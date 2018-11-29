@@ -20,76 +20,7 @@ typedef std::set<PoolItem> Candidates;
 
 extern ZYpp::Ptr God;
 
-static void find_updates( const ResKindSet & kinds, Candidates & candidates );
-
-///////////////////////////////////////////////////////////////////
-/// \class Issues
-/// \brief An issue (Type,Id) pair
-///////////////////////////////////////////////////////////////////
-struct Issue : std::pair<std::string, std::string>
-{
-  Issue( std::string issueType_r, std::string issueId_r )
-  : std::pair<std::string, std::string>( std::move(issueType_r), std::move(issueId_r) )
-  {}
-
-  std::string &       type()			{ return first; }
-  const std::string & type()		const	{ return first; }
-  bool                anyType()		const	{ return type().empty(); }
-  bool                specificType()	const	{ return !anyType(); }
-
-  std::string &       id()			{ return second; }
-  const std::string & id()		const	{ return second; }
-  bool                anyId()		const 	{ return id().empty(); }
-  bool                specificId()	const	{ return !anyId(); }
-};
-
-///////////////////////////////////////////////////////////////////
-/// \class CliScanIssues
-/// \brief Setup issue (Type,Id) pairs from CLI
-///////////////////////////////////////////////////////////////////
-struct CliScanIssues : public std::set<Issue>
-{
-  CliScanIssues()
-  {
-    //        cliOption   issueType
-    checkCLI( "issues",   ""/*any*/ );
-    checkCLI( "bugzilla", "bugzilla" );
-    checkCLI( "bz",       "bugzilla" );
-    checkCLI( "cve",      "cve" );
-  }
-
-private:
-  void checkCLI( const std::string & cliOption_r, const std::string & issueType_r )
-  {
-    Zypper & zypper( Zypper::instance() );
-
-    bool anyId = false;	// plain option without opt. args
-    std::vector<std::string> issueIds;
-
-    for ( const auto & val : zypper.cOptValues( cliOption_r ) )
-    {
-      if ( str::split( val, std::back_inserter(issueIds), "," ) == 0 )
-      {	anyId = true; }
-    }
-
-    if ( issueIds.empty() )
-    {
-      if ( anyId )
-      { insert( value_type( issueType_r, std::string() ) ); }
-    }
-    else
-    {
-      if ( anyId )
-      {
-	zypper.out().warning(str::form(
-	  _("Ignoring %s without argument because similar option with an argument has been specified."),
-	  ("--" + cliOption_r).c_str() ));
-      }
-      for ( auto & val : issueIds )
-      { insert( value_type( issueType_r, std::move(val) ) ); }
-    }
-  }
-};
+static void find_updates( const ResKindSet & kinds, Candidates & candidates, bool all_r );
 
 ///////////////////////////////////////////////////////////////////
 namespace
@@ -384,14 +315,13 @@ namespace
 } // namespace
 ///////////////////////////////////////////////////////////////////
 
-void patch_check()
+void patch_check( bool updatestackOnly )
 {
   Zypper & zypper( Zypper::instance() );
   Out & out( zypper.out() );
   DBG << "patch check" << endl;
 
   PatchCheckStats stats( zypper.globalOpts().exclude_optional_patches );
-  bool updatestackOnly = Zypper::instance().cOpts().count("updatestack-only");
   for_( it, God->pool().byKindBegin(ResKind::patch), God->pool().byKindEnd(ResKind::patch) )
   {
     const PoolItem & pi( *it );
@@ -453,7 +383,7 @@ static void xml_print_patch( Zypper & zypper, const PoolItem & pi )
 
 
 // returns true if NEEDED! restartSuggested() patches are available
-static bool xml_list_patches (Zypper & zypper)
+static bool xml_list_patches (Zypper & zypper, bool all_r )
 {
   const ResPool& pool = God->pool();
 
@@ -469,16 +399,15 @@ static bool xml_list_patches (Zypper & zypper)
   }
 
   unsigned patchcount = 0;
-  bool all = zypper.cOpts().count("all");
   for_( it, pool.byKindBegin(ResKind::patch), pool.byKindEnd(ResKind::patch) )
   {
-    if ( all || patchIsApplicable( *it ) )
+    if ( all_r || patchIsApplicable( *it ) )
     {
       const PoolItem & pi( *it );
       Patch::constPtr patch = pi->asKind<Patch>();
 
       // if updates stack patches are available, show only those
-      if ( all || !pkg_mgr_available || patchIsNeededRestartSuggested( pi ) )
+      if ( all_r || !pkg_mgr_available || patchIsNeededRestartSuggested( pi ) )
       {
 	xml_print_patch( zypper, pi );
       }
@@ -495,7 +424,7 @@ static bool xml_list_patches (Zypper & zypper)
   {
     // close <update-list> and write <blocked-update-list> if not all
     cout << "</update-list>" << endl;
-    if ( ! all )
+    if ( ! all_r )
     {
     cout << "<blocked-update-list>" << endl;
     for_( it, pool.byKindBegin(ResKind::patch), pool.byKindEnd(ResKind::patch) )
@@ -517,10 +446,10 @@ static bool xml_list_patches (Zypper & zypper)
 
 // ----------------------------------------------------------------------------
 
-static void xml_list_updates(const ResKindSet & kinds)
+static void xml_list_updates(const ResKindSet & kinds, bool all_r )
 {
   Candidates candidates;
-  find_updates( kinds, candidates );
+  find_updates( kinds, candidates, all_r );
 
   for( const PoolItem & pi : candidates )
   {
@@ -558,7 +487,7 @@ static void xml_list_updates(const ResKindSet & kinds)
 // ----------------------------------------------------------------------------
 
 // returns true if NEEDED! restartSuggested() patches are available
-static bool list_patch_updates( Zypper & zypper )
+static bool list_patch_updates( Zypper & zypper, bool all_r, const PatchSelector &sel )
 {
   Table tbl;
   FillPatchesTable intoTbl( tbl );
@@ -567,8 +496,7 @@ static bool list_patch_updates( Zypper & zypper )
   FillPatchesTable intoPMTbl( pmTbl );
 
   PatchCheckStats stats( zypper.globalOpts().exclude_optional_patches );
-  CliMatchPatch cliMatchPatch( zypper );
-  bool all = zypper.cOpts().count("all");
+  CliMatchPatch cliMatchPatch( zypper, sel._requestedPatchDates, sel._requestedPatchCategories, sel._requestedPatchSeverity );
 
   const ResPool& pool = God->pool();
   for_( it, pool.byKindBegin(ResKind::patch), pool.byKindEnd(ResKind::patch) )
@@ -584,9 +512,9 @@ static bool list_patch_updates( Zypper & zypper )
     if ( tostat )	// exclude cliMatchPatch filtered but include undisplayed ones
       stats.collect( pi );
 
-    if ( all || patchIsApplicable( pi ) )
+    if ( all_r || patchIsApplicable( pi ) )
     {
-      if ( ! all && patchIsNeededRestartSuggested( pi ) )
+      if ( ! all_r && patchIsNeededRestartSuggested( pi ) )
 	intoPMTbl( pi );
       else
 	intoTbl( pi );
@@ -639,13 +567,13 @@ static bool list_patch_updates( Zypper & zypper )
  * Find all available updates of given kind.
  */
 static void
-find_updates( const ResKind & kind, Candidates & candidates )
+find_updates( const ResKind & kind, Candidates & candidates, bool all_r )
 {
   const ResPool& pool = God->pool();
   DBG << "Looking for update candidates of kind " << kind << endl;
 
   // package updates
-  if (kind == ResKind::package && !Zypper::instance().cOpts().count("all"))
+  if (kind == ResKind::package && !all_r)
   {
     God->resolver()->doUpdate();
     ResPool::const_iterator
@@ -695,10 +623,10 @@ find_updates( const ResKind & kind, Candidates & candidates )
  * Find all available updates of given kinds.
  */
 void
-find_updates( const ResKindSet & kinds, Candidates & candidates )
+find_updates(const ResKindSet & kinds, Candidates & candidates , bool all_r)
 {
   for (ResKindSet::const_iterator kit = kinds.begin(); kit != kinds.end(); ++kit)
-    find_updates(*kit, candidates);
+    find_updates( *kit, candidates, all_r );
 
   if (kinds.empty())
     WAR << "called with empty kinds set" << endl;
@@ -724,7 +652,7 @@ std::string i18n_kind_updates(const ResKind & kind)
 
 // FIXME rewrite this function so that first the list of updates is collected and later correctly presented (bnc #523573)
 
-void list_updates(Zypper & zypper, const ResKindSet & kinds, bool best_effort)
+void list_updates(Zypper & zypper, const ResKindSet & kinds, bool best_effort, bool all_r, const PatchSelector &patchSel_r )
 {
   if (zypper.out().type() == Out::TYPE_XML)
   {
@@ -748,7 +676,7 @@ void list_updates(Zypper & zypper, const ResKindSet & kinds, bool best_effort)
   if(it != localkinds.end())
   {
     if (zypper.out().type() == Out::TYPE_XML)
-      affects_pkgmgr = xml_list_patches(zypper);
+      affects_pkgmgr = xml_list_patches( zypper, all_r );
     else
     {
       if (kinds.size() > 1)
@@ -756,7 +684,7 @@ void list_updates(Zypper & zypper, const ResKindSet & kinds, bool best_effort)
         zypper.out().info("", Out::NORMAL, Out::TYPE_NORMAL);
         zypper.out().info(i18n_kind_updates(*it), Out::QUIET, Out::TYPE_NORMAL);
       }
-      affects_pkgmgr = list_patch_updates(zypper);
+      affects_pkgmgr = list_patch_updates( zypper, all_r, patchSel_r );
     }
     localkinds.erase(it);
   }
@@ -768,7 +696,7 @@ void list_updates(Zypper & zypper, const ResKindSet & kinds, bool best_effort)
   {
     if (!affects_pkgmgr)
     {
-      xml_list_updates(localkinds);
+      xml_list_updates( localkinds, all_r );
       cout << "</update-list>" << endl;		// otherwise closed in xml_list_patches
     }
     cout << "</update-status>" << endl;
@@ -785,7 +713,7 @@ void list_updates(Zypper & zypper, const ResKindSet & kinds, bool best_effort)
 
     // show repo only if not best effort or --from-repo set
     // on best_effort, the solver will determine the repo if we don't limit it to a specific one
-    bool hide_repo = best_effort || copts.count("repo");
+    bool hide_repo = best_effort || InitRepoSettings::instance()._repoFilter.size();
 
     // header
     TableHeader th;
@@ -812,7 +740,7 @@ void list_updates(Zypper & zypper, const ResKindSet & kinds, bool best_effort)
     ResPoolProxy uipool( ResPool::instance().proxy() );
 
     Candidates candidates;
-    find_updates( *it, candidates );
+    find_updates( *it, candidates, all_r );
 
     for ( const PoolItem & pi : candidates )
     {
@@ -857,16 +785,19 @@ void list_updates(Zypper & zypper, const ResKindSet & kinds, bool best_effort)
 
 // ----------------------------------------------------------------------------
 
-void list_patches_by_issue( Zypper & zypper )
+void list_patches_by_issue( Zypper & zypper, bool all_r, const PatchSelector &sel )
 {
   // --bz, --cve can't be used together with --issue; this case is ruled out
   // in the initial arguments validation in Zypper.cc
   Table issueMatchesTbl;
   FillPatchesTableForIssue intoIssueMatchesTbl( issueMatchesTbl );
 
-  CliScanIssues issues;
-  CliMatchPatch cliMatchPatch( zypper );
-  bool only_needed = !zypper.cOpts().count("all");
+  const std::set<Issue> &issues = sel._requestedIssues;
+  CliMatchPatch cliMatchPatch( zypper,
+                               sel._requestedPatchDates,
+                               sel._requestedPatchCategories,
+                               sel._requestedPatchSeverity );
+  bool only_needed = !all_r;
 
   std::vector<const Issue*> pass2; // on the fly remember anyType issues for pass2
 
@@ -991,16 +922,8 @@ void list_patches_by_issue( Zypper & zypper )
 
 // ----------------------------------------------------------------------------
 
-void mark_updates_by_issue( Zypper & zypper )
+void mark_updates_by_issue( Zypper & zypper, const std::set<Issue> &issues, SolverRequester::Options srOpts )
 {
-  CliScanIssues issues;
-
-  SolverRequester::Options srOpts;
-  srOpts.force = zypper.cOpts().count("force");
-  srOpts.skip_interactive = zypper.cOpts().count("skip-interactive");
-  srOpts.skip_optional_patches = zypper.globalOpts().exclude_optional_patches;
-  srOpts.cliMatchPatch = CliMatchPatch( zypper );
-
   for ( const Issue & issue : issues )
   {
     PoolQuery q;

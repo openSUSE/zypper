@@ -125,10 +125,10 @@ void RefreshServicesCmd::doReset()
 
 int RefreshServicesCmd::execute( Zypper &zypper, const std::vector<std::string> &positionalArgs )
 {
-  return refreshServices( zypper );
+  return refreshServices( zypper, positionalArgs );
 }
 
-int RefreshServicesCmd::refreshServices( Zypper &zypper )
+int RefreshServicesCmd::refreshServices(Zypper &zypper, const std::vector<std::string> &services_r )
 {
   MIL << "going to refresh services" << endl;
 
@@ -138,7 +138,7 @@ int RefreshServicesCmd::refreshServices( Zypper &zypper )
   ServiceList specified;
   std::list<std::string> not_found;
   // ...as command arguments
-  get_services( zypper, zypper.arguments().begin(), zypper.arguments().end(), specified, not_found );
+  get_services( zypper, services_r.begin(), services_r.end(), specified, not_found );
   report_unknown_services( zypper.out(), not_found ) ;
 
   unsigned error_count = 0;

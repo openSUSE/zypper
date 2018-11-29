@@ -156,7 +156,7 @@ int ListReposCmd::execute( Zypper &zypp_r, const std::vector<std::string> &posit
   // print repo list as xml
   else if ( zypp_r.out().type() == Out::TYPE_XML )
     print_xml_repo_list( zypp_r, repos );
-  else if ( !zypp_r.arguments().empty() )
+  else if ( !positionalArgs_r.empty() )
     print_repo_details( zypp_r, repos );
   // print repo list as table
   else

@@ -19,43 +19,6 @@
 #include "Summary.h"
 
 /**
- * Commonly shared Options mixin for all commands that install packages
- */
-struct InstallerBaseOptions : public OptionsMixin
-{
-  int _allowDowngrade		= -1;	///< indeterminate: keep the resolvers default
-  int _allowNameChange		= -1;	///< indeterminate: keep the resolvers default
-  int _allowArchChange		= -1;	///< indeterminate: keep the resolvers default
-  int _allowVendorChange	= -1;	///< indeterminate: keep the resolvers default
-};
-
-/**
- * Commonly shared Options type for all commands that install packages.
- */
-template <const ZypperCommand& TZypperCommand>
-struct InstallCommandOptions : public MixinOptions<TZypperCommand, InstallerBaseOptions>
-{};
-
-struct InstallOptions : public InstallCommandOptions<ZypperCommand::INSTALL>
-{};
-
-struct UpdateOptions : public InstallCommandOptions<ZypperCommand::UPDATE>
-{};
-
-struct PatchOptions : public InstallCommandOptions<ZypperCommand::PATCH>
-{};
-
-struct VerifyOptions : public InstallCommandOptions<ZypperCommand::VERIFY>
-{};
-
-struct InrOptions : public InstallCommandOptions<ZypperCommand::INSTALL_NEW_RECOMMENDS>
-{};
-
-struct DupOptions : public InstallCommandOptions<ZypperCommand::DIST_UPGRADE>
-{};
-
-
-/**
  * Run the solver.
  * 
  * \return <tt>true</tt> if a solution has been found, <tt>false</tt> otherwise 
@@ -72,7 +35,7 @@ bool resolve(Zypper & zypper);
  *         or ZYPPER_EXIT_OK or ZYPPER_EXIT_ERR_ZYPP on zypp erorr. 
  *  
  */
-void solve_and_commit(Zypper & zypper , Summary::ViewOptions summaryOptions_r = Summary::DEFAULT , DownloadMode dlMode_r = DownloadDefault);
+void solve_and_commit( Zypper & zypper , Summary::ViewOptions summaryOptions_r , DownloadMode dlMode_r );
 
 
 #endif /*SOLVE_COMMIT_H_*/

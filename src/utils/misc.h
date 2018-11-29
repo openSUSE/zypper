@@ -175,12 +175,6 @@ std::string asXML( const Product & p, bool is_installed, const std::vector<std::
 
 std::string asXML( const Pattern & p, bool is_installed );
 
-/**
- * Check whether one of --download-* or --download options was given and return
- * the specified mode.
- */
-DownloadMode get_download_option( Zypper & zypper, bool quiet = false );
-
 /** Check whether packagekit is running using a DBus call */
 bool packagekit_running();
 

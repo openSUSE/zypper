@@ -430,7 +430,7 @@ void SolverRequester::updatePatterns()
 
 // ----------------------------------------------------------------------------
 
-void SolverRequester::updatePatches()
+void SolverRequester::updatePatches( bool updateStackOnly )
 {
   DBG << "going to mark needed patches for installation" << endl;
 
@@ -482,7 +482,7 @@ void SolverRequester::updatePatches()
 	}
       }
 
-      if ( Zypper::instance().cOpts().count("updatestack-only") )
+      if ( updateStackOnly )
       {
 	MIL << "updatestack-only: will stop here!" << endl;
 	break;

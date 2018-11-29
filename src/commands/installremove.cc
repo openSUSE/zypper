@@ -9,6 +9,7 @@
 #include "commands/conditions.h"
 #include "solve-commit.h"
 #include "repos.h"
+#include "commonflags.h"
 
 #include <zypp/Pathname.h>
 #include <zypp/target/rpm/RpmHeader.h>
@@ -49,16 +50,10 @@ ZyppFlags::CommandGroup InstallRemoveBase::cmdOptions() const
 {
   auto that = const_cast<InstallRemoveBase *> ( this );
   return {{
-    { "type", 't', ZyppFlags::RequiredArgument | ZyppFlags::Repeatable, ZyppFlags::KindSetType ( &that->_kinds ) , str::Format(_("Type of package (%1%).") ) % "package, patch, pattern, product"},
+    CommonFlags::resKindSetFlag( that->_kinds ),
     { "name", 'n', ZyppFlags::NoArgument, ZyppFlags::BoolType( &that->_selectByName, ZyppFlags::StoreTrue, _selectByName ), _("Select packages by plain name, not by capability.") },
     { "capability", 'C', ZyppFlags::NoArgument, ZyppFlags::BoolType( &that->_selectByCap, ZyppFlags::StoreTrue, _selectByCap ), _("Select packages by capability.") },
-    { "no-confirm", 'y', ZyppFlags::NoArgument, ZyppFlags::BoolType( &that->_noConfirm, ZyppFlags::StoreTrue, _noConfirm ),  // pkg/apt/yum user convenience ==> --non-interactive
-            _("Don't require user interaction. Alias for the --non-interactive global option.")
-    },
-    { "details", 0, ZyppFlags::NoArgument, ZyppFlags::BoolType( &that->_details, ZyppFlags::StoreTrue, _details ),
-            // translators: --details
-            _("Show the detailed summary.")
-    }
+    CommonFlags::detailsFlag( that->_details )
     },{
       { "capability", "name" }
     }};
@@ -67,7 +62,6 @@ ZyppFlags::CommandGroup InstallRemoveBase::cmdOptions() const
 void InstallRemoveBase::doReset()
 {
   _kinds.clear();
-  _noConfirm     = false;
   _details       = false;
   _selectByName  = true;
   _selectByCap   = false;
@@ -154,7 +148,7 @@ int RemoveCmd::execute(Zypper &zypper, const std::vector<std::string> &positiona
     opts = static_cast<Summary::ViewOptions>( opts | Summary::DETAILS );
 
   //do solve
-  solve_and_commit( zypper, opts );
+  solve_and_commit( zypper, opts, DownloadMode::DownloadDefault );
   return zypper.exitCode();
 
 }
@@ -188,7 +182,6 @@ ZyppFlags::CommandGroup InstallCmd::cmdOptions() const
       // translators: --oldpackage
       _("Allow to replace a newer item with an older one. Handy if you are doing a rollback. Unlike --force it will not enforce a reinstall.")
     },
-    // WARNING WARNING still uses copts, WARNING WARNING
     { "replacefiles", '\0', ZyppFlags::NoArgument, ZyppFlags::BoolType( &that->_replaceFiles, ZyppFlags::StoreTrue, _replaceFiles ),
       // translators: --replacefiles
       _("Install the packages even if they replace files from other, already installed, packages. Default is to treat file conflicts as an error. --download-as-needed disables the fileconflict check.")

@@ -17,6 +17,7 @@
 #include "Zypper.h"
 #include "utils/flags/flagtypes.h"
 #include "commands/conditions.h"
+#include "commands/commonflags.h"
 
 using namespace zypp;
 
@@ -42,7 +43,7 @@ ZyppFlags::CommandGroup RemoveLocksCmd::cmdOptions() const
 {
   auto that = const_cast<RemoveLocksCmd *>(this);
   return {{
-    { "type", 't', ZyppFlags::RequiredArgument, ZyppFlags::KindSetType ( &that->_kinds ) , str::Format(_("Type of package (%1%).") ) % "package, patch, pattern, product" },
+    CommonFlags::resKindSetFlag( that->_kinds ),
     { "repo", 'r', ZyppFlags::RequiredArgument | ZyppFlags::Repeatable, ZyppFlags::StringVectorType ( &that->_repos, "ALIAS|#|URI" ),  _("Remove only locks with specified repository.") },
     { "catalog", 'c', ZyppFlags::RequiredArgument | ZyppFlags::Repeatable | ZyppFlags::Hidden, ZyppFlags::StringVectorType ( &that->_repos, "ALIAS|#|URI"),  "Alias for --repo" }
   }};

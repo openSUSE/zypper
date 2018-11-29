@@ -9,6 +9,8 @@
 #include "utils/messages.h"
 #include "utils/misc.h"
 
+#include "Zypper.h"
+
 namespace zypp {
 namespace ZyppFlags {
 
@@ -76,16 +78,7 @@ Value IntType(int *target, const boost::optional<int> &defValue) {
 }
 
 Value BoolType(bool *target, StoreFlag store, const boost::optional<bool> &defVal) {
-  return Value (
-    [defVal]() -> boost::optional<std::string>{
-      if (!defVal)
-        return boost::optional<std::string>();
-      return std::string( (*defVal) ? "true" : "false" );
-    },
-   [target, store]( const CommandOption &, const boost::optional<std::string> &){
-      *target = (store == StoreTrue);
-    }
-  );
+  return BoolCompatibleType (*target, store, defVal );
 }
 
 Value TriBoolType(TriBool &target, StoreFlag store, const boost::optional<TriBool> &defValue)
@@ -132,17 +125,14 @@ Value KindSetType(std::set<ResKind> *target) {
   );
 }
 
+
 Value StringVectorType(std::vector<std::string> *target, std::string hint) {
-  return Value (
-        noDefaultValue,
-        [target] ( const CommandOption &opt, const boost::optional<std::string> &in ) {
-          if ( !in || in->empty() ) ZYPP_THROW(MissingArgumentException(opt.name)); //value required
-          target->push_back(*in);
-          return;
-        },
+  return GenericContainerType (
+        *target,
         std::move(hint)
   );
 }
+
 
 Value NoValue()
 {
@@ -187,6 +177,52 @@ Value PathNameType( filesystem::Pathname &target, const boost::optional<std::str
     },
     std::move(hint)
   );
+}
+
+Value IssueSetType(std::set<Issue> &target_r, const std::string &issueType_r, std::string hint_r )
+{
+  return Value (
+    noDefaultValue,
+    [ &target_r, issueType_r ]( const CommandOption &opt, const boost::optional<std::string> &in ){
+
+      std::vector<std::string> issueIds;
+      Issue anyVal = Issue( issueType_r, std::string() );
+
+      // if issue type is already in the target
+      // -> and the value it empty we replace it
+      // -> and the value is not empty we keep the existing value
+      auto pos = target_r.find( anyVal );
+      if ( pos != target_r.end() ) {
+        if ( ( *pos ).id().empty() ) {
+
+          Zypper::instance().out().warning(str::form(
+            _("Ignoring %s without argument because similar option with an argument has been specified."),
+            ("--" + opt.name).c_str() ));
+
+          target_r.erase( pos );
+        }
+      }
+
+      /// \bug this will not insert anything if the key already exists, should we emit a message?
+      if ( !in || str::split( *in, std::back_inserter(issueIds), "," ) == 0 ) {
+        target_r.insert( anyVal );
+      } else {
+        for ( auto & val : issueIds )
+        { target_r.insert( Issue( issueType_r, std::move(val) ) ); }
+      }
+
+    },
+    std::move(hint_r)
+  );
+}
+
+template <>
+zypp::Date argValueConvert ( const CommandOption &opt, const boost::optional<std::string> &in ) {
+  try {
+    return Date ( *in, "%F" );
+  } catch ( const DateFormatException &e ) {
+    ZYPP_THROW(InvalidValueException ( opt.name, *in, e.msg() ) );
+  }
 }
 
 }

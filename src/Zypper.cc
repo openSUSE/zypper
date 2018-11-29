@@ -1,4 +1,4 @@
-/*---------------------------------------------------------------------------*\
+﻿/*---------------------------------------------------------------------------*\
                           ____  _ _ __ _ __  ___ _ _
                          |_ / || | '_ \ '_ \/ -_) '_|
                          /__|\_, | .__/ .__/\___|_|
@@ -428,37 +428,6 @@ namespace {
     }
     return false;
   }
-
-  bool checkRequiredCapabilities ( Zypper & zypper, GlobalOptions &gopts_r )
-  {
-    switch ( zypper.command().toEnum() ) {
-      case ZypperCommand::UPDATE_e:
-      case ZypperCommand::PATCH_e:
-#if 0
-      // bsc#1108999: Quick fix: Allow repo commands on transactional-server (/etc is rw)
-      case ZypperCommand::ADD_REPO_e:
-      case ZypperCommand::REMOVE_REPO_e:
-      case ZypperCommand::MODIFY_REPO_e:
-      case ZypperCommand::RENAME_REPO_e:
-      case ZypperCommand::ADD_SERVICE_e:
-      case ZypperCommand::REMOVE_SERVICE_e:
-      case ZypperCommand::MODIFY_SERVICE_e:
-#endif
-    {
-        std::string msg;
-        NeedsWritableRoot rt;
-        if ( rt.check( msg ) != ZYPPER_EXIT_OK ) {
-          zypper.out().errorPar( msg );
-          return false;
-        }
-        break;
-      }
-      default:
-        break;
-    }
-    return true;
-  }
-
 } //namespace
 ///////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////
@@ -1847,6 +1816,7 @@ void Zypper::processCommandOptions()
 
   //! \todo all option descriptions in help texts should start at 29th character
   //! and should wrap at 79th column (bnc #423007)
+
 #if 0
     _command_help = ( CommandHelpFormater()
       << str::form(_(
@@ -2153,6 +2123,7 @@ void Zypper::processCommandOptions()
       "-s, --services           Refresh also services before refreshing repos.\n"
     );
 #endif
+
 #if 0
     _command_help = _(
       "clean (cc) [alias|#|URI] ...\n"
@@ -2167,36 +2138,6 @@ void Zypper::processCommandOptions()
     );
 #endif
 
-  case ZypperCommand::LIST_UPDATES_e:
-  {
-    static struct option list_updates_options[] = {
-      {"repo",        required_argument, 0, 'r'},
-      // rug compatibility option, we have --repo
-      {"catalog",     required_argument, 0, 'c'},
-      {"type",        required_argument, 0, 't'},
-      {"all",         no_argument,       0, 'a'},
-      {"best-effort", no_argument,       0,  0 },
-      {"help", no_argument, 0, 'h'},
-      {0, 0, 0, 0}
-    };
-    specific_options = list_updates_options;
-    _command_help = CommandHelpFormater()
-    .synopsis(	// translators: command synopsis; do not translate lowercase words
-    _("list-updates (lu) [OPTIONS]")
-    )
-    .description(	// translators: command description
-    _("List all available updates.")
-    )
-    .optionSectionCommandOptions()
-    .option( "-t, --type <TYPE>",	// translators: -t, --type <TYPE>
-             str::Format(_("Type of package (%1%).") ) % "package, patch, pattern, product" )
-    .option( "-r, --repo <ALIAS|#|URI>",	// translators: -r, --repo <ALIAS|#|URI>
-             _("List only updates from the specified repository.") )
-    .option( "--best-effort",	// translators: --best-effort
-             _("Do a 'best effort' approach to update. Updates to a lower than the latest version are also acceptable.") )
-    .option( "-a, --all",	// translators: -a, --all
-             _("List all packages for which newer versions are available, regardless whether they are installable or not.") )
-    ;
 #if 0
     _command_help = str::form(_(
       // TranslatorExplanation the first %s = "package, patch, pattern, product"
@@ -2217,43 +2158,7 @@ void Zypper::processCommandOptions()
       "                              installable or not.\n"
     ), "package, patch, pattern, product", "package");
 #endif
-    break;
-  }
 
-  case ZypperCommand::UPDATE_e:
-  {
-    shared_ptr<UpdateOptions> myOpts( new UpdateOptions );
-    _commandOptions = myOpts;
-    static struct option update_options[] = {
-      {"repo",                      required_argument, 0, 'r'},
-      // rug compatibility option, we have --repo
-      {"catalog",                   required_argument, 0, 'c'},
-      {"type",                      required_argument, 0, 't'},
-      {"no-confirm",                no_argument,       0, 'y'},	// pkg/apt/yum user convenience ==> --non-interactive
-      {"skip-interactive",          no_argument,       0,  0 },
-      {"with-interactive",          no_argument,       0,  0 },
-      ARG_License_Agreement,
-      {"agree-to-third-party-licenses",  no_argument,  0, 0},	// rug compatibility, we have --auto-agree-with-licenses
-      {"best-effort",               no_argument,       0, 0},
-      ARG_Solver_Flags_Common,
-      ARG_Solver_Flags_Recommends,
-      ARG_Solver_Flags_Installs,
-      {"replacefiles",              no_argument,       0,  0 },
-      {"dry-run",                   no_argument,       0, 'D'},
-      // rug uses -N shorthand
-      {"dry-run",                   no_argument,       0, 'N'},
-      {"details",		    no_argument,       0,  0 },
-      {"download",                  required_argument, 0,  0 },
-      // aliases for --download
-      // in --download-only, -d must be kept for backward and rug compatibility
-      {"download-only",             no_argument,       0, 'd'},
-      {"download-in-advance",       no_argument,       0,  0 },
-      {"download-in-heaps",         no_argument,       0,  0 },
-      {"download-as-needed",        no_argument,       0,  0 },
-      {"help", no_argument, 0, 'h'},
-      {0, 0, 0, 0}
-    };
-    specific_options = update_options;
 #if 0
     _command_help = ( CommandHelpFormater()
       << str::form(_(
@@ -2290,84 +2195,7 @@ void Zypper::processCommandOptions()
          "package",
          "only, in-advance, in-heaps, as-needed") )
 #endif
-    _command_help = CommandHelpFormater()
-    .synopsis(	// translators: command synopsis; do not translate lowercase words
-    _("update (up) [OPTIONS] [PACKAGENAME] ...")
-    )
-    .description(	// translators: command description
-    _("Update all or specified installed packages with newer versions, if possible.")
-    )
-    .optionSectionCommandOptions()
-    .option( "-t, --type <TYPE>",	// translators: -t, --type <TYPE>
-             str::Format(_("Type of package (%1%).") ) % "package, patch, pattern, product" )
-    .option( "-r, --repo <ALIAS|#|URI>",	// translators: -r, --repo <ALIAS|#|URI>
-             _("Load only the specified repository.") )
-    .option( "--skip-interactive",	// translators: --skip-interactive
-             _("Skip interactive updates.") )
-    .option( "--with-interactive",	// translators: --with-interactive
-             _("Do not skip interactive updates.") )
-    .option( "-l, --auto-agree-with-licenses",	// translators: -l, --auto-agree-with-licenses
-             _("Automatically say 'yes' to third party license confirmation prompt. See man zypper for more details.") )
-    .option( "--best-effort",	// translators: --best-effort
-             _("Do a 'best effort' approach to update. Updates to a lower than the latest version are also acceptable.") )
-    .option( "--replacefiles",	// translators: --replacefiles
-             _("Install the packages even if they replace files from other, already installed, packages. Default is to treat file conflicts as an error. --download-as-needed disables the fileconflict check.") )
-    .option( "-D, --dry-run",	// translators: -D, --dry-run
-             _("Test the update, do not actually update.") )
-    .option( "--details",	// translators: --details
-             _("Show the detailed installation summary.") )
-    .option( "--download",	// translators: --download
-             str::Format(_("Set the download-install mode. Available modes: %s") ) % "only, in-advance, in-heaps, as-needed" )
-    .option( "-d, --download-only",	// translators: -d, --download-only
-             _("Only download the packages, do not install.") )
-    .option( "-y, --no-confirm",	// translators: -y, --no-confirm
-	     _("Don't require user interaction. Alias for the --non-interactive global option.") )
 
-    .optionSectionSolverOptions()
-    .option_Solver_Flags_Common
-    .option_Solver_Flags_Recommends
-    .optionSectionExpertOptions()
-    .option_Solver_Flags_Installs
-    ;
-    break;
-  }
-
-  case ZypperCommand::PATCH_e:
-  {
-    shared_ptr<PatchOptions> myOpts( new PatchOptions );
-    _commandOptions = myOpts;
-    static struct option update_options[] = {
-      {"repo",                      required_argument, 0, 'r'},
-      {"updatestack-only",	    no_argument,       0,  0 },
-      {"with-update",		    no_argument,       0,  0 },
-      {"no-confirm",                no_argument,       0, 'y'},	// pkg/apt/yum user convenience ==> --non-interactive
-      {"skip-interactive",          no_argument,       0,  0 },
-      {"with-interactive",          no_argument,       0,  0 },
-      ARG_License_Agreement,
-      ARG_Solver_Flags_Common,
-      ARG_Solver_Flags_Recommends,
-      ARG_Solver_Flags_Installs,
-      {"replacefiles",              no_argument,       0,  0 },
-      {"dry-run",                   no_argument,       0, 'D'},
-      {"details",		    no_argument,       0,  0 },
-      {"download",                  required_argument, 0,  0 },
-      // aliases for --download
-      // in --download-only, -d must be kept for backward and rug compatibility
-      {"download-only",             no_argument,       0, 'd'},
-      {"download-in-advance",       no_argument,       0,  0 },
-      {"download-in-heaps",         no_argument,       0,  0 },
-      {"download-as-needed",        no_argument,       0,  0 },
-      {"bugzilla",                  required_argument, 0, 'b'},
-      {"bz",                        required_argument, 0,  0 },
-      {"cve",                       required_argument, 0,  0 },
-      {"category",                  required_argument, 0, 'g'},
-      {"severity",                  required_argument, 0,  0 },
-      {"date",                      required_argument, 0,  0 },
-      ARG_WITHout_OPTIONAL,
-      {"help", no_argument, 0, 'h'},
-      {0, 0, 0, 0}
-    };
-    specific_options = update_options;
 #if 0
     _command_help = ( CommandHelpFormater()
       << str::form(_(
@@ -2399,99 +2227,7 @@ void Zypper::processCommandOptions()
       "-d, --download-only         Only download the packages, do not install.\n"
       ), "only, in-advance, in-heaps, as-needed") )
 #endif
-    _command_help = CommandHelpFormater()
-    .synopsis(	// translators: command synopsis; do not translate lowercase words
-    _("patch [OPTIONS]")
-    )
-    .description(	// translators: command description
-    _("Install all available needed patches.")
-    )
-    .optionSectionCommandOptions()
-    .option( "--skip-interactive",	// translators: --skip-interactive
-             _("Skip interactive patches.") )
-    .option( "--with-interactive",	// translators: --with-interactive
-             _("Do not skip interactive patches.") )
-    .option( "-l, --auto-agree-with-licenses",	// translators: -l, --auto-agree-with-licenses
-             _("Automatically say 'yes' to third party license confirmation prompt. See man zypper for more details.") )
-    .option( "-b, --bugzilla",	// translators: -b, --bugzilla
-             _("#            Install patch fixing the specified bugzilla issue.") )
-    .option( "--cve",	// translators: --cve
-             _("#                 Install patch fixing the specified CVE issue.") )
-    .option( "-g, --category <CATEGORY>",	// translators: -g, --category <CATEGORY>
-             _("Install only patches with this category.") )
-    .option( "--severity <SEVERITY>",	// translators: --severity <SEVERITY>
-             _("Install only patches with this severity.") )
-    .option( "--date <YYYY-MM-DD>",	// translators: --date <YYYY-MM-DD>
-             _("Install only patches issued up to, but not including, the specified date") )
-    .option( "--replacefiles",	// translators: --replacefiles
-             _("Install the packages even if they replace files from other, already installed, packages. Default is to treat file conflicts as an error. --download-as-needed disables the fileconflict check.") )
-    .option( "-r, --repo <ALIAS|#|URI>",	// translators: -r, --repo <ALIAS|#|URI>
-             _("Load only the specified repository.") )
-    .option( "-D, --dry-run",	// translators: -D, --dry-run
-             _("Test the update, do not actually update.") )
-    .option( "--details",	// translators: --details
-             _("Show the detailed installation summary.") )
-    .option( "--download",	// translators: --download
-             str::Format(_("Set the download-install mode. Available modes: %s") ) % "only, in-advance, in-heaps, as-needed" )
-    .option( "-d, --download-only",	// translators: -d, --download-only
-             _("Only download the packages, do not install.") )
-    .option("--updatestack-only",	_("Install only patches which affect the package management itself.") )
-    .option("--with-update",		_("Additionally try to update all packages not covered by patches. The option is ignored, if the patch command must update the update stack first. Can not be combined with --updatestack-only.") )
-    .option_WITHout_OPTIONAL
-    .option( "-y, --no-confirm",	_("Don't require user interaction. Alias for the --non-interactive global option.") )
 
-    .optionSectionSolverOptions()
-    .option_Solver_Flags_Common
-    .option_Solver_Flags_Recommends
-    .optionSectionExpertOptions()
-    .option_Solver_Flags_Installs
-    ;
-    break;
-  }
-
-  case ZypperCommand::LIST_PATCHES_e:
-  {
-    static struct option list_updates_options[] = {
-      {"repo",        required_argument, 0, 'r'},
-      {"bugzilla",    optional_argument, 0, 'b'},
-      {"bz",          optional_argument, 0,  0 },
-      {"cve",         optional_argument, 0,  0 },
-      {"category",    required_argument, 0, 'g'},
-      {"severity",    required_argument, 0,  0 },
-      {"date",        required_argument, 0,  0 },
-      {"issues",      optional_argument, 0,  0 },
-      {"all",         no_argument,       0, 'a'},
-      ARG_WITHout_OPTIONAL,
-      {"help", no_argument, 0, 'h'},
-      {0, 0, 0, 0}
-    };
-    specific_options = list_updates_options;
-    _command_help = CommandHelpFormater()
-    .synopsis(	// translators: command synopsis; do not translate lowercase words
-    _("list-patches (lp) [OPTIONS]")
-    )
-    .description(// translators: command description
-    _("List all applicable patches.")
-    )
-    .optionSectionCommandOptions()
-    .option( "-b, --bugzilla[=#]",	// translators: -b, --bugzilla[=#]
-             _("List applicable patches for Bugzilla issues.") )
-    .option( "--cve[=#]",	// translators: --cve[=#]
-             _("List applicable patches for CVE issues.") )
-    .option( "--issues[=STRING]",	// translators: --issues[=STRING]
-             _("Look for issues matching the specified string.") )
-    .option( "--date <YYYY-MM-DD>",	// translators: --date <YYYY-MM-DD>
-             _("List only patches issued up to, but not including, the specified date.") )
-    .option( "-g, --category <CATEGORY>",	// translators: -g, --category <CATEGORY>
-             _("List only patches with this category.") )
-    .option( "--severity <SEVERITY>",	// translators: --severity <SEVERITY>
-             _("List only patches with this severity.") )
-    .option( "-a, --all",	// translators: -a, --all
-             _("List all patches, not only applicable ones.") )
-    .option_WITHout_OPTIONAL
-    .option( "-r, --repo <ALIAS|#|URI>",	// translators: -r, --repo <ALIAS|#|URI>
-             _("List only patches from the specified repository.") )
-    ;
 #if 0
     .option(_("-b, --bugzilla[=#]"		"\n"	"List applicable patches for Bugzilla issues."))
     .option(_(    "--cve[=#]"			"\n"	"List applicable patches for CVE issues."))
@@ -2503,8 +2239,6 @@ void Zypper::processCommandOptions()
     .option_WITHout_OPTIONAL
     .option(_("-r, --repo <ALIAS|#|URI>"	"\n"	"List only patches from the specified repository."))
 #endif
-    break;
-  }
 
 #if 0
     _command_help = ( CommandHelpFormater()
@@ -2662,39 +2396,6 @@ void Zypper::processCommandOptions()
     .option( "-v, --verbose",	// translators: -v, --verbose
              _("Like --details, with additional information where the search has matched (useful for search in dependencies).") )
     ;
-    break;
-  }
-
-  case ZypperCommand::PATCH_CHECK_e:
-  {
-    static struct option patch_check_options[] = {
-      {"repo",				required_argument,	0, 'r'},
-      // rug compatibility option, we have --repo
-      {"catalog",			required_argument,	0, 'c'},
-      {"updatestack-only",		no_argument,		0,  0 },
-      ARG_WITHout_OPTIONAL,
-      {"help", no_argument, 0, 'h'},
-      {0, 0, 0, 0}
-    };
-    specific_options = patch_check_options;
-    _command_help = CommandHelpFormater()
-    .synopsis(	// translators: command synopsis; do not translate lowercase words
-    _("patch-check (pchk) [OPTIONS]")
-    )
-    .description(// translators: command description
-    _("Display stats about applicable patches. The command returns 100 if needed patches were found, 101 if there is at least one needed security patch.")
-    )
-    .optionSectionCommandOptions()
-    .option( "-r, --repo <ALIAS|#|URI>",	// translators: -r, --repo <ALIAS|#|URI>
-             _("Check for patches only in the specified repository.") )
-    .option( "--updatestack-only",	// translators: --updatestack-only
-             _("Check only for patches which affect the package management itself.") )
-    .option_WITHout_OPTIONAL
-    ;
-#if 0
-    .option(_("-r, --repo <ALIAS|#|URI>"	"\n"	"Check for patches only in the specified repository."))
-    .option(_("--updatestack-only"		"\n"	"Check only for patches which affect the package management itself."))
-#endif
     break;
   }
 
@@ -3240,11 +2941,6 @@ void Zypper::doCommand()
   }
   // === execute command ===
 
-  if ( !checkRequiredCapabilities( *this, _gopts ) ) {
-    setExitCode( ZYPPER_EXIT_ERR_PRIVILEGES );
-    return;
-  }
-
   MIL << "Going to process command " << command() << endl;
 
   //handle new style commands
@@ -3545,36 +3241,6 @@ void Zypper::doCommand()
     break;
   }
 
-  // --------------------------( patch check )--------------------------------
-
-  // TODO: rug summary
-  case ZypperCommand::PATCH_CHECK_e:
-  {
-    // too many arguments
-    if ( _arguments.size() > 0 )
-    {
-      report_too_many_arguments( _command_help );
-      setExitCode( ZYPPER_EXIT_ERR_INVALID_ARGS );
-      return;
-    }
-
-    initRepoManager();
-
-    init_target( *this );
-    init_repos( *this );
-    if ( exitCode() != ZYPPER_EXIT_OK )
-      return;
-
-    // TODO calc token?
-
-    // now load resolvables:
-    load_resolvables( *this );
-    // needed to compute status of PPP
-    resolve( *this );
-    patch_check();
-    break;
-  }
-
   // --------------------------( misc queries )--------------------------------
 
   case ZypperCommand::WHAT_PROVIDES_e:
@@ -3583,252 +3249,6 @@ void Zypper::doCommand()
     // zypper what-provides 'zypper>1.6'
     // zypper se --match-exact --provides 'zypper>1.6'
     setExitCode( ZYPPER_EXIT_ERR_BUG );
-    break;
-  }
-
-  // --------------------------( list updates )-------------------------------
-
-  case ZypperCommand::LIST_UPDATES_e:
-  case ZypperCommand::LIST_PATCHES_e:
-  {
-    // too many arguments
-    if ( _arguments.size() > 0 )
-    {
-      report_too_many_arguments( _command_help );
-      setExitCode( ZYPPER_EXIT_ERR_INVALID_ARGS );
-      return;
-    }
-
-    ResKindSet kinds;
-    if ( copts.count("type") )
-    {
-      for_( it, copts["type"].begin(), copts["type"].end())
-      {
-        kind = string_to_kind( *it );
-        if ( kind == ResObject::Kind() )
-        {
-          out().error( str::Format(_("Unknown package type '%s'.")) % *it );
-          setExitCode( ZYPPER_EXIT_ERR_INVALID_ARGS );
-          return;
-        }
-        kinds.insert( kind );
-      }
-    }
-    else if ( command() == ZypperCommand::LIST_PATCHES )
-      kinds.insert( ResKind::patch );
-    else
-      kinds.insert( ResKind::package );
-
-    //! \todo drop this option - it's the default for packages now, irrelevant
-    //! for patches; just test with products and patterns
-    bool best_effort = copts.count( "best-effort" );
-
-    if ( ( copts.count("bugzilla") || copts.count("bz") || copts.count("cve") )
-      && copts.count("issues") )
-    {
-      out().error(str::form( _("Cannot use %s together with %s."), "--issues", "--bz, --cve") );
-      setExitCode( ZYPPER_EXIT_ERR_INVALID_ARGS );
-      return;
-    }
-
-    initRepoManager();
-    init_target( *this );
-    init_repos( *this );
-    if ( exitCode() != ZYPPER_EXIT_OK )
-      return;
-    load_resolvables( *this );
-    resolve( *this );
-
-    if ( copts.count("bugzilla") || copts.count("bz") || copts.count("cve") || copts.count("issues") )
-      list_patches_by_issue( *this );
-    else
-      list_updates( *this, kinds, best_effort );
-
-    break;
-  }
-
-  // -----------------------------( update )----------------------------------
-
-  case ZypperCommand::UPDATE_e:
-  case ZypperCommand::PATCH_e:
-  {
-    // check root user
-    if ( geteuid() != 0 && !globalOpts().changedRoot )
-    {
-      out().error(_("Root privileges are required for updating packages.") );
-      setExitCode( ZYPPER_EXIT_ERR_PRIVILEGES );
-      return;
-    }
-
-    // too many arguments
-    if ( !_arguments.empty() && command() == ZypperCommand::PATCH )
-    {
-      report_too_many_arguments( _command_help );
-      setExitCode( ZYPPER_EXIT_ERR_INVALID_ARGS );
-      return;
-    }
-
-    if ( copts.count("updatestack-only") )
-    {
-      for ( const char * opt : { "bugzilla", "bz", "cve", "with-update" } )
-      {
-	if ( copts.count( opt ) )
-	{
-	  out().error( str::form(_("Cannot use %s together with %s."),
-				 dashdash("updatestack-only").c_str(),
-				 dashdash(opt).c_str() ) );
-	  setExitCode( ZYPPER_EXIT_ERR_INVALID_ARGS );
-	  return;
-	}
-      }
-    }
-
-    bool skip_interactive = false;
-    if ( copts.count("skip-interactive") )
-    {
-      if ( copts.count("with-interactive") )
-      {
-        out().error( str::form(_("%s contradicts %s"), "--with-interactive", "--skip-interactive" ) );
-        setExitCode( ZYPPER_EXIT_ERR_INVALID_ARGS );
-        return;
-      }
-      skip_interactive = true;
-    }
-    // bnc #497711
-    else if ( globalOpts().non_interactive && !copts.count("with-interactive") )
-      skip_interactive = true;
-    MIL << "Skipping interactive patches: " << (skip_interactive ? "yes" : "no") << endl;
-
-    ResKindSet kinds;
-    if ( copts.count("type") )
-    {
-      for_( it, copts["type"].begin(), copts["type"].end() )
-      {
-        kind = string_to_kind( *it );
-        if ( kind == ResObject::Kind() )
-        {
-          out().error( str::Format(_("Unknown package type '%s'.")) % *it );
-          setExitCode( ZYPPER_EXIT_ERR_INVALID_ARGS );
-          return;
-        }
-
-        if ( kind == ResKind::product )
-        {
-          out().error(_("Operation not supported."),
-		      str::form(_("To update installed products use '%s'."),
-				"zypper dup [--from <repo>]") );
-          setExitCode( ZYPPER_EXIT_ERR_INVALID_ARGS );
-          return;
-        }
-        else if ( kind == ResKind::srcpackage )
-        {
-	  out().error(_("Operation not supported."),
-		      str::form(_("Zypper does not keep track of installed source packages. To install the latest source package and its build dependencies, use '%s'."),
-				"zypper si"));
-          setExitCode( ZYPPER_EXIT_ERR_INVALID_ARGS );
-          return;
-        }
-
-        kinds.insert( kind );
-      }
-    }
-    else if ( command() == ZypperCommand::PATCH )
-      kinds.insert( ResKind::patch );
-    else
-      kinds.insert( ResKind::package );
-
-    if ( !arguments().empty() && kinds.size() > 1 )
-    {
-      out().error(_("Cannot use multiple types when specific packages are given as arguments.") );
-      setExitCode( ZYPPER_EXIT_ERR_INVALID_ARGS );
-      return;
-    }
-
-    bool best_effort = copts.count( "best-effort" );
-
-    // parse the download options to check for errors
-    get_download_option( *this );
-
-    init_target( *this );
-    initRepoManager();
-    init_repos( *this );
-    if ( exitCode() != ZYPPER_EXIT_OK )
-      return;
-
-    load_resolvables( *this );
-    resolve( *this ); // needed to compute status of PPP
-    // Beware: While zypper calls resolve() once just to compute the PPP status,
-    // solve_with_update must be false until the command passed the initialization!
-    // Reset to false when leaving the block in case we are in shell mode!
-    DtorReset guard( runtimeData().solve_with_update );
-    if ( copts.count( "with-update" ) )
-      runtimeData().solve_with_update = true;
-
-    // patch --bugzilla/--cve
-    if ( copts.count("bugzilla") || copts.count("bz") || copts.count("cve") )
-      mark_updates_by_issue( *this );
-    // update without arguments
-    else
-    {
-      SolverRequester::Options sropts;
-      if ( copts.find("force") != copts.end() )
-        sropts.force = true;
-      sropts.best_effort = best_effort;
-      sropts.skip_interactive = skip_interactive; // bcn #647214
-      sropts.skip_optional_patches = arguments().empty() && globalOpts().exclude_optional_patches;	// without args follow --with[out]-optional
-      sropts.cliMatchPatch = CliMatchPatch( *this );
-
-      SolverRequester sr(sropts);
-      if ( arguments().empty() )
-      {
-        for_( kit, kinds.begin(), kinds.end() )
-        {
-          if ( *kit == ResKind::package )
-          {
-            MIL << "Computing package update..." << endl;
-            // this will do a complete package update as far as possible
-            // while respecting solver policies
-            getZYpp()->resolver()->doUpdate();
-            // no need to call Resolver::resolvePool() afterwards
-            runtimeData().solve_before_commit = false;
-          }
-          // update -t patch; patch
-          else if ( *kit == ResKind::patch )
-	  {
-	    runtimeData().plain_patch_command = true;
-	    sr.updatePatches();
-	  }
-          else if ( *kit == ResKind::pattern )
-            sr.updatePatterns();
-          // should not get here (see above kind parsing code), but just in case
-          else
-          {
-            out().error(_("Operation not supported.") );
-            setExitCode( ZYPPER_EXIT_ERR_INVALID_ARGS );
-            return;
-          }
-        }
-      }
-      // update with arguments
-      else
-      {
-        PackageArgs args( *kinds.begin() );
-	sr.update( args );
-      }
-
-      sr.printFeedback( out() );
-
-      if ( !globalOpts().ignore_unknown
-	&& ( sr.hasFeedback( SolverRequester::Feedback::NOT_FOUND_NAME )
-	  || sr.hasFeedback( SolverRequester::Feedback::NOT_FOUND_CAP ) ) )
-      {
-        setExitCode( ZYPPER_EXIT_INF_CAP_NOT_FOUND );
-        if ( globalOpts().non_interactive )
-          ZYPP_THROW( ExitRequestException("name or capability not found") );
-      }
-    }
-    solve_and_commit( *this );
-
     break;
   }
 

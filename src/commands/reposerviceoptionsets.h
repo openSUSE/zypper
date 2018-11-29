@@ -33,9 +33,6 @@ public:
   std::vector<zypp::ZyppFlags::CommandGroup> options() override;
   void reset() override;
 
-  //will be removed
-  void fillFromCopts (Zypper &zypper );
-
   std::string _name;
   zypp::TriBool _enable = zypp::indeterminate;
   zypp::TriBool _enableAutoRefresh = zypp::indeterminate;
@@ -55,9 +52,6 @@ public:
   std::vector<zypp::ZyppFlags::CommandGroup> options() override;
   void reset() override;
 
-  //will be removed
-  void fillFromCopts (Zypper &zypper );
-
   bool _all    = false;
   bool _local  = false;
   bool _remote = false;
@@ -75,9 +69,6 @@ public:
   // BaseCommandOptionSet interface
   std::vector<zypp::ZyppFlags::CommandGroup> options() override;
   void reset() override;
-
-  //will be removed
-  void fillFromCopts (Zypper &zypper );
 
   unsigned _priority = 0U;
   zypp::TriBool _keepPackages = zypp::indeterminate;

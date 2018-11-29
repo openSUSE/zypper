@@ -35,38 +35,29 @@ struct CliMatchPatch
   CliMatchPatch()
   {}
 
-  /** Ctor: Filter according to zypper CLI options */
-  CliMatchPatch( Zypper & zypper )
+  CliMatchPatch( Zypper & zypper, const std::vector<Date> &dates_r, std::set<std::string> categories_r, std::set<std::string> severities_r )
   {
-    for ( const auto & val : zypper.cOptValues( "date" ) )
+    for ( const auto & val : dates_r )
     {
-      // ISO 8601 format
-      Date v( std::string(val), "%F");
-      if ( v && ( !_dateBefore || v < _dateBefore ) )
+      if ( val && ( !_dateBefore || val < _dateBefore ) )
       {
-	_dateBefore = v;
+	_dateBefore = val;
       }
     }
-    for ( const auto & val : zypper.cOptValues( "category" ) )
+    _categories = std::move( categories_r );
+    for ( const std::string & cat : _categories )
     {
-      str::split( str::toLower( std::string(val) ), std::inserter(_categories, _categories.end()), "," );
-      for ( const std::string & cat : _categories )
+      if ( Patch::categoryEnum( cat ) == Patch::CAT_OTHER )
       {
-	if ( Patch::categoryEnum( cat ) == Patch::CAT_OTHER )
-	{
-	  zypper.out().warning( str::Format(_("Suspicious category filter value '%1%'.")) % cat );
-	}
+        zypper.out().warning( str::Format(_("Suspicious category filter value '%1%'.")) % cat );
       }
     }
-    for ( const auto & val : zypper.cOptValues( "severity" ) )
+    _severities = std::move ( severities_r );
+    for ( const std::string & sev : _severities )
     {
-      str::split( str::toLower( std::string(val) ), std::inserter(_severities, _severities.end()), "," );
-      for ( const std::string & sev : _severities )
+      if ( Patch::severityFlag( sev ) == Patch::SEV_OTHER )
       {
-	if ( Patch::severityFlag( sev ) == Patch::SEV_OTHER )
-	{
-	  zypper.out().warning( str::Format(_("Suspicious severity filter value '%1%'.")) % sev );
-	}
+        zypper.out().warning( str::Format(_("Suspicious severity filter value '%1%'.")) % sev );
       }
     }
   }
@@ -375,7 +366,7 @@ public:
    * If there are any needed patches flagged "affects package management", only
    * these get selected (need to call this again once these are installed).
    */
-  void updatePatches();
+  void updatePatches(bool updateStackOnly);
 
   /**
    * Set specified patch for installation.

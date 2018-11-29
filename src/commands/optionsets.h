@@ -123,4 +123,32 @@ public:
   void reset() override;
 };
 
+class OptionalPatchesOptionSet : public BaseCommandOptionSet
+{
+public:
+  using BaseCommandOptionSet::BaseCommandOptionSet;
+
+  // BaseCommandOptionSet interface
+public:
+  std::vector<ZyppFlags::CommandGroup> options() override;
+  void reset() override;
+};
+
+class InteractiveUpdatesOptionSet : public BaseCommandOptionSet
+{
+public:
+  using BaseCommandOptionSet::BaseCommandOptionSet;
+
+  bool skipInteractive () const;
+
+private:
+  TriBool _withInteractive;
+
+  // BaseCommandOptionSet interface
+public:
+  std::vector<ZyppFlags::CommandGroup> options() override;
+  void reset() override;
+};
+
+
 #endif
