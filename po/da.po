@@ -7,10 +7,10 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-11-28 14:46+0100\n"
-"PO-Revision-Date: 2018-10-31 18:02+0000\n"
+"PO-Revision-Date: 2018-11-30 04:01+0000\n"
 "Last-Translator: scootergrisen <scootergrisen@gmail.com>\n"
-"Language-Team: Danish <https://l10n.opensuse.org/projects/zypper/master/da/"
-">\n"
+"Language-Team: Danish <https://l10n.opensuse.org/projects/zypper/master/da/>"
+"\n"
 "Language: da\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -6311,7 +6311,7 @@ msgstr ""
 #: src/commands/search/search-packages-hinthack.cc:102
 #, boost-format
 msgid "Do you want to run '%1%' now?"
-msgstr ""
+msgstr "Vil du køre '%1%' nu?"
 
 #: src/commands/search/search-packages-hinthack.cc:113
 #, boost-format
