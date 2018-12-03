@@ -1100,8 +1100,6 @@ namespace zypp
 				    return true;
 				  });
 	}
-
-        INT << "Needreboot " << needrebootSpec << endl;
         satpool.setNeedrebootSpec( std::move(needrebootSpec) );
       }
 
