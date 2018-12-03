@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-11-28 14:46+0100\n"
-"PO-Revision-Date: 2018-12-02 18:07+0000\n"
+"PO-Revision-Date: 2018-12-03 12:07+0000\n"
 "Last-Translator: Murat Servan Kahraman <muratservan@outlook.com>\n"
 "Language-Team: Turkish <https://l10n.opensuse.org/projects/zypper/master/tr/>"
 "\n"
@@ -2381,6 +2381,7 @@ msgid ""
 msgstr ""
 
 #: src/Zypper.cc:908
+#, fuzzy
 msgid ""
 "     Querying:\n"
 "\tsearch, se\t\tSearch for packages matching a pattern.\n"
@@ -2506,8 +2507,9 @@ msgid "Subcommand %1% does not support zypper global options."
 msgstr "%1% alt komutu zypper evrensel seçeneklerini desteklemiyor."
 
 #: src/Zypper.cc:1324
+#, fuzzy
 msgid "Enforced setting"
-msgstr ""
+msgstr "Zorlanmış ayar"
 
 #: src/Zypper.cc:1334
 msgid "User data string must not contain nonprintable or newline characters!"
@@ -2598,8 +2600,9 @@ msgstr ""
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:1934
+#, fuzzy
 msgid "install (in) [OPTIONS] <CAPABILITY|RPM_FILE_URI> ..."
-msgstr ""
+msgstr "install (in) [SEÇENEKLER] <KABİLİYET|RPM_DOSYA_URI'I> ..."
 
 #. translators: command description
 #: src/Zypper.cc:1937
@@ -2630,13 +2633,15 @@ msgstr "Paketin türü (%1%)."
 
 #. translators: -n, --name
 #: src/Zypper.cc:1947 src/Zypper.cc:2052
+#, fuzzy
 msgid "Select packages by plain name, not by capability."
-msgstr ""
+msgstr "Paketleri açık ada göre seç, kabiliyete göre değil."
 
 #. translators: -C, --capability
 #: src/Zypper.cc:1949 src/Zypper.cc:2054
+#, fuzzy
 msgid "Select packages by capability."
-msgstr ""
+msgstr "Paketleri kabiliyete göre seç."
 
 #. translators: -f, --force
 #: src/Zypper.cc:1951
@@ -6828,6 +6833,7 @@ msgstr[1] "%d problemler"
 
 #. should not happen! If solve() failed at least one problem must be set!
 #: src/solve-commit.cc:150
+#, fuzzy
 msgid "Specified capability not found"
 msgstr "BElirtilen kapasite bulunamadı."
 
