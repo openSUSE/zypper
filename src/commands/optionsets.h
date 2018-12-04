@@ -150,5 +150,23 @@ public:
   void reset() override;
 };
 
+class SortResultOptionSet : public BaseCommandOptionSet, public RugCompatModeMixin
+{
+public:
+  using BaseCommandOptionSet::BaseCommandOptionSet;
+
+  enum SortMode {
+    Default, //<! Option was never set
+    ByName,  //<! Sort result by name
+    ByRepo   //<! Sort result by repo
+  };
+  SortMode _mode = Default;
+
+  // BaseCommandOptionSet interface
+public:
+  std::vector<ZyppFlags::CommandGroup> options() override;
+  void reset() override;
+};
+
 
 #endif

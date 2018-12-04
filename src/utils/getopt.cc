@@ -117,30 +117,6 @@ parsed_opts parse_options( int argc, char** argv, const struct option* longopts 
   return result;
 }
 
-TriBool get_boolean_option( Zypper & zypper, const std::string & pname, const std::string & nname )
-{
-  // translators: speaking of two mutually contradicting command line options
-  static std::string msg_contradition = _("%s used together with %s, which contradict each other. This property will be left unchanged.");
-
-  TriBool result = indeterminate;
-  if ( copts.count(pname) )
-    result = true;
-  if ( copts.count(nname) )
-  {
-    if ( result )
-    {
-      std::string po( "--" + pname );
-      std::string no( "--" + nname );
-      // report contradition
-      zypper.out().warning(str::form( msg_contradition.c_str(), po.c_str(), no.c_str()), Out::QUIET );
-      result = indeterminate;
-    }
-    else
-      result = false;
-  }
-  return result;
-}
-
 Args::Args( const std::string & s )
 : _argv( NULL )
 {
