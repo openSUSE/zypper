@@ -51,27 +51,6 @@ struct Options;
 inline std::string dashdash( std::string optname_r )
 { return optname_r.insert( 0, "--" ); }
 
-///////////////////////////////////////////////////////////////////
-namespace cli
-{
-  /** Evaluate mutual exlusive '--*gpgcheck*' options. */
-  RepoInfo::GpgCheck gpgCheck( Zypper & zypper );
-
-} // namespace cli
-///////////////////////////////////////////////////////////////////
-
-/** Flags for tuning \ref Zypper::defaultLoadSystem. */
-enum LoadSystemBits
-{
- NoTarget		= (1 << 0),		//< don't load target to pool
- NoRepos		= (1 << 1),		//< don't load repos to pool
- NoPool		        = NoTarget | NoRepos	//< no pool at all
-};
-ZYPP_DECLARE_FLAGS( LoadSystemFlags, LoadSystemBits );
-
-/** \relates LoadSystemFlags */
-ZYPP_DECLARE_OPERATORS_FOR_FLAGS( LoadSystemFlags );
-
 /**
  * Structure for holding global options.
  *
@@ -233,21 +212,6 @@ public:
   Config & config()				{ return _config; }
   const GlobalOptions & globalOpts() const	{ return _gopts; }
   GlobalOptions & globalOptsNoConst()		{ return _gopts; }
-  const parsed_opts & cOpts() const		{ return _copts; }
-
-  /** Leightweight string_ref vector to \a option_r args */
-  std::vector<boost::string_ref> cOptValues( const std::string & option_r ) const
-  {
-    std::vector<boost::string_ref> ret;
-    const parsed_opts & copts( cOpts() );
-    parsed_opts::const_iterator it = copts.find( option_r );
-    if ( it != copts.end() )
-    {
-      for_( v, it->second.begin(), it->second.end() )
-      {	ret.push_back( *v ); }
-    }
-    return ret;
-  }
 
   const ZypperCommand & command() const		{ return _command; }
   const std::string & commandHelp() const	{ return _command_help; }
@@ -309,13 +273,6 @@ public:
 
   void cleanup();
   void cleanupForSubcommand();
-
-public:
-  /** Prepare repos and pool according to \a flags_r.
-   * Defaults to load target and repos and in this case also adjusts
-   * the PPP status by doing an initial solver run.
-   */
-  int defaultLoadSystem( LoadSystemFlags flags_r = LoadSystemFlags() );
 
 public:
   /** Convenience to return properly casted _commandOptions. */

@@ -354,3 +354,44 @@ void InteractiveUpdatesOptionSet::reset()
 {
   _withInteractive = zypp::indeterminate;
 }
+
+
+std::vector<ZyppFlags::CommandGroup> SortResultOptionSet::options()
+{
+  ZyppFlags::CommandGroup grp {{
+            { "sort-by-name", 0, ZyppFlags::NoArgument, ZyppFlags::WriteFixedValueType( _mode, SortMode::ByName ),
+                  // translators: --sort-by-name
+                  _("Sort packages by name (default).")
+            }
+    }
+  };
+
+  if ( _compatMode.testFlag( CompatModeBits::EnableNewOpt) ) {
+    grp.options.insert( grp.options.end(),
+      {
+        { "sort-by-repo", 0, ZyppFlags::NoArgument, ZyppFlags::WriteFixedValueType( _mode, SortMode::ByRepo ),
+             // translators: --sort-by-repo
+             _("Sort packages by repository.")
+        }
+      }
+    );
+  }
+
+  if ( _compatMode.testFlag( CompatModeBits::EnableRugOpt) ) {
+    grp.options.insert( grp.options.end(),
+      {
+        { "sort-by-catalog", 0, ZyppFlags::NoArgument, ZyppFlags::WriteFixedValueType( _mode, SortMode::ByRepo ),
+              // translators: --sort-by-catalog
+              _("Sort packages by repository.")
+        }
+      }
+    );
+  }
+
+  return { grp };
+}
+
+void SortResultOptionSet::reset()
+{
+  _mode = SortMode::Default;
+}

@@ -16,18 +16,18 @@
 namespace CommonFlags
 {
 
-  inline zypp::ZyppFlags::CommandOption detailsFlag ( bool &targetFlag ) {
+  inline zypp::ZyppFlags::CommandOption detailsFlag ( bool &targetFlag, char shortFlag = '\0',  std::string help = std::string()  ) {
     return {
-      "details", '\0', zypp::ZyppFlags::NoArgument, zypp::ZyppFlags::BoolType( &targetFlag, zypp::ZyppFlags::StoreTrue, targetFlag ),
+      "details", shortFlag, zypp::ZyppFlags::NoArgument, zypp::ZyppFlags::BoolType( &targetFlag, zypp::ZyppFlags::StoreTrue, targetFlag ),
       // translators: --details
-      _("Show the detailed installation summary.")
-    };;
+      help.empty() ? _("Show the detailed installation summary.") : help
+    };
   }
 
-  inline zypp::ZyppFlags::CommandOption resKindSetFlag ( std::set<ResKind> &target ) {
+  inline zypp::ZyppFlags::CommandOption resKindSetFlag ( std::set<ResKind> &target, std::string help = std::string() ) {
     return {
       "type", 't', zypp::ZyppFlags::RequiredArgument | ZyppFlags::Repeatable , zypp::ZyppFlags::KindSetType ( &target ) ,
-       str::Format(_("Type of package (%1%).") ) % "package, patch, pattern, product"
+       help.empty() ? std::string( str::Format(_("Type of package (%1%).") ) % "package, patch, pattern, product" ) : help
     };
   }
 

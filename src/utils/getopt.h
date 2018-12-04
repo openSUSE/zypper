@@ -18,8 +18,6 @@ parsed_opts parse_options( int argc, char **argv, const struct option *longopts 
 
 class Zypper;
 
-TriBool get_boolean_option( Zypper & zypper, const std::string & pname, const std::string & nname );
-
 //! Parse a single string to an array of char* usable for getopt_long.
 class Args
 {

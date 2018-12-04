@@ -780,5 +780,48 @@ void stringsContainer ()
       "\n"
       "This command has dummy implementation which always returns 0.\n"
     );
+
+    _command_help = ( CommandHelpFormater() << _(
+      "search (se) [OPTIONS] [querystring] ...\n"
+      "\n"
+      "Search for packages matching any of the given search strings.\n"
+      "\n"
+      "  Command options:\n"
+      "    --match-substrings     Search for a match to partial words (default).\n"
+      "    --match-words          Search for a match to whole words only.\n"
+      "-x, --match-exact          Searches for an exact match of the search strings.\n"
+      "    --provides             Search for packages which provide the search strings.\n"
+      "    --recommends           Search for packages which recommend the search strings.\n"
+      "    --requires             Search for packages which require the search strings.\n"
+      "    --suggests             Search for packages which suggest the search strings.\n"
+      "    --conflicts            Search packages conflicting with search strings.\n"
+      "    --obsoletes            Search for packages which obsolete the search strings.\n"
+      "-n, --name                 Useful together with dependency options, otherwise\n"
+      "                           searching in package name is default.\n"
+      "-f, --file-list            Search for a match in the file list of packages.\n"
+      "-d, --search-descriptions  Search also in package summaries and descriptions.\n"
+      "-C, --case-sensitive       Perform case-sensitive search.\n"
+      "-i, --installed-only       Show only installed packages.\n"
+      "-u, --not-installed-only   Show only packages which are not installed.\n"
+      "-t, --type <type>          Search only for packages of the specified type.\n"
+      "-r, --repo <alias|#|URI>   Search only in the specified repository.\n"
+      "    --sort-by-name         Sort packages by name (default).\n"
+      "    --sort-by-repo         Sort packages by repository.\n"
+      "-s, --details              Show each available version in each repository\n"
+      "                           on a separate line.\n"
+      "-v, --verbose              Like --details, with additional information where the\n"
+      "                           search has matched (useful for search in dependencies).\n"
+      "\n"
+      "* and ? wildcards can also be used within search strings.\n"
+      "If a search string is enclosed in '/', it's interpreted as a regular expression.\n"
+    ))
+
+    _command_help = _(
+      "quit (exit, ^D)\n"
+      "\n"
+      "Quit the current zypper shell.\n"
+      "\n"
+      "This command has no additional options.\n"
+    );
     #endif
 }

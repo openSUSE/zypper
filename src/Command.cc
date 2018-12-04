@@ -31,6 +31,7 @@
 #include "commands/patchcheck.h"
 #include "commands/listpatches.h"
 #include "commands/listupdates.h"
+#include "commands/search/search.h"
 
 using namespace zypp;
 
@@ -123,8 +124,7 @@ namespace
       { ZypperCommand::RUG_PATTERN_INFO_e, CommandFactory::makeAlias<InfoCmd, InfoCmd::Mode, InfoCmd::Mode::RugPatternInfo>( { "pattern-info" } ) },
       { ZypperCommand::RUG_PRODUCT_INFO_e, CommandFactory::makeAlias<InfoCmd, InfoCmd::Mode, InfoCmd::Mode::RugProductInfo>( { "product-info" } ) },
       { ZypperCommand::PACKAGES_e,         CommandFactory::make<PackagesCmd>( { "packages", "pa", "pkg" } ) },
-      { ZypperCommand::PATCHES_e,          CommandFactory::make<PatchesCmd>( { "patches", "pch" } ) },
-      { ZypperCommand::PATTERNS_e,         CommandFactory::make<PatternsCmd>( { "patterns", "pt" } ) },
+      { ZypperCommand::PATCHES_e,          CommandFactory::make<PatchesCmd>( { "patches", "pch" } ) },      { ZypperCommand::PATTERNS_e,         CommandFactory::make<PatternsCmd>( { "patterns", "pt" } ) },
       { ZypperCommand::PRODUCTS_e,         CommandFactory::make<ProductsCmd>( { "products", "pd" } ) },
 
       { ZypperCommand::INSTALL_e,          CommandFactory::make<InstallCmd>( { "install", "in" } ) },
@@ -137,7 +137,10 @@ namespace
       { ZypperCommand::UPDATE_e,           CommandFactory::make<UpdateCmd> ( { "update", "up"  } ) },
       { ZypperCommand::PATCH_CHECK_e,      CommandFactory::make<PatchCheckCmd> ( { "patch-check", "pchk"} ) },
       { ZypperCommand::LIST_PATCHES_e,     CommandFactory::make<ListPatchesCmd> ( { "list-patches", "lp" } ) },
-      { ZypperCommand::LIST_UPDATES_e,     CommandFactory::make<ListUpdatesCmd> ( { "list-updates", "lu" } ) }
+      { ZypperCommand::LIST_UPDATES_e,     CommandFactory::make<ListUpdatesCmd> ( { "list-updates", "lu" } ) },
+
+      { ZypperCommand::SEARCH_e,           CommandFactory::makeAlias<SearchCmd, SearchCmd::CmdMode, SearchCmd::CmdMode::Search>( { "search", "se" } ) },
+      { ZypperCommand::RUG_PATCH_SEARCH_e, CommandFactory::makeAlias<SearchCmd, SearchCmd::CmdMode, SearchCmd::CmdMode::RugPatchSearch>( { "patch-search", "pse" } ) }
     };
     return table;
   }
@@ -178,7 +181,7 @@ namespace
       //_t( PATCH_CHECK_e )	| "patch-check"		| "pchk";
       //_t( DIST_UPGRADE_e )	| "dist-upgrade"	| "dup";
 
-      _t( SEARCH_e )		| "search"		| "se";
+      //_t( SEARCH_e )		| "search"		| "se";
       //_t( INFO_e )		| "info"		| "if";
       //_t( PACKAGES_e )		| "packages"		| "pa" | "pkg";
       //_t( PATCHES_e )		| "patches"		| "pch";
@@ -211,7 +214,7 @@ namespace
       //_t( RUG_PATCH_INFO_e )	| "patch-info";
       //_t( RUG_PATTERN_INFO_e )	| "pattern-info";
       //_t( RUG_PRODUCT_INFO_e )	| "product-info";
-      _t( RUG_PATCH_SEARCH_e )	| "patch-search" | "pse";
+      //_t( RUG_PATCH_SEARCH_e )	| "patch-search" | "pse";
       _t( RUG_PING_e )		| "ping";
 #undef _t
 
