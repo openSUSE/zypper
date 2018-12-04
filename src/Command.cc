@@ -34,6 +34,7 @@
 #include "commands/search/search.h"
 #include "commands/nullcommands.h"
 #include "commands/configtest.h"
+#include "commands/shell.h"
 
 using namespace zypp;
 
@@ -147,7 +148,10 @@ namespace
       { ZypperCommand::MOO_e,              CommandFactory::make<MooCmd>( { "moo" } ) },
       { ZypperCommand::WHAT_PROVIDES_e,    CommandFactory::make<WhatProvidesCmd>( { "what-provides", "wp" } ) },
       { ZypperCommand::CONFIGTEST_e,       CommandFactory::make<ConfigTestCmd>( { "configtest" } ) },
-      { ZypperCommand::RUG_PING_e,         CommandFactory::make<RupPingCmd>( { "ping" } ) }
+      { ZypperCommand::RUG_PING_e,         CommandFactory::make<RupPingCmd>( { "ping" } ) },
+
+      { ZypperCommand::SHELL_e,            CommandFactory::make<ShellCmd>( { "shell", "sh" } ) },
+      { ZypperCommand::SHELL_QUIT_e,       CommandFactory::make<ShellQuitCmd>( { "quit", "exit", "\004" } ) }
     };
     return table;
   }
@@ -212,8 +216,8 @@ namespace
       //_t( SOURCE_DOWNLOAD_e )	| "source-download";
 
       _t( HELP_e )		| "help"		| "?";
-      _t( SHELL_e )		| "shell"		| "sh";
-      _t( SHELL_QUIT_e )	| "quit"		| "exit" | "\004";
+      //_t( SHELL_e )		| "shell"		| "sh";
+      //_t( SHELL_QUIT_e )	| "quit"		| "exit" | "\004";
       //_t( MOO_e )		| "moo";
 
       //_t( CONFIGTEST_e)		|  "configtest";
