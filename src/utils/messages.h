@@ -43,6 +43,8 @@ enum class LegacyCLIMsgType {
 std::string legacyCLIStr( const std::string & old_r, const std::string & new_r, LegacyCLIMsgType type_r );
 void print_legacyCLIStr(Out & out, const std::string & old_r, const std::string & new_r, Out::Verbosity verbosity_r = Out::NORMAL, LegacyCLIMsgType type_r = LegacyCLIMsgType::Local );
 
+void print_unknown_command_hint( Zypper & zypper, const std::string & cmd_r );
+
 
 
 #endif /*MESSAGES_H_*/
