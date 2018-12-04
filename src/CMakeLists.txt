@@ -91,6 +91,7 @@ SET (zypper_HEADERS
   commands/listupdates.h
   commands/listpatches.h
   commands/nullcommands.h
+  commands/shell.h
 )
 
 SET( zypper_SRCS
@@ -162,6 +163,7 @@ SET( zypper_SRCS
   commands/listupdates.cc
   commands/listpatches.cc
   commands/nullcommands.cc
+  commands/shell.cc
   ${zypper_HEADERS}
 )
 

@@ -1387,44 +1387,6 @@ void Zypper::processCommandOptions()
     ZYPP_THROW( ExitRequestException("help provided") );
   }
 
-  case ZypperCommand::SHELL_QUIT_e:
-  {
-    static struct option quit_options[] = {
-      {"help", no_argument, 0, 'h'},
-      {0, 0, 0, 0}
-    };
-    specific_options = quit_options;
-    _command_help = CommandHelpFormater()
-    .synopsis(	// translators: command synopsis; do not translate lowercase words
-    _("quit (exit, ^D)")
-    )
-    .description(	// translators: command description
-    _("Quit the current zypper shell.")
-    )
-    .noOptionSection()
-    ;
-    break;
-  }
-
-  case ZypperCommand::SHELL_e:
-  {
-    static struct option quit_options[] = {
-      {"help", no_argument, 0, 'h'},
-      {0, 0, 0, 0}
-    };
-    specific_options = quit_options;
-    _command_help = CommandHelpFormater()
-    .synopsis(	// translators: command synopsis; do not translate lowercase words
-    _("shell (sh)")
-    )
-    .description(	// translators: command description
-    _("Enter the zypper command shell.")
-    )
-    .noOptionSection()
-    ;
-    break;
-  }
-
   case ZypperCommand::SUBCOMMAND_e:
   {
     // This is different from other commands: Executed in main;
@@ -1580,32 +1542,6 @@ void Zypper::doCommand()
   ResObject::Kind kind;
   switch( command().toEnum() )
   {
-
-  // -----------------------------( shell )------------------------------------
-
-  case ZypperCommand::SHELL_QUIT_e:
-  {
-    if ( !runningShell() )
-      out().warning(_("This command only makes sense in the zypper shell."), Out::QUIET );
-    else
-      out().error( "oops, you wanted to quit, didn't you?" ); // should not happen
-
-    break;
-  }
-
-  case ZypperCommand::SHELL_e:
-  {
-    if ( runningShell() )
-      out().info(_("You already are running zypper's shell.") );
-    else
-    {
-      out().error(_("Unexpected program flow.") );
-      report_a_bug( out() );
-    }
-
-    break;
-  }
-
 
   // dummy commands
   case ZypperCommand::SUBCOMMAND_e:	// subcommands are not expected to be executed here!
