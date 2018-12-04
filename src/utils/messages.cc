@@ -126,3 +126,28 @@ void print_legacyCLIStr( Out & out, const std::string & old_r, const std::string
 {
   out.warning( legacyCLIStr( old_r, new_r, type_r), verbosity_r );
 }
+
+void print_unknown_command_hint( Zypper & zypper, const std::string & cmd_r )
+{
+  zypper.out().info(
+    // translators: %s is "help" or "zypper help" depending on whether
+    // zypper shell is running or not
+    str::Format(_("Type '%s' to get a list of global options and commands."))
+    % (zypper.runningShell() ? "help" : "zypper help") );
+  zypper.out().gap();
+  zypper.out().info(
+    // translators: %1% is the name of an (unknown) command
+    // translators: %2% something providing more info (like 'zypper help subcommand')
+    // translators: The word 'subcommand' also refers to a zypper command and should not be translated.
+    str::Format(_("In case '%1%' is not a typo it's probably not a built-in command, but provided as a subcommand or plug-in (see '%2%').") )
+    /*%1%*/ % cmd_r
+    /*%2%*/ % "zypper help subcommand"
+  );
+  zypper.out().info(
+    // translators: %1% and %2% are plug-in packages which might provide it.
+    // translators: The word 'subcommand' also refers to a zypper command and should not be translated.
+    str::Format(_("In this case a specific package providing the subcommand needs to be installed first. Those packages are often named '%1%' or '%2%'.") )
+    /*%1%*/ % ("zypper-"+cmd_r)
+    /*%2%*/ % ("zypper-"+cmd_r+"-plugin")
+  );
+}
