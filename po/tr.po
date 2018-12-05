@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-11-28 14:46+0100\n"
-"PO-Revision-Date: 2018-12-03 12:07+0000\n"
+"PO-Revision-Date: 2018-12-05 10:19+0000\n"
 "Last-Translator: Murat Servan Kahraman <muratservan@outlook.com>\n"
 "Language-Team: Turkish <https://l10n.opensuse.org/projects/zypper/master/tr/>"
 "\n"
@@ -5094,13 +5094,12 @@ msgstr "GPG Kontrolü"
 #: src/commands/repos/list.cc:49 src/commands/repos/list.cc:252
 #: src/commands/services/list.cc:113 src/repos.cc:1258
 msgid "Priority"
-msgstr "Öncelik."
+msgstr "Öncelik"
 
 #. translators: property name; short; used like "Name: value"
 #: src/commands/repos/list.cc:50 src/repos.cc:1256
-#, fuzzy
 msgid "Autorefresh"
-msgstr "Başlangıç durumları"
+msgstr "Otomatik yenileme"
 
 # /usr/lib/YaST2/keyboard_raw.ycp:79
 #: src/commands/repos/list.cc:50 src/commands/repos/list.cc:51
@@ -6122,6 +6121,8 @@ msgid ""
 "Please restart the operation in interactive mode and confirm your agreement "
 "with required licenses, or use the %s option."
 msgstr ""
+"Lütfen işlemi etkileşimli modda yeniden başlatın ve gerekli lisansları kabul "
+"ettiğinizi doğrulayın ya da %s seçeneğini kullanın."
 
 #. translators: e.g. "... with flash package license."
 #: src/misc.cc:184
