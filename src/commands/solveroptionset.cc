@@ -15,8 +15,8 @@ std::vector<zypp::ZyppFlags::CommandGroup> SolverRecommendsOptionSet::options()
     {
       _("Solver options"),
       {
-        { "recommends", '\0', ZyppFlags::NoArgument, ZyppFlags::TriBoolType( set._debugSolver, ZyppFlags::StoreTrue ), _("Install also recommended packages in addition to the required ones.") },
-        { "no-recommends", '\0', ZyppFlags::NoArgument, ZyppFlags::TriBoolType( set._forceResolution, ZyppFlags::StoreFalse ), _("Do not install recommended packages, only required ones.") }
+        { "recommends", '\0', ZyppFlags::NoArgument, ZyppFlags::TriBoolType( set._recommends, ZyppFlags::StoreTrue ), _("Install also recommended packages in addition to the required ones.") },
+        { "no-recommends", '\0', ZyppFlags::NoArgument, ZyppFlags::TriBoolType( set._recommends, ZyppFlags::StoreFalse ), _("Do not install recommended packages, only required ones.") }
       },
       {
         //conflicting flags
