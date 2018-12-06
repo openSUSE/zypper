@@ -75,7 +75,7 @@ BuildRequires:  pkgconfig
 BuildRequires:  pkg-config
 %endif
 
-BuildRequires:  libsolv-devel >= 0.7.1
+BuildRequires:  libsolv-devel >= 0.7.2
 %if 0%{?suse_version} >= 1100
 BuildRequires:  libsolv-tools
 %requires_eq    libsolv-tools
