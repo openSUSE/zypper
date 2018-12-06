@@ -189,15 +189,6 @@ namespace zypp
     bool ignoreAlreadyRecommended() const;
 
     /**
-     * Weak form of \ref ignoreAlreadyRecommended \c =false.
-     * Try to re-evaluate recommendations for specific namespaces only.
-     * \note May not support all namespaces.
-     */
-    void setInr( ResolverNamespaces namespaces_r );
-    void resetInr();
-    ResolverNamespaces inr() const;
-
-    /**
      * Setting whether required packages are installed ONLY
      * So recommended packages, language packages and packages which depend
      * on hardware (modalias) will not be regarded.

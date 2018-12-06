@@ -76,7 +76,6 @@ std::ostream & Resolver::dumpOn( std::ostream & os ) const
   OUTS( _solveSrcPackages );
   OUTS( _cleandepsOnRemove );
   OUTS( _ignoreAlreadyRecommended );
-  OUTS( _inr );
   #undef OUT
   return os << "<resolver/>";
 }
@@ -95,8 +94,6 @@ Resolver::Resolver (const ResPool & pool)
     , _solveSrcPackages		( false )
     , _cleandepsOnRemove	( ZConfig::instance().solver_cleandepsOnRemove() )
     , _ignoreAlreadyRecommended	( true )
-    // _inr defaults to ResolverNamespaces()
-
 {
     sat::Pool satPool( sat::Pool::instance() );
     _satResolver = new SATResolver(_pool, satPool.get());
@@ -311,7 +308,6 @@ void Resolver::solverInit()
 
     _satResolver->setFixsystem			( isVerifyingMode() );
     _satResolver->setIgnorealreadyrecommended	( ignoreAlreadyRecommended() );
-    _satResolver->setInr			( inr() );
     _satResolver->setOnlyRequires		( onlyRequires() );
     _satResolver->setUpdatesystem		(_updateMode);
     _satResolver->setSolveSrcPackages		( solveSrcPackages() );

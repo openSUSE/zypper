@@ -170,7 +170,6 @@ SATResolver::dumpOn( std::ostream & os ) const
 	os << "  solveSrcPackages	= "	<< _solveSrcPackages << endl;
 	os << "  cleandepsOnRemove	= "	<< _cleandepsOnRemove << endl;
         os << "  fixsystem		= "	<< _fixsystem << endl;
-	os << "  inr namespace		= "	<< _inr << endl;
     } else {
 	os << "<NULL>";
     }
@@ -625,19 +624,9 @@ SATResolver::solverInit(const PoolItemList & weakItems)
     }
 
     // Ad rules for changed requestedLocales
-    const auto & trackedLocaleIds( myPool().trackedLocaleIds() );
-    if ( _inr.testFlag( ResolverNamespace::language ) )
     {
-      // inr mode
-      for ( const auto & locale : trackedLocaleIds.current() )
-      {
-	queue_push( &(_jobQueue), SOLVER_INSTALL | SOLVER_SOLVABLE_PROVIDES );
-	queue_push( &(_jobQueue), Capability( ResolverNamespace::language, IdString(locale) ).id() );
-      }
-      // TODO cleanup not requested locale packages?
-    }
-    else
-    {
+      const auto & trackedLocaleIds( myPool().trackedLocaleIds() );
+
       // just track changed locakes
       for ( const auto & locale : trackedLocaleIds.added() )
       {

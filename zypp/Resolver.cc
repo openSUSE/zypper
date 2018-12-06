@@ -86,10 +86,6 @@ namespace zypp
   void Resolver::setIgnoreAlreadyRecommended( bool yesno_r) { _pimpl->setIgnoreAlreadyRecommended( yesno_r ); }
   bool Resolver::ignoreAlreadyRecommended() const	{ return _pimpl->ignoreAlreadyRecommended(); }
 
-  void Resolver::setInr( ResolverNamespaces namespaces_r ) { _pimpl->setInr( namespaces_r ); }
-  void Resolver::resetInr()				{ setInr( ResolverNamespaces() ); }
-  ResolverNamespaces Resolver::inr() const		{ return _pimpl->inr(); }
-
   void Resolver::setOnlyRequires( bool yesno_r )	{ _pimpl->setOnlyRequires( yesno_r ); }
   void Resolver::resetOnlyRequires()			{ _pimpl->setOnlyRequires( indeterminate ); }
   bool Resolver::onlyRequires() const			{ return _pimpl->onlyRequires(); }
