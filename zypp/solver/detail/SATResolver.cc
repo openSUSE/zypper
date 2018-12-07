@@ -192,7 +192,7 @@ SATResolver::SATResolver (const ResPool & pool, sat::detail::CPool *satPool)
     , _updatesystem(false)
     , _noupdateprovide		( false )
     , _dosplitprovides		( true )
-    , _onlyRequires(ZConfig::instance().solver_onlyRequires())
+    , _onlyRequires		(ZConfig::instance().solver_onlyRequires())
     , _ignorealreadyrecommended(true)
     , _distupgrade(false)
     , _distupgrade_removeunsupported(false)
@@ -405,7 +405,8 @@ SATResolver::solving(const CapabilitySet & requires_caps,
     solver_set_flag(_satSolver, SOLVER_FLAG_ALLOW_UNINSTALL,		_allowuninstall);
     solver_set_flag(_satSolver, SOLVER_FLAG_NO_UPDATEPROVIDE,		_noupdateprovide);
     solver_set_flag(_satSolver, SOLVER_FLAG_SPLITPROVIDES,		_dosplitprovides);
-    solver_set_flag(_satSolver, SOLVER_FLAG_IGNORE_RECOMMENDED, _onlyRequires);
+    solver_set_flag(_satSolver, SOLVER_FLAG_IGNORE_RECOMMENDED, 	false);		// resolve recommended namespaces
+    solver_set_flag(_satSolver, SOLVER_FLAG_ONLY_NAMESPACE_RECOMMENDED,	_onlyRequires);	//
     solver_set_flag(_satSolver, SOLVER_FLAG_DUP_ALLOW_DOWNGRADE,	_dup_allowdowngrade );
     solver_set_flag(_satSolver, SOLVER_FLAG_DUP_ALLOW_NAMECHANGE,	_dup_allownamechange );
     solver_set_flag(_satSolver, SOLVER_FLAG_DUP_ALLOW_ARCHCHANGE,	_dup_allowarchchange );
@@ -847,7 +848,8 @@ void SATResolver::doUpdate()
     solver_set_flag(_satSolver, SOLVER_FLAG_ALLOW_UNINSTALL,		_allowuninstall);
     solver_set_flag(_satSolver, SOLVER_FLAG_NO_UPDATEPROVIDE,		_noupdateprovide);
     solver_set_flag(_satSolver, SOLVER_FLAG_SPLITPROVIDES,		_dosplitprovides);
-    solver_set_flag(_satSolver, SOLVER_FLAG_IGNORE_RECOMMENDED, _onlyRequires);
+    solver_set_flag(_satSolver, SOLVER_FLAG_IGNORE_RECOMMENDED, 	false);		// resolve recommended namespaces
+    solver_set_flag(_satSolver, SOLVER_FLAG_ONLY_NAMESPACE_RECOMMENDED,	_onlyRequires);	//
 
     sat::Pool::instance().prepare();
 

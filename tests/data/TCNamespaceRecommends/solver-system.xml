@@ -1,0 +1,45 @@
+<channel><subchannel>
+
+<package>
+  <name>aspell</name>
+  <history>
+    <update>
+      <arch>x86_64</arch>
+      <version>0</version><release>0</release>
+    </update>
+  </history>
+  <recommends>
+    <dep name='aspell-en' />
+    <dep name='recommended-pkg' />
+  </recommends>
+</package>
+
+<package>
+  <name>aspell-en</name>
+  <history>
+    <update>
+      <arch>x86_64</arch>
+      <version>0</version><release>0</release>
+    </update>
+  </history>
+  <provides>
+    <dep name='locale(aspell:en)' />
+  </provides>
+  <supplements>
+    <!--- ignoring '(aspell and namespace:language(en))' -->
+  </supplements>
+</package>
+
+<package>
+  <name>glibc</name>
+  <history>
+    <update>
+      <arch>x86_64</arch>
+      <version>0</version><release>0</release>
+    </update>
+  </history>
+  <provides>
+    <dep name='glibc' op='==' version='0' release='0' />
+  </provides>
+</package>
+</subchannel></channel>

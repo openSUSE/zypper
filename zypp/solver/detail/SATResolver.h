@@ -103,7 +103,7 @@ class SATResolver : public base::ReferenceCounted, private base::NonCopyable, pr
     bool _updatesystem:1;		// update
     bool _noupdateprovide:1;		// true: update packages needs not to provide old package
     bool _dosplitprovides:1;		// true: consider legacy split provides
-    bool _onlyRequires:1;		// true: consider required packages only
+    bool _onlyRequires:1;		// true: consider required packages only (but recommended namespaces)
     bool _ignorealreadyrecommended:1;	// true: ignore recommended packages that were already recommended by the installed packages
     bool _distupgrade:1;
     bool _distupgrade_removeunsupported:1;

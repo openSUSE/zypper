@@ -39,6 +39,7 @@ ADD_TESTS(
   RepoManager
   RepoStatus
   ResKind
+  Resolver
   ResStatus
   Selectable
   SetRelationMixin

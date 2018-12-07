@@ -1,0 +1,75 @@
+<channel><subchannel>
+
+<package>
+  <name>aspell</name>
+  <history>
+    <update>
+      <arch>x86_64</arch>
+      <version>1</version><release>1</release>
+    </update>
+  </history>
+  <recommends>
+    <dep name='aspell-en' />
+    <dep name='recommended-pkg' />
+  </recommends>
+</package>
+
+<package>
+  <name>aspell-en</name>
+  <history>
+    <update>
+      <arch>x86_64</arch>
+      <version>1</version><release>1</release>
+    </update>
+  </history>
+  <provides>
+    <dep name='locale(aspell:en)' />
+  </provides>
+  <supplements>
+    <!--- ignoring '(aspell and namespace:language(en))' -->
+  </supplements>
+</package>
+
+<package>
+  <name>aspell-de</name>
+  <history>
+    <update>
+      <arch>x86_64</arch>
+      <version>1</version><release>1</release>
+    </update>
+  </history>
+  <provides>
+    <dep name='locale(aspell:de)' />
+  </provides>
+  <supplements>
+    <!--- ignoring '(aspell and namespace:language(de))' -->
+  </supplements>
+</package>
+
+<package>
+  <name>aspell-fr</name>
+  <history>
+    <update>
+      <arch>x86_64</arch>
+      <version>1</version><release>1</release>
+    </update>
+  </history>
+  <provides>
+    <dep name='locale(aspell:fr)' />
+  </provides>
+  <supplements>
+    <!--- ignoring '(aspell and namespace:language(de))' -->
+  </supplements>
+</package>
+
+<package>
+  <name>recommended-pkg</name>
+  <history>
+    <update>
+      <arch>x86_64</arch>
+      <version>1</version><release>1</release>
+    </update>
+  </history>
+</package>
+
+</subchannel></channel>
