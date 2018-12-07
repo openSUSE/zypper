@@ -378,7 +378,9 @@ include::{incdir}/option_Solver_Flags_Installs.txt[]
 --
 
 *install-new-recommends* (*inr*) ['options']::
-	Install newly added packages recommended by already installed ones. This can typically be used to install language packages recently added to repositories or drivers for newly added hardware.
+	Install newly added packages recommended by already installed ones. This command basically re-evaluates the recommendations of all installed packages and fills up the system accordingly. 'You don't want to call this unconditionally' on small or minimal systems, as it may easily add a large number of packages.
+	+
+	Called as *zypper inr --no-recommends*, it restricts the command to just look for packages supporting available hardware, languages or filesystems. Usefull after having added e.g. new hardware or driver repos. This is also the default behavior if you have set [zypp.conf:solver.onlyRequires].
 +
 --
 	*-r*, *--repo* 'alias'|'name'|'#'|'URI'::
@@ -392,7 +394,7 @@ include::{incdir}/option_Solver_Flags_Installs.txt[]
 
 	Solver related options: :: {nop}
 include::{incdir}/option_Solver_Flags_Common.txt[]
-// not supported here! //include::{incdir}/option_Solver_Flags_Recommends.txt[]
+include::{incdir}/option_Solver_Flags_Recommends.txt[]
 
 	Expert Options: :: Don't use them unless you know you need them.
 
