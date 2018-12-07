@@ -90,8 +90,12 @@ std::string InrVerifyCmd::description() const
 {
   switch ( _mode ) {
   case InrVerifyCmd::InstallRecommends:
+    return str::Str()
     // translators: command description
-    return _("Install newly added packages recommended by already installed packages. This can typically be used to install new language packages or drivers for newly added hardware.");
+    << _("Install newly added packages recommended by already installed ones. This command basically re-evaluates the recommendations of all installed packages and fills up the system accordingly. You don’t want to call this unconditionally on small or minimal systems, as it may easily add a large number of packages.")
+    << endl << endl
+    // translators: command description, %1% is a zypper command
+    << str::Format(_("Called as '%1%', it restricts the command to just look for packages supporting available hardware, languages or filesystems. Usefull after having added e.g. new hardware or driver repos.") ) % "zypper inr --no-recommends";
   case InrVerifyCmd::Verify:
     // translators: command description
     return _("Check whether dependencies of installed packages are satisfied and suggest to install or remove packages in order to repair the dependency problems.");
