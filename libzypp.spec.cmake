@@ -363,7 +363,7 @@ fi
 %config(noreplace) %{_sysconfdir}/zypp/systemCheck
 %config(noreplace) %{_sysconfdir}/logrotate.d/zypp-history.lr
 %dir               %{_var}/lib/zypp
-%dir               %{_var}/log/zypp
+%dir %attr(750,root,root) %{_var}/log/zypp
 %dir               %{_var}/cache/zypp
 %{_prefix}/lib/zypp
 %{_datadir}/zypp
