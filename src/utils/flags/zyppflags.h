@@ -13,6 +13,7 @@
 #include <iostream>
 #include <exception>
 #include <initializer_list>
+#include <set>
 
 #include <boost/optional.hpp>
 
@@ -54,8 +55,11 @@ namespace ZyppFlags {
 
   struct CommandOption;
 
-  using DefValueFun = std::function<boost::optional<std::string>()>;
-  using SetterFun   = std::function<void ( const CommandOption &, const boost::optional<std::string> &)>;
+  using DefValueFun  = std::function< boost::optional<std::string>( ) >;
+  using PreWriteHook = std::function< bool ( const CommandOption &, const boost::optional<std::string> & ) >;
+  using SetterFun    = std::function< void ( const CommandOption &, const boost::optional<std::string> & ) >;
+  using PreWriteHook = std::function< bool ( const CommandOption &, const boost::optional<std::string> & ) >;
+  using PostWriteHook = SetterFun;
 
   enum ArgFlags : int {
     NoArgument        = 0x00,
@@ -104,23 +108,40 @@ namespace ZyppFlags {
 
     bool wasSet () const;
 
+    Value &before( PreWriteHook &&preWriteHook );
+    Value &after ( PostWriteHook &&postWriteHook );
+    Value &after ( std::function<void ()> &&postWriteHook );
+
   private:
     bool _wasSet = false;
     DefValueFun _defaultVal;
     SetterFun _setter;
     std::string _argHint;
+    std::vector<PreWriteHook>  _preWriteHook;
+    std::vector<PostWriteHook> _postWriteHook;
   };
 
   struct CommandOption
   {
-    CommandOption ( std::string &&name_r, char shortName_r, int flags_r, Value &&value_r, std::string &&help_r = std::string());
+    CommandOption ( std::string &&name_r, char shortName_r, int flags_r, Value &&value_r, std::string &&help_r = std::string() );
+
+    inline CommandOption &setPriority ( int prio ) {
+      priority = prio;
+      return *this;
+    }
+
+    inline CommandOption &setDependencies ( std::set<std::string> deps ) {
+      dependencies = deps;
+      return *this;
+    }
 
     std::string name;
     char  shortName;
     int flags;
     Value value;
     std::string help;
-    std::vector<std::string> conflictingArguments;
+    int priority = 0;
+    std::set<std::string> dependencies;
   };
 
   class ConflictingFlagsEntry : public std::vector< std::string >
@@ -143,12 +164,12 @@ namespace ZyppFlags {
     /**
      * Creates the default command group with given options and conflicting flags
      */
-    CommandGroup (  std::vector<CommandOption> &&options_r, ConflictingFlagsList &&conflictingOptions_r = ConflictingFlagsList() );
+    CommandGroup ( std::vector<CommandOption> &&options_r, ConflictingFlagsList &&conflictingOptions_r = ConflictingFlagsList() );
 
     /**
      * Creates the command group with given options, conflicting flags and the custom \a name_r
      */
-    CommandGroup (  std::string &&name_r, std::vector<CommandOption> &&options_r, ConflictingFlagsList &&conflictingOptions_r = ConflictingFlagsList() );
+    CommandGroup ( std::string &&name_r, std::vector<CommandOption> &&options_r, ConflictingFlagsList &&conflictingOptions_r = ConflictingFlagsList() );
 
     inline CommandGroup &operator<< ( CommandOption && opt ) {
       options.push_back( std::move(opt) );
@@ -175,7 +196,7 @@ namespace ZyppFlags {
   /**
    * Renders the \a options help string
    */
-  void renderHelp( const std::vector<CommandGroup> &options );
+  void renderHelp ( const std::vector<CommandGroup> &options );
 
 }}
 
