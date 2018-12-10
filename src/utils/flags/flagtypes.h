@@ -105,8 +105,11 @@ inline std::string argValueConvert ( const CommandOption &, const boost::optiona
   return *in;
 }
 
+template <>
+int argValueConvert ( const CommandOption &, const boost::optional<std::string> &in );
+
 template <template<typename ...> class Container, typename T >
-Value GenericContainerType  ( Container<T> &target_r, std::string hint, const std::string sep = "" ) {
+Value GenericContainerType  ( Container<T> &target_r, std::string hint = std::string(), const std::string sep = "" ) {
   return Value (
     noDefaultValue,
     [ &target_r, sep ] ( const CommandOption &opt, const boost::optional<std::string> &in ) {
@@ -121,6 +124,18 @@ Value GenericContainerType  ( Container<T> &target_r, std::string hint, const st
       } else {
         it = argValueConvert<T>( opt, in );
       }
+    },
+    std::move( hint )
+  );
+}
+
+template < typename T >
+Value GenericValueType  ( T &target_r, std::string hint = std::string() ) {
+  return Value (
+    noDefaultValue,
+    [ &target_r ] ( const CommandOption &opt, const boost::optional<std::string> &in ) {
+      if ( !in || in->empty() ) ZYPP_THROW(MissingArgumentException(opt.name)); //value required
+      target_r = argValueConvert<T>( opt, in );
     },
     std::move( hint )
   );
@@ -154,7 +169,7 @@ Value WriteFixedValueType ( T& target, const T &value ) {
 /**
  * Returns a \sa ZyppFlags::Value instance handling flags taking a string parameter representing a \sa zypp::filesystem::PathName
  */
-Value PathNameType( filesystem::Pathname &target, const boost::optional<std::string> &defValue, std::string hint );
+Value PathNameType( filesystem::Pathname &target, const boost::optional<std::string> &defValue = boost::optional<std::string>(), std::string hint = std::string() );
 
 /**
  * Creates a null type, calling the setter or default value getter for this type will do nothing.
@@ -163,11 +178,15 @@ Value PathNameType( filesystem::Pathname &target, const boost::optional<std::str
 Value NoValue ();
 
 /**
+ * Creqtes a type forwarding the \sa Value setter call to the function specified in \a callback
+ */
+Value CallbackVal ( ZyppFlags::SetterFun &&callback, std::string &&hint = std::string() );
+
+/**
  * Creates a value that emits a warning when set, if \a val_r is valid the calls are forwarded to it after
  * emitting the warning.
  */
 Value WarnOptionVal (Out &out_r , const std::string &warning_r, Out::Verbosity verbosity_r = Out::NORMAL, const boost::optional<Value> &val_r = boost::optional<Value>());
-
 
 /**
  * Handles command argument that pass bug reference numbers of specific types ( issues, cve, bugzilla, bz )

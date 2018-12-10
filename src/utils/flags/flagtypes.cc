@@ -60,20 +60,9 @@ Value IntType(int *target, const boost::optional<int> &defValue) {
         },
 
         [target]( const CommandOption &opt, const boost::optional<std::string> &in ) {
-          if (!in)
-            ZYPP_THROW(MissingArgumentException(opt.name));
-
-          try {
-            *target = std::stoi( *in );
-          } catch ( const std::invalid_argument &e ) {
-            ZYPP_THROW(InvalidValueException(opt.name, *in, e.what()));
-          } catch ( const std::out_of_range &e) {
-            ZYPP_THROW(InvalidValueException(opt.name, *in, _("Out of range")));
-          } catch ( ... ) {
-            ZYPP_THROW(ZyppFlagsException(str::Format(_("Unknown error while assigning the value %1% to flag %2%.")) % *in % opt.name));
-          }
+          *target = argValueConvert<int>(opt, in);
         },
-        "NUMBER"
+        ARG_INTEGER
   );
 }
 
@@ -162,7 +151,7 @@ Value WarnOptionVal(Out &out_r, const std::string &warning_r, Out::Verbosity ver
   );
 }
 
-Value PathNameType( filesystem::Pathname &target, const boost::optional<std::string> &defValue, std::string hint) {
+Value PathNameType( filesystem::Pathname &target, const boost::optional<std::string> &defValue, std::string hint ) {
   return Value (
     [defValue]() ->  boost::optional<std::string>{
       if (!defValue )
@@ -223,6 +212,32 @@ zypp::Date argValueConvert ( const CommandOption &opt, const boost::optional<std
   } catch ( const DateFormatException &e ) {
     ZYPP_THROW(InvalidValueException ( opt.name, *in, e.msg() ) );
   }
+}
+
+template <>
+int argValueConvert ( const CommandOption &opt, const boost::optional<std::string> &in )
+{
+  if (!in)
+    ZYPP_THROW(MissingArgumentException(opt.name));
+
+  try {
+    return std::stoi( *in );
+  } catch ( const std::invalid_argument &e ) {
+    ZYPP_THROW(InvalidValueException(opt.name, *in, e.what()));
+  } catch ( const std::out_of_range &e) {
+    ZYPP_THROW(InvalidValueException(opt.name, *in, _("Out of range")));
+  } catch ( ... ) {
+    ZYPP_THROW(ZyppFlagsException(str::Format(_("Unknown error while assigning the value %1% to flag %2%.")) % *in % opt.name));
+  }
+}
+
+Value CallbackVal( SetterFun &&callback , std::string &&hint )
+{
+  return Value {
+    noDefaultValue,
+    std::move( callback ),
+    std::move( hint )
+  };
 }
 
 }
