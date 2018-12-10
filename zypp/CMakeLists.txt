@@ -235,6 +235,7 @@ SET( zypp_base_HEADERS
   base/DrunkenBishop.h
   base/SerialNumber.h
   base/Easy.h
+  base/Env.h
   base/Errno.h
   base/Random.h
   base/Algorithm.h
