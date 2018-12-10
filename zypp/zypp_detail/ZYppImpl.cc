@@ -14,6 +14,7 @@
 #include "zypp/TmpPath.h"
 #include "zypp/base/Logger.h"
 #include "zypp/base/String.h"
+#include "zypp/base/Env.h"
 
 #include "zypp/zypp_detail/ZYppImpl.h"
 #include "zypp/target/TargetImpl.h"
@@ -147,8 +148,6 @@ namespace zypp
      * and target used for transact. */
     ZYppCommitResult ZYppImpl::commit( const ZYppCommitPolicy & policy_r )
     {
-      setenv( "ZYPP_IS_RUNNING", str::numstring(getpid()).c_str(), 1 );
-
       if ( getenv("ZYPP_TESTSUITE_FAKE_ARCH") )
       {
         ZYPP_THROW( Exception("ZYPP_TESTSUITE_FAKE_ARCH set. Commit not allowed and disabled.") );
@@ -157,6 +156,12 @@ namespace zypp
       MIL << "Attempt to commit (" << policy_r << ")" << endl;
       if (! _target)
 	ZYPP_THROW( Exception("Target not initialized.") );
+
+
+      env::ScopedSet ea { "ZYPP_IS_RUNNING", str::numstring(getpid()).c_str() };
+      env::ScopedSet eb;
+      if ( _target->chrooted() )
+	eb = env::ScopedSet( "SYSTEMD_OFFLINE", "1" );	// bsc#1118758 - indicate no systemd if chrooted install
 
       ZYppCommitResult res = _target->_pimpl->commit( pool(), policy_r );
 
