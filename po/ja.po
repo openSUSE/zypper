@@ -11,10 +11,10 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-12-10 19:36+0100\n"
-"PO-Revision-Date: 2018-11-28 22:34+0000\n"
+"PO-Revision-Date: 2018-12-10 22:38+0000\n"
 "Last-Translator: Yasuhiko Kamata <belphegor@belbel.or.jp>\n"
-"Language-Team: Japanese <https://l10n.opensuse.org/projects/zypper/master/ja/"
-">\n"
+"Language-Team: Japanese "
+"<https://l10n.opensuse.org/projects/zypper/master/ja/>\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -589,7 +589,7 @@ msgstr ""
 
 #: src/commands/commonflags.h:53
 msgid "Consider only patches which affect the package management itself."
-msgstr ""
+msgstr "パッケージ管理システム自身に影響するパッチのみを使用します。"
 
 #: src/output/Out.h:26 src/repos.cc:125 src/repos.cc:153
 msgid "Yes"
@@ -718,7 +718,7 @@ msgstr "エラー"
 
 #: src/Command.cc:62
 msgid "Invalid command"
-msgstr ""
+msgstr "コマンドが正しくありません"
 
 #: src/Command.cc:317
 #, c-format, boost-format
@@ -2916,7 +2916,7 @@ msgstr "パスワード"
 
 #: src/commands/basecommand.cc:106
 msgid "Option program arguments: "
-msgstr ""
+msgstr "オプションプログラムのパラメータ: "
 
 #: src/commands/conditions.cc:19
 msgid "Root privileges are required to run this command."
@@ -2978,6 +2978,9 @@ msgid ""
 "unconditionally on small or minimal systems, as it may easily add a large "
 "number of packages."
 msgstr ""
+"既にインストールされているパッケージが推奨する、新しいパッケージをインストールします。このコマンドは、インストール済みの全てのパッケージに対して推奨情報を"
+"読み出し、その条件を満たすように動作します。小さくまとめておきたいシステムの場合は、このコマンドを呼び出すことで多数のパッケージがインストールされることに"
+"なってしまいますので、不用意に使用すべきではありません。"
 
 #. translators: command description, %1% is a zypper command
 #: src/commands/inrverify.cc:98
@@ -2987,6 +2990,8 @@ msgid ""
 "supporting available hardware, languages or filesystems. Useful after having "
 "added e.g. new hardware or driver repos."
 msgstr ""
+"'%1%' として実行します。これにより、利用可能なハードウエアや言語、ファイルシステムに対応するパッケージのみを参照するように制限します。新しいハードウ"
+"エアやドライバのリポジトリを追加したような場合に便利です。"
 
 #. translators: command description
 #: src/commands/inrverify.cc:101
@@ -3355,7 +3360,7 @@ msgstr "再起動はおそらく不要です。"
 
 #: src/commands/optionsets.cc:33
 msgid "Don't change anything, just report what would be done."
-msgstr ""
+msgstr "何も変更しません。何が行なわれるのかだけを表示します。"
 
 #. translators: -r, --repo <ALIAS|#|URI>
 #: src/commands/optionsets.cc:65
@@ -3365,7 +3370,7 @@ msgstr "指定したリポジトリでのみ作業を行います。"
 #: src/commands/optionsets.cc:85
 #, c-format, boost-format
 msgid "Option '--%s' overrides a previously set download mode."
-msgstr ""
+msgstr "オプション '--%s' は以前に設定されたダウンロードモードを上書きします。"
 
 #: src/commands/optionsets.cc:114
 #, c-format, boost-format
@@ -4275,33 +4280,33 @@ msgstr ""
 #. translators: -g, --category <CATEGORY>
 #: src/commands/selectpatchoptionset.cc:24
 msgid "Select patches with the specified category."
-msgstr ""
+msgstr "指定したカテゴリのパッチのみを選択します。"
 
 #. translators: --severity <SEVERITY>
 #: src/commands/selectpatchoptionset.cc:28
 msgid "Select patches with the specified severity."
-msgstr ""
+msgstr "指定した重要度のパッチのみを選択します。"
 
 #. translators: --date <YYYY-MM-DD>
 #: src/commands/selectpatchoptionset.cc:32
 msgid "Select patches issued up to, but not including, the specified date"
-msgstr ""
+msgstr "指定した日付まで (ただし指定した日付そのものは含みません) に公開されたパッチのみを選択します"
 
 #. translators: -b, --bugzilla
 #: src/commands/selectpatchoptionset.cc:36
 msgid "Select applicable patches for the specified Bugzilla issues."
-msgstr ""
+msgstr "指定した Bugzilla バグ番号に対応するパッチのみを選択します。"
 
 #. translators: --cve
 #: src/commands/selectpatchoptionset.cc:41
 msgid "Select applicable patches for the specified CVE issues."
-msgstr ""
+msgstr "指定した CVE 番号に対応するパッチのみを選択します。"
 
 #. any
 #. translators: --cve
 #: src/commands/selectpatchoptionset.cc:50
 msgid "Select issues matching the specified string."
-msgstr ""
+msgstr "指定した文字列に合致するもののみを選択します。"
 
 #: src/commands/services/add.cc:55
 #, c-format, boost-format
@@ -4595,11 +4600,11 @@ msgstr "サービス '%s' は別名／番号／URIのいずれでも見つかり
 
 #: src/commands/solveroptionset.cc:16 src/commands/solveroptionset.cc:39
 msgid "Solver options"
-msgstr ""
+msgstr "解決器のオプション"
 
 #: src/commands/solveroptionset.cc:63
 msgid "Expert options"
-msgstr ""
+msgstr "熟練者向けオプション"
 
 #. translators: -u, --clean-deps
 #: src/commands/solveroptionset.cc:96
@@ -4895,12 +4900,12 @@ msgstr ""
 #. translators: --status
 #: src/commands/utils/source-download.cc:514
 msgid "Write a manifest file."
-msgstr ""
+msgstr "マニフェストファイルを書き込みます。"
 
 #. translators: --status
 #: src/commands/utils/source-download.cc:518
 msgid "Disable writing a manifest file."
-msgstr ""
+msgstr "マニフェストファイルの書き込みを無効化します。"
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/utils/targetos.cc:20
