@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-11-28 14:46+0100\n"
-"PO-Revision-Date: 2018-12-05 10:19+0000\n"
+"PO-Revision-Date: 2018-12-10 15:03+0000\n"
 "Last-Translator: Murat Servan Kahraman <muratservan@outlook.com>\n"
 "Language-Team: Turkish <https://l10n.opensuse.org/projects/zypper/master/tr/>"
 "\n"
@@ -7053,6 +7053,8 @@ msgstr "Kurulum hatayla tamamlandı."
 #, boost-format
 msgid "You may run '%1%' to repair any dependency problems."
 msgstr ""
+"Herhangi bir bağımlılık sorununu çözmek için '%1%' komutunu "
+"çalıştırabilirsiniz."
 
 #: src/solve-commit.cc:894
 msgid ""
@@ -7077,7 +7079,7 @@ msgstr "Yüklü paketlerin tamamının bağımlılıkları sağlanmış."
 #: src/source-download.cc:208
 #, c-format, boost-format
 msgid "Can't create or access download directory '%s'."
-msgstr ""
+msgstr "'%s' indirme dizini oluşturulamıyor ya da bu dizine erişilemiyor."
 
 #: src/source-download.cc:221
 #, c-format, boost-format
@@ -7102,7 +7104,7 @@ msgstr "Yüklü paketler:"
 
 #: src/source-download.cc:288
 msgid "Required source packages:"
-msgstr ""
+msgstr "Gerekli kaynak paketler:"
 
 #: src/source-download.cc:297
 msgid "Required source packages available in download directory:"
@@ -7123,6 +7125,8 @@ msgstr "Yüklü paket"
 #: src/source-download.cc:370
 msgid "Use '--verbose' option for a full list of required source packages."
 msgstr ""
+"Gerekli kaynak paketlerin bir tam listesi için '--verbose' seçeneğini "
+"kullanın."
 
 #: src/source-download.cc:379
 msgid "Deleting superfluous source packages"
@@ -7139,12 +7143,12 @@ msgstr ""
 
 #: src/source-download.cc:411
 msgid "Downloading required source packages..."
-msgstr ""
+msgstr "Gerekli kaynak paketler indiriliyor..."
 
 #: src/source-download.cc:430
 #, c-format, boost-format
 msgid "Source package '%s' is not provided by any repository."
-msgstr ""
+msgstr "'%s' kaynak paketi herhangi bir depo tarafından sağlanmıyor."
 
 #: src/source-download.cc:449 src/source-download.cc:463
 #, c-format, boost-format
@@ -7153,7 +7157,7 @@ msgstr ""
 
 #: src/source-download.cc:474
 msgid "No source packages to download."
-msgstr ""
+msgstr "İndirilecek kaynak paket yok."
 
 #: src/subcommand.cc:51
 msgid "none"
@@ -7190,9 +7194,9 @@ msgstr ""
 #. translators: %2% - signal number
 #. translators: %3% - signal name
 #: src/subcommand.cc:344
-#, boost-format
+#, boost-format, fuzzy
 msgid "%1% was killed by signal %2% (%3%)"
-msgstr ""
+msgstr "%1%, %2% sinyali tarafından sonlandırıldı (%3%)"
 
 #: src/subcommand.cc:348
 msgid "core dumped"
@@ -7333,7 +7337,7 @@ msgstr "Yamalar"
 #. translator: Table column header.
 #: src/update.cc:356
 msgid "Locked"
-msgstr ""
+msgstr "Kilitli"
 
 #. translator: Table column header
 #. Used if stats collect data for more than one category name.
@@ -7342,7 +7346,7 @@ msgstr ""
 #. optional   | ...                      ..... | enhancement, feature
 #: src/update.cc:362
 msgid "Included categories"
-msgstr ""
+msgstr "Dahili kategoriler"
 
 #. translator: Table headline; 'Needed' refers to patches with status 'needed'
 #: src/update.cc:603
@@ -7529,10 +7533,12 @@ msgid ""
 msgstr ""
 
 #: src/utils/messages.cc:111
-#, boost-format
+#, boost-format, fuzzy
 msgid ""
 "Legacy commandline option %1% detected. Please use global option %2% instead."
 msgstr ""
+"Eski %1% komut satırı seçeneği tespit edildi. Lütfen bunun yerine %2% "
+"evrensel seçeneğini kullanın."
 
 #: src/utils/messages.cc:112
 #, boost-format
@@ -7646,7 +7652,7 @@ msgstr "Belirtilen yerel yol mevcut ya da erişilebilir değil."
 
 #: src/utils/misc.cc:357
 msgid "Given URI is invalid"
-msgstr ""
+msgstr "Verilen URI geçersiz"
 
 #. Guess failed:
 #. translators: don't translate '<platform>'
@@ -7677,7 +7683,7 @@ msgstr ""
 
 #: src/utils/misc.cc:536
 msgid "Perhaps you are running out of disk space."
-msgstr ""
+msgstr "Muhtemelen diskinizde boş alan yok."
 
 #: src/utils/misc.cc:544
 #, fuzzy
