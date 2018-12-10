@@ -93,6 +93,10 @@ namespace zypp
     /** Return the root set for this target */
     Pathname root() const;
 
+    /** Whether the targets \ref root is not \c "/". */
+    bool chrooted() const
+    { return( ! root().emptyOrRoot() ); }
+
     /** Return the path prefixed by the target root, unless it already is prefixed. */
     Pathname assertRootPrefix( const Pathname & path_r ) const
     { return Pathname::assertprefix( root(), path_r ); }
