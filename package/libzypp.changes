@@ -1,4 +1,15 @@
 -------------------------------------------------------------------
+Mon Dec 10 16:57:34 CET 2018 - ma@suse.de
+
+- commit: set `SYSTEMD_OFFLINE=1` during chrooted commits (bsc#1118758)
+- no-recommends: Nevertheless consider resolver namespaces (hardware,
+  language,..supporting packages) (FATE#325513)
+- BuildRequires:  libsolv-devel >= 0.7.2
+  (SOLVER_FLAG_ONLY_NAMESPACE_RECOMMENDED)
+- Remove world-readable bit from /var/log/zypp (bsc#1099019)
+- version 17.10.2 (9)
+
+-------------------------------------------------------------------
 Wed Nov 28 14:40:26 CET 2018 - ma@suse.de
 
 - Adapt to changes in upcoming Boost 1.69.0
