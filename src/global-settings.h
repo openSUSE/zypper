@@ -33,7 +33,7 @@ struct GlobalSettingSingleton
     return me;
   }
   static void reset () {
-    instanceNoConst().reset();
+    instanceNoConst() = T();
   }
 };
 
@@ -46,8 +46,6 @@ struct DryRunSettingsData
     return _enabled;
   }
 
-  void reset();
-
   bool _enabled = false;
 };
 using DryRunSettings = GlobalSettingSingleton<DryRunSettingsData>;
@@ -56,8 +54,6 @@ using DryRunSettings = GlobalSettingSingleton<DryRunSettingsData>;
  * Influences how zypper initializes the repositories when init_repos is called
  */
 struct InitRepoSettingsData {
-  void reset();
-
   std::vector<std::string> _repoFilter;
 };
 using InitRepoSettings = GlobalSettingSingleton<InitRepoSettingsData>;
@@ -67,23 +63,19 @@ using InitRepoSettings = GlobalSettingSingleton<InitRepoSettingsData>;
  */
 struct SolverSettingsData
 {
-  void reset ();
-
-  zypp::TriBool _debugSolver;
-  zypp::TriBool _forceResolution;
-  zypp::TriBool _recommends;
-  zypp::TriBool _allowDowngrade;
-  zypp::TriBool _allowNameChange;
-  zypp::TriBool _allowVendorChange;
-  zypp::TriBool _allowArchChange;
-  zypp::TriBool _cleanDeps;
-
+  zypp::TriBool _debugSolver = zypp::indeterminate;
+  zypp::TriBool _forceResolution = zypp::indeterminate;
+  zypp::TriBool _recommends = zypp::indeterminate;
+  zypp::TriBool _allowDowngrade = zypp::indeterminate;
+  zypp::TriBool _allowNameChange = zypp::indeterminate;
+  zypp::TriBool _allowVendorChange = zypp::indeterminate;
+  zypp::TriBool _allowArchChange = zypp::indeterminate;
+  zypp::TriBool _cleanDeps = zypp::indeterminate;
 };
 using SolverSettings = GlobalSettingSingleton<SolverSettingsData>;
 
 struct LicenseAgreementPolicyData
 {
-  void reset ();
   bool _autoAgreeWithLicenses = false;
   bool _autoAgreeWithProductLicenses = false;
 };
@@ -91,14 +83,12 @@ using LicenseAgreementPolicy = GlobalSettingSingleton<LicenseAgreementPolicyData
 
 struct DupSettingsData
 {
-  void reset();
   std::vector<std::string> _fromRepos;
 };
 using DupSettings = GlobalSettingSingleton<DupSettingsData>;
 
 struct FileConflictPolicyData
 {
-  void reset();
   bool _replaceFiles = false;
 };
 using FileConflictPolicy = GlobalSettingSingleton<FileConflictPolicyData>;
