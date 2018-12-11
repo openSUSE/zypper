@@ -19,6 +19,7 @@ extern "C"
 
 #include "utils/Augeas.h"
 #include "Config.h"
+#include "global-settings.h"
 
 // redefine _ gettext macro defined by ZYpp
 #ifdef _
@@ -116,6 +117,7 @@ namespace
     SOLVER_INSTALL_RECOMMENDS,
     SOLVER_FORCE_RESOLUTION_COMMANDS,
 
+    COMMIT_AUTO_AGREE_WITH_LICENSES,
     COMMIT_PS_CHECK_ACCESS_DELETED,
 
     COLOR_USE_COLORS,
@@ -149,6 +151,7 @@ namespace
       { "solver/installRecommends",		ConfigOption::SOLVER_INSTALL_RECOMMENDS		},
       { "solver/forceResolutionCommands",	ConfigOption::SOLVER_FORCE_RESOLUTION_COMMANDS	},
 
+      { "commit/autoAgreeWithLicenses",		ConfigOption::COMMIT_AUTO_AGREE_WITH_LICENSES	},
       { "commit/psCheckAccessDeleted",		ConfigOption::COMMIT_PS_CHECK_ACCESS_DELETED	},
 
       { "color/useColors",			ConfigOption::COLOR_USE_COLORS			},
@@ -260,6 +263,10 @@ void Config::read( const std::string & file )
     }
 
     // ---------------[ commit ]------------------------------------------------
+
+    s = augeas.getOption( asString(ConfigOption::COMMIT_AUTO_AGREE_WITH_LICENSES) );
+    if ( ! s.empty() )
+      LicenseAgreementPolicyData::_defaultAutoAgreeWithLicenses = str::strToBool( s, LicenseAgreementPolicyData::_defaultAutoAgreeWithLicenses );
 
     s = augeas.getOption(asString( ConfigOption::COMMIT_PS_CHECK_ACCESS_DELETED ));
     if ( ! s.empty() )
