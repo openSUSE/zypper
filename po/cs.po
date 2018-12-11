@@ -21,7 +21,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-12-10 19:36+0100\n"
-"PO-Revision-Date: 2018-11-28 19:01+0000\n"
+"PO-Revision-Date: 2018-12-11 16:10+0000\n"
 "Last-Translator: Aleš Kastner <alkas@volny.cz>\n"
 "Language-Team: Czech <https://l10n.opensuse.org/projects/zypper/master/cs/>\n"
 "Language: cs\n"
@@ -600,7 +600,7 @@ msgstr ""
 
 #: src/commands/commonflags.h:53
 msgid "Consider only patches which affect the package management itself."
-msgstr ""
+msgstr "Týká se jen oprav ovlivňujících samu správu balíčků."
 
 #: src/output/Out.h:26 src/repos.cc:125 src/repos.cc:153
 msgid "Yes"
@@ -727,7 +727,7 @@ msgstr "Chyba"
 
 #: src/Command.cc:62
 msgid "Invalid command"
-msgstr ""
+msgstr "Neplatný příkaz"
 
 #: src/Command.cc:317
 #, c-format, boost-format
@@ -3087,7 +3087,7 @@ msgstr "Heslo"
 
 #: src/commands/basecommand.cc:106
 msgid "Option program arguments: "
-msgstr ""
+msgstr "Volitelné parametry programu: "
 
 #: src/commands/conditions.cc:19
 msgid "Root privileges are required to run this command."
@@ -3149,6 +3149,10 @@ msgid ""
 "unconditionally on small or minimal systems, as it may easily add a large "
 "number of packages."
 msgstr ""
+"Instaluje nově přidané balíčky, doporučené již nainstalovanými. Tento příkaz "
+"v podstatě vyhodnotí doporučení od všech instalovaných balíčků a příslušně "
+"doplní systém. Na malých či minimálních systémech ho asi nebudete chtít "
+"bezpodmínečně volat, protože může přidat velké množství balíčků."
 
 #. translators: command description, %1% is a zypper command
 #: src/commands/inrverify.cc:98
@@ -3158,6 +3162,9 @@ msgid ""
 "supporting available hardware, languages or filesystems. Useful after having "
 "added e.g. new hardware or driver repos."
 msgstr ""
+"Vyvolán jako '%1%' omezí příkaz na vyhledání balíčků podporujících dostupný "
+"hardware, jazyky nebo systémy souborů. Je užitečný po přidání nového "
+"úložiště hardwaru nebo ovladačů."
 
 #. translators: command description
 #: src/commands/inrverify.cc:101
@@ -3527,7 +3534,7 @@ msgstr "Reboot není pravděpodobně potřebný."
 
 #: src/commands/optionsets.cc:33
 msgid "Don't change anything, just report what would be done."
-msgstr ""
+msgstr "Nic nemění, jen ohlásí, co by se provedlo."
 
 #. translators: -r, --repo <ALIAS|#|URI>
 #: src/commands/optionsets.cc:65
@@ -3537,7 +3544,7 @@ msgstr "Načíst pouze zadaný repozitář."
 #: src/commands/optionsets.cc:85
 #, c-format, boost-format
 msgid "Option '--%s' overrides a previously set download mode."
-msgstr ""
+msgstr "Volba '--%s' přebije dříve nastavený režim stahování."
 
 #: src/commands/optionsets.cc:114
 #, c-format, boost-format
@@ -4441,33 +4448,33 @@ msgstr "S '%1%' prohledejte i dosud neaktivované vzdálené zdroje."
 #. translators: -g, --category <CATEGORY>
 #: src/commands/selectpatchoptionset.cc:24
 msgid "Select patches with the specified category."
-msgstr ""
+msgstr "Vybere opravy zadané kategorie."
 
 #. translators: --severity <SEVERITY>
 #: src/commands/selectpatchoptionset.cc:28
 msgid "Select patches with the specified severity."
-msgstr ""
+msgstr "Vybere opravy zadané závažnosti."
 
 #. translators: --date <YYYY-MM-DD>
 #: src/commands/selectpatchoptionset.cc:32
 msgid "Select patches issued up to, but not including, the specified date"
-msgstr ""
+msgstr "Vybere opravy vydané do zadaného data (ne včetně)"
 
 #. translators: -b, --bugzilla
 #: src/commands/selectpatchoptionset.cc:36
 msgid "Select applicable patches for the specified Bugzilla issues."
-msgstr ""
+msgstr "Vybere opravy aplikovatelné pro zadané závady dle Bugzilly."
 
 #. translators: --cve
 #: src/commands/selectpatchoptionset.cc:41
 msgid "Select applicable patches for the specified CVE issues."
-msgstr ""
+msgstr "Vybere opravy aplikovatelné pro zadané závady dle CVE."
 
 #. any
 #. translators: --cve
 #: src/commands/selectpatchoptionset.cc:50
 msgid "Select issues matching the specified string."
-msgstr ""
+msgstr "Vybere opravy odpovídající zadanému řetězci."
 
 #: src/commands/services/add.cc:55
 #, c-format, boost-format
@@ -4763,11 +4770,11 @@ msgstr "Služba '%s' nebyla podle aliasu, čísla, nebo adresy URI nalezena."
 
 #: src/commands/solveroptionset.cc:16 src/commands/solveroptionset.cc:39
 msgid "Solver options"
-msgstr ""
+msgstr "Řešitelské možnosti"
 
 #: src/commands/solveroptionset.cc:63
 msgid "Expert options"
-msgstr ""
+msgstr "Expertní možnosti"
 
 #. translators: -u, --clean-deps
 #: src/commands/solveroptionset.cc:96
@@ -5054,12 +5061,12 @@ msgstr ""
 #. translators: --status
 #: src/commands/utils/source-download.cc:514
 msgid "Write a manifest file."
-msgstr ""
+msgstr "Napsat soubor manifestu."
 
 #. translators: --status
 #: src/commands/utils/source-download.cc:518
 msgid "Disable writing a manifest file."
-msgstr ""
+msgstr "Zakázat psaní souboru manifestu."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/utils/targetos.cc:20
