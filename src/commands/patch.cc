@@ -90,7 +90,7 @@ int PatchCmd::execute( Zypper &zypper, const std::vector<std::string> &positiona
 
   SolverRequester::Options srOpts;
   srOpts.skip_interactive = skip_interactive; // bcn #647214
-  srOpts.skip_optional_patches = zypper.globalOpts().exclude_optional_patches;
+  srOpts.skip_optional_patches = zypper.globalOpts().exclude_optional_patches && !_withUpdate;	// bsc#1102261: --with update" should implicitly assume "--with-optional"
   srOpts.cliMatchPatch = CliMatchPatch( zypper,
                                         _selectPatchOpts._select._requestedPatchDates,
                                         _selectPatchOpts._select._requestedPatchCategories,
