@@ -9,10 +9,10 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-12-10 19:36+0100\n"
-"PO-Revision-Date: 2018-11-28 20:01+0000\n"
+"PO-Revision-Date: 2018-12-11 11:20+0000\n"
 "Last-Translator: David Medina <medipas@gmail.com>\n"
-"Language-Team: Catalan <https://l10n.opensuse.org/projects/zypper/master/ca/"
-">\n"
+"Language-Team: Catalan <https://l10n.opensuse.org/projects/zypper/master/ca/>"
+"\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -592,7 +592,7 @@ msgstr ""
 
 #: src/commands/commonflags.h:53
 msgid "Consider only patches which affect the package management itself."
-msgstr ""
+msgstr "Considera només els pedaços que afectin el gestor de paquets mateix."
 
 #: src/output/Out.h:26 src/repos.cc:125 src/repos.cc:153
 msgid "Yes"
@@ -718,7 +718,7 @@ msgstr "Error"
 
 #: src/Command.cc:62
 msgid "Invalid command"
-msgstr ""
+msgstr "Ordre no vàlida"
 
 #: src/Command.cc:317
 #, c-format, boost-format
@@ -3026,7 +3026,7 @@ msgstr "Contrasenya"
 
 #: src/commands/basecommand.cc:106
 msgid "Option program arguments: "
-msgstr ""
+msgstr "Opcions d'arguments del programa: "
 
 #: src/commands/conditions.cc:19
 msgid "Root privileges are required to run this command."
@@ -3089,6 +3089,11 @@ msgid ""
 "unconditionally on small or minimal systems, as it may easily add a large "
 "number of packages."
 msgstr ""
+"Instal·la paquets afegits recentment recomanats per paquets ja instal·lats. "
+"Aquesta ordre bàsicament reavalua les recomanacions de tots els paquets "
+"instal·lats i omple el sistema corresponentment. No ho feu servir "
+"incondicionalment en sistemes petits o mínims, ja que pot afegir fàcilment "
+"un gran nombre de paquets."
 
 #. translators: command description, %1% is a zypper command
 #: src/commands/inrverify.cc:98
@@ -3098,6 +3103,10 @@ msgid ""
 "supporting available hardware, languages or filesystems. Useful after having "
 "added e.g. new hardware or driver repos."
 msgstr ""
+"Si es crida com a %1%, es restringeix l'ordre perquè només cerqui paquets "
+"que tenen suport per al maquinari, la llengua o els sistemes de fitxers "
+"disponibles. És útil després d'haver afegit, per exemple, maquinari nou o "
+"repositoris de controladors."
 
 #. translators: command description
 #: src/commands/inrverify.cc:101
@@ -3467,7 +3476,7 @@ msgstr "Probablement no és necessari reiniciar."
 
 #: src/commands/optionsets.cc:33
 msgid "Don't change anything, just report what would be done."
-msgstr ""
+msgstr "No canviïs res. Només informa del que es faria."
 
 #. translators: -r, --repo <ALIAS|#|URI>
 #: src/commands/optionsets.cc:65
@@ -3477,7 +3486,7 @@ msgstr "Treballa només amb aquest repositori."
 #: src/commands/optionsets.cc:85
 #, c-format, boost-format
 msgid "Option '--%s' overrides a previously set download mode."
-msgstr ""
+msgstr "L'opció --%s sobreescriu un mode de baixada establert prèviament."
 
 #: src/commands/optionsets.cc:114
 #, c-format, boost-format
@@ -4390,33 +4399,35 @@ msgstr ""
 #. translators: -g, --category <CATEGORY>
 #: src/commands/selectpatchoptionset.cc:24
 msgid "Select patches with the specified category."
-msgstr ""
+msgstr "Selecciona pedaços amb la categoria especificada."
 
 #. translators: --severity <SEVERITY>
 #: src/commands/selectpatchoptionset.cc:28
 msgid "Select patches with the specified severity."
-msgstr ""
+msgstr "Selecciona pedaços amb la severitat especificada."
 
 #. translators: --date <YYYY-MM-DD>
 #: src/commands/selectpatchoptionset.cc:32
 msgid "Select patches issued up to, but not including, the specified date"
 msgstr ""
+"Selecciona pedaços publicats fins a la data especificada, però no inclosa."
 
 #. translators: -b, --bugzilla
 #: src/commands/selectpatchoptionset.cc:36
 msgid "Select applicable patches for the specified Bugzilla issues."
 msgstr ""
+"Selecciona pedaços aplicables per als problemes de Bugzilla especificats."
 
 #. translators: --cve
 #: src/commands/selectpatchoptionset.cc:41
 msgid "Select applicable patches for the specified CVE issues."
-msgstr ""
+msgstr "Selecciona pedaços aplicables per als problemes de CVE especificats."
 
 #. any
 #. translators: --cve
 #: src/commands/selectpatchoptionset.cc:50
 msgid "Select issues matching the specified string."
-msgstr ""
+msgstr "Selecciona els problemes que coincideixin amb la cadena especificada."
 
 #: src/commands/services/add.cc:55
 #, c-format, boost-format
@@ -4718,11 +4729,11 @@ msgstr "El servei %s no s'ha trobat per l'àlies, número o URI."
 
 #: src/commands/solveroptionset.cc:16 src/commands/solveroptionset.cc:39
 msgid "Solver options"
-msgstr ""
+msgstr "Opcions de resolució"
 
 #: src/commands/solveroptionset.cc:63
 msgid "Expert options"
-msgstr ""
+msgstr "Opcions d'expert"
 
 #. translators: -u, --clean-deps
 #: src/commands/solveroptionset.cc:96
@@ -5014,12 +5025,12 @@ msgstr ""
 #. translators: --status
 #: src/commands/utils/source-download.cc:514
 msgid "Write a manifest file."
-msgstr ""
+msgstr "Escriu un fitxer de manifest."
 
 #. translators: --status
 #: src/commands/utils/source-download.cc:518
 msgid "Disable writing a manifest file."
-msgstr ""
+msgstr "Inhabilita l'escriptura d'un fitxer de manifest."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/utils/targetos.cc:20
