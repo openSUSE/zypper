@@ -76,7 +76,9 @@ using SolverSettings = GlobalSettingSingleton<SolverSettingsData>;
 
 struct LicenseAgreementPolicyData
 {
-  bool _autoAgreeWithLicenses = false;
+  static bool _defaultAutoAgreeWithLicenses;	///< ConfigOption::COMMIT_AUTO_AGREE_WITH_LICENSES {false}
+
+  bool _autoAgreeWithLicenses = _defaultAutoAgreeWithLicenses;
   bool _autoAgreeWithProductLicenses = false;
 };
 using LicenseAgreementPolicy = GlobalSettingSingleton<LicenseAgreementPolicyData>;

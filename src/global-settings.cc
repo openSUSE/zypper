@@ -15,3 +15,5 @@ void GlobalSettings::reset()
   DupSettings::reset();
   FileConflictPolicy::reset();
 }
+
+bool LicenseAgreementPolicyData::_defaultAutoAgreeWithLicenses = false;
