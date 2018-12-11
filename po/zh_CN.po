@@ -12,10 +12,10 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-12-10 19:36+0100\n"
-"PO-Revision-Date: 2018-12-02 04:44+0000\n"
+"PO-Revision-Date: 2018-12-11 06:01+0000\n"
 "Last-Translator: Marguerite Su <i@marguerite.su>\n"
-"Language-Team: Chinese (China) <https://l10n.opensuse.org/projects/zypper/"
-"master/zh_CN/>\n"
+"Language-Team: Chinese (China) "
+"<https://l10n.opensuse.org/projects/zypper/master/zh_CN/>\n"
 "Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -561,7 +561,7 @@ msgstr "'尽量'更新，更新到比最新版本 低一些的版本也是可以
 
 #: src/commands/commonflags.h:53
 msgid "Consider only patches which affect the package management itself."
-msgstr ""
+msgstr "只考虑影响软件包管理器自身的补丁。"
 
 #: src/output/Out.h:26 src/repos.cc:125 src/repos.cc:153
 msgid "Yes"
@@ -689,7 +689,7 @@ msgstr "错误"
 
 #: src/Command.cc:62
 msgid "Invalid command"
-msgstr ""
+msgstr "无效命令"
 
 #: src/Command.cc:317
 #, c-format, boost-format
@@ -2805,7 +2805,7 @@ msgstr "密码"
 
 #: src/commands/basecommand.cc:106
 msgid "Option program arguments: "
-msgstr ""
+msgstr "可选程序参数： "
 
 #: src/commands/conditions.cc:19
 msgid "Root privileges are required to run this command."
