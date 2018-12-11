@@ -100,8 +100,6 @@ int PatchCmd::execute( Zypper &zypper, const std::vector<std::string> &positiona
   if ( _selectPatchOpts._select._requestedIssues.size() ) {
     mark_updates_by_issue( zypper, _selectPatchOpts._select._requestedIssues, srOpts );
   } else {
-    srOpts.skip_optional_patches = zypper.globalOpts().exclude_optional_patches;	// without args follow --with[out]-optional
-
     SolverRequester sr(srOpts);
     zypper.runtimeData().plain_patch_command = true;
     sr.updatePatches( _updateStackOnly );
