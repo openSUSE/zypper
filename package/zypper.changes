@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Tue Dec 11 11:31:04 CET 2018 - ma@suse.de
+
+- no-recommends: Nevertheless consider resolver namespaces (hardware,
+  language,..supporting packages) (FATE#325513)
+- BuildRequires:  libzypp-devel >= 17.10.2
+- version 1.14.18
+
+-------------------------------------------------------------------
 Wed Nov 28 14:47:16 CET 2018 - ma@suse.de
 
 - Optionally run "zypper search-packages" after "search" (FATE#325599)
