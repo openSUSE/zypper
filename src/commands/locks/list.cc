@@ -28,6 +28,20 @@ using namespace zypp;
 ///////////////////////////////////////////////////////////////////
 namespace out
 {
+  inline std::ostream & dumpAsXmlOn( std::ostream & str, const Rel & op_r, const Edition & ed_r )
+  {
+    xmlout::Node n { str, "range", xmlout::Node::optionalContent,
+      { { "flag", op_r } }
+    };
+    if ( op_r != Rel::ANY && op_r != Rel::NONE )
+      n.addAttr( {
+	{ "epoch",   ed_r.epoch() },
+	{ "version", ed_r.version() },
+	{ "release", ed_r.release() },
+      } );
+    return str;
+  }
+
   struct LocksTableFormater : public TableFormater
   {
   private:
@@ -94,6 +108,12 @@ namespace out
 	for ( const std::string & repo : q_r.repos() )
 	{ *xmlout::Node( *lock, "repo" ) << repo; }
 
+	// <range>
+	if ( q_r.editionRel() != Rel::ANY )
+	{
+	  dumpAsXmlOn( *lock, q_r.editionRel(), q_r.edition() );
+	}
+
 	if ( _withMatches )
 	{
 	  // <matches>
@@ -137,10 +157,8 @@ namespace out
       else if ( nameStings.empty() && globalStrings.empty() )
 	// translators: locks table value
 	tr << _("(any)");
-      else if ( nameStings.empty() )
-	tr << *globalStrings.begin();
       else
-	tr << *nameStings.begin();
+	tr << makeNameString( nameStings.empty() ? *globalStrings.begin() : *nameStings.begin(), q_r.editionRel(), q_r.edition() );
 
       // opt Matches
       if ( _withMatches )
@@ -196,6 +214,15 @@ namespace out
     {}
 
   private:
+    static std::string makeNameString( const std::string & name_r, const Rel & op_r, const Edition & edition_r )
+    {
+      str::Str ret;
+      ret << name_r;
+      if ( op_r != Rel::ANY )
+	ret << " " << op_r << " " << edition_r;
+      return ret;
+    }
+
     static std::string get_string_for_table( const std::set<std::string> & attrvals_r )
     {
       std::string ret;
