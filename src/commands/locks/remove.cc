@@ -6,18 +6,16 @@
 \*---------------------------------------------------------------------------*/
 #include "remove.h"
 
-#include <boost/lexical_cast.hpp>
-
 #include <zypp/base/String.h>
 #include <zypp/Locks.h>
 
 #include "main.h"
 #include "utils/messages.h"
-#include "repos.h"
 #include "Zypper.h"
 #include "utils/flags/flagtypes.h"
 #include "commands/conditions.h"
 #include "commands/commonflags.h"
+#include "commands/locks/common.h"
 
 using namespace zypp;
 
@@ -74,7 +72,7 @@ int RemoveLocksCmd::execute(Zypper &zypper, const std::vector<std::string> &posi
     {
       Locks::const_iterator it = locks.begin();
       Locks::LockList::size_type i = 0;
-      safe_lexical_cast(*args_it, i);
+      str::strtonum(*args_it, i);
       if (i > 0 && i <= locks.size())
       {
         advance(it, i-1);
@@ -84,36 +82,7 @@ int RemoveLocksCmd::execute(Zypper &zypper, const std::vector<std::string> &posi
       }
       else //package name
       {
-        //TODO fill query in one method to have consistent add/remove
-        //TODO what to do with repo and _kinds?
-        PoolQuery q;
-	if ( _kinds.empty() ) // derive it from the name
-	{
-	  // derive kind from the name: (rl should also support -t)
-	  sat::Solvable::SplitIdent split( *args_it );
-	  q.addAttribute( sat::SolvAttr::name, split.name().asString() );
-	  q.addKind( split.kind() );
-	}
-	else
-	{
-	  q.addAttribute(sat::SolvAttr::name, *args_it);
-	  for_(itk, _kinds.begin(), _kinds.end()) {
-	    q.addKind(*itk);
-	  }
-	}
-	q.setMatchGlob();
-        parsed_opts::const_iterator itr;
-        for_(it_repo, _repos.begin(), _repos.end())
-        {
-          RepoInfo info;
-          if( match_repo( zypper, *it_repo, &info))
-            q.addRepo(info.alias());
-          else //TODO some error handling
-            WAR << "unknown repository" << *it_repo << endl;
-        }
-        q.setCaseSensitive();
-
-        locks.removeLock(q);
+        locks.removeLock( locks::arg2query( zypper, *args_it, _kinds, _repos ) );
       }
     }
 
