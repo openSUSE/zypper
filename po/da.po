@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-12-10 19:36+0100\n"
-"PO-Revision-Date: 2018-12-10 23:01+0000\n"
+"PO-Revision-Date: 2018-12-13 06:27+0000\n"
 "Last-Translator: scootergrisen <scootergrisen@gmail.com>\n"
 "Language-Team: Danish <https://l10n.opensuse.org/projects/zypper/master/da/>"
 "\n"
@@ -586,7 +586,7 @@ msgstr ""
 
 #: src/commands/commonflags.h:53
 msgid "Consider only patches which affect the package management itself."
-msgstr ""
+msgstr "Overvej kun rettelser som påvirker selv pakkehåndteringen."
 
 #: src/output/Out.h:26 src/repos.cc:125 src/repos.cc:153
 msgid "Yes"
@@ -2417,7 +2417,7 @@ msgstr ""
 
 #: src/Zypper.cc:1156
 msgid "Entering 'no-gpg-checks' mode."
-msgstr "Går i 'ingen GPG-tjek'-tilstand."
+msgstr "Går i 'no-gpg-checks'-tilstand."
 
 #: src/Zypper.cc:1164
 #, c-format, boost-format
@@ -3005,7 +3005,7 @@ msgstr "Adgangskode"
 
 #: src/commands/basecommand.cc:106
 msgid "Option program arguments: "
-msgstr ""
+msgstr "Tilvalg for programargumenter: "
 
 #: src/commands/conditions.cc:19
 msgid "Root privileges are required to run this command."
@@ -3067,6 +3067,11 @@ msgid ""
 "unconditionally on small or minimal systems, as it may easily add a large "
 "number of packages."
 msgstr ""
+"Installer nyligt tilføjede pakker som anbefales af dem der allerede er "
+"installeret. Kommandoen genevaluerer i bund og grund anbefalingerne til alle "
+"installerede pakker og udfylder system derefter. Undlad at kalde den "
+"betingelsesløst på små eller minimale systemer, da det let kan tilføje et "
+"stort antal pakker."
 
 #. translators: command description, %1% is a zypper command
 #: src/commands/inrverify.cc:98
@@ -3076,6 +3081,9 @@ msgid ""
 "supporting available hardware, languages or filesystems. Useful after having "
 "added e.g. new hardware or driver repos."
 msgstr ""
+"Kaldt som '%1%', begrænser det kommandoen til kun at lede efter pakker som "
+"understøtter tilgængelig hardware, sprog eller filsystemer. Nyttig efter "
+"f.eks. at have tilføjet ny hardware- eller driver-softwarekilder."
 
 #. translators: command description
 #: src/commands/inrverify.cc:101
@@ -3445,7 +3453,7 @@ msgstr "Det er sikkert ikke nødvendigt at genstarte."
 
 #: src/commands/optionsets.cc:33
 msgid "Don't change anything, just report what would be done."
-msgstr ""
+msgstr "Ændr ikke noget, rapportér blot hvad der skal gøres."
 
 #. translators: -r, --repo <ALIAS|#|URI>
 #: src/commands/optionsets.cc:65
@@ -3456,6 +3464,7 @@ msgstr "Arbejd kun med den angivne softwarekilde."
 #, c-format, boost-format
 msgid "Option '--%s' overrides a previously set download mode."
 msgstr ""
+"Tilvalget '--%s' tilsidesætter en tidligere indstillet downloadtilstand."
 
 #: src/commands/optionsets.cc:114
 #, c-format, boost-format
@@ -3466,7 +3475,7 @@ msgstr "Tilgængelige downloadtilstande: %s"
 #: src/commands/optionsets.cc:170
 #, c-format, boost-format
 msgid "Set the download-install mode. Available modes: %s"
-msgstr "Sæt tilstand for download-installér. Tilgængelige tilstande: %s"
+msgstr "Sæt download-install-tilstanden. Tilgængelige tilstande: %s"
 
 #. translators: -d, --download-only
 #. translators: --download-only
@@ -4371,16 +4380,17 @@ msgstr "Vælg rettelser med den angivne alvorlighed."
 #: src/commands/selectpatchoptionset.cc:32
 msgid "Select patches issued up to, but not including, the specified date"
 msgstr ""
+"Vælg rettelser som er udstedt op til, men ikke inkluderet i, den angivne dato"
 
 #. translators: -b, --bugzilla
 #: src/commands/selectpatchoptionset.cc:36
 msgid "Select applicable patches for the specified Bugzilla issues."
-msgstr ""
+msgstr "Vælg relevante rettelser til de angivne Bugzilla-problemstillinger."
 
 #. translators: --cve
 #: src/commands/selectpatchoptionset.cc:41
 msgid "Select applicable patches for the specified CVE issues."
-msgstr ""
+msgstr "Vælg relevante rettelser til de angivne CVE-problemstillinger."
 
 #. any
 #. translators: --cve
@@ -4641,7 +4651,7 @@ msgstr "Genopfrisk også softwarekilder."
 
 #: src/commands/services/refresh.cc:115
 msgid "Also restore service repositories enabled/disabled state."
-msgstr "Gendan også tjeneste-softwarekilders aktiveret-/deaktiveret-tilstand."
+msgstr "Gendan også tjeneste-softwarekilders aktiveret/deaktiveret tilstand."
 
 #: src/commands/services/refresh.cc:179
 #, c-format, boost-format
@@ -5618,8 +5628,8 @@ msgstr ""
 "-D, --dry-run                  Test installationen, uden faktisk at "
 "installere.\n"
 "    --details               Vis standard installationsoversigt.\n"
-"    --download              Sæt tilstand for download-installér. "
-"Tilgængelige tilstande:\n"
+"    --download              Sæt download-install-tilstanden. Tilgængelige "
+"tilstande:\n"
 "                            %s\n"
 "-d, --download-only         Download blot pakkerne, installér ikke.\n"
 
@@ -5717,8 +5727,8 @@ msgstr ""
 "på\n"
 "                            systemet.\n"
 "    --details               Vis den detaljerede installationsoversigt.\n"
-"    --download              Sæt tilstand for download-installér. "
-"Tilgængelige tilstande:\n"
+"    --download              Sæt download-install-tilstanden. Tilgængelige "
+"tilstande:\n"
 "                            %s\n"
 "-d, --download-only         Download blot pakkerne, installér ikke.\n"
 
@@ -5749,8 +5759,8 @@ msgstr ""
 "-r, --repo <alias|#|URI>    Indlæs kun de angivne softwarekilder.\n"
 "-D, --dry-run            Test installationen. Installér ikke noget.\n"
 "    --details               Vis den detaljerede installationsoversigt.\n"
-"    --download              Sæt tilstand for download-installér. "
-"Tilgængelige tilstande:\n"
+"    --download              Sæt download-install-tilstanden. Tilgængelige "
+"tilstande:\n"
 "                            %s\n"
 "-d, --download-only         Download blot pakkerne, installér ikke.\n"
 
@@ -5911,8 +5921,8 @@ msgstr ""
 "  Kommandotilvalg:\n"
 "-f, --force           Gennemtving komplet genopfriskning.\n"
 "-r, --with-repos      Genopfrisk også softwarekilder.\n"
-"-R, --restore-status  Gendan også tjeneste-softwarekilders aktiveret-/"
-"deaktiveret-tilstand.\n"
+"-R, --restore-status  Gendan også tjeneste-softwarekilders aktiveret/"
+"deaktiveret tilstand.\n"
 
 #. translators: the %s = "yast2, rpm-md, plaindir"
 #: src/legacy_strings.cc:359
@@ -6204,8 +6214,8 @@ msgstr ""
 "tjek af filkonflikter.\n"
 "-D, --dry-run                  Test opdateringen, uden at opdatere.\n"
 "    --details               Vis den detaljerede installationsoversigt.\n"
-"    --download              Sæt tilstand for download-installér. "
-"Tilgængelige tilstande:\n"
+"    --download              Sæt download-install-tilstanden. Tilgængelige "
+"tilstande:\n"
 "                            %s\n"
 "-d, --download-only         Download blot pakkerne, installér ikke.\n"
 
@@ -6273,8 +6283,8 @@ msgstr ""
 "-r, --repo <alias|#|URI>    Indlæs kun den angivne softwarekilde.\n"
 "-D, --dry-run               Test opdateringen, uden at opdatere.\n"
 "    --details               Vis detaljeret installationsoversigt.\n"
-"    --download              Sæt tilstand for download-installer. "
-"Tilgængelige tilstande:\n"
+"    --download              Sæt download-install-tilstanden. Tilgængelige "
+"tilstande:\n"
 "                            %s\n"
 "-d, --download-only         Download kun pakkerne, installer ikke.\n"
 
@@ -6325,8 +6335,8 @@ msgstr ""
 "tjek af filkonflikter.\n"
 "-D, --dry-run                  Test opgraderingen, uden at opgradere.\n"
 "    --details               Vis den detaljerede installationsoversigt.\n"
-"    --download              Sæt tilstand for download-installér. "
-"Tilgængelige tilstande:\n"
+"    --download              Sæt download-install-tilstanden. Tilgængelige "
+"tilstande:\n"
 "                            %s\n"
 "-d, --download-only         Download blot pakkerne, installér ikke.\n"
 
