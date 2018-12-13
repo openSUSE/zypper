@@ -40,6 +40,7 @@ SET (zypper_HEADERS
   commands/conditions.h
   commands/basecommand.h
   commands/locks.h
+  commands/locks/common.h
   commands/locks/add.h
   commands/locks/clean.h
   commands/locks/list.h
@@ -114,6 +115,7 @@ SET( zypper_SRCS
   commands/commandhelpformatter.cc
   commands/conditions.cc
   commands/basecommand.cc
+  commands/locks/common.cc
   commands/locks/add.cc
   commands/locks/clean.cc
   commands/locks/list.cc

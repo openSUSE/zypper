@@ -15,10 +15,10 @@
 #include "utils/flags/flagtypes.h"
 
 #include "Zypper.h"
-#include "repos.h"
 #include "utils/messages.h"
 #include "commands/conditions.h"
 #include "commands/commonflags.h"
+#include "commands/locks/common.h"
 
 using namespace zypp;
 
@@ -67,34 +67,7 @@ int AddLocksCmd::execute(Zypper &zypper, const std::vector<std::string> &positio
     Locks::size_type start = locks.size();
     for_(it,positionalArgs_r.begin(),positionalArgs_r.end())
     {
-      PoolQuery q;
-      if ( _kinds.empty() ) // derive it from the name
-      {
-        sat::Solvable::SplitIdent split( *it );
-        q.addAttribute( sat::SolvAttr::name, split.name().asString() );
-        q.addKind( split.kind() );
-      }
-      else
-      {
-        q.addAttribute(sat::SolvAttr::name, *it);
-        for_(itk, _kinds.begin(), _kinds.end()) {
-          q.addKind(*itk);
-        }
-      }
-      q.setMatchGlob();
-      parsed_opts::const_iterator itr;
-      //TODO rug compatibility for more arguments with version restrict
-      for_(it_repo, _repos.begin(), _repos.end())
-      {
-        RepoInfo info;
-        if( match_repo( zypper, *it_repo, &info))
-          q.addRepo(info.alias());
-        else //TODO some error handling
-          WAR << "unknown repository" << *it_repo << endl;
-      }
-      q.setCaseSensitive();
-
-      locks.addLock(q);
+      locks.addLock( locks::arg2query( zypper, *it, _kinds, _repos ) );
     }
     locks.save(Pathname::assertprefix
         (zypper.globalOpts().root_dir, ZConfig::instance().locksFile()));
