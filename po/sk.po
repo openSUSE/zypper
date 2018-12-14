@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-12-10 19:36+0100\n"
-"PO-Revision-Date: 2018-12-12 09:06+0000\n"
+"PO-Revision-Date: 2018-12-14 07:01+0000\n"
 "Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
 "Language-Team: Slovak <https://l10n.opensuse.org/projects/zypper/master/sk/>"
 "\n"
@@ -3136,6 +3136,11 @@ msgid ""
 "unconditionally on small or minimal systems, as it may easily add a large "
 "number of packages."
 msgstr ""
+"Inštalovať novo pridané balíky odporúčané už nainštalovanými balíkmi. Tento "
+"príkaz v podstate prehodnotí odporúčania všetkých nainštalovaných balíkov a "
+"podľa toho spôsobom doplní systém. Toto nechcete bezpodmienečne volať na "
+"malých alebo minimálnych systémoch, pretože to môže ľahko pridať veľký počet "
+"balíkov."
 
 #. translators: command description, %1% is a zypper command
 #: src/commands/inrverify.cc:98
@@ -3145,6 +3150,9 @@ msgid ""
 "supporting available hardware, languages or filesystems. Useful after having "
 "added e.g. new hardware or driver repos."
 msgstr ""
+"Volané ako '%1%', obmedzuje príkaz iba na hľadanie balíkov podporujúcich "
+"dostupný hardvér, jazyky alebo súborové systémy. Užitočné po pridaní napr. "
+"nového repozitára hardvéru alebo ovládačov."
 
 #. translators: command description
 #: src/commands/inrverify.cc:101
@@ -3513,7 +3521,7 @@ msgstr "Reštart pravdepodobne nie je potrebný."
 
 #: src/commands/optionsets.cc:33
 msgid "Don't change anything, just report what would be done."
-msgstr ""
+msgstr "Nemeniť nič, len oznámiť, čo by sa urobilo."
 
 #. translators: -r, --repo <ALIAS|#|URI>
 #: src/commands/optionsets.cc:65
@@ -3523,7 +3531,7 @@ msgstr "Pracovať len so zadaným repozitárom."
 #: src/commands/optionsets.cc:85
 #, c-format, boost-format
 msgid "Option '--%s' overrides a previously set download mode."
-msgstr ""
+msgstr "Voľba '--%s' prepíše predtým nastavený režim sťahovania."
 
 #: src/commands/optionsets.cc:114
 #, c-format, boost-format
@@ -4422,33 +4430,33 @@ msgstr ""
 #. translators: -g, --category <CATEGORY>
 #: src/commands/selectpatchoptionset.cc:24
 msgid "Select patches with the specified category."
-msgstr ""
+msgstr "Vybrať opravy s určenou kategóriou."
 
 #. translators: --severity <SEVERITY>
 #: src/commands/selectpatchoptionset.cc:28
 msgid "Select patches with the specified severity."
-msgstr ""
+msgstr "Vyberte opravy s určenou závažnosťou."
 
 #. translators: --date <YYYY-MM-DD>
 #: src/commands/selectpatchoptionset.cc:32
 msgid "Select patches issued up to, but not including, the specified date"
-msgstr ""
+msgstr "Vybrať opravy vydané do určeného dátumu, ale nie vrátane neho"
 
 #. translators: -b, --bugzilla
 #: src/commands/selectpatchoptionset.cc:36
 msgid "Select applicable patches for the specified Bugzilla issues."
-msgstr ""
+msgstr "Vybrať príslušné opravy pre určené problémy Bugzilla."
 
 #. translators: --cve
 #: src/commands/selectpatchoptionset.cc:41
 msgid "Select applicable patches for the specified CVE issues."
-msgstr ""
+msgstr "Vybrať príslušné opravy pre určené problémy CVE."
 
 #. any
 #. translators: --cve
 #: src/commands/selectpatchoptionset.cc:50
 msgid "Select issues matching the specified string."
-msgstr ""
+msgstr "Vyberte problémy zodpovedajúce určenému reťazcu."
 
 #: src/commands/services/add.cc:55
 #, c-format, boost-format
@@ -4750,11 +4758,11 @@ msgstr ""
 
 #: src/commands/solveroptionset.cc:16 src/commands/solveroptionset.cc:39
 msgid "Solver options"
-msgstr ""
+msgstr "Voľby riešiteľa"
 
 #: src/commands/solveroptionset.cc:63
 msgid "Expert options"
-msgstr ""
+msgstr "Pokročilé možnosti"
 
 #. translators: -u, --clean-deps
 #: src/commands/solveroptionset.cc:96
@@ -5043,12 +5051,12 @@ msgstr ""
 #. translators: --status
 #: src/commands/utils/source-download.cc:514
 msgid "Write a manifest file."
-msgstr ""
+msgstr "Napísať súbor manifestu."
 
 #. translators: --status
 #: src/commands/utils/source-download.cc:518
 msgid "Disable writing a manifest file."
-msgstr ""
+msgstr "Zakázať napísanie súboru manifestu."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/utils/targetos.cc:20
