@@ -870,4 +870,116 @@ BOOST_AUTO_TEST_CASE(addDependency)
   }
 }
 
+namespace
+{
+  std::string q2str( const PoolQuery & q_r )
+  {
+    str::Str s;
+    q_r.serialize( s.stream() );
+    return s;
+  }
 
+  template <class OutputIterator>
+  void str2q( const std::string & s_r, OutputIterator out_r )
+  {
+    std::istringstream s( s_r );
+    do {
+      PoolQuery q;
+      if ( q.recover( s ) )
+	*out_r++ = std::move(q);
+      else
+	break;
+    } while ( true );
+  }
+
+  typedef std::set<PoolQuery> Pqs;
+
+  PoolQuery str2q( const std::string & s_r )
+  {
+    Pqs ret;
+    str2q( s_r, std::insert_iterator<Pqs>( ret, ret.end() ) );
+    return *ret.begin();
+  }
+
+
+  std::string serialized( const std::string & arg_r )
+  { return "\n" + arg_r + "\n\n"; }
+
+  template <typename... Args>
+  std::string serialized( const std::string & arg_r, Args... args_r )
+  { return "\n" + arg_r + serialized( args_r... ); }
+
+
+  void testSerializeAndBack( const PoolQuery & q_r, const PoolQuery & expect_r, bool equal_r = true )
+  {
+    static unsigned i = 0;
+
+    std::string s { q2str( q_r ) };
+    PoolQuery   q { str2q( s ) };
+    BOOST_CHECK_EQUAL( (q == expect_r), equal_r );
+
+    if ( ++i && (q == expect_r) != equal_r )
+    {
+      cout << "+++" << endl;
+      cout << q << endl;
+      cout << "=== " << i << " ^v SerializeAndBack == " << equal_r << endl;
+      cout << expect_r << endl;
+      cout << "---" << endl;
+    }
+  }
+}
+
+BOOST_AUTO_TEST_CASE(zypperLocksSerialize)
+{
+  // Fix/cleanup zypper locks (old style, new stule, complex) (bsc#1112911)
+  // As you may notice: locks (by now) ignore any arch component
+  cout << "****zypperLocksSerialize****"  << endl;
+  std::string n { "n*" };
+  Rel         o { Rel::EQ };
+  Edition     e { "v", "r", 1 };
+  Arch        a { "a" };
+
+  {
+    // old style
+    // solvable_name: n*
+    PoolQuery oldq;
+    oldq.addAttribute( sat::SolvAttr::name, n );
+    testSerializeAndBack( oldq, oldq );
+
+    { // new style
+      PoolQuery q;
+      q.addDependency( sat::SolvAttr::name, n, Rel::ANY, Edition(), Arch_empty );
+      testSerializeAndBack( q, oldq );
+    }
+
+    { // new style + arch rule however stays complex
+      PoolQuery q;
+      q.addDependency( sat::SolvAttr::name, n, Rel::ANY, Edition(), a );
+      testSerializeAndBack( q, oldq, false );
+      testSerializeAndBack( q, q );
+    }
+  }
+
+  {
+    // old style
+    // solvable_name: n*
+    // version: == 1:v-r
+    PoolQuery oldq;
+    oldq.addAttribute( sat::SolvAttr::name, n );
+    oldq.setEdition( e, o );
+    testSerializeAndBack( oldq, oldq );
+
+    { // new style
+      PoolQuery q;
+      q.addDependency( sat::SolvAttr::name, n, o, e, Arch_empty );
+      testSerializeAndBack( q, oldq );
+    }
+
+    { // new style + arch rule however stays complex
+      PoolQuery q;
+      q.addDependency( sat::SolvAttr::name, n, o, e, a );
+      testSerializeAndBack( q, oldq, false );
+      testSerializeAndBack( q, q );
+    }
+  }
+}

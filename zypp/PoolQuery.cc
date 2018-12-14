@@ -1302,6 +1302,70 @@ namespace zypp
 
     } while ( true );
 
+    // OLD STYLE VERSIONED LOCKS:
+    //	solvable_name: kernel
+    //	version: > 1
+    //
+    // NEW STYLE VERSIONED LOCKS:
+    //	complex: AttrMatchData solvable:name kernel C SolvableRange\ >\ 1\ \"\"
+    //   or
+    //	solvable_name: kernel > 1
+    //
+    // Semantically equivalent as locks, but due to the different syntax
+    // the complex lock is wrongly handled by zypper.
+    //
+    // bsc#1112911: Unfortunately all styles are found in real-life locks-files.
+    // libzypp will try to make sure, when parsing the locks-file, that complex
+    // locks are rewritten into to OLD STYLE queries zypper can handle.
+    if ( !_pimpl->_attrs.count(SolvAttr::name) && _pimpl->_uncompiledPredicated.size() == 1 )
+    {
+      // No OLD STYLE lock for SolvAttr::name and exactly one complex lock...
+      const AttrMatchData & attrmatch {  *_pimpl->_uncompiledPredicated.begin() };
+      if ( attrmatch.attr == SolvAttr::name && attrmatch.strMatcher.flags().mode() == Match::OTHER )
+      {
+	// ...for SolvAttr::name and following the global search flags.
+	// A candidate for a rewrite?
+
+	std::vector<std::string> words;
+	str::splitEscaped( attrmatch.predicateStr, std::back_inserter(words) );
+	if ( words.size() < 4 || words[3].empty() )
+	{
+	  // We have _NO_ arch rule in the complex predicate, so we can simplify it.
+	  //
+	  // NOTE: AFAIK it's not possible to create (or have created) a complex lock
+	  // with arch rule with zypper means. Nevertheless, in case such a rule made it
+	  // into a locks file, it's better to have a strange looking 'zypper locks' list
+	  // than to lock the wrong packages.
+	  // (and remember that you can't use "addAttribute( SolvAttr::arch, ... )" because
+	  // attributes are `OR`ed)
+
+	  // kind
+	  if ( attrmatch.kindPredicate )
+	  {
+	    _pimpl->_kinds.clear();	// an explicit kind overwrites any global one
+	    addKind( attrmatch.kindPredicate );
+	  }
+
+	  // name
+	  addAttribute( SolvAttr::name, attrmatch.strMatcher.searchstring() );
+
+	  // edition
+	  std::vector<std::string> words;
+	  str::splitEscaped( attrmatch.predicateStr, std::back_inserter(words) );
+	  if ( ! words.empty() )
+	  {
+	    if ( words[0] == "EditionRange" || words[0] == "SolvableRange" )
+	    {
+	      setEdition( Edition(words[2]), Rel(words[1]) );
+	    }
+	  }
+
+	  // finally remove the complex lock
+	  _pimpl->_uncompiledPredicated.clear();
+	}
+      }
+    }
+
     return finded_something;
   }
 
