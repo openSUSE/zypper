@@ -154,6 +154,8 @@ BOOST_AUTO_TEST_CASE( hooks )
   std::string valInPreHook;
   std::string valInCB;
   std::string valInPostHook;
+  std::vector<int> notSeenInvoked;
+  std::vector<int> notSeenExcpected { 1, 2 };
 
   CommandGroup grp {{{
         { "arg", 'a', RequiredArgument,
@@ -168,20 +170,42 @@ BOOST_AUTO_TEST_CASE( hooks )
                     values.push_back( 3 );
                     valInPostHook = *in;
                   }))
-        }
+    }, {
+      "neverUsed", 'b', NoArgument, std::move( NoValue().notSeen( [ &notSeenInvoked ](){
+          notSeenInvoked.push_back( 1 );
+      } ))
+    }, std::move( CommandOption (
+        "neverUsed2", 'c', NoArgument, std::move( NoValue().notSeen( [ &notSeenInvoked ](){
+          notSeenInvoked.push_back( 2 );
+        } ))
+      ).setDependencies( { "neverUsed" } )
+    )
   }}};
 
-  const char *testArgs[] {
-    "command",
-     "--arg", "test"
-  };
+  {
+    const char *testArgs[] {
+      "command",
+       "--arg", "test"
+    };
 
-  BOOST_CHECK_NO_THROW( parseCLI( sizeof(testArgs) / sizeof(char *),  ( char *const* )testArgs, { grp } ) );
-  BOOST_CHECK_EQUAL ( values, expectedResult );
-  BOOST_CHECK_EQUAL ( valInPreHook, "test" );
-  BOOST_CHECK_EQUAL ( valInCB, "test" );
-  BOOST_CHECK_EQUAL ( valInPostHook, "test" );
+    BOOST_CHECK_NO_THROW( parseCLI( sizeof(testArgs) / sizeof(char *),  ( char *const* )testArgs, { grp } ) );
+    BOOST_CHECK_EQUAL ( values, expectedResult );
+    BOOST_CHECK_EQUAL ( valInPreHook, "test" );
+    BOOST_CHECK_EQUAL ( valInCB, "test" );
+    BOOST_CHECK_EQUAL ( valInPostHook, "test" );
+    BOOST_CHECK_EQUAL ( notSeenInvoked, notSeenExcpected );
+  }
 
+  //notSeen must be invoked in the right order even if there are no options given
+  {
+    notSeenInvoked.clear();
+    const char *testArgs[] {
+      "command"
+    };
+
+    BOOST_CHECK_NO_THROW( parseCLI( sizeof(testArgs) / sizeof(char *),  ( char *const* )testArgs, { grp } ) );
+    BOOST_CHECK_EQUAL ( notSeenInvoked, notSeenExcpected );
+  }
 }
 
 BOOST_AUTO_TEST_CASE( priority )
@@ -450,8 +474,8 @@ BOOST_AUTO_TEST_CASE( types )
     };
 
     BOOST_REQUIRE_THROW( parseCLI( sizeof(testArgs) / sizeof(char *),  ( char *const* )testArgs, { grp } ), ZyppFlagsException );
-    //check that the counter where hit at the 6th iteration
-    BOOST_CHECK_EQUAL ( counter, 6 );
+    //check that the counter was hit before increasing past the maximum value
+    BOOST_CHECK_EQUAL ( counter, 5 );
   }
 
   {

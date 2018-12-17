@@ -151,3 +151,13 @@ void print_unknown_command_hint( Zypper & zypper, const std::string & cmd_r )
     /*%2%*/ % ("zypper-"+cmd_r+"-plugin")
   );
 }
+
+void exit_rug_compat()
+{
+  Zypper &zypper = Zypper::instance();
+  zypper.out().error("************************************************************************");
+  zypper.out().error("** Rug-compatible mode is no longer available. [-r,--rug-compatible]");
+  zypper.out().error("************************************************************************");
+  zypper.setExitCode( ZYPPER_EXIT_ERR_INVALID_ARGS );
+  ZYPP_THROW( ExitRequestException("rug-compatible") );
+}

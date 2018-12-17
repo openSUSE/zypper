@@ -20,6 +20,8 @@
 #include <set>
 #include <type_traits>
 
+#include <boost/optional.hpp>
+
 class Out;
 
 namespace zypp {
@@ -45,8 +47,9 @@ Value IntType    ( int *target, const boost::optional<int> &defValue = boost::op
 
 /**
  * Returns a \sa ZyppFlags::Value instance counting how many times a parameter was seen
+ * If \a failOnOverflow is true (default) using the switch too often will throw a exception
  */
-Value CounterType    ( int *target, const boost::optional<int> &defValue = boost::optional<int>(), const boost::optional<int> &maxValue = boost::optional<int>()  );
+Value CounterType    ( int *target, const boost::optional<int> &defValue = boost::optional<int>(), const boost::optional<int> &maxValue = boost::optional<int>(), bool failOnOverflow = true  );
 
 /**
  * Returns a \sa ZyppFlags::Value instance handling flags taking package or ressource types
@@ -71,7 +74,7 @@ enum StoreFlag : int{
  * The value in \a defVal is only used for generating the help
  */
 template <typename T>
-Value BoolCompatibleType ( T &target, StoreFlag store = StoreTrue, const boost::optional<T> &defVal = boost::optional<T>()  )
+Value BoolCompatibleType ( T &target, StoreFlag store = StoreTrue, const boost::optional<T> &defVal = boost::optional<T>() )
 {
   return Value (
     [defVal]() -> boost::optional<std::string>{

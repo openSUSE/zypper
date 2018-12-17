@@ -70,7 +70,7 @@ namespace ZmartRecipients
     : public callback::ReceiveReport<media::DownloadProgressReport>
   {
     DownloadProgressReportReceiver()
-      : _gopts(Zypper::instance().globalOpts()), _be_quiet(false)
+      : _be_quiet(false)
     {}
 
     virtual void start( const Url & uri, Pathname localfile )
@@ -153,7 +153,6 @@ namespace ZmartRecipients
     }
 
   private:
-    const GlobalOptions & _gopts;
     bool _be_quiet;
     time_t _last_reported;
     double _last_drate_avg;

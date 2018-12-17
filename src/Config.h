@@ -12,9 +12,13 @@
 #include <set>
 
 #include <zypp/Url.h>
+#include <zypp/Pathname.h>
+#include <zypp/RepoManager.h>
 
 #include "Command.h"
 #include "utils/colors.h"
+#include "utils/flags/zyppflags.h"
+#include "output/Out.h"
 
 /**
  *
@@ -23,6 +27,8 @@ struct Config
 {
   /** Initializes the config options to defaults. */
   Config();
+
+  std::vector<ZyppFlags::CommandGroup> cliOptions ();
 
   /** Reads zypper.conf and stores the result */
   void read(const std::string & file = "");
@@ -73,6 +79,39 @@ struct Config
   Url obs_baseUrl;
   /** zypper.conf: obs.platform */
   std::string obs_platform;
+
+  //====================================== CLI config options ========================================
+  //  std::list<Url> additional_sources;
+  Out::Verbosity verbosity;
+  bool disable_system_sources;
+  bool disable_system_resolvables;
+  bool non_interactive;
+  bool reboot_req_non_interactive;
+  bool no_gpg_checks;
+  bool gpg_auto_import_keys;
+  bool machine_readable;
+  /** Whether to disable autorefresh. */
+  bool no_refresh;
+  /** Whether to ignore cd/dvd repos) */
+  bool no_cd;
+  /** Whether to ignore remote (http, ...) repos */
+  bool no_remote;
+  std::string root_dir;
+  bool is_install_root; /// < used when the package target rootfs is not the same as the zypper metadata rootfs
+  RepoManagerOptions rm_options;
+  bool no_abbrev;
+  bool terse;
+  bool changedRoot;
+  bool ignore_unknown;
+  const int	exclude_optional_patches_default;	// global default
+  int		exclude_optional_patches;		// effective value (--with[out]-optional)
+  bool wantHelp; ///< help was requested by CLI
+
+
+  // helper variables for CLI parsing
+  bool _wantXMLOut = false;
+  std::vector<std::string> plusRepoFromCLI;
+  std::vector<std::string> plusContentFromCLI;
 };
 
 #endif /* ZYPPER_CONFIG_H_ */

@@ -25,7 +25,7 @@ int NeedsRootCondition::check(std::string &err)
 int NeedsWritableRoot::check(std::string &err_r)
 {
   Zypper &zypper = Zypper::instance();
-  const GlobalOptions &gopts = zypper.globalOpts();
+  const Config &gopts = zypper.config();
 
   if ( DryRunSettings::instance().isEnabled() )
     return ZYPPER_EXIT_OK;

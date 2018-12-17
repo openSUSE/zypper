@@ -52,72 +52,6 @@ inline std::string dashdash( std::string optname_r )
 { return optname_r.insert( 0, "--" ); }
 
 /**
- * Structure for holding global options.
- *
- * \deprecated To be replaced by Config
- */
-struct GlobalOptions
-{
-  GlobalOptions()
-  : verbosity( 0 )
-  , disable_system_sources( false )
-  , disable_system_resolvables( false )
-  , non_interactive( false )
-  , reboot_req_non_interactive( false )
-  , no_gpg_checks( false )
-  , gpg_auto_import_keys( false )
-  , machine_readable( false )
-  , no_refresh( false )
-  , no_cd( false )
-  , no_remote( false )
-  , root_dir( "/" )
-  , is_install_root( false )
-  , no_abbrev( false )
-  , terse( false )
-  , changedRoot( false )
-  , ignore_unknown( false )
-  , exclude_optional_patches_default( true )
-  , exclude_optional_patches( exclude_optional_patches_default )
-  {}
-
-  //  std::list<Url> additional_sources;
-
-  /**
-   * Level of the amount of output.
-   *
-   * <ul>
-   * <li>-1 quiet</li>
-   * <li> 0 normal (default)</li>
-   * <li> 1 verbose</li>
-   * <li> 2 debug</li>
-   * </ul>
-   */
-  int verbosity;
-  bool disable_system_sources;
-  bool disable_system_resolvables;
-  bool non_interactive;
-  bool reboot_req_non_interactive;
-  bool no_gpg_checks;
-  bool gpg_auto_import_keys;
-  bool machine_readable;
-  /** Whether to disable autorefresh. */
-  bool no_refresh;
-  /** Whether to ignore cd/dvd repos) */
-  bool no_cd;
-  /** Whether to ignore remote (http, ...) repos */
-  bool no_remote;
-  std::string root_dir;
-  bool is_install_root; /// < used when the package target rootfs is not the same as the zypper metadata rootfs
-  RepoManagerOptions rm_options;
-  bool no_abbrev;
-  bool terse;
-  bool changedRoot;
-  bool ignore_unknown;
-  const int	exclude_optional_patches_default;	// global default
-  int		exclude_optional_patches;		// effective value (--with[out]-optional)
-};
-
-/**
  * \bug The RepoInfo lists kept herein may lack housekeeping data added by the
  * RepoManager. Consider using your own RepoInfos only for those not
  * maintained by RepoManager. (bnc #544432)
@@ -208,10 +142,13 @@ public:
   // setters & getters
   Out & out();
 
-  void setOutputWriter( Out * out )		{ _out_ptr = out; }
+  Out *outputWriter ( );
+  void setOutputWriter( Out * out );
   Config & config()				{ return _config; }
-  const GlobalOptions & globalOpts() const	{ return _gopts; }
-  GlobalOptions & globalOptsNoConst()		{ return _gopts; }
+
+  //deprecated, global options were replaced by Config
+  ZYPP_DEPRECATED const Config & globalOpts() const	{ return _config; }
+  ZYPP_DEPRECATED Config & globalOptsNoConst()		{ return _config; }
 
   const ZypperCommand & command() const		{ return _command; }
   const std::string & commandHelp() const	{ return _command_help; }
@@ -219,10 +156,10 @@ public:
   RuntimeData & runtimeData()			{ return _rdata; }
 
   void initRepoManager()
-  { _rm.reset( new RepoManager( _gopts.rm_options ) ); }
+  { _rm.reset( new RepoManager( _config.rm_options ) ); }
 
   RepoManager & repoManager()
-  { if ( !_rm ) _rm.reset( new RepoManager( _gopts.rm_options ) ); return *_rm; }
+  { if ( !_rm ) _rm.reset( new RepoManager( _config.rm_options ) ); return *_rm; }
 
 
   int exitCode() const				{ return _exitCode; }
@@ -332,7 +269,6 @@ private:
 
   Out * _out_ptr;
   Config _config;
-  GlobalOptions _gopts;
   parsed_opts   _copts;
   ZypperCommand _command;
   ArgList _arguments;

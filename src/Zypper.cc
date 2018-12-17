@@ -215,8 +215,8 @@ namespace {
 ///////////////////////////////////////////////////////////////////
 Zypper::Zypper()
 : _argc( 0 )
-, _argv( NULL )
-, _out_ptr( NULL )
+, _argv( nullptr )
+, _out_ptr( nullptr )
 , _command( ZypperCommand::NONE )
 , _exitCode( ZYPPER_EXIT_OK )
 , _exitInfoCode( ZYPPER_EXIT_OK )
@@ -328,6 +328,20 @@ Out & Zypper::out()
   ZYPP_THROW( ExitRequestException("no output writer") );
 }
 
+Out *Zypper::outputWriter()
+{
+  return _out_ptr;
+}
+
+void Zypper::setOutputWriter(Out *out)
+{
+  if ( _out_ptr ) {
+    delete _out_ptr;
+    _out_ptr = nullptr;
+  }
+  _out_ptr = out;
+}
+
 void print_command_help_hint( Zypper & zypper )
 {
   zypper.out().info(
@@ -346,168 +360,20 @@ void print_command_help_hint( Zypper & zypper )
 void Zypper::processGlobalOptions()
 {
   MIL << "START" << endl;
-  static const int indeterminate = -1;
-  int optvalColor = indeterminate;
 
-  static struct option global_options[] = {
-    {"help",                       no_argument,       0, 'h'},
-    {"verbose",                    no_argument,       0, 'v'},
-    {"quiet",                      no_argument,       0, 'q'},
-    {"version",                    no_argument,       0, 'V'},
-    {"promptids",                  no_argument,       0,  0 },
-    {"color",			   no_argument,	&optvalColor, 1},
-    {"no-color",		   no_argument,	&optvalColor, 0},
-    // rug compatibility alias for -vv
-    {"debug",                      no_argument,       0,  0 },
-    // rug compatibility alias for the default output level => ignored
-    {"normal-output",              no_argument,       0,  0 },
-    {"terse",                      no_argument,       0, 't'},
-    {"no-abbrev",                  no_argument,       0, 'A'},
-    {"table-style",                required_argument, 0, 's'},
-    {"rug-compatible",             no_argument,       0, 'r'},	/* DEPRECATED and UNSUPPORTED SINCE SLE12 */
-    {"non-interactive",            no_argument,       0, 'n'},
-    {"non-interactive-include-reboot-patches", no_argument, 0, '0'},
-    {"no-gpg-checks",              no_argument,       0,  0 },
-    {"gpg-auto-import-keys",       no_argument,       0,  0 },
-    {"root",                       required_argument, 0, 'R'},
-    {"installroot",                required_argument, 0,  0 },
-    {"reposd-dir",                 required_argument, 0, 'D'},
-    {"cache-dir",                  required_argument, 0, 'C'},
-    {"raw-cache-dir",              required_argument, 0,  0 },
-    {"solv-cache-dir",             required_argument, 0,  0 },
-    {"pkg-cache-dir",              required_argument, 0,  0 },
-    {"opt",                        optional_argument, 0, 'o'},
-    // TARGET OPTIONS
-    {"disable-system-resolvables", no_argument,       0,  0 },
-    // REPO OPTIONS
-    {"plus-repo",                  required_argument, 0, 'p'},
-    {"plus-content",               required_argument, 0,  0 },
-    {"disable-repositories",       no_argument,       0,  0 },
-    {"no-refresh",                 no_argument,       0,  0 },
-    {"no-cd",                      no_argument,       0,  0 },
-    {"no-remote",                  no_argument,       0,  0 },
-    {"releasever",                 required_argument, 0,  0 },
-    {"xmlout",                     no_argument,       0, 'x'},
-    {"config",                     required_argument, 0, 'c'},
-    {"userdata",                   required_argument, 0,  0 },
-    {"ignore-unknown",             no_argument,       0, 'i'},
-    {0, 0, 0, 0}
-  };
+  //setup the default output, this could be overridden by cli values
+  OutNormal * p = new OutNormal( _config.verbosity );
+  p->setUseColors( _config.do_colors );
+  setOutputWriter( p );
 
-  // ====== parse global options ======
-  parsed_opts gopts = parse_options( _argc, _argv, global_options );
-  searchPackagesHintHack::argvCmdIdx = optind;
-  for ( const char * opterr : { "_unknown", "_missing_arg" } )
-  {
-    if ( gopts.count( opterr ) )
-    {
-      setExitCode( ZYPPER_EXIT_ERR_SYNTAX );
-      ZYPP_THROW( ExitRequestException( std::string("global")+opterr ) );
-    }
-  }
+  std::vector<ZyppFlags::CommandGroup> globalOpts = _config.cliOptions();
+  optind = searchPackagesHintHack::argvCmdIdx = ZyppFlags::parseCLI( _argc, _argv, globalOpts );
 
-  parsed_opts::const_iterator it;
-
-  // read config from specified file or default config files
-  _config.read( (it = gopts.find("config")) != gopts.end() ? it->second.front() : "" );
-
-  // ====== output setup ======
-  // depends on global options, that's we set it up here
-  //! \todo create a default in the zypper constructor, recreate here.
-
-  // determine the desired verbosity
-  int iverbosity = 0;
-  //// --quiet
-  if ( gopts.count("quiet") )
-  {
-    _gopts.verbosity = iverbosity = -1;
-    DBG << "Verbosity " << _gopts.verbosity << endl;
-  }
-  //// --verbose
-  if ( (it = gopts.find("verbose")) != gopts.end() )
-  {
-    //! \todo if iverbosity is -1 now, say we conflict with -q
-    _gopts.verbosity += iverbosity = it->second.size();
-    // _gopts.verbosity += gopts["verbose"].size();
-  }
-
-  Out::Verbosity verbosity = Out::NORMAL;
-  switch( iverbosity )
-  {
-    case -1: verbosity = Out::QUIET; break;
-    case 0: verbosity = Out::NORMAL; break;
-    case 1: verbosity = Out::HIGH; break;
-    default: verbosity = Out::DEBUG;
-  }
-
-  //// --debug
-  // rug compatibility alias for -vv
-  if ( gopts.count("debug") )
-    verbosity = Out::DEBUG;
-
-  if ( gopts.count("terse") )
-  {
-    _gopts.machine_readable = true;
-    _gopts.no_abbrev = true;
-    _gopts.terse = true;
-    if ( optvalColor == indeterminate )
-      optvalColor = false;
-  }
-
-  // adjust --[no-]color from CLI
-  if ( optvalColor != indeterminate )
-    _config.do_colors = optvalColor;
-
-  // create output object
-  //// --xml-out
-  if ( gopts.count("xmlout") )
-  {
-    _config.do_colors = false;	// no color in xml mode!
-    _out_ptr = new OutXML( verbosity );
-    _gopts.machine_readable = true;
-    _gopts.no_abbrev = true;
-  }
-  else
-  {
-    OutNormal * p = new OutNormal( verbosity );
-    p->setUseColors( _config.do_colors );
-    _out_ptr = p;
-  }
-
-  out().info( str::Format(_("Verbosity: %d")) % _gopts.verbosity , Out::HIGH );
-  DBG << "Verbosity " << verbosity << endl;
+  out().info( str::Format(_("Verbosity: %d")) % _config.verbosity , Out::HIGH );
+  DBG << "Verbosity " << _config.verbosity << endl;
   DBG << "Output type " << _out_ptr->type() << endl;
 
-  if ( gopts.count("no-abbrev") )
-    _gopts.no_abbrev = true;
-
-  if ( (it = gopts.find("table-style")) != gopts.end() )
-  {
-    unsigned s;
-    str::strtonum( it->second.front(), s );
-    if ( s < TLS_End )
-      Table::defaultStyle = (TableLineStyle)s;
-    else
-      out().error( str::Format(_("Invalid table style %d.")) % s,
-		   str::Format(_("Use an integer number from %d to %d")) % 0 % 8 );
-  }
-
   //  ======== get command ========
-  // Print and exit global opts: --version and --propmtids
-  // Actually they should be turned into a command ...
-  if ( gopts.count("version") )
-  {
-    out().info( PACKAGE " " VERSION, Out::QUIET );
-    ZYPP_THROW( ExitRequestException("version shown") );
-  }
-  if ( gopts.count("promptids") )
-  {
-    #define PR_ENUML(nam, val) out().info(#nam "=" #val, Out::QUIET);
-    #define PR_ENUM(nam, val) PR_ENUML(nam, val)
-    #include "output/prompt.h"
-    ZYPP_THROW( ExitRequestException("promptids shown") );
-  }
-
   if ( optind < _argc )
   {
     try { setCommand( ZypperCommand( _argv[optind++] ) ); }
@@ -527,7 +393,7 @@ void Zypper::processGlobalOptions()
   // The help command is eaten and transformed to the help option
   // $0 help
   // $0 help command
-  if ( gopts.count( "help" ) )
+  if ( _config.wantHelp )
     setRunningHelp( true );	// help for current command
   else if ( command() == ZypperCommand::NONE )
     setRunningHelp( true );	// no command => global help
@@ -539,15 +405,15 @@ void Zypper::processGlobalOptions()
       std::string arg = _argv[optind++];
       if ( arg != "-h" && arg != "--help" )
       {
-	try { setCommand( ZypperCommand( arg ) ); }
-	// exception from command parsing
-	catch ( const Exception & e )
-	{
-	  out().error( e.asUserString() );
-	  print_unknown_command_hint( *this, arg );
-	  setExitCode( ZYPPER_EXIT_ERR_SYNTAX );
-	  ZYPP_THROW( ExitRequestException("unknown command") );
-	}
+        try { setCommand( ZypperCommand( arg ) ); }
+        // exception from command parsing
+        catch ( const Exception & e )
+        {
+          out().error( e.asUserString() );
+          print_unknown_command_hint( *this, arg );
+          setExitCode( ZYPPER_EXIT_ERR_SYNTAX );
+          ZYPP_THROW( ExitRequestException("unknown command") );
+        }
       }
     }
     else
@@ -599,13 +465,13 @@ void Zypper::processGlobalOptions()
     {
       if ( optind > 2 )
       {
-	out().error(
-	  // translators: %1%  - is the name of a subcommand
-	  str::Format(_("Subcommand %1% does not support zypper global options."))
-	  % myOpts->_detected._name );
-	print_command_help_hint( *this );
-	setExitCode( ZYPPER_EXIT_ERR_INVALID_ARGS );
-	ZYPP_THROW( ExitRequestException("invalid args") );
+        out().error(
+          // translators: %1%  - is the name of a subcommand
+          str::Format(_("Subcommand %1% does not support zypper global options."))
+          % myOpts->_detected._name );
+        print_command_help_hint( *this );
+        setExitCode( ZYPPER_EXIT_ERR_INVALID_ARGS );
+        ZYPP_THROW( ExitRequestException("invalid args") );
       }
       // save args (incl. the command itself as argv[0])
       myOpts->args( _argv+(optind-1), _argv+_argc );
@@ -613,11 +479,6 @@ void Zypper::processGlobalOptions()
   }
 
   // ======== other global options ========
-
-  if ( (it = gopts.find( "releasever" )) != gopts.end() )
-  {
-    ::setenv( "ZYPP_REPO_RELEASEVER", it->second.front().c_str(), 1 );
-  }
   {
     const char * env = ::getenv( "ZYPP_REPO_RELEASEVER" );
     if ( env && *env )
@@ -627,196 +488,45 @@ void Zypper::processGlobalOptions()
     }
   }
 
-
-  if ( (it = gopts.find( "userdata" )) != gopts.end() )
-  {
-    if ( ! ZConfig::instance().setUserData( it->second.front() ) )
-    {
-      out().error(_("User data string must not contain nonprintable or newline characters!"));
-      setExitCode( ZYPPER_EXIT_ERR_INVALID_ARGS );
-      ZYPP_THROW( ExitRequestException("userdata") );
-    }
-  }
-
   ///////////////////////////////////////////////////////////////////
   // Rug compatibility is dropped since SLE12.
   // Rug options are removed from documantation(commit#53ffd419) but
   // will stay active in code for a while.
   std::string rug_test( _argv[0] );
-  if ( gopts.count("rug-compatible") || Pathname::basename( _argv[0] ) == "rug" )
+  if ( Pathname::basename( _argv[0] ) == "rug" )
   {
-    out().error("************************************************************************");
-    out().error("** Rug-compatible mode is no longer available. [-r,--rug-compatible]");
-    out().error("************************************************************************");
-    setExitCode( ZYPPER_EXIT_ERR_INVALID_ARGS );
-    ZYPP_THROW( ExitRequestException("rug-compatible") );
+    exit_rug_compat();
   }
   ///////////////////////////////////////////////////////////////////
 
-  if ( gopts.count("non-interactive") )
-  {
-    _gopts.non_interactive = true;
-    out().info(_("Entering non-interactive mode."), Out::HIGH );
-    MIL << "Entering non-interactive mode" << endl;
-  }
-
-  if ( gopts.count("non-interactive-include-reboot-patches") )
-  {
-    _gopts.reboot_req_non_interactive = true;
-    out().info(_("Patches having the flag rebootSuggested set will not be treated as interactive."), Out::HIGH );
-    MIL << "Patches having the flag rebootSuggested set will not be treated as interactive" << endl;
-  }
-
-  if ( gopts.count("no-gpg-checks") )
-  {
-    _gopts.no_gpg_checks = true;
-    out().info(_("Entering 'no-gpg-checks' mode."), Out::HIGH );
-    MIL << "Entering no-gpg-checks mode" << endl;
-  }
-
-  if ( gopts.count("gpg-auto-import-keys") )
-  {
-    _gopts.gpg_auto_import_keys = true;
-    std::string warn = str::form(
-      _("Turning on '%s'. New repository signing keys will be automatically imported!"),
-      "--gpg-auto-import-keys");
-    out().warning( warn, Out::HIGH );
-    MIL << "gpg-auto-import-keys is on" << endl;
-  }
-
-  if ( (it = gopts.find("root")) != gopts.end() || (it = gopts.find("installroot")) != gopts.end() )
-  {
-    if ( gopts.find("root") != gopts.end() && gopts.find("installroot") != gopts.end() )
-    {
-      out().error( cli::errorMutuallyExclusiveOptions( "--root --installroot" ) );
-      setExitCode( ZYPPER_EXIT_ERR_INVALID_ARGS );
-      ZYPP_THROW( ExitRequestException("invalid args") );
-    }
-    _gopts.root_dir = it->second.front();
-    _gopts.changedRoot = true;
-    _gopts.is_install_root = (it->first == "installroot");
-
-    //make sure ZConfig knows the RepoManager root is not inside the target rootfs
-    if ( _gopts.is_install_root )
-      ZConfig::instance().setRepoManagerRoot("/");
-
-    Pathname tmp( _gopts.root_dir );
-    if ( !tmp.absolute() )
-    {
-      out().error(_("The path specified in the --root option must be absolute."));
-      setExitCode( ZYPPER_EXIT_ERR_INVALID_ARGS );
-      ZYPP_THROW( ExitRequestException("invalid args") );
-    }
-
-    DBG << "root dir = " << _gopts.root_dir << " is_install_root = " << _gopts.is_install_root << endl;
-    if (_gopts.is_install_root)
-      _gopts.rm_options = RepoManagerOptions("/");
-    else
-      _gopts.rm_options = RepoManagerOptions(_gopts.root_dir);
-  }
-
   // on the fly check the baseproduct symlink
   {
-    PathInfo pi( _gopts.root_dir + "/etc/products.d/baseproduct" );
-    if ( ! pi.isFile() && PathInfo( _gopts.root_dir + "/etc/products.d" ).isDir() )
+    PathInfo pi( _config.root_dir + "/etc/products.d/baseproduct" );
+    if ( ! pi.isFile() && PathInfo( _config.root_dir + "/etc/products.d" ).isDir() )
     {
       ERR << "baseproduct symlink is dangling or missing: " << pi << endl;
       out().warning(_(
-	"The /etc/products.d/baseproduct symlink is dangling or missing!\n"
-	"The link must point to your core products .prod file in /etc/products.d.\n"
-      ));
+        "The /etc/products.d/baseproduct symlink is dangling or missing!\n"
+        "The link must point to your core products .prod file in /etc/products.d.\n"
+              ));
     }
-  }
-
-  if ( (it = gopts.find("reposd-dir")) != gopts.end() )
-  {
-    _gopts.rm_options.knownReposPath = it->second.front();
   }
 
   // cache dirs
 
-  ZConfig &zconfig = ZConfig::instance();
-  if ( (it = gopts.find("cache-dir")) != gopts.end() )
-  {
-    zconfig.setRepoCachePath( it->second.front() );
-    _gopts.rm_options.repoCachePath		= zconfig.repoCachePath();
-    _gopts.rm_options.repoRawCachePath		= zconfig.repoMetadataPath();
-    _gopts.rm_options.repoSolvCachePath		= zconfig.repoSolvfilesPath();
-    _gopts.rm_options.repoPackagesCachePath	= zconfig.repoPackagesPath();
-  }
+  DBG << "repos.d dir = "       << _config.rm_options.knownReposPath        << endl;
+  DBG << "cache dir = "         << _config.rm_options.repoCachePath         << endl;
+  DBG << "raw cache dir = "     << _config.rm_options.repoRawCachePath      << endl;
+  DBG << "solv cache dir = "    << _config.rm_options.repoSolvCachePath     << endl;
+  DBG << "package cache dir = " << _config.rm_options.repoPackagesCachePath << endl;
 
-  if ( (it = gopts.find("raw-cache-dir")) != gopts.end() ) {
-    zconfig.setRepoMetadataPath( it->second.front() );
-    _gopts.rm_options.repoRawCachePath = zconfig.repoMetadataPath();
-  }
-
-  if ( (it = gopts.find("solv-cache-dir")) != gopts.end() ){
-    zconfig.setRepoSolvfilesPath( it->second.front() );
-    _gopts.rm_options.repoSolvCachePath = zconfig.repoSolvfilesPath();
-  }
-
-  if ( (it = gopts.find("pkg-cache-dir")) != gopts.end() ){
-    zconfig.setRepoPackagesPath( it->second.front() );
-    _gopts.rm_options.repoPackagesCachePath = zconfig.repoPackagesPath();
-  }
-
-  DBG << "repos.d dir = " << _gopts.rm_options.knownReposPath << endl;
-  DBG << "cache dir = " << _gopts.rm_options.repoCachePath << endl;
-  DBG << "raw cache dir = " << _gopts.rm_options.repoRawCachePath << endl;
-  DBG << "solv cache dir = " << _gopts.rm_options.repoSolvCachePath << endl;
-  DBG << "package cache dir = " << _gopts.rm_options.repoPackagesCachePath << endl;
-
-  if ( gopts.count("disable-repositories") )
-  {
-    MIL << "Repositories disabled, using target only." << endl;
-    out().info(
-      _("Repositories disabled, using the database of installed packages only."),
-      Out::HIGH);
-    _gopts.disable_system_sources = true;
-  }
-  else
+  if ( ! _config.disable_system_sources )
   {
     MIL << "Repositories enabled" << endl;
   }
 
-  if ( gopts.count("no-refresh") )
-  {
-    _gopts.no_refresh = true;
-    out().info(_("Autorefresh disabled."), Out::HIGH );
-    MIL << "Autorefresh disabled." << endl;
-  }
-
-  if ( gopts.count("no-cd") )
-  {
-    _gopts.no_cd = true;
-    out().info(_("CD/DVD repositories disabled."), Out::HIGH );
-    MIL << "No CD/DVD repos." << endl;
-  }
-
-  if ( gopts.count("no-remote") )
-  {
-    _gopts.no_remote = true;
-    out().info(_("Remote repositories disabled."), Out::HIGH );
-    MIL << "No remote repos." << endl;
-  }
-
-  if ( gopts.count("disable-system-resolvables") )
-  {
-    MIL << "System resolvables disabled" << endl;
-    out().info(_("Ignoring installed resolvables."), Out::HIGH );
-    _gopts.disable_system_resolvables = true;
-  }
-
-  // testing option
-  if ( (it = gopts.find("opt")) != gopts.end() )
-  {
-    cout << "Opt arg: ";
-    std::copy( it->second.begin(), it->second.end(), std::ostream_iterator<std::string>( cout, ", " ) );
-    cout << endl;
-  }
-
   // additional repositories by URL
-  if ( gopts.count("plus-repo") )
+  if ( _config.plusRepoFromCLI.size() )
   {
     switch ( command().toEnum() )
     {
@@ -835,10 +545,8 @@ void Zypper::processGlobalOptions()
     }
     default:
     {
-      std::list<std::string> repos = gopts["plus-repo"];
-
       int count = 1;
-      for ( std::list<std::string>::const_iterator it = repos.begin(); it != repos.end(); ++it )
+      for ( std::vector<std::string>::const_iterator it = _config.plusRepoFromCLI.begin(); it != _config.plusRepoFromCLI.end(); ++it )
       {
         Url url = make_url( *it );
         if (!url.isValid())
@@ -854,8 +562,8 @@ void Zypper::processGlobalOptions()
         repo.setAlias( str::Format("~plus-repo-%d") % count );
         repo.setName( url.asString() );
 
-	repo.setMetadataPath( runtimeData().tmpdir / repo.alias() / "%AUTO%" );
-	repo.setPackagesPath( Pathname::assertprefix( _gopts.root_dir, ZYPPER_RPM_CACHE_DIR ) );
+        repo.setMetadataPath( runtimeData().tmpdir / repo.alias() / "%AUTO%" );
+        repo.setPackagesPath( Pathname::assertprefix( _config.root_dir, ZYPPER_RPM_CACHE_DIR ) );
 
         _rdata.temporary_repos.push_back( repo );
         DBG << "got additional repo: " << url << endl;
@@ -866,7 +574,7 @@ void Zypper::processGlobalOptions()
   }
 
   // additional repositories by content (keywords)
-  if ( gopts.count("plus-content") )
+  if ( _config.plusContentFromCLI.size() )
   {
     switch ( command().toEnum() )
     {
@@ -885,14 +593,10 @@ void Zypper::processGlobalOptions()
     }
     default:
     {
-      const std::list<std::string> & content( gopts["plus-content"] );
-      _rdata.plusContentRepos.insert( content.begin(), content.end() );
+      _rdata.plusContentRepos.insert( _config.plusContentFromCLI.begin(), _config.plusContentFromCLI.end() );
     }
     }
   }
-
-  if ( gopts.count("ignore-unknown") )
-    _gopts.ignore_unknown = true;
 
   MIL << "DONE" << endl;
 }
@@ -904,10 +608,10 @@ void Zypper::commandShell()
 
   setRunningShell( true );
 
-  if ( _gopts.changedRoot && _gopts.root_dir != "/" )
+  if ( _config.changedRoot && _config.root_dir != "/" )
   {
     // bnc#575096: Quick fix
-    ::setenv( "ZYPP_LOCKFILE_ROOT", _gopts.root_dir.c_str(), 0 );
+    ::setenv( "ZYPP_LOCKFILE_ROOT", _config.root_dir.c_str(), 0 );
   }
 
   assertZYppPtrGod();
@@ -1152,14 +856,6 @@ void Zypper::processCommandOptions()
 
   switch ( command().toEnum() )
   {
-  // print help on help and return
-  // this should work for both, in shell and out of shell
-  case ZypperCommand::HELP_e:
-  {
-    HelpCmd::printMainHelp( *this );
-    ZYPP_THROW( ExitRequestException("help provided") );
-  }
-
   case ZypperCommand::SUBCOMMAND_e:
   {
     // This is different from other commands: Executed in main;
@@ -1231,11 +927,11 @@ void Zypper::processCommandOptions()
   // bsc#957862: pkg/apt/yum user convenience: no-confirm  ==> --non-interactive
   if ( _copts.count("no-confirm") )
   {
-    if ( ! _gopts.non_interactive )
+    if ( ! _config.non_interactive )
     {
       out().info(_("Entering non-interactive mode."), Out::HIGH );
       MIL << "Entering non-interactive mode" << endl;
-     _gopts.non_interactive = true;
+     _config.non_interactive = true;
     }
   }
 
@@ -1283,10 +979,10 @@ void Zypper::doCommand()
       break;
 
     default:
-      if ( _gopts.changedRoot && _gopts.root_dir != "/" )
+      if ( _config.changedRoot && _config.root_dir != "/" )
       {
 	// bnc#575096: Quick fix
-	::setenv( "ZYPP_LOCKFILE_ROOT", _gopts.root_dir.c_str(), 0 );
+	::setenv( "ZYPP_LOCKFILE_ROOT", _config.root_dir.c_str(), 0 );
       }
       {
 	const char *roh = getenv( "ZYPP_READONLY_HACK" );
