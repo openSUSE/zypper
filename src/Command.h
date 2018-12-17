@@ -10,6 +10,7 @@
 
 //#include<iosfwd>
 #include<string>
+#include <vector>
 
 #include "commands/basecommand.h"
 
@@ -169,6 +170,17 @@ struct ZypperCommand
     NEEDS_REBOOTING_e
   };
 
+  using CmdFactory = std::function<ZypperBaseCommandPtr ()>;
+
+  enum CmdDescField : int
+  {
+    Id = 0,
+    Category,
+    Alias,
+    Factory
+  };
+  using CmdDesc = std::tuple< ZypperCommand::Command, std::string, std::vector<std::string>, CmdFactory >;
+
   ZypperCommand( Command command );
 
   explicit ZypperCommand( const std::string & strval_r );
@@ -178,6 +190,8 @@ struct ZypperCommand
   const std::string & asString() const;
 
   ZypperBaseCommandPtr commandObject() const;
+
+  static const std::vector<CmdDesc> &allCommands ();
 
 private:
   /** Fills SubcommandOptions::Detected on the fly if SUBCOMMAND */

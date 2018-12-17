@@ -823,5 +823,9 @@ void stringsContainer ()
       "\n"
       "This command has no additional options.\n"
     );
+
+    _("Print help.");
+    _("Repository Options:");
+    _("Target Options:");
     #endif
 }
