@@ -35,6 +35,7 @@
 #include "commands/nullcommands.h"
 #include "commands/configtest.h"
 #include "commands/shell.h"
+#include "commands/help.h"
 
 using namespace zypp;
 
@@ -47,113 +48,98 @@ using namespace zypp;
 ///////////////////////////////////////////////////////////////////
 namespace
 {
-  template<typename T, typename AliasType, AliasType t>
-  ZypperBaseCommandPtr commandAliasFactory ( const std::vector<std::string> &aliases_r )
-  {
-    return std::make_shared<T> ( aliases_r, t );
+  template < typename T, typename ... Args >
+  ZypperCommand::CmdDesc makeCmd ( ZypperCommand::Command comm, const std::string &category, std::vector<std::string> &&aliases, Args&&... args ) {
+    return std::make_tuple(comm, category, aliases,
+      ZypperCommand::CmdFactory( [ aliases, args... ]() {
+        return std::make_shared<T>( aliases, args... );
+      })
+    );
   }
 
-  template<typename T>
-  ZypperBaseCommandPtr commandFactory ( const std::vector<std::string> &aliases_r )
-  {
-    return std::make_shared<T> ( aliases_r );
-  }
-
-  //Empty command object for NONE_e
-  template<>
-  ZypperBaseCommandPtr commandFactory<void> ( const std::vector<std::string> & )
+  ZypperBaseCommandPtr voidCmd ( )
   {
     ZYPP_THROW( ExitRequestException( str::form(_("Invalid command") ) ) );
     return ZypperBaseCommandPtr();
   }
 
-  struct CommandFactory {
-    std::vector<std::string> aliases;
-    std::function<ZypperBaseCommandPtr ( const std::vector<std::string> & )> constructor;
-
-    ZypperBaseCommandPtr operator ()()
-    {
-      return constructor( aliases );
-    }
-
-    template <typename T >
-    static CommandFactory make ( const std::vector<std::string> &aliases_r )
-    {
-      return CommandFactory { aliases_r, commandFactory<T> };
-    }
-
-    template < typename T, typename AliasType, AliasType t >
-    static CommandFactory makeAlias ( const std::vector<std::string> &aliases_r )
-    {
-      return CommandFactory { aliases_r, commandAliasFactory<T, AliasType, t> };
-    }
-  };
 
   //@TODO hack for now, this should be migrated to be part of Zypper class directly instead of a
   //singleton
-  static std::map< ZypperCommand::Command, CommandFactory > &newStyleCommands ()
+  static std::vector< ZypperCommand::CmdDesc > &newStyleCommands ()
   {
-    static std::map< ZypperCommand::Command,  CommandFactory> table {
-      { ZypperCommand::NONE_e,        CommandFactory::make<void>( { "none",       ""}) },
-      { ZypperCommand::LIST_LOCKS_e,  CommandFactory::make<ListLocksCmd>( { "locks",       "ll", "lock-list"          }) },
-      { ZypperCommand::ADD_LOCK_e,    CommandFactory::make<AddLocksCmd>({ "addlock",     "al", "lock-add",     "la" }) },
-      { ZypperCommand::REMOVE_LOCK_e, CommandFactory::make<RemoveLocksCmd>({ "removelock",  "rl", "lock-delete" , "ld" }) },
-      { ZypperCommand::CLEAN_LOCKS_e, CommandFactory::make<CleanLocksCmd> ({ "cleanlocks" , "cl", "lock-clean"         }) },
+    /// The commands here are in a specific order, do not change that unless you know what you are doing
+    /// Every command that has a category string will start a new category in the help output, all following
+    /// commands are in the last started category until a new one is found.
+    /// All commands that follow the HIDDEN category will not be shown in the help output.
+    static std::vector< ZypperCommand::CmdDesc > commands {
 
-      { ZypperCommand::LIST_SERVICES_e, CommandFactory::make<ListServicesCmd>( { "services", "ls", "service-list", "sl" } ) },
-      { ZypperCommand::REFRESH_SERVICES_e, CommandFactory::make<RefreshServicesCmd>( { "refresh-services", "refs" } ) },
-      { ZypperCommand::MODIFY_SERVICE_e, CommandFactory::make<ModifyServiceCmd>( { "modifyservice", "ms" } ) }, //<<
-      { ZypperCommand::REMOVE_SERVICE_e, CommandFactory::make<RemoveServiceCmd>( { "removeservice", "rs", "service-delete", "sd" } ) },
-      { ZypperCommand::ADD_SERVICE_e, CommandFactory::make<AddServiceCmd>( { "addservice", "as", "service-add", "sa" } ) },
+      makeCmd<HelpCmd> ( ZypperCommand::HELP_e, std::string(), { "help", "?" } ),
+      makeCmd<ShellCmd>( ZypperCommand::SHELL_e, std::string(), { "shell", "sh" } ),
 
-      { ZypperCommand::LIST_REPOS_e, CommandFactory::make<ListReposCmd>( {"repos", "lr", "catalogs","ca"} ) },
-      { ZypperCommand::ADD_REPO_e, CommandFactory::make<AddRepoCmd>( { "addrepo", "ar" } ) },
-      { ZypperCommand::REMOVE_REPO_e, CommandFactory::make<RemoveRepoCmd>( { "removerepo", "rr" } ) },
-      { ZypperCommand::RENAME_REPO_e, CommandFactory::make<RenameRepoCmd>( { "renamerepo", "nr" } ) },
-      { ZypperCommand::MODIFY_REPO_e, CommandFactory::make<ModifyRepoCmd>( { "modifyrepo", "mr" } ) },
-      { ZypperCommand::REFRESH_e, CommandFactory::make<RefreshRepoCmd>( { "refresh", "ref" } ) },
-      { ZypperCommand::CLEAN_e, CommandFactory::make<CleanRepoCmd>( { "clean", "cc", "clean-cache", "you-clean-cache", "yc" } ) },
+      makeCmd<ListReposCmd> ( ZypperCommand::LIST_REPOS_e, _("Repository Management:"), {"repos", "lr", "catalogs","ca"} ),
+      makeCmd<AddRepoCmd>   ( ZypperCommand::ADD_REPO_e , std::string() , { "addrepo", "ar" }),
+      makeCmd<RemoveRepoCmd> ( ZypperCommand::REMOVE_REPO_e , std::string(), { "removerepo", "rr" } ),
+      makeCmd<RenameRepoCmd> ( ZypperCommand::RENAME_REPO_e , std::string(), { "renamerepo", "nr" } ),
+      makeCmd<ModifyRepoCmd> ( ZypperCommand::MODIFY_REPO_e , std::string(), { "modifyrepo", "mr" } ),
+      makeCmd<RefreshRepoCmd> ( ZypperCommand::REFRESH_e , std::string(), { "refresh", "ref" } ),
+      makeCmd<CleanRepoCmd> ( ZypperCommand::CLEAN_e , std::string(), { "clean", "cc", "clean-cache", "you-clean-cache", "yc" } ),
 
-      { ZypperCommand::PS_e, CommandFactory::make<PSCommand>( { "ps" }) },
-      { ZypperCommand::NEEDS_REBOOTING_e, CommandFactory::make<NeedsRebootingCmd>( { "needs-rebooting" }) },
-      { ZypperCommand::TARGET_OS_e, CommandFactory::make<TargetOSCmd>( { "targetos", "tos" } ) },
-      { ZypperCommand::VERSION_CMP_e, CommandFactory::make<VersionCompareCmd>( { "versioncmp", "vcmp" } ) },
-      { ZypperCommand::LICENSES_e, CommandFactory::make<LicensesCmd>( { "licenses" } ) },
-      { ZypperCommand::DOWNLOAD_e, CommandFactory::make<DownloadCmd>( { "download" } ) },
-      { ZypperCommand::SOURCE_DOWNLOAD_e, CommandFactory::make<SourceDownloadCmd>( { "source-download" } ) },
+      makeCmd<ListServicesCmd> ( ZypperCommand::LIST_SERVICES_e , _("Service Management:"), { "services", "ls", "service-list", "sl" } ),
+      makeCmd<AddServiceCmd> ( ZypperCommand::ADD_SERVICE_e , std::string(),  { "addservice", "as", "service-add", "sa" } ),
+      makeCmd<ModifyServiceCmd> ( ZypperCommand::MODIFY_SERVICE_e , std::string(), { "modifyservice", "ms" } ),
+      makeCmd<RemoveServiceCmd> ( ZypperCommand::REMOVE_SERVICE_e , std::string(), { "removeservice", "rs", "service-delete", "sd" } ),
+      makeCmd<RefreshServicesCmd> ( ZypperCommand::REFRESH_SERVICES_e , std::string(), { "refresh-services", "refs" } ),
 
-      { ZypperCommand::INFO_e,             CommandFactory::make<InfoCmd>( { "info", "if" } ) },
-      { ZypperCommand::RUG_PATCH_INFO_e,   CommandFactory::makeAlias<InfoCmd, InfoCmd::Mode, InfoCmd::Mode::RugPatchInfo>( { "patch-info" } ) },
-      { ZypperCommand::RUG_PATTERN_INFO_e, CommandFactory::makeAlias<InfoCmd, InfoCmd::Mode, InfoCmd::Mode::RugPatternInfo>( { "pattern-info" } ) },
-      { ZypperCommand::RUG_PRODUCT_INFO_e, CommandFactory::makeAlias<InfoCmd, InfoCmd::Mode, InfoCmd::Mode::RugProductInfo>( { "product-info" } ) },
-      { ZypperCommand::PACKAGES_e,         CommandFactory::make<PackagesCmd>( { "packages", "pa", "pkg" } ) },
-      { ZypperCommand::PATCHES_e,          CommandFactory::make<PatchesCmd>( { "patches", "pch" } ) },      { ZypperCommand::PATTERNS_e,         CommandFactory::make<PatternsCmd>( { "patterns", "pt" } ) },
-      { ZypperCommand::PRODUCTS_e,         CommandFactory::make<ProductsCmd>( { "products", "pd" } ) },
+      makeCmd<InstallCmd> ( ZypperCommand::INSTALL_e , _("Software Management:"), { "install", "in" } ),
+      makeCmd<RemoveCmd> ( ZypperCommand::REMOVE_e , std::string(), { "remove", "rm" } ),
+      makeCmd<InrVerifyCmd> ( ZypperCommand::VERIFY_e , std::string(), { "verify", "ve" }, InrVerifyCmd::Mode::Verify ),
+      makeCmd<SourceInstallCmd> ( ZypperCommand::SRC_INSTALL_e , std::string(), { "source-install", "si" } ),
+      makeCmd<InrVerifyCmd> ( ZypperCommand::INSTALL_NEW_RECOMMENDS_e , std::string(), { "install-new-recommends", "inr" }, InrVerifyCmd::Mode::InstallRecommends ),
 
-      { ZypperCommand::INSTALL_e,          CommandFactory::make<InstallCmd>( { "install", "in" } ) },
-      { ZypperCommand::REMOVE_e,           CommandFactory::make<RemoveCmd>(  { "remove", "rm" } ) },
-      { ZypperCommand::SRC_INSTALL_e,      CommandFactory::make<SourceInstallCmd>( { "source-install", "si" } ) },
-      { ZypperCommand::DIST_UPGRADE_e,     CommandFactory::make<DistUpgradeCmd>( { "dist-upgrade", "dup" } ) },
-      { ZypperCommand::VERIFY_e,           CommandFactory::makeAlias<InrVerifyCmd, InrVerifyCmd::Mode, InrVerifyCmd::Mode::Verify>( { "verify", "ve" } ) },
-      { ZypperCommand::INSTALL_NEW_RECOMMENDS_e, CommandFactory::makeAlias<InrVerifyCmd, InrVerifyCmd::Mode, InrVerifyCmd::Mode::InstallRecommends>( { "install-new-recommends", "inr" } ) },
-      { ZypperCommand::PATCH_e,            CommandFactory::make<PatchCmd> ( { "patch"  } ) },
-      { ZypperCommand::UPDATE_e,           CommandFactory::make<UpdateCmd> ( { "update", "up"  } ) },
-      { ZypperCommand::PATCH_CHECK_e,      CommandFactory::make<PatchCheckCmd> ( { "patch-check", "pchk"} ) },
-      { ZypperCommand::LIST_PATCHES_e,     CommandFactory::make<ListPatchesCmd> ( { "list-patches", "lp" } ) },
-      { ZypperCommand::LIST_UPDATES_e,     CommandFactory::make<ListUpdatesCmd> ( { "list-updates", "lu" } ) },
+      makeCmd<UpdateCmd> ( ZypperCommand::UPDATE_e , _("Update Management:"), { "update", "up"  } ),
+      makeCmd<ListUpdatesCmd> ( ZypperCommand::LIST_UPDATES_e , std::string(), { "list-updates", "lu" } ),
+      makeCmd<PatchCmd> ( ZypperCommand::PATCH_e , std::string(), { "patch"  } ),
+      makeCmd<ListPatchesCmd> ( ZypperCommand::LIST_PATCHES_e , std::string(), { "list-patches", "lp" } ),
+      makeCmd<DistUpgradeCmd> ( ZypperCommand::DIST_UPGRADE_e , std::string(), { "dist-upgrade", "dup" } ),
+      makeCmd<PatchCheckCmd> ( ZypperCommand::PATCH_CHECK_e , std::string(), { "patch-check", "pchk"} ),
 
-      { ZypperCommand::SEARCH_e,           CommandFactory::makeAlias<SearchCmd, SearchCmd::CmdMode, SearchCmd::CmdMode::Search>( { "search", "se" } ) },
-      { ZypperCommand::RUG_PATCH_SEARCH_e, CommandFactory::makeAlias<SearchCmd, SearchCmd::CmdMode, SearchCmd::CmdMode::RugPatchSearch>( { "patch-search", "pse" } ) },
+      makeCmd<SearchCmd> ( ZypperCommand::SEARCH_e , _("Querying:"), { "search", "se" }, SearchCmd::CmdMode::Search ),
+      makeCmd<InfoCmd> ( ZypperCommand::INFO_e , std::string(), { "info", "if" } ),
+      makeCmd<InfoCmd> ( ZypperCommand::RUG_PATCH_INFO_e , std::string(), { "patch-info" }, InfoCmd::Mode::RugPatchInfo ),
+      makeCmd<InfoCmd> ( ZypperCommand::RUG_PATTERN_INFO_e , std::string(), { "pattern-info" }, InfoCmd::Mode::RugPatternInfo ),
+      makeCmd<InfoCmd> ( ZypperCommand::RUG_PRODUCT_INFO_e , std::string(), { "product-info" }, InfoCmd::Mode::RugProductInfo ),
+      makeCmd<PatchesCmd> ( ZypperCommand::PATCHES_e , std::string(), { "patches", "pch" } ),
+      makeCmd<PackagesCmd> ( ZypperCommand::PACKAGES_e , std::string(), { "packages", "pa", "pkg" } ),
+      makeCmd<PatternsCmd> ( ZypperCommand::PATTERNS_e , std::string(), { "patterns", "pt" } ),
+      makeCmd<ProductsCmd> ( ZypperCommand::PRODUCTS_e , std::string(), { "products", "pd" } ),
+      makeCmd<WhatProvidesCmd> ( ZypperCommand::WHAT_PROVIDES_e , std::string(), { "what-provides", "wp" } ),
 
-      { ZypperCommand::MOO_e,              CommandFactory::make<MooCmd>( { "moo" } ) },
-      { ZypperCommand::WHAT_PROVIDES_e,    CommandFactory::make<WhatProvidesCmd>( { "what-provides", "wp" } ) },
-      { ZypperCommand::CONFIGTEST_e,       CommandFactory::make<ConfigTestCmd>( { "configtest" } ) },
-      { ZypperCommand::RUG_PING_e,         CommandFactory::make<RupPingCmd>( { "ping" } ) },
+      makeCmd<AddLocksCmd> ( ZypperCommand::ADD_LOCK_e , _("Package Locks:"), { "addlock", "al", "lock-add", "la" } ),
+      makeCmd<RemoveLocksCmd> ( ZypperCommand::REMOVE_LOCK_e , std::string(), { "removelock",  "rl", "lock-delete" , "ld" } ),
+      makeCmd<ListLocksCmd> ( ZypperCommand::LIST_LOCKS_e , std::string(), { "locks", "ll", "lock-list" } ),
+      makeCmd<CleanLocksCmd> ( ZypperCommand::CLEAN_LOCKS_e , std::string(), { "cleanlocks" , "cl", "lock-clean" } ),
 
-      { ZypperCommand::SHELL_e,            CommandFactory::make<ShellCmd>( { "shell", "sh" } ) },
-      { ZypperCommand::SHELL_QUIT_e,       CommandFactory::make<ShellQuitCmd>( { "quit", "exit", "\004" } ) }
+      makeCmd<VersionCompareCmd> ( ZypperCommand::VERSION_CMP_e , _("Other Commands:"), { "versioncmp", "vcmp" } ),
+      makeCmd<TargetOSCmd> ( ZypperCommand::TARGET_OS_e , std::string(), { "targetos", "tos" } ),
+      makeCmd<LicensesCmd> ( ZypperCommand::LICENSES_e , std::string(), { "licenses" } ),
+      makeCmd<DownloadCmd> ( ZypperCommand::DOWNLOAD_e , std::string(), { "download" } ),
+      makeCmd<SourceDownloadCmd> ( ZypperCommand::SOURCE_DOWNLOAD_e , std::string(), { "source-download" } ),
+      makeCmd<NeedsRebootingCmd> ( ZypperCommand::NEEDS_REBOOTING_e , std::string(), { "needs-rebooting" } ),
+
+      //SUBCOMMAND GROUP HERE
+
+      //all commands in this group will be hidden from help
+      makeCmd<PSCommand> ( ZypperCommand::PS_e , "HIDDEN", { "ps" } ),
+      makeCmd<SearchCmd> ( ZypperCommand::RUG_PATCH_SEARCH_e , std::string(), { "patch-search", "pse" }, SearchCmd::CmdMode::RugPatchSearch ),
+      makeCmd<ConfigTestCmd> ( ZypperCommand::CONFIGTEST_e , std::string(), { "configtest" } ),
+      makeCmd<RupPingCmd> ( ZypperCommand::RUG_PING_e , std::string(), { "ping" } ),
+      makeCmd<ShellQuitCmd> ( ZypperCommand::SHELL_QUIT_e , std::string(), { "quit", "exit", "\004" } ),
+      makeCmd<MooCmd> ( ZypperCommand::MOO_e , std::string(), { "moo" } ),
+      std::make_tuple ( ZypperCommand::NONE_e, std::string(), std::vector<std::string>{ "none", ""}, ZypperCommand::CmdFactory( voidCmd ) )
     };
-    return table;
+
+    return commands;
   }
 
   static NamedValue<ZypperCommand::Command> & cmdTable()
@@ -215,7 +201,7 @@ namespace
       //_t( DOWNLOAD_e )		| "download";
       //_t( SOURCE_DOWNLOAD_e )	| "source-download";
 
-      _t( HELP_e )		| "help"		| "?";
+      //_t( HELP_e )		| "help"		| "?";
       //_t( SHELL_e )		| "shell"		| "sh";
       //_t( SHELL_QUIT_e )	| "quit"		| "exit" | "\004";
       //_t( MOO_e )		| "moo";
@@ -231,8 +217,8 @@ namespace
 
       // patch the table to contain all new style commands
       for ( const auto &cmd : newStyleCommands() ) {
-        auto entry = _table(cmd.first);
-        for ( const std::string &alias : cmd.second.aliases)
+        auto entry = _table( std::get< ZypperCommand::CmdDescField::Id >( cmd ) );
+        for ( const std::string &alias : std::get< ZypperCommand::CmdDescField::Alias >( cmd ) )
           entry | alias;
       }
     }
@@ -342,9 +328,19 @@ ZypperBaseCommandPtr ZypperCommand::commandObject() const
   if ( !_newStyleCmdObj ) {
     //set the command object if the passed enum represents a new style cmd
     auto &newCmds = newStyleCommands();
-    if ( newCmds.find( _command ) != newCmds.end() ) {
-      _newStyleCmdObj = newCmds[_command]();
-    }
+
+    auto predicate = [ this ]( const CmdDesc &desc ) {
+      return _command == std::get< CmdDescField::Id >( desc );
+    };
+
+    auto i = std::find_if( newCmds.begin(), newCmds.end(), predicate );
+    if ( i != newCmds.end() )
+      _newStyleCmdObj = std::get< CmdDescField::Factory >(*i)();
   }
   return _newStyleCmdObj;
+}
+
+const std::vector<ZypperCommand::CmdDesc> &ZypperCommand::allCommands()
+{
+  return newStyleCommands();
 }
