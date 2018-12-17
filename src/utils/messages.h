@@ -35,6 +35,9 @@ void print_usage(Out & out, const std::string & command_help);
 
 void print_verify_hint(Out & out);
 
+/** Prints a error about deprecated rug compatibility and exists */
+void exit_rug_compat ();
+
 enum class LegacyCLIMsgType {
   Local,
   Global,

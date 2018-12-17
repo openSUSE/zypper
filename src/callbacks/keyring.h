@@ -454,7 +454,7 @@ namespace zypp
       }
 
     private:
-      const GlobalOptions & _gopts;
+      const Config & _gopts;
     };
 
     ///////////////////////////////////////////////////////////////////
@@ -536,7 +536,7 @@ namespace zypp
       }
 
     private:
-      const GlobalOptions & _gopts;
+      const Config & _gopts;
     };
 
    ///////////////////////////////////////////////////////////////////

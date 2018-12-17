@@ -84,7 +84,7 @@ Value TriBoolType(TriBool &target, StoreFlag store, const boost::optional<TriBoo
   );
 }
 
-Value CounterType(int *target, const boost::optional<int> &defValue, const boost::optional<int> &maxValue)
+Value CounterType(int *target, const boost::optional<int> &defValue, const boost::optional<int> &maxValue, bool failOnOverflow)
 {
   return Value (
         [defValue]() -> boost::optional<std::string>{
@@ -94,10 +94,14 @@ Value CounterType(int *target, const boost::optional<int> &defValue, const boost
             return boost::optional<std::string>();
         },
 
-        [target, maxValue]( const CommandOption &opt, const boost::optional<std::string> & ) {
+        [target, maxValue, failOnOverflow]( const CommandOption &opt, const boost::optional<std::string> & ) {
+          if ( maxValue && (*target) + 1 > *maxValue) {
+            if ( failOnOverflow )
+              ZYPP_THROW(ZyppFlagsException(str::Format(_("The flag '%1%' can only be used a maximum of %2% times.")) % opt.name % *maxValue));
+            else
+              return;
+          }
           *target += 1;
-          if ( maxValue && *target > *maxValue)
-            ZYPP_THROW(ZyppFlagsException(str::Format(_("The flag '%1%' can only be used a maximum of %2% times.")) % opt.name % *maxValue));
         }
   );
 }

@@ -1,4 +1,4 @@
-/*---------------------------------------------------------------------------*\
+﻿/*---------------------------------------------------------------------------*\
                           ____  _ _ __ _ __  ___ _ _
                          |_ / || | '_ \ '_ \/ -_) '_|
                          /__|\_, | .__/ .__/\___|_|
@@ -94,6 +94,11 @@ namespace ZyppFlags {
     void set( const CommandOption &opt, const boost::optional<std::string> in );
 
     /**
+     * Calls the \sa never hook, the option was never given on CLI
+     */
+    void neverUsed ();
+
+    /**
      * Returns the default value represented as string, or a empty
      * boost::optional if no default value is given
      */
@@ -108,9 +113,25 @@ namespace ZyppFlags {
 
     bool wasSet () const;
 
+    /**
+     * Callback to call before writing the value
+     */
     Value &before( PreWriteHook &&preWriteHook );
+
+    /**
+     * Callback to call after writing the value
+     */
     Value &after ( PostWriteHook &&postWriteHook );
+
+    /**
+     * Callback to call after writing the value
+     */
     Value &after ( std::function<void ()> &&postWriteHook );
+
+    /**
+     * Callback to call in case the option was never seen
+     */
+    Value &notSeen ( std::function<void ()> &&notFoundHook );
 
   private:
     bool _wasSet = false;
@@ -119,6 +140,7 @@ namespace ZyppFlags {
     std::string _argHint;
     std::vector<PreWriteHook>  _preWriteHook;
     std::vector<PostWriteHook> _postWriteHook;
+    std::function<void ()> _notFoundHook;
   };
 
   struct CommandOption
@@ -134,6 +156,9 @@ namespace ZyppFlags {
       dependencies = deps;
       return *this;
     }
+
+    std::string optionHelp () const;
+    std::string flagDesc   ( bool shortOptFirst = true ) const;
 
     std::string name;
     char  shortName;

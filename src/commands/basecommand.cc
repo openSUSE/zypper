@@ -285,29 +285,7 @@ std::string ZypperBaseCommand::help()
   help.description(description());
 
   auto renderOption = [&help]( const ZyppFlags::CommandOption &opt ) {
-    std::string optTxt;
-    if ( opt.shortName )
-      optTxt.append( str::Format("-%1%, ") % opt.shortName);
-    optTxt.append("--").append(opt.name);
-
-    std::string argSyntax = opt.value.argHint();
-    if ( argSyntax.length() ) {
-      if ( opt.flags & ZyppFlags::OptionalArgument )
-        optTxt.append("[=");
-      else
-        optTxt.append(" <");
-      optTxt.append(argSyntax);
-      if ( opt.flags & ZyppFlags::OptionalArgument )
-        optTxt.append("]");
-      else
-        optTxt.append(">");
-    }
-
-    std::string optHelpTxt = opt.help;
-    auto defVal = opt.value.defaultValue();
-    if ( defVal )
-      optHelpTxt.append(" ").append(str::Format(("Default: %1%")) %*defVal );
-    help.option(optTxt, optHelpTxt);
+    help.option( opt.flagDesc(), opt.optionHelp() );
   };
 
   //all the options we have

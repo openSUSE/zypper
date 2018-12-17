@@ -114,6 +114,11 @@ void Value::set( const CommandOption &opt, const boost::optional<std::string> in
   ZYPP_THROW( ZyppFlagsException(str::Format("BUG: Flag %1% requires a value, but non was provided.") % opt.name ) );
 }
 
+void Value::neverUsed()
+{
+  if ( _notFoundHook )
+    _notFoundHook();
+}
 
 boost::optional<std::string> Value::defaultValue() const
 {
@@ -135,6 +140,12 @@ Value &Value::after( std::function<void ()> &&postWriteHook )
   return after ( [ postWriteHook ] ( const CommandOption &, const boost::optional<std::string> & ) {
     postWriteHook();
   } );
+}
+
+Value &Value::notSeen( std::function<void ()> &&notFoundHook )
+{
+  _notFoundHook = notFoundHook;
+  return *this;
 }
 
 Value & Value::before( PreWriteHook &&preWriteHook )
@@ -212,7 +223,7 @@ int parseCLI( const int argc, char * const *argv, const std::vector<CommandGroup
    * approach to find directly writeable flags.
    *
    * A flag is considered directly writeable if it either has no dependencies,
-   * the dependencies where not used on CLI  or all dependencies are solved already.
+   * or all dependencies are solved already.
    * We keep track of solved flags in a simple set.
    *
    * Consider the following dependency tree (read from top down):
@@ -236,13 +247,13 @@ int parseCLI( const int argc, char * const *argv, const std::vector<CommandGroup
    *
    * The first pass through will write
    *    B, C, and F
-   * Second pass through can write
+   * Second pass through
    *    A, E
    * Third pass through
    *    D
    *
    * We keep track of the number of values to be written, if the number
-   * does not change during a pass through something is the dependency chain is broken
+   * does not change during a pass through something in the dependency chain is broken
    * we need to give up, since its most likely to be a circular dependency problem we can
    * try to detect that and give a hint by throwing a exception
    */
@@ -368,13 +379,8 @@ int parseCLI( const int argc, char * const *argv, const std::vector<CommandGroup
     return ( flagsSolved.find( flagIdx ) != flagsSolved.end() );
   };
 
-  //first mark all flags as solved that where not specified on cli
-  for ( const auto &node : dependencyTree ) {
-    if ( parsedValues.find( node.first ) == parsedValues.end() )
-      flagsSolved.insert( node.first );
-  }
-
-  while ( parsedValues.size() ) {
+  //we need to run util all flags were solved
+  while ( flagsSolved.size() < allOpts.size() ) {
 
     std::vector<int> writeableFlags;
 
@@ -382,9 +388,6 @@ int parseCLI( const int argc, char * const *argv, const std::vector<CommandGroup
 
       //all values for that flag where written
       if ( flagsSolved.find( node.first ) != flagsSolved.end() )
-        continue;
-      //no values for that flag where given on CLI
-      if ( parsedValues.find( node.first ) == parsedValues.end() )
         continue;
 
       std::vector<CommandOption *> opts;
@@ -441,13 +444,21 @@ int parseCLI( const int argc, char * const *argv, const std::vector<CommandGroup
 
     //finally we can write the values
     for ( int flag : writeableFlags ) {
-      for ( const auto & val : parsedValues.at( flag ) ) {
-        allOpts[flag].value.set( allOpts[flag], val );
+      if ( parsedValues.find( flag ) == parsedValues.end() ) {
+        //trigger the "neverUsed" callback if registered
+        allOpts[flag].value.neverUsed();
+      } else {
+        for ( const auto & val : parsedValues.at( flag ) ) {
+          allOpts[flag].value.set( allOpts[flag], val );
+        }
       }
       flagsSolved.insert( flag );
       parsedValues.erase( flag );
     }
   }
+
+  if ( parsedValues.size() )
+    ZYPP_THROW( ZyppFlagsException ("Not all parsed values were handled") );
 
   return optind;
 }
@@ -499,8 +510,45 @@ CommandOption::CommandOption( std::string &&name_r, char shortName_r, int flags_
     shortName ( shortName_r ),
     flags ( flags_r ),
     value ( std::move(value_r) ),
-    help ( std::move(help_r) )
+help ( std::move(help_r) )
 { }
+
+std::string CommandOption::optionHelp() const
+{
+  std::string optHelpTxt = help;
+  auto defVal = value.defaultValue();
+  if ( defVal )
+    optHelpTxt.append(" ").append(str::Format(("Default: %1%")) %*defVal );
+  return optHelpTxt;
+}
+
+std::string CommandOption::flagDesc( bool shortOptFirst ) const
+{
+  std::string optTxt;
+
+  if ( shortName ) {
+    if ( shortOptFirst )
+      optTxt.append( str::Format("-%1%, --%2%") % shortName % name);
+    else
+      optTxt.append( str::Format("--%1%, -%2%") % name % shortName);
+  } else {
+    optTxt.append("--").append( name );
+  }
+
+  std::string argSyntax = value.argHint();
+  if ( argSyntax.length() ) {
+    if ( flags & ZyppFlags::OptionalArgument )
+      optTxt.append("[=");
+    else
+      optTxt.append(" <");
+    optTxt.append(argSyntax);
+    if ( flags & ZyppFlags::OptionalArgument )
+      optTxt.append("]");
+    else
+      optTxt.append(">");
+  }
+  return optTxt;
+}
 
 CommandGroup::CommandGroup( std::string &&name_r, std::vector<CommandOption> &&options_r, ConflictingFlagsList &&conflictingOptions_r )
   : name ( std::move(name_r) ),
