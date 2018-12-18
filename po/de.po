@@ -17,16 +17,16 @@ msgstr ""
 "Project-Id-Version: zypper.de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-12-10 19:36+0100\n"
-"PO-Revision-Date: 2018-11-28 17:02+0000\n"
+"PO-Revision-Date: 2018-12-18 10:47+0000\n"
 "Last-Translator: Sarah Kriesch <ada.lovelace@gmx.de>\n"
-"Language-Team: German <https://l10n.opensuse.org/projects/zypper/master/de/"
-">\n"
+"Language-Team: German <https://l10n.opensuse.org/projects/zypper/master/de/>"
+"\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 2.18\n"
+"X-Generator: Weblate 3.2.2\n"
 
 #: src/SolverRequester.h:52
 #, boost-format
@@ -615,6 +615,7 @@ msgstr ""
 #: src/commands/commonflags.h:53
 msgid "Consider only patches which affect the package management itself."
 msgstr ""
+"Nur Patches in Erwägung ziehen, die das Paketmanagement selbst beeinflussen."
 
 #: src/output/Out.h:26 src/repos.cc:125 src/repos.cc:153
 msgid "Yes"
@@ -743,7 +744,7 @@ msgstr "Fehler"
 
 #: src/Command.cc:62
 msgid "Invalid command"
-msgstr ""
+msgstr "Ungültiges Kommando"
 
 #: src/Command.cc:317
 #, c-format, boost-format
@@ -2821,7 +2822,7 @@ msgstr "Alle Pakete auflisten, die die angegebene Funktion bieten."
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:1856
 msgid "moo"
-msgstr ""
+msgstr "moo"
 
 #. translators: command description
 #: src/Zypper.cc:1859
@@ -2831,7 +2832,7 @@ msgstr "Tier anzeigen."
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:1875
 msgid "quit (exit, ^D)"
-msgstr ""
+msgstr "quit (exit, ^D)"
 
 #. translators: command description
 #: src/Zypper.cc:1878
@@ -2855,7 +2856,7 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:1903
 msgid "shell (sh)"
-msgstr ""
+msgstr "shell (sh)"
 
 #. translators: command description
 #: src/Zypper.cc:1906
@@ -3091,11 +3092,11 @@ msgstr "Passwort"
 
 #: src/commands/basecommand.cc:106
 msgid "Option program arguments: "
-msgstr ""
+msgstr "Option Programm-Argumente: "
 
 #: src/commands/conditions.cc:19
 msgid "Root privileges are required to run this command."
-msgstr ""
+msgstr "Root-Rechte werden benötigt um dieses Kommando auszuführen."
 
 #: src/commands/conditions.cc:47
 msgid ""
@@ -3368,7 +3369,7 @@ msgstr "Problem beim Hinzufügen der Paketsperre:"
 # =============================================================================
 #: src/commands/locks/clean.cc:16
 msgid "cleanlocks (cl)"
-msgstr ""
+msgstr "cleanlocks (cl)"
 
 #. translators: command summary
 #: src/commands/locks/clean.cc:18
@@ -3513,24 +3514,26 @@ msgstr ""
 
 #: src/commands/needs-rebooting.cc:49
 msgid "Core libraries or services have been updated."
-msgstr ""
+msgstr "Core-Bibliotheken oder Dienste wurden aktualisiert."
 
 #: src/commands/needs-rebooting.cc:50
 msgid ""
 "Reboot is required to ensure that your system benefits from these updates."
 msgstr ""
+"Ein Neustart wird benötigt, um sicher zu stellen, dass ihr System von diesen "
+"Updates profitiert."
 
 #: src/commands/needs-rebooting.cc:53
 msgid "No core libraries or services have been updated."
-msgstr ""
+msgstr "Keine Core-Bibliotheken oder Dienste wurden aktualisiert."
 
 #: src/commands/needs-rebooting.cc:54
 msgid "Reboot is probably not necessary."
-msgstr ""
+msgstr "Ein Neustart ist wahrscheinlich nicht notwendig."
 
 #: src/commands/optionsets.cc:33
 msgid "Don't change anything, just report what would be done."
-msgstr ""
+msgstr "Nichts ändern. Nur berichten, was gemacht worden wäre."
 
 #. translators: -r, --repo <ALIAS|#|URI>
 #: src/commands/optionsets.cc:65
@@ -3540,7 +3543,7 @@ msgstr "Nur mit dem angegebenen Repository arbeiten."
 #: src/commands/optionsets.cc:85
 #, c-format, boost-format
 msgid "Option '--%s' overrides a previously set download mode."
-msgstr ""
+msgstr "Option '--%s' überschreibt einen vorher gesetzten Download-Modus."
 
 #: src/commands/optionsets.cc:114
 #, c-format, boost-format
