@@ -1,4 +1,16 @@
 -------------------------------------------------------------------
+Tue Dec 18 14:06:02 CET 2018 - ma@suse.de
+
+- CLI parser: fix broken initialization enforcing 'select by name'
+  (bsc#1119820)
+- zypper.conf: [commit] autoAgreeWithLicenses {=false} (fixes #220)
+- locks: Fix printing of versioned locks (bsc#1112911)
+- locks: create and write versioned locks correctly (bsc#1112911)
+- patch: --with update may implicitly assume --with-optional
+  (bsc#1102261)
+- version 1.14.19
+
+-------------------------------------------------------------------
 Tue Dec 11 11:31:04 CET 2018 - ma@suse.de
 
 - no-recommends: Nevertheless consider resolver namespaces (hardware,
