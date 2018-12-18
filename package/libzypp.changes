@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Dec 18 14:01:19 CET 2018 - ma@suse.de
+
+- Simplify complex locks so zypper can display them (bsc#1112911)
+- version 17.10.3 (9)
+
+-------------------------------------------------------------------
 Mon Dec 10 16:57:34 CET 2018 - ma@suse.de
 
 - commit: set `SYSTEMD_OFFLINE=1` during chrooted commits (bsc#1118758)
