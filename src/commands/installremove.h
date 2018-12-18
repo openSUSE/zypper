@@ -26,7 +26,7 @@ protected:
   std::set<zypp::ResKind> _kinds;
 
   bool _details       = false;
-  bool _selectByName  = true;
+  bool _selectByName  = false;
   bool _selectByCap   = false;
 
   InitReposOptionSet _initRepos { *this };
