@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-12-18 13:53+0100\n"
-"PO-Revision-Date: 2018-12-10 22:38+0000\n"
+"PO-Revision-Date: 2018-12-19 07:56+0000\n"
 "Last-Translator: Yasuhiko Kamata <belphegor@belbel.or.jp>\n"
 "Language-Team: Japanese <https://l10n.opensuse.org/projects/zypper/master/ja/"
 ">\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 2.18\n"
+"X-Generator: Weblate 3.2.2\n"
 
 #: src/SolverRequester.h:52
 #, boost-format
@@ -3011,7 +3011,7 @@ msgstr "能力設定ではなく、単に名前でパッケージを指定しま
 
 #: src/commands/installremove.cc:55
 msgid "Select packages solely by capability."
-msgstr ""
+msgstr "能力設定でのみパッケージを指定します。"
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/installremove.cc:74
