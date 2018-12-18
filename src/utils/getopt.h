@@ -62,8 +62,6 @@ private:
   char** _argv;
 };
 
-extern parsed_opts copts; // command options
-
 #endif /*ZYPPER_GETOPT_H_*/
 // Local Variables:
 // mode: c++

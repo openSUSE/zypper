@@ -94,13 +94,13 @@ std::string ZypperBaseCommand::description() const
   return _description;
 }
 
-int ZypperBaseCommand::parseArguments(Zypper &zypper, const int firstOpt )
+int ZypperBaseCommand::parseArguments( Zypper &zypper, const int firstOpt )
 {
   const int argc    = zypper.argc();
   char * const *argv = zypper.argv();
   int nextArg = ZyppFlags::parseCLI( argc, argv, options(), firstOpt );
 
-  MIL << "Parsed new style arguments" << endl;
+  MIL << "Done parsing options." << endl;
 
   if ( _fillRawOptions ) {
     std::ostringstream s;

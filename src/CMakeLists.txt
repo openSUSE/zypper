@@ -22,8 +22,6 @@ SET (zypper_HEADERS
   info.h
   Table.h
   update.h
-  subcommand.h
-  commands/configtest.h
   solve-commit.h
   PackageArgs.h
   SolverRequester.h
@@ -93,6 +91,8 @@ SET (zypper_HEADERS
   commands/nullcommands.h
   commands/shell.h
   commands/help.h
+  commands/configtest.h
+  commands/subcommand.h
 )
 
 SET( zypper_SRCS
@@ -105,8 +105,6 @@ SET( zypper_SRCS
   info.cc
   Table.cc
   update.cc
-  subcommand.cc
-  commands/configtest.cc
   solve-commit.cc
   PackageArgs.cc
   RequestFeedback.cc
@@ -166,6 +164,8 @@ SET( zypper_SRCS
   commands/nullcommands.cc
   commands/shell.cc
   commands/help.cc
+  commands/subcommand.cc
+  commands/configtest.cc
   ${zypper_HEADERS}
 )
 

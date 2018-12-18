@@ -60,11 +60,6 @@ std::string renderGlobalHelp ()
       help.gDef( cmdTxt, cmd->summary() );
     }
   }
-
-  help.gSection( _("Subcommands:") )
-    .gDef( "subcommand",	// translators: command summary: subcommand
-      _("Lists available subcommands.") );
-
   return help;
 }
 }

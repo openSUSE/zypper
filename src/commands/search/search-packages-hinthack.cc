@@ -13,7 +13,7 @@
 #include "search-packages-hinthack.h"
 
 #include "Zypper.h"
-#include "subcommand.h"
+#include "commands/subcommand.h"
 
 using namespace zypp;
 
@@ -138,7 +138,8 @@ namespace searchPackagesHintHack
 	plgOptions->args( std::move(args) );
       }
 
-      subcommand( zypper_r, plgOptions );
+      SubCmd cmd ( { plgOptions->_detected._cmd }, plgOptions );
+      cmd.runCmd( zypper_r );
     }
 
 

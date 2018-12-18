@@ -212,38 +212,6 @@ public:
   void cleanupForSubcommand();
 
 public:
-  /** Convenience to return properly casted _commandOptions. */
-  template<class Opt_>
-  shared_ptr<Opt_> commandOptionsAs() const
-  { return dynamic_pointer_cast<Opt_>( _commandOptions ); }
-
-  /** Convenience to return _commandOptions or default constructed Options. */
-  template<class Opt_>
-  shared_ptr<Opt_> commandOptionsOrDefaultAs() const
-  {
-    shared_ptr<Opt_> myopt = commandOptionsAs<Opt_>();
-    if ( ! myopt )
-      myopt.reset( new Opt_() );
-    return myopt;
-  }
-
-private:
-  /** Convenience to return command options for \c Opt_, either casted from _commandOptions or newly created.
-   * Not for public use, only to init a new commands _commandOptions.
-   */
-  template<class Opt_>
-  shared_ptr<Opt_> assertCommandOptions()
-  {
-    shared_ptr<Opt_> myopt( commandOptionsAs<Opt_>() );
-    if ( ! myopt )
-    {
-      myopt.reset( new Opt_() );
-      _commandOptions = myopt;
-    }
-    return myopt;
-  }
-
-public:
   ~Zypper();
 
 private:
@@ -269,7 +237,6 @@ private:
 
   Out * _out_ptr;
   Config _config;
-  parsed_opts   _copts;
   ZypperCommand _command;
   ArgList _arguments;
   std::string _command_help;
@@ -286,193 +253,16 @@ private:
 
   int _sh_argc;
   char **_sh_argv;
-
-  /** Command specific options (see also _copts). */
-  shared_ptr<Options>  _commandOptions;
 };
 
 void print_unknown_command_hint( Zypper & zypper );
 void print_command_help_hint( Zypper & zypper );
 
-///////////////////////////////////////////////////////////////////
-/// \class Options
-/// \brief Base class for command specific option values.
-///
-/// Option set for a specific command should be derived from \ref Options.
-/// Place an instance in \ref Zypper and access it e.g. via
-/// \ref Zypper::commandOptionsAs.
-///
-/// The \ref MixinOptions template may be used to build command
-/// options combining multiple common option sets.
-///
-/// \see \ref MixinOptions
-///////////////////////////////////////////////////////////////////
-struct Options
-{
-  //Options() : _command( "" ) {}	// FIXME: DefaultCtor is actually undesired!
-  Options( const ZypperCommand & command_r ) : _command( command_r ) {}
-  virtual ~Options() {}
-
-  /** The command. */
-  const ZypperCommand & command() const
-  { return _command; }
-
-  /** The command name (optionally suffixed). */
-  std::string commandName( const std::string & suffix_r = std::string() ) const
-  { std::string ret( _command.asString() ); if ( ! suffix_r.empty() ) ret += suffix_r; return ret; }
-
-  /** The command help text written to a stream. */
-  virtual std::ostream & showHelpOn( std::ostream & out ) const	// FIXME: become pure virtual
-  {
-    out
-      << _command << " ...?\n"
-      << "This is just a placeholder for a commands help.\n"
-      << "Please file a bug report if this text is displayed.\n"
-      ;
-    return out;
-  }
-
-  /** The command help as string. */
-  std::string helpString() const
-  { std::ostringstream str; showHelpOn( str ); return str.str(); }
-
-  /** Show user help on command. */
-  void showUserHelp( Zypper & zypper_r ) const
-  { zypper_r.out().info( helpString(), Out::QUIET ); }	// always visible
-
-private:
-  ZypperCommand _command;	//< my command
-};
-
-///////////////////////////////////////////////////////////////////
-/// \class OptionsMixin
-/// \brief (Optional) common base class for options mixins.
-///////////////////////////////////////////////////////////////////
-struct OptionsMixin
-{};
-
-///////////////////////////////////////////////////////////////////
-/// \class MixinOptions<TZypperCommand,Mixins...>
-/// \brief Build command options combining multiple common option sets.
-/// \code
-///   struct CommonOptionsMixin : public OptionsMixin
-///   { /* common option values */ };
-///
-///   struct ExoticOptionsMixin : public OptionsMixin
-///   { /* exotic option values */ };
-///
-///   struct AOptions : public MixinOptions<ZypperCommand::A_e, CommonOptionsMixin>
-///   {
-///     /* common option values */
-///     /* command A specific options */
-///   };
-///
-///   struct BOptions : public MixinOptions<ZypperCommand::B_e, CommonOptionsMixin, ExoticOptionsMixin>
-///   {
-///     /* common option values */
-///     /* more common option values */
-///     /* command B specific options */
-///   };
-/// \endcode
-/// \see \ref Options
-///////////////////////////////////////////////////////////////////
-template <const ZypperCommand& TZypperCommand, class... TMixins>
-struct MixinOptions : public Options, public TMixins...
-{
-  MixinOptions() : Options( TZypperCommand ) {}
-};
-
-///////////////////////////////////////////////////////////////////
-/// \class CommandBase<Derived,Options>
-/// \brief Base class for command specific implementation classes.
-///////////////////////////////////////////////////////////////////
-template <class Derived_, class Options_>
-struct CommandBase
-{
-  CommandBase( Zypper & zypper_r )
-  : CommandBase( zypper_r, zypper_r.commandOptionsAs<Options_>() )
-  {}
-
-  CommandBase( Zypper & zypper_r, shared_ptr<Options_> options_r )
-  : _zypper( zypper_r )
-  , _options( options_r )
-  {
-    if ( ! _options )
-    {
-      _options.reset( new Options_() );
-      MIL << commandName() << "( no options provided )" << endl;
-    }
-  }
-
-  Options_ & options()			{ return *_options; }
-  const Options_ & options() const	{ return *_options; }
-
- /** Command name (optionally suffixed). */
-  std::string commandName( const std::string & suffix_r = std::string() ) const
-  { return _options->commandName( std::move(suffix_r) ); }
-
-  /** The Command help text written to a stream. */
-  std::ostream & showHelpOn( std::ostream & out ) const
-  { return _options->showHelpOn( out ); }
-
-  /** Show user help on command. */
-  void showHelp() const
-  { _options->showHelp( _zypper ); }
-
-  /** Run a command action.
-   * \code
-   *   void action()
-   *   {
-   *      throw( Out::Error( ZYPPER_EXIT_ERR_ZYPP, "error", "detail" ) );
-   *      _zypper.setExitCode( ZYPPER_EXIT_ERR_ZYPP );
-   *   }
-   * \endcode
-   * Thrown Out::Error and zypper are evaluated and reported to the user.
-   * Other exceptions pass by.
-   * \return zypper exitCode
-   */
-  int run( void (Derived_::*action_r)() = &Derived_::action )
-  {
-    MIL << "run: " << commandName() << " action " << action_r << endl;
-    try
-    {
-      (self().*(action_r))();
-    }
-    catch ( const Out::Error & error_r )
-    {
-      error_r.report( _zypper );
-    }
-    return _zypper.exitCode();
-  }
-  /** Execute a command action (run + final "Done"/"Finished with error." message).
-   * \return zypper exitCode
-   */
-  int execute( void (Derived_::*action_r)() = &Derived_::action )
-  {
-    run( action_r );
-    // finished
-    _zypper.out().gap();
-    if ( _zypper.exitCode() != ZYPPER_EXIT_OK )
-      _zypper.out().info( _options->commandName(": ")+MSG_WARNINGString(_("Finished with error.") ).str() );
-    else
-      _zypper.out().info( _options->commandName(": ")+_("Done.") );
-    return _zypper.exitCode();
-  }
-
-protected:
-  ~CommandBase() {}
-  Zypper & 		_zypper;	//< my Zypper
-  shared_ptr<Options_>	_options;	//< my Options
-private:
-  Derived_ &       self()       { return *static_cast<Derived_*>( this ); }
-  const Derived_ & self() const { return *static_cast<const Derived_*>( this ); }
-};
-///////////////////////////////////////////////////////////////////
-
 class ExitRequestException : public Exception
 {
 public:
   ExitRequestException(const std::string & msg ) : Exception(msg) {}
+  virtual ~ExitRequestException();
 };
 
 #endif /*ZYPPER_H*/

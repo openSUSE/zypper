@@ -476,65 +476,23 @@ std::ostream & SubcommandOptions::showHelpOn( std::ostream & out ) const
   return out;	// FAKE!
 }
 
-///////////////////////////////////////////////////////////////////
-namespace
+SubCmd::SubCmd(const std::vector<std::string> &commandAliases_r , boost::shared_ptr<SubcommandOptions> options_r) :
+  ZypperBaseCommand (
+    commandAliases_r,
+    "subcommand",
+    // translators: command summary: subcommand
+    _("Lists available subcommands."),
+    "", //no help text, its created on demand
+    DisableAll
+    ),
+  _options ( options_r )
 {
-  ///////////////////////////////////////////////////////////////////
-  /// \class SubcommandImpl
-  /// \brief Implementation of subcommands.
-  ///////////////////////////////////////////////////////////////////
-  class SubcommandImpl : public CommandBase<SubcommandImpl,SubcommandOptions>
-  {
-    typedef CommandBase<SubcommandImpl,SubcommandOptions> CommandBase;
-  public:
-    /** Standard ctor for subcommand using zypper_r.commandOptionsAs. */
-    SubcommandImpl( Zypper & zypper_r ) : CommandBase( zypper_r ) {}
-    /** \overload using custom options_r. */
-    SubcommandImpl( Zypper & zypper_r, shared_ptr<SubcommandOptions> options_r ) : CommandBase( zypper_r, options_r ) {}
-    // CommandBase::_zypper
-    // CommandBase::options;	// access/manip command options
-    // CommandBase::run;	// action + catch and repost Out::Error
-    // CommandBase::execute;	// run + final "Done"/"Finished with error" message
-    // CommandBase::showHelp;// Show user help on command
-  public:
-    /** default action */
-    void action();
-
-  private:
-    /** Store command in \c _args[0]. */
-    void setArg0( std::string arg0_r )
-    {
-      if ( options()._args.empty() )
-	options()._args.push_back( std::move(arg0_r) );
-      else
-	options()._args[0] = std::move(arg0_r);
-    }
-  };
-  ///////////////////////////////////////////////////////////////////
-
-  void SubcommandImpl::action()
-  {
-    setArg0( (options()._detected._path / options()._detected._name).asString() );
-    RunCommand cmd( options()._args );
-    if ( cmd.run() != 0 )
-      throw( Out::Error( cmd.exitStatus(), cmd.execError() ) );
+  if ( !_options ) {
+    _options.reset ( new SubcommandOptions() );
   }
-} // namespace
-///////////////////////////////////////////////////////////////////
-
-int subcommand( Zypper & zypper_r )
-{
-  zypper_r.cleanupForSubcommand();
-  return SubcommandImpl( zypper_r ).run();
 }
 
-int subcommand( Zypper & zypper_r, shared_ptr<SubcommandOptions> options_r )
-{
-  zypper_r.cleanupForSubcommand();
-  return SubcommandImpl( zypper_r, options_r ).run();
-}
-
-bool isSubcommand( const std::string & strval_r )
+bool SubCmd::isSubCommand(const std::string &strval_r )
 {
   if ( strval_r.empty() )
   {
@@ -562,4 +520,59 @@ bool isSubcommand( const std::string & strval_r )
   }
 
   return false;
+}
+
+int SubCmd::runCmd( Zypper &zypper )
+{
+  try {
+    zypper.cleanupForSubcommand();
+    setArg0( ( _options->_detected._path / _options->_detected._name).asString() );
+    RunCommand cmd( _options->_args );
+    if ( cmd.run() != 0 )
+      throw( Out::Error( cmd.exitStatus(), cmd.execError() ) );
+    return cmd.exitStatus();
+
+    //handle this error directly for now until the new command flow is implemented
+  } catch ( const Out::Error & error_r ) {
+    error_r.report( zypper );
+  }
+  return zypper.exitCode();
+}
+
+boost::shared_ptr<SubcommandOptions> SubCmd::subCmdOptions()
+{
+  return _options;
+}
+
+void SubCmd::setArg0(std::string arg0_r)
+{
+  if ( _options->_args.empty() )
+    _options->_args.push_back( std::move(arg0_r) );
+  else
+    _options->_args[0] = std::move(arg0_r);
+}
+
+std::string SubCmd::help()
+{
+  _options->loadDetected();
+  std::ostringstream str;
+  _options->showHelpOn( str );
+  return str.str();
+}
+
+ZyppFlags::CommandGroup SubCmd::cmdOptions() const
+{
+  return {};
+}
+
+void SubCmd::doReset()
+{
+  return;
+}
+
+int SubCmd::execute( Zypper &zypper, const std::vector<std::string> & )
+{
+  //in case we end up here, we just print help
+  zypper.out().info( help(), Out::QUIET );
+  return ZYPPER_EXIT_OK;
 }

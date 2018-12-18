@@ -36,6 +36,7 @@
 #include "commands/configtest.h"
 #include "commands/shell.h"
 #include "commands/help.h"
+#include "commands/subcommand.h"
 
 using namespace zypp;
 
@@ -127,7 +128,7 @@ namespace
       makeCmd<SourceDownloadCmd> ( ZypperCommand::SOURCE_DOWNLOAD_e , std::string(), { "source-download" } ),
       makeCmd<NeedsRebootingCmd> ( ZypperCommand::NEEDS_REBOOTING_e , std::string(), { "needs-rebooting" } ),
 
-      //SUBCOMMAND GROUP HERE
+      makeCmd<SubCmd> ( ZypperCommand::SUBCOMMAND_e, _("Subcommands:"), { "subcommand" }),
 
       //all commands in this group will be hidden from help
       makeCmd<PSCommand> ( ZypperCommand::PS_e , "HIDDEN", { "ps" } ),
@@ -147,75 +148,6 @@ namespace
     static NamedValue<ZypperCommand::Command> _table;
     if ( _table.empty() )
     {
-#define _t(C) _table( ZypperCommand::C )
-      //_t( NONE_e )		| "NONE"		| "none" | "";
-      _t( SUBCOMMAND_e)		| "subcommand";
-
-      //_t( ADD_SERVICE_e )	| "addservice"		| "as" | "service-add" | "sa";
-      //_t( REMOVE_SERVICE_e )	| "removeservice"	| "rs" | "service-delete" | "sd";
-      //_t( MODIFY_SERVICE_e )	| "modifyservice"	| "ms";
-      //_t( LIST_SERVICES_e )	| "services"		| "ls" | "service-list" | "sl";
-      //_t( REFRESH_SERVICES_e )	| "refresh-services"	| "refs";
-
-      //_t( ADD_REPO_e )		| "addrepo" 		| "ar";
-      //_t( REMOVE_REPO_e )	| "removerepo"		| "rr";
-      //_t( RENAME_REPO_e )	| "renamerepo"		| "nr";
-      //_t( MODIFY_REPO_e )	| "modifyrepo"		| "mr";
-      //_t( LIST_REPOS_e )	| "repos"		| "lr" | "catalogs" | "ca";
-      //_t( REFRESH_e )		| "refresh"		| "ref";
-      //_t( CLEAN_e )		| "clean"		| "cc" | "clean-cache" | "you-clean-cache" | "yc";
-
-      //_t( INSTALL_e )		| "install"		| "in";
-      //_t( REMOVE_e )		| "remove"		| "rm";
-      //_t( SRC_INSTALL_e )	| "source-install"	| "si";
-      //_t( VERIFY_e )		| "verify"		| "ve";
-      //_t( INSTALL_NEW_RECOMMENDS_e )| "install-new-recommends" | "inr";
-
-      //_t( UPDATE_e )		| "update"		| "up";
-      //_t( LIST_UPDATES_e )	| "list-updates"	| "lu";
-      //_t( PATCH_e )		| "patch";
-      //_t( LIST_PATCHES_e )	| "list-patches"	| "lp";
-      //_t( PATCH_CHECK_e )	| "patch-check"		| "pchk";
-      //_t( DIST_UPGRADE_e )	| "dist-upgrade"	| "dup";
-
-      //_t( SEARCH_e )		| "search"		| "se";
-      //_t( INFO_e )		| "info"		| "if";
-      //_t( PACKAGES_e )		| "packages"		| "pa" | "pkg";
-      //_t( PATCHES_e )		| "patches"		| "pch";
-      //_t( PATTERNS_e )		| "patterns"		| "pt";
-      //_t( PRODUCTS_e )		| "products"		| "pd";
-
-      //_t( WHAT_PROVIDES_e )	| "what-provides"	| "wp";
-      //_t( WHAT_REQUIRES_e )	| "what-requires"	| "wr";
-      //_t( WHAT_CONFLICTS_e )	| "what-conflicts"	| "wc";
-
-      // _t( ADD_LOCK_e )		| "addlock"		| "al" | "lock-add" | "la";
-      // _t( REMOVE_LOCK_e )	| "removelock"		| "rl" | "lock-delete" | "ld";
-      // _t( LIST_LOCKS_e )	| "locks"		| "ll" | "lock-list";
-      // _t( CLEAN_LOCKS_e )	| "cleanlocks"		| "cl" | "lock-clean";
-
-      //_t( TARGET_OS_e )		| "targetos"		| "tos";
-      //_t( VERSION_CMP_e )	| "versioncmp"		| "vcmp";
-      //_t( LICENSES_e )		| "licenses";
-      // _t( PS_e )		| "ps";
-      //_t( DOWNLOAD_e )		| "download";
-      //_t( SOURCE_DOWNLOAD_e )	| "source-download";
-
-      //_t( HELP_e )		| "help"		| "?";
-      //_t( SHELL_e )		| "shell"		| "sh";
-      //_t( SHELL_QUIT_e )	| "quit"		| "exit" | "\004";
-      //_t( MOO_e )		| "moo";
-
-      //_t( CONFIGTEST_e)		|  "configtest";
-
-      //_t( RUG_PATCH_INFO_e )	| "patch-info";
-      //_t( RUG_PATTERN_INFO_e )	| "pattern-info";
-      //_t( RUG_PRODUCT_INFO_e )	| "product-info";
-      //_t( RUG_PATCH_SEARCH_e )	| "patch-search" | "pse";
-      //_t( RUG_PING_e )		| "ping";
-#undef _t
-
-      // patch the table to contain all new style commands
       for ( const auto &cmd : newStyleCommands() ) {
         auto entry = _table( std::get< ZypperCommand::CmdDescField::Id >( cmd ) );
         for ( const std::string &alias : std::get< ZypperCommand::CmdDescField::Alias >( cmd ) )
@@ -310,13 +242,12 @@ ZypperCommand::Command ZypperCommand::parse( const std::string & strval_r ) cons
   ZypperCommand::Command cmd = SUBCOMMAND_e;	// Exception if not true
   if ( ! cmdTable().getValue( strval_r, cmd ) )
   {
-    bool isSubcommand( const std::string & strval_r );	// in subcommand.cc
-
-    if ( ! isSubcommand( strval_r ) )
+    if ( ! SubCmd::isSubCommand( strval_r ) )
     {
       ZYPP_THROW( Exception( str::form(_("Unknown command '%s'"), strval_r.c_str() ) ) );
     }
   }
+
   return cmd;
 }
 
