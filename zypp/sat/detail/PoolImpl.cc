@@ -108,6 +108,10 @@ namespace zypp
       static void logSat( CPool *, void *data, int type, const char *logString )
       {
 	//                            "1234567890123456789012345678901234567890
+	if ( 0 == strncmp( logString, "job: user installed", 19 ) )
+	  return;
+	if ( 0 == strncmp( logString, "job: multiversion", 17 ) )
+	  return;
 	if ( 0 == strncmp( logString, "  - no rule created", 19 ) )
 	  return;
 	if ( 0 == strncmp( logString, "    next rules: 0 0", 19 ) )
