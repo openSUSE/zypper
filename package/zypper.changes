@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Tue Dec 18 17:51:41 CET 2018 - ma@suse.de
+
+- locks: Fix printing of versioned locks (bsc#1112911)
+- locks: create and write versioned locks correctly (bsc#1112911)
+- version 1.11.74
+
+-------------------------------------------------------------------
 Mon Nov 12 10:16:09 CET 2018 - ma@suse.de
 
 - Don't iterate twice on --no-cd (bsc#1111319)
