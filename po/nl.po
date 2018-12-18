@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypper.nl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-12-18 13:53+0100\n"
-"PO-Revision-Date: 2018-12-10 22:30+0000\n"
+"PO-Revision-Date: 2018-12-19 07:56+0000\n"
 "Last-Translator: Freek de Kruijf <freek@opensuse.org>\n"
 "Language-Team: Dutch <https://l10n.opensuse.org/projects/zypper/master/nl/>\n"
 "Language: nl\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 2.18\n"
+"X-Generator: Weblate 3.2.2\n"
 
 #: src/SolverRequester.h:52
 #, boost-format
@@ -3176,7 +3176,7 @@ msgstr "Pakketten op hun gewone naam selecteren, niet op hun capaciteit."
 
 #: src/commands/installremove.cc:55
 msgid "Select packages solely by capability."
-msgstr ""
+msgstr "Pakketten alleen op capaciteit selecteren."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/installremove.cc:74
