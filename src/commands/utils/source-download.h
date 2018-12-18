@@ -8,7 +8,7 @@
 #ifndef ZYPPER_SOURCE_DOWNLOAD_H
 #define ZYPPER_SOURCE_DOWNLOAD_H
 
-#include "zypp/Pathname.h"
+#include <zypp/Pathname.h>
 #include "commands/basecommand.h"
 //#include "utils/flags/zyppflags.h"
 

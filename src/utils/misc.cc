@@ -15,7 +15,7 @@
 #include <zypp/base/Regex.h>
 #include <zypp/media/MediaManager.h>
 #include <zypp/ExternalProgram.h>
-#include "zypp/parser/ProductFileReader.h"
+#include <zypp/parser/ProductFileReader.h>
 
 #include <zypp/ZYpp.h>
 #include <zypp/Target.h>
