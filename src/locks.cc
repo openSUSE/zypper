@@ -14,6 +14,100 @@
 
 using namespace zypp;
 
+// OLD STYLE VERSIONED LOCKS:
+//	solvable_name: kernel
+//	version: > 1
+//
+// NEW STYLE VERSIONED LOCKS:
+//	complex: AttrMatchData solvable:name kernel C SolvableRange\ >\ 1\ \"\"
+//   or
+//	solvable_name: kernel > 1
+//
+// Semantically equivalent as locks, but due to the different syntax
+// the complex lock is wrongly handled in list. Different syntax also
+// may prevent removing locks (old and new style locks are not ==).
+//
+// bsc#1112911: Unfortunately all styles are found in real-life locks-files.
+// libzypp will try to make sure, when parsing the locks-file, that only
+// OLD STYLE queries are generated. They should work for list and remove.
+#undef	ENABLE_NEW_STYLE_VERSIONED_LOCKS
+
+///////////////////////////////////////////////////////////////////
+namespace locks
+{
+  using namespace zypp;
+  ///////////////////////////////////////////////////////////////////
+  namespace
+  {
+    inline void addNameDependency( PoolQuery & q_r, const std::string & arg_r )
+    {
+      CapDetail d { Capability(arg_r) };
+      if ( d.isVersioned() )
+      {
+#ifdef ENABLE_NEW_STYLE_VERSIONED_LOCKS
+	q_r.addDependency( sat::SolvAttr::name, d.name().asString(), d.op(), d.ed() );
+#else
+	q_r.addAttribute( sat::SolvAttr::name, d.name().asString() );
+	q_r.setEdition( d.ed(), d.op() );
+#endif
+      }
+      else
+      {
+#ifdef ENABLE_NEW_STYLE_VERSIONED_LOCKS
+	q_r.addDependency( sat::SolvAttr::name, arg_r );
+#else
+	q_r.addAttribute( sat::SolvAttr::name, arg_r );
+#endif
+      }
+    }
+  }
+  ///////////////////////////////////////////////////////////////////
+
+  PoolQuery arg2query( Zypper & zypper, const std::string & arg_r, const std::set<ResKind> & kinds_r )
+  {
+    // Try to stay with the syntax the serialized query (AKA lock) generates.
+    //     type: package
+    //     match_type: glob
+    //     case_sensitive: on
+    //     solvable_name: kernel
+
+    PoolQuery q;
+    q.setMatchGlob();
+    q.setCaseSensitive();
+
+    parsed_opts::const_iterator itr = copts.find( "repo" );
+    if ( itr != copts.end() )
+    {
+      const std::list<std::string> & repos( itr->second );
+      for_( it, repos.begin(), repos.end() )
+      {
+	RepoInfo info;
+	if ( match_repo( zypper, *it, &info ) )
+	  q.addRepo( info.alias() );
+	else //TODO some error handling
+	  WAR << "unknown repository" << *it << endl;
+      }
+    }
+
+    if ( kinds_r.empty() || ResKind::explicitBuiltin( arg_r ) ) // derive it from the name
+    {
+      sat::Solvable::SplitIdent split { arg_r };
+      addNameDependency( q, split.name().asString() );
+      q.addKind( split.kind() );
+    }
+    else
+    {
+      addNameDependency( q, arg_r );
+      for_( it, kinds_r.begin(), kinds_r.end() )
+	q.addKind( *it );
+    }
+
+    return q;
+  }
+
+} // namespace locks
+///////////////////////////////////////////////////////////////////
+
 ///////////////////////////////////////////////////////////////////
 namespace out
 {
@@ -253,37 +347,7 @@ void add_locks(Zypper & zypper, const Zypper::ArgList & args, const ResKindSet &
     Locks::size_type start = locks.size();
     for_(it,args.begin(),args.end())
     {
-      PoolQuery q;
-      if ( kinds.empty() ) // derive it from the name
-      {
-        sat::Solvable::SplitIdent split( *it );
-        q.addAttribute( sat::SolvAttr::name, split.name().asString() );
-        q.addKind( split.kind() );
-      }
-      else
-      {
-        q.addAttribute(sat::SolvAttr::name, *it);
-        for_(itk, kinds.begin(), kinds.end()) {
-          q.addKind(*itk);
-        }
-      }
-      q.setMatchGlob();
-      parsed_opts::const_iterator itr;
-      //TODO rug compatibility for more arguments with version restrict
-      if ((itr = copts.find("repo")) != copts.end())
-      {
-        for_(it_repo,itr->second.begin(), itr->second.end())
-        {
-          RepoInfo info;
-          if( match_repo( zypper, *it_repo, &info))
-            q.addRepo(info.alias());
-          else //TODO some error handling
-            WAR << "unknown repository" << *it_repo << endl;
-        }
-      }
-      q.setCaseSensitive();
-
-      locks.addLock(q);
+      locks.addLock( locks::arg2query( zypper, *it, kinds ) );
     }
     locks.save(Pathname::assertprefix
         (zypper.globalOpts().root_dir, ZConfig::instance().locksFile()));
@@ -324,39 +388,7 @@ void remove_locks(Zypper & zypper, const Zypper::ArgList & args, const ResKindSe
       }
       else //package name
       {
-        //TODO fill query in one method to have consistent add/remove
-        //TODO what to do with repo and kinds?
-        PoolQuery q;
-	if ( kinds.empty() ) // derive it from the name
-	{
-	  // derive kind from the name: (rl should also support -t)
-	  sat::Solvable::SplitIdent split( *args_it );
-	  q.addAttribute( sat::SolvAttr::name, split.name().asString() );
-	  q.addKind( split.kind() );
-	}
-	else
-	{
-	  q.addAttribute(sat::SolvAttr::name, *args_it);
-	  for_(itk, kinds.begin(), kinds.end()) {
-	    q.addKind(*itk);
-	  }
-	}
-	q.setMatchGlob();
-        parsed_opts::const_iterator itr;
-        if ((itr = copts.find("repo")) != copts.end())
-        {
-          for_(it_repo,itr->second.begin(), itr->second.end())
-          {
-            RepoInfo info;
-            if( match_repo( zypper, *it_repo, &info))
-              q.addRepo(info.alias());
-            else //TODO some error handling
-              WAR << "unknown repository" << *it_repo << endl;
-          }
-        }
-        q.setCaseSensitive();
-
-        locks.removeLock(q);
+        locks.removeLock( locks::arg2query( zypper, *args_it, kinds ) );
       }
     }
 
