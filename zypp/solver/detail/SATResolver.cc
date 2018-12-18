@@ -1397,18 +1397,22 @@ void SATResolver::applySolutions( const ProblemSolutionList & solutions )
 
 void SATResolver::setLocks()
 {
+    unsigned icnt = 0;
+    unsigned acnt = 0;
+
     for (PoolItemList::const_iterator iter = _items_to_lock.begin(); iter != _items_to_lock.end(); ++iter) {
         sat::detail::SolvableIdType ident( (*iter)->satSolvable().id() );
 	if (iter->status().isInstalled()) {
-	    MIL << "Lock installed item " << *iter << endl;
+	    ++icnt;
 	    queue_push( &(_jobQueue), SOLVER_INSTALL | SOLVER_SOLVABLE );
 	    queue_push( &(_jobQueue), ident );
 	} else {
-	    MIL << "Lock NOT installed item " << *iter << endl;
+	    ++acnt;
 	    queue_push( &(_jobQueue), SOLVER_ERASE | SOLVER_SOLVABLE | MAYBE_CLEANDEPS );
 	    queue_push( &(_jobQueue), ident );
 	}
     }
+    MIL << "Locked " << icnt << " installed items and " << acnt << " NOT installed items." << endl;
 
     ///////////////////////////////////////////////////////////////////
     // Weak locks: Ignore if an item with this name is already installed.
