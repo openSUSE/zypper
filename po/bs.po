@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-12-10 19:36+0100\n"
+"POT-Creation-Date: 2018-12-18 13:53+0100\n"
 "PO-Revision-Date: 2002-07-23 18:27+0200\n"
 "Last-Translator: Damir Bjelobradic <Nagual@lugbih.org>\n"
 "Language-Team: Bosnian <i18n@suse.de>\n"
@@ -476,7 +476,7 @@ msgstr ""
 msgid "This is an alias for '%s'."
 msgstr ""
 
-#: src/commands/commandhelpformatter.h:99 src/utils/flags/zyppflags.cc:302
+#: src/commands/commandhelpformatter.h:99 src/utils/flags/zyppflags.cc:512
 msgid "Command options:"
 msgstr ""
 
@@ -574,80 +574,80 @@ msgid "Continue?"
 msgstr "Nastavi"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:22
+#: src/utils/flags/zyppflags.h:23
 msgid "ALIAS"
 msgstr ""
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:24
+#: src/utils/flags/zyppflags.h:25
 msgid "ALIAS|#|URI"
 msgstr ""
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:26
+#: src/utils/flags/zyppflags.h:27
 msgid "CATEGORY"
 msgstr ""
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:28
+#: src/utils/flags/zyppflags.h:29
 msgid "DIR"
 msgstr ""
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:30
+#: src/utils/flags/zyppflags.h:31
 msgid "FILE"
 msgstr ""
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:32
+#: src/utils/flags/zyppflags.h:33
 msgid "FILE.repo"
 msgstr ""
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:34
+#: src/utils/flags/zyppflags.h:35
 msgid "FORMAT"
 msgstr ""
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:36
+#: src/utils/flags/zyppflags.h:37
 msgid "INTEGER"
 msgstr ""
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:38
+#: src/utils/flags/zyppflags.h:39
 msgid "PATH"
 msgstr ""
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:40
+#: src/utils/flags/zyppflags.h:41
 msgid "SEVERITY"
 msgstr ""
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:42
+#: src/utils/flags/zyppflags.h:43
 msgid "STRING"
 msgstr ""
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:44
+#: src/utils/flags/zyppflags.h:45
 msgid "TAG"
 msgstr ""
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:46
+#: src/utils/flags/zyppflags.h:47
 msgid "TYPE"
 msgstr ""
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #. translators: property name; short; used like "Name: value"
-#: src/utils/flags/zyppflags.h:48 src/commands/repos/list.cc:42
+#: src/utils/flags/zyppflags.h:49 src/commands/repos/list.cc:42
 #: src/commands/repos/list.cc:268 src/commands/services/list.cc:116
 #: src/repos.cc:1256
 msgid "URI"
 msgstr ""
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:50
+#: src/utils/flags/zyppflags.h:51
 msgid "YYYY-MM-DD"
 msgstr ""
 
@@ -2284,12 +2284,12 @@ msgid "Add a package lock."
 msgstr ""
 
 #. translators: command summary: removelock, rl
-#: src/Zypper.cc:724 src/commands/locks/remove.cc:28
+#: src/Zypper.cc:724 src/commands/locks/remove.cc:26
 msgid "Remove a package lock."
 msgstr ""
 
 #. translators: command summary: locks, ll
-#: src/Zypper.cc:726 src/commands/locks/list.cc:227
+#: src/Zypper.cc:726 src/commands/locks/list.cc:257
 msgid "List current package locks."
 msgstr ""
 
@@ -2996,7 +2996,7 @@ msgid "Select packages by plain name, not by capability."
 msgstr ""
 
 #: src/commands/installremove.cc:55
-msgid "Select packages by capability."
+msgid "Select packages solely by capability."
 msgstr ""
 
 #. translators: command synopsis; do not translate lowercase words
@@ -3150,7 +3150,7 @@ msgstr ""
 msgid "Restrict the lock to the specified repository."
 msgstr ""
 
-#: src/commands/locks/add.cc:103
+#: src/commands/locks/add.cc:76
 #, fuzzy
 msgid "Specified lock has been successfully added."
 msgid_plural "Specified locks have been successfully added."
@@ -3158,7 +3158,7 @@ msgstr[0] "Novi moduli nisu pronađeni."
 msgstr[1] "Novi moduli nisu pronađeni."
 msgstr[2] "Novi moduli nisu pronađeni."
 
-#: src/commands/locks/add.cc:110
+#: src/commands/locks/add.cc:83
 #, fuzzy
 msgid "Problem adding the package lock:"
 msgstr "Pripremam instalaciju..."
@@ -3194,7 +3194,7 @@ msgstr[2] ""
 #. translators: property name; short; used like "Name: value"
 #. translators: Table column header
 #. translators: name (general header)
-#: src/commands/locks/list.cc:113 src/commands/repos/list.cc:41
+#: src/commands/locks/list.cc:135 src/commands/repos/list.cc:41
 #: src/commands/repos/list.cc:223 src/commands/services/list.cc:105
 #: src/info.cc:58 src/info.cc:448 src/info.cc:692 src/search.cc:48
 #: src/search.cc:196 src/search.cc:343 src/search.cc:487 src/search.cc:551
@@ -3202,13 +3202,13 @@ msgstr[2] ""
 msgid "Name"
 msgstr "Naziv"
 
-#: src/commands/locks/list.cc:115
+#: src/commands/locks/list.cc:137
 msgid "Matches"
 msgstr ""
 
 #. translators: Table column header
 #. translators: type (general header)
-#: src/commands/locks/list.cc:116 src/commands/repos/list.cc:52
+#: src/commands/locks/list.cc:138 src/commands/repos/list.cc:52
 #: src/commands/repos/list.cc:261 src/commands/services/list.cc:114
 #: src/info.cc:449 src/search.cc:50 src/search.cc:199
 msgid "Type"
@@ -3216,47 +3216,47 @@ msgstr "Vrsta"
 
 #. translators: property name; short; used like "Name: value"
 #. translators: package's repository (header)
-#: src/commands/locks/list.cc:116 src/info.cc:56 src/search.cc:56
+#: src/commands/locks/list.cc:138 src/info.cc:56 src/search.cc:56
 #: src/search.cc:345 src/search.cc:486 src/search.cc:547 src/update.cc:724
 #: src/utils/misc.cc:227
 msgid "Repository"
 msgstr ""
 
 #. translators: locks table value
-#: src/commands/locks/list.cc:134 src/commands/locks/list.cc:203
+#: src/commands/locks/list.cc:156 src/commands/locks/list.cc:232
 msgid "(multiple)"
 msgstr ""
 
 #. translators: locks table value
-#: src/commands/locks/list.cc:137 src/commands/locks/list.cc:201
+#: src/commands/locks/list.cc:159 src/commands/locks/list.cc:230
 msgid "(any)"
 msgstr ""
 
 #. translators: property name; short; used like "Name: value"
-#: src/commands/locks/list.cc:175
+#: src/commands/locks/list.cc:195
 msgid "Keep installed"
 msgstr ""
 
 #. translators: property name; short; used like "Name: value"
-#: src/commands/locks/list.cc:183
+#: src/commands/locks/list.cc:203
 #, fuzzy
 msgid "Do not install"
 msgstr "Novi moduli nisu pronađeni."
 
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
-#: src/commands/locks/list.cc:226
+#: src/commands/locks/list.cc:256
 msgid "locks (ll) [OPTIONS]"
 msgstr ""
 
-#: src/commands/locks/list.cc:255
+#: src/commands/locks/list.cc:285
 msgid "Show the number of resolvables matched by each lock."
 msgstr ""
 
-#: src/commands/locks/list.cc:256
+#: src/commands/locks/list.cc:286
 msgid "List the resolvables matched by each lock."
 msgstr ""
 
-#: src/commands/locks/list.cc:270
+#: src/commands/locks/list.cc:300
 #, fuzzy
 msgid "Error reading the locks file:"
 msgstr ""
@@ -3264,38 +3264,38 @@ msgstr ""
 "\n"
 "%s"
 
-#: src/commands/locks/list.cc:277
+#: src/commands/locks/list.cc:307
 msgid "There are no package locks defined."
 msgstr ""
 
 # =============================================================================
-#: src/commands/locks/remove.cc:27
+#: src/commands/locks/remove.cc:25
 msgid "removelock (rl) [OPTIONS] <LOCK-NUMBER|PACKAGENAME> ..."
 msgstr ""
 
 #. translators: command description; %1% is acoomand like 'zypper locks'
-#: src/commands/locks/remove.cc:30
+#: src/commands/locks/remove.cc:28
 #, boost-format
 msgid ""
 "Remove a package lock. Specify the lock to remove by its number obtained "
 "with '%1%' or by package name."
 msgstr ""
 
-#: src/commands/locks/remove.cc:47
+#: src/commands/locks/remove.cc:45
 msgid "Remove only locks with specified repository."
 msgstr ""
 
-#: src/commands/locks/remove.cc:83
+#: src/commands/locks/remove.cc:81
 #, fuzzy
 msgid "Specified lock has been successfully removed."
 msgstr "Novi moduli nisu pronađeni."
 
-#: src/commands/locks/remove.cc:125
+#: src/commands/locks/remove.cc:94
 #, fuzzy
 msgid "No lock has been removed."
 msgstr "Novi moduli nisu pronađeni."
 
-#: src/commands/locks/remove.cc:129
+#: src/commands/locks/remove.cc:98
 #, fuzzy, c-format
 msgid "%zu lock has been successfully removed."
 msgid_plural "%zu locks have been successfully removed."
@@ -3303,7 +3303,7 @@ msgstr[0] "Novi moduli nisu pronađeni."
 msgstr[1] "Novi moduli nisu pronađeni."
 msgstr[2] "Novi moduli nisu pronađeni."
 
-#: src/commands/locks/remove.cc:136
+#: src/commands/locks/remove.cc:105
 #, fuzzy
 msgid "Problem removing the package lock:"
 msgstr "Pripremam instalaciju..."
@@ -7264,25 +7264,25 @@ msgstr ""
 msgid "Unknown package type"
 msgstr ""
 
-#: src/utils/flags/flagtypes.cc:71
-msgid "Out of range"
-msgstr ""
-
-#: src/utils/flags/flagtypes.cc:73
-#, boost-format
-msgid "Unknown error while assigning the value %1% to flag %2%."
-msgstr ""
-
-#: src/utils/flags/flagtypes.cc:111
+#: src/utils/flags/flagtypes.cc:100
 #, boost-format
 msgid "The flag '%1%' can only be used a maximum of %2% times."
 msgstr ""
 
-#: src/utils/flags/flagtypes.cc:199
+#: src/utils/flags/flagtypes.cc:188
 #, c-format, boost-format
 msgid ""
 "Ignoring %s without argument because similar option with an argument has "
 "been specified."
+msgstr ""
+
+#: src/utils/flags/flagtypes.cc:228
+msgid "Out of range"
+msgstr ""
+
+#: src/utils/flags/flagtypes.cc:230
+#, boost-format
+msgid "Unknown error while assigning the value %1% to flag %2%."
 msgstr ""
 
 #. For '-garbage' argument, with 'a', 'b', and 'e' as known options,

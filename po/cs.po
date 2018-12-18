@@ -20,7 +20,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-12-10 19:36+0100\n"
+"POT-Creation-Date: 2018-12-18 13:53+0100\n"
 "PO-Revision-Date: 2018-12-11 16:10+0000\n"
 "Last-Translator: Aleš Kastner <alkas@volny.cz>\n"
 "Language-Team: Czech <https://l10n.opensuse.org/projects/zypper/master/cs/>\n"
@@ -529,7 +529,7 @@ msgstr ""
 msgid "This is an alias for '%s'."
 msgstr "Toto je alias pro '%s'."
 
-#: src/commands/commandhelpformatter.h:99 src/utils/flags/zyppflags.cc:302
+#: src/commands/commandhelpformatter.h:99 src/utils/flags/zyppflags.cc:512
 msgid "Command options:"
 msgstr "Volby příkazu:"
 
@@ -630,80 +630,80 @@ msgid "Continue?"
 msgstr "Pokračovat?"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:22
+#: src/utils/flags/zyppflags.h:23
 msgid "ALIAS"
 msgstr "ALIAS"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:24
+#: src/utils/flags/zyppflags.h:25
 msgid "ALIAS|#|URI"
 msgstr "přezdívka|#|URI"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:26
+#: src/utils/flags/zyppflags.h:27
 msgid "CATEGORY"
 msgstr "KATEGORIE"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:28
+#: src/utils/flags/zyppflags.h:29
 msgid "DIR"
 msgstr "adresář"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:30
+#: src/utils/flags/zyppflags.h:31
 msgid "FILE"
 msgstr "FILE"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:32
+#: src/utils/flags/zyppflags.h:33
 msgid "FILE.repo"
 msgstr "SOUBOR.repo"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:34
+#: src/utils/flags/zyppflags.h:35
 msgid "FORMAT"
 msgstr "FORMAT"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:36
+#: src/utils/flags/zyppflags.h:37
 msgid "INTEGER"
 msgstr "celé číslo"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:38
+#: src/utils/flags/zyppflags.h:39
 msgid "PATH"
 msgstr "PATH"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:40
+#: src/utils/flags/zyppflags.h:41
 msgid "SEVERITY"
 msgstr "ZÁVAŽNOST"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:42
+#: src/utils/flags/zyppflags.h:43
 msgid "STRING"
 msgstr "STRING"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:44
+#: src/utils/flags/zyppflags.h:45
 msgid "TAG"
 msgstr "TAG"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:46
+#: src/utils/flags/zyppflags.h:47
 msgid "TYPE"
 msgstr "typ"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #. translators: property name; short; used like "Name: value"
-#: src/utils/flags/zyppflags.h:48 src/commands/repos/list.cc:42
+#: src/utils/flags/zyppflags.h:49 src/commands/repos/list.cc:42
 #: src/commands/repos/list.cc:268 src/commands/services/list.cc:116
 #: src/repos.cc:1256
 msgid "URI"
 msgstr "Adresa URI"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:50
+#: src/utils/flags/zyppflags.h:51
 msgid "YYYY-MM-DD"
 msgstr "RRRR-MM-DD"
 
@@ -2367,12 +2367,12 @@ msgid "Add a package lock."
 msgstr "Přidá zámek balíčku."
 
 #. translators: command summary: removelock, rl
-#: src/Zypper.cc:724 src/commands/locks/remove.cc:28
+#: src/Zypper.cc:724 src/commands/locks/remove.cc:26
 msgid "Remove a package lock."
 msgstr "Odstraní zámek balíčku."
 
 #. translators: command summary: locks, ll
-#: src/Zypper.cc:726 src/commands/locks/list.cc:227
+#: src/Zypper.cc:726 src/commands/locks/list.cc:257
 msgid "List current package locks."
 msgstr "Zobrazit současné zámky balíčků."
 
@@ -3180,8 +3180,8 @@ msgid "Select packages by plain name, not by capability."
 msgstr "Vybrat balíčky čistě podle jména, ne podle schopnosti."
 
 #: src/commands/installremove.cc:55
-msgid "Select packages by capability."
-msgstr "Vybrat balíčky podle schopnosti."
+msgid "Select packages solely by capability."
+msgstr ""
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/installremove.cc:74
@@ -3351,14 +3351,14 @@ msgstr ""
 msgid "Restrict the lock to the specified repository."
 msgstr "Omezí uzamčení na zadaný repozitář."
 
-#: src/commands/locks/add.cc:103
+#: src/commands/locks/add.cc:76
 msgid "Specified lock has been successfully added."
 msgid_plural "Specified locks have been successfully added."
 msgstr[0] "Zadaný zámek byl úspěšně přidán."
 msgstr[1] "Zadané zámky byly úspěšně přidány."
 msgstr[2] "Zadané zámky byly úspěšně přidány."
 
-#: src/commands/locks/add.cc:110
+#: src/commands/locks/add.cc:83
 msgid "Problem adding the package lock:"
 msgstr "Problém při přidávání zámku balíčku:"
 
@@ -3393,7 +3393,7 @@ msgstr[2] "Odstraněny %lu zámky."
 #. translators: property name; short; used like "Name: value"
 #. translators: Table column header
 #. translators: name (general header)
-#: src/commands/locks/list.cc:113 src/commands/repos/list.cc:41
+#: src/commands/locks/list.cc:135 src/commands/repos/list.cc:41
 #: src/commands/repos/list.cc:223 src/commands/services/list.cc:105
 #: src/info.cc:58 src/info.cc:448 src/info.cc:692 src/search.cc:48
 #: src/search.cc:196 src/search.cc:343 src/search.cc:487 src/search.cc:551
@@ -3401,13 +3401,13 @@ msgstr[2] "Odstraněny %lu zámky."
 msgid "Name"
 msgstr "Název"
 
-#: src/commands/locks/list.cc:115
+#: src/commands/locks/list.cc:137
 msgid "Matches"
 msgstr "Odpovídá"
 
 #. translators: Table column header
 #. translators: type (general header)
-#: src/commands/locks/list.cc:116 src/commands/repos/list.cc:52
+#: src/commands/locks/list.cc:138 src/commands/repos/list.cc:52
 #: src/commands/repos/list.cc:261 src/commands/services/list.cc:114
 #: src/info.cc:449 src/search.cc:50 src/search.cc:199
 msgid "Type"
@@ -3415,60 +3415,60 @@ msgstr "Typ"
 
 #. translators: property name; short; used like "Name: value"
 #. translators: package's repository (header)
-#: src/commands/locks/list.cc:116 src/info.cc:56 src/search.cc:56
+#: src/commands/locks/list.cc:138 src/info.cc:56 src/search.cc:56
 #: src/search.cc:345 src/search.cc:486 src/search.cc:547 src/update.cc:724
 #: src/utils/misc.cc:227
 msgid "Repository"
 msgstr "Úložiště"
 
 #. translators: locks table value
-#: src/commands/locks/list.cc:134 src/commands/locks/list.cc:203
+#: src/commands/locks/list.cc:156 src/commands/locks/list.cc:232
 msgid "(multiple)"
 msgstr "(více)"
 
 #. translators: locks table value
-#: src/commands/locks/list.cc:137 src/commands/locks/list.cc:201
+#: src/commands/locks/list.cc:159 src/commands/locks/list.cc:230
 msgid "(any)"
 msgstr "(jakýkoli)"
 
 #. translators: property name; short; used like "Name: value"
-#: src/commands/locks/list.cc:175
+#: src/commands/locks/list.cc:195
 msgid "Keep installed"
 msgstr "Ponechat nainstalované"
 
 #. translators: property name; short; used like "Name: value"
-#: src/commands/locks/list.cc:183
+#: src/commands/locks/list.cc:203
 msgid "Do not install"
 msgstr "Neinstalovat"
 
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
-#: src/commands/locks/list.cc:226
+#: src/commands/locks/list.cc:256
 msgid "locks (ll) [OPTIONS]"
 msgstr "locks (ll) [volby]"
 
-#: src/commands/locks/list.cc:255
+#: src/commands/locks/list.cc:285
 msgid "Show the number of resolvables matched by each lock."
 msgstr "Zobrazit počet řešení odpovídajících každému ze zámků."
 
-#: src/commands/locks/list.cc:256
+#: src/commands/locks/list.cc:286
 msgid "List the resolvables matched by each lock."
 msgstr "Vypsat řešení odpovídající každému ze zámků."
 
-#: src/commands/locks/list.cc:270
+#: src/commands/locks/list.cc:300
 msgid "Error reading the locks file:"
 msgstr "Chyba při čtení souboru zámků:"
 
-#: src/commands/locks/list.cc:277
+#: src/commands/locks/list.cc:307
 msgid "There are no package locks defined."
 msgstr "Nejsou definovány žádné zámky balíčků."
 
 # =============================================================================
-#: src/commands/locks/remove.cc:27
+#: src/commands/locks/remove.cc:25
 msgid "removelock (rl) [OPTIONS] <LOCK-NUMBER|PACKAGENAME> ..."
 msgstr "removelock (rl) <číslo-zámku|jméno_balíčku> ..."
 
 #. translators: command description; %1% is acoomand like 'zypper locks'
-#: src/commands/locks/remove.cc:30
+#: src/commands/locks/remove.cc:28
 #, boost-format
 msgid ""
 "Remove a package lock. Specify the lock to remove by its number obtained "
@@ -3477,19 +3477,19 @@ msgstr ""
 "Odstraní zámek balíčku. Určete zámek k odstranění jeho číslem získaným '%1%' "
 "nebo jménem balíčku."
 
-#: src/commands/locks/remove.cc:47
+#: src/commands/locks/remove.cc:45
 msgid "Remove only locks with specified repository."
 msgstr "Odstraní pouze zámky ze zadaného repozitáře."
 
-#: src/commands/locks/remove.cc:83
+#: src/commands/locks/remove.cc:81
 msgid "Specified lock has been successfully removed."
 msgstr "Zadaný zámek byl úspěšně odstraněn."
 
-#: src/commands/locks/remove.cc:125
+#: src/commands/locks/remove.cc:94
 msgid "No lock has been removed."
 msgstr "Žádný zámek nebyl odstraněn."
 
-#: src/commands/locks/remove.cc:129
+#: src/commands/locks/remove.cc:98
 #, c-format
 msgid "%zu lock has been successfully removed."
 msgid_plural "%zu locks have been successfully removed."
@@ -3497,7 +3497,7 @@ msgstr[0] "%zu zámek byl úspěšně odstraněn."
 msgstr[1] "%zu zámky byly úspěšně odstraněny."
 msgstr[2] "%zu zámků bylo úspěšně odstraněno."
 
-#: src/commands/locks/remove.cc:136
+#: src/commands/locks/remove.cc:105
 msgid "Problem removing the package lock:"
 msgstr "Problém při odebírání zámku balíčku:"
 
@@ -8170,27 +8170,27 @@ msgstr "%s je použito spolu s %s, což si odporuje."
 msgid "Unknown package type"
 msgstr "Neznámý typ balíčku"
 
-#: src/utils/flags/flagtypes.cc:71
-msgid "Out of range"
-msgstr "Mimo rozsah"
-
-#: src/utils/flags/flagtypes.cc:73
-#, boost-format
-msgid "Unknown error while assigning the value %1% to flag %2%."
-msgstr "Neznámá chyba přiřazení hodnoty %1% příznaku %2%."
-
-#: src/utils/flags/flagtypes.cc:111
+#: src/utils/flags/flagtypes.cc:100
 #, boost-format
 msgid "The flag '%1%' can only be used a maximum of %2% times."
 msgstr "Příznak '%1%' lze použít nejvíce %2% krát."
 
-#: src/utils/flags/flagtypes.cc:199
+#: src/utils/flags/flagtypes.cc:188
 #, c-format, boost-format
 msgid ""
 "Ignoring %s without argument because similar option with an argument has "
 "been specified."
 msgstr ""
 "Ignoruji %s bez argumentu, protože byla zadána podobná volba s argumentem."
+
+#: src/utils/flags/flagtypes.cc:228
+msgid "Out of range"
+msgstr "Mimo rozsah"
+
+#: src/utils/flags/flagtypes.cc:230
+#, boost-format
+msgid "Unknown error while assigning the value %1% to flag %2%."
+msgstr "Neznámá chyba přiřazení hodnoty %1% příznaku %2%."
 
 #. For '-garbage' argument, with 'a', 'b', and 'e' as known options,
 #. getopt_long reports 'a', 'b', and 'e' as known options.
@@ -8488,6 +8488,9 @@ msgstr "Neplatná odpověď '%s'."
 #, c-format, boost-format
 msgid "Enter '%s' for '%s' or '%s' for '%s' if nothing else works for you."
 msgstr "Zadejte '%s' pro '%s' nebo '%s' pro '%s', pokud nic jiného nepomůže."
+
+#~ msgid "Select packages by capability."
+#~ msgstr "Vybrat balíčky podle schopnosti."
 
 #~ msgid ""
 #~ "Different package type specified in '%s' option and '%s' argument. Will "

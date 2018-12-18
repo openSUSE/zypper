@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-12-10 19:36+0100\n"
+"POT-Creation-Date: 2018-12-18 13:53+0100\n"
 "PO-Revision-Date: 2018-10-27 14:06+0000\n"
 "Last-Translator: Alex Minton <alex239@gmail.com>\n"
 "Language-Team: Russian <https://l10n.opensuse.org/projects/zypper/master/ru/"
@@ -533,7 +533,7 @@ msgstr ""
 msgid "This is an alias for '%s'."
 msgstr "Это псевдоним для \"%s\"."
 
-#: src/commands/commandhelpformatter.h:99 src/utils/flags/zyppflags.cc:302
+#: src/commands/commandhelpformatter.h:99 src/utils/flags/zyppflags.cc:512
 msgid "Command options:"
 msgstr "Параметры команды:"
 
@@ -634,80 +634,80 @@ msgid "Continue?"
 msgstr "Продолжить?"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:22
+#: src/utils/flags/zyppflags.h:23
 msgid "ALIAS"
 msgstr "ПСЕВДОНИМ"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:24
+#: src/utils/flags/zyppflags.h:25
 msgid "ALIAS|#|URI"
 msgstr "ПСЕВДОНИМ|#|URI"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:26
+#: src/utils/flags/zyppflags.h:27
 msgid "CATEGORY"
 msgstr "КАТЕГОРИЯ"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:28
+#: src/utils/flags/zyppflags.h:29
 msgid "DIR"
 msgstr "КАТАЛОГ"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:30
+#: src/utils/flags/zyppflags.h:31
 msgid "FILE"
 msgstr "ФАЙЛ"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:32
+#: src/utils/flags/zyppflags.h:33
 msgid "FILE.repo"
 msgstr "ФАЙЛ.repo"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:34
+#: src/utils/flags/zyppflags.h:35
 msgid "FORMAT"
 msgstr "ФОРМАТ"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:36
+#: src/utils/flags/zyppflags.h:37
 msgid "INTEGER"
 msgstr "ЦЕЛОЕ"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:38
+#: src/utils/flags/zyppflags.h:39
 msgid "PATH"
 msgstr "ПУТЬ"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:40
+#: src/utils/flags/zyppflags.h:41
 msgid "SEVERITY"
 msgstr "ВАЖНОСТЬ"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:42
+#: src/utils/flags/zyppflags.h:43
 msgid "STRING"
 msgstr "СТРОКА"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:44
+#: src/utils/flags/zyppflags.h:45
 msgid "TAG"
 msgstr "МЕТКА"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:46
+#: src/utils/flags/zyppflags.h:47
 msgid "TYPE"
 msgstr "ТИП"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #. translators: property name; short; used like "Name: value"
-#: src/utils/flags/zyppflags.h:48 src/commands/repos/list.cc:42
+#: src/utils/flags/zyppflags.h:49 src/commands/repos/list.cc:42
 #: src/commands/repos/list.cc:268 src/commands/services/list.cc:116
 #: src/repos.cc:1256
 msgid "URI"
 msgstr "URI"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:50
+#: src/utils/flags/zyppflags.h:51
 msgid "YYYY-MM-DD"
 msgstr "ГГГГ-ММ-ДД"
 
@@ -2388,12 +2388,12 @@ msgid "Add a package lock."
 msgstr "Добавить блокировку пакета."
 
 #. translators: command summary: removelock, rl
-#: src/Zypper.cc:724 src/commands/locks/remove.cc:28
+#: src/Zypper.cc:724 src/commands/locks/remove.cc:26
 msgid "Remove a package lock."
 msgstr "Удалить блокировку пакета."
 
 #. translators: command summary: locks, ll
-#: src/Zypper.cc:726 src/commands/locks/list.cc:227
+#: src/Zypper.cc:726 src/commands/locks/list.cc:257
 msgid "List current package locks."
 msgstr "Вывести список блокировок пакетов."
 
@@ -3191,8 +3191,8 @@ msgid "Select packages by plain name, not by capability."
 msgstr "Выбирать пакеты по обычному имени, а не по возможностям."
 
 #: src/commands/installremove.cc:55
-msgid "Select packages by capability."
-msgstr "Выбирать пакеты по возможностям."
+msgid "Select packages solely by capability."
+msgstr ""
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/installremove.cc:74
@@ -3364,14 +3364,14 @@ msgstr ""
 msgid "Restrict the lock to the specified repository."
 msgstr "Ограничить блокировку указанным репозиторием."
 
-#: src/commands/locks/add.cc:103
+#: src/commands/locks/add.cc:76
 msgid "Specified lock has been successfully added."
 msgid_plural "Specified locks have been successfully added."
 msgstr[0] "Указанная блокировка успешно добавлена."
 msgstr[1] "Указанные блокировки успешно добавлены."
 msgstr[2] "Указанные блокировки успешно добавлены."
 
-#: src/commands/locks/add.cc:110
+#: src/commands/locks/add.cc:83
 msgid "Problem adding the package lock:"
 msgstr "Проблема при добавлении блокировки пакета:"
 
@@ -3406,7 +3406,7 @@ msgstr[2] "Удалено %lu блокировок."
 #. translators: property name; short; used like "Name: value"
 #. translators: Table column header
 #. translators: name (general header)
-#: src/commands/locks/list.cc:113 src/commands/repos/list.cc:41
+#: src/commands/locks/list.cc:135 src/commands/repos/list.cc:41
 #: src/commands/repos/list.cc:223 src/commands/services/list.cc:105
 #: src/info.cc:58 src/info.cc:448 src/info.cc:692 src/search.cc:48
 #: src/search.cc:196 src/search.cc:343 src/search.cc:487 src/search.cc:551
@@ -3414,13 +3414,13 @@ msgstr[2] "Удалено %lu блокировок."
 msgid "Name"
 msgstr "Имя"
 
-#: src/commands/locks/list.cc:115
+#: src/commands/locks/list.cc:137
 msgid "Matches"
 msgstr "Соответствия"
 
 #. translators: Table column header
 #. translators: type (general header)
-#: src/commands/locks/list.cc:116 src/commands/repos/list.cc:52
+#: src/commands/locks/list.cc:138 src/commands/repos/list.cc:52
 #: src/commands/repos/list.cc:261 src/commands/services/list.cc:114
 #: src/info.cc:449 src/search.cc:50 src/search.cc:199
 msgid "Type"
@@ -3428,64 +3428,64 @@ msgstr "Тип"
 
 #. translators: property name; short; used like "Name: value"
 #. translators: package's repository (header)
-#: src/commands/locks/list.cc:116 src/info.cc:56 src/search.cc:56
+#: src/commands/locks/list.cc:138 src/info.cc:56 src/search.cc:56
 #: src/search.cc:345 src/search.cc:486 src/search.cc:547 src/update.cc:724
 #: src/utils/misc.cc:227
 msgid "Repository"
 msgstr "Репозиторий"
 
 #. translators: locks table value
-#: src/commands/locks/list.cc:134 src/commands/locks/list.cc:203
+#: src/commands/locks/list.cc:156 src/commands/locks/list.cc:232
 msgid "(multiple)"
 msgstr "(несколько)"
 
 #. translators: locks table value
-#: src/commands/locks/list.cc:137 src/commands/locks/list.cc:201
+#: src/commands/locks/list.cc:159 src/commands/locks/list.cc:230
 msgid "(any)"
 msgstr "(любое)"
 
 #. translators: property name; short; used like "Name: value"
-#: src/commands/locks/list.cc:175
+#: src/commands/locks/list.cc:195
 msgid "Keep installed"
 msgstr "Оставить"
 
 #. translators: property name; short; used like "Name: value"
-#: src/commands/locks/list.cc:183
+#: src/commands/locks/list.cc:203
 msgid "Do not install"
 msgstr "Не устанавливать"
 
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
-#: src/commands/locks/list.cc:226
+#: src/commands/locks/list.cc:256
 msgid "locks (ll) [OPTIONS]"
 msgstr "locks (ll) [параметры]"
 
-#: src/commands/locks/list.cc:255
+#: src/commands/locks/list.cc:285
 msgid "Show the number of resolvables matched by each lock."
 msgstr ""
 "Показать число объектов разрешения зависимостей, соответствующих каждой "
 "блокировке."
 
-#: src/commands/locks/list.cc:256
+#: src/commands/locks/list.cc:286
 msgid "List the resolvables matched by each lock."
 msgstr ""
 "Вывести список объектов разрешения зависимостей, соответствующих каждой "
 "блокировке."
 
-#: src/commands/locks/list.cc:270
+#: src/commands/locks/list.cc:300
 msgid "Error reading the locks file:"
 msgstr "Ошибка чтения файла блокировок:"
 
-#: src/commands/locks/list.cc:277
+#: src/commands/locks/list.cc:307
 msgid "There are no package locks defined."
 msgstr "Блокировки пакетов не определены."
 
 # =============================================================================
-#: src/commands/locks/remove.cc:27
+#: src/commands/locks/remove.cc:25
 msgid "removelock (rl) [OPTIONS] <LOCK-NUMBER|PACKAGENAME> ..."
 msgstr "removelock (rl) <номер-блокировки|имя-пакета>…"
 
 #. translators: command description; %1% is acoomand like 'zypper locks'
-#: src/commands/locks/remove.cc:30
+#: src/commands/locks/remove.cc:28
 #, boost-format
 msgid ""
 "Remove a package lock. Specify the lock to remove by its number obtained "
@@ -3494,19 +3494,19 @@ msgstr ""
 "Удалить блокировку пакета. Укажите блокировку для удаления по номеру, "
 "полученному с помощью \"%1%\", или по имени пакета."
 
-#: src/commands/locks/remove.cc:47
+#: src/commands/locks/remove.cc:45
 msgid "Remove only locks with specified repository."
 msgstr "Удалить блокировки только для указанного репозитория."
 
-#: src/commands/locks/remove.cc:83
+#: src/commands/locks/remove.cc:81
 msgid "Specified lock has been successfully removed."
 msgstr "Указанная блокировка успешно удалена."
 
-#: src/commands/locks/remove.cc:125
+#: src/commands/locks/remove.cc:94
 msgid "No lock has been removed."
 msgstr "Ни одной блокировки не удалено."
 
-#: src/commands/locks/remove.cc:129
+#: src/commands/locks/remove.cc:98
 #, c-format
 msgid "%zu lock has been successfully removed."
 msgid_plural "%zu locks have been successfully removed."
@@ -3514,7 +3514,7 @@ msgstr[0] "%zu блокировка успешно удалена."
 msgstr[1] "%zu блокировки успешно удалены."
 msgstr[2] "%zu блокировок успешно удалено."
 
-#: src/commands/locks/remove.cc:136
+#: src/commands/locks/remove.cc:105
 msgid "Problem removing the package lock:"
 msgstr "Проблема при удалении блокировки пакета:"
 
@@ -8231,21 +8231,12 @@ msgstr ""
 msgid "Unknown package type"
 msgstr ""
 
-#: src/utils/flags/flagtypes.cc:71
-msgid "Out of range"
-msgstr "Вне диапазона"
-
-#: src/utils/flags/flagtypes.cc:73
-#, boost-format
-msgid "Unknown error while assigning the value %1% to flag %2%."
-msgstr "Неизвестная ошибка во время присвоения значения %1% флагу %2%."
-
-#: src/utils/flags/flagtypes.cc:111
+#: src/utils/flags/flagtypes.cc:100
 #, boost-format
 msgid "The flag '%1%' can only be used a maximum of %2% times."
 msgstr ""
 
-#: src/utils/flags/flagtypes.cc:199
+#: src/utils/flags/flagtypes.cc:188
 #, c-format, boost-format
 msgid ""
 "Ignoring %s without argument because similar option with an argument has "
@@ -8253,6 +8244,15 @@ msgid ""
 msgstr ""
 "Игнорируется параметр %s без аргумента, так как был указан похожий параметр "
 "с аргументом."
+
+#: src/utils/flags/flagtypes.cc:228
+msgid "Out of range"
+msgstr "Вне диапазона"
+
+#: src/utils/flags/flagtypes.cc:230
+#, boost-format
+msgid "Unknown error while assigning the value %1% to flag %2%."
+msgstr "Неизвестная ошибка во время присвоения значения %1% флагу %2%."
 
 #. For '-garbage' argument, with 'a', 'b', and 'e' as known options,
 #. getopt_long reports 'a', 'b', and 'e' as known options.
@@ -8551,6 +8551,9 @@ msgid "Enter '%s' for '%s' or '%s' for '%s' if nothing else works for you."
 msgstr ""
 "Введите \"%s\" для \"%s\" или \"%s\" для \"%s\", если больше ничего не "
 "работает."
+
+#~ msgid "Select packages by capability."
+#~ msgstr "Выбирать пакеты по возможностям."
 
 #~ msgid ""
 #~ "Different package type specified in '%s' option and '%s' argument. Will "

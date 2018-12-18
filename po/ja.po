@@ -10,11 +10,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-12-10 19:36+0100\n"
+"POT-Creation-Date: 2018-12-18 13:53+0100\n"
 "PO-Revision-Date: 2018-12-10 22:38+0000\n"
 "Last-Translator: Yasuhiko Kamata <belphegor@belbel.or.jp>\n"
-"Language-Team: Japanese "
-"<https://l10n.opensuse.org/projects/zypper/master/ja/>\n"
+"Language-Team: Japanese <https://l10n.opensuse.org/projects/zypper/master/ja/"
+">\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -518,7 +518,7 @@ msgstr ""
 msgid "This is an alias for '%s'."
 msgstr "これは '%s' の別名です。"
 
-#: src/commands/commandhelpformatter.h:99 src/utils/flags/zyppflags.cc:302
+#: src/commands/commandhelpformatter.h:99 src/utils/flags/zyppflags.cc:512
 msgid "Command options:"
 msgstr "コマンドオプション:"
 
@@ -621,80 +621,80 @@ msgid "Continue?"
 msgstr "続行しますか？"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:22
+#: src/utils/flags/zyppflags.h:23
 msgid "ALIAS"
 msgstr "別名"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:24
+#: src/utils/flags/zyppflags.h:25
 msgid "ALIAS|#|URI"
 msgstr "別名|#|URI"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:26
+#: src/utils/flags/zyppflags.h:27
 msgid "CATEGORY"
 msgstr "カテゴリ"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:28
+#: src/utils/flags/zyppflags.h:29
 msgid "DIR"
 msgstr "ディレクトリ"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:30
+#: src/utils/flags/zyppflags.h:31
 msgid "FILE"
 msgstr "ファイル"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:32
+#: src/utils/flags/zyppflags.h:33
 msgid "FILE.repo"
 msgstr "ファイル.repo"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:34
+#: src/utils/flags/zyppflags.h:35
 msgid "FORMAT"
 msgstr "書式"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:36
+#: src/utils/flags/zyppflags.h:37
 msgid "INTEGER"
 msgstr "整数"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:38
+#: src/utils/flags/zyppflags.h:39
 msgid "PATH"
 msgstr "パス"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:40
+#: src/utils/flags/zyppflags.h:41
 msgid "SEVERITY"
 msgstr "重要度"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:42
+#: src/utils/flags/zyppflags.h:43
 msgid "STRING"
 msgstr "文字列"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:44
+#: src/utils/flags/zyppflags.h:45
 msgid "TAG"
 msgstr "タグ"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:46
+#: src/utils/flags/zyppflags.h:47
 msgid "TYPE"
 msgstr "種類"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #. translators: property name; short; used like "Name: value"
-#: src/utils/flags/zyppflags.h:48 src/commands/repos/list.cc:42
+#: src/utils/flags/zyppflags.h:49 src/commands/repos/list.cc:42
 #: src/commands/repos/list.cc:268 src/commands/services/list.cc:116
 #: src/repos.cc:1256
 msgid "URI"
 msgstr "URI"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:50
+#: src/utils/flags/zyppflags.h:51
 msgid "YYYY-MM-DD"
 msgstr "YYYY-MM-DD"
 
@@ -2205,12 +2205,12 @@ msgid "Add a package lock."
 msgstr "パッケージロックを追加します。"
 
 #. translators: command summary: removelock, rl
-#: src/Zypper.cc:724 src/commands/locks/remove.cc:28
+#: src/Zypper.cc:724 src/commands/locks/remove.cc:26
 msgid "Remove a package lock."
 msgstr "パッケージロックを削除します。"
 
 #. translators: command summary: locks, ll
-#: src/Zypper.cc:726 src/commands/locks/list.cc:227
+#: src/Zypper.cc:726 src/commands/locks/list.cc:257
 msgid "List current package locks."
 msgstr "現在のパッケージロックを一覧表示します。"
 
@@ -2978,9 +2978,11 @@ msgid ""
 "unconditionally on small or minimal systems, as it may easily add a large "
 "number of packages."
 msgstr ""
-"既にインストールされているパッケージが推奨する、新しいパッケージをインストールします。このコマンドは、インストール済みの全てのパッケージに対して推奨情報を"
-"読み出し、その条件を満たすように動作します。小さくまとめておきたいシステムの場合は、このコマンドを呼び出すことで多数のパッケージがインストールされることに"
-"なってしまいますので、不用意に使用すべきではありません。"
+"既にインストールされているパッケージが推奨する、新しいパッケージをインストー"
+"ルします。このコマンドは、インストール済みの全てのパッケージに対して推奨情報"
+"を読み出し、その条件を満たすように動作します。小さくまとめておきたいシステム"
+"の場合は、このコマンドを呼び出すことで多数のパッケージがインストールされるこ"
+"とになってしまいますので、不用意に使用すべきではありません。"
 
 #. translators: command description, %1% is a zypper command
 #: src/commands/inrverify.cc:98
@@ -2990,8 +2992,9 @@ msgid ""
 "supporting available hardware, languages or filesystems. Useful after having "
 "added e.g. new hardware or driver repos."
 msgstr ""
-"'%1%' として実行します。これにより、利用可能なハードウエアや言語、ファイルシステムに対応するパッケージのみを参照するように制限します。新しいハードウ"
-"エアやドライバのリポジトリを追加したような場合に便利です。"
+"'%1%' として実行します。これにより、利用可能なハードウエアや言語、ファイルシ"
+"ステムに対応するパッケージのみを参照するように制限します。新しいハードウエア"
+"やドライバのリポジトリを追加したような場合に便利です。"
 
 #. translators: command description
 #: src/commands/inrverify.cc:101
@@ -3007,8 +3010,8 @@ msgid "Select packages by plain name, not by capability."
 msgstr "能力設定ではなく、単に名前でパッケージを指定します。"
 
 #: src/commands/installremove.cc:55
-msgid "Select packages by capability."
-msgstr "能力設定でパッケージを選択します。"
+msgid "Select packages solely by capability."
+msgstr ""
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/installremove.cc:74
@@ -3185,12 +3188,12 @@ msgstr ""
 msgid "Restrict the lock to the specified repository."
 msgstr "指定したリポジトリからのもののみをロックします。"
 
-#: src/commands/locks/add.cc:103
+#: src/commands/locks/add.cc:76
 msgid "Specified lock has been successfully added."
 msgid_plural "Specified locks have been successfully added."
 msgstr[0] "指定したパッケージロックを設定しました。"
 
-#: src/commands/locks/add.cc:110
+#: src/commands/locks/add.cc:83
 msgid "Problem adding the package lock:"
 msgstr "パッケージロックの追加の際に問題が発生:"
 
@@ -3223,7 +3226,7 @@ msgstr[0] "%lu 個のパッケージロックを削除しました。"
 #. translators: property name; short; used like "Name: value"
 #. translators: Table column header
 #. translators: name (general header)
-#: src/commands/locks/list.cc:113 src/commands/repos/list.cc:41
+#: src/commands/locks/list.cc:135 src/commands/repos/list.cc:41
 #: src/commands/repos/list.cc:223 src/commands/services/list.cc:105
 #: src/info.cc:58 src/info.cc:448 src/info.cc:692 src/search.cc:48
 #: src/search.cc:196 src/search.cc:343 src/search.cc:487 src/search.cc:551
@@ -3231,13 +3234,13 @@ msgstr[0] "%lu 個のパッケージロックを削除しました。"
 msgid "Name"
 msgstr "名前"
 
-#: src/commands/locks/list.cc:115
+#: src/commands/locks/list.cc:137
 msgid "Matches"
 msgstr "適合条件"
 
 #. translators: Table column header
 #. translators: type (general header)
-#: src/commands/locks/list.cc:116 src/commands/repos/list.cc:52
+#: src/commands/locks/list.cc:138 src/commands/repos/list.cc:52
 #: src/commands/repos/list.cc:261 src/commands/services/list.cc:114
 #: src/info.cc:449 src/search.cc:50 src/search.cc:199
 msgid "Type"
@@ -3245,60 +3248,60 @@ msgstr "種類"
 
 #. translators: property name; short; used like "Name: value"
 #. translators: package's repository (header)
-#: src/commands/locks/list.cc:116 src/info.cc:56 src/search.cc:56
+#: src/commands/locks/list.cc:138 src/info.cc:56 src/search.cc:56
 #: src/search.cc:345 src/search.cc:486 src/search.cc:547 src/update.cc:724
 #: src/utils/misc.cc:227
 msgid "Repository"
 msgstr "リポジトリ"
 
 #. translators: locks table value
-#: src/commands/locks/list.cc:134 src/commands/locks/list.cc:203
+#: src/commands/locks/list.cc:156 src/commands/locks/list.cc:232
 msgid "(multiple)"
 msgstr "(複数)"
 
 #. translators: locks table value
-#: src/commands/locks/list.cc:137 src/commands/locks/list.cc:201
+#: src/commands/locks/list.cc:159 src/commands/locks/list.cc:230
 msgid "(any)"
 msgstr "(任意)"
 
 #. translators: property name; short; used like "Name: value"
-#: src/commands/locks/list.cc:175
+#: src/commands/locks/list.cc:195
 msgid "Keep installed"
 msgstr "インストールしたままにする"
 
 #. translators: property name; short; used like "Name: value"
-#: src/commands/locks/list.cc:183
+#: src/commands/locks/list.cc:203
 msgid "Do not install"
 msgstr "インストールしない"
 
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
-#: src/commands/locks/list.cc:226
+#: src/commands/locks/list.cc:256
 msgid "locks (ll) [OPTIONS]"
 msgstr "locks (ll) [オプション]"
 
-#: src/commands/locks/list.cc:255
+#: src/commands/locks/list.cc:285
 msgid "Show the number of resolvables matched by each lock."
 msgstr "各ロックによってマッチされたresolvableの数を示します。"
 
-#: src/commands/locks/list.cc:256
+#: src/commands/locks/list.cc:286
 msgid "List the resolvables matched by each lock."
 msgstr "各ロックによってマッチされたresolvableを一覧表示します。"
 
-#: src/commands/locks/list.cc:270
+#: src/commands/locks/list.cc:300
 msgid "Error reading the locks file:"
 msgstr "ロックファイルの読み込みの際にエラー:"
 
-#: src/commands/locks/list.cc:277
+#: src/commands/locks/list.cc:307
 msgid "There are no package locks defined."
 msgstr "パッケージロックは定義されていません。"
 
 # =============================================================================
-#: src/commands/locks/remove.cc:27
+#: src/commands/locks/remove.cc:25
 msgid "removelock (rl) [OPTIONS] <LOCK-NUMBER|PACKAGENAME> ..."
 msgstr "removelock (rl) [オプション] <ロック番号|パッケージ名> ..."
 
 #. translators: command description; %1% is acoomand like 'zypper locks'
-#: src/commands/locks/remove.cc:30
+#: src/commands/locks/remove.cc:28
 #, boost-format
 msgid ""
 "Remove a package lock. Specify the lock to remove by its number obtained "
@@ -3307,25 +3310,25 @@ msgstr ""
 "パッケージロックを解除します。 '%1%' で表示される番号かパッケージの名前で指定"
 "してください。"
 
-#: src/commands/locks/remove.cc:47
+#: src/commands/locks/remove.cc:45
 msgid "Remove only locks with specified repository."
 msgstr "指定したリポジトリからのロックのみを解除します。"
 
-#: src/commands/locks/remove.cc:83
+#: src/commands/locks/remove.cc:81
 msgid "Specified lock has been successfully removed."
 msgstr "指定したパッケージロックを解除しました。"
 
-#: src/commands/locks/remove.cc:125
+#: src/commands/locks/remove.cc:94
 msgid "No lock has been removed."
 msgstr "ロックは解除されませんでした。"
 
-#: src/commands/locks/remove.cc:129
+#: src/commands/locks/remove.cc:98
 #, c-format
 msgid "%zu lock has been successfully removed."
 msgid_plural "%zu locks have been successfully removed."
 msgstr[0] "%zu 個のパッケージロックを解除しました。"
 
-#: src/commands/locks/remove.cc:136
+#: src/commands/locks/remove.cc:105
 msgid "Problem removing the package lock:"
 msgstr "パッケージロックの解除時に問題が発生:"
 
@@ -4290,7 +4293,9 @@ msgstr "指定した重要度のパッチのみを選択します。"
 #. translators: --date <YYYY-MM-DD>
 #: src/commands/selectpatchoptionset.cc:32
 msgid "Select patches issued up to, but not including, the specified date"
-msgstr "指定した日付まで (ただし指定した日付そのものは含みません) に公開されたパッチのみを選択します"
+msgstr ""
+"指定した日付まで (ただし指定した日付そのものは含みません) に公開されたパッチ"
+"のみを選択します"
 
 #. translators: -b, --bugzilla
 #: src/commands/selectpatchoptionset.cc:36
@@ -8020,21 +8025,12 @@ msgstr "%s と %s とは互いに矛盾する指定です。"
 msgid "Unknown package type"
 msgstr "不明なパッケージ種類"
 
-#: src/utils/flags/flagtypes.cc:71
-msgid "Out of range"
-msgstr "範囲外"
-
-#: src/utils/flags/flagtypes.cc:73
-#, boost-format
-msgid "Unknown error while assigning the value %1% to flag %2%."
-msgstr "フラグ %2% に対して値 %1% を割り当てる際、未知のエラーが発生しました。"
-
-#: src/utils/flags/flagtypes.cc:111
+#: src/utils/flags/flagtypes.cc:100
 #, boost-format
 msgid "The flag '%1%' can only be used a maximum of %2% times."
 msgstr "フラグ '%1%' は最大 %2% 回まで指定することができます。"
 
-#: src/utils/flags/flagtypes.cc:199
+#: src/utils/flags/flagtypes.cc:188
 #, c-format, boost-format
 msgid ""
 "Ignoring %s without argument because similar option with an argument has "
@@ -8042,6 +8038,15 @@ msgid ""
 msgstr ""
 "引数が設定された類似オプションが指定されているため、引数のない %s を無視して"
 "います。"
+
+#: src/utils/flags/flagtypes.cc:228
+msgid "Out of range"
+msgstr "範囲外"
+
+#: src/utils/flags/flagtypes.cc:230
+#, boost-format
+msgid "Unknown error while assigning the value %1% to flag %2%."
+msgstr "フラグ %2% に対して値 %1% を割り当てる際、未知のエラーが発生しました。"
 
 #. For '-garbage' argument, with 'a', 'b', and 'e' as known options,
 #. getopt_long reports 'a', 'b', and 'e' as known options.
@@ -8327,6 +8332,9 @@ msgid "Enter '%s' for '%s' or '%s' for '%s' if nothing else works for you."
 msgstr ""
 "うまく動作しない場合、 「%s」(「%s」の場合)、 「%s」(「%s」の場合)を入力して"
 "ください。"
+
+#~ msgid "Select packages by capability."
+#~ msgstr "能力設定でパッケージを選択します。"
 
 #~ msgid ""
 #~ "Different package type specified in '%s' option and '%s' argument. Will "

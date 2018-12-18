@@ -22,7 +22,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper.fi\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-12-10 19:36+0100\n"
+"POT-Creation-Date: 2018-12-18 13:53+0100\n"
 "PO-Revision-Date: 2018-10-20 13:02+0000\n"
 "Last-Translator: Tommi Nieminen <software@legisign.org>\n"
 "Language-Team: Finnish <https://l10n.opensuse.org/projects/zypper/master/fi/"
@@ -537,7 +537,7 @@ msgstr ""
 msgid "This is an alias for '%s'."
 msgstr "Tämä on alias komennolle '%s'."
 
-#: src/commands/commandhelpformatter.h:99 src/utils/flags/zyppflags.cc:302
+#: src/commands/commandhelpformatter.h:99 src/utils/flags/zyppflags.cc:512
 msgid "Command options:"
 msgstr "Komentovalinnat:"
 
@@ -636,80 +636,80 @@ msgid "Continue?"
 msgstr "Jatketaanko?"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:22
+#: src/utils/flags/zyppflags.h:23
 msgid "ALIAS"
 msgstr "ALIAS"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:24
+#: src/utils/flags/zyppflags.h:25
 msgid "ALIAS|#|URI"
 msgstr "ALIAS|#|URI"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:26
+#: src/utils/flags/zyppflags.h:27
 msgid "CATEGORY"
 msgstr "LUOKKA"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:28
+#: src/utils/flags/zyppflags.h:29
 msgid "DIR"
 msgstr "hakemisto"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:30
+#: src/utils/flags/zyppflags.h:31
 msgid "FILE"
 msgstr "TIEDOSTO"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:32
+#: src/utils/flags/zyppflags.h:33
 msgid "FILE.repo"
 msgstr "TIEDOSTO.repo"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:34
+#: src/utils/flags/zyppflags.h:35
 msgid "FORMAT"
 msgstr "MUOTO"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:36
+#: src/utils/flags/zyppflags.h:37
 msgid "INTEGER"
 msgstr "luku"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:38
+#: src/utils/flags/zyppflags.h:39
 msgid "PATH"
 msgstr "SIJAINTI"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:40
+#: src/utils/flags/zyppflags.h:41
 msgid "SEVERITY"
 msgstr "VAKAVUUS"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:42
+#: src/utils/flags/zyppflags.h:43
 msgid "STRING"
 msgstr "MERKKIJONO"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:44
+#: src/utils/flags/zyppflags.h:45
 msgid "TAG"
 msgstr "TUNNISTE"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:46
+#: src/utils/flags/zyppflags.h:47
 msgid "TYPE"
 msgstr "TYYPPI"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #. translators: property name; short; used like "Name: value"
-#: src/utils/flags/zyppflags.h:48 src/commands/repos/list.cc:42
+#: src/utils/flags/zyppflags.h:49 src/commands/repos/list.cc:42
 #: src/commands/repos/list.cc:268 src/commands/services/list.cc:116
 #: src/repos.cc:1256
 msgid "URI"
 msgstr "URI"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:50
+#: src/utils/flags/zyppflags.h:51
 msgid "YYYY-MM-DD"
 msgstr "VVVV-KK-PP"
 
@@ -2303,12 +2303,12 @@ msgid "Add a package lock."
 msgstr "Lukitsee paketin."
 
 #. translators: command summary: removelock, rl
-#: src/Zypper.cc:724 src/commands/locks/remove.cc:28
+#: src/Zypper.cc:724 src/commands/locks/remove.cc:26
 msgid "Remove a package lock."
 msgstr "Poistaa paketin lukituksen."
 
 #. translators: command summary: locks, ll
-#: src/Zypper.cc:726 src/commands/locks/list.cc:227
+#: src/Zypper.cc:726 src/commands/locks/list.cc:257
 msgid "List current package locks."
 msgstr "Näyttää listan lukituksista."
 
@@ -3098,8 +3098,8 @@ msgid "Select packages by plain name, not by capability."
 msgstr "Valitse paketit ainoastaan nimen perusteella."
 
 #: src/commands/installremove.cc:55
-msgid "Select packages by capability."
-msgstr "Valitsee paketin sen ominaisuuksien perusteella."
+msgid "Select packages solely by capability."
+msgstr ""
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/installremove.cc:74
@@ -3269,13 +3269,13 @@ msgstr ""
 msgid "Restrict the lock to the specified repository."
 msgstr "Rajoita lukitus vain tiettyyn asennuslähteeseen."
 
-#: src/commands/locks/add.cc:103
+#: src/commands/locks/add.cc:76
 msgid "Specified lock has been successfully added."
 msgid_plural "Specified locks have been successfully added."
 msgstr[0] "Pakettilukon määritys onnistui."
 msgstr[1] "Pakettilukkojen määritys onnistui."
 
-#: src/commands/locks/add.cc:110
+#: src/commands/locks/add.cc:83
 msgid "Problem adding the package lock:"
 msgstr "Virhe lukittaessa pakettia:"
 
@@ -3309,7 +3309,7 @@ msgstr[1] "Poistettiin %lu lukkoa."
 #. translators: property name; short; used like "Name: value"
 #. translators: Table column header
 #. translators: name (general header)
-#: src/commands/locks/list.cc:113 src/commands/repos/list.cc:41
+#: src/commands/locks/list.cc:135 src/commands/repos/list.cc:41
 #: src/commands/repos/list.cc:223 src/commands/services/list.cc:105
 #: src/info.cc:58 src/info.cc:448 src/info.cc:692 src/search.cc:48
 #: src/search.cc:196 src/search.cc:343 src/search.cc:487 src/search.cc:551
@@ -3317,14 +3317,14 @@ msgstr[1] "Poistettiin %lu lukkoa."
 msgid "Name"
 msgstr "Nimi"
 
-#: src/commands/locks/list.cc:115
+#: src/commands/locks/list.cc:137
 #, fuzzy
 msgid "Matches"
 msgstr "Korjauspäivitykset"
 
 #. translators: Table column header
 #. translators: type (general header)
-#: src/commands/locks/list.cc:116 src/commands/repos/list.cc:52
+#: src/commands/locks/list.cc:138 src/commands/repos/list.cc:52
 #: src/commands/repos/list.cc:261 src/commands/services/list.cc:114
 #: src/info.cc:449 src/search.cc:50 src/search.cc:199
 msgid "Type"
@@ -3332,63 +3332,63 @@ msgstr "Tyyppi"
 
 #. translators: property name; short; used like "Name: value"
 #. translators: package's repository (header)
-#: src/commands/locks/list.cc:116 src/info.cc:56 src/search.cc:56
+#: src/commands/locks/list.cc:138 src/info.cc:56 src/search.cc:56
 #: src/search.cc:345 src/search.cc:486 src/search.cc:547 src/update.cc:724
 #: src/utils/misc.cc:227
 msgid "Repository"
 msgstr "Asennuslähde"
 
 #. translators: locks table value
-#: src/commands/locks/list.cc:134 src/commands/locks/list.cc:203
+#: src/commands/locks/list.cc:156 src/commands/locks/list.cc:232
 msgid "(multiple)"
 msgstr "(useita)"
 
 #. translators: locks table value
-#: src/commands/locks/list.cc:137 src/commands/locks/list.cc:201
+#: src/commands/locks/list.cc:159 src/commands/locks/list.cc:230
 msgid "(any)"
 msgstr "(mikä tahansa)"
 
 #. translators: property name; short; used like "Name: value"
-#: src/commands/locks/list.cc:175
+#: src/commands/locks/list.cc:195
 #, fuzzy
 msgid "Keep installed"
 msgstr "ei asennettu"
 
 #. translators: property name; short; used like "Name: value"
-#: src/commands/locks/list.cc:183
+#: src/commands/locks/list.cc:203
 #, fuzzy
 msgid "Do not install"
 msgstr "ei asennettu"
 
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
-#: src/commands/locks/list.cc:226
+#: src/commands/locks/list.cc:256
 #, fuzzy
 msgid "locks (ll) [OPTIONS]"
 msgstr "näyttää kaikki valinnat"
 
-#: src/commands/locks/list.cc:255
+#: src/commands/locks/list.cc:285
 msgid "Show the number of resolvables matched by each lock."
 msgstr ""
 
-#: src/commands/locks/list.cc:256
+#: src/commands/locks/list.cc:286
 msgid "List the resolvables matched by each lock."
 msgstr ""
 
-#: src/commands/locks/list.cc:270
+#: src/commands/locks/list.cc:300
 msgid "Error reading the locks file:"
 msgstr "Virhe luettaessa lukkotiedostoa:"
 
-#: src/commands/locks/list.cc:277
+#: src/commands/locks/list.cc:307
 msgid "There are no package locks defined."
 msgstr "Yhtään pakettilukkoa ei ole määritetty."
 
 # =============================================================================
-#: src/commands/locks/remove.cc:27
+#: src/commands/locks/remove.cc:25
 msgid "removelock (rl) [OPTIONS] <LOCK-NUMBER|PACKAGENAME> ..."
 msgstr "removelock (rl) [valinnat] <lukon numero|paketin nimi> ..."
 
 #. translators: command description; %1% is acoomand like 'zypper locks'
-#: src/commands/locks/remove.cc:30
+#: src/commands/locks/remove.cc:28
 #, boost-format
 msgid ""
 "Remove a package lock. Specify the lock to remove by its number obtained "
@@ -3397,26 +3397,26 @@ msgstr ""
 "Poistaa paketin lukituksen. Määritä poistettava lukko sen numerolla joka "
 "saadaan '%1%' tai paketin nimen mukaan."
 
-#: src/commands/locks/remove.cc:47
+#: src/commands/locks/remove.cc:45
 msgid "Remove only locks with specified repository."
 msgstr "Poistaa lukituksen vain tietystä asennuslähteestä."
 
-#: src/commands/locks/remove.cc:83
+#: src/commands/locks/remove.cc:81
 msgid "Specified lock has been successfully removed."
 msgstr "Pakettilukon poistaminen onnistui."
 
-#: src/commands/locks/remove.cc:125
+#: src/commands/locks/remove.cc:94
 msgid "No lock has been removed."
 msgstr "Lukituksia ei poistettu."
 
-#: src/commands/locks/remove.cc:129
+#: src/commands/locks/remove.cc:98
 #, fuzzy, c-format
 msgid "%zu lock has been successfully removed."
 msgid_plural "%zu locks have been successfully removed."
 msgstr[0] "Lukon %zu poistaminen onnistui."
 msgstr[1] "%zu lukkoa poistettiin onnistuneesti."
 
-#: src/commands/locks/remove.cc:136
+#: src/commands/locks/remove.cc:105
 msgid "Problem removing the package lock:"
 msgstr "Virhe pakettilukon poistamisessa:"
 
@@ -8062,26 +8062,26 @@ msgstr ""
 msgid "Unknown package type"
 msgstr ""
 
-#: src/utils/flags/flagtypes.cc:71
-msgid "Out of range"
-msgstr ""
-
-#: src/utils/flags/flagtypes.cc:73
-#, boost-format
-msgid "Unknown error while assigning the value %1% to flag %2%."
-msgstr ""
-
-#: src/utils/flags/flagtypes.cc:111
+#: src/utils/flags/flagtypes.cc:100
 #, boost-format
 msgid "The flag '%1%' can only be used a maximum of %2% times."
 msgstr ""
 
-#: src/utils/flags/flagtypes.cc:199
+#: src/utils/flags/flagtypes.cc:188
 #, c-format, boost-format
 msgid ""
 "Ignoring %s without argument because similar option with an argument has "
 "been specified."
 msgstr "Jätetään \"%s\" huomiotta, koska samankaltainen valitsin on annettu."
+
+#: src/utils/flags/flagtypes.cc:228
+msgid "Out of range"
+msgstr ""
+
+#: src/utils/flags/flagtypes.cc:230
+#, boost-format
+msgid "Unknown error while assigning the value %1% to flag %2%."
+msgstr ""
 
 #. For '-garbage' argument, with 'a', 'b', and 'e' as known options,
 #. getopt_long reports 'a', 'b', and 'e' as known options.
@@ -8374,6 +8374,9 @@ msgstr "Virheellinen vastaus \"%s\"."
 #, c-format, boost-format
 msgid "Enter '%s' for '%s' or '%s' for '%s' if nothing else works for you."
 msgstr "Vastaa \"%s\" -> \"%s\" tai \"%s\" -> \"%s\" sijasta, ellei muu toimi."
+
+#~ msgid "Select packages by capability."
+#~ msgstr "Valitsee paketin sen ominaisuuksien perusteella."
 
 #~ msgid ""
 #~ "Different package type specified in '%s' option and '%s' argument. Will "
