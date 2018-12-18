@@ -5,12 +5,16 @@
                              |__/|_|  |_|
 \*---------------------------------------------------------------------------*/
 
-#ifndef ZYPPER_SUBCOMMAND_H
-#define ZYPPER_SUBCOMMAND_H
+#ifndef ZYPPER_COMMANDS_SUBCOMMAND_H
+#define ZYPPER_COMMANDS_SUBCOMMAND_H
+
+#include "commands/basecommand.h"
+
+#include <zypp/Pathname.h>
 
 #include <vector>
 #include <string>
-#include <zypp/Pathname.h>
+#include <memory>
 
 class Zypper;
 
@@ -33,28 +37,29 @@ class Zypper;
 
  (Idea and wording are shamelessly stolen from git :)
 */
+
 /** subcommand specific options */
-struct SubcommandOptions : public MixinOptions<ZypperCommand::SUBCOMMAND>
+struct SubcommandOptions
 {
   /** Subcommand user help (translated).
    * Unlike other commands, this page is created dynamicly for
    * subcommand overview. Command specific help will run
    * 'man zypper-COMMAND' to display the page immediately.
    */
-  virtual std::ostream & showHelpOn( std::ostream & out ) const;
+  std::ostream & showHelpOn( std::ostream & out ) const;
 
 public:
   struct Detected
   {
-    std::string _cmd;	///< original command name
-    std::string _name;	///< name of the execuatble
-    Pathname	_path;	///< path of the execuatble
+    std::string    _cmd;	///< original command name
+    std::string    _name;	///< name of the execuatble
+    zypp::Pathname _path;	///< path of the execuatble
   };
 
   typedef std::vector<std::string> Arglist;
 
 
-  static const Pathname _execdir;	///< default location for subcommands
+  static const zypp::Pathname _execdir;	///< default location for subcommands
 
   Detected 	_detected;	///< detected/detectable details
   Arglist	_args;		///< stored command and args (command as _args[0])
@@ -71,19 +76,42 @@ public:
   { _args = std::move(args_r); }
 };
 
-/** Execute subcommand (or show its help).
- *
- * \returns 126 subcommand found but not executable
- * \returns 127 subcommand not found
- * \returns subcommands exitCode
- */
-int subcommand( Zypper & zypper_r );
-/** \overload using custom options_r (see \ref SLE15_SearchPackagesHintHack). */
-int subcommand( Zypper & zypper_r, shared_ptr<SubcommandOptions> options_r );
 
-/** Test whether \c strval_r denotes a subcommand and remember the \ref Detected details.
- * \ref SubcommandOptions can load the last detected details if necessary.
- */
-bool isSubcommand( const std::string & strval_r );
+class SubCmd : public ZypperBaseCommand
+{
+public:
+  SubCmd ( const std::vector<std::string> &commandAliases_r, boost::shared_ptr<SubcommandOptions> options_r = boost::shared_ptr<SubcommandOptions>() );
+
+  /** Test whether \c strval_r denotes a subcommand and remember the \ref Detected details.
+   * \ref SubcommandOptions can load the last detected details if necessary.
+   */
+  static bool isSubCommand (const std::string &strval_r );
+
+  /** Execute subcommand (or show its help).
+   *
+   * \returns 126 subcommand found but not executable
+   * \returns 127 subcommand not found
+   * \returns subcommands exitCode
+   */
+  int runCmd( Zypper &zypper );
+
+  boost::shared_ptr<SubcommandOptions>  subCmdOptions ();
+
+private:
+  /** Store command in \c _args[0]. */
+  void setArg0( std::string arg0_r );
+
+private:
+  boost::shared_ptr<SubcommandOptions> _options;
+
+  // ZypperBaseCommand interface
+public:
+  std::string help() override;
+
+protected:
+  zypp::ZyppFlags::CommandGroup cmdOptions() const override;
+  void doReset() override;
+  int execute( Zypper &zypper, const std::vector<std::string> &positionalArgs ) override;
+};
 
 #endif // ZYPPER_SUBCOMMAND_H

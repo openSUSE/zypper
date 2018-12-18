@@ -53,7 +53,6 @@
 #include "misc.h"
 #include "search.h"
 #include "info.h"
-#include "subcommand.h"
 
 #include "output/OutNormal.h"
 #include "output/OutXML.h"
@@ -62,32 +61,12 @@
 #include "utils/flags/exceptions.h"
 #include "global-settings.h"
 
-#include "commands/commandhelpformatter.h"
-#include "commands/locks.h"
 #include "commands/search/search-packages-hinthack.h"
-#include "commands/services/common.h"
-#include "commands/services/refresh.h"
-#include "commands/conditions.h"
-#include "commands/reposerviceoptionsets.h"
-#include "commands/repos/refresh.h"
-#include "commands/search/search.h"
 #include "commands/help.h"
+#include "commands/subcommand.h"
 using namespace zypp;
 
 bool sigExitOnce = true;	// Flag to prevent nested calls to Zypper::immediateExit
-
-///////////////////////////////////////////////////////////////////
-namespace cli
-{
-  inline std::string errorMutuallyExclusiveOptions( const std::string & options_r )
-  {
-    // translator: %1% is a list of command line option names
-    return str::Format(_("These options are mutually exclusive: %1%")) % options_r;
-  }
-
-} // namespace cli
-///////////////////////////////////////////////////////////////////
-
 
 ZYpp::Ptr God = NULL;
 void Zypper::assertZYppPtrGod()
@@ -167,15 +146,9 @@ void Zypper::assertZYppPtrGod()
     ZYPP_THROW( ExitRequestException("ZYpp error, cannot get ZYpp lock") );
   }
 }
-///////////////////////////////////////////////////////////////////
-
-/// \todo Investigate why the global copts here is used in addition to
-/// Zypper::_copts? There should not be 2 instances with possibly
-/// different content. The global here is also unnecessarily exported
-/// to utils/getopt.
-parsed_opts copts; // command options
 
 ///////////////////////////////////////////////////////////////////
+
 namespace {
 
   /** Whether user may create \a dir_r or has rw-access to it. */
@@ -198,21 +171,10 @@ namespace {
     return mayuse;
   }
 
-  inline void legacyCLITranslate( parsed_opts & copts_r, const std::string & old_r, const std::string & new_r, Out::Verbosity verbosity_r = Out::NORMAL, LegacyCLIMsgType type = LegacyCLIMsgType::Local )
-  {
-    if ( copts_r.count( old_r ) )
-    {
-      Zypper::instance().out().warning( legacyCLIStr( old_r, new_r, type ), verbosity_r );
-      if ( new_r.size() ) {
-        if ( ! copts_r.count( new_r ) )
-          copts_r[new_r];
-      }
-      copts_r.erase( old_r );
-    }
-  }
 } //namespace
+
 ///////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////
+
 Zypper::Zypper()
 : _argc( 0 )
 , _argv( nullptr )
@@ -268,9 +230,15 @@ int Zypper::main( int argc, char ** argv )
 	  cleanup();
 	  break;
 
-	case ZypperCommand::SUBCOMMAND_e:
-	  subcommand( *this );
+  case ZypperCommand::SUBCOMMAND_e: {
+    std::shared_ptr<SubCmd>  cmd = std::dynamic_pointer_cast<SubCmd>( command().commandObject() );
+    if ( cmd )
+      cmd->runCmd( *this );
+    else {
+      ZYPP_THROW( Exception ("Invalid command object") );
+    }
 	  break;
+  }
 
 	case ZypperCommand::NONE_e:
 	  setExitCode( ZYPPER_EXIT_ERR_SYNTAX );
@@ -452,29 +420,33 @@ void Zypper::processGlobalOptions()
   {
     // subcommand command args are handled here because
     // the command is treated differently in main.
-    shared_ptr<SubcommandOptions> myOpts( assertCommandOptions<SubcommandOptions>() );
-    myOpts->loadDetected();
 
-    if ( myOpts->_detected._name.empty() )
-    {
-      // Command name is the builtin 'subcommand', no executable.
-      // For now we turn on the help.
-      setRunningHelp( true );
-    }
-    else
-    {
-      if ( optind > 2 )
+    std::shared_ptr<SubCmd> cmd = std::dynamic_pointer_cast<SubCmd>(command().commandObject());
+    if ( cmd ) {
+      shared_ptr<SubcommandOptions> myOpts( cmd->subCmdOptions() );
+      myOpts->loadDetected();
+
+      if ( myOpts->_detected._name.empty() )
       {
-        out().error(
-          // translators: %1%  - is the name of a subcommand
-          str::Format(_("Subcommand %1% does not support zypper global options."))
-          % myOpts->_detected._name );
-        print_command_help_hint( *this );
-        setExitCode( ZYPPER_EXIT_ERR_INVALID_ARGS );
-        ZYPP_THROW( ExitRequestException("invalid args") );
+        // Command name is the builtin 'subcommand', no executable.
+        // For now we turn on the help.
+        setRunningHelp( true );
       }
-      // save args (incl. the command itself as argv[0])
-      myOpts->args( _argv+(optind-1), _argv+_argc );
+      else
+      {
+        if ( optind > 2 )
+        {
+          out().error(
+            // translators: %1%  - is the name of a subcommand
+            str::Format(_("Subcommand %1% does not support zypper global options."))
+            % myOpts->_detected._name );
+          print_command_help_hint( *this );
+          setExitCode( ZYPPER_EXIT_ERR_INVALID_ARGS );
+          ZYPP_THROW( ExitRequestException("invalid args") );
+        }
+        // save args (incl. the command itself as argv[0])
+        myOpts->args( _argv+(optind-1), _argv+_argc );
+      }
     }
   }
 
@@ -707,9 +679,6 @@ void Zypper::shellCleanup()
 
   // clear any previous arguments
   _arguments.clear();
-  // clear command options
-  if (!_copts.empty())
-    _copts.clear();
   // clear the command
   _command = ZypperCommand::NONE;
   // clear command help text
@@ -779,9 +748,6 @@ void Zypper::processCommandOptions()
 {
   MIL << "START" << endl;
 
-  struct option no_options = { 0, 0, 0, 0 };
-  struct option *specific_options = &no_options;
-
   if ( command() == ZypperCommand::HELP )
   {
     // in shell, check next argument to see if command-specific help is wanted
@@ -796,7 +762,7 @@ void Zypper::processCommandOptions()
           setCommand( ZypperCommand( cmd ) );
         }
         catch ( Exception & ex )
-	{
+        {
           // unknown command. Known command will be handled in the switch
           // and doCommand()
           if ( !cmd.empty() && cmd != "-h" && cmd != "--help" )
@@ -849,112 +815,13 @@ void Zypper::processCommandOptions()
       setExitCode( ZYPPER_EXIT_ERR_SYNTAX );
       return;
     }
-
-    MIL << "New Style command done " << endl;
-    return;
-  }
-
-  switch ( command().toEnum() )
-  {
-  case ZypperCommand::SUBCOMMAND_e:
-  {
-    // This is different from other commands: Executed in main;
-    // here we are prepared for showing help only.
-    if ( ! runningHelp() )
-      setRunningHelp( true );
-
-    static struct option options[] = {
-      {0, 0, 0, 0}
-    };
-    specific_options = options;
-
-    shared_ptr<SubcommandOptions> myOpts( assertCommandOptions<SubcommandOptions>() );
-    myOpts->loadDetected();
-    // the following will either pop up a manpage or return a string to be displayed.
-    _command_help = assertCommandOptions<SubcommandOptions>()->helpString();
-    break;
-  }
-
-  default:
-  {
-    if ( runningHelp() )
-      break;
-
-    ERR << "Unknown or unexpected command" << endl;
-    out().error(_("Unexpected program flow."));
-    report_a_bug( out() );
-  }
-  }
-
-  // no need to parse command options if we already know we just want help
-  if ( runningHelp() )
-    return;
-
-  // parse command options
-  _copts = parse_options( argc(), argv(), specific_options );
-  searchPackagesHintHack::argvArgIdx = optind;
-  if ( _copts.count("_unknown") || _copts.count("_missing_arg") )
-  {
-    setExitCode( ZYPPER_EXIT_ERR_SYNTAX );
-    ERR << "Unknown option or missing argument, returning." << endl;
-    return;
-  }
-
-  //---------------------------------------------------------------------------
-  //@TODO REMOVE THIS CODE WITH COPTS
-
-  GlobalSettings::reset();
-
-  // set the global dry-run setting
-  DryRunSettings::instanceNoConst()._enabled = _copts.count("dry-run");
-
-  // set the global repo setting
-  parsed_opts::const_iterator it;
-  auto &repoFilter = InitRepoSettings::instanceNoConst()._repoFilter;
-  // --repo
-  if ( ( it = copts.find("repo")) != copts.end() )
-     repoFilter.insert( repoFilter.end(), it->second.begin(), it->second.end() );
-  // --catalog - rug compatibility
-  if ( ( it = copts.find("catalog")) != copts.end() )
-     repoFilter.insert( repoFilter.end(), it->second.begin(), it->second.end() );
-  //---------------------------------------------------------------------------
-
-  // Leagcy cli translations (mostly from rug to zypper)
-  legacyCLITranslate( _copts, "agree-to-third-party-licenses",	"auto-agree-with-licenses" );
-  legacyCLITranslate( _copts, "sort-by-catalog",		"sort-by-repo" );
-  legacyCLITranslate( _copts, "uninstalled-only",		"not-installed-only",	Out::HIGH );	// bsc#972997: Prefer --not-installed-only over misleading --uninstalled-only
-
-  // bsc#957862: pkg/apt/yum user convenience: no-confirm  ==> --non-interactive
-  if ( _copts.count("no-confirm") )
-  {
-    if ( ! _config.non_interactive )
-    {
-      out().info(_("Entering non-interactive mode."), Out::HIGH );
-      MIL << "Entering non-interactive mode" << endl;
-     _config.non_interactive = true;
+  } else {
+    if ( !runningHelp() ) {
+      ERR << "Unknown or unexpected command" << endl;
+      out().error(_("Unexpected program flow."));
+      report_a_bug( out() );
     }
   }
-
-  ::copts = _copts;
-  MIL << "Done parsing options." << endl;
-
-  // treat --help command option like global --help option from now on
-  // i.e. when used together with command to print command specific help
-  setRunningHelp( runningHelp() || copts.count("help") );
-
-  if ( optind < argc() )
-  {
-    std::ostringstream s;
-    s << _("Non-option program arguments: ");
-    while ( optind < argc() )
-    {
-      std::string argument = argv()[optind++];
-      s << "'" << argument << "' ";
-      _arguments.push_back( argument );
-    }
-    out().info( s.str(), Out::HIGH );
-  }
-
   MIL << "Done " << endl;
 }
 
@@ -981,22 +848,23 @@ void Zypper::doCommand()
     default:
       if ( _config.changedRoot && _config.root_dir != "/" )
       {
-	// bnc#575096: Quick fix
-	::setenv( "ZYPP_LOCKFILE_ROOT", _config.root_dir.c_str(), 0 );
+        // bnc#575096: Quick fix
+        ::setenv( "ZYPP_LOCKFILE_ROOT", _config.root_dir.c_str(), 0 );
       }
       {
-	const char *roh = getenv( "ZYPP_READONLY_HACK" );
-	if ( roh != NULL && roh[0] == '1' )
-	  zypp_readonly_hack::IWantIt ();
+        const char *roh = getenv( "ZYPP_READONLY_HACK" );
+        if ( roh != NULL && roh[0] == '1' )
+          zypp_readonly_hack::IWantIt ();
 
-	else if ( command() == ZypperCommand::LIST_REPOS
-	  || command() == ZypperCommand::LIST_SERVICES
-	  || command() == ZypperCommand::VERSION_CMP
-	  || command() == ZypperCommand::TARGET_OS )
-	  zypp_readonly_hack::IWantIt (); // #247001, #302152
+        else if ( command() == ZypperCommand::LIST_REPOS
+                  || command() == ZypperCommand::LIST_SERVICES
+                  || command() == ZypperCommand::VERSION_CMP
+                  || command() == ZypperCommand::TARGET_OS )
+          zypp_readonly_hack::IWantIt (); // #247001, #302152
       }
       assertZYppPtrGod();
   }
+
   // === execute command ===
 
   MIL << "Going to process command " << command() << endl;
@@ -1008,16 +876,9 @@ void Zypper::doCommand()
     return;
   }
 
-  ResObject::Kind kind;
-  switch( command().toEnum() )
-  {
-
-  // dummy commands
-  case ZypperCommand::SUBCOMMAND_e:	// subcommands are not expected to be executed here!
-  default:
-    // if the program reaches this line, something went wrong
-    setExitCode( ZYPPER_EXIT_ERR_BUG );
-  }
+  // if the program reaches this line, something went wrong
+  report_a_bug( out() );
+  setExitCode( ZYPPER_EXIT_ERR_BUG );
 }
 
 void Zypper::cleanup()
@@ -1043,6 +904,8 @@ void Zypper::cleanupForSubcommand()
   }
   MIL << "DONE cleanupForSubcommand" << endl;
 }
+
+ExitRequestException::~ExitRequestException() {}
 
 // Local Variables:
 // c-basic-offset: 2
