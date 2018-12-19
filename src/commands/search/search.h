@@ -31,6 +31,9 @@ public:
 
   SearchCmd ( const std::vector<std::string> &commandAliases_r, CmdMode cmdMode_r = CmdMode::Search );
 
+  void setMode(const MatchMode &mode_r );
+  void addRequestedDependency ( const zypp::sat::SolvAttr &dep_r );
+
 private:
   CmdMode _cmdMode;
   MatchMode _mode = MatchMode::Default;

@@ -32,6 +32,8 @@
 #include "commands/listpatches.h"
 #include "commands/listupdates.h"
 #include "commands/search/search.h"
+#include "commands/nullcommands.h"
+#include "commands/configtest.h"
 
 using namespace zypp;
 
@@ -140,7 +142,12 @@ namespace
       { ZypperCommand::LIST_UPDATES_e,     CommandFactory::make<ListUpdatesCmd> ( { "list-updates", "lu" } ) },
 
       { ZypperCommand::SEARCH_e,           CommandFactory::makeAlias<SearchCmd, SearchCmd::CmdMode, SearchCmd::CmdMode::Search>( { "search", "se" } ) },
-      { ZypperCommand::RUG_PATCH_SEARCH_e, CommandFactory::makeAlias<SearchCmd, SearchCmd::CmdMode, SearchCmd::CmdMode::RugPatchSearch>( { "patch-search", "pse" } ) }
+      { ZypperCommand::RUG_PATCH_SEARCH_e, CommandFactory::makeAlias<SearchCmd, SearchCmd::CmdMode, SearchCmd::CmdMode::RugPatchSearch>( { "patch-search", "pse" } ) },
+
+      { ZypperCommand::MOO_e,              CommandFactory::make<MooCmd>( { "moo" } ) },
+      { ZypperCommand::WHAT_PROVIDES_e,    CommandFactory::make<WhatProvidesCmd>( { "what-provides", "wp" } ) },
+      { ZypperCommand::CONFIGTEST_e,       CommandFactory::make<ConfigTestCmd>( { "configtest" } ) },
+      { ZypperCommand::RUG_PING_e,         CommandFactory::make<RupPingCmd>( { "ping" } ) }
     };
     return table;
   }
@@ -188,7 +195,7 @@ namespace
       //_t( PATTERNS_e )		| "patterns"		| "pt";
       //_t( PRODUCTS_e )		| "products"		| "pd";
 
-      _t( WHAT_PROVIDES_e )	| "what-provides"	| "wp";
+      //_t( WHAT_PROVIDES_e )	| "what-provides"	| "wp";
       //_t( WHAT_REQUIRES_e )	| "what-requires"	| "wr";
       //_t( WHAT_CONFLICTS_e )	| "what-conflicts"	| "wc";
 
@@ -207,15 +214,15 @@ namespace
       _t( HELP_e )		| "help"		| "?";
       _t( SHELL_e )		| "shell"		| "sh";
       _t( SHELL_QUIT_e )	| "quit"		| "exit" | "\004";
-      _t( MOO_e )		| "moo";
+      //_t( MOO_e )		| "moo";
 
-      _t( CONFIGTEST_e)		|  "configtest";
+      //_t( CONFIGTEST_e)		|  "configtest";
 
       //_t( RUG_PATCH_INFO_e )	| "patch-info";
       //_t( RUG_PATTERN_INFO_e )	| "pattern-info";
       //_t( RUG_PRODUCT_INFO_e )	| "product-info";
       //_t( RUG_PATCH_SEARCH_e )	| "patch-search" | "pse";
-      _t( RUG_PING_e )		| "ping";
+      //_t( RUG_PING_e )		| "ping";
 #undef _t
 
       // patch the table to contain all new style commands

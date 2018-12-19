@@ -215,6 +215,11 @@ std::vector<std::string> ZypperBaseCommand::positionalArguments() const
   return _positionalArguments;
 }
 
+void ZypperBaseCommand::setPositionalArguments(const std::vector<std::string> &positionalArguments)
+{
+  _positionalArguments = positionalArguments;
+}
+
 int ZypperBaseCommand::run( Zypper &zypper )
 {
   MIL << "run: " << command().front() << endl;
