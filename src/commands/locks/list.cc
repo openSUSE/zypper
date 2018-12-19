@@ -249,9 +249,9 @@ namespace out
 } // namespace out
 ///////////////////////////////////////////////////////////////////
 
-ListLocksCmd::ListLocksCmd(const std::vector<std::string> &commandAliases_r) :
+ListLocksCmd::ListLocksCmd(std::vector<std::string> &&commandAliases_r) :
   ZypperBaseCommand (
-    commandAliases_r,
+    std::move( commandAliases_r ),
     // translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
     _("locks (ll) [OPTIONS]"),
     _("List current package locks.")

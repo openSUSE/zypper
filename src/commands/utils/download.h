@@ -39,7 +39,7 @@ class Zypper;
 class DownloadCmd : public ZypperBaseCommand
 {
 public:
-  DownloadCmd ( const std::vector<std::string> &commandAliases_r );
+  DownloadCmd ( std::vector<std::string> &&commandAliases_r );
 
 private:
   DryRunOptionSet _dryRun { *this };

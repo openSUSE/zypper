@@ -13,9 +13,9 @@
  * @todo rewrite shell handling and move the code into this file
  */
 
-ShellCmd::ShellCmd(const std::vector<std::string> &commandAliases_r) :
+ShellCmd::ShellCmd(std::vector<std::string> &&commandAliases_r) :
   ZypperBaseCommand (
-    commandAliases_r,
+    std::move( commandAliases_r ),
     // translators: command synopsis; do not translate lowercase words
     _("shell (sh)"),
     // translators: command summary: shell, sh
@@ -47,9 +47,9 @@ int ShellCmd::execute(Zypper &zypper, const std::vector<std::string> &)
 }
 
 
-ShellQuitCmd::ShellQuitCmd(const std::vector<std::string> &commandAliases_r) :
+ShellQuitCmd::ShellQuitCmd( std::vector<std::string> &&commandAliases_r ) :
   ZypperBaseCommand (
-    commandAliases_r,
+    std::move( commandAliases_r ),
     // translators: command synopsis; do not translate lowercase words
     _("quit (exit, ^D)"),
     // translators: command description

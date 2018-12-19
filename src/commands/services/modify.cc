@@ -10,9 +10,9 @@
 #include "repos.h"
 
 
-ModifyServiceCmd::ModifyServiceCmd( const std::vector<std::string> &commandAliases_r )
+ModifyServiceCmd::ModifyServiceCmd(std::vector<std::string> &&commandAliases_r )
   : ZypperBaseCommand(
-    commandAliases_r,
+    std::move( commandAliases_r ),
       {
         // translators: command synopsis; do not translate lowercase words
         _("modifyservice (ms) <OPTIONS> <ALIAS|#|URI>"),

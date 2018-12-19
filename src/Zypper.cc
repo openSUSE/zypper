@@ -345,6 +345,7 @@ void Zypper::processGlobalOptions()
   if ( optind < _argc )
   {
     try { setCommand( ZypperCommand( _argv[optind++] ) ); }
+
     // exception from command parsing
     catch ( const Exception & e )
     {

@@ -222,7 +222,7 @@ private:
   void safeDoCommand();
   void doCommand();
 
-  void setCommand( const ZypperCommand & command )	{ _command = command; }
+  void setCommand( const ZypperCommand &command )	{ _command = command; }
   void setRunningShell( bool value = true )		{ _running_shell = value; }
   void setRunningHelp( bool value = true )		{ _running_help = value; }
 

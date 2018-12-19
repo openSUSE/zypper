@@ -179,7 +179,7 @@ struct ZypperCommand
     Alias,
     Factory
   };
-  using CmdDesc = std::tuple< ZypperCommand::Command, std::string, std::vector<std::string>, CmdFactory >;
+  using CmdDesc = std::tuple< ZypperCommand::Command, std::string, std::vector<const char *>, CmdFactory >;
 
   ZypperCommand( Command command );
 
@@ -209,6 +209,12 @@ inline std::ostream & operator<<( std::ostream & str, const ZypperCommand & obj 
 
 inline bool operator==(const ZypperCommand & obj1, const ZypperCommand & obj2)
 { return obj1.toEnum() == obj2.toEnum(); }
+
+inline bool operator==(const ZypperCommand & obj1, const ZypperCommand::Command & enu)
+{ return obj1.toEnum() == enu; }
+
+inline bool operator==(const ZypperCommand::Command & enu, const ZypperCommand & obj )
+{ return obj.toEnum() == enu; }
 
 inline bool operator!=(const ZypperCommand & obj1, const ZypperCommand & obj2)
 { return obj1.toEnum() != obj2.toEnum(); }

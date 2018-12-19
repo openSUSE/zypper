@@ -12,9 +12,9 @@
 using namespace zypp;
 
 
-LicensesCmd::LicensesCmd( const std::vector<std::string> &commandAliases_r ) :
+LicensesCmd::LicensesCmd(std::vector<std::string> &&commandAliases_r ) :
   ZypperBaseCommand (
-    commandAliases_r,
+    std::move( commandAliases_r ),
     // translators: command synopsis; do not translate lowercase words
     _("licenses"),
     // translators: command summary: licenses

@@ -10,9 +10,9 @@
 #include "utils/messages.h"
 #include "src/update.h"
 
-PatchCheckCmd::PatchCheckCmd(const std::vector<std::string> &commandAliases_r) :
+PatchCheckCmd::PatchCheckCmd( std::vector<std::string> &&commandAliases_r ) :
   ZypperBaseCommand (
-    commandAliases_r,
+    std::move( commandAliases_r ),
     // translators: command synopsis; do not translate lowercase words
     _("patch-check (pchk) [OPTIONS]"),
     // translators: command summary: patch-check, pchk

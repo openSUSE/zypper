@@ -15,7 +15,7 @@
 class RemoveServiceCmd : public ZypperBaseCommand
 {
 public:
-  RemoveServiceCmd( const std::vector<std::string> &commandAliases_r );
+  RemoveServiceCmd( std::vector<std::string> &&commandAliases_r );
   // ZypperBaseCommand interface
 protected:
   std::vector<BaseCommandConditionPtr> conditions() const override;

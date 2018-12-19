@@ -25,7 +25,7 @@ public:
     Verify
   };
 
-  InrVerifyCmd( const std::vector<std::string> &commandAliases_r, Mode cmdMode_r );
+  InrVerifyCmd( std::vector<std::string> &&commandAliases_r, Mode cmdMode_r );
 
 private:
   Mode _mode = InstallRecommends;

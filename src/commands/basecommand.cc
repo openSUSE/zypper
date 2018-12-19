@@ -31,21 +31,21 @@ BaseCommandCondition::~BaseCommandCondition()
 
 }
 
-ZypperBaseCommand::ZypperBaseCommand(const std::vector<std::string> &commandAliases_r, const std::string &synopsis_r,
-                                     const std::string &summary_r, const std::string &description_r,
+ZypperBaseCommand::ZypperBaseCommand(std::vector<std::string> &&commandAliases_r, std::string &&synopsis_r,
+                                     std::string &&summary_r, std::string &&description_r,
                                      SetupSystemFlags systemInitFlags_r)
-  : ZypperBaseCommand( commandAliases_r, std::vector<std::string>{synopsis_r}, summary_r, description_r, systemInitFlags_r )
+  : ZypperBaseCommand( std::move(commandAliases_r), std::vector<std::string>{ std::move(synopsis_r) }, std::move(summary_r), std::move(description_r), systemInitFlags_r )
 {
 
 }
 
-ZypperBaseCommand::ZypperBaseCommand(const std::vector<std::string> &commandAliases_r, const std::vector<std::string> &synopsis_r,
-                                     const std::string &summary_r, const std::string &description_r,
+ZypperBaseCommand::ZypperBaseCommand(std::vector<std::string> &&commandAliases_r, std::vector<std::string> &&synopsis_r,
+                                     std::string &&summary_r, std::string &&description_r,
                                      SetupSystemFlags systemInitFlags_r)
-  : _commandAliases ( commandAliases_r ),
-    _synopsis ( synopsis_r ),
-    _summary ( summary_r ),
-    _description ( description_r ),
+  : _commandAliases ( std::move( commandAliases_r ) ),
+    _synopsis ( std::move( synopsis_r ) ),
+    _summary ( std::move( summary_r ) ),
+    _description ( std::move( description_r ) ),
     _systemInitFlags ( systemInitFlags_r )
 {
 

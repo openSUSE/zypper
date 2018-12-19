@@ -11,9 +11,9 @@
 
 using namespace zypp;
 
-ProductsCmdBase::ProductsCmdBase(const std::vector<std::string> &commandAliases_r) :
+ProductsCmdBase::ProductsCmdBase(std::vector<std::string> &&commandAliases_r) :
   ZypperBaseCommand (
-    commandAliases_r,
+    std::move( commandAliases_r ),
     // translators: command synopsis; do not translate lowercase words
     _("products (pd) [OPTIONS] [REPOSITORY] ..."),
     // translators: command summary: products, pd

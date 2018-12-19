@@ -25,7 +25,7 @@ public:
   };
   ZYPP_DECLARE_FLAGS(RefreshFlags,RefreshFlagsBits);
 
-  RefreshRepoCmd( const std::vector<std::string> &commandAliases_r );
+  RefreshRepoCmd( std::vector<std::string> &&commandAliases_r );
 
   static int refreshRepositories ( Zypper &zypper, RefreshFlags flags_r = Default, const std::vector<std::string> repos_r = std::vector<std::string>() );
 

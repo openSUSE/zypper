@@ -40,9 +40,9 @@ namespace
 }
 
 
-SearchCmd::SearchCmd( const std::vector<std::string> &commandAliases_r, CmdMode cmdMode_r  ) :
+SearchCmd::SearchCmd(std::vector<std::string> &&commandAliases_r, CmdMode cmdMode_r  ) :
   ZypperBaseCommand (
-    commandAliases_r,
+    std::move( commandAliases_r ),
     std::string(),
     std::string(),
     std::string(),

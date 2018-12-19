@@ -44,7 +44,7 @@ protected:
 class RemoveCmd : public InstallRemoveBase
 {
 public:
-  RemoveCmd( const std::vector<std::string> &commandAliases_r );
+  RemoveCmd( std::vector<std::string> &&commandAliases_r );
 
 private:
   SolverCleanDepsOptionSet _cleanDeps { *this };
@@ -58,7 +58,7 @@ protected:
 class InstallCmd : public InstallRemoveBase
 {
 public:
-  InstallCmd( const std::vector<std::string> &commandAliases_r );
+  InstallCmd( std::vector<std::string> &&commandAliases_r );
 
 private:
   bool _force  = false;

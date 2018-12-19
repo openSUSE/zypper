@@ -10,9 +10,9 @@
 
 using namespace zypp;
 
-CleanLocksCmd::CleanLocksCmd(const std::vector<std::string> &commandAliases_r) :
+CleanLocksCmd::CleanLocksCmd(std::vector<std::string> &&commandAliases_r) :
   ZypperBaseCommand (
-    commandAliases_r,
+    std::move( commandAliases_r ),
     _("cleanlocks (cl)"),
     // translators: command summary
     _("Remove useless locks."),

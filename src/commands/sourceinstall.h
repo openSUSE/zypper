@@ -14,7 +14,7 @@
 class SourceInstallCmd : public ZypperBaseCommand
 {
 public:
-  SourceInstallCmd( const std::vector<std::string> &commandAliases_r );
+  SourceInstallCmd( std::vector<std::string> &&commandAliases_r );
 
 private:
   bool _buildDepsOnly = false;

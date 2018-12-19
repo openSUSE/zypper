@@ -16,7 +16,7 @@
 class CleanLocksCmd : public ZypperBaseCommand
 {
 public:
-  CleanLocksCmd( const std::vector<std::string> &commandAliases_r );
+  CleanLocksCmd( std::vector<std::string> &&commandAliases_r );
 
   // ZypperBaseCommand interface
   std::string description() const override;

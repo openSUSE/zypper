@@ -14,7 +14,7 @@
 class MooCmd : public ZypperBaseCommand
 {
 public:
-  MooCmd ( const std::vector<std::string> &commandAliases_r );
+  MooCmd ( std::vector<std::string> &&commandAliases_r );
 
   // ZypperBaseCommand interface
 protected:
@@ -26,7 +26,7 @@ protected:
 class WhatProvidesCmd : public ZypperBaseCommand
 {
 public:
-  WhatProvidesCmd ( const std::vector<std::string> &commandAliases_r );
+  WhatProvidesCmd ( std::vector<std::string> &&commandAliases_r );
 
 
   // ZypperBaseCommand interface
@@ -39,7 +39,7 @@ protected:
 class RupPingCmd : public ZypperBaseCommand
 {
 public:
-  RupPingCmd ( const std::vector<std::string> &commandAliases_r );
+  RupPingCmd ( std::vector<std::string> &&commandAliases_r );
 
   // ZypperBaseCommand interface
 protected:

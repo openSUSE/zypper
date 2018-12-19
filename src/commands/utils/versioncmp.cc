@@ -12,9 +12,9 @@
 
 using namespace zypp;
 
-VersionCompareCmd::VersionCompareCmd(const std::vector<std::string> &commandAliases_r) :
+VersionCompareCmd::VersionCompareCmd(std::vector<std::string> &&commandAliases_r) :
   ZypperBaseCommand (
-    commandAliases_r,
+    std::move( commandAliases_r ),
     // translators: command synopsis; do not translate lowercase words
     _("versioncmp (vcmp) <VERSION1> <VERSION2>"),
     // translators: command summary

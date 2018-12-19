@@ -10,9 +10,9 @@
 #include "utils/flags/flagtypes.h"
 #include "commands/search/search.h"
 
-MooCmd::MooCmd(const std::vector<std::string> &commandAliases_r) :
+MooCmd::MooCmd( std::vector<std::string> &&commandAliases_r ) :
   ZypperBaseCommand (
-    commandAliases_r,
+    std::move( commandAliases_r ),
     // translators: command synopsis; do not translate lowercase words
     _("moo"),
     // translators: command summary
@@ -30,9 +30,9 @@ int MooCmd::execute(Zypper &zypper, const std::vector<std::string> &)
   return ZYPPER_EXIT_OK;
 }
 
-WhatProvidesCmd::WhatProvidesCmd(const std::vector<std::string> &commandAliases_r):
+WhatProvidesCmd::WhatProvidesCmd( std::vector<std::string> &&commandAliases_r ):
   ZypperBaseCommand (
-    commandAliases_r,
+    std::move( commandAliases_r ),
     // translators: command synopsis; do not translate lowercase words
     _("what-provides (wp) <CAPABILITY>"),
     // translators: command summary: what-provides, wp
@@ -60,9 +60,9 @@ int WhatProvidesCmd::execute( Zypper &zypper, const std::vector<std::string> &po
   return cmd.run( zypper );
 }
 
-RupPingCmd::RupPingCmd(const std::vector<std::string> &commandAliases_r):
+RupPingCmd::RupPingCmd( std::vector<std::string> &&commandAliases_r ):
   ZypperBaseCommand (
-    commandAliases_r,
+    std::move( commandAliases_r ),
     // translators: command synopsis; do not translate lowercase words
     _("ping [OPTIONS]"),
     // translators: command summary

@@ -16,7 +16,7 @@
 class AddLocksCmd : public ZypperBaseCommand
 {
 public:
-  AddLocksCmd( const std::vector<std::string> &commandAliases_r );
+  AddLocksCmd( std::vector<std::string> &&commandAliases_r );
 
 protected:
   // ZypperBaseCommand interface

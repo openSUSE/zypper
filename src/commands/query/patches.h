@@ -17,7 +17,7 @@
 class PatchesCmdBase : public ZypperBaseCommand
 {
 public:
-  PatchesCmdBase( const std::vector<std::string> &commandAliases_r );
+  PatchesCmdBase( std::vector<std::string> &&commandAliases_r );
 
 private:
   InitReposOptionSet _initRepoFlags { *this };

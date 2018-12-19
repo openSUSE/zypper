@@ -17,7 +17,7 @@
 class PatternsCmdBase : public ZypperBaseCommand
 {
 public:
-  PatternsCmdBase( const std::vector<std::string> &commandAliases_r );
+  PatternsCmdBase( std::vector<std::string> &&commandAliases_r );
 
 private:
   InitReposOptionSet _initRepoFlags { *this };

@@ -50,10 +50,10 @@ using namespace zypp;
 namespace
 {
   template < typename T, typename ... Args >
-  ZypperCommand::CmdDesc makeCmd ( ZypperCommand::Command comm, const std::string &category, std::vector<std::string> &&aliases, Args&&... args ) {
-    return std::make_tuple(comm, category, aliases,
+  ZypperCommand::CmdDesc makeCmd ( ZypperCommand::Command comm, std::string &&category, std::vector< const char * > &&aliases, Args&&... args ) {
+    return std::make_tuple(comm, std::move( category ), aliases,
       ZypperCommand::CmdFactory( [ aliases, args... ]() {
-        return std::make_shared<T>( aliases, args... );
+        return std::make_shared<T>( std::vector<std::string>( aliases.begin(), aliases.end() ), args... );
       })
     );
   }
@@ -137,7 +137,7 @@ namespace
       makeCmd<RupPingCmd> ( ZypperCommand::RUG_PING_e , std::string(), { "ping" } ),
       makeCmd<ShellQuitCmd> ( ZypperCommand::SHELL_QUIT_e , std::string(), { "quit", "exit", "\004" } ),
       makeCmd<MooCmd> ( ZypperCommand::MOO_e , std::string(), { "moo" } ),
-      std::make_tuple ( ZypperCommand::NONE_e, std::string(), std::vector<std::string>{ "none", ""}, ZypperCommand::CmdFactory( voidCmd ) )
+      std::make_tuple ( ZypperCommand::NONE_e, std::string(), std::vector< const char *>{ "none", ""}, ZypperCommand::CmdFactory( voidCmd ) )
     };
 
     return commands;
@@ -150,7 +150,7 @@ namespace
     {
       for ( const auto &cmd : newStyleCommands() ) {
         auto entry = _table( std::get< ZypperCommand::CmdDescField::Id >( cmd ) );
-        for ( const std::string &alias : std::get< ZypperCommand::CmdDescField::Alias >( cmd ) )
+        for ( const char *alias : std::get< ZypperCommand::CmdDescField::Alias >( cmd ) )
           entry | alias;
       }
     }

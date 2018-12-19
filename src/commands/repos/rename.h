@@ -17,7 +17,7 @@
 class RenameRepoCmd : public ZypperBaseCommand
 {
 public:
-  RenameRepoCmd( const std::vector<std::string> &commandAliases_r );
+  RenameRepoCmd( std::vector<std::string> &&commandAliases_r );
 
   // ZypperBaseCommand interface
 protected:

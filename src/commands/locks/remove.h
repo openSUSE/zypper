@@ -16,7 +16,7 @@
 class RemoveLocksCmd : public ZypperBaseCommand
 {
 public:
-  RemoveLocksCmd( const std::vector<std::string> &commandAliases_r );
+  RemoveLocksCmd( std::vector<std::string> &&commandAliases_r );
 
   // ZypperBaseCommand interface
 protected:

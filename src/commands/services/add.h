@@ -17,7 +17,7 @@
 class AddServiceCmd : public ZypperBaseCommand
 {
 public:
-  AddServiceCmd( const std::vector<std::string> &commandAliases_r );
+  AddServiceCmd( std::vector<std::string> &&commandAliases_r );
 
   // ZypperBaseCommand interface
 protected:

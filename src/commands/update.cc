@@ -15,9 +15,9 @@
 
 #include <zypp/ZYppFactory.h>
 
-UpdateCmd::UpdateCmd(const std::vector<std::string> &commandAliases_r) :
+UpdateCmd::UpdateCmd(std::vector<std::string> &&commandAliases_r) :
   ZypperBaseCommand (
-    commandAliases_r,
+    std::move( commandAliases_r ),
     // translators: command synopsis; do not translate lowercase words
     _("update (up) [OPTIONS] [PACKAGENAME] ..."),
     // translators: command summary: update, up

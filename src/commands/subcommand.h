@@ -80,7 +80,7 @@ public:
 class SubCmd : public ZypperBaseCommand
 {
 public:
-  SubCmd ( const std::vector<std::string> &commandAliases_r, boost::shared_ptr<SubcommandOptions> options_r = boost::shared_ptr<SubcommandOptions>() );
+  SubCmd ( std::vector<std::string> &&commandAliases_r, boost::shared_ptr<SubcommandOptions> options_r = boost::shared_ptr<SubcommandOptions>() );
 
   /** Test whether \c strval_r denotes a subcommand and remember the \ref Detected details.
    * \ref SubcommandOptions can load the last detected details if necessary.

@@ -17,7 +17,7 @@
 class ListReposCmd : public ZypperBaseCommand
 {
 public:
-  ListReposCmd( const std::vector<std::string> &commandAliases_r );
+  ListReposCmd( std::vector<std::string> &&commandAliases_r );
 
   // ZypperBaseCommand interface
 protected:

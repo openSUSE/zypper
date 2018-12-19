@@ -13,9 +13,9 @@
 
 using namespace zypp;
 
-TargetOSCmd::TargetOSCmd(const std::vector<std::string> &commandAliases_r) :
+TargetOSCmd::TargetOSCmd(std::vector<std::string> &&commandAliases_r) :
   ZypperBaseCommand(
-    commandAliases_r,
+    std::move( commandAliases_r ),
     // translators: command synopsis; do not translate lowercase words
     _("targetos (tos) [OPTIONS]"),
     // translators: command summary: targetos, tos

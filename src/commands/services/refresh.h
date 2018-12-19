@@ -16,7 +16,7 @@ class RefreshServicesCmd : public ZypperBaseCommand
 {
 
 public:
-  RefreshServicesCmd ( const std::vector<std::string> &commandAliases_r );
+  RefreshServicesCmd ( std::vector<std::string> &&commandAliases_r );
 
   int refreshServices (Zypper &zypper, const std::vector<std::string> &services_r = std::vector<std::string>() );
 

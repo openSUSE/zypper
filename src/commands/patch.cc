@@ -17,9 +17,9 @@
 
 #include <memory>
 
-PatchCmd::PatchCmd( const std::vector<std::string> &commandAliases_r ) :
+PatchCmd::PatchCmd( std::vector<std::string> &&commandAliases_r ) :
   ZypperBaseCommand (
-    commandAliases_r,
+    std::move( commandAliases_r ),
     // translators: command synopsis; do not translate lowercase words
     _("patch [OPTIONS]"),
     // translators: command summary: patch

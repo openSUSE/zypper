@@ -16,7 +16,7 @@
 class CleanRepoCmd : public ZypperBaseCommand
 {
 public:
-  CleanRepoCmd( const std::vector<std::string> &commandAliases_r );
+  CleanRepoCmd( std::vector<std::string> &&commandAliases_r );
 
   // ZypperBaseCommand interface
 protected:

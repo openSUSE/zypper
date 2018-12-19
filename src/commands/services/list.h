@@ -16,7 +16,7 @@
 class ListServicesCmd : public ZypperBaseCommand
 {
 public:
-  ListServicesCmd ( const std::vector<std::string> &commandAliases_r );
+  ListServicesCmd ( std::vector<std::string> &&commandAliases_r );
 
 private:
   void printServiceList    ( Zypper &zypper );
