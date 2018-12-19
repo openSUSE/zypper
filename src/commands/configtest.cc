@@ -17,14 +17,6 @@
 using std::cout;
 using std::endl;
 
-///////////////////////////////////////////////////////////////////
-/// ConfigtestOptions
-///////////////////////////////////////////////////////////////////
-
-inline std::ostream & operator<<( std::ostream & str, const ConfigtestOptions & obj )
-{ return str << "ConfigtestOptions"; }
-
-///////////////////////////////////////////////////////////////////
 namespace
 {
   ///////////////////////////////////////////////////////////////////
@@ -33,12 +25,9 @@ namespace
   ///////////////////////////////////////////////////////////////////
   class Configtest
   {
-    typedef ConfigtestOptions Options;
   public:
-    Configtest( Zypper & zypper_r )
-    : _zypper( zypper_r )
-     , _options( _zypper.commandOptionsAs<ConfigtestOptions>() )
-    { MIL << "Configtest " << _options << endl; }
+    Configtest( )
+    { MIL << "Configtest " << endl; }
 
   public:
     void run();
@@ -57,10 +46,6 @@ namespace
 	  << ( ( isDefault ? ansi::Color(ansi::Color::Black,ansi::Color::Bg::White) : ansi::Color::Bg::White ) << sample );
       return str.str();
     }
-
-  private:
-    Zypper & _zypper;				//< my Zypper
-    shared_ptr<ConfigtestOptions> _options;	//< my Options
   };
   ///////////////////////////////////////////////////////////////////
 
@@ -128,15 +113,20 @@ namespace
 } // namespace
 ///////////////////////////////////////////////////////////////////
 
-int configtest( Zypper & zypper_r )
+
+ConfigTestCmd::ConfigTestCmd(const std::vector<std::string> &commandAliases_r):
+  ZypperBaseCommand (
+    commandAliases_r,
+    "configtest",
+    "This command is for debuging purposes only.",
+    "This command is for debuging purposes only.",
+    DisableAll
+        )
+{ }
+
+int ConfigTestCmd::execute(Zypper &, const std::vector<std::string> &)
 {
-  try
-  {
-    Configtest( zypper_r ).run();
-  }
-  catch ( const Out::Error & error_r )
-  {
-    return error_r.report( zypper_r );
-  }
-  return zypper_r.exitCode();
+  // Configtest debug command
+  Configtest().run();
+  return ZYPPER_EXIT_OK;
 }

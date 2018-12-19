@@ -53,7 +53,6 @@
 #include "misc.h"
 #include "search.h"
 #include "info.h"
-#include "configtest.h"
 #include "subcommand.h"
 
 #include "output/OutNormal.h"
@@ -71,6 +70,7 @@
 #include "commands/conditions.h"
 #include "commands/reposerviceoptionsets.h"
 #include "commands/repos/refresh.h"
+#include "commands/search/search.h"
 using namespace zypp;
 
 bool sigExitOnce = true;	// Flag to prevent nested calls to Zypper::immediateExit
@@ -496,7 +496,7 @@ void print_main_help( Zypper & zypper )
   .gDef( "products, pd",	// translators: command summary: products, pd
 	 _("List all available products.") )
   .gDef( "what-provides, wp",	// translators: command summary: what-provides, wp
-	 _("List packages providing specified capability.") )
+         _("List packages providing specified capability.") )
 
   .gSection( _("Package Locks:") )
   .gDef( "addlock, al",	// translators: command summary: addlock, al
@@ -1265,18 +1265,6 @@ void Zypper::safeDoCommand()
     processCommandOptions();
     if ( command() == ZypperCommand::NONE || exitCode() )
       return;
-
-    // "what-provides" is obsolete, functionality is provided by "search"
-    if ( command() == ZypperCommand::WHAT_PROVIDES_e )
-    {
-      out().info( str::Format(_("Command '%s' is replaced by '%s'.")) % "what-provides" % "search --provides --match-exact" );
-      out().info( str::Format(_("See '%s' for all available options.")) % "help search" );
-      setCommand( ZypperCommand::SEARCH_e );
-      _copts["provides"].push_back( "" );
-      _copts["match-exact"].push_back( "" );
-      ::copts = _copts;
-    }
-
     doCommand();
   }
   // The same catch block as in zypper::main.
@@ -1399,45 +1387,6 @@ void Zypper::processCommandOptions()
     ZYPP_THROW( ExitRequestException("help provided") );
   }
 
-
-  case ZypperCommand::WHAT_PROVIDES_e:
-  {
-    static struct option options[] = {
-      {"help", no_argument, 0, 'h'},
-      {0, 0, 0, 0}
-    };
-    specific_options = options;
-    _command_help = CommandHelpFormater()
-    .synopsis(	// translators: command synopsis; do not translate lowercase words
-    _("what-provides (wp) <CAPABILITY>")
-    )
-    .description(	// translators: command description
-    _("List all packages providing the specified capability.")
-    )
-    .noOptionSection()
-    ;
-    break;
-  }
-
-  case ZypperCommand::MOO_e:
-  {
-    static struct option moo_options[] = {
-      {"help", no_argument, 0, 'h'},
-      {0, 0, 0, 0}
-    };
-    specific_options = moo_options;
-    _command_help = CommandHelpFormater()
-    .synopsis(	// translators: command synopsis; do not translate lowercase words
-    _("moo")
-    )
-    .description(	// translators: command description
-    _("Show an animal.")
-    )
-    .noOptionSection()
-    ;
-    break;
-  }
-
   case ZypperCommand::SHELL_QUIT_e:
   {
     static struct option quit_options[] = {
@@ -1473,37 +1422,6 @@ void Zypper::processCommandOptions()
     )
     .noOptionSection()
     ;
-    break;
-  }
-
-  case ZypperCommand::RUG_PING_e:
-  {
-    static struct option options[] = {
-      {"help", no_argument, 0, 'h'},
-      {"if-active", no_argument, 0, 'a'},
-      {0, 0, 0, 0}
-    };
-    specific_options = options;
-    _command_help = CommandHelpFormater()
-    .synopsis(	// translators: command synopsis; do not translate lowercase words
-    _("ping [OPTIONS]")
-    )
-    .description(	// translators: command description
-    _("This command has dummy implementation which always returns 0.")
-    )
-    .noOptionSection()
-    ;
-    break;
-  }
-
-  case ZypperCommand::CONFIGTEST_e:
-  {
-    static struct option options[] = {
-      {"help",	no_argument,	 0, 'h' },
-      {0, 0, 0, 0}
-    };
-    specific_options = options;
-    _command_help = "This command is for debuging purposes only.";
     break;
   }
 
@@ -1663,26 +1581,6 @@ void Zypper::doCommand()
   switch( command().toEnum() )
   {
 
-  // --------------------------( moo )----------------------------------------
-
-  case ZypperCommand::MOO_e:
-  {
-    // TranslatorExplanation this is a hedgehog, paint another animal, if you want
-    out().info(_("   \\\\\\\\\\\n  \\\\\\\\\\\\\\__o\n__\\\\\\\\\\\\\\'/_"));
-    break;
-  }
-
-  // --------------------------( misc queries )--------------------------------
-
-  case ZypperCommand::WHAT_PROVIDES_e:
-  {
-    // The "what-provides" now is included in "search" command, e.g.
-    // zypper what-provides 'zypper>1.6'
-    // zypper se --match-exact --provides 'zypper>1.6'
-    setExitCode( ZYPPER_EXIT_ERR_BUG );
-    break;
-  }
-
   // -----------------------------( shell )------------------------------------
 
   case ZypperCommand::SHELL_QUIT_e:
@@ -1710,18 +1608,6 @@ void Zypper::doCommand()
 
 
   // dummy commands
-  case ZypperCommand::RUG_PING_e:
-  {
-    break;
-  }
-
-  // Configtest debug command
-  case ZypperCommand::CONFIGTEST_e:
-  {
-    configtest( *this );
-    break;
-  }
-
   case ZypperCommand::SUBCOMMAND_e:	// subcommands are not expected to be executed here!
   default:
     // if the program reaches this line, something went wrong

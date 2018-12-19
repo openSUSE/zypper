@@ -171,6 +171,13 @@ public:
   std::vector<std::string> positionalArguments() const;
 
   /**
+   * Directly sets the list of positional arguments, this is supposed to be used
+   * when chaining commands, and directly setting options
+   * \sa BaseCommand::parseArguments
+   */
+  void setPositionalArguments(const std::vector<std::string> &positionalArguments);
+
+  /**
    * Returns the list of raw options that was parsed from raw cli args.
    * \note this is only enabled if \sa setFillRawOptions was set to true
    * \sa BaseCommand::parseArguments

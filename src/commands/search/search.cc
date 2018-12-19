@@ -57,6 +57,16 @@ SearchCmd::SearchCmd( const std::vector<std::string> &commandAliases_r, CmdMode 
   _initReposOpts.setCompatibilityMode( CompatModeBits::EnableNewOpt | CompatModeBits::EnableNewOpt );
 }
 
+void SearchCmd::setMode(const MatchMode &mode_r)
+{
+  _mode = mode_r;
+}
+
+void SearchCmd::addRequestedDependency(const sat::SolvAttr &dep_r)
+{
+  _requestedDeps.insert( dep_r );
+}
+
 std::string SearchCmd::summary() const
 {
   // translators: command summary: search, se
