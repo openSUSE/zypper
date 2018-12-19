@@ -14,7 +14,7 @@
 
 int NeedsRootCondition::check(std::string &err)
 {
-  if ( geteuid() != 0 && !Zypper::instance().globalOpts().changedRoot )
+  if ( geteuid() != 0 && !Zypper::instance().config().changedRoot )
   {
     err = _("Root privileges are required to run this command.");
     return ZYPPER_EXIT_ERR_PRIVILEGES;

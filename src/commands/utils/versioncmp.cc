@@ -64,7 +64,7 @@ int VersionCompareCmd::execute( Zypper &zypper, const std::vector<std::string> &
     result = lhs.compare( rhs );
 
   // be terse when talking to machines
-  if ( zypper.globalOpts().terse )
+  if ( zypper.config().terse )
   {
     zypper.out().info( str::numstring(result) );
     return ZYPPER_EXIT_OK;

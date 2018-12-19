@@ -66,7 +66,7 @@ int RemoveLocksCmd::execute(Zypper &zypper, const std::vector<std::string> &posi
   {
     Locks & locks = Locks::instance();
     locks.read(Pathname::assertprefix
-        (zypper.globalOpts().root_dir, ZConfig::instance().locksFile()));
+        (zypper.config().root_dir, ZConfig::instance().locksFile()));
     Locks::size_type start = locks.size();
     for_( args_it, positionalArgs_r.begin(), positionalArgs_r.end() )
     {
@@ -87,7 +87,7 @@ int RemoveLocksCmd::execute(Zypper &zypper, const std::vector<std::string> &posi
     }
 
     locks.save(Pathname::assertprefix
-        (zypper.globalOpts().root_dir, ZConfig::instance().locksFile()));
+        (zypper.config().root_dir, ZConfig::instance().locksFile()));
 
     // nothing removed
     if (start == locks.size())

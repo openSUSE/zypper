@@ -116,13 +116,13 @@ namespace
       // Check for a usable pkg-cache-dir
       if ( geteuid() != 0 )
       {
-        const auto &gOpts = zypp.globalOpts();
+        const auto &gOpts = zypp.config();
         bool mayuse = userMayUseDir( gOpts.rm_options.repoPackagesCachePath );
 
         if ( ! mayuse && /* is the default path: */
              gOpts.rm_options.repoPackagesCachePath == RepoManagerOptions( gOpts.root_dir ).repoPackagesCachePath )
         {
-          zypp.globalOptsNoConst().rm_options.repoPackagesCachePath = env::XDG_CACHE_HOME() / "zypp/packages";
+          zypp.configNoConst().rm_options.repoPackagesCachePath = env::XDG_CACHE_HOME() / "zypp/packages";
           mayuse = userMayUseDir( gOpts.rm_options.repoPackagesCachePath );
         }
 

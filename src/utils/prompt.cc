@@ -138,7 +138,7 @@ int read_action_ari_with_timeout( PromptId pid, unsigned timeout, int default_ac
   }
 
   // wait 'timeout' number of seconds and return the default in non-interactive mode
-  if ( zypper.globalOpts().non_interactive )
+  if ( zypper.config().non_interactive )
   {
     zypper.out().info( str::form(_("Retrying in %u seconds..."), timeout) );
     sleep( timeout );
@@ -231,7 +231,7 @@ int read_action_ari( PromptId pid, int default_action )
   // correspond to abort/retry/ignore in that order.
   // The answers should be lower case letters.
   PromptOptions popts(_("a/r/i"), (unsigned) default_action );
-  if ( !zypper.globalOpts().non_interactive )
+  if ( !zypper.config().non_interactive )
     clear_keyboard_buffer();
   zypper.out().prompt( pid, _("Abort, retry, ignore?"), popts );
   return get_prompt_reply( zypper, pid, popts );
@@ -244,7 +244,7 @@ bool read_bool_answer( PromptId pid, const std::string & question, bool default_
   Zypper & zypper( Zypper::instance() );
   std::string yn( std::string(_("yes")) + "/" + _("no") );
   PromptOptions popts( yn, default_answer ? 0 : 1 );
-  if ( ! zypper.globalOpts().non_interactive )
+  if ( ! zypper.config().non_interactive )
     clear_keyboard_buffer();
   zypper.out().prompt( pid, question, popts );
   return !get_prompt_reply( zypper, pid, popts );
@@ -253,10 +253,10 @@ bool read_bool_answer( PromptId pid, const std::string & question, bool default_
 unsigned get_prompt_reply( Zypper & zypper, PromptId pid, const PromptOptions & poptions )
 {
   // non-interactive mode: return the default reply
-  if (zypper.globalOpts().non_interactive)
+  if (zypper.config().non_interactive)
   {
     // print the reply for convenience (only for normal output)
-    if ( ! zypper.globalOpts().machine_readable )
+    if ( ! zypper.config().machine_readable )
       zypper.out().info( poptions.options()[poptions.defaultOpt()],
 			 Out::QUIET, Out::TYPE_NORMAL );
     MIL << "running non-interactively, returning " << poptions.options()[poptions.defaultOpt()] << endl;

@@ -710,7 +710,7 @@ void do_init_repos( Zypper & zypper, const Container & container )
   // can ignore repos targeted for other systems
   init_target( zypper );
 
-  if ( geteuid() == 0 && !zypper.globalOpts().no_refresh )
+  if ( geteuid() == 0 && !zypper.config().no_refresh )
   {
     MIL << "Refreshing autorefresh services." << endl;
 
@@ -786,8 +786,8 @@ void do_init_repos( Zypper & zypper, const Container & container )
   if ( !gData.temporary_repos.empty() )
     gData.repos.insert( gData.repos.end(), gData.temporary_repos.begin(), gData.temporary_repos.end() );
 
-  bool no_cd = zypper.globalOpts().no_cd;
-  bool no_remote = zypper.globalOpts().no_remote;
+  bool no_cd = zypper.config().no_cd;
+  bool no_remote = zypper.config().no_remote;
   for ( std::list<RepoInfo>::iterator it = gData.repos.begin(); it != gData.repos.end(); )
   {
     if ( no_cd && it->url().schemeIsVolatile() )	// cd/dvd
@@ -839,13 +839,13 @@ void do_init_repos( Zypper & zypper, const Container & container )
       }
     }
 
-    bool do_refresh = repo.enabled() && repo.autorefresh() && !zypper.globalOpts().no_refresh;
+    bool do_refresh = repo.enabled() && repo.autorefresh() && !zypper.config().no_refresh;
     if ( do_refresh )
     {
       MIL << "calling refresh for " << repo.alias() << endl;
 
       // handle root user differently
-      if ( geteuid() == 0 && !zypper.globalOpts().changedRoot )
+      if ( geteuid() == 0 && !zypper.config().changedRoot )
       {
         if ( refresh_raw_metadata( zypper, repo, false ) || build_cache( zypper, repo, false ) )
         {
@@ -878,7 +878,7 @@ void do_init_repos( Zypper & zypper, const Container & container )
     else if ( repo.enabled() )
     {
       // handle root user differently
-      if ( geteuid() == 0 && !zypper.globalOpts().changedRoot )
+      if ( geteuid() == 0 && !zypper.config().changedRoot )
       {
         if ( build_cache( zypper, repo, false ) )
         {
@@ -958,7 +958,7 @@ void init_repos( Zypper & zypper, const Container & container )
   if ( done )
     return;
 
-  if ( !zypper.globalOpts().disable_system_sources )
+  if ( !zypper.config().disable_system_sources )
     do_init_repos( zypper, container );
 
   done = true;
@@ -986,7 +986,7 @@ void init_target( Zypper & zypper )
 
     try
     {
-      God->initializeTarget( zypper.globalOpts().root_dir );
+      God->initializeTarget( zypper.config().root_dir );
     }
     catch ( const Exception & e )
     {
@@ -1132,7 +1132,7 @@ void clean_repos(Zypper & zypper , std::vector<std::string> specificRepos, Clean
     manager.cleanCacheDirGarbage();
     // clean zypper's cache
     // this could also be done with a special option
-    filesystem::recursive_rmdir( Pathname::assertprefix( zypper.globalOpts().root_dir, ZYPPER_RPM_CACHE_DIR ) );
+    filesystem::recursive_rmdir( Pathname::assertprefix( zypper.config().root_dir, ZYPPER_RPM_CACHE_DIR ) );
   }
 
   if ( enabled_repo_count > 0 && error_count >= enabled_repo_count )
@@ -1753,7 +1753,7 @@ void load_resolvables( Zypper & zypper )
   MIL << "Going to load resolvables" << endl;
 
   load_repo_resolvables( zypper );
-  if ( !zypper.globalOpts().disable_system_resolvables )
+  if ( !zypper.config().disable_system_resolvables )
     load_target_resolvables( zypper );
 
   done = true;
@@ -1803,7 +1803,7 @@ void load_repo_resolvables( Zypper & zypper )
       {
         zypper.out().error( str::Format(_("Problem loading data from '%s'")) % repo.asUserString() );
 
-        if ( geteuid() != 0 && !zypper.globalOpts().changedRoot && manager.isCached(repo) )
+        if ( geteuid() != 0 && !zypper.config().changedRoot && manager.isCached(repo) )
         {
           zypper.out().warning( str::Format(_("Repository '%s' could not be refreshed. Using old cache.")) % repo.asUserString() );
         }

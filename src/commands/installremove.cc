@@ -28,7 +28,7 @@ int InstallRemoveBase::handleFeedback(Zypper &zypper, const SolverRequester &sr_
 {
   sr_r.printFeedback( zypper.out() );
 
-  if ( !zypper.globalOpts().ignore_unknown
+  if ( !zypper.config().ignore_unknown
     && ( sr_r.hasFeedback( SolverRequester::Feedback::NOT_FOUND_NAME )
       || sr_r.hasFeedback( SolverRequester::Feedback::NOT_FOUND_CAP ) ) )
   {
@@ -302,7 +302,7 @@ int InstallCmd::execute( Zypper &zypper, const std::vector<std::string> &positio
     repo.setName(_("Plain RPM files cache") );
     repo.setBaseUrl( cliRPMCache.asDirUrl() );
     repo.setMetadataPath( zypper.runtimeData().tmpdir / TMP_RPM_REPO_ALIAS / "%AUTO%" );
-    repo.setPackagesPath( Pathname::assertprefix( zypper.globalOpts().root_dir, ZYPPER_RPM_CACHE_DIR ) );
+    repo.setPackagesPath( Pathname::assertprefix( zypper.config().root_dir, ZYPPER_RPM_CACHE_DIR ) );
     repo.setType( repo::RepoType::RPMPLAINDIR );
     repo.setEnabled( true );
     repo.setAutorefresh( true );

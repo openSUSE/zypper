@@ -112,9 +112,9 @@ int AddRepoCmd::execute(Zypper &zypper, const std::vector<std::string> &position
       }
 
       if ( _enableCheck )
-        zypper.globalOptsNoConst().rm_options.probe = true;
+        zypper.configNoConst().rm_options.probe = true;
       else if ( _disableCheck )
-        zypper.globalOptsNoConst().rm_options.probe = false;
+        zypper.configNoConst().rm_options.probe = false;
 
       // load gpg keys
       int code = defaultSystemSetup( zypper, InitTarget  );

@@ -156,7 +156,7 @@ bool confirm_licenses( Zypper & zypper )
       printRichText( s, pi.licenseToConfirm() );
 
       // show in pager unless we are read by a machine or the pager fails
-      if ( zypper.globalOpts().machine_readable || !show_text_in_pager( s.str() ) )
+      if ( zypper.config().machine_readable || !show_text_in_pager( s.str() ) )
         zypper.out().info( s.str(), Out::QUIET );
 
       if ( to_accept )
@@ -168,7 +168,7 @@ bool confirm_licenses( Zypper & zypper )
         {
           confirmed = false;
 
-          if ( zypper.globalOpts().non_interactive )
+          if ( zypper.config().non_interactive )
           {
             zypper.out().info(_("Aborting installation due to the need for license confirmation."), Out::QUIET );
 	    zypper.out().info(
@@ -334,7 +334,7 @@ void build_deps_install( Zypper & zypper, const std::vector<std::string> &srcPkg
         DBG << "requiring: " << cap << endl;
       }
     }
-    else if ( !zypper.globalOpts().ignore_unknown )
+    else if ( !zypper.config().ignore_unknown )
     {
       zypper.setExitCode( ZYPPER_EXIT_INF_CAP_NOT_FOUND );
     }

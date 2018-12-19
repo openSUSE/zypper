@@ -63,14 +63,14 @@ int AddLocksCmd::execute(Zypper &zypper, const std::vector<std::string> &positio
   {
     Locks & locks = Locks::instance();
     locks.read(Pathname::assertprefix
-        (zypper.globalOpts().root_dir, ZConfig::instance().locksFile()));
+        (zypper.config().root_dir, ZConfig::instance().locksFile()));
     Locks::size_type start = locks.size();
     for_(it,positionalArgs_r.begin(),positionalArgs_r.end())
     {
       locks.addLock( locks::arg2query( zypper, *it, _kinds, _repos ) );
     }
     locks.save(Pathname::assertprefix
-        (zypper.globalOpts().root_dir, ZConfig::instance().locksFile()));
+        (zypper.config().root_dir, ZConfig::instance().locksFile()));
     if ( start != Locks::instance().size() )
       zypper.out().info(PL_(
         "Specified lock has been successfully added.",

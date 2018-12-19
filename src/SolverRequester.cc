@@ -517,7 +517,7 @@ bool SolverRequester::installPatch( const PackageSpec & patchspec, const PoolIte
     if ( ignore_pkgmgmt || patch->restartSuggested() )
     {
       Patch::InteractiveFlags ignoreFlags = Patch::NoFlags;
-      if ( Zypper::instance().globalOpts().reboot_req_non_interactive )
+      if ( Zypper::instance().config().reboot_req_non_interactive )
         ignoreFlags |= Patch::Reboot;
       if ( LicenseAgreementPolicy::instance()._autoAgreeWithLicenses )
 	ignoreFlags |= Patch::License;

@@ -1504,10 +1504,10 @@ void Summary::dumpTo( std::ostream & out )
   {
     SetColor( bool force )
     : docolors( Zypper::instance().config().do_colors )
-    { if (force) Zypper::instance().config().do_colors = false; }
+    { if (force) Zypper::instance().configNoConst().do_colors = false; }
 
     ~SetColor()
-    { Zypper::instance().config().do_colors = docolors; }
+    { Zypper::instance().configNoConst().do_colors = docolors; }
 
     bool docolors;
   };

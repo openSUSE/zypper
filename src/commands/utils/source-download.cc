@@ -49,7 +49,7 @@ namespace Pimpl
       _cmd( cmd_r ),
       _zypper( zypper_r ),
       _options( options_r ),
-      _dnlDir( Pathname::assertprefix( zypper_r.globalOpts().root_dir, options_r._directory ) )
+      _dnlDir( Pathname::assertprefix( zypper_r.config().root_dir, options_r._directory ) )
     { MIL << "SourceDownload " << _options << endl; }
 
   public:

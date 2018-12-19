@@ -90,7 +90,7 @@ int PatchCmd::execute( Zypper &zypper, const std::vector<std::string> &positiona
 
   SolverRequester::Options srOpts;
   srOpts.skip_interactive = skip_interactive; // bcn #647214
-  srOpts.skip_optional_patches = zypper.globalOpts().exclude_optional_patches && !_withUpdate;	// bsc#1102261: --with update" should implicitly assume "--with-optional"
+  srOpts.skip_optional_patches = zypper.config().exclude_optional_patches && !_withUpdate;	// bsc#1102261: --with update" should implicitly assume "--with-optional"
   srOpts.cliMatchPatch = CliMatchPatch( zypper,
                                         _selectPatchOpts._select._requestedPatchDates,
                                         _selectPatchOpts._select._requestedPatchCategories,
@@ -106,12 +106,12 @@ int PatchCmd::execute( Zypper &zypper, const std::vector<std::string> &positiona
 
     sr.printFeedback( zypper.out() );
 
-    if ( !zypper.globalOpts().ignore_unknown
+    if ( !zypper.config().ignore_unknown
       && ( sr.hasFeedback( SolverRequester::Feedback::NOT_FOUND_NAME )
         || sr.hasFeedback( SolverRequester::Feedback::NOT_FOUND_CAP ) ) )
     {
       zypper.setExitCode( ZYPPER_EXIT_INF_CAP_NOT_FOUND );
-      if ( zypper.globalOpts().non_interactive )
+      if ( zypper.config().non_interactive )
         ZYPP_THROW( ExitRequestException("name or capability not found") );
     }
   }

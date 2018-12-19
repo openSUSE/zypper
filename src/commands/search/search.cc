@@ -233,7 +233,7 @@ int SearchCmd::execute( Zypper &zypper, const std::vector<std::string> &position
   PoolQuery query;
   TriBool inst_notinst = indeterminate;
 
-  if ( zypper.globalOpts().disable_system_resolvables || _notInstalledOpts._mode == SolvableFilterMode::ShowOnlyNotInstalled )
+  if ( zypper.config().disable_system_resolvables || _notInstalledOpts._mode == SolvableFilterMode::ShowOnlyNotInstalled )
   {
     query.setUninstalledOnly(); // beware: this is not all to it, look at zypper-search, _only_not_installed
     inst_notinst = false;
@@ -241,7 +241,7 @@ int SearchCmd::execute( Zypper &zypper, const std::vector<std::string> &position
 
   if ( _notInstalledOpts._mode == SolvableFilterMode::ShowOnlyInstalled ) {
     inst_notinst = true;
-    zypper.globalOptsNoConst().no_refresh = true;
+    zypper.configNoConst().no_refresh = true;
     //  query.setInstalledOnly();
   }
 
@@ -436,7 +436,7 @@ int SearchCmd::execute( Zypper &zypper, const std::vector<std::string> &position
       {
         // sort by name (can't sort by repo)
         t.sort( 1 );
-        if ( !zypper.globalOpts().no_abbrev )
+        if ( !zypper.config().no_abbrev )
           t.allowAbbrev( 2 );
       }
 
