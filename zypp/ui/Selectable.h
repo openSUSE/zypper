@@ -437,9 +437,21 @@ namespace zypp
       bool unmodified() const
       { return fate() == UNMODIFIED; }
 
-      /** True if locked (subclass of unmodified). */
+      /** True if locked (subclass of unmodified).
+       * The \ref locked status indicates that \b all installed and/or \b all available
+       * items are locked. So you can't remove and/or can't install any item. This
+       * is the common case.
+       * \see \ref hasLocks
+       */
       bool locked() const
       { Status st( status() ); return( st == S_Protected || st == S_Taboo ); }
+
+      /** True if it includes locked items (don't mix this with the \ref locked status).
+       * This is also \c true for partially locked items, where only specific versions
+       * are locked.
+       * \see \ref locked
+       */
+      bool hasLocks() const;
 
       /** True if either to delete or to install */
       bool toModify() const
