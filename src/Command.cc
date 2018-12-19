@@ -49,6 +49,14 @@ using namespace zypp;
 ///////////////////////////////////////////////////////////////////
 namespace
 {
+#define EXPAND_PARAMETER_PACKS_IN_LAMBDAS
+#ifdef __GNUC__
+#  if !__GNUC_PREREQ(4,9)
+#    undef EXPAND_PARAMETER_PACKS_IN_LAMBDAS
+#  endif
+#endif
+
+#ifdef EXPAND_PARAMETER_PACKS_IN_LAMBDAS
   template < typename T, typename ... Args >
   ZypperCommand::CmdDesc makeCmd ( ZypperCommand::Command comm, std::string &&category, std::vector< const char * > &&aliases, Args&&... args ) {
     return std::make_tuple(comm, std::move( category ), aliases,
@@ -57,6 +65,25 @@ namespace
       })
     );
   }
+#else
+  template < typename T >
+  ZypperCommand::CmdDesc makeCmd ( ZypperCommand::Command comm, const std::string &&category, std::vector<const char *> &&aliases ) {
+    return std::make_tuple(comm, category, aliases,
+      ZypperCommand::CmdFactory( [ aliases ]() {
+        return std::make_shared<T>( std::vector<std::string>( aliases.begin(), aliases.end() ) );
+      })
+    );
+  }
+
+  template < typename T, typename AliasMode >
+  ZypperCommand::CmdDesc makeCmd ( ZypperCommand::Command comm, const std::string &&category, std::vector<const char *> &&aliases, AliasMode mode ) {
+    return std::make_tuple(comm, category, aliases,
+      ZypperCommand::CmdFactory( [ aliases, mode ]() {
+        return std::make_shared<T>( std::vector<std::string>( aliases.begin(), aliases.end() ), mode );
+      })
+    );
+  }
+#endif
 
   ZypperBaseCommandPtr voidCmd ( )
   {
