@@ -121,7 +121,7 @@ std::string i18nPatchStatus( const PoolItem & pi_r )
       if ( pi_r.isUnwanted() )
 	// Translator: Patch status: needed, optional, unwanted, applied, not needed
 	return HIGHLIGHTString( tUnwanted ).str();
-      if ( Zypper::instance().globalOpts().exclude_optional_patches && pi_r->asKind<Patch>()->categoryEnum() == Patch::CAT_OPTIONAL )
+      if ( Zypper::instance().config().exclude_optional_patches && pi_r->asKind<Patch>()->categoryEnum() == Patch::CAT_OPTIONAL )
 	return LOWLIGHTString( tOptional ).str();
       return tNeeded;
       break;
@@ -150,7 +150,7 @@ const char * textPatchStatus( const PoolItem & pi_r )
     case ResStatus::BROKEN:
       if ( pi_r.isUnwanted() )
 	return tUnwanted;
-      if ( Zypper::instance().globalOpts().exclude_optional_patches && pi_r->asKind<Patch>()->categoryEnum() == Patch::CAT_OPTIONAL )
+      if ( Zypper::instance().config().exclude_optional_patches && pi_r->asKind<Patch>()->categoryEnum() == Patch::CAT_OPTIONAL )
 	return tOptional;
       return tNeeded;
       break;
@@ -439,7 +439,7 @@ Url make_obs_url( const std::string & obsuri, const Url & base_url, const std::s
       if ( default_platform.empty() )
       {
 	// Try to guess platform from baseproduct....
-	const parser::ProductFileData & pdata( baseproductdata( zypper.globalOpts().root_dir ) );
+	const parser::ProductFileData & pdata( baseproductdata( zypper.config().root_dir ) );
 	if ( pdata.empty() )
 	{
 	  // Guess failed:
@@ -604,7 +604,7 @@ std::string asXML(const Product & p, bool is_installed , const std::vector<std::
       for ( const auto & tag : fwdTags )
       { tags.push_back( Pathname::assertprefix( "/product", tag ).asString() ); }
 
-      const Pathname & proddir( Pathname::assertprefix( Zypper::instance().globalOpts().root_dir, "/etc/products.d" ) );
+      const Pathname & proddir( Pathname::assertprefix( Zypper::instance().config().root_dir, "/etc/products.d" ) );
       try
       {
 	XmlFilter::fwd( InputStream( proddir+p.referenceFilename() ), *fwd, std::move(tags)  );

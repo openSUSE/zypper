@@ -101,7 +101,7 @@ namespace zypp
     struct KeyRingReceive : public callback::ReceiveReport<KeyRingReport>
     {
       KeyRingReceive()
-          : _gopts(Zypper::instance().globalOpts())
+          : _gopts(Zypper::instance().config())
           {}
 
       ////////////////////////////////////////////////////////////////////
@@ -332,7 +332,7 @@ namespace zypp
           // translators: help text for the 'a' option in the 'r/t/a' prompt
           popts.setOptionHelp( (++off), _("Trust the key and import it into trusted keyring.") );
 
-        if (!zypper.globalOpts().non_interactive)
+        if (!zypper.config().non_interactive)
           clear_keyboard_buffer();
         zypper.out().prompt(PROMPT_YN_GPG_KEY_TRUST, s.str(), popts);
         unsigned prep =
@@ -463,7 +463,7 @@ namespace zypp
 
     struct DigestReceive : public callback::ReceiveReport<DigestReport>
     {
-      DigestReceive() : _gopts(Zypper::instance().globalOpts()) {}
+      DigestReceive() : _gopts(Zypper::instance().config()) {}
 
       ////////////////////////////////////////////////////////////////////
 
@@ -527,7 +527,7 @@ namespace zypp
 	// translators: A prompt option help text
 	popts.setOptionHelp( 1, _("Discard the file.") );
 	popts.setShownCount( 1 );
-	if ( !zypper.globalOpts().non_interactive )
+	if ( !zypper.config().non_interactive )
 	  clear_keyboard_buffer();
 	// translators: A prompt text
 	zypper.out().prompt( PROMPT_GPG_WRONG_DIGEST_ACCEPT, _("Unblock or discard?"), popts );

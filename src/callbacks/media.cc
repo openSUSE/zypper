@@ -77,7 +77,7 @@ static MediaChangeReport::Action request_medium_https_handler( Zypper & zypper, 
   set_common_option_help( popts );
   popts.setOptionHelp( 4, _("Disable SSL certificate authority check and continue.") );
 
-  if ( !zypper.globalOpts().non_interactive )
+  if ( !zypper.config().non_interactive )
     clear_keyboard_buffer();
   // translators: this is a prompt text
   zypper.out().prompt( PROMPT_ARI_MEDIA_PROBLEM, _("Abort, retry, ignore?"), popts );
@@ -133,7 +133,7 @@ static void eject_drive_dialog( Zypper & zypper, Url & url, const std::vector<st
     int devcount = devices.size();
     PromptOptions popts( numbers.str(), 0 );
     popts.setOptionHelp( devcount, _("Cancel") );
-    if ( !zypper.globalOpts().non_interactive )
+    if ( !zypper.config().non_interactive )
       clear_keyboard_buffer();
     zypper.out().prompt( PROMPT_MEDIA_EJECT, _("Select device to eject."), popts );
     int reply = get_prompt_reply( zypper, PROMPT_MEDIA_EJECT, popts );
@@ -172,7 +172,7 @@ static MediaChangeReport::Action request_medium_dvd_handler( Zypper & zypper,
   set_common_option_help( popts );
   popts.setOptionHelp( 4, _("Eject medium.") );
 
-  if ( !zypper.globalOpts().non_interactive )
+  if ( !zypper.config().non_interactive )
     clear_keyboard_buffer();
   // translators: this is a prompt text
   zypper.out().prompt( PROMPT_ARI_MEDIA_PROBLEM, _("Abort, retry, ignore?"), popts );
@@ -254,7 +254,7 @@ namespace ZmartRecipients
       PromptOptions popts(_("a/r/i/u"), 0 );
       set_common_option_help( popts );
 
-      if ( !zypper.globalOpts().non_interactive )
+      if ( !zypper.config().non_interactive )
 	clear_keyboard_buffer();
       // translators: this is a prompt text
       zypper.out().prompt( PROMPT_ARI_MEDIA_PROBLEM, _("Abort, retry, ignore?"), popts );
@@ -299,7 +299,7 @@ namespace ZmartRecipients
 				      url.asString().c_str(), credfile.c_str() ) );
     }
 
-    if ( zypper.globalOpts().non_interactive )
+    if ( zypper.config().non_interactive )
     {
       MIL << "Non-interactive mode: aborting" << endl;
       return false;
@@ -315,7 +315,7 @@ namespace ZmartRecipients
 
     std::string username;
     // expect the input from machine on stdin
-    if ( zypper.globalOpts().machine_readable )
+    if ( zypper.config().machine_readable )
     {
       zypper.out().prompt( PROMPT_AUTH_USERNAME, _("User Name"), PromptOptions(), description );
       cin >> username;
@@ -336,7 +336,7 @@ namespace ZmartRecipients
 
     std::string password;
     // expect the input from machine on stdin
-    if ( zypper.globalOpts().machine_readable )
+    if ( zypper.config().machine_readable )
       cin >> password;
     else
       password = ::getpass( "" );

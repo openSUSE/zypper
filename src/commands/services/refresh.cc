@@ -267,7 +267,7 @@ int RefreshServicesCmd::systemSetup(Zypper &zypper)
   if ( code != ZYPPER_EXIT_OK )
     return code;
 
-  zypper.globalOptsNoConst().rm_options.servicesTargetDistro =
+  zypper.configNoConst().rm_options.servicesTargetDistro =
       zyppApi()->target()->targetDistribution();
 
   return defaultSystemSetup( zypper, ResetRepoManager );

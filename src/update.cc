@@ -32,7 +32,7 @@ namespace
   {
     return pi.isBroken()
     && ! pi.isUnwanted()
-    && ! ( Zypper::instance().globalOpts().exclude_optional_patches && pi->asKind<Patch>()->categoryEnum() == Patch::CAT_OPTIONAL )
+    && ! ( Zypper::instance().config().exclude_optional_patches && pi->asKind<Patch>()->categoryEnum() == Patch::CAT_OPTIONAL )
     && pi->asKind<Patch>()->restartSuggested();
   }
 
@@ -321,7 +321,7 @@ void patch_check( bool updatestackOnly )
   Out & out( zypper.out() );
   DBG << "patch check" << endl;
 
-  PatchCheckStats stats( zypper.globalOpts().exclude_optional_patches );
+  PatchCheckStats stats( zypper.config().exclude_optional_patches );
   for_( it, God->pool().byKindBegin(ResKind::patch), God->pool().byKindEnd(ResKind::patch) )
   {
     const PoolItem & pi( *it );
@@ -360,7 +360,7 @@ static void xml_print_patch( Zypper & zypper, const PoolItem & pi )
   cout << "restart=\"" << (patch->rebootSuggested() ? "true" : "false") << "\" ";
 
   Patch::InteractiveFlags ignoreFlags = Patch::NoFlags;
-  if (zypper.globalOpts().reboot_req_non_interactive)
+  if (zypper.config().reboot_req_non_interactive)
     ignoreFlags |= Patch::Reboot;
   if ( LicenseAgreementPolicy::instance()._autoAgreeWithLicenses )
     ignoreFlags |= Patch::License;
@@ -495,7 +495,7 @@ static bool list_patch_updates( Zypper & zypper, bool all_r, const PatchSelector
   Table pmTbl; // only NEEDED! that affect packagemanager (restartSuggested()), they have priority
   FillPatchesTable intoPMTbl( pmTbl );
 
-  PatchCheckStats stats( zypper.globalOpts().exclude_optional_patches );
+  PatchCheckStats stats( zypper.config().exclude_optional_patches );
   CliMatchPatch cliMatchPatch( zypper, sel._requestedPatchDates, sel._requestedPatchCategories, sel._requestedPatchSeverity );
 
   const ResPool& pool = God->pool();

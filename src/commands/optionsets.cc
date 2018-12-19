@@ -268,10 +268,10 @@ std::vector<ZyppFlags::CommandGroup> NoConfirmRugOption::options()
   return {{{
       { "no-confirm", 'y', ZyppFlags::NoArgument, ZyppFlags::Value(
                 [] () -> boost::optional<std::string> {
-                  return std::string( ( Zypper::instance().globalOpts().non_interactive ) ? "true" : "false" );
+                  return std::string( ( Zypper::instance().config().non_interactive ) ? "true" : "false" );
                 },
                 []( const ZyppFlags::CommandOption &, const boost::optional<std::string> & ) {
-                  bool &set = Zypper::instance().globalOptsNoConst().non_interactive;
+                  bool &set = Zypper::instance().configNoConst().non_interactive;
                   if ( ! set ) {
                     Zypper::instance().out().info(_("Entering non-interactive mode."), Out::HIGH );
                     MIL << "Entering non-interactive mode" << endl;
@@ -293,7 +293,7 @@ void NoConfirmRugOption::reset()
 
 std::vector<ZyppFlags::CommandGroup> OptionalPatchesOptionSet::options()
 {
-  auto &gOpts = Zypper::instance().globalOptsNoConst();
+  auto &gOpts = Zypper::instance().configNoConst();
   return {{
       {
         {"with-optional", '\0', ZyppFlags::NoArgument, ZyppFlags::BoolCompatibleType( gOpts.exclude_optional_patches, ZyppFlags::StoreFalse ), "" },
@@ -314,7 +314,7 @@ std::vector<ZyppFlags::CommandGroup> OptionalPatchesOptionSet::options()
 
 void OptionalPatchesOptionSet::reset()
 {
-  auto &gOpts = Zypper::instance().globalOptsNoConst();
+  auto &gOpts = Zypper::instance().configNoConst();
   gOpts.exclude_optional_patches = gOpts.exclude_optional_patches_default;
 }
 
@@ -325,7 +325,7 @@ bool InteractiveUpdatesOptionSet::skipInteractive() const
   if ( _withInteractive != zypp::indeterminate )
     skip_interactive = ! _withInteractive;
   // bnc #497711
-  else if ( Zypper::instance().globalOpts().non_interactive )
+  else if ( Zypper::instance().config().non_interactive )
     skip_interactive = true;
 
   return skip_interactive;

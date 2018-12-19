@@ -91,7 +91,7 @@ void RefreshRepoCmd::doReset()
 
 int RefreshRepoCmd::execute( Zypper &zypper , const std::vector<std::string> &positionalArgs_r )
 {
-  if ( zypper.globalOpts().no_refresh )
+  if ( zypper.config().no_refresh )
     zypper.out().warning( str::Format(_("The '%s' global option has no effect here.")) % "--no-refresh" );
 
   bool force = _flags.testFlag(Force);
@@ -114,7 +114,7 @@ int RefreshRepoCmd::execute( Zypper &zypper , const std::vector<std::string> &po
     if ( code != ZYPPER_EXIT_OK )
       return code;
 
-    zypper.globalOptsNoConst().rm_options.servicesTargetDistro = God->target()->targetDistribution();
+    zypper.configNoConst().rm_options.servicesTargetDistro = God->target()->targetDistribution();
 
     code = refServiceCmd.refreshServices( zypper );
     if ( code != ZYPPER_EXIT_OK )

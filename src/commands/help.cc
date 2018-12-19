@@ -24,7 +24,7 @@ std::string renderGlobalHelp ()
   );
 
   bool first = true;
-  for ( const ZyppFlags::CommandGroup & grp : Zypper::instance().config().cliOptions() ) {
+  for ( const ZyppFlags::CommandGroup & grp : Zypper::instance().configNoConst().cliOptions() ) {
     if ( first ) {
       help.gMainGlobalOpts();
       first = false;

@@ -144,11 +144,9 @@ public:
 
   Out *outputWriter ( );
   void setOutputWriter( Out * out );
-  Config & config()				{ return _config; }
 
-  //deprecated, global options were replaced by Config
-  ZYPP_DEPRECATED const Config & globalOpts() const	{ return _config; }
-  ZYPP_DEPRECATED Config & globalOptsNoConst()		{ return _config; }
+  const Config & config()				{ return _config; }
+  Config & configNoConst()			{ return _config; }
 
   const ZypperCommand & command() const		{ return _command; }
   const std::string & commandHelp() const	{ return _command_help; }

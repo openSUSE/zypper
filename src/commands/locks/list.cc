@@ -293,7 +293,7 @@ int ListLocksCmd::execute(Zypper &zypper, const std::vector<std::string> &positi
   Locks & locks( Locks::instance() );
   try
   {
-    locks.read( Pathname::assertprefix( zypper.globalOpts().root_dir, ZConfig::instance().locksFile() ) );
+    locks.read( Pathname::assertprefix( zypper.config().root_dir, ZConfig::instance().locksFile() ) );
   }
   catch( const Exception & e )
   {

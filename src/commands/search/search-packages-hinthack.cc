@@ -42,10 +42,10 @@ namespace searchPackagesHintHack
       if ( zypper_r.runningShell() )
 	return false;	// we don't support subcommands in shell
 
-      if ( zypper_r.globalOpts().non_interactive )
+      if ( zypper_r.config().non_interactive )
 	return false;	// Never forward in non-interactive mode (search-packages itself relies on this!)
 
-      if ( zypper_r.globalOpts().changedRoot )
+      if ( zypper_r.config().changedRoot )
 	return false;	// we're chrooted
 
       return true;

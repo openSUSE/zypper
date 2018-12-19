@@ -42,7 +42,7 @@ ZyppFlags::Value CheckIsServiceTypeVal( bool &target )
 
 void add_service( Zypper & zypper, const ServiceInfo & service )
 {
-  RepoManager manager( zypper.globalOpts().rm_options );
+  RepoManager manager( zypper.config().rm_options );
 
   try
   {

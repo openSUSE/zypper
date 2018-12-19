@@ -43,7 +43,7 @@ int NeedsRebootingCmd::execute( Zypper &zypper, const std::vector<std::string> &
     return ZYPPER_EXIT_ERR_INVALID_ARGS;
   }
 
-  filesystem::Pathname rebootNeededFlag = filesystem::Pathname(zypper.globalOpts().root_dir) / "/var/run/reboot-needed";
+  filesystem::Pathname rebootNeededFlag = filesystem::Pathname(zypper.config().root_dir) / "/var/run/reboot-needed";
 
   if ( filesystem::PathInfo( rebootNeededFlag ).isExist() ) {
     zypper.out().info( _("Core libraries or services have been updated.") );

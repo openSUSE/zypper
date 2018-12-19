@@ -173,10 +173,10 @@ int ZypperBaseCommand::defaultSystemSetup( Zypper &zypper, SetupSystemFlags flag
       return zypper.exitCode();
   }
 
-  DtorReset _tmp( zypper.globalOptsNoConst().disable_system_resolvables );
+  DtorReset _tmp( zypper.configNoConst().disable_system_resolvables );
   if ( flags_r.testFlag( LoadResolvables ) ) {
     if ( flags_r.testFlag( NoSystemResolvables ) ) {
-      zypper.globalOptsNoConst().disable_system_resolvables = true;
+      zypper.configNoConst().disable_system_resolvables = true;
     }
 
     load_resolvables( zypper );

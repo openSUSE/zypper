@@ -49,19 +49,19 @@ int TargetOSCmd::execute( Zypper &zypper , const std::vector<std::string> & )
 
   if ( _showOSLabel )
   {
-    if ( zypper.globalOpts().terse )
+    if ( zypper.config().terse )
     {
-      cout << "labelLong\t" << str::escape(Target::distributionLabel( zypper.globalOpts().root_dir ).summary, '\t') << endl;
-      cout << "labelShort\t" << str::escape(Target::distributionLabel( zypper.globalOpts().root_dir ).shortName, '\t') << endl;
+      cout << "labelLong\t" << str::escape(Target::distributionLabel( zypper.config().root_dir ).summary, '\t') << endl;
+      cout << "labelShort\t" << str::escape(Target::distributionLabel( zypper.config().root_dir ).shortName, '\t') << endl;
     }
     else
     {
-      zypper.out().info( str::form(_("Distribution Label: %s"), Target::distributionLabel( zypper.globalOpts().root_dir ).summary.c_str() ) );
-      zypper.out().info( str::form(_("Short Label: %s"), Target::distributionLabel( zypper.globalOpts().root_dir ).shortName.c_str() ) );
+      zypper.out().info( str::form(_("Distribution Label: %s"), Target::distributionLabel( zypper.config().root_dir ).summary.c_str() ) );
+      zypper.out().info( str::form(_("Short Label: %s"), Target::distributionLabel( zypper.config().root_dir ).shortName.c_str() ) );
     }
   }
   else
-   zypper.out().info( Target::targetDistribution( zypper.globalOpts().root_dir ) );
+   zypper.out().info( Target::targetDistribution( zypper.config().root_dir ) );
 
   return ZYPPER_EXIT_OK;
 }

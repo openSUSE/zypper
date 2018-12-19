@@ -210,7 +210,7 @@ struct DownloadResolvableReportReceiver : public callback::ReceiveReport<repo::D
     }
 
     // determine action
-    if ( zypper.globalOpts().no_gpg_checks )
+    if ( zypper.config().no_gpg_checks )
     {
       // report and continue
       ResObject::constPtr pkg( userData_r.get<ResObject::constPtr>( "ResObject" ) );

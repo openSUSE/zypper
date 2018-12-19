@@ -98,7 +98,7 @@ int UpdateCmd::execute( Zypper &zypper, const std::vector<std::string> &position
   SolverRequester::Options sropts;
   sropts.best_effort = _bestEffort;
   sropts.skip_interactive = skip_interactive; // bcn #647214
-  sropts.skip_optional_patches = positionalArgs_r.empty() && zypper.globalOpts().exclude_optional_patches;	// without args follow --with[out]-optional
+  sropts.skip_optional_patches = positionalArgs_r.empty() && zypper.config().exclude_optional_patches;	// without args follow --with[out]-optional
 
   SolverRequester sr(sropts);
   if ( positionalArgs_r.empty() )
@@ -139,12 +139,12 @@ int UpdateCmd::execute( Zypper &zypper, const std::vector<std::string> &position
 
   sr.printFeedback( zypper.out() );
 
-  if ( !zypper.globalOpts().ignore_unknown
+  if ( !zypper.config().ignore_unknown
     && ( sr.hasFeedback( SolverRequester::Feedback::NOT_FOUND_NAME )
       || sr.hasFeedback( SolverRequester::Feedback::NOT_FOUND_CAP ) ) )
   {
     zypper.setExitCode( ZYPPER_EXIT_INF_CAP_NOT_FOUND );
-    if ( zypper.globalOpts().non_interactive )
+    if ( zypper.config().non_interactive )
       ZYPP_THROW( ExitRequestException("name or capability not found") );
   }
 

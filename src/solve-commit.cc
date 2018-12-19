@@ -109,7 +109,7 @@ static TriBool show_problem( Zypper & zypper, const ResolverProblem & prob, Prob
     popts.setOptions( numbers.str() + _("c"), default_reply );
   }
 
-  if ( !zypper.globalOpts().non_interactive )
+  if ( !zypper.config().non_interactive )
     clear_keyboard_buffer();
   zypper.out().prompt( PROMPT_DEP_RESOLVE, prompt_text, popts, desc_stm.str() );
   unsigned reply = get_prompt_reply( zypper, PROMPT_DEP_RESOLVE, popts );
@@ -226,7 +226,7 @@ static void set_force_resolution( Zypper & zypper )
   // bnc #369980
   if ( indeterminate(force_resolution) )
   {
-    if ( !zypper.globalOpts().non_interactive && zypper.command() == ZypperCommand::REMOVE )
+    if ( !zypper.config().non_interactive && zypper.command() == ZypperCommand::REMOVE )
       force_resolution = true;
     else
       force_resolution = false;
@@ -476,11 +476,11 @@ static void show_update_messages( Zypper & zypper, const UpdateNotifications & m
   std::ostringstream msg;
   for_( it, messages.begin(), messages.end() )
   {
-    MIL << "- From " << it->solvable().asString() << " in file " << Pathname::showRootIf( zypper.globalOpts().root_dir, it->file() ) << endl;
-    zypper.out().info( it->solvable().asString() + " (" + Pathname::showRootIf(zypper.globalOpts().root_dir, it->file()) + ")" );
+    MIL << "- From " << it->solvable().asString() << " in file " << Pathname::showRootIf( zypper.config().root_dir, it->file() ) << endl;
+    zypper.out().info( it->solvable().asString() + " (" + Pathname::showRootIf(zypper.config().root_dir, it->file()) + ")" );
     {
       msg << str::form(_("Message from package %s:"), it->solvable().name().c_str() ) << endl << endl;
-      InputStream istr( Pathname::assertprefix( zypper.globalOpts().root_dir, it->file() ) );
+      InputStream istr( Pathname::assertprefix( zypper.config().root_dir, it->file() ) );
       iostr::copy( istr, msg );
       msg << endl << "-----------------------------------------------------------------------------" << endl;
     }
@@ -491,7 +491,7 @@ static void show_update_messages( Zypper & zypper, const UpdateNotifications & m
   std::string prompt_text( _("View the notifications now?") );
   unsigned reply;
 
-  if ( !zypper.globalOpts().non_interactive )
+  if ( !zypper.config().non_interactive )
     clear_keyboard_buffer();
   zypper.out().prompt( PROMPT_YN_INST_REMOVE_CONTINUE, prompt_text, popts );
   reply = get_prompt_reply( zypper, PROMPT_YN_INST_REMOVE_CONTINUE, popts );
@@ -599,7 +599,7 @@ void solve_and_commit (Zypper & zypper , Summary::ViewOptions summaryOptions_r, 
 
       // check root user
       if ( zypper.command() == ZypperCommand::VERIFY && geteuid() != 0
-	&& !zypper.globalOpts().changedRoot )
+	&& !zypper.config().changedRoot )
       {
         zypper.out().error(_("Root privileges are required to fix broken package dependencies.") );
         zypper.setExitCode( ZYPPER_EXIT_ERR_PRIVILEGES );
@@ -654,7 +654,7 @@ void solve_and_commit (Zypper & zypper , Summary::ViewOptions summaryOptions_r, 
       unsigned reply;
       do
       {
-        if ( !zypper.globalOpts().non_interactive )
+        if ( !zypper.config().non_interactive )
           clear_keyboard_buffer();
         zypper.out().prompt( PROMPT_YN_INST_REMOVE_CONTINUE, prompt_text, popts );
         reply = get_prompt_reply( zypper, PROMPT_YN_INST_REMOVE_CONTINUE, popts );
@@ -793,7 +793,7 @@ void solve_and_commit (Zypper & zypper , Summary::ViewOptions summaryOptions_r, 
 	  {
 	    try
 	    {
-	      RepoManager manager( zypper.globalOpts().rm_options );
+	      RepoManager manager( zypper.config().rm_options );
 	      for( RepoInfo::urls_const_iterator it = e.info().baseUrlsBegin(); it != e.info().baseUrlsEnd(); ++it )
 	      {
 		if ( manager.checkIfToRefreshMetadata( e.info(), *it, RepoManager::RefreshForced ) == RepoManager::REFRESH_NEEDED )
@@ -874,7 +874,7 @@ void solve_and_commit (Zypper & zypper , Summary::ViewOptions summaryOptions_r, 
 	}
 
         // check for running services (fate #300763)
-        if ( !( zypper.globalOpts().changedRoot || dryRunEtc )
+        if ( !( zypper.config().changedRoot || dryRunEtc )
 	  && ( summary.packagesToRemove() || summary.packagesToUpgrade() || summary.packagesToDowngrade() ) )
 	{
           notify_processes_using_deleted_files( zypper );
