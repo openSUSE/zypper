@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-12-18 13:53+0100\n"
-"PO-Revision-Date: 2018-12-04 11:11+0000\n"
+"PO-Revision-Date: 2019-01-09 15:30+0000\n"
 "Last-Translator: Rodrigo Macedo <rmsolucoeseminformatic4@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) <https://l10n.opensuse.org/projects/"
 "zypper/master/pt_BR/>\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 2.18\n"
+"X-Generator: Weblate 3.3\n"
 "X-Poedit-Language: Portuguese\n"
 "X-Poedit-Country: BRAZIL\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -597,7 +597,7 @@ msgstr ""
 
 #: src/commands/commonflags.h:53
 msgid "Consider only patches which affect the package management itself."
-msgstr ""
+msgstr "Considere apenas as correções que afetam o gerenciamento de pacotes."
 
 #: src/output/Out.h:26 src/repos.cc:125 src/repos.cc:153
 msgid "Yes"
@@ -725,7 +725,7 @@ msgstr "Erro"
 
 #: src/Command.cc:62
 msgid "Invalid command"
-msgstr ""
+msgstr "Comando inválido"
 
 #: src/Command.cc:317
 #, c-format, boost-format
@@ -3049,7 +3049,7 @@ msgstr "Senha"
 
 #: src/commands/basecommand.cc:106
 msgid "Option program arguments: "
-msgstr ""
+msgstr "Argumentos do programa de opções: "
 
 #: src/commands/conditions.cc:19
 msgid "Root privileges are required to run this command."
@@ -3112,6 +3112,11 @@ msgid ""
 "unconditionally on small or minimal systems, as it may easily add a large "
 "number of packages."
 msgstr ""
+"Instale pacotes recém-adicionados recomendados pelos já instalados. Este "
+"comando basicamente reavalia as recomendações de todos os pacotes instalados "
+"e preenche o sistema de acordo. Você não quer chamar isso incondicionalmente "
+"em sistemas pequenos ou mínimos, pois pode facilmente adicionar um grande "
+"número de pacotes."
 
 #. translators: command description, %1% is a zypper command
 #: src/commands/inrverify.cc:98
@@ -3121,6 +3126,9 @@ msgid ""
 "supporting available hardware, languages or filesystems. Useful after having "
 "added e.g. new hardware or driver repos."
 msgstr ""
+"Chamado de '1%', ele restringe o comando para procurar pacotes que suportem "
+"hardware, idiomas ou sistemas de arquivos disponíveis. Útil depois de ter "
+"adicionado, e. novas reposições de hardware ou driver."
 
 #. translators: command description
 #: src/commands/inrverify.cc:101
@@ -3138,7 +3146,7 @@ msgstr "Selecionar pacotes pelo nome, não pelo recurso."
 
 #: src/commands/installremove.cc:55
 msgid "Select packages solely by capability."
-msgstr ""
+msgstr "Selecione pacotes exclusivamente por capacidade."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/installremove.cc:74
@@ -3493,7 +3501,7 @@ msgstr "A reinicialização provavelmente não é necessária."
 
 #: src/commands/optionsets.cc:33
 msgid "Don't change anything, just report what would be done."
-msgstr ""
+msgstr "Não mude nada, apenas relate o que seria feito."
 
 #. translators: -r, --repo <ALIAS|#|URI>
 #: src/commands/optionsets.cc:65
@@ -3503,7 +3511,7 @@ msgstr "Trabalhar somente com o repositório especificado."
 #: src/commands/optionsets.cc:85
 #, c-format, boost-format
 msgid "Option '--%s' overrides a previously set download mode."
-msgstr ""
+msgstr "A opção '--%s' substitui um modo de download definido anteriormente."
 
 #: src/commands/optionsets.cc:114
 #, c-format, boost-format
@@ -4409,33 +4417,35 @@ msgstr "Execute '%1%' para pesquisar em recursos remotos ainda não ativados."
 #. translators: -g, --category <CATEGORY>
 #: src/commands/selectpatchoptionset.cc:24
 msgid "Select patches with the specified category."
-msgstr ""
+msgstr "Selecione correções com a categoria especificada."
 
 #. translators: --severity <SEVERITY>
 #: src/commands/selectpatchoptionset.cc:28
 msgid "Select patches with the specified severity."
-msgstr ""
+msgstr "Selecione as correções com a gravidade especificada."
 
 #. translators: --date <YYYY-MM-DD>
 #: src/commands/selectpatchoptionset.cc:32
 msgid "Select patches issued up to, but not including, the specified date"
 msgstr ""
+"Selecione correções emitidas até, mas não incluindo, a data especificada"
 
 #. translators: -b, --bugzilla
 #: src/commands/selectpatchoptionset.cc:36
 msgid "Select applicable patches for the specified Bugzilla issues."
 msgstr ""
+"Selecione correções aplicáveis para os problemas especificados do Bugzilla."
 
 #. translators: --cve
 #: src/commands/selectpatchoptionset.cc:41
 msgid "Select applicable patches for the specified CVE issues."
-msgstr ""
+msgstr "Selecione correções aplicáveis para os problemas de CVE especificados."
 
 #. any
 #. translators: --cve
 #: src/commands/selectpatchoptionset.cc:50
 msgid "Select issues matching the specified string."
-msgstr ""
+msgstr "Selecione problemas que correspondam à string especificada."
 
 #: src/commands/services/add.cc:55
 #, c-format, boost-format
@@ -4737,11 +4747,11 @@ msgstr "Serviço '%s' não encontrado pelo apelido, número ou URI."
 
 #: src/commands/solveroptionset.cc:16 src/commands/solveroptionset.cc:39
 msgid "Solver options"
-msgstr ""
+msgstr "Opções de Solução"
 
 #: src/commands/solveroptionset.cc:63
 msgid "Expert options"
-msgstr ""
+msgstr "Opções de especialistas"
 
 #. translators: -u, --clean-deps
 #: src/commands/solveroptionset.cc:96
@@ -5032,12 +5042,12 @@ msgstr ""
 #. translators: --status
 #: src/commands/utils/source-download.cc:514
 msgid "Write a manifest file."
-msgstr ""
+msgstr "Escreva um arquivo de manifesto."
 
 #. translators: --status
 #: src/commands/utils/source-download.cc:518
 msgid "Disable writing a manifest file."
-msgstr ""
+msgstr "Desativar a gravação de um arquivo de manifesto."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/utils/targetos.cc:20
