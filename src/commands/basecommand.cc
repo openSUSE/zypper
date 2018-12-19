@@ -1,6 +1,7 @@
 #include "basecommand.h"
 
 #include <boost/optional.hpp>
+#include <zypp/base/LogControl.h>
 #include "utils/flags/flagtypes.h"
 #include "utils/messages.h"
 #include "commandhelpformatter.h"
@@ -186,6 +187,8 @@ int ZypperBaseCommand::defaultSystemSetup( Zypper &zypper, SetupSystemFlags flag
   if ( flags_r.testFlag ( Resolve ) ) {
     // have REPOS and TARGET
     // compute status of PPP
+    MIL << "-------------- Calling SAT Solver to establish the PPP status -------------------" << endl;
+    base::LogControl::TmpLineWriter shutUp;	// reduce logging; some day libzypp/libsolv may offer a shotcut to establish
     resolve( zypper );
   }
 
