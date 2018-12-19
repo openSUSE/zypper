@@ -13,7 +13,7 @@
 class LicensesCmd : public ZypperBaseCommand
 {
 public:
-  LicensesCmd( const std::vector<std::string> &commandAliases_r );
+  LicensesCmd( std::vector<std::string> &&commandAliases_r );
 
   // ZypperBaseCommand interface
 protected:

@@ -67,9 +67,9 @@ void InstallRemoveBase::doReset()
   _selectByCap   = false;
 }
 
-RemoveCmd::RemoveCmd(const std::vector<std::string> &commandAliases_r) :
+RemoveCmd::RemoveCmd(std::vector<std::string> &&commandAliases_r) :
   InstallRemoveBase (
-    commandAliases_r,
+    std::move( commandAliases_r ),
     // translators: command synopsis; do not translate lowercase words
     _("remove (rm) [OPTIONS] <CAPABILITY> ..."),
     // translators: command summary: remove, rm
@@ -153,9 +153,9 @@ int RemoveCmd::execute(Zypper &zypper, const std::vector<std::string> &positiona
 
 }
 
-InstallCmd::InstallCmd(const std::vector<std::string> &commandAliases_r) :
+InstallCmd::InstallCmd(std::vector<std::string> &&commandAliases_r) :
   InstallRemoveBase (
-    commandAliases_r,
+    std::move( commandAliases_r ),
     // translators: command synopsis; do not translate lowercase words
     _("install (in) [OPTIONS] <CAPABILITY|RPM_FILE_URI> ..."),
     // translators: command summary: install, in

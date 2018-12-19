@@ -14,7 +14,7 @@
 class DistUpgradeCmd : public ZypperBaseCommand
 {
 public:
-  DistUpgradeCmd( const std::vector<std::string> &commandAliases_r );
+  DistUpgradeCmd( std::vector<std::string> &&commandAliases_r );
 
 private:
   bool _details = false;

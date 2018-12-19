@@ -18,9 +18,9 @@ using namespace zypp;
 
 extern ZYpp::Ptr God;
 
-RefreshRepoCmd::RefreshRepoCmd( const std::vector<std::string> &commandAliases_r )
+RefreshRepoCmd::RefreshRepoCmd(std::vector<std::string> &&commandAliases_r )
   : ZypperBaseCommand (
-      commandAliases_r,
+      std::move( commandAliases_r ),
       _("refresh (ref) [ALIAS|#|URI] ..."),
       // translators: command summary: refresh, ref
       _("Refresh all repositories."),

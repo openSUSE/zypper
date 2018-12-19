@@ -28,7 +28,7 @@ public:
     RugProductInfo
   };
 
-  InfoCmd ( const std::vector<std::string> &commandAliases_r, Mode cmdMode_r = Mode::Default );
+  InfoCmd ( std::vector<std::string> &&commandAliases_r, Mode cmdMode_r = Mode::Default );
 
   // ZypperBaseCommand interface
 public:

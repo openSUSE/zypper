@@ -11,9 +11,9 @@
 
 using namespace zypp;
 
-PatternsCmdBase::PatternsCmdBase(const std::vector<std::string> &commandAliases_r) :
+PatternsCmdBase::PatternsCmdBase(std::vector<std::string> &&commandAliases_r) :
   ZypperBaseCommand (
-    commandAliases_r,
+    std::move( commandAliases_r ),
     // translators: command synopsis; do not translate lowercase words
     _("patterns (pt) [OPTIONS] [REPOSITORY] ..."),
     // translators: command summary: patterns, pt

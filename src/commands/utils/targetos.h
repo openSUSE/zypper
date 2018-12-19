@@ -13,7 +13,7 @@
 class TargetOSCmd : public ZypperBaseCommand
 {
 public:
-  TargetOSCmd( const std::vector<std::string> &commandAliases_r );
+  TargetOSCmd( std::vector<std::string> &&commandAliases_r );
   // ZypperBaseCommand interface
 protected:
   zypp::ZyppFlags::CommandGroup cmdOptions() const override;

@@ -12,9 +12,9 @@
 #include "commands/commonflags.h"
 
 
-InfoCmd::InfoCmd( const std::vector<std::string> &commandAliases_r, InfoCmd::Mode cmdMode_r ) :
+InfoCmd::InfoCmd( std::vector<std::string> &&commandAliases_r, InfoCmd::Mode cmdMode_r ) :
   ZypperBaseCommand (
-    commandAliases_r,
+    std::move( commandAliases_r ),
     // translators: command synopsis; do not translate lowercase words
     _("info (if) [OPTIONS] <NAME> ..."),
     // translators: command summary: info, if

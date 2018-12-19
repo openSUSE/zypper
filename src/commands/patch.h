@@ -19,7 +19,7 @@
 class PatchCmd : public ZypperBaseCommand
 {
 public:
-  PatchCmd( const std::vector<std::string> &commandAliases_r );
+  PatchCmd( std::vector<std::string> &&commandAliases_r );
 
 private:
   bool _updateStackOnly = false;

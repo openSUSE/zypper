@@ -13,7 +13,7 @@
 class ShellCmd : public ZypperBaseCommand
 {
 public:
-  ShellCmd ( const std::vector<std::string> &commandAliases_r );
+  ShellCmd ( std::vector<std::string> &&commandAliases_r );
 
   // ZypperBaseCommand interface
 protected:
@@ -25,7 +25,7 @@ protected:
 class ShellQuitCmd : public ZypperBaseCommand
 {
 public:
-  ShellQuitCmd ( const std::vector<std::string> &commandAliases_r );
+  ShellQuitCmd ( std::vector<std::string> &&commandAliases_r );
 
   // ZypperBaseCommand interface
 protected:

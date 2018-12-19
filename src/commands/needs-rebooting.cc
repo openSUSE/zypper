@@ -13,9 +13,9 @@
 
 using namespace zypp;
 
-NeedsRebootingCmd::NeedsRebootingCmd(const std::vector<std::string> &commandAliases_r) :
+NeedsRebootingCmd::NeedsRebootingCmd(std::vector<std::string> &&commandAliases_r) :
   ZypperBaseCommand (
-    commandAliases_r,
+    std::move( commandAliases_r ),
     "needs-rebooting",
     // translators: command summary: needs-rebooting
     _("Check if the needs-reboot flag was set."),

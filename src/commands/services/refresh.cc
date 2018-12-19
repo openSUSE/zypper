@@ -89,9 +89,9 @@ static void report_unknown_services( Out & out, std::list<std::string> not_found
     out.info( str::Format(_("Use '%s' to get the list of defined services.")) % "zypper repos" );
 }
 
-RefreshServicesCmd::RefreshServicesCmd( const std::vector<std::string> &commandAliases_r ) :
+RefreshServicesCmd::RefreshServicesCmd(std::vector<std::string> &&commandAliases_r ) :
   ZypperBaseCommand(
-    commandAliases_r,
+    std::move( commandAliases_r ),
     _("refresh-services (refs) [OPTIONS]"),
     _("Refresh all services."),
     _("Refresh defined repository index services."))

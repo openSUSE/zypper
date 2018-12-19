@@ -474,9 +474,9 @@ namespace Pimpl
   }
 } // namespace
 
-SourceDownloadCmd::SourceDownloadCmd(const std::vector<std::string> &commandAliases_r) :
+SourceDownloadCmd::SourceDownloadCmd(std::vector<std::string> &&commandAliases_r) :
   ZypperBaseCommand (
-    commandAliases_r,
+    std::move( commandAliases_r ),
     "source-download",
     // translators: command summary: source-download
     _("Download source rpms for all installed packages to a local directory."),

@@ -15,9 +15,9 @@
 
 using namespace zypp;
 
-RemoveRepoCmd::RemoveRepoCmd( const std::vector<std::string> &commandAliases_r ) :
+RemoveRepoCmd::RemoveRepoCmd(std::vector<std::string> &&commandAliases_r ) :
   ZypperBaseCommand (
-    commandAliases_r,
+    std::move( commandAliases_r ),
     _("removerepo (rr) [OPTIONS] <ALIAS|#|URI>"),
     _("Remove specified repository."),
     _("Remove repository specified by alias, number or URI."),

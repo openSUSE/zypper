@@ -73,17 +73,17 @@ class ZypperBaseCommand
 public:
   friend class BaseCommandOptionSet;
 
-  ZypperBaseCommand ( const std::vector<std::string> &commandAliases_r,
-                      const std::string &synopsis_r,
-                      const std::string &summary_r = std::string(),
-                      const std::string &description_r = std::string(),
+  ZypperBaseCommand ( std::vector<std::string> &&commandAliases_r,
+                      std::string &&synopsis_r,
+                      std::string &&summary_r = std::string(),
+                      std::string &&description_r = std::string(),
                       SetupSystemFlags systemInitFlags_r = DefaultSetup
   );
 
-  ZypperBaseCommand ( const std::vector<std::string> &commandAliases_r,
-                      const std::vector<std::string> &synopsis_r,
-                      const std::string &summary_r = std::string(),
-                      const std::string &description_r = std::string(),
+  ZypperBaseCommand ( std::vector<std::string> &&commandAliases_r,
+                      std::vector<std::string> &&synopsis_r,
+                      std::string &&summary_r = std::string(),
+                      std::string &&description_r = std::string(),
                       SetupSystemFlags systemInitFlags_r = DefaultSetup
   );
 

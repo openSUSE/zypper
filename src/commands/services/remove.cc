@@ -14,9 +14,9 @@
 #include "utils/messages.h"
 #include "utils/flags/flagtypes.h"
 
-RemoveServiceCmd::RemoveServiceCmd(const std::vector<std::string> &commandAliases_r)
+RemoveServiceCmd::RemoveServiceCmd(std::vector<std::string> &&commandAliases_r)
   : ZypperBaseCommand (
-    commandAliases_r,
+    std::move( commandAliases_r ),
     _("removeservice (rs) [OPTIONS] <ALIAS|#|URI>"),
     _("Remove specified service."),
     _("Remove specified repository index service from the system."),

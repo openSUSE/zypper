@@ -17,7 +17,7 @@
 class ProductsCmdBase : public ZypperBaseCommand
 {
 public:
-  ProductsCmdBase( const std::vector<std::string> &commandAliases_r );
+  ProductsCmdBase( std::vector<std::string> &&commandAliases_r );
 
 private:
   InitReposOptionSet _initRepoFlags { *this };

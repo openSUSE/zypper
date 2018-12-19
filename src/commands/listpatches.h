@@ -15,7 +15,7 @@
 class ListPatchesCmd : public ZypperBaseCommand
 {
 public:
-  ListPatchesCmd( const std::vector<std::string> &commandAliases_r );
+  ListPatchesCmd( std::vector<std::string> &&commandAliases_r );
 
 private:
   bool _all = false;

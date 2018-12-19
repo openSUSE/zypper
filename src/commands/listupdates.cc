@@ -9,9 +9,9 @@
 #include "utils/messages.h"
 #include "src/update.h"
 
-ListUpdatesCmd::ListUpdatesCmd(const std::vector<std::string> &commandAliases_r) :
+ListUpdatesCmd::ListUpdatesCmd( std::vector<std::string> &&commandAliases_r) :
   ZypperBaseCommand (
-    commandAliases_r,
+    std::move( commandAliases_r ),
     // translators: command synopsis; do not translate lowercase words
     _("list-updates (lu) [OPTIONS]"),
     // translators: command summary: list-updates, lu

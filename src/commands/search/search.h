@@ -29,7 +29,7 @@ public:
     RugPatchSearch
   };
 
-  SearchCmd ( const std::vector<std::string> &commandAliases_r, CmdMode cmdMode_r = CmdMode::Search );
+  SearchCmd ( std::vector<std::string> &&commandAliases_r, CmdMode cmdMode_r = CmdMode::Search );
 
   void setMode(const MatchMode &mode_r );
   void addRequestedDependency ( const zypp::sat::SolvAttr &dep_r );

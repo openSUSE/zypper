@@ -19,9 +19,9 @@
 
 using namespace zypp;
 
-RemoveLocksCmd::RemoveLocksCmd(const std::vector<std::string> &commandAliases_r)
+RemoveLocksCmd::RemoveLocksCmd(std::vector<std::string> &&commandAliases_r)
   : ZypperBaseCommand(
-      commandAliases_r,
+      std::move( commandAliases_r ),
       _("removelock (rl) [OPTIONS] <LOCK-NUMBER|PACKAGENAME> ..."),
       _("Remove a package lock."),
       // translators: command description; %1% is acoomand like 'zypper locks'

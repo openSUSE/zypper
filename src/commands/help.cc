@@ -7,6 +7,7 @@
 #include "help.h"
 #include "utils/messages.h"
 #include "commands/commandhelpformatter.h"
+#include "commands/search/search-packages-hinthack.h"
 #include "Zypper.h"
 
 namespace
@@ -64,9 +65,9 @@ std::string renderGlobalHelp ()
 }
 }
 
-HelpCmd::HelpCmd ( const std::vector<std::string> &commandAliases_r ) :
+HelpCmd::HelpCmd ( std::vector<std::string> &&commandAliases_r ) :
   ZypperBaseCommand (
-    commandAliases_r,
+    std::move( commandAliases_r ),
     "help",
     _("Print zypper help"),
     _("Print zypper help"),

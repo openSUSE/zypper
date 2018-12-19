@@ -95,9 +95,9 @@ void add_service_by_url( Zypper & zypper,
 
 }
 
-AddServiceCmd::AddServiceCmd( const std::vector<std::string> &commandAliases_r ) :
+AddServiceCmd::AddServiceCmd(std::vector<std::string> &&commandAliases_r ) :
   ZypperBaseCommand(
-    commandAliases_r,
+    std::move( commandAliases_r ),
     // translators: command synopsis; do not translate lowercase words
     _("addservice (as) [OPTIONS] <URI> <ALIAS>"),
     _("Add a new service."),

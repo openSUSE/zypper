@@ -137,9 +137,9 @@ namespace
   };
 } // namespace
 
-DownloadCmd::DownloadCmd( const std::vector<std::string> &commandAliases_r ) :
+DownloadCmd::DownloadCmd(std::vector<std::string> &&commandAliases_r ) :
   ZypperBaseCommand (
-    commandAliases_r,
+    std::move( commandAliases_r ),
     // translators: command synopsis; do not translate lowercase words
     _("download [OPTIONS] <PACKAGES>..."),
     // translators: command summary: download

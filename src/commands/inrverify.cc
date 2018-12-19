@@ -10,9 +10,9 @@
 #include "commands/conditions.h"
 #include "solve-commit.h"
 
-InrVerifyCmd::InrVerifyCmd( const std::vector<std::string> &commandAliases_r, InrVerifyCmd::Mode cmdMode_r ) :
+InrVerifyCmd::InrVerifyCmd(std::vector<std::string> &&commandAliases_r, InrVerifyCmd::Mode cmdMode_r ) :
   ZypperBaseCommand (
-    commandAliases_r,
+    std::move( commandAliases_r ),
     std::string(),
     std::string(),
     std::string(),

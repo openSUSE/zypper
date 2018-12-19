@@ -16,7 +16,7 @@
 class ModifyServiceCmd : public ZypperBaseCommand
 {
 public:
-  ModifyServiceCmd( const std::vector<std::string> &commandAliases_r );
+  ModifyServiceCmd( std::vector<std::string> &&commandAliases_r );
 
   // ZypperBaseCommand interface
   std::string help() override;

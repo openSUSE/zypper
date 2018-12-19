@@ -42,7 +42,7 @@ class SourceDownloadImpl;
 class SourceDownloadCmd : public ZypperBaseCommand
 {
 public:
-  SourceDownloadCmd ( const std::vector<std::string> &commandAliases_r );
+  SourceDownloadCmd ( std::vector<std::string> &&commandAliases_r );
 
   struct Options {
     static const zypp::filesystem::Pathname _defaultDirectory;

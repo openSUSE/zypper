@@ -114,9 +114,9 @@ namespace
 ///////////////////////////////////////////////////////////////////
 
 
-ConfigTestCmd::ConfigTestCmd(const std::vector<std::string> &commandAliases_r):
+ConfigTestCmd::ConfigTestCmd(std::vector<std::string> &&commandAliases_r):
   ZypperBaseCommand (
-    commandAliases_r,
+    std::move( commandAliases_r ),
     "configtest",
     "This command is for debuging purposes only.",
     "This command is for debuging purposes only.",

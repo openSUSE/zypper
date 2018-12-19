@@ -22,9 +22,9 @@
 
 using namespace zypp;
 
-AddLocksCmd::AddLocksCmd( const std::vector<std::string> &commandAliases_r ) :
+AddLocksCmd::AddLocksCmd(std::vector<std::string> &&commandAliases_r ) :
   ZypperBaseCommand (
-    commandAliases_r,
+    std::move( commandAliases_r ),
     // translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
     _("addlock (al) [OPTIONS] <PACKAGENAME> ..."),
     // translators: command summary

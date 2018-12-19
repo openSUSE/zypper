@@ -17,7 +17,7 @@
 class UpdateCmd : public ZypperBaseCommand
 {
 public:
-  UpdateCmd( const std::vector<std::string> &commandAliases_r );
+  UpdateCmd( std::vector<std::string> &&commandAliases_r );
 
 private:
   bool _details = false;

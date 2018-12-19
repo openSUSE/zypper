@@ -13,7 +13,7 @@
 class HelpCmd : public ZypperBaseCommand
 {
 public:
-  HelpCmd ( const std::vector<std::string> &commandAliases_r );
+  HelpCmd ( std::vector<std::string> &&commandAliases_r );
 
   static void printMainHelp(Zypper &zypper);
 

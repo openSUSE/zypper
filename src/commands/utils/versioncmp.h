@@ -13,7 +13,7 @@
 class VersionCompareCmd : public ZypperBaseCommand
 {
 public:
-  VersionCompareCmd( const std::vector<std::string> &commandAliases_r );
+  VersionCompareCmd( std::vector<std::string> &&commandAliases_r );
 
   // ZypperBaseCommand interface
 protected:

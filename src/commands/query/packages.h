@@ -17,7 +17,7 @@
 class PackagesCmdBase : public ZypperBaseCommand
 {
 public:
-  PackagesCmdBase( const std::vector<std::string> &commandAliases_r );
+  PackagesCmdBase( std::vector<std::string> &&commandAliases_r );
 
 private:
   ListPackagesFlags _flags = ListPackagesBits::Default;

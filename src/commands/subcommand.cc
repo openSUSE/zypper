@@ -476,9 +476,9 @@ std::ostream & SubcommandOptions::showHelpOn( std::ostream & out ) const
   return out;	// FAKE!
 }
 
-SubCmd::SubCmd(const std::vector<std::string> &commandAliases_r , boost::shared_ptr<SubcommandOptions> options_r) :
+SubCmd::SubCmd(std::vector<std::string> &&commandAliases_r , boost::shared_ptr<SubcommandOptions> options_r) :
   ZypperBaseCommand (
-    commandAliases_r,
+    std::move( commandAliases_r ),
     "subcommand",
     // translators: command summary: subcommand
     _("Lists available subcommands."),

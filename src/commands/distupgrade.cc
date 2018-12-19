@@ -13,9 +13,9 @@
 
 #include "Zypper.h"
 
-DistUpgradeCmd::DistUpgradeCmd( const std::vector<std::string> &commandAliases_r ) :
+DistUpgradeCmd::DistUpgradeCmd(std::vector<std::string> &&commandAliases_r ) :
   ZypperBaseCommand (
-    commandAliases_r,
+    std::move( commandAliases_r ),
     // translators: command synopsis; do not translate lowercase words
     _("dist-upgrade (dup) [OPTIONS]"),
     // translators: command summary: dist-upgrade, dup

@@ -16,7 +16,7 @@
 class ListUpdatesCmd : public ZypperBaseCommand
 {
 public:
-  ListUpdatesCmd( const std::vector<std::string> &commandAliases_r );
+  ListUpdatesCmd( std::vector<std::string> &&commandAliases_r );
 
 private:
   std::set<ResKind> _kinds;

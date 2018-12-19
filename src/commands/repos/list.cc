@@ -68,9 +68,9 @@ void print_repo_details( Zypper & zypper, std::list<RepoInfo> & repos )
 
 }
 
-ListReposCmd::ListReposCmd(const std::vector<std::string> &commandAliases_r)
+ListReposCmd::ListReposCmd(std::vector<std::string> &&commandAliases_r)
   : ZypperBaseCommand(
-      commandAliases_r,
+      std::move( commandAliases_r ),
       _("repos (lr) [OPTIONS] [REPO] ..."),
       _("List all defined repositories."),
       _("List all defined repositories."),

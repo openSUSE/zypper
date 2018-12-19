@@ -13,7 +13,7 @@
 class NeedsRebootingCmd : public ZypperBaseCommand
 {
 public:
-  NeedsRebootingCmd ( const std::vector<std::string> &commandAliases_r );
+  NeedsRebootingCmd ( std::vector<std::string> &&commandAliases_r );
 
   // ZypperBaseCommand interface
 protected:

@@ -14,7 +14,7 @@
 class ConfigTestCmd : public ZypperBaseCommand
 {
 public:
-  ConfigTestCmd ( const std::vector<std::string> &commandAliases_r );
+  ConfigTestCmd ( std::vector<std::string> &&commandAliases_r );
 
   // ZypperBaseCommand interface
 protected:
