@@ -38,10 +38,8 @@ int ShellCmd::execute(Zypper &zypper, const std::vector<std::string> &)
 {
   if ( zypper.runningShell() )
     zypper.out().info(_("You already are running zypper's shell.") );
-  else
-  {
-    zypper.out().error(_("Unexpected program flow.") );
-    report_a_bug( zypper.out() );
+  else {
+    zypper.commandShell();
   }
   return zypper.exitCode();
 }
@@ -74,7 +72,8 @@ int ShellQuitCmd::execute( Zypper &zypper, const std::vector<std::string> & )
 {
   if ( !zypper.runningShell() )
     zypper.out().warning(_("This command only makes sense in the zypper shell."), Out::QUIET );
-  else
-    zypper.out().error( "oops, you wanted to quit, didn't you?" ); // should not happen
+  else {
+    zypper.stopCommandShell();
+  }
   return zypper.exitCode();
 }

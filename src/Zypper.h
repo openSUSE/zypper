@@ -149,8 +149,6 @@ public:
   Config & configNoConst()			{ return _config; }
 
   const ZypperCommand & command() const		{ return _command; }
-  const std::string & commandHelp() const	{ return _command_help; }
-  const ArgList & arguments() const		{ return _arguments; }
   RuntimeData & runtimeData()			{ return _rdata; }
 
   void initRepoManager()
@@ -203,54 +201,53 @@ public:
     exit( runtimeData().entered_commit ? ZYPPER_EXIT_ERR_COMMIT : ZYPPER_EXIT_ON_SIGNAL );
   }
 
-  int argc()					{ return _running_shell ? _sh_argc : _argc; }
-  char ** argv()				{ return _running_shell ? _sh_argv : _argv; }
+  int argc()					{ return _argc; }
+  char ** argv()				{ return _argv; }
 
   void cleanup();
   void cleanupForSubcommand();
 
+  void commandShell();
+
 public:
   ~Zypper();
+
+  int commandArgOffset() const;
+  void stopCommandShell ();
 
 private:
   Zypper();
 
-  void processGlobalOptions();
-  void processCommandOptions();
-  void commandShell();
+  int processGlobalOptions();
   void shellCleanup();
-  void safeDoCommand();
-  void doCommand();
+  void doCommand(int cmdArgc, char **cmdArgv , int firstFlag = 0 );
+
+  void setRunningHelp( bool value = true )		{ _running_help = value; }
 
   void setCommand( const ZypperCommand &command )	{ _command = command; }
   void setRunningShell( bool value = true )		{ _running_shell = value; }
-  void setRunningHelp( bool value = true )		{ _running_help = value; }
-
   void assertZYppPtrGod();
-  
+
 private:
 
   int     _argc;
   char ** _argv;
+  int     _commandArgOffset;
 
   Out * _out_ptr;
   Config _config;
   ZypperCommand _command;
-  ArgList _arguments;
-  std::string _command_help;
 
   int   _exitCode;
   int   _exitInfoCode;	// hack for exitcodes that don't abort but are reported if the main action succeeded (e.g. 106, 107)
   bool  _running_shell;
+  bool  _continue_running_shell;
   bool  _running_help;
   unsigned  _exit_requested;
 
   RuntimeData _rdata;
 
   RepoManager_Ptr   _rm;
-
-  int _sh_argc;
-  char **_sh_argv;
 };
 
 void print_unknown_command_hint( Zypper & zypper );

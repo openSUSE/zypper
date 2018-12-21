@@ -234,10 +234,15 @@ ZypperCommand::ZypperCommand(ZypperCommand::Command command) : _command(command)
 }
 
 ZypperCommand::ZypperCommand( const std::string & strval_r )
-  : ZypperCommand( parse(strval_r ) )
+: ZypperCommand( parse(strval_r ) )
 { }
 
 ZypperCommand::Command ZypperCommand::parse( const std::string & strval_r ) const
+{
+  return ZypperCommand::toEnum( strval_r );
+}
+
+ZypperCommand::Command ZypperCommand::toEnum( const std::string &strval_r )
 {
   ZypperCommand::Command cmd = SUBCOMMAND_e;	// Exception if not true
   if ( ! cmdTable().getValue( strval_r, cmd ) )
@@ -269,6 +274,14 @@ ZypperBaseCommandPtr ZypperCommand::commandObject() const
       _newStyleCmdObj = std::get< CmdDescField::Factory >(*i)();
   }
   return _newStyleCmdObj;
+}
+
+ZypperBaseCommand &ZypperCommand::assertCommandObject() const
+{
+  ZypperBaseCommandPtr ptr = commandObject();
+  if ( !ptr )
+    ZYPP_THROW( Exception("Invalid command object") );
+  return *ptr;
 }
 
 const std::vector<ZypperCommand::CmdDesc> &ZypperCommand::allCommands()

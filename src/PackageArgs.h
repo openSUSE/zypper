@@ -61,10 +61,6 @@ public:
   };
 
 public:
-  /** Processes current Zypper::arguments() */
-  PackageArgs( const ResKind & kind = ResKind::package,
-	       const Options & opts = Options() );
-
   /** Takes arguments as a vector of strings */
   PackageArgs( const std::vector<std::string> & args,
 	       const ResKind & kind = ResKind::package,

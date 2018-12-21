@@ -9,6 +9,7 @@
 #include <zypp/base/String.h>
 
 #include "main.h"
+#include <iostream>
 
 namespace zypp {
 namespace ZyppFlags {

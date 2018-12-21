@@ -185,8 +185,6 @@ Zypper::Zypper()
 , _running_shell( false )
 , _running_help( false )
 , _exit_requested( 0 )
-, _sh_argc( 0 )
-, _sh_argv( NULL )
 {
   MIL << "Zypper instance created." << endl;
 }
@@ -215,41 +213,9 @@ int Zypper::main( int argc, char ** argv )
 
   try {
     // parse global options and the command
-    processGlobalOptions();
-
-    if ( runningHelp() )
-    {
-      safeDoCommand();
-    }
-    else
-    {
-      switch( command().toEnum() )
-      {
-	case ZypperCommand::SHELL_e:
-	  commandShell();
-	  cleanup();
-	  break;
-
-  case ZypperCommand::SUBCOMMAND_e: {
-    std::shared_ptr<SubCmd>  cmd = std::dynamic_pointer_cast<SubCmd>( command().commandObject() );
-    if ( cmd )
-      cmd->runCmd( *this );
-    else {
-      ZYPP_THROW( Exception ("Invalid command object") );
-    }
-	  break;
-  }
-
-	case ZypperCommand::NONE_e:
-	  setExitCode( ZYPPER_EXIT_ERR_SYNTAX );
-	  break;
-
-	default:
-	  safeDoCommand();
-	  cleanup();
-	  break;
-      }
-    }
+    _commandArgOffset = processGlobalOptions();
+    doCommand( argc , argv, _commandArgOffset );
+    cleanup();
   }
   // Actually safeDoCommand also catches these exceptions.
   // Here we gather what escapes from other places.
@@ -322,10 +288,9 @@ void print_command_help_hint( Zypper & zypper )
 /*
  * parses global options, returns the command
  *
- * \returns ZypperCommand object representing the command or ZypperCommand::NONE
- *          if an unknown command has been given.
+ * \returns The index of the next flag to be parsed from CLI
  */
-void Zypper::processGlobalOptions()
+int Zypper::processGlobalOptions()
 {
   MIL << "START" << endl;
 
@@ -335,121 +300,11 @@ void Zypper::processGlobalOptions()
   setOutputWriter( p );
 
   std::vector<ZyppFlags::CommandGroup> globalOpts = _config.cliOptions();
-  optind = searchPackagesHintHack::argvCmdIdx = ZyppFlags::parseCLI( _argc, _argv, globalOpts );
+  int nextFlag = searchPackagesHintHack::argvCmdIdx = ZyppFlags::parseCLI( _argc, _argv, globalOpts );
 
   out().info( str::Format(_("Verbosity: %d")) % _config.verbosity , Out::HIGH );
   DBG << "Verbosity " << _config.verbosity << endl;
   DBG << "Output type " << _out_ptr->type() << endl;
-
-  //  ======== get command ========
-  if ( optind < _argc )
-  {
-    try { setCommand( ZypperCommand( _argv[optind++] ) ); }
-
-    // exception from command parsing
-    catch ( const Exception & e )
-    {
-      out().error( e.asUserString() );
-      print_unknown_command_hint( *this, _argv[optind-1] );
-      setExitCode( ZYPPER_EXIT_ERR_SYNTAX );
-      ZYPP_THROW( ExitRequestException("unknown command") );
-    }
-  }
-
-  // Help is parsed by setting the help flag for a command, which may be empty
-  // $0 -h,--help
-  // $0 command -h,--help
-  // The help command is eaten and transformed to the help option
-  // $0 help
-  // $0 help command
-  if ( _config.wantHelp )
-    setRunningHelp( true );	// help for current command
-  else if ( command() == ZypperCommand::NONE )
-    setRunningHelp( true );	// no command => global help
-  else if ( command() == ZypperCommand::HELP )
-  {
-    setRunningHelp( true );
-    if ( optind < _argc )	// help on help or next command
-    {
-      std::string arg = _argv[optind++];
-      if ( arg != "-h" && arg != "--help" )
-      {
-        try { setCommand( ZypperCommand( arg ) ); }
-        // exception from command parsing
-        catch ( const Exception & e )
-        {
-          out().error( e.asUserString() );
-          print_unknown_command_hint( *this, arg );
-          setExitCode( ZYPPER_EXIT_ERR_SYNTAX );
-          ZYPP_THROW( ExitRequestException("unknown command") );
-        }
-      }
-    }
-    else
-      setCommand( ZypperCommand::NONE );	// global help
-  }
-
-  if ( runningHelp() )
-  {
-    if ( command() == ZypperCommand::NONE )	// global help
-    {
-
-      HelpCmd::printMainHelp( *this );
-      ZYPP_THROW( ExitRequestException("help provided") );
-    }
-    else if ( command() == ZypperCommand::HELP )// help on help
-    {
-      HelpCmd::printMainHelp( *this );
-      ZYPP_THROW( ExitRequestException("help provided") );
-    }
-  }
-  else if ( command() == ZypperCommand::SHELL && optind < _argc )
-  {
-    // shell command args are handled here because
-    // the command is treated differently in main
-    std::string arg = _argv[optind++];
-    if ( arg == "-h" || arg == "--help" )
-      setRunningHelp(true);
-    else
-    {
-      report_too_many_arguments( "shell\n" );
-      setExitCode( ZYPPER_EXIT_ERR_INVALID_ARGS );
-      ZYPP_THROW( ExitRequestException("invalid args") );
-    }
-  }
-  else if ( command() == ZypperCommand::SUBCOMMAND )
-  {
-    // subcommand command args are handled here because
-    // the command is treated differently in main.
-
-    std::shared_ptr<SubCmd> cmd = std::dynamic_pointer_cast<SubCmd>(command().commandObject());
-    if ( cmd ) {
-      shared_ptr<SubcommandOptions> myOpts( cmd->subCmdOptions() );
-      myOpts->loadDetected();
-
-      if ( myOpts->_detected._name.empty() )
-      {
-        // Command name is the builtin 'subcommand', no executable.
-        // For now we turn on the help.
-        setRunningHelp( true );
-      }
-      else
-      {
-        if ( optind > 2 )
-        {
-          out().error(
-            // translators: %1%  - is the name of a subcommand
-            str::Format(_("Subcommand %1% does not support zypper global options."))
-            % myOpts->_detected._name );
-          print_command_help_hint( *this );
-          setExitCode( ZYPPER_EXIT_ERR_INVALID_ARGS );
-          ZYPP_THROW( ExitRequestException("invalid args") );
-        }
-        // save args (incl. the command itself as argv[0])
-        myOpts->args( _argv+(optind-1), _argv+_argc );
-      }
-    }
-  }
 
   // ======== other global options ========
   {
@@ -498,80 +353,8 @@ void Zypper::processGlobalOptions()
     MIL << "Repositories enabled" << endl;
   }
 
-  // additional repositories by URL
-  if ( _config.plusRepoFromCLI.size() )
-  {
-    switch ( command().toEnum() )
-    {
-    case ZypperCommand::ADD_REPO_e:
-    case ZypperCommand::REMOVE_REPO_e:
-    case ZypperCommand::MODIFY_REPO_e:
-    case ZypperCommand::RENAME_REPO_e:
-    case ZypperCommand::REFRESH_e:
-    case ZypperCommand::CLEAN_e:
-    case ZypperCommand::REMOVE_LOCK_e:
-    case ZypperCommand::LIST_LOCKS_e:
-    {
-      // TranslatorExplanation The %s is "--plus-repo"
-      out().warning( str::Format(_("The %s option has no effect here, ignoring.")) % "--plus-repo" );
-      break;
-    }
-    default:
-    {
-      int count = 1;
-      for ( std::vector<std::string>::const_iterator it = _config.plusRepoFromCLI.begin(); it != _config.plusRepoFromCLI.end(); ++it )
-      {
-        Url url = make_url( *it );
-        if (!url.isValid())
-        {
-          setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
-          return;
-        }
-
-        RepoInfo repo;
-        repo.addBaseUrl( url );
-        repo.setEnabled( true );
-        repo.setAutorefresh( true );
-        repo.setAlias( str::Format("~plus-repo-%d") % count );
-        repo.setName( url.asString() );
-
-        repo.setMetadataPath( runtimeData().tmpdir / repo.alias() / "%AUTO%" );
-        repo.setPackagesPath( Pathname::assertprefix( _config.root_dir, ZYPPER_RPM_CACHE_DIR ) );
-
-        _rdata.temporary_repos.push_back( repo );
-        DBG << "got additional repo: " << url << endl;
-        count++;
-      }
-    }
-    }
-  }
-
-  // additional repositories by content (keywords)
-  if ( _config.plusContentFromCLI.size() )
-  {
-    switch ( command().toEnum() )
-    {
-    case ZypperCommand::ADD_REPO_e:
-    case ZypperCommand::REMOVE_REPO_e:
-    case ZypperCommand::MODIFY_REPO_e:
-    case ZypperCommand::RENAME_REPO_e:
-    //case ZypperCommand::REFRESH_e:
-    case ZypperCommand::CLEAN_e:
-    case ZypperCommand::REMOVE_LOCK_e:
-    case ZypperCommand::LIST_LOCKS_e:
-    {
-      // TranslatorExplanation The %s is "--option-name"
-      out().warning( str::Format(_("The %s option has no effect here, ignoring.")) % "--plus-content" );
-      break;
-    }
-    default:
-    {
-      _rdata.plusContentRepos.insert( _config.plusContentFromCLI.begin(), _config.plusContentFromCLI.end() );
-    }
-    }
-  }
-
   MIL << "DONE" << endl;
+  return nextFlag;
 }
 
 
@@ -608,19 +391,19 @@ void Zypper::commandShell()
   if ( !histfile.empty() )
     read_history( histfile.c_str () );
 
-  while ( true )
+  //will be reset by ShellQuitCmd
+  _continue_running_shell = true;
+  while ( _continue_running_shell )
   {
     // read a line
     std::string line = readline_getline();
-    out().info( str::Format("Got: %s") % line, Out::DEBUG );
-    // reset optind etc
-    optind = 0;
-    // split it up and create sh_argc, sh_argv
-    Args args( line );
-    _sh_argc = args.argc();
-    _sh_argv = args.argv();
 
-    std::string command_str = _sh_argv[0] ? _sh_argv[0] : "";
+    out().info( str::Format("Got: %s") % line, Out::DEBUG );
+
+    // split it up and create argc, argv
+    Args args( line );
+
+    std::string command_str = args.argv()[0] ? args.argv()[0] : "";
 
     if ( command_str == "\004" ) // ^D
     {
@@ -632,18 +415,7 @@ void Zypper::commandShell()
     {
       MIL << "Reloading..." << endl;
       God->target()->reload();   // reload system in case rpm database has changed
-      setCommand( ZypperCommand( command_str ) );
-      if ( command() == ZypperCommand::SHELL_QUIT )
-        break;
-      else if ( command() == ZypperCommand::NONE )
-        print_unknown_command_hint( *this, command_str );
-      else if ( command() == ZypperCommand::SUBCOMMAND )
-      {
-	// Currently no concept how to handle global options and ZYPPlock
-	out().error(_("Zypper shell does not support execution of subcommands.") );
-      }
-      else
-        safeDoCommand();
+      doCommand( args.argc(), args.argv(), 0 );
     }
     catch ( const Exception & e )
     {
@@ -651,7 +423,8 @@ void Zypper::commandShell()
       print_unknown_command_hint( *this, command_str ); // TODO: command_str should come via the Exception, same for other print_unknown_command_hint's
     }
 
-    shellCleanup();
+    if ( _continue_running_shell )
+      shellCleanup();
   }
 
   if ( !histfile.empty() )
@@ -659,6 +432,7 @@ void Zypper::commandShell()
 
   MIL << "Leaving the shell" << endl;
   setRunningShell( false );
+  cleanup();
 }
 
 void Zypper::shellCleanup()
@@ -667,23 +441,19 @@ void Zypper::shellCleanup()
 
   switch( command().toEnum() )
   {
-  case ZypperCommand::INSTALL_e:
-  case ZypperCommand::REMOVE_e:
-  case ZypperCommand::UPDATE_e:
-  case ZypperCommand::PATCH_e:
-  {
-    remove_selections( *this );
-    break;
-  }
-  default:;
+    case ZypperCommand::INSTALL_e:
+    case ZypperCommand::REMOVE_e:
+    case ZypperCommand::UPDATE_e:
+    case ZypperCommand::PATCH_e:
+    {
+      remove_selections( *this );
+      break;
+    }
+    default:;
   }
 
-  // clear any previous arguments
-  _arguments.clear();
   // clear the command
   _command = ZypperCommand::NONE;
-  // clear command help text
-  _command_help.clear();
   // reset help flag
   setRunningHelp( false );
   // ... and the exit code
@@ -705,14 +475,211 @@ void Zypper::shellCleanup()
 
 /// process one command from the OS shell or the zypper shell
 // catch unexpected exceptions and tell the user to report a bug (#224216)
-void Zypper::safeDoCommand()
+void Zypper::doCommand( int cmdArgc, char **cmdArgv, int firstFlag )
 {
   try
   {
-    processCommandOptions();
-    if ( command() == ZypperCommand::NONE || exitCode() )
+    MIL << "START" << endl;
+    //  ======== get command ========
+    if ( firstFlag < cmdArgc )
+    {
+      //if wantHelp is set, we need to force the HELP_e command
+      if ( _config.wantHelp ) {
+        firstFlag -= 1; //point the argparser to the cli command as a positional arg
+        setCommand ( ZypperCommand( ZypperCommand::HELP_e ) );
+      } else {
+        //try to turn the command argument into its object representation
+        try {
+          setCommand( ZypperCommand( cmdArgv[firstFlag] ) );
+        }
+        // exception from command parsing
+        catch ( const Exception & e )
+        {
+          out().error( e.asUserString() );
+          print_unknown_command_hint( *this, cmdArgv[firstFlag] );
+          setExitCode( ZYPPER_EXIT_ERR_SYNTAX );
+          ZYPP_THROW( ExitRequestException("unknown command") );
+        }
+
+      }
+    }
+
+    if ( command() == ZypperCommand::NONE ) {
+      if ( runningShell() ) {
+        setExitCode( ZYPPER_EXIT_ERR_SYNTAX );
+        ZYPP_THROW( ExitRequestException("unknown command") );
+      }
+      setCommand ( ZypperCommand( ZypperCommand::HELP_e ) );	// no command => global help
+    }
+
+    // additional repositories by URL
+    if ( _config.plusRepoFromCLI.size() )
+    {
+      switch ( command().toEnum() )
+      {
+        case ZypperCommand::ADD_REPO_e:
+        case ZypperCommand::REMOVE_REPO_e:
+        case ZypperCommand::MODIFY_REPO_e:
+        case ZypperCommand::RENAME_REPO_e:
+        case ZypperCommand::REFRESH_e:
+        case ZypperCommand::CLEAN_e:
+        case ZypperCommand::REMOVE_LOCK_e:
+        case ZypperCommand::LIST_LOCKS_e:
+        {
+          // TranslatorExplanation The %s is "--plus-repo"
+          out().warning( str::Format(_("The %s option has no effect here, ignoring.")) % "--plus-repo" );
+          break;
+        }
+        default:
+        {
+          int count = 1;
+          for ( std::vector<std::string>::const_iterator it = _config.plusRepoFromCLI.begin(); it != _config.plusRepoFromCLI.end(); ++it )
+          {
+            Url url = make_url( *it );
+            if (!url.isValid())
+            {
+              setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
+              return;
+            }
+
+            RepoInfo repo;
+            repo.addBaseUrl( url );
+            repo.setEnabled( true );
+            repo.setAutorefresh( true );
+            repo.setAlias( str::Format("~plus-repo-%d") % count );
+            repo.setName( url.asString() );
+
+            repo.setMetadataPath( runtimeData().tmpdir / repo.alias() / "%AUTO%" );
+            repo.setPackagesPath( Pathname::assertprefix( _config.root_dir, ZYPPER_RPM_CACHE_DIR ) );
+
+            _rdata.temporary_repos.push_back( repo );
+            DBG << "got additional repo: " << url << endl;
+            count++;
+          }
+        }
+      }
+      _config.plusRepoFromCLI.clear();
+    }
+
+    // additional repositories by content (keywords)
+    if ( _config.plusContentFromCLI.size() )
+    {
+      switch ( command().toEnum() )
+      {
+        case ZypperCommand::ADD_REPO_e:
+        case ZypperCommand::REMOVE_REPO_e:
+        case ZypperCommand::MODIFY_REPO_e:
+        case ZypperCommand::RENAME_REPO_e:
+        //case ZypperCommand::REFRESH_e:
+        case ZypperCommand::CLEAN_e:
+        case ZypperCommand::REMOVE_LOCK_e:
+        case ZypperCommand::LIST_LOCKS_e:
+        {
+          // TranslatorExplanation The %s is "--option-name"
+          out().warning( str::Format(_("The %s option has no effect here, ignoring.")) % "--plus-content" );
+          break;
+        }
+        default:
+        {
+          _rdata.plusContentRepos.insert( _config.plusContentFromCLI.begin(), _config.plusContentFromCLI.end() );
+        }
+      }
+      _config.plusContentFromCLI.clear();
+    }
+
+    // === ZYpp lock ===
+    switch ( command().toEnum() )
+    {
+      case ZypperCommand::PS_e:
+      case ZypperCommand::SUBCOMMAND_e:
+        // bnc#703598: Quick fix as few commands do not need a zypp lock
+        break;
+
+      default:
+        if ( _config.changedRoot && _config.root_dir != "/" )
+        {
+          // bnc#575096: Quick fix
+          ::setenv( "ZYPP_LOCKFILE_ROOT", _config.root_dir.c_str(), 0 );
+        }
+        {
+          const char *roh = getenv( "ZYPP_READONLY_HACK" );
+          if ( roh != NULL && roh[0] == '1' )
+            zypp_readonly_hack::IWantIt ();
+
+        else if ( command() == ZypperCommand::LIST_REPOS
+                    || command() == ZypperCommand::LIST_SERVICES
+                    || command() == ZypperCommand::VERSION_CMP
+                    || command() == ZypperCommand::TARGET_OS )
+          zypp_readonly_hack::IWantIt (); // #247001, #302152
+        }
+        assertZYppPtrGod();
+    }
+
+    // === execute command ===
+
+    MIL << "Going to process command " << command() << endl;
+
+    // handle new style commands
+    ZypperBaseCommandPtr newStyleCmd = command().commandObject();
+    if ( newStyleCmd ) {
+
+      //reset the command to default
+      newStyleCmd->reset();
+
+      MIL << "Found new style command << " << newStyleCmd->command().front() << endl;
+
+      // parse command options
+      try {
+        //align argc and argv to the first flag
+        //Remember that parseArguments will always ignore the very first argument in the array due to how getopt works
+        //so we pass the command name here as well
+        int myArgc    = cmdArgc - firstFlag;
+        char **myArgv = cmdArgv + firstFlag;
+
+        //parse all option flags
+        int firstPositionalArg = newStyleCmd->parseArguments( *this, myArgc, myArgv );
+
+        //make sure to calculate the correct index of the first positional arg
+        searchPackagesHintHack::argvArgIdx = firstPositionalArg + firstFlag;
+
+        std::vector<std::string> positionalArguments;
+        if ( firstPositionalArg < myArgc ) {
+          int counter = firstPositionalArg;
+          std::ostringstream s;
+          s << _("Non-option program arguments: ");
+          while ( counter < myArgc )  {
+            std::string argument = myArgv[counter++];
+            s << "'" << argument << "' ";
+            positionalArguments.push_back( argument );
+          }
+          out().info( s.str(), Out::HIGH );
+        }
+
+        newStyleCmd->setPositionalArguments( positionalArguments );
+
+      } catch ( const ZyppFlags::ZyppFlagsException &e) {
+        ERR << e.asString() << endl;
+        out().error( e.asUserString() );
+        setExitCode( ZYPPER_EXIT_ERR_SYNTAX );
+        return;
+      }
+
+      if ( newStyleCmd->helpRequested() ) {
+        ZypperCommand helpCmd ( ZypperCommand::HELP_e );
+        HelpCmd &help = helpCmd.assertCommandObject<HelpCmd>();
+        help.setPositionalArguments( { newStyleCmd->command().at(0) } );
+        setExitCode ( help.run( *this ) );
+      } else {
+        setExitCode( newStyleCmd->run( *this ) );
+      }
+
+      MIL << "Done " << endl;
       return;
-    doCommand();
+    }
+
+    // if the program reaches this line, something went wrong
+    report_a_bug( out() );
+    setExitCode( ZYPPER_EXIT_ERR_BUG );
   }
   // The same catch block as in zypper::main.
   // TODO Someday redesign the Exceptions flow.
@@ -744,142 +711,14 @@ void Zypper::safeDoCommand()
   }
 }
 
-// === command-specific options ===
-void Zypper::processCommandOptions()
+int Zypper::commandArgOffset() const
 {
-  MIL << "START" << endl;
-
-  if ( command() == ZypperCommand::HELP )
-  {
-    // in shell, check next argument to see if command-specific help is wanted
-    if ( runningShell() )
-    {
-      if ( argc() > 1 )
-      {
-        std::string cmd = argv()[1];
-        try
-        {
-          setRunningHelp( true );
-          setCommand( ZypperCommand( cmd ) );
-        }
-        catch ( Exception & ex )
-        {
-          // unknown command. Known command will be handled in the switch
-          // and doCommand()
-          if ( !cmd.empty() && cmd != "-h" && cmd != "--help" )
-          {
-            out().error( ex.asUserString() );
-            print_unknown_command_hint( *this, cmd );
-            ZYPP_THROW( ExitRequestException("help provided") );
-          }
-        }
-      }
-      // if no command is requested, show main help
-      else
-      {
-        HelpCmd::printMainHelp( *this );
-        ZYPP_THROW( ExitRequestException("help provided") );
-      }
-    }
-  }
-
-  // handle new style commands
-  ZypperBaseCommandPtr newStyleCmd = command().commandObject();
-  if ( newStyleCmd ) {
-
-    //reset the command to default
-    newStyleCmd->reset();
-
-    //get command help
-    _command_help = newStyleCmd->help();
-
-    MIL << "Found new style command << " << newStyleCmd->command().front() << endl;
-
-    //no need to parse args if we want help anyway
-    if ( runningHelp() )
-      return;
-
-    // parse command options
-    try {
-      //keep compat by setting optind
-      searchPackagesHintHack::argvArgIdx = optind = newStyleCmd->parseArguments( *this, optind );
-
-      //keep compatibility
-      _arguments = newStyleCmd->positionalArguments();
-
-      //make sure help is shown if required
-      setRunningHelp( newStyleCmd->helpRequested() );
-
-    } catch ( const ZyppFlags::ZyppFlagsException &e) {
-      ERR << e.asString() << endl;
-      out().error( e.asUserString() );
-      setExitCode( ZYPPER_EXIT_ERR_SYNTAX );
-      return;
-    }
-  } else {
-    if ( !runningHelp() ) {
-      ERR << "Unknown or unexpected command" << endl;
-      out().error(_("Unexpected program flow."));
-      report_a_bug( out() );
-    }
-  }
-  MIL << "Done " << endl;
+  return _commandArgOffset;
 }
 
-/// process one command from the OS shell or the zypper shell
-void Zypper::doCommand()
+void Zypper::stopCommandShell()
 {
-  // help check is common to all commands
-  if ( runningHelp() )
-  {
-    out().info( _command_help, Out::QUIET );
-    if ( command() == ZypperCommand::SEARCH )
-     searchPackagesHintHack::callOrNotify( *this );
-    return;
-  }
-
-  // === ZYpp lock ===
-  switch ( command().toEnum() )
-  {
-    case ZypperCommand::PS_e:
-    case ZypperCommand::SUBCOMMAND_e:
-      // bnc#703598: Quick fix as few commands do not need a zypp lock
-      break;
-
-    default:
-      if ( _config.changedRoot && _config.root_dir != "/" )
-      {
-        // bnc#575096: Quick fix
-        ::setenv( "ZYPP_LOCKFILE_ROOT", _config.root_dir.c_str(), 0 );
-      }
-      {
-        const char *roh = getenv( "ZYPP_READONLY_HACK" );
-        if ( roh != NULL && roh[0] == '1' )
-          zypp_readonly_hack::IWantIt ();
-
-        else if ( command() == ZypperCommand::LIST_REPOS
-                  || command() == ZypperCommand::LIST_SERVICES
-                  || command() == ZypperCommand::VERSION_CMP
-                  || command() == ZypperCommand::TARGET_OS )
-          zypp_readonly_hack::IWantIt (); // #247001, #302152
-      }
-      assertZYppPtrGod();
-  }
-
-  // === execute command ===
-
-  MIL << "Going to process command " << command() << endl;
-
-  //handle new style commands
-  ZypperBaseCommandPtr newStyleCmd = command().commandObject();
-  if ( newStyleCmd ) {
-    setExitCode( newStyleCmd->run( *this ) );
-    return;
-  }
-
-  // if the program reaches this line, something went wrong
-  report_a_bug( out() );
-  setExitCode( ZYPPER_EXIT_ERR_BUG );
+  _continue_running_shell = false;
 }
 
 void Zypper::cleanup()

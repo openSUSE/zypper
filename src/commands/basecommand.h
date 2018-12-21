@@ -126,9 +126,11 @@ public:
 
   /**
    * Initialize the command options and positional arguments for the command
+   * \note The first element in argv is considered to be the command name, so it is completely skipped
+   *       by the argument parser
    * \throws ZyppFlags::ZyppFlagsException
    */
-  int parseArguments ( Zypper &zypper, const int firstOpt );
+  int parseArguments (Zypper &, const int argc, char * const *argv);
 
 
   /**
@@ -178,13 +180,13 @@ public:
   void setPositionalArguments(const std::vector<std::string> &positionalArguments);
 
   /**
-   * Returns the list of raw options that was parsed from raw cli args.
+   * Returns the list of raw options that was parsed from raw cli args, including the positionalArgs
    * \note this is only enabled if \sa setFillRawOptions was set to true
    * \sa BaseCommand::parseArguments
    * \sa BaseCommand::fillRawOptions
    * \sa BaseCommand::setFillRawOptions
    */
-  std::vector<std::string> rawOptions() const;
+  const std::vector<std::string> &rawOptions() const;
 
   /**
    * Returns if filling raw options is enabled when parsing arguments
@@ -200,6 +202,13 @@ public:
   void setFillRawOptions(bool fillRawOptions);
 
 protected:
+  /**
+   * Enables or disables running the argument parser, this can be
+   * used together with \sa fillRawOptions to completely ignore argument parsing
+   * and just get to the raw arguments
+   * \note This also means the positional arguments are not detected and passed to \sa BaseCommand::run
+   */
+  void disableArgumentParser ( bool disable = true );
   /**
    * Registers a option set to be supported on command line
    * \sa BaseCommandOptionSet
@@ -243,6 +252,7 @@ private:
   std::vector<BaseCommandOptionSet *> _registeredOptionSets;
   bool _helpRequested = false;
   bool _fillRawOptions = false;
+  bool _parseArguments = true;
   std::vector<std::string> _commandAliases;
   std::vector<std::string> _synopsis;
   std::vector<std::string> _positionalArguments;

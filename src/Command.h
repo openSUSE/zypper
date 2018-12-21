@@ -187,9 +187,18 @@ struct ZypperCommand
 
   Command toEnum() const { return _command; }
 
+  static Command toEnum (const std::string & strval_r );
+
   const std::string & asString() const;
 
   ZypperBaseCommandPtr commandObject() const;
+  ZypperBaseCommand& assertCommandObject() const;
+
+  template<typename T>
+  T& assertCommandObject () const
+  {
+    return dynamic_cast<T &>( assertCommandObject() );
+  }
 
   static const std::vector<CmdDesc> &allCommands ();
 
