@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-12-18 13:53+0100\n"
-"PO-Revision-Date: 2018-12-11 06:01+0000\n"
+"PO-Revision-Date: 2019-01-04 05:23+0000\n"
 "Last-Translator: Marguerite Su <i@marguerite.su>\n"
 "Language-Team: Chinese (China) <https://l10n.opensuse.org/projects/zypper/"
 "master/zh_CN/>\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 2.18\n"
+"X-Generator: Weblate 3.3\n"
 
 #: src/SolverRequester.h:52
 #, boost-format
@@ -499,7 +499,7 @@ msgstr "命令选项："
 
 #: src/commands/commandhelpformatter.h:102
 msgid "Solver options:"
-msgstr "解析器选项："
+msgstr "解算器选项："
 
 #: src/commands/commandhelpformatter.h:105
 msgid "Expert options:"
@@ -1626,17 +1626,17 @@ msgstr "应用修改到指定类型的软件源。"
 
 #: src/Zypper.cc:166 src/commands/solveroptionset.cc:41
 msgid "Create a solver test case for debugging."
-msgstr "创建依赖关系解决器试例以供调试。"
+msgstr "创建依赖关系解算器试例以供侦错。"
 
 #: src/Zypper.cc:167 src/commands/solveroptionset.cc:42
 msgid ""
 "Force the solver to find a solution (even an aggressive one) rather than "
 "asking."
-msgstr "强制解决依赖关系（即使方案很激进）。"
+msgstr "强迫解算器找出解决方案（即使是激进的方案）而不要询问。"
 
 #: src/Zypper.cc:168 src/commands/solveroptionset.cc:43
 msgid "Do not force the solver to find solution, let it ask."
-msgstr "不强制解决依赖关系，允许提问。"
+msgstr "不强迫解算器找出解决方案，允许它提问。"
 
 #: src/Zypper.cc:177 src/commands/solveroptionset.cc:18
 msgid "Install also recommended packages in addition to the required ones."
@@ -1858,9 +1858,7 @@ msgstr "使用一个附加软件源。"
 msgid ""
 "Additionally use disabled repositories providing a specific keyword. Try '--"
 "plus-content debug' to enable repos indicating to provide debug packages."
-msgstr ""
-"额外使用提供了某个特定关键字的已禁用软件源。 尝试 '--plus-content debug' 可启"
-"用标明其提供了调试软件包的源。"
+msgstr "也使用提供指定关键字的已禁用软件源。可尝试使用 ‘--plus-content debug’ 来临时启用表明其提供了侦错软件包的软件源。"
 
 #. translators: --disable-repositories
 #: src/Zypper.cc:618
@@ -2862,6 +2860,8 @@ msgid ""
 "unconditionally on small or minimal systems, as it may easily add a large "
 "number of packages."
 msgstr ""
+"安装已安装软件包推荐的尚未安装的新软件包。该命令基本上将会重新统计全部已安装软件包的推荐软件包并相应地充实您的系统。不要在小型或极简系统上无条件运行该命令"
+"，因为它可能会轻率地添加极大数量的软件包。"
 
 #. translators: command description, %1% is a zypper command
 #: src/commands/inrverify.cc:98
@@ -2870,7 +2870,7 @@ msgid ""
 "Called as '%1%', it restricts the command to just look for packages "
 "supporting available hardware, languages or filesystems. Useful after having "
 "added e.g. new hardware or driver repos."
-msgstr ""
+msgstr "调用 ‘%1%’ 将限制该命令仅查找支持可用硬件、语言或文件系统的软件包。用于例如添加了新硬件或驱动软件源后。"
 
 #. translators: command description
 #: src/commands/inrverify.cc:101
@@ -2887,7 +2887,7 @@ msgstr "单纯通过名称而非功能选择软件包。"
 
 #: src/commands/installremove.cc:55
 msgid "Select packages solely by capability."
-msgstr ""
+msgstr "仅通过功能选取软件包。"
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/installremove.cc:74
@@ -3222,7 +3222,7 @@ msgstr "或许无需重启。"
 
 #: src/commands/optionsets.cc:33
 msgid "Don't change anything, just report what would be done."
-msgstr ""
+msgstr "不作修改，仅汇报将进行的修改。"
 
 #. translators: -r, --repo <ALIAS|#|URI>
 #: src/commands/optionsets.cc:65
@@ -3232,7 +3232,7 @@ msgstr "仅限于指定软件源。"
 #: src/commands/optionsets.cc:85
 #, c-format, boost-format
 msgid "Option '--%s' overrides a previously set download mode."
-msgstr ""
+msgstr "选项 ‘--%s' 覆盖了前面设定的下载模式。"
 
 #: src/commands/optionsets.cc:114
 #, c-format, boost-format
@@ -3337,7 +3337,7 @@ msgstr ""
 #. translators: -d, --debugFile <path>
 #: src/commands/ps.cc:51
 msgid "Write debug output to file <path>."
-msgstr "写入调试输出到文件 <path>。"
+msgstr "将侦错输出写入到文件 <path>。"
 
 #: src/commands/ps.cc:71 src/solve-commit.cc:452
 msgid "Check failed:"
@@ -3361,7 +3361,7 @@ msgstr "父进程编号"
 #. process user ID
 #: src/commands/ps.cc:145
 msgid "UID"
-msgstr "唯一编号"
+msgstr "用户编号"
 
 #. process login name
 #: src/commands/ps.cc:147
@@ -4101,33 +4101,33 @@ msgstr "运行 '%1%' 搜索尚未激活的远程资源。"
 #. translators: -g, --category <CATEGORY>
 #: src/commands/selectpatchoptionset.cc:24
 msgid "Select patches with the specified category."
-msgstr ""
+msgstr "选取指定分类的补丁。"
 
 #. translators: --severity <SEVERITY>
 #: src/commands/selectpatchoptionset.cc:28
 msgid "Select patches with the specified severity."
-msgstr ""
+msgstr "选取指定严重性的补丁。"
 
 #. translators: --date <YYYY-MM-DD>
 #: src/commands/selectpatchoptionset.cc:32
 msgid "Select patches issued up to, but not including, the specified date"
-msgstr ""
+msgstr "选取在指定日期前但不包括指定日期发布的补丁"
 
 #. translators: -b, --bugzilla
 #: src/commands/selectpatchoptionset.cc:36
 msgid "Select applicable patches for the specified Bugzilla issues."
-msgstr ""
+msgstr "选取可修复指定 Bugzilla 问题的补丁。"
 
 #. translators: --cve
 #: src/commands/selectpatchoptionset.cc:41
 msgid "Select applicable patches for the specified CVE issues."
-msgstr ""
+msgstr "选取可修复指定 CVE 问题的补丁。"
 
 #. any
 #. translators: --cve
 #: src/commands/selectpatchoptionset.cc:50
 msgid "Select issues matching the specified string."
-msgstr ""
+msgstr "选取匹配指定字符串的 CVE 问题。"
 
 #: src/commands/services/add.cc:55
 #, c-format, boost-format
@@ -4410,11 +4410,11 @@ msgstr "通过别名、编号或 URI 都未找到服务 '%s'。"
 
 #: src/commands/solveroptionset.cc:16 src/commands/solveroptionset.cc:39
 msgid "Solver options"
-msgstr ""
+msgstr "解算器选项"
 
 #: src/commands/solveroptionset.cc:63
 msgid "Expert options"
-msgstr ""
+msgstr "专家选项"
 
 #. translators: -u, --clean-deps
 #: src/commands/solveroptionset.cc:96
@@ -4690,12 +4690,12 @@ msgstr "不下载任何源代码 RPM， 而是显示缺失或多余的源代码 
 #. translators: --status
 #: src/commands/utils/source-download.cc:514
 msgid "Write a manifest file."
-msgstr ""
+msgstr "写入一个 manifest 文件。"
 
 #. translators: --status
 #: src/commands/utils/source-download.cc:518
 msgid "Disable writing a manifest file."
-msgstr ""
+msgstr "禁用写入 manifest 文件。"
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/utils/targetos.cc:20
@@ -5045,14 +5045,13 @@ msgstr ""
 "\t--no-gpg-checks\t\t忽略失败的 GPG 检查并继续。\n"
 "\t--gpg-auto-import-keys\t自动信任并导入新软件源签名密钥。\n"
 "\t--plus-repo, -p <URI>\t使用一个附加软件源。\n"
-"\t--plus-content <标签>\t额外使用提供了某个特定关键字的已禁用软件源。\n"
-"\t\t\t\t尝试 '--plus-content debug' 可启用标明其提供了调试软件包的源。\n"
+"\t--plus-content <标签>\t也使用提供指定关键字的已禁用软件源。\n"
+"\t\t\t\t可尝试使用 ‘--plus-content debug’ 来临时启用表明其提供了侦错软件包的软件源。\n"
 "\t--disable-repositories\t不从软件源读取元数据。\n"
 "\t--no-refresh\t\t不刷新软件源。\n"
 "\t--no-cd\t\t\t忽略 CD/DVD 软件源。\n"
 "\t--no-remote\t\t忽略远程软件源。\n"
-"\t--releasever\t\t设置全部 .repo 文件中 $releasever 的值（默认：发行版版本"
-"号）\n"
+"\t--releasever\t\t设置全部 .repo 文件中 $releasever 的值（默认：发行版版本号）\n"
 
 #: src/legacy_strings.cc:54
 msgid ""
@@ -7153,16 +7152,16 @@ msgstr "正在计算升级..."
 
 #: src/solve-commit.cc:402
 msgid "Generating solver test case..."
-msgstr "正在生成解决器试例..."
+msgstr "正在生成解算器试例..."
 
 #: src/solve-commit.cc:404
 #, c-format, boost-format
 msgid "Solver test case generated successfully at %s."
-msgstr "在 %s 成功生成了解决器试例。"
+msgstr "在 %s 成功生成了解算器试例。"
 
 #: src/solve-commit.cc:407
 msgid "Error creating the solver test case."
-msgstr "创建解决器试例出错。"
+msgstr "创建解算器试例出错。"
 
 #: src/solve-commit.cc:436
 #, c-format, boost-format
@@ -7253,7 +7252,7 @@ msgstr "否，取消操作。"
 msgid ""
 "Restart solver in no-force-resolution mode in order to show dependency "
 "problems."
-msgstr "以不强制解决模式重启依赖关系解决器来显示依赖关系问题。"
+msgstr "以不强行解决模式重启解算器以便显示依赖关系问题。"
 
 #. translators: help text for 'v' option in the 'Continue?' prompt
 #: src/solve-commit.cc:637
