@@ -92,8 +92,31 @@ void HelpCmd::printMainHelp( Zypper & zypper )
   return;
 }
 
-int HelpCmd::execute( Zypper &zypper, const std::vector<std::string> & )
+int HelpCmd::execute( Zypper &zypper, const std::vector<std::string> &positionalArgs_r )
 {
+  if ( positionalArgs_r.size() ) {
+    const std::string &cmdArg = positionalArgs_r.at(0);
+
+    try {
+      ZypperCommand cmd( cmdArg );
+
+      if ( cmd.toEnum() != ZypperCommand::NONE_e ) {
+        zypper.out().info( cmd.assertCommandObject().help(), Out::QUIET );
+
+        if ( cmd.toEnum() == ZypperCommand::SEARCH )
+          searchPackagesHintHack::callOrNotify( zypper );
+
+        return ZYPPER_EXIT_OK;
+      }
+    }
+    // exception from command parsing
+    catch ( const Exception & e )
+    {
+      zypper.out().error( e.asUserString() );
+      print_unknown_command_hint( zypper, cmdArg );
+      return ( ZYPPER_EXIT_ERR_SYNTAX );
+    }
+  }
   printMainHelp ( zypper );
   return ZYPPER_EXIT_OK;
 }

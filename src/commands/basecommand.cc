@@ -94,36 +94,23 @@ std::string ZypperBaseCommand::description() const
   return _description;
 }
 
-int ZypperBaseCommand::parseArguments( Zypper &zypper, const int firstOpt )
+int ZypperBaseCommand::parseArguments( Zypper &, const int argc, char * const *argv )
 {
-  const int argc    = zypper.argc();
-  char * const *argv = zypper.argv();
-  int nextArg = ZyppFlags::parseCLI( argc, argv, options(), firstOpt );
+
+  int nextArg = 0;
+
+  if ( _parseArguments )
+    nextArg = ZyppFlags::parseCLI( argc, argv, options() );
+  else
+    nextArg = argc; //we eat all arguments
 
   MIL << "Done parsing options." << endl;
 
   if ( _fillRawOptions ) {
-    std::ostringstream s;
-    s << _("Option program arguments: ");
-    for ( int i = firstOpt; i < nextArg; i++ ) {
-      std::string argument = argv[ i ];
-      s << "'" << argument << "' ";
-      _rawOptions.push_back( argument );
+    //skip first argument here as well
+    for ( int i = 1; i < argc; i++ ) {
+      _rawOptions.push_back( argv[ i ] );
     }
-    zypper.out().info( s.str(), Out::HIGH );
-  }
-
-  if ( nextArg < argc )
-  {
-    std::ostringstream s;
-    s << _("Non-option program arguments: ");
-    while ( nextArg < argc )
-    {
-      std::string argument = argv[nextArg++];
-      s << "'" << argument << "' ";
-      _positionalArguments.push_back( argument );
-    }
-    zypper.out().info( s.str(), Out::HIGH );
   }
 
   return nextArg;
@@ -205,7 +192,12 @@ void ZypperBaseCommand::setFillRawOptions(bool fillRawOptions)
   _fillRawOptions = fillRawOptions;
 }
 
-std::vector<std::string> ZypperBaseCommand::rawOptions() const
+void ZypperBaseCommand::disableArgumentParser( bool disable )
+{
+  _parseArguments = !disable;
+}
+
+const std::vector<std::string> &ZypperBaseCommand::rawOptions() const
 {
   return _rawOptions;
 }

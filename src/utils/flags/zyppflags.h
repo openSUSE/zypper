@@ -216,7 +216,7 @@ namespace ZyppFlags {
    * \returns The first index in argv that was not parsed
    * \throws ZyppFlagsException or any subtypes of it
    */
-  int parseCLI ( const int argc, char * const *argv, const std::vector<CommandGroup> &options, const int firstOpt = 1 );
+  int parseCLI (const int argc, char * const *argv, const std::vector<CommandGroup> &options);
 
   /**
    * Renders the \a options help string

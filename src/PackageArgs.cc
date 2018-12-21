@@ -16,14 +16,6 @@
 #include "Zypper.h"
 #include "repos.h"
 
-PackageArgs::PackageArgs( const ResKind & kind, const Options & opts )
-: zypper( Zypper::instance() )
-, _opts( opts )
-{
-  preprocess( zypper.arguments() );
-  argsToCaps( kind );
-}
-
 PackageArgs::PackageArgs( const std::vector<std::string> & args, const ResKind & kind, const Options & opts )
 : zypper( Zypper::instance() )
 , _opts( opts )

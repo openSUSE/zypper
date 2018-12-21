@@ -161,7 +161,7 @@ Value & Value::after( PostWriteHook &&postWriteHook )
 }
 
 
-int parseCLI( const int argc, char * const *argv, const std::vector<CommandGroup> &options, const int firstOpt )
+int parseCLI( const int argc, char * const *argv, const std::vector<CommandGroup> &options )
 {
   // the short options string as used int getopt
   // + - do not permute, stop at the 1st nonoption, which is the command
@@ -290,7 +290,9 @@ int parseCLI( const int argc, char * const *argv, const std::vector<CommandGroup
 
   //setup getopt
   opterr = 0; 			// we report errors on our own
-  optind = firstOpt;            // start on the first arg
+
+  //work around the getopt quirks
+  optind = 0;       // setting optind to zero will reset the argument parser
 
   //remember all values we want to write
   //the key of the map is the index of options in allOpts

@@ -22,6 +22,7 @@
 #include "Zypper.h"
 #include "Table.h"
 #include "subcommand.h"
+#include "utils/messages.h"
 
 #include <boost/utility/string_ref.hpp>
 
@@ -487,6 +488,10 @@ SubCmd::SubCmd(std::vector<std::string> &&commandAliases_r , boost::shared_ptr<S
     ),
   _options ( options_r )
 {
+  //we handle options ourselfes
+  setFillRawOptions( true );
+  disableArgumentParser( );
+
   if ( !_options ) {
     _options.reset ( new SubcommandOptions() );
   }
@@ -572,7 +577,36 @@ void SubCmd::doReset()
 
 int SubCmd::execute( Zypper &zypper, const std::vector<std::string> & )
 {
-  //in case we end up here, we just print help
-  zypper.out().info( help(), Out::QUIET );
-  return ZYPPER_EXIT_OK;
+  if ( zypper.runningShell() ) {
+    // Currently no concept how to handle global options and ZYPPlock
+    zypper.out().error(_("Zypper shell does not support execution of subcommands.") );
+    return ZYPPER_EXIT_ERR_INVALID_ARGS;
+  }
+
+  _options->loadDetected();
+  if (  _options->_detected._name.empty()  ) {
+    //in case we end up here, we just print help
+    zypper.out().info( help(), Out::QUIET );
+    return ZYPPER_EXIT_OK;
+  }
+
+  if ( zypper.commandArgOffset() >= 2 ) {
+    zypper.out().error(
+      // translators: %1%  - is the name of a subcommand
+      str::Format(_("Subcommand %1% does not support zypper global options."))
+      % _options->_detected._name );
+    print_command_help_hint( zypper );
+    return ( ZYPPER_EXIT_ERR_INVALID_ARGS );
+  }
+
+  // save args (incl. the command itself as argv[0])
+  SubcommandOptions::Arglist args {
+    _options->_detected._cmd
+  };
+
+  const auto &opts = rawOptions();
+  args.insert( args.end(), opts.begin(), opts.end() );
+  _options->args( args );
+
+  return runCmd ( zypper );
 }
