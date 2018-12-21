@@ -7,16 +7,16 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-12-18 13:53+0100\n"
-"PO-Revision-Date: 2018-12-13 06:27+0000\n"
+"PO-Revision-Date: 2019-01-09 15:30+0000\n"
 "Last-Translator: scootergrisen <scootergrisen@gmail.com>\n"
-"Language-Team: Danish <https://l10n.opensuse.org/projects/zypper/master/da/"
-">\n"
+"Language-Team: Danish <https://l10n.opensuse.org/projects/zypper/master/da/>"
+"\n"
 "Language: da\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 2.18\n"
+"X-Generator: Weblate 3.3\n"
 
 #: src/SolverRequester.h:52
 #, boost-format
@@ -727,7 +727,7 @@ msgstr "\"%s\" ikke fundet i pakkenavne. Prøver \"%s\"."
 #: src/PackageArgs.cc:226
 #, c-format, boost-format
 msgid "'%s' is not a package name or capability."
-msgstr "\"%s\" er ikke et pakkenavn eller en kapabilitet."
+msgstr "\"%s\" er ikke et pakkenavn eller formåenhed."
 
 #: src/RequestFeedback.cc:40
 #, c-format, boost-format
@@ -2263,7 +2263,7 @@ msgstr "Vis alle tilgængelige produkter."
 #. translators: command summary: what-provides, wp
 #: src/Zypper.cc:718
 msgid "List packages providing specified capability."
-msgstr "Vis pakker, der lever den angivne kapabilitet."
+msgstr "Vis pakker, der lever den angivne formåenhed."
 
 #: src/Zypper.cc:720
 msgid "Package Locks:"
@@ -2709,12 +2709,12 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:1803
 msgid "what-provides (wp) <CAPABILITY>"
-msgstr "what-provides (wp) <kapabilitet>"
+msgstr "what-provides (wp) <FORMÅENHED>"
 
 #. translators: command description
 #: src/Zypper.cc:1806
 msgid "List all packages providing the specified capability."
-msgstr "Vis alle pakker, der har den angivne kapabilitet."
+msgstr "Vis alle pakker, der har den angivne formåenhed."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:1856
@@ -3097,16 +3097,16 @@ msgstr ""
 
 #: src/commands/installremove.cc:54
 msgid "Select packages by plain name, not by capability."
-msgstr "Vælg pakker ved simpelt navn, ikke ved kapabilitet."
+msgstr "Vælg pakker efter simpelt navn, ikke efter formåenhed."
 
 #: src/commands/installremove.cc:55
 msgid "Select packages solely by capability."
-msgstr ""
+msgstr "Vælg kun pakker efter formåenhed."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/installremove.cc:74
 msgid "remove (rm) [OPTIONS] <CAPABILITY> ..."
-msgstr "remove (rm) [tilvalg] <kapabilitet> ..."
+msgstr "remove (rm) [tilvalg] <FORMÅENHED> ..."
 
 #. translators: command description
 #: src/commands/installremove.cc:78
@@ -3114,8 +3114,8 @@ msgid ""
 "Remove packages with specified capabilities. A capability is NAME[.ARCH]"
 "[OP<VERSION>], where OP is one of <, <=, =, >=, >."
 msgstr ""
-"Fjern pakker med specificerede kapabiliteter En kapabilitet er NAVN[.ARCH]"
-"[OP<VERSION>], hvor OP er en af <, <=, =, >=, >."
+"Fjern pakker med specificerede kapabiliteter En formåenhed er "
+"NAVN[.ARCH][OP<VERSION>], hvor OP er en af <, <=, =, >=, >."
 
 #: src/commands/installremove.cc:96 src/commands/installremove.cc:223
 #: src/utils/messages.cc:53
@@ -3149,7 +3149,7 @@ msgstr "Afinstallation af en kildepakke er ikke defineret og implementeret."
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/installremove.cc:160
 msgid "install (in) [OPTIONS] <CAPABILITY|RPM_FILE_URI> ..."
-msgstr "install (in) [tilvalg] <kapabilitet|rpm_fil_uri> ..."
+msgstr "install (in) [tilvalg] <FORMÅENHED|rpm_fil_uri> ..."
 
 #. translators: command description
 #: src/commands/installremove.cc:164
@@ -3159,8 +3159,8 @@ msgid ""
 "<=, =, >=, >."
 msgstr ""
 "Installér pakker med specificeret kapabilitet eller RPM-filer med angiven "
-"placering. En kapabilitet er NAVN[.ARCH][OP<VERSION>], hvor OP er en af <, "
-"<=, =, >=, >."
+"placering. En formåenhed er NAVN[.ARCH][OP<VERSION>], hvor OP er en af <, <="
+", =, >=, >."
 
 #. translators: --from <ALIAS|#|URI>
 #: src/commands/installremove.cc:179
@@ -5493,7 +5493,7 @@ msgstr ""
 "\tpackages, pa\t\tVis alle tilgængelige pakker.\n"
 "\tpatterns, pt\t\tVis alle tilgængelige mønstre.\n"
 "\tproducts, pd\t\tVis alle tilgængelige produkter.\n"
-"\twhat-provides, wp\tVis pakker, der lever den angivne kapabilitet.\n"
+"\twhat-provides, wp\tVis pakker, der lever den angivne formåenhed.\n"
 
 #: src/legacy_strings.cc:122
 msgid ""
@@ -5592,10 +5592,10 @@ msgid ""
 "                            %s\n"
 "-d, --download-only         Only download the packages, do not install.\n"
 msgstr ""
-"install (in) [tilvalg] <kapabilitet|rpm_fil_uri> ...\n"
+"install (in) [tilvalg] <formåenhed|rpm_fil_uri> ...\n"
 "\n"
 "Installér pakker med specificeret kapabilitet eller RPM-filer med angiven\n"
-"placering. En kapabilitet er NAVN[.ARCH][OP<VERSION>], hvor OP er en\n"
+"placering. En formåenhed er NAVN[.ARCH][OP<VERSION>], hvor OP er en\n"
 "af <, <=, =, >=, >.\n"
 "\n"
 "  Kommandotilvalg:\n"
@@ -5603,9 +5603,9 @@ msgstr ""
 "-r, --repo <alias>              Indlæs kun den angivne softwarekilde.\n"
 "-t, --type <type>                Type af pakke (%s).\n"
 "                                Standard: %s.\n"
-"-n, --name                       Vælg pakker ved simpelt navn, ikke ved "
-"kapabilitet.\n"
-"-C, --capability                Vælg pakker ved kapabilitet.\n"
+"-n, --name                       Vælg pakker efter simpelt navn, ikke efter "
+"formåenhed.\n"
+"-C, --capability                Vælg pakker efter formåenhed.\n"
 "-f, --force                     Installér selv hvis elementet allerede er "
 "installeret (geninstallér),\n"
 "                            nedgraderet eller skifter leverandør eller "
@@ -5656,18 +5656,18 @@ msgid ""
 "-D, --dry-run               Test the removal, do not actually remove.\n"
 "    --details               Show the detailed installation summary.\n"
 msgstr ""
-"remove (rm) [tilvalg] <kapabilitet> ...\n"
+"remove (rm) [tilvalg] <formåenhed> ...\n"
 "\n"
-"Fjern pakker med specificerede kapabiliteter\n"
-"En kapabilitet er NAVN[.ARCH][OP<VERSION>], hvor OP er en af <, <=, =, >=, "
-">.\n"
+"Fjern pakker med specificerede formåenhed.\n"
+"En formåenhed er NAVN[.ARCH][OP<VERSION>], hvor OP er en af <, <=, =, >=, >."
+"\n"
 "\n"
 "  Kommandotilvalg:\n"
 "-r, --repo <alias|#|URI>        Indlæs kun den angivne softwarekilde.\n"
 "-t, --type <type>  Type af pakke (%s).\n"
 "                                Standard: %s.\n"
-"-n, --name         Vælg pakker ved simpelt navn, ikke ved kapabilitet.\n"
-"-C, --capability                Vælg pakker ved kapabilitet.\n"
+"-n, --name         Vælg pakker efter simpelt navn, ikke efter formåenhed.\n"
+"-C, --capability                Vælg pakker efter formåenhed.\n"
 "-u, --clean-deps            Fjern automatisk unødvendige afhængigheder.\n"
 "-U, --no-clean-deps         Ingen automatisk fjernelse af unødvendige "
 "afhængigheder.\n"
@@ -6638,9 +6638,9 @@ msgid ""
 "\n"
 "This command has no additional options.\n"
 msgstr ""
-"what-provides (wp) <kapabilitet>\n"
+"what-provides (wp) <formåenhed>\n"
 "\n"
-"Vis alle pakker, der har den angivne kapabilitet.\n"
+"Vis alle pakker, der har den angivne formåenhed.\n"
 "\n"
 "Denne kommando har ingen yderligere tilvalg.\n"
 
@@ -7554,7 +7554,7 @@ msgstr[1] "%d problemer:"
 #. should not happen! If solve() failed at least one problem must be set!
 #: src/solve-commit.cc:150
 msgid "Specified capability not found"
-msgstr "Angivet kapabilitet ikke fundet"
+msgstr "Angivet formåenhed ikke fundet"
 
 #: src/solve-commit.cc:160
 #, c-format, boost-format
