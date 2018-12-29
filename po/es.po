@@ -18,16 +18,16 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-12-18 13:53+0100\n"
-"PO-Revision-Date: 2018-11-24 13:06+0000\n"
-"Last-Translator: jc sl <trcs@gmx.com>\n"
-"Language-Team: Spanish <https://l10n.opensuse.org/projects/zypper/master/es/"
-">\n"
+"PO-Revision-Date: 2019-01-09 15:30+0000\n"
+"Last-Translator: Jorge Gallegos Carrasco <jcarrascochih@gmail.com>\n"
+"Language-Team: Spanish <https://l10n.opensuse.org/projects/zypper/master/es/>"
+"\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 2.18\n"
+"X-Generator: Weblate 3.3\n"
 
 #: src/SolverRequester.h:52
 #, boost-format
@@ -606,7 +606,7 @@ msgstr ""
 
 #: src/commands/commonflags.h:53
 msgid "Consider only patches which affect the package management itself."
-msgstr ""
+msgstr "Considere solo parches que afectan la administracion del paquete."
 
 #: src/output/Out.h:26 src/repos.cc:125 src/repos.cc:153
 msgid "Yes"
@@ -732,7 +732,7 @@ msgstr "Error"
 
 #: src/Command.cc:62
 msgid "Invalid command"
-msgstr ""
+msgstr "Comando invalido"
 
 #: src/Command.cc:317
 #, c-format, boost-format
@@ -4434,47 +4434,52 @@ msgid ""
 "For an extended search including not yet activated remote resources you may "
 "now run '%1%'."
 msgstr ""
+"Para una busqueda extendida incluyendo recursos remotos no activados ahora "
+"puedes ejecutar '%1%'."
 
 #: src/commands/search/search-packages-hinthack.cc:102
 #, boost-format
 msgid "Do you want to run '%1%' now?"
-msgstr ""
+msgstr "Quiere ejecutar '%1%' ahora?"
 
 #: src/commands/search/search-packages-hinthack.cc:113
 #, boost-format
 msgid "Run '%1%' to search in not yet activated remote resources."
-msgstr ""
+msgstr "Ejecute '%1%' para buscar en recursos remotos aun no activados."
 
 #. translators: -g, --category <CATEGORY>
 #: src/commands/selectpatchoptionset.cc:24
 msgid "Select patches with the specified category."
-msgstr ""
+msgstr "Seleccione parches con la categoria especificada."
 
 #. translators: --severity <SEVERITY>
 #: src/commands/selectpatchoptionset.cc:28
+#, fuzzy
 msgid "Select patches with the specified severity."
-msgstr ""
+msgstr "Seleccione parches con la gravedad especificada."
 
 #. translators: --date <YYYY-MM-DD>
 #: src/commands/selectpatchoptionset.cc:32
+#, fuzzy
 msgid "Select patches issued up to, but not including, the specified date"
-msgstr ""
+msgstr "Seleccione parches emitidos, pero no incluidos, la fecha especificada"
 
 #. translators: -b, --bugzilla
 #: src/commands/selectpatchoptionset.cc:36
 msgid "Select applicable patches for the specified Bugzilla issues."
 msgstr ""
+"Seleccione parches aplicables para los problemas especificados de Bugzilla."
 
 #. translators: --cve
 #: src/commands/selectpatchoptionset.cc:41
 msgid "Select applicable patches for the specified CVE issues."
-msgstr ""
+msgstr "Seleccione parches para los problemas especificados de CVE."
 
 #. any
 #. translators: --cve
 #: src/commands/selectpatchoptionset.cc:50
 msgid "Select issues matching the specified string."
-msgstr ""
+msgstr "Seleccione los problemas que coinciden con la cadena especificada."
 
 #: src/commands/services/add.cc:55
 #, c-format, boost-format
@@ -4958,7 +4963,7 @@ msgstr "No se está descargando el paquete '%s'."
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/utils/licenses.cc:19
 msgid "licenses"
-msgstr ""
+msgstr "licencias"
 
 #. translators: command description
 #: src/commands/utils/licenses.cc:23
@@ -5085,8 +5090,9 @@ msgstr ""
 
 #. translators: --status
 #: src/commands/utils/source-download.cc:514
+#, fuzzy
 msgid "Write a manifest file."
-msgstr ""
+msgstr "Escriba un archivo manifiesto."
 
 #. translators: --status
 #: src/commands/utils/source-download.cc:518
