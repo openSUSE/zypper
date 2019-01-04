@@ -12,16 +12,16 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-12-18 13:53+0100\n"
-"PO-Revision-Date: 2018-12-13 17:03+0000\n"
+"PO-Revision-Date: 2019-01-09 15:30+0000\n"
 "Last-Translator: Alessio Adamo <alessio.adamo@gmail.com>\n"
-"Language-Team: Italian <https://l10n.opensuse.org/projects/zypper/master/it/"
-">\n"
+"Language-Team: Italian <https://l10n.opensuse.org/projects/zypper/master/it/>"
+"\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 2.18\n"
+"X-Generator: Weblate 3.3\n"
 
 #: src/SolverRequester.h:52
 #, boost-format
@@ -529,7 +529,7 @@ msgstr ""
 #: src/commands/commandhelpformatter.h:86
 #, c-format, boost-format
 msgid "This is an alias for '%s'."
-msgstr "Questo è un alias per '%s.'"
+msgstr "Questo è un alias per '%s'."
 
 #: src/commands/commandhelpformatter.h:99 src/utils/flags/zyppflags.cc:512
 msgid "Command options:"
@@ -2048,7 +2048,7 @@ msgstr "Usa una directory alternativa per la cache dei pacchetti."
 
 #: src/Zypper.cc:608
 msgid "Repository Options:"
-msgstr "Opzioni dell'archivio:"
+msgstr "Opzioni del repository:"
 
 #. translators: --no-gpg-checks
 #: src/Zypper.cc:610
@@ -2139,7 +2139,7 @@ msgstr "Accetta comandi multipli in una volta sola."
 
 #: src/Zypper.cc:644
 msgid "Repository Management:"
-msgstr "Gestione archivi:"
+msgstr "Gestione dei repository:"
 
 #. translators: command summary: repos, lr
 #: src/Zypper.cc:646 src/commands/repos/list.cc:75
@@ -2326,7 +2326,7 @@ msgstr "Elenca tutti i prodotti disponibili."
 #. translators: command summary: what-provides, wp
 #: src/Zypper.cc:718
 msgid "List packages providing specified capability."
-msgstr "Elenca i pacchetti che forniscono una funzionalità specificata."
+msgstr "Elenca i pacchetti che forniscono la funzionalità specificata."
 
 #: src/Zypper.cc:720
 msgid "Package Locks:"
@@ -2600,7 +2600,7 @@ msgid ""
 "If a search string is enclosed in '/', it's interpreted as a regular "
 "expression.\n"
 msgstr ""
-"cerca (se) [opzioni] [querystring] ...\n"
+"search (se) [OPZIONI] [stringa_di_ricerca] ...\n"
 "\n"
 "Cerca pacchetti che corrispondano a una delle stringhe di ricerca fornite.\n"
 "\n"
@@ -2636,10 +2636,11 @@ msgstr ""
 "-u, --not-installed-only   Mostra solo i pacchetti attualmente non "
 "installati.\n"
 "-t, --type <type>          Cerca solo pacchetti del tipo specificato.\n"
-"-r, --repo <alias|#|URI>   Cerca solo nel pacchetto specificato.\n"
+"-r, --repo <alias|#|URI>   Cerca solo nel repository specificato.\n"
 "    --sort-by-name         Ordina i pacchetti per nome (default).\n"
-"    --sort-by-repo         Ordina i pacchetti per archivio.\n"
-"-s, --details              Mostra le versioni disponibili in ogni archivio\n"
+"    --sort-by-repo         Ordina i pacchetti per repository.\n"
+"-s, --details              Mostra le versioni disponibili in ogni "
+"repository\n"
 "                           su una riga separata.\n"
 "-v, --verbose              Come --details, con informazioni aggiuntive dove\n"
 "                           la ricerca ha trovato corrispondenza (utile per "
@@ -2653,7 +2654,7 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:1737
 msgid "search (se) [OPTIONS] [QUERYSTRING] ..."
-msgstr "cerca (se) [opzioni] [querystring] ..."
+msgstr "search (se) [OPZIONI] [stringa_di_ricerca] ..."
 
 #. translators: command description
 #: src/Zypper.cc:1740
@@ -2763,7 +2764,7 @@ msgstr "Cerca solo pacchetti del tipo specificato."
 #. translators: -r, --repo <ALIAS|#|URI>
 #: src/Zypper.cc:1781
 msgid "Search only in the specified repository."
-msgstr "Cerca solo nel pacchetto specificato."
+msgstr "Cerca solo nel repository specificato."
 
 #. translators: --sort-by-name
 #: src/Zypper.cc:1783
@@ -2773,12 +2774,12 @@ msgstr "Ordina i pacchetti per nome (default)."
 #. translators: --sort-by-repo
 #: src/Zypper.cc:1785
 msgid "Sort packages by repository."
-msgstr "Ordina i pacchetti per archivio."
+msgstr "Ordina i pacchetti per repository."
 
 #. translators: -s, --details
 #: src/Zypper.cc:1787
 msgid "Show each available version in each repository on a separate line."
-msgstr "Mostra le versioni disponibili in ogni archivio su una riga separata."
+msgstr "Mostra le versioni disponibili in ogni repository su una riga separata."
 
 #. translators: -v, --verbose
 #: src/Zypper.cc:1789
@@ -2792,12 +2793,12 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:1803
 msgid "what-provides (wp) <CAPABILITY>"
-msgstr "what-provides (wp) <capacità>"
+msgstr "what-provides (wp) <FUNZIONALITÀ>"
 
 #. translators: command description
 #: src/Zypper.cc:1806
 msgid "List all packages providing the specified capability."
-msgstr "Elenca tutti i pacchetti che forniscono la capacità specificata."
+msgstr "Elenca tutti i pacchetti che forniscono la funzionalità specificata."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:1856
@@ -2846,7 +2847,7 @@ msgstr "Accede alla shell di comando di zypper."
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:1930
 msgid "patch-search [OPTIONS] [QUERYSTRING...]"
-msgstr "patch-search [opzioni] [stringa di interrogazione...]"
+msgstr "patch-search [OPZIONI] [STRINGA_DI_RICERCA...]"
 
 #. translators: command description
 #: src/Zypper.cc:1933
@@ -2861,16 +2862,15 @@ msgid ""
 "Search for patches matching given search strings. This is an alias for "
 "'%s'.\n"
 msgstr ""
-"patch-search [opzioni] [stringa di interrogazione...]\n"
+"patch-search [OPZIONI] [stringa_di_ricerca...]\n"
 "\n"
 "Cerca le patch corrispondenti alla stringa di ricerca specifica. Questo è un "
 "alias per '%s'.\n"
-"\n"
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/Zypper.cc:1957
 msgid "ping [OPTIONS]"
-msgstr "ping [opzioni]"
+msgstr "ping [OPZIONI]"
 
 #. translators: command description
 #: src/Zypper.cc:1960
@@ -3098,7 +3098,7 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/distupgrade.cc:20
 msgid "dist-upgrade (dup) [OPTIONS]"
-msgstr "dist-upgrade (dup) [opzioni]"
+msgstr "dist-upgrade (dup) [OPZIONI]"
 
 #. translators: --from <ALIAS|#|URI>
 #: src/commands/distupgrade.cc:37
@@ -3120,12 +3120,12 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/inrverify.cc:68
 msgid "install-new-recommends (inr) [OPTIONS]"
-msgstr "install-new-recommends (inr) [opzioni]"
+msgstr "install-new-recommends (inr) [OPZIONI]"
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/inrverify.cc:71
 msgid "verify (ve) [OPTIONS]"
-msgstr "verify (ve) [opzioni]"
+msgstr "verify (ve) [OPZIONI]"
 
 #. translators: command description
 #: src/commands/inrverify.cc:95
@@ -3150,6 +3150,10 @@ msgid ""
 "supporting available hardware, languages or filesystems. Useful after having "
 "added e.g. new hardware or driver repos."
 msgstr ""
+"Invocato come '%1%', fa sì che il comando si limiti a cercare i soli "
+"pacchetti necessari per supportare l'hardware, le lingue e i filesystem "
+"disponibili. Utile dopo aver aggiunto, ad esempio, nuovo hardware o "
+"repository di driver."
 
 #. translators: command description
 #: src/commands/inrverify.cc:101
@@ -3167,12 +3171,12 @@ msgstr "Seleziona i pacchetti per nome, non per funzionalità."
 
 #: src/commands/installremove.cc:55
 msgid "Select packages solely by capability."
-msgstr ""
+msgstr "Seleziona i pacchetti solamente per funzionalità."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/installremove.cc:74
 msgid "remove (rm) [OPTIONS] <CAPABILITY> ..."
-msgstr "remove (rm) [opzioni] <funzionalità> ..."
+msgstr "remove (rm) [OPZIONI] <FUNZIONALITÀ> ..."
 
 #. translators: command description
 #: src/commands/installremove.cc:78
@@ -3216,7 +3220,7 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/installremove.cc:160
 msgid "install (in) [OPTIONS] <CAPABILITY|RPM_FILE_URI> ..."
-msgstr "install (in) [opzioni] <funzionalità|uri_file_rpm> ..."
+msgstr "install (in) [OPZIONI] <FUNZIONALITÀ|URI_FILE_RPM> ..."
 
 #. translators: command description
 #: src/commands/installremove.cc:164
@@ -3232,7 +3236,7 @@ msgstr ""
 #. translators: --from <ALIAS|#|URI>
 #: src/commands/installremove.cc:179
 msgid "Select packages from the specified repository."
-msgstr "Seleziona i pacchetti dall'archivio specificato."
+msgstr "Seleziona i pacchetti dal repository specificato."
 
 #. translators: --oldpackage
 #: src/commands/installremove.cc:183
@@ -3262,7 +3266,7 @@ msgstr ""
 #. 'zypper in --entire-catalog foorepo someargument' is specified
 #: src/commands/installremove.cc:235
 msgid "Ignoring arguments, marking the entire repository."
-msgstr "Argomenti ignorati, contrassegno dell'intero archivio."
+msgstr "Argomenti ignorati, viene contrassegnato l'intero repository."
 
 #: src/commands/installremove.cc:251
 #, c-format, boost-format
@@ -3309,7 +3313,7 @@ msgstr "Elenca tutte le patch, non solo quelle applicabili."
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/listupdates.cc:16
 msgid "list-updates (lu) [OPTIONS]"
-msgstr "list-updates (lu) [opzioni]"
+msgstr "list-updates (lu) [OPZIONI]"
 
 #. translators: command description
 #: src/commands/listupdates.cc:20
@@ -3329,7 +3333,7 @@ msgstr ""
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
 #: src/commands/locks/add.cc:29
 msgid "addlock (al) [OPTIONS] <PACKAGENAME> ..."
-msgstr "addlock (al) [opzioni] <nome_pacchetto> ..."
+msgstr "addlock (al) [OPZIONI] <NOME_PACCHETTO> ..."
 
 #. translators: command description
 #: src/commands/locks/add.cc:33
@@ -3439,7 +3443,7 @@ msgstr "Non installare"
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
 #: src/commands/locks/list.cc:256
 msgid "locks (ll) [OPTIONS]"
-msgstr "locks (ll) [opzioni]"
+msgstr "locks (ll) [OPZIONI]"
 
 #: src/commands/locks/list.cc:285
 msgid "Show the number of resolvables matched by each lock."
@@ -3460,7 +3464,7 @@ msgstr "Non è stato definito alcun blocco ai pacchetti."
 # =============================================================================
 #: src/commands/locks/remove.cc:25
 msgid "removelock (rl) [OPTIONS] <LOCK-NUMBER|PACKAGENAME> ..."
-msgstr "removelock (rl) [opzioni] <numero-blocco|nome-pacchetto> ..."
+msgstr "removelock (rl) [OPZIONI] <NUMERO_BLOCCO|NOME_PACCHETTO> ..."
 
 #. translators: command description; %1% is acoomand like 'zypper locks'
 #: src/commands/locks/remove.cc:28
@@ -3583,7 +3587,7 @@ msgstr "Salta gli aggiornamenti interattivi."
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/patch.cc:24
 msgid "patch [OPTIONS]"
-msgstr "patch [opzioni]"
+msgstr "patch [OPZIONI]"
 
 #. translators: command description
 #: src/commands/patch.cc:28
@@ -3618,7 +3622,7 @@ msgstr ""
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
 #: src/commands/ps.cc:26
 msgid "ps [OPTIONS]"
-msgstr "ps [opzioni]"
+msgstr "ps [OPZIONI]"
 
 #. translators: command description
 #: src/commands/ps.cc:28
@@ -3737,7 +3741,7 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/query/info.cc:19
 msgid "info (if) [OPTIONS] <NAME> ..."
-msgstr "info (if) [opzioni] <nome> ..."
+msgstr "info (if) [OPZIONI] <NOME> ..."
 
 #. translators: command description
 #: src/commands/query/info.cc:23
@@ -3837,7 +3841,7 @@ msgstr "Mostra informazioni dettagliate per i prodotti."
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/query/packages.cc:18
 msgid "packages (pa) [OPTIONS] [REPOSITORY] ..."
-msgstr "packages (pa) [opzioni] [repository] ..."
+msgstr "packages (pa) [OPZIONI] [REPOSITORY] ..."
 
 #. translators: command description
 #: src/commands/query/packages.cc:22
@@ -3877,7 +3881,7 @@ msgstr "Ordina l'elenco per repository."
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/query/patches.cc:18
 msgid "patches (pch) [REPOSITORY] ..."
-msgstr "patches (pch) [archivio]"
+msgstr "patches (pch) [REPOSITORY] ..."
 
 #. translators: command description
 #: src/commands/query/patches.cc:22
@@ -3887,7 +3891,7 @@ msgstr "Elenca gli aggiornamenti disponibili nei repository specificati."
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/query/patterns.cc:18
 msgid "patterns (pt) [OPTIONS] [REPOSITORY] ..."
-msgstr "patterns (pt) [oopzioni] [repository] ..."
+msgstr "patterns (pt) [OPZIONI] [REPOSITORY] ..."
 
 #. translators: command description
 #: src/commands/query/patterns.cc:22
@@ -3897,7 +3901,7 @@ msgstr "Elenca tutti i modelli disponibili nei repository specificati."
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/query/products.cc:18
 msgid "products (pd) [OPTIONS] [REPOSITORY] ..."
-msgstr "products (pd) [opzioni] [repository] ..."
+msgstr "products (pd) [OPZIONI] [REPOSITORY] ..."
 
 #. translators: command description
 #: src/commands/query/products.cc:22
@@ -3917,19 +3921,19 @@ msgstr "L'opzione %1% non produce effetti senza l'opzione globale %2%."
 
 #: src/commands/repos/add.cc:23
 msgid "addrepo (ar) [OPTIONS] <URI> <ALIAS>"
-msgstr "addrepo (ar) [opzioni] <URI> <alias>"
+msgstr "addrepo (ar) [OPZIONI] <URI> <ALIAS>"
 
 #: src/commands/repos/add.cc:23
 msgid "addrepo (ar) [OPTIONS] <FILE.repo>"
-msgstr "addrepo (ar) [opzioni] <file.repo>"
+msgstr "addrepo (ar) [OPZIONI] <FILE.repo>"
 
 #: src/commands/repos/add.cc:25
 msgid ""
 "Add a repository to the system. The repository can be specified by its URI "
 "or can be read from specified .repo file (even remote)."
 msgstr ""
-"Aggiungi un archivio al sistema. L'archivio può essere specificato dal suo "
-"URI o può essere letto dal file .repo specificato (anche remoto)."
+"Aggiunge un repository al sistema. Il repository può essere specificato dal "
+"suo URI o può essere letto dal file .repo specificato (anche remoto)."
 
 #: src/commands/repos/add.cc:40
 msgid "Just another means to specify a .repo file to read."
@@ -3941,7 +3945,8 @@ msgstr "Verifica URI."
 
 #: src/commands/repos/add.cc:42
 msgid "Don't probe URI, probe later during refresh."
-msgstr "Aggiunge l'archivio come disabilitato."
+msgstr ""
+"Non verifica l'URI, verrà verificata successivamente durante l'aggiornamento."
 
 #: src/commands/repos/add.cc:46
 msgid "The repository type is always autodetected. This option is ignored."
@@ -4064,7 +4069,7 @@ msgstr "Percorso della cache MD"
 
 #: src/commands/repos/list.cc:74
 msgid "repos (lr) [OPTIONS] [REPO] ..."
-msgstr "repos (lr) [opzioni] [repo]"
+msgstr "repos (lr) [OPZIONI] [REPO] ..."
 
 #. translators: -e, --export <FILE.repo>
 #: src/commands/repos/list.cc:87
@@ -4107,13 +4112,13 @@ msgstr "Usare il comando 'zypper addrepo' per aggiungere uno o più repository."
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/repos/modify.cc:24
 msgid "modifyrepo (mr) <OPTIONS> <ALIAS|#|URI>"
-msgstr "modifyrepo (mr) <opzioni> <alias|#|URI>"
+msgstr "modifyrepo (mr) <OPZIONI> <ALIAS|#|URI>"
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/repos/modify.cc:26
 #, boost-format
 msgid "modifyrepo (mr) <OPTIONS> <%1%>"
-msgstr "modifyrepo (mr) <opzioni> <%1%>"
+msgstr "modifyrepo (mr) <OPZIONI> <%1%>"
 
 #. translators: command description
 #: src/commands/repos/modify.cc:31
@@ -4249,7 +4254,7 @@ msgstr "Tutti i repository sono stati aggiornati."
 
 #: src/commands/repos/remove.cc:21
 msgid "removerepo (rr) [OPTIONS] <ALIAS|#|URI>"
-msgstr "removerepo (rr) [opzioni] <alias|#|URI>"
+msgstr "removerepo (rr) [OPZIONI] <ALIAS|#|URI>"
 
 #: src/commands/repos/remove.cc:23
 msgid "Remove repository specified by alias, number or URI."
@@ -4303,7 +4308,7 @@ msgstr "Repository '%s' non modificato."
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/repos/rename.cc:64
 msgid "renamerepo (nr) [OPTIONS] <ALIAS|#|URI> <NEW-ALIAS>"
-msgstr "renamerepo (nr) [opzioni] <alias|#|URI> <nuovo-alias>"
+msgstr "renamerepo (nr) [OPZIONI] <ALIAS|#|URI> <NUOVO-ALIAS>"
 
 #. translators: command description
 #: src/commands/repos/rename.cc:67
@@ -4499,7 +4504,7 @@ msgstr "Il servizio '%s' è stato aggiunto correttamente."
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/services/add.cc:102
 msgid "addservice (as) [OPTIONS] <URI> <ALIAS>"
-msgstr "addservice (as) [opzioni] <URI> <alias>"
+msgstr "addservice (as) [OPZIONI] <URI> <ALIAS>"
 
 #: src/commands/services/add.cc:104
 msgid "Add a repository index service to the system."
@@ -4547,7 +4552,7 @@ msgstr "Il servizio '%s' è stato rimosso."
 
 #: src/commands/services/list.cc:81
 msgid "services (ls) [OPTIONS]"
-msgstr "services (ls) [opzioni]"
+msgstr "services (ls) [OPZIONI]"
 
 #: src/commands/services/list.cc:83
 msgid "List defined services."
@@ -4563,13 +4568,13 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/services/modify.cc:18
 msgid "modifyservice (ms) <OPTIONS> <ALIAS|#|URI>"
-msgstr "modifyservice (ms) <opzioni> <alias|#|URI>"
+msgstr "modifyservice (ms) <OPZIONI> <ALIAS|#|URI>"
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/services/modify.cc:20
 #, boost-format
 msgid "modifyservice (ms) <OPTIONS> <%1%>"
-msgstr "modifyservice (ms) <opzioni> <%1%>"
+msgstr "modifyservice (ms) <OPZIONI> <%1%>"
 
 #: src/commands/services/modify.cc:23
 #, boost-format
@@ -4721,11 +4726,11 @@ msgstr "Utilizzare '%s' per ottenere un elenco dei servizi definiti."
 
 #: src/commands/services/refresh.cc:95
 msgid "refresh-services (refs) [OPTIONS]"
-msgstr "refresh-services (refs) [opzioni]"
+msgstr "refresh-services (refs) [OPZIONI]"
 
 #: src/commands/services/refresh.cc:97
 msgid "Refresh defined repository index services."
-msgstr "Aggiorna i servizi indici dei repository."
+msgstr "Aggiorna i servizi indici dei repository definiti."
 
 #: src/commands/services/refresh.cc:114
 msgid "Refresh also the service repositories."
@@ -4773,7 +4778,7 @@ msgstr "Tutti i servizi sono stati aggiornati."
 
 #: src/commands/services/remove.cc:20
 msgid "removeservice (rs) [OPTIONS] <ALIAS|#|URI>"
-msgstr "removeservice (rs) [opzioni] <alias|#|URI>"
+msgstr "removeservice (rs) [OPZIONI] <ALIAS|#|URI>"
 
 #: src/commands/services/remove.cc:22
 msgid "Remove specified repository index service from the system."
@@ -4807,7 +4812,7 @@ msgstr "Non rimuove automaticamente le dipendenze inutili."
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/sourceinstall.cc:20
 msgid "source-install (si) [OPTIONS] <NAME> ..."
-msgstr "source-install (si) [opzioni] <nome> ..."
+msgstr "source-install (si) [OPZIONI] <NOME> ..."
 
 #. translators: command description
 #: src/commands/sourceinstall.cc:24
@@ -4844,7 +4849,7 @@ msgstr "Il nome del pacchetto di origine è un argomento obbligatorio."
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/update.cc:22
 msgid "update (up) [OPTIONS] [PACKAGENAME] ..."
-msgstr "update (up) [opzioni] [nome pacchetto] ..."
+msgstr "update (up) [OPZIONI] [NOME_PACCHETTO] ..."
 
 #. translators: command description
 #: src/commands/update.cc:26
@@ -4889,7 +4894,7 @@ msgstr "Privilegi insufficienti per usare la directory di download '%s'."
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/utils/download.cc:144
 msgid "download [OPTIONS] <PACKAGES>..."
-msgstr "download [opzioni] <pacchetti>..."
+msgstr "download [OPZIONI] <PACCHETTI>..."
 
 #. translators: command description
 #: src/commands/utils/download.cc:150
@@ -5097,7 +5102,7 @@ msgstr "Disabilita la scrittura di un file manifest."
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/utils/targetos.cc:20
 msgid "targetos (tos) [OPTIONS]"
-msgstr "targetos (tos) [opzioni]"
+msgstr "targetos (tos) [OPZIONI]"
 
 #. translators: command description
 #: src/commands/utils/targetos.cc:24
@@ -5338,7 +5343,7 @@ msgstr "Id contenuto"
 
 #: src/info.cc:592
 msgid "Provided by enabled repository"
-msgstr "Fornito da repository abilitato"
+msgstr "Fornito da un repository abilitato"
 
 #: src/info.cc:597
 msgid "Not provided by any enabled repository"
@@ -5452,7 +5457,7 @@ msgid ""
 "\t--releasever\t\tSet the value of $releasever in all .repo files (default: "
 "distribution version)\n"
 msgstr ""
-"     Opzioni dell'archivio:\n"
+"     Opzioni relative ai repository:\n"
 "\t--no-gpg-checks\t\tIgnora errori di verifica GPG e continua.\n"
 "\t--gpg-auto-import-keys\tConsidera automaticamente attendibili e importare\n"
 "\t\t\t\tle nuove chiavi di firma del repository.\n"
@@ -5501,7 +5506,7 @@ msgid ""
 "\trefresh, ref\t\tRefresh all repositories.\n"
 "\tclean\t\t\tClean local caches.\n"
 msgstr ""
-"     Gestione archivi:\n"
+"     Gestione dei repository:\n"
 "\trepos, lr\t\tElenca tutti i repository definiti.\n"
 "\taddrepo, ar\t\tAggiunge un nuovo repository.\n"
 "\tremoverepo, rr\t\tRimuove il repository specificato.\n"
@@ -5693,7 +5698,7 @@ msgid ""
 "                            %s\n"
 "-d, --download-only         Only download the packages, do not install.\n"
 msgstr ""
-"install (in) [opzioni] <funzionalità|uri_file_rpm> ...\n"
+"install (in) [OPZIONI] <funzionalità|uri_file_rpm> ...\n"
 "\n"
 "Installa i pacchetti con le funzionalità specificate o file RPM con la "
 "posizione\n"
@@ -5701,9 +5706,9 @@ msgstr ""
 "uno tra <, <=, =, >=, >.\n"
 "\n"
 "  Opzioni del comando:\n"
-"    --from <alias|#|URI>    Seleziona i pacchetti dall'archivio "
-"specificato.\n"
-"-r, --repo <alias|#|URI>    Carica solo l'archivio specificato.\n"
+"    --from <alias|#|URI>    Seleziona i pacchetti dal repository specificato."
+"\n"
+"-r, --repo <alias|#|URI>    Carica solo il repository specificato.\n"
 "-t, --type <tipo>           Tipo del pacchetto (%s).\n"
 "                            Default: %s.\n"
 "-n, --name                  Seleziona i pacchetti per nome, non per "
@@ -5762,14 +5767,14 @@ msgid ""
 "-D, --dry-run               Test the removal, do not actually remove.\n"
 "    --details               Show the detailed installation summary.\n"
 msgstr ""
-"remove (rm) [opzioni] <funzionalità> ...\n"
+"remove (rm) [OPZIONI] <funzionalità> ...\n"
 "\n"
 "Rimuove i pacchetti con le funzionalità specificate.\n"
 "Una funzionalità è NOME[.ARCH][OP<VERSIONE>], dove OP può essere\n"
 "uno tra <, <=, =, >=, >.\n"
 "\n"
 "  Opzioni del comando:\n"
-"-r, --repo <alias|#|URI>    Carica solo l'archivio specificato.\n"
+"-r, --repo <alias|#|URI>    Carica solo il repository specificato.\n"
 "-t, --type <tipo>           Tipo di pacchetto (%s).\n"
 "                            Default: %s.\n"
 "-n, --name                  Seleziona i pacchetti per nome, non per "
@@ -5795,7 +5800,7 @@ msgid ""
 "-r, --repo <alias|#|URI> Install packages only from specified repositories.\n"
 "    --download-only      Only download the packages, do not install.\n"
 msgstr ""
-"source-install (si) [opzioni] <nome> ...\n"
+"source-install (si) [OPZIONI] <nome> ...\n"
 "\n"
 "Installa i pacchetti sorgente specificati e le rispettive dipendenze della "
 "build.\n"
@@ -5825,7 +5830,7 @@ msgid ""
 "                            %s\n"
 "-d, --download-only         Only download the packages, do not install.\n"
 msgstr ""
-"verify (ve) [opzioni]\n"
+"verify (ve) [OPZIONI]\n"
 "\n"
 "Verifica che le dipendenze dei pacchetti installati siano soddisfatte e "
 "suggerisce di installare o rimuovere pacchetti per riparare i problemi di "
@@ -5860,7 +5865,7 @@ msgid ""
 "                            %s\n"
 "-d, --download-only         Only download the packages, do not install.\n"
 msgstr ""
-"install-new-recommends (inr) [opzioni]\n"
+"install-new-recommends (inr) [OPZIONI]\n"
 "\n"
 "Installa i pacchetti appena aggiunti consigliati dai pacchetti già "
 "installati. Ciò può servire ad esempio per installare nuovi pacchetti di "
@@ -5891,7 +5896,7 @@ msgid ""
 "-d, --disable           Add the service as disabled.\n"
 "-n, --name <name>       Specify descriptive name for the service.\n"
 msgstr ""
-"addservice (as) [opzioni] <URI> <alias>\n"
+"addservice (as) [OPZIONI] <URI> <alias>\n"
 "\n"
 "Aggiunge al sistema un servizio indici del repository.\n"
 "\n"
@@ -5911,7 +5916,7 @@ msgid ""
 "    --loose-auth   Ignore user authentication data in the URI.\n"
 "    --loose-query  Ignore query string in the URI.\n"
 msgstr ""
-"removeservice (rs) [opzioni] <alias|#|URI>\n"
+"removeservice (rs) [OPZIONI] <alias|#|URI>\n"
 "\n"
 "Rimuove dal sistema lo specificato servizio indici del repository.\n"
 "\n"
@@ -6003,7 +6008,7 @@ msgid ""
 "-U, --sort-by-uri         Sort the list by URI.\n"
 "-N, --sort-by-name        Sort the list by name.\n"
 msgstr ""
-"services (ls) [opzioni]\n"
+"services (ls) [OPZIONI]\n"
 "\n"
 "Elenca i servizi definiti.\n"
 "\n"
@@ -6031,7 +6036,7 @@ msgid ""
 "-R, --restore-status  Also restore service repositories enabled/disabled "
 "state.\n"
 msgstr ""
-"refresh-services (refs) [opzioni]\n"
+"refresh-services (refs) [OPZIONI]\n"
 "\n"
 "Aggiorna i servizi indici dei repository.\n"
 "\n"
@@ -6064,25 +6069,26 @@ msgid ""
 "-K, --no-keep-packages    Disable RPM files caching.\n"
 "-f, --refresh             Enable autorefresh of the repository.\n"
 msgstr ""
-"addrepo (ar) [opzioni] <URI> <alias>\n"
-"addrepo (ar) [opzioni] <file.repo>\n"
+"addrepo (ar) [OPZIONI] <URI> <alias>\n"
+"addrepo (ar) [OPZIONI] <file.repo>\n"
 "\n"
-"Aggiungi un archivio al sistema. L'archivio può essere specificato dal suo "
-"URI o può essere letto dal file .repo specificato (anche remoto).\n"
+"Aggiungi un repository al sistema. Il repository può essere specificato dal "
+"suo URI o può essere letto dal file .repo specificato (anche remoto).\n"
 "\n"
 "  Opzioni comando:\n"
 "-r, --repo <file.repo>    Solo un altro modo per specificare un file .repo "
 "da leggere.\n"
-"-t, --type <type>         Tipo di archivio (%s).\n"
-"-d, --disabilita             Aggiunge l'archivio come disabilitato.\n"
+"-t, --type <type>         Tipo di repository (%s).\n"
+"-d, --disabilita             Aggiunge il repository come disabilitato.\n"
 "-c, --check               Verifica URI.\n"
 "-C, --no-check            Non verifica URI, verifica successivamente durante "
 "l'aggiornamento.\n"
-"-n, --name <name>         Specifica un nome descrittivo per l'archivio.\n"
-"-p, --priority <integer>  Imposta la priorità dell'archivio.\n"
+"-n, --name <name>         Specifica un nome descrittivo per il repository.\n"
+"-p, --priority <integer>  Imposta la priorità del repository.\n"
 "-k, --keep-packages       Abilita la memorizzazione dei file RPM.\n"
 "-K, --no-keep-packages    Disabilita la memorizzazione dei file RPM.\n"
-"-f, --refresh             Abilita l'aggiornamento automatico dell'archivio.\n"
+"-f, --refresh             Abilita l'aggiornamento automatico del repository."
+"\n"
 
 #: src/legacy_strings.cc:379
 msgid ""
@@ -6106,7 +6112,7 @@ msgid ""
 "-A, --sort-by-alias       Sort the list by alias.\n"
 "-N, --sort-by-name        Sort the list by name.\n"
 msgstr ""
-"repos (lr) [opzioni] [repo]\n"
+"repos (lr) [OPZIONI] [repo]\n"
 "\n"
 "Elenca tutti i repository definiti.\n"
 "\n"
@@ -6137,7 +6143,7 @@ msgid ""
 "    --loose-auth   Ignore user authentication data in the URI.\n"
 "    --loose-query  Ignore query string in the URI.\n"
 msgstr ""
-"removerepo (rr) [opzioni] <alias|#|URI>\n"
+"removerepo (rr) [OPZIONI] <alias|#|URI>\n"
 "\n"
 "Rimuove il repository specificato dall'alias, dal numero o dall'URI.\n"
 "\n"
@@ -6153,7 +6159,7 @@ msgid ""
 "\n"
 "This command has no additional options.\n"
 msgstr ""
-"renamerepo (nr) [opzioni] <alias|#|URI> <nuovo-alias>\n"
+"renamerepo (nr) [OPZIONI] <alias|#|URI> <nuovo-alias>\n"
 "\n"
 "Assegna un nuovo alias al repository specificato dall'alias, dal numero o "
 "dall'URI.\n"
@@ -6308,7 +6314,7 @@ msgid ""
 "                            %s\n"
 "-d, --download-only         Only download the packages, do not install.\n"
 msgstr ""
-"update (up) [opzioni] [nome pacchetto] ...\n"
+"update (up) [OPZIONI] [nome_pacchetto] ...\n"
 "\n"
 "Aggiorna tutti i pacchetti installati o quelli specificati con versioni più "
 "recenti, se possibile.\n"
@@ -6381,7 +6387,7 @@ msgid ""
 "                            %s\n"
 "-d, --download-only         Only download the packages, do not install.\n"
 msgstr ""
-"patch [opzioni]\n"
+"patch [OPZIONI]\n"
 "\n"
 "Installa tutte le patch disponibili necessarie.\n"
 "\n"
@@ -6446,7 +6452,7 @@ msgid ""
 "                            %s\n"
 "-d, --download-only         Only download the packages, do not install.\n"
 msgstr ""
-"dist-upgrade (dup) [opzioni]\n"
+"dist-upgrade (dup) [OPZIONI]\n"
 "\n"
 "Effettua un upgrade della distribuzione.\n"
 "\n"
@@ -6498,7 +6504,7 @@ msgid ""
 "                              available, regardless whether they are\n"
 "                              installable or not.\n"
 msgstr ""
-"list-updates (lu) [opzioni]\n"
+"list-updates (lu) [OPZIONI]\n"
 "\n"
 "Elenca tutti gli aggiornamenti disponibili.\n"
 "\n"
@@ -6591,7 +6597,7 @@ msgid ""
 "\n"
 "-r, --repo <alias|#|URI>  Just another means to specify repository.\n"
 msgstr ""
-"patches (pch) [archivio]\n"
+"patches (pch) [repository]\n"
 "\n"
 "Elenca gli aggiornamenti disponibili nei repository specificati.\n"
 "\n"
@@ -6618,7 +6624,7 @@ msgid ""
 "-N, --sort-by-name        Sort the list by package name.\n"
 "-R, --sort-by-repo        Sort the list by repository.\n"
 msgstr ""
-"packages (pa) [OPTIONS] [repository] ...\n"
+"packages (pa) [OPZIONI] [repository] ...\n"
 "\n"
 "Elenca tutti i pacchetti disponibili nei repository specificati.\n"
 "\n"
@@ -6627,8 +6633,8 @@ msgstr ""
 "-r, --repo <alias|#|URI>  Un altro modo per specificare il repository.\n"
 "-i, --installed-only      Mostra solo i pacchetti installati.\n"
 "-u, --not-installed-only  Mostra solo i pacchetti non installati.\n"
-"    --orphaned            Mostra solo i pacchetti orfani (senza "
-"repository).\n"
+"    --orphaned            Mostra solo i pacchetti orfani (senza repository)."
+"\n"
 "    --suggested           Mostra pacchetti consigliati.\n"
 "    --recommended         Mostra pacchetti raccomandati.\n"
 "    --unneeded            Mostra pacchetti non necessari.\n"
@@ -6647,7 +6653,7 @@ msgid ""
 "-i, --installed-only      Show only installed patterns.\n"
 "-u, --not-installed-only  Show only patterns which are not installed.\n"
 msgstr ""
-"patterns (pt) [oopzioni] [repository] ...\n"
+"patterns (pt) [OPZIONI] [repository] ...\n"
 "\n"
 "Elenca tutti i modelli disponibili nei repository specificati.\n"
 "\n"
@@ -6669,7 +6675,7 @@ msgid ""
 "-i, --installed-only      Show only installed products.\n"
 "-u, --not-installed-only  Show only products which are not installed.\n"
 msgstr ""
-"products (pd) [opzioni] [repository] ...\n"
+"products (pd) [OPZIONI] [repository] ...\n"
 "\n"
 "Elenca tutti i prodotti  disponibili nei repository specificati.\n"
 "\n"
@@ -6702,7 +6708,7 @@ msgid ""
 "    --recommends          Show recommends.\n"
 "    --suggests            Show suggests.\n"
 msgstr ""
-"info (if) [opzioni] <nome> ...\n"
+"info (if) [OPZIONI] <nome> ...\n"
 "\n"
 "Mostra informazioni dettagliate per i pacchetti specificati.\n"
 "Per default vengono visualizzati i pacchetti che corrispondono esattamente "
@@ -6777,9 +6783,9 @@ msgid ""
 "\n"
 "This command has no additional options.\n"
 msgstr ""
-"what-provides (wp) <capacità>\n"
+"what-provides (wp) <funzionalità>\n"
 "\n"
-"Elenca tutti i pacchetti che forniscono la capacità specificata.\n"
+"Elenca tutti i pacchetti che forniscono la funzionalità specificata.\n"
 "\n"
 "Questo comando non ha opzioni aggiuntive.\n"
 
@@ -6807,7 +6813,7 @@ msgid ""
 "  Command options:\n"
 "-l, --label                 Show the operating system label.\n"
 msgstr ""
-"targetos (tos) [opzioni]\n"
+"targetos (tos) [OPZIONI]\n"
 "\n"
 "Mostra diverse informazioni riguardo al sistema operativo di destinazione.\n"
 "Per impostazione predefinita è visualizzata una stringa identificativa.\n"
@@ -6867,7 +6873,7 @@ msgid ""
 "--dry-run            Don't download any package, just report what\n"
 "                     would be done.\n"
 msgstr ""
-"download [opzioni] <pacchetti>...\n"
+"download [OPZIONI] <PACCHETTI>...\n"
 "\n"
 "Effettua il download degli rpm specificati nella riga di comando in una "
 "directory locale.\n"
@@ -6945,10 +6951,10 @@ msgid ""
 "\n"
 "This command has dummy implementation which always returns 0.\n"
 msgstr ""
-"ping [opzioni]\n"
+"ping [OPZIONI]\n"
 "\n"
-"Questo comando prevede un'implementazione fittizia che restituisce sempre "
-"0.\n"
+"Questo comando prevede un'implementazione fittizia che restituisce sempre 0."
+"\n"
 
 #. translators: this will show up if you press ctrl+c twice
 #: src/main.cc:31
@@ -7523,12 +7529,12 @@ msgstr "La priorità del repository '%s' è rimasta invariata (%d)"
 #: src/repos.cc:1624
 #, c-format, boost-format
 msgid "Repository '%s' has been successfully enabled."
-msgstr "Il repository '%s' è stato abilitato."
+msgstr "Il repository '%s' è stato abilitato con successo."
 
 #: src/repos.cc:1626
 #, c-format, boost-format
 msgid "Repository '%s' has been successfully disabled."
-msgstr "Il repository '%s' è stato disabilitato."
+msgstr "Il repository '%s' è stato disabilitato con successo."
 
 #: src/repos.cc:1633
 #, c-format, boost-format
