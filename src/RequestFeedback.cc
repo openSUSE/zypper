@@ -120,8 +120,8 @@ std::string SolverRequester::Feedback::asUserString( const SolverRequester::Opti
       PoolItem highest = ui::asSelectable()(_objinst)->highestAvailableVersionObj();
       std::ostringstream cmdhint;
       cmdhint << "zypper install " << highest.asString();
-      return str::form(_("There is an update candidate for '%s', but it is from a different vendor. Use '%s' to install this candidate."),
-		       _objinst->name().c_str(), cmdhint.str().c_str() );
+      return str::form(_("There is an update candidate for '%s' from vendor '%s', while the current vendor is '%s'. Use '%s' to install this candidate."),
+		       _objinst->name().c_str(), highest->vendor().c_str(), _objinst->vendor().c_str(), cmdhint.str().c_str() );
     }
 
     case UPD_CANDIDATE_HAS_LOWER_PRIO:
