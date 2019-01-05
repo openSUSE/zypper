@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-12-18 13:53+0100\n"
-"PO-Revision-Date: 2018-11-02 15:00+0000\n"
+"PO-Revision-Date: 2019-01-09 15:30+0000\n"
 "Last-Translator: Kukuh Syafaat <syafaatkukuh@gmail.com>\n"
 "Language-Team: Indonesian <https://l10n.opensuse.org/projects/zypper/master/"
 "id/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 2.18\n"
+"X-Generator: Weblate 3.3\n"
 
 #: src/SolverRequester.h:52
 #, boost-format
@@ -593,6 +593,7 @@ msgstr ""
 #: src/commands/commonflags.h:53
 msgid "Consider only patches which affect the package management itself."
 msgstr ""
+"Pertimbangkan hanya tambalan yang memengaruhi manajemen paket itu sendiri."
 
 #: src/output/Out.h:26 src/repos.cc:125 src/repos.cc:153
 msgid "Yes"
@@ -718,7 +719,7 @@ msgstr "Galat"
 
 #: src/Command.cc:62
 msgid "Invalid command"
-msgstr ""
+msgstr "Perintah tidak valid"
 
 #: src/Command.cc:317
 #, c-format, boost-format
@@ -2932,7 +2933,7 @@ msgstr "Kata Sandi"
 
 #: src/commands/basecommand.cc:106
 msgid "Option program arguments: "
-msgstr ""
+msgstr "Argumen program opsi: "
 
 #: src/commands/conditions.cc:19
 msgid "Root privileges are required to run this command."
@@ -2994,6 +2995,11 @@ msgid ""
 "unconditionally on small or minimal systems, as it may easily add a large "
 "number of packages."
 msgstr ""
+"Pasang paket baru yang sudah ditambahkan, direkomendasikan oleh yang sudah "
+"dipasang. Perintah ini pada dasarnya mengevaluasi kembali rekomendasi semua "
+"paket yang dipasang dan mengisi sistem yang sesuai. Anda tidak ingin "
+"menyebutnya tanpa syarat pada sistem kecil atau minimal, karena dapat dengan "
+"mudah menambahkan sejumlah besar paket."
 
 #. translators: command description, %1% is a zypper command
 #: src/commands/inrverify.cc:98
@@ -3003,6 +3009,9 @@ msgid ""
 "supporting available hardware, languages or filesystems. Useful after having "
 "added e.g. new hardware or driver repos."
 msgstr ""
+"Disebut sebagai '%1%', itu membatasi perintah hanya untuk mencari paket yang "
+"mendukung perangkat keras, bahasa atau sistem berkas yang tersedia. Berguna "
+"setelah menambahkan mis. repo perangkat keras atau penggerak baru."
 
 #. translators: command description
 #: src/commands/inrverify.cc:101
@@ -3019,7 +3028,7 @@ msgstr "Pilih paket dengan nama biasa, bukan berdasarkan kapabilitas."
 
 #: src/commands/installremove.cc:55
 msgid "Select packages solely by capability."
-msgstr ""
+msgstr "Pilih paket hanya berdasarkan kemampuan."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/installremove.cc:74
@@ -3370,7 +3379,7 @@ msgstr "Nyala ulang mungkin tidak diperlukan."
 
 #: src/commands/optionsets.cc:33
 msgid "Don't change anything, just report what would be done."
-msgstr ""
+msgstr "Jangan mengubah apa pun, cukup laporkan apa yang akan dilakukan."
 
 #. translators: -r, --repo <ALIAS|#|URI>
 #: src/commands/optionsets.cc:65
@@ -3380,7 +3389,7 @@ msgstr "Bekerja hanya dengan repositori yang ditentukan."
 #: src/commands/optionsets.cc:85
 #, c-format, boost-format
 msgid "Option '--%s' overrides a previously set download mode."
-msgstr ""
+msgstr "Opsi '--%s' menimpa mode unduhan yang ditetapkan sebelumnya."
 
 #: src/commands/optionsets.cc:114
 #, c-format, boost-format
@@ -4271,47 +4280,51 @@ msgid ""
 "For an extended search including not yet activated remote resources you may "
 "now run '%1%'."
 msgstr ""
+"Untuk pencarian panjang termasuk sumber daya jarak jauh yang belum "
+"diaktifkan, Anda sekarang dapat menjalankan '%1%'."
 
 #: src/commands/search/search-packages-hinthack.cc:102
 #, boost-format
 msgid "Do you want to run '%1%' now?"
-msgstr ""
+msgstr "Anda ingin menjalankan '%1%' sekarang?"
 
 #: src/commands/search/search-packages-hinthack.cc:113
 #, boost-format
 msgid "Run '%1%' to search in not yet activated remote resources."
-msgstr ""
+msgstr "Jalankan '%1%' untuk mencari sumber daya yang belum diaktifkan."
 
 #. translators: -g, --category <CATEGORY>
 #: src/commands/selectpatchoptionset.cc:24
 msgid "Select patches with the specified category."
-msgstr ""
+msgstr "Pilih tambalan dengan kategori yang ditentukan."
 
 #. translators: --severity <SEVERITY>
 #: src/commands/selectpatchoptionset.cc:28
 msgid "Select patches with the specified severity."
-msgstr ""
+msgstr "Pilih tambalan dengan tingkat keparahan yang ditentukan."
 
 #. translators: --date <YYYY-MM-DD>
 #: src/commands/selectpatchoptionset.cc:32
 msgid "Select patches issued up to, but not including, the specified date"
 msgstr ""
+"Pilih tambalan yang dikeluarkan hingga, tetapi tidak termasuk, tanggal yang "
+"ditentukan"
 
 #. translators: -b, --bugzilla
 #: src/commands/selectpatchoptionset.cc:36
 msgid "Select applicable patches for the specified Bugzilla issues."
-msgstr ""
+msgstr "Pilih tambalan yang berlaku untuk masalah Bugzilla yang ditentukan."
 
 #. translators: --cve
 #: src/commands/selectpatchoptionset.cc:41
 msgid "Select applicable patches for the specified CVE issues."
-msgstr ""
+msgstr "Pilih tambalan yang berlaku untuk masalah CVE yang ditentukan."
 
 #. any
 #. translators: --cve
 #: src/commands/selectpatchoptionset.cc:50
 msgid "Select issues matching the specified string."
-msgstr ""
+msgstr "Pilih masalah yang cocok dengan string yang ditentukan."
 
 #: src/commands/services/add.cc:55
 #, c-format, boost-format
@@ -4605,11 +4618,11 @@ msgstr "Layanan '%s' tidak ditemukan berdasarkan alias. nomor atau URI."
 
 #: src/commands/solveroptionset.cc:16 src/commands/solveroptionset.cc:39
 msgid "Solver options"
-msgstr ""
+msgstr "Opsi pemecah"
 
 #: src/commands/solveroptionset.cc:63
 msgid "Expert options"
-msgstr ""
+msgstr "Opsi mahir"
 
 #. translators: -u, --clean-deps
 #: src/commands/solveroptionset.cc:96
@@ -4896,12 +4909,12 @@ msgstr ""
 #. translators: --status
 #: src/commands/utils/source-download.cc:514
 msgid "Write a manifest file."
-msgstr ""
+msgstr "Tulis berkas manifes."
 
 #. translators: --status
 #: src/commands/utils/source-download.cc:518
 msgid "Disable writing a manifest file."
-msgstr ""
+msgstr "Nonaktifkan menulis berkas manifes."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/utils/targetos.cc:20
