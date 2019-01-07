@@ -322,7 +322,7 @@ void OptionalPatchesOptionSet::reset()
 bool InteractiveUpdatesOptionSet::skipInteractive() const
 {
   bool skip_interactive = false;
-  if ( _withInteractive != zypp::indeterminate )
+  if ( !indeterminate( _withInteractive ) )
     skip_interactive = ! _withInteractive;
   // bnc #497711
   else if ( Zypper::instance().config().non_interactive )

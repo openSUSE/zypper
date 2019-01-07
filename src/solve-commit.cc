@@ -210,7 +210,7 @@ static void set_force_resolution( Zypper & zypper )
   // --force-resolution command line parameter value
   TriBool force_resolution = zypper.runtimeData().force_resolution;
 
-  if ( SolverSettings::instance()._forceResolution != zypp::indeterminate ) {
+  if ( !indeterminate( SolverSettings::instance()._forceResolution ) ) {
     force_resolution = SolverSettings::instance()._forceResolution;
   }
 
@@ -303,17 +303,17 @@ static void set_solver_flags( Zypper & zypper )
   const auto &solverSettings = SolverSettings::instance();
   if ( zypper.command() == ZypperCommand::DIST_UPGRADE )
   {
-    if ( solverSettings._allowDowngrade != zypp::indeterminate ) God->resolver()->dupSetAllowDowngrade( solverSettings._allowDowngrade );
-    if ( solverSettings._allowNameChange != zypp::indeterminate ) God->resolver()->dupSetAllowNameChange( solverSettings._allowNameChange );
-    if ( solverSettings._allowArchChange != zypp::indeterminate ) God->resolver()->dupSetAllowArchChange( solverSettings._allowArchChange );
-    if ( solverSettings._allowVendorChange != zypp::indeterminate ) God->resolver()->dupSetAllowVendorChange( solverSettings._allowVendorChange );
+    if ( !indeterminate( solverSettings._allowDowngrade ) ) God->resolver()->dupSetAllowDowngrade( solverSettings._allowDowngrade );
+    if ( !indeterminate( solverSettings._allowNameChange ) ) God->resolver()->dupSetAllowNameChange( solverSettings._allowNameChange );
+    if ( !indeterminate( solverSettings._allowArchChange ) ) God->resolver()->dupSetAllowArchChange( solverSettings._allowArchChange );
+    if ( !indeterminate( solverSettings._allowVendorChange ) ) God->resolver()->dupSetAllowVendorChange( solverSettings._allowVendorChange );
   }
   else
   {
-    if ( solverSettings._allowDowngrade != zypp::indeterminate ) God->resolver()->setAllowDowngrade( solverSettings._allowDowngrade );
-    if ( solverSettings._allowNameChange != zypp::indeterminate ) God->resolver()->setAllowNameChange( solverSettings._allowNameChange );
-    if ( solverSettings._allowArchChange != zypp::indeterminate ) God->resolver()->setAllowArchChange( solverSettings._allowArchChange );
-    if ( solverSettings._allowVendorChange != zypp::indeterminate ) God->resolver()->setAllowVendorChange( solverSettings._allowVendorChange );
+    if ( !indeterminate( solverSettings._allowDowngrade ) ) God->resolver()->setAllowDowngrade( solverSettings._allowDowngrade );
+    if ( !indeterminate( solverSettings._allowNameChange ) ) God->resolver()->setAllowNameChange( solverSettings._allowNameChange );
+    if ( !indeterminate( solverSettings._allowArchChange ) ) God->resolver()->setAllowArchChange( solverSettings._allowArchChange );
+    if ( !indeterminate( solverSettings._allowVendorChange ) ) God->resolver()->setAllowVendorChange( solverSettings._allowVendorChange );
   }
 }
 
