@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-12-18 13:53+0100\n"
+"POT-Creation-Date: 2019-01-08 14:42+0100\n"
 "PO-Revision-Date: 2018-05-09 23:05+0000\n"
 "Last-Translator: Mariusz Fik <fisiu@opensuse.org>\n"
 "Language-Team: Polish <https://l10n.opensuse.org/projects/zypper/master/pl/"
@@ -31,14 +31,6 @@ msgstr "Podejrzana wartość filtra kategorii '%1%'."
 #, boost-format
 msgid "Suspicious severity filter value '%1%'."
 msgstr "Podejrzana wartość filtra ważności: '%1%'."
-
-#: src/Zypper.h:564
-msgid "Finished with error."
-msgstr "Proces zakończył się błędem."
-
-#: src/Zypper.h:566
-msgid "Done."
-msgstr "Ukończono."
 
 #: src/callbacks/keyring.h:32
 msgid ""
@@ -522,7 +514,7 @@ msgstr ""
 msgid "This is an alias for '%s'."
 msgstr "To polecenie to alias dla %s."
 
-#: src/commands/commandhelpformatter.h:99 src/utils/flags/zyppflags.cc:512
+#: src/commands/commandhelpformatter.h:99 src/utils/flags/zyppflags.cc:560
 msgid "Command options:"
 msgstr "Opcje polecenia:"
 
@@ -717,14 +709,300 @@ msgstr "Nieprawidłowy obiekt"
 msgid "Error"
 msgstr "Błąd"
 
-#: src/Command.cc:62
+#: src/Command.cc:63
 msgid "Invalid command"
 msgstr ""
 
-#: src/Command.cc:317
+#: src/Command.cc:81
+msgid "Repository Management:"
+msgstr "Obsługa repozytoriów:"
+
+#: src/Command.cc:89
+msgid "Service Management:"
+msgstr "Zarządzanie usługami:"
+
+#: src/Command.cc:95
+msgid "Software Management:"
+msgstr "Zarządzanie oprogramowaniem:"
+
+#: src/Command.cc:101
+msgid "Update Management:"
+msgstr "Zarządzanie aktualizacjami:"
+
+#: src/Command.cc:108
+msgid "Querying:"
+msgstr "Zapytania:"
+
+#: src/Command.cc:119
+msgid "Package Locks:"
+msgstr "Blokowanie pakietów:"
+
+#: src/Command.cc:124
+msgid "Other Commands:"
+msgstr "Pozostałe polecenia:"
+
+#: src/Command.cc:131
+msgid "Subcommands:"
+msgstr "Podpolecenia:"
+
+#: src/Command.cc:247
 #, c-format, boost-format
 msgid "Unknown command '%s'"
 msgstr "Nieznane polecenie '%s'"
+
+#: src/Config.cc:53
+#, c-format, boost-format
+msgid "Invalid table style %d."
+msgstr "Nieprawidłowy styl tabeli %d."
+
+#: src/Config.cc:54
+#, c-format, boost-format
+msgid " Use an integer number from %d to %d"
+msgstr ""
+
+#: src/Config.cc:248
+msgid "The path specified in the --root option must be absolute."
+msgstr ""
+"Ścieżka podana w opcji --root musi odnosić się do głównego drzewa katalogów."
+
+#. translators: --help, -h
+#: src/Config.cc:326
+msgid "Help."
+msgstr "Pomoc."
+
+#. translators: --version, -V
+#: src/Config.cc:335
+msgid "Output the version number."
+msgstr "Wyświetlanie numeru wersji."
+
+#. translators: --promptids
+#: src/Config.cc:347
+msgid "Output a list of zypper's user prompts."
+msgstr "Wyświetlanie listy komunikatów użytkownika programu zypper."
+
+#. translators: --config, -c <FILE>
+#: src/Config.cc:360
+msgid "Use specified config file instead of the default."
+msgstr "Użycie podanego pliku konfiguracyjnego zamiast domyślnego."
+
+#: src/Config.cc:367
+msgid "User data string must not contain nonprintable or newline characters!"
+msgstr ""
+"Ciąg znaków danych użytkownika nie może zawierać znaków niedrukowalnych ani "
+"znaków końca linii!"
+
+#. translators: --userdata <STRING>
+#: src/Config.cc:373
+msgid "User defined transaction id used in history and plugins."
+msgstr ""
+"Zdefiniowany przez użytkownika identyfikator transakcji używany w historii i "
+"dodatkach typu plug-in."
+
+#. translators: --quiet, -q
+#: src/Config.cc:381
+msgid "Suppress normal output, print only error messages."
+msgstr "Tryb cichy, wyświetlanie tylko komunikatów o błędach. "
+
+#. translators: --verbose, -v
+#: src/Config.cc:389
+msgid "Increase verbosity."
+msgstr "Wyświetlanie dodatkowych informacji."
+
+#. translators: --color / --no-color
+#: src/Config.cc:410
+msgid "Whether to use colors in output if tty supports it."
+msgstr "Stosowanie kolorów w danych wyjściowych, jeśli tty je obsługuje."
+
+#. translators: --no-abbrev, -A
+#: src/Config.cc:415
+msgid "Do not abbreviate text in tables."
+msgstr "Bez skracania tekstów w tabelach."
+
+#. translators: --table-style, -s
+#: src/Config.cc:420
+msgid "Table style (integer)."
+msgstr "Styl tabelaryczny (liczby całkowite)."
+
+#: src/Config.cc:424 src/commands/optionsets.cc:276
+msgid "Entering non-interactive mode."
+msgstr "Rozpoczęto tryb wsadowy."
+
+#. translators: --non-interactive, -n
+#: src/Config.cc:428
+msgid "Do not ask anything, use default answers automatically."
+msgstr "Bez zadawania pytań; automatyczne stosowanie odpowiedzi domyślnych. "
+
+#: src/Config.cc:433
+msgid ""
+"Patches having the flag rebootSuggested set will not be treated as "
+"interactive."
+msgstr ""
+"Poprawki z ustawioną flagą rebootSuggested nie będą traktowane jako "
+"interaktywne."
+
+#. translators: --non-interactive-include-reboot-patches
+#: src/Config.cc:437
+msgid ""
+"Do not treat patches as interactive, which have the rebootSuggested-flag set."
+msgstr ""
+"Bez traktowania jako interaktywnych poprawek, które mają ustawioną flagę "
+"rebootSuggested."
+
+#. translators: --xmlout, -x
+#: src/Config.cc:447
+msgid "Switch to XML output."
+msgstr "Przełączenie na wyjście XML."
+
+#. translators: --ignore-unknown, -i
+#: src/Config.cc:452
+msgid "Ignore unknown packages."
+msgstr "Ignorowanie nieznanych pakietów."
+
+#. translators: --terse, -t
+#: src/Config.cc:463
+msgid ""
+"Terse output for machine consumption. Implies --no-abbrev and --no-color."
+msgstr ""
+
+#. translators: --reposd-dir, -D <DIR>
+#: src/Config.cc:487
+msgid "Use alternative repository definition file directory."
+msgstr "Użyj alternatywnego katalogu pliku definicji repozytorium katalogu."
+
+#. translators: --cache-dir, -C <DIR>
+#: src/Config.cc:502
+msgid "Use alternative directory for all caches."
+msgstr "Użyj alternatywnego katalogu dla wszystkich pamięci podręcznych."
+
+#. translators: --raw-cache-dir <DIR>
+#: src/Config.cc:515
+msgid "Use alternative raw meta-data cache directory."
+msgstr ""
+"Użyj alternatywnego katalogu dla pamięci podręcznej surowych metadanych."
+
+#. translators: --solv-cache-dir <DIR>
+#: src/Config.cc:529
+msgid "Use alternative solv file cache directory."
+msgstr "Użyj alternatywnego katalogu dla pamięci podręcznej pliku solv."
+
+#. translators: --pkg-cache-dir <DIR>
+#: src/Config.cc:543
+msgid "Use alternative package cache directory."
+msgstr "Użyj alternatywnego katalogu dla pamięci podręcznej pakietów."
+
+#: src/Config.cc:548
+msgid "Repository Options"
+msgstr "Opcje repozytoriów"
+
+#: src/Config.cc:552
+msgid "Entering 'no-gpg-checks' mode."
+msgstr "Rozpoczęto tryb \"bez sprawdzania gpg\"."
+
+#. translators: --no-gpg-checks
+#: src/Config.cc:556
+msgid "Ignore GPG check failures and continue."
+msgstr ""
+"Ignorowanie nieudanych weryfikacji podpisów GPG i kontynuowanie działania."
+
+#: src/Config.cc:561
+#, c-format, boost-format
+msgid ""
+"Turning on '%s'. New repository signing keys will be automatically imported!"
+msgstr ""
+"Włączanie '%s'. Klucze podpisujące nowe repozytorium zostaną automatycznie "
+"zaimportowane!"
+
+#. translators: --gpg-auto-import-keys
+#: src/Config.cc:567
+msgid "Automatically trust and import new repository signing keys."
+msgstr ""
+"Automatyczne zaufanie i importowanie nowych kluczy podpisujących "
+"repozytorium."
+
+#. translators: --plus-repo, -p <URI>
+#: src/Config.cc:571
+msgid "Use an additional repository."
+msgstr "Użycie dodatkowego repozytorium. "
+
+#. translators: --plus-content <TAG>
+#: src/Config.cc:575
+msgid ""
+"Additionally use disabled repositories providing a specific keyword. Try '--"
+"plus-content debug' to enable repos indicating to provide debug packages."
+msgstr ""
+"Użycie dodatkowo wyłączonych repozytoriów po podaniu określonego słowa "
+"kluczowego. Opcja --plus-content debug powoduje włączenie repozytoriów "
+"wskazujących na konieczność podania pakietów do debugowania."
+
+#: src/Config.cc:581
+msgid "Repositories disabled, using the database of installed packages only."
+msgstr "Repozytoria wyłączone, użyto tylko bazy zainstalowanych pakietów."
+
+#. translators: --disable-repositories
+#: src/Config.cc:585
+msgid "Do not read meta-data from repositories."
+msgstr "Bez odczytywania metadanych z repozytoriów."
+
+#: src/Config.cc:589
+msgid "Autorefresh disabled."
+msgstr "Automatyczne odświeżanie wyłączone."
+
+#. translators: --no-refresh
+#: src/Config.cc:593
+msgid "Do not refresh the repositories."
+msgstr "Bez odświeżania repozytoriów."
+
+#: src/Config.cc:597
+msgid "CD/DVD repositories disabled."
+msgstr "Repozytoria CD/DVD są wyłączone."
+
+#. translators: --no-cd
+#: src/Config.cc:601
+msgid "Ignore CD/DVD repositories."
+msgstr "Ignorowanie repozytoriów na CD/DVD."
+
+#: src/Config.cc:605
+msgid "Remote repositories disabled."
+msgstr "Zdalne repozytoria są wyłączone."
+
+#. translators: --no-remote
+#: src/Config.cc:609
+msgid "Ignore remote repositories."
+msgstr "Ignorowanie repozytoriów zdalnych."
+
+#. translators: --releasever
+#: src/Config.cc:616
+msgid ""
+"Set the value of $releasever in all .repo files (default: distribution "
+"version)"
+msgstr ""
+"Ustawienie wartości $releasever we wszystkich plikach .repo (domyślnie: "
+"wersja dystrybucji)"
+
+#: src/Config.cc:620
+msgid "Target Options"
+msgstr "Opcje obiektu docelowego"
+
+#. translators: --root, -R <DIR>
+#: src/Config.cc:625
+msgid "Operate on a different root directory."
+msgstr "Praca w innym katalogu głównym;"
+
+#. translators: --installroot <DIR>
+#: src/Config.cc:631 src/legacy_strings.cc:60
+msgid ""
+"Operate on a different root directory, but share repositories with the host."
+msgstr ""
+"Działanie w innym katalogu głównym, ale udostępnianie repozytoriów hostowi."
+
+#: src/Config.cc:637
+msgid "Ignoring installed resolvables."
+msgstr "Zainstalowane obiekty rozwiązywalne zostaną zignorowane."
+
+#. translators: --disable-system-resolvables
+#: src/Config.cc:640
+msgid "Do not read installed packages."
+msgstr "Bez odczytywania zainstalowanych pakietów."
 
 #: src/PackageArgs.cc:216
 #, c-format, boost-format
@@ -863,11 +1141,9 @@ msgstr ""
 #: src/RequestFeedback.cc:123
 #, c-format, boost-format
 msgid ""
-"There is an update candidate for '%s', but it is from a different vendor. "
-"Use '%s' to install this candidate."
+"There is an update candidate for '%s' from vendor '%s', while the current "
+"vendor is '%s'. Use '%s' to install this candidate."
 msgstr ""
-"Znaleziono potencjalną aktualizację '%s', ale pochodzi ona z innego źródła. "
-"Należy użyć '%s', aby zainstalować tę aktualizację."
 
 #: src/RequestFeedback.cc:132
 #, c-format, boost-format
@@ -1804,198 +2080,7 @@ msgstr "Wymagane ponowne uruchomienie systemu."
 msgid "Consider to cancel:"
 msgstr "Rozważ anulowanie:"
 
-#: src/Zypper.cc:107 src/commands/reposerviceoptionsets.cc:71
-msgid "Set a descriptive name for the service."
-msgstr "Ustawienie nazwy opisowej usługi."
-
-#: src/Zypper.cc:108 src/commands/reposerviceoptionsets.cc:74
-msgid "Enable a disabled service."
-msgstr "Włączenie wyłączonej usługi."
-
-#: src/Zypper.cc:109 src/commands/reposerviceoptionsets.cc:77
-msgid "Disable the service (but don't remove it)."
-msgstr "Wyłączenie usługi bez jej usunięcia."
-
-#: src/Zypper.cc:110 src/commands/reposerviceoptionsets.cc:80
-msgid "Enable auto-refresh of the service."
-msgstr "Włączenie automatycznego odświeżania usługi."
-
-#: src/Zypper.cc:111 src/commands/reposerviceoptionsets.cc:83
-msgid "Disable auto-refresh of the service."
-msgstr "Wyłączenie automatycznego odświeżania usługi."
-
-#: src/Zypper.cc:129 src/commands/reposerviceoptionsets.cc:71
-msgid "Set a descriptive name for the repository."
-msgstr "Ustawia nazwę opisową repozytorium."
-
-#: src/Zypper.cc:130 src/commands/reposerviceoptionsets.cc:74
-msgid "Enable a disabled repository."
-msgstr "Włącza repozytorium."
-
-#: src/Zypper.cc:131 src/commands/reposerviceoptionsets.cc:77
-msgid "Disable the repository (but don't remove it)."
-msgstr "Wyłącza repozytorium bez usuwania go."
-
-#: src/Zypper.cc:132 src/commands/reposerviceoptionsets.cc:80
-msgid "Enable auto-refresh of the repository."
-msgstr "Włącza automatyczne odświeżanie repozytorium."
-
-#: src/Zypper.cc:133 src/commands/reposerviceoptionsets.cc:83
-msgid "Disable auto-refresh of the repository."
-msgstr "Wyłącza automatyczne odświeżanie repozytorium."
-
-#: src/Zypper.cc:134 src/commands/reposerviceoptionsets.cc:135
-msgid "Set priority of the repository."
-msgstr "Ustawia priorytet repozytorium."
-
-#: src/Zypper.cc:135 src/commands/reposerviceoptionsets.cc:136
-msgid "Enable RPM files caching."
-msgstr "Włącza przechowywanie plików RPM w lokalnym buforze."
-
-#: src/Zypper.cc:136 src/commands/reposerviceoptionsets.cc:137
-msgid "Disable RPM files caching."
-msgstr "Wyłącza przechowywanie pakietów RPM w lokalnym buforze."
-
-#: src/Zypper.cc:137 src/commands/reposerviceoptionsets.cc:138
-msgid "Enable GPG check for this repository."
-msgstr "Włącza sprawdzanie GPG tego repozytorium."
-
-#: src/Zypper.cc:138 src/commands/reposerviceoptionsets.cc:139
-msgid "Enable strict GPG check for this repository."
-msgstr "Włącza dokładne sprawdzanie GPG tego repozytorium."
-
-#: src/Zypper.cc:139 src/commands/reposerviceoptionsets.cc:140
-#, boost-format
-msgid "Short hand for '%1%'."
-msgstr "Skrót dla '%1%'."
-
-#: src/Zypper.cc:140 src/commands/reposerviceoptionsets.cc:141
-msgid "Enable GPG check but allow the repository metadata to be unsigned."
-msgstr ""
-"Włącza sprawdzanie GPG tego repozytorium ale pozwala aby metadane były "
-"niepodpisane."
-
-#: src/Zypper.cc:141 src/commands/reposerviceoptionsets.cc:142
-msgid ""
-"Enable GPG check but allow installing unsigned packages from this repository."
-msgstr ""
-"Włącza sprawdzanie GPG tego repozytorium ale pozwala na instalowanie "
-"niepodpisanych pakietów."
-
-#: src/Zypper.cc:142 src/commands/reposerviceoptionsets.cc:143
-msgid "Disable GPG check for this repository."
-msgstr "Wyłącza sprawdzanie GPG tego repozytorium."
-
-#: src/Zypper.cc:143 src/commands/reposerviceoptionsets.cc:144
-msgid ""
-"Use the global GPG check setting defined in /etc/zypp/zypp.conf. This is the "
-"default."
-msgstr ""
-"Używa globalnego ustawienia sprawdzania GPG, zdefiniowanego w /etc/zypp/zypp."
-"conf. Jest to wartość domyślna."
-
-#: src/Zypper.cc:146 src/commands/reposerviceoptionsets.cc:110
-msgid "Apply changes to all repositories."
-msgstr "Stosuje zmiany do wszystkich repozytoriów."
-
-#: src/Zypper.cc:147 src/commands/reposerviceoptionsets.cc:113
-msgid "Apply changes to all local repositories."
-msgstr "Stosuje zmiany do wszystkich repozytoriów lokalnych."
-
-#: src/Zypper.cc:148 src/commands/reposerviceoptionsets.cc:116
-msgid "Apply changes to all remote repositories."
-msgstr "Stosuje zmiany do wszystkich repozytoriów zdalnych."
-
-#: src/Zypper.cc:149 src/commands/reposerviceoptionsets.cc:119
-msgid "Apply changes to repositories of specified type."
-msgstr "Stosuje zmiany do repozytoriów określonego typu."
-
-#: src/Zypper.cc:166 src/commands/solveroptionset.cc:41
-msgid "Create a solver test case for debugging."
-msgstr "Tworzenie testu rozwiązywania zależności do debugowania."
-
-#: src/Zypper.cc:167 src/commands/solveroptionset.cc:42
-msgid ""
-"Force the solver to find a solution (even an aggressive one) rather than "
-"asking."
-msgstr ""
-"Wymuszenie znalezienia rozwiązania przez mechanizm rozwiązujący (nawet "
-"zdecydowanego)."
-
-#: src/Zypper.cc:168 src/commands/solveroptionset.cc:43
-msgid "Do not force the solver to find solution, let it ask."
-msgstr ""
-"Bez wymuszania znalezienia rozwiązania zależności przez mechanizm "
-"rozwiązujący, zostaną zdane pytania."
-
-#: src/Zypper.cc:177 src/commands/solveroptionset.cc:18
-msgid "Install also recommended packages in addition to the required ones."
-msgstr "Instalowanie również pakietów zalecanych dodatkowo do wymaganych."
-
-#: src/Zypper.cc:178 src/commands/solveroptionset.cc:19
-msgid "Do not install recommended packages, only required ones."
-msgstr "Instalowanie wyłącznie pakietów wymaganych, bez zalecanych."
-
-#. auto license agreements
-#. Mainly for SUSEConnect, not (yet) documented
-#: src/Zypper.cc:186 src/commands/optionsets.cc:231
-msgid ""
-"Automatically say 'yes' to third party license confirmation prompt. See 'man "
-"zypper' for more details."
-msgstr ""
-"Automatycznie zatwierdź monit o potwierdzenie licencji stron trzeciej. "
-"Szczegóły: man zypper."
-
-#: src/Zypper.cc:187 src/commands/optionsets.cc:236
-msgid ""
-"Automatically accept product licenses only. See 'man zypper' for more "
-"details."
-msgstr ""
-"Automatycznie akceptuj tylko licencje produktów. Szczegóły: man zypper."
-
-#: src/Zypper.cc:196 src/commands/optionsets.cc:301
-msgid ""
-"Whether applicable optional patches should be treated as needed or be "
-"excluded."
-msgstr ""
-"Czy odpowiednie poprawki opcjonalne należy traktować jako przeznaczone do "
-"wykluczenia."
-
-#: src/Zypper.cc:199 src/commands/optionsets.cc:304
-msgid "The default is to exclude optional patches."
-msgstr "Domyślnie poprawki opcjonalne są wykluczane."
-
-#: src/Zypper.cc:200 src/commands/optionsets.cc:305
-msgid "The default is to include optional patches."
-msgstr "Domyślnie poprawki opcjonalne są uwzględniane."
-
-#: src/Zypper.cc:214 src/commands/solveroptionset.cc:66
-msgid "Whether to allow downgrading installed resolvables."
-msgstr ""
-"Czy zezwalać na przywracanie wcześniejszych wersji zainstalowanych obiektów "
-"rozstrzygalnych."
-
-#: src/Zypper.cc:216 src/commands/solveroptionset.cc:68
-msgid "Whether to allow changing the names of installed resolvables."
-msgstr "Czy zezwalać na zmianę nazw zainstalowanych obiektów rozstrzygalnych."
-
-#: src/Zypper.cc:218 src/commands/solveroptionset.cc:70
-msgid "Whether to allow changing the architecture of installed resolvables."
-msgstr ""
-"Czy zezwalać na zmianę architektury zainstalowanych obiektów rozstrzygalnych."
-
-#: src/Zypper.cc:220 src/commands/solveroptionset.cc:72
-msgid "Whether to allow changing the vendor of installed resolvables."
-msgstr ""
-"Czy zezwalać na zmianę dostawcy zainstalowanych obiektów rozstrzygalnych."
-
-#. translator: %1% is a list of command line option names
-#: src/Zypper.cc:228
-#, boost-format
-msgid "These options are mutually exclusive: %1%"
-msgstr "Te opcje wzajemnie się wykluczają: %1%"
-
-#: src/Zypper.cc:319
+#: src/Zypper.cc:91
 msgid ""
 "PackageKit is blocking zypper. This happens if you have an updater applet or "
 "other software management application using PackageKit running."
@@ -2004,7 +2089,7 @@ msgstr ""
 "program, np. aplet aktualizacji lub inny program do zarządzania "
 "oprogramowaniem, korzysta z PackageKit."
 
-#: src/Zypper.cc:325
+#: src/Zypper.cc:97
 msgid ""
 "We can ask PackageKit to interrupt the current action as soon as possible, "
 "but it depends on PackageKit how fast it will respond to this request."
@@ -2013,590 +2098,45 @@ msgstr ""
 "aktualnego działania, ale od PackageKit zależy, jak szybko odpowie na to "
 "zgłoszenie."
 
-#: src/Zypper.cc:328
+#: src/Zypper.cc:100
 msgid "Ask PackageKit to quit?"
 msgstr "Wysłać sygnał zamknięcia do programu PackageKit?"
 
-#: src/Zypper.cc:337
+#: src/Zypper.cc:109
 msgid "PackageKit is still running (probably busy)."
 msgstr "Program PackageKit ciągle działa (prawdopodobnie zajęty)."
 
-#: src/Zypper.cc:338
+#: src/Zypper.cc:110
 msgid "Try again?"
 msgstr "Spróbować ponownie?"
 
-#: src/Zypper.cc:527 src/Zypper.cc:1560 src/commands/basecommand.cc:260
+#: src/Zypper.cc:277 src/Zypper.cc:739 src/commands/basecommand.cc:268
 msgid "Unexpected exception."
 msgstr "Niespodziewany wyjątek."
 
-#. translators: command synopsis; do not translate lowercase words
-#: src/Zypper.cc:557
-msgid "zypper [--GLOBAL-OPTIONS] <COMMAND> [--COMMAND-OPTIONS] [ARGUMENTS]"
-msgstr "zypper [--global-options] <polecenie> [--command-options] [argumenty]"
-
-#. translators: command synopsis; do not translate lowercase words
-#: src/Zypper.cc:560
-msgid "zypper <SUBCOMMAND> [--COMMAND-OPTIONS] [ARGUMENTS]"
-msgstr "zypper <podpolecenie> [--command-options] [argumenty]"
-
-#. translators: --help, -h
-#: src/Zypper.cc:567
-msgid "Help."
-msgstr "Pomoc."
-
-#. translators: --version, -V
-#: src/Zypper.cc:569
-msgid "Output the version number."
-msgstr "Wyświetlanie numeru wersji."
-
-#. translators: --promptids
-#: src/Zypper.cc:571
-msgid "Output a list of zypper's user prompts."
-msgstr "Wyświetlanie listy komunikatów użytkownika programu zypper."
-
-#. translators: --config, -c <FILE>
-#: src/Zypper.cc:573
-msgid "Use specified config file instead of the default."
-msgstr "Użycie podanego pliku konfiguracyjnego zamiast domyślnego."
-
-#. translators: --userdata <STRING>
-#: src/Zypper.cc:575
-msgid "User defined transaction id used in history and plugins."
-msgstr ""
-"Zdefiniowany przez użytkownika identyfikator transakcji używany w historii i "
-"dodatkach typu plug-in."
-
-#. translators: --quiet, -q
-#: src/Zypper.cc:577
-msgid "Suppress normal output, print only error messages."
-msgstr "Tryb cichy, wyświetlanie tylko komunikatów o błędach. "
-
-#. translators: --verbose, -v
-#: src/Zypper.cc:579
-msgid "Increase verbosity."
-msgstr "Wyświetlanie dodatkowych informacji."
-
-#. translators: --color / --no-color
-#: src/Zypper.cc:582
-msgid "Whether to use colors in output if tty supports it."
-msgstr "Stosowanie kolorów w danych wyjściowych, jeśli tty je obsługuje."
-
-#. translators: --no-abbrev, -A
-#: src/Zypper.cc:584
-msgid "Do not abbreviate text in tables."
-msgstr "Bez skracania tekstów w tabelach."
-
-#. translators: --table-style, -s
-#: src/Zypper.cc:586
-msgid "Table style (integer)."
-msgstr "Styl tabelaryczny (liczby całkowite)."
-
-#. translators: --non-interactive, -n
-#: src/Zypper.cc:588
-msgid "Do not ask anything, use default answers automatically."
-msgstr "Bez zadawania pytań; automatyczne stosowanie odpowiedzi domyślnych. "
-
-#. translators: --non-interactive-include-reboot-patches
-#: src/Zypper.cc:590
-msgid ""
-"Do not treat patches as interactive, which have the rebootSuggested-flag set."
-msgstr ""
-"Bez traktowania jako interaktywnych poprawek, które mają ustawioną flagę "
-"rebootSuggested."
-
-#. translators: --xmlout, -x
-#: src/Zypper.cc:592
-msgid "Switch to XML output."
-msgstr "Przełączenie na wyjście XML."
-
-#. translators: --ignore-unknown, -i
-#: src/Zypper.cc:594
-msgid "Ignore unknown packages."
-msgstr "Ignorowanie nieznanych pakietów."
-
-#. translators: --reposd-dir, -D <DIR>
-#: src/Zypper.cc:598
-msgid "Use alternative repository definition file directory."
-msgstr "Użyj alternatywnego katalogu pliku definicji repozytorium katalogu."
-
-#. translators: --cache-dir, -C <DIR>
-#: src/Zypper.cc:600
-msgid "Use alternative directory for all caches."
-msgstr "Użyj alternatywnego katalogu dla wszystkich pamięci podręcznych."
-
-#. translators: --raw-cache-dir <DIR>
-#: src/Zypper.cc:602
-msgid "Use alternative raw meta-data cache directory."
-msgstr ""
-"Użyj alternatywnego katalogu dla pamięci podręcznej surowych metadanych."
-
-#. translators: --solv-cache-dir <DIR>
-#: src/Zypper.cc:604
-msgid "Use alternative solv file cache directory."
-msgstr "Użyj alternatywnego katalogu dla pamięci podręcznej pliku solv."
-
-#. translators: --pkg-cache-dir <DIR>
-#: src/Zypper.cc:606
-msgid "Use alternative package cache directory."
-msgstr "Użyj alternatywnego katalogu dla pamięci podręcznej pakietów."
-
-#: src/Zypper.cc:608
-msgid "Repository Options:"
-msgstr "Opcje repozytoriów:"
-
-#. translators: --no-gpg-checks
-#: src/Zypper.cc:610
-msgid "Ignore GPG check failures and continue."
-msgstr ""
-"Ignorowanie nieudanych weryfikacji podpisów GPG i kontynuowanie działania."
-
-#. translators: --gpg-auto-import-keys
-#: src/Zypper.cc:612
-msgid "Automatically trust and import new repository signing keys."
-msgstr ""
-"Automatyczne zaufanie i importowanie nowych kluczy podpisujących "
-"repozytorium."
-
-#. translators: --plus-repo, -p <URI>
-#: src/Zypper.cc:614
-msgid "Use an additional repository."
-msgstr "Użycie dodatkowego repozytorium. "
-
-#. translators: --plus-content <TAG>
-#: src/Zypper.cc:616
-msgid ""
-"Additionally use disabled repositories providing a specific keyword. Try '--"
-"plus-content debug' to enable repos indicating to provide debug packages."
-msgstr ""
-"Użycie dodatkowo wyłączonych repozytoriów po podaniu określonego słowa "
-"kluczowego. Opcja --plus-content debug powoduje włączenie repozytoriów "
-"wskazujących na konieczność podania pakietów do debugowania."
-
-#. translators: --disable-repositories
-#: src/Zypper.cc:618
-msgid "Do not read meta-data from repositories."
-msgstr "Bez odczytywania metadanych z repozytoriów."
-
-#. translators: --no-refresh
-#: src/Zypper.cc:620
-msgid "Do not refresh the repositories."
-msgstr "Bez odświeżania repozytoriów."
-
-#. translators: --no-cd
-#: src/Zypper.cc:622
-msgid "Ignore CD/DVD repositories."
-msgstr "Ignorowanie repozytoriów na CD/DVD."
-
-#. translators: --no-remote
-#: src/Zypper.cc:624
-msgid "Ignore remote repositories."
-msgstr "Ignorowanie repozytoriów zdalnych."
-
-#. translators: --releasever
-#: src/Zypper.cc:626
-msgid ""
-"Set the value of $releasever in all .repo files (default: distribution "
-"version)"
-msgstr ""
-"Ustawienie wartości $releasever we wszystkich plikach .repo (domyślnie: "
-"wersja dystrybucji)"
-
-#: src/Zypper.cc:628
-msgid "Target Options:"
-msgstr "Opcje obiektu docelowego:"
-
-#. translators: --root, -R <DIR>
-#: src/Zypper.cc:630
-msgid "Operate on a different root directory."
-msgstr "Praca w innym katalogu głównym;"
-
-#. translators: --installroot <DIR>
-#: src/Zypper.cc:632 src/legacy_strings.cc:60
-msgid ""
-"Operate on a different root directory, but share repositories with the host."
-msgstr ""
-"Działanie w innym katalogu głównym, ale udostępnianie repozytoriów hostowi."
-
-#. translators: --disable-system-resolvables
-#: src/Zypper.cc:634
-msgid "Do not read installed packages."
-msgstr "Bez odczytywania zainstalowanych pakietów."
-
-#. translators: command summary: help, ?
-#: src/Zypper.cc:640
-msgid "Print help."
-msgstr "Wyświetla pomoc."
-
-#. translators: command summary: shell, sh
-#: src/Zypper.cc:642
-msgid "Accept multiple commands at once."
-msgstr "Akceptuje wiele poleceń na raz."
-
-#: src/Zypper.cc:644
-msgid "Repository Management:"
-msgstr "Obsługa repozytoriów:"
-
-#. translators: command summary: repos, lr
-#: src/Zypper.cc:646 src/commands/repos/list.cc:75
-#: src/commands/repos/list.cc:76
-msgid "List all defined repositories."
-msgstr "Wyświetla wszystkie zdefiniowane repozytoria."
-
-#. translators: command summary: addrepo, ar
-#: src/Zypper.cc:648 src/commands/repos/add.cc:24
-msgid "Add a new repository."
-msgstr "Dodawanie nowego repozytorium."
-
-#. translators: command summary: removerepo, rr
-#: src/Zypper.cc:650 src/commands/repos/remove.cc:22
-msgid "Remove specified repository."
-msgstr "Usuwanie wybranego repozytorium."
-
-#. translators: command summary: renamerepo, nr
-#: src/Zypper.cc:652 src/commands/repos/rename.cc:65
-msgid "Rename specified repository."
-msgstr "Zmiana nazwy wybranego repozytorium."
-
-#. translators: command summary: modifyrepo, mr
-#. translators: command summary
-#: src/Zypper.cc:654 src/commands/repos/modify.cc:29
-msgid "Modify specified repository."
-msgstr "Modyfikacja wybranego repozytorium."
-
-#. translators: command summary: refresh, ref
-#: src/Zypper.cc:656 src/commands/repos/refresh.cc:26
-msgid "Refresh all repositories."
-msgstr "Odświeżanie wszystkich repozytoriów."
-
-#. translators: command summary: clean
-#: src/Zypper.cc:658 src/commands/repos/clean.cc:17
-#: src/commands/repos/clean.cc:18
-msgid "Clean local caches."
-msgstr "Czyści lokalną pamięć podręczną."
-
-#: src/Zypper.cc:660
-msgid "Service Management:"
-msgstr "Zarządzanie usługami:"
-
-#. translators: command summary: services, ls
-#: src/Zypper.cc:662 src/commands/services/list.cc:82
-msgid "List all defined services."
-msgstr "Wyświetlanie wszystkich zdefiniowanych usług."
-
-#. translators: command summary: addservice, as
-#: src/Zypper.cc:664 src/commands/services/add.cc:103
-msgid "Add a new service."
-msgstr "Dodanie nowej usługi."
-
-#. translators: command summary: modifyservice, ms
-#: src/Zypper.cc:666 src/commands/services/modify.cc:22
-msgid "Modify specified service."
-msgstr "Modyfikacja wybranej usługi."
-
-#. translators: command summary: removeservice, rs
-#: src/Zypper.cc:668 src/commands/services/remove.cc:21
-msgid "Remove specified service."
-msgstr "Usunięcie wybranej usługi."
-
-#. translators: command summary: refresh-services, refs
-#: src/Zypper.cc:670 src/commands/services/refresh.cc:96
-msgid "Refresh all services."
-msgstr "Odświeżenie wszystkich usług."
-
-#: src/Zypper.cc:672
-msgid "Software Management:"
-msgstr "Zarządzanie oprogramowaniem:"
-
-#. translators: command summary: install, in
-#: src/Zypper.cc:674 src/commands/installremove.cc:162
-msgid "Install packages."
-msgstr "Instalacja pakietów."
-
-#. translators: command summary: remove, rm
-#: src/Zypper.cc:676 src/commands/installremove.cc:76
-msgid "Remove packages."
-msgstr "Usuwanie pakietów."
-
-#. translators: command summary: verify, ve
-#: src/Zypper.cc:678 src/commands/inrverify.cc:84
-msgid "Verify integrity of package dependencies."
-msgstr "Weryfikacja integralności zależności pakietu."
-
-#. translators: command summary: source-install, si
-#: src/Zypper.cc:680 src/commands/sourceinstall.cc:22
-msgid "Install source packages and their build dependencies."
-msgstr "Instalacja pakietów źródłowych i ich zależności kompilacji."
-
-#. translators: command summary: install-new-recommends, inr
-#: src/Zypper.cc:682 src/commands/inrverify.cc:81
-msgid "Install newly added packages recommended by installed packages."
-msgstr ""
-"Instalacja ostatnio dodanych pakietów zalecanych przez pakiety zainstalowane."
-
-#: src/Zypper.cc:684
-msgid "Update Management:"
-msgstr "Zarządzanie aktualizacjami:"
-
-#. translators: command summary: update, up
-#: src/Zypper.cc:686 src/commands/update.cc:24
-msgid "Update installed packages with newer versions."
-msgstr "Aktualizacja zainstalowanych pakietów ich nowszymi wersjami."
-
-#. translators: command summary: list-updates, lu
-#: src/Zypper.cc:688 src/commands/listpatches.cc:18
-#: src/commands/listupdates.cc:18
-msgid "List available updates."
-msgstr "Wyświetlenie dostępnych aktualizacji."
-
-#. translators: command summary: patch
-#: src/Zypper.cc:690 src/commands/patch.cc:26
-msgid "Install needed patches."
-msgstr "Instalacja wymaganych poprawek."
-
-#. translators: command summary: list-patches, lp
-#: src/Zypper.cc:692
-msgid "List needed patches."
-msgstr "Wyświetlenie wymaganych poprawek."
-
-#. translators: command summary: dist-upgrade, dup
-#. translators: command description
-#: src/Zypper.cc:694 src/commands/distupgrade.cc:22
-#: src/commands/distupgrade.cc:24
-msgid "Perform a distribution upgrade."
-msgstr "Wykonuje aktualizację dystrybucji."
-
-#. translators: command summary: patch-check, pchk
-#: src/Zypper.cc:696 src/commands/patchcheck.cc:19
-msgid "Check for patches."
-msgstr "Sprawdzenie dostępności poprawek."
-
-#: src/Zypper.cc:698
-msgid "Querying:"
-msgstr "Zapytania:"
-
-#. translators: command summary: search, se
-#: src/Zypper.cc:700
-msgid "Search for packages matching a pattern."
-msgstr "Wyszukiwanie pakietów pasujących do wzorca."
-
-#. translators: command summary: info, if
-#: src/Zypper.cc:702 src/commands/query/info.cc:21
-msgid "Show full information for specified packages."
-msgstr "Wyświetlenie pełnych informacji o wybranych pakietach."
-
-#. translators: command summary: patch-info
-#: src/Zypper.cc:704 src/commands/query/info.cc:142
-msgid "Show full information for specified patches."
-msgstr "Wyświetlenie pełnych informacji o wybranych poprawkach."
-
-#. translators: command summary: pattern-info
-#: src/Zypper.cc:706 src/commands/query/info.cc:145
-msgid "Show full information for specified patterns."
-msgstr "Wyświetlenie pełnych informacji o wybranych wzorcach."
-
-#. translators: command summary: product-info
-#: src/Zypper.cc:708 src/commands/query/info.cc:148
-msgid "Show full information for specified products."
-msgstr "Wyświetlenie pełnych informacji o wybranych produktach."
-
-#. translators: command summary: patches, pch
-#: src/Zypper.cc:710 src/commands/query/patches.cc:20
-msgid "List all available patches."
-msgstr "Wyświetlenie wszystkich dostępnych poprawek."
-
-#. translators: command summary: packages, pa
-#: src/Zypper.cc:712 src/commands/query/packages.cc:20
-msgid "List all available packages."
-msgstr "Wyświetlenie wszystkich dostępnych pakietów."
-
-#. translators: command summary: patterns, pt
-#: src/Zypper.cc:714 src/commands/query/patterns.cc:20
-msgid "List all available patterns."
-msgstr "Wyświetlenie wszystkich dostępnych wzorców."
-
-#. translators: command summary: products, pd
-#: src/Zypper.cc:716 src/commands/query/products.cc:20
-msgid "List all available products."
-msgstr "Wyświetlenie wszystkich dostępnych produktów."
-
-#. translators: command summary: what-provides, wp
-#: src/Zypper.cc:718
-msgid "List packages providing specified capability."
-msgstr "Wyświetlenie pakietów dostarczających podanych uprawnień."
-
-#: src/Zypper.cc:720
-msgid "Package Locks:"
-msgstr "Blokowanie pakietów:"
-
-#. translators: command summary: addlock, al
-#. translators: command summary
-#: src/Zypper.cc:722 src/commands/locks/add.cc:31
-msgid "Add a package lock."
-msgstr "Dodaje blokadę na podany pakiet."
-
-#. translators: command summary: removelock, rl
-#: src/Zypper.cc:724 src/commands/locks/remove.cc:26
-msgid "Remove a package lock."
-msgstr "Usuwa blokadę z danego pakietu."
-
-#. translators: command summary: locks, ll
-#: src/Zypper.cc:726 src/commands/locks/list.cc:257
-msgid "List current package locks."
-msgstr "Wyświetl listę blokad aktualnego pakietu."
-
-#. translators: command summary: cleanlocks, cl
-#: src/Zypper.cc:728
-msgid "Remove unused locks."
-msgstr "Usuwa nieużywane blokady."
-
-#: src/Zypper.cc:730
-msgid "Other Commands:"
-msgstr "Pozostałe polecenia:"
-
-#. translators: command summary: versioncmp, vcmp
-#. translators: command summary
-#: src/Zypper.cc:732 src/commands/utils/versioncmp.cc:21
-msgid "Compare two version strings."
-msgstr "Porównanie dwóch łańcuchów wersji."
-
-#. translators: command summary: targetos, tos
-#: src/Zypper.cc:734 src/commands/utils/targetos.cc:22
-msgid "Print the target operating system ID string."
-msgstr "Wyświetlenie łańcucha ID docelowego systemu operacyjnego."
-
-#. translators: command summary: licenses
-#: src/Zypper.cc:736 src/commands/utils/licenses.cc:21
-msgid "Print report about licenses and EULAs of installed packages."
-msgstr ""
-"Wyświetlenie raportu o licencjach i umowach EULA zainstalowanych pakietów."
-
-#. translators: command summary: download
-#: src/Zypper.cc:738 src/commands/utils/download.cc:146
-msgid "Download rpms specified on the commandline to a local directory."
-msgstr "Pobranie plików rpm podanych w wierszu poleceń do katalogu lokalnego."
-
-#. translators: command summary: source-download
-#. translators: command description
-#: src/Zypper.cc:740 src/commands/utils/source-download.cc:482
-#: src/commands/utils/source-download.cc:484
-msgid "Download source rpms for all installed packages to a local directory."
-msgstr ""
-"Pobieranie do lokalnego katalogu źródłowych pakietów rpm dla wszystkich "
-"zainstalowanych pakietów "
-
-#. translators: command summary: needs-rebooting
-#: src/Zypper.cc:742 src/commands/needs-rebooting.cc:21
-msgid "Check if the needs-reboot flag was set."
-msgstr ""
-
-#: src/Zypper.cc:743
-msgid "Subcommands:"
-msgstr "Podpolecenia:"
-
-#. translators: command summary: subcommand
-#: src/Zypper.cc:745
-msgid "Lists available subcommands."
-msgstr "Wyświetla listę dostępnych podpoleceń."
-
 #. translators: %s is "help" or "zypper help" depending on whether
 #. zypper shell is running or not
-#: src/Zypper.cc:758
-#, c-format, boost-format
-msgid "Type '%s' to get a list of global options and commands."
-msgstr ""
-"Wprowadź '%s', aby uzyskać listę wszystkich globalnych opcji i poleceń."
-
-#. translators: %1% is the name of an (unknown) command
-#. translators: %2% something providing more info (like 'zypper help subcommand')
-#. translators: The word 'subcommand' also refers to a zypper command and should not be translated.
-#: src/Zypper.cc:765
-#, boost-format
-msgid ""
-"In case '%1%' is not a typo it's probably not a built-in command, but "
-"provided as a subcommand or plug-in (see '%2%')."
-msgstr ""
-"Jeśli w nazwie %1% nie ma literówki, nie jest to prawdopodobnie wbudowane "
-"polecenie, ale dostarczane jako podpolecenie lub wtyczka (zobacz %2%)."
-
-#. translators: %1% and %2% are plug-in packages which might provide it.
-#. translators: The word 'subcommand' also refers to a zypper command and should not be translated.
-#: src/Zypper.cc:772
-#, boost-format
-msgid ""
-"In this case a specific package providing the subcommand needs to be "
-"installed first. Those packages are often named '%1%' or '%2%'."
-msgstr ""
-"W takim przypadku najpierw należy zainstalować konkretny pakiet "
-"udostępniający podpolecenie. Te pakiety często mają nazwę: %1% lub %2%."
-
-#. translators: %s is "help" or "zypper help" depending on whether
-#. zypper shell is running or not
-#: src/Zypper.cc:783
+#: src/Zypper.cc:318
 #, c-format, boost-format
 msgid "Type '%s' to get command-specific help."
 msgstr "Wprowadź '%s', aby uzyskać pomoc związaną z danym poleceniem."
 
-#: src/Zypper.cc:961
+#: src/Zypper.cc:340
 #, c-format, boost-format
 msgid "Verbosity: %d"
 msgstr "Szczegółowość: %d"
 
-#: src/Zypper.cc:975
-#, c-format, boost-format
-msgid "Invalid table style %d."
-msgstr "Nieprawidłowy styl tabeli %d."
-
-#: src/Zypper.cc:976
-#, c-format, boost-format
-msgid "Use an integer number from %d to %d"
-msgstr "Proszę użyć liczby całkowitej od %d do %d"
-
 #. translators: %1%  - is the name of a subcommand
-#: src/Zypper.cc:1087
+#: src/Zypper.cc:442
 #, boost-format
 msgid "Subcommand %1% does not support zypper global options."
 msgstr "Podpolecenie %1% nie obsługuje globalnych opcji programu zypper."
 
-#: src/Zypper.cc:1108
+#: src/Zypper.cc:459
 msgid "Enforced setting"
 msgstr "Wymuszone ustawienie"
 
-#: src/Zypper.cc:1118
-msgid "User data string must not contain nonprintable or newline characters!"
-msgstr ""
-"Ciąg znaków danych użytkownika nie może zawierać znaków niedrukowalnych ani "
-"znaków końca linii!"
-
-#: src/Zypper.cc:1142 src/Zypper.cc:2051 src/commands/optionsets.cc:276
-msgid "Entering non-interactive mode."
-msgstr "Rozpoczęto tryb wsadowy."
-
-#: src/Zypper.cc:1149
-msgid ""
-"Patches having the flag rebootSuggested set will not be treated as "
-"interactive."
-msgstr ""
-"Poprawki z ustawioną flagą rebootSuggested nie będą traktowane jako "
-"interaktywne."
-
-#: src/Zypper.cc:1156
-msgid "Entering 'no-gpg-checks' mode."
-msgstr "Rozpoczęto tryb \"bez sprawdzania gpg\"."
-
-#: src/Zypper.cc:1164
-#, c-format, boost-format
-msgid ""
-"Turning on '%s'. New repository signing keys will be automatically imported!"
-msgstr ""
-"Włączanie '%s'. Klucze podpisujące nowe repozytorium zostaną automatycznie "
-"zaimportowane!"
-
-#: src/Zypper.cc:1189
-msgid "The path specified in the --root option must be absolute."
-msgstr ""
-"Ścieżka podana w opcji --root musi odnosić się do głównego drzewa katalogów."
-
-#: src/Zypper.cc:1208
+#: src/Zypper.cc:482
 msgid ""
 "The /etc/products.d/baseproduct symlink is dangling or missing!\n"
 "The link must point to your core products .prod file in /etc/products.d.\n"
@@ -2606,426 +2146,21 @@ msgstr ""
 "Dowiązanie musi wskazywać plik .prod w katalogu głównych produktów /etc/"
 "products.d.\n"
 
-#: src/Zypper.cc:1256
-msgid "Repositories disabled, using the database of installed packages only."
-msgstr "Repozytoria wyłączone, użyto tylko bazy zainstalowanych pakietów."
-
-#: src/Zypper.cc:1268
-msgid "Autorefresh disabled."
-msgstr "Automatyczne odświeżanie wyłączone."
-
-#: src/Zypper.cc:1275
-msgid "CD/DVD repositories disabled."
-msgstr "Repozytoria CD/DVD są wyłączone."
-
-#: src/Zypper.cc:1282
-msgid "Remote repositories disabled."
-msgstr "Zdalne repozytoria są wyłączone."
-
-#: src/Zypper.cc:1289
-msgid "Ignoring installed resolvables."
-msgstr "Zainstalowane obiekty rozwiązywalne zostaną zignorowane."
-
 #. TranslatorExplanation The %s is "--plus-repo"
 #. TranslatorExplanation The %s is "--option-name"
-#: src/Zypper.cc:1316 src/Zypper.cc:1366
+#: src/Zypper.cc:516 src/Zypper.cc:564
 #, c-format, boost-format
 msgid "The %s option has no effect here, ignoring."
 msgstr "Opcja %s nie dotyczy tego polecenia, została zignorowana."
 
 #. Currently no concept how to handle global options and ZYPPlock
-#: src/Zypper.cc:1449
+#: src/Zypper.cc:643
 msgid "Zypper shell does not support execution of subcommands."
 msgstr "Powłoka interfejsu Zypper nie obsługuje uruchamiania podpoleceń."
 
-#: src/Zypper.cc:1528
-#, c-format, boost-format
-msgid "Command '%s' is replaced by '%s'."
-msgstr "Polecenie '%s' zostało zastąpione przez '%s'."
-
-#: src/Zypper.cc:1529
-#, c-format, boost-format
-msgid "See '%s' for all available options."
-msgstr "Więcej opcji dostępne w '%s'."
-
-#: src/Zypper.cc:1695
-msgid ""
-"search (se) [OPTIONS] [querystring] ...\n"
-"\n"
-"Search for packages matching any of the given search strings.\n"
-"\n"
-"  Command options:\n"
-"    --match-substrings     Search for a match to partial words (default).\n"
-"    --match-words          Search for a match to whole words only.\n"
-"-x, --match-exact          Searches for an exact match of the search "
-"strings.\n"
-"    --provides             Search for packages which provide the search "
-"strings.\n"
-"    --recommends           Search for packages which recommend the search "
-"strings.\n"
-"    --requires             Search for packages which require the search "
-"strings.\n"
-"    --suggests             Search for packages which suggest the search "
-"strings.\n"
-"    --conflicts            Search packages conflicting with search strings.\n"
-"    --obsoletes            Search for packages which obsolete the search "
-"strings.\n"
-"-n, --name                 Useful together with dependency options, "
-"otherwise\n"
-"                           searching in package name is default.\n"
-"-f, --file-list            Search for a match in the file list of packages.\n"
-"-d, --search-descriptions  Search also in package summaries and "
-"descriptions.\n"
-"-C, --case-sensitive       Perform case-sensitive search.\n"
-"-i, --installed-only       Show only installed packages.\n"
-"-u, --not-installed-only   Show only packages which are not installed.\n"
-"-t, --type <type>          Search only for packages of the specified type.\n"
-"-r, --repo <alias|#|URI>   Search only in the specified repository.\n"
-"    --sort-by-name         Sort packages by name (default).\n"
-"    --sort-by-repo         Sort packages by repository.\n"
-"-s, --details              Show each available version in each repository\n"
-"                           on a separate line.\n"
-"-v, --verbose              Like --details, with additional information where "
-"the\n"
-"                           search has matched (useful for search in "
-"dependencies).\n"
-"\n"
-"* and ? wildcards can also be used within search strings.\n"
-"If a search string is enclosed in '/', it's interpreted as a regular "
-"expression.\n"
-msgstr ""
-"search (se) [opcje] [zapytanie] ... \n"
-"\n"
-"Wyszukuje pakiety pasujące do podanych fraz.\n"
-"\n"
-"  Opcje polecenia:\n"
-"    --match-substrings     Wyszukuje dopasowania, które są fragmentami słów "
-"(domyślnie).\n"
-"    --match-words          Wyszukuje dopasowania, które są pełnymi słowami.\n"
-"-x, --match-exact          Wyszukuje dopasowania, które są dokładnie takie "
-"jak podana fraza.\n"
-"    --provides             Wyszukuje pakiety, które udostępniają pakiety z "
-"wyszukiwaną frazą.\n"
-"    --recommends           Wyszukuje pakiety, które zalecają pakiety z "
-"wyszukiwaną frazą.\n"
-"    --requires             Wyszukuje pakiety, które wymagają pakietów z "
-"wyszukiwaną frazą.\n"
-"    --suggests             Wyszukuje pakiety, które proponują pakiety z "
-"wyszukiwaną frazą.\n"
-"    --conflicts            Wyszukuje pakiety w konflikcie z pakietami z "
-"wyszukiwaną frazą.\n"
-"    --obsoletes            Wyszukuje pakiety, które dezaktualizują pakiety z "
-"wyszukiwaną frazą.\n"
-"-n, --name                 Przydatne wraz z opcjami powiązanymi z "
-"zależnościami. W innych\n"
-"                           przypadkach wyszukiwanie w nazwach pakietów jest "
-"domyślne.\n"
-"-f, --file-list            Wyszukuje w ramach listy plików pakietów.\n"
-"-d, --search-descriptions  Wyszukuje również w podsumowaniu i opisach "
-"pakietów.\n"
-"-C, --case-sensitive       Rozróżnianie wielkości liter.\n"
-"-i, --installed-only       Pokazuje tylko pakiety, które są już "
-"zainstalowane.\n"
-"-u, --not-installed-only   Pokazuje tylko pakiety, które nie są aktualnie "
-"zainstalowane.\n"
-"-t, --type <typ>           Pokazuje tylko pakietów określonego typu.\n"
-"-r, --repo <alias|#|URI>   Wyszukuje tylko w określonym repozytorium.\n"
-"    --sort-by-name         Sortuje pakiety wg nazwy (domyślnie).\n"
-"    --sort-by-repo         Sortuje pakiety według repozytorium.\n"
-"-s, --details              Wyświetla każdą dostępną wersję w każdym "
-"repozytorium\n"
-"                           w oddzielnych wierszach.\n"
-"-v, --verbose              Podobnie jak --details, ale dodaje informację o "
-"miejscu\n"
-"                           znalezienia frazy (przydatne podczas wyszukiwania "
-"zależności).\n"
-"\n"
-"Znaki specjalne * oraz ? mogą być używane wewnątrz fraz wyszukiwania.\n"
-"Łańcuch wyszukiwania zawarty miedzy znakami / jest interpretowany jako "
-"wyrażenie regularne.\n"
-
-#. translators: command synopsis; do not translate lowercase words
-#: src/Zypper.cc:1737
-msgid "search (se) [OPTIONS] [QUERYSTRING] ..."
-msgstr "search (se) [opcje] [zapytanie] ... "
-
-#. translators: command description
-#: src/Zypper.cc:1740
-msgid "Search for packages matching any of the given search strings."
-msgstr "Wyszukuje pakiety pasujące do podanych fraz."
-
-#. translators: command description
-#: src/Zypper.cc:1743
-msgid ""
-"* and ? wildcards can also be used within search strings. If a search string "
-"is enclosed in '/', it's interpreted as a regular expression."
-msgstr ""
-"Znaki specjalne * oraz ? mogą być używane wewnątrz fraz wyszukiwania. "
-"Łańcuch wyszukiwania zawarty miedzy znakami / jest interpretowany jako "
-"wyrażenie regularne."
-
-#. translators: --match-substrings
-#: src/Zypper.cc:1747
-msgid "Search for a match to partial words (default)."
-msgstr "Wyszukuje dopasowania, które są fragmentami słów (domyślnie)."
-
-#. translators: --match-words
-#: src/Zypper.cc:1749
-msgid "Search for a match to whole words only."
-msgstr "Wyszukuje dopasowania, które są pełnymi słowami."
-
-#. translators: -x, --match-exact
-#: src/Zypper.cc:1751
-msgid "Searches for an exact match of the search strings."
-msgstr "Wyszukuje dopasowania, które są dokładnie takie jak podana fraza."
-
-#. translators: --provides
-#: src/Zypper.cc:1753
-msgid "Search for packages which provide the search strings."
-msgstr "Wyszukuje pakiety, które udostępniają pakiety z wyszukiwaną frazą."
-
-#. translators: --recommends
-#: src/Zypper.cc:1755
-msgid "Search for packages which recommend the search strings."
-msgstr "Wyszukuje pakiety, które zalecają pakiety z wyszukiwaną frazą."
-
-#. translators: --requires
-#: src/Zypper.cc:1757
-msgid "Search for packages which require the search strings."
-msgstr "Wyszukuje pakiety, które wymagają pakietów z wyszukiwaną frazą."
-
-#. translators: --suggests
-#: src/Zypper.cc:1759
-msgid "Search for packages which suggest the search strings."
-msgstr "Wyszukuje pakiety, które proponują pakiety z wyszukiwaną frazą."
-
-#. translators: --supplements
-#: src/Zypper.cc:1761
-msgid "Search for packages which supplement the search strings."
-msgstr ""
-
-#. translators: --conflicts
-#: src/Zypper.cc:1763
-msgid "Search packages conflicting with search strings."
-msgstr "Wyszukuje pakiety w konflikcie z pakietami z wyszukiwaną frazą."
-
-#. translators: --obsoletes
-#: src/Zypper.cc:1765
-msgid "Search for packages which obsolete the search strings."
-msgstr "Wyszukuje pakiety, które dezaktualizują pakiety z wyszukiwaną frazą."
-
-#. translators: -n, --name
-#: src/Zypper.cc:1767
-msgid ""
-"Useful together with dependency options, otherwise searching in package name "
-"is default."
-msgstr ""
-"Przydatne wraz z opcjami powiązanymi z zależnościami. W innych przypadkach "
-"wyszukiwanie w nazwach pakietów jest domyślne."
-
-#. translators: -f, --file-list
-#: src/Zypper.cc:1769
-msgid "Search for a match in the file list of packages."
-msgstr "Wyszukuje w ramach listy plików pakietów."
-
-#. translators: -d, --search-descriptions
-#: src/Zypper.cc:1771
-msgid "Search also in package summaries and descriptions."
-msgstr "Wyszukuje również w podsumowaniu i opisach pakietów."
-
-#. translators: -C, --case-sensitive
-#: src/Zypper.cc:1773
-msgid "Perform case-sensitive search."
-msgstr "Rozróżnianie wielkości liter."
-
-#. translators: -i, --installed-only
-#: src/Zypper.cc:1775 src/commands/optionsets.cc:194
-msgid "Show only installed packages."
-msgstr "Pokaż tylko zainstalowane pakiety."
-
-#. translators: -u, --not-installed-only
-#: src/Zypper.cc:1777 src/commands/optionsets.cc:198
-msgid "Show only packages which are not installed."
-msgstr "Pokaż tylko nie zainstalowane pakiety."
-
-#. translators: -t, --type <TYPE>
-#: src/Zypper.cc:1779
-msgid "Search only for packages of the specified type."
-msgstr "Pokazuje tylko pakietów określonego typu."
-
-#. translators: -r, --repo <ALIAS|#|URI>
-#: src/Zypper.cc:1781
-msgid "Search only in the specified repository."
-msgstr "Wyszukuje tylko w określonym repozytorium."
-
-#. translators: --sort-by-name
-#: src/Zypper.cc:1783
-msgid "Sort packages by name (default)."
-msgstr "Sortuje pakiety wg nazwy (domyślnie)."
-
-#. translators: --sort-by-repo
-#: src/Zypper.cc:1785
-msgid "Sort packages by repository."
-msgstr "Sortuje pakiety według repozytorium."
-
-#. translators: -s, --details
-#: src/Zypper.cc:1787
-msgid "Show each available version in each repository on a separate line."
-msgstr ""
-"Wyświetla każdą dostępną wersję w każdym repozytorium w oddzielnych "
-"wierszach."
-
-#. translators: -v, --verbose
-#: src/Zypper.cc:1789
-msgid ""
-"Like --details, with additional information where the search has matched "
-"(useful for search in dependencies)."
-msgstr ""
-"Podobnie jak --details, ale dodaje informację o miejscu znalezienia frazy "
-"(przydatne podczas wyszukiwania zależności)."
-
-#. translators: command synopsis; do not translate lowercase words
-#: src/Zypper.cc:1803
-msgid "what-provides (wp) <CAPABILITY>"
-msgstr "what-provides (wp) <uprawnienie>"
-
-#. translators: command description
-#: src/Zypper.cc:1806
-msgid "List all packages providing the specified capability."
-msgstr "Wyświetla listę pakietów według określonego uprawnienia."
-
-#. translators: command synopsis; do not translate lowercase words
-#: src/Zypper.cc:1856
-msgid "moo"
-msgstr ""
-
-#. translators: command description
-#: src/Zypper.cc:1859
-msgid "Show an animal."
-msgstr "wyświetla zwierzę"
-
-#. translators: command synopsis; do not translate lowercase words
-#: src/Zypper.cc:1875
-msgid "quit (exit, ^D)"
-msgstr ""
-
-#. translators: command description
-#: src/Zypper.cc:1878
-msgid "Quit the current zypper shell."
-msgstr "Opuszcza bieżącą powłokę zypper."
-
-#: src/Zypper.cc:1884
-msgid ""
-"quit (exit, ^D)\n"
-"\n"
-"Quit the current zypper shell.\n"
-"\n"
-"This command has no additional options.\n"
-msgstr ""
-"quit (exit, ^D)\n"
-"\n"
-"Opuszcza bieżącą powłokę zypper.\n"
-"\n"
-"Polecenie nie ma dodatkowych opcji.\n"
-
-#. translators: command synopsis; do not translate lowercase words
-#: src/Zypper.cc:1903
-msgid "shell (sh)"
-msgstr ""
-
-#. translators: command description
-#: src/Zypper.cc:1906
-msgid "Enter the zypper command shell."
-msgstr "Uruchomienie powłoki w programie zypper."
-
-#. translators: command synopsis; do not translate lowercase words
-#: src/Zypper.cc:1930
-msgid "patch-search [OPTIONS] [QUERYSTRING...]"
-msgstr "patch-search [opcje] [wzorzec wyszukiwania...]"
-
-#. translators: command description
-#: src/Zypper.cc:1933
-msgid "Search for patches matching given search strings."
-msgstr "Wyszukuje poprawki zawierające dany wzorzec wyszukiwania."
-
-#: src/Zypper.cc:1939
-#, c-format, boost-format
-msgid ""
-"patch-search [OPTIONS] [querystring...]\n"
-"\n"
-"Search for patches matching given search strings. This is an alias for "
-"'%s'.\n"
-msgstr ""
-"patch-search [opcje] [wzorzec wyszukiwania...]\n"
-"\n"
-"Wyszukuje poprawki zawierające dany wzorzec wyszukiwania. Jest to alias dla "
-"%s.\n"
-
-#. translators: command synopsis; do not translate lowercase words
-#: src/Zypper.cc:1957
-msgid "ping [OPTIONS]"
-msgstr "ping [opcje]"
-
-#. translators: command description
-#: src/Zypper.cc:1960
-msgid "This command has dummy implementation which always returns 0."
-msgstr "To polecenie ma fikcyjną implementację, która zawsze zwraca 0."
-
-#: src/Zypper.cc:2003 src/Zypper.cc:2450
+#: src/Zypper.cc:822 src/commands/shell.cc:43
 msgid "Unexpected program flow."
 msgstr "Nieoczekiwany przebieg programu."
-
-#: src/Zypper.cc:2067 src/commands/basecommand.cc:118
-msgid "Non-option program arguments: "
-msgstr "Parametry programu nie będące opcjami: "
-
-#. TranslatorExplanation this is a hedgehog, paint another animal, if you want
-#: src/Zypper.cc:2139
-msgid ""
-"   \\\\\\\\\\\n"
-"  \\\\\\\\\\\\\\__o\n"
-"__\\\\\\\\\\\\\\'/_"
-msgstr ""
-"   \\\\\\\\\\\n"
-"  \\\\\\\\\\\\\\__o\n"
-"__\\\\\\\\\\\\\\'/_"
-
-#: src/Zypper.cc:2195
-#, c-format, boost-format
-msgid "Unknown package type '%s'."
-msgstr "Nieznany typ pakietu '%s'."
-
-#: src/Zypper.cc:2220 src/repos.cc:773
-#, c-format, boost-format
-msgid "Specified repository '%s' is disabled."
-msgstr "Określone repozytorium '%s' jest wyłączone."
-
-#. translators: empty search result message
-#: src/Zypper.cc:2376
-msgid "No matching items found."
-msgstr "Nie znaleziono pasujących elementów."
-
-#: src/Zypper.cc:2411
-msgid "Problem occurred initializing or executing the search query"
-msgstr "Wystąpił problem z inicjalizacją lub wykonaniem zapytania"
-
-#: src/Zypper.cc:2412
-msgid "See the above message for a hint."
-msgstr "Wskazówki można znaleźć w powyższym komunikacie."
-
-#: src/Zypper.cc:2413 src/repos.cc:994
-msgid "Running 'zypper refresh' as root might resolve the problem."
-msgstr ""
-"Uruchomienie polecenia 'zypper refresh' z uprawnieniami użytkownika root "
-"może rozwiązać problem."
-
-#: src/Zypper.cc:2437
-msgid "This command only makes sense in the zypper shell."
-msgstr "To polecenie ma sens jedynie w powłoce programu zypper."
-
-#: src/Zypper.cc:2447
-msgid "You already are running zypper's shell."
-msgstr "Powłoka programu zypper jest już uruchomiona."
 
 #. help text for the "Abort, retry, ignore?" prompt for media errors
 #: src/callbacks/media.cc:27
@@ -3159,9 +2294,13 @@ msgstr "Nazwa użytkownika"
 msgid "Password"
 msgstr "Hasło"
 
-#: src/commands/basecommand.cc:106
+#: src/commands/basecommand.cc:107
 msgid "Option program arguments: "
 msgstr ""
+
+#: src/commands/basecommand.cc:119
+msgid "Non-option program arguments: "
+msgstr "Parametry programu nie będące opcjami: "
 
 #: src/commands/conditions.cc:19
 msgid "Root privileges are required to run this command."
@@ -3184,6 +2323,12 @@ msgstr ""
 msgid "dist-upgrade (dup) [OPTIONS]"
 msgstr "dist-upgrade (dup) [opcje]"
 
+#. translators: command summary: dist-upgrade, dup
+#. translators: command description
+#: src/commands/distupgrade.cc:22 src/commands/distupgrade.cc:24
+msgid "Perform a distribution upgrade."
+msgstr "Wykonuje aktualizację dystrybucji."
+
 #. translators: --from <ALIAS|#|URI>
 #: src/commands/distupgrade.cc:37
 msgid "Restrict upgrade to specified repository."
@@ -3201,6 +2346,20 @@ msgstr ""
 "informacji na temat tego polecenia — patrz '%s'."
 
 #. translators: command synopsis; do not translate lowercase words
+#: src/commands/help.cc:21
+msgid "zypper [--GLOBAL-OPTIONS] <COMMAND> [--COMMAND-OPTIONS] [ARGUMENTS]"
+msgstr "zypper [--global-options] <polecenie> [--command-options] [argumenty]"
+
+#. translators: command synopsis; do not translate lowercase words
+#: src/commands/help.cc:24
+msgid "zypper <SUBCOMMAND> [--COMMAND-OPTIONS] [ARGUMENTS]"
+msgstr "zypper <podpolecenie> [--command-options] [argumenty]"
+
+#: src/commands/help.cc:72 src/commands/help.cc:73
+msgid "Print zypper help"
+msgstr "Wyświetla pomoc"
+
+#. translators: command synopsis; do not translate lowercase words
 #: src/commands/inrverify.cc:68
 msgid "install-new-recommends (inr) [OPTIONS]"
 msgstr "install-new-recommends (inr) [opcje]"
@@ -3209,6 +2368,17 @@ msgstr "install-new-recommends (inr) [opcje]"
 #: src/commands/inrverify.cc:71
 msgid "verify (ve) [OPTIONS]"
 msgstr "verify (ve) [opcje]"
+
+#. translators: command summary: install-new-recommends, inr
+#: src/commands/inrverify.cc:81
+msgid "Install newly added packages recommended by installed packages."
+msgstr ""
+"Instalacja ostatnio dodanych pakietów zalecanych przez pakiety zainstalowane."
+
+#. translators: command summary: verify, ve
+#: src/commands/inrverify.cc:84
+msgid "Verify integrity of package dependencies."
+msgstr "Weryfikacja integralności zależności pakietu."
 
 #. translators: command description
 #: src/commands/inrverify.cc:95
@@ -3250,6 +2420,11 @@ msgstr ""
 #: src/commands/installremove.cc:74
 msgid "remove (rm) [OPTIONS] <CAPABILITY> ..."
 msgstr "remove (rm) [opcje] <właściwość> ..."
+
+#. translators: command summary: remove, rm
+#: src/commands/installremove.cc:76
+msgid "Remove packages."
+msgstr "Usuwanie pakietów."
 
 #. translators: command description
 #: src/commands/installremove.cc:78
@@ -3295,6 +2470,11 @@ msgstr ""
 #: src/commands/installremove.cc:160
 msgid "install (in) [OPTIONS] <CAPABILITY|RPM_FILE_URI> ..."
 msgstr "install (in) [opcje] <właściwość|uri_pliku_rpm> ..."
+
+#. translators: command summary: install, in
+#: src/commands/installremove.cc:162
+msgid "Install packages."
+msgstr "Instalacja pakietów."
 
 #. translators: command description
 #: src/commands/installremove.cc:164
@@ -3374,6 +2554,11 @@ msgstr "Nie podano prawidłowych parametrów."
 msgid "list-patches (lp) [OPTIONS]"
 msgstr "list-patches (lp) [OPCJE]"
 
+#. translators: command summary: list-updates, lu
+#: src/commands/listpatches.cc:18 src/commands/listupdates.cc:18
+msgid "List available updates."
+msgstr "Wyświetlenie dostępnych aktualizacji."
+
 #. translators: command description
 #: src/commands/listpatches.cc:20
 msgid "List all applicable patches."
@@ -3408,6 +2593,11 @@ msgstr ""
 #: src/commands/locks/add.cc:29
 msgid "addlock (al) [OPTIONS] <PACKAGENAME> ..."
 msgstr "addlock (al) [opcje] <nazwa pakietu> ..."
+
+#. translators: command summary
+#: src/commands/locks/add.cc:31
+msgid "Add a package lock."
+msgstr "Dodaje blokadę na podany pakiet."
 
 #. translators: command description
 #: src/commands/locks/add.cc:33
@@ -3518,6 +2708,10 @@ msgstr "Nie instaluj"
 msgid "locks (ll) [OPTIONS]"
 msgstr "locks (ll) [opcje]"
 
+#: src/commands/locks/list.cc:257
+msgid "List current package locks."
+msgstr "Wyświetl listę blokad aktualnego pakietu."
+
 #: src/commands/locks/list.cc:285
 msgid "Show the number of resolvables matched by each lock."
 msgstr ""
@@ -3539,6 +2733,10 @@ msgstr "Nie zdefiniowano blokad pakietów."
 #: src/commands/locks/remove.cc:25
 msgid "removelock (rl) [OPTIONS] <LOCK-NUMBER|PACKAGENAME> ..."
 msgstr "removelock (rl) [opcje] <numer-blokady|nazwapakietu> ..."
+
+#: src/commands/locks/remove.cc:26
+msgid "Remove a package lock."
+msgstr "Usuwa blokadę z danego pakietu."
 
 #. translators: command description; %1% is acoomand like 'zypper locks'
 #: src/commands/locks/remove.cc:28
@@ -3574,6 +2772,11 @@ msgstr[2] "Usunięto pomyślnie %zu blokad."
 msgid "Problem removing the package lock:"
 msgstr "Wystąpił problem podczas usuwania blokady pakietu:"
 
+#. translators: command summary: needs-rebooting
+#: src/commands/needs-rebooting.cc:21
+msgid "Check if the needs-reboot flag was set."
+msgstr ""
+
 #: src/commands/needs-rebooting.cc:22
 msgid ""
 "Checks if the needs-reboot flag was set by a previous update or install of a "
@@ -3598,6 +2801,68 @@ msgstr ""
 #: src/commands/needs-rebooting.cc:54
 msgid "Reboot is probably not necessary."
 msgstr ""
+
+#. translators: command synopsis; do not translate lowercase words
+#: src/commands/nullcommands.cc:17
+msgid "moo"
+msgstr ""
+
+#. translators: command summary
+#. translators: command description
+#: src/commands/nullcommands.cc:19 src/commands/nullcommands.cc:21
+msgid "Show an animal."
+msgstr "wyświetla zwierzę"
+
+#. TranslatorExplanation this is a hedgehog, paint another animal, if you want
+#: src/commands/nullcommands.cc:29
+msgid ""
+"   \\\\\\\\\\\n"
+"  \\\\\\\\\\\\\\__o\n"
+"__\\\\\\\\\\\\\\'/_"
+msgstr ""
+"   \\\\\\\\\\\n"
+"  \\\\\\\\\\\\\\__o\n"
+"__\\\\\\\\\\\\\\'/_"
+
+#. translators: command synopsis; do not translate lowercase words
+#: src/commands/nullcommands.cc:37
+msgid "what-provides (wp) <CAPABILITY>"
+msgstr "what-provides (wp) <uprawnienie>"
+
+#. translators: command summary: what-provides, wp
+#: src/commands/nullcommands.cc:39
+msgid "List packages providing specified capability."
+msgstr "Wyświetlenie pakietów dostarczających podanych uprawnień."
+
+#. translators: command description
+#: src/commands/nullcommands.cc:41
+msgid "List all packages providing the specified capability."
+msgstr "Wyświetla listę pakietów według określonego uprawnienia."
+
+#. "what-provides" is obsolete
+#. The "what-provides" now is included in "search" command, e.g.
+#. zypper what-provides 'zypper>1.6'
+#. zypper se --match-exact --provides 'zypper>1.6'
+#: src/commands/nullcommands.cc:52
+#, c-format, boost-format
+msgid "Command '%s' is replaced by '%s'."
+msgstr "Polecenie '%s' zostało zastąpione przez '%s'."
+
+#: src/commands/nullcommands.cc:53
+#, c-format, boost-format
+msgid "See '%s' for all available options."
+msgstr "Więcej opcji dostępne w '%s'."
+
+#. translators: command synopsis; do not translate lowercase words
+#: src/commands/nullcommands.cc:67
+msgid "ping [OPTIONS]"
+msgstr "ping [opcje]"
+
+#. translators: command summary
+#. translators: command description
+#: src/commands/nullcommands.cc:69 src/commands/nullcommands.cc:71
+msgid "This command has dummy implementation which always returns 0."
+msgstr "To polecenie ma fikcyjną implementację, która zawsze zwraca 0."
 
 #: src/commands/optionsets.cc:33
 msgid "Don't change anything, just report what would be done."
@@ -3630,6 +2895,31 @@ msgstr "Ustawienie trybu pobierania i instalacji. Dostępne tryby: %s"
 msgid "Only download the packages, do not install."
 msgstr "Tylko pobieranie pakietów, bez instalacji."
 
+#. translators: -i, --installed-only
+#: src/commands/optionsets.cc:194
+msgid "Show only installed packages."
+msgstr "Pokaż tylko zainstalowane pakiety."
+
+#. translators: -u, --not-installed-only
+#: src/commands/optionsets.cc:198
+msgid "Show only packages which are not installed."
+msgstr "Pokaż tylko nie zainstalowane pakiety."
+
+#: src/commands/optionsets.cc:231
+msgid ""
+"Automatically say 'yes' to third party license confirmation prompt. See 'man "
+"zypper' for more details."
+msgstr ""
+"Automatycznie zatwierdź monit o potwierdzenie licencji stron trzeciej. "
+"Szczegóły: man zypper."
+
+#: src/commands/optionsets.cc:236
+msgid ""
+"Automatically accept product licenses only. See 'man zypper' for more "
+"details."
+msgstr ""
+"Automatycznie akceptuj tylko licencje produktów. Szczegóły: man zypper."
+
 #. translators: -y, --no-confirm
 #: src/commands/optionsets.cc:283
 msgid ""
@@ -3637,6 +2927,22 @@ msgid ""
 "option."
 msgstr ""
 "Nie wymaga działania użytkownika. Alias opcji globalnej --non-interactive."
+
+#: src/commands/optionsets.cc:301
+msgid ""
+"Whether applicable optional patches should be treated as needed or be "
+"excluded."
+msgstr ""
+"Czy odpowiednie poprawki opcjonalne należy traktować jako przeznaczone do "
+"wykluczenia."
+
+#: src/commands/optionsets.cc:304
+msgid "The default is to exclude optional patches."
+msgstr "Domyślnie poprawki opcjonalne są wykluczane."
+
+#: src/commands/optionsets.cc:305
+msgid "The default is to include optional patches."
+msgstr "Domyślnie poprawki opcjonalne są uwzględniane."
 
 #. translators: --with-interactive
 #: src/commands/optionsets.cc:340
@@ -3648,10 +2954,26 @@ msgstr ""
 msgid "Skip interactive updates."
 msgstr ""
 
+#. translators: --sort-by-name
+#: src/commands/optionsets.cc:364
+msgid "Sort packages by name (default)."
+msgstr "Sortuje pakiety wg nazwy (domyślnie)."
+
+#. translators: --sort-by-repo
+#. translators: --sort-by-catalog
+#: src/commands/optionsets.cc:374 src/commands/optionsets.cc:385
+msgid "Sort packages by repository."
+msgstr "Sortuje pakiety według repozytorium."
+
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/patch.cc:24
 msgid "patch [OPTIONS]"
 msgstr "patch [opcje]"
+
+#. translators: command summary: patch
+#: src/commands/patch.cc:26
+msgid "Install needed patches."
+msgstr "Instalacja wymaganych poprawek."
 
 #. translators: command description
 #: src/commands/patch.cc:28
@@ -3673,6 +2995,11 @@ msgstr ""
 #: src/commands/patchcheck.cc:17
 msgid "patch-check (pchk) [OPTIONS]"
 msgstr "patch-check (pchk) [OPCJE]"
+
+#. translators: command summary: patch-check, pchk
+#: src/commands/patchcheck.cc:19
+msgid "Check for patches."
+msgstr "Sprawdzenie dostępności poprawek."
 
 #. translators: command description
 #: src/commands/patchcheck.cc:21
@@ -3802,6 +3129,11 @@ msgstr ""
 msgid "info (if) [OPTIONS] <NAME> ..."
 msgstr "info (if) [opcje] <nazwa> ..."
 
+#. translators: command summary: info, if
+#: src/commands/query/info.cc:21
+msgid "Show full information for specified packages."
+msgstr "Wyświetlenie pełnych informacji o wybranych pakietach."
+
 #. translators: command description
 #: src/commands/query/info.cc:23
 msgid ""
@@ -3864,6 +3196,21 @@ msgstr "Brak wymaganego parametru."
 msgid "Usage"
 msgstr "Użycie"
 
+#. translators: command summary: patch-info
+#: src/commands/query/info.cc:142
+msgid "Show full information for specified patches."
+msgstr "Wyświetlenie pełnych informacji o wybranych poprawkach."
+
+#. translators: command summary: pattern-info
+#: src/commands/query/info.cc:145
+msgid "Show full information for specified patterns."
+msgstr "Wyświetlenie pełnych informacji o wybranych wzorcach."
+
+#. translators: command summary: product-info
+#: src/commands/query/info.cc:148
+msgid "Show full information for specified products."
+msgstr "Wyświetlenie pełnych informacji o wybranych produktach."
+
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/query/info.cc:162
 msgid "patch-info <PATCHNAME> ..."
@@ -3898,6 +3245,11 @@ msgstr "Wyświetla szczegółowe informacje na temat produktów."
 #: src/commands/query/packages.cc:18
 msgid "packages (pa) [OPTIONS] [REPOSITORY] ..."
 msgstr "packages (pa) [opcje] [repozytorium]..."
+
+#. translators: command summary: packages, pa
+#: src/commands/query/packages.cc:20
+msgid "List all available packages."
+msgstr "Wyświetlenie wszystkich dostępnych pakietów."
 
 #. translators: command description
 #: src/commands/query/packages.cc:22
@@ -3940,6 +3292,11 @@ msgstr "Sortuj listę według repozytorium."
 msgid "patches (pch) [REPOSITORY] ..."
 msgstr "patches (pch) [repozytorium] ..."
 
+#. translators: command summary: patches, pch
+#: src/commands/query/patches.cc:20
+msgid "List all available patches."
+msgstr "Wyświetlenie wszystkich dostępnych poprawek."
+
 #. translators: command description
 #: src/commands/query/patches.cc:22
 msgid "List all patches available in specified repositories."
@@ -3949,6 +3306,11 @@ msgstr "Wyświetla listę wszystkich dostępnych w danym repozytorium poprawek"
 #: src/commands/query/patterns.cc:18
 msgid "patterns (pt) [OPTIONS] [REPOSITORY] ..."
 msgstr "patterns (pt) [opcje] [repozytorium] ..."
+
+#. translators: command summary: patterns, pt
+#: src/commands/query/patterns.cc:20
+msgid "List all available patterns."
+msgstr "Wyświetlenie wszystkich dostępnych wzorców."
 
 #. translators: command description
 #: src/commands/query/patterns.cc:22
@@ -3960,6 +3322,11 @@ msgstr ""
 #: src/commands/query/products.cc:18
 msgid "products (pd) [OPTIONS] [REPOSITORY] ..."
 msgstr "products (pd) [opcje] [repozytorium] ..."
+
+#. translators: command summary: products, pd
+#: src/commands/query/products.cc:20
+msgid "List all available products."
+msgstr "Wyświetlenie wszystkich dostępnych produktów."
 
 #. translators: command description
 #: src/commands/query/products.cc:22
@@ -3986,6 +3353,10 @@ msgstr "addrepo (ar) [opcje] <URI> <alias>"
 #: src/commands/repos/add.cc:23
 msgid "addrepo (ar) [OPTIONS] <FILE.repo>"
 msgstr "addrepo (ar) [opcje] <plik.repo>"
+
+#: src/commands/repos/add.cc:24
+msgid "Add a new repository."
+msgstr "Dodawanie nowego repozytorium."
 
 #: src/commands/repos/add.cc:25
 msgid ""
@@ -4037,6 +3408,10 @@ msgstr "Zobacz '%s' lub '%s', aby uzyskać listę znanych typów repozytoriów."
 #: src/commands/repos/clean.cc:16
 msgid "clean (cc) [ALIAS|#|URI] ..."
 msgstr ""
+
+#: src/commands/repos/clean.cc:17 src/commands/repos/clean.cc:18
+msgid "Clean local caches."
+msgstr "Czyści lokalną pamięć podręczną."
 
 #. translators: -r, --repo <ALIAS|#|URI>
 #: src/commands/repos/clean.cc:37
@@ -4129,6 +3504,10 @@ msgstr "Ścieżka MD Cache"
 msgid "repos (lr) [OPTIONS] [REPO] ..."
 msgstr "repos (lr) [opcje] [repozytorium] ..."
 
+#: src/commands/repos/list.cc:75 src/commands/repos/list.cc:76
+msgid "List all defined repositories."
+msgstr "Wyświetla wszystkie zdefiniowane repozytoria."
+
 #. translators: -e, --export <FILE.repo>
 #: src/commands/repos/list.cc:87
 msgid "Export all defined repositories as a single local .repo file."
@@ -4180,6 +3559,11 @@ msgstr "modifyrepo (mr) <opcje> <alias|#|URI>"
 msgid "modifyrepo (mr) <OPTIONS> <%1%>"
 msgstr "modifyrepo (mr) <opcje> <%1%>"
 
+#. translators: command summary
+#: src/commands/repos/modify.cc:29
+msgid "Modify specified repository."
+msgstr "Modyfikacja wybranego repozytorium."
+
 #. translators: command description
 #: src/commands/repos/modify.cc:31
 #, boost-format
@@ -4198,6 +3582,11 @@ msgstr "Nie znaleziono repozytorium '%s'."
 #: src/commands/repos/refresh.cc:24
 msgid "refresh (ref) [ALIAS|#|URI] ..."
 msgstr ""
+
+#. translators: command summary: refresh, ref
+#: src/commands/repos/refresh.cc:26
+msgid "Refresh all repositories."
+msgstr "Odświeżanie wszystkich repozytoriów."
 
 #. translators: command description
 #: src/commands/repos/refresh.cc:28
@@ -4316,6 +3705,10 @@ msgstr "Odświeżono wszystkie repozytoria."
 msgid "removerepo (rr) [OPTIONS] <ALIAS|#|URI>"
 msgstr "removerepo (rr) [opcje] <alias|URI>"
 
+#: src/commands/repos/remove.cc:22
+msgid "Remove specified repository."
+msgstr "Usuwanie wybranego repozytorium."
+
 #: src/commands/repos/remove.cc:23
 msgid "Remove repository specified by alias, number or URI."
 msgstr "Usuwa repozytorium określone przez alias lub adres URI."
@@ -4371,6 +3764,10 @@ msgstr "Nie zmieniono repozytorium '%s'."
 msgid "renamerepo (nr) [OPTIONS] <ALIAS|#|URI> <NEW-ALIAS>"
 msgstr "renamerepo [opcje] <alias|#|URI> <nowy-alias>"
 
+#: src/commands/repos/rename.cc:65
+msgid "Rename specified repository."
+msgstr "Zmiana nazwy wybranego repozytorium."
+
 #. translators: command description
 #: src/commands/repos/rename.cc:67
 msgid "Assign new alias to the repository specified by alias, number or URI."
@@ -4396,21 +3793,127 @@ msgstr ""
 "Niepoprawny priorytet '%s'. Użyj dodatniej liczby całkowitej. Im większa "
 "jest liczba, tym niższy priorytet."
 
+#: src/commands/reposerviceoptionsets.cc:71
+msgid "Set a descriptive name for the service."
+msgstr "Ustawienie nazwy opisowej usługi."
+
+#: src/commands/reposerviceoptionsets.cc:71
+msgid "Set a descriptive name for the repository."
+msgstr "Ustawia nazwę opisową repozytorium."
+
+#: src/commands/reposerviceoptionsets.cc:74
+msgid "Enable a disabled service."
+msgstr "Włączenie wyłączonej usługi."
+
+#: src/commands/reposerviceoptionsets.cc:74
+msgid "Enable a disabled repository."
+msgstr "Włącza repozytorium."
+
+#: src/commands/reposerviceoptionsets.cc:77
+msgid "Disable the service (but don't remove it)."
+msgstr "Wyłączenie usługi bez jej usunięcia."
+
+#: src/commands/reposerviceoptionsets.cc:77
+msgid "Disable the repository (but don't remove it)."
+msgstr "Wyłącza repozytorium bez usuwania go."
+
+#: src/commands/reposerviceoptionsets.cc:80
+msgid "Enable auto-refresh of the service."
+msgstr "Włączenie automatycznego odświeżania usługi."
+
+#: src/commands/reposerviceoptionsets.cc:80
+msgid "Enable auto-refresh of the repository."
+msgstr "Włącza automatyczne odświeżanie repozytorium."
+
+#: src/commands/reposerviceoptionsets.cc:83
+msgid "Disable auto-refresh of the service."
+msgstr "Wyłączenie automatycznego odświeżania usługi."
+
+#: src/commands/reposerviceoptionsets.cc:83
+msgid "Disable auto-refresh of the repository."
+msgstr "Wyłącza automatyczne odświeżanie repozytorium."
+
 #: src/commands/reposerviceoptionsets.cc:110
 msgid "Apply changes to all services."
 msgstr "Zastosowanie zmian do wszystkich usług."
+
+#: src/commands/reposerviceoptionsets.cc:110
+msgid "Apply changes to all repositories."
+msgstr "Stosuje zmiany do wszystkich repozytoriów."
 
 #: src/commands/reposerviceoptionsets.cc:113
 msgid "Apply changes to all local services."
 msgstr "Zastosowanie zmian do usług lokalnych."
 
+#: src/commands/reposerviceoptionsets.cc:113
+msgid "Apply changes to all local repositories."
+msgstr "Stosuje zmiany do wszystkich repozytoriów lokalnych."
+
 #: src/commands/reposerviceoptionsets.cc:116
 msgid "Apply changes to all remote services."
 msgstr "Zastosowanie zmian do wszystkich usług zdalnych."
 
+#: src/commands/reposerviceoptionsets.cc:116
+msgid "Apply changes to all remote repositories."
+msgstr "Stosuje zmiany do wszystkich repozytoriów zdalnych."
+
 #: src/commands/reposerviceoptionsets.cc:119
 msgid "Apply changes to services of specified type."
 msgstr "Zastosowanie zmian do usług określonego typu."
+
+#: src/commands/reposerviceoptionsets.cc:119
+msgid "Apply changes to repositories of specified type."
+msgstr "Stosuje zmiany do repozytoriów określonego typu."
+
+#: src/commands/reposerviceoptionsets.cc:135
+msgid "Set priority of the repository."
+msgstr "Ustawia priorytet repozytorium."
+
+#: src/commands/reposerviceoptionsets.cc:136
+msgid "Enable RPM files caching."
+msgstr "Włącza przechowywanie plików RPM w lokalnym buforze."
+
+#: src/commands/reposerviceoptionsets.cc:137
+msgid "Disable RPM files caching."
+msgstr "Wyłącza przechowywanie pakietów RPM w lokalnym buforze."
+
+#: src/commands/reposerviceoptionsets.cc:138
+msgid "Enable GPG check for this repository."
+msgstr "Włącza sprawdzanie GPG tego repozytorium."
+
+#: src/commands/reposerviceoptionsets.cc:139
+msgid "Enable strict GPG check for this repository."
+msgstr "Włącza dokładne sprawdzanie GPG tego repozytorium."
+
+#: src/commands/reposerviceoptionsets.cc:140
+#, boost-format
+msgid "Short hand for '%1%'."
+msgstr "Skrót dla '%1%'."
+
+#: src/commands/reposerviceoptionsets.cc:141
+msgid "Enable GPG check but allow the repository metadata to be unsigned."
+msgstr ""
+"Włącza sprawdzanie GPG tego repozytorium ale pozwala aby metadane były "
+"niepodpisane."
+
+#: src/commands/reposerviceoptionsets.cc:142
+msgid ""
+"Enable GPG check but allow installing unsigned packages from this repository."
+msgstr ""
+"Włącza sprawdzanie GPG tego repozytorium ale pozwala na instalowanie "
+"niepodpisanych pakietów."
+
+#: src/commands/reposerviceoptionsets.cc:143
+msgid "Disable GPG check for this repository."
+msgstr "Wyłącza sprawdzanie GPG tego repozytorium."
+
+#: src/commands/reposerviceoptionsets.cc:144
+msgid ""
+"Use the global GPG check setting defined in /etc/zypp/zypp.conf. This is the "
+"default."
+msgstr ""
+"Używa globalnego ustawienia sprawdzania GPG, zdefiniowanego w /etc/zypp/zypp."
+"conf. Jest to wartość domyślna."
 
 #. translators: -a, --alias
 #: src/commands/reposerviceoptionsets.cc:180
@@ -4510,6 +4013,160 @@ msgstr ""
 msgid "Run '%1%' to search in not yet activated remote resources."
 msgstr ""
 
+#. translators: command summary: search, se
+#: src/commands/search/search.cc:73
+msgid "Search for packages matching a pattern."
+msgstr "Wyszukiwanie pakietów pasujących do wzorca."
+
+#. translators: command synopsis; do not translate lowercase words
+#: src/commands/search/search.cc:81
+msgid "search (se) [OPTIONS] [QUERYSTRING] ..."
+msgstr "search (se) [opcje] [zapytanie] ... "
+
+#. translators: command synopsis; do not translate lowercase words
+#: src/commands/search/search.cc:86
+msgid "patch-search [OPTIONS] [QUERYSTRING...]"
+msgstr "patch-search [opcje] [wzorzec wyszukiwania...]"
+
+#. translators: command description
+#: src/commands/search/search.cc:95
+msgid "Search for packages matching any of the given search strings."
+msgstr "Wyszukuje pakiety pasujące do podanych fraz."
+
+#. translators: command description
+#: src/commands/search/search.cc:97
+msgid ""
+"* and ? wildcards can also be used within search strings. If a search string "
+"is enclosed in '/', it's interpreted as a regular expression."
+msgstr ""
+"Znaki specjalne * oraz ? mogą być używane wewnątrz fraz wyszukiwania. "
+"Łańcuch wyszukiwania zawarty miedzy znakami / jest interpretowany jako "
+"wyrażenie regularne."
+
+#. translators: command description
+#: src/commands/search/search.cc:102
+msgid "Search for patches matching given search strings."
+msgstr "Wyszukuje poprawki zawierające dany wzorzec wyszukiwania."
+
+#. translators: --match-substrings
+#: src/commands/search/search.cc:113
+msgid "Search for a match to partial words (default)."
+msgstr "Wyszukuje dopasowania, które są fragmentami słów (domyślnie)."
+
+#. translators: --match-words
+#: src/commands/search/search.cc:117
+msgid "Search for a match to whole words only."
+msgstr "Wyszukuje dopasowania, które są pełnymi słowami."
+
+#. translators: -x, --match-exact
+#: src/commands/search/search.cc:121
+msgid "Searches for an exact match of the search strings."
+msgstr "Wyszukuje dopasowania, które są dokładnie takie jak podana fraza."
+
+#. translators: --provides
+#: src/commands/search/search.cc:133
+msgid "Search for packages which provide the search strings."
+msgstr "Wyszukuje pakiety, które udostępniają pakiety z wyszukiwaną frazą."
+
+#. translators: --requires
+#: src/commands/search/search.cc:137
+msgid "Search for packages which require the search strings."
+msgstr "Wyszukuje pakiety, które wymagają pakietów z wyszukiwaną frazą."
+
+#. translators: --recommends
+#: src/commands/search/search.cc:141
+msgid "Search for packages which recommend the search strings."
+msgstr "Wyszukuje pakiety, które zalecają pakiety z wyszukiwaną frazą."
+
+#. translators: --supplements
+#: src/commands/search/search.cc:145
+msgid "Search for packages which supplement the search strings."
+msgstr ""
+
+#. translators: --conflicts
+#: src/commands/search/search.cc:149
+msgid "Search packages conflicting with search strings."
+msgstr "Wyszukuje pakiety w konflikcie z pakietami z wyszukiwaną frazą."
+
+#. translators: --obsoletes
+#: src/commands/search/search.cc:153
+msgid "Search for packages which obsolete the search strings."
+msgstr "Wyszukuje pakiety, które dezaktualizują pakiety z wyszukiwaną frazą."
+
+#. translators: --suggests
+#: src/commands/search/search.cc:157
+msgid "Search for packages which suggest the search strings."
+msgstr "Wyszukuje pakiety, które proponują pakiety z wyszukiwaną frazą."
+
+#. translators: -t, --type <TYPE>
+#: src/commands/search/search.cc:161
+msgid "Search only for packages of the specified type."
+msgstr "Pokazuje tylko pakietów określonego typu."
+
+#. translators: -n, --name
+#: src/commands/search/search.cc:165
+msgid ""
+"Useful together with dependency options, otherwise searching in package name "
+"is default."
+msgstr ""
+"Przydatne wraz z opcjami powiązanymi z zależnościami. W innych przypadkach "
+"wyszukiwanie w nazwach pakietów jest domyślne."
+
+#. translators: -f, --file-list
+#: src/commands/search/search.cc:169
+msgid "Search for a match in the file list of packages."
+msgstr "Wyszukuje w ramach listy plików pakietów."
+
+#. translators: -d, --search-descriptions
+#: src/commands/search/search.cc:178
+msgid "Search also in package summaries and descriptions."
+msgstr "Wyszukuje również w podsumowaniu i opisach pakietów."
+
+#. translators: -C, --case-sensitive
+#: src/commands/search/search.cc:182
+msgid "Perform case-sensitive search."
+msgstr "Rozróżnianie wielkości liter."
+
+#. translators: -s, --details
+#: src/commands/search/search.cc:191
+msgid "Show each available version in each repository on a separate line."
+msgstr ""
+"Wyświetla każdą dostępną wersję w każdym repozytorium w oddzielnych "
+"wierszach."
+
+#. translators: -v, --verbose
+#: src/commands/search/search.cc:195
+msgid ""
+"Like --details, with additional information where the search has matched "
+"(useful for search in dependencies)."
+msgstr ""
+"Podobnie jak --details, ale dodaje informację o miejscu znalezienia frazy "
+"(przydatne podczas wyszukiwania zależności)."
+
+#: src/commands/search/search.cc:289 src/repos.cc:773
+#, c-format, boost-format
+msgid "Specified repository '%s' is disabled."
+msgstr "Określone repozytorium '%s' jest wyłączone."
+
+#. translators: empty search result message
+#: src/commands/search/search.cc:414
+msgid "No matching items found."
+msgstr "Nie znaleziono pasujących elementów."
+
+#: src/commands/search/search.cc:449
+msgid "Problem occurred initializing or executing the search query"
+msgstr "Wystąpił problem z inicjalizacją lub wykonaniem zapytania"
+
+#: src/commands/search/search.cc:450
+msgid "See the above message for a hint."
+msgstr "Wskazówki można znaleźć w powyższym komunikacie."
+
+#: src/commands/search/search.cc:451 src/repos.cc:994
+msgid "Running 'zypper refresh' as root might resolve the problem."
+msgstr ""
+"Uruchomienie polecenia 'zypper refresh' z uprawnieniami użytkownika root "
+"może rozwiązać problem."
+
 #. translators: -g, --category <CATEGORY>
 #: src/commands/selectpatchoptionset.cc:24
 msgid "Select patches with the specified category."
@@ -4561,6 +4218,10 @@ msgstr "Dodano usługę '%s'."
 msgid "addservice (as) [OPTIONS] <URI> <ALIAS>"
 msgstr "addservice (as) [opcje] <URI> <alias>"
 
+#: src/commands/services/add.cc:103
+msgid "Add a new service."
+msgstr "Dodanie nowej usługi."
+
 #: src/commands/services/add.cc:104
 msgid "Add a repository index service to the system."
 msgstr "Dodaje do systemu usługę indeksowania repozytorium."
@@ -4610,6 +4271,10 @@ msgstr "Usunięto usługę '%s'."
 msgid "services (ls) [OPTIONS]"
 msgstr "services (ls) [opcje]"
 
+#: src/commands/services/list.cc:82
+msgid "List all defined services."
+msgstr "Wyświetlanie wszystkich zdefiniowanych usług."
+
 #: src/commands/services/list.cc:83
 msgid "List defined services."
 msgstr "Wyświetla zdefiniowane usługi."
@@ -4630,6 +4295,10 @@ msgstr "modifyservice (ms) <opcje> <alias|#|URI>"
 #, boost-format
 msgid "modifyservice (ms) <OPTIONS> <%1%>"
 msgstr "modifyservice (ms) <opcje> <%1%>"
+
+#: src/commands/services/modify.cc:22
+msgid "Modify specified service."
+msgstr "Modyfikacja wybranej usługi."
 
 #: src/commands/services/modify.cc:23
 #, boost-format
@@ -4786,6 +4455,10 @@ msgstr "Należy użyć '%s', aby uzyskać listę zdefiniowanych usług."
 msgid "refresh-services (refs) [OPTIONS]"
 msgstr "refresh-services (refs) [opcje]"
 
+#: src/commands/services/refresh.cc:96
+msgid "Refresh all services."
+msgstr "Odświeżenie wszystkich usług."
+
 #: src/commands/services/refresh.cc:97
 msgid "Refresh defined repository index services."
 msgstr "Odświeża zdefiniowane usługi indeksowania repozytorium."
@@ -4836,6 +4509,10 @@ msgstr "Odświeżono wszystkie usługi."
 msgid "removeservice (rs) [OPTIONS] <ALIAS|#|URI>"
 msgstr "removeservice (rs) [opcje] <alias|#|URI>"
 
+#: src/commands/services/remove.cc:21
+msgid "Remove specified service."
+msgstr "Usunięcie wybranej usługi."
+
 #: src/commands/services/remove.cc:22
 msgid "Remove specified repository index service from the system."
 msgstr "Usuwa określoną usługę indeksu repozytorium (RIS) z systemu."
@@ -4848,13 +4525,92 @@ msgid "Service '%s' not found by alias, number or URI."
 msgstr ""
 "Nie odnaleziono usługi '%s' na podstawie aliasu, numeru ani adresu URI."
 
+#. translators: command synopsis; do not translate lowercase words
+#: src/commands/shell.cc:20
+msgid "shell (sh)"
+msgstr ""
+
+#. translators: command summary: shell, sh
+#: src/commands/shell.cc:22
+msgid "Accept multiple commands at once."
+msgstr "Akceptuje wiele poleceń na raz."
+
+#. translators: command description
+#: src/commands/shell.cc:24
+msgid "Enter the zypper command shell."
+msgstr "Uruchomienie powłoki w programie zypper."
+
+#: src/commands/shell.cc:40
+msgid "You already are running zypper's shell."
+msgstr "Powłoka programu zypper jest już uruchomiona."
+
+#. translators: command synopsis; do not translate lowercase words
+#: src/commands/shell.cc:54
+msgid "quit (exit, ^D)"
+msgstr ""
+
+#. translators: command description
+#: src/commands/shell.cc:56 src/commands/shell.cc:58
+msgid "Quit the current zypper shell."
+msgstr "Opuszcza bieżącą powłokę zypper."
+
+#: src/commands/shell.cc:76
+msgid "This command only makes sense in the zypper shell."
+msgstr "To polecenie ma sens jedynie w powłoce programu zypper."
+
 #: src/commands/solveroptionset.cc:16 src/commands/solveroptionset.cc:39
 msgid "Solver options"
 msgstr ""
 
+#: src/commands/solveroptionset.cc:18
+msgid "Install also recommended packages in addition to the required ones."
+msgstr "Instalowanie również pakietów zalecanych dodatkowo do wymaganych."
+
+#: src/commands/solveroptionset.cc:19
+msgid "Do not install recommended packages, only required ones."
+msgstr "Instalowanie wyłącznie pakietów wymaganych, bez zalecanych."
+
+#: src/commands/solveroptionset.cc:41
+msgid "Create a solver test case for debugging."
+msgstr "Tworzenie testu rozwiązywania zależności do debugowania."
+
+#: src/commands/solveroptionset.cc:42
+msgid ""
+"Force the solver to find a solution (even an aggressive one) rather than "
+"asking."
+msgstr ""
+"Wymuszenie znalezienia rozwiązania przez mechanizm rozwiązujący (nawet "
+"zdecydowanego)."
+
+#: src/commands/solveroptionset.cc:43
+msgid "Do not force the solver to find solution, let it ask."
+msgstr ""
+"Bez wymuszania znalezienia rozwiązania zależności przez mechanizm "
+"rozwiązujący, zostaną zdane pytania."
+
 #: src/commands/solveroptionset.cc:63
 msgid "Expert options"
 msgstr ""
+
+#: src/commands/solveroptionset.cc:66
+msgid "Whether to allow downgrading installed resolvables."
+msgstr ""
+"Czy zezwalać na przywracanie wcześniejszych wersji zainstalowanych obiektów "
+"rozstrzygalnych."
+
+#: src/commands/solveroptionset.cc:68
+msgid "Whether to allow changing the names of installed resolvables."
+msgstr "Czy zezwalać na zmianę nazw zainstalowanych obiektów rozstrzygalnych."
+
+#: src/commands/solveroptionset.cc:70
+msgid "Whether to allow changing the architecture of installed resolvables."
+msgstr ""
+"Czy zezwalać na zmianę architektury zainstalowanych obiektów rozstrzygalnych."
+
+#: src/commands/solveroptionset.cc:72
+msgid "Whether to allow changing the vendor of installed resolvables."
+msgstr ""
+"Czy zezwalać na zmianę dostawcy zainstalowanych obiektów rozstrzygalnych."
 
 #. translators: -u, --clean-deps
 #: src/commands/solveroptionset.cc:96
@@ -4870,6 +4626,11 @@ msgstr "Bez automatycznego usuwania niepotrzebnych zależności."
 #: src/commands/sourceinstall.cc:20
 msgid "source-install (si) [OPTIONS] <NAME> ..."
 msgstr "source-install (si) [opcje] <nazwa> ..."
+
+#. translators: command summary: source-install, si
+#: src/commands/sourceinstall.cc:22
+msgid "Install source packages and their build dependencies."
+msgstr "Instalacja pakietów źródłowych i ich zależności kompilacji."
 
 #. translators: command description
 #: src/commands/sourceinstall.cc:24
@@ -4901,10 +4662,140 @@ msgstr "Nie instaluje pakietów źródłowych."
 msgid "Source package name is a required argument."
 msgstr "Nazwa pakietu źródłowego jest wymaganym parametrem."
 
+#: src/commands/subcommand.cc:51
+msgid "none"
+msgstr "brak"
+
+#: src/commands/subcommand.cc:295
+#, boost-format
+msgid "cannot exec %1% (%2%)"
+msgstr "nie można uruchomić %1% (%2%)"
+
+#. translators: %1% - command name or path
+#. translators: %2% - system error message
+#: src/commands/subcommand.cc:304
+#, boost-format
+msgid "fork for %1% failed (%2%)"
+msgstr "odgałęzienie dla %1% nie powiodło się (%2%)"
+
+#. translators: %1% - command name or path
+#. translators: %2% - system error message
+#: src/commands/subcommand.cc:323
+#, boost-format
+msgid "waitpid for %1% failed (%2%)"
+msgstr "waitpid dla %1% nie powiodło się (%2%)"
+
+#. translators: %1% - command name or path
+#. translators: %2% - returned PID (number)
+#. translators: %3% - expected PID (number)
+#: src/commands/subcommand.cc:333
+#, boost-format
+msgid "waitpid for %1% returns unexpected pid %2% while waiting for %3%"
+msgstr ""
+"waitpid dla %1% zwraca nieoczekiwany identyfikator PID %2% oczekując na %3%"
+
+#. translators: %1% - command name or path
+#. translators: %2% - signal number
+#. translators: %3% - signal name
+#: src/commands/subcommand.cc:344
+#, boost-format
+msgid "%1% was killed by signal %2% (%3%)"
+msgstr "%1% zamknięty przez sygnał %2% (%3%)"
+
+#: src/commands/subcommand.cc:348
+msgid "core dumped"
+msgstr "wykonano zrzut pliku core"
+
+#. translators: %1% - command name or path
+#. translators: %2% - exit code (number)
+#: src/commands/subcommand.cc:358
+#, boost-format
+msgid "%1% exited with status %2%"
+msgstr "%1% zakończył działanie ze stanem %2%"
+
+#. translators: %1% - command name or path
+#. translators: %2% - status (number)
+#: src/commands/subcommand.cc:373
+#, boost-format
+msgid "waitpid for %1% returns unexpected exit status %2%"
+msgstr "waitpid dla %1% zwraca nieoczekiwany stan zakończenia %2%"
+
+#: src/commands/subcommand.cc:406
+#, boost-format
+msgid ""
+"Zypper subcommands are standalone executables that live in the\n"
+"zypper_execdir ('%1%').\n"
+"\n"
+"For subcommands zypper provides a wrapper that knows where the\n"
+"subcommands live, and runs them by passing command-line arguments\n"
+"to them.\n"
+"\n"
+"If a subcommand is not found in the zypper_execdir, the wrapper\n"
+"will look in the rest of your $PATH for it. Thus, it's possible\n"
+"to write local zypper extensions that don't live in system space.\n"
+msgstr ""
+"Podpolecenia zypper to autonomiczne pliki wykonywalne znajdujące się w "
+"katalogu\n"
+"zypper_execdir ('%1%').\n"
+"\n"
+"Dla podpoleceń zypper udostępnia hermetyzator, który wie,\n"
+"gdzie znajdują się podpolecenia, i uruchamia je,\n"
+"przekazując im argumenty wiersza polecenia.\n"
+"\n"
+"Jeśli podpolecenie nie zostało znalezione w katalogu zypper_execdir, "
+"hermetyzator\n"
+"będzie szukać go w kolejnych ścieżkach zmiennej $PATH. Zatem jest możliwe\n"
+"napisanie lokalnych rozszerzeń zypper, które nie znajdują się w przestrzeni "
+"systemu.\n"
+
+#: src/commands/subcommand.cc:421
+#, boost-format
+msgid ""
+"Using zypper global-options together with subcommands, as well as\n"
+"executing subcommands in '%1%' is currently not supported.\n"
+msgstr ""
+"Korzystanie z opcji globalnych zypper wraz z podpoleceniami\n"
+"a także uruchamianie podpoleceń w %1% nie jest obecnie obsługiwane.\n"
+
+#. translators: headline of an enumeration; %1% is a directory name
+#: src/commands/subcommand.cc:438
+#, boost-format
+msgid "Available zypper subcommands in '%1%'"
+msgstr "Podpolecenia zypper dostępne w %1%"
+
+#. translators: headline of an enumeration
+#: src/commands/subcommand.cc:443
+msgid "Zypper subcommands available from elsewhere on your $PATH"
+msgstr "Podpolecenia zypper dostępne z zewnątrz w ścieżce $PATH"
+
+#. translators: helptext; %1% is a zypper command
+#: src/commands/subcommand.cc:448
+#, boost-format
+msgid "Type '%1%' to get subcommand-specific help if available."
+msgstr ""
+"Wpisz %1%, aby uzyskać pomoc dotyczącą danego podpolecenia, jeśli jest "
+"dostępna."
+
+#. translators: %1% - command name
+#: src/commands/subcommand.cc:471
+#, boost-format
+msgid "Manual entry for %1% can't be shown"
+msgstr "Nie można wyświetlić ręcznego wpisu w %1%"
+
+#. translators: command summary: subcommand
+#: src/commands/subcommand.cc:484
+msgid "Lists available subcommands."
+msgstr "Wyświetla listę dostępnych podpoleceń."
+
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/update.cc:22
 msgid "update (up) [OPTIONS] [PACKAGENAME] ..."
 msgstr ""
+
+#. translators: command summary: update, up
+#: src/commands/update.cc:24
+msgid "Update installed packages with newer versions."
+msgstr "Aktualizacja zainstalowanych pakietów ich nowszymi wersjami."
 
 #. translators: command description
 #: src/commands/update.cc:26
@@ -4948,6 +4839,11 @@ msgstr "Brak wystarczających uprawnień do użycia katalogu pobierania '%s'."
 #: src/commands/utils/download.cc:144
 msgid "download [OPTIONS] <PACKAGES>..."
 msgstr "download [opcje] <pakiety>..."
+
+#. translators: command summary: download
+#: src/commands/utils/download.cc:146
+msgid "Download rpms specified on the commandline to a local directory."
+msgstr "Pobranie plików rpm podanych w wierszu poleceń do katalogu lokalnego."
 
 #. translators: command description
 #: src/commands/utils/download.cc:150
@@ -5019,6 +4915,12 @@ msgstr "Pakiet '%s' nie jest pobierany."
 #: src/commands/utils/licenses.cc:19
 msgid "licenses"
 msgstr "licencje"
+
+#. translators: command summary: licenses
+#: src/commands/utils/licenses.cc:21
+msgid "Print report about licenses and EULAs of installed packages."
+msgstr ""
+"Wyświetlenie raportu o licencjach i umowach EULA zainstalowanych pakietów."
 
 #. translators: command description
 #: src/commands/utils/licenses.cc:23
@@ -5119,6 +5021,15 @@ msgstr "Błąd podczas pobierania pakietu źródłowego '%s'."
 msgid "No source packages to download."
 msgstr "Brak pakietów źródłowych do pobrania."
 
+#. translators: command summary: source-download
+#. translators: command description
+#: src/commands/utils/source-download.cc:482
+#: src/commands/utils/source-download.cc:484
+msgid "Download source rpms for all installed packages to a local directory."
+msgstr ""
+"Pobieranie do lokalnego katalogu źródłowych pakietów rpm dla wszystkich "
+"zainstalowanych pakietów "
+
 #. translators: -d, --directory <DIR>
 #: src/commands/utils/source-download.cc:496
 msgid ""
@@ -5158,6 +5069,11 @@ msgstr ""
 msgid "targetos (tos) [OPTIONS]"
 msgstr "targetos (tos) [opcje]"
 
+#. translators: command summary: targetos, tos
+#: src/commands/utils/targetos.cc:22
+msgid "Print the target operating system ID string."
+msgstr "Wyświetlenie łańcucha ID docelowego systemu operacyjnego."
+
 #. translators: command description
 #: src/commands/utils/targetos.cc:24
 msgid ""
@@ -5189,6 +5105,11 @@ msgstr "Nazwa skrócona: %s"
 #: src/commands/utils/versioncmp.cc:19
 msgid "versioncmp (vcmp) <VERSION1> <VERSION2>"
 msgstr "versioncmp (vcmp) <wersja1> <wersja2>"
+
+#. translators: command summary
+#: src/commands/utils/versioncmp.cc:21
+msgid "Compare two version strings."
+msgstr "Porównanie dwóch łańcuchów wersji."
 
 #. translators: command description
 #: src/commands/utils/versioncmp.cc:23
@@ -6995,6 +6916,128 @@ msgstr ""
 "\n"
 "To polecenie ma fikcyjną implementację, która zawsze zwraca 0.\n"
 
+#: src/legacy_strings.cc:785
+msgid ""
+"search (se) [OPTIONS] [querystring] ...\n"
+"\n"
+"Search for packages matching any of the given search strings.\n"
+"\n"
+"  Command options:\n"
+"    --match-substrings     Search for a match to partial words (default).\n"
+"    --match-words          Search for a match to whole words only.\n"
+"-x, --match-exact          Searches for an exact match of the search "
+"strings.\n"
+"    --provides             Search for packages which provide the search "
+"strings.\n"
+"    --recommends           Search for packages which recommend the search "
+"strings.\n"
+"    --requires             Search for packages which require the search "
+"strings.\n"
+"    --suggests             Search for packages which suggest the search "
+"strings.\n"
+"    --conflicts            Search packages conflicting with search strings.\n"
+"    --obsoletes            Search for packages which obsolete the search "
+"strings.\n"
+"-n, --name                 Useful together with dependency options, "
+"otherwise\n"
+"                           searching in package name is default.\n"
+"-f, --file-list            Search for a match in the file list of packages.\n"
+"-d, --search-descriptions  Search also in package summaries and "
+"descriptions.\n"
+"-C, --case-sensitive       Perform case-sensitive search.\n"
+"-i, --installed-only       Show only installed packages.\n"
+"-u, --not-installed-only   Show only packages which are not installed.\n"
+"-t, --type <type>          Search only for packages of the specified type.\n"
+"-r, --repo <alias|#|URI>   Search only in the specified repository.\n"
+"    --sort-by-name         Sort packages by name (default).\n"
+"    --sort-by-repo         Sort packages by repository.\n"
+"-s, --details              Show each available version in each repository\n"
+"                           on a separate line.\n"
+"-v, --verbose              Like --details, with additional information where "
+"the\n"
+"                           search has matched (useful for search in "
+"dependencies).\n"
+"\n"
+"* and ? wildcards can also be used within search strings.\n"
+"If a search string is enclosed in '/', it's interpreted as a regular "
+"expression.\n"
+msgstr ""
+"search (se) [opcje] [zapytanie] ... \n"
+"\n"
+"Wyszukuje pakiety pasujące do podanych fraz.\n"
+"\n"
+"  Opcje polecenia:\n"
+"    --match-substrings     Wyszukuje dopasowania, które są fragmentami słów "
+"(domyślnie).\n"
+"    --match-words          Wyszukuje dopasowania, które są pełnymi słowami.\n"
+"-x, --match-exact          Wyszukuje dopasowania, które są dokładnie takie "
+"jak podana fraza.\n"
+"    --provides             Wyszukuje pakiety, które udostępniają pakiety z "
+"wyszukiwaną frazą.\n"
+"    --recommends           Wyszukuje pakiety, które zalecają pakiety z "
+"wyszukiwaną frazą.\n"
+"    --requires             Wyszukuje pakiety, które wymagają pakietów z "
+"wyszukiwaną frazą.\n"
+"    --suggests             Wyszukuje pakiety, które proponują pakiety z "
+"wyszukiwaną frazą.\n"
+"    --conflicts            Wyszukuje pakiety w konflikcie z pakietami z "
+"wyszukiwaną frazą.\n"
+"    --obsoletes            Wyszukuje pakiety, które dezaktualizują pakiety z "
+"wyszukiwaną frazą.\n"
+"-n, --name                 Przydatne wraz z opcjami powiązanymi z "
+"zależnościami. W innych\n"
+"                           przypadkach wyszukiwanie w nazwach pakietów jest "
+"domyślne.\n"
+"-f, --file-list            Wyszukuje w ramach listy plików pakietów.\n"
+"-d, --search-descriptions  Wyszukuje również w podsumowaniu i opisach "
+"pakietów.\n"
+"-C, --case-sensitive       Rozróżnianie wielkości liter.\n"
+"-i, --installed-only       Pokazuje tylko pakiety, które są już "
+"zainstalowane.\n"
+"-u, --not-installed-only   Pokazuje tylko pakiety, które nie są aktualnie "
+"zainstalowane.\n"
+"-t, --type <typ>           Pokazuje tylko pakietów określonego typu.\n"
+"-r, --repo <alias|#|URI>   Wyszukuje tylko w określonym repozytorium.\n"
+"    --sort-by-name         Sortuje pakiety wg nazwy (domyślnie).\n"
+"    --sort-by-repo         Sortuje pakiety według repozytorium.\n"
+"-s, --details              Wyświetla każdą dostępną wersję w każdym "
+"repozytorium\n"
+"                           w oddzielnych wierszach.\n"
+"-v, --verbose              Podobnie jak --details, ale dodaje informację o "
+"miejscu\n"
+"                           znalezienia frazy (przydatne podczas wyszukiwania "
+"zależności).\n"
+"\n"
+"Znaki specjalne * oraz ? mogą być używane wewnątrz fraz wyszukiwania.\n"
+"Łańcuch wyszukiwania zawarty miedzy znakami / jest interpretowany jako "
+"wyrażenie regularne.\n"
+
+#: src/legacy_strings.cc:820
+msgid ""
+"quit (exit, ^D)\n"
+"\n"
+"Quit the current zypper shell.\n"
+"\n"
+"This command has no additional options.\n"
+msgstr ""
+"quit (exit, ^D)\n"
+"\n"
+"Opuszcza bieżącą powłokę zypper.\n"
+"\n"
+"Polecenie nie ma dodatkowych opcji.\n"
+
+#: src/legacy_strings.cc:827
+msgid "Print help."
+msgstr "Wyświetla pomoc."
+
+#: src/legacy_strings.cc:828
+msgid "Repository Options:"
+msgstr "Opcje repozytoriów:"
+
+#: src/legacy_strings.cc:829
+msgid "Target Options:"
+msgstr "Opcje obiektu docelowego:"
+
 #. translators: this will show up if you press ctrl+c twice
 #: src/main.cc:31
 msgid "OK OK! Exiting immediately..."
@@ -8010,126 +8053,6 @@ msgstr ""
 msgid "Dependencies of all installed packages are satisfied."
 msgstr "Brak konfliktów zależności."
 
-#: src/subcommand.cc:51
-msgid "none"
-msgstr "brak"
-
-#: src/subcommand.cc:295
-#, boost-format
-msgid "cannot exec %1% (%2%)"
-msgstr "nie można uruchomić %1% (%2%)"
-
-#. translators: %1% - command name or path
-#. translators: %2% - system error message
-#: src/subcommand.cc:304
-#, boost-format
-msgid "fork for %1% failed (%2%)"
-msgstr "odgałęzienie dla %1% nie powiodło się (%2%)"
-
-#. translators: %1% - command name or path
-#. translators: %2% - system error message
-#: src/subcommand.cc:323
-#, boost-format
-msgid "waitpid for %1% failed (%2%)"
-msgstr "waitpid dla %1% nie powiodło się (%2%)"
-
-#. translators: %1% - command name or path
-#. translators: %2% - returned PID (number)
-#. translators: %3% - expected PID (number)
-#: src/subcommand.cc:333
-#, boost-format
-msgid "waitpid for %1% returns unexpected pid %2% while waiting for %3%"
-msgstr ""
-"waitpid dla %1% zwraca nieoczekiwany identyfikator PID %2% oczekując na %3%"
-
-#. translators: %1% - command name or path
-#. translators: %2% - signal number
-#. translators: %3% - signal name
-#: src/subcommand.cc:344
-#, boost-format
-msgid "%1% was killed by signal %2% (%3%)"
-msgstr "%1% zamknięty przez sygnał %2% (%3%)"
-
-#: src/subcommand.cc:348
-msgid "core dumped"
-msgstr "wykonano zrzut pliku core"
-
-#. translators: %1% - command name or path
-#. translators: %2% - exit code (number)
-#: src/subcommand.cc:358
-#, boost-format
-msgid "%1% exited with status %2%"
-msgstr "%1% zakończył działanie ze stanem %2%"
-
-#. translators: %1% - command name or path
-#. translators: %2% - status (number)
-#: src/subcommand.cc:373
-#, boost-format
-msgid "waitpid for %1% returns unexpected exit status %2%"
-msgstr "waitpid dla %1% zwraca nieoczekiwany stan zakończenia %2%"
-
-#: src/subcommand.cc:406
-#, boost-format
-msgid ""
-"Zypper subcommands are standalone executables that live in the\n"
-"zypper_execdir ('%1%').\n"
-"\n"
-"For subcommands zypper provides a wrapper that knows where the\n"
-"subcommands live, and runs them by passing command-line arguments\n"
-"to them.\n"
-"\n"
-"If a subcommand is not found in the zypper_execdir, the wrapper\n"
-"will look in the rest of your $PATH for it. Thus, it's possible\n"
-"to write local zypper extensions that don't live in system space.\n"
-msgstr ""
-"Podpolecenia zypper to autonomiczne pliki wykonywalne znajdujące się w "
-"katalogu\n"
-"zypper_execdir ('%1%').\n"
-"\n"
-"Dla podpoleceń zypper udostępnia hermetyzator, który wie,\n"
-"gdzie znajdują się podpolecenia, i uruchamia je,\n"
-"przekazując im argumenty wiersza polecenia.\n"
-"\n"
-"Jeśli podpolecenie nie zostało znalezione w katalogu zypper_execdir, "
-"hermetyzator\n"
-"będzie szukać go w kolejnych ścieżkach zmiennej $PATH. Zatem jest możliwe\n"
-"napisanie lokalnych rozszerzeń zypper, które nie znajdują się w przestrzeni "
-"systemu.\n"
-
-#: src/subcommand.cc:421
-#, boost-format
-msgid ""
-"Using zypper global-options together with subcommands, as well as\n"
-"executing subcommands in '%1%' is currently not supported.\n"
-msgstr ""
-"Korzystanie z opcji globalnych zypper wraz z podpoleceniami\n"
-"a także uruchamianie podpoleceń w %1% nie jest obecnie obsługiwane.\n"
-
-#. translators: headline of an enumeration; %1% is a directory name
-#: src/subcommand.cc:438
-#, boost-format
-msgid "Available zypper subcommands in '%1%'"
-msgstr "Podpolecenia zypper dostępne w %1%"
-
-#. translators: headline of an enumeration
-#: src/subcommand.cc:443
-msgid "Zypper subcommands available from elsewhere on your $PATH"
-msgstr "Podpolecenia zypper dostępne z zewnątrz w ścieżce $PATH"
-
-#. translators: helptext; %1% is a zypper command
-#: src/subcommand.cc:448
-#, boost-format
-msgid "Type '%1%' to get subcommand-specific help if available."
-msgstr ""
-"Wpisz %1%, aby uzyskać pomoc dotyczącą danego podpolecenia, jeśli jest "
-"dostępna."
-
-#. translators: %1% - command name
-#: src/subcommand.cc:471
-#, boost-format
-msgid "Manual entry for %1% can't be shown"
-msgstr "Nie można wyświetlić ręcznego wpisu w %1%"
-
 #. translator: stats table header (plural number is %2%)
 #: src/update.cc:212
 #, boost-format
@@ -8333,7 +8256,7 @@ msgstr ""
 msgid "The flag '%1%' can only be used a maximum of %2% times."
 msgstr ""
 
-#: src/utils/flags/flagtypes.cc:188
+#: src/utils/flags/flagtypes.cc:192
 #, c-format, boost-format
 msgid ""
 "Ignoring %s without argument because similar option with an argument has "
@@ -8342,11 +8265,11 @@ msgstr ""
 "Ignorowanie %s bez argumentów, ponieważ zaznaczono podobną opcję z "
 "argumentem."
 
-#: src/utils/flags/flagtypes.cc:228
+#: src/utils/flags/flagtypes.cc:232
 msgid "Out of range"
 msgstr ""
 
-#: src/utils/flags/flagtypes.cc:230
+#: src/utils/flags/flagtypes.cc:234
 #, boost-format
 msgid "Unknown error while assigning the value %1% to flag %2%."
 msgstr ""
@@ -8364,16 +8287,6 @@ msgstr "Nieznana opcja "
 #: src/utils/getopt.cc:98
 msgid "Missing argument for "
 msgstr "Brakujący parametr dla "
-
-#. translators: speaking of two mutually contradicting command line options
-#: src/utils/getopt.cc:123
-#, c-format, boost-format
-msgid ""
-"%s used together with %s, which contradict each other. This property will be "
-"left unchanged."
-msgstr ""
-"Użyto %s razem z %s, które się wykluczają. Własność ta pozostanie "
-"niezmieniona."
 
 #: src/utils/messages.cc:19
 msgid "Please file a bug report about this."
@@ -8425,6 +8338,37 @@ msgstr ""
 #, boost-format
 msgid "Legacy commandline option %1% detected. This option is ignored."
 msgstr "Wykryto starszą opcję wiersza polecenia %1. Ta opcja jest ignorowana."
+
+#. translators: %s is "help" or "zypper help" depending on whether
+#. zypper shell is running or not
+#: src/utils/messages.cc:135
+#, c-format, boost-format
+msgid "Type '%s' to get a list of global options and commands."
+msgstr ""
+"Wprowadź '%s', aby uzyskać listę wszystkich globalnych opcji i poleceń."
+
+#. translators: %1% is the name of an (unknown) command
+#. translators: %2% something providing more info (like 'zypper help subcommand')
+#. translators: The word 'subcommand' also refers to a zypper command and should not be translated.
+#: src/utils/messages.cc:142
+#, boost-format
+msgid ""
+"In case '%1%' is not a typo it's probably not a built-in command, but "
+"provided as a subcommand or plug-in (see '%2%')."
+msgstr ""
+"Jeśli w nazwie %1% nie ma literówki, nie jest to prawdopodobnie wbudowane "
+"polecenie, ale dostarczane jako podpolecenie lub wtyczka (zobacz %2%)."
+
+#. translators: %1% and %2% are plug-in packages which might provide it.
+#. translators: The word 'subcommand' also refers to a zypper command and should not be translated.
+#: src/utils/messages.cc:149
+#, boost-format
+msgid ""
+"In this case a specific package providing the subcommand needs to be "
+"installed first. Those packages are often named '%1%' or '%2%'."
+msgstr ""
+"W takim przypadku najpierw należy zainstalować konkretny pakiet "
+"udostępniający podpolecenie. Te pakiety często mają nazwę: %1% lub %2%."
 
 #: src/utils/misc.cc:91
 msgid "package"
@@ -8646,6 +8590,55 @@ msgstr "Nieprawidłowa odpowiedź '%s'."
 #, c-format, boost-format
 msgid "Enter '%s' for '%s' or '%s' for '%s' if nothing else works for you."
 msgstr "Wprowadź '%s' dla '%s' lub '%s' dla '%s', jeśli nic innego nie działa."
+
+#~ msgid "Finished with error."
+#~ msgstr "Proces zakończył się błędem."
+
+#~ msgid "Done."
+#~ msgstr "Ukończono."
+
+#~ msgid ""
+#~ "There is an update candidate for '%s', but it is from a different vendor. "
+#~ "Use '%s' to install this candidate."
+#~ msgstr ""
+#~ "Znaleziono potencjalną aktualizację '%s', ale pochodzi ona z innego "
+#~ "źródła. Należy użyć '%s', aby zainstalować tę aktualizację."
+
+#~ msgid "These options are mutually exclusive: %1%"
+#~ msgstr "Te opcje wzajemnie się wykluczają: %1%"
+
+#~ msgid "List needed patches."
+#~ msgstr "Wyświetlenie wymaganych poprawek."
+
+#~ msgid "Remove unused locks."
+#~ msgstr "Usuwa nieużywane blokady."
+
+#~ msgid "Use an integer number from %d to %d"
+#~ msgstr "Proszę użyć liczby całkowitej od %d do %d"
+
+#~ msgid "Search only in the specified repository."
+#~ msgstr "Wyszukuje tylko w określonym repozytorium."
+
+#~ msgid ""
+#~ "patch-search [OPTIONS] [querystring...]\n"
+#~ "\n"
+#~ "Search for patches matching given search strings. This is an alias for "
+#~ "'%s'.\n"
+#~ msgstr ""
+#~ "patch-search [opcje] [wzorzec wyszukiwania...]\n"
+#~ "\n"
+#~ "Wyszukuje poprawki zawierające dany wzorzec wyszukiwania. Jest to alias "
+#~ "dla %s.\n"
+
+#~ msgid "Unknown package type '%s'."
+#~ msgstr "Nieznany typ pakietu '%s'."
+
+#~ msgid ""
+#~ "%s used together with %s, which contradict each other. This property will "
+#~ "be left unchanged."
+#~ msgstr ""
+#~ "Użyto %s razem z %s, które się wykluczają. Własność ta pozostanie "
+#~ "niezmieniona."
 
 #~ msgid "Select packages by capability."
 #~ msgstr "Wybór pakietów według właściwości"
