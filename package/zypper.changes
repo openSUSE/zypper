@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Jan  8 15:11:19 CET 2019 - ma@suse.de
+
+- Fix wrong zypp::indeterminate use (bsc#1120463)
+- version 1.14.20
+
+-------------------------------------------------------------------
 Tue Dec 18 14:06:02 CET 2018 - ma@suse.de
 
 - CLI parser: fix broken initialization enforcing 'select by name'
