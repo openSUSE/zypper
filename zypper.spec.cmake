@@ -130,6 +130,12 @@ cmake -DCMAKE_INSTALL_PREFIX=%{_prefix} \
 #gettextize -f
 make %{?_smp_mflags}
 make -C po %{?_smp_mflags} translations
+make -C tests %{?_smp_mflags}
+
+%check
+pushd build/tests
+ctest .
+popd
 
 %install
 cd build
