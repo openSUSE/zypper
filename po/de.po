@@ -18,7 +18,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-12-18 13:53+0100\n"
 "PO-Revision-Date: 2019-01-10 18:52+0000\n"
-"Last-Translator: Pierre Böckmann <pb@crowbyte.org>\n"
+"Last-Translator: Sarah Kriesch <ada.lovelace@gmx.de>\n"
 "Language-Team: German <https://l10n.opensuse.org/projects/zypper/master/de/>"
 "\n"
 "Language: de\n"
@@ -4517,7 +4517,7 @@ msgstr "Selektiere die auf die spezifizierten CVE Issues anwendbaren Patches."
 #. translators: --cve
 #: src/commands/selectpatchoptionset.cc:50
 msgid "Select issues matching the specified string."
-msgstr "Selektiere Issues, die der spezifizierten Zeichenkette entsprechen."
+msgstr "Issues, die der spezifizierten Zeichenkette entsprechen, auswählen."
 
 #: src/commands/services/add.cc:55
 #, c-format, boost-format
