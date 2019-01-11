@@ -19,7 +19,6 @@
 #include <zypp/RepoInfo.h>
 
 #include <zypp/PoolQuery.h>
-#include <zypp/PoolItemBest.h>
 
 #include "Zypper.h"
 #include "main.h"
