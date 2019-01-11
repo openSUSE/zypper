@@ -28,7 +28,12 @@ namespace zypp
   /** PoolItemBest implementation. */
   struct PoolItemBest::Impl
   {
+    Impl( bool preferNotLocked_r )
+    : _preferNotLocked { preferNotLocked_r }
+    {}
+
     Container _container;
+    bool _preferNotLocked;
 
     private:
       friend Impl * rwcowClone<Impl>( const Impl * rhs );
@@ -44,8 +49,11 @@ namespace zypp
   //
   ///////////////////////////////////////////////////////////////////
 
+  void PoolItemBest::_ctor_init( bool preferNotLocked_r )
+  { _dont_use_this_use_pimpl.reset( new RWCOW_pointer<Impl>(new Impl( preferNotLocked_r )) ); }
+
   void PoolItemBest::_ctor_init()
-  { _dont_use_this_use_pimpl.reset( new RWCOW_pointer<Impl>(new Impl) ); }
+  { _ctor_init( /*preferNotLocked*/false ); }
 
   const PoolItemBest::Container & PoolItemBest::container() const
   { return pimpl()->_container; }
@@ -53,8 +61,24 @@ namespace zypp
   void PoolItemBest::add( const PoolItem & pi_r )
   {
     Container & container( pimpl()->_container );
+
     PoolItem & ccand( container[pi_r.satSolvable().ident()] );
-    if ( ! ccand || ui::SelectableTraits::AVOrder()( pi_r, ccand ) )
+    if ( ! ccand )
+      ccand = pi_r;
+    else if ( pimpl()->_preferNotLocked )
+    {
+      if ( ! pi_r.status().isLocked() )
+      {
+	if ( ccand.status().isLocked() || ui::SelectableTraits::AVOrder()( pi_r, ccand ) )
+	  ccand = pi_r;
+      }
+      else if ( ccand.status().isLocked() )
+      {
+	if ( ui::SelectableTraits::AVOrder()( pi_r, ccand ) )
+	  ccand = pi_r;
+      }
+    }
+    else if ( ui::SelectableTraits::AVOrder()( pi_r, ccand ) )
       ccand = pi_r;
   }
 

@@ -39,6 +39,9 @@ namespace zypp
    * sorts the \ref ui::Selectable list of available objects, thus follows the
    * same rules the \ref resolver will apply.
    *
+   * Ctor argument \ref preferNotLocked causes locked packages to be considered
+   * less than not locked packages.
+   *
    * \code
    *   PoolQuery q;
    *   q.addAttribute(sat::SolvAttr::name, "lib*");
@@ -70,22 +73,26 @@ namespace zypp
       typedef MapKVIteratorTraits<Container>::Key_const_iterator	ident_iterator;
 
     public:
+      /** Indicator argument for ctor: consider locked packages less than not locked packages. */
+      static constexpr bool preferNotLocked = true;
+
+    public:
       /** Default ctor. */
-      PoolItemBest()
-      { _ctor_init(); }
+      PoolItemBest( bool preferNotLocked_r = false )
+      { _ctor_init( preferNotLocked_r ); }
 
       /** Ctor feeding a \ref sat::Solvable. */
-      PoolItemBest( sat::Solvable slv_r )
-      { _ctor_init(); add( slv_r ); }
+      PoolItemBest( sat::Solvable slv_r, bool preferNotLocked_r = false )
+      { _ctor_init( preferNotLocked_r ); add( slv_r ); }
 
       /** Ctor feeding a \ref PoolItem. */
-      PoolItemBest( const PoolItem & pi_r )
-      { _ctor_init(); add( pi_r ); }
+      PoolItemBest( const PoolItem & pi_r, bool preferNotLocked_r = false )
+      { _ctor_init( preferNotLocked_r ); add( pi_r ); }
 
       /** Ctor feeding a range of  \ref sat::Solvable or \ref PoolItem. */
       template<class TIterator>
-      PoolItemBest( TIterator begin_r, TIterator end_r )
-      { _ctor_init(); add( begin_r, end_r ); }
+      PoolItemBest( TIterator begin_r, TIterator end_r, bool preferNotLocked_r = false )
+      { _ctor_init( preferNotLocked_r ); add( begin_r, end_r ); }
 
     public:
       /** Feed one \ref sat::Solvable. */
@@ -132,7 +139,8 @@ namespace zypp
       //@}
 
     private:
-      void _ctor_init();
+      void _ctor_init( bool preferNotLocked_r );
+      void _ctor_init(/*preferNotLocked = false*/);	///< bin.compat legacy
       const Container & container() const;
     private:
       /** Implementation  */
