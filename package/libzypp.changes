@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Fri Jan 11 10:24:33 CET 2019 - ma@suse.de
+
+- PoolItemBest: Optionally prefer not locked packages (for bsc#1113296)
+- ui::Selectable: add `hasLocks` to indicate a partially locked
+  item (for bsc#1113296)
+- version 17.11.0 (9)
+
+-------------------------------------------------------------------
 Tue Dec 18 14:01:19 CET 2018 - ma@suse.de
 
 - Simplify complex locks so zypper can display them (bsc#1112911)
