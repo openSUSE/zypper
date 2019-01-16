@@ -21,7 +21,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-01-08 15:15+0100\n"
-"PO-Revision-Date: 2018-12-11 16:10+0000\n"
+"PO-Revision-Date: 2019-01-17 05:31+0000\n"
 "Last-Translator: Aleš Kastner <alkas@volny.cz>\n"
 "Language-Team: Czech <https://l10n.opensuse.org/projects/zypper/master/cs/>\n"
 "Language: cs\n"
@@ -29,7 +29,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Weblate 2.18\n"
+"X-Generator: Weblate 3.3\n"
 
 #: src/SolverRequester.h:52
 #, boost-format
@@ -766,7 +766,7 @@ msgstr "Neplatný styl tabulky %d."
 #: src/Config.cc:54
 #, c-format, boost-format
 msgid " Use an integer number from %d to %d"
-msgstr ""
+msgstr " Zadejte celé číslo %d až %d"
 
 #: src/Config.cc:248
 msgid "The path specified in the --root option must be absolute."
@@ -870,6 +870,8 @@ msgstr "Ignorovat neznámé balíčky."
 msgid ""
 "Terse output for machine consumption. Implies --no-abbrev and --no-color."
 msgstr ""
+"--terse, -t - výstup pro spotřebu stroje. Zároveň nastaví  --no-abbrev a -no-"
+"color."
 
 #. translators: --reposd-dir, -D <DIR>
 #: src/Config.cc:487
@@ -1148,6 +1150,8 @@ msgid ""
 "There is an update candidate for '%s' from vendor '%s', while the current "
 "vendor is '%s'. Use '%s' to install this candidate."
 msgstr ""
+"Nový kandidát aktualizace produktu %s je od dodavatele '%s', ačkoli aktuální "
+"dodavatel je '%s'. K instalaci nového kandidáta použijte '%s'."
 
 #: src/RequestFeedback.cc:132
 #, c-format, boost-format
@@ -2368,7 +2372,7 @@ msgstr "Vybrat balíčky čistě podle jména, ne podle schopnosti."
 
 #: src/commands/installremove.cc:55
 msgid "Select packages solely by capability."
-msgstr ""
+msgstr "Vyberte balíčky výhradně podle schopností."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/installremove.cc:74
