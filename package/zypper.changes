@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Jan 16 14:35:40 CET 2019 - ma@suse.de
+
+- Fixed broken argument parsing for --reposd-dir (bsc#1122062)
+- version 1.14.21
+
+-------------------------------------------------------------------
 Tue Jan  8 15:11:19 CET 2019 - ma@suse.de
 
 - Fix wrong zypp::indeterminate use (bsc#1120463)
