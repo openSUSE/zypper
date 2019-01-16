@@ -482,7 +482,7 @@ std::vector<ZyppFlags::CommandGroup> Config::cliOptions()
       //start a new section of commands
       "", //unnamed section
       {
-        { "reposd-dir", 'D', ZyppFlags::NoArgument, ZyppFlags::PathNameType( rm_options.knownReposPath, boost::optional<std::string>(), ARG_DIR ),
+        { "reposd-dir", 'D', ZyppFlags::RequiredArgument, ZyppFlags::PathNameType( rm_options.knownReposPath, boost::optional<std::string>(), ARG_DIR ),
               // translators: --reposd-dir, -D <DIR>
               _("Use alternative repository definition file directory.")
         },
