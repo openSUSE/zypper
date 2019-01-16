@@ -262,7 +262,7 @@ int parseCLI( const int argc, char * const *argv, const std::vector<CommandGroup
   //build the dependency tree
   //the dependency tree, pointing to indices in the allOpts
   std::map< int, std::set<int> > dependencyTree;
-  for ( int i = 0; i < allOpts.size(); i++ ) {
+  for ( int i = 0; unsigned(i) < allOpts.size(); ++i ) {
     const CommandOption &opt = allOpts[i];
 
     std::set<int> myDeps;
