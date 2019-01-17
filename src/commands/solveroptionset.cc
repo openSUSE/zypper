@@ -91,11 +91,11 @@ std::vector<ZyppFlags::CommandGroup> SolverCleanDepsOptionSet::options()
 {
   auto &set = SolverSettings::instanceNoConst();
   return {{{
-        { "clean-deps", 'u', ZyppFlags::NoArgument, ZyppFlags::TriBoolType( set._cleanDeps, ZyppFlags::StoreTrue, set._cleanDeps ),
+        { "clean-deps", 'u', ZyppFlags::NoArgument, ZyppFlags::TriBoolType( set._cleanDeps, ZyppFlags::StoreTrue ),
           // translators: -u, --clean-deps
           _("Automatically remove unneeded dependencies.")
         },
-        { "no-clean-deps", 'U', ZyppFlags::NoArgument, ZyppFlags::TriBoolType( set._cleanDeps, ZyppFlags::StoreFalse, !set._cleanDeps ),
+        { "no-clean-deps", 'U', ZyppFlags::NoArgument, ZyppFlags::TriBoolType( set._cleanDeps, ZyppFlags::StoreFalse ),
           // translators: -U, --no-clean-deps
           _("No automatic removal of unneeded dependencies.")
         }

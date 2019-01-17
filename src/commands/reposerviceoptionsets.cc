@@ -64,22 +64,23 @@ RepoServiceCommonOptions::RepoServiceCommonOptions(OptCommandCtx ctx, ZypperBase
 
 std::vector<ZyppFlags::CommandGroup> RepoServiceCommonOptions::options()
 {
+  RepoInfo dummy; //dummy var to get defaults
   return {
     {
       {
         {"name",   'n', ZyppFlags::RequiredArgument, ZyppFlags::StringType( &_name, boost::optional<const char *>(), "NAME"),
               _cmdContext == OptCommandCtx::ServiceContext ? _("Set a descriptive name for the service.") : _("Set a descriptive name for the repository.")
         },
-        {"enable", 'e', ZyppFlags::NoArgument, ZyppFlags::TriBoolType( _enable, ZyppFlags::StoreTrue, TriBool( true ) ),
+        {"enable", 'e', ZyppFlags::NoArgument, ZyppFlags::TriBoolType( _enable, ZyppFlags::StoreTrue, TriBool( dummy.enabled() ) ),
               _cmdContext == OptCommandCtx::ServiceContext ? _("Enable a disabled service.") : _("Enable a disabled repository.")
         },
-        {"disable", 'd', ZyppFlags::NoArgument, ZyppFlags::TriBoolType(_enable, ZyppFlags::StoreFalse, TriBool( false ) ),
+        {"disable", 'd', ZyppFlags::NoArgument, ZyppFlags::TriBoolType(_enable, ZyppFlags::StoreFalse ),
               _cmdContext == OptCommandCtx::ServiceContext ? _("Disable the service (but don't remove it).") : _("Disable the repository (but don't remove it).")
         },
-        {"refresh", 'f', ZyppFlags::NoArgument, ZyppFlags::TriBoolType( _enableAutoRefresh, ZyppFlags::StoreTrue, TriBool( true ) ),
+        {"refresh", 'f', ZyppFlags::NoArgument, ZyppFlags::TriBoolType( _enableAutoRefresh, ZyppFlags::StoreTrue, TriBool( dummy.autorefresh() ) ),
               _cmdContext == OptCommandCtx::ServiceContext ? _("Enable auto-refresh of the service.") : _("Enable auto-refresh of the repository.")
         },
-        {"no-refresh", 'F', ZyppFlags::NoArgument, ZyppFlags::TriBoolType( _enableAutoRefresh, ZyppFlags::StoreFalse, TriBool( false ) ),
+        {"no-refresh", 'F', ZyppFlags::NoArgument, ZyppFlags::TriBoolType( _enableAutoRefresh, ZyppFlags::StoreFalse ),
               _cmdContext == OptCommandCtx::ServiceContext ? _("Disable auto-refresh of the service.") : _("Disable auto-refresh of the repository.")
         }
       }
@@ -131,10 +132,11 @@ void RepoServiceCommonSelectOptions::reset()
 
 std::vector<ZyppFlags::CommandGroup> RepoProperties::options()
 {
+  RepoInfo dummy; //dummy var to get defaults
   return {{{
         { "priority", 'p', ZyppFlags::RequiredArgument, PriorityType( _priority, _priority ), _("Set priority of the repository.") },
-        { "keep-packages", 'k', ZyppFlags::NoArgument, ZyppFlags::TriBoolType( _keepPackages, ZyppFlags::StoreTrue, TriBool( true ) ), _("Enable RPM files caching.") },
-        { "no-keep-packages", 'K', ZyppFlags::NoArgument, ZyppFlags::TriBoolType( _keepPackages, ZyppFlags::StoreFalse, TriBool( false ) ), _("Disable RPM files caching.") },
+        { "keep-packages", 'k', ZyppFlags::NoArgument, ZyppFlags::TriBoolType( _keepPackages, ZyppFlags::StoreTrue, TriBool( dummy.keepPackages() ) ), _("Enable RPM files caching.") },
+        { "no-keep-packages", 'K', ZyppFlags::NoArgument, ZyppFlags::TriBoolType( _keepPackages, ZyppFlags::StoreFalse ), _("Disable RPM files caching.") },
         { "gpgcheck", 'g', ZyppFlags::NoArgument, GPGCheckType( _gpgCheck, RepoInfo::GpgCheck::On ), _("Enable GPG check for this repository.") },
         { "gpgcheck-strict", '\0', ZyppFlags::NoArgument, GPGCheckType( _gpgCheck, RepoInfo::GpgCheck::Strict ), _("Enable strict GPG check for this repository.") },
         { "gpgcheck-allow-unsigned", '\0', ZyppFlags::NoArgument, GPGCheckType( _gpgCheck, RepoInfo::GpgCheck::AllowUnsigned ), str::Format(_("Short hand for '%1%'.") ) % "--gpgcheck-allow-unsigned-repo --gpgcheck-allow-unsigned-package" },

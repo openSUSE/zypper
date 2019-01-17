@@ -75,7 +75,7 @@ zypp::ZyppFlags::CommandGroup RefreshRepoCmd::cmdOptions() const
       }
       ,
       {"services", 's', ZyppFlags::NoArgument,
-            ZyppFlags::BoolType( &that->_services, ZyppFlags::StoreTrue, false ),
+            ZyppFlags::BoolType( &that->_services, ZyppFlags::StoreTrue, _services ),
             // translators: -s, --services
             _("Refresh also services before refreshing repos.")
       },
