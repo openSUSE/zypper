@@ -135,7 +135,8 @@ void SolverRequester::install( const PackageSpec & pkg )
     // get the best matching items and tag them for installation.
     // FIXME this ignores vendor lock - we need some way to do --from which
     // would respect vendor lock: e.g. a new Selectable::updateCandidateObj(Options&)
-    PoolItemBest bestMatches( q.begin(), q.end() );
+    PoolItemBest bestMatches( q.begin(), q.end(), PoolItemBest::preferNotLocked );
+
     if ( !bestMatches.empty() )
     {
       unsigned notInstalled = 0;
@@ -167,12 +168,20 @@ void SolverRequester::install( const PackageSpec & pkg )
             // check vendor (since PoolItemBest does not do it)
             bool changes_vendor = ! VendorAttr::instance().equivalent( instobj->vendor(), (*sit)->vendor() );
 
-            PoolItem best;
+            PoolItem best { s->updateCandidateObj() };
+	    if ( best && best.status().isLocked()
+	      && !(*sit).status().isLocked()
+	      && (*sit).edition() > instobj.edition() )
+	    {
+	      // This is a partially locked item. We try the best unlocked version.
+	      best = PoolItem();
+	    }
+
             if ( userconstraints )
               updateTo( pkg, *sit);
             else if  (_opts.force )
               updateTo( pkg, s->highestAvailableVersionObj() );
-            else if ( (best = s->updateCandidateObj()) )
+            else if ( best )
               updateTo( pkg, best );
             else if ( changes_vendor && !_opts.allow_vendor_change )
               updateTo( pkg, instobj );
@@ -611,8 +620,8 @@ void SolverRequester::updateTo( const PackageSpec & pkg, const PoolItem & select
       DBG << "Newer object exists, but has different repo/arch/version: " << highest << endl;
     }
 
-    // update candidate locked
-    if ( s->status() == ui::S_Protected || highest.status().isLocked() )
+    // update candidate locked (suppress if selected is not locked)
+    if ( selected.status().isLocked() && ( s->status() == ui::S_Protected || highest.status().isLocked() ) )
     {
       addFeedback( Feedback::UPD_CANDIDATE_IS_LOCKED, pkg, selected, installed );
       DBG << "Newer object exists, but is locked: " << highest << endl;
@@ -646,7 +655,7 @@ void SolverRequester::setToInstall( const PoolItem & pi )
     pi.status().setToBeInstalled( ResStatus::USER );
     addFeedback( Feedback::FORCED_INSTALL, PackageSpec(), pi );
   }
-  else if ( ui::asSelectable()(pi)->locked() )
+  else if ( ui::asSelectable()(pi)->hasLocks() )
   {
     // Workaround: Use a solver request instead of selecting the item.
     // This will enable the solver to report the lock conflict, while
@@ -673,7 +682,7 @@ void SolverRequester::setToInstall( const PoolItem & pi )
 
 void SolverRequester::setToRemove( const PoolItem & pi )
 {
-  if ( ui::asSelectable()(pi)->locked() )
+  if ( ui::asSelectable()(pi)->hasLocks() )
   {
     // Workaround: Use a solver request instead of selecting the item.
     // This will enable the solver to report the lock conflict, while
