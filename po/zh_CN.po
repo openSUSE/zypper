@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-01-08 15:15+0100\n"
-"PO-Revision-Date: 2019-01-04 05:23+0000\n"
+"PO-Revision-Date: 2019-01-20 17:29+0000\n"
 "Last-Translator: Marguerite Su <i@marguerite.su>\n"
 "Language-Team: Chinese (China) <https://l10n.opensuse.org/projects/zypper/"
 "master/zh_CN/>\n"
@@ -728,7 +728,7 @@ msgstr "无效的表格样式 %d。"
 #: src/Config.cc:54
 #, c-format, boost-format
 msgid " Use an integer number from %d to %d"
-msgstr ""
+msgstr " 使用从 %d 到 %d 的整数"
 
 #: src/Config.cc:248
 msgid "The path specified in the --root option must be absolute."
@@ -823,7 +823,7 @@ msgstr "忽略未知软件包。"
 #: src/Config.cc:463
 msgid ""
 "Terse output for machine consumption. Implies --no-abbrev and --no-color."
-msgstr ""
+msgstr "供程序阅读的简洁输出。这意味着 —no-abbrev 和 —no-color。"
 
 #. translators: --reposd-dir, -D <DIR>
 #: src/Config.cc:487
@@ -1091,7 +1091,7 @@ msgstr ""
 msgid ""
 "There is an update candidate for '%s' from vendor '%s', while the current "
 "vendor is '%s'. Use '%s' to install this candidate."
-msgstr ""
+msgstr "有一个用于 ‘%s’ 的更新候选，来自厂家 ‘%s’，但当前厂家是 ‘%s’。可使用 ‘%s’ 安装该候选。"
 
 #: src/RequestFeedback.cc:132
 #, c-format, boost-format
