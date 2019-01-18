@@ -22,7 +22,7 @@ BOOST_AUTO_TEST_CASE(init)
     using OutNormal::OutNormal;
     unsigned termwidth() const override { return 30; }
   };
-  Zypper::instance().setOutputWriter( new OutTest );
+  Zypper::instance()->setOutputWriter( new OutTest );
 }
 
 
