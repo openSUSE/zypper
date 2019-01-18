@@ -213,7 +213,7 @@ namespace out
   {
     NON_COPYABLE( Writer );
 
-    Writer( std::ostream & str_r, ListLayout layout_r, const TFormater & formater_r )
+    Writer( std::ostream & str_r, const ListLayout & layout_r, const TFormater & formater_r )
     : _str( str_r )
     , _layout( layout_r )
     , _formater( formater_r )
