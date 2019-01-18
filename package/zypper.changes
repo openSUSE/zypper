@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Fri Jan 18 15:29:48 CET 2019 - ma@suse.de
+
+- Improve handling of partially locked packages (bsc#1113296)
+- Fix wrong default values in help text (bsc#1121611)
+- BuildRequires:  libzypp-devel >= 17.11.0
+- version 1.14.22
+
+-------------------------------------------------------------------
 Wed Jan 16 14:35:40 CET 2019 - ma@suse.de
 
 - Fixed broken argument parsing for --reposd-dir (bsc#1122062)
