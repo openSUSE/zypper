@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-01-08 15:15+0100\n"
-"PO-Revision-Date: 2018-12-04 11:11+0000\n"
+"PO-Revision-Date: 2019-01-20 17:29+0000\n"
 "Last-Translator: Rodrigo Macedo <rmsolucoeseminformatic4@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) <https://l10n.opensuse.org/projects/"
 "zypper/master/pt_BR/>\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 2.18\n"
+"X-Generator: Weblate 3.3\n"
 "X-Poedit-Language: Portuguese\n"
 "X-Poedit-Country: BRAZIL\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -589,7 +589,7 @@ msgstr ""
 
 #: src/commands/commonflags.h:53
 msgid "Consider only patches which affect the package management itself."
-msgstr ""
+msgstr "Considere apenas os patches que afetam o gerenciamento de pacotes."
 
 #: src/output/Out.h:26 src/repos.cc:125 src/repos.cc:153
 msgid "Yes"
@@ -717,7 +717,7 @@ msgstr "Erro"
 
 #: src/Command.cc:63
 msgid "Invalid command"
-msgstr ""
+msgstr "Comando inválido"
 
 #: src/Command.cc:81
 msgid "Repository Management:"
@@ -764,7 +764,7 @@ msgstr "Estilo de tabela inválido %d."
 #: src/Config.cc:54
 #, c-format, boost-format
 msgid " Use an integer number from %d to %d"
-msgstr ""
+msgstr " Use um número inteiro de %d para %d"
 
 #: src/Config.cc:248
 msgid "The path specified in the --root option must be absolute."
@@ -866,6 +866,7 @@ msgstr "Ignorar pacotes desconhecidos."
 msgid ""
 "Terse output for machine consumption. Implies --no-abbrev and --no-color."
 msgstr ""
+"Saída baixa para o consumo da máquina. Implica --no-abbrev e --no-color."
 
 #. translators: --reposd-dir, -D <DIR>
 #: src/Config.cc:487
@@ -1150,6 +1151,8 @@ msgid ""
 "There is an update candidate for '%s' from vendor '%s', while the current "
 "vendor is '%s'. Use '%s' to install this candidate."
 msgstr ""
+"Há um candidato de atualização para '%s' do fornecedor '%s', enquanto o "
+"fornecedor atual é '%s'. Use '%s' para instalar este candidato."
 
 #: src/RequestFeedback.cc:132
 #, c-format, boost-format
@@ -2183,7 +2186,7 @@ msgstr "Senha"
 
 #: src/commands/basecommand.cc:107
 msgid "Option program arguments: "
-msgstr ""
+msgstr "Argumentos do programa de opções: "
 
 #: src/commands/basecommand.cc:119
 msgid "Non-option program arguments: "
@@ -2281,6 +2284,11 @@ msgid ""
 "unconditionally on small or minimal systems, as it may easily add a large "
 "number of packages."
 msgstr ""
+"Instale pacotes recém-adicionados recomendados pelos já instalados. Este "
+"comando basicamente reavalia as recomendações de todos os pacotes instalados "
+"e preenche o sistema de acordo. Você não quer chamar isso incondicionalmente "
+"em sistemas pequenos ou mínimos, pois pode facilmente adicionar um grande "
+"número de pacotes."
 
 #. translators: command description, %1% is a zypper command
 #: src/commands/inrverify.cc:98
@@ -2290,6 +2298,9 @@ msgid ""
 "supporting available hardware, languages or filesystems. Useful after having "
 "added e.g. new hardware or driver repos."
 msgstr ""
+"Chamado de '1%', ele restringe o comando para procurar pacotes que suportem "
+"hardware, idiomas ou sistemas de arquivos disponíveis. Útil depois de ter "
+"adicionado, e. novas reposições de hardware ou driver."
 
 #. translators: command description
 #: src/commands/inrverify.cc:101
@@ -2307,7 +2318,7 @@ msgstr "Selecionar pacotes pelo nome, não pelo recurso."
 
 #: src/commands/installremove.cc:55
 msgid "Select packages solely by capability."
-msgstr ""
+msgstr "Selecione pacotes exclusivamente por capacidade."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/installremove.cc:74
@@ -2763,7 +2774,7 @@ msgstr "Este comando tem implementação simulada que sempre retorna 0."
 
 #: src/commands/optionsets.cc:33
 msgid "Don't change anything, just report what would be done."
-msgstr ""
+msgstr "Não mude nada, apenas relate o que seria feito."
 
 #. translators: -r, --repo <ALIAS|#|URI>
 #: src/commands/optionsets.cc:65
@@ -2773,7 +2784,7 @@ msgstr "Trabalhar somente com o repositório especificado."
 #: src/commands/optionsets.cc:85
 #, c-format, boost-format
 msgid "Option '--%s' overrides a previously set download mode."
-msgstr ""
+msgstr "A opção '--%s' substitui um modo de download definido anteriormente."
 
 #: src/commands/optionsets.cc:114
 #, c-format, boost-format
@@ -4071,33 +4082,34 @@ msgstr "Executar 'zypper refresh' como root deve resolver o problema."
 #. translators: -g, --category <CATEGORY>
 #: src/commands/selectpatchoptionset.cc:24
 msgid "Select patches with the specified category."
-msgstr ""
+msgstr "Selecione patches com a categoria especificada."
 
 #. translators: --severity <SEVERITY>
 #: src/commands/selectpatchoptionset.cc:28
 msgid "Select patches with the specified severity."
-msgstr ""
+msgstr "Selecione os patches com a gravidade especificada."
 
 #. translators: --date <YYYY-MM-DD>
 #: src/commands/selectpatchoptionset.cc:32
 msgid "Select patches issued up to, but not including, the specified date"
-msgstr ""
+msgstr "Selecione patches emitidos até, mas não incluindo, a data especificada"
 
 #. translators: -b, --bugzilla
 #: src/commands/selectpatchoptionset.cc:36
 msgid "Select applicable patches for the specified Bugzilla issues."
 msgstr ""
+"Selecione patches aplicáveis para os problemas especificados do Bugzilla."
 
 #. translators: --cve
 #: src/commands/selectpatchoptionset.cc:41
 msgid "Select applicable patches for the specified CVE issues."
-msgstr ""
+msgstr "Selecione patches aplicáveis para os problemas de CVE especificados."
 
 #. any
 #. translators: --cve
 #: src/commands/selectpatchoptionset.cc:50
 msgid "Select issues matching the specified string."
-msgstr ""
+msgstr "Selecione problemas que correspondam à string especificada."
 
 #: src/commands/services/add.cc:55
 #, c-format, boost-format
@@ -4452,7 +4464,7 @@ msgstr "Este comando só faz sentido no shell do zypper."
 
 #: src/commands/solveroptionset.cc:16 src/commands/solveroptionset.cc:39
 msgid "Solver options"
-msgstr ""
+msgstr "Opções de solução"
 
 #: src/commands/solveroptionset.cc:18
 msgid "Install also recommended packages in addition to the required ones."
@@ -4479,7 +4491,7 @@ msgstr ""
 
 #: src/commands/solveroptionset.cc:63
 msgid "Expert options"
-msgstr ""
+msgstr "Opções de especialistas"
 
 #: src/commands/solveroptionset.cc:66
 msgid "Whether to allow downgrading installed resolvables."
@@ -4938,12 +4950,12 @@ msgstr ""
 #. translators: --status
 #: src/commands/utils/source-download.cc:514
 msgid "Write a manifest file."
-msgstr ""
+msgstr "Escreva um arquivo de manifesto."
 
 #. translators: --status
 #: src/commands/utils/source-download.cc:518
 msgid "Disable writing a manifest file."
-msgstr ""
+msgstr "Desativar a gravação de um arquivo de manifesto."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/utils/targetos.cc:20
