@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Fri Jan 18 15:21:35 CET 2019 - ma@suse.de
+
+- Improve handling of partially locked packages (bsc#1113296)
+- BuildRequires:  libzypp-devel >= 15.28.0
+- ListLayout::Writer: fix undefined behavior
+- BuildRequire libzypp compensating malfomed locks (bsc#1112911)
+- version 1.12.64
+
+-------------------------------------------------------------------
 Tue Dec 18 17:51:35 CET 2018 - ma@suse.de
 
 - locks: Fix printing of versioned locks (bsc#1112911)
