@@ -7,16 +7,16 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-01-08 15:15+0100\n"
-"PO-Revision-Date: 2018-12-13 06:27+0000\n"
+"PO-Revision-Date: 2019-01-20 17:29+0000\n"
 "Last-Translator: scootergrisen <scootergrisen@gmail.com>\n"
-"Language-Team: Danish <https://l10n.opensuse.org/projects/zypper/master/da/"
-">\n"
+"Language-Team: Danish <https://l10n.opensuse.org/projects/zypper/master/da/>"
+"\n"
 "Language: da\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 2.18\n"
+"X-Generator: Weblate 3.3\n"
 
 #: src/SolverRequester.h:52
 #, boost-format
@@ -751,7 +751,7 @@ msgstr "Ugyldig tabelstil %d."
 #: src/Config.cc:54
 #, c-format, boost-format
 msgid " Use an integer number from %d to %d"
-msgstr ""
+msgstr " Brug et heltal fra %d fra %d"
 
 #: src/Config.cc:248
 msgid "The path specified in the --root option must be absolute."
@@ -851,6 +851,7 @@ msgstr "Ignorer ukendte pakker."
 msgid ""
 "Terse output for machine consumption. Implies --no-abbrev and --no-color."
 msgstr ""
+"Kortfattet output til maskinforbrug. Indebærer --no-abbrev og --no-color."
 
 #. translators: --reposd-dir, -D <DIR>
 #: src/Config.cc:487
@@ -1129,6 +1130,8 @@ msgid ""
 "There is an update candidate for '%s' from vendor '%s', while the current "
 "vendor is '%s'. Use '%s' to install this candidate."
 msgstr ""
+"Der er en opdateringskandidat til '%s' fra leverandøren '%s', mens den "
+"nuværende leverandør er '%s'. Brug '%s' til at installere kandidaten."
 
 #: src/RequestFeedback.cc:132
 #, c-format, boost-format
@@ -2272,7 +2275,7 @@ msgstr "Vælg pakker ved simpelt navn, ikke ved kapabilitet."
 
 #: src/commands/installremove.cc:55
 msgid "Select packages solely by capability."
-msgstr ""
+msgstr "Vælg pakker, kun efter formåenheder."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/installremove.cc:74

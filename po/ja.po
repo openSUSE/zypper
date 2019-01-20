@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-01-08 15:15+0100\n"
-"PO-Revision-Date: 2018-12-19 07:56+0000\n"
+"PO-Revision-Date: 2019-01-20 17:29+0000\n"
 "Last-Translator: Yasuhiko Kamata <belphegor@belbel.or.jp>\n"
 "Language-Team: Japanese <https://l10n.opensuse.org/projects/zypper/master/ja/"
 ">\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 3.2.2\n"
+"X-Generator: Weblate 3.3\n"
 
 #: src/SolverRequester.h:52
 #, boost-format
@@ -757,7 +757,7 @@ msgstr "無効な表形式 %d です。"
 #: src/Config.cc:54
 #, c-format, boost-format
 msgid " Use an integer number from %d to %d"
-msgstr ""
+msgstr " %d から %d までの範囲の整数を指定してください"
 
 #: src/Config.cc:248
 msgid "The path specified in the --root option must be absolute."
@@ -857,7 +857,7 @@ msgstr "不明なパッケージを無視します。"
 #: src/Config.cc:463
 msgid ""
 "Terse output for machine consumption. Implies --no-abbrev and --no-color."
-msgstr ""
+msgstr "スクリプトなどで処理するために出力を簡潔にします。 --no-abbrev と --no-color の機能を含みます。"
 
 #. translators: --reposd-dir, -D <DIR>
 #: src/Config.cc:487
@@ -1138,6 +1138,8 @@ msgid ""
 "There is an update candidate for '%s' from vendor '%s', while the current "
 "vendor is '%s'. Use '%s' to install this candidate."
 msgstr ""
+"ベンダ '%2$s' が更新候補 '%1$s' を提供していますが、現在お使いのベンダは '%3$s' です。この更新候補をインストールしたい場合は、 "
+"'%4$s' を実行してください。"
 
 #: src/RequestFeedback.cc:132
 #, c-format, boost-format
@@ -2136,7 +2138,7 @@ msgstr "zypper <サブコマンド> [--コマンドオプション] [パラメ�
 
 #: src/commands/help.cc:72 src/commands/help.cc:73
 msgid "Print zypper help"
-msgstr "ヘルプを表示します。"
+msgstr "zypper のヘルプを表示します"
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/inrverify.cc:68

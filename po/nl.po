@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypper.nl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-01-08 15:15+0100\n"
-"PO-Revision-Date: 2018-12-19 07:56+0000\n"
+"PO-Revision-Date: 2019-01-20 17:29+0000\n"
 "Last-Translator: Freek de Kruijf <freek@opensuse.org>\n"
 "Language-Team: Dutch <https://l10n.opensuse.org/projects/zypper/master/nl/>\n"
 "Language: nl\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 3.2.2\n"
+"X-Generator: Weblate 3.3\n"
 
 #: src/SolverRequester.h:52
 #, boost-format
@@ -774,7 +774,7 @@ msgstr "Ongeldige tabelstijl %d."
 #: src/Config.cc:54
 #, c-format, boost-format
 msgid " Use an integer number from %d to %d"
-msgstr ""
+msgstr " Een geheel getal van %d tot %d gebruiken"
 
 #: src/Config.cc:248
 msgid "The path specified in the --root option must be absolute."
@@ -877,6 +877,8 @@ msgstr "Negeer onbekende pakketten."
 msgid ""
 "Terse output for machine consumption. Implies --no-abbrev and --no-color."
 msgstr ""
+"Uitgebreide uitvoer voor gebruik door machine. Omvat --no-abbrev en --no-"
+"color."
 
 #. translators: --reposd-dir, -D <DIR>
 #: src/Config.cc:487
@@ -1158,6 +1160,9 @@ msgid ""
 "There is an update candidate for '%s' from vendor '%s', while the current "
 "vendor is '%s'. Use '%s' to install this candidate."
 msgstr ""
+"Er is een kandidaat voor bijwerken voor '%s' van leverancier '%s', terwijl "
+"de huidige leverancier '%s'  is. Gebruik '%s' om deze kandidaat te "
+"installeren."
 
 #: src/RequestFeedback.cc:132
 #, c-format, boost-format
