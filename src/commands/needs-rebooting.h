@@ -15,6 +15,8 @@ class NeedsRebootingCmd : public ZypperBaseCommand
 public:
   NeedsRebootingCmd ( std::vector<std::string> &&commandAliases_r );
 
+  static int checkRebootNeeded ( Zypper &zypper, const bool printMessage = false ) ;
+
   // ZypperBaseCommand interface
 protected:
   zypp::ZyppFlags::CommandGroup cmdOptions() const override;

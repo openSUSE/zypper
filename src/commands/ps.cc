@@ -16,6 +16,7 @@
 #include "Table.h"
 #include "utils/messages.h"
 #include "utils/flags/flagtypes.h"
+#include "commands/needs-rebooting.h"
 
 using namespace zypp;
 
@@ -104,7 +105,7 @@ void PSCommand::printServiceNamesOnly()
  * libraries or other files that have been removed since their execution.
  * This is particularly useful after 'zypper remove' or 'zypper update'.
  */
-int PSCommand::execute( Zypper &zypp, const std::vector<std::string> &positionalArgs )
+int PSCommand::execute( Zypper &zypper, const std::vector<std::string> &positionalArgs )
 {
   if ( !positionalArgs.empty() )
   {
@@ -123,7 +124,7 @@ int PSCommand::execute( Zypper &zypp, const std::vector<std::string> &positional
   }
 
   // Here: Table output
-  zypp.out().info(_("Checking for running processes using deleted libraries..."), Out::HIGH );
+  zypper.out().info(_("Checking for running processes using deleted libraries..."), Out::HIGH );
   CheckAccessDeleted checker( false );	// wait for explicit call to check()
 
   if(debugEnabled())
@@ -183,22 +184,28 @@ int PSCommand::execute( Zypper &zypp, const std::vector<std::string> &positional
 
   if ( t.empty() )
   {
-    zypp.out().info(_("No processes using deleted files found.") );
+    zypper.out().info(_("No processes using deleted files found.") );
   }
   else
   {
-    zypp.out().info(_("The following running processes use deleted files:") );
+    zypper.out().info(_("The following running processes use deleted files:") );
     cout << endl;
     cout << t << endl;
-    zypp.out().info(_("You may wish to restart these processes.") );
-    zypp.out().info( str::form( _("See '%s' for information about the meaning of values in the above table."),
+    zypper.out().info(_("You may wish to restart these processes.") );
+    zypper.out().info( str::form( _("See '%s' for information about the meaning of values in the above table."),
                                    "man zypper" ) );
+  }
+
+  int exitCode = ZYPPER_EXIT_OK;
+  {
+    zypper.out().info("");
+    exitCode = NeedsRebootingCmd::checkRebootNeeded( zypper, true );
   }
 
   if ( geteuid() != 0 )
   {
-    zypp.out().info("");
-    zypp.out().info(_("Note: Not running as root you are limited to searching for files you have permission to examine with the system stat(2) function. The result might be incomplete."));
+    zypper.out().info("");
+    zypper.out().info(_("Note: Not running as root you are limited to searching for files you have permission to examine with the system stat(2) function. The result might be incomplete."));
   }
-  return ZYPPER_EXIT_OK;
+  return exitCode;
 }
