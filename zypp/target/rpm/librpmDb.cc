@@ -19,6 +19,9 @@
 #include "zypp/target/rpm/RpmHeader.h"
 #include "zypp/target/rpm/RpmException.h"
 
+#undef ZYPP_BASE_LOGGER_LOGGROUP
+#define ZYPP_BASE_LOGGER_LOGGROUP "librpmDb"
+
 using namespace std;
 
 namespace zypp
@@ -114,8 +117,8 @@ public:
 //
 ///////////////////////////////////////////////////////////////////
 
-Pathname         librpmDb::_defaultRoot  ( "/" );
-Pathname         librpmDb::_defaultDbPath( "/var/lib/rpm" );
+Pathname         librpmDb::_defaultRoot;	// Remembered arg to last dbAccess call
+Pathname         librpmDb::_defaultDbPath;	// Remembered arg to last dbAccess call
 librpmDb::constPtr librpmDb::_defaultDb;
 bool             librpmDb::_dbBlocked    ( true );
 

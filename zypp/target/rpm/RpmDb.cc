@@ -59,6 +59,9 @@ using namespace zypp::filesystem;
 
 #define WORKAROUNDRPMPWDBUG
 
+#undef ZYPP_BASE_LOGGER_LOGGROUP
+#define ZYPP_BASE_LOGGER_LOGGROUP "librpmDb"
+
 namespace zypp
 {
   namespace zypp_readonly_hack
@@ -329,6 +332,14 @@ void RpmDb::initDatabase( Pathname root_r, Pathname dbPath_r, bool doRebuild_r )
   {
     ERR << "Illegal root or dbPath: " << stringPath( root_r, dbPath_r ) << endl;
     ZYPP_THROW(RpmInvalidRootException(root_r, dbPath_r));
+  }
+
+  if ( dbPath_r == "/var/lib/rpm"
+    && ! PathInfo( root_r/"/var/lib/rpm" ).isExist()
+    && PathInfo( root_r/"/usr/lib/sysimage/rpm" ).isDir() )
+  {
+    WAR << "Rpm package was deleted? Injecting missing rpmdb compat symlink." << endl;
+    filesystem::symlink( "../../usr/lib/sysimage/rpm", root_r/"/var/lib/rpm" );
   }
 
   MIL << "Calling initDatabase: " << stringPath( root_r, dbPath_r )
