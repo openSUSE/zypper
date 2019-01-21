@@ -25,6 +25,7 @@
 #include "global-settings.h"
 
 #include "solve-commit.h"
+#include "commands/needs-rebooting.h"
 
 using namespace zypp;
 extern ZYpp::Ptr God;
@@ -431,38 +432,39 @@ ZYppCommitPolicy get_commit_policy( Zypper & zypper, DownloadMode dlMode_r )
  */
 static void notify_processes_using_deleted_files( Zypper & zypper )
 {
-  if ( ! zypper.config().psCheckAccessDeleted )
-  {
+  if ( ! zypper.config().psCheckAccessDeleted ) {
     zypper.out().info( str::form(_("Check for running processes using deleted libraries is disabled in zypper.conf. Run '%s' to check manually."),
 				 "zypper ps -s" ) );
-    return;	// disabled in config
-  }
-
-  zypper.out().info(_("Checking for running processes using deleted libraries..."), Out::HIGH );
-  CheckAccessDeleted checker( false ); // wait for explicit call to check()
-  try
-  {
-    checker.check();
-  }
-  catch( const Exception & e )
-  {
-    if ( zypper.out().verbosity() > Out::NORMAL )
+  } else {
+    zypper.out().info(_("Checking for running processes using deleted libraries..."), Out::HIGH );
+    CheckAccessDeleted checker( false ); // wait for explicit call to check()
+    try
     {
-      if ( e.historySize() )
-	zypper.out().error( e, _("Check failed:") );
-      else
-	zypper.out().info( str::Str() << ( ColorContext::MSG_WARNING << _("Skip check:") ) << " " << e.asUserString() );
+      checker.check();
+    }
+    catch( const Exception & e )
+    {
+      if ( zypper.out().verbosity() > Out::NORMAL )
+      {
+        if ( e.historySize() )
+    zypper.out().error( e, _("Check failed:") );
+        else
+    zypper.out().info( str::Str() << ( ColorContext::MSG_WARNING << _("Skip check:") ) << " " << e.asUserString() );
+      }
+    }
+
+    // Don't suggest "zypper ps" if zypper is the only prog with deleted open files.
+    if ( checker.size() > 1 || ( checker.size() == 1 && checker.begin()->pid != str::numstring(::getpid()) ) )
+    {
+      zypper.out().info(str::form(
+          _("There are some running programs that might use files deleted by recent upgrade."
+            " You may wish to check and restart some of them. Run '%s' to list these programs."),
+          "zypper ps -s"));
     }
   }
 
-  // Don't suggest "zypper ps" if zypper is the only prog with deleted open files.
-  if ( checker.size() > 1 || ( checker.size() == 1 && checker.begin()->pid != str::numstring(::getpid()) ) )
-  {
-    zypper.out().info(str::form(
-        _("There are some running programs that might use files deleted by recent upgrade."
-          " You may wish to check and restart some of them. Run '%s' to list these programs."),
-        "zypper ps -s"));
-  }
+  zypper.out().info(" ");
+  NeedsRebootingCmd::checkRebootNeeded( zypper, true );
 }
 
 static void show_update_messages( Zypper & zypper, const UpdateNotifications & messages )

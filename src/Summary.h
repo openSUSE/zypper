@@ -22,6 +22,11 @@
 class Summary : private base::NonCopyable
 {
 public:
+  /**
+   * \brief ResPair is used to track removed and installed ResObjects.
+   *        usually only 'second' is intialized, the 'first' var is only
+   *        required to track upgrades, first is the removed and second the installed package
+   */
   typedef std::pair<ResObject::constPtr, ResObject::constPtr> ResPair;
   struct ResPairNameCompare
   {
@@ -146,8 +151,8 @@ private:
   KindToResPairSet _supportUnknown;
   KindToResPairSet _supportUnsupported;	///< known to be unsupported
   KindToResPairSet _supportNeedACC;	///< need additional contract
-  /** Patches which require a reboot */
-  ResPairSet       _rebootNeeded;
+  /** Patches and Packages which require a reboot */
+  KindToResPairSet _rebootNeeded;
 
   /** names of packages which have multiple versions (to-be-)installed */
   std::set<std::string> _multiInstalled;

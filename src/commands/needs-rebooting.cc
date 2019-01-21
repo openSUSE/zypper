@@ -22,8 +22,26 @@ NeedsRebootingCmd::NeedsRebootingCmd(std::vector<std::string> &&commandAliases_r
     _("Checks if the needs-reboot flag was set by a previous update or install of a core library or service.\n"
       "Exit code ZYPPER_EXIT_INF_REBOOT_NEEDED indicates that a reboot is needed, otherwise the exit code is set to ZYPPER_EXIT_OK."),
     DisableAll
-  )
+)
 {}
+
+int NeedsRebootingCmd::checkRebootNeeded( Zypper &zypper , const bool printMessage )
+{
+  filesystem::Pathname rebootNeededFlag = filesystem::Pathname(zypper.config().root_dir) / "/var/run/reboot-needed";
+
+  if ( filesystem::PathInfo( rebootNeededFlag ).isExist() ) {
+    if ( printMessage ) {
+      zypper.out().info( _("Core libraries or services have been updated.") );
+      zypper.out().info( _("Reboot is required to ensure that your system benefits from these updates.") );
+    }
+    return ZYPPER_EXIT_INF_REBOOT_NEEDED;
+  }
+  if ( printMessage ) {
+    zypper.out().info( _("No core libraries or services have been updated.") );
+    zypper.out().info( _("Reboot is probably not necessary.") );
+  }
+  return ZYPPER_EXIT_OK;
+}
 
 zypp::ZyppFlags::CommandGroup NeedsRebootingCmd::cmdOptions() const
 {
@@ -43,14 +61,5 @@ int NeedsRebootingCmd::execute( Zypper &zypper, const std::vector<std::string> &
     return ZYPPER_EXIT_ERR_INVALID_ARGS;
   }
 
-  filesystem::Pathname rebootNeededFlag = filesystem::Pathname(zypper.config().root_dir) / "/var/run/reboot-needed";
-
-  if ( filesystem::PathInfo( rebootNeededFlag ).isExist() ) {
-    zypper.out().info( _("Core libraries or services have been updated.") );
-    zypper.out().info( _("Reboot is required to ensure that your system benefits from these updates.") );
-    return ZYPPER_EXIT_INF_REBOOT_NEEDED;
-  }
-  zypper.out().info( _("No core libraries or services have been updated.") );
-  zypper.out().info( _("Reboot is probably not necessary.") );
-  return ZYPPER_EXIT_OK;
+  return checkRebootNeeded( zypper, true );
 }

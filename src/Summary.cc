@@ -116,7 +116,7 @@ void Summary::readPool( const ResPool & pool )
         if ( patch->rebootSuggested() )
 	{
           _need_reboot = true;
-	  _rebootNeeded.insert( ResPair( nullptr, patch ) );
+	  _rebootNeeded[ResKind::patch].insert( ResPair( nullptr, patch ) );
 	}
         else if ( patch->restartSuggested() )
           _need_restart = true;
@@ -126,6 +126,14 @@ void Summary::readPool( const ResPool & pool )
       {
         DBG << "<install>   ";
         to_be_installed[it->kind()].insert(it->resolvable());
+
+        if ( it->isKind( ResKind::package ) ) {
+          Package::constPtr package = asKind<Package>( it->resolvable() );
+          if ( package->isNeedreboot() ) {
+            _need_reboot = true;
+            _rebootNeeded[ResKind::package].insert( ResPair( nullptr, package ) );
+          }
+        }
       }
       if (it->status().isToBeUninstalled())
       {
@@ -1327,15 +1335,29 @@ void Summary::writeLocked( std::ostream & out )
 
 void Summary::writeRebootNeeded( std::ostream & out )
 {
-  if ( _rebootNeeded.empty() )
-    return;
+  auto generateLabel = [] ( zypp::ResKind kind, size_t count ) {
+    if ( kind == ResKind::patch )
+      return str::form(PL_("The following patch requires a system reboot:",
+                           "The following %d patches require a system reboot:",
+                          count ), static_cast<int>( count ) );
+    else if ( kind == ResKind::package )
+      return str::form(PL_("The following package requires a system reboot:",
+                           "The following %d package require a system reboot:",
+                          count ), static_cast<int>( count ) );
+    return std::string();
+  };
 
-  const std::string & label( str::form(PL_("The following patch requires a system reboot:",
-					   "The following %d patches require a system reboot:",
-					   _rebootNeeded.size() ),
-				       (int)_rebootNeeded.size()) );
-  out << endl << ( ColorContext::MSG_WARNING << label ) << endl;
-  writeResolvableList( out, _rebootNeeded, ColorContext::MSG_WARNING );
+  auto checkAndPrintRebootNeeded = [ this, &generateLabel, &out ] ( zypp::ResKind kind ) {
+    const ResPairSet & resolvables = _rebootNeeded[kind];
+    if ( ! resolvables.empty() ) {
+      size_t count = resolvables.size();
+      out << endl << ( ColorContext::MSG_WARNING << generateLabel( kind, count ) ) << endl;
+      writeResolvableList( out, resolvables, ColorContext::MSG_WARNING );
+    }
+  };
+
+  checkAndPrintRebootNeeded( ResKind::patch );
+  checkAndPrintRebootNeeded( ResKind::package );
 }
 
 // --------------------------------------------------------------------------
