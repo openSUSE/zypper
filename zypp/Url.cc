@@ -181,6 +181,10 @@ namespace zypp
 
         // =====================================
         ref.reset( new UrlBase());
+        // don't show empty authority
+        ref->setViewOptions( zypp::url::ViewOption::DEFAULTS -
+                             zypp::url::ViewOption::EMPTY_AUTHORITY);
+
         ref->config("with_authority",   "n");   // disallow host,...
         ref->config("require_pathname", "m");   // path is mandatory
         addUrlByScheme("hd",     ref);
@@ -189,9 +193,6 @@ namespace zypp
         addUrlByScheme("dir",    ref);
         addUrlByScheme("iso",    ref);
 
-        // don't show empty authority
-        ref->setViewOptions( zypp::url::ViewOption::DEFAULTS -
-                             zypp::url::ViewOption::EMPTY_AUTHORITY);
         addUrlByScheme("mailto", ref);
         addUrlByScheme("urn",    ref);
         addUrlByScheme("plugin", ref);	// zypp plugable media handler:

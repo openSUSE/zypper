@@ -65,17 +65,18 @@ BOOST_AUTO_TEST_CASE(test_url1)
     BOOST_CHECK_EQUAL( str, url.asString() );
     BOOST_CHECK_EQUAL( str, url.asCompleteString() );
 
-    // asString & asCompleteString should add empty authority
-    // "dvd://...", except we request to avoid it.
-    str = "dvd:/srv/ftp";
-    one = "dvd:///srv/ftp";
-    two = "dvd:///srv/ftp";
-    url = str;
+    // In general, schema without authority allows specifying an empty authority
+    // though it should not be printed (unless explicitly requested).
+    BOOST_CHECK_EQUAL( Url("dvd:/srv/ftp").asCompleteString(),   "dvd:/srv/ftp" );
+    BOOST_CHECK_EQUAL( Url("dvd:/srv/ftp").asString(),           "dvd:/srv/ftp" );
 
-    BOOST_CHECK_EQUAL( one, url.asString() );
-    BOOST_CHECK_EQUAL( two, url.asCompleteString() );
-    BOOST_CHECK_EQUAL( str, url.asString(zypp::url::ViewOptions() -
-                                 zypp::url::ViewOption::EMPTY_AUTHORITY));
+    BOOST_CHECK_EQUAL( Url("dvd:///srv/ftp").asCompleteString(), "dvd:/srv/ftp" );
+    BOOST_CHECK_EQUAL( Url("dvd:///srv/ftp").asString(),         "dvd:/srv/ftp" );
+
+    BOOST_CHECK_EQUAL( Url("dvd:///srv/ftp").asString(url::ViewOption::DEFAULTS+url::ViewOption::EMPTY_AUTHORITY),        "dvd:///srv/ftp" );
+    BOOST_CHECK_EQUAL( Url("dvd:///srv/ftp").asString(url::ViewOption::DEFAULTS-url::ViewOption::EMPTY_AUTHORITY),        "dvd:/srv/ftp" );
+
+    BOOST_CHECK_THROW( Url("dvd://authority/srv/ftp"), url::UrlNotAllowedException );
 
     // asString shouldn't print the password, asCompleteString should
     // further, the "//" at the begin of the path should become "/%2F"
@@ -159,7 +160,6 @@ BOOST_AUTO_TEST_CASE(test_url1)
 
     // OK, valid (no host, path is there)
     str = "cd:///some/path";
-    BOOST_CHECK_EQUAL( str, zypp::Url(str).asString());
     BOOST_CHECK( zypp::Url(str).isValid());
 }
 
