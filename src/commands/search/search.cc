@@ -302,6 +302,14 @@ int SearchCmd::execute( Zypper &zypper, const std::vector<std::string> &position
     Capability cap( *it );
     std::string name = cap.detail().name().asString();
 
+    // bsc#1119873 zypper search: inconsistent results for `-t package kernel-default` vs `package:kernel-default`
+    // Capability parser strips 'package:' prefix from name, because ident for package and srcpackage does not contain
+    // the prefix but instead is only differentiated by arch.
+    // We need to add package prefix again, the srcpackage is correctly matched since the srcpackage: prefix is not stripped
+    ResKind explicitBuildin = ResKind::explicitBuiltin( *it );
+    if ( explicitBuildin == ResKind::package )
+      name = explicitBuildin.asString() + ":" + name;
+
     if ( cap.detail().isVersioned() )
       details = true;	// show details if any search string includes an edition
 
