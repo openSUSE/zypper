@@ -8,6 +8,8 @@
 #include "zypp/base/Exception.h"
 #include "zypp/base/String.h"
 
+#include "zypp/RepoInfo.h"
+
 #include "zypp/Url.h"
 #include <stdexcept>
 #include <iostream>
@@ -278,6 +280,24 @@ BOOST_AUTO_TEST_CASE( test_url5)
   std::string str( "file:/some/${var:+path}/${var:-with}/${vars}" );
   BOOST_CHECK_EQUAL( Url(str).asString(), str );
   BOOST_CHECK_EQUAL( Url(zypp::url::encode( str, URL_SAFE_CHARS )).asString(), str );
+}
+
+BOOST_AUTO_TEST_CASE(plugin_scriptpath)
+{
+  // plugin script path must not be rewritten
+  for ( const std::string & t : { "script", "script/", "/script", "/script/", "./script", "./script/" } )
+  {
+    BOOST_CHECK_EQUAL( Url("plugin:"+t).getPathName(),	t );
+  }
+
+  { // more cosmetic issue, but the RepoVarReplacer should
+    // not change the string representation (-> "plugin:/script")
+    Url u( "plugin:script?opt=val" );
+    RepoInfo i;
+    i.setBaseUrl( u );
+    BOOST_CHECK_EQUAL( u.asString(), i.url().asString() );
+  }
+
 }
 
 BOOST_AUTO_TEST_CASE(plugin_querystring_args)

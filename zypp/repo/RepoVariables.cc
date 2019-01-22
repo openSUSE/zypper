@@ -548,7 +548,7 @@ namespace zypp
 
     Url RepoVariablesUrlReplacer::operator()( const Url & value ) const
     {
-      static const Url::ViewOptions toReplace = url::ViewOption::DEFAULTS - url::ViewOption::WITH_USERNAME - url::ViewOption::WITH_PASSWORD;
+      Url::ViewOptions toReplace = value.getViewOptions() - url::ViewOption::WITH_USERNAME - url::ViewOption::WITH_PASSWORD;
       const std::string & replaced( RepoVarExpand()( value.asString( toReplace ), RepoVarsMap::lookup ) );
       Url newurl;
       if ( !replaced.empty() )
@@ -556,6 +556,7 @@ namespace zypp
 	newurl = replaced;
 	newurl.setUsername( value.getUsername( url::E_ENCODED ), url::E_ENCODED );
 	newurl.setPassword( value.getPassword( url::E_ENCODED ), url::E_ENCODED );
+	newurl.setViewOptions( value.getViewOptions() );
       }
       return newurl;
     }
