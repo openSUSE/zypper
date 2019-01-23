@@ -114,13 +114,11 @@ namespace
     return 0;
   }
 
-  static size_t
-  log_redirects_curl(
-      void *ptr, size_t size, size_t nmemb, void *stream)
+  static size_t log_redirects_curl( char *ptr, size_t size, size_t nmemb, void *userdata)
   {
-    // INT << "got header: " << string((char *)ptr, ((char*)ptr) + size*nmemb) << endl;
+    // INT << "got header: " << string(ptr, ptr + size*nmemb) << endl;
 
-    char * lstart = (char *)ptr, * lend = (char *)ptr;
+    char * lstart = ptr, * lend = ptr;
     size_t pos = 0;
     size_t max = size * nmemb;
     while (pos + 1 < max)
@@ -129,10 +127,21 @@ namespace
       for (lstart = lend; *lend != '\n' && pos < max; ++lend, ++pos);
 
       // look for "Location"
-      string line(lstart, lend);
-      if (line.find("Location") != string::npos)
+      if ( lstart[0] == 'L'
+	&& lstart[1] == 'o'
+	&& lstart[2] == 'c'
+	&& lstart[3] == 'a'
+	&& lstart[4] == 't'
+	&& lstart[5] == 'i'
+	&& lstart[6] == 'o'
+	&& lstart[7] == 'n'
+	&& lstart[8] == ':' )
       {
+	std::string line { lstart, *(lend-1)=='\r' ? lend-1 : lend };
         DBG << "redirecting to " << line << endl;
+	if ( userdata ) {
+	  *reinterpret_cast<std::string *>( userdata ) = line;
+	}
         return max;
       }
 
@@ -667,6 +676,7 @@ void MediaCurl::setupEasy()
   }
 
   curl_easy_setopt(_curl, CURLOPT_HEADERFUNCTION, log_redirects_curl);
+  curl_easy_setopt(_curl, CURLOPT_HEADERDATA, &_lastRedirect);
   CURLcode ret = curl_easy_setopt( _curl, CURLOPT_ERRORBUFFER, _curlError );
   if ( ret != 0 ) {
     ZYPP_THROW(MediaCurlSetOptException(_url, "Error setting error buffer"));
@@ -1078,6 +1088,14 @@ void MediaCurl::evaluateCurlCode(const Pathname &filename,
       switch ( code )
       {
       case CURLE_UNSUPPORTED_PROTOCOL:
+	  err = " Unsupported protocol";
+	  if ( !_lastRedirect.empty() )
+	  {
+	    err += " or redirect (";
+	    err += _lastRedirect;
+	    err += ")";
+	  }
+	  break;
       case CURLE_URL_MALFORMAT:
       case CURLE_URL_MALFORMAT_USER:
           err = " Bad URL";
@@ -1219,6 +1237,7 @@ bool MediaCurl::doGetDoesFileExist( const Pathname & filename ) const
     // encoded slash as %2f) "ftp://user@host/%2ffoo/bar/file"
     // contains an absolute path.
   //
+  _lastRedirect.clear();
   string urlBuffer( curlUrl.asString());
   CURLcode ret = curl_easy_setopt( _curl, CURLOPT_URL,
                                    urlBuffer.c_str() );
@@ -1523,6 +1542,7 @@ void MediaCurl::doGetFileCopyFile(const Pathname & filename , const Pathname & d
     // encoded slash as %2f) "ftp://user@host/%2ffoo/bar/file"
     // contains an absolute path.
     //
+    _lastRedirect.clear();
     string urlBuffer( curlUrl.asString());
     CURLcode ret = curl_easy_setopt( _curl, CURLOPT_URL,
                                      urlBuffer.c_str() );

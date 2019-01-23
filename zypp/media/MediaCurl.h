@@ -170,6 +170,8 @@ class MediaCurl : public MediaHandler
     std::string _currentCookieFile;
     static Pathname _cookieFile;
 
+    mutable std::string _lastRedirect;	///< to log/report redirections
+
   protected:
     CURL *_curl;
     char _curlError[ CURL_ERROR_SIZE ];
