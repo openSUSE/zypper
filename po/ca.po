@@ -8,11 +8,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-01-08 15:15+0100\n"
+"POT-Creation-Date: 2019-01-23 09:24+0100\n"
 "PO-Revision-Date: 2019-01-17 05:31+0000\n"
 "Last-Translator: David Medina <medipas@gmail.com>\n"
-"Language-Team: Catalan <https://l10n.opensuse.org/projects/zypper/master/ca/>"
-"\n"
+"Language-Team: Catalan <https://l10n.opensuse.org/projects/zypper/master/ca/"
+">\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -513,7 +513,7 @@ msgstr ""
 msgid "This is an alias for '%s'."
 msgstr "És un àlies per a '%s'."
 
-#: src/commands/commandhelpformatter.h:99 src/utils/flags/zyppflags.cc:560
+#: src/commands/commandhelpformatter.h:99 src/utils/flags/zyppflags.cc:562
 msgid "Command options:"
 msgstr "Opcions de l'ordre:"
 
@@ -708,43 +708,43 @@ msgstr "Objecte no vàlid"
 msgid "Error"
 msgstr "Error"
 
-#: src/Command.cc:63
+#: src/Command.cc:90
 msgid "Invalid command"
 msgstr "Ordre no vàlida"
 
-#: src/Command.cc:81
+#: src/Command.cc:108
 msgid "Repository Management:"
 msgstr "Gestió del repositori:"
 
-#: src/Command.cc:89
+#: src/Command.cc:116
 msgid "Service Management:"
 msgstr "Gestió de servei:"
 
-#: src/Command.cc:95
+#: src/Command.cc:122
 msgid "Software Management:"
 msgstr "Gestió de programari:"
 
-#: src/Command.cc:101
+#: src/Command.cc:128
 msgid "Update Management:"
 msgstr "Gestió d'actualització:"
 
-#: src/Command.cc:108
+#: src/Command.cc:135
 msgid "Querying:"
 msgstr "Consulta:"
 
-#: src/Command.cc:119
+#: src/Command.cc:146
 msgid "Package Locks:"
 msgstr "Blocatge de paquets:"
 
-#: src/Command.cc:124
+#: src/Command.cc:151
 msgid "Other Commands:"
 msgstr "Altres ordres:"
 
-#: src/Command.cc:131
+#: src/Command.cc:158
 msgid "Subcommands:"
 msgstr "Subordres:"
 
-#: src/Command.cc:247
+#: src/Command.cc:279
 #, c-format, boost-format
 msgid "Unknown command '%s'"
 msgstr "L'ordre \"%s\" és desconeguda"
@@ -1002,12 +1002,12 @@ msgstr "Ignorant els resolubles instal·lats."
 msgid "Do not read installed packages."
 msgstr "No llegeixis els paquets instal·lats."
 
-#: src/PackageArgs.cc:216
+#: src/PackageArgs.cc:208
 #, c-format, boost-format
 msgid "'%s' not found in package names. Trying '%s'."
 msgstr "\"%s\" no s'ha trobat entre els noms dels paquets. Provant \"%s\"."
 
-#: src/PackageArgs.cc:226
+#: src/PackageArgs.cc:218
 #, c-format, boost-format
 msgid "'%s' is not a package name or capability."
 msgstr "\"%s\" no és un nom de paquet o de capacitat."
@@ -1038,7 +1038,7 @@ msgstr "No s'ha trobat el producte %s."
 msgid "Pattern '%s' not found."
 msgstr "No s'ha trobat el patró %s."
 
-#: src/RequestFeedback.cc:54 src/misc.cc:296
+#: src/RequestFeedback.cc:54 src/misc.cc:295
 #, c-format, boost-format
 msgid "Source package '%s' not found."
 msgstr "No s'ha trobat el paquet de codi font %s."
@@ -1265,7 +1265,7 @@ msgstr "Afegint el conflicte \"%s\"."
 msgid "Did you mean %1%?"
 msgstr "Volíeu dir %1%?"
 
-#: src/SolverRequester.cc:479
+#: src/SolverRequester.cc:487
 #, c-format, boost-format
 msgid "Ignoring option %s when updating the update stack first."
 msgstr "S'ignora l'opció %s quan primer s'actualitza la pila d'actualització."
@@ -1273,203 +1273,203 @@ msgstr "S'ignora l'opció %s quan primer s'actualitza la pila d'actualització."
 #. translator: '%1%' is a products name
 #. '%2%' is a command to call (like 'zypper dup')
 #. Both may contain whitespace and should be enclosed by quotes!
-#: src/Summary.cc:391
+#: src/Summary.cc:399
 #, boost-format
 msgid "Product '%1%' requires to be updated by calling '%2%'!"
 msgstr "Cal que el producte \"%1%\" s'actualitzi amb \"%2%\"!"
 
 #. translators: Appended when clipping a long enumeration:
 #. "ConsoleKit-devel ConsoleKit-doc ... and 20828 more items."
-#: src/Summary.cc:466 src/Summary.cc:542
+#: src/Summary.cc:474 src/Summary.cc:550
 #, boost-format
 msgid "... and %1% more item."
 msgid_plural "... and %1% more items."
 msgstr[0] "... i %1% ítem més."
 msgstr[1] "... i %1% ítems més."
 
-#: src/Summary.cc:560
+#: src/Summary.cc:568
 #, c-format, boost-format
 msgid "The following NEW package is going to be installed:"
 msgid_plural "The following %d NEW packages are going to be installed:"
 msgstr[0] "S'instal·larà el paquet NOU següent:"
 msgstr[1] "S'instal·laran els %d paquets NOUS següents:"
 
-#: src/Summary.cc:565
+#: src/Summary.cc:573
 #, c-format, boost-format
 msgid "The following NEW patch is going to be installed:"
 msgid_plural "The following %d NEW patches are going to be installed:"
 msgstr[0] "S'instal·larà el pedaç NOU següent:"
 msgstr[1] "S'instal·laran els %d pedaços NOUS següents:"
 
-#: src/Summary.cc:570
+#: src/Summary.cc:578
 #, c-format, boost-format
 msgid "The following NEW pattern is going to be installed:"
 msgid_plural "The following %d NEW patterns are going to be installed:"
 msgstr[0] "S'instal·larà el patró NOU següent:"
 msgstr[1] "S'instal·laran els %d patrons NOUS següents:"
 
-#: src/Summary.cc:575
+#: src/Summary.cc:583
 #, c-format, boost-format
 msgid "The following NEW product is going to be installed:"
 msgid_plural "The following %d NEW products are going to be installed:"
 msgstr[0] "S'instal·larà el producte NOU següent:"
 msgstr[1] "S'instal·laran els %d productes NOUS següents:"
 
-#: src/Summary.cc:580
+#: src/Summary.cc:588
 #, c-format, boost-format
 msgid "The following source package is going to be installed:"
 msgid_plural "The following %d source packages are going to be installed:"
 msgstr[0] "S'instal·larà el paquet de codi font següent:"
 msgstr[1] "S'instal·laran els %d paquets de codi font següents:"
 
-#: src/Summary.cc:586
+#: src/Summary.cc:594
 #, c-format, boost-format
 msgid "The following application is going to be installed:"
 msgid_plural "The following %d applications are going to be installed:"
 msgstr[0] "S'instal·larà l'aplicació següent:"
 msgstr[1] "S'instal·laran les %d aplicacions següents:"
 
-#: src/Summary.cc:611
+#: src/Summary.cc:619
 #, c-format, boost-format
 msgid "The following package is going to be REMOVED:"
 msgid_plural "The following %d packages are going to be REMOVED:"
 msgstr[0] "El paquet següent SE SUPRIMIRÀ:"
 msgstr[1] "Els %d paquets següents SE SUPRIMIRAN:"
 
-#: src/Summary.cc:616
+#: src/Summary.cc:624
 #, c-format, boost-format
 msgid "The following patch is going to be REMOVED:"
 msgid_plural "The following %d patches are going to be REMOVED:"
 msgstr[0] "El pedaç següent SE SUPRIMIRÀ:"
 msgstr[1] "Els %d pedaços següents SE SUPRIMIRAN:"
 
-#: src/Summary.cc:621
+#: src/Summary.cc:629
 #, c-format, boost-format
 msgid "The following pattern is going to be REMOVED:"
 msgid_plural "The following %d patterns are going to be REMOVED:"
 msgstr[0] "El patró següent SE SUPRIMIRÀ:"
 msgstr[1] "Els %d patrons següents SE SUPRIMIRAN:"
 
-#: src/Summary.cc:626
+#: src/Summary.cc:634
 #, c-format, boost-format
 msgid "The following product is going to be REMOVED:"
 msgid_plural "The following %d products are going to be REMOVED:"
 msgstr[0] "El producte següent SE SUPRIMIRÀ:"
 msgstr[1] "Els següents %d productes SE SUPRIMIRAN:"
 
-#: src/Summary.cc:632
+#: src/Summary.cc:640
 #, c-format, boost-format
 msgid "The following application is going to be REMOVED:"
 msgid_plural "The following %d applications are going to be REMOVED:"
 msgstr[0] "L'aplicació següent SE SUPRIMIRÀ:"
 msgstr[1] "Les %d aplicacions següents SE SUPRIMIRAN:"
 
-#: src/Summary.cc:655
+#: src/Summary.cc:663
 #, c-format, boost-format
 msgid "The following package is going to be upgraded:"
 msgid_plural "The following %d packages are going to be upgraded:"
 msgstr[0] "S'actualitzarà el paquet següent:"
 msgstr[1] "S'actualitzaran els %d paquets següents:"
 
-#: src/Summary.cc:660
+#: src/Summary.cc:668
 #, c-format, boost-format
 msgid "The following patch is going to be upgraded:"
 msgid_plural "The following %d patches are going to be upgraded:"
 msgstr[0] "S'actualitzarà el pedaç següent:"
 msgstr[1] "S'actualitzaran els %d pedaços següents:"
 
-#: src/Summary.cc:665
+#: src/Summary.cc:673
 #, c-format, boost-format
 msgid "The following pattern is going to be upgraded:"
 msgid_plural "The following %d patterns are going to be upgraded:"
 msgstr[0] "S'actualitzarà el patró següent:"
 msgstr[1] "S'actualitzaran els %d patrons següents:"
 
-#: src/Summary.cc:671
+#: src/Summary.cc:679
 #, c-format, boost-format
 msgid "The following product is going to be upgraded:"
 msgid_plural "The following %d products are going to be upgraded:"
 msgstr[0] "S'actualitzarà el producte següent:"
 msgstr[1] "S'actualitzaran els %d productes següents:"
 
-#: src/Summary.cc:679
+#: src/Summary.cc:687
 #, c-format, boost-format
 msgid "The following application is going to be upgraded:"
 msgid_plural "The following %d applications are going to be upgraded:"
 msgstr[0] "S'actualitzarà l'aplicació següent:"
 msgstr[1] "S'actualitzaran les %d aplicacions següents:"
 
-#: src/Summary.cc:701
+#: src/Summary.cc:709
 #, c-format, boost-format
 msgid "The following package is going to be downgraded:"
 msgid_plural "The following %d packages are going to be downgraded:"
 msgstr[0] "Es desactualitzarà el paquet següent:"
 msgstr[1] "Es desactualitzaran els %d paquets següents:"
 
-#: src/Summary.cc:706
+#: src/Summary.cc:714
 #, c-format, boost-format
 msgid "The following patch is going to be downgraded:"
 msgid_plural "The following %d patches are going to be downgraded:"
 msgstr[0] "Es desactualitzarà el pedaç següent:"
 msgstr[1] "Es desactualitzaran els %d pedaços següents:"
 
-#: src/Summary.cc:711
+#: src/Summary.cc:719
 #, c-format, boost-format
 msgid "The following pattern is going to be downgraded:"
 msgid_plural "The following %d patterns are going to be downgraded:"
 msgstr[0] "Es desactualitzarà el patró següent:"
 msgstr[1] "Es desactualitzaran els %d patrons següents:"
 
-#: src/Summary.cc:716
+#: src/Summary.cc:724
 #, c-format, boost-format
 msgid "The following product is going to be downgraded:"
 msgid_plural "The following %d products are going to be downgraded:"
 msgstr[0] "Es desactualitzarà el producte següent:"
 msgstr[1] "Es desactualitzaran els %d productes següents:"
 
-#: src/Summary.cc:722
+#: src/Summary.cc:730
 #, c-format, boost-format
 msgid "The following application is going to be downgraded:"
 msgid_plural "The following %d applications are going to be downgraded:"
 msgstr[0] "Es desactualitzarà l'aplicació següent:"
 msgstr[1] "Es desactualitzaran les %d aplicacions següents:"
 
-#: src/Summary.cc:744
+#: src/Summary.cc:752
 #, c-format, boost-format
 msgid "The following package is going to be reinstalled:"
 msgid_plural "The following %d packages are going to be reinstalled:"
 msgstr[0] "Es reinstal·larà el paquet següent:"
 msgstr[1] "Es reinstal·laran els %d paquets següents:"
 
-#: src/Summary.cc:749
+#: src/Summary.cc:757
 #, c-format, boost-format
 msgid "The following patch is going to be reinstalled:"
 msgid_plural "The following %d patches are going to be reinstalled:"
 msgstr[0] "Es reinstal·larà el pedaç següent:"
 msgstr[1] "Es reinstal·laran els %d pedaços següents:"
 
-#: src/Summary.cc:754
+#: src/Summary.cc:762
 #, c-format, boost-format
 msgid "The following pattern is going to be reinstalled:"
 msgid_plural "The following %d patterns are going to be reinstalled:"
 msgstr[0] "Es reinstal·larà el patró següent:"
 msgstr[1] "Es reinstal·laran els %d patrons següents:"
 
-#: src/Summary.cc:759
+#: src/Summary.cc:767
 #, c-format, boost-format
 msgid "The following product is going to be reinstalled:"
 msgid_plural "The following %d products are going to be reinstalled:"
 msgstr[0] "Es reinstal·larà el producte següent:"
 msgstr[1] "Es reinstal·laran els %d productes següents:"
 
-#: src/Summary.cc:772
+#: src/Summary.cc:780
 #, c-format, boost-format
 msgid "The following application is going to be reinstalled:"
 msgid_plural "The following %d applications are going to be reinstalled:"
 msgstr[0] "Es reinstal·larà l'aplicació següent:"
 msgstr[1] "Es reinstal·laran les %d aplicacions següents:"
 
-#: src/Summary.cc:909
+#: src/Summary.cc:917
 #, c-format, boost-format
 msgid "The following recommended package was automatically selected:"
 msgid_plural ""
@@ -1478,7 +1478,7 @@ msgstr[0] "El paquet recomanat següent s'ha seleccionat automàticament:"
 msgstr[1] ""
 "Els %d paquets recomanats següents s'han seleccionat automàticament:"
 
-#: src/Summary.cc:914
+#: src/Summary.cc:922
 #, c-format, boost-format
 msgid "The following recommended patch was automatically selected:"
 msgid_plural ""
@@ -1487,7 +1487,7 @@ msgstr[0] "El pedaç recomanat següent s'ha seleccionat automàticament:"
 msgstr[1] ""
 "Els %d pedaços recomanats següents s'han seleccionat automàticament:"
 
-#: src/Summary.cc:919
+#: src/Summary.cc:927
 #, c-format, boost-format
 msgid "The following recommended pattern was automatically selected:"
 msgid_plural ""
@@ -1496,7 +1496,7 @@ msgstr[0] "El patró recomanat següent s'ha seleccionat automàticament:"
 msgstr[1] ""
 "Els %d patrons recomanats següents s'han seleccionat automàticament:"
 
-#: src/Summary.cc:924
+#: src/Summary.cc:932
 #, c-format, boost-format
 msgid "The following recommended product was automatically selected:"
 msgid_plural ""
@@ -1505,7 +1505,7 @@ msgstr[0] "El producte recomanat següent s'ha seleccionat automàticament:"
 msgstr[1] ""
 "Els %d productes recomanats següents s'han seleccionat automàticament:"
 
-#: src/Summary.cc:929
+#: src/Summary.cc:937
 #, c-format, boost-format
 msgid "The following recommended source package was automatically selected:"
 msgid_plural ""
@@ -1516,7 +1516,7 @@ msgstr[1] ""
 "Els %d paquets de codi font recomanats següents s'han seleccionat "
 "automàticament:"
 
-#: src/Summary.cc:935
+#: src/Summary.cc:943
 #, c-format, boost-format
 msgid "The following recommended application was automatically selected:"
 msgid_plural ""
@@ -1527,7 +1527,7 @@ msgstr[1] ""
 "Les següents %d  aplicacions recomanades han estat seleccionades "
 "automàticament:"
 
-#: src/Summary.cc:982
+#: src/Summary.cc:990
 #, c-format, boost-format
 msgid ""
 "The following package is recommended, but will not be installed (only "
@@ -1542,7 +1542,7 @@ msgstr[1] ""
 "Els s%d paquets següents estan recomanats, però no s'instal·laran (només "
 "s'instal·laran els paquets necessaris):"
 
-#: src/Summary.cc:994
+#: src/Summary.cc:1002
 #, c-format, boost-format
 msgid ""
 "The following package is recommended, but will not be installed because it's "
@@ -1557,7 +1557,7 @@ msgstr[1] ""
 "Els %d paquets següents estan recomanats, però no s'instal·laran perquè no "
 "són volguts (abans es van suprimir manualment):"
 
-#: src/Summary.cc:1004
+#: src/Summary.cc:1012
 #, c-format, boost-format
 msgid ""
 "The following package is recommended, but will not be installed due to "
@@ -1572,7 +1572,7 @@ msgstr[1] ""
 "Els %d paquets següents estan recomanats, però no s'instal·laran a causa de "
 "conflictes o problemes de dependències:"
 
-#: src/Summary.cc:1017
+#: src/Summary.cc:1025
 #, c-format, boost-format
 msgid "The following patch is recommended, but will not be installed:"
 msgid_plural ""
@@ -1580,7 +1580,7 @@ msgid_plural ""
 msgstr[0] "El pedaç següent està recomanat, però no s'instal·larà:"
 msgstr[1] "Els %d pedaços següents estan recomanats, però no s'instal·laran:"
 
-#: src/Summary.cc:1021
+#: src/Summary.cc:1029
 #, c-format, boost-format
 msgid "The following pattern is recommended, but will not be installed:"
 msgid_plural ""
@@ -1588,7 +1588,7 @@ msgid_plural ""
 msgstr[0] "El patró següent està recomanat, però no s'instal·larà:"
 msgstr[1] "Els %d patrons següents estan recomanats, però no s'instal·laran:"
 
-#: src/Summary.cc:1025
+#: src/Summary.cc:1033
 #, c-format, boost-format
 msgid "The following product is recommended, but will not be installed:"
 msgid_plural ""
@@ -1596,7 +1596,7 @@ msgid_plural ""
 msgstr[0] "El producte següent està recomanat, però no s'instal·larà:"
 msgstr[1] "Els %d productes següents estan recomanats, però no s'instal·laran:"
 
-#: src/Summary.cc:1030
+#: src/Summary.cc:1038
 #, c-format, boost-format
 msgid "The following application is recommended, but will not be installed:"
 msgid_plural ""
@@ -1605,7 +1605,7 @@ msgstr[0] "La següent aplicació està recomanada, però no s'instal·larà:"
 msgstr[1] ""
 "Les següents %d aplicacions estan recomanades, però no s'instal·laran:"
 
-#: src/Summary.cc:1063
+#: src/Summary.cc:1071
 #, c-format, boost-format
 msgid "The following package is suggested, but will not be installed:"
 msgid_plural ""
@@ -1613,7 +1613,7 @@ msgid_plural ""
 msgstr[0] "El paquet següent està suggerit, però no s'instal·larà:"
 msgstr[1] "Els %d paquets següents estan suggerits, però no s'instal·laran:"
 
-#: src/Summary.cc:1068
+#: src/Summary.cc:1076
 #, c-format, boost-format
 msgid "The following patch is suggested, but will not be installed:"
 msgid_plural ""
@@ -1621,7 +1621,7 @@ msgid_plural ""
 msgstr[0] "El pedaç següent està suggerit, però no s'instal·larà:"
 msgstr[1] "Els %d pedaços següents estan suggerits, però no s'instal·laran:"
 
-#: src/Summary.cc:1073
+#: src/Summary.cc:1081
 #, c-format, boost-format
 msgid "The following pattern is suggested, but will not be installed:"
 msgid_plural ""
@@ -1629,7 +1629,7 @@ msgid_plural ""
 msgstr[0] "El patró següent està suggerit, però no s'instal·larà:"
 msgstr[1] "Els %d patrons següents estan suggerits, però no s'instal·laran:"
 
-#: src/Summary.cc:1078
+#: src/Summary.cc:1086
 #, c-format, boost-format
 msgid "The following product is suggested, but will not be installed:"
 msgid_plural ""
@@ -1637,7 +1637,7 @@ msgid_plural ""
 msgstr[0] "El producte següent està suggerit, però no s'instal·larà:"
 msgstr[1] "Els %d productes següents estan suggerits, però no s'instal·laran:"
 
-#: src/Summary.cc:1084
+#: src/Summary.cc:1092
 #, c-format, boost-format
 msgid "The following application is suggested, but will not be installed:"
 msgid_plural ""
@@ -1646,77 +1646,77 @@ msgstr[0] "La següent aplicació està suggerida, però no s'instal·larà:"
 msgstr[1] ""
 "Les següents %d aplicacions estan suggerides, però no s'instal·laran:"
 
-#: src/Summary.cc:1109
+#: src/Summary.cc:1117
 #, c-format, boost-format
 msgid "The following package is going to change architecture:"
 msgid_plural "The following %d packages are going to change architecture:"
 msgstr[0] "El paquet següent canviarà d'arquitectura:"
 msgstr[1] "Els %d paquets següents canviaran d'arquitectura:"
 
-#: src/Summary.cc:1114
+#: src/Summary.cc:1122
 #, c-format, boost-format
 msgid "The following patch is going to change architecture:"
 msgid_plural "The following %d patches are going to change architecture:"
 msgstr[0] "El pedaç següent canviarà d'arquitectura:"
 msgstr[1] "Els %d pedaços següents canviaran d'arquitectura:"
 
-#: src/Summary.cc:1119
+#: src/Summary.cc:1127
 #, c-format, boost-format
 msgid "The following pattern is going to change architecture:"
 msgid_plural "The following %d patterns are going to change architecture:"
 msgstr[0] "El patró següent canviarà d'arquitectura:"
 msgstr[1] "Els %d patrons següents canviaran d'arquitectura:"
 
-#: src/Summary.cc:1124
+#: src/Summary.cc:1132
 #, c-format, boost-format
 msgid "The following product is going to change architecture:"
 msgid_plural "The following %d products are going to change architecture:"
 msgstr[0] "El producte següent canviarà d'arquitectura:"
 msgstr[1] "Els %d productes següents canviaran d'arquitectura:"
 
-#: src/Summary.cc:1130
+#: src/Summary.cc:1138
 #, c-format, boost-format
 msgid "The following application is going to change architecture:"
 msgid_plural "The following %d applications are going to change architecture:"
 msgstr[0] "L'aplicació següent canviarà d'arquitectura:"
 msgstr[1] "Les següents %d aplicacions canviaran d'arquitectura:"
 
-#: src/Summary.cc:1155
+#: src/Summary.cc:1163
 #, c-format, boost-format
 msgid "The following package is going to change vendor:"
 msgid_plural "The following %d packages are going to change vendor:"
 msgstr[0] "El paquet següent canviarà de proveïdor:"
 msgstr[1] "Els %d paquets següents canviaran de proveïdor:"
 
-#: src/Summary.cc:1160
+#: src/Summary.cc:1168
 #, c-format, boost-format
 msgid "The following patch is going to change vendor:"
 msgid_plural "The following %d patches are going to change vendor:"
 msgstr[0] "El pedaç següent canviarà de proveïdor:"
 msgstr[1] "Els següents %d pedaços canviaran de proveïdor:"
 
-#: src/Summary.cc:1165
+#: src/Summary.cc:1173
 #, c-format, boost-format
 msgid "The following pattern is going to change vendor:"
 msgid_plural "The following %d patterns are going to change vendor:"
 msgstr[0] "El pedaç següent canviarà de proveïdor:"
 msgstr[1] "Els %d patrons següents canviaran de proveïdor:"
 
-#: src/Summary.cc:1170
+#: src/Summary.cc:1178
 #, c-format, boost-format
 msgid "The following product is going to change vendor:"
 msgid_plural "The following %d products are going to change vendor:"
 msgstr[0] "El producte següent canviarà de proveïdor:"
 msgstr[1] "Els %d productes següents canviaran de proveïdor:"
 
-#: src/Summary.cc:1176
+#: src/Summary.cc:1184
 #, c-format, boost-format
 msgid "The following application is going to change vendor:"
 msgid_plural "The following %d applications are going to change vendor:"
 msgstr[0] "L'aplicació següent canviarà de proveïdor:"
 msgstr[1] "Les següents %d aplicacions canviaran de proveïdor:"
 
-#: src/Summary.cc:1199
+#: src/Summary.cc:1207
 #, c-format, boost-format
 msgid "The following package has no support information from its vendor:"
 msgid_plural ""
@@ -1725,14 +1725,14 @@ msgstr[0] "El paquet següent no té informació de suport del seu proveïdor:"
 msgstr[1] ""
 "Els %d paquets següents no tenen informació de suport del seu proveïdor:"
 
-#: src/Summary.cc:1217
+#: src/Summary.cc:1225
 #, c-format, boost-format
 msgid "The following package is not supported by its vendor:"
 msgid_plural "The following %d packages are not supported by their vendor:"
 msgstr[0] "El paquet següent no té suport del seu proveïdor:"
 msgstr[1] "Els %d paquets següents no tenen suport del seu proveïdor:"
 
-#: src/Summary.cc:1235
+#: src/Summary.cc:1243
 #, c-format, boost-format
 msgid ""
 "The following package needs additional customer contract to get support:"
@@ -1745,28 +1745,28 @@ msgstr[1] ""
 "Els %d paquets següents necessiten un contracte addicional de client per "
 "obtenir suport:"
 
-#: src/Summary.cc:1255
+#: src/Summary.cc:1263
 #, c-format, boost-format
 msgid "The following package update will NOT be installed:"
 msgid_plural "The following %d package updates will NOT be installed:"
 msgstr[0] "El paquet d'actualització següent NO s'instal·larà:"
 msgstr[1] "Els %d paquets d'actualització següents NO s'instal·laran:"
 
-#: src/Summary.cc:1260
+#: src/Summary.cc:1268
 #, c-format, boost-format
 msgid "The following product update will NOT be installed:"
 msgid_plural "The following %d product updates will NOT be installed:"
 msgstr[0] "El producte d'actualització següent NO s'instal·larà:"
 msgstr[1] "Els %d productes d'actualització següents NO s'instal·laran:"
 
-#: src/Summary.cc:1266
+#: src/Summary.cc:1274
 #, c-format, boost-format
 msgid "The following application update will NOT be installed:"
 msgid_plural "The following %d application updates will NOT be installed:"
 msgstr[0] "La següent aplicació NO s'instal·larà:"
 msgstr[1] "Les següents %d aplicacions NO s'instal·laran:"
 
-#: src/Summary.cc:1299
+#: src/Summary.cc:1307
 #, c-format, boost-format
 msgid "The following item is locked and will not be changed by any action:"
 msgid_plural ""
@@ -1777,161 +1777,168 @@ msgstr[1] ""
 
 #. always as plain name list
 #. translators: used as 'tag:' (i.e. followed by ':')
-#: src/Summary.cc:1312
+#: src/Summary.cc:1320
 msgid "Available"
 msgstr "Disponible"
 
 #. translators: used as 'tag:' (i.e. followed by ':')
 #. translators: property name; short; used like "Name: value"
-#: src/Summary.cc:1318 src/info.cc:334 src/info.cc:425 src/info.cc:556
+#: src/Summary.cc:1326 src/info.cc:334 src/info.cc:425 src/info.cc:556
 msgid "Installed"
 msgstr "Instal·lat"
 
-#: src/Summary.cc:1323
+#: src/Summary.cc:1331
 #, boost-format
 msgid "Run '%1%' to see the complete list of locked items."
 msgstr "Feu servir \"%s\" per veure una llista completa dels ítems bloquejats."
 
-#: src/Summary.cc:1333
+#: src/Summary.cc:1340
 #, c-format, boost-format
 msgid "The following patch requires a system reboot:"
 msgid_plural "The following %d patches require a system reboot:"
 msgstr[0] "El pedaç següent requereix un reinici del sistema:"
 msgstr[1] "Els %d pedaços següents requereixen un reinici del sistema:"
 
-#: src/Summary.cc:1351
+#: src/Summary.cc:1344
+#, c-format, boost-format
+msgid "The following package requires a system reboot:"
+msgid_plural "The following %d package require a system reboot:"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/Summary.cc:1373
 #, boost-format
 msgid "Overall download size: %1%. Already cached: %2%."
 msgstr "Mida global de la baixada: %1%. Ja a la memòria cau: %2%."
 
-#: src/Summary.cc:1354
+#: src/Summary.cc:1376
 msgid "Download only."
 msgstr "Només descarregar."
 
 #. TrasnlatorExplanation %s will be substituted by a byte count e.g. 212 K
-#: src/Summary.cc:1360
+#: src/Summary.cc:1382
 #, c-format, boost-format
 msgid "After the operation, additional %s will be used."
 msgstr "Després de l'operació, s'usaran %s d'espai addicional."
 
-#: src/Summary.cc:1362
+#: src/Summary.cc:1384
 msgid "No additional space will be used or freed after the operation."
 msgstr ""
 "No s'utilitzarà ni s'alliberarà espai addicional després de l'operació."
 
 #. TrasnlatorExplanation %s will be substituted by a byte count e.g. 212 K
-#: src/Summary.cc:1369
+#: src/Summary.cc:1391
 #, c-format, boost-format
 msgid "After the operation, %s will be freed."
 msgstr "Després de l'operació, s'hauran alliberat %s d'espai."
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
-#: src/Summary.cc:1392
+#: src/Summary.cc:1414
 msgid "package to upgrade"
 msgid_plural "packages to upgrade"
 msgstr[0] "paquet per actualitzar"
 msgstr[1] "paquets per actualitzar"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
-#: src/Summary.cc:1403
+#: src/Summary.cc:1425
 msgid "to downgrade"
 msgid_plural "to downgrade"
 msgstr[0] "per desactualitzar"
 msgstr[1] "per desactualitzar"
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
-#: src/Summary.cc:1406
+#: src/Summary.cc:1428
 msgid "package to downgrade"
 msgid_plural "packages to downgrade"
 msgstr[0] "paquet per desactualitzar"
 msgstr[1] "paquets per desactualitzar"
 
 #. translators: this text will be preceded by a number e.g. "5 new"
-#: src/Summary.cc:1417
+#: src/Summary.cc:1439
 msgid "new"
 msgid_plural "new"
 msgstr[0] "de nou"
 msgstr[1] "de nous"
 
 #. translators: this text will be preceded by a number e.g. "5 new to install"
-#: src/Summary.cc:1420
+#: src/Summary.cc:1442
 msgid "new package to install"
 msgid_plural "new packages to install"
 msgstr[0] "paquet nou per instal·lar"
 msgstr[1] "paquets nous per instal·lar"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
-#: src/Summary.cc:1431
+#: src/Summary.cc:1453
 msgid "to reinstall"
 msgid_plural "to reinstall"
 msgstr[0] "per reinstal·lar"
 msgstr[1] "per reinstal·lar"
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
-#: src/Summary.cc:1434
+#: src/Summary.cc:1456
 msgid "package to reinstall"
 msgid_plural "packages to reinstall"
 msgstr[0] "paquet per reinstal·lar"
 msgstr[1] "paquets per reinstal·lar"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
-#: src/Summary.cc:1445
+#: src/Summary.cc:1467
 msgid "to remove"
 msgid_plural "to remove"
 msgstr[0] "per suprimir"
 msgstr[1] "per suprimir"
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
-#: src/Summary.cc:1448
+#: src/Summary.cc:1470
 msgid "package to remove"
 msgid_plural "packages to remove"
 msgstr[0] "paquet per suprimir"
 msgstr[1] "paquets per suprimir"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
-#: src/Summary.cc:1459
+#: src/Summary.cc:1481
 msgid "to change vendor"
 msgid_plural " to change vendor"
 msgstr[0] "per canviar de proveïdor"
 msgstr[1] "per canviar de proveïdor"
 
 #. translators: this text will be preceded by a number e.g. "5 packages ..."
-#: src/Summary.cc:1462
+#: src/Summary.cc:1484
 msgid "package will change vendor"
 msgid_plural "packages will change vendor"
 msgstr[0] "paquet canviarà de proveïdor."
 msgstr[1] "paquets canviaran de proveïdor."
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
-#: src/Summary.cc:1473
+#: src/Summary.cc:1495
 msgid "to change arch"
 msgid_plural "to change arch"
 msgstr[0] "per canviar d'arquitectura"
 msgstr[1] "per canviar d'arquitectura"
 
 #. translators: this text will be preceded by a number e.g. "5 packages ..."
-#: src/Summary.cc:1476
+#: src/Summary.cc:1498
 msgid "package will change arch"
 msgid_plural "packages will change arch"
 msgstr[0] "paquet per canviar d'arquitectura"
 msgstr[1] "paquets per canviar d'arquitectura"
 
 #. translators: this text will be preceded by a number e.g. "5 new"
-#: src/Summary.cc:1487
+#: src/Summary.cc:1509
 msgid "source package"
 msgid_plural "source packages"
 msgstr[0] "paquet de codi font"
 msgstr[1] "paquets de codi font"
 
 #. translators: this text will be preceded by a number e.g. "5 new to install"
-#: src/Summary.cc:1490
+#: src/Summary.cc:1512
 msgid "source package to install"
 msgid_plural "source packages to install"
 msgstr[0] "paquet de codi font per instal·lar."
 msgstr[1] "paquets de codi font per instal·lar."
 
 #. patch command (auto)restricted to update stack patches
-#: src/Summary.cc:1556
+#: src/Summary.cc:1578
 msgid ""
 "Package manager restart required. (Run this command once again after the "
 "update stack got updated)"
@@ -1939,7 +1946,7 @@ msgstr ""
 "Cal reiniciar el gestor de paquets. (Executeu aquesta ordre un altre cop "
 "després d'actualitzar la pila d'actualització)"
 
-#: src/Summary.cc:1559
+#: src/Summary.cc:1581
 msgid "System reboot required."
 msgstr "Cal reiniciar el sistema."
 
@@ -1951,7 +1958,7 @@ msgstr "Cal reiniciar el sistema."
 #. Consider to cancel:
 #. Product 'opennSUSE Tumbleweed' requires to be updated by calling 'zypper dup'!
 #. Continue? [y/n/...? shows all options] (y):
-#: src/Summary.cc:1576
+#: src/Summary.cc:1598
 msgid "Consider to cancel:"
 msgstr "Considereu-ne la cancel·lació:"
 
@@ -1984,33 +1991,27 @@ msgstr "El PackageKit encara està actiu (probablement ocupat)."
 msgid "Try again?"
 msgstr "Ho torno a intentar?"
 
-#: src/Zypper.cc:277 src/Zypper.cc:739 src/commands/basecommand.cc:268
+#: src/Zypper.cc:243 src/Zypper.cc:706 src/commands/basecommand.cc:260
 msgid "Unexpected exception."
 msgstr "Excepció inesperada."
 
 #. translators: %s is "help" or "zypper help" depending on whether
 #. zypper shell is running or not
-#: src/Zypper.cc:318
+#: src/Zypper.cc:284
 #, c-format, boost-format
 msgid "Type '%s' to get command-specific help."
 msgstr "Escriviu \"%s\" per obtenir ajuda sobre una ordre concreta."
 
-#: src/Zypper.cc:340
+#: src/Zypper.cc:305
 #, c-format, boost-format
 msgid "Verbosity: %d"
 msgstr "Verbositat: %d"
 
-#. translators: %1%  - is the name of a subcommand
-#: src/Zypper.cc:442
-#, boost-format
-msgid "Subcommand %1% does not support zypper global options."
-msgstr "La subordre %1% no té suport per a opcions globals del zypper."
-
-#: src/Zypper.cc:459
+#: src/Zypper.cc:314
 msgid "Enforced setting"
 msgstr "Configuració forçada"
 
-#: src/Zypper.cc:482
+#: src/Zypper.cc:337
 msgid ""
 "The /etc/products.d/baseproduct symlink is dangling or missing!\n"
 "The link must point to your core products .prod file in /etc/products.d.\n"
@@ -2020,19 +2021,14 @@ msgstr ""
 
 #. TranslatorExplanation The %s is "--plus-repo"
 #. TranslatorExplanation The %s is "--option-name"
-#: src/Zypper.cc:516 src/Zypper.cc:564
+#: src/Zypper.cc:530 src/Zypper.cc:579
 #, c-format, boost-format
 msgid "The %s option has no effect here, ignoring."
 msgstr "L'opció %s no té cap efecte aquí, ignorant-la."
 
-#. Currently no concept how to handle global options and ZYPPlock
-#: src/Zypper.cc:643
-msgid "Zypper shell does not support execution of subcommands."
-msgstr "L'intèrpret d'ordres Zypper no té suport per executar subordres."
-
-#: src/Zypper.cc:822 src/commands/shell.cc:43
-msgid "Unexpected program flow."
-msgstr "S'ha produït un error de flux de programa."
+#: src/Zypper.cc:649
+msgid "Non-option program arguments: "
+msgstr "Arguments del programa sense opcions: "
 
 #. help text for the "Abort, retry, ignore?" prompt for media errors
 #: src/callbacks/media.cc:27
@@ -2169,14 +2165,6 @@ msgstr "Nom d'usuari"
 #: src/callbacks/media.cc:335
 msgid "Password"
 msgstr "Contrasenya"
-
-#: src/commands/basecommand.cc:107
-msgid "Option program arguments: "
-msgstr "Opcions d'arguments del programa: "
-
-#: src/commands/basecommand.cc:119
-msgid "Non-option program arguments: "
-msgstr "Arguments del programa sense opcions: "
 
 #: src/commands/conditions.cc:19
 msgid "Root privileges are required to run this command."
@@ -2669,22 +2657,22 @@ msgstr ""
 "El codi de sortida ZYPPER_EXIT_INF_REBOOT_NEEDED indica que cal un reinici. "
 "Si no, el codi de sortida s'estableix a ZYPPER_EXIT_OK."
 
-#: src/commands/needs-rebooting.cc:49
+#: src/commands/needs-rebooting.cc:34
 msgid "Core libraries or services have been updated."
 msgstr "S'han actualitzat biblioteques o serveis de base."
 
-#: src/commands/needs-rebooting.cc:50
+#: src/commands/needs-rebooting.cc:35
 msgid ""
 "Reboot is required to ensure that your system benefits from these updates."
 msgstr ""
 "Cal reiniciar per assegurar que el sistema es beneficia d'aquestes "
 "actualitzacions."
 
-#: src/commands/needs-rebooting.cc:53
+#: src/commands/needs-rebooting.cc:40
 msgid "No core libraries or services have been updated."
 msgstr "No s'han actualitzat biblioteques o serveis de base."
 
-#: src/commands/needs-rebooting.cc:54
+#: src/commands/needs-rebooting.cc:41
 msgid "Reboot is probably not necessary."
 msgstr "Probablement no és necessari reiniciar."
 
@@ -2899,12 +2887,12 @@ msgstr ""
 "necessari."
 
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
-#: src/commands/ps.cc:26
+#: src/commands/ps.cc:27
 msgid "ps [OPTIONS]"
 msgstr "ps [opcions]"
 
 #. translators: command description
-#: src/commands/ps.cc:28
+#: src/commands/ps.cc:29
 msgid ""
 "List running processes which might still use files and libraries deleted by "
 "recent upgrades."
@@ -2913,7 +2901,7 @@ msgstr ""
 "biblioteques suprimides per actualitzacions recents."
 
 #. translators: -s, --short
-#: src/commands/ps.cc:45
+#: src/commands/ps.cc:46
 msgid ""
 "Create a short table not showing the deleted files. Given twice, show only "
 "processes which are associated with a system service. Given three times, "
@@ -2925,7 +2913,7 @@ msgstr ""
 "associats."
 
 #. translators: --print <format>
-#: src/commands/ps.cc:48
+#: src/commands/ps.cc:49
 #, c-format, boost-format
 msgid ""
 "For each associated system service print <format> on the standard output, "
@@ -2937,70 +2925,70 @@ msgstr ""
 "se substitueix pel nom de servei del sistema."
 
 #. translators: -d, --debugFile <path>
-#: src/commands/ps.cc:51
+#: src/commands/ps.cc:52
 msgid "Write debug output to file <path>."
 msgstr "Escriu la sortida de depuració al fitxer <path>."
 
-#: src/commands/ps.cc:71 src/solve-commit.cc:452
+#: src/commands/ps.cc:72 src/solve-commit.cc:450
 msgid "Check failed:"
 msgstr "Ha fallat la comprovació:"
 
 #. Here: Table output
-#: src/commands/ps.cc:126 src/solve-commit.cc:441
+#: src/commands/ps.cc:127 src/solve-commit.cc:439
 msgid "Checking for running processes using deleted libraries..."
 msgstr ""
 "Comprovant si hi ha processos actius que facin servir biblioteques "
 "esborrades..."
 
 #. process ID
-#: src/commands/ps.cc:141
+#: src/commands/ps.cc:142
 msgid "PID"
 msgstr "PID"
 
 #. parent process ID
-#: src/commands/ps.cc:143
+#: src/commands/ps.cc:144
 msgid "PPID"
 msgstr "PPID"
 
 #. process user ID
-#: src/commands/ps.cc:145
+#: src/commands/ps.cc:146
 msgid "UID"
 msgstr "UID"
 
 #. process login name
-#: src/commands/ps.cc:147
+#: src/commands/ps.cc:148
 msgid "User"
 msgstr "Usuari"
 
 #. process command name
-#: src/commands/ps.cc:149
+#: src/commands/ps.cc:150
 msgid "Command"
 msgstr "Ordre"
 
 #. "/etc/init.d/ script that might be used to restart the command (guessed)
-#: src/commands/ps.cc:151 src/commands/repos/list.cc:277
+#: src/commands/ps.cc:152 src/commands/repos/list.cc:277
 msgid "Service"
 msgstr "Servei"
 
 # menu item for selecting a file
 #. "list of deleted files or libraries accessed"
-#: src/commands/ps.cc:155
+#: src/commands/ps.cc:156
 msgid "Files"
 msgstr "Fitxers"
 
-#: src/commands/ps.cc:186
+#: src/commands/ps.cc:187
 msgid "No processes using deleted files found."
 msgstr "No s'ha trobat cap procés que faci servir fitxers suprimits."
 
-#: src/commands/ps.cc:190
+#: src/commands/ps.cc:191
 msgid "The following running processes use deleted files:"
 msgstr "Els processos actius següents utilitzen fitxers suprimits:"
 
-#: src/commands/ps.cc:193
+#: src/commands/ps.cc:194
 msgid "You may wish to restart these processes."
 msgstr "Potser hauríeu de reiniciar aquests processos."
 
-#: src/commands/ps.cc:194
+#: src/commands/ps.cc:195
 #, c-format, boost-format
 msgid ""
 "See '%s' for information about the meaning of values in the above table."
@@ -3008,7 +2996,7 @@ msgstr ""
 "Vegeu \"%s\" per obtenir informació sobre el significat dels valors de la "
 "taula anterior."
 
-#: src/commands/ps.cc:201
+#: src/commands/ps.cc:208
 msgid ""
 "Note: Not running as root you are limited to searching for files you have "
 "permission to examine with the system stat(2) function. The result might be "
@@ -3687,121 +3675,121 @@ msgstr ""
 "Prioritat no vàlida: %s. Feu servir un número enter positiu. Com més alt el "
 "número, més baixa la prioritat."
 
-#: src/commands/reposerviceoptionsets.cc:71
+#: src/commands/reposerviceoptionsets.cc:72
 msgid "Set a descriptive name for the service."
 msgstr "Estableix un nom descriptiu per al servei."
 
-#: src/commands/reposerviceoptionsets.cc:71
+#: src/commands/reposerviceoptionsets.cc:72
 msgid "Set a descriptive name for the repository."
 msgstr "Estableix un nom descriptiu per al repositori."
 
-#: src/commands/reposerviceoptionsets.cc:74
+#: src/commands/reposerviceoptionsets.cc:75
 msgid "Enable a disabled service."
 msgstr "Activa el servei desactivat."
 
-#: src/commands/reposerviceoptionsets.cc:74
+#: src/commands/reposerviceoptionsets.cc:75
 msgid "Enable a disabled repository."
 msgstr "Activa el repositori desactivat."
 
-#: src/commands/reposerviceoptionsets.cc:77
+#: src/commands/reposerviceoptionsets.cc:78
 msgid "Disable the service (but don't remove it)."
 msgstr "Desactiva el servei (però no el suprimeixis)."
 
-#: src/commands/reposerviceoptionsets.cc:77
+#: src/commands/reposerviceoptionsets.cc:78
 msgid "Disable the repository (but don't remove it)."
 msgstr "Desactiva el repositori (però no el suprimeixis)."
 
-#: src/commands/reposerviceoptionsets.cc:80
+#: src/commands/reposerviceoptionsets.cc:81
 msgid "Enable auto-refresh of the service."
 msgstr "Activa l'autorefresc per al servei."
 
-#: src/commands/reposerviceoptionsets.cc:80
+#: src/commands/reposerviceoptionsets.cc:81
 msgid "Enable auto-refresh of the repository."
 msgstr "Activa l'autorefresc del repositori."
 
-#: src/commands/reposerviceoptionsets.cc:83
+#: src/commands/reposerviceoptionsets.cc:84
 msgid "Disable auto-refresh of the service."
 msgstr "Desctiva l'autorefresc per al servei."
 
-#: src/commands/reposerviceoptionsets.cc:83
+#: src/commands/reposerviceoptionsets.cc:84
 msgid "Disable auto-refresh of the repository."
 msgstr "Desactiva l'autorefresc del repositori."
 
-#: src/commands/reposerviceoptionsets.cc:110
+#: src/commands/reposerviceoptionsets.cc:111
 msgid "Apply changes to all services."
 msgstr "Aplica els canvis a tots els serveis."
 
-#: src/commands/reposerviceoptionsets.cc:110
+#: src/commands/reposerviceoptionsets.cc:111
 msgid "Apply changes to all repositories."
 msgstr "Aplica els canvis a tots els repositoris."
 
-#: src/commands/reposerviceoptionsets.cc:113
+#: src/commands/reposerviceoptionsets.cc:114
 msgid "Apply changes to all local services."
 msgstr "Aplica els canvis a tots els serveis locals."
 
-#: src/commands/reposerviceoptionsets.cc:113
+#: src/commands/reposerviceoptionsets.cc:114
 msgid "Apply changes to all local repositories."
 msgstr "Aplica els canvis a tots els repositoris locals."
 
-#: src/commands/reposerviceoptionsets.cc:116
+#: src/commands/reposerviceoptionsets.cc:117
 msgid "Apply changes to all remote services."
 msgstr "Aplica els canvis a tots els serveis remots."
 
-#: src/commands/reposerviceoptionsets.cc:116
+#: src/commands/reposerviceoptionsets.cc:117
 msgid "Apply changes to all remote repositories."
 msgstr "Aplica els canvis a tots els repositoris remots."
 
-#: src/commands/reposerviceoptionsets.cc:119
+#: src/commands/reposerviceoptionsets.cc:120
 msgid "Apply changes to services of specified type."
 msgstr "Aplica els canvis a tots els serveis d'un tipus concret."
 
-#: src/commands/reposerviceoptionsets.cc:119
+#: src/commands/reposerviceoptionsets.cc:120
 msgid "Apply changes to repositories of specified type."
 msgstr "Aplica els canvis a tots els repositoris d'un tipus especificat."
 
-#: src/commands/reposerviceoptionsets.cc:135
+#: src/commands/reposerviceoptionsets.cc:137
 msgid "Set priority of the repository."
 msgstr "Estableix la prioritat del repositori."
 
-#: src/commands/reposerviceoptionsets.cc:136
+#: src/commands/reposerviceoptionsets.cc:138
 msgid "Enable RPM files caching."
 msgstr "Activa la memòria cau per als fitxers RPM."
 
-#: src/commands/reposerviceoptionsets.cc:137
+#: src/commands/reposerviceoptionsets.cc:139
 msgid "Disable RPM files caching."
 msgstr "Desctiva la memòria cau per als fitxers RPM."
 
-#: src/commands/reposerviceoptionsets.cc:138
+#: src/commands/reposerviceoptionsets.cc:140
 msgid "Enable GPG check for this repository."
 msgstr "Activa la comprovació GPG per a aquest repositori."
 
-#: src/commands/reposerviceoptionsets.cc:139
+#: src/commands/reposerviceoptionsets.cc:141
 msgid "Enable strict GPG check for this repository."
 msgstr "Habilita la comprovació GPG estricta per a aquest repositori."
 
-#: src/commands/reposerviceoptionsets.cc:140
+#: src/commands/reposerviceoptionsets.cc:142
 #, boost-format
 msgid "Short hand for '%1%'."
 msgstr "Forma breu per a \"%1%\"."
 
-#: src/commands/reposerviceoptionsets.cc:141
+#: src/commands/reposerviceoptionsets.cc:143
 msgid "Enable GPG check but allow the repository metadata to be unsigned."
 msgstr ""
 "Habilita la comprovació GPG però permet que les metadades del repositori no "
 "estiguin signades."
 
-#: src/commands/reposerviceoptionsets.cc:142
+#: src/commands/reposerviceoptionsets.cc:144
 msgid ""
 "Enable GPG check but allow installing unsigned packages from this repository."
 msgstr ""
 "Habilita la comprovació GPG però permet instal·lar paquets sense signar "
 "d'aquest repositori."
 
-#: src/commands/reposerviceoptionsets.cc:143
+#: src/commands/reposerviceoptionsets.cc:145
 msgid "Disable GPG check for this repository."
 msgstr "Desactiva la comprovació GPG per a aquest repositori."
 
-#: src/commands/reposerviceoptionsets.cc:144
+#: src/commands/reposerviceoptionsets.cc:146
 msgid ""
 "Use the global GPG check setting defined in /etc/zypp/zypp.conf. This is the "
 "default."
@@ -3810,63 +3798,63 @@ msgstr ""
 "per defecte."
 
 #. translators: -a, --alias
-#: src/commands/reposerviceoptionsets.cc:180
+#: src/commands/reposerviceoptionsets.cc:182
 msgid "Show also repository alias."
 msgstr "Mostra també l'àlies del repositori."
 
 #. translators: -n, --name
-#: src/commands/reposerviceoptionsets.cc:183
+#: src/commands/reposerviceoptionsets.cc:185
 msgid "Show also repository name."
 msgstr "Mostra també el nom del repositori."
 
 #. translators: -r, --refresh
-#: src/commands/reposerviceoptionsets.cc:186
+#: src/commands/reposerviceoptionsets.cc:188
 msgid "Show also the autorefresh flag."
 msgstr "Mostra també l'etiqueta d'autorefresc."
 
 #. translators: -u, --uri
-#: src/commands/reposerviceoptionsets.cc:196
+#: src/commands/reposerviceoptionsets.cc:198
 msgid "Show also base URI of repositories."
 msgstr "Mostra també la base URI dels repositoris."
 
 #. translators: -p, --priority
-#: src/commands/reposerviceoptionsets.cc:200
+#: src/commands/reposerviceoptionsets.cc:202
 msgid "Show also repository priority."
 msgstr "Mostra també la prioritat del repositori."
 
 #. translators: -d, --details
-#: src/commands/reposerviceoptionsets.cc:203
+#: src/commands/reposerviceoptionsets.cc:205
 msgid "Show more information like URI, priority, type."
 msgstr "Mostra més informació, com ara l'URI, prioritat, tipus."
 
-#: src/commands/reposerviceoptionsets.cc:210
+#: src/commands/reposerviceoptionsets.cc:212
 msgid "Show also repositories belonging to the services."
 msgstr "Mostra també els repositoris que pertanyin als serveis."
 
 #. translators: -s, --service
 #. translators: -A, --sort-by-alias
-#: src/commands/reposerviceoptionsets.cc:216
-#: src/commands/reposerviceoptionsets.cc:239
+#: src/commands/reposerviceoptionsets.cc:218
+#: src/commands/reposerviceoptionsets.cc:241
 msgid "Show also alias of parent service."
 msgstr "Mostra també l'àlies del servei."
 
 #. translators: -E, --show-enabled-only
-#: src/commands/reposerviceoptionsets.cc:223
+#: src/commands/reposerviceoptionsets.cc:225
 msgid "Show enabled repos only."
 msgstr "Mostra només els repositoris activats."
 
 #. translators: -U, --sort-by-uri
-#: src/commands/reposerviceoptionsets.cc:226
+#: src/commands/reposerviceoptionsets.cc:228
 msgid "Sort the list by URI."
 msgstr "Classifica per URI."
 
 #. translators: -N, --sort-by-name
-#: src/commands/reposerviceoptionsets.cc:229
+#: src/commands/reposerviceoptionsets.cc:231
 msgid "Sort the list by name."
 msgstr "Classifica per nom."
 
 #. translators: -P, --sort-by-priority
-#: src/commands/reposerviceoptionsets.cc:232
+#: src/commands/reposerviceoptionsets.cc:234
 msgid "Sort the list by repository priority."
 msgstr "Classifica per prioritat de repository."
 
@@ -4045,19 +4033,19 @@ msgid "Specified repository '%s' is disabled."
 msgstr "El repositori especificat '%s' està inhabilitat."
 
 #. translators: empty search result message
-#: src/commands/search/search.cc:414
+#: src/commands/search/search.cc:422
 msgid "No matching items found."
 msgstr "No s'ha trobat cap element que coincideixi."
 
-#: src/commands/search/search.cc:449
+#: src/commands/search/search.cc:457
 msgid "Problem occurred initializing or executing the search query"
 msgstr "Problema a l'hora d'iniciar o executar l'ordre de cerca"
 
-#: src/commands/search/search.cc:450
+#: src/commands/search/search.cc:458
 msgid "See the above message for a hint."
 msgstr "Llegiu l'error anterior per tenir-ne una pista."
 
-#: src/commands/search/search.cc:451 src/repos.cc:994
+#: src/commands/search/search.cc:459 src/repos.cc:994
 msgid "Running 'zypper refresh' as root might resolve the problem."
 msgstr ""
 "Amb l'ordre \"zypper refresh\" com a administrador es podria resoldre el "
@@ -4434,16 +4422,16 @@ msgid "You already are running zypper's shell."
 msgstr "Ja esteu executant un terminal zypper."
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/commands/shell.cc:54
+#: src/commands/shell.cc:52
 msgid "quit (exit, ^D)"
 msgstr "sortir (exit, ^D)"
 
 #. translators: command description
-#: src/commands/shell.cc:56 src/commands/shell.cc:58
+#: src/commands/shell.cc:54 src/commands/shell.cc:56
 msgid "Quit the current zypper shell."
 msgstr "Sortir del terminal zypper."
 
-#: src/commands/shell.cc:76
+#: src/commands/shell.cc:74
 msgid "This command only makes sense in the zypper shell."
 msgstr "Aquesta ordre només té sentit en un terminal zypper."
 
@@ -4548,25 +4536,25 @@ msgstr "No instal·lis dependències construïdes."
 msgid "Source package name is a required argument."
 msgstr "El nom del paquet de codi font és necessari com a argument."
 
-#: src/commands/subcommand.cc:51
+#: src/commands/subcommand.cc:52
 msgid "none"
 msgstr "cap"
 
-#: src/commands/subcommand.cc:295
+#: src/commands/subcommand.cc:296
 #, boost-format
 msgid "cannot exec %1% (%2%)"
 msgstr "no es pot executar %1% (%2%)"
 
 #. translators: %1% - command name or path
 #. translators: %2% - system error message
-#: src/commands/subcommand.cc:304
+#: src/commands/subcommand.cc:305
 #, boost-format
 msgid "fork for %1% failed (%2%)"
 msgstr "Ha fallat fork per a %1% (%2%)"
 
 #. translators: %1% - command name or path
 #. translators: %2% - system error message
-#: src/commands/subcommand.cc:323
+#: src/commands/subcommand.cc:324
 #, boost-format
 msgid "waitpid for %1% failed (%2%)"
 msgstr "Ha fallat el pid d'espera per a %1% (%2%)"
@@ -4574,7 +4562,7 @@ msgstr "Ha fallat el pid d'espera per a %1% (%2%)"
 #. translators: %1% - command name or path
 #. translators: %2% - returned PID (number)
 #. translators: %3% - expected PID (number)
-#: src/commands/subcommand.cc:333
+#: src/commands/subcommand.cc:334
 #, boost-format
 msgid "waitpid for %1% returns unexpected pid %2% while waiting for %3%"
 msgstr ""
@@ -4583,30 +4571,30 @@ msgstr ""
 #. translators: %1% - command name or path
 #. translators: %2% - signal number
 #. translators: %3% - signal name
-#: src/commands/subcommand.cc:344
+#: src/commands/subcommand.cc:345
 #, boost-format
 msgid "%1% was killed by signal %2% (%3%)"
 msgstr "%1% ha estat matat pel senyal %2% (%3%)"
 
-#: src/commands/subcommand.cc:348
+#: src/commands/subcommand.cc:349
 msgid "core dumped"
 msgstr "core abocat"
 
 #. translators: %1% - command name or path
 #. translators: %2% - exit code (number)
-#: src/commands/subcommand.cc:358
+#: src/commands/subcommand.cc:359
 #, boost-format
 msgid "%1% exited with status %2%"
 msgstr "%1% ha sortit amb l'estat %2%"
 
 #. translators: %1% - command name or path
 #. translators: %2% - status (number)
-#: src/commands/subcommand.cc:373
+#: src/commands/subcommand.cc:374
 #, boost-format
 msgid "waitpid for %1% returns unexpected exit status %2%"
 msgstr "El pid d'espera per a %1% retorna un estat de sortida inesperat %2%"
 
-#: src/commands/subcommand.cc:406
+#: src/commands/subcommand.cc:407
 #, boost-format
 msgid ""
 "Zypper subcommands are standalone executables that live in the\n"
@@ -4632,7 +4620,7 @@ msgstr ""
 "escriure les extensions locals del zypper que no viuen a l'espai del "
 "sistema.\n"
 
-#: src/commands/subcommand.cc:421
+#: src/commands/subcommand.cc:422
 #, boost-format
 msgid ""
 "Using zypper global-options together with subcommands, as well as\n"
@@ -4642,19 +4630,19 @@ msgstr ""
 "executar subordres a %1%, ara no té suport.\n"
 
 #. translators: headline of an enumeration; %1% is a directory name
-#: src/commands/subcommand.cc:438
+#: src/commands/subcommand.cc:439
 #, boost-format
 msgid "Available zypper subcommands in '%1%'"
 msgstr "Subordres del zypper disponibles a %1%"
 
 #. translators: headline of an enumeration
-#: src/commands/subcommand.cc:443
+#: src/commands/subcommand.cc:444
 msgid "Zypper subcommands available from elsewhere on your $PATH"
 msgstr ""
 "Sobordres del zypper disponibles des de qualsevol altre lloc al vostre $PATH"
 
 #. translators: helptext; %1% is a zypper command
-#: src/commands/subcommand.cc:448
+#: src/commands/subcommand.cc:449
 #, boost-format
 msgid "Type '%1%' to get subcommand-specific help if available."
 msgstr ""
@@ -4662,15 +4650,26 @@ msgstr ""
 "disponible."
 
 #. translators: %1% - command name
-#: src/commands/subcommand.cc:471
+#: src/commands/subcommand.cc:472
 #, boost-format
 msgid "Manual entry for %1% can't be shown"
 msgstr "No es pot mostrar l'entrada manual per a %1%"
 
 #. translators: command summary: subcommand
-#: src/commands/subcommand.cc:484
+#: src/commands/subcommand.cc:485
 msgid "Lists available subcommands."
 msgstr "Llista les subordres disponibles."
+
+#. Currently no concept how to handle global options and ZYPPlock
+#: src/commands/subcommand.cc:582
+msgid "Zypper shell does not support execution of subcommands."
+msgstr "L'intèrpret d'ordres Zypper no té suport per executar subordres."
+
+#. translators: %1%  - is the name of a subcommand
+#: src/commands/subcommand.cc:596
+#, boost-format
+msgid "Subcommand %1% does not support zypper global options."
+msgstr "La subordre %1% no té suport per a opcions globals del zypper."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/update.cc:22
@@ -4771,7 +4770,7 @@ msgstr ""
 msgid "Argument resolves to no package"
 msgstr "L'argument no apunta a cap paquet"
 
-#: src/commands/utils/download.cc:246 src/solve-commit.cc:890
+#: src/commands/utils/download.cc:246 src/solve-commit.cc:892
 msgid "Nothing to do."
 msgstr "Res per fer."
 
@@ -5243,7 +5242,7 @@ msgstr "S'intenta sortir elegantment..."
 
 #. translators: the first %s is name of the resolvable,
 #. the second is its kind (e.g. 'zypper package')
-#: src/misc.cc:132
+#: src/misc.cc:131
 #, c-format, boost-format
 msgid "Automatically agreeing with %s %s license."
 msgstr "Acceptant automàticament la llicència %s de %s."
@@ -5251,7 +5250,7 @@ msgstr "Acceptant automàticament la llicència %s de %s."
 #. introduction
 #. translators: the first %s is the name of the package, the second
 #. is " (package-type)" if other than "package" (patch/product/pattern)
-#: src/misc.cc:151
+#: src/misc.cc:150
 #, c-format, boost-format
 msgid ""
 "In order to install '%s'%s, you must agree to terms of the following license "
@@ -5261,18 +5260,18 @@ msgstr ""
 "llicència:"
 
 #. lincense prompt
-#: src/misc.cc:165
+#: src/misc.cc:164
 msgid "Do you agree with the terms of the license?"
 msgstr "Esteu d'acord amb els termes de la llicència?"
 
-#: src/misc.cc:173
+#: src/misc.cc:172
 msgid "Aborting installation due to the need for license confirmation."
 msgstr ""
 "Avortant la instal·lació a causa de la necessitat de confirmació de les "
 "llicències."
 
 #. translators: %s is '--auto-agree-with-licenses'
-#: src/misc.cc:176
+#: src/misc.cc:175
 #, c-format, boost-format
 msgid ""
 "Please restart the operation in interactive mode and confirm your agreement "
@@ -5282,66 +5281,66 @@ msgstr ""
 "llicències necessàries o feu servir l'opció %s."
 
 #. translators: e.g. "... with flash package license."
-#: src/misc.cc:185
+#: src/misc.cc:184
 #, c-format, boost-format
 msgid "Aborting installation due to user disagreement with %s %s license."
 msgstr ""
 "Avortant la instal·lació a causa del desacord de l'usuari amb la llicència "
 "de %s %s."
 
-#: src/misc.cc:223
+#: src/misc.cc:222
 msgid "License"
 msgstr "Llicència"
 
-#: src/misc.cc:242
+#: src/misc.cc:241
 msgid "EULA"
 msgstr "EULA (End User License Agreement)"
 
-#: src/misc.cc:254
+#: src/misc.cc:253
 msgid "SUMMARY"
 msgstr "RESUM"
 
-#: src/misc.cc:255
+#: src/misc.cc:254
 #, c-format, boost-format
 msgid "Installed packages: %d"
 msgstr "Paquets instal·lats: %d"
 
-#: src/misc.cc:256
+#: src/misc.cc:255
 #, c-format, boost-format
 msgid "Installed packages with counterparts in repositories: %d"
 msgstr "Paquets instal·lats amb homòlegs als repositoris: %d"
 
-#: src/misc.cc:257
+#: src/misc.cc:256
 #, c-format, boost-format
 msgid "Installed packages with EULAs: %d"
 msgstr "Paquests instal·lats amb EULAs: %d"
 
-#: src/misc.cc:287
+#: src/misc.cc:286
 #, c-format, boost-format
 msgid "Package '%s' has source package '%s'."
 msgstr "El paquet %s té un paquet de codi font: %s."
 
-#: src/misc.cc:293
+#: src/misc.cc:292
 #, c-format, boost-format
 msgid "Source package '%s' for package '%s' not found."
 msgstr "El paquet de codi font %s per al paquet %s no s'ha trobat."
 
-#: src/misc.cc:371
+#: src/misc.cc:370
 #, c-format, boost-format
 msgid "Installing source package %s-%s"
 msgstr "Instal·lant el paquet de codi font %s-%s"
 
-#: src/misc.cc:380
+#: src/misc.cc:379
 #, c-format, boost-format
 msgid "Source package %s-%s successfully retrieved."
 msgstr "El paquet de codi font %s-%s s'ha obtingut correctament."
 
-#: src/misc.cc:386
+#: src/misc.cc:385
 #, c-format, boost-format
 msgid "Source package %s-%s successfully installed."
 msgstr "El paquet de codi font %s-%s s'ha instal·lat correctament."
 
-#: src/misc.cc:392
+#: src/misc.cc:391
 #, c-format, boost-format
 msgid "Problem installing source package %s-%s:"
 msgstr "Problema instal·lant el paquet de codi font %s-%s:"
@@ -5478,8 +5477,8 @@ msgstr "Error a l'hora d'inhabilitar el repositori %s."
 msgid "Problem retrieving files from '%s'."
 msgstr "Problema obtenint els fitxers de %s."
 
-#: src/repos.cc:337 src/repos.cc:1861 src/solve-commit.cc:784
-#: src/solve-commit.cc:815 src/solve-commit.cc:839
+#: src/repos.cc:337 src/repos.cc:1861 src/solve-commit.cc:786
+#: src/solve-commit.cc:817 src/solve-commit.cc:841
 msgid "Please see the above error message for a hint."
 msgstr "Si us plau, llegiu l'error anterior."
 
@@ -5930,17 +5929,17 @@ msgid "No products found."
 msgstr "No s'ha trobat cap producte."
 
 #. translators: meaning 'dependency problem' found during solving
-#: src/solve-commit.cc:40
+#: src/solve-commit.cc:41
 msgid "Problem: "
 msgstr "Problema: "
 
 #. TranslatorExplanation %d is the solution number
-#: src/solve-commit.cc:52
+#: src/solve-commit.cc:53
 #, c-format, boost-format
 msgid " Solution %d: "
 msgstr " Solució %d: "
 
-#: src/solve-commit.cc:71
+#: src/solve-commit.cc:72
 msgid "Choose the above solution using '1' or skip, retry or cancel"
 msgid_plural "Choose from above solutions by number or skip, retry or cancel"
 msgstr[0] ""
@@ -5952,7 +5951,7 @@ msgstr[1] ""
 
 #. translators: translate 'c' to whatever you translated the 'c' in
 #. "c" and "s/r/c" strings
-#: src/solve-commit.cc:78
+#: src/solve-commit.cc:79
 msgid "Choose the above solution using '1' or cancel using 'c'"
 msgid_plural "Choose from above solutions by number or cancel"
 msgstr[0] "Trieu la solució anterior amb \"1\" o cancel·leu-ho amb \"c\"."
@@ -5964,7 +5963,7 @@ msgstr[1] "Trieu la solució amb el número corresponent o cancel·leu-ho."
 #. The anserws must be separated by slash characters '/' and must
 #. correspond to skip/retry/cancel in that order.
 #. The answers should be lower case letters.
-#: src/solve-commit.cc:97
+#: src/solve-commit.cc:98
 msgid "s/r/c"
 msgstr "s/r/c"
 
@@ -5975,17 +5974,17 @@ msgstr "s/r/c"
 #. See the "s/r/c" comment for other details.
 #. One letter string  for translation can be tricky, so in case of problems,
 #. please report a bug against zypper at bugzilla.novell.com, we'll try to solve it.
-#: src/solve-commit.cc:109
+#: src/solve-commit.cc:110
 msgid "c"
 msgstr "c"
 
 #. continue with next problem
-#: src/solve-commit.cc:130
+#: src/solve-commit.cc:131
 #, c-format, boost-format
 msgid "Applying solution %s"
 msgstr "Aplicant la solució %s"
 
-#: src/solve-commit.cc:146
+#: src/solve-commit.cc:147
 #, c-format, boost-format
 msgid "%d Problem:"
 msgid_plural "%d Problems:"
@@ -5993,42 +5992,42 @@ msgstr[0] "%d problema:"
 msgstr[1] "%d problemes:"
 
 #. should not happen! If solve() failed at least one problem must be set!
-#: src/solve-commit.cc:150
+#: src/solve-commit.cc:151
 msgid "Specified capability not found"
 msgstr "No s'ha trobat la capacitat especificada."
 
-#: src/solve-commit.cc:160
+#: src/solve-commit.cc:161
 #, c-format, boost-format
 msgid "Problem: %s"
 msgstr "Problema: %s"
 
-#: src/solve-commit.cc:179
+#: src/solve-commit.cc:180
 msgid "Resolving dependencies..."
 msgstr "Resolent les dependències..."
 
-#: src/solve-commit.cc:240
+#: src/solve-commit.cc:241
 msgid "Force resolution:"
 msgstr "Força la resolució:"
 
-#: src/solve-commit.cc:338
+#: src/solve-commit.cc:339
 msgid "Verifying dependencies..."
 msgstr "Verificant les dependències..."
 
 #. Here: compute the full upgrade
-#: src/solve-commit.cc:388
+#: src/solve-commit.cc:389
 msgid "Computing upgrade..."
 msgstr "Calculant l'actualizació..."
 
-#: src/solve-commit.cc:402
+#: src/solve-commit.cc:403
 msgid "Generating solver test case..."
 msgstr "Generant test de resolució..."
 
-#: src/solve-commit.cc:404
+#: src/solve-commit.cc:405
 #, c-format, boost-format
 msgid "Solver test case generated successfully at %s."
 msgstr "Prova de solució generada satisfactòriament a %s."
 
-#: src/solve-commit.cc:407
+#: src/solve-commit.cc:408
 msgid "Error creating the solver test case."
 msgstr "S'ha produït un error en crear el test de solució."
 
@@ -6042,11 +6041,11 @@ msgstr ""
 "està inhabilitada a zypper.conf. Executeu \"%s\" per comprovar-los "
 "manualment."
 
-#: src/solve-commit.cc:454
+#: src/solve-commit.cc:452
 msgid "Skip check:"
 msgstr "Omet la comprovació:"
 
-#: src/solve-commit.cc:462
+#: src/solve-commit.cc:460
 #, c-format, boost-format
 msgid ""
 "There are some running programs that might use files deleted by recent "
@@ -6057,32 +6056,32 @@ msgstr ""
 "durant aquesta actualització. Potser voldríeu comprovar-los i reiniciar-ne "
 "algun. Feu servir \"%s\" per veure'n la llista."
 
-#: src/solve-commit.cc:473
+#: src/solve-commit.cc:475
 msgid "Update notifications were received from the following packages:"
 msgstr "S'han rebut notificacions d'actualització dels següents paquets:"
 
-#: src/solve-commit.cc:482
+#: src/solve-commit.cc:484
 #, c-format, boost-format
 msgid "Message from package %s:"
 msgstr "Missatge del paquet %s:"
 
-#: src/solve-commit.cc:490
+#: src/solve-commit.cc:492
 msgid "y/n"
 msgstr "s/n"
 
-#: src/solve-commit.cc:491
+#: src/solve-commit.cc:493
 msgid "View the notifications now?"
 msgstr "Mostro les notificacions ara?"
 
-#: src/solve-commit.cc:537
+#: src/solve-commit.cc:539
 msgid "Computing distribution upgrade..."
 msgstr "Calculant l'actualització de la distribució..."
 
-#: src/solve-commit.cc:542
+#: src/solve-commit.cc:544
 msgid "Resolving package dependencies..."
 msgstr "Resolent les dependències del paquet..."
 
-#: src/solve-commit.cc:597
+#: src/solve-commit.cc:599
 msgid ""
 "Some of the dependencies of installed packages are broken. In order to fix "
 "these dependencies, the following actions need to be taken:"
@@ -6090,7 +6089,7 @@ msgstr ""
 "Algunes de les dependències dels paquets instal·lats estan trencades. Per "
 "tal d'arreglar-les, s'han de fer les accions següents:"
 
-#: src/solve-commit.cc:604
+#: src/solve-commit.cc:606
 msgid "Root privileges are required to fix broken package dependencies."
 msgstr ""
 "Calen privilegis d'arrel per poder arreglar els problemes de dependències."
@@ -6105,12 +6104,12 @@ msgstr ""
 #. The answers should be lower case letters, but in general, any UTF-8
 #. string will do.
 #. ! \todo add c for changelog and x for explain (show the dep tree)
-#: src/solve-commit.cc:626
+#: src/solve-commit.cc:628
 msgid "y/n/p/v/a/r/m/d/g"
 msgstr "s/n/p/v/a/r/p/d/m"
 
 #. translators: help text for 'y' option in the 'Continue?' prompt
-#: src/solve-commit.cc:631
+#: src/solve-commit.cc:633
 msgid ""
 "Yes, accept the summary and proceed with installation/removal of packages."
 msgstr ""
@@ -6118,12 +6117,12 @@ msgstr ""
 "paquets."
 
 #. translators: help text for 'n' option in the 'Continue?' prompt
-#: src/solve-commit.cc:633
+#: src/solve-commit.cc:635
 msgid "No, cancel the operation."
 msgstr "No, cancel·la l'operació."
 
 #. translators: help text for 'p' option in the 'Continue?' prompt
-#: src/solve-commit.cc:635
+#: src/solve-commit.cc:637
 msgid ""
 "Restart solver in no-force-resolution mode in order to show dependency "
 "problems."
@@ -6132,57 +6131,57 @@ msgstr ""
 "mostrar els problemes de dependències."
 
 #. translators: help text for 'v' option in the 'Continue?' prompt
-#: src/solve-commit.cc:637
+#: src/solve-commit.cc:639
 msgid "Toggle display of package versions."
 msgstr "Commuta la visualització de les versions dels paquets."
 
 #. translators: help text for 'a' option in the 'Continue?' prompt
-#: src/solve-commit.cc:639
+#: src/solve-commit.cc:641
 msgid "Toggle display of package architectures."
 msgstr "Commuta la visualització de l'arquitectura dels paquets."
 
 #. translators: help text for 'r' option in the 'Continue?' prompt
-#: src/solve-commit.cc:641
+#: src/solve-commit.cc:643
 msgid ""
 "Toggle display of repositories from which the packages will be installed."
 msgstr "Commuta la visualització de les versions dels paquets."
 
 #. translators: help text for 'm' option in the 'Continue?' prompt
-#: src/solve-commit.cc:643
+#: src/solve-commit.cc:645
 msgid "Toggle display of package vendor names."
 msgstr "Commuta la visualització dels proveïdors dels paquets."
 
 #. translators: help text for 'd' option in the 'Continue?' prompt
-#: src/solve-commit.cc:645
+#: src/solve-commit.cc:647
 msgid "Toggle between showing all details and as few details as possible."
 msgstr ""
 "Commuta la visualització entre mostrar tots els detalls o mostrar-ne tan "
 "pocs com sigui possible."
 
 #. translators: help text for 'g' option in the 'Continue?' prompt
-#: src/solve-commit.cc:647
+#: src/solve-commit.cc:649
 msgid "View the summary in pager."
 msgstr "Visualitzar el resum al paginador."
 
-#: src/solve-commit.cc:757
+#: src/solve-commit.cc:759
 msgid "committing"
 msgstr "confirmant"
 
-#: src/solve-commit.cc:759
+#: src/solve-commit.cc:761
 msgid "(dry run)"
 msgstr "(execució de prova)"
 
-#: src/solve-commit.cc:783 src/solve-commit.cc:816
+#: src/solve-commit.cc:785 src/solve-commit.cc:818
 msgid "Problem retrieving the package file from the repository:"
 msgstr "Problema obtenint el fitxer de paquet del repositori:"
 
 #. translators: the first %s is 'zypper refresh' and the second is repo alias
-#: src/solve-commit.cc:813
+#: src/solve-commit.cc:815
 #, c-format, boost-format
 msgid "Repository '%s' is out of date. Running '%s' might help."
 msgstr "El repositori %s no està actualitzat. Fer servir \"%s\" podria ajudar."
 
-#: src/solve-commit.cc:824
+#: src/solve-commit.cc:826
 msgid ""
 "The package integrity check failed. This may be a problem with the "
 "repository or media. Try one of the following:\n"
@@ -6201,23 +6200,23 @@ msgstr ""
 "- utilitzeu un altre suport d'instal·lació (si, per exemple, està malmès)\n"
 "- utilitzeu un altre repositori"
 
-#: src/solve-commit.cc:838
+#: src/solve-commit.cc:840
 msgid "Problem occurred during or after installation or removal of packages:"
 msgstr ""
 "S'ha produït un error durant o després de la instal·lació o supressió de "
 "paquets:"
 
-#: src/solve-commit.cc:846
+#: src/solve-commit.cc:848
 msgid "Installation has completed with error."
 msgstr "La instal·lació s'ha completat amb errors."
 
-#: src/solve-commit.cc:848
+#: src/solve-commit.cc:850
 #, boost-format
 msgid "You may run '%1%' to repair any dependency problems."
 msgstr ""
 "Podríeu executar \"%1%\" per reparar qualsevol problema de dependències."
 
-#: src/solve-commit.cc:862
+#: src/solve-commit.cc:864
 msgid ""
 "One of the installed patches requires a reboot of your machine. Reboot as "
 "soon as possible."
@@ -6225,7 +6224,7 @@ msgstr ""
 "Un dels pedaços instal·lats requereix reiniciar la màquina. Feu-ho al més "
 "aviat possible."
 
-#: src/solve-commit.cc:870
+#: src/solve-commit.cc:872
 msgid ""
 "One of the installed patches affects the package manager itself. Run this "
 "command once more to install any other needed patches."
@@ -6233,7 +6232,7 @@ msgstr ""
 "Un dels pedaços instal·lats afecta el mateix gestor de paquets. Executeu "
 "aquesta ordre un altre cop per instal·lar qualsevol altre pedaç necessari."
 
-#: src/solve-commit.cc:888
+#: src/solve-commit.cc:890
 msgid "Dependencies of all installed packages are satisfied."
 msgstr "Es satisfan totes les dependències dels paquets instal·lats."
 
@@ -6405,27 +6404,27 @@ msgstr "No s'han pogut analitzar els fitxers de configuració."
 msgid "Error parsing zypper.conf:"
 msgstr "S'ha produït un error en analitzar zypper.conf:"
 
-#: src/utils/flags/exceptions.cc:21
+#: src/utils/flags/exceptions.cc:22
 #, boost-format
 msgid "The flag %1% is not known."
 msgstr "La bandera %1% no es coneix."
 
-#: src/utils/flags/exceptions.cc:27
+#: src/utils/flags/exceptions.cc:28
 #, boost-format
 msgid "The flag %1% is not compatible with argument %2% (%3%)."
 msgstr "La bandera %1% no és compatible amb l'argument %2% (%3%)."
 
-#: src/utils/flags/exceptions.cc:33
+#: src/utils/flags/exceptions.cc:34
 #, boost-format
 msgid "The flag %1% requires a argument."
 msgstr "La bandera %1% requereix un argument."
 
-#: src/utils/flags/exceptions.cc:39
+#: src/utils/flags/exceptions.cc:40
 #, boost-format
 msgid "The flag %1% can only be used once."
 msgstr "La bandera %1% només es pot usar un cop."
 
-#: src/utils/flags/exceptions.cc:45
+#: src/utils/flags/exceptions.cc:46
 #, c-format, boost-format
 msgid "%s used together with %s, which contradict each other."
 msgstr "%s usat conjuntament amb %s, els quals es contradiuen un a l'altre."
@@ -6771,6 +6770,12 @@ msgstr "Resposta incorrecta \"%s\"."
 msgid "Enter '%s' for '%s' or '%s' for '%s' if nothing else works for you."
 msgstr ""
 "Escriviu \"%s\" per a \"%s\" o \"%s\" per a \"%s\" si no us va bé res més."
+
+#~ msgid "Unexpected program flow."
+#~ msgstr "S'ha produït un error de flux de programa."
+
+#~ msgid "Option program arguments: "
+#~ msgstr "Opcions d'arguments del programa: "
 
 #~ msgid ""
 #~ "  Global Options:\n"

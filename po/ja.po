@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-01-08 15:15+0100\n"
+"POT-Creation-Date: 2019-01-23 09:24+0100\n"
 "PO-Revision-Date: 2019-01-20 17:29+0000\n"
 "Last-Translator: Yasuhiko Kamata <belphegor@belbel.or.jp>\n"
 "Language-Team: Japanese <https://l10n.opensuse.org/projects/zypper/master/ja/"
@@ -510,7 +510,7 @@ msgstr ""
 msgid "This is an alias for '%s'."
 msgstr "これは '%s' の別名です。"
 
-#: src/commands/commandhelpformatter.h:99 src/utils/flags/zyppflags.cc:560
+#: src/commands/commandhelpformatter.h:99 src/utils/flags/zyppflags.cc:562
 msgid "Command options:"
 msgstr "コマンドオプション:"
 
@@ -708,43 +708,43 @@ msgstr "無効なオブジェクト"
 msgid "Error"
 msgstr "エラー"
 
-#: src/Command.cc:63
+#: src/Command.cc:90
 msgid "Invalid command"
 msgstr "コマンドが正しくありません"
 
-#: src/Command.cc:81
+#: src/Command.cc:108
 msgid "Repository Management:"
 msgstr "リポジトリ管理:"
 
-#: src/Command.cc:89
+#: src/Command.cc:116
 msgid "Service Management:"
 msgstr "サービス管理:"
 
-#: src/Command.cc:95
+#: src/Command.cc:122
 msgid "Software Management:"
 msgstr "ソフトウエア管理:"
 
-#: src/Command.cc:101
+#: src/Command.cc:128
 msgid "Update Management:"
 msgstr "更新管理:"
 
-#: src/Command.cc:108
+#: src/Command.cc:135
 msgid "Querying:"
 msgstr "問い合わせ:"
 
-#: src/Command.cc:119
+#: src/Command.cc:146
 msgid "Package Locks:"
 msgstr "パッケージロック:"
 
-#: src/Command.cc:124
+#: src/Command.cc:151
 msgid "Other Commands:"
 msgstr "その他のコマンド:"
 
-#: src/Command.cc:131
+#: src/Command.cc:158
 msgid "Subcommands:"
 msgstr "サブコマンド:"
 
-#: src/Command.cc:247
+#: src/Command.cc:279
 #, c-format, boost-format
 msgid "Unknown command '%s'"
 msgstr "不明なコマンド '%s'"
@@ -857,7 +857,9 @@ msgstr "不明なパッケージを無視します。"
 #: src/Config.cc:463
 msgid ""
 "Terse output for machine consumption. Implies --no-abbrev and --no-color."
-msgstr "スクリプトなどで処理するために出力を簡潔にします。 --no-abbrev と --no-color の機能を含みます。"
+msgstr ""
+"スクリプトなどで処理するために出力を簡潔にします。 --no-abbrev と --no-color "
+"の機能を含みます。"
 
 #. translators: --reposd-dir, -D <DIR>
 #: src/Config.cc:487
@@ -997,12 +999,12 @@ msgstr "インストールされている解決方法を無視しています。
 msgid "Do not read installed packages."
 msgstr "インストールされたパッケージを読み込まない。"
 
-#: src/PackageArgs.cc:216
+#: src/PackageArgs.cc:208
 #, c-format, boost-format
 msgid "'%s' not found in package names. Trying '%s'."
 msgstr "'%s' というパッケージ名は見つかりません。 '%s' として試してみます。"
 
-#: src/PackageArgs.cc:226
+#: src/PackageArgs.cc:218
 #, c-format, boost-format
 msgid "'%s' is not a package name or capability."
 msgstr "'%s' は正しいパッケージ名でも能力でもありません。"
@@ -1033,7 +1035,7 @@ msgstr "製品 '%s' が見つかりません。"
 msgid "Pattern '%s' not found."
 msgstr "パターン '%s' が見つかりません。"
 
-#: src/RequestFeedback.cc:54 src/misc.cc:296
+#: src/RequestFeedback.cc:54 src/misc.cc:295
 #, c-format, boost-format
 msgid "Source package '%s' not found."
 msgstr "ソースパッケージ '%s' が見つかりません。"
@@ -1138,8 +1140,9 @@ msgid ""
 "There is an update candidate for '%s' from vendor '%s', while the current "
 "vendor is '%s'. Use '%s' to install this candidate."
 msgstr ""
-"ベンダ '%2$s' が更新候補 '%1$s' を提供していますが、現在お使いのベンダは '%3$s' です。この更新候補をインストールしたい場合は、 "
-"'%4$s' を実行してください。"
+"ベンダ '%2$s' が更新候補 '%1$s' を提供していますが、現在お使いのベンダは "
+"'%3$s' です。この更新候補をインストールしたい場合は、 '%4$s' を実行してくださ"
+"い。"
 
 #: src/RequestFeedback.cc:132
 #, c-format, boost-format
@@ -1261,7 +1264,7 @@ msgstr "矛盾を追加:「%s」。"
 msgid "Did you mean %1%?"
 msgstr "%1% のことでしょうか？"
 
-#: src/SolverRequester.cc:479
+#: src/SolverRequester.cc:487
 #, c-format, boost-format
 msgid "Ignoring option %s when updating the update stack first."
 msgstr "更新スタックを最初に更新するため、オプション %s を無視しています。"
@@ -1269,218 +1272,218 @@ msgstr "更新スタックを最初に更新するため、オプション %s �
 #. translator: '%1%' is a products name
 #. '%2%' is a command to call (like 'zypper dup')
 #. Both may contain whitespace and should be enclosed by quotes!
-#: src/Summary.cc:391
+#: src/Summary.cc:399
 #, boost-format
 msgid "Product '%1%' requires to be updated by calling '%2%'!"
 msgstr "'%2%' を実行して製品 '%1%' を更新する必要があります！"
 
 #. translators: Appended when clipping a long enumeration:
 #. "ConsoleKit-devel ConsoleKit-doc ... and 20828 more items."
-#: src/Summary.cc:466 src/Summary.cc:542
+#: src/Summary.cc:474 src/Summary.cc:550
 #, boost-format
 msgid "... and %1% more item."
 msgid_plural "... and %1% more items."
 msgstr[0] "... さらに %1% 個の項目があります。"
 
-#: src/Summary.cc:560
+#: src/Summary.cc:568
 #, c-format, boost-format
 msgid "The following NEW package is going to be installed:"
 msgid_plural "The following %d NEW packages are going to be installed:"
 msgstr[0] "以下 %d 個の新しいパッケージをインストールします:"
 
-#: src/Summary.cc:565
+#: src/Summary.cc:573
 #, c-format, boost-format
 msgid "The following NEW patch is going to be installed:"
 msgid_plural "The following %d NEW patches are going to be installed:"
 msgstr[0] "以下 %d 個の新しいパッチをインストールします:"
 
-#: src/Summary.cc:570
+#: src/Summary.cc:578
 #, c-format, boost-format
 msgid "The following NEW pattern is going to be installed:"
 msgid_plural "The following %d NEW patterns are going to be installed:"
 msgstr[0] "以下 %d 個の新しいパターンをインストールします:"
 
-#: src/Summary.cc:575
+#: src/Summary.cc:583
 #, c-format, boost-format
 msgid "The following NEW product is going to be installed:"
 msgid_plural "The following %d NEW products are going to be installed:"
 msgstr[0] "以下 %d 個の新しい製品をインストールします:"
 
-#: src/Summary.cc:580
+#: src/Summary.cc:588
 #, c-format, boost-format
 msgid "The following source package is going to be installed:"
 msgid_plural "The following %d source packages are going to be installed:"
 msgstr[0] "以下 %d 個のソースパッケージをインストールします:"
 
-#: src/Summary.cc:586
+#: src/Summary.cc:594
 #, c-format, boost-format
 msgid "The following application is going to be installed:"
 msgid_plural "The following %d applications are going to be installed:"
 msgstr[0] "以下 %d 個のアプリケーションをインストールします:"
 
-#: src/Summary.cc:611
+#: src/Summary.cc:619
 #, c-format, boost-format
 msgid "The following package is going to be REMOVED:"
 msgid_plural "The following %d packages are going to be REMOVED:"
 msgstr[0] "以下 %d 個のパッケージを削除します:"
 
-#: src/Summary.cc:616
+#: src/Summary.cc:624
 #, c-format, boost-format
 msgid "The following patch is going to be REMOVED:"
 msgid_plural "The following %d patches are going to be REMOVED:"
 msgstr[0] "以下 %d 個のパッチを削除します:"
 
-#: src/Summary.cc:621
+#: src/Summary.cc:629
 #, c-format, boost-format
 msgid "The following pattern is going to be REMOVED:"
 msgid_plural "The following %d patterns are going to be REMOVED:"
 msgstr[0] "以下 %d 個のパターンを削除します:"
 
-#: src/Summary.cc:626
+#: src/Summary.cc:634
 #, c-format, boost-format
 msgid "The following product is going to be REMOVED:"
 msgid_plural "The following %d products are going to be REMOVED:"
 msgstr[0] "以下 %d 個の製品を削除します:"
 
-#: src/Summary.cc:632
+#: src/Summary.cc:640
 #, c-format, boost-format
 msgid "The following application is going to be REMOVED:"
 msgid_plural "The following %d applications are going to be REMOVED:"
 msgstr[0] "以下 %d 個のアプリケーションを削除します:"
 
-#: src/Summary.cc:655
+#: src/Summary.cc:663
 #, c-format, boost-format
 msgid "The following package is going to be upgraded:"
 msgid_plural "The following %d packages are going to be upgraded:"
 msgstr[0] "以下 %d 個のパッケージをアップグレードします:"
 
-#: src/Summary.cc:660
+#: src/Summary.cc:668
 #, c-format, boost-format
 msgid "The following patch is going to be upgraded:"
 msgid_plural "The following %d patches are going to be upgraded:"
 msgstr[0] "以下 %d 個のパッチをアップグレードします:"
 
-#: src/Summary.cc:665
+#: src/Summary.cc:673
 #, c-format, boost-format
 msgid "The following pattern is going to be upgraded:"
 msgid_plural "The following %d patterns are going to be upgraded:"
 msgstr[0] "以下 %d 個のパターンをアップグレードします:"
 
-#: src/Summary.cc:671
+#: src/Summary.cc:679
 #, c-format, boost-format
 msgid "The following product is going to be upgraded:"
 msgid_plural "The following %d products are going to be upgraded:"
 msgstr[0] "以下 %d 個の製品をアップグレードします:"
 
-#: src/Summary.cc:679
+#: src/Summary.cc:687
 #, c-format, boost-format
 msgid "The following application is going to be upgraded:"
 msgid_plural "The following %d applications are going to be upgraded:"
 msgstr[0] "以下 %d 個のアプリケーションをアップグレードします:"
 
-#: src/Summary.cc:701
+#: src/Summary.cc:709
 #, c-format, boost-format
 msgid "The following package is going to be downgraded:"
 msgid_plural "The following %d packages are going to be downgraded:"
 msgstr[0] "以下 %d 個のパッケージをダウングレードします:"
 
-#: src/Summary.cc:706
+#: src/Summary.cc:714
 #, c-format, boost-format
 msgid "The following patch is going to be downgraded:"
 msgid_plural "The following %d patches are going to be downgraded:"
 msgstr[0] "以下 %d 個のパッチをダウングレードします:"
 
-#: src/Summary.cc:711
+#: src/Summary.cc:719
 #, c-format, boost-format
 msgid "The following pattern is going to be downgraded:"
 msgid_plural "The following %d patterns are going to be downgraded:"
 msgstr[0] "以下 %d 個のパターンをダウングレードします:"
 
-#: src/Summary.cc:716
+#: src/Summary.cc:724
 #, c-format, boost-format
 msgid "The following product is going to be downgraded:"
 msgid_plural "The following %d products are going to be downgraded:"
 msgstr[0] "以下 %d 個の製品をダウングレードします:"
 
-#: src/Summary.cc:722
+#: src/Summary.cc:730
 #, c-format, boost-format
 msgid "The following application is going to be downgraded:"
 msgid_plural "The following %d applications are going to be downgraded:"
 msgstr[0] "以下 %d 個のアプリケーションをダウングレードします:"
 
-#: src/Summary.cc:744
+#: src/Summary.cc:752
 #, c-format, boost-format
 msgid "The following package is going to be reinstalled:"
 msgid_plural "The following %d packages are going to be reinstalled:"
 msgstr[0] "以下 %d 個のパッケージを再インストールします:"
 
-#: src/Summary.cc:749
+#: src/Summary.cc:757
 #, c-format, boost-format
 msgid "The following patch is going to be reinstalled:"
 msgid_plural "The following %d patches are going to be reinstalled:"
 msgstr[0] "以下 %d 個のパッチを再インストールします:"
 
-#: src/Summary.cc:754
+#: src/Summary.cc:762
 #, c-format, boost-format
 msgid "The following pattern is going to be reinstalled:"
 msgid_plural "The following %d patterns are going to be reinstalled:"
 msgstr[0] "以下 %d 個のパターンを再インストールします:"
 
-#: src/Summary.cc:759
+#: src/Summary.cc:767
 #, c-format, boost-format
 msgid "The following product is going to be reinstalled:"
 msgid_plural "The following %d products are going to be reinstalled:"
 msgstr[0] "以下 %d 個の製品を再インストールします:"
 
-#: src/Summary.cc:772
+#: src/Summary.cc:780
 #, c-format, boost-format
 msgid "The following application is going to be reinstalled:"
 msgid_plural "The following %d applications are going to be reinstalled:"
 msgstr[0] "以下 %d 個のアプリケーションを再インストールします:"
 
-#: src/Summary.cc:909
+#: src/Summary.cc:917
 #, c-format, boost-format
 msgid "The following recommended package was automatically selected:"
 msgid_plural ""
 "The following %d recommended packages were automatically selected:"
 msgstr[0] "以下 %d 個の推奨パッケージを自動的に選択しました:"
 
-#: src/Summary.cc:914
+#: src/Summary.cc:922
 #, c-format, boost-format
 msgid "The following recommended patch was automatically selected:"
 msgid_plural ""
 "The following %d recommended patches were automatically selected:"
 msgstr[0] "以下 %d 個の推奨されるパッチを自動的に選択しました:"
 
-#: src/Summary.cc:919
+#: src/Summary.cc:927
 #, c-format, boost-format
 msgid "The following recommended pattern was automatically selected:"
 msgid_plural ""
 "The following %d recommended patterns were automatically selected:"
 msgstr[0] "以下 %d 個の推奨パターンを自動的に選択しました:"
 
-#: src/Summary.cc:924
+#: src/Summary.cc:932
 #, c-format, boost-format
 msgid "The following recommended product was automatically selected:"
 msgid_plural ""
 "The following %d recommended products were automatically selected:"
 msgstr[0] "以下 %d 個の推奨製品を自動的に選択しました:"
 
-#: src/Summary.cc:929
+#: src/Summary.cc:937
 #, c-format, boost-format
 msgid "The following recommended source package was automatically selected:"
 msgid_plural ""
 "The following %d recommended source packages were automatically selected:"
 msgstr[0] "以下 %d 個の推奨ソースパッケージを自動的に選択しました:"
 
-#: src/Summary.cc:935
+#: src/Summary.cc:943
 #, c-format, boost-format
 msgid "The following recommended application was automatically selected:"
 msgid_plural ""
 "The following %d recommended applications were automatically selected:"
 msgstr[0] "以下 %d 個の推奨アプリケーションを自動的に選択しました:"
 
-#: src/Summary.cc:982
+#: src/Summary.cc:990
 #, c-format, boost-format
 msgid ""
 "The following package is recommended, but will not be installed (only "
@@ -1492,7 +1495,7 @@ msgstr[0] ""
 "以下 %d 個のパッケージが推奨されていますが、インストールを行ないません (必要"
 "なパッケージのみをインストールします):"
 
-#: src/Summary.cc:994
+#: src/Summary.cc:1002
 #, c-format, boost-format
 msgid ""
 "The following package is recommended, but will not be installed because it's "
@@ -1504,7 +1507,7 @@ msgstr[0] ""
 "以下 %d 個のパッケージが推奨されていますが、不要であるためインストールを行な"
 "いません (以前に手動で削除されています):"
 
-#: src/Summary.cc:1004
+#: src/Summary.cc:1012
 #, c-format, boost-format
 msgid ""
 "The following package is recommended, but will not be installed due to "
@@ -1516,14 +1519,14 @@ msgstr[0] ""
 "以下 %d 個のパッケージが推奨されていますが、矛盾または依存関係の問題があるた"
 "め、インストールを行ないません:"
 
-#: src/Summary.cc:1017
+#: src/Summary.cc:1025
 #, c-format, boost-format
 msgid "The following patch is recommended, but will not be installed:"
 msgid_plural ""
 "The following %d patches are recommended, but will not be installed:"
 msgstr[0] "以下 %d 個のパッチが推奨されていますが、インストールを行ないません:"
 
-#: src/Summary.cc:1021
+#: src/Summary.cc:1029
 #, c-format, boost-format
 msgid "The following pattern is recommended, but will not be installed:"
 msgid_plural ""
@@ -1531,14 +1534,14 @@ msgid_plural ""
 msgstr[0] ""
 "以下 %d 個のパターンが推奨されていますが、インストールを行ないません:"
 
-#: src/Summary.cc:1025
+#: src/Summary.cc:1033
 #, c-format, boost-format
 msgid "The following product is recommended, but will not be installed:"
 msgid_plural ""
 "The following %d products are recommended, but will not be installed:"
 msgstr[0] "以下 %d 個の製品が推奨されていますが、インストールを行ないません:"
 
-#: src/Summary.cc:1030
+#: src/Summary.cc:1038
 #, c-format, boost-format
 msgid "The following application is recommended, but will not be installed:"
 msgid_plural ""
@@ -1546,7 +1549,7 @@ msgid_plural ""
 msgstr[0] ""
 "以下 %d 個のアプリケーションが推奨されていますが、インストールを行ないません:"
 
-#: src/Summary.cc:1063
+#: src/Summary.cc:1071
 #, c-format, boost-format
 msgid "The following package is suggested, but will not be installed:"
 msgid_plural ""
@@ -1554,14 +1557,14 @@ msgid_plural ""
 msgstr[0] ""
 "以下 %d 個のパッケージが提案されていますが、インストールを行ないません:"
 
-#: src/Summary.cc:1068
+#: src/Summary.cc:1076
 #, c-format, boost-format
 msgid "The following patch is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d patches are suggested, but will not be installed:"
 msgstr[0] "以下 %d 個のパッチが提案されていますが、インストールを行ないません:"
 
-#: src/Summary.cc:1073
+#: src/Summary.cc:1081
 #, c-format, boost-format
 msgid "The following pattern is suggested, but will not be installed:"
 msgid_plural ""
@@ -1569,14 +1572,14 @@ msgid_plural ""
 msgstr[0] ""
 "以下 %d 個のパターンが提案されていますが、インストールを行ないません:"
 
-#: src/Summary.cc:1078
+#: src/Summary.cc:1086
 #, c-format, boost-format
 msgid "The following product is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d products are suggested, but will not be installed:"
 msgstr[0] "以下 %d 個の製品が提案されていますが、インストールを行ないません:"
 
-#: src/Summary.cc:1084
+#: src/Summary.cc:1092
 #, c-format, boost-format
 msgid "The following application is suggested, but will not be installed:"
 msgid_plural ""
@@ -1584,67 +1587,67 @@ msgid_plural ""
 msgstr[0] ""
 "以下 %d 個のアプリケーションが提案されていますが、インストールを行ないません:"
 
-#: src/Summary.cc:1109
+#: src/Summary.cc:1117
 #, c-format, boost-format
 msgid "The following package is going to change architecture:"
 msgid_plural "The following %d packages are going to change architecture:"
 msgstr[0] "以下 %d 個のパッケージのアーキテクチャを変更します:"
 
-#: src/Summary.cc:1114
+#: src/Summary.cc:1122
 #, c-format, boost-format
 msgid "The following patch is going to change architecture:"
 msgid_plural "The following %d patches are going to change architecture:"
 msgstr[0] "以下 %d 個のパッチのアーキテクチャを変更します:"
 
-#: src/Summary.cc:1119
+#: src/Summary.cc:1127
 #, c-format, boost-format
 msgid "The following pattern is going to change architecture:"
 msgid_plural "The following %d patterns are going to change architecture:"
 msgstr[0] "以下 %d 個のパターンのアーキテクチャを変更します:"
 
-#: src/Summary.cc:1124
+#: src/Summary.cc:1132
 #, c-format, boost-format
 msgid "The following product is going to change architecture:"
 msgid_plural "The following %d products are going to change architecture:"
 msgstr[0] "以下 %d 個の製品のアーキテクチャを変更します:"
 
-#: src/Summary.cc:1130
+#: src/Summary.cc:1138
 #, c-format, boost-format
 msgid "The following application is going to change architecture:"
 msgid_plural "The following %d applications are going to change architecture:"
 msgstr[0] "以下 %d 個のアプリケーションのアーキテクチャを変更します:"
 
-#: src/Summary.cc:1155
+#: src/Summary.cc:1163
 #, c-format, boost-format
 msgid "The following package is going to change vendor:"
 msgid_plural "The following %d packages are going to change vendor:"
 msgstr[0] "以下 %d 個のパッケージのベンダを変更します:"
 
-#: src/Summary.cc:1160
+#: src/Summary.cc:1168
 #, c-format, boost-format
 msgid "The following patch is going to change vendor:"
 msgid_plural "The following %d patches are going to change vendor:"
 msgstr[0] "以下 %d 個のパッチのベンダを変更します:"
 
-#: src/Summary.cc:1165
+#: src/Summary.cc:1173
 #, c-format, boost-format
 msgid "The following pattern is going to change vendor:"
 msgid_plural "The following %d patterns are going to change vendor:"
 msgstr[0] "以下 %d 個のパターンのベンダを変更します:"
 
-#: src/Summary.cc:1170
+#: src/Summary.cc:1178
 #, c-format, boost-format
 msgid "The following product is going to change vendor:"
 msgid_plural "The following %d products are going to change vendor:"
 msgstr[0] "以下 %d 個の製品のベンダを変更します:"
 
-#: src/Summary.cc:1176
+#: src/Summary.cc:1184
 #, c-format, boost-format
 msgid "The following application is going to change vendor:"
 msgid_plural "The following %d applications are going to change vendor:"
 msgstr[0] "以下 %d 個のアプリケーションのベンダを変更します:"
 
-#: src/Summary.cc:1199
+#: src/Summary.cc:1207
 #, c-format, boost-format
 msgid "The following package has no support information from its vendor:"
 msgid_plural ""
@@ -1652,13 +1655,13 @@ msgid_plural ""
 msgstr[0] ""
 "以下 %d 個のパッケージには、ベンダ側でのサポート情報が記されていません:"
 
-#: src/Summary.cc:1217
+#: src/Summary.cc:1225
 #, c-format, boost-format
 msgid "The following package is not supported by its vendor:"
 msgid_plural "The following %d packages are not supported by their vendor:"
 msgstr[0] "以下 %d 個のパッケージはベンダ側でサポートされていません:"
 
-#: src/Summary.cc:1235
+#: src/Summary.cc:1243
 #, c-format, boost-format
 msgid ""
 "The following package needs additional customer contract to get support:"
@@ -1667,25 +1670,25 @@ msgid_plural ""
 msgstr[0] ""
 "以下 %d 個のパッケージのサポートを得るには、追加の顧客契約が必要です:"
 
-#: src/Summary.cc:1255
+#: src/Summary.cc:1263
 #, c-format, boost-format
 msgid "The following package update will NOT be installed:"
 msgid_plural "The following %d package updates will NOT be installed:"
 msgstr[0] "以下 %d 個のパッケージ更新はインストールしません:"
 
-#: src/Summary.cc:1260
+#: src/Summary.cc:1268
 #, c-format, boost-format
 msgid "The following product update will NOT be installed:"
 msgid_plural "The following %d product updates will NOT be installed:"
 msgstr[0] "以下 %d 個の製品更新はインストールしません:"
 
-#: src/Summary.cc:1266
+#: src/Summary.cc:1274
 #, c-format, boost-format
 msgid "The following application update will NOT be installed:"
 msgid_plural "The following %d application updates will NOT be installed:"
 msgstr[0] "以下 %d 個のアプリケーション更新はインストールしません:"
 
-#: src/Summary.cc:1299
+#: src/Summary.cc:1307
 #, c-format, boost-format
 msgid "The following item is locked and will not be changed by any action:"
 msgid_plural ""
@@ -1694,144 +1697,150 @@ msgstr[0] "以下 %d 個の項目はロックされているため、何も行�
 
 #. always as plain name list
 #. translators: used as 'tag:' (i.e. followed by ':')
-#: src/Summary.cc:1312
+#: src/Summary.cc:1320
 msgid "Available"
 msgstr "利用可能"
 
 #. translators: used as 'tag:' (i.e. followed by ':')
 #. translators: property name; short; used like "Name: value"
-#: src/Summary.cc:1318 src/info.cc:334 src/info.cc:425 src/info.cc:556
+#: src/Summary.cc:1326 src/info.cc:334 src/info.cc:425 src/info.cc:556
 msgid "Installed"
 msgstr "インストール済み"
 
-#: src/Summary.cc:1323
+#: src/Summary.cc:1331
 #, boost-format
 msgid "Run '%1%' to see the complete list of locked items."
 msgstr "ロックされた項目の詳細なリストを参照するには、'%1%' を実行します。"
 
-#: src/Summary.cc:1333
+#: src/Summary.cc:1340
 #, c-format, boost-format
 msgid "The following patch requires a system reboot:"
 msgid_plural "The following %d patches require a system reboot:"
 msgstr[0] "以下 %d 個のパッチを適用するには、システムの再起動が必要です:"
 
-#: src/Summary.cc:1351
+#: src/Summary.cc:1344
+#, c-format, boost-format
+msgid "The following package requires a system reboot:"
+msgid_plural "The following %d package require a system reboot:"
+msgstr[0] ""
+
+#: src/Summary.cc:1373
 #, boost-format
 msgid "Overall download size: %1%. Already cached: %2%."
 msgstr "全ダウンロードサイズ:%1%。すでにキャッシュ済み:%2%。"
 
-#: src/Summary.cc:1354
+#: src/Summary.cc:1376
 msgid "Download only."
 msgstr "ダウンロードのみ。"
 
 #. TrasnlatorExplanation %s will be substituted by a byte count e.g. 212 K
-#: src/Summary.cc:1360
+#: src/Summary.cc:1382
 #, c-format, boost-format
 msgid "After the operation, additional %s will be used."
 msgstr "この操作を行うには、追加で %s の容量が必要です。"
 
-#: src/Summary.cc:1362
+#: src/Summary.cc:1384
 msgid "No additional space will be used or freed after the operation."
 msgstr "この操作を行うのに必要となる追加の容量や解放される容量はありません。"
 
 #. TrasnlatorExplanation %s will be substituted by a byte count e.g. 212 K
-#: src/Summary.cc:1369
+#: src/Summary.cc:1391
 #, c-format, boost-format
 msgid "After the operation, %s will be freed."
 msgstr "この操作を行うと、%s の容量が解放されます。"
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
-#: src/Summary.cc:1392
+#: src/Summary.cc:1414
 msgid "package to upgrade"
 msgid_plural "packages to upgrade"
 msgstr[0] "個のパッケージアップグレード"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
-#: src/Summary.cc:1403
+#: src/Summary.cc:1425
 msgid "to downgrade"
 msgid_plural "to downgrade"
 msgstr[0] "個のダウングレード"
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
-#: src/Summary.cc:1406
+#: src/Summary.cc:1428
 msgid "package to downgrade"
 msgid_plural "packages to downgrade"
 msgstr[0] "個のパッケージダウングレード"
 
 #. translators: this text will be preceded by a number e.g. "5 new"
-#: src/Summary.cc:1417
+#: src/Summary.cc:1439
 msgid "new"
 msgid_plural "new"
 msgstr[0] "個の新規"
 
 #. translators: this text will be preceded by a number e.g. "5 new to install"
-#: src/Summary.cc:1420
+#: src/Summary.cc:1442
 msgid "new package to install"
 msgid_plural "new packages to install"
 msgstr[0] "個の新規パッケージのインストール"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
-#: src/Summary.cc:1431
+#: src/Summary.cc:1453
 msgid "to reinstall"
 msgid_plural "to reinstall"
 msgstr[0] "個の再インストール"
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
-#: src/Summary.cc:1434
+#: src/Summary.cc:1456
 msgid "package to reinstall"
 msgid_plural "packages to reinstall"
 msgstr[0] "個のパッケージ再インストール"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
-#: src/Summary.cc:1445
+#: src/Summary.cc:1467
 msgid "to remove"
 msgid_plural "to remove"
 msgstr[0] "個の削除"
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
-#: src/Summary.cc:1448
+#: src/Summary.cc:1470
 msgid "package to remove"
 msgid_plural "packages to remove"
 msgstr[0] "個のパッケージ削除"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
-#: src/Summary.cc:1459
+#: src/Summary.cc:1481
 msgid "to change vendor"
 msgid_plural " to change vendor"
 msgstr[0] "個のベンダ変更"
 
 #. translators: this text will be preceded by a number e.g. "5 packages ..."
-#: src/Summary.cc:1462
+#: src/Summary.cc:1484
 msgid "package will change vendor"
 msgid_plural "packages will change vendor"
 msgstr[0] "個のパッケージベンダ変更"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
-#: src/Summary.cc:1473
+#: src/Summary.cc:1495
 msgid "to change arch"
 msgid_plural "to change arch"
 msgstr[0] "個のアーキテクチャ変更"
 
 #. translators: this text will be preceded by a number e.g. "5 packages ..."
-#: src/Summary.cc:1476
+#: src/Summary.cc:1498
 msgid "package will change arch"
 msgid_plural "packages will change arch"
 msgstr[0] "個のパッケージのアーキテクチャ変更"
 
 #. translators: this text will be preceded by a number e.g. "5 new"
-#: src/Summary.cc:1487
+#: src/Summary.cc:1509
 msgid "source package"
 msgid_plural "source packages"
 msgstr[0] "個のソースパッケージ"
 
 #. translators: this text will be preceded by a number e.g. "5 new to install"
-#: src/Summary.cc:1490
+#: src/Summary.cc:1512
 msgid "source package to install"
 msgid_plural "source packages to install"
 msgstr[0] "個のソースパッケージのインストール"
 
 #. patch command (auto)restricted to update stack patches
-#: src/Summary.cc:1556
+#: src/Summary.cc:1578
 msgid ""
 "Package manager restart required. (Run this command once again after the "
 "update stack got updated)"
@@ -1839,7 +1848,7 @@ msgstr ""
 "パッケージマネージャの再起動が必要です。 (更新スタックの更新後、再度このコマ"
 "ンドを実行してください)"
 
-#: src/Summary.cc:1559
+#: src/Summary.cc:1581
 msgid "System reboot required."
 msgstr "システムの再起動が必要です。"
 
@@ -1851,7 +1860,7 @@ msgstr "システムの再起動が必要です。"
 #. Consider to cancel:
 #. Product 'opennSUSE Tumbleweed' requires to be updated by calling 'zypper dup'!
 #. Continue? [y/n/...? shows all options] (y):
-#: src/Summary.cc:1576
+#: src/Summary.cc:1598
 msgid "Consider to cancel:"
 msgstr "ここではキャンセルしておくことをお勧めします:"
 
@@ -1883,33 +1892,27 @@ msgstr "PackageKitが稼働中です(おそらくビジーです)。"
 msgid "Try again?"
 msgstr "再試行しますか？"
 
-#: src/Zypper.cc:277 src/Zypper.cc:739 src/commands/basecommand.cc:268
+#: src/Zypper.cc:243 src/Zypper.cc:706 src/commands/basecommand.cc:260
 msgid "Unexpected exception."
 msgstr "予期しない例外が発生しました。"
 
 #. translators: %s is "help" or "zypper help" depending on whether
 #. zypper shell is running or not
-#: src/Zypper.cc:318
+#: src/Zypper.cc:284
 #, c-format, boost-format
 msgid "Type '%s' to get command-specific help."
 msgstr "コマンド固有のヘルプを取得するには '%s' と入力してください。"
 
-#: src/Zypper.cc:340
+#: src/Zypper.cc:305
 #, c-format, boost-format
 msgid "Verbosity: %d"
 msgstr "冗長性:%d"
 
-#. translators: %1%  - is the name of a subcommand
-#: src/Zypper.cc:442
-#, boost-format
-msgid "Subcommand %1% does not support zypper global options."
-msgstr "サブコマンド %1% は zypper のグローバルオプションに対応していません。"
-
-#: src/Zypper.cc:459
+#: src/Zypper.cc:314
 msgid "Enforced setting"
 msgstr "強制設定"
 
-#: src/Zypper.cc:482
+#: src/Zypper.cc:337
 msgid ""
 "The /etc/products.d/baseproduct symlink is dangling or missing!\n"
 "The link must point to your core products .prod file in /etc/products.d.\n"
@@ -1921,19 +1924,14 @@ msgstr ""
 
 #. TranslatorExplanation The %s is "--plus-repo"
 #. TranslatorExplanation The %s is "--option-name"
-#: src/Zypper.cc:516 src/Zypper.cc:564
+#: src/Zypper.cc:530 src/Zypper.cc:579
 #, c-format, boost-format
 msgid "The %s option has no effect here, ignoring."
 msgstr "%s オプションはここでは意味がありません。無視します。"
 
-#. Currently no concept how to handle global options and ZYPPlock
-#: src/Zypper.cc:643
-msgid "Zypper shell does not support execution of subcommands."
-msgstr "zypper shell はサブコマンドの実行には対応していません。"
-
-#: src/Zypper.cc:822 src/commands/shell.cc:43
-msgid "Unexpected program flow."
-msgstr "予期しないプログラムの流れです。"
+#: src/Zypper.cc:649
+msgid "Non-option program arguments: "
+msgstr "オプション以外のプログラム引数: "
 
 #. help text for the "Abort, retry, ignore?" prompt for media errors
 #: src/callbacks/media.cc:27
@@ -2068,14 +2066,6 @@ msgstr "ユーザ名"
 #: src/callbacks/media.cc:335
 msgid "Password"
 msgstr "パスワード"
-
-#: src/commands/basecommand.cc:107
-msgid "Option program arguments: "
-msgstr "オプションプログラムのパラメータ: "
-
-#: src/commands/basecommand.cc:119
-msgid "Non-option program arguments: "
-msgstr "オプション以外のプログラム引数: "
 
 #: src/commands/conditions.cc:19
 msgid "Root privileges are required to run this command."
@@ -2569,20 +2559,20 @@ msgstr ""
 "再起動が必要な場合は ZYPPER_EXIT_INF_REBOOT_NEEDED の終了コードを返し、それ以"
 "外の場合は ZYPPER_EXIT_OK の終了コードを返します。"
 
-#: src/commands/needs-rebooting.cc:49
+#: src/commands/needs-rebooting.cc:34
 msgid "Core libraries or services have been updated."
 msgstr "中枢ライブラリもしくはサービスの更新を行ないました。"
 
-#: src/commands/needs-rebooting.cc:50
+#: src/commands/needs-rebooting.cc:35
 msgid ""
 "Reboot is required to ensure that your system benefits from these updates."
 msgstr "これらの更新を反映させるため、システムの再起動が必要です。"
 
-#: src/commands/needs-rebooting.cc:53
+#: src/commands/needs-rebooting.cc:40
 msgid "No core libraries or services have been updated."
 msgstr "中枢ライブラリもしくはサービスの更新は行なわれていません。"
 
-#: src/commands/needs-rebooting.cc:54
+#: src/commands/needs-rebooting.cc:41
 msgid "Reboot is probably not necessary."
 msgstr "再起動はおそらく不要です。"
 
@@ -2796,12 +2786,12 @@ msgstr ""
 "つかった場合は 101 を返します。"
 
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
-#: src/commands/ps.cc:26
+#: src/commands/ps.cc:27
 msgid "ps [OPTIONS]"
 msgstr "ps [オプション]"
 
 #. translators: command description
-#: src/commands/ps.cc:28
+#: src/commands/ps.cc:29
 msgid ""
 "List running processes which might still use files and libraries deleted by "
 "recent upgrades."
@@ -2810,7 +2800,7 @@ msgstr ""
 "まだ使用している可能性のある実行中プロセスを一覧表示します。"
 
 #. translators: -s, --short
-#: src/commands/ps.cc:45
+#: src/commands/ps.cc:46
 msgid ""
 "Create a short table not showing the deleted files. Given twice, show only "
 "processes which are associated with a system service. Given three times, "
@@ -2821,7 +2811,7 @@ msgstr ""
 "られたシステムサービスの名前のみが表示されます。"
 
 #. translators: --print <format>
-#: src/commands/ps.cc:48
+#: src/commands/ps.cc:49
 #, c-format, boost-format
 msgid ""
 "For each associated system service print <format> on the standard output, "
@@ -2833,74 +2823,74 @@ msgstr ""
 "と、その箇所はシステムサービス名に置き換えられます。"
 
 #. translators: -d, --debugFile <path>
-#: src/commands/ps.cc:51
+#: src/commands/ps.cc:52
 msgid "Write debug output to file <path>."
 msgstr "デバッグ出力をファイル <path> に出力します。"
 
-#: src/commands/ps.cc:71 src/solve-commit.cc:452
+#: src/commands/ps.cc:72 src/solve-commit.cc:450
 msgid "Check failed:"
 msgstr "確認に失敗:"
 
 #. Here: Table output
-#: src/commands/ps.cc:126 src/solve-commit.cc:441
+#: src/commands/ps.cc:127 src/solve-commit.cc:439
 msgid "Checking for running processes using deleted libraries..."
 msgstr "削除されたライブラリを使用している実行中プロセスを確認しています..."
 
 #. process ID
-#: src/commands/ps.cc:141
+#: src/commands/ps.cc:142
 msgid "PID"
 msgstr "PID"
 
 #. parent process ID
-#: src/commands/ps.cc:143
+#: src/commands/ps.cc:144
 msgid "PPID"
 msgstr "PPID"
 
 #. process user ID
-#: src/commands/ps.cc:145
+#: src/commands/ps.cc:146
 msgid "UID"
 msgstr "UID"
 
 #. process login name
-#: src/commands/ps.cc:147
+#: src/commands/ps.cc:148
 msgid "User"
 msgstr "ユーザ"
 
 #. process command name
-#: src/commands/ps.cc:149
+#: src/commands/ps.cc:150
 msgid "Command"
 msgstr "コマンド"
 
 #. "/etc/init.d/ script that might be used to restart the command (guessed)
-#: src/commands/ps.cc:151 src/commands/repos/list.cc:277
+#: src/commands/ps.cc:152 src/commands/repos/list.cc:277
 msgid "Service"
 msgstr "サービス"
 
 # menu item for selecting a file
 #. "list of deleted files or libraries accessed"
-#: src/commands/ps.cc:155
+#: src/commands/ps.cc:156
 msgid "Files"
 msgstr "ファイル"
 
-#: src/commands/ps.cc:186
+#: src/commands/ps.cc:187
 msgid "No processes using deleted files found."
 msgstr "削除済みのファイルを使用しているプロセスは見つかりませんでした。"
 
-#: src/commands/ps.cc:190
+#: src/commands/ps.cc:191
 msgid "The following running processes use deleted files:"
 msgstr "以下の実行中プロセスが削除済みのファイルを使用しています:"
 
-#: src/commands/ps.cc:193
+#: src/commands/ps.cc:194
 msgid "You may wish to restart these processes."
 msgstr "これらのプロセスを再起動する必要があります。"
 
-#: src/commands/ps.cc:194
+#: src/commands/ps.cc:195
 #, c-format, boost-format
 msgid ""
 "See '%s' for information about the meaning of values in the above table."
 msgstr "上記の表内にある値の意味については、 '%s' をご覧ください。"
 
-#: src/commands/ps.cc:201
+#: src/commands/ps.cc:208
 msgid ""
 "Note: Not running as root you are limited to searching for files you have "
 "permission to examine with the system stat(2) function. The result might be "
@@ -3581,121 +3571,121 @@ msgstr ""
 "正しくない優先順位 '%s' です。正の整数で入力してください。より大きい数字がよ"
 "り低い優先順位になります。"
 
-#: src/commands/reposerviceoptionsets.cc:71
+#: src/commands/reposerviceoptionsets.cc:72
 msgid "Set a descriptive name for the service."
 msgstr "サービスを説明するための名前を設定します。"
 
-#: src/commands/reposerviceoptionsets.cc:71
+#: src/commands/reposerviceoptionsets.cc:72
 msgid "Set a descriptive name for the repository."
 msgstr "リポジトリを説明するための名前を設定します。"
 
-#: src/commands/reposerviceoptionsets.cc:74
+#: src/commands/reposerviceoptionsets.cc:75
 msgid "Enable a disabled service."
 msgstr "無効に設定してあるサービスを有効にします。"
 
-#: src/commands/reposerviceoptionsets.cc:74
+#: src/commands/reposerviceoptionsets.cc:75
 msgid "Enable a disabled repository."
 msgstr "無効に設定してあるリポジトリを有効にします。"
 
-#: src/commands/reposerviceoptionsets.cc:77
+#: src/commands/reposerviceoptionsets.cc:78
 msgid "Disable the service (but don't remove it)."
 msgstr "サービスを無効に設定する (削除は行なわない) 。"
 
-#: src/commands/reposerviceoptionsets.cc:77
+#: src/commands/reposerviceoptionsets.cc:78
 msgid "Disable the repository (but don't remove it)."
 msgstr "リポジトリを無効に設定する (削除は行なわない) 。"
 
-#: src/commands/reposerviceoptionsets.cc:80
+#: src/commands/reposerviceoptionsets.cc:81
 msgid "Enable auto-refresh of the service."
 msgstr "サービスの自動更新を有効にします。"
 
-#: src/commands/reposerviceoptionsets.cc:80
+#: src/commands/reposerviceoptionsets.cc:81
 msgid "Enable auto-refresh of the repository."
 msgstr "リポジトリの自動更新を有効にします。"
 
-#: src/commands/reposerviceoptionsets.cc:83
+#: src/commands/reposerviceoptionsets.cc:84
 msgid "Disable auto-refresh of the service."
 msgstr "サービスの自動更新を無効にします。"
 
-#: src/commands/reposerviceoptionsets.cc:83
+#: src/commands/reposerviceoptionsets.cc:84
 msgid "Disable auto-refresh of the repository."
 msgstr "リポジトリの自動更新を無効にします。"
 
-#: src/commands/reposerviceoptionsets.cc:110
+#: src/commands/reposerviceoptionsets.cc:111
 msgid "Apply changes to all services."
 msgstr "全てのサービスに対して変更を適用します。"
 
-#: src/commands/reposerviceoptionsets.cc:110
+#: src/commands/reposerviceoptionsets.cc:111
 msgid "Apply changes to all repositories."
 msgstr "全てのリポジトリに対して変更を適用します。"
 
-#: src/commands/reposerviceoptionsets.cc:113
+#: src/commands/reposerviceoptionsets.cc:114
 msgid "Apply changes to all local services."
 msgstr "全てのローカルサービスに対して変更を適用します。"
 
-#: src/commands/reposerviceoptionsets.cc:113
+#: src/commands/reposerviceoptionsets.cc:114
 msgid "Apply changes to all local repositories."
 msgstr "全てのローカルリポジトリに対して変更を適用します。"
 
-#: src/commands/reposerviceoptionsets.cc:116
+#: src/commands/reposerviceoptionsets.cc:117
 msgid "Apply changes to all remote services."
 msgstr "全てのリモート (ネットワーク) サービスに対して変更を適用します。"
 
-#: src/commands/reposerviceoptionsets.cc:116
+#: src/commands/reposerviceoptionsets.cc:117
 msgid "Apply changes to all remote repositories."
 msgstr "全てのリモート (ネットワーク) リポジトリに対して変更を適用します。"
 
-#: src/commands/reposerviceoptionsets.cc:119
+#: src/commands/reposerviceoptionsets.cc:120
 msgid "Apply changes to services of specified type."
 msgstr "指定した種類のサービスに対して変更を適用します。"
 
-#: src/commands/reposerviceoptionsets.cc:119
+#: src/commands/reposerviceoptionsets.cc:120
 msgid "Apply changes to repositories of specified type."
 msgstr "指定した種類のリポジトリに対して変更を適用します。"
 
-#: src/commands/reposerviceoptionsets.cc:135
+#: src/commands/reposerviceoptionsets.cc:137
 msgid "Set priority of the repository."
 msgstr "リポジトリの優先順位を設定します。"
 
-#: src/commands/reposerviceoptionsets.cc:136
+#: src/commands/reposerviceoptionsets.cc:138
 msgid "Enable RPM files caching."
 msgstr "RPM ファイルのキャッシュ機能を有効にします。"
 
-#: src/commands/reposerviceoptionsets.cc:137
+#: src/commands/reposerviceoptionsets.cc:139
 msgid "Disable RPM files caching."
 msgstr "RPM ファイルのキャッシュ機能を無効にします。"
 
-#: src/commands/reposerviceoptionsets.cc:138
+#: src/commands/reposerviceoptionsets.cc:140
 msgid "Enable GPG check for this repository."
 msgstr "このリポジトリに対して、 GPG チェックを有効にします。"
 
-#: src/commands/reposerviceoptionsets.cc:139
+#: src/commands/reposerviceoptionsets.cc:141
 msgid "Enable strict GPG check for this repository."
 msgstr "このリポジトリに対して厳密な GPG チェックを行なう。"
 
-#: src/commands/reposerviceoptionsets.cc:140
+#: src/commands/reposerviceoptionsets.cc:142
 #, boost-format
 msgid "Short hand for '%1%'."
 msgstr "'%s' の省略形です。"
 
-#: src/commands/reposerviceoptionsets.cc:141
+#: src/commands/reposerviceoptionsets.cc:143
 msgid "Enable GPG check but allow the repository metadata to be unsigned."
 msgstr ""
 "GPG チェックを有効にしますが、リポジトリのメタデータについては未署名を許可し"
 "ます。"
 
-#: src/commands/reposerviceoptionsets.cc:142
+#: src/commands/reposerviceoptionsets.cc:144
 msgid ""
 "Enable GPG check but allow installing unsigned packages from this repository."
 msgstr ""
 "GPG チェックを有効にしますが、このリポジトリからのものについては未署名のパッ"
 "ケージのインストールを許可します。"
 
-#: src/commands/reposerviceoptionsets.cc:143
+#: src/commands/reposerviceoptionsets.cc:145
 msgid "Disable GPG check for this repository."
 msgstr "このリポジトリに対して、 GPG チェックを無効にします。"
 
-#: src/commands/reposerviceoptionsets.cc:144
+#: src/commands/reposerviceoptionsets.cc:146
 msgid ""
 "Use the global GPG check setting defined in /etc/zypp/zypp.conf. This is the "
 "default."
@@ -3704,63 +3694,63 @@ msgstr ""
 "す。これが既定値です。"
 
 #. translators: -a, --alias
-#: src/commands/reposerviceoptionsets.cc:180
+#: src/commands/reposerviceoptionsets.cc:182
 msgid "Show also repository alias."
 msgstr "リポジトリのエイリアスも表示します。"
 
 #. translators: -n, --name
-#: src/commands/reposerviceoptionsets.cc:183
+#: src/commands/reposerviceoptionsets.cc:185
 msgid "Show also repository name."
 msgstr "リポジトリの名前も表示します。"
 
 #. translators: -r, --refresh
-#: src/commands/reposerviceoptionsets.cc:186
+#: src/commands/reposerviceoptionsets.cc:188
 msgid "Show also the autorefresh flag."
 msgstr "自動更新フラグも表示します。"
 
 #. translators: -u, --uri
-#: src/commands/reposerviceoptionsets.cc:196
+#: src/commands/reposerviceoptionsets.cc:198
 msgid "Show also base URI of repositories."
 msgstr "リポジトリのベースURIも表示します。"
 
 #. translators: -p, --priority
-#: src/commands/reposerviceoptionsets.cc:200
+#: src/commands/reposerviceoptionsets.cc:202
 msgid "Show also repository priority."
 msgstr "リポジトリの優先度も表示します。"
 
 #. translators: -d, --details
-#: src/commands/reposerviceoptionsets.cc:203
+#: src/commands/reposerviceoptionsets.cc:205
 msgid "Show more information like URI, priority, type."
 msgstr "URIや優先度、タイプなどの詳細情報を表示します。"
 
-#: src/commands/reposerviceoptionsets.cc:210
+#: src/commands/reposerviceoptionsets.cc:212
 msgid "Show also repositories belonging to the services."
 msgstr "サービスに属するリポジトリも表示します。"
 
 #. translators: -s, --service
 #. translators: -A, --sort-by-alias
-#: src/commands/reposerviceoptionsets.cc:216
-#: src/commands/reposerviceoptionsets.cc:239
+#: src/commands/reposerviceoptionsets.cc:218
+#: src/commands/reposerviceoptionsets.cc:241
 msgid "Show also alias of parent service."
 msgstr "親サービスの別名も表示します。"
 
 #. translators: -E, --show-enabled-only
-#: src/commands/reposerviceoptionsets.cc:223
+#: src/commands/reposerviceoptionsets.cc:225
 msgid "Show enabled repos only."
 msgstr "有効なリポジトリのみを表示します。"
 
 #. translators: -U, --sort-by-uri
-#: src/commands/reposerviceoptionsets.cc:226
+#: src/commands/reposerviceoptionsets.cc:228
 msgid "Sort the list by URI."
 msgstr "リストをURI順にソートします。"
 
 #. translators: -N, --sort-by-name
-#: src/commands/reposerviceoptionsets.cc:229
+#: src/commands/reposerviceoptionsets.cc:231
 msgid "Sort the list by name."
 msgstr "リストを名前順にソートします。"
 
 #. translators: -P, --sort-by-priority
-#: src/commands/reposerviceoptionsets.cc:232
+#: src/commands/reposerviceoptionsets.cc:234
 msgid "Sort the list by repository priority."
 msgstr "リストをリポジトリの優先順位順にソートします。"
 
@@ -3938,19 +3928,19 @@ msgid "Specified repository '%s' is disabled."
 msgstr "指定したリポジトリ '%s' は無効化されています。"
 
 #. translators: empty search result message
-#: src/commands/search/search.cc:414
+#: src/commands/search/search.cc:422
 msgid "No matching items found."
 msgstr "該当する項目がありません。"
 
-#: src/commands/search/search.cc:449
+#: src/commands/search/search.cc:457
 msgid "Problem occurred initializing or executing the search query"
 msgstr "検索の問い合わせを準備する際、または実行する際に問題が発生しました"
 
-#: src/commands/search/search.cc:450
+#: src/commands/search/search.cc:458
 msgid "See the above message for a hint."
 msgstr "解決へのヒントとして上記のメッセージをお読みください。"
 
-#: src/commands/search/search.cc:451 src/repos.cc:994
+#: src/commands/search/search.cc:459 src/repos.cc:994
 msgid "Running 'zypper refresh' as root might resolve the problem."
 msgstr ""
 "root ユーザで 'zypper refresh' を実行すると問題を解決できるかもしれません。"
@@ -4318,16 +4308,16 @@ msgid "You already are running zypper's shell."
 msgstr "既にzypperのシェルにいます。"
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/commands/shell.cc:54
+#: src/commands/shell.cc:52
 msgid "quit (exit, ^D)"
 msgstr "quit (exit, ^D)"
 
 #. translators: command description
-#: src/commands/shell.cc:56 src/commands/shell.cc:58
+#: src/commands/shell.cc:54 src/commands/shell.cc:56
 msgid "Quit the current zypper shell."
 msgstr "現在の zypper シェルを終了します。"
 
-#: src/commands/shell.cc:76
+#: src/commands/shell.cc:74
 msgid "This command only makes sense in the zypper shell."
 msgstr "このコマンドは zypper シェル内でのみ意味を持ちます。"
 
@@ -4434,25 +4424,25 @@ msgstr "ビルドの際に依存するパッケージのソースコードをイ
 msgid "Source package name is a required argument."
 msgstr "ソースパッケージ名の指定が必要です。"
 
-#: src/commands/subcommand.cc:51
+#: src/commands/subcommand.cc:52
 msgid "none"
 msgstr "なし"
 
-#: src/commands/subcommand.cc:295
+#: src/commands/subcommand.cc:296
 #, boost-format
 msgid "cannot exec %1% (%2%)"
 msgstr "%1% を実行できません (%2%)"
 
 #. translators: %1% - command name or path
 #. translators: %2% - system error message
-#: src/commands/subcommand.cc:304
+#: src/commands/subcommand.cc:305
 #, boost-format
 msgid "fork for %1% failed (%2%)"
 msgstr "%1% に対する fork が失敗しました (%2%)"
 
 #. translators: %1% - command name or path
 #. translators: %2% - system error message
-#: src/commands/subcommand.cc:323
+#: src/commands/subcommand.cc:324
 #, boost-format
 msgid "waitpid for %1% failed (%2%)"
 msgstr "%1% に対する waitpid が失敗しました (%2%)"
@@ -4460,7 +4450,7 @@ msgstr "%1% に対する waitpid が失敗しました (%2%)"
 #. translators: %1% - command name or path
 #. translators: %2% - returned PID (number)
 #. translators: %3% - expected PID (number)
-#: src/commands/subcommand.cc:333
+#: src/commands/subcommand.cc:334
 #, boost-format
 msgid "waitpid for %1% returns unexpected pid %2% while waiting for %3%"
 msgstr ""
@@ -4469,30 +4459,30 @@ msgstr ""
 #. translators: %1% - command name or path
 #. translators: %2% - signal number
 #. translators: %3% - signal name
-#: src/commands/subcommand.cc:344
+#: src/commands/subcommand.cc:345
 #, boost-format
 msgid "%1% was killed by signal %2% (%3%)"
 msgstr "%1% はシグナル %2% で kill されました (%3%)"
 
-#: src/commands/subcommand.cc:348
+#: src/commands/subcommand.cc:349
 msgid "core dumped"
 msgstr "コアダンプしました"
 
 #. translators: %1% - command name or path
 #. translators: %2% - exit code (number)
-#: src/commands/subcommand.cc:358
+#: src/commands/subcommand.cc:359
 #, boost-format
 msgid "%1% exited with status %2%"
 msgstr "%1% は状態 %2% で終了しました"
 
 #. translators: %1% - command name or path
 #. translators: %2% - status (number)
-#: src/commands/subcommand.cc:373
+#: src/commands/subcommand.cc:374
 #, boost-format
 msgid "waitpid for %1% returns unexpected exit status %2%"
 msgstr "%1% に対する waitpid が予期しない終了状態 %2% を返しました"
 
-#: src/commands/subcommand.cc:406
+#: src/commands/subcommand.cc:407
 #, boost-format
 msgid ""
 "Zypper subcommands are standalone executables that live in the\n"
@@ -4517,7 +4507,7 @@ msgstr ""
 " $PATH 環境変数を参照します。そのため、システム以外の場所に zypper\n"
 "の独自拡張を配置し、利用することができるようになっています。\n"
 
-#: src/commands/subcommand.cc:421
+#: src/commands/subcommand.cc:422
 #, boost-format
 msgid ""
 "Using zypper global-options together with subcommands, as well as\n"
@@ -4527,18 +4517,18 @@ msgstr ""
 "場合、 '%1%' 内でのサブコマンドの実行は現時点ではサポートしていません。\n"
 
 #. translators: headline of an enumeration; %1% is a directory name
-#: src/commands/subcommand.cc:438
+#: src/commands/subcommand.cc:439
 #, boost-format
 msgid "Available zypper subcommands in '%1%'"
 msgstr "'%1%' 内で利用可能な zypper のサブコマンド"
 
 #. translators: headline of an enumeration
-#: src/commands/subcommand.cc:443
+#: src/commands/subcommand.cc:444
 msgid "Zypper subcommands available from elsewhere on your $PATH"
 msgstr "お使いの $PATH 内の他の場所で利用可能な zypper サブコマンド"
 
 #. translators: helptext; %1% is a zypper command
-#: src/commands/subcommand.cc:448
+#: src/commands/subcommand.cc:449
 #, boost-format
 msgid "Type '%1%' to get subcommand-specific help if available."
 msgstr ""
@@ -4546,15 +4536,26 @@ msgstr ""
 "さい。"
 
 #. translators: %1% - command name
-#: src/commands/subcommand.cc:471
+#: src/commands/subcommand.cc:472
 #, boost-format
 msgid "Manual entry for %1% can't be shown"
 msgstr "%1% に対するマニュアル項目が表示できません"
 
 #. translators: command summary: subcommand
-#: src/commands/subcommand.cc:484
+#: src/commands/subcommand.cc:485
 msgid "Lists available subcommands."
 msgstr "利用可能なサブコマンドを一覧表示します。"
+
+#. Currently no concept how to handle global options and ZYPPlock
+#: src/commands/subcommand.cc:582
+msgid "Zypper shell does not support execution of subcommands."
+msgstr "zypper shell はサブコマンドの実行には対応していません。"
+
+#. translators: %1%  - is the name of a subcommand
+#: src/commands/subcommand.cc:596
+#, boost-format
+msgid "Subcommand %1% does not support zypper global options."
+msgstr "サブコマンド %1% は zypper のグローバルオプションに対応していません。"
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/update.cc:22
@@ -4656,7 +4657,7 @@ msgstr ""
 msgid "Argument resolves to no package"
 msgstr "パラメータを解釈しましたが、該当するパッケージがありません"
 
-#: src/commands/utils/download.cc:246 src/solve-commit.cc:890
+#: src/commands/utils/download.cc:246 src/solve-commit.cc:892
 msgid "Nothing to do."
 msgstr "何もすることがありません。"
 
@@ -5128,7 +5129,7 @@ msgstr "終了処理中です。しばらくお待ちください..."
 
 #. translators: the first %s is name of the resolvable,
 #. the second is its kind (e.g. 'zypper package')
-#: src/misc.cc:132
+#: src/misc.cc:131
 #, c-format, boost-format
 msgid "Automatically agreeing with %s %s license."
 msgstr "自動的に %s %s ライセンスに同意します。"
@@ -5136,7 +5137,7 @@ msgstr "自動的に %s %s ライセンスに同意します。"
 #. introduction
 #. translators: the first %s is the name of the package, the second
 #. is " (package-type)" if other than "package" (patch/product/pattern)
-#: src/misc.cc:151
+#: src/misc.cc:150
 #, c-format, boost-format
 msgid ""
 "In order to install '%s'%s, you must agree to terms of the following license "
@@ -5146,18 +5147,18 @@ msgstr ""
 "必要があります:"
 
 #. lincense prompt
-#: src/misc.cc:165
+#: src/misc.cc:164
 msgid "Do you agree with the terms of the license?"
 msgstr "ライセンス (使用許諾) 契約条項に同意しますか？"
 
-#: src/misc.cc:173
+#: src/misc.cc:172
 msgid "Aborting installation due to the need for license confirmation."
 msgstr ""
 "ライセンス (使用許諾) 契約に同意する必要があるため、インストールを中止しま"
 "す。"
 
 #. translators: %s is '--auto-agree-with-licenses'
-#: src/misc.cc:176
+#: src/misc.cc:175
 #, c-format, boost-format
 msgid ""
 "Please restart the operation in interactive mode and confirm your agreement "
@@ -5167,66 +5168,66 @@ msgstr ""
 "コマンドラインオプションに %s を指定してください。"
 
 #. translators: e.g. "... with flash package license."
-#: src/misc.cc:185
+#: src/misc.cc:184
 #, c-format, boost-format
 msgid "Aborting installation due to user disagreement with %s %s license."
 msgstr ""
 "%s %s のライセンス (使用許諾) 契約に同意しなかったため、インストールを中止し"
 "ました。"
 
-#: src/misc.cc:223
+#: src/misc.cc:222
 msgid "License"
 msgstr "ライセンス"
 
-#: src/misc.cc:242
+#: src/misc.cc:241
 msgid "EULA"
 msgstr "使用許諾契約"
 
-#: src/misc.cc:254
+#: src/misc.cc:253
 msgid "SUMMARY"
 msgstr "概要"
 
-#: src/misc.cc:255
+#: src/misc.cc:254
 #, c-format, boost-format
 msgid "Installed packages: %d"
 msgstr "インストール済みパッケージ:%d"
 
-#: src/misc.cc:256
+#: src/misc.cc:255
 #, c-format, boost-format
 msgid "Installed packages with counterparts in repositories: %d"
 msgstr "リポジトリ内に対応するものがあるインストール済みパッケージ: %d"
 
-#: src/misc.cc:257
+#: src/misc.cc:256
 #, c-format, boost-format
 msgid "Installed packages with EULAs: %d"
 msgstr "使用許諾契約のあるインストール済みパッケージ:%d"
 
-#: src/misc.cc:287
+#: src/misc.cc:286
 #, c-format, boost-format
 msgid "Package '%s' has source package '%s'."
 msgstr "パッケージ '%s' には、ソースパッケージ '%s' があります。"
 
-#: src/misc.cc:293
+#: src/misc.cc:292
 #, c-format, boost-format
 msgid "Source package '%s' for package '%s' not found."
 msgstr "ソースパッケージ '%s ' ( '%s ' パッケージ向け) が見つかりません。"
 
-#: src/misc.cc:371
+#: src/misc.cc:370
 #, c-format, boost-format
 msgid "Installing source package %s-%s"
 msgstr "ソースパッケージ %s-%s をインストール中"
 
-#: src/misc.cc:380
+#: src/misc.cc:379
 #, c-format, boost-format
 msgid "Source package %s-%s successfully retrieved."
 msgstr "ソースパッケージ %s-%s の取得に成功しました。"
 
-#: src/misc.cc:386
+#: src/misc.cc:385
 #, c-format, boost-format
 msgid "Source package %s-%s successfully installed."
 msgstr "ソースパッケージ %s-%s のインストールに成功しました。"
 
-#: src/misc.cc:392
+#: src/misc.cc:391
 #, c-format, boost-format
 msgid "Problem installing source package %s-%s:"
 msgstr "ソースパッケージ %s-%s のインストール中に問題が発生しました。"
@@ -5361,8 +5362,8 @@ msgstr "リポジトリ '%s' を無効にする際にエラーが発生しまし
 msgid "Problem retrieving files from '%s'."
 msgstr "'%s' からのファイル取得中に問題が発生しました。"
 
-#: src/repos.cc:337 src/repos.cc:1861 src/solve-commit.cc:784
-#: src/solve-commit.cc:815 src/solve-commit.cc:839
+#: src/repos.cc:337 src/repos.cc:1861 src/solve-commit.cc:786
+#: src/solve-commit.cc:817 src/solve-commit.cc:841
 msgid "Please see the above error message for a hint."
 msgstr "解決へのヒントとして上記のエラーメッセージをお読みください。"
 
@@ -5820,17 +5821,17 @@ msgid "No products found."
 msgstr "製品が見つかりません。"
 
 #. translators: meaning 'dependency problem' found during solving
-#: src/solve-commit.cc:40
+#: src/solve-commit.cc:41
 msgid "Problem: "
 msgstr "問題点: "
 
 #. TranslatorExplanation %d is the solution number
-#: src/solve-commit.cc:52
+#: src/solve-commit.cc:53
 #, c-format, boost-format
 msgid " Solution %d: "
 msgstr " 解決方法 %d: "
 
-#: src/solve-commit.cc:71
+#: src/solve-commit.cc:72
 msgid "Choose the above solution using '1' or skip, retry or cancel"
 msgid_plural "Choose from above solutions by number or skip, retry or cancel"
 msgstr[0] ""
@@ -5839,7 +5840,7 @@ msgstr[0] ""
 
 #. translators: translate 'c' to whatever you translated the 'c' in
 #. "c" and "s/r/c" strings
-#: src/solve-commit.cc:78
+#: src/solve-commit.cc:79
 msgid "Choose the above solution using '1' or cancel using 'c'"
 msgid_plural "Choose from above solutions by number or cancel"
 msgstr[0] ""
@@ -5852,7 +5853,7 @@ msgstr[0] ""
 #. The anserws must be separated by slash characters '/' and must
 #. correspond to skip/retry/cancel in that order.
 #. The answers should be lower case letters.
-#: src/solve-commit.cc:97
+#: src/solve-commit.cc:98
 msgid "s/r/c"
 msgstr "s/r/c"
 
@@ -5863,59 +5864,59 @@ msgstr "s/r/c"
 #. See the "s/r/c" comment for other details.
 #. One letter string  for translation can be tricky, so in case of problems,
 #. please report a bug against zypper at bugzilla.novell.com, we'll try to solve it.
-#: src/solve-commit.cc:109
+#: src/solve-commit.cc:110
 msgid "c"
 msgstr "c"
 
 #. continue with next problem
-#: src/solve-commit.cc:130
+#: src/solve-commit.cc:131
 #, c-format, boost-format
 msgid "Applying solution %s"
 msgstr "解決方法 %s を適用しています"
 
-#: src/solve-commit.cc:146
+#: src/solve-commit.cc:147
 #, c-format, boost-format
 msgid "%d Problem:"
 msgid_plural "%d Problems:"
 msgstr[0] "%d 個の問題点:"
 
 #. should not happen! If solve() failed at least one problem must be set!
-#: src/solve-commit.cc:150
+#: src/solve-commit.cc:151
 msgid "Specified capability not found"
 msgstr "指定された機能が見つかりません"
 
-#: src/solve-commit.cc:160
+#: src/solve-commit.cc:161
 #, c-format, boost-format
 msgid "Problem: %s"
 msgstr "問題点:%s"
 
-#: src/solve-commit.cc:179
+#: src/solve-commit.cc:180
 msgid "Resolving dependencies..."
 msgstr "依存関係を解決しています..."
 
-#: src/solve-commit.cc:240
+#: src/solve-commit.cc:241
 msgid "Force resolution:"
 msgstr "強制的な解決:"
 
-#: src/solve-commit.cc:338
+#: src/solve-commit.cc:339
 msgid "Verifying dependencies..."
 msgstr "依存関係を解決しています..."
 
 #. Here: compute the full upgrade
-#: src/solve-commit.cc:388
+#: src/solve-commit.cc:389
 msgid "Computing upgrade..."
 msgstr "アップグレードを準備しています..."
 
-#: src/solve-commit.cc:402
+#: src/solve-commit.cc:403
 msgid "Generating solver test case..."
 msgstr "解決処理のテスト出力を作成しています..."
 
-#: src/solve-commit.cc:404
+#: src/solve-commit.cc:405
 #, c-format, boost-format
 msgid "Solver test case generated successfully at %s."
 msgstr "解決処理のテスト結果は %s に出力されました。"
 
-#: src/solve-commit.cc:407
+#: src/solve-commit.cc:408
 msgid "Error creating the solver test case."
 msgstr "解決処理のテスト出力中にエラーが発生しました。"
 
@@ -5928,11 +5929,11 @@ msgstr ""
 "削除されたライブラリを使用している実行中プロセスの確認は、zypper.confで無効に"
 "されています。'%s' を実行して手動で確認してください。"
 
-#: src/solve-commit.cc:454
+#: src/solve-commit.cc:452
 msgid "Skip check:"
 msgstr "確認を省略:"
 
-#: src/solve-commit.cc:462
+#: src/solve-commit.cc:460
 #, c-format, boost-format
 msgid ""
 "There are some running programs that might use files deleted by recent "
@@ -5943,32 +5944,32 @@ msgstr ""
 "ます。ご確認の上、これらを再起動してください。 '%s' と入力すると、プログラム"
 "の一覧を表示することができます。"
 
-#: src/solve-commit.cc:473
+#: src/solve-commit.cc:475
 msgid "Update notifications were received from the following packages:"
 msgstr "下記のパッケージから更新通知を受信しました:"
 
-#: src/solve-commit.cc:482
+#: src/solve-commit.cc:484
 #, c-format, boost-format
 msgid "Message from package %s:"
 msgstr "パッケージ %s からのメッセージ:"
 
-#: src/solve-commit.cc:490
+#: src/solve-commit.cc:492
 msgid "y/n"
 msgstr "y/n"
 
-#: src/solve-commit.cc:491
+#: src/solve-commit.cc:493
 msgid "View the notifications now?"
 msgstr "今すぐ通知を閲覧しますか？"
 
-#: src/solve-commit.cc:537
+#: src/solve-commit.cc:539
 msgid "Computing distribution upgrade..."
 msgstr "ディストリビューションのアップグレードを準備しています..."
 
-#: src/solve-commit.cc:542
+#: src/solve-commit.cc:544
 msgid "Resolving package dependencies..."
 msgstr "パッケージの依存関係を解決しています..."
 
-#: src/solve-commit.cc:597
+#: src/solve-commit.cc:599
 msgid ""
 "Some of the dependencies of installed packages are broken. In order to fix "
 "these dependencies, the following actions need to be taken:"
@@ -5976,7 +5977,7 @@ msgstr ""
 "インストール済みのパッケージのうち、いくつかの依存関係が壊れています。依存関"
 "係を修復するには、以下の作業を実行する必要があります:"
 
-#: src/solve-commit.cc:604
+#: src/solve-commit.cc:606
 msgid "Root privileges are required to fix broken package dependencies."
 msgstr "壊れた依存関係を修復するには root 権限が必要です。"
 
@@ -5990,12 +5991,12 @@ msgstr "壊れた依存関係を修復するには root 権限が必要です。
 #. The answers should be lower case letters, but in general, any UTF-8
 #. string will do.
 #. ! \todo add c for changelog and x for explain (show the dep tree)
-#: src/solve-commit.cc:626
+#: src/solve-commit.cc:628
 msgid "y/n/p/v/a/r/m/d/g"
 msgstr "y/n/p/v/a/r/m/d/g"
 
 #. translators: help text for 'y' option in the 'Continue?' prompt
-#: src/solve-commit.cc:631
+#: src/solve-commit.cc:633
 msgid ""
 "Yes, accept the summary and proceed with installation/removal of packages."
 msgstr ""
@@ -6003,67 +6004,67 @@ msgstr ""
 "行います。"
 
 #. translators: help text for 'n' option in the 'Continue?' prompt
-#: src/solve-commit.cc:633
+#: src/solve-commit.cc:635
 msgid "No, cancel the operation."
 msgstr "いいえ (n)、操作をキャンセルします。"
 
 #. translators: help text for 'p' option in the 'Continue?' prompt
-#: src/solve-commit.cc:635
+#: src/solve-commit.cc:637
 msgid ""
 "Restart solver in no-force-resolution mode in order to show dependency "
 "problems."
 msgstr "依存関係の問題を表示するため、強制力を設定せずに解決器を実行します。"
 
 #. translators: help text for 'v' option in the 'Continue?' prompt
-#: src/solve-commit.cc:637
+#: src/solve-commit.cc:639
 msgid "Toggle display of package versions."
 msgstr "パッケージバージョンの表示を切り替えます。"
 
 #. translators: help text for 'a' option in the 'Continue?' prompt
-#: src/solve-commit.cc:639
+#: src/solve-commit.cc:641
 msgid "Toggle display of package architectures."
 msgstr "パッケージアーキテクチャの表示を切り替えます。"
 
 #. translators: help text for 'r' option in the 'Continue?' prompt
-#: src/solve-commit.cc:641
+#: src/solve-commit.cc:643
 msgid ""
 "Toggle display of repositories from which the packages will be installed."
 msgstr "パッケージのインストール元リポジトリの表示を切り替えます。"
 
 #. translators: help text for 'm' option in the 'Continue?' prompt
-#: src/solve-commit.cc:643
+#: src/solve-commit.cc:645
 msgid "Toggle display of package vendor names."
 msgstr "パッケージのベンダ名の表示を切り替えます。"
 
 #. translators: help text for 'd' option in the 'Continue?' prompt
-#: src/solve-commit.cc:645
+#: src/solve-commit.cc:647
 msgid "Toggle between showing all details and as few details as possible."
 msgstr "すべての詳細を表示するか、最小限の表示のみにとどめるかを切り替えます。"
 
 #. translators: help text for 'g' option in the 'Continue?' prompt
-#: src/solve-commit.cc:647
+#: src/solve-commit.cc:649
 msgid "View the summary in pager."
 msgstr "ページャで詳細を表示します。"
 
-#: src/solve-commit.cc:757
+#: src/solve-commit.cc:759
 msgid "committing"
 msgstr "確定しています"
 
-#: src/solve-commit.cc:759
+#: src/solve-commit.cc:761
 msgid "(dry run)"
 msgstr "(テスト)"
 
-#: src/solve-commit.cc:783 src/solve-commit.cc:816
+#: src/solve-commit.cc:785 src/solve-commit.cc:818
 msgid "Problem retrieving the package file from the repository:"
 msgstr "リポジトリからのパッケージファイルの取得に問題:"
 
 #. translators: the first %s is 'zypper refresh' and the second is repo alias
-#: src/solve-commit.cc:813
+#: src/solve-commit.cc:815
 #, c-format, boost-format
 msgid "Repository '%s' is out of date. Running '%s' might help."
 msgstr "リポジトリ '%s' の情報は古くなっています。 '%s' を実行してください。"
 
-#: src/solve-commit.cc:824
+#: src/solve-commit.cc:826
 msgid ""
 "The package integrity check failed. This may be a problem with the "
 "repository or media. Try one of the following:\n"
@@ -6081,21 +6082,21 @@ msgstr ""
 "- 他のインストールメディアを使用する　(損傷している場合など)　\n"
 "- 他のリポジトリを使用する"
 
-#: src/solve-commit.cc:838
+#: src/solve-commit.cc:840
 msgid "Problem occurred during or after installation or removal of packages:"
 msgstr ""
 "インストールまたは削除の際、もしくはそれぞれの作業の後に問題が発生しました:"
 
-#: src/solve-commit.cc:846
+#: src/solve-commit.cc:848
 msgid "Installation has completed with error."
 msgstr "インストールはエラーで終了しました。"
 
-#: src/solve-commit.cc:848
+#: src/solve-commit.cc:850
 #, boost-format
 msgid "You may run '%1%' to repair any dependency problems."
 msgstr "'%1%' を実行することで、依存関係の問題を修復することができます。"
 
-#: src/solve-commit.cc:862
+#: src/solve-commit.cc:864
 msgid ""
 "One of the installed patches requires a reboot of your machine. Reboot as "
 "soon as possible."
@@ -6103,7 +6104,7 @@ msgstr ""
 "インストールされたパッチの中にはコンピュータの再起動を必要とするものがありま"
 "す。できるだけ早めに再起動してください。"
 
-#: src/solve-commit.cc:870
+#: src/solve-commit.cc:872
 msgid ""
 "One of the installed patches affects the package manager itself. Run this "
 "command once more to install any other needed patches."
@@ -6112,7 +6113,7 @@ msgstr ""
 "ています。再度このコマンドを実行して、その他の必要な更新をインストールしてく"
 "ださい。"
 
-#: src/solve-commit.cc:888
+#: src/solve-commit.cc:890
 msgid "Dependencies of all installed packages are satisfied."
 msgstr "インストール済みの全パッケージの依存関係に問題はありません。"
 
@@ -6270,27 +6271,27 @@ msgstr "環境設定ファイルを解析できませんでした。"
 msgid "Error parsing zypper.conf:"
 msgstr "zypper.confの解析中にエラーが発生しました:"
 
-#: src/utils/flags/exceptions.cc:21
+#: src/utils/flags/exceptions.cc:22
 #, boost-format
 msgid "The flag %1% is not known."
 msgstr "不明なフラグ %1% です。"
 
-#: src/utils/flags/exceptions.cc:27
+#: src/utils/flags/exceptions.cc:28
 #, boost-format
 msgid "The flag %1% is not compatible with argument %2% (%3%)."
 msgstr "フラグ %1% はパラメータ %2% (%3%) との互換性がありません。"
 
-#: src/utils/flags/exceptions.cc:33
+#: src/utils/flags/exceptions.cc:34
 #, boost-format
 msgid "The flag %1% requires a argument."
 msgstr "フラグ %1% にはパラメータが必要です。"
 
-#: src/utils/flags/exceptions.cc:39
+#: src/utils/flags/exceptions.cc:40
 #, boost-format
 msgid "The flag %1% can only be used once."
 msgstr "フラグ %1% は一度だけ使用することができます。"
 
-#: src/utils/flags/exceptions.cc:45
+#: src/utils/flags/exceptions.cc:46
 #, c-format, boost-format
 msgid "%s used together with %s, which contradict each other."
 msgstr "%s と %s とは互いに矛盾する指定です。"
@@ -6631,6 +6632,12 @@ msgid "Enter '%s' for '%s' or '%s' for '%s' if nothing else works for you."
 msgstr ""
 "うまく動作しない場合、 「%s」(「%s」の場合)、 「%s」(「%s」の場合)を入力して"
 "ください。"
+
+#~ msgid "Unexpected program flow."
+#~ msgstr "予期しないプログラムの流れです。"
+
+#~ msgid "Option program arguments: "
+#~ msgstr "オプションプログラムのパラメータ: "
 
 #~ msgid ""
 #~ "  Global Options:\n"
