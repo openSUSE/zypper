@@ -21,7 +21,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-01-23 09:24+0100\n"
-"PO-Revision-Date: 2019-01-17 05:31+0000\n"
+"PO-Revision-Date: 2019-01-28 08:52+0000\n"
 "Last-Translator: Aleš Kastner <alkas@volny.cz>\n"
 "Language-Team: Czech <https://l10n.opensuse.org/projects/zypper/master/cs/>\n"
 "Language: cs\n"
@@ -1863,9 +1863,9 @@ msgstr[2] "Následujících %d oprav vyžaduje restart systému:"
 #, c-format, boost-format
 msgid "The following package requires a system reboot:"
 msgid_plural "The following %d package require a system reboot:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Tento balíček vyžaduje restart systému:"
+msgstr[1] "Tyto balíčky (celkem %d) vyžadují restart systému:"
+msgstr[2] "Tyto balíčky (celkem %d) vyžadují restart systému:"
 
 #: src/Summary.cc:1373
 #, boost-format
