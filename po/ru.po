@@ -10,17 +10,17 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-01-23 09:24+0100\n"
-"PO-Revision-Date: 2018-10-27 14:06+0000\n"
+"PO-Revision-Date: 2019-02-02 17:07+0000\n"
 "Last-Translator: Alex Minton <alex239@gmail.com>\n"
-"Language-Team: Russian <https://l10n.opensuse.org/projects/zypper/master/ru/"
-">\n"
+"Language-Team: Russian <https://l10n.opensuse.org/projects/zypper/master/ru/>"
+"\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 2.18\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<="
+"4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Generator: Weblate 3.3\n"
 
 #: src/SolverRequester.h:52
 #, boost-format
@@ -596,7 +596,7 @@ msgstr ""
 
 #: src/commands/commonflags.h:53
 msgid "Consider only patches which affect the package management itself."
-msgstr ""
+msgstr "Учитывать только исправления, влияющие на управление пакетами."
 
 #: src/output/Out.h:26 src/repos.cc:125 src/repos.cc:153
 msgid "Yes"
@@ -722,7 +722,7 @@ msgstr "Ошибка"
 
 #: src/Command.cc:90
 msgid "Invalid command"
-msgstr ""
+msgstr "Неверная команда"
 
 #: src/Command.cc:108
 msgid "Repository Management:"
@@ -769,7 +769,7 @@ msgstr "Недопустимый стиль таблицы %d."
 #: src/Config.cc:54
 #, c-format, boost-format
 msgid " Use an integer number from %d to %d"
-msgstr ""
+msgstr " Используйте целое число от %d до %d"
 
 #: src/Config.cc:248
 msgid "The path specified in the --root option must be absolute."
@@ -873,6 +873,7 @@ msgstr "Игнорировать неизвестные пакеты."
 msgid ""
 "Terse output for machine consumption. Implies --no-abbrev and --no-color."
 msgstr ""
+"Сжатый вывод для машинной обработки. Подразумевает --no-abbrev и --no-color."
 
 #. translators: --reposd-dir, -D <DIR>
 #: src/Config.cc:487
@@ -1152,6 +1153,8 @@ msgid ""
 "There is an update candidate for '%s' from vendor '%s', while the current "
 "vendor is '%s'. Use '%s' to install this candidate."
 msgstr ""
+"Есть кандидат на обновление '%s' от поставщика '%s', поставщик текущей "
+"версии '%s'. Чтобы его установить, используйте \"%s\"."
 
 #: src/RequestFeedback.cc:132
 #, c-format, boost-format
@@ -1867,9 +1870,9 @@ msgstr[2] "%d исправлений требуют перезагрузки:"
 #, c-format, boost-format
 msgid "The following package requires a system reboot:"
 msgid_plural "The following %d package require a system reboot:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "%d пакет требует перезагрузки:"
+msgstr[1] "%d пакета требует перезагрузки:"
+msgstr[2] "%d пакетов требует перезагрузки:"
 
 #: src/Summary.cc:1373
 #, boost-format
@@ -2242,7 +2245,7 @@ msgstr "Пароль"
 
 #: src/commands/conditions.cc:19
 msgid "Root privileges are required to run this command."
-msgstr ""
+msgstr "Для запуска этой команды требуются права root."
 
 #: src/commands/conditions.cc:47
 msgid ""
@@ -2332,6 +2335,11 @@ msgid ""
 "unconditionally on small or minimal systems, as it may easily add a large "
 "number of packages."
 msgstr ""
+"Доустановить дополнительные пакеты, рекомендованные уже установленными "
+"пакетами. Данная команда по сути заново перебирает рекомендации всех "
+"установленных пакетов и дополняет систему в соответствии с ними. Вам не "
+"требуется запускать эту команду на маленьких/минимальных системах, поскольку "
+"она запросто добавит огромное количество пакетов."
 
 #. translators: command description, %1% is a zypper command
 #: src/commands/inrverify.cc:98
@@ -2341,6 +2349,9 @@ msgid ""
 "supporting available hardware, languages or filesystems. Useful after having "
 "added e.g. new hardware or driver repos."
 msgstr ""
+"При вызове в виде '%1%' вводится ограничение для команды на поиск только "
+"пакетов, поддерживающих доступное оборудование, языки или файловые системы. "
+"Полезно после добавления нового оборудования или репозиториев с драйверами."
 
 #. translators: command description
 #: src/commands/inrverify.cc:101
@@ -2358,7 +2369,7 @@ msgstr "Выбирать пакеты по обычному имени, а не 
 
 #: src/commands/installremove.cc:55
 msgid "Select packages solely by capability."
-msgstr ""
+msgstr "Выбирать пакеты только по возможностям."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/installremove.cc:74
@@ -2715,7 +2726,7 @@ msgstr "Проблема при удалении блокировки пакет
 #. translators: command summary: needs-rebooting
 #: src/commands/needs-rebooting.cc:21
 msgid "Check if the needs-reboot flag was set."
-msgstr ""
+msgstr "Проверить, был ли установлен флаг needs-reboot."
 
 #: src/commands/needs-rebooting.cc:22
 msgid ""
@@ -2724,23 +2735,27 @@ msgid ""
 "Exit code ZYPPER_EXIT_INF_REBOOT_NEEDED indicates that a reboot is needed, "
 "otherwise the exit code is set to ZYPPER_EXIT_OK."
 msgstr ""
+"Проверяет, был ли флаг needs-reboot установлен предыдущим обновлением или "
+"установкой основной библиотеки или службы.\n"
+".Код выхода ZYPPER_EXIT_INF_REBOOT_NEEDED означает, что требуется "
+"перезагрузка, в противном случае код выхода ZYPPER_EXIT_OK."
 
 #: src/commands/needs-rebooting.cc:34
 msgid "Core libraries or services have been updated."
-msgstr ""
+msgstr "Были обновлены основные библиотеки или службы."
 
 #: src/commands/needs-rebooting.cc:35
 msgid ""
 "Reboot is required to ensure that your system benefits from these updates."
-msgstr ""
+msgstr "Требуется перезагрузка, чтобы обновления вашей системы вступили в силу."
 
 #: src/commands/needs-rebooting.cc:40
 msgid "No core libraries or services have been updated."
-msgstr ""
+msgstr "Основные библиотеки или службы не были обновлены."
 
 #: src/commands/needs-rebooting.cc:41
 msgid "Reboot is probably not necessary."
-msgstr ""
+msgstr "Вероятно, перезагрузка не требуется."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/nullcommands.cc:17
@@ -2806,7 +2821,7 @@ msgstr "Эта команда реализована фиктивно и все�
 
 #: src/commands/optionsets.cc:33
 msgid "Don't change anything, just report what would be done."
-msgstr ""
+msgstr "Ничего не менять, только сообщить о том, что было бы сделано."
 
 #. translators: -r, --repo <ALIAS|#|URI>
 #: src/commands/optionsets.cc:65
@@ -2816,7 +2831,7 @@ msgstr "Работать только с указанным репозитори
 #: src/commands/optionsets.cc:85
 #, c-format, boost-format
 msgid "Option '--%s' overrides a previously set download mode."
-msgstr ""
+msgstr "Параметр '--%s' переопределяет предварительно заданный режим загруки."
 
 #: src/commands/optionsets.cc:114
 #, c-format, boost-format
@@ -2986,11 +3001,14 @@ msgid ""
 "followed by a newline. Any '%s' directive in <format> is replaced by the "
 "system service name."
 msgstr ""
+"<Формат> текста для стандартного вывода по каждой связанной системной "
+"службе, с переводом строки в конце. Каждое вхождение '%s' в <формате> "
+"заменяется именем системной службы."
 
 #. translators: -d, --debugFile <path>
 #: src/commands/ps.cc:52
 msgid "Write debug output to file <path>."
-msgstr ""
+msgstr "Записать отладочный вывод в файл <путь_к_файлу>."
 
 #: src/commands/ps.cc:72 src/solve-commit.cc:450
 msgid "Check failed:"
@@ -3942,16 +3960,20 @@ msgid ""
 "For an extended search including not yet activated remote resources you may "
 "now run '%1%'."
 msgstr ""
+"Чтобы осуществить расширенный поиск, в том числе в ещё не включённых сетевых "
+"репозиториях, можно использовать '%'."
 
 #: src/commands/search/search-packages-hinthack.cc:102
 #, boost-format
 msgid "Do you want to run '%1%' now?"
-msgstr ""
+msgstr "Хотите запустить '%1%' прямо сейчас?"
 
 #: src/commands/search/search-packages-hinthack.cc:113
 #, boost-format
 msgid "Run '%1%' to search in not yet activated remote resources."
 msgstr ""
+"Запустите '%1', чтобы осуществить поиск в ещё не включённых сетевых "
+"репозиториях."
 
 #. translators: command summary: search, se
 #: src/commands/search/search.cc:73
@@ -4108,33 +4130,33 @@ msgstr ""
 #. translators: -g, --category <CATEGORY>
 #: src/commands/selectpatchoptionset.cc:24
 msgid "Select patches with the specified category."
-msgstr ""
+msgstr "Выбрать исправления в указанной категории."
 
 #. translators: --severity <SEVERITY>
 #: src/commands/selectpatchoptionset.cc:28
 msgid "Select patches with the specified severity."
-msgstr ""
+msgstr "Выбрать исправления с указанной важностью."
 
 #. translators: --date <YYYY-MM-DD>
 #: src/commands/selectpatchoptionset.cc:32
 msgid "Select patches issued up to, but not including, the specified date"
-msgstr ""
+msgstr "Выбрать исправления, выпущенные ранее указанной даты"
 
 #. translators: -b, --bugzilla
 #: src/commands/selectpatchoptionset.cc:36
 msgid "Select applicable patches for the specified Bugzilla issues."
-msgstr ""
+msgstr "Выбрать применимые исправления для указанных отчётов Bugzilla."
 
 #. translators: --cve
 #: src/commands/selectpatchoptionset.cc:41
 msgid "Select applicable patches for the specified CVE issues."
-msgstr ""
+msgstr "Выбрать применимые исправления для указанных отчётов CVE."
 
 #. any
 #. translators: --cve
 #: src/commands/selectpatchoptionset.cc:50
 msgid "Select issues matching the specified string."
-msgstr ""
+msgstr "Выбрать отчёты, соответствующие указанной строке."
 
 #: src/commands/services/add.cc:55
 #, c-format, boost-format
@@ -4249,7 +4271,7 @@ msgstr ""
 
 #: src/commands/services/modify.cc:41
 msgid "Advanced:"
-msgstr ""
+msgstr "Дополнительно:"
 
 #: src/commands/services/modify.cc:43
 msgid "Add a RIS service repository to enable."
@@ -4498,7 +4520,7 @@ msgstr "Эта команда имеет смысл только в оболоч
 
 #: src/commands/solveroptionset.cc:16 src/commands/solveroptionset.cc:39
 msgid "Solver options"
-msgstr ""
+msgstr "Параметры решателя"
 
 #: src/commands/solveroptionset.cc:18
 msgid "Install also recommended packages in addition to the required ones."
@@ -4526,7 +4548,7 @@ msgstr ""
 
 #: src/commands/solveroptionset.cc:63
 msgid "Expert options"
-msgstr ""
+msgstr "Экспертные параметры"
 
 #: src/commands/solveroptionset.cc:66
 msgid "Whether to allow downgrading installed resolvables."
@@ -5008,12 +5030,12 @@ msgstr ""
 #. translators: --status
 #: src/commands/utils/source-download.cc:514
 msgid "Write a manifest file."
-msgstr ""
+msgstr "Записать файл-манифест."
 
 #. translators: --status
 #: src/commands/utils/source-download.cc:518
 msgid "Disable writing a manifest file."
-msgstr ""
+msgstr "Отключить запись файла-манифеста."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/utils/targetos.cc:20
@@ -6479,16 +6501,16 @@ msgstr "Флаг %1% можно использовать только один �
 #: src/utils/flags/exceptions.cc:46
 #, c-format, boost-format
 msgid "%s used together with %s, which contradict each other."
-msgstr ""
+msgstr "%s используется вместе с %s, но они противоречат друг другу."
 
 #: src/utils/flags/flagtypes.cc:24
 msgid "Unknown package type"
-msgstr ""
+msgstr "Неизвестный тип пакета"
 
 #: src/utils/flags/flagtypes.cc:100
 #, boost-format
 msgid "The flag '%1%' can only be used a maximum of %2% times."
-msgstr ""
+msgstr "Флаг '%1%' можно использовать не более %2% раз."
 
 #: src/utils/flags/flagtypes.cc:192
 #, c-format, boost-format
