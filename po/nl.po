@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper.nl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-01-23 09:24+0100\n"
-"PO-Revision-Date: 2019-01-20 17:29+0000\n"
-"Last-Translator: Freek de Kruijf <freek@opensuse.org>\n"
+"PO-Revision-Date: 2019-01-28 08:29+0000\n"
+"Last-Translator: Eva van Rein <vistatec@globaltextware.nl>\n"
 "Language-Team: Dutch <https://l10n.opensuse.org/projects/zypper/master/nl/>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
@@ -1847,8 +1847,8 @@ msgstr[1] "De volgende %d patches vereisen een herstart van het systeem:"
 #, c-format, boost-format
 msgid "The following package requires a system reboot:"
 msgid_plural "The following %d package require a system reboot:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Het volgende %d pakket vereist dat het systeem opnieuw opstart:"
+msgstr[1] "De volgende %d pakketten vereist dat het systeem opnieuw opstart:"
 
 #: src/Summary.cc:1373
 #, boost-format
