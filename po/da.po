@@ -7,10 +7,10 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-01-23 09:24+0100\n"
-"PO-Revision-Date: 2019-01-20 17:29+0000\n"
+"PO-Revision-Date: 2019-02-02 17:07+0000\n"
 "Last-Translator: scootergrisen <scootergrisen@gmail.com>\n"
-"Language-Team: Danish <https://l10n.opensuse.org/projects/zypper/master/da/"
-">\n"
+"Language-Team: Danish <https://l10n.opensuse.org/projects/zypper/master/da/>"
+"\n"
 "Language: da\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1771,15 +1771,15 @@ msgstr "Kør '%1%' for at se den komplette liste af låste elementer."
 #, c-format, boost-format
 msgid "The following patch requires a system reboot:"
 msgid_plural "The following %d patches require a system reboot:"
-msgstr[0] "Følgende rettelse kræver at systemet genstartes:"
-msgstr[1] "Følgende %d rettelser kræver at systemet genstartes:"
+msgstr[0] "Følgende rettelse kræver genstart af systemet:"
+msgstr[1] "Følgende %d rettelser kræver genstart af systemet:"
 
 #: src/Summary.cc:1344
 #, c-format, boost-format
 msgid "The following package requires a system reboot:"
 msgid_plural "The following %d package require a system reboot:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Følgende pakke kræver genstart af systemet:"
+msgstr[1] "Følgende %d pakke kræver genstart af systemet:"
 
 #: src/Summary.cc:1373
 #, boost-format
