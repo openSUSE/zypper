@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: zypp.ru\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-08-03 11:09+0200\n"
-"PO-Revision-Date: 2019-01-12 21:17+0000\n"
+"PO-Revision-Date: 2019-01-24 22:36+0000\n"
 "Last-Translator: Alex Minton <alex239@gmail.com>\n"
 "Language-Team: Russian <https://l10n.opensuse.org/projects/libzypp/master/ru/"
 ">\n"
@@ -3785,13 +3785,13 @@ msgstr "Поиск ID gpg-ключа %1% в кэше %2%."
 #: zypp/RepoInfo.cc:541
 #, boost-format
 msgid "Looking for gpg key ID %1% in repository %2%."
-msgstr ""
+msgstr "Поиск ID gpg-ключа %1% в репозитории %2%."
 
 #. translator: %1% is a repositories name
 #: zypp/RepoInfo.cc:565
 #, boost-format
 msgid "Repository %1% does not define additional 'gpgkey=' URLs."
-msgstr ""
+msgstr "Репозиторий %1% не определяет дополнительных URL вида «gpgkey=»."
 
 #: zypp/RepoManager.cc:314
 #, boost-format
@@ -4206,7 +4206,7 @@ msgstr "Превышено время ожидания при попытке д�
 #: zypp/media/MediaException.cc:195
 #, c-format, boost-format
 msgid "Downloaded data exceeded the expected filesize '%s' of '%s'."
-msgstr ""
+msgstr "Размер загруженных данных превысил ожидаемый '%s' из '%s'."
 
 #: zypp/media/MediaException.cc:203
 #, c-format, boost-format
