@@ -19,7 +19,7 @@ msgstr ""
 "Project-Id-Version: zypp.hu\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-08-03 11:09+0200\n"
-"PO-Revision-Date: 2018-04-12 12:07+0000\n"
+"PO-Revision-Date: 2019-01-25 20:07+0000\n"
 "Last-Translator: Robert Taisz <robert.taisz@emerald.hu>\n"
 "Language-Team: Hungarian <https://l10n.opensuse.org/projects/libzypp/master/"
 "hu/>\n"
@@ -28,7 +28,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 2.18\n"
+"X-Generator: Weblate 3.3\n"
 
 #: zypp/target/hal/HalException.h:46 zypp/target/hal/HalException.h:55
 #: zypp/target/hal/HalException.h:64
@@ -4054,20 +4054,20 @@ msgstr[1] "(%d napon belül lejár)"
 #: zypp/RepoInfo.cc:513
 #, boost-format
 msgid "Looking for gpg key ID %1% in cache %2%."
-msgstr ""
+msgstr "%1% azonosítójú gpg-kulcs keresése a gyorsítótárban (%2%)."
 
 #. translator: %1% is a gpg key ID like 3DBDC284
 #. %2% is a repositories name
 #: zypp/RepoInfo.cc:541
 #, boost-format
 msgid "Looking for gpg key ID %1% in repository %2%."
-msgstr ""
+msgstr "%1% azonosítójú gpg-kulcs keresése a telepítési forrásban (%2%)."
 
 #. translator: %1% is a repositories name
 #: zypp/RepoInfo.cc:565
 #, boost-format
 msgid "Repository %1% does not define additional 'gpgkey=' URLs."
-msgstr ""
+msgstr "A(z) %1% telepítési forrás nem definiál további 'gpgkey=' URL-címeket."
 
 #: zypp/RepoManager.cc:314
 #, boost-format
@@ -4485,6 +4485,8 @@ msgstr "Időtúllépés a '%s' elérése közben."
 #, c-format, boost-format
 msgid "Downloaded data exceeded the expected filesize '%s' of '%s'."
 msgstr ""
+"A letöltött adatok mérete meghaladta a várt fájlméretet: '%s' (összesen: "
+"'%s')."
 
 #: zypp/media/MediaException.cc:203
 #, c-format, boost-format
