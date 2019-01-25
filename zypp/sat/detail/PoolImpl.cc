@@ -426,6 +426,13 @@ namespace zypp
 
       void PoolImpl::setTextLocale( const Locale & locale_r )
       {
+	if ( ! locale_r )
+	{
+	  // We need one, so "en" is the last resort
+	  const char *needone[] { "en" };
+	  ::pool_set_languages( _pool, needone, 1 );
+	}
+
 	std::vector<std::string> fallbacklist;
 	for ( Locale l( locale_r ); l; l = l.fallback() )
 	{
