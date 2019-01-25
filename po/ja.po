@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-01-23 09:24+0100\n"
-"PO-Revision-Date: 2019-01-20 17:29+0000\n"
+"PO-Revision-Date: 2019-02-02 17:07+0000\n"
 "Last-Translator: Yasuhiko Kamata <belphegor@belbel.or.jp>\n"
 "Language-Team: Japanese <https://l10n.opensuse.org/projects/zypper/master/ja/"
 ">\n"
@@ -1722,7 +1722,7 @@ msgstr[0] "以下 %d 個のパッチを適用するには、システムの再�
 #, c-format, boost-format
 msgid "The following package requires a system reboot:"
 msgid_plural "The following %d package require a system reboot:"
-msgstr[0] ""
+msgstr[0] "以下 %d 個のパッケージにはシステムの再起動が必要です:"
 
 #: src/Summary.cc:1373
 #, boost-format
