@@ -14,16 +14,16 @@ msgstr ""
 "Project-Id-Version: zypper.fr\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-01-23 09:24+0100\n"
-"PO-Revision-Date: 2018-12-01 09:18+0000\n"
+"PO-Revision-Date: 2019-01-26 10:30+0000\n"
 "Last-Translator: Antoine Belvire <antoine.belvire@opensuse.org>\n"
-"Language-Team: French <https://l10n.opensuse.org/projects/zypper/master/fr/"
-">\n"
+"Language-Team: French <https://l10n.opensuse.org/projects/zypper/master/fr/>"
+"\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 2.18\n"
+"X-Generator: Weblate 3.3\n"
 
 #: src/SolverRequester.h:52
 #, boost-format
@@ -600,6 +600,8 @@ msgstr ""
 #: src/commands/commonflags.h:53
 msgid "Consider only patches which affect the package management itself."
 msgstr ""
+"Considérer seulement les correctifs qui affectent la gestion des paquets "
+"elle-même."
 
 #: src/output/Out.h:26 src/repos.cc:125 src/repos.cc:153
 msgid "Yes"
@@ -727,7 +729,7 @@ msgstr "Erreur"
 
 #: src/Command.cc:90
 msgid "Invalid command"
-msgstr ""
+msgstr "Commande non valide"
 
 #: src/Command.cc:108
 msgid "Repository Management:"
@@ -774,7 +776,7 @@ msgstr "Style de table %d non valide."
 #: src/Config.cc:54
 #, c-format, boost-format
 msgid " Use an integer number from %d to %d"
-msgstr ""
+msgstr " Utilisez un nombre entier compris entre %d et %d"
 
 #: src/Config.cc:248
 msgid "The path specified in the --root option must be absolute."
@@ -1170,6 +1172,9 @@ msgid ""
 "There is an update candidate for '%s' from vendor '%s', while the current "
 "vendor is '%s'. Use '%s' to install this candidate."
 msgstr ""
+"Il existe une mise à jour pour « %s » fournie par « %s », alors que la "
+"version actuelle est fournie par « %s ». Utilisez « %s » pour installer "
+"cette mise à jour."
 
 #: src/RequestFeedback.cc:132
 #, c-format, boost-format
@@ -1846,8 +1851,8 @@ msgstr[1] "Les %d correctifs suivants nécessitent un redémarrage du système 
 #, c-format, boost-format
 msgid "The following package requires a system reboot:"
 msgid_plural "The following %d package require a system reboot:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Le paquet suivant requiert un redémarrage du système :"
+msgstr[1] "Les %d paquets suivants requièrent un redémarrage du système :"
 
 #: src/Summary.cc:1373
 #, boost-format
