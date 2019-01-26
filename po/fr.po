@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: zypper.fr\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-01-23 09:24+0100\n"
-"PO-Revision-Date: 2019-01-26 10:30+0000\n"
+"PO-Revision-Date: 2019-02-02 17:07+0000\n"
 "Last-Translator: Antoine Belvire <antoine.belvire@opensuse.org>\n"
 "Language-Team: French <https://l10n.opensuse.org/projects/zypper/master/fr/>"
 "\n"
@@ -886,6 +886,8 @@ msgstr "Ignorer les paquets inconnus."
 msgid ""
 "Terse output for machine consumption. Implies --no-abbrev and --no-color."
 msgstr ""
+"Sortie concise utilisable par d'autres programmes. Implique --no-abbrev et "
+"--no-color."
 
 #. translators: --reposd-dir, -D <DIR>
 #: src/Config.cc:487
@@ -1004,7 +1006,7 @@ msgstr ""
 
 #: src/Config.cc:620
 msgid "Target Options"
-msgstr "Options de la cible "
+msgstr "Options de la cible"
 
 #. translators: --root, -R <DIR>
 #: src/Config.cc:625
@@ -2314,6 +2316,12 @@ msgid ""
 "unconditionally on small or minimal systems, as it may easily add a large "
 "number of packages."
 msgstr ""
+"Installer les paquets nouvellement disponibles qui sont recommandés par des "
+"paquets déjà installés. Cette commande réévalue les recommandations de tous "
+"les paquets installés et complète le système pour les satisfaire. Sur des "
+"systèmes de taille réduite ou minimale, il n'est pas désirable d'appeler "
+"cette commande sans condition car elle peut facilement déclencher "
+"l'installation d'un grand nombre de paquets."
 
 #. translators: command description, %1% is a zypper command
 #: src/commands/inrverify.cc:98
@@ -2323,6 +2331,10 @@ msgid ""
 "supporting available hardware, languages or filesystems. Useful after having "
 "added e.g. new hardware or driver repos."
 msgstr ""
+"Appelée comme ceci : « %1% », la commande est restreinte pour ne chercher "
+"que des paquets supportant le matériel, les langues et les systèmes de "
+"fichiers disponibles. Utile par exemple après avoir ajouté un nouveau "
+"périphérique ou un nouveau dépôt de pilotes."
 
 #. translators: command description
 #: src/commands/inrverify.cc:101
@@ -2340,7 +2352,7 @@ msgstr "Sélectionner les paquets par leur nom, pas par leur fonction."
 
 #: src/commands/installremove.cc:55
 msgid "Select packages solely by capability."
-msgstr ""
+msgstr "Sélectionner les paquets seulement par leurs capacités."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/installremove.cc:74
@@ -2798,7 +2810,7 @@ msgstr "Cette commande a une implémentation factice qui retourne toujours 0."
 
 #: src/commands/optionsets.cc:33
 msgid "Don't change anything, just report what would be done."
-msgstr ""
+msgstr "Ne rien changer, juste indiquer ce qui serait fait."
 
 #. translators: -r, --repo <ALIAS|#|URI>
 #: src/commands/optionsets.cc:65
@@ -2809,6 +2821,7 @@ msgstr "Ne travailler qu'avec le dépôt spécifié."
 #, c-format, boost-format
 msgid "Option '--%s' overrides a previously set download mode."
 msgstr ""
+"L'option « --%s » outrepasse un mode de téléchargement défini précédemment."
 
 #: src/commands/optionsets.cc:114
 #, c-format, boost-format
@@ -4119,33 +4132,34 @@ msgstr "Lancer 'zypper refresh' en tant que root peut résoudre le problème."
 #. translators: -g, --category <CATEGORY>
 #: src/commands/selectpatchoptionset.cc:24
 msgid "Select patches with the specified category."
-msgstr ""
+msgstr "Sélectionner les correctifs de la catégorie spécifiée."
 
 #. translators: --severity <SEVERITY>
 #: src/commands/selectpatchoptionset.cc:28
 msgid "Select patches with the specified severity."
-msgstr ""
+msgstr "Sélectionner les correctifs de la sévérité spécifiée."
 
 #. translators: --date <YYYY-MM-DD>
 #: src/commands/selectpatchoptionset.cc:32
 msgid "Select patches issued up to, but not including, the specified date"
 msgstr ""
+"Sélectionner les correctifs publiés jusqu’à la date spécifiée (non incluse)"
 
 #. translators: -b, --bugzilla
 #: src/commands/selectpatchoptionset.cc:36
 msgid "Select applicable patches for the specified Bugzilla issues."
-msgstr ""
+msgstr "Sélectionner les correctifs relatifs aux problèmes Bugzilla spécifiés."
 
 #. translators: --cve
 #: src/commands/selectpatchoptionset.cc:41
 msgid "Select applicable patches for the specified CVE issues."
-msgstr ""
+msgstr "Sélectionner les correctifs relatifs aux problèmes CVE spécifiés."
 
 #. any
 #. translators: --cve
 #: src/commands/selectpatchoptionset.cc:50
 msgid "Select issues matching the specified string."
-msgstr ""
+msgstr "Sélectionner les problèmes correspondants au texte spécifié."
 
 #: src/commands/services/add.cc:55
 #, c-format, boost-format
@@ -4498,7 +4512,7 @@ msgstr "Cette commande n'a de sens que dans le shell zypper."
 
 #: src/commands/solveroptionset.cc:16 src/commands/solveroptionset.cc:39
 msgid "Solver options"
-msgstr ""
+msgstr "Options du solveur"
 
 #: src/commands/solveroptionset.cc:18
 msgid "Install also recommended packages in addition to the required ones."
@@ -4526,7 +4540,7 @@ msgstr "Ne pas forcer le solveur à trouver une solution, le laisser demander."
 
 #: src/commands/solveroptionset.cc:63
 msgid "Expert options"
-msgstr ""
+msgstr "Options expert"
 
 #: src/commands/solveroptionset.cc:66
 msgid "Whether to allow downgrading installed resolvables."
@@ -5009,12 +5023,12 @@ msgstr ""
 #. translators: --status
 #: src/commands/utils/source-download.cc:514
 msgid "Write a manifest file."
-msgstr ""
+msgstr "Écrire un fichier manifeste."
 
 #. translators: --status
 #: src/commands/utils/source-download.cc:518
 msgid "Disable writing a manifest file."
-msgstr ""
+msgstr "Désactiver l'écriture de fichier manifeste."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/utils/targetos.cc:20
