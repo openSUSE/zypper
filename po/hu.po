@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: zypper.hu\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-01-23 09:24+0100\n"
-"PO-Revision-Date: 2018-05-15 17:04+0000\n"
+"PO-Revision-Date: 2019-02-02 17:07+0000\n"
 "Last-Translator: Robert Taisz <robert.taisz@emerald.hu>\n"
 "Language-Team: Hungarian <https://l10n.opensuse.org/projects/zypper/master/"
 "hu/>\n"
@@ -25,7 +25,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 2.18\n"
+"X-Generator: Weblate 3.3\n"
 
 #: src/SolverRequester.h:52
 #, boost-format
@@ -217,10 +217,8 @@ msgstr ""
 
 #. translators: this message is shown after showing description of the key
 #: src/callbacks/keyring.h:290
-#, fuzzy
 msgid "Do you want to reject the key, or trust always?"
-msgstr ""
-"Elutasítja a kulcsot, megbízik benne ideiglenesen, vagy elfogadja véglegesen?"
+msgstr "Elutasítja a kulcsot, vagy megbízik benne véglegesen?"
 
 #. translators: r/t/a stands for Reject/TrustTemporarily/trustAlways(import)
 #. translate to whatever is appropriate for your language
@@ -243,7 +241,7 @@ msgstr "e/i"
 #. The answers should be lower case letters.
 #: src/callbacks/keyring.h:318
 msgid "r/a/"
-msgstr ""
+msgstr "e/v/"
 
 #. translators: help text for the 'r' option in the 'r/t/a' prompt
 #: src/callbacks/keyring.h:324
@@ -296,11 +294,13 @@ msgid ""
 "The rpm database seems to contain old V3 version gpg keys which are "
 "meanwhile obsolete and considered insecure:"
 msgstr ""
+"Úgy tűnik, hogy az rpm adatbázis V3 verziójú régi gpg-kulcsokat tartalmaz, "
+"amelyek időközben elavultak, és nem számítanak biztonságosnak:"
 
 #: src/callbacks/keyring.h:446
 #, boost-format
 msgid "To see details about a key call '%1%'."
-msgstr ""
+msgstr "A kulcs adatainak megtekintéséhez használja a(z) \"%1%\" parancsot."
 
 #: src/callbacks/keyring.h:450
 #, boost-format
@@ -308,6 +308,8 @@ msgid ""
 "Unless you believe the key in question is still in use, you can remove it "
 "from the rpm database calling '%1%'."
 msgstr ""
+"Ha úgy véli, hogy a kérdéses kulcs már nincs használatban, eltávolíthatja az "
+"rpm adatbázisból a(z) \"%1%\" parancs használatával."
 
 #: src/callbacks/keyring.h:472
 #, c-format, boost-format
@@ -596,6 +598,8 @@ msgstr ""
 #: src/commands/commonflags.h:53
 msgid "Consider only patches which affect the package management itself."
 msgstr ""
+"Csak olyan javításokat alkalmazzon, amelyek magára a csomagkezelésre "
+"vonatkoznak."
 
 #: src/output/Out.h:26 src/repos.cc:125 src/repos.cc:153
 msgid "Yes"
@@ -642,12 +646,12 @@ msgstr "kategória"
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:29
 msgid "DIR"
-msgstr ""
+msgstr "KÖNYVTÁR"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:31
 msgid "FILE"
-msgstr ""
+msgstr "FÁJL"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:33
@@ -657,7 +661,7 @@ msgstr ".repo_fájl"
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:35
 msgid "FORMAT"
-msgstr ""
+msgstr "FORMÁTUM"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:37
@@ -667,7 +671,7 @@ msgstr "egész szám"
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:39
 msgid "PATH"
-msgstr ""
+msgstr "ELÉRÉSI ÚT"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:41
@@ -677,12 +681,12 @@ msgstr "súlyosság"
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:43
 msgid "STRING"
-msgstr ""
+msgstr "KARAKTERLÁNC"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:45
 msgid "TAG"
-msgstr ""
+msgstr "CÍMKE"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:47
@@ -722,7 +726,7 @@ msgstr "Hiba"
 
 #: src/Command.cc:90
 msgid "Invalid command"
-msgstr ""
+msgstr "Érvénytelen parancs"
 
 #: src/Command.cc:108
 msgid "Repository Management:"
@@ -769,7 +773,7 @@ msgstr "Érvénytelen táblázatstílus: %d."
 #: src/Config.cc:54
 #, c-format, boost-format
 msgid " Use an integer number from %d to %d"
-msgstr ""
+msgstr " Használjon %d és %d közötti egész számot"
 
 #: src/Config.cc:248
 msgid "The path specified in the --root option must be absolute."
@@ -874,6 +878,8 @@ msgstr "Az ismeretlen csomagok figyelmen kívül hagyása."
 msgid ""
 "Terse output for machine consumption. Implies --no-abbrev and --no-color."
 msgstr ""
+"Kimenet tömörítése gépi használathoz. A --no-abbrev és --no-color "
+"használatát feltételezi."
 
 #. translators: --reposd-dir, -D <DIR>
 #: src/Config.cc:487
@@ -1156,6 +1162,8 @@ msgid ""
 "There is an update candidate for '%s' from vendor '%s', while the current "
 "vendor is '%s'. Use '%s' to install this candidate."
 msgstr ""
+"Van egy frissítési lehetőség a(z) '%s' csomaghoz a(z) '%s' gyártótól, de az "
+"aktuális gyártó '%s'. A(z) '%s' használatával telepítse ezt a lehetőséget."
 
 #: src/RequestFeedback.cc:132
 #, c-format, boost-format
@@ -1806,8 +1814,8 @@ msgstr[1] "A következő %d javítás megköveteli a rendszer újraindítását:
 #, c-format, boost-format
 msgid "The following package requires a system reboot:"
 msgid_plural "The following %d package require a system reboot:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "A következő csomag a rendszer újraindítását igényli:"
+msgstr[1] "A következő %d csomag a rendszer újraindítását igényli:"
 
 #: src/Summary.cc:1373
 #, boost-format
@@ -2174,19 +2182,23 @@ msgstr "Jelszó"
 
 #: src/commands/conditions.cc:19
 msgid "Root privileges are required to run this command."
-msgstr ""
+msgstr "A parancs futtatásához gyökérszintű jogosultságok szükségesek."
 
 #: src/commands/conditions.cc:47
 msgid ""
 "This is a transactional-server, please use transactional-update to update or "
 "modify the system."
 msgstr ""
+"Ez tranzakciós kiszolgáló, használjon tranzakciós frissítést a rendszer "
+"frissítéséhez vagy módosításához."
 
 #: src/commands/conditions.cc:49
 msgid ""
 "The target filesystem is mounted as read-only. Please make sure the target "
 "filesystem is writeable."
 msgstr ""
+"A célként megadott fájlrendszer csak olvashatóként van csatlakoztatva. "
+"Győződjön meg arról, hogy a célként megadott fájlrendszer írható."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/distupgrade.cc:20
@@ -2261,6 +2273,11 @@ msgid ""
 "unconditionally on small or minimal systems, as it may easily add a large "
 "number of packages."
 msgstr ""
+"Az újonnan hozzáadott csomagok telepítése a már telepített csomagoktól függ. "
+"Ez a parancs alapvetően újból ellenőrzi az összes telepített csomag "
+"javaslatait, és ennek megfelelően tölti fel a rendszert. Nem célszerű "
+"feltétel megadása nélkül használni kicsi vagy minimális méretű rendszereken, "
+"mivel könnyen előfordulhat, hogy nagy mennyiségű csomagot ad hozzá."
 
 #. translators: command description, %1% is a zypper command
 #: src/commands/inrverify.cc:98
@@ -2270,6 +2287,10 @@ msgid ""
 "supporting available hardware, languages or filesystems. Useful after having "
 "added e.g. new hardware or driver repos."
 msgstr ""
+"Hívása '%1%' formában történik, korlátozza a parancsot úgy, hogy csak az "
+"elérhető hardvert, nyelveket vagy fájlrendszereket támogató csomagokat "
+"keressen. Új hardver vagy illesztőprogramtárak hozzáadása után hasznos a "
+"használata."
 
 #. translators: command description
 #: src/commands/inrverify.cc:101
@@ -2286,7 +2307,7 @@ msgstr "Csomagok kiválasztása egyszerű név, nem funkció alapján."
 
 #: src/commands/installremove.cc:55
 msgid "Select packages solely by capability."
-msgstr ""
+msgstr "Csomagok kiválasztása csak a funkció alapján."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/installremove.cc:74
@@ -2448,7 +2469,7 @@ msgstr "list-updates (lu) [kapcsolók]"
 #. translators: command description
 #: src/commands/listupdates.cc:20
 msgid "List all available updates."
-msgstr "Az összes elérhető frissítés megjelenítése"
+msgstr "Az összes elérhető frissítés megjelenítése."
 
 #. translators: -a, --all
 #: src/commands/listupdates.cc:35
@@ -2463,7 +2484,7 @@ msgstr ""
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
 #: src/commands/locks/add.cc:29
 msgid "addlock (al) [OPTIONS] <PACKAGENAME> ..."
-msgstr "addlock (al) [kapcsolók] <csomagnév>"
+msgstr "addlock (al) [kapcsolók] <csomagnév> ..."
 
 #. translators: command summary
 #: src/commands/locks/add.cc:31
@@ -2496,7 +2517,7 @@ msgstr "Hiba történt a csomag zárolása közben:"
 # =============================================================================
 #: src/commands/locks/clean.cc:16
 msgid "cleanlocks (cl)"
-msgstr ""
+msgstr "cleanlocks (cl)"
 
 #. translators: command summary
 #: src/commands/locks/clean.cc:18
@@ -2599,7 +2620,7 @@ msgstr "Nincs csomagzárolás megadva."
 # =============================================================================
 #: src/commands/locks/remove.cc:25
 msgid "removelock (rl) [OPTIONS] <LOCK-NUMBER|PACKAGENAME> ..."
-msgstr "removelock (rl) <zárolás-száma|csomagnév>"
+msgstr "removelock (rl) <zárolás-száma|csomagnév> ..."
 
 #: src/commands/locks/remove.cc:26
 msgid "Remove a package lock."
@@ -2641,7 +2662,7 @@ msgstr "Hiba történt a csomag zárolásának feloldása közben:"
 #. translators: command summary: needs-rebooting
 #: src/commands/needs-rebooting.cc:21
 msgid "Check if the needs-reboot flag was set."
-msgstr ""
+msgstr "Ellenőrizze, hogy be van-e állítva a needs-reboot jelző."
 
 #: src/commands/needs-rebooting.cc:22
 msgid ""
@@ -2650,28 +2671,34 @@ msgid ""
 "Exit code ZYPPER_EXIT_INF_REBOOT_NEEDED indicates that a reboot is needed, "
 "otherwise the exit code is set to ZYPPER_EXIT_OK."
 msgstr ""
+"Ellenőrzi, hogy a needs-reboot jelzőt beállította-e egy korábbi korábbi "
+"frissítés, vagy egy alapkönyvtár vagy szolgáltatás telepítése.\n"
+"A ZYPPER_EXIT_INF_REBOOT_NEEDED kilépési kód azt jelzi, hogy újraindítás "
+"szükséges, máskülönben a kilépési kód ZYPPER_EXIT_OK lesz."
 
 #: src/commands/needs-rebooting.cc:34
 msgid "Core libraries or services have been updated."
-msgstr ""
+msgstr "Az alapkönyvtárak vagy a szolgáltatások frissítve lettek."
 
 #: src/commands/needs-rebooting.cc:35
 msgid ""
 "Reboot is required to ensure that your system benefits from these updates."
 msgstr ""
+"Újraindítás szükséges annak biztosításához, hogy a rendszer érvényesítse "
+"ezeket a frissítéseket."
 
 #: src/commands/needs-rebooting.cc:40
 msgid "No core libraries or services have been updated."
-msgstr ""
+msgstr "Egyetlen alapkönyvtár vagy szolgáltatás sem lett frissítve."
 
 #: src/commands/needs-rebooting.cc:41
 msgid "Reboot is probably not necessary."
-msgstr ""
+msgstr "Valószínűleg nincs szükség újraindításra."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/nullcommands.cc:17
 msgid "moo"
-msgstr ""
+msgstr "moo"
 
 #. translators: command summary
 #. translators: command description
@@ -2732,7 +2759,7 @@ msgstr "A parancs látszólagos megvalósítása, amely mindig 0-át ad vissza."
 
 #: src/commands/optionsets.cc:33
 msgid "Don't change anything, just report what would be done."
-msgstr ""
+msgstr "Ne változtasson meg semmit, csak jelentse, mit lehetne végrehajtani."
 
 #. translators: -r, --repo <ALIAS|#|URI>
 #: src/commands/optionsets.cc:65
@@ -2743,6 +2770,7 @@ msgstr "Csak a megadott telepítési forrás használata."
 #, c-format, boost-format
 msgid "Option '--%s' overrides a previously set download mode."
 msgstr ""
+"A(z) '--%s' kapcsoló felülbírálja a korábban beállított letöltési módot."
 
 #: src/commands/optionsets.cc:114
 #, c-format, boost-format
@@ -2815,12 +2843,12 @@ msgstr "Az alapértelmezés a nem kötelező javítások belefoglalása."
 #. translators: --with-interactive
 #: src/commands/optionsets.cc:340
 msgid "Do not skip interactive updates."
-msgstr ""
+msgstr "Ne hagyja ki az interaktív frissítéseket."
 
 #. translators: --skip-interactive
 #: src/commands/optionsets.cc:344
 msgid "Skip interactive updates."
-msgstr ""
+msgstr "Interaktív frissítések kihagyása."
 
 #. translators: --sort-by-name
 #: src/commands/optionsets.cc:364
@@ -2913,11 +2941,15 @@ msgid ""
 "followed by a newline. Any '%s' directive in <format> is replaced by the "
 "system service name."
 msgstr ""
+"Minden társított rendszerszolgáltatásnál jelenítse a <formátum> értékét a "
+"normál kimenetben, és utána szúrjon be sortörést. A <formátum> értékének "
+"megfelelő minden '%s' direktíva helyett a rendszerszolgáltatás neve jelenik "
+"meg."
 
 #. translators: -d, --debugFile <path>
 #: src/commands/ps.cc:52
 msgid "Write debug output to file <path>."
-msgstr ""
+msgstr "Hibakeresési kimenet írása az <elérési út> kapcsolóban megadott fájlba."
 
 #: src/commands/ps.cc:72 src/solve-commit.cc:450
 msgid "Check failed:"
@@ -3051,7 +3083,7 @@ msgstr "Az ajánlott csomagok megjelenítése."
 #. translators: --supplements
 #: src/commands/query/info.cc:87
 msgid "Show supplements."
-msgstr ""
+msgstr "Kiegészítések megjelenítése."
 
 #. translators: --suggests
 #: src/commands/query/info.cc:91
@@ -3541,10 +3573,9 @@ msgid "Skipping repository '%s' because of the above error."
 msgstr "A jelzett hiba miatt a(z) %s telepítési forrás kihagyása."
 
 #: src/commands/repos/refresh.cc:274
-#, fuzzy
 msgid ""
 "Some of the repositories have not been refreshed because they were not known."
-msgstr "Hiba miatt néhány telepítési forrás nem került frissítésre."
+msgstr "Néhány telepítési forrás nem lett  frissítve, mert ismeretlenek."
 
 #: src/commands/repos/refresh.cc:281
 msgid "Specified repositories are not enabled or defined."
@@ -3883,16 +3914,20 @@ msgid ""
 "For an extended search including not yet activated remote resources you may "
 "now run '%1%'."
 msgstr ""
+"A még nem aktivált távoli erőforrásokra is kiterjedő kereséshez futtathatja "
+"a(z) '%1%' parancsot."
 
 #: src/commands/search/search-packages-hinthack.cc:102
 #, boost-format
 msgid "Do you want to run '%1%' now?"
-msgstr ""
+msgstr "Futtatja most a(z) '%1%' parancsot?"
 
 #: src/commands/search/search-packages-hinthack.cc:113
 #, boost-format
 msgid "Run '%1%' to search in not yet activated remote resources."
 msgstr ""
+"Futtassa a(z) '%1%' parancsot a még nem aktivált távoli erőforrásokban való "
+"kereséshez."
 
 #. translators: command summary: search, se
 #: src/commands/search/search.cc:73
@@ -3964,7 +3999,7 @@ msgstr "Keresés a keresési karakterláncokat ajánló csomagokra."
 #. translators: --supplements
 #: src/commands/search/search.cc:145
 msgid "Search for packages which supplement the search strings."
-msgstr ""
+msgstr "A keresési karakterláncokat kiegészítő csomagok keresése."
 
 #. translators: --conflicts
 #: src/commands/search/search.cc:149
@@ -4053,33 +4088,33 @@ msgstr ""
 #. translators: -g, --category <CATEGORY>
 #: src/commands/selectpatchoptionset.cc:24
 msgid "Select patches with the specified category."
-msgstr ""
+msgstr "Válassza ki a megadott kategóriájú javításokat."
 
 #. translators: --severity <SEVERITY>
 #: src/commands/selectpatchoptionset.cc:28
 msgid "Select patches with the specified severity."
-msgstr ""
+msgstr "Válassza ki a megadott súlyosságú javításokat."
 
 #. translators: --date <YYYY-MM-DD>
 #: src/commands/selectpatchoptionset.cc:32
 msgid "Select patches issued up to, but not including, the specified date"
-msgstr ""
+msgstr "Válassza ki a megadott dátum előtt kiadott javításokat."
 
 #. translators: -b, --bugzilla
 #: src/commands/selectpatchoptionset.cc:36
 msgid "Select applicable patches for the specified Bugzilla issues."
-msgstr ""
+msgstr "Válassza ki a megadott Bugzilla-problémákra vonatkozó javításokat."
 
 #. translators: --cve
 #: src/commands/selectpatchoptionset.cc:41
 msgid "Select applicable patches for the specified CVE issues."
-msgstr ""
+msgstr "Válassza ki a megadott CVE-problémákra vonatkozó javításokat."
 
 #. any
 #. translators: --cve
 #: src/commands/selectpatchoptionset.cc:50
 msgid "Select issues matching the specified string."
-msgstr ""
+msgstr "Válassza ki a megadott karakterláncnak megfelelő problémákat."
 
 #: src/commands/services/add.cc:55
 #, c-format, boost-format
@@ -4194,7 +4229,7 @@ msgstr ""
 
 #: src/commands/services/modify.cc:41
 msgid "Advanced:"
-msgstr ""
+msgstr "Speciális:"
 
 #: src/commands/services/modify.cc:43
 msgid "Add a RIS service repository to enable."
@@ -4417,7 +4452,7 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/shell.cc:20
 msgid "shell (sh)"
-msgstr ""
+msgstr "shell (sh)"
 
 #. translators: command summary: shell, sh
 #: src/commands/shell.cc:22
@@ -4436,7 +4471,7 @@ msgstr "A zypper shell már fut."
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/shell.cc:52
 msgid "quit (exit, ^D)"
-msgstr ""
+msgstr "quit (exit, ^D)"
 
 #. translators: command description
 #: src/commands/shell.cc:54 src/commands/shell.cc:56
@@ -4449,7 +4484,7 @@ msgstr "Ez a parancs csak a zypper héjprogramban értelmezhető."
 
 #: src/commands/solveroptionset.cc:16 src/commands/solveroptionset.cc:39
 msgid "Solver options"
-msgstr ""
+msgstr "Solver beállításai"
 
 #: src/commands/solveroptionset.cc:18
 msgid "Install also recommended packages in addition to the required ones."
@@ -4478,7 +4513,7 @@ msgstr ""
 
 #: src/commands/solveroptionset.cc:63
 msgid "Expert options"
-msgstr ""
+msgstr "Szakértői beállítások"
 
 #: src/commands/solveroptionset.cc:66
 msgid "Whether to allow downgrading installed resolvables."
@@ -4687,7 +4722,7 @@ msgstr "A(z) %1% alparancs nem támogatja a Zypper általános beállításait."
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/update.cc:22
 msgid "update (up) [OPTIONS] [PACKAGENAME] ..."
-msgstr ""
+msgstr "update (up) [KAPCSOLÓK] [CSOMAGNÉV] ..."
 
 #. translators: command summary: update, up
 #: src/commands/update.cc:24
@@ -4699,6 +4734,8 @@ msgstr "A telepített csomagok frissítése újabb verziókkal."
 msgid ""
 "Update all or specified installed packages with newer versions, if possible."
 msgstr ""
+"Az összes frissítés vagy a megadott telepített csomagok frissítése az újabb "
+"verziókra, ha lehetséges."
 
 #: src/commands/update.cc:71 src/commands/update.cc:78
 #: src/commands/update.cc:128
@@ -4948,12 +4985,12 @@ msgstr ""
 #. translators: --status
 #: src/commands/utils/source-download.cc:514
 msgid "Write a manifest file."
-msgstr ""
+msgstr "Jegyzékfájl írása."
 
 #. translators: --status
 #: src/commands/utils/source-download.cc:518
 msgid "Disable writing a manifest file."
-msgstr ""
+msgstr "Jegyzékfájl írásának letiltása."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/utils/targetos.cc:20
@@ -6432,36 +6469,37 @@ msgstr "Hiba történt a zypper.conf feldolgozása közben:"
 #: src/utils/flags/exceptions.cc:22
 #, boost-format
 msgid "The flag %1% is not known."
-msgstr ""
+msgstr "A(z) %1% jelző ismeretlen."
 
 #: src/utils/flags/exceptions.cc:28
 #, boost-format
 msgid "The flag %1% is not compatible with argument %2% (%3%)."
-msgstr ""
+msgstr "A(z) %1% jelző nem kompatibilis a(z) %2% (%3%) argumentummal."
 
 #: src/utils/flags/exceptions.cc:34
-#, fuzzy, boost-format
+#, boost-format
 msgid "The flag %1% requires a argument."
-msgstr "A forráscsomag nevének megadása szükséges."
+msgstr "A(z) %1% jelző argumentumot igényel."
 
 #: src/utils/flags/exceptions.cc:40
 #, boost-format
 msgid "The flag %1% can only be used once."
-msgstr ""
+msgstr "A(z) %1% jelző csak egyszer használható."
 
 #: src/utils/flags/exceptions.cc:46
 #, c-format, boost-format
 msgid "%s used together with %s, which contradict each other."
 msgstr ""
+"A(z) %s és a(z) %s együtt lett használva, ezek ellentmondanak egymásnak."
 
 #: src/utils/flags/flagtypes.cc:24
 msgid "Unknown package type"
-msgstr ""
+msgstr "Ismeretlen csomagtípus"
 
 #: src/utils/flags/flagtypes.cc:100
 #, boost-format
 msgid "The flag '%1%' can only be used a maximum of %2% times."
-msgstr ""
+msgstr "A(z) '%1%' jelző legfeljebb %2% alkalommal használható."
 
 #: src/utils/flags/flagtypes.cc:192
 #, c-format, boost-format
@@ -6474,12 +6512,14 @@ msgstr ""
 
 #: src/utils/flags/flagtypes.cc:232
 msgid "Out of range"
-msgstr ""
+msgstr "Tartományon kívül"
 
 #: src/utils/flags/flagtypes.cc:234
 #, boost-format
 msgid "Unknown error while assigning the value %1% to flag %2%."
 msgstr ""
+"Ismeretlen hiba történt a(z) %1% értéknek a(z) %2% jelzőhöz való "
+"hozzárendelése közben."
 
 #. For '-garbage' argument, with 'a', 'b', and 'e' as known options,
 #. getopt_long reports 'a', 'b', and 'e' as known options.
