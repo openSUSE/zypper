@@ -13,7 +13,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-01-23 09:24+0100\n"
 "PO-Revision-Date: 2019-02-02 17:07+0000\n"
-"Last-Translator: Marguerite Su <i@marguerite.su>\n"
+"Last-Translator: Emily Dong <Emily.Dong@excel-gits.com>\n"
 "Language-Team: Chinese (China) <https://l10n.opensuse.org/projects/zypper/"
 "master/zh_CN/>\n"
 "Language: zh_CN\n"
@@ -2041,7 +2041,7 @@ msgstr "zypper <子命令> [--命令选项] [参数]"
 
 #: src/commands/help.cc:72 src/commands/help.cc:73
 msgid "Print zypper help"
-msgstr "打印帮助。"
+msgstr "打印 zypper 帮助"
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/inrverify.cc:68
