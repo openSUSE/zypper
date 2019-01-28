@@ -235,6 +235,11 @@ int Zypper::main( int argc, char ** argv )
     error_r.report( *this );
     report_a_bug( out() );
   }
+  catch ( const ZyppFlags::ZyppFlagsException &e) {
+    ERR << e.asString() << endl;
+    out().error( e.asUserString() );
+    setExitCode( ZYPPER_EXIT_ERR_SYNTAX );
+  }
   catch ( const Exception & ex )
   {
     ZYPP_CAUGHT( ex );
