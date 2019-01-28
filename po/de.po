@@ -17,16 +17,16 @@ msgstr ""
 "Project-Id-Version: zypper.de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-01-23 09:24+0100\n"
-"PO-Revision-Date: 2018-12-18 10:47+0000\n"
-"Last-Translator: Sarah Kriesch <ada.lovelace@gmx.de>\n"
-"Language-Team: German <https://l10n.opensuse.org/projects/zypper/master/de/"
-">\n"
+"PO-Revision-Date: 2019-01-28 17:27+0000\n"
+"Last-Translator: Franziska Weinberger <f.weinberger@gemino.de>\n"
+"Language-Team: German <https://l10n.opensuse.org/projects/zypper/master/de/>"
+"\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 3.2.2\n"
+"X-Generator: Weblate 3.3\n"
 
 #: src/SolverRequester.h:52
 #, boost-format
@@ -783,7 +783,7 @@ msgstr "Ungültiger Tabellenstil %d."
 #: src/Config.cc:54
 #, c-format, boost-format
 msgid " Use an integer number from %d to %d"
-msgstr ""
+msgstr " Verwenden Sie eine Ganzzahl von %d bis %d."
 
 #: src/Config.cc:248
 msgid "The path specified in the --root option must be absolute."
@@ -888,6 +888,8 @@ msgstr "Unbekannte Pakete ignorieren."
 msgid ""
 "Terse output for machine consumption. Implies --no-abbrev and --no-color."
 msgstr ""
+"Kompakte Ausgabe für die maschinelle Verwendung. Beinhaltet --no-abbrev und "
+"--no-color."
 
 #. translators: --reposd-dir, -D <DIR>
 #: src/Config.cc:487
@@ -1171,6 +1173,9 @@ msgid ""
 "There is an update candidate for '%s' from vendor '%s', while the current "
 "vendor is '%s'. Use '%s' to install this candidate."
 msgstr ""
+"Es ist ein Aktualisierungskandidat für '%s' von Anbieter '%s' vorhanden. Der "
+"aktuelle Anbieter ist '%s'. Verwenden Sie '%s' zum Installieren dieses "
+"Kandidaten."
 
 #: src/RequestFeedback.cc:132
 #, c-format, boost-format
@@ -1845,8 +1850,8 @@ msgstr[1] "Die folgenden %d Patches benötigen einen Systemneustart:"
 #, c-format, boost-format
 msgid "The following package requires a system reboot:"
 msgid_plural "The following %d package require a system reboot:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Das folgende Paket erfordert einen Systemneustart:"
+msgstr[1] "Die folgenden %d Pakete erfordern einen Systemneustart:"
 
 #: src/Summary.cc:1373
 #, boost-format
@@ -2217,12 +2222,16 @@ msgid ""
 "This is a transactional-server, please use transactional-update to update or "
 "modify the system."
 msgstr ""
+"Dies ist ein transaktionaler Server. Verwenden Sie eine transaktionale "
+"Aktualisierung, um das System zu aktualisieren oder zu ändern."
 
 #: src/commands/conditions.cc:49
 msgid ""
 "The target filesystem is mounted as read-only. Please make sure the target "
 "filesystem is writeable."
 msgstr ""
+"Das Ziel-Dateisystem ist als nicht beschreibbares Medium eingehängt. Stellen "
+"Sie sicher, dass das Ziel-Dateisystem beschreibbar ist."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/distupgrade.cc:20
@@ -2298,6 +2307,12 @@ msgid ""
 "unconditionally on small or minimal systems, as it may easily add a large "
 "number of packages."
 msgstr ""
+"Neu hinzugefügte Pakete, die durch bereits installierte vorgeschlagen "
+"wurden, installieren. Dieses Kommando wertet die Vorschläge aller "
+"installierten Pakete neu aus und füllt das System entsprechend. Dieses "
+"Kommando sollte nicht ohne Vorbehalt auf kleinen oder Minimalsystemen "
+"aufgerufen werden, da möglicherweise eine große Anzahl von Paketen "
+"hinzugefügt wird."
 
 #. translators: command description, %1% is a zypper command
 #: src/commands/inrverify.cc:98
@@ -2307,6 +2322,10 @@ msgid ""
 "supporting available hardware, languages or filesystems. Useful after having "
 "added e.g. new hardware or driver repos."
 msgstr ""
+"Wird als '%1%' aufgerufen. Schränkt das Kommando ein, sodass nur nach "
+"Paketen gesucht wird, die die verfügbare Hardware, die verfügbaren Sprachen "
+"oder Dateisysteme unterstützen. Nützlich, nachdem beispielsweise neue "
+"Hardware oder Treiber-Repositorys hinzugefügt wurden."
 
 #. translators: command description
 #: src/commands/inrverify.cc:101
@@ -2324,7 +2343,7 @@ msgstr "Pakete nach dem einfachen Namen auswählen, nicht nach Fähigkeit."
 
 #: src/commands/installremove.cc:55
 msgid "Select packages solely by capability."
-msgstr ""
+msgstr "Pakete nur nach Fähigkeit auswählen."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/installremove.cc:74
@@ -2691,6 +2710,10 @@ msgid ""
 "Exit code ZYPPER_EXIT_INF_REBOOT_NEEDED indicates that a reboot is needed, "
 "otherwise the exit code is set to ZYPPER_EXIT_OK."
 msgstr ""
+"Prüft, ob der Flag 'needs-reboot' bei einer vorherigen Aktualisierung bzw. "
+"Installation einer Core-Bibliothek bzw. eines Diensts gesetzt wurde.\n"
+"Exitcode ZYPPER_EXIT_INF_REBOOT_NEEDED gibt an, dass ein Neustart "
+"erforderlich ist, andernfalls wird der Exitcode ZYPPER_EXIT_OK verwendet."
 
 #: src/commands/needs-rebooting.cc:34
 msgid "Core libraries or services have been updated."
@@ -2860,12 +2883,12 @@ msgstr "Die Standardeinstellung sieht die Einbeziehung optionaler Patches vor."
 #. translators: --with-interactive
 #: src/commands/optionsets.cc:340
 msgid "Do not skip interactive updates."
-msgstr ""
+msgstr "Interaktive Aktualisierungen nicht überspringen."
 
 #. translators: --skip-interactive
 #: src/commands/optionsets.cc:344
 msgid "Skip interactive updates."
-msgstr ""
+msgstr "Interaktive Aktualisierungen überspringen."
 
 #. translators: --sort-by-name
 #: src/commands/optionsets.cc:364
@@ -2958,11 +2981,14 @@ msgid ""
 "followed by a newline. Any '%s' directive in <format> is replaced by the "
 "system service name."
 msgstr ""
+"Für jeden verknüpften Systemdienst <Format> als Standardausgabe verwenden, "
+"gefolgt von einem Zeilenumbruch. Alle '%s'-Direktiven in <Format> werden "
+"durch den Systemdienstnamen ersetzt."
 
 #. translators: -d, --debugFile <path>
 #: src/commands/ps.cc:52
 msgid "Write debug output to file <path>."
-msgstr ""
+msgstr "Debug-Ausgabe in Datei-<Pfad> schreiben."
 
 #: src/commands/ps.cc:72 src/solve-commit.cc:450
 msgid "Check failed:"
@@ -3933,16 +3959,20 @@ msgid ""
 "For an extended search including not yet activated remote resources you may "
 "now run '%1%'."
 msgstr ""
+"Für eine erweiterte Suche, die noch nicht aktivierte Remote-Ressourcen "
+"einschließt, können Sie jetzt '%1%' ausführen."
 
 #: src/commands/search/search-packages-hinthack.cc:102
 #, boost-format
 msgid "Do you want to run '%1%' now?"
-msgstr ""
+msgstr "Möchten Sie '%1%' jetzt ausführen?"
 
 #: src/commands/search/search-packages-hinthack.cc:113
 #, boost-format
 msgid "Run '%1%' to search in not yet activated remote resources."
 msgstr ""
+"Führen Sie '%1%' aus, um noch nicht aktivierte Remote-Ressourcen zu "
+"durchsuchen."
 
 #. translators: command summary: search, se
 #: src/commands/search/search.cc:73
@@ -4105,33 +4135,36 @@ msgstr ""
 #. translators: -g, --category <CATEGORY>
 #: src/commands/selectpatchoptionset.cc:24
 msgid "Select patches with the specified category."
-msgstr ""
+msgstr "Wählen Sie Patches der angegebenen Kategorie aus."
 
 #. translators: --severity <SEVERITY>
 #: src/commands/selectpatchoptionset.cc:28
 msgid "Select patches with the specified severity."
-msgstr ""
+msgstr "Wählen Sie Patches mit dem angegebenen Schweregrad aus."
 
 #. translators: --date <YYYY-MM-DD>
 #: src/commands/selectpatchoptionset.cc:32
 msgid "Select patches issued up to, but not including, the specified date"
 msgstr ""
+"Wählen Sie Patches aus, die bis zum angegebenen Datum ausgegeben wurden, "
+"dieses aber nicht enthalten."
 
 #. translators: -b, --bugzilla
 #: src/commands/selectpatchoptionset.cc:36
 msgid "Select applicable patches for the specified Bugzilla issues."
 msgstr ""
+"Wählen Sie anwendbare Patches für die angegebenen Bugzilla-Einträge aus."
 
 #. translators: --cve
 #: src/commands/selectpatchoptionset.cc:41
 msgid "Select applicable patches for the specified CVE issues."
-msgstr ""
+msgstr "Wählen Sie anwendbare Patches für die angegebenen CVE-Einträge aus."
 
 #. any
 #. translators: --cve
 #: src/commands/selectpatchoptionset.cc:50
 msgid "Select issues matching the specified string."
-msgstr ""
+msgstr "Wählen Sie Einträge aus, die der angegebenen Zeichenfolge entsprechen."
 
 #: src/commands/services/add.cc:55
 #, c-format, boost-format
@@ -4249,7 +4282,7 @@ msgstr ""
 
 #: src/commands/services/modify.cc:41
 msgid "Advanced:"
-msgstr ""
+msgstr "Erweitert:"
 
 #: src/commands/services/modify.cc:43
 msgid "Add a RIS service repository to enable."
@@ -4505,7 +4538,7 @@ msgstr "Dieses Kommando ist nur in der Zypper-Shell sinnvoll."
 
 #: src/commands/solveroptionset.cc:16 src/commands/solveroptionset.cc:39
 msgid "Solver options"
-msgstr ""
+msgstr "Auflösungsoptionen"
 
 #: src/commands/solveroptionset.cc:18
 msgid "Install also recommended packages in addition to the required ones."
@@ -4532,7 +4565,7 @@ msgstr ""
 
 #: src/commands/solveroptionset.cc:63
 msgid "Expert options"
-msgstr ""
+msgstr "Optionen für Experten"
 
 #: src/commands/solveroptionset.cc:66
 msgid "Whether to allow downgrading installed resolvables."
@@ -4761,6 +4794,8 @@ msgstr "Inst. Pakete mit neueren Vers. aktualisieren."
 msgid ""
 "Update all or specified installed packages with newer versions, if possible."
 msgstr ""
+"Alle oder die angegebenen installierten Pakete mit neueren Versionen "
+"aktualisieren, wenn möglich."
 
 #: src/commands/update.cc:71 src/commands/update.cc:78
 #: src/commands/update.cc:128
@@ -5015,12 +5050,12 @@ msgstr ""
 #. translators: --status
 #: src/commands/utils/source-download.cc:514
 msgid "Write a manifest file."
-msgstr ""
+msgstr "Manifestdatei schreiben."
 
 #. translators: --status
 #: src/commands/utils/source-download.cc:518
 msgid "Disable writing a manifest file."
-msgstr ""
+msgstr "Schreiben einer Manifestdatei deaktivieren."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/utils/targetos.cc:20
@@ -6501,12 +6536,12 @@ msgstr "Fehler bei der Analyse von zypper.conf:"
 #: src/utils/flags/exceptions.cc:22
 #, boost-format
 msgid "The flag %1% is not known."
-msgstr ""
+msgstr "Flag %1% ist unbekannt."
 
 #: src/utils/flags/exceptions.cc:28
 #, boost-format
 msgid "The flag %1% is not compatible with argument %2% (%3%)."
-msgstr ""
+msgstr "Flag %1% ist nicht mit dem Argument %2% (%3%) kompatibel."
 
 #: src/utils/flags/exceptions.cc:34
 #, boost-format
@@ -6516,21 +6551,21 @@ msgstr "Das Flag %1% benötigt ein Argument."
 #: src/utils/flags/exceptions.cc:40
 #, boost-format
 msgid "The flag %1% can only be used once."
-msgstr ""
+msgstr "Flag %1% kann nur einmal verwendet werden."
 
 #: src/utils/flags/exceptions.cc:46
 #, c-format, boost-format
 msgid "%s used together with %s, which contradict each other."
-msgstr ""
+msgstr "%s wird zusammen mit %s verwendet, was widersprüchlich ist."
 
 #: src/utils/flags/flagtypes.cc:24
 msgid "Unknown package type"
-msgstr ""
+msgstr "Unbekannter Pakettyp"
 
 #: src/utils/flags/flagtypes.cc:100
 #, boost-format
 msgid "The flag '%1%' can only be used a maximum of %2% times."
-msgstr ""
+msgstr "Flag '%1%' kann höchstens %2%-mal verwendet werden."
 
 #: src/utils/flags/flagtypes.cc:192
 #, c-format, boost-format
@@ -6543,12 +6578,12 @@ msgstr ""
 
 #: src/utils/flags/flagtypes.cc:232
 msgid "Out of range"
-msgstr ""
+msgstr "Außerhalb des Bereichs"
 
 #: src/utils/flags/flagtypes.cc:234
 #, boost-format
 msgid "Unknown error while assigning the value %1% to flag %2%."
-msgstr ""
+msgstr "Unbekannter Fehler beim Zuweisen des Werts %1% zu Flag %2%."
 
 #. For '-garbage' argument, with 'a', 'b', and 'e' as known options,
 #. getopt_long reports 'a', 'b', and 'e' as known options.
