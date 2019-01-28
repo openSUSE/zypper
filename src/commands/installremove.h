@@ -63,11 +63,11 @@ public:
 private:
   bool _force  = false;
   bool _oldPackage = false;
-  bool _replaceFiles = false;
   bool _allowUnsignedRPM = false;
   std::vector<std::string> _fromRepos;
   std::vector<std::string> _entireCatalog;
 
+  FileConflictPolicyOptionSet _fileConflictOpts { *this };
   LicensePolicyOptionSet _licensePolicy { *this };
   DownloadOptionSet _downloadMode { *this };
 

@@ -24,9 +24,9 @@ public:
 private:
   bool _updateStackOnly = false;
   bool _withUpdate = false;
-  bool _replaceFiles = false;
   bool _details = false;
 
+  FileConflictPolicyOptionSet _fileConflictOpts { *this };
   InitReposOptionSet _initRepoOpts { *this };
   SelectPatchOptionSet _selectPatchOpts { *this };
   NoConfirmRugOption _noConfirmOpts { *this };

@@ -47,7 +47,6 @@ zypp::ZyppFlags::CommandGroup PatchCmd::cmdOptions() const
       { "with-update", '\0', ZyppFlags::NoArgument, ZyppFlags::BoolType( &that->_withUpdate, ZyppFlags::StoreTrue, _withUpdate ),
             _("Additionally try to update all packages not covered by patches. The option is ignored, if the patch command must update the update stack first. Can not be combined with --updatestack-only.")
       },
-      CommonFlags::replaceFilesFlag( that->_replaceFiles ),
       CommonFlags::detailsFlag( that->_details )
     }, {
       { "updatestack-only", "bugzilla" },
@@ -62,7 +61,6 @@ void PatchCmd::doReset()
 {
   _updateStackOnly = false;
   _withUpdate = false;
-  _replaceFiles = false;
   _details = false;
 }
 
