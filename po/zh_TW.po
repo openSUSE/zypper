@@ -13,8 +13,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-01-23 09:24+0100\n"
-"PO-Revision-Date: 2018-11-30 16:01+0000\n"
-"Last-Translator: Yi-Jyun Pan <pan93412@gmail.com>\n"
+"PO-Revision-Date: 2019-02-02 17:07+0000\n"
+"Last-Translator: Emily Dong <Emily.Dong@excel-gits.com>\n"
 "Language-Team: Chinese (Taiwan) <https://l10n.opensuse.org/projects/zypper/"
 "master/zh_TW/>\n"
 "Language: zh_TW\n"
@@ -22,7 +22,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 2.18\n"
+"X-Generator: Weblate 3.3\n"
 
 #: src/SolverRequester.h:52
 #, boost-format
@@ -553,7 +553,7 @@ msgstr "盡最大努力來趨近最新狀態， 更新到比最新版本還低�
 
 #: src/commands/commonflags.h:53
 msgid "Consider only patches which affect the package management itself."
-msgstr ""
+msgstr "僅考慮將影響軟體包管理自身的修補程式。"
 
 #: src/output/Out.h:26 src/repos.cc:125 src/repos.cc:153
 msgid "Yes"
@@ -680,7 +680,7 @@ msgstr "錯誤"
 
 #: src/Command.cc:90
 msgid "Invalid command"
-msgstr ""
+msgstr "無效指令"
 
 #: src/Command.cc:108
 msgid "Repository Management:"
@@ -727,7 +727,7 @@ msgstr "無效的表格樣式 %d。"
 #: src/Config.cc:54
 #, c-format, boost-format
 msgid " Use an integer number from %d to %d"
-msgstr ""
+msgstr " 使用 %d 至 %d 之間的整數"
 
 #: src/Config.cc:248
 msgid "The path specified in the --root option must be absolute."
@@ -822,7 +822,7 @@ msgstr "忽略未知的軟體包。"
 #: src/Config.cc:463
 msgid ""
 "Terse output for machine consumption. Implies --no-abbrev and --no-color."
-msgstr ""
+msgstr "機器資源使用情況的精簡輸出。預設包含--no-abbrev 和 --no-color 設定。"
 
 #. translators: --reposd-dir, -D <DIR>
 #: src/Config.cc:487
@@ -1089,7 +1089,7 @@ msgstr "有更新候選 '%s' (適用於 '%s')，但它不符合特定版本、�
 msgid ""
 "There is an update candidate for '%s' from vendor '%s', while the current "
 "vendor is '%s'. Use '%s' to install this candidate."
-msgstr ""
+msgstr "廠商「%s」發佈了「%s」的候選更新，但目前的廠商為「%s」。請使用「%s」安裝此候選更新。"
 
 #: src/RequestFeedback.cc:132
 #, c-format, boost-format
@@ -1651,7 +1651,7 @@ msgstr[0] "下列 %d 個修補程式將會需要系統重新啟動："
 #, c-format, boost-format
 msgid "The following package requires a system reboot:"
 msgid_plural "The following %d package require a system reboot:"
-msgstr[0] ""
+msgstr[0] "下列 %d 個軟體包需要將系統重新開機："
 
 #: src/Summary.cc:1373
 #, boost-format
@@ -2039,7 +2039,7 @@ msgstr "zypper <個別指令> [--指令選項] [參數]"
 
 #: src/commands/help.cc:72 src/commands/help.cc:73
 msgid "Print zypper help"
-msgstr "印出說明。"
+msgstr "印出 zypper 說明"
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/inrverify.cc:68
@@ -2070,6 +2070,8 @@ msgid ""
 "unconditionally on small or minimal systems, as it may easily add a large "
 "number of packages."
 msgstr ""
+"安裝已安裝軟體包建議的新增軟體包。此指令本質上會重新評估所有已安裝軟體包的建議軟體包，並相應地在系統上加以安裝。在小型或精簡系統上不需要無限制地呼叫此指令"
+"，因為它可能輕易就會新增大量的軟體包。"
 
 #. translators: command description, %1% is a zypper command
 #: src/commands/inrverify.cc:98
@@ -2078,7 +2080,7 @@ msgid ""
 "Called as '%1%', it restricts the command to just look for packages "
 "supporting available hardware, languages or filesystems. Useful after having "
 "added e.g. new hardware or driver repos."
-msgstr ""
+msgstr "隨「%1%」呼叫時，它會限制指令僅評估支援可用硬體、語言或檔案系統的軟體包。例如，可在已新增新硬體或磁碟機軟體庫後使用。"
 
 #. translators: command description
 #: src/commands/inrverify.cc:101
@@ -2094,7 +2096,7 @@ msgstr "單純依照名稱而不是功能來選取軟體包。"
 
 #: src/commands/installremove.cc:55
 msgid "Select packages solely by capability."
-msgstr ""
+msgstr "僅依功能選取軟體包。"
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/installremove.cc:74
@@ -2527,7 +2529,7 @@ msgstr "此指令是一個假動作，它只會回應 0。"
 
 #: src/commands/optionsets.cc:33
 msgid "Don't change anything, just report what would be done."
-msgstr ""
+msgstr "它並不會進行任何變更，僅會報告將執行的操作。"
 
 #. translators: -r, --repo <ALIAS|#|URI>
 #: src/commands/optionsets.cc:65
@@ -2537,7 +2539,7 @@ msgstr "只對指定軟體庫起作用。"
 #: src/commands/optionsets.cc:85
 #, c-format, boost-format
 msgid "Option '--%s' overrides a previously set download mode."
-msgstr ""
+msgstr "選項「--%s」會覆寫先前設定的下載模式。"
 
 #: src/commands/optionsets.cc:114
 #, c-format, boost-format
@@ -2693,7 +2695,7 @@ msgid ""
 "For each associated system service print <format> on the standard output, "
 "followed by a newline. Any '%s' directive in <format> is replaced by the "
 "system service name."
-msgstr ""
+msgstr "對於每個關聯的系統服務，在標準輸出中列印 <format>，後接一個換行字元。<format> 中的所有「%s」指令都會以系統服務名稱取代。"
 
 #. translators: -d, --debugFile <path>
 #: src/commands/ps.cc:52
@@ -3618,17 +3620,17 @@ msgstr ""
 msgid ""
 "For an extended search including not yet activated remote resources you may "
 "now run '%1%'."
-msgstr ""
+msgstr "對於包含尚未啟用的遠端資源的延伸搜尋，您現在可以執行「%1%」。"
 
 #: src/commands/search/search-packages-hinthack.cc:102
 #, boost-format
 msgid "Do you want to run '%1%' now?"
-msgstr ""
+msgstr "是否要立即執行「%1%」？"
 
 #: src/commands/search/search-packages-hinthack.cc:113
 #, boost-format
 msgid "Run '%1%' to search in not yet activated remote resources."
-msgstr ""
+msgstr "執行「%1%」以搜尋尚未啟用的遠端資源。"
 
 #. translators: command summary: search, se
 #: src/commands/search/search.cc:73
@@ -3779,33 +3781,33 @@ msgstr "以 root 執行 'zypper refresh' 也許可以解決這個問題。"
 #. translators: -g, --category <CATEGORY>
 #: src/commands/selectpatchoptionset.cc:24
 msgid "Select patches with the specified category."
-msgstr ""
+msgstr "搜尋屬於指定類別的修補程式。"
 
 #. translators: --severity <SEVERITY>
 #: src/commands/selectpatchoptionset.cc:28
 msgid "Select patches with the specified severity."
-msgstr ""
+msgstr "選取安全性為指定安全性的修補程式。"
 
 #. translators: --date <YYYY-MM-DD>
 #: src/commands/selectpatchoptionset.cc:32
 msgid "Select patches issued up to, but not including, the specified date"
-msgstr ""
+msgstr "選取早於指定日期發佈的修補程式"
 
 #. translators: -b, --bugzilla
 #: src/commands/selectpatchoptionset.cc:36
 msgid "Select applicable patches for the specified Bugzilla issues."
-msgstr ""
+msgstr "選取適用於指定 Bugzilla 問題的修補程式。"
 
 #. translators: --cve
 #: src/commands/selectpatchoptionset.cc:41
 msgid "Select applicable patches for the specified CVE issues."
-msgstr ""
+msgstr "選取適用於指定 CVE 問題的修補程式。"
 
 #. any
 #. translators: --cve
 #: src/commands/selectpatchoptionset.cc:50
 msgid "Select issues matching the specified string."
-msgstr ""
+msgstr "選取與指定的字串相符的問題。"
 
 #: src/commands/services/add.cc:55
 #, c-format, boost-format
@@ -3914,7 +3916,7 @@ msgstr "修改藉由別名、編號、URI 或 '%1%' 統合選項所指定的服�
 
 #: src/commands/services/modify.cc:41
 msgid "Advanced:"
-msgstr ""
+msgstr "進階："
 
 #: src/commands/services/modify.cc:43
 msgid "Add a RIS service repository to enable."
@@ -4141,7 +4143,7 @@ msgstr "這個指令只在 zypper shell 中有意義。"
 
 #: src/commands/solveroptionset.cc:16 src/commands/solveroptionset.cc:39
 msgid "Solver options"
-msgstr ""
+msgstr "解析程式選項"
 
 #: src/commands/solveroptionset.cc:18
 msgid "Install also recommended packages in addition to the required ones."
@@ -4167,7 +4169,7 @@ msgstr "不要強迫找尋解決方案，要先詢問。"
 
 #: src/commands/solveroptionset.cc:63
 msgid "Expert options"
-msgstr ""
+msgstr "進階選項"
 
 #: src/commands/solveroptionset.cc:66
 msgid "Whether to allow downgrading installed resolvables."
@@ -4613,12 +4615,12 @@ msgstr "不要下載任何原始碼 rpm，只顯示那些遺失或 不相關的 
 #. translators: --status
 #: src/commands/utils/source-download.cc:514
 msgid "Write a manifest file."
-msgstr ""
+msgstr "寫入資訊清單檔案。"
 
 #. translators: --status
 #: src/commands/utils/source-download.cc:518
 msgid "Disable writing a manifest file."
-msgstr ""
+msgstr "禁止寫入資訊清單檔案。"
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/utils/targetos.cc:20
@@ -6023,16 +6025,16 @@ msgstr "%1% 標記僅能使用一次。"
 #: src/utils/flags/exceptions.cc:46
 #, c-format, boost-format
 msgid "%s used together with %s, which contradict each other."
-msgstr ""
+msgstr "已將 %s 與 %s 搭配使用，但它們互相矛盾。"
 
 #: src/utils/flags/flagtypes.cc:24
 msgid "Unknown package type"
-msgstr ""
+msgstr "未知的軟體包類型"
 
 #: src/utils/flags/flagtypes.cc:100
 #, boost-format
 msgid "The flag '%1%' can only be used a maximum of %2% times."
-msgstr ""
+msgstr "「%1%」標記最多只能使用 %2% 次。"
 
 #: src/utils/flags/flagtypes.cc:192
 #, c-format, boost-format
