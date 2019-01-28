@@ -136,6 +136,11 @@ namespace
   }
 }
 
+DownloadOptionSet::DownloadOptionSet( ZypperBaseCommand &parent , Mode cmdMode )
+  : BaseCommandOptionSet( parent )
+  , _cmdMode ( cmdMode )
+{ }
+
 zypp::DownloadMode DownloadOptionSet::mode() const
 {
   MIL << "Download mode: ";
@@ -169,7 +174,7 @@ std::vector<ZyppFlags::CommandGroup> DownloadOptionSet::options()
               // translators: --download
               str::Format(_("Set the download-install mode. Available modes: %s") ) % "only, in-advance, in-heaps, as-needed"
         },
-        { "download-only", 'd', ZyppFlags::NoArgument | ZyppFlags::Repeatable, DownloadModeNoArgType( *this, DownloadMode::DownloadOnly ),
+        { "download-only", _cmdMode == DownloadOptionSet::Default ? 'd' : '\0', ZyppFlags::NoArgument | ZyppFlags::Repeatable, DownloadModeNoArgType( *this, DownloadMode::DownloadOnly ),
               // translators: -d, --download-only
               _("Only download the packages, do not install.")
         },

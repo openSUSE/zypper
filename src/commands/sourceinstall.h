@@ -9,6 +9,7 @@
 
 #include "commands/basecommand.h"
 #include "commands/optionsets.h"
+#include "commands/solveroptionset.h"
 #include "utils/flags/zyppflags.h"
 
 class SourceInstallCmd : public ZypperBaseCommand
@@ -19,8 +20,11 @@ public:
 private:
   bool _buildDepsOnly = false;
   bool _noBuildDeps   = false;
-  bool _downloadOnly  = false;
   InitReposOptionSet _initRepos { *this };
+  DownloadOptionSet _dlOpts { *this, DownloadOptionSet::SourceInstall };
+  SolverCommonOptionSet _solverCommonOpts { *this };
+  SolverInstallsOptionSet _solverInstallOpts { *this };
+  SolverRecommendsOptionSet _solverRecommOpts { *this };
 
   // ZypperBaseCommand interface
 protected:

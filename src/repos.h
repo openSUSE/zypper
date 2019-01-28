@@ -229,6 +229,12 @@ bool refresh_raw_metadata( Zypper & zypper, const RepoInfo & repo, bool force_do
 
 bool build_cache( Zypper & zypper, const RepoInfo & repo, bool force_build );
 
+/**
+ * Iterate over \a positionalArgs and try to treat it as a .rpm file, in case it turns out to be a valid
+ * rpm file, remove the arg from the list and place the file in a temporary repository
+ */
+std::vector<std::string> createTempRepoFromArgs(Zypper &zypper, std::vector<std::string> &positionalArgs , bool allowUnsigned_r);
+
 #endif
 // Local Variables:
 // mode: c++

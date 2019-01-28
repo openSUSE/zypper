@@ -57,7 +57,12 @@ public:
 class DownloadOptionSet : public BaseCommandOptionSet
 {
 public:
- using BaseCommandOptionSet::BaseCommandOptionSet;
+  enum Mode {
+    Default,
+    SourceInstall
+  };
+
+  DownloadOptionSet( ZypperBaseCommand &parent, DownloadOptionSet::Mode cmdMode = DownloadOptionSet::Default );
 
   zypp::DownloadMode mode() const;
   void setMode( const zypp::DownloadMode &mode );
@@ -66,6 +71,7 @@ public:
 private:
   zypp::DownloadMode _mode;
   bool _wasSetBefore = false;
+  Mode _cmdMode = Default;
 
   // BaseCommandOptionSet interface
 public:
