@@ -21,9 +21,9 @@ public:
 
 private:
   bool _details = false;
-  bool _replaceFiles = false;
   bool _bestEffort   = false;
   std::set<zypp::ResKind> _kinds;
+  FileConflictPolicyOptionSet _fileConflictOpts { *this };
   InitReposOptionSet _initReposOpts { *this };
   NoConfirmRugOption _noComfirmOpts { *this };
   InteractiveUpdatesOptionSet _interactiveOpts { *this };

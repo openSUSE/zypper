@@ -182,10 +182,6 @@ ZyppFlags::CommandGroup InstallCmd::cmdOptions() const
       // translators: --oldpackage
       _("Allow to replace a newer item with an older one. Handy if you are doing a rollback. Unlike --force it will not enforce a reinstall.")
     },
-    { "replacefiles", '\0', ZyppFlags::NoArgument, ZyppFlags::BoolType( &that->_replaceFiles, ZyppFlags::StoreTrue, _replaceFiles ),
-      // translators: --replacefiles
-      _("Install the packages even if they replace files from other, already installed, packages. Default is to treat file conflicts as an error. --download-as-needed disables the fileconflict check.")
-    },
     // disable gpg checks for directly passed rpms
     { "allow-unsigned-rpm", '\0', ZyppFlags::NoArgument, ZyppFlags::BoolType( &that->_allowUnsignedRPM, ZyppFlags::StoreTrue, _allowUnsignedRPM ),
       _("Silently install unsigned rpm packages given as commandline parameters.")
@@ -208,7 +204,6 @@ void InstallCmd::doReset()
   InstallRemoveBase::doReset();
   _force  = false;
   _oldPackage = false;
-  _replaceFiles = false;
   _allowUnsignedRPM = false;
   _fromRepos.clear();
   _entireCatalog.clear();

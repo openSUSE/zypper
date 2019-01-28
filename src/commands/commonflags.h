@@ -31,14 +31,6 @@ namespace CommonFlags
     };
   }
 
-  inline zypp::ZyppFlags::CommandOption replaceFilesFlag ( bool &targetFlag ) {
-    return {
-      "replacefiles", '\0', zypp::ZyppFlags::NoArgument, zypp::ZyppFlags::BoolType( &targetFlag, zypp::ZyppFlags::StoreTrue, targetFlag ),
-      // translators: --replacefiles
-      _("Install the packages even if they replace files from other, already installed, packages. Default is to treat file conflicts as an error. --download-as-needed disables the fileconflict check.")
-    };
-  }
-
   inline zypp::ZyppFlags::CommandOption bestEffortUpdateFlag ( bool &targetFlag ) {
     return {
       "best-effort", '\0', zypp::ZyppFlags::NoArgument, zypp::ZyppFlags::BoolType( &targetFlag, zypp::ZyppFlags::StoreTrue, targetFlag ),

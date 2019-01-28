@@ -46,7 +46,6 @@ zypp::ZyppFlags::CommandGroup UpdateCmd::cmdOptions() const
   return {{
      CommonFlags::resKindSetFlag( that._kinds ),
      CommonFlags::detailsFlag( that._details ),
-     CommonFlags::replaceFilesFlag( that._replaceFiles ),
      CommonFlags::bestEffortUpdateFlag( that._bestEffort )
   }};
 }
@@ -54,7 +53,6 @@ zypp::ZyppFlags::CommandGroup UpdateCmd::cmdOptions() const
 void UpdateCmd::doReset()
 {
   _details = false;
-  _replaceFiles = false;
   _bestEffort   = false;
   _kinds.clear();
 }
