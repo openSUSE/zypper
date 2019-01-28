@@ -112,22 +112,18 @@ int InfoCmd::execute( Zypper &zypper, const std::vector<std::string> &positional
   }
 
   //for aliased modes we override the _kinds in the option object
-  if ( _cmdMode != Mode::Default ) {
-    switch ( _cmdMode ) {
-      case Mode::RugPatchInfo:
-        _options._kinds = { ResKind::patch };
-        break;
-      case Mode::RugPatternInfo:
-        _options._kinds = { ResKind::pattern };
-        break;
-      case Mode::RugProductInfo:
-        _options._kinds = { ResKind::product };
-        break;
-      default:
-        //this should never happen
-        report_a_bug( zypper.out() );
-        break;
-    }
+  switch ( _cmdMode ) {
+    case Mode::RugPatchInfo:
+      _options._kinds = { ResKind::patch };
+      break;
+    case Mode::RugPatternInfo:
+      _options._kinds = { ResKind::pattern };
+      break;
+    case Mode::RugProductInfo:
+      _options._kinds = { ResKind::product };
+      break;
+    case Mode::Default:
+      break;
   }
 
   printInfo( zypper, positionalArgs_r, _options );
@@ -146,7 +142,6 @@ std::string InfoCmd::summary() const
     case Mode::RugProductInfo:
       // translators: command summary: product-info
       return _("Show full information for specified products.");
-    default:
     case Mode::Default:
       break;
   }
@@ -166,7 +161,6 @@ std::vector<std::string> InfoCmd::synopsis() const
     case Mode::RugProductInfo:
       // translators: command synopsis; do not translate lowercase words
       return { _("product-info <PRODUCT_NAME> ...") };
-    default:
     case Mode::Default:
       break;
   }
@@ -185,7 +179,6 @@ std::string InfoCmd::description() const
     case Mode::RugProductInfo:
       // translators: command description
       return _("Show detailed information for products.");
-    default:
     case Mode::Default:
       break;
   }
