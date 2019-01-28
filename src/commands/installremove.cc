@@ -1,4 +1,4 @@
-/*---------------------------------------------------------------------------*\
+﻿/*---------------------------------------------------------------------------*\
                           ____  _ _ __ _ __  ___ _ _
                          |_ / || | '_ \ '_ \/ -_) '_|
                          /__|\_, | .__/ .__/\___|_|
@@ -240,86 +240,10 @@ int InstallCmd::execute( Zypper &zypper, const std::vector<std::string> &positio
   }
 
   // check for rpm files among the arguments
-  std::vector<std::string> rpms_files_caps;
-  filesystem::Pathname cliRPMCache;	// temporary plaindir repo (if needed)
+  std::vector<std::string> rpms_files_caps = createTempRepoFromArgs( zypper, positionalArgs, _allowUnsignedRPM );
 
-  for ( std::vector<std::string>::iterator it = positionalArgs.begin(); it != positionalArgs.end(); )
-  {
-    if ( looks_like_rpm_file( *it ) )
-    {
-      DBG << *it << " looks like rpm file" << endl;
-      zypper.out().info( str::Format(_("'%s' looks like an RPM file. Will try to download it.")) % *it,
-                  Out::HIGH );
-
-      // download the rpm into the temp cache
-      if ( cliRPMCache.empty() )
-        cliRPMCache = zypper.runtimeData().tmpdir / TMP_RPM_REPO_ALIAS / "%CLI%";
-      filesystem::Pathname rpmpath = cache_rpm( *it, cliRPMCache );
-      if ( rpmpath.empty() )
-      {
-        zypper.out().error( str::Format(_("Problem with the RPM file specified as '%s', skipping.")) % *it );
-      }
-      else
-      {
-        using target::rpm::RpmHeader;
-        // rpm header (need name-version-release)
-        RpmHeader::constPtr header = RpmHeader::readPackage( rpmpath, RpmHeader::NOSIGNATURE );
-        if ( header )
-        {
-          std::string nvrcap =
-            TMP_RPM_REPO_ALIAS ":" +
-            header->tag_name() + "=" +
-            str::numstring(header->tag_epoch()) + ":" +
-            header->tag_version() + "-" +
-            header->tag_release();
-          DBG << "rpm package capability: " << nvrcap << endl;
-
-          // store the rpm file capability string (name=version-release)
-          rpms_files_caps.push_back( nvrcap );
-        }
-        else
-        {
-          zypper.out().error( str::Format(_("Problem reading the RPM header of %s. Is it an RPM file?")) % *it );
-        }
-      }
-
-      // remove this rpm argument
-      it = positionalArgs.erase( it );
-    }
-    else
-      ++it;
-  }
-
-  // If there were some rpm files, add the rpm cache as a temporary plaindir repo.
-  // Set up as temp repo, but redirect PackagesPath to ZYPPER_RPM_CACHE_DIR. This
-  // way downloaded packages (e.g. --download-only) are accessible until they get
-  // installed (unless .keeppackages)
-  if ( !rpms_files_caps.empty() )
-  {
-    // add a plaindir repo
-    RepoInfo repo;
-    repo.setAlias( TMP_RPM_REPO_ALIAS );
-    repo.setName(_("Plain RPM files cache") );
-    repo.setBaseUrl( cliRPMCache.asDirUrl() );
-    repo.setMetadataPath( zypper.runtimeData().tmpdir / TMP_RPM_REPO_ALIAS / "%AUTO%" );
-    repo.setPackagesPath( Pathname::assertprefix( zypper.config().root_dir, ZYPPER_RPM_CACHE_DIR ) );
-    repo.setType( repo::RepoType::RPMPLAINDIR );
-    repo.setEnabled( true );
-    repo.setAutorefresh( true );
-    repo.setKeepPackages( false );
-
-    if ( _allowUnsignedRPM )
-    {
-      repo.setGpgCheck(RepoInfo::GpgCheck::AllowUnsignedPackage);
-    }
-
-    // shut up zypper
-    SCOPED_VERBOSITY( zypper.out(), Out::QUIET );
-    RefreshRepoCmd::refreshRepository( zypper, repo );
-    zypper.runtimeData().temporary_repos.push_back( repo );
-  }
   // no rpms and no other arguments either
-  else if ( positionalArgs.empty() )
+  if ( rpms_files_caps.empty() && positionalArgs.empty() )
   {
     zypper.out().error(_("No valid arguments specified.") );
     return ( ZYPPER_EXIT_ERR_INVALID_ARGS );

@@ -8,6 +8,7 @@
 #include <iostream>
 #include <sstream>
 
+#include <zypp/Arch.h>
 #include <zypp/ZYppFactory.h>
 #include <zypp/base/Logger.h>
 
@@ -19,6 +20,8 @@
 #include <zypp/RepoInfo.h>
 
 #include <zypp/PoolQuery.h>
+#include <zypp/PoolItemBest.h>
+#include <zypp/ResObject.h>
 
 #include "Zypper.h"
 #include "main.h"
@@ -30,6 +33,7 @@
 #include "global-settings.h"
 
 #include "misc.h"
+#include "PackageArgs.h"
 
 extern ZYpp::Ptr God;
 
@@ -263,7 +267,7 @@ void report_licenses( Zypper & zypper )
 // ----------------------------------------------------------------------------
 namespace
 {
-  SrcPackage::constPtr source_find( Zypper & zypper_r, const std::string & arg_r )
+  std::set<SrcPackage::constPtr> source_find( Zypper & zypper_r, const PackageSpec & spec )
   {
     /*
      * Workflow:
@@ -272,36 +276,80 @@ namespace
      * 2. else if package "arg_r" is available, return it's srcpackage if available
      * 3; else return 0
      */
-    DBG << "looking for source package: " << arg_r << endl;
-    ui::Selectable::Ptr p( ui::Selectable::get( ResKind::srcpackage, arg_r ) );
-    if ( p )
-      return asKind<SrcPackage>( p->theObj().resolvable() );
 
-    // else: try package and packages sourcepackage
-    p = ui::Selectable::get( ResKind::package, arg_r );
-    if ( p )
-    {
-      std::string name( p->theObj()->asKind<Package>()->sourcePkgName() );
-      DBG << "looking for source package of package: " << name << endl;
-      zypper_r.out().info( str::Format(_("Package '%s' has source package '%s'.")) % arg_r % name );
+    auto poolQuery = []( const Capability &cap, ResKind kind, const std::string &repoAlias, bool exact = false ) {
+      sat::Solvable::SplitIdent splid( kind, cap.detail().name() );
 
-      p = ui::Selectable::get( ResKind::srcpackage, p->theObj()->asKind<Package>()->sourcePkgName() );
-      if ( p )
-	return asKind<SrcPackage>( p->theObj().resolvable() );
+      PoolQuery q;
+      if ( exact )
+        q.setMatchExact();
       else
-	zypper_r.out().error( str::Format(_("Source package '%s' for package '%s' not found.")) % name % arg_r );
+        q.setMatchGlob();
+      q.setCaseSensitive( true );
+      q.addKind( kind );
+
+      if ( !repoAlias.empty() )
+        q.addRepo( repoAlias );
+
+      q.addDependency( sat::SolvAttr::name, splid.name().asString(),
+      // only package names (no provides)
+      cap.detail().op(), cap.detail().ed(),
+      // defaults to Rel::ANY (NOOP) if no versioned cap
+      Arch( cap.detail().arch() ) );
+      // defaults Arch_empty (NOOP) if no arch in cap
+
+      DBG << "query: " << q << endl;
+      return q;
+    };
+
+    std::set<SrcPackage::constPtr> srcPackages;
+
+    DBG << "looking for source package: " << spec.orig_str << endl;
+    PoolQuery q = poolQuery( spec.parsed_cap, ResKind::srcpackage, spec.repo_alias );
+    PoolItemBest bestSrc ( q.begin(), q.end() );
+    if ( !bestSrc.empty() ) {
+      for ( const PoolItem &srcPoolItem : bestSrc ) {
+        SrcPackage::constPtr pkg = srcPoolItem->asKind<SrcPackage>();
+        if ( pkg ) {
+          srcPackages.insert( pkg );
+        }
+      }
+    } else {
+      DBG << "looking for package: " << spec.orig_str << endl;
+      PoolQuery q = poolQuery( spec.parsed_cap, ResKind::package, spec.repo_alias );
+      PoolItemBest bestBin ( q.begin(), q.end() );
+      if ( !bestBin.empty() ) {
+        for ( const PoolItem &binPoolItem : bestBin ) {
+          Package::constPtr binaryPkg = binPoolItem->asKind<Package>();
+          if ( !binaryPkg )
+            continue;
+
+          std::string name( binaryPkg->sourcePkgName() );
+          zypper_r.out().info( str::Format(_("Package '%s' has source package '%s'.")) % binaryPkg->name() % name );
+
+          Capability pkgCap ( binaryPkg->sourcePkgName( ), Rel::EQ, binaryPkg->sourcePkgEdition() );
+          q = poolQuery( pkgCap, ResKind::srcpackage, std::string(), true );
+          if ( q.begin() != q.end() ) {
+            SrcPackage::constPtr pkg = make<SrcPackage>( *q.begin() );
+            if ( pkg )
+              srcPackages.insert( pkg );
+          } else {
+            zypper_r.out().error( str::Format(_("Source package '%s' for package '%s' not found.")) % name % binaryPkg->name() );
+          }
+        }
+      }
     }
-    else
-      zypper_r.out().error( str::Format(_("Source package '%s' not found.")) % arg_r );
 
+    //nothing found, try package , then its source package
+    if ( srcPackages.empty() )
+      DBG << "no source package found for: " << spec.orig_str << endl;
 
-    DBG << "no source package found for: " << arg_r << endl;
-    return SrcPackage::constPtr();
+    return srcPackages;
   }
 } // namespace
 // ----------------------------------------------------------------------------
 
-void build_deps_install( Zypper & zypper, const std::vector<std::string> &srcPkgs_r, bool buildDepsOnly_r )
+void build_deps_install( Zypper & zypper, const PackageSpec &spec, bool buildDepsOnly_r )
 {
   /*
    * Workflow:
@@ -309,40 +357,37 @@ void build_deps_install( Zypper & zypper, const std::vector<std::string> &srcPkg
    * 1. find the latest version or version satisfying specification.
    * 2. install the source package with ZYpp->installSrcPackage(SrcPackage::constPtr);
    */
+  std::set<SrcPackage::constPtr> srcpkgs = source_find( zypper, spec );
 
-  for ( const std::string & arg : srcPkgs_r )
+  for ( SrcPackage::constPtr srcpkg : srcpkgs )
   {
-    SrcPackage::constPtr srcpkg = source_find( zypper, arg );
+    DBG << "Injecting build requieres for " << srcpkg << endl;
 
-    if ( srcpkg )
-    {
-      DBG << "Injecting build requieres for " << srcpkg << endl;
-
-      // install build depenendcies only
-      if ( buildDepsOnly_r )
-        for_( itc, srcpkg->requires().begin(), srcpkg->requires().end() )
-        {
-          God->resolver()->addRequire( *itc );
-          DBG << "requiring: " << *itc << endl;
-        }
-      // install the source package with build deps
-      else
+    // install build depenendcies only
+    if ( buildDepsOnly_r )
+      for_( itc, srcpkg->requires().begin(), srcpkg->requires().end() )
       {
-        Capability cap( srcpkg->name(), Rel::EQ, srcpkg->edition(), ResKind::srcpackage );
-        God->resolver()->addRequire( cap );
-        DBG << "requiring: " << cap << endl;
+        God->resolver()->addRequire( *itc );
+        DBG << "requiring: " << *itc << endl;
       }
-    }
-    else if ( !zypper.config().ignore_unknown )
+    // install the source package with build deps
+    else
     {
-      zypper.setExitCode( ZYPPER_EXIT_INF_CAP_NOT_FOUND );
+      Capability cap( srcpkg->name(), Rel::EQ, srcpkg->edition(), ResKind::srcpackage );
+      God->resolver()->addRequire( cap );
+      DBG << "requiring: " << cap << endl;
     }
+  }
+
+  if ( srcpkgs.empty() && !zypper.config().ignore_unknown )
+  {
+    zypper.setExitCode( ZYPPER_EXIT_INF_CAP_NOT_FOUND );
   }
 }
 
 // ----------------------------------------------------------------------------
 
-void mark_src_pkgs( Zypper & zypper, const std::vector<std::string> &packages_r )
+void mark_src_pkgs( Zypper & zypper, const PackageSpec & spec )
 {
   /*
    * Workflow:
@@ -350,14 +395,10 @@ void mark_src_pkgs( Zypper & zypper, const std::vector<std::string> &packages_r 
    * 1. find the latest version or version satisfying specification.
    * 2. install the source package with ZYpp->installSrcPackage(SrcPackage::constPtr);
    */
+  std::set<SrcPackage::constPtr> srcpkgs = source_find( zypper, spec );
 
-  for ( const std::string & arg : packages_r )
-  {
-    SrcPackage::constPtr srcpkg = source_find( zypper, arg );
-
-    if ( srcpkg )
-      zypper.runtimeData().srcpkgs_to_install.insert( srcpkg );
-  }
+  for ( SrcPackage::constPtr srcpkg : srcpkgs )
+    zypper.runtimeData().srcpkgs_to_install.insert( srcpkg );
 }
 
 // ----------------------------------------------------------------------------

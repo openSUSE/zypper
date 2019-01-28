@@ -12,6 +12,7 @@
 #include "misc.h"
 #include "global-settings.h"
 #include "solve-commit.h"
+#include "PackageArgs.h"
 
 SourceInstallCmd::SourceInstallCmd(std::vector<std::string> &&commandAliases_r) :
   ZypperBaseCommand (
@@ -26,7 +27,7 @@ SourceInstallCmd::SourceInstallCmd(std::vector<std::string> &&commandAliases_r) 
     % "/usr/src/packages/{SPECS,SOURCES}"
     % "rpm --eval \"%{_specdir} and %{_sourcedir}\""
     ).str(),
-    ResetRepoManager | InitTarget | InitRepos
+    ResetRepoManager
   )
 { }
 
@@ -49,10 +50,6 @@ zypp::ZyppFlags::CommandGroup SourceInstallCmd::cmdOptions() const
     { "no-build-deps", 'D', ZyppFlags::NoArgument, ZyppFlags::BoolType( &that->_noBuildDeps, ZyppFlags::StoreTrue, _noBuildDeps ),
             // translators: -D, --no-build-deps
             _("Don't install build dependencies.")
-    },
-    {"download-only", 0, ZyppFlags::NoArgument, ZyppFlags::BoolType( &that->_downloadOnly, ZyppFlags::StoreTrue, _downloadOnly ),
-            // translators: --download-only
-            _("Only download the packages, do not install.")
     }
   },{
     //conflicting flags
@@ -64,7 +61,6 @@ void SourceInstallCmd::doReset()
 {
   _buildDepsOnly = false;
   _noBuildDeps   = false;
-  _downloadOnly  = false;
 }
 
 int SourceInstallCmd::execute( Zypper &zypper, const std::vector<std::string> &positionalArgs_r )
@@ -75,21 +71,36 @@ int SourceInstallCmd::execute( Zypper &zypper, const std::vector<std::string> &p
     return ( ZYPPER_EXIT_ERR_INVALID_ARGS );
   }
 
-  // if ( !copts.count("no-build-deps") ) // if target resolvables are not read, solver produces a weird result
-  load_target_resolvables( zypper );
-  load_repo_resolvables( zypper );
-  if ( zypper.exitCode() != ZYPPER_EXIT_OK )
-    return zypper.exitCode();
+  std::vector<std::string> positionalArgs = positionalArgs_r;
+  std::vector<std::string> rpm_caps = createTempRepoFromArgs( zypper, positionalArgs, true );
 
-  DownloadMode dlMode = DownloadMode::DownloadDefault;
-  if ( _downloadOnly )
-    dlMode = DownloadMode::DownloadOnly;
+  if ( rpm_caps.size() )
+    positionalArgs.insert( positionalArgs.end(), rpm_caps.begin(), rpm_caps.end() );
 
-  if ( _noBuildDeps )
-    mark_src_pkgs( zypper, positionalArgs_r );
-  else
-    build_deps_install( zypper, positionalArgs_r, _buildDepsOnly );
+  int code = defaultSystemSetup( zypper, InitTarget | InitRepos | LoadResolvables );
+  if ( code != ZYPPER_EXIT_OK )
+    return code;
 
-  solve_and_commit( zypper, Summary::DEFAULT, dlMode );
+  PackageArgs args ( positionalArgs );
+  if ( args.donts().size() ) {
+    zypper.out().error(_("Uninstalling source packages is not supported.") );
+    return ( ZYPPER_EXIT_ERR_INVALID_ARGS );
+  }
+
+  // no rpms and no other arguments either
+  if ( args.dos().empty() ) {
+    zypper.out().error(_("No valid arguments specified.") );
+    return ( ZYPPER_EXIT_ERR_INVALID_ARGS );
+  }
+
+  for ( const PackageSpec &spec : args.dos() ) {
+    if ( _noBuildDeps ) {
+      mark_src_pkgs( zypper, spec );
+    } else {
+      build_deps_install( zypper, spec, _buildDepsOnly );
+    }
+  }
+
+  solve_and_commit( zypper, Summary::DEFAULT, _dlOpts.mode() );
   return zypper.exitCode();
 }
