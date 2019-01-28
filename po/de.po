@@ -17,8 +17,8 @@ msgstr ""
 "Project-Id-Version: zypper.de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-01-23 09:24+0100\n"
-"PO-Revision-Date: 2019-01-28 17:27+0000\n"
-"Last-Translator: Franziska Weinberger <f.weinberger@gemino.de>\n"
+"PO-Revision-Date: 2019-02-02 17:07+0000\n"
+"Last-Translator: Sarah Kriesch <ada.lovelace@gmx.de>\n"
 "Language-Team: German <https://l10n.opensuse.org/projects/zypper/master/de/>"
 "\n"
 "Language: de\n"
@@ -783,7 +783,7 @@ msgstr "Ungültiger Tabellenstil %d."
 #: src/Config.cc:54
 #, c-format, boost-format
 msgid " Use an integer number from %d to %d"
-msgstr " Verwenden Sie eine Ganzzahl von %d bis %d."
+msgstr " Eine Ganzzahl von %d bis %d verwenden"
 
 #: src/Config.cc:248
 msgid "The path specified in the --root option must be absolute."
@@ -1173,9 +1173,9 @@ msgid ""
 "There is an update candidate for '%s' from vendor '%s', while the current "
 "vendor is '%s'. Use '%s' to install this candidate."
 msgstr ""
-"Es ist ein Aktualisierungskandidat für '%s' von Anbieter '%s' vorhanden. Der "
-"aktuelle Anbieter ist '%s'. Verwenden Sie '%s' zum Installieren dieses "
-"Kandidaten."
+"Es ist ein Aktualisierungskandidat für '%s' von Anbieter '%s' vorhanden, "
+"während der aktuelle Anbieter '%s' ist. Zum Installieren dieses Kandidaten '%"
+"s' verwenden."
 
 #: src/RequestFeedback.cc:132
 #, c-format, boost-format
@@ -2322,9 +2322,9 @@ msgid ""
 "supporting available hardware, languages or filesystems. Useful after having "
 "added e.g. new hardware or driver repos."
 msgstr ""
-"Wird als '%1%' aufgerufen. Schränkt das Kommando ein, sodass nur nach "
-"Paketen gesucht wird, die die verfügbare Hardware, die verfügbaren Sprachen "
-"oder Dateisysteme unterstützen. Nützlich, nachdem beispielsweise neue "
+"Wird es als '%1%' aufgerufen, schränkt das das Kommando ein, so dass nur "
+"nach Paketen gesucht wird, die die verfügbare Hardware, die verfügbaren "
+"Sprachen oder Dateisysteme unterstützen. Das ist nützlich nachdem z.B. neue "
 "Hardware oder Treiber-Repositorys hinzugefügt wurden."
 
 #. translators: command description
@@ -2981,18 +2981,18 @@ msgid ""
 "followed by a newline. Any '%s' directive in <format> is replaced by the "
 "system service name."
 msgstr ""
-"Für jeden verknüpften Systemdienst <Format> als Standardausgabe verwenden, "
+"Für jeden verknüpften Systemdienst <Format> als Standardausgabe ausgeben, "
 "gefolgt von einem Zeilenumbruch. Alle '%s'-Direktiven in <Format> werden "
 "durch den Systemdienstnamen ersetzt."
 
 #. translators: -d, --debugFile <path>
 #: src/commands/ps.cc:52
 msgid "Write debug output to file <path>."
-msgstr "Debug-Ausgabe in Datei-<Pfad> schreiben."
+msgstr "Debug-Ausgabe in Datei <Pfad> schreiben."
 
 #: src/commands/ps.cc:72 src/solve-commit.cc:450
 msgid "Check failed:"
-msgstr "Prüfung fehlerhaft:"
+msgstr "Prüfung fehlgeschlagen:"
 
 #. Here: Table output
 #: src/commands/ps.cc:127 src/solve-commit.cc:439
@@ -3971,8 +3971,7 @@ msgstr "Möchten Sie '%1%' jetzt ausführen?"
 #, boost-format
 msgid "Run '%1%' to search in not yet activated remote resources."
 msgstr ""
-"Führen Sie '%1%' aus, um noch nicht aktivierte Remote-Ressourcen zu "
-"durchsuchen."
+"'%1%' ausführen um noch nicht aktivierte Remote-Ressourcen zu durchsuchen."
 
 #. translators: command summary: search, se
 #: src/commands/search/search.cc:73
@@ -4135,36 +4134,35 @@ msgstr ""
 #. translators: -g, --category <CATEGORY>
 #: src/commands/selectpatchoptionset.cc:24
 msgid "Select patches with the specified category."
-msgstr "Wählen Sie Patches der angegebenen Kategorie aus."
+msgstr "Patches mit der angegebenen Kategorie auswählen."
 
 #. translators: --severity <SEVERITY>
 #: src/commands/selectpatchoptionset.cc:28
 msgid "Select patches with the specified severity."
-msgstr "Wählen Sie Patches mit dem angegebenen Schweregrad aus."
+msgstr "Patches mit dem angegebenen Schweregrad auswählen."
 
 #. translators: --date <YYYY-MM-DD>
 #: src/commands/selectpatchoptionset.cc:32
 msgid "Select patches issued up to, but not including, the specified date"
 msgstr ""
-"Wählen Sie Patches aus, die bis zum angegebenen Datum ausgegeben wurden, "
-"dieses aber nicht enthalten."
+"Patches auswählen, die bis zum angegebenen Datum ausgegeben wurden, dieses "
+"aber nicht enthalten"
 
 #. translators: -b, --bugzilla
 #: src/commands/selectpatchoptionset.cc:36
 msgid "Select applicable patches for the specified Bugzilla issues."
-msgstr ""
-"Wählen Sie anwendbare Patches für die angegebenen Bugzilla-Einträge aus."
+msgstr "Anwendbare Patches für die angegebenen Bugzilla-Einträge auswählen."
 
 #. translators: --cve
 #: src/commands/selectpatchoptionset.cc:41
 msgid "Select applicable patches for the specified CVE issues."
-msgstr "Wählen Sie anwendbare Patches für die angegebenen CVE-Einträge aus."
+msgstr "Anwendbare Patches für die angegebenen CVE-Einträge auswählen."
 
 #. any
 #. translators: --cve
 #: src/commands/selectpatchoptionset.cc:50
 msgid "Select issues matching the specified string."
-msgstr "Wählen Sie Einträge aus, die der angegebenen Zeichenfolge entsprechen."
+msgstr "Issues auswählen, die der angegebenen Zeichenfolge entsprechen."
 
 #: src/commands/services/add.cc:55
 #, c-format, boost-format
@@ -5050,12 +5048,12 @@ msgstr ""
 #. translators: --status
 #: src/commands/utils/source-download.cc:514
 msgid "Write a manifest file."
-msgstr "Manifestdatei schreiben."
+msgstr "Eine Manifestdatei schreiben."
 
 #. translators: --status
 #: src/commands/utils/source-download.cc:518
 msgid "Disable writing a manifest file."
-msgstr "Schreiben einer Manifestdatei deaktivieren."
+msgstr "Das Schreiben einer Manifestdatei deaktivieren."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/utils/targetos.cc:20
@@ -6536,12 +6534,12 @@ msgstr "Fehler bei der Analyse von zypper.conf:"
 #: src/utils/flags/exceptions.cc:22
 #, boost-format
 msgid "The flag %1% is not known."
-msgstr "Flag %1% ist unbekannt."
+msgstr "Das Flag %1% ist unbekannt."
 
 #: src/utils/flags/exceptions.cc:28
 #, boost-format
 msgid "The flag %1% is not compatible with argument %2% (%3%)."
-msgstr "Flag %1% ist nicht mit dem Argument %2% (%3%) kompatibel."
+msgstr "Das Flag %1% ist nicht mit dem Argument %2% (%3%) kompatibel."
 
 #: src/utils/flags/exceptions.cc:34
 #, boost-format
@@ -6551,7 +6549,7 @@ msgstr "Das Flag %1% benötigt ein Argument."
 #: src/utils/flags/exceptions.cc:40
 #, boost-format
 msgid "The flag %1% can only be used once."
-msgstr "Flag %1% kann nur einmal verwendet werden."
+msgstr "Das Flag %1% kann nur einmal verwendet werden."
 
 #: src/utils/flags/exceptions.cc:46
 #, c-format, boost-format
@@ -6565,7 +6563,7 @@ msgstr "Unbekannter Pakettyp"
 #: src/utils/flags/flagtypes.cc:100
 #, boost-format
 msgid "The flag '%1%' can only be used a maximum of %2% times."
-msgstr "Flag '%1%' kann höchstens %2%-mal verwendet werden."
+msgstr "Das Flag '%1%' kann höchstens %2%-mal verwendet werden."
 
 #: src/utils/flags/flagtypes.cc:192
 #, c-format, boost-format
