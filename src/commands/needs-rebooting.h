@@ -15,7 +15,11 @@ class NeedsRebootingCmd : public ZypperBaseCommand
 public:
   NeedsRebootingCmd ( std::vector<std::string> &&commandAliases_r );
 
-  static int checkRebootNeeded ( Zypper &zypper, const bool printMessage = false ) ;
+  /** Check and return whether a reboot is needed.
+   * Depending on \a printMessage_r an additional user message is printed never (\c false),
+   * always (\c true) or only if a reboot is actually needed (\c indeterminate).
+   */
+  static int checkRebootNeeded ( Zypper &zypper, zypp::TriBool printMessage_r = false ) ;
 
   // ZypperBaseCommand interface
 protected:
