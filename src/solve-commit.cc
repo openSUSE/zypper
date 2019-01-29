@@ -10,6 +10,7 @@
 
 #include <zypp/ZYppFactory.h>
 #include <zypp/base/Logger.h>
+#include <zypp/TriBool.h>
 #include <zypp/FileChecker.h>
 #include <zypp/base/InputStream.h>
 #include <zypp/base/IOStream.h>
@@ -464,7 +465,7 @@ static void notify_processes_using_deleted_files( Zypper & zypper )
   }
 
   zypper.out().info(" ");
-  NeedsRebootingCmd::checkRebootNeeded( zypper, true );
+  NeedsRebootingCmd::checkRebootNeeded( zypper, indeterminate );
 }
 
 static void show_update_messages( Zypper & zypper, const UpdateNotifications & messages )
