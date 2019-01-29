@@ -10,6 +10,7 @@
 #include "Zypper.h"
 
 #include <zypp/PathInfo.h>
+#include <zypp/TriBool.h>
 
 using namespace zypp;
 
@@ -25,18 +26,18 @@ NeedsRebootingCmd::NeedsRebootingCmd(std::vector<std::string> &&commandAliases_r
 )
 {}
 
-int NeedsRebootingCmd::checkRebootNeeded( Zypper &zypper , const bool printMessage )
+int NeedsRebootingCmd::checkRebootNeeded( Zypper &zypper , TriBool printMessage_r )
 {
   filesystem::Pathname rebootNeededFlag = filesystem::Pathname(zypper.config().root_dir) / "/var/run/reboot-needed";
 
   if ( filesystem::PathInfo( rebootNeededFlag ).isExist() ) {
-    if ( printMessage ) {
+    if ( ! sameTriboolState( printMessage_r, false ) ) {
       zypper.out().info( _("Core libraries or services have been updated.") );
       zypper.out().info( _("Reboot is required to ensure that your system benefits from these updates.") );
     }
     return ZYPPER_EXIT_INF_REBOOT_NEEDED;
   }
-  if ( printMessage ) {
+  if ( sameTriboolState( printMessage_r, true ) ) {
     zypper.out().info( _("No core libraries or services have been updated.") );
     zypper.out().info( _("Reboot is probably not necessary.") );
   }
