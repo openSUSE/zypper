@@ -101,7 +101,9 @@ int HelpCmd::execute( Zypper &zypper, const std::vector<std::string> &positional
       ZypperCommand cmd( cmdArg );
 
       if ( cmd.toEnum() != ZypperCommand::NONE_e ) {
-        zypper.out().info( cmd.assertCommandObject().help(), Out::QUIET );
+        ZypperBaseCommand &cmdImpl = cmd.assertCommandObject();
+        cmdImpl.reset();
+        zypper.out().info( cmdImpl.help(), Out::QUIET );
 
         if ( cmd.toEnum() == ZypperCommand::SEARCH )
           searchPackagesHintHack::callOrNotify( zypper );
