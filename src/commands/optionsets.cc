@@ -114,7 +114,8 @@ namespace
           ZYPP_THROW( ZyppFlags::InvalidValueException( opt.name, *in, str::form(_("Available download modes: %s"), "only, in-advance, in-heaps, as-needed") ) );
         }
         return;
-      }
+      },
+      ARG_MODE
     );
   }
 
