@@ -12,16 +12,16 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-01-23 09:24+0100\n"
-"PO-Revision-Date: 2018-04-26 08:47+0000\n"
-"Last-Translator: Martin Devenney <devenneymartin@gmail.com>\n"
-"Language-Team: Swedish <https://l10n.opensuse.org/projects/zypper/master/sv/"
-">\n"
+"PO-Revision-Date: 2019-02-02 17:07+0000\n"
+"Last-Translator: Sven Åhr <anders.ahr@gmail.com>\n"
+"Language-Team: Swedish <https://l10n.opensuse.org/projects/zypper/master/sv/>"
+"\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 2.18\n"
+"X-Generator: Weblate 3.3\n"
 
 #: src/SolverRequester.h:52
 #, boost-format
@@ -210,11 +210,8 @@ msgstr ""
 
 #. translators: this message is shown after showing description of the key
 #: src/callbacks/keyring.h:290
-#, fuzzy
 msgid "Do you want to reject the key, or trust always?"
-msgstr ""
-"Vill du avvisa nyckeln, ha temporärt förtroende för den eller alltid ha "
-"förtroende för den?"
+msgstr "Vill du avvisa nyckeln eller alltid ha förtroende för den?"
 
 #. translators: r/t/a stands for Reject/TrustTemporarily/trustAlways(import)
 #. translate to whatever is appropriate for your language
@@ -237,7 +234,7 @@ msgstr "r/t"
 #. The answers should be lower case letters.
 #: src/callbacks/keyring.h:318
 msgid "r/a/"
-msgstr ""
+msgstr "r/a/"
 
 #. translators: help text for the 'r' option in the 'r/t/a' prompt
 #: src/callbacks/keyring.h:324
@@ -287,11 +284,13 @@ msgid ""
 "The rpm database seems to contain old V3 version gpg keys which are "
 "meanwhile obsolete and considered insecure:"
 msgstr ""
+"rpm-databasen verkar innehålla gpg-nycklar från gamla V3-versionen som inte "
+"används längre och som inte är säkra:"
 
 #: src/callbacks/keyring.h:446
 #, boost-format
 msgid "To see details about a key call '%1%'."
-msgstr ""
+msgstr "Om du vill visa detaljer om en nyckel anropar du '%1%'."
 
 #: src/callbacks/keyring.h:450
 #, boost-format
@@ -299,6 +298,8 @@ msgid ""
 "Unless you believe the key in question is still in use, you can remove it "
 "from the rpm database calling '%1%'."
 msgstr ""
+"Såvida du inte tror att nyckeln i fråga fortfarande används kan du ta bort "
+"den från rpm-databasen med anropet '%1%'."
 
 #: src/callbacks/keyring.h:472
 #, c-format, boost-format
@@ -580,7 +581,7 @@ msgstr ""
 
 #: src/commands/commonflags.h:53
 msgid "Consider only patches which affect the package management itself."
-msgstr ""
+msgstr "Hantera endast korrigeringar som påverkar själva pakethanteringen."
 
 #: src/output/Out.h:26 src/repos.cc:125 src/repos.cc:153
 msgid "Yes"
@@ -613,12 +614,12 @@ msgstr "Fortsätt?"
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:23
 msgid "ALIAS"
-msgstr ""
+msgstr "ALIAS"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:25
 msgid "ALIAS|#|URI"
-msgstr ""
+msgstr "ALIAS|#|URI"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:27
@@ -628,22 +629,22 @@ msgstr "KATEGORI"
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:29
 msgid "DIR"
-msgstr ""
+msgstr "DIR"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:31
 msgid "FILE"
-msgstr ""
+msgstr "FILE"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:33
 msgid "FILE.repo"
-msgstr ""
+msgstr "FILE.repo"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:35
 msgid "FORMAT"
-msgstr ""
+msgstr "FORMAT"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:37
@@ -653,7 +654,7 @@ msgstr "heltal"
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:39
 msgid "PATH"
-msgstr ""
+msgstr "PATH"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:41
@@ -663,12 +664,12 @@ msgstr "ALLVARLIGHETSGRAD"
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:43
 msgid "STRING"
-msgstr ""
+msgstr "STRING"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:45
 msgid "TAG"
-msgstr ""
+msgstr "TAG"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:47
@@ -708,7 +709,7 @@ msgstr "Fel"
 
 #: src/Command.cc:90
 msgid "Invalid command"
-msgstr ""
+msgstr "Ogiltigt kommando"
 
 #: src/Command.cc:108
 msgid "Repository Management:"
@@ -755,7 +756,7 @@ msgstr "Ogiltigt tabellformat %d."
 #: src/Config.cc:54
 #, c-format, boost-format
 msgid " Use an integer number from %d to %d"
-msgstr ""
+msgstr " Använd ett heltal från %d till %d"
 
 #: src/Config.cc:248
 msgid "The path specified in the --root option must be absolute."
@@ -764,12 +765,12 @@ msgstr "Sökvägen i alternativet --root måste vara absolut."
 #. translators: --help, -h
 #: src/Config.cc:326
 msgid "Help."
-msgstr ""
+msgstr "Hjälp."
 
 #. translators: --version, -V
 #: src/Config.cc:335
 msgid "Output the version number."
-msgstr " Skriv ut versionsnumret."
+msgstr "Skriv ut versionsnumret."
 
 #. translators: --promptids
 #: src/Config.cc:347
@@ -858,6 +859,8 @@ msgstr "Ignorera okända paket."
 msgid ""
 "Terse output for machine consumption. Implies --no-abbrev and --no-color."
 msgstr ""
+"Kortfattade utdata för maskinkonsumption. Innebörd --no-abbrev och --no-"
+"color."
 
 #. translators: --reposd-dir, -D <DIR>
 #: src/Config.cc:487
@@ -967,8 +970,8 @@ msgid ""
 "Set the value of $releasever in all .repo files (default: distribution "
 "version)"
 msgstr ""
-"Ange värdet för $releasever i allal .repo-filer (standardvärde: "
-"distributionsversion)."
+"Ange värdet för $releasever i alla .repo-filer (standardvärde: "
+"distributionsversion)"
 
 #: src/Config.cc:620
 msgid "Target Options"
@@ -1134,6 +1137,8 @@ msgid ""
 "There is an update candidate for '%s' from vendor '%s', while the current "
 "vendor is '%s'. Use '%s' to install this candidate."
 msgstr ""
+"Det finns en uppdateringskandidat för '%s' från leverantören '%s', medan "
+"aktuell leverantör är '%s'. Använd '%s' för att installera denna kandidat."
 
 #: src/RequestFeedback.cc:132
 #, c-format, boost-format
@@ -1778,8 +1783,8 @@ msgstr[1] "Följande %d programfixar kräver en omstart av systemet:"
 #, c-format, boost-format
 msgid "The following package requires a system reboot:"
 msgid_plural "The following %d package require a system reboot:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Följande paket kräver systemomstart:"
+msgstr[1] "Följande %d paket kräver systemomstart:"
 
 #: src/Summary.cc:1373
 #, boost-format
@@ -2140,19 +2145,23 @@ msgstr "Lösenord"
 
 #: src/commands/conditions.cc:19
 msgid "Root privileges are required to run this command."
-msgstr ""
+msgstr "Rotprivilegier krävs för att köra det här kommandot."
 
 #: src/commands/conditions.cc:47
 msgid ""
 "This is a transactional-server, please use transactional-update to update or "
 "modify the system."
 msgstr ""
+"Det här är en transactional-server, använd transactional-update för att "
+"uppdatera eller ändra systemet."
 
 #: src/commands/conditions.cc:49
 msgid ""
 "The target filesystem is mounted as read-only. Please make sure the target "
 "filesystem is writeable."
 msgstr ""
+"Målfilsystemet är monterat som skrivskyddat. Se till att målfilsystemet är "
+"skrivbart."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/distupgrade.cc:20
@@ -2225,6 +2234,11 @@ msgid ""
 "unconditionally on small or minimal systems, as it may easily add a large "
 "number of packages."
 msgstr ""
+"Installera nyligen tillagda paket som rekommenderas av redan installerade "
+"paket. Detta kommando omvärderar rekommendationerna för alla installerade "
+"paket och fyller på systemet utefter detta. Du kanske inte vill anropa detta "
+"på mindre eller minimala system eftersom det kan lägga till ett stort antal "
+"paket."
 
 #. translators: command description, %1% is a zypper command
 #: src/commands/inrverify.cc:98
@@ -2234,6 +2248,9 @@ msgid ""
 "supporting available hardware, languages or filesystems. Useful after having "
 "added e.g. new hardware or driver repos."
 msgstr ""
+"Anropat som '%1%' begränsar det kommandot att bara titta efter paket som "
+"stöder tillgängliga maskinvaror, språk eller filsystem. Användbart efter att "
+"ha lagt till t.ex. ny maskinvara eller drivenhetsarkiv."
 
 #. translators: command description
 #: src/commands/inrverify.cc:101
@@ -2250,7 +2267,7 @@ msgstr "Välj paket efter vanligt namn, inte kapacitet."
 
 #: src/commands/installremove.cc:55
 msgid "Select packages solely by capability."
-msgstr ""
+msgstr "Välj paket endast efter prestanda."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/installremove.cc:74
@@ -2435,7 +2452,7 @@ msgid ""
 "pattern using '*' and '?' wildcard characters."
 msgstr ""
 "Lägg till ett paketlås. Ange vilka paket som ska låsas med hjälp av namn "
-"eller ett glob-mönster med jokertecknen * och ?."
+"eller ett glob-mönster med jokertecknen '*' och '?'."
 
 #: src/commands/locks/add.cc:42
 msgid "Restrict the lock to the specified repository."
@@ -2454,7 +2471,7 @@ msgstr "Det gick inte att lägga till paketlåset:"
 # =============================================================================
 #: src/commands/locks/clean.cc:16
 msgid "cleanlocks (cl)"
-msgstr ""
+msgstr "cleanlocks (cl)"
 
 #. translators: command summary
 #: src/commands/locks/clean.cc:18
@@ -2464,7 +2481,7 @@ msgstr "Ta bort lås som inte används."
 #. translators: -d, --only-duplicates
 #: src/commands/locks/clean.cc:36
 msgid "Clean only duplicate locks."
-msgstr "Ta endast bort dubbla lås."
+msgstr "Ta endast bort duplicerade lås."
 
 #. translators: -e, --only-empty
 #: src/commands/locks/clean.cc:39
@@ -2599,7 +2616,7 @@ msgstr "Det gick inte att ta bort paketlåset:"
 #. translators: command summary: needs-rebooting
 #: src/commands/needs-rebooting.cc:21
 msgid "Check if the needs-reboot flag was set."
-msgstr ""
+msgstr "kontrollera om flaggan needs-reboot var inställd."
 
 #: src/commands/needs-rebooting.cc:22
 msgid ""
@@ -2608,28 +2625,33 @@ msgid ""
 "Exit code ZYPPER_EXIT_INF_REBOOT_NEEDED indicates that a reboot is needed, "
 "otherwise the exit code is set to ZYPPER_EXIT_OK."
 msgstr ""
+"Kontrollerar om flaggan needs-reboot var inställd av en tidigare uppdatering "
+"elle rinstallation av ett källbibliotek eller en tjänst.\n"
+"Avslutningskod ZYPPER_EXIT_INF_REBOOT_NEEDED anger att det krävs en omstart, "
+"annars är avslutningskoden inställd på ZYPPER_EXIT_OK."
 
 #: src/commands/needs-rebooting.cc:34
 msgid "Core libraries or services have been updated."
-msgstr ""
+msgstr "Källbibliotek eller tjänster har uppdaterats."
 
 #: src/commands/needs-rebooting.cc:35
 msgid ""
 "Reboot is required to ensure that your system benefits from these updates."
 msgstr ""
+"Omstart krävs för att se till att systemet drar nytta av dessa uppdateringar."
 
 #: src/commands/needs-rebooting.cc:40
 msgid "No core libraries or services have been updated."
-msgstr ""
+msgstr "Inga källbibliotek eller tjänster har uppdaterats."
 
 #: src/commands/needs-rebooting.cc:41
 msgid "Reboot is probably not necessary."
-msgstr ""
+msgstr "Omstart behövs troligtvis inte."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/nullcommands.cc:17
 msgid "moo"
-msgstr ""
+msgstr "moo"
 
 #. translators: command summary
 #. translators: command description
@@ -2651,7 +2673,7 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/nullcommands.cc:37
 msgid "what-provides (wp) <CAPABILITY>"
-msgstr "what-provides (wp) <kapacitet>"
+msgstr "what-provides (wp) <CAPABILITY>"
 
 #. translators: command summary: what-provides, wp
 #: src/commands/nullcommands.cc:39
@@ -2691,7 +2713,7 @@ msgstr ""
 
 #: src/commands/optionsets.cc:33
 msgid "Don't change anything, just report what would be done."
-msgstr ""
+msgstr "Ändra inte något, rapportera bara vad som ska göras."
 
 #. translators: -r, --repo <ALIAS|#|URI>
 #: src/commands/optionsets.cc:65
@@ -2701,7 +2723,7 @@ msgstr "Arbeta endast med den angivna lagringsplatsen."
 #: src/commands/optionsets.cc:85
 #, c-format, boost-format
 msgid "Option '--%s' overrides a previously set download mode."
-msgstr ""
+msgstr "Alternativet '--%s' går förbi ett tidigare inställt nedladdningsläge."
 
 #: src/commands/optionsets.cc:114
 #, c-format, boost-format
@@ -2776,12 +2798,12 @@ msgstr "Som standard inkluderas frivilliga programfixar."
 #. translators: --with-interactive
 #: src/commands/optionsets.cc:340
 msgid "Do not skip interactive updates."
-msgstr ""
+msgstr "Hoppa inte över interaktiva uppdateringar."
 
 #. translators: --skip-interactive
 #: src/commands/optionsets.cc:344
 msgid "Skip interactive updates."
-msgstr ""
+msgstr "Hoppa över interaktiva uppdateringar."
 
 #. translators: --sort-by-name
 #: src/commands/optionsets.cc:364
@@ -2872,11 +2894,13 @@ msgid ""
 "followed by a newline. Any '%s' directive in <format> is replaced by the "
 "system service name."
 msgstr ""
+"För varje associerad systemtjänst, <format> för utskrift på standardenhet, "
+"följt av en ny rad. '%s'-direktiv i <format> ersätts av systemtjänstnamnet."
 
 #. translators: -d, --debugFile <path>
 #: src/commands/ps.cc:52
 msgid "Write debug output to file <path>."
-msgstr ""
+msgstr "Skriv felrapportdata till fil <path>."
 
 #: src/commands/ps.cc:72 src/solve-commit.cc:450
 msgid "Check failed:"
@@ -2953,7 +2977,7 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/query/info.cc:19
 msgid "info (if) [OPTIONS] <NAME> ..."
-msgstr ""
+msgstr "info (if) [OPTIONS] <NAME> ..."
 
 #. translators: command summary: info, if
 #: src/commands/query/info.cc:21
@@ -3006,7 +3030,7 @@ msgstr "Visa rekommenderar."
 #. translators: --supplements
 #: src/commands/query/info.cc:87
 msgid "Show supplements."
-msgstr ""
+msgstr "Visa tillägg."
 
 #. translators: --suggests
 #: src/commands/query/info.cc:91
@@ -3231,7 +3255,7 @@ msgstr "En lista över kända förrådstyper finns i \"%s\" och \"%s\"."
 
 #: src/commands/repos/clean.cc:16
 msgid "clean (cc) [ALIAS|#|URI] ..."
-msgstr ""
+msgstr "clean (cc) [ALIAS|#|URI] ..."
 
 #: src/commands/repos/clean.cc:17 src/commands/repos/clean.cc:18
 msgid "Clean local caches."
@@ -3326,7 +3350,7 @@ msgstr "Sökväg för MD-cache"
 
 #: src/commands/repos/list.cc:74
 msgid "repos (lr) [OPTIONS] [REPO] ..."
-msgstr ""
+msgstr "repos (lr) [OPTIONS] [REPO] ..."
 
 #: src/commands/repos/list.cc:75 src/commands/repos/list.cc:76
 msgid "List all defined repositories."
@@ -3340,7 +3364,7 @@ msgstr ""
 
 #: src/commands/repos/list.cc:118 src/repos.cc:1015
 msgid "Error reading repositories:"
-msgstr "Fel vid läsning av förråd:"
+msgstr "Fel vid läsning av lagringsplatser:"
 
 #: src/commands/repos/list.cc:144
 #, c-format, boost-format
@@ -3370,18 +3394,19 @@ msgstr "Inga arkiv definierade."
 #: src/commands/repos/list.cc:333
 msgid "Use the 'zypper addrepo' command to add one or more repositories."
 msgstr ""
-"Använd kommandot zypper addrepo för att lägga till ett eller flera arkiv."
+"Använd kommandot 'zypper addrepo' för att lägga till ett eller flera "
+"lagringsplatser."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/repos/modify.cc:24
 msgid "modifyrepo (mr) <OPTIONS> <ALIAS|#|URI>"
-msgstr "modifyrepo (mr) <alternativ> <alias|#|URI>"
+msgstr "modifyrepo (mr) <OPTIONS> <ALIAS|#|URI>"
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/repos/modify.cc:26
 #, boost-format
 msgid "modifyrepo (mr) <OPTIONS> <%1%>"
-msgstr "modifyrepo (mr) <alternativ> <%1%>"
+msgstr "modifyrepo (mr) <OPTIONS> <%1%>"
 
 #. translators: command summary
 #: src/commands/repos/modify.cc:29
@@ -3405,7 +3430,7 @@ msgstr "Det gick inte att hitta förrådet %s."
 
 #: src/commands/repos/refresh.cc:24
 msgid "refresh (ref) [ALIAS|#|URI] ..."
-msgstr ""
+msgstr "refresh (ref) [ALIAS|#|URI] ..."
 
 #. translators: command summary: refresh, ref
 #: src/commands/repos/refresh.cc:26
@@ -3491,10 +3516,9 @@ msgid "Skipping repository '%s' because of the above error."
 msgstr "Förrådet %s ignoreras på grund av felet ovan."
 
 #: src/commands/repos/refresh.cc:274
-#, fuzzy
 msgid ""
 "Some of the repositories have not been refreshed because they were not known."
-msgstr "Några av arkiven har inte uppdaterats på grund av ett fel."
+msgstr "Några av arkiven har inte uppdaterats på grund av att de är okända."
 
 #: src/commands/repos/refresh.cc:281
 msgid "Specified repositories are not enabled or defined."
@@ -3585,7 +3609,7 @@ msgstr "Lämnar förrådet '%s' oförändrat."
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/repos/rename.cc:64
 msgid "renamerepo (nr) [OPTIONS] <ALIAS|#|URI> <NEW-ALIAS>"
-msgstr ""
+msgstr "renamerepo (nr) [OPTIONS] <ALIAS|#|URI> <NEW-ALIAS>"
 
 #: src/commands/repos/rename.cc:65
 msgid "Rename specified repository."
@@ -3595,6 +3619,7 @@ msgstr "Byt namn på det angivna arkivet."
 #: src/commands/repos/rename.cc:67
 msgid "Assign new alias to the repository specified by alias, number or URI."
 msgstr ""
+"Tilldela nytt alias till den behållare som anges av alias, nummer eller URI."
 
 #: src/commands/repos/rename.cc:92
 msgid "Too few arguments. At least URI and alias are required."
@@ -3803,6 +3828,8 @@ msgid ""
 "For an extended search including not yet activated remote resources please "
 "use '%1%'."
 msgstr ""
+"För en utökad sökning inklusive fjärresurser som inte har aktiverats ännu "
+"ska du använda '%1%'."
 
 #. translator: %1% denotes a zypper command to execute. Like 'zypper search-packages'.
 #: src/commands/search/search-packages-hinthack.cc:85
@@ -3811,6 +3838,8 @@ msgid ""
 "The package providing this subcommand is currently not installed. You can "
 "install it by calling '%1%'."
 msgstr ""
+"Det paket som levererar detta delkommando är inte installerat för "
+"tillfället. Du kan installera det genom att anropa '%1%'."
 
 #: src/commands/search/search-packages-hinthack.cc:100
 #, boost-format
@@ -3818,16 +3847,18 @@ msgid ""
 "For an extended search including not yet activated remote resources you may "
 "now run '%1%'."
 msgstr ""
+"För en utökad sökning inklusive fjärresurser som inte har aktiverats ännu "
+"kan du nu köra '%1%'."
 
 #: src/commands/search/search-packages-hinthack.cc:102
 #, boost-format
 msgid "Do you want to run '%1%' now?"
-msgstr ""
+msgstr "Vill du köra '%1%' nu?"
 
 #: src/commands/search/search-packages-hinthack.cc:113
 #, boost-format
 msgid "Run '%1%' to search in not yet activated remote resources."
-msgstr ""
+msgstr "Kör '%1%' för att söka i fjärresurser som inte har aktiverats ännu."
 
 #. translators: command summary: search, se
 #: src/commands/search/search.cc:73
@@ -3896,7 +3927,7 @@ msgstr "Sök efter paket som rekommenderar söksträngarna."
 #. translators: --supplements
 #: src/commands/search/search.cc:145
 msgid "Search for packages which supplement the search strings."
-msgstr ""
+msgstr "Sök efter paket som följer söksträngarna."
 
 #. translators: --conflicts
 #: src/commands/search/search.cc:149
@@ -3983,33 +4014,34 @@ msgstr ""
 #. translators: -g, --category <CATEGORY>
 #: src/commands/selectpatchoptionset.cc:24
 msgid "Select patches with the specified category."
-msgstr ""
+msgstr "Välj korrigeringar med angiven kategori."
 
 #. translators: --severity <SEVERITY>
 #: src/commands/selectpatchoptionset.cc:28
 msgid "Select patches with the specified severity."
-msgstr ""
+msgstr "Välj korrigeringar med angiven allvarlighetsgrad."
 
 #. translators: --date <YYYY-MM-DD>
 #: src/commands/selectpatchoptionset.cc:32
 msgid "Select patches issued up to, but not including, the specified date"
 msgstr ""
+"Välj korrigeringar som utfärdats upp till, men inte inklusive, angivet datum"
 
 #. translators: -b, --bugzilla
 #: src/commands/selectpatchoptionset.cc:36
 msgid "Select applicable patches for the specified Bugzilla issues."
-msgstr ""
+msgstr "Välj tillämpliga korrigeringar för angivna Bugzilla-problem."
 
 #. translators: --cve
 #: src/commands/selectpatchoptionset.cc:41
 msgid "Select applicable patches for the specified CVE issues."
-msgstr ""
+msgstr "Välj tillämpliga korrigeringar för angivna CVE-problem."
 
 #. any
 #. translators: --cve
 #: src/commands/selectpatchoptionset.cc:50
 msgid "Select issues matching the specified string."
-msgstr ""
+msgstr "Välj problem som matchar angiven sträng."
 
 #: src/commands/services/add.cc:55
 #, c-format, boost-format
@@ -4081,7 +4113,7 @@ msgstr "Tjänsten %s har tagits bort."
 
 #: src/commands/services/list.cc:81
 msgid "services (ls) [OPTIONS]"
-msgstr ""
+msgstr "services (ls) [OPTIONS]"
 
 #: src/commands/services/list.cc:82
 msgid "List all defined services."
@@ -4124,7 +4156,7 @@ msgstr ""
 
 #: src/commands/services/modify.cc:41
 msgid "Advanced:"
-msgstr ""
+msgstr "Avancerat:"
 
 #: src/commands/services/modify.cc:43
 msgid "Add a RIS service repository to enable."
@@ -4312,7 +4344,7 @@ msgstr "Alla tjänster har uppdaterats."
 
 #: src/commands/services/remove.cc:20
 msgid "removeservice (rs) [OPTIONS] <ALIAS|#|URI>"
-msgstr ""
+msgstr "removeservice (rs) [OPTIONS] <ALIAS|#|URI>"
 
 #: src/commands/services/remove.cc:21
 msgid "Remove specified service."
@@ -4333,7 +4365,7 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/shell.cc:20
 msgid "shell (sh)"
-msgstr ""
+msgstr "shell (sh)"
 
 #. translators: command summary: shell, sh
 #: src/commands/shell.cc:22
@@ -4352,7 +4384,7 @@ msgstr "Du kör redan zypper-skalet."
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/shell.cc:52
 msgid "quit (exit, ^D)"
-msgstr ""
+msgstr "quit (exit, ^D)"
 
 #. translators: command description
 #: src/commands/shell.cc:54 src/commands/shell.cc:56
@@ -4365,7 +4397,7 @@ msgstr "Kommandot har bara effekt i zypper-skalet."
 
 #: src/commands/solveroptionset.cc:16 src/commands/solveroptionset.cc:39
 msgid "Solver options"
-msgstr ""
+msgstr "Lösaralternativ"
 
 #: src/commands/solveroptionset.cc:18
 msgid "Install also recommended packages in addition to the required ones."
@@ -4391,7 +4423,7 @@ msgstr "Tvinga inte fram en lösning vid problem utan att."
 
 #: src/commands/solveroptionset.cc:63
 msgid "Expert options"
-msgstr ""
+msgstr "Expertalternativ"
 
 #: src/commands/solveroptionset.cc:66
 msgid "Whether to allow downgrading installed resolvables."
@@ -4424,7 +4456,7 @@ msgstr "Ingen automatisk borttagning av beroenden som inte behövs."
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/sourceinstall.cc:20
 msgid "source-install (si) [OPTIONS] <NAME> ..."
-msgstr ""
+msgstr "source-install (si) [OPTIONS] <NAME> ..."
 
 #. translators: command summary: source-install, si
 #: src/commands/sourceinstall.cc:22
@@ -4593,7 +4625,7 @@ msgstr "Underkommandot %1% kan inte användas med globala  zypper-alternativ."
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/update.cc:22
 msgid "update (up) [OPTIONS] [PACKAGENAME] ..."
-msgstr ""
+msgstr "update (up) [OPTIONS] [PACKAGENAME] ..."
 
 #. translators: command summary: update, up
 #: src/commands/update.cc:24
@@ -4605,6 +4637,8 @@ msgstr "Uppdatera installerade paket till nyare versioner."
 msgid ""
 "Update all or specified installed packages with newer versions, if possible."
 msgstr ""
+"Uppdatera alla eller angivna installerade paket med nyare versioner, om det "
+"är möjligt."
 
 #: src/commands/update.cc:71 src/commands/update.cc:78
 #: src/commands/update.cc:128
@@ -4713,7 +4747,7 @@ msgstr "Paketet %s hämtas inte."
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/utils/licenses.cc:19
 msgid "licenses"
-msgstr ""
+msgstr "licenses"
 
 #. translators: command summary: licenses
 #: src/commands/utils/licenses.cc:21
@@ -4853,12 +4887,12 @@ msgstr ""
 #. translators: --status
 #: src/commands/utils/source-download.cc:514
 msgid "Write a manifest file."
-msgstr ""
+msgstr "Skriv en manifestfil."
 
 #. translators: --status
 #: src/commands/utils/source-download.cc:518
 msgid "Disable writing a manifest file."
-msgstr ""
+msgstr "Inaktivera skrivning av manifestfil."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/utils/targetos.cc:20
@@ -4900,7 +4934,7 @@ msgstr "Kort etikett: %s"
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/utils/versioncmp.cc:19
 msgid "versioncmp (vcmp) <VERSION1> <VERSION2>"
-msgstr ""
+msgstr "versioncmp (vcmp) <VERSION1> <VERSION2>"
 
 #. translators: command summary
 #: src/commands/utils/versioncmp.cc:21
@@ -4910,7 +4944,7 @@ msgstr "Jämför två versionssträngar."
 #. translators: command description
 #: src/commands/utils/versioncmp.cc:23
 msgid "Compare the versions supplied as arguments."
-msgstr "Jämför versionerna som anges i argumenten"
+msgstr "Jämför versionerna som anges i argumenten."
 
 #. translators: -m, --match
 #: src/commands/utils/versioncmp.cc:35
@@ -6305,36 +6339,36 @@ msgstr "Fel vid tolkning av zypper.conf:"
 #: src/utils/flags/exceptions.cc:22
 #, boost-format
 msgid "The flag %1% is not known."
-msgstr ""
+msgstr "Flaggan %1% är okänd."
 
 #: src/utils/flags/exceptions.cc:28
 #, boost-format
 msgid "The flag %1% is not compatible with argument %2% (%3%)."
-msgstr ""
+msgstr "Flaggan %1% är inte kompatibel med argumentet %2% (%3%)."
 
 #: src/utils/flags/exceptions.cc:34
-#, fuzzy, boost-format
+#, boost-format
 msgid "The flag %1% requires a argument."
-msgstr "Källpaketnamn är ett argument som krävs."
+msgstr "Flaggan %1% kräver ett argument."
 
 #: src/utils/flags/exceptions.cc:40
 #, boost-format
 msgid "The flag %1% can only be used once."
-msgstr ""
+msgstr "Flaggan %1% kan bara användas en gång."
 
 #: src/utils/flags/exceptions.cc:46
 #, c-format, boost-format
 msgid "%s used together with %s, which contradict each other."
-msgstr ""
+msgstr "%s används tillsammans med %s, och de motsäger varandra."
 
 #: src/utils/flags/flagtypes.cc:24
 msgid "Unknown package type"
-msgstr ""
+msgstr "Okänd pakettyp"
 
 #: src/utils/flags/flagtypes.cc:100
 #, boost-format
 msgid "The flag '%1%' can only be used a maximum of %2% times."
-msgstr ""
+msgstr "Flaggan '%1%' kan bara användas högst %2% gånger."
 
 #: src/utils/flags/flagtypes.cc:192
 #, c-format, boost-format
@@ -6347,12 +6381,12 @@ msgstr ""
 
 #: src/utils/flags/flagtypes.cc:232
 msgid "Out of range"
-msgstr ""
+msgstr "Utanför intervall"
 
 #: src/utils/flags/flagtypes.cc:234
 #, boost-format
 msgid "Unknown error while assigning the value %1% to flag %2%."
-msgstr ""
+msgstr "Okänt fel vid tilldelning av värdet %1% till flaggan %2%."
 
 #. For '-garbage' argument, with 'a', 'b', and 'e' as known options,
 #. getopt_long reports 'a', 'b', and 'e' as known options.
