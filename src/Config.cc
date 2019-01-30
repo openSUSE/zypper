@@ -570,7 +570,7 @@ std::vector<ZyppFlags::CommandGroup> Config::cliOptions()
               // translators: --plus-repo, -p <URI>
               _("Use an additional repository.")
         },
-        { "plus-content", 0, ZyppFlags::Repeatable | ZyppFlags::RequiredArgument, ZyppFlags::GenericContainerType( plusRepoFromCLI, ARG_TAG ),
+        { "plus-content", 0, ZyppFlags::Repeatable | ZyppFlags::RequiredArgument, ZyppFlags::GenericContainerType( plusContentFromCLI, ARG_TAG ),
               // translators: --plus-content <TAG>
               _("Additionally use disabled repositories providing a specific keyword. Try '--plus-content debug' to enable repos indicating to provide debug packages.")
         },
