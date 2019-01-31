@@ -613,6 +613,7 @@ void Zypper::doCommand( int cmdArgc, char **cmdArgv, int firstFlag )
 
         else if ( command() == ZypperCommand::LIST_REPOS
                     || command() == ZypperCommand::LIST_SERVICES
+                    || command() == ZypperCommand::HELP
                     || command() == ZypperCommand::VERSION_CMP
                     || command() == ZypperCommand::TARGET_OS )
           zypp_readonly_hack::IWantIt (); // #247001, #302152
