@@ -57,7 +57,7 @@ namespace {
         has_arg = optional_argument;
         break;
       default:
-        throw ZyppFlagsException( str::Format("Invalid opt.flags value for option: %1%") % opt.name );
+        throw ZyppFlagsException( str::Format("Invalid opt.flags value for option: %1%") % opt.nameStr() );
     }
 
     //we do not use the flag and val types, instead we use optind to figure out what happend
@@ -78,7 +78,7 @@ void Value::set( const CommandOption &opt, const boost::optional<std::string> in
 {
   if ( _wasSet && !(opt.flags & Repeatable) ) {
     // bsc#1123865: don't throw, just warn
-    Zypper::instance().out().warning( FlagRepeatedException(opt.name).asString() );
+    Zypper::instance().out().warning( FlagRepeatedException(opt.nameStr()).asString() );
     return;
   }
 
@@ -95,7 +95,7 @@ void Value::set( const CommandOption &opt, const boost::optional<std::string> in
   if ( !in && opt.flags & OptionalArgument ) {
       auto optVal = _defaultVal();
       if ( !optVal )
-        ZYPP_THROW( ZyppFlagsException( str::Format("BUG: Flag %1% is optional, but no default value was provided") % opt.name ) );
+        ZYPP_THROW( ZyppFlagsException( str::Format("BUG: Flag %1% is optional, but no default value was provided") % opt.nameStr() ) );
       _setter( opt, optVal );
       runPostSetHook = true;
   } else if ( in || ( !in && ( opt.flags & ArgumentTypeMask ) == NoArgument ) )  {
@@ -113,7 +113,7 @@ void Value::set( const CommandOption &opt, const boost::optional<std::string> in
   }
 
   // this line should never be reached, because the case of required argument is handled directly in parseCLI
-  ZYPP_THROW( ZyppFlagsException(str::Format("BUG: Flag %1% requires a value, but non was provided.") % opt.name ) );
+  ZYPP_THROW( ZyppFlagsException(str::Format("BUG: Flag %1% requires a value, but non was provided.") % opt.nameStr() ) );
 }
 
 void Value::neverUsed()
@@ -198,14 +198,14 @@ int parseCLI( const int argc, char * const *argv, const std::vector<CommandGroup
 
       if ( !currOpt.name.empty() ) {
         if ( !longOptIndex.insert( { currOpt.name, allOptIndex } ).second ) {
-          throw ZyppFlagsException( str::Format("Duplicate long option ''%1%") % currOpt.name );
+          throw ZyppFlagsException( str::Format("Duplicate long option %1%") % currOpt.nameStr() );
         }
         appendToLongOptions( currOpt, longopts );
       }
 
       if ( currOpt.shortName ) {
         if ( !shortOptIndex.insert( { currOpt.shortName, allOptIndex } ).second ) {
-          throw ZyppFlagsException( str::Format("Duplicate short option %1%") % currOpt.shortName );
+          throw ZyppFlagsException( str::Format("Duplicate short option %1%") % currOpt.shortNameStr() );
         }
         appendToOptString( currOpt, shortopts );
       }
@@ -283,7 +283,7 @@ int parseCLI( const int argc, char * const *argv, const std::vector<CommandGroup
       }
 
       if ( idx == -1 ) {
-        throw ZyppFlagsException( str::Format("Flag %1% (%2%) depends on unknown flag %3%") % opt.name % opt.shortName % str );
+        throw ZyppFlagsException( str::Format("Flag %1% (%2%) depends on unknown flag %3%") % opt.nameStr() % opt.shortNameStr() % str );
       }
       myDeps.insert( idx );
     }
@@ -363,7 +363,7 @@ int parseCLI( const int argc, char * const *argv, const std::vector<CommandGroup
                 WAR << "Ignoring unknown option " << conflicting << " specified as conflicting flag for " << opt.name << endl;
               } else {
                 if ( parsedValues.find( it->second ) != parsedValues.end() ) {
-                  throw ConflictingFlagsException( opt.name, conflicting );
+                  throw ConflictingFlagsException( opt.nameStr(), CommandOption::nameStr(conflicting) );
                 }
               }
             }
@@ -420,7 +420,7 @@ int parseCLI( const int argc, char * const *argv, const std::vector<CommandGroup
               auto &opt = allOpts.at( depIndex );
               if ( circDep.size() )
                 circDep += "->";
-              circDep += opt.name + "(" + opt.shortName + ")";
+              circDep += opt.nameStr() + "(" + opt.shortNameStr() + ")";
             };
 
             for ( int dep : foundSoFar )
