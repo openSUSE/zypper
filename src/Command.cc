@@ -153,7 +153,7 @@ namespace
 
       makeCmd<LocalesCmd>   ( ZypperCommand::LOCALES_e , _("Locale Management:"), { "locales", "lloc" } ),
       makeCmd<AddLocaleCmd> ( ZypperCommand::ADD_LOCALE_e , std::string(), { "addlocale", "aloc" } ),
-      makeCmd<RemoveLocaleCmd> ( ZypperCommand::REMOVE_LOCALE_e , std::string(), { "remove-locale", "rloc" } ),
+      makeCmd<RemoveLocaleCmd> ( ZypperCommand::REMOVE_LOCALE_e , std::string(), { "removelocale", "rloc" } ),
 
       makeCmd<VersionCompareCmd> ( ZypperCommand::VERSION_CMP_e , _("Other Commands:"), { "versioncmp", "vcmp" } ),
       makeCmd<TargetOSCmd> ( ZypperCommand::TARGET_OS_e , std::string(), { "targetos", "tos" } ),

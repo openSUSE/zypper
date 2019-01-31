@@ -14,7 +14,7 @@ RemoveLocaleCmd::RemoveLocaleCmd(std::vector<std::string> &&commandAliases_r)
   : ZypperBaseCommand (
       std::move( commandAliases_r ),
       // translators: command synopsis; do not translate lowercase words
-      _( "remove-locale (rloc) [OPTIONS] <LOCALE> ..." ),
+      _( "removelocale (rloc) [OPTIONS] <LOCALE> ..." ),
       _( "Remove locale(s) from requested locales." ),
       _( "Remove given locale(s) from the list of supported languages." ),
       ResetRepoManager| InitTarget | LoadResolvables

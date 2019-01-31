@@ -1453,7 +1453,7 @@ These commands give information about requested locales and the possibilty to ma
  Show corresponding packages.
 --
 
-*add-locale* (*aloc*) [OPTIONS] <LOCALE> ...::
+*addlocale* (*aloc*) [OPTIONS] <LOCALE> ...::
  Add specified locale(s) to the list of requested locales..
 +
 --
@@ -1461,7 +1461,7 @@ These commands give information about requested locales and the possibilty to ma
  Do not install corresponding packages.
 --
 
-*remove-locale* (*rloc*) [OPTIONS] <LOCALE> ...::
+*removelocale* (*rloc*) [OPTIONS] <LOCALE> ...::
  Remove specified locale(s) from the list of requested locales..
 +
 --
