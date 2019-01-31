@@ -262,6 +262,7 @@ namespace zypp
         , "/dev/"
         , "/tmp/"
         , "/proc/"
+	, "/memfd:"
       };
       for_( it, arrayBegin( black ), arrayEnd( black ) )
       {
