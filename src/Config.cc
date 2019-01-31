@@ -266,7 +266,7 @@ Config::Config()
   : repo_list_columns("anr")
   , solver_installRecommends(!ZConfig::instance().solver_onlyRequires())
   , psCheckAccessDeleted(true)
-  , do_ttyout		(true)
+  , do_ttyout		(mayUseANSIEscapes())
   , do_colors		(false)
   , color_useColors	("autodetect")
   , color_result	(namedColor("default"))
@@ -707,7 +707,6 @@ void Config::read( const std::string & file )
     if (!s.empty())
       color_useColors = s;
 
-    do_ttyout = mayUseANSIEscapes();
     do_colors = ( color_useColors == "autodetect" && hasANSIColor() ) || color_useColors == "always";
 
     ansi::Color c;
