@@ -554,6 +554,21 @@ std::string CommandOption::flagDesc( bool shortOptFirst ) const
   return optTxt;
 }
 
+
+std::string CommandOption::nameStr( const std::string & name_r )
+{ return( name_r.empty() ? name_r : "--"+name_r ); }
+
+std::string CommandOption::shortNameStr( char shortName_r )
+{
+  static char buf[] { "-n" };
+  if ( shortName_r )
+  {
+    buf[1] = shortName_r;
+    return buf;
+  }
+  return "";
+}
+
 CommandGroup::CommandGroup( std::string &&name_r, std::vector<CommandOption> &&options_r, ConflictingFlagsList &&conflictingOptions_r )
   : name ( std::move(name_r) ),
     options ( std::move(options_r) ),

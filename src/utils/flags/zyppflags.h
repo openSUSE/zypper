@@ -162,6 +162,12 @@ namespace ZyppFlags {
     std::string optionHelp () const;
     std::string flagDesc   ( bool shortOptFirst = true ) const;
 
+    static std::string nameStr( const std::string & name_r );	///< "--name" or empty string if empty
+    std::string nameStr() const { return nameStr( name ); }
+
+    static std::string shortNameStr( char shortName_r );	///< "-n" or empty string if 0
+    std::string shortNameStr() const { return shortNameStr( shortName ); }
+
     std::string name;
     char  shortName;
     int flags;
