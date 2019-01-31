@@ -1,5 +1,4 @@
-#include <boost/test/auto_unit_test.hpp>
-using boost::unit_test::test_case;
+#include "TestSetup.h"
 
 #include "utils/flags/zyppflags.h"
 #include "utils/flags/flagtypes.h"
@@ -7,6 +6,8 @@ using boost::unit_test::test_case;
 
 using namespace zypp;
 using namespace ZyppFlags;
+
+TestSetup test;	// prepare zypper and assert we have an OutputWriter
 
 std::ostream& operator<<(std::ostream& ostr, std::vector<int> const& r) {
   ostr << "{";
@@ -133,6 +134,7 @@ BOOST_AUTO_TEST_CASE( simpleOptions )
     BOOST_REQUIRE_THROW( parseCLI( sizeof(testArgs) / sizeof(char *),  ( char* const* )testArgs, { grp } ), UnknownFlagException );
   }
 
+#if 0 // Test disabled due to bsc#1123865: don't throw, just warn
   {
     //flag repeated, but is not repeatable
     resetVals();
@@ -144,6 +146,7 @@ BOOST_AUTO_TEST_CASE( simpleOptions )
 
     BOOST_REQUIRE_THROW( parseCLI( sizeof(testArgs) / sizeof(char *),  ( char* const* )testArgs, { grp } ), FlagRepeatedException );
   }
+#endif
 }
 
 BOOST_AUTO_TEST_CASE( hooks )
