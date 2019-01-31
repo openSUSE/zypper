@@ -2430,7 +2430,7 @@ msgstr ""
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/locale/removelocalecmd.cc:17
-msgid "remove-locale (rloc) [OPTIONS] <LOCALE> ..."
+msgid "removelocale (rloc) [OPTIONS] <LOCALE> ..."
 msgstr ""
 
 #: src/commands/locale/removelocalecmd.cc:18
