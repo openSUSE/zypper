@@ -1,4 +1,17 @@
 -------------------------------------------------------------------
+Thu Jan 31 17:41:21 CET 2019 - ma@suse.de
+
+- CheckAccessDeleted: Suppress reporting `/memfd:` pseudo files
+  (bsc#1123843)
+- MediaCurl: improve reporting https->http redirection errors
+- Prevent SEGV if the application sets an empty TextLocale
+- Url: don't force printing an empty authority if the schema does not
+  allow authority at all
+- Try to the missing rpmDB compat symlink in case the rpm package got
+  deleted (bsc#1122471)
+- version 17.11.1 (9)
+
+-------------------------------------------------------------------
 Fri Jan 11 10:24:33 CET 2019 - ma@suse.de
 
 - PoolItemBest: Optionally prefer not locked packages (for bsc#1113296)
