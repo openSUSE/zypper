@@ -77,7 +77,9 @@ Value::Value( DefValueFun &&defValue, SetterFun &&setter, std::string argHint )
 void Value::set( const CommandOption &opt, const boost::optional<std::string> in )
 {
   if ( _wasSet && !(opt.flags & Repeatable) ) {
-    ZYPP_THROW( FlagRepeatedException(opt.name) );
+    // bsc#1123865: don't throw, just warn
+    Zypper::instance().out().warning( FlagRepeatedException(opt.name).asString() );
+    return;
   }
 
   if ( _preWriteHook.size() ) {
