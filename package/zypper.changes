@@ -1,4 +1,20 @@
 -------------------------------------------------------------------
+Thu Jan 31 17:46:02 CET 2019 - ma@suse.de
+
+- New commands for locale management: locales addlocale removelocale
+  Inspect and manipulate the systems `requested locales`, aka. the
+  languages software packages should try support by installing
+  translations, dictionaries and tools, as far as they are available.
+- Don't throw, just warn if options are repeated (bsc#1123865)
+- Fix detection whether stdout is a tty (happened too late)
+- Fix broken --plus-content switch (fixes bsc#1123681)
+- Fix broken --replacefiles switch (fixes bsc#1123137)
+- Extend zypper source-install (fixes bsc#663358)
+- Fix inconsistent results for search (bsc#1119873)
+- Show reboot hint in zypper ps and summary (fixes bnc#1120263)
+- version 1.14.23
+
+-------------------------------------------------------------------
 Fri Jan 18 15:29:48 CET 2019 - ma@suse.de
 
 - Improve handling of partially locked packages (bsc#1113296)
