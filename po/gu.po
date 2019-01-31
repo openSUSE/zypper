@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nis\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-01-30 15:15+0100\n"
+"POT-Creation-Date: 2019-01-31 13:26+0100\n"
 "PO-Revision-Date: 2006-11-11 18:41+0530\n"
 "Last-Translator: Priyavert Sharma<priyavert.sharma@agreeya.com>\n"
 "Language-Team: AgreeYa Solutions<linux_team@agreeya.com>\n"
@@ -1727,7 +1727,7 @@ msgstr[1] " નીચેના vpnc VPN જોડાણ બનાવાશે:"
 #: src/Summary.cc:1344
 #, c-format, boost-format
 msgid "The following package requires a system reboot:"
-msgid_plural "The following %d package require a system reboot:"
+msgid_plural "The following %d packages require a system reboot:"
 msgstr[0] ""
 msgstr[1] ""
 

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper.ko\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-01-30 15:15+0100\n"
+"POT-Creation-Date: 2019-01-31 13:26+0100\n"
 "PO-Revision-Date: 2018-05-14 06:32+0000\n"
 "Last-Translator: Hwajin Kim <hwajin.kim@e4net.net>\n"
 "Language-Team: Korean <https://l10n.opensuse.org/projects/zypper/master/ko/"
@@ -1679,7 +1679,7 @@ msgstr[0] "다음 패치를 위해서는 시스템을 재부팅해야 합니다.
 #: src/Summary.cc:1344
 #, c-format, boost-format
 msgid "The following package requires a system reboot:"
-msgid_plural "The following %d package require a system reboot:"
+msgid_plural "The following %d packages require a system reboot:"
 msgstr[0] ""
 
 #: src/Summary.cc:1373

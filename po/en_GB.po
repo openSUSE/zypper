@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-01-30 15:15+0100\n"
+"POT-Creation-Date: 2019-01-31 13:26+0100\n"
 "PO-Revision-Date: 2016-05-23 12:39+0000\n"
 "Last-Translator: Sarah O'Farrell <sarah.ofarrell@vistatec.com>\n"
 "Language-Team: English (United Kingdom) <http://l10n.opensuse.org/projects/"
@@ -1722,7 +1722,7 @@ msgstr[1] "The following packages will be updated:\n"
 #: src/Summary.cc:1344
 #, c-format, boost-format
 msgid "The following package requires a system reboot:"
-msgid_plural "The following %d package require a system reboot:"
+msgid_plural "The following %d packages require a system reboot:"
 msgstr[0] ""
 msgstr[1] ""
 

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-01-30 15:15+0100\n"
+"POT-Creation-Date: 2019-01-31 13:26+0100\n"
 "PO-Revision-Date: 2018-11-02 15:00+0000\n"
 "Last-Translator: Kukuh Syafaat <syafaatkukuh@gmail.com>\n"
 "Language-Team: Indonesian <https://l10n.opensuse.org/projects/zypper/master/"
@@ -1729,7 +1729,7 @@ msgstr[0] "%d Tambalan berikut ini perlu memulai ulang sistem:"
 #: src/Summary.cc:1344
 #, c-format, boost-format
 msgid "The following package requires a system reboot:"
-msgid_plural "The following %d package require a system reboot:"
+msgid_plural "The following %d packages require a system reboot:"
 msgstr[0] ""
 
 #: src/Summary.cc:1373

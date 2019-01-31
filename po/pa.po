@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper.pa\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-01-30 15:15+0100\n"
+"POT-Creation-Date: 2019-01-31 13:26+0100\n"
 "PO-Revision-Date: 2008-11-23 08:36+0530\n"
 "Last-Translator: KDB <brar.kd@gmail.com>\n"
 "Language-Team: Panjabi <punjabi-l10n@list.sf.net>\n"
@@ -1702,7 +1702,7 @@ msgstr[1] "ਹੇਠ ਦਿੱਤੇ ਪੈਕੇਜ ਅੱਪਡੇਟ ਕੀ�
 #: src/Summary.cc:1344
 #, c-format, boost-format
 msgid "The following package requires a system reboot:"
-msgid_plural "The following %d package require a system reboot:"
+msgid_plural "The following %d packages require a system reboot:"
 msgstr[0] ""
 msgstr[1] ""
 

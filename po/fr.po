@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper.fr\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-01-30 15:15+0100\n"
+"POT-Creation-Date: 2019-01-31 13:26+0100\n"
 "PO-Revision-Date: 2019-01-26 10:30+0000\n"
 "Last-Translator: Antoine Belvire <antoine.belvire@opensuse.org>\n"
 "Language-Team: French <https://l10n.opensuse.org/projects/zypper/master/fr/"
@@ -1852,9 +1852,9 @@ msgstr[0] "Le correctif suivant nécessite un redémarrage du système :"
 msgstr[1] "Les %d correctifs suivants nécessitent un redémarrage du système :"
 
 #: src/Summary.cc:1344
-#, c-format, boost-format
+#, fuzzy, c-format, boost-format
 msgid "The following package requires a system reboot:"
-msgid_plural "The following %d package require a system reboot:"
+msgid_plural "The following %d packages require a system reboot:"
 msgstr[0] "Le paquet suivant requiert un redémarrage du système :"
 msgstr[1] "Les %d paquets suivants requièrent un redémarrage du système :"
 
