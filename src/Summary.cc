@@ -1342,7 +1342,7 @@ void Summary::writeRebootNeeded( std::ostream & out )
                           count ), static_cast<int>( count ) );
     else if ( kind == ResKind::package )
       return str::form(PL_("The following package requires a system reboot:",
-                           "The following %d package require a system reboot:",
+                           "The following %d packages require a system reboot:",
                           count ), static_cast<int>( count ) );
     return std::string();
   };
