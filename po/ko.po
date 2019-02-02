@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: zypp.ko\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-08-03 11:09+0200\n"
-"PO-Revision-Date: 2019-01-24 19:41+0000\n"
+"PO-Revision-Date: 2019-02-02 22:17+0000\n"
 "Last-Translator: Hwajin Kim <hwajin.kim@e4net.net>\n"
 "Language-Team: Korean <https://l10n.opensuse.org/projects/libzypp/master/ko/>"
 "\n"
@@ -3960,20 +3960,20 @@ msgstr[0] "%d(24시간 내 만료)"
 #. translator: %1% is a gpg key ID like 3DBDC284
 #. %2% is a cache directories path
 #: zypp/RepoInfo.cc:513
-#, boost-format, fuzzy
+#, boost-format
 msgid "Looking for gpg key ID %1% in cache %2%."
 msgstr "%2% 캐시에서 gpg 키 ID %1%을(를) 검색합니다."
 
 #. translator: %1% is a gpg key ID like 3DBDC284
 #. %2% is a repositories name
 #: zypp/RepoInfo.cc:541
-#, boost-format, fuzzy
+#, boost-format
 msgid "Looking for gpg key ID %1% in repository %2%."
 msgstr "%2% 리포지토리에서 gpg 키 ID %1%을(를) 검색합니다."
 
 #. translator: %1% is a repositories name
 #: zypp/RepoInfo.cc:565
-#, boost-format, fuzzy
+#, boost-format
 msgid "Repository %1% does not define additional 'gpgkey=' URLs."
 msgstr "%1% 리포지토리에서 추가 'gpgkey=' URL을 정의하지 않습니다."
 
@@ -4385,7 +4385,7 @@ msgid "Timeout exceeded when accessing '%s'."
 msgstr "'%s'에 액세스할 때 제한 시간이 초과되었습니다."
 
 #: zypp/media/MediaException.cc:195
-#, boost-format, c-format, fuzzy
+#, boost-format, c-format
 msgid "Downloaded data exceeded the expected filesize '%s' of '%s'."
 msgstr "다운로드한 데이터가 예상 파일 크기 '%s'/'%s'을(를) 초과했습니다."
 

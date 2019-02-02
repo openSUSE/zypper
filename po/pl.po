@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-08-03 11:09+0200\n"
-"PO-Revision-Date: 2019-01-25 20:07+0000\n"
+"PO-Revision-Date: 2019-02-02 22:17+0000\n"
 "Last-Translator: Ewelina Michalowska <ewelina.michalowska@stgambit.com>\n"
 "Language-Team: Polish <https://l10n.opensuse.org/projects/libzypp/master/pl/>"
 "\n"
@@ -3774,7 +3774,7 @@ msgstr[2] "(wygasa w ciągu %d dni)"
 #: zypp/RepoInfo.cc:513
 #, boost-format
 msgid "Looking for gpg key ID %1% in cache %2%."
-msgstr "Wyszukiwanie identyfikatora %1% klucza gpg w buforze %2%."
+msgstr "Wyszukiwanie identyfikatora %1% klucza gpg w pamięci podręcznej %2%."
 
 #. translator: %1% is a gpg key ID like 3DBDC284
 #. %2% is a repositories name
@@ -3854,7 +3854,7 @@ msgstr "Budowanie pamięci podręcznej repozytorium '%s'"
 #: zypp/RepoManager.cc:1316
 #, c-format, boost-format
 msgid "Can't create cache at %s - no writing permissions."
-msgstr "Nie można utworzyć pamięci podręcznej w %s — brak uprawnień do zapisu."
+msgstr "Nie można utworzyć pamięci podręcznej w %s - brak uprawnień do zapisu."
 
 #: zypp/RepoManager.cc:1381
 #, c-format, boost-format
