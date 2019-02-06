@@ -100,9 +100,13 @@ public:
   const ByteCount & inCache() const		{ return _incache; }
   const ByteCount & installedSizeChange() const	{ return _inst_size_change; }
 
-  bool needMachineReboot() const			{ return _need_reboot; }
-
-  bool needPkgMgrRestart() const			{ return _need_restart; }
+  /** The exposed needMachineReboot value causing ZYPPER_EXIT_INF_REBOOT_NEEDED considers patches only (zypper#237)
+   * Packages cause a summary hint but will not lead to a non-zero return value.
+   */
+  bool needMachineReboot() const		{ return _need_reboot_patch; }
+  /** The exposed needPkgMgrRestart value causing ZYPPER_EXIT_INF_RESTART_NEEDED considers patches only (zypper#237)
+   */
+  bool needPkgMgrRestart() const		{ return _need_restart; }
 
 
   void dumpTo( std::ostream & out );
@@ -125,8 +129,9 @@ private:
   bool _force_no_color;
   bool _download_only;
 
-  bool _need_reboot;
-  bool _need_restart;
+  bool _need_reboot_patch;	// need_reboot caused by a patch
+  bool _need_reboot_nonpatch;	// need_reboot caused by something not a patch
+  bool _need_restart;		// by now patch specific
 
   ByteCount _todownload;
   ByteCount _incache;
