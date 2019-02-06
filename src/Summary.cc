@@ -76,7 +76,8 @@ typedef std::map<Resolvable::Kind, std::set<ResObject::constPtr, ResNameCompare>
 void Summary::readPool( const ResPool & pool )
 {
   // reset stats
-  _need_reboot = false;
+  _need_reboot_patch = false;
+  _need_reboot_nonpatch = false;
   _need_restart = false;
   _inst_pkg_total = 0;
 
@@ -115,7 +116,7 @@ void Summary::readPool( const ResPool & pool )
         // set the 'need reboot' flag
         if ( patch->rebootSuggested() )
 	{
-          _need_reboot = true;
+          _need_reboot_patch = true;
 	  _rebootNeeded[ResKind::patch].insert( ResPair( nullptr, patch ) );
 	}
         else if ( patch->restartSuggested() )
@@ -130,7 +131,7 @@ void Summary::readPool( const ResPool & pool )
         if ( it->isKind( ResKind::package ) ) {
           Package::constPtr package = asKind<Package>( it->resolvable() );
           if ( package->isNeedreboot() ) {
-            _need_reboot = true;
+            _need_reboot_nonpatch = true;
             _rebootNeeded[ResKind::package].insert( ResPair( nullptr, package ) );
           }
         }
@@ -1577,7 +1578,7 @@ void Summary::dumpTo( std::ostream & out )
     // patch command (auto)restricted to update stack patches
     Zypper::instance().out().notePar( 4, _("Package manager restart required. (Run this command once again after the update stack got updated)") );
   }
-  if ( _need_reboot )
+  if ( _need_reboot_patch || _need_reboot_nonpatch )
   {   Zypper::instance().out().notePar( 4, _("System reboot required.") ); }
 
   if ( !_ctc.empty() )
