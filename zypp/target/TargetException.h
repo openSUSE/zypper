@@ -51,6 +51,8 @@ namespace zypp
     class TargetAbortedException : public TargetException
     {
     public:
+      TargetAbortedException( );
+
       /** Ctor taking message.
        * Use \ref ZYPP_THROW to throw exceptions.
       */

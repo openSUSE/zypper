@@ -14,6 +14,7 @@
 #include <iostream>
 
 #include "zypp/target/TargetException.h"
+#include "zypp/base/Gettext.h"
 
 using namespace std;
 
@@ -23,9 +24,14 @@ namespace zypp
   namespace target {
   /////////////////////////////////////////////////////////////////
 
+    TargetAbortedException::TargetAbortedException()
+      : TargetAbortedException ( _("Installation has been aborted as directed.") )
+    { }
+
     std::ostream & TargetAbortedException::dumpOn( std::ostream & str ) const
     {
-      return str << "Installation aborted by user";
+        //call base implementation, do not hardcode a string, do not blame user ( fixes bnc#978193 )
+        return TargetException::dumpOn( str );
     }
 
 

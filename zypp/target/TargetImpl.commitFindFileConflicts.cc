@@ -163,7 +163,7 @@ namespace zypp
       }
       catch ( const AbortRequestException & e )
       {
-	TargetAbortedException excpt( N_("Installation has been aborted as directed.") );
+	TargetAbortedException excpt;
 	excpt.remember( e );
 	ZYPP_THROW( excpt );
       }
