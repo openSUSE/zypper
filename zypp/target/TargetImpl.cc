@@ -1251,7 +1251,7 @@ namespace zypp
 	  if ( ! report->show( patch ) )
 	  {
 	    WAR << "commit aborted by the user" << endl;
-	    ZYPP_THROW( TargetAbortedException( N_("Installation has been aborted as directed.") ) );
+	    ZYPP_THROW( TargetAbortedException( ) );
           }
         }
       }
@@ -1305,7 +1305,7 @@ namespace zypp
 		it->stepStage( sat::Transaction::STEP_ERROR );
                 miss = true;
                 WAR << "commit cache preload aborted by the user" << endl;
-                ZYPP_THROW( TargetAbortedException( N_("Installation has been aborted as directed.") ) );
+                ZYPP_THROW( TargetAbortedException( ) );
                 break;
               }
               catch ( const SkipRequestException & exp )
@@ -1662,7 +1662,7 @@ namespace zypp
 
       if ( abort )
       {
-        ZYPP_THROW( TargetAbortedException( N_("Installation has been aborted as directed.") ) );
+        ZYPP_THROW( TargetAbortedException( ) );
       }
     }
 

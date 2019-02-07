@@ -9,4 +9,4 @@ build
 .externalToolBuilders
 .settings
 *flymake.h.gch
-*.user
+CMakeLists.txt.user*
