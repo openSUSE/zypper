@@ -1,4 +1,16 @@
 -------------------------------------------------------------------
+Thu Feb  7 12:34:14 CET 2019 - ma@suse.de
+
+- Stay with legacy behavior and return ZYPPER_EXIT_INF_REBOOT_NEEDED
+  only for patches. We don't extend this return code to packages,
+  although they may also carry the 'reboot-needed' attribute. The
+  preferred way to test whether the system needs to be rebooted is
+  `zypper needs-rebooting`. (openSUSE/zypper#237)
+- Skip repository on error (bsc#1123967)
+- Adapt testcase as repeated options lo longer throw (bsc#1123865)
+- version 1.14.24
+
+-------------------------------------------------------------------
 Thu Jan 31 17:46:02 CET 2019 - ma@suse.de
 
 - New commands for locale management: locales addlocale removelocale
