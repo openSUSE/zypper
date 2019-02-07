@@ -1902,7 +1902,7 @@ std::vector<std::string> createTempRepoFromArgs( Zypper &zypper, std::vector<std
         if ( header )
         {
           std::string nvrcap =
-            TMP_RPM_REPO_ALIAS ":srcpackage:" +
+            TMP_RPM_REPO_ALIAS ":" +
             header->tag_name() + "=" +
             str::numstring(header->tag_epoch()) + ":" +
             header->tag_version() + "-" +
