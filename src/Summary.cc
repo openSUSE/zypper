@@ -1548,6 +1548,13 @@ void Summary::dumpTo( std::ostream & out )
     unsetViewOption( SHOW_SUGGESTED );
   }
 
+  // bsc#993025: Suppress some information if verbosity is set to quiet
+  if ( zypper.config().verbosity == Out::QUIET )
+  {
+    unsetViewOption( SHOW_LOCKS );
+    unsetViewOption( SHOW_NOT_UPDATED );
+  }
+
   if ( _viewop & SHOW_LOCKS )
     writeLocked( out );
   if ( _viewop & SHOW_NOT_UPDATED )
