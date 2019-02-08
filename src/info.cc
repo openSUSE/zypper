@@ -324,9 +324,10 @@ void printPkgInfo(Zypper & zypper, const ui::Selectable & s , const PrintInfoOpt
   PropertyTable p;
   printCommonData( theone, p );
 
-  // if running on SUSE Linux Enterprise, report unsupported packages
-  if ( runningOnEnterprise() )
-    p.add( _("Support Level"),	asUserString( theone->asKind<Package>()->vendorSupport() ) );
+  //bnc#764147 Show Support Status always if not unknown, not only on SLE
+  VendorSupportOption supportOpt = theone->asKind<Package>()->vendorSupport();
+  if ( runningOnEnterprise() || supportOpt != VendorSupportOption::VendorSupportUnknown )
+    p.add( _("Support Level"),	asUserString( supportOpt ) );
 
   // translators: property name; short; used like "Name: value"
   p.add( _("Installed Size"),	theone.installSize() );
