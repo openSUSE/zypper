@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-01-23 09:24+0100\n"
-"PO-Revision-Date: 2019-02-02 17:07+0000\n"
+"PO-Revision-Date: 2019-02-11 11:58+0000\n"
 "Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
 "Language-Team: Slovak <https://l10n.opensuse.org/projects/zypper/master/sk/>"
 "\n"
@@ -1131,6 +1131,8 @@ msgid ""
 "There is an update candidate for '%s' from vendor '%s', while the current "
 "vendor is '%s'. Use '%s' to install this candidate."
 msgstr ""
+"Existuje kandidát na aktualizáciu '%s' od dodávateľa '%s', pričom súčasný "
+"dodávateľ je '%s'. Použiť '%s' pre inštaláciu tohto kandidáta."
 
 #: src/RequestFeedback.cc:132
 #, c-format, boost-format
@@ -1856,9 +1858,9 @@ msgstr[2] "Nasledujúcich %d opráv si vyžaduje reštart systému:"
 #, c-format, boost-format
 msgid "The following package requires a system reboot:"
 msgid_plural "The following %d package require a system reboot:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Nasledujúci balík vyžaduje reštart systému:"
+msgstr[1] "Nasledujúce %d balíky vyžadujú reštart systému:"
+msgstr[2] "Nasledujúcich %d balíkov vyžaduje reštart systému:"
 
 #: src/Summary.cc:1373
 #, boost-format
@@ -2352,7 +2354,7 @@ msgstr "Vybrať balíky podľa názvu, nie podľa schopnosti."
 
 #: src/commands/installremove.cc:55
 msgid "Select packages solely by capability."
-msgstr ""
+msgstr "Vyberte balíky výlučne podľa schopnosti."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/installremove.cc:74
