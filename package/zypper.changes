@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Mon Feb 11 12:54:44 CET 2019 - ma@suse.de
+
+- Fix installing plain rpm files with `zypper in` (bsc#1124897)
+- Show only required info in the summary in quiet mode (bsc#993025)
+- version 1.14.25
+
+-------------------------------------------------------------------
 Thu Feb  7 12:34:14 CET 2019 - ma@suse.de
 
 - Stay with legacy behavior and return ZYPPER_EXIT_INF_REBOOT_NEEDED
