@@ -1127,7 +1127,7 @@ namespace zypp
 	    {
 	      if ( info.alias() == (*it).alias() )
 	      {
-		RepoInfo modifiedrepo = info;
+		RepoInfo modifiedrepo = *it;
 		modifiedrepo.setType( repokind );
 		modifyRepository( info.alias(), modifiedrepo );
 		break;
