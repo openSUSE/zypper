@@ -115,7 +115,7 @@ namespace searchPackagesHintHack
       }
       zypper_r.out().gap();
 
-      return( callSP == true );
+      return bool(callSP);
     }
 
     /** Forward the search request to search-packages subcommand. */

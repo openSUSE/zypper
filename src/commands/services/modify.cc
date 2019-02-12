@@ -146,14 +146,14 @@ int ModifyServiceCmd::modifyService( Zypper & zypper, const std::string & alias 
     {
       if ( enable != srv.enabled() )
         changed_enabled = true;
-      srv.setEnabled( enable );
+      srv.setEnabled( bool(enable) );
     }
 
     if ( !indeterminate(autoref) )
     {
       if ( autoref != srv.autorefresh() )
         changed_autoref = true;
-      srv.setAutorefresh( autoref );
+      srv.setAutorefresh( bool(autoref) );
     }
 
     const std::string &name = _commonProperties._name;
