@@ -17,8 +17,8 @@ msgstr ""
 "Project-Id-Version: zypper.de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-01-23 09:24+0100\n"
-"PO-Revision-Date: 2019-02-02 17:07+0000\n"
-"Last-Translator: Sarah Kriesch <ada.lovelace@gmx.de>\n"
+"PO-Revision-Date: 2019-02-14 00:43+0000\n"
+"Last-Translator: Sakuhl Lakuhl <2012gdwu@web.de>\n"
 "Language-Team: German <https://l10n.opensuse.org/projects/zypper/master/de/>"
 "\n"
 "Language: de\n"
@@ -58,7 +58,7 @@ msgid ""
 "File '%1%' is the repositories master index file. It ensures the integrity "
 "of the whole repo."
 msgstr ""
-"Die Datei '%1%' ist die Master Index Datei des Repositorys. Sie stellt die "
+"Die Datei '%1%' ist die Master-Index-Datei des Repositories. Sie stellt die "
 "Integrität des gesamten Repositorys sicher."
 
 #: src/callbacks/keyring.h:46
@@ -67,8 +67,8 @@ msgid ""
 "trustworthy anymore! You should not continue unless you know it's safe."
 msgstr ""
 "Wir können nicht überprüfen, ob jemand diese Datei verändert hat, daher ist "
-"es möglich, das sie nicht mehr vertrauenswürdig ist! Sie sollten nur "
-"fortfahren wenn Sie wissen, das die Datei sicher ist."
+"es möglich, dass sie nicht mehr vertrauenswürdig ist! Sie sollten nur "
+"fortfahren wenn Sie wissen, dass die Datei sicher ist."
 
 #: src/callbacks/keyring.h:51
 msgid ""
@@ -87,7 +87,7 @@ msgstr "Repository:"
 
 #: src/callbacks/keyring.h:81
 msgid "Key Name:"
-msgstr "Name des Schlüssels:"
+msgstr "Schlüsselname:"
 
 #: src/callbacks/keyring.h:82
 msgid "Key Fingerprint:"
@@ -119,21 +119,21 @@ msgstr "Der GPG-Signierungsschlüssel für Datei '%1%' ist abgelaufen."
 msgid "The gpg key signing file '%1%' will expire in %2% day."
 msgid_plural "The gpg key signing file '%1%' will expire in %2% days."
 msgstr[0] ""
-"Der GPG-Schlüssel, welcher die Datei '%1%' signiert hat wird in %2% Tag "
+"Der GPG-Schlüssel, der die Datei '%1%' signiert hat, wird in einem Tag "
 "ablaufen."
 msgstr[1] ""
-"Der GPG-Schlüssel, welcher die Datei '%1%' signiert hat wird in %2% Tagen "
+"Der GPG-Schlüssel, der die Datei '%1%' signiert hat, wird in %2% Tagen "
 "ablaufen."
 
 #: src/callbacks/keyring.h:142
 #, c-format, boost-format
 msgid "Accepting an unsigned file '%s'."
-msgstr "Eine unsignierte Datei '%s' akzeptieren."
+msgstr "Akzeptiere eine unsignierte Datei '%s'."
 
 #: src/callbacks/keyring.h:146
 #, c-format, boost-format
 msgid "Accepting an unsigned file '%s' from repository '%s'."
-msgstr "Eine unsignierte Datei '%s' aus Repository '%s' wird akzeptiert."
+msgstr "Akzeptiere eine unsignierte Datei '%s' aus Repository '%s'."
 
 #. translator: %1% is a file name
 #: src/callbacks/keyring.h:156
@@ -163,16 +163,15 @@ msgstr "Datei '%s' aus Repository '%s' ist unsigniert. Weiter?"
 #, c-format, boost-format
 msgid "Accepting file '%s' signed with an unknown key '%s'."
 msgstr ""
-"Die Datei '%s', die mit dem unbekannten Schlüssel '%s' signiert ist, wird "
-"akzeptiert."
+"Akzeptiere Datei '%s', die mit dem unbekannten Schlüssel '%s' signiert ist."
 
 #: src/callbacks/keyring.h:207
 #, c-format, boost-format
 msgid ""
 "Accepting file '%s' from repository '%s' signed with an unknown key '%s'."
 msgstr ""
-"Datei '%s' aus Repository '%s', die mit einem unbekannten Schlüssel '%s' "
-"signiert wurde, wird akzeptiert."
+"Akzeptiere Datei '%s' aus Repository '%s', die mit einem unbekannten "
+"Schlüssel '%s' signiert wurde."
 
 #. translator: %1% is a file name, %2% is a gpg key ID
 #: src/callbacks/keyring.h:216
@@ -316,8 +315,8 @@ msgid ""
 "Unless you believe the key in question is still in use, you can remove it "
 "from the rpm database calling '%1%'."
 msgstr ""
-"Ohne dass Sie glauben, dass der Schlüssel in der Frage auch in Verwendung "
-"ist, können Sie ihn aus der rpm-Datenbank mit dem Aufruf '%1%' löschen."
+"Falls Sie wissen, dass der Schlüssel nicht mehr verwendet wird, können Sie "
+"ihn aus der RPM-Datenbank mit dem Aufruf '%1%' löschen."
 
 #: src/callbacks/keyring.h:472
 #, c-format, boost-format
@@ -440,7 +439,7 @@ msgstr "Fehler beim Überprüfen der Signatur"
 
 #: src/callbacks/repo.h:237
 msgid "Accepting package despite the error."
-msgstr "Das Paket trotz des Fehlers akzeptieren."
+msgstr "Akzeptiere Paket trotz des Fehlers."
 
 #. TranslatorExplanation speaking of a script - "Running: script file name (package name, script dir)"
 #: src/callbacks/rpm.h:184
@@ -473,7 +472,7 @@ msgstr "Installation von %s fehlgeschlagen:"
 #. TranslatorExplanation A progressbar label
 #: src/callbacks/rpm.h:383
 msgid "Checking for file conflicts:"
-msgstr "Überprüfung auf Dateikonflikte läuft:"
+msgstr "Suche nach Dateikonflikte läuft:"
 
 #. TranslatorExplanation %1%(commandline option)
 #: src/callbacks/rpm.h:417
