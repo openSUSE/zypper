@@ -171,7 +171,7 @@ static bool show_problems( Zypper & zypper )
     TriBool stopnow = show_problem( zypper, *probPtr, todo );
     if ( !indeterminate( stopnow ) )
     {
-      retry = stopnow;
+      retry = bool(stopnow);
       break;
     }
   }
@@ -239,10 +239,10 @@ static void set_force_resolution( Zypper & zypper )
 
   DBG << "force resolution: " << force_resolution << endl;
   std::ostringstream s;
-  s << _("Force resolution:") << " " << asYesNo( force_resolution );
+  s << _("Force resolution:") << " " << asYesNo( bool(force_resolution) );
   zypper.out().info(s.str(), Out::HIGH);
 
-  God->resolver()->setForceResolve( force_resolution );
+  God->resolver()->setForceResolve( bool(force_resolution) );
 }
 
 static void set_clean_deps( Zypper & zypper )
@@ -305,17 +305,17 @@ static void set_solver_flags( Zypper & zypper )
   const auto &solverSettings = SolverSettings::instance();
   if ( zypper.command() == ZypperCommand::DIST_UPGRADE )
   {
-    if ( !indeterminate( solverSettings._allowDowngrade ) ) God->resolver()->dupSetAllowDowngrade( solverSettings._allowDowngrade );
-    if ( !indeterminate( solverSettings._allowNameChange ) ) God->resolver()->dupSetAllowNameChange( solverSettings._allowNameChange );
-    if ( !indeterminate( solverSettings._allowArchChange ) ) God->resolver()->dupSetAllowArchChange( solverSettings._allowArchChange );
-    if ( !indeterminate( solverSettings._allowVendorChange ) ) God->resolver()->dupSetAllowVendorChange( solverSettings._allowVendorChange );
+    if ( !indeterminate( solverSettings._allowDowngrade ) ) God->resolver()->dupSetAllowDowngrade( bool(solverSettings._allowDowngrade) );
+    if ( !indeterminate( solverSettings._allowNameChange ) ) God->resolver()->dupSetAllowNameChange( bool(solverSettings._allowNameChange) );
+    if ( !indeterminate( solverSettings._allowArchChange ) ) God->resolver()->dupSetAllowArchChange( bool(solverSettings._allowArchChange) );
+    if ( !indeterminate( solverSettings._allowVendorChange ) ) God->resolver()->dupSetAllowVendorChange( bool(solverSettings._allowVendorChange) );
   }
   else
   {
-    if ( !indeterminate( solverSettings._allowDowngrade ) ) God->resolver()->setAllowDowngrade( solverSettings._allowDowngrade );
-    if ( !indeterminate( solverSettings._allowNameChange ) ) God->resolver()->setAllowNameChange( solverSettings._allowNameChange );
-    if ( !indeterminate( solverSettings._allowArchChange ) ) God->resolver()->setAllowArchChange( solverSettings._allowArchChange );
-    if ( !indeterminate( solverSettings._allowVendorChange ) ) God->resolver()->setAllowVendorChange( solverSettings._allowVendorChange );
+    if ( !indeterminate( solverSettings._allowDowngrade ) ) God->resolver()->setAllowDowngrade( bool(solverSettings._allowDowngrade) );
+    if ( !indeterminate( solverSettings._allowNameChange ) ) God->resolver()->setAllowNameChange( bool(solverSettings._allowNameChange) );
+    if ( !indeterminate( solverSettings._allowArchChange ) ) God->resolver()->setAllowArchChange( bool(solverSettings._allowArchChange) );
+    if ( !indeterminate( solverSettings._allowVendorChange ) ) God->resolver()->setAllowVendorChange( bool(solverSettings._allowVendorChange) );
   }
 }
 

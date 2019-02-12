@@ -329,7 +329,7 @@ bool InteractiveUpdatesOptionSet::skipInteractive() const
 {
   bool skip_interactive = false;
   if ( !indeterminate( _withInteractive ) )
-    skip_interactive = ! _withInteractive;
+    skip_interactive = ! bool(_withInteractive);
   // bnc #497711
   else if ( Zypper::instance().config().non_interactive )
     skip_interactive = true;

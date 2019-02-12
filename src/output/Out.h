@@ -1005,7 +1005,7 @@ public:
     _progress.noSend();	// suppress ~ProgressData final report
     if ( indeterminate( _error ) )
       _error = ( _progress.reportValue() != 100 && _progress.reportPercent() );
-    _out.progressEnd( _progressId, outLabel( _progress.name() ), _error );
+    _out.progressEnd( _progressId, outLabel( _progress.name() ), bool(_error) );
   }
 
   /** Immediately print the progress bar not waiting for a new trigger. */

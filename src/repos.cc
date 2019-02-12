@@ -1330,7 +1330,7 @@ void add_repo_by_url( Zypper & zypper,
     repo.setPriority( repoProps._priority );
 
   if ( !indeterminate( repoProps._keepPackages ) )
-    repo.setKeepPackages( repoProps._keepPackages );
+    repo.setKeepPackages( bool(repoProps._keepPackages) );
 
   RepoInfo::GpgCheck gpgCheck = repoProps._gpgCheck;
   if ( gpgCheck != RepoInfo::GpgCheck::indeterminate )
@@ -1409,13 +1409,13 @@ void add_repo_from_file( Zypper & zypper,
       repo.setName( opts._name );
 
     if ( !indeterminate(opts._enable) )
-      repo.setEnabled( opts._enable );
+      repo.setEnabled( bool(opts._enable) );
 
     if ( !indeterminate( opts._enableAutoRefresh) )
-      repo.setAutorefresh( opts._enableAutoRefresh );
+      repo.setAutorefresh( bool(opts._enableAutoRefresh) );
 
     if ( !indeterminate( repoProps._keepPackages ) )
-      repo.setKeepPackages( repoProps._keepPackages );
+      repo.setKeepPackages( bool(repoProps._keepPackages) );
 
     if ( gpgCheck != RepoInfo::GpgCheck::indeterminate )
       repo.setGpgCheck( gpgCheck );
@@ -1571,21 +1571,21 @@ void modify_repo( Zypper & zypper, const std::string & alias, const RepoServiceC
     {
       if ( enable != repo.enabled() )
         changed_enabled = true;
-      repo.setEnabled( enable );
+      repo.setEnabled( bool(enable) );
     }
 
     if ( !indeterminate(autoref) )
     {
       if ( autoref != repo.autorefresh())
         changed_autoref = true;
-      repo.setAutorefresh( autoref );
+      repo.setAutorefresh( bool(autoref) );
     }
 
     if ( !indeterminate(keepPackages) )
     {
       if ( keepPackages != repo.keepPackages() )
         changed_keeppackages = true;
-      repo.setKeepPackages( keepPackages );
+      repo.setKeepPackages( bool(keepPackages) );
     }
 
     if ( gpgCheck != RepoInfo::GpgCheck::indeterminate )
