@@ -1057,13 +1057,15 @@ void clean_repos(Zypper & zypper , std::vector<std::string> specificRepos, Clean
     {
       const RepoInfo & repo( *rit );
 
+      bool explicitelySpecified = false;
+
       if ( !specified.empty() )
       {
         bool found = false;
         for_( it, specified.begin(), specified.end() )
           if ( it->alias() == repo.alias() )
           {
-            found = true;
+            explicitelySpecified = found = true;
             break;
           }
 
@@ -1085,7 +1087,7 @@ void clean_repos(Zypper & zypper , std::vector<std::string> specificRepos, Clean
 	}
         if( clean_raw_metadata )
         {
-            if ( ! repo.url().schemeIsVolatile()  )	// cd/dvd
+          if ( ( clean_all && explicitelySpecified ) || ! repo.url().schemeIsVolatile()  )	// cd/dvd
             {
                 zypper.out().info( str::Format(_("Cleaning raw metadata cache for '%s'.")) % repo.asUserString(),
 				   Out::HIGH );
