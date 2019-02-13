@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-01-23 09:24+0100\n"
-"PO-Revision-Date: 2019-02-13 20:54+0000\n"
-"Last-Translator: Faruk Eryılmaz <frkerylmz@gmail.com>\n"
+"PO-Revision-Date: 2019-02-13 23:34+0000\n"
+"Last-Translator: Murat Servan Kahraman <muratservan@outlook.com>\n"
 "Language-Team: Turkish <https://l10n.opensuse.org/projects/zypper/master/tr/>"
 "\n"
 "Language: tr\n"
@@ -37,11 +37,11 @@ msgid ""
 "signature can lead to a corrupted system and in extreme cases even to a "
 "system compromise."
 msgstr ""
-"İmzalanmış veriler, verilerin imzalanmasından sonra alıcının veriler "
-"üzerinde herhangi bir değişiklik yapılmadığını doğrulamasını sağlar. "
-"İmzalanmamış, yanlış imzalanmış veya bilinmeyen kaynak tarafından imzalanmış "
-"veriler, sistemin bozulmasına, hatta aşırı durumlarda sistemin kötü niyetli "
-"kişilerce ele geçirilmesine neden olur."
+"Verileri imzalamak alıcının verilerin imzalanmasından sonra veriler üzerinde "
+"herhangi bir değişiklik yapılmadığını doğrulamasını sağlar. İmzalanmamış, "
+"yanlış imzalanmış veya bilinmeyen kaynak tarafından imzalanmış veriler "
+"sistemin bozulmasına, hatta aşırı durumlarda sistemin kötü niyetli kişilerce "
+"ele geçirilmesine neden olur."
 
 #. translator: %1% is a file name
 #: src/callbacks/keyring.h:40
@@ -237,7 +237,7 @@ msgstr "r/t"
 #. The answers should be lower case letters.
 #: src/callbacks/keyring.h:318
 msgid "r/a/"
-msgstr ""
+msgstr "r/d"
 
 #. translators: help text for the 'r' option in the 'r/t/a' prompt
 #: src/callbacks/keyring.h:324
@@ -477,7 +477,7 @@ msgstr[1] "%1% dosya çakışması tespit edildi:"
 
 #: src/callbacks/rpm.h:443
 msgid "Conflicting files will be replaced."
-msgstr ""
+msgstr "Çakışan dosyalar değiştirilecek."
 
 #. TranslatorExplanation Problem description before asking whether to "Continue? [yes/no] (no):"
 #: src/callbacks/rpm.h:449
@@ -693,7 +693,7 @@ msgstr "Hata"
 
 #: src/Command.cc:90
 msgid "Invalid command"
-msgstr ""
+msgstr "Geçersiz komut"
 
 #: src/Command.cc:108
 msgid "Repository Management:"
@@ -717,7 +717,7 @@ msgstr "Sorgulanıyor:"
 
 #: src/Command.cc:146
 msgid "Package Locks:"
-msgstr ""
+msgstr "Paket Kilitleri:"
 
 #: src/Command.cc:151
 msgid "Other Commands:"
@@ -778,7 +778,7 @@ msgstr ""
 #. translators: --quiet, -q
 #: src/Config.cc:381
 msgid "Suppress normal output, print only error messages."
-msgstr ""
+msgstr "Normal çıktıyı gizle, sadece hata iletilerini yazdır."
 
 #. translators: --verbose, -v
 #: src/Config.cc:389
@@ -810,10 +810,13 @@ msgid "Do not ask anything, use default answers automatically."
 msgstr "Hiçbir şey sorma, varsayılan yanıtları otomatik olarak kullan."
 
 #: src/Config.cc:433
+#, fuzzy
 msgid ""
 "Patches having the flag rebootSuggested set will not be treated as "
 "interactive."
 msgstr ""
+"rebootSuggested bayrağına sahip yamalara etkileşimliymiş gibi "
+"davranılmayacak."
 
 #. translators: --non-interactive-include-reboot-patches
 #: src/Config.cc:437
@@ -1076,7 +1079,7 @@ msgstr "Bir yama bulunamadı."
 #: src/RequestFeedback.cc:84
 #, c-format, boost-format
 msgid "No package matching '%s' is installed."
-msgstr ""
+msgstr "'%s' ile eşleşen yüklü paket yok."
 
 #
 # clients/inst_sw_select.ycp:195
