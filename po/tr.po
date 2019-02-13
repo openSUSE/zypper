@@ -10,7 +10,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-01-23 09:24+0100\n"
 "PO-Revision-Date: 2019-02-13 23:34+0000\n"
-"Last-Translator: Murat Servan Kahraman <muratservan@outlook.com>\n"
+"Last-Translator: Faruk Eryılmaz <frkerylmz@gmail.com>\n"
 "Language-Team: Turkish <https://l10n.opensuse.org/projects/zypper/master/tr/>"
 "\n"
 "Language: tr\n"
@@ -83,19 +83,19 @@ msgstr "Anahtar Adı:"
 
 #: src/callbacks/keyring.h:82
 msgid "Key Fingerprint:"
-msgstr ""
+msgstr "Anahtar Parmak İzi:"
 
 #: src/callbacks/keyring.h:83
 msgid "Key Created:"
-msgstr ""
+msgstr "Anahtar Oluşturma Tarihi:"
 
 #: src/callbacks/keyring.h:84
 msgid "Key Expires:"
-msgstr ""
+msgstr "Anahtar Son Geçerlilik:"
 
 #: src/callbacks/keyring.h:86
 msgid "Subkey:"
-msgstr ""
+msgstr "Alt Anahtar:"
 
 #: src/callbacks/keyring.h:87
 msgid "Rpm Name:"
