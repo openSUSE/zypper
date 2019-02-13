@@ -9,16 +9,16 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-01-23 09:24+0100\n"
-"PO-Revision-Date: 2018-12-18 10:47+0000\n"
-"Last-Translator: Murat Servan Kahraman <muratservan@outlook.com>\n"
-"Language-Team: Turkish <https://l10n.opensuse.org/projects/zypper/master/tr/"
-">\n"
+"PO-Revision-Date: 2019-02-13 20:54+0000\n"
+"Last-Translator: Faruk Eryılmaz <frkerylmz@gmail.com>\n"
+"Language-Team: Turkish <https://l10n.opensuse.org/projects/zypper/master/tr/>"
+"\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 3.2.2\n"
+"X-Generator: Weblate 3.3\n"
 
 #: src/SolverRequester.h:52
 #, boost-format
@@ -37,6 +37,11 @@ msgid ""
 "signature can lead to a corrupted system and in extreme cases even to a "
 "system compromise."
 msgstr ""
+"İmzalanmış veriler, verilerin imzalanmasından sonra alıcının veriler "
+"üzerinde herhangi bir değişiklik yapılmadığını doğrulamasını sağlar. "
+"İmzalanmamış, yanlış imzalanmış veya bilinmeyen kaynak tarafından imzalanmış "
+"veriler, sistemin bozulmasına, hatta aşırı durumlarda sistemin kötü niyetli "
+"kişilerce ele geçirilmesine neden olur."
 
 #. translator: %1% is a file name
 #: src/callbacks/keyring.h:40
