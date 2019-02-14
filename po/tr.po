@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-01-23 09:24+0100\n"
-"PO-Revision-Date: 2019-02-13 23:34+0000\n"
-"Last-Translator: Faruk Eryılmaz <frkerylmz@gmail.com>\n"
+"PO-Revision-Date: 2019-02-14 11:21+0000\n"
+"Last-Translator: Murat Servan Kahraman <muratservan@outlook.com>\n"
 "Language-Team: Turkish <https://l10n.opensuse.org/projects/zypper/master/tr/>"
 "\n"
 "Language: tr\n"
@@ -3866,10 +3866,13 @@ msgstr ""
 
 #. translators: -v, --verbose
 #: src/commands/search/search.cc:195
+#, fuzzy
 msgid ""
 "Like --details, with additional information where the search has matched "
 "(useful for search in dependencies)."
 msgstr ""
+"--details gibi, aramanın nereyle eşleştiği ek bilgisiyle birlikte ("
+"bağımlılıklar içinde arama yaparken kullanışlıdır)."
 
 #: src/commands/search/search.cc:289 src/repos.cc:773
 #, c-format, boost-format
@@ -3953,11 +3956,13 @@ msgstr "Yeni bir hizmet ekle."
 
 #: src/commands/services/add.cc:104
 msgid "Add a repository index service to the system."
-msgstr ""
+msgstr "Sisteme bir depo dizinleme hizmeti ekle."
 
 #: src/commands/services/add.cc:118
 msgid "The type of service is always autodetected. This option is ignored."
 msgstr ""
+"Hizmetin türü daima otomatik olarak tespit edilir. Bu seçenek göz ardı "
+"edildi."
 
 #: src/commands/services/common.cc:37
 #, fuzzy
@@ -4010,6 +4015,8 @@ msgstr "Tanımlı hizmetleri listele."
 #, c-format, boost-format
 msgid "No services defined. Use the '%s' command to add one or more services."
 msgstr ""
+"Tanımlı hizmet yok. Bir ya da daha fazla hizmet eklemek için '%s' komutunu "
+"kullanın."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/services/modify.cc:18
@@ -4161,7 +4168,7 @@ msgstr "Bir geri dönüşüm noktası bulunamadı."
 #: src/commands/services/refresh.cc:89
 #, c-format, boost-format
 msgid "Use '%s' to get the list of defined services."
-msgstr ""
+msgstr "Tanımlı hizmetlerin listesini almak için '%s' komutunu kullanın."
 
 #: src/commands/services/refresh.cc:95
 msgid "refresh-services (refs) [OPTIONS]"
@@ -4232,7 +4239,7 @@ msgstr "Belirtilen hizmeti kaldır."
 
 #: src/commands/services/remove.cc:22
 msgid "Remove specified repository index service from the system."
-msgstr ""
+msgstr "Belirtilen depo dizinleme hizmetini sistemden kaldır."
 
 # clients/rc_config_step1.ycp:253
 #. translators: %s is the supplied command line argument which
@@ -4254,8 +4261,9 @@ msgstr "Çoklu komutları tek seferde kabul et."
 
 #. translators: command description
 #: src/commands/shell.cc:24
+#, fuzzy
 msgid "Enter the zypper command shell."
-msgstr ""
+msgstr "zypper komut kabuğuna giriş yap."
 
 #: src/commands/shell.cc:40
 msgid "You already are running zypper's shell."
@@ -4303,7 +4311,7 @@ msgstr ""
 
 #: src/commands/solveroptionset.cc:63
 msgid "Expert options"
-msgstr ""
+msgstr "Uzman seçenekler"
 
 #: src/commands/solveroptionset.cc:66
 msgid "Whether to allow downgrading installed resolvables."
@@ -4377,7 +4385,7 @@ msgstr ""
 #: src/commands/subcommand.cc:296
 #, boost-format
 msgid "cannot exec %1% (%2%)"
-msgstr ""
+msgstr "%1% çalıştırılamıyor (%2%)"
 
 #. translators: %1% - command name or path
 #. translators: %2% - system error message
@@ -4448,12 +4456,14 @@ msgid ""
 "Using zypper global-options together with subcommands, as well as\n"
 "executing subcommands in '%1%' is currently not supported.\n"
 msgstr ""
+"zypper evrensel seçeneklerini alt komutlarla birlikle kullanmak, alt "
+"komutları '%1%' içinde çalıştırmak şu an desteklenmiyor.\n"
 
 #. translators: headline of an enumeration; %1% is a directory name
 #: src/commands/subcommand.cc:439
 #, boost-format
 msgid "Available zypper subcommands in '%1%'"
-msgstr ""
+msgstr "'%1%' içindeki mevcut zypper alt komutları"
 
 #. translators: headline of an enumeration
 #: src/commands/subcommand.cc:444
@@ -4475,7 +4485,7 @@ msgstr ""
 #. translators: command summary: subcommand
 #: src/commands/subcommand.cc:485
 msgid "Lists available subcommands."
-msgstr ""
+msgstr "Mevcut alt komutları listeler."
 
 #. Currently no concept how to handle global options and ZYPPlock
 #: src/commands/subcommand.cc:582
@@ -4500,9 +4510,10 @@ msgstr "Yüklü paketleri daha yeni sürümlerle güncelle."
 
 #. translators: command description
 #: src/commands/update.cc:26
+#, fuzzy
 msgid ""
 "Update all or specified installed packages with newer versions, if possible."
-msgstr ""
+msgstr "Tüm ya da belirtilen yüklü paketleri mümkünse yeni sürümlerle güncelle."
 
 #: src/commands/update.cc:71 src/commands/update.cc:78
 #: src/commands/update.cc:128
@@ -4590,9 +4601,9 @@ msgid "Not downloading anything..."
 msgstr "Hiçbir şey indirilmiyor..."
 
 #: src/commands/utils/download.cc:308
-#, c-format, boost-format
+#, boost-format, c-format, fuzzy
 msgid "Error downloading package '%s'."
-msgstr ""
+msgstr "'%s' paketi indirilirken hata."
 
 #: src/commands/utils/download.cc:322
 #, c-format, boost-format
@@ -4627,7 +4638,7 @@ msgstr ""
 #: src/commands/utils/source-download.cc:226
 #: src/commands/utils/source-download.cc:261
 msgid "Failed to read download directory"
-msgstr ""
+msgstr "İndirme dizinini okuma başarısız oldu"
 
 #: src/commands/utils/source-download.cc:231
 msgid "Scanning download directory"
