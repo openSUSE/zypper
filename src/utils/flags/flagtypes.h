@@ -116,7 +116,7 @@ Value GenericContainerType  ( Container<T> &target_r, std::string hint = std::st
   return Value (
     noDefaultValue,
     [ &target_r, sep ] ( const CommandOption &opt, const boost::optional<std::string> &in ) {
-      if ( !in || in->empty() ) ZYPP_THROW(MissingArgumentException(opt.name)); //value required
+      if ( !in ) ZYPP_THROW(MissingArgumentException(opt.name)); //value required
 
       auto it = std::inserter ( target_r, target_r.end() );
       if ( !sep.empty() ) {
