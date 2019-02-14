@@ -340,8 +340,11 @@ int parseCLI( const int argc, char * const *argv, const std::vector<CommandGroup
         if ( index >= 0 ) {
 
           boost::optional<std::string> arg;
-          if ( optarg && strlen(optarg) ) {
-            arg = std::string(optarg);
+          if ( optarg ) {
+            if ( strlen (optarg ))
+              arg = std::string(optarg);
+            else
+              arg = std::string();
           }
 
           CommandOption &opt = allOpts[index];
