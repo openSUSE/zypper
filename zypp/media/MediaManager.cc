@@ -88,7 +88,15 @@ namespace zypp
 
           if ( !desired )
           {
-	    desired = verifier->isDesiredMedia(handler);
+            try {
+              desired = verifier->isDesiredMedia(handler);
+            } catch ( const zypp::Exception &e ) {
+                ZYPP_CAUGHT( e );
+
+                media::MediaNotDesiredException newEx ( handler->url() );
+                newEx.remember( e );
+                ZYPP_THROW( newEx );
+            }
 
             if( !desired )
             {
