@@ -108,19 +108,7 @@ bool Out::progressFilter()
 
 std::string Out::zyppExceptionReport(const Exception & e)
 {
-  std::ostringstream s;
-  // The Exception history is a stack! So Exception::asUserHistory() prints:
-  //   This is bad!          <- Exception::asUserString()
-  //   History:            -+
-  //    - top level error   |<- Exception::historyAsString()
-  //    - mid level error   |
-  //    - first error      -+
-  if (verbosity() > Out::NORMAL)
-    s << e.asUserHistory();
-  else
-    s << e.asUserString();
-
-  return s.str();
+  return e.asUserString();
 }
 
 void Out::searchResult( const Table & table_r )
