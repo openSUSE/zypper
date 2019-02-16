@@ -23,16 +23,16 @@ msgstr ""
 "Project-Id-Version: zypper.fi\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-01-23 09:24+0100\n"
-"PO-Revision-Date: 2018-10-20 13:02+0000\n"
+"PO-Revision-Date: 2019-02-18 10:01+0000\n"
 "Last-Translator: Tommi Nieminen <software@legisign.org>\n"
-"Language-Team: Finnish <https://l10n.opensuse.org/projects/zypper/master/fi/"
-">\n"
+"Language-Team: Finnish <https://l10n.opensuse.org/projects/zypper/master/fi/>"
+"\n"
 "Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 2.18\n"
+"X-Generator: Weblate 3.3\n"
 
 #: src/SolverRequester.h:52
 #, boost-format
@@ -599,6 +599,7 @@ msgstr "Mahdollistaa pakettien päivittämisen myös vanhempaan versioon."
 #: src/commands/commonflags.h:53
 msgid "Consider only patches which affect the package management itself."
 msgstr ""
+"Käsittele vain korjaukset, jotka vaikuttavat paketinhallintaan itseensä."
 
 #: src/output/Out.h:26 src/repos.cc:125 src/repos.cc:153
 msgid "Yes"
@@ -725,7 +726,7 @@ msgstr "Virhe"
 
 #: src/Command.cc:90
 msgid "Invalid command"
-msgstr ""
+msgstr "Virheellinen komento"
 
 #: src/Command.cc:108
 msgid "Repository Management:"
@@ -772,7 +773,7 @@ msgstr "Virheellinen taulukon tyyli %d."
 #: src/Config.cc:54
 #, c-format, boost-format
 msgid " Use an integer number from %d to %d"
-msgstr ""
+msgstr " Käytä kokonaislukua väliltä %d–%d"
 
 #: src/Config.cc:248
 msgid "The path specified in the --root option must be absolute."
@@ -875,7 +876,7 @@ msgstr "Jätä huomiotta tuntemattomat paketit."
 #: src/Config.cc:463
 msgid ""
 "Terse output for machine consumption. Implies --no-abbrev and --no-color."
-msgstr ""
+msgstr "Lyhyt tuloste konekäyttöön. Sisältää --no-abbrev ja --no-color."
 
 #. translators: --reposd-dir, -D <DIR>
 #: src/Config.cc:487
@@ -1153,6 +1154,8 @@ msgid ""
 "There is an update candidate for '%s' from vendor '%s', while the current "
 "vendor is '%s'. Use '%s' to install this candidate."
 msgstr ""
+"Paketille ”%s” on julkaisuehdokas tarjoajalta ”%s”, mutta nykyinen tarjoaja "
+"on ”%s”. Asenna tämä ehdokas komennolla ”%s”."
 
 #: src/RequestFeedback.cc:132
 #, c-format, boost-format
@@ -1803,8 +1806,8 @@ msgstr[1] ""
 #, c-format, boost-format
 msgid "The following package requires a system reboot:"
 msgid_plural "The following %d package require a system reboot:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Seuraava paketti vaatii käynnistämään järjestelmän uudestaan:"
+msgstr[1] "Seuraavat %d pakettia vaativat käynnistämään järjestelmän uudestaan:"
 
 #: src/Summary.cc:1373
 #, boost-format
@@ -2166,13 +2169,15 @@ msgstr "Salasana"
 
 #: src/commands/conditions.cc:19
 msgid "Root privileges are required to run this command."
-msgstr ""
+msgstr "Tämän komennon suorittaminen vaatii pääkäyttäjäoikeudet."
 
 #: src/commands/conditions.cc:47
 msgid ""
 "This is a transactional-server, please use transactional-update to update or "
 "modify the system."
 msgstr ""
+"Tämä on transactional-server: käytä transactional-update-komentoa "
+"järjestelmän päivittämiseen tai muuttamiseen."
 
 #: src/commands/conditions.cc:49
 msgid ""
@@ -2254,6 +2259,11 @@ msgid ""
 "unconditionally on small or minimal systems, as it may easily add a large "
 "number of packages."
 msgstr ""
+"Asenna jo asennettujen pakettien suosittelemat, äskettäin lisätyt paketit. "
+"Pohjimmiltaan komento arvioi asennettujen pakettien suositukset uudestaan ja "
+"asentaa järjestelmän sen mukaisesti. Et halua kutsua tätä ehdoitta pienissä "
+"tai vähimmäisjärjestelmissä, koska se voi helposti lisätä suuren joukon "
+"paketteja."
 
 #. translators: command description, %1% is a zypper command
 #: src/commands/inrverify.cc:98
@@ -2263,6 +2273,9 @@ msgid ""
 "supporting available hardware, languages or filesystems. Useful after having "
 "added e.g. new hardware or driver repos."
 msgstr ""
+"Muoto ”%1%” rajoittaa komennon etsimään vain saatavilla olevaa laitteistoa, "
+"kieliä tai tiedostojärjestelmiä tukevia paketeja. Hyödyllinen esim. uuden "
+"laitteen tai ajurilähteen lisäämisen jälkeen."
 
 #. translators: command description
 #: src/commands/inrverify.cc:101
@@ -2277,7 +2290,7 @@ msgstr "Valitse paketit ainoastaan nimen perusteella."
 
 #: src/commands/installremove.cc:55
 msgid "Select packages solely by capability."
-msgstr ""
+msgstr "Valitse paketit vain suorituskyvyn mukaan."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/installremove.cc:74
@@ -2407,7 +2420,7 @@ msgstr "Yhtään virheetöntä valintaa ei määritetty."
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/listpatches.cc:16
 msgid "list-patches (lp) [OPTIONS]"
-msgstr ""
+msgstr "list-patches (lp) [VALITSIMET]"
 
 #. translators: command summary: list-updates, lu
 #: src/commands/listpatches.cc:18 src/commands/listupdates.cc:18
@@ -2417,12 +2430,12 @@ msgstr "Listaa saatavilla olevat päivitykset."
 #. translators: command description
 #: src/commands/listpatches.cc:20
 msgid "List all applicable patches."
-msgstr ""
+msgstr "Luettele kaikki mahdolliset korjaukset."
 
 #. translators: -a, --all
 #: src/commands/listpatches.cc:31
 msgid "List all patches, not only applicable ones."
-msgstr ""
+msgstr "Luettele kaikki korjaukset, ei vain sopivia."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/listupdates.cc:16
@@ -2480,7 +2493,7 @@ msgstr "Virhe lukittaessa pakettia:"
 # =============================================================================
 #: src/commands/locks/clean.cc:16
 msgid "cleanlocks (cl)"
-msgstr ""
+msgstr "cleanlocks (cl)"
 
 #. translators: command summary
 #: src/commands/locks/clean.cc:18
@@ -2516,9 +2529,8 @@ msgid "Name"
 msgstr "Nimi"
 
 #: src/commands/locks/list.cc:137
-#, fuzzy
 msgid "Matches"
-msgstr "Korjauspäivitykset"
+msgstr "Osumat"
 
 #. translators: Table column header
 #. translators: type (general header)
@@ -2548,21 +2560,18 @@ msgstr "(mikä tahansa)"
 
 #. translators: property name; short; used like "Name: value"
 #: src/commands/locks/list.cc:195
-#, fuzzy
 msgid "Keep installed"
-msgstr "ei asennettu"
+msgstr "Säilytä asennus"
 
 #. translators: property name; short; used like "Name: value"
 #: src/commands/locks/list.cc:203
-#, fuzzy
 msgid "Do not install"
-msgstr "ei asennettu"
+msgstr "Älä asenna"
 
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
 #: src/commands/locks/list.cc:256
-#, fuzzy
 msgid "locks (ll) [OPTIONS]"
-msgstr "näyttää kaikki valinnat"
+msgstr "locks (ll) [VALITSIMET]"
 
 #: src/commands/locks/list.cc:257
 msgid "List current package locks."
@@ -2570,11 +2579,11 @@ msgstr "Näyttää listan lukituksista."
 
 #: src/commands/locks/list.cc:285
 msgid "Show the number of resolvables matched by each lock."
-msgstr ""
+msgstr "Näytä kutakin lukkoa vastaavien ratkottavien määrä."
 
 #: src/commands/locks/list.cc:286
 msgid "List the resolvables matched by each lock."
-msgstr ""
+msgstr "Luettele kutakin lukkoa vastaavat ratkottavat."
 
 #: src/commands/locks/list.cc:300
 msgid "Error reading the locks file:"
@@ -2616,11 +2625,11 @@ msgid "No lock has been removed."
 msgstr "Lukituksia ei poistettu."
 
 #: src/commands/locks/remove.cc:98
-#, fuzzy, c-format
+#, c-format
 msgid "%zu lock has been successfully removed."
 msgid_plural "%zu locks have been successfully removed."
-msgstr[0] "Lukon %zu poistaminen onnistui."
-msgstr[1] "%zu lukkoa poistettiin onnistuneesti."
+msgstr[0] "%zu lukon poistaminen onnistui."
+msgstr[1] "%zu lukon poistaminen onnistui."
 
 #: src/commands/locks/remove.cc:105
 msgid "Problem removing the package lock:"
@@ -2629,7 +2638,7 @@ msgstr "Virhe pakettilukon poistamisessa:"
 #. translators: command summary: needs-rebooting
 #: src/commands/needs-rebooting.cc:21
 msgid "Check if the needs-reboot flag was set."
-msgstr ""
+msgstr "Tarkista, asetettiinko needs-reboot-lippu."
 
 #: src/commands/needs-rebooting.cc:22
 msgid ""
@@ -2638,28 +2647,33 @@ msgid ""
 "Exit code ZYPPER_EXIT_INF_REBOOT_NEEDED indicates that a reboot is needed, "
 "otherwise the exit code is set to ZYPPER_EXIT_OK."
 msgstr ""
+"Tarkistaanko, asettiko ydinkirjaston tai -palvelun aiempi päivitys tai "
+"asennus needs-reboot-lippua.\n"
+"Paluukoodi ZYPPER_EXIT_INF_REBOOT_NEEDED osoittaa, että uudelleenkäynnistys "
+"vaaditaan, muuten paluukoodi on ZYPPER_EXIT_OK."
 
 #: src/commands/needs-rebooting.cc:34
 msgid "Core libraries or services have been updated."
-msgstr ""
+msgstr "Ydinkirjastoja tai -palveluja on päivitetty."
 
 #: src/commands/needs-rebooting.cc:35
 msgid ""
 "Reboot is required to ensure that your system benefits from these updates."
 msgstr ""
+"Uudelleenkäynnistys vaaditaan päivitysten saamiseksi järjestelmän käyttöön."
 
 #: src/commands/needs-rebooting.cc:40
 msgid "No core libraries or services have been updated."
-msgstr ""
+msgstr "Ei päivitetty ydinkirjastoja tai -palveluja."
 
 #: src/commands/needs-rebooting.cc:41
 msgid "Reboot is probably not necessary."
-msgstr ""
+msgstr "Uudelleenkäynnistys ei liene tarpeen."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/nullcommands.cc:17
 msgid "moo"
-msgstr ""
+msgstr "moo"
 
 #. translators: command summary
 #. translators: command description
@@ -2720,7 +2734,7 @@ msgstr "Tällä komennolla on tyhmä täytäntöönpano joka palauttaa aina 0."
 
 #: src/commands/optionsets.cc:33
 msgid "Don't change anything, just report what would be done."
-msgstr ""
+msgstr "Älä muuta mitään, kerro vain mitä tehtäisiin."
 
 #. translators: -r, --repo <ALIAS|#|URI>
 #: src/commands/optionsets.cc:65
@@ -2730,7 +2744,7 @@ msgstr "Käyttää vain määritettyä asennuslähdettä."
 #: src/commands/optionsets.cc:85
 #, c-format, boost-format
 msgid "Option '--%s' overrides a previously set download mode."
-msgstr ""
+msgstr "Valitsin ”--%s” ohittaa aiemmin asetetun lataustilan."
 
 #: src/commands/optionsets.cc:114
 #, c-format, boost-format
@@ -2813,13 +2827,13 @@ msgstr "Ohita vuorovaikutteiset päivitykset."
 #. translators: --sort-by-name
 #: src/commands/optionsets.cc:364
 msgid "Sort packages by name (default)."
-msgstr ""
+msgstr "Lajittele paketit nimen mukaan (oletus)."
 
 #. translators: --sort-by-repo
 #. translators: --sort-by-catalog
 #: src/commands/optionsets.cc:374 src/commands/optionsets.cc:385
 msgid "Sort packages by repository."
-msgstr ""
+msgstr "Lajittele paketit asennuslähteen mukaan."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/patch.cc:24
@@ -2842,11 +2856,14 @@ msgid ""
 "is ignored, if the patch command must update the update stack first. Can not "
 "be combined with --updatestack-only."
 msgstr ""
+"Yritä lisäksi päivittää kaikki paketit, joita korjaus ei koske. Valisin "
+"ohitetaan, jos korjauskomennon on ensin päivitettävä päivityspino. Ei voida "
+"yhdistää valitsimeen --updatestack-only."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/patchcheck.cc:17
 msgid "patch-check (pchk) [OPTIONS]"
-msgstr ""
+msgstr "patch-check (pchk) [VALITSIMET]"
 
 #. translators: command summary: patch-check, pchk
 #: src/commands/patchcheck.cc:19
@@ -2859,26 +2876,23 @@ msgid ""
 "Display stats about applicable patches. The command returns 100 if needed "
 "patches were found, 101 if there is at least one needed security patch."
 msgstr ""
+"Näytä sopivien korjausten tilastot. Komento palauttaa 100, jos tarvittavia "
+"korjauksia löytyi, 101 jos joukossa on vähintään yksi tarvittava "
+"turvallisuuskorjaus."
 
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
 #: src/commands/ps.cc:27
-#, fuzzy
 msgid "ps [OPTIONS]"
-msgstr "näyttää kaikki valinnat"
+msgstr "ps [VALITSIMET]"
 
 #. translators: command description
 #: src/commands/ps.cc:29
-#, fuzzy
 msgid ""
 "List running processes which might still use files and libraries deleted by "
 "recent upgrades."
 msgstr ""
-"ps\n"
-"\n"
-"Listaa käynnissä olevat prosessit, jotka käyttävät edellisessä päivityksessä "
-"poistettuja tiedostoja.\n"
-"\n"
-"Tällä komennolla ei ole valitsimia.\n"
+"Luettele käynnissä olevat prosessit, jotka voivat yhä käyttää äskettäisten "
+"päivitysten poistamia tiedostoja ja kirjastoja."
 
 #. translators: -s, --short
 #: src/commands/ps.cc:46
@@ -2887,6 +2901,9 @@ msgid ""
 "processes which are associated with a system service. Given three times, "
 "list the associated system service names only."
 msgstr ""
+"Luo lyhyt taulukko, joka ei sisällä poistettuja tiedostoja. Kahdesti "
+"annettuna näyttää vain prosessit, jotka on kytketty järjestelmäpalveluun. "
+"Kolmesti annettuna luettelee vain kytkettyjen järjestelmäpalvelujen nimet."
 
 #. translators: --print <format>
 #: src/commands/ps.cc:49
@@ -2896,11 +2913,14 @@ msgid ""
 "followed by a newline. Any '%s' directive in <format> is replaced by the "
 "system service name."
 msgstr ""
+"Tulosta <muoto> ja rivinvaihto vakiotulosvirtaan kustakin kytketystä "
+"järjestelmäpalvelusta. <muodon> sisältämä ”%s” korvataan järjestelmäpalvelun "
+"nimellä."
 
 #. translators: -d, --debugFile <path>
 #: src/commands/ps.cc:52
 msgid "Write debug output to file <path>."
-msgstr ""
+msgstr "Kirjoita vianjäljitystuloste tiedostoon <sijainti>."
 
 #: src/commands/ps.cc:72 src/solve-commit.cc:450
 msgid "Check failed:"
@@ -2930,9 +2950,8 @@ msgstr "UID"
 
 #. process login name
 #: src/commands/ps.cc:148
-#, fuzzy
 msgid "User"
-msgstr "Käyttäjätunnus"
+msgstr "Käyttäjä"
 
 #. process command name
 #: src/commands/ps.cc:150
@@ -3036,7 +3055,7 @@ msgstr "Näytä mitä paketti suosittaa."
 #. translators: --supplements
 #: src/commands/query/info.cc:87
 msgid "Show supplements."
-msgstr ""
+msgstr "Näytä täydennykset."
 
 #. translators: --suggests
 #: src/commands/query/info.cc:91
@@ -3192,11 +3211,13 @@ msgstr "Listaa tuotteet asennuslähteestä."
 msgid ""
 "XML output only: Literally forward the XML tags found in a product file."
 msgstr ""
+"Vain XML-tuloste: edennä sellaisinaan tuotetiedostosta löytyneet XML-"
+"tunnisteet."
 
 #: src/commands/query/products.cc:50
 #, boost-format
 msgid "Option %1% has no effect without the %2% global option."
-msgstr ""
+msgstr "Valitsimella %1% ei ole vaikutusta ilman yleistä %2%-valitsinta."
 
 #: src/commands/repos/add.cc:23
 msgid "addrepo (ar) [OPTIONS] <URI> <ALIAS>"
@@ -3343,7 +3364,7 @@ msgstr "Kantapalvelu"
 
 #: src/commands/repos/list.cc:56
 msgid "Keywords"
-msgstr ""
+msgstr "Avainsanat"
 
 #: src/commands/repos/list.cc:57
 msgid "Repo Info Path"
@@ -3502,9 +3523,9 @@ msgid "Specified repositories: "
 msgstr "Määritellyt asennuslähteet: "
 
 #: src/commands/repos/refresh.cc:218
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Refreshing repository '%s'."
-msgstr "Poistetaan asennuslähde \"%s\" käytöstä."
+msgstr "Virkistetään asennuslähdettä ”%s”."
 
 #: src/commands/repos/refresh.cc:236 src/repos.cc:836
 #, c-format, boost-format
@@ -3522,10 +3543,10 @@ msgid "Skipping repository '%s' because of the above error."
 msgstr "Ohitettiin asennuslähde \"%s\" yllä olevien virheiden vuoksi."
 
 #: src/commands/repos/refresh.cc:274
-#, fuzzy
 msgid ""
 "Some of the repositories have not been refreshed because they were not known."
-msgstr "Joitakin asennuslähteitä ei päivitetty virheiden vuoksi."
+msgstr ""
+"Joitakin asennuslähteitä ei voitu virkistää, koska ne olivat tuntemattomia."
 
 #: src/commands/repos/refresh.cc:281
 msgid "Specified repositories are not enabled or defined."
@@ -3860,16 +3881,18 @@ msgid ""
 "For an extended search including not yet activated remote resources you may "
 "now run '%1%'."
 msgstr ""
+"Voit nyt komennolla ”%1%” tehdä laajennetun haun, johon sisältyvät myös "
+"vielä aktivoimattomat etäresurssit."
 
 #: src/commands/search/search-packages-hinthack.cc:102
 #, boost-format
 msgid "Do you want to run '%1%' now?"
-msgstr ""
+msgstr "Haluatko suorittaa komennon ”%1%” nyt?"
 
 #: src/commands/search/search-packages-hinthack.cc:113
 #, boost-format
 msgid "Run '%1%' to search in not yet activated remote resources."
-msgstr ""
+msgstr "Etsi vielä aktivoimattomista etäresursseista komennolla ”%1%”."
 
 #. translators: command summary: search, se
 #: src/commands/search/search.cc:73
@@ -3879,7 +3902,7 @@ msgstr "Hakee paketteja hakulauseella."
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/search/search.cc:81
 msgid "search (se) [OPTIONS] [QUERYSTRING] ..."
-msgstr ""
+msgstr "search (se) [VALITSIMET] [KYSELY]…"
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/search/search.cc:86
@@ -3889,7 +3912,7 @@ msgstr "patch-search [valinnat] [hakulause...]"
 #. translators: command description
 #: src/commands/search/search.cc:95
 msgid "Search for packages matching any of the given search strings."
-msgstr ""
+msgstr "Etsi paketteja, jotka vastaavat mitä tahansa kyselyjonoista."
 
 #. translators: command description
 #: src/commands/search/search.cc:97
@@ -3897,6 +3920,8 @@ msgid ""
 "* and ? wildcards can also be used within search strings. If a search string "
 "is enclosed in '/', it's interpreted as a regular expression."
 msgstr ""
+"Kyselyissä voi käyttää jokerimerkkejä * ja ?. Jos kyselyjono ympäröidään ”/”-"
+"merkein, se tulkitaan säännölliseksi lausekkeeksi."
 
 #. translators: command description
 #: src/commands/search/search.cc:102
@@ -3906,57 +3931,57 @@ msgstr "Hakee korjauspäivityksiä hakulauseen perusteella."
 #. translators: --match-substrings
 #: src/commands/search/search.cc:113
 msgid "Search for a match to partial words (default)."
-msgstr ""
+msgstr "Etsi vastaavuutta osittaisista sanoista (oletus)."
 
 #. translators: --match-words
 #: src/commands/search/search.cc:117
 msgid "Search for a match to whole words only."
-msgstr ""
+msgstr "Etsi vastaavuutta vain kokonaisista sanoista."
 
 #. translators: -x, --match-exact
 #: src/commands/search/search.cc:121
 msgid "Searches for an exact match of the search strings."
-msgstr ""
+msgstr "Etsi tarkalleen kyselyä vastaavia jonoja."
 
 #. translators: --provides
 #: src/commands/search/search.cc:133
 msgid "Search for packages which provide the search strings."
-msgstr ""
+msgstr "Etsi paketteja, jotka tarjoavat hakujonot."
 
 #. translators: --requires
 #: src/commands/search/search.cc:137
 msgid "Search for packages which require the search strings."
-msgstr ""
+msgstr "Etsi paketteja, jotka vaativat hakujonoja."
 
 #. translators: --recommends
 #: src/commands/search/search.cc:141
 msgid "Search for packages which recommend the search strings."
-msgstr ""
+msgstr "Etsi paketteja, jotka suosittelevat hakujonoja."
 
 #. translators: --supplements
 #: src/commands/search/search.cc:145
 msgid "Search for packages which supplement the search strings."
-msgstr ""
+msgstr "Etsi paketteja, jotka täydentävät hakujonoja."
 
 #. translators: --conflicts
 #: src/commands/search/search.cc:149
 msgid "Search packages conflicting with search strings."
-msgstr ""
+msgstr "Etsi paketteja, jotka ovat ristiriidassa hakujonojen kanssa."
 
 #. translators: --obsoletes
 #: src/commands/search/search.cc:153
 msgid "Search for packages which obsolete the search strings."
-msgstr ""
+msgstr "Etsi paketteja, jotka vanhentavat hakujonot."
 
 #. translators: --suggests
 #: src/commands/search/search.cc:157
 msgid "Search for packages which suggest the search strings."
-msgstr ""
+msgstr "Etsi paketteja, jotka ehdottavat hakujonoja."
 
 #. translators: -t, --type <TYPE>
 #: src/commands/search/search.cc:161
 msgid "Search only for packages of the specified type."
-msgstr ""
+msgstr "Etsi vain määritetyn tyypin paketteja."
 
 #. translators: -n, --name
 #: src/commands/search/search.cc:165
@@ -3964,26 +3989,29 @@ msgid ""
 "Useful together with dependency options, otherwise searching in package name "
 "is default."
 msgstr ""
+"Hyödyksi riippuvuusvalitsimien kanssa, muulloin haku paketin nimestä on "
+"oletus."
 
 #. translators: -f, --file-list
 #: src/commands/search/search.cc:169
 msgid "Search for a match in the file list of packages."
-msgstr ""
+msgstr "Etsi vastaavuutta pakettien tiedostoluetteloista."
 
 #. translators: -d, --search-descriptions
 #: src/commands/search/search.cc:178
 msgid "Search also in package summaries and descriptions."
-msgstr ""
+msgstr "Etsi myös paketin yhteenvedosta ja kuvauksesta."
 
 #. translators: -C, --case-sensitive
 #: src/commands/search/search.cc:182
 msgid "Perform case-sensitive search."
-msgstr ""
+msgstr "Erota etsittäessä pien- ja suuraakkoset."
 
 #. translators: -s, --details
 #: src/commands/search/search.cc:191
 msgid "Show each available version in each repository on a separate line."
 msgstr ""
+"Näytä kunkin asennuslähteen kukin saatavilla oleva versio omalla rivillään."
 
 #. translators: -v, --verbose
 #: src/commands/search/search.cc:195
@@ -3991,6 +4019,8 @@ msgid ""
 "Like --details, with additional information where the search has matched "
 "(useful for search in dependencies)."
 msgstr ""
+"Kuten --details mutta tarjoaa lisätietoa siitä, missä haku osui (hyödyksi "
+"riippuvuuksista etsittäessä)."
 
 #: src/commands/search/search.cc:289 src/repos.cc:773
 #, c-format, boost-format
