@@ -9,16 +9,16 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-01-31 13:26+0100\n"
-"PO-Revision-Date: 2018-12-18 10:47+0000\n"
+"PO-Revision-Date: 2019-02-18 15:25+0000\n"
 "Last-Translator: Murat Servan Kahraman <muratservan@outlook.com>\n"
-"Language-Team: Turkish <https://l10n.opensuse.org/projects/zypper/master/tr/"
-">\n"
+"Language-Team: Turkish <https://l10n.opensuse.org/projects/zypper/master/tr/>"
+"\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 3.2.2\n"
+"X-Generator: Weblate 3.3\n"
 
 #: src/SolverRequester.h:52
 #, boost-format
@@ -1770,10 +1770,10 @@ msgstr[0] "Paket alt sürüme düşürüldü. (Paketler alt sürüme düşürül
 
 #. translators: this text will be preceded by a number e.g. "5 new"
 #: src/Summary.cc:1439
-#, fuzzy
 msgid "new"
 msgid_plural "new"
-msgstr[0] "Yeni (Yeniler)"
+msgstr[0] "yeni"
+msgstr[1] "yeni"
 
 #
 # clients/inst_sw_select.ycp:195
@@ -1909,7 +1909,6 @@ msgid "Ask PackageKit to quit?"
 msgstr "Hiçbir paket bulunamadı."
 
 #: src/Zypper.cc:109
-#, fuzzy
 msgid "PackageKit is still running (probably busy)."
 msgstr "PackageKit hala çalışıyor (muhtemelen meşgul)."
 
@@ -1935,7 +1934,6 @@ msgid "Verbosity: %d"
 msgstr "Sürüm: "
 
 #: src/Zypper.cc:319
-#, fuzzy
 msgid "Enforced setting"
 msgstr "Zorlanmış ayar"
 
@@ -2225,9 +2223,8 @@ msgid "Too few arguments."
 msgstr "Çok fazla argüman."
 
 #: src/commands/installremove.cc:97 src/commands/installremove.cc:219
-#, fuzzy
 msgid "At least one package name is required."
-msgstr "İşaret verileni gerektiren paketleri göster"
+msgstr "En az bir paket adı gerekiyor."
 
 #: src/commands/installremove.cc:108
 msgid "Cannot uninstall patches."
@@ -5861,7 +5858,7 @@ msgid "'%s' looks like an RPM file. Will try to download it."
 msgstr "'%s' bir RPM paketi gibi görünüyor. İndirmeye çalışılacak."
 
 #: src/repos.cc:1887
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Problem with the RPM file specified as '%s', skipping."
 msgstr "RPM dosyasıyla ilgili sorun '%s' olarak belirtildi, atlanıyor."
 
