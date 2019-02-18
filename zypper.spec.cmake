@@ -17,7 +17,7 @@
 
 
 Name:           @PACKAGE@
-BuildRequires:  augeas-devel >= 0.5.0
+BuildRequires:  augeas-devel >= 1.10.0
 %if 0%{?suse_version} > 1325
 BuildRequires:  libboost_headers-devel
 %else

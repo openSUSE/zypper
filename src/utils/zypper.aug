@@ -8,70 +8,71 @@ module ZYpper =
   autoload xfm
 
   (* ****************( primitives )*************** *)
-  (* These are taken from the official util.aug *)
+  (* Some are taken from the official util.aug     *)
 
-  (*
-  Variable: eol
-    Delete end of line, including optional trailing whitespace
+  (* Variable: eol
+     Delete end of line, including optional trailing whitespace
   *)
   let eol = del /[ \t]*\n/ "\n"
 
-  (*
-  Variable: del_str
-    Delete a string and default to it
+  (* Variable: del_str
+     Delete a string and default to it
 
-  Parameters:
-     s:string - the string to delete and default to
+     Parameters:
+       s:string - the string to delete and default to
   *)
   let del_str (s:string) = del s s
 
-  (*
-  Variable: del_opt_ws
-    Delete optional whitespace
+  (* Variable: del_opt_ws
+     Delete optional whitespace
   *)
-  let del_opt_ws = del /[ \t]*/
+  let del_opt_ws = del /[ \t]*/ ""
 
-  (* Matches an empty line and creates a node for it *)
-  let empty = [ eol ]
+  (* Variable: store_to_eol
+     Stores the rest 'till the end of line or empty if just WS
+  *)
+  let store_to_eol = store /(.*[^ \t\n])?/ . eol
 
-  (* Deletes optional whitespace and stores the rest 'till the end of line *)
-  let store_to_eol = del_opt_ws " " . store /(.*[^ \t\n])?/
-
-  (*
-    Keyword regex.
-    Allows alphanumericals and '.' and '_'. Must start with a letter
-    and end with a letter or number.
+  (* Keyword regex.
+     Allows alphanumericals and '.' and '_'. Must start with a letter and end with a letter or number.
   *)
   let kw_re = /[a-zA-Z][a-zA-Z0-9\._]*[a-zA-Z0-9]/
 
-  (* ****************( section )*************** *)
+  (* Value regex.
+     Must start and end with a non-ws or empty.
+  *)
+  let val_re = /([^ \t\n]([^\n]*[^ \t\n])?)?/
+
+  (* ****************( line nodes )*************** *)
+
+  (* Matches an empty line and creates a node for it *)
+  let empty = [ (*label "X" .*) eol ]
 
   (* Matches one line of ## description and creates a node for it *)
-  let description = [ label "description" . del /##/ "##" . store_to_eol? . eol ]
+  let description = [ label "##" . del_opt_ws . del /## ?/ "## " . store_to_eol ]
 
-  (* Matches '#' and whitespace, creates a 'commented' note for it. *)
-  let commented  = [ label "commented" . del /#[ \t]*/ "# " . store_to_eol? . eol ]
+  (* Matches one line of # comment (but not ##) and creates a node for it *)
+  let comment = [ label "#" . del_opt_ws . del /#/ "# " . ( del / / "" . store /(.*[^ \t\n])?/ | store /([^#].*[^ \t\n])?/ ) . eol ]
 
   (* Matches key=value, creates a new node out of key and stores the value *)
-  let kv = [ del_opt_ws "" . key kw_re . del /[ \t]*=[ \t]*/ " = " . store /[^ \t\n]([^\n]*[^ \t\n])?/ . eol ]
+  let kv = [ del_opt_ws . key kw_re . del /[ \t]*=[ \t]*/ " = " . store val_re . eol ]
 
-  (* An option consists of ## description, # commented lines and an optionall key=value pair. *)
-  let option = [ seq "option" . description* . commented* . kv? ]
-
-  (* ****************( section )*************** *)
+  (* Specialized comment detecting and storing a commented kv.*)
+  let commented_kv = [ label "#kv" . del_opt_ws . del /# ?/ "# " . kv ]
 
   (* Matches section [title] and creates a new tree node out of it *)
   let section_title = del_str "[" . key /[^] \t\n\/]+/ . del_str "]" . eol
 
+  (* ****************( section )*************** *)
+
   (* Section with it's contests *)
-  let section = [ section_title . (option | empty)* ]
+  let section = [ section_title . ( description | commented_kv | kv | comment | empty )* ]
 
   (* Optional comments in the anonymous section (start of the file). *)
-  let section_anon = [ label "anon" . ( description | empty )+ ]
-
+  let section_anon = [ label "anon" . ( description | comment | empty )+ ]
 
   (* The lens matching and mapping the whole file *)
-  let lns = section_anon? . section+
+  let lns = section_anon? . section*
 
   (*
     Filter for the xfm transformation.
