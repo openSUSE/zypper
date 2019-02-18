@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-01-23 09:24+0100\n"
-"PO-Revision-Date: 2019-02-18 10:01+0000\n"
+"PO-Revision-Date: 2019-02-18 15:20+0000\n"
 "Last-Translator: Murat Servan Kahraman <muratservan@outlook.com>\n"
 "Language-Team: Turkish <https://l10n.opensuse.org/projects/zypper/master/tr/>"
 "\n"
@@ -45,12 +45,13 @@ msgstr ""
 
 #. translator: %1% is a file name
 #: src/callbacks/keyring.h:40
-#, fuzzy, boost-format
+#, boost-format
 msgid ""
 "File '%1%' is the repositories master index file. It ensures the integrity "
 "of the whole repo."
 msgstr ""
-"%1% dosyası depoların ana dizin dosyasıdır. Bütün depoyu bir arada tutar."
+"'%1%' dosyası depoların ana dizin dosyasıdır. Bu dosya tüm deponun "
+"bütünlüğünü sağlar."
 
 #: src/callbacks/keyring.h:46
 #, fuzzy
@@ -63,15 +64,14 @@ msgstr ""
 "olduğundan kesinlikle emin değilseniz, devam etmeyin."
 
 #: src/callbacks/keyring.h:51
-#, fuzzy
 msgid ""
 "This file was modified after it has been signed. This may have been a "
 "malicious change, so it might not be trustworthy anymore! You should not "
 "continue unless you know it's safe."
 msgstr ""
-"Bu dosya, imzalandıktan sonra değiştirildi. Bu kötü amaçlı bir değişiklik "
-"olabilir, bu yüzden artık güvenilir olmayabilir! Güvenli olduğundan emin "
-"değilseniz devam etmemelisiniz."
+"Bu dosyanın üzerinde, imzalandıktan sonra değişiklik gerçekleştirildi. Bu "
+"kötü amaçlı bir değişiklik olabilir, bu yüzden artık güvenilir olmayabilir! "
+"Güvenli olduğundan emin değilseniz devam etmemelisiniz."
 
 #: src/callbacks/keyring.h:79
 msgid "Repository:"
@@ -695,9 +695,8 @@ msgstr "G/Ç hatası"
 
 # clients/support_question.ycp:27
 #: src/utils/prompt.h:160
-#, fuzzy
 msgid "Invalid object"
-msgstr "Hatalı ilişki"
+msgstr "Geçersiz nesne"
 
 # include/ui/common_messages.ycp:95
 #: src/utils/prompt.h:167
@@ -741,14 +740,14 @@ msgid "Subcommands:"
 msgstr "Alt Komutlar:"
 
 #: src/Command.cc:279
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Unknown command '%s'"
-msgstr "Bilinmeyen"
+msgstr "Bilinmeyen '%s' komutu"
 
 #: src/Config.cc:53
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Invalid table style %d."
-msgstr "Geçersiz yol:"
+msgstr "Geçersiz %d tablo stili."
 
 #: src/Config.cc:54
 #, c-format, boost-format
@@ -888,9 +887,8 @@ msgstr "'no-gpg-checks' moduna giriliyor."
 
 #. translators: --no-gpg-checks
 #: src/Config.cc:556
-#, fuzzy
 msgid "Ignore GPG check failures and continue."
-msgstr "GPG kontrol hatalarını gözardı et ve devam et."
+msgstr "GPG kontrol hatalarını göz ardı et ve devam et."
 
 #: src/Config.cc:561
 #, c-format, boost-format
@@ -928,9 +926,8 @@ msgid "Do not read meta-data from repositories."
 msgstr "Meta veriyi depolardan okuma."
 
 #: src/Config.cc:589
-#, fuzzy
 msgid "Autorefresh disabled."
-msgstr "Başlangıç durumları"
+msgstr "Otomatik yenileme devre dışı bırakıldı."
 
 #. translators: --no-refresh
 #: src/Config.cc:593
@@ -938,9 +935,8 @@ msgid "Do not refresh the repositories."
 msgstr "Depoları yenileme."
 
 #: src/Config.cc:597
-#, fuzzy
 msgid "CD/DVD repositories disabled."
-msgstr "Başlangıç durumları"
+msgstr "CD/DVD depoları devre dışı bırakıldı."
 
 #. translators: --no-cd
 #: src/Config.cc:601
@@ -948,15 +944,13 @@ msgid "Ignore CD/DVD repositories."
 msgstr "CD/DVD depolarını gözardı et."
 
 #: src/Config.cc:605
-#, fuzzy
 msgid "Remote repositories disabled."
-msgstr "Başlangıç durumları"
+msgstr "Uzak depolar devre dışı bırakıldı."
 
 #. translators: --no-remote
 #: src/Config.cc:609
-#, fuzzy
 msgid "Ignore remote repositories."
-msgstr "Uzak depoları gözardı et."
+msgstr "Uzak depoları göz ardı et."
 
 #. translators: --releasever
 #: src/Config.cc:616
@@ -1046,7 +1040,7 @@ msgstr "'%s' kaynak paketi bulunamadı."
 #: src/RequestFeedback.cc:56
 #, fuzzy, c-format, boost-format
 msgid "Object '%s' not found."
-msgstr "'{0}' kullanıcısı bulunamadı"
+msgstr "'%s' nesnesi bulunamadı."
 
 #: src/RequestFeedback.cc:61
 #, c-format, boost-format
@@ -1199,12 +1193,13 @@ msgid "Patch '%s' is not needed."
 msgstr "'%s' yaması gerekli değil."
 
 #: src/RequestFeedback.cc:181
-#, fuzzy, boost-format
+#, boost-format
 msgid ""
 "Patch '%1%' is optional. Use '%2%' to install it, or '%3%' to include all "
 "optional patches."
 msgstr ""
-"'%s'  yaması kapalı. '%s' kullanarak yükleyin ya da '%s' kullanımını açın. "
+"'%1%' yaması isteğe bağlı. Yüklemek için '%2%' komutunu ya da isteğe bağlı "
+"yamaların tamamını dahil etmek için '%3%' komutunu kullanın."
 
 #: src/RequestFeedback.cc:192
 #, c-format, boost-format
@@ -1400,64 +1395,74 @@ msgstr[0] "Aşağıdaki uygulama yükseltilecek:"
 msgstr[1] "Aşağıdaki %d uygulama yükseltilecek:"
 
 #: src/Summary.cc:709
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following package is going to be downgraded:"
 msgid_plural "The following %d packages are going to be downgraded:"
-msgstr[0] "Belirtilen paketler indirilecek:"
+msgstr[0] "Aşağıdaki paketin sürümü düşürülecek:"
+msgstr[1] "Aşağıdaki %d paketin sürümü düşürülecek:"
 
 #: src/Summary.cc:714
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following patch is going to be downgraded:"
 msgid_plural "The following %d patches are going to be downgraded:"
-msgstr[0] "Belirtilen paketler indirilecek:"
+msgstr[0] "Aşağıdaki yamanın sürümü düşürülecek:"
+msgstr[1] "Aşağıdaki %d yamanın sürümü düşürülecek:"
 
 #: src/Summary.cc:719
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following pattern is going to be downgraded:"
 msgid_plural "The following %d patterns are going to be downgraded:"
-msgstr[0] "Belirtilen paketler indirilecek:"
+msgstr[0] "Aşağıdaki örüntünün sürümü düşürülecek:"
+msgstr[1] "Aşağıdaki %d örüntünün sürümü düşürülecek:"
 
 #: src/Summary.cc:724
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following product is going to be downgraded:"
 msgid_plural "The following %d products are going to be downgraded:"
-msgstr[0] "Belirtilen paketler indirilecek:"
+msgstr[0] "Aşağıdaki ürünün sürümü düşürülecek:"
+msgstr[1] "Aşağıdaki %d ürünün sürümü düşürülecek:"
 
 #: src/Summary.cc:730
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following application is going to be downgraded:"
 msgid_plural "The following %d applications are going to be downgraded:"
-msgstr[0] "Belirtilen paketler indirilecek:"
+msgstr[0] "Aşağıdaki uygulamanın sürümü düşürülecek:"
+msgstr[1] "Aşağıdaki %d uygulamanın sürümü düşürülecek:"
 
 #: src/Summary.cc:752
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following package is going to be reinstalled:"
 msgid_plural "The following %d packages are going to be reinstalled:"
-msgstr[0] "Aşağıdaki desteler kurulacak:"
+msgstr[0] "Aşağıdaki paket yeniden yüklenecek:"
+msgstr[1] "Aşağıdaki %d paket yeniden yüklenecek:"
 
 #: src/Summary.cc:757
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following patch is going to be reinstalled:"
 msgid_plural "The following %d patches are going to be reinstalled:"
-msgstr[0] "Aşağıdaki desteler kurulacak:"
+msgstr[0] "Aşağıdaki yama yeniden yüklenecek:"
+msgstr[1] "Aşağıdaki %d yama yeniden yüklenecek:"
 
 #: src/Summary.cc:762
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following pattern is going to be reinstalled:"
 msgid_plural "The following %d patterns are going to be reinstalled:"
-msgstr[0] "Aşağıdaki desteler kurulacak:"
+msgstr[0] "Aşağıdaki örüntü yeniden yüklenecek:"
+msgstr[1] "Aşağıdaki %d örüntü yeniden yüklenecek:"
 
 #: src/Summary.cc:767
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following product is going to be reinstalled:"
 msgid_plural "The following %d products are going to be reinstalled:"
-msgstr[0] "Aşağıdaki desteler kurulacak:"
+msgstr[0] "Aşağıdaki ürün yeniden yüklenecek:"
+msgstr[1] "Aşağıdaki %d ürün yeniden yüklenecek:"
 
 #: src/Summary.cc:780
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following application is going to be reinstalled:"
 msgid_plural "The following %d applications are going to be reinstalled:"
-msgstr[0] "Aşağıdaki desteler kurulacak:"
+msgstr[0] "Aşağıdaki uygulama yeniden yüklenecek:"
+msgstr[1] "Aşağıdaki %d uygulama yeniden yüklenecek:"
 
 #: src/Summary.cc:917
 #, fuzzy, c-format, boost-format
