@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-01-31 13:26+0100\n"
-"PO-Revision-Date: 2019-01-20 17:29+0000\n"
+"PO-Revision-Date: 2019-03-01 14:58+0000\n"
 "Last-Translator: Yasuhiko Kamata <belphegor@belbel.or.jp>\n"
 "Language-Team: Japanese <https://l10n.opensuse.org/projects/zypper/master/ja/"
 ">\n"
@@ -512,11 +512,11 @@ msgstr "これは '%s' の別名です。"
 
 #: src/commands/commandhelpformatter.h:107
 msgid "Examples:"
-msgstr ""
+msgstr "例:"
 
 #: src/commands/commandhelpformatter.h:110
 msgid "Arguments:"
-msgstr ""
+msgstr "パラメータ:"
 
 #: src/commands/commandhelpformatter.h:123 src/utils/flags/zyppflags.cc:562
 msgid "Command options:"
@@ -689,7 +689,7 @@ msgstr "YYYY-MM-DD"
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:53
 msgid "MODE"
-msgstr ""
+msgstr "モード"
 
 #. TranslatorExplanation These are reasons for various failures.
 #: src/utils/prompt.h:160
@@ -739,7 +739,7 @@ msgstr "パッケージロック:"
 
 #: src/Command.cc:154
 msgid "Locale Management:"
-msgstr ""
+msgstr "ロケール管理:"
 
 #: src/Command.cc:158
 msgid "Other Commands:"
@@ -1727,7 +1727,7 @@ msgstr[0] "以下 %d 個のパッチを適用するには、システムの再�
 #, c-format, boost-format
 msgid "The following package requires a system reboot:"
 msgid_plural "The following %d packages require a system reboot:"
-msgstr[0] ""
+msgstr[0] "以下 %d 個のパッケージには、システムの再起動が必要です:"
 
 #: src/Summary.cc:1373
 #, boost-format
@@ -2353,19 +2353,19 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/locale/addlocalecmd.cc:19
 msgid "addlocale (aloc) [OPTIONS] <LOCALE> ..."
-msgstr ""
+msgstr "addlocale (aloc) [オプション] <ロケール> ..."
 
 #: src/commands/locale/addlocalecmd.cc:20
 msgid "Add locale(s) to requested locales."
-msgstr ""
+msgstr "必要なロケールを追加します。"
 
 #: src/commands/locale/addlocalecmd.cc:21
 msgid "Add given locale(s) to the list of requested locales."
-msgstr ""
+msgstr "指定したロケールを、必要なロケールの一覧に追加します。"
 
 #: src/commands/locale/addlocalecmd.cc:32
 msgid "Do not install corresponding packages for given locale(s)."
-msgstr ""
+msgstr "指定したロケールに必要なパッケージをインストールしません。"
 
 #: src/commands/locale/addlocalecmd.cc:56
 #, c-format, boost-format
@@ -2373,15 +2373,17 @@ msgid ""
 "Specify locale which shall be supported by the language code.\n"
 "Get a list of all available locales by calling '%s'."
 msgstr ""
+"対応すべきロケールを言語コードで指定します。\n"
+"利用可能なロケールの一覧は、 '%s' を実行することで出力することができます。"
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/locale/localescmd.cc:17
 msgid "locales (lloc) [OPTIONS] [LOCALE] ..."
-msgstr ""
+msgstr "locales (lloc) [オプション] [ロケール] ..."
 
 #: src/commands/locale/localescmd.cc:18
 msgid "List requested locales (languages codes)."
-msgstr ""
+msgstr "対応するロケール (言語コード) を一覧表示します。"
 
 #: src/commands/locale/localescmd.cc:19
 #, c-format, boost-format
@@ -2393,53 +2395,58 @@ msgid ""
 "can\n"
 "be installed by calling '%s'.\n"
 msgstr ""
+"対応する言語と、そのパッケージを一覧表示します。\n"
+"\n"
+"何もパラメータを指定せずに実行すると、利用可能なロケールの一覧を表示します。\n"
+"なお、言語に対応するロケールパッケージがシステムにインストールされていない場合は、\n"
+"'%s' を実行することでインストールすることができます。\n"
 
 #: src/commands/locale/localescmd.cc:35
 msgid "Show corresponding packages."
-msgstr ""
+msgstr "対応するパッケージを表示します。"
 
 #: src/commands/locale/localescmd.cc:36
 msgid "List all available locales."
-msgstr ""
+msgstr "利用可能な全てのロケールを表示します。"
 
 #: src/commands/locale/localescmd.cc:49
 msgid "Ignoring positional arguments because --all argument was provided."
-msgstr ""
+msgstr "--all パラメータが指定されているため、それ以外のパラメータを無視しています。"
 
 #: src/commands/locale/localescmd.cc:76
 msgid "The locale(s) for which the information shall be printed."
-msgstr ""
+msgstr "ロケールに関する情報を表示します。"
 
 #: src/commands/locale/localescmd.cc:80
 msgid ""
 "Get all locales with lang code 'en' that have their own country code, "
 "excluding the fallback 'en':"
-msgstr ""
+msgstr "言語コード 'en' と国コードを含む全てのロケールを表示します。フォールバックである 'en' は除外します:"
 
 #: src/commands/locale/localescmd.cc:87
 msgid "Get all locales with lang code 'en' with or without country code:"
-msgstr ""
+msgstr "言語コード 'en' に対応する全てのロケールを表示します。国コードの有無は無視します:"
 
 #: src/commands/locale/localescmd.cc:94
 msgid "Get the locale matching the argument exactly: "
-msgstr ""
+msgstr "指定したパラメータに正確に一致するロケールを表示します: "
 
 #: src/commands/locale/localescmd.cc:101
 msgid "Get the list of packages which are available for 'de' and 'en':"
-msgstr ""
+msgstr "'de' および 'en' で利用できるパッケージの一覧を表示します:"
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/locale/removelocalecmd.cc:17
 msgid "removelocale (rloc) [OPTIONS] <LOCALE> ..."
-msgstr ""
+msgstr "removelocale (rloc) [オプション] <ロケール> ..."
 
 #: src/commands/locale/removelocalecmd.cc:18
 msgid "Remove locale(s) from requested locales."
-msgstr ""
+msgstr "指定したロケールを削除します。"
 
 #: src/commands/locale/removelocalecmd.cc:19
 msgid "Remove given locale(s) from the list of supported languages."
-msgstr ""
+msgstr "指定したロケールを、必要なロケールから削除します。"
 
 #: src/commands/locale/removelocalecmd.cc:34
 #, c-format, boost-format
@@ -2447,10 +2454,12 @@ msgid ""
 "Specify locales which shall be removed by the the language code.\n"
 "Get the list of requested locales by calling '%s'."
 msgstr ""
+"削除すべきロケールを言語コードで指定します。\n"
+"利用可能なロケールの一覧は、 '%s' を実行することで出力することができます。"
 
 #: src/commands/locale/removelocalecmd.cc:46
 msgid "Do not remove corresponding packages for given locale(s)."
-msgstr ""
+msgstr "指定したロケールに対応するパッケージを削除しません。"
 
 # =============================================================================
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
@@ -4523,7 +4532,7 @@ msgstr "ソースパッケージ名の指定が必要です。"
 
 #: src/commands/sourceinstall.cc:86
 msgid "Uninstalling source packages is not supported."
-msgstr ""
+msgstr "ソースパッケージの削除には対応していません。"
 
 #: src/commands/subcommand.cc:52
 msgid "none"
@@ -5224,56 +5233,56 @@ msgstr "構築されたバイナリパッケージ"
 #. translators: header of table column - is the language requested? (Yes/No)
 #: src/locales.cc:56 src/locales.cc:90
 msgid "Requested"
-msgstr ""
+msgstr "要求済み"
 
 #: src/locales.cc:60
 msgid "Fallback"
-msgstr ""
+msgstr "フォールバック"
 
 #. translators: header of table column - the language code, e.g. en_US
 #: src/locales.cc:86
 msgid "Code"
-msgstr ""
+msgstr "コード"
 
 #. translators: header of table column - the language, e.g. English (United States)
 #: src/locales.cc:88
 msgid "Language"
-msgstr ""
+msgstr "言語"
 
 #: src/locales.cc:306
 #, c-format, boost-format
 msgid "Packages for %s (locale '%s', requested: %s):"
-msgstr ""
+msgstr "%s に対するパッケージ (ロケール '%s', 要求可否: %s):"
 
 #: src/locales.cc:323
 #, c-format, boost-format
 msgid "Added locale: %s"
-msgstr ""
+msgstr "ロケールを追加しました: %s"
 
 #: src/locales.cc:326
 #, c-format, boost-format
 msgid "ERROR: cannot add %s"
-msgstr ""
+msgstr "エラー: %s を追加できません"
 
 #: src/locales.cc:330
 #, c-format, boost-format
 msgid " %s is already requested."
-msgstr ""
+msgstr " %s は既に要求済みです。"
 
 #: src/locales.cc:351
 #, c-format, boost-format
 msgid "Removed locale: %s"
-msgstr ""
+msgstr "ロケールを削除しました: %s"
 
 #: src/locales.cc:354
 #, c-format, boost-format
 msgid "ERROR: cannot remove %s"
-msgstr ""
+msgstr "エラー: %s を削除できません"
 
 #: src/locales.cc:358
 #, c-format, boost-format
 msgid "%s was not requested."
-msgstr ""
+msgstr "%s は要求していません。"
 
 #. translators: this will show up if you press ctrl+c twice
 #: src/main.cc:31
