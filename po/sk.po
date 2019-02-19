@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-01-31 13:26+0100\n"
-"PO-Revision-Date: 2019-02-19 18:59+0000\n"
+"PO-Revision-Date: 2019-02-20 16:48+0000\n"
 "Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
 "Language-Team: Slovak <https://l10n.opensuse.org/projects/zypper/master/sk/>"
 "\n"
@@ -2550,6 +2550,11 @@ msgid ""
 "can\n"
 "be installed by calling '%s'.\n"
 msgstr ""
+"Zoznam požadovaných lokalizácií a zodpovedajúcich balíkov.\n"
+"\n"
+"Volané bez argumentov vypíše požadované lokalizácie. Ak lokalizačné\n"
+"balíky pre požadovaný jazyk ešte nie sú v systéme, môžu byť\n"
+"nainštalované volaním '%s'.\n"
 
 #: src/commands/locale/localescmd.cc:35
 msgid "Show corresponding packages."
@@ -2562,16 +2567,19 @@ msgstr "Zoznam všetkých dostupných lokalizácií."
 #: src/commands/locale/localescmd.cc:49
 msgid "Ignoring positional arguments because --all argument was provided."
 msgstr ""
+"Ignorovanie pozičných argumentov, pretože bol poskytnutý argument --all."
 
 #: src/commands/locale/localescmd.cc:76
 msgid "The locale(s) for which the information shall be printed."
-msgstr ""
+msgstr "Lokalizácia(e), pre ktoré majú byť vytlačené informácie."
 
 #: src/commands/locale/localescmd.cc:80
 msgid ""
 "Get all locales with lang code 'en' that have their own country code, "
 "excluding the fallback 'en':"
 msgstr ""
+"Získať všetky lokalizácie s kódom jazyka 'en' , ktoré majú svoj vlastný kód "
+"krajiny, okrem núdzového 'en':"
 
 #: src/commands/locale/localescmd.cc:87
 msgid "Get all locales with lang code 'en' with or without country code:"
@@ -5377,7 +5385,7 @@ msgstr ""
 
 #: src/locales.cc:60
 msgid "Fallback"
-msgstr ""
+msgstr "Núdzové riešenie"
 
 #. translators: header of table column - the language code, e.g. en_US
 #: src/locales.cc:86
