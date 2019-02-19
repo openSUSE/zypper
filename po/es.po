@@ -18,10 +18,10 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-01-31 13:26+0100\n"
-"PO-Revision-Date: 2019-01-25 16:11+0000\n"
-"Last-Translator: Patricia Pazos <pms.malaga@hermestrans.com>\n"
-"Language-Team: Spanish <https://l10n.opensuse.org/projects/zypper/master/es/"
-">\n"
+"PO-Revision-Date: 2019-03-01 14:59+0000\n"
+"Last-Translator: jcsl <trcs@gmx.com>\n"
+"Language-Team: Spanish <https://l10n.opensuse.org/projects/zypper/master/es/>"
+"\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -529,11 +529,11 @@ msgstr "Se trata de un alias para '%s'."
 
 #: src/commands/commandhelpformatter.h:107
 msgid "Examples:"
-msgstr ""
+msgstr "Ejemplos:"
 
 #: src/commands/commandhelpformatter.h:110
 msgid "Arguments:"
-msgstr ""
+msgstr "Argumentos:"
 
 #: src/commands/commandhelpformatter.h:123 src/utils/flags/zyppflags.cc:562
 msgid "Command options:"
@@ -706,7 +706,7 @@ msgstr "AAAA-MM-DD"
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:53
 msgid "MODE"
-msgstr ""
+msgstr "MODO"
 
 #. TranslatorExplanation These are reasons for various failures.
 #: src/utils/prompt.h:160
@@ -755,7 +755,7 @@ msgstr "Bloqueos de paquete:"
 
 #: src/Command.cc:154
 msgid "Locale Management:"
-msgstr ""
+msgstr "Gestión de la configuración regional:"
 
 #: src/Command.cc:158
 msgid "Other Commands:"
@@ -1839,11 +1839,11 @@ msgstr[0] "El parche siguiente requiere que se reinicie el sistema:"
 msgstr[1] "Los %d parches siguientes requieren que se reinicie el sistema:"
 
 #: src/Summary.cc:1344
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following package requires a system reboot:"
 msgid_plural "The following %d packages require a system reboot:"
-msgstr[0] "El paquete siguiente requiere que se reinicie el sistema:"
-msgstr[1] "El paquete siguiente %d requiere que se reinicie el sistema:"
+msgstr[0] "El siguiente paquete requiere que se reinicie el sistema:"
+msgstr[1] "Los siguientes %d paquetes requieren que se reinicie el sistema:"
 
 #: src/Summary.cc:1373
 #, boost-format
@@ -2493,12 +2493,16 @@ msgid "addlocale (aloc) [OPTIONS] <LOCALE> ..."
 msgstr ""
 
 #: src/commands/locale/addlocalecmd.cc:20
+#, fuzzy
 msgid "Add locale(s) to requested locales."
-msgstr ""
+msgstr "Añadir una o más configuraciones regionales a las ya solicitadas."
 
 #: src/commands/locale/addlocalecmd.cc:21
+#, fuzzy
 msgid "Add given locale(s) to the list of requested locales."
 msgstr ""
+"Añadir las configuraciones regionales dadas a la listas de configuraciones "
+"regionales solicitadas."
 
 #: src/commands/locale/addlocalecmd.cc:32
 msgid "Do not install corresponding packages for given locale(s)."
@@ -2533,7 +2537,7 @@ msgstr ""
 
 #: src/commands/locale/localescmd.cc:35
 msgid "Show corresponding packages."
-msgstr ""
+msgstr "Mostrar los paquetes correspondientes."
 
 #: src/commands/locale/localescmd.cc:36
 msgid "List all available locales."
@@ -2542,6 +2546,8 @@ msgstr ""
 #: src/commands/locale/localescmd.cc:49
 msgid "Ignoring positional arguments because --all argument was provided."
 msgstr ""
+"Se ignoran los argumentos posicionales porque se ha proporcionado el "
+"argumento --all."
 
 #: src/commands/locale/localescmd.cc:76
 msgid "The locale(s) for which the information shall be printed."
@@ -2563,7 +2569,7 @@ msgstr ""
 
 #: src/commands/locale/localescmd.cc:101
 msgid "Get the list of packages which are available for 'de' and 'en':"
-msgstr ""
+msgstr "Obtener la lista de paquetes que están disponibles para 'de' y 'en':"
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/locale/removelocalecmd.cc:17
@@ -4700,7 +4706,7 @@ msgstr "El nombre del paquete de origen es un argumento requerido."
 
 #: src/commands/sourceinstall.cc:86
 msgid "Uninstalling source packages is not supported."
-msgstr ""
+msgstr "La desistalación de paquetes de fuentes no está permitida."
 
 #: src/commands/subcommand.cc:52
 msgid "none"
@@ -5413,21 +5419,21 @@ msgstr "Crea un paquete binario"
 #. translators: header of table column - is the language requested? (Yes/No)
 #: src/locales.cc:56 src/locales.cc:90
 msgid "Requested"
-msgstr ""
+msgstr "Requerido"
 
 #: src/locales.cc:60
 msgid "Fallback"
-msgstr ""
+msgstr "Alternativa"
 
 #. translators: header of table column - the language code, e.g. en_US
 #: src/locales.cc:86
 msgid "Code"
-msgstr ""
+msgstr "Código"
 
 #. translators: header of table column - the language, e.g. English (United States)
 #: src/locales.cc:88
 msgid "Language"
-msgstr ""
+msgstr "Idioma"
 
 #: src/locales.cc:306
 #, c-format, boost-format
@@ -5442,12 +5448,12 @@ msgstr ""
 #: src/locales.cc:326
 #, c-format, boost-format
 msgid "ERROR: cannot add %s"
-msgstr ""
+msgstr "ERROR: no se puede añadir %s"
 
 #: src/locales.cc:330
 #, c-format, boost-format
 msgid " %s is already requested."
-msgstr ""
+msgstr " %s ya ha sido requerido."
 
 #: src/locales.cc:351
 #, c-format, boost-format
@@ -5457,12 +5463,12 @@ msgstr ""
 #: src/locales.cc:354
 #, c-format, boost-format
 msgid "ERROR: cannot remove %s"
-msgstr ""
+msgstr "ERROR: no se puede eliminar %s"
 
 #: src/locales.cc:358
 #, c-format, boost-format
 msgid "%s was not requested."
-msgstr ""
+msgstr "% no fue requerido."
 
 #. translators: this will show up if you press ctrl+c twice
 #: src/main.cc:31
