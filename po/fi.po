@@ -20,7 +20,7 @@ msgstr ""
 "Project-Id-Version: zypp.fi\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-08-03 11:09+0200\n"
-"PO-Revision-Date: 2018-02-15 11:35+0000\n"
+"PO-Revision-Date: 2019-03-04 13:04+0000\n"
 "Last-Translator: Tommi Nieminen <software@legisign.org>\n"
 "Language-Team: Finnish <https://l10n.opensuse.org/projects/libzypp/master/fi/"
 ">\n"
@@ -29,7 +29,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 2.18\n"
+"X-Generator: Weblate 3.3\n"
 
 #: zypp/target/hal/HalException.h:46 zypp/target/hal/HalException.h:55
 #: zypp/target/hal/HalException.h:64
@@ -158,7 +158,7 @@ msgstr "Barbados"
 #. :BRB:052:
 #: zypp/CountryCode.cc:177
 msgid "Bangladesh"
-msgstr "Bangladesh"
+msgstr "Bangladeš"
 
 #. :BGD:050:
 #: zypp/CountryCode.cc:178
@@ -3982,20 +3982,20 @@ msgstr[1] "(vanhenee %d päivässä)"
 #: zypp/RepoInfo.cc:513
 #, boost-format
 msgid "Looking for gpg key ID %1% in cache %2%."
-msgstr ""
+msgstr "Etsitään GPG-avainta %1% välimuistista %2%."
 
 #. translator: %1% is a gpg key ID like 3DBDC284
 #. %2% is a repositories name
 #: zypp/RepoInfo.cc:541
 #, boost-format
 msgid "Looking for gpg key ID %1% in repository %2%."
-msgstr ""
+msgstr "Etsitään GPG-avainta %1% avainlähteestä %2%."
 
 #. translator: %1% is a repositories name
 #: zypp/RepoInfo.cc:565
 #, boost-format
 msgid "Repository %1% does not define additional 'gpgkey=' URLs."
-msgstr ""
+msgstr "Avainlähde %1% ei määritä ”gpgkey=”-lisäosoitteita."
 
 #: zypp/RepoManager.cc:314
 #, boost-format
@@ -4406,7 +4406,7 @@ msgstr "Aikakatkaisu avattaessa \"%s\"."
 #: zypp/media/MediaException.cc:195
 #, c-format, boost-format
 msgid "Downloaded data exceeded the expected filesize '%s' of '%s'."
-msgstr ""
+msgstr "Ladatun tiedon määrä ylittää odotetun tiedostokoon %s / %s."
 
 #: zypp/media/MediaException.cc:203
 #, c-format, boost-format
@@ -4846,13 +4846,13 @@ msgstr "poista %s"
 #: zypp/target/RpmPostTransCollector.cc:103
 #, boost-format
 msgid "Executing %%posttrans script '%1%'"
-msgstr ""
+msgstr "Suoritetaan %%posttrans-skriptiä ”%1”"
 
 #. show a final message
 #: zypp/target/RpmPostTransCollector.cc:161
 #, c-format, boost-format
 msgid "Executing %posttrans scripts"
-msgstr ""
+msgstr "Suoritetaan %%posttrans-skriptejä"
 
 #: zypp/target/TargetImpl.cc:311
 msgid " executed"
