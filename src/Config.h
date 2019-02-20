@@ -75,6 +75,9 @@ struct Config
 
   TriBool search_runSearchPackages;	// runSearchPackages after search: always/never/ask
 
+  /** Hackisch way so save back a search_runSearchPackages value from search-packages-hinthack. */
+  void saveback_search_runSearchPackages( const TriBool & value_r );
+
   /** zypper.conf: obs.baseUrl */
   Url obs_baseUrl;
   /** zypper.conf: obs.platform */
@@ -112,6 +115,9 @@ struct Config
   bool _wantXMLOut = false;
   std::vector<std::string> plusRepoFromCLI;
   std::vector<std::string> plusContentFromCLI;
+
+private:
+  Pathname _cfgSaveFile;	///< the default config file used for saving back values (--config or in $HOME)
 };
 
 #endif /* ZYPPER_CONFIG_H_ */
