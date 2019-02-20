@@ -9,10 +9,10 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-01-31 13:26+0100\n"
-"PO-Revision-Date: 2019-01-17 05:31+0000\n"
+"PO-Revision-Date: 2019-03-01 14:58+0000\n"
 "Last-Translator: David Medina <medipas@gmail.com>\n"
-"Language-Team: Catalan <https://l10n.opensuse.org/projects/zypper/master/ca/"
-">\n"
+"Language-Team: Catalan <https://l10n.opensuse.org/projects/zypper/master/ca/>"
+"\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -515,11 +515,11 @@ msgstr "És un àlies per a '%s'."
 
 #: src/commands/commandhelpformatter.h:107
 msgid "Examples:"
-msgstr ""
+msgstr "Exemples:"
 
 #: src/commands/commandhelpformatter.h:110
 msgid "Arguments:"
-msgstr ""
+msgstr "Arguments:"
 
 #: src/commands/commandhelpformatter.h:123 src/utils/flags/zyppflags.cc:562
 msgid "Command options:"
@@ -690,7 +690,7 @@ msgstr "AAAA-MM-DD"
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:53
 msgid "MODE"
-msgstr ""
+msgstr "MODE"
 
 #. TranslatorExplanation These are reasons for various failures.
 #: src/utils/prompt.h:160
@@ -739,7 +739,7 @@ msgstr "Blocatge de paquets:"
 
 #: src/Command.cc:154
 msgid "Locale Management:"
-msgstr ""
+msgstr "Gestió de llengua:"
 
 #: src/Command.cc:158
 msgid "Other Commands:"
@@ -792,7 +792,7 @@ msgstr "Usa un fitxer config especificat en comptes del predeterminat."
 msgid "User data string must not contain nonprintable or newline characters!"
 msgstr ""
 "La línia de dades de l'usuari no ha de contenir caràcters no imprimibles o "
-"de nova línia!"
+"de línia nova!"
 
 #. translators: --userdata <STRING>
 #: src/Config.cc:373
@@ -1808,8 +1808,8 @@ msgstr[1] "Els %d pedaços següents requereixen un reinici del sistema:"
 #, c-format, boost-format
 msgid "The following package requires a system reboot:"
 msgid_plural "The following %d packages require a system reboot:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "El paquet següent requereix un reinici del sistema:"
+msgstr[1] "Els %d paquets següents requereixen un reinici del sistema:"
 
 #: src/Summary.cc:1373
 #, boost-format
@@ -2386,8 +2386,8 @@ msgstr ""
 #: src/commands/installremove.cc:187
 msgid "Silently install unsigned rpm packages given as commandline parameters."
 msgstr ""
-"Instal·la silenciosament paquets rpm no signats donats com a paràmetres de "
-"la línia d'ordres."
+"Instal·la silenciosament paquets rpm no signats especificats com a "
+"paràmetres de la línia d'ordres."
 
 #. translators: -f, --force
 #: src/commands/installremove.cc:192
@@ -2450,19 +2450,20 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/locale/addlocalecmd.cc:19
 msgid "addlocale (aloc) [OPTIONS] <LOCALE> ..."
-msgstr ""
+msgstr "addlocale (aloc) [OPCIONS] <LLENGUA> ..."
 
 #: src/commands/locale/addlocalecmd.cc:20
 msgid "Add locale(s) to requested locales."
-msgstr ""
+msgstr "Afegeix llengües a les llengües sol·licitades."
 
 #: src/commands/locale/addlocalecmd.cc:21
 msgid "Add given locale(s) to the list of requested locales."
-msgstr ""
+msgstr "Afegiu llengües específiques a la llista de llengües sol·licitades."
 
 #: src/commands/locale/addlocalecmd.cc:32
 msgid "Do not install corresponding packages for given locale(s)."
 msgstr ""
+"No instal·lis els paquets corresponents per a les llengües especificades."
 
 #: src/commands/locale/addlocalecmd.cc:56
 #, c-format, boost-format
@@ -2470,15 +2471,17 @@ msgid ""
 "Specify locale which shall be supported by the language code.\n"
 "Get a list of all available locales by calling '%s'."
 msgstr ""
+"Especifiqueu la llengua, que ha de ser compatible amb el codi de llengua.\n"
+"Obteniu una llista de llengües disponibles amb l'ordre \"%s\"."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/locale/localescmd.cc:17
 msgid "locales (lloc) [OPTIONS] [LOCALE] ..."
-msgstr ""
+msgstr "locales (lloc) [OPCIONS] [LLENGUA] ..."
 
 #: src/commands/locale/localescmd.cc:18
 msgid "List requested locales (languages codes)."
-msgstr ""
+msgstr "Llista de llengües sol·licitades (codis de llengua)."
 
 #: src/commands/locale/localescmd.cc:19
 #, c-format, boost-format
@@ -2490,53 +2493,66 @@ msgid ""
 "can\n"
 "be installed by calling '%s'.\n"
 msgstr ""
+"Llista les llengües sol·licitades i els paquets corresponents.\n"
+"\n"
+"Sense arguments, llista les llengües sol·licitades. Si els paquets de "
+"llengua\n"
+"per a una llengua sol·licitada encara no són al sistema, es poden instal·"
+"lar\n"
+"amb l'ordre \"%s\".\n"
 
 #: src/commands/locale/localescmd.cc:35
 msgid "Show corresponding packages."
-msgstr ""
+msgstr "Mostra els paquets corresponents."
 
 #: src/commands/locale/localescmd.cc:36
 msgid "List all available locales."
-msgstr ""
+msgstr "Llista totes les llengües disponibles."
 
 #: src/commands/locale/localescmd.cc:49
 msgid "Ignoring positional arguments because --all argument was provided."
 msgstr ""
+"S'ignoren els arguments posicionals perquè s'ha proporcionat l'argument "
+"--all."
 
 #: src/commands/locale/localescmd.cc:76
 msgid "The locale(s) for which the information shall be printed."
-msgstr ""
+msgstr "Les llengües de les quals s'ha d'imprimir la informació."
 
 #: src/commands/locale/localescmd.cc:80
 msgid ""
 "Get all locales with lang code 'en' that have their own country code, "
 "excluding the fallback 'en':"
 msgstr ""
+"Obtén totes les llengües  amb el codi \"en\" que tinguin codi de país propi, "
+"excloent-ne l'opció alternativa \"en\":"
 
 #: src/commands/locale/localescmd.cc:87
 msgid "Get all locales with lang code 'en' with or without country code:"
-msgstr ""
+msgstr "Obtén totes les llengües amb el codi \"en\" amb o sense codi de país:"
 
 #: src/commands/locale/localescmd.cc:94
 msgid "Get the locale matching the argument exactly: "
-msgstr ""
+msgstr "Obtén la llengua que coincideixi exactament amb l'argument: "
 
 #: src/commands/locale/localescmd.cc:101
 msgid "Get the list of packages which are available for 'de' and 'en':"
 msgstr ""
+"Obtén la llista de paquets que estan disponibles per als codis \"de\" i \""
+"en\":"
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/locale/removelocalecmd.cc:17
 msgid "removelocale (rloc) [OPTIONS] <LOCALE> ..."
-msgstr ""
+msgstr "removelocale (rloc) [OPCIONS] <LLENGUA> ..."
 
 #: src/commands/locale/removelocalecmd.cc:18
 msgid "Remove locale(s) from requested locales."
-msgstr ""
+msgstr "Suprimeix llengües de les llengües sol·licitades."
 
 #: src/commands/locale/removelocalecmd.cc:19
 msgid "Remove given locale(s) from the list of supported languages."
-msgstr ""
+msgstr "Suprimeix llengües específiques de la llista de llengües admeses."
 
 #: src/commands/locale/removelocalecmd.cc:34
 #, c-format, boost-format
@@ -2544,10 +2560,12 @@ msgid ""
 "Specify locales which shall be removed by the the language code.\n"
 "Get the list of requested locales by calling '%s'."
 msgstr ""
+"Especifiqueu les llengües que s'han de suprimir segons el codi de llengua.\n"
+"Obteniu la llista de llengües sol·licitades amb l'ordre \"%s\"."
 
 #: src/commands/locale/removelocalecmd.cc:46
 msgid "Do not remove corresponding packages for given locale(s)."
-msgstr ""
+msgstr "No suprimeixis els paquets corresponents de les llengües especificades."
 
 # =============================================================================
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
@@ -3124,9 +3142,9 @@ msgid ""
 "name."
 msgstr ""
 "Mostra informació detallada per a paquets especificats. Per defecte, es "
-"mostren els paquets que coincideixen exactament amb els noms donats. Per "
-"obtenir tambe paquets que hi coincideixin parcialment feu servir '--match-"
-"substrings' o el comodí (*?) al nom."
+"mostren els paquets que coincideixen exactament amb els noms especificats. "
+"Per obtenir també paquets que hi coincideixin parcialment feu servir \""
+"--match-substrings\" o el comodí (*?) al nom."
 
 #. translators: -s, --match-substrings
 #: src/commands/query/info.cc:62
@@ -3702,7 +3720,7 @@ msgstr "Ignora l'autenticació de dades de l'usuari a l'URI."
 #. translators: --loose-query
 #: src/commands/repos/remove.cc:47 src/commands/services/remove.cc:43
 msgid "Ignore query string in the URI."
-msgstr "Ignora la línia de consulta a l'URI."
+msgstr "Ignora la cadena de consulta a l'URI."
 
 #. translators: %s is the supplied command line argument which
 #. for which no repository counterpart was found
@@ -4006,18 +4024,19 @@ msgstr "Cerca els paquets que coincideixin amb un patró."
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/search/search.cc:81
 msgid "search (se) [OPTIONS] [QUERYSTRING] ..."
-msgstr "search (se) [opcions] [cadena_de_cerca] ..."
+msgstr "search (se) [OPCIONS] [CADENA DE CONSULTA] ..."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/search/search.cc:86
 msgid "patch-search [OPTIONS] [QUERYSTRING...]"
-msgstr "patch-search [opcions] [línia de consulta...]"
+msgstr "patch-search [OPCIONS] [CADENA DE CONSULTA...]"
 
 #. translators: command description
 #: src/commands/search/search.cc:95
 msgid "Search for packages matching any of the given search strings."
 msgstr ""
-"Cerca paquets que coincideixin amb alguna de les cadenes de cerca donades."
+"Cerca paquets que coincideixin amb alguna de les cadenes de cerca "
+"especificades."
 
 #. translators: command description
 #: src/commands/search/search.cc:97
@@ -4031,7 +4050,7 @@ msgstr ""
 #. translators: command description
 #: src/commands/search/search.cc:102
 msgid "Search for patches matching given search strings."
-msgstr "Cerca paquets que coincideixin amb línies de cerca."
+msgstr "Cerca paquets que coincideixin amb cadenes de cerca especificades."
 
 #. translators: --match-substrings
 #: src/commands/search/search.cc:113
@@ -4046,42 +4065,42 @@ msgstr "Cerca només per coincidència completa de paraules."
 #. translators: -x, --match-exact
 #: src/commands/search/search.cc:121
 msgid "Searches for an exact match of the search strings."
-msgstr "Cerca per coincidència exacta amb els valors de la cerca."
+msgstr "Cerca per coincidència exacta amb les cadenes de cerca."
 
 #. translators: --provides
 #: src/commands/search/search.cc:133
 msgid "Search for packages which provide the search strings."
-msgstr "Cerca els paquets que proveeixen el contingut que es cerca."
+msgstr "Cerca els paquets que proporcionen les cadenes de cerca."
 
 #. translators: --requires
 #: src/commands/search/search.cc:137
 msgid "Search for packages which require the search strings."
-msgstr "Cerca els paquets que requereixen el que es cerca."
+msgstr "Cerca els paquets que requereixen les cadenes de cerca."
 
 #. translators: --recommends
 #: src/commands/search/search.cc:141
 msgid "Search for packages which recommend the search strings."
-msgstr "Cerca els paquets que recomanen el que es cerca."
+msgstr "Cerca els paquets que recomanen les cadenes de cerca."
 
 #. translators: --supplements
 #: src/commands/search/search.cc:145
 msgid "Search for packages which supplement the search strings."
-msgstr "Cerca paquets que complementin les cadenes de cerca."
+msgstr "Cerca els paquets que complementen les cadenes de cerca."
 
 #. translators: --conflicts
 #: src/commands/search/search.cc:149
 msgid "Search packages conflicting with search strings."
-msgstr "Cerca els paquets que tenen conflictes amb els valors que es cerquen."
+msgstr "Cerca els paquets que tenen conflictes amb les cadenes de cerca."
 
 #. translators: --obsoletes
 #: src/commands/search/search.cc:153
 msgid "Search for packages which obsolete the search strings."
-msgstr "Cerca els paquets que tenen el contingut cercat com a obsolet."
+msgstr "Cerca els paquets que tenen les cadenes de cerca com a obsoletes."
 
 #. translators: --suggests
 #: src/commands/search/search.cc:157
 msgid "Search for packages which suggest the search strings."
-msgstr "Cerca els paquets que suggereixen el que es cerca."
+msgstr "Cerca els paquets que suggereixen les cadenes de cerca."
 
 #. translators: -t, --type <TYPE>
 #: src/commands/search/search.cc:161
@@ -4181,7 +4200,7 @@ msgstr "Selecciona pedaços aplicables per als problemes de CVE especificats."
 #. translators: --cve
 #: src/commands/selectpatchoptionset.cc:50
 msgid "Select issues matching the specified string."
-msgstr "Selecciona els problemes que coincideixin amb la cadena especificada."
+msgstr "Selecciona els problemes que coincideixen amb la cadena especificada."
 
 #: src/commands/services/add.cc:55
 #, c-format, boost-format
@@ -4637,7 +4656,7 @@ msgstr "El nom del paquet de codi font és necessari com a argument."
 
 #: src/commands/sourceinstall.cc:86
 msgid "Uninstalling source packages is not supported."
-msgstr ""
+msgstr "No s'admet la desinstal·lació de paquets font."
 
 #: src/commands/subcommand.cc:52
 msgid "none"
@@ -4816,7 +4835,7 @@ msgstr ""
 msgid ""
 "Cannot use multiple types when specific packages are given as arguments."
 msgstr ""
-"No es poden fer servir tipus múltiples quan es donen com a arguments paquets "
+"No es poden usar tipus múltiples quan s'ofereixen com a arguments paquets "
 "específics."
 
 #: src/commands/utils/download.cc:131 src/commands/utils/source-download.cc:212
@@ -5339,56 +5358,56 @@ msgstr "Construeix un paquet binari"
 #. translators: header of table column - is the language requested? (Yes/No)
 #: src/locales.cc:56 src/locales.cc:90
 msgid "Requested"
-msgstr ""
+msgstr "Sol·licitada"
 
 #: src/locales.cc:60
 msgid "Fallback"
-msgstr ""
+msgstr "Alternativa"
 
 #. translators: header of table column - the language code, e.g. en_US
 #: src/locales.cc:86
 msgid "Code"
-msgstr ""
+msgstr "Codi"
 
 #. translators: header of table column - the language, e.g. English (United States)
 #: src/locales.cc:88
 msgid "Language"
-msgstr ""
+msgstr "Llengua"
 
 #: src/locales.cc:306
 #, c-format, boost-format
 msgid "Packages for %s (locale '%s', requested: %s):"
-msgstr ""
+msgstr "Paquets per a %s (llengua: %s, sol·licitada: %s):"
 
 #: src/locales.cc:323
 #, c-format, boost-format
 msgid "Added locale: %s"
-msgstr ""
+msgstr "Afegeix una llengua: %s"
 
 #: src/locales.cc:326
 #, c-format, boost-format
 msgid "ERROR: cannot add %s"
-msgstr ""
+msgstr "ERROR: no es pot afegir %s"
 
 #: src/locales.cc:330
 #, c-format, boost-format
 msgid " %s is already requested."
-msgstr ""
+msgstr " %s ja s'ha sol·licitat."
 
 #: src/locales.cc:351
 #, c-format, boost-format
 msgid "Removed locale: %s"
-msgstr ""
+msgstr "Llengua suprimida: %s"
 
 #: src/locales.cc:354
 #, c-format, boost-format
 msgid "ERROR: cannot remove %s"
-msgstr ""
+msgstr "ERROR: no es pot suprimir %s"
 
 #: src/locales.cc:358
 #, c-format, boost-format
 msgid "%s was not requested."
-msgstr ""
+msgstr "%s no s'ha sol·licitat."
 
 #. translators: this will show up if you press ctrl+c twice
 #: src/main.cc:31
@@ -5849,7 +5868,7 @@ msgstr ""
 
 #: src/repos.cc:1220
 msgid "Can't find a valid repository at given location:"
-msgstr "No es pot trobar un repositori vàlid en aquest lloc:"
+msgstr "No es pot trobar cap repositori vàlid a la ubicació especificada:"
 
 #: src/repos.cc:1228
 msgid "Problem transferring repository data from specified URI:"
