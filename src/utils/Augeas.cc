@@ -80,6 +80,13 @@ namespace
     {}
   };
 
+  struct AugSaveError : public AugException
+  {
+    AugSaveError( std::string  msg_r )
+    : AugException( std::move(msg_r) )
+    {}
+  };
+
   class AugPath;
 
   ///////////////////////////////////////////////////////////////////
@@ -495,6 +502,16 @@ struct Augeas::Impl
   }
 
 
+  static std::pair<std::string,std::string> splitOption( const std::string & option_r )
+  {
+    std::vector<std::string> words;
+    str::split( option_r, back_inserter(words), "/" );
+    if ( words.size() != 2 || words[0].empty() || words[1].empty() )
+      ZYPP_THROW( AugException( str::Format(_("Malformed option name '%1%'." ) ) % option_r ) );
+    return { std::move(words[0]), std::move(words[1]) };
+  }
+
+
   void saveCfg()
   {
     MIL << "Going to save pending config file changes..." << endl;
@@ -516,7 +533,7 @@ public:
 /// class Augeas
 ///////////////////////////////////////////////////////////////////
 
-Augeas::Augeas( Pathname customcfg_r )
+Augeas::Augeas( Pathname customcfg_r, bool readmode_r  )
 : _pimpl { new Impl( ::aug_init( NULL, "/usr/local/share/zypper:/usr/share/zypper", AUG_NO_STDINC | AUG_NO_LOAD ) ) }
 {
   MIL << "Going to read zypper config using Augeas..." << endl;
@@ -539,10 +556,14 @@ Augeas::Augeas( Pathname customcfg_r )
     if ( customcfg_r.relative() )
     {
       const char * PWD = env::PWD();
-      _pimpl->_cfgFiles.push_back( (PWD ? PWD : "/") / customcfg_r );
+      customcfg_r = (PWD ? PWD : "/") / customcfg_r;
     }
-    else
-      _pimpl->_cfgFiles.push_back( customcfg_r );
+
+    PathInfo pi( customcfg_r );
+    if ( pi.isExist() && ! pi.isFile() )
+      ZYPP_THROW( AugException(str::Format(_("Config file '%1%' exists but is not a file." ) ) % customcfg_r ) );
+
+    _pimpl->_cfgFiles.push_back( customcfg_r );
   }
 
   // load the config files
@@ -581,7 +602,8 @@ Augeas::Augeas( Pathname customcfg_r )
     }
     else
     {
-      Zypper::instance().out().warning( str::Format(_("Config file '%1%' can not be found or read." ) ) % cfg );
+      if ( readmode_r && ! customcfg_r.empty() )
+	Zypper::instance().out().warning( str::Format(_("Config file '%1%' does not exist." ) ) % cfg );
       WAR << "MISS config file: " << cfg << endl;
     }
   }
@@ -589,6 +611,9 @@ Augeas::Augeas( Pathname customcfg_r )
 
 Augeas::~Augeas()
 {}
+
+Pathname Augeas::getSaveFile() const
+{ return( _pimpl->_cfgFiles.empty() ? Pathname() : _pimpl->_cfgFiles[0] ); }
 
 std::string Augeas::getOption( const std::string & option_r ) const
 {
@@ -625,6 +650,56 @@ std::string Augeas::getOption( const std::string & option_r ) const
 
   return ret;
 }
+
+void Augeas::setOption( const std::string & option_r, const std::string & value_r )
+{
+  const Pathname & cfg { getSaveFile() };
+  if ( cfg.empty() )
+    ZYPP_THROW( AugSaveError(_("No config file is in use.") ) );
+
+  AugPath fP { _pimpl->augPath( "/files"/cfg/option_r ) };
+
+  unsigned matches = fP.matches();
+  if ( matches )
+  {
+    if ( matches > 1 )
+    {
+      AugPath last { fP.lastMatch() };
+      fP.rm();
+      fP = last;
+    }
+    fP.set( value_r );
+  }
+  else
+  {
+    // - perferably insert the new node after its commented node (if it exists)
+    const std::pair<std::string,std::string> & sk { Impl::splitOption( option_r ) };
+    AugPath secP { _pimpl->augPath( "/files"/cfg/sk.first ) };
+
+    AugPath comP { secP };
+    comP += "/#kv/";
+    comP += sk.second;
+    comP = comP.lastMatch();
+    if ( comP )
+    {
+      comP += "/..";
+      comP.insertAfter( sk.second );	// now fP matches
+      fP.set( value_r );
+    }
+    else
+    {
+      // - Not intended, but be prepared for ambiguous parent (multiple sections with same name)
+      fP = secP;
+      fP += "[last()]/";
+      fP += sk.second;
+      fP.set( value_r );
+    }
+  }
+  DBG << fP << endl;
+}
+
+void Augeas::save()
+{ _pimpl->saveCfg(); }
 
 std::ostream & operator<<( std::ostream & str_r, const Augeas & obj_r )
 { return str_r << obj_r._pimpl->_aug; }

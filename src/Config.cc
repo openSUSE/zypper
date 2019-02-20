@@ -779,13 +779,46 @@ void Config::read( const std::string & file )
     if (!s.empty())
       obs_platform = s;
 
+
+    // finally remember the default config file for saving back values
+    _cfgSaveFile = augeas.getSaveFile();
     m.stop();
   }
   catch (Exception & e)
   {
     std::cerr << e.asUserHistory() << endl;
-    std::cerr << "*** Augeas exception. No config read, sticking with defaults." << endl;
+    std::cerr << "*** Augeas exception: No config files read, sticking with defaults." << endl;
   }
 
   setColorForOut( do_colors );
+}
+
+
+void Config::saveback_search_runSearchPackages( const TriBool & value_r )
+{
+  auto & out { Zypper::instance().out() };
+
+  if ( _cfgSaveFile.empty() )
+  {
+    out.gap();
+    out.errorPar(_("No config file is in use. Can not save options.") );
+  }
+  else try
+  {
+    Augeas augeas( _cfgSaveFile, /*readmode=*/false );
+
+    const std::string & value { asString( value_r, "ask", "always", "never" ) };
+    augeas.setOption( asString( ConfigOption::SEARCH_RUNSEARCHPACKAGES ), value );
+    augeas.save();
+
+    out.gap();
+    out.info( str::Format(_("Option '%1%' saved in '%2%'.") ) % ("[search] runSearchPackages = "+value) %_cfgSaveFile );
+
+  }
+  catch ( const Exception & excpt )
+  {
+    ZYPP_CAUGHT( excpt );
+    out.gap();
+    out.error( excpt, "", _("Failed to save option.") );
+  }
 }

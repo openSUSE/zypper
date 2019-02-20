@@ -27,13 +27,22 @@ class Augeas
 
 public:
   /** Ctor opt. taking a custom config file (otherwise the default cfg files are used). */
-  Augeas( zypp::Pathname customcfg_r = zypp::Pathname() );
+  Augeas( zypp::Pathname customcfg_r = zypp::Pathname(), bool readmode_r = true );
 
   ~Augeas();
 
 public:
   /** Returns the value for \a option_r ("SECTION/VARIABLE") or an empty string. */
   std::string getOption( const std::string & option_r ) const;
+
+  /** Set the value for \a option_r ("SECTION/VARIABLE") in the augeas tree. */
+  void setOption( const std::string & option_r, const std::string & value_r );
+
+  /** Save changes in the augeas tree back to disk. */
+  void save();
+
+  /** Actually the */
+  Pathname getSaveFile() const;
 
 public:
   class Impl;
