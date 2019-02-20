@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-01-31 13:26+0100\n"
-"PO-Revision-Date: 2019-01-20 17:29+0000\n"
-"Last-Translator: Rodrigo Macedo <rmsolucoeseminformatic4@gmail.com>\n"
+"PO-Revision-Date: 2019-03-01 14:58+0000\n"
+"Last-Translator: carlo valente <carlo.gt.valente@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) <https://l10n.opensuse.org/projects/"
 "zypper/master/pt_BR/>\n"
 "Language: pt_BR\n"
@@ -520,11 +520,11 @@ msgstr "Este é um apelido para '%s'."
 
 #: src/commands/commandhelpformatter.h:107
 msgid "Examples:"
-msgstr ""
+msgstr "Exemplos:"
 
 #: src/commands/commandhelpformatter.h:110
 msgid "Arguments:"
-msgstr ""
+msgstr "Argumentos:"
 
 #: src/commands/commandhelpformatter.h:123 src/utils/flags/zyppflags.cc:562
 msgid "Command options:"
@@ -1820,8 +1820,8 @@ msgstr[1] "As seguintes %d correções requerem o reinício do sistema:"
 #, c-format, boost-format
 msgid "The following package requires a system reboot:"
 msgid_plural "The following %d packages require a system reboot:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "O seguinte pacote requer a reinicialização do sistema:"
+msgstr[1] "Os seguintes pacotes requerem a reinicialização do sistema:"
 
 #: src/Summary.cc:1373
 #, boost-format
