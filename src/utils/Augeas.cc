@@ -140,6 +140,9 @@ namespace
     const char * c_str() const
     { return _path.c_str(); }
 
+    explicit operator bool() const
+    { return !_path.empty(); }
+
     AugPath & operator=( const std::string & str_r )
     { str() = str_r; return *this; }
 
@@ -148,6 +151,16 @@ namespace
 
     AugPath operator+( const std::string & str_r ) const
     { return AugPath(*this) += str_r; }
+
+    /** Returns a unique AugPath to the first match or an empty AugPath if no matches.
+     * \see \ref AugMatches
+     */
+    AugPath firstMatch() const;
+
+    /** Returns a unique AugPath to the last match or an empty AugPath if no matches.
+     * \see \ref AugMatches
+     */
+    AugPath lastMatch() const;
 
   public:
     bool empty() const
@@ -300,11 +313,6 @@ namespace
   }
 
   ///////////////////////////////////////////////////////////////////
-
-  inline AugPath AugRef::augPath( std::string path_r ) const
-  { return { *this, std::move(path_r) }; }
-
-  ///////////////////////////////////////////////////////////////////
   /// \brief \ref AugPath matches in the the augeas tree (AugPath container)
   struct AugMatches : public AugRef
   {
@@ -332,8 +340,11 @@ namespace
   public:
     typedef transform_iterator<MkValue,char**> const_iterator;
 
+    explicit operator bool() const
+    { return !empty(); }
+
     bool empty() const
-    { return _d->_cnt; }
+    { return !_d->_cnt; }
 
     unsigned size() const
     { return _d->_cnt; }
@@ -384,6 +395,28 @@ namespace
   /** \relates AugMatches Stream output */
   inline std::ostream & operator<<( std::ostream & str_r, const AugMatches & obj_r )
   { return dumpRange( str_r << "AugMatches ", obj_r.begin(), obj_r.end() ); }
+
+  ///////////////////////////////////////////////////////////////////
+
+  inline AugPath AugRef::augPath( std::string path_r ) const
+  { return { *this, std::move(path_r) }; }
+
+
+  inline AugPath AugPath::firstMatch() const
+  {
+    AugPath ret { augPath() };
+    AugMatches m { *this };
+    if ( ! m.empty() ) ret = *m.begin();
+    return ret;
+  }
+
+  inline AugPath AugPath::lastMatch() const
+  {
+    AugPath ret { augPath() };
+    AugMatches m { *this };
+    if ( ! m.empty() ) ret = *m.last();
+    return ret;
+  }
 
   ///////////////////////////////////////////////////////////////////
   /// \brief IOmanip to dump an augeas (sub)tree
