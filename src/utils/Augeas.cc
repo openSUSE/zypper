@@ -92,13 +92,13 @@ namespace
 
     explicit AugRef( ::augeas * take_r )
     : _ref { take_r, &deleter }
-    {}
-
-    explicit operator bool() const
-    { return bool(_ref); }
+    {
+      if ( ! take_r )
+	ZYPP_THROW( AugException(_("Cannot initialize configuration file parser.") ) );
+    }
 
   public:
-    AugPath augPath( std::string path_r ) const;	///< AugPath factory
+    AugPath augPath( std::string path_r = std::string() ) const;	///< AugPath factory
 
   public:
     ::augeas * aug()
@@ -442,10 +442,7 @@ struct Augeas::Impl
 {
   explicit Impl( ::augeas * take_r )
   : _aug { take_r }
-  {
-    if ( !_aug )
-      ZYPP_THROW( AugException(_("Cannot initialize configuration file parser.") ) );
-  }
+  {}
 
   AugPath augPath( const Pathname & path_r ) const
   { return { _aug, path_r.asString() }; }
