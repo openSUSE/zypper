@@ -12,7 +12,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-01-31 13:26+0100\n"
 "PO-Revision-Date: 2019-03-01 14:58+0000\n"
-"Last-Translator: carlo valente <carlo.gt.valente@gmail.com>\n"
+"Last-Translator: Rodrigo Macedo <rmsolucoeseminformatic4@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) <https://l10n.opensuse.org/projects/"
 "zypper/master/pt_BR/>\n"
 "Language: pt_BR\n"
@@ -696,7 +696,7 @@ msgstr "aaaa-mm-dd"
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:53
 msgid "MODE"
-msgstr ""
+msgstr "MODO"
 
 #. TranslatorExplanation These are reasons for various failures.
 #: src/utils/prompt.h:160
@@ -746,7 +746,7 @@ msgstr "Bloqueios de pacotes:"
 
 #: src/Command.cc:154
 msgid "Locale Management:"
-msgstr ""
+msgstr "Gestão da configuração regional:"
 
 #: src/Command.cc:158
 msgid "Other Commands:"
@@ -2464,19 +2464,21 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/locale/addlocalecmd.cc:19
 msgid "addlocale (aloc) [OPTIONS] <LOCALE> ..."
-msgstr ""
+msgstr "adicionar local (aloc) [OPTIONS] <LOCALE> ..."
 
 #: src/commands/locale/addlocalecmd.cc:20
 msgid "Add locale(s) to requested locales."
-msgstr ""
+msgstr "Adicionar localidade (s) às localidades solicitadas."
 
 #: src/commands/locale/addlocalecmd.cc:21
 msgid "Add given locale(s) to the list of requested locales."
-msgstr ""
+msgstr "Adicionar localidade (s) dada (s) à lista de localidades solicitadas."
 
 #: src/commands/locale/addlocalecmd.cc:32
 msgid "Do not install corresponding packages for given locale(s)."
 msgstr ""
+"Não instale os pacotes correspondentes para o (s) local (is) especificado "
+"(s)."
 
 #: src/commands/locale/addlocalecmd.cc:56
 #, c-format, boost-format
@@ -2484,15 +2486,17 @@ msgid ""
 "Specify locale which shall be supported by the language code.\n"
 "Get a list of all available locales by calling '%s'."
 msgstr ""
+"Especifique a localidade que deve ser suportada pelo código de idioma.\n"
+"Obtenha uma lista de todas as localidades disponíveis chamando '%s'."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/locale/localescmd.cc:17
 msgid "locales (lloc) [OPTIONS] [LOCALE] ..."
-msgstr ""
+msgstr "locais (lloc) [OPTIONS] [LOCALE] ..."
 
 #: src/commands/locale/localescmd.cc:18
 msgid "List requested locales (languages codes)."
-msgstr ""
+msgstr "Listar localidades solicitadas (códigos de idiomas)."
 
 #: src/commands/locale/localescmd.cc:19
 #, c-format, boost-format
@@ -2504,53 +2508,66 @@ msgid ""
 "can\n"
 "be installed by calling '%s'.\n"
 msgstr ""
+"Listar os locais solicitados e os pacotes correspondentes.\n"
+"\n"
+"Chamado sem argumentos, lista os locais solicitados. Se o\n"
+"pacotes de idioma para um idioma solicitado ainda não estão no sistema, eles "
+"podem\n"
+"ser instalado chamando '%s'.\n"
 
 #: src/commands/locale/localescmd.cc:35
 msgid "Show corresponding packages."
-msgstr ""
+msgstr "Mostrar os pacotes correspondentes."
 
 #: src/commands/locale/localescmd.cc:36
 msgid "List all available locales."
-msgstr ""
+msgstr "Listar todos os locais disponíveis."
 
 #: src/commands/locale/localescmd.cc:49
 msgid "Ignoring positional arguments because --all argument was provided."
 msgstr ""
+"Ignorando os argumentos posicionais porque se tem proporcionado o argumento "
+"--all."
 
 #: src/commands/locale/localescmd.cc:76
 msgid "The locale(s) for which the information shall be printed."
 msgstr ""
+"O (s) local (ais) para o (s) qual (is) a informação será (em) impressa (s)."
 
 #: src/commands/locale/localescmd.cc:80
 msgid ""
 "Get all locales with lang code 'en' that have their own country code, "
 "excluding the fallback 'en':"
 msgstr ""
+"Obtenha todas as localidades com o código de idioma 'en' que tenham seu "
+"próprio código de país, excluindo o substituto 'en':"
 
 #: src/commands/locale/localescmd.cc:87
 msgid "Get all locales with lang code 'en' with or without country code:"
 msgstr ""
+"Obtenha todas as localidades com o código de idioma 'en' com ou sem código "
+"do país:"
 
 #: src/commands/locale/localescmd.cc:94
 msgid "Get the locale matching the argument exactly: "
-msgstr ""
+msgstr "Obtenha o código do idioma correspondente exatamente ao argumento: "
 
 #: src/commands/locale/localescmd.cc:101
 msgid "Get the list of packages which are available for 'de' and 'en':"
-msgstr ""
+msgstr "Veja a lista de pacotes que está disponível para 'de' e 'en':"
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/locale/removelocalecmd.cc:17
 msgid "removelocale (rloc) [OPTIONS] <LOCALE> ..."
-msgstr ""
+msgstr "remover local (rloc) [OPTIONS] <LOCALE> ..."
 
 #: src/commands/locale/removelocalecmd.cc:18
 msgid "Remove locale(s) from requested locales."
-msgstr ""
+msgstr "Remover local (ais) das localidades solicitadas."
 
 #: src/commands/locale/removelocalecmd.cc:19
 msgid "Remove given locale(s) from the list of supported languages."
-msgstr ""
+msgstr "Remover dado (s) local (ais) da lista de idiomas suportados."
 
 #: src/commands/locale/removelocalecmd.cc:34
 #, c-format, boost-format
@@ -2558,10 +2575,13 @@ msgid ""
 "Specify locales which shall be removed by the the language code.\n"
 "Get the list of requested locales by calling '%s'."
 msgstr ""
+"Especifique as localidades que devem ser removidas pelo código do idioma.\n"
+"Obtenha a lista de localidades solicitadas chamando '%s'."
 
 #: src/commands/locale/removelocalecmd.cc:46
 msgid "Do not remove corresponding packages for given locale(s)."
 msgstr ""
+"Não remova os pacotes correspondentes para o (s) local (is) especificado (s)."
 
 # =============================================================================
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
@@ -4652,7 +4672,7 @@ msgstr "O nome do pacote fonte é um argumento necessário."
 
 #: src/commands/sourceinstall.cc:86
 msgid "Uninstalling source packages is not supported."
-msgstr ""
+msgstr "A desinstalação de pacotes de origem não é permitida."
 
 #: src/commands/subcommand.cc:52
 msgid "none"
@@ -5347,56 +5367,56 @@ msgstr "Compila pacote executável"
 #. translators: header of table column - is the language requested? (Yes/No)
 #: src/locales.cc:56 src/locales.cc:90
 msgid "Requested"
-msgstr ""
+msgstr "Requerido"
 
 #: src/locales.cc:60
 msgid "Fallback"
-msgstr ""
+msgstr "Alternativa"
 
 #. translators: header of table column - the language code, e.g. en_US
 #: src/locales.cc:86
 msgid "Code"
-msgstr ""
+msgstr "Código"
 
 #. translators: header of table column - the language, e.g. English (United States)
 #: src/locales.cc:88
 msgid "Language"
-msgstr ""
+msgstr "Idioma"
 
 #: src/locales.cc:306
 #, c-format, boost-format
 msgid "Packages for %s (locale '%s', requested: %s):"
-msgstr ""
+msgstr "Pacotes para %s (localidade '%s', solicitado: %s):"
 
 #: src/locales.cc:323
 #, c-format, boost-format
 msgid "Added locale: %s"
-msgstr ""
+msgstr "Localidade adicionada: %s"
 
 #: src/locales.cc:326
 #, c-format, boost-format
 msgid "ERROR: cannot add %s"
-msgstr ""
+msgstr "ERRO: não é possível adicionar %s"
 
 #: src/locales.cc:330
 #, c-format, boost-format
 msgid " %s is already requested."
-msgstr ""
+msgstr " %s já foi requerido."
 
 #: src/locales.cc:351
 #, c-format, boost-format
 msgid "Removed locale: %s"
-msgstr ""
+msgstr "Locale removido:% s"
 
 #: src/locales.cc:354
 #, c-format, boost-format
 msgid "ERROR: cannot remove %s"
-msgstr ""
+msgstr "ERRO: %s não pode ser removido"
 
 #: src/locales.cc:358
 #, c-format, boost-format
 msgid "%s was not requested."
-msgstr ""
+msgstr "% não foi necessário."
 
 #. translators: this will show up if you press ctrl+c twice
 #: src/main.cc:31
