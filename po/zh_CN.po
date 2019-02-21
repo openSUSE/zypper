@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-01-31 13:26+0100\n"
-"PO-Revision-Date: 2019-01-20 17:29+0000\n"
-"Last-Translator: Marguerite Su <i@marguerite.su>\n"
+"PO-Revision-Date: 2019-03-01 14:58+0000\n"
+"Last-Translator: H. Zeng <zhx@cnzhx.net>\n"
 "Language-Team: Chinese (China) <https://l10n.opensuse.org/projects/zypper/"
 "master/zh_CN/>\n"
 "Language: zh_CN\n"
@@ -487,11 +487,11 @@ msgstr "这是 '%s' 的一个别名。"
 
 #: src/commands/commandhelpformatter.h:107
 msgid "Examples:"
-msgstr ""
+msgstr "示例："
 
 #: src/commands/commandhelpformatter.h:110
 msgid "Arguments:"
-msgstr ""
+msgstr "参数："
 
 #: src/commands/commandhelpformatter.h:123 src/utils/flags/zyppflags.cc:562
 msgid "Command options:"
@@ -661,7 +661,7 @@ msgstr "YYYY-MM-DD"
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:53
 msgid "MODE"
-msgstr ""
+msgstr "模式"
 
 #. TranslatorExplanation These are reasons for various failures.
 #: src/utils/prompt.h:160
@@ -711,7 +711,7 @@ msgstr "软件包锁定："
 
 #: src/Command.cc:154
 msgid "Locale Management:"
-msgstr ""
+msgstr "地区管理："
 
 #: src/Command.cc:158
 msgid "Other Commands:"
@@ -1656,7 +1656,7 @@ msgstr[0] "以下 %d 个补丁需要重启系统："
 #, c-format, boost-format
 msgid "The following package requires a system reboot:"
 msgid_plural "The following %d packages require a system reboot:"
-msgstr[0] ""
+msgstr[0] "以下 %d 个软件包需要重新启动系统："
 
 #: src/Summary.cc:1373
 #, boost-format
@@ -2047,7 +2047,7 @@ msgstr "zypper <子命令> [--命令选项] [参数]"
 
 #: src/commands/help.cc:72 src/commands/help.cc:73
 msgid "Print zypper help"
-msgstr "打印帮助。"
+msgstr "显示 zypper 帮助"
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/inrverify.cc:68
@@ -2250,19 +2250,19 @@ msgstr "列出全部有新版本的软件包， 不管其是否可以安装。"
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/locale/addlocalecmd.cc:19
 msgid "addlocale (aloc) [OPTIONS] <LOCALE> ..."
-msgstr ""
+msgstr "addlocale (aloc) [选项] <地区> ..."
 
 #: src/commands/locale/addlocalecmd.cc:20
 msgid "Add locale(s) to requested locales."
-msgstr ""
+msgstr "增加地区到要求的地区列表。"
 
 #: src/commands/locale/addlocalecmd.cc:21
 msgid "Add given locale(s) to the list of requested locales."
-msgstr ""
+msgstr "添加指定地区到要求的地区列表中。"
 
 #: src/commands/locale/addlocalecmd.cc:32
 msgid "Do not install corresponding packages for given locale(s)."
-msgstr ""
+msgstr "不为指定地区安装相应的软件包。"
 
 #: src/commands/locale/addlocalecmd.cc:56
 #, c-format, boost-format
@@ -2270,15 +2270,17 @@ msgid ""
 "Specify locale which shall be supported by the language code.\n"
 "Get a list of all available locales by calling '%s'."
 msgstr ""
+"指定应该被语言代码支持的地区。\n"
+"使用 '%s' 可获取所有可用的地区列表。"
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/locale/localescmd.cc:17
 msgid "locales (lloc) [OPTIONS] [LOCALE] ..."
-msgstr ""
+msgstr "locales (lloc) [选项] [地区] ..."
 
 #: src/commands/locale/localescmd.cc:18
 msgid "List requested locales (languages codes)."
-msgstr ""
+msgstr "列出所有要求的地区（语言代码）。"
 
 #: src/commands/locale/localescmd.cc:19
 #, c-format, boost-format
@@ -2290,53 +2292,58 @@ msgid ""
 "can\n"
 "be installed by calling '%s'.\n"
 msgstr ""
+"列出要求的地区和相应的软件包。\n"
+"\n"
+"不使用任何参数时，列出要求的地区。如果\n"
+"系统中还没有某个要求的语言的地区软件包，可以\n"
+"通过 '%s' 来安装他们。\n"
 
 #: src/commands/locale/localescmd.cc:35
 msgid "Show corresponding packages."
-msgstr ""
+msgstr "显示相应的软件包。"
 
 #: src/commands/locale/localescmd.cc:36
 msgid "List all available locales."
-msgstr ""
+msgstr "列出所有可用地区。"
 
 #: src/commands/locale/localescmd.cc:49
 msgid "Ignoring positional arguments because --all argument was provided."
-msgstr ""
+msgstr "忽略位置参数因为已提供 --all 参数。"
 
 #: src/commands/locale/localescmd.cc:76
 msgid "The locale(s) for which the information shall be printed."
-msgstr ""
+msgstr "需要显示其信息的地区。"
 
 #: src/commands/locale/localescmd.cc:80
 msgid ""
 "Get all locales with lang code 'en' that have their own country code, "
 "excluding the fallback 'en':"
-msgstr ""
+msgstr "获取所有包含自己的国家代码的语言代码为 'en' 的地区，默认的 'en' 除外："
 
 #: src/commands/locale/localescmd.cc:87
 msgid "Get all locales with lang code 'en' with or without country code:"
-msgstr ""
+msgstr "获取所有包含或者不包含国家代码的语言代码为 'en' 的地区："
 
 #: src/commands/locale/localescmd.cc:94
 msgid "Get the locale matching the argument exactly: "
-msgstr ""
+msgstr "获取所有精确匹配参数的地区： "
 
 #: src/commands/locale/localescmd.cc:101
 msgid "Get the list of packages which are available for 'de' and 'en':"
-msgstr ""
+msgstr "获取适用于 'de' 和 'en' 的软件包列表："
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/locale/removelocalecmd.cc:17
 msgid "removelocale (rloc) [OPTIONS] <LOCALE> ..."
-msgstr ""
+msgstr "removelocale (rloc) [选项] <地区> ..."
 
 #: src/commands/locale/removelocalecmd.cc:18
 msgid "Remove locale(s) from requested locales."
-msgstr ""
+msgstr "从要求的地区中移除地区。"
 
 #: src/commands/locale/removelocalecmd.cc:19
 msgid "Remove given locale(s) from the list of supported languages."
-msgstr ""
+msgstr "从支持的语言列表中移除地区。"
 
 #: src/commands/locale/removelocalecmd.cc:34
 #, c-format, boost-format
@@ -2344,10 +2351,12 @@ msgid ""
 "Specify locales which shall be removed by the the language code.\n"
 "Get the list of requested locales by calling '%s'."
 msgstr ""
+"指定根据语言代码应该移除的地区。\n"
+"使用 '%s' 获取要求的地区列表。"
 
 #: src/commands/locale/removelocalecmd.cc:46
 msgid "Do not remove corresponding packages for given locale(s)."
-msgstr ""
+msgstr "不要为给定的地区移除相应的软件包。"
 
 # =============================================================================
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
@@ -4341,7 +4350,7 @@ msgstr "源代码包名称是一个必需的参数。"
 
 #: src/commands/sourceinstall.cc:86
 msgid "Uninstalling source packages is not supported."
-msgstr ""
+msgstr "不支持卸载源软件包。"
 
 #: src/commands/subcommand.cc:52
 msgid "none"
@@ -5014,56 +5023,56 @@ msgstr "构建二进制包"
 #. translators: header of table column - is the language requested? (Yes/No)
 #: src/locales.cc:56 src/locales.cc:90
 msgid "Requested"
-msgstr ""
+msgstr "要求"
 
 #: src/locales.cc:60
 msgid "Fallback"
-msgstr ""
+msgstr "默认"
 
 #. translators: header of table column - the language code, e.g. en_US
 #: src/locales.cc:86
 msgid "Code"
-msgstr ""
+msgstr "语言代码"
 
 #. translators: header of table column - the language, e.g. English (United States)
 #: src/locales.cc:88
 msgid "Language"
-msgstr ""
+msgstr "语言"
 
 #: src/locales.cc:306
 #, c-format, boost-format
 msgid "Packages for %s (locale '%s', requested: %s):"
-msgstr ""
+msgstr "%s 的软件包(地区 '%s'，要求： %s)："
 
 #: src/locales.cc:323
 #, c-format, boost-format
 msgid "Added locale: %s"
-msgstr ""
+msgstr "增加的地区：%s"
 
 #: src/locales.cc:326
 #, c-format, boost-format
 msgid "ERROR: cannot add %s"
-msgstr ""
+msgstr "错误：无法添加 %s"
 
 #: src/locales.cc:330
 #, c-format, boost-format
 msgid " %s is already requested."
-msgstr ""
+msgstr " %s 已经要求。"
 
 #: src/locales.cc:351
 #, c-format, boost-format
 msgid "Removed locale: %s"
-msgstr ""
+msgstr "移除的地区：%s"
 
 #: src/locales.cc:354
 #, c-format, boost-format
 msgid "ERROR: cannot remove %s"
-msgstr ""
+msgstr "错误：无法移除 %s"
 
 #: src/locales.cc:358
 #, c-format, boost-format
 msgid "%s was not requested."
-msgstr ""
+msgstr "%s 不被要求。"
 
 #. translators: this will show up if you press ctrl+c twice
 #: src/main.cc:31
