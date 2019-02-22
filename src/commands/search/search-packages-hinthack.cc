@@ -95,12 +95,14 @@ namespace searchPackagesHintHack
       zypper_r.out().gap();
       if ( indeterminate(callSP) )
       {
-	HIGHLIGHTString tag { "Undecided in zypper.conf:" };
-	std::string hint { "[search] runSearchPackages = ask" };
-	zypper_r.out().infoLRHint( text::join( tag, str::Format(_("For an extended search including not yet activated remote resources you may now run '%1%'.")) % "zypper search-packages" ),
-				   hint );
+	zypper_r.out().par( str::Format(_("For an extended search including not yet activated remote resources you may run '%1%' at any time.")) % "zypper search-packages" );
 	std::string question { str::Format(_("Do you want to run '%1%' now?")) % "zypper search-packages" };
-        callSP = read_bool_answer( PROMPT_YN_GPG_UNSIGNED_FILE_ACCEPT, question, false );
+	std::pair<bool,bool> answer { read_bool_answer_opt_save( PROMPT_YN_RUN_SEARCH_PACKAGES, question, false ) };
+	callSP = answer.first;
+	if ( answer.second )
+	{
+	  zypper_r.configNoConst().saveback_search_runSearchPackages( callSP );
+	}
       }
 #ifdef ENABLE_DISABLED_IN_CONFIG_HINT
       else
