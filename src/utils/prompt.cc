@@ -23,11 +23,11 @@
 
 // ----------------------------------------------------------------------------
 
-PromptOptions::PromptOptions( const std::string & option_str, unsigned default_opt )
-: _shown_count(-1)
-{
-  setOptions( option_str, default_opt );
-}
+PromptOptions::PromptOptions( StrVector options_r, unsigned defaultOpt_r )
+{ setOptions( std::move(options_r), defaultOpt_r ); }
+
+PromptOptions::PromptOptions( const std::string & optionstr_r, unsigned defaultOpt_r )
+{ setOptions( optionstr_r, defaultOpt_r ); }
 
 // ----------------------------------------------------------------------------
 
@@ -36,17 +36,24 @@ PromptOptions::~PromptOptions()
 
 // ----------------------------------------------------------------------------
 
-void PromptOptions::setOptions( const std::string & option_str, unsigned default_opt )
+void PromptOptions::setOptions( StrVector options_r, unsigned defaultOpt_r )
 {
-  str::split(option_str, back_inserter(_options), "/");
-
-  if (_options.size() <= default_opt)
-    INT << "Invalid default option index " << default_opt << endl;
+  _options.swap( options_r );
+  if ( _options.size() <= defaultOpt_r )
+  {
+    INT << "Invalid default option index " << defaultOpt_r << endl;
+    _default = 0;
+  }
   else
-    _default = default_opt;
+    _default = defaultOpt_r;
 }
 
-
+void PromptOptions::setOptions( const std::string & optionstr_r, unsigned defaultOpt_r )
+{
+  StrVector options;
+  str::split( optionstr_r, back_inserter(options), "/" );
+  setOptions( std::move(options), defaultOpt_r );
+}
 
 ColorString PromptOptions::optionString() const
 {

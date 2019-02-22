@@ -36,23 +36,28 @@ public:
   /**
    * Default c-tor.
    */
-  PromptOptions() : _shown_count(-1) {};
+  PromptOptions() {};
+
+  /** Ctor taking the option values as vector */
+  PromptOptions( StrVector options_r, unsigned defaultOpt_r );
 
   /**
    * Constructor.
    *
-   * \param option_str translated option string containing one or more
-   *                   options separated by slash '/' character
-   *                   e.g. "yes/no/?" or "1/s/r/c"
-   * \param default_opt index of the default answer within the \a option_str
+   * \param optionstr_r  translated option string containing one or more
+   *                     options separated by slash '/' character
+   *                     e.g. "yes/no/?" or "1/s/r/c"
+   * \param defaultOpt_r index of the default answer within the \a option_str
    */
-  PromptOptions(const std::string & option_str, unsigned default_opt);
+  PromptOptions( const std::string & optionstr_r, unsigned defaultOpt_r );
 
   /** D-tor */
   ~PromptOptions();
 
   const StrVector & options() const { return _options; }
-  void setOptions(const std::string & option_str, unsigned default_opt);
+  void setOptions( StrVector options_r, unsigned defaultOpt_r );
+  void setOptions( const std::string & optionstr_r, unsigned defaultOpt_r );
+
   unsigned defaultOpt() const { return _default; }
   /** Option string (may have embedded color codes) */
   ColorString optionString() const;
@@ -66,9 +71,9 @@ public:
   bool helpEmpty() const { return _opt_help.empty(); }
 
   bool isEnabled(unsigned opt) const
-  { return _disabled.find(opt) == _disabled.end(); }
+  { return !isDisabled(opt); }
   bool isDisabled(unsigned opt) const
-  { return _disabled.find(opt) != _disabled.end(); }
+  { return _disabled.count(opt); }
   void disable(unsigned opt)
   { _disabled.insert(opt); }
   void enable(unsigned opt)
@@ -87,7 +92,7 @@ private:
   /** option strings */
   StrVector _options;
   /** index of the default option */
-  unsigned _default;
+  unsigned _default = 0;
   /** help strings corresponding to options */
   StrVector _opt_help;
   /** set of options to ignore */
@@ -96,7 +101,7 @@ private:
    * Number of options to show (the rest will still be available and visible
    * through '?' help). If negative, all options will be shown. Zero is allowed.
    */
-  int _shown_count;
+  int _shown_count = -1;
 };
 
 
