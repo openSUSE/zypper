@@ -57,32 +57,44 @@ void PromptOptions::setOptions( const std::string & optionstr_r, unsigned defaul
 
 ColorString PromptOptions::optionString() const
 {
-  std::ostringstream str;
-
+  bool hidden = false;	// have enabled options not shown at the prompt (/...)?
   unsigned shown = 0;
-  unsigned maxidx = _shown_count < 0 ? _options.size()
-                                     : ( (unsigned)_shown_count < _options.size() ? _shown_count : _options.size() );
-  for ( unsigned idx = 0; idx < maxidx; ++idx )
+  unsigned showmax = ( _shown_count < 0 ? _options.size() : (unsigned)_shown_count );
+
+  std::ostringstream str;
+  str << "[";
+
+  const char * slash = "";	// "/" after the 1st option
+  for ( unsigned idx = 0; idx < _options.size(); ++idx )
   {
-    if ( isEnabled( idx ) )
+    if ( isDisabled(idx) )
+      continue;
+
+    if ( shown < showmax )
     {
-      str << ( shown ? "/" : "[" ) << ( ColorContext::PROMPT_OPTION << _options[idx] );
+      str << slash << ( ColorContext::PROMPT_OPTION << _options[idx] );
+      if ( !shown ) slash = "/";
       ++shown;
+    }
+    else
+    {
+      hidden = true;
+      break;	// don't mind how many
     }
   }
 
-  if ( !_opt_help.empty() )
+  if ( hidden || !_opt_help.empty() )
   {
-    if ( shown )
-      str << ( maxidx != _options.size() ? "/..." : "/" );
-    // translators: Press '?' to see all options embedded in this prompt: "Continue? [y/n/? shows all options] (y):"
-    str << ( ColorContext::PROMPT_OPTION << "?" ) << " " << _("shows all options");
+    str << slash << ( hidden ? "..." : "" ) << ( ColorContext::PROMPT_OPTION << "?" );
+    if ( hidden )
+      // translators: Press '?' to see all options embedded in this prompt: "Continue? [y/n/? shows all options] (y):"
+      str << " " << _("shows all options");
   }
 
-  if ( shown )
-  {
-    str << "] (" << ( ColorContext::PROMPT_OPTION << _options[_default] ) << ")";
-  }
+  str << "]";
+
+  if ( !_options.empty() )
+    str << " (" << ( ColorContext::PROMPT_OPTION << _options[_default] ) << ")";
 
   return ColorString( str.str() );
 }
