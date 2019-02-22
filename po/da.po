@@ -7,10 +7,10 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-01-31 13:26+0100\n"
-"PO-Revision-Date: 2019-01-20 17:29+0000\n"
+"PO-Revision-Date: 2019-03-01 14:58+0000\n"
 "Last-Translator: scootergrisen <scootergrisen@gmail.com>\n"
-"Language-Team: Danish <https://l10n.opensuse.org/projects/zypper/master/da/"
-">\n"
+"Language-Team: Danish <https://l10n.opensuse.org/projects/zypper/master/da/>"
+"\n"
 "Language: da\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -509,11 +509,11 @@ msgstr "Dette er et alias for \"%s\"."
 
 #: src/commands/commandhelpformatter.h:107
 msgid "Examples:"
-msgstr ""
+msgstr "Eksempler:"
 
 #: src/commands/commandhelpformatter.h:110
 msgid "Arguments:"
-msgstr ""
+msgstr "Argumenter:"
 
 #: src/commands/commandhelpformatter.h:123 src/utils/flags/zyppflags.cc:562
 msgid "Command options:"
@@ -684,7 +684,7 @@ msgstr "ÅÅÅÅ-MM-DD"
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:53
 msgid "MODE"
-msgstr ""
+msgstr "TILSTAND"
 
 #. TranslatorExplanation These are reasons for various failures.
 #: src/utils/prompt.h:160
@@ -733,7 +733,7 @@ msgstr "Pakkelåse:"
 
 #: src/Command.cc:154
 msgid "Locale Management:"
-msgstr ""
+msgstr "Håndtering af lokalitet:"
 
 #: src/Command.cc:158
 msgid "Other Commands:"
@@ -1783,8 +1783,8 @@ msgstr[1] "Følgende %d rettelser kræver at systemet genstartes:"
 #, c-format, boost-format
 msgid "The following package requires a system reboot:"
 msgid_plural "The following %d packages require a system reboot:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Følgende pakke kræver genstart af systemet:"
+msgstr[1] "Følgende %d pakker kræver genstart af systemet:"
 
 #: src/Summary.cc:1373
 #, boost-format
@@ -2420,19 +2420,19 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/locale/addlocalecmd.cc:19
 msgid "addlocale (aloc) [OPTIONS] <LOCALE> ..."
-msgstr ""
+msgstr "addlocale (aloc) [TILVALG] <LOKALITET> ..."
 
 #: src/commands/locale/addlocalecmd.cc:20
 msgid "Add locale(s) to requested locales."
-msgstr ""
+msgstr "Tilføj lokalitet(er) til anmodede lokaliteter."
 
 #: src/commands/locale/addlocalecmd.cc:21
 msgid "Add given locale(s) to the list of requested locales."
-msgstr ""
+msgstr "Tilføj givne lokalitet(er) til listen over anmodede lokaliteter."
 
 #: src/commands/locale/addlocalecmd.cc:32
 msgid "Do not install corresponding packages for given locale(s)."
-msgstr ""
+msgstr "Installer ikke tilhørende pakker til given lokalitet(er)."
 
 #: src/commands/locale/addlocalecmd.cc:56
 #, c-format, boost-format
@@ -2440,15 +2440,17 @@ msgid ""
 "Specify locale which shall be supported by the language code.\n"
 "Get a list of all available locales by calling '%s'."
 msgstr ""
+"Angiv lokalitet som skal understøttes af sprogkoden.\n"
+"Hent en liste over tilgængelige lokaliteter, ved at kalde '%s'."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/locale/localescmd.cc:17
 msgid "locales (lloc) [OPTIONS] [LOCALE] ..."
-msgstr ""
+msgstr "locales (lloc) [TILVALG] [LOKALITET] ..."
 
 #: src/commands/locale/localescmd.cc:18
 msgid "List requested locales (languages codes)."
-msgstr ""
+msgstr "Vis anmodende lokaliteter (sprogkoder)."
 
 #: src/commands/locale/localescmd.cc:19
 #, c-format, boost-format
@@ -2460,53 +2462,60 @@ msgid ""
 "can\n"
 "be installed by calling '%s'.\n"
 msgstr ""
+"Vis anmodede lokaliteter og tilhørende pakker.\n"
+"\n"
+"Når der kaldes uden argumenter, så viser de anmodede lokaliteter.\n"
+"Hvis lokalitetens pakker for et anmodet sprog endnu ikke er på systemet, så\n"
+"kan de installeres, ved at kalde '%s'.\n"
 
 #: src/commands/locale/localescmd.cc:35
 msgid "Show corresponding packages."
-msgstr ""
+msgstr "Vis tilhørende pakker."
 
 #: src/commands/locale/localescmd.cc:36
 msgid "List all available locales."
-msgstr ""
+msgstr "Vis alle tilgængelige lokaliteter."
 
 #: src/commands/locale/localescmd.cc:49
 msgid "Ignoring positional arguments because --all argument was provided."
-msgstr ""
+msgstr "Ignorerer positionelle argumenter da --all-argumentet blev angivet."
 
 #: src/commands/locale/localescmd.cc:76
 msgid "The locale(s) for which the information shall be printed."
-msgstr ""
+msgstr "Lokalitet(er) hvis information skal udskrives."
 
 #: src/commands/locale/localescmd.cc:80
 msgid ""
 "Get all locales with lang code 'en' that have their own country code, "
 "excluding the fallback 'en':"
 msgstr ""
+"Hent alle lokaliteter med sprogkoden 'en' som har deres egen landekode, "
+"eksklusiv reserven 'en':"
 
 #: src/commands/locale/localescmd.cc:87
 msgid "Get all locales with lang code 'en' with or without country code:"
-msgstr ""
+msgstr "Hent alle lokaliteter med sprogkoden 'en' med eller uden landekode:"
 
 #: src/commands/locale/localescmd.cc:94
 msgid "Get the locale matching the argument exactly: "
-msgstr ""
+msgstr "Hent lokaliteten som matcher argumentet præcist: "
 
 #: src/commands/locale/localescmd.cc:101
 msgid "Get the list of packages which are available for 'de' and 'en':"
-msgstr ""
+msgstr "Hent listen over pakker som er tilgængelige til 'de' og 'en':"
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/locale/removelocalecmd.cc:17
 msgid "removelocale (rloc) [OPTIONS] <LOCALE> ..."
-msgstr ""
+msgstr "removelocale (rloc) [TILVALG] <LOKALITET> ..."
 
 #: src/commands/locale/removelocalecmd.cc:18
 msgid "Remove locale(s) from requested locales."
-msgstr ""
+msgstr "Fjern lokalitet(er) fra anmodede lokaliteter."
 
 #: src/commands/locale/removelocalecmd.cc:19
 msgid "Remove given locale(s) from the list of supported languages."
-msgstr ""
+msgstr "Fjern givne lokalitet(er) fra listen over understøttede sprog."
 
 #: src/commands/locale/removelocalecmd.cc:34
 #, c-format, boost-format
@@ -2514,10 +2523,12 @@ msgid ""
 "Specify locales which shall be removed by the the language code.\n"
 "Get the list of requested locales by calling '%s'."
 msgstr ""
+"Angiv lokaliteter som skal fjernes fra sprogkoden.\n"
+"Hent listen over anmodede lokaliteter, ved at kalde '%s'."
 
 #: src/commands/locale/removelocalecmd.cc:46
 msgid "Do not remove corresponding packages for given locale(s)."
-msgstr ""
+msgstr "Fjern ikke tilhørende pakker for givne lokalitet(er)."
 
 # =============================================================================
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
@@ -4623,7 +4634,7 @@ msgstr "Kildepakkens navn er et krævet argument."
 
 #: src/commands/sourceinstall.cc:86
 msgid "Uninstalling source packages is not supported."
-msgstr ""
+msgstr "Afinstallering af kildepakker understøttes ikke."
 
 #: src/commands/subcommand.cc:52
 msgid "none"
@@ -5314,56 +5325,56 @@ msgstr "Bygningens binære pakke"
 #. translators: header of table column - is the language requested? (Yes/No)
 #: src/locales.cc:56 src/locales.cc:90
 msgid "Requested"
-msgstr ""
+msgstr "Anmodet"
 
 #: src/locales.cc:60
 msgid "Fallback"
-msgstr ""
+msgstr "Reserve"
 
 #. translators: header of table column - the language code, e.g. en_US
 #: src/locales.cc:86
 msgid "Code"
-msgstr ""
+msgstr "Kode"
 
 #. translators: header of table column - the language, e.g. English (United States)
 #: src/locales.cc:88
 msgid "Language"
-msgstr ""
+msgstr "Sprog"
 
 #: src/locales.cc:306
 #, c-format, boost-format
 msgid "Packages for %s (locale '%s', requested: %s):"
-msgstr ""
+msgstr "Pakker for %s (lokalitet '%s', anmodet: %s):"
 
 #: src/locales.cc:323
 #, c-format, boost-format
 msgid "Added locale: %s"
-msgstr ""
+msgstr "Tilføjet lokalitet: %s"
 
 #: src/locales.cc:326
 #, c-format, boost-format
 msgid "ERROR: cannot add %s"
-msgstr ""
+msgstr "FEJL: kan ikke tilføje %s"
 
 #: src/locales.cc:330
 #, c-format, boost-format
 msgid " %s is already requested."
-msgstr ""
+msgstr " %s er allerede anmodet."
 
 #: src/locales.cc:351
 #, c-format, boost-format
 msgid "Removed locale: %s"
-msgstr ""
+msgstr "Fjernet lokalitet: %s"
 
 #: src/locales.cc:354
 #, c-format, boost-format
 msgid "ERROR: cannot remove %s"
-msgstr ""
+msgstr "FEJL: kan ikke fjerne %s"
 
 #: src/locales.cc:358
 #, c-format, boost-format
 msgid "%s was not requested."
-msgstr ""
+msgstr "%s blev ikke anmodet."
 
 #. translators: this will show up if you press ctrl+c twice
 #: src/main.cc:31
