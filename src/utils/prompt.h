@@ -135,6 +135,23 @@ int read_action_ari (PromptId pid, int default_action = -1);
  */
 bool read_bool_answer(PromptId pid, const std::string & question, bool default_answer);
 
+/**
+ * Prompt for y/n/always/never answer (localized) from stdin.
+ *
+ * \param question Question to be printed on prompt.
+ * \param default_answer Value to be returned in non-interactive mode or on
+ *      input failure.
+ *
+ * The answer is returned in the first \c bool. The second \c bool tells
+ * whether this answer should be remembered:
+ *          |  1st  |  2nd   |
+ *   yes    | true  | false  |
+ *   no     | false | false  |
+ *   always | true  | true   |
+ *   never  | false | true   |
+ */
+std::pair<bool,bool> read_bool_answer_opt_save( PromptId pid_r, const std::string & question_r, bool defaultAnswer_r );
+
 class Zypper;
 unsigned get_prompt_reply(Zypper & zypper,
                               PromptId pid,
