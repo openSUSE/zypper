@@ -48,6 +48,18 @@ namespace text
   template <class Tltext, class Trtext>
   inline std::string join( const Tltext & ltext, const Trtext & rtext, const char * sep = " " )
   { std::string ret( asString(ltext) ); ret += sep; ret += asString(rtext); return ret; }
+
+  /** Whether the \a str_r ends with a WS. */
+  inline bool endsOnWS( const std::string & str_r )
+  {
+    bool ret = false;
+    if ( !str_r.empty() )
+    { int l = *str_r.rbegin(); if ( ::strchr( " \n\t", l ) ) ret = true; }
+    return ret;
+  }
+
+  inline const char * optBlankAfter( const std::string & str_r )
+  { return( endsOnWS( str_r ) ? "" : " " ); }
 }
 ///////////////////////////////////////////////////////////////////
 
