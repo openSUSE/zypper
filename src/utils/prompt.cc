@@ -120,25 +120,75 @@ void PromptOptions::setOptionHelp( unsigned opt, const std::string & help_str )
   _opt_help[opt] = help_str;
 }
 
-
-int PromptOptions::getReplyIndex( const std::string & reply ) const
+std::vector<int> PromptOptions::getReplyMatches( const std::string & reply_r ) const
 {
-  DBG << " reply: " << reply << " (" << str::toLower(reply) << " lowercase)" << endl;
+  std::vector<int> ret;
 
-  unsigned i = 0;
-  for( StrVector::const_iterator it = _options.begin(); it != _options.end(); ++i, ++it )
+  // #NUM ? (direct index into option vector)
+  if ( reply_r[0] == '#' && reply_r[1] != '\0' )
   {
-    DBG << "index: " << i << " option: " << *it << endl;
-    if ( *it == str::toLower(reply) )
+    unsigned num = 0;	// -1 : if no match
+    for ( const char * cp = reply_r.c_str()+1; *cp; ++cp )
     {
-      if ( isDisabled(i) )
-        break;
-      return i;
+      if ( '0' <= *cp && *cp <= '9' )
+      {
+	num *= 10;
+	num += (*cp-'0');
+      }
+      else
+      {
+	num = unsigned(-1);
+	break;
+      }
     }
+
+    if ( num != unsigned(-1) )
+    {
+      // userland counting! #1 is the 1st (enabled) option (#0 will never match)
+      if ( num != 0 )
+      {
+	for ( unsigned i = 0; i < _options.size(); ++i )
+	{
+	  if ( isDisabled(i) )
+	    continue;
+
+	  if ( --num == 0 )
+	  {
+	    ret.push_back( i );
+	    break;
+	  }
+	}
+      }
+      return ret;	// a match - good or bad - will be eaten
+    }
+    // no match falls through....
   }
 
-  return -1;
+  std::string lreply { str::toLower( reply_r ) };
+  for ( unsigned i = 0; i < _options.size(); ++i )
+  {
+    if ( isDisabled(i) )
+      continue;
+
+    if ( str::hasPrefix( str::toLower( _options[i] ), lreply ) )
+      ret.push_back( i );
+  }
+
+  return ret;
 }
+
+std::string PromptOptions::replyMatchesStr( const std::vector<int> & matches_r ) const
+{
+  str::Str str;
+  const char * sep = "(";	// "," after the 1st option
+  for ( unsigned idx : matches_r )
+  {
+    str << sep << _options[idx];
+    if ( *sep != ',' ) sep =",";
+  }
+  return str << ")";
+}
+
 
 bool PromptOptions::isYesNoPrompt() const
 { return _options.size() == 2 && _options[0] == _("yes") && _options[1] == _("no"); }
@@ -298,7 +348,8 @@ unsigned get_prompt_reply( Zypper & zypper, PromptId pid, const PromptOptions & 
 
   std::string reply;
   int reply_int = -1;
-  while ( true )
+  unsigned loopcnt = 0;
+  while ( /*true*/++loopcnt )
   {
     reply = str::getline( stm, str::TRIM );
     // if we cannot read input or it is at EOF (bnc #436963), exit
@@ -326,27 +377,44 @@ unsigned get_prompt_reply( Zypper & zypper, PromptId pid, const PromptOptions & 
       continue;
     }
 
-    if ( poptions.isYesNoPrompt() && rpmatch(reply.c_str()) >= 0 )
+    if ( poptions.isYesNoPrompt() && ::rpmatch(reply.c_str()) >= 0 )
     {
-      if ( rpmatch(reply.c_str()) )
+      if ( ::rpmatch(reply.c_str()) )
         reply_int = 0; // the index of "yes" in the poptions.options()
       else
         reply_int = 1; // the index of "no" in the poptions.options()
       break;
     }
-    else if ( (reply_int = poptions.getReplyIndex(reply)) >= 0 ) // got valid reply
-      break;
 
-    std::ostringstream s;
-    s << str::Format(_("Invalid answer '%s'.")) % reply;
-    if ( poptions.isYesNoPrompt() )
+    std::vector<int> replyMatches { poptions.getReplyMatches( reply ) };
+
+    if ( replyMatches.size() == 1 )	// got valid reply
+    {
+      reply_int = replyMatches[0];
+      break;
+    }
+
+    ColorStream s { ColorContext::MSG_ERROR };
+    if ( replyMatches.empty() )
+      s << ": " << str::Format(_("Invalid answer '%s'.")) % reply;
+    else
+    {
+      s << ": " << str::Format(_("Ambiguous answer '%s'.")) % reply;
+      s << " " << poptions.replyMatchesStr( replyMatches );
+    }
+
+    if ( poptions.isYesNoPrompt() )	// legacy message for YesNo as it uses ::rpmatch
     {
       s << " "
         // translators: the %s are: 'y', 'yes' (translated), 'n', and 'no' (translated).
 	<< str::Format(_("Enter '%s' for '%s' or '%s' for '%s' if nothing else works for you."))
 	   % "y" % _("yes") % "n" % _("no");
     }
-    zypper.out().prompt( pid, s.str(), poptions );
+    else if ( loopcnt > 1 )
+    {
+      s << " " << _("If nothing else works enter '#1' to select the 1st option, '#2' for the 2nd one, ...");
+    }
+    zypper.out().prompt( pid, s.str()+="\n", poptions );	// trailing uncolored '\n' is important, otherwise prompt inserts a leading ' '
   }
 
   if ( reply.empty() )

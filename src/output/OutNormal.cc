@@ -368,7 +368,7 @@ void OutNormal::prompt( PromptId id, const std::string & prompt, const PromptOpt
 
   cout << prompt;
   if ( ! poptions.empty() )
-    cout << " " << ColorString( poptions.optionString() );
+    cout << text::optBlankAfter(prompt) << ColorString( poptions.optionString() );
   cout << ": ";
 
   if ( do_colors() )
@@ -412,23 +412,30 @@ void OutNormal::prompt( PromptId id, const std::string & prompt, const PromptOpt
 void OutNormal::promptHelp( const PromptOptions & poptions )
 {
   cout << endl;
+
   if ( poptions.helpEmpty() )
     cout << _("No help available for this prompt.") << endl;
-  else
+
+  // Nevertheless list all option names and their '#NUM' shortcut
+  unsigned pos = 0;	// Userland counter #NUM  (starts with #1)
+
+  str::Format fopt { "#%-2d: %-10s" };
+  for ( unsigned idx = 0; idx < poptions.options().size(); ++idx )
   {
-    unsigned pos = 0;
-    for( PromptOptions::StrVector::const_iterator it = poptions.options().begin(); it != poptions.options().end(); ++it, ++pos )
+    if ( poptions.isDisabled(idx) )
+      continue;
+
+    cout << ( fopt % ++pos % poptions.options()[idx] );
+    if ( ! poptions.helpEmpty() )
     {
-      if ( poptions.isDisabled( pos ) )
-        continue;
-      cout << *it << " - ";
-      const std::string & hs_r = poptions.optionHelp( pos );
-      if ( hs_r.empty() )
-        cout << "(" << _("no help available for this option") << ")";
+      const std::string & help { poptions.optionHelp(idx) };
+      cout << " - ";
+      if ( help.empty() )
+	cout << ( ColorContext::LOWLIGHT << "(" << _("no help available for this option") << ")" );
       else
-        cout << hs_r;
-      cout << endl;
+	cout << help;
     }
+    cout << endl;
   }
 
   ColorStream cout( std::cout, ColorContext::PROMPT ); // scoped color on std::cout
