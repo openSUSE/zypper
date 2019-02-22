@@ -319,6 +319,19 @@ bool read_bool_answer( PromptId pid, const std::string & question, bool default_
   return !get_prompt_reply( zypper, pid, popts );
 }
 
+std::pair<bool,bool> read_bool_answer_opt_save( PromptId pid_r, const std::string & question_r, bool defaultAnswer_r )
+{
+  Zypper & zypper( Zypper::instance() );
+  PromptOptions popts( { _("yes"), _("no"), _("always"), _("never") }, defaultAnswer_r ? 0 : 1 );
+
+  if ( ! zypper.config().non_interactive )
+    clear_keyboard_buffer();
+  zypper.out().prompt( pid_r, question_r, popts );
+
+  unsigned r = get_prompt_reply( zypper, pid_r, popts );
+  return { !(r%2), (r > 1) };
+}
+
 unsigned get_prompt_reply( Zypper & zypper, PromptId pid, const PromptOptions & poptions )
 {
   // non-interactive mode: return the default reply
