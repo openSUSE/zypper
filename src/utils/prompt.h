@@ -86,7 +86,10 @@ public:
   void setShownCount(unsigned count)
   { _shown_count = count; }
 
-  int getReplyIndex(const std::string & reply) const;
+  /** Return the indices of option string matches (lowercase/prefix or #NUM). */
+  std::vector<int> getReplyMatches( const std::string & reply_r ) const;
+  /** The returned reply matches as '(,)' list. */
+  std::string replyMatchesStr( const std::vector<int> & matches_r ) const;
 
 private:
   /** option strings */
