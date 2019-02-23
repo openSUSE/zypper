@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: zypper.gl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-01-31 13:26+0100\n"
-"PO-Revision-Date: 2018-11-11 12:02+0000\n"
+"PO-Revision-Date: 2019-03-01 14:58+0000\n"
 "Last-Translator: Manuel Vazquez <xixirei@yahoo.es>\n"
 "Language-Team: Galician <https://l10n.opensuse.org/projects/zypper/master/gl/"
 ">\n"
@@ -24,13 +24,13 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 2.18\n"
+"X-Generator: Weblate 3.3\n"
 "X-Poedit-Language: Galician\n"
 
 #: src/SolverRequester.h:52
 #, boost-format
 msgid "Suspicious category filter value '%1%'."
-msgstr ""
+msgstr "Valor de filtro de categorías sospeitoso '%1%'."
 
 #: src/SolverRequester.h:60
 #, boost-format
@@ -3121,7 +3121,7 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/query/patches.cc:18
 msgid "patches (pch) [REPOSITORY] ..."
-msgstr "patches"
+msgstr "patches (pch) [repositorio]..."
 
 #. translators: command summary: patches, pch
 #: src/commands/query/patches.cc:20
@@ -3131,7 +3131,7 @@ msgstr "Listar todos os parches dispoñibles."
 #. translators: command description
 #: src/commands/query/patches.cc:22
 msgid "List all patches available in specified repositories."
-msgstr "Lista os parches dispoñibles no repositorio especificado"
+msgstr "Lista os parches dispoñíbeis nos repositorios especificados."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/query/patterns.cc:18
@@ -3421,17 +3421,17 @@ msgstr ""
 #. translators: -f, --force
 #: src/commands/repos/refresh.cc:49 src/commands/services/refresh.cc:113
 msgid "Force a complete refresh."
-msgstr "Forzar unha actualización completa"
+msgstr "Forzar unha actualización completa."
 
 #. translators: -b, --force-build
 #: src/commands/repos/refresh.cc:54
 msgid "Force rebuild of the database."
-msgstr "Forzar a reconstrución da base de datos"
+msgstr "Forzar a reconstrución da base de datos."
 
 #. translators: -d, --force-download
 #: src/commands/repos/refresh.cc:59
 msgid "Force download of raw metadata."
-msgstr "Forzar a descarga de metadatos en bruto"
+msgstr "Forzar a descarga de metadatos en bruto."
 
 #. translators: -B, --build-only
 #: src/commands/repos/refresh.cc:64
@@ -3441,7 +3441,7 @@ msgstr "Construír só a base de datos, non descargar os metadatos."
 #. translators: -D, --download-only
 #: src/commands/repos/refresh.cc:69
 msgid "Only download raw metadata, don't build the database."
-msgstr "Descargar só os metadatos en bruto, non construír a base de datos"
+msgstr "Descargar só os metadatos en bruto, non construír a base de datos."
 
 #. translators: -r, --repo <ALIAS|#|URI>
 #: src/commands/repos/refresh.cc:74
@@ -3537,12 +3537,12 @@ msgstr "Elimina o repositorio especificado mediante alias, número ou URI."
 #. translators: --loose-auth
 #: src/commands/repos/remove.cc:44 src/commands/services/remove.cc:40
 msgid "Ignore user authentication data in the URI."
-msgstr "Ignorar os datos de autenticación de usuario no URI"
+msgstr "Ignorar os datos de autenticación de usuario no URI."
 
 #. translators: --loose-query
 #: src/commands/repos/remove.cc:47 src/commands/services/remove.cc:43
 msgid "Ignore query string in the URI."
-msgstr "Ignorar a cadea de consulta no URI"
+msgstr "Ignorar a cadea de consulta no URI."
 
 #. translators: %s is the supplied command line argument which
 #. for which no repository counterpart was found
@@ -6626,7 +6626,7 @@ msgstr ""
 #. translators: Press '?' to see all options embedded in this prompt: "Continue? [y/n/? shows all options] (y):"
 #: src/utils/prompt.cc:72
 msgid "shows all options"
-msgstr ""
+msgstr "amosar todas as opcións"
 
 #: src/utils/prompt.cc:125 src/utils/prompt.cc:245 src/utils/prompt.cc:328
 msgid "yes"
