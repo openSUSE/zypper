@@ -349,14 +349,14 @@ void removeLocales( Zypper &zypper, const std::vector<std::string> &localeArgs, 
       success = God->pool().eraseRequestedLocale( loc );
       if ( success ) {
         zypper.out().info( str::form( _("Removed locale: %s"), (*it).c_str() ) );
-        ( *result )[(*it)] = true;
+        if ( result ) ( *result )[(*it)] = true;
       } else {
         zypper.out().error( str::form( _("ERROR: cannot remove %s"), (*it).c_str() ) ) ;
-        ( *result )[(*it)] = false;
+        if ( result ) ( *result )[(*it)] = false;
       }
     } else {
       zypper.out().info( str::form( _("%s was not requested."), (*it).c_str() ) );
-      ( *result )[(*it)] = false;
+      if ( result ) ( *result )[(*it)] = false;
     }
   }
 
