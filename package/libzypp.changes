@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Mon Feb 25 12:07:19 CET 2019 - ma@suse.de
+
+- Correctly handle exceptions when verifying the medium (bsc#1065022)
+- Only write type field when probing (bsc#1114908)
+- Don't blame user on TargetAbortedException (bsc#978193)
+- version 17.11.2 (9)
+
+-------------------------------------------------------------------
 Thu Jan 31 17:41:21 CET 2019 - ma@suse.de
 
 - CheckAccessDeleted: Suppress reporting `/memfd:` pseudo files
