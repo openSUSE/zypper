@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nis\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-01-31 13:26+0100\n"
+"POT-Creation-Date: 2019-02-25 12:04+0100\n"
 "PO-Revision-Date: 2006-11-11 18:41+0530\n"
 "Last-Translator: Priyavert Sharma<priyavert.sharma@agreeya.com>\n"
 "Language-Team: AgreeYa Solutions<linux_team@agreeya.com>\n"
@@ -497,7 +497,7 @@ msgstr ""
 msgid "Arguments:"
 msgstr ""
 
-#: src/commands/commandhelpformatter.h:123 src/utils/flags/zyppflags.cc:562
+#: src/commands/commandhelpformatter.h:123 src/utils/flags/zyppflags.cc:582
 #, fuzzy
 msgid "Command options:"
 msgstr "    <આદેશ> (વિકલ્પો)"
@@ -657,7 +657,7 @@ msgstr ""
 #. translators: property name; short; used like "Name: value"
 #: src/utils/flags/zyppflags.h:49 src/commands/repos/list.cc:42
 #: src/commands/repos/list.cc:268 src/commands/services/list.cc:116
-#: src/repos.cc:1257
+#: src/repos.cc:1267
 msgid "URI"
 msgstr ""
 
@@ -672,21 +672,21 @@ msgid "MODE"
 msgstr ""
 
 #. TranslatorExplanation These are reasons for various failures.
-#: src/utils/prompt.h:160
+#: src/utils/prompt.h:185
 msgid "Not found"
 msgstr " મળ્યું નથી "
 
-#: src/utils/prompt.h:160
+#: src/utils/prompt.h:185
 #, fuzzy
 msgid "I/O error"
 msgstr "I/O ભૂલ"
 
-#: src/utils/prompt.h:160
+#: src/utils/prompt.h:185
 #, fuzzy
 msgid "Invalid object"
 msgstr "અયોગ્ય પસંદગી"
 
-#: src/utils/prompt.h:167
+#: src/utils/prompt.h:192
 msgid "Error"
 msgstr "ભૂલ"
 
@@ -972,6 +972,19 @@ msgstr "સ્થપાયેલરિઝોલ્વેજલ્સને અ�
 msgid "Do not read installed packages."
 msgstr ""
 
+#: src/Config.cc:804
+msgid "No config file is in use. Can not save options."
+msgstr ""
+
+#: src/Config.cc:815
+#, boost-format
+msgid "Option '%1%' saved in '%2%'."
+msgstr ""
+
+#: src/Config.cc:822
+msgid "Failed to save option."
+msgstr ""
+
 #: src/PackageArgs.cc:208
 #, fuzzy, c-format, boost-format
 msgid "'%s' not found in package names. Trying '%s'."
@@ -1227,203 +1240,203 @@ msgstr ""
 #. translator: '%1%' is a products name
 #. '%2%' is a command to call (like 'zypper dup')
 #. Both may contain whitespace and should be enclosed by quotes!
-#: src/Summary.cc:399
+#: src/Summary.cc:400
 #, boost-format
 msgid "Product '%1%' requires to be updated by calling '%2%'!"
 msgstr ""
 
 #. translators: Appended when clipping a long enumeration:
 #. "ConsoleKit-devel ConsoleKit-doc ... and 20828 more items."
-#: src/Summary.cc:474 src/Summary.cc:550
+#: src/Summary.cc:475 src/Summary.cc:551
 #, boost-format
 msgid "... and %1% more item."
 msgid_plural "... and %1% more items."
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/Summary.cc:568
+#: src/Summary.cc:569
 #, fuzzy, c-format, boost-format
 msgid "The following NEW package is going to be installed:"
 msgid_plural "The following %d NEW packages are going to be installed:"
 msgstr[0] "આ પેકેજીસની સ્થાપના કરવી જરુરી છે."
 msgstr[1] "આ પેકેજીસની સ્થાપના કરવી જરુરી છે."
 
-#: src/Summary.cc:573
+#: src/Summary.cc:574
 #, fuzzy, c-format, boost-format
 msgid "The following NEW patch is going to be installed:"
 msgid_plural "The following %d NEW patches are going to be installed:"
 msgstr[0] "આ પેકેજીસની સ્થાપના કરવી જરુરી છે."
 msgstr[1] "આ પેકેજીસની સ્થાપના કરવી જરુરી છે."
 
-#: src/Summary.cc:578
+#: src/Summary.cc:579
 #, fuzzy, c-format, boost-format
 msgid "The following NEW pattern is going to be installed:"
 msgid_plural "The following %d NEW patterns are going to be installed:"
 msgstr[0] "આ પેકેજીસની સ્થાપના કરવી જરુરી છે."
 msgstr[1] "આ પેકેજીસની સ્થાપના કરવી જરુરી છે."
 
-#: src/Summary.cc:583
+#: src/Summary.cc:584
 #, fuzzy, c-format, boost-format
 msgid "The following NEW product is going to be installed:"
 msgid_plural "The following %d NEW products are going to be installed:"
 msgstr[0] "આ પેકેજીસની સ્થાપના કરવી જરુરી છે."
 msgstr[1] "આ પેકેજીસની સ્થાપના કરવી જરુરી છે."
 
-#: src/Summary.cc:588
+#: src/Summary.cc:589
 #, fuzzy, c-format, boost-format
 msgid "The following source package is going to be installed:"
 msgid_plural "The following %d source packages are going to be installed:"
 msgstr[0] "આ પેકેજીસની સ્થાપના કરવી જરુરી છે."
 msgstr[1] "આ પેકેજીસની સ્થાપના કરવી જરુરી છે."
 
-#: src/Summary.cc:594
+#: src/Summary.cc:595
 #, fuzzy, c-format, boost-format
 msgid "The following application is going to be installed:"
 msgid_plural "The following %d applications are going to be installed:"
 msgstr[0] "આ પેકેજીસની સ્થાપના કરવી જરુરી છે."
 msgstr[1] "આ પેકેજીસની સ્થાપના કરવી જરુરી છે."
 
-#: src/Summary.cc:619
+#: src/Summary.cc:620
 #, fuzzy, c-format, boost-format
 msgid "The following package is going to be REMOVED:"
 msgid_plural "The following %d packages are going to be REMOVED:"
 msgstr[0] " નીચેના vpnc VPN જોડાણ બનાવાશે:"
 msgstr[1] " નીચેના vpnc VPN જોડાણ બનાવાશે:"
 
-#: src/Summary.cc:624
+#: src/Summary.cc:625
 #, fuzzy, c-format, boost-format
 msgid "The following patch is going to be REMOVED:"
 msgid_plural "The following %d patches are going to be REMOVED:"
 msgstr[0] " નીચેના vpnc VPN જોડાણ બનાવાશે:"
 msgstr[1] " નીચેના vpnc VPN જોડાણ બનાવાશે:"
 
-#: src/Summary.cc:629
+#: src/Summary.cc:630
 #, fuzzy, c-format, boost-format
 msgid "The following pattern is going to be REMOVED:"
 msgid_plural "The following %d patterns are going to be REMOVED:"
 msgstr[0] " નીચેના vpnc VPN જોડાણ બનાવાશે:"
 msgstr[1] " નીચેના vpnc VPN જોડાણ બનાવાશે:"
 
-#: src/Summary.cc:634
+#: src/Summary.cc:635
 #, fuzzy, c-format, boost-format
 msgid "The following product is going to be REMOVED:"
 msgid_plural "The following %d products are going to be REMOVED:"
 msgstr[0] " નીચેના vpnc VPN જોડાણ બનાવાશે:"
 msgstr[1] " નીચેના vpnc VPN જોડાણ બનાવાશે:"
 
-#: src/Summary.cc:640
+#: src/Summary.cc:641
 #, fuzzy, c-format, boost-format
 msgid "The following application is going to be REMOVED:"
 msgid_plural "The following %d applications are going to be REMOVED:"
 msgstr[0] " નીચેના vpnc VPN જોડાણ બનાવાશે:"
 msgstr[1] " નીચેના vpnc VPN જોડાણ બનાવાશે:"
 
-#: src/Summary.cc:663
+#: src/Summary.cc:664
 #, fuzzy, c-format, boost-format
 msgid "The following package is going to be upgraded:"
 msgid_plural "The following %d packages are going to be upgraded:"
 msgstr[0] " નીચેના vpnc VPN જોડાણ બનાવાશે:"
 msgstr[1] " નીચેના vpnc VPN જોડાણ બનાવાશે:"
 
-#: src/Summary.cc:668
+#: src/Summary.cc:669
 #, fuzzy, c-format, boost-format
 msgid "The following patch is going to be upgraded:"
 msgid_plural "The following %d patches are going to be upgraded:"
 msgstr[0] " નીચેના vpnc VPN જોડાણ બનાવાશે:"
 msgstr[1] " નીચેના vpnc VPN જોડાણ બનાવાશે:"
 
-#: src/Summary.cc:673
+#: src/Summary.cc:674
 #, fuzzy, c-format, boost-format
 msgid "The following pattern is going to be upgraded:"
 msgid_plural "The following %d patterns are going to be upgraded:"
 msgstr[0] " નીચેના vpnc VPN જોડાણ બનાવાશે:"
 msgstr[1] " નીચેના vpnc VPN જોડાણ બનાવાશે:"
 
-#: src/Summary.cc:679
+#: src/Summary.cc:680
 #, fuzzy, c-format, boost-format
 msgid "The following product is going to be upgraded:"
 msgid_plural "The following %d products are going to be upgraded:"
 msgstr[0] " નીચેના vpnc VPN જોડાણ બનાવાશે:"
 msgstr[1] " નીચેના vpnc VPN જોડાણ બનાવાશે:"
 
-#: src/Summary.cc:687
+#: src/Summary.cc:688
 #, fuzzy, c-format, boost-format
 msgid "The following application is going to be upgraded:"
 msgid_plural "The following %d applications are going to be upgraded:"
 msgstr[0] " નીચેના vpnc VPN જોડાણ બનાવાશે:"
 msgstr[1] " નીચેના vpnc VPN જોડાણ બનાવાશે:"
 
-#: src/Summary.cc:709
+#: src/Summary.cc:710
 #, fuzzy, c-format, boost-format
 msgid "The following package is going to be downgraded:"
 msgid_plural "The following %d packages are going to be downgraded:"
 msgstr[0] " નીચેના vpnc VPN જોડાણ બનાવાશે:"
 msgstr[1] " નીચેના vpnc VPN જોડાણ બનાવાશે:"
 
-#: src/Summary.cc:714
+#: src/Summary.cc:715
 #, fuzzy, c-format, boost-format
 msgid "The following patch is going to be downgraded:"
 msgid_plural "The following %d patches are going to be downgraded:"
 msgstr[0] " નીચેના vpnc VPN જોડાણ બનાવાશે:"
 msgstr[1] " નીચેના vpnc VPN જોડાણ બનાવાશે:"
 
-#: src/Summary.cc:719
+#: src/Summary.cc:720
 #, fuzzy, c-format, boost-format
 msgid "The following pattern is going to be downgraded:"
 msgid_plural "The following %d patterns are going to be downgraded:"
 msgstr[0] " નીચેના vpnc VPN જોડાણ બનાવાશે:"
 msgstr[1] " નીચેના vpnc VPN જોડાણ બનાવાશે:"
 
-#: src/Summary.cc:724
+#: src/Summary.cc:725
 #, fuzzy, c-format, boost-format
 msgid "The following product is going to be downgraded:"
 msgid_plural "The following %d products are going to be downgraded:"
 msgstr[0] " નીચેના vpnc VPN જોડાણ બનાવાશે:"
 msgstr[1] " નીચેના vpnc VPN જોડાણ બનાવાશે:"
 
-#: src/Summary.cc:730
+#: src/Summary.cc:731
 #, fuzzy, c-format, boost-format
 msgid "The following application is going to be downgraded:"
 msgid_plural "The following %d applications are going to be downgraded:"
 msgstr[0] " નીચેના vpnc VPN જોડાણ બનાવાશે:"
 msgstr[1] " નીચેના vpnc VPN જોડાણ બનાવાશે:"
 
-#: src/Summary.cc:752
+#: src/Summary.cc:753
 #, fuzzy, c-format, boost-format
 msgid "The following package is going to be reinstalled:"
 msgid_plural "The following %d packages are going to be reinstalled:"
 msgstr[0] "આ પેકેજીસની સ્થાપના કરવી જરુરી છે."
 msgstr[1] "આ પેકેજીસની સ્થાપના કરવી જરુરી છે."
 
-#: src/Summary.cc:757
+#: src/Summary.cc:758
 #, fuzzy, c-format, boost-format
 msgid "The following patch is going to be reinstalled:"
 msgid_plural "The following %d patches are going to be reinstalled:"
 msgstr[0] "આ પેકેજીસની સ્થાપના કરવી જરુરી છે."
 msgstr[1] "આ પેકેજીસની સ્થાપના કરવી જરુરી છે."
 
-#: src/Summary.cc:762
+#: src/Summary.cc:763
 #, fuzzy, c-format, boost-format
 msgid "The following pattern is going to be reinstalled:"
 msgid_plural "The following %d patterns are going to be reinstalled:"
 msgstr[0] "આ પેકેજીસની સ્થાપના કરવી જરુરી છે."
 msgstr[1] "આ પેકેજીસની સ્થાપના કરવી જરુરી છે."
 
-#: src/Summary.cc:767
+#: src/Summary.cc:768
 #, fuzzy, c-format, boost-format
 msgid "The following product is going to be reinstalled:"
 msgid_plural "The following %d products are going to be reinstalled:"
 msgstr[0] "આ પેકેજીસની સ્થાપના કરવી જરુરી છે."
 msgstr[1] "આ પેકેજીસની સ્થાપના કરવી જરુરી છે."
 
-#: src/Summary.cc:780
+#: src/Summary.cc:781
 #, fuzzy, c-format, boost-format
 msgid "The following application is going to be reinstalled:"
 msgid_plural "The following %d applications are going to be reinstalled:"
 msgstr[0] "આ પેકેજીસની સ્થાપના કરવી જરુરી છે."
 msgstr[1] "આ પેકેજીસની સ્થાપના કરવી જરુરી છે."
 
-#: src/Summary.cc:917
+#: src/Summary.cc:918
 #, fuzzy, c-format, boost-format
 msgid "The following recommended package was automatically selected:"
 msgid_plural ""
@@ -1431,7 +1444,7 @@ msgid_plural ""
 msgstr[0] "આ પેકેજીસની સ્થાપના કરવી જરુરી છે."
 msgstr[1] "આ પેકેજીસની સ્થાપના કરવી જરુરી છે."
 
-#: src/Summary.cc:922
+#: src/Summary.cc:923
 #, c-format, boost-format
 msgid "The following recommended patch was automatically selected:"
 msgid_plural ""
@@ -1439,7 +1452,7 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/Summary.cc:927
+#: src/Summary.cc:928
 #, fuzzy, c-format, boost-format
 msgid "The following recommended pattern was automatically selected:"
 msgid_plural ""
@@ -1447,7 +1460,7 @@ msgid_plural ""
 msgstr[0] "આ પેકેજીસની સ્થાપના કરવી જરુરી છે."
 msgstr[1] "આ પેકેજીસની સ્થાપના કરવી જરુરી છે."
 
-#: src/Summary.cc:932
+#: src/Summary.cc:933
 #, fuzzy, c-format, boost-format
 msgid "The following recommended product was automatically selected:"
 msgid_plural ""
@@ -1455,7 +1468,7 @@ msgid_plural ""
 msgstr[0] "આ પેકેજીસની સ્થાપના કરવી જરુરી છે."
 msgstr[1] "આ પેકેજીસની સ્થાપના કરવી જરુરી છે."
 
-#: src/Summary.cc:937
+#: src/Summary.cc:938
 #, fuzzy, c-format, boost-format
 msgid "The following recommended source package was automatically selected:"
 msgid_plural ""
@@ -1463,7 +1476,7 @@ msgid_plural ""
 msgstr[0] "આ પેકેજીસની સ્થાપના કરવી જરુરી છે."
 msgstr[1] "આ પેકેજીસની સ્થાપના કરવી જરુરી છે."
 
-#: src/Summary.cc:943
+#: src/Summary.cc:944
 #, fuzzy, c-format, boost-format
 msgid "The following recommended application was automatically selected:"
 msgid_plural ""
@@ -1471,7 +1484,7 @@ msgid_plural ""
 msgstr[0] "આ પેકેજીસની સ્થાપના કરવી જરુરી છે."
 msgstr[1] "આ પેકેજીસની સ્થાપના કરવી જરુરી છે."
 
-#: src/Summary.cc:990
+#: src/Summary.cc:991
 #, fuzzy, c-format, boost-format
 msgid ""
 "The following package is recommended, but will not be installed (only "
@@ -1482,7 +1495,7 @@ msgid_plural ""
 msgstr[0] "આ પેકેજીસની સ્થાપના કરવી જરુરી છે."
 msgstr[1] "આ પેકેજીસની સ્થાપના કરવી જરુરી છે."
 
-#: src/Summary.cc:1002
+#: src/Summary.cc:1003
 #, fuzzy, c-format, boost-format
 msgid ""
 "The following package is recommended, but will not be installed because it's "
@@ -1493,7 +1506,7 @@ msgid_plural ""
 msgstr[0] "આ પેકેજીસની સ્થાપના કરવી જરુરી છે."
 msgstr[1] "આ પેકેજીસની સ્થાપના કરવી જરુરી છે."
 
-#: src/Summary.cc:1012
+#: src/Summary.cc:1013
 #, fuzzy, c-format, boost-format
 msgid ""
 "The following package is recommended, but will not be installed due to "
@@ -1504,7 +1517,7 @@ msgid_plural ""
 msgstr[0] "આ પેકેજીસની સ્થાપના કરવી જરુરી છે."
 msgstr[1] "આ પેકેજીસની સ્થાપના કરવી જરુરી છે."
 
-#: src/Summary.cc:1025
+#: src/Summary.cc:1026
 #, fuzzy, c-format, boost-format
 msgid "The following patch is recommended, but will not be installed:"
 msgid_plural ""
@@ -1512,7 +1525,7 @@ msgid_plural ""
 msgstr[0] "આ પેકેજીસની સ્થાપના કરવી જરુરી છે."
 msgstr[1] "આ પેકેજીસની સ્થાપના કરવી જરુરી છે."
 
-#: src/Summary.cc:1029
+#: src/Summary.cc:1030
 #, fuzzy, c-format, boost-format
 msgid "The following pattern is recommended, but will not be installed:"
 msgid_plural ""
@@ -1520,7 +1533,7 @@ msgid_plural ""
 msgstr[0] "આ પેકેજીસની સ્થાપના કરવી જરુરી છે."
 msgstr[1] "આ પેકેજીસની સ્થાપના કરવી જરુરી છે."
 
-#: src/Summary.cc:1033
+#: src/Summary.cc:1034
 #, fuzzy, c-format, boost-format
 msgid "The following product is recommended, but will not be installed:"
 msgid_plural ""
@@ -1528,7 +1541,7 @@ msgid_plural ""
 msgstr[0] "આ પેકેજીસની સ્થાપના કરવી જરુરી છે."
 msgstr[1] "આ પેકેજીસની સ્થાપના કરવી જરુરી છે."
 
-#: src/Summary.cc:1038
+#: src/Summary.cc:1039
 #, fuzzy, c-format, boost-format
 msgid "The following application is recommended, but will not be installed:"
 msgid_plural ""
@@ -1536,7 +1549,7 @@ msgid_plural ""
 msgstr[0] "આ પેકેજીસની સ્થાપના કરવી જરુરી છે."
 msgstr[1] "આ પેકેજીસની સ્થાપના કરવી જરુરી છે."
 
-#: src/Summary.cc:1071
+#: src/Summary.cc:1072
 #, fuzzy, c-format, boost-format
 msgid "The following package is suggested, but will not be installed:"
 msgid_plural ""
@@ -1544,7 +1557,7 @@ msgid_plural ""
 msgstr[0] "આ પેકેજીસની સ્થાપના કરવી જરુરી છે."
 msgstr[1] "આ પેકેજીસની સ્થાપના કરવી જરુરી છે."
 
-#: src/Summary.cc:1076
+#: src/Summary.cc:1077
 #, fuzzy, c-format, boost-format
 msgid "The following patch is suggested, but will not be installed:"
 msgid_plural ""
@@ -1552,7 +1565,7 @@ msgid_plural ""
 msgstr[0] "આ પેકેજીસની સ્થાપના કરવી જરુરી છે."
 msgstr[1] "આ પેકેજીસની સ્થાપના કરવી જરુરી છે."
 
-#: src/Summary.cc:1081
+#: src/Summary.cc:1082
 #, fuzzy, c-format, boost-format
 msgid "The following pattern is suggested, but will not be installed:"
 msgid_plural ""
@@ -1560,7 +1573,7 @@ msgid_plural ""
 msgstr[0] "આ પેકેજીસની સ્થાપના કરવી જરુરી છે."
 msgstr[1] "આ પેકેજીસની સ્થાપના કરવી જરુરી છે."
 
-#: src/Summary.cc:1086
+#: src/Summary.cc:1087
 #, fuzzy, c-format, boost-format
 msgid "The following product is suggested, but will not be installed:"
 msgid_plural ""
@@ -1568,7 +1581,7 @@ msgid_plural ""
 msgstr[0] "આ પેકેજીસની સ્થાપના કરવી જરુરી છે."
 msgstr[1] "આ પેકેજીસની સ્થાપના કરવી જરુરી છે."
 
-#: src/Summary.cc:1092
+#: src/Summary.cc:1093
 #, fuzzy, c-format, boost-format
 msgid "The following application is suggested, but will not be installed:"
 msgid_plural ""
@@ -1576,77 +1589,77 @@ msgid_plural ""
 msgstr[0] "આ પેકેજીસની સ્થાપના કરવી જરુરી છે."
 msgstr[1] "આ પેકેજીસની સ્થાપના કરવી જરુરી છે."
 
-#: src/Summary.cc:1117
+#: src/Summary.cc:1118
 #, fuzzy, c-format, boost-format
 msgid "The following package is going to change architecture:"
 msgid_plural "The following %d packages are going to change architecture:"
 msgstr[0] " નીચેના vpnc VPN જોડાણ બનાવાશે:"
 msgstr[1] " નીચેના vpnc VPN જોડાણ બનાવાશે:"
 
-#: src/Summary.cc:1122
+#: src/Summary.cc:1123
 #, fuzzy, c-format, boost-format
 msgid "The following patch is going to change architecture:"
 msgid_plural "The following %d patches are going to change architecture:"
 msgstr[0] " નીચેના vpnc VPN જોડાણ બનાવાશે:"
 msgstr[1] " નીચેના vpnc VPN જોડાણ બનાવાશે:"
 
-#: src/Summary.cc:1127
+#: src/Summary.cc:1128
 #, fuzzy, c-format, boost-format
 msgid "The following pattern is going to change architecture:"
 msgid_plural "The following %d patterns are going to change architecture:"
 msgstr[0] " નીચેના vpnc VPN જોડાણ બનાવાશે:"
 msgstr[1] " નીચેના vpnc VPN જોડાણ બનાવાશે:"
 
-#: src/Summary.cc:1132
+#: src/Summary.cc:1133
 #, fuzzy, c-format, boost-format
 msgid "The following product is going to change architecture:"
 msgid_plural "The following %d products are going to change architecture:"
 msgstr[0] " નીચેના vpnc VPN જોડાણ બનાવાશે:"
 msgstr[1] " નીચેના vpnc VPN જોડાણ બનાવાશે:"
 
-#: src/Summary.cc:1138
+#: src/Summary.cc:1139
 #, fuzzy, c-format, boost-format
 msgid "The following application is going to change architecture:"
 msgid_plural "The following %d applications are going to change architecture:"
 msgstr[0] " નીચેના vpnc VPN જોડાણ બનાવાશે:"
 msgstr[1] " નીચેના vpnc VPN જોડાણ બનાવાશે:"
 
-#: src/Summary.cc:1163
+#: src/Summary.cc:1164
 #, fuzzy, c-format, boost-format
 msgid "The following package is going to change vendor:"
 msgid_plural "The following %d packages are going to change vendor:"
 msgstr[0] " નીચેના vpnc VPN જોડાણ બનાવાશે:"
 msgstr[1] " નીચેના vpnc VPN જોડાણ બનાવાશે:"
 
-#: src/Summary.cc:1168
+#: src/Summary.cc:1169
 #, fuzzy, c-format, boost-format
 msgid "The following patch is going to change vendor:"
 msgid_plural "The following %d patches are going to change vendor:"
 msgstr[0] " નીચેના vpnc VPN જોડાણ બનાવાશે:"
 msgstr[1] " નીચેના vpnc VPN જોડાણ બનાવાશે:"
 
-#: src/Summary.cc:1173
+#: src/Summary.cc:1174
 #, fuzzy, c-format, boost-format
 msgid "The following pattern is going to change vendor:"
 msgid_plural "The following %d patterns are going to change vendor:"
 msgstr[0] " નીચેના vpnc VPN જોડાણ બનાવાશે:"
 msgstr[1] " નીચેના vpnc VPN જોડાણ બનાવાશે:"
 
-#: src/Summary.cc:1178
+#: src/Summary.cc:1179
 #, fuzzy, c-format, boost-format
 msgid "The following product is going to change vendor:"
 msgid_plural "The following %d products are going to change vendor:"
 msgstr[0] " નીચેના vpnc VPN જોડાણ બનાવાશે:"
 msgstr[1] " નીચેના vpnc VPN જોડાણ બનાવાશે:"
 
-#: src/Summary.cc:1184
+#: src/Summary.cc:1185
 #, fuzzy, c-format, boost-format
 msgid "The following application is going to change vendor:"
 msgid_plural "The following %d applications are going to change vendor:"
 msgstr[0] " નીચેના vpnc VPN જોડાણ બનાવાશે:"
 msgstr[1] " નીચેના vpnc VPN જોડાણ બનાવાશે:"
 
-#: src/Summary.cc:1207
+#: src/Summary.cc:1208
 #, fuzzy, c-format, boost-format
 msgid "The following package has no support information from its vendor:"
 msgid_plural ""
@@ -1654,14 +1667,14 @@ msgid_plural ""
 msgstr[0] " નીચેના vpnc VPN જોડાણ બનાવાશે:"
 msgstr[1] " નીચેના vpnc VPN જોડાણ બનાવાશે:"
 
-#: src/Summary.cc:1225
+#: src/Summary.cc:1226
 #, fuzzy, c-format, boost-format
 msgid "The following package is not supported by its vendor:"
 msgid_plural "The following %d packages are not supported by their vendor:"
 msgstr[0] " નીચેના vpnc VPN જોડાણ બનાવાશે:"
 msgstr[1] " નીચેના vpnc VPN જોડાણ બનાવાશે:"
 
-#: src/Summary.cc:1243
+#: src/Summary.cc:1244
 #, fuzzy, c-format, boost-format
 msgid ""
 "The following package needs additional customer contract to get support:"
@@ -1670,28 +1683,28 @@ msgid_plural ""
 msgstr[0] " નીચેના vpnc VPN જોડાણ બનાવાશે:"
 msgstr[1] " નીચેના vpnc VPN જોડાણ બનાવાશે:"
 
-#: src/Summary.cc:1263
+#: src/Summary.cc:1264
 #, fuzzy, c-format, boost-format
 msgid "The following package update will NOT be installed:"
 msgid_plural "The following %d package updates will NOT be installed:"
 msgstr[0] "આ પેકેજીસની સ્થાપના કરવી જરુરી છે."
 msgstr[1] "આ પેકેજીસની સ્થાપના કરવી જરુરી છે."
 
-#: src/Summary.cc:1268
+#: src/Summary.cc:1269
 #, fuzzy, c-format, boost-format
 msgid "The following product update will NOT be installed:"
 msgid_plural "The following %d product updates will NOT be installed:"
 msgstr[0] "આ પેકેજીસની સ્થાપના કરવી જરુરી છે."
 msgstr[1] "આ પેકેજીસની સ્થાપના કરવી જરુરી છે."
 
-#: src/Summary.cc:1274
+#: src/Summary.cc:1275
 #, fuzzy, c-format, boost-format
 msgid "The following application update will NOT be installed:"
 msgid_plural "The following %d application updates will NOT be installed:"
 msgstr[0] "આ પેકેજીસની સ્થાપના કરવી જરુરી છે."
 msgstr[1] "આ પેકેજીસની સ્થાપના કરવી જરુરી છે."
 
-#: src/Summary.cc:1307
+#: src/Summary.cc:1308
 #, fuzzy, c-format, boost-format
 msgid "The following item is locked and will not be changed by any action:"
 msgid_plural ""
@@ -1701,64 +1714,64 @@ msgstr[1] "આ પેકેજીસની સ્થાપના કરવી �
 
 #. always as plain name list
 #. translators: used as 'tag:' (i.e. followed by ':')
-#: src/Summary.cc:1320
+#: src/Summary.cc:1321
 #, fuzzy
 msgid "Available"
 msgstr "ઉપલબ્ધ મેમરી"
 
 #. translators: used as 'tag:' (i.e. followed by ':')
 #. translators: property name; short; used like "Name: value"
-#: src/Summary.cc:1326 src/info.cc:334 src/info.cc:425 src/info.cc:556
+#: src/Summary.cc:1327 src/info.cc:335 src/info.cc:426 src/info.cc:557
 msgid "Installed"
 msgstr "સ્થાપેલ"
 
-#: src/Summary.cc:1331
+#: src/Summary.cc:1332
 #, boost-format
 msgid "Run '%1%' to see the complete list of locked items."
 msgstr ""
 
-#: src/Summary.cc:1340
+#: src/Summary.cc:1341
 #, fuzzy, c-format, boost-format
 msgid "The following patch requires a system reboot:"
 msgid_plural "The following %d patches require a system reboot:"
 msgstr[0] " નીચેના vpnc VPN જોડાણ બનાવાશે:"
 msgstr[1] " નીચેના vpnc VPN જોડાણ બનાવાશે:"
 
-#: src/Summary.cc:1344
+#: src/Summary.cc:1345
 #, c-format, boost-format
 msgid "The following package requires a system reboot:"
 msgid_plural "The following %d packages require a system reboot:"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/Summary.cc:1373
+#: src/Summary.cc:1374
 #, fuzzy, boost-format
 msgid "Overall download size: %1%. Already cached: %2%."
 msgstr "ડાઉનલોડ કદ : %1"
 
-#: src/Summary.cc:1376
+#: src/Summary.cc:1377
 #, fuzzy
 msgid "Download only."
 msgstr "%s ડાઉનલોડ થઇ રહ્યું છે"
 
 #. TrasnlatorExplanation %s will be substituted by a byte count e.g. 212 K
-#: src/Summary.cc:1382
+#: src/Summary.cc:1383
 #, c-format, boost-format
 msgid "After the operation, additional %s will be used."
 msgstr ""
 
-#: src/Summary.cc:1384
+#: src/Summary.cc:1385
 msgid "No additional space will be used or freed after the operation."
 msgstr ""
 
 #. TrasnlatorExplanation %s will be substituted by a byte count e.g. 212 K
-#: src/Summary.cc:1391
+#: src/Summary.cc:1392
 #, fuzzy, c-format, boost-format
 msgid "After the operation, %s will be freed."
 msgstr "સ્પેસીફાઇડ વેધર ધ ઓપરેશન શુડ બી અલાઉડ."
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
-#: src/Summary.cc:1414
+#: src/Summary.cc:1415
 #, fuzzy
 msgid "package to upgrade"
 msgid_plural "packages to upgrade"
@@ -1766,28 +1779,28 @@ msgstr[0] "પેકેજરનું નામ : %1"
 msgstr[1] "પેકેજરનું નામ : %1"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
-#: src/Summary.cc:1425
+#: src/Summary.cc:1426
 msgid "to downgrade"
 msgid_plural "to downgrade"
 msgstr[0] ""
 msgstr[1] ""
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
-#: src/Summary.cc:1428
+#: src/Summary.cc:1429
 msgid "package to downgrade"
 msgid_plural "packages to downgrade"
 msgstr[0] ""
 msgstr[1] ""
 
 #. translators: this text will be preceded by a number e.g. "5 new"
-#: src/Summary.cc:1439
+#: src/Summary.cc:1440
 msgid "new"
 msgid_plural "new"
 msgstr[0] ""
 msgstr[1] ""
 
 #. translators: this text will be preceded by a number e.g. "5 new to install"
-#: src/Summary.cc:1442
+#: src/Summary.cc:1443
 #, fuzzy
 msgid "new package to install"
 msgid_plural "new packages to install"
@@ -1795,7 +1808,7 @@ msgstr[0] "%s સ્થાપવાની જરૂર નથી"
 msgstr[1] "%s સ્થાપવાની જરૂર નથી"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
-#: src/Summary.cc:1453
+#: src/Summary.cc:1454
 #, fuzzy
 msgid "to reinstall"
 msgid_plural "to reinstall"
@@ -1803,7 +1816,7 @@ msgstr[0] "ઈન્સ્ટોલ"
 msgstr[1] "ઈન્સ્ટોલ"
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
-#: src/Summary.cc:1456
+#: src/Summary.cc:1457
 #, fuzzy
 msgid "package to reinstall"
 msgid_plural "packages to reinstall"
@@ -1811,7 +1824,7 @@ msgstr[0] "પેકેજનું સ્થાપન"
 msgstr[1] "પેકેજનું સ્થાપન"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
-#: src/Summary.cc:1467
+#: src/Summary.cc:1468
 #, fuzzy
 msgid "to remove"
 msgid_plural "to remove"
@@ -1819,21 +1832,21 @@ msgstr[0] "%s ને દૂર કરવામાં બરાબર"
 msgstr[1] "%s ને દૂર કરવામાં બરાબર"
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
-#: src/Summary.cc:1470
+#: src/Summary.cc:1471
 msgid "package to remove"
 msgid_plural "packages to remove"
 msgstr[0] ""
 msgstr[1] ""
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
-#: src/Summary.cc:1481
+#: src/Summary.cc:1482
 msgid "to change vendor"
 msgid_plural " to change vendor"
 msgstr[0] ""
 msgstr[1] ""
 
 #. translators: this text will be preceded by a number e.g. "5 packages ..."
-#: src/Summary.cc:1484
+#: src/Summary.cc:1485
 #, fuzzy
 msgid "package will change vendor"
 msgid_plural "packages will change vendor"
@@ -1841,7 +1854,7 @@ msgstr[0] " નીચેના vpnc VPN જોડાણ બનાવાશે:"
 msgstr[1] " નીચેના vpnc VPN જોડાણ બનાવાશે:"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
-#: src/Summary.cc:1495
+#: src/Summary.cc:1496
 #, fuzzy
 msgid "to change arch"
 msgid_plural "to change arch"
@@ -1849,14 +1862,14 @@ msgstr[0] "ફેરફારો પડતા મૂકો"
 msgstr[1] "ફેરફારો પડતા મૂકો"
 
 #. translators: this text will be preceded by a number e.g. "5 packages ..."
-#: src/Summary.cc:1498
+#: src/Summary.cc:1499
 msgid "package will change arch"
 msgid_plural "packages will change arch"
 msgstr[0] ""
 msgstr[1] ""
 
 #. translators: this text will be preceded by a number e.g. "5 new"
-#: src/Summary.cc:1509
+#: src/Summary.cc:1510
 #, fuzzy
 msgid "source package"
 msgid_plural "source packages"
@@ -1864,7 +1877,7 @@ msgstr[0] "પેકેજ"
 msgstr[1] "પેકેજ"
 
 #. translators: this text will be preceded by a number e.g. "5 new to install"
-#: src/Summary.cc:1512
+#: src/Summary.cc:1513
 #, fuzzy
 msgid "source package to install"
 msgid_plural "source packages to install"
@@ -1872,13 +1885,13 @@ msgstr[0] "%s સ્થાપવાની જરૂર નથી"
 msgstr[1] "%s સ્થાપવાની જરૂર નથી"
 
 #. patch command (auto)restricted to update stack patches
-#: src/Summary.cc:1578
+#: src/Summary.cc:1586
 msgid ""
 "Package manager restart required. (Run this command once again after the "
 "update stack got updated)"
 msgstr ""
 
-#: src/Summary.cc:1581
+#: src/Summary.cc:1589
 msgid "System reboot required."
 msgstr ""
 
@@ -1890,7 +1903,7 @@ msgstr ""
 #. Consider to cancel:
 #. Product 'opennSUSE Tumbleweed' requires to be updated by calling 'zypper dup'!
 #. Continue? [y/n/...? shows all options] (y):
-#: src/Summary.cc:1598
+#: src/Summary.cc:1606
 msgid "Consider to cancel:"
 msgstr ""
 
@@ -1920,7 +1933,7 @@ msgstr ""
 msgid "Try again?"
 msgstr "સ્થાપનની તૈયારી થઇ રહી છે..."
 
-#: src/Zypper.cc:248 src/Zypper.cc:711 src/commands/basecommand.cc:265
+#: src/Zypper.cc:248 src/Zypper.cc:712 src/commands/basecommand.cc:265
 msgid "Unexpected exception."
 msgstr "અનઅપેક્ષિત અપવાદ."
 
@@ -1953,7 +1966,7 @@ msgstr ""
 msgid "The %s option has no effect here, ignoring."
 msgstr ""
 
-#: src/Zypper.cc:654
+#: src/Zypper.cc:655
 msgid "Non-option program arguments: "
 msgstr ""
 
@@ -2000,7 +2013,7 @@ msgstr ""
 
 #. translators: this is a prompt text
 #: src/callbacks/media.cc:83 src/callbacks/media.cc:178
-#: src/callbacks/media.cc:260 src/utils/prompt.cc:150 src/utils/prompt.cc:236
+#: src/callbacks/media.cc:260 src/utils/prompt.cc:219 src/utils/prompt.cc:305
 #, fuzzy
 msgid "Abort, retry, ignore?"
 msgstr " (A) અધૂરૂં છોડો, (R) ફરીથી પ્રયત્ન કરો, (I) અવગણવું છે? "
@@ -2501,7 +2514,7 @@ msgstr[1] ""
 #. translators: name (general header)
 #: src/commands/locks/list.cc:135 src/commands/repos/list.cc:41
 #: src/commands/repos/list.cc:223 src/commands/services/list.cc:105
-#: src/info.cc:58 src/info.cc:448 src/info.cc:692 src/locales.cc:124
+#: src/info.cc:58 src/info.cc:449 src/info.cc:693 src/locales.cc:124
 #: src/search.cc:48 src/search.cc:196 src/search.cc:343 src/search.cc:487
 #: src/search.cc:551 src/update.cc:727 src/utils/misc.cc:228
 msgid "Name"
@@ -2516,7 +2529,7 @@ msgstr "મળતા આવતાઓ"
 #. translators: type (general header)
 #: src/commands/locks/list.cc:138 src/commands/repos/list.cc:52
 #: src/commands/repos/list.cc:261 src/commands/services/list.cc:114
-#: src/info.cc:449 src/search.cc:50 src/search.cc:199
+#: src/info.cc:450 src/search.cc:50 src/search.cc:199
 msgid "Type"
 msgstr " પ્રકાર "
 
@@ -3264,14 +3277,14 @@ msgstr ""
 #. 'enabled' flag
 #. translators: property name; short; used like "Name: value"
 #: src/commands/repos/list.cc:47 src/commands/repos/list.cc:230
-#: src/commands/services/list.cc:106 src/repos.cc:1259
+#: src/commands/services/list.cc:106 src/repos.cc:1269
 msgid "Enabled"
 msgstr " સક્ષમ કરેલ "
 
 #. GPG Check
 #. translators: property name; short; used like "Name: value"
 #: src/commands/repos/list.cc:48 src/commands/repos/list.cc:234
-#: src/commands/services/list.cc:107 src/repos.cc:1261
+#: src/commands/services/list.cc:107 src/repos.cc:1271
 #, fuzzy
 msgid "GPG Check"
 msgstr " DNS તપાસ"
@@ -3279,12 +3292,12 @@ msgstr " DNS તપાસ"
 #. translators: repository priority (in zypper repos -p or -d)
 #. translators: property name; short; used like "Name: value"
 #: src/commands/repos/list.cc:49 src/commands/repos/list.cc:252
-#: src/commands/services/list.cc:113 src/repos.cc:1265
+#: src/commands/services/list.cc:113 src/repos.cc:1275
 msgid "Priority"
 msgstr ""
 
 #. translators: property name; short; used like "Name: value"
-#: src/commands/repos/list.cc:50 src/repos.cc:1263
+#: src/commands/repos/list.cc:50 src/repos.cc:1273
 #, fuzzy
 msgid "Autorefresh"
 msgstr "સ્વયં તાજુ કરો"
@@ -3342,7 +3355,7 @@ msgstr ""
 msgid "Export all defined repositories as a single local .repo file."
 msgstr ""
 
-#: src/commands/repos/list.cc:118 src/repos.cc:1016
+#: src/commands/repos/list.cc:118 src/repos.cc:1024
 #, fuzzy
 msgid "Error reading repositories:"
 msgstr "એરર એડિટીંગ ફોટો"
@@ -3468,7 +3481,7 @@ msgstr ""
 msgid "Arguments are not allowed if '%s' is used."
 msgstr ""
 
-#: src/commands/repos/refresh.cc:195 src/repos.cc:1028
+#: src/commands/repos/refresh.cc:195 src/repos.cc:1036
 #, fuzzy
 msgid "Specified repositories: "
 msgstr "એરર એડિટીંગ ફોટો"
@@ -3478,7 +3491,7 @@ msgstr "એરર એડિટીંગ ફોટો"
 msgid "Refreshing repository '%s'."
 msgstr "સાધનો ઉમેરાય છે"
 
-#: src/commands/repos/refresh.cc:236 src/repos.cc:837
+#: src/commands/repos/refresh.cc:236 src/repos.cc:845
 #, fuzzy, c-format, boost-format
 msgid "Scanning content of disabled repository '%s'."
 msgstr "સાધનો ઉમેરાય છે"
@@ -3488,7 +3501,7 @@ msgstr "સાધનો ઉમેરાય છે"
 msgid "Skipping disabled repository '%s'"
 msgstr ""
 
-#: src/commands/repos/refresh.cc:262 src/repos.cc:854 src/repos.cc:887
+#: src/commands/repos/refresh.cc:262 src/repos.cc:862 src/repos.cc:895
 #, c-format, boost-format
 msgid "Skipping repository '%s' because of the above error."
 msgstr ""
@@ -3518,7 +3531,7 @@ msgstr ""
 msgid "Could not refresh the repositories because of errors."
 msgstr "પસંદ કરેલ એન્ટ્રી દૂર કરી શકાઈ નહીં."
 
-#: src/commands/repos/refresh.cc:298 src/repos.cc:938
+#: src/commands/repos/refresh.cc:298 src/repos.cc:946
 #, fuzzy
 msgid "Some of the repositories have not been refreshed because of an error."
 msgstr "પસંદ કરેલ એન્ટ્રી દૂર કરી શકાઈ નહીં."
@@ -3572,12 +3585,12 @@ msgstr ""
 msgid "Repository '%s' renamed to '%s'."
 msgstr "સેવા ચાલુ નથી."
 
-#: src/commands/repos/rename.cc:47 src/repos.cc:1205
+#: src/commands/repos/rename.cc:47 src/repos.cc:1215
 #, fuzzy, c-format, boost-format
 msgid "Repository named '%s' already exists. Please use another alias."
 msgstr "આ નામનું પ્લેલિસ્ટ તો છે જ. મહેરબાની કરીને કોઈ બીજું નામ આપો."
 
-#: src/commands/repos/rename.cc:52 src/repos.cc:1683
+#: src/commands/repos/rename.cc:52 src/repos.cc:1693
 #, fuzzy
 msgid "Error while modifying the repository:"
 msgstr "રિક્વેસ્ટ પાર્સ કરવામાં ભૂલ."
@@ -3816,19 +3829,19 @@ msgid ""
 "install it by calling '%1%'."
 msgstr ""
 
-#: src/commands/search/search-packages-hinthack.cc:100
+#: src/commands/search/search-packages-hinthack.cc:98
 #, boost-format
 msgid ""
 "For an extended search including not yet activated remote resources you may "
-"now run '%1%'."
+"run '%1%' at any time."
 msgstr ""
 
-#: src/commands/search/search-packages-hinthack.cc:102
+#: src/commands/search/search-packages-hinthack.cc:99
 #, boost-format
 msgid "Do you want to run '%1%' now?"
 msgstr ""
 
-#: src/commands/search/search-packages-hinthack.cc:113
+#: src/commands/search/search-packages-hinthack.cc:115
 #, boost-format
 msgid "Run '%1%' to search in not yet activated remote resources."
 msgstr ""
@@ -3954,7 +3967,7 @@ msgid ""
 "(useful for search in dependencies)."
 msgstr ""
 
-#: src/commands/search/search.cc:289 src/repos.cc:774
+#: src/commands/search/search.cc:289 src/repos.cc:782
 #, fuzzy, c-format, boost-format
 msgid "Specified repository '%s' is disabled."
 msgstr "સ્વયં તાજુ કરો"
@@ -3974,7 +3987,7 @@ msgstr ""
 msgid "See the above message for a hint."
 msgstr "કૃપા કરીને ભૂલ સુધારો અને ફરીથી પ્રયત્ન કરો."
 
-#: src/commands/search/search.cc:459 src/repos.cc:995
+#: src/commands/search/search.cc:459 src/repos.cc:1003
 msgid "Running 'zypper refresh' as root might resolve the problem."
 msgstr ""
 
@@ -4057,7 +4070,7 @@ msgid "Problem retrieving the repository index file for service '%s':"
 msgstr "એરર એડિટીંગ ફોટો"
 
 #: src/commands/services/common.cc:138 src/commands/services/refresh.cc:226
-#: src/repos.cc:1735
+#: src/repos.cc:1745
 #, fuzzy, c-format, boost-format
 msgid "Skipping service '%s' because of the above error."
 msgstr "પસંદ કરેલ એન્ટ્રી દૂર કરી શકાઈ નહીં."
@@ -4748,7 +4761,7 @@ msgstr ""
 
 #. translators: table headers
 #. translators: property name; short; used like "Name: value"
-#: src/commands/utils/source-download.cc:318 src/info.cc:347
+#: src/commands/utils/source-download.cc:318 src/info.cc:348
 #, fuzzy
 msgid "Source package"
 msgstr "પેકેજ"
@@ -4906,7 +4919,7 @@ msgstr ""
 #. translators: property name; short; used like "Name: value"
 #. translators: Table column header
 #. translators: package version (header)
-#: src/info.cc:60 src/info.cc:693 src/search.cc:52 src/search.cc:344
+#: src/info.cc:60 src/info.cc:694 src/search.cc:52 src/search.cc:344
 #: src/search.cc:488 src/search.cc:552
 msgid "Version"
 msgstr " આવૃત્તિ "
@@ -4959,71 +4972,71 @@ msgstr "સેવા ચાલુ નથી."
 msgid "Information for %s %s:"
 msgstr "માહિતી "
 
-#: src/info.cc:329
+#: src/info.cc:330
 #, fuzzy
 msgid "Support Level"
 msgstr "ટૂંકા નામો"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:332
+#: src/info.cc:333
 msgid "Installed Size"
 msgstr "સ્થાપેલનું કદઃ"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:336 src/info.cc:384 src/info.cc:559 src/utils/misc.cc:232
+#: src/info.cc:337 src/info.cc:385 src/info.cc:560 src/utils/misc.cc:232
 #: src/utils/misc.cc:273
 msgid "Status"
 msgstr " સ્થિતિ "
 
-#: src/info.cc:340 src/info.cc:563
+#: src/info.cc:341 src/info.cc:564
 #, fuzzy, c-format, boost-format
 msgid "out-of-date (version %s installed)"
 msgstr " નીકળી ગયેલ (આવૃત્તિ "
 
-#: src/info.cc:342 src/info.cc:565
+#: src/info.cc:343 src/info.cc:566
 msgid "up-to-date"
 msgstr "આજની તારીખ સુધી"
 
-#: src/info.cc:345 src/info.cc:568
+#: src/info.cc:346 src/info.cc:569
 msgid "not installed"
 msgstr "સ્થાપેલ નથી"
 
 #. translators: property name; short; used like "Name: value"
 #. translator: Table column header.
 #. Name
-#: src/info.cc:386 src/update.cc:282 src/utils/misc.cc:229
+#: src/info.cc:387 src/update.cc:282 src/utils/misc.cc:229
 #: src/utils/misc.cc:270
 msgid "Category"
 msgstr " વર્ગ "
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:388 src/utils/misc.cc:230 src/utils/misc.cc:271
+#: src/info.cc:389 src/utils/misc.cc:230 src/utils/misc.cc:271
 msgid "Severity"
 msgstr "સિવીયરીટી"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:390
+#: src/info.cc:391
 #, fuzzy
 msgid "Created On"
 msgstr "ક્રિએટ CD"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:392 src/utils/misc.cc:231 src/utils/misc.cc:272
+#: src/info.cc:393 src/utils/misc.cc:231 src/utils/misc.cc:272
 #, fuzzy
 msgid "Interactive"
 msgstr "નિષ્ક્રિય:"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:427
+#: src/info.cc:428
 msgid "Visible to User"
 msgstr ""
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:441 src/info.cc:477
+#: src/info.cc:442 src/info.cc:478
 msgid "Contents"
 msgstr "વિષયો"
 
-#: src/info.cc:441
+#: src/info.cc:442
 msgid "(empty)"
 msgstr ""
 
@@ -5032,99 +5045,99 @@ msgstr ""
 #. translators: S for 'installed Status'
 #. translators: S for installed Status
 #. TranslatorExplanation S stands for Status
-#: src/info.cc:447 src/info.cc:691 src/locales.cc:122 src/search.cc:46
+#: src/info.cc:448 src/info.cc:692 src/locales.cc:122 src/search.cc:46
 #: src/search.cc:195 src/search.cc:342 src/search.cc:485 src/search.cc:546
 #: src/update.cc:722
 msgid "S"
 msgstr " S "
 
 #. translators: Table column header
-#: src/info.cc:450 src/search.cc:346
+#: src/info.cc:451 src/search.cc:346
 msgid "Dependency"
 msgstr ""
 
-#: src/info.cc:455 src/info.cc:469
+#: src/info.cc:456 src/info.cc:470
 #, fuzzy
 msgid "Required"
 msgstr "&રીફેશ"
 
-#: src/info.cc:460 src/info.cc:469 src/search.cc:282
+#: src/info.cc:461 src/info.cc:470 src/search.cc:282
 msgid "Recommended"
 msgstr ""
 
-#: src/info.cc:466 src/info.cc:469 src/search.cc:284
+#: src/info.cc:467 src/info.cc:470 src/search.cc:284
 msgid "Suggested"
 msgstr ""
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:536
+#: src/info.cc:537
 msgid "End of Support"
 msgstr ""
 
-#: src/info.cc:541
+#: src/info.cc:542
 msgid "unknown"
 msgstr "અપરિચિત"
 
 #. translators: %1% is an URL or Path pointing to some document
-#: src/info.cc:546
+#: src/info.cc:547
 #, boost-format
 msgid "See %1%"
 msgstr ""
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:552
+#: src/info.cc:553
 msgid "Flavor"
 msgstr ""
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:554 src/search.cc:554
+#: src/info.cc:555 src/search.cc:554
 msgid "Is Base"
 msgstr ""
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:575 src/info.cc:602
+#: src/info.cc:576 src/info.cc:603
 #, fuzzy
 msgid "Update Repositories"
 msgstr "એરર એડિટીંગ ફોટો"
 
-#: src/info.cc:580
+#: src/info.cc:581
 #, fuzzy
 msgid "Content Id"
 msgstr "વિષયો"
 
-#: src/info.cc:592
+#: src/info.cc:593
 #, fuzzy
 msgid "Provided by enabled repository"
 msgstr "સાધનો ઉમેરાય છે"
 
-#: src/info.cc:597
+#: src/info.cc:598
 #, fuzzy
 msgid "Not provided by any enabled repository"
 msgstr "%s પેકેજ મળ્યું નથી"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:607
+#: src/info.cc:608
 #, fuzzy
 msgid "CPE Name"
 msgstr " નામ "
 
-#: src/info.cc:612
+#: src/info.cc:613
 msgid "undefined"
 msgstr ""
 
-#: src/info.cc:614
+#: src/info.cc:615
 #, fuzzy
 msgid "invalid CPE Name"
 msgstr "અમાન્ય caName: %1."
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:617
+#: src/info.cc:618
 #, fuzzy
 msgid "Short Name"
 msgstr "ટૂંકા નામો:"
 
 #. translators: property name; short; used like "Name: value"; is followed by a list of binary packages built from this source package
-#: src/info.cc:701
+#: src/info.cc:702
 msgid "Builds binary package"
 msgstr ""
 
@@ -5327,11 +5340,11 @@ msgstr "શરૂ થઇ રહ્યું છે..."
 msgid "not found"
 msgstr " મળ્યું નથી "
 
-#: src/output/OutNormal.cc:416
+#: src/output/OutNormal.cc:417
 msgid "No help available for this prompt."
 msgstr ""
 
-#: src/output/OutNormal.cc:427
+#: src/output/OutNormal.cc:434
 msgid "no help available for this option"
 msgstr ""
 
@@ -5385,97 +5398,97 @@ msgstr[1] "સેવા ચાલુ નથી."
 
 #. check whether libzypp indicates a refresh is needed, and if so,
 #. print a message
-#: src/repos.cc:221
+#: src/repos.cc:226
 #, c-format, boost-format
 msgid "Checking whether to refresh metadata for %s"
 msgstr ""
 
-#: src/repos.cc:247
+#: src/repos.cc:255
 #, fuzzy, c-format, boost-format
 msgid "Repository '%s' is up to date."
 msgstr "સેવા ચાલુ નથી."
 
-#: src/repos.cc:253
+#: src/repos.cc:261
 #, fuzzy, c-format, boost-format
 msgid "The up-to-date check of '%s' has been delayed."
 msgstr "સેવા ચાલુ નથી."
 
-#: src/repos.cc:275
+#: src/repos.cc:283
 msgid "Forcing raw metadata refresh"
 msgstr ""
 
-#: src/repos.cc:281
+#: src/repos.cc:289
 #, fuzzy, c-format, boost-format
 msgid "Retrieving repository '%s' metadata"
 msgstr "સાધનો ઉમેરાય છે"
 
-#: src/repos.cc:305
+#: src/repos.cc:313
 #, fuzzy, c-format, boost-format
 msgid "Do you want to disable the repository %s permanently?"
 msgstr "શું તમારે હમણા સિસ્ટમ શોભાવવા  માગો છે?"
 
-#: src/repos.cc:321
+#: src/repos.cc:329
 #, fuzzy, c-format, boost-format
 msgid "Error while disabling repository '%s'."
 msgstr "સાધનો ઉમેરાય છે"
 
-#: src/repos.cc:337
+#: src/repos.cc:345
 #, fuzzy, c-format, boost-format
 msgid "Problem retrieving files from '%s'."
 msgstr "%s માંથી પ્રોડક્ટ વંચાઇ રહી છે"
 
-#: src/repos.cc:338 src/repos.cc:1862 src/solve-commit.cc:787
+#: src/repos.cc:346 src/repos.cc:1872 src/solve-commit.cc:787
 #: src/solve-commit.cc:818 src/solve-commit.cc:842
 #, fuzzy
 msgid "Please see the above error message for a hint."
 msgstr "કૃપા કરીને ભૂલ સુધારો અને ફરીથી પ્રયત્ન કરો."
 
-#: src/repos.cc:350
+#: src/repos.cc:358
 #, fuzzy, c-format, boost-format
 msgid "No URIs defined for '%s'."
 msgstr "%s: બે સબડોમેઈન ડિફાઈન થયેલ છે '%s' ને માટે.\n"
 
 #. TranslatorExplanation the first %s is a .repo file path
-#: src/repos.cc:355
+#: src/repos.cc:363
 #, c-format, boost-format
 msgid ""
 "Please add one or more base URI (baseurl=URI) entries to %s for repository "
 "'%s'."
 msgstr ""
 
-#: src/repos.cc:369
+#: src/repos.cc:377
 #, fuzzy
 msgid "No alias defined for this repository."
 msgstr "રિક્વેસ્ટ પાર્સ કરવામાં ભૂલ."
 
-#: src/repos.cc:381
+#: src/repos.cc:389
 #, fuzzy, c-format, boost-format
 msgid "Repository '%s' is invalid."
 msgstr "સેવા ચાલુ નથી."
 
-#: src/repos.cc:382
+#: src/repos.cc:390
 msgid ""
 "Please check if the URIs defined for this repository are pointing to a valid "
 "repository."
 msgstr ""
 
-#: src/repos.cc:394
+#: src/repos.cc:402
 #, fuzzy, c-format, boost-format
 msgid "Error retrieving metadata for '%s':"
 msgstr "એરર એડિટીંગ ફોટો"
 
-#: src/repos.cc:407
+#: src/repos.cc:415
 #, fuzzy
 msgid "Forcing building of repository cache"
 msgstr "CD મેટાડેટા શોધાય છે..."
 
-#: src/repos.cc:432
+#: src/repos.cc:440
 #, fuzzy, c-format, boost-format
 msgid "Error parsing metadata for '%s':"
 msgstr "એરર એડિટીંગ ફોટો"
 
 #. TranslatorExplanation Don't translate the URL unless it is translated, too
-#: src/repos.cc:434
+#: src/repos.cc:442
 msgid ""
 "This may be caused by invalid metadata in the repository, or by a bug in the "
 "metadata parser. In the latter case, or if in doubt, please, file a bug "
@@ -5483,344 +5496,344 @@ msgid ""
 "Troubleshooting"
 msgstr ""
 
-#: src/repos.cc:443
+#: src/repos.cc:451
 #, fuzzy, c-format, boost-format
 msgid "Repository metadata for '%s' not found in local cache."
 msgstr "સેવા ચાલુ નથી."
 
-#: src/repos.cc:451
+#: src/repos.cc:459
 #, fuzzy
 msgid "Error building the cache:"
 msgstr "iPod ડેટાબેઝ બનાવવામાં ભૂલ થઈ છે"
 
-#: src/repos.cc:670
+#: src/repos.cc:678
 #, fuzzy, c-format, boost-format
 msgid "Repository '%s' not found by its alias, number, or URI."
 msgstr "સેવા ચાલુ નથી."
 
-#: src/repos.cc:672
+#: src/repos.cc:680
 #, c-format, boost-format
 msgid "Use '%s' to get the list of defined repositories."
 msgstr ""
 
-#: src/repos.cc:692
+#: src/repos.cc:700
 #, fuzzy, c-format, boost-format
 msgid "Ignoring disabled repository '%s'"
 msgstr "સાધનો ઉમેરાય છે"
 
-#: src/repos.cc:780
+#: src/repos.cc:788
 #, c-format, boost-format
 msgid "Global option '%s' can be used to temporarily enable repositories."
 msgstr ""
 
-#: src/repos.cc:796 src/repos.cc:802
+#: src/repos.cc:804 src/repos.cc:810
 #, fuzzy, c-format, boost-format
 msgid "Ignoring repository '%s' because of '%s' option."
 msgstr "પસંદ કરેલ એન્ટ્રી દૂર કરી શકાઈ નહીં."
 
-#: src/repos.cc:823 src/repos.cc:923
+#: src/repos.cc:831 src/repos.cc:931
 #, fuzzy, c-format, boost-format
 msgid "Temporarily enabling repository '%s'."
 msgstr "સાધનો ઉમેરાય છે"
 
-#: src/repos.cc:873
+#: src/repos.cc:881
 #, c-format, boost-format
 msgid ""
 "Repository '%s' is out-of-date. You can run 'zypper refresh' as root to "
 "update it."
 msgstr ""
 
-#: src/repos.cc:905
+#: src/repos.cc:913
 #, c-format, boost-format
 msgid ""
 "The metadata cache needs to be built for the '%s' repository. You can run "
 "'zypper refresh' as root to do this."
 msgstr ""
 
-#: src/repos.cc:909
+#: src/repos.cc:917
 #, fuzzy, c-format, boost-format
 msgid "Disabling repository '%s'."
 msgstr "સાધનો ઉમેરાય છે"
 
-#: src/repos.cc:930
+#: src/repos.cc:938
 #, fuzzy, c-format, boost-format
 msgid "Repository '%s' stays disabled."
 msgstr "સેવા ચાલુ નથી."
 
-#: src/repos.cc:986
+#: src/repos.cc:994
 msgid "Initializing Target"
 msgstr "લક્ષ્યનો પ્રારંભ થઈ રહ્યા છે"
 
-#: src/repos.cc:994
+#: src/repos.cc:1002
 #, fuzzy
 msgid "Target initialization failed:"
 msgstr "ઈનીશીયલાઈઝેશન નિષ્ફળ ગયું"
 
-#: src/repos.cc:1074
+#: src/repos.cc:1084
 #, fuzzy, c-format, boost-format
 msgid "Cleaning metadata cache for '%s'."
 msgstr "એરર એડિટીંગ ફોટો"
 
-#: src/repos.cc:1082
+#: src/repos.cc:1092
 #, fuzzy, c-format, boost-format
 msgid "Cleaning raw metadata cache for '%s'."
 msgstr "એરર એડિટીંગ ફોટો"
 
-#: src/repos.cc:1088
+#: src/repos.cc:1098
 #, fuzzy, c-format, boost-format
 msgid "Keeping raw metadata cache for %s '%s'."
 msgstr "એરર એડિટીંગ ફોટો"
 
 #. translators: meaning the cached rpm files
-#: src/repos.cc:1095
+#: src/repos.cc:1105
 #, fuzzy, c-format, boost-format
 msgid "Cleaning packages for '%s'."
 msgstr "%s માંથી પેકેજીસ વંચાઇ રહ્યા છે"
 
-#: src/repos.cc:1103
+#: src/repos.cc:1113
 #, fuzzy, c-format, boost-format
 msgid "Cannot clean repository '%s' because of an error."
 msgstr "પસંદ કરેલ એન્ટ્રી દૂર કરી શકાઈ નહીં."
 
-#: src/repos.cc:1114
+#: src/repos.cc:1124
 #, fuzzy
 msgid "Cleaning installed packages cache."
 msgstr "પેકેજીસનું સ્થાપન દૂર કરવાનો આદેશ"
 
-#: src/repos.cc:1123
+#: src/repos.cc:1133
 #, fuzzy
 msgid "Cannot clean installed packages cache because of an error."
 msgstr "પસંદ કરેલ એન્ટ્રી દૂર કરી શકાઈ નહીં."
 
-#: src/repos.cc:1141
+#: src/repos.cc:1151
 #, fuzzy
 msgid "Could not clean the repositories because of errors."
 msgstr "પસંદ કરેલ એન્ટ્રી દૂર કરી શકાઈ નહીં."
 
-#: src/repos.cc:1147
+#: src/repos.cc:1157
 #, fuzzy
 msgid "Some of the repositories have not been cleaned up because of an error."
 msgstr "પસંદ કરેલ એન્ટ્રી દૂર કરી શકાઈ નહીં."
 
-#: src/repos.cc:1152
+#: src/repos.cc:1162
 #, fuzzy
 msgid "Specified repositories have been cleaned up."
 msgstr "એરર એડિટીંગ ફોટો"
 
-#: src/repos.cc:1154
+#: src/repos.cc:1164
 #, fuzzy
 msgid "All repositories have been cleaned up."
 msgstr "સેવા ચાલુ નથી."
 
-#: src/repos.cc:1176
+#: src/repos.cc:1186
 msgid "This is a changeable read-only media (CD/DVD), disabling autorefresh."
 msgstr ""
 
-#: src/repos.cc:1197
+#: src/repos.cc:1207
 #, fuzzy, c-format, boost-format
 msgid "Invalid repository alias: '%s'"
 msgstr "સાધનો ઉમેરાય છે"
 
-#: src/repos.cc:1214
+#: src/repos.cc:1224
 msgid ""
 "Could not determine the type of the repository. Please check if the defined "
 "URIs (see below) point to a valid repository:"
 msgstr ""
 
-#: src/repos.cc:1220
+#: src/repos.cc:1230
 msgid "Can't find a valid repository at given location:"
 msgstr ""
 
-#: src/repos.cc:1228
+#: src/repos.cc:1238
 #, fuzzy
 msgid "Problem transferring repository data from specified URI:"
 msgstr "CD મેટાડેટા શોધાય છે..."
 
-#: src/repos.cc:1229
+#: src/repos.cc:1239
 #, fuzzy
 msgid "Please check whether the specified URI is accessible."
 msgstr "સ્ક્રિપ્ટ ફાઈલ પ્રાપ્ત થાય તેમ નથી"
 
-#: src/repos.cc:1236
+#: src/repos.cc:1246
 #, fuzzy
 msgid "Unknown problem when adding repository:"
 msgstr "CD મેટાડેટા શોધાય છે..."
 
 #. translators: BOOST STYLE POSITIONAL DIRECTIVES ( %N% )
 #. translators: %1% - a repository name
-#: src/repos.cc:1246
+#: src/repos.cc:1256
 #, boost-format
 msgid ""
 "GPG checking is disabled in configuration of repository '%1%'. Integrity and "
 "origin of packages cannot be verified."
 msgstr ""
 
-#: src/repos.cc:1251
+#: src/repos.cc:1261
 #, c-format, boost-format
 msgid "Repository '%s' successfully added"
 msgstr ""
 
-#: src/repos.cc:1277
+#: src/repos.cc:1287
 #, fuzzy, c-format, boost-format
 msgid "Reading data from '%s' media"
 msgstr "%s માંથી પ્રોડક્ટ વંચાઇ રહી છે"
 
-#: src/repos.cc:1283
+#: src/repos.cc:1293
 #, fuzzy, c-format, boost-format
 msgid "Problem reading data from '%s' media"
 msgstr "%s માંથી પ્રોડક્ટ વંચાઇ રહી છે"
 
-#: src/repos.cc:1284
+#: src/repos.cc:1294
 msgid "Please check if your installation media is valid and readable."
 msgstr ""
 
-#: src/repos.cc:1291
+#: src/repos.cc:1301
 #, fuzzy, c-format, boost-format
 msgid "Reading data from '%s' media is delayed until next refresh."
 msgstr "%s માંથી પ્રોડક્ટ વંચાઇ રહી છે"
 
-#: src/repos.cc:1360
+#: src/repos.cc:1370
 #, fuzzy
 msgid "Problem accessing the file at the specified URI"
 msgstr "CD મેટાડેટા શોધાય છે..."
 
-#: src/repos.cc:1361
+#: src/repos.cc:1371
 #, fuzzy
 msgid "Please check if the URI is valid and accessible."
 msgstr "સ્ક્રિપ્ટ ફાઈલ પ્રાપ્ત થાય તેમ નથી"
 
-#: src/repos.cc:1368
+#: src/repos.cc:1378
 #, fuzzy
 msgid "Problem parsing the file at the specified URI"
 msgstr "CD મેટાડેટા શોધાય છે..."
 
 #. TranslatorExplanation Don't translate the '.repo' string.
-#: src/repos.cc:1370
+#: src/repos.cc:1380
 msgid "Is it a .repo file?"
 msgstr ""
 
-#: src/repos.cc:1377
+#: src/repos.cc:1387
 #, fuzzy
 msgid "Problem encountered while trying to read the file at the specified URI"
 msgstr "CD મેટાડેટા શોધાય છે..."
 
-#: src/repos.cc:1390
+#: src/repos.cc:1400
 #, fuzzy
 msgid "Repository with no alias defined found in the file, skipping."
 msgstr "સેવા ચાલુ નથી."
 
-#: src/repos.cc:1396
+#: src/repos.cc:1406
 #, fuzzy, c-format, boost-format
 msgid "Repository '%s' has no URI defined, skipping."
 msgstr "સેવા ચાલુ નથી."
 
-#: src/repos.cc:1444
+#: src/repos.cc:1454
 #, fuzzy, c-format, boost-format
 msgid "Repository '%s' has been removed."
 msgstr "સેવા ચાલુ નથી."
 
-#: src/repos.cc:1592
+#: src/repos.cc:1602
 #, fuzzy, c-format, boost-format
 msgid "Repository '%s' priority has been left unchanged (%d)"
 msgstr "સેવા ચાલુ નથી."
 
-#: src/repos.cc:1625
+#: src/repos.cc:1635
 #, fuzzy, c-format, boost-format
 msgid "Repository '%s' has been successfully enabled."
 msgstr "સેવા ચાલુ નથી."
 
-#: src/repos.cc:1627
+#: src/repos.cc:1637
 #, fuzzy, c-format, boost-format
 msgid "Repository '%s' has been successfully disabled."
 msgstr "સેવા ચાલુ નથી."
 
-#: src/repos.cc:1634
+#: src/repos.cc:1644
 #, c-format, boost-format
 msgid "Autorefresh has been enabled for repository '%s'."
 msgstr ""
 
-#: src/repos.cc:1636
+#: src/repos.cc:1646
 #, c-format, boost-format
 msgid "Autorefresh has been disabled for repository '%s'."
 msgstr ""
 
-#: src/repos.cc:1643
+#: src/repos.cc:1653
 #, fuzzy, c-format, boost-format
 msgid "RPM files caching has been enabled for repository '%s'."
 msgstr "સાધનો ઉમેરાય છે"
 
-#: src/repos.cc:1645
+#: src/repos.cc:1655
 #, fuzzy, c-format, boost-format
 msgid "RPM files caching has been disabled for repository '%s'."
 msgstr "સાધનો ઉમેરાય છે"
 
-#: src/repos.cc:1652
+#: src/repos.cc:1662
 #, fuzzy, c-format, boost-format
 msgid "GPG check has been enabled for repository '%s'."
 msgstr "સાધનો ઉમેરાય છે"
 
-#: src/repos.cc:1654
+#: src/repos.cc:1664
 #, fuzzy, c-format, boost-format
 msgid "GPG check has been disabled for repository '%s'."
 msgstr "સાધનો ઉમેરાય છે"
 
-#: src/repos.cc:1660
+#: src/repos.cc:1670
 #, fuzzy, c-format, boost-format
 msgid "Repository '%s' priority has been set to %d."
 msgstr "સેવા ચાલુ નથી."
 
-#: src/repos.cc:1666
+#: src/repos.cc:1676
 #, fuzzy, c-format, boost-format
 msgid "Name of repository '%s' has been set to '%s'."
 msgstr "સેવા ચાલુ નથી."
 
-#: src/repos.cc:1677
+#: src/repos.cc:1687
 #, fuzzy, c-format, boost-format
 msgid "Nothing to change for repository '%s'."
 msgstr "સાધનો ઉમેરાય છે"
 
-#: src/repos.cc:1684
+#: src/repos.cc:1694
 #, fuzzy, c-format, boost-format
 msgid "Leaving repository %s unchanged."
 msgstr "સાધનો ઉમેરાય છે"
 
-#: src/repos.cc:1771
+#: src/repos.cc:1781
 #, fuzzy
 msgid "Loading repository data..."
 msgstr "સાધનો ઉમેરાય છે"
 
-#: src/repos.cc:1773
+#: src/repos.cc:1783
 msgid ""
 "No repositories defined. Operating only with the installed resolvables. "
 "Nothing can be installed."
 msgstr ""
 
-#: src/repos.cc:1793
+#: src/repos.cc:1803
 #, fuzzy, c-format, boost-format
 msgid "Retrieving repository '%s' data..."
 msgstr "સાધનો ઉમેરાય છે"
 
-#: src/repos.cc:1799
+#: src/repos.cc:1809
 #, c-format, boost-format
 msgid "Repository '%s' not cached. Caching..."
 msgstr ""
 
-#: src/repos.cc:1805 src/repos.cc:1839
+#: src/repos.cc:1815 src/repos.cc:1849
 #, fuzzy, c-format, boost-format
 msgid "Problem loading data from '%s'"
 msgstr "%s માંથી પ્રોડક્ટ વંચાઇ રહી છે"
 
-#: src/repos.cc:1809
+#: src/repos.cc:1819
 #, fuzzy, c-format, boost-format
 msgid "Repository '%s' could not be refreshed. Using old cache."
 msgstr "સેવા ચાલુ નથી."
 
-#: src/repos.cc:1813 src/repos.cc:1842
+#: src/repos.cc:1823 src/repos.cc:1852
 #, c-format, boost-format
 msgid "Resolvables from '%s' not loaded because of error."
 msgstr ""
 
-#: src/repos.cc:1830
+#: src/repos.cc:1840
 #, c-format, boost-format
 msgid ""
 "Repository '%s' appears to be outdated. Consider using a different mirror or "
@@ -5828,37 +5841,37 @@ msgid ""
 msgstr ""
 
 #. translators: the first %s is 'zypper refresh' and the second 'zypper clean -m'
-#: src/repos.cc:1841
+#: src/repos.cc:1851
 #, c-format, boost-format
 msgid "Try '%s', or even '%s' before doing so."
 msgstr ""
 
-#: src/repos.cc:1852
+#: src/repos.cc:1862
 #, fuzzy
 msgid "Reading installed packages..."
 msgstr "પેકેજીસનું સ્થાપન દૂર કરવાનો આદેશ"
 
-#: src/repos.cc:1861
+#: src/repos.cc:1871
 #, fuzzy
 msgid "Problem occurred while reading the installed packages:"
 msgstr "સ્થાપન સ્ત્રોતમાંથી વાંચતી વખતે ભૂલ થઇ."
 
-#: src/repos.cc:1878
+#: src/repos.cc:1888
 #, c-format, boost-format
 msgid "'%s' looks like an RPM file. Will try to download it."
 msgstr ""
 
-#: src/repos.cc:1887
+#: src/repos.cc:1897
 #, c-format, boost-format
 msgid "Problem with the RPM file specified as '%s', skipping."
 msgstr ""
 
-#: src/repos.cc:1909
+#: src/repos.cc:1919
 #, c-format, boost-format
 msgid "Problem reading the RPM header of %s. Is it an RPM file?"
 msgstr ""
 
-#: src/repos.cc:1929
+#: src/repos.cc:1939
 msgid "Plain RPM files cache"
 msgstr ""
 
@@ -6336,24 +6349,43 @@ msgstr ""
 msgid "Fix for %s issue number %s was not found or is not needed."
 msgstr ""
 
-#: src/utils/Augeas.cc:26
+#: src/utils/Augeas.cc:104
 #, fuzzy
 msgid "Cannot initialize configuration file parser."
 msgstr "કન્ફિગ્યુરેશન ટેમ્પ્લેટ કોપી કરી શકાતું નથી."
 
-#: src/utils/Augeas.cc:44 src/utils/Augeas.cc:58
-msgid "Augeas error: setting config file to load failed."
+#: src/utils/Augeas.cc:510
+#, boost-format
+msgid "Malformed option name '%1%'."
 msgstr ""
 
-#: src/utils/Augeas.cc:64
-#, fuzzy
-msgid "Could not parse the config files."
-msgstr "સર્ટિફીકેટ પાર્સ નથી કરી શકાતો."
+#: src/utils/Augeas.cc:522
+msgid "Could not save the config file."
+msgstr ""
 
-#: src/utils/Augeas.cc:99
-#, fuzzy
-msgid "Error parsing zypper.conf:"
-msgstr "CRL પાર કરવામાં ભૂલ."
+#: src/utils/Augeas.cc:564
+#, boost-format
+msgid "Config file '%1%' exists but is not a file."
+msgstr ""
+
+#: src/utils/Augeas.cc:580
+msgid "Could not load the config files."
+msgstr ""
+
+#: src/utils/Augeas.cc:606
+#, boost-format
+msgid "Config file '%1%' does not exist."
+msgstr ""
+
+#. translator: %1% is the path to a config file, %2% is the name of an options inside the file
+#: src/utils/Augeas.cc:637
+#, boost-format
+msgid "%1%: Option '%2%' is defined multiple times. Using the last one."
+msgstr ""
+
+#: src/utils/Augeas.cc:658
+msgid "No config file is in use."
+msgstr ""
 
 #: src/utils/flags/exceptions.cc:22
 #, boost-format
@@ -6657,19 +6689,21 @@ msgid "Use the Enter or Space key to scroll the text by lines or pages."
 msgstr ""
 
 #. translators: Press '?' to see all options embedded in this prompt: "Continue? [y/n/? shows all options] (y):"
-#: src/utils/prompt.cc:72
+#: src/utils/prompt.cc:91
 msgid "shows all options"
 msgstr ""
 
-#: src/utils/prompt.cc:125 src/utils/prompt.cc:245 src/utils/prompt.cc:328
+#: src/utils/prompt.cc:194 src/utils/prompt.cc:314 src/utils/prompt.cc:325
+#: src/utils/prompt.cc:424
 msgid "yes"
 msgstr "હા"
 
-#: src/utils/prompt.cc:125 src/utils/prompt.cc:245 src/utils/prompt.cc:328
+#: src/utils/prompt.cc:194 src/utils/prompt.cc:314 src/utils/prompt.cc:325
+#: src/utils/prompt.cc:424
 msgid "no"
 msgstr "ના"
 
-#: src/utils/prompt.cc:143 src/utils/prompt.cc:188
+#: src/utils/prompt.cc:212 src/utils/prompt.cc:257
 #, c-format, boost-format
 msgid "Retrying in %u seconds..."
 msgstr ""
@@ -6680,43 +6714,70 @@ msgstr ""
 #. the answers must be separated by slash characters '/' and must
 #. correspond to abort/retry/ignore in that order.
 #. The answers should be lower case letters.
-#: src/utils/prompt.cc:149 src/utils/prompt.cc:233
+#: src/utils/prompt.cc:218 src/utils/prompt.cc:302
 msgid "a/r/i"
 msgstr ""
 
-#: src/utils/prompt.cc:198
+#: src/utils/prompt.cc:267
 #, c-format, boost-format
 msgid "Autoselecting '%s' after %u second."
 msgid_plural "Autoselecting '%s' after %u seconds."
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/utils/prompt.cc:215
+#: src/utils/prompt.cc:284
 #, fuzzy
 msgid "Trying again..."
 msgstr "સ્થાપનની તૈયારી થઇ રહી છે..."
 
-#: src/utils/prompt.cc:289
+#: src/utils/prompt.cc:325
+msgid "always"
+msgstr ""
+
+#: src/utils/prompt.cc:325
+msgid "never"
+msgstr ""
+
+#: src/utils/prompt.cc:372
 msgid "Cannot read input: bad stream or EOF."
 msgstr ""
 
-#: src/utils/prompt.cc:290
+#: src/utils/prompt.cc:373
 #, c-format, boost-format
 msgid ""
 "If you run zypper without a terminal, use '%s' global\n"
 "option to make zypper use default answers to prompts."
 msgstr ""
 
-#: src/utils/prompt.cc:322
+#: src/utils/prompt.cc:412
 #, fuzzy, c-format, boost-format
 msgid "Invalid answer '%s'."
 msgstr "સીરીઅલ %1 અમાન્ય છે."
 
+#: src/utils/prompt.cc:415
+#, c-format, boost-format
+msgid "Ambiguous answer '%s'."
+msgstr ""
+
 #. translators: the %s are: 'y', 'yes' (translated), 'n', and 'no' (translated).
-#: src/utils/prompt.cc:327
+#: src/utils/prompt.cc:423
 #, c-format, boost-format
 msgid "Enter '%s' for '%s' or '%s' for '%s' if nothing else works for you."
 msgstr ""
+
+#: src/utils/prompt.cc:428
+msgid ""
+"If nothing else works enter '#1' to select the 1st option, '#2' for the 2nd "
+"one, ..."
+msgstr ""
+
+#, fuzzy
+#~ msgid "Could not parse the config files."
+#~ msgstr "સર્ટિફીકેટ પાર્સ નથી કરી શકાતો."
+
+#, fuzzy
+#~ msgid "Error parsing zypper.conf:"
+#~ msgstr "CRL પાર કરવામાં ભૂલ."
 
 #, fuzzy
 #~ msgid "Unexpected program flow."

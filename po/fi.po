@@ -22,7 +22,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper.fi\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-01-31 13:26+0100\n"
+"POT-Creation-Date: 2019-02-25 12:04+0100\n"
 "PO-Revision-Date: 2018-10-20 13:02+0000\n"
 "Last-Translator: Tommi Nieminen <software@legisign.org>\n"
 "Language-Team: Finnish <https://l10n.opensuse.org/projects/zypper/master/fi/"
@@ -537,7 +537,7 @@ msgstr ""
 msgid "Arguments:"
 msgstr ""
 
-#: src/commands/commandhelpformatter.h:123 src/utils/flags/zyppflags.cc:562
+#: src/commands/commandhelpformatter.h:123 src/utils/flags/zyppflags.cc:582
 msgid "Command options:"
 msgstr "Komentovalinnat:"
 
@@ -692,7 +692,7 @@ msgstr "TYYPPI"
 #. translators: property name; short; used like "Name: value"
 #: src/utils/flags/zyppflags.h:49 src/commands/repos/list.cc:42
 #: src/commands/repos/list.cc:268 src/commands/services/list.cc:116
-#: src/repos.cc:1257
+#: src/repos.cc:1267
 msgid "URI"
 msgstr "URI"
 
@@ -707,20 +707,20 @@ msgid "MODE"
 msgstr ""
 
 #. TranslatorExplanation These are reasons for various failures.
-#: src/utils/prompt.h:160
+#: src/utils/prompt.h:185
 msgid "Not found"
 msgstr "Ei löytynyt"
 
 # error box title
-#: src/utils/prompt.h:160
+#: src/utils/prompt.h:185
 msgid "I/O error"
 msgstr "I/O-virhe"
 
-#: src/utils/prompt.h:160
+#: src/utils/prompt.h:185
 msgid "Invalid object"
 msgstr "Virheellinen kohde"
 
-#: src/utils/prompt.h:167
+#: src/utils/prompt.h:192
 msgid "Error"
 msgstr "Virhe"
 
@@ -1019,6 +1019,19 @@ msgstr "Jätetään asennetut huomioimatta."
 msgid "Do not read installed packages."
 msgstr "Älä lue järjestelmään asennettuja paketteja."
 
+#: src/Config.cc:804
+msgid "No config file is in use. Can not save options."
+msgstr ""
+
+#: src/Config.cc:815
+#, boost-format
+msgid "Option '%1%' saved in '%2%'."
+msgstr ""
+
+#: src/Config.cc:822
+msgid "Failed to save option."
+msgstr ""
+
 #: src/PackageArgs.cc:208
 #, c-format, boost-format
 msgid "'%s' not found in package names. Trying '%s'."
@@ -1287,203 +1300,203 @@ msgstr "Sivuutetaan valinta %s päivitettäessä päivityspino ensin."
 #. translator: '%1%' is a products name
 #. '%2%' is a command to call (like 'zypper dup')
 #. Both may contain whitespace and should be enclosed by quotes!
-#: src/Summary.cc:399
+#: src/Summary.cc:400
 #, boost-format
 msgid "Product '%1%' requires to be updated by calling '%2%'!"
 msgstr "Tuote \"%1%\" pitää päivittää suorittamalla \"%2%\"!"
 
 #. translators: Appended when clipping a long enumeration:
 #. "ConsoleKit-devel ConsoleKit-doc ... and 20828 more items."
-#: src/Summary.cc:474 src/Summary.cc:550
+#: src/Summary.cc:475 src/Summary.cc:551
 #, boost-format
 msgid "... and %1% more item."
 msgid_plural "... and %1% more items."
 msgstr[0] "...ja %1% muu kohde."
 msgstr[1] "...ja %1% muuta kohdetta."
 
-#: src/Summary.cc:568
+#: src/Summary.cc:569
 #, c-format, boost-format
 msgid "The following NEW package is going to be installed:"
 msgid_plural "The following %d NEW packages are going to be installed:"
 msgstr[0] "Asennetaan seuraava UUSI paketti:"
 msgstr[1] "Asennetaan seuraavat %d UUTTA pakettia:"
 
-#: src/Summary.cc:573
+#: src/Summary.cc:574
 #, c-format, boost-format
 msgid "The following NEW patch is going to be installed:"
 msgid_plural "The following %d NEW patches are going to be installed:"
 msgstr[0] "Asennetaan seuraava UUSI korjauspäivitys:"
 msgstr[1] "Asennetaan seuraavat %d UUTTA korjauspäivitystä:"
 
-#: src/Summary.cc:578
+#: src/Summary.cc:579
 #, c-format, boost-format
 msgid "The following NEW pattern is going to be installed:"
 msgid_plural "The following %d NEW patterns are going to be installed:"
 msgstr[0] "Asennetaan seuraava UUSI ohjelmistoryhmä:"
 msgstr[1] "Asennetaan seuraavat %d UUTTA ohjelmistoryhmää:"
 
-#: src/Summary.cc:583
+#: src/Summary.cc:584
 #, c-format, boost-format
 msgid "The following NEW product is going to be installed:"
 msgid_plural "The following %d NEW products are going to be installed:"
 msgstr[0] "Asennetaan seuraava UUSI tuote:"
 msgstr[1] "Asennetaan seuraavat %d UUTTA tuotetta:"
 
-#: src/Summary.cc:588
+#: src/Summary.cc:589
 #, c-format, boost-format
 msgid "The following source package is going to be installed:"
 msgid_plural "The following %d source packages are going to be installed:"
 msgstr[0] "Asennetaan seuraava lähdekoodipaketti:"
 msgstr[1] "Asennetaan seuraavat %d lähdekoodipakettia:"
 
-#: src/Summary.cc:594
+#: src/Summary.cc:595
 #, c-format, boost-format
 msgid "The following application is going to be installed:"
 msgid_plural "The following %d applications are going to be installed:"
 msgstr[0] "Asennetaan seuraava ohjelma:"
 msgstr[1] "Asennetaan seuraavat %d ohjelmaa:"
 
-#: src/Summary.cc:619
+#: src/Summary.cc:620
 #, c-format, boost-format
 msgid "The following package is going to be REMOVED:"
 msgid_plural "The following %d packages are going to be REMOVED:"
 msgstr[0] "POISTETAAN seuraava paketti:"
 msgstr[1] "POISTETAAN seuraavat %d pakettia:"
 
-#: src/Summary.cc:624
+#: src/Summary.cc:625
 #, c-format, boost-format
 msgid "The following patch is going to be REMOVED:"
 msgid_plural "The following %d patches are going to be REMOVED:"
 msgstr[0] "POISTETAAN seuraava korjauspäivitys:"
 msgstr[1] "POISTETAAN seuraavat %d korjauspäivitystä:"
 
-#: src/Summary.cc:629
+#: src/Summary.cc:630
 #, c-format, boost-format
 msgid "The following pattern is going to be REMOVED:"
 msgid_plural "The following %d patterns are going to be REMOVED:"
 msgstr[0] "POISTETAAN seuraava ohjelmistoryhmä:"
 msgstr[1] "POISTETAAN seuraavat %d ohjelmistoryhmää:"
 
-#: src/Summary.cc:634
+#: src/Summary.cc:635
 #, c-format, boost-format
 msgid "The following product is going to be REMOVED:"
 msgid_plural "The following %d products are going to be REMOVED:"
 msgstr[0] "POISTETAAN seuraava tuote:"
 msgstr[1] "POISTETAAN seuraavat %d tuotetta:"
 
-#: src/Summary.cc:640
+#: src/Summary.cc:641
 #, c-format, boost-format
 msgid "The following application is going to be REMOVED:"
 msgid_plural "The following %d applications are going to be REMOVED:"
 msgstr[0] "POISTETAAN seuraava ohjelma:"
 msgstr[1] "POISTETAAN seuraavat %d ohjelmaa:"
 
-#: src/Summary.cc:663
+#: src/Summary.cc:664
 #, c-format, boost-format
 msgid "The following package is going to be upgraded:"
 msgid_plural "The following %d packages are going to be upgraded:"
 msgstr[0] "Päivitetään seuraava paketti:"
 msgstr[1] "Päivitetään seuraavat %d pakettia:"
 
-#: src/Summary.cc:668
+#: src/Summary.cc:669
 #, c-format, boost-format
 msgid "The following patch is going to be upgraded:"
 msgid_plural "The following %d patches are going to be upgraded:"
 msgstr[0] "Päivitetään seuraava korjauspäivitys:"
 msgstr[1] "Päivitetään seuraavat %d korjauspäivitystä:"
 
-#: src/Summary.cc:673
+#: src/Summary.cc:674
 #, c-format, boost-format
 msgid "The following pattern is going to be upgraded:"
 msgid_plural "The following %d patterns are going to be upgraded:"
 msgstr[0] "Päivitetään seuraava ohjelmistoryhmä:"
 msgstr[1] "Päivitetään seuraavat %d ohjelmistoryhmää:"
 
-#: src/Summary.cc:679
+#: src/Summary.cc:680
 #, c-format, boost-format
 msgid "The following product is going to be upgraded:"
 msgid_plural "The following %d products are going to be upgraded:"
 msgstr[0] "Päivitetään seuraava tuote:"
 msgstr[1] "Päivitetään seuraavat  %d tuotetta:"
 
-#: src/Summary.cc:687
+#: src/Summary.cc:688
 #, c-format, boost-format
 msgid "The following application is going to be upgraded:"
 msgid_plural "The following %d applications are going to be upgraded:"
 msgstr[0] "Päivitetään seuraava ohjelma:"
 msgstr[1] "Päivitetään seuraavat %d ohjelmaa:"
 
-#: src/Summary.cc:709
+#: src/Summary.cc:710
 #, c-format, boost-format
 msgid "The following package is going to be downgraded:"
 msgid_plural "The following %d packages are going to be downgraded:"
 msgstr[0] "Vaihdetaan seuraava paketti vanhempaan versioon:"
 msgstr[1] "Vaihdetaan seuraavat %d pakettia vanhempiin versioihin:"
 
-#: src/Summary.cc:714
+#: src/Summary.cc:715
 #, c-format, boost-format
 msgid "The following patch is going to be downgraded:"
 msgid_plural "The following %d patches are going to be downgraded:"
 msgstr[0] "Vaihdetaan seuraava korjauspäivitys vanhempaan versioon:"
 msgstr[1] "Vaihdetaan seuraavat %d korjauspäivitystä vanhempiin versioihin:"
 
-#: src/Summary.cc:719
+#: src/Summary.cc:720
 #, c-format, boost-format
 msgid "The following pattern is going to be downgraded:"
 msgid_plural "The following %d patterns are going to be downgraded:"
 msgstr[0] "Vaihdetaan seuraava ohjelmistoryhmä vanhempaan versioon:"
 msgstr[1] "Vaihdetaan seuraavat %d ohjelmistoryhmää vanhempiin versioihin:"
 
-#: src/Summary.cc:724
+#: src/Summary.cc:725
 #, c-format, boost-format
 msgid "The following product is going to be downgraded:"
 msgid_plural "The following %d products are going to be downgraded:"
 msgstr[0] "Vaihdetaan seuraava tuote vanhempaan versioon:"
 msgstr[1] "Vaihdetaan seuraavat %d tuotetta vanhempiin versioihin:"
 
-#: src/Summary.cc:730
+#: src/Summary.cc:731
 #, c-format, boost-format
 msgid "The following application is going to be downgraded:"
 msgid_plural "The following %d applications are going to be downgraded:"
 msgstr[0] "Vaihdetaan seuraava ohjelma vanhempaan versioon:"
 msgstr[1] "Vaihdetaan seuraavat %d ohjelmaa vanhempiin versioihin:"
 
-#: src/Summary.cc:752
+#: src/Summary.cc:753
 #, c-format, boost-format
 msgid "The following package is going to be reinstalled:"
 msgid_plural "The following %d packages are going to be reinstalled:"
 msgstr[0] "Asennetaan seuraava paketti uudelleen:"
 msgstr[1] "Asennetaan seuraavat %d pakettia uudelleen:"
 
-#: src/Summary.cc:757
+#: src/Summary.cc:758
 #, c-format, boost-format
 msgid "The following patch is going to be reinstalled:"
 msgid_plural "The following %d patches are going to be reinstalled:"
 msgstr[0] "Asennetaan seuraava korjauspäivitys uudelleen:"
 msgstr[1] "Asennetaan seuraavat %d korjauspäivitystä uudelleen:"
 
-#: src/Summary.cc:762
+#: src/Summary.cc:763
 #, c-format, boost-format
 msgid "The following pattern is going to be reinstalled:"
 msgid_plural "The following %d patterns are going to be reinstalled:"
 msgstr[0] "Asennetaan seuraava ohjelmistoryhmä uudelleen:"
 msgstr[1] "Asennetaan seuraavat %d ohjelmistoryhmää uudelleen:"
 
-#: src/Summary.cc:767
+#: src/Summary.cc:768
 #, c-format, boost-format
 msgid "The following product is going to be reinstalled:"
 msgid_plural "The following %d products are going to be reinstalled:"
 msgstr[0] "Asennetaan seuraava tuote uudelleen:"
 msgstr[1] "Asennetaan seuraavat %d tuotetta uudelleen:"
 
-#: src/Summary.cc:780
+#: src/Summary.cc:781
 #, c-format, boost-format
 msgid "The following application is going to be reinstalled:"
 msgid_plural "The following %d applications are going to be reinstalled:"
 msgstr[0] "Asennetaan seuraava ohjelma uudelleen:"
 msgstr[1] "Asennetaan seuraavat %d ohjelmaa uudelleen:"
 
-#: src/Summary.cc:917
+#: src/Summary.cc:918
 #, c-format, boost-format
 msgid "The following recommended package was automatically selected:"
 msgid_plural ""
@@ -1491,7 +1504,7 @@ msgid_plural ""
 msgstr[0] "Seuraava suositeltu paketti valittiin automaattisesti:"
 msgstr[1] "Seuraavat %d suositeltua pakettia valittiin automaattisesti:"
 
-#: src/Summary.cc:922
+#: src/Summary.cc:923
 #, c-format, boost-format
 msgid "The following recommended patch was automatically selected:"
 msgid_plural ""
@@ -1499,7 +1512,7 @@ msgid_plural ""
 msgstr[0] "Seuraava suositeltu paikkaus valittiin automaattisesti:"
 msgstr[1] "Seuraavat %d suositeltua paikkausta valittiin automaattisesti:"
 
-#: src/Summary.cc:927
+#: src/Summary.cc:928
 #, c-format, boost-format
 msgid "The following recommended pattern was automatically selected:"
 msgid_plural ""
@@ -1508,7 +1521,7 @@ msgstr[0] "Seuraava suositeltu ohjelmistoryhmä valittiin automaattisesti:"
 msgstr[1] ""
 "Seuraavat %d suositeltua ohjelmistoryhmää valittiin automaattisesti:"
 
-#: src/Summary.cc:932
+#: src/Summary.cc:933
 #, c-format, boost-format
 msgid "The following recommended product was automatically selected:"
 msgid_plural ""
@@ -1516,7 +1529,7 @@ msgid_plural ""
 msgstr[0] "Seuraava suositeltu tuote valittiin automaattisesti:"
 msgstr[1] "Seuraavat  %d suositeltua tuotetta valittiin automaattisesti:"
 
-#: src/Summary.cc:937
+#: src/Summary.cc:938
 #, c-format, boost-format
 msgid "The following recommended source package was automatically selected:"
 msgid_plural ""
@@ -1525,7 +1538,7 @@ msgstr[0] "Seuraava suositeltu lähdekoodipaketti valittiin automaattisesti:"
 msgstr[1] ""
 "Seuraavat %d suositeltua lähdekoodipakettia valittiin automaattisesti:"
 
-#: src/Summary.cc:943
+#: src/Summary.cc:944
 #, c-format, boost-format
 msgid "The following recommended application was automatically selected:"
 msgid_plural ""
@@ -1533,7 +1546,7 @@ msgid_plural ""
 msgstr[0] "Seuraava suositeltu ohjelmisto valittiin automaattisesti:"
 msgstr[1] "Seuraavat %d suositeltua ohjelmistoa valittiin automaattisesti:"
 
-#: src/Summary.cc:990
+#: src/Summary.cc:991
 #, c-format, boost-format
 msgid ""
 "The following package is recommended, but will not be installed (only "
@@ -1548,7 +1561,7 @@ msgstr[1] ""
 "Seuraavia %d pakettia suositellaan, mutta niitä ei asenneta (vain "
 "vaadittavat paketit asennetaan):"
 
-#: src/Summary.cc:1002
+#: src/Summary.cc:1003
 #, c-format, boost-format
 msgid ""
 "The following package is recommended, but will not be installed because it's "
@@ -1563,7 +1576,7 @@ msgstr[1] ""
 "Seuraavia %d pakettia suositellaan, muttei asenneta koska ne ovat ei "
 "toivottuja (poistettiin aiemmin manuaalisesti):"
 
-#: src/Summary.cc:1012
+#: src/Summary.cc:1013
 #, c-format, boost-format
 msgid ""
 "The following package is recommended, but will not be installed due to "
@@ -1578,7 +1591,7 @@ msgstr[1] ""
 "Seuraavia %d pakettia suositellaan, mutta niitä ei asenneta "
 "pakettiristiriidan tai pakettiriippuvuuden vuoksi:"
 
-#: src/Summary.cc:1025
+#: src/Summary.cc:1026
 #, c-format, boost-format
 msgid "The following patch is recommended, but will not be installed:"
 msgid_plural ""
@@ -1586,7 +1599,7 @@ msgid_plural ""
 msgstr[0] "Seuraavaa paikkausta suositellaan, mutta sitä ei asenneta:"
 msgstr[1] "Seuraavia %d paikkausta suositellaan, muttei asenneta:"
 
-#: src/Summary.cc:1029
+#: src/Summary.cc:1030
 #, c-format, boost-format
 msgid "The following pattern is recommended, but will not be installed:"
 msgid_plural ""
@@ -1595,7 +1608,7 @@ msgstr[0] "Seuraavaa ohjelmistoryhmää suositellaan, mutta sitä ei asenneta:"
 msgstr[1] ""
 "Seuraavat %d ohjelmistoryhmää ovat suositeltuja, mutta niitä ei asenneta:"
 
-#: src/Summary.cc:1033
+#: src/Summary.cc:1034
 #, c-format, boost-format
 msgid "The following product is recommended, but will not be installed:"
 msgid_plural ""
@@ -1603,7 +1616,7 @@ msgid_plural ""
 msgstr[0] "Seuraavaa tuotetta suositellaan, mutta sitä ei asenneta:"
 msgstr[1] "Seuraavia %d tuotetta suositellaan, muttei asenneta:"
 
-#: src/Summary.cc:1038
+#: src/Summary.cc:1039
 #, c-format, boost-format
 msgid "The following application is recommended, but will not be installed:"
 msgid_plural ""
@@ -1612,7 +1625,7 @@ msgstr[0] "Seuraavaa ohjelmistoa suositellaan, mutta sitä ei asenneta:"
 msgstr[1] ""
 "Seuraavat %d ohjelmistoa ovat suositeltuja, mutta niitä ei asenneta:"
 
-#: src/Summary.cc:1071
+#: src/Summary.cc:1072
 #, c-format, boost-format
 msgid "The following package is suggested, but will not be installed:"
 msgid_plural ""
@@ -1620,7 +1633,7 @@ msgid_plural ""
 msgstr[0] "Seuraavaa pakettia ehdotetaan, mutta sitä ei asenneta:"
 msgstr[1] "Seuraavia %d pakettia ehdotetaan, mutta niitä ei asenneta:"
 
-#: src/Summary.cc:1076
+#: src/Summary.cc:1077
 #, c-format, boost-format
 msgid "The following patch is suggested, but will not be installed:"
 msgid_plural ""
@@ -1628,7 +1641,7 @@ msgid_plural ""
 msgstr[0] "Seuraavaa korjauspäivitystä ehdotetaan, mutta sitä ei asenneta:"
 msgstr[1] "Seuraavia %d korjauspäivitystä ehdotetaan, muttei asenneta:"
 
-#: src/Summary.cc:1081
+#: src/Summary.cc:1082
 #, c-format, boost-format
 msgid "The following pattern is suggested, but will not be installed:"
 msgid_plural ""
@@ -1636,7 +1649,7 @@ msgid_plural ""
 msgstr[0] "Seuraavaa ohjelmistoryhmää ehdotetaan, mutta sitä ei asenneta:"
 msgstr[1] "Seuraavia %d ohjelmistoryhmää ehdotetaan, mutta niitä ei asenneta:"
 
-#: src/Summary.cc:1086
+#: src/Summary.cc:1087
 #, c-format, boost-format
 msgid "The following product is suggested, but will not be installed:"
 msgid_plural ""
@@ -1644,7 +1657,7 @@ msgid_plural ""
 msgstr[0] "Seuraavaa tuotetta ehdotetaan, mutta sitä ei asenneta:"
 msgstr[1] "Seuraavia %d tuotetta ehdotetaan, muttei asenneta:"
 
-#: src/Summary.cc:1092
+#: src/Summary.cc:1093
 #, c-format, boost-format
 msgid "The following application is suggested, but will not be installed:"
 msgid_plural ""
@@ -1652,77 +1665,77 @@ msgid_plural ""
 msgstr[0] "Seuraavaa ohjelmistoa ehdotetaan, mutta sitä ei asenneta:"
 msgstr[1] "Seuraavia %d ohjelmistoa ehdotetaan, mutta niitä ei asenneta:"
 
-#: src/Summary.cc:1117
+#: src/Summary.cc:1118
 #, c-format, boost-format
 msgid "The following package is going to change architecture:"
 msgid_plural "The following %d packages are going to change architecture:"
 msgstr[0] "Seuraava paketti vaihtaa arkkitehtuuria:"
 msgstr[1] "Seuraavat %d pakettia vaihtavat arkkitehtuuria:"
 
-#: src/Summary.cc:1122
+#: src/Summary.cc:1123
 #, c-format, boost-format
 msgid "The following patch is going to change architecture:"
 msgid_plural "The following %d patches are going to change architecture:"
 msgstr[0] "Seuraava korjauspäivitys vaihtaa arkkitehtuuria:"
 msgstr[1] "Seuraavat %d korjauspäivitystä vaihtavat arkkitehtuuria:"
 
-#: src/Summary.cc:1127
+#: src/Summary.cc:1128
 #, c-format, boost-format
 msgid "The following pattern is going to change architecture:"
 msgid_plural "The following %d patterns are going to change architecture:"
 msgstr[0] "Seuraava ohjelmistoryhmä vaihtaa arkkitehtuuria:"
 msgstr[1] "Seuraavat %d ohjelmistoryhmää vaihtavat arkkitehtuuria:"
 
-#: src/Summary.cc:1132
+#: src/Summary.cc:1133
 #, c-format, boost-format
 msgid "The following product is going to change architecture:"
 msgid_plural "The following %d products are going to change architecture:"
 msgstr[0] "Seuraava tuote vaihtaa arkkitehtuuria:"
 msgstr[1] "Seuraavat %d tuotetta vaihtavat arkkitehtuuria:"
 
-#: src/Summary.cc:1138
+#: src/Summary.cc:1139
 #, c-format, boost-format
 msgid "The following application is going to change architecture:"
 msgid_plural "The following %d applications are going to change architecture:"
 msgstr[0] "Seuraava ohjelmistoryhmä vaihtaa arkkitehtuuria:"
 msgstr[1] "Seuraavat %d ohjelmistoryhmää vaihtavat arkkitehtuuria:"
 
-#: src/Summary.cc:1163
+#: src/Summary.cc:1164
 #, c-format, boost-format
 msgid "The following package is going to change vendor:"
 msgid_plural "The following %d packages are going to change vendor:"
 msgstr[0] "Seuraava paketti vaihtaa toimittajaa:"
 msgstr[1] "Seuraavat %d pakettia vaihtavat toimittajaa:"
 
-#: src/Summary.cc:1168
+#: src/Summary.cc:1169
 #, c-format, boost-format
 msgid "The following patch is going to change vendor:"
 msgid_plural "The following %d patches are going to change vendor:"
 msgstr[0] "Seuraava korjauspäivitys vaihtaa toimittajaa:"
 msgstr[1] "Seuraavat %d korjauspäivitystä vaihtavat toimittajaa:"
 
-#: src/Summary.cc:1173
+#: src/Summary.cc:1174
 #, c-format, boost-format
 msgid "The following pattern is going to change vendor:"
 msgid_plural "The following %d patterns are going to change vendor:"
 msgstr[0] "Seuraava ohjelmistoryhmä vaihtaa toimittajaa:"
 msgstr[1] "Seuraavat %d ohjelmistoryhmää vaihtavat toimittajaa:"
 
-#: src/Summary.cc:1178
+#: src/Summary.cc:1179
 #, c-format, boost-format
 msgid "The following product is going to change vendor:"
 msgid_plural "The following %d products are going to change vendor:"
 msgstr[0] "Seuraava tuote vaihtaa toimittajaa:"
 msgstr[1] "Seuraavat %d tuotetta vaihtavat toimittajaa:"
 
-#: src/Summary.cc:1184
+#: src/Summary.cc:1185
 #, c-format, boost-format
 msgid "The following application is going to change vendor:"
 msgid_plural "The following %d applications are going to change vendor:"
 msgstr[0] "Seuraava ohjelmistoryhmä vaihtaa toimittajaa:"
 msgstr[1] "Seuraavat %d ohjelmistoryhmää vaihtavat toimittajaa:"
 
-#: src/Summary.cc:1207
+#: src/Summary.cc:1208
 #, c-format, boost-format
 msgid "The following package has no support information from its vendor:"
 msgid_plural ""
@@ -1730,14 +1743,14 @@ msgid_plural ""
 msgstr[0] "Seuraavalla %d paketilla ei ole valmistajan tukitietoja:"
 msgstr[1] "Seuraavilla %d paketilla ei ole valmistajan tukitietoja:"
 
-#: src/Summary.cc:1225
+#: src/Summary.cc:1226
 #, c-format, boost-format
 msgid "The following package is not supported by its vendor:"
 msgid_plural "The following %d packages are not supported by their vendor:"
 msgstr[0] "Seuraava paketti ei ole toimittajan tukema:"
 msgstr[1] "Seuraavat %d pakettia eivät ole toimittajan tukemia:"
 
-#: src/Summary.cc:1243
+#: src/Summary.cc:1244
 #, c-format, boost-format
 msgid ""
 "The following package needs additional customer contract to get support:"
@@ -1749,28 +1762,28 @@ msgstr[1] ""
 "Tuen saamiseksi seuraaviin %d pakettiin edellytetään erillinen "
 "asiakassopimus:"
 
-#: src/Summary.cc:1263
+#: src/Summary.cc:1264
 #, c-format, boost-format
 msgid "The following package update will NOT be installed:"
 msgid_plural "The following %d package updates will NOT be installed:"
 msgstr[0] "Seuraavaa päivityspakettia EI asenneta:"
 msgstr[1] "Seuraavia %d  päivityspakettia EI asenneta:"
 
-#: src/Summary.cc:1268
+#: src/Summary.cc:1269
 #, c-format, boost-format
 msgid "The following product update will NOT be installed:"
 msgid_plural "The following %d product updates will NOT be installed:"
 msgstr[0] "Seuraavaa tuotepäivitystä EI asenneta:"
 msgstr[1] "Seuraavia %d tuotepäivitystä EI asenneta:"
 
-#: src/Summary.cc:1274
+#: src/Summary.cc:1275
 #, c-format, boost-format
 msgid "The following application update will NOT be installed:"
 msgid_plural "The following %d application updates will NOT be installed:"
 msgstr[0] "Seuraavaa päivityspakettia EI asenneta:"
 msgstr[1] "Seuraavia %d päivityspakettia EI asenneta:"
 
-#: src/Summary.cc:1307
+#: src/Summary.cc:1308
 #, c-format, boost-format
 msgid "The following item is locked and will not be changed by any action:"
 msgid_plural ""
@@ -1780,22 +1793,22 @@ msgstr[1] "Seuraavat %d kohdetta on lukittu eikä niitä toimenpitein muuteta:"
 
 #. always as plain name list
 #. translators: used as 'tag:' (i.e. followed by ':')
-#: src/Summary.cc:1320
+#: src/Summary.cc:1321
 msgid "Available"
 msgstr "Saatavilla"
 
 #. translators: used as 'tag:' (i.e. followed by ':')
 #. translators: property name; short; used like "Name: value"
-#: src/Summary.cc:1326 src/info.cc:334 src/info.cc:425 src/info.cc:556
+#: src/Summary.cc:1327 src/info.cc:335 src/info.cc:426 src/info.cc:557
 msgid "Installed"
 msgstr "Asennettu"
 
-#: src/Summary.cc:1331
+#: src/Summary.cc:1332
 #, boost-format
 msgid "Run '%1%' to see the complete list of locked items."
 msgstr "Näet kaikki lukitut kohteet suorittamalla ”%1“."
 
-#: src/Summary.cc:1340
+#: src/Summary.cc:1341
 #, c-format, boost-format
 msgid "The following patch requires a system reboot:"
 msgid_plural "The following %d patches require a system reboot:"
@@ -1804,146 +1817,146 @@ msgstr[0] ""
 msgstr[1] ""
 "Seuraavat %d korjauspäivitystä vaativat käynnistämään järjestelmän uudelleen:"
 
-#: src/Summary.cc:1344
+#: src/Summary.cc:1345
 #, c-format, boost-format
 msgid "The following package requires a system reboot:"
 msgid_plural "The following %d packages require a system reboot:"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/Summary.cc:1373
+#: src/Summary.cc:1374
 #, boost-format
 msgid "Overall download size: %1%. Already cached: %2%."
 msgstr "Latauksen koko kaikkiaan: %1%. Jo välimuistissa: %2%."
 
-#: src/Summary.cc:1376
+#: src/Summary.cc:1377
 msgid "Download only."
 msgstr "Vain lataus."
 
 #. TrasnlatorExplanation %s will be substituted by a byte count e.g. 212 K
-#: src/Summary.cc:1382
+#: src/Summary.cc:1383
 #, c-format, boost-format
 msgid "After the operation, additional %s will be used."
 msgstr "Operaation jälkeen tilaa on %s vähemmän."
 
-#: src/Summary.cc:1384
+#: src/Summary.cc:1385
 msgid "No additional space will be used or freed after the operation."
 msgstr ""
 "Operaation suorittamisen jälkeen järjestelmä vie tilaa saman verran kuin nyt."
 
 #. TrasnlatorExplanation %s will be substituted by a byte count e.g. 212 K
-#: src/Summary.cc:1391
+#: src/Summary.cc:1392
 #, c-format, boost-format
 msgid "After the operation, %s will be freed."
 msgstr "Operaation jälkeen tilaa on %s enemmän."
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
-#: src/Summary.cc:1414
+#: src/Summary.cc:1415
 msgid "package to upgrade"
 msgid_plural "packages to upgrade"
 msgstr[0] "paketti päivitetään"
 msgstr[1] "pakettia päivitetään"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
-#: src/Summary.cc:1425
+#: src/Summary.cc:1426
 msgid "to downgrade"
 msgid_plural "to downgrade"
 msgstr[0] "päivittyy vanhempaan"
 msgstr[1] "päivitetään vanhempaan"
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
-#: src/Summary.cc:1428
+#: src/Summary.cc:1429
 msgid "package to downgrade"
 msgid_plural "packages to downgrade"
 msgstr[0] "paketti päivittyy vanhempaan"
 msgstr[1] "pakettia päivittyy vanhempaan"
 
 #. translators: this text will be preceded by a number e.g. "5 new"
-#: src/Summary.cc:1439
+#: src/Summary.cc:1440
 msgid "new"
 msgid_plural "new"
 msgstr[0] "uusi"
 msgstr[1] "uutta"
 
 #. translators: this text will be preceded by a number e.g. "5 new to install"
-#: src/Summary.cc:1442
+#: src/Summary.cc:1443
 msgid "new package to install"
 msgid_plural "new packages to install"
 msgstr[0] "uusi paketti asennetaan"
 msgstr[1] "uutta pakettia asennetaan"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
-#: src/Summary.cc:1453
+#: src/Summary.cc:1454
 msgid "to reinstall"
 msgid_plural "to reinstall"
 msgstr[0] "uudelleen asennetaan"
 msgstr[1] "uudelleen asennetaan"
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
-#: src/Summary.cc:1456
+#: src/Summary.cc:1457
 msgid "package to reinstall"
 msgid_plural "packages to reinstall"
 msgstr[0] "paketti asennetaan uudelleen "
 msgstr[1] "pakettia uudelleen asennetaan"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
-#: src/Summary.cc:1467
+#: src/Summary.cc:1468
 msgid "to remove"
 msgid_plural "to remove"
 msgstr[0] "poistetaan"
 msgstr[1] "poistetaan"
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
-#: src/Summary.cc:1470
+#: src/Summary.cc:1471
 msgid "package to remove"
 msgid_plural "packages to remove"
 msgstr[0] "paketti poistetaan"
 msgstr[1] "pakettia poistetaan"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
-#: src/Summary.cc:1481
+#: src/Summary.cc:1482
 msgid "to change vendor"
 msgid_plural " to change vendor"
 msgstr[0] "vaihtaa toimittajaa"
 msgstr[1] " vaihtaa toimittajaa"
 
 #. translators: this text will be preceded by a number e.g. "5 packages ..."
-#: src/Summary.cc:1484
+#: src/Summary.cc:1485
 msgid "package will change vendor"
 msgid_plural "packages will change vendor"
 msgstr[0] "paketti vaihtaa toimittajaa"
 msgstr[1] "pakettia vaihtaa toimittajaa"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
-#: src/Summary.cc:1495
+#: src/Summary.cc:1496
 msgid "to change arch"
 msgid_plural "to change arch"
 msgstr[0] "vaihtaa arkkitehtuuria"
 msgstr[1] "vaihtaa arkkitehtuuria"
 
 #. translators: this text will be preceded by a number e.g. "5 packages ..."
-#: src/Summary.cc:1498
+#: src/Summary.cc:1499
 msgid "package will change arch"
 msgid_plural "packages will change arch"
 msgstr[0] "paketti vaihtaa arkkitehtuuria"
 msgstr[1] "pakettia vaihtaa arkkitehtuuria"
 
 #. translators: this text will be preceded by a number e.g. "5 new"
-#: src/Summary.cc:1509
+#: src/Summary.cc:1510
 msgid "source package"
 msgid_plural "source packages"
 msgstr[0] "lähdekoodipaketti"
 msgstr[1] "lähdekoodipakettia"
 
 #. translators: this text will be preceded by a number e.g. "5 new to install"
-#: src/Summary.cc:1512
+#: src/Summary.cc:1513
 msgid "source package to install"
 msgid_plural "source packages to install"
 msgstr[0] "lähdekoodipakettia asennetaan"
 msgstr[1] "lähdekoodipaketteja asennetaan"
 
 #. patch command (auto)restricted to update stack patches
-#: src/Summary.cc:1578
+#: src/Summary.cc:1586
 msgid ""
 "Package manager restart required. (Run this command once again after the "
 "update stack got updated)"
@@ -1951,7 +1964,7 @@ msgstr ""
 "Paketinhallinta pitää käynnistää uudelleen. (Suorita tämä komento uudestaan "
 "päivityspinon päivityttyä)"
 
-#: src/Summary.cc:1581
+#: src/Summary.cc:1589
 msgid "System reboot required."
 msgstr "Järjestelmä on käynnistettävä uudelleen."
 
@@ -1963,7 +1976,7 @@ msgstr "Järjestelmä on käynnistettävä uudelleen."
 #. Consider to cancel:
 #. Product 'opennSUSE Tumbleweed' requires to be updated by calling 'zypper dup'!
 #. Continue? [y/n/...? shows all options] (y):
-#: src/Summary.cc:1598
+#: src/Summary.cc:1606
 msgid "Consider to cancel:"
 msgstr "Harkitse, voitko perua:"
 
@@ -1995,7 +2008,7 @@ msgstr "PackageKit on yhä toiminnassa (todennäköisesti kiireinen)."
 msgid "Try again?"
 msgstr "Yritetäänkö uudelleen?"
 
-#: src/Zypper.cc:248 src/Zypper.cc:711 src/commands/basecommand.cc:265
+#: src/Zypper.cc:248 src/Zypper.cc:712 src/commands/basecommand.cc:265
 msgid "Unexpected exception."
 msgstr "Odottamaton poikkeus."
 
@@ -2031,7 +2044,7 @@ msgstr ""
 msgid "The %s option has no effect here, ignoring."
 msgstr "Valinta %s ei vaikuta täällä. Jätetään huomioimatta."
 
-#: src/Zypper.cc:654
+#: src/Zypper.cc:655
 msgid "Non-option program arguments: "
 msgstr "Pakolliset ohjelman parametrit: "
 
@@ -2078,7 +2091,7 @@ msgstr "Poista käytöstä SSL-varmenteen autenttisuuden tarkistus ja jatka."
 
 #. translators: this is a prompt text
 #: src/callbacks/media.cc:83 src/callbacks/media.cc:178
-#: src/callbacks/media.cc:260 src/utils/prompt.cc:150 src/utils/prompt.cc:236
+#: src/callbacks/media.cc:260 src/utils/prompt.cc:219 src/utils/prompt.cc:305
 msgid "Abort, retry, ignore?"
 msgstr "Keskeytä, yritä uudelleen, ohita?"
 
@@ -2596,7 +2609,7 @@ msgstr[1] "Poistettiin %lu lukkoa."
 #. translators: name (general header)
 #: src/commands/locks/list.cc:135 src/commands/repos/list.cc:41
 #: src/commands/repos/list.cc:223 src/commands/services/list.cc:105
-#: src/info.cc:58 src/info.cc:448 src/info.cc:692 src/locales.cc:124
+#: src/info.cc:58 src/info.cc:449 src/info.cc:693 src/locales.cc:124
 #: src/search.cc:48 src/search.cc:196 src/search.cc:343 src/search.cc:487
 #: src/search.cc:551 src/update.cc:727 src/utils/misc.cc:228
 msgid "Name"
@@ -2611,7 +2624,7 @@ msgstr "Korjauspäivitykset"
 #. translators: type (general header)
 #: src/commands/locks/list.cc:138 src/commands/repos/list.cc:52
 #: src/commands/repos/list.cc:261 src/commands/services/list.cc:114
-#: src/info.cc:449 src/search.cc:50 src/search.cc:199
+#: src/info.cc:450 src/search.cc:50 src/search.cc:199
 msgid "Type"
 msgstr "Tyyppi"
 
@@ -3391,26 +3404,26 @@ msgstr "Alias"
 #. 'enabled' flag
 #. translators: property name; short; used like "Name: value"
 #: src/commands/repos/list.cc:47 src/commands/repos/list.cc:230
-#: src/commands/services/list.cc:106 src/repos.cc:1259
+#: src/commands/services/list.cc:106 src/repos.cc:1269
 msgid "Enabled"
 msgstr "Käytössä"
 
 #. GPG Check
 #. translators: property name; short; used like "Name: value"
 #: src/commands/repos/list.cc:48 src/commands/repos/list.cc:234
-#: src/commands/services/list.cc:107 src/repos.cc:1261
+#: src/commands/services/list.cc:107 src/repos.cc:1271
 msgid "GPG Check"
 msgstr "GPG-tarkistus"
 
 #. translators: repository priority (in zypper repos -p or -d)
 #. translators: property name; short; used like "Name: value"
 #: src/commands/repos/list.cc:49 src/commands/repos/list.cc:252
-#: src/commands/services/list.cc:113 src/repos.cc:1265
+#: src/commands/services/list.cc:113 src/repos.cc:1275
 msgid "Priority"
 msgstr "Tärkeysjärjestys"
 
 #. translators: property name; short; used like "Name: value"
-#: src/commands/repos/list.cc:50 src/repos.cc:1263
+#: src/commands/repos/list.cc:50 src/repos.cc:1273
 msgid "Autorefresh"
 msgstr "Automaattinen päivitys"
 
@@ -3463,7 +3476,7 @@ msgstr "Listaa järjestelmän asennuslähteet."
 msgid "Export all defined repositories as a single local .repo file."
 msgstr "Tallenna kaikki asennuslähteet yksittäiseen .repo-tiedostoon."
 
-#: src/commands/repos/list.cc:118 src/repos.cc:1016
+#: src/commands/repos/list.cc:118 src/repos.cc:1024
 msgid "Error reading repositories:"
 msgstr "Virhe luettaessa asennuslähteitä:"
 
@@ -3594,7 +3607,7 @@ msgstr "Valinnalla \"%s\" ei ole vaikutusta tässä."
 msgid "Arguments are not allowed if '%s' is used."
 msgstr "Käytettäessä \"%s\" ei sallita parametreja."
 
-#: src/commands/repos/refresh.cc:195 src/repos.cc:1028
+#: src/commands/repos/refresh.cc:195 src/repos.cc:1036
 msgid "Specified repositories: "
 msgstr "Määritellyt asennuslähteet: "
 
@@ -3603,7 +3616,7 @@ msgstr "Määritellyt asennuslähteet: "
 msgid "Refreshing repository '%s'."
 msgstr "Poistetaan asennuslähde \"%s\" käytöstä."
 
-#: src/commands/repos/refresh.cc:236 src/repos.cc:837
+#: src/commands/repos/refresh.cc:236 src/repos.cc:845
 #, c-format, boost-format
 msgid "Scanning content of disabled repository '%s'."
 msgstr "Tarkastetaan käytöstä poistetun asennuslähteen '%s' sisältöä."
@@ -3613,7 +3626,7 @@ msgstr "Tarkastetaan käytöstä poistetun asennuslähteen '%s' sisältöä."
 msgid "Skipping disabled repository '%s'"
 msgstr "Ohitettiin käytöstä poistettu asennuslähde \"%s\""
 
-#: src/commands/repos/refresh.cc:262 src/repos.cc:854 src/repos.cc:887
+#: src/commands/repos/refresh.cc:262 src/repos.cc:862 src/repos.cc:895
 #, c-format, boost-format
 msgid "Skipping repository '%s' because of the above error."
 msgstr "Ohitettiin asennuslähde \"%s\" yllä olevien virheiden vuoksi."
@@ -3641,7 +3654,7 @@ msgstr "Lisää tai ota käyttöön asennuslähteitä komennoin \"%s\" tai \"%s\
 msgid "Could not refresh the repositories because of errors."
 msgstr "Asennuslähdettä ei voitu päivittää virheiden vuoksi."
 
-#: src/commands/repos/refresh.cc:298 src/repos.cc:938
+#: src/commands/repos/refresh.cc:298 src/repos.cc:946
 msgid "Some of the repositories have not been refreshed because of an error."
 msgstr "Joitakin asennuslähteitä ei päivitetty virheiden vuoksi."
 
@@ -3700,12 +3713,12 @@ msgstr ""
 msgid "Repository '%s' renamed to '%s'."
 msgstr "Asennuslähde \"%s\" nimeksi muutettiin \"%s\"."
 
-#: src/commands/repos/rename.cc:47 src/repos.cc:1205
+#: src/commands/repos/rename.cc:47 src/repos.cc:1215
 #, c-format, boost-format
 msgid "Repository named '%s' already exists. Please use another alias."
 msgstr "\"%s\" on jo käytössä: valitse toinen alias."
 
-#: src/commands/repos/rename.cc:52 src/repos.cc:1683
+#: src/commands/repos/rename.cc:52 src/repos.cc:1693
 msgid "Error while modifying the repository:"
 msgstr "Virhe muokattaessa asennuslähdettä:"
 
@@ -3951,19 +3964,19 @@ msgstr ""
 "Alikomennon tarjoavaa pakettia ei ole asennettu. Voit asentaa sen komennolla "
 "”%1%”."
 
-#: src/commands/search/search-packages-hinthack.cc:100
+#: src/commands/search/search-packages-hinthack.cc:98
 #, boost-format
 msgid ""
 "For an extended search including not yet activated remote resources you may "
-"now run '%1%'."
+"run '%1%' at any time."
 msgstr ""
 
-#: src/commands/search/search-packages-hinthack.cc:102
+#: src/commands/search/search-packages-hinthack.cc:99
 #, boost-format
 msgid "Do you want to run '%1%' now?"
 msgstr ""
 
-#: src/commands/search/search-packages-hinthack.cc:113
+#: src/commands/search/search-packages-hinthack.cc:115
 #, boost-format
 msgid "Run '%1%' to search in not yet activated remote resources."
 msgstr ""
@@ -4089,7 +4102,7 @@ msgid ""
 "(useful for search in dependencies)."
 msgstr ""
 
-#: src/commands/search/search.cc:289 src/repos.cc:774
+#: src/commands/search/search.cc:289 src/repos.cc:782
 #, c-format, boost-format
 msgid "Specified repository '%s' is disabled."
 msgstr "Määritetty asennuslähde \"%s\" on poistettu käytöstä."
@@ -4108,7 +4121,7 @@ msgstr "Virhe valmisteltaessa tai suoritettaessa hakua"
 msgid "See the above message for a hint."
 msgstr "Tarkista yllä oleva virheviesti."
 
-#: src/commands/search/search.cc:459 src/repos.cc:995
+#: src/commands/search/search.cc:459 src/repos.cc:1003
 msgid "Running 'zypper refresh' as root might resolve the problem."
 msgstr ""
 "\"zypper refresh\" -komennon ajaminen pääkäyttäjänä saattaa korjata ongelman."
@@ -4193,7 +4206,7 @@ msgid "Problem retrieving the repository index file for service '%s':"
 msgstr "Virhe siirrettäessä palvelun \"%s\" tietoja:"
 
 #: src/commands/services/common.cc:138 src/commands/services/refresh.cc:226
-#: src/repos.cc:1735
+#: src/repos.cc:1745
 #, c-format, boost-format
 msgid "Skipping service '%s' because of the above error."
 msgstr "Ohitettiin palvelu \"%s\" yllä olevien virheiden vuoksi."
@@ -4896,7 +4909,7 @@ msgstr "tarpeettomat lähdekoodipaketit lataushakemistossa:"
 
 #. translators: table headers
 #. translators: property name; short; used like "Name: value"
-#: src/commands/utils/source-download.cc:318 src/info.cc:347
+#: src/commands/utils/source-download.cc:318 src/info.cc:348
 msgid "Source package"
 msgstr "lähdekoodipaketti"
 
@@ -5058,7 +5071,7 @@ msgstr "%s on vanhempi kuin %s"
 #. translators: property name; short; used like "Name: value"
 #. translators: Table column header
 #. translators: package version (header)
-#: src/info.cc:60 src/info.cc:693 src/search.cc:52 src/search.cc:344
+#: src/info.cc:60 src/info.cc:694 src/search.cc:52 src/search.cc:344
 #: src/search.cc:488 src/search.cc:552
 msgid "Version"
 msgstr "Versio"
@@ -5110,69 +5123,69 @@ msgstr "Kohdetta %s \"%s\" ei löytynyt."
 msgid "Information for %s %s:"
 msgstr "Tiedot kohteesta %s %s:"
 
-#: src/info.cc:329
+#: src/info.cc:330
 msgid "Support Level"
 msgstr "Tukitaso"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:332
+#: src/info.cc:333
 msgid "Installed Size"
 msgstr "Koko asennettuna"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:336 src/info.cc:384 src/info.cc:559 src/utils/misc.cc:232
+#: src/info.cc:337 src/info.cc:385 src/info.cc:560 src/utils/misc.cc:232
 #: src/utils/misc.cc:273
 msgid "Status"
 msgstr "Tila"
 
-#: src/info.cc:340 src/info.cc:563
+#: src/info.cc:341 src/info.cc:564
 #, c-format, boost-format
 msgid "out-of-date (version %s installed)"
 msgstr "vanhentunut (asennettu versio %s)"
 
-#: src/info.cc:342 src/info.cc:565
+#: src/info.cc:343 src/info.cc:566
 msgid "up-to-date"
 msgstr "ajan tasalla"
 
-#: src/info.cc:345 src/info.cc:568
+#: src/info.cc:346 src/info.cc:569
 msgid "not installed"
 msgstr "ei asennettu"
 
 #. translators: property name; short; used like "Name: value"
 #. translator: Table column header.
 #. Name
-#: src/info.cc:386 src/update.cc:282 src/utils/misc.cc:229
+#: src/info.cc:387 src/update.cc:282 src/utils/misc.cc:229
 #: src/utils/misc.cc:270
 msgid "Category"
 msgstr "Luokka"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:388 src/utils/misc.cc:230 src/utils/misc.cc:271
+#: src/info.cc:389 src/utils/misc.cc:230 src/utils/misc.cc:271
 msgid "Severity"
 msgstr "Vakavuus"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:390
+#: src/info.cc:391
 msgid "Created On"
 msgstr "Luotu"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:392 src/utils/misc.cc:231 src/utils/misc.cc:272
+#: src/info.cc:393 src/utils/misc.cc:231 src/utils/misc.cc:272
 #, fuzzy
 msgid "Interactive"
 msgstr "Vuorovaikutteinen: "
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:427
+#: src/info.cc:428
 msgid "Visible to User"
 msgstr "Näkyy käyttäjälle"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:441 src/info.cc:477
+#: src/info.cc:442 src/info.cc:478
 msgid "Contents"
 msgstr "Sisältö"
 
-#: src/info.cc:441
+#: src/info.cc:442
 msgid "(empty)"
 msgstr "(tyhjä)"
 
@@ -5181,92 +5194,92 @@ msgstr "(tyhjä)"
 #. translators: S for 'installed Status'
 #. translators: S for installed Status
 #. TranslatorExplanation S stands for Status
-#: src/info.cc:447 src/info.cc:691 src/locales.cc:122 src/search.cc:46
+#: src/info.cc:448 src/info.cc:692 src/locales.cc:122 src/search.cc:46
 #: src/search.cc:195 src/search.cc:342 src/search.cc:485 src/search.cc:546
 #: src/update.cc:722
 msgid "S"
 msgstr "S"
 
 #. translators: Table column header
-#: src/info.cc:450 src/search.cc:346
+#: src/info.cc:451 src/search.cc:346
 msgid "Dependency"
 msgstr "Riippuvuudet"
 
-#: src/info.cc:455 src/info.cc:469
+#: src/info.cc:456 src/info.cc:470
 #, fuzzy
 msgid "Required"
 msgstr "Vaatii"
 
-#: src/info.cc:460 src/info.cc:469 src/search.cc:282
+#: src/info.cc:461 src/info.cc:470 src/search.cc:282
 msgid "Recommended"
 msgstr "Ehdottaa"
 
-#: src/info.cc:466 src/info.cc:469 src/search.cc:284
+#: src/info.cc:467 src/info.cc:470 src/search.cc:284
 msgid "Suggested"
 msgstr "Suosittelee"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:536
+#: src/info.cc:537
 msgid "End of Support"
 msgstr "Tuen loppu"
 
-#: src/info.cc:541
+#: src/info.cc:542
 msgid "unknown"
 msgstr "tuntematon"
 
 #. translators: %1% is an URL or Path pointing to some document
-#: src/info.cc:546
+#: src/info.cc:547
 #, boost-format
 msgid "See %1%"
 msgstr ""
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:552
+#: src/info.cc:553
 msgid "Flavor"
 msgstr "Tyyppi"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:554 src/search.cc:554
+#: src/info.cc:555 src/search.cc:554
 msgid "Is Base"
 msgstr "Kantapaketti"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:575 src/info.cc:602
+#: src/info.cc:576 src/info.cc:603
 msgid "Update Repositories"
 msgstr "Päivityslähteet"
 
-#: src/info.cc:580
+#: src/info.cc:581
 msgid "Content Id"
 msgstr "Sisältö ID"
 
-#: src/info.cc:592
+#: src/info.cc:593
 msgid "Provided by enabled repository"
 msgstr "Käytössä oleva asennuslähde tarjoaa"
 
-#: src/info.cc:597
+#: src/info.cc:598
 msgid "Not provided by any enabled repository"
 msgstr "Mikään käytössä oleva asennuslähde ei tarjoa"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:607
+#: src/info.cc:608
 msgid "CPE Name"
 msgstr "CPE nimi"
 
-#: src/info.cc:612
+#: src/info.cc:613
 msgid "undefined"
 msgstr "Määrittelemätön"
 
-#: src/info.cc:614
+#: src/info.cc:615
 msgid "invalid CPE Name"
 msgstr "Virheellinen CPE nimi"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:617
+#: src/info.cc:618
 msgid "Short Name"
 msgstr "Lyhyt nimi"
 
 #. translators: property name; short; used like "Name: value"; is followed by a list of binary packages built from this source package
-#: src/info.cc:701
+#: src/info.cc:702
 msgid "Builds binary package"
 msgstr ""
 
@@ -5471,11 +5484,11 @@ msgstr "käynnistetään"
 msgid "not found"
 msgstr "Ei löytynyt"
 
-#: src/output/OutNormal.cc:416
+#: src/output/OutNormal.cc:417
 msgid "No help available for this prompt."
 msgstr "Tälle toiminnolle ei ole ohjetta."
 
-#: src/output/OutNormal.cc:427
+#: src/output/OutNormal.cc:434
 msgid "no help available for this option"
 msgstr "Tälle valinnalle ei ole ohjetta"
 
@@ -5530,57 +5543,57 @@ msgstr[1] "Asennuslähde"
 
 #. check whether libzypp indicates a refresh is needed, and if so,
 #. print a message
-#: src/repos.cc:221
+#: src/repos.cc:226
 #, c-format, boost-format
 msgid "Checking whether to refresh metadata for %s"
 msgstr "Tarkistetaan tarvitseeko %s metatietoja päivittää"
 
-#: src/repos.cc:247
+#: src/repos.cc:255
 #, c-format, boost-format
 msgid "Repository '%s' is up to date."
 msgstr "Asennuslähde \"%s\" on ajan tasalla."
 
-#: src/repos.cc:253
+#: src/repos.cc:261
 #, c-format, boost-format
 msgid "The up-to-date check of '%s' has been delayed."
 msgstr "Kohteen \"%s\" päivityksen tarkistusta on viivästetty."
 
-#: src/repos.cc:275
+#: src/repos.cc:283
 msgid "Forcing raw metadata refresh"
 msgstr "Pakotetaan raakametatietojen päivitys"
 
-#: src/repos.cc:281
+#: src/repos.cc:289
 #, c-format, boost-format
 msgid "Retrieving repository '%s' metadata"
 msgstr "Ladataan asennuslähteen \"%s\" tietoja"
 
-#: src/repos.cc:305
+#: src/repos.cc:313
 #, c-format, boost-format
 msgid "Do you want to disable the repository %s permanently?"
 msgstr "Haluatko poistaa %s asennuslähteen pysyvästi?"
 
-#: src/repos.cc:321
+#: src/repos.cc:329
 #, c-format, boost-format
 msgid "Error while disabling repository '%s'."
 msgstr "Virhe poistettaessa asennuslähdettä '%s'."
 
-#: src/repos.cc:337
+#: src/repos.cc:345
 #, c-format, boost-format
 msgid "Problem retrieving files from '%s'."
 msgstr "Virhe ladattaessa tiedostoja kohteesta \"%s\"."
 
-#: src/repos.cc:338 src/repos.cc:1862 src/solve-commit.cc:787
+#: src/repos.cc:346 src/repos.cc:1872 src/solve-commit.cc:787
 #: src/solve-commit.cc:818 src/solve-commit.cc:842
 msgid "Please see the above error message for a hint."
 msgstr "Tarkista yllä oleva viesti vihjeiden varalta."
 
-#: src/repos.cc:350
+#: src/repos.cc:358
 #, c-format, boost-format
 msgid "No URIs defined for '%s'."
 msgstr "Asennuslähteelle \"%s\" ei ole määritetty URI-osoitteita."
 
 #. TranslatorExplanation the first %s is a .repo file path
-#: src/repos.cc:355
+#: src/repos.cc:363
 #, c-format, boost-format
 msgid ""
 "Please add one or more base URI (baseurl=URI) entries to %s for repository "
@@ -5589,16 +5602,16 @@ msgstr ""
 "Aseta vähintään yksi osoite (baseurl=URI) tiedostoon %s asennuslähteelle \"%s"
 "\"."
 
-#: src/repos.cc:369
+#: src/repos.cc:377
 msgid "No alias defined for this repository."
 msgstr "Tälle asennuslähteelle ei ole määritetty aliasta."
 
-#: src/repos.cc:381
+#: src/repos.cc:389
 #, c-format, boost-format
 msgid "Repository '%s' is invalid."
 msgstr "Asennuslähde \"%s\" on virheellinen."
 
-#: src/repos.cc:382
+#: src/repos.cc:390
 msgid ""
 "Please check if the URIs defined for this repository are pointing to a valid "
 "repository."
@@ -5606,22 +5619,22 @@ msgstr ""
 "Tarkista että asennuslähteen URI-osoitteet osoittavat kelvolliseen "
 "asennuslähteeseen."
 
-#: src/repos.cc:394
+#: src/repos.cc:402
 #, c-format, boost-format
 msgid "Error retrieving metadata for '%s':"
 msgstr "Virhe ladattaessa metatietoja asennuslähteestä \"%s\"."
 
-#: src/repos.cc:407
+#: src/repos.cc:415
 msgid "Forcing building of repository cache"
 msgstr "Pakotetaan asennuslähteen välimuistin rakentaminen"
 
-#: src/repos.cc:432
+#: src/repos.cc:440
 #, c-format, boost-format
 msgid "Error parsing metadata for '%s':"
 msgstr "Virhe jäsennettäessä asennuslähteen \"%s\" metatietoja:"
 
 #. TranslatorExplanation Don't translate the URL unless it is translated, too
-#: src/repos.cc:434
+#: src/repos.cc:442
 msgid ""
 "This may be caused by invalid metadata in the repository, or by a bug in the "
 "metadata parser. In the latter case, or if in doubt, please, file a bug "
@@ -5632,49 +5645,49 @@ msgstr ""
 "jäsentäjän ohjelmointivirheestä. Jos epäilet jälkimmäistä, tee virheraportti "
 "näiden ohjeiden mukaisesti: http://en.opensuse.org/Zypper/Troubleshooting"
 
-#: src/repos.cc:443
+#: src/repos.cc:451
 #, c-format, boost-format
 msgid "Repository metadata for '%s' not found in local cache."
 msgstr ""
 "Asennuslähteen \"%s\" metatietoja ei löytynyt paikallisesta välimuistista."
 
-#: src/repos.cc:451
+#: src/repos.cc:459
 msgid "Error building the cache:"
 msgstr "Virhe rakennettaessa välimuistia:"
 
-#: src/repos.cc:670
+#: src/repos.cc:678
 #, c-format, boost-format
 msgid "Repository '%s' not found by its alias, number, or URI."
 msgstr ""
 "Asennuslähdettä \"%s\" ei löydetty aliaksen, järjestysnumeron tai URI-"
 "osoitteen perusteella."
 
-#: src/repos.cc:672
+#: src/repos.cc:680
 #, c-format, boost-format
 msgid "Use '%s' to get the list of defined repositories."
 msgstr "Kirjoita \"%s\" saadaksesi lista määritetyistä asennuslähteistä."
 
-#: src/repos.cc:692
+#: src/repos.cc:700
 #, c-format, boost-format
 msgid "Ignoring disabled repository '%s'"
 msgstr "Ohitetaan käytöstä poistettu asennuslähde \"%s\""
 
-#: src/repos.cc:780
+#: src/repos.cc:788
 #, fuzzy, c-format, boost-format
 msgid "Global option '%s' can be used to temporarily enable repositories."
 msgstr "Lisää tai ota käyttöön asennuslähteitä komennoin \"%s\" tai \"%s\"."
 
-#: src/repos.cc:796 src/repos.cc:802
+#: src/repos.cc:804 src/repos.cc:810
 #, c-format, boost-format
 msgid "Ignoring repository '%s' because of '%s' option."
 msgstr "Asennuslähde \"%s\" jätettiin huomioimatta parametrin \"%s\" vuoksi."
 
-#: src/repos.cc:823 src/repos.cc:923
+#: src/repos.cc:831 src/repos.cc:931
 #, c-format, boost-format
 msgid "Temporarily enabling repository '%s'."
 msgstr "Otetaan väiliaikaisesti käyttöön asennuslähde '%s'."
 
-#: src/repos.cc:873
+#: src/repos.cc:881
 #, c-format, boost-format
 msgid ""
 "Repository '%s' is out-of-date. You can run 'zypper refresh' as root to "
@@ -5683,7 +5696,7 @@ msgstr ""
 "Asennuslähde \"%s\" ei ole ajan tasalla. Päivitä se suorittamalla \"zypper "
 "refresh\" -komento pääkäyttäjänä."
 
-#: src/repos.cc:905
+#: src/repos.cc:913
 #, c-format, boost-format
 msgid ""
 "The metadata cache needs to be built for the '%s' repository. You can run "
@@ -5692,86 +5705,86 @@ msgstr ""
 "Asennuslähteen \"%s\" välimuistitietokanta täytyy rakentaa uudelleen. Tämä "
 "onnistuu ajamalla \"zypper refresh\" -komento pääkäyttäjänä."
 
-#: src/repos.cc:909
+#: src/repos.cc:917
 #, c-format, boost-format
 msgid "Disabling repository '%s'."
 msgstr "Poistetaan asennuslähde \"%s\" käytöstä."
 
-#: src/repos.cc:930
+#: src/repos.cc:938
 #, c-format, boost-format
 msgid "Repository '%s' stays disabled."
 msgstr "Asennuslähde '%s' pysyy poissa käytöstä."
 
-#: src/repos.cc:986
+#: src/repos.cc:994
 msgid "Initializing Target"
 msgstr "Valmistellaan kohdetta"
 
-#: src/repos.cc:994
+#: src/repos.cc:1002
 msgid "Target initialization failed:"
 msgstr "Kohteen valmistelu epäonnistui:"
 
-#: src/repos.cc:1074
+#: src/repos.cc:1084
 #, c-format, boost-format
 msgid "Cleaning metadata cache for '%s'."
 msgstr "Puhdistetaan asennuslähteen \"%s\" välimuistia."
 
-#: src/repos.cc:1082
+#: src/repos.cc:1092
 #, c-format, boost-format
 msgid "Cleaning raw metadata cache for '%s'."
 msgstr "Puhdistetaan asennuslähteen \"%s\" raakametatietojen välimuistia."
 
-#: src/repos.cc:1088
+#: src/repos.cc:1098
 #, c-format, boost-format
 msgid "Keeping raw metadata cache for %s '%s'."
 msgstr "Säilytetään raakametatietojen välimuisti %s \"%s\"."
 
 #. translators: meaning the cached rpm files
-#: src/repos.cc:1095
+#: src/repos.cc:1105
 #, c-format, boost-format
 msgid "Cleaning packages for '%s'."
 msgstr "Puhdistettiin paketit \"%s\"."
 
-#: src/repos.cc:1103
+#: src/repos.cc:1113
 #, c-format, boost-format
 msgid "Cannot clean repository '%s' because of an error."
 msgstr "Asennuslähdettä \"%s\" ei voitu puhdistaa virheen vuoksi."
 
-#: src/repos.cc:1114
+#: src/repos.cc:1124
 msgid "Cleaning installed packages cache."
 msgstr "Puhdistetaan asennettujen pakettien välimuistia."
 
-#: src/repos.cc:1123
+#: src/repos.cc:1133
 msgid "Cannot clean installed packages cache because of an error."
 msgstr "Asennettujen pakettien välimuistia ei voi puhdistaa virheiden vuoksi."
 
-#: src/repos.cc:1141
+#: src/repos.cc:1151
 msgid "Could not clean the repositories because of errors."
 msgstr "Asennuslähteitä ei voitu puhdistaa virheiden vuoksi."
 
-#: src/repos.cc:1147
+#: src/repos.cc:1157
 msgid "Some of the repositories have not been cleaned up because of an error."
 msgstr "Joitakin asennuslähteitä ei ole päivitetty virheiden vuoksi."
 
-#: src/repos.cc:1152
+#: src/repos.cc:1162
 msgid "Specified repositories have been cleaned up."
 msgstr "Määritetyt asennuslähteet puhdistettiin."
 
-#: src/repos.cc:1154
+#: src/repos.cc:1164
 msgid "All repositories have been cleaned up."
 msgstr "Kaikki asennuslähteet puhdistettiin."
 
-#: src/repos.cc:1176
+#: src/repos.cc:1186
 msgid "This is a changeable read-only media (CD/DVD), disabling autorefresh."
 msgstr ""
 "Tämä on vaihdettava vain luettavissa oleva asennusväline (CD/DVD). "
 "Automaattipäivitys poistetaan käytöstä."
 
-#: src/repos.cc:1197
+#: src/repos.cc:1207
 #, c-format, boost-format
 msgid "Invalid repository alias: '%s'"
 msgstr "Virheellinen asennuslähteen alias: \"%s\""
 
-#: src/repos.cc:1214
+#: src/repos.cc:1224
 msgid ""
 "Could not determine the type of the repository. Please check if the defined "
 "URIs (see below) point to a valid repository:"
@@ -5779,163 +5792,163 @@ msgstr ""
 "Asennuslähteen tyyppiä ei voitu tunnistaa automaattisesti. Tarkista, "
 "osoittavatko alla olevat URI-osoitteet kelvollisiin asennuslähteisiin:"
 
-#: src/repos.cc:1220
+#: src/repos.cc:1230
 msgid "Can't find a valid repository at given location:"
 msgstr "Annetusta sijainnista ei löydy asennuslähteitä:"
 
-#: src/repos.cc:1228
+#: src/repos.cc:1238
 msgid "Problem transferring repository data from specified URI:"
 msgstr ""
 "Ongelma siirrettäessä asennuslähteen tietoja määritellystä URI-osoitteesta:"
 
-#: src/repos.cc:1229
+#: src/repos.cc:1239
 msgid "Please check whether the specified URI is accessible."
 msgstr "Tarkista, että URI-osoite on saatavissa."
 
-#: src/repos.cc:1236
+#: src/repos.cc:1246
 msgid "Unknown problem when adding repository:"
 msgstr "Tunnistamaton ongelma lisättäessä asennuslähdettä:"
 
 #. translators: BOOST STYLE POSITIONAL DIRECTIVES ( %N% )
 #. translators: %1% - a repository name
-#: src/repos.cc:1246
+#: src/repos.cc:1256
 #, boost-format
 msgid ""
 "GPG checking is disabled in configuration of repository '%1%'. Integrity and "
 "origin of packages cannot be verified."
 msgstr ""
 
-#: src/repos.cc:1251
+#: src/repos.cc:1261
 #, c-format, boost-format
 msgid "Repository '%s' successfully added"
 msgstr "Asennuslähde \"%s\" lisättiin onnistuneesti"
 
-#: src/repos.cc:1277
+#: src/repos.cc:1287
 #, c-format, boost-format
 msgid "Reading data from '%s' media"
 msgstr "Luetaan tietoja tietovälineeltä \"%s\""
 
-#: src/repos.cc:1283
+#: src/repos.cc:1293
 #, c-format, boost-format
 msgid "Problem reading data from '%s' media"
 msgstr "Ongelma luettaessa tietovälinettä \"%s\""
 
-#: src/repos.cc:1284
+#: src/repos.cc:1294
 msgid "Please check if your installation media is valid and readable."
 msgstr "Tarkista, että asennusmedia on oikeellinen ja luettavissa."
 
-#: src/repos.cc:1291
+#: src/repos.cc:1301
 #, c-format, boost-format
 msgid "Reading data from '%s' media is delayed until next refresh."
 msgstr ""
 "Tietojen lukemista '%s' medialta on viivytetty seuraavaa virkistykseen asti."
 
-#: src/repos.cc:1360
+#: src/repos.cc:1370
 msgid "Problem accessing the file at the specified URI"
 msgstr "Ongelma luettaessa tiedostoa määritellystä URI-osoitteesta."
 
-#: src/repos.cc:1361
+#: src/repos.cc:1371
 msgid "Please check if the URI is valid and accessible."
 msgstr "Tarkista, että määritetty URI-osoite on oikein ja saatavilla."
 
-#: src/repos.cc:1368
+#: src/repos.cc:1378
 msgid "Problem parsing the file at the specified URI"
 msgstr "Ongelma jäsennettäessä tiedostoa määritellystä URI-osoitteesta."
 
 #. TranslatorExplanation Don't translate the '.repo' string.
-#: src/repos.cc:1370
+#: src/repos.cc:1380
 msgid "Is it a .repo file?"
 msgstr "Onko se .repo-tiedosto?"
 
-#: src/repos.cc:1377
+#: src/repos.cc:1387
 msgid "Problem encountered while trying to read the file at the specified URI"
 msgstr ""
 "Tapahtui virhe yritettäessä lukea tiedostoa määritetystä URI-osoitteesta"
 
-#: src/repos.cc:1390
+#: src/repos.cc:1400
 msgid "Repository with no alias defined found in the file, skipping."
 msgstr "Löydettiin asennuslähde ilman aliasta. Ohitetaan."
 
-#: src/repos.cc:1396
+#: src/repos.cc:1406
 #, c-format, boost-format
 msgid "Repository '%s' has no URI defined, skipping."
 msgstr "Asennuslähteellä \"%s\" ei ole URI-osoitetta. Ohitetaan."
 
-#: src/repos.cc:1444
+#: src/repos.cc:1454
 #, c-format, boost-format
 msgid "Repository '%s' has been removed."
 msgstr "Asennuslähde \"%s\" poistettiin."
 
-#: src/repos.cc:1592
+#: src/repos.cc:1602
 #, c-format, boost-format
 msgid "Repository '%s' priority has been left unchanged (%d)"
 msgstr "Asennuslähteen \"%s\" tärkeysjärjestystä ei muutettu (%d)"
 
-#: src/repos.cc:1625
+#: src/repos.cc:1635
 #, c-format, boost-format
 msgid "Repository '%s' has been successfully enabled."
 msgstr "Asennuslähde \"%s\" otettiin käyttöön."
 
-#: src/repos.cc:1627
+#: src/repos.cc:1637
 #, c-format, boost-format
 msgid "Repository '%s' has been successfully disabled."
 msgstr "Asennuslähde \"%s\" poistettiin käytöstä."
 
-#: src/repos.cc:1634
+#: src/repos.cc:1644
 #, c-format, boost-format
 msgid "Autorefresh has been enabled for repository '%s'."
 msgstr "Asennuslähteen \"%s\" automaattipäivitys otettiin käyttöön."
 
-#: src/repos.cc:1636
+#: src/repos.cc:1646
 #, c-format, boost-format
 msgid "Autorefresh has been disabled for repository '%s'."
 msgstr "Asennuslähteen \"%s\" automaattipäivitys poistettiin käytöstä."
 
-#: src/repos.cc:1643
+#: src/repos.cc:1653
 #, c-format, boost-format
 msgid "RPM files caching has been enabled for repository '%s'."
 msgstr "Asennuslähteen \"%s\" RPM-välimuisti otettiin käyttöön."
 
-#: src/repos.cc:1645
+#: src/repos.cc:1655
 #, c-format, boost-format
 msgid "RPM files caching has been disabled for repository '%s'."
 msgstr "Asennuslähteen \"%s\" RPM-välimuisti poistettiin käytöstä."
 
-#: src/repos.cc:1652
+#: src/repos.cc:1662
 #, c-format, boost-format
 msgid "GPG check has been enabled for repository '%s'."
 msgstr "Asennuslähteen \"%s\" GPG-tarkistus otettiin käyttöön."
 
-#: src/repos.cc:1654
+#: src/repos.cc:1664
 #, c-format, boost-format
 msgid "GPG check has been disabled for repository '%s'."
 msgstr "Asennuslähteen \"%s\" GPG-tarkistus poistettiin käytöstä."
 
-#: src/repos.cc:1660
+#: src/repos.cc:1670
 #, c-format, boost-format
 msgid "Repository '%s' priority has been set to %d."
 msgstr "Asennuslähteen \"%s\" tärkeysjärjestykseksi asetettiin %d."
 
-#: src/repos.cc:1666
+#: src/repos.cc:1676
 #, c-format, boost-format
 msgid "Name of repository '%s' has been set to '%s'."
 msgstr "Asennuslähteen \"%s\" nimeksi asetettiin \"%s\"."
 
-#: src/repos.cc:1677
+#: src/repos.cc:1687
 #, c-format, boost-format
 msgid "Nothing to change for repository '%s'."
 msgstr "Ei muutoksia asennuslähteeseen \"%s\"."
 
-#: src/repos.cc:1684
+#: src/repos.cc:1694
 #, c-format, boost-format
 msgid "Leaving repository %s unchanged."
 msgstr "Asennuslähteeseen %s ei tehty muutoksia."
 
-#: src/repos.cc:1771
+#: src/repos.cc:1781
 msgid "Loading repository data..."
 msgstr "Luetaan asennuslähteiden tietoja..."
 
-#: src/repos.cc:1773
+#: src/repos.cc:1783
 msgid ""
 "No repositories defined. Operating only with the installed resolvables. "
 "Nothing can be installed."
@@ -5943,33 +5956,33 @@ msgstr ""
 "Ei asennuslähdettä määritettynä. Käytetään ainoastaan asennettuja "
 "ratkaisimia. Mitään ei voida asentaa."
 
-#: src/repos.cc:1793
+#: src/repos.cc:1803
 #, c-format, boost-format
 msgid "Retrieving repository '%s' data..."
 msgstr "Luetaan asennuslähteen \"%s\" tietoja..."
 
-#: src/repos.cc:1799
+#: src/repos.cc:1809
 #, c-format, boost-format
 msgid "Repository '%s' not cached. Caching..."
 msgstr "Asennuslähdettä \"%s\" ei löydy välimuistista. Ladataan..."
 
-#: src/repos.cc:1805 src/repos.cc:1839
+#: src/repos.cc:1815 src/repos.cc:1849
 #, c-format, boost-format
 msgid "Problem loading data from '%s'"
 msgstr "Ongelma ladattaessa tietoja \"%s\""
 
-#: src/repos.cc:1809
+#: src/repos.cc:1819
 #, c-format, boost-format
 msgid "Repository '%s' could not be refreshed. Using old cache."
 msgstr ""
 "Asennuslähteen \"%s\" päivitys ei onnistunut. Käytetään vanhaa välimuistia."
 
-#: src/repos.cc:1813 src/repos.cc:1842
+#: src/repos.cc:1823 src/repos.cc:1852
 #, c-format, boost-format
 msgid "Resolvables from '%s' not loaded because of error."
 msgstr "\"%s\" ei voida käyttää virheiden vuoksi."
 
-#: src/repos.cc:1830
+#: src/repos.cc:1840
 #, c-format, boost-format
 msgid ""
 "Repository '%s' appears to be outdated. Consider using a different mirror or "
@@ -5979,38 +5992,38 @@ msgstr ""
 "palvelimen käyttöä."
 
 #. translators: the first %s is 'zypper refresh' and the second 'zypper clean -m'
-#: src/repos.cc:1841
+#: src/repos.cc:1851
 #, c-format, boost-format
 msgid "Try '%s', or even '%s' before doing so."
 msgstr "Kokeile \"%s\" tai jopa \"%s\"."
 
-#: src/repos.cc:1852
+#: src/repos.cc:1862
 msgid "Reading installed packages..."
 msgstr "Luetaan asennettuja paketteja..."
 
-#: src/repos.cc:1861
+#: src/repos.cc:1871
 #, fuzzy
 msgid "Problem occurred while reading the installed packages:"
 msgstr "Tapahtui virhe luettaessa asennettuja paketteja:"
 
-#: src/repos.cc:1878
+#: src/repos.cc:1888
 #, c-format, boost-format
 msgid "'%s' looks like an RPM file. Will try to download it."
 msgstr "\"%s\" vaikuttaa RPM-tiedostolta: yritetään ladata se."
 
-#: src/repos.cc:1887
+#: src/repos.cc:1897
 #, c-format, boost-format
 msgid "Problem with the RPM file specified as '%s', skipping."
 msgstr "Virhe RPM-tiedostossa %s. Ohitetaan."
 
-#: src/repos.cc:1909
+#: src/repos.cc:1919
 #, c-format, boost-format
 msgid "Problem reading the RPM header of %s. Is it an RPM file?"
 msgstr ""
 "Virhe luettaessa RPM-paketin tunnistetietoa %s. Onko tämä varmasti RPM-"
 "tiedosto?"
 
-#: src/repos.cc:1929
+#: src/repos.cc:1939
 msgid "Plain RPM files cache"
 msgstr "RPM-tiedostojen välimuisti"
 
@@ -6479,21 +6492,42 @@ msgstr "CVE-merkintää %s ei löydy tai se ei ole tarpeellinen."
 msgid "Fix for %s issue number %s was not found or is not needed."
 msgstr "CVE-merkintää %s ei löydy tai se ei ole tarpeellinen."
 
-#: src/utils/Augeas.cc:26
+#: src/utils/Augeas.cc:104
 msgid "Cannot initialize configuration file parser."
 msgstr "Asetusten jäsentimen alustaminen ei onnistu."
 
-#: src/utils/Augeas.cc:44 src/utils/Augeas.cc:58
-msgid "Augeas error: setting config file to load failed."
-msgstr "Augeas-virhe: Asetustiedoston luku epäonnistui."
+#: src/utils/Augeas.cc:510
+#, boost-format
+msgid "Malformed option name '%1%'."
+msgstr ""
 
-#: src/utils/Augeas.cc:64
-msgid "Could not parse the config files."
-msgstr "Asetustiedoston jäsentäminen ei onnistu."
+#: src/utils/Augeas.cc:522
+msgid "Could not save the config file."
+msgstr ""
 
-#: src/utils/Augeas.cc:99
-msgid "Error parsing zypper.conf:"
-msgstr "Virhe jäsennettäessä zypper.conf -tiedostoa:"
+#: src/utils/Augeas.cc:564
+#, boost-format
+msgid "Config file '%1%' exists but is not a file."
+msgstr ""
+
+#: src/utils/Augeas.cc:580
+msgid "Could not load the config files."
+msgstr ""
+
+#: src/utils/Augeas.cc:606
+#, boost-format
+msgid "Config file '%1%' does not exist."
+msgstr ""
+
+#. translator: %1% is the path to a config file, %2% is the name of an options inside the file
+#: src/utils/Augeas.cc:637
+#, boost-format
+msgid "%1%: Option '%2%' is defined multiple times. Using the last one."
+msgstr ""
+
+#: src/utils/Augeas.cc:658
+msgid "No config file is in use."
+msgstr ""
 
 #: src/utils/flags/exceptions.cc:22
 #, boost-format
@@ -6795,19 +6829,21 @@ msgstr ""
 "sivuittain."
 
 #. translators: Press '?' to see all options embedded in this prompt: "Continue? [y/n/? shows all options] (y):"
-#: src/utils/prompt.cc:72
+#: src/utils/prompt.cc:91
 msgid "shows all options"
 msgstr "näyttää kaikki valinnat"
 
-#: src/utils/prompt.cc:125 src/utils/prompt.cc:245 src/utils/prompt.cc:328
+#: src/utils/prompt.cc:194 src/utils/prompt.cc:314 src/utils/prompt.cc:325
+#: src/utils/prompt.cc:424
 msgid "yes"
 msgstr "kyllä"
 
-#: src/utils/prompt.cc:125 src/utils/prompt.cc:245 src/utils/prompt.cc:328
+#: src/utils/prompt.cc:194 src/utils/prompt.cc:314 src/utils/prompt.cc:325
+#: src/utils/prompt.cc:424
 msgid "no"
 msgstr "ei"
 
-#: src/utils/prompt.cc:143 src/utils/prompt.cc:188
+#: src/utils/prompt.cc:212 src/utils/prompt.cc:257
 #, c-format, boost-format
 msgid "Retrying in %u seconds..."
 msgstr "Yritetään %u sekunnin kuluttua..."
@@ -6818,26 +6854,34 @@ msgstr "Yritetään %u sekunnin kuluttua..."
 #. the answers must be separated by slash characters '/' and must
 #. correspond to abort/retry/ignore in that order.
 #. The answers should be lower case letters.
-#: src/utils/prompt.cc:149 src/utils/prompt.cc:233
+#: src/utils/prompt.cc:218 src/utils/prompt.cc:302
 msgid "a/r/i"
 msgstr "k/y/o"
 
-#: src/utils/prompt.cc:198
+#: src/utils/prompt.cc:267
 #, c-format, boost-format
 msgid "Autoselecting '%s' after %u second."
 msgid_plural "Autoselecting '%s' after %u seconds."
 msgstr[0] "Valitaan \"%s\" automaattisesti %u sekunnin kuluttua."
 msgstr[1] "Valitaan '%s' automaattisesti %u sekunnin kuluttua."
 
-#: src/utils/prompt.cc:215
+#: src/utils/prompt.cc:284
 msgid "Trying again..."
 msgstr "Yritetään uudelleen..."
 
-#: src/utils/prompt.cc:289
+#: src/utils/prompt.cc:325
+msgid "always"
+msgstr ""
+
+#: src/utils/prompt.cc:325
+msgid "never"
+msgstr ""
+
+#: src/utils/prompt.cc:372
 msgid "Cannot read input: bad stream or EOF."
 msgstr ""
 
-#: src/utils/prompt.cc:290
+#: src/utils/prompt.cc:373
 #, c-format, boost-format
 msgid ""
 "If you run zypper without a terminal, use '%s' global\n"
@@ -6846,16 +6890,36 @@ msgstr ""
 "Jos ajat zypper-komennon ilman päätettä, ohjeistat yleisvalitsimella \"%s\"\n"
 "zypperiä antamaan oletusvastauksen kehotteisiin."
 
-#: src/utils/prompt.cc:322
+#: src/utils/prompt.cc:412
 #, c-format, boost-format
 msgid "Invalid answer '%s'."
 msgstr "Virheellinen vastaus \"%s\"."
 
+#: src/utils/prompt.cc:415
+#, c-format, boost-format
+msgid "Ambiguous answer '%s'."
+msgstr ""
+
 #. translators: the %s are: 'y', 'yes' (translated), 'n', and 'no' (translated).
-#: src/utils/prompt.cc:327
+#: src/utils/prompt.cc:423
 #, c-format, boost-format
 msgid "Enter '%s' for '%s' or '%s' for '%s' if nothing else works for you."
 msgstr "Vastaa \"%s\" -> \"%s\" tai \"%s\" -> \"%s\" sijasta, ellei muu toimi."
+
+#: src/utils/prompt.cc:428
+msgid ""
+"If nothing else works enter '#1' to select the 1st option, '#2' for the 2nd "
+"one, ..."
+msgstr ""
+
+#~ msgid "Augeas error: setting config file to load failed."
+#~ msgstr "Augeas-virhe: Asetustiedoston luku epäonnistui."
+
+#~ msgid "Could not parse the config files."
+#~ msgstr "Asetustiedoston jäsentäminen ei onnistu."
+
+#~ msgid "Error parsing zypper.conf:"
+#~ msgstr "Virhe jäsennettäessä zypper.conf -tiedostoa:"
 
 #~ msgid "Unexpected program flow."
 #~ msgstr "Odottamaton ohjelman kulku."
