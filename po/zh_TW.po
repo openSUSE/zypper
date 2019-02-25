@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-25 12:04+0100\n"
+"POT-Creation-Date: 2019-02-25 14:33+0100\n"
 "PO-Revision-Date: 2018-11-30 16:01+0000\n"
 "Last-Translator: Yi-Jyun Pan <pan93412@gmail.com>\n"
 "Language-Team: Chinese (Taiwan) <https://l10n.opensuse.org/projects/zypper/"
@@ -4568,7 +4568,7 @@ msgstr "下載所有符合指令行參數的版本。 否則只有相符軟體�
 msgid "Argument resolves to no package"
 msgstr "該參數解析不到軟體包"
 
-#: src/commands/utils/download.cc:246 src/solve-commit.cc:893
+#: src/commands/utils/download.cc:246 src/solve-commit.cc:898
 msgid "Nothing to do."
 msgstr "無執行動作。"
 
@@ -5306,8 +5306,8 @@ msgstr "停用軟體庫 '%s' 發生錯誤。"
 msgid "Problem retrieving files from '%s'."
 msgstr "從 '%s' 取出檔案出現問題。"
 
-#: src/repos.cc:346 src/repos.cc:1872 src/solve-commit.cc:787
-#: src/solve-commit.cc:818 src/solve-commit.cc:842
+#: src/repos.cc:346 src/repos.cc:1872 src/solve-commit.cc:792
+#: src/solve-commit.cc:823 src/solve-commit.cc:847
 msgid "Please see the above error message for a hint."
 msgstr "請檢視上面的錯誤訊息以獲得提示。"
 
@@ -5877,38 +5877,47 @@ msgstr ""
 "有些正在執行的程式使用了已被最近更新刪除的檔案。 您可能會想要檢查並重新啟動這"
 "些程式。請執行 '%s' 來列出這些程式。"
 
-#: src/solve-commit.cc:476
+#. bsc#859480: Rephrased and added for translation switch if core translations are available.
+#: src/solve-commit.cc:466
+#, boost-format
+msgid ""
+"There are running programs which still use files and libraries deleted or "
+"updated by recent upgrades. They should be restarted to benefit from the "
+"latest updates. Run '%1%' to list these programs."
+msgstr ""
+
+#: src/solve-commit.cc:481
 msgid "Update notifications were received from the following packages:"
 msgstr "從下列軟體包收到了更新提醒："
 
-#: src/solve-commit.cc:485
+#: src/solve-commit.cc:490
 #, c-format, boost-format
 msgid "Message from package %s:"
 msgstr "從軟體包 %s 收到的訊息："
 
-#: src/solve-commit.cc:493
+#: src/solve-commit.cc:498
 msgid "y/n"
 msgstr "y/n"
 
-#: src/solve-commit.cc:494
+#: src/solve-commit.cc:499
 msgid "View the notifications now?"
 msgstr "現在檢視提醒嗎？"
 
-#: src/solve-commit.cc:540
+#: src/solve-commit.cc:545
 msgid "Computing distribution upgrade..."
 msgstr "正在計算版本升級..."
 
-#: src/solve-commit.cc:545
+#: src/solve-commit.cc:550
 msgid "Resolving package dependencies..."
 msgstr "正在解決軟體包相依性..."
 
-#: src/solve-commit.cc:600
+#: src/solve-commit.cc:605
 msgid ""
 "Some of the dependencies of installed packages are broken. In order to fix "
 "these dependencies, the following actions need to be taken:"
 msgstr "有些已安裝的軟體包相依性已被破壞。為了修正此相依性，將採取下列行動："
 
-#: src/solve-commit.cc:607
+#: src/solve-commit.cc:612
 msgid "Root privileges are required to fix broken package dependencies."
 msgstr "需要有 Root 權限才能修正軟體包的相依性。"
 
@@ -5922,78 +5931,78 @@ msgstr "需要有 Root 權限才能修正軟體包的相依性。"
 #. The answers should be lower case letters, but in general, any UTF-8
 #. string will do.
 #. ! \todo add c for changelog and x for explain (show the dep tree)
-#: src/solve-commit.cc:629
+#: src/solve-commit.cc:634
 msgid "y/n/p/v/a/r/m/d/g"
 msgstr "y/n/p/v/a/r/m/d/g"
 
 #. translators: help text for 'y' option in the 'Continue?' prompt
-#: src/solve-commit.cc:634
+#: src/solve-commit.cc:639
 msgid ""
 "Yes, accept the summary and proceed with installation/removal of packages."
 msgstr "是的，接受此摘要並進行軟體包的安裝/移除。"
 
 #. translators: help text for 'n' option in the 'Continue?' prompt
-#: src/solve-commit.cc:636
+#: src/solve-commit.cc:641
 msgid "No, cancel the operation."
 msgstr "不，請取消此操作。"
 
 #. translators: help text for 'p' option in the 'Continue?' prompt
-#: src/solve-commit.cc:638
+#: src/solve-commit.cc:643
 msgid ""
 "Restart solver in no-force-resolution mode in order to show dependency "
 "problems."
 msgstr "重新以不強迫解決模式啟動解析者，以顯示相依性問題。"
 
 #. translators: help text for 'v' option in the 'Continue?' prompt
-#: src/solve-commit.cc:640
+#: src/solve-commit.cc:645
 msgid "Toggle display of package versions."
 msgstr "切換顯示軟體包版本。"
 
 #. translators: help text for 'a' option in the 'Continue?' prompt
-#: src/solve-commit.cc:642
+#: src/solve-commit.cc:647
 msgid "Toggle display of package architectures."
 msgstr "切換顯示軟體包架構。"
 
 #. translators: help text for 'r' option in the 'Continue?' prompt
-#: src/solve-commit.cc:644
+#: src/solve-commit.cc:649
 msgid ""
 "Toggle display of repositories from which the packages will be installed."
 msgstr "切換顯示軟體包將從哪個軟體庫安裝。"
 
 #. translators: help text for 'm' option in the 'Continue?' prompt
-#: src/solve-commit.cc:646
+#: src/solve-commit.cc:651
 msgid "Toggle display of package vendor names."
 msgstr "切換顯示軟體包供應商名稱。"
 
 #. translators: help text for 'd' option in the 'Continue?' prompt
-#: src/solve-commit.cc:648
+#: src/solve-commit.cc:653
 msgid "Toggle between showing all details and as few details as possible."
 msgstr "在顯示所有細節和顯示最少細節間切換。"
 
 #. translators: help text for 'g' option in the 'Continue?' prompt
-#: src/solve-commit.cc:650
+#: src/solve-commit.cc:655
 msgid "View the summary in pager."
 msgstr "在呼叫器中檢視摘要。"
 
-#: src/solve-commit.cc:760
+#: src/solve-commit.cc:765
 msgid "committing"
 msgstr "提交"
 
-#: src/solve-commit.cc:762
+#: src/solve-commit.cc:767
 msgid "(dry run)"
 msgstr "(測試)"
 
-#: src/solve-commit.cc:786 src/solve-commit.cc:819
+#: src/solve-commit.cc:791 src/solve-commit.cc:824
 msgid "Problem retrieving the package file from the repository:"
 msgstr "從軟體庫取出軟體包檔案出現問題："
 
 #. translators: the first %s is 'zypper refresh' and the second is repo alias
-#: src/solve-commit.cc:816
+#: src/solve-commit.cc:821
 #, c-format, boost-format
 msgid "Repository '%s' is out of date. Running '%s' might help."
 msgstr "軟體庫 '%s' 已過期。執行 '%s' 可能會有幫助。"
 
-#: src/solve-commit.cc:827
+#: src/solve-commit.cc:832
 msgid ""
 "The package integrity check failed. This may be a problem with the "
 "repository or media. Try one of the following:\n"
@@ -6010,26 +6019,26 @@ msgstr ""
 " – 使用另一個安裝媒體 (例如媒體損壞時)\n"
 " – 使用另一個軟體庫"
 
-#: src/solve-commit.cc:841
+#: src/solve-commit.cc:846
 msgid "Problem occurred during or after installation or removal of packages:"
 msgstr "安裝或移除軟體包時 (或之後) 發生問題："
 
-#: src/solve-commit.cc:849
+#: src/solve-commit.cc:854
 msgid "Installation has completed with error."
 msgstr "安裝已完成，然而有錯誤發生。"
 
-#: src/solve-commit.cc:851
+#: src/solve-commit.cc:856
 #, boost-format
 msgid "You may run '%1%' to repair any dependency problems."
 msgstr "您可以執行 '%1%' 來修復任何相依性問題。"
 
-#: src/solve-commit.cc:865
+#: src/solve-commit.cc:870
 msgid ""
 "One of the installed patches requires a reboot of your machine. Reboot as "
 "soon as possible."
 msgstr "其中一個安裝的修補程式需要重新啟動您的機器。 請盡快重新啟動電腦。"
 
-#: src/solve-commit.cc:873
+#: src/solve-commit.cc:878
 msgid ""
 "One of the installed patches affects the package manager itself. Run this "
 "command once more to install any other needed patches."
@@ -6037,7 +6046,7 @@ msgstr ""
 "其中一個安裝的修補程式會影響軟體包管理員本身，請再次執行此命令以安裝其他所需"
 "的修補程式。"
 
-#: src/solve-commit.cc:891
+#: src/solve-commit.cc:896
 msgid "Dependencies of all installed packages are satisfied."
 msgstr "所有已安裝的軟體包均滿足相依性。"
 

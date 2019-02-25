@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper.nl\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-25 12:04+0100\n"
+"POT-Creation-Date: 2019-02-25 14:33+0100\n"
 "PO-Revision-Date: 2019-01-28 08:29+0000\n"
 "Last-Translator: Eva van Rein <vistatec@globaltextware.nl>\n"
 "Language-Team: Dutch <https://l10n.opensuse.org/projects/zypper/master/nl/>\n"
@@ -4968,7 +4968,7 @@ msgstr ""
 msgid "Argument resolves to no package"
 msgstr "Argument is geen oplossing voor een pakket"
 
-#: src/commands/utils/download.cc:246 src/solve-commit.cc:893
+#: src/commands/utils/download.cc:246 src/solve-commit.cc:898
 msgid "Nothing to do."
 msgstr "Geen activiteit."
 
@@ -5731,8 +5731,8 @@ msgstr "Fout bij het het uitschakelen van opslagruimte '%s'."
 msgid "Problem retrieving files from '%s'."
 msgstr "Probleem bij ophalen van bestanden van '%s'."
 
-#: src/repos.cc:346 src/repos.cc:1872 src/solve-commit.cc:787
-#: src/solve-commit.cc:818 src/solve-commit.cc:842
+#: src/repos.cc:346 src/repos.cc:1872 src/solve-commit.cc:792
+#: src/solve-commit.cc:823 src/solve-commit.cc:847
 msgid "Please see the above error message for a hint."
 msgstr "Zie bovenstaande foutmelding voor een hint."
 
@@ -6337,32 +6337,41 @@ msgstr ""
 "controleren en opnieuw starten. Voer %s uit om deze programma's weer te "
 "geven."
 
-#: src/solve-commit.cc:476
+#. bsc#859480: Rephrased and added for translation switch if core translations are available.
+#: src/solve-commit.cc:466
+#, boost-format
+msgid ""
+"There are running programs which still use files and libraries deleted or "
+"updated by recent upgrades. They should be restarted to benefit from the "
+"latest updates. Run '%1%' to list these programs."
+msgstr ""
+
+#: src/solve-commit.cc:481
 msgid "Update notifications were received from the following packages:"
 msgstr "Van de volgende pakketten zijn updatemeldingen ontvangen:"
 
-#: src/solve-commit.cc:485
+#: src/solve-commit.cc:490
 #, c-format, boost-format
 msgid "Message from package %s:"
 msgstr "Melding van pakket %s:"
 
-#: src/solve-commit.cc:493
+#: src/solve-commit.cc:498
 msgid "y/n"
 msgstr "j/n"
 
-#: src/solve-commit.cc:494
+#: src/solve-commit.cc:499
 msgid "View the notifications now?"
 msgstr "Meldingen nu weergeven?"
 
-#: src/solve-commit.cc:540
+#: src/solve-commit.cc:545
 msgid "Computing distribution upgrade..."
 msgstr "Distributie-upgrades berekenen..."
 
-#: src/solve-commit.cc:545
+#: src/solve-commit.cc:550
 msgid "Resolving package dependencies..."
 msgstr "Pakketafhankelijkheden oplossen..."
 
-#: src/solve-commit.cc:600
+#: src/solve-commit.cc:605
 msgid ""
 "Some of the dependencies of installed packages are broken. In order to fix "
 "these dependencies, the following actions need to be taken:"
@@ -6370,7 +6379,7 @@ msgstr ""
 "Sommige afhankelijkheden van geïnstalleerde pakketten kloppen niet. Om deze "
 "afhankelijkheden te verhelpen moeten de volgende acties uitgevoerd worden:"
 
-#: src/solve-commit.cc:607
+#: src/solve-commit.cc:612
 msgid "Root privileges are required to fix broken package dependencies."
 msgstr ""
 "Er zijn root-privileges vereist voor het repareren van niet kloppende "
@@ -6386,12 +6395,12 @@ msgstr ""
 #. The answers should be lower case letters, but in general, any UTF-8
 #. string will do.
 #. ! \todo add c for changelog and x for explain (show the dep tree)
-#: src/solve-commit.cc:629
+#: src/solve-commit.cc:634
 msgid "y/n/p/v/a/r/m/d/g"
 msgstr "j/n/p/v/a/i/l/d/g"
 
 #. translators: help text for 'y' option in the 'Continue?' prompt
-#: src/solve-commit.cc:634
+#: src/solve-commit.cc:639
 msgid ""
 "Yes, accept the summary and proceed with installation/removal of packages."
 msgstr ""
@@ -6399,12 +6408,12 @@ msgstr ""
 "verwijdering van pakketten."
 
 #. translators: help text for 'n' option in the 'Continue?' prompt
-#: src/solve-commit.cc:636
+#: src/solve-commit.cc:641
 msgid "No, cancel the operation."
 msgstr "Nee, annuleer de bewerking."
 
 #. translators: help text for 'p' option in the 'Continue?' prompt
-#: src/solve-commit.cc:638
+#: src/solve-commit.cc:643
 msgid ""
 "Restart solver in no-force-resolution mode in order to show dependency "
 "problems."
@@ -6413,17 +6422,17 @@ msgstr ""
 "afhankelijkheidsproblemen weer te geven."
 
 #. translators: help text for 'v' option in the 'Continue?' prompt
-#: src/solve-commit.cc:640
+#: src/solve-commit.cc:645
 msgid "Toggle display of package versions."
 msgstr "Schakel weergave van pakketversies in of uit."
 
 #. translators: help text for 'a' option in the 'Continue?' prompt
-#: src/solve-commit.cc:642
+#: src/solve-commit.cc:647
 msgid "Toggle display of package architectures."
 msgstr "Schakel weergave van pakketarchitecturen in of uit."
 
 #. translators: help text for 'r' option in the 'Continue?' prompt
-#: src/solve-commit.cc:644
+#: src/solve-commit.cc:649
 msgid ""
 "Toggle display of repositories from which the packages will be installed."
 msgstr ""
@@ -6431,39 +6440,39 @@ msgstr ""
 "in of uit."
 
 #. translators: help text for 'm' option in the 'Continue?' prompt
-#: src/solve-commit.cc:646
+#: src/solve-commit.cc:651
 msgid "Toggle display of package vendor names."
 msgstr "Schakel weergave van de leverancier van de pakketten in of uit."
 
 #. translators: help text for 'd' option in the 'Continue?' prompt
-#: src/solve-commit.cc:648
+#: src/solve-commit.cc:653
 msgid "Toggle between showing all details and as few details as possible."
 msgstr "Schakel tussen alle details en zo min mogelijk details weergeven."
 
 #. translators: help text for 'g' option in the 'Continue?' prompt
-#: src/solve-commit.cc:650
+#: src/solve-commit.cc:655
 msgid "View the summary in pager."
 msgstr "Geef samenvatting weer in de pager."
 
-#: src/solve-commit.cc:760
+#: src/solve-commit.cc:765
 msgid "committing"
 msgstr "goedkeuren"
 
-#: src/solve-commit.cc:762
+#: src/solve-commit.cc:767
 msgid "(dry run)"
 msgstr "(test)"
 
-#: src/solve-commit.cc:786 src/solve-commit.cc:819
+#: src/solve-commit.cc:791 src/solve-commit.cc:824
 msgid "Problem retrieving the package file from the repository:"
 msgstr "Probleem bij ophalen van pakketbestand van de opslagruimte:"
 
 #. translators: the first %s is 'zypper refresh' and the second is repo alias
-#: src/solve-commit.cc:816
+#: src/solve-commit.cc:821
 #, c-format, boost-format
 msgid "Repository '%s' is out of date. Running '%s' might help."
 msgstr "Opslagruimte '%s' is verouderd. Als u '%s' uitvoert, kan dit helpen."
 
-#: src/solve-commit.cc:827
+#: src/solve-commit.cc:832
 msgid ""
 "The package integrity check failed. This may be a problem with the "
 "repository or media. Try one of the following:\n"
@@ -6481,24 +6490,24 @@ msgstr ""
 " - gebruik een ander installatiemedium (bijvoorbeeld bij beschadiging)\n"
 " - gebruik een andere opslagruimte"
 
-#: src/solve-commit.cc:841
+#: src/solve-commit.cc:846
 msgid "Problem occurred during or after installation or removal of packages:"
 msgstr ""
 "Er is een fout opgetreden tijdens of na de installatie of verwijdering van "
 "pakketten:"
 
-#: src/solve-commit.cc:849
+#: src/solve-commit.cc:854
 msgid "Installation has completed with error."
 msgstr "Installatie is voltooid met een fout."
 
-#: src/solve-commit.cc:851
+#: src/solve-commit.cc:856
 #, boost-format
 msgid "You may run '%1%' to repair any dependency problems."
 msgstr ""
 "U zou '%1%' kunnen uitvoeren om elk probleem met afhankelijkheden te "
 "repareren."
 
-#: src/solve-commit.cc:865
+#: src/solve-commit.cc:870
 msgid ""
 "One of the installed patches requires a reboot of your machine. Reboot as "
 "soon as possible."
@@ -6506,7 +6515,7 @@ msgstr ""
 "Een van de geïnstalleerde patches vereist dat u de computer opnieuw opstart. "
 "Doe dit zo snel mogelijk."
 
-#: src/solve-commit.cc:873
+#: src/solve-commit.cc:878
 msgid ""
 "One of the installed patches affects the package manager itself. Run this "
 "command once more to install any other needed patches."
@@ -6515,7 +6524,7 @@ msgstr ""
 "Opnieuw starten hiervan is daarom vereist voor het installeren van de andere "
 "noodzakelijke patches."
 
-#: src/solve-commit.cc:891
+#: src/solve-commit.cc:896
 msgid "Dependencies of all installed packages are satisfied."
 msgstr "Aan afhankelijkheden van alle pakketten is voldaan."
 

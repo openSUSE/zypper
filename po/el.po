@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper.el\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-25 12:04+0100\n"
+"POT-Creation-Date: 2019-02-25 14:33+0100\n"
 "PO-Revision-Date: 2016-08-23 07:58+0000\n"
 "Last-Translator: Anastasios Mavrommatis <anastasios@mavrommatis.net>\n"
 "Language-Team: Greek <https://l10n.opensuse.org/projects/zypper/master/el/>\n"
@@ -4848,7 +4848,7 @@ msgstr ""
 msgid "Argument resolves to no package"
 msgstr "Το όρισμα δεν επιλύεται σε κάποιο πακέτο"
 
-#: src/commands/utils/download.cc:246 src/solve-commit.cc:893
+#: src/commands/utils/download.cc:246 src/solve-commit.cc:898
 msgid "Nothing to do."
 msgstr "Δεν υπάρχει τίποτα να γίνει."
 
@@ -5611,8 +5611,8 @@ msgstr "Σφάλμα απενεργοποίησης του αποθετηρίο�
 msgid "Problem retrieving files from '%s'."
 msgstr "Πρόβλημα κατά τη λήψη αρχείων από το %s."
 
-#: src/repos.cc:346 src/repos.cc:1872 src/solve-commit.cc:787
-#: src/solve-commit.cc:818 src/solve-commit.cc:842
+#: src/repos.cc:346 src/repos.cc:1872 src/solve-commit.cc:792
+#: src/solve-commit.cc:823 src/solve-commit.cc:847
 msgid "Please see the above error message for a hint."
 msgstr "Παρακαλώ δείτε το παραπάνω μήνυμα σφάλματος για κάποια υπόδειξη."
 
@@ -6225,32 +6225,41 @@ msgstr ""
 "θέλετε να επανεκκινήσετε κάποια από αυτά. Εκτελέστε '%s' για να "
 "δημιουργήσετε μια λίστα με αυτά τα προγράμματα."
 
-#: src/solve-commit.cc:476
+#. bsc#859480: Rephrased and added for translation switch if core translations are available.
+#: src/solve-commit.cc:466
+#, boost-format
+msgid ""
+"There are running programs which still use files and libraries deleted or "
+"updated by recent upgrades. They should be restarted to benefit from the "
+"latest updates. Run '%1%' to list these programs."
+msgstr ""
+
+#: src/solve-commit.cc:481
 msgid "Update notifications were received from the following packages:"
 msgstr "Οι ειδοποιήσεις ενημερώσεων ελήφθησαν από τα ακόλουθα πακέτα:"
 
-#: src/solve-commit.cc:485
+#: src/solve-commit.cc:490
 #, c-format, boost-format
 msgid "Message from package %s:"
 msgstr "Μήνυμα από το πακέτο %s:"
 
-#: src/solve-commit.cc:493
+#: src/solve-commit.cc:498
 msgid "y/n"
 msgstr "y/n"
 
-#: src/solve-commit.cc:494
+#: src/solve-commit.cc:499
 msgid "View the notifications now?"
 msgstr "Εμφάνιση ειδοποιήσεων τώρα;"
 
-#: src/solve-commit.cc:540
+#: src/solve-commit.cc:545
 msgid "Computing distribution upgrade..."
 msgstr "Υπολογισμός αναβάθμισης διανομής..."
 
-#: src/solve-commit.cc:545
+#: src/solve-commit.cc:550
 msgid "Resolving package dependencies..."
 msgstr "Επίλυση εξαρτήσεων πακέτων..."
 
-#: src/solve-commit.cc:600
+#: src/solve-commit.cc:605
 msgid ""
 "Some of the dependencies of installed packages are broken. In order to fix "
 "these dependencies, the following actions need to be taken:"
@@ -6259,7 +6268,7 @@ msgstr ""
 "Για να διορθωθούν αυτές τις εξαρτήσεις, οι ακόλουθες ενέργειες πρέπει να "
 "γίνουν:"
 
-#: src/solve-commit.cc:607
+#: src/solve-commit.cc:612
 msgid "Root privileges are required to fix broken package dependencies."
 msgstr ""
 "Απαιτούνται δικαιώματα root για τη διόρθωση κατεστραμμένων εξαρτήσεων "
@@ -6275,12 +6284,12 @@ msgstr ""
 #. The answers should be lower case letters, but in general, any UTF-8
 #. string will do.
 #. ! \todo add c for changelog and x for explain (show the dep tree)
-#: src/solve-commit.cc:629
+#: src/solve-commit.cc:634
 msgid "y/n/p/v/a/r/m/d/g"
 msgstr "y/n/p/v/a/r/m/d/g"
 
 #. translators: help text for 'y' option in the 'Continue?' prompt
-#: src/solve-commit.cc:634
+#: src/solve-commit.cc:639
 msgid ""
 "Yes, accept the summary and proceed with installation/removal of packages."
 msgstr ""
@@ -6288,12 +6297,12 @@ msgstr ""
 "πακέτων."
 
 #. translators: help text for 'n' option in the 'Continue?' prompt
-#: src/solve-commit.cc:636
+#: src/solve-commit.cc:641
 msgid "No, cancel the operation."
 msgstr "Όχι, ακύρωση της λειτουργίας."
 
 #. translators: help text for 'p' option in the 'Continue?' prompt
-#: src/solve-commit.cc:638
+#: src/solve-commit.cc:643
 msgid ""
 "Restart solver in no-force-resolution mode in order to show dependency "
 "problems."
@@ -6302,60 +6311,60 @@ msgstr ""
 "προβλήματα εξαρτήσεων."
 
 #. translators: help text for 'v' option in the 'Continue?' prompt
-#: src/solve-commit.cc:640
+#: src/solve-commit.cc:645
 msgid "Toggle display of package versions."
 msgstr "Εναλλαγή εμφάνισης των εκδόσεων των πακέτων."
 
 #. translators: help text for 'a' option in the 'Continue?' prompt
-#: src/solve-commit.cc:642
+#: src/solve-commit.cc:647
 msgid "Toggle display of package architectures."
 msgstr "Εναλλαγή εμφάνισης των αρχιτεκτονικών των πακέτων."
 
 #. translators: help text for 'r' option in the 'Continue?' prompt
-#: src/solve-commit.cc:644
+#: src/solve-commit.cc:649
 msgid ""
 "Toggle display of repositories from which the packages will be installed."
 msgstr ""
 "Εναλλαγή εμφάνισης των αποθετηρίων από τα οποία θα εγκατασταθούν τα πακέτα."
 
 #. translators: help text for 'm' option in the 'Continue?' prompt
-#: src/solve-commit.cc:646
+#: src/solve-commit.cc:651
 msgid "Toggle display of package vendor names."
 msgstr "Εναλλαγή εμφάνισης των ονομάτων των προμηθευτών."
 
 #. translators: help text for 'd' option in the 'Continue?' prompt
-#: src/solve-commit.cc:648
+#: src/solve-commit.cc:653
 msgid "Toggle between showing all details and as few details as possible."
 msgstr ""
 "Εναλλαγή μεταξύ εμφάνισης όλων των λεπτομερειών και των λιγότερο δυνατόν "
 "λεπτομερειών."
 
 #. translators: help text for 'g' option in the 'Continue?' prompt
-#: src/solve-commit.cc:650
+#: src/solve-commit.cc:655
 msgid "View the summary in pager."
 msgstr "Εμφάνιση της περίληψης στο σελιδοδείκτη."
 
-#: src/solve-commit.cc:760
+#: src/solve-commit.cc:765
 msgid "committing"
 msgstr "υποβολή"
 
-#: src/solve-commit.cc:762
+#: src/solve-commit.cc:767
 msgid "(dry run)"
 msgstr "(στεγνή εκτέλεση)"
 
-#: src/solve-commit.cc:786 src/solve-commit.cc:819
+#: src/solve-commit.cc:791 src/solve-commit.cc:824
 msgid "Problem retrieving the package file from the repository:"
 msgstr "Πρόβλημα κατά τη λήψη του πακέτου από το αποθετήριο:"
 
 #. translators: the first %s is 'zypper refresh' and the second is repo alias
-#: src/solve-commit.cc:816
+#: src/solve-commit.cc:821
 #, c-format, boost-format
 msgid "Repository '%s' is out of date. Running '%s' might help."
 msgstr ""
 "Το αποθετήριο '%s' δεν είναι ενημερωμένο. Η εκτέλεση του '%s' μπορεί να "
 "βοηθήσει."
 
-#: src/solve-commit.cc:827
+#: src/solve-commit.cc:832
 msgid ""
 "The package integrity check failed. This may be a problem with the "
 "repository or media. Try one of the following:\n"
@@ -6373,22 +6382,22 @@ msgstr ""
 "- χρησιμοποιήστε άλλο μέσο εγκατάστασης (εαν π.χ. είναι κατεστραμμένο)\n"
 "- χρησιμοποιήστε άλλο αποθετήριο"
 
-#: src/solve-commit.cc:841
+#: src/solve-commit.cc:846
 msgid "Problem occurred during or after installation or removal of packages:"
 msgstr ""
 "Παρουσιάστηκε πρόβλημα κατά ή μετά την εγκατάσταση ή την αφαίρεση των "
 "πακέτων:"
 
-#: src/solve-commit.cc:849
+#: src/solve-commit.cc:854
 msgid "Installation has completed with error."
 msgstr ""
 
-#: src/solve-commit.cc:851
+#: src/solve-commit.cc:856
 #, boost-format
 msgid "You may run '%1%' to repair any dependency problems."
 msgstr ""
 
-#: src/solve-commit.cc:865
+#: src/solve-commit.cc:870
 msgid ""
 "One of the installed patches requires a reboot of your machine. Reboot as "
 "soon as possible."
@@ -6396,7 +6405,7 @@ msgstr ""
 "Μία από τις εγκατεστημένες διορθώσεις απαιτεί επανεκκίνηση του υπολογιστή "
 "σας. Επανεκκινήστε το συντομότερο δυνατόν."
 
-#: src/solve-commit.cc:873
+#: src/solve-commit.cc:878
 msgid ""
 "One of the installed patches affects the package manager itself. Run this "
 "command once more to install any other needed patches."
@@ -6405,7 +6414,7 @@ msgstr ""
 "Εκτελέστε αυτή την εντολή ακόμη μια φορά για να εγκαταστήσετε όποιες άλλες "
 "διορθώσεις απαιτούνται."
 
-#: src/solve-commit.cc:891
+#: src/solve-commit.cc:896
 msgid "Dependencies of all installed packages are satisfied."
 msgstr "Οι εξαρτήσεις όλων των εγκατεστημένων πακέτων είναι εντάξει."
 

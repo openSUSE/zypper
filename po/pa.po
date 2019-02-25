@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper.pa\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-25 12:04+0100\n"
+"POT-Creation-Date: 2019-02-25 14:33+0100\n"
 "PO-Revision-Date: 2008-11-23 08:36+0530\n"
 "Last-Translator: KDB <brar.kd@gmail.com>\n"
 "Language-Team: Panjabi <punjabi-l10n@list.sf.net>\n"
@@ -4647,7 +4647,7 @@ msgstr ""
 msgid "Argument resolves to no package"
 msgstr ""
 
-#: src/commands/utils/download.cc:246 src/solve-commit.cc:893
+#: src/commands/utils/download.cc:246 src/solve-commit.cc:898
 msgid "Nothing to do."
 msgstr "ਕੁਝ ਵੀ ਨਹੀਂ ਹੈ।"
 
@@ -5396,8 +5396,8 @@ msgstr ""
 msgid "Problem retrieving files from '%s'."
 msgstr "'%s' ਤੋਂ ਫਾਇਲਾਂ ਡਾਊਨਲੋਡ ਕਰਨ ਦੌਰਾਨ ਸਮੱਸਿਆ।"
 
-#: src/repos.cc:346 src/repos.cc:1872 src/solve-commit.cc:787
-#: src/solve-commit.cc:818 src/solve-commit.cc:842
+#: src/repos.cc:346 src/repos.cc:1872 src/solve-commit.cc:792
+#: src/solve-commit.cc:823 src/solve-commit.cc:847
 #, fuzzy
 msgid "Please see the above error message for a hint."
 msgstr "ਇਸ਼ਾਰੇ ਲਈ ਉੱਤੇ ਦਿੱਤਾ ਗਲਤੀ ਸੁਨੇਹਾ ਵੇਖੋ ਜੀ।"
@@ -5993,40 +5993,49 @@ msgid ""
 "these programs."
 msgstr ""
 
-#: src/solve-commit.cc:476
+#. bsc#859480: Rephrased and added for translation switch if core translations are available.
+#: src/solve-commit.cc:466
+#, boost-format
+msgid ""
+"There are running programs which still use files and libraries deleted or "
+"updated by recent upgrades. They should be restarted to benefit from the "
+"latest updates. Run '%1%' to list these programs."
+msgstr ""
+
+#: src/solve-commit.cc:481
 msgid "Update notifications were received from the following packages:"
 msgstr ""
 
-#: src/solve-commit.cc:485
+#: src/solve-commit.cc:490
 #, fuzzy, c-format, boost-format
 msgid "Message from package %s:"
 msgstr "ਪੈਕੇਜ ਨਾਂ ਦੀ ਖੋਜ ਕੀਤੀ ਗਈ"
 
-#: src/solve-commit.cc:493
+#: src/solve-commit.cc:498
 msgid "y/n"
 msgstr ""
 
-#: src/solve-commit.cc:494
+#: src/solve-commit.cc:499
 #, fuzzy
 msgid "View the notifications now?"
 msgstr "ਨੋਟੀਫਿਕੇਸ਼ਨ ਵੇਖਾਓ"
 
-#: src/solve-commit.cc:540
+#: src/solve-commit.cc:545
 msgid "Computing distribution upgrade..."
 msgstr ""
 
-#: src/solve-commit.cc:545
+#: src/solve-commit.cc:550
 #, fuzzy
 msgid "Resolving package dependencies..."
 msgstr "ਨਿਰਭਰਤਾ ਹੱਲ਼ ਕੀਤੀ ਜਾ ਰਹੀ ਹੈ..."
 
-#: src/solve-commit.cc:600
+#: src/solve-commit.cc:605
 msgid ""
 "Some of the dependencies of installed packages are broken. In order to fix "
 "these dependencies, the following actions need to be taken:"
 msgstr ""
 
-#: src/solve-commit.cc:607
+#: src/solve-commit.cc:612
 #, fuzzy
 msgid "Root privileges are required to fix broken package dependencies."
 msgstr "ਪੈਕੇਜ ਅੱਪਡੇਟ ਕਰਨ ਲਈ root ਅਧਿਕਾਰ ਲੋੜੀਦੇ ਹਨ।"
@@ -6041,81 +6050,81 @@ msgstr "ਪੈਕੇਜ ਅੱਪਡੇਟ ਕਰਨ ਲਈ root ਅਧਿਕਾ
 #. The answers should be lower case letters, but in general, any UTF-8
 #. string will do.
 #. ! \todo add c for changelog and x for explain (show the dep tree)
-#: src/solve-commit.cc:629
+#: src/solve-commit.cc:634
 msgid "y/n/p/v/a/r/m/d/g"
 msgstr ""
 
 #. translators: help text for 'y' option in the 'Continue?' prompt
-#: src/solve-commit.cc:634
+#: src/solve-commit.cc:639
 #, fuzzy
 msgid ""
 "Yes, accept the summary and proceed with installation/removal of packages."
 msgstr "ਇੰਸਟਾਲੇਸ਼ਨ ਦੌਰਾਨ ਇੱਕ ਗਲਤੀ ਆਈ ਹੈ।"
 
 #. translators: help text for 'n' option in the 'Continue?' prompt
-#: src/solve-commit.cc:636
+#: src/solve-commit.cc:641
 msgid "No, cancel the operation."
 msgstr ""
 
 #. translators: help text for 'p' option in the 'Continue?' prompt
-#: src/solve-commit.cc:638
+#: src/solve-commit.cc:643
 msgid ""
 "Restart solver in no-force-resolution mode in order to show dependency "
 "problems."
 msgstr ""
 
 #. translators: help text for 'v' option in the 'Continue?' prompt
-#: src/solve-commit.cc:640
+#: src/solve-commit.cc:645
 msgid "Toggle display of package versions."
 msgstr ""
 
 #. translators: help text for 'a' option in the 'Continue?' prompt
-#: src/solve-commit.cc:642
+#: src/solve-commit.cc:647
 msgid "Toggle display of package architectures."
 msgstr ""
 
 #. translators: help text for 'r' option in the 'Continue?' prompt
-#: src/solve-commit.cc:644
+#: src/solve-commit.cc:649
 #, fuzzy
 msgid ""
 "Toggle display of repositories from which the packages will be installed."
 msgstr "ਹੇਠ ਦਿੱਤੇ ਪੈਕੇਜ ਇੰਸਟਾਲ ਕੀਤੇ ਜਾਣਗੇ:\n"
 
 #. translators: help text for 'm' option in the 'Continue?' prompt
-#: src/solve-commit.cc:646
+#: src/solve-commit.cc:651
 msgid "Toggle display of package vendor names."
 msgstr ""
 
 #. translators: help text for 'd' option in the 'Continue?' prompt
-#: src/solve-commit.cc:648
+#: src/solve-commit.cc:653
 msgid "Toggle between showing all details and as few details as possible."
 msgstr ""
 
 #. translators: help text for 'g' option in the 'Continue?' prompt
-#: src/solve-commit.cc:650
+#: src/solve-commit.cc:655
 msgid "View the summary in pager."
 msgstr ""
 
-#: src/solve-commit.cc:760
+#: src/solve-commit.cc:765
 msgid "committing"
 msgstr "ਕਮਿਟ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ"
 
-#: src/solve-commit.cc:762
+#: src/solve-commit.cc:767
 msgid "(dry run)"
 msgstr ""
 
-#: src/solve-commit.cc:786 src/solve-commit.cc:819
+#: src/solve-commit.cc:791 src/solve-commit.cc:824
 #, fuzzy
 msgid "Problem retrieving the package file from the repository:"
 msgstr "'%s' ਤੋਂ ਫਾਇਲਾਂ ਡਾਊਨਲੋਡ ਕਰਨ ਦੌਰਾਨ ਸਮੱਸਿਆ।"
 
 #. translators: the first %s is 'zypper refresh' and the second is repo alias
-#: src/solve-commit.cc:816
+#: src/solve-commit.cc:821
 #, fuzzy, c-format, boost-format
 msgid "Repository '%s' is out of date. Running '%s' might help."
 msgstr "ਰਿਪੋਜ਼ਟਰੀ '%s' ਅੱਪ-ਟੂ-ਡੇਟ ਹੈ।"
 
-#: src/solve-commit.cc:827
+#: src/solve-commit.cc:832
 msgid ""
 "The package integrity check failed. This may be a problem with the "
 "repository or media. Try one of the following:\n"
@@ -6133,28 +6142,28 @@ msgstr ""
 "- ਕੋਈ ਹੋਰ ਇੰਸਟਾਲੇਸ਼ਨ ਮੀਡਿਆ (ਜੇ ਇਹ ਖਰਾਬ ਹੋਵੇ)\n"
 " - ਹੋਰ ਰਿਪੋਜ਼ਟਰੀ ਸ਼ਾਮਲ ਕਰੋ"
 
-#: src/solve-commit.cc:841
+#: src/solve-commit.cc:846
 #, fuzzy
 msgid "Problem occurred during or after installation or removal of packages:"
 msgstr "ਇੰਸਟਾਲੇਸ਼ਨ ਦੌਰਾਨ ਇੱਕ ਗਲਤੀ ਆਈ ਹੈ।"
 
-#: src/solve-commit.cc:849
+#: src/solve-commit.cc:854
 msgid "Installation has completed with error."
 msgstr ""
 
-#: src/solve-commit.cc:851
+#: src/solve-commit.cc:856
 #, boost-format
 msgid "You may run '%1%' to repair any dependency problems."
 msgstr ""
 
-#: src/solve-commit.cc:865
+#: src/solve-commit.cc:870
 #, fuzzy
 msgid ""
 "One of the installed patches requires a reboot of your machine. Reboot as "
 "soon as possible."
 msgstr "ਇੱਕ ਇੰਸਟਾਲ ਹੋਏ ਪੈਂਚ ਲਈ ਤੁਹਾਡੀ ਮਸ਼ੀਨ ਨੂੰ ਮੁੜ-ਚਾਲੂ ਕਰਨਾ ਪਵੇਗਾ। ਜਿੰਨ੍ਹਾਂ ਛੇਤੀ ਹੋ ਸਕੇ ਕਰੋ ਜੀ।"
 
-#: src/solve-commit.cc:873
+#: src/solve-commit.cc:878
 #, fuzzy
 msgid ""
 "One of the installed patches affects the package manager itself. Run this "
@@ -6163,7 +6172,7 @@ msgstr ""
 "ਚੇਤਾਵਨੀ: ਇੰਸਟਾਲ ਹੋਏ ਪੈਂਚਾਂ ਵਿੱਚ ਇੱਕ ਪੈਕੇਜ ਮੈਨੇਜਰ ਨੂੰ ਪਰਭਾਵਿਤ ਕਰ ਰਿਹਾ ਹੈ, ਇਸਕਰਕੇ ਅਗਲੀ ਕਾਰਵਾਈ "
 "ਕਰਨ ਲਈ ਇਸ ਨੂੰ ਮੁੜ-ਚਾਲੂ ਕਰਨਾ ਲਾਜ਼ਮੀ ਹੈ।"
 
-#: src/solve-commit.cc:891
+#: src/solve-commit.cc:896
 msgid "Dependencies of all installed packages are satisfied."
 msgstr ""
 

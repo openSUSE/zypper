@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper.hu\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-25 12:04+0100\n"
+"POT-Creation-Date: 2019-02-25 14:33+0100\n"
 "PO-Revision-Date: 2018-05-15 17:04+0000\n"
 "Last-Translator: Robert Taisz <robert.taisz@emerald.hu>\n"
 "Language-Team: Hungarian <https://l10n.opensuse.org/projects/zypper/master/"
@@ -4891,7 +4891,7 @@ msgstr ""
 msgid "Argument resolves to no package"
 msgstr "Az argumentum feloldása nem eredményez csomagot"
 
-#: src/commands/utils/download.cc:246 src/solve-commit.cc:893
+#: src/commands/utils/download.cc:246 src/solve-commit.cc:898
 msgid "Nothing to do."
 msgstr "Nincs teendő."
 
@@ -5657,8 +5657,8 @@ msgstr "Hiba történt a(z) '%s' telepítési forrás letiltásakor."
 msgid "Problem retrieving files from '%s'."
 msgstr "Hiba történt a fájlok letöltésekor a következő helyről: '%s'."
 
-#: src/repos.cc:346 src/repos.cc:1872 src/solve-commit.cc:787
-#: src/solve-commit.cc:818 src/solve-commit.cc:842
+#: src/repos.cc:346 src/repos.cc:1872 src/solve-commit.cc:792
+#: src/solve-commit.cc:823 src/solve-commit.cc:847
 msgid "Please see the above error message for a hint."
 msgstr "Tekintse meg a fent található hibaüzenetet javaslatért."
 
@@ -6273,32 +6273,41 @@ msgstr ""
 "fájlokat használ. Érdemes lehet ellenőrizni, és újraindítani az ilyen "
 "programokat – listázásukhoz a(z) '%s' parancs használható."
 
-#: src/solve-commit.cc:476
+#. bsc#859480: Rephrased and added for translation switch if core translations are available.
+#: src/solve-commit.cc:466
+#, boost-format
+msgid ""
+"There are running programs which still use files and libraries deleted or "
+"updated by recent upgrades. They should be restarted to benefit from the "
+"latest updates. Run '%1%' to list these programs."
+msgstr ""
+
+#: src/solve-commit.cc:481
 msgid "Update notifications were received from the following packages:"
 msgstr "Frissítési értesítés érkezett a következő csomagról:"
 
-#: src/solve-commit.cc:485
+#: src/solve-commit.cc:490
 #, c-format, boost-format
 msgid "Message from package %s:"
 msgstr "Üzenet a(z) %s csomagról:"
 
-#: src/solve-commit.cc:493
+#: src/solve-commit.cc:498
 msgid "y/n"
 msgstr "i/n"
 
-#: src/solve-commit.cc:494
+#: src/solve-commit.cc:499
 msgid "View the notifications now?"
 msgstr "Megtekinti az értesítést most?"
 
-#: src/solve-commit.cc:540
+#: src/solve-commit.cc:545
 msgid "Computing distribution upgrade..."
 msgstr "A disztribúció frissítésének számítása..."
 
-#: src/solve-commit.cc:545
+#: src/solve-commit.cc:550
 msgid "Resolving package dependencies..."
 msgstr "Függőségek feloldása..."
 
-#: src/solve-commit.cc:600
+#: src/solve-commit.cc:605
 msgid ""
 "Some of the dependencies of installed packages are broken. In order to fix "
 "these dependencies, the following actions need to be taken:"
@@ -6306,7 +6315,7 @@ msgstr ""
 "A telepített csomagok bizonyos függőségeivel problémák adódtak. A problémák "
 "kijavításának érdekében a következő műveleteket kell végrehajtani:"
 
-#: src/solve-commit.cc:607
+#: src/solve-commit.cc:612
 msgid "Root privileges are required to fix broken package dependencies."
 msgstr ""
 "A csomagok függőségi problémáinak javításához root jogosultság szükséges."
@@ -6321,12 +6330,12 @@ msgstr ""
 #. The answers should be lower case letters, but in general, any UTF-8
 #. string will do.
 #. ! \todo add c for changelog and x for explain (show the dep tree)
-#: src/solve-commit.cc:629
+#: src/solve-commit.cc:634
 msgid "y/n/p/v/a/r/m/d/g"
 msgstr "i/n/p/v/a/r/m/d/g"
 
 #. translators: help text for 'y' option in the 'Continue?' prompt
-#: src/solve-commit.cc:634
+#: src/solve-commit.cc:639
 msgid ""
 "Yes, accept the summary and proceed with installation/removal of packages."
 msgstr ""
@@ -6334,12 +6343,12 @@ msgstr ""
 "eltávolítását."
 
 #. translators: help text for 'n' option in the 'Continue?' prompt
-#: src/solve-commit.cc:636
+#: src/solve-commit.cc:641
 msgid "No, cancel the operation."
 msgstr "Nem, szakítsa meg a műveletet."
 
 #. translators: help text for 'p' option in the 'Continue?' prompt
-#: src/solve-commit.cc:638
+#: src/solve-commit.cc:643
 msgid ""
 "Restart solver in no-force-resolution mode in order to show dependency "
 "problems."
@@ -6348,17 +6357,17 @@ msgstr ""
 "megjelenítéséhez."
 
 #. translators: help text for 'v' option in the 'Continue?' prompt
-#: src/solve-commit.cc:640
+#: src/solve-commit.cc:645
 msgid "Toggle display of package versions."
 msgstr "Csomagverziók megjelenítésének átkapcsolása."
 
 #. translators: help text for 'a' option in the 'Continue?' prompt
-#: src/solve-commit.cc:642
+#: src/solve-commit.cc:647
 msgid "Toggle display of package architectures."
 msgstr "Csomagarchitektúrák megjelenítésének átkapcsolása."
 
 #. translators: help text for 'r' option in the 'Continue?' prompt
-#: src/solve-commit.cc:644
+#: src/solve-commit.cc:649
 msgid ""
 "Toggle display of repositories from which the packages will be installed."
 msgstr ""
@@ -6366,43 +6375,43 @@ msgstr ""
 "átkapcsolása."
 
 #. translators: help text for 'm' option in the 'Continue?' prompt
-#: src/solve-commit.cc:646
+#: src/solve-commit.cc:651
 msgid "Toggle display of package vendor names."
 msgstr "Csomaggyártó nevek megjelenítésének átkapcsolása."
 
 #. translators: help text for 'd' option in the 'Continue?' prompt
-#: src/solve-commit.cc:648
+#: src/solve-commit.cc:653
 msgid "Toggle between showing all details and as few details as possible."
 msgstr ""
 "Átváltás az összes részlet megjelenítése és a lehetséges legkevesebb részlet "
 "megjelenítése között."
 
 #. translators: help text for 'g' option in the 'Continue?' prompt
-#: src/solve-commit.cc:650
+#: src/solve-commit.cc:655
 msgid "View the summary in pager."
 msgstr "Összesítés megtekintése."
 
-#: src/solve-commit.cc:760
+#: src/solve-commit.cc:765
 msgid "committing"
 msgstr "véglegesítés"
 
-#: src/solve-commit.cc:762
+#: src/solve-commit.cc:767
 msgid "(dry run)"
 msgstr "(üresjárat)"
 
-#: src/solve-commit.cc:786 src/solve-commit.cc:819
+#: src/solve-commit.cc:791 src/solve-commit.cc:824
 msgid "Problem retrieving the package file from the repository:"
 msgstr "Hiba történt a csomagfájl letöltésekor a telepítési forrásról:"
 
 #. translators: the first %s is 'zypper refresh' and the second is repo alias
-#: src/solve-commit.cc:816
+#: src/solve-commit.cc:821
 #, c-format, boost-format
 msgid "Repository '%s' is out of date. Running '%s' might help."
 msgstr ""
 "A(z) %s telepítési forrás nem naprakész. Frissítheti a '%s' parancs "
 "futtatásával."
 
-#: src/solve-commit.cc:827
+#: src/solve-commit.cc:832
 msgid ""
 "The package integrity check failed. This may be a problem with the "
 "repository or media. Try one of the following:\n"
@@ -6420,21 +6429,21 @@ msgstr ""
 " - használjon másik telepítő adathordozót (ha az sérült)\n"
 " - használjon másik telepítési forrást"
 
-#: src/solve-commit.cc:841
+#: src/solve-commit.cc:846
 msgid "Problem occurred during or after installation or removal of packages:"
 msgstr "A telepítés során hiba történt:"
 
-#: src/solve-commit.cc:849
+#: src/solve-commit.cc:854
 msgid "Installation has completed with error."
 msgstr "A telepítés hibával fejeződött be."
 
-#: src/solve-commit.cc:851
+#: src/solve-commit.cc:856
 #, boost-format
 msgid "You may run '%1%' to repair any dependency problems."
 msgstr ""
 "A(z) '%1%' futtatásával kijavíthatja az esetleges függőségi problémákat."
 
-#: src/solve-commit.cc:865
+#: src/solve-commit.cc:870
 msgid ""
 "One of the installed patches requires a reboot of your machine. Reboot as "
 "soon as possible."
@@ -6442,7 +6451,7 @@ msgstr ""
 "A telepített frissítések egyike a számítógép újraindítását igényli. Ezt "
 "amint lehet, tegye meg."
 
-#: src/solve-commit.cc:873
+#: src/solve-commit.cc:878
 msgid ""
 "One of the installed patches affects the package manager itself. Run this "
 "command once more to install any other needed patches."
@@ -6450,7 +6459,7 @@ msgstr ""
 "A telepített frissítések egyike magát a csomagkezelőt érinti, ezért futtassa "
 "még egyszer a parancsot a további frissítések telepítése érdekében."
 
-#: src/solve-commit.cc:891
+#: src/solve-commit.cc:896
 msgid "Dependencies of all installed packages are satisfied."
 msgstr "Minden telepített csomag függősége rendben."
 
