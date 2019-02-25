@@ -14,10 +14,10 @@ msgstr ""
 "Project-Id-Version: zypper.fr\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-01-31 13:26+0100\n"
-"PO-Revision-Date: 2019-01-26 10:30+0000\n"
+"PO-Revision-Date: 2019-03-01 14:58+0000\n"
 "Last-Translator: Antoine Belvire <antoine.belvire@opensuse.org>\n"
-"Language-Team: French <https://l10n.opensuse.org/projects/zypper/master/fr/"
-">\n"
+"Language-Team: French <https://l10n.opensuse.org/projects/zypper/master/fr/>"
+"\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -528,11 +528,11 @@ msgstr "C'est un alias de '%s\"."
 
 #: src/commands/commandhelpformatter.h:107
 msgid "Examples:"
-msgstr ""
+msgstr "Exemples :"
 
 #: src/commands/commandhelpformatter.h:110
 msgid "Arguments:"
-msgstr ""
+msgstr "Arguments :"
 
 #: src/commands/commandhelpformatter.h:123 src/utils/flags/zyppflags.cc:562
 msgid "Command options:"
@@ -707,7 +707,7 @@ msgstr "AAAA-MM-JJ"
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:53
 msgid "MODE"
-msgstr ""
+msgstr "MODE"
 
 #. TranslatorExplanation These are reasons for various failures.
 #: src/utils/prompt.h:160
@@ -757,7 +757,7 @@ msgstr "Verrouillage de paquets :"
 
 #: src/Command.cc:154
 msgid "Locale Management:"
-msgstr ""
+msgstr "Gestion des paramètres régionaux :"
 
 #: src/Command.cc:158
 msgid "Other Commands:"
@@ -890,6 +890,8 @@ msgstr "Ignorer les paquets inconnus."
 msgid ""
 "Terse output for machine consumption. Implies --no-abbrev and --no-color."
 msgstr ""
+"Sortie succincte consommable par une machine. Implique --no-abbrev et --no-"
+"color."
 
 #. translators: --reposd-dir, -D <DIR>
 #: src/Config.cc:487
@@ -1008,7 +1010,7 @@ msgstr ""
 
 #: src/Config.cc:620
 msgid "Target Options"
-msgstr "Options de la cible "
+msgstr "Options de la cible"
 
 #. translators: --root, -R <DIR>
 #: src/Config.cc:625
@@ -1852,7 +1854,7 @@ msgstr[0] "Le correctif suivant nécessite un redémarrage du système :"
 msgstr[1] "Les %d correctifs suivants nécessitent un redémarrage du système :"
 
 #: src/Summary.cc:1344
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following package requires a system reboot:"
 msgid_plural "The following %d packages require a system reboot:"
 msgstr[0] "Le paquet suivant requiert un redémarrage du système :"
@@ -2344,7 +2346,7 @@ msgstr "Sélectionner les paquets par leur nom, pas par leur fonction."
 
 #: src/commands/installremove.cc:55
 msgid "Select packages solely by capability."
-msgstr ""
+msgstr "Sélectionner des paquets uniquement par leur capacité."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/installremove.cc:74
@@ -2502,19 +2504,22 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/locale/addlocalecmd.cc:19
 msgid "addlocale (aloc) [OPTIONS] <LOCALE> ..."
-msgstr ""
+msgstr "addlocale (aloc) [OPTIONS] <LANGUE> ..."
 
 #: src/commands/locale/addlocalecmd.cc:20
 msgid "Add locale(s) to requested locales."
-msgstr ""
+msgstr "Ajouter une ou plusieurs langue(s) aux langues demandées."
 
 #: src/commands/locale/addlocalecmd.cc:21
 msgid "Add given locale(s) to the list of requested locales."
 msgstr ""
+"Ajouter la ou les langue(s) spécifiée(s) à la liste des langues demandées."
 
 #: src/commands/locale/addlocalecmd.cc:32
 msgid "Do not install corresponding packages for given locale(s)."
 msgstr ""
+"De ne pas installer les paquets correspondant à la ou aux langue(s) "
+"spécifiée(s)."
 
 #: src/commands/locale/addlocalecmd.cc:56
 #, c-format, boost-format
@@ -2526,11 +2531,11 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/locale/localescmd.cc:17
 msgid "locales (lloc) [OPTIONS] [LOCALE] ..."
-msgstr ""
+msgstr "locales (lloc) [OPTIONS] [LANGUE] ..."
 
 #: src/commands/locale/localescmd.cc:18
 msgid "List requested locales (languages codes)."
-msgstr ""
+msgstr "Lister les langues demandées (codes de langue)."
 
 #: src/commands/locale/localescmd.cc:19
 #, c-format, boost-format
@@ -2542,22 +2547,29 @@ msgid ""
 "can\n"
 "be installed by calling '%s'.\n"
 msgstr ""
+"Lister les langues demandées et les paquets correspondants.\n"
+"\n"
+"Appelée sans argument, cette commande liste les langues demandées. Si les\n"
+"paquets pour les langues demandées ne sont pas encore présents sur le\n"
+"système, ils peuvent être installés en lançant « %s ».\n"
 
 #: src/commands/locale/localescmd.cc:35
 msgid "Show corresponding packages."
-msgstr ""
+msgstr "Afficher les paquets correspondants."
 
 #: src/commands/locale/localescmd.cc:36
 msgid "List all available locales."
-msgstr ""
+msgstr "Lister toutes les langues disponibles."
 
 #: src/commands/locale/localescmd.cc:49
 msgid "Ignoring positional arguments because --all argument was provided."
-msgstr ""
+msgstr "Arguments positionnels ignorés car l'argument --all a été fourni."
 
 #: src/commands/locale/localescmd.cc:76
 msgid "The locale(s) for which the information shall be printed."
 msgstr ""
+"La ou les langue(s) pour laquelle (lesquelles) l'information doit être "
+"affichée."
 
 #: src/commands/locale/localescmd.cc:80
 msgid ""
@@ -2575,20 +2587,22 @@ msgstr ""
 
 #: src/commands/locale/localescmd.cc:101
 msgid "Get the list of packages which are available for 'de' and 'en':"
-msgstr ""
+msgstr "Récupérer la liste des paquets disponibles pour « de » et « en » :"
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/locale/removelocalecmd.cc:17
 msgid "removelocale (rloc) [OPTIONS] <LOCALE> ..."
-msgstr ""
+msgstr "removelocale (rloc) [OPTIONS] <LANGUE> ..."
 
 #: src/commands/locale/removelocalecmd.cc:18
 msgid "Remove locale(s) from requested locales."
-msgstr ""
+msgstr "Supprimer une ou plusieurs langue(s) des langues demandées."
 
 #: src/commands/locale/removelocalecmd.cc:19
 msgid "Remove given locale(s) from the list of supported languages."
 msgstr ""
+"Supprimer la ou les langue(s) spécifiée(s) de la liste des langues prises en "
+"charge."
 
 #: src/commands/locale/removelocalecmd.cc:34
 #, c-format, boost-format
@@ -2596,10 +2610,14 @@ msgid ""
 "Specify locales which shall be removed by the the language code.\n"
 "Get the list of requested locales by calling '%s'."
 msgstr ""
+"Spécifier par leur code les langues qui doivent être supprimées.\n"
+"Récupérer la liste des langues demandées en lançant « %s »."
 
 #: src/commands/locale/removelocalecmd.cc:46
 msgid "Do not remove corresponding packages for given locale(s)."
 msgstr ""
+"Ne pas supprimer les paquets correspondant à la ou aux langue(s) "
+"spécifiée(s)."
 
 # =============================================================================
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
@@ -2884,7 +2902,7 @@ msgstr "Cette commande a une implémentation factice qui retourne toujours 0."
 
 #: src/commands/optionsets.cc:33
 msgid "Don't change anything, just report what would be done."
-msgstr ""
+msgstr "Ne rien changer, juste rapporter ce qui serait fait."
 
 #. translators: -r, --repo <ALIAS|#|URI>
 #: src/commands/optionsets.cc:65
@@ -2895,6 +2913,7 @@ msgstr "Ne travailler qu'avec le dépôt spécifié."
 #, c-format, boost-format
 msgid "Option '--%s' overrides a previously set download mode."
 msgstr ""
+"L'option « --%s » outrepasse un mode de téléchargement précédemment défini."
 
 #: src/commands/optionsets.cc:114
 #, c-format, boost-format
@@ -4216,27 +4235,29 @@ msgstr "Lancer 'zypper refresh' en tant que root peut résoudre le problème."
 #. translators: -g, --category <CATEGORY>
 #: src/commands/selectpatchoptionset.cc:24
 msgid "Select patches with the specified category."
-msgstr ""
+msgstr "Sélectionner des correctifs de la catégorie spécifié."
 
 #. translators: --severity <SEVERITY>
 #: src/commands/selectpatchoptionset.cc:28
 msgid "Select patches with the specified severity."
-msgstr ""
+msgstr "Sélectionner des correctifs de la sévérité spécifiée."
 
 #. translators: --date <YYYY-MM-DD>
 #: src/commands/selectpatchoptionset.cc:32
 msgid "Select patches issued up to, but not including, the specified date"
 msgstr ""
+"Sélectionner les correctifs publiés jusqu'à la date spécifiée, non incluse"
 
 #. translators: -b, --bugzilla
 #: src/commands/selectpatchoptionset.cc:36
 msgid "Select applicable patches for the specified Bugzilla issues."
 msgstr ""
+"Sélectionner les correctifs applicables aux problèmes Bugzilla spécifiés."
 
 #. translators: --cve
 #: src/commands/selectpatchoptionset.cc:41
 msgid "Select applicable patches for the specified CVE issues."
-msgstr ""
+msgstr "Sélectionner les correctifs applicables aux problèmes CVE spécifiés."
 
 #. any
 #. translators: --cve
@@ -4595,7 +4616,7 @@ msgstr "Cette commande n'a de sens que dans le shell zypper."
 
 #: src/commands/solveroptionset.cc:16 src/commands/solveroptionset.cc:39
 msgid "Solver options"
-msgstr ""
+msgstr "Options du solveur"
 
 #: src/commands/solveroptionset.cc:18
 msgid "Install also recommended packages in addition to the required ones."
@@ -4623,7 +4644,7 @@ msgstr "Ne pas forcer le solveur à trouver une solution, le laisser demander."
 
 #: src/commands/solveroptionset.cc:63
 msgid "Expert options"
-msgstr ""
+msgstr "Options expert"
 
 #: src/commands/solveroptionset.cc:66
 msgid "Whether to allow downgrading installed resolvables."
@@ -4697,7 +4718,7 @@ msgstr "Le nom du paquet source est un argument requis."
 
 #: src/commands/sourceinstall.cc:86
 msgid "Uninstalling source packages is not supported."
-msgstr ""
+msgstr "La suppression des paquets source n'est pas prise en charge."
 
 #: src/commands/subcommand.cc:52
 msgid "none"
@@ -5110,12 +5131,12 @@ msgstr ""
 #. translators: --status
 #: src/commands/utils/source-download.cc:514
 msgid "Write a manifest file."
-msgstr ""
+msgstr "Écrire un fichier manifeste."
 
 #. translators: --status
 #: src/commands/utils/source-download.cc:518
 msgid "Disable writing a manifest file."
-msgstr ""
+msgstr "Désactiver l'écriture d'un fichier manifeste."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/utils/targetos.cc:20
@@ -5410,56 +5431,56 @@ msgstr "Construit les paquets binaires"
 #. translators: header of table column - is the language requested? (Yes/No)
 #: src/locales.cc:56 src/locales.cc:90
 msgid "Requested"
-msgstr ""
+msgstr "Demandée"
 
 #: src/locales.cc:60
 msgid "Fallback"
-msgstr ""
+msgstr "De secours"
 
 #. translators: header of table column - the language code, e.g. en_US
 #: src/locales.cc:86
 msgid "Code"
-msgstr ""
+msgstr "Code"
 
 #. translators: header of table column - the language, e.g. English (United States)
 #: src/locales.cc:88
 msgid "Language"
-msgstr ""
+msgstr "Langue"
 
 #: src/locales.cc:306
 #, c-format, boost-format
 msgid "Packages for %s (locale '%s', requested: %s):"
-msgstr ""
+msgstr "Paquets pour %s (langue « %s », demandée : %s) :"
 
 #: src/locales.cc:323
 #, c-format, boost-format
 msgid "Added locale: %s"
-msgstr ""
+msgstr "Langue ajoutée : %s"
 
 #: src/locales.cc:326
 #, c-format, boost-format
 msgid "ERROR: cannot add %s"
-msgstr ""
+msgstr "ERREUR : impossible d'ajouter %s"
 
 #: src/locales.cc:330
 #, c-format, boost-format
 msgid " %s is already requested."
-msgstr ""
+msgstr " %s est déjà demandée."
 
 #: src/locales.cc:351
 #, c-format, boost-format
 msgid "Removed locale: %s"
-msgstr ""
+msgstr "Langue supprimée : %s"
 
 #: src/locales.cc:354
 #, c-format, boost-format
 msgid "ERROR: cannot remove %s"
-msgstr ""
+msgstr "ERREUR : impossible de supprimer %s"
 
 #: src/locales.cc:358
 #, c-format, boost-format
 msgid "%s was not requested."
-msgstr ""
+msgstr "%s n'a pas été demandée."
 
 #. translators: this will show up if you press ctrl+c twice
 #: src/main.cc:31
