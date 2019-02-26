@@ -167,7 +167,7 @@ _zypper() {
 			remove | rm | update | up)
 				opts=(${opts[@]}$(echo; _installed_packages ))
 			;;
-			install | in | source-install | si | download | info | if)
+			install | in | source-install | si | download | info | if | addlock | al)
 				opts=(${opts[@]}$(echo; _available_packages ))
 			;;
 		esac
