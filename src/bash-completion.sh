@@ -73,7 +73,8 @@ _zypper() {
 	let ITER=COMP_CWORD
 	while test $((ITER--)) -ge 0 ; do
 		comp="${COMP_WORDS[ITER]}"
-		if [[ "${ZYPPER_CMDLIST[@]}" =~ "${comp}" ]]; then
+		# bsc#1049826 - surrounding ' 's are important to get a word-match of ${comp}:
+		if [[ " ${ZYPPER_CMDLIST[@]} " =~ " ${comp} " ]]; then
 			command=${COMP_WORDS[ITER]}
 			break;
 		fi
