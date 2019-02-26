@@ -1135,7 +1135,9 @@ void MediaCurl::evaluateCurlCode(const Pathname &filename,
           case 403:
           {
             string msg403;
-            if (url.asString().find("novell.com") != string::npos)
+	    if ( url.getHost().find(".suse.com") != string::npos )
+	      msg403 = _("Visit the SUSE Customer Center to check whether your registration is valid and has not expired.");
+	    else if (url.asString().find("novell.com") != string::npos)
               msg403 = _("Visit the Novell Customer Center to check whether your registration is valid and has not expired.");
             ZYPP_THROW(MediaForbiddenException(url, msg403));
           }
