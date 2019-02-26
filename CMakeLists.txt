@@ -56,7 +56,7 @@ CHECK_CXX_COMPILER_FLAG("-Werror=format-security" CXX_FORMAT_SECURITY)
 SET( CMAKE_C_FLAGS     "${CMAKE_C_FLAGS} -fno-strict-aliasing -fPIC -g -rdynamic -Wall -Wl,-as-needed -Wp,-D_GLIBCXX_ASSERTIONS" )
 SET( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-strict-aliasing -fPIC -g -rdynamic -Wall -Wl,-as-needed -Wp,-D_GLIBCXX_ASSERTIONS" )
 
-SET( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -fvisibility-inlines-hidden -Woverloaded-virtual -Wnon-virtual-dtor" )
+SET( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fvisibility-inlines-hidden -Woverloaded-virtual -Wnon-virtual-dtor" )
 
 set( CMAKE_C_FLAGS_RELEASE     "${CMAKE_C_FLAGS} -O3 -DZYPP_NDEBUG" )
 set( CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS} -O3 -DZYPP_NDEBUG" )

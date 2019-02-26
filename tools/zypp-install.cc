@@ -1,5 +1,5 @@
 //
-// g++ -Wall -std=c++11 zypp-install.cc -l zypp -o zypp-install
+// g++ -Wall zypp-install.cc -l zypp -o zypp-install
 //
 // A small (and simple) demo which walks through zypp, initializing
 // and refreshing the repos, selecting packages ('zypper dup'),
