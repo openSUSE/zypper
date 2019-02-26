@@ -22,7 +22,7 @@ ADD_DEFINITIONS( -DVERSION="${VERSION}" )
 SET( CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O3" )
 SET( CMAKE_C_FLAGS_RELEASE   "${CMAKE_C_FLAGS_RELEASE}   -O3" )
 
-SET( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -Wall -Woverloaded-virtual -Wnon-virtual-dtor -fstack-protector -std=c++11 -fvisibility-inlines-hidden" )
+SET( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -Wall -Woverloaded-virtual -Wnon-virtual-dtor -fstack-protector -fvisibility-inlines-hidden" )
 SET( CMAKE_C_FLAGS   "${CMAKE_C_FLAGS}   -g -Wall -fstack-protector" )
 
 
