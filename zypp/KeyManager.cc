@@ -18,49 +18,56 @@
 #include <gpgme.h>
 
 #include <stdio.h>
+using std::endl;
 
 #undef  ZYPP_BASE_LOGGER_LOGGROUP
 #define ZYPP_BASE_LOGGER_LOGGROUP "zypp::gpg"
 
-// @TODO [threading]
-// make sure to call the init code of gpgme only once
-// this might need to be moved to a different location when
-// threads are introduced into libzypp
-boost::once_flag gpgme_init_once = BOOST_ONCE_INIT;
-using std::endl;
-
-//using boost::interprocess pointer because it allows a custom deleter
-typedef boost::interprocess::scoped_ptr<gpgme_data, boost::function<void (gpgme_data_t)>> GpgmeDataPtr;
-typedef boost::interprocess::scoped_ptr<_gpgme_key, boost::function<void (gpgme_key_t)>>  GpgmeKeyPtr;
-typedef boost::interprocess::scoped_ptr<FILE, boost::function<int (FILE *)>> FILEPtr;
-
-struct GpgmeErr
-{
-  GpgmeErr( gpgme_error_t err_r = GPG_ERR_NO_ERROR )
-  : _err( err_r )
-  {}
-  operator gpgme_error_t() const { return _err; }
-private:
-  gpgme_error_t _err;
-};
-std::ostream & operator<<( std::ostream & str, const GpgmeErr & obj )
-{ return str << "<" << gpgme_strsource(obj) << "> " << gpgme_strerror(obj); }
-
-static void initGpgme ()
-{
-  const char *version = gpgme_check_version(NULL);
-  if ( version )
-  {
-    MIL << "Initialized libgpgme version: " << version << endl;
-  }
-  else
-  {
-    MIL << "Initialized libgpgme with unknown version" << endl;
-  }
-}
-
+///////////////////////////////////////////////////////////////////
 namespace zypp
 {
+  ///////////////////////////////////////////////////////////////////
+  namespace
+  {
+    // @TODO [threading]
+    // make sure to call the init code of gpgme only once
+    // this might need to be moved to a different location when
+    // threads are introduced into libzypp
+    boost::once_flag gpgme_init_once = BOOST_ONCE_INIT;
+
+    //using boost::interprocess pointer because it allows a custom deleter
+    typedef boost::interprocess::scoped_ptr<gpgme_data, boost::function<void (gpgme_data_t)>> GpgmeDataPtr;
+    typedef boost::interprocess::scoped_ptr<_gpgme_key, boost::function<void (gpgme_key_t)>>  GpgmeKeyPtr;
+    typedef boost::interprocess::scoped_ptr<FILE, boost::function<int (FILE *)>> FILEPtr;
+
+    struct GpgmeErr
+    {
+      GpgmeErr( gpgme_error_t err_r = GPG_ERR_NO_ERROR )
+      : _err( err_r )
+      {}
+      operator gpgme_error_t() const { return _err; }
+    private:
+      gpgme_error_t _err;
+    };
+
+    std::ostream & operator<<( std::ostream & str, const GpgmeErr & obj )
+    { return str << "<" << gpgme_strsource(obj) << "> " << gpgme_strerror(obj); }
+
+    void initGpgme ()
+    {
+      const char *version = gpgme_check_version(NULL);
+      if ( version )
+      {
+	MIL << "Initialized libgpgme version: " << version << endl;
+      }
+      else
+      {
+	MIL << "Initialized libgpgme with unknown version" << endl;
+      }
+    }
+
+  } // namespace
+  ///////////////////////////////////////////////////////////////////
 
 class KeyManagerCtx::Impl
 {
@@ -415,4 +422,5 @@ bool KeyManagerCtx::deleteKey(const std::string &id)
 std::list<std::string> KeyManagerCtx::readSignatureFingerprints(const Pathname &signature)
 { return _pimpl->readSignaturesFprs(signature); }
 
-}
+} // namespace zypp
+///////////////////////////////////////////////////////////////////
