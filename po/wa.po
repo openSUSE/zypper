@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lcn memory\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-08-03 11:09+0200\n"
+"POT-Creation-Date: 2019-02-27 13:31+0100\n"
 "PO-Revision-Date: 2012-08-24 14:42+0200\n"
 "Last-Translator: Jean Cayron <jean.cayron@base.be>\n"
 "Language-Team: Walloon <linux-wa@walon.org>\n"
@@ -17,11 +17,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Lokalize 1.4\n"
-
-#: zypp/target/hal/HalException.h:46 zypp/target/hal/HalException.h:55
-#: zypp/target/hal/HalException.h:64
-msgid "Hal Exception"
-msgstr "Foû-rîle di hal"
 
 #. dubious: Throw on malformed known types, otherwise log a warning.
 #: zypp/CheckSum.cc:136
@@ -1356,36 +1351,36 @@ msgstr "Dji n' sai enonder « %s » (%s)."
 msgid "Can't fork (%s)."
 msgstr "Dji n' sai fé on fork (%s)."
 
-#: zypp/ExternalProgram.cc:519
+#: zypp/ExternalProgram.cc:522
 #, c-format, boost-format
 msgid "Command exited with status %d."
 msgstr "Li comande a moussî foû avou l' sitatut %d."
 
-#: zypp/ExternalProgram.cc:539
+#: zypp/ExternalProgram.cc:542
 #, c-format, boost-format
 msgid "Command was killed by signal %d (%s)."
 msgstr "Li comande a stî touwêye på signå %d (%s)."
 
-#: zypp/ExternalProgram.cc:544
+#: zypp/ExternalProgram.cc:547
 msgid "Command exited with unknown error."
 msgstr "Li comande a moussî foû avou ene aroke nén cnoxhowe."
 
 #. TranslatorExplanation first %s is key name, second is keyring name
-#: zypp/KeyRing.cc:536
+#: zypp/KeyRing.cc:599
 #, fuzzy, c-format, boost-format
 msgid "Tried to import not existent key %s into keyring %s"
 msgstr "Dj' a sayî d' abaguer l' clé %s nén egzistante e l' anea d' clés %s"
 
-#: zypp/KeyRing.cc:542 zypp/KeyRing.cc:546
+#: zypp/KeyRing.cc:605 zypp/KeyRing.cc:609
 #, fuzzy
 msgid "Failed to import key."
 msgstr "L' abagaedje del clé publike %1% a fwait berwete"
 
-#: zypp/KeyRing.cc:553 zypp/KeyRing.cc:557 zypp/KeyRing.cc:561
+#: zypp/KeyRing.cc:616 zypp/KeyRing.cc:620 zypp/KeyRing.cc:624
 msgid "Failed to delete key."
 msgstr "Li disfaçaedje del clé a fwait berwete."
 
-#: zypp/KeyRing.cc:570
+#: zypp/KeyRing.cc:633
 #, c-format, boost-format
 msgid "Signature file %s not found"
 msgstr "Sinateure di fitchî %s nén trovêye"
@@ -3791,20 +3786,20 @@ msgstr[1] "(espire divant 24 e)"
 
 #. translator: %1% is a gpg key ID like 3DBDC284
 #. %2% is a cache directories path
-#: zypp/RepoInfo.cc:513
+#: zypp/RepoInfo.cc:517
 #, boost-format
 msgid "Looking for gpg key ID %1% in cache %2%."
 msgstr ""
 
 #. translator: %1% is a gpg key ID like 3DBDC284
 #. %2% is a repositories name
-#: zypp/RepoInfo.cc:541
+#: zypp/RepoInfo.cc:545
 #, boost-format
 msgid "Looking for gpg key ID %1% in repository %2%."
 msgstr ""
 
 #. translator: %1% is a repositories name
-#: zypp/RepoInfo.cc:565
+#: zypp/RepoInfo.cc:569
 #, boost-format
 msgid "Repository %1% does not define additional 'gpgkey=' URLs."
 msgstr ""
@@ -3941,15 +3936,15 @@ msgstr "Tchinne di cweraedje di l' IRL LDAP nén valåbe"
 msgid "Invalid LDAP URL query parameter '%s'"
 msgstr "Paramete cweraedje di l' URL LDAP nén valåbe « %s »"
 
-#: zypp/Url.cc:300
+#: zypp/Url.cc:301
 msgid "Unable to clone Url object"
 msgstr "Dji n' sai clôner l' objet Url"
 
-#: zypp/Url.cc:313
+#: zypp/Url.cc:314
 msgid "Invalid empty Url object reference"
 msgstr "Vude referince d' objet di l' Url nén valåbe"
 
-#: zypp/Url.cc:326 zypp/Url.cc:340
+#: zypp/Url.cc:327 zypp/Url.cc:341
 msgid "Unable to parse Url components"
 msgstr "Dji n' sai analijhî les componints di l' Url"
 
@@ -4065,12 +4060,18 @@ msgid "Invalid regular expression '%s'"
 msgstr "Erîlêye ratourneure « %s » nén valåbe"
 
 #. !\todo add comma to the message for the next release
-#: zypp/media/MediaCIFS.cc:427 zypp/media/MediaCurl.cc:1753
+#: zypp/media/MediaCIFS.cc:427 zypp/media/MediaCurl.cc:1775
 #, c-format, boost-format
 msgid "Authentication required for '%s'"
 msgstr "I s' fåt otintifyî po « %s »"
 
-#: zypp/media/MediaCurl.cc:1121
+#: zypp/media/MediaCurl.cc:1139
+msgid ""
+"Visit the SUSE Customer Center to check whether your registration is valid "
+"and has not expired."
+msgstr ""
+
+#: zypp/media/MediaCurl.cc:1141
 msgid ""
 "Visit the Novell Customer Center to check whether your registration is valid "
 "and has not expired."
@@ -4236,7 +4237,7 @@ msgstr ""
 msgid "Unsupported HTTP authentication method '%s'"
 msgstr "Metôde d' otintifiaedje HTTP \"%s\" nén sopoirtêye"
 
-#: zypp/misc/CheckAccessDeleted.cc:354
+#: zypp/misc/CheckAccessDeleted.cc:357
 msgid "Please install package 'lsof' first."
 msgstr ""
 
@@ -4250,13 +4251,13 @@ msgstr ""
 msgid "One or both of '%s' or '%s' attributes is required."
 msgstr "Dj' a dandjî d' onk ou amdedeus atributs « %s » ou « %s »."
 
-#: zypp/repo/PackageProvider.cc:368
+#: zypp/repo/PackageProvider.cc:331
 #, fuzzy
 msgid "Signature verification failed"
 msgstr " a fwait berwete a l' enondaedje"
 
 #. TranslatorExplanation %s = package being checked for integrity
-#: zypp/repo/PackageProvider.cc:499
+#: zypp/repo/PackageProvider.cc:462
 #, c-format, boost-format
 msgid ""
 "Package %s seems to be corrupted during transfer. Do you want to retry "
@@ -4266,18 +4267,18 @@ msgstr ""
 "l' rischoyaedje ?"
 
 #. TranslatorExplanation %s = name of the package being processed.
-#: zypp/repo/PackageProvider.cc:523
+#: zypp/repo/PackageProvider.cc:486
 #, c-format, boost-format
 msgid "Failed to provide Package %s. Do you want to retry retrieval?"
 msgstr ""
 "L' ahessaedje do pacaedje %s a fwait berwete. Voloz vs rissayî l' "
 "rischoyaedje?"
 
-#: zypp/repo/PackageProvider.cc:646
+#: zypp/repo/PackageProvider.cc:609
 msgid "applydeltarpm check failed."
 msgstr "li verifiaedje d' applydeltarpm a fwait berwete."
 
-#: zypp/repo/PackageProvider.cc:657
+#: zypp/repo/PackageProvider.cc:620
 msgid "applydeltarpm failed."
 msgstr "applydeltarpm a fwait berwete."
 
@@ -4392,7 +4393,7 @@ msgid ""
 "     %4%"
 msgstr ""
 
-#: zypp/sat/detail/PoolImpl.cc:189
+#: zypp/sat/detail/PoolImpl.cc:193
 msgid "Can not create sat-pool."
 msgstr "Dji n' sai ahiver sat-pool."
 
@@ -4407,99 +4408,100 @@ msgstr "sketer %s e passant houte sacwantes di ses aloyances"
 msgid "generally ignore of some dependencies"
 msgstr "sketer %s e passant houte sacwantes di ses aloyances"
 
-#: zypp/solver/detail/SATResolver.cc:979
+#: zypp/solver/detail/SATResolver.cc:988
 #, c-format, boost-format
 msgid "%s does not belong to a distupgrade repository"
 msgstr ""
 "%s ni fwait nén pårteye d' on depot d' metaedje a djoû del distribucion"
 
-#: zypp/solver/detail/SATResolver.cc:983
+#: zypp/solver/detail/SATResolver.cc:992
 #, c-format, boost-format
 msgid "%s has inferior architecture"
 msgstr "%s a ene årtchitecteure pus basse"
 
-#: zypp/solver/detail/SATResolver.cc:987
+#: zypp/solver/detail/SATResolver.cc:996
 #, c-format, boost-format
 msgid "problem with installed package %s"
 msgstr "problinme avou l' pacaedje d' astalé %s"
 
-#: zypp/solver/detail/SATResolver.cc:990
+#: zypp/solver/detail/SATResolver.cc:999
 msgid "conflicting requests"
 msgstr "dimandes d' afrontmints"
 
-#: zypp/solver/detail/SATResolver.cc:993
+#: zypp/solver/detail/SATResolver.cc:1002
 msgid "some dependency problem"
 msgstr "gn des des problinmes d' aloyances"
 
-#: zypp/solver/detail/SATResolver.cc:996
+#: zypp/solver/detail/SATResolver.cc:1005
 #, c-format, boost-format
 msgid "nothing provides requested %s"
 msgstr "rén n' dene li %s dimandé"
 
-#: zypp/solver/detail/SATResolver.cc:997 zypp/solver/detail/SATResolver.cc:1001
+#: zypp/solver/detail/SATResolver.cc:1006
+#: zypp/solver/detail/SATResolver.cc:1010
 msgid "Have you enabled all requested repositories?"
 msgstr "Avoz metou en alaedje tos les depots dmandés ?"
 
-#: zypp/solver/detail/SATResolver.cc:1000
+#: zypp/solver/detail/SATResolver.cc:1009
 #, c-format, boost-format
 msgid "package %s does not exist"
 msgstr ""
 
-#: zypp/solver/detail/SATResolver.cc:1004
+#: zypp/solver/detail/SATResolver.cc:1013
 #, fuzzy
 msgid "unsupported request"
 msgstr "nén sopoirté"
 
-#: zypp/solver/detail/SATResolver.cc:1007
+#: zypp/solver/detail/SATResolver.cc:1016
 #, fuzzy, c-format, boost-format
 msgid "%s is provided by the system and cannot be erased"
 msgstr "Çou paket n' est nén astalé et n' serè nén astalé."
 
-#: zypp/solver/detail/SATResolver.cc:1011
+#: zypp/solver/detail/SATResolver.cc:1020
 #, c-format, boost-format
 msgid "%s is not installable"
 msgstr "%s n' est nén astalåve"
 
-#: zypp/solver/detail/SATResolver.cc:1016
+#: zypp/solver/detail/SATResolver.cc:1025
 #, c-format, boost-format
 msgid "nothing provides %s needed by %s"
 msgstr "rén n' dene %s k' a dandjî %s"
 
-#: zypp/solver/detail/SATResolver.cc:1021
+#: zypp/solver/detail/SATResolver.cc:1030
 #, c-format, boost-format
 msgid "cannot install both %s and %s"
 msgstr "Dji n' sai nén astaler ambedeus %s eyet %s"
 
-#: zypp/solver/detail/SATResolver.cc:1026
+#: zypp/solver/detail/SATResolver.cc:1035
 #, c-format, boost-format
 msgid "%s conflicts with %s provided by %s"
 msgstr "%s s' afronte avou %s ahessî pa %s"
 
-#: zypp/solver/detail/SATResolver.cc:1031
+#: zypp/solver/detail/SATResolver.cc:1040
 #, c-format, boost-format
 msgid "%s obsoletes %s provided by %s"
 msgstr "%s rind trop vîs %s ahessî pa %s"
 
-#: zypp/solver/detail/SATResolver.cc:1036
+#: zypp/solver/detail/SATResolver.cc:1045
 #, c-format, boost-format
 msgid "installed %s obsoletes %s provided by %s"
 msgstr "astalé %s trop vîs %s dinés pa %s"
 
-#: zypp/solver/detail/SATResolver.cc:1040
+#: zypp/solver/detail/SATResolver.cc:1049
 #, c-format, boost-format
 msgid "solvable %s conflicts with %s provided by itself"
 msgstr "%s afrontmints rezoudåves avou %s ahessî pa lyi minme"
 
-#: zypp/solver/detail/SATResolver.cc:1072
+#: zypp/solver/detail/SATResolver.cc:1081
 #, c-format, boost-format
 msgid "%s requires %s, but this requirement cannot be provided"
 msgstr "%s a dandjî d' %s mins cisse dimande ni sait nén esse ahesseye"
 
-#: zypp/solver/detail/SATResolver.cc:1074
+#: zypp/solver/detail/SATResolver.cc:1083
 msgid "deleted providers: "
 msgstr "ahesseus disfacé : "
 
-#: zypp/solver/detail/SATResolver.cc:1084
+#: zypp/solver/detail/SATResolver.cc:1093
 msgid ""
 "\n"
 "not installable providers: "
@@ -4507,88 +4509,88 @@ msgstr ""
 "\n"
 "ahesseus nén astalåves : "
 
-#: zypp/solver/detail/SATResolver.cc:1086
+#: zypp/solver/detail/SATResolver.cc:1095
 msgid "not installable providers: "
 msgstr "ahesseus nén astalåves : "
 
-#: zypp/solver/detail/SATResolver.cc:1143
+#: zypp/solver/detail/SATResolver.cc:1152
 #, c-format, boost-format
 msgid "remove lock to allow removal of %s"
 msgstr ""
 
-#: zypp/solver/detail/SATResolver.cc:1148
-#: zypp/solver/detail/SATResolver.cc:1184
+#: zypp/solver/detail/SATResolver.cc:1157
+#: zypp/solver/detail/SATResolver.cc:1193
 #, c-format, boost-format
 msgid "do not install %s"
 msgstr "èn nén astaler %s"
 
-#: zypp/solver/detail/SATResolver.cc:1163
-#: zypp/solver/detail/SATResolver.cc:1205
+#: zypp/solver/detail/SATResolver.cc:1172
+#: zypp/solver/detail/SATResolver.cc:1214
 #, c-format, boost-format
 msgid "keep %s"
 msgstr "wårder %s"
 
-#: zypp/solver/detail/SATResolver.cc:1168
+#: zypp/solver/detail/SATResolver.cc:1177
 #, fuzzy, c-format, boost-format
 msgid "remove lock to allow installation of %s"
 msgstr "èn nén espaitchî l' astalaedje di %s"
 
-#: zypp/solver/detail/SATResolver.cc:1219
-#: zypp/solver/detail/SATResolver.cc:1240
+#: zypp/solver/detail/SATResolver.cc:1228
+#: zypp/solver/detail/SATResolver.cc:1249
 msgid "This request will break your system!"
 msgstr "Cisse dimande ci va scheter vosse sistinme !"
 
-#: zypp/solver/detail/SATResolver.cc:1220
-#: zypp/solver/detail/SATResolver.cc:1241
+#: zypp/solver/detail/SATResolver.cc:1229
+#: zypp/solver/detail/SATResolver.cc:1250
 msgid "ignore the warning of a broken system"
 msgstr "passer houte l' adviertixhmint d' on sketé sistinme"
 
-#: zypp/solver/detail/SATResolver.cc:1225
+#: zypp/solver/detail/SATResolver.cc:1234
 #, c-format, boost-format
 msgid "do not ask to install a solvable providing %s"
 msgstr "èn nén dmander d' astaler on rezoudaedje dinant %s"
 
-#: zypp/solver/detail/SATResolver.cc:1247
+#: zypp/solver/detail/SATResolver.cc:1256
 #, c-format, boost-format
 msgid "do not ask to delete all solvables providing %s"
 msgstr "èn nén dmander d' disfacer tos les rezoudaedjes dinant %s"
 
-#: zypp/solver/detail/SATResolver.cc:1260
+#: zypp/solver/detail/SATResolver.cc:1269
 #, c-format, boost-format
 msgid "do not install most recent version of %s"
 msgstr "èn nén astaler l' pus nouve modêye di %s"
 
-#: zypp/solver/detail/SATResolver.cc:1281
+#: zypp/solver/detail/SATResolver.cc:1290
 #, c-format, boost-format
 msgid "keep %s despite the inferior architecture"
 msgstr "wårder %s mågré k' il est d' ene pus basse årtchitecteure"
 
-#: zypp/solver/detail/SATResolver.cc:1286
+#: zypp/solver/detail/SATResolver.cc:1295
 #, c-format, boost-format
 msgid "install %s despite the inferior architecture"
 msgstr "astaler %s mågré k' il est d' ene pus basse årtchitecteure"
 
-#: zypp/solver/detail/SATResolver.cc:1295
+#: zypp/solver/detail/SATResolver.cc:1304
 #, c-format, boost-format
 msgid "keep obsolete %s"
 msgstr "wårder l' forpassé %s"
 
-#: zypp/solver/detail/SATResolver.cc:1300
+#: zypp/solver/detail/SATResolver.cc:1309
 #, c-format, boost-format
 msgid "install %s from excluded repository"
 msgstr "astaler %s a pårti do depot schovté evoye"
 
-#: zypp/solver/detail/SATResolver.cc:1320
+#: zypp/solver/detail/SATResolver.cc:1329
 #, c-format, boost-format
 msgid "downgrade of %s to %s"
 msgstr "dismete a djoû di %s a %s"
 
-#: zypp/solver/detail/SATResolver.cc:1327
+#: zypp/solver/detail/SATResolver.cc:1336
 #, c-format, boost-format
 msgid "architecture change of %s to %s"
 msgstr "candjmint d' årtchitecteure di %s a %s"
 
-#: zypp/solver/detail/SATResolver.cc:1336
+#: zypp/solver/detail/SATResolver.cc:1345
 #, c-format, boost-format
 msgid ""
 "install %s (with vendor change)\n"
@@ -4597,12 +4599,12 @@ msgstr ""
 "astaler %s (avou candjmint d' vindeu)\n"
 "  %s  -->  %s"
 
-#: zypp/solver/detail/SATResolver.cc:1345
+#: zypp/solver/detail/SATResolver.cc:1354
 #, c-format, boost-format
 msgid "replacement of %s with %s"
 msgstr "replaeçmint di %s avou %s"
 
-#: zypp/solver/detail/SATResolver.cc:1356
+#: zypp/solver/detail/SATResolver.cc:1365
 #, c-format, boost-format
 msgid "deinstallation of %s"
 msgstr "disastalaedje di %s"
@@ -4619,118 +4621,121 @@ msgstr ""
 msgid "Executing %posttrans scripts"
 msgstr ""
 
-#: zypp/target/TargetImpl.cc:311
+#: zypp/target/TargetException.cc:28
+msgid "Installation has been aborted as directed."
+msgstr "L' astalaedje a stî abandné come dimandé."
+
+#: zypp/target/TargetImpl.cc:313
 msgid " executed"
 msgstr " enondé"
 
-#: zypp/target/TargetImpl.cc:333
+#: zypp/target/TargetImpl.cc:335
 msgid " execution failed"
 msgstr " a fwait berwete a l' enondaedje"
 
 #. translators: We may find the same script content in files with different names.
 #. Only the first occurence is executed, subsequent ones are skipped. It's a one-line
 #. message for a log file. Preferably start translation with "%s"
-#: zypp/target/TargetImpl.cc:450
+#: zypp/target/TargetImpl.cc:452
 #, c-format, boost-format
 msgid "%s already executed as %s)"
 msgstr ""
 
-#: zypp/target/TargetImpl.cc:460
+#: zypp/target/TargetImpl.cc:462
 msgid " execution skipped while aborting"
 msgstr " a passé l' enondaedje cwand il abandnéve"
 
-#: zypp/target/TargetImpl.cc:515 zypp/target/TargetImpl.cc:535
-#: zypp/target/TargetImpl.cc:563 zypp/target/TargetImpl.cc:600
-#: zypp/target/TargetImpl.cc:608
+#: zypp/target/TargetImpl.cc:517 zypp/target/TargetImpl.cc:537
+#: zypp/target/TargetImpl.cc:565 zypp/target/TargetImpl.cc:602
+#: zypp/target/TargetImpl.cc:610
 msgid "Error sending update message notification."
 msgstr "Åk n' a nén stî come dji meteu a djoû l' notifiaedje do messaedje."
 
-#: zypp/target/TargetImpl.cc:659
+#: zypp/target/TargetImpl.cc:661
 msgid "New update message"
 msgstr "Novea messaedje di metaedje a djoû"
 
-#: zypp/target/TargetImpl.cc:1223 zypp/target/TargetImpl.cc:1277
-#: zypp/target/TargetImpl.cc:1628
-#: zypp/target/TargetImpl.commitFindFileConflicts.cc:166
-msgid "Installation has been aborted as directed."
-msgstr "L' astalaedje a stî abandné come dimandé."
+#: zypp/target/hal/HalContext.cc:25 zypp/target/hal/HalContext.cc:28
+#: zypp/target/hal/HalContext.cc:33
+msgid "Hal Exception"
+msgstr "Foû-rîle di hal"
 
-#: zypp/target/hal/HalContext.cc:24
+#: zypp/target/hal/HalContext.cc:38
 msgid "Sorry, but this version of libzypp was built without HAL support."
 msgstr ""
 "Dji rgrete mins cisse modêye ci di libzypp a stî basteye sins sopoirt po HAL."
 
-#: zypp/target/hal/HalContext.cc:117
+#: zypp/target/hal/HalContext.cc:131
 msgid "HalContext not connected"
 msgstr "HalContext nén raloyî"
 
-#: zypp/target/hal/HalContext.cc:127
+#: zypp/target/hal/HalContext.cc:141
 msgid "HalDrive not initialized"
 msgstr "HalDrive nén inicialijhî"
 
-#: zypp/target/hal/HalContext.cc:137
+#: zypp/target/hal/HalContext.cc:151
 msgid "HalVolume not initialized"
 msgstr "HalVolume nén inicialijhî"
 
-#: zypp/target/hal/HalContext.cc:229
+#: zypp/target/hal/HalContext.cc:243
 msgid "Unable to create dbus connection"
 msgstr "Dji n' sai ahiver l' raloyaedje dbus"
 
-#: zypp/target/hal/HalContext.cc:242
+#: zypp/target/hal/HalContext.cc:256
 msgid "libhal_ctx_new: Can't create libhal context"
 msgstr "libhal_ctx_new : Dji n' sai ahiver l' contecse libhal"
 
-#: zypp/target/hal/HalContext.cc:257
+#: zypp/target/hal/HalContext.cc:271
 msgid "libhal_set_dbus_connection: Can't set dbus connection"
 msgstr "libhal_set_dbus_connection : Dji n' sai defini l' raloyaedje dbus"
 
-#: zypp/target/hal/HalContext.cc:272
+#: zypp/target/hal/HalContext.cc:286
 msgid "Unable to initalize HAL context -- hald not running?"
 msgstr "Dji n' sai inicialijhî l' contecse HAL -- hald nén ovrant ?"
 
-#: zypp/target/hal/HalContext.cc:851
+#: zypp/target/hal/HalContext.cc:865
 msgid "Not a CDROM drive"
 msgstr "Nén on léjheu d' plake CDROM"
 
 #. TranslatorExplanation after semicolon is error message
 #. TranslatorExplanation the colon is followed by an error message
-#: zypp/target/rpm/RpmDb.cc:832 zypp/target/rpm/RpmDb.cc:2093
-#: zypp/target/rpm/RpmDb.cc:2239
+#: zypp/target/rpm/RpmDb.cc:843 zypp/target/rpm/RpmDb.cc:2119
+#: zypp/target/rpm/RpmDb.cc:2265
 msgid "RPM failed: "
 msgstr "RPM a fwait berwete :"
 
 #. Translator: %1% is a gpg public key
-#: zypp/target/rpm/RpmDb.cc:1148
+#: zypp/target/rpm/RpmDb.cc:1174
 #, boost-format
 msgid "Failed to import public key %1%"
 msgstr "L' abagaedje del clé publike %1% a fwait berwete"
 
 #. Translator: %1% is a gpg public key
-#: zypp/target/rpm/RpmDb.cc:1218
+#: zypp/target/rpm/RpmDb.cc:1244
 #, boost-format
 msgid "Failed to remove public key %1%"
 msgstr "Li oistaedje del clé publike %1% a fwait berwete"
 
-#: zypp/target/rpm/RpmDb.cc:1599
+#: zypp/target/rpm/RpmDb.cc:1625
 msgid "Package is not signed!"
 msgstr ""
 
 #. Translator: %s = name of an rpm package. A list of diffs follows
 #. this message.
-#: zypp/target/rpm/RpmDb.cc:1899
+#: zypp/target/rpm/RpmDb.cc:1925
 #, c-format, boost-format
 msgid "Changed configuration files for %s:"
 msgstr "Les fitchîs d' apontiaedje po %s ont stî candjîs :"
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:2074
+#: zypp/target/rpm/RpmDb.cc:2100
 #, c-format, boost-format
 msgid "rpm saved %s as %s, but it was impossible to determine the difference"
 msgstr ""
 "rpm a schapé %s come %s mins ça n' a nén stî possibe di trover l' diferince"
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:2076
+#: zypp/target/rpm/RpmDb.cc:2102
 #, c-format, boost-format
 msgid ""
 "rpm saved %s as %s.\n"
@@ -4740,14 +4745,14 @@ msgstr ""
 "Vos avoz droci les 25 prumirès royes di diferince :\n"
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:2079
+#: zypp/target/rpm/RpmDb.cc:2105
 #, c-format, boost-format
 msgid "rpm created %s as %s, but it was impossible to determine the difference"
 msgstr ""
 "rpm a ahivé %s come %s mins ça n' a nén stî possibe di trover l' diferince"
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:2081
+#: zypp/target/rpm/RpmDb.cc:2107
 #, c-format, boost-format
 msgid ""
 "rpm created %s as %s.\n"
@@ -4758,50 +4763,50 @@ msgstr ""
 
 #. report additional rpm output in finish
 #. TranslatorExplanation Text is followed by a ':'  and the actual output.
-#: zypp/target/rpm/RpmDb.cc:2106 zypp/target/rpm/RpmDb.cc:2252
+#: zypp/target/rpm/RpmDb.cc:2132 zypp/target/rpm/RpmDb.cc:2278
 msgid "Additional rpm output"
 msgstr "Ôtès rexhowes di rpm"
 
-#: zypp/target/rpm/RpmDb.cc:2394
+#: zypp/target/rpm/RpmDb.cc:2420
 #, c-format, boost-format
 msgid "created backup %s"
 msgstr "copeye di såvrité di %s ahivêye"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2415
+#: zypp/target/rpm/RpmDb.cc:2441
 #, fuzzy
 msgid "Signature is OK"
 msgstr "Sinateure di fitchî %s nén trovêye"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2417
+#: zypp/target/rpm/RpmDb.cc:2443
 msgid "Unknown type of signature"
 msgstr ""
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2419
+#: zypp/target/rpm/RpmDb.cc:2445
 #, fuzzy
 msgid "Signature does not verify"
 msgstr "Sinateure di fitchî %s nén trovêye"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2421
+#: zypp/target/rpm/RpmDb.cc:2447
 #, fuzzy
 msgid "Signature is OK, but key is not trusted"
 msgstr "Sinateure di fitchî %s nén trovêye"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2423
+#: zypp/target/rpm/RpmDb.cc:2449
 msgid "Signatures public key is not available"
 msgstr ""
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2425
+#: zypp/target/rpm/RpmDb.cc:2451
 msgid "File does not exist or signature can't be checked"
 msgstr ""
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2427
+#: zypp/target/rpm/RpmDb.cc:2453
 msgid "File is unsigned"
 msgstr ""
 

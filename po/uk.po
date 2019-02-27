@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypp.uk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-08-03 11:09+0200\n"
+"POT-Creation-Date: 2019-02-27 13:31+0100\n"
 "PO-Revision-Date: 2018-04-14 04:38+0000\n"
 "Last-Translator: Andriy Bandura <andriykopanytsia@gmail.com>\n"
 "Language-Team: Ukrainian <https://l10n.opensuse.org/projects/libzypp/master/"
@@ -25,11 +25,6 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: Weblate 2.18\n"
-
-#: zypp/target/hal/HalException.h:46 zypp/target/hal/HalException.h:55
-#: zypp/target/hal/HalException.h:64
-msgid "Hal Exception"
-msgstr "Виняток Hal"
 
 #. dubious: Throw on malformed known types, otherwise log a warning.
 #: zypp/CheckSum.cc:136
@@ -1460,35 +1455,35 @@ msgstr "Не вдалося виконати \"%s\" (%s)."
 msgid "Can't fork (%s)."
 msgstr "Не вдалося відгалузити (%s)."
 
-#: zypp/ExternalProgram.cc:519
+#: zypp/ExternalProgram.cc:522
 #, c-format, boost-format
 msgid "Command exited with status %d."
 msgstr "Команда завершила роботу зі станом %d."
 
-#: zypp/ExternalProgram.cc:539
+#: zypp/ExternalProgram.cc:542
 #, c-format, boost-format
 msgid "Command was killed by signal %d (%s)."
 msgstr "Команду було зупинено за сигналом %d (%s)."
 
-#: zypp/ExternalProgram.cc:544
+#: zypp/ExternalProgram.cc:547
 msgid "Command exited with unknown error."
 msgstr "Команда завершила роботу з невідомою помилкою."
 
 #. TranslatorExplanation first %s is key name, second is keyring name
-#: zypp/KeyRing.cc:536
+#: zypp/KeyRing.cc:599
 #, c-format, boost-format
 msgid "Tried to import not existent key %s into keyring %s"
 msgstr "Спроба імпорту неіснуючого ключа %s у сховище ключів %s"
 
-#: zypp/KeyRing.cc:542 zypp/KeyRing.cc:546
+#: zypp/KeyRing.cc:605 zypp/KeyRing.cc:609
 msgid "Failed to import key."
 msgstr "Не вдалося імпортувати ключ."
 
-#: zypp/KeyRing.cc:553 zypp/KeyRing.cc:557 zypp/KeyRing.cc:561
+#: zypp/KeyRing.cc:616 zypp/KeyRing.cc:620 zypp/KeyRing.cc:624
 msgid "Failed to delete key."
 msgstr "Не вдалось вилучити ключ."
 
-#: zypp/KeyRing.cc:570
+#: zypp/KeyRing.cc:633
 #, c-format, boost-format
 msgid "Signature file %s not found"
 msgstr "Файл підпису \"%s\" не знайдено"
@@ -3958,20 +3953,20 @@ msgstr[2] "(закінчується через %d днів)"
 
 #. translator: %1% is a gpg key ID like 3DBDC284
 #. %2% is a cache directories path
-#: zypp/RepoInfo.cc:513
+#: zypp/RepoInfo.cc:517
 #, boost-format
 msgid "Looking for gpg key ID %1% in cache %2%."
 msgstr ""
 
 #. translator: %1% is a gpg key ID like 3DBDC284
 #. %2% is a repositories name
-#: zypp/RepoInfo.cc:541
+#: zypp/RepoInfo.cc:545
 #, boost-format
 msgid "Looking for gpg key ID %1% in repository %2%."
 msgstr ""
 
 #. translator: %1% is a repositories name
-#: zypp/RepoInfo.cc:565
+#: zypp/RepoInfo.cc:569
 #, boost-format
 msgid "Repository %1% does not define additional 'gpgkey=' URLs."
 msgstr ""
@@ -4108,15 +4103,15 @@ msgstr "Не чинний рядок запиту URL LDAP"
 msgid "Invalid LDAP URL query parameter '%s'"
 msgstr "Не чинний параметр запиту \"%s\" URL LDAP"
 
-#: zypp/Url.cc:300
+#: zypp/Url.cc:301
 msgid "Unable to clone Url object"
 msgstr "Не вдається клонувати об'єкт URL"
 
-#: zypp/Url.cc:313
+#: zypp/Url.cc:314
 msgid "Invalid empty Url object reference"
 msgstr "Не чинне порожнє посилання до об'єкта URL"
 
-#: zypp/Url.cc:326 zypp/Url.cc:340
+#: zypp/Url.cc:327 zypp/Url.cc:341
 msgid "Unable to parse Url components"
 msgstr "Неможливо розібрати компоненти URL"
 
@@ -4240,12 +4235,18 @@ msgid "Invalid regular expression '%s'"
 msgstr "Нечинний формальний вираз «%s»"
 
 #. !\todo add comma to the message for the next release
-#: zypp/media/MediaCIFS.cc:427 zypp/media/MediaCurl.cc:1753
+#: zypp/media/MediaCIFS.cc:427 zypp/media/MediaCurl.cc:1775
 #, c-format, boost-format
 msgid "Authentication required for '%s'"
 msgstr "Потрібна автентифікація для \"%s\""
 
-#: zypp/media/MediaCurl.cc:1121
+#: zypp/media/MediaCurl.cc:1139
+msgid ""
+"Visit the SUSE Customer Center to check whether your registration is valid "
+"and has not expired."
+msgstr ""
+
+#: zypp/media/MediaCurl.cc:1141
 msgid ""
 "Visit the Novell Customer Center to check whether your registration is valid "
 "and has not expired."
@@ -4414,7 +4415,7 @@ msgstr ""
 msgid "Unsupported HTTP authentication method '%s'"
 msgstr "Метод автентифікації HTTP \"%s\", який не підтримується"
 
-#: zypp/misc/CheckAccessDeleted.cc:354
+#: zypp/misc/CheckAccessDeleted.cc:357
 msgid "Please install package 'lsof' first."
 msgstr "Встановіть спершу пакунок 'lsof'."
 
@@ -4428,12 +4429,12 @@ msgstr "Немає потрібного атрибута «%s»."
 msgid "One or both of '%s' or '%s' attributes is required."
 msgstr "Потрібний один або двоє атрибутів «%s» та «'%s»."
 
-#: zypp/repo/PackageProvider.cc:368
+#: zypp/repo/PackageProvider.cc:331
 msgid "Signature verification failed"
 msgstr "Невдала перевірка підпису"
 
 #. TranslatorExplanation %s = package being checked for integrity
-#: zypp/repo/PackageProvider.cc:499
+#: zypp/repo/PackageProvider.cc:462
 #, c-format, boost-format
 msgid ""
 "Package %s seems to be corrupted during transfer. Do you want to retry "
@@ -4442,16 +4443,16 @@ msgstr ""
 "Пакунок %s, здається, пошкоджено під час перенесення. Повторити спробу?"
 
 #. TranslatorExplanation %s = name of the package being processed.
-#: zypp/repo/PackageProvider.cc:523
+#: zypp/repo/PackageProvider.cc:486
 #, c-format, boost-format
 msgid "Failed to provide Package %s. Do you want to retry retrieval?"
 msgstr "Не вдалося надати пакунок %s. Повторити спробу?"
 
-#: zypp/repo/PackageProvider.cc:646
+#: zypp/repo/PackageProvider.cc:609
 msgid "applydeltarpm check failed."
 msgstr "перевірка applydeltarpm зазнала невдачі."
 
-#: zypp/repo/PackageProvider.cc:657
+#: zypp/repo/PackageProvider.cc:620
 msgid "applydeltarpm failed."
 msgstr "застосування дельти rpm зазнало невдачі."
 
@@ -4614,7 +4615,7 @@ msgstr ""
 "з пакунку\n"
 "%4%"
 
-#: zypp/sat/detail/PoolImpl.cc:189
+#: zypp/sat/detail/PoolImpl.cc:193
 msgid "Can not create sat-pool."
 msgstr "Неможливо створити sat-pool."
 
@@ -4628,97 +4629,98 @@ msgstr "зламати %s, ігноруючи деякі залежності"
 msgid "generally ignore of some dependencies"
 msgstr "взагалі нехтувати деякими залежностями"
 
-#: zypp/solver/detail/SATResolver.cc:979
+#: zypp/solver/detail/SATResolver.cc:988
 #, c-format, boost-format
 msgid "%s does not belong to a distupgrade repository"
 msgstr "%s не належить до сховища distupgrade (оновлення дистрибутиву)"
 
-#: zypp/solver/detail/SATResolver.cc:983
+#: zypp/solver/detail/SATResolver.cc:992
 #, c-format, boost-format
 msgid "%s has inferior architecture"
 msgstr "%s має слабшу архітектуру"
 
-#: zypp/solver/detail/SATResolver.cc:987
+#: zypp/solver/detail/SATResolver.cc:996
 #, c-format, boost-format
 msgid "problem with installed package %s"
 msgstr "проблема з встановленим пакунком %s"
 
-#: zypp/solver/detail/SATResolver.cc:990
+#: zypp/solver/detail/SATResolver.cc:999
 msgid "conflicting requests"
 msgstr "конфлікт запитів"
 
-#: zypp/solver/detail/SATResolver.cc:993
+#: zypp/solver/detail/SATResolver.cc:1002
 msgid "some dependency problem"
 msgstr "якась проблема залежностей"
 
-#: zypp/solver/detail/SATResolver.cc:996
+#: zypp/solver/detail/SATResolver.cc:1005
 #, c-format, boost-format
 msgid "nothing provides requested %s"
 msgstr "жоден з пакунків не надає потрібного %s"
 
-#: zypp/solver/detail/SATResolver.cc:997 zypp/solver/detail/SATResolver.cc:1001
+#: zypp/solver/detail/SATResolver.cc:1006
+#: zypp/solver/detail/SATResolver.cc:1010
 msgid "Have you enabled all requested repositories?"
 msgstr "Чи ви увімкнули всі запитані сховища?"
 
-#: zypp/solver/detail/SATResolver.cc:1000
+#: zypp/solver/detail/SATResolver.cc:1009
 #, c-format, boost-format
 msgid "package %s does not exist"
 msgstr "пакунок %s не існує"
 
-#: zypp/solver/detail/SATResolver.cc:1004
+#: zypp/solver/detail/SATResolver.cc:1013
 msgid "unsupported request"
 msgstr "непідтримуваний запит"
 
-#: zypp/solver/detail/SATResolver.cc:1007
+#: zypp/solver/detail/SATResolver.cc:1016
 #, c-format, boost-format
 msgid "%s is provided by the system and cannot be erased"
 msgstr "%s надано системою і його неможливо прибрати"
 
-#: zypp/solver/detail/SATResolver.cc:1011
+#: zypp/solver/detail/SATResolver.cc:1020
 #, c-format, boost-format
 msgid "%s is not installable"
 msgstr "%s не можливо встановити"
 
-#: zypp/solver/detail/SATResolver.cc:1016
+#: zypp/solver/detail/SATResolver.cc:1025
 #, c-format, boost-format
 msgid "nothing provides %s needed by %s"
 msgstr "жоден з пакунків не надає %s, потрібного %s"
 
-#: zypp/solver/detail/SATResolver.cc:1021
+#: zypp/solver/detail/SATResolver.cc:1030
 #, c-format, boost-format
 msgid "cannot install both %s and %s"
 msgstr "неможливо встановити одночасно %s і %s"
 
-#: zypp/solver/detail/SATResolver.cc:1026
+#: zypp/solver/detail/SATResolver.cc:1035
 #, c-format, boost-format
 msgid "%s conflicts with %s provided by %s"
 msgstr "%s конфліктує з %s, що надається %s"
 
-#: zypp/solver/detail/SATResolver.cc:1031
+#: zypp/solver/detail/SATResolver.cc:1040
 #, c-format, boost-format
 msgid "%s obsoletes %s provided by %s"
 msgstr "%s робить застарілим %s, що надається %s"
 
-#: zypp/solver/detail/SATResolver.cc:1036
+#: zypp/solver/detail/SATResolver.cc:1045
 #, c-format, boost-format
 msgid "installed %s obsoletes %s provided by %s"
 msgstr "встановлений пакунок %s робить застарілим %s, який надається %s"
 
-#: zypp/solver/detail/SATResolver.cc:1040
+#: zypp/solver/detail/SATResolver.cc:1049
 #, c-format, boost-format
 msgid "solvable %s conflicts with %s provided by itself"
 msgstr "Розв’язок %s конфліктує з %s, що у ньому міститься"
 
-#: zypp/solver/detail/SATResolver.cc:1072
+#: zypp/solver/detail/SATResolver.cc:1081
 #, c-format, boost-format
 msgid "%s requires %s, but this requirement cannot be provided"
 msgstr "%s потребує %s, але цю залежність неможливо вдовольнити"
 
-#: zypp/solver/detail/SATResolver.cc:1074
+#: zypp/solver/detail/SATResolver.cc:1083
 msgid "deleted providers: "
 msgstr "вилучені залежності: "
 
-#: zypp/solver/detail/SATResolver.cc:1084
+#: zypp/solver/detail/SATResolver.cc:1093
 msgid ""
 "\n"
 "not installable providers: "
@@ -4726,88 +4728,88 @@ msgstr ""
 "\n"
 "залежності без можливості встановлення: "
 
-#: zypp/solver/detail/SATResolver.cc:1086
+#: zypp/solver/detail/SATResolver.cc:1095
 msgid "not installable providers: "
 msgstr "залежності без можливості встановлення: "
 
-#: zypp/solver/detail/SATResolver.cc:1143
+#: zypp/solver/detail/SATResolver.cc:1152
 #, c-format, boost-format
 msgid "remove lock to allow removal of %s"
 msgstr "усунути блокування, щоб дозволити вилучення %s"
 
-#: zypp/solver/detail/SATResolver.cc:1148
-#: zypp/solver/detail/SATResolver.cc:1184
+#: zypp/solver/detail/SATResolver.cc:1157
+#: zypp/solver/detail/SATResolver.cc:1193
 #, c-format, boost-format
 msgid "do not install %s"
 msgstr "не встановлювати %s"
 
-#: zypp/solver/detail/SATResolver.cc:1163
-#: zypp/solver/detail/SATResolver.cc:1205
+#: zypp/solver/detail/SATResolver.cc:1172
+#: zypp/solver/detail/SATResolver.cc:1214
 #, c-format, boost-format
 msgid "keep %s"
 msgstr "залишити %s"
 
-#: zypp/solver/detail/SATResolver.cc:1168
+#: zypp/solver/detail/SATResolver.cc:1177
 #, c-format, boost-format
 msgid "remove lock to allow installation of %s"
 msgstr "усунути блокування, щоб дозволити встановлення %s"
 
-#: zypp/solver/detail/SATResolver.cc:1219
-#: zypp/solver/detail/SATResolver.cc:1240
+#: zypp/solver/detail/SATResolver.cc:1228
+#: zypp/solver/detail/SATResolver.cc:1249
 msgid "This request will break your system!"
 msgstr "Цей запит пошкодить вашу систему!"
 
-#: zypp/solver/detail/SATResolver.cc:1220
-#: zypp/solver/detail/SATResolver.cc:1241
+#: zypp/solver/detail/SATResolver.cc:1229
+#: zypp/solver/detail/SATResolver.cc:1250
 msgid "ignore the warning of a broken system"
 msgstr "ігнорувати попередження про пошкодження системи"
 
-#: zypp/solver/detail/SATResolver.cc:1225
+#: zypp/solver/detail/SATResolver.cc:1234
 #, c-format, boost-format
 msgid "do not ask to install a solvable providing %s"
 msgstr "не питати про встановлення розв’язувача, що надає %s"
 
-#: zypp/solver/detail/SATResolver.cc:1247
+#: zypp/solver/detail/SATResolver.cc:1256
 #, c-format, boost-format
 msgid "do not ask to delete all solvables providing %s"
 msgstr "не питати про вилучення всіх розв’язувачів, що надаються %s"
 
-#: zypp/solver/detail/SATResolver.cc:1260
+#: zypp/solver/detail/SATResolver.cc:1269
 #, c-format, boost-format
 msgid "do not install most recent version of %s"
 msgstr "не встановлювати ранішу версію %s"
 
-#: zypp/solver/detail/SATResolver.cc:1281
+#: zypp/solver/detail/SATResolver.cc:1290
 #, c-format, boost-format
 msgid "keep %s despite the inferior architecture"
 msgstr "Залишити %s, незважаючи на слабшу архітектуру"
 
-#: zypp/solver/detail/SATResolver.cc:1286
+#: zypp/solver/detail/SATResolver.cc:1295
 #, c-format, boost-format
 msgid "install %s despite the inferior architecture"
 msgstr "Встановити %s, незважаючи на те, що це змінить архітектуру"
 
-#: zypp/solver/detail/SATResolver.cc:1295
+#: zypp/solver/detail/SATResolver.cc:1304
 #, c-format, boost-format
 msgid "keep obsolete %s"
 msgstr "Залишити застарілі %s"
 
-#: zypp/solver/detail/SATResolver.cc:1300
+#: zypp/solver/detail/SATResolver.cc:1309
 #, c-format, boost-format
 msgid "install %s from excluded repository"
 msgstr "Встановити %s з невключеного сховища"
 
-#: zypp/solver/detail/SATResolver.cc:1320
+#: zypp/solver/detail/SATResolver.cc:1329
 #, c-format, boost-format
 msgid "downgrade of %s to %s"
 msgstr "повернення замість %s %s"
 
-#: zypp/solver/detail/SATResolver.cc:1327
+#: zypp/solver/detail/SATResolver.cc:1336
 #, c-format, boost-format
 msgid "architecture change of %s to %s"
 msgstr "зміна архітектури з %s на %s"
 
-#: zypp/solver/detail/SATResolver.cc:1336
+#: zypp/solver/detail/SATResolver.cc:1345
 #, c-format, boost-format
 msgid ""
 "install %s (with vendor change)\n"
@@ -4816,12 +4818,12 @@ msgstr ""
 "встановити %s (зі зміною виробника)\n"
 "  %s  -->  %s"
 
-#: zypp/solver/detail/SATResolver.cc:1345
+#: zypp/solver/detail/SATResolver.cc:1354
 #, c-format, boost-format
 msgid "replacement of %s with %s"
 msgstr "заміна %s на %s"
 
-#: zypp/solver/detail/SATResolver.cc:1356
+#: zypp/solver/detail/SATResolver.cc:1365
 #, c-format, boost-format
 msgid "deinstallation of %s"
 msgstr "вилучення %s"
@@ -4838,116 +4840,119 @@ msgstr "Виконання сценарію %%posttrans '%1%'"
 msgid "Executing %posttrans scripts"
 msgstr "Виконання сценаріїв %posttrans"
 
-#: zypp/target/TargetImpl.cc:311
+#: zypp/target/TargetException.cc:28
+msgid "Installation has been aborted as directed."
+msgstr "Встановлення перервано відповідно до вказівки."
+
+#: zypp/target/TargetImpl.cc:313
 msgid " executed"
 msgstr " виконано"
 
-#: zypp/target/TargetImpl.cc:333
+#: zypp/target/TargetImpl.cc:335
 msgid " execution failed"
 msgstr " виконання зазнало невдачі"
 
 #. translators: We may find the same script content in files with different names.
 #. Only the first occurence is executed, subsequent ones are skipped. It's a one-line
 #. message for a log file. Preferably start translation with "%s"
-#: zypp/target/TargetImpl.cc:450
+#: zypp/target/TargetImpl.cc:452
 #, c-format, boost-format
 msgid "%s already executed as %s)"
 msgstr "%s вже виконаний як %s)"
 
-#: zypp/target/TargetImpl.cc:460
+#: zypp/target/TargetImpl.cc:462
 msgid " execution skipped while aborting"
 msgstr " виконання пропущено під час переривання"
 
-#: zypp/target/TargetImpl.cc:515 zypp/target/TargetImpl.cc:535
-#: zypp/target/TargetImpl.cc:563 zypp/target/TargetImpl.cc:600
-#: zypp/target/TargetImpl.cc:608
+#: zypp/target/TargetImpl.cc:517 zypp/target/TargetImpl.cc:537
+#: zypp/target/TargetImpl.cc:565 zypp/target/TargetImpl.cc:602
+#: zypp/target/TargetImpl.cc:610
 msgid "Error sending update message notification."
 msgstr "Помилка відсилання сповіщення про оновлення."
 
-#: zypp/target/TargetImpl.cc:659
+#: zypp/target/TargetImpl.cc:661
 msgid "New update message"
 msgstr "Нове повідомлення про оновлення"
 
-#: zypp/target/TargetImpl.cc:1223 zypp/target/TargetImpl.cc:1277
-#: zypp/target/TargetImpl.cc:1628
-#: zypp/target/TargetImpl.commitFindFileConflicts.cc:166
-msgid "Installation has been aborted as directed."
-msgstr "Встановлення перервано відповідно до вказівки."
+#: zypp/target/hal/HalContext.cc:25 zypp/target/hal/HalContext.cc:28
+#: zypp/target/hal/HalContext.cc:33
+msgid "Hal Exception"
+msgstr "Виняток Hal"
 
-#: zypp/target/hal/HalContext.cc:24
+#: zypp/target/hal/HalContext.cc:38
 msgid "Sorry, but this version of libzypp was built without HAL support."
 msgstr "Вибачте, цю версію libzypp було складено без підтримки HAL."
 
-#: zypp/target/hal/HalContext.cc:117
+#: zypp/target/hal/HalContext.cc:131
 msgid "HalContext not connected"
 msgstr "HalContext не приєднано"
 
-#: zypp/target/hal/HalContext.cc:127
+#: zypp/target/hal/HalContext.cc:141
 msgid "HalDrive not initialized"
 msgstr "HalDrive не започатковано"
 
-#: zypp/target/hal/HalContext.cc:137
+#: zypp/target/hal/HalContext.cc:151
 msgid "HalVolume not initialized"
 msgstr "HalVolume не започатковано"
 
-#: zypp/target/hal/HalContext.cc:229
+#: zypp/target/hal/HalContext.cc:243
 msgid "Unable to create dbus connection"
 msgstr "Неможливо створити з'єднання з dbus"
 
-#: zypp/target/hal/HalContext.cc:242
+#: zypp/target/hal/HalContext.cc:256
 msgid "libhal_ctx_new: Can't create libhal context"
 msgstr "libhal_ctx_new: неможливо створити контекст libhal"
 
-#: zypp/target/hal/HalContext.cc:257
+#: zypp/target/hal/HalContext.cc:271
 msgid "libhal_set_dbus_connection: Can't set dbus connection"
 msgstr "libhal_set_dbus_connection: неможливо встановити з'єднання з dbus"
 
-#: zypp/target/hal/HalContext.cc:272
+#: zypp/target/hal/HalContext.cc:286
 msgid "Unable to initalize HAL context -- hald not running?"
 msgstr "Неможливо започаткувати контекст HAL context -- не запущено hald?"
 
-#: zypp/target/hal/HalContext.cc:851
+#: zypp/target/hal/HalContext.cc:865
 msgid "Not a CDROM drive"
 msgstr "Не привід CD-ROM"
 
 #. TranslatorExplanation after semicolon is error message
 #. TranslatorExplanation the colon is followed by an error message
-#: zypp/target/rpm/RpmDb.cc:832 zypp/target/rpm/RpmDb.cc:2093
-#: zypp/target/rpm/RpmDb.cc:2239
+#: zypp/target/rpm/RpmDb.cc:843 zypp/target/rpm/RpmDb.cc:2119
+#: zypp/target/rpm/RpmDb.cc:2265
 msgid "RPM failed: "
 msgstr "Помилка RPM: "
 
 #. Translator: %1% is a gpg public key
-#: zypp/target/rpm/RpmDb.cc:1148
+#: zypp/target/rpm/RpmDb.cc:1174
 #, boost-format
 msgid "Failed to import public key %1%"
 msgstr "Не вдалося імпортувати відкритий ключ %1%"
 
 #. Translator: %1% is a gpg public key
-#: zypp/target/rpm/RpmDb.cc:1218
+#: zypp/target/rpm/RpmDb.cc:1244
 #, boost-format
 msgid "Failed to remove public key %1%"
 msgstr "Не вдалося вилучити відкрити ключ %1%"
 
-#: zypp/target/rpm/RpmDb.cc:1599
+#: zypp/target/rpm/RpmDb.cc:1625
 msgid "Package is not signed!"
 msgstr "Пакунок не підписаний!"
 
 #. Translator: %s = name of an rpm package. A list of diffs follows
 #. this message.
-#: zypp/target/rpm/RpmDb.cc:1899
+#: zypp/target/rpm/RpmDb.cc:1925
 #, c-format, boost-format
 msgid "Changed configuration files for %s:"
 msgstr "Змінено конфігураційні файли для %s:"
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:2074
+#: zypp/target/rpm/RpmDb.cc:2100
 #, c-format, boost-format
 msgid "rpm saved %s as %s, but it was impossible to determine the difference"
 msgstr "rpm збережено %s як %s, але було неможливо виявити різницю"
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:2076
+#: zypp/target/rpm/RpmDb.cc:2102
 #, c-format, boost-format
 msgid ""
 "rpm saved %s as %s.\n"
@@ -4957,13 +4962,13 @@ msgstr ""
 "Ось перші 25 рядків розбіжностей:\n"
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:2079
+#: zypp/target/rpm/RpmDb.cc:2105
 #, c-format, boost-format
 msgid "rpm created %s as %s, but it was impossible to determine the difference"
 msgstr "rpm створила %s як %s, але було неможливо виявити різницю"
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:2081
+#: zypp/target/rpm/RpmDb.cc:2107
 #, c-format, boost-format
 msgid ""
 "rpm created %s as %s.\n"
@@ -4974,47 +4979,47 @@ msgstr ""
 
 #. report additional rpm output in finish
 #. TranslatorExplanation Text is followed by a ':'  and the actual output.
-#: zypp/target/rpm/RpmDb.cc:2106 zypp/target/rpm/RpmDb.cc:2252
+#: zypp/target/rpm/RpmDb.cc:2132 zypp/target/rpm/RpmDb.cc:2278
 msgid "Additional rpm output"
 msgstr "Додатковий вивід rpm"
 
-#: zypp/target/rpm/RpmDb.cc:2394
+#: zypp/target/rpm/RpmDb.cc:2420
 #, c-format, boost-format
 msgid "created backup %s"
 msgstr "створено резервну копію %s"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2415
+#: zypp/target/rpm/RpmDb.cc:2441
 msgid "Signature is OK"
 msgstr "Із підписом усе гаразд"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2417
+#: zypp/target/rpm/RpmDb.cc:2443
 msgid "Unknown type of signature"
 msgstr "Невідомий тип підпису"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2419
+#: zypp/target/rpm/RpmDb.cc:2445
 msgid "Signature does not verify"
 msgstr "Підпис не перевіряється"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2421
+#: zypp/target/rpm/RpmDb.cc:2447
 msgid "Signature is OK, but key is not trusted"
 msgstr "Із підписом усе гаразд, але ключ - ненадійний"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2423
+#: zypp/target/rpm/RpmDb.cc:2449
 msgid "Signatures public key is not available"
 msgstr "Публічний ключ підписів - недоступний"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2425
+#: zypp/target/rpm/RpmDb.cc:2451
 msgid "File does not exist or signature can't be checked"
 msgstr "Файл не існує чи підпис не можна перевірити"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2427
+#: zypp/target/rpm/RpmDb.cc:2453
 msgid "File is unsigned"
 msgstr "Файл не підписаний"
 
