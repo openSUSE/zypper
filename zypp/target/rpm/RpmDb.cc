@@ -1030,9 +1030,10 @@ void RpmDb::syncTrustedKeys( SyncTrustedKeyBits mode_r )
       if ( ! missingKeys.empty() )
         callback::SendReport<KeyRingReport>()->reportNonImportedKeys(missingKeys);
     }
-    catch (Exception &e)
+    catch ( const Exception & excpt )
     {
-      ERR << "Could not import keys into zypp keyring" << endl;
+      ZYPP_CAUGHT( excpt );
+      ERR << "Could not import keys into zypp keyring: " << endl;
     }
   }
 

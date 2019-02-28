@@ -66,6 +66,30 @@ namespace zypp
       }
     }
 
+    /** \relates gpgme_import_result_t Stream output. */
+    std::ostream & operator<<( std::ostream & str, const _gpgme_op_import_result & obj )
+    {
+      str << "gpgme_op_import_result {" << endl;
+      str << "  "  << obj.considered		<< " The total number of considered keys." << endl;
+      str << "  "  << obj.no_user_id		<< " The number of keys without user ID." << endl;
+      str << "  "  << obj.imported		<< " The total number of imported keys." << endl;
+      str << "  "  << obj.imported_rsa		<< " imported RSA keys." << endl;
+      str << "  "  << obj.unchanged		<< " unchanged keys." << endl;
+      str << "  "  << obj.new_user_ids		<< " new user IDs." << endl;
+      str << "  "  << obj.new_sub_keys		<< " new sub keys." << endl;
+      str << "  "  << obj.new_signatures	<< " new signatures." << endl;
+      str << "  "  << obj.new_revocations	<< " new revocations." << endl;
+      str << "  "  << obj.secret_read		<< " secret keys read." << endl;
+      str << "  "  << obj.secret_imported	<< " imported secret keys." << endl;
+      str << "  "  << obj.secret_unchanged	<< " unchanged secret keys." << endl;
+      str << "  "  << obj.not_imported		<< " keys not imported." << endl;
+      for ( gpgme_import_status_t p = obj.imports; p; p = p->next )
+      {
+	str << "  - "  << p->fpr << ": " << p->result << endl;
+      }
+      // In V.1.11: str << "  "  << obj.skipped_v3_keys	<< " skipped v3 keys." << endl;
+      return str << "}";
+    }
   } // namespace
   ///////////////////////////////////////////////////////////////////
 
@@ -387,7 +411,21 @@ bool KeyManagerCtx::importKey(const Pathname &keyfile)
   err = gpgme_op_import(_pimpl->_ctx, data.get());
   if (err) {
     ERR << "Error importing key: "<< err << endl;
+    return false;
   }
+
+  // Work around bsc#1127220 [libgpgme] no error upon incomplete import due to signal received.
+  // We need this error, otherwise RpmDb will report the missing keys as 'probably v3'.
+  if ( gpgme_import_result_t res = gpgme_op_import_result(_pimpl->_ctx) )
+  {
+    if ( ! res->considered && PathInfo(keyfile).size() )
+    {
+      DBG << *res << endl;
+      ERR << "Error importing key: No keys considered (bsc#1127220, [libgpgme] signal received?)" << endl;
+      return false;
+    }
+  }
+
   return (err == GPG_ERR_NO_ERROR);
 }
 
