@@ -13,6 +13,7 @@ INCLUDE_DIRECTORIES(${ZYPPER_SOURCE_DIR}/src)
 
 SET (zypper_HEADERS
   Zypper.h
+  Guardians.h
   main.h
   Command.h
   Config.h
