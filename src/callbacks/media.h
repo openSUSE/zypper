@@ -51,7 +51,31 @@ namespace ZmartRecipients
       }
   };
 
-  struct MediaChangeReportReceiver : public callback::ReceiveReport<MediaChangeReport>
+  ///////////////////////////////////////////////////////////////////
+  /// \brief Legacy or feature - Base class protecting a callback receiver from exiting on the 1st CTRL-C
+  ///
+  /// Media callbacks pass down the exit request to abort the download and
+  /// handle the user response. This base class handles the Zypper::SigExitGuard
+  /// to accompoish this.
+  ///
+  /// \note Derived classes overriding reportbegin/reportend must explicitly call
+  ///       the method in this instance.
+  ///
+  template <typename ReportT>
+  struct ExitGuardedReceiveReport : public callback::ReceiveReport<ReportT>
+  {
+    void reportbegin() override
+    { _g = Zypper::sigExitGuard(); }
+
+    void reportend() override
+    { _g.reset(); }
+
+   private:
+     Zypper::SigExitGuard _g;
+  };
+
+
+  struct MediaChangeReportReceiver : public ExitGuardedReceiveReport<MediaChangeReport>
   {
     virtual MediaChangeReport::Action
     requestMedia(Url & url,
@@ -66,8 +90,7 @@ namespace ZmartRecipients
   };
 
   // progress for downloading a file
-  struct DownloadProgressReportReceiver
-    : public callback::ReceiveReport<media::DownloadProgressReport>
+  struct DownloadProgressReportReceiver : public ExitGuardedReceiveReport<media::DownloadProgressReport>
   {
     DownloadProgressReportReceiver()
       : _be_quiet(false)
@@ -159,7 +182,7 @@ namespace ZmartRecipients
   };
 
 
-  struct AuthenticationReportReceiver : public callback::ReceiveReport<media::AuthenticationReport>
+  struct AuthenticationReportReceiver : public ExitGuardedReceiveReport<media::AuthenticationReport>
   {
     virtual bool prompt(const Url & url,
                         const std::string & description,
