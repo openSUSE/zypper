@@ -28,6 +28,7 @@
 #include "Command.h"
 #include "utils/getopt.h"
 #include "output/Out.h"
+#include "Guardians.h"
 
 #include "commands/basecommand.h"
 
@@ -177,9 +178,23 @@ public:
   void requestExit( bool do_exit = true )	{ _exit_requested = do_exit ? 1 : 0; }
   void requestImmediateExit()			{ _exit_requested = 2; }
 
+private:
+  struct SigExitTreasureT {
+    friend std::ostream & operator<<( std::ostream & str, SigExitTreasureT obj )
+    { return str << "SigExitTreasure"; }
+  };
+public:
+  typedef Guardians<SigExitTreasureT> SigExitGuardians;
+  typedef SigExitGuardians::Guard     SigExitGuard;
+
+  /** Get a scoped guard preventing \ref immediateExitCheck from exiting on the 1st CTRL-C.
+   * \note Don't try to get it via \c Zypper::instance(). It calls \ref immediateExitCheck.
+   */
+  static SigExitGuard sigExitGuard()		{ return SigExitGuardians::guard(); }
+
   /** Pending SigINT? Check at some frequently called place to avoid exiting from within the signal handler. */
   void immediateExitCheck()
-  { if ( _exit_requested > 1 ) immediateExit( /* not called from within a sighandler */false ); }
+  { if ( _exit_requested > 1 || ( _exit_requested == 1 && SigExitGuardians::expired() ) ) immediateExit( /* not called from within a sighandler */false ); }
 
   /** E.g. from SIGNINT handler (main.cc) */
   void immediateExit( bool fromWithinSigHandler_r = true )
@@ -189,7 +204,7 @@ public:
       return;	// no nested calls to Zypper::immediateExit
     sigExitOnce = false;
 
-    WAR << "Immediate Exit requested (" << fromWithinSigHandler_r << ")." << endl;
+    WAR << "Immediate Exit requested (" << fromWithinSigHandler_r << "," << SigExitGuardians() << ")." << endl;
     cleanup();
     if ( fromWithinSigHandler_r )
     {
