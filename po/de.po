@@ -17,10 +17,10 @@ msgstr ""
 "Project-Id-Version: zypper.de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-01-31 13:26+0100\n"
-"PO-Revision-Date: 2019-01-28 17:27+0000\n"
-"Last-Translator: Franziska Weinberger <f.weinberger@gemino.de>\n"
-"Language-Team: German <https://l10n.opensuse.org/projects/zypper/master/de/"
-">\n"
+"PO-Revision-Date: 2019-03-03 21:03+0000\n"
+"Last-Translator: Sakuhl Lakuhl <2012gdwu@web.de>\n"
+"Language-Team: German <https://l10n.opensuse.org/projects/zypper/master/de/>"
+"\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -119,10 +119,10 @@ msgstr "Der GPG-Signierungsschlüssel für Datei '%1%' ist abgelaufen."
 msgid "The gpg key signing file '%1%' will expire in %2% day."
 msgid_plural "The gpg key signing file '%1%' will expire in %2% days."
 msgstr[0] ""
-"Der GPG-Schlüssel, welcher die Datei '%1%' signiert hat wird in %2% Tag "
+"Der GPG-Schlüssel, welcher die Datei '%1%' signiert hat, wird in einem Tag "
 "ablaufen."
 msgstr[1] ""
-"Der GPG-Schlüssel, welcher die Datei '%1%' signiert hat wird in %2% Tagen "
+"Der GPG-Schlüssel, welcher die Datei '%1%' signiert hat, wird in %2% Tagen "
 "ablaufen."
 
 #: src/callbacks/keyring.h:142
@@ -171,8 +171,8 @@ msgstr ""
 msgid ""
 "Accepting file '%s' from repository '%s' signed with an unknown key '%s'."
 msgstr ""
-"Datei '%s' aus Repository '%s', die mit einem unbekannten Schlüssel '%s' "
-"signiert wurde, wird akzeptiert."
+"Akzeptiere Datei '%s' aus Repository '%s', die mit einem unbekannten "
+"Schlüssel '%s' signiert wurde."
 
 #. translator: %1% is a file name, %2% is a gpg key ID
 #: src/callbacks/keyring.h:216
@@ -275,8 +275,8 @@ msgstr "Fehlgeschlagene Signaturüberprüfung für Datei '%s' wird ignoriert!"
 msgid ""
 "Ignoring failed signature verification for file '%s' from repository '%s'!"
 msgstr ""
-"Fehlgeschlagene Signaturüberprüfung für Datei '%s' aus Repository '%s' wird "
-"ignoriert!"
+"Ignoriere fehlgeschlagene Signaturüberprüfung für Datei '%s' aus Repository "
+"'%s'!"
 
 #: src/callbacks/keyring.h:382
 msgid "Double-check this is not caused by some malicious changes in the file!"
@@ -342,7 +342,7 @@ msgstr ""
 "[%2%]\n"
 "\n"
 "  erwartet %3%\n"
-"  aber erhalten  %4%\n"
+"  erhalten %4%\n"
 
 #: src/callbacks/keyring.h:509
 msgid ""
@@ -535,11 +535,11 @@ msgstr "Dies ist ein Alias für '%s'."
 
 #: src/commands/commandhelpformatter.h:107
 msgid "Examples:"
-msgstr ""
+msgstr "Beispiele:"
 
 #: src/commands/commandhelpformatter.h:110
 msgid "Arguments:"
-msgstr ""
+msgstr "Argumente:"
 
 #: src/commands/commandhelpformatter.h:123 src/utils/flags/zyppflags.cc:562
 msgid "Command options:"
