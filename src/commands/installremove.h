@@ -21,7 +21,7 @@ public:
   using ZypperBaseCommand::ZypperBaseCommand;
 protected:
   void fillSrOpts (SolverRequester::Options &sropts_r ) const;
-  int handleFeedback (Zypper &zypper, const SolverRequester &sr_r) const;
+  void handleFeedback(Zypper &zypper, const SolverRequester &sr_r, bool failOnCapNotFound = true ) const;
 
   std::set<zypp::ResKind> _kinds;
 

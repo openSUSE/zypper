@@ -24,7 +24,7 @@ void InstallRemoveBase::fillSrOpts(SolverRequester::Options &sropts_r ) const
   sropts_r.force_by_name = _selectByName;
 }
 
-int InstallRemoveBase::handleFeedback(Zypper &zypper, const SolverRequester &sr_r ) const
+void InstallRemoveBase::handleFeedback(Zypper &zypper, const SolverRequester &sr_r, bool failOnCapNotFound ) const
 {
   sr_r.printFeedback( zypper.out() );
 
@@ -32,9 +32,17 @@ int InstallRemoveBase::handleFeedback(Zypper &zypper, const SolverRequester &sr_
     && ( sr_r.hasFeedback( SolverRequester::Feedback::NOT_FOUND_NAME )
       || sr_r.hasFeedback( SolverRequester::Feedback::NOT_FOUND_CAP ) ) )
   {
-    return ( ZYPPER_EXIT_INF_CAP_NOT_FOUND );
+    zypper.setExitCode( ZYPPER_EXIT_INF_CAP_NOT_FOUND );
+
+    //bsc#1127608 Only return with error if zypper is executed non interactively
+    //This was missed when migrating the install/remove commands,
+    //see commit f2e0f8638a32225ff084458a536eedc0f08ee549
+    if ( zypper.config().non_interactive && failOnCapNotFound )
+      ZYPP_THROW( ExitRequestException("name or capability not found") );
+
+    return;
   }
-  return ZYPPER_EXIT_OK;
+  zypper.setExitCode( ZYPPER_EXIT_OK );
 }
 
 
@@ -141,7 +149,7 @@ int RemoveCmd::execute(Zypper &zypper, const std::vector<std::string> &positiona
 
   // bsc#980263: relax if removing packages
   // only store exit code but continue with solving
-  zypper.setExitCode( handleFeedback( zypper, sr ) );
+  handleFeedback( zypper, sr, false );
 
   Summary::ViewOptions opts = Summary::DEFAULT;
   if ( _details )
@@ -274,9 +282,7 @@ int InstallCmd::execute( Zypper &zypper, const std::vector<std::string> &positio
   PackageArgs rpm_args( rpms_files_caps );
   sr.install( rpm_args );
 
-  code = handleFeedback( zypper, sr );
-  if ( code != ZYPPER_EXIT_OK )
-    return code;
+  handleFeedback( zypper, sr );
 
   Summary::ViewOptions opts = Summary::DEFAULT;
   if ( _details )
