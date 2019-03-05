@@ -88,17 +88,23 @@ int AddRepoCmd::execute(Zypper &zypper, const std::vector<std::string> &position
         report_too_few_arguments( zypper.out(), help() );
         return( ZYPPER_EXIT_ERR_INVALID_ARGS );
     case 1:
-      if( !isRepoFile( positionalArgs_r[0] ) )
-      {
-        zypper.out().error(_("If only one argument is used, it must be a URI pointing to a .repo file."));
-        ERR << "Not a repo file." << endl;
-        zypper.out().info( help() );
-        return ( ZYPPER_EXIT_ERR_INVALID_ARGS );
-      }
-      else
+      if( isRepoFile( positionalArgs_r[0] ) )
       {
         add_repo_from_file( zypper, positionalArgs_r[0], _commonProperties, _repoProperties, _disableCheck );
         break;
+      }
+      else if ( positionalArgs_r[0].find("obs") == 0 ) {
+        bool withFilename = true;
+        Url url = make_obs_url( positionalArgs_r[0], zypper.config().obs_baseUrl, zypper.config().obs_platform, withFilename );
+        add_repo_from_file( zypper, repo::RepoVariablesUrlReplacer()(url).asCompleteString(), _commonProperties, _repoProperties, _disableCheck );
+        break;
+      }
+      else
+      {
+        zypper.out().error(_("If only one argument is used, it must be a URI pointing to a .repo file or a OBS repository."));
+        ERR << "Not a repo file." << endl;
+        zypper.out().info( help() );
+        return ( ZYPPER_EXIT_ERR_INVALID_ARGS );
       }
     case 2:
       Url url;

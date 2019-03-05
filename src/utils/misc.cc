@@ -394,7 +394,7 @@ namespace
 } // namespace
 ///////////////////////////////////////////////////////////////////
 
-Url make_obs_url( const std::string & obsuri, const Url & base_url, const std::string & default_platform )
+Url make_obs_url( const std::string & obsuri, const Url & base_url, const std::string & default_platform , bool guessRepoFilename )
 {
   // obs-server ==> < base_url, default_platform >
   static std::map<std::string, std::pair<Url,std::string>> wellKnownServers({
@@ -475,6 +475,9 @@ Url make_obs_url( const std::string & obsuri, const Url & base_url, const std::s
     }
     else
       path /= platform;
+
+    if ( guessRepoFilename )
+      path /= what[1] + ".repo";
 
     ret.setPathName( path.asString() );
 
