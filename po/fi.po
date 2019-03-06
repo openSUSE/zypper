@@ -20,7 +20,7 @@ msgstr ""
 "Project-Id-Version: zypp.fi\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-08-03 11:09+0200\n"
-"PO-Revision-Date: 2019-03-04 13:04+0000\n"
+"PO-Revision-Date: 2019-03-06 18:33+0000\n"
 "Last-Translator: Tommi Nieminen <software@legisign.org>\n"
 "Language-Team: Finnish <https://l10n.opensuse.org/projects/libzypp/master/fi/"
 ">\n"
@@ -445,7 +445,7 @@ msgstr "Ranska"
 #. :FRA:250:
 #: zypp/CountryCode.cc:231
 msgid "Metropolitan France"
-msgstr "Metropolitan France"
+msgstr "Ranskan emämaa"
 
 # GH
 #. :FXX:249:
