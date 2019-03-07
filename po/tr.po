@@ -9,10 +9,10 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-02-25 14:33+0100\n"
-"PO-Revision-Date: 2019-02-18 15:25+0000\n"
+"PO-Revision-Date: 2019-03-12 11:54+0000\n"
 "Last-Translator: Murat Servan Kahraman <muratservan@outlook.com>\n"
-"Language-Team: Turkish <https://l10n.opensuse.org/projects/zypper/master/tr/"
-">\n"
+"Language-Team: Turkish <https://l10n.opensuse.org/projects/zypper/master/tr/>"
+"\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -78,19 +78,19 @@ msgstr "Anahtar Adı:"
 
 #: src/callbacks/keyring.h:82
 msgid "Key Fingerprint:"
-msgstr ""
+msgstr "Anahtar Parmak İzi:"
 
 #: src/callbacks/keyring.h:83
 msgid "Key Created:"
-msgstr ""
+msgstr "Anahtar Oluşturma Tarihi:"
 
 #: src/callbacks/keyring.h:84
 msgid "Key Expires:"
-msgstr ""
+msgstr "Anahtar Son Geçerlilik:"
 
 #: src/callbacks/keyring.h:86
 msgid "Subkey:"
-msgstr ""
+msgstr "Alt Anahtar:"
 
 #: src/callbacks/keyring.h:87
 msgid "Rpm Name:"
@@ -6390,7 +6390,7 @@ msgstr ""
 
 #: src/utils/Augeas.cc:522
 msgid "Could not save the config file."
-msgstr ""
+msgstr "Yapılandırma dosyası kaydedilemedi."
 
 #: src/utils/Augeas.cc:564
 #, boost-format
@@ -6399,7 +6399,7 @@ msgstr ""
 
 #: src/utils/Augeas.cc:580
 msgid "Could not load the config files."
-msgstr ""
+msgstr "Yapılandırma dosyaları yüklenemedi."
 
 #: src/utils/Augeas.cc:606
 #, boost-format
@@ -6414,7 +6414,7 @@ msgstr ""
 
 #: src/utils/Augeas.cc:658
 msgid "No config file is in use."
-msgstr ""
+msgstr "Kullanımda olan yapılandırma dosyası yok."
 
 #: src/utils/flags/exceptions.cc:22
 #, boost-format
@@ -6424,7 +6424,7 @@ msgstr ""
 #: src/utils/flags/exceptions.cc:28
 #, boost-format
 msgid "The flag %1% is not compatible with argument %2% (%3%)."
-msgstr ""
+msgstr "%1% bayrağı %2% argümanıyla uyumlu değil (%3%)."
 
 #: src/utils/flags/exceptions.cc:34
 #, fuzzy, boost-format
@@ -6563,10 +6563,10 @@ msgstr[1] "paketler"
 
 # /usr/lib/YaST2/timezone_raw.ycp:482
 #: src/utils/misc.cc:93
-#, fuzzy
 msgid "pattern"
 msgid_plural "patterns"
-msgstr[0] "kalıp: "
+msgstr[0] "örüntü"
+msgstr[1] "örüntüler"
 
 #: src/utils/misc.cc:95
 #, fuzzy
@@ -6621,9 +6621,8 @@ msgstr "gerekli"
 # clients/lvm_config.ycp:311
 #. translator: patch status
 #: src/utils/misc.cc:115
-#, fuzzy
 msgid "applied"
-msgstr "Uygulandı"
+msgstr "uygulandı"
 
 # include/ui/summary.ycp:56
 #. translator: patch status
