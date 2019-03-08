@@ -6,16 +6,16 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-02-25 14:33+0100\n"
-"PO-Revision-Date: 2018-12-14 07:01+0000\n"
+"PO-Revision-Date: 2019-03-09 13:52+0000\n"
 "Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
-"Language-Team: Slovak <https://l10n.opensuse.org/projects/zypper/master/sk/"
-">\n"
+"Language-Team: Slovak <https://l10n.opensuse.org/projects/zypper/master/sk/>"
+"\n"
 "Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Weblate 2.18\n"
+"X-Generator: Weblate 3.3\n"
 
 #: src/SolverRequester.h:52
 #, boost-format
@@ -509,11 +509,11 @@ msgstr "Toto je alias pre '%s'."
 
 #: src/commands/commandhelpformatter.h:107
 msgid "Examples:"
-msgstr ""
+msgstr "Príklady:"
 
 #: src/commands/commandhelpformatter.h:110
 msgid "Arguments:"
-msgstr ""
+msgstr "Argumenty:"
 
 #: src/commands/commandhelpformatter.h:123 src/utils/flags/zyppflags.cc:582
 msgid "Command options:"
@@ -684,7 +684,7 @@ msgstr "RRRR-MM-DD"
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:53
 msgid "MODE"
-msgstr ""
+msgstr "REŽIM"
 
 #. TranslatorExplanation These are reasons for various failures.
 #: src/utils/prompt.h:185
@@ -733,7 +733,7 @@ msgstr "Zámky balíkov:"
 
 #: src/Command.cc:154
 msgid "Locale Management:"
-msgstr ""
+msgstr "Správa lokalizácií:"
 
 #: src/Command.cc:158
 msgid "Other Commands:"
@@ -756,7 +756,7 @@ msgstr "Nesprávny štýl tabuľky %d."
 #: src/Config.cc:54
 #, c-format, boost-format
 msgid " Use an integer number from %d to %d"
-msgstr ""
+msgstr " Použiť celé číslo od %d do %d"
 
 #: src/Config.cc:248
 msgid "The path specified in the --root option must be absolute."
@@ -859,7 +859,7 @@ msgstr "Ignorovať neznáme balíky."
 #: src/Config.cc:463
 msgid ""
 "Terse output for machine consumption. Implies --no-abbrev and --no-color."
-msgstr ""
+msgstr "Stručný výstup pre spotrebu stroja. Naznačuje --no-abbrev a --no-color."
 
 #. translators: --reposd-dir, -D <DIR>
 #: src/Config.cc:487
@@ -1149,6 +1149,8 @@ msgid ""
 "There is an update candidate for '%s' from vendor '%s', while the current "
 "vendor is '%s'. Use '%s' to install this candidate."
 msgstr ""
+"Existuje kandidát na aktualizáciu '%s' od dodávateľa '%s', pričom súčasný "
+"dodávateľ je '%s'. Použiť '%s' pre inštaláciu tohto kandidáta."
 
 #: src/RequestFeedback.cc:132
 #, c-format, boost-format
@@ -1874,9 +1876,9 @@ msgstr[2] "Nasledujúcich %d opráv si vyžaduje reštart systému:"
 #, c-format, boost-format
 msgid "The following package requires a system reboot:"
 msgid_plural "The following %d packages require a system reboot:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Nasledujúci balík vyžaduje reštart systému:"
+msgstr[1] "Nasledujúce %d balíky vyžadujú reštart systému:"
+msgstr[2] "Nasledujúcich %d balíkov vyžaduje reštart systému:"
 
 #: src/Summary.cc:1374
 #, boost-format
@@ -2370,7 +2372,7 @@ msgstr "Vybrať balíky podľa názvu, nie podľa schopnosti."
 
 #: src/commands/installremove.cc:55
 msgid "Select packages solely by capability."
-msgstr ""
+msgstr "Vyberte balíky výlučne podľa schopnosti."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/installremove.cc:74
@@ -2519,19 +2521,19 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/locale/addlocalecmd.cc:19
 msgid "addlocale (aloc) [OPTIONS] <LOCALE> ..."
-msgstr ""
+msgstr "addlocale (aloc) [VOĽBY] <LOKALIZÁCIA> ..."
 
 #: src/commands/locale/addlocalecmd.cc:20
 msgid "Add locale(s) to requested locales."
-msgstr ""
+msgstr "Pridať lokalizáciu(e) do požadovaných lokalizácií."
 
 #: src/commands/locale/addlocalecmd.cc:21
 msgid "Add given locale(s) to the list of requested locales."
-msgstr ""
+msgstr "Pridať danú lokalizáciu(e) do zoznamu požadovaných lokalizácií."
 
 #: src/commands/locale/addlocalecmd.cc:32
 msgid "Do not install corresponding packages for given locale(s)."
-msgstr ""
+msgstr "Neinštalovať zodpovedajúce balíky pre danú lokalizáciu(e)."
 
 #: src/commands/locale/addlocalecmd.cc:56
 #, c-format, boost-format
@@ -2539,15 +2541,17 @@ msgid ""
 "Specify locale which shall be supported by the language code.\n"
 "Get a list of all available locales by calling '%s'."
 msgstr ""
+"Zadať lokalizáciu, ktorá má byť podporovaná kódom jazyka.\n"
+"Získať zoznam všetkých dostupných lokalizácií volaním '% s'."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/locale/localescmd.cc:17
 msgid "locales (lloc) [OPTIONS] [LOCALE] ..."
-msgstr ""
+msgstr "locales (lloc) [VOĽBY] [LOKALIZÁCIA] ..."
 
 #: src/commands/locale/localescmd.cc:18
 msgid "List requested locales (languages codes)."
-msgstr ""
+msgstr "Zoznam požadovaných lokalizácií (kódy jazykov)."
 
 #: src/commands/locale/localescmd.cc:19
 #, c-format, boost-format
@@ -2559,53 +2563,61 @@ msgid ""
 "can\n"
 "be installed by calling '%s'.\n"
 msgstr ""
+"Zoznam požadovaných lokalizácií a zodpovedajúcich balíkov.\n"
+"\n"
+"Volané bez argumentov vypíše požadované lokalizácie. Ak lokalizačné\n"
+"balíky pre požadovaný jazyk ešte nie sú v systéme, môžu byť\n"
+"nainštalované volaním '%s'.\n"
 
 #: src/commands/locale/localescmd.cc:35
 msgid "Show corresponding packages."
-msgstr ""
+msgstr "Ukázať zodpovedajúce balíky."
 
 #: src/commands/locale/localescmd.cc:36
 msgid "List all available locales."
-msgstr ""
+msgstr "Zoznam všetkých dostupných lokalizácií."
 
 #: src/commands/locale/localescmd.cc:49
 msgid "Ignoring positional arguments because --all argument was provided."
 msgstr ""
+"Ignorovanie pozičných argumentov, pretože bol poskytnutý argument --all."
 
 #: src/commands/locale/localescmd.cc:76
 msgid "The locale(s) for which the information shall be printed."
-msgstr ""
+msgstr "Lokalizácia(e), pre ktoré majú byť vytlačené informácie."
 
 #: src/commands/locale/localescmd.cc:80
 msgid ""
 "Get all locales with lang code 'en' that have their own country code, "
 "excluding the fallback 'en':"
 msgstr ""
+"Získať všetky lokalizácie s kódom jazyka 'en' , ktoré majú svoj vlastný kód "
+"krajiny, okrem núdzového 'en':"
 
 #: src/commands/locale/localescmd.cc:87
 msgid "Get all locales with lang code 'en' with or without country code:"
-msgstr ""
+msgstr "Získať všetky lokalizácie s kódom jazyka 'en' s alebo bez kódu krajiny:"
 
 #: src/commands/locale/localescmd.cc:94
 msgid "Get the locale matching the argument exactly: "
-msgstr ""
+msgstr "Získať lokalizáciu, ktorá presne zodpovedá argumentu: "
 
 #: src/commands/locale/localescmd.cc:101
 msgid "Get the list of packages which are available for 'de' and 'en':"
-msgstr ""
+msgstr "Získať zoznam balíkov, ktoré sú k dispozícii pre 'de' a 'en':"
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/locale/removelocalecmd.cc:17
 msgid "removelocale (rloc) [OPTIONS] <LOCALE> ..."
-msgstr ""
+msgstr "removelocale (rloc) [VOĽBY] <LOKALIZÁCIA> ..."
 
 #: src/commands/locale/removelocalecmd.cc:18
 msgid "Remove locale(s) from requested locales."
-msgstr ""
+msgstr "Odstrániť lokalizáciu(e) z požadovaných lokalizácií."
 
 #: src/commands/locale/removelocalecmd.cc:19
 msgid "Remove given locale(s) from the list of supported languages."
-msgstr ""
+msgstr "Odstrániť danú lokalizáciu(e) zo zoznamu podporovaných jazykov."
 
 #: src/commands/locale/removelocalecmd.cc:34
 #, c-format, boost-format
@@ -2613,10 +2625,12 @@ msgid ""
 "Specify locales which shall be removed by the the language code.\n"
 "Get the list of requested locales by calling '%s'."
 msgstr ""
+"Zadať lokalizácie, ktoré majú byť odstránené podľa kódu jazyka.\n"
+"Získať zoznam požadovaných lokalizácií volaním '% s'."
 
 #: src/commands/locale/removelocalecmd.cc:46
 msgid "Do not remove corresponding packages for given locale(s)."
-msgstr ""
+msgstr "Neodstrániť zodpovedajúce balíky pre danú lokalizáciu(e)."
 
 # =============================================================================
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
@@ -4685,7 +4699,7 @@ msgstr "Názov zdrojového balíka je vyžadovaný argument."
 
 #: src/commands/sourceinstall.cc:86
 msgid "Uninstalling source packages is not supported."
-msgstr ""
+msgstr "Odinštalovanie zdrojových balíkov nie je podporované."
 
 #: src/commands/subcommand.cc:52
 msgid "none"
@@ -5380,56 +5394,56 @@ msgstr "Zostavuje binárny balík"
 #. translators: header of table column - is the language requested? (Yes/No)
 #: src/locales.cc:56 src/locales.cc:90
 msgid "Requested"
-msgstr ""
+msgstr "Požadovaný"
 
 #: src/locales.cc:60
 msgid "Fallback"
-msgstr ""
+msgstr "Núdzové riešenie"
 
 #. translators: header of table column - the language code, e.g. en_US
 #: src/locales.cc:86
 msgid "Code"
-msgstr ""
+msgstr "Kód"
 
 #. translators: header of table column - the language, e.g. English (United States)
 #: src/locales.cc:88
 msgid "Language"
-msgstr ""
+msgstr "Jazyk"
 
 #: src/locales.cc:306
 #, c-format, boost-format
 msgid "Packages for %s (locale '%s', requested: %s):"
-msgstr ""
+msgstr "Balíky pre %s (lokalizácia '%s', požadované: %s):"
 
 #: src/locales.cc:323
 #, c-format, boost-format
 msgid "Added locale: %s"
-msgstr ""
+msgstr "Pridaná lokalizácia: %s"
 
 #: src/locales.cc:326
 #, c-format, boost-format
 msgid "ERROR: cannot add %s"
-msgstr ""
+msgstr "CHYBA: nie je možné pridať %s"
 
 #: src/locales.cc:330
 #, c-format, boost-format
 msgid " %s is already requested."
-msgstr ""
+msgstr " %s je už požadované."
 
 #: src/locales.cc:351
 #, c-format, boost-format
 msgid "Removed locale: %s"
-msgstr ""
+msgstr "Odstránená lokalizácia: %s"
 
 #: src/locales.cc:354
 #, c-format, boost-format
 msgid "ERROR: cannot remove %s"
-msgstr ""
+msgstr "CHYBA: nie je možné odstrániť %s"
 
 #: src/locales.cc:358
 #, c-format, boost-format
 msgid "%s was not requested."
-msgstr ""
+msgstr "%s nebola požadovaná."
 
 #. translators: this will show up if you press ctrl+c twice
 #: src/main.cc:31
