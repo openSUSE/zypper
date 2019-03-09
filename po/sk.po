@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-02-25 14:33+0100\n"
-"PO-Revision-Date: 2019-03-09 13:52+0000\n"
+"PO-Revision-Date: 2019-03-10 17:50+0000\n"
 "Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
 "Language-Team: Slovak <https://l10n.opensuse.org/projects/zypper/master/sk/>"
 "\n"
@@ -998,16 +998,16 @@ msgstr "Nečítať nainštalované balíky."
 
 #: src/Config.cc:804
 msgid "No config file is in use. Can not save options."
-msgstr ""
+msgstr "Nepoužíva sa žiadny konfiguračný súbor. Nemožno uložiť voľby."
 
 #: src/Config.cc:815
 #, boost-format
 msgid "Option '%1%' saved in '%2%'."
-msgstr ""
+msgstr "Voľba '%1%' uložená v '%2%'."
 
 #: src/Config.cc:822
 msgid "Failed to save option."
-msgstr ""
+msgstr "Zlyhalo uloženie voľby."
 
 #: src/PackageArgs.cc:208
 #, c-format, boost-format
@@ -4055,6 +4055,8 @@ msgid ""
 "For an extended search including not yet activated remote resources you may "
 "run '%1%' at any time."
 msgstr ""
+"Rozšírené vyhľadávanie vrátane ešte neaktivovaných vzdialených zdrojov "
+"môžete kedykoľvek spustiť  '%1%'."
 
 #: src/commands/search/search-packages-hinthack.cc:99
 #, boost-format
@@ -6291,6 +6293,10 @@ msgid ""
 "updated by recent upgrades. They should be restarted to benefit from the "
 "latest updates. Run '%1%' to list these programs."
 msgstr ""
+"Existujú spustené programy, ktoré stále používajú súbory a knižnice "
+"odstránené alebo aktualizované nedávnymi zvýšeniami verzií. Mali by sa znova "
+"spustiť, aby využívali najnovšie aktualizácie. Spustite '%1%' pre vypísanie "
+"týchto programov."
 
 #: src/solve-commit.cc:481
 msgid "Update notifications were received from the following packages:"
@@ -6622,7 +6628,7 @@ msgstr "Nepodarilo sa spustiť analyzátor konfiguračných súborov."
 #: src/utils/Augeas.cc:510
 #, boost-format
 msgid "Malformed option name '%1%'."
-msgstr ""
+msgstr "Nesprávny názov voľby '%1%'."
 
 #: src/utils/Augeas.cc:522
 msgid "Could not save the config file."
