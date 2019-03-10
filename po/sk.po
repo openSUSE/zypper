@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-02-25 14:33+0100\n"
-"PO-Revision-Date: 2019-03-10 17:50+0000\n"
+"PO-Revision-Date: 2019-03-12 11:54+0000\n"
 "Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
 "Language-Team: Slovak <https://l10n.opensuse.org/projects/zypper/master/sk/>"
 "\n"
@@ -6632,31 +6632,31 @@ msgstr "Nesprávny názov voľby '%1%'."
 
 #: src/utils/Augeas.cc:522
 msgid "Could not save the config file."
-msgstr ""
+msgstr "Nebolo možné uložiť konfiguračný súbor."
 
 #: src/utils/Augeas.cc:564
 #, boost-format
 msgid "Config file '%1%' exists but is not a file."
-msgstr ""
+msgstr "Konfiguračný súbor '%1%' existuje, ale nie je súbor."
 
 #: src/utils/Augeas.cc:580
 msgid "Could not load the config files."
-msgstr ""
+msgstr "Nebolo možné načítať konfiguračné súbory."
 
 #: src/utils/Augeas.cc:606
 #, boost-format
 msgid "Config file '%1%' does not exist."
-msgstr ""
+msgstr "Konfiguračný súbor '%1%' neexistuje."
 
 #. translator: %1% is the path to a config file, %2% is the name of an options inside the file
 #: src/utils/Augeas.cc:637
 #, boost-format
 msgid "%1%: Option '%2%' is defined multiple times. Using the last one."
-msgstr ""
+msgstr "%1%: Voľba '%2%' je definovaná viackrát. Použitie poslednej."
 
 #: src/utils/Augeas.cc:658
 msgid "No config file is in use."
-msgstr ""
+msgstr "Nepoužíva sa žiadny konfiguračný súbor."
 
 #: src/utils/flags/exceptions.cc:22
 #, boost-format
@@ -7007,11 +7007,11 @@ msgstr "Opätovné skúšanie..."
 
 #: src/utils/prompt.cc:325
 msgid "always"
-msgstr ""
+msgstr "vždy"
 
 #: src/utils/prompt.cc:325
 msgid "never"
-msgstr ""
+msgstr "nikdy"
 
 #: src/utils/prompt.cc:372
 msgid "Cannot read input: bad stream or EOF."
@@ -7034,7 +7034,7 @@ msgstr "Neplatná odpoveď '%s'."
 #: src/utils/prompt.cc:415
 #, c-format, boost-format
 msgid "Ambiguous answer '%s'."
-msgstr ""
+msgstr "Nejednoznačná odpoveď '%s'."
 
 #. translators: the %s are: 'y', 'yes' (translated), 'n', and 'no' (translated).
 #: src/utils/prompt.cc:423
@@ -7047,6 +7047,8 @@ msgid ""
 "If nothing else works enter '#1' to select the 1st option, '#2' for the 2nd "
 "one, ..."
 msgstr ""
+"Ak nič iné nefunguje, zadajte '#1' pre výber 1. voľby, '#2' pre výber 2. "
+"voľby, ..."
 
 #~ msgid ""
 #~ "For an extended search including not yet activated remote resources you "
