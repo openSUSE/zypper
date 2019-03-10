@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-02-25 14:33+0100\n"
-"PO-Revision-Date: 2019-01-20 17:29+0000\n"
+"PO-Revision-Date: 2019-03-11 03:24+0000\n"
 "Last-Translator: Yasuhiko Kamata <belphegor@belbel.or.jp>\n"
 "Language-Team: Japanese <https://l10n.opensuse.org/projects/zypper/master/ja/"
 ">\n"
@@ -512,11 +512,11 @@ msgstr "これは '%s' の別名です。"
 
 #: src/commands/commandhelpformatter.h:107
 msgid "Examples:"
-msgstr ""
+msgstr "例:"
 
 #: src/commands/commandhelpformatter.h:110
 msgid "Arguments:"
-msgstr ""
+msgstr "パラメータ:"
 
 #: src/commands/commandhelpformatter.h:123 src/utils/flags/zyppflags.cc:582
 msgid "Command options:"
@@ -689,7 +689,7 @@ msgstr "YYYY-MM-DD"
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:53
 msgid "MODE"
-msgstr ""
+msgstr "モード"
 
 #. TranslatorExplanation These are reasons for various failures.
 #: src/utils/prompt.h:185
@@ -739,7 +739,7 @@ msgstr "パッケージロック:"
 
 #: src/Command.cc:154
 msgid "Locale Management:"
-msgstr ""
+msgstr "ロケール管理:"
 
 #: src/Command.cc:158
 msgid "Other Commands:"
@@ -1006,16 +1006,16 @@ msgstr "インストールされたパッケージを読み込まない。"
 
 #: src/Config.cc:804
 msgid "No config file is in use. Can not save options."
-msgstr ""
+msgstr "使用している設定ファイルはありません。オプションを保存できません。"
 
 #: src/Config.cc:815
 #, boost-format
 msgid "Option '%1%' saved in '%2%'."
-msgstr ""
+msgstr "オプション '%1%' を '%2%' に保存しました。"
 
 #: src/Config.cc:822
 msgid "Failed to save option."
-msgstr ""
+msgstr "オプションの保存に失敗しました。"
 
 #: src/PackageArgs.cc:208
 #, c-format, boost-format
@@ -1740,7 +1740,7 @@ msgstr[0] "以下 %d 個のパッチを適用するには、システムの再�
 #, c-format, boost-format
 msgid "The following package requires a system reboot:"
 msgid_plural "The following %d packages require a system reboot:"
-msgstr[0] ""
+msgstr[0] "以下 %d 個のパッケージをインストールするには、システムの再起動が必要です:"
 
 #: src/Summary.cc:1374
 #, boost-format
@@ -2366,19 +2366,19 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/locale/addlocalecmd.cc:19
 msgid "addlocale (aloc) [OPTIONS] <LOCALE> ..."
-msgstr ""
+msgstr "addlocale (aloc) [オプション] <ロケール> ..."
 
 #: src/commands/locale/addlocalecmd.cc:20
 msgid "Add locale(s) to requested locales."
-msgstr ""
+msgstr "指定したロケールを追加します。"
 
 #: src/commands/locale/addlocalecmd.cc:21
 msgid "Add given locale(s) to the list of requested locales."
-msgstr ""
+msgstr "指定したロケールを、必要なロケールの一覧に追加します。"
 
 #: src/commands/locale/addlocalecmd.cc:32
 msgid "Do not install corresponding packages for given locale(s)."
-msgstr ""
+msgstr "指定したロケールに対するパッケージをインストールしません。"
 
 #: src/commands/locale/addlocalecmd.cc:56
 #, c-format, boost-format
@@ -2386,15 +2386,17 @@ msgid ""
 "Specify locale which shall be supported by the language code.\n"
 "Get a list of all available locales by calling '%s'."
 msgstr ""
+"対応すべきロケールを、言語コードで指定します。\n"
+"利用可能なロケールの一覧は、 '%s' を実行することで表示することができます。"
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/locale/localescmd.cc:17
 msgid "locales (lloc) [OPTIONS] [LOCALE] ..."
-msgstr ""
+msgstr "locales (lloc) [オプション] [ロケール] ..."
 
 #: src/commands/locale/localescmd.cc:18
 msgid "List requested locales (languages codes)."
-msgstr ""
+msgstr "必要なロケール (言語コード) の一覧を表示します。"
 
 #: src/commands/locale/localescmd.cc:19
 #, c-format, boost-format
@@ -2406,53 +2408,58 @@ msgid ""
 "can\n"
 "be installed by calling '%s'.\n"
 msgstr ""
+"必要であるとして指定したロケールと、対応するパッケージを一覧で表示します。\n"
+"\n"
+"何もパラメータを指定しないで実行すると、指定済みのロケールを一覧表示します。\n"
+"なお、指定済みの言語に対するロケールパッケージがインストールされていない場合は、\n"
+" '%s' を実行することでインストールすることができます。\n"
 
 #: src/commands/locale/localescmd.cc:35
 msgid "Show corresponding packages."
-msgstr ""
+msgstr "対応するパッケージを表示します。"
 
 #: src/commands/locale/localescmd.cc:36
 msgid "List all available locales."
-msgstr ""
+msgstr "利用可能なロケールの一覧を表示します。"
 
 #: src/commands/locale/localescmd.cc:49
 msgid "Ignoring positional arguments because --all argument was provided."
-msgstr ""
+msgstr "-all パラメータが指定されているため、固定引数が無視されます。"
 
 #: src/commands/locale/localescmd.cc:76
 msgid "The locale(s) for which the information shall be printed."
-msgstr ""
+msgstr "表示すべきロケールを指定します。"
 
 #: src/commands/locale/localescmd.cc:80
 msgid ""
 "Get all locales with lang code 'en' that have their own country code, "
 "excluding the fallback 'en':"
-msgstr ""
+msgstr "'en' で始まるロケールのうち、フォールバックである 'en' そのものを除外したものを表示したい場合は、下記のようにします:"
 
 #: src/commands/locale/localescmd.cc:87
 msgid "Get all locales with lang code 'en' with or without country code:"
-msgstr ""
+msgstr "言語コード 'en' に対応する全てのロケールのうち、国コードがあるものと無いものの両方を表示します:"
 
 #: src/commands/locale/localescmd.cc:94
 msgid "Get the locale matching the argument exactly: "
-msgstr ""
+msgstr "指定したパラメータに正確に一致するロケールを表示します: "
 
 #: src/commands/locale/localescmd.cc:101
 msgid "Get the list of packages which are available for 'de' and 'en':"
-msgstr ""
+msgstr "'de' と 'en' の両方に対して、利用可能なパッケージを表示します:"
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/locale/removelocalecmd.cc:17
 msgid "removelocale (rloc) [OPTIONS] <LOCALE> ..."
-msgstr ""
+msgstr "removelocale (rloc) [オプション] <ロケール> ..."
 
 #: src/commands/locale/removelocalecmd.cc:18
 msgid "Remove locale(s) from requested locales."
-msgstr ""
+msgstr "指定したロケールを削除します。"
 
 #: src/commands/locale/removelocalecmd.cc:19
 msgid "Remove given locale(s) from the list of supported languages."
-msgstr ""
+msgstr "指定したロケールを、必要なロケールの一覧から削除します。"
 
 #: src/commands/locale/removelocalecmd.cc:34
 #, c-format, boost-format
@@ -2460,10 +2467,12 @@ msgid ""
 "Specify locales which shall be removed by the the language code.\n"
 "Get the list of requested locales by calling '%s'."
 msgstr ""
+"削除すべきロケールを、言語コードで指定します。\n"
+"利用可能なロケールの一覧は、 '%s' を実行することで表示することができます。"
 
 #: src/commands/locale/removelocalecmd.cc:46
 msgid "Do not remove corresponding packages for given locale(s)."
-msgstr ""
+msgstr "指定したロケールに対するパッケージを削除しません。"
 
 # =============================================================================
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
@@ -3889,7 +3898,7 @@ msgstr ""
 msgid ""
 "For an extended search including not yet activated remote resources you may "
 "run '%1%' at any time."
-msgstr ""
+msgstr "現時点では有効化していないリモートのリソースを含めた拡張検索を行なうには、 '%1%' を実行する必要があります。"
 
 #: src/commands/search/search-packages-hinthack.cc:99
 #, boost-format
@@ -4534,7 +4543,7 @@ msgstr "ソースパッケージ名の指定が必要です。"
 
 #: src/commands/sourceinstall.cc:86
 msgid "Uninstalling source packages is not supported."
-msgstr ""
+msgstr "ソースパッケージの削除の機能は用意されていません。"
 
 #: src/commands/subcommand.cc:52
 msgid "none"
@@ -5235,56 +5244,56 @@ msgstr "構築されたバイナリパッケージ"
 #. translators: header of table column - is the language requested? (Yes/No)
 #: src/locales.cc:56 src/locales.cc:90
 msgid "Requested"
-msgstr ""
+msgstr "要求済み"
 
 #: src/locales.cc:60
 msgid "Fallback"
-msgstr ""
+msgstr "フォールバック"
 
 #. translators: header of table column - the language code, e.g. en_US
 #: src/locales.cc:86
 msgid "Code"
-msgstr ""
+msgstr "コード"
 
 #. translators: header of table column - the language, e.g. English (United States)
 #: src/locales.cc:88
 msgid "Language"
-msgstr ""
+msgstr "言語"
 
 #: src/locales.cc:306
 #, c-format, boost-format
 msgid "Packages for %s (locale '%s', requested: %s):"
-msgstr ""
+msgstr "%s に対するパッケージ (ロケール '%s', 要求済み: %s):"
 
 #: src/locales.cc:323
 #, c-format, boost-format
 msgid "Added locale: %s"
-msgstr ""
+msgstr "ロケールを追加しました: %s"
 
 #: src/locales.cc:326
 #, c-format, boost-format
 msgid "ERROR: cannot add %s"
-msgstr ""
+msgstr "エラー: %s を追加できません"
 
 #: src/locales.cc:330
 #, c-format, boost-format
 msgid " %s is already requested."
-msgstr ""
+msgstr " %s は既に要求済みです。"
 
 #: src/locales.cc:351
 #, c-format, boost-format
 msgid "Removed locale: %s"
-msgstr ""
+msgstr "ロケールを削除しました: %s"
 
 #: src/locales.cc:354
 #, c-format, boost-format
 msgid "ERROR: cannot remove %s"
-msgstr ""
+msgstr "エラー: %s を削除できません"
 
 #: src/locales.cc:358
 #, c-format, boost-format
 msgid "%s was not requested."
-msgstr ""
+msgstr "%s は要求されていません。"
 
 #. translators: this will show up if you press ctrl+c twice
 #: src/main.cc:31
@@ -6142,6 +6151,8 @@ msgid ""
 "updated by recent upgrades. They should be restarted to benefit from the "
 "latest updates. Run '%1%' to list these programs."
 msgstr ""
+"実行中のプログラムが、直近のアップグレードにより削除もしくは更新されたファイルを使用しています。ご確認の上、これらを再起動してください。 '%1%' "
+"と入力して実行すると、プログラムの一覧を表示することができます。"
 
 #: src/solve-commit.cc:481
 msgid "Update notifications were received from the following packages:"
@@ -6461,35 +6472,35 @@ msgstr "環境設定ファイルパーサを準備できません。"
 #: src/utils/Augeas.cc:510
 #, boost-format
 msgid "Malformed option name '%1%'."
-msgstr ""
+msgstr "オプション名 '%1%' の形式が正しくありません。"
 
 #: src/utils/Augeas.cc:522
 msgid "Could not save the config file."
-msgstr ""
+msgstr "設定ファイルを保存できませんでした。"
 
 #: src/utils/Augeas.cc:564
 #, boost-format
 msgid "Config file '%1%' exists but is not a file."
-msgstr ""
+msgstr "設定ファイル '%1%' は存在していますが、ファイルではありません。"
 
 #: src/utils/Augeas.cc:580
 msgid "Could not load the config files."
-msgstr ""
+msgstr "設定ファイルを読み込めませんでした。"
 
 #: src/utils/Augeas.cc:606
 #, boost-format
 msgid "Config file '%1%' does not exist."
-msgstr ""
+msgstr "設定ファイル '%1%' が存在していません。"
 
 #. translator: %1% is the path to a config file, %2% is the name of an options inside the file
 #: src/utils/Augeas.cc:637
 #, boost-format
 msgid "%1%: Option '%2%' is defined multiple times. Using the last one."
-msgstr ""
+msgstr "%1%: オプション '%2%' が複数回指定されています。最後の 1 つのみを使用します。"
 
 #: src/utils/Augeas.cc:658
 msgid "No config file is in use."
-msgstr ""
+msgstr "使用している設定ファイルはありません。"
 
 #: src/utils/flags/exceptions.cc:22
 #, boost-format
@@ -6828,11 +6839,11 @@ msgstr "再試行しています..."
 
 #: src/utils/prompt.cc:325
 msgid "always"
-msgstr ""
+msgstr "常に行なう"
 
 #: src/utils/prompt.cc:325
 msgid "never"
-msgstr ""
+msgstr "決して行なわない"
 
 #: src/utils/prompt.cc:372
 msgid "Cannot read input: bad stream or EOF."
@@ -6858,7 +6869,7 @@ msgstr "回答 '%s' が正しくありません。"
 #: src/utils/prompt.cc:415
 #, c-format, boost-format
 msgid "Ambiguous answer '%s'."
-msgstr ""
+msgstr "回答 '%s' が不正確です。"
 
 #. translators: the %s are: 'y', 'yes' (translated), 'n', and 'no' (translated).
 #: src/utils/prompt.cc:423
@@ -6873,6 +6884,7 @@ msgid ""
 "If nothing else works enter '#1' to select the 1st option, '#2' for the 2nd "
 "one, ..."
 msgstr ""
+"いずれも動作しない場合は、 '#1' と入力すると最初の選択肢を、 '#2' と入力すると 2 番目の選択肢・・・のように選択することもできます。"
 
 #~ msgid ""
 #~ "For an extended search including not yet activated remote resources you "
