@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-02-27 13:31+0100\n"
-"PO-Revision-Date: 2018-08-03 10:36+0000\n"
+"PO-Revision-Date: 2019-03-14 18:32+0000\n"
 "Last-Translator: Yasuhiko Kamata <belphegor@belbel.or.jp>\n"
 "Language-Team: Japanese <https://l10n.opensuse.org/projects/libzypp/master/"
 "ja/>\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 2.18\n"
+"X-Generator: Weblate 3.3\n"
 
 #. dubious: Throw on malformed known types, otherwise log a warning.
 #: zypp/CheckSum.cc:136
@@ -4055,7 +4055,7 @@ msgstr "'%s' にアクセスするにはユーザ認証が必要です"
 msgid ""
 "Visit the SUSE Customer Center to check whether your registration is valid "
 "and has not expired."
-msgstr ""
+msgstr "SUSE カスタマーセンターを開いて、お使いの登録が有効であること、および期限切れになっていないことをご確認ください。"
 
 #: zypp/media/MediaCurl.cc:1141
 msgid ""
