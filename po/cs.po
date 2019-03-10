@@ -21,7 +21,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-02-25 14:33+0100\n"
-"PO-Revision-Date: 2019-01-28 08:52+0000\n"
+"PO-Revision-Date: 2019-03-12 11:54+0000\n"
 "Last-Translator: Aleš Kastner <alkas@volny.cz>\n"
 "Language-Team: Czech <https://l10n.opensuse.org/projects/zypper/master/cs/>\n"
 "Language: cs\n"
@@ -523,11 +523,11 @@ msgstr "Toto je alias pro '%s'."
 
 #: src/commands/commandhelpformatter.h:107
 msgid "Examples:"
-msgstr ""
+msgstr "Příklady:"
 
 #: src/commands/commandhelpformatter.h:110
 msgid "Arguments:"
-msgstr ""
+msgstr "Argumenty:"
 
 #: src/commands/commandhelpformatter.h:123 src/utils/flags/zyppflags.cc:582
 msgid "Command options:"
@@ -698,7 +698,7 @@ msgstr "RRRR-MM-DD"
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:53
 msgid "MODE"
-msgstr ""
+msgstr "REŽIM"
 
 #. TranslatorExplanation These are reasons for various failures.
 #: src/utils/prompt.h:185
@@ -748,7 +748,7 @@ msgstr "Zámky balíčků:"
 
 #: src/Command.cc:154
 msgid "Locale Management:"
-msgstr ""
+msgstr "Správa lokalizací:"
 
 #: src/Command.cc:158
 msgid "Other Commands:"
@@ -1017,16 +1017,16 @@ msgstr "Nenačítat instalované balíčky."
 
 #: src/Config.cc:804
 msgid "No config file is in use. Can not save options."
-msgstr ""
+msgstr "Není použit žádný konfigurační soubor. Volby nelze uložit."
 
 #: src/Config.cc:815
 #, boost-format
 msgid "Option '%1%' saved in '%2%'."
-msgstr ""
+msgstr "Volba '%1%' je uložena do '%2%'."
 
 #: src/Config.cc:822
 msgid "Failed to save option."
-msgstr ""
+msgstr "Uložení voleb se nezdařilo."
 
 #: src/PackageArgs.cc:208
 #, c-format, boost-format
@@ -1878,12 +1878,12 @@ msgstr[1] "Následující %d opravy vyžadují restart systému:"
 msgstr[2] "Následujících %d oprav vyžaduje restart systému:"
 
 #: src/Summary.cc:1345
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following package requires a system reboot:"
 msgid_plural "The following %d packages require a system reboot:"
 msgstr[0] "Tento balíček vyžaduje restart systému:"
-msgstr[1] "Tyto balíčky (celkem %d) vyžadují restart systému:"
-msgstr[2] "Tyto balíčky (celkem %d) vyžadují restart systému:"
+msgstr[1] "Tyto %d balíčky vyžadují restart systému:"
+msgstr[2] "Těchto %d balíčků vyžaduje restart systému:"
 
 #: src/Summary.cc:1374
 #, boost-format
@@ -2529,19 +2529,19 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/locale/addlocalecmd.cc:19
 msgid "addlocale (aloc) [OPTIONS] <LOCALE> ..."
-msgstr ""
+msgstr "addlocale (aloc) [VOLBY] <LOKALIZACE> ..."
 
 #: src/commands/locale/addlocalecmd.cc:20
 msgid "Add locale(s) to requested locales."
-msgstr ""
+msgstr "Přidat lokalizaci(-e) k vyžádaným lokalizacím."
 
 #: src/commands/locale/addlocalecmd.cc:21
 msgid "Add given locale(s) to the list of requested locales."
-msgstr ""
+msgstr "Přidat danou(-é) lokalizaci(-e) k seznamu vyžádaných lokalizací."
 
 #: src/commands/locale/addlocalecmd.cc:32
 msgid "Do not install corresponding packages for given locale(s)."
-msgstr ""
+msgstr "Pro danou(-é) lokalizaci(-e) nenainstalovat příslušné balíčky."
 
 #: src/commands/locale/addlocalecmd.cc:56
 #, c-format, boost-format
@@ -2549,15 +2549,17 @@ msgid ""
 "Specify locale which shall be supported by the language code.\n"
 "Get a list of all available locales by calling '%s'."
 msgstr ""
+"Určit lokalizáciu, která má být podporována, kódem jazyka.\n"
+"Seznam všech dostupných lokalizací získejte voláním '% s'."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/locale/localescmd.cc:17
 msgid "locales (lloc) [OPTIONS] [LOCALE] ..."
-msgstr ""
+msgstr "locales (lloc) [VOLBY] [LOKALIZACE] ..."
 
 #: src/commands/locale/localescmd.cc:18
 msgid "List requested locales (languages codes)."
-msgstr ""
+msgstr "Seznam požadovaných lokalizací (kódy jazyků)."
 
 #: src/commands/locale/localescmd.cc:19
 #, c-format, boost-format
@@ -2569,53 +2571,60 @@ msgid ""
 "can\n"
 "be installed by calling '%s'.\n"
 msgstr ""
+"Seznam požadovaných lokalizací a odpovídajících balíčků.\n"
+"\n"
+"Volání bez argumentů ukáže žádané lokalizace. Nejsou-li\n"
+"balíčky lokalizace žádaného jazyka dosud v systému,\n"
+"lze je instalovat voláním '%s'.\n"
 
 #: src/commands/locale/localescmd.cc:35
 msgid "Show corresponding packages."
-msgstr ""
+msgstr "Ukázat příslušné balíčky."
 
 #: src/commands/locale/localescmd.cc:36
 msgid "List all available locales."
-msgstr ""
+msgstr "Seznam všech dostupných lokalizací."
 
 #: src/commands/locale/localescmd.cc:49
 msgid "Ignoring positional arguments because --all argument was provided."
-msgstr ""
+msgstr "Bylo zadáno --all, proto ignoruji poziční argumenty."
 
 #: src/commands/locale/localescmd.cc:76
 msgid "The locale(s) for which the information shall be printed."
-msgstr ""
+msgstr "Budou vytištěny údaje těchto lokalizací."
 
 #: src/commands/locale/localescmd.cc:80
 msgid ""
 "Get all locales with lang code 'en' that have their own country code, "
 "excluding the fallback 'en':"
 msgstr ""
+"Získat všetky lokalizace s kódom jazyka 'en' a vlastním kódem země (kromě "
+"nouzového 'en'):"
 
 #: src/commands/locale/localescmd.cc:87
 msgid "Get all locales with lang code 'en' with or without country code:"
-msgstr ""
+msgstr "Získat všechny lokalizace s kódem jazyka 'en', s kódem země i bez něj:"
 
 #: src/commands/locale/localescmd.cc:94
 msgid "Get the locale matching the argument exactly: "
-msgstr ""
+msgstr "Získat lokalizaci přesně odpovídající argumentu: "
 
 #: src/commands/locale/localescmd.cc:101
 msgid "Get the list of packages which are available for 'de' and 'en':"
-msgstr ""
+msgstr "Získat seznam balíčků dostupných pro 'de' a 'en':"
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/locale/removelocalecmd.cc:17
 msgid "removelocale (rloc) [OPTIONS] <LOCALE> ..."
-msgstr ""
+msgstr "removelocale (rloc) [VOLBY] <LOKALIZACE> ..."
 
 #: src/commands/locale/removelocalecmd.cc:18
 msgid "Remove locale(s) from requested locales."
-msgstr ""
+msgstr "Odstranit lokalizaci(-e) z žádaných lokalizací."
 
 #: src/commands/locale/removelocalecmd.cc:19
 msgid "Remove given locale(s) from the list of supported languages."
-msgstr ""
+msgstr "Odstranit danou(-é) lokalizaci(-e) ze seznamu podporovaných jazyků."
 
 #: src/commands/locale/removelocalecmd.cc:34
 #, c-format, boost-format
@@ -2623,10 +2632,12 @@ msgid ""
 "Specify locales which shall be removed by the the language code.\n"
 "Get the list of requested locales by calling '%s'."
 msgstr ""
+"Kódem jazyka zadat lokalizace, které mají být odstraněny.\n"
+"Seznam žádaných lokalizácí získejte voláním '% s'."
 
 #: src/commands/locale/removelocalecmd.cc:46
 msgid "Do not remove corresponding packages for given locale(s)."
-msgstr ""
+msgstr "Neodstraňovat příslušné balíčky pro danou(-é) lokalizaci(-e)."
 
 # =============================================================================
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
@@ -4056,6 +4067,8 @@ msgid ""
 "For an extended search including not yet activated remote resources you may "
 "run '%1%' at any time."
 msgstr ""
+"'%1%' kdykoli spustí rozšířené hledání i v dosud neaktivovaných vzdálených "
+"zdrojích."
 
 #: src/commands/search/search-packages-hinthack.cc:99
 #, boost-format
@@ -4692,7 +4705,7 @@ msgstr "Název zdrojového balíčku je vyžadovaný argument."
 
 #: src/commands/sourceinstall.cc:86
 msgid "Uninstalling source packages is not supported."
-msgstr ""
+msgstr "Odinstalace zdrojových balíčků není podporována."
 
 #: src/commands/subcommand.cc:52
 msgid "none"
@@ -5388,56 +5401,56 @@ msgstr "Vytváří binární balíček"
 #. translators: header of table column - is the language requested? (Yes/No)
 #: src/locales.cc:56 src/locales.cc:90
 msgid "Requested"
-msgstr ""
+msgstr "Žádaný"
 
 #: src/locales.cc:60
 msgid "Fallback"
-msgstr ""
+msgstr "Nouzové řešení"
 
 #. translators: header of table column - the language code, e.g. en_US
 #: src/locales.cc:86
 msgid "Code"
-msgstr ""
+msgstr "Kód"
 
 #. translators: header of table column - the language, e.g. English (United States)
 #: src/locales.cc:88
 msgid "Language"
-msgstr ""
+msgstr "Jazyk"
 
 #: src/locales.cc:306
 #, c-format, boost-format
 msgid "Packages for %s (locale '%s', requested: %s):"
-msgstr ""
+msgstr "Balíčky pro %s (lokalizace '%s', vyžádané: %s):"
 
 #: src/locales.cc:323
 #, c-format, boost-format
 msgid "Added locale: %s"
-msgstr ""
+msgstr "Přidaná lokalizace: %s"
 
 #: src/locales.cc:326
 #, c-format, boost-format
 msgid "ERROR: cannot add %s"
-msgstr ""
+msgstr "CHYBA: nelze přidat %s"
 
 #: src/locales.cc:330
 #, c-format, boost-format
 msgid " %s is already requested."
-msgstr ""
+msgstr " %s už je vyžádáno."
 
 #: src/locales.cc:351
 #, c-format, boost-format
 msgid "Removed locale: %s"
-msgstr ""
+msgstr "Odstraněná lokalizace: %s"
 
 #: src/locales.cc:354
 #, c-format, boost-format
 msgid "ERROR: cannot remove %s"
-msgstr ""
+msgstr "CHYBA: nelze odstranit %s"
 
 #: src/locales.cc:358
 #, c-format, boost-format
 msgid "%s was not requested."
-msgstr ""
+msgstr "%s nebylo vyžádáno."
 
 #. translators: this will show up if you press ctrl+c twice
 #: src/main.cc:31
@@ -6285,6 +6298,9 @@ msgid ""
 "updated by recent upgrades. They should be restarted to benefit from the "
 "latest updates. Run '%1%' to list these programs."
 msgstr ""
+"Některé běžící programy stále používají soubory a knihovny aktualizované "
+"nebo zrušené posledními opravami. Měly by být restartovány, aby mohly "
+"poslední opravy využít. Seznam těchto programů získáte příkazem '%1%'."
 
 #: src/solve-commit.cc:481
 msgid "Update notifications were received from the following packages:"
@@ -6616,35 +6632,35 @@ msgstr "Nelze inicializovat parser konfiguračního souboru."
 #: src/utils/Augeas.cc:510
 #, boost-format
 msgid "Malformed option name '%1%'."
-msgstr ""
+msgstr "Nesprávný název volby '%1%'."
 
 #: src/utils/Augeas.cc:522
 msgid "Could not save the config file."
-msgstr ""
+msgstr "Nelze uložit konfigurační soubor."
 
 #: src/utils/Augeas.cc:564
 #, boost-format
 msgid "Config file '%1%' exists but is not a file."
-msgstr ""
+msgstr "Konfigurační soubor '%1%' existuje, není to však soubor."
 
 #: src/utils/Augeas.cc:580
 msgid "Could not load the config files."
-msgstr ""
+msgstr "Nelze zavést konfigurační soubory."
 
 #: src/utils/Augeas.cc:606
 #, boost-format
 msgid "Config file '%1%' does not exist."
-msgstr ""
+msgstr "Konfigurační soubor '%1%' neexistuje."
 
 #. translator: %1% is the path to a config file, %2% is the name of an options inside the file
 #: src/utils/Augeas.cc:637
 #, boost-format
 msgid "%1%: Option '%2%' is defined multiple times. Using the last one."
-msgstr ""
+msgstr "%1%: Volba '%2%' je uvedena vícekrát. Použiji poslední."
 
 #: src/utils/Augeas.cc:658
 msgid "No config file is in use."
-msgstr ""
+msgstr "Nepoužívá se žádný konfigurační soubor."
 
 #: src/utils/flags/exceptions.cc:22
 #, boost-format
@@ -6994,11 +7010,11 @@ msgstr "Zkouším znovu..."
 
 #: src/utils/prompt.cc:325
 msgid "always"
-msgstr ""
+msgstr "vždy"
 
 #: src/utils/prompt.cc:325
 msgid "never"
-msgstr ""
+msgstr "nikdy"
 
 #: src/utils/prompt.cc:372
 msgid "Cannot read input: bad stream or EOF."
@@ -7021,7 +7037,7 @@ msgstr "Neplatná odpověď '%s'."
 #: src/utils/prompt.cc:415
 #, c-format, boost-format
 msgid "Ambiguous answer '%s'."
-msgstr ""
+msgstr "Nejednoznačná odpověď '%s'."
 
 #. translators: the %s are: 'y', 'yes' (translated), 'n', and 'no' (translated).
 #: src/utils/prompt.cc:423
@@ -7034,6 +7050,8 @@ msgid ""
 "If nothing else works enter '#1' to select the 1st option, '#2' for the 2nd "
 "one, ..."
 msgstr ""
+"Nefunguje-li nic jiného, zadejte '#1' pro výběr 1. volby, '#2' pro výběr 2. "
+"volby, atd."
 
 #~ msgid ""
 #~ "For an extended search including not yet activated remote resources you "
