@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-02-25 14:33+0100\n"
-"PO-Revision-Date: 2019-03-11 03:24+0000\n"
+"PO-Revision-Date: 2019-03-12 11:54+0000\n"
 "Last-Translator: Yasuhiko Kamata <belphegor@belbel.or.jp>\n"
 "Language-Team: Japanese <https://l10n.opensuse.org/projects/zypper/master/ja/"
 ">\n"
@@ -974,9 +974,7 @@ msgstr "リモートのリポジトリを無視します。"
 msgid ""
 "Set the value of $releasever in all .repo files (default: distribution "
 "version)"
-msgstr ""
-"すべての.repoファイル内で$releaseverの値を設定する (既定値: ディストリビュー"
-"ションのバージョン)"
+msgstr "すべての .repo ファイル内での $releasever の値を指定します (既定値: ディストリビューションのバージョン)"
 
 #: src/Config.cc:620
 msgid "Target Options"
@@ -991,9 +989,7 @@ msgstr "指定したルートディレクトリ内で処理を実施します。
 #: src/Config.cc:631
 msgid ""
 "Operate on a different root directory, but share repositories with the host."
-msgstr ""
-"このホストと同じリポジトリを使用するが、異なるルートディレクトリで作業を行な"
-"う。"
+msgstr "このホストと同じリポジトリを使用したまま、指定したルートディレクトリ内で処理を実施します。"
 
 #: src/Config.cc:637
 msgid "Ignoring installed resolvables."
@@ -1002,7 +998,7 @@ msgstr "インストールされている解決方法を無視しています。
 #. translators: --disable-system-resolvables
 #: src/Config.cc:640
 msgid "Do not read installed packages."
-msgstr "インストールされたパッケージを読み込まない。"
+msgstr "インストールされたパッケージを読み込みません。"
 
 #: src/Config.cc:804
 msgid "No config file is in use. Can not save options."
@@ -2828,7 +2824,7 @@ msgstr ""
 msgid ""
 "Whether applicable optional patches should be treated as needed or be "
 "excluded."
-msgstr "任意指定のパッチを必要なパッチとして含めるかどうか。"
+msgstr "任意指定のパッチを必要なパッチとして含めるかどうかを指定します。"
 
 #: src/commands/optionsets.cc:310
 msgid "The default is to exclude optional patches."
@@ -4472,20 +4468,19 @@ msgstr "熟練者向けオプション"
 
 #: src/commands/solveroptionset.cc:66
 msgid "Whether to allow downgrading installed resolvables."
-msgstr "インストール済みの解決方法に対して、ダウングレードを許可するかどうか。"
+msgstr "インストール済みの解決方法に対して、ダウングレードを許可するかどうかを指定します。"
 
 #: src/commands/solveroptionset.cc:68
 msgid "Whether to allow changing the names of installed resolvables."
-msgstr "インストール済みの解決方法に対して、名前の変更を許可するかどうか。"
+msgstr "インストール済みの解決方法に対して、名前の変更を許可するかどうかを指定します。"
 
 #: src/commands/solveroptionset.cc:70
 msgid "Whether to allow changing the architecture of installed resolvables."
-msgstr ""
-"インストール済みの解決方法に対して、アーキテクチャの変更を許可するかどうか。"
+msgstr "インストール済みの解決方法に対して、アーキテクチャの変更を許可するかどうかを指定します。"
 
 #: src/commands/solveroptionset.cc:72
 msgid "Whether to allow changing the vendor of installed resolvables."
-msgstr "インストールされているresolvableのベンダ変更を許可するかどうか。"
+msgstr "インストールされている resolvable のベンダ変更を許可するかどうかを指定します。"
 
 #. translators: -u, --clean-deps
 #: src/commands/solveroptionset.cc:96
