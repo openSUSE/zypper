@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper.nl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-02-25 14:33+0100\n"
-"PO-Revision-Date: 2019-01-28 08:29+0000\n"
-"Last-Translator: Eva van Rein <vistatec@globaltextware.nl>\n"
+"PO-Revision-Date: 2019-03-14 19:13+0000\n"
+"Last-Translator: Freek de Kruijf <freek@opensuse.org>\n"
 "Language-Team: Dutch <https://l10n.opensuse.org/projects/zypper/master/nl/>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
@@ -530,11 +530,11 @@ msgstr "Dit is een alias voor '%s'."
 
 #: src/commands/commandhelpformatter.h:107
 msgid "Examples:"
-msgstr ""
+msgstr "Voorbeelden:"
 
 #: src/commands/commandhelpformatter.h:110
 msgid "Arguments:"
-msgstr ""
+msgstr "Argumenten:"
 
 #: src/commands/commandhelpformatter.h:123 src/utils/flags/zyppflags.cc:582
 msgid "Command options:"
@@ -705,7 +705,7 @@ msgstr "JJJJ-MM-DD"
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:53
 msgid "MODE"
-msgstr ""
+msgstr "MODUS"
 
 #. TranslatorExplanation These are reasons for various failures.
 #: src/utils/prompt.h:185
@@ -755,7 +755,7 @@ msgstr "Pakketblokkeringen:"
 
 #: src/Command.cc:154
 msgid "Locale Management:"
-msgstr ""
+msgstr "Beheer van taalregio:"
 
 #: src/Command.cc:158
 msgid "Other Commands:"
@@ -1026,16 +1026,16 @@ msgstr "Lees geen geïnstalleerde pakketten."
 
 #: src/Config.cc:804
 msgid "No config file is in use. Can not save options."
-msgstr ""
+msgstr "Er is geen configuratiebestand in gebruik. Kan geen opties opslaan."
 
 #: src/Config.cc:815
 #, boost-format
 msgid "Option '%1%' saved in '%2%'."
-msgstr ""
+msgstr "Optie '%1%' opgeslagen in '%2%'."
 
 #: src/Config.cc:822
 msgid "Failed to save option."
-msgstr ""
+msgstr "Optie opslaan is mislukt."
 
 #: src/PackageArgs.cc:208
 #, c-format, boost-format
@@ -1861,11 +1861,11 @@ msgstr[0] "De volgende patch vereist een herstart van het systeem:"
 msgstr[1] "De volgende %d patches vereisen een herstart van het systeem:"
 
 #: src/Summary.cc:1345
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following package requires a system reboot:"
 msgid_plural "The following %d packages require a system reboot:"
-msgstr[0] "Het volgende %d pakket vereist dat het systeem opnieuw opstart:"
-msgstr[1] "De volgende %d pakketten vereist dat het systeem opnieuw opstart:"
+msgstr[0] "Het volgende pakket vereist dat het systeem opnieuw opstart:"
+msgstr[1] "De volgende %d pakketten vereisen dat het systeem opnieuw opstart:"
 
 #: src/Summary.cc:1374
 #, boost-format
@@ -2511,19 +2511,19 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/locale/addlocalecmd.cc:19
 msgid "addlocale (aloc) [OPTIONS] <LOCALE> ..."
-msgstr ""
+msgstr "addlocale (aloc) [OPTIES] <REGIOCODE> ..."
 
 #: src/commands/locale/addlocalecmd.cc:20
 msgid "Add locale(s) to requested locales."
-msgstr ""
+msgstr "Regiocode(s) opslaan bij gevraagde regiocodes."
 
 #: src/commands/locale/addlocalecmd.cc:21
 msgid "Add given locale(s) to the list of requested locales."
-msgstr ""
+msgstr "Gegeven regiocode(s) toevoegen aan de lijst met gevraagde regiocodes."
 
 #: src/commands/locale/addlocalecmd.cc:32
 msgid "Do not install corresponding packages for given locale(s)."
-msgstr ""
+msgstr "Bijbehorende pakketten voor gegeven regiocode(s) niet installeren."
 
 #: src/commands/locale/addlocalecmd.cc:56
 #, c-format, boost-format
@@ -2531,15 +2531,17 @@ msgid ""
 "Specify locale which shall be supported by the language code.\n"
 "Get a list of all available locales by calling '%s'."
 msgstr ""
+"Regiocode specificeren die ondersteund zal worden door de taalcode.\n"
+"Een lijst van alle beschikbare regiocodes ophalen door '%s' aan te roepen."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/locale/localescmd.cc:17
 msgid "locales (lloc) [OPTIONS] [LOCALE] ..."
-msgstr ""
+msgstr "locales (lloc) [OPTIES] [REGIOCODE] ..."
 
 #: src/commands/locale/localescmd.cc:18
 msgid "List requested locales (languages codes)."
-msgstr ""
+msgstr "Gevraagde regiocodes (taalcodes) tonen."
 
 #: src/commands/locale/localescmd.cc:19
 #, c-format, boost-format
@@ -2551,53 +2553,63 @@ msgid ""
 "can\n"
 "be installed by calling '%s'.\n"
 msgstr ""
+"Gevraagde regiocodes en bijbehorenden pakketten tonen.\n"
+"\n"
+"Aangeroepen zonder argumenten, de gevraagde regiocodes tonen. Als de\n"
+"pakketten voor regiocodes voor een gevraagde taal nog niet in het systeem "
+"zijn, dan kunnen ze\n"
+"geïnstalleerd worden door '%s' aan te roepen.\n"
 
 #: src/commands/locale/localescmd.cc:35
 msgid "Show corresponding packages."
-msgstr ""
+msgstr "Bijbehorende pakketten tonen."
 
 #: src/commands/locale/localescmd.cc:36
 msgid "List all available locales."
-msgstr ""
+msgstr "Alle beschikbare regiocodes tonen."
 
 #: src/commands/locale/localescmd.cc:49
 msgid "Ignoring positional arguments because --all argument was provided."
 msgstr ""
+"Positionele argumenten worden genegeerd omdat het argument --all is "
+"aangeleverd."
 
 #: src/commands/locale/localescmd.cc:76
 msgid "The locale(s) for which the information shall be printed."
-msgstr ""
+msgstr "De regiocode(s) waarvoor de informatie afgedrukt zal worden."
 
 #: src/commands/locale/localescmd.cc:80
 msgid ""
 "Get all locales with lang code 'en' that have their own country code, "
 "excluding the fallback 'en':"
 msgstr ""
+"Alle regiocodes ophalen met taalcode 'en' die hun eigen landcode hebben, met "
+"uitzondering van de terugval 'en':"
 
 #: src/commands/locale/localescmd.cc:87
 msgid "Get all locales with lang code 'en' with or without country code:"
-msgstr ""
+msgstr "Alle regiocodes met taalcode 'en' met of zonder landcode:"
 
 #: src/commands/locale/localescmd.cc:94
 msgid "Get the locale matching the argument exactly: "
-msgstr ""
+msgstr "De regiocode die exact overeenkomt met het argument: "
 
 #: src/commands/locale/localescmd.cc:101
 msgid "Get the list of packages which are available for 'de' and 'en':"
-msgstr ""
+msgstr "De lijst met pakketen die beschikbaar zijn voor 'de' en 'en':"
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/locale/removelocalecmd.cc:17
 msgid "removelocale (rloc) [OPTIONS] <LOCALE> ..."
-msgstr ""
+msgstr "removelocale (rloc) [OPTIES] <REGIOCODE> ..."
 
 #: src/commands/locale/removelocalecmd.cc:18
 msgid "Remove locale(s) from requested locales."
-msgstr ""
+msgstr "Regiocode(s) verwijderen uit gevraagde regiocodes."
 
 #: src/commands/locale/removelocalecmd.cc:19
 msgid "Remove given locale(s) from the list of supported languages."
-msgstr ""
+msgstr "Gegeven regiocode(s) uit de lijst met ondersteunde talen verwijderen."
 
 #: src/commands/locale/removelocalecmd.cc:34
 #, c-format, boost-format
@@ -2605,10 +2617,12 @@ msgid ""
 "Specify locales which shall be removed by the the language code.\n"
 "Get the list of requested locales by calling '%s'."
 msgstr ""
+"Regiocodes die verwijderd zullen worden door de taalcode.\n"
+"De lijst met gevraagde regiocodes ophalen door '%s' aan te roepen."
 
 #: src/commands/locale/removelocalecmd.cc:46
 msgid "Do not remove corresponding packages for given locale(s)."
-msgstr ""
+msgstr "Geen bijbehorende pakketten verwijderen voor gegeven regiocode(s)."
 
 # =============================================================================
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
@@ -4057,6 +4071,8 @@ msgid ""
 "For an extended search including not yet activated remote resources you may "
 "run '%1%' at any time."
 msgstr ""
+"Voor een uitgebreid zoeken inclusief nog niet geactiveerde hulpbronnen op "
+"afstand kunt u op elk moment '%1%' uitvoeren."
 
 #: src/commands/search/search-packages-hinthack.cc:99
 #, boost-format
@@ -4734,6 +4750,7 @@ msgstr "Naam van bronpakket is een vereist argument."
 #: src/commands/sourceinstall.cc:86
 msgid "Uninstalling source packages is not supported."
 msgstr ""
+"Installatie ongedaan maken van broncodepakketten wordt niet ondersteund."
 
 #: src/commands/subcommand.cc:52
 msgid "none"
@@ -5435,56 +5452,56 @@ msgstr "Bouwt binair pakket"
 #. translators: header of table column - is the language requested? (Yes/No)
 #: src/locales.cc:56 src/locales.cc:90
 msgid "Requested"
-msgstr ""
+msgstr "Gevraagd"
 
 #: src/locales.cc:60
 msgid "Fallback"
-msgstr ""
+msgstr "Terugval"
 
 #. translators: header of table column - the language code, e.g. en_US
 #: src/locales.cc:86
 msgid "Code"
-msgstr ""
+msgstr "Code"
 
 #. translators: header of table column - the language, e.g. English (United States)
 #: src/locales.cc:88
 msgid "Language"
-msgstr ""
+msgstr "Taal"
 
 #: src/locales.cc:306
 #, c-format, boost-format
 msgid "Packages for %s (locale '%s', requested: %s):"
-msgstr ""
+msgstr "Pakketten voor %s (regiocode '%s', gevraagd: %s):"
 
 #: src/locales.cc:323
 #, c-format, boost-format
 msgid "Added locale: %s"
-msgstr ""
+msgstr "Regiocode toegevoegd: %s"
 
 #: src/locales.cc:326
 #, c-format, boost-format
 msgid "ERROR: cannot add %s"
-msgstr ""
+msgstr "FOUT: kan %s niet toevoegen"
 
 #: src/locales.cc:330
 #, c-format, boost-format
 msgid " %s is already requested."
-msgstr ""
+msgstr " %s is al gevraagd."
 
 #: src/locales.cc:351
 #, c-format, boost-format
 msgid "Removed locale: %s"
-msgstr ""
+msgstr "Regiocode verwijderd: %s"
 
 #: src/locales.cc:354
 #, c-format, boost-format
 msgid "ERROR: cannot remove %s"
-msgstr ""
+msgstr "FOUT: kan %s niet verwijderen"
 
 #: src/locales.cc:358
 #, c-format, boost-format
 msgid "%s was not requested."
-msgstr ""
+msgstr "%s was niet gevraagd."
 
 #. translators: this will show up if you press ctrl+c twice
 #: src/main.cc:31
@@ -6345,6 +6362,11 @@ msgid ""
 "updated by recent upgrades. They should be restarted to benefit from the "
 "latest updates. Run '%1%' to list these programs."
 msgstr ""
+"Er zijn actieve programma's die no steeds bestanden en bibliotheken "
+"gebruiken die verwijderd of bijgewerkt zijn door recente opwaarderingen. Ze "
+"zouden opnieuw gestart moeten worden om te voordeel te hebben van de laatste "
+"vormen van bijwerken. Voer '%1%' uit om een lijst met deze programma's te "
+"maken."
 
 #: src/solve-commit.cc:481
 msgid "Update notifications were received from the following packages:"
@@ -6681,35 +6703,36 @@ msgstr "Kan de configuratiebestandsparser niet initialiseren."
 #: src/utils/Augeas.cc:510
 #, boost-format
 msgid "Malformed option name '%1%'."
-msgstr ""
+msgstr "Onjuiste naam van optie '%1%'."
 
 #: src/utils/Augeas.cc:522
 msgid "Could not save the config file."
-msgstr ""
+msgstr "Kon het configuratiebestand niet opslaan."
 
 #: src/utils/Augeas.cc:564
 #, boost-format
 msgid "Config file '%1%' exists but is not a file."
-msgstr ""
+msgstr "Configuratiebestand '%1%' bestaat maar is geen bestand."
 
 #: src/utils/Augeas.cc:580
 msgid "Could not load the config files."
-msgstr ""
+msgstr "Kon het configuratiebestand niet laden."
 
 #: src/utils/Augeas.cc:606
 #, boost-format
 msgid "Config file '%1%' does not exist."
-msgstr ""
+msgstr "Configuratiebesatnd '%1%' bestaat niet."
 
 #. translator: %1% is the path to a config file, %2% is the name of an options inside the file
 #: src/utils/Augeas.cc:637
 #, boost-format
 msgid "%1%: Option '%2%' is defined multiple times. Using the last one."
 msgstr ""
+"%1%: Optie '%2%' is meerdere keren gedefinieerd. De laatste wordt gebruikt."
 
 #: src/utils/Augeas.cc:658
 msgid "No config file is in use."
-msgstr ""
+msgstr "Geen configuratiebestand is in gebruik."
 
 #: src/utils/flags/exceptions.cc:22
 #, boost-format
@@ -7059,11 +7082,11 @@ msgstr "Opnieuw proberen..."
 
 #: src/utils/prompt.cc:325
 msgid "always"
-msgstr ""
+msgstr "altijd"
 
 #: src/utils/prompt.cc:325
 msgid "never"
-msgstr ""
+msgstr "nooit"
 
 #: src/utils/prompt.cc:372
 msgid "Cannot read input: bad stream or EOF."
@@ -7086,7 +7109,7 @@ msgstr "Ongeldig antwoord '%s'."
 #: src/utils/prompt.cc:415
 #, c-format, boost-format
 msgid "Ambiguous answer '%s'."
-msgstr ""
+msgstr "Meerduidig antwoord '%s'."
 
 #. translators: the %s are: 'y', 'yes' (translated), 'n', and 'no' (translated).
 #: src/utils/prompt.cc:423
@@ -7099,6 +7122,8 @@ msgid ""
 "If nothing else works enter '#1' to select the 1st option, '#2' for the 2nd "
 "one, ..."
 msgstr ""
+"Als niets anders werkt voer '#1' in om de eerste optie te selecteren, '#2' "
+"voor de tweede, ..."
 
 #~ msgid ""
 #~ "For an extended search including not yet activated remote resources you "
