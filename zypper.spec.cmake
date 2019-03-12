@@ -31,8 +31,11 @@ BuildRequires:  readline-devel >= 5.1
 BuildRequires:  libxml2-devel
 Requires:       procps
 %if 0%{?suse_version}
+Requires:	libaugeas0 >= 1.10.0
 %requires_ge    libzypp
 Recommends:     logrotate zypper-log
+%else
+Requires:       augeas >= 1.10.0
 %endif
 
 # required for documentation
