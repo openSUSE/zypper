@@ -9,10 +9,10 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-02-25 14:33+0100\n"
-"PO-Revision-Date: 2019-01-17 05:31+0000\n"
+"PO-Revision-Date: 2019-03-12 11:54+0000\n"
 "Last-Translator: David Medina <medipas@gmail.com>\n"
-"Language-Team: Catalan <https://l10n.opensuse.org/projects/zypper/master/ca/"
-">\n"
+"Language-Team: Catalan <https://l10n.opensuse.org/projects/zypper/master/ca/>"
+"\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -515,11 +515,11 @@ msgstr "És un àlies per a '%s'."
 
 #: src/commands/commandhelpformatter.h:107
 msgid "Examples:"
-msgstr ""
+msgstr "Exemples:"
 
 #: src/commands/commandhelpformatter.h:110
 msgid "Arguments:"
-msgstr ""
+msgstr "Arguments:"
 
 #: src/commands/commandhelpformatter.h:123 src/utils/flags/zyppflags.cc:582
 msgid "Command options:"
@@ -690,7 +690,7 @@ msgstr "AAAA-MM-DD"
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:53
 msgid "MODE"
-msgstr ""
+msgstr "MODE"
 
 #. TranslatorExplanation These are reasons for various failures.
 #: src/utils/prompt.h:185
@@ -739,7 +739,7 @@ msgstr "Blocatge de paquets:"
 
 #: src/Command.cc:154
 msgid "Locale Management:"
-msgstr ""
+msgstr "Gestió de llengua:"
 
 #: src/Command.cc:158
 msgid "Other Commands:"
@@ -1010,15 +1010,16 @@ msgstr "No llegeixis els paquets instal·lats."
 #: src/Config.cc:804
 msgid "No config file is in use. Can not save options."
 msgstr ""
+"No hi ha cap fitxer de configuració en ús. No es poden desar les opcions."
 
 #: src/Config.cc:815
 #, boost-format
 msgid "Option '%1%' saved in '%2%'."
-msgstr ""
+msgstr "Opció \"%1%\" desada a \"%2%\"."
 
 #: src/Config.cc:822
 msgid "Failed to save option."
-msgstr ""
+msgstr "Ha fallat desar l'opció."
 
 #: src/PackageArgs.cc:208
 #, c-format, boost-format
@@ -1821,8 +1822,8 @@ msgstr[1] "Els %d pedaços següents requereixen un reinici del sistema:"
 #, c-format, boost-format
 msgid "The following package requires a system reboot:"
 msgid_plural "The following %d packages require a system reboot:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "El paquet següent requereix un reinici del sistema:"
+msgstr[1] "Els paquets següents requereixen un reinici del sistema:"
 
 #: src/Summary.cc:1374
 #, boost-format
@@ -2463,19 +2464,20 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/locale/addlocalecmd.cc:19
 msgid "addlocale (aloc) [OPTIONS] <LOCALE> ..."
-msgstr ""
+msgstr "addlocale (aloc) [OPCIONS] <LLENGUA> ..."
 
 #: src/commands/locale/addlocalecmd.cc:20
 msgid "Add locale(s) to requested locales."
-msgstr ""
+msgstr "Afegiu llengües a les llengües sol·licitades."
 
 #: src/commands/locale/addlocalecmd.cc:21
 msgid "Add given locale(s) to the list of requested locales."
-msgstr ""
+msgstr "Afegeix llengües seleccionades a la llista de llengües sol·licitades."
 
 #: src/commands/locale/addlocalecmd.cc:32
 msgid "Do not install corresponding packages for given locale(s)."
 msgstr ""
+"No instal·lis els paquets corresponents per a les llengües seleccionades."
 
 #: src/commands/locale/addlocalecmd.cc:56
 #, c-format, boost-format
@@ -2483,15 +2485,17 @@ msgid ""
 "Specify locale which shall be supported by the language code.\n"
 "Get a list of all available locales by calling '%s'."
 msgstr ""
+"Especifiqueu la llengua, que ha de ser compatible amb el codi de llengua.\n"
+"Obtingueu una llista de totes les llengües disponibles amb l'ordre \"%s\"."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/locale/localescmd.cc:17
 msgid "locales (lloc) [OPTIONS] [LOCALE] ..."
-msgstr ""
+msgstr "locales (lloc) [OPCIONS] [LLLENGUA] ..."
 
 #: src/commands/locale/localescmd.cc:18
 msgid "List requested locales (languages codes)."
-msgstr ""
+msgstr "Llista les llengües sol·licitades (codis de llengua)."
 
 #: src/commands/locale/localescmd.cc:19
 #, c-format, boost-format
@@ -2503,53 +2507,64 @@ msgid ""
 "can\n"
 "be installed by calling '%s'.\n"
 msgstr ""
+"Llista les llengües sol·licitades i els paquets corresponents.\n"
+"\n"
+"Sense arguments, llista les llengües sol·licitades. Si els paquets\n"
+"de llengua per a una llengua sol·licitada encara no són al sistema,\n"
+"es poden instal·lar amb l'ordre \"%s\".\n"
 
 #: src/commands/locale/localescmd.cc:35
 msgid "Show corresponding packages."
-msgstr ""
+msgstr "Mostra els paquets corresponents."
 
 #: src/commands/locale/localescmd.cc:36
 msgid "List all available locales."
-msgstr ""
+msgstr "Llista totes les llengües disponibles."
 
 #: src/commands/locale/localescmd.cc:49
 msgid "Ignoring positional arguments because --all argument was provided."
 msgstr ""
+"S'ignoren els arguments posicionals perquè s'ha proporcionat l'argument "
+"--all."
 
 #: src/commands/locale/localescmd.cc:76
 msgid "The locale(s) for which the information shall be printed."
-msgstr ""
+msgstr "Les llengües de les quals s'ha d'imprimir la informació."
 
 #: src/commands/locale/localescmd.cc:80
 msgid ""
 "Get all locales with lang code 'en' that have their own country code, "
 "excluding the fallback 'en':"
 msgstr ""
+"Obtén totes les llengües amb el codi \"en\" que tinguin codi de país propi, "
+"excloent-ne l'opció alternativa \"en\":"
 
 #: src/commands/locale/localescmd.cc:87
 msgid "Get all locales with lang code 'en' with or without country code:"
-msgstr ""
+msgstr "Obtén totes les llengües amb el codi \"en\" amb o sense codi de país:"
 
 #: src/commands/locale/localescmd.cc:94
 msgid "Get the locale matching the argument exactly: "
-msgstr ""
+msgstr "Obtén la llengua que coincideixi exactament amb l'argument: "
 
 #: src/commands/locale/localescmd.cc:101
 msgid "Get the list of packages which are available for 'de' and 'en':"
 msgstr ""
+"Obtén la llista de paquets que estan disponibles per als codis \"de\" i \""
+"en\":"
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/locale/removelocalecmd.cc:17
 msgid "removelocale (rloc) [OPTIONS] <LOCALE> ..."
-msgstr ""
+msgstr "removelocale (rloc) [OPCIONS] <LLENGUA> ..."
 
 #: src/commands/locale/removelocalecmd.cc:18
 msgid "Remove locale(s) from requested locales."
-msgstr ""
+msgstr "Suprimeix llengües de les llengües sol·licitades."
 
 #: src/commands/locale/removelocalecmd.cc:19
 msgid "Remove given locale(s) from the list of supported languages."
-msgstr ""
+msgstr "Suprimeix llengües específiques de la llista de llengües admeses."
 
 #: src/commands/locale/removelocalecmd.cc:34
 #, c-format, boost-format
@@ -2557,10 +2572,12 @@ msgid ""
 "Specify locales which shall be removed by the the language code.\n"
 "Get the list of requested locales by calling '%s'."
 msgstr ""
+"Especifiqueu les llengües que s'han de suprimir segons el codi de llengua.\n"
+"Obteniu la llista de llengües sol·licitades amb l'ordre \"%s\"."
 
 #: src/commands/locale/removelocalecmd.cc:46
 msgid "Do not remove corresponding packages for given locale(s)."
-msgstr ""
+msgstr "No suprimeixis els paquets corresponents de les llengües especificades."
 
 # =============================================================================
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
@@ -3996,6 +4013,8 @@ msgid ""
 "For an extended search including not yet activated remote resources you may "
 "run '%1%' at any time."
 msgstr ""
+"Per a una cerca més àmplia que inclogui recursos remots encara no activats, "
+"podeu executar \"%1%\" en qualsevol moment."
 
 #: src/commands/search/search-packages-hinthack.cc:99
 #, boost-format
@@ -4648,7 +4667,7 @@ msgstr "El nom del paquet de codi font és necessari com a argument."
 
 #: src/commands/sourceinstall.cc:86
 msgid "Uninstalling source packages is not supported."
-msgstr ""
+msgstr "No s'admet la desinstal·lació de paquets font."
 
 #: src/commands/subcommand.cc:52
 msgid "none"
@@ -5350,56 +5369,56 @@ msgstr "Construeix un paquet binari"
 #. translators: header of table column - is the language requested? (Yes/No)
 #: src/locales.cc:56 src/locales.cc:90
 msgid "Requested"
-msgstr ""
+msgstr "Sol·licitada"
 
 #: src/locales.cc:60
 msgid "Fallback"
-msgstr ""
+msgstr "Alternativa"
 
 #. translators: header of table column - the language code, e.g. en_US
 #: src/locales.cc:86
 msgid "Code"
-msgstr ""
+msgstr "Codi"
 
 #. translators: header of table column - the language, e.g. English (United States)
 #: src/locales.cc:88
 msgid "Language"
-msgstr ""
+msgstr "Llengua"
 
 #: src/locales.cc:306
 #, c-format, boost-format
 msgid "Packages for %s (locale '%s', requested: %s):"
-msgstr ""
+msgstr "Paquets per a %s (llengua: %s, sol·licitada: %s):"
 
 #: src/locales.cc:323
 #, c-format, boost-format
 msgid "Added locale: %s"
-msgstr ""
+msgstr "Llengua afegida: %s"
 
 #: src/locales.cc:326
 #, c-format, boost-format
 msgid "ERROR: cannot add %s"
-msgstr ""
+msgstr "ERROR: no es pot afegir %s"
 
 #: src/locales.cc:330
 #, c-format, boost-format
 msgid " %s is already requested."
-msgstr ""
+msgstr " %s ja s'ha sol·licitat."
 
 #: src/locales.cc:351
 #, c-format, boost-format
 msgid "Removed locale: %s"
-msgstr ""
+msgstr "Llengua suprimida: %s"
 
 #: src/locales.cc:354
 #, c-format, boost-format
 msgid "ERROR: cannot remove %s"
-msgstr ""
+msgstr "ERROR: no es pot suprimir %s"
 
 #: src/locales.cc:358
 #, c-format, boost-format
 msgid "%s was not requested."
-msgstr ""
+msgstr "%s no s'ha sol·licitat."
 
 #. translators: this will show up if you press ctrl+c twice
 #: src/main.cc:31
@@ -6254,6 +6273,10 @@ msgid ""
 "updated by recent upgrades. They should be restarted to benefit from the "
 "latest updates. Run '%1%' to list these programs."
 msgstr ""
+"Hi ha programes en execució que encara usen fitxers i biblioteques "
+"suprimides o actualitzades per les actualitzacions recents. S'haurien de "
+"reiniciar per poder aprofitar les darreres actualitzacions. Executeu \"%1%\" "
+"per obtenir una llista d'aquests programes."
 
 #: src/solve-commit.cc:481
 msgid "Update notifications were received from the following packages:"
@@ -6592,35 +6615,36 @@ msgstr "No es pot iniciar l'anàlisi del fitxer de configuració."
 #: src/utils/Augeas.cc:510
 #, boost-format
 msgid "Malformed option name '%1%'."
-msgstr ""
+msgstr "Nom de l'opció incorrecte: \"%1%\"."
 
 #: src/utils/Augeas.cc:522
 msgid "Could not save the config file."
-msgstr ""
+msgstr "No s'ha pogut desar el fitxer de configuració."
 
 #: src/utils/Augeas.cc:564
 #, boost-format
 msgid "Config file '%1%' exists but is not a file."
-msgstr ""
+msgstr "El fitxer de configuració \"%1%\" existeix però no és un fitxer."
 
 #: src/utils/Augeas.cc:580
 msgid "Could not load the config files."
-msgstr ""
+msgstr "No s'han pogut carregar els fitxers de configuració."
 
 #: src/utils/Augeas.cc:606
 #, boost-format
 msgid "Config file '%1%' does not exist."
-msgstr ""
+msgstr "El fitxer de configuració \"%1%\" no existeix."
 
 #. translator: %1% is the path to a config file, %2% is the name of an options inside the file
 #: src/utils/Augeas.cc:637
 #, boost-format
 msgid "%1%: Option '%2%' is defined multiple times. Using the last one."
 msgstr ""
+"%1%: l'opció \"%2%\" s'ha definit diverses vegades. Se n'usa la darrera."
 
 #: src/utils/Augeas.cc:658
 msgid "No config file is in use."
-msgstr ""
+msgstr "No hi ha cap fitxer de configuració en ús."
 
 #: src/utils/flags/exceptions.cc:22
 #, boost-format
@@ -6968,11 +6992,11 @@ msgstr "Ho torno a provar..."
 
 #: src/utils/prompt.cc:325
 msgid "always"
-msgstr ""
+msgstr "sempre"
 
 #: src/utils/prompt.cc:325
 msgid "never"
-msgstr ""
+msgstr "mai"
 
 #: src/utils/prompt.cc:372
 msgid "Cannot read input: bad stream or EOF."
@@ -6995,7 +7019,7 @@ msgstr "Resposta incorrecta \"%s\"."
 #: src/utils/prompt.cc:415
 #, c-format, boost-format
 msgid "Ambiguous answer '%s'."
-msgstr ""
+msgstr "Resposta ambigua: \"%s\"."
 
 #. translators: the %s are: 'y', 'yes' (translated), 'n', and 'no' (translated).
 #: src/utils/prompt.cc:423
@@ -7009,6 +7033,8 @@ msgid ""
 "If nothing else works enter '#1' to select the 1st option, '#2' for the 2nd "
 "one, ..."
 msgstr ""
+"Si no funciona res més, introduïu \"#1\" per seleccionar la 1a opció, \"#2\" "
+"per a la 2a..."
 
 #~ msgid ""
 #~ "For an extended search including not yet activated remote resources you "
