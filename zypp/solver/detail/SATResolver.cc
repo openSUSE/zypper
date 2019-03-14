@@ -968,37 +968,77 @@ PoolItem SATResolver::mapItem ( const PoolItem & item )
 sat::Solvable SATResolver::mapSolvable ( const Id & id )
 { return mapBuddy( sat::Solvable(id) ); }
 
+std::vector<std::string> SATResolver::SATgetCompleteProblemInfoStrings ( Id problem )
+{
+  std::vector<std::string> ret;
+  sat::Queue problems;
+  solver_findallproblemrules( _satSolver, problem, problems );
+
+  bool nobad = false;
+
+  //filter out generic rule information if more explicit ones are available
+  for ( sat::Queue::size_type i = 0; i < problems.size(); i++ ) {
+    SolverRuleinfo ruleClass = solver_ruleclass( _satSolver, problems[i]);
+    if ( ruleClass != SolverRuleinfo::SOLVER_RULE_UPDATE && ruleClass != SolverRuleinfo::SOLVER_RULE_JOB ) {
+      nobad = true;
+      break;
+    }
+  }
+  for ( sat::Queue::size_type i = 0; i < problems.size(); i++ ) {
+    SolverRuleinfo ruleClass = solver_ruleclass( _satSolver, problems[i]);
+    if ( nobad && ( ruleClass == SolverRuleinfo::SOLVER_RULE_UPDATE || ruleClass == SolverRuleinfo::SOLVER_RULE_JOB ) ) {
+      continue;
+    }
+
+    std::string detail;
+    Id ignore = 0;
+    std::string pInfo = SATproblemRuleInfoString( problems[i], detail, ignore );
+
+    //we get the same string multiple times, reduce the noise
+    if ( std::find( ret.begin(), ret.end(), pInfo ) == ret.end() )
+      ret.push_back( pInfo );
+  }
+  return ret;
+}
+
 string SATResolver::SATprobleminfoString(Id problem, string &detail, Id &ignoreId)
+{
+  // FIXME: solver_findallproblemrules to get all rules for this problem
+  // (the 'most relevabt' one returned by solver_findproblemrule is embedded
+  Id probr = solver_findproblemrule(_satSolver, problem);
+  return SATproblemRuleInfoString( probr, detail, ignoreId );
+}
+
+std::string SATResolver::SATproblemRuleInfoString (Id probr, std::string &detail, Id &ignoreId)
 {
   string ret;
   sat::detail::CPool *pool = _satSolver->pool;
-  Id probr;
   Id dep, source, target;
-  sat::Solvable s, s2;
+  SolverRuleinfo type = solver_ruleinfo(_satSolver, probr, &source, &target, &dep);
 
   ignoreId = 0;
 
-  // FIXME: solver_findallproblemrules to get all rules for this problem
-  // (the 'most relevabt' one returned by solver_findproblemrule is embedded
-  probr = solver_findproblemrule(_satSolver, problem);
-  switch (solver_ruleinfo(_satSolver, probr, &source, &target, &dep))
+  sat::Solvable s = mapSolvable( source );
+  sat::Solvable s2 = mapSolvable( target );
+
+  // @FIXME, these strings are a duplicate copied from the libsolv library
+  // to provide translations. Instead of having duplicate code we should
+  // translate those strings directly in libsolv
+  switch ( type )
   {
       case SOLVER_RULE_DISTUPGRADE:
-	  s = mapSolvable (source);
 	  ret = str::form (_("%s does not belong to a distupgrade repository"), s.asString().c_str());
   	  break;
       case SOLVER_RULE_INFARCH:
-	  s = mapSolvable (source);
 	  ret = str::form (_("%s has inferior architecture"), s.asString().c_str());
 	  break;
       case SOLVER_RULE_UPDATE:
-	  s = mapSolvable (source);
 	  ret = str::form (_("problem with installed package %s"), s.asString().c_str());
 	  break;
       case SOLVER_RULE_JOB:
 	  ret = _("conflicting requests");
 	  break;
-      case SOLVER_RULE_RPM:
+      case SOLVER_RULE_PKG:
 	  ret = _("some dependency problem");
 	  break;
       case SOLVER_RULE_JOB_NOTHING_PROVIDES_DEP:
@@ -1015,42 +1055,30 @@ string SATResolver::SATprobleminfoString(Id problem, string &detail, Id &ignoreI
       case SOLVER_RULE_JOB_PROVIDED_BY_SYSTEM:
 	  ret = str::form (_("%s is provided by the system and cannot be erased"), pool_dep2str(pool, dep));
 	  break;
-      case SOLVER_RULE_RPM_NOT_INSTALLABLE:
-	  s = mapSolvable (source);
+      case SOLVER_RULE_PKG_NOT_INSTALLABLE:
 	  ret = str::form (_("%s is not installable"), s.asString().c_str());
 	  break;
-      case SOLVER_RULE_RPM_NOTHING_PROVIDES_DEP:
+      case SOLVER_RULE_PKG_NOTHING_PROVIDES_DEP:
 	  ignoreId = source; // for setting weak dependencies
-	  s = mapSolvable (source);
 	  ret = str::form (_("nothing provides %s needed by %s"), pool_dep2str(pool, dep), s.asString().c_str());
 	  break;
-      case SOLVER_RULE_RPM_SAME_NAME:
-	  s = mapSolvable (source);
-	  s2 = mapSolvable (target);
+      case SOLVER_RULE_PKG_SAME_NAME:
 	  ret = str::form (_("cannot install both %s and %s"), s.asString().c_str(), s2.asString().c_str());
 	  break;
-      case SOLVER_RULE_RPM_PACKAGE_CONFLICT:
-	  s = mapSolvable (source);
-	  s2 = mapSolvable (target);
+      case SOLVER_RULE_PKG_CONFLICTS:
 	  ret = str::form (_("%s conflicts with %s provided by %s"), s.asString().c_str(), pool_dep2str(pool, dep), s2.asString().c_str());
 	  break;
-      case SOLVER_RULE_RPM_PACKAGE_OBSOLETES:
-	  s = mapSolvable (source);
-	  s2 = mapSolvable (target);
+      case SOLVER_RULE_PKG_OBSOLETES:
 	  ret = str::form (_("%s obsoletes %s provided by %s"), s.asString().c_str(), pool_dep2str(pool, dep), s2.asString().c_str());
 	  break;
-      case SOLVER_RULE_RPM_INSTALLEDPKG_OBSOLETES:
-	  s = mapSolvable (source);
-	  s2 = mapSolvable (target);
+      case SOLVER_RULE_PKG_INSTALLED_OBSOLETES:
 	  ret = str::form (_("installed %s obsoletes %s provided by %s"), s.asString().c_str(), pool_dep2str(pool, dep), s2.asString().c_str());
 	  break;
-      case SOLVER_RULE_RPM_SELF_CONFLICT:
-	  s = mapSolvable (source);
+      case SOLVER_RULE_PKG_SELF_CONFLICT:
 	  ret = str::form (_("solvable %s conflicts with %s provided by itself"), s.asString().c_str(), pool_dep2str(pool, dep));
           break;
-      case SOLVER_RULE_RPM_PACKAGE_REQUIRES:
+      case SOLVER_RULE_PKG_REQUIRES: {
 	  ignoreId = source; // for setting weak dependencies
-	  s = mapSolvable (source);
 	  Capability cap(dep);
 	  sat::WhatProvides possibleProviders(cap);
 
@@ -1101,8 +1129,13 @@ string SATResolver::SATprobleminfoString(Id problem, string &detail, Id &ignoreI
 	      }
 	  }
 	  break;
+      }
+      default: {
+          DBG << "Unknown rule type(" << type << ") going to query libsolv for rule information." << endl;
+          ret = str::asString( ::solver_problemruleinfo2str( _satSolver, type, static_cast<Id>(s.id()), static_cast<Id>(s2.id()), dep ) );
+          break;
+      }
   }
-
   return ret;
 }
 
@@ -1131,7 +1164,7 @@ SATResolver::problems ()
 	    string whatString = SATprobleminfoString (problem,detail,ignoreId);
 	    MIL << whatString << endl;
 	    MIL << "------------------------------------" << endl;
-	    ResolverProblem_Ptr resolverProblem = new ResolverProblem (whatString, detail);
+            ResolverProblem_Ptr resolverProblem = new ResolverProblem (whatString, detail, SATgetCompleteProblemInfoStrings( problem ));
 
 	    solution = 0;
 	    while ((solution = solver_next_solution(_satSolver, problem, solution)) != 0) {

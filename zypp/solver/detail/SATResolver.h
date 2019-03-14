@@ -117,6 +117,8 @@ class SATResolver : public base::ReferenceCounted, private base::NonCopyable, pr
   private:
     // ---------------------------------- methods
     std::string SATprobleminfoString (Id problem, std::string &detail, Id &ignoreId);
+    std::string SATproblemRuleInfoString (Id rule, std::string &detail, Id &ignoreId);
+    std::vector<std::string> SATgetCompleteProblemInfoStrings ( Id problem );
     void resetItemTransaction (PoolItem item);
 
     // Create a SAT solver and reset solver selection in the pool (Collecting

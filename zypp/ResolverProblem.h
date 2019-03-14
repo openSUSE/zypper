@@ -11,6 +11,7 @@
 
 #include <list>
 #include <string>
+#include <vector>
 
 #include "zypp/ProblemTypes.h"
 #include "zypp/ProblemSolution.h"
@@ -31,6 +32,8 @@ namespace zypp
     ResolverProblem( std::string description );
     /** Constructor. */
     ResolverProblem( std::string description, std::string details );
+    /** Constructor. */
+    ResolverProblem( std::string description, std::string details, std::vector<std::string> &&completeProblemInfo );
 
     /** Destructor. */
     ~ResolverProblem();
@@ -46,6 +49,11 @@ namespace zypp
      * or an empty string if there are no useful details.
      **/
     const std::string & details() const;
+
+    /**
+     * Return a one-line description for each problematic rule in the problem tree
+     **/
+    const std::vector<std::string> & completeProblemInfo() const;
 
     /**
      * Return the possible solutions to this problem.

@@ -70,9 +70,16 @@ namespace zypp
     , _details( std::move(details) )
     {}
 
+    Impl( std::string && description, std::string && details, std::vector<std::string> &&completeProblemInfo )
+        : _description( std::move(description) )
+          , _details( std::move(details) )
+          , _completeProblemInfo ( std::move(completeProblemInfo) )
+    {}
+
     std::string		_description;
     std::string		_details;
     ProblemSolutionList	_solutions;
+    std::vector<std::string> _completeProblemInfo;
 
   private:
     friend Impl * rwcowClone<Impl>( const Impl * rhs );
@@ -94,6 +101,10 @@ namespace zypp
   : _pimpl( new Impl( std::move(description), std::move(details) ) )
   {}
 
+  ResolverProblem::ResolverProblem( std::string description, std::string details, std::vector<std::string> &&completeProblemInfo )
+      : _pimpl( new Impl( std::move(description), std::move(details), std::move(completeProblemInfo) ) )
+  {}
+
   ResolverProblem::~ResolverProblem()
   {}
 
@@ -107,6 +118,8 @@ namespace zypp
   const ProblemSolutionList & ResolverProblem::solutions() const
   { return _pimpl->_solutions; }
 
+  const std::vector<std::string> & ResolverProblem::completeProblemInfo() const
+  { return _pimpl->_completeProblemInfo; }
 
   void ResolverProblem::setDescription( std::string description )
   { _pimpl->_description = std::move(description); }
