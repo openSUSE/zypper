@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-02-25 14:33+0100\n"
-"PO-Revision-Date: 2019-03-12 11:54+0000\n"
+"PO-Revision-Date: 2019-03-21 12:49+0000\n"
 "Last-Translator: David Medina <medipas@gmail.com>\n"
 "Language-Team: Catalan <https://l10n.opensuse.org/projects/zypper/master/ca/>"
 "\n"
@@ -5631,7 +5631,7 @@ msgstr[1] "%1% repositoris"
 #: src/repos.cc:226
 #, c-format, boost-format
 msgid "Checking whether to refresh metadata for %s"
-msgstr "Comprovant si s'han d'actualitzar les metadades per a %s"
+msgstr "Comprovant si s'han de refrescar les metadades per a %s"
 
 #: src/repos.cc:255
 #, c-format, boost-format
