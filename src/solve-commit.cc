@@ -44,17 +44,24 @@ static TriBool show_problem( Zypper & zypper, const ResolverProblem & prob, Prob
   if ( !tmp.empty() )
     desc_stm << "  " << tmp << endl;
 
+  std::ostringstream desc_ext_stm;
+  desc_ext_stm << _("Detailed information: ") << endl;
+  for ( const std::string &pRule : prob.completeProblemInfo() ) {
+    desc_ext_stm << "\t" << pRule << endl;
+  }
+
   const ProblemSolutionList & solutions = prob.solutions();
 
   unsigned n = 0;
+  std::ostringstream solution_stm;
   for ( const auto & solPtr : solutions )
   {
     ++n;
     // TranslatorExplanation %d is the solution number
-    desc_stm << str::Format(_(" Solution %d: ")) % n << solPtr->description() << endl;
+    solution_stm << str::Format(_(" Solution %d: ")) % n << solPtr->description() << endl;
     tmp = solPtr->details ();
     if ( !tmp.empty () )
-      desc_stm << indent( tmp, 2 ) << endl;
+      solution_stm << indent( tmp, 2 ) << endl;
   }
 
   unsigned problem_count = God->resolver()->problems().size();
@@ -63,7 +70,7 @@ static TriBool show_problem( Zypper & zypper, const ResolverProblem & prob, Prob
   // without solutions, its useless to prompt
   if ( solutions.empty() )
   {
-    zypper.out().error( desc_stm.str() );
+    zypper.out().error( desc_stm.str() + solution_stm.str() );
     return false;
   }
 
@@ -87,6 +94,11 @@ static TriBool show_problem( Zypper & zypper, const ResolverProblem & prob, Prob
   for ( unsigned i = 1; i <= solution_count; i++ )
     numbers << i << "/";
 
+  unsigned extInfoAnswer = 0;
+  unsigned cancelAnswer = 0;
+  int retryAnswer = -1;
+  int skipAnswer = -1;
+
   if ( problem_count > 1 )
   {
     default_reply = solution_count + 2;
@@ -94,9 +106,13 @@ static TriBool show_problem( Zypper & zypper, const ResolverProblem & prob, Prob
     // "Choose from above solutions by number or skip, retry or cancel"
     // Translate the letters to whatever is suitable for your language.
     // The anserws must be separated by slash characters '/' and must
-    // correspond to skip/retry/cancel in that order.
+    // correspond to skip/retry/cancel/detailed information in that order.
     // The answers should be lower case letters.
-    popts.setOptions( numbers.str() + _("s/r/c"), default_reply );
+    popts.setOptions( numbers.str() + _("s/r/c/d"), default_reply );
+    skipAnswer    = solution_count;
+    retryAnswer   = solution_count + 1;
+    cancelAnswer  = solution_count + 2;
+    extInfoAnswer = solution_count + 3;
   }
   else
   {
@@ -104,30 +120,59 @@ static TriBool show_problem( Zypper & zypper, const ResolverProblem & prob, Prob
     // translators: answers for dependency problem solution input prompt:
     // "Choose from above solutions by number or cancel"
     // Translate the letter 'c' to whatever is suitable for your language
-    // and to the same as you translated it in the "s/r/c" string
-    // See the "s/r/c" comment for other details.
+    // and to the same as you translated it in the "s/r/c/d" string
+    // See the "s/r/c/d" comment for other details.
     // One letter string  for translation can be tricky, so in case of problems,
     // please report a bug against zypper at bugzilla.novell.com, we'll try to solve it.
-    popts.setOptions( numbers.str() + _("c"), default_reply );
+    popts.setOptions( numbers.str() + _("c/d"), default_reply );
+    cancelAnswer  = solution_count;
+    extInfoAnswer = solution_count + 1;
   }
 
-  if ( !zypper.config().non_interactive )
-    clear_keyboard_buffer();
-  zypper.out().prompt( PROMPT_DEP_RESOLVE, prompt_text, popts, desc_stm.str() );
-  unsigned reply = get_prompt_reply( zypper, PROMPT_DEP_RESOLVE, popts );
+  for ( unsigned i = 0; i < solution_count; i++ )
+    popts.setOptionHelp( i, str::Format( _("Choose solution %1%") ) % (i+1) );
+  if ( skipAnswer != -1 ) {
+    popts.setOptionHelp( skipAnswer,  _("Skip problem and continue.") );
+  }
+  if ( retryAnswer != -1 ) {
+    popts.setOptionHelp( retryAnswer, _("Retry solving immediately.") );
+  }
+  popts.setOptionHelp( cancelAnswer,  _("Choose no solution and cancel.") );
+  popts.setOptionHelp( extInfoAnswer, _("Toggle show detailed conflict information.") );
 
-  // retry
-  if ( problem_count > 1 && reply == solution_count + 1 )
-    return true;
-  // cancel (one problem)
-  if ( problem_count == 1 && reply == solution_count )
-    return false;
-  // cancel (more problems)
-  if ( problem_count > 1 && reply == solution_count + 2 )
-    return false;
-  // skip
-  if ( problem_count > 1 && reply == solution_count )
-    return indeterminate; // continue with next problem
+  bool showExtInfo = false;
+  unsigned reply = default_reply;
+
+  while ( true ) {
+
+    std::ostringstream fulltext;
+    fulltext << desc_stm.str();
+    if ( showExtInfo )
+      fulltext << desc_ext_stm.str();
+    fulltext << solution_stm.str();
+
+    if ( !zypper.config().non_interactive )
+      clear_keyboard_buffer();
+
+    zypper.out().prompt( PROMPT_DEP_RESOLVE, prompt_text, popts, fulltext.str() );
+    reply = get_prompt_reply( zypper, PROMPT_DEP_RESOLVE, popts );
+
+    if ( reply == extInfoAnswer ) {
+      showExtInfo = !showExtInfo;
+      continue;
+    }
+    // cancel
+    if ( reply == cancelAnswer )
+      return false;
+    // retry
+    if (  reply == static_cast<unsigned>(retryAnswer) )
+      return true;
+    // skip
+    if ( reply == static_cast<unsigned>(skipAnswer) )
+      return indeterminate; // continue with next problem
+
+    break;
+  }
 
   zypper.out().info( str::Format(_("Applying solution %s")) % (reply + 1), Out::HIGH );
   ProblemSolutionList::const_iterator reply_i = solutions.begin();
