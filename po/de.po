@@ -18,16 +18,16 @@ msgstr ""
 "Project-Id-Version: zypp.de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-02-27 13:31+0100\n"
-"PO-Revision-Date: 2018-08-07 08:48+0000\n"
-"Last-Translator: Sarah Kriesch <ada.lovelace@gmx.de>\n"
-"Language-Team: German <https://l10n.opensuse.org/projects/libzypp/master/de/"
-">\n"
+"PO-Revision-Date: 2019-03-16 18:44+0000\n"
+"Last-Translator: Franziska Weinberger <f.weinberger@gemino.de>\n"
+"Language-Team: German <https://l10n.opensuse.org/projects/libzypp/master/de/>"
+"\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 2.18\n"
+"X-Generator: Weblate 3.3\n"
 
 #. dubious: Throw on malformed known types, otherwise log a warning.
 #: zypp/CheckSum.cc:136
@@ -4065,10 +4065,13 @@ msgid "Authentication required for '%s'"
 msgstr "Authentifizierung erforderlich für '%s'"
 
 #: zypp/media/MediaCurl.cc:1139
+#, fuzzy
 msgid ""
 "Visit the SUSE Customer Center to check whether your registration is valid "
 "and has not expired."
 msgstr ""
+"Prüfen Sie im SUSE Customer Center, ob Ihre Registrierung gültig und nicht "
+"abgelaufen ist."
 
 #: zypp/media/MediaCurl.cc:1141
 msgid ""
