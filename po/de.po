@@ -17,8 +17,8 @@ msgstr ""
 "Project-Id-Version: zypper.de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-02-25 14:33+0100\n"
-"PO-Revision-Date: 2019-03-16 17:38+0000\n"
-"Last-Translator: Franziska Weinberger <f.weinberger@gemino.de>\n"
+"PO-Revision-Date: 2019-03-21 12:49+0000\n"
+"Last-Translator: Sarah Kriesch <ada.lovelace@gmx.de>\n"
 "Language-Team: German <https://l10n.opensuse.org/projects/zypper/master/de/>"
 "\n"
 "Language: de\n"
@@ -534,12 +534,10 @@ msgid "This is an alias for '%s'."
 msgstr "Dies ist ein Alias für '%s'."
 
 #: src/commands/commandhelpformatter.h:107
-#, fuzzy
 msgid "Examples:"
 msgstr "Beispiele:"
 
 #: src/commands/commandhelpformatter.h:110
-#, fuzzy
 msgid "Arguments:"
 msgstr "Argumente:"
 
@@ -715,7 +713,6 @@ msgstr "JJJJ-MM-TT"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:53
-#, fuzzy
 msgid "MODE"
 msgstr "MODUS"
 
@@ -766,9 +763,8 @@ msgid "Package Locks:"
 msgstr "Paketsperren:"
 
 #: src/Command.cc:154
-#, fuzzy
 msgid "Locale Management:"
-msgstr "Locale-Verwaltung:"
+msgstr "Lokale Verwaltung:"
 
 #: src/Command.cc:158
 msgid "Other Commands:"
@@ -1041,19 +1037,17 @@ msgid "Do not read installed packages."
 msgstr "Keine installierten Pakete lesen."
 
 #: src/Config.cc:804
-#, fuzzy
 msgid "No config file is in use. Can not save options."
 msgstr ""
-"Es wird keine Konfigurationsdatei verwendet. Die Optionen können nicht "
+"Es wird keine Konfigurationsdatei verwendet. Optionen können nicht "
 "gespeichert werden."
 
 #: src/Config.cc:815
-#, boost-format, fuzzy
+#, boost-format
 msgid "Option '%1%' saved in '%2%'."
 msgstr "Option '%1%' gespeichert in '%2%'."
 
 #: src/Config.cc:822
-#, fuzzy
 msgid "Failed to save option."
 msgstr "Speichern der Option fehlgeschlagen."
 
@@ -2522,7 +2516,6 @@ msgstr ""
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/locale/addlocalecmd.cc:19
-#, fuzzy
 msgid "addlocale (aloc) [OPTIONS] <LOCALE> ..."
 msgstr "addlocale (aloc) [OPTIONEN] <LOCALE>..."
 
@@ -7196,13 +7189,12 @@ msgstr ""
 "funktioniert."
 
 #: src/utils/prompt.cc:428
-#, fuzzy
 msgid ""
 "If nothing else works enter '#1' to select the 1st option, '#2' for the 2nd "
 "one, ..."
 msgstr ""
-"Wenn nichts anderes funktioniert, geben Sie '#1' zur Auswahl der ersten "
-"Option ein, '#2' zur Auswahl der zweiten Option ..."
+"Wenn nichts anderes funktioniert, geben Sie '#1' zur Auswahl der 1. Option "
+"ein, '#2' zur Auswahl der 2. Option, ..."
 
 #~ msgid ""
 #~ "For an extended search including not yet activated remote resources you "
