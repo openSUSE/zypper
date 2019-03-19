@@ -18,7 +18,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-02-25 14:33+0100\n"
 "PO-Revision-Date: 2019-03-21 12:49+0000\n"
-"Last-Translator: Sarah Kriesch <ada.lovelace@gmx.de>\n"
+"Last-Translator: Franziska Weinberger <f.weinberger@gemino.de>\n"
 "Language-Team: German <https://l10n.opensuse.org/projects/zypper/master/de/>"
 "\n"
 "Language: de\n"
@@ -2520,24 +2520,21 @@ msgid "addlocale (aloc) [OPTIONS] <LOCALE> ..."
 msgstr "addlocale (aloc) [OPTIONEN] <LOCALE>..."
 
 #: src/commands/locale/addlocalecmd.cc:20
-#, fuzzy
 msgid "Add locale(s) to requested locales."
 msgstr "Den angeforderten Locales weitere Locale(s) hinzufügen."
 
 #: src/commands/locale/addlocalecmd.cc:21
-#, fuzzy
 msgid "Add given locale(s) to the list of requested locales."
 msgstr ""
 "Die angegebenen Locale(s) der Liste der angeforderten Locales hinzufügen."
 
 #: src/commands/locale/addlocalecmd.cc:32
-#, fuzzy
 msgid "Do not install corresponding packages for given locale(s)."
 msgstr ""
 "Die entsprechenden Pakete für die angegebenen Locale(s) nicht installieren."
 
 #: src/commands/locale/addlocalecmd.cc:56
-#, boost-format, c-format, fuzzy
+#, boost-format, c-format
 msgid ""
 "Specify locale which shall be supported by the language code.\n"
 "Get a list of all available locales by calling '%s'."
@@ -2547,17 +2544,15 @@ msgstr ""
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/locale/localescmd.cc:17
-#, fuzzy
 msgid "locales (lloc) [OPTIONS] [LOCALE] ..."
 msgstr "locales (lloc) [OPTIONEN] [LOCALE] ..."
 
 #: src/commands/locale/localescmd.cc:18
-#, fuzzy
 msgid "List requested locales (languages codes)."
 msgstr "Angeforderte Locales (Sprachcodes) auflisten."
 
 #: src/commands/locale/localescmd.cc:19
-#, boost-format, c-format, fuzzy
+#, boost-format, c-format
 msgid ""
 "List requested locales and corresponding packages.\n"
 "\n"
@@ -2575,78 +2570,66 @@ msgstr ""
 "können sie durch Aufrufen von '%s' installiert werden.\n"
 
 #: src/commands/locale/localescmd.cc:35
-#, fuzzy
 msgid "Show corresponding packages."
 msgstr "Die entsprechenden Pakete anzeigen."
 
 #: src/commands/locale/localescmd.cc:36
-#, fuzzy
 msgid "List all available locales."
 msgstr "Alle verfügbaren Locales auflisten."
 
 #: src/commands/locale/localescmd.cc:49
-#, fuzzy
 msgid "Ignoring positional arguments because --all argument was provided."
 msgstr ""
 "Positionsargumente werden ignoriert, da das Argument '--all' angegeben wurde."
 
 #: src/commands/locale/localescmd.cc:76
-#, fuzzy
 msgid "The locale(s) for which the information shall be printed."
-msgstr "Die Locale(s) für die die Informationen ausgegeben werden sollen."
+msgstr "Die Locale(s), für die die Informationen ausgegeben werden sollen."
 
 #: src/commands/locale/localescmd.cc:80
-#, fuzzy
 msgid ""
 "Get all locales with lang code 'en' that have their own country code, "
 "excluding the fallback 'en':"
 msgstr ""
 "Alle Locales mit dem Sprachcode 'en' abrufen, die über einen eigenen "
-"Ländercode verfügen, ausschließlich des Fallbacks 'en':"
+"Ländercode verfügen, mit Ausnahme der Ausweichlösung 'en':"
 
 #: src/commands/locale/localescmd.cc:87
-#, fuzzy
 msgid "Get all locales with lang code 'en' with or without country code:"
-msgstr "Alle Locales mit Sprachcode 'en' mit oder ohne Sprachcode abrufen:"
+msgstr "Alle Locales mit Sprachcode 'en' mit oder ohne Ländercode abrufen:"
 
 #: src/commands/locale/localescmd.cc:94
-#, fuzzy
 msgid "Get the locale matching the argument exactly: "
 msgstr "Locale abrufen, die dem Argument genau entspricht: "
 
 #: src/commands/locale/localescmd.cc:101
-#, fuzzy
 msgid "Get the list of packages which are available for 'de' and 'en':"
 msgstr "Liste der Pakete abrufen, die für 'de' und 'en' verfügbar sind:"
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/locale/removelocalecmd.cc:17
-#, fuzzy
 msgid "removelocale (rloc) [OPTIONS] <LOCALE> ..."
 msgstr "removelocale (rloc) [OPTIONEN] <LOCALE>..."
 
 #: src/commands/locale/removelocalecmd.cc:18
-#, fuzzy
 msgid "Remove locale(s) from requested locales."
 msgstr "Locale(s) aus angeforderten Locales entfernen."
 
 #: src/commands/locale/removelocalecmd.cc:19
-#, fuzzy
 msgid "Remove given locale(s) from the list of supported languages."
 msgstr ""
 "Angegebene Locale(s) aus der Liste der unterstützten Sprachen entfernen."
 
 #: src/commands/locale/removelocalecmd.cc:34
-#, boost-format, c-format, fuzzy
+#, boost-format, c-format
 msgid ""
 "Specify locales which shall be removed by the the language code.\n"
 "Get the list of requested locales by calling '%s'."
 msgstr ""
-"Den Sprachcode für die Locales eingeben, die entfernt werden sollen.\n"
+"Locales angeben, die anhand des Sprachcodes entfernt werden sollen.\n"
 "Die Liste der angeforderten Locales kann mit '%s' abgerufen werden."
 
 #: src/commands/locale/removelocalecmd.cc:46
-#, fuzzy
 msgid "Do not remove corresponding packages for given locale(s)."
 msgstr "Die Pakete für die angegebenen Locale(s) nicht entfernen."
 
@@ -4099,7 +4082,7 @@ msgstr ""
 "installiert. Sie können es durch den Aufruf von '%1%' installieren."
 
 #: src/commands/search/search-packages-hinthack.cc:98
-#, boost-format, fuzzy
+#, boost-format
 msgid ""
 "For an extended search including not yet activated remote resources you may "
 "run '%1%' at any time."
@@ -4790,7 +4773,6 @@ msgid "Source package name is a required argument."
 msgstr "Die Angabe eines Quellpaketnamens ist zwingend erforderlich."
 
 #: src/commands/sourceinstall.cc:86
-#, fuzzy
 msgid "Uninstalling source packages is not supported."
 msgstr "Die Deinstallation von Quellpaketen wird nicht unterstützt."
 
@@ -5494,7 +5476,6 @@ msgstr "Baut binäres Paket"
 
 #. translators: header of table column - is the language requested? (Yes/No)
 #: src/locales.cc:56 src/locales.cc:90
-#, fuzzy
 msgid "Requested"
 msgstr "Angefordert"
 
@@ -5509,42 +5490,41 @@ msgstr "Code"
 
 #. translators: header of table column - the language, e.g. English (United States)
 #: src/locales.cc:88
-#, fuzzy
 msgid "Language"
 msgstr "Sprache"
 
 #: src/locales.cc:306
-#, boost-format, c-format, fuzzy
+#, boost-format, c-format
 msgid "Packages for %s (locale '%s', requested: %s):"
 msgstr "Pakete für %s (Locale '%s', angefordert: %s):"
 
 #: src/locales.cc:323
-#, boost-format, c-format, fuzzy
+#, boost-format, c-format
 msgid "Added locale: %s"
 msgstr "Hinzugefügte Locale: %s"
 
 #: src/locales.cc:326
-#, boost-format, c-format, fuzzy
+#, boost-format, c-format
 msgid "ERROR: cannot add %s"
 msgstr "FEHLER: %s kann nicht hinzugefügt werden"
 
 #: src/locales.cc:330
-#, boost-format, c-format, fuzzy
+#, boost-format, c-format
 msgid " %s is already requested."
 msgstr " %s ist bereits angefordert."
 
 #: src/locales.cc:351
-#, boost-format, c-format, fuzzy
+#, boost-format, c-format
 msgid "Removed locale: %s"
 msgstr "Entfernte Locale: %s"
 
 #: src/locales.cc:354
-#, boost-format, c-format, fuzzy
+#, boost-format, c-format
 msgid "ERROR: cannot remove %s"
 msgstr "FEHLER: %s kann nicht entfernt werden."
 
 #: src/locales.cc:358
-#, boost-format, c-format, fuzzy
+#, boost-format, c-format
 msgid "%s was not requested."
 msgstr "%s war nicht angefordert."
 
@@ -6415,7 +6395,7 @@ msgstr ""
 
 #. bsc#859480: Rephrased and added for translation switch if core translations are available.
 #: src/solve-commit.cc:466
-#, boost-format, fuzzy
+#, boost-format
 msgid ""
 "There are running programs which still use files and libraries deleted or "
 "updated by recent upgrades. They should be restarted to benefit from the "
@@ -6765,38 +6745,36 @@ msgid "Cannot initialize configuration file parser."
 msgstr "Konfigurationsdatei-Analyseprogramm konnte nicht initialisiert werden."
 
 #: src/utils/Augeas.cc:510
-#, boost-format, fuzzy
+#, boost-format
 msgid "Malformed option name '%1%'."
 msgstr "Fehlerhafter Optionsname '%1%'."
 
 #: src/utils/Augeas.cc:522
-#, fuzzy
 msgid "Could not save the config file."
 msgstr "Konfigurationsdatei konnte nicht gespeichert werden."
 
 #: src/utils/Augeas.cc:564
-#, boost-format, fuzzy
+#, boost-format
 msgid "Config file '%1%' exists but is not a file."
 msgstr "Konfigurationsdatei '%1%' ist vorhanden, ist jedoch keine Datei."
 
 #: src/utils/Augeas.cc:580
-#, fuzzy
 msgid "Could not load the config files."
 msgstr "Konfigurationsdateien konnten nicht geladen werden."
 
 #: src/utils/Augeas.cc:606
-#, boost-format, fuzzy
+#, boost-format
 msgid "Config file '%1%' does not exist."
 msgstr "Konfigurationsdatei '%1%' ist nicht vorhanden."
 
 #. translator: %1% is the path to a config file, %2% is the name of an options inside the file
 #: src/utils/Augeas.cc:637
-#, boost-format, fuzzy
+#, boost-format
 msgid "%1%: Option '%2%' is defined multiple times. Using the last one."
-msgstr "%1%: Option '%2%' wurde mehrmals definiert. Verwenden Sie die letzte."
+msgstr ""
+"%1%: Option '%2%' wurde mehrmals definiert. Letzte Definition wird verwendet."
 
 #: src/utils/Augeas.cc:658
-#, fuzzy
 msgid "No config file is in use."
 msgstr "Es wird keine Konfigurationsdatei verwendet."
 
@@ -7147,12 +7125,10 @@ msgid "Trying again..."
 msgstr "Neuversuch..."
 
 #: src/utils/prompt.cc:325
-#, fuzzy
 msgid "always"
 msgstr "immer"
 
 #: src/utils/prompt.cc:325
-#, fuzzy
 msgid "never"
 msgstr "nie"
 
@@ -7176,7 +7152,7 @@ msgid "Invalid answer '%s'."
 msgstr "Ungültige Antwort '%s'."
 
 #: src/utils/prompt.cc:415
-#, boost-format, c-format, fuzzy
+#, boost-format, c-format
 msgid "Ambiguous answer '%s'."
 msgstr "Antwort '%s' ist mehrdeutig."
 
