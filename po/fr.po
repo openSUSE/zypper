@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: zypper.fr\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-02-25 14:33+0100\n"
-"PO-Revision-Date: 2019-03-19 19:47+0000\n"
+"PO-Revision-Date: 2019-03-21 12:49+0000\n"
 "Last-Translator: Antoine Belvire <antoine.belvire@opensuse.org>\n"
 "Language-Team: French <https://l10n.opensuse.org/projects/zypper/master/fr/>"
 "\n"
@@ -757,7 +757,7 @@ msgstr "Verrouillage de paquets :"
 
 #: src/Command.cc:154
 msgid "Locale Management:"
-msgstr ""
+msgstr "Gestion de la localisation :"
 
 #: src/Command.cc:158
 msgid "Other Commands:"
@@ -1008,7 +1008,7 @@ msgstr ""
 
 #: src/Config.cc:620
 msgid "Target Options"
-msgstr "Options de la cible "
+msgstr "Options de la cible"
 
 #. translators: --root, -R <DIR>
 #: src/Config.cc:625
@@ -1035,15 +1035,17 @@ msgstr "Ne pas lire les paquets installés."
 #: src/Config.cc:804
 msgid "No config file is in use. Can not save options."
 msgstr ""
+"Aucun fichier de configuration utilisé. Impossible de sauvegarder des "
+"options."
 
 #: src/Config.cc:815
 #, boost-format
 msgid "Option '%1%' saved in '%2%'."
-msgstr ""
+msgstr "Option « %1 » sauvegardée dans « %2 »."
 
 #: src/Config.cc:822
 msgid "Failed to save option."
-msgstr ""
+msgstr "Échec de la sauvegarde de l'option."
 
 #: src/PackageArgs.cc:208
 #, c-format, boost-format
@@ -2357,7 +2359,7 @@ msgstr "Sélectionner les paquets par leur nom, pas par leur fonction."
 
 #: src/commands/installremove.cc:55
 msgid "Select packages solely by capability."
-msgstr ""
+msgstr "Sélectionner des paquets seulement par capacité."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/installremove.cc:74
@@ -2515,19 +2517,20 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/locale/addlocalecmd.cc:19
 msgid "addlocale (aloc) [OPTIONS] <LOCALE> ..."
-msgstr ""
+msgstr "addlocale (aloc) [OPTIONS] <LOCALISATION> ..."
 
 #: src/commands/locale/addlocalecmd.cc:20
 msgid "Add locale(s) to requested locales."
-msgstr ""
+msgstr "Ajouter des localisations aux localisations demandées."
 
 #: src/commands/locale/addlocalecmd.cc:21
 msgid "Add given locale(s) to the list of requested locales."
 msgstr ""
+"Ajouter les localisations données à la liste des localisations demandées."
 
 #: src/commands/locale/addlocalecmd.cc:32
 msgid "Do not install corresponding packages for given locale(s)."
-msgstr ""
+msgstr "Ne pas installer les paquets correspondant aux localisations données."
 
 #: src/commands/locale/addlocalecmd.cc:56
 #, c-format, boost-format
@@ -2539,11 +2542,11 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/locale/localescmd.cc:17
 msgid "locales (lloc) [OPTIONS] [LOCALE] ..."
-msgstr ""
+msgstr "locales (lloc) [OPTIONS] [LOCALISATION] ..."
 
 #: src/commands/locale/localescmd.cc:18
 msgid "List requested locales (languages codes)."
-msgstr ""
+msgstr "Lister les localisations demandées (codes de langues)."
 
 #: src/commands/locale/localescmd.cc:19
 #, c-format, boost-format
@@ -2555,14 +2558,20 @@ msgid ""
 "can\n"
 "be installed by calling '%s'.\n"
 msgstr ""
+"Lister les localisations demandées et les paquets correspondants.\n"
+"\n"
+"Sans argument, liste les localisations demandées. Si les paquets de "
+"localisation\n"
+"pour une langue demandée ne sont pas encore présents sur le système, ils\n"
+"peuvent être installés en appelant « %s ».\n"
 
 #: src/commands/locale/localescmd.cc:35
 msgid "Show corresponding packages."
-msgstr ""
+msgstr "Afficher les paquets correspondants."
 
 #: src/commands/locale/localescmd.cc:36
 msgid "List all available locales."
-msgstr ""
+msgstr "Lister toutes les localisations disponibles."
 
 #: src/commands/locale/localescmd.cc:49
 msgid "Ignoring positional arguments because --all argument was provided."
@@ -2570,7 +2579,7 @@ msgstr ""
 
 #: src/commands/locale/localescmd.cc:76
 msgid "The locale(s) for which the information shall be printed."
-msgstr ""
+msgstr "Les localisations dont les informations doivent être affichées."
 
 #: src/commands/locale/localescmd.cc:80
 msgid ""
@@ -2593,15 +2602,16 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/locale/removelocalecmd.cc:17
 msgid "removelocale (rloc) [OPTIONS] <LOCALE> ..."
-msgstr ""
+msgstr "removelocale (rloc) [OPTIONS] <LOCALISATION> ..."
 
 #: src/commands/locale/removelocalecmd.cc:18
 msgid "Remove locale(s) from requested locales."
-msgstr ""
+msgstr "Supprimer des localisations des localisations demandées."
 
 #: src/commands/locale/removelocalecmd.cc:19
 msgid "Remove given locale(s) from the list of supported languages."
 msgstr ""
+"Supprimer les localisations données de la liste des langues prises en charge."
 
 #: src/commands/locale/removelocalecmd.cc:34
 #, c-format, boost-format
@@ -2612,7 +2622,7 @@ msgstr ""
 
 #: src/commands/locale/removelocalecmd.cc:46
 msgid "Do not remove corresponding packages for given locale(s)."
-msgstr ""
+msgstr "Ne pas supprimer les paquets correspondant aux localisations données."
 
 # =============================================================================
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
@@ -2897,7 +2907,7 @@ msgstr "Cette commande a une implémentation factice qui retourne toujours 0."
 
 #: src/commands/optionsets.cc:33
 msgid "Don't change anything, just report what would be done."
-msgstr ""
+msgstr "Ne rien modifier, simplement rapporter ce qui serait fait."
 
 #. translators: -r, --repo <ALIAS|#|URI>
 #: src/commands/optionsets.cc:65
@@ -2907,7 +2917,7 @@ msgstr "Ne travailler qu'avec le dépôt spécifié."
 #: src/commands/optionsets.cc:85
 #, c-format, boost-format
 msgid "Option '--%s' overrides a previously set download mode."
-msgstr ""
+msgstr "L'option « --%s » annule un mode de téléchargement précédemment défini."
 
 #: src/commands/optionsets.cc:114
 #, c-format, boost-format
@@ -4227,33 +4237,35 @@ msgstr "Lancer 'zypper refresh' en tant que root peut résoudre le problème."
 #. translators: -g, --category <CATEGORY>
 #: src/commands/selectpatchoptionset.cc:24
 msgid "Select patches with the specified category."
-msgstr ""
+msgstr "Sélectionner des correctifs de la catégorie spécifiée."
 
 #. translators: --severity <SEVERITY>
 #: src/commands/selectpatchoptionset.cc:28
 msgid "Select patches with the specified severity."
-msgstr ""
+msgstr "Sélectionner des correctifs de la sévérité spécifiée."
 
 #. translators: --date <YYYY-MM-DD>
 #: src/commands/selectpatchoptionset.cc:32
 msgid "Select patches issued up to, but not including, the specified date"
 msgstr ""
+"Sélectionnez des correctifs publiés jusqu'à la date spécifiée (non incluse)"
 
 #. translators: -b, --bugzilla
 #: src/commands/selectpatchoptionset.cc:36
 msgid "Select applicable patches for the specified Bugzilla issues."
 msgstr ""
+"Sélectionner des correctifs applicables aux problèmes Bugzilla spécifiés."
 
 #. translators: --cve
 #: src/commands/selectpatchoptionset.cc:41
 msgid "Select applicable patches for the specified CVE issues."
-msgstr ""
+msgstr "Sélectionner des correctifs applicables aux problèmes CVE spécifiés."
 
 #. any
 #. translators: --cve
 #: src/commands/selectpatchoptionset.cc:50
 msgid "Select issues matching the specified string."
-msgstr ""
+msgstr "Sélectionner des problèmes correspondant au texte spécifié."
 
 #: src/commands/services/add.cc:55
 #, c-format, boost-format
@@ -4606,7 +4618,7 @@ msgstr "Cette commande n'a de sens que dans le shell zypper."
 
 #: src/commands/solveroptionset.cc:16 src/commands/solveroptionset.cc:39
 msgid "Solver options"
-msgstr ""
+msgstr "Options du solveur"
 
 #: src/commands/solveroptionset.cc:18
 msgid "Install also recommended packages in addition to the required ones."
@@ -4634,7 +4646,7 @@ msgstr "Ne pas forcer le solveur à trouver une solution, le laisser demander."
 
 #: src/commands/solveroptionset.cc:63
 msgid "Expert options"
-msgstr ""
+msgstr "Options expert"
 
 #: src/commands/solveroptionset.cc:66
 msgid "Whether to allow downgrading installed resolvables."
@@ -4708,7 +4720,7 @@ msgstr "Le nom du paquet source est un argument requis."
 
 #: src/commands/sourceinstall.cc:86
 msgid "Uninstalling source packages is not supported."
-msgstr ""
+msgstr "La suppression des paquets source n'est pas prise en charge."
 
 #: src/commands/subcommand.cc:52
 msgid "none"
@@ -5121,12 +5133,12 @@ msgstr ""
 #. translators: --status
 #: src/commands/utils/source-download.cc:514
 msgid "Write a manifest file."
-msgstr ""
+msgstr "Écrire un fichier manifeste."
 
 #. translators: --status
 #: src/commands/utils/source-download.cc:518
 msgid "Disable writing a manifest file."
-msgstr ""
+msgstr "Désactiver l'écriture d'un fichier manifeste."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/utils/targetos.cc:20
@@ -5430,12 +5442,12 @@ msgstr ""
 #. translators: header of table column - the language code, e.g. en_US
 #: src/locales.cc:86
 msgid "Code"
-msgstr ""
+msgstr "Code"
 
 #. translators: header of table column - the language, e.g. English (United States)
 #: src/locales.cc:88
 msgid "Language"
-msgstr ""
+msgstr "Langue"
 
 #: src/locales.cc:306
 #, c-format, boost-format
@@ -5445,32 +5457,32 @@ msgstr ""
 #: src/locales.cc:323
 #, c-format, boost-format
 msgid "Added locale: %s"
-msgstr ""
+msgstr "Localisation ajoutée : %s"
 
 #: src/locales.cc:326
 #, c-format, boost-format
 msgid "ERROR: cannot add %s"
-msgstr ""
+msgstr "ERREUR : impossible d'ajouter %s"
 
 #: src/locales.cc:330
 #, c-format, boost-format
 msgid " %s is already requested."
-msgstr ""
+msgstr " %s est déjà demandée."
 
 #: src/locales.cc:351
 #, c-format, boost-format
 msgid "Removed locale: %s"
-msgstr ""
+msgstr "Localisation supprimée : %s"
 
 #: src/locales.cc:354
 #, c-format, boost-format
 msgid "ERROR: cannot remove %s"
-msgstr ""
+msgstr "ERREUR : impossible de supprimer %s"
 
 #: src/locales.cc:358
 #, c-format, boost-format
 msgid "%s was not requested."
-msgstr ""
+msgstr "%s n'était pas demandée."
 
 #. translators: this will show up if you press ctrl+c twice
 #: src/main.cc:31
@@ -6338,6 +6350,10 @@ msgid ""
 "updated by recent upgrades. They should be restarted to benefit from the "
 "latest updates. Run '%1%' to list these programs."
 msgstr ""
+"Des programmes en cours d'exécution utilisent des fichiers et des "
+"bibliothèques supprimés ou mis à jour dernièrement. Ils devraient être "
+"redémarrés afin de bénéficier des dernières mises à jour. Lancez « %1% » "
+"pour lister ces programmes."
 
 #: src/solve-commit.cc:481
 msgid "Update notifications were received from the following packages:"
@@ -6692,7 +6708,7 @@ msgstr ""
 
 #: src/utils/Augeas.cc:522
 msgid "Could not save the config file."
-msgstr ""
+msgstr "Impossible de sauvegarder le fichier de configuration."
 
 #: src/utils/Augeas.cc:564
 #, boost-format
@@ -6701,22 +6717,24 @@ msgstr ""
 
 #: src/utils/Augeas.cc:580
 msgid "Could not load the config files."
-msgstr ""
+msgstr "Impossible de charger les fichiers de configuration."
 
 #: src/utils/Augeas.cc:606
 #, boost-format
 msgid "Config file '%1%' does not exist."
-msgstr ""
+msgstr "Le fichier de configuration « %1% » n'existe pas."
 
 #. translator: %1% is the path to a config file, %2% is the name of an options inside the file
 #: src/utils/Augeas.cc:637
 #, boost-format
 msgid "%1%: Option '%2%' is defined multiple times. Using the last one."
 msgstr ""
+"%1% : l'option « %2% » est définie à plusieurs reprises. La dernière est "
+"utilisée."
 
 #: src/utils/Augeas.cc:658
 msgid "No config file is in use."
-msgstr ""
+msgstr "Aucun fichier de configuration utilisé."
 
 #: src/utils/flags/exceptions.cc:22
 #, boost-format
@@ -7068,11 +7086,11 @@ msgstr "Nouvel essai..."
 
 #: src/utils/prompt.cc:325
 msgid "always"
-msgstr ""
+msgstr "toujours"
 
 #: src/utils/prompt.cc:325
 msgid "never"
-msgstr ""
+msgstr "jamais"
 
 #: src/utils/prompt.cc:372
 msgid "Cannot read input: bad stream or EOF."
@@ -7095,7 +7113,7 @@ msgstr "Réponse '%s' invalide."
 #: src/utils/prompt.cc:415
 #, c-format, boost-format
 msgid "Ambiguous answer '%s'."
-msgstr ""
+msgstr "Réponse ambiguë « %s »."
 
 #. translators: the %s are: 'y', 'yes' (translated), 'n', and 'no' (translated).
 #: src/utils/prompt.cc:423
@@ -7110,6 +7128,8 @@ msgid ""
 "If nothing else works enter '#1' to select the 1st option, '#2' for the 2nd "
 "one, ..."
 msgstr ""
+"Si rien d'autre ne fonctionne, saisissez « #1 » pour sélectionner la "
+"première option, « #2 » pour la deuxième, …"
 
 #~ msgid ""
 #~ "For an extended search including not yet activated remote resources you "
