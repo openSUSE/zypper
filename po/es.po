@@ -18,10 +18,10 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-02-25 14:33+0100\n"
-"PO-Revision-Date: 2019-01-25 16:11+0000\n"
-"Last-Translator: Patricia Pazos <pms.malaga@hermestrans.com>\n"
-"Language-Team: Spanish <https://l10n.opensuse.org/projects/zypper/master/es/"
-">\n"
+"PO-Revision-Date: 2019-03-21 12:50+0000\n"
+"Last-Translator: Juan Sarria <juansarriam@gmail.com>\n"
+"Language-Team: Spanish <https://l10n.opensuse.org/projects/zypper/master/es/>"
+"\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -529,11 +529,11 @@ msgstr "Se trata de un alias para '%s'."
 
 #: src/commands/commandhelpformatter.h:107
 msgid "Examples:"
-msgstr ""
+msgstr "Ejemplos:"
 
 #: src/commands/commandhelpformatter.h:110
 msgid "Arguments:"
-msgstr ""
+msgstr "Argumentos:"
 
 #: src/commands/commandhelpformatter.h:123 src/utils/flags/zyppflags.cc:582
 msgid "Command options:"
@@ -706,7 +706,7 @@ msgstr "AAAA-MM-DD"
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:53
 msgid "MODE"
-msgstr ""
+msgstr "MODO"
 
 #. TranslatorExplanation These are reasons for various failures.
 #: src/utils/prompt.h:185
@@ -755,7 +755,7 @@ msgstr "Bloqueos de paquete:"
 
 #: src/Command.cc:154
 msgid "Locale Management:"
-msgstr ""
+msgstr "Gestión de configuración regional:"
 
 #: src/Command.cc:158
 msgid "Other Commands:"
@@ -1033,15 +1033,17 @@ msgstr "No leer paquetes instalados."
 #: src/Config.cc:804
 msgid "No config file is in use. Can not save options."
 msgstr ""
+"No hay ningún archivo de configuración en uso. No es posible guardar las "
+"opciones."
 
 #: src/Config.cc:815
 #, boost-format
 msgid "Option '%1%' saved in '%2%'."
-msgstr ""
+msgstr "Opción %1% guardada en %2%."
 
 #: src/Config.cc:822
 msgid "Failed to save option."
-msgstr ""
+msgstr "Error al guardar la opción."
 
 #: src/PackageArgs.cc:208
 #, c-format, boost-format
@@ -1852,11 +1854,11 @@ msgstr[0] "El parche siguiente requiere que se reinicie el sistema:"
 msgstr[1] "Los %d parches siguientes requieren que se reinicie el sistema:"
 
 #: src/Summary.cc:1345
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following package requires a system reboot:"
 msgid_plural "The following %d packages require a system reboot:"
 msgstr[0] "El paquete siguiente requiere que se reinicie el sistema:"
-msgstr[1] "El paquete siguiente %d requiere que se reinicie el sistema:"
+msgstr[1] "Los %d paquetes siguientes requieren que se reinicie el sistema:"
 
 #: src/Summary.cc:1374
 #, boost-format
@@ -2503,19 +2505,22 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/locale/addlocalecmd.cc:19
 msgid "addlocale (aloc) [OPTIONS] <LOCALE> ..."
-msgstr ""
+msgstr "addlocale (aloc) [OPCIONES] <CONFIGURACIÓN REGIONAL> ..."
 
 #: src/commands/locale/addlocalecmd.cc:20
 msgid "Add locale(s) to requested locales."
-msgstr ""
+msgstr "Añade configuraciones regionales a las ya pedidas."
 
 #: src/commands/locale/addlocalecmd.cc:21
 msgid "Add given locale(s) to the list of requested locales."
 msgstr ""
+"Añade las configuraciones regionales indicadas a la lista de las pedidas."
 
 #: src/commands/locale/addlocalecmd.cc:32
 msgid "Do not install corresponding packages for given locale(s)."
 msgstr ""
+"No instala los paquetes correspondientes para las configuraciones regionales "
+"indicadas."
 
 #: src/commands/locale/addlocalecmd.cc:56
 #, c-format, boost-format
@@ -2523,15 +2528,18 @@ msgid ""
 "Specify locale which shall be supported by the language code.\n"
 "Get a list of all available locales by calling '%s'."
 msgstr ""
+"Especifica la configuración regional que debe admitir el código de idioma.\n"
+"Para obtener una lista de todas las configuraciones regionales disponibles, "
+"llame a %s."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/locale/localescmd.cc:17
 msgid "locales (lloc) [OPTIONS] [LOCALE] ..."
-msgstr ""
+msgstr "locales (lloc) [OPCIONES] [CONFIGURACIÓN REGIONAL] ..."
 
 #: src/commands/locale/localescmd.cc:18
 msgid "List requested locales (languages codes)."
-msgstr ""
+msgstr "Muestra las configuraciones regionales pedidas (códigos de idioma)."
 
 #: src/commands/locale/localescmd.cc:19
 #, c-format, boost-format
@@ -2543,53 +2551,72 @@ msgid ""
 "can\n"
 "be installed by calling '%s'.\n"
 msgstr ""
+"Muestra las configuraciones regionales pedidas y sus paquetes "
+"correspondientes.\n"
+"\n"
+"Si se llama sin argumentos, muestra las configuraciones regionales pedidas.\n"
+"Si los paquetes de configuraciones regionales de un idioma pedido aún no "
+"están\n"
+"en el sistema, se pueden instalar llamando a %s.\n"
 
 #: src/commands/locale/localescmd.cc:35
 msgid "Show corresponding packages."
-msgstr ""
+msgstr "Muestra los paquetes correspondientes."
 
 #: src/commands/locale/localescmd.cc:36
 msgid "List all available locales."
-msgstr ""
+msgstr "Muestra todas las configuraciones regionales disponibles."
 
 #: src/commands/locale/localescmd.cc:49
 msgid "Ignoring positional arguments because --all argument was provided."
 msgstr ""
+"Ignora los argumentos de posición porque se ha proporcionado el argumento "
+"--all."
 
 #: src/commands/locale/localescmd.cc:76
 msgid "The locale(s) for which the information shall be printed."
-msgstr ""
+msgstr "Las configuraciones regionales cuya información se debe imprimir."
 
 #: src/commands/locale/localescmd.cc:80
 msgid ""
 "Get all locales with lang code 'en' that have their own country code, "
 "excluding the fallback 'en':"
 msgstr ""
+"Obtiene todas las configuraciones regionales con el codigo de idioma \"en\" "
+"que tienen su propio código de país, excluyendo el último recurso \"en\":"
 
 #: src/commands/locale/localescmd.cc:87
 msgid "Get all locales with lang code 'en' with or without country code:"
 msgstr ""
+"Obtiene todas las configuraciones regionales con el código de idioma \"en\" "
+"con código de país o sin él:"
 
 #: src/commands/locale/localescmd.cc:94
 msgid "Get the locale matching the argument exactly: "
 msgstr ""
+"Obtiene la configuración regional que coincide exactamente con el argumento: "
 
 #: src/commands/locale/localescmd.cc:101
 msgid "Get the list of packages which are available for 'de' and 'en':"
 msgstr ""
+"Obtiene la lista de paquetes que están disponibles para \"de\" y \"en\":"
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/locale/removelocalecmd.cc:17
 msgid "removelocale (rloc) [OPTIONS] <LOCALE> ..."
-msgstr ""
+msgstr "removelocale (rloc) [OPCIONES] <CONFIGURACIÓN REGIONAL> ..."
 
 #: src/commands/locale/removelocalecmd.cc:18
 msgid "Remove locale(s) from requested locales."
 msgstr ""
+"Elimina las configuraciones regionales de las configuraciones regionales "
+"pedidas."
 
 #: src/commands/locale/removelocalecmd.cc:19
 msgid "Remove given locale(s) from the list of supported languages."
 msgstr ""
+"Elimina las configuraciones regionales indicadas de la lista de idiomas "
+"admitidos."
 
 #: src/commands/locale/removelocalecmd.cc:34
 #, c-format, boost-format
@@ -2597,10 +2624,15 @@ msgid ""
 "Specify locales which shall be removed by the the language code.\n"
 "Get the list of requested locales by calling '%s'."
 msgstr ""
+"Especifica las configuraciones regionales que se deben eliminar por código "
+"de idioma.\n"
+"Para obtener la lista de configuraciones regionales pedidas, llame a %s."
 
 #: src/commands/locale/removelocalecmd.cc:46
 msgid "Do not remove corresponding packages for given locale(s)."
 msgstr ""
+"No elimina los paquetes correspondientes de las configuraciones regionales "
+"indicadas."
 
 # =============================================================================
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
@@ -4041,6 +4073,8 @@ msgid ""
 "For an extended search including not yet activated remote resources you may "
 "run '%1%' at any time."
 msgstr ""
+"Para realizar una búsqueda extendida que incluya los recursos remotos aún no "
+"activados, puede ejecutar %1% en cualquier momento."
 
 #: src/commands/search/search-packages-hinthack.cc:99
 #, boost-format
@@ -4711,7 +4745,7 @@ msgstr "El nombre del paquete de origen es un argumento requerido."
 
 #: src/commands/sourceinstall.cc:86
 msgid "Uninstalling source packages is not supported."
-msgstr ""
+msgstr "No se admite la desinstalación de paquetes de origen."
 
 #: src/commands/subcommand.cc:52
 msgid "none"
@@ -5424,56 +5458,56 @@ msgstr "Crea un paquete binario"
 #. translators: header of table column - is the language requested? (Yes/No)
 #: src/locales.cc:56 src/locales.cc:90
 msgid "Requested"
-msgstr ""
+msgstr "Pedida"
 
 #: src/locales.cc:60
 msgid "Fallback"
-msgstr ""
+msgstr "Último recurso"
 
 #. translators: header of table column - the language code, e.g. en_US
 #: src/locales.cc:86
 msgid "Code"
-msgstr ""
+msgstr "Código"
 
 #. translators: header of table column - the language, e.g. English (United States)
 #: src/locales.cc:88
 msgid "Language"
-msgstr ""
+msgstr "Idioma"
 
 #: src/locales.cc:306
 #, c-format, boost-format
 msgid "Packages for %s (locale '%s', requested: %s):"
-msgstr ""
+msgstr "Paquetes para %s (configuración regional %s, pedido: %s):"
 
 #: src/locales.cc:323
 #, c-format, boost-format
 msgid "Added locale: %s"
-msgstr ""
+msgstr "Configuración regional añadida: %s"
 
 #: src/locales.cc:326
 #, c-format, boost-format
 msgid "ERROR: cannot add %s"
-msgstr ""
+msgstr "ERROR: no es posible añadir %s"
 
 #: src/locales.cc:330
 #, c-format, boost-format
 msgid " %s is already requested."
-msgstr ""
+msgstr " %s ya se ha pedido."
 
 #: src/locales.cc:351
 #, c-format, boost-format
 msgid "Removed locale: %s"
-msgstr ""
+msgstr "Configuración regional eliminada: %s"
 
 #: src/locales.cc:354
 #, c-format, boost-format
 msgid "ERROR: cannot remove %s"
-msgstr ""
+msgstr "ERROR: no es posible eliminar %s"
 
 #: src/locales.cc:358
 #, c-format, boost-format
 msgid "%s was not requested."
-msgstr ""
+msgstr "%s no se ha pedido."
 
 #. translators: this will show up if you press ctrl+c twice
 #: src/main.cc:31
@@ -6337,6 +6371,10 @@ msgid ""
 "updated by recent upgrades. They should be restarted to benefit from the "
 "latest updates. Run '%1%' to list these programs."
 msgstr ""
+"Hay programas en ejecución que aún usan archivos y bibliotecas suprimidos o "
+"actualizados en actualizaciones recientes. Se deben reiniciar para que se "
+"les apliquen las últimas actualizaciones. Ejecute %1% para mostrar estos "
+"programas."
 
 #: src/solve-commit.cc:481
 msgid "Update notifications were received from the following packages:"
@@ -6674,35 +6712,35 @@ msgstr "No es posible inicializar el analizador del archivo de configuración."
 #: src/utils/Augeas.cc:510
 #, boost-format
 msgid "Malformed option name '%1%'."
-msgstr ""
+msgstr "Nombre de opción con formato erróneo %1%."
 
 #: src/utils/Augeas.cc:522
 msgid "Could not save the config file."
-msgstr ""
+msgstr "No es posible guardar el archivo de configuración."
 
 #: src/utils/Augeas.cc:564
 #, boost-format
 msgid "Config file '%1%' exists but is not a file."
-msgstr ""
+msgstr "El archivo de configuración %1% existe, pero no es un archivo."
 
 #: src/utils/Augeas.cc:580
 msgid "Could not load the config files."
-msgstr ""
+msgstr "No es posible cargar los archivos de configuración."
 
 #: src/utils/Augeas.cc:606
 #, boost-format
 msgid "Config file '%1%' does not exist."
-msgstr ""
+msgstr "El archivo de configuración %1% no existe."
 
 #. translator: %1% is the path to a config file, %2% is the name of an options inside the file
 #: src/utils/Augeas.cc:637
 #, boost-format
 msgid "%1%: Option '%2%' is defined multiple times. Using the last one."
-msgstr ""
+msgstr "%1%: la opción %2% se ha definido varias veces. Se va a usar la última."
 
 #: src/utils/Augeas.cc:658
 msgid "No config file is in use."
-msgstr ""
+msgstr "No hay ningún archivo de configuración en uso."
 
 #: src/utils/flags/exceptions.cc:22
 #, boost-format
@@ -7045,11 +7083,11 @@ msgstr "Volver a intentarlo..."
 
 #: src/utils/prompt.cc:325
 msgid "always"
-msgstr ""
+msgstr "siempre"
 
 #: src/utils/prompt.cc:325
 msgid "never"
-msgstr ""
+msgstr "nunca"
 
 #: src/utils/prompt.cc:372
 msgid "Cannot read input: bad stream or EOF."
@@ -7073,7 +7111,7 @@ msgstr "La respuesta '%s' no es válida."
 #: src/utils/prompt.cc:415
 #, c-format, boost-format
 msgid "Ambiguous answer '%s'."
-msgstr ""
+msgstr "Respuesta ambigua %s."
 
 #. translators: the %s are: 'y', 'yes' (translated), 'n', and 'no' (translated).
 #: src/utils/prompt.cc:423
@@ -7088,6 +7126,8 @@ msgid ""
 "If nothing else works enter '#1' to select the 1st option, '#2' for the 2nd "
 "one, ..."
 msgstr ""
+"Si no funciona nada más, introduzca #1 para seleccionar la primera opción, #"
+"2 para la segunda, etc."
 
 #~ msgid ""
 #~ "For an extended search including not yet activated remote resources you "
