@@ -457,15 +457,8 @@ static void notify_processes_using_deleted_files( Zypper & zypper )
     // Don't suggest "zypper ps" if zypper is the only prog with deleted open files.
     if ( checker.size() > 1 || ( checker.size() == 1 && checker.begin()->pid != str::numstring(::getpid()) ) )
     {
-      zypper.out().info(str::form(
-          _("There are some running programs that might use files deleted by recent upgrade."
-            " You may wish to check and restart some of them. Run '%s' to list these programs."),
-          "zypper ps -s"));
-#if 0
-      // bsc#859480: Rephrased and added for translation switch if core translations are available.
       zypper.out().info( str::Format(_("There are running programs which still use files and libraries deleted or updated by recent upgrades. They should be restarted to benefit from the latest updates. Run '%1%' to list these programs.") )
       % "zypper ps -s" );
-#endif
     }
   }
 
