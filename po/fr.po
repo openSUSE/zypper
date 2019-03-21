@@ -15,7 +15,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-02-25 14:33+0100\n"
 "PO-Revision-Date: 2019-03-21 12:49+0000\n"
-"Last-Translator: Antoine Belvire <antoine.belvire@opensuse.org>\n"
+"Last-Translator: Christine Gabriel <christine@stoquart.com>\n"
 "Language-Team: French <https://l10n.opensuse.org/projects/zypper/master/fr/>"
 "\n"
 "Language: fr\n"
@@ -890,6 +890,8 @@ msgstr "Ignorer les paquets inconnus."
 msgid ""
 "Terse output for machine consumption. Implies --no-abbrev and --no-color."
 msgstr ""
+"Sortie succincte pour la consommation de la machine. Implique --no-abbrev et "
+"--no-color."
 
 #. translators: --reposd-dir, -D <DIR>
 #: src/Config.cc:487
@@ -2333,6 +2335,11 @@ msgid ""
 "unconditionally on small or minimal systems, as it may easily add a large "
 "number of packages."
 msgstr ""
+"Installe les paquets récemment ajoutés recommandés par les paquets déjà "
+"installés. Cette commande réévalue les recommandations de tous les paquets "
+"installés et complète le système en conséquence. Il est préférable de ne pas "
+"appeler cette commande sans condition sur les systèmes de taille réduite ou "
+"minimale, car elle peut facilement ajouter un nombre important de paquets."
 
 #. translators: command description, %1% is a zypper command
 #: src/commands/inrverify.cc:98
@@ -2342,6 +2349,10 @@ msgid ""
 "supporting available hardware, languages or filesystems. Useful after having "
 "added e.g. new hardware or driver repos."
 msgstr ""
+"Appelée comme '%1%', cela restreint la commande de manière à ce qu'elle "
+"recherche uniquement les paquets prenant en charge le matériel, les langues "
+"ou les systèmes de fichiers disponibles. Cela est utile après avoir ajouté, "
+"par exemple, du nouveau matériel ou des dépôts de pilotes."
 
 #. translators: command description
 #: src/commands/inrverify.cc:101
@@ -2538,6 +2549,10 @@ msgid ""
 "Specify locale which shall be supported by the language code.\n"
 "Get a list of all available locales by calling '%s'."
 msgstr ""
+"Spécifiez les paramètres régionaux qui seront pris en charge par le code de "
+"langue.\n"
+"Obtenez la liste de tous les paramètres régionaux disponibles en appelant "
+"'%s'."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/locale/localescmd.cc:17
@@ -2576,6 +2591,7 @@ msgstr "Lister toutes les localisations disponibles."
 #: src/commands/locale/localescmd.cc:49
 msgid "Ignoring positional arguments because --all argument was provided."
 msgstr ""
+"Les arguments positionnels sont ignorés, car l'argument --all a été spécifié."
 
 #: src/commands/locale/localescmd.cc:76
 msgid "The locale(s) for which the information shall be printed."
@@ -2586,18 +2602,23 @@ msgid ""
 "Get all locales with lang code 'en' that have their own country code, "
 "excluding the fallback 'en':"
 msgstr ""
+"Obtenir tous les paramètres régionaux avec le code de langue 'en' qui ont "
+"leur propre code de pays, excepté le 'en' de base :"
 
 #: src/commands/locale/localescmd.cc:87
 msgid "Get all locales with lang code 'en' with or without country code:"
 msgstr ""
+"Obtenir tous les paramètres régionaux avec le code de langue 'en' avec ou "
+"sans code de pays :"
 
 #: src/commands/locale/localescmd.cc:94
 msgid "Get the locale matching the argument exactly: "
 msgstr ""
+"Obtenir les paramètres régionaux correspondant exactement à l'argument : "
 
 #: src/commands/locale/localescmd.cc:101
 msgid "Get the list of packages which are available for 'de' and 'en':"
-msgstr ""
+msgstr "Obtenir la liste des paquets disponibles pour 'de' et 'en' :"
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/locale/removelocalecmd.cc:17
@@ -2619,6 +2640,9 @@ msgid ""
 "Specify locales which shall be removed by the the language code.\n"
 "Get the list of requested locales by calling '%s'."
 msgstr ""
+"Spécifiez les paramètres régionaux qui seront supprimés en fonction du code "
+"de langue.\n"
+"Obtenez la liste des paramètres régionaux demandés en appelant '%s'."
 
 #: src/commands/locale/removelocalecmd.cc:46
 msgid "Do not remove corresponding packages for given locale(s)."
@@ -4066,6 +4090,9 @@ msgid ""
 "For an extended search including not yet activated remote resources you may "
 "run '%1%' at any time."
 msgstr ""
+"Pour effectuer une recherche étendue y compris sur les ressources distantes "
+"qui ne sont pas encore activées, vous pouvez exécuter la commande '%1%' à "
+"tout moment."
 
 #: src/commands/search/search-packages-hinthack.cc:99
 #, boost-format
@@ -5433,11 +5460,11 @@ msgstr "Construit les paquets binaires"
 #. translators: header of table column - is the language requested? (Yes/No)
 #: src/locales.cc:56 src/locales.cc:90
 msgid "Requested"
-msgstr ""
+msgstr "Demandé"
 
 #: src/locales.cc:60
 msgid "Fallback"
-msgstr ""
+msgstr "Base"
 
 #. translators: header of table column - the language code, e.g. en_US
 #: src/locales.cc:86
@@ -5452,7 +5479,7 @@ msgstr "Langue"
 #: src/locales.cc:306
 #, c-format, boost-format
 msgid "Packages for %s (locale '%s', requested: %s):"
-msgstr ""
+msgstr "Paquets pour %s (paramètres régionaux '%s', demandé : %s) :"
 
 #: src/locales.cc:323
 #, c-format, boost-format
@@ -6704,7 +6731,7 @@ msgstr "Impossible d'initialiser l'analyseur de fichiers de configuration."
 #: src/utils/Augeas.cc:510
 #, boost-format
 msgid "Malformed option name '%1%'."
-msgstr ""
+msgstr "Format du nom d'option '%1%' incorrect."
 
 #: src/utils/Augeas.cc:522
 msgid "Could not save the config file."
@@ -6714,6 +6741,7 @@ msgstr "Impossible de sauvegarder le fichier de configuration."
 #, boost-format
 msgid "Config file '%1%' exists but is not a file."
 msgstr ""
+"Le fichier de configuration '%1%' existe, mais il ne s'agit pas d'un fichier."
 
 #: src/utils/Augeas.cc:580
 msgid "Could not load the config files."
