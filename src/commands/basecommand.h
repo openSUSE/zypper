@@ -59,10 +59,11 @@ enum SetupSystemBits
 };
 ZYPP_DECLARE_FLAGS( SetupSystemFlags, SetupSystemBits );
 
-/** \relates LoadSystemFlags */
+/** \relates SetupSystemFlags */
 ZYPP_DECLARE_OPERATORS_FOR_FLAGS( SetupSystemFlags );
 
-
+/** \relates SetupSystemFlags Stream output */
+std::ostream & operator<<( std::ostream & str, const SetupSystemFlags & obj );
 
 
 /**

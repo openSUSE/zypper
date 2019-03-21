@@ -14,6 +14,23 @@ using namespace zypp;
 
 extern ZYpp::Ptr God;
 
+std::ostream & operator<<( std::ostream & str, const SetupSystemFlags & obj )
+{
+#define OUTS(F) { F, #F }
+  static const std::initializer_list<std::pair<SetupSystemFlags,std::string> > strmap {
+    OUTS( ResetRepoManager ),
+    OUTS( InitTarget ),
+    OUTS( InitRepos ),
+    OUTS( NoSystemResolvables ),
+    OUTS( LoadTargetResolvables ),
+    OUTS( LoadRepoResolvables ),
+    OUTS( LoadResolvables ),
+    OUTS( Resolve ),
+  };
+#undef OUTS
+  return str << zypp::base::stringify( obj, strmap );
+}
+
 BaseCommandOptionSet::BaseCommandOptionSet()
 {
 }
