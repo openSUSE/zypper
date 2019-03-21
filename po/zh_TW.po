@@ -13,8 +13,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-02-25 14:33+0100\n"
-"PO-Revision-Date: 2018-11-30 16:01+0000\n"
-"Last-Translator: Yi-Jyun Pan <pan93412@gmail.com>\n"
+"PO-Revision-Date: 2019-03-21 12:49+0000\n"
+"Last-Translator: Emily Dong <Emily.Dong@excel-gits.com>\n"
 "Language-Team: Chinese (Taiwan) <https://l10n.opensuse.org/projects/zypper/"
 "master/zh_TW/>\n"
 "Language: zh_TW\n"
@@ -22,7 +22,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 2.18\n"
+"X-Generator: Weblate 3.3\n"
 
 #: src/SolverRequester.h:52
 #, boost-format
@@ -316,7 +316,7 @@ msgstr ""
 msgid ""
 "Accepting packages with wrong checksums can lead to a corrupted system and "
 "in extreme cases even to a system compromise."
-msgstr "接受帶有錯誤檢核碼的軟體包會導致系統損壞，甚至危及系統安全。"
+msgstr "接受帶有錯誤檢查總數的套件會導致系統損壞，甚至危及系統安全。"
 
 #: src/callbacks/keyring.h:517
 #, boost-format
@@ -487,11 +487,11 @@ msgstr "這是 '%s' 的別名。"
 
 #: src/commands/commandhelpformatter.h:107
 msgid "Examples:"
-msgstr ""
+msgstr "範例："
 
 #: src/commands/commandhelpformatter.h:110
 msgid "Arguments:"
-msgstr ""
+msgstr "引數："
 
 #: src/commands/commandhelpformatter.h:123 src/utils/flags/zyppflags.cc:582
 msgid "Command options:"
@@ -550,7 +550,7 @@ msgstr "盡最大努力來趨近最新狀態， 更新到比最新版本還低�
 
 #: src/commands/commonflags.h:45
 msgid "Consider only patches which affect the package management itself."
-msgstr ""
+msgstr "僅考慮影響套件管理本身的修補程式。"
 
 #: src/output/Out.h:26 src/repos.cc:126 src/repos.cc:154
 msgid "Yes"
@@ -660,7 +660,7 @@ msgstr "YYYY-MM-DD"
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:53
 msgid "MODE"
-msgstr ""
+msgstr "模式"
 
 #. TranslatorExplanation These are reasons for various failures.
 #: src/utils/prompt.h:185
@@ -682,7 +682,7 @@ msgstr "錯誤"
 
 #: src/Command.cc:93
 msgid "Invalid command"
-msgstr ""
+msgstr "無效指令"
 
 #: src/Command.cc:111
 msgid "Repository Management:"
@@ -710,7 +710,7 @@ msgstr "軟體包鎖定："
 
 #: src/Command.cc:154
 msgid "Locale Management:"
-msgstr ""
+msgstr "地區設定管理："
 
 #: src/Command.cc:158
 msgid "Other Commands:"
@@ -733,7 +733,7 @@ msgstr "無效的表格樣式 %d。"
 #: src/Config.cc:54
 #, c-format, boost-format
 msgid " Use an integer number from %d to %d"
-msgstr ""
+msgstr " 使用介於 %d 到 %d 之間的整數"
 
 #: src/Config.cc:248
 msgid "The path specified in the --root option must be absolute."
@@ -828,7 +828,7 @@ msgstr "忽略未知的軟體包。"
 #: src/Config.cc:463
 msgid ""
 "Terse output for machine consumption. Implies --no-abbrev and --no-color."
-msgstr ""
+msgstr "供機器使用的摘要輸出。表示 --no-abbrev 和 --no-color。"
 
 #. translators: --reposd-dir, -D <DIR>
 #: src/Config.cc:487
@@ -962,16 +962,16 @@ msgstr "不要讀取已安裝的軟體包。"
 
 #: src/Config.cc:804
 msgid "No config file is in use. Can not save options."
-msgstr ""
+msgstr "沒有使用中的組態檔案。無法儲存選項。"
 
 #: src/Config.cc:815
 #, boost-format
 msgid "Option '%1%' saved in '%2%'."
-msgstr ""
+msgstr "選項「%1%」已儲存到「%2%」中。"
 
 #: src/Config.cc:822
 msgid "Failed to save option."
-msgstr ""
+msgstr "無法儲存選項。"
 
 #: src/PackageArgs.cc:208
 #, c-format, boost-format
@@ -1108,7 +1108,7 @@ msgstr "有更新候選 '%s' (適用於 '%s')，但它不符合特定版本、�
 msgid ""
 "There is an update candidate for '%s' from vendor '%s', while the current "
 "vendor is '%s'. Use '%s' to install this candidate."
-msgstr ""
+msgstr "有一個「%s」的更新候選 (來自廠商「%s」)，但當前廠商是「%s」。請使用「%s」安裝此候選。"
 
 #: src/RequestFeedback.cc:132
 #, c-format, boost-format
@@ -1459,9 +1459,7 @@ msgid ""
 msgid_plural ""
 "The following %d packages are recommended, but will not be installed because "
 "they are unwanted (were manually removed before):"
-msgstr[0] ""
-"下列 %d 個軟體包是推薦的，但將不會被安裝，因為它們是您不想要的(之前被手動移"
-"除)："
+msgstr[0] "下列 %d 個軟體包是推薦的，但將不會被安裝，因為它們是您不想要的 (之前已被手動移除)："
 
 #: src/Summary.cc:1013
 #, c-format, boost-format
@@ -1670,7 +1668,7 @@ msgstr[0] "下列 %d 個修補程式將會需要系統重新啟動："
 #, c-format, boost-format
 msgid "The following package requires a system reboot:"
 msgid_plural "The following %d packages require a system reboot:"
-msgstr[0] ""
+msgstr[0] "以下 %d 個套件需要將系統重新開機："
 
 #: src/Summary.cc:1374
 #, boost-format
@@ -1880,7 +1878,7 @@ msgstr "非選項程式引數︰ "
 #. help text for the "Abort, retry, ignore?" prompt for media errors
 #: src/callbacks/media.cc:27
 msgid "Skip retrieval of the file and abort current operation."
-msgstr "跳過取得檔案並跳出目前操作。"
+msgstr "跳過檔案擷取並中止目前操作。"
 
 #. help text for the "Abort, retry, ignore?" prompt for media errors
 #: src/callbacks/media.cc:29
@@ -1892,7 +1890,7 @@ msgstr "嘗試再次取得檔案。"
 msgid ""
 "Skip retrieval of the file and try to continue with the operation without "
 "the file."
-msgstr "跳過取得檔案並嘗試沒有此檔案而繼續操作。"
+msgstr "跳過檔案擷取並嘗試沒有此檔案繼續操作。"
 
 #. help text for the "Abort, retry, ignore?" prompt for media errors
 #: src/callbacks/media.cc:33
@@ -2058,7 +2056,7 @@ msgstr "zypper <個別指令> [--指令選項] [參數]"
 
 #: src/commands/help.cc:72 src/commands/help.cc:73
 msgid "Print zypper help"
-msgstr "印出說明。"
+msgstr "列印 zypper 說明"
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/inrverify.cc:68
@@ -2089,6 +2087,8 @@ msgid ""
 "unconditionally on small or minimal systems, as it may easily add a large "
 "number of packages."
 msgstr ""
+"安裝已安裝套件推薦的新增套件。此指令基本上將重新評估所有已安裝套件的推薦套件並相應地安裝到系統中。不要在小型或精簡系統上無條件呼叫該指令，因為它可能會輕易"
+"地新增大量套件。"
 
 #. translators: command description, %1% is a zypper command
 #: src/commands/inrverify.cc:98
@@ -2097,7 +2097,7 @@ msgid ""
 "Called as '%1%', it restricts the command to just look for packages "
 "supporting available hardware, languages or filesystems. Useful after having "
 "added e.g. new hardware or driver repos."
-msgstr ""
+msgstr "呼叫「%1%」將限制該指令，僅允許其尋找支援可用硬體、語言或檔案系統的套件。新增硬體或驅動程式儲存庫後此指令會十分有用。"
 
 #. translators: command description
 #: src/commands/inrverify.cc:101
@@ -2113,7 +2113,7 @@ msgstr "單純依照名稱而不是功能來選取軟體包。"
 
 #: src/commands/installremove.cc:55
 msgid "Select packages solely by capability."
-msgstr ""
+msgstr "僅依據功能選取套件。"
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/installremove.cc:74
@@ -2257,19 +2257,19 @@ msgstr "列出所有有較新版本可用的 軟體包，不論它們是否 可�
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/locale/addlocalecmd.cc:19
 msgid "addlocale (aloc) [OPTIONS] <LOCALE> ..."
-msgstr ""
+msgstr "addlocale (aloc) [選項] <地區設定> ..."
 
 #: src/commands/locale/addlocalecmd.cc:20
 msgid "Add locale(s) to requested locales."
-msgstr ""
+msgstr "為請求的地區設定新增地區設定。"
 
 #: src/commands/locale/addlocalecmd.cc:21
 msgid "Add given locale(s) to the list of requested locales."
-msgstr ""
+msgstr "將指定的地區設定新增到請求的地區設定清單。"
 
 #: src/commands/locale/addlocalecmd.cc:32
 msgid "Do not install corresponding packages for given locale(s)."
-msgstr ""
+msgstr "不安裝針對指定地區設定的對應套件。"
 
 #: src/commands/locale/addlocalecmd.cc:56
 #, c-format, boost-format
@@ -2277,15 +2277,17 @@ msgid ""
 "Specify locale which shall be supported by the language code.\n"
 "Get a list of all available locales by calling '%s'."
 msgstr ""
+"依據語言代碼指定應支援的地區設定。\n"
+"透過呼叫「%s」獲取所有可用地區設定的清單。"
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/locale/localescmd.cc:17
 msgid "locales (lloc) [OPTIONS] [LOCALE] ..."
-msgstr ""
+msgstr "locales (lloc) [選項] [地區設定] ..."
 
 #: src/commands/locale/localescmd.cc:18
 msgid "List requested locales (languages codes)."
-msgstr ""
+msgstr "列出請求的地區設定 (語言代碼)。"
 
 #: src/commands/locale/localescmd.cc:19
 #, c-format, boost-format
@@ -2297,53 +2299,58 @@ msgid ""
 "can\n"
 "be installed by calling '%s'.\n"
 msgstr ""
+"列出請求的地區設定和對應套件。\n"
+"\n"
+"不指定引數呼叫，即可列出請求的地區設定。如果\n"
+"尚未在系統上安裝所請求語言的地區設定套件，可呼叫「%s」\n"
+"進行安裝。\n"
 
 #: src/commands/locale/localescmd.cc:35
 msgid "Show corresponding packages."
-msgstr ""
+msgstr "顯示對應套件。"
 
 #: src/commands/locale/localescmd.cc:36
 msgid "List all available locales."
-msgstr ""
+msgstr "列出所有可用地區設定。"
 
 #: src/commands/locale/localescmd.cc:49
 msgid "Ignoring positional arguments because --all argument was provided."
-msgstr ""
+msgstr "由於提供了 --all 引數，將忽略位置引數。"
 
 #: src/commands/locale/localescmd.cc:76
 msgid "The locale(s) for which the information shall be printed."
-msgstr ""
+msgstr "要列印資訊的相應地區設定。"
 
 #: src/commands/locale/localescmd.cc:80
 msgid ""
 "Get all locales with lang code 'en' that have their own country code, "
 "excluding the fallback 'en':"
-msgstr ""
+msgstr "獲取語言代碼為「en」且具有自己國家/地區代碼的所有地區設定，不包括錯誤回復「en」："
 
 #: src/commands/locale/localescmd.cc:87
 msgid "Get all locales with lang code 'en' with or without country code:"
-msgstr ""
+msgstr "獲取語言代碼為「en」且含有或不含國家/地區代碼的所有地區設定："
 
 #: src/commands/locale/localescmd.cc:94
 msgid "Get the locale matching the argument exactly: "
-msgstr ""
+msgstr "獲取與引數完全相符的地區設定： "
 
 #: src/commands/locale/localescmd.cc:101
 msgid "Get the list of packages which are available for 'de' and 'en':"
-msgstr ""
+msgstr "獲取「de」和「en」可用的套件清單："
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/locale/removelocalecmd.cc:17
 msgid "removelocale (rloc) [OPTIONS] <LOCALE> ..."
-msgstr ""
+msgstr "removelocale (rloc) [選項] <地區設定> ..."
 
 #: src/commands/locale/removelocalecmd.cc:18
 msgid "Remove locale(s) from requested locales."
-msgstr ""
+msgstr "從請求的地區設定移除地區設定。"
 
 #: src/commands/locale/removelocalecmd.cc:19
 msgid "Remove given locale(s) from the list of supported languages."
-msgstr ""
+msgstr "從支援的語言清單移除指定地區設定。"
 
 #: src/commands/locale/removelocalecmd.cc:34
 #, c-format, boost-format
@@ -2351,10 +2358,12 @@ msgid ""
 "Specify locales which shall be removed by the the language code.\n"
 "Get the list of requested locales by calling '%s'."
 msgstr ""
+"指定要依據語言代碼移除的地區設定。\n"
+"透過呼叫「%s」獲取所請求地區設定的清單。"
 
 #: src/commands/locale/removelocalecmd.cc:46
 msgid "Do not remove corresponding packages for given locale(s)."
-msgstr ""
+msgstr "不要移除指定地區設定的相應套件。"
 
 # =============================================================================
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
@@ -2630,7 +2639,7 @@ msgstr "此指令是一個假動作，它只會回應 0。"
 
 #: src/commands/optionsets.cc:33
 msgid "Don't change anything, just report what would be done."
-msgstr ""
+msgstr "不做任何變更，僅報告要執行的操作。"
 
 #. translators: -r, --repo <ALIAS|#|URI>
 #: src/commands/optionsets.cc:65
@@ -2640,7 +2649,7 @@ msgstr "只對指定軟體庫起作用。"
 #: src/commands/optionsets.cc:85
 #, c-format, boost-format
 msgid "Option '--%s' overrides a previously set download mode."
-msgstr ""
+msgstr "選項「--%s」會覆寫先前設定的下載模式。"
 
 #: src/commands/optionsets.cc:114
 #, c-format, boost-format
@@ -2805,7 +2814,7 @@ msgid ""
 "For each associated system service print <format> on the standard output, "
 "followed by a newline. Any '%s' directive in <format> is replaced by the "
 "system service name."
-msgstr ""
+msgstr "每個關聯系統服務均會在標準輸出上列印 <format>，並後跟一個换行符。<format> 中的所有「%s」指令都將由系統服務名稱取代。"
 
 #. translators: -d, --debugFile <path>
 #: src/commands/ps.cc:52
@@ -2819,7 +2828,7 @@ msgstr "檢查失敗的："
 #. Here: Table output
 #: src/commands/ps.cc:127 src/solve-commit.cc:440
 msgid "Checking for running processes using deleted libraries..."
-msgstr "正在檢查使用已刪除函式庫的執行中程序..."
+msgstr "正在檢查使用已刪除軟體庫的執行中程序..."
 
 #. process ID
 #: src/commands/ps.cc:142
@@ -3138,12 +3147,12 @@ msgstr "已自動偵測到該儲存庫類型。將忽略此選項。"
 #: src/commands/repos/add.cc:70
 #, c-format, boost-format
 msgid "Cannot use %s together with %s. Using the %s setting."
-msgstr "無法一起使用 %s 和 %s。 將使用 %s 設定。"
+msgstr "無法搭配使用 %s 和 %s。 將使用 %s 設定。"
 
 #: src/commands/repos/add.cc:93
 msgid ""
 "If only one argument is used, it must be a URI pointing to a .repo file."
-msgstr "如果只使用一個參數，它必須是一個指向 .repo 檔的位址。"
+msgstr "如果只使用一個引數，它必須是一個指向 .repo 檔案的位址。"
 
 #: src/commands/repos/add.cc:130
 msgid "Specified type is not a valid repository type:"
@@ -3730,17 +3739,17 @@ msgstr ""
 msgid ""
 "For an extended search including not yet activated remote resources you may "
 "run '%1%' at any time."
-msgstr ""
+msgstr "您可隨時執行「%1%」進行延伸搜尋，範圍包括尚未啟動的遠端資源。"
 
 #: src/commands/search/search-packages-hinthack.cc:99
 #, boost-format
 msgid "Do you want to run '%1%' now?"
-msgstr ""
+msgstr "要立即執行「%1%」嗎？"
 
 #: src/commands/search/search-packages-hinthack.cc:115
 #, boost-format
 msgid "Run '%1%' to search in not yet activated remote resources."
-msgstr ""
+msgstr "執行「%1%」以搜尋尚未啟動的遠端資源。"
 
 #. translators: command summary: search, se
 #: src/commands/search/search.cc:73
@@ -3891,33 +3900,33 @@ msgstr "以 root 執行 'zypper refresh' 也許可以解決這個問題。"
 #. translators: -g, --category <CATEGORY>
 #: src/commands/selectpatchoptionset.cc:24
 msgid "Select patches with the specified category."
-msgstr ""
+msgstr "選取指定類別的修補程式。"
 
 #. translators: --severity <SEVERITY>
 #: src/commands/selectpatchoptionset.cc:28
 msgid "Select patches with the specified severity."
-msgstr ""
+msgstr "選取指定嚴重性的修補程式。"
 
 #. translators: --date <YYYY-MM-DD>
 #: src/commands/selectpatchoptionset.cc:32
 msgid "Select patches issued up to, but not including, the specified date"
-msgstr ""
+msgstr "選取在指定日期前 (但不包含該日期) 發佈的修補程式"
 
 #. translators: -b, --bugzilla
 #: src/commands/selectpatchoptionset.cc:36
 msgid "Select applicable patches for the specified Bugzilla issues."
-msgstr ""
+msgstr "選取針對指定 Bugzilla 問題的適用修補程式。"
 
 #. translators: --cve
 #: src/commands/selectpatchoptionset.cc:41
 msgid "Select applicable patches for the specified CVE issues."
-msgstr ""
+msgstr "選取針對指定 CVE 問題的適用修補程式。"
 
 #. any
 #. translators: --cve
 #: src/commands/selectpatchoptionset.cc:50
 msgid "Select issues matching the specified string."
-msgstr ""
+msgstr "選取與指定字串相符的問題。"
 
 #: src/commands/services/add.cc:55
 #, c-format, boost-format
@@ -4026,7 +4035,7 @@ msgstr "修改藉由別名、編號、URI 或 '%1%' 統合選項所指定的服�
 
 #: src/commands/services/modify.cc:41
 msgid "Advanced:"
-msgstr ""
+msgstr "進階："
 
 #: src/commands/services/modify.cc:43
 msgid "Add a RIS service repository to enable."
@@ -4253,7 +4262,7 @@ msgstr "這個指令只在 zypper shell 中有意義。"
 
 #: src/commands/solveroptionset.cc:16 src/commands/solveroptionset.cc:39
 msgid "Solver options"
-msgstr ""
+msgstr "規劃求解選項"
 
 #: src/commands/solveroptionset.cc:18
 msgid "Install also recommended packages in addition to the required ones."
@@ -4279,7 +4288,7 @@ msgstr "不要強迫找尋解決方案，要先詢問。"
 
 #: src/commands/solveroptionset.cc:63
 msgid "Expert options"
-msgstr ""
+msgstr "專家選項"
 
 #: src/commands/solveroptionset.cc:66
 msgid "Whether to allow downgrading installed resolvables."
@@ -4348,7 +4357,7 @@ msgstr "原始碼軟體包的名稱為必要的參數。"
 
 #: src/commands/sourceinstall.cc:86
 msgid "Uninstalling source packages is not supported."
-msgstr ""
+msgstr "不支援解除安裝來源套件。"
 
 #: src/commands/subcommand.cc:52
 msgid "none"
@@ -4617,7 +4626,7 @@ msgstr "無法建立或存取下載目錄 '%s'。"
 #: src/commands/utils/source-download.cc:216
 #, c-format, boost-format
 msgid "Using download directory at '%s'."
-msgstr "正在使用 '%s 1' 中的下載目錄。"
+msgstr "正在使用 '%s' 中的下載目錄。"
 
 #: src/commands/utils/source-download.cc:226
 #: src/commands/utils/source-download.cc:261
@@ -4729,12 +4738,12 @@ msgstr "不要下載任何原始碼 rpm，只顯示那些遺失或 不相關的 
 #. translators: --status
 #: src/commands/utils/source-download.cc:514
 msgid "Write a manifest file."
-msgstr ""
+msgstr "寫入資訊清單檔案。"
 
 #. translators: --status
 #: src/commands/utils/source-download.cc:518
 msgid "Disable writing a manifest file."
-msgstr ""
+msgstr "停用寫入資訊清單檔案。"
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/utils/targetos.cc:20
@@ -5021,56 +5030,56 @@ msgstr "建構二進位軟體包"
 #. translators: header of table column - is the language requested? (Yes/No)
 #: src/locales.cc:56 src/locales.cc:90
 msgid "Requested"
-msgstr ""
+msgstr "已申請"
 
 #: src/locales.cc:60
 msgid "Fallback"
-msgstr ""
+msgstr "錯誤回復"
 
 #. translators: header of table column - the language code, e.g. en_US
 #: src/locales.cc:86
 msgid "Code"
-msgstr ""
+msgstr "代碼"
 
 #. translators: header of table column - the language, e.g. English (United States)
 #: src/locales.cc:88
 msgid "Language"
-msgstr ""
+msgstr "語言"
 
 #: src/locales.cc:306
 #, c-format, boost-format
 msgid "Packages for %s (locale '%s', requested: %s):"
-msgstr ""
+msgstr "%s 套件 (地區設定 %s，已申請：%s)："
 
 #: src/locales.cc:323
 #, c-format, boost-format
 msgid "Added locale: %s"
-msgstr ""
+msgstr "已新增地區設定：%s"
 
 #: src/locales.cc:326
 #, c-format, boost-format
 msgid "ERROR: cannot add %s"
-msgstr ""
+msgstr "錯誤：無法新增 %s"
 
 #: src/locales.cc:330
 #, c-format, boost-format
 msgid " %s is already requested."
-msgstr ""
+msgstr " 已申請 %s。"
 
 #: src/locales.cc:351
 #, c-format, boost-format
 msgid "Removed locale: %s"
-msgstr ""
+msgstr "已移除地區設定：%s"
 
 #: src/locales.cc:354
 #, c-format, boost-format
 msgid "ERROR: cannot remove %s"
-msgstr ""
+msgstr "錯誤：無法移除 %s"
 
 #: src/locales.cc:358
 #, c-format, boost-format
 msgid "%s was not requested."
-msgstr ""
+msgstr "未申請 %s。"
 
 #. translators: this will show up if you press ctrl+c twice
 #: src/main.cc:31
@@ -5289,7 +5298,7 @@ msgstr "正在強迫原始中繼資料重新整理"
 #: src/repos.cc:289
 #, c-format, boost-format
 msgid "Retrieving repository '%s' metadata"
-msgstr "正在取出軟體庫 '%s' 中繼資料"
+msgstr "正在取回軟體庫 '%s' 中繼資料"
 
 #: src/repos.cc:313
 #, c-format, boost-format
@@ -5343,7 +5352,7 @@ msgstr "請檢查為此軟體庫定義的位址是否指向有效的軟體庫。
 #: src/repos.cc:402
 #, c-format, boost-format
 msgid "Error retrieving metadata for '%s':"
-msgstr "取出 '%s' 的中繼資料發生錯誤："
+msgstr "取回 '%s' 的中繼資料發生錯誤："
 
 #: src/repos.cc:415
 msgid "Forcing building of repository cache"
@@ -5884,7 +5893,7 @@ msgid ""
 "There are running programs which still use files and libraries deleted or "
 "updated by recent upgrades. They should be restarted to benefit from the "
 "latest updates. Run '%1%' to list these programs."
-msgstr ""
+msgstr "有些執行中的程式仍在使用已被近期升級刪除或更新的檔案和文件庫。應重新啟動它們以使其獲得最新更新。執行「%1%」列出這些程式。"
 
 #: src/solve-commit.cc:481
 msgid "Update notifications were received from the following packages:"
@@ -6192,35 +6201,35 @@ msgstr "無法初始化組態檔案分析器。"
 #: src/utils/Augeas.cc:510
 #, boost-format
 msgid "Malformed option name '%1%'."
-msgstr ""
+msgstr "格式錯誤的選項名稱「%1%」。"
 
 #: src/utils/Augeas.cc:522
 msgid "Could not save the config file."
-msgstr ""
+msgstr "無法儲存組態檔案。"
 
 #: src/utils/Augeas.cc:564
 #, boost-format
 msgid "Config file '%1%' exists but is not a file."
-msgstr ""
+msgstr "組態檔案「%1%」存在但不是檔案。"
 
 #: src/utils/Augeas.cc:580
 msgid "Could not load the config files."
-msgstr ""
+msgstr "無法載入組態檔案。"
 
 #: src/utils/Augeas.cc:606
 #, boost-format
 msgid "Config file '%1%' does not exist."
-msgstr ""
+msgstr "組態檔案「%1%」不存在。"
 
 #. translator: %1% is the path to a config file, %2% is the name of an options inside the file
 #: src/utils/Augeas.cc:637
 #, boost-format
 msgid "%1%: Option '%2%' is defined multiple times. Using the last one."
-msgstr ""
+msgstr "%1%：多次定義選項「%2%」。將使用最後定義的那個。"
 
 #: src/utils/Augeas.cc:658
 msgid "No config file is in use."
-msgstr ""
+msgstr "沒有使用中的組態檔案。"
 
 #: src/utils/flags/exceptions.cc:22
 #, boost-format
@@ -6245,16 +6254,16 @@ msgstr "%1% 標記僅能使用一次。"
 #: src/utils/flags/exceptions.cc:46
 #, c-format, boost-format
 msgid "%s used together with %s, which contradict each other."
-msgstr ""
+msgstr "%s 與 %s 搭配使用，但它們彼此衝突。"
 
 #: src/utils/flags/flagtypes.cc:24
 msgid "Unknown package type"
-msgstr ""
+msgstr "未知套件類型"
 
 #: src/utils/flags/flagtypes.cc:100
 #, boost-format
 msgid "The flag '%1%' can only be used a maximum of %2% times."
-msgstr ""
+msgstr "旗標「%1%」最多只能使用 %2% 次。"
 
 #: src/utils/flags/flagtypes.cc:192
 #, c-format, boost-format
@@ -6543,11 +6552,11 @@ msgstr "再次嘗試中..."
 
 #: src/utils/prompt.cc:325
 msgid "always"
-msgstr ""
+msgstr "永遠"
 
 #: src/utils/prompt.cc:325
 msgid "never"
-msgstr ""
+msgstr "永不"
 
 #: src/utils/prompt.cc:372
 msgid "Cannot read input: bad stream or EOF."
@@ -6570,7 +6579,7 @@ msgstr "無效的答案 '%s'。"
 #: src/utils/prompt.cc:415
 #, c-format, boost-format
 msgid "Ambiguous answer '%s'."
-msgstr ""
+msgstr "含糊回答「%s」。"
 
 #. translators: the %s are: 'y', 'yes' (translated), 'n', and 'no' (translated).
 #: src/utils/prompt.cc:423
@@ -6582,7 +6591,7 @@ msgstr "如果沒有可用的答案，輸入 '%s' 表示 '%s' 或 '%s' 表示 '%
 msgid ""
 "If nothing else works enter '#1' to select the 1st option, '#2' for the 2nd "
 "one, ..."
-msgstr ""
+msgstr "如果沒有可用回答，輸入「#1」選取第一個選項，輸入「#2」選取第二個選項..."
 
 #~ msgid "Augeas error: setting config file to load failed."
 #~ msgstr "Augeas 錯誤：設定組態檔載入失敗。"
