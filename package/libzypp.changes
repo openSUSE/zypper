@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Thu Mar 21 12:35:39 CET 2019 - ma@suse.de
+
+- KeyManager: Work around bsc#1127220 [libgpgme] no error upon
+  incomplete import due to signal received.
+- MediaCurl: add hint to check SCC for an expired regcode on
+  http error 403 (bsc#965786)
+- version 17.11.3 (9)
+
+-------------------------------------------------------------------
 Mon Feb 25 12:07:19 CET 2019 - ma@suse.de
 
 - Correctly handle exceptions when verifying the medium (bsc#1065022)
