@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Thu Mar 21 12:44:06 CET 2019 - ma@suse.de
+
+- Add Requires: libaugeas0 >= 1.10.0 (fixes #265)
+- bash-completion: add package completion for addlock (bsc#1047962)
+- bash-completion: fix incorrect detection of command names (bsc#1049826)
+- version 1.14.27
+
+-------------------------------------------------------------------
 Mon Feb 25 12:16:35 CET 2019 - ma@suse.de
 
 - Offer to change the 'runSearchPackages' config option at the prompt
