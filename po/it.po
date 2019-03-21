@@ -12,16 +12,16 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-02-25 14:33+0100\n"
-"PO-Revision-Date: 2018-12-13 17:03+0000\n"
-"Last-Translator: Alessio Adamo <alessio.adamo@gmail.com>\n"
-"Language-Team: Italian <https://l10n.opensuse.org/projects/zypper/master/it/"
-">\n"
+"PO-Revision-Date: 2019-03-21 12:50+0000\n"
+"Last-Translator: Davide Aiello <davidea@novilinguists.com>\n"
+"Language-Team: Italian <https://l10n.opensuse.org/projects/zypper/master/it/>"
+"\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 2.18\n"
+"X-Generator: Weblate 3.3\n"
 
 #: src/SolverRequester.h:52
 #, boost-format
@@ -521,15 +521,15 @@ msgstr ""
 #: src/commands/commandhelpformatter.h:94
 #, c-format, boost-format
 msgid "This is an alias for '%s'."
-msgstr "Questo è un alias per '%s.'"
+msgstr "Questo è un alias per '%s'."
 
 #: src/commands/commandhelpformatter.h:107
 msgid "Examples:"
-msgstr ""
+msgstr "Esempi:"
 
 #: src/commands/commandhelpformatter.h:110
 msgid "Arguments:"
-msgstr ""
+msgstr "Argomenti:"
 
 #: src/commands/commandhelpformatter.h:123 src/utils/flags/zyppflags.cc:582
 msgid "Command options:"
@@ -703,7 +703,7 @@ msgstr "AAAA-MM-GG"
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:53
 msgid "MODE"
-msgstr ""
+msgstr "MODALITÀ"
 
 #. TranslatorExplanation These are reasons for various failures.
 #: src/utils/prompt.h:185
@@ -753,7 +753,7 @@ msgstr "Blocchi ai pacchetti:"
 
 #: src/Command.cc:154
 msgid "Locale Management:"
-msgstr ""
+msgstr "Gestione impostazioni internazionali:"
 
 #: src/Command.cc:158
 msgid "Other Commands:"
@@ -776,7 +776,7 @@ msgstr "Stile tabella %d non valido."
 #: src/Config.cc:54
 #, c-format, boost-format
 msgid " Use an integer number from %d to %d"
-msgstr ""
+msgstr " Usa un numero intero compreso tra %d e %d"
 
 #: src/Config.cc:248
 msgid "The path specified in the --root option must be absolute."
@@ -880,6 +880,7 @@ msgstr "Ignora i pacchetti sconosciuti."
 msgid ""
 "Terse output for machine consumption. Implies --no-abbrev and --no-color."
 msgstr ""
+"Output di Terse per utilizzo del computer. Implica --no-abbrev e --no-color."
 
 #. translators: --reposd-dir, -D <DIR>
 #: src/Config.cc:487
@@ -1024,16 +1025,16 @@ msgstr "Non legge i pacchetti installati."
 
 #: src/Config.cc:804
 msgid "No config file is in use. Can not save options."
-msgstr ""
+msgstr "Nessun file di configurazione in uso. Impossibile salvare le opzioni."
 
 #: src/Config.cc:815
 #, boost-format
 msgid "Option '%1%' saved in '%2%'."
-msgstr ""
+msgstr "Opzione '%1%' salvata in '%2%'."
 
 #: src/Config.cc:822
 msgid "Failed to save option."
-msgstr ""
+msgstr "Salvataggio dell'opzione non riuscito."
 
 #: src/PackageArgs.cc:208
 #, c-format, boost-format
@@ -1178,6 +1179,8 @@ msgid ""
 "There is an update candidate for '%s' from vendor '%s', while the current "
 "vendor is '%s'. Use '%s' to install this candidate."
 msgstr ""
+"È disponibile un aggiornamento candidato per '%s' dal fornitore '%s', mentre "
+"il fornitore corrente è '%s'. Utilizzare '%s' per installare il candidato."
 
 #: src/RequestFeedback.cc:132
 #, c-format, boost-format
@@ -1860,8 +1863,8 @@ msgstr[1] "Le seguenti %d patch richiedono un riavvio di sistema:"
 #, c-format, boost-format
 msgid "The following package requires a system reboot:"
 msgid_plural "The following %d packages require a system reboot:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Per il pacchetto seguente è necessario riavviare il sistema:"
+msgstr[1] "Per i pacchetti %d seguenti è necessario riavviare il sistema:"
 
 #: src/Summary.cc:1374
 #, boost-format
@@ -2332,6 +2335,9 @@ msgid ""
 "supporting available hardware, languages or filesystems. Useful after having "
 "added e.g. new hardware or driver repos."
 msgstr ""
+"Chiamato come '%1%', limita il comando alla semplice ricerca di pacchetti "
+"che supportano l'hardware, le lingue o i file system disponibili. Utile dopo "
+"aver aggiunto, ad esempio, nuovo hardware o repository del driver."
 
 #. translators: command description
 #: src/commands/inrverify.cc:101
@@ -2349,7 +2355,7 @@ msgstr "Seleziona i pacchetti per nome, non per funzionalità."
 
 #: src/commands/installremove.cc:55
 msgid "Select packages solely by capability."
-msgstr ""
+msgstr "Selezionare i pacchetti solo in base alla funzionalità."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/installremove.cc:74
@@ -2502,19 +2508,23 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/locale/addlocalecmd.cc:19
 msgid "addlocale (aloc) [OPTIONS] <LOCALE> ..."
-msgstr ""
+msgstr "addlocale (aloc) [OPZIONI] <IMPOSTAZIONE INTERNAZIONALE>..."
 
 #: src/commands/locale/addlocalecmd.cc:20
 msgid "Add locale(s) to requested locales."
-msgstr ""
+msgstr "Aggiunge impostazioni internazionali a quelle richieste."
 
 #: src/commands/locale/addlocalecmd.cc:21
 msgid "Add given locale(s) to the list of requested locales."
 msgstr ""
+"Aggiunge determinate impostazioni internazionali all'elenco di quelle "
+"richieste."
 
 #: src/commands/locale/addlocalecmd.cc:32
 msgid "Do not install corresponding packages for given locale(s)."
 msgstr ""
+"Non installa pacchetti corrispondenti per determinate impostazioni "
+"internazionali."
 
 #: src/commands/locale/addlocalecmd.cc:56
 #, c-format, boost-format
@@ -2522,15 +2532,18 @@ msgid ""
 "Specify locale which shall be supported by the language code.\n"
 "Get a list of all available locales by calling '%s'."
 msgstr ""
+"Specifica l'impostazione internazionale che sarà supportata dal codice "
+"lingua.\n"
+"Per ottenere un elenco di impostazioni internazionali chiamare '%s'."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/locale/localescmd.cc:17
 msgid "locales (lloc) [OPTIONS] [LOCALE] ..."
-msgstr ""
+msgstr "locales (lloc) [OPZIONI] [IMPOSTAZIONE INTERNAZIONALE]..."
 
 #: src/commands/locale/localescmd.cc:18
 msgid "List requested locales (languages codes)."
-msgstr ""
+msgstr "Elenca le impostazioni internazionali richieste (codici lingua)."
 
 #: src/commands/locale/localescmd.cc:19
 #, c-format, boost-format
@@ -2542,53 +2555,71 @@ msgid ""
 "can\n"
 "be installed by calling '%s'.\n"
 msgstr ""
+"Elenca le impostazioni internazionali e i pacchetti corrispondenti.\n"
+"\n"
+"Chiamato senza argomenti, elenca le impostazioni internazionali richieste. "
+"Se i\n"
+"pacchetti delle impostazioni internazionali per una lingua richiesta non "
+"sono ancora nel sistema, è possibile\n"
+"installarli chiamando '%s'.\n"
 
 #: src/commands/locale/localescmd.cc:35
 msgid "Show corresponding packages."
-msgstr ""
+msgstr "Mostra i pacchetti corrispondenti."
 
 #: src/commands/locale/localescmd.cc:36
 msgid "List all available locales."
-msgstr ""
+msgstr "Elenca tutte le impostazioni internazionali disponibili."
 
 #: src/commands/locale/localescmd.cc:49
 msgid "Ignoring positional arguments because --all argument was provided."
 msgstr ""
+"Gli argomenti posizionali vengono ingorati perché è stato fornito "
+"l'argomento --all."
 
 #: src/commands/locale/localescmd.cc:76
 msgid "The locale(s) for which the information shall be printed."
 msgstr ""
+"Le impostazioni internazionali per le quali saranno stampate le informazioni."
 
 #: src/commands/locale/localescmd.cc:80
 msgid ""
 "Get all locales with lang code 'en' that have their own country code, "
 "excluding the fallback 'en':"
 msgstr ""
+"Ottieni tutte le impostazioni internazionali con codice lingua 'en' con "
+"codice paese proprio, tranne fallback 'en':"
 
 #: src/commands/locale/localescmd.cc:87
 msgid "Get all locales with lang code 'en' with or without country code:"
 msgstr ""
+"Ottieni tutte le impostazioni internazionali con codice lingua 'en' con o "
+"senza codice paese:"
 
 #: src/commands/locale/localescmd.cc:94
 msgid "Get the locale matching the argument exactly: "
 msgstr ""
+"Ottieni l'impostazione internazionale che corrisponde esattamente "
+"all'argomento: "
 
 #: src/commands/locale/localescmd.cc:101
 msgid "Get the list of packages which are available for 'de' and 'en':"
-msgstr ""
+msgstr "Ottieni l'elenco dei pacchetti disponibili per 'de' e 'en':"
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/locale/removelocalecmd.cc:17
 msgid "removelocale (rloc) [OPTIONS] <LOCALE> ..."
-msgstr ""
+msgstr "removelocale (rloc) [OPZIONI] <IMPOSTAZIONE INTERNAZIONALE>..."
 
 #: src/commands/locale/removelocalecmd.cc:18
 msgid "Remove locale(s) from requested locales."
-msgstr ""
+msgstr "Rimuove le impostazioni internazionali da quelle richieste."
 
 #: src/commands/locale/removelocalecmd.cc:19
 msgid "Remove given locale(s) from the list of supported languages."
 msgstr ""
+"Rimuove determinate impostazioni internazionali dall'elenco delle lingue "
+"supportate."
 
 #: src/commands/locale/removelocalecmd.cc:34
 #, c-format, boost-format
@@ -2596,10 +2627,15 @@ msgid ""
 "Specify locales which shall be removed by the the language code.\n"
 "Get the list of requested locales by calling '%s'."
 msgstr ""
+"Specifica le impostazioni internazionali che saranno rimosse dal codice "
+"lingua.\n"
+"Per ottenere l'elenco di impostazioni internazionali richieste chiamare '%s'."
 
 #: src/commands/locale/removelocalecmd.cc:46
 msgid "Do not remove corresponding packages for given locale(s)."
 msgstr ""
+"Non rimuove i pacchetti corrispondenti per determinate impostazioni "
+"internazionali."
 
 # =============================================================================
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
@@ -3332,7 +3368,7 @@ msgstr "Ordina l'elenco per repository."
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/query/patches.cc:18
 msgid "patches (pch) [REPOSITORY] ..."
-msgstr "patches (pch) [archivio]"
+msgstr "patches (pch) [REPOSITORY]..."
 
 #. translators: command summary: patches, pch
 #: src/commands/query/patches.cc:20
@@ -3542,7 +3578,7 @@ msgstr "Percorso della cache MD"
 
 #: src/commands/repos/list.cc:74
 msgid "repos (lr) [OPTIONS] [REPO] ..."
-msgstr "repos (lr) [opzioni] [repo]"
+msgstr "repos (lr) [OPZIONI] [REPO]..."
 
 #: src/commands/repos/list.cc:75 src/commands/repos/list.cc:76
 msgid "List all defined repositories."
@@ -4039,6 +4075,8 @@ msgid ""
 "For an extended search including not yet activated remote resources you may "
 "run '%1%' at any time."
 msgstr ""
+"Per una ricerca estesa che includa risorse remote non ancora attivate è "
+"possibile eseguire '%1%' in qualsiasi momento."
 
 #: src/commands/search/search-packages-hinthack.cc:99
 #, boost-format
@@ -4696,7 +4734,7 @@ msgstr "Il nome del pacchetto di origine è un argomento obbligatorio."
 
 #: src/commands/sourceinstall.cc:86
 msgid "Uninstalling source packages is not supported."
-msgstr ""
+msgstr "La disinstallazione dei pacchetti di origine non è supportata."
 
 #: src/commands/subcommand.cc:52
 msgid "none"
@@ -5399,56 +5437,56 @@ msgstr "Consente di compilare pacchetti binari"
 #. translators: header of table column - is the language requested? (Yes/No)
 #: src/locales.cc:56 src/locales.cc:90
 msgid "Requested"
-msgstr ""
+msgstr "Richiesta"
 
 #: src/locales.cc:60
 msgid "Fallback"
-msgstr ""
+msgstr "Fallback"
 
 #. translators: header of table column - the language code, e.g. en_US
 #: src/locales.cc:86
 msgid "Code"
-msgstr ""
+msgstr "Codice"
 
 #. translators: header of table column - the language, e.g. English (United States)
 #: src/locales.cc:88
 msgid "Language"
-msgstr ""
+msgstr "Lingua"
 
 #: src/locales.cc:306
 #, c-format, boost-format
 msgid "Packages for %s (locale '%s', requested: %s):"
-msgstr ""
+msgstr "Pacchetti per %s (impostazione internazionale '%s', richiesta: %s):"
 
 #: src/locales.cc:323
 #, c-format, boost-format
 msgid "Added locale: %s"
-msgstr ""
+msgstr "Impostazione internazionale aggiunta: %s"
 
 #: src/locales.cc:326
 #, c-format, boost-format
 msgid "ERROR: cannot add %s"
-msgstr ""
+msgstr "ERRORE: impossibile aggiungere %s"
 
 #: src/locales.cc:330
 #, c-format, boost-format
 msgid " %s is already requested."
-msgstr ""
+msgstr " %s già richiesta."
 
 #: src/locales.cc:351
 #, c-format, boost-format
 msgid "Removed locale: %s"
-msgstr ""
+msgstr "Rimossa impostazione internazionale: %s"
 
 #: src/locales.cc:354
 #, c-format, boost-format
 msgid "ERROR: cannot remove %s"
-msgstr ""
+msgstr "ERRORE: impossibile rimuovere %s"
 
 #: src/locales.cc:358
 #, c-format, boost-format
 msgid "%s was not requested."
-msgstr ""
+msgstr "%s non è stata richiesta."
 
 #. translators: this will show up if you press ctrl+c twice
 #: src/main.cc:31
@@ -6334,6 +6372,9 @@ msgid ""
 "updated by recent upgrades. They should be restarted to benefit from the "
 "latest updates. Run '%1%' to list these programs."
 msgstr ""
+"Alcuni programmi in esecuzione utilizzano ancora file e librerie rilevati e "
+"aggiornati da upgrade recenti. Riavviarli per trarre vantaggio dagli ultimi "
+"aggiornamenti. Eseguire '%1%' per visualizzare l'elenco di questi programmi."
 
 #: src/solve-commit.cc:481
 msgid "Update notifications were received from the following packages:"
@@ -6679,35 +6720,37 @@ msgstr "Impossibile inizializzare il parser del file di configurazione."
 #: src/utils/Augeas.cc:510
 #, boost-format
 msgid "Malformed option name '%1%'."
-msgstr ""
+msgstr "Nome opzione '%1%' errato."
 
 #: src/utils/Augeas.cc:522
 msgid "Could not save the config file."
-msgstr ""
+msgstr "Impossibile salvare il file di configurazione."
 
 #: src/utils/Augeas.cc:564
 #, boost-format
 msgid "Config file '%1%' exists but is not a file."
-msgstr ""
+msgstr "Il file di configurazione '%1%' esiste ma non è un file."
 
 #: src/utils/Augeas.cc:580
 msgid "Could not load the config files."
-msgstr ""
+msgstr "Impossibile caricare i file di configurazione."
 
 #: src/utils/Augeas.cc:606
 #, boost-format
 msgid "Config file '%1%' does not exist."
-msgstr ""
+msgstr "File di configurazione '%1%' inesistente."
 
 #. translator: %1% is the path to a config file, %2% is the name of an options inside the file
 #: src/utils/Augeas.cc:637
 #, boost-format
 msgid "%1%: Option '%2%' is defined multiple times. Using the last one."
 msgstr ""
+"%1%: l'opzione '%2%' è stata definita più volte. Viene utilizzata l'ultima "
+"definizione."
 
 #: src/utils/Augeas.cc:658
 msgid "No config file is in use."
-msgstr ""
+msgstr "Nessun file di configurazione in uso."
 
 #: src/utils/flags/exceptions.cc:22
 #, boost-format
@@ -7058,11 +7101,11 @@ msgstr "Nuovo tentativo in corso..."
 
 #: src/utils/prompt.cc:325
 msgid "always"
-msgstr ""
+msgstr "sempre"
 
 #: src/utils/prompt.cc:325
 msgid "never"
-msgstr ""
+msgstr "mai"
 
 #: src/utils/prompt.cc:372
 msgid "Cannot read input: bad stream or EOF."
@@ -7085,7 +7128,7 @@ msgstr "'%s', risposta non valida."
 #: src/utils/prompt.cc:415
 #, c-format, boost-format
 msgid "Ambiguous answer '%s'."
-msgstr ""
+msgstr "Risposta ambigua '%s'."
 
 #. translators: the %s are: 'y', 'yes' (translated), 'n', and 'no' (translated).
 #: src/utils/prompt.cc:423
@@ -7099,6 +7142,8 @@ msgid ""
 "If nothing else works enter '#1' to select the 1st option, '#2' for the 2nd "
 "one, ..."
 msgstr ""
+"Se non funziona nulla, immettere '#1' per selezionare la prima opzione, '#2' "
+"per la seconda e così via..."
 
 #~ msgid ""
 #~ "For an extended search including not yet activated remote resources you "

@@ -6,16 +6,16 @@ msgstr ""
 "Project-Id-Version: zypper.ko\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-02-25 14:33+0100\n"
-"PO-Revision-Date: 2018-05-14 06:32+0000\n"
+"PO-Revision-Date: 2019-03-21 12:50+0000\n"
 "Last-Translator: Hwajin Kim <hwajin.kim@e4net.net>\n"
-"Language-Team: Korean <https://l10n.opensuse.org/projects/zypper/master/ko/"
-">\n"
+"Language-Team: Korean <https://l10n.opensuse.org/projects/zypper/master/ko/>"
+"\n"
 "Language: ko\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 2.18\n"
+"X-Generator: Weblate 3.3\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
 #: src/SolverRequester.h:52
@@ -195,13 +195,12 @@ msgstr "새 리포지토리 또는 패키지 서명 키 수신:"
 #. translators: this message is shown after showing description of the key
 #: src/callbacks/keyring.h:287
 msgid "Do you want to reject the key, trust temporarily, or trust always?"
-msgstr "키를 거부하시겠습니까, 아니면 임시로 신뢰하거나 항상 신뢰하시겠습니까?"
+msgstr "키를 거부(r)하시겠습니까, 아니면 임시로 신뢰(t)하거나 항상 신뢰(a)하시겠습니까?"
 
 #. translators: this message is shown after showing description of the key
 #: src/callbacks/keyring.h:290
-#, fuzzy
 msgid "Do you want to reject the key, or trust always?"
-msgstr "키를 거부하시겠습니까, 아니면 임시로 신뢰하거나 항상 신뢰하시겠습니까?"
+msgstr "키를 거부(r)하시겠습니까, 아니면 항상 신뢰(a)하시겠습니까?"
 
 #. translators: r/t/a stands for Reject/TrustTemporarily/trustAlways(import)
 #. translate to whatever is appropriate for your language
@@ -224,7 +223,7 @@ msgstr "r/t"
 #. The answers should be lower case letters.
 #: src/callbacks/keyring.h:318
 msgid "r/a/"
-msgstr ""
+msgstr "r/a/"
 
 #. translators: help text for the 'r' option in the 'r/t/a' prompt
 #: src/callbacks/keyring.h:324
@@ -272,19 +271,19 @@ msgstr "리포지토리 '%1%'의 '%2%' 파일에 대한 서명 확인에 실패�
 msgid ""
 "The rpm database seems to contain old V3 version gpg keys which are "
 "meanwhile obsolete and considered insecure:"
-msgstr ""
+msgstr "rpm 데이터베이스에 오래되고 안전하지 않은 것으로 간주되는 이전 V3 버전 gpg 키가 있는 것 같습니다."
 
 #: src/callbacks/keyring.h:446
 #, boost-format
 msgid "To see details about a key call '%1%'."
-msgstr ""
+msgstr "키에 대한 세부 정보를 보려면 '%1%'을(를) 호출합니다."
 
 #: src/callbacks/keyring.h:450
 #, boost-format
 msgid ""
 "Unless you believe the key in question is still in use, you can remove it "
 "from the rpm database calling '%1%'."
-msgstr ""
+msgstr "문제의 키가 여전히 사용되는 것이 아니면 '%1%'을(를) 호출하여 rpm 데이터베이스에서 해당 키를 제거할 수 있습니다."
 
 #: src/callbacks/keyring.h:472
 #, c-format, boost-format
@@ -492,11 +491,11 @@ msgstr "이는 '%s'에 대한 별칭입니다."
 
 #: src/commands/commandhelpformatter.h:107
 msgid "Examples:"
-msgstr ""
+msgstr "예:"
 
 #: src/commands/commandhelpformatter.h:110
 msgid "Arguments:"
-msgstr ""
+msgstr "인수:"
 
 #: src/commands/commandhelpformatter.h:123 src/utils/flags/zyppflags.cc:582
 msgid "Command options:"
@@ -557,7 +556,7 @@ msgstr ""
 
 #: src/commands/commonflags.h:45
 msgid "Consider only patches which affect the package management itself."
-msgstr ""
+msgstr "패키지 관리 자체에 영향을 미치는 패치만 고려합니다."
 
 #: src/output/Out.h:26 src/repos.cc:126 src/repos.cc:154
 msgid "Yes"
@@ -589,67 +588,67 @@ msgstr "계속하시겠습니까?"
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:23
 msgid "ALIAS"
-msgstr ""
+msgstr "ALIAS"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:25
 msgid "ALIAS|#|URI"
-msgstr ""
+msgstr "ALIAS|#|URI"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:27
 msgid "CATEGORY"
-msgstr ""
+msgstr "CATEGORY"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:29
 msgid "DIR"
-msgstr ""
+msgstr "DIR"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:31
 msgid "FILE"
-msgstr ""
+msgstr "FILE"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:33
 msgid "FILE.repo"
-msgstr ""
+msgstr "FILE.repo"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:35
 msgid "FORMAT"
-msgstr ""
+msgstr "FORMAT"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:37
 msgid "INTEGER"
-msgstr ""
+msgstr "INTEGER"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:39
 msgid "PATH"
-msgstr ""
+msgstr "PATH"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:41
 msgid "SEVERITY"
-msgstr ""
+msgstr "SEVERITY"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:43
 msgid "STRING"
-msgstr ""
+msgstr "STRING"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:45
 msgid "TAG"
-msgstr ""
+msgstr "TAG"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:47
 msgid "TYPE"
-msgstr ""
+msgstr "TYPE"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #. translators: property name; short; used like "Name: value"
@@ -662,12 +661,12 @@ msgstr "URI"
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:51
 msgid "YYYY-MM-DD"
-msgstr ""
+msgstr "YYYY-MM-DD"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:53
 msgid "MODE"
-msgstr ""
+msgstr "MODE"
 
 #. TranslatorExplanation These are reasons for various failures.
 #: src/utils/prompt.h:185
@@ -688,7 +687,7 @@ msgstr "오류"
 
 #: src/Command.cc:93
 msgid "Invalid command"
-msgstr ""
+msgstr "잘못된 명령"
 
 #: src/Command.cc:111
 msgid "Repository Management:"
@@ -716,7 +715,7 @@ msgstr "패키지 잠금:"
 
 #: src/Command.cc:154
 msgid "Locale Management:"
-msgstr ""
+msgstr "로케일 관리:"
 
 #: src/Command.cc:158
 msgid "Other Commands:"
@@ -739,7 +738,7 @@ msgstr "잘못된 테이블 스타일 %d입니다."
 #: src/Config.cc:54
 #, c-format, boost-format
 msgid " Use an integer number from %d to %d"
-msgstr ""
+msgstr " %d부터 %d까지의 정수 사용"
 
 #: src/Config.cc:248
 msgid "The path specified in the --root option must be absolute."
@@ -836,7 +835,7 @@ msgstr "알 수 없는 패키지를 무시합니다."
 #: src/Config.cc:463
 msgid ""
 "Terse output for machine consumption. Implies --no-abbrev and --no-color."
-msgstr ""
+msgstr "시스템 사용에 대한 간단한 출력입니다. --no-abbrev 및 --no-color를 의미합니다."
 
 #. translators: --reposd-dir, -D <DIR>
 #: src/Config.cc:487
@@ -973,16 +972,16 @@ msgstr "설치된 패키지를 읽지 않습니다."
 
 #: src/Config.cc:804
 msgid "No config file is in use. Can not save options."
-msgstr ""
+msgstr "사용 중인 구성 파일이 없습니다. 옵션을 저장할 수 없습니다."
 
 #: src/Config.cc:815
 #, boost-format
 msgid "Option '%1%' saved in '%2%'."
-msgstr ""
+msgstr "'%1%' 옵션이 '%2%'에 저장되었습니다."
 
 #: src/Config.cc:822
 msgid "Failed to save option."
-msgstr ""
+msgstr "옵션을 저장하지 못했습니다."
 
 #: src/PackageArgs.cc:208
 #, c-format, boost-format
@@ -1125,6 +1124,7 @@ msgid ""
 "There is an update candidate for '%s' from vendor '%s', while the current "
 "vendor is '%s'. Use '%s' to install this candidate."
 msgstr ""
+"현재 벤더가 '%s'이지만 '%s' 벤더의 '%s'에 대한 업데이트 후보가 없습니다. '%s'을(를) 사용하여 이 후보를 설치하십시오."
 
 #: src/RequestFeedback.cc:132
 #, c-format, boost-format
@@ -1693,7 +1693,7 @@ msgstr[0] "다음 패치를 위해서는 시스템을 재부팅해야 합니다.
 #, c-format, boost-format
 msgid "The following package requires a system reboot:"
 msgid_plural "The following %d packages require a system reboot:"
-msgstr[0] ""
+msgstr[0] "다음 %d 패키지를 사용하려면 시스템을 재부팅해야 합니다."
 
 #: src/Summary.cc:1374
 #, boost-format
@@ -2036,24 +2036,24 @@ msgstr "비밀번호"
 
 #: src/commands/conditions.cc:19
 msgid "Root privileges are required to run this command."
-msgstr ""
+msgstr "이 명령을 실행하려면 루트 권한이 필요합니다."
 
 #: src/commands/conditions.cc:47
 msgid ""
 "This is a transactional-server, please use transactional-update to update or "
 "modify the system."
-msgstr ""
+msgstr "트랜잭션 서버이므로 트랜잭션 업데이트를 사용하여 시스템을 업데이트하거나 수정하십시오."
 
 #: src/commands/conditions.cc:49
 msgid ""
 "The target filesystem is mounted as read-only. Please make sure the target "
 "filesystem is writeable."
-msgstr ""
+msgstr "대상 파일 시스템이 읽기 전용으로 마운트되었습니다. 대상 파일 시스템이 쓰기 가능한지 확인하십시오."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/distupgrade.cc:20
 msgid "dist-upgrade (dup) [OPTIONS]"
-msgstr ""
+msgstr "dist-upgrade (dup) [OPTIONS]"
 
 #. translators: command summary: dist-upgrade, dup
 #. translators: command description
@@ -2080,12 +2080,12 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/help.cc:21
 msgid "zypper [--GLOBAL-OPTIONS] <COMMAND> [--COMMAND-OPTIONS] [ARGUMENTS]"
-msgstr ""
+msgstr "zypper [--GLOBAL-OPTIONS] <COMMAND> [--COMMAND-OPTIONS] [ARGUMENTS]"
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/help.cc:24
 msgid "zypper <SUBCOMMAND> [--COMMAND-OPTIONS] [ARGUMENTS]"
-msgstr ""
+msgstr "zypper <SUBCOMMAND> [--COMMAND-OPTIONS] [ARGUMENTS]"
 
 #: src/commands/help.cc:72 src/commands/help.cc:73
 msgid "Print zypper help"
@@ -2094,12 +2094,12 @@ msgstr "도움말을 인쇄합니다."
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/inrverify.cc:68
 msgid "install-new-recommends (inr) [OPTIONS]"
-msgstr ""
+msgstr "install-new-recommends (inr) [OPTIONS]"
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/inrverify.cc:71
 msgid "verify (ve) [OPTIONS]"
-msgstr ""
+msgstr "verify (ve) [OPTIONS]"
 
 #. translators: command summary: install-new-recommends, inr
 #: src/commands/inrverify.cc:81
@@ -2120,6 +2120,9 @@ msgid ""
 "unconditionally on small or minimal systems, as it may easily add a large "
 "number of packages."
 msgstr ""
+"이미 설치된 패키지에서 권장하는 새로 추가된 패키지를 설치합니다. 이 명령은 기본적으로 설치된 모든 패키지 권장 사항을 다시 평가하고 "
+"그에 따라 시스템을 채웁니다. 많은 패키지를 쉽게 추가할 수 있으므로 작은 시스템 또는 MSYS에서 이 명령을 무조건 호출하지 않는 것이 "
+"좋습니다."
 
 #. translators: command description, %1% is a zypper command
 #: src/commands/inrverify.cc:98
@@ -2129,6 +2132,8 @@ msgid ""
 "supporting available hardware, languages or filesystems. Useful after having "
 "added e.g. new hardware or driver repos."
 msgstr ""
+"'%1%'(으)로 호출되었으므로 사용 가능한 하드웨어, 언어 또는 파일 시스템을 지원하는 패키지만 찾도록 명령을 제한합니다. 새 하드웨어 "
+"또는 드라이버 리포지토리 등을 추가했을 때 유용합니다."
 
 #. translators: command description
 #: src/commands/inrverify.cc:101
@@ -2145,12 +2150,12 @@ msgstr "기능별이 아닌 일반 이름별로 패키지를 선택합니다."
 
 #: src/commands/installremove.cc:55
 msgid "Select packages solely by capability."
-msgstr ""
+msgstr "용량별로만 패키지를 선택합니다."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/installremove.cc:74
 msgid "remove (rm) [OPTIONS] <CAPABILITY> ..."
-msgstr ""
+msgstr "remove (rm) [OPTIONS] <CAPABILITY> ..."
 
 #. translators: command summary: remove, rm
 #: src/commands/installremove.cc:76
@@ -2196,7 +2201,7 @@ msgstr "소스 패키지 제거가 정의 및 구현되지 않았습니다."
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/installremove.cc:160
 msgid "install (in) [OPTIONS] <CAPABILITY|RPM_FILE_URI> ..."
-msgstr ""
+msgstr "install (in) [OPTIONS] <CAPABILITY|RPM_FILE_URI> ..."
 
 #. translators: command summary: install, in
 #: src/commands/installremove.cc:162
@@ -2275,7 +2280,7 @@ msgstr "해당하는 패치뿐 아니라 모든 패치를 나열합니다."
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/listupdates.cc:16
 msgid "list-updates (lu) [OPTIONS]"
-msgstr ""
+msgstr "list-updates (lu) [OPTIONS]"
 
 #. translators: command description
 #: src/commands/listupdates.cc:20
@@ -2293,19 +2298,19 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/locale/addlocalecmd.cc:19
 msgid "addlocale (aloc) [OPTIONS] <LOCALE> ..."
-msgstr ""
+msgstr "addlocale (aloc) [OPTIONS] <LOCALE> ..."
 
 #: src/commands/locale/addlocalecmd.cc:20
 msgid "Add locale(s) to requested locales."
-msgstr ""
+msgstr "요청한 로케일에 로케일을 추가합니다."
 
 #: src/commands/locale/addlocalecmd.cc:21
 msgid "Add given locale(s) to the list of requested locales."
-msgstr ""
+msgstr "요청한 로케일 목록에 제공된 로케일을 추가합니다."
 
 #: src/commands/locale/addlocalecmd.cc:32
 msgid "Do not install corresponding packages for given locale(s)."
-msgstr ""
+msgstr "제공된 로케일에 해당하는 패키지를 설치하지 않습니다."
 
 #: src/commands/locale/addlocalecmd.cc:56
 #, c-format, boost-format
@@ -2313,15 +2318,17 @@ msgid ""
 "Specify locale which shall be supported by the language code.\n"
 "Get a list of all available locales by calling '%s'."
 msgstr ""
+"언어 코드에서 지원할 로케일을 지정합니다.\n"
+"'%s'을(를) 호출하여 사용 가능한 모든 로케일 목록을 가져옵니다."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/locale/localescmd.cc:17
 msgid "locales (lloc) [OPTIONS] [LOCALE] ..."
-msgstr ""
+msgstr "locales (lloc) [OPTIONS] [LOCALE] ..."
 
 #: src/commands/locale/localescmd.cc:18
 msgid "List requested locales (languages codes)."
-msgstr ""
+msgstr "요청한 로케일(언어 코드)을 나열합니다."
 
 #: src/commands/locale/localescmd.cc:19
 #, c-format, boost-format
@@ -2333,53 +2340,58 @@ msgid ""
 "can\n"
 "be installed by calling '%s'.\n"
 msgstr ""
+"요청한 로케일 및 해당 패키지를 나열합니다.\n"
+"\n"
+"인수 없이 호출한 경우 요청한 로케일을 나열합니다. 요청한\n"
+"언어의 로케일 패키지가 아직 시스템에 없는 경우\n"
+"'%s'을(를) 호출하여 설치할 수 있습니다.\n"
 
 #: src/commands/locale/localescmd.cc:35
 msgid "Show corresponding packages."
-msgstr ""
+msgstr "해당 패키지를 표시합니다."
 
 #: src/commands/locale/localescmd.cc:36
 msgid "List all available locales."
-msgstr ""
+msgstr "사용 가능한 로케일을 모두 나열합니다."
 
 #: src/commands/locale/localescmd.cc:49
 msgid "Ignoring positional arguments because --all argument was provided."
-msgstr ""
+msgstr "모든 인수를 제공했기 때문에 위치 인수를 무시합니다."
 
 #: src/commands/locale/localescmd.cc:76
 msgid "The locale(s) for which the information shall be printed."
-msgstr ""
+msgstr "정보를 인쇄할 로케일입니다."
 
 #: src/commands/locale/localescmd.cc:80
 msgid ""
 "Get all locales with lang code 'en' that have their own country code, "
 "excluding the fallback 'en':"
-msgstr ""
+msgstr "대체 'en'을 제외하고 언어 코드 'en'과 함께 고유한 국가 코드가 있는 모든 로케일 가져오기:"
 
 #: src/commands/locale/localescmd.cc:87
 msgid "Get all locales with lang code 'en' with or without country code:"
-msgstr ""
+msgstr "언어 코드 'en'과 함께 다음 국가 코드가 있거나 없는 모든 로케일 가져오기:"
 
 #: src/commands/locale/localescmd.cc:94
 msgid "Get the locale matching the argument exactly: "
-msgstr ""
+msgstr "다음 인수와 정확히 일치하는 로케일 가져오기: "
 
 #: src/commands/locale/localescmd.cc:101
 msgid "Get the list of packages which are available for 'de' and 'en':"
-msgstr ""
+msgstr "'de' 및 'en'에 사용할 수 있는 패키지 목록 가져오기:"
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/locale/removelocalecmd.cc:17
 msgid "removelocale (rloc) [OPTIONS] <LOCALE> ..."
-msgstr ""
+msgstr "removelocale (rloc) [OPTIONS] <LOCALE> ..."
 
 #: src/commands/locale/removelocalecmd.cc:18
 msgid "Remove locale(s) from requested locales."
-msgstr ""
+msgstr "요청한 로케일에서 로케일을 제거합니다."
 
 #: src/commands/locale/removelocalecmd.cc:19
 msgid "Remove given locale(s) from the list of supported languages."
-msgstr ""
+msgstr "지원 언어 목록에서 제공된 로케일을 제거합니다."
 
 #: src/commands/locale/removelocalecmd.cc:34
 #, c-format, boost-format
@@ -2387,16 +2399,18 @@ msgid ""
 "Specify locales which shall be removed by the the language code.\n"
 "Get the list of requested locales by calling '%s'."
 msgstr ""
+"언어 코드에서 제거할 로케일을 지정합니다.\n"
+"'%s'을(를) 호출하여 요청한 로케일 목록을 가져옵니다."
 
 #: src/commands/locale/removelocalecmd.cc:46
 msgid "Do not remove corresponding packages for given locale(s)."
-msgstr ""
+msgstr "제공된 로케일에 해당하는 패키지를 제거하지 않습니다."
 
 # =============================================================================
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
 #: src/commands/locks/add.cc:29
 msgid "addlock (al) [OPTIONS] <PACKAGENAME> ..."
-msgstr ""
+msgstr "addlock (al) [OPTIONS] <PACKAGENAME> ..."
 
 #. translators: command summary
 #: src/commands/locks/add.cc:31
@@ -2429,7 +2443,7 @@ msgstr "패키지 잠금 추가 중 문제 발생:"
 # =============================================================================
 #: src/commands/locks/clean.cc:16
 msgid "cleanlocks (cl)"
-msgstr ""
+msgstr "cleanlocks (cl)"
 
 #. translators: command summary
 #: src/commands/locks/clean.cc:18
@@ -2509,7 +2523,7 @@ msgstr "설치 안 함"
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
 #: src/commands/locks/list.cc:256
 msgid "locks (ll) [OPTIONS]"
-msgstr ""
+msgstr "locks (ll) [OPTIONS]"
 
 #: src/commands/locks/list.cc:257
 msgid "List current package locks."
@@ -2534,7 +2548,7 @@ msgstr "패키지 잠금이 정의되지 않았습니다."
 # =============================================================================
 #: src/commands/locks/remove.cc:25
 msgid "removelock (rl) [OPTIONS] <LOCK-NUMBER|PACKAGENAME> ..."
-msgstr ""
+msgstr "removelock (rl) [OPTIONS] <LOCK-NUMBER|PACKAGENAME> ..."
 
 #: src/commands/locks/remove.cc:26
 msgid "Remove a package lock."
@@ -2576,7 +2590,7 @@ msgstr "패키지 잠금 제거 중 문제 발생:"
 #. translators: command summary: needs-rebooting
 #: src/commands/needs-rebooting.cc:22
 msgid "Check if the needs-reboot flag was set."
-msgstr ""
+msgstr "needs-reboot 플래그가 설정되었는지 확인합니다."
 
 #: src/commands/needs-rebooting.cc:23
 msgid ""
@@ -2585,28 +2599,31 @@ msgid ""
 "Exit code ZYPPER_EXIT_INF_REBOOT_NEEDED indicates that a reboot is needed, "
 "otherwise the exit code is set to ZYPPER_EXIT_OK."
 msgstr ""
+"코어 라이브러리 또는 서비스의 이전 업데이트 또는 설치에서 needs-reboot 플래그를 설정했는지 확인합니다.\n"
+"종료 코드 ZYPPER_EXIT_INF_REBOOT_NEEDED는 재부팅이 필요함을 나타냅니다. 그렇지 않은 경우 종료 코드가 "
+"ZYPPER_EXIT_OK로 설정됩니다."
 
 #: src/commands/needs-rebooting.cc:35
 msgid "Core libraries or services have been updated."
-msgstr ""
+msgstr "코어 라이브러리 또는 서비스가 업데이트되었습니다."
 
 #: src/commands/needs-rebooting.cc:36
 msgid ""
 "Reboot is required to ensure that your system benefits from these updates."
-msgstr ""
+msgstr "시스템에 이러한 업데이트를 적용하려면 재부팅해야 합니다."
 
 #: src/commands/needs-rebooting.cc:41
 msgid "No core libraries or services have been updated."
-msgstr ""
+msgstr "코어 라이브러리 또는 서비스가 업데이트되지 않았습니다."
 
 #: src/commands/needs-rebooting.cc:42
 msgid "Reboot is probably not necessary."
-msgstr ""
+msgstr "재부팅이 필요하지 않은 것 같습니다."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/nullcommands.cc:17
 msgid "moo"
-msgstr ""
+msgstr "moo"
 
 #. translators: command summary
 #. translators: command description
@@ -2628,7 +2645,7 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/nullcommands.cc:37
 msgid "what-provides (wp) <CAPABILITY>"
-msgstr ""
+msgstr "what-provides (wp) <CAPABILITY>"
 
 #. translators: command summary: what-provides, wp
 #: src/commands/nullcommands.cc:39
@@ -2657,7 +2674,7 @@ msgstr "사용 가능한 옵션은 '%s'을(를) 참조하십시오."
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/nullcommands.cc:67
 msgid "ping [OPTIONS]"
-msgstr ""
+msgstr "ping [OPTIONS]"
 
 #. translators: command summary
 #. translators: command description
@@ -2667,7 +2684,7 @@ msgstr "이 명령은 항상 0을 반환하는 더미를 구현합니다."
 
 #: src/commands/optionsets.cc:33
 msgid "Don't change anything, just report what would be done."
-msgstr ""
+msgstr "아무 것도 변경하지 말고 무엇을 해야 하는지에 대해서만 기록해주십시오."
 
 #. translators: -r, --repo <ALIAS|#|URI>
 #: src/commands/optionsets.cc:65
@@ -2677,7 +2694,7 @@ msgstr "지정된 리포지토리에서만 작동합니다."
 #: src/commands/optionsets.cc:85
 #, c-format, boost-format
 msgid "Option '--%s' overrides a previously set download mode."
-msgstr ""
+msgstr "'--%s' 옵션은 이전에 설정한 다운로드 모드를 무효화합니다."
 
 #: src/commands/optionsets.cc:114
 #, c-format, boost-format
@@ -2757,12 +2774,12 @@ msgstr "기본값은 옵션 패치를 포함하는 것입니다."
 #. translators: --with-interactive
 #: src/commands/optionsets.cc:346
 msgid "Do not skip interactive updates."
-msgstr ""
+msgstr "대화형 업데이트를 건너뛰지 마십시오."
 
 #. translators: --skip-interactive
 #: src/commands/optionsets.cc:350
 msgid "Skip interactive updates."
-msgstr ""
+msgstr "대화형 업데이트를 건너뜁니다."
 
 #. translators: --sort-by-name
 #: src/commands/optionsets.cc:370
@@ -2852,11 +2869,13 @@ msgid ""
 "followed by a newline. Any '%s' directive in <format> is replaced by the "
 "system service name."
 msgstr ""
+"연관된 각 시스템 서비스에 대해 표준 출력으로 <format>을 인쇄하고 그 뒤에 줄바꿈 문자를 인쇄합니다. <format>의 '%s' "
+"지시어는 시스템 서비스 이름으로 대체됩니다."
 
 #. translators: -d, --debugFile <path>
 #: src/commands/ps.cc:52
 msgid "Write debug output to file <path>."
-msgstr ""
+msgstr "<path> 파일에 디버그 출력을 씁니다."
 
 #: src/commands/ps.cc:72 src/solve-commit.cc:451
 msgid "Check failed:"
@@ -2933,7 +2952,7 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/query/info.cc:19
 msgid "info (if) [OPTIONS] <NAME> ..."
-msgstr ""
+msgstr "info (if) [OPTIONS] <NAME> ..."
 
 #. translators: command summary: info, if
 #: src/commands/query/info.cc:21
@@ -2985,7 +3004,7 @@ msgstr "권장을 표시합니다."
 #. translators: --supplements
 #: src/commands/query/info.cc:87
 msgid "Show supplements."
-msgstr ""
+msgstr "보충 내용을 표시합니다."
 
 #. translators: --suggests
 #: src/commands/query/info.cc:91
@@ -3019,17 +3038,17 @@ msgstr "지정된 제품에 대한 전체 정보를 표시합니다."
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/query/info.cc:157
 msgid "patch-info <PATCHNAME> ..."
-msgstr ""
+msgstr "patch-info <PATCHNAME> ..."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/query/info.cc:160
 msgid "pattern-info <PATTERN_NAME> ..."
-msgstr ""
+msgstr "pattern-info <PATTERN_NAME> ..."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/query/info.cc:163
 msgid "product-info <PRODUCT_NAME> ..."
-msgstr ""
+msgstr "product-info <PRODUCT_NAME> ..."
 
 #. translators: command description
 #: src/commands/query/info.cc:175
@@ -3049,7 +3068,7 @@ msgstr "제품에 대한 자세한 정보를 표시합니다."
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/query/packages.cc:18
 msgid "packages (pa) [OPTIONS] [REPOSITORY] ..."
-msgstr ""
+msgstr "packages (pa) [OPTIONS] [REPOSITORY] ..."
 
 #. translators: command summary: packages, pa
 #: src/commands/query/packages.cc:20
@@ -3094,7 +3113,7 @@ msgstr "리포지토리별로 목록을 정렬합니다."
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/query/patches.cc:18
 msgid "patches (pch) [REPOSITORY] ..."
-msgstr ""
+msgstr "patches (pch) [REPOSITORY] ..."
 
 #. translators: command summary: patches, pch
 #: src/commands/query/patches.cc:20
@@ -3109,7 +3128,7 @@ msgstr "지정한 리포지토리에서 사용 가능한 모든 패치를 나열
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/query/patterns.cc:18
 msgid "patterns (pt) [OPTIONS] [REPOSITORY] ..."
-msgstr ""
+msgstr "patterns (pt) [OPTIONS] [REPOSITORY] ..."
 
 #. translators: command summary: patterns, pt
 #: src/commands/query/patterns.cc:20
@@ -3124,7 +3143,7 @@ msgstr "지정한 리포지토리에서 사용 가능한 모든 패턴을 나열
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/query/products.cc:18
 msgid "products (pd) [OPTIONS] [REPOSITORY] ..."
-msgstr ""
+msgstr "products (pd) [OPTIONS] [REPOSITORY] ..."
 
 #. translators: command summary: products, pd
 #: src/commands/query/products.cc:20
@@ -3205,7 +3224,7 @@ msgstr ""
 
 #: src/commands/repos/clean.cc:16
 msgid "clean (cc) [ALIAS|#|URI] ..."
-msgstr ""
+msgstr "clean (cc) [ALIAS|#|URI] ..."
 
 #: src/commands/repos/clean.cc:17 src/commands/repos/clean.cc:18
 msgid "Clean local caches."
@@ -3301,7 +3320,7 @@ msgstr "MD 캐시 경로"
 
 #: src/commands/repos/list.cc:74
 msgid "repos (lr) [OPTIONS] [REPO] ..."
-msgstr ""
+msgstr "repos (lr) [OPTIONS] [REPO] ..."
 
 #: src/commands/repos/list.cc:75 src/commands/repos/list.cc:76
 msgid "List all defined repositories."
@@ -3378,7 +3397,7 @@ msgstr "%s 리포지토리를 찾을 수 없습니다."
 
 #: src/commands/repos/refresh.cc:24
 msgid "refresh (ref) [ALIAS|#|URI] ..."
-msgstr ""
+msgstr "refresh (ref) [ALIAS|#|URI] ..."
 
 #. translators: command summary: refresh, ref
 #: src/commands/repos/refresh.cc:26
@@ -3464,10 +3483,9 @@ msgid "Skipping repository '%s' because of the above error."
 msgstr "위의 오류로 인해 '%s' 리포지토리를 건너뛰고 있습니다."
 
 #: src/commands/repos/refresh.cc:274
-#, fuzzy
 msgid ""
 "Some of the repositories have not been refreshed because they were not known."
-msgstr "오류로 인해 일부 리포지토리가 새로 고쳐지지 않았습니다."
+msgstr "일부 리포지토리가 알려져 있지 않기 때문에 새로 고쳐지지 않았습니다."
 
 #: src/commands/repos/refresh.cc:281
 msgid "Specified repositories are not enabled or defined."
@@ -3500,7 +3518,7 @@ msgstr "모든 리포지토리를 새로 고쳤습니다."
 
 #: src/commands/repos/remove.cc:21
 msgid "removerepo (rr) [OPTIONS] <ALIAS|#|URI>"
-msgstr ""
+msgstr "removerepo (rr) [OPTIONS] <ALIAS|#|URI>"
 
 #: src/commands/repos/remove.cc:22
 msgid "Remove specified repository."
@@ -3558,7 +3576,7 @@ msgstr "'%s' 리포지토리를 변경하지 않은 채로 둡니다."
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/repos/rename.cc:64
 msgid "renamerepo (nr) [OPTIONS] <ALIAS|#|URI> <NEW-ALIAS>"
-msgstr ""
+msgstr "renamerepo (nr) [OPTIONS] <ALIAS|#|URI> <NEW-ALIAS>"
 
 #: src/commands/repos/rename.cc:65
 msgid "Rename specified repository."
@@ -3794,17 +3812,17 @@ msgstr ""
 msgid ""
 "For an extended search including not yet activated remote resources you may "
 "run '%1%' at any time."
-msgstr ""
+msgstr "아직 활성화되지 않은 원격 리소스를 포함한 확장 검색을 위해 언제든지 '%1%'을(를) 실행할 수 있습니다."
 
 #: src/commands/search/search-packages-hinthack.cc:99
 #, boost-format
 msgid "Do you want to run '%1%' now?"
-msgstr ""
+msgstr "지금 '%1%'을(를) 실행하시겠습니까?"
 
 #: src/commands/search/search-packages-hinthack.cc:115
 #, boost-format
 msgid "Run '%1%' to search in not yet activated remote resources."
-msgstr ""
+msgstr "아직 활성화되지 않은 원격 리소스를 검색하려면 '%1%'을(를) 실행합니다."
 
 #. translators: command summary: search, se
 #: src/commands/search/search.cc:73
@@ -3814,12 +3832,12 @@ msgstr "패턴과 일치하는 패키지를 검색합니다."
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/search/search.cc:81
 msgid "search (se) [OPTIONS] [QUERYSTRING] ..."
-msgstr ""
+msgstr "search (se) [OPTIONS] [QUERYSTRING] ..."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/search/search.cc:86
 msgid "patch-search [OPTIONS] [QUERYSTRING...]"
-msgstr ""
+msgstr "patch-search [OPTIONS] [QUERYSTRING...]"
 
 #. translators: command description
 #: src/commands/search/search.cc:95
@@ -3873,7 +3891,7 @@ msgstr "검색 문자열을 추천하는 패키지를 검색합니다."
 #. translators: --supplements
 #: src/commands/search/search.cc:145
 msgid "Search for packages which supplement the search strings."
-msgstr ""
+msgstr "검색 문자열을 보충하는 패키지를 검색합니다."
 
 #. translators: --conflicts
 #: src/commands/search/search.cc:149
@@ -3956,33 +3974,33 @@ msgstr "'zypper refresh'를 루트 권한으로 실행하여 문제를 해결할
 #. translators: -g, --category <CATEGORY>
 #: src/commands/selectpatchoptionset.cc:24
 msgid "Select patches with the specified category."
-msgstr ""
+msgstr "지정한 범주의 패치를 선택합니다."
 
 #. translators: --severity <SEVERITY>
 #: src/commands/selectpatchoptionset.cc:28
 msgid "Select patches with the specified severity."
-msgstr ""
+msgstr "지정된 심각도가 있는 패치를 선택합니다."
 
 #. translators: --date <YYYY-MM-DD>
 #: src/commands/selectpatchoptionset.cc:32
 msgid "Select patches issued up to, but not including, the specified date"
-msgstr ""
+msgstr "지정된 날짜까지(포함 안 함) 발급된 패치 선택"
 
 #. translators: -b, --bugzilla
 #: src/commands/selectpatchoptionset.cc:36
 msgid "Select applicable patches for the specified Bugzilla issues."
-msgstr ""
+msgstr "지정된 Bugzilla 문제에 적용할 수 있는 패치를 선택합니다."
 
 #. translators: --cve
 #: src/commands/selectpatchoptionset.cc:41
 msgid "Select applicable patches for the specified CVE issues."
-msgstr ""
+msgstr "지정된 CVE 문제에 적용할 수 있는 패치를 선택합니다."
 
 #. any
 #. translators: --cve
 #: src/commands/selectpatchoptionset.cc:50
 msgid "Select issues matching the specified string."
-msgstr ""
+msgstr "지정된 문자열과 일치하는 문제를 선택합니다."
 
 #: src/commands/services/add.cc:55
 #, c-format, boost-format
@@ -4053,7 +4071,7 @@ msgstr "'%s' 서비스가 제거되었습니다."
 
 #: src/commands/services/list.cc:81
 msgid "services (ls) [OPTIONS]"
-msgstr ""
+msgstr "services (ls) [OPTIONS]"
 
 #: src/commands/services/list.cc:82
 msgid "List all defined services."
@@ -4096,7 +4114,7 @@ msgstr ""
 
 #: src/commands/services/modify.cc:41
 msgid "Advanced:"
-msgstr ""
+msgstr "고급:"
 
 #: src/commands/services/modify.cc:43
 msgid "Add a RIS service repository to enable."
@@ -4217,7 +4235,7 @@ msgstr "'%s'을(를) 사용하여 정의된 서비스 목록을 가져옵니다.
 
 #: src/commands/services/refresh.cc:95
 msgid "refresh-services (refs) [OPTIONS]"
-msgstr ""
+msgstr "refresh-services (refs) [OPTIONS]"
 
 #: src/commands/services/refresh.cc:96
 msgid "Refresh all services."
@@ -4271,7 +4289,7 @@ msgstr "모든 서비스를 새로 고쳤습니다."
 
 #: src/commands/services/remove.cc:20
 msgid "removeservice (rs) [OPTIONS] <ALIAS|#|URI>"
-msgstr ""
+msgstr "removeservice (rs) [OPTIONS] <ALIAS|#|URI>"
 
 #: src/commands/services/remove.cc:21
 msgid "Remove specified service."
@@ -4291,7 +4309,7 @@ msgstr "별칭, 번호 또는 URI별로 '%s' 서비스를 찾을 수 없습니�
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/shell.cc:20
 msgid "shell (sh)"
-msgstr ""
+msgstr "shell (sh)"
 
 #. translators: command summary: shell, sh
 #: src/commands/shell.cc:22
@@ -4310,7 +4328,7 @@ msgstr "이미 Zypper 셸을 실행 중입니다."
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/shell.cc:52
 msgid "quit (exit, ^D)"
-msgstr ""
+msgstr "quit (exit, ^D)"
 
 #. translators: command description
 #: src/commands/shell.cc:54 src/commands/shell.cc:56
@@ -4323,7 +4341,7 @@ msgstr "이 명령은 Zypper 셸에서만 유효합니다."
 
 #: src/commands/solveroptionset.cc:16 src/commands/solveroptionset.cc:39
 msgid "Solver options"
-msgstr ""
+msgstr "Solver 옵션"
 
 #: src/commands/solveroptionset.cc:18
 msgid "Install also recommended packages in addition to the required ones."
@@ -4349,7 +4367,7 @@ msgstr "솔루션을 찾도록 Solver에 강제하지 않고,확인 메시지를
 
 #: src/commands/solveroptionset.cc:63
 msgid "Expert options"
-msgstr ""
+msgstr "고급 옵션"
 
 #: src/commands/solveroptionset.cc:66
 msgid "Whether to allow downgrading installed resolvables."
@@ -4380,7 +4398,7 @@ msgstr "필요 없는 종속성을 자동으로 제거하지 않습니다."
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/sourceinstall.cc:21
 msgid "source-install (si) [OPTIONS] <NAME> ..."
-msgstr ""
+msgstr "source-install (si) [OPTIONS] <NAME> ..."
 
 #. translators: command summary: source-install, si
 #: src/commands/sourceinstall.cc:23
@@ -4419,7 +4437,7 @@ msgstr "소스 패키지 이름은 필수 인수입니다."
 
 #: src/commands/sourceinstall.cc:86
 msgid "Uninstalling source packages is not supported."
-msgstr ""
+msgstr "소프 패키지 제거는 지원되지 않습니다."
 
 #: src/commands/subcommand.cc:52
 msgid "none"
@@ -4555,7 +4573,7 @@ msgstr "하위 명령 %1%은(는) zypper 전역 옵션을 지원하지 않습니
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/update.cc:22
 msgid "update (up) [OPTIONS] [PACKAGENAME] ..."
-msgstr ""
+msgstr "update (up) [OPTIONS] [PACKAGENAME] ..."
 
 #. translators: command summary: update, up
 #: src/commands/update.cc:24
@@ -4566,7 +4584,7 @@ msgstr "설치된 패키지를 새 버전으로 업데이트합니다."
 #: src/commands/update.cc:26
 msgid ""
 "Update all or specified installed packages with newer versions, if possible."
-msgstr ""
+msgstr "가능한 경우 설치된 모든 패키지나 지정된 패키지를 최신 버전으로 업데이트합니다."
 
 #: src/commands/update.cc:69 src/commands/update.cc:76
 #: src/commands/update.cc:126
@@ -4600,7 +4618,7 @@ msgstr "'%s' 다운로드 디렉토리를 사용하기 위한 권한이 부족�
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/utils/download.cc:144
 msgid "download [OPTIONS] <PACKAGES>..."
-msgstr ""
+msgstr "download [OPTIONS] <PACKAGES>..."
 
 #. translators: command summary: download
 #: src/commands/utils/download.cc:146
@@ -4808,17 +4826,17 @@ msgstr ""
 #. translators: --status
 #: src/commands/utils/source-download.cc:514
 msgid "Write a manifest file."
-msgstr ""
+msgstr "매니페스트 파일을 작성합니다."
 
 #. translators: --status
 #: src/commands/utils/source-download.cc:518
 msgid "Disable writing a manifest file."
-msgstr ""
+msgstr "매니페스트 파일 작성을 비활성화합니다."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/utils/targetos.cc:20
 msgid "targetos (tos) [OPTIONS]"
-msgstr ""
+msgstr "targetos (tos) [OPTIONS]"
 
 #. translators: command summary: targetos, tos
 #: src/commands/utils/targetos.cc:22
@@ -4855,7 +4873,7 @@ msgstr "짧은 레이블: %s"
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/utils/versioncmp.cc:19
 msgid "versioncmp (vcmp) <VERSION1> <VERSION2>"
-msgstr ""
+msgstr "versioncmp (vcmp) <VERSION1> <VERSION2>"
 
 #. translators: command summary
 #: src/commands/utils/versioncmp.cc:21
@@ -5105,56 +5123,56 @@ msgstr "바이너리 패키지 빌드"
 #. translators: header of table column - is the language requested? (Yes/No)
 #: src/locales.cc:56 src/locales.cc:90
 msgid "Requested"
-msgstr ""
+msgstr "요청됨"
 
 #: src/locales.cc:60
 msgid "Fallback"
-msgstr ""
+msgstr "대체"
 
 #. translators: header of table column - the language code, e.g. en_US
 #: src/locales.cc:86
 msgid "Code"
-msgstr ""
+msgstr "코드"
 
 #. translators: header of table column - the language, e.g. English (United States)
 #: src/locales.cc:88
 msgid "Language"
-msgstr ""
+msgstr "언어"
 
 #: src/locales.cc:306
 #, c-format, boost-format
 msgid "Packages for %s (locale '%s', requested: %s):"
-msgstr ""
+msgstr "%s용 패키지(로케일 '%s', 요청: %s):"
 
 #: src/locales.cc:323
 #, c-format, boost-format
 msgid "Added locale: %s"
-msgstr ""
+msgstr "추가된 로케일: %s"
 
 #: src/locales.cc:326
 #, c-format, boost-format
 msgid "ERROR: cannot add %s"
-msgstr ""
+msgstr "오류: %s을(를) 추가할 수 없습니다"
 
 #: src/locales.cc:330
 #, c-format, boost-format
 msgid " %s is already requested."
-msgstr ""
+msgstr " %s을(를) 이미 요청했습니다."
 
 #: src/locales.cc:351
 #, c-format, boost-format
 msgid "Removed locale: %s"
-msgstr ""
+msgstr "제거된 로케일: %s"
 
 #: src/locales.cc:354
 #, c-format, boost-format
 msgid "ERROR: cannot remove %s"
-msgstr ""
+msgstr "오류: %s을(를) 제거할 수 없음"
 
 #: src/locales.cc:358
 #, c-format, boost-format
 msgid "%s was not requested."
-msgstr ""
+msgstr "%s을(를) 요청하지 않았습니다."
 
 #. translators: this will show up if you press ctrl+c twice
 #: src/main.cc:31
@@ -5990,6 +6008,8 @@ msgid ""
 "updated by recent upgrades. They should be restarted to benefit from the "
 "latest updates. Run '%1%' to list these programs."
 msgstr ""
+"최근 업그레이드에서 삭제하거나 업데이트한 파일 및 라이브러리를 아직 사용하는 프로그램이 실행 중입니다. 최근 업그레이드를 적용하려면 "
+"이러한 프로그램을 다시 시작해야 합니다. 해당 프로그램을 나열하려면 '%1%'을(를) 실행합니다."
 
 #: src/solve-commit.cc:481
 msgid "Update notifications were received from the following packages:"
@@ -6306,69 +6326,69 @@ msgstr "구성 파일 구문 분석기를 초기화할 수 없습니다."
 #: src/utils/Augeas.cc:510
 #, boost-format
 msgid "Malformed option name '%1%'."
-msgstr ""
+msgstr "옵션 이름 '%1%'의 형식이 잘못되었습니다."
 
 #: src/utils/Augeas.cc:522
 msgid "Could not save the config file."
-msgstr ""
+msgstr "구성 파일을 저장할 수 없습니다."
 
 #: src/utils/Augeas.cc:564
 #, boost-format
 msgid "Config file '%1%' exists but is not a file."
-msgstr ""
+msgstr "구성 파일 '%1%'이(가) 있지만 파일이 아닙니다."
 
 #: src/utils/Augeas.cc:580
 msgid "Could not load the config files."
-msgstr ""
+msgstr "구성 파일을 로드할 수 없습니다."
 
 #: src/utils/Augeas.cc:606
 #, boost-format
 msgid "Config file '%1%' does not exist."
-msgstr ""
+msgstr "구성 파일 '%1%'이(가) 없습니다."
 
 #. translator: %1% is the path to a config file, %2% is the name of an options inside the file
 #: src/utils/Augeas.cc:637
 #, boost-format
 msgid "%1%: Option '%2%' is defined multiple times. Using the last one."
-msgstr ""
+msgstr "%1%: '%2%' 옵션이 여러 번 정의되었습니다. 마지막 정의를 사용합니다."
 
 #: src/utils/Augeas.cc:658
 msgid "No config file is in use."
-msgstr ""
+msgstr "사용 중인 구성 파일이 없습니다."
 
 #: src/utils/flags/exceptions.cc:22
 #, boost-format
 msgid "The flag %1% is not known."
-msgstr ""
+msgstr "%1% 플래그를 알 수 없습니다."
 
 #: src/utils/flags/exceptions.cc:28
 #, boost-format
 msgid "The flag %1% is not compatible with argument %2% (%3%)."
-msgstr ""
+msgstr "%1% 플래그가 %2%(%3%) 인수와 호환되지 않습니다."
 
 #: src/utils/flags/exceptions.cc:34
-#, fuzzy, boost-format
+#, boost-format
 msgid "The flag %1% requires a argument."
-msgstr "별명을 지정 할 필요가 있습니다."
+msgstr "%1% 플래그는 인수가 필요합니다."
 
 #: src/utils/flags/exceptions.cc:40
 #, boost-format
 msgid "The flag %1% can only be used once."
-msgstr ""
+msgstr "%1% 플래그는 한 번만 사용할 수 있습니다."
 
 #: src/utils/flags/exceptions.cc:46
 #, c-format, boost-format
 msgid "%s used together with %s, which contradict each other."
-msgstr ""
+msgstr "%s이(가) 서로 모순된 %s과(와) 함께 사용되었습니다."
 
 #: src/utils/flags/flagtypes.cc:24
 msgid "Unknown package type"
-msgstr ""
+msgstr "알 수 없는 패키지 유형"
 
 #: src/utils/flags/flagtypes.cc:100
 #, boost-format
 msgid "The flag '%1%' can only be used a maximum of %2% times."
-msgstr ""
+msgstr "'%1%' 플래그는 최대 %2% 번만 사용할 수 있습니다."
 
 #: src/utils/flags/flagtypes.cc:192
 #, c-format, boost-format
@@ -6380,12 +6400,12 @@ msgstr ""
 
 #: src/utils/flags/flagtypes.cc:232
 msgid "Out of range"
-msgstr ""
+msgstr "범위를 벗어남"
 
 #: src/utils/flags/flagtypes.cc:234
 #, boost-format
 msgid "Unknown error while assigning the value %1% to flag %2%."
-msgstr ""
+msgstr "%1% 값을 %2% 플래그에 할당하는 동안 알 수 없는 오류가 발생했습니다."
 
 #. For '-garbage' argument, with 'a', 'b', and 'e' as known options,
 #. getopt_long reports 'a', 'b', and 'e' as known options.
@@ -6666,11 +6686,11 @@ msgstr "재시도 중..."
 
 #: src/utils/prompt.cc:325
 msgid "always"
-msgstr ""
+msgstr "항상"
 
 #: src/utils/prompt.cc:325
 msgid "never"
-msgstr ""
+msgstr "안 함"
 
 #: src/utils/prompt.cc:372
 msgid "Cannot read input: bad stream or EOF."
@@ -6694,7 +6714,7 @@ msgstr "잘못된 대답 '%s'입니다."
 #: src/utils/prompt.cc:415
 #, c-format, boost-format
 msgid "Ambiguous answer '%s'."
-msgstr ""
+msgstr "'%s' 응답이 모호합니다."
 
 #. translators: the %s are: 'y', 'yes' (translated), 'n', and 'no' (translated).
 #: src/utils/prompt.cc:423
@@ -6708,7 +6728,7 @@ msgstr ""
 msgid ""
 "If nothing else works enter '#1' to select the 1st option, '#2' for the 2nd "
 "one, ..."
-msgstr ""
+msgstr "아무것도 실행되지 않는 경우 '#1'을 입력하여 첫 번째 옵션을 선택하고, '#2'를 입력하여 두 번째 옵션을, ..."
 
 #~ msgid "Augeas error: setting config file to load failed."
 #~ msgstr "Augeas 오류: 로드할 구성 파일을 설정하지 못했습니다."

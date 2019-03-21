@@ -12,17 +12,17 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-02-25 14:33+0100\n"
-"PO-Revision-Date: 2018-09-11 04:44+0000\n"
-"Last-Translator: Mahmoud Khalil <kkhalil2535@gmail.com>\n"
-"Language-Team: Arabic <https://l10n.opensuse.org/projects/zypper/master/ar/"
-">\n"
+"PO-Revision-Date: 2019-03-21 12:49+0000\n"
+"Last-Translator: Iman Abd Elaziz <Iman.AbdelAziz@arabize.com>\n"
+"Language-Team: Arabic <https://l10n.opensuse.org/projects/zypper/master/ar/>"
+"\n"
 "Language: ar\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
-"X-Generator: Weblate 2.18\n"
+"X-Generator: Weblate 3.3\n"
 
 #: src/SolverRequester.h:52
 #, boost-format
@@ -522,11 +522,11 @@ msgstr "يعتبر هذا اسمًا مستعارًا لـ '%s'."
 
 #: src/commands/commandhelpformatter.h:107
 msgid "Examples:"
-msgstr ""
+msgstr "الأمثلة:"
 
 #: src/commands/commandhelpformatter.h:110
 msgid "Arguments:"
-msgstr ""
+msgstr "الوسائط:"
 
 #: src/commands/commandhelpformatter.h:123 src/utils/flags/zyppflags.cc:582
 msgid "Command options:"
@@ -587,7 +587,7 @@ msgstr ""
 
 #: src/commands/commonflags.h:45
 msgid "Consider only patches which affect the package management itself."
-msgstr ""
+msgstr "عدم مراعاة إلا التصحيحات التي تؤثر على إدارة الحزم نفسها."
 
 #: src/output/Out.h:26 src/repos.cc:126 src/repos.cc:154
 msgid "Yes"
@@ -620,37 +620,37 @@ msgstr "هل تريد المتابعة؟"
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:23
 msgid "ALIAS"
-msgstr ""
+msgstr "ALIAS"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:25
 msgid "ALIAS|#|URI"
-msgstr ""
+msgstr "ALIAS|#|URI"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:27
 msgid "CATEGORY"
-msgstr ""
+msgstr "CATEGORY"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:29
 msgid "DIR"
-msgstr ""
+msgstr "DIR"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:31
 msgid "FILE"
-msgstr ""
+msgstr "FILE"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:33
 msgid "FILE.repo"
-msgstr ""
+msgstr "FILE.repo"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:35
 msgid "FORMAT"
-msgstr ""
+msgstr "FORMAT"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:37
@@ -660,22 +660,22 @@ msgstr "عدد صحيح"
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:39
 msgid "PATH"
-msgstr ""
+msgstr "PATH"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:41
 msgid "SEVERITY"
-msgstr ""
+msgstr "SEVERITY"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:43
 msgid "STRING"
-msgstr ""
+msgstr "STRING"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:45
 msgid "TAG"
-msgstr ""
+msgstr "TAG"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:47
@@ -698,7 +698,7 @@ msgstr "ي‏ ي-ش‏ ش-س‏ س‏ س‏ س"
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:53
 msgid "MODE"
-msgstr ""
+msgstr "MODE"
 
 #. TranslatorExplanation These are reasons for various failures.
 #: src/utils/prompt.h:185
@@ -720,7 +720,7 @@ msgstr "الخطأ"
 
 #: src/Command.cc:93
 msgid "Invalid command"
-msgstr ""
+msgstr "أمر غير صالح"
 
 #: src/Command.cc:111
 msgid "Repository Management:"
@@ -748,7 +748,7 @@ msgstr "أقفال الحزم:"
 
 #: src/Command.cc:154
 msgid "Locale Management:"
-msgstr ""
+msgstr "إدارة المناطق اللغوية:"
 
 #: src/Command.cc:158
 msgid "Other Commands:"
@@ -771,7 +771,7 @@ msgstr "نمط الجدول غير الصالح %d."
 #: src/Config.cc:54
 #, c-format, boost-format
 msgid " Use an integer number from %d to %d"
-msgstr ""
+msgstr " استخدام عدد صحيح من %d إلى %d"
 
 #: src/Config.cc:248
 msgid "The path specified in the --root option must be absolute."
@@ -876,6 +876,7 @@ msgstr "تجاهل الحزم غير المعروفة."
 msgid ""
 "Terse output for machine consumption. Implies --no-abbrev and --no-color."
 msgstr ""
+"اختصار المخرجات لأجل استخدام البرنامج. ينتج عن ذلك --no-abbrev و--no-color."
 
 #. translators: --reposd-dir, -D <DIR>
 #: src/Config.cc:487
@@ -1011,16 +1012,16 @@ msgstr "عدم قراءة الحزم المثبَّتة."
 
 #: src/Config.cc:804
 msgid "No config file is in use. Can not save options."
-msgstr ""
+msgstr "لا يوجد ملف تكوين قيد الاستخدام. لا يمكن حفظ الخيارات."
 
 #: src/Config.cc:815
 #, boost-format
 msgid "Option '%1%' saved in '%2%'."
-msgstr ""
+msgstr "تم حفظ الخيار '%1%' في '%2%'."
 
 #: src/Config.cc:822
 msgid "Failed to save option."
-msgstr ""
+msgstr "فشل حفظ الخيار."
 
 #: src/PackageArgs.cc:208
 #, c-format, boost-format
@@ -1160,6 +1161,8 @@ msgid ""
 "There is an update candidate for '%s' from vendor '%s', while the current "
 "vendor is '%s'. Use '%s' to install this candidate."
 msgstr ""
+"يوجد تحديث مرشح لـ '%s' من البائع '%s'، بينما البائع الحالي هو '%s'. يمكن "
+"استخدام '%s' لتثبيت هذا الترشيح."
 
 #: src/RequestFeedback.cc:132
 #, c-format, boost-format
@@ -2056,12 +2059,12 @@ msgstr[5] "تتطلب %d 1 من الدفعات التالية إعادة تشغ�
 #, c-format, boost-format
 msgid "The following package requires a system reboot:"
 msgid_plural "The following %d packages require a system reboot:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
+msgstr[0] "تتطلب %d  من الحزم التالية إعادة تشغيل نظام:"
+msgstr[1] "تتطلب الحزمة التالية %d إعادة تشغيل نظام:"
+msgstr[2] "تتطلب الحزمتان التاليتان %d إعادة تشغيل نظام:"
+msgstr[3] "تتطلب %d  من الحزم التالية إعادة تشغيل نظام:"
+msgstr[4] "تتطلب %d من الحزم التالية إعادة تشغيل نظام:"
+msgstr[5] "تتطلب %d  من الحزم التالية إعادة تشغيل نظام:"
 
 #: src/Summary.cc:1374
 #, boost-format
@@ -2480,7 +2483,7 @@ msgstr "كلمة السر"
 
 #: src/commands/conditions.cc:19
 msgid "Root privileges are required to run this command."
-msgstr ""
+msgstr "الامتيازات الأساسية مطلوبة لتنفيذ هذا الأمر."
 
 #: src/commands/conditions.cc:47
 msgid ""
@@ -2567,6 +2570,10 @@ msgid ""
 "unconditionally on small or minimal systems, as it may easily add a large "
 "number of packages."
 msgstr ""
+"توصى الحزم المُثبتة حاليًا تثبيت الحزم المُضافة حديثًا. يعمل هذا الأمر أساسً"
+"ا على إعادة تقييم التوصيات الخاصة بكل الحزم المُثبتة وإدخال البيانات في "
+"النظام وفقًا لذلك. لن تحتاج إلى استدعاء هذا بدون داعٍ في الأنظمة الصغيرة "
+"والأقل حجمًا، لأن ذلك قد يؤدي بسهولة إلى إضافة عدد كبير من الحزم."
 
 #. translators: command description, %1% is a zypper command
 #: src/commands/inrverify.cc:98
@@ -2576,6 +2583,9 @@ msgid ""
 "supporting available hardware, languages or filesystems. Useful after having "
 "added e.g. new hardware or driver repos."
 msgstr ""
+"يُطلق عليه '%1%'، ويقوم بتقييد الأمر بحيث يبحث فقط عن الحزم التي تدعم أنظمة "
+"الملفات أو اللغات أو الأجهزة المتاحة. يكون ذلك مفيدًا بعد إضافة مستودع "
+"برنامج تشغيل أو جهاز جديد، على سبيل المثال."
 
 #. translators: command description
 #: src/commands/inrverify.cc:101
@@ -2592,7 +2602,7 @@ msgstr "تحديد الحزم حسب الاسم العادي، وليس حسب �
 
 #: src/commands/installremove.cc:55
 msgid "Select packages solely by capability."
-msgstr ""
+msgstr "تحديد الحزم حسب الإمكانية فقط."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/installremove.cc:74
@@ -2740,19 +2750,19 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/locale/addlocalecmd.cc:19
 msgid "addlocale (aloc) [OPTIONS] <LOCALE> ..."
-msgstr ""
+msgstr "addlocale (aloc) [OPTIONS] <LOCALE> ..."
 
 #: src/commands/locale/addlocalecmd.cc:20
 msgid "Add locale(s) to requested locales."
-msgstr ""
+msgstr "إضافة مناطق لغوية إلى المناطق اللغوية المطلوبة."
 
 #: src/commands/locale/addlocalecmd.cc:21
 msgid "Add given locale(s) to the list of requested locales."
-msgstr ""
+msgstr "إضافة المناطق اللغوية المحددة إلى قائمة المناطق اللغوية المطلوبة."
 
 #: src/commands/locale/addlocalecmd.cc:32
 msgid "Do not install corresponding packages for given locale(s)."
-msgstr ""
+msgstr "عدم تثبيت الحزم المتوافقة للمناطق اللغوية المحددة."
 
 #: src/commands/locale/addlocalecmd.cc:56
 #, c-format, boost-format
@@ -2760,15 +2770,17 @@ msgid ""
 "Specify locale which shall be supported by the language code.\n"
 "Get a list of all available locales by calling '%s'."
 msgstr ""
+"تحديد المنطقة اللغوية التي يجب دعمها حسب رمز اللغة.\n"
+"يمكن الحصول على قائمة بكل المناطق اللغوية المتاحة عن طريق استدعاء '%s'."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/locale/localescmd.cc:17
 msgid "locales (lloc) [OPTIONS] [LOCALE] ..."
-msgstr ""
+msgstr "locales (lloc) [OPTIONS] [LOCALE] ..."
 
 #: src/commands/locale/localescmd.cc:18
 msgid "List requested locales (languages codes)."
-msgstr ""
+msgstr "سرد المناطق اللغوية المطلوبة (رموز اللغات)."
 
 #: src/commands/locale/localescmd.cc:19
 #, c-format, boost-format
@@ -2780,53 +2792,61 @@ msgid ""
 "can\n"
 "be installed by calling '%s'.\n"
 msgstr ""
+"سرد المناطق اللغوية المطلوبة والحزم المتوافقة.\n"
+"\n"
+"إذا تم الاستدعاء بدون وسائط، تُسرد المناطق اللغوية المطلوبة. إذا لم\n"
+"تكن حزم المناطق اللغوية الخاصة باللغات المطلوبة متوفرة حاليًا في النظام، "
+"يمكن\n"
+"تثبيتها عن طريق استدعاء '%s'.\n"
 
 #: src/commands/locale/localescmd.cc:35
 msgid "Show corresponding packages."
-msgstr ""
+msgstr "عرض الحزم المتوافقة."
 
 #: src/commands/locale/localescmd.cc:36
 msgid "List all available locales."
-msgstr ""
+msgstr "سرد كل المناطق اللغوية المتاحة."
 
 #: src/commands/locale/localescmd.cc:49
 msgid "Ignoring positional arguments because --all argument was provided."
-msgstr ""
+msgstr "تجاهل الوسائط الموضعية لأنه --تم إدخال كل الوسائط."
 
 #: src/commands/locale/localescmd.cc:76
 msgid "The locale(s) for which the information shall be printed."
-msgstr ""
+msgstr "المناطق اللغوية التي يجب طباعة المعلومات لها."
 
 #: src/commands/locale/localescmd.cc:80
 msgid ""
 "Get all locales with lang code 'en' that have their own country code, "
 "excluding the fallback 'en':"
 msgstr ""
+"الحصول على كل المناطق اللغوية برمز اللغة 'en' التي لها رمز دولة خاص بها، "
+"باستثناء اللغة الاحتياطية 'en':"
 
 #: src/commands/locale/localescmd.cc:87
 msgid "Get all locales with lang code 'en' with or without country code:"
-msgstr ""
+msgstr "الحصول على كل المناطق اللغوية برمز اللغة 'en' سواء برمز دولة أو بدونه:"
 
 #: src/commands/locale/localescmd.cc:94
 msgid "Get the locale matching the argument exactly: "
-msgstr ""
+msgstr "الحصول على المنطقة اللغوية التي تتطابق مع الوسيطة تمامًا: "
 
 #: src/commands/locale/localescmd.cc:101
 msgid "Get the list of packages which are available for 'de' and 'en':"
-msgstr ""
+msgstr "الحصول على قائمة الحزم المتاحة لأجل 'de' و'en':"
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/locale/removelocalecmd.cc:17
 msgid "removelocale (rloc) [OPTIONS] <LOCALE> ..."
-msgstr ""
+msgstr "removelocale (rloc) [OPTIONS] <LOCALE> ..."
 
 #: src/commands/locale/removelocalecmd.cc:18
 msgid "Remove locale(s) from requested locales."
-msgstr ""
+msgstr "إزالة المناطق اللغوية من المناطق اللغوية المطلوبة."
 
 #: src/commands/locale/removelocalecmd.cc:19
 msgid "Remove given locale(s) from the list of supported languages."
-msgstr ""
+msgstr "إزالة المناطق اللغوية المحددة من قائمة اللغات المدعومة."
 
 #: src/commands/locale/removelocalecmd.cc:34
 #, c-format, boost-format
@@ -2834,10 +2854,12 @@ msgid ""
 "Specify locales which shall be removed by the the language code.\n"
 "Get the list of requested locales by calling '%s'."
 msgstr ""
+"تحديد المناطق اللغوية التي يجب إزالتها حسب رمز اللغة.\n"
+"يمكن الحصول على قائمة بالمناطق اللغوية المطلوبة عن طريق استدعاء '%s'."
 
 #: src/commands/locale/removelocalecmd.cc:46
 msgid "Do not remove corresponding packages for given locale(s)."
-msgstr ""
+msgstr "عدم إزالة الحزم المتوافقة للمناطق اللغوية المحددة."
 
 # =============================================================================
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
@@ -2880,7 +2902,7 @@ msgstr "حدثت مشكلة أثناء إضافة قفل الحزمة:"
 # =============================================================================
 #: src/commands/locks/clean.cc:16
 msgid "cleanlocks (cl)"
-msgstr ""
+msgstr "cleanlocks (cl)"
 
 #. translators: command summary
 #: src/commands/locks/clean.cc:18
@@ -2963,7 +2985,7 @@ msgstr "عدم التثبيت"
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
 #: src/commands/locks/list.cc:256
 msgid "locks (ll) [OPTIONS]"
-msgstr ""
+msgstr "locks (ll) [OPTIONS]"
 
 #: src/commands/locks/list.cc:257
 msgid "List current package locks."
@@ -2988,7 +3010,7 @@ msgstr "لم يتم تعريف أية أقفال حزمة."
 # =============================================================================
 #: src/commands/locks/remove.cc:25
 msgid "removelock (rl) [OPTIONS] <LOCK-NUMBER|PACKAGENAME> ..."
-msgstr ""
+msgstr "removelock (rl) [OPTIONS] <LOCK-NUMBER|PACKAGENAME> ..."
 
 #: src/commands/locks/remove.cc:26
 msgid "Remove a package lock."
@@ -3034,7 +3056,7 @@ msgstr "حدثت مشكلة أثناء إزالة قفل الحزمة:"
 #. translators: command summary: needs-rebooting
 #: src/commands/needs-rebooting.cc:22
 msgid "Check if the needs-reboot flag was set."
-msgstr ""
+msgstr "التحقق مما إذا تم تعيين علامة \"مطلوب إعادة التشغيل\"."
 
 #: src/commands/needs-rebooting.cc:23
 msgid ""
@@ -3043,28 +3065,32 @@ msgid ""
 "Exit code ZYPPER_EXIT_INF_REBOOT_NEEDED indicates that a reboot is needed, "
 "otherwise the exit code is set to ZYPPER_EXIT_OK."
 msgstr ""
+"التحقق مما إذا تم تعيين علامة \"مطلوب إعادة التشغيل\" بواسطة تحديث سابق أو "
+"تثبيت خدمة أو مكتبة أساسية.\n"
+"يشير رمز الخروج ZYPPER_EXIT_INF_REBOOT_NEEDED إلى أن إعادة التشغيل مطلوبة، "
+"وفيما عدا ذلك، يتم تعيين رمز الخروج على ZYPPER_EXIT_OK."
 
 #: src/commands/needs-rebooting.cc:35
 msgid "Core libraries or services have been updated."
-msgstr ""
+msgstr "تم تحديث الخدمات أو المكتبات الأساسية."
 
 #: src/commands/needs-rebooting.cc:36
 msgid ""
 "Reboot is required to ensure that your system benefits from these updates."
-msgstr ""
+msgstr "مطلوب إعادة التشغيل لضمان أن النظام لديك يستفيد من هذه التحديثات."
 
 #: src/commands/needs-rebooting.cc:41
 msgid "No core libraries or services have been updated."
-msgstr ""
+msgstr "لم يتم تحديث أية خدمات أو مكتبات أساسية."
 
 #: src/commands/needs-rebooting.cc:42
 msgid "Reboot is probably not necessary."
-msgstr ""
+msgstr "إعادة التشغيل غير ضرورية غالبًا."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/nullcommands.cc:17
 msgid "moo"
-msgstr ""
+msgstr "moo"
 
 #. translators: command summary
 #. translators: command description
@@ -3086,7 +3112,7 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/nullcommands.cc:37
 msgid "what-provides (wp) <CAPABILITY>"
-msgstr ""
+msgstr "what-provides (wp) <CAPABILITY>"
 
 #. translators: command summary: what-provides, wp
 #: src/commands/nullcommands.cc:39
@@ -3125,7 +3151,7 @@ msgstr "يحتوي هذا الأمر على عملية تنفيذ وهمية د�
 
 #: src/commands/optionsets.cc:33
 msgid "Don't change anything, just report what would be done."
-msgstr ""
+msgstr "عدم تغيير أي شيء، يتم فقط الإبلاغ عن الإجراء المطلوب اتخاذه."
 
 #. translators: -r, --repo <ALIAS|#|URI>
 #: src/commands/optionsets.cc:65
@@ -3135,7 +3161,7 @@ msgstr "يُستخدم فقط مع المخزن المحدد."
 #: src/commands/optionsets.cc:85
 #, c-format, boost-format
 msgid "Option '--%s' overrides a previously set download mode."
-msgstr ""
+msgstr "يقوم الخيار '--%s' بتجاوز وضع الإنزال المحدد سابقًا."
 
 #: src/commands/optionsets.cc:114
 #, c-format, boost-format
@@ -3214,12 +3240,12 @@ msgstr "يعد تضمين التصحيحات الاختيارية افتراضي
 #. translators: --with-interactive
 #: src/commands/optionsets.cc:346
 msgid "Do not skip interactive updates."
-msgstr ""
+msgstr "عدم تخطي التحديثات التفاعلية."
 
 #. translators: --skip-interactive
 #: src/commands/optionsets.cc:350
 msgid "Skip interactive updates."
-msgstr ""
+msgstr "تخطي التحديثات التفاعلية."
 
 #. translators: --sort-by-name
 #: src/commands/optionsets.cc:370
@@ -3480,17 +3506,17 @@ msgstr "إظهار المعلومات الكاملة للمنتجات المحد
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/query/info.cc:157
 msgid "patch-info <PATCHNAME> ..."
-msgstr ""
+msgstr "patch-info <PATCHNAME> ..."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/query/info.cc:160
 msgid "pattern-info <PATTERN_NAME> ..."
-msgstr ""
+msgstr "pattern-info <PATTERN_NAME> ..."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/query/info.cc:163
 msgid "product-info <PRODUCT_NAME> ..."
-msgstr ""
+msgstr "product-info <PRODUCT_NAME> ..."
 
 #. translators: command description
 #: src/commands/query/info.cc:175
@@ -3510,7 +3536,7 @@ msgstr "إظهار المعلومات التفصيلية للمنتجات."
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/query/packages.cc:18
 msgid "packages (pa) [OPTIONS] [REPOSITORY] ..."
-msgstr ""
+msgstr "packages (pa) [OPTIONS] [REPOSITORY] ..."
 
 #. translators: command summary: packages, pa
 #: src/commands/query/packages.cc:20
@@ -3555,12 +3581,12 @@ msgstr "فرز القائمة حسب المخزن."
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/query/patches.cc:18
 msgid "patches (pch) [REPOSITORY] ..."
-msgstr ""
+msgstr "patches (pch) [REPOSITORY] ..."
 
 #. translators: command summary: patches, pch
 #: src/commands/query/patches.cc:20
 msgid "List all available patches."
-msgstr " سرد كل التصحيحات المتاحة."
+msgstr "سرد كل التصحيحات المتاحة."
 
 #. translators: command description
 #: src/commands/query/patches.cc:22
@@ -3570,7 +3596,7 @@ msgstr "سرد كل التصحيحات المتاحة في المخازن الم
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/query/patterns.cc:18
 msgid "patterns (pt) [OPTIONS] [REPOSITORY] ..."
-msgstr ""
+msgstr "patterns (pt) [OPTIONS] [REPOSITORY] ..."
 
 #. translators: command summary: patterns, pt
 #: src/commands/query/patterns.cc:20
@@ -3585,7 +3611,7 @@ msgstr "سرد كافة الأنماط المتاحة في المخازن الم
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/query/products.cc:18
 msgid "products (pd) [OPTIONS] [REPOSITORY] ..."
-msgstr ""
+msgstr "products (pd) [OPTIONS] [REPOSITORY] ..."
 
 #. translators: command summary: products, pd
 #: src/commands/query/products.cc:20
@@ -3837,7 +3863,7 @@ msgstr "لم يتم العثور على المخزن %s."
 
 #: src/commands/repos/refresh.cc:24
 msgid "refresh (ref) [ALIAS|#|URI] ..."
-msgstr ""
+msgstr "refresh (ref) [ALIAS|#|URI] ..."
 
 #. translators: command summary: refresh, ref
 #: src/commands/repos/refresh.cc:26
@@ -4018,7 +4044,7 @@ msgstr "ترك المخزن '%s' دون تغيير."
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/repos/rename.cc:64
 msgid "renamerepo (nr) [OPTIONS] <ALIAS|#|URI> <NEW-ALIAS>"
-msgstr ""
+msgstr "renamerepo (nr) [OPTIONS] <ALIAS|#|URI> <NEW-ALIAS>"
 
 #: src/commands/repos/rename.cc:65
 msgid "Rename specified repository."
@@ -4028,6 +4054,7 @@ msgstr "إعادة تسمية المخزن المحدد."
 #: src/commands/repos/rename.cc:67
 msgid "Assign new alias to the repository specified by alias, number or URI."
 msgstr ""
+"تخصيص اسم مستعار جديد للمستودع المحدد حسب الاسم المستعار أو الرقم أو URI."
 
 #: src/commands/repos/rename.cc:92
 msgid "Too few arguments. At least URI and alias are required."
@@ -4250,16 +4277,18 @@ msgid ""
 "For an extended search including not yet activated remote resources you may "
 "run '%1%' at any time."
 msgstr ""
+"للبحث الموسع بما في ذلك المصادر البعيدة التي لم يتم تفعيلها حتى الآن، يمكنك "
+"تشغيل '%1%' في أي وقت."
 
 #: src/commands/search/search-packages-hinthack.cc:99
 #, boost-format
 msgid "Do you want to run '%1%' now?"
-msgstr ""
+msgstr "هل تريد تشغيل '%1%' الآن؟"
 
 #: src/commands/search/search-packages-hinthack.cc:115
 #, boost-format
 msgid "Run '%1%' to search in not yet activated remote resources."
-msgstr ""
+msgstr "تشغيل '%1%' للبحث في المصادر التي لم يتم تفعيلها حتى الآن."
 
 #. translators: command summary: search, se
 #: src/commands/search/search.cc:73
@@ -4411,33 +4440,34 @@ msgstr "قد يؤدي تشغيل 'zypper refresh' كجذر إلى حل المش�
 #. translators: -g, --category <CATEGORY>
 #: src/commands/selectpatchoptionset.cc:24
 msgid "Select patches with the specified category."
-msgstr ""
+msgstr "تحديد التصحيحات بالفئة المحددة."
 
 #. translators: --severity <SEVERITY>
 #: src/commands/selectpatchoptionset.cc:28
 msgid "Select patches with the specified severity."
-msgstr ""
+msgstr "تحديد التصحيحات بالخطورة المحددة."
 
 #. translators: --date <YYYY-MM-DD>
 #: src/commands/selectpatchoptionset.cc:32
 msgid "Select patches issued up to, but not including, the specified date"
 msgstr ""
+"تحديد التصحيحات الصادرة حتى التاريخ المحدد، لكن لا يتم تضمين التاريخ المحدد"
 
 #. translators: -b, --bugzilla
 #: src/commands/selectpatchoptionset.cc:36
 msgid "Select applicable patches for the specified Bugzilla issues."
-msgstr ""
+msgstr "تحديد التصحيحات القابلة للتطبيق على المشكلات المحددة في Bugzilla."
 
 #. translators: --cve
 #: src/commands/selectpatchoptionset.cc:41
 msgid "Select applicable patches for the specified CVE issues."
-msgstr ""
+msgstr "تحديد التصحيحات القابلة للتطبيق على المشكلات المحددة في CVE."
 
 #. any
 #. translators: --cve
 #: src/commands/selectpatchoptionset.cc:50
 msgid "Select issues matching the specified string."
-msgstr ""
+msgstr "تحديد الإصدارات المطابقة للسلسلة المحددة."
 
 #: src/commands/services/add.cc:55
 #, c-format, boost-format
@@ -4550,7 +4580,7 @@ msgstr ""
 
 #: src/commands/services/modify.cc:41
 msgid "Advanced:"
-msgstr ""
+msgstr "متقدم:"
 
 #: src/commands/services/modify.cc:43
 msgid "Add a RIS service repository to enable."
@@ -4747,7 +4777,7 @@ msgstr "تم تجديد كافة الخدمات."
 
 #: src/commands/services/remove.cc:20
 msgid "removeservice (rs) [OPTIONS] <ALIAS|#|URI>"
-msgstr ""
+msgstr "removeservice (rs) [OPTIONS] <ALIAS|#|URI>"
 
 #: src/commands/services/remove.cc:21
 msgid "Remove specified service."
@@ -4769,7 +4799,7 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/shell.cc:20
 msgid "shell (sh)"
-msgstr ""
+msgstr "shell (sh)"
 
 #. translators: command summary: shell, sh
 #: src/commands/shell.cc:22
@@ -4788,7 +4818,7 @@ msgstr "أنت تقوم الآن بتشغيل برنامج الواجهة shell 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/shell.cc:52
 msgid "quit (exit, ^D)"
-msgstr ""
+msgstr "quit (exit, ^D)"
 
 #. translators: command description
 #: src/commands/shell.cc:54 src/commands/shell.cc:56
@@ -4801,7 +4831,7 @@ msgstr "لا يعمل هذا الأمر إلا في برنامج الواجهة 
 
 #: src/commands/solveroptionset.cc:16 src/commands/solveroptionset.cc:39
 msgid "Solver options"
-msgstr ""
+msgstr "خيارات الحل"
 
 #: src/commands/solveroptionset.cc:18
 msgid "Install also recommended packages in addition to the required ones."
@@ -4827,7 +4857,7 @@ msgstr "لا تجبر المحلل على إيجاد حل، واسمح بالس�
 
 #: src/commands/solveroptionset.cc:63
 msgid "Expert options"
-msgstr ""
+msgstr "خيارات الخبير"
 
 #: src/commands/solveroptionset.cc:66
 msgid "Whether to allow downgrading installed resolvables."
@@ -4858,7 +4888,7 @@ msgstr "عدم الإزالة التلقائية للتبعيات غير الم�
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/sourceinstall.cc:21
 msgid "source-install (si) [OPTIONS] <NAME> ..."
-msgstr ""
+msgstr "source-install (si) [OPTIONS] <NAME> ..."
 
 #. translators: command summary: source-install, si
 #: src/commands/sourceinstall.cc:23
@@ -4896,7 +4926,7 @@ msgstr "اسم الحزمة المصدر وسيطة مطلوبة."
 
 #: src/commands/sourceinstall.cc:86
 msgid "Uninstalling source packages is not supported."
-msgstr ""
+msgstr "إلغاء تثبيت حزم المصدر غير مدعوم."
 
 #: src/commands/subcommand.cc:52
 msgid "none"
@@ -5032,7 +5062,7 @@ msgstr "لا يدعم الأمر الفرعي %1% الخيارات العامة 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/update.cc:22
 msgid "update (up) [OPTIONS] [PACKAGENAME] ..."
-msgstr ""
+msgstr "update (up) [OPTIONS] [PACKAGENAME] ..."
 
 #. translators: command summary: update, up
 #: src/commands/update.cc:24
@@ -5044,6 +5074,7 @@ msgstr "تحديث الحزم المثبتة باستخدام أحدث الإص�
 msgid ""
 "Update all or specified installed packages with newer versions, if possible."
 msgstr ""
+"تحديث الحزم المُثبتة المحددة أو كل الحزم المُثبتة بالإصدارات الأحدث، إن أمكن."
 
 #: src/commands/update.cc:69 src/commands/update.cc:76
 #: src/commands/update.cc:126
@@ -5151,7 +5182,7 @@ msgstr "لا يتم إنزال حزمة '%s'."
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/utils/licenses.cc:19
 msgid "licenses"
-msgstr ""
+msgstr "التراخيص"
 
 #. translators: command summary: licenses
 #: src/commands/utils/licenses.cc:21
@@ -5285,12 +5316,12 @@ msgstr "عدم تنزيل أي rpms مصدر فقط إظهار rpms المصدر
 #. translators: --status
 #: src/commands/utils/source-download.cc:514
 msgid "Write a manifest file."
-msgstr ""
+msgstr "كتابة ملف بيان."
 
 #. translators: --status
 #: src/commands/utils/source-download.cc:518
 msgid "Disable writing a manifest file."
-msgstr ""
+msgstr "تعطيل كتابة ملف بيان."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/utils/targetos.cc:20
@@ -5332,7 +5363,7 @@ msgstr "تسمية قصيرة: %s"
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/utils/versioncmp.cc:19
 msgid "versioncmp (vcmp) <VERSION1> <VERSION2>"
-msgstr ""
+msgstr "versioncmp (vcmp) <VERSION1> <VERSION2>"
 
 #. translators: command summary
 #: src/commands/utils/versioncmp.cc:21
@@ -5584,56 +5615,56 @@ msgstr "بناء حزمة ثنائية"
 #. translators: header of table column - is the language requested? (Yes/No)
 #: src/locales.cc:56 src/locales.cc:90
 msgid "Requested"
-msgstr ""
+msgstr "المطلوب"
 
 #: src/locales.cc:60
 msgid "Fallback"
-msgstr ""
+msgstr "احتياطي"
 
 #. translators: header of table column - the language code, e.g. en_US
 #: src/locales.cc:86
 msgid "Code"
-msgstr ""
+msgstr "الرمز"
 
 #. translators: header of table column - the language, e.g. English (United States)
 #: src/locales.cc:88
 msgid "Language"
-msgstr ""
+msgstr "اللغة"
 
 #: src/locales.cc:306
 #, c-format, boost-format
 msgid "Packages for %s (locale '%s', requested: %s):"
-msgstr ""
+msgstr "الحزم التي تخص %s (المنطقة اللغوية '%s'، المطلوب: %s):"
 
 #: src/locales.cc:323
 #, c-format, boost-format
 msgid "Added locale: %s"
-msgstr ""
+msgstr "المنطقة اللغوية المضافة: %s"
 
 #: src/locales.cc:326
 #, c-format, boost-format
 msgid "ERROR: cannot add %s"
-msgstr ""
+msgstr "خطأ: لا يمكن إضافة %s"
 
 #: src/locales.cc:330
 #, c-format, boost-format
 msgid " %s is already requested."
-msgstr ""
+msgstr " %s مطلوب بالفعل."
 
 #: src/locales.cc:351
 #, c-format, boost-format
 msgid "Removed locale: %s"
-msgstr ""
+msgstr "المنطقة اللغوية التي تمت إزالتها: %s"
 
 #: src/locales.cc:354
 #, c-format, boost-format
 msgid "ERROR: cannot remove %s"
-msgstr ""
+msgstr "خطأ: لا يمكن إزالة %s"
 
 #: src/locales.cc:358
 #, c-format, boost-format
 msgid "%s was not requested."
-msgstr ""
+msgstr "لم يكن %s مطلوبًا."
 
 #. translators: this will show up if you press ctrl+c twice
 #: src/main.cc:31
@@ -6492,6 +6523,9 @@ msgid ""
 "updated by recent upgrades. They should be restarted to benefit from the "
 "latest updates. Run '%1%' to list these programs."
 msgstr ""
+"توجد بعض البرامج قيد التشغيل، والتي لا تزال تستخدم ملفات ومكتبات تم حذفها أو "
+"تحديثها بواسطة ترقيات حديثة. يجب أن تقوم بإعادة تشغيل هذه البرامج للاستفادة "
+"من آخر التحديثات. قم بتشغيل '%1%' لإدراج هذه البرامج."
 
 #: src/solve-commit.cc:481
 msgid "Update notifications were received from the following packages:"
@@ -6835,69 +6869,69 @@ msgstr "تعذرت تهيئة محلل ملف التكوين."
 #: src/utils/Augeas.cc:510
 #, boost-format
 msgid "Malformed option name '%1%'."
-msgstr ""
+msgstr "اسم خيار الصياغة غير السليمة '%1%'."
 
 #: src/utils/Augeas.cc:522
 msgid "Could not save the config file."
-msgstr ""
+msgstr "تعذر حفظ ملف التكوين."
 
 #: src/utils/Augeas.cc:564
 #, boost-format
 msgid "Config file '%1%' exists but is not a file."
-msgstr ""
+msgstr "ملف التكوين '%1%' موجود، لكنه ليس ملفًا."
 
 #: src/utils/Augeas.cc:580
 msgid "Could not load the config files."
-msgstr ""
+msgstr "تعذر تحميل ملفات التكوين."
 
 #: src/utils/Augeas.cc:606
 #, boost-format
 msgid "Config file '%1%' does not exist."
-msgstr ""
+msgstr "ملف التكوين '%1%' غير موجود."
 
 #. translator: %1% is the path to a config file, %2% is the name of an options inside the file
 #: src/utils/Augeas.cc:637
 #, boost-format
 msgid "%1%: Option '%2%' is defined multiple times. Using the last one."
-msgstr ""
+msgstr "%1%: تم تحديد الخيار '%2%' عدة مرات. استخدام الأخير."
 
 #: src/utils/Augeas.cc:658
 msgid "No config file is in use."
-msgstr ""
+msgstr "لا يوجد ملف تكوين قيد الاستخدام."
 
 #: src/utils/flags/exceptions.cc:22
 #, boost-format
 msgid "The flag %1% is not known."
-msgstr ""
+msgstr "العلامة %1% غير معروفة."
 
 #: src/utils/flags/exceptions.cc:28
 #, boost-format
 msgid "The flag %1% is not compatible with argument %2% (%3%)."
-msgstr ""
+msgstr "العلامة %1% غير متوافقة مع الوسيطة %2% (%3%)."
 
 #: src/utils/flags/exceptions.cc:34
-#, fuzzy, boost-format
+#, boost-format
 msgid "The flag %1% requires a argument."
-msgstr "يعتبر مخطط Url مكونًا مطلوبًا"
+msgstr "تتطلب علامة %1% وسيطة."
 
 #: src/utils/flags/exceptions.cc:40
 #, boost-format
 msgid "The flag %1% can only be used once."
-msgstr ""
+msgstr "لا يمكن استخدام العلامة %1% أكثر من مرة."
 
 #: src/utils/flags/exceptions.cc:46
 #, c-format, boost-format
 msgid "%s used together with %s, which contradict each other."
-msgstr ""
+msgstr "يتم استخدام %s مع %s، وهما متعارضان معًا."
 
 #: src/utils/flags/flagtypes.cc:24
 msgid "Unknown package type"
-msgstr ""
+msgstr "نوع حزمة غير معروف"
 
 #: src/utils/flags/flagtypes.cc:100
 #, boost-format
 msgid "The flag '%1%' can only be used a maximum of %2% times."
-msgstr ""
+msgstr "لا يمكن استخدام العلامة '%1%' أكثر من %2% من المرات بحد أقصى."
 
 #: src/utils/flags/flagtypes.cc:192
 #, c-format, boost-format
@@ -6908,12 +6942,12 @@ msgstr "تجاهل %s بدون وسيطة نظرًا لتحديد خيار مش�
 
 #: src/utils/flags/flagtypes.cc:232
 msgid "Out of range"
-msgstr ""
+msgstr "خارج النطاق"
 
 #: src/utils/flags/flagtypes.cc:234
 #, boost-format
 msgid "Unknown error while assigning the value %1% to flag %2%."
-msgstr ""
+msgstr "حدث خطأ غير معروف أثناء تخصيص القيمة %1% إلى العلامة %2%."
 
 #. For '-garbage' argument, with 'a', 'b', and 'e' as known options,
 #. getopt_long reports 'a', 'b', and 'e' as known options.
@@ -7234,11 +7268,11 @@ msgstr "تتم الآن المحاولة مرة أخرى..."
 
 #: src/utils/prompt.cc:325
 msgid "always"
-msgstr ""
+msgstr "دائمًا"
 
 #: src/utils/prompt.cc:325
 msgid "never"
-msgstr ""
+msgstr "مطلقًا"
 
 #: src/utils/prompt.cc:372
 msgid "Cannot read input: bad stream or EOF."
@@ -7261,7 +7295,7 @@ msgstr "الإجابة '%s' غير صالحة."
 #: src/utils/prompt.cc:415
 #, c-format, boost-format
 msgid "Ambiguous answer '%s'."
-msgstr ""
+msgstr "الإجابة المبهمة '%s'."
 
 #. translators: the %s are: 'y', 'yes' (translated), 'n', and 'no' (translated).
 #: src/utils/prompt.cc:423
@@ -7274,6 +7308,8 @@ msgid ""
 "If nothing else works enter '#1' to select the 1st option, '#2' for the 2nd "
 "one, ..."
 msgstr ""
+"إذا لم تعمل أي طريقة أخرى، فأدخل '#1' لتحديد الخيار الأول، و'#2' للخيار "
+"الثاني، ..."
 
 #~ msgid "Augeas error: setting config file to load failed."
 #~ msgstr "خطأ Augeas: فشل إعداد ملف التكوين للتحميل."
