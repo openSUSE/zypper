@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: zypper.ko\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-02-25 14:33+0100\n"
-"PO-Revision-Date: 2019-03-21 12:50+0000\n"
+"PO-Revision-Date: 2019-04-04 18:36+0000\n"
 "Last-Translator: Hwajin Kim <hwajin.kim@e4net.net>\n"
 "Language-Team: Korean <https://l10n.opensuse.org/projects/zypper/master/ko/>"
 "\n"
@@ -588,17 +588,17 @@ msgstr "계속하시겠습니까?"
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:23
 msgid "ALIAS"
-msgstr "ALIAS"
+msgstr "별칭"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:25
 msgid "ALIAS|#|URI"
-msgstr "ALIAS|#|URI"
+msgstr "별칭|#|URI"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:27
 msgid "CATEGORY"
-msgstr "CATEGORY"
+msgstr "범주"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:29
@@ -608,7 +608,7 @@ msgstr "DIR"
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:31
 msgid "FILE"
-msgstr "FILE"
+msgstr "파일"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:33
@@ -618,37 +618,37 @@ msgstr "FILE.repo"
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:35
 msgid "FORMAT"
-msgstr "FORMAT"
+msgstr "형식"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:37
 msgid "INTEGER"
-msgstr "INTEGER"
+msgstr "정수"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:39
 msgid "PATH"
-msgstr "PATH"
+msgstr "경로"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:41
 msgid "SEVERITY"
-msgstr "SEVERITY"
+msgstr "심각도"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:43
 msgid "STRING"
-msgstr "STRING"
+msgstr "문자열"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:45
 msgid "TAG"
-msgstr "TAG"
+msgstr "태그"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:47
 msgid "TYPE"
-msgstr "TYPE"
+msgstr "유형"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #. translators: property name; short; used like "Name: value"
@@ -666,7 +666,7 @@ msgstr "YYYY-MM-DD"
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:53
 msgid "MODE"
-msgstr "MODE"
+msgstr "모드"
 
 #. TranslatorExplanation These are reasons for various failures.
 #: src/utils/prompt.h:185
@@ -2053,7 +2053,7 @@ msgstr "대상 파일 시스템이 읽기 전용으로 마운트되었습니다.
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/distupgrade.cc:20
 msgid "dist-upgrade (dup) [OPTIONS]"
-msgstr "dist-upgrade (dup) [OPTIONS]"
+msgstr "dist-upgrade (dup) [옵션]"
 
 #. translators: command summary: dist-upgrade, dup
 #. translators: command description
@@ -2080,12 +2080,12 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/help.cc:21
 msgid "zypper [--GLOBAL-OPTIONS] <COMMAND> [--COMMAND-OPTIONS] [ARGUMENTS]"
-msgstr "zypper [--GLOBAL-OPTIONS] <COMMAND> [--COMMAND-OPTIONS] [ARGUMENTS]"
+msgstr "zypper [--글로벌 옵션] <명령> [--명령-옵션] [인수]"
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/help.cc:24
 msgid "zypper <SUBCOMMAND> [--COMMAND-OPTIONS] [ARGUMENTS]"
-msgstr "zypper <SUBCOMMAND> [--COMMAND-OPTIONS] [ARGUMENTS]"
+msgstr "zypper <하위 명령> [--명령-옵션] [인수]"
 
 #: src/commands/help.cc:72 src/commands/help.cc:73
 msgid "Print zypper help"
@@ -2094,12 +2094,12 @@ msgstr "도움말을 인쇄합니다."
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/inrverify.cc:68
 msgid "install-new-recommends (inr) [OPTIONS]"
-msgstr "install-new-recommends (inr) [OPTIONS]"
+msgstr "install-new-recommends (inr) [옵션]"
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/inrverify.cc:71
 msgid "verify (ve) [OPTIONS]"
-msgstr "verify (ve) [OPTIONS]"
+msgstr "verify (ve) [옵션]"
 
 #. translators: command summary: install-new-recommends, inr
 #: src/commands/inrverify.cc:81
@@ -2155,7 +2155,7 @@ msgstr "용량별로만 패키지를 선택합니다."
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/installremove.cc:74
 msgid "remove (rm) [OPTIONS] <CAPABILITY> ..."
-msgstr "remove (rm) [OPTIONS] <CAPABILITY> ..."
+msgstr "remove (rm) [옵션] <기능> ..."
 
 #. translators: command summary: remove, rm
 #: src/commands/installremove.cc:76
@@ -2201,7 +2201,7 @@ msgstr "소스 패키지 제거가 정의 및 구현되지 않았습니다."
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/installremove.cc:160
 msgid "install (in) [OPTIONS] <CAPABILITY|RPM_FILE_URI> ..."
-msgstr "install (in) [OPTIONS] <CAPABILITY|RPM_FILE_URI> ..."
+msgstr "install (in) [옵션] <기능|RPM_FILE_URI> ..."
 
 #. translators: command summary: install, in
 #: src/commands/installremove.cc:162
@@ -2280,7 +2280,7 @@ msgstr "해당하는 패치뿐 아니라 모든 패치를 나열합니다."
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/listupdates.cc:16
 msgid "list-updates (lu) [OPTIONS]"
-msgstr "list-updates (lu) [OPTIONS]"
+msgstr "list-updates (lu) [옵션]"
 
 #. translators: command description
 #: src/commands/listupdates.cc:20
@@ -2298,7 +2298,7 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/locale/addlocalecmd.cc:19
 msgid "addlocale (aloc) [OPTIONS] <LOCALE> ..."
-msgstr "addlocale (aloc) [OPTIONS] <LOCALE> ..."
+msgstr "addlocale (aloc) [옵션] <로케일> ..."
 
 #: src/commands/locale/addlocalecmd.cc:20
 msgid "Add locale(s) to requested locales."
@@ -2324,7 +2324,7 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/locale/localescmd.cc:17
 msgid "locales (lloc) [OPTIONS] [LOCALE] ..."
-msgstr "locales (lloc) [OPTIONS] [LOCALE] ..."
+msgstr "locales (lloc) [옵션] [로케일] ..."
 
 #: src/commands/locale/localescmd.cc:18
 msgid "List requested locales (languages codes)."
@@ -2383,7 +2383,7 @@ msgstr "'de' 및 'en'에 사용할 수 있는 패키지 목록 가져오기:"
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/locale/removelocalecmd.cc:17
 msgid "removelocale (rloc) [OPTIONS] <LOCALE> ..."
-msgstr "removelocale (rloc) [OPTIONS] <LOCALE> ..."
+msgstr "removelocale (rloc) [옵션] <로케일> ..."
 
 #: src/commands/locale/removelocalecmd.cc:18
 msgid "Remove locale(s) from requested locales."
@@ -2410,7 +2410,7 @@ msgstr "제공된 로케일에 해당하는 패키지를 제거하지 않습니�
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
 #: src/commands/locks/add.cc:29
 msgid "addlock (al) [OPTIONS] <PACKAGENAME> ..."
-msgstr "addlock (al) [OPTIONS] <PACKAGENAME> ..."
+msgstr "addlock (al) [옵션] <패키지 이름> ..."
 
 #. translators: command summary
 #: src/commands/locks/add.cc:31
@@ -2523,7 +2523,7 @@ msgstr "설치 안 함"
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
 #: src/commands/locks/list.cc:256
 msgid "locks (ll) [OPTIONS]"
-msgstr "locks (ll) [OPTIONS]"
+msgstr "locks (ll) [옵션]"
 
 #: src/commands/locks/list.cc:257
 msgid "List current package locks."
@@ -2548,7 +2548,7 @@ msgstr "패키지 잠금이 정의되지 않았습니다."
 # =============================================================================
 #: src/commands/locks/remove.cc:25
 msgid "removelock (rl) [OPTIONS] <LOCK-NUMBER|PACKAGENAME> ..."
-msgstr "removelock (rl) [OPTIONS] <LOCK-NUMBER|PACKAGENAME> ..."
+msgstr "removelock (rl) [옵션] <잠금-번호|패키지 이름> ..."
 
 #: src/commands/locks/remove.cc:26
 msgid "Remove a package lock."
@@ -2645,7 +2645,7 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/nullcommands.cc:37
 msgid "what-provides (wp) <CAPABILITY>"
-msgstr "what-provides (wp) <CAPABILITY>"
+msgstr "what-provides (wp) <기능>"
 
 #. translators: command summary: what-provides, wp
 #: src/commands/nullcommands.cc:39
@@ -2674,7 +2674,7 @@ msgstr "사용 가능한 옵션은 '%s'을(를) 참조하십시오."
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/nullcommands.cc:67
 msgid "ping [OPTIONS]"
-msgstr "ping [OPTIONS]"
+msgstr "ping [옵션]"
 
 #. translators: command summary
 #. translators: command description
@@ -2952,7 +2952,7 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/query/info.cc:19
 msgid "info (if) [OPTIONS] <NAME> ..."
-msgstr "info (if) [OPTIONS] <NAME> ..."
+msgstr "info (if) [옵션] <이름> ..."
 
 #. translators: command summary: info, if
 #: src/commands/query/info.cc:21
@@ -3038,17 +3038,17 @@ msgstr "지정된 제품에 대한 전체 정보를 표시합니다."
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/query/info.cc:157
 msgid "patch-info <PATCHNAME> ..."
-msgstr "patch-info <PATCHNAME> ..."
+msgstr "patch-info <패치 이름> ..."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/query/info.cc:160
 msgid "pattern-info <PATTERN_NAME> ..."
-msgstr "pattern-info <PATTERN_NAME> ..."
+msgstr "pattern-info <패턴_이름> ..."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/query/info.cc:163
 msgid "product-info <PRODUCT_NAME> ..."
-msgstr "product-info <PRODUCT_NAME> ..."
+msgstr "product-info <제품_이름> ..."
 
 #. translators: command description
 #: src/commands/query/info.cc:175
@@ -3068,7 +3068,7 @@ msgstr "제품에 대한 자세한 정보를 표시합니다."
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/query/packages.cc:18
 msgid "packages (pa) [OPTIONS] [REPOSITORY] ..."
-msgstr "packages (pa) [OPTIONS] [REPOSITORY] ..."
+msgstr "packages (pa) [옵션] [리포지토리] ..."
 
 #. translators: command summary: packages, pa
 #: src/commands/query/packages.cc:20
@@ -3113,7 +3113,7 @@ msgstr "리포지토리별로 목록을 정렬합니다."
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/query/patches.cc:18
 msgid "patches (pch) [REPOSITORY] ..."
-msgstr "patches (pch) [REPOSITORY] ..."
+msgstr "patches (pch) [리포지토리] ..."
 
 #. translators: command summary: patches, pch
 #: src/commands/query/patches.cc:20
@@ -3128,7 +3128,7 @@ msgstr "지정한 리포지토리에서 사용 가능한 모든 패치를 나열
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/query/patterns.cc:18
 msgid "patterns (pt) [OPTIONS] [REPOSITORY] ..."
-msgstr "patterns (pt) [OPTIONS] [REPOSITORY] ..."
+msgstr "patterns (pt) [옵션] [리포지토리] ..."
 
 #. translators: command summary: patterns, pt
 #: src/commands/query/patterns.cc:20
@@ -3143,7 +3143,7 @@ msgstr "지정한 리포지토리에서 사용 가능한 모든 패턴을 나열
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/query/products.cc:18
 msgid "products (pd) [OPTIONS] [REPOSITORY] ..."
-msgstr "products (pd) [OPTIONS] [REPOSITORY] ..."
+msgstr "products (pd) [옵션] [리포지토리] ..."
 
 #. translators: command summary: products, pd
 #: src/commands/query/products.cc:20
@@ -3224,7 +3224,7 @@ msgstr ""
 
 #: src/commands/repos/clean.cc:16
 msgid "clean (cc) [ALIAS|#|URI] ..."
-msgstr "clean (cc) [ALIAS|#|URI] ..."
+msgstr "clean (cc) [별칭|#|URI] ..."
 
 #: src/commands/repos/clean.cc:17 src/commands/repos/clean.cc:18
 msgid "Clean local caches."
@@ -3320,7 +3320,7 @@ msgstr "MD 캐시 경로"
 
 #: src/commands/repos/list.cc:74
 msgid "repos (lr) [OPTIONS] [REPO] ..."
-msgstr "repos (lr) [OPTIONS] [REPO] ..."
+msgstr "repos (lr) [옵션] [리포지토리] ..."
 
 #: src/commands/repos/list.cc:75 src/commands/repos/list.cc:76
 msgid "List all defined repositories."
@@ -3397,7 +3397,7 @@ msgstr "%s 리포지토리를 찾을 수 없습니다."
 
 #: src/commands/repos/refresh.cc:24
 msgid "refresh (ref) [ALIAS|#|URI] ..."
-msgstr "refresh (ref) [ALIAS|#|URI] ..."
+msgstr "refresh (ref) [별칭|#|URI] ..."
 
 #. translators: command summary: refresh, ref
 #: src/commands/repos/refresh.cc:26
@@ -3518,7 +3518,7 @@ msgstr "모든 리포지토리를 새로 고쳤습니다."
 
 #: src/commands/repos/remove.cc:21
 msgid "removerepo (rr) [OPTIONS] <ALIAS|#|URI>"
-msgstr "removerepo (rr) [OPTIONS] <ALIAS|#|URI>"
+msgstr "removerepo (rr) [옵션] <별칭|#|URI>"
 
 #: src/commands/repos/remove.cc:22
 msgid "Remove specified repository."
@@ -3576,7 +3576,7 @@ msgstr "'%s' 리포지토리를 변경하지 않은 채로 둡니다."
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/repos/rename.cc:64
 msgid "renamerepo (nr) [OPTIONS] <ALIAS|#|URI> <NEW-ALIAS>"
-msgstr "renamerepo (nr) [OPTIONS] <ALIAS|#|URI> <NEW-ALIAS>"
+msgstr "renamerepo (nr) [옵션] <별칭|#|URI> <새-별칭>"
 
 #: src/commands/repos/rename.cc:65
 msgid "Rename specified repository."
@@ -3832,12 +3832,12 @@ msgstr "패턴과 일치하는 패키지를 검색합니다."
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/search/search.cc:81
 msgid "search (se) [OPTIONS] [QUERYSTRING] ..."
-msgstr "search (se) [OPTIONS] [QUERYSTRING] ..."
+msgstr "search (se) [옵션] [쿼리 문자열] ..."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/search/search.cc:86
 msgid "patch-search [OPTIONS] [QUERYSTRING...]"
-msgstr "patch-search [OPTIONS] [QUERYSTRING...]"
+msgstr "patch-search [옵션] [쿼리 문자열...]"
 
 #. translators: command description
 #: src/commands/search/search.cc:95
@@ -4071,7 +4071,7 @@ msgstr "'%s' 서비스가 제거되었습니다."
 
 #: src/commands/services/list.cc:81
 msgid "services (ls) [OPTIONS]"
-msgstr "services (ls) [OPTIONS]"
+msgstr "services (ls) [옵션]"
 
 #: src/commands/services/list.cc:82
 msgid "List all defined services."
@@ -4235,7 +4235,7 @@ msgstr "'%s'을(를) 사용하여 정의된 서비스 목록을 가져옵니다.
 
 #: src/commands/services/refresh.cc:95
 msgid "refresh-services (refs) [OPTIONS]"
-msgstr "refresh-services (refs) [OPTIONS]"
+msgstr "refresh-services (refs) [옵션]"
 
 #: src/commands/services/refresh.cc:96
 msgid "Refresh all services."
@@ -4289,7 +4289,7 @@ msgstr "모든 서비스를 새로 고쳤습니다."
 
 #: src/commands/services/remove.cc:20
 msgid "removeservice (rs) [OPTIONS] <ALIAS|#|URI>"
-msgstr "removeservice (rs) [OPTIONS] <ALIAS|#|URI>"
+msgstr "removeservice (rs) [옵션] <별칭|#|URI>"
 
 #: src/commands/services/remove.cc:21
 msgid "Remove specified service."
@@ -4398,7 +4398,7 @@ msgstr "필요 없는 종속성을 자동으로 제거하지 않습니다."
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/sourceinstall.cc:21
 msgid "source-install (si) [OPTIONS] <NAME> ..."
-msgstr "source-install (si) [OPTIONS] <NAME> ..."
+msgstr "source-install (si) [옵션] <이름> ..."
 
 #. translators: command summary: source-install, si
 #: src/commands/sourceinstall.cc:23
@@ -4573,7 +4573,7 @@ msgstr "하위 명령 %1%은(는) zypper 전역 옵션을 지원하지 않습니
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/update.cc:22
 msgid "update (up) [OPTIONS] [PACKAGENAME] ..."
-msgstr "update (up) [OPTIONS] [PACKAGENAME] ..."
+msgstr "update (up) [옵션] [패키지 이름] ..."
 
 #. translators: command summary: update, up
 #: src/commands/update.cc:24
@@ -4618,7 +4618,7 @@ msgstr "'%s' 다운로드 디렉토리를 사용하기 위한 권한이 부족�
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/utils/download.cc:144
 msgid "download [OPTIONS] <PACKAGES>..."
-msgstr "download [OPTIONS] <PACKAGES>..."
+msgstr "download [옵션] <패키지>..."
 
 #. translators: command summary: download
 #: src/commands/utils/download.cc:146
@@ -4836,7 +4836,7 @@ msgstr "매니페스트 파일 작성을 비활성화합니다."
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/utils/targetos.cc:20
 msgid "targetos (tos) [OPTIONS]"
-msgstr "targetos (tos) [OPTIONS]"
+msgstr "targetos (tos) [옵션]"
 
 #. translators: command summary: targetos, tos
 #: src/commands/utils/targetos.cc:22
@@ -4873,7 +4873,7 @@ msgstr "짧은 레이블: %s"
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/utils/versioncmp.cc:19
 msgid "versioncmp (vcmp) <VERSION1> <VERSION2>"
-msgstr "versioncmp (vcmp) <VERSION1> <VERSION2>"
+msgstr "versioncmp (vcmp) <버전1> <버전2>"
 
 #. translators: command summary
 #: src/commands/utils/versioncmp.cc:21
