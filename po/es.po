@@ -17,8 +17,8 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-02-27 13:31+0100\n"
-"PO-Revision-Date: 2018-10-31 20:02+0000\n"
-"Last-Translator: jc sl <trcs@gmx.com>\n"
+"PO-Revision-Date: 2019-03-23 20:19+0000\n"
+"Last-Translator: Juan Sarria <juansarriam@gmail.com>\n"
 "Language-Team: Spanish <https://l10n.opensuse.org/projects/libzypp/master/es/"
 ">\n"
 "Language: es\n"
@@ -26,7 +26,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 2.18\n"
+"X-Generator: Weblate 3.3\n"
 
 #. dubious: Throw on malformed known types, otherwise log a warning.
 #: zypp/CheckSum.cc:136
@@ -4079,6 +4079,8 @@ msgid ""
 "Visit the SUSE Customer Center to check whether your registration is valid "
 "and has not expired."
 msgstr ""
+"Visite el Centro de servicios al cliente de SUSE para comprobar si su "
+"registro es válido y no ha caducado."
 
 #: zypp/media/MediaCurl.cc:1141
 msgid ""
