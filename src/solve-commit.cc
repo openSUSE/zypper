@@ -151,9 +151,6 @@ static TriBool show_problem( Zypper & zypper, const ResolverProblem & prob, Prob
       fulltext << desc_ext_stm.str();
     fulltext << solution_stm.str();
 
-    if ( !zypper.config().non_interactive )
-      clear_keyboard_buffer();
-
     zypper.out().prompt( PROMPT_DEP_RESOLVE, prompt_text, popts, fulltext.str() );
     reply = get_prompt_reply( zypper, PROMPT_DEP_RESOLVE, popts );
 
@@ -544,8 +541,6 @@ static void show_update_messages( Zypper & zypper, const UpdateNotifications & m
   std::string prompt_text( _("View the notifications now?") );
   unsigned reply;
 
-  if ( !zypper.config().non_interactive )
-    clear_keyboard_buffer();
   zypper.out().prompt( PROMPT_YN_INST_REMOVE_CONTINUE, prompt_text, popts );
   reply = get_prompt_reply( zypper, PROMPT_YN_INST_REMOVE_CONTINUE, popts );
 
@@ -707,8 +702,6 @@ void solve_and_commit (Zypper & zypper , Summary::ViewOptions summaryOptions_r, 
       unsigned reply;
       do
       {
-        if ( !zypper.config().non_interactive )
-          clear_keyboard_buffer();
         zypper.out().prompt( PROMPT_YN_INST_REMOVE_CONTINUE, prompt_text, popts );
         reply = get_prompt_reply( zypper, PROMPT_YN_INST_REMOVE_CONTINUE, popts );
 
