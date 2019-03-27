@@ -332,8 +332,6 @@ namespace zypp
           // translators: help text for the 'a' option in the 'r/t/a' prompt
           popts.setOptionHelp( (++off), _("Trust the key and import it into trusted keyring.") );
 
-        if (!zypper.config().non_interactive)
-          clear_keyboard_buffer();
         zypper.out().prompt(PROMPT_YN_GPG_KEY_TRUST, s.str(), popts);
         unsigned prep =
           get_prompt_reply(zypper, PROMPT_YN_GPG_KEY_TRUST, popts);
@@ -527,8 +525,7 @@ namespace zypp
 	// translators: A prompt option help text
 	popts.setOptionHelp( 1, _("Discard the file.") );
 	popts.setShownCount( 1 );
-	if ( !zypper.config().non_interactive )
-	  clear_keyboard_buffer();
+
 	// translators: A prompt text
 	zypper.out().prompt( PROMPT_GPG_WRONG_DIGEST_ACCEPT, _("Unblock or discard?"), popts );
 	int reply = get_prompt_reply( zypper, PROMPT_GPG_WRONG_DIGEST_ACCEPT, popts );

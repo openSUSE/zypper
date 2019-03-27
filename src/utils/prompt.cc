@@ -300,8 +300,6 @@ int read_action_ari( PromptId pid, int default_action )
   // correspond to abort/retry/ignore in that order.
   // The answers should be lower case letters.
   PromptOptions popts(_("a/r/i"), (unsigned) default_action );
-  if ( !zypper.config().non_interactive )
-    clear_keyboard_buffer();
   zypper.out().prompt( pid, _("Abort, retry, ignore?"), popts );
   return get_prompt_reply( zypper, pid, popts );
 }
@@ -313,8 +311,6 @@ bool read_bool_answer( PromptId pid, const std::string & question, bool default_
   Zypper & zypper( Zypper::instance() );
   std::string yn( std::string(_("yes")) + "/" + _("no") );
   PromptOptions popts( yn, default_answer ? 0 : 1 );
-  if ( ! zypper.config().non_interactive )
-    clear_keyboard_buffer();
   zypper.out().prompt( pid, question, popts );
   return !get_prompt_reply( zypper, pid, popts );
 }
@@ -324,10 +320,7 @@ std::pair<bool,bool> read_bool_answer_opt_save( PromptId pid_r, const std::strin
   Zypper & zypper( Zypper::instance() );
   PromptOptions popts( { _("yes"), _("no"), _("always"), _("never") }, defaultAnswer_r ? 0 : 1 );
 
-  if ( ! zypper.config().non_interactive )
-    clear_keyboard_buffer();
   zypper.out().prompt( pid_r, question_r, popts );
-
   unsigned r = get_prompt_reply( zypper, pid_r, popts );
   return { !(r%2), (r > 1) };
 }
@@ -344,6 +337,8 @@ unsigned get_prompt_reply( Zypper & zypper, PromptId pid, const PromptOptions & 
     MIL << "running non-interactively, returning " << poptions.options()[poptions.defaultOpt()] << endl;
     return poptions.defaultOpt();
   }
+
+  clear_keyboard_buffer();
 
   // set runtimeData().waiting_for_input flag while in this function
   struct Bye
