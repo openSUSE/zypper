@@ -23,16 +23,16 @@ msgstr ""
 "Project-Id-Version: zypper.fi\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-02-25 14:33+0100\n"
-"PO-Revision-Date: 2018-10-20 13:02+0000\n"
+"PO-Revision-Date: 2019-04-04 18:36+0000\n"
 "Last-Translator: Tommi Nieminen <software@legisign.org>\n"
-"Language-Team: Finnish <https://l10n.opensuse.org/projects/zypper/master/fi/"
-">\n"
+"Language-Team: Finnish <https://l10n.opensuse.org/projects/zypper/master/fi/>"
+"\n"
 "Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 2.18\n"
+"X-Generator: Weblate 3.3\n"
 
 #: src/SolverRequester.h:52
 #, boost-format
@@ -531,11 +531,11 @@ msgstr "Tämä on alias komennolle '%s'."
 
 #: src/commands/commandhelpformatter.h:107
 msgid "Examples:"
-msgstr ""
+msgstr "Esimerkkejä:"
 
 #: src/commands/commandhelpformatter.h:110
 msgid "Arguments:"
-msgstr ""
+msgstr "Parametrit:"
 
 #: src/commands/commandhelpformatter.h:123 src/utils/flags/zyppflags.cc:582
 msgid "Command options:"
@@ -594,7 +594,7 @@ msgstr "Mahdollistaa pakettien päivittämisen myös vanhempaan versioon."
 
 #: src/commands/commonflags.h:45
 msgid "Consider only patches which affect the package management itself."
-msgstr ""
+msgstr "Ota huomioon vain itse paketinhallintaan vaikuttavat korjaukset."
 
 #: src/output/Out.h:26 src/repos.cc:126 src/repos.cc:154
 msgid "Yes"
@@ -704,7 +704,7 @@ msgstr "VVVV-KK-PP"
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:53
 msgid "MODE"
-msgstr ""
+msgstr "TILA"
 
 #. TranslatorExplanation These are reasons for various failures.
 #: src/utils/prompt.h:185
@@ -726,7 +726,7 @@ msgstr "Virhe"
 
 #: src/Command.cc:93
 msgid "Invalid command"
-msgstr ""
+msgstr "Virheellinen komento"
 
 #: src/Command.cc:111
 msgid "Repository Management:"
@@ -754,7 +754,7 @@ msgstr "Lukitukset:"
 
 #: src/Command.cc:154
 msgid "Locale Management:"
-msgstr ""
+msgstr "Maa-asetusten hallinta:"
 
 #: src/Command.cc:158
 msgid "Other Commands:"
@@ -777,7 +777,7 @@ msgstr "Virheellinen taulukon tyyli %d."
 #: src/Config.cc:54
 #, c-format, boost-format
 msgid " Use an integer number from %d to %d"
-msgstr ""
+msgstr " Käytä kokonaislukua väliltä %d–%d"
 
 #: src/Config.cc:248
 msgid "The path specified in the --root option must be absolute."
@@ -881,6 +881,8 @@ msgstr "Jätä huomiotta tuntemattomat paketit."
 msgid ""
 "Terse output for machine consumption. Implies --no-abbrev and --no-color."
 msgstr ""
+"Niukka tuloste ohjelmalliseen käyttöön. Asettaa myös --no-abbrev ja --no-"
+"color."
 
 #. translators: --reposd-dir, -D <DIR>
 #: src/Config.cc:487
@@ -1021,16 +1023,16 @@ msgstr "Älä lue järjestelmään asennettuja paketteja."
 
 #: src/Config.cc:804
 msgid "No config file is in use. Can not save options."
-msgstr ""
+msgstr "Määritystiedostoa ei ole käytössä: asetuksia ei voi tallentaa."
 
 #: src/Config.cc:815
 #, boost-format
 msgid "Option '%1%' saved in '%2%'."
-msgstr ""
+msgstr "Asetus ”%1%” tallennettu kohteeseen ”%2%”."
 
 #: src/Config.cc:822
 msgid "Failed to save option."
-msgstr ""
+msgstr "Asetuksen tallentaminen epäonnistui."
 
 #: src/PackageArgs.cc:208
 #, c-format, boost-format
@@ -1171,6 +1173,8 @@ msgid ""
 "There is an update candidate for '%s' from vendor '%s', while the current "
 "vendor is '%s'. Use '%s' to install this candidate."
 msgstr ""
+"Paketille ”%s” on päivitysehdokas päivityslähteestä ”%s”, mutta "
+"päivityslähde on nyt ”%s”. Asenna tämä ehdokas komennolla ”%s”."
 
 #: src/RequestFeedback.cc:132
 #, c-format, boost-format
@@ -1821,8 +1825,8 @@ msgstr[1] ""
 #, c-format, boost-format
 msgid "The following package requires a system reboot:"
 msgid_plural "The following %d packages require a system reboot:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Seuraava paketti vaatii käynnistämään järjestelmän uudelleen:"
+msgstr[1] "Seuraavat %d pakettia vaativat käynnistämään järjestelmän uudelleen:"
 
 #: src/Summary.cc:1374
 #, boost-format
@@ -2184,13 +2188,15 @@ msgstr "Salasana"
 
 #: src/commands/conditions.cc:19
 msgid "Root privileges are required to run this command."
-msgstr ""
+msgstr "Tämän komennon suorittaminen vaatii pääkäyttäjäoikeuksia."
 
 #: src/commands/conditions.cc:47
 msgid ""
 "This is a transactional-server, please use transactional-update to update or "
 "modify the system."
 msgstr ""
+"Tämä on transaktionaalinen palvelin: päivitä tai muuta järjestelmää "
+"komennolla transactional-update."
 
 #: src/commands/conditions.cc:49
 msgid ""
@@ -2272,6 +2278,11 @@ msgid ""
 "unconditionally on small or minimal systems, as it may easily add a large "
 "number of packages."
 msgstr ""
+"Asenna jo asennettujen pakettien suosittelemat, vasta lisätyt paketit. Tämä "
+"komento käytännössä arvioi kaikkien asennettujen pakettien suositukset "
+"uudestaan ja täydentää järjestelmän niiden mukaan. Et halua käyttää tätä "
+"komentoa ehdoitta pienessä tai vähimmäisjärjestelmässä, koska paketteja "
+"asennetaan helposti paljon lisää."
 
 #. translators: command description, %1% is a zypper command
 #: src/commands/inrverify.cc:98
@@ -2281,6 +2292,9 @@ msgid ""
 "supporting available hardware, languages or filesystems. Useful after having "
 "added e.g. new hardware or driver repos."
 msgstr ""
+"Muodossa ”%1%” rajoittaa komennon etsimään vain käytettävissä olevaa "
+"laitteistoa, kieliä tai tiedostojärjestelmiä tukevia paketteja. Avuksi esim. "
+"lisättäessä uutta laitteistoa tai ajurilähteitä."
 
 #. translators: command description
 #: src/commands/inrverify.cc:101
@@ -2404,7 +2418,7 @@ msgstr "Yhtään virheetöntä valintaa ei määritetty."
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/listpatches.cc:16
 msgid "list-patches (lp) [OPTIONS]"
-msgstr ""
+msgstr "list-patches (lp) [VALINNAT]"
 
 #. translators: command summary: list-updates, lu
 #: src/commands/listpatches.cc:18 src/commands/listupdates.cc:18
@@ -2414,12 +2428,12 @@ msgstr "Listaa saatavilla olevat päivitykset."
 #. translators: command description
 #: src/commands/listpatches.cc:20
 msgid "List all applicable patches."
-msgstr ""
+msgstr "Luettele kaikki saatavilla olevat korjaukset."
 
 #. translators: -a, --all
 #: src/commands/listpatches.cc:31
 msgid "List all patches, not only applicable ones."
-msgstr ""
+msgstr "Luettele kaikki korjaukset, ei voi saatavilla olevia."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/listupdates.cc:16
@@ -2443,19 +2457,19 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/locale/addlocalecmd.cc:19
 msgid "addlocale (aloc) [OPTIONS] <LOCALE> ..."
-msgstr ""
+msgstr "addlocale (aloc) [VALINNAT] <MAA-ASETUS>…"
 
 #: src/commands/locale/addlocalecmd.cc:20
 msgid "Add locale(s) to requested locales."
-msgstr ""
+msgstr "Lisää uusia maa-asetuksia."
 
 #: src/commands/locale/addlocalecmd.cc:21
 msgid "Add given locale(s) to the list of requested locales."
-msgstr ""
+msgstr "Lisää annetut maa-asetukset haluttujen luetteloon."
 
 #: src/commands/locale/addlocalecmd.cc:32
 msgid "Do not install corresponding packages for given locale(s)."
-msgstr ""
+msgstr "Älä asenna annettuja maa-asetuksia vastaavia paketteja."
 
 #: src/commands/locale/addlocalecmd.cc:56
 #, c-format, boost-format
@@ -2463,15 +2477,17 @@ msgid ""
 "Specify locale which shall be supported by the language code.\n"
 "Get a list of all available locales by calling '%s'."
 msgstr ""
+"Määritä maa-asetus, jota kielikoodin tulisi tukea.\n"
+"Näet luettelon maa-asetuksista komennolla \"%s”."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/locale/localescmd.cc:17
 msgid "locales (lloc) [OPTIONS] [LOCALE] ..."
-msgstr ""
+msgstr "locales (lloc) [VALINNAT] [MAA-ASETUS]…"
 
 #: src/commands/locale/localescmd.cc:18
 msgid "List requested locales (languages codes)."
-msgstr ""
+msgstr "Luettele pyydetyt maa-asetukset (kielikoodit)."
 
 #: src/commands/locale/localescmd.cc:19
 #, c-format, boost-format
@@ -2483,40 +2499,48 @@ msgid ""
 "can\n"
 "be installed by calling '%s'.\n"
 msgstr ""
+"Luettele pyydetyt maa-asetukset vastaavine paketteineen.\n"
+"\n"
+"Parametreitta luettelee pyydetyt maa-asetukset. Ellei pyydetyn\n"
+"kielen maa-asetuspaketteja vielä ole järjestelmässä, ne voi asentaa\n"
+"komennolla ”%s”.\n"
 
 #: src/commands/locale/localescmd.cc:35
 msgid "Show corresponding packages."
-msgstr ""
+msgstr "Näytä vastaavat paketit."
 
 #: src/commands/locale/localescmd.cc:36
 msgid "List all available locales."
-msgstr ""
+msgstr "Luettelo kaikki saatavilla olevat maa-asetukset."
 
 #: src/commands/locale/localescmd.cc:49
 msgid "Ignoring positional arguments because --all argument was provided."
-msgstr ""
+msgstr "Ohitetaan sijaintiin perustuvat parametrit, koska --all on annettu."
 
 #: src/commands/locale/localescmd.cc:76
 msgid "The locale(s) for which the information shall be printed."
-msgstr ""
+msgstr "Maa-asetukset, joiden tiedot näytetään."
 
 #: src/commands/locale/localescmd.cc:80
 msgid ""
 "Get all locales with lang code 'en' that have their own country code, "
 "excluding the fallback 'en':"
 msgstr ""
+"Nouda kaikki kielikoodin ”en” maa-asetukset, joilla on oma maakoodi, paitsi "
+"oletusarvoa ”en”:"
 
 #: src/commands/locale/localescmd.cc:87
 msgid "Get all locales with lang code 'en' with or without country code:"
-msgstr ""
+msgstr "Nouda kaikki kielikoodin ”en” maa-asetukset maakoodilla tai ilman:"
 
 #: src/commands/locale/localescmd.cc:94
 msgid "Get the locale matching the argument exactly: "
-msgstr ""
+msgstr "Nouda täsmälleen parametria vastaava maa-asetus: "
 
 #: src/commands/locale/localescmd.cc:101
 msgid "Get the list of packages which are available for 'de' and 'en':"
 msgstr ""
+"Nouda ”de”- ja ”en”-kielikoodeille käytettävissä olevien pakettien luettelo:"
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/locale/removelocalecmd.cc:17
