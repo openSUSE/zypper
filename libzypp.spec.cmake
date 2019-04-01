@@ -221,6 +221,9 @@ export EXTRA_CMAKE_OPTIONS="-DDISABLE_LIBPROXY=ON"
 %endif
 
 cmake -DCMAKE_INSTALL_PREFIX=%{_prefix} \
+      -DENABLE_BUILD_DOCS=TRUE \
+      -DENABLE_BUILD_TRANS=TRUE \
+      -DENABLE_BUILD_TESTS=TRUE \
       -DDOC_INSTALL_DIR=%{_docdir} \
       -DLIB=%{_lib} \
       -DCMAKE_BUILD_TYPE=Release \
@@ -228,14 +231,10 @@ cmake -DCMAKE_INSTALL_PREFIX=%{_prefix} \
       ${EXTRA_CMAKE_OPTIONS} \
       ..
 make %{?_smp_mflags} VERBOSE=1
-make -C doc/autodoc %{?_smp_mflags}
-make -C po %{?_smp_mflags} translations
-make -C tests %{?_smp_mflags}
 
 %install
 cd build
 %make_install
-%make_install -C doc/autodoc
 %if 0%{?fedora_version} || 0%{?rhel_version} >= 600 || 0%{?centos_version} >= 600
 ln -s %{_sysconfdir}/yum.repos.d %{buildroot}/%{_sysconfdir}/zypp/repos.d
 %else
@@ -264,9 +263,9 @@ mkdir -p %{buildroot}/%{_var}/cache/zypp
 sed -i "s|# solver.dupAllowVendorChange = true|solver.dupAllowVendorChange = false|g" %{buildroot}%{_sysconfdir}/zypp/zypp.conf
 %endif
 
-%make_install -C po
-# Create filelist with translations
 cd ..
+
+# Create filelist with translations
 %{find_lang} zypp
 
 %check
