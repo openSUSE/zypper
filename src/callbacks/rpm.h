@@ -243,14 +243,8 @@ struct RemoveResolvableReportReceiver : public callback::ReceiveReport<target::r
 {
   virtual void start( Resolvable::constPtr resolvable )
   {
-    Zypper & zypper = Zypper::instance();
-    _progress.reset( new Out::ProgressBar( zypper.out(),
-					   "remove-resolvable",
-					   // translators: This text is a progress display label e.g. "Removing packagename-x.x.x [42%]"
-					   str::Format(_("Removing %s") ) % resolvable->asString(),
-					   ++zypper.runtimeData().rpm_pkg_current,
-					   zypper.runtimeData().rpm_pkgs_total ) );
-    (*_progress)->range( 100 );	// progress reports percent
+    ++Zypper::instance().runtimeData().rpm_pkg_current;
+    showProgress( resolvable );
   }
 
   virtual bool progress( int value, Resolvable::constPtr resolvable )
@@ -274,7 +268,11 @@ struct RemoveResolvableReportReceiver : public callback::ReceiveReport<target::r
     s << zcb_error2str(error, description);
     Zypper::instance().out().error(s.str());
 
-    return (Action) read_action_ari (PROMPT_ARI_RPM_REMOVE_PROBLEM, ABORT);
+    Action ret = (Action) read_action_ari (PROMPT_ARI_RPM_REMOVE_PROBLEM, ABORT);
+    if ( ret == RETRY )
+      showProgress( resolvable );	// bsc#1131113: need to re-show progress
+
+    return ret;
   }
 
   virtual void finish( Resolvable::constPtr /*resolvable*/, Error error, const std::string & reason )
@@ -300,6 +298,19 @@ struct RemoveResolvableReportReceiver : public callback::ReceiveReport<target::r
   { _progress.reset(); }
 
 private:
+  void showProgress( Resolvable::constPtr resolvable_r )
+  {
+    Zypper & zypper = Zypper::instance();
+    _progress.reset( new Out::ProgressBar( zypper.out(),
+					   "remove-resolvable",
+					   // translators: This text is a progress display label e.g. "Removing packagename-x.x.x [42%]"
+					   str::Format(_("Removing %s") ) % resolvable_r->asString(),
+					   zypper.runtimeData().rpm_pkg_current,
+					   zypper.runtimeData().rpm_pkgs_total ) );
+    (*_progress)->range( 100 );	// progress reports percent
+  }
+
+private:
   scoped_ptr<Out::ProgressBar>	_progress;
 };
 
@@ -309,14 +320,8 @@ struct InstallResolvableReportReceiver : public callback::ReceiveReport<target::
 {
   virtual void start( Resolvable::constPtr resolvable )
   {
-    Zypper & zypper = Zypper::instance();
-    _progress.reset( new Out::ProgressBar( zypper.out(),
-					   "install-resolvable",
-					   // TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
-					   str::Format(_("Installing: %s") ) % resolvable->asString(),
-					   ++zypper.runtimeData().rpm_pkg_current,
-					   zypper.runtimeData().rpm_pkgs_total ) );
-    (*_progress)->range( 100 );	// progress reports percent
+    ++Zypper::instance().runtimeData().rpm_pkg_current;
+    showProgress( resolvable );
   }
 
   virtual bool progress( int value, Resolvable::constPtr resolvable )
@@ -340,7 +345,11 @@ struct InstallResolvableReportReceiver : public callback::ReceiveReport<target::
     s << zcb_error2str(error, description);
     Zypper::instance().out().error(s.str());
 
-    return (Action) read_action_ari (PROMPT_ARI_RPM_INSTALL_PROBLEM, ABORT);
+    Action ret = (Action) read_action_ari (PROMPT_ARI_RPM_INSTALL_PROBLEM, ABORT);
+    if ( ret == RETRY )
+      showProgress( resolvable );	// bsc#1131113: need to re-show progress
+
+    return ret;
   }
 
   virtual void finish( Resolvable::constPtr /*resolvable*/, Error error, const std::string & reason, RpmLevel /*unused*/ )
@@ -364,6 +373,19 @@ struct InstallResolvableReportReceiver : public callback::ReceiveReport<target::
 
   virtual void reportend()
   { _progress.reset(); }
+
+private:
+  void showProgress( Resolvable::constPtr resolvable_r )
+  {
+    Zypper & zypper = Zypper::instance();
+    _progress.reset( new Out::ProgressBar( zypper.out(),
+					   "install-resolvable",
+					   // TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
+					   str::Format(_("Installing: %s") ) % resolvable_r->asString(),
+					   zypper.runtimeData().rpm_pkg_current,
+					   zypper.runtimeData().rpm_pkgs_total ) );
+    (*_progress)->range( 100 );
+  }
 
 private:
   scoped_ptr<Out::ProgressBar>	_progress;
