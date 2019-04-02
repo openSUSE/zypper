@@ -431,6 +431,7 @@ namespace zypp
 	  // We need one, so "en" is the last resort
 	  const char *needone[] { "en" };
 	  ::pool_set_languages( _pool, needone, 1 );
+	  return;
 	}
 
 	std::vector<std::string> fallbacklist;
