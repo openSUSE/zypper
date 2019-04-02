@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Tue Apr  2 18:15:12 CEST 2019 - ma@suse.de
+
+- Prevent SEGV if the application sets an empty TextLocale (bsc#1127026)
+
+-------------------------------------------------------------------
 Mon Apr  1 08:49:45 UTC 2019 - Christophe Giboudeaux <christophe@krop.fr>
 
 - Fix build with CMake >= 3.14.0:
