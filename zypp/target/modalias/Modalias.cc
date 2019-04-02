@@ -54,8 +54,7 @@ namespace zypp
 #undef PATH_IS
       }
 
-      /** Recursively scan for modalias files and scan them to \a arg. */
-      void foreach_file_recursive( const Pathname & dir_r, Modalias::ModaliasList & arg )
+      void foreach_file_recursive( const Pathname & dir_r, std::set<std::string> & arg_r )
       {
 	AutoDispose<DIR *> dir( ::opendir( dir_r.c_str() ), ::closedir );
 	if ( ! dir )
@@ -70,21 +69,43 @@ namespace zypp
 	  if ( isBlackListed( dir_r, dirent->d_name ) )
 	    continue;
 
-	  PathInfo pi( dir_r / dirent->d_name, PathInfo::LSTAT );
-
-	  if ( pi.isDir() )
+	  Pathname path;	// lazy init as needed
+	  unsigned char d_type = dirent->d_type;
+	  if ( d_type == DT_UNKNOWN )
 	  {
-	    foreach_file_recursive( pi.path(), arg );
+	    path = dir_r/dirent->d_name;
+	    PathInfo pi( path, PathInfo::LSTAT );
+	    if ( pi.isDir() )
+	      d_type = DT_DIR;
+	    else if ( pi.isFile() )
+	      d_type = DT_REG;
 	  }
-	  else if ( pi.isFile() && ::strcmp( dirent->d_name, "modalias" ) == 0 )
+
+	  if ( d_type == DT_DIR )
 	  {
+	    if ( path.empty() )
+	      path = dir_r/dirent->d_name;
+	    foreach_file_recursive( path, arg_r );
+	  }
+	  else if ( d_type == DT_REG && ::strcmp( dirent->d_name, "modalias" ) == 0 )
+	  {
+	    if ( path.empty() )
+	      path = dir_r/dirent->d_name;
 	    // read modalias line from file
-	    std::ifstream str( pi.path().c_str() );
+	    std::ifstream str( path.c_str() );
 	    std::string line( iostr::getline( str ) );
 	    if ( ! line.empty() )
-	      arg.push_back( line );
+	      arg_r.insert( line );
 	  }
 	}
+      }
+
+      /** Recursively scan for modalias files and scan them to \a arg. */
+      void foreach_file_recursive( const Pathname & dir_r, Modalias::ModaliasList & arg_r )
+      {
+	std::set<std::string> arg;	// we want the aliases to be unified (the public API uses a vector)
+	foreach_file_recursive( dir_r, arg );
+	arg_r.insert( arg_r.end(), arg.begin(), arg.end() );
       }
     } // namespace
     ///////////////////////////////////////////////////////////////////
