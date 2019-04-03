@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Wed Apr  3 17:11:37 UTC 2019 - Christophe Giboudeaux <christophe@krop.fr>
+
+- Fix build with CMake >= 3.14
+  Starting with CMake 3.14, EXCLUDE_FROM_ALL now spreads from
+  directories to targets. 'make -C someSubdir' when 'someSubdir'
+  uses the 'EXCLUDE_FROM_ALL' keyword does nothing.
+- Remove unneeded CMake commands.
+
+-------------------------------------------------------------------
 Thu Mar 21 12:44:06 CET 2019 - ma@suse.de
 
 - Add Requires: libaugeas0 >= 1.10.0 (fixes #265)

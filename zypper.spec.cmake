@@ -144,12 +144,11 @@ cmake -DCMAKE_INSTALL_PREFIX=%{_prefix} \
       -DCMAKE_C_FLAGS_RELEASE:STRING="$RPM_OPT_FLAGS" \
       -DCMAKE_CXX_FLAGS_RELEASE:STRING="$RPM_OPT_FLAGS" \
       -DCMAKE_BUILD_TYPE=Release \
+      -DENABLE_BUILD_TESTS=ON \
       ..
 
 #gettextize -f
 make %{?_smp_mflags}
-make -C po %{?_smp_mflags} translations
-make -C tests %{?_smp_mflags}
 
 %check
 pushd build/tests
@@ -159,7 +158,6 @@ popd
 %install
 cd build
 make install DESTDIR=$RPM_BUILD_ROOT
-make -C po install DESTDIR=$RPM_BUILD_ROOT
 
 mkdir -p $RPM_BUILD_ROOT%{_prefix}/lib/zypper
 mkdir -p $RPM_BUILD_ROOT%{_prefix}/lib/zypper/commands
