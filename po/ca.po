@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-02-25 14:33+0100\n"
-"PO-Revision-Date: 2019-03-21 12:49+0000\n"
+"PO-Revision-Date: 2019-04-04 18:36+0000\n"
 "Last-Translator: David Medina <medipas@gmail.com>\n"
 "Language-Team: Catalan <https://l10n.opensuse.org/projects/zypper/master/ca/>"
 "\n"
@@ -5457,7 +5457,7 @@ msgstr "Esteu d'acord amb els termes de la llicència?"
 #: src/misc.cc:176
 msgid "Aborting installation due to the need for license confirmation."
 msgstr ""
-"Avortant la instal·lació a causa de la necessitat de confirmació de les "
+"S'avorta la instal·lació a causa de la necessitat de confirmació de les "
 "llicències."
 
 #. translators: %s is '--auto-agree-with-licenses'
@@ -5475,8 +5475,8 @@ msgstr ""
 #, c-format, boost-format
 msgid "Aborting installation due to user disagreement with %s %s license."
 msgstr ""
-"Avortant la instal·lació a causa del desacord de l'usuari amb la llicència "
-"de %s %s."
+"S'avorta la instal·lació a causa del desacord de l'usuari amb la llicència "
+"del següent: %s, %s."
 
 #: src/misc.cc:226
 msgid "License"

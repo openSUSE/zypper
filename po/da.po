@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-02-25 14:33+0100\n"
-"PO-Revision-Date: 2019-03-12 11:54+0000\n"
+"PO-Revision-Date: 2019-04-04 18:36+0000\n"
 "Last-Translator: scootergrisen <scootergrisen@gmail.com>\n"
 "Language-Team: Danish <https://l10n.opensuse.org/projects/zypper/master/da/>"
 "\n"
@@ -733,7 +733,7 @@ msgstr "Pakkelåse:"
 
 #: src/Command.cc:154
 msgid "Locale Management:"
-msgstr ""
+msgstr "Håndtering af lokalitet:"
 
 #: src/Command.cc:158
 msgid "Other Commands:"
@@ -997,16 +997,16 @@ msgstr "Læs ikke installerede pakker."
 
 #: src/Config.cc:804
 msgid "No config file is in use. Can not save options."
-msgstr ""
+msgstr "Der er ikke nogen konfigurationsfil i brug. Kan ikke gemme tilvalgene."
 
 #: src/Config.cc:815
 #, boost-format
 msgid "Option '%1%' saved in '%2%'."
-msgstr ""
+msgstr "Tilvalget '%1%' blev gemt i '%2%'."
 
 #: src/Config.cc:822
 msgid "Failed to save option."
-msgstr ""
+msgstr "Kunne ikke gemme tilvalget."
 
 #: src/PackageArgs.cc:208
 #, c-format, boost-format
@@ -1796,8 +1796,8 @@ msgstr[1] "Følgende %d rettelser kræver at systemet genstartes:"
 #, c-format, boost-format
 msgid "The following package requires a system reboot:"
 msgid_plural "The following %d packages require a system reboot:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Følgende pakke kræver en genstart af systemet:"
+msgstr[1] "Følgende %d pakker kræver en genstart af systemet:"
 
 #: src/Summary.cc:1374
 #, boost-format
@@ -2433,19 +2433,19 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/locale/addlocalecmd.cc:19
 msgid "addlocale (aloc) [OPTIONS] <LOCALE> ..."
-msgstr ""
+msgstr "addlocale (aloc) [TILVALG] <LOKALITET> ..."
 
 #: src/commands/locale/addlocalecmd.cc:20
 msgid "Add locale(s) to requested locales."
-msgstr ""
+msgstr "Tilføj lokalitet(er) til anmodede lokaliteter."
 
 #: src/commands/locale/addlocalecmd.cc:21
 msgid "Add given locale(s) to the list of requested locales."
-msgstr ""
+msgstr "Tilføj angivne lokalitet(er) til listen over anmodede lokaliteter."
 
 #: src/commands/locale/addlocalecmd.cc:32
 msgid "Do not install corresponding packages for given locale(s)."
-msgstr ""
+msgstr "Installer ikke tilhørende pakker for angivne lokalitet(er)."
 
 #: src/commands/locale/addlocalecmd.cc:56
 #, c-format, boost-format
@@ -2453,15 +2453,17 @@ msgid ""
 "Specify locale which shall be supported by the language code.\n"
 "Get a list of all available locales by calling '%s'."
 msgstr ""
+"Angiv den lokalitet som skal understøttes af sprogkoden.\n"
+"Hent en liste over alle tilgængelige lokaliteter ved at kalde '%s'."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/locale/localescmd.cc:17
 msgid "locales (lloc) [OPTIONS] [LOCALE] ..."
-msgstr ""
+msgstr "locales (lloc) [TILVALG] [LOKALITET] ..."
 
 #: src/commands/locale/localescmd.cc:18
 msgid "List requested locales (languages codes)."
-msgstr ""
+msgstr "Vis anmodende lokaliteter (sprogkoder)."
 
 #: src/commands/locale/localescmd.cc:19
 #, c-format, boost-format
@@ -2473,53 +2475,60 @@ msgid ""
 "can\n"
 "be installed by calling '%s'.\n"
 msgstr ""
+"Vis anmodede lokaliteter og tilhørende pakker.\n"
+"\n"
+"Kaldt uden parametre, viser de anmodede lokaliteter. Hvis\n"
+"lokalitetspakkerne for et anmodet sprog endnu ikke er på systemet, så kan\n"
+"de installeres ved at kalde '%s'.\n"
 
 #: src/commands/locale/localescmd.cc:35
 msgid "Show corresponding packages."
-msgstr ""
+msgstr "Vis tilhørende pakker."
 
 #: src/commands/locale/localescmd.cc:36
 msgid "List all available locales."
-msgstr ""
+msgstr "Vis alle tilgængelige lokaliteter."
 
 #: src/commands/locale/localescmd.cc:49
 msgid "Ignoring positional arguments because --all argument was provided."
-msgstr ""
+msgstr "Ignorerer positionelle argumenter da --all-argument blev angivet."
 
 #: src/commands/locale/localescmd.cc:76
 msgid "The locale(s) for which the information shall be printed."
-msgstr ""
+msgstr "Den lokalitet(er) som der skal udskrives information om."
 
 #: src/commands/locale/localescmd.cc:80
 msgid ""
 "Get all locales with lang code 'en' that have their own country code, "
 "excluding the fallback 'en':"
 msgstr ""
+"Hent alle lokaliteter med sprogkoden 'en' som har deres egen landekode, "
+"eksklusiv reserven 'en':"
 
 #: src/commands/locale/localescmd.cc:87
 msgid "Get all locales with lang code 'en' with or without country code:"
-msgstr ""
+msgstr "Hent alle lokaliteter med sprogkoden 'en' med eller uden landekode:"
 
 #: src/commands/locale/localescmd.cc:94
 msgid "Get the locale matching the argument exactly: "
-msgstr ""
+msgstr "Hent lokaliteten som matcher argumentet præcist: "
 
 #: src/commands/locale/localescmd.cc:101
 msgid "Get the list of packages which are available for 'de' and 'en':"
-msgstr ""
+msgstr "Hent listen over pakker som er tilgængelige for 'de' og 'en':"
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/locale/removelocalecmd.cc:17
 msgid "removelocale (rloc) [OPTIONS] <LOCALE> ..."
-msgstr ""
+msgstr "removelocale (rloc) [TILVALG] <LOKALITET> ..."
 
 #: src/commands/locale/removelocalecmd.cc:18
 msgid "Remove locale(s) from requested locales."
-msgstr ""
+msgstr "Fjern lokalitet(er) fra anmodede lokaliteter."
 
 #: src/commands/locale/removelocalecmd.cc:19
 msgid "Remove given locale(s) from the list of supported languages."
-msgstr ""
+msgstr "Fjern angivne lokalitet(er) fra listen over understøttede sprog."
 
 #: src/commands/locale/removelocalecmd.cc:34
 #, c-format, boost-format
@@ -2527,10 +2536,12 @@ msgid ""
 "Specify locales which shall be removed by the the language code.\n"
 "Get the list of requested locales by calling '%s'."
 msgstr ""
+"Angiv lokaliteter som skal fjernes af sprogkoden.\n"
+"Hent listen over anmodede lokaliteter ved at kalde '%s'."
 
 #: src/commands/locale/removelocalecmd.cc:46
 msgid "Do not remove corresponding packages for given locale(s)."
-msgstr ""
+msgstr "Fjern ikke tilhørende pakker for angive lokalitet(er)."
 
 # =============================================================================
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
@@ -3981,6 +3992,8 @@ msgid ""
 "For an extended search including not yet activated remote resources you may "
 "run '%1%' at any time."
 msgstr ""
+"For en omfattende søgning, inklusiv endnu ikke aktiveret fjernressourcer, så "
+"kan du når som helst køre '%1%'."
 
 #: src/commands/search/search-packages-hinthack.cc:99
 #, boost-format
@@ -4634,7 +4647,7 @@ msgstr "Kildepakkens navn er et krævet argument."
 
 #: src/commands/sourceinstall.cc:86
 msgid "Uninstalling source packages is not supported."
-msgstr ""
+msgstr "Afinstallation af kildepakker understøttes ikke."
 
 #: src/commands/subcommand.cc:52
 msgid "none"
@@ -5325,56 +5338,56 @@ msgstr "Bygningens binære pakke"
 #. translators: header of table column - is the language requested? (Yes/No)
 #: src/locales.cc:56 src/locales.cc:90
 msgid "Requested"
-msgstr ""
+msgstr "Anmodet"
 
 #: src/locales.cc:60
 msgid "Fallback"
-msgstr ""
+msgstr "Reserve"
 
 #. translators: header of table column - the language code, e.g. en_US
 #: src/locales.cc:86
 msgid "Code"
-msgstr ""
+msgstr "Kode"
 
 #. translators: header of table column - the language, e.g. English (United States)
 #: src/locales.cc:88
 msgid "Language"
-msgstr ""
+msgstr "Sprog"
 
 #: src/locales.cc:306
 #, c-format, boost-format
 msgid "Packages for %s (locale '%s', requested: %s):"
-msgstr ""
+msgstr "Pakker for %s (lokalitet '%s', anmodet: %s):"
 
 #: src/locales.cc:323
 #, c-format, boost-format
 msgid "Added locale: %s"
-msgstr ""
+msgstr "Tilføjet lokalitet: %s"
 
 #: src/locales.cc:326
 #, c-format, boost-format
 msgid "ERROR: cannot add %s"
-msgstr ""
+msgstr "FEJL: kan ikke tilføje %s"
 
 #: src/locales.cc:330
 #, c-format, boost-format
 msgid " %s is already requested."
-msgstr ""
+msgstr " %s er allerede anmodet."
 
 #: src/locales.cc:351
 #, c-format, boost-format
 msgid "Removed locale: %s"
-msgstr ""
+msgstr "Fjernet lokalitet: %s"
 
 #: src/locales.cc:354
 #, c-format, boost-format
 msgid "ERROR: cannot remove %s"
-msgstr ""
+msgstr "FEJL: kan ikke fjerne %s"
 
 #: src/locales.cc:358
 #, c-format, boost-format
 msgid "%s was not requested."
-msgstr ""
+msgstr "%s blev ikke anmodet."
 
 #. translators: this will show up if you press ctrl+c twice
 #: src/main.cc:31
@@ -6217,6 +6230,9 @@ msgid ""
 "updated by recent upgrades. They should be restarted to benefit from the "
 "latest updates. Run '%1%' to list these programs."
 msgstr ""
+"Der er kørende programmer som stadigvæk bruger filer og biblioteker som er "
+"slettet eller opdateret af nylige opgraderinger. De skal genstartes for at "
+"få gavn af de seneste opdateringer. Kør '%1%' for at vise programmerne."
 
 #: src/solve-commit.cc:481
 msgid "Update notifications were received from the following packages:"
@@ -6547,35 +6563,35 @@ msgstr "Kan ikke initialisere konfigurationsfil-fortolker."
 #: src/utils/Augeas.cc:510
 #, boost-format
 msgid "Malformed option name '%1%'."
-msgstr ""
+msgstr "Forkort udformet tilvalgsnavn '%1%'."
 
 #: src/utils/Augeas.cc:522
 msgid "Could not save the config file."
-msgstr ""
+msgstr "Kunne ikke gemme konfiguratonsfilen."
 
 #: src/utils/Augeas.cc:564
 #, boost-format
 msgid "Config file '%1%' exists but is not a file."
-msgstr ""
+msgstr "Konfigurationsfilen '%1%' findes men er ikke en fil."
 
 #: src/utils/Augeas.cc:580
 msgid "Could not load the config files."
-msgstr ""
+msgstr "Kunne ikke indlæse konfigurationsfilerne."
 
 #: src/utils/Augeas.cc:606
 #, boost-format
 msgid "Config file '%1%' does not exist."
-msgstr ""
+msgstr "Konfigurationsfilen '%1%' findes ikke."
 
 #. translator: %1% is the path to a config file, %2% is the name of an options inside the file
 #: src/utils/Augeas.cc:637
 #, boost-format
 msgid "%1%: Option '%2%' is defined multiple times. Using the last one."
-msgstr ""
+msgstr "%1%: Tilvalget '%2%' er defineret flere gange. Bruger den sidste."
 
 #: src/utils/Augeas.cc:658
 msgid "No config file is in use."
-msgstr ""
+msgstr "Der er ikke nogen konfigurationsfil i brug."
 
 #: src/utils/flags/exceptions.cc:22
 #, boost-format
@@ -6917,11 +6933,11 @@ msgstr "Prøver igen..."
 
 #: src/utils/prompt.cc:325
 msgid "always"
-msgstr ""
+msgstr "altid"
 
 #: src/utils/prompt.cc:325
 msgid "never"
-msgstr ""
+msgstr "aldrig"
 
 #: src/utils/prompt.cc:372
 msgid "Cannot read input: bad stream or EOF."
@@ -6944,7 +6960,7 @@ msgstr "Ugyldigt svar '%s'."
 #: src/utils/prompt.cc:415
 #, c-format, boost-format
 msgid "Ambiguous answer '%s'."
-msgstr ""
+msgstr "Flertydigt svar '%s'."
 
 #. translators: the %s are: 'y', 'yes' (translated), 'n', and 'no' (translated).
 #: src/utils/prompt.cc:423
@@ -6959,6 +6975,8 @@ msgid ""
 "If nothing else works enter '#1' to select the 1st option, '#2' for the 2nd "
 "one, ..."
 msgstr ""
+"Hvis intet andet virker så indtast '#1' for at vælge det første tilvalg, '#"
+"2' for det andet, ..."
 
 #~ msgid ""
 #~ "For an extended search including not yet activated remote resources you "
