@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Apr  4 13:24:40 CEST 2019 - ma@suse.de
+
+- Enhance scanning /sys for modaliases (bsc#1130161)
+- version 17.11.4 (9)
+
+-------------------------------------------------------------------
 Tue Apr  2 18:15:12 CEST 2019 - ma@suse.de
 
 - Prevent SEGV if the application sets an empty TextLocale (bsc#1127026)
