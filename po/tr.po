@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-02-25 14:33+0100\n"
-"PO-Revision-Date: 2019-03-12 11:54+0000\n"
+"PO-Revision-Date: 2019-04-09 16:50+0000\n"
 "Last-Translator: Murat Servan Kahraman <muratservan@outlook.com>\n"
 "Language-Team: Turkish <https://l10n.opensuse.org/projects/zypper/master/tr/>"
 "\n"
@@ -86,7 +86,7 @@ msgstr "Anahtar Oluşturma Tarihi:"
 
 #: src/callbacks/keyring.h:84
 msgid "Key Expires:"
-msgstr "Anahtar Son Geçerlilik:"
+msgstr "Anahtar Son Geçerlilik Tarihi:"
 
 #: src/callbacks/keyring.h:86
 msgid "Subkey:"
@@ -99,28 +99,28 @@ msgstr "Rpm Adı:"
 #: src/callbacks/keyring.h:113
 #, boost-format
 msgid "The gpg key signing file '%1%' has expired."
-msgstr "'%1%' dosyası imzalayan gpg anahtarının geçerlilik süresi sona erdi."
+msgstr "'%1%' dosyasını imzalayan gpg anahtarının geçerlilik süresi sona erdi."
 
 #: src/callbacks/keyring.h:119
 #, boost-format
 msgid "The gpg key signing file '%1%' will expire in %2% day."
 msgid_plural "The gpg key signing file '%1%' will expire in %2% days."
 msgstr[0] ""
-"'%1%' dosyası imzalayan gpg anahtarının geçerlilik süresi %2% gün içinde "
+"'%1%' dosyasını imzalayan gpg anahtarının geçerlilik süresi %2% gün içinde "
 "sona erecek."
 msgstr[1] ""
-"'%1%' dosyası imzalayan gpg anahtarının geçerlilik süresi %2% gün içinde "
+"'%1%' dosyasını imzalayan gpg anahtarının geçerlilik süresi %2% gün içinde "
 "sona erecek."
 
 #: src/callbacks/keyring.h:142
 #, c-format, boost-format
 msgid "Accepting an unsigned file '%s'."
-msgstr "imzalanmamış '%s' dosyası kabulediliyor."
+msgstr "İmzalanmamış bir '%s' dosyası kabul ediliyor."
 
 #: src/callbacks/keyring.h:146
 #, c-format, boost-format
 msgid "Accepting an unsigned file '%s' from repository '%s'."
-msgstr "'%s' deposundan imzalanmamış '%s' dosyası kabuledilior. "
+msgstr "İmzalanmamış bir '%s' dosyası '%s' deposundan kabul ediliyor."
 
 #. translator: %1% is a file name
 #: src/callbacks/keyring.h:156
@@ -138,16 +138,16 @@ msgstr "'%2%' deposundaki '%1%' dosyası imzalanmamış."
 #: src/callbacks/keyring.h:176
 #, c-format, boost-format
 msgid "File '%s' is unsigned, continue?"
-msgstr "'%s' imzalanmamış , devam edilsin mi?"
+msgstr "'%s' dosyası imzalanmamış, devam edilsin mi?"
 
 #. TranslatorExplanation: speaking of a file
 #: src/callbacks/keyring.h:180
-#, c-format, boost-format
+#, boost-format, c-format, fuzzy
 msgid "File '%s' from repository '%s' is unsigned, continue?"
 msgstr "'%s' deposundan imzalanmamış '%s' dosyası , devam edilsin mi?"
 
 #: src/callbacks/keyring.h:203
-#, c-format, boost-format
+#, boost-format, c-format, fuzzy
 msgid "Accepting file '%s' signed with an unknown key '%s'."
 msgstr "Kabul edilen %s dosyası bilinmeyen %s anahtarı ile imzalı."
 
