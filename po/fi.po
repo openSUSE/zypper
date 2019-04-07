@@ -23,7 +23,7 @@ msgstr ""
 "Project-Id-Version: zypper.fi\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-02-25 14:33+0100\n"
-"PO-Revision-Date: 2019-04-04 18:36+0000\n"
+"PO-Revision-Date: 2019-04-09 16:50+0000\n"
 "Last-Translator: Tommi Nieminen <software@legisign.org>\n"
 "Language-Team: Finnish <https://l10n.opensuse.org/projects/zypper/master/fi/>"
 "\n"
@@ -2309,7 +2309,7 @@ msgstr "Valitse paketit ainoastaan nimen perusteella."
 
 #: src/commands/installremove.cc:55
 msgid "Select packages solely by capability."
-msgstr ""
+msgstr "Valitse paketit yksin ominaisuuksien mukaan."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/installremove.cc:74
@@ -2545,15 +2545,15 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/locale/removelocalecmd.cc:17
 msgid "removelocale (rloc) [OPTIONS] <LOCALE> ..."
-msgstr ""
+msgstr "removelocale (rloc) [VALINNAT] <MAA-ASETUS>…"
 
 #: src/commands/locale/removelocalecmd.cc:18
 msgid "Remove locale(s) from requested locales."
-msgstr ""
+msgstr "Poista maa-asetukset pyydetyistä."
 
 #: src/commands/locale/removelocalecmd.cc:19
 msgid "Remove given locale(s) from the list of supported languages."
-msgstr ""
+msgstr "Poista annetut maa-asetukset tuettujen kielten luettelosta."
 
 #: src/commands/locale/removelocalecmd.cc:34
 #, c-format, boost-format
@@ -2561,10 +2561,12 @@ msgid ""
 "Specify locales which shall be removed by the the language code.\n"
 "Get the list of requested locales by calling '%s'."
 msgstr ""
+"Määritä maa-asetukset, jotka kielikoodin perusteella poistetaan.\n"
+"Pyydettyjen maa-asetusten luettelon saat komennolla ”%s”."
 
 #: src/commands/locale/removelocalecmd.cc:46
 msgid "Do not remove corresponding packages for given locale(s)."
-msgstr ""
+msgstr "Älä poista annettuja maa-asetuksia vastaavia paketteja."
 
 # =============================================================================
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
@@ -2603,7 +2605,7 @@ msgstr "Virhe lukittaessa pakettia:"
 # =============================================================================
 #: src/commands/locks/clean.cc:16
 msgid "cleanlocks (cl)"
-msgstr ""
+msgstr "cleanlocks (cl)"
 
 #. translators: command summary
 #: src/commands/locks/clean.cc:18
@@ -2640,9 +2642,8 @@ msgid "Name"
 msgstr "Nimi"
 
 #: src/commands/locks/list.cc:137
-#, fuzzy
 msgid "Matches"
-msgstr "Korjauspäivitykset"
+msgstr "Osumat"
 
 #. translators: Table column header
 #. translators: type (general header)
@@ -2672,21 +2673,18 @@ msgstr "(mikä tahansa)"
 
 #. translators: property name; short; used like "Name: value"
 #: src/commands/locks/list.cc:195
-#, fuzzy
 msgid "Keep installed"
-msgstr "ei asennettu"
+msgstr "Säilytä asennettuna"
 
 #. translators: property name; short; used like "Name: value"
 #: src/commands/locks/list.cc:203
-#, fuzzy
 msgid "Do not install"
-msgstr "ei asennettu"
+msgstr "Älä asenna"
 
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
 #: src/commands/locks/list.cc:256
-#, fuzzy
 msgid "locks (ll) [OPTIONS]"
-msgstr "näyttää kaikki valinnat"
+msgstr "locks (ll) [VALINNAT]"
 
 #: src/commands/locks/list.cc:257
 msgid "List current package locks."
@@ -2694,11 +2692,11 @@ msgstr "Näyttää listan lukituksista."
 
 #: src/commands/locks/list.cc:285
 msgid "Show the number of resolvables matched by each lock."
-msgstr ""
+msgstr "Näytä kutakin lukkoa vastaavien ratkaistavien määrä."
 
 #: src/commands/locks/list.cc:286
 msgid "List the resolvables matched by each lock."
-msgstr ""
+msgstr "Näytä kutakin lukkoa vastaavat ratkaistavat."
 
 #: src/commands/locks/list.cc:300
 msgid "Error reading the locks file:"
@@ -2740,11 +2738,11 @@ msgid "No lock has been removed."
 msgstr "Lukituksia ei poistettu."
 
 #: src/commands/locks/remove.cc:98
-#, fuzzy, c-format
+#, c-format
 msgid "%zu lock has been successfully removed."
 msgid_plural "%zu locks have been successfully removed."
-msgstr[0] "Lukon %zu poistaminen onnistui."
-msgstr[1] "%zu lukkoa poistettiin onnistuneesti."
+msgstr[0] "%zu lukon poistaminen onnistui."
+msgstr[1] "%zu lukon poistaminen onnistui."
 
 #: src/commands/locks/remove.cc:105
 msgid "Problem removing the package lock:"
@@ -2753,7 +2751,7 @@ msgstr "Virhe pakettilukon poistamisessa:"
 #. translators: command summary: needs-rebooting
 #: src/commands/needs-rebooting.cc:22
 msgid "Check if the needs-reboot flag was set."
-msgstr ""
+msgstr "Tarkista, asetettiinko needs-reboot-lippu."
 
 #: src/commands/needs-rebooting.cc:23
 msgid ""
@@ -2762,28 +2760,35 @@ msgid ""
 "Exit code ZYPPER_EXIT_INF_REBOOT_NEEDED indicates that a reboot is needed, "
 "otherwise the exit code is set to ZYPPER_EXIT_OK."
 msgstr ""
+"Tarkistaa, asettiko aiempi ydinkirjaston tai -palvelun päivitys tai  asennus "
+"needs-reboot-lipun.\n"
+"Paluukoodi ZYPPER_EXIT_INF_REBOOT_NEEDED osoittaa uudelleenkäynnistyksen "
+"olevan tarpeen, muuten\n"
+"paluukoodi on ZYPPER_EXIT_OK."
 
 #: src/commands/needs-rebooting.cc:35
 msgid "Core libraries or services have been updated."
-msgstr ""
+msgstr "Ydinkirjastoja tai -palveluja on päivitetty."
 
 #: src/commands/needs-rebooting.cc:36
 msgid ""
 "Reboot is required to ensure that your system benefits from these updates."
 msgstr ""
+"Uudelleenkäynnistys vaaditaan, jotta järjestelmä hyötyisi näistä "
+"päivityksistä."
 
 #: src/commands/needs-rebooting.cc:41
 msgid "No core libraries or services have been updated."
-msgstr ""
+msgstr "Ydinkirjastoja tai -palveluja ei päivitetty."
 
 #: src/commands/needs-rebooting.cc:42
 msgid "Reboot is probably not necessary."
-msgstr ""
+msgstr "Uudelleenkäynnistys ei liene tarpeen."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/nullcommands.cc:17
 msgid "moo"
-msgstr ""
+msgstr "moo"
 
 #. translators: command summary
 #. translators: command description
@@ -2844,7 +2849,7 @@ msgstr "Tällä komennolla on tyhmä täytäntöönpano joka palauttaa aina 0."
 
 #: src/commands/optionsets.cc:33
 msgid "Don't change anything, just report what would be done."
-msgstr ""
+msgstr "Älä muuta mitään, kerro vain mitä tehtäisiin."
 
 #. translators: -r, --repo <ALIAS|#|URI>
 #: src/commands/optionsets.cc:65
@@ -2854,7 +2859,7 @@ msgstr "Käyttää vain määritettyä asennuslähdettä."
 #: src/commands/optionsets.cc:85
 #, c-format, boost-format
 msgid "Option '--%s' overrides a previously set download mode."
-msgstr ""
+msgstr "Valitsin ”--%s” ohittaa aiemmin asetetun lataustilan."
 
 #: src/commands/optionsets.cc:114
 #, c-format, boost-format
@@ -2947,13 +2952,13 @@ msgstr "Ohita vuorovaikutteiset päivitykset."
 #. translators: --sort-by-name
 #: src/commands/optionsets.cc:370
 msgid "Sort packages by name (default)."
-msgstr ""
+msgstr "Lajittele paketit nimen mukaan (oletus)."
 
 #. translators: --sort-by-repo
 #. translators: --sort-by-catalog
 #: src/commands/optionsets.cc:380 src/commands/optionsets.cc:391
 msgid "Sort packages by repository."
-msgstr ""
+msgstr "Lajittele paketit asennuslähteen mukaan."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/patch.cc:24
@@ -2976,11 +2981,14 @@ msgid ""
 "is ignored, if the patch command must update the update stack first. Can not "
 "be combined with --updatestack-only."
 msgstr ""
+"Yritä lisäksi päivittää kaikki paketit, joita korjaus ei koske. Valitsin "
+"jätetään huomiotta, jos korjauskomennon on ensin päivitettävä päivityspino. "
+"Ei voida yhdistää valitsimeen --updatestack-only."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/patchcheck.cc:17
 msgid "patch-check (pchk) [OPTIONS]"
-msgstr ""
+msgstr "patch-check (pchk) [VALINNAT]"
 
 #. translators: command summary: patch-check, pchk
 #: src/commands/patchcheck.cc:19
@@ -2993,26 +3001,22 @@ msgid ""
 "Display stats about applicable patches. The command returns 100 if needed "
 "patches were found, 101 if there is at least one needed security patch."
 msgstr ""
+"Näytä sopivien korjausten tilastot. Komento palauttaa 100, jos tarvittavia "
+"korjauksia löytyi, 101, jos vähintään yksi on vaadittu turvallisuuskorjaus."
 
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
 #: src/commands/ps.cc:27
-#, fuzzy
 msgid "ps [OPTIONS]"
-msgstr "näyttää kaikki valinnat"
+msgstr "ps [VALINNAT]"
 
 #. translators: command description
 #: src/commands/ps.cc:29
-#, fuzzy
 msgid ""
 "List running processes which might still use files and libraries deleted by "
 "recent upgrades."
 msgstr ""
-"ps\n"
-"\n"
-"Listaa käynnissä olevat prosessit, jotka käyttävät edellisessä päivityksessä "
-"poistettuja tiedostoja.\n"
-"\n"
-"Tällä komennolla ei ole valitsimia.\n"
+"Luettele käynnissä olevat prosessit, jotka voivat yhä käyttää äskettäisten "
+"päivitysten poistamia tiedostoja ja kirjastoja."
 
 #. translators: -s, --short
 #: src/commands/ps.cc:46
@@ -3021,6 +3025,9 @@ msgid ""
 "processes which are associated with a system service. Given three times, "
 "list the associated system service names only."
 msgstr ""
+"Luo lyhyt taulukko ilman poistettuja tiedostoja. Kahdesti annettuna näyttää "
+"vain järjestelmäpalveluun kytketyt prosessit. Kolmesti annettuna luettelee "
+"vain kytketyt järjestelmäpalvelut."
 
 #. translators: --print <format>
 #: src/commands/ps.cc:49
