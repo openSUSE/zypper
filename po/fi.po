@@ -20,7 +20,7 @@ msgstr ""
 "Project-Id-Version: zypp.fi\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-02-27 13:31+0100\n"
-"PO-Revision-Date: 2018-02-15 11:35+0000\n"
+"PO-Revision-Date: 2019-04-09 16:45+0000\n"
 "Last-Translator: Tommi Nieminen <software@legisign.org>\n"
 "Language-Team: Finnish <https://l10n.opensuse.org/projects/libzypp/master/fi/"
 ">\n"
@@ -29,7 +29,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 2.18\n"
+"X-Generator: Weblate 3.3\n"
 
 #. dubious: Throw on malformed known types, otherwise log a warning.
 #: zypp/CheckSum.cc:136
@@ -440,7 +440,7 @@ msgstr "Ranska"
 #. :FRA:250:
 #: zypp/CountryCode.cc:231
 msgid "Metropolitan France"
-msgstr "Metropolitan France"
+msgstr "Ranskan suurkaupungit"
 
 # GH
 #. :FXX:249:
@@ -3977,20 +3977,20 @@ msgstr[1] "(vanhenee %d päivässä)"
 #: zypp/RepoInfo.cc:517
 #, boost-format
 msgid "Looking for gpg key ID %1% in cache %2%."
-msgstr ""
+msgstr "Etsitään GPG-avainta %1% välimuistista %2%."
 
 #. translator: %1% is a gpg key ID like 3DBDC284
 #. %2% is a repositories name
 #: zypp/RepoInfo.cc:545
 #, boost-format
 msgid "Looking for gpg key ID %1% in repository %2%."
-msgstr ""
+msgstr "Etsitään GPG-avainta %1% asennuslähteestä %2%."
 
 #. translator: %1% is a repositories name
 #: zypp/RepoInfo.cc:569
 #, boost-format
 msgid "Repository %1% does not define additional 'gpgkey=' URLs."
-msgstr ""
+msgstr "Asennuslähde %1% ei ole asettanut ”gpgkey=”-lisäverkko-osoitteita."
 
 #: zypp/RepoManager.cc:314
 #, boost-format
@@ -4265,6 +4265,7 @@ msgid ""
 "Visit the SUSE Customer Center to check whether your registration is valid "
 "and has not expired."
 msgstr ""
+"Tarkista SUSEn asiakaskeskuksessa käymällä, onko rekisteröitymisesi voimassa."
 
 #: zypp/media/MediaCurl.cc:1141
 msgid ""
@@ -4407,7 +4408,7 @@ msgstr "Aikakatkaisu avattaessa \"%s\"."
 #: zypp/media/MediaException.cc:195
 #, c-format, boost-format
 msgid "Downloaded data exceeded the expected filesize '%s' of '%s'."
-msgstr ""
+msgstr "Ladattu tieto ylittää odotetun tiedostokoon ”%s”/”%s”."
 
 #: zypp/media/MediaException.cc:203
 #, c-format, boost-format
@@ -4848,13 +4849,13 @@ msgstr "poista %s"
 #: zypp/target/RpmPostTransCollector.cc:103
 #, boost-format
 msgid "Executing %%posttrans script '%1%'"
-msgstr ""
+msgstr "Suoritetaan %%posttrans-skriptiä ”%1%”"
 
 #. show a final message
 #: zypp/target/RpmPostTransCollector.cc:161
 #, c-format, boost-format
 msgid "Executing %posttrans scripts"
-msgstr ""
+msgstr "Suoritetaan %posttrans-skriptejä"
 
 #: zypp/target/TargetException.cc:28
 msgid "Installation has been aborted as directed."
