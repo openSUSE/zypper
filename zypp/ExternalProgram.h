@@ -231,7 +231,7 @@ namespace zypp {
       void start_program (const char *const *argv, const Environment & environment,
     			Stderr_Disposition stderr_disp = Normal_Stderr,
     			int stderr_fd = -1, bool default_locale = false,
-    			const char* root = NULL, bool switch_pgid = false);
+    			const char* root = NULL, bool switch_pgid = false, bool die_with_parent = false );
 
     };
 

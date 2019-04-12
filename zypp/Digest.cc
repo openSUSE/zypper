@@ -187,26 +187,21 @@ namespace zypp {
 
     std::string Digest::digest()
     {
-      if(!_dp->maybeInit())
-    	return std::string();
+      return digestVectorToString( digestVector() );
+    }
 
-      if(!_dp->finalized)
+    string Digest::digestVectorToString(const std::vector<unsigned char> &vec)
+    {
+      if ( vec.empty() )
+        return std::string();
+
+      std::vector<char> resData ( vec.size()*2 + 1, '\0' );
+      char *mdtxt = &resData[0];
+      for(unsigned i = 0; i < vec.size(); ++i)
       {
-      if(!EVP_DigestFinal_ex(_dp->mdctx.get(), _dp->md_value, &_dp->md_len))
-    	    return std::string();
-
-    	_dp->finalized = true;
+        ::snprintf( mdtxt+(i*2), 3, "%02hhx", vec[i]);
       }
-
-      char mdtxt[_dp->md_len*2 + 1];
-      mdtxt[_dp->md_len*2] = '\0';
-
-      for(unsigned i = 0; i < _dp->md_len; ++i)
-      {
-    	::snprintf(mdtxt + i*2, 3, "%02hhx", _dp->md_value[i]);
-      }
-
-      return std::string(mdtxt);
+      return std::string( resData.data() );
     }
 
     std::vector<unsigned char> Digest::digestVector()
@@ -250,26 +245,36 @@ namespace zypp {
       return true;
     }
 
+    bool Digest::update(istream &is, size_t bufsize)
+    {
+      if( is )
+        return false;
+
+      char buf[bufsize];
+
+      while(is.good())
+      {
+        size_t readed;
+        is.read(buf, bufsize);
+        readed = is.gcount();
+        if(readed && !update(buf, readed))
+          return false;
+      }
+
+      return true;
+    }
+
     std::string Digest::digest(const std::string& name, std::istream& is, size_t bufsize)
     {
       if(name.empty() || !is)
     	return string();
 
-      char buf[bufsize];
-
       Digest digest;
       if(!digest.create(name))
-    	return string();
+        return string();
 
-
-      while(is.good())
-      {
-        int readed;
-        is.read(buf, bufsize);
-    	readed = is.gcount();
-        if(readed && !digest.update(buf, readed))
-    	    return string();
-      }
+      if ( !digest.update( is, bufsize ))
+        return string();
 
       return digest.digest();
     }

@@ -57,6 +57,11 @@ MediaBlockList::setFileChecksum(std::string ctype, int cl, unsigned char *c)
   memcpy(&fsum[0], c, cl);
 }
 
+const std::vector<unsigned char> &MediaBlockList::getFileChecksum()
+{
+  return fsum;
+}
+
 bool
 MediaBlockList::createFileDigest(Digest &digest) const
 {
@@ -202,6 +207,30 @@ MediaBlockList::checkChecksum(size_t blkno, const unsigned char *buf, size_t buf
     return false;
   dig.update((const char *)buf, blocks[blkno].size);
   return verifyDigest(blkno, dig);
+}
+
+std::vector<unsigned char> MediaBlockList::getChecksum(size_t blkno)
+{
+  if ( !haveChecksum(blkno) )
+    return {};
+
+  std::vector<unsigned char> buf ( chksumlen, '\0' );
+  memcpy( buf.data(), chksums.data()+(chksumlen * blkno), chksumlen );
+
+  std::vector<unsigned char> buf2 ( &chksums[chksumlen * blkno], &chksums[ ( chksumlen * ( blkno + 1 ) ) ] );
+
+  std::string e;
+  for (int j = 0; j < buf.size(); j++)
+    e += zypp::str::form("%02hhx", buf[j]);
+
+  std::string b;
+  for (int j = 0; j < buf2.size(); j++)
+    b += zypp::str::form("%02hhx", buf2[j]);
+
+  std::cout << "BUF 1 : " << e << std::endl;
+  std::cout << "BUF 2 : " << b << std::endl;
+
+  return buf;
 }
 
 // specialized version of checkChecksum that can deal with a "rotated" buffer

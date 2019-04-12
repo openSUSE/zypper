@@ -99,6 +99,13 @@ namespace zypp {
     	 * */
     	bool update(const char* bytes, size_t len);
 
+        /** \brief feed data into digest computation algorithm
+    	 * @param is
+    	 * @param bufsize
+    	 * @return whether an error occured
+    	 * */
+        bool update(std::istream& is, size_t bufsize = 4096);
+
     	/** \brief get hex string representation of the digest
     	 *
     	 * this function will finalize the digest computation. calls to update
@@ -107,6 +114,12 @@ namespace zypp {
     	 * @return hex string representation of the digest
     	 * */
     	std::string digest();
+
+        /** \brief get hex string representation of the digest vector given as parameter
+    	 *
+    	 * @return hex string representation of the digest
+    	 * */
+        static std::string digestVectorToString ( const std::vector<unsigned char> &vec );
 
     	/** \brief get vector of unsigned char representation of the digest
     	 *

@@ -18,6 +18,7 @@
 #include <fcntl.h>
 #include <pty.h> // openpty
 #include <stdlib.h> // setenv
+#include <sys/prctl.h> // prctl(), PR_SET_PDEATHSIG
 
 #include <cstring> // strsignal
 #include <iostream>
@@ -183,7 +184,7 @@ namespace zypp {
 					 Stderr_Disposition stderr_disp,
 					 int stderr_fd,
 					 bool default_locale,
-					 const char * root , bool switch_pgid)
+					 const char * root , bool switch_pgid, bool die_with_parent )
     {
       pid = -1;
       _exitStatus = 0;
@@ -283,6 +284,8 @@ namespace zypp {
     	}
       }
 
+      pid_t ppid_before_fork = ::getpid();
+
       // Create module process
       if ((pid = fork()) == 0)
       {
@@ -379,6 +382,23 @@ namespace zypp {
     	for ( int i = ::getdtablesize() - 1; i > 2; --i ) {
     	  ::close( i );
     	}
+
+        if ( die_with_parent ) {
+          // process dies with us
+          int r = prctl(PR_SET_PDEATHSIG, SIGTERM);
+          if (r == -1) {
+            //ignore if it did not work, worst case the process lives on after the parent dies
+            std::cerr << "Failed to set PR_SET_PDEATHSIG" << endl;// After fork log on stderr too
+          }
+
+          // test in case the original parent exited just
+          // before the prctl() call
+          pid_t ppidNow = getppid();
+          if (ppidNow != ppid_before_fork) {
+            std::cerr << "PPID changed from "<<ppid_before_fork<<" to "<< ppidNow << endl;// After fork log on stderr too
+            _exit(128);
+          }
+        }
 
     	execvp(argv[0], const_cast<char *const *>(argv));
         // don't want to get here
