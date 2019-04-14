@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-02-25 14:33+0100\n"
-"PO-Revision-Date: 2018-11-02 15:00+0000\n"
+"PO-Revision-Date: 2019-04-18 16:48+0000\n"
 "Last-Translator: Kukuh Syafaat <syafaatkukuh@gmail.com>\n"
 "Language-Team: Indonesian <https://l10n.opensuse.org/projects/zypper/master/"
 "id/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 2.18\n"
+"X-Generator: Weblate 3.3\n"
 
 #: src/SolverRequester.h:52
 #, boost-format
@@ -515,11 +515,11 @@ msgstr "Ini adalah alias untuk '%s'."
 
 #: src/commands/commandhelpformatter.h:107
 msgid "Examples:"
-msgstr ""
+msgstr "Contoh:"
 
 #: src/commands/commandhelpformatter.h:110
 msgid "Arguments:"
-msgstr ""
+msgstr "Argumen:"
 
 #: src/commands/commandhelpformatter.h:123 src/utils/flags/zyppflags.cc:582
 msgid "Command options:"
@@ -581,6 +581,7 @@ msgstr ""
 #: src/commands/commonflags.h:45
 msgid "Consider only patches which affect the package management itself."
 msgstr ""
+"Pertimbangkan hanya tambalan yang memengaruhi manajemen paket itu sendiri."
 
 #: src/output/Out.h:26 src/repos.cc:126 src/repos.cc:154
 msgid "Yes"
@@ -690,7 +691,7 @@ msgstr "YYYY-MM-DD"
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:53
 msgid "MODE"
-msgstr ""
+msgstr "MODE"
 
 #. TranslatorExplanation These are reasons for various failures.
 #: src/utils/prompt.h:185
@@ -711,7 +712,7 @@ msgstr "Galat"
 
 #: src/Command.cc:93
 msgid "Invalid command"
-msgstr ""
+msgstr "Perintah tidak valid"
 
 #: src/Command.cc:111
 msgid "Repository Management:"
@@ -739,7 +740,7 @@ msgstr "Kunci Paket:"
 
 #: src/Command.cc:154
 msgid "Locale Management:"
-msgstr ""
+msgstr "Manajemen Locale:"
 
 #: src/Command.cc:158
 msgid "Other Commands:"
@@ -762,7 +763,7 @@ msgstr "Gaya tabel %d tidak valid."
 #: src/Config.cc:54
 #, c-format, boost-format
 msgid " Use an integer number from %d to %d"
-msgstr ""
+msgstr " Gunakan bilangan bulat dari %d hingga %d"
 
 #: src/Config.cc:248
 msgid "The path specified in the --root option must be absolute."
@@ -865,6 +866,7 @@ msgstr "Abaikan paket yang tidak dikenal."
 msgid ""
 "Terse output for machine consumption. Implies --no-abbrev and --no-color."
 msgstr ""
+"Keluaran terse untuk konsumsi mesin. Menyiratkan --no-abbrev dan --no-color."
 
 #. translators: --reposd-dir, -D <DIR>
 #: src/Config.cc:487
@@ -1009,15 +1011,16 @@ msgstr "Jangan membaca paket yang dipasang."
 #: src/Config.cc:804
 msgid "No config file is in use. Can not save options."
 msgstr ""
+"Tidak ada berkas konfigurasi yang digunakan. Tidak dapat menyimpan opsi."
 
 #: src/Config.cc:815
 #, boost-format
 msgid "Option '%1%' saved in '%2%'."
-msgstr ""
+msgstr "Opsi '%1%' disimpan di '%2%'."
 
 #: src/Config.cc:822
 msgid "Failed to save option."
-msgstr ""
+msgstr "Gagal menyimpan opsi."
 
 #: src/PackageArgs.cc:208
 #, c-format, boost-format
@@ -1159,6 +1162,8 @@ msgid ""
 "There is an update candidate for '%s' from vendor '%s', while the current "
 "vendor is '%s'. Use '%s' to install this candidate."
 msgstr ""
+"Ada kandidat pemutakhiran untuk '%s' dari vendor '%s', sedangkan vendor saat "
+"ini adalah '%s'. Gunakan '%s' untuk memasang kandidat ini."
 
 #: src/RequestFeedback.cc:132
 #, c-format, boost-format
@@ -1743,7 +1748,7 @@ msgstr[0] "%d Tambalan berikut ini perlu memulai ulang sistem:"
 #, c-format, boost-format
 msgid "The following package requires a system reboot:"
 msgid_plural "The following %d packages require a system reboot:"
-msgstr[0] ""
+msgstr[0] "Paket %d berikut ini membutuhkan mulai ulang sistem:"
 
 #: src/Summary.cc:1374
 #, boost-format
@@ -2184,6 +2189,11 @@ msgid ""
 "unconditionally on small or minimal systems, as it may easily add a large "
 "number of packages."
 msgstr ""
+"Pasang paket baru yang ditambahkan direkomendasikan oleh yang sudah "
+"dipasang. Perintah ini pada dasarnya mengevaluasi kembali rekomendasi semua "
+"paket yang dipasang dan mengisi sistem yang sesuai. Anda tidak ingin "
+"menyebutnya tanpa syarat pada sistem kecil atau minimal, karena dapat dengan "
+"mudah menambahkan sejumlah besar paket."
 
 #. translators: command description, %1% is a zypper command
 #: src/commands/inrverify.cc:98
@@ -2193,6 +2203,9 @@ msgid ""
 "supporting available hardware, languages or filesystems. Useful after having "
 "added e.g. new hardware or driver repos."
 msgstr ""
+"Disebut sebagai '%1%', itu membatasi perintah untuk hanya mencari paket yang "
+"mendukung perangkat keras, bahasa atau sistem berkas yang tersedia. Berguna "
+"setelah menambahkan mis. repo perangkat keras atau penggerak baru."
 
 #. translators: command description
 #: src/commands/inrverify.cc:101
@@ -2209,7 +2222,7 @@ msgstr "Pilih paket dengan nama biasa, bukan berdasarkan kapabilitas."
 
 #: src/commands/installremove.cc:55
 msgid "Select packages solely by capability."
-msgstr ""
+msgstr "Pilih paket hanya berdasarkan kemampuan."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/installremove.cc:74
@@ -2363,19 +2376,19 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/locale/addlocalecmd.cc:19
 msgid "addlocale (aloc) [OPTIONS] <LOCALE> ..."
-msgstr ""
+msgstr "addlocale (aloc) [OPSI] <LOCALE> ..."
 
 #: src/commands/locale/addlocalecmd.cc:20
 msgid "Add locale(s) to requested locales."
-msgstr ""
+msgstr "Tambah locale ke locale yang diminta."
 
 #: src/commands/locale/addlocalecmd.cc:21
 msgid "Add given locale(s) to the list of requested locales."
-msgstr ""
+msgstr "Tambah locale yang diberikan ke daftar locale yang diminta."
 
 #: src/commands/locale/addlocalecmd.cc:32
 msgid "Do not install corresponding packages for given locale(s)."
-msgstr ""
+msgstr "Jangan memasang paket yang sesuai untuk locale yang diberikan."
 
 #: src/commands/locale/addlocalecmd.cc:56
 #, c-format, boost-format
@@ -2383,15 +2396,17 @@ msgid ""
 "Specify locale which shall be supported by the language code.\n"
 "Get a list of all available locales by calling '%s'."
 msgstr ""
+"Tentukan locale yang harus didukung oleh kode bahasa.\n"
+"Dapatkan daftar semua locale yang tersedia dengan memanggil '%s'."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/locale/localescmd.cc:17
 msgid "locales (lloc) [OPTIONS] [LOCALE] ..."
-msgstr ""
+msgstr "locales (lloc) [OPSI] [LOCALE] ..."
 
 #: src/commands/locale/localescmd.cc:18
 msgid "List requested locales (languages codes)."
-msgstr ""
+msgstr "Daftar locale yang diminta (kode bahasa)."
 
 #: src/commands/locale/localescmd.cc:19
 #, c-format, boost-format
@@ -2403,53 +2418,61 @@ msgid ""
 "can\n"
 "be installed by calling '%s'.\n"
 msgstr ""
+"Daftar locale yang diminta dan paket yang sesuai.\n"
+"\n"
+"Dipanggil tanpa argumen, daftar lokasi yang diminta. Jika\n"
+"paket lokal untuk bahasa yang diminta belum ada di sistem, mereka bisa\n"
+"dipasang dengan memanggil '%s'.\n"
 
 #: src/commands/locale/localescmd.cc:35
 msgid "Show corresponding packages."
-msgstr ""
+msgstr "Tampilkan paket yang sesuai."
 
 #: src/commands/locale/localescmd.cc:36
 msgid "List all available locales."
-msgstr ""
+msgstr "Daftar semua locale yang tersedia."
 
 #: src/commands/locale/localescmd.cc:49
 msgid "Ignoring positional arguments because --all argument was provided."
-msgstr ""
+msgstr "Mengabaikan argumen posisi karena argumen --all diberikan."
 
 #: src/commands/locale/localescmd.cc:76
 msgid "The locale(s) for which the information shall be printed."
-msgstr ""
+msgstr "Locale tempat informasi harus dicetak."
 
 #: src/commands/locale/localescmd.cc:80
 msgid ""
 "Get all locales with lang code 'en' that have their own country code, "
 "excluding the fallback 'en':"
 msgstr ""
+"Dapatkan semua locale dengan kode bahasa 'en' yang memiliki kode negara "
+"sendiri, tidak termasuk fallback 'en':"
 
 #: src/commands/locale/localescmd.cc:87
 msgid "Get all locales with lang code 'en' with or without country code:"
 msgstr ""
+"Dapatkan semua locale dengan kode bahasa 'en' dengan atau tanpa kode negara:"
 
 #: src/commands/locale/localescmd.cc:94
 msgid "Get the locale matching the argument exactly: "
-msgstr ""
+msgstr "Dapatkan locale yang cocok dengan argumen yang tepat: "
 
 #: src/commands/locale/localescmd.cc:101
 msgid "Get the list of packages which are available for 'de' and 'en':"
-msgstr ""
+msgstr "Dapatkan daftar paket yang tersedia untuk 'de' dan 'en':"
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/locale/removelocalecmd.cc:17
 msgid "removelocale (rloc) [OPTIONS] <LOCALE> ..."
-msgstr ""
+msgstr "removelocale (rloc) [OPSI] <LOCALE> ..."
 
 #: src/commands/locale/removelocalecmd.cc:18
 msgid "Remove locale(s) from requested locales."
-msgstr ""
+msgstr "Hapus locale dari locale yang diminta."
 
 #: src/commands/locale/removelocalecmd.cc:19
 msgid "Remove given locale(s) from the list of supported languages."
-msgstr ""
+msgstr "Hapus locale yang diberikan dari daftar bahasa yang didukung."
 
 #: src/commands/locale/removelocalecmd.cc:34
 #, c-format, boost-format
@@ -2457,10 +2480,12 @@ msgid ""
 "Specify locales which shall be removed by the the language code.\n"
 "Get the list of requested locales by calling '%s'."
 msgstr ""
+"Tentukan locale yang akan dihapus oleh kode bahasa.\n"
+"Dapatkan daftar locale yang diminta dengan memanggil '%s'."
 
 #: src/commands/locale/removelocalecmd.cc:46
 msgid "Do not remove corresponding packages for given locale(s)."
-msgstr ""
+msgstr "Jangan hapus paket yang sesuai dengan locale yang diberikan."
 
 # =============================================================================
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
@@ -2739,7 +2764,7 @@ msgstr "Perintah ini memiliki implementasi dummy yang selalu mengembalikan 0."
 
 #: src/commands/optionsets.cc:33
 msgid "Don't change anything, just report what would be done."
-msgstr ""
+msgstr "Jangan mengubah apa pun, cukup laporkan apa yang akan dilakukan."
 
 #. translators: -r, --repo <ALIAS|#|URI>
 #: src/commands/optionsets.cc:65
@@ -2749,7 +2774,7 @@ msgstr "Bekerja hanya dengan repositori yang ditentukan."
 #: src/commands/optionsets.cc:85
 #, c-format, boost-format
 msgid "Option '--%s' overrides a previously set download mode."
-msgstr ""
+msgstr "Opsi '-%s' menimpa mode unduhan yang ditetapkan sebelumnya."
 
 #: src/commands/optionsets.cc:114
 #, c-format, boost-format
@@ -3889,16 +3914,18 @@ msgid ""
 "For an extended search including not yet activated remote resources you may "
 "run '%1%' at any time."
 msgstr ""
+"Untuk pencarian yang diperluas termasuk sumber jarak jauh yang belum "
+"diaktifkan, Anda dapat menjalankan '%1%' kapan saja."
 
 #: src/commands/search/search-packages-hinthack.cc:99
 #, boost-format
 msgid "Do you want to run '%1%' now?"
-msgstr ""
+msgstr "Anda ingin menjalankan '%1%' sekarang?"
 
 #: src/commands/search/search-packages-hinthack.cc:115
 #, boost-format
 msgid "Run '%1%' to search in not yet activated remote resources."
-msgstr ""
+msgstr "Jalankan '%1%' untuk mencari pada sumber yang belum diaktifkan."
 
 #. translators: command summary: search, se
 #: src/commands/search/search.cc:73
@@ -4057,33 +4084,35 @@ msgstr ""
 #. translators: -g, --category <CATEGORY>
 #: src/commands/selectpatchoptionset.cc:24
 msgid "Select patches with the specified category."
-msgstr ""
+msgstr "Pilih tambalan dengan kategori yang ditentukan."
 
 #. translators: --severity <SEVERITY>
 #: src/commands/selectpatchoptionset.cc:28
 msgid "Select patches with the specified severity."
-msgstr ""
+msgstr "Pilih tambalan dengan tingkat keparahan yang ditentukan."
 
 #. translators: --date <YYYY-MM-DD>
 #: src/commands/selectpatchoptionset.cc:32
 msgid "Select patches issued up to, but not including, the specified date"
 msgstr ""
+"Pilih tambalan yang dikeluarkan hingga, tetapi tidak termasuk, tanggal yang "
+"ditentukan"
 
 #. translators: -b, --bugzilla
 #: src/commands/selectpatchoptionset.cc:36
 msgid "Select applicable patches for the specified Bugzilla issues."
-msgstr ""
+msgstr "Pilih tambalan yang berlaku untuk masalah Bugzilla yang ditentukan."
 
 #. translators: --cve
 #: src/commands/selectpatchoptionset.cc:41
 msgid "Select applicable patches for the specified CVE issues."
-msgstr ""
+msgstr "Pilih tambalan yang berlaku untuk masalah CVE yang ditentukan."
 
 #. any
 #. translators: --cve
 #: src/commands/selectpatchoptionset.cc:50
 msgid "Select issues matching the specified string."
-msgstr ""
+msgstr "Pilih masalah yang cocok dengan string yang ditentukan."
 
 #: src/commands/services/add.cc:55
 #, c-format, boost-format
@@ -4430,7 +4459,7 @@ msgstr "Perintah ini hanya berguna di zypper shell."
 
 #: src/commands/solveroptionset.cc:16 src/commands/solveroptionset.cc:39
 msgid "Solver options"
-msgstr ""
+msgstr "Opsi pemecah"
 
 #: src/commands/solveroptionset.cc:18
 msgid "Install also recommended packages in addition to the required ones."
@@ -4457,7 +4486,7 @@ msgstr "Jangan paksa pemecah untuk mencari solusinya, biarkan bertanya."
 
 #: src/commands/solveroptionset.cc:63
 msgid "Expert options"
-msgstr ""
+msgstr "Opsi mahir"
 
 #: src/commands/solveroptionset.cc:66
 msgid "Whether to allow downgrading installed resolvables."
@@ -4529,7 +4558,7 @@ msgstr "Nama paket sumber adalah argumen yang diperlukan."
 
 #: src/commands/sourceinstall.cc:86
 msgid "Uninstalling source packages is not supported."
-msgstr ""
+msgstr "Menghapus instalasi paket sumber tidak didukung."
 
 #: src/commands/subcommand.cc:52
 msgid "none"
@@ -4929,12 +4958,12 @@ msgstr ""
 #. translators: --status
 #: src/commands/utils/source-download.cc:514
 msgid "Write a manifest file."
-msgstr ""
+msgstr "Tulis berkas manifes."
 
 #. translators: --status
 #: src/commands/utils/source-download.cc:518
 msgid "Disable writing a manifest file."
-msgstr ""
+msgstr "Nonaktifkan menulis berkas manifes."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/utils/targetos.cc:20
@@ -5223,56 +5252,56 @@ msgstr "Bangun paket biner"
 #. translators: header of table column - is the language requested? (Yes/No)
 #: src/locales.cc:56 src/locales.cc:90
 msgid "Requested"
-msgstr ""
+msgstr "Diminta"
 
 #: src/locales.cc:60
 msgid "Fallback"
-msgstr ""
+msgstr "Fallback"
 
 #. translators: header of table column - the language code, e.g. en_US
 #: src/locales.cc:86
 msgid "Code"
-msgstr ""
+msgstr "Kode"
 
 #. translators: header of table column - the language, e.g. English (United States)
 #: src/locales.cc:88
 msgid "Language"
-msgstr ""
+msgstr "Bahasa"
 
 #: src/locales.cc:306
 #, c-format, boost-format
 msgid "Packages for %s (locale '%s', requested: %s):"
-msgstr ""
+msgstr "Paket untuk %s (locale '%s', diminta:%s):"
 
 #: src/locales.cc:323
 #, c-format, boost-format
 msgid "Added locale: %s"
-msgstr ""
+msgstr "Locale ditambahkan: %s"
 
 #: src/locales.cc:326
 #, c-format, boost-format
 msgid "ERROR: cannot add %s"
-msgstr ""
+msgstr "GALAT: tidak dapat menambahkan %s"
 
 #: src/locales.cc:330
 #, c-format, boost-format
 msgid " %s is already requested."
-msgstr ""
+msgstr " %s sudah diminta."
 
 #: src/locales.cc:351
 #, c-format, boost-format
 msgid "Removed locale: %s"
-msgstr ""
+msgstr "Locale yang dihapus: %s"
 
 #: src/locales.cc:354
 #, c-format, boost-format
 msgid "ERROR: cannot remove %s"
-msgstr ""
+msgstr "GALAT: tidak dapat menghapus %s"
 
 #: src/locales.cc:358
 #, c-format, boost-format
 msgid "%s was not requested."
-msgstr ""
+msgstr "%s tidak diminta."
 
 #. translators: this will show up if you press ctrl+c twice
 #: src/main.cc:31
@@ -6112,6 +6141,10 @@ msgid ""
 "updated by recent upgrades. They should be restarted to benefit from the "
 "latest updates. Run '%1%' to list these programs."
 msgstr ""
+"Ada program yang sedang berjalan yang masih menggunakan berkas dan pustaka "
+"yang dihapus atau diperbarui oleh pemutakhiran terbaru. Mereka harus dimulai "
+"untuk mendapatkan manfaat dari pemutakhiran terbaru. Jalankan '%1%' untuk "
+"mendaftar program ini."
 
 #: src/solve-commit.cc:481
 msgid "Update notifications were received from the following packages:"
@@ -6437,35 +6470,35 @@ msgstr "Tidak dapat menginisiasi konfigurasi berkas parser."
 #: src/utils/Augeas.cc:510
 #, boost-format
 msgid "Malformed option name '%1%'."
-msgstr ""
+msgstr "Nama opsi salah bentuk '%1%'."
 
 #: src/utils/Augeas.cc:522
 msgid "Could not save the config file."
-msgstr ""
+msgstr "Tidak dapat menyimpan berkas konfigurasi."
 
 #: src/utils/Augeas.cc:564
 #, boost-format
 msgid "Config file '%1%' exists but is not a file."
-msgstr ""
+msgstr "Berkas konfigurasi '%1%' ada tetapi bukan berkas."
 
 #: src/utils/Augeas.cc:580
 msgid "Could not load the config files."
-msgstr ""
+msgstr "Tidak dapat memuat berkas konfigurasi."
 
 #: src/utils/Augeas.cc:606
 #, boost-format
 msgid "Config file '%1%' does not exist."
-msgstr ""
+msgstr "Berkas konfigurasi '%1%' tidak ada."
 
 #. translator: %1% is the path to a config file, %2% is the name of an options inside the file
 #: src/utils/Augeas.cc:637
 #, boost-format
 msgid "%1%: Option '%2%' is defined multiple times. Using the last one."
-msgstr ""
+msgstr "%1%: Opsi '%2%' didefinisikan beberapa kali. Menggunakan yang terakhir."
 
 #: src/utils/Augeas.cc:658
 msgid "No config file is in use."
-msgstr ""
+msgstr "Tidak ada berkas konfigurasi yang digunakan."
 
 #: src/utils/flags/exceptions.cc:22
 #, boost-format
@@ -6796,11 +6829,11 @@ msgstr "Mencoba lagi..."
 
 #: src/utils/prompt.cc:325
 msgid "always"
-msgstr ""
+msgstr "selalu"
 
 #: src/utils/prompt.cc:325
 msgid "never"
-msgstr ""
+msgstr "tidak pernah"
 
 #: src/utils/prompt.cc:372
 msgid "Cannot read input: bad stream or EOF."
@@ -6823,7 +6856,7 @@ msgstr "Jawaban '%s' tidak valid."
 #: src/utils/prompt.cc:415
 #, c-format, boost-format
 msgid "Ambiguous answer '%s'."
-msgstr ""
+msgstr "Jawaban ambigu '%s'."
 
 #. translators: the %s are: 'y', 'yes' (translated), 'n', and 'no' (translated).
 #: src/utils/prompt.cc:423
@@ -6838,6 +6871,8 @@ msgid ""
 "If nothing else works enter '#1' to select the 1st option, '#2' for the 2nd "
 "one, ..."
 msgstr ""
+"Jika tidak ada lagi yang berhasil, masukkan '#1' untuk memilih opsi 1, '#2' "
+"untuk yang ke-2, ..."
 
 #~ msgid "Augeas error: setting config file to load failed."
 #~ msgstr "Galat Augeas: berkas konfigurasi pengaturan gagal dimuat."
