@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-02-27 13:31+0100\n"
-"PO-Revision-Date: 2018-10-05 13:06+0000\n"
+"PO-Revision-Date: 2019-04-18 16:03+0000\n"
 "Last-Translator: Kukuh Syafaat <syafaatkukuh@gmail.com>\n"
 "Language-Team: Indonesian <https://l10n.opensuse.org/projects/libzypp/master/"
 "id/>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 2.18\n"
+"X-Generator: Weblate 3.3\n"
 
 #. dubious: Throw on malformed known types, otherwise log a warning.
 #: zypp/CheckSum.cc:136
@@ -1624,7 +1624,7 @@ msgstr "Gagal menghapus kunci."
 #: zypp/KeyRing.cc:633
 #, c-format, boost-format
 msgid "Signature file %s not found"
-msgstr "Tanda tangan file %s tidak ditemukan"
+msgstr "Berkas tanda tangan %s tidak ditemukan"
 
 #: zypp/LanguageCode.cc:49
 msgid "Unknown language: "
@@ -4266,7 +4266,7 @@ msgstr ""
 #: zypp/RepoManager.cc:1094
 msgid "Valid metadata not found at specified URL"
 msgid_plural "Valid metadata not found at specified URLs"
-msgstr[0] "Metadata yang sah tidak ditemukan pada URL yang ditentukan"
+msgstr[0] "Metadata yang valid tidak ditemukan pada URL yang ditentukan"
 
 #: zypp/RepoManager.cc:1142 zypp/RepoManager.cc:1254 zypp/RepoManager.cc:1310
 #, c-format, boost-format
@@ -4322,7 +4322,7 @@ msgstr "Menambah repositori '%s'"
 #: zypp/RepoManager.cc:1708
 #, c-format, boost-format
 msgid "Invalid repo file name at '%s'"
-msgstr "Nama berkas repo tidak sah di '%s'"
+msgstr "Nama berkas repo tidak valid di '%s'"
 
 #: zypp/RepoManager.cc:1749
 #, c-format, boost-format
@@ -4345,12 +4345,12 @@ msgstr "Tidak dapat mengetahui di mana layanan disimpan."
 
 #: zypp/Url.cc:114
 msgid "Invalid LDAP URL query string"
-msgstr "Permintaan String LDAP URL tidak sahih"
+msgstr "String kueri URL LDAP tidak valid"
 
 #: zypp/Url.cc:153
 #, c-format, boost-format
 msgid "Invalid LDAP URL query parameter '%s'"
-msgstr "Parameter '%s’ query LDAP URL tidak valid"
+msgstr "Parameter kueri LDAP URL '%s’  tidak valid"
 
 #: zypp/Url.cc:301
 msgid "Unable to clone Url object"
@@ -4370,7 +4370,7 @@ msgstr "tidak dikenal"
 
 #: zypp/VendorSupportOptions.cc:17
 msgid "unsupported"
-msgstr "Tidak didukung"
+msgstr "tidak didukung"
 
 #: zypp/VendorSupportOptions.cc:20
 msgid "Level 1"
@@ -4390,7 +4390,7 @@ msgstr "Kontrak pelanggan tambahan diperlukan"
 
 #: zypp/VendorSupportOptions.cc:31
 msgid "invalid"
-msgstr "Tidak sah"
+msgstr "tidak valid"
 
 #: zypp/VendorSupportOptions.cc:39
 msgid "The level of support is unspecified"
@@ -4439,7 +4439,7 @@ msgstr "Kontrak pelanggan tambahan diperlukan untuk mendapatkan dukungan."
 
 #: zypp/VendorSupportOptions.cc:56
 msgid "Unknown support option. Description not available"
-msgstr "Opsi support tidak diketahui. Deskripsi tidak ditemukan"
+msgstr "Opsi dukungan tidak diketahui. Deskripsi tidak ditemukan"
 
 #: zypp/ZYppFactory.cc:399
 #, c-format, boost-format
@@ -4458,7 +4458,7 @@ msgstr "Riwayat:"
 #: zypp/base/InterProcessMutex.cc:83
 #, c-format, boost-format
 msgid "Can't open lock file: %s"
-msgstr "Ttidak dapat membuka file kunci: %s"
+msgstr "Tidak dapat membuka berkas kunci: %s"
 
 #: zypp/base/InterProcessMutex.cc:143
 msgid "This action is being run by another program already."
@@ -4477,12 +4477,12 @@ msgstr "Kesesuaian mode '%s' tidak diketahui untuk pola '%s'"
 #: zypp/base/StrMatcher.cc:157
 #, c-format, boost-format
 msgid "Invalid regular expression '%s': regcomp returned %d"
-msgstr "Expresi reguler '%s' tidak valid: regcomp kembali %d"
+msgstr "Ekspresi reguler '%s' tidak valid: regcomp kembali %d"
 
 #: zypp/base/StrMatcher.cc:158
 #, c-format, boost-format
 msgid "Invalid regular expression '%s'"
-msgstr "Expresi reguler '%s' tidak valid"
+msgstr "Ekspresi reguler '%s' tidak valid"
 
 #. !\todo add comma to the message for the next release
 #: zypp/media/MediaCIFS.cc:427 zypp/media/MediaCurl.cc:1775
@@ -4495,19 +4495,21 @@ msgid ""
 "Visit the SUSE Customer Center to check whether your registration is valid "
 "and has not expired."
 msgstr ""
+"Kunjungi Pusat Pelanggan SUSE untuk memeriksa apakah pendaftaran Anda valid "
+"dan belum kedaluwarsa."
 
 #: zypp/media/MediaCurl.cc:1141
 msgid ""
 "Visit the Novell Customer Center to check whether your registration is valid "
 "and has not expired."
 msgstr ""
-"Kunjungi pusat pelanggan Novell untuk memeriksa apakah pendaftaran anda "
-"valid dan tidak kadaluarsa."
+"Kunjungi Pusat Pelanggan Novell untuk memeriksa apakah pendaftaran Anda "
+"valid dan tidak kedaluwarsa."
 
 #: zypp/media/MediaException.cc:31
 #, c-format, boost-format
 msgid "Failed to mount %s on %s"
-msgstr "Gagal untuk mengaitkan%s pada %s"
+msgstr "Gagal untuk mengaitkan %s pada %s"
 
 #: zypp/media/MediaException.cc:41
 #, c-format, boost-format
@@ -4517,7 +4519,7 @@ msgstr "Gagal untuk melepas %s"
 #: zypp/media/MediaException.cc:46
 #, c-format, boost-format
 msgid "Bad file name: %s"
-msgstr "Nama file yang buruk: %s"
+msgstr "Nama berkas yang buruk: %s"
 
 #: zypp/media/MediaException.cc:51
 #, c-format, boost-format
@@ -4527,12 +4529,12 @@ msgstr "Medium tidak dibuka ketika mencoba untuk melakukan tindakan '%s'."
 #: zypp/media/MediaException.cc:56
 #, c-format, boost-format
 msgid "File '%s' not found on medium '%s'"
-msgstr "File '%s' tidak ditemukan pada medium '%s'"
+msgstr "Berkas '%s' tidak ditemukan pada medium '%s'"
 
 #: zypp/media/MediaException.cc:61
 #, c-format, boost-format
 msgid "Cannot write file '%s'."
-msgstr "Tidak dapat menulis file '%s'."
+msgstr "Tidak dapat menulis berkas '%s'."
 
 #: zypp/media/MediaException.cc:66
 msgid "Medium not attached"
@@ -4556,7 +4558,7 @@ msgstr "Pengecualian sistem '%s' pada medium '%s'."
 #: zypp/media/MediaException.cc:87
 #, c-format, boost-format
 msgid "Path '%s' on medium '%s' is not a file."
-msgstr "Lokasi '%s' pada medium '%s' bukan sebuah file."
+msgstr "Lokasi '%s' pada medium '%s' bukan sebuah berkas."
 
 #: zypp/media/MediaException.cc:92
 #, c-format, boost-format
@@ -4573,7 +4575,7 @@ msgstr "Nama host kosong pada URI"
 
 #: zypp/media/MediaException.cc:114
 msgid "Empty filesystem in URI"
-msgstr "Filesistem kosong pada URI"
+msgstr "Sistem berkas kosong pada URI"
 
 #: zypp/media/MediaException.cc:119
 msgid "Empty destination in URI"
@@ -4713,7 +4715,7 @@ msgstr "Layanan Plugin tidak mendukung perubahan atribut."
 #: zypp/repo/RepoProvideFile.cc:261
 #, c-format, boost-format
 msgid "Can't provide file '%s' from repository '%s'"
-msgstr "Tidak dapat meyediakan file '%s' dari repositori '%s'"
+msgstr "Tidak dapat meyediakan berkas '%s' dari repositori '%s'"
 
 #: zypp/repo/RepoProvideFile.cc:267
 msgid "No url in repository."
@@ -4730,10 +4732,10 @@ msgid ""
 "  conflicts with file from package\n"
 "     %3%"
 msgstr ""
-"File %1%\n"
+"Berkas %1%\n"
 "  dari paket\n"
 "     %2%\n"
-"  konflik dengan file dari paket\n"
+"  konflik dengan berkas dari paket\n"
 "     %3%"
 
 #. TranslatorExplanation %1%(filename) %2%(package1) %3%(package2)
@@ -4746,10 +4748,10 @@ msgid ""
 "  conflicts with file from install of\n"
 "     %3%"
 msgstr ""
-"File %1%\n"
+"Berkas %1%\n"
 "  dari paket\n"
 "     %2%\n"
-"  konflik dengan file dari pemasangan\n"
+"  konflik dengan berkas dari pemasangan\n"
 "     %3%"
 
 #. TranslatorExplanation %1%(filename) %2%(package1) %3%(package2)
@@ -4762,10 +4764,10 @@ msgid ""
 "  conflicts with file from package\n"
 "     %3%"
 msgstr ""
-"File %1%\n"
+"Berkas %1%\n"
 "  dari pemasangan\n"
 "     %2%\n"
-"  konflik dengan file dari paket\n"
+"  konflik dengan berkas dari paket\n"
 "     %3%"
 
 #. TranslatorExplanation %1%(filename) %2%(package1) %3%(package2)
@@ -4778,10 +4780,10 @@ msgid ""
 "  conflicts with file from install of\n"
 "     %3%"
 msgstr ""
-"File %1%\n"
+"Berkas %1%\n"
 "  dari pemasangan\n"
 "     %2%\n"
-"  konflik dengan file dari pemasangan\n"
+"  konflik dengan berkas dari pemasangan\n"
 "     %3%"
 
 #. [lhs][rhs] 0 = installed; 1 = to be installed
@@ -4817,10 +4819,10 @@ msgid ""
 "  from install of\n"
 "     %4%"
 msgstr ""
-"File %1%\n"
+"Berkas %1%\n"
 "  dari paket\n"
 "     %2%\n"
-"  konflik dengan file\n"
+"  konflik dengan berkas\n"
 "     %3%\n"
 "  dari pemasangan\n"
 "     %4%"
@@ -4837,10 +4839,10 @@ msgid ""
 "  from package\n"
 "     %4%"
 msgstr ""
-"File %1%\n"
+"Berkas %1%\n"
 "  dari pemasangan\n"
 "     %2%\n"
-"  konflik dengan file\n"
+"  konflik dengan berkas\n"
 "     %3%\n"
 "  dari paket\n"
 "     %4%"
@@ -4857,10 +4859,10 @@ msgid ""
 "  from install of\n"
 "     %4%"
 msgstr ""
-"File %1%\n"
+"Berkas %1%\n"
 "  dari pemasangan\n"
 "     %2%\n"
-"  konflik dengan FIle\n"
+"  konflik dengan berkas\n"
 "     %3%\n"
 "  dari pemasangan\n"
 "     %4%"
@@ -5195,7 +5197,7 @@ msgstr "Paket tidak ditandatangani!"
 #: zypp/target/rpm/RpmDb.cc:1925
 #, c-format, boost-format
 msgid "Changed configuration files for %s:"
-msgstr "Mengubah konfigurasi berkas untuk %s:"
+msgstr "Mengubah berkas konfigurasi untuk %s:"
 
 #. %s = filenames
 #: zypp/target/rpm/RpmDb.cc:2100
@@ -5272,7 +5274,7 @@ msgstr "Tanda tangan kunci publik tidak tersedia"
 #. translators: possible rpm package signature check result [brief]
 #: zypp/target/rpm/RpmDb.cc:2451
 msgid "File does not exist or signature can't be checked"
-msgstr "File tidak ada atau tanda tangan tidak dapat diperiksa"
+msgstr "Berkas tidak ada atau tanda tangan tidak dapat diperiksa"
 
 #. translators: possible rpm package signature check result [brief]
 #: zypp/target/rpm/RpmDb.cc:2453
@@ -5307,7 +5309,7 @@ msgstr "Skema Url tidak diizinkan %s"
 #: zypp/url/UrlBase.cc:173
 #, c-format, boost-format
 msgid "Invalid %s component '%s'"
-msgstr "Komponen '%s' tidak sah %s"
+msgstr "Komponen '%s' tidak valid %s"
 
 #: zypp/url/UrlBase.cc:180
 #, c-format, boost-format
