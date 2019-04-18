@@ -247,7 +247,7 @@ namespace zypp {
 
     bool Digest::update(istream &is, size_t bufsize)
     {
-      if( is )
+      if( !is )
         return false;
 
       char buf[bufsize];

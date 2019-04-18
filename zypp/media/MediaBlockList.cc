@@ -216,20 +216,6 @@ std::vector<unsigned char> MediaBlockList::getChecksum(size_t blkno)
 
   std::vector<unsigned char> buf ( chksumlen, '\0' );
   memcpy( buf.data(), chksums.data()+(chksumlen * blkno), chksumlen );
-
-  std::vector<unsigned char> buf2 ( &chksums[chksumlen * blkno], &chksums[ ( chksumlen * ( blkno + 1 ) ) ] );
-
-  std::string e;
-  for (int j = 0; j < buf.size(); j++)
-    e += zypp::str::form("%02hhx", buf[j]);
-
-  std::string b;
-  for (int j = 0; j < buf2.size(); j++)
-    b += zypp::str::form("%02hhx", buf2[j]);
-
-  std::cout << "BUF 1 : " << e << std::endl;
-  std::cout << "BUF 2 : " << b << std::endl;
-
   return buf;
 }
 

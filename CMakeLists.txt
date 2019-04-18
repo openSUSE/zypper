@@ -13,6 +13,7 @@ OPTION (ENABLE_ZCHUNK_COMPRESSION "Build with zchunk compression support?" OFF)
 
 OPTION (DISABLE_LIBPROXY "Build without libproxy support even if package is installed?" OFF)
 OPTION (DISABLE_AUTODOCS "Do not require doxygen being installed (required to build autodocs)?" OFF)
+OPTION (EXPORT_NG_API "Export experimental libzypp API" OFF)
 #--------------------------------------------------------------------------------
 SET (have_system x)
 
@@ -99,7 +100,7 @@ MACRO(ADD_TESTS)
   FOREACH( loop_var ${ARGV} )
     SET_SOURCE_FILES_PROPERTIES( ${loop_var}_test.cc COMPILE_FLAGS "-DBOOST_TEST_DYN_LINK -DBOOST_TEST_MAIN -DBOOST_AUTO_TEST_MAIN=\"\" " )
     ADD_EXECUTABLE( ${loop_var}_test ${loop_var}_test.cc )
-    TARGET_LINK_LIBRARIES( ${loop_var}_test  zypp ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY} zypp_test_utils)
+    TARGET_LINK_LIBRARIES( ${loop_var}_test zypp-allsym ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY} zypp_test_utils)
     ADD_TEST( ${loop_var}_test ${CMAKE_CURRENT_BINARY_DIR}/${loop_var}_test --catch_system_errors=no)
   ENDFOREACH( loop_var )
 ENDMACRO(ADD_TESTS)
@@ -248,6 +249,12 @@ IF (ENABLE_ZCHUNK_COMPRESSION)
   SET( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${ZCHUNK_CFLAGS}" )
   ADD_DEFINITIONS (-DENABLE_ZCHUNK_COMPRESSION=1)
 ENDIF(ENABLE_ZCHUNK_COMPRESSION)
+
+pkg_check_modules ( SIGCPP REQUIRED sigc++-2.0 )
+INCLUDE_DIRECTORIES( ${SIGCPP_INCLUDE_DIRS} )
+
+pkg_check_modules ( LIBGLIB REQUIRED glib-2.0 )
+INCLUDE_DIRECTORIES( ${LIBGLIB_INCLUDE_DIRS} )
 
 MESSAGE(STATUS "soname: ${LIBZYPP_VERSION_INFO}")
 MESSAGE(STATUS "version: ${VERSION}")

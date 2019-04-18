@@ -1,0 +1,3 @@
+ADD_TESTS(
+  EventLoop
+)

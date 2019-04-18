@@ -84,6 +84,9 @@ BuildRequires:  libsolv-tools
 Requires:       libsolv-tools
 %endif
 
+BuildRequires:  glib2-devel
+BuildRequires:  libsigc++2-devel
+
 # required for testsuite, webrick
 BuildRequires:  ruby
 
