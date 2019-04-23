@@ -120,7 +120,7 @@ namespace zypp
 	    }
 
 	    MIL << "EXECUTE posttrans: " << script << endl;
-	    ExternalProgram prog( (noRootScriptDir/script).asString(), ExternalProgram::Stderr_To_Stdout, false, -1, true, _root );
+	    ExternalProgram prog( (noRootScriptDir/script).asString() + " 0", ExternalProgram::Stderr_To_Stdout, false, -1, true, _root );
 
 	    str::Str collect;
 	    for( std::string line = prog.receiveLine(); ! line.empty(); line = prog.receiveLine() )
