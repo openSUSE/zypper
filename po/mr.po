@@ -3,24 +3,26 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-02-25 14:33+0100\n"
-"PO-Revision-Date: 2004-08-09 10:24+0200\n"
-"Last-Translator: Priyavert Sharma<priyavert.sharma@agreeya.com>\n"
-"Language-Team: AgreeYa Solutions <linux_team@agreeya.com>\n"
-"Language: \n"
+"PO-Revision-Date: 2019-05-02 20:15+0000\n"
+"Last-Translator: Aditi Sarwate <aditi.sarwate@gmail.com>\n"
+"Language-Team: Marathi <https://l10n.opensuse.org/projects/zypper/master/mr/>"
+"\n"
+"Language: mr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+"X-Generator: Weblate 3.3\n"
 
 #: src/SolverRequester.h:52
 #, boost-format
 msgid "Suspicious category filter value '%1%'."
-msgstr ""
+msgstr "संशयास्पद श्रेणी फिल्टर मूल्य '%१%'."
 
 #: src/SolverRequester.h:60
 #, boost-format
 msgid "Suspicious severity filter value '%1%'."
-msgstr ""
+msgstr "संशयास्पद तीव्रता फिल्टर मूल्य '%१%'"
 
 #: src/callbacks/keyring.h:32
 msgid ""
@@ -29,6 +31,10 @@ msgid ""
 "signature can lead to a corrupted system and in extreme cases even to a "
 "system compromise."
 msgstr ""
+"डेटा साइन करण्यामुळे डेटावर स्वाक्षरी झाल्यानंतर कोणतेही बदल झाले नाहीत "
+"याच्या पडताळणीकर्ता प्राप्तकर्त्यास सक्षम करते. स्वाक्षरी नसलेला किवा चुकीची "
+"सही असलेला किंवा अज्ञात स्वाक्षरीसह डेटा स्वीकारणे दूषित प्रणालीस कारणीभूत "
+"ठरू शकते आणि काही प्रकरणांमध्ये अगदी सिस्टमशी तडजोडही करू शकते."
 
 #. translator: %1% is a file name
 #: src/callbacks/keyring.h:40
@@ -36,13 +42,16 @@ msgstr ""
 msgid ""
 "File '%1%' is the repositories master index file. It ensures the integrity "
 "of the whole repo."
-msgstr ""
+msgstr "भाषांतरकारः%१% ही फाइलचे नाव आहे"
 
 #: src/callbacks/keyring.h:46
 msgid ""
 "We can't verify that no one meddled with this file, so it might not be "
 "trustworthy anymore! You should not continue unless you know it's safe."
 msgstr ""
+"या फायीलींबरोबर कोणीही हस्तक्षेप करणार नाही हे आम्ही सत्यापित करू शकत नाही, "
+"यामुळे हे कदाचित यापुढे विश्वसनीय असणार नाही! आपणास हे सुरक्षित आहे असे "
+"वाटल्याशिवायअसल्याशिवाय  पुढे सुरू ठेवू नये."
 
 #: src/callbacks/keyring.h:51
 msgid ""
@@ -50,39 +59,37 @@ msgid ""
 "malicious change, so it might not be trustworthy anymore! You should not "
 "continue unless you know it's safe."
 msgstr ""
+"ही फाइल साइन झाल्यानंतर सुधारित केली गेली. हा कदाचित एक दुर्भावनापूर्ण बदल "
+"असू शकतो, यामुळे तो कदाचित विश्वसनीय ठरणार नाही! आपल्याला हे सुरक्षित "
+"वाटल्याशिवाय पुढे सुरू ठेवू नये."
 
 #: src/callbacks/keyring.h:79
-#, fuzzy
 msgid "Repository:"
-msgstr "सेवा चालू नाही"
+msgstr "भांडार:"
 
 #: src/callbacks/keyring.h:81
-#, fuzzy
 msgid "Key Name:"
-msgstr "नांव:"
+msgstr "मूळ नांव:"
 
 #: src/callbacks/keyring.h:82
 msgid "Key Fingerprint:"
-msgstr ""
+msgstr "मूळ फिंगरप्रिंट"
 
 #: src/callbacks/keyring.h:83
-#, fuzzy
 msgid "Key Created:"
-msgstr "नांव:"
+msgstr "चावी तयार केली"
 
 #: src/callbacks/keyring.h:84
-#, fuzzy
 msgid "Key Expires:"
-msgstr "नांव:"
+msgstr "चावीची वैधता संपली."
 
 #: src/callbacks/keyring.h:86
 msgid "Subkey:"
-msgstr ""
+msgstr "उपकुंजी"
 
 #: src/callbacks/keyring.h:87
-#, fuzzy
 msgid "Rpm Name:"
-msgstr "नांव:"
+msgstr "आर पी एम चे नाव"
 
 #: src/callbacks/keyring.h:113
 #, boost-format
