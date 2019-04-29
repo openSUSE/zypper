@@ -13,8 +13,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-02-25 14:33+0100\n"
-"PO-Revision-Date: 2019-03-21 12:49+0000\n"
-"Last-Translator: Emily Dong <Emily.Dong@excel-gits.com>\n"
+"PO-Revision-Date: 2019-05-02 20:15+0000\n"
+"Last-Translator: Ramax Lo <ramaxlo@gmail.com>\n"
 "Language-Team: Chinese (Taiwan) <https://l10n.opensuse.org/projects/zypper/"
 "master/zh_TW/>\n"
 "Language: zh_TW\n"
@@ -50,7 +50,7 @@ msgstr ""
 msgid ""
 "File '%1%' is the repositories master index file. It ensures the integrity "
 "of the whole repo."
-msgstr "檔案「%1%」是軟體庫主索引檔案。它可確保整個軟體庫的完整性。"
+msgstr "檔案「%1%」是套件庫主索引檔案。它可確保整個套件庫的完整性。"
 
 #: src/callbacks/keyring.h:46
 msgid ""
@@ -71,7 +71,7 @@ msgstr ""
 
 #: src/callbacks/keyring.h:79
 msgid "Repository:"
-msgstr "軟體庫："
+msgstr "套件庫："
 
 #: src/callbacks/keyring.h:81
 msgid "Key Name:"
@@ -116,7 +116,7 @@ msgstr "正在接受一個未簽章的檔案 '%s'。"
 #: src/callbacks/keyring.h:146
 #, c-format, boost-format
 msgid "Accepting an unsigned file '%s' from repository '%s'."
-msgstr "正在接受一個未簽章的檔案 '%s' (來自軟體庫 '%s')。"
+msgstr "正在接受一個未簽章的檔案 '%s' (來自套件庫 '%s')。"
 
 #. translator: %1% is a file name
 #: src/callbacks/keyring.h:156
@@ -128,7 +128,7 @@ msgstr "檔案「%s」未簽章。"
 #: src/callbacks/keyring.h:159
 #, boost-format
 msgid "File '%1%' from repository '%2%' is unsigned."
-msgstr "軟體庫「%2%」中的檔案「%1%」未簽章。"
+msgstr "套件庫「%2%」中的檔案「%1%」未簽章。"
 
 #. TranslatorExplanation: speaking of a file
 #: src/callbacks/keyring.h:176
@@ -140,7 +140,7 @@ msgstr "檔案 '%s' 未簽章，要繼續嗎？"
 #: src/callbacks/keyring.h:180
 #, c-format, boost-format
 msgid "File '%s' from repository '%s' is unsigned, continue?"
-msgstr "檔案 ′%s′ (來自軟體庫 ′%s′) 未簽章，要繼續嗎？"
+msgstr "檔案 ′%s′ (來自套件庫 ′%s′) 未簽章，要繼續嗎？"
 
 #: src/callbacks/keyring.h:203
 #, c-format, boost-format
@@ -151,7 +151,7 @@ msgstr "正在接受檔案 '%s'，此檔案使用未知的金鑰 '%s' 簽章。"
 #, c-format, boost-format
 msgid ""
 "Accepting file '%s' from repository '%s' signed with an unknown key '%s'."
-msgstr "正在接受檔案 ′%s′ (來自軟體庫 ′%s′)，此檔案使用未知的金鑰 '%s' 簽章。"
+msgstr "正在接受檔案 ′%s′ (來自套件庫 ′%s′)，此檔案使用未知的金鑰 '%s' 簽章。"
 
 #. translator: %1% is a file name, %2% is a gpg key ID
 #: src/callbacks/keyring.h:216
@@ -163,7 +163,7 @@ msgstr "檔案「%1%」是以未知金鑰「%2%」簽章。"
 #: src/callbacks/keyring.h:219
 #, boost-format
 msgid "File '%1%' from repository '%3%' is signed with an unknown key '%2%'."
-msgstr "軟體庫「%3%」中的檔案「%1%」是以未知金鑰「%2%」簽章。"
+msgstr "套件庫「%3%」中的檔案「%1%」是以未知金鑰「%2%」簽章。"
 
 #. translators: the last %s is gpg key ID
 #: src/callbacks/keyring.h:236
@@ -176,7 +176,7 @@ msgstr "檔案 '%s' 是以不明金鑰 '%s' 簽章。要繼續嗎？"
 #, c-format, boost-format
 msgid ""
 "File '%s' from repository '%s' is signed with an unknown key '%s'. Continue?"
-msgstr "檔案 '%s' (來自軟體庫 '%s') 是以不明金鑰 '%s' 簽章。要繼續嗎？"
+msgstr "檔案 '%s' (來自套件庫 '%s') 是以不明金鑰 '%s' 簽章。要繼續嗎？"
 
 #: src/callbacks/keyring.h:260
 msgid "Automatically importing the following key:"
@@ -188,7 +188,7 @@ msgstr "自動信任下列金鑰："
 
 #: src/callbacks/keyring.h:264
 msgid "New repository or package signing key received:"
-msgstr "收到新的軟體庫或軟體包簽署金鑰："
+msgstr "收到新的套件庫或套件簽署金鑰："
 
 #. translators: this message is shown after showing description of the key
 #: src/callbacks/keyring.h:287
@@ -247,7 +247,7 @@ msgstr "正在忽略檔案 '%s' 的失敗簽章驗證！"
 #, c-format, boost-format
 msgid ""
 "Ignoring failed signature verification for file '%s' from repository '%s'!"
-msgstr "正在忽略檔案 '%s' (來自軟體庫 '%s') 的失敗簽章驗證！"
+msgstr "正在忽略檔案 '%s' (來自套件庫 '%s') 的失敗簽章驗證！"
 
 #: src/callbacks/keyring.h:382
 msgid "Double-check this is not caused by some malicious changes in the file!"
@@ -263,7 +263,7 @@ msgstr "檔案 '%1%' 的簽章驗證失敗。"
 #: src/callbacks/keyring.h:395
 #, boost-format
 msgid "Signature verification failed for file '%1%' from repository '%2%'."
-msgstr "檔案 '%1%' (來自軟體庫 '%2%') 的簽章驗證失敗。"
+msgstr "檔案 '%1%' (來自套件庫 '%2%') 的簽章驗證失敗。"
 
 #: src/callbacks/keyring.h:439
 msgid ""
@@ -401,7 +401,7 @@ msgstr "簽章驗證失敗"
 
 #: src/callbacks/repo.h:237
 msgid "Accepting package despite the error."
-msgstr "即使遇到錯誤，仍然接受軟體包。"
+msgstr "即使遇到錯誤，仍然接受套件。"
 
 #. TranslatorExplanation speaking of a script - "Running: script file name (package name, script dir)"
 #: src/callbacks/rpm.h:184
@@ -443,9 +443,7 @@ msgid ""
 "Checking for file conflicts requires not installed packages to be downloaded "
 "in advance in order to access their file lists. See option '%1%' in the "
 "zypper manual page for details."
-msgstr ""
-"檢查檔案衝突需要事先下載尚未安裝的軟體包，才能存取其檔案清單。詳情請見 "
-"zypper 說明文件中關於選項 '%1%' 的說明。"
+msgstr "檢查檔案衝突需要事先下載尚未安裝的套件，才能存取其檔案清單。詳情請見 zypper 說明文件中關於選項 '%1%' 的說明。"
 
 #. TranslatorExplanation %1%(number of packages); detailed list follows
 #: src/callbacks/rpm.h:424
@@ -456,7 +454,7 @@ msgid ""
 msgid_plural ""
 "The following %1% packages had to be excluded from file conflicts check "
 "because they are not yet downloaded:"
-msgstr[0] "下列 %1% 個軟體包因為尚未下載，故必須在檔案衝突檢查時被排除："
+msgstr[0] "下列 %1% 個套件因為尚未下載，故必須在檔案衝突檢查時被排除："
 
 #. TranslatorExplanation %1%(number of conflicts); detailed list follows
 #: src/callbacks/rpm.h:435
@@ -475,9 +473,7 @@ msgid ""
 "File conflicts happen when two packages attempt to install files with the "
 "same name but different contents. If you continue, conflicting files will be "
 "replaced losing the previous content."
-msgstr ""
-"當二個軟體包嘗試安裝檔名相同、內容卻不同的檔案時，檔案衝突就會發生。若您選擇"
-"繼續，衝突檔案將會被取代，先前的內容也會消失。"
+msgstr "當二個套件嘗試安裝檔名相同、內容卻不同的檔案時，檔案衝突就會發生。若您選擇繼續，衝突檔案將會被取代，先前的內容也會消失。"
 
 #. translator: %s is an other command: "This is an alias for 'zypper info -t patch'."
 #: src/commands/commandhelpformatter.h:94
@@ -539,7 +535,7 @@ msgstr "顯示詳細的安裝摘要。"
 #: src/commands/commonflags.h:30
 #, boost-format
 msgid "Type of package (%1%)."
-msgstr "軟體包 (%1%) 的類型。"
+msgstr "套件 (%1%) 的類型。"
 
 #. translators: --best-effort
 #: src/commands/commonflags.h:38
@@ -686,7 +682,7 @@ msgstr "無效指令"
 
 #: src/Command.cc:111
 msgid "Repository Management:"
-msgstr "軟體庫管理："
+msgstr "套件庫管理："
 
 #: src/Command.cc:119
 msgid "Service Management:"
@@ -706,7 +702,7 @@ msgstr "查詢："
 
 #: src/Command.cc:149
 msgid "Package Locks:"
-msgstr "軟體包鎖定："
+msgstr "套件鎖定："
 
 #: src/Command.cc:154
 msgid "Locale Management:"
@@ -822,7 +818,7 @@ msgstr "切換為 XML 輸出。"
 #. translators: --ignore-unknown, -i
 #: src/Config.cc:452
 msgid "Ignore unknown packages."
-msgstr "忽略未知的軟體包。"
+msgstr "忽略未知的套件。"
 
 #. translators: --terse, -t
 #: src/Config.cc:463
@@ -833,7 +829,7 @@ msgstr "供機器使用的摘要輸出。表示 --no-abbrev 和 --no-color。"
 #. translators: --reposd-dir, -D <DIR>
 #: src/Config.cc:487
 msgid "Use alternative repository definition file directory."
-msgstr "使用不同的軟體庫定義檔 目錄。"
+msgstr "使用不同的套件庫定義檔 目錄。"
 
 #. translators: --cache-dir, -C <DIR>
 #: src/Config.cc:502
@@ -853,11 +849,11 @@ msgstr "使用不同的解決方案檔案快取目錄。"
 #. translators: --pkg-cache-dir <DIR>
 #: src/Config.cc:543
 msgid "Use alternative package cache directory."
-msgstr "使用不同的軟體包快取目錄。"
+msgstr "使用不同的套件快取目錄。"
 
 #: src/Config.cc:548
 msgid "Repository Options"
-msgstr "軟體庫選項"
+msgstr "套件庫選項"
 
 #: src/Config.cc:552
 msgid "Entering 'no-gpg-checks' mode."
@@ -872,35 +868,33 @@ msgstr "忽略 GPG 檢查錯誤並繼續。"
 #, c-format, boost-format
 msgid ""
 "Turning on '%s'. New repository signing keys will be automatically imported!"
-msgstr "正在開啟 '%s'。新軟體庫簽名金鑰將自動被匯入！"
+msgstr "正在開啟 '%s'。新套件庫簽名金鑰將自動被匯入！"
 
 #. translators: --gpg-auto-import-keys
 #: src/Config.cc:567
 msgid "Automatically trust and import new repository signing keys."
-msgstr "自動信任並匯入新的軟體庫簽章金鑰。"
+msgstr "自動信任並匯入新的套件庫簽章金鑰。"
 
 #. translators: --plus-repo, -p <URI>
 #: src/Config.cc:571
 msgid "Use an additional repository."
-msgstr "使用額外的軟體庫。"
+msgstr "使用額外的套件庫。"
 
 #. translators: --plus-content <TAG>
 #: src/Config.cc:575
 msgid ""
 "Additionally use disabled repositories providing a specific keyword. Try '--"
 "plus-content debug' to enable repos indicating to provide debug packages."
-msgstr ""
-"另外使用提供特定關鍵字的被停用軟體庫。 嘗試 '--plus-content debug' 來啟用有提"
-"供除錯軟體包的軟體庫。"
+msgstr "另外使用提供特定關鍵字的被停用套件庫。 嘗試 '--plus-content debug' 來啟用有提供除錯套件的套件庫。"
 
 #: src/Config.cc:581
 msgid "Repositories disabled, using the database of installed packages only."
-msgstr "軟體庫已停用，僅使用已安裝軟體包的資料庫。"
+msgstr "套件庫已停用，僅使用已安裝套件的資料庫。"
 
 #. translators: --disable-repositories
 #: src/Config.cc:585
 msgid "Do not read meta-data from repositories."
-msgstr "不要從軟體庫讀取中繼資料。"
+msgstr "不要從套件庫讀取中繼資料。"
 
 #: src/Config.cc:589
 msgid "Autorefresh disabled."
@@ -909,25 +903,25 @@ msgstr "停用自動重新整理。"
 #. translators: --no-refresh
 #: src/Config.cc:593
 msgid "Do not refresh the repositories."
-msgstr "不要重新整理軟體庫。"
+msgstr "不要重新整理套件庫。"
 
 #: src/Config.cc:597
 msgid "CD/DVD repositories disabled."
-msgstr "CD/DVD 軟體庫停用。"
+msgstr "CD/DVD 套件庫停用。"
 
 #. translators: --no-cd
 #: src/Config.cc:601
 msgid "Ignore CD/DVD repositories."
-msgstr "忽略 CD/DVD 軟體庫。"
+msgstr "忽略 CD/DVD 套件庫。"
 
 #: src/Config.cc:605
 msgid "Remote repositories disabled."
-msgstr "遠端軟體庫停用。"
+msgstr "遠端套件庫停用。"
 
 #. translators: --no-remote
 #: src/Config.cc:609
 msgid "Ignore remote repositories."
-msgstr "忽略遠端軟體庫。"
+msgstr "忽略遠端套件庫。"
 
 #. translators: --releasever
 #: src/Config.cc:616
@@ -949,7 +943,7 @@ msgstr "在不同的根目錄操作。"
 #: src/Config.cc:631
 msgid ""
 "Operate on a different root directory, but share repositories with the host."
-msgstr "在不同的根目錄上操作，但與主機共用軟體庫。"
+msgstr "在不同的根目錄上操作，但與主機共用套件庫。"
 
 #: src/Config.cc:637
 msgid "Ignoring installed resolvables."
@@ -958,7 +952,7 @@ msgstr "忽略已安裝的解決方案。"
 #. translators: --disable-system-resolvables
 #: src/Config.cc:640
 msgid "Do not read installed packages."
-msgstr "不要讀取已安裝的軟體包。"
+msgstr "不要讀取已安裝的套件。"
 
 #: src/Config.cc:804
 msgid "No config file is in use. Can not save options."
@@ -976,22 +970,22 @@ msgstr "無法儲存選項。"
 #: src/PackageArgs.cc:208
 #, c-format, boost-format
 msgid "'%s' not found in package names. Trying '%s'."
-msgstr "軟體包名稱中找不到 '%s'。正在嘗試 '%s'。"
+msgstr "套件名稱中找不到 '%s'。正在嘗試 '%s'。"
 
 #: src/PackageArgs.cc:218
 #, c-format, boost-format
 msgid "'%s' is not a package name or capability."
-msgstr "'%s' 不是一個軟體包或功能名稱。"
+msgstr "'%s' 不是一個套件或功能名稱。"
 
 #: src/RequestFeedback.cc:40
 #, c-format, boost-format
 msgid "'%s' not found in package names. Trying capabilities."
-msgstr "軟體包名稱中找不到 '%s'。正在嘗試其他功能。"
+msgstr "套件名稱中找不到 '%s'。正在嘗試其他功能。"
 
 #: src/RequestFeedback.cc:46
 #, c-format, boost-format
 msgid "Package '%s' not found."
-msgstr "找不到軟體包 '%s'。"
+msgstr "找不到套件 '%s'。"
 
 #: src/RequestFeedback.cc:48
 #, c-format, boost-format
@@ -1011,7 +1005,7 @@ msgstr "找不到樣式 '%s'。"
 #: src/RequestFeedback.cc:54
 #, c-format, boost-format
 msgid "Source package '%s' not found."
-msgstr "找不到原始碼軟體包 '%s'。"
+msgstr "找不到原始碼套件 '%s'。"
 
 #. just in case
 #: src/RequestFeedback.cc:56
@@ -1022,33 +1016,33 @@ msgstr "找不到物件 '%s'。"
 #: src/RequestFeedback.cc:61
 #, c-format, boost-format
 msgid "Package '%s' not found in specified repositories."
-msgstr "在指定軟體庫中找不到軟體包 '%s' 。"
+msgstr "在指定套件庫中找不到套件 '%s' 。"
 
 #: src/RequestFeedback.cc:63
 #, c-format, boost-format
 msgid "Patch '%s' not found in specified repositories."
-msgstr "在指定軟體庫中找不到修補程式 '%s' 。"
+msgstr "在指定套件庫中找不到修補程式 '%s' 。"
 
 #: src/RequestFeedback.cc:65
 #, c-format, boost-format
 msgid "Product '%s' not found in specified repositories."
-msgstr "在指定軟體庫中找不到產品 '%s'。"
+msgstr "在指定套件庫中找不到產品 '%s'。"
 
 #: src/RequestFeedback.cc:67
 #, c-format, boost-format
 msgid "Pattern '%s' not found in specified repositories."
-msgstr "在指定軟體庫中找不到樣式 '%s' 。"
+msgstr "在指定套件庫中找不到樣式 '%s' 。"
 
 #: src/RequestFeedback.cc:69
 #, c-format, boost-format
 msgid "Source package '%s' not found in specified repositories."
-msgstr "在指定軟體庫中找不到原始碼軟體包 '%s' 。"
+msgstr "在指定套件庫中找不到原始碼套件 '%s' 。"
 
 #. just in case
 #: src/RequestFeedback.cc:71
 #, c-format, boost-format
 msgid "Object '%s' not found in specified repositories."
-msgstr "在指定軟體庫中找不到物件 '%s' 。"
+msgstr "在指定套件庫中找不到物件 '%s' 。"
 
 #. translators: meaning a package %s or provider of capability %s
 #: src/RequestFeedback.cc:76
@@ -1060,12 +1054,12 @@ msgstr "找不到提供 '%s' 的提供者。"
 #: src/RequestFeedback.cc:84
 #, c-format, boost-format
 msgid "No package matching '%s' is installed."
-msgstr "未安裝與 '%s' 相符的軟體包。"
+msgstr "未安裝與 '%s' 相符的套件。"
 
 #: src/RequestFeedback.cc:86
 #, c-format, boost-format
 msgid "Package '%s' is not installed."
-msgstr "軟體包 '%s' 尚未安裝。"
+msgstr "套件 '%s' 尚未安裝。"
 
 #. translators: meaning provider of capability %s
 #: src/RequestFeedback.cc:90
@@ -1101,7 +1095,7 @@ msgstr "'%s' 無更新候選。"
 msgid ""
 "There is an update candidate '%s' for '%s', but it does not match the "
 "specified version, architecture, or repository."
-msgstr "有更新候選 '%s' (適用於 '%s')，但它不符合特定版本、架構或軟體庫。"
+msgstr "有更新候選 '%s' (適用於 '%s')，但它不符合特定版本、架構或套件庫。"
 
 #: src/RequestFeedback.cc:123
 #, c-format, boost-format
@@ -1115,9 +1109,7 @@ msgstr "有一個「%s」的更新候選 (來自廠商「%s」)，但當前廠�
 msgid ""
 "There is an update candidate for '%s', but it comes from a repository with a "
 "lower priority. Use '%s' to install this candidate."
-msgstr ""
-"有針對 '%s' 的更新候選，但是從優先等級較低的軟體庫而來。 使用 '%s' 來安裝此更"
-"新。"
+msgstr "有針對 '%s' 的更新候選，但是從優先等級較低的套件庫而來。 使用 '%s' 來安裝此更新。"
 
 #: src/RequestFeedback.cc:142
 #, c-format, boost-format
@@ -1131,20 +1123,20 @@ msgstr "有一個 '%s' 的更新候選，但被鎖定。請使用 '%s' 解除鎖
 msgid ""
 "Package '%s' is not available in your repositories. Cannot reinstall, "
 "upgrade, or downgrade."
-msgstr "軟體包 '%s' 無法在您的軟體庫找到。無法重新安裝、升級或降級。"
+msgstr "套件 '%s' 無法在您的套件庫找到。無法重新安裝、升級或降級。"
 
 #: src/RequestFeedback.cc:158
 #, c-format, boost-format
 msgid ""
 "The selected package '%s' from repository '%s' has lower version than the "
 "installed one."
-msgstr "所選軟體包 '%s' (來自軟體庫 '%s') 的版本低於已安裝的版本。"
+msgstr "所選套件 '%s' (來自套件庫 '%s') 的版本低於已安裝的版本。"
 
 #. translators: %s = "zypper install --oldpackage package-version.arch"
 #: src/RequestFeedback.cc:162
 #, c-format, boost-format
 msgid "Use '%s' to force installation of the package."
-msgstr "使用 '%s' 強迫安裝軟體包。"
+msgstr "使用 '%s' 強迫安裝套件。"
 
 #: src/RequestFeedback.cc:169
 #, c-format, boost-format
@@ -1188,12 +1180,12 @@ msgstr "修補程式 '%s' 已在指定日期後發行。"
 #: src/RequestFeedback.cc:218
 #, c-format, boost-format
 msgid "Selecting '%s' from repository '%s' for installation."
-msgstr "正在選取 '%s' (來自軟體庫 '%s') 以安裝。"
+msgstr "正在選取 '%s' (來自套件庫 '%s') 以安裝。"
 
 #: src/RequestFeedback.cc:222
 #, c-format, boost-format
 msgid "Forcing installation of '%s' from repository '%s'."
-msgstr "正在強制安裝 '%s' (來自軟體庫 '%s')。"
+msgstr "正在強制安裝 '%s' (來自套件庫 '%s')。"
 
 #: src/RequestFeedback.cc:226
 #, c-format, boost-format
@@ -1246,7 +1238,7 @@ msgstr[0] "... 以及 %1% 個項目。"
 #, c-format, boost-format
 msgid "The following NEW package is going to be installed:"
 msgid_plural "The following %d NEW packages are going to be installed:"
-msgstr[0] "將會安裝下列 %d 個新的軟體包："
+msgstr[0] "將會安裝下列 %d 個新的套件："
 
 #: src/Summary.cc:574
 #, c-format, boost-format
@@ -1270,7 +1262,7 @@ msgstr[0] "將會安裝下列 %d 個新的產品："
 #, c-format, boost-format
 msgid "The following source package is going to be installed:"
 msgid_plural "The following %d source packages are going to be installed:"
-msgstr[0] "將會安裝下列 %d 個原始碼軟體包："
+msgstr[0] "將會安裝下列 %d 個原始碼套件："
 
 #: src/Summary.cc:595
 #, c-format, boost-format
@@ -1282,7 +1274,7 @@ msgstr[0] "將會安裝下列 %d 個應用："
 #, c-format, boost-format
 msgid "The following package is going to be REMOVED:"
 msgid_plural "The following %d packages are going to be REMOVED:"
-msgstr[0] "下列 %d 個軟體包將會被移除："
+msgstr[0] "下列 %d 個套件將會被移除："
 
 #: src/Summary.cc:625
 #, c-format, boost-format
@@ -1312,7 +1304,7 @@ msgstr[0] "下列 %d 個應用將會被移除："
 #, c-format, boost-format
 msgid "The following package is going to be upgraded:"
 msgid_plural "The following %d packages are going to be upgraded:"
-msgstr[0] "下列 %d 個軟體包將會升級："
+msgstr[0] "下列 %d 個套件將會升級："
 
 #: src/Summary.cc:669
 #, c-format, boost-format
@@ -1342,7 +1334,7 @@ msgstr[0] "下列 %d 個應用將會升級："
 #, c-format, boost-format
 msgid "The following package is going to be downgraded:"
 msgid_plural "The following %d packages are going to be downgraded:"
-msgstr[0] "下列 %d 個軟體包將會降級："
+msgstr[0] "下列 %d 個套件將會降級："
 
 #: src/Summary.cc:715
 #, c-format, boost-format
@@ -1372,7 +1364,7 @@ msgstr[0] "下列 %d 個應用將會降級："
 #, c-format, boost-format
 msgid "The following package is going to be reinstalled:"
 msgid_plural "The following %d packages are going to be reinstalled:"
-msgstr[0] "下列 %d 個軟體包將會重新安裝："
+msgstr[0] "下列 %d 個套件將會重新安裝："
 
 #: src/Summary.cc:758
 #, c-format, boost-format
@@ -1403,7 +1395,7 @@ msgstr[0] "下列 %d 個應用將會重新安裝："
 msgid "The following recommended package was automatically selected:"
 msgid_plural ""
 "The following %d recommended packages were automatically selected:"
-msgstr[0] "下列 %d 個推薦的軟體包已自動被選取："
+msgstr[0] "下列 %d 個推薦的套件已自動被選取："
 
 #: src/Summary.cc:923
 #, c-format, boost-format
@@ -1431,7 +1423,7 @@ msgstr[0] "下列 %d 個推薦的產品已自動被選取："
 msgid "The following recommended source package was automatically selected:"
 msgid_plural ""
 "The following %d recommended source packages were automatically selected:"
-msgstr[0] "下列 %d 個推薦的原始碼軟體包已自動被選取："
+msgstr[0] "下列 %d 個推薦的原始碼套件已自動被選取："
 
 #: src/Summary.cc:944
 #, c-format, boost-format
@@ -1448,8 +1440,7 @@ msgid ""
 msgid_plural ""
 "The following %d packages are recommended, but will not be installed (only "
 "required packages will be installed):"
-msgstr[0] ""
-"下列 %d 個軟體包是推薦的，但將不會被安裝(僅有需要的軟體包會被安裝)："
+msgstr[0] "下列 %d 個套件是推薦的，但將不會被安裝(僅有需要的套件會被安裝)："
 
 #: src/Summary.cc:1003
 #, c-format, boost-format
@@ -1459,7 +1450,7 @@ msgid ""
 msgid_plural ""
 "The following %d packages are recommended, but will not be installed because "
 "they are unwanted (were manually removed before):"
-msgstr[0] "下列 %d 個軟體包是推薦的，但將不會被安裝，因為它們是您不想要的 (之前已被手動移除)："
+msgstr[0] "下列 %d 個套件是推薦的，但將不會被安裝，因為它們是您不想要的 (之前已被手動移除)："
 
 #: src/Summary.cc:1013
 #, c-format, boost-format
@@ -1469,8 +1460,7 @@ msgid ""
 msgid_plural ""
 "The following %d packages are recommended, but will not be installed due to "
 "conflicts or dependency issues:"
-msgstr[0] ""
-"下列 %d 個軟體包是推薦的，但將不會被安裝，因為有衝突或相依性的問題："
+msgstr[0] "下列 %d 個套件是推薦的，但將不會被安裝，因為有衝突或相依性的問題："
 
 #: src/Summary.cc:1026
 #, c-format, boost-format
@@ -1505,7 +1495,7 @@ msgstr[0] "下列 %d 個應用是推薦的，但將不會被安裝："
 msgid "The following package is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d packages are suggested, but will not be installed:"
-msgstr[0] "下列 %d 個軟體包是建議的，但將不會被安裝："
+msgstr[0] "下列 %d 個套件是建議的，但將不會被安裝："
 
 #: src/Summary.cc:1077
 #, c-format, boost-format
@@ -1539,7 +1529,7 @@ msgstr[0] "下列 %d 個應用是建議的，但將不會被安裝："
 #, c-format, boost-format
 msgid "The following package is going to change architecture:"
 msgid_plural "The following %d packages are going to change architecture:"
-msgstr[0] "下列 %d 個軟體包將會變更架構："
+msgstr[0] "下列 %d 個套件將會變更架構："
 
 #: src/Summary.cc:1123
 #, c-format, boost-format
@@ -1569,7 +1559,7 @@ msgstr[0] "下列 %d 個應用將會變更架構："
 #, c-format, boost-format
 msgid "The following package is going to change vendor:"
 msgid_plural "The following %d packages are going to change vendor:"
-msgstr[0] "下列 %d 個軟體包將會變更供應商："
+msgstr[0] "下列 %d 個套件將會變更供應商："
 
 #: src/Summary.cc:1169
 #, c-format, boost-format
@@ -1600,13 +1590,13 @@ msgstr[0] "下列 %d 個應用將會變更供應商："
 msgid "The following package has no support information from its vendor:"
 msgid_plural ""
 "The following %d packages have no support information from their vendor:"
-msgstr[0] "下列 %d 個軟體包沒有其供應商的支援資訊："
+msgstr[0] "下列 %d 個套件沒有其供應商的支援資訊："
 
 #: src/Summary.cc:1226
 #, c-format, boost-format
 msgid "The following package is not supported by its vendor:"
 msgid_plural "The following %d packages are not supported by their vendor:"
-msgstr[0] "下列 %d 個軟體包不被它們的供應商支援："
+msgstr[0] "下列 %d 個套件不被它們的供應商支援："
 
 #: src/Summary.cc:1244
 #, c-format, boost-format
@@ -1614,13 +1604,13 @@ msgid ""
 "The following package needs additional customer contract to get support:"
 msgid_plural ""
 "The following %d packages need additional customer contract to get support:"
-msgstr[0] "下列 %d 個軟體包需要額外的客製化合約以取得支援："
+msgstr[0] "下列 %d 個套件需要額外的客製化合約以取得支援："
 
 #: src/Summary.cc:1264
 #, c-format, boost-format
 msgid "The following package update will NOT be installed:"
 msgid_plural "The following %d package updates will NOT be installed:"
-msgstr[0] "下列 %d 個軟體包更新將 不會 被安裝："
+msgstr[0] "下列 %d 個套件更新將 不會 被安裝："
 
 #: src/Summary.cc:1269
 #, c-format, boost-format
@@ -1699,7 +1689,7 @@ msgstr "完成操作後，將釋出 %s。"
 #: src/Summary.cc:1415
 msgid "package to upgrade"
 msgid_plural "packages to upgrade"
-msgstr[0] "個待升級軟體包"
+msgstr[0] "個待升級套件"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
 #: src/Summary.cc:1426
@@ -1711,19 +1701,19 @@ msgstr[0] "將降級"
 #: src/Summary.cc:1429
 msgid "package to downgrade"
 msgid_plural "packages to downgrade"
-msgstr[0] "要降級的軟體包"
+msgstr[0] "要降級的套件"
 
 #. translators: this text will be preceded by a number e.g. "5 new"
 #: src/Summary.cc:1440
 msgid "new"
 msgid_plural "new"
-msgstr[0] "個新軟體包"
+msgstr[0] "個新套件"
 
 #. translators: this text will be preceded by a number e.g. "5 new to install"
 #: src/Summary.cc:1443
 msgid "new package to install"
 msgid_plural "new packages to install"
-msgstr[0] "要安裝的新軟體包"
+msgstr[0] "要安裝的新套件"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
 #: src/Summary.cc:1454
@@ -1735,7 +1725,7 @@ msgstr[0] "將重新安裝"
 #: src/Summary.cc:1457
 msgid "package to reinstall"
 msgid_plural "packages to reinstall"
-msgstr[0] "要重新安裝的軟體包"
+msgstr[0] "要重新安裝的套件"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
 #: src/Summary.cc:1468
@@ -1747,7 +1737,7 @@ msgstr[0] "將移除"
 #: src/Summary.cc:1471
 msgid "package to remove"
 msgid_plural "packages to remove"
-msgstr[0] "要移除的軟體包"
+msgstr[0] "要移除的套件"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
 #: src/Summary.cc:1482
@@ -1759,7 +1749,7 @@ msgstr[0] "將變更供應商"
 #: src/Summary.cc:1485
 msgid "package will change vendor"
 msgid_plural "packages will change vendor"
-msgstr[0] "軟體包將會變更供應商"
+msgstr[0] "套件將會變更供應商"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
 #: src/Summary.cc:1496
@@ -1771,26 +1761,26 @@ msgstr[0] "將變更架構"
 #: src/Summary.cc:1499
 msgid "package will change arch"
 msgid_plural "packages will change arch"
-msgstr[0] "軟體包將變更架構"
+msgstr[0] "套件將變更架構"
 
 #. translators: this text will be preceded by a number e.g. "5 new"
 #: src/Summary.cc:1510
 msgid "source package"
 msgid_plural "source packages"
-msgstr[0] "原始碼軟體包"
+msgstr[0] "原始碼套件"
 
 #. translators: this text will be preceded by a number e.g. "5 new to install"
 #: src/Summary.cc:1513
 msgid "source package to install"
 msgid_plural "source packages to install"
-msgstr[0] "要安裝的原始碼軟體包"
+msgstr[0] "要安裝的原始碼套件"
 
 #. patch command (auto)restricted to update stack patches
 #: src/Summary.cc:1586
 msgid ""
 "Package manager restart required. (Run this command once again after the "
 "update stack got updated)"
-msgstr "需要重新啟動軟體包管理員 (更新堆疊得到更新後，請再次執行此指令)。"
+msgstr "需要重新啟動套件管理員 (更新堆疊得到更新後，請再次執行此指令)。"
 
 #: src/Summary.cc:1589
 msgid "System reboot required."
@@ -2032,7 +2022,7 @@ msgstr "進行發行版本升級。"
 #. translators: --from <ALIAS|#|URI>
 #: src/commands/distupgrade.cc:37
 msgid "Restrict upgrade to specified repository."
-msgstr "限制升級到指定的軟體庫。"
+msgstr "限制升級到指定的套件庫。"
 
 #: src/commands/distupgrade.cc:68
 #, c-format, boost-format
@@ -2040,9 +2030,7 @@ msgid ""
 "You are about to do a distribution upgrade with all enabled repositories. "
 "Make sure these repositories are compatible before you continue. See '%s' "
 "for more information about this command."
-msgstr ""
-"您將要使用所有可用的軟體庫進行發行版本升級。 在您繼續之前，請先確定這些軟體庫"
-"的相容性。參閱 '%s' 得到更多關於此命令的資訊。"
+msgstr "您將要使用所有可用的套件庫進行發行版本升級。 在您繼續之前，請先確定這些套件庫的相容性。參閱 '%s' 得到更多關於此命令的資訊。"
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/help.cc:21
@@ -2071,12 +2059,12 @@ msgstr "verify (ve) [選項]"
 #. translators: command summary: install-new-recommends, inr
 #: src/commands/inrverify.cc:81
 msgid "Install newly added packages recommended by installed packages."
-msgstr "安裝已安裝軟體包所建議 的新軟體包。"
+msgstr "安裝已安裝套件所建議 的新套件。"
 
 #. translators: command summary: verify, ve
 #: src/commands/inrverify.cc:84
 msgid "Verify integrity of package dependencies."
-msgstr "確認軟體包相依完整性。"
+msgstr "確認套件相依完整性。"
 
 #. translators: command description
 #: src/commands/inrverify.cc:95
@@ -2104,12 +2092,11 @@ msgstr "呼叫「%1%」將限制該指令，僅允許其尋找支援可用硬體
 msgid ""
 "Check whether dependencies of installed packages are satisfied and suggest "
 "to install or remove packages in order to repair the dependency problems."
-msgstr ""
-"檢查已安裝的軟體包是否滿足相依性並建議安裝或移除軟體包來修正相依性問題。"
+msgstr "檢查已安裝的套件是否滿足相依性並建議安裝或移除套件來修正相依性問題。"
 
 #: src/commands/installremove.cc:54
 msgid "Select packages by plain name, not by capability."
-msgstr "單純依照名稱而不是功能來選取軟體包。"
+msgstr "單純依照名稱而不是功能來選取套件。"
 
 #: src/commands/installremove.cc:55
 msgid "Select packages solely by capability."
@@ -2123,16 +2110,14 @@ msgstr "remove (rm) [選項] <功能> ..."
 #. translators: command summary: remove, rm
 #: src/commands/installremove.cc:76
 msgid "Remove packages."
-msgstr "移除軟體包。"
+msgstr "移除套件。"
 
 #. translators: command description
 #: src/commands/installremove.cc:78
 msgid ""
 "Remove packages with specified capabilities. A capability is NAME[.ARCH]"
 "[OP<VERSION>], where OP is one of <, <=, =, >=, >."
-msgstr ""
-"移除具有指定功能的軟體包。 功能是名稱[.ARCH][OP<版本>]，其中 OP 為以下運算子"
-"之一： <、<=、=、>=、>。"
+msgstr "移除具有指定功能的套件。 功能是名稱[.ARCH][OP<版本>]，其中 OP 為以下運算子之一： <、<=、=、>=、>。"
 
 #: src/commands/installremove.cc:96 src/commands/installremove.cc:218
 #: src/utils/messages.cc:53
@@ -2141,7 +2126,7 @@ msgstr "引數太少。"
 
 #: src/commands/installremove.cc:97 src/commands/installremove.cc:219
 msgid "At least one package name is required."
-msgstr "至少需要一個軟體包名稱。"
+msgstr "至少需要一個套件名稱。"
 
 #: src/commands/installremove.cc:108
 msgid "Cannot uninstall patches."
@@ -2159,7 +2144,7 @@ msgstr ""
 
 #: src/commands/installremove.cc:118
 msgid "Uninstallation of a source package not defined and implemented."
-msgstr "反安裝一個原始碼軟體包仍未定義且未完成。"
+msgstr "反安裝一個原始碼套件仍未定義且未完成。"
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/installremove.cc:160
@@ -2169,7 +2154,7 @@ msgstr "install (in) [選項] <功能|rpm_檔案_位址> ..."
 #. translators: command summary: install, in
 #: src/commands/installremove.cc:162
 msgid "Install packages."
-msgstr "安裝軟體包。"
+msgstr "安裝套件。"
 
 #. translators: command description
 #: src/commands/installremove.cc:164
@@ -2178,13 +2163,12 @@ msgid ""
 "location. A capability is NAME[.ARCH][OP<VERSION>], where OP is one of <, "
 "<=, =, >=, >."
 msgstr ""
-"安裝具有指定功能的軟體包或指定位置 的 RPM 檔案。功能是指名稱[.ARCH][OP<版本"
-">]，其中 OP 為以下運算子之一： <、<=、=、>=、>。"
+"安裝具有指定功能的套件或指定位置 的 RPM 檔案。功能是指名稱[.ARCH][OP<版本>]，其中 OP 為以下運算子之一： <、<=、=、>=、>。"
 
 #. translators: --from <ALIAS|#|URI>
 #: src/commands/installremove.cc:179
 msgid "Select packages from the specified repository."
-msgstr "從指定的軟體庫選取軟體包。"
+msgstr "從指定的套件庫選取套件。"
 
 #. translators: --oldpackage
 #: src/commands/installremove.cc:183
@@ -2197,21 +2181,20 @@ msgstr ""
 
 #: src/commands/installremove.cc:187
 msgid "Silently install unsigned rpm packages given as commandline parameters."
-msgstr "以靜默方式安裝以指令行參數指定的未簽署 rpm 軟體包。"
+msgstr "以靜默方式安裝以指令行參數指定的未簽署 rpm 套件。"
 
 #. translators: -f, --force
 #: src/commands/installremove.cc:192
 msgid ""
 "Install even if the item is already installed (reinstall), downgraded or "
 "changes vendor or architecture."
-msgstr ""
-"安裝軟體包，即使該軟體包已安裝 (重新安裝)、 已降級、或已變更供應商或架構。"
+msgstr "安裝套件，即使該套件已安裝 (重新安裝)、 已降級、或已變更供應商或架構。"
 
 #. translators: rug related message, shown if
 #. 'zypper in --entire-catalog foorepo someargument' is specified
 #: src/commands/installremove.cc:230
 msgid "Ignoring arguments, marking the entire repository."
-msgstr "將忽略參數，標示整個軟體庫。"
+msgstr "將忽略參數，標示整個套件庫。"
 
 #: src/commands/installremove.cc:243 src/commands/sourceinstall.cc:92
 msgid "No valid arguments specified."
@@ -2252,7 +2235,7 @@ msgstr "列出所有可用的更新。"
 msgid ""
 "List all packages for which newer versions are available, regardless whether "
 "they are installable or not."
-msgstr "列出所有有較新版本可用的 軟體包，不論它們是否 可以安裝。"
+msgstr "列出所有有較新版本可用的 套件，不論它們是否 可以安裝。"
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/locale/addlocalecmd.cc:19
@@ -2369,25 +2352,23 @@ msgstr "不要移除指定地區設定的相應套件。"
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
 #: src/commands/locks/add.cc:29
 msgid "addlock (al) [OPTIONS] <PACKAGENAME> ..."
-msgstr "addlock (al) [選項] <軟體包名稱> ..."
+msgstr "addlock (al) [選項] <套件名稱> ..."
 
 #. translators: command summary
 #: src/commands/locks/add.cc:31
 msgid "Add a package lock."
-msgstr "加入一個軟體包鎖定。"
+msgstr "加入一個套件鎖定。"
 
 #. translators: command description
 #: src/commands/locks/add.cc:33
 msgid ""
 "Add a package lock. Specify packages to lock by exact name or by a glob "
 "pattern using '*' and '?' wildcard characters."
-msgstr ""
-"新增軟體包鎖定。 透過確切名稱或使用 '*' 和 '?' 萬用字元的全域樣式指定要鎖定的"
-"軟體包。"
+msgstr "新增套件鎖定。 透過確切名稱或使用 '*' 和 '?' 萬用字元的全域樣式指定要鎖定的套件。"
 
 #: src/commands/locks/add.cc:42
 msgid "Restrict the lock to the specified repository."
-msgstr "限制僅鎖定指定的軟體庫。"
+msgstr "限制僅鎖定指定的套件庫。"
 
 #: src/commands/locks/add.cc:76
 msgid "Specified lock has been successfully added."
@@ -2396,7 +2377,7 @@ msgstr[0] "指定的鎖定已成功新增。"
 
 #: src/commands/locks/add.cc:83
 msgid "Problem adding the package lock:"
-msgstr "加入軟體包鎖定發生問題："
+msgstr "加入套件鎖定發生問題："
 
 # =============================================================================
 #: src/commands/locks/clean.cc:16
@@ -2454,7 +2435,7 @@ msgstr "類型"
 #: src/search.cc:345 src/search.cc:486 src/search.cc:547 src/update.cc:724
 #: src/utils/misc.cc:227
 msgid "Repository"
-msgstr "軟體庫"
+msgstr "套件庫"
 
 #. translators: locks table value
 #: src/commands/locks/list.cc:156 src/commands/locks/list.cc:232
@@ -2483,7 +2464,7 @@ msgstr "locks (ll) [選項]"
 
 #: src/commands/locks/list.cc:257
 msgid "List current package locks."
-msgstr "列出目前的軟體包鎖定。"
+msgstr "列出目前的套件鎖定。"
 
 #: src/commands/locks/list.cc:285
 msgid "Show the number of resolvables matched by each lock."
@@ -2499,16 +2480,16 @@ msgstr "讀取鎖定檔案發生錯誤："
 
 #: src/commands/locks/list.cc:307
 msgid "There are no package locks defined."
-msgstr "沒有定義任何軟體包鎖定。"
+msgstr "沒有定義任何套件鎖定。"
 
 # =============================================================================
 #: src/commands/locks/remove.cc:25
 msgid "removelock (rl) [OPTIONS] <LOCK-NUMBER|PACKAGENAME> ..."
-msgstr "removelock (rl) [選項] <鎖定編號|軟體包名稱> ..."
+msgstr "removelock (rl) [選項] <鎖定編號|套件名稱> ..."
 
 #: src/commands/locks/remove.cc:26
 msgid "Remove a package lock."
-msgstr "解除一個軟體包鎖定。"
+msgstr "解除一個套件鎖定。"
 
 #. translators: command description; %1% is acoomand like 'zypper locks'
 #: src/commands/locks/remove.cc:28
@@ -2516,13 +2497,11 @@ msgstr "解除一個軟體包鎖定。"
 msgid ""
 "Remove a package lock. Specify the lock to remove by its number obtained "
 "with '%1%' or by package name."
-msgstr ""
-"移除一個軟體包鎖定。透過由 '%1% 1' 獲得的編號或透過軟體包名稱指定要移除的鎖"
-"定。"
+msgstr "移除一個套件鎖定。透過由 '%1% 1' 獲得的編號或透過套件名稱指定要移除的鎖定。"
 
 #: src/commands/locks/remove.cc:45
 msgid "Remove only locks with specified repository."
-msgstr "僅移除指定軟體庫的鎖定。"
+msgstr "僅移除指定套件庫的鎖定。"
 
 #: src/commands/locks/remove.cc:81
 msgid "Specified lock has been successfully removed."
@@ -2540,7 +2519,7 @@ msgstr[0] "%zu 鎖定已成功移除。"
 
 #: src/commands/locks/remove.cc:105
 msgid "Problem removing the package lock:"
-msgstr "移除軟體包鎖定發生問題："
+msgstr "移除套件鎖定發生問題："
 
 #. translators: command summary: needs-rebooting
 #: src/commands/needs-rebooting.cc:22
@@ -2605,12 +2584,12 @@ msgstr "what-provides (wp) <功能>"
 #. translators: command summary: what-provides, wp
 #: src/commands/nullcommands.cc:39
 msgid "List packages providing specified capability."
-msgstr "列出提供指定功能的軟體包。"
+msgstr "列出提供指定功能的套件。"
 
 #. translators: command description
 #: src/commands/nullcommands.cc:41
 msgid "List all packages providing the specified capability."
-msgstr "列出所有提供指定功能的軟體包。"
+msgstr "列出所有提供指定功能的套件。"
 
 #. "what-provides" is obsolete
 #. The "what-provides" now is included in "search" command, e.g.
@@ -2644,7 +2623,7 @@ msgstr "不做任何變更，僅報告要執行的操作。"
 #. translators: -r, --repo <ALIAS|#|URI>
 #: src/commands/optionsets.cc:65
 msgid "Work only with the specified repository."
-msgstr "只對指定軟體庫起作用。"
+msgstr "只對指定套件庫起作用。"
 
 #: src/commands/optionsets.cc:85
 #, c-format, boost-format
@@ -2665,17 +2644,17 @@ msgstr "設定下載-安裝模式。可用的模式： %s"
 #. translators: -d, --download-only
 #: src/commands/optionsets.cc:180
 msgid "Only download the packages, do not install."
-msgstr "僅下載軟體包，不要安裝。"
+msgstr "僅下載套件，不要安裝。"
 
 #. translators: -i, --installed-only
 #: src/commands/optionsets.cc:200
 msgid "Show only installed packages."
-msgstr "僅顯示已安裝的軟體包。"
+msgstr "僅顯示已安裝的套件。"
 
 #. translators: -u, --not-installed-only
 #: src/commands/optionsets.cc:204
 msgid "Show only packages which are not installed."
-msgstr "僅顯示未安裝的軟體包。"
+msgstr "僅顯示未安裝的套件。"
 
 #: src/commands/optionsets.cc:237
 msgid ""
@@ -2697,8 +2676,7 @@ msgid ""
 "installed, packages. Default is to treat file conflicts as an error. --"
 "download-as-needed disables the fileconflict check."
 msgstr ""
-"安裝軟體包，即使它會取代來自其他已安裝軟體包的檔案。 預設將檔案衝突視為錯誤來"
-"處理。 使用 --download-as-needed 選項來停用檔案衝突檢查。"
+"安裝套件，即使它會取代來自其他已安裝套件的檔案。 預設將檔案衝突視為錯誤來處理。 使用 --download-as-needed 選項來停用檔案衝突檢查。"
 
 #. translators: -y, --no-confirm
 #: src/commands/optionsets.cc:289
@@ -2734,13 +2712,13 @@ msgstr "跳過互動式更新。"
 #. translators: --sort-by-name
 #: src/commands/optionsets.cc:370
 msgid "Sort packages by name (default)."
-msgstr "依名稱對軟體包排序 (預設值)。"
+msgstr "依名稱對套件排序 (預設值)。"
 
 #. translators: --sort-by-repo
 #. translators: --sort-by-catalog
 #: src/commands/optionsets.cc:380 src/commands/optionsets.cc:391
 msgid "Sort packages by repository."
-msgstr "依軟體庫對軟體包排序。"
+msgstr "依套件庫對套件排序。"
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/patch.cc:24
@@ -2763,8 +2741,7 @@ msgid ""
 "is ignored, if the patch command must update the update stack first. Can not "
 "be combined with --updatestack-only."
 msgstr ""
-"另外嘗試更新修補程式未涵蓋的所有軟體包。如果修補程式指令必須先更新更新堆疊，"
-"則會忽略此選項。不能與 --updatestack-only 結合使用。"
+"另外嘗試更新修補程式未涵蓋的所有套件。如果修補程式指令必須先更新更新堆疊，則會忽略此選項。不能與 --updatestack-only 結合使用。"
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/patchcheck.cc:17
@@ -2828,7 +2805,7 @@ msgstr "檢查失敗的："
 #. Here: Table output
 #: src/commands/ps.cc:127 src/solve-commit.cc:440
 msgid "Checking for running processes using deleted libraries..."
-msgstr "正在檢查使用已刪除軟體庫的執行中程序..."
+msgstr "正在檢查使用已刪除套件庫的執行中程序..."
 
 #. process ID
 #: src/commands/ps.cc:142
@@ -2900,7 +2877,7 @@ msgstr "info (if) [選項] <名稱> ..."
 #. translators: command summary: info, if
 #: src/commands/query/info.cc:21
 msgid "Show full information for specified packages."
-msgstr "顯示指定軟體包的完整資訊。"
+msgstr "顯示指定套件的完整資訊。"
 
 #. translators: command description
 #: src/commands/query/info.cc:23
@@ -2910,38 +2887,38 @@ msgid ""
 "partially matching use option '--match-substrings' or use wildcards (*?) in "
 "name."
 msgstr ""
-"顯示指定軟體包的詳細資訊。 預設僅有完全符合指定名稱的才會顯示。 若也要顯示部"
-"份符合的軟體包，使用 '--match-substrings' 選項 或在名稱中使用萬用字元 (*?)。"
+"顯示指定套件的詳細資訊。 預設僅有完全符合指定名稱的才會顯示。 若也要顯示部份符合的套件，使用 '--match-substrings' 選項 "
+"或在名稱中使用萬用字元 (*?)。"
 
 #. translators: -s, --match-substrings
 #: src/commands/query/info.cc:62
 msgid "Print information for packages partially matching name."
-msgstr "印出部份名稱符合的軟體包資訊。"
+msgstr "印出部份名稱符合的套件資訊。"
 
 #. translators: --provides
 #: src/commands/query/info.cc:67
 msgid "Show provides."
-msgstr "顯示提供的軟體包。"
+msgstr "顯示提供的套件。"
 
 #. translators: --requires
 #: src/commands/query/info.cc:71
 msgid "Show requires and prerequires."
-msgstr "顯示必需和預先需要的軟體包。"
+msgstr "顯示必需和預先需要的套件。"
 
 #. translators: --conflicts
 #: src/commands/query/info.cc:75
 msgid "Show conflicts."
-msgstr "顯示衝突軟體包。"
+msgstr "顯示衝突套件。"
 
 #. translators: --obsoletes
 #: src/commands/query/info.cc:79
 msgid "Show obsoletes."
-msgstr "顯示汰換軟體包。"
+msgstr "顯示汰換套件。"
 
 #. translators: --recommends
 #: src/commands/query/info.cc:83
 msgid "Show recommends."
-msgstr "顯示推薦軟體包。"
+msgstr "顯示推薦套件。"
 
 #. translators: --supplements
 #: src/commands/query/info.cc:87
@@ -2951,7 +2928,7 @@ msgstr "顯示補充。"
 #. translators: --suggests
 #: src/commands/query/info.cc:91
 msgid "Show suggests."
-msgstr "顯示建議軟體包。"
+msgstr "顯示建議套件。"
 
 #: src/commands/query/info.cc:105 src/utils/messages.cc:70
 msgid "Required argument missing."
@@ -3010,52 +2987,52 @@ msgstr "顯示產品的詳細資料。"
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/query/packages.cc:18
 msgid "packages (pa) [OPTIONS] [REPOSITORY] ..."
-msgstr "packages (pa) [選項] [軟體庫] ..."
+msgstr "packages (pa) [選項] [套件庫] ..."
 
 #. translators: command summary: packages, pa
 #: src/commands/query/packages.cc:20
 msgid "List all available packages."
-msgstr "列出所有可用的軟體包。"
+msgstr "列出所有可用的套件。"
 
 #. translators: command description
 #: src/commands/query/packages.cc:22
 msgid "List all packages available in specified repositories."
-msgstr "列出指定軟體庫中所有可用的軟體包。"
+msgstr "列出指定套件庫中所有可用的套件。"
 
 #. translators: --orphaned
 #: src/commands/query/packages.cc:36
 msgid "Show packages which are orphaned (without repository)."
-msgstr "顯示孤兒軟體包 (沒有軟體庫)。"
+msgstr "顯示孤兒套件 (沒有套件庫)。"
 
 #. translators: --suggested
 #: src/commands/query/packages.cc:40
 msgid "Show packages which are suggested."
-msgstr "顯示建議的軟體包。"
+msgstr "顯示建議的套件。"
 
 #. translators: --recommended
 #: src/commands/query/packages.cc:44
 msgid "Show packages which are recommended."
-msgstr "顯示推薦的軟體包。"
+msgstr "顯示推薦的套件。"
 
 #. translators: --unneeded
 #: src/commands/query/packages.cc:48
 msgid "Show packages which are unneeded."
-msgstr "顯示不需要的軟體包。"
+msgstr "顯示不需要的套件。"
 
 #. translators: -N, --sort-by-name
 #: src/commands/query/packages.cc:52
 msgid "Sort the list by package name."
-msgstr "以軟體包名稱排列清單。"
+msgstr "以套件名稱排列清單。"
 
 #. translators: -R, --sort-by-repo
 #: src/commands/query/packages.cc:56
 msgid "Sort the list by repository."
-msgstr "以軟體庫排列清單。"
+msgstr "以套件庫排列清單。"
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/query/patches.cc:18
 msgid "patches (pch) [REPOSITORY] ..."
-msgstr "patches (pch) [軟體庫] ..."
+msgstr "patches (pch) [套件庫] ..."
 
 #. translators: command summary: patches, pch
 #: src/commands/query/patches.cc:20
@@ -3065,12 +3042,12 @@ msgstr "列出所有可用的修補程式。"
 #. translators: command description
 #: src/commands/query/patches.cc:22
 msgid "List all patches available in specified repositories."
-msgstr "列出指定軟體庫中所有可用的修補程式。"
+msgstr "列出指定套件庫中所有可用的修補程式。"
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/query/patterns.cc:18
 msgid "patterns (pt) [OPTIONS] [REPOSITORY] ..."
-msgstr "patterns (pt) [選項] [軟體庫] ..."
+msgstr "patterns (pt) [選項] [套件庫] ..."
 
 #. translators: command summary: patterns, pt
 #: src/commands/query/patterns.cc:20
@@ -3080,12 +3057,12 @@ msgstr "列出所有可用的樣式。"
 #. translators: command description
 #: src/commands/query/patterns.cc:22
 msgid "List all patterns available in specified repositories."
-msgstr "列出指定軟體庫中所有可用的樣式。"
+msgstr "列出指定套件庫中所有可用的樣式。"
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/query/products.cc:18
 msgid "products (pd) [OPTIONS] [REPOSITORY] ..."
-msgstr "products (pd) [選項] [軟體庫] ..."
+msgstr "products (pd) [選項] [套件庫] ..."
 
 #. translators: command summary: products, pd
 #: src/commands/query/products.cc:20
@@ -3095,7 +3072,7 @@ msgstr "列出所有可用的產品。"
 #. translators: command description
 #: src/commands/query/products.cc:22
 msgid "List all products available in specified repositories."
-msgstr "列出指定軟體庫中所有可用的產品。"
+msgstr "列出指定套件庫中所有可用的產品。"
 
 #. translators: --xmlfwd <TAG>
 #: src/commands/query/products.cc:36
@@ -3118,15 +3095,13 @@ msgstr "addrepo (ar) [選項] <檔案.repo>"
 
 #: src/commands/repos/add.cc:24
 msgid "Add a new repository."
-msgstr "加入一個新的軟體庫。"
+msgstr "加入一個新的套件庫。"
 
 #: src/commands/repos/add.cc:25
 msgid ""
 "Add a repository to the system. The repository can be specified by its URI "
 "or can be read from specified .repo file (even remote)."
-msgstr ""
-"增加一個軟體庫到此系統。軟體庫可藉由指定位址或從指定的 .repo 檔讀取(甚至是遠"
-"端的)。"
+msgstr "增加一個套件庫到此系統。套件庫可藉由指定位址或從指定的 .repo 檔讀取(甚至是遠端的)。"
 
 #: src/commands/repos/add.cc:40
 msgid "Just another means to specify a .repo file to read."
@@ -3156,12 +3131,12 @@ msgstr "如果只使用一個引數，它必須是一個指向 .repo 檔案的�
 
 #: src/commands/repos/add.cc:130
 msgid "Specified type is not a valid repository type:"
-msgstr "指定的類型不是有效的軟體庫類型："
+msgstr "指定的類型不是有效的套件庫類型："
 
 #: src/commands/repos/add.cc:131
 #, c-format, boost-format
 msgid "See '%s' or '%s' to get a list of known repository types."
-msgstr "參閱 '%s' 或 '%s' 取得已知的軟體庫類型清單。"
+msgstr "參閱 '%s' 或 '%s' 取得已知的套件庫類型清單。"
 
 #: src/commands/repos/clean.cc:16
 msgid "clean (cc) [ALIAS|#|URI] ..."
@@ -3174,7 +3149,7 @@ msgstr "清除本機快取。"
 #. translators: -r, --repo <ALIAS|#|URI>
 #: src/commands/repos/clean.cc:37
 msgid "Clean only specified repositories."
-msgstr "只清除指定的軟體庫。"
+msgstr "只清除指定的套件庫。"
 
 #. translators: -m, --metadata
 #: src/commands/repos/clean.cc:42
@@ -3189,7 +3164,7 @@ msgstr "清除原始中繼資料快取。"
 #. translators: -a, --all
 #: src/commands/repos/clean.cc:53
 msgid "Clean both metadata and package caches."
-msgstr "清除中繼資料和軟體包快取。"
+msgstr "清除中繼資料和套件快取。"
 
 #: src/commands/repos/list.cc:40 src/commands/repos/list.cc:212
 #: src/commands/services/list.cc:104
@@ -3232,7 +3207,7 @@ msgstr "關閉"
 
 #: src/commands/repos/list.cc:51
 msgid "Keep Packages"
-msgstr "保留軟體包"
+msgstr "保留套件"
 
 #: src/commands/repos/list.cc:53
 msgid "GPG Key URI"
@@ -3252,7 +3227,7 @@ msgstr "關鍵字"
 
 #: src/commands/repos/list.cc:57
 msgid "Repo Info Path"
-msgstr "軟體庫資訊路徑"
+msgstr "套件庫資訊路徑"
 
 #: src/commands/repos/list.cc:58
 msgid "MD Cache Path"
@@ -3260,20 +3235,20 @@ msgstr "MD 快取路徑"
 
 #: src/commands/repos/list.cc:74
 msgid "repos (lr) [OPTIONS] [REPO] ..."
-msgstr "repos (lr) [選項] [軟體庫] ..."
+msgstr "repos (lr) [選項] [套件庫] ..."
 
 #: src/commands/repos/list.cc:75 src/commands/repos/list.cc:76
 msgid "List all defined repositories."
-msgstr "列出所有已定義的軟體庫。"
+msgstr "列出所有已定義的套件庫。"
 
 #. translators: -e, --export <FILE.repo>
 #: src/commands/repos/list.cc:87
 msgid "Export all defined repositories as a single local .repo file."
-msgstr "將所有已定義的軟體庫匯出為單一的本機 .repo 檔。"
+msgstr "將所有已定義的套件庫匯出為單一的本機 .repo 檔。"
 
 #: src/commands/repos/list.cc:118 src/repos.cc:1024
 msgid "Error reading repositories:"
-msgstr "讀取軟體庫發生錯誤："
+msgstr "讀取套件庫發生錯誤："
 
 #: src/commands/repos/list.cc:144
 #, c-format, boost-format
@@ -3287,7 +3262,7 @@ msgstr "可能您沒有寫入的權限？"
 #: src/commands/repos/list.cc:151
 #, c-format, boost-format
 msgid "Repositories have been successfully exported to %s."
-msgstr "軟體庫已成功匯出到 %s。"
+msgstr "套件庫已成功匯出到 %s。"
 
 #. translators: 'zypper repos' column - whether autorefresh is enabled
 #. for the repository
@@ -3298,11 +3273,11 @@ msgstr "重新整理"
 
 #: src/commands/repos/list.cc:332
 msgid "No repositories defined."
-msgstr "尚未定義軟體庫。"
+msgstr "尚未定義套件庫。"
 
 #: src/commands/repos/list.cc:333
 msgid "Use the 'zypper addrepo' command to add one or more repositories."
-msgstr "請用 'zypper addrepo' 指令來加入一或多個軟體庫。"
+msgstr "請用 'zypper addrepo' 指令來加入一或多個套件庫。"
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/repos/modify.cc:24
@@ -3318,7 +3293,7 @@ msgstr "modifyrepo (mr) <選項> <%1%>"
 #. translators: command summary
 #: src/commands/repos/modify.cc:29
 msgid "Modify specified repository."
-msgstr "修改指定的軟體庫。"
+msgstr "修改指定的套件庫。"
 
 #. translators: command description
 #: src/commands/repos/modify.cc:31
@@ -3326,12 +3301,12 @@ msgstr "修改指定的軟體庫。"
 msgid ""
 "Modify properties of repositories specified by alias, number, or URI, or by "
 "the '%1%' aggregate options."
-msgstr "修改藉由別名、編號、URI，或使用 '%1%' 聚集選項所指定的軟體庫的屬性。"
+msgstr "修改藉由別名、編號、URI，或使用 '%1%' 聚集選項所指定的套件庫的屬性。"
 
 #: src/commands/repos/modify.cc:89
 #, c-format, boost-format
 msgid "Repository %s not found."
-msgstr "找不到軟體庫 %s。"
+msgstr "找不到套件庫 %s。"
 
 #: src/commands/repos/refresh.cc:24
 msgid "refresh (ref) [ALIAS|#|URI] ..."
@@ -3340,16 +3315,14 @@ msgstr "refresh (ref) [別名|編號|位址]..."
 #. translators: command summary: refresh, ref
 #: src/commands/repos/refresh.cc:26
 msgid "Refresh all repositories."
-msgstr "重新整理所有軟體庫。"
+msgstr "重新整理所有套件庫。"
 
 #. translators: command description
 #: src/commands/repos/refresh.cc:28
 msgid ""
 "Refresh repositories specified by their alias, number or URI. If none are "
 "specified, all enabled repositories will be refreshed."
-msgstr ""
-"重新整理由別名、編號或位址指定的軟體庫。若未指定任何軟體庫，將會重新整理所有"
-"啟用的軟體庫。"
+msgstr "重新整理由別名、編號或位址指定的套件庫。若未指定任何套件庫，將會重新整理所有啟用的套件庫。"
 
 #. translators: -f, --force
 #: src/commands/repos/refresh.cc:49 src/commands/services/refresh.cc:113
@@ -3379,12 +3352,12 @@ msgstr "僅下載 RAW 中繼資料，不建立資料庫。"
 #. translators: -r, --repo <ALIAS|#|URI>
 #: src/commands/repos/refresh.cc:74
 msgid "Refresh only specified repositories."
-msgstr "僅重新整理指定的軟體庫。"
+msgstr "僅重新整理指定的套件庫。"
 
 #. translators: -s, --services
 #: src/commands/repos/refresh.cc:80
 msgid "Refresh also services before refreshing repos."
-msgstr "重新整理軟體庫之前也重新整理服務。"
+msgstr "重新整理套件庫之前也重新整理服務。"
 
 #: src/commands/repos/refresh.cc:95
 #, c-format, boost-format
@@ -3398,61 +3371,61 @@ msgstr "如果使用了 '%s'，則不允許使用參數。"
 
 #: src/commands/repos/refresh.cc:195 src/repos.cc:1036
 msgid "Specified repositories: "
-msgstr "指定的軟體庫： "
+msgstr "指定的套件庫： "
 
 #: src/commands/repos/refresh.cc:218
 #, c-format, boost-format
 msgid "Refreshing repository '%s'."
-msgstr "正在重新整理軟體庫 '%s'。"
+msgstr "正在重新整理套件庫 '%s'。"
 
 #: src/commands/repos/refresh.cc:236 src/repos.cc:845
 #, c-format, boost-format
 msgid "Scanning content of disabled repository '%s'."
-msgstr "正在掃描已停用的軟體庫 '%s' 的內容。"
+msgstr "正在掃描已停用的套件庫 '%s' 的內容。"
 
 #: src/commands/repos/refresh.cc:247
 #, c-format, boost-format
 msgid "Skipping disabled repository '%s'"
-msgstr "正在跳過已停用的軟體庫 '%s'"
+msgstr "正在跳過已停用的套件庫 '%s'"
 
 #: src/commands/repos/refresh.cc:262 src/repos.cc:862 src/repos.cc:895
 #, c-format, boost-format
 msgid "Skipping repository '%s' because of the above error."
-msgstr "由於上述錯誤，正在跳過軟體庫 '%s'。"
+msgstr "由於上述錯誤，正在跳過套件庫 '%s'。"
 
 #: src/commands/repos/refresh.cc:274
 msgid ""
 "Some of the repositories have not been refreshed because they were not known."
-msgstr "因為軟體庫未知，某些軟體庫尚未被重新整理。"
+msgstr "因為套件庫未知，某些套件庫尚未被重新整理。"
 
 #: src/commands/repos/refresh.cc:281
 msgid "Specified repositories are not enabled or defined."
-msgstr "指定的軟體庫尚未啟用或定義。"
+msgstr "指定的套件庫尚未啟用或定義。"
 
 #: src/commands/repos/refresh.cc:283
 msgid "There are no enabled repositories defined."
-msgstr "尚未定義已啟用的軟體庫。"
+msgstr "尚未定義已啟用的套件庫。"
 
 #: src/commands/repos/refresh.cc:287
 #, c-format, boost-format
 msgid "Use '%s' or '%s' commands to add or enable repositories."
-msgstr "請用 '%s' 或 '%s' 指令來加入或啟用軟體庫。"
+msgstr "請用 '%s' 或 '%s' 指令來加入或啟用套件庫。"
 
 #: src/commands/repos/refresh.cc:293
 msgid "Could not refresh the repositories because of errors."
-msgstr "因發生錯誤無法重新整理軟體庫。"
+msgstr "因發生錯誤無法重新整理套件庫。"
 
 #: src/commands/repos/refresh.cc:298 src/repos.cc:946
 msgid "Some of the repositories have not been refreshed because of an error."
-msgstr "因發生錯誤，某些軟體庫尚未被重新整理。"
+msgstr "因發生錯誤，某些套件庫尚未被重新整理。"
 
 #: src/commands/repos/refresh.cc:302
 msgid "Specified repositories have been refreshed."
-msgstr "指定的軟體庫已重新整理。"
+msgstr "指定的套件庫已重新整理。"
 
 #: src/commands/repos/refresh.cc:304
 msgid "All repositories have been refreshed."
-msgstr "所有軟體庫已重新整理。"
+msgstr "所有套件庫已重新整理。"
 
 #: src/commands/repos/remove.cc:21
 msgid "removerepo (rr) [OPTIONS] <ALIAS|#|URI>"
@@ -3460,11 +3433,11 @@ msgstr "removerepo (rr) [選項] <別名|編號|位址>"
 
 #: src/commands/repos/remove.cc:22
 msgid "Remove specified repository."
-msgstr "移除指定的軟體庫。"
+msgstr "移除指定的套件庫。"
 
 #: src/commands/repos/remove.cc:23
 msgid "Remove repository specified by alias, number or URI."
-msgstr "移除透過別名、編號或位址指定的軟體庫。"
+msgstr "移除透過別名、編號或位址指定的套件庫。"
 
 #. translators: --loose-auth
 #: src/commands/repos/remove.cc:44 src/commands/services/remove.cc:40
@@ -3481,34 +3454,33 @@ msgstr "忽略位址中的查詢字串。"
 #: src/commands/repos/remove.cc:96
 #, c-format, boost-format
 msgid "Repository '%s' not found by alias, number or URI."
-msgstr "無法由它的別名、編號或位址找到軟體庫 '%s'。"
+msgstr "無法由它的別名、編號或位址找到套件庫 '%s'。"
 
 #: src/commands/repos/rename.cc:33
 #, c-format, boost-format
 msgid ""
 "Cannot change alias of '%s' repository. The repository belongs to service "
 "'%s' which is responsible for setting its alias."
-msgstr ""
-"無法變更 '%s' 軟體庫的別名。此軟體庫屬於 '%s' 服務，此服務才能設定它的別名。"
+msgstr "無法變更 '%s' 套件庫的別名。此套件庫屬於 '%s' 服務，此服務才能設定它的別名。"
 
 #: src/commands/repos/rename.cc:43
 #, c-format, boost-format
 msgid "Repository '%s' renamed to '%s'."
-msgstr "軟體庫 '%s' 已改名為 '%s'。"
+msgstr "套件庫 '%s' 已改名為 '%s'。"
 
 #: src/commands/repos/rename.cc:47 src/repos.cc:1215
 #, c-format, boost-format
 msgid "Repository named '%s' already exists. Please use another alias."
-msgstr "軟體庫名稱 '%s' 已存在。請使用其他的別名。"
+msgstr "套件庫名稱 '%s' 已存在。請使用其他的別名。"
 
 #: src/commands/repos/rename.cc:52 src/repos.cc:1693
 msgid "Error while modifying the repository:"
-msgstr "修改軟體庫時發生錯誤："
+msgstr "修改套件庫時發生錯誤："
 
 #: src/commands/repos/rename.cc:53
 #, c-format, boost-format
 msgid "Leaving repository '%s' unchanged."
-msgstr "軟體庫 '%s' 維持不變。"
+msgstr "套件庫 '%s' 維持不變。"
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/repos/rename.cc:64
@@ -3517,12 +3489,12 @@ msgstr "renamerepo (nr) [選項] <別名|編號|位址> <新別名>"
 
 #: src/commands/repos/rename.cc:65
 msgid "Rename specified repository."
-msgstr "更名指定的軟體庫。"
+msgstr "更名指定的套件庫。"
 
 #. translators: command description
 #: src/commands/repos/rename.cc:67
 msgid "Assign new alias to the repository specified by alias, number or URI."
-msgstr "將由別名、編號或位址指定的軟體庫改名為新別名。"
+msgstr "將由別名、編號或位址指定的套件庫改名為新別名。"
 
 #: src/commands/repos/rename.cc:92
 msgid "Too few arguments. At least URI and alias are required."
@@ -3531,7 +3503,7 @@ msgstr "參數過少。至少要有位址和別名。"
 #: src/commands/repos/rename.cc:114
 #, c-format, boost-format
 msgid "Repository '%s' not found."
-msgstr "找不到軟體庫 '%s'。"
+msgstr "找不到套件庫 '%s'。"
 
 #: src/commands/reposerviceoptionsets.cc:35 src/repos.cc:108
 #, c-format, boost-format
@@ -3546,7 +3518,7 @@ msgstr "設定此服務的描述姓名稱。"
 
 #: src/commands/reposerviceoptionsets.cc:72
 msgid "Set a descriptive name for the repository."
-msgstr "為此軟體庫設定一個描述性的名稱。"
+msgstr "為此套件庫設定一個描述性的名稱。"
 
 #: src/commands/reposerviceoptionsets.cc:75
 msgid "Enable a disabled service."
@@ -3554,7 +3526,7 @@ msgstr "啟用一個已停用的服務。"
 
 #: src/commands/reposerviceoptionsets.cc:75
 msgid "Enable a disabled repository."
-msgstr "啟用一個已停用的軟體庫。"
+msgstr "啟用一個已停用的套件庫。"
 
 #: src/commands/reposerviceoptionsets.cc:78
 msgid "Disable the service (but don't remove it)."
@@ -3562,7 +3534,7 @@ msgstr "停用服務 (但不移除它)。"
 
 #: src/commands/reposerviceoptionsets.cc:78
 msgid "Disable the repository (but don't remove it)."
-msgstr "停用軟體庫 (但未移除它)。"
+msgstr "停用套件庫 (但未移除它)。"
 
 #: src/commands/reposerviceoptionsets.cc:81
 msgid "Enable auto-refresh of the service."
@@ -3570,7 +3542,7 @@ msgstr "啟用服務的自動重新整理。"
 
 #: src/commands/reposerviceoptionsets.cc:81
 msgid "Enable auto-refresh of the repository."
-msgstr "啟用軟體庫的自動重新整理。"
+msgstr "啟用套件庫的自動重新整理。"
 
 #: src/commands/reposerviceoptionsets.cc:84
 msgid "Disable auto-refresh of the service."
@@ -3578,7 +3550,7 @@ msgstr "停用服務的自動重新整理。"
 
 #: src/commands/reposerviceoptionsets.cc:84
 msgid "Disable auto-refresh of the repository."
-msgstr "停用該軟體庫的自動重新整理。"
+msgstr "停用該套件庫的自動重新整理。"
 
 #: src/commands/reposerviceoptionsets.cc:111
 msgid "Apply changes to all services."
@@ -3586,7 +3558,7 @@ msgstr "套用變更到所有服務。"
 
 #: src/commands/reposerviceoptionsets.cc:111
 msgid "Apply changes to all repositories."
-msgstr "套用變更到所軟體庫。"
+msgstr "套用變更到所套件庫。"
 
 #: src/commands/reposerviceoptionsets.cc:114
 msgid "Apply changes to all local services."
@@ -3594,7 +3566,7 @@ msgstr "套用變更到所有本地服務。"
 
 #: src/commands/reposerviceoptionsets.cc:114
 msgid "Apply changes to all local repositories."
-msgstr "套用變更到所有本地軟體庫。"
+msgstr "套用變更到所有本地套件庫。"
 
 #: src/commands/reposerviceoptionsets.cc:117
 msgid "Apply changes to all remote services."
@@ -3602,7 +3574,7 @@ msgstr "套用變更到所有遠端服務。"
 
 #: src/commands/reposerviceoptionsets.cc:117
 msgid "Apply changes to all remote repositories."
-msgstr "套用變更到所有遠端軟體庫。"
+msgstr "套用變更到所有遠端套件庫。"
 
 #: src/commands/reposerviceoptionsets.cc:120
 msgid "Apply changes to services of specified type."
@@ -3610,11 +3582,11 @@ msgstr "套用變更到指定類型的服務。"
 
 #: src/commands/reposerviceoptionsets.cc:120
 msgid "Apply changes to repositories of specified type."
-msgstr "套用變更到指定類型的軟體庫。"
+msgstr "套用變更到指定類型的套件庫。"
 
 #: src/commands/reposerviceoptionsets.cc:137
 msgid "Set priority of the repository."
-msgstr "設定軟體庫的優先性。"
+msgstr "設定套件庫的優先性。"
 
 #: src/commands/reposerviceoptionsets.cc:138
 msgid "Enable RPM files caching."
@@ -3626,11 +3598,11 @@ msgstr "停用 RPM 檔案快取。"
 
 #: src/commands/reposerviceoptionsets.cc:140
 msgid "Enable GPG check for this repository."
-msgstr "為此軟體庫啟用 GPG 檢查。"
+msgstr "為此套件庫啟用 GPG 檢查。"
 
 #: src/commands/reposerviceoptionsets.cc:141
 msgid "Enable strict GPG check for this repository."
-msgstr "為此軟體庫啟用嚴格 GPG 檢查。"
+msgstr "為此套件庫啟用嚴格 GPG 檢查。"
 
 #: src/commands/reposerviceoptionsets.cc:142
 #, boost-format
@@ -3639,16 +3611,16 @@ msgstr "「%1%」的縮寫。"
 
 #: src/commands/reposerviceoptionsets.cc:143
 msgid "Enable GPG check but allow the repository metadata to be unsigned."
-msgstr "啟用 GPG 檢查，但允許不對軟體庫中繼資料簽章。"
+msgstr "啟用 GPG 檢查，但允許不對套件庫中繼資料簽章。"
 
 #: src/commands/reposerviceoptionsets.cc:144
 msgid ""
 "Enable GPG check but allow installing unsigned packages from this repository."
-msgstr "啟用 GPG 檢查，但允許安裝此軟體庫中的未簽章軟體包。"
+msgstr "啟用 GPG 檢查，但允許安裝此套件庫中的未簽章套件。"
 
 #: src/commands/reposerviceoptionsets.cc:145
 msgid "Disable GPG check for this repository."
-msgstr "為此軟體庫停用 GPG 檢查。"
+msgstr "為此套件庫停用 GPG 檢查。"
 
 #: src/commands/reposerviceoptionsets.cc:146
 msgid ""
@@ -3659,12 +3631,12 @@ msgstr "使用 /etc/zypp/zypp.conf 中定義的全域 GPG 檢查設定。此為�
 #. translators: -a, --alias
 #: src/commands/reposerviceoptionsets.cc:182
 msgid "Show also repository alias."
-msgstr "同時顯示軟體庫別名。"
+msgstr "同時顯示套件庫別名。"
 
 #. translators: -n, --name
 #: src/commands/reposerviceoptionsets.cc:185
 msgid "Show also repository name."
-msgstr "同時顯示軟體庫名稱。"
+msgstr "同時顯示套件庫名稱。"
 
 #. translators: -r, --refresh
 #: src/commands/reposerviceoptionsets.cc:188
@@ -3674,12 +3646,12 @@ msgstr "同時顯示自動重新整理旗標。"
 #. translators: -u, --uri
 #: src/commands/reposerviceoptionsets.cc:198
 msgid "Show also base URI of repositories."
-msgstr "同時顯示軟體庫的基礎位址。"
+msgstr "同時顯示套件庫的基礎位址。"
 
 #. translators: -p, --priority
 #: src/commands/reposerviceoptionsets.cc:202
 msgid "Show also repository priority."
-msgstr "同時顯示軟體庫的優先權。"
+msgstr "同時顯示套件庫的優先權。"
 
 #. translators: -d, --details
 #: src/commands/reposerviceoptionsets.cc:205
@@ -3688,7 +3660,7 @@ msgstr "顯示更多資訊，如位址、優先權、類型。"
 
 #: src/commands/reposerviceoptionsets.cc:212
 msgid "Show also repositories belonging to the services."
-msgstr "同時顯示屬於服務的軟體庫。"
+msgstr "同時顯示屬於服務的套件庫。"
 
 #. translators: -s, --service
 #. translators: -A, --sort-by-alias
@@ -3700,7 +3672,7 @@ msgstr "同時顯示上一層服務的別名。"
 #. translators: -E, --show-enabled-only
 #: src/commands/reposerviceoptionsets.cc:225
 msgid "Show enabled repos only."
-msgstr "僅顯示啟用的軟體庫。"
+msgstr "僅顯示啟用的套件庫。"
 
 #. translators: -U, --sort-by-uri
 #: src/commands/reposerviceoptionsets.cc:228
@@ -3715,7 +3687,7 @@ msgstr "依名稱排序清單。"
 #. translators: -P, --sort-by-priority
 #: src/commands/reposerviceoptionsets.cc:234
 msgid "Sort the list by repository priority."
-msgstr "依軟體庫優先權排序清單。"
+msgstr "依套件庫優先權排序清單。"
 
 #. translator: %1% denotes a zypper command to execute. Like 'zypper search-packages'.
 #: src/commands/search/search-packages-hinthack.cc:81
@@ -3731,8 +3703,7 @@ msgstr "要將尚未啟用的遠端資源包含在延伸搜尋範圍中，請使
 msgid ""
 "The package providing this subcommand is currently not installed. You can "
 "install it by calling '%1%'."
-msgstr ""
-"目前尚未安裝提供此子指令的軟體包。您可以透過呼叫「%1%」來安裝該軟體包。"
+msgstr "目前尚未安裝提供此子指令的套件。您可以透過呼叫「%1%」來安裝該套件。"
 
 #: src/commands/search/search-packages-hinthack.cc:98
 #, boost-format
@@ -3754,7 +3725,7 @@ msgstr "執行「%1%」以搜尋尚未啟動的遠端資源。"
 #. translators: command summary: search, se
 #: src/commands/search/search.cc:73
 msgid "Search for packages matching a pattern."
-msgstr "搜尋符合樣式的軟體包。"
+msgstr "搜尋符合樣式的套件。"
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/search/search.cc:81
@@ -3769,7 +3740,7 @@ msgstr "patch-search [選項] [查詢字串...]"
 #. translators: command description
 #: src/commands/search/search.cc:95
 msgid "Search for packages matching any of the given search strings."
-msgstr "搜尋符合指定搜尋字串的軟體包。"
+msgstr "搜尋符合指定搜尋字串的套件。"
 
 #. translators: command description
 #: src/commands/search/search.cc:97
@@ -3798,64 +3769,64 @@ msgstr "搜尋字串符合結果只能是完整的詞語。"
 #. translators: -x, --match-exact
 #: src/commands/search/search.cc:121
 msgid "Searches for an exact match of the search strings."
-msgstr "搜尋完全相符的軟體包名稱。"
+msgstr "搜尋完全相符的套件名稱。"
 
 #. translators: --provides
 #: src/commands/search/search.cc:133
 msgid "Search for packages which provide the search strings."
-msgstr "搜尋提供搜尋字串的軟體包。"
+msgstr "搜尋提供搜尋字串的套件。"
 
 #. translators: --requires
 #: src/commands/search/search.cc:137
 msgid "Search for packages which require the search strings."
-msgstr "搜尋需要搜尋字串的軟體包。"
+msgstr "搜尋需要搜尋字串的套件。"
 
 #. translators: --recommends
 #: src/commands/search/search.cc:141
 msgid "Search for packages which recommend the search strings."
-msgstr "搜尋推薦搜尋字串的軟體包。"
+msgstr "搜尋推薦搜尋字串的套件。"
 
 #. translators: --supplements
 #: src/commands/search/search.cc:145
 msgid "Search for packages which supplement the search strings."
-msgstr "搜尋補充搜尋字串的軟體包。"
+msgstr "搜尋補充搜尋字串的套件。"
 
 #. translators: --conflicts
 #: src/commands/search/search.cc:149
 msgid "Search packages conflicting with search strings."
-msgstr "搜尋與搜尋字串衝突的軟體包。"
+msgstr "搜尋與搜尋字串衝突的套件。"
 
 #. translators: --obsoletes
 #: src/commands/search/search.cc:153
 msgid "Search for packages which obsolete the search strings."
-msgstr "搜尋哪個軟體包取代了搜尋字串。"
+msgstr "搜尋哪個套件取代了搜尋字串。"
 
 #. translators: --suggests
 #: src/commands/search/search.cc:157
 msgid "Search for packages which suggest the search strings."
-msgstr "搜尋建議搜尋字串的軟體包。"
+msgstr "搜尋建議搜尋字串的套件。"
 
 #. translators: -t, --type <TYPE>
 #: src/commands/search/search.cc:161
 msgid "Search only for packages of the specified type."
-msgstr "僅搜尋指定類型的軟體包。"
+msgstr "僅搜尋指定類型的套件。"
 
 #. translators: -n, --name
 #: src/commands/search/search.cc:165
 msgid ""
 "Useful together with dependency options, otherwise searching in package name "
 "is default."
-msgstr "可和相依性選項合併使用，否則 預設搜尋軟體包名稱。"
+msgstr "可和相依性選項合併使用，否則 預設搜尋套件名稱。"
 
 #. translators: -f, --file-list
 #: src/commands/search/search.cc:169
 msgid "Search for a match in the file list of packages."
-msgstr "在檔案清單中搜尋符合的軟體包。"
+msgstr "在檔案清單中搜尋符合的套件。"
 
 #. translators: -d, --search-descriptions
 #: src/commands/search/search.cc:178
 msgid "Search also in package summaries and descriptions."
-msgstr "也搜尋軟體包摘要和描述。"
+msgstr "也搜尋套件摘要和描述。"
 
 #. translators: -C, --case-sensitive
 #: src/commands/search/search.cc:182
@@ -3865,20 +3836,19 @@ msgstr "執行區分大小寫的搜尋。"
 #. translators: -s, --details
 #: src/commands/search/search.cc:191
 msgid "Show each available version in each repository on a separate line."
-msgstr "每個軟體庫中每個可用的版本 單獨顯示在一行。"
+msgstr "每個套件庫中每個可用的版本 單獨顯示在一行。"
 
 #. translators: -v, --verbose
 #: src/commands/search/search.cc:195
 msgid ""
 "Like --details, with additional information where the search has matched "
 "(useful for search in dependencies)."
-msgstr ""
-"與 --details 相似，不過會額外顯示相符項的 位置資訊 (對搜尋相依軟體包很有用)。"
+msgstr "與 --details 相似，不過會額外顯示相符項的 位置資訊 (對搜尋相依套件很有用)。"
 
 #: src/commands/search/search.cc:289 src/repos.cc:782
 #, c-format, boost-format
 msgid "Specified repository '%s' is disabled."
-msgstr "指定軟體庫 '%s' 已停用。"
+msgstr "指定套件庫 '%s' 已停用。"
 
 #. translators: empty search result message
 #: src/commands/search/search.cc:422
@@ -3954,7 +3924,7 @@ msgstr "加入一個新的服務。"
 
 #: src/commands/services/add.cc:104
 msgid "Add a repository index service to the system."
-msgstr "加入一個軟體庫索引服務到系統。"
+msgstr "加入一個套件庫索引服務到系統。"
 
 #: src/commands/services/add.cc:118
 msgid "The type of service is always autodetected. This option is ignored."
@@ -3972,7 +3942,7 @@ msgstr "正在重新整理服務 '%s'。"
 #: src/commands/services/common.cc:136 src/commands/services/common.cc:146
 #, c-format, boost-format
 msgid "Problem retrieving the repository index file for service '%s':"
-msgstr "為服務 '%s' 取得軟體庫索引檔案時發生問題："
+msgstr "為服務 '%s' 取得套件庫索引檔案時發生問題："
 
 #: src/commands/services/common.cc:138 src/commands/services/refresh.cc:226
 #: src/repos.cc:1745
@@ -4039,27 +4009,27 @@ msgstr "進階："
 
 #: src/commands/services/modify.cc:43
 msgid "Add a RIS service repository to enable."
-msgstr "新增一個要啟用的 RIS 服務軟體庫。"
+msgstr "新增一個要啟用的 RIS 服務套件庫。"
 
 #: src/commands/services/modify.cc:44
 msgid "Add a RIS service repository to disable."
-msgstr "新增一個要停用的 RIS 服務軟體庫。"
+msgstr "新增一個要停用的 RIS 服務套件庫。"
 
 #: src/commands/services/modify.cc:45
 msgid "Remove a RIS service repository to enable."
-msgstr "移除一個要啟用的 RIS 服務軟體庫。"
+msgstr "移除一個要啟用的 RIS 服務套件庫。"
 
 #: src/commands/services/modify.cc:46
 msgid "Remove a RIS service repository to disable."
-msgstr "移除一個要停用的 RIS 服務軟體庫。"
+msgstr "移除一個要停用的 RIS 服務套件庫。"
 
 #: src/commands/services/modify.cc:47
 msgid "Clear the list of RIS repositories to enable."
-msgstr "清除要啟用的 RIS 軟體庫清單。"
+msgstr "清除要啟用的 RIS 套件庫清單。"
 
 #: src/commands/services/modify.cc:48
 msgid "Clear the list of RIS repositories to disable."
-msgstr "清除要停用的 RIS 軟體庫清單。"
+msgstr "清除要停用的 RIS 套件庫清單。"
 
 #. translators: aggregate option is e.g. "--all". This message will be
 #. followed by ms command help text which will explain it
@@ -4104,14 +4074,14 @@ msgstr "服務 '%s' 的名稱已被設為 '%s'。"
 msgid "Repository '%s' has been added to enabled repositories of service '%s'"
 msgid_plural ""
 "Repositories '%s' have been added to enabled repositories of service '%s'"
-msgstr[0] "軟體庫 '%s' 已被加入服務 '%s' 的啟用軟體庫"
+msgstr[0] "套件庫 '%s' 已被加入服務 '%s' 的啟用套件庫"
 
 #: src/commands/services/modify.cc:262
 #, c-format, boost-format
 msgid "Repository '%s' has been added to disabled repositories of service '%s'"
 msgid_plural ""
 "Repositories '%s' have been added to disabled repositories of service '%s'"
-msgstr[0] "軟體庫 '%s' 已被加入服務 '%s' 的停用軟體庫"
+msgstr[0] "套件庫 '%s' 已被加入服務 '%s' 的停用套件庫"
 
 #: src/commands/services/modify.cc:269
 #, c-format, boost-format
@@ -4119,7 +4089,7 @@ msgid ""
 "Repository '%s' has been removed from enabled repositories of service '%s'"
 msgid_plural ""
 "Repositories '%s' have been removed from enabled repositories of service '%s'"
-msgstr[0] "軟體庫 '%s' 已從服務 '%s' 的啟用軟體庫被移除"
+msgstr[0] "套件庫 '%s' 已從服務 '%s' 的啟用套件庫被移除"
 
 #: src/commands/services/modify.cc:276
 #, c-format, boost-format
@@ -4128,7 +4098,7 @@ msgid ""
 msgid_plural ""
 "Repositories '%s' have been removed from disabled repositories of service "
 "'%s'"
-msgstr[0] "軟體庫 '%s' 已從服務 '%s' 的停用軟體庫中移除"
+msgstr[0] "套件庫 '%s' 已從服務 '%s' 的停用套件庫中移除"
 
 #: src/commands/services/modify.cc:285
 #, c-format, boost-format
@@ -4164,15 +4134,15 @@ msgstr "重新整理所有的服務。"
 
 #: src/commands/services/refresh.cc:97
 msgid "Refresh defined repository index services."
-msgstr "重新整理定義的軟體庫索引服務。"
+msgstr "重新整理定義的套件庫索引服務。"
 
 #: src/commands/services/refresh.cc:114
 msgid "Refresh also the service repositories."
-msgstr "同時也重新整理軟體庫。"
+msgstr "同時也重新整理套件庫。"
 
 #: src/commands/services/refresh.cc:115
 msgid "Also restore service repositories enabled/disabled state."
-msgstr "同時也回復服務軟體庫的啟用/停用狀態。"
+msgstr "同時也回復服務套件庫的啟用/停用狀態。"
 
 #: src/commands/services/refresh.cc:179
 #, c-format, boost-format
@@ -4218,7 +4188,7 @@ msgstr "移除指定的服務。"
 
 #: src/commands/services/remove.cc:22
 msgid "Remove specified repository index service from the system."
-msgstr "從系統中移除指定的軟體庫索引服務.."
+msgstr "從系統中移除指定的套件庫索引服務.."
 
 #. translators: %s is the supplied command line argument which
 #. for which no service counterpart was found
@@ -4266,11 +4236,11 @@ msgstr "規劃求解選項"
 
 #: src/commands/solveroptionset.cc:18
 msgid "Install also recommended packages in addition to the required ones."
-msgstr "除了必需的軟體包外，也安裝推薦的。"
+msgstr "除了必需的套件外，也安裝推薦的。"
 
 #: src/commands/solveroptionset.cc:19
 msgid "Do not install recommended packages, only required ones."
-msgstr "不要安裝推薦的軟體包，只安裝必需的。"
+msgstr "不要安裝推薦的套件，只安裝必需的。"
 
 #: src/commands/solveroptionset.cc:41
 msgid "Create a solver test case for debugging."
@@ -4324,12 +4294,12 @@ msgstr "source-install (si) [選項] <名稱> ..."
 #. translators: command summary: source-install, si
 #: src/commands/sourceinstall.cc:23
 msgid "Install source packages and their build dependencies."
-msgstr "安裝原始碼軟體包和其建構所需 的相依性軟體包。"
+msgstr "安裝原始碼套件和其建構所需 的相依性套件。"
 
 #. translators: command description
 #: src/commands/sourceinstall.cc:25
 msgid "Install specified source packages and their build dependencies."
-msgstr "安裝指定的原始碼軟體包和建構的相依性軟體包。"
+msgstr "安裝指定的原始碼套件和建構的相依性套件。"
 
 #: src/commands/sourceinstall.cc:26
 #, boost-format
@@ -4337,14 +4307,12 @@ msgid ""
 "The default location where rpm installs source packages to is '%1%', but the "
 "value can be changed in your local rpm configuration. In case of doubt try "
 "executing '%2%'."
-msgstr ""
-"預設 rpm 源碼軟體包的安裝位置是在 '%1%'，但您可在本地端的 rpm 設定修改此值。"
-"若有疑問，請嘗試執行 '%2%'。"
+msgstr "預設 rpm 源碼套件的安裝位置是在 '%1%'，但您可在本地端的 rpm 設定修改此值。若有疑問，請嘗試執行 '%2%'。"
 
 #. translators: -d, --build-deps-only
 #: src/commands/sourceinstall.cc:48
 msgid "Install only build dependencies of specified packages."
-msgstr "只安裝指定軟體包的建構相依性。"
+msgstr "只安裝指定套件的建構相依性。"
 
 #. translators: -D, --no-build-deps
 #: src/commands/sourceinstall.cc:52
@@ -4353,7 +4321,7 @@ msgstr "不要安裝建構相依性。"
 
 #: src/commands/sourceinstall.cc:70
 msgid "Source package name is a required argument."
-msgstr "原始碼軟體包的名稱為必要的參數。"
+msgstr "原始碼套件的名稱為必要的參數。"
 
 #: src/commands/sourceinstall.cc:86
 msgid "Uninstalling source packages is not supported."
@@ -4490,18 +4458,18 @@ msgstr "個別指令 %1% 不支援 zypper 全域選項。"
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/update.cc:22
 msgid "update (up) [OPTIONS] [PACKAGENAME] ..."
-msgstr "update (up) [選項] [軟體包名稱] ..."
+msgstr "update (up) [選項] [套件名稱] ..."
 
 #. translators: command summary: update, up
 #: src/commands/update.cc:24
 msgid "Update installed packages with newer versions."
-msgstr "使用較新版本更新已安裝的軟體包。"
+msgstr "使用較新版本更新已安裝的套件。"
 
 #. translators: command description
 #: src/commands/update.cc:26
 msgid ""
 "Update all or specified installed packages with newer versions, if possible."
-msgstr "若能則更新所有或指定的已安裝軟體包至新版本。"
+msgstr "若能則更新所有或指定的已安裝套件至新版本。"
 
 #: src/commands/update.cc:69 src/commands/update.cc:76
 #: src/commands/update.cc:126
@@ -4518,14 +4486,12 @@ msgstr "要更新已安裝的產品請用 '%s'。"
 msgid ""
 "Zypper does not keep track of installed source packages. To install the "
 "latest source package and its build dependencies, use '%s'."
-msgstr ""
-"Zypper 不會追蹤安裝的原始碼軟體包。若要安裝最新的原始碼軟體包及其建構相依項，"
-"請使用 '%s 1'。"
+msgstr "Zypper 不會追蹤安裝的原始碼套件。若要安裝最新的原始碼套件及其建構相依項，請使用 '%s 1'。"
 
 #: src/commands/update.cc:83
 msgid ""
 "Cannot use multiple types when specific packages are given as arguments."
-msgstr "當指定軟體包作為參數時無法使用多重格式。"
+msgstr "當指定套件作為參數時無法使用多重格式。"
 
 #: src/commands/utils/download.cc:131 src/commands/utils/source-download.cc:212
 #, c-format, boost-format
@@ -4535,7 +4501,7 @@ msgstr "權限不足以使用下載目錄 '%s'。"
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/utils/download.cc:144
 msgid "download [OPTIONS] <PACKAGES>..."
-msgstr "download [選項] <軟體包>..."
+msgstr "download [選項] <套件>..."
 
 #. translators: command summary: download
 #: src/commands/utils/download.cc:146
@@ -4550,9 +4516,9 @@ msgid ""
 "packages; for non-root users $XDG_CACHE_HOME/zypp/packages), but this can be "
 "changed by using the global --pkg-cache-dir option."
 msgstr ""
-"下載指令行上指定的 RPM 到本地目錄。 軟體包預設會下載到 libzypp 軟體包快取目錄"
-"中 (/var/cache/zypp/packages；非 root 使用者的目錄為 $XDG_CACHE_HOME/zypp/"
-"packages)， 不過，該預設值可透過全域設定 --pkg-cache-dir 修改。"
+"下載指令行上指定的 RPM 到本地目錄。 套件預設會下載到 libzypp 套件快取目錄中 (/var/cache/zypp/packages；非 "
+"root 使用者的目錄為 $XDG_CACHE_HOME/zypp/packages)， 不過，該預設值可透過全域設定 --pkg-cache-dir "
+"修改。"
 
 #. translators: command description
 #: src/commands/utils/download.cc:153
@@ -4561,21 +4527,20 @@ msgid ""
 "tried to download. Upon success the local path is is found in 'download-"
 "result/localpath@path'."
 msgstr ""
-"在 XML 輸出模式下，對每個 zypper 嘗試下載的軟體包， 將會寫入一個 <download-"
-"result> 節點。下載成功後， 本地端路徑可在「download-result/localpath@path」中"
-"找到。"
+"在 XML 輸出模式下，對每個 zypper 嘗試下載的套件， 將會寫入一個 <download-result> 節點。下載成功後， 本地端路徑可在"
+"「download-result/localpath@path」中找到。"
 
 #. translators: --all-matches
 #: src/commands/utils/download.cc:168
 msgid ""
 "Download all versions matching the commandline arguments. Otherwise only the "
 "best version of each matching package is downloaded."
-msgstr "下載所有符合指令行參數的版本。 否則只有相符軟體包的最佳版本 會被下載。"
+msgstr "下載所有符合指令行參數的版本。 否則只有相符套件的最佳版本 會被下載。"
 
 #. translators: Label text; is followed by ': cmdline argument'
 #: src/commands/utils/download.cc:231
 msgid "Argument resolves to no package"
-msgstr "該參數解析不到軟體包"
+msgstr "該參數解析不到套件"
 
 #: src/commands/utils/download.cc:246 src/solve-commit.cc:898
 msgid "Nothing to do."
@@ -4596,12 +4561,12 @@ msgstr "未下載任何東西..."
 #: src/commands/utils/download.cc:308
 #, c-format, boost-format
 msgid "Error downloading package '%s'."
-msgstr "下載軟體包 '%s' 發生錯誤。"
+msgstr "下載套件 '%s' 發生錯誤。"
 
 #: src/commands/utils/download.cc:322
 #, c-format, boost-format
 msgid "Not downloading package '%s'."
-msgstr "軟體包 '%s' 未下載。"
+msgstr "套件 '%s' 未下載。"
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/utils/licenses.cc:19
@@ -4611,12 +4576,12 @@ msgstr "licenses"
 #. translators: command summary: licenses
 #: src/commands/utils/licenses.cc:21
 msgid "Print report about licenses and EULAs of installed packages."
-msgstr "印出關於已安裝軟體包的授權 與終端使用者協議 (EULA) 的報告。"
+msgstr "印出關於已安裝套件的授權 與終端使用者協議 (EULA) 的報告。"
 
 #. translators: command description
 #: src/commands/utils/licenses.cc:23
 msgid "Report licenses and EULAs of currently installed software packages."
-msgstr "報告目前已安裝軟體軟體包的授權合約和 EULA 。"
+msgstr "報告目前已安裝軟體套件的授權合約和 EULA 。"
 
 #: src/commands/utils/source-download.cc:203
 #, c-format, boost-format
@@ -4639,80 +4604,80 @@ msgstr "正在掃描下載目錄"
 
 #: src/commands/utils/source-download.cc:265
 msgid "Scanning installed packages"
-msgstr "正在掃描已安裝的軟體包"
+msgstr "正在掃描已安裝的套件"
 
 #: src/commands/utils/source-download.cc:284
 msgid "Installed packages:"
-msgstr "已安裝的軟體包："
+msgstr "已安裝的套件："
 
 #: src/commands/utils/source-download.cc:287
 msgid "Required source packages:"
-msgstr "所需要的原始碼軟體包："
+msgstr "所需要的原始碼套件："
 
 #: src/commands/utils/source-download.cc:296
 msgid "Required source packages available in download directory:"
-msgstr "下載目錄中有必要的原始碼軟體包︰"
+msgstr "下載目錄中有必要的原始碼套件︰"
 
 #: src/commands/utils/source-download.cc:300
 msgid "Required source packages to be downloaded:"
-msgstr "要下載的必要原始碼軟體包︰"
+msgstr "要下載的必要原始碼套件︰"
 
 #: src/commands/utils/source-download.cc:304
 msgid "Superfluous source packages in download directory:"
-msgstr "下載目錄中多餘的原始碼軟體包︰"
+msgstr "下載目錄中多餘的原始碼套件︰"
 
 #. translators: table headers
 #. translators: property name; short; used like "Name: value"
 #: src/commands/utils/source-download.cc:318 src/info.cc:348
 msgid "Source package"
-msgstr "原始碼軟體包"
+msgstr "原始碼套件"
 
 #: src/commands/utils/source-download.cc:318
 msgid "Installed package"
-msgstr "已安裝的軟體包"
+msgstr "已安裝的套件"
 
 #: src/commands/utils/source-download.cc:368
 msgid "Use '--verbose' option for a full list of required source packages."
-msgstr "使用 '--verbose' 選項來顯示必需的原始碼軟體包完整列表。"
+msgstr "使用 '--verbose' 選項來顯示必需的原始碼套件完整列表。"
 
 #: src/commands/utils/source-download.cc:377
 msgid "Deleting superfluous source packages"
-msgstr "正在移除多餘的原始碼軟體包"
+msgstr "正在移除多餘的原始碼套件"
 
 #: src/commands/utils/source-download.cc:388
 #, c-format, boost-format
 msgid "Failed to remove source package '%s'"
-msgstr "移除原始碼軟體包 '%s' 失敗"
+msgstr "移除原始碼套件 '%s' 失敗"
 
 #: src/commands/utils/source-download.cc:399
 msgid "No superfluous source packages to delete."
-msgstr "沒有多餘的原始碼軟體包可以移除。"
+msgstr "沒有多餘的原始碼套件可以移除。"
 
 #: src/commands/utils/source-download.cc:409
 msgid "Downloading required source packages..."
-msgstr "正在下載所需要的原始碼軟體包..."
+msgstr "正在下載所需要的原始碼套件..."
 
 #: src/commands/utils/source-download.cc:428
 #, c-format, boost-format
 msgid "Source package '%s' is not provided by any repository."
-msgstr "原始碼軟體包 '%s' 未在任何軟體庫中提供 。"
+msgstr "原始碼套件 '%s' 未在任何套件庫中提供 。"
 
 #: src/commands/utils/source-download.cc:447
 #: src/commands/utils/source-download.cc:461
 #, c-format, boost-format
 msgid "Error downloading source package '%s'."
-msgstr "下載原始碼軟體包 '%s' 發生錯誤。"
+msgstr "下載原始碼套件 '%s' 發生錯誤。"
 
 #: src/commands/utils/source-download.cc:472
 msgid "No source packages to download."
-msgstr "沒有原始碼軟體包將被下載。"
+msgstr "沒有原始碼套件將被下載。"
 
 #. translators: command summary: source-download
 #. translators: command description
 #: src/commands/utils/source-download.cc:482
 #: src/commands/utils/source-download.cc:484
 msgid "Download source rpms for all installed packages to a local directory."
-msgstr "下載所有已安裝軟體包的原始碼 rpm 到本地目錄。"
+msgstr "下載所有已安裝套件的原始碼 rpm 到本地目錄。"
 
 #. translators: -d, --directory <DIR>
 #: src/commands/utils/source-download.cc:496
@@ -4990,7 +4955,7 @@ msgstr "是基礎"
 #. translators: property name; short; used like "Name: value"
 #: src/info.cc:576 src/info.cc:603
 msgid "Update Repositories"
-msgstr "更新軟體庫"
+msgstr "更新套件庫"
 
 #: src/info.cc:581
 msgid "Content Id"
@@ -4998,11 +4963,11 @@ msgstr "內容 ID"
 
 #: src/info.cc:593
 msgid "Provided by enabled repository"
-msgstr "由啟用的軟體庫提供"
+msgstr "由啟用的套件庫提供"
 
 #: src/info.cc:598
 msgid "Not provided by any enabled repository"
-msgstr "非由任何啟用的軟體庫提供"
+msgstr "非由任何啟用的套件庫提供"
 
 #. translators: property name; short; used like "Name: value"
 #: src/info.cc:608
@@ -5025,7 +4990,7 @@ msgstr "簡稱"
 #. translators: property name; short; used like "Name: value"; is followed by a list of binary packages built from this source package
 #: src/info.cc:702
 msgid "Builds binary package"
-msgstr "建構二進位軟體包"
+msgstr "建構二進位套件"
 
 #. translators: header of table column - is the language requested? (Yes/No)
 #: src/locales.cc:56 src/locales.cc:90
@@ -5147,47 +5112,47 @@ msgstr "摘要"
 #: src/misc.cc:258
 #, c-format, boost-format
 msgid "Installed packages: %d"
-msgstr "已安裝的軟體包︰%d"
+msgstr "已安裝的套件︰%d"
 
 #: src/misc.cc:259
 #, c-format, boost-format
 msgid "Installed packages with counterparts in repositories: %d"
-msgstr "軟體庫中存在相依項的已安裝軟體包︰%d"
+msgstr "套件庫中存在相依項的已安裝套件︰%d"
 
 #: src/misc.cc:260
 #, c-format, boost-format
 msgid "Installed packages with EULAs: %d"
-msgstr "帶有 EULA 的已安裝軟體包：%d"
+msgstr "帶有 EULA 的已安裝套件：%d"
 
 #: src/misc.cc:328
 #, c-format, boost-format
 msgid "Package '%s' has source package '%s'."
-msgstr "軟體包 '%s' 有原始碼軟體包 '%s'。"
+msgstr "套件 '%s' 有原始碼套件 '%s'。"
 
 #: src/misc.cc:337
 #, c-format, boost-format
 msgid "Source package '%s' for package '%s' not found."
-msgstr "原始碼軟體包 '%s' (針對軟體包 '%s') 找不到。"
+msgstr "原始碼套件 '%s' (針對套件 '%s') 找不到。"
 
 #: src/misc.cc:411
 #, c-format, boost-format
 msgid "Installing source package %s-%s"
-msgstr "正在安裝來源軟體包 %s-%s"
+msgstr "正在安裝來源套件 %s-%s"
 
 #: src/misc.cc:420
 #, c-format, boost-format
 msgid "Source package %s-%s successfully retrieved."
-msgstr "原始碼軟體包 %s-%s 已成功取得。"
+msgstr "原始碼套件 %s-%s 已成功取得。"
 
 #: src/misc.cc:426
 #, c-format, boost-format
 msgid "Source package %s-%s successfully installed."
-msgstr "來源軟體包 %s-%s 已成功安裝。"
+msgstr "來源套件 %s-%s 已成功安裝。"
 
 #: src/misc.cc:432
 #, c-format, boost-format
 msgid "Problem installing source package %s-%s:"
-msgstr "安裝來源軟體包 %s-%s 發生問題："
+msgstr "安裝來源套件 %s-%s 發生問題："
 
 #: src/output/OutNormal.cc:81
 msgid "Warning: "
@@ -5238,8 +5203,7 @@ msgstr "暫時"
 msgid ""
 "Repo '%1%' is managed by service '%2%'. Volatile changes are reset by the "
 "next service refresh!"
-msgstr ""
-"軟體庫「%1%」由服務「%2%」管理。暫時性的變動將會在下次服務重新整理時重設！"
+msgstr "套件庫「%1%」由服務「%2%」管理。暫時性的變動將會在下次服務重新整理時重設！"
 
 #: src/repos.cc:74
 msgid "default priority"
@@ -5257,11 +5221,11 @@ msgstr "下降的優先權"
 msgid ""
 "Repository priorities are without effect. All enabled repositories share the "
 "same priority."
-msgstr "軟體庫優先權沒有作用。所有啟用的軟體庫共享相同的優先權。"
+msgstr "套件庫優先權沒有作用。所有啟用的套件庫共享相同的優先權。"
 
 #: src/repos.cc:183
 msgid "Repository priorities in effect:"
-msgstr "軟體庫優先權作用中："
+msgstr "套件庫優先權作用中："
 
 #: src/repos.cc:184
 #, boost-format
@@ -5272,7 +5236,7 @@ msgstr "詳見 '%1%'"
 #, boost-format
 msgid "%1% repository"
 msgid_plural "%1% repositories"
-msgstr[0] "%1% 個軟體庫"
+msgstr[0] "%1% 個套件庫"
 
 #. check whether libzypp indicates a refresh is needed, and if so,
 #. print a message
@@ -5284,7 +5248,7 @@ msgstr "檢查是否需要重新整理 %s 的中繼資料"
 #: src/repos.cc:255
 #, c-format, boost-format
 msgid "Repository '%s' is up to date."
-msgstr "軟體庫 '%s' 已是最新狀態。"
+msgstr "套件庫 '%s' 已是最新狀態。"
 
 #: src/repos.cc:261
 #, c-format, boost-format
@@ -5298,17 +5262,17 @@ msgstr "正在強迫原始中繼資料重新整理"
 #: src/repos.cc:289
 #, c-format, boost-format
 msgid "Retrieving repository '%s' metadata"
-msgstr "正在取回軟體庫 '%s' 中繼資料"
+msgstr "正在取回套件庫 '%s' 中繼資料"
 
 #: src/repos.cc:313
 #, c-format, boost-format
 msgid "Do you want to disable the repository %s permanently?"
-msgstr "您要永久停用軟體庫 %s 嗎？"
+msgstr "您要永久停用套件庫 %s 嗎？"
 
 #: src/repos.cc:329
 #, c-format, boost-format
 msgid "Error while disabling repository '%s'."
-msgstr "停用軟體庫 '%s' 發生錯誤。"
+msgstr "停用套件庫 '%s' 發生錯誤。"
 
 #: src/repos.cc:345
 #, c-format, boost-format
@@ -5331,23 +5295,22 @@ msgstr "'%s' 沒有定義位址。"
 msgid ""
 "Please add one or more base URI (baseurl=URI) entries to %s for repository "
 "'%s'."
-msgstr ""
-"請加入一個或數個基礎位址 (baseurl=位址) 項目到 %s，以供軟體庫 '%s' 使用。"
+msgstr "請加入一個或數個基礎位址 (baseurl=位址) 項目到 %s，以供套件庫 '%s' 使用。"
 
 #: src/repos.cc:377
 msgid "No alias defined for this repository."
-msgstr "這個軟體庫未定義別名。"
+msgstr "這個套件庫未定義別名。"
 
 #: src/repos.cc:389
 #, c-format, boost-format
 msgid "Repository '%s' is invalid."
-msgstr "軟體庫 '%s' 無效。"
+msgstr "套件庫 '%s' 無效。"
 
 #: src/repos.cc:390
 msgid ""
 "Please check if the URIs defined for this repository are pointing to a valid "
 "repository."
-msgstr "請檢查為此軟體庫定義的位址是否指向有效的軟體庫。"
+msgstr "請檢查為此套件庫定義的位址是否指向有效的套件庫。"
 
 #: src/repos.cc:402
 #, c-format, boost-format
@@ -5356,7 +5319,7 @@ msgstr "取回 '%s' 的中繼資料發生錯誤："
 
 #: src/repos.cc:415
 msgid "Forcing building of repository cache"
-msgstr "正在強迫建立軟體庫快取"
+msgstr "正在強迫建立套件庫快取"
 
 #: src/repos.cc:440
 #, c-format, boost-format
@@ -5371,14 +5334,13 @@ msgid ""
 "report by following instructions at http://en.opensuse.org/Zypper/"
 "Troubleshooting"
 msgstr ""
-"這可能是因為軟體庫的中繼資訊不適用，或中繼資訊分析器存在錯誤。若是後者的情形"
-"(或您懷疑是)請參考 http://en.opensuse.org/Zypper/Troubleshooting 的指引發出錯"
-"誤回報"
+"這可能是因為套件庫的中繼資訊不適用，或中繼資訊分析器存在錯誤。若是後者的情形(或您懷疑是)請參考 http://en.opensuse.org/"
+"Zypper/Troubleshooting 的指引發出錯誤回報"
 
 #: src/repos.cc:451
 #, c-format, boost-format
 msgid "Repository metadata for '%s' not found in local cache."
-msgstr "在本機快取中找不到 '%s' 的軟體庫中繼資料。"
+msgstr "在本機快取中找不到 '%s' 的套件庫中繼資料。"
 
 #: src/repos.cc:459
 msgid "Error building the cache:"
@@ -5387,58 +5349,56 @@ msgstr "建立快取時發生錯誤："
 #: src/repos.cc:678
 #, c-format, boost-format
 msgid "Repository '%s' not found by its alias, number, or URI."
-msgstr "無法由它的別名、編號或位址找到軟體庫 '%s'。"
+msgstr "無法由它的別名、編號或位址找到套件庫 '%s'。"
 
 #: src/repos.cc:680
 #, c-format, boost-format
 msgid "Use '%s' to get the list of defined repositories."
-msgstr "請用 '%s' 取得已定義的軟體庫清單。"
+msgstr "請用 '%s' 取得已定義的套件庫清單。"
 
 #: src/repos.cc:700
 #, c-format, boost-format
 msgid "Ignoring disabled repository '%s'"
-msgstr "正在忽略已停用的軟體庫 '%s'"
+msgstr "正在忽略已停用的套件庫 '%s'"
 
 #: src/repos.cc:788
 #, c-format, boost-format
 msgid "Global option '%s' can be used to temporarily enable repositories."
-msgstr "全域選項 '%s' 可用來暫時啟用軟體庫。"
+msgstr "全域選項 '%s' 可用來暫時啟用套件庫。"
 
 #: src/repos.cc:804 src/repos.cc:810
 #, c-format, boost-format
 msgid "Ignoring repository '%s' because of '%s' option."
-msgstr "正在忽略軟體庫 '%s'，因為使用了 '%s' 選項。"
+msgstr "正在忽略套件庫 '%s'，因為使用了 '%s' 選項。"
 
 #: src/repos.cc:831 src/repos.cc:931
 #, c-format, boost-format
 msgid "Temporarily enabling repository '%s'."
-msgstr "正在暫時啟用軟體庫 '%s'。"
+msgstr "正在暫時啟用套件庫 '%s'。"
 
 #: src/repos.cc:881
 #, c-format, boost-format
 msgid ""
 "Repository '%s' is out-of-date. You can run 'zypper refresh' as root to "
 "update it."
-msgstr "軟體庫 '%s' 已過期。您可以用 root 執行 'zypper refresh' 來更新它。"
+msgstr "套件庫 '%s' 已過期。您可以用 root 執行 'zypper refresh' 來更新它。"
 
 #: src/repos.cc:913
 #, c-format, boost-format
 msgid ""
 "The metadata cache needs to be built for the '%s' repository. You can run "
 "'zypper refresh' as root to do this."
-msgstr ""
-"需要建立軟體庫 '%s' 的中繼資料快取。您可以用 root 執行 'zypper refresh' 來完"
-"成。"
+msgstr "需要建立套件庫 '%s' 的中繼資料快取。您可以用 root 執行 'zypper refresh' 來完成。"
 
 #: src/repos.cc:917
 #, c-format, boost-format
 msgid "Disabling repository '%s'."
-msgstr "正在停用軟體庫 '%s'。"
+msgstr "正在停用套件庫 '%s'。"
 
 #: src/repos.cc:938
 #, c-format, boost-format
 msgid "Repository '%s' stays disabled."
-msgstr "軟體庫 '%s' 維持停用狀態。"
+msgstr "套件庫 '%s' 維持停用狀態。"
 
 #: src/repos.cc:994
 msgid "Initializing Target"
@@ -5467,36 +5427,36 @@ msgstr "正在保留 %s 的原始中繼資料快取 '%s'。"
 #: src/repos.cc:1105
 #, c-format, boost-format
 msgid "Cleaning packages for '%s'."
-msgstr "正在清除 '%s' 的軟體包。"
+msgstr "正在清除 '%s' 的套件。"
 
 #: src/repos.cc:1113
 #, c-format, boost-format
 msgid "Cannot clean repository '%s' because of an error."
-msgstr "因錯誤無法清除軟體庫 '%s'。"
+msgstr "因錯誤無法清除套件庫 '%s'。"
 
 #: src/repos.cc:1124
 msgid "Cleaning installed packages cache."
-msgstr "正在清除已安裝軟體包的快取。"
+msgstr "正在清除已安裝套件的快取。"
 
 #: src/repos.cc:1133
 msgid "Cannot clean installed packages cache because of an error."
-msgstr "因錯誤無法清除已安裝軟體包的快取。"
+msgstr "因錯誤無法清除已安裝套件的快取。"
 
 #: src/repos.cc:1151
 msgid "Could not clean the repositories because of errors."
-msgstr "因發生錯誤，無法清除軟體庫。"
+msgstr "因發生錯誤，無法清除套件庫。"
 
 #: src/repos.cc:1157
 msgid "Some of the repositories have not been cleaned up because of an error."
-msgstr "因發生錯誤，某些軟體庫尚未被清理。"
+msgstr "因發生錯誤，某些套件庫尚未被清理。"
 
 #: src/repos.cc:1162
 msgid "Specified repositories have been cleaned up."
-msgstr "指定的軟體庫已清理完成。"
+msgstr "指定的套件庫已清理完成。"
 
 #: src/repos.cc:1164
 msgid "All repositories have been cleaned up."
-msgstr "所有軟體庫已清理完成。"
+msgstr "所有套件庫已清理完成。"
 
 #: src/repos.cc:1186
 msgid "This is a changeable read-only media (CD/DVD), disabling autorefresh."
@@ -5505,23 +5465,21 @@ msgstr "這是一個可抽換的唯讀媒體 (CD/DVD)，正在停用自動重新
 #: src/repos.cc:1207
 #, c-format, boost-format
 msgid "Invalid repository alias: '%s'"
-msgstr "無效的軟體庫別名：'%s'"
+msgstr "無效的套件庫別名：'%s'"
 
 #: src/repos.cc:1224
 msgid ""
 "Could not determine the type of the repository. Please check if the defined "
 "URIs (see below) point to a valid repository:"
-msgstr ""
-"無法決定軟體庫的類型。請檢查是否定義的位址 (參看下方) 真的指向一個有效的軟體"
-"庫："
+msgstr "無法決定套件庫的類型。請檢查是否定義的位址 (參看下方) 真的指向一個有效的軟體庫："
 
 #: src/repos.cc:1230
 msgid "Can't find a valid repository at given location:"
-msgstr "在指定的位置找不到有效的軟體庫："
+msgstr "在指定的位置找不到有效的套件庫："
 
 #: src/repos.cc:1238
 msgid "Problem transferring repository data from specified URI:"
-msgstr "由指定的位址傳輸軟體庫資料時發生錯誤："
+msgstr "由指定的位址傳輸套件庫資料時發生錯誤："
 
 #: src/repos.cc:1239
 msgid "Please check whether the specified URI is accessible."
@@ -5529,7 +5487,7 @@ msgstr "請檢查指定的位址是否可存取。"
 
 #: src/repos.cc:1246
 msgid "Unknown problem when adding repository:"
-msgstr "新增軟體庫時發生未知的問題："
+msgstr "新增套件庫時發生未知的問題："
 
 #. translators: BOOST STYLE POSITIONAL DIRECTIVES ( %N% )
 #. translators: %1% - a repository name
@@ -5538,12 +5496,12 @@ msgstr "新增軟體庫時發生未知的問題："
 msgid ""
 "GPG checking is disabled in configuration of repository '%1%'. Integrity and "
 "origin of packages cannot be verified."
-msgstr "'%1%' 軟體庫設定中已停用 GPG 檢查。將無法驗證軟體包完整性及來源。"
+msgstr "'%1%' 套件庫設定中已停用 GPG 檢查。將無法驗證套件完整性及來源。"
 
 #: src/repos.cc:1261
 #, c-format, boost-format
 msgid "Repository '%s' successfully added"
-msgstr "已成功新增軟體庫 '%s'"
+msgstr "已成功新增套件庫 '%s'"
 
 #: src/repos.cc:1287
 #, c-format, boost-format
@@ -5587,103 +5545,102 @@ msgstr "在指定的 URI 嘗試讀取檔案時發生問題"
 
 #: src/repos.cc:1400
 msgid "Repository with no alias defined found in the file, skipping."
-msgstr "檔案中有未定義別名的軟體庫，正在跳過。"
+msgstr "檔案中有未定義別名的套件庫，正在跳過。"
 
 #: src/repos.cc:1406
 #, c-format, boost-format
 msgid "Repository '%s' has no URI defined, skipping."
-msgstr "軟體庫 '%s' 未定義位址，正在跳過。"
+msgstr "套件庫 '%s' 未定義位址，正在跳過。"
 
 #: src/repos.cc:1454
 #, c-format, boost-format
 msgid "Repository '%s' has been removed."
-msgstr "軟體庫 '%s' 已經被移除。"
+msgstr "套件庫 '%s' 已經被移除。"
 
 #: src/repos.cc:1602
 #, c-format, boost-format
 msgid "Repository '%s' priority has been left unchanged (%d)"
-msgstr "軟體庫 '%s' 的優先權維持不變 (%d)"
+msgstr "套件庫 '%s' 的優先權維持不變 (%d)"
 
 #: src/repos.cc:1635
 #, c-format, boost-format
 msgid "Repository '%s' has been successfully enabled."
-msgstr "軟體庫 '%s' 已成功啟用。"
+msgstr "套件庫 '%s' 已成功啟用。"
 
 #: src/repos.cc:1637
 #, c-format, boost-format
 msgid "Repository '%s' has been successfully disabled."
-msgstr "軟體庫 '%s' 已成功停用。"
+msgstr "套件庫 '%s' 已成功停用。"
 
 #: src/repos.cc:1644
 #, c-format, boost-format
 msgid "Autorefresh has been enabled for repository '%s'."
-msgstr "軟體庫 '%s' 已啟用自動重新整理。"
+msgstr "套件庫 '%s' 已啟用自動重新整理。"
 
 #: src/repos.cc:1646
 #, c-format, boost-format
 msgid "Autorefresh has been disabled for repository '%s'."
-msgstr "軟體庫 '%s' 已停用自動重新整理。"
+msgstr "套件庫 '%s' 已停用自動重新整理。"
 
 #: src/repos.cc:1653
 #, c-format, boost-format
 msgid "RPM files caching has been enabled for repository '%s'."
-msgstr "軟體庫 '%s' 已啟用 RPM 檔案快取。"
+msgstr "套件庫 '%s' 已啟用 RPM 檔案快取。"
 
 #: src/repos.cc:1655
 #, c-format, boost-format
 msgid "RPM files caching has been disabled for repository '%s'."
-msgstr "軟體庫 '%s' 已停用 RPM 檔案快取。"
+msgstr "套件庫 '%s' 已停用 RPM 檔案快取。"
 
 #: src/repos.cc:1662
 #, c-format, boost-format
 msgid "GPG check has been enabled for repository '%s'."
-msgstr "軟體庫 '%s' 已啟用 GPG 檢查。"
+msgstr "套件庫 '%s' 已啟用 GPG 檢查。"
 
 #: src/repos.cc:1664
 #, c-format, boost-format
 msgid "GPG check has been disabled for repository '%s'."
-msgstr "軟體庫 '%s' 已停用 GPG 檢查。"
+msgstr "套件庫 '%s' 已停用 GPG 檢查。"
 
 #: src/repos.cc:1670
 #, c-format, boost-format
 msgid "Repository '%s' priority has been set to %d."
-msgstr "軟體庫 '%s' 的優先權已被設為 %d。"
+msgstr "套件庫 '%s' 的優先權已被設為 %d。"
 
 #: src/repos.cc:1676
 #, c-format, boost-format
 msgid "Name of repository '%s' has been set to '%s'."
-msgstr "軟體庫 '%s' 的名稱已被設為 '%s'。"
+msgstr "套件庫 '%s' 的名稱已被設為 '%s'。"
 
 #: src/repos.cc:1687
 #, c-format, boost-format
 msgid "Nothing to change for repository '%s'."
-msgstr "軟體庫 '%s' 將不變更。"
+msgstr "套件庫 '%s' 將不變更。"
 
 #: src/repos.cc:1694
 #, c-format, boost-format
 msgid "Leaving repository %s unchanged."
-msgstr "軟體庫 %s 維持不變。"
+msgstr "套件庫 %s 維持不變。"
 
 #: src/repos.cc:1781
 msgid "Loading repository data..."
-msgstr "正在載入軟體庫資料..."
+msgstr "正在載入套件庫資料..."
 
 #: src/repos.cc:1783
 msgid ""
 "No repositories defined. Operating only with the installed resolvables. "
 "Nothing can be installed."
-msgstr ""
-"警告：沒有已定義的軟體庫。您只能使用已安裝的解決方案操作。無法安裝任何項目。"
+msgstr "警告：沒有已定義的套件庫。您只能使用已安裝的解決方案操作。無法安裝任何項目。"
 
 #: src/repos.cc:1803
 #, c-format, boost-format
 msgid "Retrieving repository '%s' data..."
-msgstr "正在取回軟體庫 '%s' 資料..."
+msgstr "正在取回套件庫 '%s' 資料..."
 
 #: src/repos.cc:1809
 #, c-format, boost-format
 msgid "Repository '%s' not cached. Caching..."
-msgstr "軟體庫 '%s' 沒有快取。快取中..."
+msgstr "套件庫 '%s' 沒有快取。快取中..."
 
 #: src/repos.cc:1815 src/repos.cc:1849
 #, c-format, boost-format
@@ -5693,7 +5650,7 @@ msgstr "從 '%s' 載入資料有問題"
 #: src/repos.cc:1819
 #, c-format, boost-format
 msgid "Repository '%s' could not be refreshed. Using old cache."
-msgstr "無法重新整理軟體庫 '%s'。正在使用舊快取。"
+msgstr "無法重新整理套件庫 '%s'。正在使用舊快取。"
 
 #: src/repos.cc:1823 src/repos.cc:1852
 #, c-format, boost-format
@@ -5705,7 +5662,7 @@ msgstr "因為錯誤，由 '%s' 提供的解決方案無法載入。"
 msgid ""
 "Repository '%s' appears to be outdated. Consider using a different mirror or "
 "server."
-msgstr "軟體庫 '%s' 似乎已過期。請考慮使用其他鏡像或伺服器。"
+msgstr "套件庫 '%s' 似乎已過期。請考慮使用其他鏡像或伺服器。"
 
 #. translators: the first %s is 'zypper refresh' and the second 'zypper clean -m'
 #: src/repos.cc:1851
@@ -5715,11 +5672,11 @@ msgstr "在您這樣做之前，嘗試 '%s'，或甚至 '%s' 。"
 
 #: src/repos.cc:1862
 msgid "Reading installed packages..."
-msgstr "正在讀取已安裝的軟體包..."
+msgstr "正在讀取已安裝的套件..."
 
 #: src/repos.cc:1871
 msgid "Problem occurred while reading the installed packages:"
-msgstr "讀取已安裝軟體包時發生錯誤："
+msgstr "讀取已安裝套件時發生錯誤："
 
 #: src/repos.cc:1888
 #, c-format, boost-format
@@ -5742,7 +5699,7 @@ msgstr "純 RPM 檔快取"
 
 #: src/search.cc:122
 msgid "System Packages"
-msgstr "系統軟體包"
+msgstr "系統套件"
 
 #: src/search.cc:300
 msgid "No needed patches found."
@@ -5754,7 +5711,7 @@ msgstr "沒有發現樣式。"
 
 #: src/search.cc:479
 msgid "No packages found."
-msgstr "沒有發現軟體包。"
+msgstr "沒有發現套件。"
 
 #. translators: used in products. Internal Name is the unix name of the
 #. product whereas simply Name is the official full name of the product.
@@ -5897,12 +5854,12 @@ msgstr "有些執行中的程式仍在使用已被近期升級刪除或更新的
 
 #: src/solve-commit.cc:481
 msgid "Update notifications were received from the following packages:"
-msgstr "從下列軟體包收到了更新提醒："
+msgstr "從下列套件收到了更新提醒："
 
 #: src/solve-commit.cc:490
 #, c-format, boost-format
 msgid "Message from package %s:"
-msgstr "從軟體包 %s 收到的訊息："
+msgstr "從套件 %s 收到的訊息："
 
 #: src/solve-commit.cc:498
 msgid "y/n"
@@ -5918,17 +5875,17 @@ msgstr "正在計算版本升級..."
 
 #: src/solve-commit.cc:550
 msgid "Resolving package dependencies..."
-msgstr "正在解決軟體包相依性..."
+msgstr "正在解決套件相依性..."
 
 #: src/solve-commit.cc:605
 msgid ""
 "Some of the dependencies of installed packages are broken. In order to fix "
 "these dependencies, the following actions need to be taken:"
-msgstr "有些已安裝的軟體包相依性已被破壞。為了修正此相依性，將採取下列行動："
+msgstr "有些已安裝的套件相依性已被破壞。為了修正此相依性，將採取下列行動："
 
 #: src/solve-commit.cc:612
 msgid "Root privileges are required to fix broken package dependencies."
-msgstr "需要有 Root 權限才能修正軟體包的相依性。"
+msgstr "需要有 Root 權限才能修正套件的相依性。"
 
 #. translators: These are the "Continue?" prompt options corresponding to
 #. "Yes / No / show Problems / Versions / Arch / Repository /
@@ -5948,7 +5905,7 @@ msgstr "y/n/p/v/a/r/m/d/g"
 #: src/solve-commit.cc:639
 msgid ""
 "Yes, accept the summary and proceed with installation/removal of packages."
-msgstr "是的，接受此摘要並進行軟體包的安裝/移除。"
+msgstr "是的，接受此摘要並進行套件的安裝/移除。"
 
 #. translators: help text for 'n' option in the 'Continue?' prompt
 #: src/solve-commit.cc:641
@@ -5965,23 +5922,23 @@ msgstr "重新以不強迫解決模式啟動解析者，以顯示相依性問題
 #. translators: help text for 'v' option in the 'Continue?' prompt
 #: src/solve-commit.cc:645
 msgid "Toggle display of package versions."
-msgstr "切換顯示軟體包版本。"
+msgstr "切換顯示套件版本。"
 
 #. translators: help text for 'a' option in the 'Continue?' prompt
 #: src/solve-commit.cc:647
 msgid "Toggle display of package architectures."
-msgstr "切換顯示軟體包架構。"
+msgstr "切換顯示套件架構。"
 
 #. translators: help text for 'r' option in the 'Continue?' prompt
 #: src/solve-commit.cc:649
 msgid ""
 "Toggle display of repositories from which the packages will be installed."
-msgstr "切換顯示軟體包將從哪個軟體庫安裝。"
+msgstr "切換顯示套件將從哪個套件庫安裝。"
 
 #. translators: help text for 'm' option in the 'Continue?' prompt
 #: src/solve-commit.cc:651
 msgid "Toggle display of package vendor names."
-msgstr "切換顯示軟體包供應商名稱。"
+msgstr "切換顯示套件供應商名稱。"
 
 #. translators: help text for 'd' option in the 'Continue?' prompt
 #: src/solve-commit.cc:653
@@ -6003,13 +5960,13 @@ msgstr "(測試)"
 
 #: src/solve-commit.cc:791 src/solve-commit.cc:824
 msgid "Problem retrieving the package file from the repository:"
-msgstr "從軟體庫取出軟體包檔案出現問題："
+msgstr "從套件庫取出套件檔案出現問題："
 
 #. translators: the first %s is 'zypper refresh' and the second is repo alias
 #: src/solve-commit.cc:821
 #, c-format, boost-format
 msgid "Repository '%s' is out of date. Running '%s' might help."
-msgstr "軟體庫 '%s' 已過期。執行 '%s' 可能會有幫助。"
+msgstr "套件庫 '%s' 已過期。執行 '%s' 可能會有幫助。"
 
 #: src/solve-commit.cc:832
 msgid ""
@@ -6021,16 +5978,16 @@ msgid ""
 "- use another installation medium (if e.g. damaged)\n"
 "- use another repository"
 msgstr ""
-"軟體包完整性檢查失敗。 軟體庫或媒體可能有問題。請嘗試下列其中一個動作：\n"
+"套件完整性檢查失敗。 套件庫或媒體可能有問題。請嘗試下列其中一個動作：\n"
 " \n"
 " – 重試之前的指令\n"
-" – 使用 'zypper refresh' 重新整理軟體庫\n"
+" – 使用 'zypper refresh' 重新整理套件庫\n"
 " – 使用另一個安裝媒體 (例如媒體損壞時)\n"
-" – 使用另一個軟體庫"
+" – 使用另一個套件庫"
 
 #: src/solve-commit.cc:846
 msgid "Problem occurred during or after installation or removal of packages:"
-msgstr "安裝或移除軟體包時 (或之後) 發生問題："
+msgstr "安裝或移除套件時 (或之後) 發生問題："
 
 #: src/solve-commit.cc:854
 msgid "Installation has completed with error."
@@ -6051,13 +6008,11 @@ msgstr "其中一個安裝的修補程式需要重新啟動您的機器。 請�
 msgid ""
 "One of the installed patches affects the package manager itself. Run this "
 "command once more to install any other needed patches."
-msgstr ""
-"其中一個安裝的修補程式會影響軟體包管理員本身，請再次執行此命令以安裝其他所需"
-"的修補程式。"
+msgstr "其中一個安裝的修補程式會影響套件管理員本身，請再次執行此命令以安裝其他所需的修補程式。"
 
 #: src/solve-commit.cc:896
 msgid "Dependencies of all installed packages are satisfied."
-msgstr "所有已安裝的軟體包均滿足相依性。"
+msgstr "所有已安裝的套件均滿足相依性。"
 
 #. translator: stats table header (plural number is %2%)
 #: src/update.cc:212
@@ -6148,7 +6103,7 @@ msgstr "還有下列更新可用："
 
 #: src/update.cc:640
 msgid "Package updates"
-msgstr "軟體包更新"
+msgstr "套件更新"
 
 #: src/update.cc:644
 msgid "Pattern updates"
@@ -6320,9 +6275,7 @@ msgid ""
 "You have chosen to ignore a problem with download or installation of a "
 "package which might lead to broken dependencies of other packages. It is "
 "recommended to run '%s' after the operation has finished."
-msgstr ""
-"您已經選擇去忽略軟體包下載或安裝的問題，這可能導致其他軟體包的相依性被破壞。"
-"建議您在此操作完成後執行 '%s' 命令。"
+msgstr "您已經選擇去忽略套件下載或安裝的問題，這可能導致其他套件的相依性被破壞。建議您在此操作完成後執行 '%s' 命令。"
 
 #: src/utils/messages.cc:111
 #, boost-format
@@ -6366,14 +6319,12 @@ msgstr ""
 msgid ""
 "In this case a specific package providing the subcommand needs to be "
 "installed first. Those packages are often named '%1%' or '%2%'."
-msgstr ""
-"在此情況下，需要先安裝提供該子指令的特定軟體包。這些軟體包通常名為「%1%」或"
-"「%2%」。"
+msgstr "在此情況下，需要先安裝提供該子指令的特定套件。這些套件通常名為「%1%」或「%2%」。"
 
 #: src/utils/misc.cc:91
 msgid "package"
 msgid_plural "packages"
-msgstr[0] "軟體包"
+msgstr[0] "套件"
 
 #: src/utils/misc.cc:93
 msgid "pattern"
@@ -6393,7 +6344,7 @@ msgstr[0] "修補程式"
 #: src/utils/misc.cc:99
 msgid "srcpackage"
 msgid_plural "srcpackages"
-msgstr[0] "src 軟體包"
+msgstr[0] "src 套件"
 
 #: src/utils/misc.cc:101
 msgid "application"
