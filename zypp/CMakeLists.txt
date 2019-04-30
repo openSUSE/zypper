@@ -308,6 +308,7 @@ INSTALL(  FILES
 )
 
 SET( zypp_media_SRCS
+  media/CurlHelper.cc
   media/MediaException.cc
   media/MediaAccess.cc
   media/MediaHandler.cc
