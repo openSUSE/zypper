@@ -8,24 +8,26 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-02-25 14:33+0100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2019-05-14 15:33+0000\n"
+"Last-Translator: Olga Smirnova <mistresssilvara@hotmail.com>\n"
+"Language-Team: Occidental <https://l10n.opensuse.org/projects/zypper/master/"
+"ie/>\n"
 "Language: ie\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 3.3\n"
 
 #: src/SolverRequester.h:52
 #, boost-format
 msgid "Suspicious category filter value '%1%'."
-msgstr ""
+msgstr "Suspectiv valore del filtre de categories: '%1% '."
 
 #: src/SolverRequester.h:60
 #, boost-format
 msgid "Suspicious severity filter value '%1%'."
-msgstr ""
+msgstr "Suspectiv valore del filtre de severitá: '%1%'."
 
 #: src/callbacks/keyring.h:32
 msgid "Signing data enables the recipient to verify that no modifications occurred after the data were signed. Accepting data with no, wrong or unknown signature can lead to a corrupted system and in extreme cases even to a system compromise."
@@ -47,31 +49,31 @@ msgstr ""
 
 #: src/callbacks/keyring.h:79
 msgid "Repository:"
-msgstr ""
+msgstr "Repositoria:"
 
 #: src/callbacks/keyring.h:81
 msgid "Key Name:"
-msgstr ""
+msgstr "Nómine de clave:"
 
 #: src/callbacks/keyring.h:82
 msgid "Key Fingerprint:"
-msgstr ""
+msgstr "Fingre-print de clave:"
 
 #: src/callbacks/keyring.h:83
 msgid "Key Created:"
-msgstr ""
+msgstr "Clave creat:"
 
 #: src/callbacks/keyring.h:84
 msgid "Key Expires:"
-msgstr ""
+msgstr "Clave expira:"
 
 #: src/callbacks/keyring.h:86
 msgid "Subkey:"
-msgstr ""
+msgstr "Sub-clave:"
 
 #: src/callbacks/keyring.h:87
 msgid "Rpm Name:"
-msgstr ""
+msgstr "Nómine de RPM:"
 
 #: src/callbacks/keyring.h:113
 #, boost-format
@@ -99,7 +101,7 @@ msgstr ""
 #: src/callbacks/keyring.h:156
 #, boost-format
 msgid "File '%1%' is unsigned."
-msgstr ""
+msgstr "File «%1%» ne es signat."
 
 #. translator: %1% is a file name, %2% a repositories name
 #: src/callbacks/keyring.h:159
