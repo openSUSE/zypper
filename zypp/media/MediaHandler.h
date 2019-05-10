@@ -361,6 +361,19 @@ class MediaHandler {
 	 **/
 	virtual void getFile( const Pathname & filename, const ByteCount &expectedFileSize_r ) const;
 
+
+        /**
+	 * Call concrete handler to provide all files below attach point.
+	 *
+	 * Default implementation provided, that calls getFile for each files in the list
+	 *
+	 * Asserted that media is attached.
+	 *
+	 * \throws MediaException
+	 *
+	 **/
+        virtual void getFiles( const std::vector< std::pair<Pathname, ByteCount> > &files ) const;
+
         /**
          * Call concrete handler to provide a file under a different place
          * in the file system (usually not under attach point) as a copy.

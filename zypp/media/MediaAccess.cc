@@ -34,6 +34,7 @@
 #include <zypp/media/MediaISO.h>
 #include <zypp/media/MediaPlugin.h>
 #include <zypp/media/UrlResolverPlugin.h>
+#include <zypp/zyppng/media/MediaNetwork>
 
 using std::endl;
 
@@ -134,41 +135,59 @@ MediaAccess::open (const Url& o_url, const Pathname & preferred_attach_point)
 	_handler = new MediaCIFS (url,preferred_attach_point);
     else if (scheme == "ftp" || scheme == "tftp" || scheme == "http" || scheme == "https")
     {
-        bool use_multicurl = true;
-	std::string urlmediahandler ( url.getQueryParam("mediahandler") );
-        if ( urlmediahandler == "multicurl" )
-        {
-          use_multicurl = true;
-        }
-        else if ( urlmediahandler == "curl" )
-        {
-          use_multicurl = false;
-        }
-        else
-        {
-          if ( ! urlmediahandler.empty() )
-          {
-            WAR << "unknown mediahandler set: " << urlmediahandler << endl;
+        const char *networkenv = getenv( "ZYPPNG_MEDIANETWORK" );
+        bool use_network = ( networkenv && strcmp(networkenv, "1" ) == 0 );
+        if ( use_network ) {
+          WAR << "network backend manually enabled." << endl;
+          zyppng::MediaHandlerNetwork *hdl = new zyppng::MediaHandlerNetwork (url,preferred_attach_point);
+
+          UrlResolverPlugin::HeaderList::const_iterator it;
+          for ( const auto & el : custom_headers ) {
+            std::string header { el.first };
+            header += ": ";
+            header += el.second;
+            MIL << "Added custom header -> " << header << endl;
+            hdl->settings().addHeader( std::move(header) );
           }
-          const char *multicurlenv = getenv( "ZYPP_MULTICURL" );
-          // if user disabled it manually
-          if ( use_multicurl && multicurlenv && ( strcmp(multicurlenv, "0" ) == 0 ) )
+          _handler = hdl;
+
+
+        } else {
+          bool use_multicurl = true;
+	  std::string urlmediahandler ( url.getQueryParam("mediahandler") );
+          if ( urlmediahandler == "multicurl" )
           {
+            use_multicurl = true;
+          }
+          else if ( urlmediahandler == "curl" )
+          {
+            use_multicurl = false;
+          }
+          else
+          {
+            if ( ! urlmediahandler.empty() )
+            {
+              WAR << "unknown mediahandler set: " << urlmediahandler << endl;
+            }
+            const char *multicurlenv = getenv( "ZYPP_MULTICURL" );
+            // if user disabled it manually
+            if ( use_multicurl && multicurlenv && ( strcmp(multicurlenv, "0" ) == 0 ) )
+            {
               WAR << "multicurl manually disabled." << endl;
               use_multicurl = false;
-          }
-          else if ( !use_multicurl && multicurlenv && ( strcmp(multicurlenv, "1" ) == 0 ) )
-          {
+            }
+            else if ( !use_multicurl && multicurlenv && ( strcmp(multicurlenv, "1" ) == 0 ) )
+            {
               WAR << "multicurl manually enabled." << endl;
               use_multicurl = true;
+            }
           }
-        }
 
-        MediaCurl *curl;
+          MediaCurl *curl;
 
-        if ( use_multicurl )
+          if ( use_multicurl )
             curl = new MediaMultiCurl (url,preferred_attach_point);
-	else
+          else
             curl = new MediaCurl (url,preferred_attach_point);
 
         for ( const auto & el : custom_headers ) {
@@ -177,8 +196,9 @@ MediaAccess::open (const Url& o_url, const Pathname & preferred_attach_point)
 	    header += el.second;
             MIL << "Added custom header -> " << header << endl;
             curl->settings().addHeader( std::move(header) );
+          }
+          _handler = curl;
         }
-        _handler = curl;
     }
     else if (scheme == "plugin" )
 	_handler = new MediaPlugin (url,preferred_attach_point);

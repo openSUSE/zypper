@@ -1244,6 +1244,12 @@ void MediaHandler::getFile(const Pathname & filename , const ByteCount &) const
       ZYPP_THROW(MediaFileNotFoundException(url(), filename));
 }
 
+void MediaHandler::getFiles(const std::vector<std::pair<zypp::filesystem::Pathname, ByteCount> > &files) const
+{
+  for ( const auto &req : files )
+    getFile( req.first, req.second );
+}
+
 
 void MediaHandler::getFileCopy (const Pathname & srcFilename, const Pathname & targetFilename , const ByteCount &expectedFileSize_r) const
 {

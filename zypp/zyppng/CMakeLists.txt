@@ -38,6 +38,7 @@ SET( zyppng_core_HEADERS
 )
 
 SET( zyppng_media_SRCS
+  ${CMAKE_CURRENT_SOURCE_DIR}/media/medianetwork.cc
   ${CMAKE_CURRENT_SOURCE_DIR}/media/network/downloader.cc
   ${CMAKE_CURRENT_SOURCE_DIR}/media/network/networkrequestdispatcher.cc
   ${CMAKE_CURRENT_SOURCE_DIR}/media/network/networkrequesterror.cc
@@ -45,6 +46,8 @@ SET( zyppng_media_SRCS
 )
 
 SET( zyppng_media_HEADERS
+  ${CMAKE_CURRENT_SOURCE_DIR}/media/MediaNetwork
+  ${CMAKE_CURRENT_SOURCE_DIR}/media/medianetwork.h
   ${CMAKE_CURRENT_SOURCE_DIR}/media/network/AuthData
   ${CMAKE_CURRENT_SOURCE_DIR}/media/network/authdata.h
   ${CMAKE_CURRENT_SOURCE_DIR}/media/network/downloader.h
