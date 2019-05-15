@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: opensuse-i 18n\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-02-27 13:31+0100\n"
-"PO-Revision-Date: 2018-02-28 13:09+0000\n"
+"PO-Revision-Date: 2019-05-21 15:55+0000\n"
 "Last-Translator: Mohammad Rezaei Seresht <m_rezaei_seresht@hotmail.com>\n"
 "Language-Team: Persian <https://l10n.opensuse.org/projects/libzypp/master/fa/"
 ">\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 2.18\n"
+"X-Generator: Weblate 3.3\n"
 
 #. dubious: Throw on malformed known types, otherwise log a warning.
 #: zypp/CheckSum.cc:136
@@ -3763,14 +3763,14 @@ msgstr[2] "(در %d منقضی می شود)"
 #: zypp/RepoInfo.cc:517
 #, boost-format
 msgid "Looking for gpg key ID %1% in cache %2%."
-msgstr ""
+msgstr "در جستجوی کلید gpg %1%  در کش %2% ."
 
 #. translator: %1% is a gpg key ID like 3DBDC284
 #. %2% is a repositories name
 #: zypp/RepoInfo.cc:545
 #, boost-format
 msgid "Looking for gpg key ID %1% in repository %2%."
-msgstr ""
+msgstr "در جستجوی شناسه کلید gpg %1% در مخزن %2%."
 
 #. translator: %1% is a repositories name
 #: zypp/RepoInfo.cc:569
