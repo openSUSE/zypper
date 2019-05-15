@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-02-25 14:33+0100\n"
-"PO-Revision-Date: 2019-05-14 15:33+0000\n"
+"PO-Revision-Date: 2019-05-19 19:32+0000\n"
 "Last-Translator: Murat Servan Kahraman <muratservan@outlook.com>\n"
 "Language-Team: Turkish <https://l10n.opensuse.org/projects/zypper/master/tr/>"
 "\n"
@@ -259,7 +259,7 @@ msgid "Ignoring failed signature verification for file '%s'!"
 msgstr "'%s' dosyası için imza doğrulama başarısızlığı yok sayılıyor!"
 
 #: src/callbacks/keyring.h:376
-#, c-format, boost-format
+#, boost-format, c-format, fuzzy
 msgid ""
 "Ignoring failed signature verification for file '%s' from repository '%s'!"
 msgstr ""
@@ -376,16 +376,16 @@ msgstr "Bu kilidi silmek istiyor musunuz?"
 
 #: src/callbacks/locks.h:45
 msgid "The following query does not lock anything:"
-msgstr "Aşağıdaki sorgu hiç bir şeyi kilitlemez."
+msgstr "Aşağıdaki sorgu hiç bir şeyi kilitlemez:"
 
 #: src/callbacks/repo.h:49
 msgid "Retrieving delta"
-msgstr "Delta alınıyor."
+msgstr "Delta alınıyor"
 
 #. translators: this text is a progress display label e.g. "Applying delta foo [42%]"
 #: src/callbacks/repo.h:74
 msgid "Applying delta"
-msgstr "Delta uygulanıyor."
+msgstr "Delta uygulanıyor"
 
 #. TranslatorExplanation %s is package size like "5.6 M"
 #: src/callbacks/repo.h:103
@@ -1043,9 +1043,9 @@ msgstr "'%s' kaynak paketi bulunamadı."
 # clients/nis_write.ycp:73
 #. just in case
 #: src/RequestFeedback.cc:56
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Object '%s' not found."
-msgstr "'{0}' kullanıcısı bulunamadı"
+msgstr "'%s' nesnesi bulunamadı."
 
 #: src/RequestFeedback.cc:61
 #, c-format, boost-format
@@ -1436,34 +1436,39 @@ msgstr[0] "Aşağıdaki uygulamanın sürümü düşürülecek:"
 msgstr[1] "Aşağıdaki %d uygulamanın sürümü düşürülecek:"
 
 #: src/Summary.cc:753
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following package is going to be reinstalled:"
 msgid_plural "The following %d packages are going to be reinstalled:"
-msgstr[0] "Aşağıdaki desteler kurulacak:"
+msgstr[0] "Aşağıdaki paket yeniden yüklenecek:"
+msgstr[1] "Aşağıdaki %d paket yeniden yüklenecek:"
 
 #: src/Summary.cc:758
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following patch is going to be reinstalled:"
 msgid_plural "The following %d patches are going to be reinstalled:"
-msgstr[0] "Aşağıdaki desteler kurulacak:"
+msgstr[0] "Aşağıdaki yama yeniden yüklenecek:"
+msgstr[1] "Aşağıdaki %d yama yeniden yüklenecek:"
 
 #: src/Summary.cc:763
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following pattern is going to be reinstalled:"
 msgid_plural "The following %d patterns are going to be reinstalled:"
-msgstr[0] "Aşağıdaki desteler kurulacak:"
+msgstr[0] "Aşağıdaki örüntü yeniden yüklenecek:"
+msgstr[1] "Aşağıdaki %d örüntü yeniden yüklenecek:"
 
 #: src/Summary.cc:768
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following product is going to be reinstalled:"
 msgid_plural "The following %d products are going to be reinstalled:"
-msgstr[0] "Aşağıdaki desteler kurulacak:"
+msgstr[0] "Aşağıdaki ürün yeniden yüklenecek:"
+msgstr[1] "Aşağıdaki %d ürün yeniden yüklenecek:"
 
 #: src/Summary.cc:781
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following application is going to be reinstalled:"
 msgid_plural "The following %d applications are going to be reinstalled:"
-msgstr[0] "Aşağıdaki desteler kurulacak:"
+msgstr[0] "Aşağıdaki uygulama yeniden yüklenecek:"
+msgstr[1] "Aşağıdaki %d uygulama yeniden yüklenecek:"
 
 #: src/Summary.cc:918
 #, fuzzy, c-format, boost-format
@@ -1671,18 +1676,24 @@ msgid_plural ""
 msgstr[0] "Belirtilen paketler güncellenecek:"
 
 #: src/Summary.cc:1226
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following package is not supported by its vendor:"
 msgid_plural "The following %d packages are not supported by their vendor:"
-msgstr[0] "Belirtilen paketler güncellenecek:"
+msgstr[0] "Aşağıdaki paket, sağlayıcısı tarafından desteklenmiyor:"
+msgstr[1] "Aşağıdaki %d paket, sağlayıcıları tarafından desteklenmiyor:"
 
 #: src/Summary.cc:1244
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid ""
 "The following package needs additional customer contract to get support:"
 msgid_plural ""
 "The following %d packages need additional customer contract to get support:"
-msgstr[0] "Belirtilen paketler güncellenecek:"
+msgstr[0] ""
+"Aşağıdaki paket, destek alabilmek için ek bir tüketici sözleşmesi "
+"gerektiriyor:"
+msgstr[1] ""
+"Aşağıdaki %d paket, destek alabilmeleri için ek bir tüketici sözleşmesi "
+"gerektiriyor:"
 
 #: src/Summary.cc:1264
 #, fuzzy, c-format, boost-format
@@ -2015,7 +2026,7 @@ msgstr "a/r/i/u/s"
 
 #: src/callbacks/media.cc:78
 msgid "Disable SSL certificate authority check and continue."
-msgstr "(Nodeps ile)"
+msgstr "SSL sertifikası yetki kontrolünü devre dışı bırak ve devam et."
 
 #. translators: this is a prompt text
 #: src/callbacks/media.cc:83 src/callbacks/media.cc:178
@@ -2033,7 +2044,7 @@ msgstr "Aygıtlar algılanamadı, çıkaramazsınız."
 
 #: src/callbacks/media.cc:109
 msgid "Try to eject the device manually."
-msgstr "Aygıtı el ile çıkarmayı deneyin"
+msgstr "Aygıtı el ile çıkarmayı deneyin."
 
 #: src/callbacks/media.cc:120
 msgid "Detected devices:"
@@ -3304,7 +3315,7 @@ msgstr "Takma ad"
 #: src/commands/repos/list.cc:47 src/commands/repos/list.cc:230
 #: src/commands/services/list.cc:106 src/repos.cc:1269
 msgid "Enabled"
-msgstr "Etkinleştir."
+msgstr "Etkinleşti"
 
 #. GPG Check
 #. translators: property name; short; used like "Name: value"
@@ -4008,7 +4019,7 @@ msgstr "Eşleşen öge bulunamadı."
 
 #: src/commands/search/search.cc:457
 msgid "Problem occurred initializing or executing the search query"
-msgstr "Arama sorgusu yükleniyorken yada yürütülüyorken hata oluştu."
+msgstr "Arama sorgusu başlatılırken yada yürütülüyorken hata oluştu"
 
 #: src/commands/search/search.cc:458
 msgid "See the above message for a hint."
@@ -4243,8 +4254,8 @@ msgstr[1] "'%s' depoları '%s' hizmetinin etkin depolarına eklendi"
 msgid "Repository '%s' has been added to disabled repositories of service '%s'"
 msgid_plural ""
 "Repositories '%s' have been added to disabled repositories of service '%s'"
-msgstr[0] "'%s' deposu '%s' hizmetinin devre dışı bırakılmış depolarına eklendi."
-msgstr[1] "'%s' depoları '%s' hizmetinin devre dışı bırakılmış depolarına eklendi."
+msgstr[0] "'%s' deposu '%s' hizmetinin devre dışı bırakılmış depolarına eklendi"
+msgstr[1] "'%s' depoları '%s' hizmetinin devre dışı bırakılmış depolarına eklendi"
 
 #: src/commands/services/modify.cc:269
 #, c-format, boost-format
@@ -5429,7 +5440,7 @@ msgstr[1] "%1% depo"
 #. check whether libzypp indicates a refresh is needed, and if so,
 #. print a message
 #: src/repos.cc:226
-#, c-format, boost-format
+#, boost-format, c-format, fuzzy
 msgid "Checking whether to refresh metadata for %s"
 msgstr "%s için meta veri lerini yenilleyip kontrol ediliyor."
 
@@ -5464,9 +5475,9 @@ msgid "Error while disabling repository '%s'."
 msgstr "'%s' deposu devre dışı bırakılırken hata oluştu."
 
 #: src/repos.cc:345
-#, c-format, boost-format
+#, boost-format, c-format, fuzzy
 msgid "Problem retrieving files from '%s'."
-msgstr "'%s' den dosyalar alınırken problem ortaya çıktı. "
+msgstr "'%s' deposundan dosyalar alınırken sorun çıktı."
 
 #: src/repos.cc:346 src/repos.cc:1872 src/solve-commit.cc:792
 #: src/solve-commit.cc:823 src/solve-commit.cc:847
@@ -5598,7 +5609,7 @@ msgstr ""
 
 #: src/repos.cc:994
 msgid "Initializing Target"
-msgstr "Hedef başlatılıyor."
+msgstr "Hedef Başlatılıyor"
 
 # clients/online_update_start.ycp:171
 #: src/repos.cc:1002
@@ -5704,7 +5715,7 @@ msgstr "'%s' deposu başarıyla eklendi"
 #: src/repos.cc:1287
 #, c-format, boost-format
 msgid "Reading data from '%s' media"
-msgstr "'%s' mediyasından veri okunuyor."
+msgstr "'%s' ortamından veri okunuyor"
 
 #: src/repos.cc:1293
 #, c-format, boost-format
@@ -6269,7 +6280,8 @@ msgstr[1] "%d yama kilitli"
 #, fuzzy, c-format, boost-format
 msgid "%d patch optional"
 msgid_plural "%d patches optional"
-msgstr[0] "Bir yama bulunamadı."
+msgstr[0] "%d yama isteğe bağlı"
+msgstr[1] "%d yama isteğe bağlı"
 
 #. translator: Hint displayed right adjusted; %1% is a CLI option
 #. "42 patches optional                  (use --with-optional to include optional patches)"
