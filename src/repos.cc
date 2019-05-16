@@ -882,44 +882,30 @@ void do_init_repos( Zypper & zypper, const Container & container )
         }
       }
     }
-    // even if refresh is not required, try to build the sqlite cache
+    // even if refresh is not required, try to build the cache
     // for the case of non-existing cache
     else if ( repo.enabled() )
     {
-      // handle root user differently
-      if ( geteuid() == 0 && !zypper.config().changedRoot )
+      if ( build_cache( zypper, repo, false ) )
       {
-        if ( build_cache( zypper, repo, false ) )
-        {
-          WAR << "Skipping repository '" << repo.alias() << "' because of the above error." << endl;
-          zypper.out().warning( str::Format(_("Skipping repository '%s' because of the above error.")) % repo.asUserString(),
-				Out::QUIET );
-
-          it->setEnabled( false );
-	  postContentcheck = false;
-	  ++skip_count;
-        }
-      }
-      // non-root user
-      else
-      {
-        // if error is returned, it means zypp attempted to build the metadata
-        // cache for the repo and failed because writing is not allowed for
-        // non-root. Thus, just display refresh hint for non-root user.
-        if ( build_cache(zypper, repo, false) )
-        {
-          MIL <<  "We're running as non-root, skipping building of " << repo.alias() + "cache" << endl;
-          zypper.out().warning(
+	// If an error is returned, it means zypp attempted to build the metadata
+	// cache for the repo and failed.  For non-root probably because writing
+	// is not allowed. Display a refresh hint then.
+	if ( geteuid() != 0 )
+	{
+	  MIL <<  "We're running as non-root, skipping building of " << repo.alias() + "cache" << endl;
+	  zypper.out().warning(
 	    str::Format(_( "The metadata cache needs to be built for the '%s' repository. You can run 'zypper refresh' as root to do this."))
 	    % repo.asUserString(), Out::QUIET );
-
-          WAR << "Disabling repository '" << repo.alias() << "'" << endl;
-          zypper.out().info( str::Format(_("Disabling repository '%s'.")) % repo.asUserString() );
-
-          it->setEnabled( false );	// in gData!
-	  postContentcheck = false;
-	  ++skip_count;
 	}
+
+	WAR << "Skipping repository '" << repo.alias() << "' because of the above error." << endl;
+	zypper.out().warning( str::Format(_("Skipping repository '%s' because of the above error.")) % repo.asUserString(),
+			      Out::QUIET );
+
+	it->setEnabled( false );
+	postContentcheck = false;
+	++skip_count;
       }
     }
 
