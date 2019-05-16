@@ -772,7 +772,7 @@ void do_init_repos(Zypper & zypper, const Container & container)
       MIL << "calling refresh for " << repo.alias() << endl;
 
       // handle root user differently
-      if (geteuid() == 0 && !zypper.globalOpts().changedRoot)
+      if ( geteuid() == 0 )
       {
         if (refresh_raw_metadata(zypper, repo, false)
             || build_cache(zypper, repo, false))
