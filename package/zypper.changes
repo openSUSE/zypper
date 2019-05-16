@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Thu May 16 18:40:16 CEST 2019 - ma@suse.de
+
+- Fix repo refresh not returning 106-ZYPPER_EXIT_INF_REPOS_SKIPPED
+  if --root is used (bsc#1134226)
+- fix patch to compile with old zypper
+- version 1.11.76
+
+-------------------------------------------------------------------
 Fri Jan 18 15:21:42 CET 2019 - ma@suse.de
 
 - Improve handling of partially locked packages (bsc#1113296)
