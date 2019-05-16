@@ -854,7 +854,7 @@ void do_init_repos( Zypper & zypper, const Container & container )
       MIL << "calling refresh for " << repo.alias() << endl;
 
       // handle root user differently
-      if ( geteuid() == 0 && !zypper.config().changedRoot )
+      if ( geteuid() == 0 )
       {
         if ( refresh_raw_metadata( zypper, repo, false ) || build_cache( zypper, repo, false ) )
         {
@@ -870,6 +870,8 @@ void do_init_repos( Zypper & zypper, const Container & container )
       // non-root user
       else
       {
+	// bnc#683509: use old repo cache when refresh failed for non-root users
+	// TODO Nevertheless we should head towards a common basic workflow for root/non-root
         try
         { manager.refreshMetadata( repo, RepoManager::RefreshIfNeeded ); }
         // any exception thrown means zypp attempted to refresh the repo
