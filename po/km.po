@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper.km\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-25 14:33+0100\n"
+"POT-Creation-Date: 2019-05-20 10:18+0200\n"
 "PO-Revision-Date: 2012-05-24 15:15+0700\n"
 "Last-Translator: Khoem Sokhem <khoemsokhem@khmeros.info>\n"
 "Language-Team: Khmer <support@khmeros.info>\n"
@@ -397,35 +397,35 @@ msgstr ""
 msgid "Running: %s  (%s, %s)"
 msgstr "កំពុង​រត់ ៖ %s  (%s, %s)"
 
-#. translators: This text is a progress display label e.g. "Removing packagename-x.x.x [42%]"
-#: src/callbacks/rpm.h:250
-#, c-format, boost-format
-msgid "Removing %s"
-msgstr "យក %s ចេញ"
-
-#: src/callbacks/rpm.h:273
+#: src/callbacks/rpm.h:267
 #, c-format, boost-format
 msgid "Removal of %s failed:"
 msgstr "ការ​យក %s ចេញ​បាន​បរាជ័យ ៖"
 
-#. TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
-#: src/callbacks/rpm.h:316
+#. translators: This text is a progress display label e.g. "Removing packagename-x.x.x [42%]"
+#: src/callbacks/rpm.h:307
 #, c-format, boost-format
-msgid "Installing: %s"
-msgstr "ដំឡើង ៖ %s"
+msgid "Removing %s"
+msgstr "យក %s ចេញ"
 
-#: src/callbacks/rpm.h:339
+#: src/callbacks/rpm.h:344
 #, c-format, boost-format
 msgid "Installation of %s failed:"
 msgstr "ការ​ដំឡើង %s បាន​បរាជ័យ ៖"
 
+#. TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
+#: src/callbacks/rpm.h:384
+#, c-format, boost-format
+msgid "Installing: %s"
+msgstr "ដំឡើង ៖ %s"
+
 #. TranslatorExplanation A progressbar label
-#: src/callbacks/rpm.h:383
+#: src/callbacks/rpm.h:405
 msgid "Checking for file conflicts:"
 msgstr ""
 
 #. TranslatorExplanation %1%(commandline option)
-#: src/callbacks/rpm.h:417
+#: src/callbacks/rpm.h:439
 #, boost-format
 msgid ""
 "Checking for file conflicts requires not installed packages to be downloaded "
@@ -434,7 +434,7 @@ msgid ""
 msgstr ""
 
 #. TranslatorExplanation %1%(number of packages); detailed list follows
-#: src/callbacks/rpm.h:424
+#: src/callbacks/rpm.h:446
 #, boost-format
 msgid ""
 "The following package had to be excluded from file conflicts check because "
@@ -445,18 +445,18 @@ msgid_plural ""
 msgstr[0] ""
 
 #. TranslatorExplanation %1%(number of conflicts); detailed list follows
-#: src/callbacks/rpm.h:435
+#: src/callbacks/rpm.h:457
 #, boost-format
 msgid "Detected %1% file conflict:"
 msgid_plural "Detected %1% file conflicts:"
 msgstr[0] ""
 
-#: src/callbacks/rpm.h:443
+#: src/callbacks/rpm.h:465
 msgid "Conflicting files will be replaced."
 msgstr ""
 
 #. TranslatorExplanation Problem description before asking whether to "Continue? [yes/no] (no):"
-#: src/callbacks/rpm.h:449
+#: src/callbacks/rpm.h:471
 msgid ""
 "File conflicts happen when two packages attempt to install files with the "
 "same name but different contents. If you continue, conflicting files will be "
@@ -639,7 +639,7 @@ msgstr ""
 #. translators: property name; short; used like "Name: value"
 #: src/utils/flags/zyppflags.h:49 src/commands/repos/list.cc:42
 #: src/commands/repos/list.cc:268 src/commands/services/list.cc:116
-#: src/repos.cc:1267
+#: src/repos.cc:1255
 msgid "URI"
 msgstr "URI"
 
@@ -1825,7 +1825,7 @@ msgstr "PackageKit នៅតែ​កំពុង​រត់ (ប្រហែ�
 msgid "Try again?"
 msgstr "​ព្យាយាម​ម្ដងទៀត ?"
 
-#: src/Zypper.cc:248 src/Zypper.cc:712 src/commands/basecommand.cc:265
+#: src/Zypper.cc:248 src/Zypper.cc:712 src/commands/basecommand.cc:282
 msgid "Unexpected exception."
 msgstr "ករណី​លើកលែង​ដែល​មិនបាន​រំពឹង​ទុក ។"
 
@@ -2098,45 +2098,45 @@ msgid ""
 "to install or remove packages in order to repair the dependency problems."
 msgstr ""
 
-#: src/commands/installremove.cc:54
+#: src/commands/installremove.cc:62
 msgid "Select packages by plain name, not by capability."
 msgstr ""
 
-#: src/commands/installremove.cc:55
+#: src/commands/installremove.cc:63
 msgid "Select packages solely by capability."
 msgstr ""
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/commands/installremove.cc:74
+#: src/commands/installremove.cc:82
 msgid "remove (rm) [OPTIONS] <CAPABILITY> ..."
 msgstr ""
 
 #. translators: command summary: remove, rm
-#: src/commands/installremove.cc:76
+#: src/commands/installremove.cc:84
 msgid "Remove packages."
 msgstr "យក​កញ្ចប់​ចេញ ។"
 
 #. translators: command description
-#: src/commands/installremove.cc:78
+#: src/commands/installremove.cc:86
 msgid ""
 "Remove packages with specified capabilities. A capability is NAME[.ARCH]"
 "[OP<VERSION>], where OP is one of <, <=, =, >=, >."
 msgstr ""
 
-#: src/commands/installremove.cc:96 src/commands/installremove.cc:218
+#: src/commands/installremove.cc:104 src/commands/installremove.cc:226
 #: src/utils/messages.cc:53
 msgid "Too few arguments."
 msgstr "អាគុយម៉ង់​តិច​ពេក ។"
 
-#: src/commands/installremove.cc:97 src/commands/installremove.cc:219
+#: src/commands/installremove.cc:105 src/commands/installremove.cc:227
 msgid "At least one package name is required."
 msgstr "ត្រូវការ​យ៉ាងហោចណាស់​ឈ្មោះ​កញ្ចប់​មួយ ។"
 
-#: src/commands/installremove.cc:108
+#: src/commands/installremove.cc:116
 msgid "Cannot uninstall patches."
 msgstr "មិនអាច​លុប​បំណះ​បានទេ ។"
 
-#: src/commands/installremove.cc:109
+#: src/commands/installremove.cc:117
 msgid ""
 "Installed status of a patch is determined solely based on its dependencies.\n"
 "Patches are not installed in sense of copied files, database records,\n"
@@ -2146,23 +2146,23 @@ msgstr ""
 "បំណះ​មិនត្រូវបាន​ដំឡើង​នៅ​ក្នុង​ឯកសារ​ដែល​បាន​ចម្លង មូលដ្ឋាន​ទិន្នន័យ កំណត់ត្រា\n"
 "ឬ​អ្វី​ផ្សេងទៀត​ដែល​ស្រដៀង​គ្នា ។"
 
-#: src/commands/installremove.cc:118
+#: src/commands/installremove.cc:126
 #, fuzzy
 msgid "Uninstallation of a source package not defined and implemented."
 msgstr "ការ​លុប​កញ្ចប់​ប្រភព​មិន​បានកំណត់ និងអនុវត្ត​ទេ"
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/commands/installremove.cc:160
+#: src/commands/installremove.cc:168
 msgid "install (in) [OPTIONS] <CAPABILITY|RPM_FILE_URI> ..."
 msgstr ""
 
 #. translators: command summary: install, in
-#: src/commands/installremove.cc:162
+#: src/commands/installremove.cc:170
 msgid "Install packages."
 msgstr "ដំឡើង​កញ្ចប់ ។"
 
 #. translators: command description
-#: src/commands/installremove.cc:164
+#: src/commands/installremove.cc:172
 msgid ""
 "Install packages with specified capabilities or RPM files with specified "
 "location. A capability is NAME[.ARCH][OP<VERSION>], where OP is one of <, "
@@ -2170,23 +2170,23 @@ msgid ""
 msgstr ""
 
 #. translators: --from <ALIAS|#|URI>
-#: src/commands/installremove.cc:179
+#: src/commands/installremove.cc:187
 msgid "Select packages from the specified repository."
 msgstr ""
 
 #. translators: --oldpackage
-#: src/commands/installremove.cc:183
+#: src/commands/installremove.cc:191
 msgid ""
 "Allow to replace a newer item with an older one. Handy if you are doing a "
 "rollback. Unlike --force it will not enforce a reinstall."
 msgstr ""
 
-#: src/commands/installremove.cc:187
+#: src/commands/installremove.cc:195
 msgid "Silently install unsigned rpm packages given as commandline parameters."
 msgstr ""
 
 #. translators: -f, --force
-#: src/commands/installremove.cc:192
+#: src/commands/installremove.cc:200
 msgid ""
 "Install even if the item is already installed (reinstall), downgraded or "
 "changes vendor or architecture."
@@ -2194,11 +2194,11 @@ msgstr ""
 
 #. translators: rug related message, shown if
 #. 'zypper in --entire-catalog foorepo someargument' is specified
-#: src/commands/installremove.cc:230
+#: src/commands/installremove.cc:238
 msgid "Ignoring arguments, marking the entire repository."
 msgstr "មិនអើពើ​នឹង​អាគុយម៉ង់ សម្គាល់​ឃ្លាំង​ទាំង​មូល ។"
 
-#: src/commands/installremove.cc:243 src/commands/sourceinstall.cc:92
+#: src/commands/installremove.cc:251 src/commands/sourceinstall.cc:92
 msgid "No valid arguments specified."
 msgstr "គ្មាន​អាគុយម៉ង់​ត្រឹមត្រូវ​ដែល​បាន​បញ្ជាក់​ទេ ។"
 
@@ -3169,26 +3169,26 @@ msgstr "ឈ្មោះ​ក្លែងក្លាយ"
 #. 'enabled' flag
 #. translators: property name; short; used like "Name: value"
 #: src/commands/repos/list.cc:47 src/commands/repos/list.cc:230
-#: src/commands/services/list.cc:106 src/repos.cc:1269
+#: src/commands/services/list.cc:106 src/repos.cc:1257
 msgid "Enabled"
 msgstr "អនុញ្ញាត"
 
 #. GPG Check
 #. translators: property name; short; used like "Name: value"
 #: src/commands/repos/list.cc:48 src/commands/repos/list.cc:234
-#: src/commands/services/list.cc:107 src/repos.cc:1271
+#: src/commands/services/list.cc:107 src/repos.cc:1259
 msgid "GPG Check"
 msgstr "ពិនិត្យ​មើល GPG"
 
 #. translators: repository priority (in zypper repos -p or -d)
 #. translators: property name; short; used like "Name: value"
 #: src/commands/repos/list.cc:49 src/commands/repos/list.cc:252
-#: src/commands/services/list.cc:113 src/repos.cc:1275
+#: src/commands/services/list.cc:113 src/repos.cc:1263
 msgid "Priority"
 msgstr "អទិភាព"
 
 #. translators: property name; short; used like "Name: value"
-#: src/commands/repos/list.cc:50 src/repos.cc:1273
+#: src/commands/repos/list.cc:50 src/repos.cc:1261
 msgid "Autorefresh"
 msgstr "ធ្វើ​ឲ្យ​ស្រស់​ដោយ​ស្វ័យ​ប្រវត្តិ"
 
@@ -3241,7 +3241,7 @@ msgstr "រាយ​ឃ្លាំង​ដែល​បានកំណត់​
 msgid "Export all defined repositories as a single local .repo file."
 msgstr ""
 
-#: src/commands/repos/list.cc:118 src/repos.cc:1024
+#: src/commands/repos/list.cc:118 src/repos.cc:1012
 msgid "Error reading repositories:"
 msgstr "កំហុស​ខណៈពេល​អាន​ឃ្លាំង ៖"
 
@@ -3368,7 +3368,7 @@ msgstr "ជម្រើស​សកល '%s' មិនមាន​បែបផែ
 msgid "Arguments are not allowed if '%s' is used."
 msgstr "អាគុយម៉ង់​មិន​ត្រូវ​បាន​អនុញ្ញាត​ប្រសិន​បើ '%s' ត្រូវ​បានប្រើ ។"
 
-#: src/commands/repos/refresh.cc:195 src/repos.cc:1036
+#: src/commands/repos/refresh.cc:195 src/repos.cc:1024
 msgid "Specified repositories: "
 msgstr "ឃ្លាំង​ដែលបាន​បញ្ជាក់ ៖ "
 
@@ -3387,7 +3387,7 @@ msgstr "មិនអើពើ​ឃ្លាំង​ដែលបាន​បិ
 msgid "Skipping disabled repository '%s'"
 msgstr "កំពុង​រំលង​ឃ្លាំង '%s' ដែល​បាន​បិទ"
 
-#: src/commands/repos/refresh.cc:262 src/repos.cc:862 src/repos.cc:895
+#: src/commands/repos/refresh.cc:262 src/repos.cc:862 src/repos.cc:905
 #, c-format, boost-format
 msgid "Skipping repository '%s' because of the above error."
 msgstr "រំលង​ឃ្លាំង '%s' ដោយ​សាង​តែ​កំហុស​ខាង​លើ ។"
@@ -3415,7 +3415,7 @@ msgstr "ប្រើ​ពាក្យ​បញ្ជា '%s' ឬ '%s' ដើម
 msgid "Could not refresh the repositories because of errors."
 msgstr "មិន​អាច​ធ្វើ​ឲ្យ​ឃ្លាំង​ស្រស់​ដោយ​សារ​តែ​មាន​កំហុស ។"
 
-#: src/commands/repos/refresh.cc:298 src/repos.cc:946
+#: src/commands/repos/refresh.cc:298 src/repos.cc:934
 msgid "Some of the repositories have not been refreshed because of an error."
 msgstr "ឃ្លាំង​មួយ​ចំនួន​មិន​ត្រូវ​បាន​​ធ្វើ​ឲ្យ​ស្រស់​ទេ ដោយ​សារ​តែ​មាន​កំហុស ។"
 
@@ -3470,12 +3470,12 @@ msgstr ""
 msgid "Repository '%s' renamed to '%s'."
 msgstr "ឃ្លាំង '%s' បាន​ប្ដូរ​ឈ្មោះ​ទៅ '%s' ។"
 
-#: src/commands/repos/rename.cc:47 src/repos.cc:1215
+#: src/commands/repos/rename.cc:47 src/repos.cc:1203
 #, c-format, boost-format
 msgid "Repository named '%s' already exists. Please use another alias."
 msgstr "មាន​ឃ្លាំង​ដែល​មាន​ឈ្មោះ '%s' រួចហើយ ។ សូម​ប្រើ​ឈ្មោះ​ផ្សេងទៀត ។"
 
-#: src/commands/repos/rename.cc:52 src/repos.cc:1693
+#: src/commands/repos/rename.cc:52 src/repos.cc:1681
 msgid "Error while modifying the repository:"
 msgstr "កំហុស​ខណៈពេល​កែប្រែ​ឃ្លាំង ៖"
 
@@ -3867,7 +3867,7 @@ msgstr "មាន​បញ្ហា​កើតឡើង​​នៅពេល​
 msgid "See the above message for a hint."
 msgstr "មើល​សារ​ខាងលើ​សម្រាប់​ព័ត៌មាន​ជំនួយ ។"
 
-#: src/commands/search/search.cc:459 src/repos.cc:1003
+#: src/commands/search/search.cc:459 src/repos.cc:991
 msgid "Running 'zypper refresh' as root might resolve the problem."
 msgstr "ការ​រត់ 'zypper refresh' ជា root គឺ​អាច​ដោះស្រាយ​បញ្ហា​បាន ។"
 
@@ -3949,7 +3949,7 @@ msgid "Problem retrieving the repository index file for service '%s':"
 msgstr "បញ្ហា​ក្នុងការ​ទៅ​យក​ឯកសារ​លិបិក្រម​ឃ្លាំង​សម្រាប់​សេវា '%s' ៖"
 
 #: src/commands/services/common.cc:138 src/commands/services/refresh.cc:226
-#: src/repos.cc:1745
+#: src/repos.cc:1733
 #, c-format, boost-format
 msgid "Skipping service '%s' because of the above error."
 msgstr "រំលង​សេវា '%s' ដោយ​សារ​តែ​កំហុស​ខាង​លើ ។"
@@ -4535,7 +4535,7 @@ msgstr ""
 msgid "Argument resolves to no package"
 msgstr "បានបរាជ័យ​ក្នុង​កា​រដោះស្រាយ​កញ្ចប់"
 
-#: src/commands/utils/download.cc:246 src/solve-commit.cc:898
+#: src/commands/utils/download.cc:246 src/solve-commit.cc:891
 msgid "Nothing to do."
 msgstr "គ្មាន​អ្វី​ត្រូវ​ធ្វើ ។"
 
@@ -5295,8 +5295,8 @@ msgstr "បិទ​ឃ្លាំង '%s' ។"
 msgid "Problem retrieving files from '%s'."
 msgstr "បញ្ហា​ក្នុងការ​ទៅ​យក​ឯកសារ​ពី '%s' ។"
 
-#: src/repos.cc:346 src/repos.cc:1872 src/solve-commit.cc:792
-#: src/solve-commit.cc:823 src/solve-commit.cc:847
+#: src/repos.cc:346 src/repos.cc:1860 src/solve-commit.cc:785
+#: src/solve-commit.cc:816 src/solve-commit.cc:840
 msgid "Please see the above error message for a hint."
 msgstr "សូម​មើល​សារ​កំហុស​ខាងលើ សម្រាប់​ព័ត៌មាន​ជំនួយ ។"
 
@@ -5388,12 +5388,12 @@ msgstr "ប្រើ​ពាក្យ​បញ្ជា '%s' ឬ '%s' ដើម
 msgid "Ignoring repository '%s' because of '%s' option."
 msgstr "មិនអើពើ​នឹង​ឃ្លាំង '%s' ដោយសារ​ជម្រើស '%s' ។"
 
-#: src/repos.cc:831 src/repos.cc:931
+#: src/repos.cc:831 src/repos.cc:919
 #, fuzzy, c-format, boost-format
 msgid "Temporarily enabling repository '%s'."
 msgstr "បិទ​ឃ្លាំង '%s' ។"
 
-#: src/repos.cc:881
+#: src/repos.cc:883
 #, c-format, boost-format
 msgid ""
 "Repository '%s' is out-of-date. You can run 'zypper refresh' as root to "
@@ -5401,7 +5401,7 @@ msgid ""
 msgstr ""
 "ឃ្លាំង '%s' ផុត​កំណត់ ។ អ្នក​អាច​រត់ 'zypper refresh' ជា​ root ដើម្បី​ធ្វើបច្ចុប្បន្នភាព ។"
 
-#: src/repos.cc:913
+#: src/repos.cc:900
 #, c-format, boost-format
 msgid ""
 "The metadata cache needs to be built for the '%s' repository. You can run "
@@ -5410,84 +5410,79 @@ msgstr ""
 "ឃ្លាំង​សម្ងាត់​ទិន្នន័យ​មេតា តម្រូវ​ឲ្យ​ស្ថាបនា​សម្រាប់​ឃ្លាំង '%s' ។ អ្នក​អាច​រត់ 'zypper refresh' ជា "
 "root ដើម្បី​ធ្វើវា ។"
 
-#: src/repos.cc:917
-#, c-format, boost-format
-msgid "Disabling repository '%s'."
-msgstr "បិទ​ឃ្លាំង '%s' ។"
-
-#: src/repos.cc:938
+#: src/repos.cc:926
 #, fuzzy, c-format, boost-format
 msgid "Repository '%s' stays disabled."
 msgstr "ឃ្លាំង '%s' មិន​ត្រឹមត្រូវ ។"
 
-#: src/repos.cc:994
+#: src/repos.cc:982
 msgid "Initializing Target"
 msgstr "ចាប់ផ្ដើម​គោលដៅ"
 
-#: src/repos.cc:1002
+#: src/repos.cc:990
 msgid "Target initialization failed:"
 msgstr "ការ​ចាប់ផ្ដើម​គោលដៅ​បាន​បរាជ័យ ៖"
 
-#: src/repos.cc:1084
+#: src/repos.cc:1072
 #, c-format, boost-format
 msgid "Cleaning metadata cache for '%s'."
 msgstr "ជម្រះ​ឃ្លាំង​សម្ងាត់​ទិន្នន័យ​មេតា​សម្រាប់ '%s' ។"
 
-#: src/repos.cc:1092
+#: src/repos.cc:1080
 #, c-format, boost-format
 msgid "Cleaning raw metadata cache for '%s'."
 msgstr "ជម្រះ​ឃ្លាំង​សម្ងាត់​ទិន្នន័យ​មេតា​ដើម​សម្រាប់ '%s' ។"
 
-#: src/repos.cc:1098
+#: src/repos.cc:1086
 #, c-format, boost-format
 msgid "Keeping raw metadata cache for %s '%s'."
 msgstr "រក្សា​ឃ្លាំង​ទិន្នន័យ​មេតា​ដើម​សម្រាប់ %s '%s' ។"
 
 #. translators: meaning the cached rpm files
-#: src/repos.cc:1105
+#: src/repos.cc:1093
 #, c-format, boost-format
 msgid "Cleaning packages for '%s'."
 msgstr "ជម្រះ​កញ្ចប់​សម្រាប់ '%s' ។"
 
-#: src/repos.cc:1113
+#: src/repos.cc:1101
 #, c-format, boost-format
 msgid "Cannot clean repository '%s' because of an error."
 msgstr "មិនអាច​ជម្រះ​ឃ្លាំង '%s' បានទេ ព្រោះ​មាន​កំហុស ។"
 
-#: src/repos.cc:1124
+#: src/repos.cc:1112
 msgid "Cleaning installed packages cache."
 msgstr "ជម្រះ​ឃ្លាំង​សម្ងាត់​របស់​កញ្ចប់​ដែល​បាន​ដំឡើង ។"
 
-#: src/repos.cc:1133
+#: src/repos.cc:1121
 msgid "Cannot clean installed packages cache because of an error."
 msgstr "មិនអាច​ជម្រះ​ឃ្លាំង​សម្ងាត់​របស់​កញ្ចប់​ដែល​បាន​ដំឡើង​បាន​ទេ ព្រោះ​មាន​កំហុស ។"
 
-#: src/repos.cc:1151
+#: src/repos.cc:1139
 msgid "Could not clean the repositories because of errors."
 msgstr "មិនអាច​ជម្រះ​ឃ្លាំង​បានទេ ព្រោះ​មាន​កំហុស ។"
 
-#: src/repos.cc:1157
+#: src/repos.cc:1145
 msgid "Some of the repositories have not been cleaned up because of an error."
 msgstr "ឃ្លាំង​មួយ​ចំនួន​មិនត្រូវបាន​ជម្រះ​ទេ ព្រោះ​មាន​កំហុស ។"
 
-#: src/repos.cc:1162
+#: src/repos.cc:1150
 msgid "Specified repositories have been cleaned up."
 msgstr "ឃ្លាំង​ដែល​បាន​បញ្ជាក់​ត្រូវបាន​ជម្រះ ។"
 
-#: src/repos.cc:1164
+#: src/repos.cc:1152
 msgid "All repositories have been cleaned up."
 msgstr "ឃ្លាំង​ទាំងអស់​ត្រូវបាន​ជម្រះ ។"
 
-#: src/repos.cc:1186
+#: src/repos.cc:1174
 msgid "This is a changeable read-only media (CD/DVD), disabling autorefresh."
 msgstr "នេះ​ជា​មេឌៀ​ដែល​បានតែ​អាន​ដែល​អាច​ផ្លាស់ប្ដូរ​បាន (ស៊ីឌី/ឌីវីឌី) កា​របិទ​ធ្វើ​ឲ្យ​ស្រស់​ស្វ័យ​ប្រវត្តិ ។"
 
-#: src/repos.cc:1207
+#: src/repos.cc:1195
 #, c-format, boost-format
 msgid "Invalid repository alias: '%s'"
 msgstr "ឈ្មោះក្លែងក្លាយ​ឃ្លាំង​មិន​ត្រឹមត្រូវ ៖ '%s'"
 
-#: src/repos.cc:1224
+#: src/repos.cc:1212
 msgid ""
 "Could not determine the type of the repository. Please check if the defined "
 "URIs (see below) point to a valid repository:"
@@ -5495,160 +5490,160 @@ msgstr ""
 "មិនអាច​កំណត់​ប្រភេទ​ឃ្លាំង​បានទេ ។ សូម​ពិនិត្យ​មើល ប្រសិន​បើ​បាន​កំណត់ URI (សូម​មើល​ខាងក្រោម) ដែល​ចង្អុល​ទៅ​"
 "ឃ្លាំង​ត្រឹមត្រូវ ៖"
 
-#: src/repos.cc:1230
+#: src/repos.cc:1218
 msgid "Can't find a valid repository at given location:"
 msgstr "មិន​អាច​រក​ឃ្លាំង​ដែល​ត្រឹមត្រូវ​នៅ​ទីតាំង​ដែល​បានផ្ដល់ ៖"
 
-#: src/repos.cc:1238
+#: src/repos.cc:1226
 msgid "Problem transferring repository data from specified URI:"
 msgstr "មាន​បញ្ហា​ក្នុងការ​ផ្ទេរ​ទិន្នន័យ​ឃ្លាំង​ពី URI ដែល​បាន​បញ្ជាក់ ៖"
 
-#: src/repos.cc:1239
+#: src/repos.cc:1227
 msgid "Please check whether the specified URI is accessible."
 msgstr "សូម​ពិនិត្យ​មើល ថាតើ URI ដែលបាន​បញ្ជាក់​គឺ​អាច​ចូលដំណើរការ​បាន ។"
 
-#: src/repos.cc:1246
+#: src/repos.cc:1234
 msgid "Unknown problem when adding repository:"
 msgstr "មាន​បញ្ហា​ដែល​មិន​ស្គាល់ នៅ​ពេល​បន្ថែម​ឃ្លាំង ៖"
 
 #. translators: BOOST STYLE POSITIONAL DIRECTIVES ( %N% )
 #. translators: %1% - a repository name
-#: src/repos.cc:1256
+#: src/repos.cc:1244
 #, boost-format
 msgid ""
 "GPG checking is disabled in configuration of repository '%1%'. Integrity and "
 "origin of packages cannot be verified."
 msgstr ""
 
-#: src/repos.cc:1261
+#: src/repos.cc:1249
 #, c-format, boost-format
 msgid "Repository '%s' successfully added"
 msgstr "បាន​បន្ថែម​ឃ្លាំង '%s' ដោយ​ជោគជ័យ"
 
-#: src/repos.cc:1287
+#: src/repos.cc:1275
 #, c-format, boost-format
 msgid "Reading data from '%s' media"
 msgstr "អាន​ទិន្នន័យ​ពី​មេឌៀ '%s'"
 
-#: src/repos.cc:1293
+#: src/repos.cc:1281
 #, c-format, boost-format
 msgid "Problem reading data from '%s' media"
 msgstr "បញ្ហា​ក្នុង​ការ​អាន​ទិន្នន័យ​ពី​មេឌៀ '%s'"
 
-#: src/repos.cc:1294
+#: src/repos.cc:1282
 msgid "Please check if your installation media is valid and readable."
 msgstr "សូម​ពិនិត្យ​មើល ថាតើ​ឧបករណ៍​ផ្ទុក​ការ​ដំឡើង​របស់​អ្នក​គឺ​ត្រឹមត្រូវ ហើយ​អាច​អានបាន ។"
 
-#: src/repos.cc:1301
+#: src/repos.cc:1289
 #, fuzzy, c-format, boost-format
 msgid "Reading data from '%s' media is delayed until next refresh."
 msgstr "អាន​ទិន្នន័យ​ពី​មេឌៀ '%s'"
 
-#: src/repos.cc:1370
+#: src/repos.cc:1358
 msgid "Problem accessing the file at the specified URI"
 msgstr "មាន​បញ្ហា​ក្នុងការ​ចូលដំណើរការ​ឯកសារ​នៅ URI ដែល​បាន​បញ្ជាក់"
 
-#: src/repos.cc:1371
+#: src/repos.cc:1359
 msgid "Please check if the URI is valid and accessible."
 msgstr "សូម​ពិនិត្យ​មើល ថាតើ URI ត្រឹមត្រូវ ហើយ​អាច​ចូលដំណើរការ​បាន ។"
 
-#: src/repos.cc:1378
+#: src/repos.cc:1366
 msgid "Problem parsing the file at the specified URI"
 msgstr "មាន​បញ្ហា​ក្នុងការ​ញែក​​ឯកសារ​នៅ URI ដែលបាន​បញ្ជាក់"
 
 #. TranslatorExplanation Don't translate the '.repo' string.
-#: src/repos.cc:1380
+#: src/repos.cc:1368
 msgid "Is it a .repo file?"
 msgstr "តើ​វា​ជា​ឯកសារ .repo ? ចំពោះ?"
 
-#: src/repos.cc:1387
+#: src/repos.cc:1375
 msgid "Problem encountered while trying to read the file at the specified URI"
 msgstr "ជួប​បញ្ហា​នៅពេល​អាន​ឯកសារ​នៅ URI ដែល​បាន​បញ្ជាក់"
 
-#: src/repos.cc:1400
+#: src/repos.cc:1388
 msgid "Repository with no alias defined found in the file, skipping."
 msgstr "បាន​រកឃើញ​ឃ្លាំង​ដែល​មិន​មាន​ឈ្មោះ​ក្លែងក្លាយ​ត្រូវបាន​កំណត់​នៅ​ក្នុង​ឯកសារ ដូច្នេះ​រំលង ។"
 
-#: src/repos.cc:1406
+#: src/repos.cc:1394
 #, c-format, boost-format
 msgid "Repository '%s' has no URI defined, skipping."
 msgstr "ឃ្លាំង '%s' មិនមាន URI ដែល​បាន​កំណត់​ទេ ដូច្នេះ​រំលង​។"
 
-#: src/repos.cc:1454
+#: src/repos.cc:1442
 #, c-format, boost-format
 msgid "Repository '%s' has been removed."
 msgstr "ឃ្លាំង '%s' ត្រូវបាន​យកចេញ ។"
 
-#: src/repos.cc:1602
+#: src/repos.cc:1590
 #, c-format, boost-format
 msgid "Repository '%s' priority has been left unchanged (%d)"
 msgstr "អាទិភាព​ឃ្លាំង '%s' ត្រូវ​បាន​ទុក​ឲ្យ​នៅ​ដដែល (%d)"
 
-#: src/repos.cc:1635
+#: src/repos.cc:1623
 #, c-format, boost-format
 msgid "Repository '%s' has been successfully enabled."
 msgstr "បាន​បើក​ឃ្លាំង '%s' ដោយ​ជោគជ័យ ។"
 
-#: src/repos.cc:1637
+#: src/repos.cc:1625
 #, c-format, boost-format
 msgid "Repository '%s' has been successfully disabled."
 msgstr "បាន​បិទ​ឃ្លាំង '%s' ដោយ​ជោគជ័យ ។"
 
-#: src/repos.cc:1644
+#: src/repos.cc:1632
 #, c-format, boost-format
 msgid "Autorefresh has been enabled for repository '%s'."
 msgstr "បាន​បើក​ការ​ធ្វើ​ឲ្យ​ស្រស់​ដោយ​ស្វ័យប្រវត្តិ សម្រាប់​ឃ្លាំង '%s' ។"
 
-#: src/repos.cc:1646
+#: src/repos.cc:1634
 #, c-format, boost-format
 msgid "Autorefresh has been disabled for repository '%s'."
 msgstr "បាន​បិទ​ការ​ធ្វើ​ឲ្យ​ស្រស់​ដោយ​ស្វ័យប្រវត្តិ​សម្រាប់​ឃ្លាំង '%s' ។"
 
-#: src/repos.cc:1653
+#: src/repos.cc:1641
 #, c-format, boost-format
 msgid "RPM files caching has been enabled for repository '%s'."
 msgstr "ឃ្លាំង​សម្ងាត់​ឯកសារ RPM ត្រូវ​បាន​បើក​សម្រាប់​ឃ្លាំង '%s' ។"
 
-#: src/repos.cc:1655
+#: src/repos.cc:1643
 #, c-format, boost-format
 msgid "RPM files caching has been disabled for repository '%s'."
 msgstr "ឃ្លាំង​ឯកសារ RPM ត្រូវ​បានបិទ​សម្រាប់​ឃ្លាំង '%s' ។"
 
-#: src/repos.cc:1662
+#: src/repos.cc:1650
 #, c-format, boost-format
 msgid "GPG check has been enabled for repository '%s'."
 msgstr "ការ​ពិនិត្យ​មើល GPG ត្រូវ​បាន​បើក​សម្រាប់​ឃ្លាំង '%s' ។"
 
-#: src/repos.cc:1664
+#: src/repos.cc:1652
 #, c-format, boost-format
 msgid "GPG check has been disabled for repository '%s'."
 msgstr "ការ​ពិនិត្យ​មើល GPG ត្រូវ​បាន​បិទ​សម្រាប់​ឃ្លាំង '%s' ។"
 
-#: src/repos.cc:1670
+#: src/repos.cc:1658
 #, c-format, boost-format
 msgid "Repository '%s' priority has been set to %d."
 msgstr "អាទិភាព​ឃ្លាំង '%s' ត្រូវបាន​កំណត់​ទៅ %d ។"
 
-#: src/repos.cc:1676
+#: src/repos.cc:1664
 #, c-format, boost-format
 msgid "Name of repository '%s' has been set to '%s'."
 msgstr "ឈ្មោះ​របស់​ឃ្លាំង '%s' ត្រូវ​បានកំណត់​ទៅ '%s' ។"
 
-#: src/repos.cc:1687
+#: src/repos.cc:1675
 #, c-format, boost-format
 msgid "Nothing to change for repository '%s'."
 msgstr "គ្មាន​អ្វី​ត្រូវប្ដូរ​សម្រាប់​ឃ្លាំង '%s' ទេ ។"
 
-#: src/repos.cc:1694
+#: src/repos.cc:1682
 #, c-format, boost-format
 msgid "Leaving repository %s unchanged."
 msgstr "មិន​ប៉ះពាល់​ឃ្លាំង %s ។"
 
-#: src/repos.cc:1781
+#: src/repos.cc:1769
 msgid "Loading repository data..."
 msgstr "កំពុង​ទុក​ទិន្នន័យ​ឃ្លាំង..."
 
-#: src/repos.cc:1783
+#: src/repos.cc:1771
 #, fuzzy
 msgid ""
 "No repositories defined. Operating only with the installed resolvables. "
@@ -5657,32 +5652,32 @@ msgstr ""
 "ការ​ព្រមាន ៖ មិន​បាន​កំណត់​ឃ្លាំង ។ ប្រតិបត្តិការ​តែ​ជា​មួយ​អ្វី​ដែល​អាច​ដោះស្រាយ​បាន​ដែល​បាន​ដំឡើង​ប៉ុណ្ណោះ ។ "
 "គ្មាន​អ្វី​ត្រូវ​បាន​ដំឡើង​ទេ ។"
 
-#: src/repos.cc:1803
+#: src/repos.cc:1791
 #, c-format, boost-format
 msgid "Retrieving repository '%s' data..."
 msgstr "កំពុង​ទៅ​យក​ទិន្នន័យ​ឃ្លាំង '%s'..."
 
-#: src/repos.cc:1809
+#: src/repos.cc:1797
 #, c-format, boost-format
 msgid "Repository '%s' not cached. Caching..."
 msgstr "ឃ្លាំង '%s' មិនបាន​ដាក់​ជា​ឃ្លាំង​សម្ងាត់ ។ កំពុង​ដាក់​ជា​ឃ្លាំង​សម្ងាត់..."
 
-#: src/repos.cc:1815 src/repos.cc:1849
+#: src/repos.cc:1803 src/repos.cc:1837
 #, c-format, boost-format
 msgid "Problem loading data from '%s'"
 msgstr "បញ្ហា​ក្នុង​កា​រផ្ទុក​ទិន្នន័យ​ពី '%s'"
 
-#: src/repos.cc:1819
+#: src/repos.cc:1807
 #, c-format, boost-format
 msgid "Repository '%s' could not be refreshed. Using old cache."
 msgstr "ឃ្លាំង​ '%s' មិន​អាច​ត្រូវ​ធ្វើ​ឲ្យ​ស្រស់​បានទេ ។ ប្រើ​ឃ្លាំង​សម្ងាត់​ចាស់ៗ ។"
 
-#: src/repos.cc:1823 src/repos.cc:1852
+#: src/repos.cc:1811 src/repos.cc:1840
 #, c-format, boost-format
 msgid "Resolvables from '%s' not loaded because of error."
 msgstr "អ្វី​ដែលអាច​ដោះស្រាយ​ពី '%s' មិន​ត្រូវ​បាន​ផ្ទុក​ ដោយ​សារ​តែ​កំហុស ។"
 
-#: src/repos.cc:1840
+#: src/repos.cc:1828
 #, fuzzy, c-format, boost-format
 msgid ""
 "Repository '%s' appears to be outdated. Consider using a different mirror or "
@@ -5690,36 +5685,36 @@ msgid ""
 msgstr "ឃ្លាំង '%s' គឺ​ហួស​សម័យ ។ គិត​ប្រើ​ម៉ាស៊ីន​បម្រើ​ផ្សេង​ទៅ ។"
 
 #. translators: the first %s is 'zypper refresh' and the second 'zypper clean -m'
-#: src/repos.cc:1851
+#: src/repos.cc:1839
 #, c-format, boost-format
 msgid "Try '%s', or even '%s' before doing so."
 msgstr "សាកល្បង '%s' ឬ '%s' មុនពេល​ធ្វើ​ដូច្នេះ ។"
 
-#: src/repos.cc:1862
+#: src/repos.cc:1850
 msgid "Reading installed packages..."
 msgstr "កំពុង​អាច​កញ្ចប់​ដែល​បាន​ដំឡើង..."
 
-#: src/repos.cc:1871
+#: src/repos.cc:1859
 #, fuzzy
 msgid "Problem occurred while reading the installed packages:"
 msgstr "មាន​បញ្ហា​នៅពេល​អាន​កញ្ចប់​ដែល​បាន​ដំឡើង ៖"
 
-#: src/repos.cc:1888
+#: src/repos.cc:1876
 #, c-format, boost-format
 msgid "'%s' looks like an RPM file. Will try to download it."
 msgstr "'%s' ដូចជា​ឯកសារ RPM ។ ព្យាយាម​ទាញយក​វា ។"
 
-#: src/repos.cc:1897
+#: src/repos.cc:1885
 #, c-format, boost-format
 msgid "Problem with the RPM file specified as '%s', skipping."
 msgstr "មាន​បញ្ហា​ជាមួយ​ឯកសារ RPM ដែល​បាន​បញ្ជាក់​ជា '%s' ដូច្នេះ​រំលង ។"
 
-#: src/repos.cc:1919
+#: src/repos.cc:1907
 #, c-format, boost-format
 msgid "Problem reading the RPM header of %s. Is it an RPM file?"
 msgstr "មាន​បញ្ហា​ក្នុងការ​អាន​បឋមកថា RPM របស់ %s ។ តើ​វា​ជា​ឯកសារ RPM ឬ ?"
 
-#: src/repos.cc:1939
+#: src/repos.cc:1927
 msgid "Plain RPM files cache"
 msgstr "ឃ្លាំង​សម្ងាត់​ឯកសារ RPM ធម្មតា"
 
@@ -5857,19 +5852,7 @@ msgstr "ពិនិត្យ​មើល​ដំណើរការ​ដែល
 msgid "Skip check:"
 msgstr "ការ​ពិនិត្យ​មើល GPG"
 
-#: src/solve-commit.cc:461
-#, fuzzy, c-format, boost-format
-msgid ""
-"There are some running programs that might use files deleted by recent "
-"upgrade. You may wish to check and restart some of them. Run '%s' to list "
-"these programs."
-msgstr ""
-"មាន​កម្មវិធី​ដែល​កំពុង​រត់​មួយ​ចំនួនដែល​ប្រើ​ឯកសារ​ដែល​ត្រូវ​បាន​លុប​ដោយ​ការ​ធ្វើ​ឲ្យ​ប្រសើរ​ឡើង​បច្ចុប្បន្ន ។ អ្នក​ចង់​"
-"ចាប់ផ្ដើម​ដំណើរ​ការ​មួយ​ចំនួន​ក្នុង​ចំណោម​ដំណើរការ​​ទាំង​នេះ​ឡើងវិញ​បាន ។ រត់ '%s' ដើម្បី​រាយ​កម្មវិធី​ទាំង​​"
-"នេះ ។"
-
-#. bsc#859480: Rephrased and added for translation switch if core translations are available.
-#: src/solve-commit.cc:466
+#: src/solve-commit.cc:460
 #, boost-format
 msgid ""
 "There are running programs which still use files and libraries deleted or "
@@ -5877,32 +5860,32 @@ msgid ""
 "latest updates. Run '%1%' to list these programs."
 msgstr ""
 
-#: src/solve-commit.cc:481
+#: src/solve-commit.cc:474
 msgid "Update notifications were received from the following packages:"
 msgstr "ធ្វើ​បច្ចុប្បន្នភាព​​​ការ​ជូនដំណឹង​ដែល​ត្រូវបានទទួល​ពី​កញ្ចប់​ដូច​ខាងក្រោម ៖"
 
-#: src/solve-commit.cc:490
+#: src/solve-commit.cc:483
 #, c-format, boost-format
 msgid "Message from package %s:"
 msgstr "សារ​ពី​កញ្ចប់​ %s ៖"
 
-#: src/solve-commit.cc:498
+#: src/solve-commit.cc:491
 msgid "y/n"
 msgstr "y/n"
 
-#: src/solve-commit.cc:499
+#: src/solve-commit.cc:492
 msgid "View the notifications now?"
 msgstr "មើល​ការ​​ជូន​ដំណឹងឥឡូវ ?"
 
-#: src/solve-commit.cc:545
+#: src/solve-commit.cc:538
 msgid "Computing distribution upgrade..."
 msgstr "កំពុង​គណនា​ការ​ធ្វើ​ឲ្យការ​ចែកចាយ​ប្រសើរឡើង..."
 
-#: src/solve-commit.cc:550
+#: src/solve-commit.cc:543
 msgid "Resolving package dependencies..."
 msgstr "កំពុង​ដោះស្រាយ​ភាព​អាស្រ័យ​របស់​កញ្ចប់..."
 
-#: src/solve-commit.cc:605
+#: src/solve-commit.cc:598
 msgid ""
 "Some of the dependencies of installed packages are broken. In order to fix "
 "these dependencies, the following actions need to be taken:"
@@ -5910,7 +5893,7 @@ msgstr ""
 "ភាព​អាស្រ័យ​មួយ​ចំនួន​នៃ​កញ្ចប់​ដែលបាន​ដំឡើង គឺ​ខូច ។ ដើម្បី​ជួសជុល​ភាព​អាស្រ័យ​ទាំងនេះ ដែល​អំពើ​ខាងក្រោម​ត្រូវ​"
 "ជ្រើស ៖"
 
-#: src/solve-commit.cc:612
+#: src/solve-commit.cc:605
 msgid "Root privileges are required to fix broken package dependencies."
 msgstr "ត្រូវការ​សិទ្ធិ​ជា Root ដើម្បី​ជួសជុល​ភាព​អាស្រ័យ​របស់​កញ្ចប់​ដែល​ខូច ។"
 
@@ -5924,78 +5907,78 @@ msgstr "ត្រូវការ​សិទ្ធិ​ជា Root ដើម្
 #. The answers should be lower case letters, but in general, any UTF-8
 #. string will do.
 #. ! \todo add c for changelog and x for explain (show the dep tree)
-#: src/solve-commit.cc:634
+#: src/solve-commit.cc:627
 msgid "y/n/p/v/a/r/m/d/g"
 msgstr "y/n/p/v/a/r/m/d/g"
 
 #. translators: help text for 'y' option in the 'Continue?' prompt
-#: src/solve-commit.cc:639
+#: src/solve-commit.cc:632
 msgid ""
 "Yes, accept the summary and proceed with installation/removal of packages."
 msgstr "បាទ​/​ចាស ទទួល​យក​សេចក្ដី​សង្ខេប និង​បន្ត​ដំឡើង/​យក​កញ្ចប់​ចេញ ។"
 
 #. translators: help text for 'n' option in the 'Continue?' prompt
-#: src/solve-commit.cc:641
+#: src/solve-commit.cc:634
 msgid "No, cancel the operation."
 msgstr "ទេ បោះបង់​ប្រតិបត្តិការ ។"
 
 #. translators: help text for 'p' option in the 'Continue?' prompt
-#: src/solve-commit.cc:643
+#: src/solve-commit.cc:636
 msgid ""
 "Restart solver in no-force-resolution mode in order to show dependency "
 "problems."
 msgstr "ចាប់ផ្ដើម​កម្មវិធី​ដោះស្រាយ​នៅ​ក្នុង​របៀប​គ្មាន​កា​របង្ខំ ដើម្បី​បង្ហាញ​បញ្ហា​ភាព​អាស្រ័យ ។"
 
 #. translators: help text for 'v' option in the 'Continue?' prompt
-#: src/solve-commit.cc:645
+#: src/solve-commit.cc:638
 msgid "Toggle display of package versions."
 msgstr "បិទបើក​ការ​បង្ហាញ​កំណែ​កញ្ចប់ ។"
 
 #. translators: help text for 'a' option in the 'Continue?' prompt
-#: src/solve-commit.cc:647
+#: src/solve-commit.cc:640
 msgid "Toggle display of package architectures."
 msgstr "បិទបើក​ការ​បង្ហាញ​ស្ថាបត្យកម្ម​កញ្ចប់ ។"
 
 #. translators: help text for 'r' option in the 'Continue?' prompt
-#: src/solve-commit.cc:649
+#: src/solve-commit.cc:642
 msgid ""
 "Toggle display of repositories from which the packages will be installed."
 msgstr "បិទបើក​ការ​បង្ហាញ​ឃ្លាំង​ពី​កញ្ចប់​ដែល​នឹង​ត្រូវ​ដំឡើង ។"
 
 #. translators: help text for 'm' option in the 'Continue?' prompt
-#: src/solve-commit.cc:651
+#: src/solve-commit.cc:644
 msgid "Toggle display of package vendor names."
 msgstr "បិទ​បើក​ការ​បង្ហាញ​ឈ្មោះ​ក្រុមហ៊ុន​ផលិត​កញ្ចប់ ។"
 
 #. translators: help text for 'd' option in the 'Continue?' prompt
-#: src/solve-commit.cc:653
+#: src/solve-commit.cc:646
 msgid "Toggle between showing all details and as few details as possible."
 msgstr "បិទបើក​ការ​បង្ហាញ​សេចក្ដី​លម្អិតទាំង​អស់ និង​សេចក្ដី​លម្អិត​មួយ​ចំនួន​ដែល​អាច​បង្ហាញ​បាន ។"
 
 #. translators: help text for 'g' option in the 'Continue?' prompt
-#: src/solve-commit.cc:655
+#: src/solve-commit.cc:648
 msgid "View the summary in pager."
 msgstr "មើល​សេចក្ដី​សង្ខេប​​ក្នុង​ភេគយ័រ ។"
 
-#: src/solve-commit.cc:765
+#: src/solve-commit.cc:758
 msgid "committing"
 msgstr "ដាក់​ស្នើ"
 
-#: src/solve-commit.cc:767
+#: src/solve-commit.cc:760
 msgid "(dry run)"
 msgstr "(អនុវត្ត)"
 
-#: src/solve-commit.cc:791 src/solve-commit.cc:824
+#: src/solve-commit.cc:784 src/solve-commit.cc:817
 msgid "Problem retrieving the package file from the repository:"
 msgstr "បញ្ហា​ក្នុងការ​ទៅ​យក​ឯកសារ​កញ្ចប់​ពី​ឃ្លាំង ៖"
 
 #. translators: the first %s is 'zypper refresh' and the second is repo alias
-#: src/solve-commit.cc:821
+#: src/solve-commit.cc:814
 #, c-format, boost-format
 msgid "Repository '%s' is out of date. Running '%s' might help."
 msgstr "ឃ្លាំង '%s' គឺ​ហួស​សម័យ ។ បើ​រត់ '%s' គឺ​អាច​ជួយ​បាន ។"
 
-#: src/solve-commit.cc:832
+#: src/solve-commit.cc:825
 msgid ""
 "The package integrity check failed. This may be a problem with the "
 "repository or media. Try one of the following:\n"
@@ -6013,20 +5996,20 @@ msgstr ""
 "- ប្រើ​ឧបករណ៍​ផ្ទុក​ដំឡើង​ផ្សេង (ឧ. ប្រសិន​បើ​វា​ខូច)\n"
 "- ប្រើ​ឃ្លាំង​ផ្សេង"
 
-#: src/solve-commit.cc:846
+#: src/solve-commit.cc:839
 msgid "Problem occurred during or after installation or removal of packages:"
 msgstr "មាន​បញ្ហា​កើតឡើង​នៅពេល ឬ​បន្ទាប់​ដំឡើង ឬ​ការ​យក​កញ្ចប់​ចេញ ៖"
 
-#: src/solve-commit.cc:854
+#: src/solve-commit.cc:847
 msgid "Installation has completed with error."
 msgstr ""
 
-#: src/solve-commit.cc:856
+#: src/solve-commit.cc:849
 #, boost-format
 msgid "You may run '%1%' to repair any dependency problems."
 msgstr ""
 
-#: src/solve-commit.cc:870
+#: src/solve-commit.cc:863
 msgid ""
 "One of the installed patches requires a reboot of your machine. Reboot as "
 "soon as possible."
@@ -6034,7 +6017,7 @@ msgstr ""
 "បំណះ​ដែល​បាន​ដំឡើង​មួយ តម្រូវ​ឲ្យ​ចាប់ផ្ដើម​ម៉ាស៊ីន​របស់​អ្នក​ឡើងវិញ ។ ចាប់ផ្ដើម​ឡើងវិញ​ឲ្យ​លឿន​តាម​ដែល​អាច​ធ្វើ​"
 "ទៅបាន ។"
 
-#: src/solve-commit.cc:878
+#: src/solve-commit.cc:871
 msgid ""
 "One of the installed patches affects the package manager itself. Run this "
 "command once more to install any other needed patches."
@@ -6042,7 +6025,7 @@ msgstr ""
 "បំណះ​មួយ​ក្នុង​ចំណោម​បំណះ​ដូច​ខាងក្រោម​ប៉ះពាល់​ដល់​កម្មវិធី​គ្រប់គ្រង​​កញ្ចប់​ខ្លួន​ឯង ។ រត់​ពាក្យ​បញ្ជា​ម្ដង​ទៀត​ដើម្បី​"
 "ដំឡើង​បំណះ​ដែល​ត្រូវការ​ផ្សេងៗ​ទៀត ។"
 
-#: src/solve-commit.cc:896
+#: src/solve-commit.cc:889
 msgid "Dependencies of all installed packages are satisfied."
 msgstr "ភាព​អាស្រ័យ​របស់​កញ្ចប់​ដែល​បាន​ដំឡើង​គឺ​ត្រឹមត្រូវ ។"
 
@@ -6577,6 +6560,19 @@ msgid ""
 "If nothing else works enter '#1' to select the 1st option, '#2' for the 2nd "
 "one, ..."
 msgstr ""
+
+#~ msgid "Disabling repository '%s'."
+#~ msgstr "បិទ​ឃ្លាំង '%s' ។"
+
+#, fuzzy
+#~ msgid ""
+#~ "There are some running programs that might use files deleted by recent "
+#~ "upgrade. You may wish to check and restart some of them. Run '%s' to list "
+#~ "these programs."
+#~ msgstr ""
+#~ "មាន​កម្មវិធី​ដែល​កំពុង​រត់​មួយ​ចំនួនដែល​ប្រើ​ឯកសារ​ដែល​ត្រូវ​បាន​លុប​ដោយ​ការ​ធ្វើ​ឲ្យ​ប្រសើរ​ឡើង​បច្ចុប្បន្ន ។ "
+#~ "អ្នក​ចង់​ចាប់ផ្ដើម​ដំណើរ​ការ​មួយ​ចំនួន​ក្នុង​ចំណោម​ដំណើរការ​​ទាំង​នេះ​ឡើងវិញ​បាន ។ រត់ '%s' ដើម្បី​រាយ​"
+#~ "កម្មវិធី​ទាំង​​នេះ ។"
 
 #~ msgid "Augeas error: setting config file to load failed."
 #~ msgstr "កំហុស Augeas ៖ ឯកសារ​កំណត់​រចនា​សម្ព័ន្ធ​ការ​កំណត់​ដែល​ត្រូវ​ផ្ទុក​បាន​បរាជ័យ ។"

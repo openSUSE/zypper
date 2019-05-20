@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-25 14:33+0100\n"
+"POT-Creation-Date: 2019-05-20 10:18+0200\n"
 "PO-Revision-Date: 2019-05-14 15:33+0000\n"
 "Last-Translator: Olga Smirnova <mistresssilvara@hotmail.com>\n"
 "Language-Team: Occidental <https://l10n.opensuse.org/projects/zypper/master/"
@@ -30,21 +30,32 @@ msgid "Suspicious severity filter value '%1%'."
 msgstr "Suspectiv valore del filtre de severitá: '%1%'."
 
 #: src/callbacks/keyring.h:32
-msgid "Signing data enables the recipient to verify that no modifications occurred after the data were signed. Accepting data with no, wrong or unknown signature can lead to a corrupted system and in extreme cases even to a system compromise."
+msgid ""
+"Signing data enables the recipient to verify that no modifications occurred "
+"after the data were signed. Accepting data with no, wrong or unknown "
+"signature can lead to a corrupted system and in extreme cases even to a "
+"system compromise."
 msgstr ""
 
 #. translator: %1% is a file name
 #: src/callbacks/keyring.h:40
 #, boost-format
-msgid "File '%1%' is the repositories master index file. It ensures the integrity of the whole repo."
+msgid ""
+"File '%1%' is the repositories master index file. It ensures the integrity "
+"of the whole repo."
 msgstr ""
 
 #: src/callbacks/keyring.h:46
-msgid "We can't verify that no one meddled with this file, so it might not be trustworthy anymore! You should not continue unless you know it's safe."
+msgid ""
+"We can't verify that no one meddled with this file, so it might not be "
+"trustworthy anymore! You should not continue unless you know it's safe."
 msgstr ""
 
 #: src/callbacks/keyring.h:51
-msgid "This file was modified after it has been signed. This may have been a malicious change, so it might not be trustworthy anymore! You should not continue unless you know it's safe."
+msgid ""
+"This file was modified after it has been signed. This may have been a "
+"malicious change, so it might not be trustworthy anymore! You should not "
+"continue unless you know it's safe."
 msgstr ""
 
 #: src/callbacks/keyring.h:79
@@ -128,7 +139,8 @@ msgstr ""
 
 #: src/callbacks/keyring.h:207
 #, c-format, boost-format
-msgid "Accepting file '%s' from repository '%s' signed with an unknown key '%s'."
+msgid ""
+"Accepting file '%s' from repository '%s' signed with an unknown key '%s'."
 msgstr ""
 
 #. translator: %1% is a file name, %2% is a gpg key ID
@@ -152,7 +164,8 @@ msgstr ""
 #. translators: the last %s is gpg key ID
 #: src/callbacks/keyring.h:240
 #, c-format, boost-format
-msgid "File '%s' from repository '%s' is signed with an unknown key '%s'. Continue?"
+msgid ""
+"File '%s' from repository '%s' is signed with an unknown key '%s'. Continue?"
 msgstr ""
 
 #: src/callbacks/keyring.h:260
@@ -222,7 +235,8 @@ msgstr ""
 
 #: src/callbacks/keyring.h:376
 #, c-format, boost-format
-msgid "Ignoring failed signature verification for file '%s' from repository '%s'!"
+msgid ""
+"Ignoring failed signature verification for file '%s' from repository '%s'!"
 msgstr ""
 
 #: src/callbacks/keyring.h:382
@@ -242,7 +256,9 @@ msgid "Signature verification failed for file '%1%' from repository '%2%'."
 msgstr ""
 
 #: src/callbacks/keyring.h:439
-msgid "The rpm database seems to contain old V3 version gpg keys which are meanwhile obsolete and considered insecure:"
+msgid ""
+"The rpm database seems to contain old V3 version gpg keys which are "
+"meanwhile obsolete and considered insecure:"
 msgstr ""
 
 #: src/callbacks/keyring.h:446
@@ -252,7 +268,9 @@ msgstr ""
 
 #: src/callbacks/keyring.h:450
 #, boost-format
-msgid "Unless you believe the key in question is still in use, you can remove it from the rpm database calling '%1%'."
+msgid ""
+"Unless you believe the key in question is still in use, you can remove it "
+"from the rpm database calling '%1%'."
 msgstr ""
 
 #: src/callbacks/keyring.h:472
@@ -276,15 +294,20 @@ msgid ""
 msgstr ""
 
 #: src/callbacks/keyring.h:509
-msgid "Accepting packages with wrong checksums can lead to a corrupted system and in extreme cases even to a system compromise."
+msgid ""
+"Accepting packages with wrong checksums can lead to a corrupted system and "
+"in extreme cases even to a system compromise."
 msgstr ""
 
 #: src/callbacks/keyring.h:517
 #, boost-format
 msgid ""
-"However if you made certain that the file with checksum '%1%..' is secure, correct\n"
-"and should be used within this operation, enter the first 4 characters of the checksum\n"
-"to unblock using this file on your own risk. Empty input will discard the file.\n"
+"However if you made certain that the file with checksum '%1%..' is secure, "
+"correct\n"
+"and should be used within this operation, enter the first 4 characters of "
+"the checksum\n"
+"to unblock using this file on your own risk. Empty input will discard the "
+"file.\n"
 msgstr ""
 
 #. translators: A prompt option
@@ -308,7 +331,8 @@ msgid "Unblock or discard?"
 msgstr ""
 
 #: src/callbacks/locks.h:27
-msgid "The following query locks the same objects as the one you want to remove:"
+msgid ""
+"The following query locks the same objects as the one you want to remove:"
 msgstr ""
 
 #: src/callbacks/locks.h:30
@@ -362,62 +386,72 @@ msgstr ""
 msgid "Running: %s  (%s, %s)"
 msgstr ""
 
-#. translators: This text is a progress display label e.g. "Removing packagename-x.x.x [42%]"
-#: src/callbacks/rpm.h:250
-#, c-format, boost-format
-msgid "Removing %s"
-msgstr ""
-
-#: src/callbacks/rpm.h:273
+#: src/callbacks/rpm.h:267
 #, c-format, boost-format
 msgid "Removal of %s failed:"
 msgstr ""
 
-#. TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
-#: src/callbacks/rpm.h:316
+#. translators: This text is a progress display label e.g. "Removing packagename-x.x.x [42%]"
+#: src/callbacks/rpm.h:307
 #, c-format, boost-format
-msgid "Installing: %s"
+msgid "Removing %s"
 msgstr ""
 
-#: src/callbacks/rpm.h:339
+#: src/callbacks/rpm.h:344
 #, c-format, boost-format
 msgid "Installation of %s failed:"
 msgstr ""
 
+#. TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
+#: src/callbacks/rpm.h:384
+#, c-format, boost-format
+msgid "Installing: %s"
+msgstr ""
+
 #. TranslatorExplanation A progressbar label
-#: src/callbacks/rpm.h:383
+#: src/callbacks/rpm.h:405
 msgid "Checking for file conflicts:"
 msgstr ""
 
 #. TranslatorExplanation %1%(commandline option)
-#: src/callbacks/rpm.h:417
+#: src/callbacks/rpm.h:439
 #, boost-format
-msgid "Checking for file conflicts requires not installed packages to be downloaded in advance in order to access their file lists. See option '%1%' in the zypper manual page for details."
+msgid ""
+"Checking for file conflicts requires not installed packages to be downloaded "
+"in advance in order to access their file lists. See option '%1%' in the "
+"zypper manual page for details."
 msgstr ""
 
 #. TranslatorExplanation %1%(number of packages); detailed list follows
-#: src/callbacks/rpm.h:424
+#: src/callbacks/rpm.h:446
 #, boost-format
-msgid "The following package had to be excluded from file conflicts check because it is not yet downloaded:"
-msgid_plural "The following %1% packages had to be excluded from file conflicts check because they are not yet downloaded:"
+msgid ""
+"The following package had to be excluded from file conflicts check because "
+"it is not yet downloaded:"
+msgid_plural ""
+"The following %1% packages had to be excluded from file conflicts check "
+"because they are not yet downloaded:"
 msgstr[0] ""
 msgstr[1] ""
 
 #. TranslatorExplanation %1%(number of conflicts); detailed list follows
-#: src/callbacks/rpm.h:435
+#: src/callbacks/rpm.h:457
 #, boost-format
 msgid "Detected %1% file conflict:"
 msgid_plural "Detected %1% file conflicts:"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/callbacks/rpm.h:443
+#: src/callbacks/rpm.h:465
 msgid "Conflicting files will be replaced."
 msgstr ""
 
 #. TranslatorExplanation Problem description before asking whether to "Continue? [yes/no] (no):"
-#: src/callbacks/rpm.h:449
-msgid "File conflicts happen when two packages attempt to install files with the same name but different contents. If you continue, conflicting files will be replaced losing the previous content."
+#: src/callbacks/rpm.h:471
+msgid ""
+"File conflicts happen when two packages attempt to install files with the "
+"same name but different contents. If you continue, conflicting files will be "
+"replaced losing the previous content."
 msgstr ""
 
 #. translator: %s is an other command: "This is an alias for 'zypper info -t patch'."
@@ -484,7 +518,9 @@ msgstr ""
 
 #. translators: --best-effort
 #: src/commands/commonflags.h:38
-msgid "Do a 'best effort' approach to update. Updates to a lower than the latest version are also acceptable."
+msgid ""
+"Do a 'best effort' approach to update. Updates to a lower than the latest "
+"version are also acceptable."
 msgstr ""
 
 #: src/commands/commonflags.h:45
@@ -587,7 +623,7 @@ msgstr ""
 #. translators: property name; short; used like "Name: value"
 #: src/utils/flags/zyppflags.h:49 src/commands/repos/list.cc:42
 #: src/commands/repos/list.cc:268 src/commands/services/list.cc:116
-#: src/repos.cc:1267
+#: src/repos.cc:1255
 msgid "URI"
 msgstr ""
 
@@ -741,12 +777,15 @@ msgid "Do not ask anything, use default answers automatically."
 msgstr ""
 
 #: src/Config.cc:433
-msgid "Patches having the flag rebootSuggested set will not be treated as interactive."
+msgid ""
+"Patches having the flag rebootSuggested set will not be treated as "
+"interactive."
 msgstr ""
 
 #. translators: --non-interactive-include-reboot-patches
 #: src/Config.cc:437
-msgid "Do not treat patches as interactive, which have the rebootSuggested-flag set."
+msgid ""
+"Do not treat patches as interactive, which have the rebootSuggested-flag set."
 msgstr ""
 
 #. translators: --xmlout, -x
@@ -761,7 +800,8 @@ msgstr ""
 
 #. translators: --terse, -t
 #: src/Config.cc:463
-msgid "Terse output for machine consumption. Implies --no-abbrev and --no-color."
+msgid ""
+"Terse output for machine consumption. Implies --no-abbrev and --no-color."
 msgstr ""
 
 #. translators: --reposd-dir, -D <DIR>
@@ -804,7 +844,8 @@ msgstr ""
 
 #: src/Config.cc:561
 #, c-format, boost-format
-msgid "Turning on '%s'. New repository signing keys will be automatically imported!"
+msgid ""
+"Turning on '%s'. New repository signing keys will be automatically imported!"
 msgstr ""
 
 #. translators: --gpg-auto-import-keys
@@ -819,7 +860,9 @@ msgstr ""
 
 #. translators: --plus-content <TAG>
 #: src/Config.cc:575
-msgid "Additionally use disabled repositories providing a specific keyword. Try '--plus-content debug' to enable repos indicating to provide debug packages."
+msgid ""
+"Additionally use disabled repositories providing a specific keyword. Try '--"
+"plus-content debug' to enable repos indicating to provide debug packages."
 msgstr ""
 
 #: src/Config.cc:581
@@ -860,7 +903,9 @@ msgstr ""
 
 #. translators: --releasever
 #: src/Config.cc:616
-msgid "Set the value of $releasever in all .repo files (default: distribution version)"
+msgid ""
+"Set the value of $releasever in all .repo files (default: distribution "
+"version)"
 msgstr ""
 
 #: src/Config.cc:620
@@ -874,7 +919,8 @@ msgstr ""
 
 #. translators: --installroot <DIR>
 #: src/Config.cc:631
-msgid "Operate on a different root directory, but share repositories with the host."
+msgid ""
+"Operate on a different root directory, but share repositories with the host."
 msgstr ""
 
 #: src/Config.cc:637
@@ -1012,7 +1058,9 @@ msgstr ""
 
 #: src/RequestFeedback.cc:105
 #, c-format, boost-format
-msgid "No update candidate for '%s'. The highest available version is already installed."
+msgid ""
+"No update candidate for '%s'. The highest available version is already "
+"installed."
 msgstr ""
 
 #: src/RequestFeedback.cc:108
@@ -1022,32 +1070,44 @@ msgstr ""
 
 #: src/RequestFeedback.cc:114
 #, c-format, boost-format
-msgid "There is an update candidate '%s' for '%s', but it does not match the specified version, architecture, or repository."
+msgid ""
+"There is an update candidate '%s' for '%s', but it does not match the "
+"specified version, architecture, or repository."
 msgstr ""
 
 #: src/RequestFeedback.cc:123
 #, c-format, boost-format
-msgid "There is an update candidate for '%s' from vendor '%s', while the current vendor is '%s'. Use '%s' to install this candidate."
+msgid ""
+"There is an update candidate for '%s' from vendor '%s', while the current "
+"vendor is '%s'. Use '%s' to install this candidate."
 msgstr ""
 
 #: src/RequestFeedback.cc:132
 #, c-format, boost-format
-msgid "There is an update candidate for '%s', but it comes from a repository with a lower priority. Use '%s' to install this candidate."
+msgid ""
+"There is an update candidate for '%s', but it comes from a repository with a "
+"lower priority. Use '%s' to install this candidate."
 msgstr ""
 
 #: src/RequestFeedback.cc:142
 #, c-format, boost-format
-msgid "There is an update candidate for '%s', but it is locked. Use '%s' to unlock it."
+msgid ""
+"There is an update candidate for '%s', but it is locked. Use '%s' to unlock "
+"it."
 msgstr ""
 
 #: src/RequestFeedback.cc:148
 #, c-format, boost-format
-msgid "Package '%s' is not available in your repositories. Cannot reinstall, upgrade, or downgrade."
+msgid ""
+"Package '%s' is not available in your repositories. Cannot reinstall, "
+"upgrade, or downgrade."
 msgstr ""
 
 #: src/RequestFeedback.cc:158
 #, c-format, boost-format
-msgid "The selected package '%s' from repository '%s' has lower version than the installed one."
+msgid ""
+"The selected package '%s' from repository '%s' has lower version than the "
+"installed one."
 msgstr ""
 
 #. translators: %s = "zypper install --oldpackage package-version.arch"
@@ -1068,7 +1128,9 @@ msgstr ""
 
 #: src/RequestFeedback.cc:181
 #, boost-format
-msgid "Patch '%1%' is optional. Use '%2%' to install it, or '%3%' to include all optional patches."
+msgid ""
+"Patch '%1%' is optional. Use '%2%' to install it, or '%3%' to include all "
+"optional patches."
 msgstr ""
 
 #: src/RequestFeedback.cc:192
@@ -1334,126 +1396,153 @@ msgstr[1] ""
 #: src/Summary.cc:918
 #, c-format, boost-format
 msgid "The following recommended package was automatically selected:"
-msgid_plural "The following %d recommended packages were automatically selected:"
+msgid_plural ""
+"The following %d recommended packages were automatically selected:"
 msgstr[0] ""
 msgstr[1] ""
 
 #: src/Summary.cc:923
 #, c-format, boost-format
 msgid "The following recommended patch was automatically selected:"
-msgid_plural "The following %d recommended patches were automatically selected:"
+msgid_plural ""
+"The following %d recommended patches were automatically selected:"
 msgstr[0] ""
 msgstr[1] ""
 
 #: src/Summary.cc:928
 #, c-format, boost-format
 msgid "The following recommended pattern was automatically selected:"
-msgid_plural "The following %d recommended patterns were automatically selected:"
+msgid_plural ""
+"The following %d recommended patterns were automatically selected:"
 msgstr[0] ""
 msgstr[1] ""
 
 #: src/Summary.cc:933
 #, c-format, boost-format
 msgid "The following recommended product was automatically selected:"
-msgid_plural "The following %d recommended products were automatically selected:"
+msgid_plural ""
+"The following %d recommended products were automatically selected:"
 msgstr[0] ""
 msgstr[1] ""
 
 #: src/Summary.cc:938
 #, c-format, boost-format
 msgid "The following recommended source package was automatically selected:"
-msgid_plural "The following %d recommended source packages were automatically selected:"
+msgid_plural ""
+"The following %d recommended source packages were automatically selected:"
 msgstr[0] ""
 msgstr[1] ""
 
 #: src/Summary.cc:944
 #, c-format, boost-format
 msgid "The following recommended application was automatically selected:"
-msgid_plural "The following %d recommended applications were automatically selected:"
+msgid_plural ""
+"The following %d recommended applications were automatically selected:"
 msgstr[0] ""
 msgstr[1] ""
 
 #: src/Summary.cc:991
 #, c-format, boost-format
-msgid "The following package is recommended, but will not be installed (only required packages will be installed):"
-msgid_plural "The following %d packages are recommended, but will not be installed (only required packages will be installed):"
+msgid ""
+"The following package is recommended, but will not be installed (only "
+"required packages will be installed):"
+msgid_plural ""
+"The following %d packages are recommended, but will not be installed (only "
+"required packages will be installed):"
 msgstr[0] ""
 msgstr[1] ""
 
 #: src/Summary.cc:1003
 #, c-format, boost-format
-msgid "The following package is recommended, but will not be installed because it's unwanted (was manually removed before):"
-msgid_plural "The following %d packages are recommended, but will not be installed because they are unwanted (were manually removed before):"
+msgid ""
+"The following package is recommended, but will not be installed because it's "
+"unwanted (was manually removed before):"
+msgid_plural ""
+"The following %d packages are recommended, but will not be installed because "
+"they are unwanted (were manually removed before):"
 msgstr[0] ""
 msgstr[1] ""
 
 #: src/Summary.cc:1013
 #, c-format, boost-format
-msgid "The following package is recommended, but will not be installed due to conflicts or dependency issues:"
-msgid_plural "The following %d packages are recommended, but will not be installed due to conflicts or dependency issues:"
+msgid ""
+"The following package is recommended, but will not be installed due to "
+"conflicts or dependency issues:"
+msgid_plural ""
+"The following %d packages are recommended, but will not be installed due to "
+"conflicts or dependency issues:"
 msgstr[0] ""
 msgstr[1] ""
 
 #: src/Summary.cc:1026
 #, c-format, boost-format
 msgid "The following patch is recommended, but will not be installed:"
-msgid_plural "The following %d patches are recommended, but will not be installed:"
+msgid_plural ""
+"The following %d patches are recommended, but will not be installed:"
 msgstr[0] ""
 msgstr[1] ""
 
 #: src/Summary.cc:1030
 #, c-format, boost-format
 msgid "The following pattern is recommended, but will not be installed:"
-msgid_plural "The following %d patterns are recommended, but will not be installed:"
+msgid_plural ""
+"The following %d patterns are recommended, but will not be installed:"
 msgstr[0] ""
 msgstr[1] ""
 
 #: src/Summary.cc:1034
 #, c-format, boost-format
 msgid "The following product is recommended, but will not be installed:"
-msgid_plural "The following %d products are recommended, but will not be installed:"
+msgid_plural ""
+"The following %d products are recommended, but will not be installed:"
 msgstr[0] ""
 msgstr[1] ""
 
 #: src/Summary.cc:1039
 #, c-format, boost-format
 msgid "The following application is recommended, but will not be installed:"
-msgid_plural "The following %d applications are recommended, but will not be installed:"
+msgid_plural ""
+"The following %d applications are recommended, but will not be installed:"
 msgstr[0] ""
 msgstr[1] ""
 
 #: src/Summary.cc:1072
 #, c-format, boost-format
 msgid "The following package is suggested, but will not be installed:"
-msgid_plural "The following %d packages are suggested, but will not be installed:"
+msgid_plural ""
+"The following %d packages are suggested, but will not be installed:"
 msgstr[0] ""
 msgstr[1] ""
 
 #: src/Summary.cc:1077
 #, c-format, boost-format
 msgid "The following patch is suggested, but will not be installed:"
-msgid_plural "The following %d patches are suggested, but will not be installed:"
+msgid_plural ""
+"The following %d patches are suggested, but will not be installed:"
 msgstr[0] ""
 msgstr[1] ""
 
 #: src/Summary.cc:1082
 #, c-format, boost-format
 msgid "The following pattern is suggested, but will not be installed:"
-msgid_plural "The following %d patterns are suggested, but will not be installed:"
+msgid_plural ""
+"The following %d patterns are suggested, but will not be installed:"
 msgstr[0] ""
 msgstr[1] ""
 
 #: src/Summary.cc:1087
 #, c-format, boost-format
 msgid "The following product is suggested, but will not be installed:"
-msgid_plural "The following %d products are suggested, but will not be installed:"
+msgid_plural ""
+"The following %d products are suggested, but will not be installed:"
 msgstr[0] ""
 msgstr[1] ""
 
 #: src/Summary.cc:1093
 #, c-format, boost-format
 msgid "The following application is suggested, but will not be installed:"
-msgid_plural "The following %d applications are suggested, but will not be installed:"
+msgid_plural ""
+"The following %d applications are suggested, but will not be installed:"
 msgstr[0] ""
 msgstr[1] ""
 
@@ -1530,7 +1619,8 @@ msgstr[1] ""
 #: src/Summary.cc:1208
 #, c-format, boost-format
 msgid "The following package has no support information from its vendor:"
-msgid_plural "The following %d packages have no support information from their vendor:"
+msgid_plural ""
+"The following %d packages have no support information from their vendor:"
 msgstr[0] ""
 msgstr[1] ""
 
@@ -1543,8 +1633,10 @@ msgstr[1] ""
 
 #: src/Summary.cc:1244
 #, c-format, boost-format
-msgid "The following package needs additional customer contract to get support:"
-msgid_plural "The following %d packages need additional customer contract to get support:"
+msgid ""
+"The following package needs additional customer contract to get support:"
+msgid_plural ""
+"The following %d packages need additional customer contract to get support:"
 msgstr[0] ""
 msgstr[1] ""
 
@@ -1572,7 +1664,8 @@ msgstr[1] ""
 #: src/Summary.cc:1308
 #, c-format, boost-format
 msgid "The following item is locked and will not be changed by any action:"
-msgid_plural "The following %d items are locked and will not be changed by any action:"
+msgid_plural ""
+"The following %d items are locked and will not be changed by any action:"
 msgstr[0] ""
 msgstr[1] ""
 
@@ -1739,7 +1832,9 @@ msgstr[1] ""
 
 #. patch command (auto)restricted to update stack patches
 #: src/Summary.cc:1586
-msgid "Package manager restart required. (Run this command once again after the update stack got updated)"
+msgid ""
+"Package manager restart required. (Run this command once again after the "
+"update stack got updated)"
 msgstr ""
 
 #: src/Summary.cc:1589
@@ -1759,11 +1854,15 @@ msgid "Consider to cancel:"
 msgstr ""
 
 #: src/Zypper.cc:91
-msgid "PackageKit is blocking zypper. This happens if you have an updater applet or other software management application using PackageKit running."
+msgid ""
+"PackageKit is blocking zypper. This happens if you have an updater applet or "
+"other software management application using PackageKit running."
 msgstr ""
 
 #: src/Zypper.cc:97
-msgid "We can ask PackageKit to interrupt the current action as soon as possible, but it depends on PackageKit how fast it will respond to this request."
+msgid ""
+"We can ask PackageKit to interrupt the current action as soon as possible, "
+"but it depends on PackageKit how fast it will respond to this request."
 msgstr ""
 
 #: src/Zypper.cc:100
@@ -1778,7 +1877,7 @@ msgstr ""
 msgid "Try again?"
 msgstr ""
 
-#: src/Zypper.cc:248 src/Zypper.cc:712 src/commands/basecommand.cc:265
+#: src/Zypper.cc:248 src/Zypper.cc:712 src/commands/basecommand.cc:282
 msgid "Unexpected exception."
 msgstr ""
 
@@ -1827,7 +1926,9 @@ msgstr ""
 
 #. help text for the "Abort, retry, ignore?" prompt for media errors
 #: src/callbacks/media.cc:31
-msgid "Skip retrieval of the file and try to continue with the operation without the file."
+msgid ""
+"Skip retrieval of the file and try to continue with the operation without "
+"the file."
 msgstr ""
 
 #. help text for the "Abort, retry, ignore?" prompt for media errors
@@ -1912,7 +2013,9 @@ msgstr ""
 #. /usr/lib/locale/<your_locale>/LC_MESSAGES/SYS_LC_MESSAGES
 #: src/callbacks/media.cc:219
 #, c-format, boost-format
-msgid "Please insert medium [%s] #%d and type 'y' to continue or 'n' to cancel the operation."
+msgid ""
+"Please insert medium [%s] #%d and type 'y' to continue or 'n' to cancel the "
+"operation."
 msgstr ""
 
 #. translators: a/r/i/u are replies to the "Abort, retry, ignore?" prompt
@@ -1924,7 +2027,9 @@ msgstr ""
 
 #: src/callbacks/media.cc:298
 #, c-format, boost-format
-msgid "Authentication required to access %s. You need to be root to be able to read the credentials from %s."
+msgid ""
+"Authentication required to access %s. You need to be root to be able to read "
+"the credentials from %s."
 msgstr ""
 
 #: src/callbacks/media.cc:320 src/callbacks/media.cc:327
@@ -1941,11 +2046,15 @@ msgid "Root privileges are required to run this command."
 msgstr ""
 
 #: src/commands/conditions.cc:47
-msgid "This is a transactional-server, please use transactional-update to update or modify the system."
+msgid ""
+"This is a transactional-server, please use transactional-update to update or "
+"modify the system."
 msgstr ""
 
 #: src/commands/conditions.cc:49
-msgid "The target filesystem is mounted as read-only. Please make sure the target filesystem is writeable."
+msgid ""
+"The target filesystem is mounted as read-only. Please make sure the target "
+"filesystem is writeable."
 msgstr ""
 
 #. translators: command synopsis; do not translate lowercase words
@@ -1966,7 +2075,10 @@ msgstr ""
 
 #: src/commands/distupgrade.cc:68
 #, c-format, boost-format
-msgid "You are about to do a distribution upgrade with all enabled repositories. Make sure these repositories are compatible before you continue. See '%s' for more information about this command."
+msgid ""
+"You are about to do a distribution upgrade with all enabled repositories. "
+"Make sure these repositories are compatible before you continue. See '%s' "
+"for more information about this command."
 msgstr ""
 
 #. translators: command synopsis; do not translate lowercase words
@@ -2005,108 +2117,127 @@ msgstr ""
 
 #. translators: command description
 #: src/commands/inrverify.cc:95
-msgid "Install newly added packages recommended by already installed ones. This command basically re-evaluates the recommendations of all installed packages and fills up the system accordingly. You don't want to call this unconditionally on small or minimal systems, as it may easily add a large number of packages."
+msgid ""
+"Install newly added packages recommended by already installed ones. This "
+"command basically re-evaluates the recommendations of all installed packages "
+"and fills up the system accordingly. You don't want to call this "
+"unconditionally on small or minimal systems, as it may easily add a large "
+"number of packages."
 msgstr ""
 
 #. translators: command description, %1% is a zypper command
 #: src/commands/inrverify.cc:98
 #, boost-format
-msgid "Called as '%1%', it restricts the command to just look for packages supporting available hardware, languages or filesystems. Useful after having added e.g. new hardware or driver repos."
+msgid ""
+"Called as '%1%', it restricts the command to just look for packages "
+"supporting available hardware, languages or filesystems. Useful after having "
+"added e.g. new hardware or driver repos."
 msgstr ""
 
 #. translators: command description
 #: src/commands/inrverify.cc:101
-msgid "Check whether dependencies of installed packages are satisfied and suggest to install or remove packages in order to repair the dependency problems."
+msgid ""
+"Check whether dependencies of installed packages are satisfied and suggest "
+"to install or remove packages in order to repair the dependency problems."
 msgstr ""
 
-#: src/commands/installremove.cc:54
+#: src/commands/installremove.cc:62
 msgid "Select packages by plain name, not by capability."
 msgstr ""
 
-#: src/commands/installremove.cc:55
+#: src/commands/installremove.cc:63
 msgid "Select packages solely by capability."
 msgstr ""
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/commands/installremove.cc:74
+#: src/commands/installremove.cc:82
 msgid "remove (rm) [OPTIONS] <CAPABILITY> ..."
 msgstr ""
 
 #. translators: command summary: remove, rm
-#: src/commands/installremove.cc:76
+#: src/commands/installremove.cc:84
 msgid "Remove packages."
 msgstr ""
 
 #. translators: command description
-#: src/commands/installremove.cc:78
-msgid "Remove packages with specified capabilities. A capability is NAME[.ARCH][OP<VERSION>], where OP is one of <, <=, =, >=, >."
+#: src/commands/installremove.cc:86
+msgid ""
+"Remove packages with specified capabilities. A capability is NAME[.ARCH]"
+"[OP<VERSION>], where OP is one of <, <=, =, >=, >."
 msgstr ""
 
-#: src/commands/installremove.cc:96 src/commands/installremove.cc:218
+#: src/commands/installremove.cc:104 src/commands/installremove.cc:226
 #: src/utils/messages.cc:53
 msgid "Too few arguments."
 msgstr ""
 
-#: src/commands/installremove.cc:97 src/commands/installremove.cc:219
+#: src/commands/installremove.cc:105 src/commands/installremove.cc:227
 msgid "At least one package name is required."
 msgstr ""
 
-#: src/commands/installremove.cc:108
+#: src/commands/installremove.cc:116
 msgid "Cannot uninstall patches."
 msgstr ""
 
-#: src/commands/installremove.cc:109
+#: src/commands/installremove.cc:117
 msgid ""
 "Installed status of a patch is determined solely based on its dependencies.\n"
 "Patches are not installed in sense of copied files, database records,\n"
 "or similar."
 msgstr ""
 
-#: src/commands/installremove.cc:118
+#: src/commands/installremove.cc:126
 msgid "Uninstallation of a source package not defined and implemented."
 msgstr ""
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/commands/installremove.cc:160
+#: src/commands/installremove.cc:168
 msgid "install (in) [OPTIONS] <CAPABILITY|RPM_FILE_URI> ..."
 msgstr ""
 
 #. translators: command summary: install, in
-#: src/commands/installremove.cc:162
+#: src/commands/installremove.cc:170
 msgid "Install packages."
 msgstr ""
 
 #. translators: command description
-#: src/commands/installremove.cc:164
-msgid "Install packages with specified capabilities or RPM files with specified location. A capability is NAME[.ARCH][OP<VERSION>], where OP is one of <, <=, =, >=, >."
+#: src/commands/installremove.cc:172
+msgid ""
+"Install packages with specified capabilities or RPM files with specified "
+"location. A capability is NAME[.ARCH][OP<VERSION>], where OP is one of <, "
+"<=, =, >=, >."
 msgstr ""
 
 #. translators: --from <ALIAS|#|URI>
-#: src/commands/installremove.cc:179
+#: src/commands/installremove.cc:187
 msgid "Select packages from the specified repository."
 msgstr ""
 
 #. translators: --oldpackage
-#: src/commands/installremove.cc:183
-msgid "Allow to replace a newer item with an older one. Handy if you are doing a rollback. Unlike --force it will not enforce a reinstall."
+#: src/commands/installremove.cc:191
+msgid ""
+"Allow to replace a newer item with an older one. Handy if you are doing a "
+"rollback. Unlike --force it will not enforce a reinstall."
 msgstr ""
 
-#: src/commands/installremove.cc:187
+#: src/commands/installremove.cc:195
 msgid "Silently install unsigned rpm packages given as commandline parameters."
 msgstr ""
 
 #. translators: -f, --force
-#: src/commands/installremove.cc:192
-msgid "Install even if the item is already installed (reinstall), downgraded or changes vendor or architecture."
+#: src/commands/installremove.cc:200
+msgid ""
+"Install even if the item is already installed (reinstall), downgraded or "
+"changes vendor or architecture."
 msgstr ""
 
 #. translators: rug related message, shown if
 #. 'zypper in --entire-catalog foorepo someargument' is specified
-#: src/commands/installremove.cc:230
+#: src/commands/installremove.cc:238
 msgid "Ignoring arguments, marking the entire repository."
 msgstr ""
 
-#: src/commands/installremove.cc:243 src/commands/sourceinstall.cc:92
+#: src/commands/installremove.cc:251 src/commands/sourceinstall.cc:92
 msgid "No valid arguments specified."
 msgstr ""
 
@@ -2142,7 +2273,9 @@ msgstr ""
 
 #. translators: -a, --all
 #: src/commands/listupdates.cc:35
-msgid "List all packages for which newer versions are available, regardless whether they are installable or not."
+msgid ""
+"List all packages for which newer versions are available, regardless whether "
+"they are installable or not."
 msgstr ""
 
 #. translators: command synopsis; do not translate lowercase words
@@ -2184,7 +2317,8 @@ msgid ""
 "List requested locales and corresponding packages.\n"
 "\n"
 "Called without arguments, lists the requested locales. If the\n"
-"locale packages for a requested language are not yet on the system, they can\n"
+"locale packages for a requested language are not yet on the system, they "
+"can\n"
 "be installed by calling '%s'.\n"
 msgstr ""
 
@@ -2205,7 +2339,9 @@ msgid "The locale(s) for which the information shall be printed."
 msgstr ""
 
 #: src/commands/locale/localescmd.cc:80
-msgid "Get all locales with lang code 'en' that have their own country code, excluding the fallback 'en':"
+msgid ""
+"Get all locales with lang code 'en' that have their own country code, "
+"excluding the fallback 'en':"
 msgstr ""
 
 #: src/commands/locale/localescmd.cc:87
@@ -2256,7 +2392,9 @@ msgstr ""
 
 #. translators: command description
 #: src/commands/locks/add.cc:33
-msgid "Add a package lock. Specify packages to lock by exact name or by a glob pattern using '*' and '?' wildcard characters."
+msgid ""
+"Add a package lock. Specify packages to lock by exact name or by a glob "
+"pattern using '*' and '?' wildcard characters."
 msgstr ""
 
 #: src/commands/locks/add.cc:42
@@ -2387,7 +2525,9 @@ msgstr ""
 #. translators: command description; %1% is acoomand like 'zypper locks'
 #: src/commands/locks/remove.cc:28
 #, boost-format
-msgid "Remove a package lock. Specify the lock to remove by its number obtained with '%1%' or by package name."
+msgid ""
+"Remove a package lock. Specify the lock to remove by its number obtained "
+"with '%1%' or by package name."
 msgstr ""
 
 #: src/commands/locks/remove.cc:45
@@ -2420,8 +2560,10 @@ msgstr ""
 
 #: src/commands/needs-rebooting.cc:23
 msgid ""
-"Checks if the needs-reboot flag was set by a previous update or install of a core library or service.\n"
-"Exit code ZYPPER_EXIT_INF_REBOOT_NEEDED indicates that a reboot is needed, otherwise the exit code is set to ZYPPER_EXIT_OK."
+"Checks if the needs-reboot flag was set by a previous update or install of a "
+"core library or service.\n"
+"Exit code ZYPPER_EXIT_INF_REBOOT_NEEDED indicates that a reboot is needed, "
+"otherwise the exit code is set to ZYPPER_EXIT_OK."
 msgstr ""
 
 #: src/commands/needs-rebooting.cc:35
@@ -2429,7 +2571,8 @@ msgid "Core libraries or services have been updated."
 msgstr ""
 
 #: src/commands/needs-rebooting.cc:36
-msgid "Reboot is required to ensure that your system benefits from these updates."
+msgid ""
+"Reboot is required to ensure that your system benefits from these updates."
 msgstr ""
 
 #: src/commands/needs-rebooting.cc:41
@@ -2540,25 +2683,36 @@ msgid "Show only packages which are not installed."
 msgstr ""
 
 #: src/commands/optionsets.cc:237
-msgid "Automatically say 'yes' to third party license confirmation prompt. See 'man zypper' for more details."
+msgid ""
+"Automatically say 'yes' to third party license confirmation prompt. See 'man "
+"zypper' for more details."
 msgstr ""
 
 #: src/commands/optionsets.cc:242
-msgid "Automatically accept product licenses only. See 'man zypper' for more details."
+msgid ""
+"Automatically accept product licenses only. See 'man zypper' for more "
+"details."
 msgstr ""
 
 #. translators: --replacefiles
 #: src/commands/optionsets.cc:262
-msgid "Install the packages even if they replace files from other, already installed, packages. Default is to treat file conflicts as an error. --download-as-needed disables the fileconflict check."
+msgid ""
+"Install the packages even if they replace files from other, already "
+"installed, packages. Default is to treat file conflicts as an error. --"
+"download-as-needed disables the fileconflict check."
 msgstr ""
 
 #. translators: -y, --no-confirm
 #: src/commands/optionsets.cc:289
-msgid "Don't require user interaction. Alias for the --non-interactive global option."
+msgid ""
+"Don't require user interaction. Alias for the --non-interactive global "
+"option."
 msgstr ""
 
 #: src/commands/optionsets.cc:307
-msgid "Whether applicable optional patches should be treated as needed or be excluded."
+msgid ""
+"Whether applicable optional patches should be treated as needed or be "
+"excluded."
 msgstr ""
 
 #: src/commands/optionsets.cc:310
@@ -2606,7 +2760,10 @@ msgid "Install all available needed patches."
 msgstr ""
 
 #: src/commands/patch.cc:48
-msgid "Additionally try to update all packages not covered by patches. The option is ignored, if the patch command must update the update stack first. Can not be combined with --updatestack-only."
+msgid ""
+"Additionally try to update all packages not covered by patches. The option "
+"is ignored, if the patch command must update the update stack first. Can not "
+"be combined with --updatestack-only."
 msgstr ""
 
 #. translators: command synopsis; do not translate lowercase words
@@ -2621,7 +2778,9 @@ msgstr ""
 
 #. translators: command description
 #: src/commands/patchcheck.cc:21
-msgid "Display stats about applicable patches. The command returns 100 if needed patches were found, 101 if there is at least one needed security patch."
+msgid ""
+"Display stats about applicable patches. The command returns 100 if needed "
+"patches were found, 101 if there is at least one needed security patch."
 msgstr ""
 
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
@@ -2631,18 +2790,26 @@ msgstr ""
 
 #. translators: command description
 #: src/commands/ps.cc:29
-msgid "List running processes which might still use files and libraries deleted by recent upgrades."
+msgid ""
+"List running processes which might still use files and libraries deleted by "
+"recent upgrades."
 msgstr ""
 
 #. translators: -s, --short
 #: src/commands/ps.cc:46
-msgid "Create a short table not showing the deleted files. Given twice, show only processes which are associated with a system service. Given three times, list the associated system service names only."
+msgid ""
+"Create a short table not showing the deleted files. Given twice, show only "
+"processes which are associated with a system service. Given three times, "
+"list the associated system service names only."
 msgstr ""
 
 #. translators: --print <format>
 #: src/commands/ps.cc:49
 #, c-format, boost-format
-msgid "For each associated system service print <format> on the standard output, followed by a newline. Any '%s' directive in <format> is replaced by the system service name."
+msgid ""
+"For each associated system service print <format> on the standard output, "
+"followed by a newline. Any '%s' directive in <format> is replaced by the "
+"system service name."
 msgstr ""
 
 #. translators: -d, --debugFile <path>
@@ -2708,11 +2875,15 @@ msgstr ""
 
 #: src/commands/ps.cc:195
 #, c-format, boost-format
-msgid "See '%s' for information about the meaning of values in the above table."
+msgid ""
+"See '%s' for information about the meaning of values in the above table."
 msgstr ""
 
 #: src/commands/ps.cc:208
-msgid "Note: Not running as root you are limited to searching for files you have permission to examine with the system stat(2) function. The result might be incomplete."
+msgid ""
+"Note: Not running as root you are limited to searching for files you have "
+"permission to examine with the system stat(2) function. The result might be "
+"incomplete."
 msgstr ""
 
 #. translators: command synopsis; do not translate lowercase words
@@ -2727,7 +2898,11 @@ msgstr ""
 
 #. translators: command description
 #: src/commands/query/info.cc:23
-msgid "Show detailed information for specified packages. By default the packages which match exactly the given names are shown. To get also packages partially matching use option '--match-substrings' or use wildcards (*?) in name."
+msgid ""
+"Show detailed information for specified packages. By default the packages "
+"which match exactly the given names are shown. To get also packages "
+"partially matching use option '--match-substrings' or use wildcards (*?) in "
+"name."
 msgstr ""
 
 #. translators: -s, --match-substrings
@@ -2916,7 +3091,8 @@ msgstr ""
 
 #. translators: --xmlfwd <TAG>
 #: src/commands/query/products.cc:36
-msgid "XML output only: Literally forward the XML tags found in a product file."
+msgid ""
+"XML output only: Literally forward the XML tags found in a product file."
 msgstr ""
 
 #: src/commands/query/products.cc:50
@@ -2937,7 +3113,9 @@ msgid "Add a new repository."
 msgstr ""
 
 #: src/commands/repos/add.cc:25
-msgid "Add a repository to the system. The repository can be specified by its URI or can be read from specified .repo file (even remote)."
+msgid ""
+"Add a repository to the system. The repository can be specified by its URI "
+"or can be read from specified .repo file (even remote)."
 msgstr ""
 
 #: src/commands/repos/add.cc:40
@@ -2962,7 +3140,8 @@ msgid "Cannot use %s together with %s. Using the %s setting."
 msgstr ""
 
 #: src/commands/repos/add.cc:93
-msgid "If only one argument is used, it must be a URI pointing to a .repo file."
+msgid ""
+"If only one argument is used, it must be a URI pointing to a .repo file."
 msgstr ""
 
 #: src/commands/repos/add.cc:130
@@ -3010,26 +3189,26 @@ msgstr ""
 #. 'enabled' flag
 #. translators: property name; short; used like "Name: value"
 #: src/commands/repos/list.cc:47 src/commands/repos/list.cc:230
-#: src/commands/services/list.cc:106 src/repos.cc:1269
+#: src/commands/services/list.cc:106 src/repos.cc:1257
 msgid "Enabled"
 msgstr ""
 
 #. GPG Check
 #. translators: property name; short; used like "Name: value"
 #: src/commands/repos/list.cc:48 src/commands/repos/list.cc:234
-#: src/commands/services/list.cc:107 src/repos.cc:1271
+#: src/commands/services/list.cc:107 src/repos.cc:1259
 msgid "GPG Check"
 msgstr ""
 
 #. translators: repository priority (in zypper repos -p or -d)
 #. translators: property name; short; used like "Name: value"
 #: src/commands/repos/list.cc:49 src/commands/repos/list.cc:252
-#: src/commands/services/list.cc:113 src/repos.cc:1275
+#: src/commands/services/list.cc:113 src/repos.cc:1263
 msgid "Priority"
 msgstr ""
 
 #. translators: property name; short; used like "Name: value"
-#: src/commands/repos/list.cc:50 src/repos.cc:1273
+#: src/commands/repos/list.cc:50 src/repos.cc:1261
 msgid "Autorefresh"
 msgstr ""
 
@@ -3082,7 +3261,7 @@ msgstr ""
 msgid "Export all defined repositories as a single local .repo file."
 msgstr ""
 
-#: src/commands/repos/list.cc:118 src/repos.cc:1024
+#: src/commands/repos/list.cc:118 src/repos.cc:1012
 msgid "Error reading repositories:"
 msgstr ""
 
@@ -3134,7 +3313,9 @@ msgstr ""
 #. translators: command description
 #: src/commands/repos/modify.cc:31
 #, boost-format
-msgid "Modify properties of repositories specified by alias, number, or URI, or by the '%1%' aggregate options."
+msgid ""
+"Modify properties of repositories specified by alias, number, or URI, or by "
+"the '%1%' aggregate options."
 msgstr ""
 
 #: src/commands/repos/modify.cc:89
@@ -3153,7 +3334,9 @@ msgstr ""
 
 #. translators: command description
 #: src/commands/repos/refresh.cc:28
-msgid "Refresh repositories specified by their alias, number or URI. If none are specified, all enabled repositories will be refreshed."
+msgid ""
+"Refresh repositories specified by their alias, number or URI. If none are "
+"specified, all enabled repositories will be refreshed."
 msgstr ""
 
 #. translators: -f, --force
@@ -3201,7 +3384,7 @@ msgstr ""
 msgid "Arguments are not allowed if '%s' is used."
 msgstr ""
 
-#: src/commands/repos/refresh.cc:195 src/repos.cc:1036
+#: src/commands/repos/refresh.cc:195 src/repos.cc:1024
 msgid "Specified repositories: "
 msgstr ""
 
@@ -3220,13 +3403,14 @@ msgstr ""
 msgid "Skipping disabled repository '%s'"
 msgstr ""
 
-#: src/commands/repos/refresh.cc:262 src/repos.cc:862 src/repos.cc:895
+#: src/commands/repos/refresh.cc:262 src/repos.cc:862 src/repos.cc:905
 #, c-format, boost-format
 msgid "Skipping repository '%s' because of the above error."
 msgstr ""
 
 #: src/commands/repos/refresh.cc:274
-msgid "Some of the repositories have not been refreshed because they were not known."
+msgid ""
+"Some of the repositories have not been refreshed because they were not known."
 msgstr ""
 
 #: src/commands/repos/refresh.cc:281
@@ -3246,7 +3430,7 @@ msgstr ""
 msgid "Could not refresh the repositories because of errors."
 msgstr ""
 
-#: src/commands/repos/refresh.cc:298 src/repos.cc:946
+#: src/commands/repos/refresh.cc:298 src/repos.cc:934
 msgid "Some of the repositories have not been refreshed because of an error."
 msgstr ""
 
@@ -3289,7 +3473,9 @@ msgstr ""
 
 #: src/commands/repos/rename.cc:33
 #, c-format, boost-format
-msgid "Cannot change alias of '%s' repository. The repository belongs to service '%s' which is responsible for setting its alias."
+msgid ""
+"Cannot change alias of '%s' repository. The repository belongs to service "
+"'%s' which is responsible for setting its alias."
 msgstr ""
 
 #: src/commands/repos/rename.cc:43
@@ -3297,12 +3483,12 @@ msgstr ""
 msgid "Repository '%s' renamed to '%s'."
 msgstr ""
 
-#: src/commands/repos/rename.cc:47 src/repos.cc:1215
+#: src/commands/repos/rename.cc:47 src/repos.cc:1203
 #, c-format, boost-format
 msgid "Repository named '%s' already exists. Please use another alias."
 msgstr ""
 
-#: src/commands/repos/rename.cc:52 src/repos.cc:1693
+#: src/commands/repos/rename.cc:52 src/repos.cc:1681
 msgid "Error while modifying the repository:"
 msgstr ""
 
@@ -3336,7 +3522,9 @@ msgstr ""
 
 #: src/commands/reposerviceoptionsets.cc:35 src/repos.cc:108
 #, c-format, boost-format
-msgid "Invalid priority '%s'. Use a positive integer number. The greater the number, the lower the priority."
+msgid ""
+"Invalid priority '%s'. Use a positive integer number. The greater the "
+"number, the lower the priority."
 msgstr ""
 
 #: src/commands/reposerviceoptionsets.cc:72
@@ -3441,7 +3629,8 @@ msgid "Enable GPG check but allow the repository metadata to be unsigned."
 msgstr ""
 
 #: src/commands/reposerviceoptionsets.cc:144
-msgid "Enable GPG check but allow installing unsigned packages from this repository."
+msgid ""
+"Enable GPG check but allow installing unsigned packages from this repository."
 msgstr ""
 
 #: src/commands/reposerviceoptionsets.cc:145
@@ -3449,7 +3638,9 @@ msgid "Disable GPG check for this repository."
 msgstr ""
 
 #: src/commands/reposerviceoptionsets.cc:146
-msgid "Use the global GPG check setting defined in /etc/zypp/zypp.conf. This is the default."
+msgid ""
+"Use the global GPG check setting defined in /etc/zypp/zypp.conf. This is the "
+"default."
 msgstr ""
 
 #. translators: -a, --alias
@@ -3516,18 +3707,24 @@ msgstr ""
 #. translator: %1% denotes a zypper command to execute. Like 'zypper search-packages'.
 #: src/commands/search/search-packages-hinthack.cc:81
 #, boost-format
-msgid "For an extended search including not yet activated remote resources please use '%1%'."
+msgid ""
+"For an extended search including not yet activated remote resources please "
+"use '%1%'."
 msgstr ""
 
 #. translator: %1% denotes a zypper command to execute. Like 'zypper search-packages'.
 #: src/commands/search/search-packages-hinthack.cc:85
 #, boost-format
-msgid "The package providing this subcommand is currently not installed. You can install it by calling '%1%'."
+msgid ""
+"The package providing this subcommand is currently not installed. You can "
+"install it by calling '%1%'."
 msgstr ""
 
 #: src/commands/search/search-packages-hinthack.cc:98
 #, boost-format
-msgid "For an extended search including not yet activated remote resources you may run '%1%' at any time."
+msgid ""
+"For an extended search including not yet activated remote resources you may "
+"run '%1%' at any time."
 msgstr ""
 
 #: src/commands/search/search-packages-hinthack.cc:99
@@ -3562,7 +3759,9 @@ msgstr ""
 
 #. translators: command description
 #: src/commands/search/search.cc:97
-msgid "* and ? wildcards can also be used within search strings. If a search string is enclosed in '/', it's interpreted as a regular expression."
+msgid ""
+"* and ? wildcards can also be used within search strings. If a search string "
+"is enclosed in '/', it's interpreted as a regular expression."
 msgstr ""
 
 #. translators: command description
@@ -3627,7 +3826,9 @@ msgstr ""
 
 #. translators: -n, --name
 #: src/commands/search/search.cc:165
-msgid "Useful together with dependency options, otherwise searching in package name is default."
+msgid ""
+"Useful together with dependency options, otherwise searching in package name "
+"is default."
 msgstr ""
 
 #. translators: -f, --file-list
@@ -3652,7 +3853,9 @@ msgstr ""
 
 #. translators: -v, --verbose
 #: src/commands/search/search.cc:195
-msgid "Like --details, with additional information where the search has matched (useful for search in dependencies)."
+msgid ""
+"Like --details, with additional information where the search has matched "
+"(useful for search in dependencies)."
 msgstr ""
 
 #: src/commands/search/search.cc:289 src/repos.cc:782
@@ -3673,7 +3876,7 @@ msgstr ""
 msgid "See the above message for a hint."
 msgstr ""
 
-#: src/commands/search/search.cc:459 src/repos.cc:1003
+#: src/commands/search/search.cc:459 src/repos.cc:991
 msgid "Running 'zypper refresh' as root might resolve the problem."
 msgstr ""
 
@@ -3755,7 +3958,7 @@ msgid "Problem retrieving the repository index file for service '%s':"
 msgstr ""
 
 #: src/commands/services/common.cc:138 src/commands/services/refresh.cc:226
-#: src/repos.cc:1745
+#: src/repos.cc:1733
 #, c-format, boost-format
 msgid "Skipping service '%s' because of the above error."
 msgstr ""
@@ -3808,7 +4011,9 @@ msgstr ""
 
 #: src/commands/services/modify.cc:23
 #, boost-format
-msgid "Modify properties of services specified by alias, number, or URI, or by the '%1%' aggregate options."
+msgid ""
+"Modify properties of services specified by alias, number, or URI, or by the "
+"'%1%' aggregate options."
 msgstr ""
 
 #: src/commands/services/modify.cc:41
@@ -3880,28 +4085,35 @@ msgstr ""
 #: src/commands/services/modify.cc:255
 #, c-format, boost-format
 msgid "Repository '%s' has been added to enabled repositories of service '%s'"
-msgid_plural "Repositories '%s' have been added to enabled repositories of service '%s'"
+msgid_plural ""
+"Repositories '%s' have been added to enabled repositories of service '%s'"
 msgstr[0] ""
 msgstr[1] ""
 
 #: src/commands/services/modify.cc:262
 #, c-format, boost-format
 msgid "Repository '%s' has been added to disabled repositories of service '%s'"
-msgid_plural "Repositories '%s' have been added to disabled repositories of service '%s'"
+msgid_plural ""
+"Repositories '%s' have been added to disabled repositories of service '%s'"
 msgstr[0] ""
 msgstr[1] ""
 
 #: src/commands/services/modify.cc:269
 #, c-format, boost-format
-msgid "Repository '%s' has been removed from enabled repositories of service '%s'"
-msgid_plural "Repositories '%s' have been removed from enabled repositories of service '%s'"
+msgid ""
+"Repository '%s' has been removed from enabled repositories of service '%s'"
+msgid_plural ""
+"Repositories '%s' have been removed from enabled repositories of service '%s'"
 msgstr[0] ""
 msgstr[1] ""
 
 #: src/commands/services/modify.cc:276
 #, c-format, boost-format
-msgid "Repository '%s' has been removed from disabled repositories of service '%s'"
-msgid_plural "Repositories '%s' have been removed from disabled repositories of service '%s'"
+msgid ""
+"Repository '%s' has been removed from disabled repositories of service '%s'"
+msgid_plural ""
+"Repositories '%s' have been removed from disabled repositories of service "
+"'%s'"
 msgstr[0] ""
 msgstr[1] ""
 
@@ -4052,7 +4264,9 @@ msgid "Create a solver test case for debugging."
 msgstr ""
 
 #: src/commands/solveroptionset.cc:42
-msgid "Force the solver to find a solution (even an aggressive one) rather than asking."
+msgid ""
+"Force the solver to find a solution (even an aggressive one) rather than "
+"asking."
 msgstr ""
 
 #: src/commands/solveroptionset.cc:43
@@ -4106,7 +4320,10 @@ msgstr ""
 
 #: src/commands/sourceinstall.cc:26
 #, boost-format
-msgid "The default location where rpm installs source packages to is '%1%', but the value can be changed in your local rpm configuration. In case of doubt try executing '%2%'."
+msgid ""
+"The default location where rpm installs source packages to is '%1%', but the "
+"value can be changed in your local rpm configuration. In case of doubt try "
+"executing '%2%'."
 msgstr ""
 
 #. translators: -d, --build-deps-only
@@ -4257,7 +4474,8 @@ msgstr ""
 
 #. translators: command description
 #: src/commands/update.cc:26
-msgid "Update all or specified installed packages with newer versions, if possible."
+msgid ""
+"Update all or specified installed packages with newer versions, if possible."
 msgstr ""
 
 #: src/commands/update.cc:69 src/commands/update.cc:76
@@ -4272,11 +4490,14 @@ msgstr ""
 
 #: src/commands/update.cc:77
 #, c-format, boost-format
-msgid "Zypper does not keep track of installed source packages. To install the latest source package and its build dependencies, use '%s'."
+msgid ""
+"Zypper does not keep track of installed source packages. To install the "
+"latest source package and its build dependencies, use '%s'."
 msgstr ""
 
 #: src/commands/update.cc:83
-msgid "Cannot use multiple types when specific packages are given as arguments."
+msgid ""
+"Cannot use multiple types when specific packages are given as arguments."
 msgstr ""
 
 #: src/commands/utils/download.cc:131 src/commands/utils/source-download.cc:212
@@ -4296,17 +4517,26 @@ msgstr ""
 
 #. translators: command description
 #: src/commands/utils/download.cc:150
-msgid "Download rpms specified on the commandline to a local directory. Per default packages are downloaded to the libzypp package cache (/var/cache/zypp/packages; for non-root users $XDG_CACHE_HOME/zypp/packages), but this can be changed by using the global --pkg-cache-dir option."
+msgid ""
+"Download rpms specified on the commandline to a local directory. Per default "
+"packages are downloaded to the libzypp package cache (/var/cache/zypp/"
+"packages; for non-root users $XDG_CACHE_HOME/zypp/packages), but this can be "
+"changed by using the global --pkg-cache-dir option."
 msgstr ""
 
 #. translators: command description
 #: src/commands/utils/download.cc:153
-msgid "In XML output a <download-result> node is written for each package zypper tried to download. Upon success the local path is is found in 'download-result/localpath@path'."
+msgid ""
+"In XML output a <download-result> node is written for each package zypper "
+"tried to download. Upon success the local path is is found in 'download-"
+"result/localpath@path'."
 msgstr ""
 
 #. translators: --all-matches
 #: src/commands/utils/download.cc:168
-msgid "Download all versions matching the commandline arguments. Otherwise only the best version of each matching package is downloaded."
+msgid ""
+"Download all versions matching the commandline arguments. Otherwise only the "
+"best version of each matching package is downloaded."
 msgstr ""
 
 #. translators: Label text; is followed by ': cmdline argument'
@@ -4314,7 +4544,7 @@ msgstr ""
 msgid "Argument resolves to no package"
 msgstr ""
 
-#: src/commands/utils/download.cc:246 src/solve-commit.cc:898
+#: src/commands/utils/download.cc:246 src/solve-commit.cc:891
 msgid "Nothing to do."
 msgstr ""
 
@@ -4453,7 +4683,9 @@ msgstr ""
 
 #. translators: -d, --directory <DIR>
 #: src/commands/utils/source-download.cc:496
-msgid "Download all source rpms to this directory. Default: /var/cache/zypper/source-download"
+msgid ""
+"Download all source rpms to this directory. Default: /var/cache/zypper/"
+"source-download"
 msgstr ""
 
 #. translators: --delete
@@ -4464,7 +4696,9 @@ msgstr ""
 
 #. translators: --status
 #: src/commands/utils/source-download.cc:508
-msgid "Don't download any source rpms, but show which source rpms are missing or extraneous."
+msgid ""
+"Don't download any source rpms, but show which source rpms are missing or "
+"extraneous."
 msgstr ""
 
 #. translators: --status
@@ -4489,7 +4723,9 @@ msgstr ""
 
 #. translators: command description
 #: src/commands/utils/targetos.cc:24
-msgid "Show various information about the target operating system. By default, an ID string is shown."
+msgid ""
+"Show various information about the target operating system. By default, an "
+"ID string is shown."
 msgstr ""
 
 #: src/commands/utils/targetos.cc:33
@@ -4834,7 +5070,9 @@ msgstr ""
 #. is " (package-type)" if other than "package" (patch/product/pattern)
 #: src/misc.cc:154
 #, c-format, boost-format
-msgid "In order to install '%s'%s, you must agree to terms of the following license agreement:"
+msgid ""
+"In order to install '%s'%s, you must agree to terms of the following license "
+"agreement:"
 msgstr ""
 
 #. lincense prompt
@@ -4849,7 +5087,9 @@ msgstr ""
 #. translators: %s is '--auto-agree-with-licenses'
 #: src/misc.cc:179
 #, c-format, boost-format
-msgid "Please restart the operation in interactive mode and confirm your agreement with required licenses, or use the %s option."
+msgid ""
+"Please restart the operation in interactive mode and confirm your agreement "
+"with required licenses, or use the %s option."
 msgstr ""
 
 #. translators: e.g. "... with flash package license."
@@ -4961,7 +5201,9 @@ msgstr ""
 #. translators: 'Volatile' refers to changes we previously tagged as 'XYZ changed to SOMETHING [volatile]'
 #: src/repos.cc:58
 #, boost-format
-msgid "Repo '%1%' is managed by service '%2%'. Volatile changes are reset by the next service refresh!"
+msgid ""
+"Repo '%1%' is managed by service '%2%'. Volatile changes are reset by the "
+"next service refresh!"
 msgstr ""
 
 #: src/repos.cc:74
@@ -4977,7 +5219,9 @@ msgid "lowered priority"
 msgstr ""
 
 #: src/repos.cc:179
-msgid "Repository priorities are without effect. All enabled repositories share the same priority."
+msgid ""
+"Repository priorities are without effect. All enabled repositories share the "
+"same priority."
 msgstr ""
 
 #: src/repos.cc:183
@@ -5037,8 +5281,8 @@ msgstr ""
 msgid "Problem retrieving files from '%s'."
 msgstr ""
 
-#: src/repos.cc:346 src/repos.cc:1872 src/solve-commit.cc:792
-#: src/solve-commit.cc:823 src/solve-commit.cc:847
+#: src/repos.cc:346 src/repos.cc:1860 src/solve-commit.cc:785
+#: src/solve-commit.cc:816 src/solve-commit.cc:840
 msgid "Please see the above error message for a hint."
 msgstr ""
 
@@ -5050,7 +5294,9 @@ msgstr ""
 #. TranslatorExplanation the first %s is a .repo file path
 #: src/repos.cc:363
 #, c-format, boost-format
-msgid "Please add one or more base URI (baseurl=URI) entries to %s for repository '%s'."
+msgid ""
+"Please add one or more base URI (baseurl=URI) entries to %s for repository "
+"'%s'."
 msgstr ""
 
 #: src/repos.cc:377
@@ -5063,7 +5309,9 @@ msgid "Repository '%s' is invalid."
 msgstr ""
 
 #: src/repos.cc:390
-msgid "Please check if the URIs defined for this repository are pointing to a valid repository."
+msgid ""
+"Please check if the URIs defined for this repository are pointing to a valid "
+"repository."
 msgstr ""
 
 #: src/repos.cc:402
@@ -5082,7 +5330,11 @@ msgstr ""
 
 #. TranslatorExplanation Don't translate the URL unless it is translated, too
 #: src/repos.cc:442
-msgid "This may be caused by invalid metadata in the repository, or by a bug in the metadata parser. In the latter case, or if in doubt, please, file a bug report by following instructions at http://en.opensuse.org/Zypper/Troubleshooting"
+msgid ""
+"This may be caused by invalid metadata in the repository, or by a bug in the "
+"metadata parser. In the latter case, or if in doubt, please, file a bug "
+"report by following instructions at http://en.opensuse.org/Zypper/"
+"Troubleshooting"
 msgstr ""
 
 #: src/repos.cc:451
@@ -5119,317 +5371,324 @@ msgstr ""
 msgid "Ignoring repository '%s' because of '%s' option."
 msgstr ""
 
-#: src/repos.cc:831 src/repos.cc:931
+#: src/repos.cc:831 src/repos.cc:919
 #, c-format, boost-format
 msgid "Temporarily enabling repository '%s'."
 msgstr ""
 
-#: src/repos.cc:881
+#: src/repos.cc:883
 #, c-format, boost-format
-msgid "Repository '%s' is out-of-date. You can run 'zypper refresh' as root to update it."
+msgid ""
+"Repository '%s' is out-of-date. You can run 'zypper refresh' as root to "
+"update it."
 msgstr ""
 
-#: src/repos.cc:913
+#: src/repos.cc:900
 #, c-format, boost-format
-msgid "The metadata cache needs to be built for the '%s' repository. You can run 'zypper refresh' as root to do this."
+msgid ""
+"The metadata cache needs to be built for the '%s' repository. You can run "
+"'zypper refresh' as root to do this."
 msgstr ""
 
-#: src/repos.cc:917
-#, c-format, boost-format
-msgid "Disabling repository '%s'."
-msgstr ""
-
-#: src/repos.cc:938
+#: src/repos.cc:926
 #, c-format, boost-format
 msgid "Repository '%s' stays disabled."
 msgstr ""
 
-#: src/repos.cc:994
+#: src/repos.cc:982
 msgid "Initializing Target"
 msgstr ""
 
-#: src/repos.cc:1002
+#: src/repos.cc:990
 msgid "Target initialization failed:"
 msgstr ""
 
-#: src/repos.cc:1084
+#: src/repos.cc:1072
 #, c-format, boost-format
 msgid "Cleaning metadata cache for '%s'."
 msgstr ""
 
-#: src/repos.cc:1092
+#: src/repos.cc:1080
 #, c-format, boost-format
 msgid "Cleaning raw metadata cache for '%s'."
 msgstr ""
 
-#: src/repos.cc:1098
+#: src/repos.cc:1086
 #, c-format, boost-format
 msgid "Keeping raw metadata cache for %s '%s'."
 msgstr ""
 
 #. translators: meaning the cached rpm files
-#: src/repos.cc:1105
+#: src/repos.cc:1093
 #, c-format, boost-format
 msgid "Cleaning packages for '%s'."
 msgstr ""
 
-#: src/repos.cc:1113
+#: src/repos.cc:1101
 #, c-format, boost-format
 msgid "Cannot clean repository '%s' because of an error."
 msgstr ""
 
-#: src/repos.cc:1124
+#: src/repos.cc:1112
 msgid "Cleaning installed packages cache."
 msgstr ""
 
-#: src/repos.cc:1133
+#: src/repos.cc:1121
 msgid "Cannot clean installed packages cache because of an error."
 msgstr ""
 
-#: src/repos.cc:1151
+#: src/repos.cc:1139
 msgid "Could not clean the repositories because of errors."
 msgstr ""
 
-#: src/repos.cc:1157
+#: src/repos.cc:1145
 msgid "Some of the repositories have not been cleaned up because of an error."
 msgstr ""
 
-#: src/repos.cc:1162
+#: src/repos.cc:1150
 msgid "Specified repositories have been cleaned up."
 msgstr ""
 
-#: src/repos.cc:1164
+#: src/repos.cc:1152
 msgid "All repositories have been cleaned up."
 msgstr ""
 
-#: src/repos.cc:1186
+#: src/repos.cc:1174
 msgid "This is a changeable read-only media (CD/DVD), disabling autorefresh."
 msgstr ""
 
-#: src/repos.cc:1207
+#: src/repos.cc:1195
 #, c-format, boost-format
 msgid "Invalid repository alias: '%s'"
 msgstr ""
 
-#: src/repos.cc:1224
-msgid "Could not determine the type of the repository. Please check if the defined URIs (see below) point to a valid repository:"
+#: src/repos.cc:1212
+msgid ""
+"Could not determine the type of the repository. Please check if the defined "
+"URIs (see below) point to a valid repository:"
 msgstr ""
 
-#: src/repos.cc:1230
+#: src/repos.cc:1218
 msgid "Can't find a valid repository at given location:"
 msgstr ""
 
-#: src/repos.cc:1238
+#: src/repos.cc:1226
 msgid "Problem transferring repository data from specified URI:"
 msgstr ""
 
-#: src/repos.cc:1239
+#: src/repos.cc:1227
 msgid "Please check whether the specified URI is accessible."
 msgstr ""
 
-#: src/repos.cc:1246
+#: src/repos.cc:1234
 msgid "Unknown problem when adding repository:"
 msgstr ""
 
 #. translators: BOOST STYLE POSITIONAL DIRECTIVES ( %N% )
 #. translators: %1% - a repository name
-#: src/repos.cc:1256
+#: src/repos.cc:1244
 #, boost-format
-msgid "GPG checking is disabled in configuration of repository '%1%'. Integrity and origin of packages cannot be verified."
+msgid ""
+"GPG checking is disabled in configuration of repository '%1%'. Integrity and "
+"origin of packages cannot be verified."
 msgstr ""
 
-#: src/repos.cc:1261
+#: src/repos.cc:1249
 #, c-format, boost-format
 msgid "Repository '%s' successfully added"
 msgstr ""
 
-#: src/repos.cc:1287
+#: src/repos.cc:1275
 #, c-format, boost-format
 msgid "Reading data from '%s' media"
 msgstr ""
 
-#: src/repos.cc:1293
+#: src/repos.cc:1281
 #, c-format, boost-format
 msgid "Problem reading data from '%s' media"
 msgstr ""
 
-#: src/repos.cc:1294
+#: src/repos.cc:1282
 msgid "Please check if your installation media is valid and readable."
 msgstr ""
 
-#: src/repos.cc:1301
+#: src/repos.cc:1289
 #, c-format, boost-format
 msgid "Reading data from '%s' media is delayed until next refresh."
 msgstr ""
 
-#: src/repos.cc:1370
+#: src/repos.cc:1358
 msgid "Problem accessing the file at the specified URI"
 msgstr ""
 
-#: src/repos.cc:1371
+#: src/repos.cc:1359
 msgid "Please check if the URI is valid and accessible."
 msgstr ""
 
-#: src/repos.cc:1378
+#: src/repos.cc:1366
 msgid "Problem parsing the file at the specified URI"
 msgstr ""
 
 #. TranslatorExplanation Don't translate the '.repo' string.
-#: src/repos.cc:1380
+#: src/repos.cc:1368
 msgid "Is it a .repo file?"
 msgstr ""
 
-#: src/repos.cc:1387
+#: src/repos.cc:1375
 msgid "Problem encountered while trying to read the file at the specified URI"
 msgstr ""
 
-#: src/repos.cc:1400
+#: src/repos.cc:1388
 msgid "Repository with no alias defined found in the file, skipping."
 msgstr ""
 
-#: src/repos.cc:1406
+#: src/repos.cc:1394
 #, c-format, boost-format
 msgid "Repository '%s' has no URI defined, skipping."
 msgstr ""
 
-#: src/repos.cc:1454
+#: src/repos.cc:1442
 #, c-format, boost-format
 msgid "Repository '%s' has been removed."
 msgstr ""
 
-#: src/repos.cc:1602
+#: src/repos.cc:1590
 #, c-format, boost-format
 msgid "Repository '%s' priority has been left unchanged (%d)"
 msgstr ""
 
-#: src/repos.cc:1635
+#: src/repos.cc:1623
 #, c-format, boost-format
 msgid "Repository '%s' has been successfully enabled."
 msgstr ""
 
-#: src/repos.cc:1637
+#: src/repos.cc:1625
 #, c-format, boost-format
 msgid "Repository '%s' has been successfully disabled."
 msgstr ""
 
-#: src/repos.cc:1644
+#: src/repos.cc:1632
 #, c-format, boost-format
 msgid "Autorefresh has been enabled for repository '%s'."
 msgstr ""
 
-#: src/repos.cc:1646
+#: src/repos.cc:1634
 #, c-format, boost-format
 msgid "Autorefresh has been disabled for repository '%s'."
 msgstr ""
 
-#: src/repos.cc:1653
+#: src/repos.cc:1641
 #, c-format, boost-format
 msgid "RPM files caching has been enabled for repository '%s'."
 msgstr ""
 
-#: src/repos.cc:1655
+#: src/repos.cc:1643
 #, c-format, boost-format
 msgid "RPM files caching has been disabled for repository '%s'."
 msgstr ""
 
-#: src/repos.cc:1662
+#: src/repos.cc:1650
 #, c-format, boost-format
 msgid "GPG check has been enabled for repository '%s'."
 msgstr ""
 
-#: src/repos.cc:1664
+#: src/repos.cc:1652
 #, c-format, boost-format
 msgid "GPG check has been disabled for repository '%s'."
 msgstr ""
 
-#: src/repos.cc:1670
+#: src/repos.cc:1658
 #, c-format, boost-format
 msgid "Repository '%s' priority has been set to %d."
 msgstr ""
 
-#: src/repos.cc:1676
+#: src/repos.cc:1664
 #, c-format, boost-format
 msgid "Name of repository '%s' has been set to '%s'."
 msgstr ""
 
-#: src/repos.cc:1687
+#: src/repos.cc:1675
 #, c-format, boost-format
 msgid "Nothing to change for repository '%s'."
 msgstr ""
 
-#: src/repos.cc:1694
+#: src/repos.cc:1682
 #, c-format, boost-format
 msgid "Leaving repository %s unchanged."
 msgstr ""
 
-#: src/repos.cc:1781
+#: src/repos.cc:1769
 msgid "Loading repository data..."
 msgstr ""
 
-#: src/repos.cc:1783
-msgid "No repositories defined. Operating only with the installed resolvables. Nothing can be installed."
+#: src/repos.cc:1771
+msgid ""
+"No repositories defined. Operating only with the installed resolvables. "
+"Nothing can be installed."
 msgstr ""
 
-#: src/repos.cc:1803
+#: src/repos.cc:1791
 #, c-format, boost-format
 msgid "Retrieving repository '%s' data..."
 msgstr ""
 
-#: src/repos.cc:1809
+#: src/repos.cc:1797
 #, c-format, boost-format
 msgid "Repository '%s' not cached. Caching..."
 msgstr ""
 
-#: src/repos.cc:1815 src/repos.cc:1849
+#: src/repos.cc:1803 src/repos.cc:1837
 #, c-format, boost-format
 msgid "Problem loading data from '%s'"
 msgstr ""
 
-#: src/repos.cc:1819
+#: src/repos.cc:1807
 #, c-format, boost-format
 msgid "Repository '%s' could not be refreshed. Using old cache."
 msgstr ""
 
-#: src/repos.cc:1823 src/repos.cc:1852
+#: src/repos.cc:1811 src/repos.cc:1840
 #, c-format, boost-format
 msgid "Resolvables from '%s' not loaded because of error."
 msgstr ""
 
-#: src/repos.cc:1840
+#: src/repos.cc:1828
 #, c-format, boost-format
-msgid "Repository '%s' appears to be outdated. Consider using a different mirror or server."
+msgid ""
+"Repository '%s' appears to be outdated. Consider using a different mirror or "
+"server."
 msgstr ""
 
 #. translators: the first %s is 'zypper refresh' and the second 'zypper clean -m'
-#: src/repos.cc:1851
+#: src/repos.cc:1839
 #, c-format, boost-format
 msgid "Try '%s', or even '%s' before doing so."
 msgstr ""
 
-#: src/repos.cc:1862
+#: src/repos.cc:1850
 msgid "Reading installed packages..."
 msgstr ""
 
-#: src/repos.cc:1871
+#: src/repos.cc:1859
 msgid "Problem occurred while reading the installed packages:"
 msgstr ""
 
-#: src/repos.cc:1888
+#: src/repos.cc:1876
 #, c-format, boost-format
 msgid "'%s' looks like an RPM file. Will try to download it."
 msgstr ""
 
-#: src/repos.cc:1897
+#: src/repos.cc:1885
 #, c-format, boost-format
 msgid "Problem with the RPM file specified as '%s', skipping."
 msgstr ""
 
-#: src/repos.cc:1919
+#: src/repos.cc:1907
 #, c-format, boost-format
 msgid "Problem reading the RPM header of %s. Is it an RPM file?"
 msgstr ""
 
-#: src/repos.cc:1939
+#: src/repos.cc:1927
 msgid "Plain RPM files cache"
 msgstr ""
 
@@ -5560,54 +5819,55 @@ msgstr ""
 
 #: src/solve-commit.cc:437
 #, c-format, boost-format
-msgid "Check for running processes using deleted libraries is disabled in zypper.conf. Run '%s' to check manually."
+msgid ""
+"Check for running processes using deleted libraries is disabled in zypper."
+"conf. Run '%s' to check manually."
 msgstr ""
 
 #: src/solve-commit.cc:453
 msgid "Skip check:"
 msgstr ""
 
-#: src/solve-commit.cc:461
-#, c-format, boost-format
-msgid "There are some running programs that might use files deleted by recent upgrade. You may wish to check and restart some of them. Run '%s' to list these programs."
-msgstr ""
-
-#. bsc#859480: Rephrased and added for translation switch if core translations are available.
-#: src/solve-commit.cc:466
+#: src/solve-commit.cc:460
 #, boost-format
-msgid "There are running programs which still use files and libraries deleted or updated by recent upgrades. They should be restarted to benefit from the latest updates. Run '%1%' to list these programs."
+msgid ""
+"There are running programs which still use files and libraries deleted or "
+"updated by recent upgrades. They should be restarted to benefit from the "
+"latest updates. Run '%1%' to list these programs."
 msgstr ""
 
-#: src/solve-commit.cc:481
+#: src/solve-commit.cc:474
 msgid "Update notifications were received from the following packages:"
 msgstr ""
 
-#: src/solve-commit.cc:490
+#: src/solve-commit.cc:483
 #, c-format, boost-format
 msgid "Message from package %s:"
 msgstr ""
 
-#: src/solve-commit.cc:498
+#: src/solve-commit.cc:491
 msgid "y/n"
 msgstr ""
 
-#: src/solve-commit.cc:499
+#: src/solve-commit.cc:492
 msgid "View the notifications now?"
 msgstr ""
 
-#: src/solve-commit.cc:545
+#: src/solve-commit.cc:538
 msgid "Computing distribution upgrade..."
 msgstr ""
 
-#: src/solve-commit.cc:550
+#: src/solve-commit.cc:543
 msgid "Resolving package dependencies..."
 msgstr ""
 
-#: src/solve-commit.cc:605
-msgid "Some of the dependencies of installed packages are broken. In order to fix these dependencies, the following actions need to be taken:"
+#: src/solve-commit.cc:598
+msgid ""
+"Some of the dependencies of installed packages are broken. In order to fix "
+"these dependencies, the following actions need to be taken:"
 msgstr ""
 
-#: src/solve-commit.cc:612
+#: src/solve-commit.cc:605
 msgid "Root privileges are required to fix broken package dependencies."
 msgstr ""
 
@@ -5621,76 +5881,81 @@ msgstr ""
 #. The answers should be lower case letters, but in general, any UTF-8
 #. string will do.
 #. ! \todo add c for changelog and x for explain (show the dep tree)
-#: src/solve-commit.cc:634
+#: src/solve-commit.cc:627
 msgid "y/n/p/v/a/r/m/d/g"
 msgstr ""
 
 #. translators: help text for 'y' option in the 'Continue?' prompt
-#: src/solve-commit.cc:639
-msgid "Yes, accept the summary and proceed with installation/removal of packages."
+#: src/solve-commit.cc:632
+msgid ""
+"Yes, accept the summary and proceed with installation/removal of packages."
 msgstr ""
 
 #. translators: help text for 'n' option in the 'Continue?' prompt
-#: src/solve-commit.cc:641
+#: src/solve-commit.cc:634
 msgid "No, cancel the operation."
 msgstr ""
 
 #. translators: help text for 'p' option in the 'Continue?' prompt
-#: src/solve-commit.cc:643
-msgid "Restart solver in no-force-resolution mode in order to show dependency problems."
+#: src/solve-commit.cc:636
+msgid ""
+"Restart solver in no-force-resolution mode in order to show dependency "
+"problems."
 msgstr ""
 
 #. translators: help text for 'v' option in the 'Continue?' prompt
-#: src/solve-commit.cc:645
+#: src/solve-commit.cc:638
 msgid "Toggle display of package versions."
 msgstr ""
 
 #. translators: help text for 'a' option in the 'Continue?' prompt
-#: src/solve-commit.cc:647
+#: src/solve-commit.cc:640
 msgid "Toggle display of package architectures."
 msgstr ""
 
 #. translators: help text for 'r' option in the 'Continue?' prompt
-#: src/solve-commit.cc:649
-msgid "Toggle display of repositories from which the packages will be installed."
+#: src/solve-commit.cc:642
+msgid ""
+"Toggle display of repositories from which the packages will be installed."
 msgstr ""
 
 #. translators: help text for 'm' option in the 'Continue?' prompt
-#: src/solve-commit.cc:651
+#: src/solve-commit.cc:644
 msgid "Toggle display of package vendor names."
 msgstr ""
 
 #. translators: help text for 'd' option in the 'Continue?' prompt
-#: src/solve-commit.cc:653
+#: src/solve-commit.cc:646
 msgid "Toggle between showing all details and as few details as possible."
 msgstr ""
 
 #. translators: help text for 'g' option in the 'Continue?' prompt
-#: src/solve-commit.cc:655
+#: src/solve-commit.cc:648
 msgid "View the summary in pager."
 msgstr ""
 
-#: src/solve-commit.cc:765
+#: src/solve-commit.cc:758
 msgid "committing"
 msgstr ""
 
-#: src/solve-commit.cc:767
+#: src/solve-commit.cc:760
 msgid "(dry run)"
 msgstr ""
 
-#: src/solve-commit.cc:791 src/solve-commit.cc:824
+#: src/solve-commit.cc:784 src/solve-commit.cc:817
 msgid "Problem retrieving the package file from the repository:"
 msgstr ""
 
 #. translators: the first %s is 'zypper refresh' and the second is repo alias
-#: src/solve-commit.cc:821
+#: src/solve-commit.cc:814
 #, c-format, boost-format
 msgid "Repository '%s' is out of date. Running '%s' might help."
 msgstr ""
 
-#: src/solve-commit.cc:832
+#: src/solve-commit.cc:825
 msgid ""
-"The package integrity check failed. This may be a problem with the repository or media. Try one of the following:\n"
+"The package integrity check failed. This may be a problem with the "
+"repository or media. Try one of the following:\n"
 "\n"
 "- just retry previous command\n"
 "- refresh the repositories using 'zypper refresh'\n"
@@ -5698,28 +5963,32 @@ msgid ""
 "- use another repository"
 msgstr ""
 
-#: src/solve-commit.cc:846
+#: src/solve-commit.cc:839
 msgid "Problem occurred during or after installation or removal of packages:"
 msgstr ""
 
-#: src/solve-commit.cc:854
+#: src/solve-commit.cc:847
 msgid "Installation has completed with error."
 msgstr ""
 
-#: src/solve-commit.cc:856
+#: src/solve-commit.cc:849
 #, boost-format
 msgid "You may run '%1%' to repair any dependency problems."
 msgstr ""
 
-#: src/solve-commit.cc:870
-msgid "One of the installed patches requires a reboot of your machine. Reboot as soon as possible."
+#: src/solve-commit.cc:863
+msgid ""
+"One of the installed patches requires a reboot of your machine. Reboot as "
+"soon as possible."
 msgstr ""
 
-#: src/solve-commit.cc:878
-msgid "One of the installed patches affects the package manager itself. Run this command once more to install any other needed patches."
+#: src/solve-commit.cc:871
+msgid ""
+"One of the installed patches affects the package manager itself. Run this "
+"command once more to install any other needed patches."
 msgstr ""
 
-#: src/solve-commit.cc:896
+#: src/solve-commit.cc:889
 msgid "Dependencies of all installed packages are satisfied."
 msgstr ""
 
@@ -5937,7 +6206,9 @@ msgstr ""
 
 #: src/utils/flags/flagtypes.cc:192
 #, c-format, boost-format
-msgid "Ignoring %s without argument because similar option with an argument has been specified."
+msgid ""
+"Ignoring %s without argument because similar option with an argument has "
+"been specified."
 msgstr ""
 
 #: src/utils/flags/flagtypes.cc:232
@@ -5984,12 +6255,16 @@ msgstr ""
 
 #: src/utils/messages.cc:99
 #, c-format, boost-format
-msgid "You have chosen to ignore a problem with download or installation of a package which might lead to broken dependencies of other packages. It is recommended to run '%s' after the operation has finished."
+msgid ""
+"You have chosen to ignore a problem with download or installation of a "
+"package which might lead to broken dependencies of other packages. It is "
+"recommended to run '%s' after the operation has finished."
 msgstr ""
 
 #: src/utils/messages.cc:111
 #, boost-format
-msgid "Legacy commandline option %1% detected. Please use global option %2% instead."
+msgid ""
+"Legacy commandline option %1% detected. Please use global option %2% instead."
 msgstr ""
 
 #: src/utils/messages.cc:112
@@ -6014,14 +6289,18 @@ msgstr ""
 #. translators: The word 'subcommand' also refers to a zypper command and should not be translated.
 #: src/utils/messages.cc:142
 #, boost-format
-msgid "In case '%1%' is not a typo it's probably not a built-in command, but provided as a subcommand or plug-in (see '%2%')."
+msgid ""
+"In case '%1%' is not a typo it's probably not a built-in command, but "
+"provided as a subcommand or plug-in (see '%2%')."
 msgstr ""
 
 #. translators: %1% and %2% are plug-in packages which might provide it.
 #. translators: The word 'subcommand' also refers to a zypper command and should not be translated.
 #: src/utils/messages.cc:149
 #, boost-format
-msgid "In this case a specific package providing the subcommand needs to be installed first. Those packages are often named '%1%' or '%2%'."
+msgid ""
+"In this case a specific package providing the subcommand needs to be "
+"installed first. Those packages are often named '%1%' or '%2%'."
 msgstr ""
 
 #: src/utils/misc.cc:91
@@ -6248,5 +6527,7 @@ msgid "Enter '%s' for '%s' or '%s' for '%s' if nothing else works for you."
 msgstr ""
 
 #: src/utils/prompt.cc:428
-msgid "If nothing else works enter '#1' to select the 1st option, '#2' for the 2nd one, ..."
+msgid ""
+"If nothing else works enter '#1' to select the 1st option, '#2' for the 2nd "
+"one, ..."
 msgstr ""

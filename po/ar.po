@@ -11,11 +11,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-25 14:33+0100\n"
+"POT-Creation-Date: 2019-05-20 10:18+0200\n"
 "PO-Revision-Date: 2019-03-21 12:49+0000\n"
 "Last-Translator: Iman Abd Elaziz <Iman.AbdelAziz@arabize.com>\n"
-"Language-Team: Arabic <https://l10n.opensuse.org/projects/zypper/master/ar/>"
-"\n"
+"Language-Team: Arabic <https://l10n.opensuse.org/projects/zypper/master/ar/"
+">\n"
 "Language: ar\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -421,35 +421,35 @@ msgstr "قبول الحزمة على الرغم من وجود الخطأ."
 msgid "Running: %s  (%s, %s)"
 msgstr "تشغيل: %s (%s و%s)"
 
-#. translators: This text is a progress display label e.g. "Removing packagename-x.x.x [42%]"
-#: src/callbacks/rpm.h:250
-#, c-format, boost-format
-msgid "Removing %s"
-msgstr "إزالة %s"
-
-#: src/callbacks/rpm.h:273
+#: src/callbacks/rpm.h:267
 #, c-format, boost-format
 msgid "Removal of %s failed:"
 msgstr "فشلت إزالة %s:"
 
-#. TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
-#: src/callbacks/rpm.h:316
+#. translators: This text is a progress display label e.g. "Removing packagename-x.x.x [42%]"
+#: src/callbacks/rpm.h:307
 #, c-format, boost-format
-msgid "Installing: %s"
-msgstr "التثبيت: %s"
+msgid "Removing %s"
+msgstr "إزالة %s"
 
-#: src/callbacks/rpm.h:339
+#: src/callbacks/rpm.h:344
 #, c-format, boost-format
 msgid "Installation of %s failed:"
 msgstr "فشل تثبيت %s:"
 
+#. TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
+#: src/callbacks/rpm.h:384
+#, c-format, boost-format
+msgid "Installing: %s"
+msgstr "التثبيت: %s"
+
 #. TranslatorExplanation A progressbar label
-#: src/callbacks/rpm.h:383
+#: src/callbacks/rpm.h:405
 msgid "Checking for file conflicts:"
 msgstr "التحقق من وجود تعارض في الملفات:"
 
 #. TranslatorExplanation %1%(commandline option)
-#: src/callbacks/rpm.h:417
+#: src/callbacks/rpm.h:439
 #, boost-format
 msgid ""
 "Checking for file conflicts requires not installed packages to be downloaded "
@@ -461,7 +461,7 @@ msgstr ""
 "zypper لمزيد من التفاصيل."
 
 #. TranslatorExplanation %1%(number of packages); detailed list follows
-#: src/callbacks/rpm.h:424
+#: src/callbacks/rpm.h:446
 #, boost-format
 msgid ""
 "The following package had to be excluded from file conflicts check because "
@@ -488,7 +488,7 @@ msgstr[5] ""
 "بعد:"
 
 #. TranslatorExplanation %1%(number of conflicts); detailed list follows
-#: src/callbacks/rpm.h:435
+#: src/callbacks/rpm.h:457
 #, boost-format
 msgid "Detected %1% file conflict:"
 msgid_plural "Detected %1% file conflicts:"
@@ -499,12 +499,12 @@ msgstr[3] "تم الكشف عن %1% تعارضات الملفات:"
 msgstr[4] "تم الكشف عن %1% تعارض الملفات:"
 msgstr[5] "تم الكشف عن %1% من تعارضات الملفات:"
 
-#: src/callbacks/rpm.h:443
+#: src/callbacks/rpm.h:465
 msgid "Conflicting files will be replaced."
 msgstr "سيتم استبدال الملفات المتعارضة."
 
 #. TranslatorExplanation Problem description before asking whether to "Continue? [yes/no] (no):"
-#: src/callbacks/rpm.h:449
+#: src/callbacks/rpm.h:471
 msgid ""
 "File conflicts happen when two packages attempt to install files with the "
 "same name but different contents. If you continue, conflicting files will be "
@@ -686,7 +686,7 @@ msgstr "نوع"
 #. translators: property name; short; used like "Name: value"
 #: src/utils/flags/zyppflags.h:49 src/commands/repos/list.cc:42
 #: src/commands/repos/list.cc:268 src/commands/services/list.cc:116
-#: src/repos.cc:1267
+#: src/repos.cc:1255
 msgid "URI"
 msgstr "URI"
 
@@ -2309,7 +2309,7 @@ msgstr "PackageKit قيد التشغيل بالفعل (من المحتمل أن 
 msgid "Try again?"
 msgstr "هل تريد المحاولة مرة أخرى؟"
 
-#: src/Zypper.cc:248 src/Zypper.cc:712 src/commands/basecommand.cc:265
+#: src/Zypper.cc:248 src/Zypper.cc:712 src/commands/basecommand.cc:282
 msgid "Unexpected exception."
 msgstr "استثناء غير متوقع."
 
@@ -2570,10 +2570,10 @@ msgid ""
 "unconditionally on small or minimal systems, as it may easily add a large "
 "number of packages."
 msgstr ""
-"توصى الحزم المُثبتة حاليًا تثبيت الحزم المُضافة حديثًا. يعمل هذا الأمر أساسً"
-"ا على إعادة تقييم التوصيات الخاصة بكل الحزم المُثبتة وإدخال البيانات في "
-"النظام وفقًا لذلك. لن تحتاج إلى استدعاء هذا بدون داعٍ في الأنظمة الصغيرة "
-"والأقل حجمًا، لأن ذلك قد يؤدي بسهولة إلى إضافة عدد كبير من الحزم."
+"توصى الحزم المُثبتة حاليًا تثبيت الحزم المُضافة حديثًا. يعمل هذا الأمر أساسًا على "
+"إعادة تقييم التوصيات الخاصة بكل الحزم المُثبتة وإدخال البيانات في النظام وفقًا "
+"لذلك. لن تحتاج إلى استدعاء هذا بدون داعٍ في الأنظمة الصغيرة والأقل حجمًا، لأن "
+"ذلك قد يؤدي بسهولة إلى إضافة عدد كبير من الحزم."
 
 #. translators: command description, %1% is a zypper command
 #: src/commands/inrverify.cc:98
@@ -2584,8 +2584,8 @@ msgid ""
 "added e.g. new hardware or driver repos."
 msgstr ""
 "يُطلق عليه '%1%'، ويقوم بتقييد الأمر بحيث يبحث فقط عن الحزم التي تدعم أنظمة "
-"الملفات أو اللغات أو الأجهزة المتاحة. يكون ذلك مفيدًا بعد إضافة مستودع "
-"برنامج تشغيل أو جهاز جديد، على سبيل المثال."
+"الملفات أو اللغات أو الأجهزة المتاحة. يكون ذلك مفيدًا بعد إضافة مستودع برنامج "
+"تشغيل أو جهاز جديد، على سبيل المثال."
 
 #. translators: command description
 #: src/commands/inrverify.cc:101
@@ -2596,26 +2596,26 @@ msgstr ""
 "التحقق مما إذا كان يتم استيفاء تبعيات الحزم المثبتّة واقتراح تثبيت الحزم أو "
 "إزالتها لإصلاح مشكلات التبعيات."
 
-#: src/commands/installremove.cc:54
+#: src/commands/installremove.cc:62
 msgid "Select packages by plain name, not by capability."
 msgstr "تحديد الحزم حسب الاسم العادي، وليس حسب الإمكانية."
 
-#: src/commands/installremove.cc:55
+#: src/commands/installremove.cc:63
 msgid "Select packages solely by capability."
 msgstr "تحديد الحزم حسب الإمكانية فقط."
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/commands/installremove.cc:74
+#: src/commands/installremove.cc:82
 msgid "remove (rm) [OPTIONS] <CAPABILITY> ..."
 msgstr "remove (rm) [خيارات] <إمكانية> ..."
 
 #. translators: command summary: remove, rm
-#: src/commands/installremove.cc:76
+#: src/commands/installremove.cc:84
 msgid "Remove packages."
 msgstr "إزالة الحزم."
 
 #. translators: command description
-#: src/commands/installremove.cc:78
+#: src/commands/installremove.cc:86
 msgid ""
 "Remove packages with specified capabilities. A capability is NAME[.ARCH]"
 "[OP<VERSION>], where OP is one of <, <=, =, >=, >."
@@ -2623,20 +2623,20 @@ msgstr ""
 "إزالة الحزم ذات الإمكانيات المحددة. الإمكانية هي NAME[.ARCH][OP<VERSION>]، "
 "حيث تمثل قيمة OP إحدى  قيم <، <=، =، >=، >."
 
-#: src/commands/installremove.cc:96 src/commands/installremove.cc:218
+#: src/commands/installremove.cc:104 src/commands/installremove.cc:226
 #: src/utils/messages.cc:53
 msgid "Too few arguments."
 msgstr "الوسيطات قليلة للغاية."
 
-#: src/commands/installremove.cc:97 src/commands/installremove.cc:219
+#: src/commands/installremove.cc:105 src/commands/installremove.cc:227
 msgid "At least one package name is required."
 msgstr "مطلوب اسم حزمة واحد على الأقل."
 
-#: src/commands/installremove.cc:108
+#: src/commands/installremove.cc:116
 msgid "Cannot uninstall patches."
 msgstr "تعذر إلغاء تثبيت التصحيحات."
 
-#: src/commands/installremove.cc:109
+#: src/commands/installremove.cc:117
 msgid ""
 "Installed status of a patch is determined solely based on its dependencies.\n"
 "Patches are not installed in sense of copied files, database records,\n"
@@ -2646,22 +2646,22 @@ msgstr ""
 "لا يتم تثبيت التصحيحات عند وجود ملفات منسوخة، أو سجلات قواعد البيانات \n"
 "أو ما شابه ذلك."
 
-#: src/commands/installremove.cc:118
+#: src/commands/installremove.cc:126
 msgid "Uninstallation of a source package not defined and implemented."
 msgstr "إلغاء تثبيت حزمة لم يتم تحديدها وتنفيذها."
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/commands/installremove.cc:160
+#: src/commands/installremove.cc:168
 msgid "install (in) [OPTIONS] <CAPABILITY|RPM_FILE_URI> ..."
 msgstr "install (in) [خيارات] <capability|rpm_file_uri> ..."
 
 #. translators: command summary: install, in
-#: src/commands/installremove.cc:162
+#: src/commands/installremove.cc:170
 msgid "Install packages."
 msgstr "تثبيت الحزم."
 
 #. translators: command description
-#: src/commands/installremove.cc:164
+#: src/commands/installremove.cc:172
 msgid ""
 "Install packages with specified capabilities or RPM files with specified "
 "location. A capability is NAME[.ARCH][OP<VERSION>], where OP is one of <, "
@@ -2672,12 +2672,12 @@ msgstr ""
 "<=، =، >=، >."
 
 #. translators: --from <ALIAS|#|URI>
-#: src/commands/installremove.cc:179
+#: src/commands/installremove.cc:187
 msgid "Select packages from the specified repository."
 msgstr "تحديد الحزم من المخزن المحدد."
 
 #. translators: --oldpackage
-#: src/commands/installremove.cc:183
+#: src/commands/installremove.cc:191
 msgid ""
 "Allow to replace a newer item with an older one. Handy if you are doing a "
 "rollback. Unlike --force it will not enforce a reinstall."
@@ -2685,12 +2685,12 @@ msgstr ""
 "السماح باستبدال العناصر القديمة بالجديدة. متوفر إذا كنت تقوم بالإرجاع. على "
 "عكس --force لن ينفذ عملية إعادة تثبيت."
 
-#: src/commands/installremove.cc:187
+#: src/commands/installremove.cc:195
 msgid "Silently install unsigned rpm packages given as commandline parameters."
 msgstr "قم بتثبيت تلقائيًا حزم rpm غير الموقعة المحددة كمعلمات سطر الأوامر."
 
 #. translators: -f, --force
-#: src/commands/installremove.cc:192
+#: src/commands/installremove.cc:200
 msgid ""
 "Install even if the item is already installed (reinstall), downgraded or "
 "changes vendor or architecture."
@@ -2700,11 +2700,11 @@ msgstr ""
 
 #. translators: rug related message, shown if
 #. 'zypper in --entire-catalog foorepo someargument' is specified
-#: src/commands/installremove.cc:230
+#: src/commands/installremove.cc:238
 msgid "Ignoring arguments, marking the entire repository."
 msgstr "تجاهل الوسيطات، ووضع علامة على المخزن الكامل."
 
-#: src/commands/installremove.cc:243 src/commands/sourceinstall.cc:92
+#: src/commands/installremove.cc:251 src/commands/sourceinstall.cc:92
 msgid "No valid arguments specified."
 msgstr "لم يتم تحديد أية وسيطات صالحة."
 
@@ -3725,26 +3725,26 @@ msgstr "الاسم المستعار"
 #. 'enabled' flag
 #. translators: property name; short; used like "Name: value"
 #: src/commands/repos/list.cc:47 src/commands/repos/list.cc:230
-#: src/commands/services/list.cc:106 src/repos.cc:1269
+#: src/commands/services/list.cc:106 src/repos.cc:1257
 msgid "Enabled"
 msgstr "مُمكّن"
 
 #. GPG Check
 #. translators: property name; short; used like "Name: value"
 #: src/commands/repos/list.cc:48 src/commands/repos/list.cc:234
-#: src/commands/services/list.cc:107 src/repos.cc:1271
+#: src/commands/services/list.cc:107 src/repos.cc:1259
 msgid "GPG Check"
 msgstr "التحقق من GPG"
 
 #. translators: repository priority (in zypper repos -p or -d)
 #. translators: property name; short; used like "Name: value"
 #: src/commands/repos/list.cc:49 src/commands/repos/list.cc:252
-#: src/commands/services/list.cc:113 src/repos.cc:1275
+#: src/commands/services/list.cc:113 src/repos.cc:1263
 msgid "Priority"
 msgstr "الأولوية"
 
 #. translators: property name; short; used like "Name: value"
-#: src/commands/repos/list.cc:50 src/repos.cc:1273
+#: src/commands/repos/list.cc:50 src/repos.cc:1261
 msgid "Autorefresh"
 msgstr "تجديد تلقائي"
 
@@ -3797,7 +3797,7 @@ msgstr "إدراج كل المخازن المحددة."
 msgid "Export all defined repositories as a single local .repo file."
 msgstr "تصدير كل المخازن المحددة كملف .repo محلي فردي."
 
-#: src/commands/repos/list.cc:118 src/repos.cc:1024
+#: src/commands/repos/list.cc:118 src/repos.cc:1012
 msgid "Error reading repositories:"
 msgstr "حدث خطأ أثناء قراءة المخازن:"
 
@@ -3924,7 +3924,7 @@ msgstr "لا يُحدث الخيار العام '%s' أي تأثير هنا."
 msgid "Arguments are not allowed if '%s' is used."
 msgstr "غير مسموح بالوسيطات في حالة استخدام '%s'."
 
-#: src/commands/repos/refresh.cc:195 src/repos.cc:1036
+#: src/commands/repos/refresh.cc:195 src/repos.cc:1024
 msgid "Specified repositories: "
 msgstr "المخازن المحددة: "
 
@@ -3943,7 +3943,7 @@ msgstr "مسح محتويات المخزن '%s' الذي تم تعطيله."
 msgid "Skipping disabled repository '%s'"
 msgstr "تخطي المخزن '%s' الذي تم تعطيله"
 
-#: src/commands/repos/refresh.cc:262 src/repos.cc:862 src/repos.cc:895
+#: src/commands/repos/refresh.cc:262 src/repos.cc:862 src/repos.cc:905
 #, c-format, boost-format
 msgid "Skipping repository '%s' because of the above error."
 msgstr "تخطي المخزن '%s' بسبب الخطأ أعلاه."
@@ -3970,7 +3970,7 @@ msgstr "استخدم الأمرين '%s' أو '%s' لإضافة مخازن أو 
 msgid "Could not refresh the repositories because of errors."
 msgstr "تعذر تجديد المخازن بسبب حدوث أخطاء."
 
-#: src/commands/repos/refresh.cc:298 src/repos.cc:946
+#: src/commands/repos/refresh.cc:298 src/repos.cc:934
 msgid "Some of the repositories have not been refreshed because of an error."
 msgstr "لم يتم تجديد بعض المخازن بسبب حدوث خطأ."
 
@@ -4027,12 +4027,12 @@ msgstr ""
 msgid "Repository '%s' renamed to '%s'."
 msgstr "تمت إعادة تسمية المخزن '%s' إلى '%s'."
 
-#: src/commands/repos/rename.cc:47 src/repos.cc:1215
+#: src/commands/repos/rename.cc:47 src/repos.cc:1203
 #, c-format, boost-format
 msgid "Repository named '%s' already exists. Please use another alias."
 msgstr "المخزن بالاسم '%s' موجود بالفعل. الرجاء استخدام اسم مستعار آخر."
 
-#: src/commands/repos/rename.cc:52 src/repos.cc:1693
+#: src/commands/repos/rename.cc:52 src/repos.cc:1681
 msgid "Error while modifying the repository:"
 msgstr "حدث خطأ أثناء تعديل المخزن:"
 
@@ -4433,7 +4433,7 @@ msgstr "حدثت مشكلة أثناء تهيئة استعلام البحث أو
 msgid "See the above message for a hint."
 msgstr "راجع الرسالة أعلاه للحصول على تلميح."
 
-#: src/commands/search/search.cc:459 src/repos.cc:1003
+#: src/commands/search/search.cc:459 src/repos.cc:991
 msgid "Running 'zypper refresh' as root might resolve the problem."
 msgstr "قد يؤدي تشغيل 'zypper refresh' كجذر إلى حل المشكلة."
 
@@ -4518,7 +4518,7 @@ msgid "Problem retrieving the repository index file for service '%s':"
 msgstr "حدثت مشكلة أثناء استرداد ملف فهرس المخازن للخدمة '%s':"
 
 #: src/commands/services/common.cc:138 src/commands/services/refresh.cc:226
-#: src/repos.cc:1745
+#: src/repos.cc:1733
 #, c-format, boost-format
 msgid "Skipping service '%s' because of the above error."
 msgstr "تخطي خدمة '%s' بسبب حدوث الخطأ أعلاه."
@@ -5153,7 +5153,7 @@ msgstr ""
 msgid "Argument resolves to no package"
 msgstr "الوسيطة لا تتحلل إلى حزمة"
 
-#: src/commands/utils/download.cc:246 src/solve-commit.cc:898
+#: src/commands/utils/download.cc:246 src/solve-commit.cc:891
 msgid "Nothing to do."
 msgstr "لا يوجد ما يمكن إجراؤه."
 
@@ -5909,8 +5909,8 @@ msgstr "حدث خطأ أثناء تعطيل المخزن '%s'."
 msgid "Problem retrieving files from '%s'."
 msgstr "حدثت مشكلة أثناء استرداد الملفات من '%s'."
 
-#: src/repos.cc:346 src/repos.cc:1872 src/solve-commit.cc:792
-#: src/solve-commit.cc:823 src/solve-commit.cc:847
+#: src/repos.cc:346 src/repos.cc:1860 src/solve-commit.cc:785
+#: src/solve-commit.cc:816 src/solve-commit.cc:840
 msgid "Please see the above error message for a hint."
 msgstr "الرجاء مراجعة رسالة الخطأ أعلاه للحصول على تلميح."
 
@@ -6008,19 +6008,19 @@ msgstr "يمكن استخدام الأمرالعام '%s' لتمكين المس�
 msgid "Ignoring repository '%s' because of '%s' option."
 msgstr "تجاهل المخزن '%s' بسبب الخيار '%s'."
 
-#: src/repos.cc:831 src/repos.cc:931
+#: src/repos.cc:831 src/repos.cc:919
 #, c-format, boost-format
 msgid "Temporarily enabling repository '%s'."
 msgstr "تمكين المخزن '%s' مؤقتًا."
 
-#: src/repos.cc:881
+#: src/repos.cc:883
 #, c-format, boost-format
 msgid ""
 "Repository '%s' is out-of-date. You can run 'zypper refresh' as root to "
 "update it."
 msgstr "المخزن '%s' قديم. يمكنك تشغيل 'zypper refresh' كجذر لتحديثه."
 
-#: src/repos.cc:913
+#: src/repos.cc:900
 #, c-format, boost-format
 msgid ""
 "The metadata cache needs to be built for the '%s' repository. You can run "
@@ -6029,84 +6029,79 @@ msgstr ""
 "يلزم بناء الذاكرة المؤقتة لبيانات التعريف لمخزن '%s'. يمكنك تشغيل 'zypper "
 "refresh' كجذر للقيام بذلك."
 
-#: src/repos.cc:917
-#, c-format, boost-format
-msgid "Disabling repository '%s'."
-msgstr "تعطيل المخزن '%s'."
-
-#: src/repos.cc:938
+#: src/repos.cc:926
 #, c-format, boost-format
 msgid "Repository '%s' stays disabled."
 msgstr "المخزن '%s' لا يزال معطلاً."
 
-#: src/repos.cc:994
+#: src/repos.cc:982
 msgid "Initializing Target"
 msgstr "تهيئة الهدف"
 
-#: src/repos.cc:1002
+#: src/repos.cc:990
 msgid "Target initialization failed:"
 msgstr "فشلت تهيئة الهدف:"
 
-#: src/repos.cc:1084
+#: src/repos.cc:1072
 #, c-format, boost-format
 msgid "Cleaning metadata cache for '%s'."
 msgstr "تنظيف ذاكرة التخزين المؤقت لبيانات التعريف لـ '%s'."
 
-#: src/repos.cc:1092
+#: src/repos.cc:1080
 #, c-format, boost-format
 msgid "Cleaning raw metadata cache for '%s'."
 msgstr "تنظيف ذاكرة التخزين المؤقت لبيانات التعريف الأولية لـ '%s'."
 
-#: src/repos.cc:1098
+#: src/repos.cc:1086
 #, c-format, boost-format
 msgid "Keeping raw metadata cache for %s '%s'."
 msgstr "الاحتفاظ بذاكرة التخزين المؤقت لبيانات التعريف الأولية لـ %s '%s'."
 
 #. translators: meaning the cached rpm files
-#: src/repos.cc:1105
+#: src/repos.cc:1093
 #, c-format, boost-format
 msgid "Cleaning packages for '%s'."
 msgstr "تنظيف الحزم لـ  '%s'."
 
-#: src/repos.cc:1113
+#: src/repos.cc:1101
 #, c-format, boost-format
 msgid "Cannot clean repository '%s' because of an error."
 msgstr "تعذر تنظيف المخزن '%s' بسبب حدوث خطأ."
 
-#: src/repos.cc:1124
+#: src/repos.cc:1112
 msgid "Cleaning installed packages cache."
 msgstr "تنظيف ذاكرة التخزين المؤقت للحزم المثبَّتة."
 
-#: src/repos.cc:1133
+#: src/repos.cc:1121
 msgid "Cannot clean installed packages cache because of an error."
 msgstr "لا يمكن تنظيف ذاكرة التخزين المؤقت للحزم المثبتة لوجود خطأ."
 
-#: src/repos.cc:1151
+#: src/repos.cc:1139
 msgid "Could not clean the repositories because of errors."
 msgstr "تعذر تنظيف المخازن بسبب حدوث أخطاء."
 
-#: src/repos.cc:1157
+#: src/repos.cc:1145
 msgid "Some of the repositories have not been cleaned up because of an error."
 msgstr "لم يتم تنظيف بعض المخازن بسبب حدوث خطأ."
 
-#: src/repos.cc:1162
+#: src/repos.cc:1150
 msgid "Specified repositories have been cleaned up."
 msgstr "تم تنظيف المخازن المحددة."
 
-#: src/repos.cc:1164
+#: src/repos.cc:1152
 msgid "All repositories have been cleaned up."
 msgstr "تم تنظيف كل المخازن."
 
-#: src/repos.cc:1186
+#: src/repos.cc:1174
 msgid "This is a changeable read-only media (CD/DVD), disabling autorefresh."
 msgstr "هذه وسائط (CD/DVD) للقراءة فقط قابلة للتغيير، تعطيل التجديد التلقائي."
 
-#: src/repos.cc:1207
+#: src/repos.cc:1195
 #, c-format, boost-format
 msgid "Invalid repository alias: '%s'"
 msgstr "الاسم المستعار للمخزن غير صالح: '%s'"
 
-#: src/repos.cc:1224
+#: src/repos.cc:1212
 msgid ""
 "Could not determine the type of the repository. Please check if the defined "
 "URIs (see below) point to a valid repository:"
@@ -6114,25 +6109,25 @@ msgstr ""
 "تعذر تحديد نوع المخزن. الرجاء التحقق مما إذا كانت محددات URI (انظر أدناه) "
 "تشير إلى مخزن صالح:"
 
-#: src/repos.cc:1230
+#: src/repos.cc:1218
 msgid "Can't find a valid repository at given location:"
 msgstr "تعذر العثور على مخزن صالح في الموقع المحدد:"
 
-#: src/repos.cc:1238
+#: src/repos.cc:1226
 msgid "Problem transferring repository data from specified URI:"
 msgstr "حدثت مشكلة أثناء نقل بيانات المخزن من URI المحدد:"
 
-#: src/repos.cc:1239
+#: src/repos.cc:1227
 msgid "Please check whether the specified URI is accessible."
 msgstr "الرجاء التحقق من إمكانية الوصول إلى URI المحدد."
 
-#: src/repos.cc:1246
+#: src/repos.cc:1234
 msgid "Unknown problem when adding repository:"
 msgstr "حدثت مشكلة غير معروفة أثناء إضافة المخزن:"
 
 #. translators: BOOST STYLE POSITIONAL DIRECTIVES ( %N% )
 #. translators: %1% - a repository name
-#: src/repos.cc:1256
+#: src/repos.cc:1244
 #, boost-format
 msgid ""
 "GPG checking is disabled in configuration of repository '%1%'. Integrity and "
@@ -6141,135 +6136,135 @@ msgstr ""
 "تم تعطيل التحقق من مفتاح GPG في إعداد مستودع '%1%'. لا يمكن التحقق من سلامة "
 "وأصل الحزم."
 
-#: src/repos.cc:1261
+#: src/repos.cc:1249
 #, c-format, boost-format
 msgid "Repository '%s' successfully added"
 msgstr "تمت إضافة المخزن '%s' بنجاح"
 
-#: src/repos.cc:1287
+#: src/repos.cc:1275
 #, c-format, boost-format
 msgid "Reading data from '%s' media"
 msgstr "قراءة البيانات من وسائط '%s'"
 
-#: src/repos.cc:1293
+#: src/repos.cc:1281
 #, c-format, boost-format
 msgid "Problem reading data from '%s' media"
 msgstr "حدثت مشكلة أثناء قراءة البيانات من وسائط '%s'"
 
-#: src/repos.cc:1294
+#: src/repos.cc:1282
 msgid "Please check if your installation media is valid and readable."
 msgstr "الرجاء التحقق من صلاحية وسائط التثبيت وقابليتها للقراءة."
 
-#: src/repos.cc:1301
+#: src/repos.cc:1289
 #, c-format, boost-format
 msgid "Reading data from '%s' media is delayed until next refresh."
 msgstr "تم تأخير قراءة البيانات من وسائط '%s' حتى التجديد التالي."
 
-#: src/repos.cc:1370
+#: src/repos.cc:1358
 msgid "Problem accessing the file at the specified URI"
 msgstr "حدثت مشكلة أثناء الوصول إلى الملف في URI المحدد"
 
-#: src/repos.cc:1371
+#: src/repos.cc:1359
 msgid "Please check if the URI is valid and accessible."
 msgstr "الرجاء التحقق من صلاحية URI وإمكانية الوصول إليه."
 
-#: src/repos.cc:1378
+#: src/repos.cc:1366
 msgid "Problem parsing the file at the specified URI"
 msgstr "حدثت مشكلة أثناء تحليل الملف في URI المحدد"
 
 #. TranslatorExplanation Don't translate the '.repo' string.
-#: src/repos.cc:1380
+#: src/repos.cc:1368
 msgid "Is it a .repo file?"
 msgstr "هل هو ملف .repo؟"
 
-#: src/repos.cc:1387
+#: src/repos.cc:1375
 msgid "Problem encountered while trying to read the file at the specified URI"
 msgstr "حدثت مشكلة أثناء محاولة قراءة الملف في URI المحدد"
 
-#: src/repos.cc:1400
+#: src/repos.cc:1388
 msgid "Repository with no alias defined found in the file, skipping."
 msgstr "تم العثور على مخزن بدون أي اسم مستعار تم تعريفه، تخطي."
 
-#: src/repos.cc:1406
+#: src/repos.cc:1394
 #, c-format, boost-format
 msgid "Repository '%s' has no URI defined, skipping."
 msgstr "لا يحتوي المخزن '%s' على أي محدد URI معرَّف، تخطي."
 
-#: src/repos.cc:1454
+#: src/repos.cc:1442
 #, c-format, boost-format
 msgid "Repository '%s' has been removed."
 msgstr "تمت إزالة المخزن '%s'."
 
-#: src/repos.cc:1602
+#: src/repos.cc:1590
 #, c-format, boost-format
 msgid "Repository '%s' priority has been left unchanged (%d)"
 msgstr "لم يتم تغيير الأولوية للمخزن '%s' مطلقًا (%d)"
 
-#: src/repos.cc:1635
+#: src/repos.cc:1623
 #, c-format, boost-format
 msgid "Repository '%s' has been successfully enabled."
 msgstr "تم تمكين المخزن '%s' بنجاح."
 
-#: src/repos.cc:1637
+#: src/repos.cc:1625
 #, c-format, boost-format
 msgid "Repository '%s' has been successfully disabled."
 msgstr "تم تعطيل المخزن '%s' بنجاح."
 
-#: src/repos.cc:1644
+#: src/repos.cc:1632
 #, c-format, boost-format
 msgid "Autorefresh has been enabled for repository '%s'."
 msgstr "تم تمكين التجديد التلقائي للمخزن '%s'."
 
-#: src/repos.cc:1646
+#: src/repos.cc:1634
 #, c-format, boost-format
 msgid "Autorefresh has been disabled for repository '%s'."
 msgstr "تم تعطيل التجديد التلقائي للمخزن '%s'."
 
-#: src/repos.cc:1653
+#: src/repos.cc:1641
 #, c-format, boost-format
 msgid "RPM files caching has been enabled for repository '%s'."
 msgstr "تم تمكين التخزين المؤقت لملفات RPM للمخزن '%s'."
 
-#: src/repos.cc:1655
+#: src/repos.cc:1643
 #, c-format, boost-format
 msgid "RPM files caching has been disabled for repository '%s'."
 msgstr "تم تعطيل التخزين المؤقت لملفات RPM للمخزن '%s'."
 
-#: src/repos.cc:1662
+#: src/repos.cc:1650
 #, c-format, boost-format
 msgid "GPG check has been enabled for repository '%s'."
 msgstr "تم تمكين التحقق من GPG للمخزن '%s'."
 
-#: src/repos.cc:1664
+#: src/repos.cc:1652
 #, c-format, boost-format
 msgid "GPG check has been disabled for repository '%s'."
 msgstr "تم تعطيل التحقق من GPG للمخزن '%s'."
 
-#: src/repos.cc:1670
+#: src/repos.cc:1658
 #, c-format, boost-format
 msgid "Repository '%s' priority has been set to %d."
 msgstr "تم تعيين أولوية المخزن '%s' إلى %d."
 
-#: src/repos.cc:1676
+#: src/repos.cc:1664
 #, c-format, boost-format
 msgid "Name of repository '%s' has been set to '%s'."
 msgstr "تم تعيين اسم المخزن '%s' إلى '%s'."
 
-#: src/repos.cc:1687
+#: src/repos.cc:1675
 #, c-format, boost-format
 msgid "Nothing to change for repository '%s'."
 msgstr "لم يطرأ أي تغيير على المخزن '%s'."
 
-#: src/repos.cc:1694
+#: src/repos.cc:1682
 #, c-format, boost-format
 msgid "Leaving repository %s unchanged."
 msgstr "ترك المخزن %s دون تغيير."
 
-#: src/repos.cc:1781
+#: src/repos.cc:1769
 msgid "Loading repository data..."
 msgstr "يتم الآن تحميل بيانات المخزن..."
 
-#: src/repos.cc:1783
+#: src/repos.cc:1771
 msgid ""
 "No repositories defined. Operating only with the installed resolvables. "
 "Nothing can be installed."
@@ -6277,32 +6272,32 @@ msgstr ""
 "لم يتم تحديد أي مخازن. يتم التشغيل بالتبعيات القابلة للتحليل المثبتة فقط. "
 "ولا يمكن تثبيت أي شيء آخر."
 
-#: src/repos.cc:1803
+#: src/repos.cc:1791
 #, c-format, boost-format
 msgid "Retrieving repository '%s' data..."
 msgstr "يتم الآن استرداد بيانات المخزن '%s'..."
 
-#: src/repos.cc:1809
+#: src/repos.cc:1797
 #, c-format, boost-format
 msgid "Repository '%s' not cached. Caching..."
 msgstr "لم يتم تخزين المخزن '%s' مؤقتًا. يتم الآن التخزين المؤقت..."
 
-#: src/repos.cc:1815 src/repos.cc:1849
+#: src/repos.cc:1803 src/repos.cc:1837
 #, c-format, boost-format
 msgid "Problem loading data from '%s'"
 msgstr "حدثت مشكلة أثناء تحميل البيانات من '%s'"
 
-#: src/repos.cc:1819
+#: src/repos.cc:1807
 #, c-format, boost-format
 msgid "Repository '%s' could not be refreshed. Using old cache."
 msgstr "تعذر تجديد المخزن '%s'. استخدام ذاكرة التخزين المؤقت القديمة."
 
-#: src/repos.cc:1823 src/repos.cc:1852
+#: src/repos.cc:1811 src/repos.cc:1840
 #, c-format, boost-format
 msgid "Resolvables from '%s' not loaded because of error."
 msgstr "لم يتم تحميل التبعيات القابلة للتحليل من '%s' بسبب حدوث خطأ."
 
-#: src/repos.cc:1840
+#: src/repos.cc:1828
 #, c-format, boost-format
 msgid ""
 "Repository '%s' appears to be outdated. Consider using a different mirror or "
@@ -6310,35 +6305,35 @@ msgid ""
 msgstr "يبدو أن المخزن '%s' قديم. استخدم خادم أو نسخة مختلفة."
 
 #. translators: the first %s is 'zypper refresh' and the second 'zypper clean -m'
-#: src/repos.cc:1851
+#: src/repos.cc:1839
 #, c-format, boost-format
 msgid "Try '%s', or even '%s' before doing so."
 msgstr "جرب '%s'، أو حتى '%s' قبل القيام بذلك."
 
-#: src/repos.cc:1862
+#: src/repos.cc:1850
 msgid "Reading installed packages..."
 msgstr "تتم الآن قراءة الحزم المثبَّتة..."
 
-#: src/repos.cc:1871
+#: src/repos.cc:1859
 msgid "Problem occurred while reading the installed packages:"
 msgstr "حدثت مشكلة أثناء قراءة الحزم المثبتة:"
 
-#: src/repos.cc:1888
+#: src/repos.cc:1876
 #, c-format, boost-format
 msgid "'%s' looks like an RPM file. Will try to download it."
 msgstr "'%s' يبدو كملف RPM. سنحاول إنزاله."
 
-#: src/repos.cc:1897
+#: src/repos.cc:1885
 #, c-format, boost-format
 msgid "Problem with the RPM file specified as '%s', skipping."
 msgstr "حدثت مشكلة في ملف RPM المحدد كـ '%s'، تخطي."
 
-#: src/repos.cc:1919
+#: src/repos.cc:1907
 #, c-format, boost-format
 msgid "Problem reading the RPM header of %s. Is it an RPM file?"
 msgstr "حدثت مشكلة أثناء قراءة رأس RPM الخاص بـ %s. هل هذا ملف RPM؟"
 
-#: src/repos.cc:1939
+#: src/repos.cc:1927
 msgid "Plain RPM files cache"
 msgstr "ذاكرة التخزين المؤقت لملفات RPM العادية"
 
@@ -6504,19 +6499,7 @@ msgstr ""
 msgid "Skip check:"
 msgstr "تخطي الفحص:"
 
-#: src/solve-commit.cc:461
-#, c-format, boost-format
-msgid ""
-"There are some running programs that might use files deleted by recent "
-"upgrade. You may wish to check and restart some of them. Run '%s' to list "
-"these programs."
-msgstr ""
-"توجد بعض البرامج قيد التشغيل، والتي قد تستخدم ملفات تم حذفها بواسطة الترقية "
-"الحديثة. قد تريد التحقق من بعض هذه البرامج وإعادة تشغيل بعض منها. قم بتشغيل "
-"'%s' لإدراج هذه البرامج."
-
-#. bsc#859480: Rephrased and added for translation switch if core translations are available.
-#: src/solve-commit.cc:466
+#: src/solve-commit.cc:460
 #, boost-format
 msgid ""
 "There are running programs which still use files and libraries deleted or "
@@ -6527,32 +6510,32 @@ msgstr ""
 "تحديثها بواسطة ترقيات حديثة. يجب أن تقوم بإعادة تشغيل هذه البرامج للاستفادة "
 "من آخر التحديثات. قم بتشغيل '%1%' لإدراج هذه البرامج."
 
-#: src/solve-commit.cc:481
+#: src/solve-commit.cc:474
 msgid "Update notifications were received from the following packages:"
 msgstr "تم استلام إعلامات التحديث من الحزم التالية:"
 
-#: src/solve-commit.cc:490
+#: src/solve-commit.cc:483
 #, c-format, boost-format
 msgid "Message from package %s:"
 msgstr "رسالة من الحزمة %s:"
 
-#: src/solve-commit.cc:498
+#: src/solve-commit.cc:491
 msgid "y/n"
 msgstr "نعم/لا"
 
-#: src/solve-commit.cc:499
+#: src/solve-commit.cc:492
 msgid "View the notifications now?"
 msgstr "هل تريد عرض الإعلامات الآن؟"
 
-#: src/solve-commit.cc:545
+#: src/solve-commit.cc:538
 msgid "Computing distribution upgrade..."
 msgstr "يتم احتساب ترقية التوزيع..."
 
-#: src/solve-commit.cc:550
+#: src/solve-commit.cc:543
 msgid "Resolving package dependencies..."
 msgstr "يتم الآن تحليل تبعيات الحزمة..."
 
-#: src/solve-commit.cc:605
+#: src/solve-commit.cc:598
 msgid ""
 "Some of the dependencies of installed packages are broken. In order to fix "
 "these dependencies, the following actions need to be taken:"
@@ -6560,7 +6543,7 @@ msgstr ""
 "تم تعطيل بعض تبعيات الحزم المثبَّتة. لإصلاح هذه التبعيات، يجب القيام "
 "بالإجراءات التالية:"
 
-#: src/solve-commit.cc:612
+#: src/solve-commit.cc:605
 msgid "Root privileges are required to fix broken package dependencies."
 msgstr "مطلوب امتيازات المسؤول لإصلاح تبعيات الحزمة المعطلة."
 
@@ -6574,79 +6557,79 @@ msgstr "مطلوب امتيازات المسؤول لإصلاح تبعيات ا�
 #. The answers should be lower case letters, but in general, any UTF-8
 #. string will do.
 #. ! \todo add c for changelog and x for explain (show the dep tree)
-#: src/solve-commit.cc:634
+#: src/solve-commit.cc:627
 msgid "y/n/p/v/a/r/m/d/g"
 msgstr ""
 "نعم/لا/المخزن/البائع/الهيكل/المخزن/إظهار المشكلات/التفاصيل/إظهار في المتصفح"
 
 #. translators: help text for 'y' option in the 'Continue?' prompt
-#: src/solve-commit.cc:639
+#: src/solve-commit.cc:632
 msgid ""
 "Yes, accept the summary and proceed with installation/removal of packages."
 msgstr "نعم، قبول الملخص ومتابعة تثبيت/إزالة الحزم."
 
 #. translators: help text for 'n' option in the 'Continue?' prompt
-#: src/solve-commit.cc:641
+#: src/solve-commit.cc:634
 msgid "No, cancel the operation."
 msgstr "لا، قم بإلغاء العملية."
 
 #. translators: help text for 'p' option in the 'Continue?' prompt
-#: src/solve-commit.cc:643
+#: src/solve-commit.cc:636
 msgid ""
 "Restart solver in no-force-resolution mode in order to show dependency "
 "problems."
 msgstr "إعادة بدء المحلل في وضع عدم فرض الدقة لإظهار مشكلات التبعية."
 
 #. translators: help text for 'v' option in the 'Continue?' prompt
-#: src/solve-commit.cc:645
+#: src/solve-commit.cc:638
 msgid "Toggle display of package versions."
 msgstr "تبديل عرض إصدارات الحزمة."
 
 #. translators: help text for 'a' option in the 'Continue?' prompt
-#: src/solve-commit.cc:647
+#: src/solve-commit.cc:640
 msgid "Toggle display of package architectures."
 msgstr "تبديل عرض هياكل الحزمة."
 
 #. translators: help text for 'r' option in the 'Continue?' prompt
-#: src/solve-commit.cc:649
+#: src/solve-commit.cc:642
 msgid ""
 "Toggle display of repositories from which the packages will be installed."
 msgstr "تبديل عرض المخازن التي سيتم تثبيت الحزم منها."
 
 #. translators: help text for 'm' option in the 'Continue?' prompt
-#: src/solve-commit.cc:651
+#: src/solve-commit.cc:644
 msgid "Toggle display of package vendor names."
 msgstr "تبديل عرض أسماء بائعي الحزم."
 
 #. translators: help text for 'd' option in the 'Continue?' prompt
-#: src/solve-commit.cc:653
+#: src/solve-commit.cc:646
 msgid "Toggle between showing all details and as few details as possible."
 msgstr "التبديل بين إظهار كل التفاصيل وإظهار أقل تفاصيل ممكنة."
 
 #. translators: help text for 'g' option in the 'Continue?' prompt
-#: src/solve-commit.cc:655
+#: src/solve-commit.cc:648
 msgid "View the summary in pager."
 msgstr "عرض الملخص في المتصفح."
 
-#: src/solve-commit.cc:765
+#: src/solve-commit.cc:758
 msgid "committing"
 msgstr "تنفيذ"
 
-#: src/solve-commit.cc:767
+#: src/solve-commit.cc:760
 msgid "(dry run)"
 msgstr "(تشغيل اختباري)"
 
-#: src/solve-commit.cc:791 src/solve-commit.cc:824
+#: src/solve-commit.cc:784 src/solve-commit.cc:817
 msgid "Problem retrieving the package file from the repository:"
 msgstr "حدثت مشكلة أثناء استرداد ملف الحزمة من المخزن:"
 
 #. translators: the first %s is 'zypper refresh' and the second is repo alias
-#: src/solve-commit.cc:821
+#: src/solve-commit.cc:814
 #, c-format, boost-format
 msgid "Repository '%s' is out of date. Running '%s' might help."
 msgstr "المخزن '%s' قديم. قد يوفر تشغيل '%s' نوعًا من المساعدة."
 
-#: src/solve-commit.cc:832
+#: src/solve-commit.cc:825
 msgid ""
 "The package integrity check failed. This may be a problem with the "
 "repository or media. Try one of the following:\n"
@@ -6664,20 +6647,20 @@ msgstr ""
 "- استخدم وسائط تثبيت أخرى (في حالة تلفها)\n"
 "- استخدم مخزنًا آخر"
 
-#: src/solve-commit.cc:846
+#: src/solve-commit.cc:839
 msgid "Problem occurred during or after installation or removal of packages:"
 msgstr "حدثت مشكلة أثناء أو بعد تثبيت الحزم أو إزالتها:"
 
-#: src/solve-commit.cc:854
+#: src/solve-commit.cc:847
 msgid "Installation has completed with error."
 msgstr "تم اكتمال التثبيت مع وجود خطأ."
 
-#: src/solve-commit.cc:856
+#: src/solve-commit.cc:849
 #, boost-format
 msgid "You may run '%1%' to repair any dependency problems."
 msgstr "يمكنك تشغيل '%1%' لإصلاح مشكلات التبعية."
 
-#: src/solve-commit.cc:870
+#: src/solve-commit.cc:863
 msgid ""
 "One of the installed patches requires a reboot of your machine. Reboot as "
 "soon as possible."
@@ -6685,7 +6668,7 @@ msgstr ""
 "يتطلب أحد التصحيحات المثبتة إعادة تشغيل الجهاز. قم بإعادة التشغيل في أقرب "
 "وقت ممكن."
 
-#: src/solve-commit.cc:878
+#: src/solve-commit.cc:871
 msgid ""
 "One of the installed patches affects the package manager itself. Run this "
 "command once more to install any other needed patches."
@@ -6693,7 +6676,7 @@ msgstr ""
 "تؤثر إحدى التصحيحات المثبتة على مدير الحزم نفسه. قم ببدء تشغيل هذا الأمر مرة "
 "واحدة لتثبيت أي تصحيحات أخرى مطلوبة."
 
-#: src/solve-commit.cc:896
+#: src/solve-commit.cc:889
 msgid "Dependencies of all installed packages are satisfied."
 msgstr "تم استيفاء تبعيات كل الحزم المثبَّتة."
 
@@ -7310,6 +7293,18 @@ msgid ""
 msgstr ""
 "إذا لم تعمل أي طريقة أخرى، فأدخل '#1' لتحديد الخيار الأول، و'#2' للخيار "
 "الثاني، ..."
+
+#~ msgid "Disabling repository '%s'."
+#~ msgstr "تعطيل المخزن '%s'."
+
+#~ msgid ""
+#~ "There are some running programs that might use files deleted by recent "
+#~ "upgrade. You may wish to check and restart some of them. Run '%s' to list "
+#~ "these programs."
+#~ msgstr ""
+#~ "توجد بعض البرامج قيد التشغيل، والتي قد تستخدم ملفات تم حذفها بواسطة "
+#~ "الترقية الحديثة. قد تريد التحقق من بعض هذه البرامج وإعادة تشغيل بعض منها. "
+#~ "قم بتشغيل '%s' لإدراج هذه البرامج."
 
 #~ msgid "Augeas error: setting config file to load failed."
 #~ msgstr "خطأ Augeas: فشل إعداد ملف التكوين للتحميل."

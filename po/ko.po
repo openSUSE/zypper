@@ -5,11 +5,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper.ko\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-25 14:33+0100\n"
+"POT-Creation-Date: 2019-05-20 10:18+0200\n"
 "PO-Revision-Date: 2019-04-04 18:36+0000\n"
 "Last-Translator: Hwajin Kim <hwajin.kim@e4net.net>\n"
-"Language-Team: Korean <https://l10n.opensuse.org/projects/zypper/master/ko/>"
-"\n"
+"Language-Team: Korean <https://l10n.opensuse.org/projects/zypper/master/ko/"
+">\n"
 "Language: ko\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -195,7 +195,9 @@ msgstr "새 리포지토리 또는 패키지 서명 키 수신:"
 #. translators: this message is shown after showing description of the key
 #: src/callbacks/keyring.h:287
 msgid "Do you want to reject the key, trust temporarily, or trust always?"
-msgstr "키를 거부(r)하시겠습니까, 아니면 임시로 신뢰(t)하거나 항상 신뢰(a)하시겠습니까?"
+msgstr ""
+"키를 거부(r)하시겠습니까, 아니면 임시로 신뢰(t)하거나 항상 신뢰(a)하시겠습니"
+"까?"
 
 #. translators: this message is shown after showing description of the key
 #: src/callbacks/keyring.h:290
@@ -271,7 +273,9 @@ msgstr "리포지토리 '%1%'의 '%2%' 파일에 대한 서명 확인에 실패�
 msgid ""
 "The rpm database seems to contain old V3 version gpg keys which are "
 "meanwhile obsolete and considered insecure:"
-msgstr "rpm 데이터베이스에 오래되고 안전하지 않은 것으로 간주되는 이전 V3 버전 gpg 키가 있는 것 같습니다."
+msgstr ""
+"rpm 데이터베이스에 오래되고 안전하지 않은 것으로 간주되는 이전 V3 버전 gpg 키"
+"가 있는 것 같습니다."
 
 #: src/callbacks/keyring.h:446
 #, boost-format
@@ -283,7 +287,9 @@ msgstr "키에 대한 세부 정보를 보려면 '%1%'을(를) 호출합니다."
 msgid ""
 "Unless you believe the key in question is still in use, you can remove it "
 "from the rpm database calling '%1%'."
-msgstr "문제의 키가 여전히 사용되는 것이 아니면 '%1%'을(를) 호출하여 rpm 데이터베이스에서 해당 키를 제거할 수 있습니다."
+msgstr ""
+"문제의 키가 여전히 사용되는 것이 아니면 '%1%'을(를) 호출하여 rpm 데이터베이스"
+"에서 해당 키를 제거할 수 있습니다."
 
 #: src/callbacks/keyring.h:472
 #, c-format, boost-format
@@ -410,35 +416,35 @@ msgstr "오류를 무시하고 패키지를 승인합니다."
 msgid "Running: %s  (%s, %s)"
 msgstr "실행 중: %s  (%s, %s)"
 
-#. translators: This text is a progress display label e.g. "Removing packagename-x.x.x [42%]"
-#: src/callbacks/rpm.h:250
-#, c-format, boost-format
-msgid "Removing %s"
-msgstr "%s 제거 중"
-
-#: src/callbacks/rpm.h:273
+#: src/callbacks/rpm.h:267
 #, c-format, boost-format
 msgid "Removal of %s failed:"
 msgstr "%s 제거 실패:"
 
-#. TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
-#: src/callbacks/rpm.h:316
+#. translators: This text is a progress display label e.g. "Removing packagename-x.x.x [42%]"
+#: src/callbacks/rpm.h:307
 #, c-format, boost-format
-msgid "Installing: %s"
-msgstr "설치 중: %s"
+msgid "Removing %s"
+msgstr "%s 제거 중"
 
-#: src/callbacks/rpm.h:339
+#: src/callbacks/rpm.h:344
 #, c-format, boost-format
 msgid "Installation of %s failed:"
 msgstr "%s의 설치에 실패:"
 
+#. TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
+#: src/callbacks/rpm.h:384
+#, c-format, boost-format
+msgid "Installing: %s"
+msgstr "설치 중: %s"
+
 #. TranslatorExplanation A progressbar label
-#: src/callbacks/rpm.h:383
+#: src/callbacks/rpm.h:405
 msgid "Checking for file conflicts:"
 msgstr "파일 충돌 확인:"
 
 #. TranslatorExplanation %1%(commandline option)
-#: src/callbacks/rpm.h:417
+#: src/callbacks/rpm.h:439
 #, boost-format
 msgid ""
 "Checking for file conflicts requires not installed packages to be downloaded "
@@ -450,7 +456,7 @@ msgstr ""
 "조하십시오."
 
 #. TranslatorExplanation %1%(number of packages); detailed list follows
-#: src/callbacks/rpm.h:424
+#: src/callbacks/rpm.h:446
 #, boost-format
 msgid ""
 "The following package had to be excluded from file conflicts check because "
@@ -463,18 +469,18 @@ msgstr[0] ""
 "다."
 
 #. TranslatorExplanation %1%(number of conflicts); detailed list follows
-#: src/callbacks/rpm.h:435
+#: src/callbacks/rpm.h:457
 #, boost-format
 msgid "Detected %1% file conflict:"
 msgid_plural "Detected %1% file conflicts:"
 msgstr[0] "%1%개의 파일 충돌이 검색되었습니다."
 
-#: src/callbacks/rpm.h:443
+#: src/callbacks/rpm.h:465
 msgid "Conflicting files will be replaced."
 msgstr "충돌하는 파일이 바뀝니다."
 
 #. TranslatorExplanation Problem description before asking whether to "Continue? [yes/no] (no):"
-#: src/callbacks/rpm.h:449
+#: src/callbacks/rpm.h:471
 msgid ""
 "File conflicts happen when two packages attempt to install files with the "
 "same name but different contents. If you continue, conflicting files will be "
@@ -654,7 +660,7 @@ msgstr "유형"
 #. translators: property name; short; used like "Name: value"
 #: src/utils/flags/zyppflags.h:49 src/commands/repos/list.cc:42
 #: src/commands/repos/list.cc:268 src/commands/services/list.cc:116
-#: src/repos.cc:1267
+#: src/repos.cc:1255
 msgid "URI"
 msgstr "URI"
 
@@ -835,7 +841,8 @@ msgstr "알 수 없는 패키지를 무시합니다."
 #: src/Config.cc:463
 msgid ""
 "Terse output for machine consumption. Implies --no-abbrev and --no-color."
-msgstr "시스템 사용에 대한 간단한 출력입니다. --no-abbrev 및 --no-color를 의미합니다."
+msgstr ""
+"시스템 사용에 대한 간단한 출력입니다. --no-abbrev 및 --no-color를 의미합니다."
 
 #. translators: --reposd-dir, -D <DIR>
 #: src/Config.cc:487
@@ -1124,7 +1131,8 @@ msgid ""
 "There is an update candidate for '%s' from vendor '%s', while the current "
 "vendor is '%s'. Use '%s' to install this candidate."
 msgstr ""
-"현재 벤더가 '%s'이지만 '%s' 벤더의 '%s'에 대한 업데이트 후보가 없습니다. '%s'을(를) 사용하여 이 후보를 설치하십시오."
+"현재 벤더가 '%s'이지만 '%s' 벤더의 '%s'에 대한 업데이트 후보가 없습니다. "
+"'%s'을(를) 사용하여 이 후보를 설치하십시오."
 
 #: src/RequestFeedback.cc:132
 #, c-format, boost-format
@@ -1863,7 +1871,7 @@ msgstr "PackageKit가 여전히 실행 중입니다(사용 중일 수 있음)."
 msgid "Try again?"
 msgstr "다시 해보시겠습니까?"
 
-#: src/Zypper.cc:248 src/Zypper.cc:712 src/commands/basecommand.cc:265
+#: src/Zypper.cc:248 src/Zypper.cc:712 src/commands/basecommand.cc:282
 msgid "Unexpected exception."
 msgstr "예상치 못한 예외가 발생했습니다."
 
@@ -2042,13 +2050,17 @@ msgstr "이 명령을 실행하려면 루트 권한이 필요합니다."
 msgid ""
 "This is a transactional-server, please use transactional-update to update or "
 "modify the system."
-msgstr "트랜잭션 서버이므로 트랜잭션 업데이트를 사용하여 시스템을 업데이트하거나 수정하십시오."
+msgstr ""
+"트랜잭션 서버이므로 트랜잭션 업데이트를 사용하여 시스템을 업데이트하거나 수정"
+"하십시오."
 
 #: src/commands/conditions.cc:49
 msgid ""
 "The target filesystem is mounted as read-only. Please make sure the target "
 "filesystem is writeable."
-msgstr "대상 파일 시스템이 읽기 전용으로 마운트되었습니다. 대상 파일 시스템이 쓰기 가능한지 확인하십시오."
+msgstr ""
+"대상 파일 시스템이 읽기 전용으로 마운트되었습니다. 대상 파일 시스템이 쓰기 가"
+"능한지 확인하십시오."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/distupgrade.cc:20
@@ -2120,9 +2132,10 @@ msgid ""
 "unconditionally on small or minimal systems, as it may easily add a large "
 "number of packages."
 msgstr ""
-"이미 설치된 패키지에서 권장하는 새로 추가된 패키지를 설치합니다. 이 명령은 기본적으로 설치된 모든 패키지 권장 사항을 다시 평가하고 "
-"그에 따라 시스템을 채웁니다. 많은 패키지를 쉽게 추가할 수 있으므로 작은 시스템 또는 MSYS에서 이 명령을 무조건 호출하지 않는 것이 "
-"좋습니다."
+"이미 설치된 패키지에서 권장하는 새로 추가된 패키지를 설치합니다. 이 명령은 기"
+"본적으로 설치된 모든 패키지 권장 사항을 다시 평가하고 그에 따라 시스템을 채웁"
+"니다. 많은 패키지를 쉽게 추가할 수 있으므로 작은 시스템 또는 MSYS에서 이 명령"
+"을 무조건 호출하지 않는 것이 좋습니다."
 
 #. translators: command description, %1% is a zypper command
 #: src/commands/inrverify.cc:98
@@ -2132,8 +2145,9 @@ msgid ""
 "supporting available hardware, languages or filesystems. Useful after having "
 "added e.g. new hardware or driver repos."
 msgstr ""
-"'%1%'(으)로 호출되었으므로 사용 가능한 하드웨어, 언어 또는 파일 시스템을 지원하는 패키지만 찾도록 명령을 제한합니다. 새 하드웨어 "
-"또는 드라이버 리포지토리 등을 추가했을 때 유용합니다."
+"'%1%'(으)로 호출되었으므로 사용 가능한 하드웨어, 언어 또는 파일 시스템을 지원"
+"하는 패키지만 찾도록 명령을 제한합니다. 새 하드웨어 또는 드라이버 리포지토리 "
+"등을 추가했을 때 유용합니다."
 
 #. translators: command description
 #: src/commands/inrverify.cc:101
@@ -2144,26 +2158,26 @@ msgstr ""
 "설치된 패키지의 종속성을 만족하는지 확인하고 종속성 문제를 해결하려면 패키지"
 "를 설치하거나 제거합니다."
 
-#: src/commands/installremove.cc:54
+#: src/commands/installremove.cc:62
 msgid "Select packages by plain name, not by capability."
 msgstr "기능별이 아닌 일반 이름별로 패키지를 선택합니다."
 
-#: src/commands/installremove.cc:55
+#: src/commands/installremove.cc:63
 msgid "Select packages solely by capability."
 msgstr "용량별로만 패키지를 선택합니다."
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/commands/installremove.cc:74
+#: src/commands/installremove.cc:82
 msgid "remove (rm) [OPTIONS] <CAPABILITY> ..."
 msgstr "remove (rm) [옵션] <기능> ..."
 
 #. translators: command summary: remove, rm
-#: src/commands/installremove.cc:76
+#: src/commands/installremove.cc:84
 msgid "Remove packages."
 msgstr "패키지를 제거합니다."
 
 #. translators: command description
-#: src/commands/installremove.cc:78
+#: src/commands/installremove.cc:86
 msgid ""
 "Remove packages with specified capabilities. A capability is NAME[.ARCH]"
 "[OP<VERSION>], where OP is one of <, <=, =, >=, >."
@@ -2171,20 +2185,20 @@ msgstr ""
 "지정된 기능을 포함한 패키지를 제거합니다. 기능은 NAME[.ARCH][OP<VERSION>]입니"
 "다. 여기서 OP는 <, <=, =, >=, > 중 하나입니다."
 
-#: src/commands/installremove.cc:96 src/commands/installremove.cc:218
+#: src/commands/installremove.cc:104 src/commands/installremove.cc:226
 #: src/utils/messages.cc:53
 msgid "Too few arguments."
 msgstr "인수가 너무 적습니다."
 
-#: src/commands/installremove.cc:97 src/commands/installremove.cc:219
+#: src/commands/installremove.cc:105 src/commands/installremove.cc:227
 msgid "At least one package name is required."
 msgstr "패키지 이름이 한 개 이상 필요합니다."
 
-#: src/commands/installremove.cc:108
+#: src/commands/installremove.cc:116
 msgid "Cannot uninstall patches."
 msgstr "패치를 제거할 수 없습니다."
 
-#: src/commands/installremove.cc:109
+#: src/commands/installremove.cc:117
 msgid ""
 "Installed status of a patch is determined solely based on its dependencies.\n"
 "Patches are not installed in sense of copied files, database records,\n"
@@ -2194,22 +2208,22 @@ msgstr ""
 "패치는 단순한 파일 복사나 데이터베이스 기록 차원의\n"
 "설치가 아닙니다."
 
-#: src/commands/installremove.cc:118
+#: src/commands/installremove.cc:126
 msgid "Uninstallation of a source package not defined and implemented."
 msgstr "소스 패키지 제거가 정의 및 구현되지 않았습니다."
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/commands/installremove.cc:160
+#: src/commands/installremove.cc:168
 msgid "install (in) [OPTIONS] <CAPABILITY|RPM_FILE_URI> ..."
 msgstr "install (in) [옵션] <기능|RPM_FILE_URI> ..."
 
 #. translators: command summary: install, in
-#: src/commands/installremove.cc:162
+#: src/commands/installremove.cc:170
 msgid "Install packages."
 msgstr "패키지를 설치합니다."
 
 #. translators: command description
-#: src/commands/installremove.cc:164
+#: src/commands/installremove.cc:172
 msgid ""
 "Install packages with specified capabilities or RPM files with specified "
 "location. A capability is NAME[.ARCH][OP<VERSION>], where OP is one of <, "
@@ -2220,12 +2234,12 @@ msgstr ""
 "다."
 
 #. translators: --from <ALIAS|#|URI>
-#: src/commands/installremove.cc:179
+#: src/commands/installremove.cc:187
 msgid "Select packages from the specified repository."
 msgstr "지정된 리포지토리에서 패키지를 선택합니다."
 
 #. translators: --oldpackage
-#: src/commands/installremove.cc:183
+#: src/commands/installremove.cc:191
 msgid ""
 "Allow to replace a newer item with an older one. Handy if you are doing a "
 "rollback. Unlike --force it will not enforce a reinstall."
@@ -2233,13 +2247,13 @@ msgstr ""
 "최신 항목을 오래된 항목으로 바꿀 수 있습니다. 롤백을 할 경우 편리합니다. --"
 "force와 달리 재설치를 수행하지 않습니다."
 
-#: src/commands/installremove.cc:187
+#: src/commands/installremove.cc:195
 msgid "Silently install unsigned rpm packages given as commandline parameters."
 msgstr ""
 "명령줄 매개변수로 주어진 서명되지 않은 rpm 패키지를 자동으로 설치하십시오."
 
 #. translators: -f, --force
-#: src/commands/installremove.cc:192
+#: src/commands/installremove.cc:200
 msgid ""
 "Install even if the item is already installed (reinstall), downgraded or "
 "changes vendor or architecture."
@@ -2249,11 +2263,11 @@ msgstr ""
 
 #. translators: rug related message, shown if
 #. 'zypper in --entire-catalog foorepo someargument' is specified
-#: src/commands/installremove.cc:230
+#: src/commands/installremove.cc:238
 msgid "Ignoring arguments, marking the entire repository."
 msgstr "인수를 무시하며, 전체 리포지토리를 표시합니다."
 
-#: src/commands/installremove.cc:243 src/commands/sourceinstall.cc:92
+#: src/commands/installremove.cc:251 src/commands/sourceinstall.cc:92
 msgid "No valid arguments specified."
 msgstr "올바른 인수가 지정되지 않았습니다."
 
@@ -2366,11 +2380,14 @@ msgstr "정보를 인쇄할 로케일입니다."
 msgid ""
 "Get all locales with lang code 'en' that have their own country code, "
 "excluding the fallback 'en':"
-msgstr "대체 'en'을 제외하고 언어 코드 'en'과 함께 고유한 국가 코드가 있는 모든 로케일 가져오기:"
+msgstr ""
+"대체 'en'을 제외하고 언어 코드 'en'과 함께 고유한 국가 코드가 있는 모든 로케"
+"일 가져오기:"
 
 #: src/commands/locale/localescmd.cc:87
 msgid "Get all locales with lang code 'en' with or without country code:"
-msgstr "언어 코드 'en'과 함께 다음 국가 코드가 있거나 없는 모든 로케일 가져오기:"
+msgstr ""
+"언어 코드 'en'과 함께 다음 국가 코드가 있거나 없는 모든 로케일 가져오기:"
 
 #: src/commands/locale/localescmd.cc:94
 msgid "Get the locale matching the argument exactly: "
@@ -2599,9 +2616,10 @@ msgid ""
 "Exit code ZYPPER_EXIT_INF_REBOOT_NEEDED indicates that a reboot is needed, "
 "otherwise the exit code is set to ZYPPER_EXIT_OK."
 msgstr ""
-"코어 라이브러리 또는 서비스의 이전 업데이트 또는 설치에서 needs-reboot 플래그를 설정했는지 확인합니다.\n"
-"종료 코드 ZYPPER_EXIT_INF_REBOOT_NEEDED는 재부팅이 필요함을 나타냅니다. 그렇지 않은 경우 종료 코드가 "
-"ZYPPER_EXIT_OK로 설정됩니다."
+"코어 라이브러리 또는 서비스의 이전 업데이트 또는 설치에서 needs-reboot 플래그"
+"를 설정했는지 확인합니다.\n"
+"종료 코드 ZYPPER_EXIT_INF_REBOOT_NEEDED는 재부팅이 필요함을 나타냅니다. 그렇"
+"지 않은 경우 종료 코드가 ZYPPER_EXIT_OK로 설정됩니다."
 
 #: src/commands/needs-rebooting.cc:35
 msgid "Core libraries or services have been updated."
@@ -2869,8 +2887,9 @@ msgid ""
 "followed by a newline. Any '%s' directive in <format> is replaced by the "
 "system service name."
 msgstr ""
-"연관된 각 시스템 서비스에 대해 표준 출력으로 <format>을 인쇄하고 그 뒤에 줄바꿈 문자를 인쇄합니다. <format>의 '%s' "
-"지시어는 시스템 서비스 이름으로 대체됩니다."
+"연관된 각 시스템 서비스에 대해 표준 출력으로 <format>을 인쇄하고 그 뒤에 줄바"
+"꿈 문자를 인쇄합니다. <format>의 '%s' 지시어는 시스템 서비스 이름으로 대체됩"
+"니다."
 
 #. translators: -d, --debugFile <path>
 #: src/commands/ps.cc:52
@@ -3259,26 +3278,26 @@ msgstr "별칭"
 #. 'enabled' flag
 #. translators: property name; short; used like "Name: value"
 #: src/commands/repos/list.cc:47 src/commands/repos/list.cc:230
-#: src/commands/services/list.cc:106 src/repos.cc:1269
+#: src/commands/services/list.cc:106 src/repos.cc:1257
 msgid "Enabled"
 msgstr "활성화됨"
 
 #. GPG Check
 #. translators: property name; short; used like "Name: value"
 #: src/commands/repos/list.cc:48 src/commands/repos/list.cc:234
-#: src/commands/services/list.cc:107 src/repos.cc:1271
+#: src/commands/services/list.cc:107 src/repos.cc:1259
 msgid "GPG Check"
 msgstr "GPG 확인"
 
 #. translators: repository priority (in zypper repos -p or -d)
 #. translators: property name; short; used like "Name: value"
 #: src/commands/repos/list.cc:49 src/commands/repos/list.cc:252
-#: src/commands/services/list.cc:113 src/repos.cc:1275
+#: src/commands/services/list.cc:113 src/repos.cc:1263
 msgid "Priority"
 msgstr "우선순위"
 
 #. translators: property name; short; used like "Name: value"
-#: src/commands/repos/list.cc:50 src/repos.cc:1273
+#: src/commands/repos/list.cc:50 src/repos.cc:1261
 msgid "Autorefresh"
 msgstr "자동 새로 고침"
 
@@ -3331,7 +3350,7 @@ msgstr "정의된 모든 리포지토리를 나열합니다."
 msgid "Export all defined repositories as a single local .repo file."
 msgstr "정의된 모든 리포지토리를 단일 로컬 .repo 파일로 엑스포트합니다."
 
-#: src/commands/repos/list.cc:118 src/repos.cc:1024
+#: src/commands/repos/list.cc:118 src/repos.cc:1012
 msgid "Error reading repositories:"
 msgstr "리포지토리를 읽는 중 오류 발생:"
 
@@ -3458,7 +3477,7 @@ msgstr "'%s' 전체 옵션은 여기서 아무런 의미가 없습니다."
 msgid "Arguments are not allowed if '%s' is used."
 msgstr "'%s'이(가) 사용될 경우 인수가 허용되지 않습니다."
 
-#: src/commands/repos/refresh.cc:195 src/repos.cc:1036
+#: src/commands/repos/refresh.cc:195 src/repos.cc:1024
 msgid "Specified repositories: "
 msgstr "지정된 리포지토리: "
 
@@ -3477,7 +3496,7 @@ msgstr "비활성화된 '%s' 리포지토리의 컨텐트를 스캔 중입니다
 msgid "Skipping disabled repository '%s'"
 msgstr "비활성화된 리포지토리 '%s'을(를) 건너뛰는 중"
 
-#: src/commands/repos/refresh.cc:262 src/repos.cc:862 src/repos.cc:895
+#: src/commands/repos/refresh.cc:262 src/repos.cc:862 src/repos.cc:905
 #, c-format, boost-format
 msgid "Skipping repository '%s' because of the above error."
 msgstr "위의 오류로 인해 '%s' 리포지토리를 건너뛰고 있습니다."
@@ -3504,7 +3523,7 @@ msgstr "'%s' 또는 '%s' 명령을 사용하여 리포지토리를 추가하거�
 msgid "Could not refresh the repositories because of errors."
 msgstr "오류로 인해 리포지토리를 새로 고칠 수 없습니다."
 
-#: src/commands/repos/refresh.cc:298 src/repos.cc:946
+#: src/commands/repos/refresh.cc:298 src/repos.cc:934
 msgid "Some of the repositories have not been refreshed because of an error."
 msgstr "오류로 인해 일부 리포지토리가 새로 고쳐지지 않았습니다."
 
@@ -3559,12 +3578,12 @@ msgstr ""
 msgid "Repository '%s' renamed to '%s'."
 msgstr "'%s' 리포지토리의 이름이 '%s'(으)로 변경되었습니다."
 
-#: src/commands/repos/rename.cc:47 src/repos.cc:1215
+#: src/commands/repos/rename.cc:47 src/repos.cc:1203
 #, c-format, boost-format
 msgid "Repository named '%s' already exists. Please use another alias."
 msgstr "이름이 '%s'인 리포지토리가 이미 있습니다. 다른 별칭을 사용하십시오."
 
-#: src/commands/repos/rename.cc:52 src/repos.cc:1693
+#: src/commands/repos/rename.cc:52 src/repos.cc:1681
 msgid "Error while modifying the repository:"
 msgstr "리포지토리를 수정하는 중 오류 발생:"
 
@@ -3812,7 +3831,9 @@ msgstr ""
 msgid ""
 "For an extended search including not yet activated remote resources you may "
 "run '%1%' at any time."
-msgstr "아직 활성화되지 않은 원격 리소스를 포함한 확장 검색을 위해 언제든지 '%1%'을(를) 실행할 수 있습니다."
+msgstr ""
+"아직 활성화되지 않은 원격 리소스를 포함한 확장 검색을 위해 언제든지 '%1%'을"
+"(를) 실행할 수 있습니다."
 
 #: src/commands/search/search-packages-hinthack.cc:99
 #, boost-format
@@ -3967,7 +3988,7 @@ msgstr "검색 쿼리를 초기화하거나 실행하는 중 문제가 발생했
 msgid "See the above message for a hint."
 msgstr "자세한 내용은 위의 메시지를 참조하십시오."
 
-#: src/commands/search/search.cc:459 src/repos.cc:1003
+#: src/commands/search/search.cc:459 src/repos.cc:991
 msgid "Running 'zypper refresh' as root might resolve the problem."
 msgstr "'zypper refresh'를 루트 권한으로 실행하여 문제를 해결할 수 있습니다."
 
@@ -4050,7 +4071,7 @@ msgid "Problem retrieving the repository index file for service '%s':"
 msgstr "'%s' 서비스에 대한 리포지토리 색인 파일을 검색하는 중 문제 발생:"
 
 #: src/commands/services/common.cc:138 src/commands/services/refresh.cc:226
-#: src/repos.cc:1745
+#: src/repos.cc:1733
 #, c-format, boost-format
 msgid "Skipping service '%s' because of the above error."
 msgstr "위의 오류로 인해 '%s' 서비스를 건너뛰고 있습니다."
@@ -4584,7 +4605,9 @@ msgstr "설치된 패키지를 새 버전으로 업데이트합니다."
 #: src/commands/update.cc:26
 msgid ""
 "Update all or specified installed packages with newer versions, if possible."
-msgstr "가능한 경우 설치된 모든 패키지나 지정된 패키지를 최신 버전으로 업데이트합니다."
+msgstr ""
+"가능한 경우 설치된 모든 패키지나 지정된 패키지를 최신 버전으로 업데이트합니"
+"다."
 
 #: src/commands/update.cc:69 src/commands/update.cc:76
 #: src/commands/update.cc:126
@@ -4663,7 +4686,7 @@ msgstr ""
 msgid "Argument resolves to no package"
 msgstr "인수가 패키지 없음으로 확인됨"
 
-#: src/commands/utils/download.cc:246 src/solve-commit.cc:898
+#: src/commands/utils/download.cc:246 src/solve-commit.cc:891
 msgid "Nothing to do."
 msgstr "수행할 작업 없음."
 
@@ -5414,8 +5437,8 @@ msgstr "'%s' 리포지토리를 비활성화하는 중 오류가 발생했습니
 msgid "Problem retrieving files from '%s'."
 msgstr "'%s'에서 파일을 검색하는 중 문제가 발생했습니다."
 
-#: src/repos.cc:346 src/repos.cc:1872 src/solve-commit.cc:792
-#: src/solve-commit.cc:823 src/solve-commit.cc:847
+#: src/repos.cc:346 src/repos.cc:1860 src/solve-commit.cc:785
+#: src/solve-commit.cc:816 src/solve-commit.cc:840
 msgid "Please see the above error message for a hint."
 msgstr "자세한 내용은 위의 오류 메시지를 확인하십시오."
 
@@ -5512,12 +5535,12 @@ msgstr ""
 msgid "Ignoring repository '%s' because of '%s' option."
 msgstr "'%s' 리포지토리를 '%s' 옵션으로 인해 무시합니다."
 
-#: src/repos.cc:831 src/repos.cc:931
+#: src/repos.cc:831 src/repos.cc:919
 #, c-format, boost-format
 msgid "Temporarily enabling repository '%s'."
 msgstr "'%s' 리포지토리를 일시적으로 활성화 중입니다."
 
-#: src/repos.cc:881
+#: src/repos.cc:883
 #, c-format, boost-format
 msgid ""
 "Repository '%s' is out-of-date. You can run 'zypper refresh' as root to "
@@ -5526,7 +5549,7 @@ msgstr ""
 "'%s' 리포지토리가 오래되었습니다. 루트 권한으로 'zypper refresh'를 실행하면 "
 "업데이트할 수 있습니다."
 
-#: src/repos.cc:913
+#: src/repos.cc:900
 #, c-format, boost-format
 msgid ""
 "The metadata cache needs to be built for the '%s' repository. You can run "
@@ -5535,87 +5558,82 @@ msgstr ""
 "'%s' 리포지토리에 대한 메타 데이터 캐시를 빌드해야 합니다. 루트 권한으로 "
 "'zypper refresh'를 실행하면 이 작업을 수행할 수 있습니다."
 
-#: src/repos.cc:917
-#, c-format, boost-format
-msgid "Disabling repository '%s'."
-msgstr "'%s' 리포지토리를 비활성화하는 중입니다."
-
-#: src/repos.cc:938
+#: src/repos.cc:926
 #, c-format, boost-format
 msgid "Repository '%s' stays disabled."
 msgstr "'%s' 리포지토리가 비활성화 상태입니다."
 
-#: src/repos.cc:994
+#: src/repos.cc:982
 msgid "Initializing Target"
 msgstr "대상 초기화 중"
 
-#: src/repos.cc:1002
+#: src/repos.cc:990
 msgid "Target initialization failed:"
 msgstr "대상 초기화 실패:"
 
-#: src/repos.cc:1084
+#: src/repos.cc:1072
 #, c-format, boost-format
 msgid "Cleaning metadata cache for '%s'."
 msgstr "'%s'에 대한 메타 데이터 캐시를 정리하는 중입니다."
 
-#: src/repos.cc:1092
+#: src/repos.cc:1080
 #, c-format, boost-format
 msgid "Cleaning raw metadata cache for '%s'."
 msgstr "'%s'에 대한 원시 메타 데이터 캐시를 정리하는 중입니다."
 
-#: src/repos.cc:1098
+#: src/repos.cc:1086
 #, c-format, boost-format
 msgid "Keeping raw metadata cache for %s '%s'."
 msgstr "%s '%s'에 대한 원시 메타 데이터 캐시를 유지하고 있습니다."
 
 #. translators: meaning the cached rpm files
-#: src/repos.cc:1105
+#: src/repos.cc:1093
 #, c-format, boost-format
 msgid "Cleaning packages for '%s'."
 msgstr "'%s'에 대한 패키지를 정리하는 중입니다."
 
-#: src/repos.cc:1113
+#: src/repos.cc:1101
 #, c-format, boost-format
 msgid "Cannot clean repository '%s' because of an error."
 msgstr "오류로 인해 '%s' 리포지토리를 정리할 수 없습니다."
 
 #  progress stages
-#: src/repos.cc:1124
+#: src/repos.cc:1112
 msgid "Cleaning installed packages cache."
 msgstr "설치된 패키지 캐시를 정리하는 중입니다."
 
-#: src/repos.cc:1133
+#: src/repos.cc:1121
 msgid "Cannot clean installed packages cache because of an error."
 msgstr "오류로 인해 설치된 패키지 캐시를 정리할 수 없습니다."
 
-#: src/repos.cc:1151
+#: src/repos.cc:1139
 msgid "Could not clean the repositories because of errors."
 msgstr "오류로 인해 리포지토리를 정리할 수 없습니다."
 
-#: src/repos.cc:1157
+#: src/repos.cc:1145
 msgid "Some of the repositories have not been cleaned up because of an error."
 msgstr "오류로 인해 일부 리포지토리가 정리되지 않았습니다."
 
-#: src/repos.cc:1162
+#: src/repos.cc:1150
 msgid "Specified repositories have been cleaned up."
 msgstr "지정된 리포지토리가 정리되었습니다."
 
-#: src/repos.cc:1164
+#: src/repos.cc:1152
 msgid "All repositories have been cleaned up."
 msgstr "모든 리포지토리가 정리되었습니다."
 
-#: src/repos.cc:1186
+#: src/repos.cc:1174
 msgid "This is a changeable read-only media (CD/DVD), disabling autorefresh."
 msgstr ""
 "변경 가능한 읽기 전용 미디어(CD/DVD)입니다. 자동 새로 고침을 비활성화하고 있"
 "습니다."
 
-#: src/repos.cc:1207
+#: src/repos.cc:1195
 #, c-format, boost-format
 msgid "Invalid repository alias: '%s'"
 msgstr "잘못된 리포지토리 별칭: '%s'"
 
-#: src/repos.cc:1224
+#: src/repos.cc:1212
 msgid ""
 "Could not determine the type of the repository. Please check if the defined "
 "URIs (see below) point to a valid repository:"
@@ -5623,25 +5641,25 @@ msgstr ""
 "리포지토리 유형을 결정할 수 없습니다. 정의한 URI(아래 참조)가 올바른 리포지토"
 "리를 가리키고 있는지 확인하십시오."
 
-#: src/repos.cc:1230
+#: src/repos.cc:1218
 msgid "Can't find a valid repository at given location:"
 msgstr "지정된 위치에서 올바른 리포지토리를 찾을 수 없습니다."
 
-#: src/repos.cc:1238
+#: src/repos.cc:1226
 msgid "Problem transferring repository data from specified URI:"
 msgstr "지정된 URI에서 리포지토리 데이터를 전송하는 중 문제 발생:"
 
-#: src/repos.cc:1239
+#: src/repos.cc:1227
 msgid "Please check whether the specified URI is accessible."
 msgstr "지정한 URI가 액세스 가능한지 확인하십시오."
 
-#: src/repos.cc:1246
+#: src/repos.cc:1234
 msgid "Unknown problem when adding repository:"
 msgstr "리포지토리 추가 중 알 수 없는 문제 발생:"
 
 #. translators: BOOST STYLE POSITIONAL DIRECTIVES ( %N% )
 #. translators: %1% - a repository name
-#: src/repos.cc:1256
+#: src/repos.cc:1244
 #, boost-format
 msgid ""
 "GPG checking is disabled in configuration of repository '%1%'. Integrity and "
@@ -5650,135 +5668,135 @@ msgstr ""
 "'%1%' 리포지토리 구성에서 GPG 검사가 비활성화되었습니다. 패키지의 무결성과 출"
 "처를 확인할 수 없습니다."
 
-#: src/repos.cc:1261
+#: src/repos.cc:1249
 #, c-format, boost-format
 msgid "Repository '%s' successfully added"
 msgstr "'%s' 리포지토리가 추가되었습니다."
 
-#: src/repos.cc:1287
+#: src/repos.cc:1275
 #, c-format, boost-format
 msgid "Reading data from '%s' media"
 msgstr "'%s' 미디어에서 데이터를 읽는 중"
 
-#: src/repos.cc:1293
+#: src/repos.cc:1281
 #, c-format, boost-format
 msgid "Problem reading data from '%s' media"
 msgstr "'%s' 미디어에서 데이터를 읽는 중 문제가 발생했습니다."
 
-#: src/repos.cc:1294
+#: src/repos.cc:1282
 msgid "Please check if your installation media is valid and readable."
 msgstr "설치 미디어가 유효하고 판독 가능한지 확인하십시오."
 
-#: src/repos.cc:1301
+#: src/repos.cc:1289
 #, c-format, boost-format
 msgid "Reading data from '%s' media is delayed until next refresh."
 msgstr "다음 새로 고침까지 '%s' 미디어에서 데이터 읽기가 지연됩니다."
 
-#: src/repos.cc:1370
+#: src/repos.cc:1358
 msgid "Problem accessing the file at the specified URI"
 msgstr "지정한 URI에서 파일에 액세스하는 중 문제가 발생했습니다."
 
-#: src/repos.cc:1371
+#: src/repos.cc:1359
 msgid "Please check if the URI is valid and accessible."
 msgstr "URI가 유효하고 액세스 가능한지 확인하십시오."
 
-#: src/repos.cc:1378
+#: src/repos.cc:1366
 msgid "Problem parsing the file at the specified URI"
 msgstr "지정한 URI에서 파일 구문을 분석하는 중 문제가 발생했습니다."
 
 #. TranslatorExplanation Don't translate the '.repo' string.
-#: src/repos.cc:1380
+#: src/repos.cc:1368
 msgid "Is it a .repo file?"
 msgstr "그것은 .repo 파일입니까?"
 
-#: src/repos.cc:1387
+#: src/repos.cc:1375
 msgid "Problem encountered while trying to read the file at the specified URI"
 msgstr "지정한 URI에서 파일을 읽으려는 중 문제가 발생했습니다."
 
-#: src/repos.cc:1400
+#: src/repos.cc:1388
 msgid "Repository with no alias defined found in the file, skipping."
 msgstr "정의된 별칭이 없는 리포지토리가 파일에 있습니다. 건너뛰는 중입니다."
 
-#: src/repos.cc:1406
+#: src/repos.cc:1394
 #, c-format, boost-format
 msgid "Repository '%s' has no URI defined, skipping."
 msgstr "'%s' 리포지토리에 URI가 정의되어 있지 않습니다. 건너뛰는 중입니다."
 
-#: src/repos.cc:1454
+#: src/repos.cc:1442
 #, c-format, boost-format
 msgid "Repository '%s' has been removed."
 msgstr "'%s' 리포지토리가 제거되었습니다."
 
-#: src/repos.cc:1602
+#: src/repos.cc:1590
 #, c-format, boost-format
 msgid "Repository '%s' priority has been left unchanged (%d)"
 msgstr "'%s' 리포지토리의 우선순위가 변경되지 않았습니다(%d)."
 
-#: src/repos.cc:1635
+#: src/repos.cc:1623
 #, c-format, boost-format
 msgid "Repository '%s' has been successfully enabled."
 msgstr "'%s' 리포지토리가 활성화되었습니다."
 
-#: src/repos.cc:1637
+#: src/repos.cc:1625
 #, c-format, boost-format
 msgid "Repository '%s' has been successfully disabled."
 msgstr "'%s' 리포지토리가 비활성화되었습니다."
 
-#: src/repos.cc:1644
+#: src/repos.cc:1632
 #, c-format, boost-format
 msgid "Autorefresh has been enabled for repository '%s'."
 msgstr "'%s' 리포지토리의 자동 새로 고침이 활성화되었습니다."
 
-#: src/repos.cc:1646
+#: src/repos.cc:1634
 #, c-format, boost-format
 msgid "Autorefresh has been disabled for repository '%s'."
 msgstr "'%s' 리포지토리의 자동 새로 고침이 비활성화되었습니다."
 
-#: src/repos.cc:1653
+#: src/repos.cc:1641
 #, c-format, boost-format
 msgid "RPM files caching has been enabled for repository '%s'."
 msgstr "'%s' 리포지토리의 RPM 파일 캐싱이 활성화되었습니다."
 
-#: src/repos.cc:1655
+#: src/repos.cc:1643
 #, c-format, boost-format
 msgid "RPM files caching has been disabled for repository '%s'."
 msgstr "'%s' 리포지토리의 RPM 파일 캐싱이 비활성화되었습니다."
 
-#: src/repos.cc:1662
+#: src/repos.cc:1650
 #, c-format, boost-format
 msgid "GPG check has been enabled for repository '%s'."
 msgstr "'%s' 리포지토리에 대해 GPG 확인이 활성화되었습니다."
 
-#: src/repos.cc:1664
+#: src/repos.cc:1652
 #, c-format, boost-format
 msgid "GPG check has been disabled for repository '%s'."
 msgstr "'%s' 리포지토리에 대해 GPG 확인이 비활성화되었습니다."
 
-#: src/repos.cc:1670
+#: src/repos.cc:1658
 #, c-format, boost-format
 msgid "Repository '%s' priority has been set to %d."
 msgstr "'%s' 리포지토리의 우선순위가 %d(으)로 설정되었습니다."
 
-#: src/repos.cc:1676
+#: src/repos.cc:1664
 #, c-format, boost-format
 msgid "Name of repository '%s' has been set to '%s'."
 msgstr "'%s' 리포지토리의 이름이 '%s'(으)로 설정되었습니다."
 
-#: src/repos.cc:1687
+#: src/repos.cc:1675
 #, c-format, boost-format
 msgid "Nothing to change for repository '%s'."
 msgstr "'%s' 리포지토리에 변경할 항목이 없습니다."
 
-#: src/repos.cc:1694
+#: src/repos.cc:1682
 #, c-format, boost-format
 msgid "Leaving repository %s unchanged."
 msgstr "%s 리포지토리를 변경하지 않은 채로 둡니다."
 
-#: src/repos.cc:1781
+#: src/repos.cc:1769
 msgid "Loading repository data..."
 msgstr "리포지토리 데이터 로드 중..."
 
-#: src/repos.cc:1783
+#: src/repos.cc:1771
 msgid ""
 "No repositories defined. Operating only with the installed resolvables. "
 "Nothing can be installed."
@@ -5786,32 +5804,32 @@ msgstr ""
 "리포지토리가 정의되지 않았습니다. 설치된 resolvable만 작동 중입니다. 다른 항"
 "목은 설치할 수 없습니다."
 
-#: src/repos.cc:1803
+#: src/repos.cc:1791
 #, c-format, boost-format
 msgid "Retrieving repository '%s' data..."
 msgstr "리포지토리 '%s' 데이터 검색 중..."
 
-#: src/repos.cc:1809
+#: src/repos.cc:1797
 #, c-format, boost-format
 msgid "Repository '%s' not cached. Caching..."
 msgstr "'%s' 리포지토리가 캐싱되지 않았습니다. 캐싱 중..."
 
-#: src/repos.cc:1815 src/repos.cc:1849
+#: src/repos.cc:1803 src/repos.cc:1837
 #, c-format, boost-format
 msgid "Problem loading data from '%s'"
 msgstr "'%s'에서 데이터를 로드하는 중 문제가 발생했습니다."
 
-#: src/repos.cc:1819
+#: src/repos.cc:1807
 #, c-format, boost-format
 msgid "Repository '%s' could not be refreshed. Using old cache."
 msgstr "'%s' 리포지토리를 새로 고칠 수 없습니다. 이전 캐시를 사용합니다."
 
-#: src/repos.cc:1823 src/repos.cc:1852
+#: src/repos.cc:1811 src/repos.cc:1840
 #, c-format, boost-format
 msgid "Resolvables from '%s' not loaded because of error."
 msgstr "오류로 인해 '%s'에서 Resolvable이 로드되지 않았습니다."
 
-#: src/repos.cc:1840
+#: src/repos.cc:1828
 #, c-format, boost-format
 msgid ""
 "Repository '%s' appears to be outdated. Consider using a different mirror or "
@@ -5821,36 +5839,36 @@ msgstr ""
 "습니다."
 
 #. translators: the first %s is 'zypper refresh' and the second 'zypper clean -m'
-#: src/repos.cc:1851
+#: src/repos.cc:1839
 #, c-format, boost-format
 msgid "Try '%s', or even '%s' before doing so."
 msgstr "작업을 실행하기 전에 '%s' 또는 '%s'을(를) 시도하십시오."
 
 #  progress stages
-#: src/repos.cc:1862
+#: src/repos.cc:1850
 msgid "Reading installed packages..."
 msgstr "설치된 패키지를 읽는 중..."
 
-#: src/repos.cc:1871
+#: src/repos.cc:1859
 msgid "Problem occurred while reading the installed packages:"
 msgstr "설치된 패키지를 읽는 동안 문제 발생:"
 
-#: src/repos.cc:1888
+#: src/repos.cc:1876
 #, c-format, boost-format
 msgid "'%s' looks like an RPM file. Will try to download it."
 msgstr "'%s'은(는) RPM 파일과 유사합니다. 다운로드를 시도합니다."
 
-#: src/repos.cc:1897
+#: src/repos.cc:1885
 #, c-format, boost-format
 msgid "Problem with the RPM file specified as '%s', skipping."
 msgstr "'%s'(으)로 지정한 RPM 파일에 문제가 발생했습니다. 건너뛰는 중입니다."
 
-#: src/repos.cc:1919
+#: src/repos.cc:1907
 #, c-format, boost-format
 msgid "Problem reading the RPM header of %s. Is it an RPM file?"
 msgstr "%s의 RPM 헤더를 읽는 중 문제가 발생했습니다. RPM 파일입니까?"
 
-#: src/repos.cc:1939
+#: src/repos.cc:1927
 msgid "Plain RPM files cache"
 msgstr "일반 RPM 파일 캐시"
 
@@ -5989,54 +6007,43 @@ msgstr ""
 msgid "Skip check:"
 msgstr "확인 생략:"
 
-#: src/solve-commit.cc:461
-#, c-format, boost-format
-msgid ""
-"There are some running programs that might use files deleted by recent "
-"upgrade. You may wish to check and restart some of them. Run '%s' to list "
-"these programs."
-msgstr ""
-"최근 업그레이드에서 삭제된 파일을 사용했을 수 있는 실행 중인 프로그램이 있습"
-"니다. 일부 프로그램을 확인하고 다시 시작할 수도 있습니다. 해당 프로그램을 나"
-"열하려면 '%s'을(를) 실행하십시오."
-
-#. bsc#859480: Rephrased and added for translation switch if core translations are available.
-#: src/solve-commit.cc:466
+#: src/solve-commit.cc:460
 #, boost-format
 msgid ""
 "There are running programs which still use files and libraries deleted or "
 "updated by recent upgrades. They should be restarted to benefit from the "
 "latest updates. Run '%1%' to list these programs."
 msgstr ""
-"최근 업그레이드에서 삭제하거나 업데이트한 파일 및 라이브러리를 아직 사용하는 프로그램이 실행 중입니다. 최근 업그레이드를 적용하려면 "
-"이러한 프로그램을 다시 시작해야 합니다. 해당 프로그램을 나열하려면 '%1%'을(를) 실행합니다."
+"최근 업그레이드에서 삭제하거나 업데이트한 파일 및 라이브러리를 아직 사용하는 "
+"프로그램이 실행 중입니다. 최근 업그레이드를 적용하려면 이러한 프로그램을 다"
+"시 시작해야 합니다. 해당 프로그램을 나열하려면 '%1%'을(를) 실행합니다."
 
-#: src/solve-commit.cc:481
+#: src/solve-commit.cc:474
 msgid "Update notifications were received from the following packages:"
 msgstr "다음 패키지에서 업데이트 알림을 수신했습니다."
 
-#: src/solve-commit.cc:490
+#: src/solve-commit.cc:483
 #, c-format, boost-format
 msgid "Message from package %s:"
 msgstr "패키지 %s의 메시지:"
 
-#: src/solve-commit.cc:498
+#: src/solve-commit.cc:491
 msgid "y/n"
 msgstr "예/아니요"
 
-#: src/solve-commit.cc:499
+#: src/solve-commit.cc:492
 msgid "View the notifications now?"
 msgstr "지금 알림을 보시겠습니까?"
 
-#: src/solve-commit.cc:545
+#: src/solve-commit.cc:538
 msgid "Computing distribution upgrade..."
 msgstr "배포판 업그레이드 계산 중..."
 
-#: src/solve-commit.cc:550
+#: src/solve-commit.cc:543
 msgid "Resolving package dependencies..."
 msgstr "패키지 종속성 확인 중..."
 
-#: src/solve-commit.cc:605
+#: src/solve-commit.cc:598
 msgid ""
 "Some of the dependencies of installed packages are broken. In order to fix "
 "these dependencies, the following actions need to be taken:"
@@ -6044,7 +6051,7 @@ msgstr ""
 "설치된 패키지 중 일부 종속성이 손상되었습니다. 이 종속성을 복구하려면 다음 작"
 "업을 수행해야 합니다."
 
-#: src/solve-commit.cc:612
+#: src/solve-commit.cc:605
 msgid "Root privileges are required to fix broken package dependencies."
 msgstr "손상된 패키지 종속성을 복구하려면 루트 권한이 필요합니다."
 
@@ -6058,24 +6065,24 @@ msgstr "손상된 패키지 종속성을 복구하려면 루트 권한이 필요
 #. The answers should be lower case letters, but in general, any UTF-8
 #. string will do.
 #. ! \todo add c for changelog and x for explain (show the dep tree)
-#: src/solve-commit.cc:634
+#: src/solve-commit.cc:627
 msgid "y/n/p/v/a/r/m/d/g"
 msgstr ""
 "예/아니오/문제 표시/버전/아키텍처/리포지토리/벤더/세부 사항/페이저 요약"
 
 #. translators: help text for 'y' option in the 'Continue?' prompt
-#: src/solve-commit.cc:639
+#: src/solve-commit.cc:632
 msgid ""
 "Yes, accept the summary and proceed with installation/removal of packages."
 msgstr "예. 요약 내용에 동의하고 패키지를 계속 설치/제거합니다."
 
 #. translators: help text for 'n' option in the 'Continue?' prompt
-#: src/solve-commit.cc:641
+#: src/solve-commit.cc:634
 msgid "No, cancel the operation."
 msgstr "아니요. 작업을 취소합니다."
 
 #. translators: help text for 'p' option in the 'Continue?' prompt
-#: src/solve-commit.cc:643
+#: src/solve-commit.cc:636
 msgid ""
 "Restart solver in no-force-resolution mode in order to show dependency "
 "problems."
@@ -6084,56 +6091,56 @@ msgstr ""
 "니다."
 
 #. translators: help text for 'v' option in the 'Continue?' prompt
-#: src/solve-commit.cc:645
+#: src/solve-commit.cc:638
 msgid "Toggle display of package versions."
 msgstr "패키지 버전 표시를 전환합니다."
 
 #. translators: help text for 'a' option in the 'Continue?' prompt
-#: src/solve-commit.cc:647
+#: src/solve-commit.cc:640
 msgid "Toggle display of package architectures."
 msgstr "패키지 아키텍처 표시를 전환합니다."
 
 #. translators: help text for 'r' option in the 'Continue?' prompt
-#: src/solve-commit.cc:649
+#: src/solve-commit.cc:642
 msgid ""
 "Toggle display of repositories from which the packages will be installed."
 msgstr "설치할 패키지에서 리포지토리 표시를 전환합니다."
 
 #. translators: help text for 'm' option in the 'Continue?' prompt
-#: src/solve-commit.cc:651
+#: src/solve-commit.cc:644
 msgid "Toggle display of package vendor names."
 msgstr "패키지 벤더 이름 표시를 전환합니다."
 
 #. translators: help text for 'd' option in the 'Continue?' prompt
-#: src/solve-commit.cc:653
+#: src/solve-commit.cc:646
 msgid "Toggle between showing all details and as few details as possible."
 msgstr "모든 정보를 표시하거나 최소로 표시합니다."
 
 #. translators: help text for 'g' option in the 'Continue?' prompt
-#: src/solve-commit.cc:655
+#: src/solve-commit.cc:648
 msgid "View the summary in pager."
 msgstr "페이저의 요약을 봅니다."
 
-#: src/solve-commit.cc:765
+#: src/solve-commit.cc:758
 msgid "committing"
 msgstr "커밋 중"
 
-#: src/solve-commit.cc:767
+#: src/solve-commit.cc:760
 msgid "(dry run)"
 msgstr "(모의 연습)"
 
-#: src/solve-commit.cc:791 src/solve-commit.cc:824
+#: src/solve-commit.cc:784 src/solve-commit.cc:817
 msgid "Problem retrieving the package file from the repository:"
 msgstr "리포지토리에서 패키지 파일을 검색하는 중 문제 발생:"
 
 #. translators: the first %s is 'zypper refresh' and the second is repo alias
-#: src/solve-commit.cc:821
+#: src/solve-commit.cc:814
 #, c-format, boost-format
 msgid "Repository '%s' is out of date. Running '%s' might help."
 msgstr ""
 "'%s' 리포지토리가 오래되었습니다. '%s'을(를) 실행하면 도움이 될 수 있습니다."
 
-#: src/solve-commit.cc:832
+#: src/solve-commit.cc:825
 msgid ""
 "The package integrity check failed. This may be a problem with the "
 "repository or media. Try one of the following:\n"
@@ -6151,20 +6158,20 @@ msgstr ""
 "- 다른 설치 미디어 사용(손상된 경우)\n"
 "- 다른 리포지토리 사용"
 
-#: src/solve-commit.cc:846
+#: src/solve-commit.cc:839
 msgid "Problem occurred during or after installation or removal of packages:"
 msgstr "패키지 설치 중이나 패키지 설치 또는 제거 후 문제 발생:"
 
-#: src/solve-commit.cc:854
+#: src/solve-commit.cc:847
 msgid "Installation has completed with error."
 msgstr "설치가 완료되었으나 오류가 발생했습니다."
 
-#: src/solve-commit.cc:856
+#: src/solve-commit.cc:849
 #, boost-format
 msgid "You may run '%1%' to repair any dependency problems."
 msgstr "'%1%'을(를) 실행하여 종속성 문제를 복구할 수 있습니다."
 
-#: src/solve-commit.cc:870
+#: src/solve-commit.cc:863
 msgid ""
 "One of the installed patches requires a reboot of your machine. Reboot as "
 "soon as possible."
@@ -6172,7 +6179,7 @@ msgstr ""
 "설치된 패치 중 하나를 사용하려면 컴퓨터 재부팅이 필요합니다. 최대한 빨리 재부"
 "팅하십시오."
 
-#: src/solve-commit.cc:878
+#: src/solve-commit.cc:871
 msgid ""
 "One of the installed patches affects the package manager itself. Run this "
 "command once more to install any other needed patches."
@@ -6180,7 +6187,7 @@ msgstr ""
 "설치된 패치 중 하나가 패키지 관리자 자체에 영향을 줍니다. 이 명령을 다시 실행"
 "하여 다른 필요한 패치를 설치하십시오."
 
-#: src/solve-commit.cc:896
+#: src/solve-commit.cc:889
 msgid "Dependencies of all installed packages are satisfied."
 msgstr "설치된 모든 패키지의 종속성이 충족되었습니다."
 
@@ -6728,7 +6735,21 @@ msgstr ""
 msgid ""
 "If nothing else works enter '#1' to select the 1st option, '#2' for the 2nd "
 "one, ..."
-msgstr "아무것도 실행되지 않는 경우 '#1'을 입력하여 첫 번째 옵션을 선택하고, '#2'를 입력하여 두 번째 옵션을, ..."
+msgstr ""
+"아무것도 실행되지 않는 경우 '#1'을 입력하여 첫 번째 옵션을 선택하고, '#2'를 "
+"입력하여 두 번째 옵션을, ..."
+
+#~ msgid "Disabling repository '%s'."
+#~ msgstr "'%s' 리포지토리를 비활성화하는 중입니다."
+
+#~ msgid ""
+#~ "There are some running programs that might use files deleted by recent "
+#~ "upgrade. You may wish to check and restart some of them. Run '%s' to list "
+#~ "these programs."
+#~ msgstr ""
+#~ "최근 업그레이드에서 삭제된 파일을 사용했을 수 있는 실행 중인 프로그램이 있"
+#~ "습니다. 일부 프로그램을 확인하고 다시 시작할 수도 있습니다. 해당 프로그램"
+#~ "을 나열하려면 '%s'을(를) 실행하십시오."
 
 #~ msgid "Augeas error: setting config file to load failed."
 #~ msgstr "Augeas 오류: 로드할 구성 파일을 설정하지 못했습니다."
