@@ -461,20 +461,6 @@ INSTALL(  FILES
   DESTINATION ${INCLUDE_INSTALL_DIR}/zypp/parser/yum
 )
 
-SET( zypp_parser_ws_SRCS
-  parser/ws/WebpinResultFileReader.cc
-)
-
-SET( zypp_parser_ws_HEADERS
-  parser/ws/WebpinResultFileReader.h
-)
-
-INSTALL(  FILES
-  ${zypp_parser_ws_HEADERS}
-  DESTINATION ${INCLUDE_INSTALL_DIR}/zypp/parser/ws
-)
-
-
 SET( zypp_pool_SRCS
   pool/PoolImpl.cc
   pool/PoolStats.cc
@@ -802,14 +788,6 @@ SET( zypp_repo_susetags_HEADERS
   repo/susetags/Downloader.h
 )
 
-SET( zypp_ws_SRCS
-  ws/WebpinResult.cc
-)
-
-SET( zypp_ws_HEADERS
-  ws/WebpinResult.h
-)
-
 ####################################################################
 
 SET( zypp_misc_HEADERS
@@ -836,7 +814,6 @@ ${zypp_pool_SRCS}
 ${zypp_parser_susetags_SRCS}
 ${zypp_parser_xml_SRCS}
 ${zypp_parser_yum_SRCS}
-${zypp_parser_ws_SRCS}
 ${zypp_parser_SRCS}
 ${zypp_media_proxyinfo_SRCS}
 ${zypp_media_SRCS}
@@ -852,7 +829,6 @@ ${zypp_target_SRCS}
 ${zypp_solver_detail_SRCS}
 ${zypp_ui_SRCS}
 ${zypp_thread_SRCS}
-${zypp_ws_SRCS}
 ${zypp_SRCS}
 ${zypp_zypp_detail_SRCS}
 ${zypp_sat_SRCS}
@@ -867,7 +843,6 @@ ${zypp_parser_tagfile_HEADERS}
 ${zypp_parser_susetags_HEADERS}
 ${zypp_parser_yum_HEADERS}
 ${zypp_parser_xml_HEADERS}
-${zypp_parser_ws_HEADERS}
 ${zypp_parser_HEADERS}
 ${zypp_ui_HEADERS}
 ${zypp_media_HEADERS}
@@ -877,7 +852,6 @@ ${zypp_solver_detail_HEADERS}
 ${zypp_sat_HEADERS}
 ${zypp_sat_detail_HEADERS}
 ${zypp_url_HEADERS}
-${zypp_ws_HEADERS}
 ${zypp_HEADERS}
 ${zypp_zypp_detail_HEADERS}
 ${zypp_thread_HEADERS}
