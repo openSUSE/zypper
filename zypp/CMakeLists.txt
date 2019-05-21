@@ -201,7 +201,6 @@ SET( zypp_HEADERS
 INSTALL(  FILES ${zypp_HEADERS} DESTINATION "${INCLUDE_INSTALL_DIR}/zypp" )
 
 SET( zypp_base_SRCS
-  base/InterProcessMutex.cc
   base/Backtrace.cc
   base/CleanerThread.cc
   base/DrunkenBishop.cc
@@ -229,7 +228,6 @@ SET( zypp_base_SRCS
 )
 
 SET( zypp_base_HEADERS
-  base/InterProcessMutex.h
   base/Backtrace.h
   base/Collector.h
   base/DrunkenBishop.h
