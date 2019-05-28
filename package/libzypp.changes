@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Tue May 28 16:50:14 CEST 2019 - ma@suse.de
+
+- Drop unused InterProcessMutex class and test
+- Drop unused WebpinResult class and test
+- Give posttrans script a parameter of 0 (issue #168)
+- Use CURL_HTTP_VERSION_2TLS if available (fixes #141)
+- version 17.12.0 (12)
+
+-------------------------------------------------------------------
 Thu Apr  4 13:24:40 CEST 2019 - ma@suse.de
 
 - Enhance scanning /sys for modaliases (bsc#1130161)
