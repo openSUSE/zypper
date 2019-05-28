@@ -161,12 +161,12 @@ namespace
       makeCmd<DownloadCmd> ( ZypperCommand::DOWNLOAD_e , std::string(), { "download" } ),
       makeCmd<SourceDownloadCmd> ( ZypperCommand::SOURCE_DOWNLOAD_e , std::string(), { "source-download" } ),
       makeCmd<NeedsRebootingCmd> ( ZypperCommand::NEEDS_REBOOTING_e , std::string(), { "needs-rebooting" } ),
+      makeCmd<PSCommand> ( ZypperCommand::PS_e , std::string(), { "ps" } ),
 
       makeCmd<SubCmd> ( ZypperCommand::SUBCOMMAND_e, _("Subcommands:"), { "subcommand" }),
 
       //all commands in this group will be hidden from help
-      makeCmd<PSCommand> ( ZypperCommand::PS_e , "HIDDEN", { "ps" } ),
-      makeCmd<SearchCmd> ( ZypperCommand::RUG_PATCH_SEARCH_e , std::string(), { "patch-search", "pse" }, SearchCmd::CmdMode::RugPatchSearch ),
+      makeCmd<SearchCmd> ( ZypperCommand::RUG_PATCH_SEARCH_e , "HIDDEN", { "patch-search", "pse" }, SearchCmd::CmdMode::RugPatchSearch ),
       makeCmd<ConfigTestCmd> ( ZypperCommand::CONFIGTEST_e , std::string(), { "configtest" } ),
       makeCmd<RupPingCmd> ( ZypperCommand::RUG_PING_e , std::string(), { "ping" } ),
       makeCmd<ShellQuitCmd> ( ZypperCommand::SHELL_QUIT_e , std::string(), { "quit", "exit", "\004" } ),
