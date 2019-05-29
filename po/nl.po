@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypper.nl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-05-29 13:10+0200\n"
-"PO-Revision-Date: 2019-03-14 19:13+0000\n"
+"PO-Revision-Date: 2019-05-29 15:49+0000\n"
 "Last-Translator: Freek de Kruijf <freek@opensuse.org>\n"
 "Language-Team: Dutch <https://l10n.opensuse.org/projects/zypper/master/nl/>\n"
 "Language: nl\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 3.3\n"
+"X-Generator: Weblate 3.6.1\n"
 
 #: src/SolverRequester.h:52
 #, boost-format
@@ -2836,7 +2836,7 @@ msgstr ""
 
 #: src/commands/needs-rebooting.cc:41
 msgid "No core libraries or services have been updated."
-msgstr "Er zijn geen kernbibliotheken or -services bijgewerkt."
+msgstr "Er zijn geen kernbibliotheken of -services bijgewerkt."
 
 #: src/commands/needs-rebooting.cc:42
 msgid "Reboot is probably not necessary."
@@ -6226,7 +6226,7 @@ msgstr "Probleem: "
 
 #: src/solve-commit.cc:48
 msgid "Detailed information: "
-msgstr ""
+msgstr "Gedetailleerde informatie: "
 
 #. TranslatorExplanation %d is the solution number
 #: src/solve-commit.cc:61
@@ -6262,7 +6262,7 @@ msgstr[1] ""
 #. The answers should be lower case letters.
 #: src/solve-commit.cc:111
 msgid "s/r/c/d"
-msgstr ""
+msgstr "o/n/a/d"
 
 #. translators: answers for dependency problem solution input prompt:
 #. "Choose from above solutions by number or cancel"
@@ -6273,28 +6273,28 @@ msgstr ""
 #. please report a bug against zypper at bugzilla.novell.com, we'll try to solve it.
 #: src/solve-commit.cc:127
 msgid "c/d"
-msgstr ""
+msgstr "a/d"
 
 #: src/solve-commit.cc:133
 #, boost-format
 msgid "Choose solution %1%"
-msgstr ""
+msgstr "Oplossing %1% kiezen"
 
 #: src/solve-commit.cc:135
 msgid "Skip problem and continue."
-msgstr ""
+msgstr "Probleem overslaan en doorgaan."
 
 #: src/solve-commit.cc:138
 msgid "Retry solving immediately."
-msgstr ""
+msgstr "Probeer onmiddellijk opnieuw op te lossen."
 
 #: src/solve-commit.cc:140
 msgid "Choose no solution and cancel."
-msgstr ""
+msgstr "Geen oplossing kiezen en annuleren."
 
 #: src/solve-commit.cc:141
 msgid "Toggle show detailed conflict information."
-msgstr ""
+msgstr "Gedetailleerde informatie over conflict tonen omschakelen."
 
 #: src/solve-commit.cc:174
 #, c-format, boost-format
