@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-20 10:18+0200\n"
+"POT-Creation-Date: 2019-05-29 13:10+0200\n"
 "PO-Revision-Date: 2019-04-04 18:36+0000\n"
 "Last-Translator: David Medina <medipas@gmail.com>\n"
 "Language-Team: Catalan <https://l10n.opensuse.org/projects/zypper/master/ca/"
@@ -247,12 +247,12 @@ msgstr "Confia en la clau temporalment."
 msgid "Trust the key and import it into trusted keyring."
 msgstr "Confia en la clau i importa-la a l'anell de claus de confiança."
 
-#: src/callbacks/keyring.h:373
+#: src/callbacks/keyring.h:371
 #, c-format, boost-format
 msgid "Ignoring failed signature verification for file '%s'!"
 msgstr "S'ignora la verificació fallida de la signatura per al fitxer %s!"
 
-#: src/callbacks/keyring.h:376
+#: src/callbacks/keyring.h:374
 #, c-format, boost-format
 msgid ""
 "Ignoring failed signature verification for file '%s' from repository '%s'!"
@@ -260,25 +260,25 @@ msgstr ""
 "S'ignora la verificació fallida de la signatura per al fitxer %s del "
 "repositori %s!"
 
-#: src/callbacks/keyring.h:382
+#: src/callbacks/keyring.h:380
 msgid "Double-check this is not caused by some malicious changes in the file!"
 msgstr ""
 "Aquesta doble comprovació no està causada per cap canvi maliciós del fitxer!"
 
 #. translator: %1% is a file name
-#: src/callbacks/keyring.h:392
+#: src/callbacks/keyring.h:390
 #, boost-format
 msgid "Signature verification failed for file '%1%'."
 msgstr "Ha fallat la verificació de la signatura del fitxer %1%."
 
 #. translator: %1% is a file name, %2% a repositories name
-#: src/callbacks/keyring.h:395
+#: src/callbacks/keyring.h:393
 #, boost-format
 msgid "Signature verification failed for file '%1%' from repository '%2%'."
 msgstr ""
 "Ha fallat la verificació de la signatura del fitxer %1% del repositori %2%."
 
-#: src/callbacks/keyring.h:439
+#: src/callbacks/keyring.h:437
 msgid ""
 "The rpm database seems to contain old V3 version gpg keys which are "
 "meanwhile obsolete and considered insecure:"
@@ -286,12 +286,12 @@ msgstr ""
 "Sembla que la base de dades d'rpm conté claus gpg de l'antiga versió V3, que "
 "són obsoletes i que es consideren no segures:"
 
-#: src/callbacks/keyring.h:446
+#: src/callbacks/keyring.h:444
 #, boost-format
 msgid "To see details about a key call '%1%'."
 msgstr "Per veure detalls sobre una clau: \"%1%\"."
 
-#: src/callbacks/keyring.h:450
+#: src/callbacks/keyring.h:448
 #, boost-format
 msgid ""
 "Unless you believe the key in question is still in use, you can remove it "
@@ -300,17 +300,17 @@ msgstr ""
 "Si no és que cregueu que la clau en qüestió encara s'usi, podeu suprimir-la "
 "de la base de dades d'rpm amb \"%1%\"."
 
-#: src/callbacks/keyring.h:472
+#: src/callbacks/keyring.h:470
 #, c-format, boost-format
 msgid "No digest for file %s."
 msgstr "No hi ha resum per al fitxer %s."
 
-#: src/callbacks/keyring.h:480
+#: src/callbacks/keyring.h:478
 #, c-format, boost-format
 msgid "Unknown digest %s for file %s."
 msgstr "El resum %s és desconegut per al fitxer %s."
 
-#: src/callbacks/keyring.h:497
+#: src/callbacks/keyring.h:495
 #, boost-format
 msgid ""
 "Digest verification failed for file '%1%'\n"
@@ -325,7 +325,7 @@ msgstr ""
 "  s'esperava %3%\n"
 "  però s'ha obtingut %4%\n"
 
-#: src/callbacks/keyring.h:509
+#: src/callbacks/keyring.h:507
 msgid ""
 "Accepting packages with wrong checksums can lead to a corrupted system and "
 "in extreme cases even to a system compromise."
@@ -333,7 +333,7 @@ msgstr ""
 "Acceptar paquets amb sumes de verificació errònies pot conduir a un sistema "
 "corromput i, en casos extrems, a un sistema compromès."
 
-#: src/callbacks/keyring.h:517
+#: src/callbacks/keyring.h:515
 #, boost-format
 msgid ""
 "However if you made certain that the file with checksum '%1%..' is secure, "
@@ -351,22 +351,22 @@ msgstr ""
 "el fitxer.\n"
 
 #. translators: A prompt option
-#: src/callbacks/keyring.h:524
+#: src/callbacks/keyring.h:522
 msgid "discard"
 msgstr "descarta"
 
 #. translators: A prompt option help text
-#: src/callbacks/keyring.h:526
+#: src/callbacks/keyring.h:524
 msgid "Unblock using this file on your own risk."
 msgstr "Desbloquegeu l'ús d'aquest fitxer sota la vostra responsabilitat."
 
 #. translators: A prompt option help text
-#: src/callbacks/keyring.h:528
+#: src/callbacks/keyring.h:526
 msgid "Discard the file."
 msgstr "Descarta el fitxer."
 
 #. translators: A prompt text
-#: src/callbacks/keyring.h:533
+#: src/callbacks/keyring.h:530
 msgid "Unblock or discard?"
 msgstr "El desbloquejo o el descarto?"
 
@@ -745,7 +745,7 @@ msgstr "Gestió de llengua:"
 msgid "Other Commands:"
 msgstr "Altres ordres:"
 
-#: src/Command.cc:165
+#: src/Command.cc:166
 msgid "Subcommands:"
 msgstr "Subordres:"
 
@@ -2094,42 +2094,42 @@ msgstr ""
 "Desactiva la comprovació de l'autoritat de certificació SSL i continua."
 
 #. translators: this is a prompt text
-#: src/callbacks/media.cc:83 src/callbacks/media.cc:178
-#: src/callbacks/media.cc:260 src/utils/prompt.cc:219 src/utils/prompt.cc:305
+#: src/callbacks/media.cc:81 src/callbacks/media.cc:173
+#: src/callbacks/media.cc:253 src/utils/prompt.cc:219 src/utils/prompt.cc:303
 msgid "Abort, retry, ignore?"
 msgstr "Avorta, reintenta, ignora?"
 
-#: src/callbacks/media.cc:91
+#: src/callbacks/media.cc:89
 msgid "SSL certificate authority check disabled."
 msgstr "Comprovació de l'autoritat de certificació SSL desactivada."
 
-#: src/callbacks/media.cc:108
+#: src/callbacks/media.cc:106
 msgid "No devices detected, cannot eject."
 msgstr "No es detecten els dispositius. No es pot expulsar."
 
-#: src/callbacks/media.cc:109
+#: src/callbacks/media.cc:107
 msgid "Try to eject the device manually."
 msgstr "Proveu d'expulsar el dispositiu manualment."
 
-#: src/callbacks/media.cc:120
+#: src/callbacks/media.cc:118
 msgid "Detected devices:"
 msgstr "Dispositius detectats:"
 
 # FR
-#: src/callbacks/media.cc:135
+#: src/callbacks/media.cc:133
 msgid "Cancel"
 msgstr "Cancel·la"
 
-#: src/callbacks/media.cc:138
+#: src/callbacks/media.cc:135
 msgid "Select device to eject."
 msgstr "Seleccioneu el dispositiu a expulsar."
 
-#: src/callbacks/media.cc:153
+#: src/callbacks/media.cc:150
 msgid "Insert the CD/DVD and press ENTER to continue."
 msgstr "Inseriu el disc i premeu RETORN."
 
 # window title for kernel loading (see txt_load_kernel)
-#: src/callbacks/media.cc:156
+#: src/callbacks/media.cc:153
 msgid "Retrying..."
 msgstr "Ho torno a provar..."
 
@@ -2139,11 +2139,11 @@ msgstr "Ho torno a provar..."
 #. The 'u' reply means 'Change URI'.
 #. cd/dvd protocol-specific options:
 #. 'e' stands for Eject medium
-#: src/callbacks/media.cc:171
+#: src/callbacks/media.cc:168
 msgid "a/r/i/u/e"
 msgstr "a/r/i/u/e"
 
-#: src/callbacks/media.cc:173
+#: src/callbacks/media.cc:170
 msgid "Eject medium."
 msgstr "Expulsa el dispositiu."
 
@@ -2151,7 +2151,7 @@ msgstr "Expulsa el dispositiu."
 #. Try to check what answers does zypper accept (it always accepts y/n at least)
 #. You can also have a look at the regular expressions used to check the answer here:
 #. /usr/lib/locale/<your_locale>/LC_MESSAGES/SYS_LC_MESSAGES
-#: src/callbacks/media.cc:219
+#: src/callbacks/media.cc:214
 #, c-format, boost-format
 msgid ""
 "Please insert medium [%s] #%d and type 'y' to continue or 'n' to cancel the "
@@ -2163,11 +2163,11 @@ msgstr ""
 #. translators: a/r/i/u are replies to the "Abort, retry, ignore?" prompt
 #. Translate the a/r/i part exactly as you did the a/r/i string.
 #. the 'u' reply means 'Change URI'.
-#: src/callbacks/media.cc:254
+#: src/callbacks/media.cc:249
 msgid "a/r/i/u"
 msgstr "a/r/i/u"
 
-#: src/callbacks/media.cc:298
+#: src/callbacks/media.cc:291
 #, c-format, boost-format
 msgid ""
 "Authentication required to access %s. You need to be root to be able to read "
@@ -2176,12 +2176,12 @@ msgstr ""
 "Cal autenticació per accedir a %s. Necessiteu ser l'administrador per poder "
 "llegir les credencials de %s."
 
-#: src/callbacks/media.cc:320 src/callbacks/media.cc:327
+#: src/callbacks/media.cc:313 src/callbacks/media.cc:320
 msgid "User Name"
 msgstr "Nom d'usuari"
 
 #. password
-#: src/callbacks/media.cc:335
+#: src/callbacks/media.cc:328
 msgid "Password"
 msgstr "Contrasenya"
 
@@ -3059,12 +3059,12 @@ msgstr ""
 msgid "Write debug output to file <path>."
 msgstr "Escriu la sortida de depuració al fitxer <path>."
 
-#: src/commands/ps.cc:72 src/solve-commit.cc:451
+#: src/commands/ps.cc:72 src/solve-commit.cc:493
 msgid "Check failed:"
 msgstr "Ha fallat la comprovació:"
 
 #. Here: Table output
-#: src/commands/ps.cc:127 src/solve-commit.cc:440
+#: src/commands/ps.cc:127 src/solve-commit.cc:482
 msgid "Checking for running processes using deleted libraries..."
 msgstr ""
 "Comprovant si hi ha processos actius que facin servir biblioteques "
@@ -4904,7 +4904,7 @@ msgstr ""
 msgid "Argument resolves to no package"
 msgstr "L'argument no apunta a cap paquet"
 
-#: src/commands/utils/download.cc:246 src/solve-commit.cc:891
+#: src/commands/utils/download.cc:246 src/solve-commit.cc:929
 msgid "Nothing to do."
 msgstr "Res per fer."
 
@@ -5668,8 +5668,8 @@ msgstr "Error a l'hora d'inhabilitar el repositori %s."
 msgid "Problem retrieving files from '%s'."
 msgstr "Problema obtenint els fitxers de %s."
 
-#: src/repos.cc:346 src/repos.cc:1860 src/solve-commit.cc:785
-#: src/solve-commit.cc:816 src/solve-commit.cc:840
+#: src/repos.cc:346 src/repos.cc:1860 src/solve-commit.cc:823
+#: src/solve-commit.cc:854 src/solve-commit.cc:878
 msgid "Please see the above error message for a hint."
 msgstr "Si us plau, llegiu l'error anterior."
 
@@ -6138,13 +6138,17 @@ msgstr "No s'ha trobat cap producte."
 msgid "Problem: "
 msgstr "Problema: "
 
+#: src/solve-commit.cc:48
+msgid "Detailed information: "
+msgstr ""
+
 #. TranslatorExplanation %d is the solution number
-#: src/solve-commit.cc:54
+#: src/solve-commit.cc:61
 #, c-format, boost-format
 msgid " Solution %d: "
 msgstr " Solució %d: "
 
-#: src/solve-commit.cc:73
+#: src/solve-commit.cc:80
 msgid "Choose the above solution using '1' or skip, retry or cancel"
 msgid_plural "Choose from above solutions by number or skip, retry or cancel"
 msgstr[0] ""
@@ -6156,7 +6160,7 @@ msgstr[1] ""
 
 #. translators: translate 'c' to whatever you translated the 'c' in
 #. "c" and "s/r/c" strings
-#: src/solve-commit.cc:80
+#: src/solve-commit.cc:87
 msgid "Choose the above solution using '1' or cancel using 'c'"
 msgid_plural "Choose from above solutions by number or cancel"
 msgstr[0] "Trieu la solució anterior amb \"1\" o cancel·leu-ho amb \"c\"."
@@ -6166,30 +6170,50 @@ msgstr[1] "Trieu la solució amb el número corresponent o cancel·leu-ho."
 #. "Choose from above solutions by number or skip, retry or cancel"
 #. Translate the letters to whatever is suitable for your language.
 #. The anserws must be separated by slash characters '/' and must
-#. correspond to skip/retry/cancel in that order.
+#. correspond to skip/retry/cancel/detailed information in that order.
 #. The answers should be lower case letters.
-#: src/solve-commit.cc:99
-msgid "s/r/c"
-msgstr "s/r/c"
+#: src/solve-commit.cc:111
+msgid "s/r/c/d"
+msgstr ""
 
 #. translators: answers for dependency problem solution input prompt:
 #. "Choose from above solutions by number or cancel"
 #. Translate the letter 'c' to whatever is suitable for your language
-#. and to the same as you translated it in the "s/r/c" string
-#. See the "s/r/c" comment for other details.
+#. and to the same as you translated it in the "s/r/c/d" string
+#. See the "s/r/c/d" comment for other details.
 #. One letter string  for translation can be tricky, so in case of problems,
 #. please report a bug against zypper at bugzilla.novell.com, we'll try to solve it.
-#: src/solve-commit.cc:111
-msgid "c"
-msgstr "c"
+#: src/solve-commit.cc:127
+msgid "c/d"
+msgstr ""
 
-#. continue with next problem
-#: src/solve-commit.cc:132
+#: src/solve-commit.cc:133
+#, boost-format
+msgid "Choose solution %1%"
+msgstr ""
+
+#: src/solve-commit.cc:135
+msgid "Skip problem and continue."
+msgstr ""
+
+#: src/solve-commit.cc:138
+msgid "Retry solving immediately."
+msgstr ""
+
+#: src/solve-commit.cc:140
+msgid "Choose no solution and cancel."
+msgstr ""
+
+#: src/solve-commit.cc:141
+msgid "Toggle show detailed conflict information."
+msgstr ""
+
+#: src/solve-commit.cc:174
 #, c-format, boost-format
 msgid "Applying solution %s"
 msgstr "Aplicant la solució %s"
 
-#: src/solve-commit.cc:148
+#: src/solve-commit.cc:190
 #, c-format, boost-format
 msgid "%d Problem:"
 msgid_plural "%d Problems:"
@@ -6197,46 +6221,46 @@ msgstr[0] "%d problema:"
 msgstr[1] "%d problemes:"
 
 #. should not happen! If solve() failed at least one problem must be set!
-#: src/solve-commit.cc:152
+#: src/solve-commit.cc:194
 msgid "Specified capability not found"
 msgstr "No s'ha trobat la capacitat especificada."
 
-#: src/solve-commit.cc:162
+#: src/solve-commit.cc:204
 #, c-format, boost-format
 msgid "Problem: %s"
 msgstr "Problema: %s"
 
-#: src/solve-commit.cc:181
+#: src/solve-commit.cc:223
 msgid "Resolving dependencies..."
 msgstr "Resolent les dependències..."
 
-#: src/solve-commit.cc:242
+#: src/solve-commit.cc:284
 msgid "Force resolution:"
 msgstr "Força la resolució:"
 
-#: src/solve-commit.cc:340
+#: src/solve-commit.cc:382
 msgid "Verifying dependencies..."
 msgstr "Verificant les dependències..."
 
 #. Here: compute the full upgrade
-#: src/solve-commit.cc:390
+#: src/solve-commit.cc:432
 msgid "Computing upgrade..."
 msgstr "Calculant l'actualizació..."
 
-#: src/solve-commit.cc:404
+#: src/solve-commit.cc:446
 msgid "Generating solver test case..."
 msgstr "Generant test de resolució..."
 
-#: src/solve-commit.cc:406
+#: src/solve-commit.cc:448
 #, c-format, boost-format
 msgid "Solver test case generated successfully at %s."
 msgstr "Prova de solució generada satisfactòriament a %s."
 
-#: src/solve-commit.cc:409
+#: src/solve-commit.cc:451
 msgid "Error creating the solver test case."
 msgstr "S'ha produït un error en crear el test de solució."
 
-#: src/solve-commit.cc:437
+#: src/solve-commit.cc:479
 #, c-format, boost-format
 msgid ""
 "Check for running processes using deleted libraries is disabled in zypper."
@@ -6246,11 +6270,11 @@ msgstr ""
 "està inhabilitada a zypper.conf. Executeu \"%s\" per comprovar-los "
 "manualment."
 
-#: src/solve-commit.cc:453
+#: src/solve-commit.cc:495
 msgid "Skip check:"
 msgstr "Omet la comprovació:"
 
-#: src/solve-commit.cc:460
+#: src/solve-commit.cc:502
 #, boost-format
 msgid ""
 "There are running programs which still use files and libraries deleted or "
@@ -6262,32 +6286,32 @@ msgstr ""
 "reiniciar per poder aprofitar les darreres actualitzacions. Executeu \"%1%\" "
 "per obtenir una llista d'aquests programes."
 
-#: src/solve-commit.cc:474
+#: src/solve-commit.cc:516
 msgid "Update notifications were received from the following packages:"
 msgstr "S'han rebut notificacions d'actualització dels següents paquets:"
 
-#: src/solve-commit.cc:483
+#: src/solve-commit.cc:525
 #, c-format, boost-format
 msgid "Message from package %s:"
 msgstr "Missatge del paquet %s:"
 
-#: src/solve-commit.cc:491
+#: src/solve-commit.cc:533
 msgid "y/n"
 msgstr "s/n"
 
-#: src/solve-commit.cc:492
+#: src/solve-commit.cc:534
 msgid "View the notifications now?"
 msgstr "Mostro les notificacions ara?"
 
-#: src/solve-commit.cc:538
+#: src/solve-commit.cc:578
 msgid "Computing distribution upgrade..."
 msgstr "Calculant l'actualització de la distribució..."
 
-#: src/solve-commit.cc:543
+#: src/solve-commit.cc:583
 msgid "Resolving package dependencies..."
 msgstr "Resolent les dependències del paquet..."
 
-#: src/solve-commit.cc:598
+#: src/solve-commit.cc:638
 msgid ""
 "Some of the dependencies of installed packages are broken. In order to fix "
 "these dependencies, the following actions need to be taken:"
@@ -6295,7 +6319,7 @@ msgstr ""
 "Algunes de les dependències dels paquets instal·lats estan trencades. Per "
 "tal d'arreglar-les, s'han de fer les accions següents:"
 
-#: src/solve-commit.cc:605
+#: src/solve-commit.cc:645
 msgid "Root privileges are required to fix broken package dependencies."
 msgstr ""
 "Calen privilegis d'arrel per poder arreglar els problemes de dependències."
@@ -6310,12 +6334,12 @@ msgstr ""
 #. The answers should be lower case letters, but in general, any UTF-8
 #. string will do.
 #. ! \todo add c for changelog and x for explain (show the dep tree)
-#: src/solve-commit.cc:627
+#: src/solve-commit.cc:667
 msgid "y/n/p/v/a/r/m/d/g"
 msgstr "s/n/p/v/a/r/p/d/m"
 
 #. translators: help text for 'y' option in the 'Continue?' prompt
-#: src/solve-commit.cc:632
+#: src/solve-commit.cc:672
 msgid ""
 "Yes, accept the summary and proceed with installation/removal of packages."
 msgstr ""
@@ -6323,12 +6347,12 @@ msgstr ""
 "paquets."
 
 #. translators: help text for 'n' option in the 'Continue?' prompt
-#: src/solve-commit.cc:634
+#: src/solve-commit.cc:674
 msgid "No, cancel the operation."
 msgstr "No, cancel·la l'operació."
 
 #. translators: help text for 'p' option in the 'Continue?' prompt
-#: src/solve-commit.cc:636
+#: src/solve-commit.cc:676
 msgid ""
 "Restart solver in no-force-resolution mode in order to show dependency "
 "problems."
@@ -6337,57 +6361,57 @@ msgstr ""
 "mostrar els problemes de dependències."
 
 #. translators: help text for 'v' option in the 'Continue?' prompt
-#: src/solve-commit.cc:638
+#: src/solve-commit.cc:678
 msgid "Toggle display of package versions."
 msgstr "Commuta la visualització de les versions dels paquets."
 
 #. translators: help text for 'a' option in the 'Continue?' prompt
-#: src/solve-commit.cc:640
+#: src/solve-commit.cc:680
 msgid "Toggle display of package architectures."
 msgstr "Commuta la visualització de l'arquitectura dels paquets."
 
 #. translators: help text for 'r' option in the 'Continue?' prompt
-#: src/solve-commit.cc:642
+#: src/solve-commit.cc:682
 msgid ""
 "Toggle display of repositories from which the packages will be installed."
 msgstr "Commuta la visualització de les versions dels paquets."
 
 #. translators: help text for 'm' option in the 'Continue?' prompt
-#: src/solve-commit.cc:644
+#: src/solve-commit.cc:684
 msgid "Toggle display of package vendor names."
 msgstr "Commuta la visualització dels proveïdors dels paquets."
 
 #. translators: help text for 'd' option in the 'Continue?' prompt
-#: src/solve-commit.cc:646
+#: src/solve-commit.cc:686
 msgid "Toggle between showing all details and as few details as possible."
 msgstr ""
 "Commuta la visualització entre mostrar tots els detalls o mostrar-ne tan "
 "pocs com sigui possible."
 
 #. translators: help text for 'g' option in the 'Continue?' prompt
-#: src/solve-commit.cc:648
+#: src/solve-commit.cc:688
 msgid "View the summary in pager."
 msgstr "Visualitzar el resum al paginador."
 
-#: src/solve-commit.cc:758
+#: src/solve-commit.cc:796
 msgid "committing"
 msgstr "confirmant"
 
-#: src/solve-commit.cc:760
+#: src/solve-commit.cc:798
 msgid "(dry run)"
 msgstr "(execució de prova)"
 
-#: src/solve-commit.cc:784 src/solve-commit.cc:817
+#: src/solve-commit.cc:822 src/solve-commit.cc:855
 msgid "Problem retrieving the package file from the repository:"
 msgstr "Problema obtenint el fitxer de paquet del repositori:"
 
 #. translators: the first %s is 'zypper refresh' and the second is repo alias
-#: src/solve-commit.cc:814
+#: src/solve-commit.cc:852
 #, c-format, boost-format
 msgid "Repository '%s' is out of date. Running '%s' might help."
 msgstr "El repositori %s no està actualitzat. Fer servir \"%s\" podria ajudar."
 
-#: src/solve-commit.cc:825
+#: src/solve-commit.cc:863
 msgid ""
 "The package integrity check failed. This may be a problem with the "
 "repository or media. Try one of the following:\n"
@@ -6406,23 +6430,23 @@ msgstr ""
 "- utilitzeu un altre suport d'instal·lació (si, per exemple, està malmès)\n"
 "- utilitzeu un altre repositori"
 
-#: src/solve-commit.cc:839
+#: src/solve-commit.cc:877
 msgid "Problem occurred during or after installation or removal of packages:"
 msgstr ""
 "S'ha produït un error durant o després de la instal·lació o supressió de "
 "paquets:"
 
-#: src/solve-commit.cc:847
+#: src/solve-commit.cc:885
 msgid "Installation has completed with error."
 msgstr "La instal·lació s'ha completat amb errors."
 
-#: src/solve-commit.cc:849
+#: src/solve-commit.cc:887
 #, boost-format
 msgid "You may run '%1%' to repair any dependency problems."
 msgstr ""
 "Podríeu executar \"%1%\" per reparar qualsevol problema de dependències."
 
-#: src/solve-commit.cc:863
+#: src/solve-commit.cc:901
 msgid ""
 "One of the installed patches requires a reboot of your machine. Reboot as "
 "soon as possible."
@@ -6430,7 +6454,7 @@ msgstr ""
 "Un dels pedaços instal·lats requereix reiniciar la màquina. Feu-ho al més "
 "aviat possible."
 
-#: src/solve-commit.cc:871
+#: src/solve-commit.cc:909
 msgid ""
 "One of the installed patches affects the package manager itself. Run this "
 "command once more to install any other needed patches."
@@ -6438,7 +6462,7 @@ msgstr ""
 "Un dels pedaços instal·lats afecta el mateix gestor de paquets. Executeu "
 "aquesta ordre un altre cop per instal·lar qualsevol altre pedaç necessari."
 
-#: src/solve-commit.cc:889
+#: src/solve-commit.cc:927
 msgid "Dependencies of all installed packages are satisfied."
 msgstr "Es satisfan totes les dependències dels paquets instal·lats."
 
@@ -6938,13 +6962,13 @@ msgstr ""
 msgid "shows all options"
 msgstr "mostra totes les opcions"
 
-#: src/utils/prompt.cc:194 src/utils/prompt.cc:314 src/utils/prompt.cc:325
-#: src/utils/prompt.cc:424
+#: src/utils/prompt.cc:194 src/utils/prompt.cc:312 src/utils/prompt.cc:321
+#: src/utils/prompt.cc:419
 msgid "yes"
 msgstr "sí"
 
-#: src/utils/prompt.cc:194 src/utils/prompt.cc:314 src/utils/prompt.cc:325
-#: src/utils/prompt.cc:424
+#: src/utils/prompt.cc:194 src/utils/prompt.cc:312 src/utils/prompt.cc:321
+#: src/utils/prompt.cc:419
 msgid "no"
 msgstr "no"
 
@@ -6974,19 +6998,19 @@ msgstr[1] "Seleccionant automàticament '%s' després de %u segons."
 msgid "Trying again..."
 msgstr "Ho torno a provar..."
 
-#: src/utils/prompt.cc:325
+#: src/utils/prompt.cc:321
 msgid "always"
 msgstr "sempre"
 
-#: src/utils/prompt.cc:325
+#: src/utils/prompt.cc:321
 msgid "never"
 msgstr "mai"
 
-#: src/utils/prompt.cc:372
+#: src/utils/prompt.cc:367
 msgid "Cannot read input: bad stream or EOF."
 msgstr "No es pot llegir l'entrada: mal flux o final de fitxer."
 
-#: src/utils/prompt.cc:373
+#: src/utils/prompt.cc:368
 #, c-format, boost-format
 msgid ""
 "If you run zypper without a terminal, use '%s' global\n"
@@ -6995,30 +7019,36 @@ msgstr ""
 "Si feu servir el zypper sense un terminal, useu l'opció global \"%s\" \n"
 "per fer que el zypper utilitzi les respostes per defecte a les preguntes."
 
-#: src/utils/prompt.cc:412
+#: src/utils/prompt.cc:407
 #, c-format, boost-format
 msgid "Invalid answer '%s'."
 msgstr "Resposta incorrecta \"%s\"."
 
-#: src/utils/prompt.cc:415
+#: src/utils/prompt.cc:410
 #, c-format, boost-format
 msgid "Ambiguous answer '%s'."
 msgstr "Resposta ambigua: \"%s\"."
 
 #. translators: the %s are: 'y', 'yes' (translated), 'n', and 'no' (translated).
-#: src/utils/prompt.cc:423
+#: src/utils/prompt.cc:418
 #, c-format, boost-format
 msgid "Enter '%s' for '%s' or '%s' for '%s' if nothing else works for you."
 msgstr ""
 "Escriviu \"%s\" per a \"%s\" o \"%s\" per a \"%s\" si no us va bé res més."
 
-#: src/utils/prompt.cc:428
+#: src/utils/prompt.cc:423
 msgid ""
 "If nothing else works enter '#1' to select the 1st option, '#2' for the 2nd "
 "one, ..."
 msgstr ""
 "Si no funciona res més, introduïu \"#1\" per seleccionar la 1a opció, \"#2\" "
 "per a la 2a..."
+
+#~ msgid "s/r/c"
+#~ msgstr "s/r/c"
+
+#~ msgid "c"
+#~ msgstr "c"
 
 #~ msgid "Disabling repository '%s'."
 #~ msgstr "Inhabilitant el repositori %s."

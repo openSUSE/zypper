@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-20 10:18+0200\n"
+"POT-Creation-Date: 2019-05-29 13:10+0200\n"
 "PO-Revision-Date: 2019-03-12 11:54+0000\n"
 "Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
 "Language-Team: Slovak <https://l10n.opensuse.org/projects/zypper/master/sk/"
@@ -239,37 +239,37 @@ msgstr "Dôverovať kľúču dočasne."
 msgid "Trust the key and import it into trusted keyring."
 msgstr "Dôverovať kľúču a importovať ho do dôveryhodného zväzku."
 
-#: src/callbacks/keyring.h:373
+#: src/callbacks/keyring.h:371
 #, c-format, boost-format
 msgid "Ignoring failed signature verification for file '%s'!"
 msgstr "Ignorujem zlyhanie overenia podpisu pre súbor '%s'!"
 
-#: src/callbacks/keyring.h:376
+#: src/callbacks/keyring.h:374
 #, c-format, boost-format
 msgid ""
 "Ignoring failed signature verification for file '%s' from repository '%s'!"
 msgstr ""
 "Ignorovanie zlyhania overenia podpisu pre súbor '%s' z repozitára '%s'!"
 
-#: src/callbacks/keyring.h:382
+#: src/callbacks/keyring.h:380
 msgid "Double-check this is not caused by some malicious changes in the file!"
 msgstr ""
 "Dôkladne overte, či to nie je spôsobené nejakou zámernou škodlivou zmenou v "
 "súbore!"
 
 #. translator: %1% is a file name
-#: src/callbacks/keyring.h:392
+#: src/callbacks/keyring.h:390
 #, boost-format
 msgid "Signature verification failed for file '%1%'."
 msgstr "Overenie podpisu súboru '%1%' zlyhalo."
 
 #. translator: %1% is a file name, %2% a repositories name
-#: src/callbacks/keyring.h:395
+#: src/callbacks/keyring.h:393
 #, boost-format
 msgid "Signature verification failed for file '%1%' from repository '%2%'."
 msgstr "Overenie podpisu súboru '%1%' z repozitára '%2%' zlyhalo."
 
-#: src/callbacks/keyring.h:439
+#: src/callbacks/keyring.h:437
 msgid ""
 "The rpm database seems to contain old V3 version gpg keys which are "
 "meanwhile obsolete and considered insecure:"
@@ -277,12 +277,12 @@ msgstr ""
 "Zdá sa, že databáza rpm obsahuje gpg kľúče starej verzie V3, ktoré sú "
 "medzitým zastarané a nie sú považované za bezpečné:"
 
-#: src/callbacks/keyring.h:446
+#: src/callbacks/keyring.h:444
 #, boost-format
 msgid "To see details about a key call '%1%'."
 msgstr "Ak chcete vidieť podrobnosti o kľúči, volajte '%1%'."
 
-#: src/callbacks/keyring.h:450
+#: src/callbacks/keyring.h:448
 #, boost-format
 msgid ""
 "Unless you believe the key in question is still in use, you can remove it "
@@ -291,17 +291,17 @@ msgstr ""
 "Pokiaľ si nemyslíte, že kľúč sa ešte stále používa, môžete ho odstrániť z "
 "databázy rpm volaním '%1%'."
 
-#: src/callbacks/keyring.h:472
+#: src/callbacks/keyring.h:470
 #, c-format, boost-format
 msgid "No digest for file %s."
 msgstr "Žiadny prehľad pre súbor %s."
 
-#: src/callbacks/keyring.h:480
+#: src/callbacks/keyring.h:478
 #, c-format, boost-format
 msgid "Unknown digest %s for file %s."
 msgstr "Neznámy prehľad %s pre súbor %s."
 
-#: src/callbacks/keyring.h:497
+#: src/callbacks/keyring.h:495
 #, boost-format
 msgid ""
 "Digest verification failed for file '%1%'\n"
@@ -316,7 +316,7 @@ msgstr ""
 "  očakávané %3%\n"
 "  ale získané  %4%\n"
 
-#: src/callbacks/keyring.h:509
+#: src/callbacks/keyring.h:507
 msgid ""
 "Accepting packages with wrong checksums can lead to a corrupted system and "
 "in extreme cases even to a system compromise."
@@ -324,7 +324,7 @@ msgstr ""
 "Prijatie balíkov so zlými kontrolnými súčtami môže viesť k poškodeniu "
 "systému a v extrémnych prípadoch dokonca ohroziť bezpečnosť systému."
 
-#: src/callbacks/keyring.h:517
+#: src/callbacks/keyring.h:515
 #, boost-format
 msgid ""
 "However if you made certain that the file with checksum '%1%..' is secure, "
@@ -342,22 +342,22 @@ msgstr ""
 "vyradí súbor.\n"
 
 #. translators: A prompt option
-#: src/callbacks/keyring.h:524
+#: src/callbacks/keyring.h:522
 msgid "discard"
 msgstr "vyradiť"
 
 #. translators: A prompt option help text
-#: src/callbacks/keyring.h:526
+#: src/callbacks/keyring.h:524
 msgid "Unblock using this file on your own risk."
 msgstr "Odblokovať použitie tohto súboru na vlastné riziko."
 
 #. translators: A prompt option help text
-#: src/callbacks/keyring.h:528
+#: src/callbacks/keyring.h:526
 msgid "Discard the file."
 msgstr "Vyradiť súbor."
 
 #. translators: A prompt text
-#: src/callbacks/keyring.h:533
+#: src/callbacks/keyring.h:530
 msgid "Unblock or discard?"
 msgstr "Odblokovať alebo vyradiť?"
 
@@ -739,7 +739,7 @@ msgstr "Správa lokalizácií:"
 msgid "Other Commands:"
 msgstr "Ostatné príkazy:"
 
-#: src/Command.cc:165
+#: src/Command.cc:166
 msgid "Subcommands:"
 msgstr "Podpríkazy:"
 
@@ -2161,40 +2161,40 @@ msgid "Disable SSL certificate authority check and continue."
 msgstr "Vypnúť kontrolu certifikačnej autority SSL a pokračovať."
 
 #. translators: this is a prompt text
-#: src/callbacks/media.cc:83 src/callbacks/media.cc:178
-#: src/callbacks/media.cc:260 src/utils/prompt.cc:219 src/utils/prompt.cc:305
+#: src/callbacks/media.cc:81 src/callbacks/media.cc:173
+#: src/callbacks/media.cc:253 src/utils/prompt.cc:219 src/utils/prompt.cc:303
 msgid "Abort, retry, ignore?"
 msgstr "Ukončiť, znova, ignorovať?"
 
-#: src/callbacks/media.cc:91
+#: src/callbacks/media.cc:89
 msgid "SSL certificate authority check disabled."
 msgstr "Kontrola certifikačnej autority vypnutá."
 
-#: src/callbacks/media.cc:108
+#: src/callbacks/media.cc:106
 msgid "No devices detected, cannot eject."
 msgstr "Neboli zistené žiadne zariadenia, nemôžem vysunúť mechaniku."
 
-#: src/callbacks/media.cc:109
+#: src/callbacks/media.cc:107
 msgid "Try to eject the device manually."
 msgstr "Pokúste sa vysunúť mechaniku ručne."
 
-#: src/callbacks/media.cc:120
+#: src/callbacks/media.cc:118
 msgid "Detected devices:"
 msgstr "Zistené zariadenia:"
 
-#: src/callbacks/media.cc:135
+#: src/callbacks/media.cc:133
 msgid "Cancel"
 msgstr "Zrušiť"
 
-#: src/callbacks/media.cc:138
+#: src/callbacks/media.cc:135
 msgid "Select device to eject."
 msgstr "Zvoľte zariadenie, ktoré sa má vysunúť."
 
-#: src/callbacks/media.cc:153
+#: src/callbacks/media.cc:150
 msgid "Insert the CD/DVD and press ENTER to continue."
 msgstr "Vložte CD/DVD a stlačte ENTER."
 
-#: src/callbacks/media.cc:156
+#: src/callbacks/media.cc:153
 msgid "Retrying..."
 msgstr "Opätovné skúšanie..."
 
@@ -2204,11 +2204,11 @@ msgstr "Opätovné skúšanie..."
 #. The 'u' reply means 'Change URI'.
 #. cd/dvd protocol-specific options:
 #. 'e' stands for Eject medium
-#: src/callbacks/media.cc:171
+#: src/callbacks/media.cc:168
 msgid "a/r/i/u/e"
 msgstr "k/z/i/u/v"
 
-#: src/callbacks/media.cc:173
+#: src/callbacks/media.cc:170
 msgid "Eject medium."
 msgstr "Vysunúť mechaniku."
 
@@ -2216,7 +2216,7 @@ msgstr "Vysunúť mechaniku."
 #. Try to check what answers does zypper accept (it always accepts y/n at least)
 #. You can also have a look at the regular expressions used to check the answer here:
 #. /usr/lib/locale/<your_locale>/LC_MESSAGES/SYS_LC_MESSAGES
-#: src/callbacks/media.cc:219
+#: src/callbacks/media.cc:214
 #, c-format, boost-format
 msgid ""
 "Please insert medium [%s] #%d and type 'y' to continue or 'n' to cancel the "
@@ -2228,11 +2228,11 @@ msgstr ""
 #. translators: a/r/i/u are replies to the "Abort, retry, ignore?" prompt
 #. Translate the a/r/i part exactly as you did the a/r/i string.
 #. the 'u' reply means 'Change URI'.
-#: src/callbacks/media.cc:254
+#: src/callbacks/media.cc:249
 msgid "a/r/i/u"
 msgstr "k/z/i/u"
 
-#: src/callbacks/media.cc:298
+#: src/callbacks/media.cc:291
 #, c-format, boost-format
 msgid ""
 "Authentication required to access %s. You need to be root to be able to read "
@@ -2241,12 +2241,12 @@ msgstr ""
 "Autentifikácia požadovaná pre prístup k %s. Musíte byť správca systému "
 "(root), aby ste boli schopní čítať prihlasovacie údaje z %s."
 
-#: src/callbacks/media.cc:320 src/callbacks/media.cc:327
+#: src/callbacks/media.cc:313 src/callbacks/media.cc:320
 msgid "User Name"
 msgstr "Meno používateľa"
 
 #. password
-#: src/callbacks/media.cc:335
+#: src/callbacks/media.cc:328
 msgid "Password"
 msgstr "Heslo"
 
@@ -3115,12 +3115,12 @@ msgstr ""
 msgid "Write debug output to file <path>."
 msgstr "Zapísať ladiaci výstup do súboru <path>."
 
-#: src/commands/ps.cc:72 src/solve-commit.cc:451
+#: src/commands/ps.cc:72 src/solve-commit.cc:493
 msgid "Check failed:"
 msgstr "Overovanie zlyhalo:"
 
 #. Here: Table output
-#: src/commands/ps.cc:127 src/solve-commit.cc:440
+#: src/commands/ps.cc:127 src/solve-commit.cc:482
 msgid "Checking for running processes using deleted libraries..."
 msgstr "Overujem, či nejaké procesy nepoužívajú práve zmazané súbory..."
 
@@ -4935,7 +4935,7 @@ msgstr ""
 msgid "Argument resolves to no package"
 msgstr "Argument neviedol k žiadnemu balíku"
 
-#: src/commands/utils/download.cc:246 src/solve-commit.cc:891
+#: src/commands/utils/download.cc:246 src/solve-commit.cc:929
 msgid "Nothing to do."
 msgstr "Nie je čo vykonať."
 
@@ -5690,8 +5690,8 @@ msgstr "Chyba počas vypínania repozitára '%s'."
 msgid "Problem retrieving files from '%s'."
 msgstr "Problém pri sťahovaní súborov z '%s'."
 
-#: src/repos.cc:346 src/repos.cc:1860 src/solve-commit.cc:785
-#: src/solve-commit.cc:816 src/solve-commit.cc:840
+#: src/repos.cc:346 src/repos.cc:1860 src/solve-commit.cc:823
+#: src/solve-commit.cc:854 src/solve-commit.cc:878
 msgid "Please see the above error message for a hint."
 msgstr "Pozrite vyššie vypísanú chybu pre informáciu o jej príčine."
 
@@ -6156,13 +6156,17 @@ msgstr "Neboli nájdené žiadne produkty."
 msgid "Problem: "
 msgstr "Problém: "
 
+#: src/solve-commit.cc:48
+msgid "Detailed information: "
+msgstr ""
+
 #. TranslatorExplanation %d is the solution number
-#: src/solve-commit.cc:54
+#: src/solve-commit.cc:61
 #, c-format, boost-format
 msgid " Solution %d: "
 msgstr " Riešenie %d: "
 
-#: src/solve-commit.cc:73
+#: src/solve-commit.cc:80
 msgid "Choose the above solution using '1' or skip, retry or cancel"
 msgid_plural "Choose from above solutions by number or skip, retry or cancel"
 msgstr[0] ""
@@ -6175,7 +6179,7 @@ msgstr[2] ""
 
 #. translators: translate 'c' to whatever you translated the 'c' in
 #. "c" and "s/r/c" strings
-#: src/solve-commit.cc:80
+#: src/solve-commit.cc:87
 msgid "Choose the above solution using '1' or cancel using 'c'"
 msgid_plural "Choose from above solutions by number or cancel"
 msgstr[0] ""
@@ -6187,30 +6191,50 @@ msgstr[2] "Zvoľte riešenie pomocou čísla, alebo zvoľte ukončiť"
 #. "Choose from above solutions by number or skip, retry or cancel"
 #. Translate the letters to whatever is suitable for your language.
 #. The anserws must be separated by slash characters '/' and must
-#. correspond to skip/retry/cancel in that order.
+#. correspond to skip/retry/cancel/detailed information in that order.
 #. The answers should be lower case letters.
-#: src/solve-commit.cc:99
-msgid "s/r/c"
-msgstr "p/z/k"
+#: src/solve-commit.cc:111
+msgid "s/r/c/d"
+msgstr ""
 
 #. translators: answers for dependency problem solution input prompt:
 #. "Choose from above solutions by number or cancel"
 #. Translate the letter 'c' to whatever is suitable for your language
-#. and to the same as you translated it in the "s/r/c" string
-#. See the "s/r/c" comment for other details.
+#. and to the same as you translated it in the "s/r/c/d" string
+#. See the "s/r/c/d" comment for other details.
 #. One letter string  for translation can be tricky, so in case of problems,
 #. please report a bug against zypper at bugzilla.novell.com, we'll try to solve it.
-#: src/solve-commit.cc:111
-msgid "c"
-msgstr "k"
+#: src/solve-commit.cc:127
+msgid "c/d"
+msgstr ""
 
-#. continue with next problem
-#: src/solve-commit.cc:132
+#: src/solve-commit.cc:133
+#, boost-format
+msgid "Choose solution %1%"
+msgstr ""
+
+#: src/solve-commit.cc:135
+msgid "Skip problem and continue."
+msgstr ""
+
+#: src/solve-commit.cc:138
+msgid "Retry solving immediately."
+msgstr ""
+
+#: src/solve-commit.cc:140
+msgid "Choose no solution and cancel."
+msgstr ""
+
+#: src/solve-commit.cc:141
+msgid "Toggle show detailed conflict information."
+msgstr ""
+
+#: src/solve-commit.cc:174
 #, c-format, boost-format
 msgid "Applying solution %s"
 msgstr "Aplikovanie riešenie %s"
 
-#: src/solve-commit.cc:148
+#: src/solve-commit.cc:190
 #, c-format, boost-format
 msgid "%d Problem:"
 msgid_plural "%d Problems:"
@@ -6219,46 +6243,46 @@ msgstr[1] "%d problémy:"
 msgstr[2] "%d problémov:"
 
 #. should not happen! If solve() failed at least one problem must be set!
-#: src/solve-commit.cc:152
+#: src/solve-commit.cc:194
 msgid "Specified capability not found"
 msgstr "Nebola nájdená zadaná schopnosť"
 
-#: src/solve-commit.cc:162
+#: src/solve-commit.cc:204
 #, c-format, boost-format
 msgid "Problem: %s"
 msgstr "Problém: %s"
 
-#: src/solve-commit.cc:181
+#: src/solve-commit.cc:223
 msgid "Resolving dependencies..."
 msgstr "Riešim závislosti..."
 
-#: src/solve-commit.cc:242
+#: src/solve-commit.cc:284
 msgid "Force resolution:"
 msgstr "Vynucovať riešenie:"
 
-#: src/solve-commit.cc:340
+#: src/solve-commit.cc:382
 msgid "Verifying dependencies..."
 msgstr "Overujem závislosti..."
 
 #. Here: compute the full upgrade
-#: src/solve-commit.cc:390
+#: src/solve-commit.cc:432
 msgid "Computing upgrade..."
 msgstr "Vypočítavam povýšenie..."
 
-#: src/solve-commit.cc:404
+#: src/solve-commit.cc:446
 msgid "Generating solver test case..."
 msgstr "Generujem testovací prípad pre riešiteľa..."
 
-#: src/solve-commit.cc:406
+#: src/solve-commit.cc:448
 #, c-format, boost-format
 msgid "Solver test case generated successfully at %s."
 msgstr "Testovací prípad pre riešiteľa bol úspešne vygenerovaný v %s."
 
-#: src/solve-commit.cc:409
+#: src/solve-commit.cc:451
 msgid "Error creating the solver test case."
 msgstr "Chyba pri vytváraní testovacieho prípadu pre riešiteľa."
 
-#: src/solve-commit.cc:437
+#: src/solve-commit.cc:479
 #, c-format, boost-format
 msgid ""
 "Check for running processes using deleted libraries is disabled in zypper."
@@ -6267,11 +6291,11 @@ msgstr ""
 "Kontrola bežiacich procesov pomocou vymazaných knižníc je v zypper.conf "
 "zakázaná. Spustite '%s' na ručnú kontrolu."
 
-#: src/solve-commit.cc:453
+#: src/solve-commit.cc:495
 msgid "Skip check:"
 msgstr "Preskočiť kontrolu:"
 
-#: src/solve-commit.cc:460
+#: src/solve-commit.cc:502
 #, boost-format
 msgid ""
 "There are running programs which still use files and libraries deleted or "
@@ -6283,32 +6307,32 @@ msgstr ""
 "spustiť, aby využívali najnovšie aktualizácie. Spustite '%1%' pre vypísanie "
 "týchto programov."
 
-#: src/solve-commit.cc:474
+#: src/solve-commit.cc:516
 msgid "Update notifications were received from the following packages:"
 msgstr "Nasledujúce balíky zanechali hlásenia z vykonanej aktualizácie:"
 
-#: src/solve-commit.cc:483
+#: src/solve-commit.cc:525
 #, c-format, boost-format
 msgid "Message from package %s:"
 msgstr "Správa z balíka %s:"
 
-#: src/solve-commit.cc:491
+#: src/solve-commit.cc:533
 msgid "y/n"
 msgstr "a/n"
 
-#: src/solve-commit.cc:492
+#: src/solve-commit.cc:534
 msgid "View the notifications now?"
 msgstr "Zobrazovať hlásenia teraz?"
 
-#: src/solve-commit.cc:538
+#: src/solve-commit.cc:578
 msgid "Computing distribution upgrade..."
 msgstr "Vypočítavam povýšenie distribúcie..."
 
-#: src/solve-commit.cc:543
+#: src/solve-commit.cc:583
 msgid "Resolving package dependencies..."
 msgstr "Riešim závislosti balíkov..."
 
-#: src/solve-commit.cc:598
+#: src/solve-commit.cc:638
 msgid ""
 "Some of the dependencies of installed packages are broken. In order to fix "
 "these dependencies, the following actions need to be taken:"
@@ -6316,7 +6340,7 @@ msgstr ""
 "Závislosti niektorých balíkov sú porušené. Pre ich opravu sú potrebné "
 "nasledujúce akcie:"
 
-#: src/solve-commit.cc:605
+#: src/solve-commit.cc:645
 msgid "Root privileges are required to fix broken package dependencies."
 msgstr ""
 "Pre opravu porušených závislostí sú potrebné práva správcu systému (root)."
@@ -6331,23 +6355,23 @@ msgstr ""
 #. The answers should be lower case letters, but in general, any UTF-8
 #. string will do.
 #. ! \todo add c for changelog and x for explain (show the dep tree)
-#: src/solve-commit.cc:627
+#: src/solve-commit.cc:667
 msgid "y/n/p/v/a/r/m/d/g"
 msgstr "a/n/p/v/c/r/m/d/g"
 
 #. translators: help text for 'y' option in the 'Continue?' prompt
-#: src/solve-commit.cc:632
+#: src/solve-commit.cc:672
 msgid ""
 "Yes, accept the summary and proceed with installation/removal of packages."
 msgstr "Áno, prijať návrh a pokračovať v inštalácii/odstraňovaní balíkov."
 
 #. translators: help text for 'n' option in the 'Continue?' prompt
-#: src/solve-commit.cc:634
+#: src/solve-commit.cc:674
 msgid "No, cancel the operation."
 msgstr "Nie, zrušiť operáciu."
 
 #. translators: help text for 'p' option in the 'Continue?' prompt
-#: src/solve-commit.cc:636
+#: src/solve-commit.cc:676
 msgid ""
 "Restart solver in no-force-resolution mode in order to show dependency "
 "problems."
@@ -6356,57 +6380,57 @@ msgstr ""
 "so závislosťami."
 
 #. translators: help text for 'v' option in the 'Continue?' prompt
-#: src/solve-commit.cc:638
+#: src/solve-commit.cc:678
 msgid "Toggle display of package versions."
 msgstr "Zapnúť/vypnúť zobrazovanie verzií balíkov."
 
 #. translators: help text for 'a' option in the 'Continue?' prompt
-#: src/solve-commit.cc:640
+#: src/solve-commit.cc:680
 msgid "Toggle display of package architectures."
 msgstr "Zapnúť/vypnúť zobrazovanie architektúr balíkov."
 
 #. translators: help text for 'r' option in the 'Continue?' prompt
-#: src/solve-commit.cc:642
+#: src/solve-commit.cc:682
 msgid ""
 "Toggle display of repositories from which the packages will be installed."
 msgstr ""
 "Zapnúť/vypnúť zobrazovanie repozitárov z ktorých sa majú balíky inštalovať."
 
 #. translators: help text for 'm' option in the 'Continue?' prompt
-#: src/solve-commit.cc:644
+#: src/solve-commit.cc:684
 msgid "Toggle display of package vendor names."
 msgstr "Zapnúť/vypnúť zobrazovanie názvov dodávateľov balíkov."
 
 #. translators: help text for 'd' option in the 'Continue?' prompt
-#: src/solve-commit.cc:646
+#: src/solve-commit.cc:686
 msgid "Toggle between showing all details and as few details as possible."
 msgstr ""
 "Prepnúť medzi zobrazovaním všetkých podrobností a stručným zoznamom balíkov."
 
 #. translators: help text for 'g' option in the 'Continue?' prompt
-#: src/solve-commit.cc:648
+#: src/solve-commit.cc:688
 msgid "View the summary in pager."
 msgstr "Prezrieť zhrnutie v prehliadači."
 
-#: src/solve-commit.cc:758
+#: src/solve-commit.cc:796
 msgid "committing"
 msgstr "odovzdávam"
 
-#: src/solve-commit.cc:760
+#: src/solve-commit.cc:798
 msgid "(dry run)"
 msgstr "(beh naprázdno)"
 
-#: src/solve-commit.cc:784 src/solve-commit.cc:817
+#: src/solve-commit.cc:822 src/solve-commit.cc:855
 msgid "Problem retrieving the package file from the repository:"
 msgstr "Problém pri sťahovaní balíka z repozitára:"
 
 #. translators: the first %s is 'zypper refresh' and the second is repo alias
-#: src/solve-commit.cc:814
+#: src/solve-commit.cc:852
 #, c-format, boost-format
 msgid "Repository '%s' is out of date. Running '%s' might help."
 msgstr "Repozitár '%s' je neaktuálny. Skúste spustiť '%s'."
 
-#: src/solve-commit.cc:825
+#: src/solve-commit.cc:863
 msgid ""
 "The package integrity check failed. This may be a problem with the "
 "repository or media. Try one of the following:\n"
@@ -6424,20 +6448,20 @@ msgstr ""
 "- použite iné inštalačné médium (ak je napr. toto poškodené)\n"
 "- použite iný repozitár"
 
-#: src/solve-commit.cc:839
+#: src/solve-commit.cc:877
 msgid "Problem occurred during or after installation or removal of packages:"
 msgstr "Počas alebo po inštalácii alebo odstraňovaní balíkov nastala chyba:"
 
-#: src/solve-commit.cc:847
+#: src/solve-commit.cc:885
 msgid "Installation has completed with error."
 msgstr "Inštalácia skončila s chybou."
 
-#: src/solve-commit.cc:849
+#: src/solve-commit.cc:887
 #, boost-format
 msgid "You may run '%1%' to repair any dependency problems."
 msgstr "Môžete spustiť '%1%' pre opravu akýchkoľvek problémov so závislosťami."
 
-#: src/solve-commit.cc:863
+#: src/solve-commit.cc:901
 msgid ""
 "One of the installed patches requires a reboot of your machine. Reboot as "
 "soon as possible."
@@ -6445,7 +6469,7 @@ msgstr ""
 "Jedna z nainštalovaných opráv vyžaduje reštart vášho počítača. Reštartujte "
 "čo najskôr."
 
-#: src/solve-commit.cc:871
+#: src/solve-commit.cc:909
 msgid ""
 "One of the installed patches affects the package manager itself. Run this "
 "command once more to install any other needed patches."
@@ -6454,7 +6478,7 @@ msgstr ""
 "nainštalovanie prípadných ďalších opráv je potrebné spustiť tento príkaz "
 "ešte raz."
 
-#: src/solve-commit.cc:889
+#: src/solve-commit.cc:927
 msgid "Dependencies of all installed packages are satisfied."
 msgstr "Závislosti všetkých balíkov sú v poriadku."
 
@@ -6953,13 +6977,13 @@ msgstr "Na pohyb po texte použite klávesy Enter alebo Space."
 msgid "shows all options"
 msgstr "ukazuje všetky voľby"
 
-#: src/utils/prompt.cc:194 src/utils/prompt.cc:314 src/utils/prompt.cc:325
-#: src/utils/prompt.cc:424
+#: src/utils/prompt.cc:194 src/utils/prompt.cc:312 src/utils/prompt.cc:321
+#: src/utils/prompt.cc:419
 msgid "yes"
 msgstr "áno"
 
-#: src/utils/prompt.cc:194 src/utils/prompt.cc:314 src/utils/prompt.cc:325
-#: src/utils/prompt.cc:424
+#: src/utils/prompt.cc:194 src/utils/prompt.cc:312 src/utils/prompt.cc:321
+#: src/utils/prompt.cc:419
 msgid "no"
 msgstr "nie"
 
@@ -6990,19 +7014,19 @@ msgstr[2] "Automatický výber '%s' po %u sekundách."
 msgid "Trying again..."
 msgstr "Opätovné skúšanie..."
 
-#: src/utils/prompt.cc:325
+#: src/utils/prompt.cc:321
 msgid "always"
 msgstr "vždy"
 
-#: src/utils/prompt.cc:325
+#: src/utils/prompt.cc:321
 msgid "never"
 msgstr "nikdy"
 
-#: src/utils/prompt.cc:372
+#: src/utils/prompt.cc:367
 msgid "Cannot read input: bad stream or EOF."
 msgstr "Nie je možné čítať vstup: zlý stream alebo EOF."
 
-#: src/utils/prompt.cc:373
+#: src/utils/prompt.cc:368
 #, c-format, boost-format
 msgid ""
 "If you run zypper without a terminal, use '%s' global\n"
@@ -7011,29 +7035,35 @@ msgstr ""
 "Ak spúšťate zypper bez terminálu, použite globálnu voľbu '%s', aby zypper "
 "použil prednastavené odpovede na výzvy."
 
-#: src/utils/prompt.cc:412
+#: src/utils/prompt.cc:407
 #, c-format, boost-format
 msgid "Invalid answer '%s'."
 msgstr "Neplatná odpoveď '%s'."
 
-#: src/utils/prompt.cc:415
+#: src/utils/prompt.cc:410
 #, c-format, boost-format
 msgid "Ambiguous answer '%s'."
 msgstr "Nejednoznačná odpoveď '%s'."
 
 #. translators: the %s are: 'y', 'yes' (translated), 'n', and 'no' (translated).
-#: src/utils/prompt.cc:423
+#: src/utils/prompt.cc:418
 #, c-format, boost-format
 msgid "Enter '%s' for '%s' or '%s' for '%s' if nothing else works for you."
 msgstr "Zadajte '%s' pre '%s' alebo '%s' pre '%s', ak nič iné nefunguje."
 
-#: src/utils/prompt.cc:428
+#: src/utils/prompt.cc:423
 msgid ""
 "If nothing else works enter '#1' to select the 1st option, '#2' for the 2nd "
 "one, ..."
 msgstr ""
 "Ak nič iné nefunguje, zadajte '#1' pre výber 1. voľby, '#2' pre výber 2. "
 "voľby, ..."
+
+#~ msgid "s/r/c"
+#~ msgstr "p/z/k"
+
+#~ msgid "c"
+#~ msgstr "k"
 
 #~ msgid "Disabling repository '%s'."
 #~ msgstr "Vypínam repozitár '%s'."

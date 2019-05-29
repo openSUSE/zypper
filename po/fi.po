@@ -22,7 +22,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper.fi\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-20 10:18+0200\n"
+"POT-Creation-Date: 2019-05-29 13:10+0200\n"
 "PO-Revision-Date: 2019-05-02 20:15+0000\n"
 "Last-Translator: Tommi Nieminen <software@legisign.org>\n"
 "Language-Team: Finnish <https://l10n.opensuse.org/projects/zypper/master/fi/"
@@ -265,13 +265,13 @@ msgstr "Luota avaimeen väliaikaisesti."
 msgid "Trust the key and import it into trusted keyring."
 msgstr "Luota avaimeen ja lisää se avainrenkaaseen."
 
-#: src/callbacks/keyring.h:373
+#: src/callbacks/keyring.h:371
 #, c-format, boost-format
 msgid "Ignoring failed signature verification for file '%s'!"
 msgstr ""
 "Jätettiin huomioimatta epäonnistunut koostetarkistus tiedostossa \"%s\"!"
 
-#: src/callbacks/keyring.h:376
+#: src/callbacks/keyring.h:374
 #, c-format, boost-format
 msgid ""
 "Ignoring failed signature verification for file '%s' from repository '%s'!"
@@ -279,25 +279,25 @@ msgstr ""
 "Jätettiin huomioimatta epäonnistunut aitoustarkistus tiedostossa \"%s\" "
 "asennuslähteestä \"%s\"!"
 
-#: src/callbacks/keyring.h:382
+#: src/callbacks/keyring.h:380
 msgid "Double-check this is not caused by some malicious changes in the file!"
 msgstr "Tarkista, ettei tiedostossa ole pahatahtoisia muutoksia!"
 
 #. translator: %1% is a file name
-#: src/callbacks/keyring.h:392
+#: src/callbacks/keyring.h:390
 #, boost-format
 msgid "Signature verification failed for file '%1%'."
 msgstr "Aitoustarkistus epäonnistui tiedostossa \"%1%\"."
 
 #. translator: %1% is a file name, %2% a repositories name
-#: src/callbacks/keyring.h:395
+#: src/callbacks/keyring.h:393
 #, boost-format
 msgid "Signature verification failed for file '%1%' from repository '%2%'."
 msgstr ""
 "Allekirjoituksen varmistaminen epäonnistui tiedostossa \"%1%\" "
 "asennuslähteestä \"%2%\"."
 
-#: src/callbacks/keyring.h:439
+#: src/callbacks/keyring.h:437
 msgid ""
 "The rpm database seems to contain old V3 version gpg keys which are "
 "meanwhile obsolete and considered insecure:"
@@ -305,12 +305,12 @@ msgstr ""
 "RPM-tietokanta vaikuttaa sisältävän vanhan V3-version GPG-avaimia, joita "
 "vanhentuneina on pidettävä turvattomina:"
 
-#: src/callbacks/keyring.h:446
+#: src/callbacks/keyring.h:444
 #, boost-format
 msgid "To see details about a key call '%1%'."
 msgstr "Katso avaimen tiedot komennolla ”%1%”."
 
-#: src/callbacks/keyring.h:450
+#: src/callbacks/keyring.h:448
 #, boost-format
 msgid ""
 "Unless you believe the key in question is still in use, you can remove it "
@@ -319,17 +319,17 @@ msgstr ""
 "Jollet usko avaimen yhä olevan käytössä, voit poistaa sen RPM-tietokannasta "
 "komennolla ”%1%”."
 
-#: src/callbacks/keyring.h:472
+#: src/callbacks/keyring.h:470
 #, c-format, boost-format
 msgid "No digest for file %s."
 msgstr "Ei koostetta tiedostolle %s."
 
-#: src/callbacks/keyring.h:480
+#: src/callbacks/keyring.h:478
 #, c-format, boost-format
 msgid "Unknown digest %s for file %s."
 msgstr "Tuntematon kooste %s tiedostolle %s."
 
-#: src/callbacks/keyring.h:497
+#: src/callbacks/keyring.h:495
 #, boost-format
 msgid ""
 "Digest verification failed for file '%1%'\n"
@@ -344,7 +344,7 @@ msgstr ""
 " odotettiin %3%\n"
 " mutta saatiin %4%\n"
 
-#: src/callbacks/keyring.h:509
+#: src/callbacks/keyring.h:507
 msgid ""
 "Accepting packages with wrong checksums can lead to a corrupted system and "
 "in extreme cases even to a system compromise."
@@ -352,7 +352,7 @@ msgstr ""
 "Tarkistussummaltaan virheellisten pakettien hyväksyminen voi johtaa "
 "järjestelmän vioittumiseen ja pahimmassa tapauksessa tietoturvauhkaan."
 
-#: src/callbacks/keyring.h:517
+#: src/callbacks/keyring.h:515
 #, boost-format
 msgid ""
 "However if you made certain that the file with checksum '%1%..' is secure, "
@@ -369,22 +369,22 @@ msgstr ""
 "tiedoston eston omalla vastuullasi. Tiedosto hylätään, jos syöte on tyhjä.\n"
 
 #. translators: A prompt option
-#: src/callbacks/keyring.h:524
+#: src/callbacks/keyring.h:522
 msgid "discard"
 msgstr "hylkää"
 
 #. translators: A prompt option help text
-#: src/callbacks/keyring.h:526
+#: src/callbacks/keyring.h:524
 msgid "Unblock using this file on your own risk."
 msgstr "Poista tämän tiedoston esto omalla vastuullasi."
 
 #. translators: A prompt option help text
-#: src/callbacks/keyring.h:528
+#: src/callbacks/keyring.h:526
 msgid "Discard the file."
 msgstr "Hylkää tiedosto."
 
 #. translators: A prompt text
-#: src/callbacks/keyring.h:533
+#: src/callbacks/keyring.h:530
 msgid "Unblock or discard?"
 msgstr "Poistetaanko esto vai hylätäänkö?"
 
@@ -760,7 +760,7 @@ msgstr "Maa-asetusten hallinta:"
 msgid "Other Commands:"
 msgstr "Muita valintoja:"
 
-#: src/Command.cc:165
+#: src/Command.cc:166
 msgid "Subcommands:"
 msgstr "Alikomennot:"
 
@@ -2095,42 +2095,42 @@ msgid "Disable SSL certificate authority check and continue."
 msgstr "Poista käytöstä SSL-varmenteen autenttisuuden tarkistus ja jatka."
 
 #. translators: this is a prompt text
-#: src/callbacks/media.cc:83 src/callbacks/media.cc:178
-#: src/callbacks/media.cc:260 src/utils/prompt.cc:219 src/utils/prompt.cc:305
+#: src/callbacks/media.cc:81 src/callbacks/media.cc:173
+#: src/callbacks/media.cc:253 src/utils/prompt.cc:219 src/utils/prompt.cc:303
 msgid "Abort, retry, ignore?"
 msgstr "Keskeytä, yritä uudelleen, ohita?"
 
-#: src/callbacks/media.cc:91
+#: src/callbacks/media.cc:89
 msgid "SSL certificate authority check disabled."
 msgstr "SSL-varmenteen autenttisuuden tarkistus poistettu käytöstä."
 
-#: src/callbacks/media.cc:108
+#: src/callbacks/media.cc:106
 msgid "No devices detected, cannot eject."
 msgstr "Laitteita ei havaittu, tietovälineitä ei voi poistaa."
 
-#: src/callbacks/media.cc:109
+#: src/callbacks/media.cc:107
 msgid "Try to eject the device manually."
 msgstr "Yritä poistaa tietoväline manuaalisesti."
 
-#: src/callbacks/media.cc:120
+#: src/callbacks/media.cc:118
 msgid "Detected devices:"
 msgstr "Havaitut laitteet:"
 
 # cancel button label
-#: src/callbacks/media.cc:135
+#: src/callbacks/media.cc:133
 msgid "Cancel"
 msgstr "Peruuta"
 
-#: src/callbacks/media.cc:138
+#: src/callbacks/media.cc:135
 msgid "Select device to eject."
 msgstr "Valitse asema, josta levy poistetaan."
 
-#: src/callbacks/media.cc:153
+#: src/callbacks/media.cc:150
 msgid "Insert the CD/DVD and press ENTER to continue."
 msgstr "Syötä levy asemaan ja jatka painamalla ENTER."
 
 # window title for kernel loading (see txt_load_kernel)
-#: src/callbacks/media.cc:156
+#: src/callbacks/media.cc:153
 msgid "Retrying..."
 msgstr "Yritetään uudelleen..."
 
@@ -2140,11 +2140,11 @@ msgstr "Yritetään uudelleen..."
 #. The 'u' reply means 'Change URI'.
 #. cd/dvd protocol-specific options:
 #. 'e' stands for Eject medium
-#: src/callbacks/media.cc:171
+#: src/callbacks/media.cc:168
 msgid "a/r/i/u/e"
 msgstr "k/y/o/v/p"
 
-#: src/callbacks/media.cc:173
+#: src/callbacks/media.cc:170
 msgid "Eject medium."
 msgstr "Poista tietoväline."
 
@@ -2152,7 +2152,7 @@ msgstr "Poista tietoväline."
 #. Try to check what answers does zypper accept (it always accepts y/n at least)
 #. You can also have a look at the regular expressions used to check the answer here:
 #. /usr/lib/locale/<your_locale>/LC_MESSAGES/SYS_LC_MESSAGES
-#: src/callbacks/media.cc:219
+#: src/callbacks/media.cc:214
 #, c-format, boost-format
 msgid ""
 "Please insert medium [%s] #%d and type 'y' to continue or 'n' to cancel the "
@@ -2164,11 +2164,11 @@ msgstr ""
 #. translators: a/r/i/u are replies to the "Abort, retry, ignore?" prompt
 #. Translate the a/r/i part exactly as you did the a/r/i string.
 #. the 'u' reply means 'Change URI'.
-#: src/callbacks/media.cc:254
+#: src/callbacks/media.cc:249
 msgid "a/r/i/u"
 msgstr "k/y/o/v"
 
-#: src/callbacks/media.cc:298
+#: src/callbacks/media.cc:291
 #, c-format, boost-format
 msgid ""
 "Authentication required to access %s. You need to be root to be able to read "
@@ -2177,13 +2177,13 @@ msgstr ""
 "%s käyttö vaatii tunnistautumisen. Sinulla tulee olla pääkäyttäjän (root) "
 "oikeudet lukeaksesi tunnisteet %s."
 
-#: src/callbacks/media.cc:320 src/callbacks/media.cc:327
+#: src/callbacks/media.cc:313 src/callbacks/media.cc:320
 msgid "User Name"
 msgstr "Käyttäjätunnus"
 
 # password dialog title
 #. password
-#: src/callbacks/media.cc:335
+#: src/callbacks/media.cc:328
 msgid "Password"
 msgstr "Salasana"
 
@@ -3047,12 +3047,12 @@ msgstr ""
 msgid "Write debug output to file <path>."
 msgstr "Kirjoita vianjäljitystuloste tiedostoon <sijainti>."
 
-#: src/commands/ps.cc:72 src/solve-commit.cc:451
+#: src/commands/ps.cc:72 src/solve-commit.cc:493
 msgid "Check failed:"
 msgstr "Tarkistus epäonnistui:"
 
 #. Here: Table output
-#: src/commands/ps.cc:127 src/solve-commit.cc:440
+#: src/commands/ps.cc:127 src/solve-commit.cc:482
 msgid "Checking for running processes using deleted libraries..."
 msgstr ""
 "Tarkistetaan käynnissä olevat prosessit, jotka käyttävät poistettuja "
@@ -4885,7 +4885,7 @@ msgstr ""
 msgid "Argument resolves to no package"
 msgstr "Argumentti ei ratkaise mitään pakettia"
 
-#: src/commands/utils/download.cc:246 src/solve-commit.cc:891
+#: src/commands/utils/download.cc:246 src/solve-commit.cc:929
 msgid "Nothing to do."
 msgstr "Ei tehtävää."
 
@@ -5645,8 +5645,8 @@ msgstr "Virhe poistettaessa asennuslähdettä '%s'."
 msgid "Problem retrieving files from '%s'."
 msgstr "Virhe ladattaessa tiedostoja kohteesta \"%s\"."
 
-#: src/repos.cc:346 src/repos.cc:1860 src/solve-commit.cc:785
-#: src/solve-commit.cc:816 src/solve-commit.cc:840
+#: src/repos.cc:346 src/repos.cc:1860 src/solve-commit.cc:823
+#: src/solve-commit.cc:854 src/solve-commit.cc:878
 msgid "Please see the above error message for a hint."
 msgstr "Tarkista yllä oleva viesti vihjeiden varalta."
 
@@ -6119,13 +6119,17 @@ msgstr "Tuotteita ei löytynyt."
 msgid "Problem: "
 msgstr "Ongelma: "
 
+#: src/solve-commit.cc:48
+msgid "Detailed information: "
+msgstr ""
+
 #. TranslatorExplanation %d is the solution number
-#: src/solve-commit.cc:54
+#: src/solve-commit.cc:61
 #, c-format, boost-format
 msgid " Solution %d: "
 msgstr " Ratkaisu %d: "
 
-#: src/solve-commit.cc:73
+#: src/solve-commit.cc:80
 msgid "Choose the above solution using '1' or skip, retry or cancel"
 msgid_plural "Choose from above solutions by number or skip, retry or cancel"
 msgstr[0] "Valitse numero, (o)hita, y(r)itä uudelleen tai k(e)skeytä> "
@@ -6133,7 +6137,7 @@ msgstr[1] "Valitse numero, (o)hita, y(r)itä uudelleen tai k(e)skeytä> "
 
 #. translators: translate 'c' to whatever you translated the 'c' in
 #. "c" and "s/r/c" strings
-#: src/solve-commit.cc:80
+#: src/solve-commit.cc:87
 msgid "Choose the above solution using '1' or cancel using 'c'"
 msgid_plural "Choose from above solutions by number or cancel"
 msgstr[0] "Valitse numero tai k(e)skeytä> "
@@ -6143,30 +6147,50 @@ msgstr[1] "Valitse numero tai k(e)skeytä> "
 #. "Choose from above solutions by number or skip, retry or cancel"
 #. Translate the letters to whatever is suitable for your language.
 #. The anserws must be separated by slash characters '/' and must
-#. correspond to skip/retry/cancel in that order.
+#. correspond to skip/retry/cancel/detailed information in that order.
 #. The answers should be lower case letters.
-#: src/solve-commit.cc:99
-msgid "s/r/c"
-msgstr "o/r/e"
+#: src/solve-commit.cc:111
+msgid "s/r/c/d"
+msgstr ""
 
 #. translators: answers for dependency problem solution input prompt:
 #. "Choose from above solutions by number or cancel"
 #. Translate the letter 'c' to whatever is suitable for your language
-#. and to the same as you translated it in the "s/r/c" string
-#. See the "s/r/c" comment for other details.
+#. and to the same as you translated it in the "s/r/c/d" string
+#. See the "s/r/c/d" comment for other details.
 #. One letter string  for translation can be tricky, so in case of problems,
 #. please report a bug against zypper at bugzilla.novell.com, we'll try to solve it.
-#: src/solve-commit.cc:111
-msgid "c"
-msgstr "c"
+#: src/solve-commit.cc:127
+msgid "c/d"
+msgstr ""
 
-#. continue with next problem
-#: src/solve-commit.cc:132
+#: src/solve-commit.cc:133
+#, boost-format
+msgid "Choose solution %1%"
+msgstr ""
+
+#: src/solve-commit.cc:135
+msgid "Skip problem and continue."
+msgstr ""
+
+#: src/solve-commit.cc:138
+msgid "Retry solving immediately."
+msgstr ""
+
+#: src/solve-commit.cc:140
+msgid "Choose no solution and cancel."
+msgstr ""
+
+#: src/solve-commit.cc:141
+msgid "Toggle show detailed conflict information."
+msgstr ""
+
+#: src/solve-commit.cc:174
 #, c-format, boost-format
 msgid "Applying solution %s"
 msgstr "Ratkaistaan %s"
 
-#: src/solve-commit.cc:148
+#: src/solve-commit.cc:190
 #, c-format, boost-format
 msgid "%d Problem:"
 msgid_plural "%d Problems:"
@@ -6174,46 +6198,46 @@ msgstr[0] "%d ongelma:"
 msgstr[1] "%d ongelmaa:"
 
 #. should not happen! If solve() failed at least one problem must be set!
-#: src/solve-commit.cc:152
+#: src/solve-commit.cc:194
 msgid "Specified capability not found"
 msgstr "Määritettyä ominaisuutta ei löydy"
 
-#: src/solve-commit.cc:162
+#: src/solve-commit.cc:204
 #, c-format, boost-format
 msgid "Problem: %s"
 msgstr "Ongelma: %s"
 
-#: src/solve-commit.cc:181
+#: src/solve-commit.cc:223
 msgid "Resolving dependencies..."
 msgstr "Ratkaistaan riippuvuuksia..."
 
-#: src/solve-commit.cc:242
+#: src/solve-commit.cc:284
 msgid "Force resolution:"
 msgstr "Pakotettu lopputulos:"
 
-#: src/solve-commit.cc:340
+#: src/solve-commit.cc:382
 msgid "Verifying dependencies..."
 msgstr "Tarkistetaan riippuvuuksia..."
 
 #. Here: compute the full upgrade
-#: src/solve-commit.cc:390
+#: src/solve-commit.cc:432
 msgid "Computing upgrade..."
 msgstr "Lasketaan päivitystä..."
 
-#: src/solve-commit.cc:404
+#: src/solve-commit.cc:446
 msgid "Generating solver test case..."
 msgstr "Luodaan asennuslähteen ratkaisintestiä..."
 
-#: src/solve-commit.cc:406
+#: src/solve-commit.cc:448
 #, c-format, boost-format
 msgid "Solver test case generated successfully at %s."
 msgstr "Ratkaisintesti luotiin onnistuneesti tiedostoon %s."
 
-#: src/solve-commit.cc:409
+#: src/solve-commit.cc:451
 msgid "Error creating the solver test case."
 msgstr "Virhe ratkaisintestin luonnissa."
 
-#: src/solve-commit.cc:437
+#: src/solve-commit.cc:479
 #, c-format, boost-format
 msgid ""
 "Check for running processes using deleted libraries is disabled in zypper."
@@ -6222,11 +6246,11 @@ msgstr ""
 "Poistettuja kirjastoja käyttävien prosessien tarkistus on poistettu käytöstä "
 "zypper.confissa. Tarkista itse suorittamalla ”%s”."
 
-#: src/solve-commit.cc:453
+#: src/solve-commit.cc:495
 msgid "Skip check:"
 msgstr "Ohita tarkistus:"
 
-#: src/solve-commit.cc:460
+#: src/solve-commit.cc:502
 #, boost-format
 msgid ""
 "There are running programs which still use files and libraries deleted or "
@@ -6238,32 +6262,32 @@ msgstr ""
 "päivitykset tulevat voimaan. Saat näiden ohjelmien luettelon komennolla "
 "\"%1%”."
 
-#: src/solve-commit.cc:474
+#: src/solve-commit.cc:516
 msgid "Update notifications were received from the following packages:"
 msgstr "Saatiin päivitysilmoitus seuraaville paketeille:"
 
-#: src/solve-commit.cc:483
+#: src/solve-commit.cc:525
 #, c-format, boost-format
 msgid "Message from package %s:"
 msgstr "Viesti paketilta %s:"
 
-#: src/solve-commit.cc:491
+#: src/solve-commit.cc:533
 msgid "y/n"
 msgstr "k/e"
 
-#: src/solve-commit.cc:492
+#: src/solve-commit.cc:534
 msgid "View the notifications now?"
 msgstr "Näytä ilmoitukset nyt?"
 
-#: src/solve-commit.cc:538
+#: src/solve-commit.cc:578
 msgid "Computing distribution upgrade..."
 msgstr "Lasketaan jakelupäivitystä..."
 
-#: src/solve-commit.cc:543
+#: src/solve-commit.cc:583
 msgid "Resolving package dependencies..."
 msgstr "Ratkaistaan pakettien riippuvuuksia..."
 
-#: src/solve-commit.cc:598
+#: src/solve-commit.cc:638
 msgid ""
 "Some of the dependencies of installed packages are broken. In order to fix "
 "these dependencies, the following actions need to be taken:"
@@ -6271,7 +6295,7 @@ msgstr ""
 "Jonkin asennetun paketin riippuvuudet eivät täyty. Tilanteen korjaamiseksi "
 "täytyy tehdä seuraavat toimenpiteet:"
 
-#: src/solve-commit.cc:605
+#: src/solve-commit.cc:645
 msgid "Root privileges are required to fix broken package dependencies."
 msgstr "Pakettiriippuvuuksien korjaamiseen vaaditaan pääkäyttäjän oikeudet."
 
@@ -6285,23 +6309,23 @@ msgstr "Pakettiriippuvuuksien korjaamiseen vaaditaan pääkäyttäjän oikeudet.
 #. The answers should be lower case letters, but in general, any UTF-8
 #. string will do.
 #. ! \todo add c for changelog and x for explain (show the dep tree)
-#: src/solve-commit.cc:627
+#: src/solve-commit.cc:667
 msgid "y/n/p/v/a/r/m/d/g"
 msgstr "k/e/n/v/s/a/t/i/u"
 
 #. translators: help text for 'y' option in the 'Continue?' prompt
-#: src/solve-commit.cc:632
+#: src/solve-commit.cc:672
 msgid ""
 "Yes, accept the summary and proceed with installation/removal of packages."
 msgstr "Kyllä, hyväksy yhteenveto ja siirry pakettien asennukseen/poistoon."
 
 #. translators: help text for 'n' option in the 'Continue?' prompt
-#: src/solve-commit.cc:634
+#: src/solve-commit.cc:674
 msgid "No, cancel the operation."
 msgstr "Ei, peruuta toiminto."
 
 #. translators: help text for 'p' option in the 'Continue?' prompt
-#: src/solve-commit.cc:636
+#: src/solve-commit.cc:676
 msgid ""
 "Restart solver in no-force-resolution mode in order to show dependency "
 "problems."
@@ -6310,55 +6334,55 @@ msgstr ""
 "riippuvuusongelmat."
 
 #. translators: help text for 'v' option in the 'Continue?' prompt
-#: src/solve-commit.cc:638
+#: src/solve-commit.cc:678
 msgid "Toggle display of package versions."
 msgstr "Näytä/piilota pakettien versiot"
 
 #. translators: help text for 'a' option in the 'Continue?' prompt
-#: src/solve-commit.cc:640
+#: src/solve-commit.cc:680
 msgid "Toggle display of package architectures."
 msgstr "Näytä/piilota pakettien arkkitehtuurit."
 
 #. translators: help text for 'r' option in the 'Continue?' prompt
-#: src/solve-commit.cc:642
+#: src/solve-commit.cc:682
 msgid ""
 "Toggle display of repositories from which the packages will be installed."
 msgstr "Näytä/piilota asennuslähde, josta paketti asennetaan."
 
 #. translators: help text for 'm' option in the 'Continue?' prompt
-#: src/solve-commit.cc:644
+#: src/solve-commit.cc:684
 msgid "Toggle display of package vendor names."
 msgstr "Näytä/piilota pakettien toimittajat."
 
 #. translators: help text for 'd' option in the 'Continue?' prompt
-#: src/solve-commit.cc:646
+#: src/solve-commit.cc:686
 msgid "Toggle between showing all details and as few details as possible."
 msgstr "Näytä/piilota tarkemmat tiedot."
 
 #. translators: help text for 'g' option in the 'Continue?' prompt
-#: src/solve-commit.cc:648
+#: src/solve-commit.cc:688
 msgid "View the summary in pager."
 msgstr "Näytä yhteenveto sivuttimessa."
 
-#: src/solve-commit.cc:758
+#: src/solve-commit.cc:796
 msgid "committing"
 msgstr "suoritetaan"
 
-#: src/solve-commit.cc:760
+#: src/solve-commit.cc:798
 msgid "(dry run)"
 msgstr "(testiajo)"
 
-#: src/solve-commit.cc:784 src/solve-commit.cc:817
+#: src/solve-commit.cc:822 src/solve-commit.cc:855
 msgid "Problem retrieving the package file from the repository:"
 msgstr "Virhe ladattaessa pakettitiedostoa asennuslähteestä:"
 
 #. translators: the first %s is 'zypper refresh' and the second is repo alias
-#: src/solve-commit.cc:814
+#: src/solve-commit.cc:852
 #, c-format, boost-format
 msgid "Repository '%s' is out of date. Running '%s' might help."
 msgstr "Asennuslähde \"%s\" ei ole ajan tasalla. \"%s\" saattaa auttaa."
 
-#: src/solve-commit.cc:825
+#: src/solve-commit.cc:863
 msgid ""
 "The package integrity check failed. This may be a problem with the "
 "repository or media. Try one of the following:\n"
@@ -6377,20 +6401,20 @@ msgstr ""
 "vaurioitunut)\n"
 "- käytä jotakin toista asennuslähdettä"
 
-#: src/solve-commit.cc:839
+#: src/solve-commit.cc:877
 msgid "Problem occurred during or after installation or removal of packages:"
 msgstr "Tapahtui virhe paketin asennuksen tai poiston yhteydessä:"
 
-#: src/solve-commit.cc:847
+#: src/solve-commit.cc:885
 msgid "Installation has completed with error."
 msgstr "Asennus päättyi virheeseen."
 
-#: src/solve-commit.cc:849
+#: src/solve-commit.cc:887
 #, boost-format
 msgid "You may run '%1%' to repair any dependency problems."
 msgstr "Mahdolliset riippuvuusongelmat voi korjata komennolla \"%1%”."
 
-#: src/solve-commit.cc:863
+#: src/solve-commit.cc:901
 msgid ""
 "One of the installed patches requires a reboot of your machine. Reboot as "
 "soon as possible."
@@ -6398,7 +6422,7 @@ msgstr ""
 "Jokin asennetuista päivityksistä edellyttää tietokoneen "
 "uudelleenkäynnistämistä. Käynnistä tietokone uudelleen mahdollisimman pian."
 
-#: src/solve-commit.cc:871
+#: src/solve-commit.cc:909
 msgid ""
 "One of the installed patches affects the package manager itself. Run this "
 "command once more to install any other needed patches."
@@ -6407,7 +6431,7 @@ msgstr ""
 "paketinhallintasovellukseen. Aja tämä komento uudelleen asentaaksesi muut "
 "korjauspäivitykset."
 
-#: src/solve-commit.cc:889
+#: src/solve-commit.cc:927
 msgid "Dependencies of all installed packages are satisfied."
 msgstr "Kaikkien asennettujen pakettien riippuvuudet on kunnossa."
 
@@ -6890,13 +6914,13 @@ msgstr ""
 msgid "shows all options"
 msgstr "näyttää kaikki valinnat"
 
-#: src/utils/prompt.cc:194 src/utils/prompt.cc:314 src/utils/prompt.cc:325
-#: src/utils/prompt.cc:424
+#: src/utils/prompt.cc:194 src/utils/prompt.cc:312 src/utils/prompt.cc:321
+#: src/utils/prompt.cc:419
 msgid "yes"
 msgstr "kyllä"
 
-#: src/utils/prompt.cc:194 src/utils/prompt.cc:314 src/utils/prompt.cc:325
-#: src/utils/prompt.cc:424
+#: src/utils/prompt.cc:194 src/utils/prompt.cc:312 src/utils/prompt.cc:321
+#: src/utils/prompt.cc:419
 msgid "no"
 msgstr "ei"
 
@@ -6926,19 +6950,19 @@ msgstr[1] "Valitaan '%s' automaattisesti %u sekunnin kuluttua."
 msgid "Trying again..."
 msgstr "Yritetään uudelleen..."
 
-#: src/utils/prompt.cc:325
+#: src/utils/prompt.cc:321
 msgid "always"
 msgstr "aina"
 
-#: src/utils/prompt.cc:325
+#: src/utils/prompt.cc:321
 msgid "never"
 msgstr "ei koskaan"
 
-#: src/utils/prompt.cc:372
+#: src/utils/prompt.cc:367
 msgid "Cannot read input: bad stream or EOF."
 msgstr "Syötettä ei voi lukea: huono virta tai tiedoston loppu."
 
-#: src/utils/prompt.cc:373
+#: src/utils/prompt.cc:368
 #, c-format, boost-format
 msgid ""
 "If you run zypper without a terminal, use '%s' global\n"
@@ -6947,29 +6971,35 @@ msgstr ""
 "Jos ajat zypper-komennon ilman päätettä, ohjeistat yleisvalitsimella \"%s\"\n"
 "zypperiä antamaan oletusvastauksen kehotteisiin."
 
-#: src/utils/prompt.cc:412
+#: src/utils/prompt.cc:407
 #, c-format, boost-format
 msgid "Invalid answer '%s'."
 msgstr "Virheellinen vastaus \"%s\"."
 
-#: src/utils/prompt.cc:415
+#: src/utils/prompt.cc:410
 #, c-format, boost-format
 msgid "Ambiguous answer '%s'."
 msgstr "Monitulkintainen vastaus ”%s%”."
 
 #. translators: the %s are: 'y', 'yes' (translated), 'n', and 'no' (translated).
-#: src/utils/prompt.cc:423
+#: src/utils/prompt.cc:418
 #, c-format, boost-format
 msgid "Enter '%s' for '%s' or '%s' for '%s' if nothing else works for you."
 msgstr "Vastaa \"%s\" -> \"%s\" tai \"%s\" -> \"%s\" sijasta, ellei muu toimi."
 
-#: src/utils/prompt.cc:428
+#: src/utils/prompt.cc:423
 msgid ""
 "If nothing else works enter '#1' to select the 1st option, '#2' for the 2nd "
 "one, ..."
 msgstr ""
 "Ellei muu auta, valitse ensimmäinen valinta  antamalla \"#1\", toinen "
 "antamalla ”#2” jne…"
+
+#~ msgid "s/r/c"
+#~ msgstr "o/r/e"
+
+#~ msgid "c"
+#~ msgstr "c"
 
 #~ msgid "Disabling repository '%s'."
 #~ msgstr "Poistetaan asennuslähde \"%s\" käytöstä."

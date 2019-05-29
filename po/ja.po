@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-20 10:18+0200\n"
+"POT-Creation-Date: 2019-05-29 13:10+0200\n"
 "PO-Revision-Date: 2019-03-12 11:54+0000\n"
 "Last-Translator: Yasuhiko Kamata <belphegor@belbel.or.jp>\n"
 "Language-Team: Japanese <https://l10n.opensuse.org/projects/zypper/master/ja/"
@@ -250,12 +250,12 @@ msgstr "一時的に鍵を信頼します。"
 msgid "Trust the key and import it into trusted keyring."
 msgstr "鍵を信頼して信頼済み鍵リングにインポートします。"
 
-#: src/callbacks/keyring.h:373
+#: src/callbacks/keyring.h:371
 #, c-format, boost-format
 msgid "Ignoring failed signature verification for file '%s'!"
 msgstr "ファイル '%s' に対する署名検証が失敗しましたが、無視しています！"
 
-#: src/callbacks/keyring.h:376
+#: src/callbacks/keyring.h:374
 #, c-format, boost-format
 msgid ""
 "Ignoring failed signature verification for file '%s' from repository '%s'!"
@@ -263,24 +263,24 @@ msgstr ""
 "ファイル '%s' (リポジトリ '%s') に対する署名検証が失敗しましたが、無視してい"
 "ます!"
 
-#: src/callbacks/keyring.h:382
+#: src/callbacks/keyring.h:380
 msgid "Double-check this is not caused by some malicious changes in the file!"
 msgstr ""
 "ファイルに対して悪意のある変更が行われていないか、もう一度ご確認ください！"
 
 #. translator: %1% is a file name
-#: src/callbacks/keyring.h:392
+#: src/callbacks/keyring.h:390
 #, boost-format
 msgid "Signature verification failed for file '%1%'."
 msgstr "ファイル '%1%' に対する署名検証が失敗しました。"
 
 #. translator: %1% is a file name, %2% a repositories name
-#: src/callbacks/keyring.h:395
+#: src/callbacks/keyring.h:393
 #, boost-format
 msgid "Signature verification failed for file '%1%' from repository '%2%'."
 msgstr "ファイル '%1%' (リポジトリ '%2%') に対する署名検証が失敗しました。"
 
-#: src/callbacks/keyring.h:439
+#: src/callbacks/keyring.h:437
 msgid ""
 "The rpm database seems to contain old V3 version gpg keys which are "
 "meanwhile obsolete and considered insecure:"
@@ -288,12 +288,12 @@ msgstr ""
 "RPM データベース内に、古い V3 形式の GPG 鍵が存在しているものと思われます。こ"
 "の形式は既に古く、機密が保持できないものと考えられています:"
 
-#: src/callbacks/keyring.h:446
+#: src/callbacks/keyring.h:444
 #, boost-format
 msgid "To see details about a key call '%1%'."
 msgstr "鍵についての詳細を表示するには、 '%1%' を実行してください。"
 
-#: src/callbacks/keyring.h:450
+#: src/callbacks/keyring.h:448
 #, boost-format
 msgid ""
 "Unless you believe the key in question is still in use, you can remove it "
@@ -302,17 +302,17 @@ msgstr ""
 "本件の鍵を現在もなお使用している場合を除き、 '%1%' で RPM データベースから鍵"
 "を削除しておくことをお勧めします。"
 
-#: src/callbacks/keyring.h:472
+#: src/callbacks/keyring.h:470
 #, c-format, boost-format
 msgid "No digest for file %s."
 msgstr "ファイル%sに対するダイジェストがありません。"
 
-#: src/callbacks/keyring.h:480
+#: src/callbacks/keyring.h:478
 #, c-format, boost-format
 msgid "Unknown digest %s for file %s."
 msgstr "不明なダイジェスト %s です (ファイル %s)。"
 
-#: src/callbacks/keyring.h:497
+#: src/callbacks/keyring.h:495
 #, boost-format
 msgid ""
 "Digest verification failed for file '%1%'\n"
@@ -327,7 +327,7 @@ msgstr ""
 "  期待されていた値:%3%\n"
 "  登録されていた値:%4%\n"
 
-#: src/callbacks/keyring.h:509
+#: src/callbacks/keyring.h:507
 msgid ""
 "Accepting packages with wrong checksums can lead to a corrupted system and "
 "in extreme cases even to a system compromise."
@@ -335,7 +335,7 @@ msgstr ""
 "チェックサムが正しくないパッケージを受け入れてしまうと、システムを壊す可能性"
 "があるほか、不正なソフトウエアを動作させることにもなります。"
 
-#: src/callbacks/keyring.h:517
+#: src/callbacks/keyring.h:515
 #, boost-format
 msgid ""
 "However if you made certain that the file with checksum '%1%..' is secure, "
@@ -351,22 +351,22 @@ msgstr ""
 "保護を解除してください。何も入力しないと、対象のファイルは廃棄されます。\n"
 
 #. translators: A prompt option
-#: src/callbacks/keyring.h:524
+#: src/callbacks/keyring.h:522
 msgid "discard"
 msgstr "破棄"
 
 #. translators: A prompt option help text
-#: src/callbacks/keyring.h:526
+#: src/callbacks/keyring.h:524
 msgid "Unblock using this file on your own risk."
 msgstr "自己責任でファイルの保護を解除します。"
 
 #. translators: A prompt option help text
-#: src/callbacks/keyring.h:528
+#: src/callbacks/keyring.h:526
 msgid "Discard the file."
 msgstr "ファイルを破棄します。"
 
 #. translators: A prompt text
-#: src/callbacks/keyring.h:533
+#: src/callbacks/keyring.h:530
 msgid "Unblock or discard?"
 msgstr "保護を解除しますか？それとも破棄しますか？"
 
@@ -745,7 +745,7 @@ msgstr "ロケール管理:"
 msgid "Other Commands:"
 msgstr "その他のコマンド:"
 
-#: src/Command.cc:165
+#: src/Command.cc:166
 msgid "Subcommands:"
 msgstr "サブコマンド:"
 
@@ -1994,42 +1994,42 @@ msgid "Disable SSL certificate authority check and continue."
 msgstr "SSL証明局の確認を無効にして続行します。"
 
 #. translators: this is a prompt text
-#: src/callbacks/media.cc:83 src/callbacks/media.cc:178
-#: src/callbacks/media.cc:260 src/utils/prompt.cc:219 src/utils/prompt.cc:305
+#: src/callbacks/media.cc:81 src/callbacks/media.cc:173
+#: src/callbacks/media.cc:253 src/utils/prompt.cc:219 src/utils/prompt.cc:303
 msgid "Abort, retry, ignore?"
 msgstr "中止(A)、再試行(R)、無視(I)？"
 
-#: src/callbacks/media.cc:91
+#: src/callbacks/media.cc:89
 msgid "SSL certificate authority check disabled."
 msgstr "SSL認証局の確認が無効です。"
 
-#: src/callbacks/media.cc:108
+#: src/callbacks/media.cc:106
 msgid "No devices detected, cannot eject."
 msgstr "デバイスが見つからないため、取り出すことができません。"
 
-#: src/callbacks/media.cc:109
+#: src/callbacks/media.cc:107
 msgid "Try to eject the device manually."
 msgstr "デバイスを手動で取り出してみてください。"
 
-#: src/callbacks/media.cc:120
+#: src/callbacks/media.cc:118
 msgid "Detected devices:"
 msgstr "検出されたデバイス:"
 
 # cancel button label
-#: src/callbacks/media.cc:135
+#: src/callbacks/media.cc:133
 msgid "Cancel"
 msgstr "キャンセル"
 
-#: src/callbacks/media.cc:138
+#: src/callbacks/media.cc:135
 msgid "Select device to eject."
 msgstr "取り出すデバイスを選択してください。"
 
-#: src/callbacks/media.cc:153
+#: src/callbacks/media.cc:150
 msgid "Insert the CD/DVD and press ENTER to continue."
 msgstr "CD/DVDを挿入し、 Enterキーを押して続行してください。"
 
 # window title for kernel loading (see txt_load_kernel)
-#: src/callbacks/media.cc:156
+#: src/callbacks/media.cc:153
 msgid "Retrying..."
 msgstr "再試行しています..."
 
@@ -2039,11 +2039,11 @@ msgstr "再試行しています..."
 #. The 'u' reply means 'Change URI'.
 #. cd/dvd protocol-specific options:
 #. 'e' stands for Eject medium
-#: src/callbacks/media.cc:171
+#: src/callbacks/media.cc:168
 msgid "a/r/i/u/e"
 msgstr "a/r/i/u/e"
 
-#: src/callbacks/media.cc:173
+#: src/callbacks/media.cc:170
 msgid "Eject medium."
 msgstr "メディアを取り出します。"
 
@@ -2051,7 +2051,7 @@ msgstr "メディアを取り出します。"
 #. Try to check what answers does zypper accept (it always accepts y/n at least)
 #. You can also have a look at the regular expressions used to check the answer here:
 #. /usr/lib/locale/<your_locale>/LC_MESSAGES/SYS_LC_MESSAGES
-#: src/callbacks/media.cc:219
+#: src/callbacks/media.cc:214
 #, c-format, boost-format
 msgid ""
 "Please insert medium [%s] #%d and type 'y' to continue or 'n' to cancel the "
@@ -2063,11 +2063,11 @@ msgstr ""
 #. translators: a/r/i/u are replies to the "Abort, retry, ignore?" prompt
 #. Translate the a/r/i part exactly as you did the a/r/i string.
 #. the 'u' reply means 'Change URI'.
-#: src/callbacks/media.cc:254
+#: src/callbacks/media.cc:249
 msgid "a/r/i/u"
 msgstr "a/r/i/u"
 
-#: src/callbacks/media.cc:298
+#: src/callbacks/media.cc:291
 #, c-format, boost-format
 msgid ""
 "Authentication required to access %s. You need to be root to be able to read "
@@ -2076,13 +2076,13 @@ msgstr ""
 "%s にアクセスするには認証が必要です。%s からの証明書を読むには、rootである必"
 "要があります。"
 
-#: src/callbacks/media.cc:320 src/callbacks/media.cc:327
+#: src/callbacks/media.cc:313 src/callbacks/media.cc:320
 msgid "User Name"
 msgstr "ユーザ名"
 
 # password dialog title
 #. password
-#: src/callbacks/media.cc:335
+#: src/callbacks/media.cc:328
 msgid "Password"
 msgstr "パスワード"
 
@@ -2953,12 +2953,12 @@ msgstr ""
 msgid "Write debug output to file <path>."
 msgstr "デバッグ出力をファイル <path> に出力します。"
 
-#: src/commands/ps.cc:72 src/solve-commit.cc:451
+#: src/commands/ps.cc:72 src/solve-commit.cc:493
 msgid "Check failed:"
 msgstr "確認に失敗:"
 
 #. Here: Table output
-#: src/commands/ps.cc:127 src/solve-commit.cc:440
+#: src/commands/ps.cc:127 src/solve-commit.cc:482
 msgid "Checking for running processes using deleted libraries..."
 msgstr "削除されたライブラリを使用している実行中プロセスを確認しています..."
 
@@ -4794,7 +4794,7 @@ msgstr ""
 msgid "Argument resolves to no package"
 msgstr "パラメータを解釈しましたが、該当するパッケージがありません"
 
-#: src/commands/utils/download.cc:246 src/solve-commit.cc:891
+#: src/commands/utils/download.cc:246 src/solve-commit.cc:929
 msgid "Nothing to do."
 msgstr "何もすることがありません。"
 
@@ -5556,8 +5556,8 @@ msgstr "リポジトリ '%s' を無効にする際にエラーが発生しまし
 msgid "Problem retrieving files from '%s'."
 msgstr "'%s' からのファイル取得中に問題が発生しました。"
 
-#: src/repos.cc:346 src/repos.cc:1860 src/solve-commit.cc:785
-#: src/solve-commit.cc:816 src/solve-commit.cc:840
+#: src/repos.cc:346 src/repos.cc:1860 src/solve-commit.cc:823
+#: src/solve-commit.cc:854 src/solve-commit.cc:878
 msgid "Please see the above error message for a hint."
 msgstr "解決へのヒントとして上記のエラーメッセージをお読みください。"
 
@@ -6035,13 +6035,17 @@ msgstr "製品が見つかりません。"
 msgid "Problem: "
 msgstr "問題点: "
 
+#: src/solve-commit.cc:48
+msgid "Detailed information: "
+msgstr ""
+
 #. TranslatorExplanation %d is the solution number
-#: src/solve-commit.cc:54
+#: src/solve-commit.cc:61
 #, c-format, boost-format
 msgid " Solution %d: "
 msgstr " 解決方法 %d: "
 
-#: src/solve-commit.cc:73
+#: src/solve-commit.cc:80
 msgid "Choose the above solution using '1' or skip, retry or cancel"
 msgid_plural "Choose from above solutions by number or skip, retry or cancel"
 msgstr[0] ""
@@ -6050,7 +6054,7 @@ msgstr[0] ""
 
 #. translators: translate 'c' to whatever you translated the 'c' in
 #. "c" and "s/r/c" strings
-#: src/solve-commit.cc:80
+#: src/solve-commit.cc:87
 msgid "Choose the above solution using '1' or cancel using 'c'"
 msgid_plural "Choose from above solutions by number or cancel"
 msgstr[0] ""
@@ -6061,76 +6065,96 @@ msgstr[0] ""
 #. "Choose from above solutions by number or skip, retry or cancel"
 #. Translate the letters to whatever is suitable for your language.
 #. The anserws must be separated by slash characters '/' and must
-#. correspond to skip/retry/cancel in that order.
+#. correspond to skip/retry/cancel/detailed information in that order.
 #. The answers should be lower case letters.
-#: src/solve-commit.cc:99
-msgid "s/r/c"
-msgstr "s/r/c"
+#: src/solve-commit.cc:111
+msgid "s/r/c/d"
+msgstr ""
 
 #. translators: answers for dependency problem solution input prompt:
 #. "Choose from above solutions by number or cancel"
 #. Translate the letter 'c' to whatever is suitable for your language
-#. and to the same as you translated it in the "s/r/c" string
-#. See the "s/r/c" comment for other details.
+#. and to the same as you translated it in the "s/r/c/d" string
+#. See the "s/r/c/d" comment for other details.
 #. One letter string  for translation can be tricky, so in case of problems,
 #. please report a bug against zypper at bugzilla.novell.com, we'll try to solve it.
-#: src/solve-commit.cc:111
-msgid "c"
-msgstr "c"
+#: src/solve-commit.cc:127
+msgid "c/d"
+msgstr ""
 
-#. continue with next problem
-#: src/solve-commit.cc:132
+#: src/solve-commit.cc:133
+#, boost-format
+msgid "Choose solution %1%"
+msgstr ""
+
+#: src/solve-commit.cc:135
+msgid "Skip problem and continue."
+msgstr ""
+
+#: src/solve-commit.cc:138
+msgid "Retry solving immediately."
+msgstr ""
+
+#: src/solve-commit.cc:140
+msgid "Choose no solution and cancel."
+msgstr ""
+
+#: src/solve-commit.cc:141
+msgid "Toggle show detailed conflict information."
+msgstr ""
+
+#: src/solve-commit.cc:174
 #, c-format, boost-format
 msgid "Applying solution %s"
 msgstr "解決方法 %s を適用しています"
 
-#: src/solve-commit.cc:148
+#: src/solve-commit.cc:190
 #, c-format, boost-format
 msgid "%d Problem:"
 msgid_plural "%d Problems:"
 msgstr[0] "%d 個の問題点:"
 
 #. should not happen! If solve() failed at least one problem must be set!
-#: src/solve-commit.cc:152
+#: src/solve-commit.cc:194
 msgid "Specified capability not found"
 msgstr "指定された機能が見つかりません"
 
-#: src/solve-commit.cc:162
+#: src/solve-commit.cc:204
 #, c-format, boost-format
 msgid "Problem: %s"
 msgstr "問題点:%s"
 
-#: src/solve-commit.cc:181
+#: src/solve-commit.cc:223
 msgid "Resolving dependencies..."
 msgstr "依存関係を解決しています..."
 
-#: src/solve-commit.cc:242
+#: src/solve-commit.cc:284
 msgid "Force resolution:"
 msgstr "強制的な解決:"
 
-#: src/solve-commit.cc:340
+#: src/solve-commit.cc:382
 msgid "Verifying dependencies..."
 msgstr "依存関係を解決しています..."
 
 #. Here: compute the full upgrade
-#: src/solve-commit.cc:390
+#: src/solve-commit.cc:432
 msgid "Computing upgrade..."
 msgstr "アップグレードを準備しています..."
 
-#: src/solve-commit.cc:404
+#: src/solve-commit.cc:446
 msgid "Generating solver test case..."
 msgstr "解決処理のテスト出力を作成しています..."
 
-#: src/solve-commit.cc:406
+#: src/solve-commit.cc:448
 #, c-format, boost-format
 msgid "Solver test case generated successfully at %s."
 msgstr "解決処理のテスト結果は %s に出力されました。"
 
-#: src/solve-commit.cc:409
+#: src/solve-commit.cc:451
 msgid "Error creating the solver test case."
 msgstr "解決処理のテスト出力中にエラーが発生しました。"
 
-#: src/solve-commit.cc:437
+#: src/solve-commit.cc:479
 #, c-format, boost-format
 msgid ""
 "Check for running processes using deleted libraries is disabled in zypper."
@@ -6139,11 +6163,11 @@ msgstr ""
 "削除されたライブラリを使用している実行中プロセスの確認は、zypper.confで無効に"
 "されています。'%s' を実行して手動で確認してください。"
 
-#: src/solve-commit.cc:453
+#: src/solve-commit.cc:495
 msgid "Skip check:"
 msgstr "確認を省略:"
 
-#: src/solve-commit.cc:460
+#: src/solve-commit.cc:502
 #, boost-format
 msgid ""
 "There are running programs which still use files and libraries deleted or "
@@ -6154,32 +6178,32 @@ msgstr ""
 "ルを使用しています。ご確認の上、これらを再起動してください。 '%1%' と入力して"
 "実行すると、プログラムの一覧を表示することができます。"
 
-#: src/solve-commit.cc:474
+#: src/solve-commit.cc:516
 msgid "Update notifications were received from the following packages:"
 msgstr "下記のパッケージから更新通知を受信しました:"
 
-#: src/solve-commit.cc:483
+#: src/solve-commit.cc:525
 #, c-format, boost-format
 msgid "Message from package %s:"
 msgstr "パッケージ %s からのメッセージ:"
 
-#: src/solve-commit.cc:491
+#: src/solve-commit.cc:533
 msgid "y/n"
 msgstr "y/n"
 
-#: src/solve-commit.cc:492
+#: src/solve-commit.cc:534
 msgid "View the notifications now?"
 msgstr "今すぐ通知を閲覧しますか？"
 
-#: src/solve-commit.cc:538
+#: src/solve-commit.cc:578
 msgid "Computing distribution upgrade..."
 msgstr "ディストリビューションのアップグレードを準備しています..."
 
-#: src/solve-commit.cc:543
+#: src/solve-commit.cc:583
 msgid "Resolving package dependencies..."
 msgstr "パッケージの依存関係を解決しています..."
 
-#: src/solve-commit.cc:598
+#: src/solve-commit.cc:638
 msgid ""
 "Some of the dependencies of installed packages are broken. In order to fix "
 "these dependencies, the following actions need to be taken:"
@@ -6187,7 +6211,7 @@ msgstr ""
 "インストール済みのパッケージのうち、いくつかの依存関係が壊れています。依存関"
 "係を修復するには、以下の作業を実行する必要があります:"
 
-#: src/solve-commit.cc:605
+#: src/solve-commit.cc:645
 msgid "Root privileges are required to fix broken package dependencies."
 msgstr "壊れた依存関係を修復するには root 権限が必要です。"
 
@@ -6201,12 +6225,12 @@ msgstr "壊れた依存関係を修復するには root 権限が必要です。
 #. The answers should be lower case letters, but in general, any UTF-8
 #. string will do.
 #. ! \todo add c for changelog and x for explain (show the dep tree)
-#: src/solve-commit.cc:627
+#: src/solve-commit.cc:667
 msgid "y/n/p/v/a/r/m/d/g"
 msgstr "y/n/p/v/a/r/m/d/g"
 
 #. translators: help text for 'y' option in the 'Continue?' prompt
-#: src/solve-commit.cc:632
+#: src/solve-commit.cc:672
 msgid ""
 "Yes, accept the summary and proceed with installation/removal of packages."
 msgstr ""
@@ -6214,67 +6238,67 @@ msgstr ""
 "行います。"
 
 #. translators: help text for 'n' option in the 'Continue?' prompt
-#: src/solve-commit.cc:634
+#: src/solve-commit.cc:674
 msgid "No, cancel the operation."
 msgstr "いいえ (n)、操作をキャンセルします。"
 
 #. translators: help text for 'p' option in the 'Continue?' prompt
-#: src/solve-commit.cc:636
+#: src/solve-commit.cc:676
 msgid ""
 "Restart solver in no-force-resolution mode in order to show dependency "
 "problems."
 msgstr "依存関係の問題を表示するため、強制力を設定せずに解決器を実行します。"
 
 #. translators: help text for 'v' option in the 'Continue?' prompt
-#: src/solve-commit.cc:638
+#: src/solve-commit.cc:678
 msgid "Toggle display of package versions."
 msgstr "パッケージバージョンの表示を切り替えます。"
 
 #. translators: help text for 'a' option in the 'Continue?' prompt
-#: src/solve-commit.cc:640
+#: src/solve-commit.cc:680
 msgid "Toggle display of package architectures."
 msgstr "パッケージアーキテクチャの表示を切り替えます。"
 
 #. translators: help text for 'r' option in the 'Continue?' prompt
-#: src/solve-commit.cc:642
+#: src/solve-commit.cc:682
 msgid ""
 "Toggle display of repositories from which the packages will be installed."
 msgstr "パッケージのインストール元リポジトリの表示を切り替えます。"
 
 #. translators: help text for 'm' option in the 'Continue?' prompt
-#: src/solve-commit.cc:644
+#: src/solve-commit.cc:684
 msgid "Toggle display of package vendor names."
 msgstr "パッケージのベンダ名の表示を切り替えます。"
 
 #. translators: help text for 'd' option in the 'Continue?' prompt
-#: src/solve-commit.cc:646
+#: src/solve-commit.cc:686
 msgid "Toggle between showing all details and as few details as possible."
 msgstr "すべての詳細を表示するか、最小限の表示のみにとどめるかを切り替えます。"
 
 #. translators: help text for 'g' option in the 'Continue?' prompt
-#: src/solve-commit.cc:648
+#: src/solve-commit.cc:688
 msgid "View the summary in pager."
 msgstr "ページャで詳細を表示します。"
 
-#: src/solve-commit.cc:758
+#: src/solve-commit.cc:796
 msgid "committing"
 msgstr "確定しています"
 
-#: src/solve-commit.cc:760
+#: src/solve-commit.cc:798
 msgid "(dry run)"
 msgstr "(テスト)"
 
-#: src/solve-commit.cc:784 src/solve-commit.cc:817
+#: src/solve-commit.cc:822 src/solve-commit.cc:855
 msgid "Problem retrieving the package file from the repository:"
 msgstr "リポジトリからのパッケージファイルの取得に問題:"
 
 #. translators: the first %s is 'zypper refresh' and the second is repo alias
-#: src/solve-commit.cc:814
+#: src/solve-commit.cc:852
 #, c-format, boost-format
 msgid "Repository '%s' is out of date. Running '%s' might help."
 msgstr "リポジトリ '%s' の情報は古くなっています。 '%s' を実行してください。"
 
-#: src/solve-commit.cc:825
+#: src/solve-commit.cc:863
 msgid ""
 "The package integrity check failed. This may be a problem with the "
 "repository or media. Try one of the following:\n"
@@ -6292,21 +6316,21 @@ msgstr ""
 "- 他のインストールメディアを使用する　(損傷している場合など)　\n"
 "- 他のリポジトリを使用する"
 
-#: src/solve-commit.cc:839
+#: src/solve-commit.cc:877
 msgid "Problem occurred during or after installation or removal of packages:"
 msgstr ""
 "インストールまたは削除の際、もしくはそれぞれの作業の後に問題が発生しました:"
 
-#: src/solve-commit.cc:847
+#: src/solve-commit.cc:885
 msgid "Installation has completed with error."
 msgstr "インストールはエラーで終了しました。"
 
-#: src/solve-commit.cc:849
+#: src/solve-commit.cc:887
 #, boost-format
 msgid "You may run '%1%' to repair any dependency problems."
 msgstr "'%1%' を実行することで、依存関係の問題を修復することができます。"
 
-#: src/solve-commit.cc:863
+#: src/solve-commit.cc:901
 msgid ""
 "One of the installed patches requires a reboot of your machine. Reboot as "
 "soon as possible."
@@ -6314,7 +6338,7 @@ msgstr ""
 "インストールされたパッチの中にはコンピュータの再起動を必要とするものがありま"
 "す。できるだけ早めに再起動してください。"
 
-#: src/solve-commit.cc:871
+#: src/solve-commit.cc:909
 msgid ""
 "One of the installed patches affects the package manager itself. Run this "
 "command once more to install any other needed patches."
@@ -6323,7 +6347,7 @@ msgstr ""
 "ています。再度このコマンドを実行して、その他の必要な更新をインストールしてく"
 "ださい。"
 
-#: src/solve-commit.cc:889
+#: src/solve-commit.cc:927
 msgid "Dependencies of all installed packages are satisfied."
 msgstr "インストール済みの全パッケージの依存関係に問題はありません。"
 
@@ -6803,13 +6827,13 @@ msgstr "Enterキーで行単位、スペースキーでページ単位に移動�
 msgid "shows all options"
 msgstr "すべてのオプションを表示"
 
-#: src/utils/prompt.cc:194 src/utils/prompt.cc:314 src/utils/prompt.cc:325
-#: src/utils/prompt.cc:424
+#: src/utils/prompt.cc:194 src/utils/prompt.cc:312 src/utils/prompt.cc:321
+#: src/utils/prompt.cc:419
 msgid "yes"
 msgstr "はい"
 
-#: src/utils/prompt.cc:194 src/utils/prompt.cc:314 src/utils/prompt.cc:325
-#: src/utils/prompt.cc:424
+#: src/utils/prompt.cc:194 src/utils/prompt.cc:312 src/utils/prompt.cc:321
+#: src/utils/prompt.cc:419
 msgid "no"
 msgstr "いいえ"
 
@@ -6838,21 +6862,21 @@ msgstr[0] "%2$u 秒経過すると、自動的に「%1$s」を選択します。
 msgid "Trying again..."
 msgstr "再試行しています..."
 
-#: src/utils/prompt.cc:325
+#: src/utils/prompt.cc:321
 msgid "always"
 msgstr "常に行なう"
 
-#: src/utils/prompt.cc:325
+#: src/utils/prompt.cc:321
 msgid "never"
 msgstr "決して行なわない"
 
-#: src/utils/prompt.cc:372
+#: src/utils/prompt.cc:367
 msgid "Cannot read input: bad stream or EOF."
 msgstr ""
 "入力を読み込むことができません: ストリームが正しくないか、 EOF が検出されまし"
 "た。"
 
-#: src/utils/prompt.cc:373
+#: src/utils/prompt.cc:368
 #, c-format, boost-format
 msgid ""
 "If you run zypper without a terminal, use '%s' global\n"
@@ -6862,31 +6886,37 @@ msgstr ""
 "指定することで、 zypperに対して問い合わせへの既定の応答を設定することができま"
 "す。"
 
-#: src/utils/prompt.cc:412
+#: src/utils/prompt.cc:407
 #, c-format, boost-format
 msgid "Invalid answer '%s'."
 msgstr "回答 '%s' が正しくありません。"
 
-#: src/utils/prompt.cc:415
+#: src/utils/prompt.cc:410
 #, c-format, boost-format
 msgid "Ambiguous answer '%s'."
 msgstr "回答 '%s' が不正確です。"
 
 #. translators: the %s are: 'y', 'yes' (translated), 'n', and 'no' (translated).
-#: src/utils/prompt.cc:423
+#: src/utils/prompt.cc:418
 #, c-format, boost-format
 msgid "Enter '%s' for '%s' or '%s' for '%s' if nothing else works for you."
 msgstr ""
 "うまく動作しない場合、 「%s」(「%s」の場合)、 「%s」(「%s」の場合)を入力して"
 "ください。"
 
-#: src/utils/prompt.cc:428
+#: src/utils/prompt.cc:423
 msgid ""
 "If nothing else works enter '#1' to select the 1st option, '#2' for the 2nd "
 "one, ..."
 msgstr ""
 "いずれも動作しない場合は、 '#1' と入力すると最初の選択肢を、 '#2' と入力する"
 "と 2 番目の選択肢・・・のように選択することもできます。"
+
+#~ msgid "s/r/c"
+#~ msgstr "s/r/c"
+
+#~ msgid "c"
+#~ msgstr "c"
 
 #~ msgid "Disabling repository '%s'."
 #~ msgstr "リポジトリ '%s' を無効にしています。"
