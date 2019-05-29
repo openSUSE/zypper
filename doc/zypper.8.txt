@@ -553,7 +553,8 @@ include::{incdir}/option_Solver_Flags_Installs.txt[]
 	*-a*, *--all::
 		By default, only patches that are applicable on your system are listed. This option causes all available released patches to be listed. This option can be combined with all the rest of the *list-updates* command options.
 
-	*--with*[*out*]*-optional*::
+	*--with-optional*::
+	*--without-optional*::
 		Whether applicable optional patches should be treated as needed or be excluded. The default is to exclude optional patches.
 
 	*-r*, *--repo* 'alias'|'name'|'#'|'URI'::
@@ -569,7 +570,8 @@ include::{incdir}/option_Solver_Flags_Installs.txt[]
 	*--updatestack-only*::
 		Check only for patches which affect the package management itself.
 
-	*--with*[*out*]*-optional*::
+	*--with-optional*::
+	*--without-optional*::
 		Whether applicable optional patches should be treated as needed or be excluded. The default is to exclude optional patches.
 
 	*-r*, *--repo* 'alias'|'name'|'#'|'URI'::
@@ -592,7 +594,8 @@ include::{incdir}/option_Solver_Flags_Installs.txt[]
 		+
 		The option is ignored, if the patch command must update the update stack first, thus it can not be combined with the *--updatestack-only* option.
 
-	*--with*[*out*]*-optional*::
+	*--with-optional*::
+	*--without-optional*::
 		Whether applicable optional patches should be treated as needed or be excluded. The default is to exclude optional patches.
 
 	*-b*, *--bugzilla* '#'[,'...']::
@@ -690,17 +693,7 @@ include::{incdir}/option_Solver_Flags_Recommends.txt[]
 
 	Expert Options: :: Don't use them unless you know you need them.
 
-	*--*[*no-*]*allow-downgrade*::
-		Whether to allow downgrading installed resolvables [zypp.conf:solver.dupAllowDowngrade].
-
-	*--*[*no-*]*allow-name-change*::
-		Whether to allow changing the names of installed resolvables [zypp.conf:solver.dupAllowNameChange]. Setting this to *no* will not replace packages which have been renamed.
-
-	*--*[*no-*]*allow-arch-change*::
-		Whether to allow changing the architecture of installed resolvables [zypp.conf:solver.dupAllowArchChange].
-
-	*--*[*no-*]*allow-vendor-change*::
-		Whether to allow changing the vendor of installed resolvables [zypp.conf:solver.dupAllowVendorChange]. Setting this to *no* might be useful if you do not want packages from foreign repos being dup'ed to the distributions version (or vice versa).
+include::{incdir}/option_Solver_Flags_Installs.txt[]
 
 	This command also accepts the *Download-and-install mode options* described in the *install* command description.:: {nop}
 
@@ -1637,7 +1630,8 @@ GLOBAL OPTIONS
 *-q*, *--quiet*::
 	Suppress normal output. Brief (esp. result notification) messages and error messages will still be printed, though. If used together with conflicting *--verbose* option, the *--verbose* option takes preference.
 
-*--*[*no-*]*color*::
+*--color*::
+*--no-color*::
 	Whether to use colors in output if tty supports it. For details see the *[color]* section in *zypper.conf*.
 
 *-A*, *--no-abbrev*::

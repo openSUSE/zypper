@@ -1,11 +1,15 @@
-	*--*[*no-*]*allow-downgrade*::
+	*--allow-downgrade*::
+	*--no-allow-downgrade*::
 		Whether to allow downgrading installed resolvables.
 
-	*--*[*no-*]*allow-name-change*::
+	*--allow-name-change*::
+	*--no-allow-name-change*::
 		Whether to allow changing the names of installed resolvables. Setting this to *no* will not replace packages which have been renamed.
 
-	*--*[*no-*]*allow-arch-change*::
+	*--allow-arch-change*::
+	*--no-allow-arch-change*::
 		Whether to allow changing the architecture of installed resolvables.
 
-	*--*[*no-*]*allow-vendor-change*::
-		Whether to allow changing the vendor of installed resolvables. Setting this to *no* might be useful if you do not want packages from foreign repos being changed to the distributions version (or vice versa).	
+	*--allow-vendor-change*::
+	*--no-allow-vendor-change*::
+		Whether to allow changing the vendor of installed resolvables. Setting this to *no* might be useful if you do not want packages from foreign repos being changed to the distributions version (or vice versa).
