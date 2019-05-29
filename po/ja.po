@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-05-29 13:10+0200\n"
-"PO-Revision-Date: 2019-03-12 11:54+0000\n"
+"PO-Revision-Date: 2019-05-30 00:49+0000\n"
 "Last-Translator: Yasuhiko Kamata <belphegor@belbel.or.jp>\n"
 "Language-Team: Japanese <https://l10n.opensuse.org/projects/zypper/master/ja/"
 ">\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 3.3\n"
+"X-Generator: Weblate 3.6.1\n"
 
 #: src/SolverRequester.h:52
 #, boost-format
@@ -6037,7 +6037,7 @@ msgstr "問題点: "
 
 #: src/solve-commit.cc:48
 msgid "Detailed information: "
-msgstr ""
+msgstr "詳細情報: "
 
 #. TranslatorExplanation %d is the solution number
 #: src/solve-commit.cc:61
@@ -6069,7 +6069,7 @@ msgstr[0] ""
 #. The answers should be lower case letters.
 #: src/solve-commit.cc:111
 msgid "s/r/c/d"
-msgstr ""
+msgstr "s/r/c/d"
 
 #. translators: answers for dependency problem solution input prompt:
 #. "Choose from above solutions by number or cancel"
@@ -6080,28 +6080,28 @@ msgstr ""
 #. please report a bug against zypper at bugzilla.novell.com, we'll try to solve it.
 #: src/solve-commit.cc:127
 msgid "c/d"
-msgstr ""
+msgstr "c/d"
 
 #: src/solve-commit.cc:133
 #, boost-format
 msgid "Choose solution %1%"
-msgstr ""
+msgstr "%1% を選択する"
 
 #: src/solve-commit.cc:135
 msgid "Skip problem and continue."
-msgstr ""
+msgstr "問題を飛ばして続行する。"
 
 #: src/solve-commit.cc:138
 msgid "Retry solving immediately."
-msgstr ""
+msgstr "即時に解決をやり直す。"
 
 #: src/solve-commit.cc:140
 msgid "Choose no solution and cancel."
-msgstr ""
+msgstr "解決を選択せずにキャンセルする。"
 
 #: src/solve-commit.cc:141
 msgid "Toggle show detailed conflict information."
-msgstr ""
+msgstr "詳細な矛盾情報の表示を切り替える。"
 
 #: src/solve-commit.cc:174
 #, c-format, boost-format
