@@ -117,8 +117,8 @@ public:
 //
 ///////////////////////////////////////////////////////////////////
 
-Pathname         librpmDb::_defaultRoot;	// Remembered arg to last dbAccess call
-Pathname         librpmDb::_defaultDbPath;	// Remembered arg to last dbAccess call
+Pathname         librpmDb::_defaultRoot  ( "/" );
+Pathname         librpmDb::_defaultDbPath( "/var/lib/rpm" );
 librpmDb::constPtr librpmDb::_defaultDb;
 bool             librpmDb::_dbBlocked    ( true );
 
