@@ -9,16 +9,16 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-05-29 13:10+0200\n"
-"PO-Revision-Date: 2019-04-04 18:36+0000\n"
+"PO-Revision-Date: 2019-05-29 19:49+0000\n"
 "Last-Translator: David Medina <medipas@gmail.com>\n"
-"Language-Team: Catalan <https://l10n.opensuse.org/projects/zypper/master/ca/"
-">\n"
+"Language-Team: Catalan <https://l10n.opensuse.org/projects/zypper/master/ca/>"
+"\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 3.3\n"
+"X-Generator: Weblate 3.6.1\n"
 
 #: src/SolverRequester.h:52
 #, boost-format
@@ -2052,7 +2052,7 @@ msgstr "Arguments del programa sense opcions: "
 #. help text for the "Abort, retry, ignore?" prompt for media errors
 #: src/callbacks/media.cc:27
 msgid "Skip retrieval of the file and abort current operation."
-msgstr "Salta l'obtenció del fitxer i avorta l'operació vigent."
+msgstr "Salta't l'obtenció del fitxer i avorta l'operació vigent."
 
 #. help text for the "Abort, retry, ignore?" prompt for media errors
 #: src/callbacks/media.cc:29
@@ -2065,7 +2065,7 @@ msgid ""
 "Skip retrieval of the file and try to continue with the operation without "
 "the file."
 msgstr ""
-"Salta l'obtenció del fitxer i intenta continuar l'operació sense aquest "
+"Salta't l'obtenció del fitxer i intenta continuar l'operació sense aquest "
 "fitxer."
 
 #. help text for the "Abort, retry, ignore?" prompt for media errors
@@ -2953,12 +2953,12 @@ msgstr "El valor per defecte és incloure els pedaços opcionals."
 #. translators: --with-interactive
 #: src/commands/optionsets.cc:346
 msgid "Do not skip interactive updates."
-msgstr "No ometis les actualitzacions interactives."
+msgstr "No et saltis les actualitzacions interactives."
 
 #. translators: --skip-interactive
 #: src/commands/optionsets.cc:350
 msgid "Skip interactive updates."
-msgstr "Omet les actualitzacions interactives."
+msgstr "Salta't les actualitzacions interactives."
 
 #. translators: --sort-by-name
 #: src/commands/optionsets.cc:370
@@ -3671,12 +3671,12 @@ msgstr "Escanejant el contingut del repositori inhabilitat %s."
 #: src/commands/repos/refresh.cc:247
 #, c-format, boost-format
 msgid "Skipping disabled repository '%s'"
-msgstr "S'omet el repositori inhabilitat %s"
+msgstr "Se salta el repositori inhabilitat %s."
 
 #: src/commands/repos/refresh.cc:262 src/repos.cc:862 src/repos.cc:905
 #, c-format, boost-format
 msgid "Skipping repository '%s' because of the above error."
-msgstr "Saltant el repositori %s a causa de l'error anterior."
+msgstr "Se salta el repositori %s a causa de l'error anterior."
 
 #: src/commands/repos/refresh.cc:274
 msgid ""
@@ -4266,7 +4266,7 @@ msgstr "Error en obtenir el fitxer d'índex del repositori per al servei %s:"
 #: src/repos.cc:1733
 #, c-format, boost-format
 msgid "Skipping service '%s' because of the above error."
-msgstr "Saltant el servei %s a causa de l'error anterior."
+msgstr "Se salta el servei %s a causa de l'error anterior."
 
 #: src/commands/services/common.cc:148
 msgid "Check if the URI is valid and accessible."
@@ -4482,7 +4482,7 @@ msgstr ""
 #: src/commands/services/refresh.cc:179
 #, c-format, boost-format
 msgid "Skipping disabled service '%s'"
-msgstr "Saltant el servei inhabilitat %s"
+msgstr "Se salta el servei inhabilitat %s."
 
 #: src/commands/services/refresh.cc:237
 #, c-format, boost-format
@@ -5950,7 +5950,7 @@ msgstr ""
 
 #: src/repos.cc:1388
 msgid "Repository with no alias defined found in the file, skipping."
-msgstr "Repositori sense àlies definit trobat al fitxer, se salta."
+msgstr "Repositori sense àlies definit trobat al fitxer, s'omet."
 
 #: src/repos.cc:1394
 #, c-format, boost-format
@@ -6096,7 +6096,7 @@ msgstr "'%s' sembla un fitxer RPM. Es provarà de baixar-lo."
 #: src/repos.cc:1885
 #, c-format, boost-format
 msgid "Problem with the RPM file specified as '%s', skipping."
-msgstr "Problema amb el fitxer RPM especificat com a '%s', se salta."
+msgstr "Problema amb el fitxer RPM especificat com a \"%s\", s'omet."
 
 #: src/repos.cc:1907
 #, c-format, boost-format
@@ -6140,7 +6140,7 @@ msgstr "Problema: "
 
 #: src/solve-commit.cc:48
 msgid "Detailed information: "
-msgstr ""
+msgstr "Informació detallada: "
 
 #. TranslatorExplanation %d is the solution number
 #: src/solve-commit.cc:61
@@ -6174,7 +6174,7 @@ msgstr[1] "Trieu la solució amb el número corresponent o cancel·leu-ho."
 #. The answers should be lower case letters.
 #: src/solve-commit.cc:111
 msgid "s/r/c/d"
-msgstr ""
+msgstr "s/r/c/d"
 
 #. translators: answers for dependency problem solution input prompt:
 #. "Choose from above solutions by number or cancel"
@@ -6185,28 +6185,28 @@ msgstr ""
 #. please report a bug against zypper at bugzilla.novell.com, we'll try to solve it.
 #: src/solve-commit.cc:127
 msgid "c/d"
-msgstr ""
+msgstr "c/d"
 
 #: src/solve-commit.cc:133
 #, boost-format
 msgid "Choose solution %1%"
-msgstr ""
+msgstr "Trieu la solució %1%"
 
 #: src/solve-commit.cc:135
 msgid "Skip problem and continue."
-msgstr ""
+msgstr "Salta't el problema i continua."
 
 #: src/solve-commit.cc:138
 msgid "Retry solving immediately."
-msgstr ""
+msgstr "Reintenta solucionar-ho immediatament."
 
 #: src/solve-commit.cc:140
 msgid "Choose no solution and cancel."
-msgstr ""
+msgstr "No trieu cap solució i cancel·leu-ho."
 
 #: src/solve-commit.cc:141
 msgid "Toggle show detailed conflict information."
-msgstr ""
+msgstr "Commuta la visualització de la informació detallada del conflicte."
 
 #: src/solve-commit.cc:174
 #, c-format, boost-format
@@ -6272,7 +6272,7 @@ msgstr ""
 
 #: src/solve-commit.cc:495
 msgid "Skip check:"
-msgstr "Omet la comprovació:"
+msgstr "Salta't la comprovació:"
 
 #: src/solve-commit.cc:502
 #, boost-format
