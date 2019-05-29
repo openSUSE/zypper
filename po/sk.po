@@ -6,16 +6,16 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-05-29 13:10+0200\n"
-"PO-Revision-Date: 2019-03-12 11:54+0000\n"
+"PO-Revision-Date: 2019-05-29 19:49+0000\n"
 "Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
-"Language-Team: Slovak <https://l10n.opensuse.org/projects/zypper/master/sk/"
-">\n"
+"Language-Team: Slovak <https://l10n.opensuse.org/projects/zypper/master/sk/>"
+"\n"
 "Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Weblate 3.3\n"
+"X-Generator: Weblate 3.6.1\n"
 
 #: src/SolverRequester.h:52
 #, boost-format
@@ -6158,7 +6158,7 @@ msgstr "Problém: "
 
 #: src/solve-commit.cc:48
 msgid "Detailed information: "
-msgstr ""
+msgstr "Detailné informácie: "
 
 #. TranslatorExplanation %d is the solution number
 #: src/solve-commit.cc:61
@@ -6195,7 +6195,7 @@ msgstr[2] "Zvoľte riešenie pomocou čísla, alebo zvoľte ukončiť"
 #. The answers should be lower case letters.
 #: src/solve-commit.cc:111
 msgid "s/r/c/d"
-msgstr ""
+msgstr "p/z/k/d"
 
 #. translators: answers for dependency problem solution input prompt:
 #. "Choose from above solutions by number or cancel"
@@ -6206,28 +6206,28 @@ msgstr ""
 #. please report a bug against zypper at bugzilla.novell.com, we'll try to solve it.
 #: src/solve-commit.cc:127
 msgid "c/d"
-msgstr ""
+msgstr "k/d"
 
 #: src/solve-commit.cc:133
 #, boost-format
 msgid "Choose solution %1%"
-msgstr ""
+msgstr "Zvoliť riešenie %1%"
 
 #: src/solve-commit.cc:135
 msgid "Skip problem and continue."
-msgstr ""
+msgstr "Preskočiť problém a pokračovať."
 
 #: src/solve-commit.cc:138
 msgid "Retry solving immediately."
-msgstr ""
+msgstr "Znovu skúsiť riešenie okamžite."
 
 #: src/solve-commit.cc:140
 msgid "Choose no solution and cancel."
-msgstr ""
+msgstr "Nezvoliť žiadne riešenie a zrušiť."
 
 #: src/solve-commit.cc:141
 msgid "Toggle show detailed conflict information."
-msgstr ""
+msgstr "Prepnúť zobrazenie podrobných informácií o konflikte."
 
 #: src/solve-commit.cc:174
 #, c-format, boost-format
