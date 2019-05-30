@@ -21,7 +21,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-05-29 13:10+0200\n"
-"PO-Revision-Date: 2019-03-12 11:54+0000\n"
+"PO-Revision-Date: 2019-05-30 18:49+0000\n"
 "Last-Translator: Aleš Kastner <alkas@volny.cz>\n"
 "Language-Team: Czech <https://l10n.opensuse.org/projects/zypper/master/cs/>\n"
 "Language: cs\n"
@@ -29,7 +29,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Weblate 3.3\n"
+"X-Generator: Weblate 3.6.1\n"
 
 #: src/SolverRequester.h:52
 #, boost-format
@@ -6161,7 +6161,7 @@ msgstr "Problém: "
 
 #: src/solve-commit.cc:48
 msgid "Detailed information: "
-msgstr ""
+msgstr "Podrobné údaje: "
 
 #. TranslatorExplanation %d is the solution number
 #: src/solve-commit.cc:61
@@ -6198,7 +6198,7 @@ msgstr[2] "Vyberte jedno z uvedených řešení nebo akci zrušte (z)"
 #. The answers should be lower case letters.
 #: src/solve-commit.cc:111
 msgid "s/r/c/d"
-msgstr ""
+msgstr "p/o/z/č"
 
 #. translators: answers for dependency problem solution input prompt:
 #. "Choose from above solutions by number or cancel"
@@ -6209,28 +6209,28 @@ msgstr ""
 #. please report a bug against zypper at bugzilla.novell.com, we'll try to solve it.
 #: src/solve-commit.cc:127
 msgid "c/d"
-msgstr ""
+msgstr "z/č"
 
 #: src/solve-commit.cc:133
 #, boost-format
 msgid "Choose solution %1%"
-msgstr ""
+msgstr "Zvolte řešení %1%"
 
 #: src/solve-commit.cc:135
 msgid "Skip problem and continue."
-msgstr ""
+msgstr "Přeskočte problém a pokračujte."
 
 #: src/solve-commit.cc:138
 msgid "Retry solving immediately."
-msgstr ""
+msgstr "Nový pokus o okamžité řešení."
 
 #: src/solve-commit.cc:140
 msgid "Choose no solution and cancel."
-msgstr ""
+msgstr "Nezvolit žádné řešení a zrušit."
 
 #: src/solve-commit.cc:141
 msgid "Toggle show detailed conflict information."
-msgstr ""
+msgstr "Přepnout zobrazení podrobných údajů o konfliktu."
 
 #: src/solve-commit.cc:174
 #, c-format, boost-format
