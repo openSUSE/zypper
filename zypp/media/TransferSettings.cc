@@ -18,14 +18,13 @@ namespace zypp
 {
   namespace media
   {
-
     class TransferSettings::Impl
     {
     public:
       Impl()
       : _useproxy(false)
-      , _timeout(0)
-      , _connect_timeout(0)
+      , _timeout( ZConfig::instance().download_transfer_timeout() )
+      , _connect_timeout( 60 )
       , _maxConcurrentConnections(ZConfig::instance().download_max_concurrent_connections())
       , _minDownloadSpeed(ZConfig::instance().download_min_download_speed())
       , _maxDownloadSpeed(ZConfig::instance().download_max_download_speed())
