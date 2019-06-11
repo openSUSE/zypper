@@ -1,4 +1,19 @@
 -------------------------------------------------------------------
+Tue Jun 11 13:54:17 CEST 2019 - ma@suse.de
+
+- man: split '--with[out]' like options to ease searching.
+- Unhide 'ps' command in help
+- Add option to show more conflict information
+- Rephrased `zypper ps` hint (bsc#859480)
+- Fix repo refresh not returning 106-ZYPPER_EXIT_INF_REPOS_SKIPPED
+  if --root is used (bsc#1134226)
+- Fix unknown package handling in zypper install (fixes bsc#1127608)
+- Fix the package build failure with CMake 3.14.
+- Re-show progress bar after pressing retry upon install error
+  (bsc#1131113)
+- version 1.14.28
+
+-------------------------------------------------------------------
 Wed Apr  3 17:11:37 UTC 2019 - Christophe Giboudeaux <christophe@krop.fr>
 
 - Fix build with CMake >= 3.14
