@@ -41,6 +41,7 @@ ADD_TESTS(
   ResKind
   Resolver
   ResStatus
+  RpmPkgSigCheck
   Selectable
   SetRelationMixin
   SetTracker
