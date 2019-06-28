@@ -270,7 +270,7 @@ cd ..
 
 %check
 pushd build/tests
-LD_LIBRARY_PATH="%{buildroot}/%{_libdir}:$LD_LIBRARY_PATH" ctest .
+LD_LIBRARY_PATH="%{buildroot}/%{_libdir}:$LD_LIBRARY_PATH" ctest --output-on-failure .
 popd
 
 %post
