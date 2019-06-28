@@ -152,7 +152,7 @@ make %{?_smp_mflags}
 
 %check
 pushd build/tests
-ctest .
+ctest --output-on-failure .
 popd
 
 %install
