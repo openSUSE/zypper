@@ -1615,11 +1615,18 @@ namespace zypp
                 }
                 else
                 {
-                  PathInfo referenceFile( Pathname::assertprefix( _root, Pathname( "/etc/products.d" ) ) / referenceFilename );
-                  if ( ! referenceFile.isFile() || filesystem::unlink( referenceFile.path() ) != 0 )
-                  {
-                    ERR << "Delete orphan product failed: " << referenceFile << endl;
-                  }
+		  Pathname referencePath { Pathname("/etc/products.d") / referenceFilename };	// no root prefix for rpmdb lookup!
+		  if ( ! rpm().hasFile( referencePath.asString() ) )
+		  {
+		    // If it's not owned by a package, we can delete it.
+		    referencePath = Pathname::assertprefix( _root, referencePath );	// now add a root prefix
+		    if ( filesystem::unlink( referencePath ) != 0 )
+		      ERR << "Delete orphan product failed: " << referencePath << endl;
+		  }
+		  else
+		  {
+		    WAR << "Won't remove orphan product: '/etc/products.d/" << referenceFilename << "' is owned by a package." << endl;
+		  }
                 }
               }
             }
