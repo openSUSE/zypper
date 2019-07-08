@@ -321,9 +321,6 @@ std::list<PublicKeyData> KeyManagerCtx::readKeyFromFile(const Pathname &file)
 
 bool KeyManagerCtx::verify(const Pathname &file, const Pathname &signature)
 {
-  if ( !PathInfo( file ).isExist() || !PathInfo( signature ).isExist() )
-    return false;
-
   return _pimpl->verifySignaturesFprs(file, signature);
 }
 
