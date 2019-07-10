@@ -162,14 +162,8 @@ namespace zypp
       const std::list<PublicKeyData> & getData( const Pathname & keyring_r, Cache & cache_r ) const
       {
         if ( cache_r.hasChanged() ) {
-          shared_ptr<KeyManagerCtx> ctx = KeyManagerCtx::createForOpenPGP();
-          if (ctx) {
-            if (ctx->setHomedir(keyring_r)) {
-              std::list<PublicKeyData> foundKeys = ctx->listKeys();
-              cache_r._data.swap(foundKeys);
-            }
-          }
-          MIL << "Found keys: " << cache_r._data  << endl;
+	  cache_r._data = KeyManagerCtx::createForOpenPGP( keyring_r ).listKeys();
+	  MIL << "Found keys: " << cache_r._data  << endl;
         }
         return cache_r._data;
       }
@@ -392,10 +386,7 @@ namespace zypp
 
   void KeyRing::Impl::dumpPublicKey( const std::string & id, const Pathname & keyring, std::ostream & stream )
   {
-    KeyManagerCtx::Ptr ctx = KeyManagerCtx::createForOpenPGP();
-    if (!ctx || !ctx->setHomedir(keyring))
-      return;
-    ctx->exportKey(id, stream);
+    KeyManagerCtx::createForOpenPGP( keyring ).exportKey(id, stream);
   }
 
   filesystem::TmpFile KeyRing::Impl::dumpPublicKeyToTmp( const std::string & id, const Pathname & keyring )
@@ -600,31 +591,16 @@ namespace zypp
 				   % keyfile.asString()
 				   % keyring.asString() ));
 
-    KeyManagerCtx::Ptr ctx = KeyManagerCtx::createForOpenPGP();
-    if(!ctx || !ctx->setHomedir(keyring))
-      ZYPP_THROW(KeyRingException(_("Failed to import key.")));
-
     cachedPublicKeyData.setDirty( keyring );
-    if(!ctx->importKey(keyfile))
+    if ( ! KeyManagerCtx::createForOpenPGP( keyring ).importKey( keyfile ) )
       ZYPP_THROW(KeyRingException(_("Failed to import key.")));
   }
 
   void KeyRing::Impl::deleteKey( const std::string & id, const Pathname & keyring )
   {
-    KeyManagerCtx::Ptr ctx = KeyManagerCtx::createForOpenPGP();
-    if(!ctx) {
-      ZYPP_THROW(KeyRingException(_("Failed to delete key.")));
-    }
-
-    if(!ctx->setHomedir(keyring)) {
-      ZYPP_THROW(KeyRingException(_("Failed to delete key.")));
-    }
-
-    if(!ctx->deleteKey(id)){
-      ZYPP_THROW(KeyRingException(_("Failed to delete key.")));
-    }
-
     cachedPublicKeyData.setDirty( keyring );
+    if ( ! KeyManagerCtx::createForOpenPGP( keyring ).deleteKey( id ) )
+      ZYPP_THROW(KeyRingException(_("Failed to delete key.")));
   }
 
   std::string KeyRing::Impl::readSignatureKeyId( const Pathname & signature )
@@ -634,13 +610,8 @@ namespace zypp
 
     MIL << "Determining key id of signature " << signature << endl;
 
-    KeyManagerCtx::Ptr ctx = KeyManagerCtx::createForOpenPGP();
-    if(!ctx) {
-      return std::string();
-    }
-
-    std::list<std::string> fprs = ctx->readSignatureFingerprints(signature);
-    if (fprs.size()) {
+    std::list<std::string> fprs = KeyManagerCtx::createForOpenPGP().readSignatureFingerprints( signature );
+    if ( ! fprs.empty() ) {
       std::string &id = fprs.back();
       MIL << "Determined key id [" << id << "] for signature " << signature << endl;
       return id;
@@ -650,11 +621,7 @@ namespace zypp
 
   bool KeyRing::Impl::verifyFile( const Pathname & file, const Pathname & signature, const Pathname & keyring )
   {
-    KeyManagerCtx::Ptr ctx = KeyManagerCtx::createForOpenPGP();
-    if (!ctx || !ctx->setHomedir(keyring))
-      return false;
-
-    return ctx->verify(file, signature);
+    return KeyManagerCtx::createForOpenPGP( keyring ).verify( file, signature );
   }
 
   ///////////////////////////////////////////////////////////////////

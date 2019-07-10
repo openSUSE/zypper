@@ -31,19 +31,34 @@ namespace zypp
 class KeyManagerCtx
 {
     public:
-        typedef shared_ptr<KeyManagerCtx> Ptr;
+	/** Creates a new KeyManagerCtx for PGP using a volatile temp. homedir/keyring.
+	 *
+	 * Mainly used with methods, which need a context but do not need a keyring
+	 * (like \ref readKeyFromFile or \ref readSignatureFingerprints).
+	 *
+	 * \note The underlying keyring is intentionally NOT the users keyring.
+	 * Think of it as a volatile keyring whose content may get cleared anytime.
+	 *
+	 * \throws KeyRingException if context can not be created or set up
+	 */
+	static KeyManagerCtx createForOpenPGP();
 
-        /** Creates a new KeyManagerCtx for PGP */
-        static Ptr createForOpenPGP();
+	/** Creates a new KeyManagerCtx for PGP using a custom homedir/keyring.
+	 *
+	 * \note If you explicitly pass an empty \c Pathname, no homedir/keyring
+	 * will be set and GPGME will use it's defaults.
+	 *
+	 * \throws KeyRingException if context can not be created or set up
+	 */
+	static KeyManagerCtx createForOpenPGP( const Pathname & keyring_r );
 
-        /** Changes the keyring directory */
-        bool setHomedir (const Pathname & keyring_r);
-        Pathname homedir ()const;
+	/** Return the homedir/keyring. */
+	Pathname homedir() const;
 
         /**  Returns a list of all public keys found in the current keyring */
         std::list<PublicKeyData> listKeys();
 
-        /** Returns a list of all \sa PublicKeyData found in \a file */
+        /** Returns a list of all \a PublicKeyData found in \a file */
         std::list<PublicKeyData> readKeyFromFile(const Pathname & file);
 
         /** Tries to verify \a file using \a signature, returns true on success */
@@ -62,12 +77,10 @@ class KeyManagerCtx
         std::list<std::string> readSignatureFingerprints(const Pathname & signature);
 
     private:
-      class Impl;
-
       KeyManagerCtx();
 
+      class Impl;
       RW_pointer<Impl> _pimpl; ///< Pointer to implementation
-
 };
 
 }

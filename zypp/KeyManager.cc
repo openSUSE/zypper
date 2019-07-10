@@ -7,11 +7,12 @@
 |                                                                      |
 \---------------------------------------------------------------------*/
 #include "zypp/KeyManager.h"
-#include "zypp/PublicKey.h"
+#include "zypp/KeyRing.h"
 #include "zypp/PathInfo.h"
 #include "zypp/base/Logger.h"
 #include "zypp/TmpPath.h"
 #include "zypp/base/String.h"
+#include "zypp/AutoDispose.h"
 
 #include <boost/thread/once.hpp>
 #include <boost/interprocess/smart_ptr/scoped_ptr.hpp>
@@ -35,6 +36,19 @@ namespace zypp
     // threads are introduced into libzypp
     boost::once_flag gpgme_init_once = BOOST_ONCE_INIT;
 
+    void initGpgme ()
+    {
+      const char *version = gpgme_check_version(NULL);
+      if ( version )
+      {
+	MIL << "Initialized libgpgme version: " << version << endl;
+      }
+      else
+      {
+	MIL << "Initialized libgpgme with unknown version" << endl;
+      }
+    }
+
     //using boost::interprocess pointer because it allows a custom deleter
     typedef boost::interprocess::scoped_ptr<gpgme_data, boost::function<void (gpgme_data_t)>> GpgmeDataPtr;
     typedef boost::interprocess::scoped_ptr<_gpgme_key, boost::function<void (gpgme_key_t)>>  GpgmeKeyPtr;
@@ -52,19 +66,6 @@ namespace zypp
 
     std::ostream & operator<<( std::ostream & str, const GpgmeErr & obj )
     { return str << "<" << gpgme_strsource(obj) << "> " << gpgme_strerror(obj); }
-
-    void initGpgme ()
-    {
-      const char *version = gpgme_check_version(NULL);
-      if ( version )
-      {
-	MIL << "Initialized libgpgme version: " << version << endl;
-      }
-      else
-      {
-	MIL << "Initialized libgpgme with unknown version" << endl;
-      }
-    }
 
     /** \relates gpgme_import_result_t Stream output. */
     std::ostream & operator<<( std::ostream & str, const _gpgme_op_import_result & obj )
@@ -93,44 +94,46 @@ namespace zypp
   } // namespace
   ///////////////////////////////////////////////////////////////////
 
-class KeyManagerCtx::Impl
-{
-public:
-  Impl();
-  ~Impl();
-
-  /** Return all fingerprints found in \a signature_r. */
-  std::list<std::string> readSignaturesFprs( const Pathname & signature_r )
-  { return readSignaturesFprsOptVerify( signature_r ); }
-
-  /** Tries to verify the \a file_r using \a signature_r. */
-  bool verifySignaturesFprs( const Pathname & file_r, const Pathname & signature_r )
+  struct GpgmeException : public KeyRingException
   {
-    bool verify = false;
-    readSignaturesFprsOptVerify( signature_r, file_r, &verify );
-    return verify;
-  }
+    GpgmeException( const std::string & in_r, const GpgmeErr & err_r )
+    : KeyRingException( str::Format( "libgpgme error in '%1%': %2%" ) % in_r % err_r )
+    {}
+  };
 
-  gpgme_ctx_t _ctx;
+  class KeyManagerCtx::Impl
+  {
+  public:
+    Impl()
+    { boost::call_once( gpgme_init_once, initGpgme ); }
 
-private:
-  /** Return all fingerprints found in \a signature_r and optionally verify the \a file_r on the fly.
-   *
-   * If \a verify_r is not a \c nullptr, log verification errors and return
-   * whether all signatures are good.
-   */
-  std::list<std::string> readSignaturesFprsOptVerify( const Pathname & signature_r, const Pathname & file_r = "/dev/null", bool * verify_r = nullptr );
-};
-
-KeyManagerCtx::Impl::Impl()
-{ }
+    ~Impl()
+    { if ( _ctx ) gpgme_release( _ctx ); }
 
 
-KeyManagerCtx::KeyManagerCtx()
-  : _pimpl( new Impl )
-{
+    /** Return all fingerprints found in \a signature_r. */
+    std::list<std::string> readSignaturesFprs( const Pathname & signature_r )
+    { return readSignaturesFprsOptVerify( signature_r ); }
 
-}
+    /** Tries to verify the \a file_r using \a signature_r. */
+    bool verifySignaturesFprs( const Pathname & file_r, const Pathname & signature_r )
+    {
+      bool verify = false;
+      readSignaturesFprsOptVerify( signature_r, file_r, &verify );
+      return verify;
+    }
+
+    gpgme_ctx_t _ctx { nullptr };
+    bool _volatile { false };	///< readKeyFromFile workaround bsc#1140670
+
+  private:
+    /** Return all fingerprints found in \a signature_r and optionally verify the \a file_r on the fly.
+     *
+     * If \a verify_r is not a \c nullptr, log verification errors and return
+     * whether all signatures are good.
+     */
+    std::list<std::string> readSignaturesFprsOptVerify( const Pathname & signature_r, const Pathname & file_r = "/dev/null", bool * verify_r = nullptr );
+  };
 
 std::list<std::string> KeyManagerCtx::Impl::readSignaturesFprsOptVerify( const Pathname & signature_r, const Pathname & file_r, bool * verify_r )
 {
@@ -216,108 +219,150 @@ std::list<std::string> KeyManagerCtx::Impl::readSignaturesFprsOptVerify( const P
   return signatures;
 }
 
-KeyManagerCtx::Impl::~Impl()
+
+KeyManagerCtx::KeyManagerCtx()
+: _pimpl( new Impl )
+{}
+
+KeyManagerCtx KeyManagerCtx::createForOpenPGP()
 {
-  gpgme_release(_ctx);
+  static Pathname tmppath( zypp::myTmpDir() / "PublicKey" );
+  filesystem::assert_dir( tmppath );
+
+  KeyManagerCtx ret { createForOpenPGP( tmppath ) };
+  ret._pimpl->_volatile = true;	// readKeyFromFile workaround bsc#1140670
+  return ret;
 }
 
-KeyManagerCtx::Ptr KeyManagerCtx::createForOpenPGP()
+KeyManagerCtx KeyManagerCtx::createForOpenPGP( const Pathname & keyring_r )
 {
-  //make sure gpgpme is initialized
-  boost::call_once(gpgme_init_once, initGpgme);
+  DBG << "createForOpenPGP(" << keyring_r << ")" << endl;
 
-  gpgme_ctx_t ctx;
-  GpgmeErr err = gpgme_new(&ctx);
-  if (err != GPG_ERR_NO_ERROR) {
-    ERR << err << endl;
-    return shared_ptr<KeyManagerCtx>();
+  KeyManagerCtx ret;
+  gpgme_ctx_t & ctx { ret._pimpl->_ctx };
+
+  // create the context
+  GpgmeErr err = gpgme_new( &ctx );
+  if ( err != GPG_ERR_NO_ERROR )
+    ZYPP_THROW( GpgmeException( "gpgme_new", err ) );
+
+  // use OpenPGP
+  err = gpgme_set_protocol( ctx, GPGME_PROTOCOL_OpenPGP );
+  if ( err != GPG_ERR_NO_ERROR )
+    ZYPP_THROW( GpgmeException( "gpgme_set_protocol", err ) );
+
+  if ( !keyring_r.empty() ) {
+    // get engine information to read current state
+    gpgme_engine_info_t enginfo = gpgme_ctx_get_engine_info( ctx );
+    if ( !enginfo )
+      ZYPP_THROW( GpgmeException( "gpgme_ctx_get_engine_info", err ) );
+
+    err = gpgme_ctx_set_engine_info( ctx, GPGME_PROTOCOL_OpenPGP, enginfo->file_name, keyring_r.c_str() );
+    if ( err != GPG_ERR_NO_ERROR )
+      ZYPP_THROW( GpgmeException( "gpgme_ctx_set_engine_info", err ) );
   }
 
-  //use OpenPGP
-  err = gpgme_set_protocol(ctx, GPGME_PROTOCOL_OpenPGP);
-  if (err != GPG_ERR_NO_ERROR) {
-    ERR << err << endl;
-    gpgme_release(ctx);
-    return shared_ptr<KeyManagerCtx>();
-  }
-
-  shared_ptr<KeyManagerCtx> me( new KeyManagerCtx());
-  me->_pimpl->_ctx = ctx;
-  return me;
-}
-
-bool KeyManagerCtx::setHomedir(const Pathname &keyring_r)
-{
-
-  /* get engine information to read current state*/
-  gpgme_engine_info_t enginfo = gpgme_ctx_get_engine_info(_pimpl->_ctx);
-  if (!enginfo)
-    return false;
-
-  GpgmeErr err = gpgme_ctx_set_engine_info(
-        _pimpl->_ctx,
-        GPGME_PROTOCOL_OpenPGP,
-        enginfo->file_name,
-        keyring_r.c_str());
-
-  if (err != GPG_ERR_NO_ERROR) {
-    ERR << "Unable to set homedir " << err << endl;
-    return false;
-  }
-
-  return true;
+  return ret;
 }
 
 Pathname KeyManagerCtx::homedir() const
 {
-  gpgme_engine_info_t enginfo = gpgme_ctx_get_engine_info(_pimpl->_ctx);
-  if (!enginfo)
-    return Pathname();
-
-  return Pathname(enginfo->home_dir);
+  Pathname ret;
+  if ( gpgme_engine_info_t enginfo = gpgme_ctx_get_engine_info( _pimpl->_ctx ) )
+    ret = enginfo->home_dir;
+  return ret;
 }
 
 std::list<PublicKeyData> KeyManagerCtx::listKeys()
 {
-  std::list<PublicKeyData> keys;
-  gpgme_key_t key;
+  std::list<PublicKeyData> ret;
   GpgmeErr err = GPG_ERR_NO_ERROR;
 
-  gpgme_keylist_mode_t mode = GPGME_KEYLIST_MODE_LOCAL | GPGME_KEYLIST_MODE_SIGS;
-  gpgme_set_keylist_mode (_pimpl->_ctx, mode);
-  gpgme_op_keylist_start (_pimpl->_ctx, NULL, 0);
-
-  while (!(err = gpgme_op_keylist_next(_pimpl->_ctx, &key))) {
-    PublicKeyData data = PublicKeyData::fromGpgmeKey(key);
-    if (data) {
-      keys.push_back(data);
-    }
-    gpgme_key_release(key);
+  // Reset gpgme_keylist_mode on return!
+  AutoDispose<gpgme_keylist_mode_t> guard { gpgme_get_keylist_mode( _pimpl->_ctx ), bind( &gpgme_set_keylist_mode, _pimpl->_ctx, _1 ) };
+  // Let listed keys include signatures (required if PublicKeyData are created from the key)
+  if ( (err = gpgme_set_keylist_mode( _pimpl->_ctx, GPGME_KEYLIST_MODE_LOCAL | GPGME_KEYLIST_MODE_SIGS )) != GPG_ERR_NO_ERROR ) {
+    ERR << "gpgme_set_keylist_mode: " << err << endl;
+    return ret;
   }
-  gpgme_op_keylist_end(_pimpl->_ctx);
-  return keys;
+
+  if ( (err = gpgme_op_keylist_start( _pimpl->_ctx, NULL, 0 )) != GPG_ERR_NO_ERROR ) {
+    ERR << "gpgme_op_keylist_start: " << err << endl;
+    return ret;
+  }
+  // Close list operation on return!
+  AutoDispose<gpgme_ctx_t> guard2 { _pimpl->_ctx, &gpgme_op_keylist_end };
+
+  AutoDispose<gpgme_key_t> key { nullptr, &gpgme_key_release };
+  for ( ; gpgme_op_keylist_next( _pimpl->_ctx, &(*key) ) == GPG_ERR_NO_ERROR; key.getDispose()( key ) ) {
+    PublicKeyData data { PublicKeyData::fromGpgmeKey( key ) };
+    if ( data )
+      ret.push_back( data );
+  }
+
+  return ret;
 }
 
-std::list<PublicKeyData> KeyManagerCtx::readKeyFromFile(const Pathname &file)
+#if 1
+std::list<PublicKeyData> KeyManagerCtx::readKeyFromFile( const Pathname & keyfile_r )
 {
-  //seems GPGME does not support reading keys from a keyfile using
-  //gpgme_data_t and gpgme_op_keylist_from_data_start, this always
-  //return unsupported errors. However importing and listing the key works.
-  zypp::Pathname realHomedir = homedir();
+  // bsc#1140670: GPGME does not support reading keys from a keyfile using
+  // gpgme_data_t and gpgme_op_keylist_from_data_start. Despite GPGME_KEYLIST_MODE_SIGS
+  // the signatures are missing, but we need them to create proper PublicKeyData objects.
+  // While this is not resolved, we read into a temp. keyring. Impl::_volatile helps
+  // to detect whether we can clear and import into the current context or need to
+  // create a temp. one.
+  std::list<PublicKeyData> ret;
 
-  zypp::filesystem::TmpDir tmpKeyring;
-  if (!setHomedir(tmpKeyring.path()))
-    return std::list<PublicKeyData>();
-
-  if (!importKey(file)) {
-    setHomedir(realHomedir);
-    return std::list<PublicKeyData>();
+  if ( _pimpl->_volatile ) {
+    // in a volatile context we can simple clear the keyring...
+    filesystem::clean_dir( homedir() );
+    if ( importKey( keyfile_r ) )
+      ret = listKeys();
+  } else {
+    // read in a volatile context
+    ret = createForOpenPGP().readKeyFromFile( keyfile_r );
   }
 
-  std::list<PublicKeyData> keys = listKeys();
-  setHomedir(realHomedir);
-  return keys;
+  return ret;
 }
+#else
+std::list<PublicKeyData> KeyManagerCtx::readKeyFromFile( const Pathname & file_r )
+{
+  std::list<PublicKeyData> ret;
+  GpgmeErr err = GPG_ERR_NO_ERROR;
+
+  AutoDispose<gpgme_data_t> data { nullptr, &gpgme_data_release };
+  if ( (err = gpgme_data_new_from_file( &(*data), file_r.c_str(), 1 )) != GPG_ERR_NO_ERROR ) {
+    ERR << "gpgme_data_new_from_file " << file_r << ": " << err << endl;
+    return ret;
+  }
+
+  // Reset gpgme_keylist_mode on return!
+  AutoDispose<gpgme_keylist_mode_t> guard { gpgme_get_keylist_mode( _pimpl->_ctx ), bind( &gpgme_set_keylist_mode, _pimpl->_ctx, _1 ) };
+  // Let listed keys include signatures (required if PublicKeyData are created from the key)
+  if ( (err = gpgme_set_keylist_mode( _pimpl->_ctx, GPGME_KEYLIST_MODE_LOCAL | GPGME_KEYLIST_MODE_SIGS )) != GPG_ERR_NO_ERROR ) {
+    ERR << "gpgme_set_keylist_mode: " << err << endl;
+    return ret;
+  }
+
+  if ( (err = gpgme_op_keylist_from_data_start( _pimpl->_ctx, data, 0 )) != GPG_ERR_NO_ERROR ) {
+    ERR << "gpgme_op_keylist_from_data_start " << file_r << ": " << err << endl;
+    return ret;
+  }
+  // Close list operation on return!
+  AutoDispose<gpgme_ctx_t> guard2 { _pimpl->_ctx, &gpgme_op_keylist_end };
+
+  AutoDispose<gpgme_key_t> key { nullptr, &gpgme_key_release };
+  for ( ; gpgme_op_keylist_next( _pimpl->_ctx, &(*key) ) == GPG_ERR_NO_ERROR; key.getDispose()( key ) ) {
+    PublicKeyData data { PublicKeyData::fromGpgmeKey( key ) };
+    if ( data )
+      ret.push_back( data );
+  }
+
+  return ret;
+}
+#endif
 
 bool KeyManagerCtx::verify(const Pathname &file, const Pathname &signature)
 {

@@ -393,6 +393,7 @@ namespace zypp
       : _dontUseThisPtrDirectly( new filesystem::TmpFile( sharedFile_r ) )
     { readFromFile(); }
 
+    // private from keyring
     Impl( const filesystem::TmpFile & sharedFile_r, const PublicKeyData & keyData_r )
       : _dontUseThisPtrDirectly( new filesystem::TmpFile( sharedFile_r ) )
       , _keyData( keyData_r )
@@ -404,6 +405,7 @@ namespace zypp
       }
     }
 
+    // private from keyring
     Impl( const PublicKeyData & keyData_r )
       : _keyData( keyData_r )
     {}
@@ -419,23 +421,12 @@ namespace zypp
       { return _hiddenKeys; }
 
     protected:
-      std::string _initHomeDir()	///< readFromFile helper to prepare the 'gpg --homedir'
-      { Pathname ret( zypp::myTmpDir() / "PublicKey" ); filesystem::assert_dir( ret ); return ret.asString(); }
-
       void readFromFile()
       {
         PathInfo info( path() );
         MIL << "Reading pubkey from " << info.path() << " of size " << info.size() << " and sha1 " << filesystem::checksum(info.path(), "sha1") << endl;
 
-        //@TODO is this still required? KeyManagerCtx creates a homedir on the fly
-        static std::string tmppath( _initHomeDir() );
-
-        KeyManagerCtx::Ptr ctx = KeyManagerCtx::createForOpenPGP();
-        if (!ctx || !ctx->setHomedir(tmppath)) {
-          ZYPP_THROW( Exception( std::string("Can't read public key data: Setting the keyring path failed!")) );
-        }
-
-        std::list<PublicKeyData> keys = ctx->readKeyFromFile(path());
+        std::list<PublicKeyData> keys = KeyManagerCtx::createForOpenPGP().readKeyFromFile( path() );
         switch ( keys.size() )
         {
           case 0:
