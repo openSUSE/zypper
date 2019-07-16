@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Jul 16 16:50:34 CEST 2019 - ma@suse.de
+
+- Fix bash completions option detection (bsc#1049825)
+- version 1.11.77
+
+-------------------------------------------------------------------
 Thu May 16 18:40:16 CEST 2019 - ma@suse.de
 
 - Fix repo refresh not returning 106-ZYPPER_EXIT_INF_REPOS_SKIPPED
