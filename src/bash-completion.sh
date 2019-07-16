@@ -119,7 +119,7 @@ _zypper() {
 
 	if test -n "$command" ; then
 		if ! [[ $cur =~ ^[^-] ]] ; then
-			opts=$(LC_ALL=POSIX $ZYPPER -q help $command 2>&1 | sed -n '1,/[Oo]ptions:$/d; s/^[[:blank:]]*\(-[^-]*\)\?\(--[^[:blank:][]*\).*/\2/p')
+			opts=$(LC_ALL=POSIX $ZYPPER -q help $command 2>&1 | sed -n '1,/[Oo]ptions:$/d; s/^.\{,6\}\(--[^[:blank:][]*\).*/\1/p')
 		fi
 
 		#handling individual commands if they need more then we can dig from help
