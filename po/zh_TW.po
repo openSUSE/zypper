@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-29 13:10+0200\n"
+"POT-Creation-Date: 2019-07-18 13:07+0200\n"
 "PO-Revision-Date: 2019-06-25 07:50+0000\n"
 "Last-Translator: Yi-Jyun Pan <pan93412@gmail.com>\n"
 "Language-Team: Chinese (Taiwan) <https://l10n.opensuse.org/projects/zypper/"
@@ -431,13 +431,24 @@ msgstr "安裝 %s 失敗："
 msgid "Installing: %s"
 msgstr "正在安裝：%s"
 
-#. TranslatorExplanation A progressbar label
-#: src/callbacks/rpm.h:405
+#. translators: A progressbar label
+#: src/callbacks/rpm.h:403
 msgid "Checking for file conflicts:"
 msgstr "正在檢查檔案衝突："
 
+#. TranslatorExplanation %1%(number of packages); detailed list follows
+#: src/callbacks/rpm.h:454
+#, boost-format
+msgid ""
+"%1% package had to be excluded from file conflicts check because it is not "
+"yet download."
+msgid_plural ""
+"%1% packages had to be excluded from file conflicts check because they are "
+"not yet downloaded."
+msgstr[0] ""
+
 #. TranslatorExplanation %1%(commandline option)
-#: src/callbacks/rpm.h:439
+#: src/callbacks/rpm.h:460
 #, boost-format
 msgid ""
 "Checking for file conflicts requires not installed packages to be downloaded "
@@ -447,30 +458,19 @@ msgstr ""
 "檢查檔案衝突需要事先下載尚未安裝的套件，才能存取其檔案清單。詳情請見 zypper "
 "說明文件中關於選項 '%1%' 的說明。"
 
-#. TranslatorExplanation %1%(number of packages); detailed list follows
-#: src/callbacks/rpm.h:446
-#, boost-format
-msgid ""
-"The following package had to be excluded from file conflicts check because "
-"it is not yet downloaded:"
-msgid_plural ""
-"The following %1% packages had to be excluded from file conflicts check "
-"because they are not yet downloaded:"
-msgstr[0] "下列 %1% 個套件因為尚未下載，故必須在檔案衝突檢查時被排除："
-
 #. TranslatorExplanation %1%(number of conflicts); detailed list follows
-#: src/callbacks/rpm.h:457
+#: src/callbacks/rpm.h:470
 #, boost-format
 msgid "Detected %1% file conflict:"
 msgid_plural "Detected %1% file conflicts:"
 msgstr[0] "偵測到 %1% 個檔案衝突："
 
-#: src/callbacks/rpm.h:465
+#: src/callbacks/rpm.h:478
 msgid "Conflicting files will be replaced."
 msgstr "衝突檔案將會被取代。"
 
 #. TranslatorExplanation Problem description before asking whether to "Continue? [yes/no] (no):"
-#: src/callbacks/rpm.h:471
+#: src/callbacks/rpm.h:484
 msgid ""
 "File conflicts happen when two packages attempt to install files with the "
 "same name but different contents. If you continue, conflicting files will be "
@@ -793,7 +793,7 @@ msgstr "在表格中不要使用縮寫文字。"
 msgid "Table style (integer)."
 msgstr "設定表格風格 (整數)。"
 
-#: src/Config.cc:424 src/commands/optionsets.cc:282
+#: src/Config.cc:424 src/commands/optionsets.cc:284
 msgid "Entering non-interactive mode."
 msgstr "進入非互動模式。"
 
@@ -2645,57 +2645,65 @@ msgstr "此指令是一個假動作，它只會回應 0。"
 msgid "Don't change anything, just report what would be done."
 msgstr "不做任何變更，僅報告要執行的操作。"
 
+#. translators: %1% is a commandline option (like "--download-only")
+#: src/commands/optionsets.cc:35
+#, boost-format
+msgid ""
+"A meaningful file conflict check can only be performed if used together with "
+"'%1%'."
+msgstr ""
+
 #. translators: -r, --repo <ALIAS|#|URI>
-#: src/commands/optionsets.cc:65
+#: src/commands/optionsets.cc:67
 msgid "Work only with the specified repository."
 msgstr "只對指定套件庫起作用。"
 
-#: src/commands/optionsets.cc:85
+#: src/commands/optionsets.cc:87
 #, c-format, boost-format
 msgid "Option '--%s' overrides a previously set download mode."
 msgstr "選項「--%s」會覆寫先前設定的下載模式。"
 
-#: src/commands/optionsets.cc:114
+#: src/commands/optionsets.cc:116
 #, c-format, boost-format
 msgid "Available download modes: %s"
 msgstr "可用的下載模式︰%s"
 
 #. translators: --download
-#: src/commands/optionsets.cc:176
+#: src/commands/optionsets.cc:178
 #, c-format, boost-format
 msgid "Set the download-install mode. Available modes: %s"
 msgstr "設定下載-安裝模式。可用的模式： %s"
 
 #. translators: -d, --download-only
-#: src/commands/optionsets.cc:180
+#: src/commands/optionsets.cc:182
 msgid "Only download the packages, do not install."
 msgstr "僅下載套件，不要安裝。"
 
 #. translators: -i, --installed-only
-#: src/commands/optionsets.cc:200
+#: src/commands/optionsets.cc:202
 msgid "Show only installed packages."
 msgstr "僅顯示已安裝的套件。"
 
 #. translators: -u, --not-installed-only
-#: src/commands/optionsets.cc:204
+#: src/commands/optionsets.cc:206
 msgid "Show only packages which are not installed."
 msgstr "僅顯示未安裝的套件。"
 
-#: src/commands/optionsets.cc:237
+#: src/commands/optionsets.cc:239
 msgid ""
 "Automatically say 'yes' to third party license confirmation prompt. See 'man "
 "zypper' for more details."
 msgstr ""
 "對協力廠商授權資訊提示自動選取「是」。請參閱「man zypper」瞭解詳細資料。"
 
-#: src/commands/optionsets.cc:242
+#: src/commands/optionsets.cc:244
 msgid ""
 "Automatically accept product licenses only. See 'man zypper' for more "
 "details."
 msgstr "僅自動接受產品授權。請參閱「man zypper」瞭解詳細資料。"
 
 #. translators: --replacefiles
-#: src/commands/optionsets.cc:262
+#: src/commands/optionsets.cc:264
 msgid ""
 "Install the packages even if they replace files from other, already "
 "installed, packages. Default is to treat file conflicts as an error. --"
@@ -2705,44 +2713,44 @@ msgstr ""
 "理。 使用 --download-as-needed 選項來停用檔案衝突檢查。"
 
 #. translators: -y, --no-confirm
-#: src/commands/optionsets.cc:289
+#: src/commands/optionsets.cc:291
 msgid ""
 "Don't require user interaction. Alias for the --non-interactive global "
 "option."
 msgstr "不需要與使用者互動。相當於全域選項 --non-interactive。"
 
-#: src/commands/optionsets.cc:307
+#: src/commands/optionsets.cc:309
 msgid ""
 "Whether applicable optional patches should be treated as needed or be "
 "excluded."
 msgstr "是否應將適用選擇性修補程式視為需要或將其排除。"
 
-#: src/commands/optionsets.cc:310
+#: src/commands/optionsets.cc:312
 msgid "The default is to exclude optional patches."
 msgstr "預設設定為排除選擇性修補程式。"
 
-#: src/commands/optionsets.cc:311
+#: src/commands/optionsets.cc:313
 msgid "The default is to include optional patches."
 msgstr "預設設定為包括選擇性修補程式。"
 
 #. translators: --with-interactive
-#: src/commands/optionsets.cc:346
+#: src/commands/optionsets.cc:348
 msgid "Do not skip interactive updates."
 msgstr "請勿跳過互動式更新。"
 
 #. translators: --skip-interactive
-#: src/commands/optionsets.cc:350
+#: src/commands/optionsets.cc:352
 msgid "Skip interactive updates."
 msgstr "跳過互動式更新。"
 
 #. translators: --sort-by-name
-#: src/commands/optionsets.cc:370
+#: src/commands/optionsets.cc:372
 msgid "Sort packages by name (default)."
 msgstr "依名稱對套件排序 (預設值)。"
 
 #. translators: --sort-by-repo
 #. translators: --sort-by-catalog
-#: src/commands/optionsets.cc:380 src/commands/optionsets.cc:391
+#: src/commands/optionsets.cc:382 src/commands/optionsets.cc:393
 msgid "Sort packages by repository."
 msgstr "依套件庫對套件排序。"
 
@@ -6608,6 +6616,14 @@ msgid ""
 "one, ..."
 msgstr ""
 "如果沒有可用回答，輸入「#1」選取第一個選項，輸入「#2」選取第二個選項..."
+
+#~ msgid ""
+#~ "The following package had to be excluded from file conflicts check "
+#~ "because it is not yet downloaded:"
+#~ msgid_plural ""
+#~ "The following %1% packages had to be excluded from file conflicts check "
+#~ "because they are not yet downloaded:"
+#~ msgstr[0] "下列 %1% 個套件因為尚未下載，故必須在檔案衝突檢查時被排除："
 
 #~ msgid "s/r/c"
 #~ msgstr "s/r/c"

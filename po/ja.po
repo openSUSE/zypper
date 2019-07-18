@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-29 13:10+0200\n"
+"POT-Creation-Date: 2019-07-18 13:07+0200\n"
 "PO-Revision-Date: 2019-05-30 00:49+0000\n"
 "Last-Translator: Yasuhiko Kamata <belphegor@belbel.or.jp>\n"
 "Language-Team: Japanese <https://l10n.opensuse.org/projects/zypper/master/ja/"
@@ -452,13 +452,24 @@ msgstr "%s のインストールに失敗しました:"
 msgid "Installing: %s"
 msgstr "インストールしています:%s"
 
-#. TranslatorExplanation A progressbar label
-#: src/callbacks/rpm.h:405
+#. translators: A progressbar label
+#: src/callbacks/rpm.h:403
 msgid "Checking for file conflicts:"
 msgstr "ファイルの競合を確認中:"
 
+#. TranslatorExplanation %1%(number of packages); detailed list follows
+#: src/callbacks/rpm.h:454
+#, boost-format
+msgid ""
+"%1% package had to be excluded from file conflicts check because it is not "
+"yet download."
+msgid_plural ""
+"%1% packages had to be excluded from file conflicts check because they are "
+"not yet downloaded."
+msgstr[0] ""
+
 #. TranslatorExplanation %1%(commandline option)
-#: src/callbacks/rpm.h:439
+#: src/callbacks/rpm.h:460
 #, boost-format
 msgid ""
 "Checking for file conflicts requires not installed packages to be downloaded "
@@ -469,32 +480,19 @@ msgstr ""
 "ロードしてファイルリストを入手する必要があります。詳細については、zypperのマ"
 "ニュアルのオプション '%1%' を参照してください。"
 
-#. TranslatorExplanation %1%(number of packages); detailed list follows
-#: src/callbacks/rpm.h:446
-#, boost-format
-msgid ""
-"The following package had to be excluded from file conflicts check because "
-"it is not yet downloaded:"
-msgid_plural ""
-"The following %1% packages had to be excluded from file conflicts check "
-"because they are not yet downloaded:"
-msgstr[0] ""
-"以下 %1% 個のパッケージについては、まだダウンロードを行なっていないため、ファ"
-"イルの競合検出からは除外されます:"
-
 #. TranslatorExplanation %1%(number of conflicts); detailed list follows
-#: src/callbacks/rpm.h:457
+#: src/callbacks/rpm.h:470
 #, boost-format
 msgid "Detected %1% file conflict:"
 msgid_plural "Detected %1% file conflicts:"
 msgstr[0] "%1% 個のファイル競合を検出しました:"
 
-#: src/callbacks/rpm.h:465
+#: src/callbacks/rpm.h:478
 msgid "Conflicting files will be replaced."
 msgstr "競合しているファイルは置き換えられます。"
 
 #. TranslatorExplanation Problem description before asking whether to "Continue? [yes/no] (no):"
-#: src/callbacks/rpm.h:471
+#: src/callbacks/rpm.h:484
 msgid ""
 "File conflicts happen when two packages attempt to install files with the "
 "same name but different contents. If you continue, conflicting files will be "
@@ -824,7 +822,7 @@ msgstr "表内でのテキストの省略を行なわないようにします。
 msgid "Table style (integer)."
 msgstr "表形式を指定します (整数) 。"
 
-#: src/Config.cc:424 src/commands/optionsets.cc:282
+#: src/Config.cc:424 src/commands/optionsets.cc:284
 msgid "Entering non-interactive mode."
 msgstr "対話処理を行なわない設定にします。"
 
@@ -2759,43 +2757,51 @@ msgstr "このコマンドは常に0を返すダミー実装です。"
 msgid "Don't change anything, just report what would be done."
 msgstr "何も変更しません。何が行なわれるのかだけを表示します。"
 
+#. translators: %1% is a commandline option (like "--download-only")
+#: src/commands/optionsets.cc:35
+#, boost-format
+msgid ""
+"A meaningful file conflict check can only be performed if used together with "
+"'%1%'."
+msgstr ""
+
 #. translators: -r, --repo <ALIAS|#|URI>
-#: src/commands/optionsets.cc:65
+#: src/commands/optionsets.cc:67
 msgid "Work only with the specified repository."
 msgstr "指定したリポジトリでのみ作業を行います。"
 
-#: src/commands/optionsets.cc:85
+#: src/commands/optionsets.cc:87
 #, c-format, boost-format
 msgid "Option '--%s' overrides a previously set download mode."
 msgstr "オプション '--%s' は以前に設定されたダウンロードモードを上書きします。"
 
-#: src/commands/optionsets.cc:114
+#: src/commands/optionsets.cc:116
 #, c-format, boost-format
 msgid "Available download modes: %s"
 msgstr "利用可能なダウンロードモード:%s"
 
 #. translators: --download
-#: src/commands/optionsets.cc:176
+#: src/commands/optionsets.cc:178
 #, c-format, boost-format
 msgid "Set the download-install mode. Available modes: %s"
 msgstr "ダウンロード - インストールモードを指定します。利用可能なモード: %s"
 
 #. translators: -d, --download-only
-#: src/commands/optionsets.cc:180
+#: src/commands/optionsets.cc:182
 msgid "Only download the packages, do not install."
 msgstr "パッケージをダウンロードするだけでインストールは行いません。"
 
 #. translators: -i, --installed-only
-#: src/commands/optionsets.cc:200
+#: src/commands/optionsets.cc:202
 msgid "Show only installed packages."
 msgstr "インストール済みのパッケージのみを表示します。"
 
 #. translators: -u, --not-installed-only
-#: src/commands/optionsets.cc:204
+#: src/commands/optionsets.cc:206
 msgid "Show only packages which are not installed."
 msgstr "インストールされていないパッケージのみを表示します。"
 
-#: src/commands/optionsets.cc:237
+#: src/commands/optionsets.cc:239
 msgid ""
 "Automatically say 'yes' to third party license confirmation prompt. See 'man "
 "zypper' for more details."
@@ -2803,7 +2809,7 @@ msgstr ""
 "サードパーティのライセンス確認プロンプトに対して、自動的に 'yes' と回答しま"
 "す。詳しくは 'man zypper' をお読みください。"
 
-#: src/commands/optionsets.cc:242
+#: src/commands/optionsets.cc:244
 msgid ""
 "Automatically accept product licenses only. See 'man zypper' for more "
 "details."
@@ -2812,7 +2818,7 @@ msgstr ""
 "みください。"
 
 #. translators: --replacefiles
-#: src/commands/optionsets.cc:262
+#: src/commands/optionsets.cc:264
 msgid ""
 "Install the packages even if they replace files from other, already "
 "installed, packages. Default is to treat file conflicts as an error. --"
@@ -2823,7 +2829,7 @@ msgstr ""
 "download-as-neededを指定するとファイルの衝突の確認が無効になります。"
 
 #. translators: -y, --no-confirm
-#: src/commands/optionsets.cc:289
+#: src/commands/optionsets.cc:291
 msgid ""
 "Don't require user interaction. Alias for the --non-interactive global "
 "option."
@@ -2831,38 +2837,38 @@ msgstr ""
 "ユーザの操作を不要にします。 --non-interactive グローバルオプションの別名で"
 "す。"
 
-#: src/commands/optionsets.cc:307
+#: src/commands/optionsets.cc:309
 msgid ""
 "Whether applicable optional patches should be treated as needed or be "
 "excluded."
 msgstr "任意指定のパッチを必要なパッチとして含めるかどうかを指定します。"
 
-#: src/commands/optionsets.cc:310
+#: src/commands/optionsets.cc:312
 msgid "The default is to exclude optional patches."
 msgstr "既定では、任意指定のパッチは除外されます。"
 
-#: src/commands/optionsets.cc:311
+#: src/commands/optionsets.cc:313
 msgid "The default is to include optional patches."
 msgstr "既定では、任意指定のパッチを含みます。"
 
 #. translators: --with-interactive
-#: src/commands/optionsets.cc:346
+#: src/commands/optionsets.cc:348
 msgid "Do not skip interactive updates."
 msgstr "対話処理が必要な更新を飛ばしません。"
 
 #. translators: --skip-interactive
-#: src/commands/optionsets.cc:350
+#: src/commands/optionsets.cc:352
 msgid "Skip interactive updates."
 msgstr "対話処理が必要な更新を飛ばします。"
 
 #. translators: --sort-by-name
-#: src/commands/optionsets.cc:370
+#: src/commands/optionsets.cc:372
 msgid "Sort packages by name (default)."
 msgstr "名前別にパッケージをソートします(デフォルト)。"
 
 #. translators: --sort-by-repo
 #. translators: --sort-by-catalog
-#: src/commands/optionsets.cc:380 src/commands/optionsets.cc:391
+#: src/commands/optionsets.cc:382 src/commands/optionsets.cc:393
 msgid "Sort packages by repository."
 msgstr "リポジトリ別にパッケージをソートします。"
 
@@ -6911,6 +6917,16 @@ msgid ""
 msgstr ""
 "いずれも動作しない場合は、 '#1' と入力すると最初の選択肢を、 '#2' と入力する"
 "と 2 番目の選択肢・・・のように選択することもできます。"
+
+#~ msgid ""
+#~ "The following package had to be excluded from file conflicts check "
+#~ "because it is not yet downloaded:"
+#~ msgid_plural ""
+#~ "The following %1% packages had to be excluded from file conflicts check "
+#~ "because they are not yet downloaded:"
+#~ msgstr[0] ""
+#~ "以下 %1% 個のパッケージについては、まだダウンロードを行なっていないため、"
+#~ "ファイルの競合検出からは除外されます:"
 
 #~ msgid "s/r/c"
 #~ msgstr "s/r/c"

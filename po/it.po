@@ -11,11 +11,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-29 13:10+0200\n"
+"POT-Creation-Date: 2019-07-18 13:07+0200\n"
 "PO-Revision-Date: 2019-07-17 13:51+0000\n"
 "Last-Translator: Alessio Adamo <alessio.adamo@gmail.com>\n"
-"Language-Team: Italian <https://l10n.opensuse.org/projects/zypper/master/it/>"
-"\n"
+"Language-Team: Italian <https://l10n.opensuse.org/projects/zypper/master/it/"
+">\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -459,13 +459,25 @@ msgstr "Installazione di %s fallita:"
 msgid "Installing: %s"
 msgstr "Installazione di: %s"
 
-#. TranslatorExplanation A progressbar label
-#: src/callbacks/rpm.h:405
+#. translators: A progressbar label
+#: src/callbacks/rpm.h:403
 msgid "Checking for file conflicts:"
 msgstr "Controllo dei conflitti tra file:"
 
+#. TranslatorExplanation %1%(number of packages); detailed list follows
+#: src/callbacks/rpm.h:454
+#, boost-format
+msgid ""
+"%1% package had to be excluded from file conflicts check because it is not "
+"yet download."
+msgid_plural ""
+"%1% packages had to be excluded from file conflicts check because they are "
+"not yet downloaded."
+msgstr[0] ""
+msgstr[1] ""
+
 #. TranslatorExplanation %1%(commandline option)
-#: src/callbacks/rpm.h:439
+#: src/callbacks/rpm.h:460
 #, boost-format
 msgid ""
 "Checking for file conflicts requires not installed packages to be downloaded "
@@ -477,36 +489,20 @@ msgstr ""
 "rispettivi elenchi dei file. Vedere l'opzione '%1%' nella pagina del manuale "
 "zypper per i dettagli."
 
-#. TranslatorExplanation %1%(number of packages); detailed list follows
-#: src/callbacks/rpm.h:446
-#, boost-format
-msgid ""
-"The following package had to be excluded from file conflicts check because "
-"it is not yet downloaded:"
-msgid_plural ""
-"The following %1% packages had to be excluded from file conflicts check "
-"because they are not yet downloaded:"
-msgstr[0] ""
-"Il seguente pacchetto è stato escluso dal controllo dei conflitti dei file "
-"in quanto non è ancora stato scaricato:"
-msgstr[1] ""
-"I seguenti %1% pacchetti sono stati esclusi dal controllo dei conflitti dei "
-"file in quanto non sono ancora stati scaricati:"
-
 #. TranslatorExplanation %1%(number of conflicts); detailed list follows
-#: src/callbacks/rpm.h:457
+#: src/callbacks/rpm.h:470
 #, boost-format
 msgid "Detected %1% file conflict:"
 msgid_plural "Detected %1% file conflicts:"
 msgstr[0] "Rilevato %1% conflitto tra file:"
 msgstr[1] "Rilevati %1% conflitti tra file:"
 
-#: src/callbacks/rpm.h:465
+#: src/callbacks/rpm.h:478
 msgid "Conflicting files will be replaced."
 msgstr "I file in conflitto verranno sostituiti."
 
 #. TranslatorExplanation Problem description before asking whether to "Continue? [yes/no] (no):"
-#: src/callbacks/rpm.h:471
+#: src/callbacks/rpm.h:484
 msgid ""
 "File conflicts happen when two packages attempt to install files with the "
 "same name but different contents. If you continue, conflicting files will be "
@@ -840,7 +836,7 @@ msgstr "Non abbreviare il testo nelle tabelle."
 msgid "Table style (integer)."
 msgstr "Stile delle tabelle (intero)."
 
-#: src/Config.cc:424 src/commands/optionsets.cc:282
+#: src/Config.cc:424 src/commands/optionsets.cc:284
 msgid "Entering non-interactive mode."
 msgstr "Attivazione modalità non interattiva."
 
@@ -2926,45 +2922,53 @@ msgid "Don't change anything, just report what would be done."
 msgstr ""
 "Non modifica nulla, semplicemente riporta le modifiche che avrebbe apportato."
 
+#. translators: %1% is a commandline option (like "--download-only")
+#: src/commands/optionsets.cc:35
+#, boost-format
+msgid ""
+"A meaningful file conflict check can only be performed if used together with "
+"'%1%'."
+msgstr ""
+
 #. translators: -r, --repo <ALIAS|#|URI>
-#: src/commands/optionsets.cc:65
+#: src/commands/optionsets.cc:67
 msgid "Work only with the specified repository."
 msgstr "Funziona solo con il repository specificato."
 
-#: src/commands/optionsets.cc:85
+#: src/commands/optionsets.cc:87
 #, c-format, boost-format
 msgid "Option '--%s' overrides a previously set download mode."
 msgstr ""
 "L'opzione '--%s' bypassa una modalità di download impostata in precedenza."
 
-#: src/commands/optionsets.cc:114
+#: src/commands/optionsets.cc:116
 #, c-format, boost-format
 msgid "Available download modes: %s"
 msgstr "Modalità di download disponibile: %s"
 
 #. translators: --download
-#: src/commands/optionsets.cc:176
+#: src/commands/optionsets.cc:178
 #, c-format, boost-format
 msgid "Set the download-install mode. Available modes: %s"
 msgstr ""
 "Imposta la modalità di installazione del download. Modalità disponibili: %s"
 
 #. translators: -d, --download-only
-#: src/commands/optionsets.cc:180
+#: src/commands/optionsets.cc:182
 msgid "Only download the packages, do not install."
 msgstr "Effettua solo il download dei pacchetti, non li installa."
 
 #. translators: -i, --installed-only
-#: src/commands/optionsets.cc:200
+#: src/commands/optionsets.cc:202
 msgid "Show only installed packages."
 msgstr "Mostra solo i pacchetti installati."
 
 #. translators: -u, --not-installed-only
-#: src/commands/optionsets.cc:204
+#: src/commands/optionsets.cc:206
 msgid "Show only packages which are not installed."
 msgstr "Mostra solo i pacchetti non installati."
 
-#: src/commands/optionsets.cc:237
+#: src/commands/optionsets.cc:239
 msgid ""
 "Automatically say 'yes' to third party license confirmation prompt. See 'man "
 "zypper' for more details."
@@ -2972,7 +2976,7 @@ msgstr ""
 "Rispondi automaticamente 'sì' alle richieste di conferma di licenza di terze "
 "parti. Consultare 'man zypper' per maggiori dettagli."
 
-#: src/commands/optionsets.cc:242
+#: src/commands/optionsets.cc:244
 msgid ""
 "Automatically accept product licenses only. See 'man zypper' for more "
 "details."
@@ -2981,7 +2985,7 @@ msgstr ""
 "per maggiori dettagli."
 
 #. translators: --replacefiles
-#: src/commands/optionsets.cc:262
+#: src/commands/optionsets.cc:264
 msgid ""
 "Install the packages even if they replace files from other, already "
 "installed, packages. Default is to treat file conflicts as an error. --"
@@ -2992,7 +2996,7 @@ msgstr ""
 "download-as-needed disabilita la verifica dei conflitti tra file."
 
 #. translators: -y, --no-confirm
-#: src/commands/optionsets.cc:289
+#: src/commands/optionsets.cc:291
 msgid ""
 "Don't require user interaction. Alias for the --non-interactive global "
 "option."
@@ -3000,39 +3004,39 @@ msgstr ""
 "Non richiedere interazione utente. Alias per l'opzionale globale --non-"
 "interactive."
 
-#: src/commands/optionsets.cc:307
+#: src/commands/optionsets.cc:309
 msgid ""
 "Whether applicable optional patches should be treated as needed or be "
 "excluded."
 msgstr ""
 "Consente di stabilire se le patch opzionali sono necessarie o da escludere."
 
-#: src/commands/optionsets.cc:310
+#: src/commands/optionsets.cc:312
 msgid "The default is to exclude optional patches."
 msgstr "L'impostazione predefinita è escludere le patch opzionali."
 
-#: src/commands/optionsets.cc:311
+#: src/commands/optionsets.cc:313
 msgid "The default is to include optional patches."
 msgstr "L'impostazione predefinita è di includere le patch opzionali."
 
 #. translators: --with-interactive
-#: src/commands/optionsets.cc:346
+#: src/commands/optionsets.cc:348
 msgid "Do not skip interactive updates."
 msgstr "Non saltare gli aggiornamenti interattivi."
 
 #. translators: --skip-interactive
-#: src/commands/optionsets.cc:350
+#: src/commands/optionsets.cc:352
 msgid "Skip interactive updates."
 msgstr "Salta gli aggiornamenti interattivi."
 
 #. translators: --sort-by-name
-#: src/commands/optionsets.cc:370
+#: src/commands/optionsets.cc:372
 msgid "Sort packages by name (default)."
 msgstr "Ordina i pacchetti per nome (default)."
 
 #. translators: --sort-by-repo
 #. translators: --sort-by-catalog
-#: src/commands/optionsets.cc:380 src/commands/optionsets.cc:391
+#: src/commands/optionsets.cc:382 src/commands/optionsets.cc:393
 msgid "Sort packages by repository."
 msgstr "Ordina i pacchetti per archivio."
 
@@ -7151,6 +7155,19 @@ msgid ""
 msgstr ""
 "Se non funziona nulla, immettere '#1' per selezionare la prima opzione, '#2' "
 "per la seconda e così via..."
+
+#~ msgid ""
+#~ "The following package had to be excluded from file conflicts check "
+#~ "because it is not yet downloaded:"
+#~ msgid_plural ""
+#~ "The following %1% packages had to be excluded from file conflicts check "
+#~ "because they are not yet downloaded:"
+#~ msgstr[0] ""
+#~ "Il seguente pacchetto è stato escluso dal controllo dei conflitti dei "
+#~ "file in quanto non è ancora stato scaricato:"
+#~ msgstr[1] ""
+#~ "I seguenti %1% pacchetti sono stati esclusi dal controllo dei conflitti "
+#~ "dei file in quanto non sono ancora stati scaricati:"
 
 #~ msgid "s/r/c"
 #~ msgstr "i/r/a"

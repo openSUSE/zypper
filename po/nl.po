@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper.nl\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-29 13:10+0200\n"
+"POT-Creation-Date: 2019-07-18 13:07+0200\n"
 "PO-Revision-Date: 2019-07-12 15:50+0000\n"
 "Last-Translator: Freek de Kruijf <freek@opensuse.org>\n"
 "Language-Team: Dutch <https://l10n.opensuse.org/projects/zypper/master/nl/>\n"
@@ -464,13 +464,25 @@ msgstr "Installatie van %s is mislukt:"
 msgid "Installing: %s"
 msgstr "Installeren van: %s"
 
-#. TranslatorExplanation A progressbar label
-#: src/callbacks/rpm.h:405
+#. translators: A progressbar label
+#: src/callbacks/rpm.h:403
 msgid "Checking for file conflicts:"
 msgstr "Controleren op conflicten tussen bestanden:"
 
+#. TranslatorExplanation %1%(number of packages); detailed list follows
+#: src/callbacks/rpm.h:454
+#, boost-format
+msgid ""
+"%1% package had to be excluded from file conflicts check because it is not "
+"yet download."
+msgid_plural ""
+"%1% packages had to be excluded from file conflicts check because they are "
+"not yet downloaded."
+msgstr[0] ""
+msgstr[1] ""
+
 #. TranslatorExplanation %1%(commandline option)
-#: src/callbacks/rpm.h:439
+#: src/callbacks/rpm.h:460
 #, boost-format
 msgid ""
 "Checking for file conflicts requires not installed packages to be downloaded "
@@ -482,36 +494,20 @@ msgstr ""
 "lijsten met bestanden. Zie optie '%1%' in de zypper-handleidingpagina voor "
 "details."
 
-#. TranslatorExplanation %1%(number of packages); detailed list follows
-#: src/callbacks/rpm.h:446
-#, boost-format
-msgid ""
-"The following package had to be excluded from file conflicts check because "
-"it is not yet downloaded:"
-msgid_plural ""
-"The following %1% packages had to be excluded from file conflicts check "
-"because they are not yet downloaded:"
-msgstr[0] ""
-"Het volgende pakket moet worden uitgezonderd van controle op bestanden met "
-"conflicten omdat deze nog niet is gedownload:"
-msgstr[1] ""
-"De volgende %1% pakketten moeten worden uitgezonderd van controle op "
-"bestanden met conflicten omdat deze nog niet zijn gedownload:"
-
 #. TranslatorExplanation %1%(number of conflicts); detailed list follows
-#: src/callbacks/rpm.h:457
+#: src/callbacks/rpm.h:470
 #, boost-format
 msgid "Detected %1% file conflict:"
 msgid_plural "Detected %1% file conflicts:"
 msgstr[0] "Gedetecteerd %1% conflict tussen bestanden:"
 msgstr[1] "Gedetecteerd %1% conflicten tussen bestanden:"
 
-#: src/callbacks/rpm.h:465
+#: src/callbacks/rpm.h:478
 msgid "Conflicting files will be replaced."
 msgstr "Bestanden met conflicten zullen vervangen worden."
 
 #. TranslatorExplanation Problem description before asking whether to "Continue? [yes/no] (no):"
-#: src/callbacks/rpm.h:471
+#: src/callbacks/rpm.h:484
 msgid ""
 "File conflicts happen when two packages attempt to install files with the "
 "same name but different contents. If you continue, conflicting files will be "
@@ -841,7 +837,7 @@ msgstr "Geen afkortingen in tabellen."
 msgid "Table style (integer)."
 msgstr "Tabelstijl (geheel getal)."
 
-#: src/Config.cc:424 src/commands/optionsets.cc:282
+#: src/Config.cc:424 src/commands/optionsets.cc:284
 msgid "Entering non-interactive mode."
 msgstr "Niet-interactieve modus wordt geactiveerd."
 
@@ -1864,7 +1860,8 @@ msgstr[1] "De volgende %d patches vereisen een herstart van het systeem:"
 #, c-format, boost-format
 msgid "The following package requires a system reboot:"
 msgid_plural "The following %d packages require a system reboot:"
-msgstr[0] "Het volgende pakket vereist dat het systeem opnieuw wordt opgestart:"
+msgstr[0] ""
+"Het volgende pakket vereist dat het systeem opnieuw wordt opgestart:"
 msgstr[1] ""
 "De volgende %d pakketten vereisen dat het systeem opnieuw wordt opgestart:"
 
@@ -2909,43 +2906,51 @@ msgstr "Deze opdracht heeft een dummy-implementatie die altijd 0 teruggeeft."
 msgid "Don't change anything, just report what would be done."
 msgstr "Wijzig niets, rapporteer alleen wat gedaan zou worden."
 
+#. translators: %1% is a commandline option (like "--download-only")
+#: src/commands/optionsets.cc:35
+#, boost-format
+msgid ""
+"A meaningful file conflict check can only be performed if used together with "
+"'%1%'."
+msgstr ""
+
 #. translators: -r, --repo <ALIAS|#|URI>
-#: src/commands/optionsets.cc:65
+#: src/commands/optionsets.cc:67
 msgid "Work only with the specified repository."
 msgstr "werk alleen met de gespecificeerde opslagruimte."
 
-#: src/commands/optionsets.cc:85
+#: src/commands/optionsets.cc:87
 #, c-format, boost-format
 msgid "Option '--%s' overrides a previously set download mode."
 msgstr "Optie '--%s' overschrijft een eerder ingestelde modus voor downloaden."
 
-#: src/commands/optionsets.cc:114
+#: src/commands/optionsets.cc:116
 #, c-format, boost-format
 msgid "Available download modes: %s"
 msgstr "Beschikbare downloadmodi: %s"
 
 #. translators: --download
-#: src/commands/optionsets.cc:176
+#: src/commands/optionsets.cc:178
 #, c-format, boost-format
 msgid "Set the download-install mode. Available modes: %s"
 msgstr "stel de download-installatiemodus in. Beschikbare modi zijn: %s"
 
 #. translators: -d, --download-only
-#: src/commands/optionsets.cc:180
+#: src/commands/optionsets.cc:182
 msgid "Only download the packages, do not install."
 msgstr "alleen de pakketten downloaden, maar geen installatie."
 
 #. translators: -i, --installed-only
-#: src/commands/optionsets.cc:200
+#: src/commands/optionsets.cc:202
 msgid "Show only installed packages."
 msgstr "Alleen geïnstalleerde pakketten tonen."
 
 #. translators: -u, --not-installed-only
-#: src/commands/optionsets.cc:204
+#: src/commands/optionsets.cc:206
 msgid "Show only packages which are not installed."
 msgstr "Alleen niet geïnstalleerde pakketten tonen."
 
-#: src/commands/optionsets.cc:237
+#: src/commands/optionsets.cc:239
 msgid ""
 "Automatically say 'yes' to third party license confirmation prompt. See 'man "
 "zypper' for more details."
@@ -2953,7 +2958,7 @@ msgstr ""
 "Automatisch 'ja' antwoorden op vraag voor akkoord gaan met licentie van "
 "derde partijen. Zie 'man zypper' voor meer details."
 
-#: src/commands/optionsets.cc:242
+#: src/commands/optionsets.cc:244
 msgid ""
 "Automatically accept product licenses only. See 'man zypper' for more "
 "details."
@@ -2962,7 +2967,7 @@ msgstr ""
 "details."
 
 #. translators: --replacefiles
-#: src/commands/optionsets.cc:262
+#: src/commands/optionsets.cc:264
 msgid ""
 "Install the packages even if they replace files from other, already "
 "installed, packages. Default is to treat file conflicts as an error. --"
@@ -2974,7 +2979,7 @@ msgstr ""
 "tussen bestanden uit."
 
 #. translators: -y, --no-confirm
-#: src/commands/optionsets.cc:289
+#: src/commands/optionsets.cc:291
 msgid ""
 "Don't require user interaction. Alias for the --non-interactive global "
 "option."
@@ -2982,7 +2987,7 @@ msgstr ""
 "Vraagt geen gebruikersinteractie. Alias voor de algemene optie --non-"
 "interactive."
 
-#: src/commands/optionsets.cc:307
+#: src/commands/optionsets.cc:309
 msgid ""
 "Whether applicable optional patches should be treated as needed or be "
 "excluded."
@@ -2990,32 +2995,32 @@ msgstr ""
 "Of van toepassing zijnde optionele patches behandeld moeten worden als "
 "benodigd of worden uitgesloten."
 
-#: src/commands/optionsets.cc:310
+#: src/commands/optionsets.cc:312
 msgid "The default is to exclude optional patches."
 msgstr "De standaard is om optionele patches uit te sluiten."
 
-#: src/commands/optionsets.cc:311
+#: src/commands/optionsets.cc:313
 msgid "The default is to include optional patches."
 msgstr "De standaard is om optionele patches mee te nemen."
 
 #. translators: --with-interactive
-#: src/commands/optionsets.cc:346
+#: src/commands/optionsets.cc:348
 msgid "Do not skip interactive updates."
 msgstr "Interactieve elementen voor bijwerken niet overslaan."
 
 #. translators: --skip-interactive
-#: src/commands/optionsets.cc:350
+#: src/commands/optionsets.cc:352
 msgid "Skip interactive updates."
 msgstr "Interactieve elementen voor bijwerken overslaan."
 
 #. translators: --sort-by-name
-#: src/commands/optionsets.cc:370
+#: src/commands/optionsets.cc:372
 msgid "Sort packages by name (default)."
 msgstr "Pakketten op naam sorteren (standaard)."
 
 #. translators: --sort-by-repo
 #. translators: --sort-by-catalog
-#: src/commands/optionsets.cc:380 src/commands/optionsets.cc:391
+#: src/commands/optionsets.cc:382 src/commands/optionsets.cc:393
 msgid "Sort packages by repository."
 msgstr "Pakketten op opslagruimte sorteren."
 
@@ -7131,6 +7136,19 @@ msgid ""
 msgstr ""
 "Als niets anders werkt voer '#1' in om de eerste optie te selecteren, '#2' "
 "voor de tweede, ..."
+
+#~ msgid ""
+#~ "The following package had to be excluded from file conflicts check "
+#~ "because it is not yet downloaded:"
+#~ msgid_plural ""
+#~ "The following %1% packages had to be excluded from file conflicts check "
+#~ "because they are not yet downloaded:"
+#~ msgstr[0] ""
+#~ "Het volgende pakket moet worden uitgezonderd van controle op bestanden "
+#~ "met conflicten omdat deze nog niet is gedownload:"
+#~ msgstr[1] ""
+#~ "De volgende %1% pakketten moeten worden uitgezonderd van controle op "
+#~ "bestanden met conflicten omdat deze nog niet zijn gedownload:"
 
 #~ msgid "s/r/c"
 #~ msgstr "o/n/a"

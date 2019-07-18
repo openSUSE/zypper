@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-29 13:10+0200\n"
+"POT-Creation-Date: 2019-07-18 13:07+0200\n"
 "PO-Revision-Date: 2019-03-21 12:49+0000\n"
 "Last-Translator: Iman Abd Elaziz <Iman.AbdelAziz@arabize.com>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/zypper/master/ar/"
@@ -443,13 +443,29 @@ msgstr "فشل تثبيت %s:"
 msgid "Installing: %s"
 msgstr "التثبيت: %s"
 
-#. TranslatorExplanation A progressbar label
-#: src/callbacks/rpm.h:405
+#. translators: A progressbar label
+#: src/callbacks/rpm.h:403
 msgid "Checking for file conflicts:"
 msgstr "التحقق من وجود تعارض في الملفات:"
 
+#. TranslatorExplanation %1%(number of packages); detailed list follows
+#: src/callbacks/rpm.h:454
+#, boost-format
+msgid ""
+"%1% package had to be excluded from file conflicts check because it is not "
+"yet download."
+msgid_plural ""
+"%1% packages had to be excluded from file conflicts check because they are "
+"not yet downloaded."
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+msgstr[5] ""
+
 #. TranslatorExplanation %1%(commandline option)
-#: src/callbacks/rpm.h:439
+#: src/callbacks/rpm.h:460
 #, boost-format
 msgid ""
 "Checking for file conflicts requires not installed packages to be downloaded "
@@ -460,35 +476,8 @@ msgstr ""
 "من أجل الوصول إلى قوائم الملفات الخاصة بها. راجع الخيار '%1%' في صفحة دليل "
 "zypper لمزيد من التفاصيل."
 
-#. TranslatorExplanation %1%(number of packages); detailed list follows
-#: src/callbacks/rpm.h:446
-#, boost-format
-msgid ""
-"The following package had to be excluded from file conflicts check because "
-"it is not yet downloaded:"
-msgid_plural ""
-"The following %1% packages had to be excluded from file conflicts check "
-"because they are not yet downloaded:"
-msgstr[0] ""
-"الحزمة التالية كانت مستبعدة من ملف التحقق من التعارض لأنه لم يتم تحميلها بعد:"
-msgstr[1] ""
-"الحزمة التالية %1% كانت مستبعدة من ملف التحقق من التعارض لأنه لم يتم تحميلها "
-"بعد:"
-msgstr[2] ""
-"الحزمتان التاليتان %1% كانتا مستبعدتان من ملف التحقق من التعارض لأنه لم يتم "
-"تحميلهما بعد:"
-msgstr[3] ""
-"الحزم التالية %1% كانت مستبعدة من ملف التحقق من التعارض لأنه لم يتم تحميلها "
-"بعد:"
-msgstr[4] ""
-"الحزم التالية %1% كانت مستبعدة من ملف التحقق من التعارض لأنه لم يتم تحميلها "
-"بعد:"
-msgstr[5] ""
-"الحزم التالية %1% كانت مستبعدة من ملف التحقق من التعارض لأنه لم يتم تحميلها "
-"بعد:"
-
 #. TranslatorExplanation %1%(number of conflicts); detailed list follows
-#: src/callbacks/rpm.h:457
+#: src/callbacks/rpm.h:470
 #, boost-format
 msgid "Detected %1% file conflict:"
 msgid_plural "Detected %1% file conflicts:"
@@ -499,12 +488,12 @@ msgstr[3] "تم الكشف عن %1% تعارضات الملفات:"
 msgstr[4] "تم الكشف عن %1% تعارض الملفات:"
 msgstr[5] "تم الكشف عن %1% من تعارضات الملفات:"
 
-#: src/callbacks/rpm.h:465
+#: src/callbacks/rpm.h:478
 msgid "Conflicting files will be replaced."
 msgstr "سيتم استبدال الملفات المتعارضة."
 
 #. TranslatorExplanation Problem description before asking whether to "Continue? [yes/no] (no):"
-#: src/callbacks/rpm.h:471
+#: src/callbacks/rpm.h:484
 msgid ""
 "File conflicts happen when two packages attempt to install files with the "
 "same name but different contents. If you continue, conflicting files will be "
@@ -836,7 +825,7 @@ msgstr "عدم اختصار النص في الجداول."
 msgid "Table style (integer)."
 msgstr "نمط الجدول (عدد صحيح)."
 
-#: src/Config.cc:424 src/commands/optionsets.cc:282
+#: src/Config.cc:424 src/commands/optionsets.cc:284
 msgid "Entering non-interactive mode."
 msgstr "الدخول في وضع غير تفاعلي."
 
@@ -3153,43 +3142,51 @@ msgstr "يحتوي هذا الأمر على عملية تنفيذ وهمية د�
 msgid "Don't change anything, just report what would be done."
 msgstr "عدم تغيير أي شيء، يتم فقط الإبلاغ عن الإجراء المطلوب اتخاذه."
 
+#. translators: %1% is a commandline option (like "--download-only")
+#: src/commands/optionsets.cc:35
+#, boost-format
+msgid ""
+"A meaningful file conflict check can only be performed if used together with "
+"'%1%'."
+msgstr ""
+
 #. translators: -r, --repo <ALIAS|#|URI>
-#: src/commands/optionsets.cc:65
+#: src/commands/optionsets.cc:67
 msgid "Work only with the specified repository."
 msgstr "يُستخدم فقط مع المخزن المحدد."
 
-#: src/commands/optionsets.cc:85
+#: src/commands/optionsets.cc:87
 #, c-format, boost-format
 msgid "Option '--%s' overrides a previously set download mode."
 msgstr "يقوم الخيار '--%s' بتجاوز وضع الإنزال المحدد سابقًا."
 
-#: src/commands/optionsets.cc:114
+#: src/commands/optionsets.cc:116
 #, c-format, boost-format
 msgid "Available download modes: %s"
 msgstr "أوضاع الإنزال المتوفرة: %s"
 
 #. translators: --download
-#: src/commands/optionsets.cc:176
+#: src/commands/optionsets.cc:178
 #, c-format, boost-format
 msgid "Set the download-install mode. Available modes: %s"
 msgstr "تعيين وضع التنزيل-التثبيت. الأوضاع المتوفرة: %s"
 
 #. translators: -d, --download-only
-#: src/commands/optionsets.cc:180
+#: src/commands/optionsets.cc:182
 msgid "Only download the packages, do not install."
 msgstr "تنزيل الحزم فقط دون تثبيتها."
 
 #. translators: -i, --installed-only
-#: src/commands/optionsets.cc:200
+#: src/commands/optionsets.cc:202
 msgid "Show only installed packages."
 msgstr "إظهار الحزم المثبتة فقط."
 
 #. translators: -u, --not-installed-only
-#: src/commands/optionsets.cc:204
+#: src/commands/optionsets.cc:206
 msgid "Show only packages which are not installed."
 msgstr "إظهار الحزم غير المثبتة فقط."
 
-#: src/commands/optionsets.cc:237
+#: src/commands/optionsets.cc:239
 msgid ""
 "Automatically say 'yes' to third party license confirmation prompt. See 'man "
 "zypper' for more details."
@@ -3197,14 +3194,14 @@ msgstr ""
 "لاختيار تلقائيا حدد\"نعم\" لتأكيد رخصة الطرف الفوري.  انظر 'man zypper' "
 "لمزيد من التفاصيل."
 
-#: src/commands/optionsets.cc:242
+#: src/commands/optionsets.cc:244
 msgid ""
 "Automatically accept product licenses only. See 'man zypper' for more "
 "details."
 msgstr "قبول تراخيص المنتجات تلقائيا.  انظر 'man zypper' لمزيد من التفاصيل."
 
 #. translators: --replacefiles
-#: src/commands/optionsets.cc:262
+#: src/commands/optionsets.cc:264
 msgid ""
 "Install the packages even if they replace files from other, already "
 "installed, packages. Default is to treat file conflicts as an error. --"
@@ -3215,13 +3212,13 @@ msgstr ""
 "التحقق من تعارضات الملفات."
 
 #. translators: -y, --no-confirm
-#: src/commands/optionsets.cc:289
+#: src/commands/optionsets.cc:291
 msgid ""
 "Don't require user interaction. Alias for the --non-interactive global "
 "option."
 msgstr "لا يتطلب تفاعل المستخدم. الاسم المستعار لخيار --non-interactive العام."
 
-#: src/commands/optionsets.cc:307
+#: src/commands/optionsets.cc:309
 msgid ""
 "Whether applicable optional patches should be treated as needed or be "
 "excluded."
@@ -3229,32 +3226,32 @@ msgstr ""
 "ما إذا كان يجب التعامل مع التصحيحات الاختيارية القابلة للتطبيق حسب الحاجة أو "
 "استبعادها."
 
-#: src/commands/optionsets.cc:310
+#: src/commands/optionsets.cc:312
 msgid "The default is to exclude optional patches."
 msgstr "يعد استبعاد التصحيحات الاختيارية افتراضيًا."
 
-#: src/commands/optionsets.cc:311
+#: src/commands/optionsets.cc:313
 msgid "The default is to include optional patches."
 msgstr "يعد تضمين التصحيحات الاختيارية افتراضيًا."
 
 #. translators: --with-interactive
-#: src/commands/optionsets.cc:346
+#: src/commands/optionsets.cc:348
 msgid "Do not skip interactive updates."
 msgstr "عدم تخطي التحديثات التفاعلية."
 
 #. translators: --skip-interactive
-#: src/commands/optionsets.cc:350
+#: src/commands/optionsets.cc:352
 msgid "Skip interactive updates."
 msgstr "تخطي التحديثات التفاعلية."
 
 #. translators: --sort-by-name
-#: src/commands/optionsets.cc:370
+#: src/commands/optionsets.cc:372
 msgid "Sort packages by name (default)."
 msgstr "فرز الحزم حسب الاسم (افتراضي)."
 
 #. translators: --sort-by-repo
 #. translators: --sort-by-catalog
-#: src/commands/optionsets.cc:380 src/commands/optionsets.cc:391
+#: src/commands/optionsets.cc:382 src/commands/optionsets.cc:393
 msgid "Sort packages by repository."
 msgstr "فرز الحزم حسب المستودع."
 
@@ -7317,6 +7314,31 @@ msgid ""
 msgstr ""
 "إذا لم تعمل أي طريقة أخرى، فأدخل '#1' لتحديد الخيار الأول، و'#2' للخيار "
 "الثاني، ..."
+
+#~ msgid ""
+#~ "The following package had to be excluded from file conflicts check "
+#~ "because it is not yet downloaded:"
+#~ msgid_plural ""
+#~ "The following %1% packages had to be excluded from file conflicts check "
+#~ "because they are not yet downloaded:"
+#~ msgstr[0] ""
+#~ "الحزمة التالية كانت مستبعدة من ملف التحقق من التعارض لأنه لم يتم تحميلها "
+#~ "بعد:"
+#~ msgstr[1] ""
+#~ "الحزمة التالية %1% كانت مستبعدة من ملف التحقق من التعارض لأنه لم يتم "
+#~ "تحميلها بعد:"
+#~ msgstr[2] ""
+#~ "الحزمتان التاليتان %1% كانتا مستبعدتان من ملف التحقق من التعارض لأنه لم "
+#~ "يتم تحميلهما بعد:"
+#~ msgstr[3] ""
+#~ "الحزم التالية %1% كانت مستبعدة من ملف التحقق من التعارض لأنه لم يتم "
+#~ "تحميلها بعد:"
+#~ msgstr[4] ""
+#~ "الحزم التالية %1% كانت مستبعدة من ملف التحقق من التعارض لأنه لم يتم "
+#~ "تحميلها بعد:"
+#~ msgstr[5] ""
+#~ "الحزم التالية %1% كانت مستبعدة من ملف التحقق من التعارض لأنه لم يتم "
+#~ "تحميلها بعد:"
 
 #~ msgid "s/r/c"
 #~ msgstr "تخطي/إعادة محاولة/إلغاء"

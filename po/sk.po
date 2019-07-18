@@ -5,11 +5,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-29 13:10+0200\n"
+"POT-Creation-Date: 2019-07-18 13:07+0200\n"
 "PO-Revision-Date: 2019-05-29 19:49+0000\n"
 "Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
-"Language-Team: Slovak <https://l10n.opensuse.org/projects/zypper/master/sk/>"
-"\n"
+"Language-Team: Slovak <https://l10n.opensuse.org/projects/zypper/master/sk/"
+">\n"
 "Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -440,13 +440,26 @@ msgstr "Inštalácia %s zlyhala:"
 msgid "Installing: %s"
 msgstr "Inštalovanie: %s"
 
-#. TranslatorExplanation A progressbar label
-#: src/callbacks/rpm.h:405
+#. translators: A progressbar label
+#: src/callbacks/rpm.h:403
 msgid "Checking for file conflicts:"
 msgstr "Kontrola konfliktov súborov:"
 
+#. TranslatorExplanation %1%(number of packages); detailed list follows
+#: src/callbacks/rpm.h:454
+#, boost-format
+msgid ""
+"%1% package had to be excluded from file conflicts check because it is not "
+"yet download."
+msgid_plural ""
+"%1% packages had to be excluded from file conflicts check because they are "
+"not yet downloaded."
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
 #. TranslatorExplanation %1%(commandline option)
-#: src/callbacks/rpm.h:439
+#: src/callbacks/rpm.h:460
 #, boost-format
 msgid ""
 "Checking for file conflicts requires not installed packages to be downloaded "
@@ -458,27 +471,8 @@ msgstr ""
 "ďalšie Pre ďalšie podrobnosti pozrieť voľbu '%1%' v manuálovej stránke "
 "zypper."
 
-#. TranslatorExplanation %1%(number of packages); detailed list follows
-#: src/callbacks/rpm.h:446
-#, boost-format
-msgid ""
-"The following package had to be excluded from file conflicts check because "
-"it is not yet downloaded:"
-msgid_plural ""
-"The following %1% packages had to be excluded from file conflicts check "
-"because they are not yet downloaded:"
-msgstr[0] ""
-"Nasledujúci balík musel byť vylúčený z kontroly konfliktov súborov, pretože "
-"ešte nie je stiahnutý:"
-msgstr[1] ""
-"Nasledujúce %1% balíky museli byť vylúčené z kontroly konfliktov súborov, "
-"pretože ešte nie sú stiahnuté:"
-msgstr[2] ""
-"Nasledujúcich %1% balíkov muselo byť vylúčených z kontroly konfliktov "
-"súborov, pretože ešte nie sú stiahnuté:"
-
 #. TranslatorExplanation %1%(number of conflicts); detailed list follows
-#: src/callbacks/rpm.h:457
+#: src/callbacks/rpm.h:470
 #, boost-format
 msgid "Detected %1% file conflict:"
 msgid_plural "Detected %1% file conflicts:"
@@ -486,12 +480,12 @@ msgstr[0] "Zistený %1% konflikt súborov:"
 msgstr[1] "Zistené %1% konflikty súborov:"
 msgstr[2] "Zistených %1% konfliktov súborov:"
 
-#: src/callbacks/rpm.h:465
+#: src/callbacks/rpm.h:478
 msgid "Conflicting files will be replaced."
 msgstr "Konfliktné súbory budú nahradené."
 
 #. TranslatorExplanation Problem description before asking whether to "Continue? [yes/no] (no):"
-#: src/callbacks/rpm.h:471
+#: src/callbacks/rpm.h:484
 msgid ""
 "File conflicts happen when two packages attempt to install files with the "
 "same name but different contents. If you continue, conflicting files will be "
@@ -820,7 +814,7 @@ msgstr "Neskracovať text v tabuľkách."
 msgid "Table style (integer)."
 msgstr "Štýl tabuľky (celé číslo)."
 
-#: src/Config.cc:424 src/commands/optionsets.cc:282
+#: src/Config.cc:424 src/commands/optionsets.cc:284
 msgid "Entering non-interactive mode."
 msgstr "Zapínam neinteraktívny režim."
 
@@ -2919,43 +2913,51 @@ msgstr "Tento príkaz má fiktívnu implementáciu a vždy vracia 0."
 msgid "Don't change anything, just report what would be done."
 msgstr "Nemeniť nič, len oznámiť, čo by sa urobilo."
 
+#. translators: %1% is a commandline option (like "--download-only")
+#: src/commands/optionsets.cc:35
+#, boost-format
+msgid ""
+"A meaningful file conflict check can only be performed if used together with "
+"'%1%'."
+msgstr ""
+
 #. translators: -r, --repo <ALIAS|#|URI>
-#: src/commands/optionsets.cc:65
+#: src/commands/optionsets.cc:67
 msgid "Work only with the specified repository."
 msgstr "Pracovať len so zadaným repozitárom."
 
-#: src/commands/optionsets.cc:85
+#: src/commands/optionsets.cc:87
 #, c-format, boost-format
 msgid "Option '--%s' overrides a previously set download mode."
 msgstr "Voľba '--%s' prepíše predtým nastavený režim sťahovania."
 
-#: src/commands/optionsets.cc:114
+#: src/commands/optionsets.cc:116
 #, c-format, boost-format
 msgid "Available download modes: %s"
 msgstr "Dostupné režimy sťahovania: %s"
 
 #. translators: --download
-#: src/commands/optionsets.cc:176
+#: src/commands/optionsets.cc:178
 #, c-format, boost-format
 msgid "Set the download-install mode. Available modes: %s"
 msgstr "Nastaviť režim download-install. Dostupné režimy: %s"
 
 #. translators: -d, --download-only
-#: src/commands/optionsets.cc:180
+#: src/commands/optionsets.cc:182
 msgid "Only download the packages, do not install."
 msgstr "Len stiahnuť balíky, neinštalovať."
 
 #. translators: -i, --installed-only
-#: src/commands/optionsets.cc:200
+#: src/commands/optionsets.cc:202
 msgid "Show only installed packages."
 msgstr "Ukázať len nainštalované balíky."
 
 #. translators: -u, --not-installed-only
-#: src/commands/optionsets.cc:204
+#: src/commands/optionsets.cc:206
 msgid "Show only packages which are not installed."
 msgstr "Ukázať len balíky, ktoré sú nenainštalované."
 
-#: src/commands/optionsets.cc:237
+#: src/commands/optionsets.cc:239
 msgid ""
 "Automatically say 'yes' to third party license confirmation prompt. See 'man "
 "zypper' for more details."
@@ -2963,7 +2965,7 @@ msgstr ""
 "Automaticky povedať 'áno' výzve na potvrdenie licencie tretích strán. Viac "
 "informácií nájdete na 'man zypper'."
 
-#: src/commands/optionsets.cc:242
+#: src/commands/optionsets.cc:244
 msgid ""
 "Automatically accept product licenses only. See 'man zypper' for more "
 "details."
@@ -2972,7 +2974,7 @@ msgstr ""
 "zipper'."
 
 #. translators: --replacefiles
-#: src/commands/optionsets.cc:262
+#: src/commands/optionsets.cc:264
 msgid ""
 "Install the packages even if they replace files from other, already "
 "installed, packages. Default is to treat file conflicts as an error. --"
@@ -2983,7 +2985,7 @@ msgstr ""
 "needed vypína kontrolu konfliktov súborov."
 
 #. translators: -y, --no-confirm
-#: src/commands/optionsets.cc:289
+#: src/commands/optionsets.cc:291
 msgid ""
 "Don't require user interaction. Alias for the --non-interactive global "
 "option."
@@ -2991,7 +2993,7 @@ msgstr ""
 "Nevyžaduje interakciu s používateľom. Alias pre globálnu voľbu --non-"
 "interactive."
 
-#: src/commands/optionsets.cc:307
+#: src/commands/optionsets.cc:309
 msgid ""
 "Whether applicable optional patches should be treated as needed or be "
 "excluded."
@@ -2999,32 +3001,32 @@ msgstr ""
 "Či by sa mali použiteľné voliteľné opravy považovať za potrebné alebo "
 "vylúčené."
 
-#: src/commands/optionsets.cc:310
+#: src/commands/optionsets.cc:312
 msgid "The default is to exclude optional patches."
 msgstr "Predvolené nastavenie je vylúčiť voliteľné opravy."
 
-#: src/commands/optionsets.cc:311
+#: src/commands/optionsets.cc:313
 msgid "The default is to include optional patches."
 msgstr "Predvolené nastavenie je zahrnúť voliteľné opravy."
 
 #. translators: --with-interactive
-#: src/commands/optionsets.cc:346
+#: src/commands/optionsets.cc:348
 msgid "Do not skip interactive updates."
 msgstr "Nepreskočiť interaktívne aktualizácie."
 
 #. translators: --skip-interactive
-#: src/commands/optionsets.cc:350
+#: src/commands/optionsets.cc:352
 msgid "Skip interactive updates."
 msgstr "Preskočiť interaktívne aktualizácie."
 
 #. translators: --sort-by-name
-#: src/commands/optionsets.cc:370
+#: src/commands/optionsets.cc:372
 msgid "Sort packages by name (default)."
 msgstr "Triediť balíky podľa názvu (predvolené)."
 
 #. translators: --sort-by-repo
 #. translators: --sort-by-catalog
-#: src/commands/optionsets.cc:380 src/commands/optionsets.cc:391
+#: src/commands/optionsets.cc:382 src/commands/optionsets.cc:393
 msgid "Sort packages by repository."
 msgstr "Triediť balíky podľa repozitára."
 
@@ -7058,6 +7060,22 @@ msgid ""
 msgstr ""
 "Ak nič iné nefunguje, zadajte '#1' pre výber 1. voľby, '#2' pre výber 2. "
 "voľby, ..."
+
+#~ msgid ""
+#~ "The following package had to be excluded from file conflicts check "
+#~ "because it is not yet downloaded:"
+#~ msgid_plural ""
+#~ "The following %1% packages had to be excluded from file conflicts check "
+#~ "because they are not yet downloaded:"
+#~ msgstr[0] ""
+#~ "Nasledujúci balík musel byť vylúčený z kontroly konfliktov súborov, "
+#~ "pretože ešte nie je stiahnutý:"
+#~ msgstr[1] ""
+#~ "Nasledujúce %1% balíky museli byť vylúčené z kontroly konfliktov súborov, "
+#~ "pretože ešte nie sú stiahnuté:"
+#~ msgstr[2] ""
+#~ "Nasledujúcich %1% balíkov muselo byť vylúčených z kontroly konfliktov "
+#~ "súborov, pretože ešte nie sú stiahnuté:"
 
 #~ msgid "s/r/c"
 #~ msgstr "p/z/k"
