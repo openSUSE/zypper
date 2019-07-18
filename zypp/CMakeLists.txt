@@ -604,19 +604,6 @@ INSTALL(  FILES
   DESTINATION ${INCLUDE_INSTALL_DIR}/zypp/target
 )
 
-IF(NOT UDEV_FOUND)
-IF(HAL_FOUND)
-SET( zypp_target_hal_SRCS
-  target/hal/HalContext.cc
-)
-SET( zypp_target_hal_HEADERS
-  target/hal/HalContext.h
-  target/hal/HalException.h
-)
-ENDIF(HAL_FOUND)
-ENDIF(NOT UDEV_FOUND)
-# as HAL is deprecated, we don't install headers
-
 SET( zypp_target_modalias_SRCS
   target/modalias/Modalias.cc
 )

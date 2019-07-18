@@ -18,12 +18,6 @@ extern "C"
 #endif
 }
 
-#ifndef HAVE_UDEV
-#if HAVE_HAL
-#include "zypp/target/hal/HalContext.h"
-#endif
-#endif
-
 #include <cstring> // strerror
 #include <cstdlib> // getenv
 #include <iostream>
@@ -65,13 +59,9 @@ namespace zypp
       typedef std::list<MediaSource> DeviceList;
 
       //////////////////////////////////////////////////////////////////
-      /// \brief Try to detect cd/dvd devices using hal/udev
+      /// \brief Try to detect cd/dvd devices using udev
       ///
       /// Returns an empty device list on error.
-      ///
-      /// \todo I took the code more or less as it was from MediaCD::detectDevices
-      /// into this function. Semantic between HAL and UDEV seems to be slightly
-      /// different, esp. in supportingDVD mode. This should be investigated and fixed.
       //////////////////////////////////////////////////////////////////
       DeviceList systemDetectDevices( bool supportingDVD_r )
       {
@@ -135,62 +125,6 @@ namespace zypp
 	if ( detected.empty() )
 	{
 	  WAR << "Did not find any CD/DVD device." << endl;
-	}
-#elif HAVE_HAL
-	using namespace zypp::target::hal;
-	try
-	{
-	  HalContext hal(true);
-
-	  std::vector<std::string> drv_udis;
-	  drv_udis = hal.findDevicesByCapability("storage.cdrom");
-
-	  DBG << "Found " << drv_udis.size() << " cdrom drive udis" << std::endl;
-	  for(size_t d = 0; d < drv_udis.size(); d++)
-	  {
-	    HalDrive drv( hal.getDriveFromUDI( drv_udis[d]));
-
-	    if( drv)
-	    {
-	      bool supportsDVD=false;
-	      if( supportingDVD_r)
-	      {
-		std::vector<std::string> caps;
-		try {
-		  caps = drv.getCdromCapabilityNames();
-		}
-		catch(const HalException &e)
-		{
-		  ZYPP_CAUGHT(e);
-		}
-
-		std::vector<std::string>::const_iterator ci;
-		for( ci=caps.begin(); ci != caps.end(); ++ci)
-		{
-		  if( *ci == "dvd")
-		    supportsDVD = true;
-		}
-	      }
-
-	      MediaSource media("cdrom", drv.getDeviceFile(),
-		      drv.getDeviceMajor(),
-		      drv.getDeviceMinor());
-		  DBG << "Found " << drv_udis[d] << ": "
-		  << media.asString() << std::endl;
-		  if( supportingDVD_r && supportsDVD)
-		  {
-		    detected.push_front(media);
-		  }
-		  else
-		  {
-		    detected.push_back(media);
-		  }
-	    }
-	  }
-	}
-	catch(const zypp::target::hal::HalException &e)
-	{
-	  ZYPP_CAUGHT(e);
 	}
 #endif
 	return detected;
@@ -330,7 +264,7 @@ namespace zypp
 
     if ( detected.empty() )
     {
-      WAR << "CD/DVD drive detection with HAL/UDEV failed! Guessing..." << std::endl;
+      WAR << "CD/DVD drive detection with UDEV failed! Guessing..." << std::endl;
       PathInfo dvdinfo( "/dev/dvd" );
       PathInfo cdrinfo( "/dev/cdrom" );
       if ( dvdinfo.isBlk() )

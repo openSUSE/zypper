@@ -182,16 +182,13 @@ namespace zypp
      *       Optional parameter, containing a comma separated list of
      *       block device names to use, e.g.: "/dev/sr0,/dev/sr1".
      *       <br>
-     *       The device names will be verified using a HAL query. If one
-     *       of the provided devices is not usable (not a block device,
-     *       or does not support required media type), an exception is
-     *       thrown.
+     *       The device names will be verified. If one of the provided
+     *       devices is not usable (not a block device, or does not
+     *       support required media type), an exception is thrown.
      *       <br>
-     *       If the devices parameter is not provided (or empty), all
-     *       avaliable CD/DVD drives 'detected' using a HAL query. The
-     *       preferred drive (used as first drive) is the drive pointed
-     *       to by the symlink "/dev/dvd" ("dvd" scheme only) or
-     *       "/dev/cdrom".
+     *       If the devices parameter is not provided (or empty), available
+     *       CD/DVD drives will be auto-detected. The preferred device is
+     *       the one denoted by "/dev/dvd" ("dvd" scheme only) or "/dev/cdrom".
      *   - Authority:
      *     A non-empty authority URL component (e.g. containing a host
      *     name) is not allowed.
