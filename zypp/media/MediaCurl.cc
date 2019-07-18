@@ -25,7 +25,6 @@
 #include "zypp/media/MediaUserAuth.h"
 #include "zypp/media/CredentialManager.h"
 #include "zypp/media/CurlConfig.h"
-#include "zypp/thread/Once.h"
 #include "zypp/Target.h"
 #include "zypp/ZYppFactory.h"
 #include "zypp/ZConfig.h"
@@ -52,40 +51,13 @@ using namespace zypp::base;
 
 namespace
 {
-  zypp::thread::OnceFlag g_InitOnceFlag = PTHREAD_ONCE_INIT;
-  zypp::thread::OnceFlag g_FreeOnceFlag = PTHREAD_ONCE_INIT;
-
-  extern "C" void _do_free_once()
-  {
-    curl_global_cleanup();
-  }
-
-  extern "C" void globalFreeOnce()
-  {
-    zypp::thread::callOnce(g_FreeOnceFlag, _do_free_once);
-  }
-
-  extern "C" void _do_init_once()
-  {
-    CURLcode ret = curl_global_init( CURL_GLOBAL_ALL );
-    if ( ret != 0 )
-    {
-      WAR << "curl global init failed" << endl;
-    }
-
-    //
-    // register at exit handler ?
-    // this may cause trouble, because we can protect it
-    // against ourself only.
-    // if the app sets an atexit handler as well, it will
-    // cause a double free while the second of them runs.
-    //
-    //std::atexit( globalFreeOnce);
-  }
-
   inline void globalInitOnce()
   {
-    zypp::thread::callOnce(g_InitOnceFlag, _do_init_once);
+    // function-level static <=> std::call_once
+    static bool once __attribute__ ((__unused__)) = ( [] {
+      if ( curl_global_init( CURL_GLOBAL_ALL ) != 0 )
+	WAR << "curl global init failed" << endl;
+    } (), true );
   }
 
   int log_curl(CURL *curl, curl_infotype info,

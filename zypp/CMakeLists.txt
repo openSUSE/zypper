@@ -651,7 +651,6 @@ SET( zypp_thread_HEADERS
   thread/Mutex.h
   thread/MutexException.h
   thread/MutexLock.h
-  thread/Once.h
 )
 
 INSTALL(  FILES
