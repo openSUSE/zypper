@@ -1155,6 +1155,11 @@ void list_repos(Zypper & zypper)
   // print repo list as table
   else
     print_repo_list(zypper, repos);
+
+  if ( ! not_found.empty() )
+    zypper.setExitCode(ZYPPER_EXIT_ERR_INVALID_ARGS);
+  else if ( repos.empty() )
+    zypper.setExitCode(ZYPPER_EXIT_NO_REPOS);
 }
 
 // ----------------------------------------------------------------------------
