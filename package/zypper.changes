@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Jul 18 14:49:21 CEST 2019 - ma@suse.de
+
+- repos: return not-zero if not existing repos are passed
+  as argunment (bsc#1141504)
+- version 1.6.339
+
+-------------------------------------------------------------------
 Thu Jul 12 12:20:30 CEST 2018 - ma@suse.de
 
 - man: Strengthen that `--config FILE' affects zypper.conf,
