@@ -194,6 +194,45 @@ namespace zypp
     inline std::ostream & operator<<( std::ostream & str, const AutoDispose<Tp> & obj )
     { return str << obj.value(); }
 
+
+  ///////////////////////////////////////////////////////////////////
+  /// \class AutoFD
+  /// \brief \ref AutoDispose\<int>  calling \c ::close
+  /// \ingroup g_RAII
+  ///////////////////////////////////////////////////////////////////
+  struct AutoFD : public AutoDispose<int>
+  {
+    AutoFD( int fd_r = -1 ) : AutoDispose<int>( fd_r, [] ( int fd_r ) { if ( fd_r != -1 ) ::close( fd_r ); } ) {}
+  };
+
+  ///////////////////////////////////////////////////////////////////
+  /// \class AutoFILE
+  /// \brief \ref AutoDispose\<FILE*> calling \c ::fclose
+  /// \see \ref AutoDispose
+  /// \ingroup g_RAII
+  ///////////////////////////////////////////////////////////////////
+  struct AutoFILE : public AutoDispose<FILE*>
+  {
+    AutoFILE( FILE* file_r = nullptr ) : AutoDispose<FILE*>( file_r, [] ( FILE* file_r ) { if ( file_r ) ::fclose( file_r ); } ) {}
+  };
+
+  ///////////////////////////////////////////////////////////////////
+  /// \class AutoFREE<Tp>
+  /// \brief \ref AutoDispose\<Tp*> calling \c ::free
+  /// \ingroup g_RAII
+  ///////////////////////////////////////////////////////////////////
+  template <typename Tp>
+  struct AutoFREE : public AutoDispose<Tp*>
+  {
+    AutoFREE( Tp* ptr_r = nullptr ) : AutoDispose<Tp*>( ptr_r, [] ( Tp* ptr_r ) { if ( ptr_r ) ::free( ptr_r ); } ) {}
+    AutoFREE( void* ptr_r ) : AutoFREE( static_cast<Tp*>(ptr_r) ) {}
+  };
+
+  template <>
+  struct AutoFREE<void> : public AutoDispose<void*>
+  {
+    AutoFREE( void* ptr_r = nullptr ) : AutoDispose<void*>( ptr_r, [] ( void* ptr_r ) { if ( ptr_r ) ::free( ptr_r ); } ) {}
+  };
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
