@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-07-18 13:07+0200\n"
-"PO-Revision-Date: 2019-05-29 15:49+0000\n"
+"PO-Revision-Date: 2019-07-19 19:51+0000\n"
 "Last-Translator: Rodrigo Macedo <rmsolucoeseminformatic4@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) <https://l10n.opensuse.org/projects/"
 "zypper/master/pt_BR/>\n"
@@ -471,7 +471,11 @@ msgid_plural ""
 "%1% packages had to be excluded from file conflicts check because they are "
 "not yet downloaded."
 msgstr[0] ""
+"O pacote %1% teve que ser excluído da verificação de conflitos de arquivos "
+"porque ainda não é feito o download."
 msgstr[1] ""
+"%1% de pacotes tiveram que ser excluídos da verificação de conflitos de "
+"arquivos porque ainda não foram baixados."
 
 #. TranslatorExplanation %1%(commandline option)
 #: src/callbacks/rpm.h:460
@@ -2890,6 +2894,8 @@ msgid ""
 "A meaningful file conflict check can only be performed if used together with "
 "'%1%'."
 msgstr ""
+"Uma verificação significativa de conflito de arquivos só pode ser executada "
+"se usada junto com '%1%'."
 
 #. translators: -r, --repo <ALIAS|#|URI>
 #: src/commands/optionsets.cc:67
