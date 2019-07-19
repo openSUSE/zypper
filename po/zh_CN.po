@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-07-18 13:07+0200\n"
-"PO-Revision-Date: 2019-05-31 05:49+0000\n"
+"PO-Revision-Date: 2019-07-19 13:51+0000\n"
 "Last-Translator: Marguerite Su <i@marguerite.su>\n"
 "Language-Team: Chinese (China) <https://l10n.opensuse.org/projects/zypper/"
 "master/zh_CN/>\n"
@@ -445,7 +445,7 @@ msgid ""
 msgid_plural ""
 "%1% packages had to be excluded from file conflicts check because they are "
 "not yet downloaded."
-msgstr[0] ""
+msgstr[0] "%1% 个软件包须从文件冲突检查中排除，因其尚未下载。"
 
 #. TranslatorExplanation %1%(commandline option)
 #: src/callbacks/rpm.h:460
@@ -2652,7 +2652,7 @@ msgstr "不作修改，仅汇报将进行的修改。"
 msgid ""
 "A meaningful file conflict check can only be performed if used together with "
 "'%1%'."
-msgstr ""
+msgstr "文件冲突检查只有与 ‘%1%’ 一起使用时执行得才有意义。"
 
 #. translators: -r, --repo <ALIAS|#|URI>
 #: src/commands/optionsets.cc:67
