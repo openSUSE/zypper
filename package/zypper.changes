@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Jul 19 11:22:39 CEST 2019 - ma@suse.de
+
+- Rephrase file conflict check summary (bsc#1140039)
+- version 1.11.78
+
+-------------------------------------------------------------------
 Tue Jul 16 16:50:34 CEST 2019 - ma@suse.de
 
 - Fix bash completions option detection (bsc#1049825)
