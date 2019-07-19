@@ -207,7 +207,6 @@ SET( zypp_base_SRCS
   base/SerialNumber.cc
   base/Random.cc
   base/Measure.cc
-  base/Fd.cc
   base/Gettext.cc
   base/GzStream.cc
   base/IOStream.cc
@@ -245,7 +244,6 @@ SET( zypp_base_HEADERS
   base/UserRequestException.h
   base/EnumClass.h
   base/ExternalDataSource.h
-  base/Fd.h
   base/Flags.h
   base/Function.h
   base/Functional.h
