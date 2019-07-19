@@ -18,8 +18,6 @@
 #include "zypp/media/MediaManager.h"
 #include "zypp/media/MediaHandler.h"
 #include "zypp/media/Mount.h"
-#include "zypp/thread/Mutex.h"
-#include "zypp/thread/MutexLock.h"
 
 #include "zypp/base/String.h"
 #include "zypp/base/Logger.h"
@@ -34,18 +32,9 @@ namespace zypp
   namespace media
   { //////////////////////////////////////////////////////////////////
 
-    using zypp::thread::Mutex;
-    using zypp::thread::MutexLock;
-
     //////////////////////////////////////////////////////////////////
     namespace // anonymous
     { ////////////////////////////////////////////////////////////////
-
-
-      // -------------------------------------------------------------
-      // STATIC
-      static Mutex  g_Mutex;
-
 
       // -------------------------------------------------------------
       struct ManagedMedia
@@ -156,8 +145,6 @@ namespace zypp
     public:
       ~MediaManager_Impl()
       {
-        MutexLock glock(g_Mutex);
-
         try
         {
           // remove depending (iso) handlers first
@@ -242,7 +229,6 @@ namespace zypp
     //////////////////////////////////////////////////////////////////
     MediaManager::MediaManager()
     {
-      MutexLock glock(g_Mutex);
       if( !m_impl)
       {
         m_impl.reset( new MediaManager_Impl());
@@ -258,8 +244,6 @@ namespace zypp
     MediaAccessId
     MediaManager::open(const Url &url, const Pathname &preferred_attach_point)
     {
-      MutexLock glock(g_Mutex);
-
       // create new access handler for it
       MediaAccessRef handler( new MediaAccess());
       MediaVerifierRef verifier( new NoVerifier());
@@ -280,8 +264,6 @@ namespace zypp
     void
     MediaManager::close(MediaAccessId accessId)
     {
-      MutexLock glock(g_Mutex);
-
       //
       // The MediaISO handler internally requests an accessId
       // of a "parent" handler providing the iso file.
@@ -316,8 +298,6 @@ namespace zypp
     bool
     MediaManager::isOpen(MediaAccessId accessId) const
     {
-      MutexLock glock(g_Mutex);
-
       ManagedMediaMap::iterator it( m_impl->mediaMap.find(accessId));
       return it != m_impl->mediaMap.end() &&
              it->second.handler->isOpen();
@@ -327,8 +307,6 @@ namespace zypp
     std::string
     MediaManager::protocol(MediaAccessId accessId) const
     {
-      MutexLock glock(g_Mutex);
-
       ManagedMedia &ref( m_impl->findMM(accessId));
 
       return ref.handler->protocol();
@@ -338,8 +316,6 @@ namespace zypp
 	  bool
     MediaManager::downloads(MediaAccessId accessId) const
     {
-      MutexLock glock(g_Mutex);
-
       ManagedMedia &ref( m_impl->findMM(accessId));
 
       return ref.handler->downloads();
@@ -349,8 +325,6 @@ namespace zypp
     Url
     MediaManager::url(MediaAccessId accessId) const
     {
-      MutexLock glock(g_Mutex);
-
       ManagedMedia &ref( m_impl->findMM(accessId));
 
       return ref.handler->url();
@@ -361,8 +335,6 @@ namespace zypp
     MediaManager::addVerifier(MediaAccessId           accessId,
                               const MediaVerifierRef &verifier)
     {
-      MutexLock glock(g_Mutex);
-
       if( !verifier)
         ZYPP_THROW(MediaException("Invalid verifier reference"));
 
@@ -379,8 +351,6 @@ namespace zypp
     void
     MediaManager::delVerifier(MediaAccessId accessId)
     {
-      MutexLock glock(g_Mutex);
-
       ManagedMedia &ref( m_impl->findMM(accessId));
 
       MediaVerifierRef verifier( new NoVerifier());
@@ -395,16 +365,12 @@ namespace zypp
     bool
     MediaManager::setAttachPrefix(const Pathname &attach_prefix)
     {
-      MutexLock glock(g_Mutex);
-
       return MediaHandler::setAttachPrefix(attach_prefix);
     }
 
     // ---------------------------------------------------------------
     void MediaManager::attach(MediaAccessId accessId)
     {
-      MutexLock glock(g_Mutex);
-
       ManagedMedia &ref( m_impl->findMM(accessId));
 
       DBG << "attach(id=" << accessId << ")" << std::endl;
@@ -473,8 +439,6 @@ namespace zypp
     void
     MediaManager::release(MediaAccessId accessId, const std::string & ejectDev)
     {
-      MutexLock glock(g_Mutex);
-
       ManagedMedia &ref( m_impl->findMM(accessId));
 
       DBG << "release(id=" << accessId;
@@ -517,8 +481,6 @@ namespace zypp
     void
     MediaManager::releaseAll()
     {
-      MutexLock glock(g_Mutex);
-
       MIL << "Releasing all attached media" << std::endl;
 
       ManagedMediaMap::iterator m(m_impl->mediaMap.begin());
@@ -554,8 +516,6 @@ namespace zypp
     void
     MediaManager::disconnect(MediaAccessId accessId)
     {
-      MutexLock glock(g_Mutex);
-
       ManagedMedia &ref( m_impl->findMM(accessId));
 
       ref.handler->disconnect();
@@ -565,8 +525,6 @@ namespace zypp
     bool
     MediaManager::isAttached(MediaAccessId accessId) const
     {
-      MutexLock glock(g_Mutex);
-
       ManagedMedia &ref( m_impl->findMM(accessId));
 
       return ref.handler->isAttached();
@@ -575,8 +533,6 @@ namespace zypp
     // ---------------------------------------------------------------
     bool MediaManager::isSharedMedia(MediaAccessId accessId) const
     {
-      MutexLock glock(g_Mutex);
-
       ManagedMedia &ref( m_impl->findMM(accessId));
 
       return ref.handler->isSharedMedia();
@@ -586,8 +542,6 @@ namespace zypp
     bool
     MediaManager::isDesiredMedia(MediaAccessId accessId) const
     {
-      MutexLock glock(g_Mutex);
-
       ManagedMedia &ref( m_impl->findMM(accessId));
 
       if( !ref.handler->isAttached())
@@ -616,8 +570,6 @@ namespace zypp
     MediaManager::isDesiredMedia(MediaAccessId           accessId,
                                  const MediaVerifierRef &verifier) const
     {
-      MutexLock glock(g_Mutex);
-
       MediaVerifierRef v(verifier);
       if( !v)
         ZYPP_THROW(MediaException("Invalid verifier reference"));
@@ -653,8 +605,6 @@ namespace zypp
     Pathname
     MediaManager::localRoot(MediaAccessId accessId) const
     {
-      MutexLock glock(g_Mutex);
-
       ManagedMedia &ref( m_impl->findMM(accessId));
 
       Pathname path;
@@ -667,8 +617,6 @@ namespace zypp
     MediaManager::localPath(MediaAccessId accessId,
                             const Pathname & pathname) const
     {
-      MutexLock glock(g_Mutex);
-
       ManagedMedia &ref( m_impl->findMM(accessId));
 
       Pathname path;
@@ -681,8 +629,6 @@ namespace zypp
                               const Pathname &filename,
                               const ByteCount &expectedFileSize ) const
     {
-      MutexLock glock(g_Mutex);
-
       ManagedMedia &ref( m_impl->findMM(accessId));
 
       ref.checkDesired(accessId);
@@ -703,8 +649,6 @@ namespace zypp
     MediaManager::setDeltafile(MediaAccessId   accessId,
                               const Pathname &filename ) const
     {
-      MutexLock glock(g_Mutex);
-
       ManagedMedia &ref( m_impl->findMM(accessId));
 
       ref.checkDesired(accessId);
@@ -717,8 +661,6 @@ namespace zypp
     MediaManager::provideDir(MediaAccessId   accessId,
                              const Pathname &dirname) const
     {
-      MutexLock glock(g_Mutex);
-
       ManagedMedia &ref( m_impl->findMM(accessId));
 
       ref.checkDesired(accessId);
@@ -731,8 +673,6 @@ namespace zypp
     MediaManager::provideDirTree(MediaAccessId   accessId,
                                  const Pathname &dirname) const
     {
-      MutexLock glock(g_Mutex);
-
       ManagedMedia &ref( m_impl->findMM(accessId));
 
       ref.checkDesired(accessId);
@@ -745,8 +685,6 @@ namespace zypp
     MediaManager::releaseFile(MediaAccessId   accessId,
                               const Pathname &filename) const
     {
-      MutexLock glock(g_Mutex);
-
       ManagedMedia &ref( m_impl->findMM(accessId));
 
       ref.checkAttached(accessId);
@@ -759,8 +697,6 @@ namespace zypp
     MediaManager::releaseDir(MediaAccessId   accessId,
                              const Pathname &dirname) const
     {
-      MutexLock glock(g_Mutex);
-
       ManagedMedia &ref( m_impl->findMM(accessId));
 
       ref.checkAttached(accessId);
@@ -774,8 +710,6 @@ namespace zypp
     MediaManager::releasePath(MediaAccessId   accessId,
                               const Pathname &pathname) const
     {
-      MutexLock glock(g_Mutex);
-
       ManagedMedia &ref( m_impl->findMM(accessId));
 
       ref.checkAttached(accessId);
@@ -790,8 +724,6 @@ namespace zypp
                           const Pathname         &dirname,
                           bool                    dots) const
     {
-      MutexLock glock(g_Mutex);
-
       ManagedMedia &ref( m_impl->findMM(accessId));
 
       // FIXME: ref.checkDesired(accessId); ???
@@ -807,8 +739,6 @@ namespace zypp
                           const Pathname         &dirname,
                           bool                    dots) const
     {
-      MutexLock glock(g_Mutex);
-
       ManagedMedia &ref( m_impl->findMM(accessId));
 
       // FIXME: ref.checkDesired(accessId); ???
@@ -821,7 +751,6 @@ namespace zypp
     bool
     MediaManager::doesFileExist(MediaAccessId  accessId, const Pathname & filename ) const
     {
-      MutexLock glock(g_Mutex);
       ManagedMedia &ref( m_impl->findMM(accessId));
 
       // FIXME: ref.checkDesired(accessId); ???
@@ -836,7 +765,6 @@ namespace zypp
                                      std::vector<std::string> & devices,
                                      unsigned int & index) const
     {
-      MutexLock glock(g_Mutex);
       ManagedMedia &ref( m_impl->findMM(accessId));
       return ref.handler->getDetectedDevices(devices, index);
     }
@@ -846,7 +774,6 @@ namespace zypp
     time_t
     MediaManager::getMountTableMTime()
     {
-      MutexLock glock(g_Mutex);
       return MediaManager_Impl::getMountTableMTime();
     }
 
@@ -855,8 +782,6 @@ namespace zypp
     MountEntries
     MediaManager::getMountEntries()
     {
-      MutexLock glock(g_Mutex);
-
       return MediaManager_Impl::getMountEntries();
     }
 
@@ -867,8 +792,6 @@ namespace zypp
     {
       if( path.empty() || path == "/" || !PathInfo(path).isDir())
         return false;
-
-      MutexLock glock(g_Mutex);
 
       //
       // check against our current attach points
@@ -935,8 +858,6 @@ namespace zypp
     AttachedMedia
     MediaManager::getAttachedMedia(MediaAccessId &accessId) const
     {
-      MutexLock glock(g_Mutex);
-
       ManagedMedia &ref( m_impl->findMM(accessId));
 
       return ref.handler->attachedMedia();
@@ -946,8 +867,6 @@ namespace zypp
     AttachedMedia
     MediaManager::findAttachedMedia(const MediaSourceRef &media) const
     {
-      MutexLock glock(g_Mutex);
-
       if( !media || media->type.empty())
         return AttachedMedia();
 
@@ -968,8 +887,6 @@ namespace zypp
     void
     MediaManager::forceReleaseShared(const MediaSourceRef &media)
     {
-      MutexLock glock(g_Mutex);
-
       if( !media || media->type.empty())
         return;
 

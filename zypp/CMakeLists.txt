@@ -643,21 +643,6 @@ INSTALL(  FILES
   DESTINATION ${INCLUDE_INSTALL_DIR}/zypp/target/rpm
 )
 
-SET( zypp_thread_SRCS
-  thread/Mutex.cc
-)
-
-SET( zypp_thread_HEADERS
-  thread/Mutex.h
-  thread/MutexException.h
-  thread/MutexLock.h
-)
-
-INSTALL(  FILES
-  ${zypp_thread_HEADERS}
-  DESTINATION ${INCLUDE_INSTALL_DIR}/zypp/thread
-)
-
 SET( zypp_ui_SRCS
   ui/Selectable.cc
   ui/SelectableImpl.cc
@@ -812,7 +797,6 @@ ${zypp_target_modalias_SRCS}
 ${zypp_target_SRCS}
 ${zypp_solver_detail_SRCS}
 ${zypp_ui_SRCS}
-${zypp_thread_SRCS}
 ${zypp_SRCS}
 ${zypp_zypp_detail_SRCS}
 ${zypp_sat_SRCS}
@@ -838,7 +822,6 @@ ${zypp_sat_detail_HEADERS}
 ${zypp_url_HEADERS}
 ${zypp_HEADERS}
 ${zypp_zypp_detail_HEADERS}
-${zypp_thread_HEADERS}
 ${zypp_repo_HEADERS}
 ${zypp_source_susetags_HEADERS}
 ${zypp_target_modalias_HEADERS}
@@ -879,7 +862,6 @@ SET_LOGGROUP( "libsolv" ${zypp_sat_SRCS} )
 #SET_LOGGROUP( "group" ${zypp_parser_SRCS} )
 #SET_LOGGROUP( "group" ${zypp_SRCS} )
 #SET_LOGGROUP( "group" ${zypp_zypp_detail_SRCS} )
-#SET_LOGGROUP( "group" ${zypp_thread_SRCS} )
 #SET_LOGGROUP( "group" ${zypp_source_susetags_SRCS} )
 #SET_LOGGROUP( "group" ${zypp_target_modalias_SRCS} )
 #SET_LOGGROUP( "group" ${zypp_target_SRCS} )
