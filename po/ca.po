@@ -9,10 +9,10 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-07-18 13:07+0200\n"
-"PO-Revision-Date: 2019-05-29 19:49+0000\n"
+"PO-Revision-Date: 2019-07-19 13:51+0000\n"
 "Last-Translator: David Medina <medipas@gmail.com>\n"
-"Language-Team: Catalan <https://l10n.opensuse.org/projects/zypper/master/ca/"
-">\n"
+"Language-Team: Catalan <https://l10n.opensuse.org/projects/zypper/master/ca/>"
+"\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -466,7 +466,11 @@ msgid_plural ""
 "%1% packages had to be excluded from file conflicts check because they are "
 "not yet downloaded."
 msgstr[0] ""
+"S'ha hagut d'excloure %1% paquet de la comprovació de conflictes perquè "
+"encara no s'ha descarregat."
 msgstr[1] ""
+"S'han hagut d'excloure %1% paquets de la comprovació de conflictes perquè "
+"encara no s'ha descarregat."
 
 #. TranslatorExplanation %1%(commandline option)
 #: src/callbacks/rpm.h:460
@@ -2852,7 +2856,7 @@ msgstr "ping [opcions]"
 #. translators: command description
 #: src/commands/nullcommands.cc:69 src/commands/nullcommands.cc:71
 msgid "This command has dummy implementation which always returns 0."
-msgstr "Aquesta ordre té una implementació buida que sempre retorna 0."
+msgstr "Aquesta ordre té una implementació fictícia que sempre retorna 0."
 
 #: src/commands/optionsets.cc:33
 msgid "Don't change anything, just report what would be done."
@@ -2865,6 +2869,8 @@ msgid ""
 "A meaningful file conflict check can only be performed if used together with "
 "'%1%'."
 msgstr ""
+"Una comprovació de conflictes entre fitxers significativa només es pot fer "
+"si es fa conjuntament amb \"%1%\"."
 
 #. translators: -r, --repo <ALIAS|#|URI>
 #: src/commands/optionsets.cc:67
