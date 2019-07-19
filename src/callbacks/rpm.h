@@ -125,7 +125,7 @@ struct PatchMessageReportReceiver : public callback::ReceiveReport<target::Patch
   {
     Out & out = Zypper::instance()->out();
     std::ostringstream s;
-    s << patch; // [patch]important-patch-101 \todo make some meaningfull message out of this
+    s << patch; // [patch]important-patch-101 \todo make some meaningful message out of this
     out.info(s.str(), Out::HIGH);
     out.info(patch->message());
 
@@ -361,12 +361,25 @@ private:
 ///////////////////////////////////////////////////////////////////
 struct FindFileConflictstReportReceiver : public callback::ReceiveReport<target::FindFileConflictstReport>
 {
+  static std::string mkProgressBarLabel( unsigned skipped_r = 0 )
+  {
+    // translators: A progressbar label
+    std::string ret( _("Checking for file conflicts:") );
+    if ( skipped_r ) {
+      // translators: progressbar label extension; %1% is the number of skipped items
+      static str::Format fmt( MSG_WARNINGString(" (%1% skipped)" ).str() );
+      ret += fmt % skipped_r;
+    }
+    return ret;
+  }
+
   virtual void reportbegin()
   {
+    Zypper::instance()->out().gap();
+    _lastskip = 0;
     _progress.reset( new Out::ProgressBar( Zypper::instance()->out(),
 					   "fileconflict-check",
-					   // TranslatorExplanation A progressbar label
-					   _("Checking for file conflicts:") ) );
+					   mkProgressBarLabel() ) );
   }
 
   virtual bool start( const ProgressData & progress_r )
@@ -378,6 +391,9 @@ struct FindFileConflictstReportReceiver : public callback::ReceiveReport<target:
   virtual bool progress( const ProgressData & progress_r, const sat::Queue & noFilelist_r )
   {
     (*_progress)->set( progress_r );
+    if ( noFilelist_r.size() != _lastskip ) {
+      (*_progress).print( mkProgressBarLabel( (_lastskip = noFilelist_r.size()) ) );
+    }
     return !Zypper::instance()->exitRequested();
   }
 
@@ -398,19 +414,16 @@ struct FindFileConflictstReportReceiver : public callback::ReceiveReport<target:
 
       if ( ! noFilelist_r.empty() )	// warning
       {
-	out.warning( str::FormatNAC(
+	out.warning( str::FormatNAC( // TranslatorExplanation %1%(number of packages); detailed list follows
+				  PL_( "%1% package had to be excluded from file conflicts check because it is not yet download.",
+				       "%1% packages had to be excluded from file conflicts check because they are not yet downloaded.",
+				       noFilelist_r.size() ) ) % noFilelist_r.size() );
+
+	out.notePar( 4, str::Format(
 		       // TranslatorExplanation %1%(commandline option)
 		       _("Checking for file conflicts requires not installed packages to be downloaded in advance "
 	                 "in order to access their file lists. See option '%1%' in the zypper manual page for details.")
-		     ) % "--download-in-advance" );
-	out.gap();
-
-	out.list( "no-filelist",
-		  // TranslatorExplanation %1%(number of packages); detailed list follows
-		  PL_("The following package had to be excluded from file conflicts check because it is not yet downloaded:",
-		      "The following %1% packages had to be excluded from file conflicts check because they are not yet downloaded:",
-		      noFilelist_r.size() ),
-		  noFilelist_r, out::SolvableListFormater() );
+		     ) % "--download-in-advance / --dry-run --download-only" );
 	out.gap();
       }
 
@@ -452,6 +465,7 @@ struct FindFileConflictstReportReceiver : public callback::ReceiveReport<target:
 
 private:
   scoped_ptr<Out::ProgressBar>	_progress;
+  unsigned _lastskip = 0;
 };
 
 

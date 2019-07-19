@@ -104,7 +104,7 @@ Package File Conflicts
 ~~~~~~~~~~~~~~~~~~~~~~
 File conflicts happen when two packages attempt to install files with the same name but different contents. This may happen if you are installing a newer version of a package without erasing the older version, of if two unrelated packages each install a file with the same name.
 
-As checking for file conflicts requires access to the full filelist of each package being installed, zypper will check for file conflict only if all packages are downloaded in advance (see *--download-in-advance*).
+As checking for file conflicts requires access to the full filelist of each package being installed, zypper will be able to check for file conflicts only if all packages are downloaded in advance (see *--download-in-advance*). If you are doing a *--dry-run* no packages are downloaded, so the file conflict check will skip packages not available in the packages cache. To get a meaningful file conflict check use *--dry-run* together with *--download-only*.
 
 As the reason for file conflicts usually is a poor package design or lack of coordination between the people building the packages, they are not easy to resolve. By using the *--replacefiles* option you can force zypper to replace the conflicting files. Nevertheless this may damage the package whose file gets replaced.
 
@@ -258,7 +258,7 @@ Package Management Commands
 		Force the solver to find a solution by allowing to remove packages with unfulfilled requirements. This is the default when removing packages (*zypper remove*). This option overrides *--no-force-resolution* in case both are specified on the command line.
 
 	*-D*, *--dry-run*::
-		Test the installation, do not actually install any package. This option will add the *--test* option to the rpm commands run by the install command.
+		Test the installation, do not actually install any package. If used together with *--download-only* a meaningful file conflict check can be performed (see section *Package File Conflicts*).
 
 	*--details*::
 		Show the detailed installation summary.
@@ -269,10 +269,10 @@ Package Management Commands
 	Download-and-install mode options: :: {nop}
 
 	*-d*, *--download-only*::
-		Only download the packages for later installation.
+		Only download the packages for later installation. If used together with *--dry-run* a meaningful file conflict check can be performed (see section *Package File Conflicts*).
 
 	*--download-in-advance*::
-		First download all packages, then start installing.
+		First download all packages, then start installing. This is the default.
 
 	*--download-in-heaps*::
 		Download a minimal set of packages that can be installed without leaving
@@ -346,7 +346,7 @@ Package Management Commands
 		By default, zypper installs also packages recommended by the requested ones (the ones needed to fix broken dependencies in this case). This option causes the recommended packages to be ignored and only the required ones to be installed.
 
 	*-D*, *--dry-run*::
-		Test the repair, do not actually do anything to the system.
+		Test the repair, do not actually do anything to the system. If used together with *--download-only* a meaningful file conflict check can be performed (see section *Package File Conflicts*).
 
 	*--details*::
 		Show the detailed installation summary.
@@ -371,7 +371,7 @@ Package Management Commands
 		Work only with the repository specified by the alias, name, number, or URI. This option can be used multiple times.
 
 	*-D*, *--dry-run*::
-		Test the installation, do not actually install anything.
+		Test the installation, do not actually install anything. If used together with *--download-only* a meaningful file conflict check can be performed (see section *Package File Conflicts*).
 
 	*--details*::
 		Show the detailed installation summary.
@@ -421,7 +421,7 @@ Package Management Commands
 		No automatic removal of unneeded dependencies.
 
 	*-D*, *--dry-run*::
-		Test the removal of packages, do not actually remove anything. This option will add the *--test* option to the rpm commands run by the remove command.
+		Test the removal of packages, do not actually remove anything. If used together with *--download-only* a meaningful file conflict check can be performed (see section *Package File Conflicts*).
 
 	*--details*::
 		Show the detailed installation summary.
@@ -498,7 +498,7 @@ Update Management Commands
 		Force the solver to find a solution by allowing to remove packages with unfulfilled requirements. This is the default when removing packages (*zypper remove*). This option overrides *--no-force-resolution* in case both are specified on the command line.
 
 	*-D*, *--dry-run*::
-		Test the update, do not actually install or update any package. This option will add the *--test* option to the rpm commands run by the update command.
+		Test the update, do not actually install or update any package. If used together with *--download-only* a meaningful file conflict check can be performed (see section *Package File Conflicts*).
 
 	*--details*::
 		Show the detailed installation summary.
@@ -609,7 +609,7 @@ Update Management Commands
 		Create test case for debugging of dependency resolver.
 
 	*-D*, *--dry-run*::
-		Test the update, do not actually update.
+		Test the update, do not actually update. If used together with *--download-only* a meaningful file conflict check can be performed (see section *Package File Conflicts*).
 
 
 	*--details*::
@@ -655,7 +655,7 @@ Update Management Commands
 		Create solver test case for debugging. See the install command for details.
 
 	*-D*, *--dry-run*::
-		Test the upgrade, do not actually install or update any package. This option will add the *--test* option to the rpm commands run by the dist-upgrade command.
+		Test the upgrade, do not actually install or update any package. If used together with *--download-only* a meaningful file conflict check can be performed (see section *Package File Conflicts*).
 
 	*--details*::
 		Show the detailed installation summary.
