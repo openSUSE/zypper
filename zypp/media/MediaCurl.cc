@@ -1245,7 +1245,7 @@ bool MediaCurl::doGetDoesFileExist( const Pathname & filename ) const
     ZYPP_THROW(MediaCurlSetOptException(url, _curlError));
   }
 
-  FILE *file = ::fopen( "/dev/null", "w" );
+  AutoFILE file { ::fopen( "/dev/null", "w" ) };
   if ( !file ) {
       ERR << "fopen failed for /dev/null" << endl;
       curl_easy_setopt( _curl, CURLOPT_NOBODY, 0L);
@@ -1264,7 +1264,6 @@ bool MediaCurl::doGetDoesFileExist( const Pathname & filename ) const
 
   ret = curl_easy_setopt( _curl, CURLOPT_WRITEDATA, file );
   if ( ret != 0 ) {
-      ::fclose(file);
       std::string err( _curlError);
       curl_easy_setopt( _curl, CURLOPT_RANGE, NULL );
       curl_easy_setopt( _curl, CURLOPT_NOBODY, 0L);
@@ -1310,10 +1309,6 @@ bool MediaCurl::doGetDoesFileExist( const Pathname & filename ) const
       ZYPP_THROW(MediaCurlSetOptException(url, _curlError));
     }
   }
-
-  // if the code is not zero, close the file
-  if ( ok != 0 )
-      ::fclose(file);
 
   // as we are not having user interaction, the user can't cancel
   // the file existence checking, a callback or timeout return code
@@ -1384,34 +1379,34 @@ void MediaCurl::doGetFileCopy(const Pathname & filename , const Pathname & targe
     if( assert_dir( dest.dirname() ) )
     {
       DBG << "assert_dir " << dest.dirname() << " failed" << endl;
-      Url url(getFileUrl(filename));
-      ZYPP_THROW( MediaSystemException(url, "System error on " + dest.dirname().asString()) );
-    }
-    string destNew = target.asString() + ".new.zypp.XXXXXX";
-    char *buf = ::strdup( destNew.c_str());
-    if( !buf)
-    {
-      ERR << "out of memory for temp file name" << endl;
-      Url url(getFileUrl(filename));
-      ZYPP_THROW(MediaSystemException(url, "out of memory for temp file name"));
+      ZYPP_THROW( MediaSystemException(getFileUrl(filename), "System error on " + dest.dirname().asString()) );
     }
 
-    int tmp_fd = ::mkostemp( buf, O_CLOEXEC );
-    if( tmp_fd == -1)
+    ManagedFile destNew { target.extend( ".new.zypp.XXXXXX" ) };
+    AutoFILE file;
     {
-      free( buf);
-      ERR << "mkstemp failed for file '" << destNew << "'" << endl;
-      ZYPP_THROW(MediaWriteException(destNew));
-    }
-    destNew = buf;
-    free( buf);
+      AutoFREE<char> buf { ::strdup( (*destNew).c_str() ) };
+      if( ! buf )
+      {
+	ERR << "out of memory for temp file name" << endl;
+	ZYPP_THROW(MediaSystemException(getFileUrl(filename), "out of memory for temp file name"));
+      }
 
-    FILE *file = ::fdopen( tmp_fd, "we" );
-    if ( !file ) {
-      ::close( tmp_fd);
-      filesystem::unlink( destNew );
-      ERR << "fopen failed for file '" << destNew << "'" << endl;
-      ZYPP_THROW(MediaWriteException(destNew));
+      AutoFD tmp_fd { ::mkostemp( buf, O_CLOEXEC ) };
+      if( tmp_fd == -1 )
+      {
+	ERR << "mkstemp failed for file '" << destNew << "'" << endl;
+	ZYPP_THROW(MediaWriteException(destNew));
+      }
+      destNew = ManagedFile( (*buf), filesystem::unlink );
+
+      file = ::fdopen( tmp_fd, "we" );
+      if ( ! file )
+      {
+	ERR << "fopen failed for file '" << destNew << "'" << endl;
+	ZYPP_THROW(MediaWriteException(destNew));
+      }
+      tmp_fd.resetDispose();	// don't close it here! ::fdopen moved ownership to file
     }
 
     DBG << "dest: " << dest << endl;
@@ -1434,8 +1429,6 @@ void MediaCurl::doGetFileCopy(const Pathname & filename , const Pathname & targe
     }
     catch (Exception &e)
     {
-      ::fclose( file );
-      filesystem::unlink( destNew );
       curl_easy_setopt(_curl, CURLOPT_TIMECONDITION, CURL_TIMECOND_NONE);
       curl_easy_setopt(_curl, CURLOPT_TIMEVALUE, 0L);
       ZYPP_RETHROW(e);
@@ -1469,22 +1462,20 @@ void MediaCurl::doGetFileCopy(const Pathname & filename , const Pathname & targe
       {
         ERR << "Failed to chmod file " << destNew << endl;
       }
-      if (::fclose( file ))
+
+      file.resetDispose();	// we're going to close it manually here
+      if ( ::fclose( file ) )
       {
         ERR << "Fclose failed for file '" << destNew << "'" << endl;
         ZYPP_THROW(MediaWriteException(destNew));
       }
+
       // move the temp file into dest
       if ( rename( destNew, dest ) != 0 ) {
         ERR << "Rename failed" << endl;
         ZYPP_THROW(MediaWriteException(dest));
       }
-    }
-    else
-    {
-      // close and remove the temp file
-      ::fclose( file );
-      filesystem::unlink( destNew );
+      destNew.resetDispose();	// no more need to unlink it
     }
 
     DBG << "done: " << PathInfo(dest) << endl;
