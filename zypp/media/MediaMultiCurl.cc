@@ -26,6 +26,7 @@
 #include "zypp/base/Logger.h"
 #include "zypp/media/MediaMultiCurl.h"
 #include "zypp/media/MetaLinkParser.h"
+#include "zypp/ManagedFile.h"
 
 using namespace std;
 using namespace zypp::base;
@@ -1300,35 +1301,36 @@ void MediaMultiCurl::doGetFileCopy( const Pathname & filename , const Pathname &
   if( assert_dir( dest.dirname() ) )
   {
     DBG << "assert_dir " << dest.dirname() << " failed" << endl;
-    Url url(getFileUrl(filename));
-    ZYPP_THROW( MediaSystemException(url, "System error on " + dest.dirname().asString()) );
-  }
-  string destNew = target.asString() + ".new.zypp.XXXXXX";
-  char *buf = ::strdup( destNew.c_str());
-  if( !buf)
-  {
-    ERR << "out of memory for temp file name" << endl;
-    Url url(getFileUrl(filename));
-    ZYPP_THROW(MediaSystemException(url, "out of memory for temp file name"));
+    ZYPP_THROW( MediaSystemException(getFileUrl(filename), "System error on " + dest.dirname().asString()) );
   }
 
-  int tmp_fd = ::mkostemp( buf, O_CLOEXEC );
-  if( tmp_fd == -1)
+  ManagedFile destNew { target.extend( ".new.zypp.XXXXXX" ) };
+  AutoFILE file;
   {
-    free( buf);
-    ERR << "mkstemp failed for file '" << destNew << "'" << endl;
-    ZYPP_THROW(MediaWriteException(destNew));
-  }
-  destNew = buf;
-  free( buf);
+    AutoFREE<char> buf { ::strdup( (*destNew).c_str() ) };
+    if( ! buf )
+    {
+      ERR << "out of memory for temp file name" << endl;
+      ZYPP_THROW(MediaSystemException(getFileUrl(filename), "out of memory for temp file name"));
+    }
 
-  FILE *file = ::fdopen( tmp_fd, "we" );
-  if ( !file ) {
-    ::close( tmp_fd);
-    filesystem::unlink( destNew );
-    ERR << "fopen failed for file '" << destNew << "'" << endl;
-    ZYPP_THROW(MediaWriteException(destNew));
+    AutoFD tmp_fd { ::mkostemp( buf, O_CLOEXEC ) };
+    if( tmp_fd == -1 )
+    {
+      ERR << "mkstemp failed for file '" << destNew << "'" << endl;
+      ZYPP_THROW(MediaWriteException(destNew));
+    }
+    destNew = ManagedFile( (*buf), filesystem::unlink );
+
+    file = ::fdopen( tmp_fd, "we" );
+    if ( ! file )
+    {
+      ERR << "fopen failed for file '" << destNew << "'" << endl;
+      ZYPP_THROW(MediaWriteException(destNew));
+    }
+    tmp_fd.resetDispose();	// don't close it here! ::fdopen moved ownership to file
   }
+
   DBG << "dest: " << dest << endl;
   DBG << "temp: " << destNew << endl;
 
@@ -1347,15 +1349,13 @@ void MediaMultiCurl::doGetFileCopy( const Pathname & filename , const Pathname &
   curl_easy_setopt(_curl, CURLOPT_HTTPHEADER, _customHeadersMetalink);
   // change to our own progress funcion
   curl_easy_setopt(_curl, CURLOPT_PROGRESSFUNCTION, &progressCallback);
-  curl_easy_setopt(_curl, CURLOPT_PRIVATE, file);
+  curl_easy_setopt(_curl, CURLOPT_PRIVATE, (*file) );	// important to pass the FILE* explicitly (passing through varargs)
   try
     {
       MediaCurl::doGetFileCopyFile(filename, dest, file, report, expectedFileSize_r, options);
     }
   catch (Exception &ex)
     {
-      ::fclose(file);
-      filesystem::unlink(destNew);
       curl_easy_setopt(_curl, CURLOPT_TIMECONDITION, CURL_TIMECOND_NONE);
       curl_easy_setopt(_curl, CURLOPT_TIMEVALUE, 0L);
       curl_easy_setopt(_curl, CURLOPT_HTTPHEADER, _customHeaders);
@@ -1398,24 +1398,23 @@ void MediaMultiCurl::doGetFileCopy( const Pathname & filename , const Pathname &
       // some proxies do not store the content type, so also look at the file to find
       // out if we received a metalink (bnc#649925)
       fflush(file);
-      if (looks_like_metalink(Pathname(destNew)))
+      if (looks_like_metalink(destNew))
 	ismetalink = true;
     }
 
   if (ismetalink)
     {
       bool userabort = false;
-      fclose(file);
-      file = NULL;
       Pathname failedFile = ZConfig::instance().repoCachePath() / "MultiCurl.failed";
+      file = nullptr;	// explicitly close destNew before the parser reads it.
       try
 	{
 	  MetaLinkParser mlp;
-	  mlp.parse(Pathname(destNew));
+	  mlp.parse(destNew);
 	  MediaBlockList bl = mlp.getBlockList();
 	  vector<Url> urls = mlp.getUrls();
 	  XXX << bl << endl;
-	  file = fopen(destNew.c_str(), "w+e");
+	  file = fopen((*destNew).c_str(), "w+e");
 	  if (!file)
 	    ZYPP_THROW(MediaWriteException(destNew));
 	  if (PathInfo(target).isExist())
@@ -1454,9 +1453,7 @@ void MediaMultiCurl::doGetFileCopy( const Pathname & filename , const Pathname &
       catch (Exception &ex)
 	{
 	  // something went wrong. fall back to normal download
-	  if (file)
-	    fclose(file);
-	  file = NULL;
+	  file = nullptr;	// explicitly close destNew before moving it
 	  if (PathInfo(destNew).size() >= 63336)
 	    {
 	      ::unlink(failedFile.asString().c_str());
@@ -1464,10 +1461,9 @@ void MediaMultiCurl::doGetFileCopy( const Pathname & filename , const Pathname &
 	    }
 	  if (userabort)
 	    {
-	      filesystem::unlink(destNew);
 	      ZYPP_RETHROW(ex);
 	    }
-	  file = fopen(destNew.c_str(), "w+e");
+	  file = fopen((*destNew).c_str(), "w+e");
 	  if (!file)
 	    ZYPP_THROW(MediaWriteException(destNew));
 	  MediaCurl::doGetFileCopyFile(filename, dest, file, report, expectedFileSize_r, options | OPTION_NO_REPORT_START);
@@ -1478,17 +1474,22 @@ void MediaMultiCurl::doGetFileCopy( const Pathname & filename , const Pathname &
     {
       ERR << "Failed to chmod file " << destNew << endl;
     }
+
+  file.resetDispose();	// we're going to close it manually here
   if (::fclose(file))
     {
       filesystem::unlink(destNew);
       ERR << "Fclose failed for file '" << destNew << "'" << endl;
       ZYPP_THROW(MediaWriteException(destNew));
     }
+
   if ( rename( destNew, dest ) != 0 )
     {
       ERR << "Rename failed" << endl;
       ZYPP_THROW(MediaWriteException(dest));
     }
+  destNew.resetDispose();	// no more need to unlink it
+
   DBG << "done: " << PathInfo(dest) << endl;
 }
 
