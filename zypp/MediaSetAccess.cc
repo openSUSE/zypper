@@ -47,7 +47,9 @@ IMPL_PTR_TYPE(MediaSetAccess);
   {
     try
     {
-      release();
+      media::MediaManager manager;
+      for ( const auto & mm : _medias )
+	manager.close( mm.second );
     }
     catch(...) {} // don't let exception escape a dtor.
   }
