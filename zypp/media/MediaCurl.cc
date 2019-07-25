@@ -1262,7 +1262,7 @@ bool MediaCurl::doGetDoesFileExist( const Pathname & filename ) const
       ZYPP_THROW(MediaWriteException("/dev/null"));
   }
 
-  ret = curl_easy_setopt( _curl, CURLOPT_WRITEDATA, file );
+  ret = curl_easy_setopt( _curl, CURLOPT_WRITEDATA, (*file) );
   if ( ret != 0 ) {
       std::string err( _curlError);
       curl_easy_setopt( _curl, CURLOPT_RANGE, NULL );
