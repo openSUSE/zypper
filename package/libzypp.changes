@@ -1,4 +1,14 @@
 -------------------------------------------------------------------
+Thu Jul 25 17:25:10 CEST 2019 - ma@suse.de
+
+- MediaCurl: Fix leaking filedescriptors (bsc#1116995)
+- commit: Run file conflict check on dry-run (best with download-only)
+  (bsc#1140039)
+- commit: do not remove orphan products if the .prod file is owned by
+  a package (bsc#1139795)
+- version 17.13.0 (12)
+
+-------------------------------------------------------------------
 Tue May 28 16:50:14 CEST 2019 - ma@suse.de
 
 - Drop unused InterProcessMutex class and test
