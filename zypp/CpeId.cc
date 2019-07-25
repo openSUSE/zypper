@@ -75,6 +75,8 @@ namespace zypp
   } // namespace
   ///////////////////////////////////////////////////////////////////
 
+  constexpr CpeId::NoThrowType CpeId::noThrow;
+
   ///////////////////////////////////////////////////////////////////
   /// \class CpeId::Impl
   /// \brief CpeId implementation.
@@ -441,6 +443,9 @@ namespace zypp
 
   const CpeId::Value CpeId::Value::ANY;
   const CpeId::Value CpeId::Value::NA( "" );
+
+  constexpr CpeId::Value::FsFormatType CpeId::Value::fsFormat;
+  constexpr CpeId::Value::UriFormatType CpeId::Value::uriFormat;
 
   CpeId::Value::Value( const std::string & value_r )
   {

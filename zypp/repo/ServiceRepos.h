@@ -42,7 +42,7 @@ namespace zypp
       ~ServiceRepos();
 
     public:
-      class Impl;	//!< Expose type only
+      struct Impl;	//!< Expose type only
     private:
       RW_pointer<Impl> _impl;
     };

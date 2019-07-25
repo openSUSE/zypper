@@ -65,7 +65,7 @@ namespace zypp
     //	METHOD TYPE : Constructor
     //
     ZYppImpl::ZYppImpl()
-    : _target(0)
+    : _target( nullptr )
     , _resolver( new Resolver( ResPool::instance()) )
     {
       ZConfig::instance().about( MIL );
@@ -138,7 +138,7 @@ namespace zypp
       if (_target)
           _target->unload();
 
-      _target = 0;
+      _target = nullptr;
     }
 
     //------------------------------------------------------------------------
@@ -227,7 +227,7 @@ namespace zypp
 
   Pathname myTmpDir()	// from TmpPath.h
   {
-    static filesystem::TmpDir _tmpdir( TmpPath::defaultLocation(), "zypp." );
+    static filesystem::TmpDir _tmpdir( filesystem::TmpPath::defaultLocation(), "zypp." );
     return _tmpdir.path();
   }
 

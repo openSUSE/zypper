@@ -22,7 +22,7 @@ namespace zypp
 
   namespace resstatus
   {
-    class UserLockQueryManip;
+    struct UserLockQueryManip;
     class StatusBackup;
   }
 
@@ -322,7 +322,7 @@ namespace zypp
 
     /** \name Internal hard lock maintainance */
     //@{
-    friend class resstatus::UserLockQueryManip;
+    friend struct resstatus::UserLockQueryManip;
 
     bool isUserLockQueryMatch() const
     { return fieldValueIs<UserLockQueryField>( USERLOCK_MATCH ); }

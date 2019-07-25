@@ -115,7 +115,7 @@ namespace zypp
     std::string asString() const;
 
   private:
-    class Impl;
+    struct Impl;
     RWCOW_pointer<Impl> _pimpl;
     friend class PublicKeyData;
     friend std::ostream & dumpOn( std::ostream & str, const PublicKeyData & obj );
@@ -233,7 +233,7 @@ namespace zypp
     AsciiArt asciiArt() const;
 
   private:
-    class Impl;
+    struct Impl;
     RWCOW_pointer<Impl> _pimpl;
 
     friend class KeyManagerCtx;
@@ -273,7 +273,7 @@ namespace zypp
   {
   public:
     /** Implementation  */
-    class Impl;
+    struct Impl;
 
   public:
     /** Default ctor. */

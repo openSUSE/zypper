@@ -144,7 +144,7 @@ namespace zypp
       const Container & container() const;
     private:
       /** Implementation  */
-      class Impl;
+      struct Impl;
       /** Pointer to implementation */
       RWCOW_pointer<Impl> & pimpl()             { return *(reinterpret_cast<RWCOW_pointer<Impl>*>( _dont_use_this_use_pimpl.get() )); }
       /** Pointer to implementation */

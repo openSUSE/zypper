@@ -43,7 +43,7 @@ public:
   friend class multifetchworker;
 
   MediaMultiCurl(const Url &url_r, const Pathname & attach_point_hint_r);
-  ~MediaMultiCurl();
+  ~MediaMultiCurl() override;
 
   virtual void doGetFileCopy( const Pathname & srcFilename, const Pathname & targetFilename, callback::SendReport<DownloadProgressReport> & _report, const ByteCount &expectedFileSize_r, RequestOptions options = OPTION_NONE ) const override;
 
@@ -57,7 +57,7 @@ protected:
   CURL *fromEasyPool(const std::string &host) const;
   void toEasyPool(const std::string &host, CURL *easy) const;
 
-  virtual void setupEasy();
+  virtual void setupEasy() override;
   void checkFileDigest(Url &url, FILE *fp, MediaBlockList *blklist) const;
   static int progressCallback( void *clientp, double dltotal, double dlnow, double ultotal, double ulnow );
 

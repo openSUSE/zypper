@@ -345,6 +345,9 @@ namespace std
 { /////////////////////////////////////////////////////////////////
   /** \relates zypp::Arch Default order for std::container based Arch::compare.*/
   template<>
+#ifdef __clang__
+constexpr
+#endif
     inline bool less<zypp::Arch>::operator()( const zypp::Arch & lhs, const zypp::Arch & rhs ) const
     { return lhs.compare( rhs ) < 0; }
   /////////////////////////////////////////////////////////////////

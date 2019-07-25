@@ -1807,6 +1807,9 @@ bool MediaCurl::authenticate(const string & availAuthTypes, bool firstTry) const
   return false;
 }
 
+//need a out of line definiton, otherwise vtable is emitted for every translation unit
+MediaCurl::Callbacks::~Callbacks() {}
+
 
   } // namespace media
 } // namespace zypp

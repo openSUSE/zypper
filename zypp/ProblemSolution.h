@@ -92,7 +92,7 @@ namespace zypp
 
 
   private:
-    class Impl;
+    struct Impl;
     RWCOW_pointer<Impl> _pimpl;
   };
 

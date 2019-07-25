@@ -528,7 +528,7 @@ namespace zypp
 
     public:
       /** Implementation  */
-      class Impl;
+      struct Impl;
       typedef shared_ptr<Impl> Impl_Ptr;
       /** Default ctor */
       Selectable( Impl_Ptr pimpl_r );

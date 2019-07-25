@@ -94,7 +94,7 @@ namespace zypp
       bool isCached() const;
 
     public:
-      class Impl;              ///< Implementation class.
+      struct Impl;              ///< Implementation class.
     private:
       RW_pointer<Impl> _pimpl; ///< Pointer to implementation.
     };

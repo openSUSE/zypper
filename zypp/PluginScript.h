@@ -182,7 +182,7 @@ namespace zypp
 
     public:
       /** Implementation. */
-      class Impl;
+      struct Impl;
     private:
       /** Pointer to implementation. */
       RW_pointer<Impl> _pimpl;

@@ -26,6 +26,8 @@ namespace zypp
   namespace media {
   /////////////////////////////////////////////////////////////////
 
+    MediaException::~MediaException () noexcept {}
+
     std::ostream & MediaMountException::dumpOn( std::ostream & str ) const
     {
       str << form(_("Failed to mount %s on %s"), _source.c_str(), _target.c_str() );
@@ -214,7 +216,7 @@ namespace zypp
       return str;
     }
 
-  /////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////
   } // namespace media
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////

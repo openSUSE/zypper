@@ -326,7 +326,7 @@ namespace zypp
     /** Helper for \ref ZYPP_THROW( Exception ). */
     template<class TExcpt, EnableIfIsException<TExcpt> = 0>
     void do_ZYPP_THROW( const TExcpt & excpt_r, const CodeLocation & where_r ) __attribute__((noreturn));
-    template<class TExcpt, EnableIfIsException<TExcpt> = 0>
+    template<class TExcpt, EnableIfIsException<TExcpt>>
     void do_ZYPP_THROW( const TExcpt & excpt_r, const CodeLocation & where_r )
     {
       excpt_r.relocate( where_r );
@@ -337,7 +337,7 @@ namespace zypp
     /** Helper for \ref ZYPP_THROW( not Exception ). */
     template<class TExcpt, EnableIfNotException<TExcpt> = 0>
     void do_ZYPP_THROW( const TExcpt & excpt_r, const CodeLocation & where_r ) __attribute__((noreturn));
-    template<class TExcpt, EnableIfNotException<TExcpt> = 0>
+    template<class TExcpt, EnableIfNotException<TExcpt>>
     void do_ZYPP_THROW( const TExcpt & excpt_r, const CodeLocation & where_r )
     {
       Exception::log( typeid(excpt_r).name(), where_r, "THROW:   " );
@@ -363,7 +363,7 @@ namespace zypp
     /** Helper for \ref ZYPP_THROW( Exception ). */
     template<class TExcpt, EnableIfIsException<TExcpt> = 0>
     void do_ZYPP_RETHROW( const TExcpt & excpt_r, const CodeLocation & where_r ) __attribute__((noreturn));
-    template<class TExcpt, EnableIfIsException<TExcpt> = 0>
+    template<class TExcpt, EnableIfIsException<TExcpt>>
     void do_ZYPP_RETHROW( const TExcpt & excpt_r, const CodeLocation & where_r )
     {
       Exception::log( excpt_r, where_r, "RETHROW: " );
@@ -374,7 +374,7 @@ namespace zypp
     /** Helper for \ref ZYPP_THROW( not Exception ). */
     template<class TExcpt, EnableIfNotException<TExcpt> = 0>
     void do_ZYPP_RETHROW( const TExcpt & excpt_r, const CodeLocation & where_r ) __attribute__((noreturn));
-    template<class TExcpt, EnableIfNotException<TExcpt> = 0>
+    template<class TExcpt, EnableIfNotException<TExcpt>>
     void do_ZYPP_RETHROW( const TExcpt & excpt_r, const CodeLocation & where_r )
     {
       Exception::log( excpt_r, where_r, "RETHROW: " );

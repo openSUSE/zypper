@@ -14,6 +14,7 @@
 
 #include "zypp/ResObject.h"
 #include "zypp/Pathname.h"
+#include "zypp/sat/SolvableSet.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

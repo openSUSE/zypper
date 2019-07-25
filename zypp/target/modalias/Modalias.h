@@ -38,7 +38,7 @@ namespace zypp
 
       public:
         /** Implementation  */
-        class Impl;
+        struct Impl;
 
       public:
 	typedef std::vector<std::string> ModaliasList;

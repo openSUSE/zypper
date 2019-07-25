@@ -89,7 +89,7 @@ namespace zypp
     void addSolution( ProblemSolution_Ptr solution, bool inFront = false );
 
   private:
-    class Impl;
+    struct Impl;
     RWCOW_pointer<Impl> _pimpl;
   };
 

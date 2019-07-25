@@ -38,6 +38,8 @@ namespace zypp
   namespace sat
   { /////////////////////////////////////////////////////////////////
 
+  constexpr Map::PoolSizeType Map::poolSize;
+
     Map::Map()
       : _pimpl( new detail::CMap )
     { ::map_init( _pimpl.get(), 0 ); }

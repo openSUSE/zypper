@@ -541,7 +541,7 @@ namespace zypp
        */
       virtual std::ostream & dumpAsXmlOn( std::ostream & str, const std::string & content = "" ) const;
 
-      class Impl;
+      struct Impl;
     private:
       friend class RepoManager;
       /** Raw values for RepoManager */

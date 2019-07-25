@@ -39,7 +39,7 @@ namespace zypp
 
   public:
     /** Implementation  */
-    class Impl;
+    struct Impl;
 
     typedef MapKVIteratorTraits<SelectablePool>::Value_const_iterator const_iterator;
     typedef SelectablePool::size_type size_type;

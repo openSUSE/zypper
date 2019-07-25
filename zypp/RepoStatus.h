@@ -77,7 +77,7 @@ namespace zypp
     Date timestamp() const;
 
   public:
-    class Impl;			///< Implementation
+    struct Impl;			///< Implementation
   private:
     RWCOW_pointer<Impl> _pimpl;	///< Pointer to implementation
   };

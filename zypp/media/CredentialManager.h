@@ -169,7 +169,7 @@ namespace zypp
     CredentialSize     credsUserSize()  const;
     bool               credsUserEmpty() const;
 
-    class Impl;
+    struct Impl;
   private:
     RW_pointer<Impl> _pimpl;
   };

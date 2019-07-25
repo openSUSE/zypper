@@ -40,7 +40,7 @@ namespace zypp
     class ProductFileData
     {
       public:
-        class Impl;
+        struct Impl;
         /** Ctor takes ownership of \c allocated_r. */
         ProductFileData( Impl * allocated_r = 0 );
 
@@ -72,7 +72,7 @@ namespace zypp
         struct Upgrade
         {
           public:
-            class Impl;
+            struct Impl;
             /** Ctor takes ownership of \c allocated_r. */
             Upgrade( Impl * allocated_r = 0 );
 

@@ -85,7 +85,7 @@ namespace zypp
 				 const std::string & line_r = "-" ) const;
 
 	private:
-	  class Impl;
+	  struct Impl;
 	  RW_pointer<Impl,rw_pointer::Scoped<Impl> > _pimpl;
 	  RepoIndexConsumer _repoIndexConsumer;
       };

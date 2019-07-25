@@ -144,7 +144,7 @@ namespace zypp
       void setBuddy( const sat::Solvable & solv_r );
       /** internal ctor */
     public:
-      class Impl;	///< Expose type only
+      struct Impl;	///< Expose type only
     private:
       explicit PoolItem( Impl * implptr_r );
       /** Pointer to implementation */
@@ -154,7 +154,7 @@ namespace zypp
       /** \name tmp hack for save/restore state. */
       /** \todo get rid of it. */
       //@{
-      friend class PoolItemSaver;
+      friend struct PoolItemSaver;
       void saveState() const;
       void restoreState() const;
       bool sameState() const;

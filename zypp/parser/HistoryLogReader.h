@@ -141,7 +141,7 @@ namespace zypp
 
   private:
     /** Implementation */
-    class Impl;
+    struct Impl;
     RW_pointer<Impl,rw_pointer::Scoped<Impl> > _pimpl;
   };
 

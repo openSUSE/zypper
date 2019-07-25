@@ -18,7 +18,6 @@
 #include "zypp/Vendor.h"
 
 #include "zypp/sat/LookupAttr.h"
-#include "zypp/sat/SolvableSet.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

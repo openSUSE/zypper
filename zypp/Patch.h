@@ -15,6 +15,7 @@
 #include "zypp/base/Flags.h"
 #include "zypp/sat/SolvAttr.h"
 #include "zypp/ResObject.h"
+#include "zypp/sat/SolvableSet.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

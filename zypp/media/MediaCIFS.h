@@ -33,23 +33,23 @@ namespace zypp {
 
     protected:
 
-      virtual void attachTo (bool next = false);
-      virtual void releaseFrom( const std::string & ejectDev );
+      virtual void attachTo (bool next = false) override;
+      virtual void releaseFrom( const std::string & ejectDev ) override;
       virtual void getFile( const Pathname & filename, const ByteCount &expectedFileSize_r ) const override;
-      virtual void getDir( const Pathname & dirname, bool recurse_r ) const;
+      virtual void getDir( const Pathname & dirname, bool recurse_r ) const override;
       virtual void getDirInfo( std::list<std::string> & retlist,
-                               const Pathname & dirname, bool dots = true ) const;
+                               const Pathname & dirname, bool dots = true ) const override;
       virtual void getDirInfo( filesystem::DirContent & retlist,
-                               const Pathname & dirname, bool dots = true ) const;
-      virtual bool getDoesFileExist( const Pathname & filename ) const;
+                               const Pathname & dirname, bool dots = true ) const override;
+      virtual bool getDoesFileExist( const Pathname & filename ) const override;
 
     public:
       MediaCIFS( const Url&       url_r,
 		const Pathname & attach_point_hint_r );
 
-      virtual ~MediaCIFS() { try { release(); } catch(...) {} }
+      virtual ~MediaCIFS() override { try { release(); } catch(...) {} }
 
-      virtual bool isAttached() const;
+      virtual bool isAttached() const override;
 
     private:
       bool authenticate( AuthData & authdata, bool firstTry ) const;

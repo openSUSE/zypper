@@ -19,25 +19,19 @@
 #include "zypp/base/Hash.h"
 
 #include "zypp/sat/Solvable.h"
+#include "zypp/PoolItem.h"
+#include "zypp/ui/Selectable.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
-
-  class PoolItem;
-  class asPoolItem; // transform functor
-
-  namespace ui
-  {
-    class asSelectable; // transform functor
-  }
 
   ///////////////////////////////////////////////////////////////////
   namespace sat
   { /////////////////////////////////////////////////////////////////
 
     class Solvable;
-    class asSolvable; // transform functor
+    //class asSolvable; // transform functor
 
     namespace solvitermixin_detail
     {

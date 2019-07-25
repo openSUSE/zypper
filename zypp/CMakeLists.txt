@@ -224,6 +224,7 @@ SET( zypp_base_SRCS
   base/Sysconfig.cc
   base/ProfilingFormater.cc
   base/LogControl.cc
+  base/Xml.cc
 )
 
 SET( zypp_base_HEADERS

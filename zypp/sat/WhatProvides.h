@@ -124,7 +124,7 @@ namespace zypp
         const_iterator end() const;
 
       private:
-        struct Impl;
+        class Impl;
         RW_pointer<Impl> _pimpl;
     };
     ///////////////////////////////////////////////////////////////////

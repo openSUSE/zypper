@@ -36,6 +36,8 @@ namespace zypp
   namespace sat
   { /////////////////////////////////////////////////////////////////
 
+    constexpr Transaction::LoadFromPoolType Transaction::loadFromPool;
+
     /** Transaction implementation.
      *
      * \NOTE After commit the @System repo is reloaded. This invalidates

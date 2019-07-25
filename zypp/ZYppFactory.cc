@@ -190,7 +190,7 @@ namespace zypp
     bool isProcessRunning( pid_t pid_r )
     {
       // it is another program, not me, see if it is still running
-      Pathname procdir( "/proc"/str::numstring(pid_r) );
+      Pathname procdir( Pathname("/proc")/str::numstring(pid_r) );
       PathInfo status( procdir );
       MIL << "Checking " <<  status << endl;
 
@@ -371,7 +371,7 @@ namespace zypp
 	{
 	  MIL << "Waiting whether pid " << globalLock().lockerPid() << " ends within $LOCK_TIMEOUT=" << LOCK_TIMEOUT << " sec." << endl;
 	  unsigned delay = 1;
-	  Pathname procdir( "/proc"/str::numstring(globalLock().lockerPid()) );
+          Pathname procdir( Pathname("/proc")/str::numstring(globalLock().lockerPid()) );
 	  for ( long i = 0; i < LOCK_TIMEOUT; i += delay )
 	  {
 	    if ( PathInfo( procdir ).isDir() )	// wait for /proc/pid to disapear
@@ -384,7 +384,7 @@ namespace zypp
 	      {
 		// another proc locked faster. maybe it ends fast as well....
 		MIL << "Waiting whether pid " << globalLock().lockerPid() << " ends within " << (LOCK_TIMEOUT-i) << " sec." << endl;
-		procdir = Pathname( "/proc"/str::numstring(globalLock().lockerPid()) );
+                procdir = Pathname( Pathname("/proc")/str::numstring(globalLock().lockerPid()) );
 	      }
 	      else
 	      {

@@ -39,7 +39,7 @@ namespace zypp
 
     public:
       /** Implementation  */
-      class Impl;
+      struct Impl;
 
     public:
       DeltaCandidates();

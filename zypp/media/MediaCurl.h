@@ -51,20 +51,20 @@ class MediaCurl : public MediaHandler
 
     Url clearQueryString(const Url &url) const;
 
-    virtual void attachTo (bool next = false);
-    virtual void releaseFrom( const std::string & ejectDev );
+    virtual void attachTo (bool next = false) override;
+    virtual void releaseFrom( const std::string & ejectDev ) override;
     virtual void getFile( const Pathname & filename, const ByteCount &expectedFileSize_r ) const override;
-    virtual void getDir( const Pathname & dirname, bool recurse_r ) const;
+    virtual void getDir( const Pathname & dirname, bool recurse_r ) const override;
     virtual void getDirInfo( std::list<std::string> & retlist,
-                             const Pathname & dirname, bool dots = true ) const;
+                             const Pathname & dirname, bool dots = true ) const override;
     virtual void getDirInfo( filesystem::DirContent & retlist,
-                             const Pathname & dirname, bool dots = true ) const;
+                             const Pathname & dirname, bool dots = true ) const override;
     /**
      * Repeatedly calls doGetDoesFileExist() until it successfully returns,
      * fails unexpectedly, or user cancels the operation. This is used to
      * handle authentication or similar retry scenarios on media level.
      */
-    virtual bool getDoesFileExist( const Pathname & filename ) const;
+    virtual bool getDoesFileExist( const Pathname & filename ) const override;
 
     /**
      * \see MediaHandler::getDoesFileExist
@@ -76,7 +76,7 @@ class MediaCurl : public MediaHandler
      * \throws MediaException
      *
      */
-    virtual void disconnectFrom();
+    virtual void disconnectFrom() override;
     /**
      *
      * \throws MediaException
@@ -92,14 +92,14 @@ class MediaCurl : public MediaHandler
     virtual void doGetFileCopy( const Pathname & srcFilename, const Pathname & targetFilename, callback::SendReport<DownloadProgressReport> & _report, const ByteCount &expectedFileSize_r,  RequestOptions options = OPTION_NONE ) const;
 
 
-    virtual bool checkAttachPoint(const Pathname &apoint) const;
+    virtual bool checkAttachPoint(const Pathname &apoint) const override;
 
   public:
 
     MediaCurl( const Url &      url_r,
 	       const Pathname & attach_point_hint_r );
 
-    virtual ~MediaCurl() { try { release(); } catch(...) {} }
+    virtual ~MediaCurl() override { try { release(); } catch(...) {} }
 
     TransferSettings & settings();
 
@@ -108,7 +108,7 @@ class MediaCurl : public MediaHandler
     class Callbacks
     {
       public:
-	virtual ~Callbacks() {}
+	virtual ~Callbacks();
         virtual bool progress( int percent ) = 0;
     };
 

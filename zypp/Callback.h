@@ -161,7 +161,7 @@ namespace zypp
 
     /**  */
     template<class TReport>
-      class DistributeReport;
+      struct DistributeReport;
 
     /**  */
     template<class TReport>

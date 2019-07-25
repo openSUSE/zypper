@@ -45,7 +45,7 @@ namespace zypp
   namespace detail
   {
     class RepoIterator;
-    class ByRepository;
+    struct ByRepository;
   }
 
   ///////////////////////////////////////////////////////////////////

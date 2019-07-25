@@ -108,7 +108,7 @@ namespace zypp
 
   public:
     /** Implementation  */
-    class Impl;
+    struct Impl;
 
     /** ServiceInfo typedefs */
     typedef std::set<ServiceInfo> ServiceSet;

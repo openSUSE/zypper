@@ -26,7 +26,7 @@ namespace zypp
 
   class CheckSum;
   class Match;
-  class MatchException;
+  struct MatchException;
   class StrMatcher;
 
   ///////////////////////////////////////////////////////////////////

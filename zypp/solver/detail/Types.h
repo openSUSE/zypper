@@ -38,7 +38,7 @@ namespace zypp
       class Resolver;
       typedef Resolver ResolverInternal;	///< Preferred name in API
 
-      class ItemCapKind;
+      struct ItemCapKind;
       typedef std::list<ItemCapKind> ItemCapKindList;
 
       DEFINE_PTR_TYPE(SolverQueueItem);

@@ -157,7 +157,7 @@ namespace zypp
        */
       virtual std::ostream & dumpAsXmlOn( std::ostream & str, const std::string & content = "" ) const;
 
-      class Impl;
+      struct Impl;
     private:
       /** Pointer to implementation */
       RWCOW_pointer<Impl> _pimpl;

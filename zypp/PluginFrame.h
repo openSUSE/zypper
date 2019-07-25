@@ -247,7 +247,7 @@ namespace zypp
 
     public:
       /** Implementation */
-      class Impl;
+      struct Impl;
     private:
       /** Pointer to implementation */
       RWCOW_pointer<Impl> _pimpl;

@@ -36,7 +36,7 @@ namespace zypp
 
     public:
 
-      class Impl;
+      struct Impl;
 
       typedef std::multimap<std::string, std::string> HeaderList;
 

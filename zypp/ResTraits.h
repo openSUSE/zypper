@@ -89,6 +89,14 @@ namespace zypp
       static bool isPseudoInstalled()   { return traits::isPseudoInstalled( kind ); }
     };
 
+    // Defined in ResKind.cc
+    template<> const ResKind ResTraits<Package>::kind;
+    template<> const ResKind ResTraits<Patch>::kind;
+    template<> const ResKind ResTraits<Pattern>::kind;
+    template<> const ResKind ResTraits<Product>::kind;
+    template<> const ResKind ResTraits<SrcPackage>::kind;
+    template<> const ResKind ResTraits<Application>::kind;
+
   /** ResTraits specialisation for Resolvable.
    * Resolvable is common base and has no Kind value.
    */

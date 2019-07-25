@@ -15,6 +15,8 @@ OPTION (DISABLE_AUTODOCS "Do not require doxygen being installed (required to bu
 #--------------------------------------------------------------------------------
 SET (have_system x)
 
+set (CMAKE_CXX_STANDARD 14)
+
 IF (DEBIAN)
   MESSAGE (STATUS "Building for Debian")
   SET (ENABLE_BUILD_DOCS ON)
@@ -53,8 +55,8 @@ include(CheckCXXCompilerFlag)
 CHECK_C_COMPILER_FLAG("-Werror=format-security" CC_FORMAT_SECURITY)
 CHECK_CXX_COMPILER_FLAG("-Werror=format-security" CXX_FORMAT_SECURITY)
 
-SET( CMAKE_C_FLAGS     "${CMAKE_C_FLAGS} -fno-strict-aliasing -fPIC -g -rdynamic -Wall -Wl,-as-needed -Wp,-D_GLIBCXX_ASSERTIONS" )
-SET( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-strict-aliasing -fPIC -g -rdynamic -Wall -Wl,-as-needed -Wp,-D_GLIBCXX_ASSERTIONS" )
+SET( CMAKE_C_FLAGS     "${CMAKE_C_FLAGS} -fno-strict-aliasing -fPIC -g -Wall -Wp,-D_GLIBCXX_ASSERTIONS" )
+SET( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-strict-aliasing -fPIC -g -Wall -Wp,-D_GLIBCXX_ASSERTIONS" )
 
 SET( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fvisibility-inlines-hidden -Woverloaded-virtual -Wnon-virtual-dtor" )
 
@@ -68,6 +70,12 @@ ENDIF(${CC_FORMAT_SECURITY})
 IF(${CXX_FORMAT_SECURITY})
   SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Werror=format-security")
 ENDIF(${CXX_FORMAT_SECURITY})
+
+if ( NOT "${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
+  #cli args ignored by clang, it still prints a noisy warning though
+  SET( CMAKE_C_FLAGS     "${CMAKE_C_FLAGS} -rdynamic -Wl,-as-needed" )
+  SET( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -rdynamic -Wl,-as-needed" )
+endif()
 
 INCLUDE(CheckFunctionExists)
 CHECK_FUNCTION_EXISTS(pipe2 PIPE2_FOUND)
