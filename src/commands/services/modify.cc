@@ -341,13 +341,11 @@ void ModifyServiceCmd::modifyServicesByOption( Zypper & zypper )
     if ( url.isValid() )
     {
       bool modify = false;
-      if ( local  && ! url.schemeIsDownloading() )
+      if ( local && url.schemeIsLocal() )
         modify = true;
-
-      if ( !modify && remote && url.schemeIsDownloading() )
+      else if ( remote && url.schemeIsRemote() )
         modify = true;
-
-      if ( !modify && schemes.find(url.getScheme()) != schemes.end() )
+      else if ( schemes.count( url.getScheme() ) )
         modify = true;
 
       if ( modify )

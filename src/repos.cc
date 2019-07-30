@@ -805,7 +805,7 @@ void do_init_repos( Zypper & zypper, const Container & container )
 				   it->asUserString().c_str(), "no-cd" ) );
       gData.repos.erase( it++ );
     }
-    else if ( no_remote && it->url().schemeIsDownloading() )
+    else if ( no_remote && !it->url().schemeIsLocal() )	// !IsLocal includes IsRemote and plugin://
     {
       zypper.out().info( str::form(_("Ignoring repository '%s' because of '%s' option."),
 				   it->asUserString().c_str(), "no-remote" ) );
@@ -1482,14 +1482,14 @@ RepoInfoSet collect_repos_by_option( Zypper & zypper, const RepoServiceCommonSel
     if ( selectOpts._local )
     {
       filterList.push_back([]( const RepoInfo &info ) {
-        return ( !info.baseUrlsEmpty() && !info.url().schemeIsDownloading() );
+        return info.url().schemeIsLocal();
       });
     }
 
     if ( selectOpts._remote )
     {
       filterList.push_back([]( const RepoInfo &info ) {
-        return ( !info.baseUrlsEmpty() && info.url().schemeIsDownloading() );
+        return info.url().schemeIsRemote();
       });
     }
 
