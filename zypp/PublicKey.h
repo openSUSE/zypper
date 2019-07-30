@@ -157,6 +157,9 @@ namespace zypp
     /** Key fingerprint.*/
     std::string fingerprint() const;
 
+    /** Key algorithm string like `RSA 2048` */
+    std::string algoName() const;
+
     /** Creation / last modification date (latest selfsig). */
     Date created() const;
 
@@ -311,6 +314,7 @@ namespace zypp
     std::string id() const;			//!< \see \ref PublicKeyData
     std::string name() const;			//!< \see \ref PublicKeyData
     std::string fingerprint() const;		//!< \see \ref PublicKeyData
+    std::string algoName() const;		//!< \see \ref PublicKeyData
     Date created() const;			//!< \see \ref PublicKeyData
     Date expires() const;			//!< \see \ref PublicKeyData
     std::string expiresAsString() const;	//!< \see \ref PublicKeyData

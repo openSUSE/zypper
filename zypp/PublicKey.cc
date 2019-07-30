@@ -102,6 +102,15 @@ namespace zypp
       return ret;
     }
 
+    std::string keyAlgoName( const gpgme_subkey_t & key_r )
+    {
+      std::string ret;
+      if ( const char * n = ::gpgme_pubkey_algo_name( key_r->pubkey_algo ) )
+	ret = str::Str() << n << ' ' << key_r->length;
+      else
+	ret = "?";
+      return ret;
+    }
   } //namespace
   ///////////////////////////////////////////////////////////////////
 
@@ -190,6 +199,7 @@ namespace zypp
     std::string _id;
     std::string _name;
     std::string _fingerprint;
+    std::string _algoName;
     Date        _created;
     Date        _expires;
 
@@ -245,6 +255,7 @@ namespace zypp
 
       data->_expires = zypp::Date(sKey->expires);
       data->_fingerprint = str::asString(sKey->fpr);
+      data->_algoName = keyAlgoName( sKey );
       data->_id = str::asString(sKey->keyid);
 
       //get the primary user ID
@@ -298,6 +309,9 @@ namespace zypp
   std::string PublicKeyData::fingerprint() const
   { return _pimpl->_fingerprint; }
 
+  std::string PublicKeyData::algoName() const
+  {  return _pimpl->_algoName; }
+
   Date PublicKeyData::created() const
   { return _pimpl->_created; }
 
@@ -345,13 +359,14 @@ namespace zypp
   }
 
   PublicKeyData::AsciiArt PublicKeyData::asciiArt() const
-  { return AsciiArt( fingerprint() /* TODO: key algorithm could be added as top tile. */ ); }
+  { return AsciiArt( fingerprint(), algoName() ); }
 
   std::ostream & dumpOn( std::ostream & str, const PublicKeyData & obj )
   {
     str << "[" << obj.name() << "]" << endl;
     str << "  fpr " << obj.fingerprint() << endl;
     str << "   id " << obj.id() << endl;
+    str << "  alg " << obj.algoName() << endl;
     str << "  cre " << Date::ValueType(obj.created()) << ' ' << obj.created() << endl;
     str << "  exp " << Date::ValueType(obj.expires()) << ' ' << obj.expiresAsString() << endl;
     str << "  ttl " << obj.daysToLive() << endl;
@@ -514,6 +529,9 @@ namespace zypp
 
   std::string PublicKey::fingerprint() const
   { return keyData().fingerprint(); }
+
+  std::string PublicKey::algoName() const
+  { return keyData().algoName(); }
 
   Date PublicKey::created() const
   { return keyData().created(); }
