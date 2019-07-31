@@ -706,7 +706,7 @@ namespace zypp
 	// _specMap[root] - scan root/zypp.conf and root/multiversion.d
 
 	if ( root_r.empty() )
-	  root_r == "/";
+	  root_r = "/";
 	bool cacheHit = _specMap.count( root_r );
 	MultiversionSpec & ret( _specMap[root_r] );	// creates new entry on the fly
 
