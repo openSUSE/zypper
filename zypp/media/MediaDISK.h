@@ -27,9 +27,6 @@ namespace zypp {
     class MediaDISK : public MediaHandler {
 
       private:
-
-        unsigned long _mountflags;
-
         std::string _device;
         std::string _filesystem;
 

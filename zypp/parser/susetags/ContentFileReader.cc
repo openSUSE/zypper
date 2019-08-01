@@ -43,8 +43,7 @@ namespace zypp
       struct ContentFileReader::Impl
       {
 	public:
-	  Impl( const ContentFileReader & parent_r )
-	  : _parent( parent_r )
+	  Impl()
 	  {}
 
 	  RepoIndex & repoindex()
@@ -85,7 +84,6 @@ namespace zypp
 	  std::string _inputname;
 
 	private:
-	  const ContentFileReader & _parent;
 	  RepoIndex_Ptr      _repoindex;
       };
       ///////////////////////////////////////////////////////////////////
@@ -119,7 +117,7 @@ namespace zypp
       //
       void ContentFileReader::beginParse()
       {
-	_pimpl.reset( new Impl(*this) );
+	_pimpl.reset( new Impl() );
         // actually mandatory, but in case they were forgotten...
         _pimpl->repoindex().descrdir = "suse/setup/descr";
         _pimpl->repoindex().datadir = "suse";

@@ -36,7 +36,6 @@ namespace zypp
     {
       private:
         Pathname      _isofile;
-        MediaAccessId _isosource;
         std::string   _filesystem;
 
       protected:
