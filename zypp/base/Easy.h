@@ -13,6 +13,7 @@
 #define ZYPP_BASE_EASY_H
 
 #include <cstdio>
+#include <type_traits>
 
 /** Convenient for-loops using iterator.
  * \code
@@ -88,6 +89,28 @@
 #define NON_MOVABLE_BUT_COPY( CLASS ) 		\
   NON_MOVABLE(CLASS);				\
   DEFAULT_COPYABLE(CLASS)
+
+
+/** Prevent an universal ctor to be chosen as copy ctor.
+ * \code
+ *  struct FeedStrings
+ *  {
+ *    template<typename TARG, typename X = disable_use_as_copy_ctor<FeedStrings,TARG>>
+ *    FeedStrings( TARG && arg_r )
+ *    : _value { std::forward<TARG>( arg_r ) }
+ *    {}
+ *
+ *    // Same with variadic template. Could be chosen as copy_ctor.
+ *    template<typename ... Us>
+ *    FeedStrings( Us &&... us )
+ *    : ...
+ *
+ *  private:
+ *    std::string _value;
+ * \endcode
+ */
+template<typename TBase, typename TDerived>
+using disable_use_as_copy_ctor = typename std::enable_if<!std::is_base_of<TBase,typename std::remove_reference<TDerived>::type>::value>::type;
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
