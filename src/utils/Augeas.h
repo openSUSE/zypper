@@ -42,7 +42,7 @@ public:
   void save();
 
   /** Actually the */
-  Pathname getSaveFile() const;
+  zypp::Pathname getSaveFile() const;
 
 public:
   class Impl;
