@@ -87,7 +87,7 @@ namespace
     {}
   };
 
-  class AugPath;
+  struct AugPath;
 
   ///////////////////////////////////////////////////////////////////
   /// \brief Shared reference to ::augeas (calling ::aug_close if done).
