@@ -288,7 +288,7 @@ public:
   void sort( std::list<unsigned> && byColumns_r )	{ if ( byColumns_r.size() ) _rows.sort( TableRow::Less( std::move(byColumns_r) ) ); }
 
   /** Custom sort */
-  template<class TCompare, typename std::enable_if<!std::is_integral<TCompare>::value>::type* = nullptr>
+  template<class TCompare, std::enable_if_t<!std::is_integral<TCompare>::value, int> = 0>
   void sort( TCompare && less_r )		{ _rows.sort( std::forward<TCompare>(less_r) ); }
 
   void lineStyle( TableLineStyle st );

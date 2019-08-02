@@ -703,7 +703,7 @@ public:
   virtual void warning(const std::string & msg, Verbosity verbosity = NORMAL, Type mask = TYPE_ALL) = 0;
 
   /** Convenience class for error reporting. */
-  class Error;
+  struct Error;
 
   /**
    * Show an error message and an optional hint.
@@ -736,7 +736,7 @@ public:
   class ProgressBar;
 
   /** Convenience class for download progress output. */
-  class DownloadProgress;
+  struct DownloadProgress;
 
   /**
    * Start of an operation with reported progress.
