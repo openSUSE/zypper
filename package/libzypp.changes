@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Aug  5 13:03:55 CEST 2019 - ma@suse.de
+
+- PublicKey::algoName: supply key algorithm and length
+- version 17.14.0 (12)
+
+-------------------------------------------------------------------
 Thu Jul 25 17:25:10 CEST 2019 - ma@suse.de
 
 - MediaCurl: Fix leaking filedescriptors (bsc#1116995)
