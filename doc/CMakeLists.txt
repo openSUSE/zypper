@@ -1,6 +1,9 @@
+if (NOT JEZYPP)
+  SET (my_MAN8 zypper.8 zypper-log.8 zypp-refresh.8)
+else (NOT JEZYPP)
+  SET (my_MAN8 zypper.8)
+endif (NOT JEZYPP)
 
-SET (my_MAN8
-     zypper.8 zypper-log.8 zypp-refresh.8)
 
 FILE( GLOB my_MANINCLUDE zypper.8.d/*)
 

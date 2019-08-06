@@ -15,6 +15,10 @@
 # Please submit bugfixes or comments via http://bugs.opensuse.org/
 #
 
+%if 0%{?rhel} >= 8
+# JEZYPP to support SCC for RES
+%define jezypp %{rhel}
+%endif
 
 Name:           @PACKAGE@
 BuildRequires:  augeas-devel >= 0.5.0
@@ -26,7 +30,7 @@ BuildRequires:  boost-devel >= 1.33.1
 BuildRequires:  cmake >= 2.4.6
 BuildRequires:  gcc-c++ >= 4.7
 BuildRequires:  gettext-devel >= 0.15
-BuildRequires:  libzypp-devel >= 16.20.0
+BuildRequires:  libzypp-devel >= 16.20.3
 BuildRequires:  readline-devel >= 5.1
 BuildRequires:  libxml2-devel
 Requires:       procps
@@ -66,6 +70,7 @@ Authors:
     Martin Vidner <mvidner@suse.cz>
     Josef Reidinger <jreidinger@suse.cz>
 
+%if !0%{?jezypp}
 %package log
 %if 0%{?suse_version} && 0%{?suse_version} < 1140
 Requires:       python >= 2.6
@@ -101,6 +106,7 @@ provides compatibility to Debian's aptitude command using zypper
 Authors:
 --------
     Bernhard M. Wiedemann <bernhard+aptitude4zypp lsmod de>
+%endif
 
 %prep
 %setup -q
@@ -109,6 +115,11 @@ Authors:
 mkdir -p build
 cd build
 
+unset EXTRA_CMAKE_OPTIONS
+%if 0%{?jezypp}
+export EXTRA_CMAKE_OPTIONS="-DJEZYPP=%{jezypp}"
+%endif
+
 cmake -DCMAKE_INSTALL_PREFIX=%{_prefix} \
       -DSYSCONFDIR=%{_sysconfdir} \
       -DMANDIR=%{_mandir} \
@@ -116,56 +127,71 @@ cmake -DCMAKE_INSTALL_PREFIX=%{_prefix} \
       -DCMAKE_C_FLAGS_RELEASE:STRING="$RPM_OPT_FLAGS" \
       -DCMAKE_CXX_FLAGS_RELEASE:STRING="$RPM_OPT_FLAGS" \
       -DCMAKE_BUILD_TYPE=Release \
+      ${EXTRA_CMAKE_OPTIONS} \
       ..
 
 #gettextize -f
 make %{?_smp_mflags}
+%if !0%{?jezypp}
 make -C po %{?_smp_mflags} translations
+%endif
 
 %install
 cd build
 make install DESTDIR=$RPM_BUILD_ROOT
+%if !0%{?jezypp}
 make -C po install DESTDIR=$RPM_BUILD_ROOT
+%endif
 
 mkdir -p $RPM_BUILD_ROOT%{_prefix}/lib/zypper
 mkdir -p $RPM_BUILD_ROOT%{_prefix}/lib/zypper/commands
 
+%if !0%{?jezypp}
 # yzpper symlink
 ln -s zypper $RPM_BUILD_ROOT%{_bindir}/yzpper
 
 # Create filelist with translations
 cd ..
 %{find_lang} zypper
+%endif
 %{__install} -d -m755 $RPM_BUILD_ROOT%{_var}/log
 touch $RPM_BUILD_ROOT%{_var}/log/zypper.log
 
 %clean
 rm -rf "$RPM_BUILD_ROOT"
 
+%if !0%{?jezypp}
 %files -f zypper.lang
+%else
+%files
+%endif
 %defattr(-,root,root)
 %config(noreplace) %{_sysconfdir}/zypp/zypper.conf
 %config(noreplace) %{_sysconfdir}/logrotate.d/zypper.lr
-%config(noreplace) %{_sysconfdir}/logrotate.d/zypp-refresh.lr
-%{_sysconfdir}/bash_completion.d/zypper.sh
 %{_bindir}/zypper
-%{_bindir}/yzpper
-%{_bindir}/installation_sources
-%{_sbindir}/zypp-refresh
 %dir %{_datadir}/zypper
 %{_datadir}/zypper/zypper.aug
-%dir %{_datadir}/zypper/xml
-%{_datadir}/zypper/xml/xmlout.rnc
 %{_prefix}/lib/zypper
 %doc %{_mandir}/man8/zypper.8*
-%doc %{_mandir}/man8/zypp-refresh.8*
 %doc %dir %{_datadir}/doc/packages/zypper
 %doc %{_datadir}/doc/packages/zypper/COPYING
 %doc %{_datadir}/doc/packages/zypper/HACKING
+
+%if !0%{?jezypp}
+%config(noreplace) %{_sysconfdir}/logrotate.d/zypp-refresh.lr
+%{_sysconfdir}/bash_completion.d/zypper.sh
+%{_bindir}/installation_sources
+%{_bindir}/yzpper
+%{_sbindir}/zypp-refresh
+%dir %{_datadir}/zypper/xml
+%{_datadir}/zypper/xml/xmlout.rnc
+%doc %{_mandir}/man8/zypp-refresh.8*
+%endif
 # declare ownership of the log file but prevent
 # it from being erased by rpm -e
 %ghost %config(noreplace) %attr (640,root,root) %{_var}/log/zypper.log
 
+%if !0%{?jezypp}
 %files log
 %defattr(-,root,root)
 %{_sbindir}/zypper-log
@@ -177,5 +203,6 @@ rm -rf "$RPM_BUILD_ROOT"
 %{_bindir}/apt-get
 %dir %{_sysconfdir}/zypp/apt-packagemap.d/
 %config(noreplace) %{_sysconfdir}/zypp/apt-packagemap.d/*
+%endif
 
 %changelog

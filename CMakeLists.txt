@@ -11,6 +11,25 @@ SET( CMAKE_MODULE_PATH
 INCLUDE(ZyppCommon)
 
 OPTION (ENABLE_BUILD_TRANS "Build translation files by default?" ON)
+#--------------------------------------------------------------------------------
+SET (have_system x)
+
+IF (JEZYPP)
+  MESSAGE (STATUS "Building JEZYPP to support SCC for RES")
+  SET (ENABLE_BUILD_TRANS OFF)
+  ADD_DEFINITIONS (-DJEZYPP)
+  SET (have_system ${have_system}x)
+ENDIF (JEZYPP)
+
+IF (${have_system} STREQUAL x)
+  MESSAGE (STATUS "Building for SUSE")
+  ADD_DEFINITIONS (-DSUSE)
+ENDIF (${have_system} STREQUAL x)
+
+IF (${have_system} STRGREATER xx)
+  MESSAGE (FATAL_ERROR "Can only build for one system type.")
+ENDIF (${have_system} STRGREATER xx)
+#--------------------------------------------------------------------------------
 
 # VERSION
 INCLUDE( ${ZYPPER_SOURCE_DIR}/VERSION.cmake )
@@ -90,6 +109,7 @@ INSTALL(
   DESTINATION ${SYSCONFDIR}/zypp
 )
 
+if (NOT JEZYPP)
 # zypper-log tool
 INSTALL(
   PROGRAMS tools/zypper-log
@@ -105,3 +125,4 @@ INSTALL(
   DIRECTORY tools/apt-packagemap.d/
   DESTINATION ${SYSCONFDIR}/zypp/apt-packagemap.d
 )
+endif (NOT JEZYPP)

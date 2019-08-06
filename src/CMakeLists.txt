@@ -122,6 +122,7 @@ INSTALL(
 
 MESSAGE ( "** ZYpper binary will be installed in ${INSTALL_PREFIX}/bin" )
 
+if (NOT JEZYPP)
 INSTALL(  FILES
   output/xmlout.rnc
   DESTINATION ${CMAKE_INSTALL_PREFIX}/share/zypper/xml
@@ -136,6 +137,12 @@ INSTALL(
   TARGETS zypp-refresh
   RUNTIME DESTINATION ${INSTALL_PREFIX}/sbin
 )
+# logrotate config file
+INSTALL(
+  FILES zypp-refresh.lr
+  DESTINATION ${SYSCONFDIR}/logrotate.d
+)
+
 
 # bash completion script
 INSTALL(
@@ -144,16 +151,16 @@ INSTALL(
   RENAME zypper.sh
 )
 
-
 # installation_sources script
 INSTALL(
   PROGRAMS installation_sources
   DESTINATION ${INSTALL_PREFIX}/bin
 )
+endif (NOT JEZYPP)
 
 # logrotate config file
 INSTALL(
-  FILES zypper.lr zypp-refresh.lr
+  FILES zypper.lr
   DESTINATION ${SYSCONFDIR}/logrotate.d
 )
 
