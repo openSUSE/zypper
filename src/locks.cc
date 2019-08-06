@@ -140,11 +140,11 @@ namespace out
 	int res = sat::compareByN( lhs, rhs );			// ascending  l<r
 	if ( res == 0 )
 	  res = rhs.arch().compare( lhs.arch() );		// descending r<l
-	  if ( res == 0 )
-	    res = rhs.edition().compare( lhs.edition() );	// descending r<l
-	    if ( res == 0 )
-	      res = lhs.repository().asUserString().compare( rhs.repository().asUserString() );	// ascending  l<r
-	      return res;
+	if ( res == 0 )
+	  res = rhs.edition().compare( lhs.edition() );	// descending r<l
+	if ( res == 0 )
+	  res = lhs.repository().asUserString().compare( rhs.repository().asUserString() );	// ascending  l<r
+	return res;
       }
     };
     /** Ordered MatchDetails */
