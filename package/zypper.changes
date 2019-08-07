@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Wed Aug  7 09:52:36 CEST 2019 - ma@suse.de
+
+- Fix local/remote url classification.
+- Rephrase file conflict check summary (bsc#1140039)
+- Fix bash completions option detection (bsc#1049825)
+- BuildRequires:  libzypp-devel >= 17.14.0
+- version 1.14.29
+
+-------------------------------------------------------------------
 Tue Jun 11 13:54:17 CEST 2019 - ma@suse.de
 
 - man: split '--with[out]' like options to ease searching.
