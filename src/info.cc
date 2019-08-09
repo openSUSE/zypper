@@ -283,7 +283,7 @@ void printDefaultInfo(Zypper & zypper, const ui::Selectable & s, const PrintInfo
   printCommonData( theone, p );
 
   printSummaryDescDeps( theone, p, options_r );
-  zypper.out().info( str::Str() << p );
+  zypper.out().info( str::Str() << p, Out::QUIET );
 }
 
 /**
@@ -348,7 +348,7 @@ void printPkgInfo(Zypper & zypper, const ui::Selectable & s , const PrintInfoOpt
   p.add( _("Source package"),	package->sourcePkgLongName() );
 
   printSummaryDescDeps( theone, p, options_r );
-  zypper.out().info( str::Str() << p );
+  zypper.out().info( str::Str() << p, Out::QUIET );
 }
 
 /**
@@ -393,7 +393,7 @@ void printPatchInfo(Zypper & zypper, const ui::Selectable & s , const PrintInfoO
   p.add( _("Interactive"),	patchInteractiveFlags( *patch ) );	// print interactive flags the same style as list-patches
 
   printSummaryDescDeps( theone, p, options_r );
-  zypper.out().info( str::Str() << p );
+  zypper.out().info( str::Str() << p, Out::QUIET );
 }
 
 /**
@@ -478,7 +478,7 @@ void printPatternInfo(Zypper & zypper, const ui::Selectable & s , const PrintInf
       p.addDetail( _("Contents"),	str::Str() << t );
     }
   }
-  zypper.out().info( str::Str() << p );
+  zypper.out().info( str::Str() << p, Out::QUIET );
 }
 
 /**
@@ -618,7 +618,7 @@ void printProductInfo(Zypper & zypper, const ui::Selectable & s, const PrintInfo
   p.add( _("Short Name"),		product->shortName() );
 
   printSummaryDescDeps( theone, p , options_r );
-  zypper.out().info( str::Str() << p );
+  zypper.out().info( str::Str() << p, Out::QUIET );
 }
 
 /**
@@ -703,5 +703,5 @@ void printSrcPackageInfo(Zypper & zypper, const ui::Selectable & s, const PrintI
   }
   ///////////////////////////////////////////////////////////////////
 
-  zypper.out().info( str::Str() << p );
+  zypper.out().info( str::Str() << p, Out::QUIET );
 }
