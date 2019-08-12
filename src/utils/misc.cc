@@ -31,6 +31,41 @@
 #include "utils/misc.h"
 #include "utils/XmlFilter.h"
 
+#ifdef JEZYPP_PRODTRANS
+
+Pathname FakeProduct::Impl::proddir() const
+{ return Pathname::assertprefix( Zypper::instance().globalOpts().root_dir, "/etc/products.d" ); }
+
+std::string FakeProduct::flavor() const
+{
+  // Look for a  provider of 'product_flavor(name) = version'
+  // within the same repo. Unlike the reference package, we
+  // can be relaxed and ignore the architecture.
+  Capability identCap( str::form( "product_flavor(%s) = %s", name().c_str(), edition().c_str() ) );
+
+  sat::WhatProvides providers( identCap );
+  for_( it, providers.begin(), providers.end() )
+  {
+    if ( it->repository() == repository() )
+    {
+      // Got the package now try to get the provided 'flavor(...)'
+      Capabilities provides( it->provides() );
+      for_( cap, provides.begin(), provides.end() )
+      {
+	std::string capstr( cap->asString() );
+	if ( str::hasPrefix( capstr, "flavor(" ) )
+	{
+	  capstr = str::stripPrefix( capstr, "flavor(" );
+	  capstr.erase( capstr.size()-1 ); // trailing ')'
+	  return capstr;
+	}
+      }
+    }
+  }
+  return std::string();
+}
+#endif // JEZYPP_PRODTRANS
+
 extern ZYpp::Ptr God;
 
 bool runningOnEnterprise()
@@ -562,7 +597,12 @@ std::string & indent( std::string & text, int columns )
  * \todo this is an ugly quick-hack code, let's do something reusable and maintainable in libzypp later
  */
 // ----------------------------------------------------------------------------
+#ifdef JEZYPP_PRODTRANS
+template <class TProduct>
+std::string productAsXML( const TProduct & p, bool is_installed )
+#else
 std::string asXML( const Product & p, bool is_installed )
+#endif // JEZYPP_PRODTRANS
 {
   std::ostringstream str;
   {
@@ -617,6 +657,13 @@ std::string asXML( const Product & p, bool is_installed )
   }
   return str.str();
 }
+#ifdef JEZYPP_PRODTRANS
+std::string asXML( const Product & p, bool is_installed )
+{ return productAsXML( p, is_installed ); }
+
+std::string asXML( const FakeProduct & p, bool is_installed )
+{ return productAsXML( p, is_installed ); }
+#endif // JEZYPP_PRODTRANS
 
 std::string asXML( const Pattern & p, bool is_installed )
 {

@@ -508,7 +508,12 @@ static void list_products_xml( Zypper & zypper )
   bool notinst_only = zypper.cOpts().count("not-installed-only");
 
   cout << "<product-list>" << endl;
+#ifdef JEZYPP_PRODTRANS
+  sat::WhatProvides q( Capability( "product()" ) );
+  for_( it, q.poolItemBegin(), q.poolItemEnd() )
+#else
   for_( it, God->pool().byKindBegin(ResKind::product), God->pool().byKindEnd(ResKind::product) )
+#endif // JEZYPP_PRODTRANS
   {
     if ( it->status().isInstalled() && notinst_only )
       continue;
@@ -516,14 +521,22 @@ static void list_products_xml( Zypper & zypper )
       continue;
     if ( repofilter && it->repository().info().name() == "@System" )
       continue;
+#ifdef JEZYPP_PRODTRANS
+    FakeProduct product { *it };
+#else
     Product::constPtr product = asKind<Product>(it->resolvable());
+#endif // JEZYPP_PRODTRANS
     cout << asXML( *product, it->status().isInstalled() ) << endl;
   }
   cout << "</product-list>" << endl;
 }
 
 // common product_table_row data
+#ifdef JEZYPP_PRODTRANS
+static void add_product_table_row( Zypper & zypper, TableRow & tr,  const FakeProduct & product, bool forceShowAsBaseProduct_r = false )
+#else
 static void add_product_table_row( Zypper & zypper, TableRow & tr,  const Product::constPtr & product, bool forceShowAsBaseProduct_r = false )
+#endif // JEZYPP_PRODTRANS
 {
   // repository
   tr << product->repoInfo().name();
@@ -561,7 +574,12 @@ static void list_product_table( Zypper & zypper )
   bool installed_only = zypper.cOpts().count("installed-only");
   bool notinst_only = zypper.cOpts().count("not-installed-only");
 
+#ifdef JEZYPP_PRODTRANS
+  sat::WhatProvides q( Capability( "product()" ) );
+  for_( it, q.selectableBegin(), q.selectableEnd() )
+#else
   for_( it, God->pool().proxy().byKindBegin(ResKind::product), God->pool().proxy().byKindEnd(ResKind::product) )
+#endif // JEZYPP_PRODTRANS
   {
     ui::Selectable::constPtr s = *it;
 
@@ -575,7 +593,13 @@ static void list_product_table( Zypper & zypper )
     // show available objects
     for_( it, s->availableBegin(), s->availableEnd() )
     {
+#ifdef JEZYPP_PRODTRANS
+      FakeProduct fakeprod { *it };
+      if ( ! fakeprod.isProduct() )	// in case not all items in the Selectable actually provide a product
+	continue;
+#else
       Product::constPtr product = asKind<Product>(it->resolvable());
+#endif // JEZYPP_PRODTRANS
       TableRow tr;
       PoolItem pi = *it;
       bool isLocked = pi.status().isLocked();
@@ -589,7 +613,11 @@ static void list_product_table( Zypper & zypper )
             continue;
           tr << lockStatusTag( "i", isLocked, pi.identIsAutoInstalled() );
           // isTargetDistribution (i.e. is Base Product) needs to be taken from the installed item!
+#ifdef JEZYPP_PRODTRANS
+          forceShowAsBaseProduct = FakeProduct::isTargetDistribution( installed );
+#else
           forceShowAsBaseProduct = installed->asKind<Product>()->isTargetDistribution();
+#endif // JEZYPP_PRODTRANS
           missedInstalled = false;
 	  // bnc#841473: Downside of reporting the installed product (repo: @System)
 	  // instead of the available one (repo the product originated from) is that
@@ -609,7 +637,11 @@ static void list_product_table( Zypper & zypper )
           continue;
         tr << lockStatusTag( "", isLocked );
       }
+#ifdef JEZYPP_PRODTRANS
+      add_product_table_row( zypper, tr, fakeprod, forceShowAsBaseProduct );
+#else
       add_product_table_row( zypper, tr, product, forceShowAsBaseProduct );
+#endif // JEZYPP_PRODTRANS
       tbl << tr;
     }
 
@@ -622,7 +654,11 @@ static void list_product_table( Zypper & zypper )
       TableRow tr;
       bool isLocked = installed.status().isLocked();
       tr << lockStatusTag( "i", isLocked, installed.identIsAutoInstalled() );
+#ifdef JEZYPP_PRODTRANS
+      add_product_table_row( zypper, tr, installed );
+#else
       add_product_table_row( zypper, tr, installed->asKind<Product>() );
+#endif // JEZYPP_PRODTRANS
       tbl << tr;
     }
   }
