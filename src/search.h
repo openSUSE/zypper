@@ -13,6 +13,9 @@
 
 #include "Zypper.h"
 #include "Table.h"
+#ifdef JEZYPP_PRODTRANS
+#include "utils/misc.h"
+#endif // JEZYPP_PRODTRANS
 
 /**
  * Functor for filling search output table in rug style.
@@ -24,6 +27,9 @@ struct FillSearchTableSolvable
   /** Aliases of repos specified as --repo */
   std::set<std::string> _repos;
   TriBool _inst_notinst;
+#ifdef JEZYPP_PRODTRANS
+  const Prodtranstable * _prodtranstable = nullptr;
+#endif // JEZYPP_PRODTRANS
 
   FillSearchTableSolvable(
       Table & table,
@@ -52,6 +58,9 @@ struct FillSearchTableSelectable
   /** Aliases of repos specified as --repo */
   std::set<std::string> _repos;
   TriBool inst_notinst;
+#ifdef JEZYPP_PRODTRANS
+  Prodtranstable * _prodtranstable = nullptr;
+#endif // JEZYPP_PRODTRANS
 
   FillSearchTableSelectable(
       Table & table, TriBool installed_only = indeterminate);

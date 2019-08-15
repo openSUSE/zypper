@@ -32,6 +32,9 @@
 #include <zypp/PoolQuery.h>
 #include <zypp/Locks.h>
 #include <zypp/Edition.h>
+#ifdef JEZYPP_PRODTRANS
+#include <zypp/PoolQueryResult.h>
+#endif // JEZYPP_PRODTRANS
 
 #include <zypp/target/rpm/RpmHeader.h> // for install <.rpmURI>
 
@@ -4439,6 +4442,12 @@ void Zypper::doCommand()
       }
     }
 
+#ifdef JEZYPP_PRODTRANS
+    bool prodtrans = false;	// '-t product NAME' must search for providers of 'product() = NAME'
+    PoolQueryResult prodtransquery;
+    Prodtranstable prodtranstable;
+#endif // JEZYPP_PRODTRANS
+
     if ( copts.count("case-sensitive") )
       query.setCaseSensitive();
 
@@ -4455,7 +4464,14 @@ void Zypper::doCommand()
           setExitCode( ZYPPER_EXIT_ERR_INVALID_ARGS );
           return;
         }
+#ifdef JEZYPP_PRODTRANS
+	if ( kind == ResKind::product )
+	  prodtrans = true;
+	else
+	  query.addKind( kind );
+#else
         query.addKind( kind );
+#endif // JEZYPP_PRODTRANS
       }
     }
 
@@ -4478,10 +4494,16 @@ void Zypper::doCommand()
       }
     }
 
+
+
     bool details = _copts.count("details") || _copts.count("verbose");
+#ifdef JEZYPP_PRODTRANS
+    if ( ! prodtrans ) {
+#endif // JEZYPP_PRODTRANS
     // add argument strings and attributes to query
     for_( it, _arguments.begin(), _arguments.end() )
     {
+      cout << "+++" << prodtrans << " " << *it << endl;
       Capability cap = Capability::guessPackageSpec( *it );
       std::string name = cap.detail().name().asString();
 
@@ -4563,6 +4585,56 @@ void Zypper::doCommand()
         query.addAttribute( sat::SolvAttr::description, name );
       }
     }
+#ifdef JEZYPP_PRODTRANS
+    } else {
+      // Get the FakeProduct matching _arguments....
+      // Printing: We basically pass the release-package query result to the FillSearchTable*
+      // functors and provide a lookuptable to actually print the corresponding FakeProduct.
+      sat::WhatProvides q( Capability( "product()" ) );
+      if ( !q.empty() )
+      {
+	if ( _arguments.empty() )
+	{
+	  prodtransquery = PoolQueryResult( q.begin(), q.end() );
+	  for ( sat::Solvable solv : q )
+	    prodtranstable[solv] = FakeProduct( solv );
+	}
+	else
+	{
+	  // keeping it simple: args are expected to denote product names. nothing else.
+	  std::vector<StrMatcher> matcher;
+	  for ( std::string name : _arguments )
+	  {
+	    Match::Mode mode = query.matchMode();
+
+	    if ( mode != Match::REGEX && mode != Match::STRING && name.find_first_of("?*") != std::string::npos )
+	      mode = Match::GLOB;
+
+	    if ( mode != Match::GLOB && mode != Match::STRING && str::regex_match( name.c_str(), std::string("^/.*/$") ) )
+	    {
+	      name = name.substr( 1, name.size()-2 );
+	      mode = Match::REGEX;
+	    }
+
+	    matcher.push_back( StrMatcher( name, mode ) );
+	  }
+
+	  for ( sat::Solvable solv : q )
+	  {
+	    FakeProduct prod( solv );
+	    for ( const StrMatcher & m : matcher )
+	    {
+	      if ( m( prod.name() ) )
+	      {
+		prodtransquery += solv;
+		prodtranstable[solv] = prod;
+	      }
+	    }
+	  }
+	}
+      }
+    }
+#endif // JEZYPP_PRODTRANS
 
     // Output query result...
     Table t;
@@ -4578,7 +4650,11 @@ void Zypper::doCommand()
       else if ( details )
       {
         FillSearchTableSolvable callback( t, inst_notinst );
+#ifdef JEZYPP_PRODTRANS
+	if ( _copts.count("verbose") && !prodtrans )	// no support for match details
+#else
 	if ( _copts.count("verbose") )
+#endif // JEZYPP_PRODTRANS
 	{
 	  // Option 'verbose' shows where (e.g. in 'requires', 'name') the search has matched.
 	  // Info is available from PoolQuery::const_iterator.
@@ -4586,12 +4662,29 @@ void Zypper::doCommand()
 	    callback( it );
 	}
 	else
+#ifdef JEZYPP_PRODTRANS
+	  if ( prodtrans )
+	  {
+	    callback._prodtranstable = &prodtranstable;
+	    for ( const auto slv : prodtransquery )
+	      callback( slv );
+	  }
+	  else
+#endif // JEZYPP_PRODTRANS
 	  for ( const auto slv : query )
 	    callback( slv );
       }
       else
       {
         FillSearchTableSelectable callback( t, inst_notinst );
+#ifdef JEZYPP_PRODTRANS
+	if ( prodtrans )
+	{
+	  callback._prodtranstable = &prodtranstable;
+	  invokeOnEach( prodtransquery.selectableBegin(), prodtransquery.selectableEnd(), callback );
+	}
+	else
+#endif // JEZYPP_PRODTRANS
         invokeOnEach( query.selectableBegin(), query.selectableEnd(), callback );
       }
 

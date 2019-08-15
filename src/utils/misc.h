@@ -295,6 +295,9 @@ inline std::ostream & operator<<( std::ostream & str, const FakeProduct & obj )
 
 // for zypper -x products
 std::string asXML( const FakeProduct & p, bool is_installed );
+
+// fake query result, map release-package to Fakeproduct
+typedef std::map<sat::Solvable,FakeProduct> Prodtranstable;
 #endif // JEZYPP_PRODTRANS
 
 

@@ -106,6 +106,23 @@ bool FillSearchTableSolvable::addPicklistItem( const ui::Selectable::constPtr & 
     }
   }
 
+#ifdef JEZYPP_PRODTRANS
+  if ( _prodtranstable )
+  {
+    sat::Solvable rp { pi.satSolvable() };
+    const FakeProduct & pi { (*_prodtranstable).at(rp) };
+    row
+      << pi->name()
+      << kind_to_string_localized( pi->kind(), 1 )
+      << pi->edition().asString()
+      << pi->arch().asString()
+      << ( pi->isSystem()
+	? (std::string("(") + _("System Packages") + ")")
+	: pi->repository().asUserString() );
+  }
+  else
+  {
+#endif // JEZYPP_PRODTRANS
   row
     << pi->name()
     << kind_to_string_localized( pi->kind(), 1 )
@@ -114,6 +131,9 @@ bool FillSearchTableSolvable::addPicklistItem( const ui::Selectable::constPtr & 
     << ( pi->isSystem()
        ? (std::string("(") + _("System Packages") + ")")
        : pi->repository().asUserString() );
+#ifdef JEZYPP_PRODTRANS
+  }
+#endif // JEZYPP_PRODTRANS
 
   *_table << row;
   return true;	// actually added a row
@@ -268,9 +288,30 @@ bool FillSearchTableSelectable::operator()( const ui::Selectable::constPtr & s )
     row << lockStatusTag( "", isLocked );
   }
 
+#ifdef JEZYPP_PRODTRANS
+  if ( _prodtranstable )
+  {
+    FakeProduct fp;
+    for ( auto pi : s->picklist() )
+    {
+      auto it = (*_prodtranstable).find( pi.satSolvable() );
+      if ( it != (*_prodtranstable).end() )
+	fp = it->second;
+    }
+
+    row << fp->name();
+    row << fp->summary();
+    row << kind_to_string_localized( fp.kind(), 1 );
+  }
+  else
+  {
+#endif // JEZYPP_PRODTRANS
   row << s->name();
   row << s->theObj()->summary();
   row << kind_to_string_localized( s->kind(), 1 );
+#ifdef JEZYPP_PRODTRANS
+  }
+#endif // JEZYPP_PRODTRANS
   *_table << row;
   return true;
 }
