@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Fri Aug 16 16:25:24 CEST 2019 - ma@suse.com
+
+- JEZYPP to support SCC for RES
+  product and search commands adapted
+- version 1.13.54
+
+-------------------------------------------------------------------
 Fri Jul 19 11:22:17 CEST 2019 - ma@suse.de
 
 - Rephrase file conflict check summary (bsc#1140039)
