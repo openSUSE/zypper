@@ -29,8 +29,6 @@ struct FillSearchTableSolvable
       Table & table,
       TriBool inst_notinst = indeterminate );
 
-  /** Add all items within this Selectable */
-  bool operator()( const ui::Selectable::constPtr & sel ) const;
   /** Add this PoolItem */
   bool operator()( const PoolItem & pi ) const;
   /** Add this Solvable */

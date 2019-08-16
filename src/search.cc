@@ -174,19 +174,6 @@ bool FillSearchTableSolvable::operator()( const PoolItem & pi ) const
 bool FillSearchTableSolvable::operator()( sat::Solvable solv ) const
 { return operator()( PoolItem( solv ) ); }
 
-bool FillSearchTableSolvable::operator()( const ui::Selectable::constPtr & sel ) const
-{
-  bool ret = false;
-  // picklist: available items list prepended by those installed items not identicalAvailable
-  for_( it, sel->picklistBegin(), sel->picklistEnd() )
-  {
-    if ( addPicklistItem( sel, *it ) || !ret )
-      ret = true;	// at least one row added
-  }
-  return ret;
-}
-
-
 FillSearchTableSelectable::FillSearchTableSelectable( Table & table, TriBool installed_only )
 : _table( &table )
 , inst_notinst( installed_only )
