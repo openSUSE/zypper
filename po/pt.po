@@ -15,16 +15,16 @@ msgstr ""
 "Project-Id-Version: zypper.pt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-07-18 13:07+0200\n"
-"PO-Revision-Date: 2016-10-11 11:27+0000\n"
-"Last-Translator: Pedro Rosado <pdvrosado@gmail.com>\n"
+"PO-Revision-Date: 2019-08-17 14:51+0000\n"
+"Last-Translator: Miguel Martins <miguelrosa.programacao@gmail.com>\n"
 "Language-Team: Portuguese <https://l10n.opensuse.org/projects/zypper/master/"
 "pt/>\n"
 "Language: pt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 2.6\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Weblate 3.6.1\n"
 
 #: src/SolverRequester.h:52
 #, boost-format
@@ -122,15 +122,15 @@ msgstr "A aceitar um ficheiro %s não assinado do repositório '%s'."
 
 #. translator: %1% is a file name
 #: src/callbacks/keyring.h:156
-#, fuzzy, boost-format
+#, boost-format
 msgid "File '%1%' is unsigned."
-msgstr "Ficheiro '%s' não está assinado, continuar?"
+msgstr "Ficheiro '%1%' não está assinado."
 
 #. translator: %1% is a file name, %2% a repositories name
 #: src/callbacks/keyring.h:159
-#, fuzzy, boost-format
+#, boost-format
 msgid "File '%1%' from repository '%2%' is unsigned."
-msgstr "Ficheiro '%s' do repositório '%s' não está assinado, continuar?"
+msgstr "Ficheiro '%1%' do repositório '%2%' não está assinado."
 
 #. TranslatorExplanation: speaking of a file
 #: src/callbacks/keyring.h:176
@@ -159,18 +159,17 @@ msgstr ""
 
 #. translator: %1% is a file name, %2% is a gpg key ID
 #: src/callbacks/keyring.h:216
-#, fuzzy, boost-format
+#, boost-format
 msgid "File '%1%' is signed with an unknown key '%2%'."
-msgstr ""
-"Ficheiro '%s' está assinado com uma chave '%s' desconhecida. Continuar?"
+msgstr "Ficheiro '%1%' está assinado com uma chave '%2%' desconhecida."
 
 #. translator: %1% is a file name, %2% is a gpg key ID, %3% a repositories name
 #: src/callbacks/keyring.h:219
-#, fuzzy, boost-format
+#, boost-format
 msgid "File '%1%' from repository '%3%' is signed with an unknown key '%2%'."
 msgstr ""
-"Ficheiro '%s' do repositório '%s' está assinado com uma chave '%s' "
-"desconhecida. Continuar?"
+"Ficheiro '%1%' do repositório '%3%' está assinado com uma chave '%2%' "
+"desconhecida."
 
 #. translators: the last %s is gpg key ID
 #: src/callbacks/keyring.h:236
@@ -207,9 +206,8 @@ msgstr "Quer rejeitar a chave, confiar temporariamente, ou confiar sempre?"
 
 #. translators: this message is shown after showing description of the key
 #: src/callbacks/keyring.h:290
-#, fuzzy
 msgid "Do you want to reject the key, or trust always?"
-msgstr "Quer rejeitar a chave, confiar temporariamente, ou confiar sempre?"
+msgstr "Quer rejeitar a chave, ou confiar sempre?"
 
 #. translators: r/t/a stands for Reject/TrustTemporarily/trustAlways(import)
 #. translate to whatever is appropriate for your language
@@ -592,15 +590,13 @@ msgstr ""
 
 #. translator: usually followed by a ' ' and some explanatory text
 #: src/output/Out.h:40
-#, fuzzy
 msgid "Warning:"
-msgstr "Aviso: "
+msgstr "Aviso:"
 
 #. translator: usually followed by a ' ' and some explanatory text
 #: src/output/Out.h:42
-#, fuzzy
 msgid "Error:"
-msgstr "Erro"
+msgstr "Erro:"
 
 # internal key used: Ok
 #: src/output/Out.h:44
@@ -1002,9 +998,9 @@ msgid "Failed to save option."
 msgstr ""
 
 #: src/PackageArgs.cc:208
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "'%s' not found in package names. Trying '%s'."
-msgstr "'%s' não é um pacote ou nome de capacidade válida."
+msgstr "'%s' não foi encontrado o nome do pacote. Tente '%s'."
 
 #: src/PackageArgs.cc:218
 #, fuzzy, c-format, boost-format
