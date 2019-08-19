@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Aug 19 14:56:57 CEST 2019 - ma@suse.com
+
+- JEZYPP: install/remove -t product adapted
+- version 1.13.55
+
+-------------------------------------------------------------------
 Fri Aug 16 16:25:24 CEST 2019 - ma@suse.com
 
 - JEZYPP to support SCC for RES
