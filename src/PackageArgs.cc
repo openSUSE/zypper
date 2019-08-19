@@ -15,6 +15,10 @@
 #include "PackageArgs.h"
 #include "Zypper.h"
 #include "repos.h"
+#ifdef JEZYPP_PRODTRANS
+#include "utils/misc.h"
+#include <zypp/sat/WhatProvides.h>
+#endif // JEZYPP_PRODTRANS
 
 PackageArgs::PackageArgs( const ResKind & kind, const Options & opts )
 : zypper( Zypper::instance() )
@@ -112,14 +116,34 @@ static bool remove_duplicate( PackageArgs::PackageSpecSet & set, const PackageSp
 
 // ---------------------------------------------------------------------------
 
+#ifdef JEZYPP_PRODTRANS
+void PackageArgs::argsToCaps( const ResKind & kind_r )
+{
+  bool prodtrans = ( kind_r == ResKind::product );
+  std::map<std::string,std::string> prodtranstable;
+  if ( prodtrans )
+  {
+    sat::WhatProvides q( Capability( "product()" ) );
+    for ( sat::Solvable solv : q )
+      prodtranstable[FakeProduct(solv).name()] = solv.name();
+    cout << "PTT " << prodtranstable << endl;
+  }
+  const ResKind & kind ( prodtrans ? ResKind::package : kind_r );
+#else
 void PackageArgs::argsToCaps( const ResKind & kind )
 {
+#endif // JEZYPP_PRODTRANS
   bool dont;
   std::string arg, repo;
   for_( it, _args.begin(), _args.end() )
   {
     arg = *it;
     repo.clear();
+
+#ifdef JEZYPP_PRODTRANS
+    if ( prodtrans )
+      arg = prodtranstable[arg];
+#endif // JEZYPP_PRODTRANS
 
     PackageSpec spec;
     spec.orig_str = arg;
