@@ -4,6 +4,7 @@
 
 #include <zypp/base/LogTools.h>
 #include <zypp/base/LogControl.h>
+#include <zypp/base/Backtrace.h>
 
 #include "main.h"
 #include "Zypper.h"
@@ -47,7 +48,7 @@ void signal_handler( int sig )
 
 void signal_nopipe( int sig )
 {
-  WAR << "Exiting on SIGPIPE..." << endl;
+  WAR << "Exiting on SIGPIPE..." << endl << dumpBacktrace << endl;
   Zypper & zypper( Zypper::instance() );
   zypper.requestImmediateExit();
 }
