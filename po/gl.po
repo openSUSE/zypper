@@ -15,8 +15,8 @@ msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-02-27 13:31+0100\n"
-"PO-Revision-Date: 2019-02-12 10:55+0000\n"
-"Last-Translator: Miguel Branco <mgl.branco@gmail.com>\n"
+"PO-Revision-Date: 2019-08-26 11:51+0000\n"
+"Last-Translator: Manuel Vazquez <xixirei@yahoo.es>\n"
 "Language-Team: Galician <https://l10n.opensuse.org/projects/libzypp/master/"
 "gl/>\n"
 "Language: gl\n"
@@ -24,7 +24,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 3.3\n"
+"X-Generator: Weblate 3.6.1\n"
 
 #. dubious: Throw on malformed known types, otherwise log a warning.
 #: zypp/CheckSum.cc:136
@@ -4392,6 +4392,8 @@ msgid ""
 "Visit the SUSE Customer Center to check whether your registration is valid "
 "and has not expired."
 msgstr ""
+"Visite o Centro de servizos ao cliente de SUSE para comprobar se o seu "
+"rexistro é correcto e non caducou."
 
 #: zypp/media/MediaCurl.cc:1141
 msgid ""
