@@ -123,7 +123,7 @@ static TriBool show_problem( Zypper & zypper, const ResolverProblem & prob, Prob
     // and to the same as you translated it in the "s/r/c/d" string
     // See the "s/r/c/d" comment for other details.
     // One letter string  for translation can be tricky, so in case of problems,
-    // please report a bug against zypper at bugzilla.novell.com, we'll try to solve it.
+    // please report a bug against zypper at bugzilla.suse.com, we'll try to solve it.
     popts.setOptions( numbers.str() + _("c/d"), default_reply );
     cancelAnswer  = solution_count;
     extInfoAnswer = solution_count + 1;
