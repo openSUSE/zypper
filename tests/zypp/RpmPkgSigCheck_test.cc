@@ -6,6 +6,10 @@ using target::rpm::RpmDb;
 
 #define DATADIR (Pathname(TESTS_SRC_DIR) / "/zypp/data/RpmPkgSigCheck")
 
+#ifndef HAVE_NO_RPMTSSETVFYFLAGS
+#define HAVE_RPMTSSETVFYFLAGS
+#endif
+
 ///////////////////////////////////////////////////////////////////
 //
 // - RpmDb::checkPackage (legacy) and RpmDb::checkPackageSignature are
@@ -158,6 +162,9 @@ BOOST_AUTO_TEST_CASE(signed_pkg_nokey)
     { RpmDb::CHK_OK,	"    Header SHA256 digest: OK" },
     { RpmDb::CHK_OK,	"    Payload SHA256 digest: OK" },
     { RpmDb::CHK_OK,	"    MD5 digest: OK" },
+#ifdef HAVE_RPMTSSETVFYFLAGS
+    { RpmDb::CHK_NOKEY,	"    V3 RSA/SHA256 Signature, key ID 3dbdc284: NOKEY" },
+#endif
   } };
   BOOST_CHECK_EQUAL( xpct, cs );
 }
@@ -175,6 +182,9 @@ BOOST_AUTO_TEST_CASE(signed_broken_pkg_nokey)
     { RpmDb::CHK_OK,	"    Header SHA256 digest: OK" },
     { RpmDb::CHK_FAIL,	"    Payload SHA256 digest: BAD (Expected 6632dfb6e78fd3346baa860da339acdedf6f019fb1b5448ba1baa6cef67de795 != 85156c232f4c76273bbbb134d8d869e93bbfc845dd0d79016856e5356dd33727)" },
     { RpmDb::CHK_FAIL,	"    MD5 digest: BAD (Expected 8e64684e4d5bd90c3c13f76ecbda9ee2 != 442a473472708c39f3ac2b5eb38b476f)" },
+#ifdef HAVE_RPMTSSETVFYFLAGS
+    { RpmDb::CHK_FAIL,	"    V3 RSA/SHA256 Signature, key ID 3dbdc284: BAD" },
+#endif
   } };
   BOOST_CHECK_EQUAL( xpct, cs );
 }
@@ -192,7 +202,9 @@ BOOST_AUTO_TEST_CASE(signed_broken_header_pkg_nokey)
     { RpmDb::CHK_FAIL,	"    Header SHA256 digest: BAD (Expected e88100656c8e06b6e4bb9155f0dd111ef8042866941f02b623cb46e12a82f732 != 76b343bcb9b8aaf9998fdcf7392e234944a0b078c67667fa0d658208b9a66983)" },
     { RpmDb::CHK_FAIL,	"    Payload SHA256 digest: BAD (Expected 6632dfb6e78fd3346baa860da339acdedf6f019fb1b5448ba1baa6cef67de795 != 85156c232f4c76273bbbb134d8d869e93bbfc845dd0d79016856e5356dd33727)" },
     { RpmDb::CHK_FAIL,	"    MD5 digest: BAD (Expected 8e64684e4d5bd90c3c13f76ecbda9ee2 != 81df819a7d94638ff3ffe0bb93a7d177)" },
-
+#ifdef HAVE_RPMTSSETVFYFLAGS
+    { RpmDb::CHK_FAIL,	"    V3 RSA/SHA256 Signature, key ID 3dbdc284: BAD" },
+#endif
   } };
   BOOST_CHECK_EQUAL( xpct, cs );
 }
@@ -221,6 +233,9 @@ BOOST_AUTO_TEST_CASE(signed_pkg_withkey)
     { RpmDb::CHK_OK,	"    Header SHA256 digest: OK" },
     { RpmDb::CHK_OK,	"    Payload SHA256 digest: OK" },
     { RpmDb::CHK_OK,	"    MD5 digest: OK" },
+#ifdef HAVE_RPMTSSETVFYFLAGS
+    { RpmDb::CHK_OK,	"    V3 RSA/SHA256 Signature, key ID 3dbdc284: OK" },
+#endif
   } };
   BOOST_CHECK_EQUAL( xpct, cs );
 }
@@ -238,6 +253,9 @@ BOOST_AUTO_TEST_CASE(signed_broken_pkg_withkey)
     { RpmDb::CHK_OK,	"    Header SHA256 digest: OK" },
     { RpmDb::CHK_FAIL,	"    Payload SHA256 digest: BAD (Expected 6632dfb6e78fd3346baa860da339acdedf6f019fb1b5448ba1baa6cef67de795 != 85156c232f4c76273bbbb134d8d869e93bbfc845dd0d79016856e5356dd33727)" },
     { RpmDb::CHK_FAIL,	"    MD5 digest: BAD (Expected 8e64684e4d5bd90c3c13f76ecbda9ee2 != 442a473472708c39f3ac2b5eb38b476f)" },
+#ifdef HAVE_RPMTSSETVFYFLAGS
+    { RpmDb::CHK_FAIL,	"    V3 RSA/SHA256 Signature, key ID 3dbdc284: BAD" },
+#endif
   } };
   BOOST_CHECK_EQUAL( xpct, cs );
 }
@@ -255,6 +273,9 @@ BOOST_AUTO_TEST_CASE(signed_broken_header_pkg_withkey)
     { RpmDb::CHK_FAIL,	"    Header SHA256 digest: BAD (Expected e88100656c8e06b6e4bb9155f0dd111ef8042866941f02b623cb46e12a82f732 != 76b343bcb9b8aaf9998fdcf7392e234944a0b078c67667fa0d658208b9a66983)" },
     { RpmDb::CHK_FAIL,	"    Payload SHA256 digest: BAD (Expected 6632dfb6e78fd3346baa860da339acdedf6f019fb1b5448ba1baa6cef67de795 != 85156c232f4c76273bbbb134d8d869e93bbfc845dd0d79016856e5356dd33727)" },
     { RpmDb::CHK_FAIL,	"    MD5 digest: BAD (Expected 8e64684e4d5bd90c3c13f76ecbda9ee2 != 81df819a7d94638ff3ffe0bb93a7d177)" },
+#ifdef HAVE_RPMTSSETVFYFLAGS
+    { RpmDb::CHK_FAIL,	"    V3 RSA/SHA256 Signature, key ID 3dbdc284: BAD" },
+#endif
   } };
   BOOST_CHECK_EQUAL( xpct, cs );
 }
