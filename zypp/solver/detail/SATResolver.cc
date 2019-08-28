@@ -86,6 +86,33 @@ namespace zypp
     namespace detail
     { ///////////////////////////////////////////////////////////////////
 
+      ///////////////////////////////////////////////////////////////////////
+      namespace
+      {
+	inline void solverSetFocus( sat::detail::CSolver & satSolver_r, const ResolverFocus & focus_r )
+	{
+	  switch ( focus_r )
+	  {
+	    case ResolverFocus::Default:	// fallthrough to Job
+	    case ResolverFocus::Job:
+	      solver_set_flag( &satSolver_r, SOLVER_FLAG_FOCUS_INSTALLED, 0 );
+	      solver_set_flag( &satSolver_r, SOLVER_FLAG_FOCUS_BEST,      0 );
+	      break;
+	    case ResolverFocus::Installed:
+	      solver_set_flag( &satSolver_r, SOLVER_FLAG_FOCUS_INSTALLED, 1 );
+	      solver_set_flag( &satSolver_r, SOLVER_FLAG_FOCUS_BEST,      0 );
+	      break;
+	    case ResolverFocus::Update:
+	      solver_set_flag( &satSolver_r, SOLVER_FLAG_FOCUS_INSTALLED, 0 );
+	      solver_set_flag( &satSolver_r, SOLVER_FLAG_FOCUS_BEST,      1 );
+	      break;
+	  }
+	}
+
+      } //namespace
+      ///////////////////////////////////////////////////////////////////////
+
+
 using namespace std;
 
 IMPL_PTR_TYPE(SATResolver);
@@ -154,9 +181,9 @@ SATResolver::dumpOn( std::ostream & os ) const
 	OUTS( DUP_ALLOW_NAMECHANGE );
 	OUTS( KEEP_ORPHANS );
 	OUTS( BREAK_ORPHANS );
-	OUTS( FOCUS_INSTALLED );
 	OUTS( YUM_OBSOLETES );
 #undef OUTS
+        os << "  focus	= "	<< _focus << endl;
 	os << "  distupgrade	= "	<< _distupgrade << endl;
         os << "  distupgrade_removeunsupported	= " << _distupgrade_removeunsupported << endl;
 	os << "  solveSrcPackages	= "	<< _solveSrcPackages << endl;
@@ -389,6 +416,7 @@ SATResolver::solving(const CapabilitySet & requires_caps,
 	queue_push( &(_jobQueue), SOLVER_DROP_ORPHANED|SOLVER_SOLVABLE_ALL);
 	queue_push( &(_jobQueue), 0 );
     }
+    solverSetFocus( *_satSolver, _focus );
     solver_set_flag(_satSolver, SOLVER_FLAG_ADD_ALREADY_RECOMMENDED, !_ignorealreadyrecommended);
     solver_set_flag(_satSolver, SOLVER_FLAG_ALLOW_DOWNGRADE,		_allowdowngrade);
     solver_set_flag(_satSolver, SOLVER_FLAG_ALLOW_NAMECHANGE,		_allownamechange);
@@ -832,6 +860,7 @@ void SATResolver::doUpdate()
 	queue_push( &(_jobQueue), SOLVER_DROP_ORPHANED|SOLVER_SOLVABLE_ALL);
 	queue_push( &(_jobQueue), 0 );
     }
+    solverSetFocus( *_satSolver, _focus );
     solver_set_flag(_satSolver, SOLVER_FLAG_ADD_ALREADY_RECOMMENDED, !_ignorealreadyrecommended);
     solver_set_flag(_satSolver, SOLVER_FLAG_ALLOW_DOWNGRADE,		_allowdowngrade);
     solver_set_flag(_satSolver, SOLVER_FLAG_ALLOW_NAMECHANGE,		_allownamechange);

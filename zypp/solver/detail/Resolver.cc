@@ -100,6 +100,10 @@ Resolver::~Resolver()
 
 //---------------------------------------------------------------------------
 // forward flags too SATResolver
+
+void Resolver::setFocus( ResolverFocus focus_r )	{ _satResolver->_focus = focus_r; }
+ResolverFocus Resolver::focus() const			{ return _satResolver->_focus; }
+
 #define ZOLV_FLAG_TRIBOOL( ZSETTER, ZGETTER, ZVARNAME, ZVARDEFAULT )			\
     void Resolver::ZSETTER( TriBool state_r )						\
     { _satResolver->ZVARNAME = indeterminate(state_r) ? ZVARDEFAULT : bool(state_r); }	\

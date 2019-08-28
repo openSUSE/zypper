@@ -78,6 +78,9 @@ namespace zypp
   void Resolver::doUpdate()
   { _pimpl->doUpdate(); }
 
+  void Resolver::setFocus( ResolverFocus focus_r )	{ _pimpl->setFocus( focus_r ); }
+  ResolverFocus Resolver::focus() const			{ return _pimpl->focus(); }
+
   void Resolver::setForceResolve( bool yesno_r )	{ _pimpl->setForceResolve( yesno_r ); }
   bool Resolver::forceResolve() const			{ return _pimpl->forceResolve(); }
 

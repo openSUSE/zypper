@@ -178,6 +178,9 @@ class Resolver : private base::NonCopyable
     void setCleandepsOnRemove( TriBool state_r );
     //@}
 
+    void setFocus( ResolverFocus focus_r );
+    ResolverFocus focus() const;
+
 #define ZOLV_FLAG_TRIBOOL( ZSETTER, ZGETTER )	\
     void ZSETTER( TriBool state_r );		\
     bool ZGETTER() const;			\

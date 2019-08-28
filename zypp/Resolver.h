@@ -164,6 +164,13 @@ namespace zypp
     sat::Transaction getTransaction();
 
     /**
+     * Define the resolvers general attitude when resolving jobs.
+     * \see \ref ResolverFocus
+     */
+    void setFocus( ResolverFocus focus_r );
+    ResolverFocus focus() const;
+
+    /**
      * Remove resolvables which are conflicts with others or
      * have unfulfilled requirements.
      * This behaviour is favourited by ZMD.

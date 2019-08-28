@@ -296,10 +296,13 @@ class  HelixControl {
       }
     }
 
+    std::ostream & writeTag()
+    { return *file << (_inSetup ? TAB : ""); }
+
     void addTagIf( const std::string & tag_r, bool yesno_r = true )
     {
       if ( yesno_r )
-	*file << (_inSetup ? TAB : "") << "<" << tag_r << "/>" << endl;
+	writeTag() << "<" << tag_r << "/>" << endl;
     }
 
     void installResolvable( const PoolItem & pi_r );
@@ -559,6 +562,8 @@ bool Testcase::createTestcase(Resolver & resolver, bool dumpPool, bool runSolver
 			  "solver-system.xml.gz");
 
     // In <setup>: resolver flags,...
+    control.writeTag() << "<focus value=\"" << resolver.focus() << "\"/>" << endl;
+
     control.addTagIf( "ignorealreadyrecommended",	resolver.ignoreAlreadyRecommended() );
     control.addTagIf( "onlyRequires",		resolver.onlyRequires() );
     control.addTagIf( "forceResolve",		resolver.forceResolve() );

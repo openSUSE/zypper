@@ -16,6 +16,7 @@
 
 #include "zypp/ResPool.h"
 
+#include "zypp/ResolverFocus.h"
 #include "zypp/ResolverNamespace.h"
 
 #include "zypp/ResolverProblem.h"
