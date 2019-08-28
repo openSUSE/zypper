@@ -35,17 +35,7 @@ extern "C"
 #include <map>
 #include <string>
 
-#include "zypp/base/ReferenceCounted.h"
-#include "zypp/base/PtrTypes.h"
-#include "zypp/ResPool.h"
-#include "zypp/base/SerialNumber.h"
-#include "zypp/ProblemTypes.h"
-#include "zypp/ResolverProblem.h"
-#include "zypp/ProblemSolution.h"
-#include "zypp/Capability.h"
-#include "zypp/solver/detail/SolverQueueItem.h"
-
-#include "zypp/sat/detail/PoolMember.h"
+#include "zypp/solver/Types.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp

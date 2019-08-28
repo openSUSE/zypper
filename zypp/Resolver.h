@@ -16,19 +16,9 @@
 #include <functional>
 
 #include "zypp/base/ReferenceCounted.h"
-#include "zypp/base/PtrTypes.h"
 
-#include "zypp/ResPool.h"
-#include "zypp/PoolItem.h"
-#include "zypp/Capabilities.h"
-#include "zypp/Capability.h"
-#include "zypp/ResolverNamespace.h"
-
+#include "zypp/solver/Types.h"
 #include "zypp/solver/detail/Types.h"
-
-#include "zypp/ProblemTypes.h"
-#include "zypp/ResolverProblem.h"
-#include "zypp/ProblemSolution.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

@@ -30,16 +30,8 @@
 #include <list>
 #include <map>
 
-#include "zypp/ResPool.h"
-#include "zypp/TriBool.h"
+#include "zypp/solver/Types.h"
 #include "zypp/base/SerialNumber.h"
-#include "zypp/base/NonCopyable.h"
-
-#include "zypp/ProblemTypes.h"
-#include "zypp/ResolverProblem.h"
-#include "zypp/ProblemSolution.h"
-#include "zypp/Capabilities.h"
-#include "zypp/Capability.h"
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp

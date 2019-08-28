@@ -31,23 +31,19 @@ extern "C"
 
 #define ZYPP_USE_RESOLVER_INTERNALS
 
-#include "zypp/base/String.h"
-#include "zypp/Product.h"
-#include "zypp/Capability.h"
-#include "zypp/ResStatus.h"
-#include "zypp/VendorAttr.h"
 #include "zypp/base/LogTools.h"
-#include "zypp/base/String.h"
 #include "zypp/base/Gettext.h"
 #include "zypp/base/Algorithm.h"
-#include "zypp/ResPool.h"
-#include "zypp/ResFilters.h"
+
 #include "zypp/ZConfig.h"
-#include "zypp/sat/Pool.h"
+#include "zypp/Product.h"
 #include "zypp/sat/WhatProvides.h"
 #include "zypp/sat/WhatObsoletes.h"
+#include "zypp/sat/detail/PoolImpl.h"
+
 #include "zypp/solver/detail/Resolver.h"
 #include "zypp/solver/detail/SATResolver.h"
+
 #include "zypp/solver/detail/ProblemSolutionCombi.h"
 #include "zypp/solver/detail/ProblemSolutionIgnore.h"
 #include "zypp/solver/detail/SolverQueueItemInstall.h"
@@ -55,10 +51,6 @@ extern "C"
 #include "zypp/solver/detail/SystemCheck.h"
 #include "zypp/solver/detail/SolutionAction.h"
 #include "zypp/solver/detail/SolverQueueItem.h"
-#include "zypp/sat/Transaction.h"
-#include "zypp/sat/Queue.h"
-
-#include "zypp/sat/detail/PoolImpl.h"
 
 #define XDEBUG(x) do { if (base::logger::isExcessive()) XXX << x << std::endl;} while (0)
 
