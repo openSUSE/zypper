@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Aug 30 13:52:07 CEST 2019 - ma@suse.de
+
+- Ignore SIGPIPE while STDOUT/STDERR are OK (bsc#1145521)
+- version 1.13.55
+
+-------------------------------------------------------------------
 Wed Aug 21 08:26:34 CEST 2019 - ma@suse.de
 
 - Dump stacktrace on SIGPIPE (bsc#1145521)
