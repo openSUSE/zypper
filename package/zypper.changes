@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Fri Aug 30 13:48:18 CEST 2019 - ma@suse.de
+
+- Ignore SIGPIPE while STDOUT/STDERR are OK (bsc#1145521)
+- Dump stacktrace on SIGPIPE (bsc#1145521)
+- info: The requested info must be shown in QUIET mode (fixes #287)
+- version 1.14.30
+
+-------------------------------------------------------------------
 Wed Aug  7 09:52:36 CEST 2019 - ma@suse.de
 
 - Fix local/remote url classification.
