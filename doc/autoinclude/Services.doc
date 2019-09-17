@@ -121,6 +121,108 @@ You are a build service user, and you have an account, and of course you have a 
 
 Or what if the build service could offer a service based on keywords or other data: like http://build.opensuse.org/services/mostpopular/repo/repoindex.xml would contain dynamically the 15 most popular repositories. You add that service, and then ZYpp does the work for you of adding new popular repositories, and remove the old ones.
 
+\subsection services-usecase-4 Usecase #4: Collect openSUSE core repos in one service
+
+Some people prefer to keep and maintain the distros core repos within one local service rather than managing the repos individually. Since version 14.21.0 libzypp supports a simple form of variable replacement within a repoindex.xml file, which makes this even easier.
+
+To use a local RIS service create a directory /somewhere on your disk (or accessible via http, nfs, etc.) and create the file
+./repo/repoindex.xml inside. A repoindex.xml for openSUSE Leap 15.1 might look like this:
+
+\verbatim
+<repoindex          ttl="0"
+                disturl="https://download.opensuse.org"
+                distsub="leap/"
+                distver="15.1"
+            debugenable="false"
+           sourceenable="false">
+
+  <repo url="%{disturl}/distribution/%{distsub}%{distver}/repo/oss"
+                alias="repo-oss"
+                 name="%{alias} (%{distver})"
+              enabled="true"
+          autorefresh="true"/>
+
+  <repo url="%{disturl}/distribution/%{distsub}%{distver}/repo/non-oss"
+                alias="repo-non-oss"
+                 name="%{alias} (%{distver})"
+              enabled="true"
+          autorefresh="true"/>
+
+
+  <repo url="%{disturl}/update/%{distsub}%{distver}/oss"
+                alias="update-oss"
+                 name="%{alias} (%{distver})"
+              enabled="true"
+          autorefresh="true"/>
+
+  <repo url="%{disturl}/update/%{distsub}%{distver}/non-oss"
+                alias="upadte-non-oss"
+                 name="%{alias} (%{distver})"
+              enabled="true"
+          autorefresh="true"/>
+
+
+  <repo url="%{disturl}/debug/distribution/%{distsub}%{distver}/repo/oss"
+                alias="debug-oss"
+                 name="%{alias} (%{distver})"
+              enabled="%{debugenable}"
+          autorefresh="true"/>
+
+  <repo url="%{disturl}/debug/distribution/%{distsub}%{distver}/repo/oss"
+                alias="debug-non-oss"
+                 name="%{alias} (%{distver})"
+              enabled="%{debugenable}"
+          autorefresh="true"/>
+
+
+  <repo url="%{disturl}/source/distribution/%{distsub}%{distver}/repo/oss"
+                alias="source-oss"
+                 name="%{alias} (%{distver})"
+              enabled="%{sourceenable}"
+          autorefresh="true"/>
+
+  <repo url="%{disturl}/source/distribution/%{distsub}%{distver}/repo/non-oss"
+                alias="source-non-oss"
+                 name="%{alias} (%{distver})"
+              enabled="%{sourceenable}"
+          autorefresh="true"/>
+</repoindex>
+\endverbatim
+
+%{VAR} always refers to the value defined in the <tt>repoindex</tt> tag (reserved names are 'ttl' and 'alias'). %{alias} is available within a <tt>repo</tt> tag after the alias was defined there.
+
+Given the file is located at /somewhere/repo/repoindex.xml, add the service by:
+\verbatim
+zypper sa /somewhere openSUSE
+\endverbatim
+
+Manually refresh the service (incl. its repos) with:
+\verbatim
+zypper refs -r
+\endverbatim
+
+Refreshing the service will evaluate the repoindex.xml and adjust the Services repos accordingly. The repos alias will be prefixed by the service name:
+\verbatim
+zypper lr
+> #  | Alias                   | Name                  | Enabled | ... | Refresh
+> ---+-------------------------+-----------------------+---------+-...-+--------
+>  9 | openSUSE:debug-non-oss  | debug-non-oss (15.1)  | No      | ... | ----
+> 10 | openSUSE:debug-oss      | debug-oss (15.1)      | No      | ... | ----
+> 11 | openSUSE:repo-non-oss   | repo-non-oss (15.1)   | Yes     | ... | Yes
+> 12 | openSUSE:repo-oss       | repo-oss (15.1)       | Yes     | ... | Yes
+> 13 | openSUSE:source-non-oss | source-non-oss (15.1) | No      | ... | ----
+> 14 | openSUSE:source-oss     | source-oss (15.1)     | No      | ... | ----
+> 15 | openSUSE:upadte-non-oss | upadte-non-oss (15.1) | Yes     | ... | Yes
+> 16 | openSUSE:update-oss     | update-oss (15.1)     | Yes     | ... | Yes
+\endverbatim
+
+After editing the repoindex.xml you must manually refresh the service to takeover the changes, or you turn on autorefresh for the service (depends on how often you change the content):
+\verbatim
+zypper ms -r openSUSE
+\endverbatim
+
+Rather than hardcoding the <tt>distver="15.1"</tt>, you can also use a repo variable like <tt>distver="${releasever}"</tt>.
+
 \section service-impl Developers: Implementation
 
 Services are implemented in the following classes:
