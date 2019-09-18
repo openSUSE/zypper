@@ -12,10 +12,10 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-07-18 13:07+0200\n"
-"PO-Revision-Date: 2019-07-17 13:51+0000\n"
+"PO-Revision-Date: 2019-09-18 16:52+0000\n"
 "Last-Translator: Alessio Adamo <alessio.adamo@gmail.com>\n"
-"Language-Team: Italian <https://l10n.opensuse.org/projects/zypper/master/it/"
-">\n"
+"Language-Team: Italian <https://l10n.opensuse.org/projects/zypper/master/it/>"
+"\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -474,7 +474,11 @@ msgid_plural ""
 "%1% packages had to be excluded from file conflicts check because they are "
 "not yet downloaded."
 msgstr[0] ""
+"È stato necessario escludere %1% pacchetto dal controllo dei conflitti tra "
+"file poiché non è stato ancora scaricato."
 msgstr[1] ""
+"È stato necessario escludere %1% pacchetti dal controllo dei conflitti tra "
+"file poiché non sono stati ancora scaricati."
 
 #. TranslatorExplanation %1%(commandline option)
 #: src/callbacks/rpm.h:460
@@ -2929,6 +2933,8 @@ msgid ""
 "A meaningful file conflict check can only be performed if used together with "
 "'%1%'."
 msgstr ""
+"Un controllo sensato dei conflitti tra file può essere eseguito solo se "
+"usato insieme a '%1%'."
 
 #. translators: -r, --repo <ALIAS|#|URI>
 #: src/commands/optionsets.cc:67
@@ -6276,7 +6282,7 @@ msgstr[1] "Scegliere tra le soluzioni precedenti per numero o annulla"
 #. The answers should be lower case letters.
 #: src/solve-commit.cc:111
 msgid "s/r/c/d"
-msgstr ""
+msgstr "i/r/a/d"
 
 #. translators: answers for dependency problem solution input prompt:
 #. "Choose from above solutions by number or cancel"
@@ -6287,7 +6293,7 @@ msgstr ""
 #. please report a bug against zypper at bugzilla.novell.com, we'll try to solve it.
 #: src/solve-commit.cc:127
 msgid "c/d"
-msgstr ""
+msgstr "a/d"
 
 #: src/solve-commit.cc:133
 #, boost-format
@@ -6308,7 +6314,7 @@ msgstr "Non scegliere alcuna soluzione ed annulla."
 
 #: src/solve-commit.cc:141
 msgid "Toggle show detailed conflict information."
-msgstr ""
+msgstr "Visualizza/maschera le informazioni dettagliate sui conflitti."
 
 #: src/solve-commit.cc:174
 #, c-format, boost-format
@@ -6459,43 +6465,44 @@ msgid ""
 "Restart solver in no-force-resolution mode in order to show dependency "
 "problems."
 msgstr ""
-"Riavvia il solver nella modalità no-force-resolution per evidenziare i "
+"Riavvia il risolutore nella modalità no-force-resolution per evidenziare i "
 "problemi di dipendenze."
 
 #. translators: help text for 'v' option in the 'Continue?' prompt
 #: src/solve-commit.cc:678
 msgid "Toggle display of package versions."
-msgstr "Alternare la visualizzazione delle versioni dei pacchetti."
+msgstr "Attiva/disattiva la visualizzazione delle versioni dei pacchetti."
 
 #. translators: help text for 'a' option in the 'Continue?' prompt
 #: src/solve-commit.cc:680
 msgid "Toggle display of package architectures."
-msgstr "Alternare la visualizzazione delle architetture dei pacchetti."
+msgstr "Attiva/disattiva la visualizzazione delle architetture dei pacchetti."
 
 #. translators: help text for 'r' option in the 'Continue?' prompt
 #: src/solve-commit.cc:682
 msgid ""
 "Toggle display of repositories from which the packages will be installed."
 msgstr ""
-"Alternare la visualizzazione dei repository dai quali saranno installati i "
-"pacchetti."
+"Attiva/disattiva la visualizzazione dei repository dai quali saranno "
+"installati i pacchetti."
 
 #. translators: help text for 'm' option in the 'Continue?' prompt
 #: src/solve-commit.cc:684
 msgid "Toggle display of package vendor names."
-msgstr "Alternare la visualizzazione dei nomi dei fornitori dei pacchetti."
+msgstr ""
+"Attiva/disattiva la visualizzazione dei nomi dei fornitori dei pacchetti."
 
 #. translators: help text for 'd' option in the 'Continue?' prompt
 #: src/solve-commit.cc:686
 msgid "Toggle between showing all details and as few details as possible."
 msgstr ""
-"Alternare tra la visualizzazione di tutti i dettagli e del minor numero di "
-"dettagli possibili."
+"Attiva/disattiva tra la visualizzazione di tutti i dettagli e del minor "
+"numero di dettagli possibili."
 
 #. translators: help text for 'g' option in the 'Continue?' prompt
 #: src/solve-commit.cc:688
 msgid "View the summary in pager."
-msgstr "Visualizzare il riepilogo nel cercapersone."
+msgstr "Visualizzare il riepilogo nel pager."
 
 #: src/solve-commit.cc:796
 msgid "committing"
