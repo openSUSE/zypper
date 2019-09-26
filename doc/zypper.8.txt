@@ -1391,7 +1391,7 @@ Standalone repositories (not belonging to any service) are treated like services
 
 Package Locks Management
 ~~~~~~~~~~~~~~~~~~~~~~~~
-Package locks serve the purpose of preventing changes to the set of installed packages on the system. The locks are stored in form of a 'query' in /etc/zypp/locks file (see also locks(5)). Packages matching this query are then forbidden to change their installed status; an installed package can't be removed, not installed package can't be installed. When requesting to install or remove such locked package, you will get a dependency problem dialog.
+Package locks serve the purpose of preventing changes to the set of installed packages on the system. The locks are stored in form of a 'query' in /etc/zypp/locks file (see also locks(5)). Packages matching this query are then forbidden to change their installed status; an installed package can't be removed or upgraded, not installed package can't be installed. When requesting to install, upgrade or remove such locked package, you will get a dependency problem dialog.
 
 *locks* (*ll*)::
 	List currently active package locks.
