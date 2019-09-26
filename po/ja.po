@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-02-27 13:31+0100\n"
-"PO-Revision-Date: 2019-03-14 18:32+0000\n"
+"PO-Revision-Date: 2019-09-26 04:52+0000\n"
 "Last-Translator: Yasuhiko Kamata <belphegor@belbel.or.jp>\n"
 "Language-Team: Japanese <https://l10n.opensuse.org/projects/libzypp/master/"
 "ja/>\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 3.3\n"
+"X-Generator: Weblate 3.6.1\n"
 
 #. dubious: Throw on malformed known types, otherwise log a warning.
 #: zypp/CheckSum.cc:136
@@ -4188,7 +4188,7 @@ msgstr "メディア「%s」を取り出せません"
 #: zypp/media/MediaException.cc:179
 #, c-format, boost-format
 msgid "Permission to access '%s' denied."
-msgstr "「%s」にアクセスするパーミッションが拒否されました。"
+msgstr "'%s' へのアクセスが拒否されました。"
 
 #: zypp/media/MediaException.cc:187
 #, c-format, boost-format
