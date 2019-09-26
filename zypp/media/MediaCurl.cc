@@ -725,9 +725,6 @@ void MediaCurl::setupEasy()
     // restrict following of redirections from https to https only
     SET_OPTION( CURLOPT_REDIR_PROTOCOLS, CURLPROTO_HTTPS );
 #endif
-#if CURLVERSION_AT_LEAST(7,60,0)	// SLE15+
-    SET_OPTION( CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_2TLS );
-#endif
 
     if( _settings.verifyPeerEnabled() ||
         _settings.verifyHostEnabled() )
