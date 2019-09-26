@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Thu Sep 26 14:08:51 CEST 2019 - ma@suse.de
+
+- Revert "Use CURL_HTTP_VERSION_2TLS if available" (bsc#1146027)
+- doc: add service example using variables
+- Fix build with rpm >= 4.15 (fixes #172)
+- version 17.14.1 (12)
+
+-------------------------------------------------------------------
 Mon Aug  5 13:03:55 CEST 2019 - ma@suse.de
 
 - PublicKey::algoName: supply key algorithm and length
