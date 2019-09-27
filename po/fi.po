@@ -23,16 +23,16 @@ msgstr ""
 "Project-Id-Version: zypper.fi\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-07-18 13:07+0200\n"
-"PO-Revision-Date: 2019-05-02 20:15+0000\n"
-"Last-Translator: Tommi Nieminen <software@legisign.org>\n"
-"Language-Team: Finnish <https://l10n.opensuse.org/projects/zypper/master/fi/"
-">\n"
+"PO-Revision-Date: 2019-09-28 00:52+0000\n"
+"Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
+"Language-Team: Finnish <https://l10n.opensuse.org/projects/zypper/master/fi/>"
+"\n"
 "Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 3.3\n"
+"X-Generator: Weblate 3.6.1\n"
 
 #: src/SolverRequester.h:52
 #, boost-format
@@ -515,9 +515,9 @@ msgid ""
 "same name but different contents. If you continue, conflicting files will be "
 "replaced losing the previous content."
 msgstr ""
-"Tiedostoristiriitoja tapahtui, kun kaksi pakettia yrittää asentaa saman "
-"nimisiä tiedostoja eri sisällöllä. Mikäli jatkat, ristiriitaiset ​​tiedostot "
-"korvataan ja edellinen sisältö menetetään."
+"Tiedostojen ristiriitoja tapahtui kun kaksi pakettia yrittävät asentaa "
+"tiedostoja joilla on sama nimi, mutta eri sisältö. Mikäli jatkat, "
+"ristiriitaiset tiedostot korvataan ja edellinen sisältö menetetään."
 
 #. translator: %s is an other command: "This is an alias for 'zypper info -t patch'."
 #: src/commands/commandhelpformatter.h:94
@@ -1897,7 +1897,7 @@ msgstr[1] "uudelleen asennetaan"
 #: src/Summary.cc:1457
 msgid "package to reinstall"
 msgid_plural "packages to reinstall"
-msgstr[0] "paketti asennetaan uudelleen "
+msgstr[0] "paketti asennetaan uudelleen"
 msgstr[1] "pakettia uudelleen asennetaan"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
@@ -2791,7 +2791,7 @@ msgstr "moo"
 #. translators: command description
 #: src/commands/nullcommands.cc:19 src/commands/nullcommands.cc:21
 msgid "Show an animal."
-msgstr "Näyttää eläimen"
+msgstr "Näyttää eläimen."
 
 #. TranslatorExplanation this is a hedgehog, paint another animal, if you want
 #: src/commands/nullcommands.cc:29
@@ -2807,7 +2807,7 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/nullcommands.cc:37
 msgid "what-provides (wp) <CAPABILITY>"
-msgstr "what-provides (wp) <ominaisuus> ..."
+msgstr "mitä tarjoaa (wp) <CAPABILITY>"
 
 #. translators: command summary: what-provides, wp
 #: src/commands/nullcommands.cc:39
@@ -4581,8 +4581,8 @@ msgid ""
 "Force the solver to find a solution (even an aggressive one) rather than "
 "asking."
 msgstr ""
-"Pakottaa ratkaisimen johonkin ratkaisuun. (ehkä jopa aggressiiviseen "
-"ratkaisuun)"
+"Pakottaa ratkaisimen johonkin ratkaisuun (ehkä jopa aggressiiviseen "
+"ratkaisuun)."
 
 #: src/commands/solveroptionset.cc:43
 msgid "Do not force the solver to find solution, let it ask."
@@ -5689,7 +5689,7 @@ msgstr ""
 #: src/repos.cc:402
 #, c-format, boost-format
 msgid "Error retrieving metadata for '%s':"
-msgstr "Virhe ladattaessa metatietoja asennuslähteestä \"%s\"."
+msgstr "Virhe ladattaessa metatietoja asennuslähteestä '%s':"
 
 #: src/repos.cc:415
 msgid "Forcing building of repository cache"
@@ -5911,7 +5911,7 @@ msgstr ""
 
 #: src/repos.cc:1358
 msgid "Problem accessing the file at the specified URI"
-msgstr "Ongelma luettaessa tiedostoa määritellystä URI-osoitteesta."
+msgstr "Ongelma luettaessa tiedostoa määritellystä URI-osoitteesta"
 
 #: src/repos.cc:1359
 msgid "Please check if the URI is valid and accessible."
@@ -5919,7 +5919,7 @@ msgstr "Tarkista, että määritetty URI-osoite on oikein ja saatavilla."
 
 #: src/repos.cc:1366
 msgid "Problem parsing the file at the specified URI"
-msgstr "Ongelma jäsennettäessä tiedostoa määritellystä URI-osoitteesta."
+msgstr "Ongelma jäsennettäessä tiedostoa määritellystä URI-osoitteesta"
 
 #. TranslatorExplanation Don't translate the '.repo' string.
 #: src/repos.cc:1368
@@ -6136,16 +6136,21 @@ msgstr " Ratkaisu %d: "
 #: src/solve-commit.cc:80
 msgid "Choose the above solution using '1' or skip, retry or cancel"
 msgid_plural "Choose from above solutions by number or skip, retry or cancel"
-msgstr[0] "Valitse numero, (o)hita, y(r)itä uudelleen tai k(e)skeytä> "
-msgstr[1] "Valitse numero, (o)hita, y(r)itä uudelleen tai k(e)skeytä> "
+msgstr[0] ""
+"Valitse yllä oleva ratkaisu painikkeella '1' tai ohita, yritä uudelleen tai "
+"peruuta"
+msgstr[1] ""
+"Valitse yllä olevista ratkaisuista lukumäärän mukaan tai ohita, yritä "
+"uudelleen tai peruuta"
 
 #. translators: translate 'c' to whatever you translated the 'c' in
 #. "c" and "s/r/c" strings
 #: src/solve-commit.cc:87
 msgid "Choose the above solution using '1' or cancel using 'c'"
 msgid_plural "Choose from above solutions by number or cancel"
-msgstr[0] "Valitse numero tai k(e)skeytä> "
-msgstr[1] "Valitse numero tai k(e)skeytä> "
+msgstr[0] ""
+"Valitse yllä oleva ratkaisu painikkeella '1' tai peruuta painikkeella 'e'"
+msgstr[1] "Valitse yllä olevista ratkaisuista numeron perusteella tai peruuta"
 
 #. translators: answers for dependency problem solution input prompt:
 #. "Choose from above solutions by number or skip, retry or cancel"
@@ -6340,7 +6345,7 @@ msgstr ""
 #. translators: help text for 'v' option in the 'Continue?' prompt
 #: src/solve-commit.cc:678
 msgid "Toggle display of package versions."
-msgstr "Näytä/piilota pakettien versiot"
+msgstr "Näytä/piilota pakettien versiot."
 
 #. translators: help text for 'a' option in the 'Continue?' prompt
 #: src/solve-commit.cc:680
