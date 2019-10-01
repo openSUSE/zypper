@@ -141,8 +141,6 @@ int RemoveCmd::execute(Zypper &zypper, const std::vector<std::string> &positiona
   // tell the solver what we want
   SolverRequester::Options sropts;
   fillSrOpts(sropts);
-  if ( sropts.force )
-    sropts.force_by_name = true;
 
   SolverRequester sr( sropts );
   sr.remove( args );
@@ -260,8 +258,6 @@ int InstallCmd::execute( Zypper &zypper, const std::vector<std::string> &positio
   sropts.force = _force;
   sropts.oldpackage = _oldPackage;
   fillSrOpts(sropts);
-  if ( sropts.force )
-    sropts.force_by_name = true;
 
   if ( _fromRepos.size() ) {
     int code = repo_specs_to_aliases( zypper, _fromRepos, sropts.from_repos );
