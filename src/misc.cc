@@ -99,13 +99,16 @@ namespace
 // - after negative answer, call solve_and_commit() again
 bool confirm_licenses( Zypper & zypper )
 {
-  bool confirmed = true;
+  std::unordered_map<std::string,std::set<PoolItem>> licenseCollector; // bsc#1145554: collect multiple packages using the same license text
+
   bool auto_agree_all = LicenseAgreementPolicy::instance()._autoAgreeWithLicenses;
   bool auto_agree_product = auto_agree_all || LicenseAgreementPolicy::instance()._autoAgreeWithProductLicenses;
 
   for ( const PoolItem & pi : God->pool() )
   {
-    if ( pi.status().isToBeInstalled() && !pi.licenseToConfirm().empty() )
+    std::string piLicenseToConfirm { pi.licenseToConfirm() };
+
+    if ( pi.status().isToBeInstalled() && !piLicenseToConfirm.empty() )
     {
       ui::Selectable::Ptr selectable = God->pool().proxy().lookup( pi.kind(), pi.name() );
 
@@ -115,7 +118,7 @@ bool confirm_licenses( Zypper & zypper )
       {
         bool differ = false;
         for_( inst, selectable->installedBegin(), selectable->installedEnd() )
-	  if ( inst->resolvable()->licenseToConfirm() != pi.licenseToConfirm() )
+	  if ( inst->resolvable()->licenseToConfirm() != piLicenseToConfirm )
           { differ = true; break; }
 
         if ( !differ )
@@ -140,62 +143,81 @@ bool confirm_licenses( Zypper & zypper )
         continue;
       }
 
-      std::ostringstream s;
-      std::string kindstr;
-      if ( pi.kind() != ResKind::package )
-	kindstr = " (" + kind_to_string_localized( pi.kind(), 1 ) + ")";
+      // collect it...
+      licenseCollector[std::move(piLicenseToConfirm)].insert( pi );
+    }
+  }
 
-      bool to_accept = pi.needToAcceptLicense();	// true except for e.g. openSUSE which wants the text to be shown, but no need to agree.
-      if (to_accept)
+  // now display them...
+  for ( auto el : licenseCollector )
+  {
+    std::ostringstream s;
+    bool toAccept = false;	// e.g. openSUSE which wants the text to be shown, but no need to agree.
+
+    for ( const PoolItem & pi : el.second )
+    {
+      if ( pi.needToAcceptLicense() )
       {
-        // introduction
+	if ( !toAccept )
+	  toAccept = true;
+
+	std::string kindstr;
+	if ( pi.kind() != ResKind::package )
+	  kindstr = " (" + kind_to_string_localized( pi.kind(), 1 ) + ")";
+	// introduction
 	// translators: the first %s is the name of the package, the second
 	// is " (package-type)" if other than "package" (patch/product/pattern)
 	s << str::form(_("In order to install '%s'%s, you must agree to terms of the following license agreement:"),
-		       get_display_name( pi ).c_str(), kindstr.c_str());
-	s << endl << endl;
+		       get_display_name( pi ).c_str(), kindstr.c_str()) << endl;
       }
-      // license text
-      printRichText( s, pi.licenseToConfirm() );
+    }
+    if ( toAccept )
+      s << endl;
 
-      // show in pager unless we are read by a machine or the pager fails
-      if ( zypper.config().machine_readable || !show_text_in_pager( s.str() ) )
-        zypper.out().info( s.str(), Out::QUIET );
+    // license text
+    printRichText( s, el.first );
 
-      if ( to_accept )
+    // show in pager unless we are read by a machine or the pager fails
+    if ( zypper.config().machine_readable || !show_text_in_pager( s.str() ) )
+      zypper.out().info( s.str(), Out::QUIET );
+
+    if ( toAccept )
+    {
+      // lincense prompt
+      std::string question( _("Do you agree with the terms of the license?") );
+      //! \todo add 'v' option to view the license again, add prompt help
+      if ( !read_bool_answer( PROMPT_YN_LICENSE_AGREE, question, false ) )
       {
-        // lincense prompt
-        std::string question( _("Do you agree with the terms of the license?") );
-        //! \todo add 'v' option to view the license again, add prompt help
-        if ( !read_bool_answer( PROMPT_YN_LICENSE_AGREE, question, auto_agree ) )
-        {
-          confirmed = false;
+	if ( zypper.config().non_interactive )
+	{
+	  zypper.out().info(_("Aborting installation due to the need for license confirmation."), Out::QUIET );
+	  zypper.out().info(
+	    // translators: %s is '--auto-agree-with-licenses'
+	    str::Format(_("Please restart the operation in interactive mode and confirm your agreement with required licenses, or use the %s option."))
+	    % "--auto-agree-with-licenses", Out::QUIET );
 
-          if ( zypper.config().non_interactive )
-          {
-            zypper.out().info(_("Aborting installation due to the need for license confirmation."), Out::QUIET );
-	    zypper.out().info(
-	      // translators: %s is '--auto-agree-with-licenses'
-	      str::Format(_("Please restart the operation in interactive mode and confirm your agreement with required licenses, or use the %s option."))
-	      % "--auto-agree-with-licenses", Out::QUIET );
-
-            MIL << "License(s) NOT confirmed (non-interactive without auto confirmation)" << endl;
-          }
-          else
-          {
-	    zypper.out().info(
-	      // translators: e.g. "... with flash package license."
-	      str::Format(_("Aborting installation due to user disagreement with %s %s license."))
-	      % get_display_name( pi )
-	      % kind_to_string_localized( pi.kind(), 1 ), Out::QUIET );
-	    MIL << "License(s) NOT confirmed (interactive)" << endl;
+	  MIL << "License(s) NOT confirmed (non-interactive without auto confirmation)" << endl;
+	}
+	else
+	{
+	  for ( const PoolItem & pi : el.second )
+	  {
+	    if ( pi.needToAcceptLicense() )
+	    {
+	      zypper.out().info(
+		// translators: e.g. "... with flash package license."
+		str::Format(_("Aborting installation due to user disagreement with %s %s license."))
+		% get_display_name( pi )
+		% kind_to_string_localized( pi.kind(), 1 ), Out::QUIET );
+	    }
 	  }
-          break;
-        }
+	  MIL << "License(s) NOT confirmed (interactive)" << endl;
+	}
+	return false;
       }
     }
   }
-  return confirmed;
+  return true;
 }
 
 // ----------------------------------------------------------------------------
