@@ -656,7 +656,11 @@ include::{incdir}/option_Solver_Flags_Installs.txt[]
 	+
 	If no repositories are specified via the *--from* option, zypper will do a global upgrade with all defined repositories. This global form of dup will also consider unchanged installed packages and re-evaluate their dependencies. This can be a problem if the system contains conflicting repositories, like repositories for two different distribution releases. This often happens if one forgets to remove an older release repository after adding a new one, say openSUSE 13.1 and openSUSE 13.2.
 	+
-	For all repositories which have the distribution version within their URL (like https://download.opensuse.org/distribution/'13.1'/repo/oss) using the *$releasever* variable instead may be helpful (https://download.opensuse.org/distribution/*$releasever*/repo/oss). The variable is per default substituted by the current distributions version ('13.1') This value can be overwritten using the *--releasever* global option. Calling *zypper --releasever 13.2*'...' will cause these repos to use the new location (https://download.opensuse.org/distribution/'13.2'/repo/oss) without need to add/remove anything. Once the *dup* is performed, *$releasever* will default to the new distribution version. See section *Repository Management* for more info about variable substitution.
+	For all repositories which have the distribution version within their URL (like https://download.opensuse.org/distribution/'13.1'/repo/oss) using the *$releasever* variable instead may be helpful (https://download.opensuse.org/distribution/*$releasever*/repo/oss). The variable is per default substituted by the current distributions version ('13.1').
+	+
+	This value can be temporarily overwritten in the current zypper command by using the *--releasever* global option. Calling *zypper --releasever 13.2*'...' will cause these repos to use the new location (https://download.opensuse.org/distribution/'13.2'/repo/oss) without the need to add/remove anything. But you'll need to use *--releasever 13.2* with every zypper command until the distribution upgrade was actually performed. Once the *dup* is done, *$releasever* will default to the new distribution version '13.2' and *--releasever* is no longer needed.
+	+
+	It might be less tedious to persistently set *$releasever* to the target distribution value, so --releasever is not needed at all. See section *Repository Management* for more info about variable substitution and the definition of custom variables.
 	+
 	Note: distribution upgrades in openSUSE are currently only supported between consecutive releases. To upgrade multiple releases, upgrade each consecutive release one at a time. For more details see *http://en.opensuse.org/SDB:System_upgrade* and the 'openSUSE release notes' at *http://doc.opensuse.org/release-notes/*.
 +
@@ -930,12 +934,25 @@ You can use the following variables within a *.repo* or *.service* files 'name' 
 	*$releasever_minor*:::
 		Use this variable to refer to the version of your openSUSE or SUSE Linux. The value is obtained from the '/product/version' XML-node in */etc/products.d/baseproduct*.
 		+
-		This is useful for related repositories like packman (*http://ftp.gwdg.de/pub/linux/packman/suse/$releasever*), which shall always fit the installed distribution, even after a distribution upgrade. To help performing a distribution upgrade, the value of *$releasever* can be overwritten using the *--releasever* global option. This way you can easily switch all repositories using *$releasever* to the new version (provided the server layouts did not change and new repos are already available).
+		This is useful for related repositories like packman (*http://ftp.gwdg.de/pub/linux/packman/suse/$releasever*), which shall always fit the installed distribution, even after a distribution upgrade.
+		+
+		To help performing a distribution upgrade, the value of *$releasever* can be persistently set to a user defined value by creating a custom variable with that name (see below). This way you can easily switch all repositories using *$releasever* to the new version (provided the server layouts did not change and new repos are already available).
+		+
+		For a single zypper command the value of *$releasever* can be temporarily overwritten by using the *--releasever* global option.
 		+
 		In addition *$releasever_major* will be set to the leading portion up to (but not including) the 1st dot; *$releasever_minor* to the trailing portion after the 1st dot. If there's no dot in *$releasever*, *$releasever_major* is the same as *$releasever* and *$releasever_minor* is empty.
 
 	*Custom Variables*:::
 		A custom repository variable is defined by creating a file in */etc/zypp/vars.d*. The variable name equals the file name. The files first line (up to but not including the newline character) defines the variables value.  Valid variable(file) names consist of alphanumeric chars and underscore only.
+
+	This is how you can set a custom variable, e.g. *$releasever* to a value of *99.0*: :::
+		*echo "99.0" >/etc/zypp/vars.d/releasever*
+
+	To remove the custom variable, simply delete its file in */etc/zypp/vars.d*: :::
+		*rm /etc/zypp/vars.d/releasever*
+
+	To check where you already use *$releasever* call: :::
+		*zypper --releasever @--HERE--@ lr -u*
 
 	Remember to protect the *$* when using these variables on a shell command line: :::
 		zypper ar -f http://ftp.gwdg.de/pub/linux/packman/suse/*\$*{nop}releasever packman
@@ -946,9 +963,6 @@ You can use the following variables within a *.repo* or *.service* files 'name' 
 	Bash style definition of default *${*'variable'*:-*'word'*}* and alternate *${*'variable'*:+*'word'*}* values: :::
 		SLE-*${*'releasever_major'*}${*'releasever_minor'*:+*-SP-'$releasever_minor'*}*
 
-
-	To check where you already use *$releasever* call: :::
-		*zypper --releasever @--HERE--@ lr -u*
 
 	NOTE: :::
 		Variable substitution within an URIs authority is limited to *host* and *port*. Bash style definition of default and alternate values is not supported. No variables can be used in an URIs *scheme*, *user* and *password*.
@@ -1713,7 +1727,7 @@ Repository Options: :: {nop}
 	Ignore remote repositories like http, ftp, smb and similar. This makes using zypper easier when being offline. When this option is specified, zypper acts as if the remote repositories were not defined at all.
 
 *--releasever* 'version'::
-	Set the value of the *$releasever* variable in all *.repo* files (default: 'current distribution version'). This can be used to switch to new distribution repositories when performing a distribution upgrade. See section *Repository Management* and the *dist-upgrade* (*dup*) command for details.
+	For the current command set the value of the *$releasever* repository variable to 'version'. This can be used to switch to new distribution repositories when performing a distribution upgrade. See the *dist-upgrade* (*dup*) command and section *Repository Management* for more details about using the *$releasever* repository variable.
 	+
 	To check where you already use *$releasever* call: :::
 		*zypper --releasever @--HERE--@ lr -u*
