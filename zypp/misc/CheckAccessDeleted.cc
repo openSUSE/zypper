@@ -53,28 +53,115 @@ namespace zypp
     typedef std::pair<std::string,std::unordered_set<std::string>> CacheEntry;
 
     /////////////////////////////////////////////////////////////////
-    /// \class FilterRunsInLXC
+    /// \class FilterRunsInContainer
     /// \brief Functor guessing whether \a PID is running in a container.
     ///
-    /// Assumme using different \c pid namespace than \c self.
+    /// Use /proc to guess if a process is running in a container
     /////////////////////////////////////////////////////////////////
-    struct FilterRunsInLXC
+    struct FilterRunsInContainer
     {
-      bool operator()( pid_t pid_r ) const
-      { return( nsIno( pid_r, "pid" ) != pidNS ); }
+    private:
 
-      FilterRunsInLXC()
-      : pidNS( nsIno( "self", "pid" ) )
-      {}
+      enum Type {
+        IGNORE,
+        HOST,
+        CONTAINER
+      };
 
-      static inline ino_t nsIno( const std::string & pid_r, const std::string & ns_r )
-      { return PathInfo("/proc/"+pid_r+"/ns/"+ns_r).ino(); }
+      /*!
+       * Checks if the given file in proc is part of our root
+       * or not. If the file was unlinked IGNORE is returned to signal
+       * that its better to check the next file.
+       */
+      Type in_our_root( const Pathname &path ) const {
 
-      static inline ino_t nsIno( pid_t pid_r, const std::string & ns_r )
-      { return  nsIno( asString(pid_r), ns_r ); }
+        const PathInfo procInfoStat( path );
 
-      ino_t pidNS;
+        // if we can not stat the file continue to the next one
+        if ( procInfoStat.error() ) return IGNORE;
+
+        // if the file was unlinked ignore it
+        if ( procInfoStat.nlink() == 0 )
+          return IGNORE;
+
+        // get the file the link points to, if that fails continue to the next
+        const Pathname linkTarget = filesystem::readlink( path );
+        if ( linkTarget.empty() ) return IGNORE;
+
+        // get stat info for the target file
+        const PathInfo linkStat( linkTarget );
+
+        // Non-existent path means it's not reachable by us.
+        if ( !linkStat.isExist() )
+          return CONTAINER;
+
+        // If the file exists, it could simply mean it exists in and outside a container, check inode to be safe
+        if ( linkStat.ino() != procInfoStat.ino())
+          return CONTAINER;
+
+        // If the inode is the same, it could simply mean it exists in and outside a container but on different devices, check to be safe
+        if ( linkStat.dev() != procInfoStat.dev() )
+          return CONTAINER;
+
+        // assume HOST if all tests fail
+        return HOST;
+      }
+
+    public:
+
+      /*!
+       * Iterates over the /proc contents for the given pid
+       */
+      bool operator()( const pid_t pid ) const {
+
+        // first check the exe file
+        const Pathname pidDir  = Pathname("/proc") / asString(pid);
+        const Pathname exeFile = pidDir / "exe";
+
+        auto res = in_our_root( exeFile );
+        if ( res > IGNORE )
+          return res == CONTAINER;
+
+        // if IGNORE was returned we need to continue testing all the files in /proc/<pid>/map_files until we hopefully
+        // find a still existing file. If all tests fail we will simply assume this pid is running on the HOST
+
+        // a map of all already tested files, each file can be mapped multiple times and we do not want to check them more than once
+        std::unordered_set<std::string> tested;
+
+        // iterate over all the entries in /proc/<pid>/map_files
+        filesystem::dirForEach( pidDir / "map_files", [ this, &tested, &res ]( const Pathname & dir_r, const char *const & name_r  ){
+
+          // some helpers to make the code more self explanatory
+          constexpr bool contloop = true;
+          constexpr bool stoploop = false;
+
+          const Pathname entryName = dir_r / name_r;
+
+          // get the links target file and check if we alreadys know it, also if we can not read link information we skip the file
+          const Pathname linkTarget = filesystem::readlink( entryName );
+          if ( linkTarget.empty() || !tested.insert( linkTarget.asString() ).second ) return contloop;
+
+          // try to get file type
+          const auto mappedFileType = in_our_root( entryName );
+
+          // if we got something, remember the value and stop the loop
+          if ( mappedFileType > IGNORE ) {
+            res = mappedFileType;
+            return stoploop;
+          }
+          return contloop;
+        });
+
+        // if res is still IGNORE we did not find a explicit answer. So to be safe we assume its running on the host
+        if ( res == IGNORE )
+          return false; // can't tell for sure, lets assume host
+
+        return res == CONTAINER;
+      }
+
+      FilterRunsInContainer() {}
     };
+
 
     /** bsc#1099847: Check for lsof version < 4.90 which does not support '-K i'
      * Just a quick check to allow code15 libzypp runnig in a code12 environment.
@@ -308,7 +395,7 @@ namespace zypp
     bool debugEnabled = !_debugFile.empty();
 
     pid_t cachepid = 0;
-    FilterRunsInLXC runsInLXC;
+    FilterRunsInContainer runsInLXC;
     for( std::string line = source.receiveLine(); ! line.empty(); line = source.receiveLine() )
     {
       // NOTE: line contains '\0' separeated fields!
