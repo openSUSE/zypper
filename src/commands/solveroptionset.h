@@ -15,7 +15,7 @@
 #include "src/global-settings.h"
 
 // Solver flag with/without recommends
-// (not used in remove and inr)
+// (not used in remove)
 class SolverRecommendsOptionSet : public BaseCommandOptionSet
 {
 public:
