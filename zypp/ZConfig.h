@@ -25,7 +25,7 @@
 #include "zypp/Pathname.h"
 #include "zypp/IdString.h"
 #include "zypp/TriBool.h"
-
+#include "zypp/ResolverFocus.h"
 #include "zypp/DownloadMode.h"
 #include "zypp/target/rpm/RpmFlags.h"
 
@@ -359,6 +359,11 @@ namespace zypp
        * \ingroup g_ZC_CONFIGFILES
        */
       Pathname vendorPath() const;
+
+      /**
+       * The resolvers general attitude when resolving jobs.
+       */
+      ResolverFocus solver_focus() const;
 
       /**
        * Solver regards required packages,patterns,... only

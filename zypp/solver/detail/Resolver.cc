@@ -101,7 +101,7 @@ Resolver::~Resolver()
 //---------------------------------------------------------------------------
 // forward flags too SATResolver
 
-void Resolver::setFocus( ResolverFocus focus_r )	{ _satResolver->_focus = focus_r; }
+void Resolver::setFocus( ResolverFocus focus_r )	{ _satResolver->_focus = ( focus_r == ResolverFocus::Default ) ? ZConfig::instance().solver_focus() : focus_r; }
 ResolverFocus Resolver::focus() const			{ return _satResolver->_focus; }
 
 #define ZOLV_FLAG_TRIBOOL( ZSETTER, ZGETTER, ZVARNAME, ZVARDEFAULT )			\

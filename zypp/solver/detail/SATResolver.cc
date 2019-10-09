@@ -202,6 +202,7 @@ SATResolver::SATResolver (const ResPool & pool, sat::detail::CPool *satPool)
     : _pool(pool)
     , _satPool(satPool)
     , _satSolver(NULL)
+    , _focus			( ZConfig::instance().solver_focus() )
     , _fixsystem(false)
     , _allowdowngrade		( false )
     , _allownamechange		( true )	// bsc#1071466

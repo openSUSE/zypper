@@ -326,6 +326,7 @@ namespace zypp
 	, gpgCheck			( true )
 	, repoGpgCheck			( indeterminate )
 	, pkgGpgCheck			( indeterminate )
+	, solver_focus			( ResolverFocus::Default )
         , solver_onlyRequires		( false )
         , solver_allowVendorChange	( false )
 	, solver_dupAllowDowngrade	( true )
@@ -494,6 +495,10 @@ namespace zypp
                 {
                   cfg_multiversion_path = Pathname(value);
                 }
+                else if ( entry == "solver.focus" )
+                {
+		  fromString( value, solver_focus );
+                }
                 else if ( entry == "solver.onlyRequires" )
                 {
                   solver_onlyRequires.set( str::strToBool( value, solver_onlyRequires ) );
@@ -661,6 +666,7 @@ namespace zypp
     DefaultOption<TriBool>	repoGpgCheck;
     DefaultOption<TriBool>	pkgGpgCheck;
 
+    ResolverFocus	solver_focus;
     Option<bool>	solver_onlyRequires;
     Option<bool>	solver_allowVendorChange;
     Option<bool>	solver_dupAllowDowngrade;
@@ -1067,6 +1073,7 @@ namespace zypp
   void ZConfig::resetRepoGpgCheck()			{ _pimpl->repoGpgCheck.restoreToDefault(); }
   void ZConfig::resetPkgGpgCheck()			{ _pimpl->pkgGpgCheck.restoreToDefault(); }
 
+  ResolverFocus ZConfig::solver_focus() const		{ return _pimpl->solver_focus; }
 
   bool ZConfig::solver_onlyRequires() const
   { return _pimpl->solver_onlyRequires; }
