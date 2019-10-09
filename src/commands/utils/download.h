@@ -43,6 +43,7 @@ public:
 
 private:
   DryRunOptionSet _dryRun { *this };
+  InitReposOptionSet _initRepos { *this };
   bool _allMatches = false;
 
 
