@@ -1549,6 +1549,12 @@ Other Commands
 
 	*--dry-run*::
 		Don't download any package, just report what would be done.
+
+	*-r*, *--repo* 'alias'|'name'|'#'|'URI'::
+		Work only with the repository specified by the alias, name, number or URI. This option can be used multiple times.
+
+	*--from* 'alias'|'name'|'#'|'URI'::
+		Select packages from the specified repository only. This option can be used multiple times.
 --
 
 *source-download*::

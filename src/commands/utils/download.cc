@@ -166,7 +166,11 @@ ZyppFlags::CommandGroup DownloadCmd::cmdOptions() const
          ZyppFlags::BoolType( &that->_allMatches, ZyppFlags::StoreTrue, _allMatches ),
          // translators: --all-matches
          _("Download all versions matching the commandline arguments. Otherwise only the best version of each matching package is downloaded.")
-      }
+      },
+      { "from", '\0', ZyppFlags::Repeatable | ZyppFlags::RequiredArgument, ZyppFlags::StringVectorType( &InitRepoSettings::instanceNoConst()._repoFilter, ARG_REPOSITORY),
+        // translators: --from <ALIAS|#|URI>
+        _("Select packages from the specified repository.")
+      },
   }};
 }
 
