@@ -7,6 +7,25 @@
 #include "solveroptionset.h"
 #include "utils/flags/flagtypes.h"
 
+namespace
+{
+  // Map string argument to ResolverFocus
+  ZyppFlags::Value ResolverFocusArgType( ResolverFocus & optval_r )
+  {
+    return ZyppFlags::Value (
+      ZyppFlags::noDefaultValue,
+      [ &optval_r ]( const ZyppFlags::CommandOption & option_r, const boost::optional<std::string> & argstr_r )
+      {
+	if ( !argstr_r )
+	  ZYPP_THROW( ZyppFlags::MissingArgumentException( option_r.name ) );
+
+	if ( ! zypp::fromString( *argstr_r, optval_r ) )
+	  ZYPP_THROW( ZyppFlags::InvalidValueException( option_r.name, *argstr_r, str::Format(_("Valid values: %1%")) % "Job, Installed, Update" ) );
+      },
+      ARG_MODE
+    );
+  }
+} //namespace
 
 std::vector<zypp::ZyppFlags::CommandGroup> SolverRecommendsOptionSet::options()
 {
@@ -40,7 +59,8 @@ std::vector<zypp::ZyppFlags::CommandGroup> SolverCommonOptionSet::options()
       {
         { "debug-solver", '\0', ZyppFlags::NoArgument, ZyppFlags::TriBoolType( set._debugSolver, ZyppFlags::StoreTrue ), _("Create a solver test case for debugging.") },
         { "force-resolution", '\0', ZyppFlags::NoArgument, ZyppFlags::TriBoolType( set._forceResolution, ZyppFlags::StoreTrue ), _("Force the solver to find a solution (even an aggressive one) rather than asking.") },
-        { "no-force-resolution", 'R', ZyppFlags::NoArgument, ZyppFlags::TriBoolType( set._forceResolution, ZyppFlags::StoreFalse ), _("Do not force the solver to find a solution, let it ask.") }
+        { "no-force-resolution", 'R', ZyppFlags::NoArgument, ZyppFlags::TriBoolType( set._forceResolution, ZyppFlags::StoreFalse ), _("Do not force the solver to find a solution, let it ask.") },
+	{ "solver-focus", '\0', ZyppFlags::RequiredArgument, ResolverFocusArgType( set._focus ), _("Set the solvers general attitude when resolving a job.") },
       },
       {
         //conflicting flags

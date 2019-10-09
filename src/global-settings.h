@@ -11,6 +11,7 @@
 #include <string>
 
 #include <zypp/TriBool.h>
+#include <zypp/ResolverFocus.h>
 
 /**
  * \file This file is used for settings and flags that were directly parsed from copts in the code
@@ -63,6 +64,7 @@ using InitRepoSettings = GlobalSettingSingleton<InitRepoSettingsData>;
  */
 struct SolverSettingsData
 {
+  zypp::ResolverFocus _focus { zypp::ResolverFocus::Default };
   zypp::TriBool _debugSolver = zypp::indeterminate;
   zypp::TriBool _forceResolution = zypp::indeterminate;
   zypp::TriBool _recommends = zypp::indeterminate;

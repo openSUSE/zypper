@@ -102,7 +102,16 @@ Throughout this manual we will often refer to resolvables simply as 'packages' a
 
 Package Dependencies
 ~~~~~~~~~~~~~~~~~~~~
-Software packages depend on each other in various ways. Packages usually 'require' or 'recommend' other packages, but they can also 'conflict' with other packages. Packages may support specific hardware or language settings. Zypper uses a 'dependency solver' to find out which packages need to be installed to satisfy the user's request. See https://en.opensuse.org/Libzypp/Dependencies for more information.
+Software packages depend on each other in various ways. Packages usually 'require' or 'recommend' other packages, but they can also 'conflict' with them. Packages may support specific hardware or language settings. Zypper uses a 'dependency solver' to find out which packages need to be installed to satisfy the user's request.
+
+If you do not request a specific version of a package the solver will pick a reasonable one. The solvers general attitude when resolving a job is to focus on installing the best version of the requested package and to add or update dependencies as they are needed. Aside from this 'Focus on Job', which is the default, two other focus modes are available:
+
+In 'Focus on Installed' mode the solver focuses on applying as little changes to the installed packages as needed. Choosing an older version of a requested package is valid if it's dependencies require less changes to the system. The solver will try to avoid updating already installed packages.
+
+In 'Focus on Update' mode the solver focuses on updating the requested package and all its dependencies as much as possible. Beware, installing a single package in this mode may easily lead to a mini system update.
+
+For a single command the focus mode can be set using the *--solver-focus MODE* switch. Valid modes are *Job*, *Installed* or *Update*. If you want to change the default mode for your system, set [/etc/zypp/zypp.conf:solver.focus] to the desired value.
+
 
 Automatically installed packages
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
