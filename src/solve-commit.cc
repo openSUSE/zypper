@@ -343,8 +343,9 @@ static void set_solver_flags( Zypper & zypper )
   // solve_with_update must be false until the command passed the initialization!
   God->resolver()->setUpdateMode( zypper.runtimeData().solve_with_update );
 
-  // Use resolver->dupSet... if ZypperCommand::DIST_UPGRADE
   const auto &solverSettings = SolverSettings::instance();
+  God->resolver()->setFocus( solverSettings._focus );
+  // Use resolver->dupSet... if ZypperCommand::DIST_UPGRADE
   if ( zypper.command() == ZypperCommand::DIST_UPGRADE )
   {
     if ( !indeterminate( solverSettings._allowDowngrade ) ) God->resolver()->dupSetAllowDowngrade( bool(solverSettings._allowDowngrade) );
