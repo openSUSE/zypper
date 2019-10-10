@@ -468,6 +468,11 @@ Update Management Commands
 
 	*--best-effort*::
 		See the *update* command for description.
+
+	Expert Options: :: Don't use them unless you know you need them.
+
+include::{incdir}/option_Solver_Flags_Installs.txt[]
+
 --
 
 *update* (*up*) ['options'] ['packagename']...::
