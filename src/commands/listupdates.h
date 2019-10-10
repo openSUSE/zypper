@@ -10,6 +10,7 @@
 #include "commands/basecommand.h"
 #include "utils/flags/zyppflags.h"
 #include "optionsets.h"
+#include "solveroptionset.h"
 
 #include <zypp/ResKind.h>
 
@@ -23,6 +24,7 @@ private:
   bool _all = false;
   bool _bestEffort = false;
   InitReposOptionSet _initReposOpts { *this };
+  SolverInstallsOptionSet _solverOpts { *this };
 
 
   // ZypperBaseCommand interface
