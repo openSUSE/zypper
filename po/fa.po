@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: opensuse-i 18n\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-27 13:31+0100\n"
+"POT-Creation-Date: 2019-10-11 09:20+0200\n"
 "PO-Revision-Date: 2019-05-21 15:55+0000\n"
 "Last-Translator: Mohammad Rezaei Seresht <m_rezaei_seresht@hotmail.com>\n"
 "Language-Team: Persian <https://l10n.opensuse.org/projects/libzypp/master/fa/"
@@ -1341,20 +1341,20 @@ msgid "Command exited with unknown error."
 msgstr "دستور با خطای ناشناخته خارج شد."
 
 #. TranslatorExplanation first %s is key name, second is keyring name
-#: zypp/KeyRing.cc:599
+#: zypp/KeyRing.cc:590
 #, c-format, boost-format
 msgid "Tried to import not existent key %s into keyring %s"
 msgstr "برای وارد کردن کلید ناموجود %s در دسته کلید %s تلاش شد"
 
-#: zypp/KeyRing.cc:605 zypp/KeyRing.cc:609
+#: zypp/KeyRing.cc:596
 msgid "Failed to import key."
 msgstr "ناموفق در وارد کردن کلید."
 
-#: zypp/KeyRing.cc:616 zypp/KeyRing.cc:620 zypp/KeyRing.cc:624
+#: zypp/KeyRing.cc:603
 msgid "Failed to delete key."
 msgstr "در حذف کلید ناموفق بود."
 
-#: zypp/KeyRing.cc:633
+#: zypp/KeyRing.cc:609
 #, c-format, boost-format
 msgid "Signature file %s not found"
 msgstr "پرونده ی امضای %s  یافت نشد"
@@ -3778,34 +3778,34 @@ msgstr "در جستجوی شناسه کلید gpg %1% در مخزن %2%."
 msgid "Repository %1% does not define additional 'gpgkey=' URLs."
 msgstr ""
 
-#: zypp/RepoManager.cc:314
+#: zypp/RepoManager.cc:312
 #, boost-format
 msgid "Cannot read repo directory '%1%': Permission denied"
 msgstr "نمیتوان فهرست مخزن '%1%' را خواند: دسترسی غیرمجاز است"
 
 #. TranslatorExplanation '%s' is a pathname
-#: zypp/RepoManager.cc:322 zypp/RepoManager.cc:785 zypp/RepoManager.cc:1538
+#: zypp/RepoManager.cc:320 zypp/RepoManager.cc:783 zypp/RepoManager.cc:1536
 #: zypp/repo/PluginServices.cc:49
 #, c-format, boost-format
 msgid "Failed to read directory '%s'"
 msgstr "ناموفق در خواندن مسیر '%s'"
 
-#: zypp/RepoManager.cc:332
+#: zypp/RepoManager.cc:330
 #, boost-format
 msgid "Cannot read repo file '%1%': Permission denied"
 msgstr "نمیتوان پرونده ی مخزن  '%1%' را خواند: دسترسی غیرمجاز است"
 
-#: zypp/RepoManager.cc:355
+#: zypp/RepoManager.cc:353
 msgid "Repository alias cannot start with dot."
 msgstr "نام مستعار مخزن نمیتواند با نقطه شروع شود."
 
-#: zypp/RepoManager.cc:366
+#: zypp/RepoManager.cc:364
 msgid "Service alias cannot start with dot."
 msgstr "نام مستعار سرویس نمیتواند با نقطه شروع شود."
 
 #. TranslatorExplanation '%s' is a filename
-#: zypp/RepoManager.cc:740 zypp/RepoManager.cc:1656 zypp/RepoManager.cc:1722
-#: zypp/RepoManager.cc:1800 zypp/RepoManager.cc:1865 zypp/RepoManager.cc:1996
+#: zypp/RepoManager.cc:738 zypp/RepoManager.cc:1654 zypp/RepoManager.cc:1720
+#: zypp/RepoManager.cc:1798 zypp/RepoManager.cc:1863 zypp/RepoManager.cc:1994
 #, c-format, boost-format
 msgid "Can't open file '%s' for writing."
 msgstr "نمیتوان پرونده ی '%s' را برای نوشتن باز کرد."
@@ -3813,44 +3813,44 @@ msgstr "نمیتوان پرونده ی '%s' را برای نوشتن باز کر
 #. translators: Cleanup a repository previously owned by a meanwhile unknown (deleted) service.
 #. %1% = service name
 #. %2% = repository name
-#: zypp/RepoManager.cc:867
+#: zypp/RepoManager.cc:865
 #, boost-format
 msgid "Unknown service '%1%': Removing orphaned service repository '%2%'"
 msgstr "سرویس ناشناخته '%1%': در حال حذف مخزن سرویس جدا افتاده '%2%'"
 
 #. we will throw this later if no URL checks out fine
-#: zypp/RepoManager.cc:1094
+#: zypp/RepoManager.cc:1092
 msgid "Valid metadata not found at specified URL"
 msgid_plural "Valid metadata not found at specified URLs"
 msgstr[0] "شبه داده ی معتبر  در آدرس تعیین شده یافت نشد"
 msgstr[1] "شبه داده ی معتبر در آدرسهای تعیین شده یافت نشد"
 msgstr[2] "شبه داده ی معتبر در آدرسهای تعیین شده یافت نشد"
 
-#: zypp/RepoManager.cc:1142 zypp/RepoManager.cc:1254 zypp/RepoManager.cc:1310
+#: zypp/RepoManager.cc:1140 zypp/RepoManager.cc:1252 zypp/RepoManager.cc:1308
 #, c-format, boost-format
 msgid "Can't create %s"
 msgstr "نمیتوان %s را ساخت"
 
-#: zypp/RepoManager.cc:1150
+#: zypp/RepoManager.cc:1148
 msgid "Can't create metadata cache directory."
 msgstr "نمیتوان فهرست کش شبه داده را ساخت."
 
-#: zypp/RepoManager.cc:1296
+#: zypp/RepoManager.cc:1294
 #, c-format, boost-format
 msgid "Building repository '%s' cache"
 msgstr "در حال ساخت کش مخزن '%s'"
 
-#: zypp/RepoManager.cc:1316
+#: zypp/RepoManager.cc:1314
 #, c-format, boost-format
 msgid "Can't create cache at %s - no writing permissions."
 msgstr "نمیتوان کش را در %s ساخت - دسترسی نوشتن نیست."
 
-#: zypp/RepoManager.cc:1381
+#: zypp/RepoManager.cc:1379
 #, c-format, boost-format
 msgid "Failed to cache repo (%d)."
 msgstr "ناموفق در کش مخزن (%d)."
 
-#: zypp/RepoManager.cc:1392
+#: zypp/RepoManager.cc:1390
 msgid "Unhandled repository type"
 msgstr "نوع مخزن کنترل نشده"
 
@@ -3860,44 +3860,44 @@ msgstr "نوع مخزن کنترل نشده"
 #. on ftp file-not-found(bnc #335906). Instead we'll check another types
 #. before throwing.
 #. TranslatorExplanation '%s' is an URL
-#: zypp/RepoManager.cc:1429 zypp/RepoManager.cc:2491
+#: zypp/RepoManager.cc:1427 zypp/RepoManager.cc:2489
 #, c-format, boost-format
 msgid "Error trying to read from '%s'"
 msgstr "خطا در تلاش برای خواندن از '%s'"
 
 #. TranslatorExplanation '%s' is an URL
-#: zypp/RepoManager.cc:1482 zypp/RepoManager.cc:2499
+#: zypp/RepoManager.cc:1480 zypp/RepoManager.cc:2497
 #, c-format, boost-format
 msgid "Unknown error reading from '%s'"
 msgstr "خطای ناشناس در خواندن از  '%s'"
 
-#: zypp/RepoManager.cc:1620
+#: zypp/RepoManager.cc:1618
 #, c-format, boost-format
 msgid "Adding repository '%s'"
 msgstr "در حال اضافه کردن مخزن '%s'"
 
 #. TranslatorExplanation '%s' is an URL
-#: zypp/RepoManager.cc:1708
+#: zypp/RepoManager.cc:1706
 #, c-format, boost-format
 msgid "Invalid repo file name at '%s'"
 msgstr "نام پرونده ی مخزن نامعتبر در '%s'"
 
-#: zypp/RepoManager.cc:1749
+#: zypp/RepoManager.cc:1747
 #, c-format, boost-format
 msgid "Removing repository '%s'"
 msgstr "در حال حذف مخزن  '%s'"
 
-#: zypp/RepoManager.cc:1768 zypp/RepoManager.cc:1846
+#: zypp/RepoManager.cc:1766 zypp/RepoManager.cc:1844
 msgid "Can't figure out where the repo is stored."
 msgstr "نمیتوان کشف کرد که مخزن در کجا ذخیره شده است."
 
 #. TranslatorExplanation '%s' is a filename
-#: zypp/RepoManager.cc:1782 zypp/RepoManager.cc:1984
+#: zypp/RepoManager.cc:1780 zypp/RepoManager.cc:1982
 #, c-format, boost-format
 msgid "Can't delete '%s'"
 msgstr "'%s' را نمیتوان حذف کرد"
 
-#: zypp/RepoManager.cc:1972 zypp/RepoManager.cc:2422
+#: zypp/RepoManager.cc:1970 zypp/RepoManager.cc:2420
 msgid "Can't figure out where the service is stored."
 msgstr "نمیتوان کشف کرد سرویس در کجا ذخیره شده است."
 
@@ -4011,15 +4011,6 @@ msgstr ""
 msgid "History:"
 msgstr "تاریخچه:"
 
-#: zypp/base/InterProcessMutex.cc:83
-#, c-format, boost-format
-msgid "Can't open lock file: %s"
-msgstr "نمیتوان فایل قفل را باز کرد: %s"
-
-#: zypp/base/InterProcessMutex.cc:143
-msgid "This action is being run by another program already."
-msgstr "این عمل در حال حاظر در حال اجرا توسط یک نرم افزار دیگر است."
-
 #: zypp/base/StrMatcher.cc:152
 #, c-format, boost-format
 msgid "Unknown match mode '%s'"
@@ -4041,18 +4032,18 @@ msgid "Invalid regular expression '%s'"
 msgstr "عبارت عادی نامعتبر '%s'"
 
 #. !\todo add comma to the message for the next release
-#: zypp/media/MediaCIFS.cc:427 zypp/media/MediaCurl.cc:1775
+#: zypp/media/MediaCIFS.cc:427 zypp/media/MediaCurl.cc:1738
 #, c-format, boost-format
 msgid "Authentication required for '%s'"
 msgstr "احراز هویت برای '%s' مورد نیاز است"
 
-#: zypp/media/MediaCurl.cc:1139
+#: zypp/media/MediaCurl.cc:1111
 msgid ""
 "Visit the SUSE Customer Center to check whether your registration is valid "
 "and has not expired."
 msgstr ""
 
-#: zypp/media/MediaCurl.cc:1141
+#: zypp/media/MediaCurl.cc:1113
 msgid ""
 "Visit the Novell Customer Center to check whether your registration is valid "
 "and has not expired."
@@ -4060,91 +4051,91 @@ msgstr ""
 "مرکز مشتریان Novell را برای بررسی اینکه ثبت نام شما معتبر است و منقضی نشده "
 "است را مشاهده کنید."
 
-#: zypp/media/MediaException.cc:31
+#: zypp/media/MediaException.cc:33
 #, c-format, boost-format
 msgid "Failed to mount %s on %s"
 msgstr "ناموفق در سوار کردن %s بر روی %s"
 
-#: zypp/media/MediaException.cc:41
+#: zypp/media/MediaException.cc:43
 #, c-format, boost-format
 msgid "Failed to unmount %s"
 msgstr "ناموفق در پیاده سازی %s"
 
-#: zypp/media/MediaException.cc:46
+#: zypp/media/MediaException.cc:48
 #, c-format, boost-format
 msgid "Bad file name: %s"
 msgstr "نام پرونده ی بد: %s"
 
-#: zypp/media/MediaException.cc:51
+#: zypp/media/MediaException.cc:53
 #, c-format, boost-format
 msgid "Medium not opened when trying to perform action '%s'."
 msgstr "رسانه در هنگام تلاش برای انجام عمل '%s' باز نشده است."
 
-#: zypp/media/MediaException.cc:56
+#: zypp/media/MediaException.cc:58
 #, c-format, boost-format
 msgid "File '%s' not found on medium '%s'"
 msgstr "پرونده ی '%s' در رسانه ی '%s' یافت نشد"
 
-#: zypp/media/MediaException.cc:61
+#: zypp/media/MediaException.cc:63
 #, c-format, boost-format
 msgid "Cannot write file '%s'."
 msgstr "نمیتوان پرونده ی '%s' را نوشت."
 
-#: zypp/media/MediaException.cc:66
+#: zypp/media/MediaException.cc:68
 msgid "Medium not attached"
 msgstr "رسانه متصل نشده است"
 
-#: zypp/media/MediaException.cc:71
+#: zypp/media/MediaException.cc:73
 msgid "Bad media attach point"
 msgstr "نقطه ی اتصال رسانه ی بد"
 
 #. TranslatorExplanation: curl is the name of a library, don't translate
-#: zypp/media/MediaException.cc:77
+#: zypp/media/MediaException.cc:79
 #, c-format, boost-format
 msgid "Download (curl) initialization failed for '%s'"
 msgstr "مقداردهی دریافت (curl9) برای '%s' ناموفق بود"
 
-#: zypp/media/MediaException.cc:82
+#: zypp/media/MediaException.cc:84
 #, c-format, boost-format
 msgid "System exception '%s' on medium '%s'."
 msgstr "استثناء سیستم '%s' برای رسانه ی '%s'."
 
-#: zypp/media/MediaException.cc:87
+#: zypp/media/MediaException.cc:89
 #, c-format, boost-format
 msgid "Path '%s' on medium '%s' is not a file."
 msgstr "مسیر '%s' در رسانه ی '%s' یک پرونده نیست."
 
-#: zypp/media/MediaException.cc:92
+#: zypp/media/MediaException.cc:94
 #, c-format, boost-format
 msgid "Path '%s' on medium '%s' is not a directory."
 msgstr "مسیر '%s' در رسانه ی '%s' یک فهرست نیست."
 
-#: zypp/media/MediaException.cc:99
+#: zypp/media/MediaException.cc:101
 msgid "Malformed URI"
 msgstr "ادرس بدشکل"
 
-#: zypp/media/MediaException.cc:109
+#: zypp/media/MediaException.cc:111
 msgid "Empty host name in URI"
 msgstr "نام میزبان خالی در آدرس"
 
-#: zypp/media/MediaException.cc:114
+#: zypp/media/MediaException.cc:116
 msgid "Empty filesystem in URI"
 msgstr "فایل سیستم خالی در آدرس"
 
-#: zypp/media/MediaException.cc:119
+#: zypp/media/MediaException.cc:121
 msgid "Empty destination in URI"
 msgstr "مسیر خالی در آدرس"
 
-#: zypp/media/MediaException.cc:124
+#: zypp/media/MediaException.cc:126
 #, c-format, boost-format
 msgid "Unsupported URI scheme in '%s'."
 msgstr "شکل آدرس پشتیبانی نشده در '%s'."
 
-#: zypp/media/MediaException.cc:129
+#: zypp/media/MediaException.cc:131
 msgid "Operation not supported by medium"
 msgstr "عملیات توسط رسانه پشتیبانی نشده است"
 
-#: zypp/media/MediaException.cc:136
+#: zypp/media/MediaException.cc:138
 #, c-format, boost-format
 msgid ""
 "Download (curl) error for '%s':\n"
@@ -4156,51 +4147,51 @@ msgstr ""
 "متن خطا: %s \n"
 
 #. TranslatorExplanation: curl is the name of a library, don't translate
-#: zypp/media/MediaException.cc:144
+#: zypp/media/MediaException.cc:146
 #, c-format, boost-format
 msgid "Error occurred while setting download (curl) options for '%s':"
 msgstr "خطایی در هنگام تنظیم اختیارات دریافت (curl) برای '%s' رخ داد:"
 
-#: zypp/media/MediaException.cc:151
+#: zypp/media/MediaException.cc:153
 #, c-format, boost-format
 msgid "Media source '%s' does not contain the desired medium"
 msgstr "منبع رسانه ی '%s' حاوی رسانه ی مطلوب نیست"
 
-#: zypp/media/MediaException.cc:156
+#: zypp/media/MediaException.cc:158
 #, c-format, boost-format
 msgid "Medium '%s' is in use by another instance"
 msgstr "رسانه ی '%s' توسط یک مورد دیگر در حال استفاده است"
 
-#: zypp/media/MediaException.cc:162
+#: zypp/media/MediaException.cc:164
 msgid "Cannot eject any media"
 msgstr "نمیتوان هیچ رسانه ای را خارج کرد"
 
-#: zypp/media/MediaException.cc:164
+#: zypp/media/MediaException.cc:166
 #, c-format, boost-format
 msgid "Cannot eject media '%s'"
 msgstr "نمیتوان رسانه ی '%s' را خارج کرد"
 
-#: zypp/media/MediaException.cc:179
+#: zypp/media/MediaException.cc:181
 #, c-format, boost-format
 msgid "Permission to access '%s' denied."
 msgstr "اجازه برای دسترسی به '%s' داده نشد."
 
-#: zypp/media/MediaException.cc:187
+#: zypp/media/MediaException.cc:189
 #, c-format, boost-format
 msgid "Timeout exceeded when accessing '%s'."
 msgstr "مهلت زمانی در هنگام دسترسی به '%s' به اتمام رسید."
 
-#: zypp/media/MediaException.cc:195
+#: zypp/media/MediaException.cc:197
 #, c-format, boost-format
 msgid "Downloaded data exceeded the expected filesize '%s' of '%s'."
 msgstr ""
 
-#: zypp/media/MediaException.cc:203
+#: zypp/media/MediaException.cc:205
 #, c-format, boost-format
 msgid "Location '%s' is temporarily unaccessible."
 msgstr "مکان '%s' به صورت موقتی غیر قابل دسترسی است."
 
-#: zypp/media/MediaException.cc:211
+#: zypp/media/MediaException.cc:213
 #, c-format, boost-format
 msgid " SSL certificate problem, verify that the CA cert is OK for '%s'."
 msgstr " ایراد گواهی SSL، لطفا بررسی کنید که گواهی CA برای '%s' درست است."
@@ -4217,7 +4208,7 @@ msgstr ""
 msgid "Unsupported HTTP authentication method '%s'"
 msgstr "حالت احراز هویت پشتیبانی نشده '%s'"
 
-#: zypp/misc/CheckAccessDeleted.cc:357
+#: zypp/misc/CheckAccessDeleted.cc:444
 msgid "Please install package 'lsof' first."
 msgstr "لطفا ابتدا بسته ی 'lsof' را نصب کنید."
 
@@ -4433,98 +4424,99 @@ msgstr "شکستن %s با نادیده گرفتن برخی از وابستگی�
 msgid "generally ignore of some dependencies"
 msgstr "نادیده گرفته برخی وابستگیها به صورت عمومی"
 
-#: zypp/solver/detail/SATResolver.cc:988
+#: zypp/solver/detail/SATResolver.cc:1052
 #, c-format, boost-format
 msgid "%s does not belong to a distupgrade repository"
 msgstr "%s مربوط به یک مخزن distupgrade نیست"
 
-#: zypp/solver/detail/SATResolver.cc:992
+#: zypp/solver/detail/SATResolver.cc:1055
 #, c-format, boost-format
 msgid "%s has inferior architecture"
 msgstr "%s دارای معماری نامرغوب است"
 
-#: zypp/solver/detail/SATResolver.cc:996
+#: zypp/solver/detail/SATResolver.cc:1058
 #, c-format, boost-format
 msgid "problem with installed package %s"
 msgstr "ایراد در بسته ی نصب شده ی %s"
 
-#: zypp/solver/detail/SATResolver.cc:999
+#: zypp/solver/detail/SATResolver.cc:1061
 msgid "conflicting requests"
 msgstr "درخواستهای متداخل"
 
-#: zypp/solver/detail/SATResolver.cc:1002
+#: zypp/solver/detail/SATResolver.cc:1064
 msgid "some dependency problem"
 msgstr "برخی مشکلات وابستگی"
 
-#: zypp/solver/detail/SATResolver.cc:1005
+#: zypp/solver/detail/SATResolver.cc:1067
 #, c-format, boost-format
 msgid "nothing provides requested %s"
 msgstr "هیچ چیز %s درخواستی را مهیا نمیکند"
 
-#: zypp/solver/detail/SATResolver.cc:1006
-#: zypp/solver/detail/SATResolver.cc:1010
+#: zypp/solver/detail/SATResolver.cc:1068
+#: zypp/solver/detail/SATResolver.cc:1072
 msgid "Have you enabled all requested repositories?"
 msgstr "آیا شما تمامی مخازن درخواستی را فعال کرده اید؟"
 
-#: zypp/solver/detail/SATResolver.cc:1009
+#: zypp/solver/detail/SATResolver.cc:1071
 #, c-format, boost-format
 msgid "package %s does not exist"
 msgstr "بسته ی %s وجود ندارد"
 
-#: zypp/solver/detail/SATResolver.cc:1013
+#: zypp/solver/detail/SATResolver.cc:1075
 msgid "unsupported request"
 msgstr "درخواست پشتیبانی نشده"
 
-#: zypp/solver/detail/SATResolver.cc:1016
+#: zypp/solver/detail/SATResolver.cc:1078
 #, c-format, boost-format
 msgid "%s is provided by the system and cannot be erased"
 msgstr "%s توسط سیستم مهیا شده است و نمیتواند حذف شود"
 
-#: zypp/solver/detail/SATResolver.cc:1020
+#: zypp/solver/detail/SATResolver.cc:1081
 #, c-format, boost-format
 msgid "%s is not installable"
 msgstr "%s قابل نصب نیست"
 
-#: zypp/solver/detail/SATResolver.cc:1025
+#. for setting weak dependencies
+#: zypp/solver/detail/SATResolver.cc:1085
 #, c-format, boost-format
 msgid "nothing provides %s needed by %s"
 msgstr "هیچ چیز %s که توسط %s مورد نیاز است را مهیا نمیکند"
 
-#: zypp/solver/detail/SATResolver.cc:1030
+#: zypp/solver/detail/SATResolver.cc:1088
 #, c-format, boost-format
 msgid "cannot install both %s and %s"
 msgstr "نمیتوان هردو %s و %s را نصب کرد"
 
-#: zypp/solver/detail/SATResolver.cc:1035
+#: zypp/solver/detail/SATResolver.cc:1091
 #, c-format, boost-format
 msgid "%s conflicts with %s provided by %s"
 msgstr "%s با %s که توسط %s مهیا شده است متداخل است"
 
-#: zypp/solver/detail/SATResolver.cc:1040
+#: zypp/solver/detail/SATResolver.cc:1094
 #, c-format, boost-format
 msgid "%s obsoletes %s provided by %s"
 msgstr "%s منسوخ میکند %s را که توسط %s مهیا شده است"
 
-#: zypp/solver/detail/SATResolver.cc:1045
+#: zypp/solver/detail/SATResolver.cc:1097
 #, c-format, boost-format
 msgid "installed %s obsoletes %s provided by %s"
 msgstr "%s نصب شده منسوخ میکند %s را که توسط %s مهیا شده است"
 
-#: zypp/solver/detail/SATResolver.cc:1049
+#: zypp/solver/detail/SATResolver.cc:1100
 #, c-format, boost-format
 msgid "solvable %s conflicts with %s provided by itself"
 msgstr "حل شونده ی %s با %s مهیا شده توسط خودش متداخل است"
 
-#: zypp/solver/detail/SATResolver.cc:1081
+#: zypp/solver/detail/SATResolver.cc:1131
 #, c-format, boost-format
 msgid "%s requires %s, but this requirement cannot be provided"
 msgstr "%s میخواهد %s را، اما این نیازمندی قابل مهیا شدن نیست"
 
-#: zypp/solver/detail/SATResolver.cc:1083
+#: zypp/solver/detail/SATResolver.cc:1133
 msgid "deleted providers: "
 msgstr "ارائه دهنده های حذف شده: "
 
-#: zypp/solver/detail/SATResolver.cc:1093
+#: zypp/solver/detail/SATResolver.cc:1143
 msgid ""
 "\n"
 "not installable providers: "
@@ -4532,88 +4524,88 @@ msgstr ""
 "\n"
 "ارائه دهندگان غیر قابل نصب: "
 
-#: zypp/solver/detail/SATResolver.cc:1095
+#: zypp/solver/detail/SATResolver.cc:1145
 msgid "not installable providers: "
 msgstr "ارائه دهندگان غیر قابل نصب: "
 
-#: zypp/solver/detail/SATResolver.cc:1152
+#: zypp/solver/detail/SATResolver.cc:1207
 #, c-format, boost-format
 msgid "remove lock to allow removal of %s"
 msgstr "قفل را جهت حذف %s پاک کنید"
 
-#: zypp/solver/detail/SATResolver.cc:1157
-#: zypp/solver/detail/SATResolver.cc:1193
+#: zypp/solver/detail/SATResolver.cc:1212
+#: zypp/solver/detail/SATResolver.cc:1248
 #, c-format, boost-format
 msgid "do not install %s"
 msgstr "%s را نصب نکن"
 
-#: zypp/solver/detail/SATResolver.cc:1172
-#: zypp/solver/detail/SATResolver.cc:1214
+#: zypp/solver/detail/SATResolver.cc:1227
+#: zypp/solver/detail/SATResolver.cc:1269
 #, c-format, boost-format
 msgid "keep %s"
 msgstr "%s را نگه دار"
 
-#: zypp/solver/detail/SATResolver.cc:1177
+#: zypp/solver/detail/SATResolver.cc:1232
 #, c-format, boost-format
 msgid "remove lock to allow installation of %s"
 msgstr "قفل را جهت نصب %s حذف کن"
 
-#: zypp/solver/detail/SATResolver.cc:1228
-#: zypp/solver/detail/SATResolver.cc:1249
+#: zypp/solver/detail/SATResolver.cc:1283
+#: zypp/solver/detail/SATResolver.cc:1304
 msgid "This request will break your system!"
 msgstr "این درخواست سیستم شما را خواهد شکست!"
 
-#: zypp/solver/detail/SATResolver.cc:1229
-#: zypp/solver/detail/SATResolver.cc:1250
+#: zypp/solver/detail/SATResolver.cc:1284
+#: zypp/solver/detail/SATResolver.cc:1305
 msgid "ignore the warning of a broken system"
 msgstr "نادیده گرفتن هشدار سیستم شکسته شده"
 
-#: zypp/solver/detail/SATResolver.cc:1234
+#: zypp/solver/detail/SATResolver.cc:1289
 #, c-format, boost-format
 msgid "do not ask to install a solvable providing %s"
 msgstr "درباره ی نصب یک حل شونده که %s را ارائه میدهد سوال نکن"
 
-#: zypp/solver/detail/SATResolver.cc:1256
+#: zypp/solver/detail/SATResolver.cc:1311
 #, c-format, boost-format
 msgid "do not ask to delete all solvables providing %s"
 msgstr "درباره ی حذف تمامی حل شونده ها که %s را ارائه میدهند سوال نکن"
 
-#: zypp/solver/detail/SATResolver.cc:1269
+#: zypp/solver/detail/SATResolver.cc:1324
 #, c-format, boost-format
 msgid "do not install most recent version of %s"
 msgstr "نسخه های جدیدتر %s را نصب نکن"
 
-#: zypp/solver/detail/SATResolver.cc:1290
+#: zypp/solver/detail/SATResolver.cc:1345
 #, c-format, boost-format
 msgid "keep %s despite the inferior architecture"
 msgstr "نگهداری %s با وجود اینکه معماری نامرغوب دارد"
 
-#: zypp/solver/detail/SATResolver.cc:1295
+#: zypp/solver/detail/SATResolver.cc:1350
 #, c-format, boost-format
 msgid "install %s despite the inferior architecture"
 msgstr "نصب %s با وجود اینکه معماری نامرغوب دارد"
 
-#: zypp/solver/detail/SATResolver.cc:1304
+#: zypp/solver/detail/SATResolver.cc:1359
 #, c-format, boost-format
 msgid "keep obsolete %s"
 msgstr "نگهداری %s منسوخ شده"
 
-#: zypp/solver/detail/SATResolver.cc:1309
+#: zypp/solver/detail/SATResolver.cc:1364
 #, c-format, boost-format
 msgid "install %s from excluded repository"
 msgstr "نصب %s از مخزن مستثنی"
 
-#: zypp/solver/detail/SATResolver.cc:1329
+#: zypp/solver/detail/SATResolver.cc:1384
 #, c-format, boost-format
 msgid "downgrade of %s to %s"
 msgstr "تنزل درجه ی %s به %s"
 
-#: zypp/solver/detail/SATResolver.cc:1336
+#: zypp/solver/detail/SATResolver.cc:1391
 #, c-format, boost-format
 msgid "architecture change of %s to %s"
 msgstr "تغییر معماری %s به %s"
 
-#: zypp/solver/detail/SATResolver.cc:1345
+#: zypp/solver/detail/SATResolver.cc:1400
 #, c-format, boost-format
 msgid ""
 "install %s (with vendor change)\n"
@@ -4622,12 +4614,12 @@ msgstr ""
 "نصب %s (با تغییر فروشنده) \n"
 "  %s  -->  %s"
 
-#: zypp/solver/detail/SATResolver.cc:1354
+#: zypp/solver/detail/SATResolver.cc:1409
 #, c-format, boost-format
 msgid "replacement of %s with %s"
 msgstr "جایگزینی %s با %s"
 
-#: zypp/solver/detail/SATResolver.cc:1365
+#: zypp/solver/detail/SATResolver.cc:1420
 #, c-format, boost-format
 msgid "deinstallation of %s"
 msgstr "از نصب خارج کردن %s"
@@ -4678,86 +4670,44 @@ msgstr "خطا در ارسال اعلام پیغام بروزرسانی."
 msgid "New update message"
 msgstr "پیغام بروزرسانی جدید"
 
-#: zypp/target/hal/HalContext.cc:25 zypp/target/hal/HalContext.cc:28
-#: zypp/target/hal/HalContext.cc:33
-msgid "Hal Exception"
-msgstr "استثنای Hal"
-
-#: zypp/target/hal/HalContext.cc:38
-msgid "Sorry, but this version of libzypp was built without HAL support."
-msgstr ""
-"عذخواهی میکنیم، اما این نسخه ی libzypp بدون پشتیبانی از HAL ساخته شده است."
-
-#: zypp/target/hal/HalContext.cc:131
-msgid "HalContext not connected"
-msgstr "HalContext متصل نشده است"
-
-#: zypp/target/hal/HalContext.cc:141
-msgid "HalDrive not initialized"
-msgstr "HalDrive مقداردهی اولیه نشده است"
-
-#: zypp/target/hal/HalContext.cc:151
-msgid "HalVolume not initialized"
-msgstr "HalVolume مقداردهی نشده است"
-
-#: zypp/target/hal/HalContext.cc:243
-msgid "Unable to create dbus connection"
-msgstr "ناتوان در ساخت ارتباط dbus"
-
-#: zypp/target/hal/HalContext.cc:256
-msgid "libhal_ctx_new: Can't create libhal context"
-msgstr "libhal_ctx_new: نمیتوان متن libhal را ساخت"
-
-#: zypp/target/hal/HalContext.cc:271
-msgid "libhal_set_dbus_connection: Can't set dbus connection"
-msgstr "libhal_set_dbus_connection: نمیتوان ارتباط dbus را تنظیم کرد"
-
-#: zypp/target/hal/HalContext.cc:286
-msgid "Unable to initalize HAL context -- hald not running?"
-msgstr "ناتوان در مقداردهی به متن HAL -- آیا hald اجرا نمیشود؟"
-
-#: zypp/target/hal/HalContext.cc:865
-msgid "Not a CDROM drive"
-msgstr "درایو CDROM نیست"
-
 #. TranslatorExplanation after semicolon is error message
 #. TranslatorExplanation the colon is followed by an error message
-#: zypp/target/rpm/RpmDb.cc:843 zypp/target/rpm/RpmDb.cc:2119
-#: zypp/target/rpm/RpmDb.cc:2265
+#: zypp/target/rpm/RpmDb.cc:843 zypp/target/rpm/RpmDb.cc:2123
+#: zypp/target/rpm/RpmDb.cc:2269
 msgid "RPM failed: "
 msgstr "RPM شکست خورد: "
 
 #. Translator: %1% is a gpg public key
-#: zypp/target/rpm/RpmDb.cc:1174
+#: zypp/target/rpm/RpmDb.cc:1173
 #, boost-format
 msgid "Failed to import public key %1%"
 msgstr "ناموفق در وارد کردن کلید عمومی از پرونده ی %1%"
 
 #. Translator: %1% is a gpg public key
-#: zypp/target/rpm/RpmDb.cc:1244
+#: zypp/target/rpm/RpmDb.cc:1243
 #, boost-format
 msgid "Failed to remove public key %1%"
 msgstr "ناموفق در حذف کلید عمومی %1%"
 
-#: zypp/target/rpm/RpmDb.cc:1625
+#: zypp/target/rpm/RpmDb.cc:1629
 msgid "Package is not signed!"
 msgstr "بسته مورد تایید نیست!"
 
 #. Translator: %s = name of an rpm package. A list of diffs follows
 #. this message.
-#: zypp/target/rpm/RpmDb.cc:1925
+#: zypp/target/rpm/RpmDb.cc:1929
 #, c-format, boost-format
 msgid "Changed configuration files for %s:"
 msgstr "پرونده های پیکربندی تغییر کرده برای %s:"
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:2100
+#: zypp/target/rpm/RpmDb.cc:2104
 #, c-format, boost-format
 msgid "rpm saved %s as %s, but it was impossible to determine the difference"
 msgstr "rpm ذخیره شد %s به عنوان %s، اما تعیین اختلاف امکانپذیر نبود"
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:2102
+#: zypp/target/rpm/RpmDb.cc:2106
 #, c-format, boost-format
 msgid ""
 "rpm saved %s as %s.\n"
@@ -4767,13 +4717,13 @@ msgstr ""
 "اینها 25 خط اولیه ی اختلاف ها هستند:\n"
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:2105
+#: zypp/target/rpm/RpmDb.cc:2109
 #, c-format, boost-format
 msgid "rpm created %s as %s, but it was impossible to determine the difference"
 msgstr "rpm ساخته شد %s به عنوان %s، اما تعیین اختلاف امکانپذیر نبود"
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:2107
+#: zypp/target/rpm/RpmDb.cc:2111
 #, c-format, boost-format
 msgid ""
 "rpm created %s as %s.\n"
@@ -4784,69 +4734,49 @@ msgstr ""
 
 #. report additional rpm output in finish
 #. TranslatorExplanation Text is followed by a ':'  and the actual output.
-#: zypp/target/rpm/RpmDb.cc:2132 zypp/target/rpm/RpmDb.cc:2278
+#: zypp/target/rpm/RpmDb.cc:2136 zypp/target/rpm/RpmDb.cc:2282
 msgid "Additional rpm output"
 msgstr "خروجی rpm اضافی"
 
-#: zypp/target/rpm/RpmDb.cc:2420
+#: zypp/target/rpm/RpmDb.cc:2424
 #, c-format, boost-format
 msgid "created backup %s"
 msgstr "پشتیبان ساخته شد %s"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2441
+#: zypp/target/rpm/RpmDb.cc:2445
 msgid "Signature is OK"
 msgstr "امضا خوب است"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2443
+#: zypp/target/rpm/RpmDb.cc:2447
 msgid "Unknown type of signature"
 msgstr "نوع امضا ناشناخته است"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2445
+#: zypp/target/rpm/RpmDb.cc:2449
 msgid "Signature does not verify"
 msgstr "امضا قابل تایید نیست"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2447
+#: zypp/target/rpm/RpmDb.cc:2451
 msgid "Signature is OK, but key is not trusted"
 msgstr "امضا خوب است، اما کلید اعتمادسازی نشده است"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2449
+#: zypp/target/rpm/RpmDb.cc:2453
 msgid "Signatures public key is not available"
 msgstr "کلید عمومی امضاها موجود نیست"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2451
+#: zypp/target/rpm/RpmDb.cc:2455
 msgid "File does not exist or signature can't be checked"
 msgstr "پرونده موجود نیست و یا امضاها قابل بررسی نیستند"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2453
+#: zypp/target/rpm/RpmDb.cc:2457
 msgid "File is unsigned"
 msgstr "فایل تایید نشده"
-
-#: zypp/thread/Mutex.cc:33
-msgid "Can't initialize mutex attributes"
-msgstr "نمیتوان صفات mutex را مقدار دهی اولیه کرد"
-
-#: zypp/thread/Mutex.cc:40
-msgid "Can't set recursive mutex attribute"
-msgstr "نمیتوان صفت mutex بازگشتی را قرار داد"
-
-#: zypp/thread/Mutex.cc:47
-msgid "Can't initialize recursive mutex"
-msgstr "نمیتوان mutex بازگشتی را مقداردهی اولیه کرد"
-
-#: zypp/thread/Mutex.cc:77
-msgid "Can't acquire the mutex lock"
-msgstr "نمیتوان قفل mutex را دریافت کرد"
-
-#: zypp/thread/Mutex.cc:87
-msgid "Can't release the mutex lock"
-msgstr "نمیتوان قفل mutex را آزاد کرد"
 
 #: zypp/url/UrlBase.cc:154
 #, c-format, boost-format
@@ -4929,6 +4859,58 @@ msgstr "پارامتر کاراکتر جداکننده ی تقسیمگر نقش�
 #: zypp/url/UrlUtils.cc:283
 msgid "Invalid parameter array join separator character"
 msgstr "پارامتر کاراکتر جداکننده ی پیوند آرایه نامعتبر"
+
+#~ msgid "Can't open lock file: %s"
+#~ msgstr "نمیتوان فایل قفل را باز کرد: %s"
+
+#~ msgid "This action is being run by another program already."
+#~ msgstr "این عمل در حال حاظر در حال اجرا توسط یک نرم افزار دیگر است."
+
+#~ msgid "Hal Exception"
+#~ msgstr "استثنای Hal"
+
+#~ msgid "Sorry, but this version of libzypp was built without HAL support."
+#~ msgstr ""
+#~ "عذخواهی میکنیم، اما این نسخه ی libzypp بدون پشتیبانی از HAL ساخته شده است."
+
+#~ msgid "HalContext not connected"
+#~ msgstr "HalContext متصل نشده است"
+
+#~ msgid "HalDrive not initialized"
+#~ msgstr "HalDrive مقداردهی اولیه نشده است"
+
+#~ msgid "HalVolume not initialized"
+#~ msgstr "HalVolume مقداردهی نشده است"
+
+#~ msgid "Unable to create dbus connection"
+#~ msgstr "ناتوان در ساخت ارتباط dbus"
+
+#~ msgid "libhal_ctx_new: Can't create libhal context"
+#~ msgstr "libhal_ctx_new: نمیتوان متن libhal را ساخت"
+
+#~ msgid "libhal_set_dbus_connection: Can't set dbus connection"
+#~ msgstr "libhal_set_dbus_connection: نمیتوان ارتباط dbus را تنظیم کرد"
+
+#~ msgid "Unable to initalize HAL context -- hald not running?"
+#~ msgstr "ناتوان در مقداردهی به متن HAL -- آیا hald اجرا نمیشود؟"
+
+#~ msgid "Not a CDROM drive"
+#~ msgstr "درایو CDROM نیست"
+
+#~ msgid "Can't initialize mutex attributes"
+#~ msgstr "نمیتوان صفات mutex را مقدار دهی اولیه کرد"
+
+#~ msgid "Can't set recursive mutex attribute"
+#~ msgstr "نمیتوان صفت mutex بازگشتی را قرار داد"
+
+#~ msgid "Can't initialize recursive mutex"
+#~ msgstr "نمیتوان mutex بازگشتی را مقداردهی اولیه کرد"
+
+#~ msgid "Can't acquire the mutex lock"
+#~ msgstr "نمیتوان قفل mutex را دریافت کرد"
+
+#~ msgid "Can't release the mutex lock"
+#~ msgstr "نمیتوان قفل mutex را آزاد کرد"
 
 #~ msgid "Failed to import public key from file %s: %s"
 #~ msgstr "ناموفق در وارد کردن کلید عمومی از پرونده ی %s: %s"

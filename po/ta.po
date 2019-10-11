@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: NetworkManager-vpnc\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-27 13:31+0100\n"
+"POT-Creation-Date: 2019-10-11 09:20+0200\n"
 "PO-Revision-Date: 2005-06-26 01:20+0200\n"
 "Last-Translator: Priyavert Sharma <priyavert.sharma@agreeya.com>\n"
 "Language-Team: AgreeYa Solutions <www.agreeya.com>\n"
@@ -1343,22 +1343,22 @@ msgid "Command exited with unknown error."
 msgstr "இணைக்கப்படும் பொழுது கட்டளையை செயல்படுத்து"
 
 #. TranslatorExplanation first %s is key name, second is keyring name
-#: zypp/KeyRing.cc:599
+#: zypp/KeyRing.cc:590
 #, c-format, boost-format
 msgid "Tried to import not existent key %s into keyring %s"
 msgstr ""
 
-#: zypp/KeyRing.cc:605 zypp/KeyRing.cc:609
+#: zypp/KeyRing.cc:596
 #, fuzzy
 msgid "Failed to import key."
 msgstr "Failed to parse: %s."
 
-#: zypp/KeyRing.cc:616 zypp/KeyRing.cc:620 zypp/KeyRing.cc:624
+#: zypp/KeyRing.cc:603
 #, fuzzy
 msgid "Failed to delete key."
 msgstr "Failed to parse: %s."
 
-#: zypp/KeyRing.cc:633
+#: zypp/KeyRing.cc:609
 #, fuzzy, c-format, boost-format
 msgid "Signature file %s not found"
 msgstr "உள்ளீடு காணப்படவில்லை."
@@ -3783,34 +3783,34 @@ msgstr ""
 msgid "Repository %1% does not define additional 'gpgkey=' URLs."
 msgstr ""
 
-#: zypp/RepoManager.cc:314
+#: zypp/RepoManager.cc:312
 #, boost-format
 msgid "Cannot read repo directory '%1%': Permission denied"
 msgstr ""
 
 #. TranslatorExplanation '%s' is a pathname
-#: zypp/RepoManager.cc:322 zypp/RepoManager.cc:785 zypp/RepoManager.cc:1538
+#: zypp/RepoManager.cc:320 zypp/RepoManager.cc:783 zypp/RepoManager.cc:1536
 #: zypp/repo/PluginServices.cc:49
 #, fuzzy, c-format, boost-format
 msgid "Failed to read directory '%s'"
 msgstr "Failed to parse: %s."
 
-#: zypp/RepoManager.cc:332
+#: zypp/RepoManager.cc:330
 #, boost-format
 msgid "Cannot read repo file '%1%': Permission denied"
 msgstr ""
 
-#: zypp/RepoManager.cc:355
+#: zypp/RepoManager.cc:353
 msgid "Repository alias cannot start with dot."
 msgstr ""
 
-#: zypp/RepoManager.cc:366
+#: zypp/RepoManager.cc:364
 msgid "Service alias cannot start with dot."
 msgstr ""
 
 #. TranslatorExplanation '%s' is a filename
-#: zypp/RepoManager.cc:740 zypp/RepoManager.cc:1656 zypp/RepoManager.cc:1722
-#: zypp/RepoManager.cc:1800 zypp/RepoManager.cc:1865 zypp/RepoManager.cc:1996
+#: zypp/RepoManager.cc:738 zypp/RepoManager.cc:1654 zypp/RepoManager.cc:1720
+#: zypp/RepoManager.cc:1798 zypp/RepoManager.cc:1863 zypp/RepoManager.cc:1994
 #, fuzzy, c-format, boost-format
 msgid "Can't open file '%s' for writing."
 msgstr "எழுதுவதற்கு கோப்பைத் திறக்க முடியவில்லை."
@@ -3818,44 +3818,44 @@ msgstr "எழுதுவதற்கு கோப்பைத் திற�
 #. translators: Cleanup a repository previously owned by a meanwhile unknown (deleted) service.
 #. %1% = service name
 #. %2% = repository name
-#: zypp/RepoManager.cc:867
+#: zypp/RepoManager.cc:865
 #, boost-format
 msgid "Unknown service '%1%': Removing orphaned service repository '%2%'"
 msgstr ""
 
 #. we will throw this later if no URL checks out fine
-#: zypp/RepoManager.cc:1094
+#: zypp/RepoManager.cc:1092
 msgid "Valid metadata not found at specified URL"
 msgid_plural "Valid metadata not found at specified URLs"
 msgstr[0] ""
 msgstr[1] ""
 
-#: zypp/RepoManager.cc:1142 zypp/RepoManager.cc:1254 zypp/RepoManager.cc:1310
+#: zypp/RepoManager.cc:1140 zypp/RepoManager.cc:1252 zypp/RepoManager.cc:1308
 #, fuzzy, c-format, boost-format
 msgid "Can't create %s"
 msgstr "டெஸ்க்டாப் பொருளை '%s' திறக்க முடியவில்லை"
 
-#: zypp/RepoManager.cc:1150
+#: zypp/RepoManager.cc:1148
 #, fuzzy
 msgid "Can't create metadata cache directory."
 msgstr "அடைவு %1 உருவாக்க முடியவில்லை: %2."
 
-#: zypp/RepoManager.cc:1296
+#: zypp/RepoManager.cc:1294
 #, c-format, boost-format
 msgid "Building repository '%s' cache"
 msgstr ""
 
-#: zypp/RepoManager.cc:1316
+#: zypp/RepoManager.cc:1314
 #, c-format, boost-format
 msgid "Can't create cache at %s - no writing permissions."
 msgstr ""
 
-#: zypp/RepoManager.cc:1381
+#: zypp/RepoManager.cc:1379
 #, fuzzy, c-format, boost-format
 msgid "Failed to cache repo (%d)."
 msgstr "Failed to parse: %s."
 
-#: zypp/RepoManager.cc:1392
+#: zypp/RepoManager.cc:1390
 msgid "Unhandled repository type"
 msgstr ""
 
@@ -3865,44 +3865,44 @@ msgstr ""
 #. on ftp file-not-found(bnc #335906). Instead we'll check another types
 #. before throwing.
 #. TranslatorExplanation '%s' is an URL
-#: zypp/RepoManager.cc:1429 zypp/RepoManager.cc:2491
+#: zypp/RepoManager.cc:1427 zypp/RepoManager.cc:2489
 #, c-format, boost-format
 msgid "Error trying to read from '%s'"
 msgstr ""
 
 #. TranslatorExplanation '%s' is an URL
-#: zypp/RepoManager.cc:1482 zypp/RepoManager.cc:2499
+#: zypp/RepoManager.cc:1480 zypp/RepoManager.cc:2497
 #, fuzzy, c-format, boost-format
 msgid "Unknown error reading from '%s'"
 msgstr "ஃப்ளாப்பி வட்டிலிருந்து படிப்பதில் பிழை"
 
-#: zypp/RepoManager.cc:1620
+#: zypp/RepoManager.cc:1618
 #, fuzzy, c-format, boost-format
 msgid "Adding repository '%s'"
 msgstr "மூலங்கள் சேர்க்கப்படுகின்றன"
 
 #. TranslatorExplanation '%s' is an URL
-#: zypp/RepoManager.cc:1708
+#: zypp/RepoManager.cc:1706
 #, fuzzy, c-format, boost-format
 msgid "Invalid repo file name at '%s'"
 msgstr "செல்லாத ஏற்றுமதி கோப்புபெயர்."
 
-#: zypp/RepoManager.cc:1749
+#: zypp/RepoManager.cc:1747
 #, fuzzy, c-format, boost-format
 msgid "Removing repository '%s'"
 msgstr "மூலங்கள் சேர்க்கப்படுகின்றன"
 
-#: zypp/RepoManager.cc:1768 zypp/RepoManager.cc:1846
+#: zypp/RepoManager.cc:1766 zypp/RepoManager.cc:1844
 msgid "Can't figure out where the repo is stored."
 msgstr ""
 
 #. TranslatorExplanation '%s' is a filename
-#: zypp/RepoManager.cc:1782 zypp/RepoManager.cc:1984
+#: zypp/RepoManager.cc:1780 zypp/RepoManager.cc:1982
 #, fuzzy, c-format, boost-format
 msgid "Can't delete '%s'"
 msgstr "டெஸ்க்டாப் பொருளை '%s' திறக்க முடியவில்லை"
 
-#: zypp/RepoManager.cc:1972 zypp/RepoManager.cc:2422
+#: zypp/RepoManager.cc:1970 zypp/RepoManager.cc:2420
 msgid "Can't figure out where the service is stored."
 msgstr ""
 
@@ -4005,15 +4005,6 @@ msgstr ""
 msgid "History:"
 msgstr ""
 
-#: zypp/base/InterProcessMutex.cc:83
-#, fuzzy, c-format, boost-format
-msgid "Can't open lock file: %s"
-msgstr "கோப்பை %1 திறக்க முடியவில்லை."
-
-#: zypp/base/InterProcessMutex.cc:143
-msgid "This action is being run by another program already."
-msgstr ""
-
 #: zypp/base/StrMatcher.cc:152
 #, fuzzy, c-format, boost-format
 msgid "Unknown match mode '%s'"
@@ -4035,109 +4026,109 @@ msgid "Invalid regular expression '%s'"
 msgstr "செல்லாத யூஆர்எல் திட்டம் '%s'"
 
 #. !\todo add comma to the message for the next release
-#: zypp/media/MediaCIFS.cc:427 zypp/media/MediaCurl.cc:1775
+#: zypp/media/MediaCIFS.cc:427 zypp/media/MediaCurl.cc:1738
 #, c-format, boost-format
 msgid "Authentication required for '%s'"
 msgstr ""
 
-#: zypp/media/MediaCurl.cc:1139
+#: zypp/media/MediaCurl.cc:1111
 msgid ""
 "Visit the SUSE Customer Center to check whether your registration is valid "
 "and has not expired."
 msgstr ""
 
-#: zypp/media/MediaCurl.cc:1141
+#: zypp/media/MediaCurl.cc:1113
 msgid ""
 "Visit the Novell Customer Center to check whether your registration is valid "
 "and has not expired."
 msgstr ""
 
-#: zypp/media/MediaException.cc:31
+#: zypp/media/MediaException.cc:33
 #, fuzzy, c-format, boost-format
 msgid "Failed to mount %s on %s"
 msgstr "%s - %s திறக்க முடியவில்லை\n"
 
-#: zypp/media/MediaException.cc:41
+#: zypp/media/MediaException.cc:43
 #, fuzzy, c-format, boost-format
 msgid "Failed to unmount %s"
 msgstr "கூறு\"%s\"ஐ ஏற்ற முடியவில்லை"
 
-#: zypp/media/MediaException.cc:46
+#: zypp/media/MediaException.cc:48
 #, c-format, boost-format
 msgid "Bad file name: %s"
 msgstr ""
 
-#: zypp/media/MediaException.cc:51
+#: zypp/media/MediaException.cc:53
 #, c-format, boost-format
 msgid "Medium not opened when trying to perform action '%s'."
 msgstr ""
 
-#: zypp/media/MediaException.cc:56
+#: zypp/media/MediaException.cc:58
 #, fuzzy, c-format, boost-format
 msgid "File '%s' not found on medium '%s'"
 msgstr "சேமிப்பிடத்தில் கோப்பு %1 காணப்படவில்லை."
 
-#: zypp/media/MediaException.cc:61
+#: zypp/media/MediaException.cc:63
 #, fuzzy, c-format, boost-format
 msgid "Cannot write file '%s'."
 msgstr "%1 கோப்பில் எழுத முடியவில்லை."
 
-#: zypp/media/MediaException.cc:66
+#: zypp/media/MediaException.cc:68
 msgid "Medium not attached"
 msgstr ""
 
-#: zypp/media/MediaException.cc:71
+#: zypp/media/MediaException.cc:73
 msgid "Bad media attach point"
 msgstr ""
 
 #. TranslatorExplanation: curl is the name of a library, don't translate
-#: zypp/media/MediaException.cc:77
+#: zypp/media/MediaException.cc:79
 #, c-format, boost-format
 msgid "Download (curl) initialization failed for '%s'"
 msgstr ""
 
-#: zypp/media/MediaException.cc:82
+#: zypp/media/MediaException.cc:84
 #, c-format, boost-format
 msgid "System exception '%s' on medium '%s'."
 msgstr ""
 
-#: zypp/media/MediaException.cc:87
+#: zypp/media/MediaException.cc:89
 #, c-format, boost-format
 msgid "Path '%s' on medium '%s' is not a file."
 msgstr ""
 
-#: zypp/media/MediaException.cc:92
+#: zypp/media/MediaException.cc:94
 #, fuzzy, c-format, boost-format
 msgid "Path '%s' on medium '%s' is not a directory."
 msgstr "%1 ஒரு அடைவல்ல."
 
-#: zypp/media/MediaException.cc:99
+#: zypp/media/MediaException.cc:101
 msgid "Malformed URI"
 msgstr ""
 
-#: zypp/media/MediaException.cc:109
+#: zypp/media/MediaException.cc:111
 #, fuzzy
 msgid "Empty host name in URI"
 msgstr "சிஏ பெயா காலி செய்."
 
-#: zypp/media/MediaException.cc:114
+#: zypp/media/MediaException.cc:116
 msgid "Empty filesystem in URI"
 msgstr ""
 
-#: zypp/media/MediaException.cc:119
+#: zypp/media/MediaException.cc:121
 msgid "Empty destination in URI"
 msgstr ""
 
-#: zypp/media/MediaException.cc:124
+#: zypp/media/MediaException.cc:126
 #, fuzzy, c-format, boost-format
 msgid "Unsupported URI scheme in '%s'."
 msgstr "செல்லாத URL திட்டம் '%1'."
 
-#: zypp/media/MediaException.cc:129
+#: zypp/media/MediaException.cc:131
 msgid "Operation not supported by medium"
 msgstr ""
 
-#: zypp/media/MediaException.cc:136
+#: zypp/media/MediaException.cc:138
 #, c-format, boost-format
 msgid ""
 "Download (curl) error for '%s':\n"
@@ -4146,51 +4137,51 @@ msgid ""
 msgstr ""
 
 #. TranslatorExplanation: curl is the name of a library, don't translate
-#: zypp/media/MediaException.cc:144
+#: zypp/media/MediaException.cc:146
 #, c-format, boost-format
 msgid "Error occurred while setting download (curl) options for '%s':"
 msgstr ""
 
-#: zypp/media/MediaException.cc:151
+#: zypp/media/MediaException.cc:153
 #, c-format, boost-format
 msgid "Media source '%s' does not contain the desired medium"
 msgstr ""
 
-#: zypp/media/MediaException.cc:156
+#: zypp/media/MediaException.cc:158
 #, c-format, boost-format
 msgid "Medium '%s' is in use by another instance"
 msgstr ""
 
-#: zypp/media/MediaException.cc:162
+#: zypp/media/MediaException.cc:164
 msgid "Cannot eject any media"
 msgstr ""
 
-#: zypp/media/MediaException.cc:164
+#: zypp/media/MediaException.cc:166
 #, fuzzy, c-format, boost-format
 msgid "Cannot eject media '%s'"
 msgstr "டெஸ்க்டாப் பொருளை '%s' திறக்க முடியவில்லை"
 
-#: zypp/media/MediaException.cc:179
+#: zypp/media/MediaException.cc:181
 #, fuzzy, c-format, boost-format
 msgid "Permission to access '%s' denied."
 msgstr "அனுமதிகள் மறுக்கப்படுகின்றன"
 
-#: zypp/media/MediaException.cc:187
+#: zypp/media/MediaException.cc:189
 #, c-format, boost-format
 msgid "Timeout exceeded when accessing '%s'."
 msgstr ""
 
-#: zypp/media/MediaException.cc:195
+#: zypp/media/MediaException.cc:197
 #, c-format, boost-format
 msgid "Downloaded data exceeded the expected filesize '%s' of '%s'."
 msgstr ""
 
-#: zypp/media/MediaException.cc:203
+#: zypp/media/MediaException.cc:205
 #, c-format, boost-format
 msgid "Location '%s' is temporarily unaccessible."
 msgstr ""
 
-#: zypp/media/MediaException.cc:211
+#: zypp/media/MediaException.cc:213
 #, c-format, boost-format
 msgid " SSL certificate problem, verify that the CA cert is OK for '%s'."
 msgstr ""
@@ -4206,7 +4197,7 @@ msgstr ""
 msgid "Unsupported HTTP authentication method '%s'"
 msgstr ""
 
-#: zypp/misc/CheckAccessDeleted.cc:357
+#: zypp/misc/CheckAccessDeleted.cc:444
 msgid "Please install package 'lsof' first."
 msgstr ""
 
@@ -4380,203 +4371,204 @@ msgstr "இத்தேவையை இங்கேயே புறக்கண�
 msgid "generally ignore of some dependencies"
 msgstr "இத்தேவையை இங்கேயே புறக்கணிக்கவும்"
 
-#: zypp/solver/detail/SATResolver.cc:988
+#: zypp/solver/detail/SATResolver.cc:1052
 #, c-format, boost-format
 msgid "%s does not belong to a distupgrade repository"
 msgstr ""
 
-#: zypp/solver/detail/SATResolver.cc:992
+#: zypp/solver/detail/SATResolver.cc:1055
 #, fuzzy, c-format, boost-format
 msgid "%s has inferior architecture"
 msgstr "%s, %sஐ அளிக்கிறது, ஆனால் அதற்கு வேறொரு கட்டமைப்பு உள்ளது."
 
-#: zypp/solver/detail/SATResolver.cc:996
+#: zypp/solver/detail/SATResolver.cc:1058
 #, fuzzy, c-format, boost-format
 msgid "problem with installed package %s"
 msgstr "பேக்கேஜ்களின் நிறுவுதலை நீக்குவதற்கான ஆணை"
 
-#: zypp/solver/detail/SATResolver.cc:999
+#: zypp/solver/detail/SATResolver.cc:1061
 #, fuzzy
 msgid "conflicting requests"
 msgstr "இந்த இணைப்புக்கான கோரிக்கை: "
 
-#: zypp/solver/detail/SATResolver.cc:1002
+#: zypp/solver/detail/SATResolver.cc:1064
 #, fuzzy
 msgid "some dependency problem"
 msgstr "சார்புத்தன்மை பிரச்னைகள் காரணமாக %s ஐ நிறுவ இயலவில்லை"
 
-#: zypp/solver/detail/SATResolver.cc:1005
+#: zypp/solver/detail/SATResolver.cc:1067
 #, fuzzy, c-format, boost-format
 msgid "nothing provides requested %s"
 msgstr "%s யாரும் அளிப்பதில்லை"
 
-#: zypp/solver/detail/SATResolver.cc:1006
-#: zypp/solver/detail/SATResolver.cc:1010
+#: zypp/solver/detail/SATResolver.cc:1068
+#: zypp/solver/detail/SATResolver.cc:1072
 msgid "Have you enabled all requested repositories?"
 msgstr ""
 
-#: zypp/solver/detail/SATResolver.cc:1009
+#: zypp/solver/detail/SATResolver.cc:1071
 #, fuzzy, c-format, boost-format
 msgid "package %s does not exist"
 msgstr "சான்றிதழ் %1 இல்லை."
 
-#: zypp/solver/detail/SATResolver.cc:1013
+#: zypp/solver/detail/SATResolver.cc:1075
 msgid "unsupported request"
 msgstr ""
 
-#: zypp/solver/detail/SATResolver.cc:1016
+#: zypp/solver/detail/SATResolver.cc:1078
 #, fuzzy, c-format, boost-format
 msgid "%s is provided by the system and cannot be erased"
 msgstr "%s பூட்டப்பட்டுள்ளது மற்றும் அதன் நிறுவுதலை நீக்க இயலாது."
 
-#: zypp/solver/detail/SATResolver.cc:1020
+#: zypp/solver/detail/SATResolver.cc:1081
 #, fuzzy, c-format, boost-format
 msgid "%s is not installable"
 msgstr "நிறுவப்படவில்லை"
 
-#: zypp/solver/detail/SATResolver.cc:1025
+#. for setting weak dependencies
+#: zypp/solver/detail/SATResolver.cc:1085
 #, fuzzy, c-format, boost-format
 msgid "nothing provides %s needed by %s"
 msgstr "%s, %sக்கு தேவைப்படுகிறது"
 
-#: zypp/solver/detail/SATResolver.cc:1030
+#: zypp/solver/detail/SATResolver.cc:1088
 #, fuzzy, c-format, boost-format
 msgid "cannot install both %s and %s"
 msgstr "%sஐ நிறுவ முடியவில்லை"
 
-#: zypp/solver/detail/SATResolver.cc:1035
+#: zypp/solver/detail/SATResolver.cc:1091
 #, fuzzy, c-format, boost-format
 msgid "%s conflicts with %s provided by %s"
 msgstr "%s %sஉடன் முரண்படுகிறது"
 
-#: zypp/solver/detail/SATResolver.cc:1040
+#: zypp/solver/detail/SATResolver.cc:1094
 #, fuzzy, c-format, boost-format
 msgid "%s obsoletes %s provided by %s"
 msgstr "%s %sஐ வழக்கற்றதாக்குகிறது"
 
-#: zypp/solver/detail/SATResolver.cc:1045
+#: zypp/solver/detail/SATResolver.cc:1097
 #, fuzzy, c-format, boost-format
 msgid "installed %s obsoletes %s provided by %s"
 msgstr "%s %sஐ வழக்கற்றதாக்குகிறது"
 
-#: zypp/solver/detail/SATResolver.cc:1049
+#: zypp/solver/detail/SATResolver.cc:1100
 #, fuzzy, c-format, boost-format
 msgid "solvable %s conflicts with %s provided by itself"
 msgstr "%s %sஉடன் முரண்படுகிறது"
 
-#: zypp/solver/detail/SATResolver.cc:1081
+#: zypp/solver/detail/SATResolver.cc:1131
 #, c-format, boost-format
 msgid "%s requires %s, but this requirement cannot be provided"
 msgstr ""
 
-#: zypp/solver/detail/SATResolver.cc:1083
+#: zypp/solver/detail/SATResolver.cc:1133
 #, fuzzy
 msgid "deleted providers: "
 msgstr "%s யாரும் அளிப்பதில்லை"
 
-#: zypp/solver/detail/SATResolver.cc:1093
+#: zypp/solver/detail/SATResolver.cc:1143
 #, fuzzy
 msgid ""
 "\n"
 "not installable providers: "
 msgstr "%sக்கு நிறுவக்கூடிய அளிப்பவர்கள் இல்லை"
 
-#: zypp/solver/detail/SATResolver.cc:1095
+#: zypp/solver/detail/SATResolver.cc:1145
 #, fuzzy
 msgid "not installable providers: "
 msgstr "%sக்கு நிறுவக்கூடிய அளிப்பவர்கள் இல்லை"
 
-#: zypp/solver/detail/SATResolver.cc:1152
+#: zypp/solver/detail/SATResolver.cc:1207
 #, c-format, boost-format
 msgid "remove lock to allow removal of %s"
 msgstr ""
 
-#: zypp/solver/detail/SATResolver.cc:1157
-#: zypp/solver/detail/SATResolver.cc:1193
+#: zypp/solver/detail/SATResolver.cc:1212
+#: zypp/solver/detail/SATResolver.cc:1248
 #, c-format, boost-format
 msgid "do not install %s"
 msgstr "%sஐ நிறுவ வேண்டாம்"
 
-#: zypp/solver/detail/SATResolver.cc:1172
-#: zypp/solver/detail/SATResolver.cc:1214
+#: zypp/solver/detail/SATResolver.cc:1227
+#: zypp/solver/detail/SATResolver.cc:1269
 #, c-format, boost-format
 msgid "keep %s"
 msgstr "%sஐ வைத்துக் கொள்ளவும்"
 
-#: zypp/solver/detail/SATResolver.cc:1177
+#: zypp/solver/detail/SATResolver.cc:1232
 #, fuzzy, c-format, boost-format
 msgid "remove lock to allow installation of %s"
 msgstr "%sஐ நிறுவ வேண்டாம்"
 
-#: zypp/solver/detail/SATResolver.cc:1228
-#: zypp/solver/detail/SATResolver.cc:1249
+#: zypp/solver/detail/SATResolver.cc:1283
+#: zypp/solver/detail/SATResolver.cc:1304
 #, fuzzy
 msgid "This request will break your system!"
 msgstr "கோரிக்கை ஏற்கனவே உள்ளது."
 
-#: zypp/solver/detail/SATResolver.cc:1229
-#: zypp/solver/detail/SATResolver.cc:1250
+#: zypp/solver/detail/SATResolver.cc:1284
+#: zypp/solver/detail/SATResolver.cc:1305
 msgid "ignore the warning of a broken system"
 msgstr ""
 
-#: zypp/solver/detail/SATResolver.cc:1234
+#: zypp/solver/detail/SATResolver.cc:1289
 #, fuzzy, c-format, boost-format
 msgid "do not ask to install a solvable providing %s"
 msgstr "%sக்கு நிறுவக்கூடிய அளிப்பவர்கள் இல்லை"
 
-#: zypp/solver/detail/SATResolver.cc:1256
+#: zypp/solver/detail/SATResolver.cc:1311
 #, fuzzy, c-format, boost-format
 msgid "do not ask to delete all solvables providing %s"
 msgstr "தொடர்புள்ள தீர்வுகளை நிறுவவோ அல்லது நீக்கவோ வேண்டாம்"
 
-#: zypp/solver/detail/SATResolver.cc:1269
+#: zypp/solver/detail/SATResolver.cc:1324
 #, c-format, boost-format
 msgid "do not install most recent version of %s"
 msgstr ""
 
-#: zypp/solver/detail/SATResolver.cc:1290
+#: zypp/solver/detail/SATResolver.cc:1345
 #, fuzzy, c-format, boost-format
 msgid "keep %s despite the inferior architecture"
 msgstr "%s, %sஐ அளிக்கிறது, ஆனால் அதற்கு வேறொரு கட்டமைப்பு உள்ளது."
 
-#: zypp/solver/detail/SATResolver.cc:1295
+#: zypp/solver/detail/SATResolver.cc:1350
 #, fuzzy, c-format, boost-format
 msgid "install %s despite the inferior architecture"
 msgstr "அது கட்டமைப்பை மாற்றக்கூடுமென்றாலும் %sஐ நிறுவவும்"
 
-#: zypp/solver/detail/SATResolver.cc:1304
+#: zypp/solver/detail/SATResolver.cc:1359
 #, fuzzy, c-format, boost-format
 msgid "keep obsolete %s"
 msgstr "%s %sஐ வழக்கற்றதாக்குகிறது"
 
-#: zypp/solver/detail/SATResolver.cc:1309
+#: zypp/solver/detail/SATResolver.cc:1364
 #, c-format, boost-format
 msgid "install %s from excluded repository"
 msgstr ""
 
-#: zypp/solver/detail/SATResolver.cc:1329
+#: zypp/solver/detail/SATResolver.cc:1384
 #, fuzzy, c-format, boost-format
 msgid "downgrade of %s to %s"
 msgstr "%sலிருந்து %s தகவலிறக்கம் செய்யப்பட்டது"
 
-#: zypp/solver/detail/SATResolver.cc:1336
+#: zypp/solver/detail/SATResolver.cc:1391
 #, c-format, boost-format
 msgid "architecture change of %s to %s"
 msgstr ""
 
-#: zypp/solver/detail/SATResolver.cc:1345
+#: zypp/solver/detail/SATResolver.cc:1400
 #, c-format, boost-format
 msgid ""
 "install %s (with vendor change)\n"
 "  %s  -->  %s"
 msgstr ""
 
-#: zypp/solver/detail/SATResolver.cc:1354
+#: zypp/solver/detail/SATResolver.cc:1409
 #, c-format, boost-format
 msgid "replacement of %s with %s"
 msgstr ""
 
-#: zypp/solver/detail/SATResolver.cc:1365
+#: zypp/solver/detail/SATResolver.cc:1420
 #, fuzzy, c-format, boost-format
 msgid "deinstallation of %s"
 msgstr "நிறுவுதல்"
@@ -4630,86 +4622,45 @@ msgstr "விசை என்கிரிப்ட் செய்யும்�
 msgid "New update message"
 msgstr ""
 
-#: zypp/target/hal/HalContext.cc:25 zypp/target/hal/HalContext.cc:28
-#: zypp/target/hal/HalContext.cc:33
-msgid "Hal Exception"
-msgstr "ஹால் விதிவிலக்கு"
-
-#: zypp/target/hal/HalContext.cc:38
-msgid "Sorry, but this version of libzypp was built without HAL support."
-msgstr ""
-
-#: zypp/target/hal/HalContext.cc:131
-msgid "HalContext not connected"
-msgstr "ஹால்கான்டெக்ஸ்ட் இணைக்கப்படவில்லை"
-
-#: zypp/target/hal/HalContext.cc:141
-msgid "HalDrive not initialized"
-msgstr "ஹால்டிரைவ் துவக்கப்படவில்லை"
-
-#: zypp/target/hal/HalContext.cc:151
-msgid "HalVolume not initialized"
-msgstr "ஹால்வால்யூம் துவக்கப்படவில்லை"
-
-#: zypp/target/hal/HalContext.cc:243
-msgid "Unable to create dbus connection"
-msgstr "டிபஸ் இணைப்பை உருவாக்க இயலவில்லை"
-
-#: zypp/target/hal/HalContext.cc:256
-msgid "libhal_ctx_new: Can't create libhal context"
-msgstr "libhal_ctx_new: ஆல் லைபால் உள்ளடக்கத்தை உருவாக்க இயலவில்லை"
-
-#: zypp/target/hal/HalContext.cc:271
-msgid "libhal_set_dbus_connection: Can't set dbus connection"
-msgstr "libhal_set_dbus_connection: ஆல் டிபஸ் இணைப்பை அமைக்க இயலவில்லை"
-
-#: zypp/target/hal/HalContext.cc:286
-msgid "Unable to initalize HAL context -- hald not running?"
-msgstr "HAL உள்ளடக்கத்தை துவக்க இயலவில்லை -- ஹால்ட் இயக்கத்தில் இல்லையா?"
-
-#: zypp/target/hal/HalContext.cc:865
-msgid "Not a CDROM drive"
-msgstr "சிடிரோம் டிரைவ் அல்ல"
-
 #. TranslatorExplanation after semicolon is error message
 #. TranslatorExplanation the colon is followed by an error message
-#: zypp/target/rpm/RpmDb.cc:843 zypp/target/rpm/RpmDb.cc:2119
-#: zypp/target/rpm/RpmDb.cc:2265
+#: zypp/target/rpm/RpmDb.cc:843 zypp/target/rpm/RpmDb.cc:2123
+#: zypp/target/rpm/RpmDb.cc:2269
 #, fuzzy
 msgid "RPM failed: "
 msgstr "தோல்வியுற்றது"
 
 #. Translator: %1% is a gpg public key
-#: zypp/target/rpm/RpmDb.cc:1174
+#: zypp/target/rpm/RpmDb.cc:1173
 #, boost-format
 msgid "Failed to import public key %1%"
 msgstr ""
 
 #. Translator: %1% is a gpg public key
-#: zypp/target/rpm/RpmDb.cc:1244
+#: zypp/target/rpm/RpmDb.cc:1243
 #, boost-format
 msgid "Failed to remove public key %1%"
 msgstr ""
 
-#: zypp/target/rpm/RpmDb.cc:1625
+#: zypp/target/rpm/RpmDb.cc:1629
 msgid "Package is not signed!"
 msgstr ""
 
 #. Translator: %s = name of an rpm package. A list of diffs follows
 #. this message.
-#: zypp/target/rpm/RpmDb.cc:1925
+#: zypp/target/rpm/RpmDb.cc:1929
 #, c-format, boost-format
 msgid "Changed configuration files for %s:"
 msgstr "%s:க்காக உள்ளமைத்தல் கோப்புகள் மாற்றப்பட்டுள்ளன"
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:2100
+#: zypp/target/rpm/RpmDb.cc:2104
 #, fuzzy, c-format, boost-format
 msgid "rpm saved %s as %s, but it was impossible to determine the difference"
 msgstr "%s ஆக ஆர்பிஎம் சேமிக்கப்பட்டுள்ளது, ஆனால் வேறுபாட்டை நிர்ணயிக்க முடியவில்லை"
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:2102
+#: zypp/target/rpm/RpmDb.cc:2106
 #, fuzzy, c-format, boost-format
 msgid ""
 "rpm saved %s as %s.\n"
@@ -4719,13 +4670,13 @@ msgstr ""
 "வேறுபாடுகளின் முதல் 25 வரிகள் இங்குள்ளன:\n"
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:2105
+#: zypp/target/rpm/RpmDb.cc:2109
 #, fuzzy, c-format, boost-format
 msgid "rpm created %s as %s, but it was impossible to determine the difference"
 msgstr "%s ஆக ஆர்பிஎம் உருவாf;கப்பட்டுள்ளது, ஆனால் வேறுபாட்டை நிர்ணயிக்க முடியவில்லை"
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:2107
+#: zypp/target/rpm/RpmDb.cc:2111
 #, fuzzy, c-format, boost-format
 msgid ""
 "rpm created %s as %s.\n"
@@ -4736,73 +4687,53 @@ msgstr ""
 
 #. report additional rpm output in finish
 #. TranslatorExplanation Text is followed by a ':'  and the actual output.
-#: zypp/target/rpm/RpmDb.cc:2132 zypp/target/rpm/RpmDb.cc:2278
+#: zypp/target/rpm/RpmDb.cc:2136 zypp/target/rpm/RpmDb.cc:2282
 #, fuzzy
 msgid "Additional rpm output"
 msgstr "கூடுதல் ஆர்பிஎம் அவுட்புட்:"
 
-#: zypp/target/rpm/RpmDb.cc:2420
+#: zypp/target/rpm/RpmDb.cc:2424
 #, c-format, boost-format
 msgid "created backup %s"
 msgstr "%s மறுபிரதி உருவாக்கப்பட்டது"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2441
+#: zypp/target/rpm/RpmDb.cc:2445
 #, fuzzy
 msgid "Signature is OK"
 msgstr "உள்ளீடு காணப்படவில்லை."
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2443
+#: zypp/target/rpm/RpmDb.cc:2447
 msgid "Unknown type of signature"
 msgstr ""
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2445
+#: zypp/target/rpm/RpmDb.cc:2449
 #, fuzzy
 msgid "Signature does not verify"
 msgstr "உள்ளீடு காணப்படவில்லை."
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2447
+#: zypp/target/rpm/RpmDb.cc:2451
 #, fuzzy
 msgid "Signature is OK, but key is not trusted"
 msgstr "உள்ளீடு காணப்படவில்லை."
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2449
+#: zypp/target/rpm/RpmDb.cc:2453
 msgid "Signatures public key is not available"
 msgstr ""
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2451
+#: zypp/target/rpm/RpmDb.cc:2455
 msgid "File does not exist or signature can't be checked"
 msgstr ""
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2453
+#: zypp/target/rpm/RpmDb.cc:2457
 msgid "File is unsigned"
 msgstr ""
-
-#: zypp/thread/Mutex.cc:33
-msgid "Can't initialize mutex attributes"
-msgstr "மியூடெக்ஸ் பண்புகளை துவக்க இயலாது"
-
-#: zypp/thread/Mutex.cc:40
-msgid "Can't set recursive mutex attribute"
-msgstr "எதிர்ப்புத்தன்மையுள்ள மியூடெக்ஸ் பண்மப அமைக்க இயலாது"
-
-#: zypp/thread/Mutex.cc:47
-msgid "Can't initialize recursive mutex"
-msgstr "எதிர்ப்புத்தன்மையுள்ள மியூடெக்ஸை துவக்க இயலாது"
-
-#: zypp/thread/Mutex.cc:77
-msgid "Can't acquire the mutex lock"
-msgstr "மியூடெக்ஸ் பூட்டை பெற இயலாது"
-
-#: zypp/thread/Mutex.cc:87
-msgid "Can't release the mutex lock"
-msgstr "மியூடெக்ஸ் பூட்டை திறக்க இயலாது"
 
 #: zypp/url/UrlBase.cc:154
 #, c-format, boost-format
@@ -4885,6 +4816,52 @@ msgstr "செல்லாத அளவீட்டு வரைவு பிள
 #: zypp/url/UrlUtils.cc:283
 msgid "Invalid parameter array join separator character"
 msgstr "செல்லாத அளவீட்டு அடுக்கு இணைப்பை பிரிக்கும் வடிவம்"
+
+#, fuzzy
+#~ msgid "Can't open lock file: %s"
+#~ msgstr "கோப்பை %1 திறக்க முடியவில்லை."
+
+#~ msgid "Hal Exception"
+#~ msgstr "ஹால் விதிவிலக்கு"
+
+#~ msgid "HalContext not connected"
+#~ msgstr "ஹால்கான்டெக்ஸ்ட் இணைக்கப்படவில்லை"
+
+#~ msgid "HalDrive not initialized"
+#~ msgstr "ஹால்டிரைவ் துவக்கப்படவில்லை"
+
+#~ msgid "HalVolume not initialized"
+#~ msgstr "ஹால்வால்யூம் துவக்கப்படவில்லை"
+
+#~ msgid "Unable to create dbus connection"
+#~ msgstr "டிபஸ் இணைப்பை உருவாக்க இயலவில்லை"
+
+#~ msgid "libhal_ctx_new: Can't create libhal context"
+#~ msgstr "libhal_ctx_new: ஆல் லைபால் உள்ளடக்கத்தை உருவாக்க இயலவில்லை"
+
+#~ msgid "libhal_set_dbus_connection: Can't set dbus connection"
+#~ msgstr "libhal_set_dbus_connection: ஆல் டிபஸ் இணைப்பை அமைக்க இயலவில்லை"
+
+#~ msgid "Unable to initalize HAL context -- hald not running?"
+#~ msgstr "HAL உள்ளடக்கத்தை துவக்க இயலவில்லை -- ஹால்ட் இயக்கத்தில் இல்லையா?"
+
+#~ msgid "Not a CDROM drive"
+#~ msgstr "சிடிரோம் டிரைவ் அல்ல"
+
+#~ msgid "Can't initialize mutex attributes"
+#~ msgstr "மியூடெக்ஸ் பண்புகளை துவக்க இயலாது"
+
+#~ msgid "Can't set recursive mutex attribute"
+#~ msgstr "எதிர்ப்புத்தன்மையுள்ள மியூடெக்ஸ் பண்மப அமைக்க இயலாது"
+
+#~ msgid "Can't initialize recursive mutex"
+#~ msgstr "எதிர்ப்புத்தன்மையுள்ள மியூடெக்ஸை துவக்க இயலாது"
+
+#~ msgid "Can't acquire the mutex lock"
+#~ msgstr "மியூடெக்ஸ் பூட்டை பெற இயலாது"
+
+#~ msgid "Can't release the mutex lock"
+#~ msgstr "மியூடெக்ஸ் பூட்டை திறக்க இயலாது"
 
 #, fuzzy
 #~ msgid "Failed to remove public key %s: %s"

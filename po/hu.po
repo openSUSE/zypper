@@ -18,7 +18,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypp.hu\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-27 13:31+0100\n"
+"POT-Creation-Date: 2019-10-11 09:20+0200\n"
 "PO-Revision-Date: 2019-03-23 20:19+0000\n"
 "Last-Translator: Robert Taisz <robert.taisz@emerald.hu>\n"
 "Language-Team: Hungarian <https://l10n.opensuse.org/projects/libzypp/master/"
@@ -1506,20 +1506,20 @@ msgid "Command exited with unknown error."
 msgstr "A parancs végrehajtása ismeretlen hibával leállt."
 
 #. TranslatorExplanation first %s is key name, second is keyring name
-#: zypp/KeyRing.cc:599
+#: zypp/KeyRing.cc:590
 #, c-format, boost-format
 msgid "Tried to import not existent key %s into keyring %s"
 msgstr "Kísérlet nem létező kulcs (%s) importálására a(z) %s kulcstárban"
 
-#: zypp/KeyRing.cc:605 zypp/KeyRing.cc:609
+#: zypp/KeyRing.cc:596
 msgid "Failed to import key."
 msgstr "Nem sikerült importálni a kulcsot."
 
-#: zypp/KeyRing.cc:616 zypp/KeyRing.cc:620 zypp/KeyRing.cc:624
+#: zypp/KeyRing.cc:603
 msgid "Failed to delete key."
 msgstr "A kulcs törlése sikertelen."
 
-#: zypp/KeyRing.cc:633
+#: zypp/KeyRing.cc:609
 #, c-format, boost-format
 msgid "Signature file %s not found"
 msgstr "A(z) %s aláírás-fájl nem található"
@@ -4064,7 +4064,7 @@ msgstr "%1% azonosítójú gpg-kulcs keresése a telepítési forrásban (%2%)."
 msgid "Repository %1% does not define additional 'gpgkey=' URLs."
 msgstr "A(z) %1% telepítési forrás nem definiál további 'gpgkey=' URL-címeket."
 
-#: zypp/RepoManager.cc:314
+#: zypp/RepoManager.cc:312
 #, boost-format
 msgid "Cannot read repo directory '%1%': Permission denied"
 msgstr ""
@@ -4072,30 +4072,30 @@ msgstr ""
 "megtagadta az engedélyt"
 
 #. TranslatorExplanation '%s' is a pathname
-#: zypp/RepoManager.cc:322 zypp/RepoManager.cc:785 zypp/RepoManager.cc:1538
+#: zypp/RepoManager.cc:320 zypp/RepoManager.cc:783 zypp/RepoManager.cc:1536
 #: zypp/repo/PluginServices.cc:49
 #, c-format, boost-format
 msgid "Failed to read directory '%s'"
 msgstr "Nem sikerült a(z) '%s' könyvtár beolvasása."
 
-#: zypp/RepoManager.cc:332
+#: zypp/RepoManager.cc:330
 #, boost-format
 msgid "Cannot read repo file '%1%': Permission denied"
 msgstr ""
 "A következő telepítésiforrás-fájl nem olvasható: '%1%': A rendszer "
 "megtagadta az engedélyt"
 
-#: zypp/RepoManager.cc:355
+#: zypp/RepoManager.cc:353
 msgid "Repository alias cannot start with dot."
 msgstr "A telepítési forrás álneve nem kezdődhet ponttal."
 
-#: zypp/RepoManager.cc:366
+#: zypp/RepoManager.cc:364
 msgid "Service alias cannot start with dot."
 msgstr "A szolgáltatás álneve nem kezdődhet ponttal."
 
 #. TranslatorExplanation '%s' is a filename
-#: zypp/RepoManager.cc:740 zypp/RepoManager.cc:1656 zypp/RepoManager.cc:1722
-#: zypp/RepoManager.cc:1800 zypp/RepoManager.cc:1865 zypp/RepoManager.cc:1996
+#: zypp/RepoManager.cc:738 zypp/RepoManager.cc:1654 zypp/RepoManager.cc:1720
+#: zypp/RepoManager.cc:1798 zypp/RepoManager.cc:1863 zypp/RepoManager.cc:1994
 #, c-format, boost-format
 msgid "Can't open file '%s' for writing."
 msgstr "A '%s' fájl nem nyitható meg írásra."
@@ -4103,45 +4103,45 @@ msgstr "A '%s' fájl nem nyitható meg írásra."
 #. translators: Cleanup a repository previously owned by a meanwhile unknown (deleted) service.
 #. %1% = service name
 #. %2% = repository name
-#: zypp/RepoManager.cc:867
+#: zypp/RepoManager.cc:865
 #, boost-format
 msgid "Unknown service '%1%': Removing orphaned service repository '%2%'"
 msgstr ""
 "Ismeretlen '%1%' szolgáltatás: az árva '%2%' szolgáltatástároló eltávolítása"
 
 #. we will throw this later if no URL checks out fine
-#: zypp/RepoManager.cc:1094
+#: zypp/RepoManager.cc:1092
 msgid "Valid metadata not found at specified URL"
 msgid_plural "Valid metadata not found at specified URLs"
 msgstr[0] "A megadott URL-címen nem találhatók érvényes metaadatok"
 msgstr[1] "A megadott URL-címeken nem találhatók érvényes metaadatok"
 
-#: zypp/RepoManager.cc:1142 zypp/RepoManager.cc:1254 zypp/RepoManager.cc:1310
+#: zypp/RepoManager.cc:1140 zypp/RepoManager.cc:1252 zypp/RepoManager.cc:1308
 #, c-format, boost-format
 msgid "Can't create %s"
 msgstr "A(z) %s nem hozható létre"
 
-#: zypp/RepoManager.cc:1150
+#: zypp/RepoManager.cc:1148
 msgid "Can't create metadata cache directory."
 msgstr "Nem hozható létre a metaadat gyorsítótár-könyvtára."
 
-#: zypp/RepoManager.cc:1296
+#: zypp/RepoManager.cc:1294
 #, c-format, boost-format
 msgid "Building repository '%s' cache"
 msgstr "A(z) '%s' telepítési forrás gyorsítótárának felépítése"
 
-#: zypp/RepoManager.cc:1316
+#: zypp/RepoManager.cc:1314
 #, c-format, boost-format
 msgid "Can't create cache at %s - no writing permissions."
 msgstr ""
 "Írási engedélyek hiányában nem hozható létre gyorsítótár a(z) %s helyen."
 
-#: zypp/RepoManager.cc:1381
+#: zypp/RepoManager.cc:1379
 #, c-format, boost-format
 msgid "Failed to cache repo (%d)."
 msgstr "Nem sikerült a tároló gyorsítótárazása (%d)."
 
-#: zypp/RepoManager.cc:1392
+#: zypp/RepoManager.cc:1390
 msgid "Unhandled repository type"
 msgstr "Nem kezelt tárolótípus"
 
@@ -4151,44 +4151,44 @@ msgstr "Nem kezelt tárolótípus"
 #. on ftp file-not-found(bnc #335906). Instead we'll check another types
 #. before throwing.
 #. TranslatorExplanation '%s' is an URL
-#: zypp/RepoManager.cc:1429 zypp/RepoManager.cc:2491
+#: zypp/RepoManager.cc:1427 zypp/RepoManager.cc:2489
 #, c-format, boost-format
 msgid "Error trying to read from '%s'"
 msgstr "Hiba történt a következőből való olvasás során: \"%s\""
 
 #. TranslatorExplanation '%s' is an URL
-#: zypp/RepoManager.cc:1482 zypp/RepoManager.cc:2499
+#: zypp/RepoManager.cc:1480 zypp/RepoManager.cc:2497
 #, c-format, boost-format
 msgid "Unknown error reading from '%s'"
 msgstr "Ismeretlen hiba a '%s' beolvasása közben"
 
-#: zypp/RepoManager.cc:1620
+#: zypp/RepoManager.cc:1618
 #, c-format, boost-format
 msgid "Adding repository '%s'"
 msgstr "A(z) '%s' telepítési forrás hozzáadása"
 
 #. TranslatorExplanation '%s' is an URL
-#: zypp/RepoManager.cc:1708
+#: zypp/RepoManager.cc:1706
 #, c-format, boost-format
 msgid "Invalid repo file name at '%s'"
 msgstr "Érvénytelen tárolónév: '%s'"
 
-#: zypp/RepoManager.cc:1749
+#: zypp/RepoManager.cc:1747
 #, c-format, boost-format
 msgid "Removing repository '%s'"
 msgstr "A(z) '%s' telepítési forrás eltávolítása"
 
-#: zypp/RepoManager.cc:1768 zypp/RepoManager.cc:1846
+#: zypp/RepoManager.cc:1766 zypp/RepoManager.cc:1844
 msgid "Can't figure out where the repo is stored."
 msgstr "Nem sikerült a tároló felismerése."
 
 #. TranslatorExplanation '%s' is a filename
-#: zypp/RepoManager.cc:1782 zypp/RepoManager.cc:1984
+#: zypp/RepoManager.cc:1780 zypp/RepoManager.cc:1982
 #, c-format, boost-format
 msgid "Can't delete '%s'"
 msgstr "A(z) '%s' törlése sikertelen"
 
-#: zypp/RepoManager.cc:1972 zypp/RepoManager.cc:2422
+#: zypp/RepoManager.cc:1970 zypp/RepoManager.cc:2420
 msgid "Can't figure out where the service is stored."
 msgstr "Nem sikerült a szolgáltatás felismerése."
 
@@ -4302,15 +4302,6 @@ msgstr ""
 msgid "History:"
 msgstr "Előzmények:"
 
-#: zypp/base/InterProcessMutex.cc:83
-#, c-format, boost-format
-msgid "Can't open lock file: %s"
-msgstr "A zárolt fájl nem nyitható meg: %s"
-
-#: zypp/base/InterProcessMutex.cc:143
-msgid "This action is being run by another program already."
-msgstr "Ezt a folyamatot már elindította egy másik program."
-
 #: zypp/base/StrMatcher.cc:152
 #, c-format, boost-format
 msgid "Unknown match mode '%s'"
@@ -4332,12 +4323,12 @@ msgid "Invalid regular expression '%s'"
 msgstr "Érvénytelen reguláris kifejezés '%s'"
 
 #. !\todo add comma to the message for the next release
-#: zypp/media/MediaCIFS.cc:427 zypp/media/MediaCurl.cc:1775
+#: zypp/media/MediaCIFS.cc:427 zypp/media/MediaCurl.cc:1738
 #, c-format, boost-format
 msgid "Authentication required for '%s'"
 msgstr "Felhasználóhitelesítés szükséges ehhez: '%s'"
 
-#: zypp/media/MediaCurl.cc:1139
+#: zypp/media/MediaCurl.cc:1111
 msgid ""
 "Visit the SUSE Customer Center to check whether your registration is valid "
 "and has not expired."
@@ -4345,7 +4336,7 @@ msgstr ""
 "Keresse fel a SUSE Ügyfélközpontot, és ellenőrizze, hogy a regisztrációja "
 "érvényes-e, illetve nem járt-e le."
 
-#: zypp/media/MediaCurl.cc:1141
+#: zypp/media/MediaCurl.cc:1113
 msgid ""
 "Visit the Novell Customer Center to check whether your registration is valid "
 "and has not expired."
@@ -4353,92 +4344,92 @@ msgstr ""
 "Látogassa meg a Novell Ügyfélközpotot (Novell Customer Center), hogy "
 "ellenőrizni tudja, hogy a regisztrációja érvényes és nem jár re."
 
-#: zypp/media/MediaException.cc:31
+#: zypp/media/MediaException.cc:33
 #, c-format, boost-format
 msgid "Failed to mount %s on %s"
 msgstr "Nem sikerült a(z) %s felcsatolása ide: %s"
 
-#: zypp/media/MediaException.cc:41
+#: zypp/media/MediaException.cc:43
 #, c-format, boost-format
 msgid "Failed to unmount %s"
 msgstr "A(z) %s eltávolítása sikertelen"
 
-#: zypp/media/MediaException.cc:46
+#: zypp/media/MediaException.cc:48
 #, c-format, boost-format
 msgid "Bad file name: %s"
 msgstr "Hibás fájlnév: %s"
 
-#: zypp/media/MediaException.cc:51
+#: zypp/media/MediaException.cc:53
 #, c-format, boost-format
 msgid "Medium not opened when trying to perform action '%s'."
 msgstr ""
 "Az adathordozó elérése a(z) '%s' művelet végrehajtása közben nem sikerült."
 
-#: zypp/media/MediaException.cc:56
+#: zypp/media/MediaException.cc:58
 #, c-format, boost-format
 msgid "File '%s' not found on medium '%s'"
 msgstr "A(z) '%s' fájl nem található a(z) '%s' adathordozón"
 
-#: zypp/media/MediaException.cc:61
+#: zypp/media/MediaException.cc:63
 #, c-format, boost-format
 msgid "Cannot write file '%s'."
 msgstr "A fájl írása sikertelen: '%s'."
 
-#: zypp/media/MediaException.cc:66
+#: zypp/media/MediaException.cc:68
 msgid "Medium not attached"
 msgstr "Az adathordozó nincs csatlakoztatva"
 
-#: zypp/media/MediaException.cc:71
+#: zypp/media/MediaException.cc:73
 msgid "Bad media attach point"
 msgstr "Hibás csatolási pont"
 
 #. TranslatorExplanation: curl is the name of a library, don't translate
-#: zypp/media/MediaException.cc:77
+#: zypp/media/MediaException.cc:79
 #, c-format, boost-format
 msgid "Download (curl) initialization failed for '%s'"
 msgstr "A letöltés (curl) inicializálása meghiúsult: '%s'"
 
-#: zypp/media/MediaException.cc:82
+#: zypp/media/MediaException.cc:84
 #, c-format, boost-format
 msgid "System exception '%s' on medium '%s'."
 msgstr "%s rendszerkivétel történt a(z) '%s' adathordozón."
 
-#: zypp/media/MediaException.cc:87
+#: zypp/media/MediaException.cc:89
 #, c-format, boost-format
 msgid "Path '%s' on medium '%s' is not a file."
 msgstr "A(z) '%s' elérési út a(z) '%s' adathordozón nem fájl."
 
-#: zypp/media/MediaException.cc:92
+#: zypp/media/MediaException.cc:94
 #, c-format, boost-format
 msgid "Path '%s' on medium '%s' is not a directory."
 msgstr "A(z) '%s' elérési út a(z) '%s' adathordozón nem könyvtár."
 
-#: zypp/media/MediaException.cc:99
+#: zypp/media/MediaException.cc:101
 msgid "Malformed URI"
 msgstr "Hibás URI"
 
-#: zypp/media/MediaException.cc:109
+#: zypp/media/MediaException.cc:111
 msgid "Empty host name in URI"
 msgstr "Üres hosztnév a hivatkozásban"
 
-#: zypp/media/MediaException.cc:114
+#: zypp/media/MediaException.cc:116
 msgid "Empty filesystem in URI"
 msgstr "Üres fájlrendszer a hivatkozásban"
 
-#: zypp/media/MediaException.cc:119
+#: zypp/media/MediaException.cc:121
 msgid "Empty destination in URI"
 msgstr "Üres cél a hivatkozásban"
 
-#: zypp/media/MediaException.cc:124
+#: zypp/media/MediaException.cc:126
 #, c-format, boost-format
 msgid "Unsupported URI scheme in '%s'."
 msgstr "Érvénytelen URI séma: '%s'."
 
-#: zypp/media/MediaException.cc:129
+#: zypp/media/MediaException.cc:131
 msgid "Operation not supported by medium"
 msgstr "Az adathordozó nem támogatja ezt a műveletet"
 
-#: zypp/media/MediaException.cc:136
+#: zypp/media/MediaException.cc:138
 #, c-format, boost-format
 msgid ""
 "Download (curl) error for '%s':\n"
@@ -4450,53 +4441,53 @@ msgstr ""
 "Hibaüzenet: %s\n"
 
 #. TranslatorExplanation: curl is the name of a library, don't translate
-#: zypp/media/MediaException.cc:144
+#: zypp/media/MediaException.cc:146
 #, c-format, boost-format
 msgid "Error occurred while setting download (curl) options for '%s':"
 msgstr "Hiba történt a '%s' letöltési (curl) beállításainak beállítása közben:"
 
-#: zypp/media/MediaException.cc:151
+#: zypp/media/MediaException.cc:153
 #, c-format, boost-format
 msgid "Media source '%s' does not contain the desired medium"
 msgstr "A '%s' adathordozó forrása nem tartalmazza a kívánt adathordozót"
 
-#: zypp/media/MediaException.cc:156
+#: zypp/media/MediaException.cc:158
 #, c-format, boost-format
 msgid "Medium '%s' is in use by another instance"
 msgstr "Jelenleg egy másik folyamat használja a(z) '%s' adathordozót"
 
-#: zypp/media/MediaException.cc:162
+#: zypp/media/MediaException.cc:164
 msgid "Cannot eject any media"
 msgstr "Nincs kiadható adathordozó"
 
-#: zypp/media/MediaException.cc:164
+#: zypp/media/MediaException.cc:166
 #, c-format, boost-format
 msgid "Cannot eject media '%s'"
 msgstr "A(z) '%s' adathordozó kiadása sikertelen"
 
-#: zypp/media/MediaException.cc:179
+#: zypp/media/MediaException.cc:181
 #, c-format, boost-format
 msgid "Permission to access '%s' denied."
 msgstr "Hozzáférés megtagadva: '%s'."
 
-#: zypp/media/MediaException.cc:187
+#: zypp/media/MediaException.cc:189
 #, c-format, boost-format
 msgid "Timeout exceeded when accessing '%s'."
 msgstr "Időtúllépés a '%s' elérése közben."
 
-#: zypp/media/MediaException.cc:195
+#: zypp/media/MediaException.cc:197
 #, c-format, boost-format
 msgid "Downloaded data exceeded the expected filesize '%s' of '%s'."
 msgstr ""
 "A letöltött adatok mérete meghaladta a várt fájlméretet: '%s' (összesen: "
 "'%s')."
 
-#: zypp/media/MediaException.cc:203
+#: zypp/media/MediaException.cc:205
 #, c-format, boost-format
 msgid "Location '%s' is temporarily unaccessible."
 msgstr "A '%s' hely ideiglenesen nem elérhető."
 
-#: zypp/media/MediaException.cc:211
+#: zypp/media/MediaException.cc:213
 #, c-format, boost-format
 msgid " SSL certificate problem, verify that the CA cert is OK for '%s'."
 msgstr ""
@@ -4516,7 +4507,7 @@ msgstr ""
 msgid "Unsupported HTTP authentication method '%s'"
 msgstr "Nem támogatott HTTP hitelesítési metódus: '%s'"
 
-#: zypp/misc/CheckAccessDeleted.cc:357
+#: zypp/misc/CheckAccessDeleted.cc:444
 msgid "Please install package 'lsof' first."
 msgstr "Először az 'lsof' csomagot kell telepíteni."
 
@@ -4730,60 +4721,61 @@ msgstr "%s csomag megtörése néhány függőség figyelmen kívül hagyásáva
 msgid "generally ignore of some dependencies"
 msgstr "egyes függőségek általános mellőzése"
 
-#: zypp/solver/detail/SATResolver.cc:988
+#: zypp/solver/detail/SATResolver.cc:1052
 #, c-format, boost-format
 msgid "%s does not belong to a distupgrade repository"
 msgstr "%s nem tartozik a distupgrade telepítési forráshoz"
 
-#: zypp/solver/detail/SATResolver.cc:992
+#: zypp/solver/detail/SATResolver.cc:1055
 #, c-format, boost-format
 msgid "%s has inferior architecture"
 msgstr "%s alacsonyabb szintű architektúrával rendelkezik"
 
-#: zypp/solver/detail/SATResolver.cc:996
+#: zypp/solver/detail/SATResolver.cc:1058
 #, c-format, boost-format
 msgid "problem with installed package %s"
 msgstr "probléma a telepített csomaggal: %s"
 
-#: zypp/solver/detail/SATResolver.cc:999
+#: zypp/solver/detail/SATResolver.cc:1061
 msgid "conflicting requests"
 msgstr "ütköző kérelmek"
 
-#: zypp/solver/detail/SATResolver.cc:1002
+#: zypp/solver/detail/SATResolver.cc:1064
 msgid "some dependency problem"
 msgstr "bizonyos függőségi probléma"
 
-#: zypp/solver/detail/SATResolver.cc:1005
+#: zypp/solver/detail/SATResolver.cc:1067
 #, c-format, boost-format
 msgid "nothing provides requested %s"
 msgstr "semmi nem biztosítja a(z) %s csomagot"
 
-#: zypp/solver/detail/SATResolver.cc:1006
-#: zypp/solver/detail/SATResolver.cc:1010
+#: zypp/solver/detail/SATResolver.cc:1068
+#: zypp/solver/detail/SATResolver.cc:1072
 msgid "Have you enabled all requested repositories?"
 msgstr "Minden szükséges telepítési forrást engedélyezett?"
 
-#: zypp/solver/detail/SATResolver.cc:1009
+#: zypp/solver/detail/SATResolver.cc:1071
 #, c-format, boost-format
 msgid "package %s does not exist"
 msgstr "a(z) %s csomag nem létezik"
 
-#: zypp/solver/detail/SATResolver.cc:1013
+#: zypp/solver/detail/SATResolver.cc:1075
 msgid "unsupported request"
 msgstr "nem támogatott kérelem"
 
-#: zypp/solver/detail/SATResolver.cc:1016
+#: zypp/solver/detail/SATResolver.cc:1078
 #, c-format, boost-format
 msgid "%s is provided by the system and cannot be erased"
 msgstr "A(z) %s a rendszertől származik, ezért törlése nem lehetséges."
 
 # modules/inst_target_part.ycp:676
-#: zypp/solver/detail/SATResolver.cc:1020
+#: zypp/solver/detail/SATResolver.cc:1081
 #, c-format, boost-format
 msgid "%s is not installable"
 msgstr "%s nem telepíthető"
 
-#: zypp/solver/detail/SATResolver.cc:1025
+#. for setting weak dependencies
+#: zypp/solver/detail/SATResolver.cc:1085
 #, c-format, boost-format
 msgid "nothing provides %s needed by %s"
 msgstr ""
@@ -4791,41 +4783,41 @@ msgstr ""
 "amely szükséges a(z) %s csomag telepítéséhez"
 
 # modules/inst_target_part.ycp:676
-#: zypp/solver/detail/SATResolver.cc:1030
+#: zypp/solver/detail/SATResolver.cc:1088
 #, c-format, boost-format
 msgid "cannot install both %s and %s"
 msgstr "nem telepíthető %s és %s is"
 
-#: zypp/solver/detail/SATResolver.cc:1035
+#: zypp/solver/detail/SATResolver.cc:1091
 #, c-format, boost-format
 msgid "%s conflicts with %s provided by %s"
 msgstr "%s ütközik a(z) %s csomaggal, amit a(z) %s csomag biztosít"
 
-#: zypp/solver/detail/SATResolver.cc:1040
+#: zypp/solver/detail/SATResolver.cc:1094
 #, c-format, boost-format
 msgid "%s obsoletes %s provided by %s"
 msgstr "%s elavulttá teszi a(z) %s csomagot, amit a(z) %s csomag biztosít"
 
-#: zypp/solver/detail/SATResolver.cc:1045
+#: zypp/solver/detail/SATResolver.cc:1097
 #, c-format, boost-format
 msgid "installed %s obsoletes %s provided by %s"
 msgstr "%s elavulttá teszi a(z) %s csomagot, amit a(z) %s csomag biztosít"
 
-#: zypp/solver/detail/SATResolver.cc:1049
+#: zypp/solver/detail/SATResolver.cc:1100
 #, c-format, boost-format
 msgid "solvable %s conflicts with %s provided by itself"
 msgstr "%s ütközik a(z) %s csomaggal, amit saját maga biztosít"
 
-#: zypp/solver/detail/SATResolver.cc:1081
+#: zypp/solver/detail/SATResolver.cc:1131
 #, c-format, boost-format
 msgid "%s requires %s, but this requirement cannot be provided"
 msgstr "%s csomagnak a következőre van szüksége: %s, de ez nem teljesíthető"
 
-#: zypp/solver/detail/SATResolver.cc:1083
+#: zypp/solver/detail/SATResolver.cc:1133
 msgid "deleted providers: "
 msgstr "törölt csomagok: "
 
-#: zypp/solver/detail/SATResolver.cc:1093
+#: zypp/solver/detail/SATResolver.cc:1143
 msgid ""
 "\n"
 "not installable providers: "
@@ -4833,89 +4825,89 @@ msgstr ""
 "\n"
 "nem telepíthető szolgáltatók: "
 
-#: zypp/solver/detail/SATResolver.cc:1095
+#: zypp/solver/detail/SATResolver.cc:1145
 msgid "not installable providers: "
 msgstr "nem telepíthető szolgáltatók: "
 
-#: zypp/solver/detail/SATResolver.cc:1152
+#: zypp/solver/detail/SATResolver.cc:1207
 #, c-format, boost-format
 msgid "remove lock to allow removal of %s"
 msgstr "távolítsa el a zárolást a(z) %s eltávolításának engedélyezéséhez"
 
 # modules/inst_target_part.ycp:676
-#: zypp/solver/detail/SATResolver.cc:1157
-#: zypp/solver/detail/SATResolver.cc:1193
+#: zypp/solver/detail/SATResolver.cc:1212
+#: zypp/solver/detail/SATResolver.cc:1248
 #, c-format, boost-format
 msgid "do not install %s"
 msgstr "Ne telepítse a(z) %s csomagot"
 
-#: zypp/solver/detail/SATResolver.cc:1172
-#: zypp/solver/detail/SATResolver.cc:1214
+#: zypp/solver/detail/SATResolver.cc:1227
+#: zypp/solver/detail/SATResolver.cc:1269
 #, c-format, boost-format
 msgid "keep %s"
 msgstr "%s megtartása"
 
-#: zypp/solver/detail/SATResolver.cc:1177
+#: zypp/solver/detail/SATResolver.cc:1232
 #, c-format, boost-format
 msgid "remove lock to allow installation of %s"
 msgstr "távolítsa el a zárolást a(z) %s telepítésének engedélyezéséhez"
 
-#: zypp/solver/detail/SATResolver.cc:1228
-#: zypp/solver/detail/SATResolver.cc:1249
+#: zypp/solver/detail/SATResolver.cc:1283
+#: zypp/solver/detail/SATResolver.cc:1304
 msgid "This request will break your system!"
 msgstr "A kért módosítás a rendszer meghibásodásához vezet!"
 
-#: zypp/solver/detail/SATResolver.cc:1229
-#: zypp/solver/detail/SATResolver.cc:1250
+#: zypp/solver/detail/SATResolver.cc:1284
+#: zypp/solver/detail/SATResolver.cc:1305
 msgid "ignore the warning of a broken system"
 msgstr "a hibás rendszer figyelmeztetésének figyelmen kívül hagyása"
 
-#: zypp/solver/detail/SATResolver.cc:1234
+#: zypp/solver/detail/SATResolver.cc:1289
 #, c-format, boost-format
 msgid "do not ask to install a solvable providing %s"
 msgstr "ne kérdezzen rá a %s-t biztosító feloldható telepítésére"
 
-#: zypp/solver/detail/SATResolver.cc:1256
+#: zypp/solver/detail/SATResolver.cc:1311
 #, c-format, boost-format
 msgid "do not ask to delete all solvables providing %s"
 msgstr "ne kérdezzen rá a %s-t biztosító feloldhatók eltávolítására"
 
-#: zypp/solver/detail/SATResolver.cc:1269
+#: zypp/solver/detail/SATResolver.cc:1324
 #, c-format, boost-format
 msgid "do not install most recent version of %s"
 msgstr "Ne telepítse a(z) %s csomag legújabb verzióját"
 
-#: zypp/solver/detail/SATResolver.cc:1290
+#: zypp/solver/detail/SATResolver.cc:1345
 #, c-format, boost-format
 msgid "keep %s despite the inferior architecture"
 msgstr "%s megtartása az alacsonyabb rendű architektúra ellenére"
 
-#: zypp/solver/detail/SATResolver.cc:1295
+#: zypp/solver/detail/SATResolver.cc:1350
 #, c-format, boost-format
 msgid "install %s despite the inferior architecture"
 msgstr "%s telepítése az alacsonyabb architektúra ellenére"
 
-#: zypp/solver/detail/SATResolver.cc:1304
+#: zypp/solver/detail/SATResolver.cc:1359
 #, c-format, boost-format
 msgid "keep obsolete %s"
 msgstr "az elavult %s megtartása"
 
-#: zypp/solver/detail/SATResolver.cc:1309
+#: zypp/solver/detail/SATResolver.cc:1364
 #, c-format, boost-format
 msgid "install %s from excluded repository"
 msgstr "%s telepítése a figyelmen kívül hagyott tárolóból"
 
-#: zypp/solver/detail/SATResolver.cc:1329
+#: zypp/solver/detail/SATResolver.cc:1384
 #, c-format, boost-format
 msgid "downgrade of %s to %s"
 msgstr "A(z) %s csomag visszafejlesztése a(z) %s csomagra"
 
-#: zypp/solver/detail/SATResolver.cc:1336
+#: zypp/solver/detail/SATResolver.cc:1391
 #, c-format, boost-format
 msgid "architecture change of %s to %s"
 msgstr "A(z) %s csomag helyett a(z) %s architektúrájú csomag telepítése"
 
-#: zypp/solver/detail/SATResolver.cc:1345
+#: zypp/solver/detail/SATResolver.cc:1400
 #, c-format, boost-format
 msgid ""
 "install %s (with vendor change)\n"
@@ -4924,12 +4916,12 @@ msgstr ""
 "%s telepítése (gyártó megváltoztatásával)\n"
 "  %s  -->  %s"
 
-#: zypp/solver/detail/SATResolver.cc:1354
+#: zypp/solver/detail/SATResolver.cc:1409
 #, c-format, boost-format
 msgid "replacement of %s with %s"
 msgstr "%s cseréje erre: %s"
 
-#: zypp/solver/detail/SATResolver.cc:1365
+#: zypp/solver/detail/SATResolver.cc:1420
 #, c-format, boost-format
 msgid "deinstallation of %s"
 msgstr "%s eltávolítása"
@@ -4980,68 +4972,26 @@ msgstr "Hiba történt a frissítési értesítés küldésekor."
 msgid "New update message"
 msgstr "Új frissítési üzenet"
 
-#: zypp/target/hal/HalContext.cc:25 zypp/target/hal/HalContext.cc:28
-#: zypp/target/hal/HalContext.cc:33
-msgid "Hal Exception"
-msgstr "Hal kivétel"
-
-#: zypp/target/hal/HalContext.cc:38
-msgid "Sorry, but this version of libzypp was built without HAL support."
-msgstr "A libzypp ezen verziója HAL-támogatás nélkül készült."
-
-#: zypp/target/hal/HalContext.cc:131
-msgid "HalContext not connected"
-msgstr "A HalContext nem kapcsolódott"
-
-#: zypp/target/hal/HalContext.cc:141
-msgid "HalDrive not initialized"
-msgstr "A HalDriver inicializálása sikertelen"
-
-#: zypp/target/hal/HalContext.cc:151
-msgid "HalVolume not initialized"
-msgstr "A HalVolume inicializálása sikertelen"
-
-#: zypp/target/hal/HalContext.cc:243
-msgid "Unable to create dbus connection"
-msgstr "A dbus kapcsolat létrehozása sikertelen"
-
-#: zypp/target/hal/HalContext.cc:256
-msgid "libhal_ctx_new: Can't create libhal context"
-msgstr "libhal_ctx_new: A libhal kontextus létrehozása sikertelen"
-
-#: zypp/target/hal/HalContext.cc:271
-msgid "libhal_set_dbus_connection: Can't set dbus connection"
-msgstr "libhal_set_dbus_connection: A dbus kapcsolat beállítása sikertelen"
-
-#: zypp/target/hal/HalContext.cc:286
-msgid "Unable to initalize HAL context -- hald not running?"
-msgstr ""
-"A HAL kontextus inicializálása sikertelen -- lehetséges, hogy a hald nem fut?"
-
-#: zypp/target/hal/HalContext.cc:865
-msgid "Not a CDROM drive"
-msgstr "CD-ROM meghajtó nem található"
-
 #. TranslatorExplanation after semicolon is error message
 #. TranslatorExplanation the colon is followed by an error message
-#: zypp/target/rpm/RpmDb.cc:843 zypp/target/rpm/RpmDb.cc:2119
-#: zypp/target/rpm/RpmDb.cc:2265
+#: zypp/target/rpm/RpmDb.cc:843 zypp/target/rpm/RpmDb.cc:2123
+#: zypp/target/rpm/RpmDb.cc:2269
 msgid "RPM failed: "
 msgstr "RPM sikertelen: "
 
 #. Translator: %1% is a gpg public key
-#: zypp/target/rpm/RpmDb.cc:1174
+#: zypp/target/rpm/RpmDb.cc:1173
 #, boost-format
 msgid "Failed to import public key %1%"
 msgstr "Nem sikerült a(z) %1% fájlból importálni a publikus kulcsot"
 
 #. Translator: %1% is a gpg public key
-#: zypp/target/rpm/RpmDb.cc:1244
+#: zypp/target/rpm/RpmDb.cc:1243
 #, boost-format
 msgid "Failed to remove public key %1%"
 msgstr "A(z) %1% publikus kulcs eltávolítása sikertelen"
 
-#: zypp/target/rpm/RpmDb.cc:1625
+#: zypp/target/rpm/RpmDb.cc:1629
 msgid "Package is not signed!"
 msgstr "A csomag nincs aláírva."
 
@@ -5050,13 +5000,13 @@ msgstr "A csomag nincs aláírva."
 # menuentries/menuentry_lan_sendmail.ycp:14
 #. Translator: %s = name of an rpm package. A list of diffs follows
 #. this message.
-#: zypp/target/rpm/RpmDb.cc:1925
+#: zypp/target/rpm/RpmDb.cc:1929
 #, c-format, boost-format
 msgid "Changed configuration files for %s:"
 msgstr "%s módosított konfigurációs fájljai:"
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:2100
+#: zypp/target/rpm/RpmDb.cc:2104
 #, c-format, boost-format
 msgid "rpm saved %s as %s, but it was impossible to determine the difference"
 msgstr ""
@@ -5064,7 +5014,7 @@ msgstr ""
 "különbséget"
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:2102
+#: zypp/target/rpm/RpmDb.cc:2106
 #, c-format, boost-format
 msgid ""
 "rpm saved %s as %s.\n"
@@ -5074,7 +5024,7 @@ msgstr ""
 "A különbség első 25 sora:\n"
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:2105
+#: zypp/target/rpm/RpmDb.cc:2109
 #, c-format, boost-format
 msgid "rpm created %s as %s, but it was impossible to determine the difference"
 msgstr ""
@@ -5082,7 +5032,7 @@ msgstr ""
 "különbséget"
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:2107
+#: zypp/target/rpm/RpmDb.cc:2111
 #, c-format, boost-format
 msgid ""
 "rpm created %s as %s.\n"
@@ -5093,69 +5043,49 @@ msgstr ""
 
 #. report additional rpm output in finish
 #. TranslatorExplanation Text is followed by a ':'  and the actual output.
-#: zypp/target/rpm/RpmDb.cc:2132 zypp/target/rpm/RpmDb.cc:2278
+#: zypp/target/rpm/RpmDb.cc:2136 zypp/target/rpm/RpmDb.cc:2282
 msgid "Additional rpm output"
 msgstr "További rpm kimenet"
 
-#: zypp/target/rpm/RpmDb.cc:2420
+#: zypp/target/rpm/RpmDb.cc:2424
 #, c-format, boost-format
 msgid "created backup %s"
 msgstr "%s másolata létrehozva"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2441
+#: zypp/target/rpm/RpmDb.cc:2445
 msgid "Signature is OK"
 msgstr "Az aláírás rendben van"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2443
+#: zypp/target/rpm/RpmDb.cc:2447
 msgid "Unknown type of signature"
 msgstr "Ismeretlen típusú aláírás"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2445
+#: zypp/target/rpm/RpmDb.cc:2449
 msgid "Signature does not verify"
 msgstr "Az aláírás nem felelt meg az ellenőrzésen"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2447
+#: zypp/target/rpm/RpmDb.cc:2451
 msgid "Signature is OK, but key is not trusted"
 msgstr "Az aláírás rendben van, de a kulcs nem megbízható"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2449
+#: zypp/target/rpm/RpmDb.cc:2453
 msgid "Signatures public key is not available"
 msgstr "Az aláírások nyilvános kulcsa nem érhető el"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2451
+#: zypp/target/rpm/RpmDb.cc:2455
 msgid "File does not exist or signature can't be checked"
 msgstr "A fájl nem létezik, vagy nem ellenőrizhető az aláírása"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2453
+#: zypp/target/rpm/RpmDb.cc:2457
 msgid "File is unsigned"
 msgstr "A fájl nincs aláírva"
-
-#: zypp/thread/Mutex.cc:33
-msgid "Can't initialize mutex attributes"
-msgstr "A mutex attribútumok inicializációja sikertelen"
-
-#: zypp/thread/Mutex.cc:40
-msgid "Can't set recursive mutex attribute"
-msgstr "Rekurzív mutex attribútum nem állítható be"
-
-#: zypp/thread/Mutex.cc:47
-msgid "Can't initialize recursive mutex"
-msgstr "A rekurzív mutex attribútum inicializációja sikertelen"
-
-#: zypp/thread/Mutex.cc:77
-msgid "Can't acquire the mutex lock"
-msgstr "A mutex zárolása sikertelen"
-
-#: zypp/thread/Mutex.cc:87
-msgid "Can't release the mutex lock"
-msgstr "A mutex zárolása nem oldható fel"
 
 #: zypp/url/UrlBase.cc:154
 #, c-format, boost-format
@@ -5242,6 +5172,59 @@ msgstr ""
 #: zypp/url/UrlUtils.cc:283
 msgid "Invalid parameter array join separator character"
 msgstr "Érvénytelen tömbösszefűzés-elválasztó (array join separator) karakter"
+
+#~ msgid "Can't open lock file: %s"
+#~ msgstr "A zárolt fájl nem nyitható meg: %s"
+
+#~ msgid "This action is being run by another program already."
+#~ msgstr "Ezt a folyamatot már elindította egy másik program."
+
+#~ msgid "Hal Exception"
+#~ msgstr "Hal kivétel"
+
+#~ msgid "Sorry, but this version of libzypp was built without HAL support."
+#~ msgstr "A libzypp ezen verziója HAL-támogatás nélkül készült."
+
+#~ msgid "HalContext not connected"
+#~ msgstr "A HalContext nem kapcsolódott"
+
+#~ msgid "HalDrive not initialized"
+#~ msgstr "A HalDriver inicializálása sikertelen"
+
+#~ msgid "HalVolume not initialized"
+#~ msgstr "A HalVolume inicializálása sikertelen"
+
+#~ msgid "Unable to create dbus connection"
+#~ msgstr "A dbus kapcsolat létrehozása sikertelen"
+
+#~ msgid "libhal_ctx_new: Can't create libhal context"
+#~ msgstr "libhal_ctx_new: A libhal kontextus létrehozása sikertelen"
+
+#~ msgid "libhal_set_dbus_connection: Can't set dbus connection"
+#~ msgstr "libhal_set_dbus_connection: A dbus kapcsolat beállítása sikertelen"
+
+#~ msgid "Unable to initalize HAL context -- hald not running?"
+#~ msgstr ""
+#~ "A HAL kontextus inicializálása sikertelen -- lehetséges, hogy a hald nem "
+#~ "fut?"
+
+#~ msgid "Not a CDROM drive"
+#~ msgstr "CD-ROM meghajtó nem található"
+
+#~ msgid "Can't initialize mutex attributes"
+#~ msgstr "A mutex attribútumok inicializációja sikertelen"
+
+#~ msgid "Can't set recursive mutex attribute"
+#~ msgstr "Rekurzív mutex attribútum nem állítható be"
+
+#~ msgid "Can't initialize recursive mutex"
+#~ msgstr "A rekurzív mutex attribútum inicializációja sikertelen"
+
+#~ msgid "Can't acquire the mutex lock"
+#~ msgstr "A mutex zárolása sikertelen"
+
+#~ msgid "Can't release the mutex lock"
+#~ msgstr "A mutex zárolása nem oldható fel"
 
 #~ msgid "Failed to import public key from file %s: %s"
 #~ msgstr "Nem sikerült a(z) %s fájlból importálni a publikus kulcsot: %s"

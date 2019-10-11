@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-27 13:31+0100\n"
+"POT-Creation-Date: 2019-10-11 09:20+0200\n"
 "PO-Revision-Date: 2019-03-23 20:19+0000\n"
 "Last-Translator: Juan Sarria <juansarriam@gmail.com>\n"
 "Language-Team: Spanish <https://l10n.opensuse.org/projects/libzypp/master/es/"
@@ -1358,21 +1358,21 @@ msgid "Command exited with unknown error."
 msgstr "El comando ha terminado con un error desconocido."
 
 #. TranslatorExplanation first %s is key name, second is keyring name
-#: zypp/KeyRing.cc:599
+#: zypp/KeyRing.cc:590
 #, c-format, boost-format
 msgid "Tried to import not existent key %s into keyring %s"
 msgstr ""
 "Se intentó importar una clave que no existe (%s) al almacén de claves %s"
 
-#: zypp/KeyRing.cc:605 zypp/KeyRing.cc:609
+#: zypp/KeyRing.cc:596
 msgid "Failed to import key."
 msgstr "Error al importar la clave."
 
-#: zypp/KeyRing.cc:616 zypp/KeyRing.cc:620 zypp/KeyRing.cc:624
+#: zypp/KeyRing.cc:603
 msgid "Failed to delete key."
 msgstr "Error al suprimir la clave."
 
-#: zypp/KeyRing.cc:633
+#: zypp/KeyRing.cc:609
 #, c-format, boost-format
 msgid "Signature file %s not found"
 msgstr "No se encuentra el archivo de firma %s"
@@ -3798,34 +3798,34 @@ msgstr "Buscando la llave gpg con identificador %1% en el repositorio %2%."
 msgid "Repository %1% does not define additional 'gpgkey=' URLs."
 msgstr "El repositorio %1% no define ningún URL 'gpgkey=' adicional."
 
-#: zypp/RepoManager.cc:314
+#: zypp/RepoManager.cc:312
 #, boost-format
 msgid "Cannot read repo directory '%1%': Permission denied"
 msgstr "No es posible leer el directorio de repositorio %1%: permiso denegado"
 
 #. TranslatorExplanation '%s' is a pathname
-#: zypp/RepoManager.cc:322 zypp/RepoManager.cc:785 zypp/RepoManager.cc:1538
+#: zypp/RepoManager.cc:320 zypp/RepoManager.cc:783 zypp/RepoManager.cc:1536
 #: zypp/repo/PluginServices.cc:49
 #, c-format, boost-format
 msgid "Failed to read directory '%s'"
 msgstr "Error al leer el directorio %s"
 
-#: zypp/RepoManager.cc:332
+#: zypp/RepoManager.cc:330
 #, boost-format
 msgid "Cannot read repo file '%1%': Permission denied"
 msgstr "No es posible leer el archivo de repositorio %1%: permiso denegado"
 
-#: zypp/RepoManager.cc:355
+#: zypp/RepoManager.cc:353
 msgid "Repository alias cannot start with dot."
 msgstr "El alias del repositorio no puede comenzar con un punto."
 
-#: zypp/RepoManager.cc:366
+#: zypp/RepoManager.cc:364
 msgid "Service alias cannot start with dot."
 msgstr "El alias del servicio no puede comenzar con un punto."
 
 #. TranslatorExplanation '%s' is a filename
-#: zypp/RepoManager.cc:740 zypp/RepoManager.cc:1656 zypp/RepoManager.cc:1722
-#: zypp/RepoManager.cc:1800 zypp/RepoManager.cc:1865 zypp/RepoManager.cc:1996
+#: zypp/RepoManager.cc:738 zypp/RepoManager.cc:1654 zypp/RepoManager.cc:1720
+#: zypp/RepoManager.cc:1798 zypp/RepoManager.cc:1863 zypp/RepoManager.cc:1994
 #, c-format, boost-format
 msgid "Can't open file '%s' for writing."
 msgstr "No es posible abrir el archivo %s para escribir en él."
@@ -3833,7 +3833,7 @@ msgstr "No es posible abrir el archivo %s para escribir en él."
 #. translators: Cleanup a repository previously owned by a meanwhile unknown (deleted) service.
 #. %1% = service name
 #. %2% = repository name
-#: zypp/RepoManager.cc:867
+#: zypp/RepoManager.cc:865
 #, boost-format
 msgid "Unknown service '%1%': Removing orphaned service repository '%2%'"
 msgstr ""
@@ -3841,37 +3841,37 @@ msgstr ""
 "huérfano %2%"
 
 #. we will throw this later if no URL checks out fine
-#: zypp/RepoManager.cc:1094
+#: zypp/RepoManager.cc:1092
 msgid "Valid metadata not found at specified URL"
 msgid_plural "Valid metadata not found at specified URLs"
 msgstr[0] "No se han encontrado metadatos válidos en la URL especificada"
 msgstr[1] "No se han encontrado metadatos válidos en las URL especificadas"
 
-#: zypp/RepoManager.cc:1142 zypp/RepoManager.cc:1254 zypp/RepoManager.cc:1310
+#: zypp/RepoManager.cc:1140 zypp/RepoManager.cc:1252 zypp/RepoManager.cc:1308
 #, c-format, boost-format
 msgid "Can't create %s"
 msgstr "No es posible crear %s"
 
-#: zypp/RepoManager.cc:1150
+#: zypp/RepoManager.cc:1148
 msgid "Can't create metadata cache directory."
 msgstr "No es posible crear el directorio para el caché de metadatos."
 
-#: zypp/RepoManager.cc:1296
+#: zypp/RepoManager.cc:1294
 #, c-format, boost-format
 msgid "Building repository '%s' cache"
 msgstr "Construyendo el caché del repositorio %s"
 
-#: zypp/RepoManager.cc:1316
+#: zypp/RepoManager.cc:1314
 #, c-format, boost-format
 msgid "Can't create cache at %s - no writing permissions."
 msgstr "No es posible crear el caché en %s, no posee permisos de escritura."
 
-#: zypp/RepoManager.cc:1381
+#: zypp/RepoManager.cc:1379
 #, c-format, boost-format
 msgid "Failed to cache repo (%d)."
 msgstr "Error al añadir a caché el repositorio (%d)."
 
-#: zypp/RepoManager.cc:1392
+#: zypp/RepoManager.cc:1390
 msgid "Unhandled repository type"
 msgstr "Tipo de repositorio no gestionado"
 
@@ -3881,44 +3881,44 @@ msgstr "Tipo de repositorio no gestionado"
 #. on ftp file-not-found(bnc #335906). Instead we'll check another types
 #. before throwing.
 #. TranslatorExplanation '%s' is an URL
-#: zypp/RepoManager.cc:1429 zypp/RepoManager.cc:2491
+#: zypp/RepoManager.cc:1427 zypp/RepoManager.cc:2489
 #, c-format, boost-format
 msgid "Error trying to read from '%s'"
 msgstr "Error al intentar leer de %s"
 
 #. TranslatorExplanation '%s' is an URL
-#: zypp/RepoManager.cc:1482 zypp/RepoManager.cc:2499
+#: zypp/RepoManager.cc:1480 zypp/RepoManager.cc:2497
 #, c-format, boost-format
 msgid "Unknown error reading from '%s'"
 msgstr "Error desconocido al leer de %s"
 
-#: zypp/RepoManager.cc:1620
+#: zypp/RepoManager.cc:1618
 #, c-format, boost-format
 msgid "Adding repository '%s'"
 msgstr "Añadiendo el repositorio %s"
 
 #. TranslatorExplanation '%s' is an URL
-#: zypp/RepoManager.cc:1708
+#: zypp/RepoManager.cc:1706
 #, c-format, boost-format
 msgid "Invalid repo file name at '%s'"
 msgstr "Nombre de archivo del repositorio no válido en %s"
 
-#: zypp/RepoManager.cc:1749
+#: zypp/RepoManager.cc:1747
 #, c-format, boost-format
 msgid "Removing repository '%s'"
 msgstr "Eliminando el repositorio %s"
 
-#: zypp/RepoManager.cc:1768 zypp/RepoManager.cc:1846
+#: zypp/RepoManager.cc:1766 zypp/RepoManager.cc:1844
 msgid "Can't figure out where the repo is stored."
 msgstr "No es posible determinar dónde está almacenado el repositorio."
 
 #. TranslatorExplanation '%s' is a filename
-#: zypp/RepoManager.cc:1782 zypp/RepoManager.cc:1984
+#: zypp/RepoManager.cc:1780 zypp/RepoManager.cc:1982
 #, c-format, boost-format
 msgid "Can't delete '%s'"
 msgstr "No es posible suprimir %s"
 
-#: zypp/RepoManager.cc:1972 zypp/RepoManager.cc:2422
+#: zypp/RepoManager.cc:1970 zypp/RepoManager.cc:2420
 msgid "Can't figure out where the service is stored."
 msgstr "No es posible determinar donde está almacenado el servicio."
 
@@ -4039,15 +4039,6 @@ msgstr ""
 msgid "History:"
 msgstr "Historial:"
 
-#: zypp/base/InterProcessMutex.cc:83
-#, c-format, boost-format
-msgid "Can't open lock file: %s"
-msgstr "No es posible abrir el archivo de bloqueo: %s"
-
-#: zypp/base/InterProcessMutex.cc:143
-msgid "This action is being run by another program already."
-msgstr "Otro programa ya está ejecutando esta acción."
-
 #: zypp/base/StrMatcher.cc:152
 #, c-format, boost-format
 msgid "Unknown match mode '%s'"
@@ -4069,12 +4060,12 @@ msgid "Invalid regular expression '%s'"
 msgstr "Expresión regular '%s' no válida"
 
 #. !\todo add comma to the message for the next release
-#: zypp/media/MediaCIFS.cc:427 zypp/media/MediaCurl.cc:1775
+#: zypp/media/MediaCIFS.cc:427 zypp/media/MediaCurl.cc:1738
 #, c-format, boost-format
 msgid "Authentication required for '%s'"
 msgstr "Se requiere autenticación para %s"
 
-#: zypp/media/MediaCurl.cc:1139
+#: zypp/media/MediaCurl.cc:1111
 msgid ""
 "Visit the SUSE Customer Center to check whether your registration is valid "
 "and has not expired."
@@ -4082,7 +4073,7 @@ msgstr ""
 "Visite el Centro de servicios al cliente de SUSE para comprobar si su "
 "registro es válido y no ha caducado."
 
-#: zypp/media/MediaCurl.cc:1141
+#: zypp/media/MediaCurl.cc:1113
 msgid ""
 "Visit the Novell Customer Center to check whether your registration is valid "
 "and has not expired."
@@ -4090,91 +4081,91 @@ msgstr ""
 "Visite el Centro de servicios al cliente de Novell para comprobar si el "
 "registro es válido y no ha caducado."
 
-#: zypp/media/MediaException.cc:31
+#: zypp/media/MediaException.cc:33
 #, c-format, boost-format
 msgid "Failed to mount %s on %s"
 msgstr "Error al montar %s en %s"
 
-#: zypp/media/MediaException.cc:41
+#: zypp/media/MediaException.cc:43
 #, c-format, boost-format
 msgid "Failed to unmount %s"
 msgstr "Error al desmontar %s"
 
-#: zypp/media/MediaException.cc:46
+#: zypp/media/MediaException.cc:48
 #, c-format, boost-format
 msgid "Bad file name: %s"
 msgstr "Nombre de archivo incorrecto: %s"
 
-#: zypp/media/MediaException.cc:51
+#: zypp/media/MediaException.cc:53
 #, c-format, boost-format
 msgid "Medium not opened when trying to perform action '%s'."
 msgstr "No se ha abierto el medio al intentar realizar la acción %s."
 
-#: zypp/media/MediaException.cc:56
+#: zypp/media/MediaException.cc:58
 #, c-format, boost-format
 msgid "File '%s' not found on medium '%s'"
 msgstr "No se encuentra el archivo %s en el medio %s"
 
-#: zypp/media/MediaException.cc:61
+#: zypp/media/MediaException.cc:63
 #, c-format, boost-format
 msgid "Cannot write file '%s'."
 msgstr "No es posible escribir el archivo %s."
 
-#: zypp/media/MediaException.cc:66
+#: zypp/media/MediaException.cc:68
 msgid "Medium not attached"
 msgstr "Medio no conectado"
 
-#: zypp/media/MediaException.cc:71
+#: zypp/media/MediaException.cc:73
 msgid "Bad media attach point"
 msgstr "Punto de conexión de medio incorrecto"
 
 #. TranslatorExplanation: curl is the name of a library, don't translate
-#: zypp/media/MediaException.cc:77
+#: zypp/media/MediaException.cc:79
 #, c-format, boost-format
 msgid "Download (curl) initialization failed for '%s'"
 msgstr "Error de inicio de descarga (curl) para %s"
 
-#: zypp/media/MediaException.cc:82
+#: zypp/media/MediaException.cc:84
 #, c-format, boost-format
 msgid "System exception '%s' on medium '%s'."
 msgstr "Excepción de sistema %s en el medio %s."
 
-#: zypp/media/MediaException.cc:87
+#: zypp/media/MediaException.cc:89
 #, c-format, boost-format
 msgid "Path '%s' on medium '%s' is not a file."
 msgstr "La vía %s del medio %s no es un archivo."
 
-#: zypp/media/MediaException.cc:92
+#: zypp/media/MediaException.cc:94
 #, c-format, boost-format
 msgid "Path '%s' on medium '%s' is not a directory."
 msgstr "La vía %s del medio %s no es un directorio."
 
-#: zypp/media/MediaException.cc:99
+#: zypp/media/MediaException.cc:101
 msgid "Malformed URI"
 msgstr "Formato de URI incorrecto"
 
-#: zypp/media/MediaException.cc:109
+#: zypp/media/MediaException.cc:111
 msgid "Empty host name in URI"
 msgstr "Nombre de host vacío en URI"
 
-#: zypp/media/MediaException.cc:114
+#: zypp/media/MediaException.cc:116
 msgid "Empty filesystem in URI"
 msgstr "Sistema de archivos vacío en URI"
 
-#: zypp/media/MediaException.cc:119
+#: zypp/media/MediaException.cc:121
 msgid "Empty destination in URI"
 msgstr "Destino vacío en URI"
 
-#: zypp/media/MediaException.cc:124
+#: zypp/media/MediaException.cc:126
 #, c-format, boost-format
 msgid "Unsupported URI scheme in '%s'."
 msgstr "Esquema de URI no admitido en %s."
 
-#: zypp/media/MediaException.cc:129
+#: zypp/media/MediaException.cc:131
 msgid "Operation not supported by medium"
 msgstr "El medio no admite la operación"
 
-#: zypp/media/MediaException.cc:136
+#: zypp/media/MediaException.cc:138
 #, c-format, boost-format
 msgid ""
 "Download (curl) error for '%s':\n"
@@ -4186,51 +4177,51 @@ msgstr ""
 "Mensaje de error: %s\n"
 
 #. TranslatorExplanation: curl is the name of a library, don't translate
-#: zypp/media/MediaException.cc:144
+#: zypp/media/MediaException.cc:146
 #, c-format, boost-format
 msgid "Error occurred while setting download (curl) options for '%s':"
 msgstr "Error al definir las opciones de descarga (curl) para %s:"
 
-#: zypp/media/MediaException.cc:151
+#: zypp/media/MediaException.cc:153
 #, c-format, boost-format
 msgid "Media source '%s' does not contain the desired medium"
 msgstr "El origen de medios %s no incluye el medio deseado"
 
-#: zypp/media/MediaException.cc:156
+#: zypp/media/MediaException.cc:158
 #, c-format, boost-format
 msgid "Medium '%s' is in use by another instance"
 msgstr "El medio %s está en uso en otra instancia"
 
-#: zypp/media/MediaException.cc:162
+#: zypp/media/MediaException.cc:164
 msgid "Cannot eject any media"
 msgstr "No es posible expulsar ningún medio"
 
-#: zypp/media/MediaException.cc:164
+#: zypp/media/MediaException.cc:166
 #, c-format, boost-format
 msgid "Cannot eject media '%s'"
 msgstr "No es posible expulsar el medio '%s'"
 
-#: zypp/media/MediaException.cc:179
+#: zypp/media/MediaException.cc:181
 #, c-format, boost-format
 msgid "Permission to access '%s' denied."
 msgstr "Se ha denegado el permiso para acceder a %s."
 
-#: zypp/media/MediaException.cc:187
+#: zypp/media/MediaException.cc:189
 #, c-format, boost-format
 msgid "Timeout exceeded when accessing '%s'."
 msgstr "Se ha superado el tiempo de espera al acceder a %s."
 
-#: zypp/media/MediaException.cc:195
+#: zypp/media/MediaException.cc:197
 #, c-format, boost-format
 msgid "Downloaded data exceeded the expected filesize '%s' of '%s'."
 msgstr "La descarga de datos ha excedido el tamaño esperado '%s 1' de '%s 2'."
 
-#: zypp/media/MediaException.cc:203
+#: zypp/media/MediaException.cc:205
 #, c-format, boost-format
 msgid "Location '%s' is temporarily unaccessible."
 msgstr "La ubicación '%s' está momentaneamente inaccesible."
 
-#: zypp/media/MediaException.cc:211
+#: zypp/media/MediaException.cc:213
 #, c-format, boost-format
 msgid " SSL certificate problem, verify that the CA cert is OK for '%s'."
 msgstr ""
@@ -4250,7 +4241,7 @@ msgstr ""
 msgid "Unsupported HTTP authentication method '%s'"
 msgstr "Método de autenticación HTTP no compatible %s"
 
-#: zypp/misc/CheckAccessDeleted.cc:357
+#: zypp/misc/CheckAccessDeleted.cc:444
 msgid "Please install package 'lsof' first."
 msgstr "Instale primero el paquete lsof."
 
@@ -4467,59 +4458,60 @@ msgstr "romper %s ignorando algunas de sus dependencias"
 msgid "generally ignore of some dependencies"
 msgstr "generalmente se ignoran algunas dependencias"
 
-#: zypp/solver/detail/SATResolver.cc:988
+#: zypp/solver/detail/SATResolver.cc:1052
 #, c-format, boost-format
 msgid "%s does not belong to a distupgrade repository"
 msgstr "%s no pertenece a un repositorio distupgrade"
 
-#: zypp/solver/detail/SATResolver.cc:992
+#: zypp/solver/detail/SATResolver.cc:1055
 #, c-format, boost-format
 msgid "%s has inferior architecture"
 msgstr "%s posee una arquitectura inferior"
 
-#: zypp/solver/detail/SATResolver.cc:996
+#: zypp/solver/detail/SATResolver.cc:1058
 #, c-format, boost-format
 msgid "problem with installed package %s"
 msgstr "se ha producido un problema con el paquete instalado %s"
 
-#: zypp/solver/detail/SATResolver.cc:999
+#: zypp/solver/detail/SATResolver.cc:1061
 msgid "conflicting requests"
 msgstr "peticiones en conflicto"
 
-#: zypp/solver/detail/SATResolver.cc:1002
+#: zypp/solver/detail/SATResolver.cc:1064
 msgid "some dependency problem"
 msgstr "algún problema de dependencia"
 
-#: zypp/solver/detail/SATResolver.cc:1005
+#: zypp/solver/detail/SATResolver.cc:1067
 #, c-format, boost-format
 msgid "nothing provides requested %s"
 msgstr "no hay nada que proporcione el elemento %s pedido"
 
-#: zypp/solver/detail/SATResolver.cc:1006
-#: zypp/solver/detail/SATResolver.cc:1010
+#: zypp/solver/detail/SATResolver.cc:1068
+#: zypp/solver/detail/SATResolver.cc:1072
 msgid "Have you enabled all requested repositories?"
 msgstr "¿Ha habilitado todos los repositorios pedidos?"
 
-#: zypp/solver/detail/SATResolver.cc:1009
+#: zypp/solver/detail/SATResolver.cc:1071
 #, c-format, boost-format
 msgid "package %s does not exist"
 msgstr "el paquete %s no existe"
 
-#: zypp/solver/detail/SATResolver.cc:1013
+#: zypp/solver/detail/SATResolver.cc:1075
 msgid "unsupported request"
 msgstr "petición no admitida"
 
-#: zypp/solver/detail/SATResolver.cc:1016
+#: zypp/solver/detail/SATResolver.cc:1078
 #, c-format, boost-format
 msgid "%s is provided by the system and cannot be erased"
 msgstr "%s proviene del sistema y no se puede eliminar"
 
-#: zypp/solver/detail/SATResolver.cc:1020
+#: zypp/solver/detail/SATResolver.cc:1081
 #, c-format, boost-format
 msgid "%s is not installable"
 msgstr "%s no es instalable"
 
-#: zypp/solver/detail/SATResolver.cc:1025
+#. for setting weak dependencies
+#: zypp/solver/detail/SATResolver.cc:1085
 #, c-format, boost-format
 msgid "nothing provides %s needed by %s"
 msgstr "no hay nada que proporcione %s, necesario para %s"
@@ -4527,41 +4519,41 @@ msgstr "no hay nada que proporcione %s, necesario para %s"
 # include/partitioning/auto_part_ui.ycp:200 include/partitioning/auto_part_ui.ycp:249
 # include/partitioning/auto_part_ui.ycp:200 include/partitioning/auto_part_ui.ycp:249
 # include/partitioning/auto_part_ui.ycp:200 include/partitioning/auto_part_ui.ycp:249
-#: zypp/solver/detail/SATResolver.cc:1030
+#: zypp/solver/detail/SATResolver.cc:1088
 #, c-format, boost-format
 msgid "cannot install both %s and %s"
 msgstr "no es posible instalar ambos elementos: %s y %s"
 
-#: zypp/solver/detail/SATResolver.cc:1035
+#: zypp/solver/detail/SATResolver.cc:1091
 #, c-format, boost-format
 msgid "%s conflicts with %s provided by %s"
 msgstr "%s está en conflicto con %s proporcionado por %s"
 
-#: zypp/solver/detail/SATResolver.cc:1040
+#: zypp/solver/detail/SATResolver.cc:1094
 #, c-format, boost-format
 msgid "%s obsoletes %s provided by %s"
 msgstr "%s deja obsoleto %s, proporcionado por %s"
 
-#: zypp/solver/detail/SATResolver.cc:1045
+#: zypp/solver/detail/SATResolver.cc:1097
 #, c-format, boost-format
 msgid "installed %s obsoletes %s provided by %s"
 msgstr "%s instalado, deja obsoleto a %s proporcionado por %s"
 
-#: zypp/solver/detail/SATResolver.cc:1049
+#: zypp/solver/detail/SATResolver.cc:1100
 #, c-format, boost-format
 msgid "solvable %s conflicts with %s provided by itself"
 msgstr "La solución %s está en conflicto con %s, proporcionada por ella misma"
 
-#: zypp/solver/detail/SATResolver.cc:1081
+#: zypp/solver/detail/SATResolver.cc:1131
 #, c-format, boost-format
 msgid "%s requires %s, but this requirement cannot be provided"
 msgstr "%s requiere %s, pero este requisito no se puede cumplir"
 
-#: zypp/solver/detail/SATResolver.cc:1083
+#: zypp/solver/detail/SATResolver.cc:1133
 msgid "deleted providers: "
 msgstr "proveedores suprimidos: "
 
-#: zypp/solver/detail/SATResolver.cc:1093
+#: zypp/solver/detail/SATResolver.cc:1143
 msgid ""
 "\n"
 "not installable providers: "
@@ -4569,11 +4561,11 @@ msgstr ""
 "\n"
 "proveedores no instalables: "
 
-#: zypp/solver/detail/SATResolver.cc:1095
+#: zypp/solver/detail/SATResolver.cc:1145
 msgid "not installable providers: "
 msgstr "proveedores no instalables: "
 
-#: zypp/solver/detail/SATResolver.cc:1152
+#: zypp/solver/detail/SATResolver.cc:1207
 #, c-format, boost-format
 msgid "remove lock to allow removal of %s"
 msgstr "eliminar bloqueo para permitir la desinstalación de %s"
@@ -4581,80 +4573,80 @@ msgstr "eliminar bloqueo para permitir la desinstalación de %s"
 # include/partitioning/auto_part_ui.ycp:200 include/partitioning/auto_part_ui.ycp:249
 # include/partitioning/auto_part_ui.ycp:200 include/partitioning/auto_part_ui.ycp:249
 # include/partitioning/auto_part_ui.ycp:200 include/partitioning/auto_part_ui.ycp:249
-#: zypp/solver/detail/SATResolver.cc:1157
-#: zypp/solver/detail/SATResolver.cc:1193
+#: zypp/solver/detail/SATResolver.cc:1212
+#: zypp/solver/detail/SATResolver.cc:1248
 #, c-format, boost-format
 msgid "do not install %s"
 msgstr "no instalar %s"
 
-#: zypp/solver/detail/SATResolver.cc:1172
-#: zypp/solver/detail/SATResolver.cc:1214
+#: zypp/solver/detail/SATResolver.cc:1227
+#: zypp/solver/detail/SATResolver.cc:1269
 #, c-format, boost-format
 msgid "keep %s"
 msgstr "mantener %s"
 
-#: zypp/solver/detail/SATResolver.cc:1177
+#: zypp/solver/detail/SATResolver.cc:1232
 #, c-format, boost-format
 msgid "remove lock to allow installation of %s"
 msgstr "eliminar bloqueo para permitir la instalación de %s"
 
-#: zypp/solver/detail/SATResolver.cc:1228
-#: zypp/solver/detail/SATResolver.cc:1249
+#: zypp/solver/detail/SATResolver.cc:1283
+#: zypp/solver/detail/SATResolver.cc:1304
 msgid "This request will break your system!"
 msgstr "Esta petición dañará su sistema."
 
-#: zypp/solver/detail/SATResolver.cc:1229
-#: zypp/solver/detail/SATResolver.cc:1250
+#: zypp/solver/detail/SATResolver.cc:1284
+#: zypp/solver/detail/SATResolver.cc:1305
 msgid "ignore the warning of a broken system"
 msgstr "ignorar la advertencia de daño del sistema"
 
-#: zypp/solver/detail/SATResolver.cc:1234
+#: zypp/solver/detail/SATResolver.cc:1289
 #, c-format, boost-format
 msgid "do not ask to install a solvable providing %s"
 msgstr "no preguntar si se debe instalar una solución que proporciona %s"
 
-#: zypp/solver/detail/SATResolver.cc:1256
+#: zypp/solver/detail/SATResolver.cc:1311
 #, c-format, boost-format
 msgid "do not ask to delete all solvables providing %s"
 msgstr ""
 "no preguntar si se deben suprimir todas las soluciones que proporcionan %s"
 
-#: zypp/solver/detail/SATResolver.cc:1269
+#: zypp/solver/detail/SATResolver.cc:1324
 #, c-format, boost-format
 msgid "do not install most recent version of %s"
 msgstr "no instalar la versión mas reciente de %s"
 
-#: zypp/solver/detail/SATResolver.cc:1290
+#: zypp/solver/detail/SATResolver.cc:1345
 #, c-format, boost-format
 msgid "keep %s despite the inferior architecture"
 msgstr "mantener %s a pesar de la arquitectura inferior"
 
-#: zypp/solver/detail/SATResolver.cc:1295
+#: zypp/solver/detail/SATResolver.cc:1350
 #, c-format, boost-format
 msgid "install %s despite the inferior architecture"
 msgstr "instalar %s a pesar de la arquitectura inferior"
 
-#: zypp/solver/detail/SATResolver.cc:1304
+#: zypp/solver/detail/SATResolver.cc:1359
 #, c-format, boost-format
 msgid "keep obsolete %s"
 msgstr "mantener el antiguo %s"
 
-#: zypp/solver/detail/SATResolver.cc:1309
+#: zypp/solver/detail/SATResolver.cc:1364
 #, c-format, boost-format
 msgid "install %s from excluded repository"
 msgstr "instalar %s desde el repositorio excluido"
 
-#: zypp/solver/detail/SATResolver.cc:1329
+#: zypp/solver/detail/SATResolver.cc:1384
 #, c-format, boost-format
 msgid "downgrade of %s to %s"
 msgstr "restablecer versión anterior de %s a %s"
 
-#: zypp/solver/detail/SATResolver.cc:1336
+#: zypp/solver/detail/SATResolver.cc:1391
 #, c-format, boost-format
 msgid "architecture change of %s to %s"
 msgstr "cambio en la arquitectura de %s a %s"
 
-#: zypp/solver/detail/SATResolver.cc:1345
+#: zypp/solver/detail/SATResolver.cc:1400
 #, c-format, boost-format
 msgid ""
 "install %s (with vendor change)\n"
@@ -4663,12 +4655,12 @@ msgstr ""
 "instalar %s (con cambio de proveedor)\n"
 "  %s  -->  %s"
 
-#: zypp/solver/detail/SATResolver.cc:1354
+#: zypp/solver/detail/SATResolver.cc:1409
 #, c-format, boost-format
 msgid "replacement of %s with %s"
 msgstr "reemplazo de %s con %s"
 
-#: zypp/solver/detail/SATResolver.cc:1365
+#: zypp/solver/detail/SATResolver.cc:1420
 #, c-format, boost-format
 msgid "deinstallation of %s"
 msgstr "desinstalación de %s"
@@ -4720,71 +4712,26 @@ msgstr "Error al enviar la notificación del mensaje de actualización."
 msgid "New update message"
 msgstr "Nuevo mensaje de actualización"
 
-#: zypp/target/hal/HalContext.cc:25 zypp/target/hal/HalContext.cc:28
-#: zypp/target/hal/HalContext.cc:33
-msgid "Hal Exception"
-msgstr "Excepción de hal"
-
-#: zypp/target/hal/HalContext.cc:38
-msgid "Sorry, but this version of libzypp was built without HAL support."
-msgstr ""
-"Lo sentimos, pero esta versión de libzypp se ha construido sin "
-"compatibilidad con HAL."
-
-#: zypp/target/hal/HalContext.cc:131
-msgid "HalContext not connected"
-msgstr "HalContext no está conectado"
-
-#: zypp/target/hal/HalContext.cc:141
-msgid "HalDrive not initialized"
-msgstr "HalDrive no se ha iniciado"
-
-#: zypp/target/hal/HalContext.cc:151
-msgid "HalVolume not initialized"
-msgstr "HalVolume no se ha iniciado"
-
-#: zypp/target/hal/HalContext.cc:243
-msgid "Unable to create dbus connection"
-msgstr "No es posible crear la conexión dbus"
-
-#: zypp/target/hal/HalContext.cc:256
-msgid "libhal_ctx_new: Can't create libhal context"
-msgstr "libhal_ctx_new: no es posible crear el contexto libhal"
-
-#: zypp/target/hal/HalContext.cc:271
-msgid "libhal_set_dbus_connection: Can't set dbus connection"
-msgstr "libhal_set_dbus_connection: no es posible establecer la conexión dbus"
-
-#: zypp/target/hal/HalContext.cc:286
-msgid "Unable to initalize HAL context -- hald not running?"
-msgstr ""
-"No es posible iniciar el contexto HAL -- ¿Es posible que hald no se esté "
-"ejecutando?"
-
-#: zypp/target/hal/HalContext.cc:865
-msgid "Not a CDROM drive"
-msgstr "No es una unidad de CD-ROM"
-
 #. TranslatorExplanation after semicolon is error message
 #. TranslatorExplanation the colon is followed by an error message
-#: zypp/target/rpm/RpmDb.cc:843 zypp/target/rpm/RpmDb.cc:2119
-#: zypp/target/rpm/RpmDb.cc:2265
+#: zypp/target/rpm/RpmDb.cc:843 zypp/target/rpm/RpmDb.cc:2123
+#: zypp/target/rpm/RpmDb.cc:2269
 msgid "RPM failed: "
 msgstr "RPM fallido: "
 
 #. Translator: %1% is a gpg public key
-#: zypp/target/rpm/RpmDb.cc:1174
+#: zypp/target/rpm/RpmDb.cc:1173
 #, boost-format
 msgid "Failed to import public key %1%"
 msgstr "Error al importar la clave pública %1%"
 
 #. Translator: %1% is a gpg public key
-#: zypp/target/rpm/RpmDb.cc:1244
+#: zypp/target/rpm/RpmDb.cc:1243
 #, boost-format
 msgid "Failed to remove public key %1%"
 msgstr "Error al eliminar la clave pública %1%"
 
-#: zypp/target/rpm/RpmDb.cc:1625
+#: zypp/target/rpm/RpmDb.cc:1629
 msgid "Package is not signed!"
 msgstr "¡El paquete no está firmado!"
 
@@ -4795,20 +4742,20 @@ msgstr "¡El paquete no está firmado!"
 # modules/Mail.ycp:563
 #. Translator: %s = name of an rpm package. A list of diffs follows
 #. this message.
-#: zypp/target/rpm/RpmDb.cc:1925
+#: zypp/target/rpm/RpmDb.cc:1929
 #, c-format, boost-format
 msgid "Changed configuration files for %s:"
 msgstr "Se han modificado los archivos de configuración para %s:"
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:2100
+#: zypp/target/rpm/RpmDb.cc:2104
 #, c-format, boost-format
 msgid "rpm saved %s as %s, but it was impossible to determine the difference"
 msgstr ""
 "rpm ha guardado %s como %s, pero no es posible determinar la diferencia"
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:2102
+#: zypp/target/rpm/RpmDb.cc:2106
 #, c-format, boost-format
 msgid ""
 "rpm saved %s as %s.\n"
@@ -4818,13 +4765,13 @@ msgstr ""
 "A continuación se presentan las primeras 25 líneas de diferencia:\n"
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:2105
+#: zypp/target/rpm/RpmDb.cc:2109
 #, c-format, boost-format
 msgid "rpm created %s as %s, but it was impossible to determine the difference"
 msgstr "rpm ha creado %s como %s, pero no es posible determinar la diferencia"
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:2107
+#: zypp/target/rpm/RpmDb.cc:2111
 #, c-format, boost-format
 msgid ""
 "rpm created %s as %s.\n"
@@ -4835,71 +4782,51 @@ msgstr ""
 
 #. report additional rpm output in finish
 #. TranslatorExplanation Text is followed by a ':'  and the actual output.
-#: zypp/target/rpm/RpmDb.cc:2132 zypp/target/rpm/RpmDb.cc:2278
+#: zypp/target/rpm/RpmDb.cc:2136 zypp/target/rpm/RpmDb.cc:2282
 msgid "Additional rpm output"
 msgstr "Salida de rpm adicional"
 
 # include/nis_server/io.ycp:582
 # include/backup/ui.ycp:1286
-#: zypp/target/rpm/RpmDb.cc:2420
+#: zypp/target/rpm/RpmDb.cc:2424
 #, c-format, boost-format
 msgid "created backup %s"
 msgstr "creada copia de seguridad %s"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2441
+#: zypp/target/rpm/RpmDb.cc:2445
 msgid "Signature is OK"
 msgstr "La firma es correcta"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2443
+#: zypp/target/rpm/RpmDb.cc:2447
 msgid "Unknown type of signature"
 msgstr "Tipo de firma desconocido"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2445
+#: zypp/target/rpm/RpmDb.cc:2449
 msgid "Signature does not verify"
 msgstr "La firma no cumple la verificación"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2447
+#: zypp/target/rpm/RpmDb.cc:2451
 msgid "Signature is OK, but key is not trusted"
 msgstr "La firma es correcta, pero la clave no es de confianza"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2449
+#: zypp/target/rpm/RpmDb.cc:2453
 msgid "Signatures public key is not available"
 msgstr "La clave pública de firma no está disponible"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2451
+#: zypp/target/rpm/RpmDb.cc:2455
 msgid "File does not exist or signature can't be checked"
 msgstr "El archivo no existe o no es posible comprobar la firma"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2453
+#: zypp/target/rpm/RpmDb.cc:2457
 msgid "File is unsigned"
 msgstr "El fichero no está firmado"
-
-#: zypp/thread/Mutex.cc:33
-msgid "Can't initialize mutex attributes"
-msgstr "No es posible iniciar los atributos de mutex"
-
-#: zypp/thread/Mutex.cc:40
-msgid "Can't set recursive mutex attribute"
-msgstr "No es posible establecer el atributo de mutex recursivo"
-
-#: zypp/thread/Mutex.cc:47
-msgid "Can't initialize recursive mutex"
-msgstr "No es posible iniciar mutex recursivo"
-
-#: zypp/thread/Mutex.cc:77
-msgid "Can't acquire the mutex lock"
-msgstr "No es posible adquirir el bloqueo de mutex"
-
-#: zypp/thread/Mutex.cc:87
-msgid "Can't release the mutex lock"
-msgstr "No es posible liberar el bloqueo de mutex"
 
 #: zypp/url/UrlBase.cc:154
 #, c-format, boost-format
@@ -4983,6 +4910,62 @@ msgstr "Carácter separador de división de asignación de parámetros no válid
 #: zypp/url/UrlUtils.cc:283
 msgid "Invalid parameter array join separator character"
 msgstr "Carácter separador de unión de conjunto de parámetros no válido"
+
+#~ msgid "Can't open lock file: %s"
+#~ msgstr "No es posible abrir el archivo de bloqueo: %s"
+
+#~ msgid "This action is being run by another program already."
+#~ msgstr "Otro programa ya está ejecutando esta acción."
+
+#~ msgid "Hal Exception"
+#~ msgstr "Excepción de hal"
+
+#~ msgid "Sorry, but this version of libzypp was built without HAL support."
+#~ msgstr ""
+#~ "Lo sentimos, pero esta versión de libzypp se ha construido sin "
+#~ "compatibilidad con HAL."
+
+#~ msgid "HalContext not connected"
+#~ msgstr "HalContext no está conectado"
+
+#~ msgid "HalDrive not initialized"
+#~ msgstr "HalDrive no se ha iniciado"
+
+#~ msgid "HalVolume not initialized"
+#~ msgstr "HalVolume no se ha iniciado"
+
+#~ msgid "Unable to create dbus connection"
+#~ msgstr "No es posible crear la conexión dbus"
+
+#~ msgid "libhal_ctx_new: Can't create libhal context"
+#~ msgstr "libhal_ctx_new: no es posible crear el contexto libhal"
+
+#~ msgid "libhal_set_dbus_connection: Can't set dbus connection"
+#~ msgstr ""
+#~ "libhal_set_dbus_connection: no es posible establecer la conexión dbus"
+
+#~ msgid "Unable to initalize HAL context -- hald not running?"
+#~ msgstr ""
+#~ "No es posible iniciar el contexto HAL -- ¿Es posible que hald no se esté "
+#~ "ejecutando?"
+
+#~ msgid "Not a CDROM drive"
+#~ msgstr "No es una unidad de CD-ROM"
+
+#~ msgid "Can't initialize mutex attributes"
+#~ msgstr "No es posible iniciar los atributos de mutex"
+
+#~ msgid "Can't set recursive mutex attribute"
+#~ msgstr "No es posible establecer el atributo de mutex recursivo"
+
+#~ msgid "Can't initialize recursive mutex"
+#~ msgstr "No es posible iniciar mutex recursivo"
+
+#~ msgid "Can't acquire the mutex lock"
+#~ msgstr "No es posible adquirir el bloqueo de mutex"
+
+#~ msgid "Can't release the mutex lock"
+#~ msgstr "No es posible liberar el bloqueo de mutex"
 
 #~ msgid "Failed to import public key from file %s: %s"
 #~ msgstr "Error al importar la clave pública desde el archivo %s: %s"
