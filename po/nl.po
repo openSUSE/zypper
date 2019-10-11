@@ -4678,7 +4678,7 @@ msgstr ""
 "plaats van dat de oplosser erom vraagt."
 
 #: src/commands/solveroptionset.cc:43
-msgid "Do not force the solver to find solution, let it ask."
+msgid "Do not force the solver to find a solution, let it ask."
 msgstr ""
 "Forceer de oplosser niet tot het vinden van een oplossing, laat de oplosser "
 "erom vragen."

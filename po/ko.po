@@ -4389,7 +4389,7 @@ msgid ""
 msgstr "공격적인 솔루션을 포함하여 솔루션을 찾도록 Solver에 강제합니다."
 
 #: src/commands/solveroptionset.cc:43
-msgid "Do not force the solver to find solution, let it ask."
+msgid "Do not force the solver to find a solution, let it ask."
 msgstr "솔루션을 찾도록 Solver에 강제하지 않고,확인 메시지를 표시하게 합니다."
 
 #: src/commands/solveroptionset.cc:63

@@ -4638,7 +4638,7 @@ msgid ""
 msgstr "Prinútiť riešiteľa nájsť riešenie (aj keby malo byť agresívne)."
 
 #: src/commands/solveroptionset.cc:43
-msgid "Do not force the solver to find solution, let it ask."
+msgid "Do not force the solver to find a solution, let it ask."
 msgstr "Nenútiť riešiteľa nájsť riešenie, umožniť mu spýtať sa."
 
 #: src/commands/solveroptionset.cc:63

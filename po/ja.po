@@ -4478,7 +4478,7 @@ msgid ""
 msgstr "解決器に対して解決方法を見つけるよう強制します(より積極的な動作)。"
 
 #: src/commands/solveroptionset.cc:43
-msgid "Do not force the solver to find solution, let it ask."
+msgid "Do not force the solver to find a solution, let it ask."
 msgstr "解決器に対して解決方法を見つけるよう強制せず、尋ねるようにします。"
 
 #: src/commands/solveroptionset.cc:63

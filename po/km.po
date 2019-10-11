@@ -4265,7 +4265,7 @@ msgid ""
 msgstr "បង្ខំ​កម្មវិធីដោះស្រាយ​ឲ្យ​រកដំណោះស្រាយ (ទោះ​បីជាឈ្លានពាន​ក៏​ដោយ) ។"
 
 #: src/commands/solveroptionset.cc:43
-msgid "Do not force the solver to find solution, let it ask."
+msgid "Do not force the solver to find a solution, let it ask."
 msgstr "កុំ​បង្ខំ​កម្មវិធី​ដោះស្រាយ​ឲ្យ​រក​ដំណោះស្រាយអនុញ្ញាត​ឲ្យ​វា​សួរ ។"
 
 #: src/commands/solveroptionset.cc:63

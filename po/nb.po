@@ -4440,7 +4440,7 @@ msgid ""
 msgstr "Tving systemet til å finne en løsning (selv om den er agressiv)."
 
 #: src/commands/solveroptionset.cc:43
-msgid "Do not force the solver to find solution, let it ask."
+msgid "Do not force the solver to find a solution, let it ask."
 msgstr "Ikke la systemet løse konflikter automatisk, spør."
 
 #: src/commands/solveroptionset.cc:63

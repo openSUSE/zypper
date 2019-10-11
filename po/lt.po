@@ -4603,7 +4603,7 @@ msgstr ""
 "Priverstinai rasti priklausomybių sprendimą (leistina net ir agresyvų)."
 
 #: src/commands/solveroptionset.cc:43
-msgid "Do not force the solver to find solution, let it ask."
+msgid "Do not force the solver to find a solution, let it ask."
 msgstr ""
 "Nesistengti rasti priklausomybių sprendimo, verčiau paklausti naudotojo."
 

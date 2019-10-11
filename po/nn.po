@@ -4440,7 +4440,7 @@ msgstr ""
 "staden for å spørja."
 
 #: src/commands/solveroptionset.cc:43
-msgid "Do not force the solver to find solution, let it ask."
+msgid "Do not force the solver to find a solution, let it ask."
 msgstr "Ikkje tving avhengnadsløysaren til å finna ei løysing; la han spørja."
 
 #: src/commands/solveroptionset.cc:63

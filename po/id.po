@@ -4487,7 +4487,7 @@ msgstr ""
 "Paksa pemecah untuk mencari solusi (bahkan yang agresif) daripada bertanya."
 
 #: src/commands/solveroptionset.cc:43
-msgid "Do not force the solver to find solution, let it ask."
+msgid "Do not force the solver to find a solution, let it ask."
 msgstr "Jangan paksa pemecah untuk mencari solusinya, biarkan bertanya."
 
 #: src/commands/solveroptionset.cc:63

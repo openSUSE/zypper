@@ -4585,7 +4585,7 @@ msgid ""
 msgstr "Примусити програми розв'язку знайти вирішення (навіть, неточне)."
 
 #: src/commands/solveroptionset.cc:43
-msgid "Do not force the solver to find solution, let it ask."
+msgid "Do not force the solver to find a solution, let it ask."
 msgstr "Не примушувати розв'язувальну програму знайти вирішення."
 
 #: src/commands/solveroptionset.cc:63

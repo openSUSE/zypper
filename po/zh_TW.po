@@ -4296,7 +4296,7 @@ msgid ""
 msgstr "強迫找尋一個解決方案 (即使是很激進的方案)。"
 
 #: src/commands/solveroptionset.cc:43
-msgid "Do not force the solver to find solution, let it ask."
+msgid "Do not force the solver to find a solution, let it ask."
 msgstr "不要強迫找尋解決方案，要先詢問。"
 
 #: src/commands/solveroptionset.cc:63

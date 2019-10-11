@@ -4297,7 +4297,7 @@ msgid ""
 msgstr "强迫解算器找出解决方案（即使是激进的方案）而不要询问。"
 
 #: src/commands/solveroptionset.cc:43
-msgid "Do not force the solver to find solution, let it ask."
+msgid "Do not force the solver to find a solution, let it ask."
 msgstr "不强迫解算器找出解决方案，允许它提问。"
 
 #: src/commands/solveroptionset.cc:63

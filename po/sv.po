@@ -4545,7 +4545,7 @@ msgid ""
 msgstr "Tvinga fram en lösning (även en aggressiv)."
 
 #: src/commands/solveroptionset.cc:43
-msgid "Do not force the solver to find solution, let it ask."
+msgid "Do not force the solver to find a solution, let it ask."
 msgstr "Tvinga inte fram en lösning vid problem utan att."
 
 #: src/commands/solveroptionset.cc:63

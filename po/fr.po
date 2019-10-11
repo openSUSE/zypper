@@ -4679,7 +4679,7 @@ msgstr ""
 "agressive)."
 
 #: src/commands/solveroptionset.cc:43
-msgid "Do not force the solver to find solution, let it ask."
+msgid "Do not force the solver to find a solution, let it ask."
 msgstr "Ne pas forcer le solveur à trouver une solution, le laisser demander."
 
 #: src/commands/solveroptionset.cc:63

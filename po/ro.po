@@ -4580,7 +4580,7 @@ msgid ""
 msgstr "Forțează solver-ul să găsească o soluție (chiar și una agresivă)."
 
 #: src/commands/solveroptionset.cc:43
-msgid "Do not force the solver to find solution, let it ask."
+msgid "Do not force the solver to find a solution, let it ask."
 msgstr "Nu forța solver-ul să găsească o soluție, lasă-l sa întrebe."
 
 #: src/commands/solveroptionset.cc:63
