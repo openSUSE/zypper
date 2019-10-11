@@ -40,7 +40,7 @@ std::vector<zypp::ZyppFlags::CommandGroup> SolverCommonOptionSet::options()
       {
         { "debug-solver", '\0', ZyppFlags::NoArgument, ZyppFlags::TriBoolType( set._debugSolver, ZyppFlags::StoreTrue ), _("Create a solver test case for debugging.") },
         { "force-resolution", '\0', ZyppFlags::NoArgument, ZyppFlags::TriBoolType( set._forceResolution, ZyppFlags::StoreTrue ), _("Force the solver to find a solution (even an aggressive one) rather than asking.") },
-        { "no-force-resolution", 'R', ZyppFlags::NoArgument, ZyppFlags::TriBoolType( set._forceResolution, ZyppFlags::StoreFalse ), _("Do not force the solver to find solution, let it ask.") }
+        { "no-force-resolution", 'R', ZyppFlags::NoArgument, ZyppFlags::TriBoolType( set._forceResolution, ZyppFlags::StoreFalse ), _("Do not force the solver to find a solution, let it ask.") }
       },
       {
         //conflicting flags
