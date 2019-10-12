@@ -260,6 +260,9 @@ namespace zypp
   /** \relates Arch */
   extern const Arch Arch_armv3l;
 
+  /** \relates Arch */
+  extern const Arch Arch_riscv64;
+
    /** \relates Arch */
   extern const Arch Arch_sh3;
 

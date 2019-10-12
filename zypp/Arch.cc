@@ -209,6 +209,8 @@ namespace zypp
   DEF_BUILTIN( armv4l );
   DEF_BUILTIN( armv3l );
 
+  DEF_BUILTIN( riscv64 );
+
   DEF_BUILTIN( sh3 );
 
   DEF_BUILTIN( sh4 );
@@ -356,6 +358,8 @@ namespace zypp
         /*?*/defCompatibleWith( a_armv7tnhl(),	a_noarch(),a_armv7hl(),a_armv7nhl(),a_armv7thl() );
 
         defCompatibleWith( a_aarch64(),		a_noarch() );
+        //
+        defCompatibleWith( a_riscv64(),		a_noarch() );
         //
         defCompatibleWith( a_sh3(),		a_noarch() );
         //

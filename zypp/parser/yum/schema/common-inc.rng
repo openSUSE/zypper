@@ -127,6 +127,7 @@
       <value>armv4tl</value>
       <value>armv4l</value>
       <value>armv3l</value>
+      <value>riscv64</value>
       <value>sh3</value>
       <value>sh4</value>
       <value>sh4a</value>
