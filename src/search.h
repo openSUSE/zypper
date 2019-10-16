@@ -30,11 +30,17 @@ struct FillSearchTableSolvable
   bool operator()( const sat::Solvable & solv_r ) const;
   /** PoolQuery iterator provides info about matches */
   bool operator()( const PoolQuery::const_iterator & it_r ) const;
+  /** For reverse dependency search */
+  bool operator()( const sat::Solvable & solv_r, const sat::SolvAttr &searchedAttr, const CapabilitySet &matchedReq ) const;
+
+private:
+  std::string attribStr(const sat::SolvAttr &attr) const;
 
 private:
   Table * _table;		//!< The table used for output
   std::set<std::string> _repos;	//!< Filter --repo
   TriBool _instNotinst;		//!< Filter --[not-]installed
+
 };
 
 struct FillSearchTableSelectable

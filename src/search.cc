@@ -152,10 +152,7 @@ bool FillSearchTableSolvable::operator()( const PoolQuery::const_iterator & it_r
   {
     for_( match, it_r.matchesBegin(), it_r.matchesEnd() )
     {
-      std::string attrib( match->inSolvAttr().asString() );
-      if ( str::startsWith( attrib, "solvable:" ) )	// strip 'solvable:' from attribute
-	attrib.erase( 0, 9 );
-
+      std::string attrib = attribStr( match->inSolvAttr() );
       if ( match->inSolvAttr() == sat::SolvAttr::summary ||
            match->inSolvAttr() == sat::SolvAttr::description )
       {
@@ -170,6 +167,41 @@ bool FillSearchTableSolvable::operator()( const PoolQuery::const_iterator & it_r
       }
     }
   }
+  return true;
+}
+
+
+std::string FillSearchTableSolvable::attribStr(  const sat::SolvAttr &attr  ) const
+{
+  std::string attrib( attr.asString() );
+  if ( str::startsWith( attrib, "solvable:" ) )	// strip 'solvable:' from attribute
+    attrib.erase( 0, 9 );
+  return attrib;
+}
+
+
+bool FillSearchTableSolvable::operator()(const sat::Solvable &solv_r, const sat::SolvAttr &searchedAttr, const CapabilitySet &matchedAttribs ) const
+{
+  if ( ! operator()(solv_r) )
+    return false;	// no row was added due to filter
+
+  // add the details about matches to last row
+  TableRow & lastRow( _table->rows().back() );
+
+  // don't show details for patterns with user visible flag not set (bnc #538152)
+  if ( solv_r.kind() == ResKind::pattern )
+  {
+    Pattern::constPtr ptrn = asKind<Pattern>(solv_r);
+    if ( ptrn && !ptrn->userVisible() )
+      return true;
+  }
+
+  auto attrStr = attribStr( searchedAttr );
+
+  for ( const auto &cap : matchedAttribs ) {
+    lastRow.addDetail( attrStr +": " + cap.asString() );
+  }
+
   return true;
 }
 
