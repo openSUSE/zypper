@@ -777,6 +777,27 @@ Query Commands
 	*--supplements*::
 		Search for packages which supplement the search strings.
 
+	*--provides-pkg*::
+		Search for all packages that provide any of the provides of the package(s) matched by the input parameters.
+
+	*--requires-pkg*::
+		Search for all packages that require any of the provides of the package(s) matched by the input parameters.
+
+	*--recommends-pkg*::
+		Search for all packages that recommend any of the provides of the package(s) matched by the input parameters.
+
+	*--supplements-pkg*::
+		Search for all packages that supplement any of the provides of the package(s) matched by the input parameters.
+
+	*--conflicts-pkg*::
+		Search for all packages that conflict with any of the package(s) matched by the input parameters.
+
+	*--obsoletes-pkg*::
+		Search for all packages that obsolete any of the package(s) matched by the input parameters.
+
+	*--suggests-pkg*::
+		Search for all packages that suggest any of the provides of the package(s) matched by the input parameters.
+
 	*-n*, *--name*::
 		Useful together with dependency options, otherwise searching in package name is default.
 

@@ -7,7 +7,11 @@
 #include "commands/search/search-packages-hinthack.h"
 
 #include <zypp/base/Algorithm.h>
+#include <zypp/sat/Solvable.h>
+#include <zypp/Capability.h>
+#include <zypp/PoolQueryResult.h>
 
+#include <unordered_map>
 
 namespace zypp
 {
@@ -21,6 +25,15 @@ namespace zypp
               target_r.insert( value_r );
             }
       );
+    }
+
+    Value setSolvAttrOptional ( boost::optional<zypp::sat::SolvAttr> &target_r, zypp::sat::SolvAttr value_r ) {
+      return Value (
+          noDefaultValue,
+          [ &target_r, value_r ] ( const CommandOption &, const boost::optional<std::string> & ) {
+            target_r = value_r;
+          }
+        );
     }
   }
 }
@@ -156,6 +169,34 @@ zypp::ZyppFlags::CommandGroup SearchCmd::cmdOptions() const
               // translators: --suggests
               _("Search for packages which suggest the search strings.")
         },
+        { "provides-pkg", '\0', ZyppFlags::NoArgument, ZyppFlags::setSolvAttrOptional( that._requestedReverseSearch, sat::SolvAttr::provides ),
+          // translators: --provides-pkg
+          _("Search for all packages that provide any of the provides of the package(s) matched by the input parameters.")
+        },
+        { "requires-pkg", '\0', ZyppFlags::NoArgument, ZyppFlags::setSolvAttrOptional( that._requestedReverseSearch, sat::SolvAttr::requires ),
+          // translators: --requires-pkg
+          _("Search for all packages that require any of the provides of the package(s) matched by the input parameters.")
+        },
+        { "recommends-pkg", '\0', ZyppFlags::NoArgument, ZyppFlags::setSolvAttrOptional( that._requestedReverseSearch, sat::SolvAttr::recommends ),
+          // translators: --recommends-pkg
+          _("Search for all packages that recommend any of the provides of the package(s) matched by the input parameters.")
+        },
+        { "supplements-pkg", '\0', ZyppFlags::NoArgument, ZyppFlags::setSolvAttrOptional( that._requestedReverseSearch, sat::SolvAttr::supplements ),
+          // translators: --supplements-pkg
+          _("Search for all packages that supplement any of the provides of the package(s) matched by the input parameters.")
+        },
+        { "conflicts-pkg", '\0', ZyppFlags::NoArgument, ZyppFlags::setSolvAttrOptional( that._requestedReverseSearch, sat::SolvAttr::conflicts ),
+          // translators: --conflicts-pkg
+          _("Search for all packages that conflict with any of the package(s) matched by the input parameters.")
+        },
+        { "obsoletes-pkg", '\0', ZyppFlags::NoArgument, ZyppFlags::setSolvAttrOptional( that._requestedReverseSearch, sat::SolvAttr::obsoletes ),
+          // translators: --obsoletes-pkg
+          _("Search for all packages that obsolete any of the package(s) matched by the input parameters.")
+        },
+        { "suggests-pkg", '\0', ZyppFlags::NoArgument, ZyppFlags::setSolvAttrOptional( that._requestedReverseSearch, sat::SolvAttr::suggests ),
+          // translators: --suggests-pkg
+          _("Search for all packages that suggest any of the provides of the package(s) matched by the input parameters.")
+        },
         CommonFlags::resKindSetFlag( that._requestedTypes,
               // translators: -t, --type <TYPE>
               _("Search only for packages of the specified type.")
@@ -169,6 +210,8 @@ zypp::ZyppFlags::CommandGroup SearchCmd::cmdOptions() const
               _("Search for a match in the file list of packages.")
         }
     } );
+
+    grp.conflictingOptions.push_back( { "provides-pkg", "requires-pkg", "recommends-pkg", "supplements-pkg", "conflicts-pkg", "obsoletes-pkg", "suggests-pkg"  } );
   }
 
   grp.options.insert( grp.options.end(),
@@ -385,35 +428,80 @@ int SearchCmd::execute( Zypper &zypper, const std::vector<std::string> &position
     }
   }
 
-  // Output query result...
   Table t;
   try
   {
-    if ( _cmdMode == CmdMode::RugPatchSearch )
-    {
-      FillPatchesTable callback( t, inst_notinst );
-      invokeOnEach( query.poolItemBegin(), query.poolItemEnd(), callback );
-    }
-    else if ( details )
-    {
-      FillSearchTableSolvable callback( t, inst_notinst );
-      if ( _verbose )
+    if ( _requestedReverseSearch.is_initialized() ) {
+
+      std::unordered_map< sat::Solvable, CapabilitySet > matchedSolvables;
+      const auto reqSearchAttrib = _requestedReverseSearch.get();
+
+      for ( const auto slv : query ) {
+
+        bool isInstalled = slv.isSystem();
+        if ( isInstalled && _notInstalledOpts._mode == SolvableFilterMode::ShowOnlyNotInstalled )
+          continue;
+        if ( !isInstalled && _notInstalledOpts._mode == SolvableFilterMode::ShowOnlyInstalled )
+          continue;
+
+        sat::Queue q = sat::Pool::instance().whatMatchesSolvable( reqSearchAttrib, slv  );
+
+        for ( auto matchedSolvId : q ) {
+
+          sat::Solvable matchedSolv ( static_cast<sat::Solvable::IdType>(matchedSolvId) );
+          auto p = matchedSolvables.insert( make_pair( std::move(matchedSolv), CapabilitySet()) );
+
+          if ( _verbose ) {
+            CapabilitySet matchedCaps = matchedSolv.matchesSolvable( reqSearchAttrib, slv).second;
+            p.first->second.insert( matchedCaps.begin(), matchedCaps.end() );
+          }
+        }
+      }
+
+      if ( details ) {
+        FillSearchTableSolvable callback( t, inst_notinst );
+        std::for_each( matchedSolvables.begin(), matchedSolvables.end(), [&callback, verb = _verbose, &reqSearchAttrib ]( auto elem ){
+          if ( verb )
+            callback( elem.first, reqSearchAttrib, elem.second );
+          else
+            callback( elem.first, reqSearchAttrib, {} );
+        } );
+      } else {
+
+        PoolQueryResult res;
+        std::for_each( matchedSolvables.begin(), matchedSolvables.end(), [ &res ]( const auto &v ){ res+=v.first; } );
+
+        FillSearchTableSelectable callback( t, inst_notinst );
+        std::for_each( res.selectableBegin(), res.selectableEnd(), callback);
+      }
+
+    } else {
+      if ( _cmdMode == CmdMode::RugPatchSearch )
       {
-        // Option 'verbose' shows where (e.g. in 'requires', 'name') the search has matched.
-        // Info is available from PoolQuery::const_iterator.
-        for_( it, query.begin(), query.end() )
-          callback( it );
+        FillPatchesTable callback( t, inst_notinst );
+        invokeOnEach( query.poolItemBegin(), query.poolItemEnd(), callback );
+      }
+      else if ( details )
+      {
+        FillSearchTableSolvable callback( t, inst_notinst );
+        if ( _verbose )
+        {
+          // Option 'verbose' shows where (e.g. in 'requires', 'name') the search has matched.
+          // Info is available from PoolQuery::const_iterator.
+          for_( it, query.begin(), query.end() )
+            callback( it );
+        }
+        else
+        {
+          for ( const auto slv : query )
+            callback( slv );
+        }
       }
       else
       {
-        for ( const auto slv : query )
-          callback( slv );
+        FillSearchTableSelectable callback( t, inst_notinst );
+        invokeOnEach( query.selectableBegin(), query.selectableEnd(), callback );
       }
-    }
-    else
-    {
-      FillSearchTableSelectable callback( t, inst_notinst );
-      invokeOnEach( query.selectableBegin(), query.selectableEnd(), callback );
     }
 
     if ( t.empty() )
@@ -451,15 +539,16 @@ int SearchCmd::execute( Zypper &zypper, const std::vector<std::string> &position
       //cout << t; //! \todo out().table()?
       zypper.out().searchResult( t );
     }
-  }
-  catch ( const Exception & e )
-  {
+
+    if ( !_requestedReverseSearch.is_initialized() )
+      searchPackagesHintHack::callOrNotify( zypper );
+
+  } catch ( const Exception & e )  {
     zypper.out().error( e, _("Problem occurred initializing or executing the search query") + std::string(":"),
-                 std::string(_("See the above message for a hint.")) + " "
-                 + _("Running 'zypper refresh' as root might resolve the problem.") );
+      std::string(_("See the above message for a hint.")) + " "
+        + _("Running 'zypper refresh' as root might resolve the problem.") );
     zypper.setExitCode( ZYPPER_EXIT_ERR_ZYPP );
   }
 
-  searchPackagesHintHack::callOrNotify( zypper );
   return zypper.exitCode();
 }

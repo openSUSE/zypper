@@ -11,7 +11,9 @@
 #include "commands/optionsets.h"
 #include "utils/flags/zyppflags.h"
 
+
 #include <zypp/sat/SolvAttr.h>
+#include <boost/optional.hpp>
 
 class SearchCmd : public ZypperBaseCommand
 {
@@ -44,6 +46,8 @@ private:
   bool _details = false;
   bool _verbose = false;
   std::set<zypp::sat::SolvAttr> _requestedDeps;
+  boost::optional<zypp::sat::SolvAttr> _requestedReverseSearch;
+
   std::set<ResKind> _requestedTypes;
 
   //careful when adding new optionsets, only enable them for the right command mode
