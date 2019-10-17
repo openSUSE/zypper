@@ -256,7 +256,7 @@ namespace zypp {
           cmdstr << " > '" << redirectStdout << "'";
         _command = cmdstr.str();
       }
-      DBG << "Executing " << _command << endl;
+      DBG << "Executing" << (default_locale?"[C] ":" ") << _command << endl;
 
 
       if (use_pty)
