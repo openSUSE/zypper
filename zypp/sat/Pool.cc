@@ -119,6 +119,27 @@ namespace zypp
     Pool::SolvableIterator Pool::solvablesEnd() const
     { return SolvableIterator(); }
 
+    sat::Queue Pool::whatMatchesDep( const SolvAttr &attr, const Capability &cap ) const
+    {
+      sat::Queue q;
+      pool_whatmatchesdep( get(), attr.id(), cap.id(), q, 0);
+      return q;
+    }
+
+    Queue Pool::whatMatchesSolvable( const SolvAttr &attr, const Solvable &solv ) const
+    {
+      sat::Queue q;
+      pool_whatmatchessolvable( get(), attr.id(), static_cast<Id>( solv.id() ), q, 0 );
+      return q;
+    }
+
+    Queue Pool::whatContainsDep( const SolvAttr &attr, const Capability &cap ) const
+    {
+      sat::Queue q;
+      pool_whatcontainsdep( get(), attr.id(), cap.id(), q, 0 );
+      return q;
+    }
+
     Repository Pool::reposInsert( const std::string & alias_r )
     {
       Repository ret( reposFind( alias_r ) );

@@ -223,6 +223,8 @@ namespace zypp
       CapabilitySet valuesOfNamespace( const std::string & namespace_r ) const;
       //@}
 
+      std::pair<bool, CapabilitySet> matchesSolvable ( const SolvAttr &attr, const sat::Solvable &solv ) const;
+
     public:
       /** \name Locale support. */
       //@{

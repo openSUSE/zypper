@@ -192,6 +192,10 @@ namespace zypp
         WhatProvides whatProvides( Capability cap_r ) const
         { return WhatProvides( cap_r ); }
 
+        Queue whatMatchesDep( const SolvAttr &attr, const Capability &cap ) const;
+        Queue whatMatchesSolvable ( const SolvAttr &attr, const Solvable &solv ) const;
+        Queue whatContainsDep ( const SolvAttr &attr, const Capability &cap ) const;
+
       public:
         /** \name Requested locales. */
         //@{

@@ -528,6 +528,18 @@ namespace zypp
       return ret;
     }
 
+    std::pair<bool, CapabilitySet> Solvable::matchesSolvable(const SolvAttr &attr, const Solvable &solv) const
+    {
+      sat::Queue capQueue;
+      int res = solvable_matchessolvable( get(), attr.id(), static_cast<Id>( solv.id() ), capQueue, 0 );
+
+      CapabilitySet caps;
+      if ( capQueue.size() )
+        std::for_each( capQueue.begin(), capQueue.end(), [ &caps ]( auto cap ){ caps.insert( Capability(cap) );});
+
+      return std::make_pair( res == 1, std::move(caps) );
+    }
+
     ///////////////////////////////////////////////////////////////////
     namespace
     {
