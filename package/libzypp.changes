@@ -1,4 +1,15 @@
 -------------------------------------------------------------------
+Fri Oct 18 17:20:08 CEST 2019 - ma@suse.de
+
+- Fix empty metalink downloads if filesize is unknown (bsc#1153557)
+- Recognize riscv64 as architecture
+- Fix installation of new header file (fixes #185)
+- zypp.conf: Introduce `solver.focus` to define the resolvers general
+  attitude when resolving jobs. (bsc#1146415)
+- New container detection algorithm for zypper ps (bsc#1146947)
+- version 17.15.0 (12)
+
+-------------------------------------------------------------------
 Thu Sep 26 14:08:51 CEST 2019 - ma@suse.de
 
 - Revert "Use CURL_HTTP_VERSION_2TLS if available" (bsc#1146027)
