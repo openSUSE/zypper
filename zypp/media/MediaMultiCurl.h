@@ -48,6 +48,12 @@ public:
   virtual void doGetFileCopy( const Pathname & srcFilename, const Pathname & targetFilename, callback::SendReport<DownloadProgressReport> & _report, const ByteCount &expectedFileSize_r, RequestOptions options = OPTION_NONE ) const override;
 
   void multifetch(const Pathname &filename, FILE *fp, std::vector<Url> *urllist, callback::SendReport<DownloadProgressReport> *report = 0, MediaBlockList *blklist = 0, off_t filesize = off_t(-1)) const;
+  /** \overload translating ByteCount(0) into off_t(-1)
+   * bsc#1153557: In the zypp media backend 'we don't know the size' is
+   * represented by ByteCount(0). The more C-isch MultiCurl uses off_t(-1).
+   */
+  void multifetch(const Pathname &filename, FILE *fp, std::vector<Url> *urllist, callback::SendReport<DownloadProgressReport> *report, MediaBlockList *blklist, const ByteCount & filesize ) const
+  { multifetch( filename, fp, urllist, report, blklist, ( filesize ? off_t(filesize) : off_t(-1) ) ); }
 
 protected:
 
