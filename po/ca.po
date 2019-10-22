@@ -9,10 +9,10 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-10-22 16:11+0200\n"
-"PO-Revision-Date: 2019-07-19 13:51+0000\n"
+"PO-Revision-Date: 2019-10-22 19:53+0000\n"
 "Last-Translator: David Medina <medipas@gmail.com>\n"
-"Language-Team: Catalan <https://l10n.opensuse.org/projects/zypper/master/ca/"
-">\n"
+"Language-Team: Catalan <https://l10n.opensuse.org/projects/zypper/master/ca/>"
+"\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -4578,7 +4578,7 @@ msgstr "Aquesta ordre només té sentit en un terminal zypper."
 #: src/commands/solveroptionset.cc:23
 #, boost-format
 msgid "Valid values: %1%"
-msgstr ""
+msgstr "Valors vàlids: %1%"
 
 #: src/commands/solveroptionset.cc:35 src/commands/solveroptionset.cc:58
 msgid "Solver options"
@@ -4610,7 +4610,7 @@ msgstr "No forcis el resolutor a trobar una solució. Deixa que pregunti."
 
 #: src/commands/solveroptionset.cc:63
 msgid "Set the solvers general attitude when resolving a job."
-msgstr ""
+msgstr "Estableix l'actitud general dels resolutors en resoldre una tasca."
 
 #: src/commands/solveroptionset.cc:83
 msgid "Expert options"
