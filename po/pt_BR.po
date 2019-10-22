@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-10-22 16:11+0200\n"
-"PO-Revision-Date: 2019-07-19 19:51+0000\n"
+"PO-Revision-Date: 2019-10-22 19:53+0000\n"
 "Last-Translator: Rodrigo Macedo <rmsolucoeseminformatic4@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) <https://l10n.opensuse.org/projects/"
 "zypper/master/pt_BR/>\n"
@@ -4596,7 +4596,7 @@ msgstr "Este comando só faz sentido no shell do zypper."
 #: src/commands/solveroptionset.cc:23
 #, boost-format
 msgid "Valid values: %1%"
-msgstr ""
+msgstr "Valores válidos: %1%"
 
 #: src/commands/solveroptionset.cc:35 src/commands/solveroptionset.cc:58
 msgid "Solver options"
@@ -4627,7 +4627,7 @@ msgstr ""
 
 #: src/commands/solveroptionset.cc:63
 msgid "Set the solvers general attitude when resolving a job."
-msgstr ""
+msgstr "Defina a atitude geral do solucionador ao resolver um trabalho."
 
 #: src/commands/solveroptionset.cc:83
 msgid "Expert options"
@@ -5419,7 +5419,7 @@ msgstr "Linguagem"
 #: src/locales.cc:306
 #, c-format, boost-format
 msgid "Packages for %s (locale '%s', requested: %s):"
-msgstr "Pacotes para% s (localidade '%s', solicitado: %s):"
+msgstr "Pacotes para %s (localidade '%s', solicitado: %s):"
 
 #: src/locales.cc:323
 #, c-format, boost-format
