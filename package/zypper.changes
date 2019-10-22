@@ -1,4 +1,19 @@
 -------------------------------------------------------------------
+Tue Oct 22 16:12:03 CEST 2019 - ma@suse.de
+
+- --solver-focus: Set the solvers general attitude when resolving
+  a job (bsc#1146415)
+- Add --repo switch to download (jira#SLE-9171)
+- manpage: Improve description of $releasever and --releasever
+  usecases (bsc#1149511)
+- Ask only once if multiple packages share the same license text
+  (bsc#1145554)
+- Allow selection by capability if --force switch is used
+  (fixes #289)
+- BuildRequires:  libzypp-devel >= 17.15.0
+- version 1.14.31
+
+-------------------------------------------------------------------
 Fri Aug 30 13:48:18 CEST 2019 - ma@suse.de
 
 - Ignore SIGPIPE while STDOUT/STDERR are OK (bsc#1145521)
