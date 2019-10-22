@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypper.nl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-10-22 16:11+0200\n"
-"PO-Revision-Date: 2019-07-19 00:51+0000\n"
+"PO-Revision-Date: 2019-10-22 19:53+0000\n"
 "Last-Translator: Freek de Kruijf <freek@opensuse.org>\n"
 "Language-Team: Dutch <https://l10n.opensuse.org/projects/zypper/master/nl/>\n"
 "Language: nl\n"
@@ -4656,7 +4656,7 @@ msgstr "Deze opdracht is alleen zinvol binnen de zypper-shell."
 #: src/commands/solveroptionset.cc:23
 #, boost-format
 msgid "Valid values: %1%"
-msgstr ""
+msgstr "Geldige waarden: %1%"
 
 #: src/commands/solveroptionset.cc:35 src/commands/solveroptionset.cc:58
 msgid "Solver options"
@@ -4690,7 +4690,7 @@ msgstr ""
 
 #: src/commands/solveroptionset.cc:63
 msgid "Set the solvers general attitude when resolving a job."
-msgstr ""
+msgstr "Stel de algemene houding van de oplossers in bij oplossen van een taak."
 
 #: src/commands/solveroptionset.cc:83
 msgid "Expert options"
