@@ -20,7 +20,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-07-18 13:07+0200\n"
+"POT-Creation-Date: 2019-10-22 16:11+0200\n"
 "PO-Revision-Date: 2019-07-18 14:50+0000\n"
 "Last-Translator: Martin Vidner <mvidner@suse.com>\n"
 "Language-Team: Czech <https://l10n.opensuse.org/projects/zypper/master/cs/>\n"
@@ -2400,12 +2400,12 @@ msgstr ""
 "Odinstaluje závislosti se zadanými schopnostmi. Schopnost má tvar NÁZEV[."
 "ARCHITEKTURA][OP<VERZE>], kde OP je jeden z operátorů <, <=, =, >=, >."
 
-#: src/commands/installremove.cc:104 src/commands/installremove.cc:226
+#: src/commands/installremove.cc:104 src/commands/installremove.cc:224
 #: src/utils/messages.cc:53
 msgid "Too few arguments."
 msgstr "Příliš málo argumentů."
 
-#: src/commands/installremove.cc:105 src/commands/installremove.cc:227
+#: src/commands/installremove.cc:105 src/commands/installremove.cc:225
 msgid "At least one package name is required."
 msgstr "Je vyžadován alespoň jeden název balíčku."
 
@@ -2428,17 +2428,17 @@ msgid "Uninstallation of a source package not defined and implemented."
 msgstr "Odinstalování zdrojového balíčku není definováno a implementováno."
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/commands/installremove.cc:168
+#: src/commands/installremove.cc:166
 msgid "install (in) [OPTIONS] <CAPABILITY|RPM_FILE_URI> ..."
 msgstr "install (in) [volby] <schopnost|uri_adresa_souboru_rpm> ..."
 
 #. translators: command summary: install, in
-#: src/commands/installremove.cc:170
+#: src/commands/installremove.cc:168
 msgid "Install packages."
 msgstr "Nainstaluje balíčky."
 
 #. translators: command description
-#: src/commands/installremove.cc:172
+#: src/commands/installremove.cc:170
 msgid ""
 "Install packages with specified capabilities or RPM files with specified "
 "location. A capability is NAME[.ARCH][OP<VERSION>], where OP is one of <, "
@@ -2449,12 +2449,12 @@ msgstr ""
 "<=, =, >=, >."
 
 #. translators: --from <ALIAS|#|URI>
-#: src/commands/installremove.cc:187
+#: src/commands/installremove.cc:185 src/commands/utils/download.cc:172
 msgid "Select packages from the specified repository."
 msgstr "Vybrat balíčky ze zadaného repozitáře."
 
 #. translators: --oldpackage
-#: src/commands/installremove.cc:191
+#: src/commands/installremove.cc:189
 msgid ""
 "Allow to replace a newer item with an older one. Handy if you are doing a "
 "rollback. Unlike --force it will not enforce a reinstall."
@@ -2462,14 +2462,14 @@ msgstr ""
 "Povolit náhradu novější položky starší položkou. Hodí se v případě návratu "
 "zpět. Na rozdíl od --force nevynucuje přeinstalaci."
 
-#: src/commands/installremove.cc:195
+#: src/commands/installremove.cc:193
 msgid "Silently install unsigned rpm packages given as commandline parameters."
 msgstr ""
 "Tichá instalace nepodepsaných balíčků RPM zadaných jako parametry "
 "příkazového řádku."
 
 #. translators: -f, --force
-#: src/commands/installremove.cc:200
+#: src/commands/installremove.cc:198
 msgid ""
 "Install even if the item is already installed (reinstall), downgraded or "
 "changes vendor or architecture."
@@ -2479,11 +2479,11 @@ msgstr ""
 
 #. translators: rug related message, shown if
 #. 'zypper in --entire-catalog foorepo someargument' is specified
-#: src/commands/installremove.cc:238
+#: src/commands/installremove.cc:236
 msgid "Ignoring arguments, marking the entire repository."
 msgstr "Ignoruji argumenty, označuji celý repozitář."
 
-#: src/commands/installremove.cc:251 src/commands/sourceinstall.cc:92
+#: src/commands/installremove.cc:249 src/commands/sourceinstall.cc:92
 msgid "No valid arguments specified."
 msgstr "Nebyly zadány žádné platné argumenty."
 
@@ -3127,12 +3127,12 @@ msgstr ""
 msgid "Write debug output to file <path>."
 msgstr "Zapíše ladicí výstup do souboru <path>."
 
-#: src/commands/ps.cc:72 src/solve-commit.cc:493
+#: src/commands/ps.cc:72 src/solve-commit.cc:494
 msgid "Check failed:"
 msgstr "Kontrola selhala:"
 
 #. Here: Table output
-#: src/commands/ps.cc:127 src/solve-commit.cc:482
+#: src/commands/ps.cc:127 src/solve-commit.cc:483
 msgid "Checking for running processes using deleted libraries..."
 msgstr "Kontroluji, které spuštěné procesy používají smazané knihovny..."
 
@@ -4616,59 +4616,68 @@ msgstr "Opustí spuštěný zypper shell."
 msgid "This command only makes sense in the zypper shell."
 msgstr "Tento příkaz lze použít pouze v příkazovém řádku programu zypper."
 
-#: src/commands/solveroptionset.cc:16 src/commands/solveroptionset.cc:39
+#: src/commands/solveroptionset.cc:23
+#, boost-format
+msgid "Valid values: %1%"
+msgstr ""
+
+#: src/commands/solveroptionset.cc:35 src/commands/solveroptionset.cc:58
 msgid "Solver options"
 msgstr "Řešitelské možnosti"
 
-#: src/commands/solveroptionset.cc:18
+#: src/commands/solveroptionset.cc:37
 msgid "Install also recommended packages in addition to the required ones."
 msgstr "Nainstalovat také doporučené balíčky společně s těmi vyžadovanými."
 
-#: src/commands/solveroptionset.cc:19
+#: src/commands/solveroptionset.cc:38
 msgid "Do not install recommended packages, only required ones."
 msgstr "Neinstalovat doporučené balíčky, pouze vyžadované."
 
-#: src/commands/solveroptionset.cc:41
+#: src/commands/solveroptionset.cc:60
 msgid "Create a solver test case for debugging."
 msgstr "Vytvořit řešitelský testovací případ pro účel ladění."
 
-#: src/commands/solveroptionset.cc:42
+#: src/commands/solveroptionset.cc:61
 msgid ""
 "Force the solver to find a solution (even an aggressive one) rather than "
 "asking."
 msgstr "Donutit řešitele, aby našel řešení (dokonce i agresivní)."
 
-#: src/commands/solveroptionset.cc:43
+#: src/commands/solveroptionset.cc:62
 msgid "Do not force the solver to find a solution, let it ask."
 msgstr "Nevynucovat na řešiteli, aby našel řešení, ale aby se zeptal."
 
 #: src/commands/solveroptionset.cc:63
+msgid "Set the solvers general attitude when resolving a job."
+msgstr ""
+
+#: src/commands/solveroptionset.cc:83
 msgid "Expert options"
 msgstr "Expertní možnosti"
 
-#: src/commands/solveroptionset.cc:66
+#: src/commands/solveroptionset.cc:86
 msgid "Whether to allow downgrading installed resolvables."
 msgstr "Zda povolit ponížení nainstalovaných řešení."
 
-#: src/commands/solveroptionset.cc:68
+#: src/commands/solveroptionset.cc:88
 msgid "Whether to allow changing the names of installed resolvables."
 msgstr "Zda povolit změnu názvů instalovaných řešení."
 
-#: src/commands/solveroptionset.cc:70
+#: src/commands/solveroptionset.cc:90
 msgid "Whether to allow changing the architecture of installed resolvables."
 msgstr "Zda povolit změnu architektury instalovaných řešení."
 
-#: src/commands/solveroptionset.cc:72
+#: src/commands/solveroptionset.cc:92
 msgid "Whether to allow changing the vendor of installed resolvables."
 msgstr "Zda povolit změnu výrobce instalovaných řešení."
 
 #. translators: -u, --clean-deps
-#: src/commands/solveroptionset.cc:96
+#: src/commands/solveroptionset.cc:116
 msgid "Automatically remove unneeded dependencies."
 msgstr "Automaticky odstraní nepotřebné závislosti."
 
 #. translators: -U, --no-clean-deps
-#: src/commands/solveroptionset.cc:100
+#: src/commands/solveroptionset.cc:120
 msgid "No automatic removal of unneeded dependencies."
 msgstr "Nepoužívá automatické odstranění nepotřebných závislostí."
 
@@ -4942,32 +4951,32 @@ msgstr ""
 "Jinak je stažena nejlepší verze každého odpovídajícího balíčku."
 
 #. translators: Label text; is followed by ': cmdline argument'
-#: src/commands/utils/download.cc:231
+#: src/commands/utils/download.cc:235
 msgid "Argument resolves to no package"
 msgstr "Parametr nevedoucí k žádnému balíčku"
 
-#: src/commands/utils/download.cc:246 src/solve-commit.cc:929
+#: src/commands/utils/download.cc:250 src/solve-commit.cc:930
 msgid "Nothing to do."
 msgstr "Nic k provedení."
 
-#: src/commands/utils/download.cc:253
+#: src/commands/utils/download.cc:257
 msgid "No prune to best version."
 msgstr "Žádné omezení na nejlepší verzi."
 
-#: src/commands/utils/download.cc:259
+#: src/commands/utils/download.cc:263
 msgid "Prune to best version..."
 msgstr "Omezení na nejlepší verzi..."
 
-#: src/commands/utils/download.cc:265
+#: src/commands/utils/download.cc:269
 msgid "Not downloading anything..."
 msgstr "Nic se nestahuje..."
 
-#: src/commands/utils/download.cc:308
+#: src/commands/utils/download.cc:312
 #, c-format, boost-format
 msgid "Error downloading package '%s'."
 msgstr "Chyba stahování balíčku '%s'."
 
-#: src/commands/utils/download.cc:322
+#: src/commands/utils/download.cc:326
 #, c-format, boost-format
 msgid "Not downloading package '%s'."
 msgstr "Nestahuje se balíček '%s'."
@@ -5462,18 +5471,18 @@ msgid "%s was not requested."
 msgstr "%s nebylo vyžádáno."
 
 #. translators: this will show up if you press ctrl+c twice
-#: src/main.cc:31
+#: src/main.cc:33
 msgid "OK OK! Exiting immediately..."
 msgstr "No jo, no jo! Končím ihned..."
 
 #. translators: this will show up if you press ctrl+c twice
-#: src/main.cc:38
+#: src/main.cc:40
 msgid "Trying to exit gracefully..."
 msgstr "Pokus o řádné ukončení..."
 
 #. translators: the first %s is name of the resolvable,
 #. the second is its kind (e.g. 'zypper package')
-#: src/misc.cc:135
+#: src/misc.cc:138
 #, c-format, boost-format
 msgid "Automatically agreeing with %s %s license."
 msgstr "Automatický souhlas s licencí %s %s."
@@ -5481,7 +5490,7 @@ msgstr "Automatický souhlas s licencí %s %s."
 #. introduction
 #. translators: the first %s is the name of the package, the second
 #. is " (package-type)" if other than "package" (patch/product/pattern)
-#: src/misc.cc:154
+#: src/misc.cc:170
 #, c-format, boost-format
 msgid ""
 "In order to install '%s'%s, you must agree to terms of the following license "
@@ -5491,16 +5500,16 @@ msgstr ""
 "podmínkami:"
 
 #. lincense prompt
-#: src/misc.cc:168
+#: src/misc.cc:187
 msgid "Do you agree with the terms of the license?"
 msgstr "Souhlasíte s podmínkami licenčního ujednání?"
 
-#: src/misc.cc:176
+#: src/misc.cc:193
 msgid "Aborting installation due to the need for license confirmation."
 msgstr "Instalace se přerušuje, protože je třeba potvrdit licence."
 
 #. translators: %s is '--auto-agree-with-licenses'
-#: src/misc.cc:179
+#: src/misc.cc:196
 #, c-format, boost-format
 msgid ""
 "Please restart the operation in interactive mode and confirm your agreement "
@@ -5510,64 +5519,64 @@ msgstr ""
 "licencemi nebo použijte volbu %s."
 
 #. translators: e.g. "... with flash package license."
-#: src/misc.cc:188
+#: src/misc.cc:209
 #, c-format, boost-format
 msgid "Aborting installation due to user disagreement with %s %s license."
 msgstr "Instalace se přerušuje, protože uživatel nesouhlasil s licencí %s %s."
 
-#: src/misc.cc:226
+#: src/misc.cc:248
 msgid "License"
 msgstr "Licence"
 
-#: src/misc.cc:245
+#: src/misc.cc:267
 msgid "EULA"
 msgstr "EULA"
 
-#: src/misc.cc:257
+#: src/misc.cc:279
 msgid "SUMMARY"
 msgstr "SOUHRN"
 
-#: src/misc.cc:258
+#: src/misc.cc:280
 #, c-format, boost-format
 msgid "Installed packages: %d"
 msgstr "Nainstalované balíčky: %d"
 
-#: src/misc.cc:259
+#: src/misc.cc:281
 #, c-format, boost-format
 msgid "Installed packages with counterparts in repositories: %d"
 msgstr "Nainstalované balíčky s protějšky v repozitářích: %d"
 
-#: src/misc.cc:260
+#: src/misc.cc:282
 #, c-format, boost-format
 msgid "Installed packages with EULAs: %d"
 msgstr "Nainstalované balíčky s EULAmi: %d"
 
-#: src/misc.cc:328
+#: src/misc.cc:350
 #, c-format, boost-format
 msgid "Package '%s' has source package '%s'."
 msgstr "Balíček '%s' má zdrojový balíček '%s'."
 
-#: src/misc.cc:337
+#: src/misc.cc:359
 #, c-format, boost-format
 msgid "Source package '%s' for package '%s' not found."
 msgstr "Zdrojový balíček '%s' pro balíček '%s' nenalezen."
 
-#: src/misc.cc:411
+#: src/misc.cc:433
 #, c-format, boost-format
 msgid "Installing source package %s-%s"
 msgstr "Instaluje se zdrojový balík %s-%s"
 
-#: src/misc.cc:420
+#: src/misc.cc:442
 #, c-format, boost-format
 msgid "Source package %s-%s successfully retrieved."
 msgstr "Zdrojový balíček %s-%s byl úspěšně získán."
 
-#: src/misc.cc:426
+#: src/misc.cc:448
 #, c-format, boost-format
 msgid "Source package %s-%s successfully installed."
 msgstr "Zdrojový balíček %s-%s byl nainstalován úspěšně."
 
-#: src/misc.cc:432
+#: src/misc.cc:454
 #, c-format, boost-format
 msgid "Problem installing source package %s-%s:"
 msgstr "Problém při instalaci zdrojového balíku %s-%s:"
@@ -5704,8 +5713,8 @@ msgstr "Chyba při zakazování repozitáře '%s'."
 msgid "Problem retrieving files from '%s'."
 msgstr "Problém při stahování souborů z '%s'."
 
-#: src/repos.cc:346 src/repos.cc:1860 src/solve-commit.cc:823
-#: src/solve-commit.cc:854 src/solve-commit.cc:878
+#: src/repos.cc:346 src/repos.cc:1860 src/solve-commit.cc:824
+#: src/solve-commit.cc:855 src/solve-commit.cc:879
 msgid "Please see the above error message for a hint."
 msgstr "Nápovědu naleznete v uvedené chybové zprávě."
 
@@ -6215,7 +6224,7 @@ msgstr "p/o/z/č"
 #. and to the same as you translated it in the "s/r/c/d" string
 #. See the "s/r/c/d" comment for other details.
 #. One letter string  for translation can be tricky, so in case of problems,
-#. please report a bug against zypper at bugzilla.novell.com, we'll try to solve it.
+#. please report a bug against zypper at bugzilla.suse.com, we'll try to solve it.
 #: src/solve-commit.cc:127
 msgid "c/d"
 msgstr "z/č"
@@ -6272,29 +6281,29 @@ msgstr "Probíhá řešení závislostí..."
 msgid "Force resolution:"
 msgstr "Nucené vyřešení:"
 
-#: src/solve-commit.cc:382
+#: src/solve-commit.cc:383
 msgid "Verifying dependencies..."
 msgstr "Probíhá ověřování závislostí..."
 
 #. Here: compute the full upgrade
-#: src/solve-commit.cc:432
+#: src/solve-commit.cc:433
 msgid "Computing upgrade..."
 msgstr "Vypočítávám upgrade..."
 
-#: src/solve-commit.cc:446
+#: src/solve-commit.cc:447
 msgid "Generating solver test case..."
 msgstr "Generuje se test pro řešitel závislostí..."
 
-#: src/solve-commit.cc:448
+#: src/solve-commit.cc:449
 #, c-format, boost-format
 msgid "Solver test case generated successfully at %s."
 msgstr "Test pro řešitel událostí byl úspěšně vygenerován do souboru %s."
 
-#: src/solve-commit.cc:451
+#: src/solve-commit.cc:452
 msgid "Error creating the solver test case."
 msgstr "Při vytváření testu pro řešitel závislostí došlo k chybě."
 
-#: src/solve-commit.cc:479
+#: src/solve-commit.cc:480
 #, c-format, boost-format
 msgid ""
 "Check for running processes using deleted libraries is disabled in zypper."
@@ -6303,11 +6312,11 @@ msgstr ""
 "Kontrola, které spuštěné procesy používají smazané knihovny, je v zypper."
 "conf zakázána. Spusťte '%s' pro ruční kontrolu."
 
-#: src/solve-commit.cc:495
+#: src/solve-commit.cc:496
 msgid "Skip check:"
 msgstr "Přeskočit kontrolu:"
 
-#: src/solve-commit.cc:502
+#: src/solve-commit.cc:503
 #, boost-format
 msgid ""
 "There are running programs which still use files and libraries deleted or "
@@ -6318,32 +6327,32 @@ msgstr ""
 "nebo zrušené posledními opravami. Měly by být restartovány, aby mohly "
 "poslední opravy využít. Seznam těchto programů získáte příkazem '%1%'."
 
-#: src/solve-commit.cc:516
+#: src/solve-commit.cc:517
 msgid "Update notifications were received from the following packages:"
 msgstr "Oznámení o aktualizacích byla obdržena od následujících balíčků:"
 
-#: src/solve-commit.cc:525
+#: src/solve-commit.cc:526
 #, c-format, boost-format
 msgid "Message from package %s:"
 msgstr "Zpráva od balíčku %s:"
 
-#: src/solve-commit.cc:533
+#: src/solve-commit.cc:534
 msgid "y/n"
 msgstr "a/n"
 
-#: src/solve-commit.cc:534
+#: src/solve-commit.cc:535
 msgid "View the notifications now?"
 msgstr "Zobrazovat nyní upozornění?"
 
-#: src/solve-commit.cc:578
+#: src/solve-commit.cc:579
 msgid "Computing distribution upgrade..."
 msgstr "Vypočítávám aktualizaci celé distribuce..."
 
-#: src/solve-commit.cc:583
+#: src/solve-commit.cc:584
 msgid "Resolving package dependencies..."
 msgstr "Probíhá řešení závislostí balíčků..."
 
-#: src/solve-commit.cc:638
+#: src/solve-commit.cc:639
 msgid ""
 "Some of the dependencies of installed packages are broken. In order to fix "
 "these dependencies, the following actions need to be taken:"
@@ -6351,7 +6360,7 @@ msgstr ""
 "Některé ze závislostí nainstalovaných balíčků jsou poškozené. Aby tyto "
 "závislosti mohly být opraveny, je zapotřebí provést následující akce:"
 
-#: src/solve-commit.cc:645
+#: src/solve-commit.cc:646
 msgid "Root privileges are required to fix broken package dependencies."
 msgstr ""
 "K opravě problémů se závislostmi balíčků je třeba mít oprávnění uživatele "
@@ -6367,23 +6376,23 @@ msgstr ""
 #. The answers should be lower case letters, but in general, any UTF-8
 #. string will do.
 #. ! \todo add c for changelog and x for explain (show the dep tree)
-#: src/solve-commit.cc:667
+#: src/solve-commit.cc:668
 msgid "y/n/p/v/a/r/m/d/g"
 msgstr "y/n/p/v/a/r/m/d/g"
 
 #. translators: help text for 'y' option in the 'Continue?' prompt
-#: src/solve-commit.cc:672
+#: src/solve-commit.cc:673
 msgid ""
 "Yes, accept the summary and proceed with installation/removal of packages."
 msgstr "Přijmout shrnutí a pokračovat v instalaci nebo odebírání balíčků."
 
 #. translators: help text for 'n' option in the 'Continue?' prompt
-#: src/solve-commit.cc:674
+#: src/solve-commit.cc:675
 msgid "No, cancel the operation."
 msgstr "Zrušit operaci."
 
 #. translators: help text for 'p' option in the 'Continue?' prompt
-#: src/solve-commit.cc:676
+#: src/solve-commit.cc:677
 msgid ""
 "Restart solver in no-force-resolution mode in order to show dependency "
 "problems."
@@ -6392,55 +6401,55 @@ msgstr ""
 "zobrazit problémy se závislostmi."
 
 #. translators: help text for 'v' option in the 'Continue?' prompt
-#: src/solve-commit.cc:678
+#: src/solve-commit.cc:679
 msgid "Toggle display of package versions."
 msgstr "Přepnout zobrazení verzí balíčků."
 
 #. translators: help text for 'a' option in the 'Continue?' prompt
-#: src/solve-commit.cc:680
+#: src/solve-commit.cc:681
 msgid "Toggle display of package architectures."
 msgstr "Přepnout zobrazení architektur balíčků."
 
 #. translators: help text for 'r' option in the 'Continue?' prompt
-#: src/solve-commit.cc:682
+#: src/solve-commit.cc:683
 msgid ""
 "Toggle display of repositories from which the packages will be installed."
 msgstr "Přepnout zobrazení repozitářů, ze kterých budou instalovány balíčky."
 
 #. translators: help text for 'm' option in the 'Continue?' prompt
-#: src/solve-commit.cc:684
+#: src/solve-commit.cc:685
 msgid "Toggle display of package vendor names."
 msgstr "Přepnout zobrazení poskytovatelů."
 
 #. translators: help text for 'd' option in the 'Continue?' prompt
-#: src/solve-commit.cc:686
+#: src/solve-commit.cc:687
 msgid "Toggle between showing all details and as few details as possible."
 msgstr "Přepnout mezi zobrazením všech a minimálních detailů."
 
 #. translators: help text for 'g' option in the 'Continue?' prompt
-#: src/solve-commit.cc:688
+#: src/solve-commit.cc:689
 msgid "View the summary in pager."
 msgstr "Zobrazit souhrn v pageru."
 
-#: src/solve-commit.cc:796
+#: src/solve-commit.cc:797
 msgid "committing"
 msgstr "potvrzuje se"
 
-#: src/solve-commit.cc:798
+#: src/solve-commit.cc:799
 msgid "(dry run)"
 msgstr "(pouze test)"
 
-#: src/solve-commit.cc:822 src/solve-commit.cc:855
+#: src/solve-commit.cc:823 src/solve-commit.cc:856
 msgid "Problem retrieving the package file from the repository:"
 msgstr "Problém při stahování souboru balíčku z repozitáře:"
 
 #. translators: the first %s is 'zypper refresh' and the second is repo alias
-#: src/solve-commit.cc:852
+#: src/solve-commit.cc:853
 #, c-format, boost-format
 msgid "Repository '%s' is out of date. Running '%s' might help."
 msgstr "Repozitář '%s' není aktuální. Zkuste spustit příkaz '%s'."
 
-#: src/solve-commit.cc:863
+#: src/solve-commit.cc:864
 msgid ""
 "The package integrity check failed. This may be a problem with the "
 "repository or media. Try one of the following:\n"
@@ -6458,22 +6467,22 @@ msgstr ""
 " - použít jiné instalační médium (například pokud je poškozeno)\n"
 " - použít jiný repozitář"
 
-#: src/solve-commit.cc:877
+#: src/solve-commit.cc:878
 msgid "Problem occurred during or after installation or removal of packages:"
 msgstr ""
 "Došlo k chybě v průběhu instalace nebo odstraňování nebo po instalaci či "
 "odstranění balíčků:"
 
-#: src/solve-commit.cc:885
+#: src/solve-commit.cc:886
 msgid "Installation has completed with error."
 msgstr "Instalace dokončena s chybou."
 
-#: src/solve-commit.cc:887
+#: src/solve-commit.cc:888
 #, boost-format
 msgid "You may run '%1%' to repair any dependency problems."
 msgstr "Můžete spustit '%1%' pro opravu jakýchkoliv problémů se závislostmi."
 
-#: src/solve-commit.cc:901
+#: src/solve-commit.cc:902
 msgid ""
 "One of the installed patches requires a reboot of your machine. Reboot as "
 "soon as possible."
@@ -6481,7 +6490,7 @@ msgstr ""
 "Jedna z nainstalovaných oprav vyžaduje restartování počítače. Restartujte "
 "počítač co nejdříve."
 
-#: src/solve-commit.cc:909
+#: src/solve-commit.cc:910
 msgid ""
 "One of the installed patches affects the package manager itself. Run this "
 "command once more to install any other needed patches."
@@ -6489,7 +6498,7 @@ msgstr ""
 "Jedna z nainstalovaných oprav se týká samotného správce balíčků. Spusťte "
 "tento příkaz znovu, abyste nainstalovali další nezbytné opravy."
 
-#: src/solve-commit.cc:927
+#: src/solve-commit.cc:928
 msgid "Dependencies of all installed packages are satisfied."
 msgstr "Závislosti všech nainstalovaných balíčků jsou splněné."
 

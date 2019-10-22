@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper.hu\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-07-18 13:07+0200\n"
+"POT-Creation-Date: 2019-10-22 16:11+0200\n"
 "PO-Revision-Date: 2019-03-21 12:49+0000\n"
 "Last-Translator: Robert Taisz <robert.taisz@emerald.hu>\n"
 "Language-Team: Hungarian <https://l10n.opensuse.org/projects/zypper/master/"
@@ -2346,13 +2346,13 @@ msgstr ""
 "A megadott képességekkel rendelkező feloldandók eltávolítása. Egy képesség a "
 "NAME[OP<VERZIÓ>], ahol az OP egy a következőkből: <, <=, =, >=, >."
 
-#: src/commands/installremove.cc:104 src/commands/installremove.cc:226
+#: src/commands/installremove.cc:104 src/commands/installremove.cc:224
 #: src/utils/messages.cc:53
 msgid "Too few arguments."
 msgstr "Túl kevés paraméter."
 
 # 50168 AttribValues/delnotify
-#: src/commands/installremove.cc:105 src/commands/installremove.cc:227
+#: src/commands/installremove.cc:105 src/commands/installremove.cc:225
 msgid "At least one package name is required."
 msgstr "Legalább egy csomagnévre szükség van."
 
@@ -2377,17 +2377,17 @@ msgid "Uninstallation of a source package not defined and implemented."
 msgstr "A forráscsomagok eltávolítása nincs definiálva és megvalósítva."
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/commands/installremove.cc:168
+#: src/commands/installremove.cc:166
 msgid "install (in) [OPTIONS] <CAPABILITY|RPM_FILE_URI> ..."
 msgstr "install (in) [kapcsolók] <funkció|rpm_fájl_uri> ..."
 
 #. translators: command summary: install, in
-#: src/commands/installremove.cc:170
+#: src/commands/installremove.cc:168
 msgid "Install packages."
 msgstr "Csomagok telepítése."
 
 #. translators: command description
-#: src/commands/installremove.cc:172
+#: src/commands/installremove.cc:170
 msgid ""
 "Install packages with specified capabilities or RPM files with specified "
 "location. A capability is NAME[.ARCH][OP<VERSION>], where OP is one of <, "
@@ -2398,12 +2398,12 @@ msgstr ""
 "az OP a <, <=, =, >=, > operátorok egyike."
 
 #. translators: --from <ALIAS|#|URI>
-#: src/commands/installremove.cc:187
+#: src/commands/installremove.cc:185 src/commands/utils/download.cc:172
 msgid "Select packages from the specified repository."
 msgstr "Csomagok kiválasztása az adott telepítési forrásból."
 
 #. translators: --oldpackage
-#: src/commands/installremove.cc:191
+#: src/commands/installremove.cc:189
 msgid ""
 "Allow to replace a newer item with an older one. Handy if you are doing a "
 "rollback. Unlike --force it will not enforce a reinstall."
@@ -2411,14 +2411,14 @@ msgstr ""
 "Újabb elem lecserélhetősége régebbivel. Visszagörgetés esetén praktikus. A --"
 "force kapcsolótól eltérő módon nem kényszerít ki újratelepítést."
 
-#: src/commands/installremove.cc:195
+#: src/commands/installremove.cc:193
 msgid "Silently install unsigned rpm packages given as commandline parameters."
 msgstr ""
 "Parancssori paraméterként megadott, aláírás nélküli rpm-csomagok beavatkozás "
 "nélküli telepítése."
 
 #. translators: -f, --force
-#: src/commands/installremove.cc:200
+#: src/commands/installremove.cc:198
 msgid ""
 "Install even if the item is already installed (reinstall), downgraded or "
 "changes vendor or architecture."
@@ -2428,12 +2428,12 @@ msgstr ""
 
 #. translators: rug related message, shown if
 #. 'zypper in --entire-catalog foorepo someargument' is specified
-#: src/commands/installremove.cc:238
+#: src/commands/installremove.cc:236
 msgid "Ignoring arguments, marking the entire repository."
 msgstr ""
 "Argumentum figyelmen kívül hagyása, a teljes telepítési forrás kijelölése."
 
-#: src/commands/installremove.cc:251 src/commands/sourceinstall.cc:92
+#: src/commands/installremove.cc:249 src/commands/sourceinstall.cc:92
 msgid "No valid arguments specified."
 msgstr "Nincs megadva érvényes paraméter."
 
@@ -3088,12 +3088,12 @@ msgstr ""
 msgid "Write debug output to file <path>."
 msgstr "Hibakeresési kimenet írása a fájl <elérési út> helyére."
 
-#: src/commands/ps.cc:72 src/solve-commit.cc:493
+#: src/commands/ps.cc:72 src/solve-commit.cc:494
 msgid "Check failed:"
 msgstr "Sikertelen ellenőrzés:"
 
 #. Here: Table output
-#: src/commands/ps.cc:127 src/solve-commit.cc:482
+#: src/commands/ps.cc:127 src/solve-commit.cc:483
 msgid "Checking for running processes using deleted libraries..."
 msgstr ""
 "Futó folyamatok ellenőrzése, hogy használnak-e törölt programkönyvtárakat..."
@@ -4621,23 +4621,28 @@ msgstr "Kilépés a zypper héjprogramból."
 msgid "This command only makes sense in the zypper shell."
 msgstr "Ez a parancs csak a zypper héjprogramban értelmezhető."
 
-#: src/commands/solveroptionset.cc:16 src/commands/solveroptionset.cc:39
+#: src/commands/solveroptionset.cc:23
+#, boost-format
+msgid "Valid values: %1%"
+msgstr ""
+
+#: src/commands/solveroptionset.cc:35 src/commands/solveroptionset.cc:58
 msgid "Solver options"
 msgstr "Solver-beállítások"
 
-#: src/commands/solveroptionset.cc:18
+#: src/commands/solveroptionset.cc:37
 msgid "Install also recommended packages in addition to the required ones."
 msgstr "A kötelezők mellett az ajánlott csomagok telepítése is."
 
-#: src/commands/solveroptionset.cc:19
+#: src/commands/solveroptionset.cc:38
 msgid "Do not install recommended packages, only required ones."
 msgstr "Csak a kötelező csomagok telepítése, az ajánlottaké nem."
 
-#: src/commands/solveroptionset.cc:41
+#: src/commands/solveroptionset.cc:60
 msgid "Create a solver test case for debugging."
 msgstr "Solver teszteset létrehozása hibakereséshez."
 
-#: src/commands/solveroptionset.cc:42
+#: src/commands/solveroptionset.cc:61
 msgid ""
 "Force the solver to find a solution (even an aggressive one) rather than "
 "asking."
@@ -4645,40 +4650,44 @@ msgstr ""
 "A solver funkció kényszerített használata megoldás keresésére (akár "
 "agresszív módon is)."
 
-#: src/commands/solveroptionset.cc:43
+#: src/commands/solveroptionset.cc:62
 msgid "Do not force the solver to find a solution, let it ask."
 msgstr ""
 "A solver megoldáskereső funkció nem kényszerített használata, rákérdezés."
 
 #: src/commands/solveroptionset.cc:63
+msgid "Set the solvers general attitude when resolving a job."
+msgstr ""
+
+#: src/commands/solveroptionset.cc:83
 msgid "Expert options"
 msgstr "Haladó beállítások"
 
-#: src/commands/solveroptionset.cc:66
+#: src/commands/solveroptionset.cc:86
 msgid "Whether to allow downgrading installed resolvables."
 msgstr ""
 "Engedélyezni kell-e a telepített feloldhatók régebbi verziójának telepítését."
 
-#: src/commands/solveroptionset.cc:68
+#: src/commands/solveroptionset.cc:88
 msgid "Whether to allow changing the names of installed resolvables."
 msgstr "Engedélyezni kell-e a telepített feloldhatók nevének módosítását."
 
-#: src/commands/solveroptionset.cc:70
+#: src/commands/solveroptionset.cc:90
 msgid "Whether to allow changing the architecture of installed resolvables."
 msgstr ""
 "Engedélyezni kell-e a telepített feloldhatók architektúrájának módosítását."
 
-#: src/commands/solveroptionset.cc:72
+#: src/commands/solveroptionset.cc:92
 msgid "Whether to allow changing the vendor of installed resolvables."
 msgstr "Engedélyezni kell-e a telepített feloldhatók gyártójának módosítását."
 
 #. translators: -u, --clean-deps
-#: src/commands/solveroptionset.cc:96
+#: src/commands/solveroptionset.cc:116
 msgid "Automatically remove unneeded dependencies."
 msgstr "Nem szükséges függőségek automatikus eltávolítása."
 
 #. translators: -U, --no-clean-deps
-#: src/commands/solveroptionset.cc:100
+#: src/commands/solveroptionset.cc:120
 msgid "No automatic removal of unneeded dependencies."
 msgstr "Nem szükséges függőségek megtartása."
 
@@ -4954,32 +4963,32 @@ msgstr ""
 "Máskülönben csak a megfelelő csomagok legjobb verziója töltődik le."
 
 #. translators: Label text; is followed by ': cmdline argument'
-#: src/commands/utils/download.cc:231
+#: src/commands/utils/download.cc:235
 msgid "Argument resolves to no package"
 msgstr "Az argumentum feloldása nem eredményez csomagot"
 
-#: src/commands/utils/download.cc:246 src/solve-commit.cc:929
+#: src/commands/utils/download.cc:250 src/solve-commit.cc:930
 msgid "Nothing to do."
 msgstr "Nincs teendő."
 
-#: src/commands/utils/download.cc:253
+#: src/commands/utils/download.cc:257
 msgid "No prune to best version."
 msgstr "Nincs törlés a legjobb verzió szerint."
 
-#: src/commands/utils/download.cc:259
+#: src/commands/utils/download.cc:263
 msgid "Prune to best version..."
 msgstr "Törlés a legjobb verzió szerint..."
 
-#: src/commands/utils/download.cc:265
+#: src/commands/utils/download.cc:269
 msgid "Not downloading anything..."
 msgstr "Nem történik letöltés..."
 
-#: src/commands/utils/download.cc:308
+#: src/commands/utils/download.cc:312
 #, c-format, boost-format
 msgid "Error downloading package '%s'."
 msgstr "Hiba a(z) „%s” csomag letöltésekor."
 
-#: src/commands/utils/download.cc:322
+#: src/commands/utils/download.cc:326
 #, c-format, boost-format
 msgid "Not downloading package '%s'."
 msgstr "A(z) '%s' csomag nem töltődik le."
@@ -5479,18 +5488,18 @@ msgid "%s was not requested."
 msgstr "A(z) %s kérése nem történt meg."
 
 #. translators: this will show up if you press ctrl+c twice
-#: src/main.cc:31
+#: src/main.cc:33
 msgid "OK OK! Exiting immediately..."
 msgstr "Renden! Kilépés folyamatban..."
 
 #. translators: this will show up if you press ctrl+c twice
-#: src/main.cc:38
+#: src/main.cc:40
 msgid "Trying to exit gracefully..."
 msgstr "Kísérlet szabályos kilépésre..."
 
 #. translators: the first %s is name of the resolvable,
 #. the second is its kind (e.g. 'zypper package')
-#: src/misc.cc:135
+#: src/misc.cc:138
 #, c-format, boost-format
 msgid "Automatically agreeing with %s %s license."
 msgstr "A(z) %s %s licencének automatikus elfogadása."
@@ -5498,7 +5507,7 @@ msgstr "A(z) %s %s licencének automatikus elfogadása."
 #. introduction
 #. translators: the first %s is the name of the package, the second
 #. is " (package-type)" if other than "package" (patch/product/pattern)
-#: src/misc.cc:154
+#: src/misc.cc:170
 #, c-format, boost-format
 msgid ""
 "In order to install '%s'%s, you must agree to terms of the following license "
@@ -5508,16 +5517,16 @@ msgstr ""
 "licencmegállapodást:"
 
 #. lincense prompt
-#: src/misc.cc:168
+#: src/misc.cc:187
 msgid "Do you agree with the terms of the license?"
 msgstr "Elfogadja a licencmegállapodás feltételeit?"
 
-#: src/misc.cc:176
+#: src/misc.cc:193
 msgid "Aborting installation due to the need for license confirmation."
 msgstr "A telepítés megszakítva a licencek elfogadásának szükségessége miatt."
 
 #. translators: %s is '--auto-agree-with-licenses'
-#: src/misc.cc:179
+#: src/misc.cc:196
 #, c-format, boost-format
 msgid ""
 "Please restart the operation in interactive mode and confirm your agreement "
@@ -5527,68 +5536,68 @@ msgstr ""
 "licenceket, vagy használja a %s kapcsolót."
 
 #. translators: e.g. "... with flash package license."
-#: src/misc.cc:188
+#: src/misc.cc:209
 #, c-format, boost-format
 msgid "Aborting installation due to user disagreement with %s %s license."
 msgstr ""
 "Telepítés megszakítva a felhasználó a %s %s licencekkel való egyet nem "
 "értése miatt."
 
-#: src/misc.cc:226
+#: src/misc.cc:248
 msgid "License"
 msgstr "Licenc"
 
-#: src/misc.cc:245
+#: src/misc.cc:267
 msgid "EULA"
 msgstr "EULA"
 
-#: src/misc.cc:257
+#: src/misc.cc:279
 msgid "SUMMARY"
 msgstr "ÖSSZEGZÉS"
 
-#: src/misc.cc:258
+#: src/misc.cc:280
 #, c-format, boost-format
 msgid "Installed packages: %d"
 msgstr "Telepített csomagok: %d"
 
-#: src/misc.cc:259
+#: src/misc.cc:281
 #, c-format, boost-format
 msgid "Installed packages with counterparts in repositories: %d"
 msgstr ""
 "A telepítési forrásokban másolatokkal rendelkező telepített csomagok: %d"
 
-#: src/misc.cc:260
+#: src/misc.cc:282
 #, c-format, boost-format
 msgid "Installed packages with EULAs: %d"
 msgstr "EULA-val rendelkező telepített csomagok: %d"
 
-#: src/misc.cc:328
+#: src/misc.cc:350
 #, c-format, boost-format
 msgid "Package '%s' has source package '%s'."
 msgstr "A(z) '%s' csomagnak a(z) '%s' forráscsomagja van."
 
-#: src/misc.cc:337
+#: src/misc.cc:359
 #, c-format, boost-format
 msgid "Source package '%s' for package '%s' not found."
 msgstr ""
 "A(z) '%s' forráscsomag, amely a(z) '%s' csomaghoz tartozik, nem található."
 
-#: src/misc.cc:411
+#: src/misc.cc:433
 #, c-format, boost-format
 msgid "Installing source package %s-%s"
 msgstr "A(z) %s-%s forráscsomag telepítése"
 
-#: src/misc.cc:420
+#: src/misc.cc:442
 #, c-format, boost-format
 msgid "Source package %s-%s successfully retrieved."
 msgstr "A(z) %s-%s forráscsomag beolvasása sikeresen megtörtént."
 
-#: src/misc.cc:426
+#: src/misc.cc:448
 #, c-format, boost-format
 msgid "Source package %s-%s successfully installed."
 msgstr "A(z) %s-%s forráscsomag telepítése sikeresen befejeződött."
 
-#: src/misc.cc:432
+#: src/misc.cc:454
 #, c-format, boost-format
 msgid "Problem installing source package %s-%s:"
 msgstr "Hiba történt a(z) %s-%s forráscsomag telepítése közben:"
@@ -5724,8 +5733,8 @@ msgstr "Hiba történt a(z) '%s' telepítési forrás letiltásakor."
 msgid "Problem retrieving files from '%s'."
 msgstr "Hiba történt a fájlok letöltésekor a következő helyről: '%s'."
 
-#: src/repos.cc:346 src/repos.cc:1860 src/solve-commit.cc:823
-#: src/solve-commit.cc:854 src/solve-commit.cc:878
+#: src/repos.cc:346 src/repos.cc:1860 src/solve-commit.cc:824
+#: src/solve-commit.cc:855 src/solve-commit.cc:879
 msgid "Please see the above error message for a hint."
 msgstr "Tekintse meg a fent található hibaüzenetet javaslatért."
 
@@ -6257,7 +6266,7 @@ msgstr ""
 #. and to the same as you translated it in the "s/r/c/d" string
 #. See the "s/r/c/d" comment for other details.
 #. One letter string  for translation can be tricky, so in case of problems,
-#. please report a bug against zypper at bugzilla.novell.com, we'll try to solve it.
+#. please report a bug against zypper at bugzilla.suse.com, we'll try to solve it.
 #: src/solve-commit.cc:127
 msgid "c/d"
 msgstr ""
@@ -6313,29 +6322,29 @@ msgstr "Függőségek feloldása..."
 msgid "Force resolution:"
 msgstr "Kikényszerített megoldás:"
 
-#: src/solve-commit.cc:382
+#: src/solve-commit.cc:383
 msgid "Verifying dependencies..."
 msgstr "Függőségek ellenőrzése..."
 
 #. Here: compute the full upgrade
-#: src/solve-commit.cc:432
+#: src/solve-commit.cc:433
 msgid "Computing upgrade..."
 msgstr "A frissítés számítása..."
 
-#: src/solve-commit.cc:446
+#: src/solve-commit.cc:447
 msgid "Generating solver test case..."
 msgstr "Feloldási tesztesét létrehozása..."
 
-#: src/solve-commit.cc:448
+#: src/solve-commit.cc:449
 #, c-format, boost-format
 msgid "Solver test case generated successfully at %s."
 msgstr "A feloldási teszteset sikeresen létrejött itt: %s."
 
-#: src/solve-commit.cc:451
+#: src/solve-commit.cc:452
 msgid "Error creating the solver test case."
 msgstr "A feloldási teszteset létrehozása sikertelen."
 
-#: src/solve-commit.cc:479
+#: src/solve-commit.cc:480
 #, c-format, boost-format
 msgid ""
 "Check for running processes using deleted libraries is disabled in zypper."
@@ -6344,11 +6353,11 @@ msgstr ""
 "A törölt függvénytárakat használó futó folyamatok ellenőrzése le van tiltva "
 "a zypper.conf fájlban. Ellenőrizze manuálisan a(z) '%s' futtatásával."
 
-#: src/solve-commit.cc:495
+#: src/solve-commit.cc:496
 msgid "Skip check:"
 msgstr "Ellenőrzés kihagyása:"
 
-#: src/solve-commit.cc:502
+#: src/solve-commit.cc:503
 #, boost-format
 msgid ""
 "There are running programs which still use files and libraries deleted or "
@@ -6360,32 +6369,32 @@ msgstr ""
 "újra kell indítani ezeket a programokat. A programok kilistázásához futtassa "
 "a(z) '%1%' parancsot."
 
-#: src/solve-commit.cc:516
+#: src/solve-commit.cc:517
 msgid "Update notifications were received from the following packages:"
 msgstr "Frissítési értesítés érkezett a következő csomagról:"
 
-#: src/solve-commit.cc:525
+#: src/solve-commit.cc:526
 #, c-format, boost-format
 msgid "Message from package %s:"
 msgstr "Üzenet a(z) %s csomagról:"
 
-#: src/solve-commit.cc:533
+#: src/solve-commit.cc:534
 msgid "y/n"
 msgstr "i/n"
 
-#: src/solve-commit.cc:534
+#: src/solve-commit.cc:535
 msgid "View the notifications now?"
 msgstr "Megtekinti az értesítést most?"
 
-#: src/solve-commit.cc:578
+#: src/solve-commit.cc:579
 msgid "Computing distribution upgrade..."
 msgstr "A disztribúció frissítésének számítása..."
 
-#: src/solve-commit.cc:583
+#: src/solve-commit.cc:584
 msgid "Resolving package dependencies..."
 msgstr "Függőségek feloldása..."
 
-#: src/solve-commit.cc:638
+#: src/solve-commit.cc:639
 msgid ""
 "Some of the dependencies of installed packages are broken. In order to fix "
 "these dependencies, the following actions need to be taken:"
@@ -6393,7 +6402,7 @@ msgstr ""
 "A telepített csomagok bizonyos függőségeivel problémák adódtak. A problémák "
 "kijavításának érdekében a következő műveleteket kell végrehajtani:"
 
-#: src/solve-commit.cc:645
+#: src/solve-commit.cc:646
 msgid "Root privileges are required to fix broken package dependencies."
 msgstr ""
 "A csomagok függőségi problémáinak javításához root jogosultság szükséges."
@@ -6408,12 +6417,12 @@ msgstr ""
 #. The answers should be lower case letters, but in general, any UTF-8
 #. string will do.
 #. ! \todo add c for changelog and x for explain (show the dep tree)
-#: src/solve-commit.cc:667
+#: src/solve-commit.cc:668
 msgid "y/n/p/v/a/r/m/d/g"
 msgstr "i/n/p/v/a/r/m/d/g"
 
 #. translators: help text for 'y' option in the 'Continue?' prompt
-#: src/solve-commit.cc:672
+#: src/solve-commit.cc:673
 msgid ""
 "Yes, accept the summary and proceed with installation/removal of packages."
 msgstr ""
@@ -6421,12 +6430,12 @@ msgstr ""
 "eltávolítását."
 
 #. translators: help text for 'n' option in the 'Continue?' prompt
-#: src/solve-commit.cc:674
+#: src/solve-commit.cc:675
 msgid "No, cancel the operation."
 msgstr "Nem, szakítsa meg a műveletet."
 
 #. translators: help text for 'p' option in the 'Continue?' prompt
-#: src/solve-commit.cc:676
+#: src/solve-commit.cc:677
 msgid ""
 "Restart solver in no-force-resolution mode in order to show dependency "
 "problems."
@@ -6435,17 +6444,17 @@ msgstr ""
 "megjelenítéséhez."
 
 #. translators: help text for 'v' option in the 'Continue?' prompt
-#: src/solve-commit.cc:678
+#: src/solve-commit.cc:679
 msgid "Toggle display of package versions."
 msgstr "Csomagverziók megjelenítésének átkapcsolása."
 
 #. translators: help text for 'a' option in the 'Continue?' prompt
-#: src/solve-commit.cc:680
+#: src/solve-commit.cc:681
 msgid "Toggle display of package architectures."
 msgstr "Csomagarchitektúrák megjelenítésének átkapcsolása."
 
 #. translators: help text for 'r' option in the 'Continue?' prompt
-#: src/solve-commit.cc:682
+#: src/solve-commit.cc:683
 msgid ""
 "Toggle display of repositories from which the packages will be installed."
 msgstr ""
@@ -6453,43 +6462,43 @@ msgstr ""
 "átkapcsolása."
 
 #. translators: help text for 'm' option in the 'Continue?' prompt
-#: src/solve-commit.cc:684
+#: src/solve-commit.cc:685
 msgid "Toggle display of package vendor names."
 msgstr "Csomaggyártó nevek megjelenítésének átkapcsolása."
 
 #. translators: help text for 'd' option in the 'Continue?' prompt
-#: src/solve-commit.cc:686
+#: src/solve-commit.cc:687
 msgid "Toggle between showing all details and as few details as possible."
 msgstr ""
 "Átváltás az összes részlet megjelenítése és a lehetséges legkevesebb részlet "
 "megjelenítése között."
 
 #. translators: help text for 'g' option in the 'Continue?' prompt
-#: src/solve-commit.cc:688
+#: src/solve-commit.cc:689
 msgid "View the summary in pager."
 msgstr "Összesítés megtekintése."
 
-#: src/solve-commit.cc:796
+#: src/solve-commit.cc:797
 msgid "committing"
 msgstr "véglegesítés"
 
-#: src/solve-commit.cc:798
+#: src/solve-commit.cc:799
 msgid "(dry run)"
 msgstr "(üresjárat)"
 
-#: src/solve-commit.cc:822 src/solve-commit.cc:855
+#: src/solve-commit.cc:823 src/solve-commit.cc:856
 msgid "Problem retrieving the package file from the repository:"
 msgstr "Hiba történt a csomagfájl letöltésekor a telepítési forrásról:"
 
 #. translators: the first %s is 'zypper refresh' and the second is repo alias
-#: src/solve-commit.cc:852
+#: src/solve-commit.cc:853
 #, c-format, boost-format
 msgid "Repository '%s' is out of date. Running '%s' might help."
 msgstr ""
 "A(z) %s telepítési forrás nem naprakész. Frissítheti a '%s' parancs "
 "futtatásával."
 
-#: src/solve-commit.cc:863
+#: src/solve-commit.cc:864
 msgid ""
 "The package integrity check failed. This may be a problem with the "
 "repository or media. Try one of the following:\n"
@@ -6507,21 +6516,21 @@ msgstr ""
 " - használjon másik telepítő adathordozót (ha az sérült)\n"
 " - használjon másik telepítési forrást"
 
-#: src/solve-commit.cc:877
+#: src/solve-commit.cc:878
 msgid "Problem occurred during or after installation or removal of packages:"
 msgstr "A telepítés során hiba történt:"
 
-#: src/solve-commit.cc:885
+#: src/solve-commit.cc:886
 msgid "Installation has completed with error."
 msgstr "A telepítés hibával fejeződött be."
 
-#: src/solve-commit.cc:887
+#: src/solve-commit.cc:888
 #, boost-format
 msgid "You may run '%1%' to repair any dependency problems."
 msgstr ""
 "A(z) '%1%' futtatásával kijavíthatja az esetleges függőségi problémákat."
 
-#: src/solve-commit.cc:901
+#: src/solve-commit.cc:902
 msgid ""
 "One of the installed patches requires a reboot of your machine. Reboot as "
 "soon as possible."
@@ -6529,7 +6538,7 @@ msgstr ""
 "A telepített frissítések egyike a számítógép újraindítását igényli. Ezt "
 "amint lehet, tegye meg."
 
-#: src/solve-commit.cc:909
+#: src/solve-commit.cc:910
 msgid ""
 "One of the installed patches affects the package manager itself. Run this "
 "command once more to install any other needed patches."
@@ -6537,7 +6546,7 @@ msgstr ""
 "A telepített frissítések egyike magát a csomagkezelőt érinti, ezért futtassa "
 "még egyszer a parancsot a további frissítések telepítése érdekében."
 
-#: src/solve-commit.cc:927
+#: src/solve-commit.cc:928
 msgid "Dependencies of all installed packages are satisfied."
 msgstr "Minden telepített csomag függősége rendben."
 
@@ -10771,8 +10780,8 @@ msgstr ""
 #~ "capability.\n"
 #~ "-C, --capability                Select packages by capability.\n"
 #~ "    --debug-solver              Create solver test case for debugging.\n"
-#~ "-R, --no-force-resolution       Do not force the solver to find a solution, "
-#~ "let it ask.\n"
+#~ "-R, --no-force-resolution       Do not force the solver to find a "
+#~ "solution, let it ask.\n"
 #~ "    --force-resolution          Force the solver to find a solution (even "
 #~ "an agressive).\n"
 #~ "-D, --dry-run                   Test the removal, do not actually "

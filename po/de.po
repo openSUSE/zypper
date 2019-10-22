@@ -16,11 +16,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper.de\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-07-18 13:07+0200\n"
+"POT-Creation-Date: 2019-10-22 16:11+0200\n"
 "PO-Revision-Date: 2019-07-19 13:51+0000\n"
 "Last-Translator: Sarah Kriesch <ada.lovelace@gmx.de>\n"
-"Language-Team: German <https://l10n.opensuse.org/projects/zypper/master/de/>"
-"\n"
+"Language-Team: German <https://l10n.opensuse.org/projects/zypper/master/de/"
+">\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2383,13 +2383,13 @@ msgstr ""
 "Pakete mit angegebenen Fähigkeiten entfernen. Eine Fähigkeit ist NAME[.ARCH]"
 "[OP<VERSION>], wobei OP für eines der Zeichen <, <=, =, >=, > steht."
 
-#: src/commands/installremove.cc:104 src/commands/installremove.cc:226
+#: src/commands/installremove.cc:104 src/commands/installremove.cc:224
 #: src/utils/messages.cc:53
 msgid "Too few arguments."
 msgstr "Zu wenig Argumente."
 
 # 50168 AttribValues/delnotify
-#: src/commands/installremove.cc:105 src/commands/installremove.cc:227
+#: src/commands/installremove.cc:105 src/commands/installremove.cc:225
 msgid "At least one package name is required."
 msgstr "Es ist mindestens ein Paketname erforderlich."
 
@@ -2414,17 +2414,17 @@ msgstr ""
 "Die Deinstallation eines Quellpakets ist nicht definiert und implementiert."
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/commands/installremove.cc:168
+#: src/commands/installremove.cc:166
 msgid "install (in) [OPTIONS] <CAPABILITY|RPM_FILE_URI> ..."
 msgstr "install (in) [Optionen] <Fähigkeit|RPM_Datei_uri> ..."
 
 #. translators: command summary: install, in
-#: src/commands/installremove.cc:170
+#: src/commands/installremove.cc:168
 msgid "Install packages."
 msgstr "Pakete installieren."
 
 #. translators: command description
-#: src/commands/installremove.cc:172
+#: src/commands/installremove.cc:170
 msgid ""
 "Install packages with specified capabilities or RPM files with specified "
 "location. A capability is NAME[.ARCH][OP<VERSION>], where OP is one of <, "
@@ -2435,12 +2435,12 @@ msgstr ""
 "OP für eines der Zeichen <, <=, =, >=, > steht."
 
 #. translators: --from <ALIAS|#|URI>
-#: src/commands/installremove.cc:187
+#: src/commands/installremove.cc:185 src/commands/utils/download.cc:172
 msgid "Select packages from the specified repository."
 msgstr "Pakete aus dem angegebenen Repository auswählen."
 
 #. translators: --oldpackage
-#: src/commands/installremove.cc:191
+#: src/commands/installremove.cc:189
 msgid ""
 "Allow to replace a newer item with an older one. Handy if you are doing a "
 "rollback. Unlike --force it will not enforce a reinstall."
@@ -2449,14 +2449,14 @@ msgstr ""
 "eines Rollbacks. Im Gegensatz zu --force wird keine erneute Installation "
 "erzwungen."
 
-#: src/commands/installremove.cc:195
+#: src/commands/installremove.cc:193
 msgid "Silently install unsigned rpm packages given as commandline parameters."
 msgstr ""
 "Installieren Sie im Hintergrund unsignierte RPM-Pakete, die als "
 "Kommandozeilen-Parameter angegeben werden."
 
 #. translators: -f, --force
-#: src/commands/installremove.cc:200
+#: src/commands/installremove.cc:198
 msgid ""
 "Install even if the item is already installed (reinstall), downgraded or "
 "changes vendor or architecture."
@@ -2467,11 +2467,11 @@ msgstr ""
 
 #. translators: rug related message, shown if
 #. 'zypper in --entire-catalog foorepo someargument' is specified
-#: src/commands/installremove.cc:238
+#: src/commands/installremove.cc:236
 msgid "Ignoring arguments, marking the entire repository."
 msgstr "Argumente ignorieren, gesamtes Repository markieren."
 
-#: src/commands/installremove.cc:251 src/commands/sourceinstall.cc:92
+#: src/commands/installremove.cc:249 src/commands/sourceinstall.cc:92
 msgid "No valid arguments specified."
 msgstr "Keine gültigen Argumente angegeben."
 
@@ -3128,12 +3128,12 @@ msgstr ""
 msgid "Write debug output to file <path>."
 msgstr "Debug-Ausgabe in Datei-<Pfad> schreiben."
 
-#: src/commands/ps.cc:72 src/solve-commit.cc:493
+#: src/commands/ps.cc:72 src/solve-commit.cc:494
 msgid "Check failed:"
 msgstr "Prüfung fehlerhaft:"
 
 #. Here: Table output
-#: src/commands/ps.cc:127 src/solve-commit.cc:482
+#: src/commands/ps.cc:127 src/solve-commit.cc:483
 msgid "Checking for running processes using deleted libraries..."
 msgstr "Suche nach aktiven Prozessen, die gelöschte Bibliotheken benutzen..."
 
@@ -4674,68 +4674,77 @@ msgstr "Die aktuelle Zypper-Shell beenden."
 msgid "This command only makes sense in the zypper shell."
 msgstr "Dieses Kommando ist nur in der Zypper-Shell sinnvoll."
 
-#: src/commands/solveroptionset.cc:16 src/commands/solveroptionset.cc:39
+#: src/commands/solveroptionset.cc:23
+#, boost-format
+msgid "Valid values: %1%"
+msgstr ""
+
+#: src/commands/solveroptionset.cc:35 src/commands/solveroptionset.cc:58
 msgid "Solver options"
 msgstr "Auflösungsoptionen"
 
-#: src/commands/solveroptionset.cc:18
+#: src/commands/solveroptionset.cc:37
 msgid "Install also recommended packages in addition to the required ones."
 msgstr "Auch empfohlene Pakete zusätzlich zu den erforderlichen installieren."
 
-#: src/commands/solveroptionset.cc:19
+#: src/commands/solveroptionset.cc:38
 msgid "Do not install recommended packages, only required ones."
 msgstr "Keine empfohlenen Pakete installieren, nur erforderliche."
 
-#: src/commands/solveroptionset.cc:41
+#: src/commands/solveroptionset.cc:60
 msgid "Create a solver test case for debugging."
 msgstr "Auflöser-Testfall zur Fehlersuche erstellen."
 
-#: src/commands/solveroptionset.cc:42
+#: src/commands/solveroptionset.cc:61
 msgid ""
 "Force the solver to find a solution (even an aggressive one) rather than "
 "asking."
 msgstr "Abhängigkeitsauflösung erzwingen (selbst eine aggressive)."
 
-#: src/commands/solveroptionset.cc:43
+#: src/commands/solveroptionset.cc:62
 msgid "Do not force the solver to find a solution, let it ask."
 msgstr ""
 "Keine Abhängigkeitsauflösung erzwingen, Frage an den Benutzer zulassen."
 
 #: src/commands/solveroptionset.cc:63
+msgid "Set the solvers general attitude when resolving a job."
+msgstr ""
+
+#: src/commands/solveroptionset.cc:83
 msgid "Expert options"
 msgstr "Optionen für Experten"
 
-#: src/commands/solveroptionset.cc:66
+#: src/commands/solveroptionset.cc:86
 msgid "Whether to allow downgrading installed resolvables."
 msgstr ""
 "Angabe, ob installierte auflösbare Elemente durch eine ältere Version "
 "ausgetauscht werden dürfen."
 
-#: src/commands/solveroptionset.cc:68
+#: src/commands/solveroptionset.cc:88
 msgid "Whether to allow changing the names of installed resolvables."
 msgstr ""
 "Angabe, ob der Name von installierten auflösbaren Elementen geändert werden "
 "darf."
 
-#: src/commands/solveroptionset.cc:70
+#: src/commands/solveroptionset.cc:90
 msgid "Whether to allow changing the architecture of installed resolvables."
 msgstr ""
 "Angabe, ob die Architektur von installierten auflösbaren Elementen geändert "
 "werden darf."
 
-#: src/commands/solveroptionset.cc:72
+#: src/commands/solveroptionset.cc:92
 msgid "Whether to allow changing the vendor of installed resolvables."
 msgstr ""
 "Angabe, ob der Anbieter von installierten auflösbaren Elementen geändert "
 "werden darf."
 
 #. translators: -u, --clean-deps
-#: src/commands/solveroptionset.cc:96
+#: src/commands/solveroptionset.cc:116
 msgid "Automatically remove unneeded dependencies."
 msgstr "Unnötige Abhängigkeiten automatisch entfernen."
 
 #. translators: -U, --no-clean-deps
-#: src/commands/solveroptionset.cc:100
+#: src/commands/solveroptionset.cc:120
 msgid "No automatic removal of unneeded dependencies."
 msgstr "Kein automatisches Entfernen von unnötigen Abhängigkeiten."
 
@@ -5018,32 +5027,32 @@ msgstr ""
 "heruntergeladen."
 
 #. translators: Label text; is followed by ': cmdline argument'
-#: src/commands/utils/download.cc:231
+#: src/commands/utils/download.cc:235
 msgid "Argument resolves to no package"
 msgstr "Argument löst sich nicht zu einem Paket auf"
 
-#: src/commands/utils/download.cc:246 src/solve-commit.cc:929
+#: src/commands/utils/download.cc:250 src/solve-commit.cc:930
 msgid "Nothing to do."
 msgstr "Keine auszuführenden Aktionen."
 
-#: src/commands/utils/download.cc:253
+#: src/commands/utils/download.cc:257
 msgid "No prune to best version."
 msgstr "Keine Bereinigung zur besten Version."
 
-#: src/commands/utils/download.cc:259
+#: src/commands/utils/download.cc:263
 msgid "Prune to best version..."
 msgstr "Zur besten Version bereinigen..."
 
-#: src/commands/utils/download.cc:265
+#: src/commands/utils/download.cc:269
 msgid "Not downloading anything..."
 msgstr "Es wird nichts heruntergeladen..."
 
-#: src/commands/utils/download.cc:308
+#: src/commands/utils/download.cc:312
 #, c-format, boost-format
 msgid "Error downloading package '%s'."
 msgstr "Fehler beim Herunterladen des Pakets '%s'."
 
-#: src/commands/utils/download.cc:322
+#: src/commands/utils/download.cc:326
 #, c-format, boost-format
 msgid "Not downloading package '%s'."
 msgstr "Paket '%s' wird nicht heruntergeladen."
@@ -5539,18 +5548,18 @@ msgid "%s was not requested."
 msgstr "%s war nicht angefordert."
 
 #. translators: this will show up if you press ctrl+c twice
-#: src/main.cc:31
+#: src/main.cc:33
 msgid "OK OK! Exiting immediately..."
 msgstr "Haben Sie etwas Geduld, der Vorgang wird unverzüglich beendet."
 
 #. translators: this will show up if you press ctrl+c twice
-#: src/main.cc:38
+#: src/main.cc:40
 msgid "Trying to exit gracefully..."
 msgstr "Versucht sich höflich zu beenden..."
 
 #. translators: the first %s is name of the resolvable,
 #. the second is its kind (e.g. 'zypper package')
-#: src/misc.cc:135
+#: src/misc.cc:138
 #, c-format, boost-format
 msgid "Automatically agreeing with %s %s license."
 msgstr "Zustimmung zur Lizenz %s für %s wird automatisch gegeben."
@@ -5558,7 +5567,7 @@ msgstr "Zustimmung zur Lizenz %s für %s wird automatisch gegeben."
 #. introduction
 #. translators: the first %s is the name of the package, the second
 #. is " (package-type)" if other than "package" (patch/product/pattern)
-#: src/misc.cc:154
+#: src/misc.cc:170
 #, c-format, boost-format
 msgid ""
 "In order to install '%s'%s, you must agree to terms of the following license "
@@ -5568,18 +5577,18 @@ msgstr ""
 "Lizenzvereinbarung zustimmen:"
 
 #. lincense prompt
-#: src/misc.cc:168
+#: src/misc.cc:187
 msgid "Do you agree with the terms of the license?"
 msgstr "Stimmen Sie den Bedingungen der Lizenz zu?"
 
-#: src/misc.cc:176
+#: src/misc.cc:193
 msgid "Aborting installation due to the need for license confirmation."
 msgstr ""
 "Die Installation wird abgebrochen, da dieser Vorgang eine Lizenzbestätigung "
 "erfordert."
 
 #. translators: %s is '--auto-agree-with-licenses'
-#: src/misc.cc:179
+#: src/misc.cc:196
 #, c-format, boost-format
 msgid ""
 "Please restart the operation in interactive mode and confirm your agreement "
@@ -5590,66 +5599,66 @@ msgstr ""
 "Option %s."
 
 #. translators: e.g. "... with flash package license."
-#: src/misc.cc:188
+#: src/misc.cc:209
 #, c-format, boost-format
 msgid "Aborting installation due to user disagreement with %s %s license."
 msgstr ""
 "Die Installation wird abgebrochen, da der Benutzer der %s %s-Lizenz nicht "
 "zugestimmt hat."
 
-#: src/misc.cc:226
+#: src/misc.cc:248
 msgid "License"
 msgstr "Lizenz"
 
-#: src/misc.cc:245
+#: src/misc.cc:267
 msgid "EULA"
 msgstr "EULA"
 
-#: src/misc.cc:257
+#: src/misc.cc:279
 msgid "SUMMARY"
 msgstr "ZUSAMMENFASSUNG"
 
-#: src/misc.cc:258
+#: src/misc.cc:280
 #, c-format, boost-format
 msgid "Installed packages: %d"
 msgstr "Installierte Pakete: %d"
 
-#: src/misc.cc:259
+#: src/misc.cc:281
 #, c-format, boost-format
 msgid "Installed packages with counterparts in repositories: %d"
 msgstr "Installierte Pakete mit Pendants in Repositorys: %d"
 
-#: src/misc.cc:260
+#: src/misc.cc:282
 #, c-format, boost-format
 msgid "Installed packages with EULAs: %d"
 msgstr "Installierte Pakete mit EULAs: %d"
 
-#: src/misc.cc:328
+#: src/misc.cc:350
 #, c-format, boost-format
 msgid "Package '%s' has source package '%s'."
 msgstr "Das Paket '%s' enthält das Quellpaket '%s'."
 
-#: src/misc.cc:337
+#: src/misc.cc:359
 #, c-format, boost-format
 msgid "Source package '%s' for package '%s' not found."
 msgstr "Das Quellpaket '%s' für Paket '%s' wurde nicht gefunden."
 
-#: src/misc.cc:411
+#: src/misc.cc:433
 #, c-format, boost-format
 msgid "Installing source package %s-%s"
 msgstr "Quellpaket %s-%s wird installiert"
 
-#: src/misc.cc:420
+#: src/misc.cc:442
 #, c-format, boost-format
 msgid "Source package %s-%s successfully retrieved."
 msgstr "Das Quellpaket %s-%s wurde erfolgreich heruntergeladen."
 
-#: src/misc.cc:426
+#: src/misc.cc:448
 #, c-format, boost-format
 msgid "Source package %s-%s successfully installed."
 msgstr "Quellpaket %s-%s wurde erfolgreich installiert."
 
-#: src/misc.cc:432
+#: src/misc.cc:454
 #, c-format, boost-format
 msgid "Problem installing source package %s-%s:"
 msgstr "Problem beim Installieren des Quellpakets %s-%s:"
@@ -5785,8 +5794,8 @@ msgstr "Fehler beim Deaktivieren des Repositorys '%s'."
 msgid "Problem retrieving files from '%s'."
 msgstr "Problem beim Abrufen der Dateien von '%s'."
 
-#: src/repos.cc:346 src/repos.cc:1860 src/solve-commit.cc:823
-#: src/solve-commit.cc:854 src/solve-commit.cc:878
+#: src/repos.cc:346 src/repos.cc:1860 src/solve-commit.cc:824
+#: src/solve-commit.cc:855 src/solve-commit.cc:879
 msgid "Please see the above error message for a hint."
 msgstr "In der Fehlermeldung oben finden Sie einen entsprechenden Hinweis."
 
@@ -6320,7 +6329,7 @@ msgstr "u/w/a/d"
 #. and to the same as you translated it in the "s/r/c/d" string
 #. See the "s/r/c/d" comment for other details.
 #. One letter string  for translation can be tricky, so in case of problems,
-#. please report a bug against zypper at bugzilla.novell.com, we'll try to solve it.
+#. please report a bug against zypper at bugzilla.suse.com, we'll try to solve it.
 #: src/solve-commit.cc:127
 msgid "c/d"
 msgstr "a/d"
@@ -6376,29 +6385,29 @@ msgstr "Abhängigkeiten werden aufgelöst..."
 msgid "Force resolution:"
 msgstr "Auflösung erzwingen:"
 
-#: src/solve-commit.cc:382
+#: src/solve-commit.cc:383
 msgid "Verifying dependencies..."
 msgstr "Abhängigkeiten werden überprüft..."
 
 #. Here: compute the full upgrade
-#: src/solve-commit.cc:432
+#: src/solve-commit.cc:433
 msgid "Computing upgrade..."
 msgstr "Aktualisierung wird berechnet..."
 
-#: src/solve-commit.cc:446
+#: src/solve-commit.cc:447
 msgid "Generating solver test case..."
 msgstr "Testfall für Auflösung wird erzeugt..."
 
-#: src/solve-commit.cc:448
+#: src/solve-commit.cc:449
 #, c-format, boost-format
 msgid "Solver test case generated successfully at %s."
 msgstr "Testfall für Auflösung erfolgreich unter %s erzeugt."
 
-#: src/solve-commit.cc:451
+#: src/solve-commit.cc:452
 msgid "Error creating the solver test case."
 msgstr "Fehler beim Erstellen des Testfalls für Auflösung."
 
-#: src/solve-commit.cc:479
+#: src/solve-commit.cc:480
 #, c-format, boost-format
 msgid ""
 "Check for running processes using deleted libraries is disabled in zypper."
@@ -6407,11 +6416,11 @@ msgstr ""
 "Die Suche nach laufenden Prozessen, die gelöschte Bibliotheken verwenden, "
 "ist in zypper.conf deaktiviert. Starten Sie die Suche manuell mit '%s'."
 
-#: src/solve-commit.cc:495
+#: src/solve-commit.cc:496
 msgid "Skip check:"
 msgstr "Überprüfung überspringen:"
 
-#: src/solve-commit.cc:502
+#: src/solve-commit.cc:503
 #, boost-format
 msgid ""
 "There are running programs which still use files and libraries deleted or "
@@ -6423,33 +6432,33 @@ msgstr ""
 "Sie die Programme neu, um die Aktualisierungen zu nutzen. Mit '%1%' erhalten "
 "Sie eine Liste dieser Programme."
 
-#: src/solve-commit.cc:516
+#: src/solve-commit.cc:517
 msgid "Update notifications were received from the following packages:"
 msgstr ""
 "Aktualisierungsbenachrichtigungen wurden von den folgenden Paketen empfangen:"
 
-#: src/solve-commit.cc:525
+#: src/solve-commit.cc:526
 #, c-format, boost-format
 msgid "Message from package %s:"
 msgstr "Nachricht von Paket %s:"
 
-#: src/solve-commit.cc:533
+#: src/solve-commit.cc:534
 msgid "y/n"
 msgstr "j/n"
 
-#: src/solve-commit.cc:534
+#: src/solve-commit.cc:535
 msgid "View the notifications now?"
 msgstr "Benachrichtigungen jetzt anzeigen?"
 
-#: src/solve-commit.cc:578
+#: src/solve-commit.cc:579
 msgid "Computing distribution upgrade..."
 msgstr "Distributions-Aktualisierungen werden verarbeitet..."
 
-#: src/solve-commit.cc:583
+#: src/solve-commit.cc:584
 msgid "Resolving package dependencies..."
 msgstr "Paketabhängigkeiten werden aufgelöst..."
 
-#: src/solve-commit.cc:638
+#: src/solve-commit.cc:639
 msgid ""
 "Some of the dependencies of installed packages are broken. In order to fix "
 "these dependencies, the following actions need to be taken:"
@@ -6458,7 +6467,7 @@ msgstr ""
 "Abhängigkeiten zu reparieren, müssen die folgenden Aktionen ausgeführt "
 "werden:"
 
-#: src/solve-commit.cc:645
+#: src/solve-commit.cc:646
 msgid "Root privileges are required to fix broken package dependencies."
 msgstr ""
 "Zur Reparatur beschädigter Paketabhängigkeiten sind Root-Berechtigungen "
@@ -6474,12 +6483,12 @@ msgstr ""
 #. The answers should be lower case letters, but in general, any UTF-8
 #. string will do.
 #. ! \todo add c for changelog and x for explain (show the dep tree)
-#: src/solve-commit.cc:667
+#: src/solve-commit.cc:668
 msgid "y/n/p/v/a/r/m/d/g"
 msgstr "j/n/p/v/a/r/h/d/g"
 
 #. translators: help text for 'y' option in the 'Continue?' prompt
-#: src/solve-commit.cc:672
+#: src/solve-commit.cc:673
 msgid ""
 "Yes, accept the summary and proceed with installation/removal of packages."
 msgstr ""
@@ -6487,12 +6496,12 @@ msgstr ""
 "Pakete fortfahren."
 
 #. translators: help text for 'n' option in the 'Continue?' prompt
-#: src/solve-commit.cc:674
+#: src/solve-commit.cc:675
 msgid "No, cancel the operation."
 msgstr "Nein, den Vorgang abbrechen."
 
 #. translators: help text for 'p' option in the 'Continue?' prompt
-#: src/solve-commit.cc:676
+#: src/solve-commit.cc:677
 msgid ""
 "Restart solver in no-force-resolution mode in order to show dependency "
 "problems."
@@ -6501,17 +6510,17 @@ msgstr ""
 "Abhängigkeitsprobleme anzuzeigen."
 
 #. translators: help text for 'v' option in the 'Continue?' prompt
-#: src/solve-commit.cc:678
+#: src/solve-commit.cc:679
 msgid "Toggle display of package versions."
 msgstr "Anzeige der Paketversionen ein-/ausschalten."
 
 #. translators: help text for 'a' option in the 'Continue?' prompt
-#: src/solve-commit.cc:680
+#: src/solve-commit.cc:681
 msgid "Toggle display of package architectures."
 msgstr "Anzeige der Paketarchitekturen ein-/ausschalten."
 
 #. translators: help text for 'r' option in the 'Continue?' prompt
-#: src/solve-commit.cc:682
+#: src/solve-commit.cc:683
 msgid ""
 "Toggle display of repositories from which the packages will be installed."
 msgstr ""
@@ -6519,40 +6528,40 @@ msgstr ""
 "ausschalten."
 
 #. translators: help text for 'm' option in the 'Continue?' prompt
-#: src/solve-commit.cc:684
+#: src/solve-commit.cc:685
 msgid "Toggle display of package vendor names."
 msgstr "Anzeige der Namen der Paketanbieter ein-/ausschalten."
 
 #. translators: help text for 'd' option in the 'Continue?' prompt
-#: src/solve-commit.cc:686
+#: src/solve-commit.cc:687
 msgid "Toggle between showing all details and as few details as possible."
 msgstr ""
 "Anzeige zwischen 'Alle Details' und 'Möglichst wenig Details' umschalten."
 
 #. translators: help text for 'g' option in the 'Continue?' prompt
-#: src/solve-commit.cc:688
+#: src/solve-commit.cc:689
 msgid "View the summary in pager."
 msgstr "Zusammenfassung im Pager anzeigen."
 
-#: src/solve-commit.cc:796
+#: src/solve-commit.cc:797
 msgid "committing"
 msgstr "speichern"
 
-#: src/solve-commit.cc:798
+#: src/solve-commit.cc:799
 msgid "(dry run)"
 msgstr "(Probelauf)"
 
-#: src/solve-commit.cc:822 src/solve-commit.cc:855
+#: src/solve-commit.cc:823 src/solve-commit.cc:856
 msgid "Problem retrieving the package file from the repository:"
 msgstr "Problem beim Abrufen der Paketdatei aus dem Repository:"
 
 #. translators: the first %s is 'zypper refresh' and the second is repo alias
-#: src/solve-commit.cc:852
+#: src/solve-commit.cc:853
 #, c-format, boost-format
 msgid "Repository '%s' is out of date. Running '%s' might help."
 msgstr "Repository '%s' ist veraltet. Vielleicht hilft es, '%s' auszuführen."
 
-#: src/solve-commit.cc:863
+#: src/solve-commit.cc:864
 msgid ""
 "The package integrity check failed. This may be a problem with the "
 "repository or media. Try one of the following:\n"
@@ -6571,22 +6580,22 @@ msgstr ""
 " – Ein anderes Installationsmedium (z. B. bei Beschädigung) verwenden\n"
 " – Ein anderes Repository verwenden"
 
-#: src/solve-commit.cc:877
+#: src/solve-commit.cc:878
 msgid "Problem occurred during or after installation or removal of packages:"
 msgstr ""
 "Während oder nach der Installation/dem Entfernung von Paketen ist ein "
 "Problem aufgetreten:"
 
-#: src/solve-commit.cc:885
+#: src/solve-commit.cc:886
 msgid "Installation has completed with error."
 msgstr "Die Installation wurde mit einem Fehler abgeschlossen."
 
-#: src/solve-commit.cc:887
+#: src/solve-commit.cc:888
 #, boost-format
 msgid "You may run '%1%' to repair any dependency problems."
 msgstr "Mit '%1%' können Sie Abhängigkeitsprobleme beheben."
 
-#: src/solve-commit.cc:901
+#: src/solve-commit.cc:902
 msgid ""
 "One of the installed patches requires a reboot of your machine. Reboot as "
 "soon as possible."
@@ -6594,7 +6603,7 @@ msgstr ""
 "Einer der installierten Patches erfordert einen Neustart des Computers. "
 "Führen Sie den Neustart so bald als möglich aus."
 
-#: src/solve-commit.cc:909
+#: src/solve-commit.cc:910
 msgid ""
 "One of the installed patches affects the package manager itself. Run this "
 "command once more to install any other needed patches."
@@ -6602,7 +6611,7 @@ msgstr ""
 "Einer der installierten Patches betrifft den Paketmanager selbst. Führen Sie "
 "das Kommando erneut aus, um weitere erforderliche Patches zu installieren."
 
-#: src/solve-commit.cc:927
+#: src/solve-commit.cc:928
 msgid "Dependencies of all installed packages are satisfied."
 msgstr "Die Abhängigkeiten aller installierten Pakete sind berücksichtigt."
 
@@ -11528,8 +11537,8 @@ msgstr ""
 #~ "capability.\n"
 #~ "-C, --capability                Select packages by capability.\n"
 #~ "    --debug-solver              Create solver test case for debugging.\n"
-#~ "-R, --no-force-resolution       Do not force the solver to find a solution, "
-#~ "let it ask.\n"
+#~ "-R, --no-force-resolution       Do not force the solver to find a "
+#~ "solution, let it ask.\n"
 #~ "    --force-resolution          Force the solver to find a solution (even "
 #~ "an agressive).\n"
 #~ "-D, --dry-run                   Test the removal, do not actually "
