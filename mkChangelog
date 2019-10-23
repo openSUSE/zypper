@@ -100,7 +100,10 @@ function sameVersion() {
 }
 
 function getchanges() {
-  git log --no-merges --pretty=format:'- %s' "$LAST_RELEASE"..HEAD | grep -v 'po.tar.bz2\|Translated using Weblate\|weblate/master'
+  git log --no-merges --pretty=format:'@@%B' "$LAST_RELEASE"..HEAD	\
+  | awk '/^@@/{p=1}/^@@Translated using Weblate/{p=0}(p){print}'	\
+  | sed '/./{H;$!d};x;/./{s/ *\n */ /g;s/^ *//;s/ *$//;/[^]})!?:.]$/s/$/./;p};d'	\
+  | fold -s -w 66 | sed '/^@@/{s/^../- /;p;d};s/^/  /'
 }
 
 function newchangesentry() {
