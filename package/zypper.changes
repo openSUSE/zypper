@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Wed Oct 23 10:10:11 CEST 2019 - ma@suse.de
+
+- Add extended solver options to list-updates.
+  Since the update command supports tweaking the solver via CLI
+  options the list-updates command should allow the same
+  (bsc#1153351)
+- version 1.14.32
+
+-------------------------------------------------------------------
 Tue Oct 22 16:12:03 CEST 2019 - ma@suse.de
 
 - --solver-focus: Set the solvers general attitude when resolving
