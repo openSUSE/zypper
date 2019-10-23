@@ -21,8 +21,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-10-22 16:11+0200\n"
-"PO-Revision-Date: 2019-07-18 14:50+0000\n"
-"Last-Translator: Martin Vidner <mvidner@suse.com>\n"
+"PO-Revision-Date: 2019-10-23 10:53+0000\n"
+"Last-Translator: Aleš Kastner <alkas@volny.cz>\n"
 "Language-Team: Czech <https://l10n.opensuse.org/projects/zypper/master/cs/>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
@@ -4619,7 +4619,7 @@ msgstr "Tento příkaz lze použít pouze v příkazovém řádku programu zyppe
 #: src/commands/solveroptionset.cc:23
 #, boost-format
 msgid "Valid values: %1%"
-msgstr ""
+msgstr "Platné hodnoty: %1%"
 
 #: src/commands/solveroptionset.cc:35 src/commands/solveroptionset.cc:58
 msgid "Solver options"
@@ -4649,7 +4649,7 @@ msgstr "Nevynucovat na řešiteli, aby našel řešení, ale aby se zeptal."
 
 #: src/commands/solveroptionset.cc:63
 msgid "Set the solvers general attitude when resolving a job."
-msgstr ""
+msgstr "Při řešení úkolu stanovte všeobecný přístup řešitelů."
 
 #: src/commands/solveroptionset.cc:83
 msgid "Expert options"
