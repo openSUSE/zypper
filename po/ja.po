@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-10-22 16:11+0200\n"
-"PO-Revision-Date: 2019-07-19 00:51+0000\n"
+"PO-Revision-Date: 2019-10-25 00:53+0000\n"
 "Last-Translator: Yasuhiko Kamata <belphegor@belbel.or.jp>\n"
 "Language-Team: Japanese <https://l10n.opensuse.org/projects/zypper/master/ja/"
 ">\n"
@@ -4460,7 +4460,7 @@ msgstr "このコマンドは zypper シェル内でのみ意味を持ちます�
 #: src/commands/solveroptionset.cc:23
 #, boost-format
 msgid "Valid values: %1%"
-msgstr ""
+msgstr "正しい値: %1%"
 
 #: src/commands/solveroptionset.cc:35 src/commands/solveroptionset.cc:58
 msgid "Solver options"
@@ -4492,7 +4492,7 @@ msgstr "解決器に対して解決方法を見つけるよう強制せず、尋
 
 #: src/commands/solveroptionset.cc:63
 msgid "Set the solvers general attitude when resolving a job."
-msgstr ""
+msgstr "ジョブを解決する際、一般的な振る舞いで解決するように設定します。"
 
 #: src/commands/solveroptionset.cc:83
 msgid "Expert options"
