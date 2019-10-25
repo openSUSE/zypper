@@ -9,15 +9,16 @@ msgstr ""
 "Project-Id-Version: zypp.et\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-10-11 09:20+0200\n"
-"PO-Revision-Date: 2009-06-10 09:49+0300\n"
-"Last-Translator: Ain Vagula <avagula@gmail.com>\n"
-"Language-Team: Estonian <linux-ee@lists.eenet.ee>\n"
+"PO-Revision-Date: 2019-10-25 09:53+0000\n"
+"Last-Translator: Jaanus Ojangu <jaanus.ojangu@gmail.com>\n"
+"Language-Team: Estonian <https://l10n.opensuse.org/projects/libzypp/master/"
+"et/>\n"
 "Language: et\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms:  nplurals=2; plural=(n != 1);\n"
-"X-Generator: KBabel 1.11.4\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 3.6.1\n"
 
 #. dubious: Throw on malformed known types, otherwise log a warning.
 #: zypp/CheckSum.cc:136
@@ -1267,7 +1268,7 @@ msgstr "Varustab"
 
 #: zypp/Dep.cc:97
 msgid "Prerequires"
-msgstr ""
+msgstr "Eeltingimused"
 
 #: zypp/Dep.cc:98
 msgid "Requires"
@@ -1288,15 +1289,15 @@ msgstr "Soovitab"
 
 #: zypp/Dep.cc:102
 msgid "Suggests"
-msgstr ""
+msgstr "Soovitused"
 
 #: zypp/Dep.cc:103
 msgid "Enhances"
-msgstr ""
+msgstr "Parandused"
 
 #: zypp/Dep.cc:104
 msgid "Supplements"
-msgstr ""
+msgstr "Lisandid"
 
 #: zypp/ExternalProgram.cc:268
 #, fuzzy, c-format, boost-format
@@ -1311,7 +1312,7 @@ msgstr "Ei saa avada faili %1."
 #: zypp/ExternalProgram.cc:362
 #, c-format, boost-format
 msgid "Can't chroot to '%s' (%s)."
-msgstr ""
+msgstr "Ei saa chroot läbi viia '%s' (%s)."
 
 #: zypp/ExternalProgram.cc:372
 #, c-format, boost-format
@@ -1337,22 +1338,22 @@ msgstr ""
 #: zypp/ExternalProgram.cc:522
 #, c-format, boost-format
 msgid "Command exited with status %d."
-msgstr ""
+msgstr "Käsk lõpetati olekuga %d."
 
 #: zypp/ExternalProgram.cc:542
 #, c-format, boost-format
 msgid "Command was killed by signal %d (%s)."
-msgstr ""
+msgstr "Käsk lõpetati signaaliga %d (%s)."
 
 #: zypp/ExternalProgram.cc:547
 msgid "Command exited with unknown error."
-msgstr ""
+msgstr "Käsk lõpetas tundmatu veaga."
 
 #. TranslatorExplanation first %s is key name, second is keyring name
 #: zypp/KeyRing.cc:590
 #, c-format, boost-format
 msgid "Tried to import not existent key %s into keyring %s"
-msgstr ""
+msgstr "Prooviti võtmehoidjasse %s importida olematu võtme  %s"
 
 #: zypp/KeyRing.cc:596
 #, fuzzy
@@ -1832,17 +1833,17 @@ msgstr "Korsika"
 #. language code: cpe
 #: zypp/LanguageCode.cc:353
 msgid "Creoles and Pidgins, English-Based (Other)"
-msgstr ""
+msgstr "Kreoolid ja Pidginid, inglise keeles (muu)"
 
 #. language code: cpf
 #: zypp/LanguageCode.cc:355
 msgid "Creoles and Pidgins, French-Based (Other)"
-msgstr ""
+msgstr "Kreoolid ja Pidginid, prantsuse päritolu (muu)"
 
 #. language code: cpp
 #: zypp/LanguageCode.cc:357
 msgid "Creoles and Pidgins, Portuguese-Based (Other)"
-msgstr ""
+msgstr "Kreoolid ja Pidginid, Portugali põhine (muu)"
 
 #. language code: cre cr
 #: zypp/LanguageCode.cc:359
@@ -1868,7 +1869,7 @@ msgstr "Kašuubi"
 #. language code: cus
 #: zypp/LanguageCode.cc:367
 msgid "Cushitic (Other)"
-msgstr ""
+msgstr "Cushitic (muu)"
 
 #. language code: cze ces cs
 #: zypp/LanguageCode.cc:369 zypp/LanguageCode.cc:371
@@ -1928,7 +1929,7 @@ msgstr "Dogri"
 #. language code: dra
 #: zypp/LanguageCode.cc:393
 msgid "Dravidian (Other)"
-msgstr ""
+msgstr "Dravidian (muu)"
 
 #. language code: dsb
 #: zypp/LanguageCode.cc:395
@@ -2318,7 +2319,7 @@ msgstr "Iloko"
 #. language code: ina ia
 #: zypp/LanguageCode.cc:561
 msgid "Interlingua (International Auxiliary Language Association)"
-msgstr ""
+msgstr "Interlingua (rahvusvaheline abikeele assotsiatsioon)"
 
 #. language code: inc
 #: zypp/LanguageCode.cc:563
@@ -2368,7 +2369,7 @@ msgstr "Jaava"
 #. language code: jbo
 #: zypp/LanguageCode.cc:581
 msgid "Lojban"
-msgstr ""
+msgstr "Lojban - tehiskeel"
 
 #. language code: jpn ja
 #: zypp/LanguageCode.cc:583
@@ -2453,7 +2454,7 @@ msgstr "Khasi"
 #. language code: khi
 #: zypp/LanguageCode.cc:615
 msgid "Khoisan (Other)"
-msgstr ""
+msgstr "Khoisan - aafrika keeled (muu)"
 
 #. language code: khm km
 #: zypp/LanguageCode.cc:617
@@ -2698,7 +2699,7 @@ msgstr "Maoori"
 #. language code: map
 #: zypp/LanguageCode.cc:717
 msgid "Austronesian (Other)"
-msgstr ""
+msgstr "Austronesian - aasia keeled (muud)"
 
 #. language code: mar mr
 #: zypp/LanguageCode.cc:719
@@ -2753,7 +2754,7 @@ msgstr "Mitmesugused keeled"
 #. language code: mkh
 #: zypp/LanguageCode.cc:741
 msgid "Mon-Khmer (Other)"
-msgstr ""
+msgstr "Mon-Khmer (muud)"
 
 #. language code: mlg mg
 #: zypp/LanguageCode.cc:743
@@ -2883,7 +2884,7 @@ msgstr "Nepali"
 #. language code: new
 #: zypp/LanguageCode.cc:795
 msgid "Nepal Bhasa"
-msgstr ""
+msgstr "Nepal Bhasa keeled"
 
 #. language code: nia
 #: zypp/LanguageCode.cc:797
@@ -3742,13 +3743,13 @@ msgstr "'%1' pole olemas."
 #: zypp/PublicKey.cc:68
 #, boost-format
 msgid "expired: %1%"
-msgstr ""
+msgstr "aegunud: %1%"
 
 #. translators: an annotation to a gpg keys expiry date: "expires: 2111-04-12"
 #: zypp/PublicKey.cc:73
 #, boost-format
 msgid "expires: %1%"
-msgstr ""
+msgstr "aegub: %1%"
 
 #. translators: an annotation to a gpg keys expiry date
 #: zypp/PublicKey.cc:82
@@ -3759,7 +3760,7 @@ msgstr "'%1' pole olemas."
 #. translators: an annotation to a gpg keys expiry date
 #: zypp/PublicKey.cc:91
 msgid "(EXPIRED)"
-msgstr ""
+msgstr "(AEGUNUD)"
 
 #. translators: an annotation to a gpg keys expiry date
 #: zypp/PublicKey.cc:95
