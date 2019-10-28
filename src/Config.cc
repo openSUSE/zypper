@@ -415,9 +415,9 @@ std::vector<ZyppFlags::CommandGroup> Config::cliOptions()
           _("Do not abbreviate text in tables.")
           ).setDependencies( { "terse" } )
         ),
-        { "table-style", 's', ZyppFlags::RequiredArgument, ZyppFlags::GenericValueType( Table::defaultStyle ),
-              // translators: --table-style, -s
-              _("Table style (integer).")
+        { "table-style", 's', ZyppFlags::RequiredArgument, ZyppFlags::GenericValueType( Table::defaultStyle, ARG_INTEGER ),
+              // translators: --table-style, -s, %1% denotes the supported range of the integer argument (e.g. "1-11")
+              str::Format(_("Table style (%1%).") ) % ("0-"+str::numstring((int)TLS_End-1))
         },
         { "non-interactive", 'n', ZyppFlags::NoArgument, std::move( ZyppFlags::BoolType( &non_interactive, ZyppFlags::StoreTrue, non_interactive )
               .after( []( ){
