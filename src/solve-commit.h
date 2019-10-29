@@ -27,15 +27,25 @@ bool resolve(Zypper & zypper);
 
 
 /**
+ * Defines the \ref solve_and_commit commit policy.
+ * Usually \ref solve_and_commit only executes a commit if packages need to
+ * be installed or removed. With \a ForceCommit a commit is always executed.
+ */
+enum SolveAndCommitPolicy {
+  CommitAsNeeded,  //<< Execute commit only if required
+  ForceCommit      //<< Always execute commit, even if no packages need to be changed
+};
+
+/**
  * Runs solver on the pool, asks to choose solution of eventual problems
  * (when run interactively) and commits the result.
- * 
+ *
  * \param have_extra_deps ?
  * \return ZYPPER_EXIT_INF_REBOOT_NEEDED, ZYPPER_EXIT_INF_RESTART_NEEDED,
- *         or ZYPPER_EXIT_OK or ZYPPER_EXIT_ERR_ZYPP on zypp erorr. 
- *  
+ *         or ZYPPER_EXIT_OK or ZYPPER_EXIT_ERR_ZYPP on zypp error.
+ *
  */
-void solve_and_commit( Zypper & zypper , Summary::ViewOptions summaryOptions_r , DownloadMode dlMode_r );
+void solve_and_commit(Zypper & zypper , Summary::ViewOptions summaryOptions_r , DownloadMode dlMode_r, SolveAndCommitPolicy commitPolicy_r = CommitAsNeeded );
 
 
 #endif /*SOLVE_COMMIT_H_*/

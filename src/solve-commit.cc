@@ -556,7 +556,8 @@ static void show_update_messages( Zypper & zypper, const UpdateNotifications & m
  *  ZYPPER_EXIT_INF_REBOOT_NEEDED - if one of patches to be installed needs machine reboot,
  *  ZYPPER_EXIT_INF_RESTART_NEEDED - if one of patches to be installed needs package manager restart
  */
-void solve_and_commit (Zypper & zypper , Summary::ViewOptions summaryOptions_r, DownloadMode dlMode_r )
+
+void solve_and_commit (Zypper & zypper , Summary::ViewOptions summaryOptions_r, DownloadMode dlMode_r , SolveAndCommitPolicy commitPolicy_r )
 {
   bool need_another_solver_run = true;
   bool dryRunEtc = DryRunSettings::instance().isEnabled() || ( dlMode_r == DownloadOnly );
@@ -924,6 +925,10 @@ void solve_and_commit (Zypper & zypper , Summary::ViewOptions summaryOptions_r, 
     // noting to do
     else
     {
+      //used to make sure locales and metadata is written even if there is no packages to be installed/removed
+      if ( commitPolicy_r == ForceCommit )
+        God->commit( ZYppCommitPolicy() );
+
       if ( zypper.command() == ZypperCommand::VERIFY )
         zypper.out().info(_("Dependencies of all installed packages are satisfied.") );
       else
