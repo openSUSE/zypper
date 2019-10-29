@@ -499,12 +499,7 @@ void renderHelp( const std::vector<CommandGroup> &options )
           std::cout << ">";
       }
 
-      std::cout << "\t" << opt.help;
-
-      auto defVal = opt.value.defaultValue();
-      if ( defVal )
-        std::cout << " Default: " << *defVal;
-
+      std::cout << "\t" << opt.optionHelp();
       std::cout << std::endl;
 
     }
@@ -524,7 +519,7 @@ std::string CommandOption::optionHelp() const
 {
   std::string optHelpTxt = help;
   auto defVal = value.defaultValue();
-  if ( defVal )
+  if ( defVal && defVal->size() )
     optHelpTxt.append(" ").append(str::Format(("Default: %1%")) %*defVal );
   return optHelpTxt;
 }
