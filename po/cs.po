@@ -21,7 +21,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-10-29 11:30+0100\n"
-"PO-Revision-Date: 2019-10-23 10:53+0000\n"
+"PO-Revision-Date: 2019-10-29 19:53+0000\n"
 "Last-Translator: Aleš Kastner <alkas@volny.cz>\n"
 "Language-Team: Czech <https://l10n.opensuse.org/projects/zypper/master/cs/>\n"
 "Language: cs\n"
@@ -832,9 +832,9 @@ msgstr "Nezkracovat text v tabulkách."
 
 #. translators: --table-style, -s, %1% denotes the supported range of the integer argument (e.g. "1-11")
 #: src/Config.cc:420
-#, fuzzy, boost-format
+#, boost-format
 msgid "Table style (%1%)."
-msgstr "Styl tabulky (celé číslo)."
+msgstr "Styl tabulky (%1%)."
 
 #: src/Config.cc:424 src/commands/optionsets.cc:284
 msgid "Entering non-interactive mode."
@@ -4181,6 +4181,8 @@ msgid ""
 "Search for all packages that provide any of the provides of the package(s) "
 "matched by the input parameters."
 msgstr ""
+"Hledat všechny balíčky poskytující jakoukoli funkci z balíčků vyhovujících "
+"vstupním parametrům."
 
 #. translators: --requires-pkg
 #: src/commands/search/search.cc:178
@@ -4188,6 +4190,8 @@ msgid ""
 "Search for all packages that require any of the provides of the package(s) "
 "matched by the input parameters."
 msgstr ""
+"Hledat všechny balíčky vyžadující jakoukoli funkci z balíčků vyhovujících "
+"vstupním parametrům."
 
 #. translators: --recommends-pkg
 #: src/commands/search/search.cc:182
@@ -4195,6 +4199,8 @@ msgid ""
 "Search for all packages that recommend any of the provides of the package(s) "
 "matched by the input parameters."
 msgstr ""
+"Hledat všechny balíčky doporučující jakoukoli funkci z balíčků vyhovujících "
+"vstupním parametrům."
 
 #. translators: --supplements-pkg
 #: src/commands/search/search.cc:186
@@ -4202,6 +4208,8 @@ msgid ""
 "Search for all packages that supplement any of the provides of the "
 "package(s) matched by the input parameters."
 msgstr ""
+"Hledat všechny balíčky přidávající jakoukoli funkci z balíčků vyhovujících "
+"vstupním parametrům."
 
 #. translators: --conflicts-pkg
 #: src/commands/search/search.cc:190
@@ -4209,6 +4217,8 @@ msgid ""
 "Search for all packages that conflict with any of the package(s) matched by "
 "the input parameters."
 msgstr ""
+"Hledat všechny balíčky, které jsou v konfliktu s jakýmkoli z balíčků "
+"vyhovujících vstupním parametrům."
 
 #. translators: --obsoletes-pkg
 #: src/commands/search/search.cc:194
@@ -4216,6 +4226,8 @@ msgid ""
 "Search for all packages that obsolete any of the package(s) matched by the "
 "input parameters."
 msgstr ""
+"Hledat všechny balíčky nahrazující jakékoli zastaralé balíčky vyhovující "
+"vstupním parametrům."
 
 #. translators: --suggests-pkg
 #: src/commands/search/search.cc:198
@@ -4223,6 +4235,8 @@ msgid ""
 "Search for all packages that suggest any of the provides of the package(s) "
 "matched by the input parameters."
 msgstr ""
+"Hledat všechny balíčky navrhující jakoukoli funkci z balíčků vyhovujících "
+"vstupním parametrům."
 
 #. translators: -t, --type <TYPE>
 #: src/commands/search/search.cc:202
