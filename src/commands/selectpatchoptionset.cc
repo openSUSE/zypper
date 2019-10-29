@@ -51,7 +51,8 @@ std::vector<zypp::ZyppFlags::CommandGroup> SelectPatchOptionSet::options()
     };
 
     grp.conflictingOptions.insert( grp.conflictingOptions.end(), {
-      { "issue", "bugzilla", "bz", "cve" }
+      { "issue", "bugzilla" }, { "issue", "bz" }, { "issue", "cve" }
+
     });
   }
 
