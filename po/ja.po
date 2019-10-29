@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-10-29 11:30+0100\n"
-"PO-Revision-Date: 2019-10-25 00:53+0000\n"
+"PO-Revision-Date: 2019-10-29 13:53+0000\n"
 "Last-Translator: Yasuhiko Kamata <belphegor@belbel.or.jp>\n"
 "Language-Team: Japanese <https://l10n.opensuse.org/projects/zypper/master/ja/"
 ">\n"
@@ -821,9 +821,9 @@ msgstr "表内でのテキストの省略を行なわないようにします。
 
 #. translators: --table-style, -s, %1% denotes the supported range of the integer argument (e.g. "1-11")
 #: src/Config.cc:420
-#, fuzzy, boost-format
+#, boost-format
 msgid "Table style (%1%)."
-msgstr "表形式を指定します (整数) 。"
+msgstr "表形式を指定します (%1%) 。"
 
 #: src/Config.cc:424 src/commands/optionsets.cc:284
 msgid "Entering non-interactive mode."
@@ -4021,49 +4021,49 @@ msgstr "検索文字列を提案するパッケージを検索します。"
 msgid ""
 "Search for all packages that provide any of the provides of the package(s) "
 "matched by the input parameters."
-msgstr ""
+msgstr "入力パラメータに合致するパッケージの提供物のうち、いずれかを提供するパッケージを検索します。"
 
 #. translators: --requires-pkg
 #: src/commands/search/search.cc:178
 msgid ""
 "Search for all packages that require any of the provides of the package(s) "
 "matched by the input parameters."
-msgstr ""
+msgstr "入力パラメータに合致するパッケージの提供物のうち、いずれかを必要とするパッケージを検索します。"
 
 #. translators: --recommends-pkg
 #: src/commands/search/search.cc:182
 msgid ""
 "Search for all packages that recommend any of the provides of the package(s) "
 "matched by the input parameters."
-msgstr ""
+msgstr "入力パラメータに合致するパッケージの提供物のうち、いずれかを推奨するパッケージを検索します。"
 
 #. translators: --supplements-pkg
 #: src/commands/search/search.cc:186
 msgid ""
 "Search for all packages that supplement any of the provides of the "
 "package(s) matched by the input parameters."
-msgstr ""
+msgstr "入力パラメータに合致するパッケージの提供物のうち、いずれかを補足するパッケージを検索します。"
 
 #. translators: --conflicts-pkg
 #: src/commands/search/search.cc:190
 msgid ""
 "Search for all packages that conflict with any of the package(s) matched by "
 "the input parameters."
-msgstr ""
+msgstr "入力パラメータに合致するパッケージのうちのいずれかと矛盾するパッケージを検索します。"
 
 #. translators: --obsoletes-pkg
 #: src/commands/search/search.cc:194
 msgid ""
 "Search for all packages that obsolete any of the package(s) matched by the "
 "input parameters."
-msgstr ""
+msgstr "入力パラメータに合致するパッケージのうちのいずれかを廃止対象とするパッケージを検索します。"
 
 #. translators: --suggests-pkg
 #: src/commands/search/search.cc:198
 msgid ""
 "Search for all packages that suggest any of the provides of the package(s) "
 "matched by the input parameters."
-msgstr ""
+msgstr "入力パラメータに合致するパッケージの提供物のうち、いずれかを提案するパッケージを検索します。"
 
 #. translators: -t, --type <TYPE>
 #: src/commands/search/search.cc:202
