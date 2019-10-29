@@ -9,10 +9,10 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-10-29 11:30+0100\n"
-"PO-Revision-Date: 2019-10-22 19:53+0000\n"
+"PO-Revision-Date: 2019-10-29 19:53+0000\n"
 "Last-Translator: David Medina <medipas@gmail.com>\n"
-"Language-Team: Catalan <https://l10n.opensuse.org/projects/zypper/master/ca/"
-">\n"
+"Language-Team: Catalan <https://l10n.opensuse.org/projects/zypper/master/ca/>"
+"\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -822,9 +822,9 @@ msgstr "No abreugis text a les taules."
 
 #. translators: --table-style, -s, %1% denotes the supported range of the integer argument (e.g. "1-11")
 #: src/Config.cc:420
-#, fuzzy, boost-format
+#, boost-format
 msgid "Table style (%1%)."
-msgstr "Estil de taula (enter)."
+msgstr "Estil de taula (%1%)."
 
 #: src/Config.cc:424 src/commands/optionsets.cc:284
 msgid "Entering non-interactive mode."
@@ -1824,7 +1824,7 @@ msgstr[1] "Els %d pedaços següents requereixen un reinici del sistema:"
 msgid "The following package requires a system reboot:"
 msgid_plural "The following %d packages require a system reboot:"
 msgstr[0] "El paquet següent requereix un reinici del sistema:"
-msgstr[1] "Els paquets següents requereixen un reinici del sistema:"
+msgstr[1] "Els %d paquets següents requereixen un reinici del sistema:"
 
 #: src/Summary.cc:1374
 #, boost-format
@@ -4131,6 +4131,8 @@ msgid ""
 "Search for all packages that provide any of the provides of the package(s) "
 "matched by the input parameters."
 msgstr ""
+"Cerca tots els paquets que proporcionen qualsevol dels continguts "
+"proporcionats dels paquets que coincideixen amb els paràmetres introduïts."
 
 #. translators: --requires-pkg
 #: src/commands/search/search.cc:178
@@ -4138,6 +4140,8 @@ msgid ""
 "Search for all packages that require any of the provides of the package(s) "
 "matched by the input parameters."
 msgstr ""
+"Cerca tots els paquets que requereixen qualsevol dels continguts "
+"proporcionats dels paquets que coincideixen amb els paràmetres introduïts."
 
 #. translators: --recommends-pkg
 #: src/commands/search/search.cc:182
@@ -4145,6 +4149,8 @@ msgid ""
 "Search for all packages that recommend any of the provides of the package(s) "
 "matched by the input parameters."
 msgstr ""
+"Cerca tots els paquets que recomanen qualsevol dels continguts proporcionats "
+"dels paquets que coincideixen amb els paràmetres introduïts."
 
 #. translators: --supplements-pkg
 #: src/commands/search/search.cc:186
@@ -4152,6 +4158,8 @@ msgid ""
 "Search for all packages that supplement any of the provides of the "
 "package(s) matched by the input parameters."
 msgstr ""
+"Cerca tots els paquets que complementen qualsevol dels continguts "
+"proporcionats dels paquets que coincideixen amb els paràmetres introduïts."
 
 #. translators: --conflicts-pkg
 #: src/commands/search/search.cc:190
@@ -4159,6 +4167,8 @@ msgid ""
 "Search for all packages that conflict with any of the package(s) matched by "
 "the input parameters."
 msgstr ""
+"Cerca tots els paquets que tenen conflicte amb qualsevol dels paquets que "
+"coincideixen amb els paràmetres introduïts."
 
 #. translators: --obsoletes-pkg
 #: src/commands/search/search.cc:194
@@ -4166,6 +4176,8 @@ msgid ""
 "Search for all packages that obsolete any of the package(s) matched by the "
 "input parameters."
 msgstr ""
+"Cerca tots els paquets que fan obsolet qualsevol dels paquets que "
+"coincideixen amb els paràmetres introduïts."
 
 #. translators: --suggests-pkg
 #: src/commands/search/search.cc:198
@@ -4173,6 +4185,8 @@ msgid ""
 "Search for all packages that suggest any of the provides of the package(s) "
 "matched by the input parameters."
 msgstr ""
+"Cerca tots els paquets que suggereixen qualsevol dels continguts "
+"proporcionats dels paquets que coincideixen amb els paràmetres introduïts."
 
 #. translators: -t, --type <TYPE>
 #: src/commands/search/search.cc:202
