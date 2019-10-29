@@ -39,7 +39,7 @@ namespace zypp
   //
   /** Interim helper class to collect global options and settings.
    * Use it to avoid hardcoded values and calls to getZYpp() just
-   * to retrieve some value like architecture, languages or tmppath.
+   * to retrieve some value like architecture, languages or temppath.
    *
    * It reads /etc/zypp/zypp.conf, the filename can be overridden by
    * setting the ZYPP_CONF environment variable to a different file.
@@ -74,7 +74,7 @@ namespace zypp
       Pathname systemRoot() const;
 
       /** The RepoManager root directory.
-       *  Returns the same as \sa systemRoot() if not explicitely set.
+       *  Returns the same as \ref systemRoot() if not explicitly set.
        */
       Pathname repoManagerRoot() const;
 
@@ -94,7 +94,7 @@ namespace zypp
       /** Override the zypp system architecture.
        * This is useful for test scenarious. <b>But be warned</b>, zypp does
        * not expect the system architecture to change at runtime. So
-       * set it at the verry beginning before you acess any other
+       * set it at the very beginning before you access any other
        * zypp component.
       */
       void setSystemArchitecture( const Arch & arch_r );
@@ -104,7 +104,7 @@ namespace zypp
       { setSystemArchitecture( defaultSystemArchitecture() ); }
 
     public:
-      /** The autodetected prefered locale for translated texts.
+      /** The autodetected preferred locale for translated texts.
        */
       static Locale defaultTextLocale();
 
@@ -112,7 +112,7 @@ namespace zypp
        */
       Locale textLocale() const;
 
-      /** Set the prefered locale for translated texts. */
+      /** Set the preferred locale for translated texts. */
       void setTextLocale( const Locale & locale_r );
 
       /** Reset the locale for translated texts to the default. */
