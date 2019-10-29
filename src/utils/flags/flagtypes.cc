@@ -175,7 +175,10 @@ Value PathNameType( filesystem::Pathname &target, const boost::optional<std::str
 Value IssueSetType(std::set<Issue> &target_r, const std::string &issueType_r, std::string hint_r )
 {
   return Value (
-    noDefaultValue,
+    [](){
+      //in case the default value is given a Issue with anyID is pushed into the result set
+      return std::string ();
+    },
     [ &target_r, issueType_r ]( const CommandOption &opt, const boost::optional<std::string> &in ){
 
       std::vector<std::string> issueIds;
