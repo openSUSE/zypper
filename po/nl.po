@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper.nl\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-22 16:11+0200\n"
+"POT-Creation-Date: 2019-10-29 11:30+0100\n"
 "PO-Revision-Date: 2019-10-23 10:53+0000\n"
 "Last-Translator: Freek de Kruijf <freek@opensuse.org>\n"
 "Language-Team: Dutch <https://l10n.opensuse.org/projects/zypper/master/nl/>\n"
@@ -836,8 +836,9 @@ msgstr "of kleuren in de uitvoer worden gebruikt als tty het ondersteunt."
 msgid "Do not abbreviate text in tables."
 msgstr "Geen afkortingen in tabellen."
 
-#. translators: --table-style, -s
+#. translators: --table-style, -s, %1% denotes the supported range of the integer argument (e.g. "1-11")
 #: src/Config.cc:420
+#, fuzzy, boost-format
 msgid "Table style (%1%)."
 msgstr "Tabelstijl (geheel getal)."
 
@@ -2694,8 +2695,8 @@ msgstr[1] "%lu vergrendelingen verwijderd."
 #: src/commands/locks/list.cc:135 src/commands/repos/list.cc:41
 #: src/commands/repos/list.cc:223 src/commands/services/list.cc:105
 #: src/info.cc:58 src/info.cc:449 src/info.cc:693 src/locales.cc:124
-#: src/search.cc:48 src/search.cc:196 src/search.cc:343 src/search.cc:487
-#: src/search.cc:551 src/update.cc:727 src/utils/misc.cc:228
+#: src/search.cc:48 src/search.cc:228 src/search.cc:375 src/search.cc:519
+#: src/search.cc:583 src/update.cc:727 src/utils/misc.cc:228
 msgid "Name"
 msgstr "Naam"
 
@@ -2707,14 +2708,14 @@ msgstr "Overeenkomsten"
 #. translators: type (general header)
 #: src/commands/locks/list.cc:138 src/commands/repos/list.cc:52
 #: src/commands/repos/list.cc:261 src/commands/services/list.cc:114
-#: src/info.cc:450 src/search.cc:50 src/search.cc:199
+#: src/info.cc:450 src/search.cc:50 src/search.cc:231
 msgid "Type"
 msgstr "Type"
 
 #. translators: property name; short; used like "Name: value"
 #. translators: package's repository (header)
 #: src/commands/locks/list.cc:138 src/info.cc:56 src/search.cc:56
-#: src/search.cc:345 src/search.cc:486 src/search.cc:547 src/update.cc:724
+#: src/search.cc:377 src/search.cc:518 src/search.cc:579 src/update.cc:724
 #: src/utils/misc.cc:227
 msgid "Repository"
 msgstr "Opslagruimte"
@@ -4099,28 +4100,28 @@ msgstr ""
 "op afstand."
 
 #. translators: command summary: search, se
-#: src/commands/search/search.cc:73
+#: src/commands/search/search.cc:86
 msgid "Search for packages matching a pattern."
 msgstr "Zoek naar pakketten die met een patroon overeenkomen."
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/commands/search/search.cc:81
+#: src/commands/search/search.cc:94
 msgid "search (se) [OPTIONS] [QUERYSTRING] ..."
 msgstr "search (se) [opties] [zoekterm] ..."
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/commands/search/search.cc:86
+#: src/commands/search/search.cc:99
 msgid "patch-search [OPTIONS] [QUERYSTRING...]"
 msgstr "patch-search [opties] [zoekterm...]"
 
 #. translators: command description
-#: src/commands/search/search.cc:95
+#: src/commands/search/search.cc:108
 msgid "Search for packages matching any of the given search strings."
 msgstr ""
 "Naar pakketten zoeken die overeenkomen met elk van de opgegeven zoektermen."
 
 #. translators: command description
-#: src/commands/search/search.cc:97
+#: src/commands/search/search.cc:110
 msgid ""
 "* and ? wildcards can also be used within search strings. If a search string "
 "is enclosed in '/', it's interpreted as a regular expression."
@@ -4130,67 +4131,116 @@ msgstr ""
 "reguliere expressie."
 
 #. translators: command description
-#: src/commands/search/search.cc:102
+#: src/commands/search/search.cc:115
 msgid "Search for patches matching given search strings."
 msgstr "Zoek naar patches die overeenkomen met de gegeven zoektermen."
 
 #. translators: --match-substrings
-#: src/commands/search/search.cc:113
+#: src/commands/search/search.cc:126
 msgid "Search for a match to partial words (default)."
 msgstr "Overeenkomsten kunnen delen van woorden zijn (standaard)."
 
 #. translators: --match-words
-#: src/commands/search/search.cc:117
+#: src/commands/search/search.cc:130
 msgid "Search for a match to whole words only."
 msgstr "Overeenkomsten kunnen alleen hele woorden zijn."
 
 #. translators: -x, --match-exact
-#: src/commands/search/search.cc:121
+#: src/commands/search/search.cc:134
 msgid "Searches for an exact match of the search strings."
 msgstr "Naar een exacte overeenkomst met de zoektermen zoeken."
 
 #. translators: --provides
-#: src/commands/search/search.cc:133
+#: src/commands/search/search.cc:146
 msgid "Search for packages which provide the search strings."
 msgstr "zoek naar pakketten die de zoektermen leveren."
 
 #. translators: --requires
-#: src/commands/search/search.cc:137
+#: src/commands/search/search.cc:150
 msgid "Search for packages which require the search strings."
 msgstr "zoek naar pakketten die de zoektermen vereisen."
 
 #. translators: --recommends
-#: src/commands/search/search.cc:141
+#: src/commands/search/search.cc:154
 msgid "Search for packages which recommend the search strings."
 msgstr "zoek naar pakketten die de zoektermen aanbevelen."
 
 #. translators: --supplements
-#: src/commands/search/search.cc:145
+#: src/commands/search/search.cc:158
 msgid "Search for packages which supplement the search strings."
 msgstr "Naar pakketten zoeken die de zoektekenreeksen aanvullen."
 
 #. translators: --conflicts
-#: src/commands/search/search.cc:149
+#: src/commands/search/search.cc:162
 msgid "Search packages conflicting with search strings."
 msgstr "zoek naar pakketten die in conflict zijn met de zoektermen."
 
 #. translators: --obsoletes
-#: src/commands/search/search.cc:153
+#: src/commands/search/search.cc:166
 msgid "Search for packages which obsolete the search strings."
 msgstr "zoek naar pakketten die de zoektermen verouderen."
 
 #. translators: --suggests
-#: src/commands/search/search.cc:157
+#: src/commands/search/search.cc:170
 msgid "Search for packages which suggest the search strings."
 msgstr "zoek welke pakketten gesuggereerd worden door de zoektermen."
 
+#. translators: --provides-pkg
+#: src/commands/search/search.cc:174
+msgid ""
+"Search for all packages that provide any of the provides of the package(s) "
+"matched by the input parameters."
+msgstr ""
+
+#. translators: --requires-pkg
+#: src/commands/search/search.cc:178
+msgid ""
+"Search for all packages that require any of the provides of the package(s) "
+"matched by the input parameters."
+msgstr ""
+
+#. translators: --recommends-pkg
+#: src/commands/search/search.cc:182
+msgid ""
+"Search for all packages that recommend any of the provides of the package(s) "
+"matched by the input parameters."
+msgstr ""
+
+#. translators: --supplements-pkg
+#: src/commands/search/search.cc:186
+msgid ""
+"Search for all packages that supplement any of the provides of the "
+"package(s) matched by the input parameters."
+msgstr ""
+
+#. translators: --conflicts-pkg
+#: src/commands/search/search.cc:190
+msgid ""
+"Search for all packages that conflict with any of the package(s) matched by "
+"the input parameters."
+msgstr ""
+
+#. translators: --obsoletes-pkg
+#: src/commands/search/search.cc:194
+msgid ""
+"Search for all packages that obsolete any of the package(s) matched by the "
+"input parameters."
+msgstr ""
+
+#. translators: --suggests-pkg
+#: src/commands/search/search.cc:198
+msgid ""
+"Search for all packages that suggest any of the provides of the package(s) "
+"matched by the input parameters."
+msgstr ""
+
 #. translators: -t, --type <TYPE>
-#: src/commands/search/search.cc:161
+#: src/commands/search/search.cc:202
 msgid "Search only for packages of the specified type."
 msgstr "Alleen naar pakketten van het opgegeven type zoeken."
 
 #. translators: -n, --name
-#: src/commands/search/search.cc:165
+#: src/commands/search/search.cc:206
 msgid ""
 "Useful together with dependency options, otherwise searching in package name "
 "is default."
@@ -4199,28 +4249,28 @@ msgstr ""
 "standaard."
 
 #. translators: -f, --file-list
-#: src/commands/search/search.cc:169
+#: src/commands/search/search.cc:210
 msgid "Search for a match in the file list of packages."
 msgstr "zoeken naar een overeenkomst in de lijst met bestanden van pakketten."
 
 #. translators: -d, --search-descriptions
-#: src/commands/search/search.cc:178
+#: src/commands/search/search.cc:221
 msgid "Search also in package summaries and descriptions."
 msgstr "Ook in samenvattingen en omschrijvingen zoeken."
 
 #. translators: -C, --case-sensitive
-#: src/commands/search/search.cc:182
+#: src/commands/search/search.cc:225
 msgid "Perform case-sensitive search."
 msgstr "Hoofdlettergevoelige zoekopdracht uitvoeren."
 
 #. translators: -s, --details
-#: src/commands/search/search.cc:191
+#: src/commands/search/search.cc:234
 msgid "Show each available version in each repository on a separate line."
 msgstr ""
 "Elke beschikbare versie in elke opslagruimte tonen op een aparte regel."
 
 #. translators: -v, --verbose
-#: src/commands/search/search.cc:195
+#: src/commands/search/search.cc:238
 msgid ""
 "Like --details, with additional information where the search has matched "
 "(useful for search in dependencies)."
@@ -4228,25 +4278,25 @@ msgstr ""
 "Zoals --details, met extra informatie waar de zoekopdracht overeenkwam "
 "(nuttig bij zoeken in afhankelijkheden)."
 
-#: src/commands/search/search.cc:289 src/repos.cc:782
+#: src/commands/search/search.cc:332 src/repos.cc:782
 #, c-format, boost-format
 msgid "Specified repository '%s' is disabled."
 msgstr "Gespecificeerde opslagruimte '%s' is uitgeschakeld."
 
 #. translators: empty search result message
-#: src/commands/search/search.cc:422
+#: src/commands/search/search.cc:510
 msgid "No matching items found."
 msgstr "Geen overeenkomstige items gevonden."
 
-#: src/commands/search/search.cc:457
+#: src/commands/search/search.cc:547
 msgid "Problem occurred initializing or executing the search query"
 msgstr "Probleem bij het initialiseren of uitvoeren van de zoekopdracht"
 
-#: src/commands/search/search.cc:458
+#: src/commands/search/search.cc:548
 msgid "See the above message for a hint."
 msgstr "Zie bovenstaande melding voor een hint."
 
-#: src/commands/search/search.cc:459 src/repos.cc:991
+#: src/commands/search/search.cc:549 src/repos.cc:991
 msgid "Running 'zypper refresh' as root might resolve the problem."
 msgstr ""
 "Het draaien van 'zypper refresh' als root zou het probleem op kunnen lossen."
@@ -4690,7 +4740,8 @@ msgstr ""
 
 #: src/commands/solveroptionset.cc:63
 msgid "Set the solvers general attitude when resolving a job."
-msgstr "Stel de algemene houding van de oplossers in bij oplossen van een taak."
+msgstr ""
+"Stel de algemene houding van de oplossers in bij oplossen van een taak."
 
 #: src/commands/solveroptionset.cc:83
 msgid "Expert options"
@@ -5258,14 +5309,14 @@ msgstr "%s is ouder dan %s"
 #. translators: property name; short; used like "Name: value"
 #. translators: Table column header
 #. translators: package version (header)
-#: src/info.cc:60 src/info.cc:694 src/search.cc:52 src/search.cc:344
-#: src/search.cc:488 src/search.cc:552
+#: src/info.cc:60 src/info.cc:694 src/search.cc:52 src/search.cc:376
+#: src/search.cc:520 src/search.cc:584
 msgid "Version"
 msgstr "Versie"
 
 #. translators: property name; short; used like "Name: value"
 #. translators: package architecture (header)
-#: src/info.cc:62 src/search.cc:54 src/search.cc:489 src/search.cc:553
+#: src/info.cc:62 src/search.cc:54 src/search.cc:521 src/search.cc:585
 #: src/update.cc:733
 msgid "Arch"
 msgstr "Arch"
@@ -5277,7 +5328,7 @@ msgstr "Leverancier"
 
 #. translators: property name; short; used like "Name: value"
 #. translators: package summary (header)
-#: src/info.cc:70 src/search.cc:198 src/utils/misc.cc:233 src/utils/misc.cc:274
+#: src/info.cc:70 src/search.cc:230 src/utils/misc.cc:233 src/utils/misc.cc:274
 msgid "Summary"
 msgstr "Samenvatting"
 
@@ -5383,13 +5434,13 @@ msgstr "(leeg)"
 #. translators: S for installed Status
 #. TranslatorExplanation S stands for Status
 #: src/info.cc:448 src/info.cc:692 src/locales.cc:122 src/search.cc:46
-#: src/search.cc:195 src/search.cc:342 src/search.cc:485 src/search.cc:546
+#: src/search.cc:227 src/search.cc:374 src/search.cc:517 src/search.cc:578
 #: src/update.cc:722
 msgid "S"
 msgstr "S"
 
 #. translators: Table column header
-#: src/info.cc:451 src/search.cc:346
+#: src/info.cc:451 src/search.cc:378
 msgid "Dependency"
 msgstr "Afhankelijkheden"
 
@@ -5397,11 +5448,11 @@ msgstr "Afhankelijkheden"
 msgid "Required"
 msgstr "Vereist"
 
-#: src/info.cc:461 src/info.cc:470 src/search.cc:282
+#: src/info.cc:461 src/info.cc:470 src/search.cc:314
 msgid "Recommended"
 msgstr "Aanbevolen"
 
-#: src/info.cc:467 src/info.cc:470 src/search.cc:284
+#: src/info.cc:467 src/info.cc:470 src/search.cc:316
 msgid "Suggested"
 msgstr "Voorgesteld"
 
@@ -5426,7 +5477,7 @@ msgid "Flavor"
 msgstr "Smaak"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:555 src/search.cc:554
+#: src/info.cc:555 src/search.cc:586
 msgid "Is Base"
 msgstr "In de basis"
 
@@ -6217,26 +6268,26 @@ msgstr "Cache van gewone RPM-bestanden"
 msgid "System Packages"
 msgstr "Systeempakketten"
 
-#: src/search.cc:300
+#: src/search.cc:332
 msgid "No needed patches found."
 msgstr "Geen noodzakelijke patches gevonden."
 
-#: src/search.cc:380
+#: src/search.cc:412
 msgid "No patterns found."
 msgstr "Geen patronen gevonden."
 
-#: src/search.cc:479
+#: src/search.cc:511
 msgid "No packages found."
 msgstr "Geen pakketten gevonden."
 
 # inlognaam/gebruikersnaam
 #. translators: used in products. Internal Name is the unix name of the
 #. product whereas simply Name is the official full name of the product.
-#: src/search.cc:550
+#: src/search.cc:582
 msgid "Internal Name"
 msgstr "Interne naam"
 
-#: src/search.cc:628
+#: src/search.cc:660
 msgid "No products found."
 msgstr "Geen producten gevonden."
 

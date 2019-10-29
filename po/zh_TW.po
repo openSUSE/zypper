@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-22 16:11+0200\n"
+"POT-Creation-Date: 2019-10-29 11:30+0100\n"
 "PO-Revision-Date: 2019-10-12 04:53+0000\n"
 "Last-Translator: Yi-Jyun Pan <pan93412@gmail.com>\n"
 "Language-Team: Chinese (Taiwan) <https://l10n.opensuse.org/projects/zypper/"
@@ -788,8 +788,9 @@ msgstr "若 tty 支援，設定是否顯示顏色在訊息中。"
 msgid "Do not abbreviate text in tables."
 msgstr "在表格中不要使用縮寫文字。"
 
-#. translators: --table-style, -s
+#. translators: --table-style, -s, %1% denotes the supported range of the integer argument (e.g. "1-11")
 #: src/Config.cc:420
+#, fuzzy, boost-format
 msgid "Table style (%1%)."
 msgstr "設定表格風格 (整數)。"
 
@@ -2436,8 +2437,8 @@ msgstr[0] "移除 %lu 鎖定。"
 #: src/commands/locks/list.cc:135 src/commands/repos/list.cc:41
 #: src/commands/repos/list.cc:223 src/commands/services/list.cc:105
 #: src/info.cc:58 src/info.cc:449 src/info.cc:693 src/locales.cc:124
-#: src/search.cc:48 src/search.cc:196 src/search.cc:343 src/search.cc:487
-#: src/search.cc:551 src/update.cc:727 src/utils/misc.cc:228
+#: src/search.cc:48 src/search.cc:228 src/search.cc:375 src/search.cc:519
+#: src/search.cc:583 src/update.cc:727 src/utils/misc.cc:228
 msgid "Name"
 msgstr "名稱"
 
@@ -2449,14 +2450,14 @@ msgstr "符合"
 #. translators: type (general header)
 #: src/commands/locks/list.cc:138 src/commands/repos/list.cc:52
 #: src/commands/repos/list.cc:261 src/commands/services/list.cc:114
-#: src/info.cc:450 src/search.cc:50 src/search.cc:199
+#: src/info.cc:450 src/search.cc:50 src/search.cc:231
 msgid "Type"
 msgstr "類型"
 
 #. translators: property name; short; used like "Name: value"
 #. translators: package's repository (header)
 #: src/commands/locks/list.cc:138 src/info.cc:56 src/search.cc:56
-#: src/search.cc:345 src/search.cc:486 src/search.cc:547 src/update.cc:724
+#: src/search.cc:377 src/search.cc:518 src/search.cc:579 src/update.cc:724
 #: src/utils/misc.cc:227
 msgid "Repository"
 msgstr "套件庫"
@@ -3765,27 +3766,27 @@ msgid "Run '%1%' to search in not yet activated remote resources."
 msgstr "執行「%1%」以搜尋尚未啟動的遠端資源。"
 
 #. translators: command summary: search, se
-#: src/commands/search/search.cc:73
+#: src/commands/search/search.cc:86
 msgid "Search for packages matching a pattern."
 msgstr "搜尋符合樣式的套件。"
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/commands/search/search.cc:81
+#: src/commands/search/search.cc:94
 msgid "search (se) [OPTIONS] [QUERYSTRING] ..."
 msgstr "search (se) [選項] [搜尋字串]..."
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/commands/search/search.cc:86
+#: src/commands/search/search.cc:99
 msgid "patch-search [OPTIONS] [QUERYSTRING...]"
 msgstr "patch-search [選項] [查詢字串...]"
 
 #. translators: command description
-#: src/commands/search/search.cc:95
+#: src/commands/search/search.cc:108
 msgid "Search for packages matching any of the given search strings."
 msgstr "搜尋符合指定搜尋字串的套件。"
 
 #. translators: command description
-#: src/commands/search/search.cc:97
+#: src/commands/search/search.cc:110
 msgid ""
 "* and ? wildcards can also be used within search strings. If a search string "
 "is enclosed in '/', it's interpreted as a regular expression."
@@ -3794,119 +3795,168 @@ msgstr ""
 "規表示式。"
 
 #. translators: command description
-#: src/commands/search/search.cc:102
+#: src/commands/search/search.cc:115
 msgid "Search for patches matching given search strings."
 msgstr "搜尋符合給定搜尋字串的修補程式。"
 
 #. translators: --match-substrings
-#: src/commands/search/search.cc:113
+#: src/commands/search/search.cc:126
 msgid "Search for a match to partial words (default)."
 msgstr "搜尋字串符合結果可以是詞語的一部分 (預設值)。"
 
 #. translators: --match-words
-#: src/commands/search/search.cc:117
+#: src/commands/search/search.cc:130
 msgid "Search for a match to whole words only."
 msgstr "搜尋字串符合結果只能是完整的詞語。"
 
 #. translators: -x, --match-exact
-#: src/commands/search/search.cc:121
+#: src/commands/search/search.cc:134
 msgid "Searches for an exact match of the search strings."
 msgstr "搜尋完全相符的套件名稱。"
 
 #. translators: --provides
-#: src/commands/search/search.cc:133
+#: src/commands/search/search.cc:146
 msgid "Search for packages which provide the search strings."
 msgstr "搜尋提供搜尋字串的套件。"
 
 #. translators: --requires
-#: src/commands/search/search.cc:137
+#: src/commands/search/search.cc:150
 msgid "Search for packages which require the search strings."
 msgstr "搜尋需要搜尋字串的套件。"
 
 #. translators: --recommends
-#: src/commands/search/search.cc:141
+#: src/commands/search/search.cc:154
 msgid "Search for packages which recommend the search strings."
 msgstr "搜尋推薦搜尋字串的套件。"
 
 #. translators: --supplements
-#: src/commands/search/search.cc:145
+#: src/commands/search/search.cc:158
 msgid "Search for packages which supplement the search strings."
 msgstr "搜尋補充搜尋字串的套件。"
 
 #. translators: --conflicts
-#: src/commands/search/search.cc:149
+#: src/commands/search/search.cc:162
 msgid "Search packages conflicting with search strings."
 msgstr "搜尋與搜尋字串衝突的套件。"
 
 #. translators: --obsoletes
-#: src/commands/search/search.cc:153
+#: src/commands/search/search.cc:166
 msgid "Search for packages which obsolete the search strings."
 msgstr "搜尋哪個套件取代了搜尋字串。"
 
 #. translators: --suggests
-#: src/commands/search/search.cc:157
+#: src/commands/search/search.cc:170
 msgid "Search for packages which suggest the search strings."
 msgstr "搜尋建議搜尋字串的套件。"
 
+#. translators: --provides-pkg
+#: src/commands/search/search.cc:174
+msgid ""
+"Search for all packages that provide any of the provides of the package(s) "
+"matched by the input parameters."
+msgstr ""
+
+#. translators: --requires-pkg
+#: src/commands/search/search.cc:178
+msgid ""
+"Search for all packages that require any of the provides of the package(s) "
+"matched by the input parameters."
+msgstr ""
+
+#. translators: --recommends-pkg
+#: src/commands/search/search.cc:182
+msgid ""
+"Search for all packages that recommend any of the provides of the package(s) "
+"matched by the input parameters."
+msgstr ""
+
+#. translators: --supplements-pkg
+#: src/commands/search/search.cc:186
+msgid ""
+"Search for all packages that supplement any of the provides of the "
+"package(s) matched by the input parameters."
+msgstr ""
+
+#. translators: --conflicts-pkg
+#: src/commands/search/search.cc:190
+msgid ""
+"Search for all packages that conflict with any of the package(s) matched by "
+"the input parameters."
+msgstr ""
+
+#. translators: --obsoletes-pkg
+#: src/commands/search/search.cc:194
+msgid ""
+"Search for all packages that obsolete any of the package(s) matched by the "
+"input parameters."
+msgstr ""
+
+#. translators: --suggests-pkg
+#: src/commands/search/search.cc:198
+msgid ""
+"Search for all packages that suggest any of the provides of the package(s) "
+"matched by the input parameters."
+msgstr ""
+
 #. translators: -t, --type <TYPE>
-#: src/commands/search/search.cc:161
+#: src/commands/search/search.cc:202
 msgid "Search only for packages of the specified type."
 msgstr "僅搜尋指定類型的套件。"
 
 #. translators: -n, --name
-#: src/commands/search/search.cc:165
+#: src/commands/search/search.cc:206
 msgid ""
 "Useful together with dependency options, otherwise searching in package name "
 "is default."
 msgstr "可和相依性選項合併使用，否則 預設搜尋套件名稱。"
 
 #. translators: -f, --file-list
-#: src/commands/search/search.cc:169
+#: src/commands/search/search.cc:210
 msgid "Search for a match in the file list of packages."
 msgstr "在檔案清單中搜尋符合的套件。"
 
 #. translators: -d, --search-descriptions
-#: src/commands/search/search.cc:178
+#: src/commands/search/search.cc:221
 msgid "Search also in package summaries and descriptions."
 msgstr "也搜尋套件摘要和描述。"
 
 #. translators: -C, --case-sensitive
-#: src/commands/search/search.cc:182
+#: src/commands/search/search.cc:225
 msgid "Perform case-sensitive search."
 msgstr "執行區分大小寫的搜尋。"
 
 #. translators: -s, --details
-#: src/commands/search/search.cc:191
+#: src/commands/search/search.cc:234
 msgid "Show each available version in each repository on a separate line."
 msgstr "每個套件庫中每個可用的版本 單獨顯示在一行。"
 
 #. translators: -v, --verbose
-#: src/commands/search/search.cc:195
+#: src/commands/search/search.cc:238
 msgid ""
 "Like --details, with additional information where the search has matched "
 "(useful for search in dependencies)."
 msgstr ""
 "與 --details 相似，不過會額外顯示相符項的 位置資訊 (對搜尋相依套件很有用)。"
 
-#: src/commands/search/search.cc:289 src/repos.cc:782
+#: src/commands/search/search.cc:332 src/repos.cc:782
 #, c-format, boost-format
 msgid "Specified repository '%s' is disabled."
 msgstr "指定套件庫 '%s' 已停用。"
 
 #. translators: empty search result message
-#: src/commands/search/search.cc:422
+#: src/commands/search/search.cc:510
 msgid "No matching items found."
 msgstr "找不到符合項目。"
 
-#: src/commands/search/search.cc:457
+#: src/commands/search/search.cc:547
 msgid "Problem occurred initializing or executing the search query"
 msgstr "初始化或執行搜尋查詢時出現問題"
 
-#: src/commands/search/search.cc:458
+#: src/commands/search/search.cc:548
 msgid "See the above message for a hint."
 msgstr "請檢視上面的訊息以獲得提示。"
 
-#: src/commands/search/search.cc:459 src/repos.cc:991
+#: src/commands/search/search.cc:549 src/repos.cc:991
 msgid "Running 'zypper refresh' as root might resolve the problem."
 msgstr "以 root 執行 'zypper refresh' 也許可以解決這個問題。"
 
@@ -4840,14 +4890,14 @@ msgstr "%s 比 %s 還舊"
 #. translators: property name; short; used like "Name: value"
 #. translators: Table column header
 #. translators: package version (header)
-#: src/info.cc:60 src/info.cc:694 src/search.cc:52 src/search.cc:344
-#: src/search.cc:488 src/search.cc:552
+#: src/info.cc:60 src/info.cc:694 src/search.cc:52 src/search.cc:376
+#: src/search.cc:520 src/search.cc:584
 msgid "Version"
 msgstr "版本"
 
 #. translators: property name; short; used like "Name: value"
 #. translators: package architecture (header)
-#: src/info.cc:62 src/search.cc:54 src/search.cc:489 src/search.cc:553
+#: src/info.cc:62 src/search.cc:54 src/search.cc:521 src/search.cc:585
 #: src/update.cc:733
 msgid "Arch"
 msgstr "結構"
@@ -4859,7 +4909,7 @@ msgstr "供應商"
 
 #. translators: property name; short; used like "Name: value"
 #. translators: package summary (header)
-#: src/info.cc:70 src/search.cc:198 src/utils/misc.cc:233 src/utils/misc.cc:274
+#: src/info.cc:70 src/search.cc:230 src/utils/misc.cc:233 src/utils/misc.cc:274
 msgid "Summary"
 msgstr "摘要"
 
@@ -4962,13 +5012,13 @@ msgstr "(空)"
 #. translators: S for installed Status
 #. TranslatorExplanation S stands for Status
 #: src/info.cc:448 src/info.cc:692 src/locales.cc:122 src/search.cc:46
-#: src/search.cc:195 src/search.cc:342 src/search.cc:485 src/search.cc:546
+#: src/search.cc:227 src/search.cc:374 src/search.cc:517 src/search.cc:578
 #: src/update.cc:722
 msgid "S"
 msgstr "S"
 
 #. translators: Table column header
-#: src/info.cc:451 src/search.cc:346
+#: src/info.cc:451 src/search.cc:378
 msgid "Dependency"
 msgstr "相依性"
 
@@ -4976,11 +5026,11 @@ msgstr "相依性"
 msgid "Required"
 msgstr "需要"
 
-#: src/info.cc:461 src/info.cc:470 src/search.cc:282
+#: src/info.cc:461 src/info.cc:470 src/search.cc:314
 msgid "Recommended"
 msgstr "推薦"
 
-#: src/info.cc:467 src/info.cc:470 src/search.cc:284
+#: src/info.cc:467 src/info.cc:470 src/search.cc:316
 msgid "Suggested"
 msgstr "建議"
 
@@ -5005,7 +5055,7 @@ msgid "Flavor"
 msgstr "類別"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:555 src/search.cc:554
+#: src/info.cc:555 src/search.cc:586
 msgid "Is Base"
 msgstr "是基礎"
 
@@ -5761,25 +5811,25 @@ msgstr "純 RPM 檔快取"
 msgid "System Packages"
 msgstr "系統套件"
 
-#: src/search.cc:300
+#: src/search.cc:332
 msgid "No needed patches found."
 msgstr "沒有需要的修補程式。"
 
-#: src/search.cc:380
+#: src/search.cc:412
 msgid "No patterns found."
 msgstr "沒有發現樣式。"
 
-#: src/search.cc:479
+#: src/search.cc:511
 msgid "No packages found."
 msgstr "沒有發現套件。"
 
 #. translators: used in products. Internal Name is the unix name of the
 #. product whereas simply Name is the official full name of the product.
-#: src/search.cc:550
+#: src/search.cc:582
 msgid "Internal Name"
 msgstr "內部名稱"
 
-#: src/search.cc:628
+#: src/search.cc:660
 msgid "No products found."
 msgstr "沒有發現產品。"
 

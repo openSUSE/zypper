@@ -5,11 +5,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-22 16:11+0200\n"
+"POT-Creation-Date: 2019-10-29 11:30+0100\n"
 "PO-Revision-Date: 2019-10-22 19:53+0000\n"
 "Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
-"Language-Team: Slovak <https://l10n.opensuse.org/projects/zypper/master/sk/>"
-"\n"
+"Language-Team: Slovak <https://l10n.opensuse.org/projects/zypper/master/sk/"
+">\n"
 "Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -815,8 +815,9 @@ msgstr "Či použiť farby vo výstupe, ak to tty podporuje."
 msgid "Do not abbreviate text in tables."
 msgstr "Neskracovať text v tabuľkách."
 
-#. translators: --table-style, -s
+#. translators: --table-style, -s, %1% denotes the supported range of the integer argument (e.g. "1-11")
 #: src/Config.cc:420
+#, fuzzy, boost-format
 msgid "Table style (%1%)."
 msgstr "Štýl tabuľky (celé číslo)."
 
@@ -2704,8 +2705,8 @@ msgstr[2] "Odstránených %lu zámkov."
 #: src/commands/locks/list.cc:135 src/commands/repos/list.cc:41
 #: src/commands/repos/list.cc:223 src/commands/services/list.cc:105
 #: src/info.cc:58 src/info.cc:449 src/info.cc:693 src/locales.cc:124
-#: src/search.cc:48 src/search.cc:196 src/search.cc:343 src/search.cc:487
-#: src/search.cc:551 src/update.cc:727 src/utils/misc.cc:228
+#: src/search.cc:48 src/search.cc:228 src/search.cc:375 src/search.cc:519
+#: src/search.cc:583 src/update.cc:727 src/utils/misc.cc:228
 msgid "Name"
 msgstr "Názov"
 
@@ -2717,14 +2718,14 @@ msgstr "Zhoduje sa"
 #. translators: type (general header)
 #: src/commands/locks/list.cc:138 src/commands/repos/list.cc:52
 #: src/commands/repos/list.cc:261 src/commands/services/list.cc:114
-#: src/info.cc:450 src/search.cc:50 src/search.cc:199
+#: src/info.cc:450 src/search.cc:50 src/search.cc:231
 msgid "Type"
 msgstr "Typ"
 
 #. translators: property name; short; used like "Name: value"
 #. translators: package's repository (header)
 #: src/commands/locks/list.cc:138 src/info.cc:56 src/search.cc:56
-#: src/search.cc:345 src/search.cc:486 src/search.cc:547 src/update.cc:724
+#: src/search.cc:377 src/search.cc:518 src/search.cc:579 src/update.cc:724
 #: src/utils/misc.cc:227
 msgid "Repository"
 msgstr "Repozitár"
@@ -4082,27 +4083,27 @@ msgstr ""
 "Spustiť '%1%' na vyhľadávanie v ešte neaktivovaných vzdialených zdrojoch."
 
 #. translators: command summary: search, se
-#: src/commands/search/search.cc:73
+#: src/commands/search/search.cc:86
 msgid "Search for packages matching a pattern."
 msgstr "Hľadať balíky podľa zadaných reťazcov."
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/commands/search/search.cc:81
+#: src/commands/search/search.cc:94
 msgid "search (se) [OPTIONS] [QUERYSTRING] ..."
 msgstr "search (se) [voľby] [hľadaný_reťazec] ..."
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/commands/search/search.cc:86
+#: src/commands/search/search.cc:99
 msgid "patch-search [OPTIONS] [QUERYSTRING...]"
 msgstr "patch-search [voľby] [hľadaný_reťazec...]"
 
 #. translators: command description
-#: src/commands/search/search.cc:95
+#: src/commands/search/search.cc:108
 msgid "Search for packages matching any of the given search strings."
 msgstr "Hľadá balíky vyhovujúce niektorému zo zadaných hľadaných reťazcov."
 
 #. translators: command description
-#: src/commands/search/search.cc:97
+#: src/commands/search/search.cc:110
 msgid ""
 "* and ? wildcards can also be used within search strings. If a search string "
 "is enclosed in '/', it's interpreted as a regular expression."
@@ -4111,67 +4112,116 @@ msgstr ""
 "hľadaný reťazec uzavretý v '/', je to interpretované ako regulárny výraz."
 
 #. translators: command description
-#: src/commands/search/search.cc:102
+#: src/commands/search/search.cc:115
 msgid "Search for patches matching given search strings."
 msgstr "Hľadá opravy zodpovedajúce zadanému reťazcu."
 
 #. translators: --match-substrings
-#: src/commands/search/search.cc:113
+#: src/commands/search/search.cc:126
 msgid "Search for a match to partial words (default)."
 msgstr "Hľadať zhodu pre čiastkové slová (predvolené)."
 
 #. translators: --match-words
-#: src/commands/search/search.cc:117
+#: src/commands/search/search.cc:130
 msgid "Search for a match to whole words only."
 msgstr "Hľadať zhodu len pre celé slová."
 
 #. translators: -x, --match-exact
-#: src/commands/search/search.cc:121
+#: src/commands/search/search.cc:134
 msgid "Searches for an exact match of the search strings."
 msgstr "Hľadať presnú zhodu k vyhľadávacím reťazcom."
 
 #. translators: --provides
-#: src/commands/search/search.cc:133
+#: src/commands/search/search.cc:146
 msgid "Search for packages which provide the search strings."
 msgstr "Hľadať balíky, ktoré poskytujú hľadané reťazce."
 
 #. translators: --requires
-#: src/commands/search/search.cc:137
+#: src/commands/search/search.cc:150
 msgid "Search for packages which require the search strings."
 msgstr "Hľadať balíky, ktoré vyžadujú hľadané reťazce."
 
 #. translators: --recommends
-#: src/commands/search/search.cc:141
+#: src/commands/search/search.cc:154
 msgid "Search for packages which recommend the search strings."
 msgstr "Hľadať balíky, ktoré odporúčajú hľadané reťazce."
 
 #. translators: --supplements
-#: src/commands/search/search.cc:145
+#: src/commands/search/search.cc:158
 msgid "Search for packages which supplement the search strings."
 msgstr "Hľadanie balíkov, ktoré doĺňajú hľadané reťazce."
 
 #. translators: --conflicts
-#: src/commands/search/search.cc:149
+#: src/commands/search/search.cc:162
 msgid "Search packages conflicting with search strings."
 msgstr "Hľadať balíky, ktoré sú v konflikte s hľadanými reťazcami."
 
 #. translators: --obsoletes
-#: src/commands/search/search.cc:153
+#: src/commands/search/search.cc:166
 msgid "Search for packages which obsolete the search strings."
 msgstr "Hľadať balíky, ktoré zastarávajú hľadané reťazce."
 
 #. translators: --suggests
-#: src/commands/search/search.cc:157
+#: src/commands/search/search.cc:170
 msgid "Search for packages which suggest the search strings."
 msgstr "Hľadať balíky, ktoré navrhujú hľadané reťazce."
 
+#. translators: --provides-pkg
+#: src/commands/search/search.cc:174
+msgid ""
+"Search for all packages that provide any of the provides of the package(s) "
+"matched by the input parameters."
+msgstr ""
+
+#. translators: --requires-pkg
+#: src/commands/search/search.cc:178
+msgid ""
+"Search for all packages that require any of the provides of the package(s) "
+"matched by the input parameters."
+msgstr ""
+
+#. translators: --recommends-pkg
+#: src/commands/search/search.cc:182
+msgid ""
+"Search for all packages that recommend any of the provides of the package(s) "
+"matched by the input parameters."
+msgstr ""
+
+#. translators: --supplements-pkg
+#: src/commands/search/search.cc:186
+msgid ""
+"Search for all packages that supplement any of the provides of the "
+"package(s) matched by the input parameters."
+msgstr ""
+
+#. translators: --conflicts-pkg
+#: src/commands/search/search.cc:190
+msgid ""
+"Search for all packages that conflict with any of the package(s) matched by "
+"the input parameters."
+msgstr ""
+
+#. translators: --obsoletes-pkg
+#: src/commands/search/search.cc:194
+msgid ""
+"Search for all packages that obsolete any of the package(s) matched by the "
+"input parameters."
+msgstr ""
+
+#. translators: --suggests-pkg
+#: src/commands/search/search.cc:198
+msgid ""
+"Search for all packages that suggest any of the provides of the package(s) "
+"matched by the input parameters."
+msgstr ""
+
 #. translators: -t, --type <TYPE>
-#: src/commands/search/search.cc:161
+#: src/commands/search/search.cc:202
 msgid "Search only for packages of the specified type."
 msgstr "Hľadať iba balíky zadaného typu."
 
 #. translators: -n, --name
-#: src/commands/search/search.cc:165
+#: src/commands/search/search.cc:206
 msgid ""
 "Useful together with dependency options, otherwise searching in package name "
 "is default."
@@ -4180,28 +4230,28 @@ msgstr ""
 "názve balíčka."
 
 #. translators: -f, --file-list
-#: src/commands/search/search.cc:169
+#: src/commands/search/search.cc:210
 msgid "Search for a match in the file list of packages."
 msgstr "Hľadať zhodu v súborovom zozname balíkov."
 
 #. translators: -d, --search-descriptions
-#: src/commands/search/search.cc:178
+#: src/commands/search/search.cc:221
 msgid "Search also in package summaries and descriptions."
 msgstr "Hľadať zhodu v popisoch balíkov."
 
 #. translators: -C, --case-sensitive
-#: src/commands/search/search.cc:182
+#: src/commands/search/search.cc:225
 msgid "Perform case-sensitive search."
 msgstr "Vykonať hľadanie s rozlišovaním veľkosti písmen."
 
 #. translators: -s, --details
-#: src/commands/search/search.cc:191
+#: src/commands/search/search.cc:234
 msgid "Show each available version in each repository on a separate line."
 msgstr ""
 "Zobraziť každú dostupnú verziu v každom repozitári na samostatnom riadku."
 
 #. translators: -v, --verbose
-#: src/commands/search/search.cc:195
+#: src/commands/search/search.cc:238
 msgid ""
 "Like --details, with additional information where the search has matched "
 "(useful for search in dependencies)."
@@ -4209,25 +4259,25 @@ msgstr ""
 "Ako --details, s ďalšími informáciami, kde bolo hľadanie vyhovujúce "
 "(užitočné pre hľadanie v závislostiach)."
 
-#: src/commands/search/search.cc:289 src/repos.cc:782
+#: src/commands/search/search.cc:332 src/repos.cc:782
 #, c-format, boost-format
 msgid "Specified repository '%s' is disabled."
 msgstr "Zadaný repozitár '%s' je vypnutý."
 
 #. translators: empty search result message
-#: src/commands/search/search.cc:422
+#: src/commands/search/search.cc:510
 msgid "No matching items found."
 msgstr "Neboli nájdené žiadne odpovedajúce položky."
 
-#: src/commands/search/search.cc:457
+#: src/commands/search/search.cc:547
 msgid "Problem occurred initializing or executing the search query"
 msgstr "Nastal problém pri inicializácii alebo spustení vyhľadávania"
 
-#: src/commands/search/search.cc:458
+#: src/commands/search/search.cc:548
 msgid "See the above message for a hint."
 msgstr "Pozrite predchádzajúcu správu. Poskytne vám tip o príčine chyby."
 
-#: src/commands/search/search.cc:459 src/repos.cc:991
+#: src/commands/search/search.cc:549 src/repos.cc:991
 msgid "Running 'zypper refresh' as root might resolve the problem."
 msgstr ""
 "Spustenie 'zypper refresh' pod správcom systému (root) by mohlo vyriešiť "
@@ -5203,14 +5253,14 @@ msgstr "%s je staršia ako %s"
 #. translators: property name; short; used like "Name: value"
 #. translators: Table column header
 #. translators: package version (header)
-#: src/info.cc:60 src/info.cc:694 src/search.cc:52 src/search.cc:344
-#: src/search.cc:488 src/search.cc:552
+#: src/info.cc:60 src/info.cc:694 src/search.cc:52 src/search.cc:376
+#: src/search.cc:520 src/search.cc:584
 msgid "Version"
 msgstr "Verzia"
 
 #. translators: property name; short; used like "Name: value"
 #. translators: package architecture (header)
-#: src/info.cc:62 src/search.cc:54 src/search.cc:489 src/search.cc:553
+#: src/info.cc:62 src/search.cc:54 src/search.cc:521 src/search.cc:585
 #: src/update.cc:733
 msgid "Arch"
 msgstr "Arch"
@@ -5222,7 +5272,7 @@ msgstr "Dodávateľ"
 
 #. translators: property name; short; used like "Name: value"
 #. translators: package summary (header)
-#: src/info.cc:70 src/search.cc:198 src/utils/misc.cc:233 src/utils/misc.cc:274
+#: src/info.cc:70 src/search.cc:230 src/utils/misc.cc:233 src/utils/misc.cc:274
 msgid "Summary"
 msgstr "Súhrn"
 
@@ -5327,13 +5377,13 @@ msgstr "(prázdny)"
 #. translators: S for installed Status
 #. TranslatorExplanation S stands for Status
 #: src/info.cc:448 src/info.cc:692 src/locales.cc:122 src/search.cc:46
-#: src/search.cc:195 src/search.cc:342 src/search.cc:485 src/search.cc:546
+#: src/search.cc:227 src/search.cc:374 src/search.cc:517 src/search.cc:578
 #: src/update.cc:722
 msgid "S"
 msgstr "S"
 
 #. translators: Table column header
-#: src/info.cc:451 src/search.cc:346
+#: src/info.cc:451 src/search.cc:378
 msgid "Dependency"
 msgstr "Závislosť"
 
@@ -5341,11 +5391,11 @@ msgstr "Závislosť"
 msgid "Required"
 msgstr "Požadované"
 
-#: src/info.cc:461 src/info.cc:470 src/search.cc:282
+#: src/info.cc:461 src/info.cc:470 src/search.cc:314
 msgid "Recommended"
 msgstr "Odporúčaný"
 
-#: src/info.cc:467 src/info.cc:470 src/search.cc:284
+#: src/info.cc:467 src/info.cc:470 src/search.cc:316
 msgid "Suggested"
 msgstr "Navrhovaný"
 
@@ -5370,7 +5420,7 @@ msgid "Flavor"
 msgstr "Druh"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:555 src/search.cc:554
+#: src/info.cc:555 src/search.cc:586
 msgid "Is Base"
 msgstr "Základný"
 
@@ -6148,25 +6198,25 @@ msgstr "Vyrovnávacie pamäť RPM súborov"
 msgid "System Packages"
 msgstr "Balíky v systéme"
 
-#: src/search.cc:300
+#: src/search.cc:332
 msgid "No needed patches found."
 msgstr "Neboli nájdené žiadne potrebné opravy."
 
-#: src/search.cc:380
+#: src/search.cc:412
 msgid "No patterns found."
 msgstr "Neboli nájdené žiadne šablóny."
 
-#: src/search.cc:479
+#: src/search.cc:511
 msgid "No packages found."
 msgstr "Neboli nájdené žiadne balíky."
 
 #. translators: used in products. Internal Name is the unix name of the
 #. product whereas simply Name is the official full name of the product.
-#: src/search.cc:550
+#: src/search.cc:582
 msgid "Internal Name"
 msgstr "Interný názov"
 
-#: src/search.cc:628
+#: src/search.cc:660
 msgid "No products found."
 msgstr "Neboli nájdené žiadne produkty."
 

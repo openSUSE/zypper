@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper.ko\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-22 16:11+0200\n"
+"POT-Creation-Date: 2019-10-29 11:30+0100\n"
 "PO-Revision-Date: 2019-04-04 18:36+0000\n"
 "Last-Translator: Hwajin Kim <hwajin.kim@e4net.net>\n"
 "Language-Team: Korean <https://l10n.opensuse.org/projects/zypper/master/ko/"
@@ -799,8 +799,9 @@ msgstr "tty가 지원할 경우 컬러 출력 여부를 지정합니다."
 msgid "Do not abbreviate text in tables."
 msgstr "테이블에서 텍스트를 약어로 표시하지 않습니다."
 
-#. translators: --table-style, -s
+#. translators: --table-style, -s, %1% denotes the supported range of the integer argument (e.g. "1-11")
 #: src/Config.cc:420
+#, fuzzy, boost-format
 msgid "Table style (%1%)."
 msgstr "테이블 스타일(정수)."
 
@@ -2490,8 +2491,8 @@ msgstr[0] "%lu 잠금이 제거되었습니다."
 #: src/commands/locks/list.cc:135 src/commands/repos/list.cc:41
 #: src/commands/repos/list.cc:223 src/commands/services/list.cc:105
 #: src/info.cc:58 src/info.cc:449 src/info.cc:693 src/locales.cc:124
-#: src/search.cc:48 src/search.cc:196 src/search.cc:343 src/search.cc:487
-#: src/search.cc:551 src/update.cc:727 src/utils/misc.cc:228
+#: src/search.cc:48 src/search.cc:228 src/search.cc:375 src/search.cc:519
+#: src/search.cc:583 src/update.cc:727 src/utils/misc.cc:228
 msgid "Name"
 msgstr "이름"
 
@@ -2503,14 +2504,14 @@ msgstr "일치 항목"
 #. translators: type (general header)
 #: src/commands/locks/list.cc:138 src/commands/repos/list.cc:52
 #: src/commands/repos/list.cc:261 src/commands/services/list.cc:114
-#: src/info.cc:450 src/search.cc:50 src/search.cc:199
+#: src/info.cc:450 src/search.cc:50 src/search.cc:231
 msgid "Type"
 msgstr "유형"
 
 #. translators: property name; short; used like "Name: value"
 #. translators: package's repository (header)
 #: src/commands/locks/list.cc:138 src/info.cc:56 src/search.cc:56
-#: src/search.cc:345 src/search.cc:486 src/search.cc:547 src/update.cc:724
+#: src/search.cc:377 src/search.cc:518 src/search.cc:579 src/update.cc:724
 #: src/utils/misc.cc:227
 msgid "Repository"
 msgstr "리포지토리"
@@ -3852,27 +3853,27 @@ msgid "Run '%1%' to search in not yet activated remote resources."
 msgstr "아직 활성화되지 않은 원격 리소스를 검색하려면 '%1%'을(를) 실행합니다."
 
 #. translators: command summary: search, se
-#: src/commands/search/search.cc:73
+#: src/commands/search/search.cc:86
 msgid "Search for packages matching a pattern."
 msgstr "패턴과 일치하는 패키지를 검색합니다."
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/commands/search/search.cc:81
+#: src/commands/search/search.cc:94
 msgid "search (se) [OPTIONS] [QUERYSTRING] ..."
 msgstr "search (se) [옵션] [쿼리 문자열] ..."
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/commands/search/search.cc:86
+#: src/commands/search/search.cc:99
 msgid "patch-search [OPTIONS] [QUERYSTRING...]"
 msgstr "patch-search [옵션] [쿼리 문자열...]"
 
 #. translators: command description
-#: src/commands/search/search.cc:95
+#: src/commands/search/search.cc:108
 msgid "Search for packages matching any of the given search strings."
 msgstr "지정된 검색 문자열과 일치하는 패키지를 검색합니다."
 
 #. translators: command description
-#: src/commands/search/search.cc:97
+#: src/commands/search/search.cc:110
 msgid ""
 "* and ? wildcards can also be used within search strings. If a search string "
 "is enclosed in '/', it's interpreted as a regular expression."
@@ -3881,67 +3882,116 @@ msgstr ""
 "묶여 있는 경우 정규식으로 해석됩니다."
 
 #. translators: command description
-#: src/commands/search/search.cc:102
+#: src/commands/search/search.cc:115
 msgid "Search for patches matching given search strings."
 msgstr "지정한 검색어로 패치를 검색합니다."
 
 #. translators: --match-substrings
-#: src/commands/search/search.cc:113
+#: src/commands/search/search.cc:126
 msgid "Search for a match to partial words (default)."
 msgstr "부분 단어와 일치하는 항목을 검색합니다(기본값)."
 
 #. translators: --match-words
-#: src/commands/search/search.cc:117
+#: src/commands/search/search.cc:130
 msgid "Search for a match to whole words only."
 msgstr "전체 단어와 일치하는 항목만 검색합니다."
 
 #. translators: -x, --match-exact
-#: src/commands/search/search.cc:121
+#: src/commands/search/search.cc:134
 msgid "Searches for an exact match of the search strings."
 msgstr "검색 문자열과 정확히 일치하는 항목을 검색합니다."
 
 #. translators: --provides
-#: src/commands/search/search.cc:133
+#: src/commands/search/search.cc:146
 msgid "Search for packages which provide the search strings."
 msgstr "검색 문자열을 제공하는 패키지를 검색합니다."
 
 #. translators: --requires
-#: src/commands/search/search.cc:137
+#: src/commands/search/search.cc:150
 msgid "Search for packages which require the search strings."
 msgstr "검색 문자열이 필요한 패키지를 검색합니다."
 
 #. translators: --recommends
-#: src/commands/search/search.cc:141
+#: src/commands/search/search.cc:154
 msgid "Search for packages which recommend the search strings."
 msgstr "검색 문자열을 추천하는 패키지를 검색합니다."
 
 #. translators: --supplements
-#: src/commands/search/search.cc:145
+#: src/commands/search/search.cc:158
 msgid "Search for packages which supplement the search strings."
 msgstr "검색 문자열을 보충하는 패키지를 검색합니다."
 
 #. translators: --conflicts
-#: src/commands/search/search.cc:149
+#: src/commands/search/search.cc:162
 msgid "Search packages conflicting with search strings."
 msgstr "검색 문자열과 충돌하는 패키지를 검색합니다."
 
 #. translators: --obsoletes
-#: src/commands/search/search.cc:153
+#: src/commands/search/search.cc:166
 msgid "Search for packages which obsolete the search strings."
 msgstr "검색 문자열을 구식으로 만드는 패키지를 검색합니다."
 
 #. translators: --suggests
-#: src/commands/search/search.cc:157
+#: src/commands/search/search.cc:170
 msgid "Search for packages which suggest the search strings."
 msgstr "검색 문자열을 제안하는 패키지를 검색합니다."
 
+#. translators: --provides-pkg
+#: src/commands/search/search.cc:174
+msgid ""
+"Search for all packages that provide any of the provides of the package(s) "
+"matched by the input parameters."
+msgstr ""
+
+#. translators: --requires-pkg
+#: src/commands/search/search.cc:178
+msgid ""
+"Search for all packages that require any of the provides of the package(s) "
+"matched by the input parameters."
+msgstr ""
+
+#. translators: --recommends-pkg
+#: src/commands/search/search.cc:182
+msgid ""
+"Search for all packages that recommend any of the provides of the package(s) "
+"matched by the input parameters."
+msgstr ""
+
+#. translators: --supplements-pkg
+#: src/commands/search/search.cc:186
+msgid ""
+"Search for all packages that supplement any of the provides of the "
+"package(s) matched by the input parameters."
+msgstr ""
+
+#. translators: --conflicts-pkg
+#: src/commands/search/search.cc:190
+msgid ""
+"Search for all packages that conflict with any of the package(s) matched by "
+"the input parameters."
+msgstr ""
+
+#. translators: --obsoletes-pkg
+#: src/commands/search/search.cc:194
+msgid ""
+"Search for all packages that obsolete any of the package(s) matched by the "
+"input parameters."
+msgstr ""
+
+#. translators: --suggests-pkg
+#: src/commands/search/search.cc:198
+msgid ""
+"Search for all packages that suggest any of the provides of the package(s) "
+"matched by the input parameters."
+msgstr ""
+
 #. translators: -t, --type <TYPE>
-#: src/commands/search/search.cc:161
+#: src/commands/search/search.cc:202
 msgid "Search only for packages of the specified type."
 msgstr "지정된 유형의 패키지만 검색합니다."
 
 #. translators: -n, --name
-#: src/commands/search/search.cc:165
+#: src/commands/search/search.cc:206
 msgid ""
 "Useful together with dependency options, otherwise searching in package name "
 "is default."
@@ -3950,51 +4000,51 @@ msgstr ""
 "이 기본값입니다."
 
 #. translators: -f, --file-list
-#: src/commands/search/search.cc:169
+#: src/commands/search/search.cc:210
 msgid "Search for a match in the file list of packages."
 msgstr "패키지 파일 목록에서 일치를 검색합니다."
 
 #. translators: -d, --search-descriptions
-#: src/commands/search/search.cc:178
+#: src/commands/search/search.cc:221
 msgid "Search also in package summaries and descriptions."
 msgstr "패키지 요약 및 설명에서도 검색합니다."
 
 #. translators: -C, --case-sensitive
-#: src/commands/search/search.cc:182
+#: src/commands/search/search.cc:225
 msgid "Perform case-sensitive search."
 msgstr "대소문자를 구분하여 검색합니다."
 
 #. translators: -s, --details
-#: src/commands/search/search.cc:191
+#: src/commands/search/search.cc:234
 msgid "Show each available version in each repository on a separate line."
 msgstr "각 리포지토리에서 사용 가능한 각 버전을 새 줄에 표시합니다."
 
 #. translators: -v, --verbose
-#: src/commands/search/search.cc:195
+#: src/commands/search/search.cc:238
 msgid ""
 "Like --details, with additional information where the search has matched "
 "(useful for search in dependencies)."
 msgstr "마찬가지로 검색이 일치된 추가 정보를 포함합니다(종속성 검색에 유용)."
 
-#: src/commands/search/search.cc:289 src/repos.cc:782
+#: src/commands/search/search.cc:332 src/repos.cc:782
 #, c-format, boost-format
 msgid "Specified repository '%s' is disabled."
 msgstr "지정된 리포지토리 '%s'이(가) 비활성화되었습니다."
 
 #. translators: empty search result message
-#: src/commands/search/search.cc:422
+#: src/commands/search/search.cc:510
 msgid "No matching items found."
 msgstr "일치하는 항목이 없습니다."
 
-#: src/commands/search/search.cc:457
+#: src/commands/search/search.cc:547
 msgid "Problem occurred initializing or executing the search query"
 msgstr "검색 쿼리를 초기화하거나 실행하는 중 문제가 발생했습니다."
 
-#: src/commands/search/search.cc:458
+#: src/commands/search/search.cc:548
 msgid "See the above message for a hint."
 msgstr "자세한 내용은 위의 메시지를 참조하십시오."
 
-#: src/commands/search/search.cc:459 src/repos.cc:991
+#: src/commands/search/search.cc:549 src/repos.cc:991
 msgid "Running 'zypper refresh' as root might resolve the problem."
 msgstr "'zypper refresh'를 루트 권한으로 실행하여 문제를 해결할 수 있습니다."
 
@@ -4946,14 +4996,14 @@ msgstr "%s이(가) %s보다 이전입니다."
 #. translators: property name; short; used like "Name: value"
 #. translators: Table column header
 #. translators: package version (header)
-#: src/info.cc:60 src/info.cc:694 src/search.cc:52 src/search.cc:344
-#: src/search.cc:488 src/search.cc:552
+#: src/info.cc:60 src/info.cc:694 src/search.cc:52 src/search.cc:376
+#: src/search.cc:520 src/search.cc:584
 msgid "Version"
 msgstr "버전"
 
 #. translators: property name; short; used like "Name: value"
 #. translators: package architecture (header)
-#: src/info.cc:62 src/search.cc:54 src/search.cc:489 src/search.cc:553
+#: src/info.cc:62 src/search.cc:54 src/search.cc:521 src/search.cc:585
 #: src/update.cc:733
 msgid "Arch"
 msgstr "아키텍처"
@@ -4965,7 +5015,7 @@ msgstr "제조사"
 
 #. translators: property name; short; used like "Name: value"
 #. translators: package summary (header)
-#: src/info.cc:70 src/search.cc:198 src/utils/misc.cc:233 src/utils/misc.cc:274
+#: src/info.cc:70 src/search.cc:230 src/utils/misc.cc:233 src/utils/misc.cc:274
 msgid "Summary"
 msgstr "요약"
 
@@ -5068,13 +5118,13 @@ msgstr "(비어 있음)"
 #. translators: S for installed Status
 #. TranslatorExplanation S stands for Status
 #: src/info.cc:448 src/info.cc:692 src/locales.cc:122 src/search.cc:46
-#: src/search.cc:195 src/search.cc:342 src/search.cc:485 src/search.cc:546
+#: src/search.cc:227 src/search.cc:374 src/search.cc:517 src/search.cc:578
 #: src/update.cc:722
 msgid "S"
 msgstr "S"
 
 #. translators: Table column header
-#: src/info.cc:451 src/search.cc:346
+#: src/info.cc:451 src/search.cc:378
 msgid "Dependency"
 msgstr "종속성"
 
@@ -5083,11 +5133,11 @@ msgstr "종속성"
 msgid "Required"
 msgstr "필요"
 
-#: src/info.cc:461 src/info.cc:470 src/search.cc:282
+#: src/info.cc:461 src/info.cc:470 src/search.cc:314
 msgid "Recommended"
 msgstr "권장됨"
 
-#: src/info.cc:467 src/info.cc:470 src/search.cc:284
+#: src/info.cc:467 src/info.cc:470 src/search.cc:316
 msgid "Suggested"
 msgstr "제안됨"
 
@@ -5112,7 +5162,7 @@ msgid "Flavor"
 msgstr "특징"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:555 src/search.cc:554
+#: src/info.cc:555 src/search.cc:586
 msgid "Is Base"
 msgstr "기본"
 
@@ -5891,25 +5941,25 @@ msgstr "일반 RPM 파일 캐시"
 msgid "System Packages"
 msgstr "시스템 패키지"
 
-#: src/search.cc:300
+#: src/search.cc:332
 msgid "No needed patches found."
 msgstr "필요한 패치가 없습니다."
 
-#: src/search.cc:380
+#: src/search.cc:412
 msgid "No patterns found."
 msgstr "패턴이 없습니다."
 
-#: src/search.cc:479
+#: src/search.cc:511
 msgid "No packages found."
 msgstr "패키지가 없습니다."
 
 #. translators: used in products. Internal Name is the unix name of the
 #. product whereas simply Name is the official full name of the product.
-#: src/search.cc:550
+#: src/search.cc:582
 msgid "Internal Name"
 msgstr "내부 이름"
 
-#: src/search.cc:628
+#: src/search.cc:660
 msgid "No products found."
 msgstr "제품이 없습니다."
 
