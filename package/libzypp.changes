@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Tue Oct 29 14:54:51 CET 2019 - ma@suse.de
+
+- Expose new libsolv API via C++ counterparts
+  (openSUSE/zypper#214)
+- BuildRequires:  libsolv-devel >= 0.7.7
+- version 17.16.0 (12)
+
+-------------------------------------------------------------------
 Fri Oct 18 17:20:08 CEST 2019 - ma@suse.de
 
 - Fix empty metalink downloads if filesize is unknown (bsc#1153557)
