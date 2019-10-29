@@ -821,7 +821,7 @@ msgstr "表内でのテキストの省略を行なわないようにします。
 
 #. translators: --table-style, -s
 #: src/Config.cc:420
-msgid "Table style (integer)."
+msgid "Table style (%1%)."
 msgstr "表形式を指定します (整数) 。"
 
 #: src/Config.cc:424 src/commands/optionsets.cc:284

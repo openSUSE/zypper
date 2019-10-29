@@ -836,7 +836,7 @@ msgstr "Ne szerepeljenek rövidítések a táblázatokban."
 
 #. translators: --table-style, -s
 #: src/Config.cc:420
-msgid "Table style (integer)."
+msgid "Table style (%1%)."
 msgstr "Táblázatstílus (egész szám)."
 
 #: src/Config.cc:424 src/commands/optionsets.cc:284

@@ -801,7 +801,7 @@ msgstr "테이블에서 텍스트를 약어로 표시하지 않습니다."
 
 #. translators: --table-style, -s
 #: src/Config.cc:420
-msgid "Table style (integer)."
+msgid "Table style (%1%)."
 msgstr "테이블 스타일(정수)."
 
 #: src/Config.cc:424 src/commands/optionsets.cc:284

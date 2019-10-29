@@ -822,7 +822,7 @@ msgstr "No abreugis text a les taules."
 
 #. translators: --table-style, -s
 #: src/Config.cc:420
-msgid "Table style (integer)."
+msgid "Table style (%1%)."
 msgstr "Estil de taula (enter)."
 
 #: src/Config.cc:424 src/commands/optionsets.cc:284

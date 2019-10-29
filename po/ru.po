@@ -831,7 +831,7 @@ msgstr "Не использовать аббревиатуры в таблица
 
 #. translators: --table-style, -s
 #: src/Config.cc:420
-msgid "Table style (integer)."
+msgid "Table style (%1%)."
 msgstr "Табличный стиль."
 
 #: src/Config.cc:424 src/commands/optionsets.cc:284

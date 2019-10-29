@@ -849,7 +849,7 @@ msgstr "Texte in Tabellen nicht abkürzen."
 
 #. translators: --table-style, -s
 #: src/Config.cc:420
-msgid "Table style (integer)."
+msgid "Table style (%1%)."
 msgstr "Tabellenstil (Ganzzahl)."
 
 #: src/Config.cc:424 src/commands/optionsets.cc:284

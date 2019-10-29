@@ -837,7 +837,7 @@ msgstr "No abreviar el texto en las tablas."
 
 #. translators: --table-style, -s
 #: src/Config.cc:420
-msgid "Table style (integer)."
+msgid "Table style (%1%)."
 msgstr "Estilo de tabla (entero)."
 
 #: src/Config.cc:424 src/commands/optionsets.cc:284

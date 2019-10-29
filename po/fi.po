@@ -834,7 +834,7 @@ msgstr "Älä lyhenne taulukon tekstejä."
 
 #. translators: --table-style, -s
 #: src/Config.cc:420
-msgid "Table style (integer)."
+msgid "Table style (%1%)."
 msgstr "Taulukon tyyli (kokonaisluku)."
 
 #: src/Config.cc:424 src/commands/optionsets.cc:284

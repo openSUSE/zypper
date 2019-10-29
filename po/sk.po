@@ -817,7 +817,7 @@ msgstr "Neskracovať text v tabuľkách."
 
 #. translators: --table-style, -s
 #: src/Config.cc:420
-msgid "Table style (integer)."
+msgid "Table style (%1%)."
 msgstr "Štýl tabuľky (celé číslo)."
 
 #: src/Config.cc:424 src/commands/optionsets.cc:284

@@ -821,7 +821,7 @@ msgstr "Jangan menyingkat teks dalam tabel."
 
 #. translators: --table-style, -s
 #: src/Config.cc:420
-msgid "Table style (integer)."
+msgid "Table style (%1%)."
 msgstr "Gaya tabel (bilangan bulat)."
 
 #: src/Config.cc:424 src/commands/optionsets.cc:284

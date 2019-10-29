@@ -822,7 +822,7 @@ msgstr "عدم اختصار النص في الجداول."
 
 #. translators: --table-style, -s
 #: src/Config.cc:420
-msgid "Table style (integer)."
+msgid "Table style (%1%)."
 msgstr "نمط الجدول (عدد صحيح)."
 
 #: src/Config.cc:424 src/commands/optionsets.cc:284

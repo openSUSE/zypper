@@ -820,7 +820,7 @@ msgstr "Не скорочувати текст у таблицях."
 
 #. translators: --table-style, -s
 #: src/Config.cc:420
-msgid "Table style (integer)."
+msgid "Table style (%1%)."
 msgstr "В стилі таблиці (ціле число)."
 
 #: src/Config.cc:424 src/commands/optionsets.cc:284

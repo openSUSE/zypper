@@ -800,7 +800,7 @@ msgstr "Ikkje forkort tekst i tabellar."
 
 #. translators: --table-style, -s
 #: src/Config.cc:420
-msgid "Table style (integer)."
+msgid "Table style (%1%)."
 msgstr "Tabellstil (heiltal)."
 
 #: src/Config.cc:424 src/commands/optionsets.cc:284

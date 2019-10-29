@@ -847,7 +847,7 @@ msgstr "Indique de ne pas abréger le texte dans les tableaux."
 
 #. translators: --table-style, -s
 #: src/Config.cc:420
-msgid "Table style (integer)."
+msgid "Table style (%1%)."
 msgstr "Style de tableau (entier)."
 
 #: src/Config.cc:424 src/commands/optionsets.cc:284

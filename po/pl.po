@@ -822,7 +822,7 @@ msgstr "Bez skracania tekstów w tabelach."
 
 #. translators: --table-style, -s
 #: src/Config.cc:420
-msgid "Table style (integer)."
+msgid "Table style (%1%)."
 msgstr "Styl tabelaryczny (liczby całkowite)."
 
 #: src/Config.cc:424 src/commands/optionsets.cc:284

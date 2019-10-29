@@ -814,7 +814,7 @@ msgstr "Forkort ikke tekst i tabeller."
 
 #. translators: --table-style, -s
 #: src/Config.cc:420
-msgid "Table style (integer)."
+msgid "Table style (%1%)."
 msgstr "Tabelstil (heltal)."
 
 #: src/Config.cc:424 src/commands/optionsets.cc:284

@@ -790,7 +790,7 @@ msgstr "在表格中不要使用縮寫文字。"
 
 #. translators: --table-style, -s
 #: src/Config.cc:420
-msgid "Table style (integer)."
+msgid "Table style (%1%)."
 msgstr "設定表格風格 (整數)。"
 
 #: src/Config.cc:424 src/commands/optionsets.cc:284
