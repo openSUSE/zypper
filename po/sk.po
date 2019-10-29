@@ -6,10 +6,10 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-10-29 11:30+0100\n"
-"PO-Revision-Date: 2019-10-22 19:53+0000\n"
+"PO-Revision-Date: 2019-10-29 19:53+0000\n"
 "Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
-"Language-Team: Slovak <https://l10n.opensuse.org/projects/zypper/master/sk/"
-">\n"
+"Language-Team: Slovak <https://l10n.opensuse.org/projects/zypper/master/sk/>"
+"\n"
 "Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -817,9 +817,9 @@ msgstr "Neskracovať text v tabuľkách."
 
 #. translators: --table-style, -s, %1% denotes the supported range of the integer argument (e.g. "1-11")
 #: src/Config.cc:420
-#, fuzzy, boost-format
+#, boost-format
 msgid "Table style (%1%)."
-msgstr "Štýl tabuľky (celé číslo)."
+msgstr "Štýl tabuľky (%1%)."
 
 #: src/Config.cc:424 src/commands/optionsets.cc:284
 msgid "Entering non-interactive mode."
@@ -4149,7 +4149,7 @@ msgstr "Hľadať balíky, ktoré odporúčajú hľadané reťazce."
 #. translators: --supplements
 #: src/commands/search/search.cc:158
 msgid "Search for packages which supplement the search strings."
-msgstr "Hľadanie balíkov, ktoré doĺňajú hľadané reťazce."
+msgstr "Hľadanie balíkov, ktoré dopĺňajú hľadané reťazce."
 
 #. translators: --conflicts
 #: src/commands/search/search.cc:162
@@ -4172,6 +4172,8 @@ msgid ""
 "Search for all packages that provide any of the provides of the package(s) "
 "matched by the input parameters."
 msgstr ""
+"Hľadať všetky balíky, ktoré poskytujú akúkoľvek funkciu z balíka(ov), ktoré "
+"zodpovedajú vstupným parametrom."
 
 #. translators: --requires-pkg
 #: src/commands/search/search.cc:178
@@ -4179,6 +4181,8 @@ msgid ""
 "Search for all packages that require any of the provides of the package(s) "
 "matched by the input parameters."
 msgstr ""
+"Hľadať všetky balíky, ktoré požadujú akúkoľvek funkciu z balíka(ov), ktoré "
+"zodpovedajú vstupným parametrom."
 
 #. translators: --recommends-pkg
 #: src/commands/search/search.cc:182
@@ -4186,6 +4190,8 @@ msgid ""
 "Search for all packages that recommend any of the provides of the package(s) "
 "matched by the input parameters."
 msgstr ""
+"Hľadať všetky balíky, ktoré odporúčajú akúkoľvek funkciu z balíka(ov), ktoré "
+"zodpovedajú vstupným parametrom."
 
 #. translators: --supplements-pkg
 #: src/commands/search/search.cc:186
@@ -4193,6 +4199,8 @@ msgid ""
 "Search for all packages that supplement any of the provides of the "
 "package(s) matched by the input parameters."
 msgstr ""
+"Hľadať všetky balíky, ktoré dopĺňajú akúkoľvek funkciu z balíka(ov), ktoré "
+"zodpovedajú vstupným parametrom."
 
 #. translators: --conflicts-pkg
 #: src/commands/search/search.cc:190
@@ -4200,6 +4208,8 @@ msgid ""
 "Search for all packages that conflict with any of the package(s) matched by "
 "the input parameters."
 msgstr ""
+"Hľadať všetky balíky, ktoré sú v konflikte s ktorýmkoľvek z balíka(ov), "
+"ktoré zodpovedajú vstupným parametrom."
 
 #. translators: --obsoletes-pkg
 #: src/commands/search/search.cc:194
@@ -4207,6 +4217,8 @@ msgid ""
 "Search for all packages that obsolete any of the package(s) matched by the "
 "input parameters."
 msgstr ""
+"Hľadať všetky balíky, ktoré nahradzujú ktorýmkoľvek z balíka(ov), ktoré "
+"zodpovedajú vstupným parametrom."
 
 #. translators: --suggests-pkg
 #: src/commands/search/search.cc:198
@@ -4214,6 +4226,8 @@ msgid ""
 "Search for all packages that suggest any of the provides of the package(s) "
 "matched by the input parameters."
 msgstr ""
+"Hľadať všetky balíky, ktoré navrhujú akúkoľvek funkciu z balíka(ov), ktoré "
+"zodpovedajú vstupným parametrom."
 
 #. translators: -t, --type <TYPE>
 #: src/commands/search/search.cc:202
