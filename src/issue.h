@@ -8,6 +8,7 @@
 #ifndef ZYPPER_ISSUE_H_INCLUDED
 #define ZYPPER_ISSUE_H_INCLUDED
 
+#include <iosfwd>
 #include <string>
 #include <utility>
 
@@ -28,7 +29,10 @@ struct Issue : std::pair<std::string, std::string>
   const std::string & id()		const	{ return second; }
   bool                anyId()		const 	{ return id().empty(); }
   bool                specificId()	const	{ return !anyId(); }
+
 };
 
+/** \relates Issue Stream output */
+std::ostream & operator<<( std::ostream & str, const Issue & obj );
 
 #endif
