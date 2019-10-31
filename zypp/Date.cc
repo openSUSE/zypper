@@ -234,7 +234,7 @@ namespace zypp
   {
     return xmlout::node( str, name_r, {
       { "time_t",	Date::ValueType(obj) },
-      { "text",	 	obj.printISO() },
+      { "text",	 	obj.printISO( Date::TB_UTC ) },
     } );
   }
 
