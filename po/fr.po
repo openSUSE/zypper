@@ -14,10 +14,10 @@ msgstr ""
 "Project-Id-Version: zypper.fr\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-10-29 11:30+0100\n"
-"PO-Revision-Date: 2019-08-07 13:51+0000\n"
+"PO-Revision-Date: 2019-11-01 22:53+0000\n"
 "Last-Translator: Antoine Belvire <antoine.belvire@opensuse.org>\n"
-"Language-Team: French <https://l10n.opensuse.org/projects/zypper/master/fr/"
-">\n"
+"Language-Team: French <https://l10n.opensuse.org/projects/zypper/master/fr/>"
+"\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -847,9 +847,9 @@ msgstr "Indique de ne pas abréger le texte dans les tableaux."
 
 #. translators: --table-style, -s, %1% denotes the supported range of the integer argument (e.g. "1-11")
 #: src/Config.cc:420
-#, fuzzy, boost-format
+#, boost-format
 msgid "Table style (%1%)."
-msgstr "Style de tableau (entier)."
+msgstr "Style de tableau (%1%)."
 
 #: src/Config.cc:424 src/commands/optionsets.cc:284
 msgid "Entering non-interactive mode."
@@ -4707,7 +4707,7 @@ msgstr "Cette commande n'a de sens que dans le shell zypper."
 #: src/commands/solveroptionset.cc:23
 #, boost-format
 msgid "Valid values: %1%"
-msgstr ""
+msgstr "Valeurs valides : %1%"
 
 #: src/commands/solveroptionset.cc:35 src/commands/solveroptionset.cc:58
 msgid "Solver options"
