@@ -835,24 +835,20 @@ void list_updates(Zypper & zypper, const ResKindSet & kinds, bool best_effort, b
 }
 
 // ----------------------------------------------------------------------------
-
-void list_patches_by_issue( Zypper & zypper, bool all_r, const PatchSelector &sel )
+void list_patches_by_issue( Zypper & zypper, bool all_r, const PatchSelector & sel_r )
 {
-  // --bz, --cve can't be used together with --issue; this case is ruled out
-  // in the initial arguments validation in Zypper.cc
-  Table issueMatchesTbl;
-  FillPatchesTableForIssue intoIssueMatchesTbl( issueMatchesTbl );
-
-  const std::set<Issue> &issues = sel._requestedIssues;
-  CliMatchPatch cliMatchPatch( zypper,
-                               sel._requestedPatchDates,
-                               sel._requestedPatchCategories,
-                               sel._requestedPatchSeverity );
+  // Overall CLI filter
   bool only_needed = !all_r;
+  CliMatchPatch cliMatchPatch( zypper,
+                               sel_r._requestedPatchDates,
+                               sel_r._requestedPatchCategories,
+                               sel_r._requestedPatchSeverity );
 
+
+  // pass1 finding PoolItems and their matching issues (pi,itype,iid)
   std::vector<const Issue*> pass2; // on the fly remember anyType issues for pass2
-
-  for ( const Issue & issue : issues )
+  std::map<PoolItem,std::map<std::string,std::set<std::string>>> iresult;
+  for ( const Issue & issue : sel_r._requestedIssues )
   {
     PoolQuery q;
     q.setMatchSubstring();
@@ -867,55 +863,40 @@ void list_patches_by_issue( Zypper & zypper, bool all_r, const PatchSelector &se
       q.addAttribute( sat::SolvAttr::updateReferenceId, issue.id() );
       if ( issue.anyType() && issue.specificId() ) 				// remember for pass2
       {
-	q.addAttribute( sat::SolvAttr::updateReferenceType, issue.id() );	// bnc#941309: let '--issue-bugzilla' also match the type
+	q.addAttribute( sat::SolvAttr::updateReferenceType, issue.id() );	// bnc#941309: let '--issue=bugzilla' also match the type
 	pass2.push_back( &issue );
       }
     }
 
     for_( it, q.begin(), q.end() )
     {
-      PoolItem pi( *it );
-      Patch::constPtr patch = asKind<Patch>(pi);
+      PoolItem pi { *it };
 
       if ( only_needed && ! patchIsApplicable( pi ) )
 	continue;
 
-      if ( ! cliMatchPatch( patch ) )
+      if ( ! cliMatchPatch( pi ) )
       {
-	DBG << patch->ident() << " skipped. (not matching CLI filter)" << endl;
+	DBG << pi.ident() << " skipped. (not matching CLI filter)" << endl;
 	continue;
       }
 
-      // Print details about each match in that solvable:
-      // NOTE: If searching in BOTH updateReferenceId AND updateReferenceType,
-      // we may find matches in both but want to report the issue just once!
-      std::set<std::pair<std::string,std::string>> unifiedResults;
       for_( d, it.matchesBegin(), it.matchesEnd() )
       {
-        std::string itype = d->subFind( sat::SolvAttr::updateReferenceType ).asString();
-
+	std::string itype { d->subFind( sat::SolvAttr::updateReferenceType ).asString() };
 	if ( issue.specificType() && itype != issue.type() )
 	  continue;	// assert correct type of specific IDs
-
 	// remember....
-	unifiedResults.insert( std::make_pair( std::move(itype), d->subFind( sat::SolvAttr::updateReferenceId ).asString() ) );
-      }
-      // print remembered...
-      for ( auto & p : unifiedResults )
-      {
-	intoIssueMatchesTbl( pi, std::move(p.first), std::move(p.second) );
+	iresult[std::move(pi)][std::move(itype)].insert( d->subFind( sat::SolvAttr::updateReferenceId ).asString() );
       }
     }
   }
 
-  // pass2: look for matches in patch summary/description
-  //
-  Table summaryMatchesTbl;
-  FillPatchesTable intoSummaryMatchesTbl( summaryMatchesTbl );
-
-  for ( const Issue* _issue : pass2 )
+  //pass2 (summary/description)
+  std::vector<PoolItem> dresult;	// query will assert unique entries
+  for ( const Issue * _issue : pass2 )
   {
-    const Issue & issue( *_issue );
+    const Issue & issue { *_issue };
     PoolQuery q;
     q.setMatchSubstring();
     q.setCaseSensitive( false );
@@ -925,48 +906,78 @@ void list_patches_by_issue( Zypper & zypper, bool all_r, const PatchSelector &se
 
     for_( it, q.begin(), q.end() )
     {
-      PoolItem pi( *it );
-      Patch::constPtr patch = asKind<Patch>(pi);
+      PoolItem pi { *it };
 
       if ( only_needed && ! patchIsApplicable( pi ) )
 	continue;
 
-      if ( ! cliMatchPatch( patch ) )
+      if ( ! cliMatchPatch( pi ) )
       {
-	DBG << patch->ident() << " skipped. (not matching CLI filter)" << endl;
+	DBG << pi.ident() << " skipped. (not matching CLI filter)" << endl;
 	continue;
       }
 
-      intoSummaryMatchesTbl( pi );
-//	issueMatchesTbl.rows().back().addDetail( str::Str() << "    " << attr.inSolvAttr() << "\t\"" << attr.asString() << "\"" );
-      //! \todo could show a highlighted match with a portion of surrounding
-      //! text. Needs case-insensitive find.
+      if ( ! iresult.count( pi ) )
+      { dresult.push_back( pi ); }
     }
   }
 
+  ///////////////////////////////////////////////////////////////////
   // print result
-  if ( issueMatchesTbl.empty() && summaryMatchesTbl.empty() )
-  {  zypper.out().info(_("No matching issues found.")); }
+  if (zypper.out().type() == Out::TYPE_XML)
+  {
+    xmlout::Node parent { cout, "list-patches-byissue", xmlout::Node::optionalContent };
+    xmlPrintPatchUpdateListOn( *parent, "issue-matches", zypp_pending::make_map_key_Iterable( iresult ) );
+    xmlPrintPatchUpdateListOn( *parent, "description-matches", dresult );
+  }
   else
   {
-    if ( !issueMatchesTbl.empty() )
+    // iresult to table
+    Table issueMatchesTbl;
+    FillPatchesTableForIssue intoIssueMatchesTbl( issueMatchesTbl );
+    for ( const auto & res : iresult )
     {
-      if ( !pass2.empty() )
+      const PoolItem & pi { res.first };
+      for ( const auto & ires : res.second )
       {
-        cout << endl;
-        zypper.out().info(_("The following matches in issue numbers have been found:"));
+	const std::string & itype { ires.first };
+	for ( const std::string & iid : ires.second )
+	{ intoIssueMatchesTbl( pi, itype, iid ); }
       }
-      issueMatchesTbl.sort(); // use default sort
-      cout << endl << issueMatchesTbl;
     }
 
-    if ( !summaryMatchesTbl.empty() )
+    // dresult to table
+    Table descrMatchesTbl;
+    FillPatchesTable intoDescrMatchesTbl( descrMatchesTbl );
+    for ( const auto & pi : dresult )
+    {
+      intoDescrMatchesTbl( pi );
+    }
+
+
+    if ( issueMatchesTbl.empty() && descrMatchesTbl.empty() )
+    {  zypper.out().info(_("No matching issues found.")); }
+    else
     {
       if ( !issueMatchesTbl.empty() )
-      { cout << endl; }
-      zypper.out().info(_( "Matches in patch descriptions of the following patches have been found:"));
-      summaryMatchesTbl.sort(); // use default sort
-      cout << endl << summaryMatchesTbl;
+      {
+	zypper.out().gap();
+	zypper.out().info(_("The following matches in issue numbers have been found:"));
+
+	issueMatchesTbl.sort(); // use default sort
+	zypper.out().gap();
+	cout << issueMatchesTbl;
+      }
+
+      if ( !descrMatchesTbl.empty() )
+      {
+	zypper.out().gap();
+	zypper.out().info(_( "Matches in patch descriptions of the following patches have been found:"));
+
+	descrMatchesTbl.sort(); // use default sort
+	zypper.out().gap();
+	cout << descrMatchesTbl;
+      }
     }
   }
 }

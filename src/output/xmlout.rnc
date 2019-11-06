@@ -11,6 +11,7 @@ stream-element =
 
       # special stuff (updates list, installation summary, search output, info)
       update-status-element* |   # for zypper list-updates/list-patches
+      list-patches-byissue-element* |  # list-patches --issue/cve/bugzilla...
       install-summary-element* | # for zypper install/remove/update
       repo-list-element? |       # for zypper repos
       service-list-element? |
@@ -81,6 +82,13 @@ update-status-element =
     element blocked-update-list { patch-update-list }?	# applicable patches waiting for a pending software stack update to be installed first
   }
 
+list-patches-byissue-element =                            # list-patches --issue/cve/bugzilla...
+  element list-patches-byissue {
+    element issue-matches { patch-update-list }?,         # patches with match within their issue ids
+    element description-matches { patch-update-list }?    # patches with match within summary/description
+  }
+
+update-list =
   ( patch-update | other-update )*
 
 patch-update-list =

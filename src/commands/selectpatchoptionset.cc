@@ -49,11 +49,6 @@ std::vector<zypp::ZyppFlags::CommandGroup> SelectPatchOptionSet::options()
             // translators: --cve
             _("Select issues matching the specified string.")
     };
-
-    grp.conflictingOptions.insert( grp.conflictingOptions.end(), {
-      { "issue", "bugzilla" }, { "issue", "bz" }, { "issue", "cve" }
-
-    });
   }
 
   return {{
