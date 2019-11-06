@@ -263,6 +263,18 @@ namespace zypp
     inline typename MapKVIteratorTraits<TMap>::Value_const_iterator make_map_value_upper_bound( const TMap & map_r, const typename TMap::key_type & key_r )
     { return make_transform_iterator( map_r.upper_bound( key_r ), GetPairSecond<typename TMap::value_type>() ); }
 
+
+  /** Convenience to create an \ref Iterable over the container keys */
+  template<class TMap>
+  inline Iterable<typename MapKVIteratorTraits<TMap>::Key_const_iterator> make_map_key_Iterable( const TMap & map_r )
+  { return makeIterable( make_map_key_begin( map_r ), make_map_key_end( map_r ) ); }
+
+  /** Convenience to create an \ref Iterable over the container values */
+  template<class TMap>
+  inline Iterable<typename MapKVIteratorTraits<TMap>::Value_const_iterator> make_map_value_Iterable( const TMap & map_r )
+  { return makeIterable( make_map_value_begin( map_r ), make_map_value_end( map_r ) ); }
+
+
   /** \class function_output_iterator
    * An output iterator wrapping a unary function object; each time an
    * element is written into the dereferenced iterator, it is passed as
