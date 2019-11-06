@@ -23,6 +23,18 @@ extern ZYpp::Ptr God;
 static void find_updates( const ResKindSet & kinds, Candidates & candidates, bool all_r );
 
 ///////////////////////////////////////////////////////////////////
+/// will go into next libzypp
+namespace zypp_pending
+{
+  template<class TMap>
+  Iterable<typename MapKVIteratorTraits<TMap>::Key_const_iterator> make_map_key_Iterable( const TMap & map_r )
+  {
+    return makeIterable( make_map_key_begin( map_r ), make_map_key_end( map_r ) );
+  }
+} // namespce zypp
+///////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////
 namespace
 {
   inline bool patchIsApplicable( const PoolItem & pi )	///< Default content for all patch lists: applicable (needed, optional, unwanted)
@@ -34,6 +46,109 @@ namespace
     && ! pi.isUnwanted()
     && ! ( Zypper::instance().config().exclude_optional_patches && pi->asKind<Patch>()->categoryEnum() == Patch::CAT_OPTIONAL )
     && pi->asKind<Patch>()->restartSuggested();
+  }
+
+  /** RNC: Print other-update element */
+  inline std::ostream & xmlPrintOtherUpdateOn( std::ostream & str, const PoolItem & pi_r )
+  {
+    xmlout::Node parent { cout, "update", xmlout::Node::optionalContent, {
+      { "kind", pi_r.kind() },
+      { "name", pi_r.name () },
+      { "edition", pi_r.edition() },
+      { "arch", pi_r.arch() },
+    } };
+    // for packages show also the current installed version (bnc #466599)
+    {
+      const PoolItem & ipi( ui::Selectable::get(pi_r)->installedObj() );
+      if ( ipi )
+      {
+	if ( pi_r.edition() != ipi.edition() )
+	  parent.addAttr( { "edition-old", ipi.edition() } );
+	if ( pi_r.arch() != ipi.arch() )
+	  parent.addAttr( { "arch-old", ipi.arch() } );
+      }
+    }
+
+    dumpAsXmlOn( *parent, pi_r.summary(), "summary" );
+    dumpAsXmlOn( *parent, pi_r.description(), "description" );
+    dumpAsXmlOn( *parent, pi_r.licenseToConfirm(), "license" );
+
+    if ( !pi_r.repoInfo().alias().empty() )
+    {
+      xmlout::Node( *parent, "source", xmlout::Node::optionalContent, {
+	{ "url", pi_r.repoInfo().url().asString() },
+	{ "alias", pi_r.repoInfo().alias() },
+      } );
+    }
+    return str;
+  }
+
+  /** RNC: Print patch-issue-list-element */
+  inline std::ostream & xmlPrintPatchIssueListElementOn( std::ostream & str, Patch::ReferenceIterator begin_r, Patch::ReferenceIterator end_r )
+  {
+    xmlout::Node parent { str, "issue-list", xmlout::Node::optionalContent };
+    for_( it, begin_r, end_r )
+    {
+      xmlout::Node issue { *parent, "issue", xmlout::Node::optionalContent, {
+	{ "type", it.type() },
+	{ "id", it.id() },
+      } };
+      zypp::dumpAsXmlOn( *issue, it.title(), "title" );
+      zypp::dumpAsXmlOn( *issue, it.href(), "href" );
+    }
+    return str;
+  }
+
+  /** RNC: Print patch-update element */
+  inline std::ostream & xmlPrintPatchUpdateOn( std::ostream & str, const PoolItem & pi_r )
+  {
+    Patch::constPtr patch = pi_r->asKind<Patch>();
+
+    Patch::InteractiveFlags ignoreFlags = Patch::NoFlags;
+    if ( Zypper::instance().config().reboot_req_non_interactive )
+      ignoreFlags |= Patch::Reboot;
+    if ( LicenseAgreementPolicy::instance()._autoAgreeWithLicenses )
+      ignoreFlags |= Patch::License;
+
+    // write the node
+    xmlout::Node parent { str, "update", xmlout::Node::optionalContent, {
+      { "kind", "patch" },
+      { "name", patch->name () },
+      { "edition", patch->edition() },
+      { "arch", patch->arch() },
+      { "status", textPatchStatus( pi_r ) },
+      { "category", patch->category() },
+      { "severity", patch->severity() },
+      { "pkgmanager", asString( patch->restartSuggested() ) },
+      { "restart", asString( patch->rebootSuggested() ) },
+      { "interactive", asString( patch->interactiveWhenIgnoring(ignoreFlags) ) },
+    } };
+
+    dumpAsXmlOn( *parent, patch->summary(), "summary" );
+    dumpAsXmlOn( *parent, patch->description(), "description" );
+    dumpAsXmlOn( *parent, patch->licenseToConfirm(), "license" );
+
+    if ( !patch->repoInfo().alias().empty() )
+    {
+      xmlout::Node( *parent, "source", xmlout::Node::optionalContent, {
+	{ "url", patch->repoInfo().url().asString() },
+	{ "alias", patch->repoInfo().alias() },
+      } );
+    }
+
+    dumpAsXmlOn( *parent, patch->timestamp(), "issue-date" );
+    xmlPrintPatchIssueListElementOn( *parent, patch->referencesBegin(), patch->referencesEnd() );
+    return str;
+  }
+
+  /** RNC: Print element containing patch-update-list */
+  template <typename TContainer>
+  inline std::ostream & xmlPrintPatchUpdateListOn( std::ostream & str, std::string nodename_r, TContainer container_r )
+  {
+    xmlout::Node parent { str, std::move(nodename_r), xmlout::Node::optionalContent };
+    for ( const auto & pi : container_r )
+      xmlPrintPatchUpdateOn( *parent, pi );
+    return str;
   }
 
 } //namespace
@@ -345,43 +460,6 @@ void patch_check( bool updatestackOnly )
   { zypper.setExitCode( stats.security() ? ZYPPER_EXIT_INF_SEC_UPDATE_NEEDED : ZYPPER_EXIT_INF_UPDATE_NEEDED ); }
 }
 
-static void xml_print_patch( Zypper & zypper, const PoolItem & pi )
-{
-  Patch::constPtr patch = pi->asKind<Patch>();
-
-  cout << " <update ";
-  cout << "name=\"" << patch->name () << "\" ";
-  cout << "edition=\""  << patch->edition() << "\" ";
-  cout << "arch=\""  << patch->arch() << "\" ";
-  cout << "status=\""  << textPatchStatus( pi ) << "\" ";
-  cout << "category=\"" <<  patch->category() << "\" ";
-  cout << "severity=\"" <<  patch->severity() << "\" ";
-  cout << "pkgmanager=\"" << (patch->restartSuggested() ? "true" : "false") << "\" ";
-  cout << "restart=\"" << (patch->rebootSuggested() ? "true" : "false") << "\" ";
-
-  Patch::InteractiveFlags ignoreFlags = Patch::NoFlags;
-  if (zypper.config().reboot_req_non_interactive)
-    ignoreFlags |= Patch::Reboot;
-  if ( LicenseAgreementPolicy::instance()._autoAgreeWithLicenses )
-    ignoreFlags |= Patch::License;
-
-  cout << "interactive=\"" << (patch->interactiveWhenIgnoring(ignoreFlags) ? "true" : "false") << "\" ";
-  cout << "kind=\"patch\"";
-  cout << ">" << endl;
-  cout << "  <summary>" << xml::escape(patch->summary()) << "  </summary>" << endl;
-  cout << "  <description>" << xml::escape(patch->description()) << "</description>" << endl;
-  cout << "  <license>" << xml::escape(patch->licenseToConfirm()) << "</license>" << endl;
-
-  if ( !patch->repoInfo().alias().empty() )
-  {
-    cout << "  <source url=\"" << xml::escape(patch->repoInfo().url().asString());
-    cout << "\" alias=\"" << xml::escape(patch->repoInfo().alias()) << "\"/>" << endl;
-  }
-
-  cout << " </update>" << endl;
-}
-
-
 // returns true if NEEDED! restartSuggested() patches are available
 static bool xml_list_patches (Zypper & zypper, bool all_r )
 {
@@ -409,7 +487,7 @@ static bool xml_list_patches (Zypper & zypper, bool all_r )
       // if updates stack patches are available, show only those
       if ( all_r || !pkg_mgr_available || patchIsNeededRestartSuggested( pi ) )
       {
-	xml_print_patch( zypper, pi );
+	xmlPrintPatchUpdateOn( cout, pi );
       }
     }
     ++patchcount;
@@ -434,7 +512,7 @@ static bool xml_list_patches (Zypper & zypper, bool all_r )
 	const PoolItem & pi( *it );
 	Patch::constPtr patch = pi->asKind<Patch>();
 	if ( ! patchIsNeededRestartSuggested( pi ) )
-	  xml_print_patch( zypper, pi );
+	  xmlPrintPatchUpdateOn( cout, pi );
       }
     }
     cout << "</blocked-update-list>" << endl;
@@ -453,34 +531,7 @@ static void xml_list_updates(const ResKindSet & kinds, bool all_r )
 
   for( const PoolItem & pi : candidates )
   {
-    cout << " <update ";
-    cout << "name=\"" << pi.name () << "\" " ;
-    cout << "edition=\""  << pi.edition() << "\" ";
-    cout << "arch=\""  << pi.arch() << "\" ";
-    cout << "kind=\"" << pi.kind() << "\" ";
-    // for packages show also the current installed version (bnc #466599)
-    {
-      const PoolItem & ipi( ui::Selectable::get(pi)->installedObj() );
-      if ( ipi )
-      {
-	if ( pi.edition() != ipi.edition() )
-	  cout << "edition-old=\""  << ipi.edition() << "\" ";
-	if ( pi.arch() != ipi.arch() )
-	  cout << "arch-old=\""  << ipi.arch() << "\" ";
-      }
-    }
-    cout << ">" << endl;
-    cout << "  <summary>" << xml::escape(pi.summary()) << "</summary>" << endl;
-    cout << "  <description>" << xml::escape(pi.description()) << "</description>" << endl;
-    cout << "  <license>" << xml::escape(pi.licenseToConfirm()) << "</license>" << endl;
-
-    if ( !pi.repoInfo().alias().empty() )
-    {
-        cout << "  <source url=\"" << xml::escape(pi.repoInfo().url().asString());
-        cout << "\" alias=\"" << xml::escape(pi.repoInfo().alias()) << "\"/>" << endl;
-    }
-
-    cout << " </update>" << endl;
+    xmlPrintOtherUpdateOn( cout, pi );
   }
 }
 
