@@ -10,7 +10,7 @@ stream-element =
       progress-elements* | download-progress-elements* | message-element* | prompt-element* |
 
       # special stuff (updates list, installation summary, search output, info)
-      update-status-element* |   # for zypper list-updates
+      update-status-element* |   # for zypper list-updates/list-patches
       install-summary-element* | # for zypper install/remove/update
       repo-list-element? |       # for zypper repos
       service-list-element? |
@@ -77,9 +77,14 @@ prompt-element =
 update-status-element =
   element update-status {
     attribute version {xsd:string},
-    element update-list { ( patch-update | other-update )* },
-    element blocked-update-list { ( patch-update )* }?	# applicable patches waiting for a pending software stack update to be installed first
+    element update-list { update-list },
+    element blocked-update-list { patch-update-list }?	# applicable patches waiting for a pending software stack update to be installed first
   }
+
+  ( patch-update | other-update )*
+
+patch-update-list =
+  ( patch-update )*
 
 update-commons =
   attribute name { xsd:string },
@@ -110,7 +115,19 @@ patch-update =
     attribute severity { xsd:string }?,   # patch severity (critical, important, moderate, low, unspecified, ...)
     attribute pkgmanager { xsd:boolean }, # affect package management?
     attribute restart { xsd:boolean },    # needs restart of the machine?
-    attribute interactive { xsd:boolean } # needs user interaction?
+    attribute interactive { xsd:boolean },# needs user interaction?
+    element issue-date { zypp-date },     # Issue date of the patch
+    patch-issue-list-element              # List of issues the patch references (bugzilla, cve, ...)
+  }
+
+patch-issue-list-element =              # List of issues the patch references (bugzilla, cve, ...)
+  element issue-list {
+    element issue {
+      attribute type { xsd:string },    # Issue type (cve, bugzilla, fate, jira,...)
+      attribute id { xsd:string },      # String to identify the issue
+      element title { text? }?,         # Summary text describing the issue
+      element href { text? }?           # Url or pointer where to find more information
+    }*
   }
 
 search-result-element =
@@ -249,3 +266,6 @@ patch-selectable-info =
   }
 
 
+zypp-date =                             # zypp::Date as XML
+  attribute time_t { xsd:long },        # time_t value
+  attribute text { xsd:dateTime }       # ISO format
