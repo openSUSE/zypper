@@ -1,9 +1,28 @@
-#!/usr/bin/env python
+#!/bin/sh
 
 # This tool helps you accessing the zypper logfile
 # see --help for more details
 #
 # Author: Dominik Heidler <dheidler@suse.de>
+
+# Shell commands follow
+# Next line is bilingual: it starts a comment in Python, and is a no-op in shell
+""":"
+
+if which python3 > /dev/null 2>&1 ; then
+	PYTHON=python3
+elif which python > /dev/null 2>&1 ; then
+	PYTHON=python
+elif which python2 > /dev/null 2>&1 ; then
+	PYTHON=python2
+fi
+
+exec $PYTHON $0 "$@"
+
+":"""
+# Previous line is bilingual: it ends a comment in Python, and is a no-op in shell
+# Shell commands end here
+# Python script follows
 
 from __future__ import print_function
 import os, string, re, bz2, zlib, sys, time, argparse, errno
@@ -13,136 +32,140 @@ filenamelen = 0
 pidlen = 0
 verlen = 0
 
-def getLogFiles(rotate = 0):
-  logfiles = []
-  global filenamelen
-  for logfile in os.listdir('/var/log/'):
-    if logfile.find('zypper.log') != -1 and logfile.find('.zypper.log') == -1 and logfile != 'zypper.log':
-      filename = os.path.join('/var/log', logfile)
-      logfiles.append(filename)
-      if len(filename) > filenamelen:
-        filenamelen = len(filename)
-  logfiles.sort()
-  filename = os.path.join('/var/log', 'zypper.log')
-  if os.path.isfile(filename):
-    logfiles.append(filename)
-    if len(filename) > filenamelen:
-      filenamelen = len(filename)
-  return logfiles[-rotate-1::]
+def getLogFiles(rotate=0):
+	logfiles = []
+	global filenamelen
+	for logfile in os.listdir('/var/log/'):
+		if logfile.find('zypper.log') != -1 and logfile.find('.zypper.log') == -1 and logfile != 'zypper.log':
+			filename = os.path.join('/var/log', logfile)
+			logfiles.append(filename)
+			if len(filename) > filenamelen:
+				filenamelen = len(filename)
+	logfiles.sort()
+	filename = os.path.join('/var/log', 'zypper.log')
+	if os.path.isfile(filename):
+		logfiles.append(filename)
+		if len(filename) > filenamelen:
+			filenamelen = len(filename)
+	return logfiles[-rotate-1::]
 
 def readFile(logfile):
-  try:
-    logtxt = open(logfile).read()
-  except IOError as e:
-    print("\rIOError: %s: '%s'" % (e.strerror, e.filename), file=sys.stderr)
-    sys.exit(1)
-  fext = logfile.split('.')[-1]
-  if fext == 'xz':
-    logtxt = subprocess.Popen(['xzcat',logfile], stdout=subprocess.PIPE).stdout.read()
-  elif fext == 'bz2':
-    logtxt = bz2.decompress(logtxt)
-  elif fext == 'gz':
-    logtxt = zlib.decompress(logtxt)
-  return logtxt
+	try:
+		fext = logfile.split('.')[-1]
+		logtxt = open(logfile, 'rb').read()
+		if fext == 'xz':
+			try:
+				import lzma
+				logtxt = lzma.decompress(logtxt)
+			except ImportError:
+				logtxt = subprocess.Popen(['xzcat', logfile], stdout=subprocess.PIPE).stdout.read()
+		elif fext == 'bz2':
+			logtxt = bz2.decompress(logtxt)
+		elif fext == 'gz':
+			logtxt = zlib.decompress(logtxt)
+		return logtxt.decode()
+	except IOError as e:
+		print("\rIOError: %s: '%s'" % (e.strerror, e.filename), file=sys.stderr)
+		sys.exit(1)
 
 def getListFromLogFiles(logfiles):
-  logindex = []
-  global pidlen, verlen
-  # ===== Hi, me zypper 1.5.7
-  # ===== Hi, me zypper 1.5.7 built Jul 28 2011 17:19:50 =====
-  # genericfrontend.cc(main):675 Launched YaST2 component 'y2base' 'installation' '("continue")' 'qt'
-  c = re.compile(r"===== Hi, me zypper (\d+.\d+.\d+).*$\s(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}).+\((\d+)\).+=====\s(.+)\s=====|genericfrontend.cc.*Launched (YaST2) component (.*)$\s(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}).+\((\d+)\)", re.M)
+	logindex = []
+	global pidlen, verlen
+	# ===== Hi, me zypper 1.5.7
+	# ===== Hi, me zypper 1.5.7 built Jul 28 2011 17:19:50 =====
+	# genericfrontend.cc(main):675 Launched YaST2 component 'y2base' 'installation' '("continue")' 'qt'
+	c = re.compile(r"===== Hi, me zypper (\d+.\d+.\d+).*$\s(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}).+\((\d+)\).+=====\s(.+)\s=====|genericfrontend.cc.*Launched (YaST2) component (.*)$\s(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}).+\((\d+)\)", re.M)
 
-  for logfile in logfiles:
-    print("Reading %s" % logfile, '.' * (filenamelen - len(logfile) + 3), end=' ', file=sys.stderr)
-    sys.stderr.flush()
-    for run in c.findall(readFile(logfile)):
-      if run[4] == 'YaST2':
-	ver = run[4]
-	tim = run[6]
-	pid = run[7]
-	cmd = run[5]
-      else:
-	ver = run[0]
-	tim = run[1]
-	pid = run[2]
-	cmd = run[3]
+	for logfile in logfiles:
+		print("Reading %s" % logfile, '.' * (filenamelen - len(logfile) + 3), end=' ', file=sys.stderr)
+		sys.stderr.flush()
+		for run in c.findall(readFile(logfile)):
+			if run[4] == 'YaST2':
+				ver = run[4]
+				tim = run[6]
+				pid = run[7]
+				cmd = run[5]
+			else:
+				ver = run[0]
+				tim = run[1]
+				pid = run[2]
+				cmd = run[3]
 
-      if len(pid) > pidlen:
-        pidlen = len(pid)
-      if len(ver) > verlen:
-        verlen = len(ver)
-      logindex.append({'version': ver,
-                       'time': time.strptime(tim, "%Y-%m-%d %H:%M:%S"),
-                       'pid': pid,
-                       'cmd': cmd.replace("'", "")})
-    print("DONE", file=sys.stderr)
-    sys.stderr.flush()
-  print("", file=sys.stderr)
-  sys.stderr.flush()
-  return logindex
+			if len(pid) > pidlen:
+				pidlen = len(pid)
+			if len(ver) > verlen:
+				verlen = len(ver)
+			logindex.append({'version': ver,
+					             'time': time.strptime(tim, "%Y-%m-%d %H:%M:%S"),
+					             'pid': pid,
+					             'cmd': cmd.replace("'", "")})
+		print("DONE", file=sys.stderr)
+		sys.stderr.flush()
+	print("", file=sys.stderr)
+	sys.stderr.flush()
+	return logindex
 
 def printList(logindex, date = False):
-  global pidlen, verlen
-  rows, columns = os.popen('stty size', 'r').read().split()
+	global pidlen, verlen
+	rows, columns = os.popen('stty size', 'r').read().split()
 
-  print("TIME              PID", ' ' * (pidlen - 3), "VER", ' ' * (verlen - 3), "CMD")
-  for logentry in logindex:
-    if date and date != time.strftime("%Y-%m-%d", logentry['time']):
-      continue
-    logentry['ptime'] = time.strftime("%Y-%m-%d %H:%M", logentry['time'])
-    spaceleft = int(columns) - (22 + pidlen + len(logentry['version']) + len(logentry['cmd']))
-    if spaceleft < 0 and sys.stdout.isatty():
-      logentry['cmd'] = logentry['cmd'][:spaceleft-3] + '...'
-    print("%(ptime)s  %(pid)s" % logentry, ' ' * (pidlen - len(logentry['pid'])), "%(version)s" % logentry, ' ' * (verlen - len(logentry['version'])),  "%(cmd)s" % logentry)
+	print("TIME              PID", ' ' * (pidlen - 3), "VER", ' ' * (verlen - 3), "CMD")
+	for logentry in logindex:
+		if date and date != time.strftime("%Y-%m-%d", logentry['time']):
+			continue
+		logentry['ptime'] = time.strftime("%Y-%m-%d %H:%M", logentry['time'])
+		spaceleft = int(columns) - (22 + pidlen + len(logentry['version']) + len(logentry['cmd']))
+		if spaceleft < 0 and sys.stdout.isatty():
+			logentry['cmd'] = logentry['cmd'][:spaceleft-3] + '...'
+		print("%(ptime)s  %(pid)s" % logentry, ' ' * (pidlen - len(logentry['pid'])), "%(version)s" % logentry, ' ' * (verlen - len(logentry['version'])),  "%(cmd)s" % logentry)
 
 def printLogByPID(logfiles, pid, date = False):
-  if not date:
-    date = "\d{4}-\d{2}-\d{2}"
-  output = []
-  c = re.compile(r"%s \d{2}:\d{2}:\d{2} \<\d+\> [^(]+\(%d\).+" % (date, pid))
+	if not date:
+		date = "\d{4}-\d{2}-\d{2}"
+	output = []
+	c = re.compile(r"%s \d{2}:\d{2}:\d{2} \<\d+\> [^(]+\(%d\).+" % (date, pid))
 
-  for logfile in logfiles:
-    print("Reading %s" % logfile, '.' * (filenamelen - len(logfile) + 3), end=' ', file=sys.stderr)
-    sys.stderr.flush()
-    output.extend( c.findall(readFile(logfile)) )
-    print("DONE", file=sys.stderr)
-    sys.stderr.flush()
-  print("", file=sys.stderr)
-  sys.stderr.flush()
-  print("\n".join(output))
+	for logfile in logfiles:
+		print("Reading %s" % logfile, '.' * (filenamelen - len(logfile) + 3), end=' ', file=sys.stderr)
+		sys.stderr.flush()
+		output.extend( c.findall(readFile(logfile)) )
+		print("DONE", file=sys.stderr)
+		sys.stderr.flush()
+	print("", file=sys.stderr)
+	sys.stderr.flush()
+	print("\n".join(output))
 
 def main():
-  parser = argparse.ArgumentParser(description='This tool helps you to access the zypper logfile. Run this command without any arguments to get a list of your zypper runs. Provide the PID-File of a zypper run as an argument to query the log for this run.')
-  parser.add_argument('-l', dest='logfile', metavar='FILE', help='Read only this file')
-  parser.add_argument('-r', dest='rotate', metavar='N', type=int, default=0, help='Read N rotated logfiles')
-  parser.add_argument('-d', dest='date', metavar='YYYY-MM-DD', help='Get runs for this day')
-  parser.add_argument('pid', metavar='PID', nargs='?', type=int, help='Get log for this PID')
-  args = parser.parse_args()
+	parser = argparse.ArgumentParser(description='This tool helps you to access the zypper logfile. Run this command without any arguments to get a list of your zypper runs. Provide the PID-File of a zypper run as an argument to query the log for this run.')
+	parser.add_argument('-l', dest='logfile', metavar='FILE', help='Read only this file')
+	parser.add_argument('-r', dest='rotate', metavar='N', type=int, default=0, help='Read N rotated logfiles')
+	parser.add_argument('-d', dest='date', metavar='YYYY-MM-DD', help='Get runs for this day')
+	parser.add_argument('pid', metavar='PID', nargs='?', type=int, help='Get log for this PID')
+	args = parser.parse_args()
 
-  if args.logfile:
-    global filenamelen
-    filenamelen = len(args.logfile)
-    logfiles = [args.logfile]
-  else:
-    logfiles = getLogFiles(args.rotate)
-  if args.date:
-    # Ensure date syntax
-    try:
-      args.date = time.strftime("%Y-%m-%d", time.strptime(args.date, "%Y-%m-%d"))
-    except ValueError:
-      print("ValueError: Time data '%s' does not match format 'YYYY-MM-DD'" % args.date, file=sys.stderr)
-      sys.exit(1)
-  if args.pid:
-     printLogByPID(logfiles, args.pid, args.date)
-  else:
-    logindex = getListFromLogFiles(logfiles)
-    printList(logindex, args.date)
+	if args.logfile:
+		global filenamelen
+		filenamelen = len(args.logfile)
+		logfiles = [args.logfile]
+	else:
+		logfiles = getLogFiles(args.rotate)
+	if args.date:
+		# Ensure date syntax
+		try:
+			args.date = time.strftime("%Y-%m-%d", time.strptime(args.date, "%Y-%m-%d"))
+		except ValueError:
+			print("ValueError: Time data '%s' does not match format 'YYYY-MM-DD'" % args.date, file=sys.stderr)
+			sys.exit(1)
+	if args.pid:
+		 printLogByPID(logfiles, args.pid, args.date)
+	else:
+		logindex = getListFromLogFiles(logfiles)
+		printList(logindex, args.date)
 
 
 if __name__ == "__main__":
-  try:
-    main()
-  except IOError as e:
-    if e.errno != errno.EPIPE:
-      raise
+	try:
+		main()
+	except IOError as e:
+		if e.errno != errno.EPIPE:
+			raise
