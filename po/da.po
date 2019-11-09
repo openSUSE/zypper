@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-10-29 11:30+0100\n"
-"PO-Revision-Date: 2019-11-09 13:54+0000\n"
+"PO-Revision-Date: 2019-11-09 18:54+0000\n"
 "Last-Translator: scootergrisen <scootergrisen@gmail.com>\n"
 "Language-Team: Danish <https://l10n.opensuse.org/projects/zypper/master/da/>"
 "\n"
@@ -4106,6 +4106,8 @@ msgid ""
 "Search for all packages that provide any of the provides of the package(s) "
 "matched by the input parameters."
 msgstr ""
+"Søg efter alle pakker som supplerer nogen af udbyderne af de pakker som "
+"matches af inputparametrene."
 
 #. translators: --requires-pkg
 #: src/commands/search/search.cc:178
@@ -4113,6 +4115,8 @@ msgid ""
 "Search for all packages that require any of the provides of the package(s) "
 "matched by the input parameters."
 msgstr ""
+"Søg efter alle pakker som kræver nogen af udbyderne af de pakker som matches "
+"af inputparametrene."
 
 #. translators: --recommends-pkg
 #: src/commands/search/search.cc:182
@@ -4120,6 +4124,8 @@ msgid ""
 "Search for all packages that recommend any of the provides of the package(s) "
 "matched by the input parameters."
 msgstr ""
+"Søg efter alle pakker som anbefales af nogen af udbyderne af de pakker som "
+"matches af inputparametrene."
 
 #. translators: --supplements-pkg
 #: src/commands/search/search.cc:186
@@ -4127,6 +4133,8 @@ msgid ""
 "Search for all packages that supplement any of the provides of the "
 "package(s) matched by the input parameters."
 msgstr ""
+"Søg efter alle pakker som supplerer nogen af udbyderne af de pakker som "
+"matches af inputparametrene."
 
 #. translators: --conflicts-pkg
 #: src/commands/search/search.cc:190
@@ -4134,6 +4142,8 @@ msgid ""
 "Search for all packages that conflict with any of the package(s) matched by "
 "the input parameters."
 msgstr ""
+"Søg efter alle pakker som er i konflikt med nogen af de pakker som matches "
+"af inputparametrene."
 
 #. translators: --obsoletes-pkg
 #: src/commands/search/search.cc:194
@@ -4141,6 +4151,8 @@ msgid ""
 "Search for all packages that obsolete any of the package(s) matched by the "
 "input parameters."
 msgstr ""
+"Søg efter alle pakker som forælder nogen de pakker som matches af "
+"inputparametrene."
 
 #. translators: --suggests-pkg
 #: src/commands/search/search.cc:198
@@ -4148,6 +4160,8 @@ msgid ""
 "Search for all packages that suggest any of the provides of the package(s) "
 "matched by the input parameters."
 msgstr ""
+"Søg efter alle pakker som foreslår nogen af udbyderne af de pakker som "
+"matches af inputparametrene."
 
 #. translators: -t, --type <TYPE>
 #: src/commands/search/search.cc:202
