@@ -49,11 +49,11 @@ int LocalesCmd::execute(Zypper &zypper, const std::vector<std::string> &position
     zypper.out().warning( _("Ignoring positional arguments because --all argument was provided.") );
   }
 
-  SetupSystemFlags flags = ResetRepoManager | InitTarget | LoadTargetResolvables;
+  SetupSystemFlags flags = ResetRepoManager | InitTarget; // Requested locales can be retrieved without loading the Target
 
-  //need to InitRepos if we want to list all, see info about packages or have a search string
+  // need to InitRepos if we want to list all, see info about packages or have a search string
   if ( _packages || _all || positionalArgs.size() ) {
-    flags = flags | InitRepos | LoadRepoResolvables;
+    flags = flags | InitRepos | LoadResolvables;
   }
 
   int code = defaultSystemSetup( zypper, flags  );
