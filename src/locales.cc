@@ -32,303 +32,214 @@
 
 extern ZYpp::Ptr God;
 
-struct LocaleWithState {
-  enum State {
-    NotRequested,
-    Requested,
-    Fallback
-  };
 
-  Locale locale;
-  State  state;
-
-  bool operator<(const LocaleWithState &other ) const {
-    return this->locale < other.locale;
-  }
-};
-
-using LocaleWithStateSet = std::set<LocaleWithState>;
-
-static std::string isRequestedState( LocaleWithState::State state )
+/////////////////////////////////////////////////////////////////
+namespace
 {
-  switch ( state ) {
-    case LocaleWithState::Requested:
-      return _("Requested");
-    case LocaleWithState::NotRequested:
-      return _("No");
-    case LocaleWithState::Fallback:
-      return _("Fallback");
-  };
-  return "";
-}
-
-static bool isRequestedFallbackLocale ( const Locale &locale )
-{
-  for ( const Locale &loc : God->pool().getRequestedLocales() ) {
-    Locale locFallback = loc.fallback();
-    while ( locFallback != Locale::noCode ) {
-      if ( locFallback == locale  ) {
-        return true;
-      }
-      locFallback = locFallback.fallback();
-    }
-  }
-  return false;
-}
-
-static void printLocaleList( Zypper & zypper, const LocaleWithStateSet &locales )
-{
-  Table tbl;
-  // header
-  TableHeader th;
-
-  // translators: header of table column - the language code, e.g. en_US
-  th << _("Code");
-  // translators: header of table column - the language, e.g. English (United States)
-  th << _("Language");
-  // translators: header of table column - is the language requested? (Yes/No)
-  th << _("Requested");
-
-  tbl << th;
-
-  for_( it, locales.begin(), locales.end() )
+  struct LocaleState
   {
-    TableRow tr(3);
+    enum State {
+      NotRequested = 0,    ///< Not relevant
+      Requested    = 1<<1, ///< A requested locale (supersedes also being a Fallback)
+      Fallback     = 1<<2, ///< Fallback of a requested locale (may also be requested)
+    };
 
-    tr << (*it).locale.code();
-    tr << (*it).locale.name();
-    tr << isRequestedState(it->state);
-    tbl << tr;
+    LocaleState()
+    {}
+
+    LocaleState( State state_r )
+    : _state { state_r }
+    {}
+
+    bool isNone() const		{ return !_state; }
+    bool isRequested() const	{ return _state & Requested; }
+    bool isFallback() const	{ return _state & Fallback; }
+
+    void tagRequested()		{ if ( !isRequested() ) _state |= Requested; }
+    void tagFallback()		{ if ( !isFallback() ) _state |= Fallback; }
+
+    std::string asString() const
+    { return isRequested() ? _("Requested") : isFallback() ? _("Fallback") : _("No"); }
+
+  private:
+    unsigned _state = 0;
+  };
+
+  using LocaleStateMap = std::map<Locale,LocaleState>;
+
+  /** 	lloc helper building the set of locales to show */
+  inline LocaleStateMap argsToLocaleSet( const std::vector<std::string> & localeArgs_r, bool showAll_r )
+  {
+    LocaleStateMap ret;
+    bool mustFixState = true;	// If locales a added in No state and later checked if Requested/Fallback
+
+    if ( showAll_r )
+    {
+      for ( Locale rloc : God->target()->requestedLocales() )
+	ret[rloc].tagRequested();
+      for ( const auto & avloc : God->pool().getAvailableLocales() )
+	ret[avloc];	// state will be adjusted later
+    }
+    else if ( ! localeArgs_r.empty() )
+    {
+      // Search patterns are matched against available locales.
+      // Exact locales are added even if not in available locales.
+      const auto & av { God->pool().getAvailableLocales() };
+      for ( const auto & larg : localeArgs_r )
+      {
+	std::string::size_type suffix = 0;
+	bool includeNoCountryCode = false;
+	if ( str::endsWith( larg, "_" ) )	// Suffix _ (_*) require a (not empty) country code
+	  suffix = 1;
+	else if ( str::endsWith( larg, "_*" ) )	// --"--  _* as convenience for the above
+	  suffix = 2;
+	else if ( str::endsWith( larg, "*" ) )	// Suffix * (except _*) also matches an empty country code
+	{
+	  suffix = 1;
+	  includeNoCountryCode = true;
+	}
+
+	if ( suffix )
+	{
+	  const std::string & stem { larg.substr( 0, larg.size() - suffix ) };
+	  for ( const auto & avloc : av )
+	  {
+	    if ( avloc.language().code() == stem && ( includeNoCountryCode || avloc.country().code() != CountryCode::noCode ) )
+	      ret[avloc];	// state will be adjusted later
+	  }
+	}
+	else	// Exact locale arg
+	  ret[Locale(larg)];	// state will be adjusted later
+      }
+    }
+    else // no args/all, so we show all requested
+    {
+      // Taking the requested locales from Target works even
+      // if the target is just initialized but nor loaded.
+      for ( Locale rloc : God->target()->requestedLocales() )
+      {
+	ret[rloc].tagRequested();
+	while ( (rloc = rloc.fallback()) )
+	  ret[rloc].tagFallback();
+      }
+      mustFixState = false;	// added with the right status
+    }
+
+    if ( mustFixState )
+    {
+      // Now adjust Requested/Fallback state for all collected locales
+      for ( Locale rloc : God->target()->requestedLocales() )
+      {
+	auto it { ret.find( rloc ) };
+	if ( it != ret.end() )
+	  it->second.tagRequested();
+	while ( (rloc = rloc.fallback()) )
+	{
+	  it = ret.find( rloc );
+	  if ( it != ret.end() )
+	    it->second.tagFallback();
+	}
+      }
+    }
+    return ret;
   }
 
-  tbl.sort(1);
+  void printLocaleList( Zypper & zypper, const LocaleStateMap & locales_r )
+  {
+    Table tbl;
+    tbl << ( TableHeader()
+    // translators: header of table column - the language code, e.g. en_US
+    << _("Code")
+    // translators: header of table column - the language, e.g. English (United States)
+    << _("Language")
+    // translators: header of table column - is the language requested? (Yes/No)
+    << _("Requested")
+    );
 
-  cout << tbl;
-}
+    for ( const auto & el : locales_r )
+    {
+      tbl << ( TableRow(3, el.second.isRequested() ? ColorContext::DEFAULT : ColorContext::LOWLIGHT )
+      << el.first.code()
+      << el.first.name()
+      << el.second.asString()
+      );
+    }
+
+    tbl.sort( 0 );
+    cout << tbl;
+  }
+
+  void printLocalePackages( Zypper & zypper, const zypp::sat::LocaleSupport & myLocale )
+  {
+    Table tbl;
+    tbl << ( TableHeader()
+    // translators: header of table column - S is for 'Status' (package installed or not)
+    << _("S")
+    // translators: header of table column - the name of the package
+    << _("Name")
+    // translators: header of table column - the package summary
+    << _("Description")
+    );
+
+    for_( it, myLocale.selectableBegin(), myLocale.selectableEnd() )
+    {
+      TableRow tr(3);
+      zypp::ui::Status status = (*it)->status();
+
+      if ( status == zypp::ui::S_KeepInstalled || status == zypp::ui::S_Protected )
+	tr << "i";
+      else
+	tr << " ";
+      tr << (*it)->name();
+      tr << (*it)->theObj()->summary();
+
+      tbl << tr;
+    }
+
+    tbl.sort(1);
+    cout << tbl;
+  }
 
 #if 0
-static void printXmlLocaleList( Zypper & zypper, const zypp::LocaleSet &locales )
-{
-
-}
+  void printXmlLocaleList( Zypper & zypper, const zypp::LocaleSet &locales )
+  {
+  }
 #endif
+} // namespace
+/////////////////////////////////////////////////////////////////
 
-static void printLocalePackages( Zypper & zypper, const zypp::sat::LocaleSupport & myLocale )
-{
-  Table tbl;
-  TableHeader th;
 
-  // translators: header of table column - S is for 'Status' (package installed or not)
-  th << _("S");
-  // translators: header of table column - the name of the package
-  th << _("Name");
-  // translators: header of table column - the package summary
-  th << _("Description");
-
-  tbl << th;
-
-  for_( it, myLocale.selectableBegin(), myLocale.selectableEnd() )
-  {
-    TableRow tr(3);
-    zypp::ui::Status status = (*it)->status();
-
-    if ( status == zypp::ui::S_KeepInstalled || status == zypp::ui::S_Protected )
-      tr << "i";
-    else
-      tr << " ";
-    tr << (*it)->name();
-    tr << (*it)->theObj()->summary();
-
-    tbl << tr;
-  }
-
-  tbl.sort(1);
-
-  cout << tbl;
-}
-
-static zypp::LocaleSet relevantLocales( const std::vector<std::string> &localeArgs, bool relaxed )
-{
-  const zypp::LocaleSet & availableLocales( God->pool().getAvailableLocales() );
-
-  zypp::LocaleSet resultSet;
-
-  for_( it, availableLocales.begin(), availableLocales.end() )
-  {
-    if ( localeArgs.empty() )
-    {
-      // without argument take only requested locales
-      if ( God->pool().isRequestedLocale(*it) )
-      {
-        resultSet.insert(*it);
-      }
-    }
-    else
-    {
-      // take given locales (if available)
-      for_( loc, localeArgs.begin(), localeArgs.end() )
-      {
-        if ( relaxed ) {
-
-          size_t strSize = loc->size();
-
-          //match all starting with the given country code but exclude the fallback one
-          bool underscoreMatch = str::endsWith( *loc, "_" );
-
-          //match all starting with the given country code including the fallback one
-          bool asteriskMatch = str::endsWith( *loc, "*" );
-
-          if ( asteriskMatch || underscoreMatch )  {
-            if ( strSize < 2 ) {
-              WAR << "Ignoring too short argument " << *loc << endl;
-              continue;
-            }
-            std::string langCode = loc->substr( 0, strSize - 1 );
-            if ( it->language().code() == langCode ) {
-              if ( underscoreMatch && it->country() != CountryCode::noCode )
-                resultSet.insert(*it);
-              else if ( asteriskMatch )
-                resultSet.insert(*it);
-            }
-            continue;
-          }
-        }
-
-        //exact match
-        if ( *loc == (*it).code().c_str() ) {
-          resultSet.insert(*it);
-        }
-      }
-    }
-  }
-
-  return resultSet;
-}
-
-/**
- * Adds fallbacks if not already in the set and flags each entry with
- * the state it is currently in
- */
-static LocaleWithStateSet addMissingInfo ( const zypp::LocaleSet &locales, bool insertMissingFallbacks )
-{
-  LocaleWithStateSet result;
-
-  auto insertOrOverwrite = [&result]( LocaleWithState::State state, const Locale &newElem ) {
-    auto inserted = result.insert( LocaleWithState{ newElem, state } );
-    if ( !inserted.second && inserted.first->state != state) {
-
-      // if we were not able to insert the value, there is already a existing element
-      // try to override it, but first check if that is allowed:
-      // REQ -> ( REQ, NREQ, FB )
-      // NR  -> ()
-      // FB  -> ( NREQ, FB )
-
-      const LocaleWithState &existing = *inserted.first;
-      bool canOverride =   state == LocaleWithState::Requested || //requested always wins
-                         ( state == LocaleWithState::Fallback && existing.state == LocaleWithState::NotRequested );
-
-      if ( canOverride ) {
-        result.erase( inserted.first );
-        if ( ! result.insert( LocaleWithState{ newElem, state } ).second ) {
-          WAR << "Unable to insert locale: "<< newElem << " into the result set " << endl;
-        }
-      }
-    }
-  };
-
-  for ( const Locale &loc : locales ) {
-
-    LocaleWithState::State state = LocaleWithState::NotRequested;
-    if ( God->pool().isRequestedLocale( loc ) ) {
-      state = LocaleWithState::Requested;
-    } else if ( isRequestedFallbackLocale( loc ) ) {
-      state = LocaleWithState::Fallback;
-    }
-
-    insertOrOverwrite( state, loc );
-
-    if ( insertMissingFallbacks ) {
-      Locale locFallback = loc.fallback();
-      while ( locFallback != Locale::noCode ) {
-        insertOrOverwrite( isRequestedFallbackLocale( locFallback ) ? LocaleWithState::Fallback : LocaleWithState::NotRequested, locFallback );
-        locFallback = locFallback.fallback();
-      }
-    }
-  }
-
-  return result;
-}
 
 void listLocales( Zypper & zypper, const std::vector<std::string> &localeArgs, bool showAll )
 {
-  zypp::LocaleSet locales;
-
-  if ( showAll ) {
-    const auto &avail = God->pool().getAvailableLocales();
-    const auto &req = God->pool().getRequestedLocales();
-    std::merge( avail.begin(), avail.end(), req.begin(), req.end(), std::inserter( locales, locales.begin() ) );
-  } else {
-    locales = relevantLocales( localeArgs, true );
-  }
-
-#if 0
-  // print xml output
-  if ( zypper.out().type() == Out::TYPE_XML )
-    printXmlLocaleList(zypper, locales);
-  else
-#endif
-  printLocaleList( zypper, addMissingInfo( locales, showAll || localeArgs.size() == 0 ) );
+  printLocaleList( zypper, argsToLocaleSet( localeArgs, showAll ) );
 }
 
 void localePackages( Zypper &zypper, const std::vector<std::string> &localeArgs, bool showAll )
 {
-   zypp::LocaleSet locales;
-
-   if ( showAll ) {
-     const auto &avail = God->pool().getAvailableLocales();
-     const auto &req = God->pool().getRequestedLocales();
-     std::merge( avail.begin(), avail.end(), req.begin(), req.end(), std::inserter( locales, locales.begin() ) );
-   } else {
-    locales = relevantLocales( localeArgs, true );
-   }
-
-  LocaleWithStateSet locs = addMissingInfo( locales, showAll || localeArgs.size() == 0  );
-
-  std::list<LocaleWithState> sortedLocales ( locs.begin(), locs.end() );
-  sortedLocales.sort( [] ( const LocaleWithState &l, const LocaleWithState &r ) {
-    return l.locale.code() < r.locale.code();
-  });
-
-  for_( it, sortedLocales.begin(), sortedLocales.end() )
+  for ( const auto & el : argsToLocaleSet( localeArgs, showAll ) )
   {
-    const zypp::sat::LocaleSupport & myLocale((*it).locale);
-    cout << endl;
+    zypper.out().gap();
     zypper.out().info( str::form( _("Packages for %s (locale '%s', requested: %s):"),
-      it->locale.name().c_str(), it->locale.code().c_str(), isRequestedState(it->state).c_str() ) );
-    cout << endl;
-    printLocalePackages( zypper, myLocale );
+				  el.first.name().c_str(), el.first.code().c_str(), el.second.asString().c_str() ) );
+    zypper.out().gap();
+    printLocalePackages( zypper, el.first );
   }
 }
 
 void addLocales( Zypper &zypper, const std::vector<std::string> &localeArgs_r, bool packages, std::map<std::string, bool> *result )
 {
-  const zypp::LocaleSet locales = relevantLocales( localeArgs_r, false );
-
-  for_( it, locales.begin(), locales.end() ) {
-    bool success = false;
-
-    if ( !God->pool().isRequestedLocale(*it) ) {
-      success = God->pool().addRequestedLocale( *it );
-      if ( success ) {
-        zypper.out().info( str::form( _("Added locale: %s"), (*it).code().c_str() ) );
-        if ( result ) ( *result )[(*it).code().c_str()] = true;
-      } else {
-        zypper.out().error( str::form( _("ERROR: cannot add %s"), (*it).code().c_str() ) );
-        if ( result ) ( *result )[(*it).code().c_str()] = false;
-      }
-    } else {
-      zypper.out().info( str::form( _(" %s is already requested."), (*it).code().c_str() ) );
-      if ( result ) ( *result )[(*it).code().c_str()] = false;
+  for ( const auto & arg : std::set<std::string>( localeArgs_r.begin(), localeArgs_r.end() ) )
+  {
+    if ( God->pool().addRequestedLocale( Locale(arg) ) )
+    {
+      zypper.out().info( str::Format(_("Added locale: %s") ) % arg );
+      if ( result ) (*result)[arg] = true;
+    }
+    else
+    {
+      zypper.out().info( str::Format(_(" %s is already requested.") ) % arg );
+      if ( result ) (*result)[arg] = false;
     }
   }
 
@@ -339,24 +250,19 @@ void addLocales( Zypper &zypper, const std::vector<std::string> &localeArgs_r, b
   }
 }
 
-void removeLocales( Zypper &zypper, const std::vector<std::string> &localeArgs, bool packages, std::map<std::string, bool> *result )
+void removeLocales( Zypper &zypper, const std::vector<std::string> &localeArgs_r, bool packages, std::map<std::string, bool> *result )
 {
-  for_( it, localeArgs.begin(), localeArgs.end() ) {
-    bool success = false;
-
-    zypp::Locale loc( *it );
-    if ( God->pool().isRequestedLocale( loc ) ) {
-      success = God->pool().eraseRequestedLocale( loc );
-      if ( success ) {
-        zypper.out().info( str::form( _("Removed locale: %s"), (*it).c_str() ) );
-        if ( result ) ( *result )[(*it)] = true;
-      } else {
-        zypper.out().error( str::form( _("ERROR: cannot remove %s"), (*it).c_str() ) ) ;
-        if ( result ) ( *result )[(*it)] = false;
-      }
-    } else {
-      zypper.out().info( str::form( _("%s was not requested."), (*it).c_str() ) );
-      if ( result ) ( *result )[(*it)] = false;
+  for ( const auto & arg : std::set<std::string>( localeArgs_r.begin(), localeArgs_r.end() ) )
+  {
+    if ( God->pool().eraseRequestedLocale( Locale(arg) ) )
+    {
+      zypper.out().info( str::Format(_("Removed locale: %s") ) % arg );
+      if ( result ) (*result)[arg] = true;
+    }
+    else
+    {
+      zypper.out().info( str::Format(_("%s was not requested.") ) % arg );
+      if ( result ) (*result)[arg] = false;
     }
   }
 

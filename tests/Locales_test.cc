@@ -52,13 +52,12 @@ BOOST_AUTO_TEST_CASE( add_locales )
   localeArgs.push_back( "en" );
   localeArgs.push_back( "invalid" );
 
-  // try to add locales "de", "en" and "invalid"
+  // try to add locales "de", "en"
   std::map<std::string, bool> result;
   addLocales( test.zypper(), localeArgs, false, &result );
 
   BOOST_CHECK( (result.find("de") != result.end()) && result["de"] );
   BOOST_CHECK( (result.find("en") != result.end()) && result["en"] );
-  BOOST_CHECK( result.find("invalid") == result.end() ); // not in result, sorted out
 
   // try to add "de" again
   result.clear();
