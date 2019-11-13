@@ -1,28 +1,9 @@
-#!/bin/sh
+#!/usr/bin/env python
 
 # This tool helps you accessing the zypper logfile
 # see --help for more details
 #
 # Author: Dominik Heidler <dheidler@suse.de>
-
-# Shell commands follow
-# Next line is bilingual: it starts a comment in Python, and is a no-op in shell
-""":"
-
-if which python3 > /dev/null 2>&1 ; then
-	PYTHON=python3
-elif which python > /dev/null 2>&1 ; then
-	PYTHON=python
-elif which python2 > /dev/null 2>&1 ; then
-	PYTHON=python2
-fi
-
-exec $PYTHON $0 "$@"
-
-":"""
-# Previous line is bilingual: it ends a comment in Python, and is a no-op in shell
-# Shell commands end here
-# Python script follows
 
 from __future__ import print_function
 import os, string, re, bz2, zlib, sys, time, argparse, errno
