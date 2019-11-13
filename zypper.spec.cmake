@@ -79,23 +79,15 @@ Authors:
     Josef Reidinger <jreidinger@suse.cz>
 
 %package log
-%if 0%{?suse_version} && 0%{?suse_version} < 1140
-Requires:       python >= 2.6
-Requires:       python-argparse
-%else
-Requires:       python >= 2.7
-%endif
-Requires:       xz
+Requires:	/bin/bash
+Requires:	/usr/bin/grep
+Requires:	/usr/bin/awk
 BuildArch:      noarch
 Summary:        CLI for accessing the zypper logfile
 Group:          System/Packages
 
 %description -n zypper-log
 CLI for accessing the zypper logfile
-
-Authors:
---------
-    Dominik Heidler <dheidler@suse.de>
 
 %package aptitude
 Summary:        aptitude compatibility with zypper
