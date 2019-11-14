@@ -17,7 +17,7 @@ msgstr ""
 "Project-Id-Version: zypper.de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-10-29 11:30+0100\n"
-"PO-Revision-Date: 2019-11-02 22:53+0000\n"
+"PO-Revision-Date: 2019-11-14 18:54+0000\n"
 "Last-Translator: Sarah Kriesch <ada.lovelace@gmx.de>\n"
 "Language-Team: German <https://l10n.opensuse.org/projects/zypper/master/de/>"
 "\n"
@@ -4206,6 +4206,8 @@ msgid ""
 "Search for all packages that provide any of the provides of the package(s) "
 "matched by the input parameters."
 msgstr ""
+"Suche alle Pakete, die irgendetwas vom Angebot der zu den Eingabeparametern "
+"passenden Paket(en) bieten."
 
 #. translators: --requires-pkg
 #: src/commands/search/search.cc:178
@@ -4213,6 +4215,8 @@ msgid ""
 "Search for all packages that require any of the provides of the package(s) "
 "matched by the input parameters."
 msgstr ""
+"Suche alle Pakete, die irgendetwas vom Angebot der zu den Eingabeparametern "
+"passenden Paket(en) benötigen."
 
 #. translators: --recommends-pkg
 #: src/commands/search/search.cc:182
@@ -4220,6 +4224,8 @@ msgid ""
 "Search for all packages that recommend any of the provides of the package(s) "
 "matched by the input parameters."
 msgstr ""
+"Suche alle Pakete, die irgendetwas vom Angebot der zu den Eingabeparametern "
+"passenden Paket(en) empfehlen."
 
 #. translators: --supplements-pkg
 #: src/commands/search/search.cc:186
@@ -4227,6 +4233,8 @@ msgid ""
 "Search for all packages that supplement any of the provides of the "
 "package(s) matched by the input parameters."
 msgstr ""
+"Suche alle Pakete, die irgendetwas vom Angebot der zu den Eingabeparametern "
+"passenden Paket(en) ergänzen."
 
 #. translators: --conflicts-pkg
 #: src/commands/search/search.cc:190
@@ -4234,6 +4242,8 @@ msgid ""
 "Search for all packages that conflict with any of the package(s) matched by "
 "the input parameters."
 msgstr ""
+"Suche alle Pakete, die sich mit irgendetwas vom Angebot der zu den "
+"Eingabeparametern passenden Paket(en) kollidieren."
 
 #. translators: --obsoletes-pkg
 #: src/commands/search/search.cc:194
@@ -4248,6 +4258,8 @@ msgid ""
 "Search for all packages that suggest any of the provides of the package(s) "
 "matched by the input parameters."
 msgstr ""
+"Suche alle Pakete, die irgendetwas vom Angebot der zu den Eingabeparametern "
+"passenden Paket(en) vorschlagen."
 
 #. translators: -t, --type <TYPE>
 #: src/commands/search/search.cc:202
