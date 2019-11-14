@@ -522,10 +522,10 @@ namespace zypp
 	    { localeIds.removed().insert( IdString(lang) ); }
 	  }
 
-	  // Assert that TrackedLocaleIds::current is not empty.
-	  // If, so fill in LanguageCode::enCode as last resort.
-	  if ( localeIds.current().empty() )
-	  { localeIds.current().insert( IdString(Locale::enCode) ); }
+	  // bsc#1155678: We try to differ between an empty RequestedLocales
+	  // and one containing 'en' (explicit or as fallback). An empty RequestedLocales
+	  // should not even drag in recommended 'en' packages. So we no longer enforce
+	  // 'en' being in the set.
 	}
 	return *_trackedLocaleIdsPtr;
       }
