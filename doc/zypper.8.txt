@@ -436,7 +436,7 @@ This command also accepts the *Download-and-install mode options* described in t
 		Select packages by capabilities.
 
 	*-D*, *--dry-run*::
-		Test the removal of packages, do not actually remove anything. If used together with *--download-only* a meaningful file conflict check can be performed (see section *Package File Conflicts*).
+		Test the removal of packages, do not actually remove anything.
 
 	*--details*::
 		Show the detailed installation summary.
@@ -453,6 +453,19 @@ include::{incdir}/option_Solver_Flags_Common.txt[]
 
 	*-U*, *--no-clean-deps*::
 		No automatic removal of unneeded dependencies.
+--
+
+*purge-kernels* ['options']::
+	Autoremoves installed kernels.
+	+
+	Automatically cleans up installed kernels according to the rules defined in [zypp.conf:multiversion.kernels] which can be given as <version>, latest(-N), running, oldest(+N).
++
+--
+	*--details*::
+		Show the detailed installation summary.
+
+	*-D*, *--dry-run*::
+		Test the removal of packages, do not actually remove anything.
 --
 
 Update Management Commands

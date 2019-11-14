@@ -162,6 +162,7 @@ namespace
       makeCmd<SourceDownloadCmd> ( ZypperCommand::SOURCE_DOWNLOAD_e , std::string(), { "source-download" } ),
       makeCmd<NeedsRebootingCmd> ( ZypperCommand::NEEDS_REBOOTING_e , std::string(), { "needs-rebooting" } ),
       makeCmd<PSCommand> ( ZypperCommand::PS_e , std::string(), { "ps" } ),
+      makeCmd<PurgeKernelsCmd> ( ZypperCommand::PURGE_KERNELS_e , std::string(), { "purge-kernels" } ),
 
       makeCmd<SubCmd> ( ZypperCommand::SUBCOMMAND_e, _("Subcommands:"), { "subcommand" }),
 
@@ -246,6 +247,7 @@ DEF_ZYPPER_COMMAND( LICENSES );
 DEF_ZYPPER_COMMAND( PS );
 DEF_ZYPPER_COMMAND( DOWNLOAD );
 DEF_ZYPPER_COMMAND( SOURCE_DOWNLOAD );
+DEF_ZYPPER_COMMAND( PURGE_KERNELS );
 
 DEF_ZYPPER_COMMAND( HELP );
 DEF_ZYPPER_COMMAND( SHELL );

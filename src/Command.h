@@ -74,6 +74,7 @@ struct ZypperCommand
   static const ZypperCommand PS;
   static const ZypperCommand DOWNLOAD;
   static const ZypperCommand SOURCE_DOWNLOAD;
+  static const ZypperCommand PURGE_KERNELS;
 
   static const ZypperCommand HELP;
   static const ZypperCommand SHELL;
@@ -157,6 +158,7 @@ struct ZypperCommand
     PS_e,
     DOWNLOAD_e,
     SOURCE_DOWNLOAD_e,
+    PURGE_KERNELS_e,
 
     HELP_e,
     SHELL_e,

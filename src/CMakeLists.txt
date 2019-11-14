@@ -69,6 +69,7 @@ SET (zypper_HEADERS
   commands/utils/licenses.h
   commands/utils/download.h
   commands/utils/source-download.h
+  commands/utils/purge-kernels.h
   commands/ps.h
   commands/needs-rebooting.h
   commands/query.h
@@ -149,6 +150,7 @@ SET( zypper_SRCS
   commands/utils/licenses.cc
   commands/utils/download.cc
   commands/utils/source-download.cc
+  commands/utils/purge-kernels.cc
   commands/ps.cc
   commands/needs-rebooting.cc
   commands/query/info.cc
