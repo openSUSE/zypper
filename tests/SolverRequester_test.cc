@@ -108,28 +108,34 @@ struct ApplyLock
   }
 };
 
-static TestSetup test(Arch_x86_64);
+struct TestInit {
+  TestInit()
+    : testSetup( std::make_unique<TestSetup>( Arch_x86_64 ) )
+  {
+    MIL << "============setup===========" << endl;
+    // fake target from a subset of the online 11.1 repo
+    testSetup->loadTargetRepo(TESTS_SRC_DIR "/data/openSUSE-11.1_subset");
+    testSetup->loadRepo(TESTS_SRC_DIR "/data/openSUSE-11.1", "main");
+    testSetup->loadRepo(TESTS_SRC_DIR "/data/misc", "misc");
+    testSetup->loadRepo(TESTS_SRC_DIR "/data/OBS_zypp_svn-11.1", "zypp");
 
-BOOST_AUTO_TEST_CASE(setup)
-{
-  MIL << "============setup===========" << endl;
-  // fake target from a subset of the online 11.1 repo
-  test.loadTargetRepo(TESTS_SRC_DIR "/data/openSUSE-11.1_subset");
-  test.loadRepo(TESTS_SRC_DIR "/data/openSUSE-11.1", "main");
-  test.loadRepo(TESTS_SRC_DIR "/data/misc", "misc");
-  test.loadRepo(TESTS_SRC_DIR "/data/OBS_zypp_svn-11.1", "zypp");
+    RepoInfo repo;
+    repo.setAlias("upd");
+    repo.addBaseUrl(Url("file://" TESTS_SRC_DIR "/data/openSUSE-11.1_updates"));
+    repo.setPriority(80);
+    repo.setGpgCheck(false);
+    testSetup->loadRepo(repo);
+    //testSetup->loadRepo(TESTS_SRC_DIR "/data/openSUSE-11.1_updates", "upd");
 
-  RepoInfo repo;
-  repo.setAlias("upd");
-  repo.addBaseUrl(Url("file://" TESTS_SRC_DIR "/data/openSUSE-11.1_updates"));
-  repo.setPriority(80);
-  repo.setGpgCheck(false);
-  test.loadRepo(repo);
-  //test.loadRepo(TESTS_SRC_DIR "/data/openSUSE-11.1_updates", "upd");
+    // resolve pool so that the satisfied status of pseudo-installed kinds becomes known
+    getZYpp()->resolver()->resolvePool();
 
-  // resolve pool so that the satisfied status of pseudo-installed kinds becomes known
-  getZYpp()->resolver()->resolvePool();
-}
+  }
+
+  std::unique_ptr<TestSetup> testSetup;
+};
+BOOST_GLOBAL_FIXTURE( TestInit );
+
 
 ///////////////////////////////////////////////////////////////////////////
 // install

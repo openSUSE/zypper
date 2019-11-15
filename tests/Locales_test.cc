@@ -12,38 +12,43 @@
 using namespace std;
 using namespace zypp;
 
-static TestSetup test( Arch_x86_64 );
-
 extern ZYpp::Ptr God;
 
-BOOST_AUTO_TEST_CASE( setup )
-{
-  zypp::base::LogControl::instance().logfile( "./zypper_test.log" );
+static TestSetup test( TestSetup::initLater );
+struct TestInit {
+  TestInit() {
+    test = TestSetup( Arch_x86_64 );
 
-  MIL << "*** Starting locale tests" << endl;
+    zypp::base::LogControl::instance().logfile( "./zypper_test.log" );
 
-  try
-  {
-    God = zypp::getZYpp();
-  }
-  catch ( const ZYppFactoryException & excpt_r )
-  {
-    ZYPP_CAUGHT (excpt_r);
-    cerr <<
-      "Could not access the package manager engine."
-      " This usually happens when you have another application (like YaST)"
-      " using it at the same time. Close the other applications and try again.";
-  }
-  catch ( const Exception & excpt_r)
-  {
-    ZYPP_CAUGHT (excpt_r);
-    cerr << excpt_r.msg() << endl;
-  }
-  
-  test.loadRepo(TESTS_SRC_DIR "/data/openSUSE-11.1", "main");
+    MIL << "*** Starting locale tests" << endl;
 
-  init_target( test.zypper() );
-}
+    try
+    {
+      God = zypp::getZYpp();
+    }
+    catch ( const ZYppFactoryException & excpt_r )
+    {
+      ZYPP_CAUGHT (excpt_r);
+      cerr <<
+        "Could not access the package manager engine."
+        " This usually happens when you have another application (like YaST)"
+        " using it at the same time. Close the other applications and try again.";
+    }
+    catch ( const Exception & excpt_r)
+    {
+      ZYPP_CAUGHT (excpt_r);
+      cerr << excpt_r.msg() << endl;
+    }
+
+    test.loadRepo(TESTS_SRC_DIR "/data/openSUSE-11.1", "main");
+
+    init_target( test.zypper() );
+
+  }
+  ~TestInit() { test.reset(); }
+};
+BOOST_GLOBAL_FIXTURE( TestInit );
 
 BOOST_AUTO_TEST_CASE( add_locales )
 {

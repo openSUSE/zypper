@@ -7,7 +7,15 @@
 using namespace zypp;
 using namespace ZyppFlags;
 
-TestSetup test;	// prepare zypper and assert we have an OutputWriter
+// prepare zypper and assert we have an OutputWriter
+static TestSetup test( TestSetup::initLater );
+struct TestInit {
+  TestInit() {
+    test = TestSetup( );
+  }
+  ~TestInit() { test.reset(); }
+};
+BOOST_GLOBAL_FIXTURE( TestInit );
 
 std::ostream& operator<<(std::ostream& ostr, std::vector<int> const& r) {
   ostr << "{";
