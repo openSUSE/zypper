@@ -55,6 +55,7 @@ SET( zypp_SRCS
   ProgressData.cc
   ProvideFilePolicy.cc
   PublicKey.cc
+  PurgeKernels.cc
   Range.cc
   Rel.cc
   RepoInfo.cc
@@ -159,6 +160,7 @@ SET( zypp_HEADERS
   ProgressData.h
   ProvideFilePolicy.h
   PublicKey.h
+  PurgeKernels.h
   Range.h
   RelCompare.h
   Rel.h

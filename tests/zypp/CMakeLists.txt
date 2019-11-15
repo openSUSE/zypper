@@ -34,6 +34,7 @@ ADD_TESTS(
   ProgressData
   PtrTypes
   PublicKey
+  PurgeKernels
   RWPtr
   RepoInfo
   RepoManager

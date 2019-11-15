@@ -534,6 +534,11 @@ namespace zypp
        */
       Pathname pluginsPath() const;
 
+      /*!
+       * Defaults to a empty string, if no keep spec is defined no kernels are removed
+       */
+      std::string multiversionKernels() const;
+
       //@}
     public:
       class Impl;

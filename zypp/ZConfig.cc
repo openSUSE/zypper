@@ -495,6 +495,10 @@ namespace zypp
                 {
                   cfg_multiversion_path = Pathname(value);
                 }
+                else if ( entry == "multiversion.kernels" )
+                {
+                  cfg_kernel_keep_spec = value;
+                }
                 else if ( entry == "solver.focus" )
                 {
 		  fromString( value, solver_focus );
@@ -637,6 +641,7 @@ namespace zypp
 
     Pathname cfg_vendor_path;
     Pathname cfg_multiversion_path;
+    std::string cfg_kernel_keep_spec;
     Pathname locks_file;
 
     Pathname update_data_path;
@@ -1181,6 +1186,11 @@ namespace zypp
 
   Pathname ZConfig::pluginsPath() const
   { return _pimpl->pluginsPath.get(); }
+
+  string ZConfig::multiversionKernels() const
+  {
+    return _pimpl->cfg_kernel_keep_spec;
+  }
 
   ///////////////////////////////////////////////////////////////////
 
