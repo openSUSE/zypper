@@ -18,13 +18,16 @@ using namespace zypp;
 using namespace boost::unit_test;
 
 
-BOOST_AUTO_TEST_CASE(test_init)
-{
-  TestSetup test( Arch_x86_64 );
-  test.loadRepo( TESTS_SRC_DIR "/data/openSUSE-11.1", "opensuse" );
-  test.loadRepo( TESTS_SRC_DIR "/data/11.0-update", "update" );
-}
+struct TestInit {
+  TestInit()
+    : _test( Arch_x86_64 ){
+    _test.loadRepo( TESTS_SRC_DIR "/data/openSUSE-11.1", "opensuse" );
+    _test.loadRepo( TESTS_SRC_DIR "/data/11.0-update", "update" );
+  }
 
+  TestSetup _test;
+};
+BOOST_GLOBAL_FIXTURE( TestInit );
 
 BOOST_AUTO_TEST_CASE(attributes)
 {

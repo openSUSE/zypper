@@ -15,7 +15,14 @@ using std::cerr;
 using std::endl;
 using namespace zypp;
 
-static TestSetup test;
+static TestSetup test( TestSetup::initLater );
+struct TestInit {
+  TestInit() {
+    test = TestSetup( Arch_x86_64 );
+  }
+  ~TestInit() { test.reset(); }
+};
+BOOST_GLOBAL_FIXTURE( TestInit );
 
 void testcase_init()
 {
@@ -79,7 +86,16 @@ void repocheck()
 // Resolvable is still the original one created for a package...
 ///////////////////////////////////////////////////////////////////
 
-BOOST_AUTO_TEST_CASE(t_1)	{ testcase_init(); }
-BOOST_AUTO_TEST_CASE(t_2)	{ repocheck(); }
-BOOST_AUTO_TEST_CASE(t_4)	{ testcase_init2(); }
-BOOST_AUTO_TEST_CASE(t_5)	{ repocheck(); }
+BOOST_AUTO_TEST_CASE(t_1) {
+
+  //will print additional context information on error
+  BOOST_TEST_CONTEXT("First phase") {
+    testcase_init();
+    repocheck();
+  }
+
+  BOOST_TEST_CONTEXT("Second phase") {
+    testcase_init2();
+    repocheck();
+  }
+}

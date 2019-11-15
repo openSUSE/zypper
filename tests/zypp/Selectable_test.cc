@@ -6,17 +6,23 @@
 
 /////////////////////////////////////////////////////////////////////////////
 
-static TestSetup test;
+static TestSetup test( TestSetup::initLater );
+struct TestInit {
+  TestInit() {
+    test = TestSetup( );
 
-BOOST_AUTO_TEST_CASE(testcase_init)
-{
-//   zypp::base::LogControl::instance().logToStdErr();
-  test.loadTestcaseRepos( TESTS_SRC_DIR"/data/TCSelectable" );
+    //   zypp::base::LogControl::instance().logToStdErr();
+    test.loadTestcaseRepos( TESTS_SRC_DIR"/data/TCSelectable" );
 
-//   dumpRange( USR, test.pool().knownRepositoriesBegin(),
-//                   test.pool().knownRepositoriesEnd() ) << endl;
-//   USR << "pool: " << test.pool() << endl;
-}
+    //   dumpRange( USR, test.pool().knownRepositoriesBegin(),
+    //                   test.pool().knownRepositoriesEnd() ) << endl;
+    //   USR << "pool: " << test.pool() << endl;
+
+  }
+  ~TestInit() { test.reset(); }
+};
+BOOST_GLOBAL_FIXTURE( TestInit );
+
 /////////////////////////////////////////////////////////////////////////////
 
 BOOST_AUTO_TEST_CASE(candiadate)

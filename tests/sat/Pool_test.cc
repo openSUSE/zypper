@@ -2,7 +2,14 @@
 #include <zypp/Repository.h>
 #include <zypp/sat/Pool.h>
 
-static TestSetup test( Arch_x86_64 );
+static TestSetup test( TestSetup::initLater );
+struct TestInit {
+  TestInit() {
+    test = TestSetup( Arch_x86_64 );
+  }
+  ~TestInit() { test.reset(); }
+};
+BOOST_GLOBAL_FIXTURE( TestInit );
 
 namespace zypp { namespace detail {
   /** \relates RepositoryIterator Stream output */

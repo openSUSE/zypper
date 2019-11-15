@@ -8,7 +8,16 @@
 
 /////////////////////////////////////////////////////////////////////////////
 
-static TestSetup test;
+static TestSetup test( TestSetup::initLater );
+struct TestInit {
+  TestInit() {
+    test = TestSetup( Arch_x86_64 );
+    test.loadTestcaseRepos( TESTS_SRC_DIR"/data/TCdup" );
+    dumpRange( USR, test.pool().knownRepositoriesBegin(),
+      test.pool().knownRepositoriesEnd() ) << endl;
+  }
+  ~TestInit() { test.reset(); }
+};
 
 template <class TIterator>
 std::ostream & vdumpPoolStats( std::ostream & str, TIterator begin_r, TIterator end_r )
@@ -22,7 +31,7 @@ std::ostream & vdumpPoolStats( std::ostream & str, TIterator begin_r, TIterator 
   return str << stats;
 }
 
-bool upgrade()
+bool upgrade( )
 {
   bool rres = false;
   {
@@ -42,22 +51,17 @@ bool upgrade()
 }
 
 
-BOOST_AUTO_TEST_CASE(testcase_init)
-{
-  //zypp::base::LogControl::instance().logToStdErr();
-  test.loadTestcaseRepos( TESTS_SRC_DIR"/data/TCdup" );
-  dumpRange( USR, test.pool().knownRepositoriesBegin(),
-                  test.pool().knownRepositoriesEnd() ) << endl;
-  USR << "pool: " << test.pool() << endl;
-  BOOST_REQUIRE( upgrade() );
-}
-/////////////////////////////////////////////////////////////////////////////
+BOOST_GLOBAL_FIXTURE( TestInit );
 
-BOOST_AUTO_TEST_CASE(orphaned)
+BOOST_AUTO_TEST_CASE( orphaned )
 {
+  USR << "pool: " << test.pool() << endl;
+  BOOST_REQUIRE( upgrade( ) );
+
   ResPoolProxy proxy( test.poolProxy() );
   BOOST_CHECK_EQUAL( proxy.lookup( ResKind::package, "glibc" )->status(),		ui::S_KeepInstalled );
   BOOST_CHECK_EQUAL( proxy.lookup( ResKind::package, "release-package" )->status(),	ui::S_AutoUpdate );
   BOOST_CHECK_EQUAL( proxy.lookup( ResKind::package, "dropped_required" )->status(),	ui::S_KeepInstalled );
   BOOST_CHECK_EQUAL( proxy.lookup( ResKind::package, "dropped" )->status(),		ui::S_AutoDel );
 }
+

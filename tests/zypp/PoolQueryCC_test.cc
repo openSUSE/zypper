@@ -14,9 +14,6 @@ using std::cerr;
 using std::endl;
 using namespace zypp;
 
-static TestSetup test;
-
-/////////////////////////////////////////////////////////////////////////////
 template <class TCont>
 std::ostream & nlist( std::ostream & str, const TCont & set_r )
 {
@@ -26,11 +23,19 @@ std::ostream & nlist( std::ostream & str, const TCont & set_r )
   return str << endl;
 }
 
-BOOST_AUTO_TEST_CASE(init)
-{
-  test.loadTargetHelix( TESTS_SRC_DIR "/zypp/data/PoolQueryCC/rxnames.xml" );
-  nlist( cout << "repo ", ResPool::instance() );
-}
+/////////////////////////////////////////////////////////////////////////////
+
+static TestSetup test( TestSetup::initLater );
+struct TestInit {
+  TestInit() {
+    test = TestSetup( Arch_x86_64 );
+
+    test.loadTargetHelix( TESTS_SRC_DIR "/zypp/data/PoolQueryCC/rxnames.xml" );
+    nlist( cout << "repo ", ResPool::instance() );
+  }
+  ~TestInit() { test.reset(); }
+};
+BOOST_GLOBAL_FIXTURE( TestInit );
 
 /////////////////////////////////////////////////////////////////////////////
 // Basic issue: Multiple match strings are compiled into a singe regex. The

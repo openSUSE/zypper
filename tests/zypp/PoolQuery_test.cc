@@ -5,19 +5,23 @@
 #define BOOST_TEST_MODULE PoolQuery
 
 /////////////////////////////////////////////////////////////////////////////
-static TestSetup test( Arch_x86_64 );
+static TestSetup test( TestSetup::initLater );
+struct TestInit {
+  TestInit() {
+    test = TestSetup( Arch_x86_64 );
 
-BOOST_AUTO_TEST_CASE(pool_query_init)
-{
-  // Abuse;) vbox as System repo:
-  test.loadTargetRepo( TESTS_SRC_DIR "/data/obs_virtualbox_11_1" );
-  test.loadRepo( TESTS_SRC_DIR "/data/openSUSE-11.1", "opensuse" );
-  test.loadRepo( TESTS_SRC_DIR "/data/OBS_zypp_svn-11.1", "zyppsvn" );
+    // Abuse;) vbox as System repo:
+    test.loadTargetRepo( TESTS_SRC_DIR "/data/obs_virtualbox_11_1" );
+    test.loadRepo( TESTS_SRC_DIR "/data/openSUSE-11.1", "opensuse" );
+    test.loadRepo( TESTS_SRC_DIR "/data/OBS_zypp_svn-11.1", "zyppsvn" );
 
-  dumpRange( USR, test.pool().knownRepositoriesBegin(),
-                  test.pool().knownRepositoriesEnd() );
-  USR << "pool: " << test.pool() << endl;
-}
+    dumpRange( USR, test.pool().knownRepositoriesBegin(),
+      test.pool().knownRepositoriesEnd() );
+    USR << "pool: " << test.pool() << endl;
+  }
+  ~TestInit() { test.reset(); }
+};
+BOOST_GLOBAL_FIXTURE( TestInit );
 /////////////////////////////////////////////////////////////////////////////
 
 static std::ofstream devNull;

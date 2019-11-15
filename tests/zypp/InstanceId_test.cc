@@ -4,16 +4,19 @@
 #define BOOST_TEST_MODULE InstanceId
 
 /////////////////////////////////////////////////////////////////////////////
-static TestSetup test( Arch_x86_64 );
+static TestSetup test( TestSetup::initLater );
+struct TestInit {
+  TestInit() {
+    test = TestSetup( Arch_x86_64 );
 
-BOOST_AUTO_TEST_CASE(pool_query_init)
-{
-  // Abuse;) vbox as System repo:
-  test.loadTargetRepo( TESTS_SRC_DIR "/data/obs_virtualbox_11_1" );
-  test.loadRepo( TESTS_SRC_DIR "/data/openSUSE-11.1", "opensuse" );
-  test.loadRepo( TESTS_SRC_DIR "/data/OBS_zypp_svn-11.1", "zyppsvn" );
-}
-
+    // Abuse;) vbox as System repo:
+    test.loadTargetRepo( TESTS_SRC_DIR "/data/obs_virtualbox_11_1" );
+    test.loadRepo( TESTS_SRC_DIR "/data/openSUSE-11.1", "opensuse" );
+    test.loadRepo( TESTS_SRC_DIR "/data/OBS_zypp_svn-11.1", "zyppsvn" );
+  }
+  ~TestInit() { test.reset(); }
+};
+BOOST_GLOBAL_FIXTURE( TestInit );
 /////////////////////////////////////////////////////////////////////////////
 
 BOOST_AUTO_TEST_CASE(default_constructed)

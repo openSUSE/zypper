@@ -8,7 +8,7 @@ using namespace boost::unit_test;
 #include "zypp/pool/PoolStats.h"
 #include "zypp/ui/Selectable.h"
 
-static TestSetup test;
+static TestSetup test( TestSetup::initLater );
 
 struct BAD_TESTCASE {};
 
@@ -48,17 +48,22 @@ PoolItem Apde;	//  A: aspell-de	(wanted locale)
 PoolItem Apfr;	//  A: aspell-fr	(unwanted locale)
 PoolItem Aprec;	//  A: recommended-pkg	(by aspell)
 
-BOOST_AUTO_TEST_CASE(testcase_init)
-{
-  test.loadTestcaseRepos( TESTS_SRC_DIR"/data/TCNamespaceRecommends" );
-  Ip	= getIPi( "aspell" );
-  Ap	= getAPi( "aspell" );
-  Ipen	= getIPi( "aspell-en" );
-  Apen	= getAPi( "aspell-en" );
-  Apde	= getAPi( "aspell-de" );
-  Apfr	= getAPi( "aspell-fr" );
-  Aprec	= getAPi( "recommended-pkg" );
-}
+struct TestInit {
+  TestInit() {
+    test = TestSetup( );
+
+    test.loadTestcaseRepos( TESTS_SRC_DIR"/data/TCNamespaceRecommends" );
+    Ip	= getIPi( "aspell" );
+    Ap	= getAPi( "aspell" );
+    Ipen	= getIPi( "aspell-en" );
+    Apen	= getAPi( "aspell-en" );
+    Apde	= getAPi( "aspell-de" );
+    Apfr	= getAPi( "aspell-fr" );
+    Aprec	= getAPi( "recommended-pkg" );
+  }
+  ~TestInit() { test.reset(); }
+};
+BOOST_GLOBAL_FIXTURE( TestInit );
 
 /////////////////////////////////////////////////////////////////////////////
 

@@ -19,7 +19,14 @@ using boost::unit_test::test_case;
 using namespace std;
 using namespace zypp;
 
-static TestSetup test( Arch_x86_64 );
+static TestSetup test( TestSetup::initLater );
+struct TestInit {
+  TestInit() {
+    test = TestSetup( Arch_x86_64 );
+  }
+  ~TestInit() { test.reset(); }
+};
+BOOST_GLOBAL_FIXTURE( TestInit );
 
 BOOST_AUTO_TEST_CASE(capabilities_test)
 {

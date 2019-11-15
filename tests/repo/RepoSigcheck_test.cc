@@ -16,7 +16,14 @@ using std::endl;
 #define COUT if ( TC_VERBOSE ) std::cout
 #define TAG COUT << "*** " << __PRETTY_FUNCTION__ << endl
 
-TestSetup test( Arch_x86_64, TSO_REPO_DEFAULT_GPG );
+static TestSetup test( TestSetup::initLater );
+struct TestInit {
+  TestInit() {
+    test = TestSetup( Arch_x86_64, TSO_REPO_DEFAULT_GPG );
+  }
+  ~TestInit() { test.reset(); }
+};
+BOOST_GLOBAL_FIXTURE( TestInit );
 const Pathname DATADIR( TESTS_SRC_DIR "/repo/RepoSigcheck" );
 
 ///////////////////////////////////////////////////////////////////

@@ -1,5 +1,4 @@
 #include "TestSetup.h"
-static TestSetup test;
 
 #include "zypp/target/rpm/RpmDb.h"
 using target::rpm::RpmDb;
@@ -9,6 +8,15 @@ using target::rpm::RpmDb;
 #ifndef HAVE_NO_RPMTSSETVFYFLAGS
 #define HAVE_RPMTSSETVFYFLAGS
 #endif
+
+static TestSetup test( TestSetup::initLater );
+struct TestInit {
+  TestInit() {
+    test = TestSetup( );
+  }
+  ~TestInit() { test.reset(); }
+};
+BOOST_GLOBAL_FIXTURE( TestInit );
 
 ///////////////////////////////////////////////////////////////////
 //

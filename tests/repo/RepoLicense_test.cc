@@ -11,7 +11,15 @@ using namespace zypp;
 using std::cout;
 using std::endl;
 
-TestSetup test( Arch_x86_64 );
+static TestSetup test( TestSetup::initLater );
+struct TestInit {
+  TestInit() {
+    test = TestSetup( Arch_x86_64 );
+  }
+  ~TestInit() { test.reset(); }
+};
+BOOST_GLOBAL_FIXTURE( TestInit );
+
 const Pathname DATADIR( TESTS_SRC_DIR "/repo/RepoLicense" );
 
 ///////////////////////////////////////////////////////////////////

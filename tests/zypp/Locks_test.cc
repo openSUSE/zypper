@@ -26,14 +26,17 @@ bool isLocked( const sat::Solvable & solvable )
   return false;
 }
 
-BOOST_AUTO_TEST_CASE(pool_query_init)
-{
-  TestSetup test( Arch_x86_64 );
-  //test.loadTarget(); // initialize and load target
-  test.loadRepo( TESTS_SRC_DIR "/data/openSUSE-11.1", "opensuse" );
-  test.loadRepo( TESTS_SRC_DIR "/data/OBS_zypp_svn-11.1", "@System" );
-}
-
+static TestSetup test( TestSetup::initLater );
+struct TestInit {
+  TestInit() {
+    test = TestSetup( Arch_x86_64 );
+    //test.loadTarget(); // initialize and load target
+    test.loadRepo( TESTS_SRC_DIR "/data/openSUSE-11.1", "opensuse" );
+    test.loadRepo( TESTS_SRC_DIR "/data/OBS_zypp_svn-11.1", "@System" );
+  }
+  ~TestInit() { test.reset(); }
+};
+BOOST_GLOBAL_FIXTURE( TestInit );
 
 /////////////////////////////////////////////////////////////////////////////
 //  0xx basic queries
