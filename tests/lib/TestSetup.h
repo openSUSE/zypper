@@ -84,17 +84,23 @@ class TestSetup
     typedef TestSetupOptions Options;
 
   public:
+    struct InitLaterType {};
+    static constexpr InitLaterType initLater = InitLaterType();
+
+    TestSetup( InitLaterType )
+    {}
+
     TestSetup( const Arch & sysarch_r = Arch_empty )
-    { _ctor( Pathname(), sysarch_r, Options() ); }
+      : _pimpl ( new Impl( Pathname(), sysarch_r, Options() ) ) { }
 
     TestSetup( const Pathname & rootdir_r, const Arch & sysarch_r = Arch_empty, const Options & options_r = Options() )
-    { _ctor( rootdir_r, sysarch_r, options_r ); }
+      : _pimpl ( new Impl( rootdir_r, sysarch_r, options_r ) ) { }
 
     TestSetup( const Pathname & rootdir_r, const Options & options_r )
-    { _ctor( rootdir_r, Arch_empty, options_r ); }
+      : _pimpl ( new Impl( rootdir_r, Arch_empty, options_r ) ) { }
 
-    ~TestSetup()
-    { USR << (_tmprootdir.path() == _rootdir ? "DELETE" : "KEEP") << " TESTSETUP below " << _rootdir << endl; }
+    void reset()
+    { _pimpl.reset(); }
 
   public:
     /** Whether directory \a path_r contains a solver testcase. */
@@ -110,15 +116,15 @@ class TestSetup
     }
 
   public:
-    const Pathname & root() const { return _rootdir; }
+    const Pathname & root() const { return _pimpl->_rootdir; }
 
-    Target &     target()      { if ( ! getZYpp()->getTarget() ) getZYpp()->initializeTarget( _rootdir ); return *getZYpp()->getTarget(); }
-    RepoManager  repomanager() { return RepoManager( RepoManagerOptions::makeTestSetup( _rootdir ) ); }
+    Target &     target()      { if ( ! getZYpp()->getTarget() ) getZYpp()->initializeTarget( _pimpl->_rootdir ); return *getZYpp()->getTarget(); }
+    RepoManager  repomanager() { return RepoManager( RepoManagerOptions::makeTestSetup( _pimpl->_rootdir ) ); }
     ResPool      pool()        { return ResPool::instance(); }
     ResPoolProxy poolProxy()   { return pool().proxy(); }
     sat::Pool    satpool()     { return sat::Pool::instance(); }
     Resolver &   resolver()    { return *getZYpp()->resolver(); }
-    Zypper &     zypper()      { return _zypper; }
+    Zypper &     zypper()      { return _pimpl->_zypper; }
 
   public:
     /** Load target repo. */
@@ -392,32 +398,42 @@ class TestSetup
     }
 
   private:
-    void _ctor( const Pathname & rootdir_r, const Arch & sysarch_r, const Options & options_r )
+    struct Impl
     {
-      if ( rootdir_r.empty() )
-        _rootdir = _tmprootdir.path();
-      else
+      Impl( const Pathname & rootdir_r, const Arch & sysarch_r, const Options & options_r )
       {
-        filesystem::assert_dir( (_rootdir = rootdir_r) );
-        if ( options_r.testFlag( TSO_CLEANROOT ) )
-          filesystem::clean_dir( _rootdir );
+        if ( rootdir_r.empty() )
+          _rootdir = _tmprootdir.path();
+        else
+        {
+          filesystem::assert_dir( (_rootdir = rootdir_r) );
+          if ( options_r.testFlag( TSO_CLEANROOT ) )
+            filesystem::clean_dir( _rootdir );
+        }
+
+        // set up the Zypper instance
+
+        _zypper.configNoConst().root_dir = _rootdir.asString();
+        _zypper.configNoConst().rm_options = RepoManagerOptions(_rootdir.asString());
+        _zypper.configNoConst().rm_options.knownReposPath = _rootdir / "repos.d";
+        _zypper.setOutputWriter(new OutNormal(Out::DEBUG));
+
+        if ( ! sysarch_r.empty() )
+          ZConfig::instance().setSystemArchitecture( sysarch_r );
+        USR << "CREATED TESTSETUP below " << _rootdir << endl;
       }
 
-      // set up the Zypper instance
+      ~Impl()
+      {
+        USR << (_tmprootdir.path() == _rootdir ? "DELETE" : "KEEP") << " TESTSETUP below " << _rootdir << endl;
+      }
 
-      _zypper.configNoConst().root_dir = _rootdir.asString();
-      _zypper.configNoConst().rm_options = RepoManagerOptions(_rootdir.asString());
-      _zypper.configNoConst().rm_options.knownReposPath = _rootdir / "repos.d";
-      _zypper.setOutputWriter(new OutNormal(Out::DEBUG));
+      filesystem::TmpDir _tmprootdir;
+      Pathname           _rootdir;
+      Zypper &           _zypper = Zypper::instance();
+    };
 
-      if ( ! sysarch_r.empty() )
-        ZConfig::instance().setSystemArchitecture( sysarch_r );
-      USR << "CREATED TESTSETUP below " << _rootdir << endl;
-    }
-  private:
-    filesystem::TmpDir _tmprootdir;
-    Pathname           _rootdir;
-    Zypper &           _zypper = Zypper::instance();
+    std::unique_ptr<Impl> _pimpl;	// maybe worth creating RW_pointer traits for it
 };
 
 

@@ -11,7 +11,14 @@
 using namespace std;
 using namespace zypp;
 
-static TestSetup test(Arch_x86_64);
+static TestSetup test;
+struct TestInit {
+  TestInit() {
+    test = TestSetup( Arch_x86_64 );
+  }
+  ~TestInit() { test.reset(); }
+};
+BOOST_GLOBAL_FIXTURE( TestInit );
 
 std::ostream & operator<<( std::ostream & str_r, const PackageArgs & obj_r )
 {
