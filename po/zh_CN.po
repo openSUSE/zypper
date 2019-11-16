@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-10-29 11:30+0100\n"
-"PO-Revision-Date: 2019-07-19 13:51+0000\n"
+"PO-Revision-Date: 2019-11-16 04:54+0000\n"
 "Last-Translator: Marguerite Su <i@marguerite.su>\n"
 "Language-Team: Chinese (China) <https://l10n.opensuse.org/projects/zypper/"
 "master/zh_CN/>\n"
@@ -791,9 +791,9 @@ msgstr "在表格中不要缩写文本。"
 
 #. translators: --table-style, -s, %1% denotes the supported range of the integer argument (e.g. "1-11")
 #: src/Config.cc:420
-#, fuzzy, boost-format
+#, boost-format
 msgid "Table style (%1%)."
-msgstr "表格样式（整数）。"
+msgstr "表格风格 (%1%)."
 
 #: src/Config.cc:424 src/commands/optionsets.cc:284
 msgid "Entering non-interactive mode."
@@ -3854,7 +3854,7 @@ msgstr "搜索建议了搜索字符串内容的软件包。"
 msgid ""
 "Search for all packages that provide any of the provides of the package(s) "
 "matched by the input parameters."
-msgstr ""
+msgstr "搜索全部其提供栏中的任意一项匹配到了输入参数的软件包。"
 
 #. translators: --requires-pkg
 #: src/commands/search/search.cc:178
