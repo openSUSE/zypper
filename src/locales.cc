@@ -42,6 +42,7 @@ namespace
       NotRequested = 0,    ///< Not relevant
       Requested    = 1<<1, ///< A requested locale (supersedes also being a Fallback)
       Fallback     = 1<<2, ///< Fallback of a requested locale (may also be requested)
+      Available    = 1<<3, ///< We saw at lest one package supporting the locale
     };
 
     LocaleState()
@@ -54,12 +55,26 @@ namespace
     bool isNone() const		{ return !_state; }
     bool isRequested() const	{ return _state & Requested; }
     bool isFallback() const	{ return _state & Fallback; }
+    bool isAvailable() const	{ return _state & Available; }
 
     void tagRequested()		{ if ( !isRequested() ) _state |= Requested; }
     void tagFallback()		{ if ( !isFallback() ) _state |= Fallback; }
+    void tagAvailable()		{ if ( !isAvailable() ) _state |= Available; }
 
     std::string asString() const
-    { return isRequested() ? _("Requested") : isFallback() ? _("Fallback") : _("No"); }
+    {
+      std::string ret;
+      if ( isRequested() )
+	ret = _("Requested");
+      else if ( isFallback() )
+	ret = _("Fallback");
+      else {
+	ret = _("No");
+	if ( !isAvailable() )
+	  ret += " (n/a)";
+      }
+      return ret;
+    }
 
   private:
     unsigned _state = 0;
@@ -78,7 +93,7 @@ namespace
       for ( Locale rloc : God->target()->requestedLocales() )
 	ret[rloc].tagRequested();
       for ( const auto & avloc : God->pool().getAvailableLocales() )
-	ret[avloc];	// state will be adjusted later
+	ret[avloc].tagAvailable();	// Requested/Fallback state will be adjusted later
     }
     else if ( ! localeArgs_r.empty() )
     {
@@ -105,11 +120,17 @@ namespace
 	  for ( const auto & avloc : av )
 	  {
 	    if ( avloc.language().code() == stem && ( includeNoCountryCode || avloc.country().code() != CountryCode::noCode ) )
-	      ret[avloc];	// state will be adjusted later
+	      ret[avloc].tagAvailable();	// Requested/Fallback state will be adjusted later
 	  }
 	}
 	else	// Exact locale arg
-	  ret[Locale(larg)];	// state will be adjusted later
+	{
+	  Locale loc { larg };
+	  if ( av.count( loc ) )	// Requested/Fallback state will be adjusted later
+	    ret[loc].tagAvailable();
+	  else
+	    ret[loc];
+	}
       }
     }
     else // no args/all, so we show all requested
@@ -128,6 +149,7 @@ namespace
     if ( mustFixState )
     {
       // Now adjust Requested/Fallback state for all collected locales
+      // Avaialble state should have been set before.
       for ( Locale rloc : God->target()->requestedLocales() )
       {
 	auto it { ret.find( rloc ) };
