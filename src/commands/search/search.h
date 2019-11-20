@@ -40,7 +40,6 @@ private:
   CmdMode _cmdMode;
   MatchMode _mode = MatchMode::Default;
   bool _forceNameAttr = false;
-  bool _searchFileList = false;
   bool _searchDesc = false;
   bool _caseSensitive = false;
   bool _details = false;
