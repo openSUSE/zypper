@@ -205,7 +205,7 @@ zypp::ZyppFlags::CommandGroup SearchCmd::cmdOptions() const
               // translators: -n, --name
              _("Useful together with dependency options, otherwise searching in package name is default.")
         },
-        { "file-list", 'f', ZyppFlags::NoArgument, ZyppFlags::BoolType( &that._searchFileList, ZyppFlags::StoreTrue, _searchFileList ),
+        { "file-list", 'f', ZyppFlags::NoArgument, ZyppFlags::appendSolvAttrToSet( that._requestedDeps, sat::SolvAttr::filelist ),
               // translators: -f, --file-list
               _("Search for a match in the file list of packages.")
         }
@@ -261,7 +261,6 @@ void SearchCmd::doReset()
 {
   _mode = MatchMode::Default;
   _forceNameAttr = false;
-  _searchFileList = false;
   _searchDesc = false;
   _caseSensitive = false;
   _details = false;
