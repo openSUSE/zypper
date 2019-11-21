@@ -50,6 +50,32 @@ int usage( const std::string & msg_r = std::string(), int exit_r = 100 )
   return exit_r;
 }
 
+#define COL_R   "\033[0;31m"
+#define COL_G   "\033[0;32m"
+#define COL_B   "\033[0;34m"
+#define COL_C   "\033[0;36m"
+#define COL_M   "\033[0;35m"
+#define COL_Y   "\033[0;33m"
+#define COL_BL  "\033[0;30m"
+#define COL_WH  "\033[1;37m"
+#define COL_OFF "\033[0m"
+
+std::string colorId( sat::Solvable solv_r )
+{
+  // return solv_r.asString();
+  std::string ret;
+  if ( solv_r )
+  {
+    static str::Format fmt { COL_B "%s" COL_OFF "-" COL_G "%s" COL_OFF ".%s" };
+    ret = fmt % solv_r.name() % solv_r.edition() % solv_r.arch();
+  }
+  else
+  {
+    ret = ( solv_r.id() == sat::detail::systemSolvableId ?  "systemSolvable" : "noSolvable" );
+  }
+  return ret;
+}
+
 void tableOut( const std::string & s1 = std::string(),
                const std::string & s2 = std::string(),
                const std::string & s3 = std::string(),
@@ -241,38 +267,41 @@ int main( int argc, char * argv[] )
   {
     if ( (*argv)[0] == '-' )
     {
-      switch ( (*argv)[1] )
+      for ( const char * arg = (*argv)+1; *arg != '\0'; ++arg )	// -pr for -p -r
       {
-        case 'a': names =	true, 	requires = provides =	true;	break;
-        case 'A': names =	true, 	requires = provides =	false;	break;
-	case 'D':
-	  if ( argc > 1 )
-	  {
-	    --argc,++argv;
-	    dDump( *argv );
-	  }
-	  else
-	    return errexit("-D <pkgspec> requires an argument.");
-	  break;
-        case 'i': ignorecase =	true;	break;
-        case 'I': ignorecase =	false;	break;
-        case 'x': matechexact =	true;	break;
-        case 'n': names =	true;	break;
-        case 'N': names =	false;	break;
-        case 'r': requires =	true;	break;
-        case 'R': requires =	false;	break;
-        case 'p': provides =	true;	break;
-        case 'P': provides =	false;	break;
-        case 'c': conflicts =	true;	break;
-        case 'C': conflicts =	false;	break;
-        case 'o': obsoletes =	true;	break;
-        case 'O': obsoletes =	false;	break;
-        case 'm': recommends =	true;	break;
-        case 'M': recommends =	false;	break;
-        case 's': supplements =	true;	break;
-        case 'S': supplements =	false;	break;
-        case 'e': enhacements =	true;	break;
-        case 'E': enhacements =	false;	break;
+	switch ( *arg )
+	{
+	  case 'a': names =		true, 	requires = provides =	true;	break;
+	  case 'A': names =		true, 	requires = provides =	false;	break;
+	  case 'D':
+	    if ( argc > 1 )
+	    {
+	      --argc,++argv;
+	      dDump( *argv );
+	    }
+	    else
+	      return errexit("-D <pkgspec> requires an argument.");
+	    break;
+	  case 'i': ignorecase =	true;	break;
+	  case 'I': ignorecase =	false;	break;
+	  case 'x': matechexact =	true;	break;
+	  case 'n': names =		true;	break;
+	  case 'N': names =		false;	break;
+	  case 'r': requires =		true;	break;
+	  case 'R': requires =		false;	break;
+	  case 'p': provides =		true;	break;
+	  case 'P': provides =		false;	break;
+	  case 'c': conflicts =		true;	break;
+	  case 'C': conflicts =		false;	break;
+	  case 'o': obsoletes =		true;	break;
+	  case 'O': obsoletes =		false;	break;
+	  case 'm': recommends =	true;	break;
+	  case 'M': recommends =	false;	break;
+	  case 's': supplements =	true;	break;
+	  case 'S': supplements =	false;	break;
+	  case 'e': enhacements =	true;	break;
+	  case 'E': enhacements =	false;	break;
+	}
       }
       continue;
     }
@@ -365,7 +394,7 @@ int main( int argc, char * argv[] )
       if ( it->isKind( ResKind::srcpackage ) && !withSrcPackages )
 	continue;
 
-      tableOut( str::numstring( it->id() ), it->asString(),
+      tableOut( str::numstring( it->id() ), colorId(*it),
 		str::form( "(%d)%s", it->repository().info().priority(), it->repository().name().c_str() ),
 		str::numstring( PoolItem(*it)->buildtime() ) );
       tableOut( "", "",
