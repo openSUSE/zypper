@@ -21,6 +21,7 @@
 #include "zypp/ZYppCallbacks.h"
 #include "zypp/ExternalProgram.h"
 #include "zypp/target/rpm/RpmHeader.h"
+#include "zypp/target/rpm/librpmDb.h"
 #include "zypp/ZConfig.h"
 #include "zypp/ZYppCallbacks.h"
 
@@ -73,8 +74,8 @@ namespace zypp
 	    out << "#! " << pkg->tag_posttransprog() << endl
 	        << pkg->tag_posttrans() << endl;
 	  }
-	  _scripts.push_back( script.path().basename() );
-	  MIL << "COLLECT posttrans: " << PathInfo( script.path() ) << endl;
+          _scripts.push_back( std::make_pair( script.path().basename(), pkg->tag_name() ) );
+          MIL << "COLLECT posttrans: '" << PathInfo( script.path() ) << "' for package: '" << pkg->tag_name() << "'" << endl;
 	  //DBG << "PROG:  " << pkg->tag_posttransprog() << endl;
 	  //DBG << "SCRPT: " << pkg->tag_posttrans() << endl;
 	  return true;
@@ -97,7 +98,8 @@ namespace zypp
 	  bool firstScript = true;
 	  while ( ! _scripts.empty() )
 	  {
-	    const std::string & script = _scripts.front();
+	    const auto &scriptPair = _scripts.front();
+	    const std::string & script = scriptPair.first;
 	    const std::string & pkgident( script.substr( 0, script.size()-6 ) );	// strip tmp file suffix
 
 	    scriptProgress.name( str::Format(_("Executing %%posttrans script '%1%'")) % pkgident );
@@ -119,8 +121,13 @@ namespace zypp
 	      return false;
 	    }
 
-	    MIL << "EXECUTE posttrans: " << script << endl;
-	    ExternalProgram prog( (noRootScriptDir/script).asString() + " 0", ExternalProgram::Stderr_To_Stdout, false, -1, true, _root );
+            int npkgs = 0;
+            rpm::librpmDb::db_const_iterator it;
+            for ( it.findByName( scriptPair.second ); *it; ++it )
+              npkgs++;
+
+            MIL << "EXECUTE posttrans: " << script << " with argument: " << npkgs << endl;
+            ExternalProgram prog( (noRootScriptDir/script).asString() + " " +str::numstring( npkgs ), ExternalProgram::Stderr_To_Stdout, false, -1, true, _root );
 
 	    str::Str collect;
 	    for( std::string line = prog.receiveLine(); ! line.empty(); line = prog.receiveLine() )
@@ -176,8 +183,8 @@ namespace zypp
 	  msg << "%posttrans scripts skipped while aborting:\n";
 	  for ( const auto & script : _scripts )
 	  {
-	    const std::string & pkgident( script.substr( 0, script.size()-6 ) );	// strip tmp file suffix
-	    WAR << "UNEXECUTED posttrans: " << script << endl;
+	    const std::string & pkgident( script.first.substr( 0, script.first.size()-6 ) );	// strip tmp file suffix
+	    WAR << "UNEXECUTED posttrans: " << script.first << endl;
 	    msg << "    " << pkgident << "\n";
 	  }
 
@@ -199,7 +206,7 @@ namespace zypp
 
       private:
 	Pathname _root;
-	std::list<std::string> _scripts;
+        std::list< std::pair< std::string, std::string > > _scripts;
 	boost::scoped_ptr<filesystem::TmpDir> _ptrTmpdir;
     };
 
