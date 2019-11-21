@@ -17,7 +17,7 @@ RemoveLocaleCmd::RemoveLocaleCmd(std::vector<std::string> &&commandAliases_r)
       _( "removelocale (rloc) [OPTIONS] <LOCALE> ..." ),
       _( "Remove locale(s) from requested locales." ),
       _( "Remove given locale(s) from the list of supported languages." ),
-      ResetRepoManager| InitTarget | LoadResolvables
+      ResetRepoManager| InitTarget | LoadTargetResolvables
     )
 {
   doReset();
