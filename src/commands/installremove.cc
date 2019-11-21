@@ -129,7 +129,7 @@ int RemoveCmd::execute(Zypper &zypper, const std::vector<std::string> &positiona
 
   // prepare repositories
   // bsc#606220: don't load repos when removing
-  int code = defaultSystemSetup( zypper, InitTarget | LoadResolvables | Resolve );
+  int code = defaultSystemSetup( zypper, InitTarget | LoadTargetResolvables | Resolve );
   if ( code != ZYPPER_EXIT_OK )
     return code;
 
