@@ -8,6 +8,7 @@
 #include "utils/flags/flagtypes.h"
 #include "utils/messages.h"
 #include "commands/commandhelpformatter.h"
+#include "commands/conditions.h"
 #include "locales.h"
 
 RemoveLocaleCmd::RemoveLocaleCmd(std::vector<std::string> &&commandAliases_r)
@@ -61,4 +62,12 @@ int RemoveLocaleCmd::execute ( Zypper &zypper, const std::vector<std::string> &p
   }
   removeLocales( zypper, positionalArgs, _packages );
   return zypper.exitCode();
+}
+
+std::vector<BaseCommandConditionPtr> RemoveLocaleCmd::conditions() const
+{
+  return {
+    std::make_shared<NeedsRootCondition>(),
+    std::make_shared<NeedsWritableRoot>()
+  };
 }

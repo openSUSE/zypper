@@ -8,6 +8,7 @@
 #include "utils/flags/flagtypes.h"
 #include "utils/messages.h"
 #include "commands/commandhelpformatter.h"
+#include "commands/conditions.h"
 #include "locales.h"
 
 using namespace zypp;
@@ -58,4 +59,12 @@ std::string AddLocaleCmd::help()
     );
 
   return hlp;
+}
+
+std::vector<BaseCommandConditionPtr> AddLocaleCmd::conditions() const
+{
+  return {
+    std::make_shared<NeedsRootCondition>(),
+    std::make_shared<NeedsWritableRoot>()
+  };
 }

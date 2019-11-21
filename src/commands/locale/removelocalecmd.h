@@ -26,6 +26,9 @@ protected:
   zypp::ZyppFlags::CommandGroup cmdOptions() const override;
   void doReset() override;
   int execute(Zypper &zypper, const std::vector<std::string> &positionalArgs) override;
+  std::vector<BaseCommandConditionPtr> conditions() const override;
 };
+
+
 
 #endif
