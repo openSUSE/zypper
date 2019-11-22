@@ -71,12 +71,7 @@ BuildRequires:  pkgconfig
 BuildRequires:  pkg-config
 %endif
 
-%if 0%{?suse_version}
-# temp. split: our 0.7.7 already contains solvable_matchessolvable
-BuildRequires:  libsolv-devel >= 0.7.7
-%else
 BuildRequires:  libsolv-devel >= 0.7.8
-%endif
 %if 0%{?suse_version} >= 1100
 BuildRequires:  libsolv-tools
 %requires_eq    libsolv-tools
