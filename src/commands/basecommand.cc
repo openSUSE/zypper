@@ -50,7 +50,7 @@ BaseCommandCondition::~BaseCommandCondition()
 }
 
 ZypperBaseCommand::ZypperBaseCommand(std::vector<std::string> &&commandAliases_r, std::string &&synopsis_r,
-                                     std::string &&summary_r, std::string &&description_r,
+                                     std::string &&summary_r, CommandDescription &&description_r,
                                      SetupSystemFlags systemInitFlags_r)
   : ZypperBaseCommand( std::move(commandAliases_r), std::vector<std::string>{ std::move(synopsis_r) }, std::move(summary_r), std::move(description_r), systemInitFlags_r )
 {
@@ -58,7 +58,7 @@ ZypperBaseCommand::ZypperBaseCommand(std::vector<std::string> &&commandAliases_r
 }
 
 ZypperBaseCommand::ZypperBaseCommand(std::vector<std::string> &&commandAliases_r, std::vector<std::string> &&synopsis_r,
-                                     std::string &&summary_r, std::string &&description_r,
+                                     std::string &&summary_r, CommandDescription &&description_r,
                                      SetupSystemFlags systemInitFlags_r)
   : _commandAliases ( std::move( commandAliases_r ) ),
     _synopsis ( std::move( synopsis_r ) ),

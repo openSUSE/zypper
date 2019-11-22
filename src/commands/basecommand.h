@@ -7,6 +7,7 @@
 
 #include <zypp/base/Flags.h>
 #include "utils/flags/zyppflags.h"
+#include "utils/MultiParText.h"
 
 #include <zypp/ZYpp.h>
 
@@ -75,18 +76,19 @@ class ZypperBaseCommand
 {
 public:
   friend class BaseCommandOptionSet;
+  using CommandDescription = MultiParText;
 
   ZypperBaseCommand ( std::vector<std::string> &&commandAliases_r,
                       std::string &&synopsis_r,
                       std::string &&summary_r = std::string(),
-                      std::string &&description_r = std::string(),
+                      CommandDescription &&description_r = CommandDescription(),
                       SetupSystemFlags systemInitFlags_r = DefaultSetup
   );
 
   ZypperBaseCommand ( std::vector<std::string> &&commandAliases_r,
                       std::vector<std::string> &&synopsis_r,
                       std::string &&summary_r = std::string(),
-                      std::string &&description_r = std::string(),
+                      CommandDescription &&description_r = CommandDescription(),
                       SetupSystemFlags systemInitFlags_r = DefaultSetup
   );
 
