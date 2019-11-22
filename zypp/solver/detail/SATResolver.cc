@@ -645,6 +645,16 @@ SATResolver::solverInit(const PoolItemList & weakItems)
         queue_push( &(_jobQueue), id );
     }
 
+    // Ad rules for retracted pathces and packages
+    {
+      static const IdString retractedToken { "retracted-patch-package()" };
+      static const IdString ptfToken { "ptf()" };
+      queue_push( &(_jobQueue), SOLVER_BLACKLIST|SOLVER_SOLVABLE_PROVIDES );
+      queue_push( &(_jobQueue), retractedToken.id() );
+      queue_push( &(_jobQueue), SOLVER_BLACKLIST|SOLVER_SOLVABLE_PROVIDES );
+      queue_push( &(_jobQueue), ptfToken.id() );
+    }
+
     // Ad rules for changed requestedLocales
     {
       const auto & trackedLocaleIds( myPool().trackedLocaleIds() );
