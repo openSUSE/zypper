@@ -23,7 +23,7 @@ msgstr ""
 "Project-Id-Version: zypper.fi\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-10-29 11:30+0100\n"
-"PO-Revision-Date: 2019-10-30 23:53+0000\n"
+"PO-Revision-Date: 2019-11-24 02:54+0000\n"
 "Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
 "Language-Team: Finnish <https://l10n.opensuse.org/projects/zypper/master/fi/>"
 "\n"
@@ -482,7 +482,11 @@ msgid_plural ""
 "%1% packages had to be excluded from file conflicts check because they are "
 "not yet downloaded."
 msgstr[0] ""
+"%1% -paketti oli jätettävä tiedostokonfliktien tarkistuksen ulkopuolelle, "
+"koska sitä ei ole vielä ladattu."
 msgstr[1] ""
+"%1% -pakettit oli jätettävä tiedostokonfliktien tarkistuksen ulkopuolelle, "
+"koska niitä ei ole vielä ladattu."
 
 #. TranslatorExplanation %1%(commandline option)
 #: src/callbacks/rpm.h:460
@@ -2856,6 +2860,8 @@ msgid ""
 "A meaningful file conflict check can only be performed if used together with "
 "'%1%'."
 msgstr ""
+"Merkityksellinen tiedostokonfliktien tarkistus voidaan suorittaa vain, jos "
+"sitä käytetään '%1%' kanssa."
 
 #. translators: -r, --repo <ALIAS|#|URI>
 #: src/commands/optionsets.cc:67
@@ -4112,6 +4118,8 @@ msgid ""
 "Search for all packages that provide any of the provides of the package(s) "
 "matched by the input parameters."
 msgstr ""
+"Etsi kaikki paketit, jotka tarjoavat minkä tahansa paketin (t), johon syöte "
+"parametrit vastaavat."
 
 #. translators: --requires-pkg
 #: src/commands/search/search.cc:178
@@ -4119,6 +4127,8 @@ msgid ""
 "Search for all packages that require any of the provides of the package(s) "
 "matched by the input parameters."
 msgstr ""
+"Etsi kaikki paketit, jotka vaativat mitä tahansa pakettia (t), joka "
+"vastaavat syöte parametrien mukaan."
 
 #. translators: --recommends-pkg
 #: src/commands/search/search.cc:182
@@ -4126,6 +4136,8 @@ msgid ""
 "Search for all packages that recommend any of the provides of the package(s) "
 "matched by the input parameters."
 msgstr ""
+"Etsi kaikki paketit, jotka suosittelevat mitä tahansa pakettia (t), jota "
+"vastaavat syöte parametriin."
 
 #. translators: --supplements-pkg
 #: src/commands/search/search.cc:186
@@ -4133,6 +4145,8 @@ msgid ""
 "Search for all packages that supplement any of the provides of the "
 "package(s) matched by the input parameters."
 msgstr ""
+"Etsi kaikki paketit, jotka täydentävät mitä tahansa pakettia (t), jotka "
+"vastaavat syöttöparametreja."
 
 #. translators: --conflicts-pkg
 #: src/commands/search/search.cc:190
@@ -4140,13 +4154,15 @@ msgid ""
 "Search for all packages that conflict with any of the package(s) matched by "
 "the input parameters."
 msgstr ""
+"Etsi kaikki paketit, jotka ovat ristiriidassa minkä tahansa paketin (t), "
+"jotka vastaavat syöteparametriin."
 
 #. translators: --obsoletes-pkg
 #: src/commands/search/search.cc:194
 msgid ""
 "Search for all packages that obsolete any of the package(s) matched by the "
 "input parameters."
-msgstr ""
+msgstr "Etsi kaikki paketit, jotka ovat vanhentuneet syöte parametrien mukaan."
 
 #. translators: --suggests-pkg
 #: src/commands/search/search.cc:198
@@ -4154,6 +4170,8 @@ msgid ""
 "Search for all packages that suggest any of the provides of the package(s) "
 "matched by the input parameters."
 msgstr ""
+"Etsi kaikki paketit, jotka ehdottavat mitä tahansa paketia, jotka vastaavat "
+"syöteparametreja."
 
 #. translators: -t, --type <TYPE>
 #: src/commands/search/search.cc:202
@@ -4613,7 +4631,7 @@ msgstr "Komento on tarkoitettu käytettäväksi zypper-kehotteessa."
 #: src/commands/solveroptionset.cc:23
 #, boost-format
 msgid "Valid values: %1%"
-msgstr ""
+msgstr "Kelvolliset arvot: %1%"
 
 #: src/commands/solveroptionset.cc:35 src/commands/solveroptionset.cc:58
 msgid "Solver options"
@@ -4645,7 +4663,7 @@ msgstr "Ei pakota ratkaisinta mihinkään ratkaisuun. Vahvistaa käyttäjältä.
 
 #: src/commands/solveroptionset.cc:63
 msgid "Set the solvers general attitude when resolving a job."
-msgstr ""
+msgstr "Aseta ratkaiseva asenne työtä selvitettäessä."
 
 #: src/commands/solveroptionset.cc:83
 msgid "Expert options"
@@ -6184,7 +6202,7 @@ msgstr "Ongelma: "
 
 #: src/solve-commit.cc:48
 msgid "Detailed information: "
-msgstr ""
+msgstr "Yksityiskohtainen tieto: "
 
 #. TranslatorExplanation %d is the solution number
 #: src/solve-commit.cc:61
@@ -6235,23 +6253,23 @@ msgstr ""
 #: src/solve-commit.cc:133
 #, boost-format
 msgid "Choose solution %1%"
-msgstr ""
+msgstr "Valitse ratkaisu %1%"
 
 #: src/solve-commit.cc:135
 msgid "Skip problem and continue."
-msgstr ""
+msgstr "Ohita ongelma ja jatka."
 
 #: src/solve-commit.cc:138
 msgid "Retry solving immediately."
-msgstr ""
+msgstr "Yritä ratkaista välittömästi."
 
 #: src/solve-commit.cc:140
 msgid "Choose no solution and cancel."
-msgstr ""
+msgstr "Valitse ei ratkaisua ja peruuta."
 
 #: src/solve-commit.cc:141
 msgid "Toggle show detailed conflict information."
-msgstr ""
+msgstr "Näytä tarkat ristiriitatiedot."
 
 #: src/solve-commit.cc:174
 #, c-format, boost-format
