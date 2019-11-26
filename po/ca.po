@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-10-29 11:30+0100\n"
-"PO-Revision-Date: 2019-10-29 19:53+0000\n"
+"PO-Revision-Date: 2019-11-26 12:54+0000\n"
 "Last-Translator: David Medina <medipas@gmail.com>\n"
 "Language-Team: Catalan <https://l10n.opensuse.org/projects/zypper/master/ca/>"
 "\n"
@@ -1968,7 +1968,7 @@ msgstr ""
 
 #: src/Summary.cc:1589
 msgid "System reboot required."
-msgstr "Cal reiniciar el sistema."
+msgstr "Caldrà reiniciar el sistema."
 
 #. translator: Printed after the summary but before the prompt to start the installation.
 #. Followed by some explanatory text telling it might be a good idea NOT to continue:
@@ -2786,7 +2786,7 @@ msgstr "S'han actualitzat biblioteques o serveis de base."
 msgid ""
 "Reboot is required to ensure that your system benefits from these updates."
 msgstr ""
-"Cal reiniciar per assegurar que el sistema es beneficia d'aquestes "
+"Caldrà reiniciar per assegurar que el sistema es beneficia d'aquestes "
 "actualitzacions."
 
 #: src/commands/needs-rebooting.cc:41
