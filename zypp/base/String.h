@@ -487,6 +487,33 @@ namespace zypp
     }
 
     ///////////////////////////////////////////////////////////////////
+    /** \name Trimming whitepace.
+     * \todo optimize l/r trim.
+    */
+    //@{
+    /** To define how to trim. */
+    enum Trim {
+      NO_TRIM = 0x00,
+      L_TRIM  = 0x01,
+      R_TRIM  = 0x02,
+      TRIM    = (L_TRIM|R_TRIM)
+    };
+
+    std::string trim( const std::string & s, const Trim trim_r = TRIM );
+    std::string trim( std::string && s, const Trim trim_r = TRIM );
+
+    inline std::string ltrim( const std::string & s )
+    { return trim( s, L_TRIM ); }
+    inline std::string ltrim( std::string && s )
+    { return trim( std::move(s), L_TRIM ); }
+
+    inline std::string rtrim( const std::string & s )
+    { return trim( s, R_TRIM ); }
+    inline std::string rtrim( std::string && s )
+    { return trim( std::move(s), R_TRIM ); }
+    //@}
+
+    ///////////////////////////////////////////////////////////////////
     /** \name Split. */
     //@{
     /** Split \a line_r into words.
@@ -499,7 +526,7 @@ namespace zypp
      *
     */
     template<class TOutputIterator>
-      unsigned split( const C_Str & line_r, TOutputIterator result_r, const C_Str & sepchars_r = " \t" )
+      unsigned split( const C_Str & line_r, TOutputIterator result_r, const C_Str & sepchars_r = " \t", const Trim trim_r = NO_TRIM )
       {
         const char * beg = line_r;
         const char * cur = beg;
@@ -513,13 +540,18 @@ namespace zypp
             while( *cur && !::strchr( sepchars_r, *cur ) )
               ++cur;
             // build string
-            *result_r = std::string( beg, cur-beg );
+            *result_r = trim( std::string( beg, cur-beg ), trim_r );
             // skip sepchars
             while ( *cur && ::strchr( sepchars_r, *cur ) )
               ++cur;
           }
         return ret;
       }
+
+    template<class TOutputIterator>
+      unsigned split( const C_Str & line_r, TOutputIterator result_r, const Trim trim_r )
+      { return split( line_r, result_r, " \t", trim_r ); }
+
 
     /** Split \a line_r into words with respect to escape delimeters.
      * Any sequence of characters in \a sepchars_r is treated as
@@ -959,33 +991,6 @@ namespace zypp
     /** Locate substring case insensitive. */
     inline bool containsCI( const C_Str & str_r, const C_Str & val_r )
     { return ::strcasestr( str_r, val_r ); }
-    //@}
-
-    ///////////////////////////////////////////////////////////////////
-    /** \name Trimming whitepace.
-     * \todo optimize l/r trim.
-    */
-    //@{
-    /** To define how to trim. */
-    enum Trim {
-      NO_TRIM = 0x00,
-      L_TRIM  = 0x01,
-      R_TRIM  = 0x02,
-      TRIM    = (L_TRIM|R_TRIM)
-    };
-
-    std::string trim( const std::string & s, const Trim trim_r = TRIM );
-    std::string trim( std::string && s, const Trim trim_r = TRIM );
-
-    inline std::string ltrim( const std::string & s )
-    { return trim( s, L_TRIM ); }
-    inline std::string ltrim( std::string && s )
-    { return trim( std::move(s), L_TRIM ); }
-
-    inline std::string rtrim( const std::string & s )
-    { return trim( s, R_TRIM ); }
-    inline std::string rtrim( std::string && s )
-    { return trim( std::move(s), R_TRIM ); }
     //@}
 
     std::string stripFirstWord( std::string & line, const bool ltrim_first = true );
