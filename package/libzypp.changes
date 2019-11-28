@@ -1,4 +1,19 @@
 -------------------------------------------------------------------
+Thu Nov 28 18:20:04 CET 2019 - ma@suse.de
+
+- Introduce PurgeKernels class (bsc#1155198)
+  Adds libzypp API to mark all obsolete kernels according to the
+  existing purge-kernel script rules.
+- Add solver jobs for retracted packages and ptfs.
+  Support for ptf packages and retract ed patches.
+- Do not enforce 'en' being in RequestedLocales (bsc#1155678)
+  If the user decides to have a system without explicit language
+  support he may do so.
+- Pass correct posttrans script argument (fixes #190)
+- BuildRequires:  libsolv-devel >= 0.7.8.
+- version 17.17.0 (12)
+
+-------------------------------------------------------------------
 Tue Oct 29 14:54:51 CET 2019 - ma@suse.de
 
 - Expose new libsolv API via C++ counterparts
