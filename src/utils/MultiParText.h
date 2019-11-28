@@ -45,7 +45,7 @@ struct MultiParText
 private:
   template <typename Tstr>
   static void appender( std::string & result_r, Tstr str_r )
-  { result_r += zypp::asString(str_r); }
+  { if ( ! result_r.empty() ) result_r += "\n\n"; result_r += zypp::asString(str_r); }
 
   std::string _text;
 };
