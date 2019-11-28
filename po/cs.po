@@ -21,7 +21,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-11-28 17:54+0100\n"
-"PO-Revision-Date: 2019-10-29 19:53+0000\n"
+"PO-Revision-Date: 2019-11-29 00:54+0000\n"
 "Last-Translator: Aleš Kastner <alkas@volny.cz>\n"
 "Language-Team: Czech <https://l10n.opensuse.org/projects/zypper/master/cs/>\n"
 "Language: cs\n"
@@ -5051,39 +5051,43 @@ msgstr "Vypíše licence a smlouvy EULA aktuálně nainstalovaných balíčků."
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/utils/purge-kernels.cc:26
 msgid "purge-kernels [OPTIONS]"
-msgstr ""
+msgstr "purge-kernels [MOŽNOSTI]"
 
 #. translators: command summary: targetos, tos
 #: src/commands/utils/purge-kernels.cc:28
 msgid "Remove old kernels."
-msgstr ""
+msgstr "Odstranit stará jádra systému."
 
 #. translators: command description
 #: src/commands/utils/purge-kernels.cc:30
+#, fuzzy
 msgid ""
 "Autoremoves installed kernels accoring to list of kernels to keep from /etc/"
 "zypp/zypp.conf:multiversion.kernels which can be given as <version>, latest(-"
 "N), running, oldest(+N)."
 msgstr ""
+"Automaticky odstraní instalovaná jádra podle seznamu udržovaných jader "
+"systému z /etc/zypp/zypp.conf:multiversion.kernels, které lze zadat jako "
+"<verze>, latest(-N), running, oldest(+N)."
 
 #: src/commands/utils/purge-kernels.cc:51
 msgid "Preparing to purge obsolete kernels..."
-msgstr ""
+msgstr "Příprava na odstranění zastaralých jader..."
 
 #: src/commands/utils/purge-kernels.cc:52
 #, boost-format
 msgid "Configuration: %1%"
-msgstr ""
+msgstr "Konfigurace: %1%"
 
 #: src/commands/utils/purge-kernels.cc:53
 #, boost-format
 msgid "Running kernel release: %1%"
-msgstr ""
+msgstr "Č. vydání běžícího jádra: %1%"
 
 #: src/commands/utils/purge-kernels.cc:54
 #, boost-format
 msgid "Running kernel arch: %1%"
-msgstr ""
+msgstr "Architektura běžícího jádra: %1%"
 
 #: src/commands/utils/source-download.cc:203
 #, c-format, boost-format
