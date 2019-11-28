@@ -555,7 +555,10 @@ void Zypper::doCommand( int cmdArgc, char **cmdArgv, int firstFlag )
             repo.setName( url.asString() );
 
             repo.setMetadataPath( runtimeData().tmpdir / repo.alias() / "%AUTO%" );
-            repo.setPackagesPath( Pathname::assertprefix( _config.root_dir, ZYPPER_RPM_CACHE_DIR ) );
+
+            // Use @System dir name because libzypp will not automatically remove it and there is no user defined repository with that name
+            // Fixes bsc 1130873 - zypper package cache relocation broken
+            repo.setPackagesPath( Pathname::assertprefix( _config.root_dir, _config.rm_options.repoPackagesCachePath ) / "@System" );
 
             _rdata.temporary_repos.push_back( repo );
             DBG << "got additional repo: " << url << endl;
