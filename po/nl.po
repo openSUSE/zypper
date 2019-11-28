@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypper.nl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-11-28 17:54+0100\n"
-"PO-Revision-Date: 2019-10-29 19:53+0000\n"
+"PO-Revision-Date: 2019-11-29 00:54+0000\n"
 "Last-Translator: Freek de Kruijf <freek@opensuse.org>\n"
 "Language-Team: Dutch <https://l10n.opensuse.org/projects/zypper/master/nl/>\n"
 "Language: nl\n"
@@ -5104,12 +5104,12 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/utils/purge-kernels.cc:26
 msgid "purge-kernels [OPTIONS]"
-msgstr ""
+msgstr "purge-kernels [OPTIES]"
 
 #. translators: command summary: targetos, tos
 #: src/commands/utils/purge-kernels.cc:28
 msgid "Remove old kernels."
-msgstr ""
+msgstr "Oude kernels verwijderen."
 
 #. translators: command description
 #: src/commands/utils/purge-kernels.cc:30
@@ -5118,25 +5118,28 @@ msgid ""
 "zypp/zypp.conf:multiversion.kernels which can be given as <version>, latest(-"
 "N), running, oldest(+N)."
 msgstr ""
+"Verwijdert automatisch geïnstalleerde kernels volgens een lijst met te "
+"behouden kernels uit /etc/zypp/zypp.conf:multiversion.kernels die gegeven "
+"kan worden als <versie>, laatste(-N), running, oudste(+N)."
 
 #: src/commands/utils/purge-kernels.cc:51
 msgid "Preparing to purge obsolete kernels..."
-msgstr ""
+msgstr "Voorbereiding op verwijderen van afgedankte kernels..."
 
 #: src/commands/utils/purge-kernels.cc:52
 #, boost-format
 msgid "Configuration: %1%"
-msgstr ""
+msgstr "Configuratie: %1%"
 
 #: src/commands/utils/purge-kernels.cc:53
 #, boost-format
 msgid "Running kernel release: %1%"
-msgstr ""
+msgstr "Uitgaveversie van actieve kernel: %1%"
 
 #: src/commands/utils/purge-kernels.cc:54
 #, boost-format
 msgid "Running kernel arch: %1%"
-msgstr ""
+msgstr "Architectuur van actieve kernel: %1%"
 
 #: src/commands/utils/source-download.cc:203
 #, c-format, boost-format
