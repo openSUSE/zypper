@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-29 11:30+0100\n"
+"POT-Creation-Date: 2019-11-28 17:54+0100\n"
 "PO-Revision-Date: 2019-03-21 12:49+0000\n"
 "Last-Translator: Iman Abd Elaziz <Iman.AbdelAziz@arabize.com>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/zypper/master/ar/"
@@ -517,7 +517,7 @@ msgstr "الأمثلة:"
 msgid "Arguments:"
 msgstr "الوسائط:"
 
-#: src/commands/commandhelpformatter.h:123 src/utils/flags/zyppflags.cc:582
+#: src/commands/commandhelpformatter.h:123 src/utils/flags/zyppflags.cc:577
 msgid "Command options:"
 msgstr "خيارات الأمر:"
 
@@ -582,7 +582,7 @@ msgstr "عدم مراعاة إلا التصحيحات التي تؤثر على �
 msgid "Yes"
 msgstr "نعم"
 
-#: src/output/Out.h:26 src/locales.cc:58 src/repos.cc:132 src/repos.cc:160
+#: src/output/Out.h:26 src/locales.cc:72 src/repos.cc:132 src/repos.cc:160
 msgid "No"
 msgstr "لا"
 
@@ -743,11 +743,11 @@ msgstr "إدارة المناطق اللغوية:"
 msgid "Other Commands:"
 msgstr "الأوامر الأخرى:"
 
-#: src/Command.cc:166
+#: src/Command.cc:167
 msgid "Subcommands:"
 msgstr "الأوامر الفرعية:"
 
-#: src/Command.cc:290
+#: src/Command.cc:292
 #, c-format, boost-format
 msgid "Unknown command '%s'"
 msgstr "أمر غير معروف '%s'"
@@ -2738,30 +2738,30 @@ msgstr ""
 "أم لا."
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/commands/locale/addlocalecmd.cc:19
+#: src/commands/locale/addlocalecmd.cc:20
 msgid "addlocale (aloc) [OPTIONS] <LOCALE> ..."
 msgstr "addlocale (aloc) [OPTIONS] <LOCALE> ..."
 
-#: src/commands/locale/addlocalecmd.cc:20
+#: src/commands/locale/addlocalecmd.cc:21
 msgid "Add locale(s) to requested locales."
 msgstr "إضافة مناطق لغوية إلى المناطق اللغوية المطلوبة."
 
-#: src/commands/locale/addlocalecmd.cc:21
+#: src/commands/locale/addlocalecmd.cc:22
 msgid "Add given locale(s) to the list of requested locales."
 msgstr "إضافة المناطق اللغوية المحددة إلى قائمة المناطق اللغوية المطلوبة."
 
-#: src/commands/locale/addlocalecmd.cc:32
+#: src/commands/locale/addlocalecmd.cc:33
 msgid "Do not install corresponding packages for given locale(s)."
 msgstr "عدم تثبيت الحزم المتوافقة للمناطق اللغوية المحددة."
 
-#: src/commands/locale/addlocalecmd.cc:56
+#: src/commands/locale/addlocalecmd.cc:57
 #, c-format, boost-format
 msgid ""
-"Specify locale which shall be supported by the language code.\n"
-"Get a list of all available locales by calling '%s'."
+"Specify locale which shall be supported by the language code. Get a list of "
+"all available locales by calling '%s'."
 msgstr ""
-"تحديد المنطقة اللغوية التي يجب دعمها حسب رمز اللغة.\n"
-"يمكن الحصول على قائمة بكل المناطق اللغوية المتاحة عن طريق استدعاء '%s'."
+"تحديد المنطقة اللغوية التي يجب دعمها حسب رمز اللغة. يمكن الحصول على قائمة "
+"بكل المناطق اللغوية المتاحة عن طريق استدعاء '%s'."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/locale/localescmd.cc:17
@@ -2772,40 +2772,27 @@ msgstr "locales (lloc) [OPTIONS] [LOCALE] ..."
 msgid "List requested locales (languages codes)."
 msgstr "سرد المناطق اللغوية المطلوبة (رموز اللغات)."
 
-#: src/commands/locale/localescmd.cc:19
-#, c-format, boost-format
-msgid ""
-"List requested locales and corresponding packages.\n"
-"\n"
-"Called without arguments, lists the requested locales. If the\n"
-"locale packages for a requested language are not yet on the system, they "
-"can\n"
-"be installed by calling '%s'.\n"
-msgstr ""
-"سرد المناطق اللغوية المطلوبة والحزم المتوافقة.\n"
-"\n"
-"إذا تم الاستدعاء بدون وسائط، تُسرد المناطق اللغوية المطلوبة. إذا لم\n"
-"تكن حزم المناطق اللغوية الخاصة باللغات المطلوبة متوفرة حاليًا في النظام، "
-"يمكن\n"
-"تثبيتها عن طريق استدعاء '%s'.\n"
+#: src/commands/locale/localescmd.cc:20
+msgid "List requested locales and corresponding packages."
+msgstr "سرد المناطق اللغوية المطلوبة والحزم المتوافقة."
 
-#: src/commands/locale/localescmd.cc:35
+#: src/commands/locale/localescmd.cc:34
 msgid "Show corresponding packages."
 msgstr "عرض الحزم المتوافقة."
 
-#: src/commands/locale/localescmd.cc:36
+#: src/commands/locale/localescmd.cc:35
 msgid "List all available locales."
 msgstr "سرد كل المناطق اللغوية المتاحة."
 
-#: src/commands/locale/localescmd.cc:49
+#: src/commands/locale/localescmd.cc:48
 msgid "Ignoring positional arguments because --all argument was provided."
 msgstr "تجاهل الوسائط الموضعية لأنه --تم إدخال كل الوسائط."
 
-#: src/commands/locale/localescmd.cc:76
+#: src/commands/locale/localescmd.cc:75
 msgid "The locale(s) for which the information shall be printed."
 msgstr "المناطق اللغوية التي يجب طباعة المعلومات لها."
 
-#: src/commands/locale/localescmd.cc:80
+#: src/commands/locale/localescmd.cc:79
 msgid ""
 "Get all locales with lang code 'en' that have their own country code, "
 "excluding the fallback 'en':"
@@ -2813,41 +2800,41 @@ msgstr ""
 "الحصول على كل المناطق اللغوية برمز اللغة 'en' التي لها رمز دولة خاص بها، "
 "باستثناء اللغة الاحتياطية 'en':"
 
-#: src/commands/locale/localescmd.cc:87
+#: src/commands/locale/localescmd.cc:86
 msgid "Get all locales with lang code 'en' with or without country code:"
 msgstr "الحصول على كل المناطق اللغوية برمز اللغة 'en' سواء برمز دولة أو بدونه:"
 
-#: src/commands/locale/localescmd.cc:94
+#: src/commands/locale/localescmd.cc:93
 msgid "Get the locale matching the argument exactly: "
 msgstr "الحصول على المنطقة اللغوية التي تتطابق مع الوسيطة تمامًا: "
 
-#: src/commands/locale/localescmd.cc:101
+#: src/commands/locale/localescmd.cc:100
 msgid "Get the list of packages which are available for 'de' and 'en':"
 msgstr "الحصول على قائمة الحزم المتاحة لأجل 'de' و'en':"
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/commands/locale/removelocalecmd.cc:17
+#: src/commands/locale/removelocalecmd.cc:12
 msgid "removelocale (rloc) [OPTIONS] <LOCALE> ..."
 msgstr "removelocale (rloc) [OPTIONS] <LOCALE> ..."
 
-#: src/commands/locale/removelocalecmd.cc:18
+#: src/commands/locale/removelocalecmd.cc:13
 msgid "Remove locale(s) from requested locales."
 msgstr "إزالة المناطق اللغوية من المناطق اللغوية المطلوبة."
 
-#: src/commands/locale/removelocalecmd.cc:19
+#: src/commands/locale/removelocalecmd.cc:14
 msgid "Remove given locale(s) from the list of supported languages."
 msgstr "إزالة المناطق اللغوية المحددة من قائمة اللغات المدعومة."
 
-#: src/commands/locale/removelocalecmd.cc:34
+#: src/commands/locale/removelocalecmd.cc:29
 #, c-format, boost-format
 msgid ""
-"Specify locales which shall be removed by the the language code.\n"
-"Get the list of requested locales by calling '%s'."
+"Specify locales which shall be removed by the language code. Get the list of "
+"requested locales by calling '%s'."
 msgstr ""
-"تحديد المناطق اللغوية التي يجب إزالتها حسب رمز اللغة.\n"
-"يمكن الحصول على قائمة بالمناطق اللغوية المطلوبة عن طريق استدعاء '%s'."
+"تحديد المناطق اللغوية التي يجب إزالتها حسب رمز اللغة. يمكن الحصول على قائمة "
+"بالمناطق اللغوية المطلوبة عن طريق استدعاء '%s'."
 
-#: src/commands/locale/removelocalecmd.cc:46
+#: src/commands/locale/removelocalecmd.cc:40
 msgid "Do not remove corresponding packages for given locale(s)."
 msgstr "عدم إزالة الحزم المتوافقة للمناطق اللغوية المحددة."
 
@@ -2926,9 +2913,9 @@ msgstr[5] "إزالة %lu أقفال."
 #. translators: name (general header)
 #: src/commands/locks/list.cc:135 src/commands/repos/list.cc:41
 #: src/commands/repos/list.cc:223 src/commands/services/list.cc:105
-#: src/info.cc:58 src/info.cc:449 src/info.cc:693 src/locales.cc:124
+#: src/info.cc:58 src/info.cc:449 src/info.cc:693 src/locales.cc:201
 #: src/search.cc:48 src/search.cc:228 src/search.cc:375 src/search.cc:519
-#: src/search.cc:583 src/update.cc:727 src/utils/misc.cc:228
+#: src/search.cc:583 src/update.cc:778 src/utils/misc.cc:228
 msgid "Name"
 msgstr "الاسم"
 
@@ -2947,7 +2934,7 @@ msgstr "النوع"
 #. translators: property name; short; used like "Name: value"
 #. translators: package's repository (header)
 #: src/commands/locks/list.cc:138 src/info.cc:56 src/search.cc:56
-#: src/search.cc:377 src/search.cc:518 src/search.cc:579 src/update.cc:724
+#: src/search.cc:377 src/search.cc:518 src/search.cc:579 src/update.cc:775
 #: src/utils/misc.cc:227
 msgid "Repository"
 msgstr "المخزن"
@@ -4462,25 +4449,25 @@ msgstr ""
 "Like --details, بالمعلومات الإضافية التي تطابق البحث (مفيد في حالة البحث في "
 "التبعيات)."
 
-#: src/commands/search/search.cc:332 src/repos.cc:782
+#: src/commands/search/search.cc:331 src/repos.cc:782
 #, c-format, boost-format
 msgid "Specified repository '%s' is disabled."
 msgstr "تم تعطيل المخزن المحدد '%s'."
 
 #. translators: empty search result message
-#: src/commands/search/search.cc:510
+#: src/commands/search/search.cc:509
 msgid "No matching items found."
 msgstr "لم يتم العثور على عناصر مطابقة."
 
-#: src/commands/search/search.cc:547
+#: src/commands/search/search.cc:546
 msgid "Problem occurred initializing or executing the search query"
 msgstr "حدثت مشكلة أثناء تهيئة استعلام البحث أو تنفيذه"
 
-#: src/commands/search/search.cc:548
+#: src/commands/search/search.cc:547
 msgid "See the above message for a hint."
 msgstr "راجع الرسالة أعلاه للحصول على تلميح."
 
-#: src/commands/search/search.cc:549 src/repos.cc:991
+#: src/commands/search/search.cc:548 src/repos.cc:991
 msgid "Running 'zypper refresh' as root might resolve the problem."
 msgstr "قد يؤدي تشغيل 'zypper refresh' كجذر إلى حل المشكلة."
 
@@ -5209,7 +5196,7 @@ msgstr ""
 msgid "Argument resolves to no package"
 msgstr "الوسيطة لا تتحلل إلى حزمة"
 
-#: src/commands/utils/download.cc:250 src/solve-commit.cc:930
+#: src/commands/utils/download.cc:250 src/solve-commit.cc:935
 msgid "Nothing to do."
 msgstr "لا يوجد ما يمكن إجراؤه."
 
@@ -5249,6 +5236,43 @@ msgstr "طباعة تقرير حول التراخيص واتفاقيات ترخ�
 #: src/commands/utils/licenses.cc:23
 msgid "Report licenses and EULAs of currently installed software packages."
 msgstr "تقديم تقرير التراخيص وEULAs الخاصة بحزم البرامج المثبتة حاليًا."
+
+#. translators: command synopsis; do not translate lowercase words
+#: src/commands/utils/purge-kernels.cc:26
+msgid "purge-kernels [OPTIONS]"
+msgstr ""
+
+#. translators: command summary: targetos, tos
+#: src/commands/utils/purge-kernels.cc:28
+msgid "Remove old kernels."
+msgstr ""
+
+#. translators: command description
+#: src/commands/utils/purge-kernels.cc:30
+msgid ""
+"Autoremoves installed kernels accoring to list of kernels to keep from /etc/"
+"zypp/zypp.conf:multiversion.kernels which can be given as <version>, latest(-"
+"N), running, oldest(+N)."
+msgstr ""
+
+#: src/commands/utils/purge-kernels.cc:51
+msgid "Preparing to purge obsolete kernels..."
+msgstr ""
+
+#: src/commands/utils/purge-kernels.cc:52
+#, boost-format
+msgid "Configuration: %1%"
+msgstr ""
+
+#: src/commands/utils/purge-kernels.cc:53
+#, boost-format
+msgid "Running kernel release: %1%"
+msgstr ""
+
+#: src/commands/utils/purge-kernels.cc:54
+#, boost-format
+msgid "Running kernel arch: %1%"
+msgstr ""
 
 #: src/commands/utils/source-download.cc:203
 #, c-format, boost-format
@@ -5462,7 +5486,7 @@ msgstr "الإصدار"
 #. translators: property name; short; used like "Name: value"
 #. translators: package architecture (header)
 #: src/info.cc:62 src/search.cc:54 src/search.cc:521 src/search.cc:585
-#: src/update.cc:733
+#: src/update.cc:784
 msgid "Arch"
 msgstr "الهيكل"
 
@@ -5479,7 +5503,7 @@ msgstr "الملخص"
 
 #. translators: property name; short; used like "Name: value"
 #. translators: header of table column - the package summary
-#: src/info.cc:72 src/locales.cc:126
+#: src/info.cc:72 src/locales.cc:203
 msgid "Description"
 msgstr "الوصف"
 
@@ -5541,7 +5565,7 @@ msgstr "غير مثبت"
 #. translators: property name; short; used like "Name: value"
 #. translator: Table column header.
 #. Name
-#: src/info.cc:387 src/update.cc:282 src/utils/misc.cc:229
+#: src/info.cc:387 src/update.cc:397 src/utils/misc.cc:229
 #: src/utils/misc.cc:270
 msgid "Category"
 msgstr "الفئة"
@@ -5580,9 +5604,9 @@ msgstr "(فارغ)"
 #. translators: S for 'installed Status'
 #. translators: S for installed Status
 #. TranslatorExplanation S stands for Status
-#: src/info.cc:448 src/info.cc:692 src/locales.cc:122 src/search.cc:46
+#: src/info.cc:448 src/info.cc:692 src/locales.cc:199 src/search.cc:46
 #: src/search.cc:227 src/search.cc:374 src/search.cc:517 src/search.cc:578
-#: src/update.cc:722
+#: src/update.cc:773
 msgid "S"
 msgstr "S"
 
@@ -5669,55 +5693,45 @@ msgid "Builds binary package"
 msgstr "بناء حزمة ثنائية"
 
 #. translators: header of table column - is the language requested? (Yes/No)
-#: src/locales.cc:56 src/locales.cc:90
+#: src/locales.cc:68 src/locales.cc:178
 msgid "Requested"
 msgstr "المطلوب"
 
-#: src/locales.cc:60
+#: src/locales.cc:70
 msgid "Fallback"
 msgstr "احتياطي"
 
 #. translators: header of table column - the language code, e.g. en_US
-#: src/locales.cc:86
+#: src/locales.cc:174
 msgid "Code"
 msgstr "الرمز"
 
 #. translators: header of table column - the language, e.g. English (United States)
-#: src/locales.cc:88
+#: src/locales.cc:176
 msgid "Language"
 msgstr "اللغة"
 
-#: src/locales.cc:306
+#: src/locales.cc:245
 #, c-format, boost-format
 msgid "Packages for %s (locale '%s', requested: %s):"
 msgstr "الحزم التي تخص %s (المنطقة اللغوية '%s'، المطلوب: %s):"
 
-#: src/locales.cc:323
+#: src/locales.cc:258
 #, c-format, boost-format
 msgid "Added locale: %s"
 msgstr "المنطقة اللغوية المضافة: %s"
 
-#: src/locales.cc:326
-#, c-format, boost-format
-msgid "ERROR: cannot add %s"
-msgstr "خطأ: لا يمكن إضافة %s"
-
-#: src/locales.cc:330
+#: src/locales.cc:263
 #, c-format, boost-format
 msgid " %s is already requested."
 msgstr " %s مطلوب بالفعل."
 
-#: src/locales.cc:351
+#: src/locales.cc:281
 #, c-format, boost-format
 msgid "Removed locale: %s"
 msgstr "المنطقة اللغوية التي تمت إزالتها: %s"
 
-#: src/locales.cc:354
-#, c-format, boost-format
-msgid "ERROR: cannot remove %s"
-msgstr "خطأ: لا يمكن إزالة %s"
-
-#: src/locales.cc:358
+#: src/locales.cc:286
 #, c-format, boost-format
 msgid "%s was not requested."
 msgstr "لم يكن %s مطلوبًا."
@@ -5965,8 +5979,8 @@ msgstr "حدث خطأ أثناء تعطيل المخزن '%s'."
 msgid "Problem retrieving files from '%s'."
 msgstr "حدثت مشكلة أثناء استرداد الملفات من '%s'."
 
-#: src/repos.cc:346 src/repos.cc:1860 src/solve-commit.cc:824
-#: src/solve-commit.cc:855 src/solve-commit.cc:879
+#: src/repos.cc:346 src/repos.cc:1860 src/solve-commit.cc:825
+#: src/solve-commit.cc:856 src/solve-commit.cc:880
 msgid "Please see the above error message for a hint."
 msgstr "الرجاء مراجعة رسالة الخطأ أعلاه للحصول على تلميح."
 
@@ -6607,15 +6621,15 @@ msgstr "نعم/لا"
 msgid "View the notifications now?"
 msgstr "هل تريد عرض الإعلامات الآن؟"
 
-#: src/solve-commit.cc:579
+#: src/solve-commit.cc:580
 msgid "Computing distribution upgrade..."
 msgstr "يتم احتساب ترقية التوزيع..."
 
-#: src/solve-commit.cc:584
+#: src/solve-commit.cc:585
 msgid "Resolving package dependencies..."
 msgstr "يتم الآن تحليل تبعيات الحزمة..."
 
-#: src/solve-commit.cc:639
+#: src/solve-commit.cc:640
 msgid ""
 "Some of the dependencies of installed packages are broken. In order to fix "
 "these dependencies, the following actions need to be taken:"
@@ -6623,7 +6637,7 @@ msgstr ""
 "تم تعطيل بعض تبعيات الحزم المثبَّتة. لإصلاح هذه التبعيات، يجب القيام "
 "بالإجراءات التالية:"
 
-#: src/solve-commit.cc:646
+#: src/solve-commit.cc:647
 msgid "Root privileges are required to fix broken package dependencies."
 msgstr "مطلوب امتيازات المسؤول لإصلاح تبعيات الحزمة المعطلة."
 
@@ -6637,79 +6651,79 @@ msgstr "مطلوب امتيازات المسؤول لإصلاح تبعيات ا�
 #. The answers should be lower case letters, but in general, any UTF-8
 #. string will do.
 #. ! \todo add c for changelog and x for explain (show the dep tree)
-#: src/solve-commit.cc:668
+#: src/solve-commit.cc:669
 msgid "y/n/p/v/a/r/m/d/g"
 msgstr ""
 "نعم/لا/المخزن/البائع/الهيكل/المخزن/إظهار المشكلات/التفاصيل/إظهار في المتصفح"
 
 #. translators: help text for 'y' option in the 'Continue?' prompt
-#: src/solve-commit.cc:673
+#: src/solve-commit.cc:674
 msgid ""
 "Yes, accept the summary and proceed with installation/removal of packages."
 msgstr "نعم، قبول الملخص ومتابعة تثبيت/إزالة الحزم."
 
 #. translators: help text for 'n' option in the 'Continue?' prompt
-#: src/solve-commit.cc:675
+#: src/solve-commit.cc:676
 msgid "No, cancel the operation."
 msgstr "لا، قم بإلغاء العملية."
 
 #. translators: help text for 'p' option in the 'Continue?' prompt
-#: src/solve-commit.cc:677
+#: src/solve-commit.cc:678
 msgid ""
 "Restart solver in no-force-resolution mode in order to show dependency "
 "problems."
 msgstr "إعادة بدء المحلل في وضع عدم فرض الدقة لإظهار مشكلات التبعية."
 
 #. translators: help text for 'v' option in the 'Continue?' prompt
-#: src/solve-commit.cc:679
+#: src/solve-commit.cc:680
 msgid "Toggle display of package versions."
 msgstr "تبديل عرض إصدارات الحزمة."
 
 #. translators: help text for 'a' option in the 'Continue?' prompt
-#: src/solve-commit.cc:681
+#: src/solve-commit.cc:682
 msgid "Toggle display of package architectures."
 msgstr "تبديل عرض هياكل الحزمة."
 
 #. translators: help text for 'r' option in the 'Continue?' prompt
-#: src/solve-commit.cc:683
+#: src/solve-commit.cc:684
 msgid ""
 "Toggle display of repositories from which the packages will be installed."
 msgstr "تبديل عرض المخازن التي سيتم تثبيت الحزم منها."
 
 #. translators: help text for 'm' option in the 'Continue?' prompt
-#: src/solve-commit.cc:685
+#: src/solve-commit.cc:686
 msgid "Toggle display of package vendor names."
 msgstr "تبديل عرض أسماء بائعي الحزم."
 
 #. translators: help text for 'd' option in the 'Continue?' prompt
-#: src/solve-commit.cc:687
+#: src/solve-commit.cc:688
 msgid "Toggle between showing all details and as few details as possible."
 msgstr "التبديل بين إظهار كل التفاصيل وإظهار أقل تفاصيل ممكنة."
 
 #. translators: help text for 'g' option in the 'Continue?' prompt
-#: src/solve-commit.cc:689
+#: src/solve-commit.cc:690
 msgid "View the summary in pager."
 msgstr "عرض الملخص في المتصفح."
 
-#: src/solve-commit.cc:797
+#: src/solve-commit.cc:798
 msgid "committing"
 msgstr "تنفيذ"
 
-#: src/solve-commit.cc:799
+#: src/solve-commit.cc:800
 msgid "(dry run)"
 msgstr "(تشغيل اختباري)"
 
-#: src/solve-commit.cc:823 src/solve-commit.cc:856
+#: src/solve-commit.cc:824 src/solve-commit.cc:857
 msgid "Problem retrieving the package file from the repository:"
 msgstr "حدثت مشكلة أثناء استرداد ملف الحزمة من المخزن:"
 
 #. translators: the first %s is 'zypper refresh' and the second is repo alias
-#: src/solve-commit.cc:853
+#: src/solve-commit.cc:854
 #, c-format, boost-format
 msgid "Repository '%s' is out of date. Running '%s' might help."
 msgstr "المخزن '%s' قديم. قد يوفر تشغيل '%s' نوعًا من المساعدة."
 
-#: src/solve-commit.cc:864
+#: src/solve-commit.cc:865
 msgid ""
 "The package integrity check failed. This may be a problem with the "
 "repository or media. Try one of the following:\n"
@@ -6727,20 +6741,20 @@ msgstr ""
 "- استخدم وسائط تثبيت أخرى (في حالة تلفها)\n"
 "- استخدم مخزنًا آخر"
 
-#: src/solve-commit.cc:878
+#: src/solve-commit.cc:879
 msgid "Problem occurred during or after installation or removal of packages:"
 msgstr "حدثت مشكلة أثناء أو بعد تثبيت الحزم أو إزالتها:"
 
-#: src/solve-commit.cc:886
+#: src/solve-commit.cc:887
 msgid "Installation has completed with error."
 msgstr "تم اكتمال التثبيت مع وجود خطأ."
 
-#: src/solve-commit.cc:888
+#: src/solve-commit.cc:889
 #, boost-format
 msgid "You may run '%1%' to repair any dependency problems."
 msgstr "يمكنك تشغيل '%1%' لإصلاح مشكلات التبعية."
 
-#: src/solve-commit.cc:902
+#: src/solve-commit.cc:903
 msgid ""
 "One of the installed patches requires a reboot of your machine. Reboot as "
 "soon as possible."
@@ -6748,7 +6762,7 @@ msgstr ""
 "يتطلب أحد التصحيحات المثبتة إعادة تشغيل الجهاز. قم بإعادة التشغيل في أقرب "
 "وقت ممكن."
 
-#: src/solve-commit.cc:910
+#: src/solve-commit.cc:911
 msgid ""
 "One of the installed patches affects the package manager itself. Run this "
 "command once more to install any other needed patches."
@@ -6756,12 +6770,12 @@ msgstr ""
 "تؤثر إحدى التصحيحات المثبتة على مدير الحزم نفسه. قم ببدء تشغيل هذا الأمر مرة "
 "واحدة لتثبيت أي تصحيحات أخرى مطلوبة."
 
-#: src/solve-commit.cc:928
+#: src/solve-commit.cc:933
 msgid "Dependencies of all installed packages are satisfied."
 msgstr "تم استيفاء تبعيات كل الحزم المثبَّتة."
 
 #. translator: stats table header (plural number is %2%)
-#: src/update.cc:212
+#: src/update.cc:327
 #, boost-format
 msgid "Considering %1% out of %2% applicable patches:"
 msgid_plural "Considering %1% out of %2% applicable patches:"
@@ -6773,7 +6787,7 @@ msgstr[4] "مراعاة %1% من %2% من التصحيحات القابلة لل
 msgstr[5] "مراعاة %1% من %2% من التصحيحات القابلة للتطبيق:"
 
 #. translator: stats table header
-#: src/update.cc:216
+#: src/update.cc:331
 #, boost-format
 msgid "Found %1% applicable patch:"
 msgid_plural "Found %1% applicable patches:"
@@ -6785,7 +6799,7 @@ msgstr[4] "%1% من التصحيحات القابلة للتطبيق تم الع
 msgstr[5] "%1% من التصحيحات القابلة للتطبيق تم العثور عليها:"
 
 #. translator: stats summary
-#: src/update.cc:226
+#: src/update.cc:341
 #, c-format, boost-format
 msgid "%d patch locked"
 msgid_plural "%d patches locked"
@@ -6797,7 +6811,7 @@ msgstr[4] "%d من التصحيحات المقفلة"
 msgstr[5] "%d من التصحيحات المقفلة"
 
 #. translator: stats summary
-#: src/update.cc:234
+#: src/update.cc:349
 #, c-format, boost-format
 msgid "%d patch optional"
 msgid_plural "%d patches optional"
@@ -6810,13 +6824,13 @@ msgstr[5] "%d من التصحيحات الاختيارية"
 
 #. translator: Hint displayed right adjusted; %1% is a CLI option
 #. "42 patches optional                  (use --with-optional to include optional patches)"
-#: src/update.cc:238
+#: src/update.cc:353
 #, boost-format
 msgid "use '%1%' to include optional patches"
 msgstr "استخدام  '%1%' لتضمين التصحيحات الاختيارية"
 
 #. translator: stats summary
-#: src/update.cc:247
+#: src/update.cc:362
 #, c-format, boost-format
 msgid "%d patch needed"
 msgid_plural "%d patches needed"
@@ -6828,7 +6842,7 @@ msgstr[4] "%d رقع لازمة"
 msgstr[5] "%d رقع لازمة"
 
 #. translator: stats summary
-#: src/update.cc:250
+#: src/update.cc:365
 #, c-format, boost-format
 msgid "%d security patch"
 msgid_plural "%d security patches"
@@ -6840,17 +6854,17 @@ msgstr[4] "%d رقع أمنية"
 msgstr[5] "%d رقع أمنية"
 
 #. translator: Table column header.
-#: src/update.cc:284
+#: src/update.cc:399
 msgid "Updatestack"
 msgstr "Updatestack"
 
 #. translator: Table column header.
-#: src/update.cc:286 src/update.cc:642
+#: src/update.cc:401 src/update.cc:693
 msgid "Patches"
 msgstr "التصحيحات"
 
 #. translator: Table column header.
-#: src/update.cc:288
+#: src/update.cc:403
 msgid "Locked"
 msgstr "مقفل"
 
@@ -6859,68 +6873,68 @@ msgstr "مقفل"
 #. Category    | Updatestack | Patches | Locked | Included categories
 #. ------------+-------------+---------+--------+---------------------
 #. optional   | ...                      ..... | enhancement, feature
-#: src/update.cc:294
+#: src/update.cc:409
 msgid "Included categories"
 msgstr "الفئات المضمنة"
 
 #. translator: Table headline; 'Needed' refers to patches with status 'needed'
-#: src/update.cc:532
+#: src/update.cc:583
 msgid "Needed software management updates will be installed first:"
 msgstr "سيتم تثبيت تحديثات إدارة البرامج المطلوبة أولاً:"
 
-#: src/update.cc:540 src/update.cc:780
+#: src/update.cc:591 src/update.cc:831
 msgid "No updates found."
 msgstr "لم يتم العثور على أية تحديثات."
 
 #. translator: Table headline
-#: src/update.cc:547
+#: src/update.cc:598
 msgid "The following updates are also available:"
 msgstr "التحديثات التالية متوفرة أيضًا:"
 
-#: src/update.cc:640
+#: src/update.cc:691
 msgid "Package updates"
 msgstr "تحديثات الحزم"
 
-#: src/update.cc:644
+#: src/update.cc:695
 msgid "Pattern updates"
 msgstr "تحديثات الأنماط"
 
-#: src/update.cc:646
+#: src/update.cc:697
 msgid "Product updates"
 msgstr "تحديثات المنتجات"
 
-#: src/update.cc:732
+#: src/update.cc:783
 msgid "Current Version"
 msgstr "الإصدار الحالي"
 
-#: src/update.cc:733
+#: src/update.cc:784
 msgid "Available Version"
 msgstr "الإصدار المتوفر"
 
-#: src/update.cc:898
+#: src/update.cc:959
 msgid "No matching issues found."
 msgstr "لم يتم العثور على مشكلات مطابقة."
 
-#: src/update.cc:906
+#: src/update.cc:965
 msgid "The following matches in issue numbers have been found:"
 msgstr "تم العثور على المطابقات التالية في أرقام المشكلات:"
 
-#: src/update.cc:916
+#: src/update.cc:975
 msgid "Matches in patch descriptions of the following patches have been found:"
 msgstr "تم العثور على المطابقات في أوصاف التصحيح الخاصة بالتصحيحات التالية:"
 
-#: src/update.cc:975
+#: src/update.cc:1037
 #, c-format, boost-format
 msgid "Fix for bugzilla issue number %s was not found or is not needed."
 msgstr "لم يتم العثور على إصلاح لرقم مشكلة bugzilla %s أو أنه غير مطلوب."
 
-#: src/update.cc:977
+#: src/update.cc:1039
 #, c-format, boost-format
 msgid "Fix for CVE issue number %s was not found or is not needed."
 msgstr "لم يتم العثور على إصلاح لرقم مشكلة CVE %s أو أنه غير مطلوب."
 
 #. translators: keep '%s issue' together, it's something like 'CVE issue' or 'Bugzilla issue'
-#: src/update.cc:980
+#: src/update.cc:1042
 #, c-format, boost-format
 msgid "Fix for %s issue number %s was not found or is not needed."
 msgstr "لم يتم العثور على إصلاح لرقم مشكلة %s %s أو أنه غير مطلوب."
@@ -6996,18 +7010,18 @@ msgstr "نوع حزمة غير معروف"
 msgid "The flag '%1%' can only be used a maximum of %2% times."
 msgstr "لا يمكن استخدام العلامة '%1%' أكثر من %2% من المرات بحد أقصى."
 
-#: src/utils/flags/flagtypes.cc:192
+#: src/utils/flags/flagtypes.cc:195
 #, c-format, boost-format
 msgid ""
 "Ignoring %s without argument because similar option with an argument has "
 "been specified."
 msgstr "تجاهل %s بدون وسيطة نظرًا لتحديد خيار مشابه به وسيطة."
 
-#: src/utils/flags/flagtypes.cc:232
+#: src/utils/flags/flagtypes.cc:235
 msgid "Out of range"
 msgstr "خارج النطاق"
 
-#: src/utils/flags/flagtypes.cc:234
+#: src/utils/flags/flagtypes.cc:237
 #, boost-format
 msgid "Unknown error while assigning the value %1% to flag %2%."
 msgstr "حدث خطأ غير معروف أثناء تخصيص القيمة %1% إلى العلامة %2%."
@@ -7373,6 +7387,50 @@ msgid ""
 msgstr ""
 "إذا لم تعمل أي طريقة أخرى، فأدخل '#1' لتحديد الخيار الأول، و'#2' للخيار "
 "الثاني، ..."
+
+#~ msgid ""
+#~ "Specify locale which shall be supported by the language code.\n"
+#~ "Get a list of all available locales by calling '%s'."
+#~ msgstr ""
+#~ "تحديد المنطقة اللغوية التي يجب دعمها حسب رمز اللغة.\n"
+#~ "يمكن الحصول على قائمة بكل المناطق اللغوية المتاحة عن طريق استدعاء '%s'."
+
+#~ msgid ""
+#~ "List requested locales and corresponding packages.\n"
+#~ "\n"
+#~ "Called without arguments, lists the requested locales. If the\n"
+#~ "locale packages for a requested language are not yet on the system, they "
+#~ "can\n"
+#~ "be installed by calling '%s'.\n"
+#~ msgstr ""
+#~ "سرد المناطق اللغوية المطلوبة والحزم المتوافقة.\n"
+#~ "\n"
+#~ "إذا تم الاستدعاء بدون وسائط، تُسرد المناطق اللغوية المطلوبة. إذا لم\n"
+#~ "تكن حزم المناطق اللغوية الخاصة باللغات المطلوبة متوفرة حاليًا في النظام، "
+#~ "يمكن\n"
+#~ "تثبيتها عن طريق استدعاء '%s'.\n"
+
+#~ msgid ""
+#~ "Specify locales which shall be removed by the the language code.\n"
+#~ "Get the list of requested locales by calling '%s'."
+#~ msgstr ""
+#~ "تحديد المناطق اللغوية التي يجب إزالتها حسب رمز اللغة.\n"
+#~ "يمكن الحصول على قائمة بالمناطق اللغوية المطلوبة عن طريق استدعاء '%s'."
+
+#~ msgid "ERROR: cannot add %s"
+#~ msgstr "خطأ: لا يمكن إضافة %s"
+
+#~ msgid "ERROR: cannot remove %s"
+#~ msgstr "خطأ: لا يمكن إزالة %s"
+
+#~ msgid ""
+#~ "Called without arguments, lists the requested locales. If the locale "
+#~ "packages for a requested language are not yet on the system, they can be "
+#~ "installed by calling '%s'."
+#~ msgstr ""
+#~ "إذا تم الاستدعاء بدون وسائط، تُسرد المناطق اللغوية المطلوبة. إذا لم تكن "
+#~ "حزم المناطق اللغوية الخاصة باللغات المطلوبة متوفرة حاليًا في النظام، يمكن "
+#~ "تثبيتها عن طريق استدعاء '%s'."
 
 #~ msgid ""
 #~ "The following package had to be excluded from file conflicts check "

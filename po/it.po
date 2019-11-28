@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-29 11:30+0100\n"
+"POT-Creation-Date: 2019-11-28 17:54+0100\n"
 "PO-Revision-Date: 2019-09-18 16:52+0000\n"
 "Last-Translator: Alessio Adamo <alessio.adamo@gmail.com>\n"
 "Language-Team: Italian <https://l10n.opensuse.org/projects/zypper/master/it/"
@@ -531,7 +531,7 @@ msgstr "Esempi:"
 msgid "Arguments:"
 msgstr "Argomenti:"
 
-#: src/commands/commandhelpformatter.h:123 src/utils/flags/zyppflags.cc:582
+#: src/commands/commandhelpformatter.h:123 src/utils/flags/zyppflags.cc:577
 msgid "Command options:"
 msgstr "Opzioni del comando:"
 
@@ -597,7 +597,7 @@ msgstr "Considera solo le patch relative alla gestione stessa dei pacchetti."
 msgid "Yes"
 msgstr "Sì"
 
-#: src/output/Out.h:26 src/locales.cc:58 src/repos.cc:132 src/repos.cc:160
+#: src/output/Out.h:26 src/locales.cc:72 src/repos.cc:132 src/repos.cc:160
 msgid "No"
 msgstr "No"
 
@@ -759,11 +759,11 @@ msgstr "Gestione impostazioni internazionali:"
 msgid "Other Commands:"
 msgstr "Altri comandi:"
 
-#: src/Command.cc:166
+#: src/Command.cc:167
 msgid "Subcommands:"
 msgstr "Sottocomandi:"
 
-#: src/Command.cc:290
+#: src/Command.cc:292
 #, c-format, boost-format
 msgid "Unknown command '%s'"
 msgstr "Comando sconosciuto '%s'"
@@ -2507,35 +2507,34 @@ msgstr ""
 "indipendentemente che siano installabili o no."
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/commands/locale/addlocalecmd.cc:19
+#: src/commands/locale/addlocalecmd.cc:20
 msgid "addlocale (aloc) [OPTIONS] <LOCALE> ..."
 msgstr "addlocale (aloc) [OPZIONI] <IMPOSTAZIONE INTERNAZIONALE>..."
 
-#: src/commands/locale/addlocalecmd.cc:20
+#: src/commands/locale/addlocalecmd.cc:21
 msgid "Add locale(s) to requested locales."
 msgstr "Aggiunge impostazioni internazionali a quelle richieste."
 
-#: src/commands/locale/addlocalecmd.cc:21
+#: src/commands/locale/addlocalecmd.cc:22
 msgid "Add given locale(s) to the list of requested locales."
 msgstr ""
 "Aggiunge determinate impostazioni internazionali all'elenco di quelle "
 "richieste."
 
-#: src/commands/locale/addlocalecmd.cc:32
+#: src/commands/locale/addlocalecmd.cc:33
 msgid "Do not install corresponding packages for given locale(s)."
 msgstr ""
 "Non installa pacchetti corrispondenti per determinate impostazioni "
 "internazionali."
 
-#: src/commands/locale/addlocalecmd.cc:56
+#: src/commands/locale/addlocalecmd.cc:57
 #, c-format, boost-format
 msgid ""
-"Specify locale which shall be supported by the language code.\n"
-"Get a list of all available locales by calling '%s'."
+"Specify locale which shall be supported by the language code. Get a list of "
+"all available locales by calling '%s'."
 msgstr ""
 "Specifica l'impostazione internazionale che sarà supportata dal codice "
-"lingua.\n"
-"Per ottenere un elenco di impostazioni internazionali chiamare '%s'."
+"lingua. Per ottenere un elenco di impostazioni internazionali chiamare '%s'."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/locale/localescmd.cc:17
@@ -2546,44 +2545,30 @@ msgstr "locales (lloc) [OPZIONI] [IMPOSTAZIONE INTERNAZIONALE]..."
 msgid "List requested locales (languages codes)."
 msgstr "Elenca le impostazioni internazionali richieste (codici lingua)."
 
-#: src/commands/locale/localescmd.cc:19
-#, c-format, boost-format
-msgid ""
-"List requested locales and corresponding packages.\n"
-"\n"
-"Called without arguments, lists the requested locales. If the\n"
-"locale packages for a requested language are not yet on the system, they "
-"can\n"
-"be installed by calling '%s'.\n"
-msgstr ""
-"Elenca le impostazioni internazionali e i pacchetti corrispondenti.\n"
-"\n"
-"Chiamato senza argomenti, elenca le impostazioni internazionali richieste. "
-"Se i\n"
-"pacchetti delle impostazioni internazionali per una lingua richiesta non "
-"sono ancora nel sistema, è possibile\n"
-"installarli chiamando '%s'.\n"
+#: src/commands/locale/localescmd.cc:20
+msgid "List requested locales and corresponding packages."
+msgstr "Elenca le impostazioni internazionali e i pacchetti corrispondenti."
 
-#: src/commands/locale/localescmd.cc:35
+#: src/commands/locale/localescmd.cc:34
 msgid "Show corresponding packages."
 msgstr "Mostra i pacchetti corrispondenti."
 
-#: src/commands/locale/localescmd.cc:36
+#: src/commands/locale/localescmd.cc:35
 msgid "List all available locales."
 msgstr "Elenca tutte le impostazioni internazionali disponibili."
 
-#: src/commands/locale/localescmd.cc:49
+#: src/commands/locale/localescmd.cc:48
 msgid "Ignoring positional arguments because --all argument was provided."
 msgstr ""
 "Gli argomenti posizionali vengono ingorati perché è stato fornito "
 "l'argomento --all."
 
-#: src/commands/locale/localescmd.cc:76
+#: src/commands/locale/localescmd.cc:75
 msgid "The locale(s) for which the information shall be printed."
 msgstr ""
 "Le impostazioni internazionali per le quali saranno stampate le informazioni."
 
-#: src/commands/locale/localescmd.cc:80
+#: src/commands/locale/localescmd.cc:79
 msgid ""
 "Get all locales with lang code 'en' that have their own country code, "
 "excluding the fallback 'en':"
@@ -2591,48 +2576,48 @@ msgstr ""
 "Ottieni tutte le impostazioni internazionali con codice lingua 'en' con "
 "codice paese proprio, tranne fallback 'en':"
 
-#: src/commands/locale/localescmd.cc:87
+#: src/commands/locale/localescmd.cc:86
 msgid "Get all locales with lang code 'en' with or without country code:"
 msgstr ""
 "Ottieni tutte le impostazioni internazionali con codice lingua 'en' con o "
 "senza codice paese:"
 
-#: src/commands/locale/localescmd.cc:94
+#: src/commands/locale/localescmd.cc:93
 msgid "Get the locale matching the argument exactly: "
 msgstr ""
 "Ottieni l'impostazione internazionale che corrisponde esattamente "
 "all'argomento: "
 
-#: src/commands/locale/localescmd.cc:101
+#: src/commands/locale/localescmd.cc:100
 msgid "Get the list of packages which are available for 'de' and 'en':"
 msgstr "Ottieni l'elenco dei pacchetti disponibili per 'de' e 'en':"
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/commands/locale/removelocalecmd.cc:17
+#: src/commands/locale/removelocalecmd.cc:12
 msgid "removelocale (rloc) [OPTIONS] <LOCALE> ..."
 msgstr "removelocale (rloc) [OPZIONI] <IMPOSTAZIONE INTERNAZIONALE>..."
 
-#: src/commands/locale/removelocalecmd.cc:18
+#: src/commands/locale/removelocalecmd.cc:13
 msgid "Remove locale(s) from requested locales."
 msgstr "Rimuove le impostazioni internazionali da quelle richieste."
 
-#: src/commands/locale/removelocalecmd.cc:19
+#: src/commands/locale/removelocalecmd.cc:14
 msgid "Remove given locale(s) from the list of supported languages."
 msgstr ""
 "Rimuove determinate impostazioni internazionali dall'elenco delle lingue "
 "supportate."
 
-#: src/commands/locale/removelocalecmd.cc:34
+#: src/commands/locale/removelocalecmd.cc:29
 #, c-format, boost-format
 msgid ""
-"Specify locales which shall be removed by the the language code.\n"
-"Get the list of requested locales by calling '%s'."
+"Specify locales which shall be removed by the language code. Get the list of "
+"requested locales by calling '%s'."
 msgstr ""
 "Specifica le impostazioni internazionali che saranno rimosse dal codice "
-"lingua.\n"
-"Per ottenere l'elenco di impostazioni internazionali richieste chiamare '%s'."
+"lingua. Per ottenere l'elenco di impostazioni internazionali richieste "
+"chiamare '%s'."
 
-#: src/commands/locale/removelocalecmd.cc:46
+#: src/commands/locale/removelocalecmd.cc:40
 msgid "Do not remove corresponding packages for given locale(s)."
 msgstr ""
 "Non rimuove i pacchetti corrispondenti per determinate impostazioni "
@@ -2707,9 +2692,9 @@ msgstr[1] "Rimossi %lu blocchi."
 #. translators: name (general header)
 #: src/commands/locks/list.cc:135 src/commands/repos/list.cc:41
 #: src/commands/repos/list.cc:223 src/commands/services/list.cc:105
-#: src/info.cc:58 src/info.cc:449 src/info.cc:693 src/locales.cc:124
+#: src/info.cc:58 src/info.cc:449 src/info.cc:693 src/locales.cc:201
 #: src/search.cc:48 src/search.cc:228 src/search.cc:375 src/search.cc:519
-#: src/search.cc:583 src/update.cc:727 src/utils/misc.cc:228
+#: src/search.cc:583 src/update.cc:778 src/utils/misc.cc:228
 msgid "Name"
 msgstr "Nome"
 
@@ -2728,7 +2713,7 @@ msgstr "Tipo"
 #. translators: property name; short; used like "Name: value"
 #. translators: package's repository (header)
 #: src/commands/locks/list.cc:138 src/info.cc:56 src/search.cc:56
-#: src/search.cc:377 src/search.cc:518 src/search.cc:579 src/update.cc:724
+#: src/search.cc:377 src/search.cc:518 src/search.cc:579 src/update.cc:775
 #: src/utils/misc.cc:227
 msgid "Repository"
 msgstr "Repository"
@@ -4279,27 +4264,27 @@ msgstr ""
 "Come --details, con informazioni aggiuntive dove la ricerca ha trovato "
 "corrispondenza (utile per la ricerca nelle dipendenze)."
 
-#: src/commands/search/search.cc:332 src/repos.cc:782
+#: src/commands/search/search.cc:331 src/repos.cc:782
 #, c-format, boost-format
 msgid "Specified repository '%s' is disabled."
 msgstr "Il repository specificato '%s' è disabilitato."
 
 #. translators: empty search result message
-#: src/commands/search/search.cc:510
+#: src/commands/search/search.cc:509
 msgid "No matching items found."
 msgstr "Nessun elemento corrispondente trovato."
 
-#: src/commands/search/search.cc:547
+#: src/commands/search/search.cc:546
 msgid "Problem occurred initializing or executing the search query"
 msgstr ""
 "Si è verificato un problema durante l'inizializzazione o l'esecuzione di "
 "un'interrogazione di ricerca"
 
-#: src/commands/search/search.cc:548
+#: src/commands/search/search.cc:547
 msgid "See the above message for a hint."
 msgstr "Leggere il messaggio visualizzato sopra."
 
-#: src/commands/search/search.cc:549 src/repos.cc:991
+#: src/commands/search/search.cc:548 src/repos.cc:991
 msgid "Running 'zypper refresh' as root might resolve the problem."
 msgstr "È possibile risolvere il problema avviando 'zypper refresh' come root."
 
@@ -5040,7 +5025,7 @@ msgstr ""
 msgid "Argument resolves to no package"
 msgstr "L'argomento non viene risolto in alcun pacchetto"
 
-#: src/commands/utils/download.cc:250 src/solve-commit.cc:930
+#: src/commands/utils/download.cc:250 src/solve-commit.cc:935
 msgid "Nothing to do."
 msgstr "Nessuna operazione da eseguire."
 
@@ -5081,6 +5066,43 @@ msgstr "Stampa il report su licenze ed EULA dei pacchetti installati."
 msgid "Report licenses and EULAs of currently installed software packages."
 msgstr ""
 "Mostra le licenze e gli EULA dei pacchetti software attualmente installati."
+
+#. translators: command synopsis; do not translate lowercase words
+#: src/commands/utils/purge-kernels.cc:26
+msgid "purge-kernels [OPTIONS]"
+msgstr ""
+
+#. translators: command summary: targetos, tos
+#: src/commands/utils/purge-kernels.cc:28
+msgid "Remove old kernels."
+msgstr ""
+
+#. translators: command description
+#: src/commands/utils/purge-kernels.cc:30
+msgid ""
+"Autoremoves installed kernels accoring to list of kernels to keep from /etc/"
+"zypp/zypp.conf:multiversion.kernels which can be given as <version>, latest(-"
+"N), running, oldest(+N)."
+msgstr ""
+
+#: src/commands/utils/purge-kernels.cc:51
+msgid "Preparing to purge obsolete kernels..."
+msgstr ""
+
+#: src/commands/utils/purge-kernels.cc:52
+#, boost-format
+msgid "Configuration: %1%"
+msgstr ""
+
+#: src/commands/utils/purge-kernels.cc:53
+#, boost-format
+msgid "Running kernel release: %1%"
+msgstr ""
+
+#: src/commands/utils/purge-kernels.cc:54
+#, boost-format
+msgid "Running kernel arch: %1%"
+msgstr ""
 
 #: src/commands/utils/source-download.cc:203
 #, c-format, boost-format
@@ -5300,7 +5322,7 @@ msgstr "Versione"
 #. translators: property name; short; used like "Name: value"
 #. translators: package architecture (header)
 #: src/info.cc:62 src/search.cc:54 src/search.cc:521 src/search.cc:585
-#: src/update.cc:733
+#: src/update.cc:784
 msgid "Arch"
 msgstr "Arch."
 
@@ -5317,7 +5339,7 @@ msgstr "Sommario"
 
 #. translators: property name; short; used like "Name: value"
 #. translators: header of table column - the package summary
-#: src/info.cc:72 src/locales.cc:126
+#: src/info.cc:72 src/locales.cc:203
 msgid "Description"
 msgstr "Descrizione"
 
@@ -5376,7 +5398,7 @@ msgstr "non installato"
 #. translators: property name; short; used like "Name: value"
 #. translator: Table column header.
 #. Name
-#: src/info.cc:387 src/update.cc:282 src/utils/misc.cc:229
+#: src/info.cc:387 src/update.cc:397 src/utils/misc.cc:229
 #: src/utils/misc.cc:270
 msgid "Category"
 msgstr "Categoria"
@@ -5415,9 +5437,9 @@ msgstr "(vuoto)"
 #. translators: S for 'installed Status'
 #. translators: S for installed Status
 #. TranslatorExplanation S stands for Status
-#: src/info.cc:448 src/info.cc:692 src/locales.cc:122 src/search.cc:46
+#: src/info.cc:448 src/info.cc:692 src/locales.cc:199 src/search.cc:46
 #: src/search.cc:227 src/search.cc:374 src/search.cc:517 src/search.cc:578
-#: src/update.cc:722
+#: src/update.cc:773
 msgid "S"
 msgstr "S"
 
@@ -5504,55 +5526,45 @@ msgid "Builds binary package"
 msgstr "Consente di compilare pacchetti binari"
 
 #. translators: header of table column - is the language requested? (Yes/No)
-#: src/locales.cc:56 src/locales.cc:90
+#: src/locales.cc:68 src/locales.cc:178
 msgid "Requested"
 msgstr "Richiesta"
 
-#: src/locales.cc:60
+#: src/locales.cc:70
 msgid "Fallback"
 msgstr "Fallback"
 
 #. translators: header of table column - the language code, e.g. en_US
-#: src/locales.cc:86
+#: src/locales.cc:174
 msgid "Code"
 msgstr "Codice"
 
 #. translators: header of table column - the language, e.g. English (United States)
-#: src/locales.cc:88
+#: src/locales.cc:176
 msgid "Language"
 msgstr "Lingua"
 
-#: src/locales.cc:306
+#: src/locales.cc:245
 #, c-format, boost-format
 msgid "Packages for %s (locale '%s', requested: %s):"
 msgstr "Pacchetti per %s (impostazione internazionale '%s', richiesta: %s):"
 
-#: src/locales.cc:323
+#: src/locales.cc:258
 #, c-format, boost-format
 msgid "Added locale: %s"
 msgstr "Impostazione internazionale aggiunta: %s"
 
-#: src/locales.cc:326
-#, c-format, boost-format
-msgid "ERROR: cannot add %s"
-msgstr "ERRORE: impossibile aggiungere %s"
-
-#: src/locales.cc:330
+#: src/locales.cc:263
 #, c-format, boost-format
 msgid " %s is already requested."
 msgstr " %s già richiesta."
 
-#: src/locales.cc:351
+#: src/locales.cc:281
 #, c-format, boost-format
 msgid "Removed locale: %s"
 msgstr "Rimossa impostazione internazionale: %s"
 
-#: src/locales.cc:354
-#, c-format, boost-format
-msgid "ERROR: cannot remove %s"
-msgstr "ERRORE: impossibile rimuovere %s"
-
-#: src/locales.cc:358
+#: src/locales.cc:286
 #, c-format, boost-format
 msgid "%s was not requested."
 msgstr "%s non è stata richiesta."
@@ -5806,8 +5818,8 @@ msgstr "Errore durante la disabilitazione del repository '%s'."
 msgid "Problem retrieving files from '%s'."
 msgstr "Si è verificato un problema durante il recupero dei file da '%s'."
 
-#: src/repos.cc:346 src/repos.cc:1860 src/solve-commit.cc:824
-#: src/solve-commit.cc:855 src/solve-commit.cc:879
+#: src/repos.cc:346 src/repos.cc:1860 src/solve-commit.cc:825
+#: src/solve-commit.cc:856 src/solve-commit.cc:880
 msgid "Please see the above error message for a hint."
 msgstr "Leggere il messaggio di errore visualizzato sopra."
 
@@ -6469,15 +6481,15 @@ msgstr "s/n"
 msgid "View the notifications now?"
 msgstr "Visualizzare le notifiche adesso?"
 
-#: src/solve-commit.cc:579
+#: src/solve-commit.cc:580
 msgid "Computing distribution upgrade..."
 msgstr "Calcolo upgrade di distribuzione in corso..."
 
-#: src/solve-commit.cc:584
+#: src/solve-commit.cc:585
 msgid "Resolving package dependencies..."
 msgstr "Risoluzione dipendenze dei pacchetti in corso..."
 
-#: src/solve-commit.cc:639
+#: src/solve-commit.cc:640
 msgid ""
 "Some of the dependencies of installed packages are broken. In order to fix "
 "these dependencies, the following actions need to be taken:"
@@ -6485,7 +6497,7 @@ msgstr ""
 "Alcune delle dipendenze dei pacchetti installati sono mancanti. Per "
 "correggerle sono necessarie le seguenti azioni:"
 
-#: src/solve-commit.cc:646
+#: src/solve-commit.cc:647
 msgid "Root privileges are required to fix broken package dependencies."
 msgstr ""
 "Per correggere le dipendenze dei pacchetti non soddisfatte sono necessari i "
@@ -6501,12 +6513,12 @@ msgstr ""
 #. The answers should be lower case letters, but in general, any UTF-8
 #. string will do.
 #. ! \todo add c for changelog and x for explain (show the dep tree)
-#: src/solve-commit.cc:668
+#: src/solve-commit.cc:669
 msgid "y/n/p/v/a/r/m/d/g"
 msgstr "s/n/p/v/a/r/f/d/g"
 
 #. translators: help text for 'y' option in the 'Continue?' prompt
-#: src/solve-commit.cc:673
+#: src/solve-commit.cc:674
 msgid ""
 "Yes, accept the summary and proceed with installation/removal of packages."
 msgstr ""
@@ -6514,12 +6526,12 @@ msgstr ""
 "pacchetti."
 
 #. translators: help text for 'n' option in the 'Continue?' prompt
-#: src/solve-commit.cc:675
+#: src/solve-commit.cc:676
 msgid "No, cancel the operation."
 msgstr "No, annulla l'operazione."
 
 #. translators: help text for 'p' option in the 'Continue?' prompt
-#: src/solve-commit.cc:677
+#: src/solve-commit.cc:678
 msgid ""
 "Restart solver in no-force-resolution mode in order to show dependency "
 "problems."
@@ -6528,17 +6540,17 @@ msgstr ""
 "problemi di dipendenze."
 
 #. translators: help text for 'v' option in the 'Continue?' prompt
-#: src/solve-commit.cc:679
+#: src/solve-commit.cc:680
 msgid "Toggle display of package versions."
 msgstr "Attiva/disattiva la visualizzazione delle versioni dei pacchetti."
 
 #. translators: help text for 'a' option in the 'Continue?' prompt
-#: src/solve-commit.cc:681
+#: src/solve-commit.cc:682
 msgid "Toggle display of package architectures."
 msgstr "Attiva/disattiva la visualizzazione delle architetture dei pacchetti."
 
 #. translators: help text for 'r' option in the 'Continue?' prompt
-#: src/solve-commit.cc:683
+#: src/solve-commit.cc:684
 msgid ""
 "Toggle display of repositories from which the packages will be installed."
 msgstr ""
@@ -6546,44 +6558,44 @@ msgstr ""
 "installati i pacchetti."
 
 #. translators: help text for 'm' option in the 'Continue?' prompt
-#: src/solve-commit.cc:685
+#: src/solve-commit.cc:686
 msgid "Toggle display of package vendor names."
 msgstr ""
 "Attiva/disattiva la visualizzazione dei nomi dei fornitori dei pacchetti."
 
 #. translators: help text for 'd' option in the 'Continue?' prompt
-#: src/solve-commit.cc:687
+#: src/solve-commit.cc:688
 msgid "Toggle between showing all details and as few details as possible."
 msgstr ""
 "Attiva/disattiva tra la visualizzazione di tutti i dettagli e del minor "
 "numero di dettagli possibili."
 
 #. translators: help text for 'g' option in the 'Continue?' prompt
-#: src/solve-commit.cc:689
+#: src/solve-commit.cc:690
 msgid "View the summary in pager."
 msgstr "Visualizzare il riepilogo nel pager."
 
-#: src/solve-commit.cc:797
+#: src/solve-commit.cc:798
 msgid "committing"
 msgstr "commit"
 
-#: src/solve-commit.cc:799
+#: src/solve-commit.cc:800
 msgid "(dry run)"
 msgstr "(avvio di prova)"
 
 # TLABEL modules/inst_config_x11.ycp:578
-#: src/solve-commit.cc:823 src/solve-commit.cc:856
+#: src/solve-commit.cc:824 src/solve-commit.cc:857
 msgid "Problem retrieving the package file from the repository:"
 msgstr ""
 "Si è verificato un problema recuperando il file del pacchetto dal repository:"
 
 #. translators: the first %s is 'zypper refresh' and the second is repo alias
-#: src/solve-commit.cc:853
+#: src/solve-commit.cc:854
 #, c-format, boost-format
 msgid "Repository '%s' is out of date. Running '%s' might help."
 msgstr "Il repository '%s' non è aggiornato. Provare ad avviare '%s'."
 
-#: src/solve-commit.cc:864
+#: src/solve-commit.cc:865
 msgid ""
 "The package integrity check failed. This may be a problem with the "
 "repository or media. Try one of the following:\n"
@@ -6603,22 +6615,22 @@ msgstr ""
 "danneggiato)\n"
 "- utilizzare un altro repository"
 
-#: src/solve-commit.cc:878
+#: src/solve-commit.cc:879
 msgid "Problem occurred during or after installation or removal of packages:"
 msgstr ""
 "Si è verificato un problema durante o dopo l'installazione o la rimozione "
 "dei pacchetti:"
 
-#: src/solve-commit.cc:886
+#: src/solve-commit.cc:887
 msgid "Installation has completed with error."
 msgstr "Installazione completata con errori."
 
-#: src/solve-commit.cc:888
+#: src/solve-commit.cc:889
 #, boost-format
 msgid "You may run '%1%' to repair any dependency problems."
 msgstr "Per risolvere problemi di dipendenza è possibile eseguire '%1%'."
 
-#: src/solve-commit.cc:902
+#: src/solve-commit.cc:903
 msgid ""
 "One of the installed patches requires a reboot of your machine. Reboot as "
 "soon as possible."
@@ -6626,7 +6638,7 @@ msgstr ""
 "Una delle patch installate richiede di riavviare il computer. Riavviarlo il "
 "più presto possibile."
 
-#: src/solve-commit.cc:910
+#: src/solve-commit.cc:911
 msgid ""
 "One of the installed patches affects the package manager itself. Run this "
 "command once more to install any other needed patches."
@@ -6634,12 +6646,12 @@ msgstr ""
 "Una delle patch installate influisce sulla gestione dei pacchetti. Eseguire "
 "il comando ancora una volta per installare tutte le altre patch necessarie."
 
-#: src/solve-commit.cc:928
+#: src/solve-commit.cc:933
 msgid "Dependencies of all installed packages are satisfied."
 msgstr "Le dipendenze di tutti i pacchetti installati sono soddisfatte."
 
 #. translator: stats table header (plural number is %2%)
-#: src/update.cc:212
+#: src/update.cc:327
 #, boost-format
 msgid "Considering %1% out of %2% applicable patches:"
 msgid_plural "Considering %1% out of %2% applicable patches:"
@@ -6647,7 +6659,7 @@ msgstr[0] "Considerare %1% di %2% patch applicabili:"
 msgstr[1] "Considerare %1% di %2% patch applicabili:"
 
 #. translator: stats table header
-#: src/update.cc:216
+#: src/update.cc:331
 #, boost-format
 msgid "Found %1% applicable patch:"
 msgid_plural "Found %1% applicable patches:"
@@ -6655,7 +6667,7 @@ msgstr[0] "Trovata %1% patch applicabile:"
 msgstr[1] "Trovate %1% patch applicabili:"
 
 #. translator: stats summary
-#: src/update.cc:226
+#: src/update.cc:341
 #, c-format, boost-format
 msgid "%d patch locked"
 msgid_plural "%d patches locked"
@@ -6663,7 +6675,7 @@ msgstr[0] "%d patch bloccata"
 msgstr[1] "%d patch bloccate"
 
 #. translator: stats summary
-#: src/update.cc:234
+#: src/update.cc:349
 #, c-format, boost-format
 msgid "%d patch optional"
 msgid_plural "%d patches optional"
@@ -6672,13 +6684,13 @@ msgstr[1] "%d patch opzionali"
 
 #. translator: Hint displayed right adjusted; %1% is a CLI option
 #. "42 patches optional                  (use --with-optional to include optional patches)"
-#: src/update.cc:238
+#: src/update.cc:353
 #, boost-format
 msgid "use '%1%' to include optional patches"
 msgstr "usare '%1%' per includere patch opzionali"
 
 #. translator: stats summary
-#: src/update.cc:247
+#: src/update.cc:362
 #, c-format, boost-format
 msgid "%d patch needed"
 msgid_plural "%d patches needed"
@@ -6687,7 +6699,7 @@ msgstr[1] "%d patch necessarie"
 
 # TLABEL modules/inst_config_x11.ycp:578
 #. translator: stats summary
-#: src/update.cc:250
+#: src/update.cc:365
 #, c-format, boost-format
 msgid "%d security patch"
 msgid_plural "%d security patches"
@@ -6695,17 +6707,17 @@ msgstr[0] "%d patch di sicurezza"
 msgstr[1] "%d patch di sicurezza"
 
 #. translator: Table column header.
-#: src/update.cc:284
+#: src/update.cc:399
 msgid "Updatestack"
 msgstr "Aggiorna stack"
 
 #. translator: Table column header.
-#: src/update.cc:286 src/update.cc:642
+#: src/update.cc:401 src/update.cc:693
 msgid "Patches"
 msgstr "Patch"
 
 #. translator: Table column header.
-#: src/update.cc:288
+#: src/update.cc:403
 msgid "Locked"
 msgstr "Bloccato"
 
@@ -6714,68 +6726,68 @@ msgstr "Bloccato"
 #. Category    | Updatestack | Patches | Locked | Included categories
 #. ------------+-------------+---------+--------+---------------------
 #. optional   | ...                      ..... | enhancement, feature
-#: src/update.cc:294
+#: src/update.cc:409
 msgid "Included categories"
 msgstr "Categorie incluse"
 
 #. translator: Table headline; 'Needed' refers to patches with status 'needed'
-#: src/update.cc:532
+#: src/update.cc:583
 msgid "Needed software management updates will be installed first:"
 msgstr ""
 "Verranno installati prima gli aggiornamenti necessari per la gestione dei "
 "programmi:"
 
-#: src/update.cc:540 src/update.cc:780
+#: src/update.cc:591 src/update.cc:831
 msgid "No updates found."
 msgstr "Nessun aggiornamento trovato."
 
 #. translator: Table headline
-#: src/update.cc:547
+#: src/update.cc:598
 msgid "The following updates are also available:"
 msgstr "Sono disponibili anche i seguenti aggiornamenti:"
 
-#: src/update.cc:640
+#: src/update.cc:691
 msgid "Package updates"
 msgstr "Aggiornamenti pacchetto"
 
 # TLABEL modules/inst_config_x11.ycp:578
-#: src/update.cc:644
+#: src/update.cc:695
 msgid "Pattern updates"
 msgstr "Aggiornamenti del modello"
 
-#: src/update.cc:646
+#: src/update.cc:697
 msgid "Product updates"
 msgstr "Aggiornamenti prodotto"
 
-#: src/update.cc:732
+#: src/update.cc:783
 msgid "Current Version"
 msgstr "Versione attuale"
 
-#: src/update.cc:733
+#: src/update.cc:784
 msgid "Available Version"
 msgstr "Versione disponibile"
 
-#: src/update.cc:898
+#: src/update.cc:959
 msgid "No matching issues found."
 msgstr "Nessun problema corrispondente trovato."
 
-#: src/update.cc:906
+#: src/update.cc:965
 msgid "The following matches in issue numbers have been found:"
 msgstr "Sono state trovate le seguenti corrispondenze nei numeri dei problemi:"
 
-#: src/update.cc:916
+#: src/update.cc:975
 msgid "Matches in patch descriptions of the following patches have been found:"
 msgstr ""
 "Sono state trovate corrispondenze nelle descrizioni delle seguenti patch:"
 
-#: src/update.cc:975
+#: src/update.cc:1037
 #, c-format, boost-format
 msgid "Fix for bugzilla issue number %s was not found or is not needed."
 msgstr ""
 "La correzione del problema numero %s di bugzilla non è stata trovata o non è "
 "necessaria."
 
-#: src/update.cc:977
+#: src/update.cc:1039
 #, c-format, boost-format
 msgid "Fix for CVE issue number %s was not found or is not needed."
 msgstr ""
@@ -6783,7 +6795,7 @@ msgstr ""
 "necessaria."
 
 #. translators: keep '%s issue' together, it's something like 'CVE issue' or 'Bugzilla issue'
-#: src/update.cc:980
+#: src/update.cc:1042
 #, c-format, boost-format
 msgid "Fix for %s issue number %s was not found or is not needed."
 msgstr ""
@@ -6863,7 +6875,7 @@ msgstr "Tipo di pacchetto sconosciuto"
 msgid "The flag '%1%' can only be used a maximum of %2% times."
 msgstr "Il flag '%1%' può essere usato un massimo di %2% volte."
 
-#: src/utils/flags/flagtypes.cc:192
+#: src/utils/flags/flagtypes.cc:195
 #, c-format, boost-format
 msgid ""
 "Ignoring %s without argument because similar option with an argument has "
@@ -6872,11 +6884,11 @@ msgstr ""
 "%s viene ignorata senza argomento perché è stata specificata un'opzione "
 "simile con un argomento."
 
-#: src/utils/flags/flagtypes.cc:232
+#: src/utils/flags/flagtypes.cc:235
 msgid "Out of range"
 msgstr "Fuori intervallo"
 
-#: src/utils/flags/flagtypes.cc:234
+#: src/utils/flags/flagtypes.cc:237
 #, boost-format
 msgid "Unknown error while assigning the value %1% to flag %2%."
 msgstr "Errore sconosciuto durante l'assegnazione del valore %1% al flag %2%."
@@ -7221,6 +7233,55 @@ msgid ""
 msgstr ""
 "Se non funziona nulla, immettere '#1' per selezionare la prima opzione, '#2' "
 "per la seconda e così via..."
+
+#~ msgid ""
+#~ "Specify locale which shall be supported by the language code.\n"
+#~ "Get a list of all available locales by calling '%s'."
+#~ msgstr ""
+#~ "Specifica l'impostazione internazionale che sarà supportata dal codice "
+#~ "lingua.\n"
+#~ "Per ottenere un elenco di impostazioni internazionali chiamare '%s'."
+
+#~ msgid ""
+#~ "List requested locales and corresponding packages.\n"
+#~ "\n"
+#~ "Called without arguments, lists the requested locales. If the\n"
+#~ "locale packages for a requested language are not yet on the system, they "
+#~ "can\n"
+#~ "be installed by calling '%s'.\n"
+#~ msgstr ""
+#~ "Elenca le impostazioni internazionali e i pacchetti corrispondenti.\n"
+#~ "\n"
+#~ "Chiamato senza argomenti, elenca le impostazioni internazionali "
+#~ "richieste. Se i\n"
+#~ "pacchetti delle impostazioni internazionali per una lingua richiesta non "
+#~ "sono ancora nel sistema, è possibile\n"
+#~ "installarli chiamando '%s'.\n"
+
+#~ msgid ""
+#~ "Specify locales which shall be removed by the the language code.\n"
+#~ "Get the list of requested locales by calling '%s'."
+#~ msgstr ""
+#~ "Specifica le impostazioni internazionali che saranno rimosse dal codice "
+#~ "lingua.\n"
+#~ "Per ottenere l'elenco di impostazioni internazionali richieste chiamare "
+#~ "'%s'."
+
+#~ msgid "ERROR: cannot add %s"
+#~ msgstr "ERRORE: impossibile aggiungere %s"
+
+#~ msgid "ERROR: cannot remove %s"
+#~ msgstr "ERRORE: impossibile rimuovere %s"
+
+#~ msgid ""
+#~ "Called without arguments, lists the requested locales. If the locale "
+#~ "packages for a requested language are not yet on the system, they can be "
+#~ "installed by calling '%s'."
+#~ msgstr ""
+#~ "Chiamato senza argomenti, elenca le impostazioni internazionali "
+#~ "richieste. Se i pacchetti delle impostazioni internazionali per una "
+#~ "lingua richiesta non sono ancora nel sistema, è possibile installarli "
+#~ "chiamando '%s'."
 
 #~ msgid ""
 #~ "The following package had to be excluded from file conflicts check "
