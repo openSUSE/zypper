@@ -32,8 +32,7 @@ std::string RemoveLocaleCmd::help()
   hlp.argumentsSection()
     .multiLineText(
       str::form(
-         _("Specify locales which shall be removed by the the language code.\n"
-           "Get the list of requested locales by calling '%s'."), "zypper locales"
+         _("Specify locales which shall be removed by the language code. Get the list of requested locales by calling '%s'."), "zypper locales"
       )
     );
 

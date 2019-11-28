@@ -54,8 +54,7 @@ std::string AddLocaleCmd::help()
   hlp.argumentsSection()
     .multiLineText(
       str::form(
-        _( "Specify locale which shall be supported by the language code.\n"
-           "Get a list of all available locales by calling '%s'."), "zypper locales --all" )
+        _( "Specify locale which shall be supported by the language code. Get a list of all available locales by calling '%s'."), "zypper locales --all" )
     );
 
   return hlp;
