@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-11-28 17:54+0100\n"
-"PO-Revision-Date: 2019-11-05 09:53+0000\n"
+"PO-Revision-Date: 2019-11-29 07:54+0000\n"
 "Last-Translator: Yasuhiko Kamata <belphegor@belbel.or.jp>\n"
 "Language-Team: Japanese <https://l10n.opensuse.org/projects/zypper/master/ja/"
 ">\n"
@@ -4911,12 +4911,12 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/utils/purge-kernels.cc:26
 msgid "purge-kernels [OPTIONS]"
-msgstr ""
+msgstr "purge-kernels [オプション]"
 
 #. translators: command summary: targetos, tos
 #: src/commands/utils/purge-kernels.cc:28
 msgid "Remove old kernels."
-msgstr ""
+msgstr "古いカーネルを削除します。"
 
 #. translators: command description
 #: src/commands/utils/purge-kernels.cc:30
@@ -4925,25 +4925,28 @@ msgid ""
 "zypp/zypp.conf:multiversion.kernels which can be given as <version>, latest(-"
 "N), running, oldest(+N)."
 msgstr ""
+"/etc/zypp/zypp.conf 内の multiversion.kernels "
+"で指定された「保持すべきカーネル」の設定に従って、不要なカーネルを自動削除します。なお multiversion.kernels "
+"の値には、バージョン番号そのもののほか、新しいものから n 個分や古いものから n 個分のように設定することができます。"
 
 #: src/commands/utils/purge-kernels.cc:51
 msgid "Preparing to purge obsolete kernels..."
-msgstr ""
+msgstr "古いカーネルの削除を準備しています..."
 
 #: src/commands/utils/purge-kernels.cc:52
 #, boost-format
 msgid "Configuration: %1%"
-msgstr ""
+msgstr "設定: %1%"
 
 #: src/commands/utils/purge-kernels.cc:53
 #, boost-format
 msgid "Running kernel release: %1%"
-msgstr ""
+msgstr "現在動作中のカーネルリリース: %1%"
 
 #: src/commands/utils/purge-kernels.cc:54
 #, boost-format
 msgid "Running kernel arch: %1%"
-msgstr ""
+msgstr "現在動作中のカーネルアーキテクチャ: %1%"
 
 #: src/commands/utils/source-download.cc:203
 #, c-format, boost-format
