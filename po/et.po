@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: zypper.et\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-11-28 17:54+0100\n"
-"PO-Revision-Date: 2016-12-23 00:01+0000\n"
-"Last-Translator: Kristjan Kütaru <kusti85@gmail.com>\n"
+"PO-Revision-Date: 2019-11-29 15:54+0000\n"
+"Last-Translator: Jaanus Ojangu <jaanus.ojangu@gmail.com>\n"
 "Language-Team: Estonian <https://l10n.opensuse.org/projects/zypper/master/et/"
 ">\n"
 "Language: et\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 2.6\n"
+"X-Generator: Weblate 3.6.1\n"
 
 #: src/SolverRequester.h:52
 #, boost-format
@@ -37,6 +37,10 @@ msgid ""
 "signature can lead to a corrupted system and in extreme cases even to a "
 "system compromise."
 msgstr ""
+"Andmete allkirjastamine võimaldab vastuvõtjal kontrollida, kas pärast "
+"andmete allkirjastamist muudatusi ei ole toimunud. Andmete vastuvõtmine ilma-"
+", vale- või tundmatu allkirjaga võib põhjustada süsteemi riknemise ja "
+"äärmuslikel juhtudel isegi süsteemi ohtu sattumise."
 
 #. translator: %1% is a file name
 #: src/callbacks/keyring.h:40
@@ -45,12 +49,16 @@ msgid ""
 "File '%1%' is the repositories master index file. It ensures the integrity "
 "of the whole repo."
 msgstr ""
+"Fail '% 1%' on hoidlate peaindeksfail. See tagab kogu repo terviklikkuse."
 
 #: src/callbacks/keyring.h:46
 msgid ""
 "We can't verify that no one meddled with this file, so it might not be "
 "trustworthy anymore! You should not continue unless you know it's safe."
 msgstr ""
+"Me ei saa kinnitada, et keegi seda faili ei ole muutnud, nii et see ei "
+"pruugi olla enam usaldusväärne! Te ei tohiks jätkata, kui te ei ole kindel, "
+"et see on ohutu."
 
 #: src/callbacks/keyring.h:51
 msgid ""
@@ -58,6 +66,9 @@ msgid ""
 "malicious change, so it might not be trustworthy anymore! You should not "
 "continue unless you know it's safe."
 msgstr ""
+"Seda faili muudeti pärast allkirjastamist. See võis olla pahatahtlik muutus, "
+"nii et see ei pruugi olla enam usaldusväärne! Te ei tohiks jätkata, kui te "
+"ei ole kindel, et see on ohutu."
 
 #: src/callbacks/keyring.h:79
 #, fuzzy
@@ -83,7 +94,7 @@ msgstr "Võti aegub:"
 
 #: src/callbacks/keyring.h:86
 msgid "Subkey:"
-msgstr ""
+msgstr "Alamvõti:"
 
 #: src/callbacks/keyring.h:87
 msgid "Rpm Name:"
@@ -226,7 +237,7 @@ msgstr "t/u"
 #. The answers should be lower case letters.
 #: src/callbacks/keyring.h:318
 msgid "r/a/"
-msgstr ""
+msgstr "t/a"
 
 #. translators: help text for the 'r' option in the 'r/t/a' prompt
 #: src/callbacks/keyring.h:324
@@ -280,11 +291,13 @@ msgid ""
 "The rpm database seems to contain old V3 version gpg keys which are "
 "meanwhile obsolete and considered insecure:"
 msgstr ""
+"Tundub, et rpm-andmebaas sisaldab vanu V3 versiooni gpg-võtmeid, mis on "
+"vahepeal vananenud ja mida peetakse ebaturvalisteks:"
 
 #: src/callbacks/keyring.h:444
 #, boost-format
 msgid "To see details about a key call '%1%'."
-msgstr ""
+msgstr "Vaata detaile võtme kohta siit '%1%'."
 
 #: src/callbacks/keyring.h:448
 #, boost-format
@@ -292,6 +305,8 @@ msgid ""
 "Unless you believe the key in question is still in use, you can remove it "
 "from the rpm database calling '%1%'."
 msgstr ""
+"Kui te ei usu, et võti on endiselt kasutusel, saate selle RPM-i andmebaasist "
+"eemaldada käsuga \"%1%\"."
 
 #: src/callbacks/keyring.h:470
 #, fuzzy, c-format, boost-format
@@ -312,12 +327,19 @@ msgid ""
 "  expected %3%\n"
 "  but got  %4%\n"
 msgstr ""
+"Põhjalikum kontrollimine failile '%1%' ebaõnnestus \n"
+"[%2%]\n"
+"\n"
+"  oodatud %3%\n"
+"  tegelik  %4%\n"
 
 #: src/callbacks/keyring.h:507
 msgid ""
 "Accepting packages with wrong checksums can lead to a corrupted system and "
 "in extreme cases even to a system compromise."
 msgstr ""
+"Vale kontrollsummaga pakettide aktsepteerimine võib rikkuda süsteemi ja "
+"äärmisel juhul isegi süsteemi kompromiteerimiseni."
 
 #: src/callbacks/keyring.h:515
 #, boost-format
@@ -329,35 +351,39 @@ msgid ""
 "to unblock using this file on your own risk. Empty input will discard the "
 "file.\n"
 msgstr ""
+"Kui aga veendusite, et fail, mille kontrollsumma on '%1%..', on turvaline, "
+"korrektne ja seda peaks selles toimingus kasutama, sisestage omal vastutusel "
+"kontrollsumma neli esimest märki selle faili blokeeringu tühistamiseks. Tühi "
+"sisend loobub failist.\n"
 
 #. translators: A prompt option
 #: src/callbacks/keyring.h:522
 msgid "discard"
-msgstr ""
+msgstr "loobu"
 
 #. translators: A prompt option help text
 #: src/callbacks/keyring.h:524
 msgid "Unblock using this file on your own risk."
-msgstr ""
+msgstr "Selle faili kasutamise deblokeerimine Teie omal vastusel."
 
 #. translators: A prompt option help text
 #: src/callbacks/keyring.h:526
 msgid "Discard the file."
-msgstr ""
+msgstr "Loobu failist."
 
 #. translators: A prompt text
 #: src/callbacks/keyring.h:530
 msgid "Unblock or discard?"
-msgstr ""
+msgstr "Deblokeeri või loobu?"
 
 #: src/callbacks/locks.h:27
 msgid ""
 "The following query locks the same objects as the one you want to remove:"
-msgstr ""
+msgstr "Järgmine päring lukustab samad objektid, mille soovite eemaldada:"
 
 #: src/callbacks/locks.h:30
 msgid "The following query locks some of the objects you want to unlock:"
-msgstr ""
+msgstr "Järgmine päring lukustab mõned objektid, mida soovite lukust avada:"
 
 #: src/callbacks/locks.h:35 src/callbacks/locks.h:50
 #, fuzzy
@@ -366,7 +392,7 @@ msgstr "Soovid sa tõesti seda asukohta kasutada?"
 
 #: src/callbacks/locks.h:45
 msgid "The following query does not lock anything:"
-msgstr ""
+msgstr "Järgmine päring ei lukusta midagi:"
 
 #: src/callbacks/repo.h:49
 #, fuzzy
@@ -387,7 +413,7 @@ msgstr "(%s pakkimata kujul)"
 #: src/callbacks/repo.h:112
 #, boost-format
 msgid "In cache %1%"
-msgstr ""
+msgstr "Vahemälus %1%"
 
 #: src/callbacks/repo.h:128
 #, fuzzy, c-format, boost-format
@@ -401,18 +427,18 @@ msgstr "Initsialiseerimine nurjus"
 
 #: src/callbacks/repo.h:237
 msgid "Accepting package despite the error."
-msgstr ""
+msgstr "Paketi aktsepteerimine hoolimata veast."
 
 #. TranslatorExplanation speaking of a script - "Running: script file name (package name, script dir)"
 #: src/callbacks/rpm.h:184
 #, c-format, boost-format
 msgid "Running: %s  (%s, %s)"
-msgstr ""
+msgstr "Käib: %s  (%s, %s)"
 
 #: src/callbacks/rpm.h:267
 #, c-format, boost-format
 msgid "Removal of %s failed:"
-msgstr ""
+msgstr "Faili %s eemaldamine ebaõnnestus:"
 
 #. translators: This text is a progress display label e.g. "Removing packagename-x.x.x [42%]"
 #: src/callbacks/rpm.h:307
