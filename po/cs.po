@@ -21,7 +21,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-11-28 17:54+0100\n"
-"PO-Revision-Date: 2019-11-29 00:54+0000\n"
+"PO-Revision-Date: 2019-12-01 10:54+0000\n"
 "Last-Translator: Aleš Kastner <alkas@volny.cz>\n"
 "Language-Team: Czech <https://l10n.opensuse.org/projects/zypper/master/cs/>\n"
 "Language: cs\n"
@@ -5060,15 +5060,14 @@ msgstr "Odstranit stará jádra systému."
 
 #. translators: command description
 #: src/commands/utils/purge-kernels.cc:30
-#, fuzzy
 msgid ""
 "Autoremoves installed kernels accoring to list of kernels to keep from /etc/"
 "zypp/zypp.conf:multiversion.kernels which can be given as <version>, latest(-"
 "N), running, oldest(+N)."
 msgstr ""
-"Automaticky odstraní instalovaná jádra podle seznamu udržovaných jader "
-"systému z /etc/zypp/zypp.conf:multiversion.kernels, které lze zadat jako "
-"<verze>, latest(-N), running, oldest(+N)."
+"Automaticky odstraní instalovaná jádra systému podle seznamu udržovaných "
+"jader /etc/zypp/zypp.conf:multiversion.kernels, které lze zadat jako <verze>"
+", latest(-N), running, oldest(+N)."
 
 #: src/commands/utils/purge-kernels.cc:51
 msgid "Preparing to purge obsolete kernels..."
