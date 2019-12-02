@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: zypp.et\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-10-11 09:20+0200\n"
-"PO-Revision-Date: 2019-12-02 17:54+0000\n"
+"PO-Revision-Date: 2019-12-03 00:54+0000\n"
 "Last-Translator: Jaanus Ojangu <jaanus.ojangu@gmail.com>\n"
 "Language-Team: Estonian <https://l10n.opensuse.org/projects/libzypp/master/"
 "et/>\n"
@@ -3862,7 +3862,7 @@ msgstr "Loodava repositooriumi '%s' vahemälu"
 #: zypp/RepoManager.cc:1314
 #, c-format, boost-format
 msgid "Can't create cache at %s - no writing permissions."
-msgstr ""
+msgstr "Ei saa luua vahemälu kohas %s - puuduvad kirjutamise õigused."
 
 #: zypp/RepoManager.cc:1379
 #, c-format, boost-format
@@ -3871,7 +3871,7 @@ msgstr "Hoidla puhverdamine nurjus (%d)."
 
 #: zypp/RepoManager.cc:1390
 msgid "Unhandled repository type"
-msgstr ""
+msgstr "Käsitlemata tarkvarahoidla tüüp"
 
 #. prepare exception to be thrown if the type could not be determined
 #. due to a media exception. We can't throw right away, because of some
@@ -3893,7 +3893,7 @@ msgstr "Tundmatu käsk '%s'"
 #: zypp/RepoManager.cc:1618
 #, c-format, boost-format
 msgid "Adding repository '%s'"
-msgstr ""
+msgstr "Lisatakse repositoorium '%s'"
 
 #. TranslatorExplanation '%s' is an URL
 #: zypp/RepoManager.cc:1706
@@ -3922,12 +3922,12 @@ msgstr "Ei suuda tuvastada, kus teenus asub."
 
 #: zypp/Url.cc:114
 msgid "Invalid LDAP URL query string"
-msgstr ""
+msgstr "Vigane LDAP URL-i päringu kirje"
 
 #: zypp/Url.cc:153
 #, c-format, boost-format
 msgid "Invalid LDAP URL query parameter '%s'"
-msgstr ""
+msgstr "Vigane LDAP URL-i päringu parameeter '%s'"
 
 #: zypp/Url.cc:301
 #, fuzzy
@@ -3950,7 +3950,7 @@ msgstr "tundmatu"
 
 #: zypp/VendorSupportOptions.cc:17
 msgid "unsupported"
-msgstr ""
+msgstr "toetamata"
 
 #: zypp/VendorSupportOptions.cc:20
 msgid "Level 1"
@@ -3966,7 +3966,7 @@ msgstr "Tase 3"
 
 #: zypp/VendorSupportOptions.cc:29
 msgid "Additional Customer Contract Necessary"
-msgstr ""
+msgstr "Vajalik on täiendav kliendileping"
 
 #: zypp/VendorSupportOptions.cc:31
 msgid "invalid"
@@ -3974,11 +3974,11 @@ msgstr "vigane"
 
 #: zypp/VendorSupportOptions.cc:39
 msgid "The level of support is unspecified"
-msgstr ""
+msgstr "Kasutajatoe tase pole määramata"
 
 #: zypp/VendorSupportOptions.cc:42
 msgid "The vendor does not provide support."
-msgstr ""
+msgstr "Müüja ei paku tuge."
 
 #: zypp/VendorSupportOptions.cc:45
 msgid ""
@@ -3987,6 +3987,10 @@ msgid ""
 "maintenance and basic troubleshooting. Level 1 Support is not intended to "
 "correct product defect errors."
 msgstr ""
+"Probleemi tuvastamine, mis tähendab tehnilist abi, et pakkuda ühilduvuse "
+"teavet, paigaldusabi, kasutustuge, töösoleva hoolduse  ja põhiliste "
+"tõrkeotsingute jaoks. Tase 1 tugi pole mõeldud toote defektide vigade "
+"parandamiseks."
 
 #: zypp/VendorSupportOptions.cc:48
 msgid ""
@@ -3994,6 +3998,9 @@ msgid ""
 "customer problems, isolate problem area and provide resolution for problems "
 "not resolved by Level 1 Support."
 msgstr ""
+"Probleemide eraldamine, mis tähendab tehnilist tuge, mis on loodud klientide "
+"probleemide dubleerimiseks, probleemipiirkonna isoleerimiseks ja probleemide "
+"lahendamiseks ei sisaldu tase 1 toes."
 
 #: zypp/VendorSupportOptions.cc:51
 msgid ""
@@ -4001,14 +4008,17 @@ msgid ""
 "complex problems by engaging engineering in resolution of product defects "
 "which have been identified by Level 2 Support."
 msgstr ""
+"Probleemi lahendamine, mis tähendab tehnilist tuge, mis on loodud keerukate "
+"probleemide lahendamiseks, rakendades tehnilisi lahendusi tuvastatud "
+"tootevigade kõrvaldamiseks, mis on kindlaks tehtud 2. taseme toe abil."
 
 #: zypp/VendorSupportOptions.cc:54
 msgid "An additional customer contract is necessary for getting support."
-msgstr ""
+msgstr "Kasutajatoe saamiseks on vajalik täiendav kliendileping."
 
 #: zypp/VendorSupportOptions.cc:56
 msgid "Unknown support option. Description not available"
-msgstr ""
+msgstr "Tundmatu toe valik. Kirjeldus pole saadaval"
 
 #: zypp/ZYppFactory.cc:399
 #, c-format, boost-format
@@ -4016,6 +4026,8 @@ msgid ""
 "System management is locked by the application with pid %d (%s).\n"
 "Close this application before trying again."
 msgstr ""
+"Süsteemihaldus on lukustatud rakendusega pid %d (%s).\n"
+"Enne uuesti proovimist sulgege see rakendus."
 
 #. TranslatorExplanation followed by the list of error messages that lead to this exception
 #: zypp/base/Exception.cc:134
@@ -4030,7 +4042,7 @@ msgstr "Tundmatu käsk '%s'"
 #: zypp/base/StrMatcher.cc:153
 #, c-format, boost-format
 msgid "Unknown match mode '%s' for pattern '%s'"
-msgstr ""
+msgstr "Tundmatu 'match mode' '%s' struktuurile '%s'"
 
 #: zypp/base/StrMatcher.cc:157
 #, fuzzy, c-format, boost-format
@@ -4046,19 +4058,23 @@ msgstr " pole korrektne regulaaravaldis: \""
 #: zypp/media/MediaCIFS.cc:427 zypp/media/MediaCurl.cc:1738
 #, c-format, boost-format
 msgid "Authentication required for '%s'"
-msgstr ""
+msgstr "Autoriseerimine on nõutav '%s' jaoks"
 
 #: zypp/media/MediaCurl.cc:1111
 msgid ""
 "Visit the SUSE Customer Center to check whether your registration is valid "
 "and has not expired."
 msgstr ""
+"Külastage SUSE kliendikeskust, et kontrollida, kas teie registreering on "
+"kehtiv ega ole aegunud."
 
 #: zypp/media/MediaCurl.cc:1113
 msgid ""
 "Visit the Novell Customer Center to check whether your registration is valid "
 "and has not expired."
 msgstr ""
+"Külastage kliendikeskust, et kontrollida, kas teie registreerimine on kehtiv "
+"ja kas see pole aegunud."
 
 #: zypp/media/MediaException.cc:33
 #, fuzzy, c-format, boost-format
@@ -4073,12 +4089,12 @@ msgstr "Mooduli \"%s\" laadimine ebaõnnestus."
 #: zypp/media/MediaException.cc:48
 #, c-format, boost-format
 msgid "Bad file name: %s"
-msgstr ""
+msgstr "Vigane faili nimi: %s"
 
 #: zypp/media/MediaException.cc:53
 #, c-format, boost-format
 msgid "Medium not opened when trying to perform action '%s'."
-msgstr ""
+msgstr "Toimingu '%s' sooritamisel meedium ei avanenud."
 
 #: zypp/media/MediaException.cc:58
 #, fuzzy, c-format, boost-format
@@ -4092,27 +4108,27 @@ msgstr "Faili '%s' ei saa kirjutada."
 
 #: zypp/media/MediaException.cc:68
 msgid "Medium not attached"
-msgstr ""
+msgstr "Meedium ei ole lisatud"
 
 #: zypp/media/MediaException.cc:73
 msgid "Bad media attach point"
-msgstr ""
+msgstr "Vigane meedia lisamispunkt"
 
 #. TranslatorExplanation: curl is the name of a library, don't translate
 #: zypp/media/MediaException.cc:79
 #, c-format, boost-format
 msgid "Download (curl) initialization failed for '%s'"
-msgstr ""
+msgstr "'%s' allalaadimise (curl) initaliseerimine nurjus"
 
 #: zypp/media/MediaException.cc:84
 #, c-format, boost-format
 msgid "System exception '%s' on medium '%s'."
-msgstr ""
+msgstr "Süsteemi erand „%s” andmekandjal „%s”."
 
 #: zypp/media/MediaException.cc:89
 #, c-format, boost-format
 msgid "Path '%s' on medium '%s' is not a file."
-msgstr ""
+msgstr "Tee sihtkohas '%s' andmekandjal '%s' ei ole fail."
 
 #: zypp/media/MediaException.cc:94
 #, fuzzy, c-format, boost-format
@@ -4121,7 +4137,7 @@ msgstr "%1 pole kataloog."
 
 #: zypp/media/MediaException.cc:101
 msgid "Malformed URI"
-msgstr ""
+msgstr "Vigane URI"
 
 #: zypp/media/MediaException.cc:111
 msgid "Empty host name in URI"
@@ -4129,16 +4145,16 @@ msgstr "Tühi masina nimi URI-s"
 
 #: zypp/media/MediaException.cc:116
 msgid "Empty filesystem in URI"
-msgstr ""
+msgstr "Tühi failisüsteem on URl-l"
 
 #: zypp/media/MediaException.cc:121
 msgid "Empty destination in URI"
-msgstr ""
+msgstr "Tühi sihtkoht URl-s"
 
 #: zypp/media/MediaException.cc:126
 #, c-format, boost-format
 msgid "Unsupported URI scheme in '%s'."
-msgstr ""
+msgstr "Mittetoetatud URl skeem '%s'."
 
 #: zypp/media/MediaException.cc:131
 #, fuzzy
@@ -4152,26 +4168,29 @@ msgid ""
 "Error code: %s\n"
 "Error message: %s\n"
 msgstr ""
+"'%s' allalaadimise (curl) viga:\n"
+"Vea kood: %s\n"
+"Veateade: %s\n"
 
 #. TranslatorExplanation: curl is the name of a library, don't translate
 #: zypp/media/MediaException.cc:146
 #, c-format, boost-format
 msgid "Error occurred while setting download (curl) options for '%s':"
-msgstr ""
+msgstr "'%s' allalaadimise valikute määramisel ilmnes viga:"
 
 #: zypp/media/MediaException.cc:153
 #, c-format, boost-format
 msgid "Media source '%s' does not contain the desired medium"
-msgstr ""
+msgstr "Meediumi allikas '%s' ei sisalda soovitud andmekandjat"
 
 #: zypp/media/MediaException.cc:158
 #, c-format, boost-format
 msgid "Medium '%s' is in use by another instance"
-msgstr ""
+msgstr "Meedium '%s' on kasutuses teise kasutaja poolt"
 
 #: zypp/media/MediaException.cc:164
 msgid "Cannot eject any media"
-msgstr ""
+msgstr "Ühtegi andmekandjat ei saa väljutada"
 
 #: zypp/media/MediaException.cc:166
 #, fuzzy, c-format, boost-format
@@ -4186,17 +4205,17 @@ msgstr "Ligipääs on keelatud"
 #: zypp/media/MediaException.cc:189
 #, c-format, boost-format
 msgid "Timeout exceeded when accessing '%s'."
-msgstr ""
+msgstr "'%s juurdepääsu ajalimiit on ületatud."
 
 #: zypp/media/MediaException.cc:197
 #, c-format, boost-format
 msgid "Downloaded data exceeded the expected filesize '%s' of '%s'."
-msgstr ""
+msgstr "Allalaaditud andmed ületasid faili suurust '%s'  '%s' -st."
 
 #: zypp/media/MediaException.cc:205
 #, c-format, boost-format
 msgid "Location '%s' is temporarily unaccessible."
-msgstr ""
+msgstr "Asukoht '%s' on ajutiselt kättesaamatu."
 
 #: zypp/media/MediaException.cc:213
 #, c-format, boost-format
@@ -4210,25 +4229,26 @@ msgid ""
 "Create attach point: Can't find a writable directory to create an attach "
 "point"
 msgstr ""
+"Lisamispunkti loomine: lisamispunkti loomiseks ei leia kirjutatavat kataloogi"
 
 #: zypp/media/MediaUserAuth.cc:136
 #, c-format, boost-format
 msgid "Unsupported HTTP authentication method '%s'"
-msgstr ""
+msgstr "Mittetoetatud HTTP autoriseerimise meetod '%s'"
 
 #: zypp/misc/CheckAccessDeleted.cc:444
 msgid "Please install package 'lsof' first."
-msgstr ""
+msgstr "Palun esmalt paigaldage 'Isof' pakett."
 
 #: zypp/parser/RepoindexFileReader.cc:197
 #, c-format, boost-format
 msgid "Required attribute '%s' is missing."
-msgstr ""
+msgstr "Puudub nõutav argument '%s'."
 
 #: zypp/parser/RepoindexFileReader.cc:209
 #, c-format, boost-format
 msgid "One or both of '%s' or '%s' attributes is required."
-msgstr ""
+msgstr "Üks või mõlemad '%s' või '%s' atribuudid on nõutavad."
 
 #: zypp/repo/PackageProvider.cc:331
 #, fuzzy
@@ -4242,29 +4262,31 @@ msgid ""
 "Package %s seems to be corrupted during transfer. Do you want to retry "
 "retrieval?"
 msgstr ""
+"Pakatt %s tundub olevat transpordi ajal rikutud. Kas te soovit proovida "
+"uuesti vastu võtta?"
 
 #. TranslatorExplanation %s = name of the package being processed.
 #: zypp/repo/PackageProvider.cc:486
 #, c-format, boost-format
 msgid "Failed to provide Package %s. Do you want to retry retrieval?"
-msgstr ""
+msgstr "Paketi %s saatmine nurjus. Kas proovida uuesti saata?"
 
 #: zypp/repo/PackageProvider.cc:609
 msgid "applydeltarpm check failed."
-msgstr ""
+msgstr "applydeltarpm kontrollimine nurjus."
 
 #: zypp/repo/PackageProvider.cc:620
 msgid "applydeltarpm failed."
-msgstr ""
+msgstr "applydeltarpm nurjus."
 
 #: zypp/repo/RepoException.cc:129
 msgid "Service plugin does not support changing an attribute."
-msgstr ""
+msgstr "Teenuse lisaprogramm ei toeta atribuudi muutmist."
 
 #: zypp/repo/RepoProvideFile.cc:261
 #, c-format, boost-format
 msgid "Can't provide file '%s' from repository '%s'"
-msgstr ""
+msgstr "Ei saa faili '%s' tarkvarahoidlast '%s' hankida"
 
 #: zypp/repo/RepoProvideFile.cc:267
 #, fuzzy
@@ -4282,6 +4304,11 @@ msgid ""
 "  conflicts with file from package\n"
 "     %3%"
 msgstr ""
+"Faili %1%\n"
+"  paketist\n"
+"    %2%\n"
+"  on konfliktis failiga paketist\n"
+"    %3%"
 
 #. TranslatorExplanation %1%(filename) %2%(package1) %3%(package2)
 #: zypp/sat/FileConflicts.cc:40
@@ -4293,6 +4320,11 @@ msgid ""
 "  conflicts with file from install of\n"
 "     %3%"
 msgstr ""
+"Fail %1%\n"
+"   paketist\n"
+"      %2%\n"
+"   on vastuolus failiga paigaldusest\n"
+"      %3%"
 
 #. TranslatorExplanation %1%(filename) %2%(package1) %3%(package2)
 #: zypp/sat/FileConflicts.cc:47
@@ -4304,6 +4336,11 @@ msgid ""
 "  conflicts with file from package\n"
 "     %3%"
 msgstr ""
+"Fail %1%\n"
+"  paigaldusest\n"
+"     %2%\n"
+"  on konfliktis failiga paketist\n"
+"     %3%"
 
 #. TranslatorExplanation %1%(filename) %2%(package1) %3%(package2)
 #: zypp/sat/FileConflicts.cc:53
@@ -4315,6 +4352,11 @@ msgid ""
 "  conflicts with file from install of\n"
 "     %3%"
 msgstr ""
+"Fail %1%\n"
+"  paigaldusest\n"
+"     %2%\n"
+"  on vastuolus failiga paigaldusest\n"
+"     %3%"
 
 #. [lhs][rhs] 0 = installed; 1 = to be installed
 #. TranslatorExplanation %1%(filename1) %2%(package1) %%3%(filename2) 4%(package2)
@@ -4329,6 +4371,13 @@ msgid ""
 "  from package\n"
 "     %4%"
 msgstr ""
+"Fail %1%\n"
+"  paketist\n"
+"     %2%\n"
+"  on vastuolus failiga\n"
+"     %3%\n"
+"  paketist\n"
+"     %4%"
 
 #. TranslatorExplanation %1%(filename1) %2%(package1) %3%(filename2) %4%(package2)
 #: zypp/sat/FileConflicts.cc:76
@@ -4342,6 +4391,13 @@ msgid ""
 "  from install of\n"
 "     %4%"
 msgstr ""
+"Fail %1%\n"
+"  paketist\n"
+"     %2%\n"
+"  on vastuolus failiga\n"
+"     %3%\n"
+"  paigaldusest\n"
+"     %4%"
 
 #. TranslatorExplanation %1%(filename1) %2%(package1) %3%(filename2) %4%(package2)
 #: zypp/sat/FileConflicts.cc:85
@@ -4355,6 +4411,13 @@ msgid ""
 "  from package\n"
 "     %4%"
 msgstr ""
+"Fail %1%\n"
+"  paigaldusest\n"
+"     %2%\n"
+"  on konfliktis failiga\n"
+"     %3%\n"
+"  paketist\n"
+"     %4%"
 
 #. TranslatorExplanation %1%(filename1) %2%(package1) %3%(filename2) %4%(package2)
 #: zypp/sat/FileConflicts.cc:93
@@ -4368,6 +4431,13 @@ msgid ""
 "  from install of\n"
 "     %4%"
 msgstr ""
+"Fail %1%\n"
+" paigaldusest\n"
+"     %2%\n"
+"  on vastuolus failiga\n"
+"     %3%\n"
+"  paigaldusest\n"
+"     %4%"
 
 #: zypp/sat/detail/PoolImpl.cc:193
 #, fuzzy
@@ -4388,12 +4458,12 @@ msgstr "Sõltuvuste kontrollimine"
 #: zypp/solver/detail/SATResolver.cc:1052
 #, c-format, boost-format
 msgid "%s does not belong to a distupgrade repository"
-msgstr ""
+msgstr "%s ei kuulu distupgrade tarkvarahoidlasse"
 
 #: zypp/solver/detail/SATResolver.cc:1055
 #, c-format, boost-format
 msgid "%s has inferior architecture"
-msgstr ""
+msgstr "%s on halvema arhitektuuriga"
 
 #: zypp/solver/detail/SATResolver.cc:1058
 #, fuzzy, c-format, boost-format
@@ -4411,12 +4481,12 @@ msgstr "mingi sõltuvuse probleem"
 #: zypp/solver/detail/SATResolver.cc:1067
 #, c-format, boost-format
 msgid "nothing provides requested %s"
-msgstr ""
+msgstr "kuskil ei pakuta nõutud %s"
 
 #: zypp/solver/detail/SATResolver.cc:1068
 #: zypp/solver/detail/SATResolver.cc:1072
 msgid "Have you enabled all requested repositories?"
-msgstr ""
+msgstr "Kas olete lubanud kõik taotletud hoidlad?"
 
 #: zypp/solver/detail/SATResolver.cc:1071
 #, fuzzy, c-format, boost-format
@@ -4425,12 +4495,12 @@ msgstr "varukoopiat pole olemas"
 
 #: zypp/solver/detail/SATResolver.cc:1075
 msgid "unsupported request"
-msgstr ""
+msgstr "mittetoetaud taotlus"
 
 #: zypp/solver/detail/SATResolver.cc:1078
 #, c-format, boost-format
 msgid "%s is provided by the system and cannot be erased"
-msgstr ""
+msgstr "%s on süsteemi poolt seatud ja ei ole eemaldatav"
 
 #: zypp/solver/detail/SATResolver.cc:1081
 #, c-format, boost-format
@@ -4441,17 +4511,17 @@ msgstr "%s pole paigaldatav"
 #: zypp/solver/detail/SATResolver.cc:1085
 #, c-format, boost-format
 msgid "nothing provides %s needed by %s"
-msgstr ""
+msgstr "miski ei paku %s vajalikku %s -le"
 
 #: zypp/solver/detail/SATResolver.cc:1088
 #, c-format, boost-format
 msgid "cannot install both %s and %s"
-msgstr ""
+msgstr "Ei saa paigaldada mõlemat %s ja %s"
 
 #: zypp/solver/detail/SATResolver.cc:1091
 #, c-format, boost-format
 msgid "%s conflicts with %s provided by %s"
-msgstr ""
+msgstr "%s on konfliktis %s -ga hangituna %s poolt"
 
 #: zypp/solver/detail/SATResolver.cc:1094
 #, c-format, boost-format
