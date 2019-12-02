@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: zypp.et\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-10-11 09:20+0200\n"
-"PO-Revision-Date: 2019-10-25 09:53+0000\n"
+"PO-Revision-Date: 2019-12-02 17:54+0000\n"
 "Last-Translator: Jaanus Ojangu <jaanus.ojangu@gmail.com>\n"
 "Language-Team: Estonian <https://l10n.opensuse.org/projects/libzypp/master/"
 "et/>\n"
@@ -24,7 +24,7 @@ msgstr ""
 #: zypp/CheckSum.cc:136
 #, c-format, boost-format
 msgid "Dubious type '%s' for %u byte checksum '%s'"
-msgstr ""
+msgstr "Kahtlane tüüp '%s' %u baitide kontrollsummale '%s'"
 
 #: zypp/CountryCode.cc:50
 msgid "Unknown country: "
@@ -544,7 +544,7 @@ msgstr "Iisrael"
 #. :ISR:376:
 #: zypp/CountryCode.cc:260
 msgid "Isle of Man"
-msgstr ""
+msgstr "Manni saar 'Isle of Man'"
 
 #: zypp/CountryCode.cc:261
 msgid "India"
@@ -577,8 +577,9 @@ msgstr "Itaalia"
 
 #. :ITA:380:
 #: zypp/CountryCode.cc:267
+#, fuzzy
 msgid "Jersey"
-msgstr ""
+msgstr "Jersey"
 
 #: zypp/CountryCode.cc:268
 msgid "Jamaica"
@@ -1317,7 +1318,7 @@ msgstr "Ei saa chroot läbi viia '%s' (%s)."
 #: zypp/ExternalProgram.cc:372
 #, c-format, boost-format
 msgid "Can't chdir to '%s' inside chroot '%s' (%s)."
-msgstr ""
+msgstr "Ei  õnnestunud 'chdir' '%s' 'chroot' sees '%s' (%s)."
 
 #: zypp/ExternalProgram.cc:373
 #, fuzzy, c-format, boost-format
@@ -1333,7 +1334,7 @@ msgstr "Ei saa käivitada '%s' (%s)."
 #: zypp/ExternalProgram.cc:393
 #, c-format, boost-format
 msgid "Can't fork (%s)."
-msgstr ""
+msgstr "'fork' ei õnnestu (%s)."
 
 #: zypp/ExternalProgram.cc:522
 #, c-format, boost-format
@@ -2894,7 +2895,7 @@ msgstr "Niasi"
 #. language code: nic
 #: zypp/LanguageCode.cc:799
 msgid "Niger-Kordofanian (Other)"
-msgstr ""
+msgstr "Niger-kordofaani (Muud)"
 
 #. language code: niu
 #: zypp/LanguageCode.cc:801
@@ -3256,7 +3257,7 @@ msgstr "Siuu keeled"
 #. language code: sit
 #: zypp/LanguageCode.cc:951
 msgid "Sino-Tibetan (Other)"
-msgstr ""
+msgstr "Hiina-Tiibeti keel (Muud)"
 
 #. language code: sla
 #: zypp/LanguageCode.cc:953
@@ -3765,40 +3766,40 @@ msgstr "(AEGUNUD)"
 #. translators: an annotation to a gpg keys expiry date
 #: zypp/PublicKey.cc:95
 msgid "(expires within 24h)"
-msgstr ""
+msgstr "(aegub 24h jooksul)"
 
 #. translators: an annotation to a gpg keys expiry date
 #: zypp/PublicKey.cc:99
 #, c-format, boost-format
 msgid "(expires in %d day)"
 msgid_plural "(expires in %d days)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "(aegub %d päevaga)"
+msgstr[1] "(aegub %d päevaga)"
 
 #. translator: %1% is a gpg key ID like 3DBDC284
 #. %2% is a cache directories path
 #: zypp/RepoInfo.cc:517
 #, boost-format
 msgid "Looking for gpg key ID %1% in cache %2%."
-msgstr ""
+msgstr "Otsitakse gpg võtme ID-d %1% vahemälus %2%."
 
 #. translator: %1% is a gpg key ID like 3DBDC284
 #. %2% is a repositories name
 #: zypp/RepoInfo.cc:545
 #, boost-format
 msgid "Looking for gpg key ID %1% in repository %2%."
-msgstr ""
+msgstr "Otsitakse gpg võtme ID-d %1% repositooriumis %2%."
 
 #. translator: %1% is a repositories name
 #: zypp/RepoInfo.cc:569
 #, boost-format
 msgid "Repository %1% does not define additional 'gpgkey=' URLs."
-msgstr ""
+msgstr "Repositoorium %1% ei defineeri täiendavat 'gpgkey=' URLi."
 
 #: zypp/RepoManager.cc:312
 #, boost-format
 msgid "Cannot read repo directory '%1%': Permission denied"
-msgstr ""
+msgstr "Ei saa lugeda repo kataloogi '%1%': Juurdepääs on keelatud"
 
 #. TranslatorExplanation '%s' is a pathname
 #: zypp/RepoManager.cc:320 zypp/RepoManager.cc:783 zypp/RepoManager.cc:1536
@@ -3810,7 +3811,7 @@ msgstr "Kataloogi '%s' lugemine nurjus."
 #: zypp/RepoManager.cc:330
 #, boost-format
 msgid "Cannot read repo file '%1%': Permission denied"
-msgstr ""
+msgstr "Ei saa lugeda repo faili '%1%': Juurdepääs on keelatud"
 
 #: zypp/RepoManager.cc:353
 #, fuzzy
@@ -3819,7 +3820,7 @@ msgstr "Hoidlat %s ei leitud."
 
 #: zypp/RepoManager.cc:364
 msgid "Service alias cannot start with dot."
-msgstr ""
+msgstr "Teenuse alias ei saa alata täpiga."
 
 #. TranslatorExplanation '%s' is a filename
 #: zypp/RepoManager.cc:738 zypp/RepoManager.cc:1654 zypp/RepoManager.cc:1720
@@ -3834,14 +3835,14 @@ msgstr "Faili '%s' avamine kirjutamiseks nurjus."
 #: zypp/RepoManager.cc:865
 #, boost-format
 msgid "Unknown service '%1%': Removing orphaned service repository '%2%'"
-msgstr ""
+msgstr "Tundmatu teenus '%1%': Orvustunud teenuse repost '%2%' eemaldamine"
 
 #. we will throw this later if no URL checks out fine
 #: zypp/RepoManager.cc:1092
 msgid "Valid metadata not found at specified URL"
 msgid_plural "Valid metadata not found at specified URLs"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Valitud metaandmeid ei leitud määratud URL-ilt"
+msgstr[1] "Valitud metaandmeid ei leitud määratud URL-delt"
 
 #: zypp/RepoManager.cc:1140 zypp/RepoManager.cc:1252 zypp/RepoManager.cc:1308
 #, fuzzy, c-format, boost-format
@@ -3856,7 +3857,7 @@ msgstr "Ei saa luua katalooogi %1: %2"
 #: zypp/RepoManager.cc:1294
 #, c-format, boost-format
 msgid "Building repository '%s' cache"
-msgstr ""
+msgstr "Loodava repositooriumi '%s' vahemälu"
 
 #: zypp/RepoManager.cc:1314
 #, c-format, boost-format
