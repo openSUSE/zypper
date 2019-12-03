@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: zypp.et\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-10-11 09:20+0200\n"
-"PO-Revision-Date: 2019-12-03 14:54+0000\n"
+"PO-Revision-Date: 2019-12-03 17:54+0000\n"
 "Last-Translator: Jaanus Ojangu <jaanus.ojangu@gmail.com>\n"
 "Language-Team: Estonian <https://l10n.opensuse.org/projects/libzypp/master/"
 "et/>\n"
@@ -4605,17 +4605,17 @@ msgstr ""
 #: zypp/solver/detail/SATResolver.cc:1324
 #, c-format, boost-format
 msgid "do not install most recent version of %s"
-msgstr ""
+msgstr "ära paigalda %s uusimat versiooni"
 
 #: zypp/solver/detail/SATResolver.cc:1345
 #, c-format, boost-format
 msgid "keep %s despite the inferior architecture"
-msgstr ""
+msgstr "jäta alles %s hoolimata halvemast arhitektuurist"
 
 #: zypp/solver/detail/SATResolver.cc:1350
 #, c-format, boost-format
 msgid "install %s despite the inferior architecture"
-msgstr ""
+msgstr "paigaldage %s vaatamata madalamale arhitektuurile"
 
 #: zypp/solver/detail/SATResolver.cc:1359
 #, fuzzy, c-format, boost-format
@@ -4625,17 +4625,17 @@ msgstr "Muudab aegunuks"
 #: zypp/solver/detail/SATResolver.cc:1364
 #, c-format, boost-format
 msgid "install %s from excluded repository"
-msgstr ""
+msgstr "paigaldage %s välistatud hoidlast"
 
 #: zypp/solver/detail/SATResolver.cc:1384
 #, c-format, boost-format
 msgid "downgrade of %s to %s"
-msgstr ""
+msgstr "tagasiviimine %s tasemele %s"
 
 #: zypp/solver/detail/SATResolver.cc:1391
 #, c-format, boost-format
 msgid "architecture change of %s to %s"
-msgstr ""
+msgstr "arhitektuuri muutus %s teisele %s"
 
 #: zypp/solver/detail/SATResolver.cc:1400
 #, c-format, boost-format
@@ -4643,11 +4643,13 @@ msgid ""
 "install %s (with vendor change)\n"
 "  %s  -->  %s"
 msgstr ""
+"paigalda %s (koos tarnija vahetusega)\n"
+"  %s  -->  %s"
 
 #: zypp/solver/detail/SATResolver.cc:1409
 #, c-format, boost-format
 msgid "replacement of %s with %s"
-msgstr ""
+msgstr "%s vahetamine %s vastu"
 
 #: zypp/solver/detail/SATResolver.cc:1420
 #, fuzzy, c-format, boost-format
