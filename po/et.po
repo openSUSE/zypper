@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: zypp.et\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-10-11 09:20+0200\n"
-"PO-Revision-Date: 2019-12-03 00:54+0000\n"
+"PO-Revision-Date: 2019-12-03 14:54+0000\n"
 "Last-Translator: Jaanus Ojangu <jaanus.ojangu@gmail.com>\n"
 "Language-Team: Estonian <https://l10n.opensuse.org/projects/libzypp/master/"
 "et/>\n"
@@ -3512,7 +3512,7 @@ msgstr "Uusmelaneesia"
 #. language code: tsi
 #: zypp/LanguageCode.cc:1059
 msgid "Tsimshian"
-msgstr ""
+msgstr "Tsimshian"
 
 #. language code: tsn tn
 #: zypp/LanguageCode.cc:1061
@@ -4526,26 +4526,26 @@ msgstr "%s on konfliktis %s -ga hangituna %s poolt"
 #: zypp/solver/detail/SATResolver.cc:1094
 #, c-format, boost-format
 msgid "%s obsoletes %s provided by %s"
-msgstr ""
+msgstr "%s aegub %s, mida pakub %s"
 
 #: zypp/solver/detail/SATResolver.cc:1097
 #, c-format, boost-format
 msgid "installed %s obsoletes %s provided by %s"
-msgstr ""
+msgstr "paigaldatud %s aegub %s pakkujalt %s"
 
 #: zypp/solver/detail/SATResolver.cc:1100
 #, c-format, boost-format
 msgid "solvable %s conflicts with %s provided by itself"
-msgstr ""
+msgstr "lahendatav %s on vastuolus enda poolt pakutuga %s"
 
 #: zypp/solver/detail/SATResolver.cc:1131
 #, c-format, boost-format
 msgid "%s requires %s, but this requirement cannot be provided"
-msgstr ""
+msgstr "%s nõuab %s, kuid seda nõuet ei saa täita"
 
 #: zypp/solver/detail/SATResolver.cc:1133
 msgid "deleted providers: "
-msgstr ""
+msgstr "kustutatud pakkujad: "
 
 #: zypp/solver/detail/SATResolver.cc:1143
 msgid ""
@@ -4562,19 +4562,19 @@ msgstr "kättesaamatud varustajad: "
 #: zypp/solver/detail/SATResolver.cc:1207
 #, c-format, boost-format
 msgid "remove lock to allow removal of %s"
-msgstr ""
+msgstr "eemalda lukk, et lubada %s eemaldamist"
 
 #: zypp/solver/detail/SATResolver.cc:1212
 #: zypp/solver/detail/SATResolver.cc:1248
 #, c-format, boost-format
 msgid "do not install %s"
-msgstr ""
+msgstr "ära paigalda %s"
 
 #: zypp/solver/detail/SATResolver.cc:1227
 #: zypp/solver/detail/SATResolver.cc:1269
 #, c-format, boost-format
 msgid "keep %s"
-msgstr ""
+msgstr "jäta alles %s"
 
 #: zypp/solver/detail/SATResolver.cc:1232
 #, fuzzy, c-format, boost-format
@@ -4590,7 +4590,7 @@ msgstr "Päring on juba olemas."
 #: zypp/solver/detail/SATResolver.cc:1284
 #: zypp/solver/detail/SATResolver.cc:1305
 msgid "ignore the warning of a broken system"
-msgstr ""
+msgstr "ignoreerige katkise süsteemi hoiatust"
 
 #: zypp/solver/detail/SATResolver.cc:1289
 #, c-format, boost-format
