@@ -55,6 +55,9 @@ namespace zypp
     public:
       typedef sat::detail::SolvableIdType IdType;
 
+      static const IdString retractedToken;	///< Indicator provides `retracted-patch-package()`
+      static const IdString ptfToken;		///< Indicator provides `ptf()`
+
     public:
       /** Default ctor creates \ref noSolvable.*/
       Solvable()
@@ -136,13 +139,19 @@ namespace zypp
       /** \overload static version */
       static bool identIsAutoInstalled( const IdString & ident_r );
 
-      /** Whether this solvable triggers the reboot-needed hint if installed/updated. */
-      bool isNeedreboot() const;
-
       /** Whether different versions of this package can be installed at the same time.
        * Per default \c false. \see also \ref ZConfig::multiversion.
        */
       bool multiversionInstall() const;
+
+      /** Whether this solvable triggers the reboot-needed hint if installed/updated. */
+      bool isNeedreboot() const;
+
+      /** Whether this solvable is retracted (provides \ref retractedToken). */
+      bool isRetracted() const;
+
+      /** Whether this solvable is a PTF (provides \ref ptfToken). */
+      bool isPtf() const;
 
       /** The items build time. */
       Date buildtime() const;

@@ -81,6 +81,8 @@ namespace zypp
       bool		identIsAutoInstalled() const		{ return satSolvable().identIsAutoInstalled(); }
       bool		multiversionInstall() const		{ return satSolvable().multiversionInstall(); }
       bool              isNeedreboot() const			{ return satSolvable().isNeedreboot(); }
+      bool		isRetracted() const			{ return satSolvable().isRetracted(); }
+      bool		isPtf() const				{ return satSolvable().isPtf(); }
 
       Date		buildtime() const			{ return satSolvable().buildtime(); }
       Date		installtime() const			{ return satSolvable().installtime(); }

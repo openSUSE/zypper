@@ -97,6 +97,9 @@ namespace zypp
 
     const Solvable Solvable::noSolvable;
 
+    const IdString Solvable::retractedToken	{ "retracted-patch-package()" };
+    const IdString Solvable::ptfToken		{ "ptf()" };
+
     /////////////////////////////////////////////////////////////////
 
     detail::CSolvable * Solvable::get() const
@@ -391,6 +394,18 @@ namespace zypp
     {
       NO_SOLVABLE_RETURN( false );
       return myPool().isNeedreboot( *this );
+    }
+
+    bool Solvable::isRetracted() const
+    {
+      NO_SOLVABLE_RETURN( false );
+      return provides().contains( Capability( retractedToken.id() ) );
+    }
+
+    bool Solvable::isPtf() const
+    {
+      NO_SOLVABLE_RETURN( false );
+      return provides().contains( Capability( ptfToken.id() ) );
     }
 
     bool Solvable::multiversionInstall() const
