@@ -23,6 +23,18 @@ namespace zypp
 
 #define DATADIR (Pathname(TESTS_SRC_DIR) + "/zypp/data/Vendor")
 
+BOOST_AUTO_TEST_CASE(vendor_empty)
+{
+  BOOST_REQUIRE( VendorAttr::instance().equivalent("", "") );
+  BOOST_REQUIRE( !VendorAttr::instance().equivalent("a", "") );
+  BOOST_REQUIRE( !VendorAttr::instance().equivalent("", "a") );
+
+  BOOST_REQUIRE( VendorAttr::instance().equivalent( IdString::Null, IdString::Null ) );
+  BOOST_REQUIRE( VendorAttr::instance().equivalent( IdString::Empty, IdString::Null ) );
+  BOOST_REQUIRE( VendorAttr::instance().equivalent( IdString::Null, IdString::Empty ) );
+  BOOST_REQUIRE( VendorAttr::instance().equivalent( IdString::Empty, IdString::Empty ) );
+}
+
 BOOST_AUTO_TEST_CASE(vendor_test1)
 {
   reconfigureZConfig( DATADIR / "zypp1.conf" );
