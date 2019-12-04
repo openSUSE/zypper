@@ -645,14 +645,12 @@ SATResolver::solverInit(const PoolItemList & weakItems)
         queue_push( &(_jobQueue), id );
     }
 
-    // Ad rules for retracted pathces and packages
+    // Ad rules for retracted patches and packages
     {
-      static const IdString retractedToken { "retracted-patch-package()" };
-      static const IdString ptfToken { "ptf()" };
       queue_push( &(_jobQueue), SOLVER_BLACKLIST|SOLVER_SOLVABLE_PROVIDES );
-      queue_push( &(_jobQueue), retractedToken.id() );
+      queue_push( &(_jobQueue), sat::Solvable::retractedToken.id() );
       queue_push( &(_jobQueue), SOLVER_BLACKLIST|SOLVER_SOLVABLE_PROVIDES );
-      queue_push( &(_jobQueue), ptfToken.id() );
+      queue_push( &(_jobQueue), sat::Solvable::ptfToken.id() );
     }
 
     // Ad rules for changed requestedLocales
@@ -1375,7 +1373,27 @@ SATResolver::problems ()
 			    MIL << description << endl;
 			    problemSolution->addDescription (description);
 			}
-		    } else {
+		    } else if ( p == SOLVER_SOLUTION_BLACK ) {
+			// Allow to install a blacklisted package (PTF, retracted,...).
+			// For not-installed items only
+			s = mapSolvable (rp);
+			PoolItem poolItem = _pool.find (s);
+
+			problemSolution->addSingleAction (poolItem, INSTALL);
+			string description;
+			if ( s.isRetracted() ) {
+			  // translator: %1% is a package name
+			  description = str::Format(_("install %1% although it has been retracted")) % s.asString();
+			} else if ( s.isPtf() ) {
+			  // translator: %1% is a package name
+			  description = str::Format(_("allow to install the PTF %1%")) % s.asString();
+			} else {
+			  // translator: %1% is a package name
+			  description = str::Format(_("install %1% although it is blacklisted")) % s.asString();
+			}
+			MIL << description << endl;
+			problemSolution->addDescription( description );
+		    } else if ( p > 0 ) {
 			/* policy, replace p with rp */
 			s = mapSolvable (p);
 			PoolItem itemFrom = _pool.find (s);
@@ -1434,6 +1452,11 @@ SATResolver::problems ()
 			    }
 			}
 		    }
+		    else
+		    {
+		      INT << "Unknown solution " << p << endl;
+		    }
+
 		}
 		resolverProblem->addSolution (problemSolution,
 					      problemSolution->actionCount() > 1 ? true : false); // Solutions with more than 1 action will be shown first.
