@@ -75,6 +75,9 @@ namespace zypp
       const_iterator end() const;
 
   public:
+    /** Return whether the set contains \a lhs (the Id)*/
+    bool contains( const Capability & lhs ) const;
+
     /** Return whether \a lhs matches at least one capability in set. */
     bool matches( const Capability & lhs ) const;
 
@@ -168,6 +171,14 @@ namespace zypp
 
   inline Capabilities::const_iterator Capabilities::end() const
   { return const_iterator( 0 ); }
+
+  inline bool Capabilities::contains( const Capability & lhs ) const
+  {
+    for ( const Capability & rhs : *this )
+      if ( lhs == rhs )
+	return true;
+    return false;
+  }
 
   inline bool Capabilities::matches( const Capability & lhs ) const
   {
