@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypp.ko\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-11 09:20+0200\n"
+"POT-Creation-Date: 2019-12-05 14:22+0100\n"
 "PO-Revision-Date: 2019-03-23 20:19+0000\n"
 "Last-Translator: Hwajin Kim <hwajin.kim@e4net.net>\n"
 "Language-Team: Korean <https://l10n.opensuse.org/projects/libzypp/master/ko/"
@@ -4618,100 +4618,100 @@ msgstr "일부 종속성을 무시하여 %s을(를) 구분합니다."
 msgid "generally ignore of some dependencies"
 msgstr "일부 종속을 일반적으로 무시"
 
-#: zypp/solver/detail/SATResolver.cc:1052
+#: zypp/solver/detail/SATResolver.cc:1060
 #, c-format, boost-format
 msgid "%s does not belong to a distupgrade repository"
 msgstr "%s이(가) 배포 업그레이드 리포지토리에 속해 있지 않습니다."
 
-#: zypp/solver/detail/SATResolver.cc:1055
+#: zypp/solver/detail/SATResolver.cc:1063
 #, c-format, boost-format
 msgid "%s has inferior architecture"
 msgstr "%s에 하위 아키텍처가 있습니다."
 
-#: zypp/solver/detail/SATResolver.cc:1058
+#: zypp/solver/detail/SATResolver.cc:1066
 #, c-format, boost-format
 msgid "problem with installed package %s"
 msgstr "설치된 패키지 %s에 문제가 발생했습니다."
 
-#: zypp/solver/detail/SATResolver.cc:1061
+#: zypp/solver/detail/SATResolver.cc:1069
 msgid "conflicting requests"
 msgstr "요청 충돌"
 
-#: zypp/solver/detail/SATResolver.cc:1064
+#: zypp/solver/detail/SATResolver.cc:1072
 msgid "some dependency problem"
 msgstr "일부 종속성 문제"
 
-#: zypp/solver/detail/SATResolver.cc:1067
+#: zypp/solver/detail/SATResolver.cc:1075
 #, c-format, boost-format
 msgid "nothing provides requested %s"
 msgstr "요청한 %s이(가) 제공되지 않습니다."
 
-#: zypp/solver/detail/SATResolver.cc:1068
-#: zypp/solver/detail/SATResolver.cc:1072
+#: zypp/solver/detail/SATResolver.cc:1076
+#: zypp/solver/detail/SATResolver.cc:1080
 msgid "Have you enabled all requested repositories?"
 msgstr "요청한 모든 리포지토리를 활성화했습니까?"
 
-#: zypp/solver/detail/SATResolver.cc:1071
+#: zypp/solver/detail/SATResolver.cc:1079
 #, c-format, boost-format
 msgid "package %s does not exist"
 msgstr "%s 패키지가 존재하지 않습니다."
 
-#: zypp/solver/detail/SATResolver.cc:1075
+#: zypp/solver/detail/SATResolver.cc:1083
 msgid "unsupported request"
 msgstr "지원되지 않는 요청"
 
-#: zypp/solver/detail/SATResolver.cc:1078
+#: zypp/solver/detail/SATResolver.cc:1086
 #, c-format, boost-format
 msgid "%s is provided by the system and cannot be erased"
 msgstr "%s은(는) 시스템에서 제공되며 지울 수 없습니다."
 
-#: zypp/solver/detail/SATResolver.cc:1081
+#: zypp/solver/detail/SATResolver.cc:1089
 #, c-format, boost-format
 msgid "%s is not installable"
 msgstr "%s을(를) 설치할 수 없습니다."
 
 #. for setting weak dependencies
-#: zypp/solver/detail/SATResolver.cc:1085
+#: zypp/solver/detail/SATResolver.cc:1093
 #, c-format, boost-format
 msgid "nothing provides %s needed by %s"
 msgstr "%s(%s에서 필요)이(가) 제공되지 않습니다."
 
 #  Frame title for installation target hard disk / partition(s)
-#: zypp/solver/detail/SATResolver.cc:1088
+#: zypp/solver/detail/SATResolver.cc:1096
 #, c-format, boost-format
 msgid "cannot install both %s and %s"
 msgstr "%s과(와) %s을(를) 모두 설치할 수 없습니다."
 
-#: zypp/solver/detail/SATResolver.cc:1091
+#: zypp/solver/detail/SATResolver.cc:1099
 #, c-format, boost-format
 msgid "%s conflicts with %s provided by %s"
 msgstr "%s이(가) %s(%s에서 제공)과(와) 충돌합니다."
 
-#: zypp/solver/detail/SATResolver.cc:1094
+#: zypp/solver/detail/SATResolver.cc:1102
 #, c-format, boost-format
 msgid "%s obsoletes %s provided by %s"
 msgstr "%s이(가) %s(%s에서 제공)을(를) 폐기합니다."
 
-#: zypp/solver/detail/SATResolver.cc:1097
+#: zypp/solver/detail/SATResolver.cc:1105
 #, c-format, boost-format
 msgid "installed %s obsoletes %s provided by %s"
 msgstr "설치된 %s이(가) %s(%s에서 제공)을(를) 제거합니다."
 
-#: zypp/solver/detail/SATResolver.cc:1100
+#: zypp/solver/detail/SATResolver.cc:1108
 #, c-format, boost-format
 msgid "solvable %s conflicts with %s provided by itself"
 msgstr "Solvable %s이(가) 자체적으로 제공된 %s과(와) 충돌합니다."
 
-#: zypp/solver/detail/SATResolver.cc:1131
+#: zypp/solver/detail/SATResolver.cc:1139
 #, c-format, boost-format
 msgid "%s requires %s, but this requirement cannot be provided"
 msgstr "%s에 %s이(가) 필요하지만, 이 요구사항을 제공할 수 없습니다."
 
-#: zypp/solver/detail/SATResolver.cc:1133
+#: zypp/solver/detail/SATResolver.cc:1141
 msgid "deleted providers: "
 msgstr "삭제된 공급자: "
 
-#: zypp/solver/detail/SATResolver.cc:1143
+#: zypp/solver/detail/SATResolver.cc:1151
 msgid ""
 "\n"
 "not installable providers: "
@@ -4719,89 +4719,107 @@ msgstr ""
 "\n"
 "설치 불가능한 공급자: "
 
-#: zypp/solver/detail/SATResolver.cc:1145
+#: zypp/solver/detail/SATResolver.cc:1153
 msgid "not installable providers: "
 msgstr "설치할 수 없는 공급자: "
 
-#: zypp/solver/detail/SATResolver.cc:1207
+#: zypp/solver/detail/SATResolver.cc:1215
 #, c-format, boost-format
 msgid "remove lock to allow removal of %s"
 msgstr "잠금 해제로 %s 제거 허용"
 
 #  Frame title for installation target hard disk / partition(s)
-#: zypp/solver/detail/SATResolver.cc:1212
-#: zypp/solver/detail/SATResolver.cc:1248
+#: zypp/solver/detail/SATResolver.cc:1220
+#: zypp/solver/detail/SATResolver.cc:1256
 #, c-format, boost-format
 msgid "do not install %s"
 msgstr "%s 설치 안 함"
 
-#: zypp/solver/detail/SATResolver.cc:1227
-#: zypp/solver/detail/SATResolver.cc:1269
+#: zypp/solver/detail/SATResolver.cc:1235
+#: zypp/solver/detail/SATResolver.cc:1277
 #, c-format, boost-format
 msgid "keep %s"
 msgstr "%s 유지"
 
-#: zypp/solver/detail/SATResolver.cc:1232
+#: zypp/solver/detail/SATResolver.cc:1240
 #, c-format, boost-format
 msgid "remove lock to allow installation of %s"
 msgstr "잠금 해제로 %s 설치 허용"
 
-#: zypp/solver/detail/SATResolver.cc:1283
-#: zypp/solver/detail/SATResolver.cc:1304
+#: zypp/solver/detail/SATResolver.cc:1291
+#: zypp/solver/detail/SATResolver.cc:1312
 msgid "This request will break your system!"
 msgstr "이 요청은 시스템을 손상시킵니다!"
 
-#: zypp/solver/detail/SATResolver.cc:1284
-#: zypp/solver/detail/SATResolver.cc:1305
+#: zypp/solver/detail/SATResolver.cc:1292
+#: zypp/solver/detail/SATResolver.cc:1313
 msgid "ignore the warning of a broken system"
 msgstr "손상된 시스템에 대한 경고를 무시합니다."
 
-#: zypp/solver/detail/SATResolver.cc:1289
+#: zypp/solver/detail/SATResolver.cc:1297
 #, c-format, boost-format
 msgid "do not ask to install a solvable providing %s"
 msgstr "%s을(를) 제공하는 solvable 설치를 묻지 않음"
 
-#: zypp/solver/detail/SATResolver.cc:1311
+#: zypp/solver/detail/SATResolver.cc:1319
 #, c-format, boost-format
 msgid "do not ask to delete all solvables providing %s"
 msgstr "%s을(를) 제공하는 모든 solvable 삭제를 묻지 않음"
 
-#: zypp/solver/detail/SATResolver.cc:1324
+#: zypp/solver/detail/SATResolver.cc:1332
 #, c-format, boost-format
 msgid "do not install most recent version of %s"
 msgstr "%s의 최신 버전을 설치하지 않음"
 
-#: zypp/solver/detail/SATResolver.cc:1345
+#: zypp/solver/detail/SATResolver.cc:1353
 #, c-format, boost-format
 msgid "keep %s despite the inferior architecture"
 msgstr "하위 아키텍처인 경우에도 %s 유지"
 
-#: zypp/solver/detail/SATResolver.cc:1350
+#: zypp/solver/detail/SATResolver.cc:1358
 #, c-format, boost-format
 msgid "install %s despite the inferior architecture"
 msgstr "하위 아키텍처인 경우에도 %s 설치"
 
-#: zypp/solver/detail/SATResolver.cc:1359
+#: zypp/solver/detail/SATResolver.cc:1367
 #, c-format, boost-format
 msgid "keep obsolete %s"
 msgstr "구식 %s 유지"
 
-#: zypp/solver/detail/SATResolver.cc:1364
+#: zypp/solver/detail/SATResolver.cc:1372
 #, c-format, boost-format
 msgid "install %s from excluded repository"
 msgstr "제외된 리포지토리에서 %s 설치"
 
-#: zypp/solver/detail/SATResolver.cc:1384
+#. translator: %1% is a package name
+#: zypp/solver/detail/SATResolver.cc:1386
+#, boost-format
+msgid "install %1% although it has been retracted"
+msgstr ""
+
+#. translator: %1% is a package name
+#: zypp/solver/detail/SATResolver.cc:1389
+#, boost-format
+msgid "allow to install the PTF %1%"
+msgstr ""
+
+#. translator: %1% is a package name
+#: zypp/solver/detail/SATResolver.cc:1392
+#, boost-format
+msgid "install %1% although it is blacklisted"
+msgstr ""
+
+#: zypp/solver/detail/SATResolver.cc:1412
 #, c-format, boost-format
 msgid "downgrade of %s to %s"
 msgstr "%s을(를) %s(으)로 다운그레이드"
 
-#: zypp/solver/detail/SATResolver.cc:1391
+#: zypp/solver/detail/SATResolver.cc:1419
 #, c-format, boost-format
 msgid "architecture change of %s to %s"
 msgstr "%s에서 %s(으)로 아키텍처 변경"
 
-#: zypp/solver/detail/SATResolver.cc:1400
+#: zypp/solver/detail/SATResolver.cc:1428
 #, c-format, boost-format
 msgid ""
 "install %s (with vendor change)\n"
@@ -4810,24 +4828,24 @@ msgstr ""
 "%s 설치(벤더 변경)\n"
 "  %s  -->  %s"
 
-#: zypp/solver/detail/SATResolver.cc:1409
+#: zypp/solver/detail/SATResolver.cc:1437
 #, c-format, boost-format
 msgid "replacement of %s with %s"
 msgstr "%s을(를) %s(으)로 대체"
 
-#: zypp/solver/detail/SATResolver.cc:1420
+#: zypp/solver/detail/SATResolver.cc:1448
 #, c-format, boost-format
 msgid "deinstallation of %s"
 msgstr "%s 설치 제거"
 
 #. strip tmp file suffix
-#: zypp/target/RpmPostTransCollector.cc:103
+#: zypp/target/RpmPostTransCollector.cc:105
 #, boost-format
 msgid "Executing %%posttrans script '%1%'"
 msgstr "%%posttrans 스크립트 '%1%' 실행 중"
 
 #. show a final message
-#: zypp/target/RpmPostTransCollector.cc:161
+#: zypp/target/RpmPostTransCollector.cc:168
 #, c-format, boost-format
 msgid "Executing %posttrans scripts"
 msgstr "%posttrans 스크립트 실행 중"

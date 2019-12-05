@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-11 09:20+0200\n"
+"POT-Creation-Date: 2019-12-05 14:22+0100\n"
 "PO-Revision-Date: 2017-06-02 18:02+0000\n"
 "Last-Translator: Mindaugas Baranauskas <opensuse.lietuviu.kalba@gmail.com>\n"
 "Language-Team: Lithuanian <https://l10n.opensuse.org/projects/libzypp/master/"
@@ -4530,99 +4530,99 @@ msgstr "nepaisyti kai kurių priklausomybių ir taip sugadinti %s "
 msgid "generally ignore of some dependencies"
 msgstr "apskritai ignoruoti kai kurias priklausomybes"
 
-#: zypp/solver/detail/SATResolver.cc:1052
+#: zypp/solver/detail/SATResolver.cc:1060
 #, c-format, boost-format
 msgid "%s does not belong to a distupgrade repository"
 msgstr "%s nepriklauso platinamojo paketo naujovinimo (distupgrade) saugyklai"
 
-#: zypp/solver/detail/SATResolver.cc:1055
+#: zypp/solver/detail/SATResolver.cc:1063
 #, c-format, boost-format
 msgid "%s has inferior architecture"
 msgstr "%s yra kitos architektūros"
 
-#: zypp/solver/detail/SATResolver.cc:1058
+#: zypp/solver/detail/SATResolver.cc:1066
 #, c-format, boost-format
 msgid "problem with installed package %s"
 msgstr "problema su įdiegtu paketu %s"
 
-#: zypp/solver/detail/SATResolver.cc:1061
+#: zypp/solver/detail/SATResolver.cc:1069
 msgid "conflicting requests"
 msgstr "konfliktuojantys reikalavimai"
 
-#: zypp/solver/detail/SATResolver.cc:1064
+#: zypp/solver/detail/SATResolver.cc:1072
 msgid "some dependency problem"
 msgstr "kai kurių priklausomybių problema"
 
-#: zypp/solver/detail/SATResolver.cc:1067
+#: zypp/solver/detail/SATResolver.cc:1075
 #, c-format, boost-format
 msgid "nothing provides requested %s"
 msgstr "niekas nepateikia reikalaujamo %s"
 
-#: zypp/solver/detail/SATResolver.cc:1068
-#: zypp/solver/detail/SATResolver.cc:1072
+#: zypp/solver/detail/SATResolver.cc:1076
+#: zypp/solver/detail/SATResolver.cc:1080
 msgid "Have you enabled all requested repositories?"
 msgstr "Ar įgalinote visas reikiamas saugyklas?"
 
-#: zypp/solver/detail/SATResolver.cc:1071
+#: zypp/solver/detail/SATResolver.cc:1079
 #, c-format, boost-format
 msgid "package %s does not exist"
 msgstr "paketo %s nėra"
 
-#: zypp/solver/detail/SATResolver.cc:1075
+#: zypp/solver/detail/SATResolver.cc:1083
 msgid "unsupported request"
 msgstr "nepalaikoma užklausa"
 
-#: zypp/solver/detail/SATResolver.cc:1078
+#: zypp/solver/detail/SATResolver.cc:1086
 #, c-format, boost-format
 msgid "%s is provided by the system and cannot be erased"
 msgstr "%s pateikia sistema, jo negalima pašalinti"
 
-#: zypp/solver/detail/SATResolver.cc:1081
+#: zypp/solver/detail/SATResolver.cc:1089
 #, c-format, boost-format
 msgid "%s is not installable"
 msgstr "%s neįdiegiamas"
 
 #. for setting weak dependencies
-#: zypp/solver/detail/SATResolver.cc:1085
+#: zypp/solver/detail/SATResolver.cc:1093
 #, c-format, boost-format
 msgid "nothing provides %s needed by %s"
 msgstr "niekas nepateikia %s, kurio reikalauja %s"
 
-#: zypp/solver/detail/SATResolver.cc:1088
+#: zypp/solver/detail/SATResolver.cc:1096
 #, c-format, boost-format
 msgid "cannot install both %s and %s"
 msgstr "negalima įdiegti ir %s, ir %s"
 
-#: zypp/solver/detail/SATResolver.cc:1091
+#: zypp/solver/detail/SATResolver.cc:1099
 #, c-format, boost-format
 msgid "%s conflicts with %s provided by %s"
 msgstr "%s konfliktuoja su %s, kurį pateikia %s"
 
-#: zypp/solver/detail/SATResolver.cc:1094
+#: zypp/solver/detail/SATResolver.cc:1102
 #, c-format, boost-format
 msgid "%s obsoletes %s provided by %s"
 msgstr "%s pakeičia %s, kurį pateikė %s"
 
-#: zypp/solver/detail/SATResolver.cc:1097
+#: zypp/solver/detail/SATResolver.cc:1105
 #, c-format, boost-format
 msgid "installed %s obsoletes %s provided by %s"
 msgstr "įdiegtas %s pakeičia %s, kurį pateikė %s"
 
-#: zypp/solver/detail/SATResolver.cc:1100
+#: zypp/solver/detail/SATResolver.cc:1108
 #, c-format, boost-format
 msgid "solvable %s conflicts with %s provided by itself"
 msgstr "sprendinys %s konfliktuoja su %s, kurį pats siūlo"
 
-#: zypp/solver/detail/SATResolver.cc:1131
+#: zypp/solver/detail/SATResolver.cc:1139
 #, c-format, boost-format
 msgid "%s requires %s, but this requirement cannot be provided"
 msgstr "%s reikalauja „%s“, bet reikalavimo negalima išpildyti"
 
-#: zypp/solver/detail/SATResolver.cc:1133
+#: zypp/solver/detail/SATResolver.cc:1141
 msgid "deleted providers: "
 msgstr "pašalinti galimi pasiūlymai: "
 
-#: zypp/solver/detail/SATResolver.cc:1143
+#: zypp/solver/detail/SATResolver.cc:1151
 msgid ""
 "\n"
 "not installable providers: "
@@ -4630,88 +4630,106 @@ msgstr ""
 "\n"
 "netinkami įdiegti pasiūlymai: "
 
-#: zypp/solver/detail/SATResolver.cc:1145
+#: zypp/solver/detail/SATResolver.cc:1153
 msgid "not installable providers: "
 msgstr "netinkami diegimui pasiūlymai: "
 
-#: zypp/solver/detail/SATResolver.cc:1207
+#: zypp/solver/detail/SATResolver.cc:1215
 #, c-format, boost-format
 msgid "remove lock to allow removal of %s"
 msgstr "nedrausti pašalinti %s"
 
-#: zypp/solver/detail/SATResolver.cc:1212
-#: zypp/solver/detail/SATResolver.cc:1248
+#: zypp/solver/detail/SATResolver.cc:1220
+#: zypp/solver/detail/SATResolver.cc:1256
 #, c-format, boost-format
 msgid "do not install %s"
 msgstr "neįdiegti %s"
 
-#: zypp/solver/detail/SATResolver.cc:1227
-#: zypp/solver/detail/SATResolver.cc:1269
+#: zypp/solver/detail/SATResolver.cc:1235
+#: zypp/solver/detail/SATResolver.cc:1277
 #, c-format, boost-format
 msgid "keep %s"
 msgstr "išlaikyti %s"
 
-#: zypp/solver/detail/SATResolver.cc:1232
+#: zypp/solver/detail/SATResolver.cc:1240
 #, c-format, boost-format
 msgid "remove lock to allow installation of %s"
 msgstr "nedrausti įdiegti %s"
 
-#: zypp/solver/detail/SATResolver.cc:1283
-#: zypp/solver/detail/SATResolver.cc:1304
+#: zypp/solver/detail/SATResolver.cc:1291
+#: zypp/solver/detail/SATResolver.cc:1312
 msgid "This request will break your system!"
 msgstr "Šis veiksmas sugadins jūsų sistemą!"
 
-#: zypp/solver/detail/SATResolver.cc:1284
-#: zypp/solver/detail/SATResolver.cc:1305
+#: zypp/solver/detail/SATResolver.cc:1292
+#: zypp/solver/detail/SATResolver.cc:1313
 msgid "ignore the warning of a broken system"
 msgstr "nepaisyti perspėjimų apie riziką sugadinti sistemą"
 
-#: zypp/solver/detail/SATResolver.cc:1289
+#: zypp/solver/detail/SATResolver.cc:1297
 #, c-format, boost-format
 msgid "do not ask to install a solvable providing %s"
 msgstr "neprašyti įdiegti sprendinių, kuriuos siūlo %s"
 
-#: zypp/solver/detail/SATResolver.cc:1311
+#: zypp/solver/detail/SATResolver.cc:1319
 #, c-format, boost-format
 msgid "do not ask to delete all solvables providing %s"
 msgstr "neprašyti pašalinti visų sprendinių, kuriuos siūlo %s"
 
-#: zypp/solver/detail/SATResolver.cc:1324
+#: zypp/solver/detail/SATResolver.cc:1332
 #, c-format, boost-format
 msgid "do not install most recent version of %s"
 msgstr "neįdiegti pačios naujausios %s versijos"
 
-#: zypp/solver/detail/SATResolver.cc:1345
+#: zypp/solver/detail/SATResolver.cc:1353
 #, c-format, boost-format
 msgid "keep %s despite the inferior architecture"
 msgstr "išlaikyti %s, nors yra kitos architektūros"
 
-#: zypp/solver/detail/SATResolver.cc:1350
+#: zypp/solver/detail/SATResolver.cc:1358
 #, c-format, boost-format
 msgid "install %s despite the inferior architecture"
 msgstr "įdiegti %s, nors yra kitos architektūros"
 
-#: zypp/solver/detail/SATResolver.cc:1359
+#: zypp/solver/detail/SATResolver.cc:1367
 #, c-format, boost-format
 msgid "keep obsolete %s"
 msgstr "išlaikyti pasenusį %s"
 
-#: zypp/solver/detail/SATResolver.cc:1364
+#: zypp/solver/detail/SATResolver.cc:1372
 #, c-format, boost-format
 msgid "install %s from excluded repository"
 msgstr "įdiegti %s iš neįtrauktos saugyklos"
 
-#: zypp/solver/detail/SATResolver.cc:1384
+#. translator: %1% is a package name
+#: zypp/solver/detail/SATResolver.cc:1386
+#, boost-format
+msgid "install %1% although it has been retracted"
+msgstr ""
+
+#. translator: %1% is a package name
+#: zypp/solver/detail/SATResolver.cc:1389
+#, boost-format
+msgid "allow to install the PTF %1%"
+msgstr ""
+
+#. translator: %1% is a package name
+#: zypp/solver/detail/SATResolver.cc:1392
+#, boost-format
+msgid "install %1% although it is blacklisted"
+msgstr ""
+
+#: zypp/solver/detail/SATResolver.cc:1412
 #, c-format, boost-format
 msgid "downgrade of %s to %s"
 msgstr "pasendinti nuo %s iki %s"
 
-#: zypp/solver/detail/SATResolver.cc:1391
+#: zypp/solver/detail/SATResolver.cc:1419
 #, c-format, boost-format
 msgid "architecture change of %s to %s"
 msgstr "pakeisti architektūrą iš %s į %s"
 
-#: zypp/solver/detail/SATResolver.cc:1400
+#: zypp/solver/detail/SATResolver.cc:1428
 #, c-format, boost-format
 msgid ""
 "install %s (with vendor change)\n"
@@ -4720,24 +4738,24 @@ msgstr ""
 "įdiegti %s (keičiant gamintoją)\n"
 "  %s  -->  %s"
 
-#: zypp/solver/detail/SATResolver.cc:1409
+#: zypp/solver/detail/SATResolver.cc:1437
 #, c-format, boost-format
 msgid "replacement of %s with %s"
 msgstr "%s pakeisti į %s"
 
-#: zypp/solver/detail/SATResolver.cc:1420
+#: zypp/solver/detail/SATResolver.cc:1448
 #, c-format, boost-format
 msgid "deinstallation of %s"
 msgstr "pašalinti %s "
 
 #. strip tmp file suffix
-#: zypp/target/RpmPostTransCollector.cc:103
+#: zypp/target/RpmPostTransCollector.cc:105
 #, boost-format
 msgid "Executing %%posttrans script '%1%'"
 msgstr ""
 
 #. show a final message
-#: zypp/target/RpmPostTransCollector.cc:161
+#: zypp/target/RpmPostTransCollector.cc:168
 #, c-format, boost-format
 msgid "Executing %posttrans scripts"
 msgstr ""

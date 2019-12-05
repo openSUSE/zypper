@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypp.bg\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-11 09:20+0200\n"
+"POT-Creation-Date: 2019-12-05 14:22+0100\n"
 "PO-Revision-Date: 2017-10-23 11:43+0000\n"
 "Last-Translator: Dimitar Zahariev <mitko@tuionui.com>\n"
 "Language-Team: Bulgarian <https://l10n.opensuse.org/projects/libzypp/master/"
@@ -4613,214 +4613,232 @@ msgstr "Пренебрегване на това изискване само т�
 msgid "generally ignore of some dependencies"
 msgstr "Пренебрегване на това изискване само тук"
 
-#: zypp/solver/detail/SATResolver.cc:1052
+#: zypp/solver/detail/SATResolver.cc:1060
 #, c-format, boost-format
 msgid "%s does not belong to a distupgrade repository"
 msgstr ""
 
-#: zypp/solver/detail/SATResolver.cc:1055
+#: zypp/solver/detail/SATResolver.cc:1063
 #, fuzzy, c-format, boost-format
 msgid "%s has inferior architecture"
 msgstr "%s доставя %s, но има друга архитектура."
 
-#: zypp/solver/detail/SATResolver.cc:1058
+#: zypp/solver/detail/SATResolver.cc:1066
 #, c-format, boost-format
 msgid "problem with installed package %s"
 msgstr ""
 
-#: zypp/solver/detail/SATResolver.cc:1061
+#: zypp/solver/detail/SATResolver.cc:1069
 msgid "conflicting requests"
 msgstr ""
 
-#: zypp/solver/detail/SATResolver.cc:1064
+#: zypp/solver/detail/SATResolver.cc:1072
 #, fuzzy
 msgid "some dependency problem"
 msgstr "%s не може да бъде инсталиран поради пробем със зависимостите"
 
-#: zypp/solver/detail/SATResolver.cc:1067
+#: zypp/solver/detail/SATResolver.cc:1075
 #, fuzzy, c-format, boost-format
 msgid "nothing provides requested %s"
 msgstr "Никой не доставя %s"
 
-#: zypp/solver/detail/SATResolver.cc:1068
-#: zypp/solver/detail/SATResolver.cc:1072
+#: zypp/solver/detail/SATResolver.cc:1076
+#: zypp/solver/detail/SATResolver.cc:1080
 msgid "Have you enabled all requested repositories?"
 msgstr ""
 
-#: zypp/solver/detail/SATResolver.cc:1071
+#: zypp/solver/detail/SATResolver.cc:1079
 #, fuzzy, c-format, boost-format
 msgid "package %s does not exist"
 msgstr "Пакетът не е подписан"
 
-#: zypp/solver/detail/SATResolver.cc:1075
+#: zypp/solver/detail/SATResolver.cc:1083
 msgid "unsupported request"
 msgstr ""
 
-#: zypp/solver/detail/SATResolver.cc:1078
+#: zypp/solver/detail/SATResolver.cc:1086
 #, fuzzy, c-format, boost-format
 msgid "%s is provided by the system and cannot be erased"
 msgstr "%s е заключен и не може да бъде деинсталиран."
 
-#: zypp/solver/detail/SATResolver.cc:1081
+#: zypp/solver/detail/SATResolver.cc:1089
 #, fuzzy, c-format, boost-format
 msgid "%s is not installable"
 msgstr "Инсталирането на %s бе неуспешно"
 
 #. for setting weak dependencies
-#: zypp/solver/detail/SATResolver.cc:1085
+#: zypp/solver/detail/SATResolver.cc:1093
 #, fuzzy, c-format, boost-format
 msgid "nothing provides %s needed by %s"
 msgstr "%s е необходим на %s"
 
-#: zypp/solver/detail/SATResolver.cc:1088
+#: zypp/solver/detail/SATResolver.cc:1096
 #, fuzzy, c-format, boost-format
 msgid "cannot install both %s and %s"
 msgstr "%s не може да бъде инсталиран"
 
-#: zypp/solver/detail/SATResolver.cc:1091
+#: zypp/solver/detail/SATResolver.cc:1099
 #, fuzzy, c-format, boost-format
 msgid "%s conflicts with %s provided by %s"
 msgstr "%s е в конфликт с %s"
 
-#: zypp/solver/detail/SATResolver.cc:1094
+#: zypp/solver/detail/SATResolver.cc:1102
 #, fuzzy, c-format, boost-format
 msgid "%s obsoletes %s provided by %s"
 msgstr "%s прави ненужно %s"
 
-#: zypp/solver/detail/SATResolver.cc:1097
+#: zypp/solver/detail/SATResolver.cc:1105
 #, fuzzy, c-format, boost-format
 msgid "installed %s obsoletes %s provided by %s"
 msgstr "%s прави ненужно %s"
 
-#: zypp/solver/detail/SATResolver.cc:1100
+#: zypp/solver/detail/SATResolver.cc:1108
 #, fuzzy, c-format, boost-format
 msgid "solvable %s conflicts with %s provided by itself"
 msgstr "%s е в конфликт с %s"
 
-#: zypp/solver/detail/SATResolver.cc:1131
+#: zypp/solver/detail/SATResolver.cc:1139
 #, c-format, boost-format
 msgid "%s requires %s, but this requirement cannot be provided"
 msgstr ""
 
-#: zypp/solver/detail/SATResolver.cc:1133
+#: zypp/solver/detail/SATResolver.cc:1141
 #, fuzzy
 msgid "deleted providers: "
 msgstr "Никой не доставя %s"
 
-#: zypp/solver/detail/SATResolver.cc:1143
+#: zypp/solver/detail/SATResolver.cc:1151
 #, fuzzy
 msgid ""
 "\n"
 "not installable providers: "
 msgstr "Няма инсталируеми доставчици на %s"
 
-#: zypp/solver/detail/SATResolver.cc:1145
+#: zypp/solver/detail/SATResolver.cc:1153
 #, fuzzy
 msgid "not installable providers: "
 msgstr "Няма инсталируеми доставчици на %s"
 
-#: zypp/solver/detail/SATResolver.cc:1207
+#: zypp/solver/detail/SATResolver.cc:1215
 #, c-format, boost-format
 msgid "remove lock to allow removal of %s"
 msgstr ""
 
-#: zypp/solver/detail/SATResolver.cc:1212
-#: zypp/solver/detail/SATResolver.cc:1248
+#: zypp/solver/detail/SATResolver.cc:1220
+#: zypp/solver/detail/SATResolver.cc:1256
 #, c-format, boost-format
 msgid "do not install %s"
 msgstr "без инсталиране на %s"
 
-#: zypp/solver/detail/SATResolver.cc:1227
-#: zypp/solver/detail/SATResolver.cc:1269
+#: zypp/solver/detail/SATResolver.cc:1235
+#: zypp/solver/detail/SATResolver.cc:1277
 #, c-format, boost-format
 msgid "keep %s"
 msgstr "запазване на %s"
 
-#: zypp/solver/detail/SATResolver.cc:1232
+#: zypp/solver/detail/SATResolver.cc:1240
 #, fuzzy, c-format, boost-format
 msgid "remove lock to allow installation of %s"
 msgstr "без инсталиране на %s"
 
-#: zypp/solver/detail/SATResolver.cc:1283
-#: zypp/solver/detail/SATResolver.cc:1304
+#: zypp/solver/detail/SATResolver.cc:1291
+#: zypp/solver/detail/SATResolver.cc:1312
 msgid "This request will break your system!"
 msgstr ""
 
-#: zypp/solver/detail/SATResolver.cc:1284
-#: zypp/solver/detail/SATResolver.cc:1305
+#: zypp/solver/detail/SATResolver.cc:1292
+#: zypp/solver/detail/SATResolver.cc:1313
 msgid "ignore the warning of a broken system"
 msgstr ""
 
-#: zypp/solver/detail/SATResolver.cc:1289
+#: zypp/solver/detail/SATResolver.cc:1297
 #, fuzzy, c-format, boost-format
 msgid "do not ask to install a solvable providing %s"
 msgstr "Няма инсталируеми доставчици на %s"
 
-#: zypp/solver/detail/SATResolver.cc:1311
+#: zypp/solver/detail/SATResolver.cc:1319
 #, fuzzy, c-format, boost-format
 msgid "do not ask to delete all solvables providing %s"
 msgstr "Без инсталиране или премахване на конфликтните пакети"
 
-#: zypp/solver/detail/SATResolver.cc:1324
+#: zypp/solver/detail/SATResolver.cc:1332
 #, c-format, boost-format
 msgid "do not install most recent version of %s"
 msgstr ""
 
-#: zypp/solver/detail/SATResolver.cc:1345
+#: zypp/solver/detail/SATResolver.cc:1353
 #, fuzzy, c-format, boost-format
 msgid "keep %s despite the inferior architecture"
 msgstr "%s доставя %s, но има друга архитектура."
 
-#: zypp/solver/detail/SATResolver.cc:1350
+#: zypp/solver/detail/SATResolver.cc:1358
 #, fuzzy, c-format, boost-format
 msgid "install %s despite the inferior architecture"
 msgstr "Инсталиране на %s, въпреки че ще промени архитектурата"
 
-#: zypp/solver/detail/SATResolver.cc:1359
+#: zypp/solver/detail/SATResolver.cc:1367
 #, fuzzy, c-format, boost-format
 msgid "keep obsolete %s"
 msgstr "%s прави ненужно %s"
 
-#: zypp/solver/detail/SATResolver.cc:1364
+#: zypp/solver/detail/SATResolver.cc:1372
 #, c-format, boost-format
 msgid "install %s from excluded repository"
 msgstr ""
 
-#: zypp/solver/detail/SATResolver.cc:1384
+#. translator: %1% is a package name
+#: zypp/solver/detail/SATResolver.cc:1386
+#, boost-format
+msgid "install %1% although it has been retracted"
+msgstr ""
+
+#. translator: %1% is a package name
+#: zypp/solver/detail/SATResolver.cc:1389
+#, boost-format
+msgid "allow to install the PTF %1%"
+msgstr ""
+
+#. translator: %1% is a package name
+#: zypp/solver/detail/SATResolver.cc:1392
+#, boost-format
+msgid "install %1% although it is blacklisted"
+msgstr ""
+
+#: zypp/solver/detail/SATResolver.cc:1412
 #, fuzzy, c-format, boost-format
 msgid "downgrade of %s to %s"
 msgstr "Обновяване на %s към %s"
 
-#: zypp/solver/detail/SATResolver.cc:1391
+#: zypp/solver/detail/SATResolver.cc:1419
 #, c-format, boost-format
 msgid "architecture change of %s to %s"
 msgstr ""
 
-#: zypp/solver/detail/SATResolver.cc:1400
+#: zypp/solver/detail/SATResolver.cc:1428
 #, c-format, boost-format
 msgid ""
 "install %s (with vendor change)\n"
 "  %s  -->  %s"
 msgstr ""
 
-#: zypp/solver/detail/SATResolver.cc:1409
+#: zypp/solver/detail/SATResolver.cc:1437
 #, c-format, boost-format
 msgid "replacement of %s with %s"
 msgstr ""
 
-#: zypp/solver/detail/SATResolver.cc:1420
+#: zypp/solver/detail/SATResolver.cc:1448
 #, fuzzy, c-format, boost-format
 msgid "deinstallation of %s"
 msgstr "Инсталиране"
 
 #. strip tmp file suffix
-#: zypp/target/RpmPostTransCollector.cc:103
+#: zypp/target/RpmPostTransCollector.cc:105
 #, boost-format
 msgid "Executing %%posttrans script '%1%'"
 msgstr ""
 
 #. show a final message
-#: zypp/target/RpmPostTransCollector.cc:161
+#: zypp/target/RpmPostTransCollector.cc:168
 #, c-format, boost-format
 msgid "Executing %posttrans scripts"
 msgstr ""

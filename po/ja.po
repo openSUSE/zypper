@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-11 09:20+0200\n"
+"POT-Creation-Date: 2019-12-05 14:22+0100\n"
 "PO-Revision-Date: 2019-09-26 04:52+0000\n"
 "Last-Translator: Yasuhiko Kamata <belphegor@belbel.or.jp>\n"
 "Language-Team: Japanese <https://l10n.opensuse.org/projects/libzypp/master/"
@@ -4433,101 +4433,101 @@ msgstr "いくつかの依存関係を無視することによって %s を壊�
 msgid "generally ignore of some dependencies"
 msgstr "いくつかの依存関係をおおよそ無視する"
 
-#: zypp/solver/detail/SATResolver.cc:1052
+#: zypp/solver/detail/SATResolver.cc:1060
 #, c-format, boost-format
 msgid "%s does not belong to a distupgrade repository"
 msgstr "%s はdistupgradeのリポジトリに属していません"
 
-#: zypp/solver/detail/SATResolver.cc:1055
+#: zypp/solver/detail/SATResolver.cc:1063
 #, c-format, boost-format
 msgid "%s has inferior architecture"
 msgstr "%s は下位のアーキテクチャです"
 
-#: zypp/solver/detail/SATResolver.cc:1058
+#: zypp/solver/detail/SATResolver.cc:1066
 #, c-format, boost-format
 msgid "problem with installed package %s"
 msgstr "インストール済みのパッケージ %s に問題が発生しました"
 
-#: zypp/solver/detail/SATResolver.cc:1061
+#: zypp/solver/detail/SATResolver.cc:1069
 msgid "conflicting requests"
 msgstr "要求が矛盾しています"
 
-#: zypp/solver/detail/SATResolver.cc:1064
+#: zypp/solver/detail/SATResolver.cc:1072
 msgid "some dependency problem"
 msgstr "何らかの依存関係の問題"
 
-#: zypp/solver/detail/SATResolver.cc:1067
+#: zypp/solver/detail/SATResolver.cc:1075
 #, c-format, boost-format
 msgid "nothing provides requested %s"
 msgstr "要求した %s はどこからも提供されていません"
 
-#: zypp/solver/detail/SATResolver.cc:1068
-#: zypp/solver/detail/SATResolver.cc:1072
+#: zypp/solver/detail/SATResolver.cc:1076
+#: zypp/solver/detail/SATResolver.cc:1080
 msgid "Have you enabled all requested repositories?"
 msgstr "すべての必要なリポジトリを有効化しましたか？"
 
-#: zypp/solver/detail/SATResolver.cc:1071
+#: zypp/solver/detail/SATResolver.cc:1079
 #, c-format, boost-format
 msgid "package %s does not exist"
 msgstr "パッケージ %s は存在しません"
 
-#: zypp/solver/detail/SATResolver.cc:1075
+#: zypp/solver/detail/SATResolver.cc:1083
 msgid "unsupported request"
 msgstr "サポートされていない要求"
 
-#: zypp/solver/detail/SATResolver.cc:1078
+#: zypp/solver/detail/SATResolver.cc:1086
 #, c-format, boost-format
 msgid "%s is provided by the system and cannot be erased"
 msgstr "%s はシステムが提供するもので、削除できません"
 
-#: zypp/solver/detail/SATResolver.cc:1081
+#: zypp/solver/detail/SATResolver.cc:1089
 #, c-format, boost-format
 msgid "%s is not installable"
 msgstr "%s はインストールできません"
 
 #. for setting weak dependencies
-#: zypp/solver/detail/SATResolver.cc:1085
+#: zypp/solver/detail/SATResolver.cc:1093
 #, c-format, boost-format
 msgid "nothing provides %s needed by %s"
 msgstr "%s (%s で必要)はどこからも提供されていません"
 
-#: zypp/solver/detail/SATResolver.cc:1088
+#: zypp/solver/detail/SATResolver.cc:1096
 #, c-format, boost-format
 msgid "cannot install both %s and %s"
 msgstr "%s と %s の両方をインストールすることはできません"
 
-#: zypp/solver/detail/SATResolver.cc:1091
+#: zypp/solver/detail/SATResolver.cc:1099
 #, c-format, boost-format
 msgid "%s conflicts with %s provided by %s"
 msgstr "%s は %s (%s から提供されている)と競合します"
 
-#: zypp/solver/detail/SATResolver.cc:1094
+#: zypp/solver/detail/SATResolver.cc:1102
 #, c-format, boost-format
 msgid "%s obsoletes %s provided by %s"
 msgstr "%s は %s (%s から提供されている)を古いものとして廃棄します"
 
-#: zypp/solver/detail/SATResolver.cc:1097
+#: zypp/solver/detail/SATResolver.cc:1105
 #, c-format, boost-format
 msgid "installed %s obsoletes %s provided by %s"
 msgstr ""
 "インストール済みの %s は、%s (%s から提供されている)を古いものとして廃棄しま"
 "す"
 
-#: zypp/solver/detail/SATResolver.cc:1100
+#: zypp/solver/detail/SATResolver.cc:1108
 #, c-format, boost-format
 msgid "solvable %s conflicts with %s provided by itself"
 msgstr "解決方法 %s は自分自身で提供している %s と競合しています"
 
-#: zypp/solver/detail/SATResolver.cc:1131
+#: zypp/solver/detail/SATResolver.cc:1139
 #, c-format, boost-format
 msgid "%s requires %s, but this requirement cannot be provided"
 msgstr "%s は %s を必要としていますが、この要求を解決する方法がありません"
 
-#: zypp/solver/detail/SATResolver.cc:1133
+#: zypp/solver/detail/SATResolver.cc:1141
 msgid "deleted providers: "
 msgstr "削除したプロバイダ: "
 
-#: zypp/solver/detail/SATResolver.cc:1143
+#: zypp/solver/detail/SATResolver.cc:1151
 msgid ""
 "\n"
 "not installable providers: "
@@ -4535,88 +4535,106 @@ msgstr ""
 "\n"
 "インストール不可能なプロバイダ: "
 
-#: zypp/solver/detail/SATResolver.cc:1145
+#: zypp/solver/detail/SATResolver.cc:1153
 msgid "not installable providers: "
 msgstr "インストール不可能なプロバイダ: "
 
-#: zypp/solver/detail/SATResolver.cc:1207
+#: zypp/solver/detail/SATResolver.cc:1215
 #, c-format, boost-format
 msgid "remove lock to allow removal of %s"
 msgstr "%s の削除を許可するためにロックを削除する"
 
-#: zypp/solver/detail/SATResolver.cc:1212
-#: zypp/solver/detail/SATResolver.cc:1248
+#: zypp/solver/detail/SATResolver.cc:1220
+#: zypp/solver/detail/SATResolver.cc:1256
 #, c-format, boost-format
 msgid "do not install %s"
 msgstr "%s をインストールしない"
 
-#: zypp/solver/detail/SATResolver.cc:1227
-#: zypp/solver/detail/SATResolver.cc:1269
+#: zypp/solver/detail/SATResolver.cc:1235
+#: zypp/solver/detail/SATResolver.cc:1277
 #, c-format, boost-format
 msgid "keep %s"
 msgstr "%s を維持"
 
-#: zypp/solver/detail/SATResolver.cc:1232
+#: zypp/solver/detail/SATResolver.cc:1240
 #, c-format, boost-format
 msgid "remove lock to allow installation of %s"
 msgstr "%s のインストールを許可するためにロックを削除する"
 
-#: zypp/solver/detail/SATResolver.cc:1283
-#: zypp/solver/detail/SATResolver.cc:1304
+#: zypp/solver/detail/SATResolver.cc:1291
+#: zypp/solver/detail/SATResolver.cc:1312
 msgid "This request will break your system!"
 msgstr "この要求はシステムを壊してしまいます！"
 
-#: zypp/solver/detail/SATResolver.cc:1284
-#: zypp/solver/detail/SATResolver.cc:1305
+#: zypp/solver/detail/SATResolver.cc:1292
+#: zypp/solver/detail/SATResolver.cc:1313
 msgid "ignore the warning of a broken system"
 msgstr "システムが破壊される警告を無視します"
 
-#: zypp/solver/detail/SATResolver.cc:1289
+#: zypp/solver/detail/SATResolver.cc:1297
 #, c-format, boost-format
 msgid "do not ask to install a solvable providing %s"
 msgstr "%s を提供する解決方法のインストールについて問い合わせない"
 
-#: zypp/solver/detail/SATResolver.cc:1311
+#: zypp/solver/detail/SATResolver.cc:1319
 #, c-format, boost-format
 msgid "do not ask to delete all solvables providing %s"
 msgstr "%s を提供するすべての解決方法の削除について問い合わせない"
 
-#: zypp/solver/detail/SATResolver.cc:1324
+#: zypp/solver/detail/SATResolver.cc:1332
 #, c-format, boost-format
 msgid "do not install most recent version of %s"
 msgstr "%s の最新バージョンをインストールしない"
 
-#: zypp/solver/detail/SATResolver.cc:1345
+#: zypp/solver/detail/SATResolver.cc:1353
 #, c-format, boost-format
 msgid "keep %s despite the inferior architecture"
 msgstr "下位のアーキテクチャですが %s を維持します"
 
-#: zypp/solver/detail/SATResolver.cc:1350
+#: zypp/solver/detail/SATResolver.cc:1358
 #, c-format, boost-format
 msgid "install %s despite the inferior architecture"
 msgstr "下位のアーキテクチャですが %s をインストールします"
 
-#: zypp/solver/detail/SATResolver.cc:1359
+#: zypp/solver/detail/SATResolver.cc:1367
 #, c-format, boost-format
 msgid "keep obsolete %s"
 msgstr "古い %s を維持します"
 
-#: zypp/solver/detail/SATResolver.cc:1364
+#: zypp/solver/detail/SATResolver.cc:1372
 #, c-format, boost-format
 msgid "install %s from excluded repository"
 msgstr "除外されたリポジトリから %s をインストールします"
 
-#: zypp/solver/detail/SATResolver.cc:1384
+#. translator: %1% is a package name
+#: zypp/solver/detail/SATResolver.cc:1386
+#, boost-format
+msgid "install %1% although it has been retracted"
+msgstr ""
+
+#. translator: %1% is a package name
+#: zypp/solver/detail/SATResolver.cc:1389
+#, boost-format
+msgid "allow to install the PTF %1%"
+msgstr ""
+
+#. translator: %1% is a package name
+#: zypp/solver/detail/SATResolver.cc:1392
+#, boost-format
+msgid "install %1% although it is blacklisted"
+msgstr ""
+
+#: zypp/solver/detail/SATResolver.cc:1412
 #, c-format, boost-format
 msgid "downgrade of %s to %s"
 msgstr "%s を %s にダウングレードする"
 
-#: zypp/solver/detail/SATResolver.cc:1391
+#: zypp/solver/detail/SATResolver.cc:1419
 #, c-format, boost-format
 msgid "architecture change of %s to %s"
 msgstr "アーキテクチャを %s から %s に変更"
 
-#: zypp/solver/detail/SATResolver.cc:1400
+#: zypp/solver/detail/SATResolver.cc:1428
 #, c-format, boost-format
 msgid ""
 "install %s (with vendor change)\n"
@@ -4625,24 +4643,24 @@ msgstr ""
 "%s をインストールする(ベンダを変更する)\n"
 "  %s  -->  %s"
 
-#: zypp/solver/detail/SATResolver.cc:1409
+#: zypp/solver/detail/SATResolver.cc:1437
 #, c-format, boost-format
 msgid "replacement of %s with %s"
 msgstr "%s を %s で置き換える"
 
-#: zypp/solver/detail/SATResolver.cc:1420
+#: zypp/solver/detail/SATResolver.cc:1448
 #, c-format, boost-format
 msgid "deinstallation of %s"
 msgstr "%s のアンインストール"
 
 #. strip tmp file suffix
-#: zypp/target/RpmPostTransCollector.cc:103
+#: zypp/target/RpmPostTransCollector.cc:105
 #, boost-format
 msgid "Executing %%posttrans script '%1%'"
 msgstr "%%posttrans スクリプト '%1%' を実行しています"
 
 #. show a final message
-#: zypp/target/RpmPostTransCollector.cc:161
+#: zypp/target/RpmPostTransCollector.cc:168
 #, c-format, boost-format
 msgid "Executing %posttrans scripts"
 msgstr "%postrans スクリプトを実行しています"
