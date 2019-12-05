@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-12-05 14:22+0100\n"
-"PO-Revision-Date: 2019-03-14 18:32+0000\n"
+"PO-Revision-Date: 2019-12-05 20:54+0000\n"
 "Last-Translator: David Medina <medipas@gmail.com>\n"
 "Language-Team: Catalan <https://l10n.opensuse.org/projects/libzypp/master/ca/"
 ">\n"
@@ -18,13 +18,13 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 3.3\n"
+"X-Generator: Weblate 3.6.1\n"
 
 #. dubious: Throw on malformed known types, otherwise log a warning.
 #: zypp/CheckSum.cc:136
 #, c-format, boost-format
 msgid "Dubious type '%s' for %u byte checksum '%s'"
-msgstr "Tipus dubtós \"%s\" per a %u byte checksum \"%s\""
+msgstr "Tipus dubtós \"%s\" per a la suma de comprovació \"%s\" de %u bytes."
 
 #: zypp/CountryCode.cc:50
 msgid "Unknown country: "
@@ -5010,19 +5010,19 @@ msgstr "instal·la %s del repositori exclòs"
 #: zypp/solver/detail/SATResolver.cc:1386
 #, boost-format
 msgid "install %1% although it has been retracted"
-msgstr ""
+msgstr "instal·la %1% tot i que ha estat retret"
 
 #. translator: %1% is a package name
 #: zypp/solver/detail/SATResolver.cc:1389
 #, boost-format
 msgid "allow to install the PTF %1%"
-msgstr ""
+msgstr "permet instal·lar el PTF %1%"
 
 #. translator: %1% is a package name
 #: zypp/solver/detail/SATResolver.cc:1392
 #, boost-format
 msgid "install %1% although it is blacklisted"
-msgstr ""
+msgstr "instal·la %1% tot i que és a la llista negra"
 
 #: zypp/solver/detail/SATResolver.cc:1412
 #, c-format, boost-format
