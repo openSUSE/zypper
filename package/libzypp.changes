@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Thu Dec  5 14:23:52 CET 2019 - ma@suse.de
+
+- Resolver: add solution actions for SOLVER_SOLUTION_BLACK
+  (retracted/PTF)
+- Solvable: add isRetracted and isPtf attributes.
+- version 17.18.0 (12)
+
+-------------------------------------------------------------------
 Thu Nov 28 18:20:04 CET 2019 - ma@suse.de
 
 - Introduce PurgeKernels class (bsc#1155198)
