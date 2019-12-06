@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-12-05 14:22+0100\n"
-"PO-Revision-Date: 2019-09-26 04:52+0000\n"
+"PO-Revision-Date: 2019-12-06 04:54+0000\n"
 "Last-Translator: Yasuhiko Kamata <belphegor@belbel.or.jp>\n"
 "Language-Team: Japanese <https://l10n.opensuse.org/projects/libzypp/master/"
 "ja/>\n"
@@ -4569,7 +4569,7 @@ msgstr "この要求はシステムを壊してしまいます！"
 #: zypp/solver/detail/SATResolver.cc:1292
 #: zypp/solver/detail/SATResolver.cc:1313
 msgid "ignore the warning of a broken system"
-msgstr "システムが破壊される警告を無視します"
+msgstr "システムが破壊される警告を無視する"
 
 #: zypp/solver/detail/SATResolver.cc:1297
 #, c-format, boost-format
@@ -4589,40 +4589,40 @@ msgstr "%s の最新バージョンをインストールしない"
 #: zypp/solver/detail/SATResolver.cc:1353
 #, c-format, boost-format
 msgid "keep %s despite the inferior architecture"
-msgstr "下位のアーキテクチャですが %s を維持します"
+msgstr "下位のアーキテクチャである %s を維持する"
 
 #: zypp/solver/detail/SATResolver.cc:1358
 #, c-format, boost-format
 msgid "install %s despite the inferior architecture"
-msgstr "下位のアーキテクチャですが %s をインストールします"
+msgstr "下位のアーキテクチャである %s をインストールする"
 
 #: zypp/solver/detail/SATResolver.cc:1367
 #, c-format, boost-format
 msgid "keep obsolete %s"
-msgstr "古い %s を維持します"
+msgstr "古い %s を維持する"
 
 #: zypp/solver/detail/SATResolver.cc:1372
 #, c-format, boost-format
 msgid "install %s from excluded repository"
-msgstr "除外されたリポジトリから %s をインストールします"
+msgstr "除外されたリポジトリから %s をインストールする"
 
 #. translator: %1% is a package name
 #: zypp/solver/detail/SATResolver.cc:1386
 #, boost-format
 msgid "install %1% although it has been retracted"
-msgstr ""
+msgstr "撤回済みの %1% をインストールする"
 
 #. translator: %1% is a package name
 #: zypp/solver/detail/SATResolver.cc:1389
 #, boost-format
 msgid "allow to install the PTF %1%"
-msgstr ""
+msgstr "PTF %1% のインストールを許可する"
 
 #. translator: %1% is a package name
 #: zypp/solver/detail/SATResolver.cc:1392
 #, boost-format
 msgid "install %1% although it is blacklisted"
-msgstr ""
+msgstr "ブラックリスト設定されている %1% をインストールする"
 
 #: zypp/solver/detail/SATResolver.cc:1412
 #, c-format, boost-format
@@ -4632,7 +4632,7 @@ msgstr "%s を %s にダウングレードする"
 #: zypp/solver/detail/SATResolver.cc:1419
 #, c-format, boost-format
 msgid "architecture change of %s to %s"
-msgstr "アーキテクチャを %s から %s に変更"
+msgstr "アーキテクチャを %s から %s に変更する"
 
 #: zypp/solver/detail/SATResolver.cc:1428
 #, c-format, boost-format
@@ -4651,7 +4651,7 @@ msgstr "%s を %s で置き換える"
 #: zypp/solver/detail/SATResolver.cc:1448
 #, c-format, boost-format
 msgid "deinstallation of %s"
-msgstr "%s のアンインストール"
+msgstr "%s をアンインストールする"
 
 #. strip tmp file suffix
 #: zypp/target/RpmPostTransCollector.cc:105
