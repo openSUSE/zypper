@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: zypp.et\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-12-05 14:22+0100\n"
-"PO-Revision-Date: 2019-12-03 17:54+0000\n"
+"PO-Revision-Date: 2019-12-06 11:54+0000\n"
 "Last-Translator: Jaanus Ojangu <jaanus.ojangu@gmail.com>\n"
 "Language-Team: Estonian <https://l10n.opensuse.org/projects/libzypp/master/"
 "et/>\n"
@@ -4678,17 +4678,17 @@ msgstr "Paigaldamine"
 #: zypp/target/RpmPostTransCollector.cc:105
 #, boost-format
 msgid "Executing %%posttrans script '%1%'"
-msgstr ""
+msgstr "Käib %%posttrans script '%1%'"
 
 #. show a final message
 #: zypp/target/RpmPostTransCollector.cc:168
 #, c-format, boost-format
 msgid "Executing %posttrans scripts"
-msgstr ""
+msgstr "Käib %posttrans scripts"
 
 #: zypp/target/TargetException.cc:28
 msgid "Installation has been aborted as directed."
-msgstr ""
+msgstr "Paigaldamine on vastavalt juhistele katkestatud."
 
 #: zypp/target/TargetImpl.cc:313
 msgid " executed"
@@ -4704,7 +4704,7 @@ msgstr " käivitamine nurjus"
 #: zypp/target/TargetImpl.cc:452
 #, c-format, boost-format
 msgid "%s already executed as %s)"
-msgstr ""
+msgstr "%s juba käivitatud kui %s)"
 
 #: zypp/target/TargetImpl.cc:462
 msgid " execution skipped while aborting"
@@ -4719,7 +4719,7 @@ msgstr "Viga võtme krüptimisel."
 
 #: zypp/target/TargetImpl.cc:661
 msgid "New update message"
-msgstr ""
+msgstr "Uus uuendusteade"
 
 #. TranslatorExplanation after semicolon is error message
 #. TranslatorExplanation the colon is followed by an error message
@@ -4733,7 +4733,7 @@ msgstr "ebaõnnestus"
 #: zypp/target/rpm/RpmDb.cc:1173
 #, boost-format
 msgid "Failed to import public key %1%"
-msgstr ""
+msgstr "Avaliku võtme %1% import nurjus"
 
 #. Translator: %1% is a gpg public key
 #: zypp/target/rpm/RpmDb.cc:1243
@@ -4743,14 +4743,14 @@ msgstr "Avaliku võtme %1% eemaldamine nurjus"
 
 #: zypp/target/rpm/RpmDb.cc:1629
 msgid "Package is not signed!"
-msgstr ""
+msgstr "Pakett ei ole allkirjastatud!"
 
 #. Translator: %s = name of an rpm package. A list of diffs follows
 #. this message.
 #: zypp/target/rpm/RpmDb.cc:1929
 #, c-format, boost-format
 msgid "Changed configuration files for %s:"
-msgstr ""
+msgstr "Muudetud seadistuste fail %s:"
 
 #. %s = filenames
 #: zypp/target/rpm/RpmDb.cc:2104
