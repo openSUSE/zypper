@@ -414,6 +414,10 @@ private:
           filesystem::clean_dir( _rootdir );
       }
 
+      // erase any old pool content...
+      getZYpp()->finishTarget();
+      sat::Pool::instance().reposEraseAll();
+      // prepare for the new one...
       ZConfig::instance().setRepoManagerRoot( _rootdir );
 
       if ( ! sysarch_r.empty() )
@@ -422,12 +426,7 @@ private:
     }
 
     ~Impl()
-    {
-      USR << (_tmprootdir.path() == _rootdir ? "DELETE" : "KEEP") << " TESTSETUP below " << _rootdir << endl;
-      ZConfig::instance().setRepoManagerRoot( Pathname() );
-      getZYpp()->finishTarget();
-      sat::Pool::instance().reposEraseAll();
-    }
+    { USR << (_tmprootdir.path() == _rootdir ? "DELETE" : "KEEP") << " TESTSETUP below " << _rootdir << endl; }
 
     filesystem::TmpDir _tmprootdir;
     Pathname           _rootdir;
