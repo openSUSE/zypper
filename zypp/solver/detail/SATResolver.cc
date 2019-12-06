@@ -419,7 +419,53 @@ SATResolver::solving(const CapabilitySet & requires_caps,
     // Solve !
     MIL << "Starting solving...." << endl;
     MIL << *this;
-    solver_solve( _satSolver, &(_jobQueue) );
+    if ( solver_solve( _satSolver, &(_jobQueue) ) == 0 )
+    {
+      // bsc#1155819: Weakremovers of future product not evaluated.
+      // Do a 2nd run to cleanup weakremovers() of to be installed
+      // Produtcs unless removeunsupported is active (cleans up all).
+      if ( _distupgrade )
+      {
+	if ( _distupgrade_removeunsupported )
+	  MIL << "Droplist processing not needed. RemoveUnsupported is On." << endl;
+	else if ( ! ZConfig::instance().solverUpgradeRemoveDroppedPackages() )
+	  MIL << "Droplist processing is disabled in ZConfig." << endl;
+	else
+	{
+	  bool resolve = false;
+	  MIL << "Checking droplists ..." << endl;
+	  // get Solvables to be installed...
+	  sat::SolvableQueue decisionq;
+	  solver_get_decisionqueue( _satSolver, decisionq );
+	  for ( sat::Solvable::IdType slvid : decisionq )
+	  {
+	    sat::Solvable slv { slvid };
+	    // get product buddies (they carry the weakremover)...
+	    static const Capability productCap { "product()" };
+	    if ( slv && slv.provides().matches( productCap ) )
+	    {
+	      CapabilitySet droplist { slv.valuesOfNamespace( "weakremover" ) };
+	      MIL << "Droplist for " << slv << ": size " << droplist.size() << endl;
+	      if ( !droplist.empty() )
+	      {
+		for ( const auto & cap : droplist )
+		{
+		  INT << "  => " << cap << endl;
+		  queue_push( &_jobQueue, SOLVER_DROP_ORPHANED | SOLVER_SOLVABLE_NAME );
+		  queue_push( &_jobQueue, cap.id() );
+		}
+		// PIN product - a safety net to prevent cleanup from changing the decision for this product
+		queue_push( &(_jobQueue), SOLVER_INSTALL | SOLVER_SOLVABLE );
+		queue_push( &(_jobQueue), slvid );
+		resolve = true;
+	      }
+	    }
+	  }
+	  if ( resolve )
+	    solver_solve( _satSolver, &(_jobQueue) );
+	}
+      }
+    }
     MIL << "....Solver end" << endl;
 
     // copying solution back to zypp pool
@@ -653,38 +699,6 @@ SATResolver::solverInit(const PoolItemList & weakItems)
     }
 
     ::pool_add_userinstalled_jobs(_satPool, sat::Pool::instance().autoInstalled(), &(_jobQueue), GET_USERINSTALLED_NAMES|GET_USERINSTALLED_INVERTED);
-
-    if ( _distupgrade )
-    {
-      if ( ZConfig::instance().solverUpgradeRemoveDroppedPackages() )
-      {
-        MIL << "Checking droplists ..." << endl;
-        // Dropped packages: look for 'weakremover()' provides
-        // in dup candidates of installed products.
-        ResPoolProxy proxy( ResPool::instance().proxy() );
-        for_( it, proxy.byKindBegin<Product>(), proxy.byKindEnd<Product>() )
-        {
-          if ( (*it)->onSystem() ) // (to install) or (not to delete)
-          {
-            Product::constPtr prodCand( (*it)->candidateAsKind<Product>() );
-            if ( ! prodCand )
-              continue; // product no longer available
-
-            CapabilitySet droplist( prodCand->droplist() );
-            dumpRangeLine( MIL << "Droplist for " << (*it)->candidateObj() << ": " << droplist.size() << " ", droplist.begin(), droplist.end() ) << endl;
-            for_( cap, droplist.begin(), droplist.end() )
-            {
-              queue_push( &_jobQueue, SOLVER_DROP_ORPHANED | SOLVER_SOLVABLE_NAME );
-              queue_push( &_jobQueue, cap->id() );
-            }
-          }
-        }
-      }
-      else
-      {
-        MIL << "Droplist processing is disabled." << endl;
-      }
-    }
 }
 
 void
