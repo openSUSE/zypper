@@ -60,25 +60,6 @@ extern "C"
 /////////////////////////////////////////////////////////////////////////
 namespace zypp
 { ///////////////////////////////////////////////////////////////////////
-
-  /////////////////////////////////////////////////////////////////////////
-  namespace env
-  {
-    inline bool HACKENV( const char * var_r, bool default_r )
-    {
-      bool ret = default_r;
-      const char * val = ::getenv( var_r );
-      if ( val )
-      {
-	ret = str::strToBool( val, default_r );
-	if ( ret != default_r )
-	  INT << "HACKENV " << var_r << " = " << ret << endl;
-      }
-      return ret;
-    }
-  } // namespace env
-  /////////////////////////////////////////////////////////////////////////
-
   ///////////////////////////////////////////////////////////////////////
   namespace solver
   { /////////////////////////////////////////////////////////////////////
@@ -432,14 +413,7 @@ SATResolver::solving(const CapabilitySet & requires_caps,
     solver_set_flag(_satSolver, SOLVER_FLAG_DUP_ALLOW_NAMECHANGE,	_dup_allownamechange );
     solver_set_flag(_satSolver, SOLVER_FLAG_DUP_ALLOW_ARCHCHANGE,	_dup_allowarchchange );
     solver_set_flag(_satSolver, SOLVER_FLAG_DUP_ALLOW_VENDORCHANGE,	_dup_allowvendorchange );
-#if 1
-#define HACKENV(X,D) solver_set_flag(_satSolver, X, env::HACKENV( #X, D ) );
-    HACKENV( SOLVER_FLAG_DUP_ALLOW_DOWNGRADE,	_dup_allowdowngrade );
-    HACKENV( SOLVER_FLAG_DUP_ALLOW_NAMECHANGE,	_dup_allownamechange );
-    HACKENV( SOLVER_FLAG_DUP_ALLOW_ARCHCHANGE,	_dup_allowarchchange );
-    HACKENV( SOLVER_FLAG_DUP_ALLOW_VENDORCHANGE,_dup_allowvendorchange );
-#undef HACKENV
-#endif
+
     sat::Pool::instance().prepare();
 
     // Solve !
