@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: zypp.et\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-12-05 14:22+0100\n"
-"PO-Revision-Date: 2019-12-07 11:54+0000\n"
+"PO-Revision-Date: 2019-12-07 21:54+0000\n"
 "Last-Translator: Jaanus Ojangu <jaanus.ojangu@gmail.com>\n"
 "Language-Team: Estonian <https://l10n.opensuse.org/projects/libzypp/master/"
 "et/>\n"
@@ -428,9 +428,8 @@ msgstr "Prantsuse Guajaana"
 
 #. :GUF:254:
 #: zypp/CountryCode.cc:237
-#, fuzzy
 msgid "Guernsey"
-msgstr "Saksamaa"
+msgstr "Guernsey"
 
 #: zypp/CountryCode.cc:238
 msgid "Ghana"
@@ -577,7 +576,6 @@ msgstr "Itaalia"
 
 #. :ITA:380:
 #: zypp/CountryCode.cc:267
-#, fuzzy
 msgid "Jersey"
 msgstr "Jersey"
 
@@ -722,14 +720,12 @@ msgstr "Moldova"
 
 #. :MDA:498:
 #: zypp/CountryCode.cc:296
-#, fuzzy
 msgid "Montenegro"
-msgstr "Mongo"
+msgstr "Montenegro"
 
 #: zypp/CountryCode.cc:297
-#, fuzzy
 msgid "Saint Martin"
-msgstr "San Marino"
+msgstr "Saint Martin"
 
 #: zypp/CountryCode.cc:298
 msgid "Madagascar"
@@ -4905,15 +4901,15 @@ msgstr "Krüpteeritud rida sisaldab Nul baiti"
 
 #: zypp/url/UrlUtils.cc:173
 msgid "Invalid parameter array split separator character"
-msgstr ""
+msgstr "Vale parameetri reastuse jaotuse eraldusmärk"
 
 #: zypp/url/UrlUtils.cc:213
 msgid "Invalid parameter map split separator character"
-msgstr ""
+msgstr "Vigane parameeter kaardijaotuse eraldusmärk"
 
 #: zypp/url/UrlUtils.cc:283
 msgid "Invalid parameter array join separator character"
-msgstr ""
+msgstr "Vigane parameetrimassiivi liitumismärk"
 
 #~ msgid "Can't open lock file: %s"
 #~ msgstr "Ei saa avada lukustusfaili: %s"
