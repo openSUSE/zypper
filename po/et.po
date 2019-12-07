@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: zypp.et\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-12-05 14:22+0100\n"
-"PO-Revision-Date: 2019-12-06 11:54+0000\n"
+"PO-Revision-Date: 2019-12-07 11:54+0000\n"
 "Last-Translator: Jaanus Ojangu <jaanus.ojangu@gmail.com>\n"
 "Language-Team: Estonian <https://l10n.opensuse.org/projects/libzypp/master/"
 "et/>\n"
@@ -4526,7 +4526,7 @@ msgstr "%s on konfliktis %s -ga hangituna %s poolt"
 #: zypp/solver/detail/SATResolver.cc:1102
 #, c-format, boost-format
 msgid "%s obsoletes %s provided by %s"
-msgstr "%s aegub %s, mida pakub %s"
+msgstr "%s aegub %s pakkujalt %s"
 
 #: zypp/solver/detail/SATResolver.cc:1105
 #, c-format, boost-format
@@ -4595,12 +4595,12 @@ msgstr "ignoreerige katkise süsteemi hoiatust"
 #: zypp/solver/detail/SATResolver.cc:1297
 #, c-format, boost-format
 msgid "do not ask to install a solvable providing %s"
-msgstr ""
+msgstr "ärge paluge paigaldada pakutavaid sõltuvuste lahendusi %s"
 
 #: zypp/solver/detail/SATResolver.cc:1319
 #, c-format, boost-format
 msgid "do not ask to delete all solvables providing %s"
-msgstr ""
+msgstr "ärge paluge kustutada kõiki pakutud sõltuvuste lahendusi %s"
 
 #: zypp/solver/detail/SATResolver.cc:1332
 #, c-format, boost-format
@@ -4631,19 +4631,19 @@ msgstr "paigaldage %s välistatud hoidlast"
 #: zypp/solver/detail/SATResolver.cc:1386
 #, boost-format
 msgid "install %1% although it has been retracted"
-msgstr ""
+msgstr "paigalda %1%, ehkki see on tagasi tõmmatud"
 
 #. translator: %1% is a package name
 #: zypp/solver/detail/SATResolver.cc:1389
 #, boost-format
 msgid "allow to install the PTF %1%"
-msgstr ""
+msgstr "lubage paigaldada PTF %1%"
 
 #. translator: %1% is a package name
 #: zypp/solver/detail/SATResolver.cc:1392
 #, boost-format
 msgid "install %1% although it is blacklisted"
-msgstr ""
+msgstr "paigaldage %1%, kuigi see on mustas nimekirjas"
 
 #: zypp/solver/detail/SATResolver.cc:1412
 #, c-format, boost-format
@@ -4756,7 +4756,7 @@ msgstr "Muudetud seadistuste fail %s:"
 #: zypp/target/rpm/RpmDb.cc:2104
 #, c-format, boost-format
 msgid "rpm saved %s as %s, but it was impossible to determine the difference"
-msgstr ""
+msgstr "rpm salvestati %s nimega %s, kuid erinevust oli võimatu tuvastada"
 
 #. %s = filenames
 #: zypp/target/rpm/RpmDb.cc:2106
@@ -4765,12 +4765,14 @@ msgid ""
 "rpm saved %s as %s.\n"
 "Here are the first 25 lines of difference:\n"
 msgstr ""
+"rpm on salvestatud %s kui %s.\n"
+"Siin on esimesed 25 erinevuse rida:\n"
 
 #. %s = filenames
 #: zypp/target/rpm/RpmDb.cc:2109
 #, c-format, boost-format
 msgid "rpm created %s as %s, but it was impossible to determine the difference"
-msgstr ""
+msgstr "rpm loodi %s nimega %s, aga oli võimatu leida erinevusi"
 
 #. %s = filenames
 #: zypp/target/rpm/RpmDb.cc:2111
@@ -4779,6 +4781,8 @@ msgid ""
 "rpm created %s as %s.\n"
 "Here are the first 25 lines of difference:\n"
 msgstr ""
+"rpm loodi %s nimega %s.\n"
+"Siin toodud esimesed 25 rida erinevusi:\n"
 
 #. report additional rpm output in finish
 #. TranslatorExplanation Text is followed by a ':'  and the actual output.
@@ -4789,7 +4793,7 @@ msgstr "Täiendav rpm-i väljund"
 #: zypp/target/rpm/RpmDb.cc:2424
 #, c-format, boost-format
 msgid "created backup %s"
-msgstr ""
+msgstr "loodi varukoopia %s"
 
 #. translators: possible rpm package signature check result [brief]
 #: zypp/target/rpm/RpmDb.cc:2445
@@ -4800,7 +4804,7 @@ msgstr "Hoidlat %s ei leitud."
 #. translators: possible rpm package signature check result [brief]
 #: zypp/target/rpm/RpmDb.cc:2447
 msgid "Unknown type of signature"
-msgstr ""
+msgstr "Tundmatu allkirja tüüp"
 
 #. translators: possible rpm package signature check result [brief]
 #: zypp/target/rpm/RpmDb.cc:2449
@@ -4817,22 +4821,22 @@ msgstr "Hoidlat %s ei leitud."
 #. translators: possible rpm package signature check result [brief]
 #: zypp/target/rpm/RpmDb.cc:2453
 msgid "Signatures public key is not available"
-msgstr ""
+msgstr "Allkirjade avalik võti pole saadaval"
 
 #. translators: possible rpm package signature check result [brief]
 #: zypp/target/rpm/RpmDb.cc:2455
 msgid "File does not exist or signature can't be checked"
-msgstr ""
+msgstr "Faili pole olemas või allkirja pole võimalik kontrollida"
 
 #. translators: possible rpm package signature check result [brief]
 #: zypp/target/rpm/RpmDb.cc:2457
 msgid "File is unsigned"
-msgstr ""
+msgstr "Fail on allkirjastamata"
 
 #: zypp/url/UrlBase.cc:154
 #, c-format, boost-format
 msgid "Url scheme does not allow a %s"
-msgstr ""
+msgstr "URL kuju ei luba %s"
 
 #: zypp/url/UrlBase.cc:173
 #, fuzzy, c-format, boost-format
@@ -4846,11 +4850,11 @@ msgstr "Vigane komponendi URI: "
 
 #: zypp/url/UrlBase.cc:786 zypp/url/UrlBase.cc:1231
 msgid "Query string parsing not supported for this URL"
-msgstr ""
+msgstr "Selle URL-i puhul ei toetata päringu kirje uurimist"
 
 #: zypp/url/UrlBase.cc:824
 msgid "Url scheme is a required component"
-msgstr ""
+msgstr "URL kuju on nõutav komponent"
 
 #: zypp/url/UrlBase.cc:830
 #, fuzzy, c-format, boost-format
@@ -4859,19 +4863,19 @@ msgstr "vigane teenuse nimi '%1'"
 
 #: zypp/url/UrlBase.cc:949
 msgid "Url scheme does not allow a username"
-msgstr ""
+msgstr "Url kuju ei võimalda kasutajanime"
 
 #: zypp/url/UrlBase.cc:983
 msgid "Url scheme does not allow a password"
-msgstr ""
+msgstr "Url kuju ei võimalda salasõna"
 
 #: zypp/url/UrlBase.cc:1012
 msgid "Url scheme requires a host component"
-msgstr ""
+msgstr "Url kuju nõuab arvutinime komponenti"
 
 #: zypp/url/UrlBase.cc:1022
 msgid "Url scheme does not allow a host component"
-msgstr ""
+msgstr "Url kuju ei võimalda arvutinime komponenti"
 
 #: zypp/url/UrlBase.cc:1049
 #, fuzzy, c-format, boost-format
@@ -4880,7 +4884,7 @@ msgstr "Vigane komponendi URI: "
 
 #: zypp/url/UrlBase.cc:1070
 msgid "Url scheme does not allow a port"
-msgstr ""
+msgstr "Url kuju ei võimalda porti"
 
 #: zypp/url/UrlBase.cc:1081
 #, fuzzy, c-format, boost-format
@@ -4889,15 +4893,15 @@ msgstr "Vigane komponendi URI: "
 
 #: zypp/url/UrlBase.cc:1098
 msgid "Url scheme requires path name"
-msgstr ""
+msgstr "Url kuju nõuab teekonna nime"
 
 #: zypp/url/UrlBase.cc:1119 zypp/url/UrlBase.cc:1133
 msgid "Relative path not allowed if authority exists"
-msgstr ""
+msgstr "Suhteline tee pole lubatud, kui autoriseerimine on olemas"
 
 #: zypp/url/UrlUtils.cc:111
 msgid "Encoded string contains a NUL byte"
-msgstr ""
+msgstr "Krüpteeritud rida sisaldab Nul baiti"
 
 #: zypp/url/UrlUtils.cc:173
 msgid "Invalid parameter array split separator character"
