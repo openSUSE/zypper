@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: zypp.et\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-12-05 14:22+0100\n"
-"PO-Revision-Date: 2019-12-07 21:54+0000\n"
+"PO-Revision-Date: 2019-12-08 11:54+0000\n"
 "Last-Translator: Jaanus Ojangu <jaanus.ojangu@gmail.com>\n"
 "Language-Team: Estonian <https://l10n.opensuse.org/projects/libzypp/master/"
 "et/>\n"
@@ -88,7 +88,7 @@ msgstr "Antarktika"
 #. :ATA:010:
 #: zypp/CountryCode.cc:168
 msgid "Argentina"
-msgstr "Argentina"
+msgstr "Argentiina"
 
 #. :ARG:032:
 #: zypp/CountryCode.cc:169
@@ -193,7 +193,7 @@ msgstr "Bahama"
 #. :BHS:044:
 #: zypp/CountryCode.cc:189
 msgid "Bhutan"
-msgstr "Bhutan"
+msgstr "Bhutaan"
 
 #. :BTN:064:
 #: zypp/CountryCode.cc:190
@@ -269,12 +269,12 @@ msgstr "Hiina"
 #. :CHN:156:
 #: zypp/CountryCode.cc:205
 msgid "Colombia"
-msgstr "Colombia"
+msgstr "Kolumbia"
 
 #. :COL:170:
 #: zypp/CountryCode.cc:206
 msgid "Costa Rica"
-msgstr "Costa Rica"
+msgstr "Costa-Rica"
 
 #. :CRI:188:
 #: zypp/CountryCode.cc:207
@@ -596,7 +596,7 @@ msgstr "Jaapan"
 #. :JPN:392:
 #: zypp/CountryCode.cc:271
 msgid "Kenya"
-msgstr "Kenya"
+msgstr "Keenia"
 
 #. :KEN:404:
 #: zypp/CountryCode.cc:272
@@ -661,7 +661,7 @@ msgstr "Liibanon"
 #. :LBN:422:
 #: zypp/CountryCode.cc:284
 msgid "Saint Lucia"
-msgstr "Saint Lucia"
+msgstr "Saint-Lucia"
 
 #. :LCA:662:
 #: zypp/CountryCode.cc:285
@@ -671,7 +671,7 @@ msgstr "Liechtenstein"
 #. :LIE:438:
 #: zypp/CountryCode.cc:286
 msgid "Sri Lanka"
-msgstr "Sri Lanka"
+msgstr "Sri-Lanka"
 
 #. :LKA:144:
 #: zypp/CountryCode.cc:287
@@ -930,7 +930,7 @@ msgstr "Pitcairn"
 #. :PCN:612:
 #: zypp/CountryCode.cc:338
 msgid "Puerto Rico"
-msgstr "Puerto Rico"
+msgstr "Puerto-Rico"
 
 #. :PRI:630:
 #: zypp/CountryCode.cc:339
@@ -969,7 +969,6 @@ msgstr "Rumeenia"
 
 #. :ROU:642:
 #: zypp/CountryCode.cc:346
-#, fuzzy
 msgid "Serbia"
 msgstr "Serbia"
 
@@ -1015,7 +1014,7 @@ msgstr "Singapur"
 #. :SGP:702:
 #: zypp/CountryCode.cc:355
 msgid "Saint Helena"
-msgstr "Saint Helena"
+msgstr "Saint-Helena"
 
 #. :SHN:654:
 #: zypp/CountryCode.cc:356
@@ -1035,12 +1034,12 @@ msgstr "Slovakkia"
 #. :SVK:703:
 #: zypp/CountryCode.cc:359
 msgid "Sierra Leone"
-msgstr "Sierra Leone"
+msgstr "Sierra-Leone"
 
 #. :SLE:694:
 #: zypp/CountryCode.cc:360
 msgid "San Marino"
-msgstr "San Marino"
+msgstr "San-Marino"
 
 #. :SMR:674:
 #: zypp/CountryCode.cc:361
@@ -1276,9 +1275,8 @@ msgid "Conflicts"
 msgstr "On vastuolus"
 
 #: zypp/Dep.cc:100
-#, fuzzy
 msgid "Obsoletes"
-msgstr "Muudab aegunuks"
+msgstr "Aegub"
 
 #: zypp/Dep.cc:101
 msgid "Recommends"
@@ -1297,14 +1295,14 @@ msgid "Supplements"
 msgstr "Lisandid"
 
 #: zypp/ExternalProgram.cc:268
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Can't open pty (%s)."
-msgstr "Ei saanud avada faili: %s."
+msgstr "Ei saanud avada preudoterminali 'pty' (%s)."
 
 #: zypp/ExternalProgram.cc:279
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Can't open pipe (%s)."
-msgstr "Ei saa avada faili %1."
+msgstr "Ei saa avada toru 'pipe' (%s)."
 
 #: zypp/ExternalProgram.cc:362
 #, c-format, boost-format
@@ -1317,9 +1315,9 @@ msgid "Can't chdir to '%s' inside chroot '%s' (%s)."
 msgstr "Ei  õnnestunud 'chdir' '%s' 'chroot' sees '%s' (%s)."
 
 #: zypp/ExternalProgram.cc:373
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Can't chdir to '%s' (%s)."
-msgstr "Ei saa käivitada '%s' (%s)."
+msgstr "Ei saa kataloogi vahetada 'chdir '%s' (%s)."
 
 #. don't want to get here
 #: zypp/ExternalProgram.cc:385
@@ -1353,18 +1351,17 @@ msgid "Tried to import not existent key %s into keyring %s"
 msgstr "Prooviti võtmehoidjasse %s importida olematu võtme  %s"
 
 #: zypp/KeyRing.cc:596
-#, fuzzy
 msgid "Failed to import key."
-msgstr "Võtme kustutamine nurjus."
+msgstr "Võtme import nurjus."
 
 #: zypp/KeyRing.cc:603
 msgid "Failed to delete key."
 msgstr "Võtme kustutamine nurjus."
 
 #: zypp/KeyRing.cc:609
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Signature file %s not found"
-msgstr "Hoidlat %s ei leitud."
+msgstr "Allkirjade faili %s ei leitud"
 
 #: zypp/LanguageCode.cc:49
 msgid "Unknown language: "
@@ -1557,9 +1554,8 @@ msgstr "Banda"
 
 #. language code: bai
 #: zypp/LanguageCode.cc:239
-#, fuzzy
 msgid "Bamileke Languages"
-msgstr "Mitu keelt"
+msgstr "Bamileke keeled"
 
 #. language code: bak ba
 #: zypp/LanguageCode.cc:241
@@ -1808,9 +1804,8 @@ msgstr "Šaieeni"
 
 #. language code: cmc
 #: zypp/LanguageCode.cc:345
-#, fuzzy
 msgid "Chamic Languages"
-msgstr "Apatši keeled"
+msgstr "Chamic keeled"
 
 #. language code: cop
 #: zypp/LanguageCode.cc:347
@@ -1854,9 +1849,8 @@ msgstr "Krimmitatari"
 
 #. language code: crp
 #: zypp/LanguageCode.cc:363
-#, fuzzy
 msgid "Creoles and Pidgins (Other)"
-msgstr "Kesk-Ameerika indiaani (muu)"
+msgstr "Kreoolid ja Pidginid (muu)"
 
 #. language code: csb
 #: zypp/LanguageCode.cc:365
@@ -2251,7 +2245,7 @@ msgstr "Hmongi"
 #. language code: hmo ho
 #: zypp/LanguageCode.cc:533
 msgid "Hiri Motu"
-msgstr "Hiri Motu"
+msgstr "Hiri-Motu"
 
 #. language code: hsb
 #: zypp/LanguageCode.cc:535
@@ -3000,9 +2994,8 @@ msgstr "Osmanitürgi (1500-1928)"
 
 #. language code: oto
 #: zypp/LanguageCode.cc:843
-#, fuzzy
 msgid "Otomian Languages"
-msgstr "Nuubia keeled"
+msgstr "Otomi keeled"
 
 #. language code: paa
 #: zypp/LanguageCode.cc:845
@@ -3166,9 +3159,8 @@ msgstr "Lõuna-Ameerika indiaani (muu)"
 
 #. language code: sal
 #: zypp/LanguageCode.cc:913
-#, fuzzy
 msgid "Salishan Languages"
-msgstr "Siuu keeled"
+msgstr "Salishani keeled"
 
 #. language code: sam
 #: zypp/LanguageCode.cc:915
@@ -3622,9 +3614,8 @@ msgstr "Vadja"
 
 #. language code: wak
 #: zypp/LanguageCode.cc:1107
-#, fuzzy
 msgid "Wakashan Languages"
-msgstr "Atapaski keeled"
+msgstr "Wakashani keeled"
 
 #. language code: wal
 #: zypp/LanguageCode.cc:1109
@@ -3732,9 +3723,8 @@ msgstr "Sooritatakse järgmised tegevused:"
 
 #. translators: an annotation to a gpg keys expiry date
 #: zypp/PublicKey.cc:63
-#, fuzzy
 msgid "does not expire"
-msgstr "'%1' pole olemas."
+msgstr "ei vanane"
 
 #. translators: an annotation to a gpg keys expiry date: "expired: 1999-04-12"
 #: zypp/PublicKey.cc:68
@@ -3750,9 +3740,8 @@ msgstr "aegub: %1%"
 
 #. translators: an annotation to a gpg keys expiry date
 #: zypp/PublicKey.cc:82
-#, fuzzy
 msgid "(does not expire)"
-msgstr "'%1' pole olemas."
+msgstr "(ei vanane)"
 
 #. translators: an annotation to a gpg keys expiry date
 #: zypp/PublicKey.cc:91
@@ -3802,7 +3791,7 @@ msgstr "Ei saa lugeda repo kataloogi '%1%': Juurdepääs on keelatud"
 #: zypp/repo/PluginServices.cc:49
 #, c-format, boost-format
 msgid "Failed to read directory '%s'"
-msgstr "Kataloogi '%s' lugemine nurjus."
+msgstr "Kataloogi '%s' lugemine nurjus"
 
 #: zypp/RepoManager.cc:330
 #, boost-format
@@ -3810,9 +3799,8 @@ msgid "Cannot read repo file '%1%': Permission denied"
 msgstr "Ei saa lugeda repo faili '%1%': Juurdepääs on keelatud"
 
 #: zypp/RepoManager.cc:353
-#, fuzzy
 msgid "Repository alias cannot start with dot."
-msgstr "Hoidlat %s ei leitud."
+msgstr "Hoidlat alias ei saa alata punktiga."
 
 #: zypp/RepoManager.cc:364
 msgid "Service alias cannot start with dot."
@@ -3841,14 +3829,13 @@ msgstr[0] "Valitud metaandmeid ei leitud määratud URL-ilt"
 msgstr[1] "Valitud metaandmeid ei leitud määratud URL-delt"
 
 #: zypp/RepoManager.cc:1140 zypp/RepoManager.cc:1252 zypp/RepoManager.cc:1308
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Can't create %s"
-msgstr "Pole võimalik luua %s: %m\n"
+msgstr "Pole võimalik luua %s"
 
 #: zypp/RepoManager.cc:1148
-#, fuzzy
 msgid "Can't create metadata cache directory."
-msgstr "Ei saa luua katalooogi %1: %2"
+msgstr "Metaandmete vahemälu kataloogi ei saa luua."
 
 #: zypp/RepoManager.cc:1294
 #, c-format, boost-format
@@ -3882,9 +3869,9 @@ msgstr "Viga lugemisel asukohast '%s'"
 
 #. TranslatorExplanation '%s' is an URL
 #: zypp/RepoManager.cc:1480 zypp/RepoManager.cc:2497
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Unknown error reading from '%s'"
-msgstr "Tundmatu käsk '%s'"
+msgstr "Tundmatu viga '%s' lugemisel"
 
 #: zypp/RepoManager.cc:1618
 #, c-format, boost-format
@@ -3893,14 +3880,14 @@ msgstr "Lisatakse repositoorium '%s'"
 
 #. TranslatorExplanation '%s' is an URL
 #: zypp/RepoManager.cc:1706
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Invalid repo file name at '%s'"
-msgstr "Vigane ekspordifaili nimi."
+msgstr "Vigane repo faili nimi '%s'"
 
 #: zypp/RepoManager.cc:1747
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Removing repository '%s'"
-msgstr "Hoidla '%s' lisamine."
+msgstr "Eemaldatakse hoidla '%s'"
 
 #: zypp/RepoManager.cc:1766 zypp/RepoManager.cc:1844
 msgid "Can't figure out where the repo is stored."
@@ -3910,7 +3897,7 @@ msgstr "Ei suuda tuvastada, kus hoidla asub."
 #: zypp/RepoManager.cc:1780 zypp/RepoManager.cc:1982
 #, c-format, boost-format
 msgid "Can't delete '%s'"
-msgstr "Faili '%s' ei saa kustutada."
+msgstr "Faili '%s' ei saa kustutada"
 
 #: zypp/RepoManager.cc:1970 zypp/RepoManager.cc:2420
 msgid "Can't figure out where the service is stored."
@@ -3926,19 +3913,16 @@ msgid "Invalid LDAP URL query parameter '%s'"
 msgstr "Vigane LDAP URL-i päringu parameeter '%s'"
 
 #: zypp/Url.cc:301
-#, fuzzy
 msgid "Unable to clone Url object"
-msgstr "Kõiki allikaid pole võimalik taastada."
+msgstr "Pole võimalik kloonida Url objekti"
 
 #: zypp/Url.cc:314
-#, fuzzy
 msgid "Invalid empty Url object reference"
-msgstr "Vigane eelistus"
+msgstr "Vigane tühja Url objekti referents"
 
 #: zypp/Url.cc:327 zypp/Url.cc:341
-#, fuzzy
 msgid "Unable to parse Url components"
-msgstr "Kõiki allikaid pole võimalik taastada."
+msgstr "Ei ole võimalik uurida Url komponente"
 
 #: zypp/VendorSupportOptions.cc:14
 msgid "unknown"
@@ -4031,9 +4015,9 @@ msgid "History:"
 msgstr "Ajalugu:"
 
 #: zypp/base/StrMatcher.cc:152
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Unknown match mode '%s'"
-msgstr "Tundmatu käsk '%s'"
+msgstr "Tundmatu ühilduvusstaatus '%s'"
 
 #: zypp/base/StrMatcher.cc:153
 #, c-format, boost-format
@@ -4041,14 +4025,14 @@ msgid "Unknown match mode '%s' for pattern '%s'"
 msgstr "Tundmatu 'match mode' '%s' struktuurile '%s'"
 
 #: zypp/base/StrMatcher.cc:157
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Invalid regular expression '%s': regcomp returned %d"
-msgstr " pole korrektne regulaaravaldis: \""
+msgstr "Vigane regulaaravaldis '%s': recomp vastas %d"
 
 #: zypp/base/StrMatcher.cc:158
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Invalid regular expression '%s'"
-msgstr " pole korrektne regulaaravaldis: \""
+msgstr "Vigane regulaaravaldis '%s'"
 
 #. !\todo add comma to the message for the next release
 #: zypp/media/MediaCIFS.cc:427 zypp/media/MediaCurl.cc:1738
@@ -4073,14 +4057,14 @@ msgstr ""
 "ja kas see pole aegunud."
 
 #: zypp/media/MediaException.cc:33
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Failed to mount %s on %s"
-msgstr "%s - %s ei saa avada\n"
+msgstr "Haakimine %s asukohas %s nurjus"
 
 #: zypp/media/MediaException.cc:43
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Failed to unmount %s"
-msgstr "Mooduli \"%s\" laadimine ebaõnnestus."
+msgstr "Lahtihaakimine %s nurjus"
 
 #: zypp/media/MediaException.cc:48
 #, c-format, boost-format
@@ -4093,9 +4077,9 @@ msgid "Medium not opened when trying to perform action '%s'."
 msgstr "Toimingu '%s' sooritamisel meedium ei avanenud."
 
 #: zypp/media/MediaException.cc:58
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "File '%s' not found on medium '%s'"
-msgstr "Faili ei leitud: %1."
+msgstr "Faili '%s' ei leitud meediumil '%s'"
 
 #: zypp/media/MediaException.cc:63
 #, c-format, boost-format
@@ -4127,9 +4111,9 @@ msgid "Path '%s' on medium '%s' is not a file."
 msgstr "Tee sihtkohas '%s' andmekandjal '%s' ei ole fail."
 
 #: zypp/media/MediaException.cc:94
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Path '%s' on medium '%s' is not a directory."
-msgstr "%1 pole kataloog."
+msgstr "Tee '%s' meediumil '%s' pole kataloog."
 
 #: zypp/media/MediaException.cc:101
 msgid "Malformed URI"
@@ -4153,9 +4137,8 @@ msgid "Unsupported URI scheme in '%s'."
 msgstr "Mittetoetatud URl skeem '%s'."
 
 #: zypp/media/MediaException.cc:131
-#, fuzzy
 msgid "Operation not supported by medium"
-msgstr "Profiili versioon ei ole Apparmori mooduli poolt toetatud\n"
+msgstr "See tegevus ei ole meediumi poolt toetatud"
 
 #: zypp/media/MediaException.cc:138
 #, c-format, boost-format
@@ -4189,14 +4172,14 @@ msgid "Cannot eject any media"
 msgstr "Ühtegi andmekandjat ei saa väljutada"
 
 #: zypp/media/MediaException.cc:166
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Cannot eject media '%s'"
-msgstr "Ei saa avada faili '%1'."
+msgstr "Ei saa väljutada meediumi '%s'"
 
 #: zypp/media/MediaException.cc:181
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Permission to access '%s' denied."
-msgstr "Ligipääs on keelatud"
+msgstr "Ligipääs '%s' on keelatud."
 
 #: zypp/media/MediaException.cc:189
 #, c-format, boost-format
@@ -4247,9 +4230,8 @@ msgid "One or both of '%s' or '%s' attributes is required."
 msgstr "Üks või mõlemad '%s' või '%s' atribuudid on nõutavad."
 
 #: zypp/repo/PackageProvider.cc:331
-#, fuzzy
 msgid "Signature verification failed"
-msgstr " käivitamine nurjus"
+msgstr "Allkirja võrdlemine nurjus"
 
 #. TranslatorExplanation %s = package being checked for integrity
 #: zypp/repo/PackageProvider.cc:462
@@ -4285,9 +4267,8 @@ msgid "Can't provide file '%s' from repository '%s'"
 msgstr "Ei saa faili '%s' tarkvarahoidlast '%s' hankida"
 
 #: zypp/repo/RepoProvideFile.cc:267
-#, fuzzy
 msgid "No url in repository."
-msgstr "Probleem hoidla andmete parsimisel."
+msgstr "Repositooriumis ei ole URLi."
 
 #. [lhs][rhs] 0 = installed; 1 = to be installed
 #. TranslatorExplanation %1%(filename) %2%(package1) %3%(package2)
@@ -4436,20 +4417,18 @@ msgstr ""
 "     %4%"
 
 #: zypp/sat/detail/PoolImpl.cc:193
-#, fuzzy
 msgid "Can not create sat-pool."
-msgstr "Faili ei sa luua."
+msgstr "Faili ei sa luua sat-pooli."
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
 #: zypp/solver/detail/ProblemSolutionIgnore.cc:42
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "break %s by ignoring some of its dependencies"
-msgstr "Sõltuvuste kontrollimine"
+msgstr "võib katki teha %s ignoneerides mõnda selle sõltuvust"
 
 #: zypp/solver/detail/ProblemSolutionIgnore.cc:48
-#, fuzzy
 msgid "generally ignore of some dependencies"
-msgstr "Sõltuvuste kontrollimine"
+msgstr "üldiselt ignoreeritakse mõnda sõltuvust"
 
 #: zypp/solver/detail/SATResolver.cc:1060
 #, c-format, boost-format
@@ -4462,9 +4441,9 @@ msgid "%s has inferior architecture"
 msgstr "%s on halvema arhitektuuriga"
 
 #: zypp/solver/detail/SATResolver.cc:1066
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "problem with installed package %s"
-msgstr "Paigaldatud pakettide lugemine"
+msgstr "Paigaldatud paketiga %s on probleem"
 
 #: zypp/solver/detail/SATResolver.cc:1069
 msgid "conflicting requests"
@@ -4485,9 +4464,9 @@ msgid "Have you enabled all requested repositories?"
 msgstr "Kas olete lubanud kõik taotletud hoidlad?"
 
 #: zypp/solver/detail/SATResolver.cc:1079
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "package %s does not exist"
-msgstr "varukoopiat pole olemas"
+msgstr "paketti %s pole olemas"
 
 #: zypp/solver/detail/SATResolver.cc:1083
 msgid "unsupported request"
@@ -4573,15 +4552,14 @@ msgid "keep %s"
 msgstr "jäta alles %s"
 
 #: zypp/solver/detail/SATResolver.cc:1240
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "remove lock to allow installation of %s"
-msgstr "Käivita paigaldus või süsteem"
+msgstr "eemalda lukustus %s paigalduse lubamiseks"
 
 #: zypp/solver/detail/SATResolver.cc:1291
 #: zypp/solver/detail/SATResolver.cc:1312
-#, fuzzy
 msgid "This request will break your system!"
-msgstr "Päring on juba olemas."
+msgstr "See päring rikub teie süsteemi!"
 
 #: zypp/solver/detail/SATResolver.cc:1292
 #: zypp/solver/detail/SATResolver.cc:1313
@@ -4614,9 +4592,9 @@ msgid "install %s despite the inferior architecture"
 msgstr "paigaldage %s vaatamata madalamale arhitektuurile"
 
 #: zypp/solver/detail/SATResolver.cc:1367
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "keep obsolete %s"
-msgstr "Muudab aegunuks"
+msgstr "jäta aegunud %s alles"
 
 #: zypp/solver/detail/SATResolver.cc:1372
 #, c-format, boost-format
@@ -4666,9 +4644,9 @@ msgid "replacement of %s with %s"
 msgstr "%s vahetamine %s vastu"
 
 #: zypp/solver/detail/SATResolver.cc:1448
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "deinstallation of %s"
-msgstr "Paigaldamine"
+msgstr "%s eemaldamine"
 
 #. strip tmp file suffix
 #: zypp/target/RpmPostTransCollector.cc:105
@@ -4709,9 +4687,8 @@ msgstr " käivitamine jäeti katkestamise käigus vahele"
 #: zypp/target/TargetImpl.cc:517 zypp/target/TargetImpl.cc:537
 #: zypp/target/TargetImpl.cc:565 zypp/target/TargetImpl.cc:602
 #: zypp/target/TargetImpl.cc:610
-#, fuzzy
 msgid "Error sending update message notification."
-msgstr "Viga võtme krüptimisel."
+msgstr "Viga uuendusteate teavituse saatmisel."
 
 #: zypp/target/TargetImpl.cc:661
 msgid "New update message"
@@ -4721,9 +4698,8 @@ msgstr "Uus uuendusteade"
 #. TranslatorExplanation the colon is followed by an error message
 #: zypp/target/rpm/RpmDb.cc:843 zypp/target/rpm/RpmDb.cc:2123
 #: zypp/target/rpm/RpmDb.cc:2269
-#, fuzzy
 msgid "RPM failed: "
-msgstr "ebaõnnestus"
+msgstr "RPM nurjus: "
 
 #. Translator: %1% is a gpg public key
 #: zypp/target/rpm/RpmDb.cc:1173
@@ -4793,9 +4769,8 @@ msgstr "loodi varukoopia %s"
 
 #. translators: possible rpm package signature check result [brief]
 #: zypp/target/rpm/RpmDb.cc:2445
-#, fuzzy
 msgid "Signature is OK"
-msgstr "Hoidlat %s ei leitud."
+msgstr "Allkiri on korras"
 
 #. translators: possible rpm package signature check result [brief]
 #: zypp/target/rpm/RpmDb.cc:2447
@@ -4804,15 +4779,13 @@ msgstr "Tundmatu allkirja tüüp"
 
 #. translators: possible rpm package signature check result [brief]
 #: zypp/target/rpm/RpmDb.cc:2449
-#, fuzzy
 msgid "Signature does not verify"
-msgstr "Hoidlat %s ei leitud."
+msgstr "Allkirja ei võrrelda"
 
 #. translators: possible rpm package signature check result [brief]
 #: zypp/target/rpm/RpmDb.cc:2451
-#, fuzzy
 msgid "Signature is OK, but key is not trusted"
-msgstr "Hoidlat %s ei leitud."
+msgstr "Allkiri on õige aga võti ei ole usaldatav"
 
 #. translators: possible rpm package signature check result [brief]
 #: zypp/target/rpm/RpmDb.cc:2453
@@ -4835,14 +4808,14 @@ msgid "Url scheme does not allow a %s"
 msgstr "URL kuju ei luba %s"
 
 #: zypp/url/UrlBase.cc:173
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Invalid %s component '%s'"
-msgstr "Vigane komponendi URI: "
+msgstr "Vigane %s komponent '%s'"
 
 #: zypp/url/UrlBase.cc:180
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Invalid %s component"
-msgstr "Vigane komponendi URI: "
+msgstr "Vigane %s komponent"
 
 #: zypp/url/UrlBase.cc:786 zypp/url/UrlBase.cc:1231
 msgid "Query string parsing not supported for this URL"
@@ -4853,9 +4826,9 @@ msgid "Url scheme is a required component"
 msgstr "URL kuju on nõutav komponent"
 
 #: zypp/url/UrlBase.cc:830
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Invalid Url scheme '%s'"
-msgstr "vigane teenuse nimi '%1'"
+msgstr "Vigane Url kuju '%s'"
 
 #: zypp/url/UrlBase.cc:949
 msgid "Url scheme does not allow a username"
@@ -4874,18 +4847,18 @@ msgid "Url scheme does not allow a host component"
 msgstr "Url kuju ei võimalda arvutinime komponenti"
 
 #: zypp/url/UrlBase.cc:1049
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Invalid host component '%s'"
-msgstr "Vigane komponendi URI: "
+msgstr "Vigane host komponent '%s'"
 
 #: zypp/url/UrlBase.cc:1070
 msgid "Url scheme does not allow a port"
 msgstr "Url kuju ei võimalda porti"
 
 #: zypp/url/UrlBase.cc:1081
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Invalid port component '%s'"
-msgstr "Vigane komponendi URI: "
+msgstr "Vigane pordi komponent '%s'"
 
 #: zypp/url/UrlBase.cc:1098
 msgid "Url scheme requires path name"
