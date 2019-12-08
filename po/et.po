@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: zypper.et\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-11-28 17:54+0100\n"
-"PO-Revision-Date: 2019-11-29 15:54+0000\n"
+"PO-Revision-Date: 2019-12-08 11:54+0000\n"
 "Last-Translator: Jaanus Ojangu <jaanus.ojangu@gmail.com>\n"
 "Language-Team: Estonian <https://l10n.opensuse.org/projects/zypper/master/et/"
 ">\n"
@@ -23,12 +23,12 @@ msgstr ""
 #: src/SolverRequester.h:52
 #, boost-format
 msgid "Suspicious category filter value '%1%'."
-msgstr ""
+msgstr "Kahtlase kategooria filtri väärtus '%1%'."
 
 #: src/SolverRequester.h:60
 #, boost-format
 msgid "Suspicious severity filter value '%1%'."
-msgstr ""
+msgstr "Kahtlase raskusastmega filtri väärtus '%1%'."
 
 #: src/callbacks/keyring.h:32
 msgid ""
@@ -460,7 +460,7 @@ msgstr "Paigaldamine"
 #. translators: A progressbar label
 #: src/callbacks/rpm.h:403
 msgid "Checking for file conflicts:"
-msgstr ""
+msgstr "Failide konfliktide kontrollimine:"
 
 #. TranslatorExplanation %1%(number of packages); detailed list follows
 #: src/callbacks/rpm.h:454
@@ -472,7 +472,11 @@ msgid_plural ""
 "%1% packages had to be excluded from file conflicts check because they are "
 "not yet downloaded."
 msgstr[0] ""
+"% 1% pakett tuli failikonfliktide kontrollist välja jätta, kuna seda pole "
+"veel alla laaditud."
 msgstr[1] ""
+"% 1% paketid tuli failikonfliktide kontrollist välja jätta, kuna neid pole "
+"veel alla laaditud."
 
 #. TranslatorExplanation %1%(commandline option)
 #: src/callbacks/rpm.h:460
