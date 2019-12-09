@@ -231,9 +231,8 @@ namespace zypp
 
   void HistoryLog::install( const PoolItem & pi )
   {
+    if ( ! pi.isKind<Package>() ) return;
     const Package::constPtr p = asKind<Package>(pi.resolvable());
-    if (!p)
-      return;
 
     _log
       << timestamp()							// 1 timestamp
@@ -260,9 +259,8 @@ namespace zypp
 
   void HistoryLog::remove( const PoolItem & pi )
   {
+    if ( ! pi.isKind<Package>() ) return;
     const Package::constPtr p = asKind<Package>(pi.resolvable());
-    if (!p)
-      return;
 
     _log
       << timestamp()							// 1 timestamp
@@ -332,6 +330,26 @@ namespace zypp
         << _sep << str::escape(ZConfig::instance().userData(), _sep)	// 5 userdata
         << endl;
     }
+  }
+
+  void HistoryLog::patchStateChange( const PoolItem & pi, const std::string &oldstate )
+  {
+    if ( ! pi.isKind<Patch>() ) return;
+    const Patch::constPtr p = asKind<Patch>(pi.resolvable());
+
+    _log
+      << timestamp()							// 1 timestamp
+      << _sep << HistoryActionID::PATCH_STATE_CHANGE.asString(true)	// 2 action
+      << _sep << p->name()						// 3 name
+      << _sep << p->edition()						// 4 evr
+      << _sep << p->arch()						// 5 arch
+      << _sep << p->repoInfo().alias()					// 6 repo alias
+      << _sep << p->severity()   					// 7 severity
+      << _sep << p->category()  					// 8 category
+      << _sep << oldstate       					// 9 old state
+      << _sep << pi.patchStatusAsString()     				// 10 new state
+      << _sep << str::escape(ZConfig::instance().userData(), _sep)	// 11 userdata
+      << endl;
   }
 
   ///////////////////////////////////////////////////////////////////

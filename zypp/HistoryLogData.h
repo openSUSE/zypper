@@ -21,6 +21,7 @@
 #include "zypp/Arch.h"
 #include "zypp/CheckSum.h"
 #include "zypp/Url.h"
+#include "zypp/Patch.h"
 
 #define HISTORY_LOG_DATE_FORMAT "%Y-%m-%d %H:%M:%S"
 
@@ -44,6 +45,7 @@ namespace zypp
     static const HistoryActionID REPO_CHANGE_ALIAS;
     static const HistoryActionID REPO_CHANGE_URL;
     static const HistoryActionID STAMP_COMMAND;
+    static const HistoryActionID PATCH_STATE_CHANGE;
 
     enum ID
     {
@@ -55,7 +57,8 @@ namespace zypp
       REPO_REMOVE_e,
       REPO_CHANGE_ALIAS_e,
       REPO_CHANGE_URL_e,
-      STAMP_COMMAND_e
+      STAMP_COMMAND_e,
+      PATCH_STATE_CHANGE_e
     };
 
     HistoryActionID() : _id(NONE_e) {}
@@ -226,6 +229,51 @@ namespace zypp
     CheckSum	checksum()	const;	///< package checksum
     std::string	userdata()	const;	///< userdata/transactionID
   };
+
+  //PATCH SEVERITY CATEGORY OLDSTATE NEWSTATE
+  ///////////////////////////////////////////////////////////////////
+  /// \class HistoryLogPatchStateChange
+  /// \brief  A zypp history log line for an installed packaged.
+  /// \ingroup g_ZyppHistory
+  ///////////////////////////////////////////////////////////////////
+  class HistoryLogPatchStateChange : public HistoryLogData
+  {
+  public:
+    typedef shared_ptr<HistoryLogPatchStateChange>		Ptr;
+    typedef shared_ptr<const HistoryLogPatchStateChange>	constPtr;
+    /** Ctor \b moving \a FieldVector (via swap).
+     * \throws ParseException if \a fields_r has the wrong \ref HistoryActionID or number of fields.
+     */
+    HistoryLogPatchStateChange( FieldVector & fields_r );
+
+  public:
+    enum Index			///< indices of known fields
+    {
+      DATE_INDEX	= HistoryLogData::DATE_INDEX,
+      ACTION_INDEX	= HistoryLogData::ACTION_INDEX,
+      NAME_INDEX,		///< patch name
+      EDITION_INDEX,		///< patch edition
+      ARCH_INDEX,		///< patch architecture
+      REPOALIAS_INDEX,		///< repository providing the patch
+      SEVERITY_INDEX,           ///< patch severity
+      CATEGORY_INDEX,           ///< patch category
+      OLDSTATE_INDEX,           ///< the state of the patch before the change
+      NEWSTATE_INDEX,           ///< the state of the patch after the change
+      USERDATA_INDEX,		///< userdata/transactionID
+    };
+
+  public:
+    std::string	name()		const;	///< package name
+    Edition	edition()	const;	///< package edition
+    Arch	arch()		const;	///< package architecture
+    std::string	repoAlias()	const;	///< repository providing the package
+    Patch::SeverityFlag severity() const;
+    Patch::Category category()  const;
+    std::string oldstate()      const;
+    std::string newstate()      const;
+    std::string	userdata()	const;	///< userdata/transactionID
+  };
+
 
   ///////////////////////////////////////////////////////////////////
   /// \class HistoryLogDataRemove

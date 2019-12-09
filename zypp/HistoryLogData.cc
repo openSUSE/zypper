@@ -40,6 +40,7 @@ namespace zypp
   const HistoryActionID HistoryActionID::REPO_CHANGE_ALIAS	(HistoryActionID::REPO_CHANGE_ALIAS_e);
   const HistoryActionID HistoryActionID::REPO_CHANGE_URL	(HistoryActionID::REPO_CHANGE_URL_e);
   const HistoryActionID HistoryActionID::STAMP_COMMAND		(HistoryActionID::STAMP_COMMAND_e);
+  const HistoryActionID HistoryActionID::PATCH_STATE_CHANGE     (HistoryActionID::PATCH_STATE_CHANGE_e);
 
   HistoryActionID::HistoryActionID(const std::string & strval_r)
     : _id(parse(strval_r))
@@ -59,6 +60,7 @@ namespace zypp
       _table["ralias"]	= REPO_CHANGE_ALIAS_e;
       _table["rurl"]	= REPO_CHANGE_URL_e;
       _table["command"]	= STAMP_COMMAND_e;
+      _table["pstate"]	= PATCH_STATE_CHANGE_e;
       _table["NONE"]	= _table["none"] = NONE_e;
     }
 
@@ -86,6 +88,7 @@ namespace zypp
       _table[REPO_CHANGE_ALIAS_e] = PairType( "ralias"	, "ralias " );
       _table[REPO_CHANGE_URL_e]   = PairType( "rurl"	, "rurl   " );
       _table[STAMP_COMMAND_e]     = PairType( "command"	, "command" );
+      _table[PATCH_STATE_CHANGE_e]= PairType( "pstate"  , "pstate " );
       _table[NONE_e]              = PairType( "NONE"	, "NONE   " );
     }
 
@@ -192,6 +195,7 @@ namespace zypp
 	OUTS( REPO_CHANGE_ALIAS_e,	HistoryLogDataRepoAliasChange );
 	OUTS( REPO_CHANGE_URL_e,	HistoryLogDataRepoUrlChange );
 	OUTS( STAMP_COMMAND_e,		HistoryLogDataStampCommand );
+        OUTS( PATCH_STATE_CHANGE_e,     HistoryLogPatchStateChange );
 #undef OUTS
 	// intentionally no default:
 	case HistoryActionID::NONE_e:
@@ -247,6 +251,22 @@ namespace zypp
     std::string	HistoryLogDataInstall::repoAlias()	const { return optionalAt( REPOALIAS_INDEX ); }
     CheckSum	HistoryLogDataInstall::checksum()	const { return optionalAt( CHEKSUM_INDEX ); }
     std::string	HistoryLogDataInstall::userdata()	const { return optionalAt( USERDATA_INDEX ); }
+
+    ///////////////////////////////////////////////////////////////////
+    //	class HistoryLogPatchStateChange
+    ///////////////////////////////////////////////////////////////////
+    HistoryLogPatchStateChange::HistoryLogPatchStateChange( FieldVector & fields_r )
+      : HistoryLogData( fields_r )
+    {}
+    std::string	HistoryLogPatchStateChange::name()	const { return optionalAt( NAME_INDEX ); }
+    Edition	HistoryLogPatchStateChange::edition()	const { return Edition( optionalAt( EDITION_INDEX ) ); }
+    Arch	HistoryLogPatchStateChange::arch()	const { return Arch( optionalAt( ARCH_INDEX ) ); }
+    std::string	HistoryLogPatchStateChange::repoAlias()	const { return optionalAt( REPOALIAS_INDEX ); }
+    Patch::SeverityFlag HistoryLogPatchStateChange::severity() const { return Patch::severityFlag( optionalAt( SEVERITY_INDEX ) ); }
+    Patch::Category HistoryLogPatchStateChange::category() const { return Patch::categoryEnum( optionalAt( CATEGORY_INDEX ) ); }
+    string HistoryLogPatchStateChange::oldstate() const { return optionalAt( OLDSTATE_INDEX ); }
+    string HistoryLogPatchStateChange::newstate() const { return optionalAt( NEWSTATE_INDEX ); }
+    std::string	HistoryLogPatchStateChange::userdata()	const { return optionalAt( USERDATA_INDEX ); }
 
   ///////////////////////////////////////////////////////////////////
   //	class HistoryLogDataRemove

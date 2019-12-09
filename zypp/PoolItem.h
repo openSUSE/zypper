@@ -104,6 +104,9 @@ namespace zypp
 
       /** Broken (needed) but locked patches. */
       bool isUnwanted() const;
+
+      std::string patchStatusAsString () const;
+
       //@}
 
       //@}

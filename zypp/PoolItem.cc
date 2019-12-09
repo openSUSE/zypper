@@ -100,6 +100,17 @@ namespace zypp
 	return isBroken() && status().isLocked();
       }
 
+      std::string patchStatusAsString() const
+      {
+        if ( isUndetermined() ) return "undetermined";
+        if ( isRelevant() )     return "relevant";
+        if ( isSatisfied() )    return "satisfied";
+        if ( isBroken() )       return "broken";
+        if ( isNeeded() )       return "needed";
+        if ( isUnwanted() )     return "unwanted";
+        return "none";
+      }
+
     private:
       mutable ResStatus     _status;
       ResObject::constPtr   _resolvable;
@@ -211,6 +222,8 @@ namespace zypp
   bool PoolItem::isBroken() const			{ return _pimpl->isBroken(); }
   bool PoolItem::isNeeded() const			{ return _pimpl->isNeeded(); }
   bool PoolItem::isUnwanted() const			{ return _pimpl->isUnwanted(); }
+  std::string PoolItem::patchStatusAsString() const     { return _pimpl->patchStatusAsString(); }
+
   void PoolItem::saveState() const			{ _pimpl->saveState(); }
   void PoolItem::restoreState() const			{ _pimpl->restoreState(); }
   bool PoolItem::sameState() const			{ return _pimpl->sameState(); }

@@ -122,6 +122,14 @@ namespace zypp
      * \param newrepo info about the new repository
      */
     void modifyRepository( const RepoInfo & oldrepo, const RepoInfo & newrepo );
+
+    /**
+     * Log state changes in patches
+     *
+     * \param oldstate info about the old state
+     */
+    void patchStateChange ( const PoolItem & pi, const std::string &oldstate );
+
   };
   ///////////////////////////////////////////////////////////////////
 
