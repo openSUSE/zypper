@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Mon Dec  9 10:22:56 CET 2019 - ma@suse.de
+
+- dup: fix removing orphaned packages dropped by to-be-installed
+  products (bsc#1155819)
+- version 17.18.1 (12)
+
+-------------------------------------------------------------------
 Thu Dec  5 14:23:52 CET 2019 - ma@suse.de
 
 - Resolver: add solution actions for SOLVER_SOLUTION_BLACK
