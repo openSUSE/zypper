@@ -108,7 +108,7 @@ bool Out::progressFilter()
 
 std::string Out::zyppExceptionReport(const Exception & e)
 {
-  return e.asUserString();
+  return e.asUserHistory();
 }
 
 void Out::searchResult( const Table & table_r )
