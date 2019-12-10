@@ -581,6 +581,10 @@ namespace zypp
      * @return 0 on success, errno on failure
      **/
     int assert_file( const Pathname & path, unsigned mode = 0644 );
+    /**
+     * Like \ref assert_file but enforce \a mode even if the file already exists.
+     */
+    int assert_file_mode( const Pathname & path, unsigned mode = 0644 );
 
     /**
      * Change file's modification and access times.

@@ -1149,6 +1149,33 @@ namespace zypp
       return logResult( 0 );
     }
 
+    int assert_file_mode( const Pathname & path, unsigned mode )
+    {
+      int ret = assert_dir( path.dirname() );
+      MIL << "assert_file_mode " << str::octstring( mode ) << " " << path;
+      if ( ret != 0 )
+        return logResult( ret );
+
+      PathInfo pi( path );
+      if ( pi.isExist() )
+      {
+	if ( ! pi.isFile() )
+	  return logResult( EEXIST );
+
+	mode = applyUmaskTo( mode );
+	if ( pi.st_mode() != mode )
+	  return chmod( path, mode );
+
+	return logResult( 0 );
+      }
+
+      int fd = ::creat( path.c_str(), mode );
+      if ( fd == -1 )
+        return logResult( errno );
+      ::close( fd );
+      return logResult( 0 );
+    }
+
     ///////////////////////////////////////////////////////////////////
     //
     //  METHOD NAME : touch
