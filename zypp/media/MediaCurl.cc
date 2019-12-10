@@ -847,6 +847,7 @@ void MediaCurl::setupEasy()
    *---------------------------------------------------------------*/
 
   _currentCookieFile = _cookieFile.asString();
+  filesystem::assert_file_mode( _currentCookieFile, 0600 );
   if ( str::strToBool( _url.getQueryParam( "cookies" ), true ) )
     SET_OPTION(CURLOPT_COOKIEFILE, _currentCookieFile.c_str() );
   else
