@@ -4788,7 +4788,7 @@ msgstr ""
 #. translators: command description
 #: src/commands/utils/purge-kernels.cc:30
 msgid ""
-"Autoremoves installed kernels accoring to list of kernels to keep from /etc/"
+"Autoremoves installed kernels according to list of kernels to keep from /etc/"
 "zypp/zypp.conf:multiversion.kernels which can be given as <version>, latest(-"
 "N), running, oldest(+N)."
 msgstr ""
