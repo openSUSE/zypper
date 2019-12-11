@@ -27,7 +27,7 @@ PurgeKernelsCmd::PurgeKernelsCmd(std::vector<std::string> &&commandAliases_r) :
     // translators: command summary: targetos, tos
     _("Remove old kernels."),
     // translators: command description
-    _("Autoremoves installed kernels accoring to list of kernels to keep from /etc/zypp/zypp.conf:multiversion.kernels which can be given as <version>, latest(-N), running, oldest(+N)."),
+    _("Autoremoves installed kernels according to list of kernels to keep from /etc/zypp/zypp.conf:multiversion.kernels which can be given as <version>, latest(-N), running, oldest(+N)."),
     ResetRepoManager | InitTarget | LoadTargetResolvables | Resolve
     )
 { }
