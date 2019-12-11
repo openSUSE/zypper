@@ -512,8 +512,7 @@ static const char *const agentString()
   // is guessed.
   static const std::string _value(
     str::form(
-       "ZYpp %s (curl %s) %s"
-       , VERSION
+       "ZYpp " LIBZYPP_VERSION_STRING " (curl %s) %s"
        , curl_version_info(CURLVERSION_NOW)->version
        , Target::targetDistribution( Pathname()/*guess root*/ ).c_str()
     )

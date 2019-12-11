@@ -10,3 +10,4 @@ build
 .settings
 *flymake.h.gch
 CMakeLists.txt.user*
+zypp/APIConfig.h

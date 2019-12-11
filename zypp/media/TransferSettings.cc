@@ -137,8 +137,7 @@ void TransferSettings::setPassword( const std::string &password )
 void TransferSettings::setAnonymousAuth()
 {
     setUsername("anonymous");
-    string id = "yast@";
-    setPassword(id + VERSION);
+    setPassword("yast@" LIBZYPP_VERSION_STRING);
 }
 
 std::string TransferSettings::password() const

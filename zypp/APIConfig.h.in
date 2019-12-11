@@ -14,6 +14,24 @@
 
 #include "zypp/base/Easy.h"	// some macros used almost everywhere
 
+#define LIBZYPP_VERSION_STRING "@VERSION@"
+#define LIBZYPP_VERSION_MAJOR  @LIBZYPP_MAJOR@
+#define LIBZYPP_VERSION_MINOR  @LIBZYPP_MINOR@
+#define LIBZYPP_VERSION_PATCH  @LIBZYPP_PATCH@
+#define LIBZYPP_SOVERSION      @LIBZYPP_SO_FIRST@
+#define LIBZYPP_VERSION        @LIBZYPP_NUMVERSION@
+
+/**
+ * Legacy code we still support.
+ *
+ * Deprecated items we can't drop immediately because YAST/PK still
+ * refer to them or they break binary compatibility, should be
+ * enclosed in `#if LEGACY(#)` where # is either a minor number(<=99),
+ * a soversion [<=9999] or numversion [<=999999].
+ *
+ */
+#define LEGACY(CL) ( CL < 100 && LIBZYPP_VERSION_MAJOR <= CL ) || ( CL < 10000 && LIBZYPP_SOVERSION <= CL ) || LIBZYPP_VERSION <= CL
+
 /**
  * Generic helper definitions for shared library support.
  *
@@ -33,7 +51,7 @@
 #if __GNUC__ >= 4
   #define ZYPP_DECL_EXPORT __attribute__ ((visibility ("default")))
   #define ZYPP_DECL_IMPORT __attribute__ ((visibility ("default")))
-  #define ZYPP_DECL_HIDDEN  __attribute__ ((visibility ("hidden")))
+  #define ZYPP_DECL_HIDDEN __attribute__ ((visibility ("hidden")))
 #else
   #define ZYPP_DECL_EXPORT
   #define ZYPP_DECL_IMPORT
