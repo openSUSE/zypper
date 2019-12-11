@@ -305,135 +305,146 @@ namespace zypp {
  */
 void fillSettingsFromUrl( const Url &url, TransferSettings &s )
 {
-    std::string param(url.getQueryParam("timeout"));
-    if( !param.empty())
+  {
+    const std::string & param { url.getQueryParam("timeout") };
+    if( ! param.empty() )
     {
       long num = str::strtonum<long>(param);
-      if( num >= 0 && num <= TRANSFER_TIMEOUT_MAX)
-          s.setTimeout(num);
+      if( num >= 0 && num <= TRANSFER_TIMEOUT_MAX )
+	s.setTimeout( num );
     }
-
-    if ( ! url.getUsername().empty() )
+  }
+  {
+    std::string param { url.getUsername() };
+    if ( ! param.empty() )
     {
-        s.setUsername(url.getUsername());
-        if ( url.getPassword().size() )
-            s.setPassword(url.getPassword());
+      s.setUsername( std::move(param) );
+      param = url.getPassword();
+      if ( ! param.empty() )
+	s.setPassword( std::move(param) );
     }
     else
     {
-        // if there is no username, set anonymous auth
-        if ( ( url.getScheme() == "ftp" || url.getScheme() == "tftp" ) && s.username().empty() )
-            s.setAnonymousAuth();
+      // if there is no username, set anonymous auth
+      if ( ( url.getScheme() == "ftp" || url.getScheme() == "tftp" ) && s.username().empty() )
+	s.setAnonymousAuth();
     }
+  }
+  if ( url.getScheme() == "https" )
+  {
+    s.setVerifyPeerEnabled( false );
+    s.setVerifyHostEnabled( false );
 
-    if ( url.getScheme() == "https" )
+    const std::string & verify { url.getQueryParam("ssl_verify") };
+    if( verify.empty() || verify == "yes" )
     {
-        s.setVerifyPeerEnabled(false);
-        s.setVerifyHostEnabled(false);
-
-        std::string verify( url.getQueryParam("ssl_verify"));
-        if( verify.empty() ||
-            verify == "yes")
-        {
-            s.setVerifyPeerEnabled(true);
-            s.setVerifyHostEnabled(true);
-        }
-        else if( verify == "no")
-        {
-            s.setVerifyPeerEnabled(false);
-            s.setVerifyHostEnabled(false);
-        }
-        else
-        {
-            std::vector<std::string>                 flags;
-            std::vector<std::string>::const_iterator flag;
-            str::split( verify, std::back_inserter(flags), ",");
-            for(flag = flags.begin(); flag != flags.end(); ++flag)
-            {
-                if( *flag == "host")
-                    s.setVerifyHostEnabled(true);
-                else if( *flag == "peer")
-                    s.setVerifyPeerEnabled(true);
-                else
-                    ZYPP_THROW(MediaBadUrlException(url, "Unknown ssl_verify flag"));
-            }
-        }
+      s.setVerifyPeerEnabled( true );
+      s.setVerifyHostEnabled( true );
     }
-
-    Pathname ca_path( url.getQueryParam("ssl_capath") );
-    if( ! ca_path.empty())
+    else if ( verify == "no" )
     {
-        if( !PathInfo(ca_path).isDir() || ! ca_path.absolute())
-            ZYPP_THROW(MediaBadUrlException(url, "Invalid ssl_capath path"));
-        else
-            s.setCertificateAuthoritiesPath(ca_path);
+      s.setVerifyPeerEnabled( false );
+      s.setVerifyHostEnabled( false );
     }
-
-    Pathname client_cert( url.getQueryParam("ssl_clientcert") );
-    if( ! client_cert.empty())
+    else
     {
-        if( !PathInfo(client_cert).isFile() || !client_cert.absolute())
-            ZYPP_THROW(MediaBadUrlException(url, "Invalid ssl_clientcert file"));
-        else
-            s.setClientCertificatePath(client_cert);
+      std::vector<std::string> flags;
+      str::split( verify, std::back_inserter(flags), "," );
+      for ( const auto & flag : flags )
+      {
+	if ( flag == "host" )
+	  s.setVerifyHostEnabled( true );
+	else if ( flag == "peer" )
+	  s.setVerifyPeerEnabled( true );
+	else
+	  ZYPP_THROW(MediaBadUrlException(url, "Unknown ssl_verify flag "+flag));
+      }
     }
-    Pathname client_key( url.getQueryParam("ssl_clientkey") );
-    if( ! client_key.empty())
+  }
+  {
+    Pathname ca_path { url.getQueryParam("ssl_capath") };
+    if( ! ca_path.empty() )
     {
-        if( !PathInfo(client_key).isFile() || !client_key.absolute())
-            ZYPP_THROW(MediaBadUrlException(url, "Invalid ssl_clientkey file"));
-        else
-            s.setClientKeyPath(client_key);
+      if( ! PathInfo(ca_path).isDir() || ! ca_path.absolute() )
+	ZYPP_THROW(MediaBadUrlException(url, "Invalid ssl_capath path"));
+      else
+	s.setCertificateAuthoritiesPath( std::move(ca_path) );
     }
-
-    param = url.getQueryParam( "proxy" );
+  }
+  {
+    Pathname client_cert { url.getQueryParam("ssl_clientcert") };
+    if( ! client_cert.empty() )
+    {
+      if( ! PathInfo(client_cert).isFile() || ! client_cert.absolute() )
+	ZYPP_THROW(MediaBadUrlException(url, "Invalid ssl_clientcert file"));
+      else
+	s.setClientCertificatePath( std::move(client_cert) );
+    }
+  }
+  {
+    Pathname client_key { url.getQueryParam("ssl_clientkey") };
+    if( ! client_key.empty() )
+    {
+      if( ! PathInfo(client_key).isFile() || ! client_key.absolute() )
+	ZYPP_THROW(MediaBadUrlException(url, "Invalid ssl_clientkey file"));
+      else
+	s.setClientKeyPath( std::move(client_key) );
+    }
+  }
+  {
+    std::string param { url.getQueryParam( "proxy" ) };
     if ( ! param.empty() )
     {
-        if ( param == EXPLICITLY_NO_PROXY ) {
-	    // Workaround TransferSettings shortcoming: With an
-	    // empty proxy string, code will continue to look for
-	    // valid proxy settings. So set proxy to some non-empty
-	    // string, to indicate it has been explicitly disabled.
-	    s.setProxy(EXPLICITLY_NO_PROXY);
-            s.setProxyEnabled(false);
-        }
-        else {
-            string proxyport( url.getQueryParam( "proxyport" ) );
-            if ( ! proxyport.empty() ) {
-                param += ":" + proxyport;
-            }
-            s.setProxy(param);
-            s.setProxyEnabled(true);
-        }
-    }
-
-    param = url.getQueryParam( "proxyuser" );
-    if ( ! param.empty() )
-    {
-      s.setProxyUsername(param);
-      s.setProxyPassword(url.getQueryParam( "proxypass" ));
-    }
-
-    // HTTP authentication type
-    param = url.getQueryParam("auth");
-    if (!param.empty() && (url.getScheme() == "http" || url.getScheme() == "https"))
-    {
-        try
-        {
-	    CurlAuthData::auth_type_str2long(param);	// check if we know it
-        }
-        catch (MediaException & ex_r)
-	{
-	    DBG << "Rethrowing as MediaUnauthorizedException.";
-	    ZYPP_THROW(MediaUnauthorizedException(url, ex_r.msg(), "", ""));
+      if ( param == EXPLICITLY_NO_PROXY ) {
+	// Workaround TransferSettings shortcoming: With an
+	// empty proxy string, code will continue to look for
+	// valid proxy settings. So set proxy to some non-empty
+	// string, to indicate it has been explicitly disabled.
+	s.setProxy(EXPLICITLY_NO_PROXY);
+	s.setProxyEnabled(false);
+      }
+      else {
+	const string & proxyport { url.getQueryParam( "proxyport" ) };
+	if ( ! proxyport.empty() ) {
+	  param += ":";
+	  param += proxyport;
 	}
-        s.setAuthType(param);
+	s.setProxy( std::move(param) );
+	s.setProxyEnabled( true );
+      }
     }
-
+  }
+  {
+    std::string param { url.getQueryParam( "proxyuser" ) };
+    if ( ! param.empty() )
+    {
+      s.setProxyUsername( std::move(param) );
+      s.setProxyPassword( url.getQueryParam( "proxypass" ) );
+    }
+  }
+  {
+    // HTTP authentication type
+    std::string param { url.getQueryParam("auth") };
+    if ( ! param.empty() && (url.getScheme() == "http" || url.getScheme() == "https") )
+    {
+      try
+      {
+	CurlAuthData::auth_type_str2long (param );	// check if we know it
+      }
+      catch ( const MediaException & ex_r )
+      {
+	DBG << "Rethrowing as MediaUnauthorizedException.";
+	ZYPP_THROW(MediaUnauthorizedException(url, ex_r.msg(), "", ""));
+      }
+      s.setAuthType( std::move(param) );
+    }
+  }
+  {
     // workarounds
-    param = url.getQueryParam("head_requests");
-    if( !param.empty() && param == "no" )
-        s.setHeadRequestsAllowed(false);
+    const std::string & param { url.getQueryParam("head_requests") };
+    if( ! param.empty() && param == "no" )
+      s.setHeadRequestsAllowed( false );
+  }
 }
 
 /**

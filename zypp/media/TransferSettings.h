@@ -11,275 +11,186 @@
 
 namespace zypp
 {
-namespace media
-{
+  namespace media
+  {
 
-/**
- * Holds transfer setting
- */
-class TransferSettings
-{
-public:
-  /**
-   * Constructs a transfer program cmd line access.
-   */
-  TransferSettings();
+    /**
+     * Holds transfer setting
+     */
+    class TransferSettings
+    {
+    public:
+      /** Constructs a transfer program cmd line access. */
+      TransferSettings();
 
-  /**
-   * Constructs the settings from a url object where.
-   * authentication/proxy  information can be extracted
-   * from the url
-   */
-  TransferSettings( const zypp::Url &url );
+      typedef std::vector<std::string> Headers;
 
-  typedef std::vector<std::string> Headers;
+      /** reset the settings to the defaults */
+      void reset();
 
-  /**
-   * reset the settings to the defaults
-   */
-  void reset();
 
-  /**
-   * add a header, on the form "Foo: Bar"
-   */
-  void addHeader( const std::string &header );
+      /** add a header, on the form "Foo: Bar" */
+      void addHeader( std::string && val_r );
 
-  /**
-   * begin iterators to additional headers
-   */
-  Headers::const_iterator headersBegin() const;
+      /** begin iterators to additional headers */
+      Headers::const_iterator headersBegin() const;
 
-  /**
-   * end iterators to additional headers
-   */
-  Headers::const_iterator headersEnd() const;
+      /** end iterators to additional headers */
+      Headers::const_iterator headersEnd() const;
 
-  /**
-   * sets the user agent ie: "Mozilla v3"
-   */
-  void setUserAgentString( const std::string &agent );
 
-  /**
-   * user agent string
-   */
-  std::string userAgentString() const;
+      /** sets the user agent ie: "Mozilla v3" */
+      void setUserAgentString( std::string && val_r );
 
-  /**
-   * sets the auth username
-   */
-  void setUsername( const std::string &username );
+      /** user agent string */
+      std::string userAgentString() const;
 
-  /**
-   * auth username
-   */
-  std::string username() const;
 
-  /**
-   * sets the auth password
-   */
-  void setPassword( const std::string &password );
+      /** sets the auth username */
+      void setUsername( std::string && val_r );
 
-  /**
-   * auth password
-   */
-  std::string password() const;
+      /** auth username */
+      std::string username() const;
 
-  /**
-   * returns the user and password as
-   * a user:pass string
-   */
-  std::string userPassword() const;
+      /** sets the auth password */
+      void setPassword( std::string && val_r );
 
-  /**
-   * sets anonymous authentication (ie: for ftp)
-   */
-  void setAnonymousAuth();
+      /** auth password */
+      std::string password() const;
 
-  /**
-   * whether the proxy is used or not
-   */
-  void setProxyEnabled( bool enabled );
+      /** returns the user and password as a user:pass string */
+      std::string userPassword() const;
 
-  /**
-   * proxy is enabled
-   */
-  bool proxyEnabled() const;
+      /** sets anonymous authentication (ie: for ftp) */
+      void setAnonymousAuth();
 
-  /**
-   * proxy to use if it is enabled
-   */
-  void setProxy( const std::string &proxyhost );
 
-  /**
-   * proxy host
-   */
-  std::string proxy() const;
+      /** whether the proxy is used or not */
+      void setProxyEnabled( bool enabled );
 
-  /**
-   * sets the proxy user
-   */
-  void setProxyUsername( const std::string &proxyuser );
+      /** proxy is enabled */
+      bool proxyEnabled() const;
 
-  /**
-   * proxy auth username
-   */
-  std::string proxyUsername() const;
 
-  /**
-   * sets the proxy password
-   */
-  void setProxyPassword( const std::string &proxypass );
+      /** proxy to use if it is enabled */
+      void setProxy( std::string && val_r );
 
-  /**
-   * proxy auth password
-   */
-  std::string proxyPassword() const;
+      /** proxy host */
+      std::string proxy() const;
 
-  /**
-   * returns the proxy user and password as
-   * a user:pass string
-   */
-  std::string proxyUserPassword() const;
 
-  /**
-   * set the connect timeout
-   */
-  void setConnectTimeout( long t );
+      /** sets the proxy user */
+      void setProxyUsername( std::string && val_r );
 
-  /**
-   * connection timeout
-   */
-  long connectTimeout() const;
+      /** proxy auth username */
+      std::string proxyUsername() const;
 
-  /**
-   * set the transfer timeout
-   */
-  void setTimeout( long t );
+      /** sets the proxy password */
+      void setProxyPassword( std::string && val_r );
 
-  /**
-   * transfer timeout
-   */
-  long timeout() const;
+      /** proxy auth password */
+      std::string proxyPassword() const;
 
-  /**
-   * Maximum number of concurrent connections for a single transfer
-   */
-  long maxConcurrentConnections() const;
+      /** returns the proxy user and password as a user:pass string */
+      std::string proxyUserPassword() const;
 
-  /**
-   * Set maximum number of concurrent connections for a single transfer
-   */
-  void setMaxConcurrentConnections(long v);
 
-  /**
-   * Minimum download speed (bytes per second)
-   * until the connection is dropped
-   */
-  long minDownloadSpeed() const;
+      /** set the connect timeout */
+      void setConnectTimeout( long t );
 
-  /**
-   * Set minimum download speed (bytes per second)
-   * until the connection is dropped
-   */
-  void setMinDownloadSpeed(long v);
+      /** connection timeout */
+      long connectTimeout() const;
 
-  /**
-   * Maximum download speed (bytes per second)
-   */
-  long maxDownloadSpeed() const;
 
-  /**
-   * Set max download speed (bytes per second)
-   */
-  void setMaxDownloadSpeed(long v);
+      /** set the transfer timeout */
+      void setTimeout( long t );
 
-  /**
-   * Maximum silent retries
-   */
-  long maxSilentTries() const;
+      /** transfer timeout */
+      long timeout() const;
 
-  /**
-   * Set maximum silent retries
-   */
-  void setMaxSilentTries(long v);
 
-  /**
-   * Whether to verify host for ssl
-   */
-  bool verifyHostEnabled() const;
+      /** Set maximum number of concurrent connections for a single transfer */
+      void setMaxConcurrentConnections(long v);
 
-  /**
-   * Sets whether to verify host for ssl
-   */
-  void setVerifyHostEnabled( bool enabled );
+      /** Maximum number of concurrent connections for a single transfer */
+      long maxConcurrentConnections() const;
 
-  /**
-   * Whether to verify peer for ssl
-   */
-  bool verifyPeerEnabled() const;
 
-  /**
-   * Sets whether to verify host for ssl
-   */
-  void setVerifyPeerEnabled( bool enabled );
+      /** Set minimum download speed (bytes per second) until the connection is dropped */
+      void setMinDownloadSpeed(long v);
 
-  /**
-   * SSL certificate authorities path
-   * ( default: /etc/ssl/certs )
-   */
-  Pathname certificateAuthoritiesPath() const;
+      /** Minimum download speed (bytes per second) until the connection is dropped */
+      long minDownloadSpeed() const;
 
-  /**
-   * Sets the SSL certificate authorities path
-   */
-  void setCertificateAuthoritiesPath( const zypp::Pathname &path );
 
-  /**
-   * set the allowed authentication types
-   */
-  void setAuthType( const std::string &authtype );
+      /** Set max download speed (bytes per second) */
+      void setMaxDownloadSpeed(long v);
 
-  /**
-   * get the allowed authentication types
-   */
-  std::string authType() const;
+      /** Maximum download speed (bytes per second) */
+      long maxDownloadSpeed() const;
 
-  /**
-   * set whether HEAD requests are allowed
-   */
-  void setHeadRequestsAllowed(bool allowed);
 
-  /**
-   * whether HEAD requests are allowed
-   */
-  bool headRequestsAllowed() const;
+      /** Set maximum silent retries */
+      void setMaxSilentTries(long v);
 
-  /**
-   * SSL client certificate file
-   */
-  Pathname clientCertificatePath() const;
+      /** Maximum silent retries */
+      long maxSilentTries() const;
 
-  /**
-   * Sets the SSL client certificate file
-   */
-  void setClientCertificatePath( const zypp::Pathname &path );
 
-  /**
-   * SSL client key file
-   */
-  Pathname clientKeyPath() const;
+      /** Sets whether to verify host for ssl */
+      void setVerifyHostEnabled( bool enabled );
 
-  /**
-   * Sets the SSL client key file
-   */
-  void setClientKeyPath( const zypp::Pathname &path );
+      /** Whether to verify host for ssl */
+      bool verifyHostEnabled() const;
 
-protected:
-  class Impl;
-  RWCOW_pointer<Impl> _impl;
-};
 
-} // ns media
-} // ns zypp
+      /** Sets whether to verify host for ssl */
+      void setVerifyPeerEnabled( bool enabled );
+
+      /** Whether to verify peer for ssl */
+      bool verifyPeerEnabled() const;
+
+
+      /** Sets the SSL certificate authorities path */
+      void setCertificateAuthoritiesPath( Pathname && val_r );
+
+      /** SSL certificate authorities path ( default: /etc/ssl/certs ) */
+      Pathname certificateAuthoritiesPath() const;
+
+
+      /** set the allowed authentication types */
+      void setAuthType( std::string && val_r );
+
+      /** get the allowed authentication types */
+      std::string authType() const;
+
+
+      /** set whether HEAD requests are allowed */
+      void setHeadRequestsAllowed(bool allowed);
+
+      /** whether HEAD requests are allowed */
+      bool headRequestsAllowed() const;
+
+
+      /** Sets the SSL client certificate file */
+      void setClientCertificatePath( Pathname && val_r );
+
+      /** SSL client certificate file */
+      Pathname clientCertificatePath() const;
+
+
+      /** Sets the SSL client key file */
+      void setClientKeyPath( Pathname && val_r );
+
+      /** SSL client key file */
+      Pathname clientKeyPath() const;
+
+    protected:
+      class Impl;
+      RWCOW_pointer<Impl> _impl;
+    };
+
+  } // namespace media
+} // namespece zypp
 
 #endif

@@ -171,13 +171,12 @@ MediaAccess::open (const Url& o_url, const Pathname & preferred_attach_point)
 	else
             curl = new MediaCurl (url,preferred_attach_point);
 
-        UrlResolverPlugin::HeaderList::const_iterator it;
-        for (it = custom_headers.begin();
-             it != custom_headers.end();
-             ++it) {
-            std::string header = it->first + ": " + it->second;
+        for ( const auto & el : custom_headers ) {
+            std::string header { el.first };
+	    header += ": ";
+	    header += el.second;
             MIL << "Added custom header -> " << header << endl;
-            curl->settings().addHeader(header);
+            curl->settings().addHeader( std::move(header) );
         }
         _handler = curl;
     }
