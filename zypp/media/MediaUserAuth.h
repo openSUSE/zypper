@@ -120,8 +120,8 @@ public:
     _auth_type_str = auth_type_long2str(auth_type);
   }
 
-  long authType() { return _auth_type; } const
-  std::string authTypeAsString() { return _auth_type_str; } const
+  long authType() const { return _auth_type; }
+  std::string authTypeAsString() const { return _auth_type_str; }
 
   std::string getUserPwd() const { return username() + ":" + password(); }
 
