@@ -638,7 +638,6 @@ SET( zypp_target_rpm_SRCS
   target/rpm/RpmException.cc
   target/rpm/RpmHeader.cc
   target/rpm/librpmDb.cc
-  target/rpm/librpmDb.cv3.cc
 )
 
 SET( zypp_target_rpm_HEADERS

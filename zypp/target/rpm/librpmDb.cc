@@ -517,8 +517,6 @@ librpmDb::DbDirInfo::DbDirInfo( const Pathname & root_r, const Pathname & dbPath
   {
     _dbDir   ( _root + _dbPath );
     _dbV4    ( _dbDir.path() + "Packages" );
-    _dbV3    ( _dbDir.path() + "packages.rpm" );
-    _dbV3ToV4( _dbDir.path() + "packages.rpm3" );
     DBG << *this << endl;
   }
 }
@@ -533,8 +531,6 @@ void librpmDb::DbDirInfo::restat()
 {
   _dbDir();
   _dbV4();
-  _dbV3();
-  _dbV3ToV4();
   DBG << *this << endl;
 }
 
@@ -555,8 +551,6 @@ std::ostream & operator<<( std::ostream & str, const librpmDb::DbDirInfo & obj )
     str << "'(" << obj.root() << ")" << obj.dbPath() << "':" << endl;
     str << "  Dir:    " << obj._dbDir << endl;
     str << "  V4:     " << obj._dbV4 << endl;
-    str << "  V3:     " << obj._dbV3 << endl;
-    str << "  V3ToV4: " << obj._dbV3ToV4;
   }
   return str;
 }

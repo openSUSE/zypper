@@ -350,16 +350,6 @@ private:
    **/
   PathInfo _dbV4;
 
-  /**
-   * rpmV3 database (_dbDir/packages.rpm)
-   **/
-  PathInfo _dbV3;
-
-  /**
-   * rpmV3 database backup created on conversion to rpmV4 (_dbDir/packages.rpm3)
-   **/
-  PathInfo _dbV3ToV4;
-
 public:
 
   /**
@@ -400,22 +390,6 @@ public:
   const PathInfo & dbV4() const
   {
     return _dbV4;
-  }
-
-  /**
-   * rpmV3 database (_dbDir/packages.rpm)
-   **/
-  const PathInfo & dbV3() const
-  {
-    return _dbV3;
-  }
-
-  /**
-   * rpmV3 database backup created on conversion to rpmV4 (_dbDir/packages.rpm3)
-   **/
-  const PathInfo & dbV3ToV4() const
-  {
-    return _dbV3ToV4;
   }
 
 public:
@@ -460,21 +434,6 @@ public:
     return _dbV4.isFile();
   }
 
-  /**
-   * Whether dbV3 file exists.
-   **/
-  bool hasDbV3() const
-  {
-    return _dbV3.isFile();
-  }
-
-  /**
-   * Whether dbV3ToV4 file exists.
-   **/
-  bool hasDbV3ToV4() const
-  {
-    return _dbV3ToV4.isFile();
-  }
 };
 
 ///////////////////////////////////////////////////////////////////

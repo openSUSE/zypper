@@ -626,40 +626,35 @@ namespace zypp
         ) {}
       };
 
+#if LEGACY(17)
       // progress for converting the database
-      struct ConvertDBReport : public callback::ReportBase
+      /// \deprecated Still used by y2-bindings in Code15 (libyzpp major 17)
+      struct ZYPP_DEPRECATED ConvertDBReport : public callback::ReportBase
       {
         enum Action {
           ABORT,  // abort and return error
-          RETRY,	// retry
-	  IGNORE	// ignore the failure
+          RETRY,  // retry
+	  IGNORE  // ignore the failure
         };
 
         enum Error {
 	  NO_ERROR,
-	  FAILED		// conversion failed
+	  FAILED // conversion failed
         };
 
-        virtual void start(
-	  Pathname /*path*/
-        ) {}
+        virtual void start( Pathname /*path*/ )
+	{}
 
-        virtual bool progress(int /*value*/, Pathname /*path*/)
+        virtual bool progress( int/*value*/, Pathname/*path*/ )
         { return true; }
 
-        virtual Action problem(
-	  Pathname /*path*/
-  	  , Error /*error*/
-  	 , const std::string &/*description*/
-        ) { return ABORT; }
+        virtual Action problem( Pathname/*path*/, Error/*error*/, const std::string &/*description*/ )
+	{ return ABORT; }
 
-        virtual void finish(
-	  Pathname /*path*/
-          , Error /*error*/
-          , const std::string &/*reason*/
-        ) {}
+        virtual void finish( Pathname/*path*/, Error/*error*/, const std::string &/*reason*/ )
+	{}
       };
-
+#endif
       /////////////////////////////////////////////////////////////////
     } // namespace rpm
     ///////////////////////////////////////////////////////////////////

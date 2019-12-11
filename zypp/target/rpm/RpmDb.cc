@@ -201,11 +201,6 @@ std::ostream & operator<<( std::ostream & str, const RpmDb::DbStateInfoBits & ob
     str << "V4(";
     ENUM_OUT( DbSI_HAVE_V4,	'X' );
     ENUM_OUT( DbSI_MADE_V4,	'c' );
-    ENUM_OUT( DbSI_MODIFIED_V4,	'm' );
-    str << ")V3(";
-    ENUM_OUT( DbSI_HAVE_V3,	'X' );
-    ENUM_OUT( DbSI_HAVE_V3TOV4,	'B' );
-    ENUM_OUT( DbSI_MADE_V3TOV4,	'c' );
     str << ")";
 #undef ENUM_OUT
   }
@@ -298,11 +293,6 @@ std::ostream & RpmDb::dumpOn( std::ostream & str ) const
     str << "V4(";
     ENUM_OUT( DbSI_HAVE_V4,	'X' );
     ENUM_OUT( DbSI_MADE_V4,	'c' );
-    ENUM_OUT( DbSI_MODIFIED_V4,	'm' );
-    str << ")V3(";
-    ENUM_OUT( DbSI_HAVE_V3,	'X' );
-    ENUM_OUT( DbSI_HAVE_V3TOV4,	'B' );
-    ENUM_OUT( DbSI_MADE_V3TOV4,	'c' );
     str << "): " << stringPath( _root, _dbPath );
 #undef ENUM_OUT
   }
@@ -385,30 +375,11 @@ void RpmDb::initDatabase( Pathname root_r, Pathname dbPath_r, bool doRebuild_r )
 
     if ( dbsi_has( info, DbSI_MADE_V4 ) )
     {
-      // remove the newly created rpm4 database and
-      // any backup created on conversion.
-      removeV4( root_r + dbPath_r, dbsi_has( info, DbSI_MADE_V3TOV4 ) );
+      // remove the newly created rpm4 database.
+      removeV4( root_r + dbPath_r );
     }
     ZYPP_RETHROW(excpt_r);
   }
-  if ( dbsi_has( info, DbSI_HAVE_V3 ) )
-  {
-    if ( root_r == "/" || dbsi_has( info, DbSI_MODIFIED_V4 ) )
-    {
-      // Move obsolete rpm3 database beside.
-      MIL << "Cleanup: state " << info << endl;
-      removeV3( root_r + dbPath_r, dbsi_has( info, DbSI_MADE_V3TOV4 ) );
-      dbsi_clr( info, DbSI_HAVE_V3 );
-    }
-    else
-    {
-      // Performing an update: Keep the original rpm3 database
-      // and wait if the rpm4 database gets modified by installing
-      // or removing packages. Cleanup in modifyDatabase or closeDatabase.
-      MIL << "Update mode: Cleanup delayed until closeOldDatabase." << endl;
-    }
-  }
-#warning CHECK: notify root about conversion backup.
 
   _root   = root_r;
   _dbPath = dbPath_r;
@@ -472,15 +443,6 @@ void RpmDb::internal_initDatabase( const Pathname & root_r, const Pathname & dbP
     MIL << "Creating new rpm4 database in " << dbInfo.dbDir() << endl;
   }
 
-  if ( dbInfo.hasDbV3() )
-  {
-    dbsi_set( info_r, DbSI_HAVE_V3 );
-  }
-  if ( dbInfo.hasDbV3ToV4() )
-  {
-    dbsi_set( info_r, DbSI_HAVE_V3TOV4 );
-  }
-
   DBG << "Initial state: " << info_r << ": " << stringPath( root_r, dbPath_r );
   librpmDb::dumpState( DBG ) << endl;
 
@@ -514,50 +476,6 @@ void RpmDb::internal_initDatabase( const Pathname & root_r, const Pathname & dbP
   {
     MIL << "Empty rpm4 database "  << dbInfo.dbV4() << endl;
   }
-
-  if ( dbInfo.hasDbV3() )
-  {
-    MIL << "Found rpm3 database " << dbInfo.dbV3() << endl;
-
-    if ( dbEmpty )
-    {
-      extern void convertV3toV4( const Pathname & v3db_r, const librpmDb::constPtr & v4db_r );
-      convertV3toV4( dbInfo.dbV3().path(), dbptr );
-
-      // create a backup copy
-      int res = filesystem::copy( dbInfo.dbV3().path(), dbInfo.dbV3ToV4().path() );
-      if ( res )
-      {
-        WAR << "Backup converted rpm3 database failed: error(" << res << ")" << endl;
-      }
-      else
-      {
-        dbInfo.restat();
-        if ( dbInfo.hasDbV3ToV4() )
-        {
-          MIL << "Backup converted rpm3 database: " << dbInfo.dbV3ToV4() << endl;
-          dbsi_set( info_r, DbSI_HAVE_V3TOV4 | DbSI_MADE_V3TOV4 );
-        }
-      }
-
-    }
-    else
-    {
-
-      WAR << "Non empty rpm3 and rpm4 database found: using rpm4" << endl;
-      // set DbSI_MODIFIED_V4 as it's not a temporary which can be removed.
-      dbsi_set( info_r, DbSI_MODIFIED_V4 );
-
-    }
-
-    DBG << "Convert state: " << info_r << ": " << stringPath( root_r, dbPath_r );
-    librpmDb::dumpState( DBG ) << endl;
-  }
-
-  if ( dbInfo.hasDbV3ToV4() )
-  {
-    MIL << "Rpm3 database backup: " << dbInfo.dbV3ToV4() << endl;
-  }
 }
 
 ///////////////////////////////////////////////////////////////////
@@ -566,32 +484,8 @@ void RpmDb::internal_initDatabase( const Pathname & root_r, const Pathname & dbP
 //	METHOD NAME : RpmDb::removeV4
 //	METHOD TYPE : void
 //
-void RpmDb::removeV4( const Pathname & dbdir_r, bool v3backup_r )
+void RpmDb::removeV4( const Pathname & dbdir_r )
 {
-  const char * v3backup = "packages.rpm3";
-  const char * master = "Packages";
-  const char * index[] =
-    {
-      "Basenames",
-      "Conflictname",
-      "Depends",
-      "Dirnames",
-      "Filemd5s",
-      "Group",
-      "Installtid",
-      "Name",
-      "Providename",
-      "Provideversion",
-      "Pubkeys",
-      "Requirename",
-      "Requireversion",
-      "Sha1header",
-      "Sigmd5",
-      "Triggername",
-      // last entry!
-      NULL
-    };
-
   PathInfo pi( dbdir_r );
   if ( ! pi.isDir() )
   {
@@ -599,120 +493,8 @@ void RpmDb::removeV4( const Pathname & dbdir_r, bool v3backup_r )
     return;
   }
 
-  for ( const char ** f = index; *f; ++f )
-  {
-    pi( dbdir_r + *f );
-    if ( pi.isFile() )
-    {
-      filesystem::unlink( pi.path() );
-    }
-  }
-
-  pi( dbdir_r + master );
-  if ( pi.isFile() )
-  {
-    MIL << "Removing rpm4 database " << pi << endl;
-    filesystem::unlink( pi.path() );
-  }
-
-  if ( v3backup_r )
-  {
-    pi( dbdir_r + v3backup );
-    if ( pi.isFile() )
-    {
-      MIL << "Removing converted rpm3 database backup " << pi << endl;
-      filesystem::unlink( pi.path() );
-    }
-  }
-}
-
-///////////////////////////////////////////////////////////////////
-//
-//
-//	METHOD NAME : RpmDb::removeV3
-//	METHOD TYPE : void
-//
-void RpmDb::removeV3( const Pathname & dbdir_r, bool v3backup_r )
-{
-  const char * master = "packages.rpm";
-  const char * index[] =
-    {
-      "conflictsindex.rpm",
-      "fileindex.rpm",
-      "groupindex.rpm",
-      "nameindex.rpm",
-      "providesindex.rpm",
-      "requiredby.rpm",
-      "triggerindex.rpm",
-      // last entry!
-      NULL
-    };
-
-  PathInfo pi( dbdir_r );
-  if ( ! pi.isDir() )
-  {
-    ERR << "Can't remove rpm3 database in non directory: " << dbdir_r << endl;
-    return;
-  }
-
-  for ( const char ** f = index; *f; ++f )
-  {
-    pi( dbdir_r + *f );
-    if ( pi.isFile() )
-    {
-      filesystem::unlink( pi.path() );
-    }
-  }
-
-#warning CHECK: compare vs existing v3 backup. notify root
-  pi( dbdir_r + master );
-  if ( pi.isFile() )
-  {
-    Pathname m( pi.path() );
-    if ( v3backup_r )
-    {
-      // backup was already created
-      filesystem::unlink( m );
-      Pathname b( m.extend( "3" ) );
-      pi( b ); // stat backup
-    }
-    else
-    {
-      Pathname b( m.extend( ".deleted" ) );
-      pi( b );
-      if ( pi.isFile() )
-      {
-        // rempve existing backup
-        filesystem::unlink( b );
-      }
-      filesystem::rename( m, b );
-      pi( b ); // stat backup
-    }
-    MIL << "(Re)moved rpm3 database to " << pi << endl;
-  }
-}
-
-///////////////////////////////////////////////////////////////////
-//
-//
-//	METHOD NAME : RpmDb::modifyDatabase
-//	METHOD TYPE : void
-//
-void RpmDb::modifyDatabase()
-{
-  if ( ! initialized() )
-    return;
-
-  // tag database as modified
-  dbsi_set( _dbStateInfo, DbSI_MODIFIED_V4 );
-
-  // Move outdated rpm3 database beside.
-  if ( dbsi_has( _dbStateInfo, DbSI_HAVE_V3 ) )
-  {
-    MIL << "Update mode: Delayed cleanup: state " << _dbStateInfo << endl;
-    removeV3( _root + _dbPath, dbsi_has( _dbStateInfo, DbSI_MADE_V3TOV4 ) );
-    dbsi_clr( _dbStateInfo, DbSI_HAVE_V3 );
-  }
+  MIL << "Removing rpm4 database " << dbdir_r << endl;
+  filesystem::clean_dir( dbdir_r );
 }
 
 ///////////////////////////////////////////////////////////////////
@@ -734,24 +516,6 @@ void RpmDb::closeDatabase()
   // Block further database access
   ///////////////////////////////////////////////////////////////////
   librpmDb::blockAccess();
-
-  ///////////////////////////////////////////////////////////////////
-  // Check fate if old version database still present
-  ///////////////////////////////////////////////////////////////////
-  if ( dbsi_has( _dbStateInfo, DbSI_HAVE_V3 ) )
-  {
-    MIL << "Update mode: Delayed cleanup: state " << _dbStateInfo << endl;
-    if ( dbsi_has( _dbStateInfo, DbSI_MODIFIED_V4 ) )
-    {
-      // Move outdated rpm3 database beside.
-      removeV3( _root + _dbPath, dbsi_has( _dbStateInfo, DbSI_MADE_V3TOV4 )  );
-    }
-    else
-    {
-      // Remove unmodified rpm4 database
-      removeV4( _root + _dbPath, dbsi_has( _dbStateInfo, DbSI_MADE_V3TOV4 ) );
-    }
-  }
 
   ///////////////////////////////////////////////////////////////////
   // Uninit
@@ -800,9 +564,6 @@ void RpmDb::doRebuildDatabase(callback::SendReport<RebuildDBReport> & report)
   RpmArgVec opts;
   opts.push_back("--rebuilddb");
   opts.push_back("-vv");
-
-  // don't call modifyDatabase because it would remove the old
-  // rpm3 database, if the current database is a temporary one.
   run_rpm (opts, ExternalProgram::Stderr_To_Stdout);
 
   // progress report: watch this file growing
@@ -1123,8 +884,6 @@ void RpmDb::importPubkey( const PublicKey & pubkey_r )
     opts.push_back ( "--allmatches" );
     opts.push_back ( "--" );
     opts.push_back ( keyName.c_str() );
-    // don't call modifyDatabase because it would remove the old
-    // rpm3 database, if the current database is a temporary one.
     run_rpm( opts, ExternalProgram::Stderr_To_Stdout );
 
     std::string line;
@@ -1149,9 +908,6 @@ void RpmDb::importPubkey( const PublicKey & pubkey_r )
   opts.push_back ( "--" );
   std::string pubkeypath( pubkey_r.path().asString() );
   opts.push_back ( pubkeypath.c_str() );
-
-  // don't call modifyDatabase because it would remove the old
-  // rpm3 database, if the current database is a temporary one.
   run_rpm( opts, ExternalProgram::Stderr_To_Stdout );
 
   std::string line;
@@ -1219,9 +975,6 @@ void RpmDb::removePubkey( const PublicKey & pubkey_r )
   opts.push_back ( "-e" );
   opts.push_back ( "--" );
   opts.push_back ( rpm_name.c_str() );
-
-  // don't call modifyDatabase because it would remove the old
-  // rpm3 database, if the current database is a temporary one.
   run_rpm( opts, ExternalProgram::Stderr_To_Stdout );
 
   std::string line;
@@ -2061,8 +1814,6 @@ void RpmDb::doInstallPackage( const Pathname & filename, RpmInstFlags flags, cal
   // rpm requires additional quoting of special chars:
   std::string quotedFilename( rpmQuoteFilename( workaroundRpmPwdBug( filename ) ) );
   opts.push_back ( quotedFilename.c_str() );
-
-  modifyDatabase(); // BEFORE run_rpm
   run_rpm( opts, ExternalProgram::Stderr_To_Stdout );
 
   std::string line;
@@ -2232,8 +1983,6 @@ void RpmDb::doRemovePackage( const std::string & name_r, RpmInstFlags flags, cal
 
   opts.push_back("--");
   opts.push_back(name_r.c_str());
-
-  modifyDatabase(); // BEFORE run_rpm
   run_rpm (opts, ExternalProgram::Stderr_To_Stdout);
 
   std::string line;

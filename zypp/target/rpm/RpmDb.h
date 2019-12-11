@@ -59,15 +59,10 @@ public:
   //
   ///////////////////////////////////////////////////////////////////
 private:
-
   enum DbStateInfoBits {
     DbSI_NO_INIT	= 0x0000,
     DbSI_HAVE_V4	= 0x0001,
     DbSI_MADE_V4	= 0x0002,
-    DbSI_MODIFIED_V4	= 0x0004,
-    DbSI_HAVE_V3	= 0x0008,
-    DbSI_HAVE_V3TOV4	= 0x0010,
-    DbSI_MADE_V3TOV4	= 0x0020
   };
 
   friend std::ostream & operator<<( std::ostream & str, const DbStateInfoBits & obj );
@@ -110,22 +105,9 @@ private:
                               DbStateInfoBits & info_r );
 
   /**
-   * Remove the rpm4 database in dbdir_r and optionally any backup created
-   * on conversion.
+   * Remove the rpm4 database in dbdir_r.
    **/
-  static void removeV4( const Pathname & dbdir_r, bool v3backup_r );
-
-  /**
-   * Remove the rpm3 database in dbdir_r. Create a backup copy named
-   * packages.rpm3 if it does not already exist.
-   **/
-  static void removeV3( const Pathname & dbdir_r, bool v3backup_r );
-
-  /**
-   * Called before the database is modified by installPackage/removePackage.
-   * Invalidates Packages list and moves away any old database.
-   **/
-  void modifyDatabase();
+  static void removeV4( const Pathname & dbdir_r );
 
 public:
 
