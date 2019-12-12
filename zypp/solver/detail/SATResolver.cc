@@ -437,9 +437,11 @@ SATResolver::solving(const CapabilitySet & requires_caps,
 	  // get Solvables to be installed...
 	  sat::SolvableQueue decisionq;
 	  solver_get_decisionqueue( _satSolver, decisionq );
-	  for ( sat::Solvable::IdType slvid : decisionq )
+	  for ( sat::detail::IdType id : decisionq )
 	  {
-	    sat::Solvable slv { slvid };
+	    if ( id < 0 )
+	      continue;
+	    sat::Solvable slv { id };
 	    // get product buddies (they carry the weakremover)...
 	    static const Capability productCap { "product()" };
 	    if ( slv && slv.provides().matches( productCap ) )
@@ -456,7 +458,7 @@ SATResolver::solving(const CapabilitySet & requires_caps,
 		}
 		// PIN product - a safety net to prevent cleanup from changing the decision for this product
 		queue_push( &(_jobQueue), SOLVER_INSTALL | SOLVER_SOLVABLE );
-		queue_push( &(_jobQueue), slvid );
+		queue_push( &(_jobQueue), id );
 		resolve = true;
 	      }
 	    }
@@ -479,8 +481,12 @@ SATResolver::solving(const CapabilitySet & requires_caps,
     solver_get_decisionqueue(_satSolver, &decisionq);
     for ( int i = 0; i < decisionq.count; ++i )
     {
-      sat::Solvable slv( decisionq.elements[i] );
-      if ( !slv || slv.isSystem() )
+      Id p = decisionq.elements[i];
+      if ( p < 0 )
+	continue;
+
+      sat::Solvable slv { p };
+      if ( ! slv || slv.isSystem() )
 	continue;
 
       PoolItem poolItem( slv );
@@ -886,19 +892,15 @@ void SATResolver::doUpdate()
     solver_get_decisionqueue(_satSolver, &decisionq);
     for (int i = 0; i < decisionq.count; i++)
     {
-      Id p;
-      p = decisionq.elements[i];
-      if (p < 0 || !sat::Solvable(p))
-	continue;
-      if (sat::Solvable(p).repository().get() == _satSolver->pool->installed)
+      Id p = decisionq.elements[i];
+      if ( p < 0 )
 	continue;
 
-      PoolItem poolItem = _pool.find (sat::Solvable(p));
-      if (poolItem) {
-	  SATSolutionToPool (poolItem, ResStatus::toBeInstalled, ResStatus::SOLVER);
-      } else {
-	  ERR << "id " << p << " not found in ZYPP pool." << endl;
-      }
+      sat::Solvable solv { p };
+      if ( ! solv || solv.isSystem() )
+	continue;
+
+      SATSolutionToPool( PoolItem(solv), ResStatus::toBeInstalled, ResStatus::SOLVER );
     }
     queue_free(&decisionq);
 
