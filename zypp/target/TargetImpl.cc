@@ -689,7 +689,7 @@ namespace zypp
     , _autoInstalledFile( home() / "AutoInstalled" )
     , _hardLocksFile( Pathname::assertprefix( _root, ZConfig::instance().locksFile() ) )
     {
-      _rpm.initDatabase( root_r, Pathname(), doRebuild_r );
+      _rpm.initDatabase( root_r, doRebuild_r );
 
       HistoryLog::setRoot(_root);
 

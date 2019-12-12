@@ -118,7 +118,12 @@ public:
 ///////////////////////////////////////////////////////////////////
 
 Pathname         librpmDb::_defaultRoot  ( "/" );
-Pathname         librpmDb::_defaultDbPath( "/var/lib/rpm" );
+// NOTE: Former variable, but now locked to "/var/lib/rpm".
+// A custom dbPath is not actually needed and would only work
+// reliably if libsolv also supports it.
+// The protected librpmDb ctor would allow to build a db_const_iterator
+// to access (ro) a database at a custom location.
+const Pathname   librpmDb::_defaultDbPath( "/var/lib/rpm" );
 librpmDb::constPtr librpmDb::_defaultDb;
 bool             librpmDb::_dbBlocked    ( true );
 
@@ -179,14 +184,8 @@ std::string librpmDb::expand( const std::string & macro_r )
 //	METHOD NAME : librpmDb::newLibrpmDb
 //	METHOD TYPE : librpmDb *
 //
-librpmDb * librpmDb::newLibrpmDb( Pathname root_r, Pathname dbPath_r, bool readonly_r )
+librpmDb * librpmDb::newLibrpmDb()
 {
-  // check arguments
-  if ( ! (root_r.absolute() && dbPath_r.absolute()) )
-  {
-    ZYPP_THROW(RpmInvalidRootException(root_r, dbPath_r));
-  }
-
   // initialize librpm
   if ( ! globalInit() )
   {
@@ -197,7 +196,7 @@ librpmDb * librpmDb::newLibrpmDb( Pathname root_r, Pathname dbPath_r, bool reado
   librpmDb * ret = 0;
   try
   {
-    ret = new librpmDb( root_r, dbPath_r, readonly_r );
+    ret = new librpmDb( _defaultRoot, _defaultDbPath, /*readonly*/true );
   }
   catch (const RpmException & excpt_r)
   {
@@ -215,28 +214,27 @@ librpmDb * librpmDb::newLibrpmDb( Pathname root_r, Pathname dbPath_r, bool reado
 //	METHOD NAME : librpmDb::dbAccess
 //	METHOD TYPE : PMError
 //
-void librpmDb::dbAccess( const Pathname & root_r, const Pathname & dbPath_r )
+void librpmDb::dbAccess( const Pathname & root_r )
 {
-  // check arguments
-  if ( ! (root_r.absolute() && dbPath_r.absolute()) )
-  {
-    ZYPP_THROW(RpmInvalidRootException(root_r, dbPath_r));
-  }
-
   if ( _defaultDb )
   {
     // already accessing a database: switching is not allowed.
-    if ( _defaultRoot == root_r && _defaultDbPath == dbPath_r )
+    if ( _defaultRoot == root_r )
       return;
     else
-    {
-      ZYPP_THROW(RpmDbAlreadyOpenException(_defaultRoot, _defaultDbPath, root_r, dbPath_r));
-    }
+      ZYPP_THROW(RpmDbAlreadyOpenException(_defaultRoot, _defaultDbPath, root_r, _defaultDbPath));
   }
 
   // got no database: we could switch to a new one (even if blocked!)
+
+  if ( root_r.empty() || ! root_r.absolute() )
+    ZYPP_THROW(RpmInvalidRootException(root_r, _defaultDbPath));
+
+  PathInfo pi { root_r / _defaultDbPath };
+  if ( pi.isExist() && ! pi.isDir() )
+    ZYPP_THROW(RpmInvalidRootException(root_r, _defaultDbPath));
+
   _defaultRoot = root_r;
-  _defaultDbPath = dbPath_r;
   MIL << "Set new database location: " << stringPath( _defaultRoot, _defaultDbPath ) << endl;
 
   return dbAccess();
@@ -258,7 +256,7 @@ void librpmDb::dbAccess()
   if ( !_defaultDb )
   {
     // get access
-    _defaultDb = newLibrpmDb( _defaultRoot, _defaultDbPath, /*readonly*/true );
+    _defaultDb = newLibrpmDb();
   }
 }
 

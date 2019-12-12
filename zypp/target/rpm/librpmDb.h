@@ -71,7 +71,7 @@ private:
    * Current directory (below root) that contains the rpmdb.
    * (initialy /var/lib/rpm)
    **/
-  static Pathname _defaultDbPath;
+  static const Pathname _defaultDbPath;
 
   /**
    * Current rpmdb handle.
@@ -90,7 +90,7 @@ private:
    * \throws RpmException
    *
    **/
-  static librpmDb * newLibrpmDb( Pathname root_r, Pathname dbPath_r, bool readonly_r );
+  static librpmDb * newLibrpmDb();
 
   /**
    * Access the database at the current default location. If necessary
@@ -161,7 +161,7 @@ public:
    * \throws RpmException
    *
    **/
-  static void dbAccess( const Pathname & root_r, const Pathname & dbPath_r );
+  static void dbAccess( const Pathname & root_r );
 
   /**
    * Same as &ref dbAccess(), but returns the database handle if

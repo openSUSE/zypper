@@ -152,33 +152,20 @@ public:
   }
 
   /**
-   * Prepare access to the rpm database. Optional arguments may denote the
-   * root directory for all operations and the directory (below root) that
-   * contains the rpmdb (usg. you won't need to set this).
+   * Prepare access to the rpm database at \c/var/lib/rpm.
    *
-   * On empty Pathnames the default is used:
-   * <PRE>
-   *     root:   /
-   *     dbPath: /var/lib/rpm
-   * </PRE>
+   * An optional argument denotes the root directory for all operations. If
+   * an empty Pathname is given the default (\c/) is used.
    *
    * Calling initDatabase a second time with different arguments will return
    * an error but leave the database in it's original state.
    *
-   * Converting an old batabase is done if necessary. On update: The converted
-   * database will be removed by @ref closeDatabase, if it was not modified
-   * (no packages were installed or deleted). Otherwise the new database
-   * is kept, and the old one is removed.
-   *
-   * If the  database alredy exists and \c doRebuild_r is true, \ref rebuildDatabase
-   * is called.
+   * If the  database already exists and \c doRebuild_r is true,
+   * \ref rebuildDatabase is called.
    *
    * \throws RpmException
-   *
    **/
-  void initDatabase( Pathname root_r = Pathname(),
-                     Pathname dbPath_r = Pathname(),
-                     bool doRebuild_r = false );
+  void initDatabase( Pathname root_r = Pathname(), bool doRebuild_r = false );
 
   /**
    * Block further access to the rpm database and go back to uninitialized

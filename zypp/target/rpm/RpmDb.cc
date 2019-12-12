@@ -305,7 +305,7 @@ std::ostream & RpmDb::dumpOn( std::ostream & str ) const
 //	METHOD NAME : RpmDb::initDatabase
 //	METHOD TYPE : PMError
 //
-void RpmDb::initDatabase( Pathname root_r, Pathname dbPath_r, bool doRebuild_r )
+void RpmDb::initDatabase( Pathname root_r, bool doRebuild_r )
 {
   ///////////////////////////////////////////////////////////////////
   // Check arguments
@@ -315,17 +315,19 @@ void RpmDb::initDatabase( Pathname root_r, Pathname dbPath_r, bool doRebuild_r )
   if ( root_r.empty() )
     root_r = "/";
 
-  if ( dbPath_r.empty() )
-    dbPath_r = "/var/lib/rpm";
+  // NOTE: Former argument, but now locked to "/var/lib/rpm".
+  // A custom dbPath is not actually needed and would only work
+  // reliably if libsolv also supports it. By now no further
+  // cleanup in the code.
+  const Pathname & dbPath_r { librpmDb::defaultDbPath() };
 
-  if ( ! (root_r.absolute() && dbPath_r.absolute()) )
+  if ( ! root_r.absolute() )
   {
     ERR << "Illegal root or dbPath: " << stringPath( root_r, dbPath_r ) << endl;
     ZYPP_THROW(RpmInvalidRootException(root_r, dbPath_r));
   }
 
-  if ( dbPath_r == "/var/lib/rpm"
-    && ! PathInfo( root_r/"/var/lib/rpm" ).isExist()
+  if ( ! PathInfo( root_r/"/var/lib/rpm" ).isExist()
     && PathInfo( root_r/"/usr/lib/sysimage/rpm" ).isDir() )
   {
     WAR << "Rpm package was deleted? Injecting missing rpmdb compat symlink." << endl;
@@ -451,7 +453,7 @@ void RpmDb::internal_initDatabase( const Pathname & root_r, const Pathname & dbP
   ///////////////////////////////////////////////////////////////////
 
   // creates dbdir and empty rpm4 database if not present
-  librpmDb::dbAccess( root_r, dbPath_r );
+  librpmDb::dbAccess( root_r/*, dbPath_r*/ );
 
   if ( ! dbInfo.hasDbV4() )
   {
