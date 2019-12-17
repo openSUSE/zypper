@@ -65,28 +65,7 @@ public:
     _ts = ::rpmtsCreate();
     ::rpmtsSetRootDir( _ts, _root.c_str() );
 
-    // check whether to create a new db
-    PathInfo master( _root + _dbPath + "Packages" );
-    if ( ! master.isFile() )
-    {
-      // init database
-      if ( filesystem::assert_dir(_root + _dbPath) != 0 )
-      {
-        ERR << "Could not create dbpath " << (_root + _dbPath).asString() << endl;
-        _error = shared_ptr<RpmInitException>(new RpmInitException(_root, _dbPath));
-        ZYPP_THROW(*_error);
-      }
-      int res = ::rpmtsInitDB( _ts, 0644 );
-      if ( res )
-      {
-        ERR << "rpmdbInit error(" << res << "): " << *this << endl;
-        _error = shared_ptr<RpmInitException>(new RpmInitException(_root, _dbPath));
-	rpmtsFree(_ts);
-        ZYPP_THROW(*_error);
-      }
-    }
-
-    // open database
+    // open database (creates a missing one on the fly)
     int res = ::rpmtsOpenDB( _ts, (readonly_r ? O_RDONLY : O_RDWR ));
     if ( res )
     {
@@ -231,8 +210,11 @@ void librpmDb::dbAccess( const Pathname & root_r )
     ZYPP_THROW(RpmInvalidRootException(root_r, _defaultDbPath));
 
   PathInfo pi { root_r / _defaultDbPath };
-  if ( pi.isExist() && ! pi.isDir() )
-    ZYPP_THROW(RpmInvalidRootException(root_r, _defaultDbPath));
+  if ( pi.isExist() && ! pi.isDir() ) {
+    RpmInvalidRootException excpt { root_r, _defaultDbPath };
+    excpt.addHistory( str::Str() << pi );
+    ZYPP_THROW(excpt);
+  }
 
   _defaultRoot = root_r;
   MIL << "Set new database location: " << stringPath( _defaultRoot, _defaultDbPath ) << endl;
@@ -268,16 +250,8 @@ void librpmDb::dbAccess()
 //
 void librpmDb::dbAccess( librpmDb::constPtr & ptr_r )
 {
-  try
-  {
-    dbAccess();
-  }
-  catch (const RpmException & excpt_r)
-  {
-    ZYPP_CAUGHT(excpt_r);
-    ptr_r = 0;
-    ZYPP_RETHROW(excpt_r);
-  }
+  ptr_r = nullptr;
+  dbAccess();
   ptr_r = _defaultDb;
 }
 
@@ -487,69 +461,6 @@ void * librpmDb::dont_call_it() const
 ostream & librpmDb::dumpOn( ostream & str ) const
 {
   ReferenceCounted::dumpOn( str ) << _d;
-  return str;
-}
-
-///////////////////////////////////////////////////////////////////
-//
-//	CLASS NAME : librpmDb::DbDirInfo
-//
-///////////////////////////////////////////////////////////////////
-
-///////////////////////////////////////////////////////////////////
-//
-//
-//	METHOD NAME : librpmDb::DbDirInfo::DbDirInfo
-//	METHOD TYPE : Constructor
-//
-librpmDb::DbDirInfo::DbDirInfo( const Pathname & root_r, const Pathname & dbPath_r )
-    : _root( root_r )
-    , _dbPath( dbPath_r )
-{
-  // check and adjust arguments
-  if ( ! (root_r.absolute() && dbPath_r.absolute()) )
-  {
-    ERR << "Relative path for root(" << _root << ") or dbPath(" << _dbPath << ")" << endl;
-  }
-  else
-  {
-    _dbDir   ( _root + _dbPath );
-    _dbV4    ( _dbDir.path() + "Packages" );
-    DBG << *this << endl;
-  }
-}
-
-///////////////////////////////////////////////////////////////////
-//
-//
-//	METHOD NAME : librpmDb::DbDirInfo::update
-//	METHOD TYPE : void
-//
-void librpmDb::DbDirInfo::restat()
-{
-  _dbDir();
-  _dbV4();
-  DBG << *this << endl;
-}
-
-/******************************************************************
-**
-**
-**	FUNCTION NAME : operator<<
-**	FUNCTION TYPE : std::ostream &
-*/
-std::ostream & operator<<( std::ostream & str, const librpmDb::DbDirInfo & obj )
-{
-  if ( obj.illegalArgs() )
-  {
-    str << "ILLEGAL: '(" << obj.root() << ")" << obj.dbPath() << "'";
-  }
-  else
-  {
-    str << "'(" << obj.root() << ")" << obj.dbPath() << "':" << endl;
-    str << "  Dir:    " << obj._dbDir << endl;
-    str << "  V4:     " << obj._dbV4 << endl;
-  }
   return str;
 }
 

@@ -59,31 +59,12 @@ public:
   //
   ///////////////////////////////////////////////////////////////////
 private:
+#if LEGACY(1712)
   enum DbStateInfoBits {
-    DbSI_NO_INIT	= 0x0000,
-    DbSI_HAVE_V4	= 0x0001,
-    DbSI_MADE_V4	= 0x0002,
+    DbSI_NO_INIT	= 0x0000
   };
-
-  friend std::ostream & operator<<( std::ostream & str, const DbStateInfoBits & obj );
-
-  void dbsi_set( DbStateInfoBits & val_r, const unsigned & bits_r ) const
-  {
-    val_r = (DbStateInfoBits)(val_r | bits_r);
-  }
-  void dbsi_clr( DbStateInfoBits & val_r, const unsigned & bits_r ) const
-  {
-    val_r = (DbStateInfoBits)(val_r & ~bits_r);
-  }
-  bool dbsi_has( const DbStateInfoBits & val_r, const unsigned & bits_r ) const
-  {
-    return( (val_r & bits_r) == bits_r );
-  }
-
-  /**
-   * Internal state info
-   **/
   DbStateInfoBits _dbStateInfo;
+#endif
 
   /**
    * Root directory for all operations.
@@ -94,20 +75,6 @@ private:
    * Directory that contains the rpmdb.
    **/
   Pathname _dbPath;
-
-  /**
-   * Internal helper for @ref initDatabase.
-   *
-   * \throws RpmException
-   *
-   **/
-  void internal_initDatabase( const Pathname & root_r, const Pathname & dbPath_r,
-                              DbStateInfoBits & info_r );
-
-  /**
-   * Remove the rpm4 database in dbdir_r.
-   **/
-  static void removeV4( const Pathname & dbdir_r );
 
 public:
 
@@ -368,9 +335,10 @@ private:
   /** create package backups? */
   bool _packagebackups;
 
+#if LEGACY(1712)
   /** whether <_root>/<WARNINGMAILPATH> was already created */
   bool _warndirexists;
-
+#endif
   /**
    * handle rpm messages like "/etc/testrc saved as /etc/testrc.rpmorig"
    *

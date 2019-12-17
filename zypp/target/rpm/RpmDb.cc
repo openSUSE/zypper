@@ -183,32 +183,6 @@ inline std::string stringPath( const Pathname & root_r, const Pathname & sub_r )
   return librpmDb::stringPath( root_r, sub_r );
 }
 
-/******************************************************************
- **
- **
- **	FUNCTION NAME : operator<<
- **	FUNCTION TYPE : std::ostream &
-*/
-std::ostream & operator<<( std::ostream & str, const RpmDb::DbStateInfoBits & obj )
-{
-  if ( obj == RpmDb::DbSI_NO_INIT )
-  {
-    str << "NO_INIT";
-  }
-  else
-  {
-#define ENUM_OUT(B,C) str << ( obj & RpmDb::B ? C : '-' )
-    str << "V4(";
-    ENUM_OUT( DbSI_HAVE_V4,	'X' );
-    ENUM_OUT( DbSI_MADE_V4,	'c' );
-    str << ")";
-#undef ENUM_OUT
-  }
-  return str;
-}
-
-
-
 ///////////////////////////////////////////////////////////////////
 //
 //	CLASS NAME : RpmDb
@@ -226,11 +200,8 @@ std::ostream & operator<<( std::ostream & str, const RpmDb::DbStateInfoBits & ob
 //	METHOD TYPE : Constructor
 //
 RpmDb::RpmDb()
-    : _dbStateInfo( DbSI_NO_INIT )
-#warning Check for obsolete memebers
-    , _backuppath ("/var/adm/backup")
+    : _backuppath ("/var/adm/backup")
     , _packagebackups(false)
-    , _warndirexists(false)
 {
   process = 0;
   exit_code = -1;
@@ -281,22 +252,7 @@ Date RpmDb::timestamp() const
 //
 std::ostream & RpmDb::dumpOn( std::ostream & str ) const
 {
-  str << "RpmDb[";
-
-  if ( _dbStateInfo == DbSI_NO_INIT )
-  {
-    str << "NO_INIT";
-  }
-  else
-  {
-#define ENUM_OUT(B,C) str << ( _dbStateInfo & B ? C : '-' )
-    str << "V4(";
-    ENUM_OUT( DbSI_HAVE_V4,	'X' );
-    ENUM_OUT( DbSI_MADE_V4,	'c' );
-    str << "): " << stringPath( _root, _dbPath );
-#undef ENUM_OUT
-  }
-  return str << "]";
+  return str << "RpmDb[" << stringPath( _root, _dbPath ) << "]";
 }
 
 ///////////////////////////////////////////////////////////////////
@@ -364,37 +320,23 @@ void RpmDb::initDatabase( Pathname root_r, bool doRebuild_r )
     return;
   }
 
-  DbStateInfoBits info = DbSI_NO_INIT;
   try
   {
-    internal_initDatabase( root_r, dbPath_r, info );
+    // creates dbdir and empty rpm database if not present
+    librpmDb::dbAccess( root_r );
   }
   catch (const RpmException & excpt_r)
   {
     ZYPP_CAUGHT(excpt_r);
     librpmDb::blockAccess();
-    ERR << "Cleanup on error: state " << info << endl;
-
-    if ( dbsi_has( info, DbSI_MADE_V4 ) )
-    {
-      // remove the newly created rpm4 database.
-      removeV4( root_r + dbPath_r );
-    }
     ZYPP_RETHROW(excpt_r);
   }
 
   _root   = root_r;
   _dbPath = dbPath_r;
-  _dbStateInfo = info;
 
   if ( doRebuild_r )
-  {
-    if (      dbsi_has( info, DbSI_HAVE_V4 )
-         && ! dbsi_has( info, DbSI_MADE_V4 ) )
-    {
-      rebuildDatabase();
-    }
-  }
+    rebuildDatabase();
 
   MIL << "Synchronizing keys with zypp keyring" << endl;
   syncTrustedKeys();
@@ -406,97 +348,6 @@ void RpmDb::initDatabase( Pathname root_r, bool doRebuild_r )
   librpmDb::dbRelease( true );
 
   MIL << "InitDatabase: " << *this << endl;
-}
-
-///////////////////////////////////////////////////////////////////
-//
-//
-//	METHOD NAME : RpmDb::internal_initDatabase
-//	METHOD TYPE : PMError
-//
-void RpmDb::internal_initDatabase( const Pathname & root_r, const Pathname & dbPath_r,
-                                   DbStateInfoBits & info_r )
-{
-  info_r = DbSI_NO_INIT;
-
-  ///////////////////////////////////////////////////////////////////
-  // Get info about the desired database dir
-  ///////////////////////////////////////////////////////////////////
-  librpmDb::DbDirInfo dbInfo( root_r, dbPath_r );
-
-  if ( dbInfo.illegalArgs() )
-  {
-    // should not happen (checked in initDatabase)
-    ZYPP_THROW(RpmInvalidRootException(root_r, dbPath_r));
-  }
-  if ( ! dbInfo.usableArgs() )
-  {
-    ERR << "Bad database directory: " << dbInfo.dbDir() << endl;
-    ZYPP_THROW(RpmInvalidRootException(root_r, dbPath_r));
-  }
-
-  if ( dbInfo.hasDbV4() )
-  {
-    dbsi_set( info_r, DbSI_HAVE_V4 );
-    MIL << "Found rpm4 database in " << dbInfo.dbDir() << endl;
-  }
-  else
-  {
-    MIL << "Creating new rpm4 database in " << dbInfo.dbDir() << endl;
-  }
-
-  DBG << "Initial state: " << info_r << ": " << stringPath( root_r, dbPath_r );
-  librpmDb::dumpState( DBG ) << endl;
-
-  ///////////////////////////////////////////////////////////////////
-  // Access database, create if needed
-  ///////////////////////////////////////////////////////////////////
-
-  // creates dbdir and empty rpm4 database if not present
-  librpmDb::dbAccess( root_r/*, dbPath_r*/ );
-
-  if ( ! dbInfo.hasDbV4() )
-  {
-    dbInfo.restat();
-    if ( dbInfo.hasDbV4() )
-    {
-      dbsi_set( info_r, DbSI_HAVE_V4 | DbSI_MADE_V4 );
-    }
-  }
-
-  DBG << "Access state: " << info_r << ": " << stringPath( root_r, dbPath_r );
-  librpmDb::dumpState( DBG ) << endl;
-
-  ///////////////////////////////////////////////////////////////////
-  // Check whether to convert something. Create backup but do
-  // not remove anything here
-  ///////////////////////////////////////////////////////////////////
-  librpmDb::constPtr dbptr;
-  librpmDb::dbAccess( dbptr );
-  bool dbEmpty = dbptr->empty();
-  if ( dbEmpty )
-  {
-    MIL << "Empty rpm4 database "  << dbInfo.dbV4() << endl;
-  }
-}
-
-///////////////////////////////////////////////////////////////////
-//
-//
-//	METHOD NAME : RpmDb::removeV4
-//	METHOD TYPE : void
-//
-void RpmDb::removeV4( const Pathname & dbdir_r )
-{
-  PathInfo pi( dbdir_r );
-  if ( ! pi.isDir() )
-  {
-    ERR << "Can't remove rpm4 database in non directory: " << dbdir_r << endl;
-    return;
-  }
-
-  MIL << "Removing rpm4 database " << dbdir_r << endl;
-  filesystem::clean_dir( dbdir_r );
 }
 
 ///////////////////////////////////////////////////////////////////
@@ -523,7 +374,6 @@ void RpmDb::closeDatabase()
   // Uninit
   ///////////////////////////////////////////////////////////////////
   _root = _dbPath = Pathname();
-  _dbStateInfo = DbSI_NO_INIT;
 
   MIL << "closeDatabase: " << *this << endl;
 }
