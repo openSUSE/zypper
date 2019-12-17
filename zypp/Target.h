@@ -101,9 +101,6 @@ namespace zypp
     Pathname assertRootPrefix( const Pathname & path_r ) const
     { return Pathname::assertprefix( root(), path_r ); }
 
-    /** return the last modification date of the target */
-    Date timestamp() const;
-
     /**
      * returns the target base installed product, also known as
      * the distribution or platform.

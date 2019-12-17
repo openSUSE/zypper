@@ -88,9 +88,6 @@ namespace zypp
   std::ostream & Target::dumpOn( std::ostream & str ) const
   { return _pimpl->dumpOn( str ); }
 
-  Date Target::timestamp() const
-  { return _pimpl->timestamp(); }
-
   Product::constPtr Target::baseProduct() const
   { return _pimpl->baseProduct(); }
 

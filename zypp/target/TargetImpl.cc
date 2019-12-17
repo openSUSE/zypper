@@ -1695,12 +1695,6 @@ namespace zypp
       return _rpm.hasFile(path_str, name_str);
     }
 
-
-    Date TargetImpl::timestamp() const
-    {
-      return _rpm.timestamp();
-    }
-
     ///////////////////////////////////////////////////////////////////
     namespace
     {

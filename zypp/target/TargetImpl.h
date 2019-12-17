@@ -150,9 +150,6 @@ namespace zypp
       std::string whoOwnsFile (const std::string & path_str) const
       { return _rpm.whoOwnsFile (path_str); }
 
-      /** return the last modification date of the target */
-      Date timestamp() const;
-
       /** \copydoc Target::baseProduct() */
       Product::constPtr baseProduct() const;
 

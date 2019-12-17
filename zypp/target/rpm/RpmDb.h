@@ -90,11 +90,6 @@ public:
   ~RpmDb();
 
   /**
-   * timestamp of the rpm database (last modification)
-   */
-  Date timestamp() const;
-
-  /**
    * @return Root directory for all operations (empty if not initialized).
    **/
   const Pathname & root() const
