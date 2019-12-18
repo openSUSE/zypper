@@ -43,10 +43,10 @@ namespace zypp
    * it a name.
    *
    * \code
-   *      bool exampleReceiver( ProgressData::value_type v )
+   *      bool exampleReceiver( const ProgressData & ticks_r )
    *      {
-   *        DBG << "got ->" << v << endl;
-   *        return( v <= 100 ); // Abort if ( v > 100 )
+   *        DBG << "got ->" << ticks_r.reportValue() << " (" << ticks_r.val() << ")" << endl;
+   *        return( ticks_r.val() <= 100 ); // Abort if ( val > 100 )
    *      }
    *
    *      class Example
@@ -107,21 +107,21 @@ namespace zypp
    * \endcode
    * \code
    * Reporting %:
-   * got ->0
-   * got ->10
-   * got ->20
-   * got ->30
-   * got ->40
-   * got ->50
-   * got ->60
-   * got ->70
-   * got ->80
-   * got ->90
-   * got ->100
-   * got ->100
+   * got ->0 (0)
+   * got ->10 (1)
+   * got ->20 (2)
+   * got ->30 (3)
+   * got ->40 (4)
+   * got ->50 (5)
+   * got ->60 (6)
+   * got ->70 (7)
+   * got ->80 (8)
+   * got ->90 (9)
+   * got ->100 (10)
+   * got ->100 (10)
    * Reporting 'still alive':
-   * got ->0
-   * got ->9
+   * got ->-1 (0)
+   * got ->-1 (9)
    * \endcode
    *
    * The different ammount of triggers is due to different rules for sending
