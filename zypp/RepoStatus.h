@@ -52,6 +52,9 @@ namespace zypp
      */
     explicit RepoStatus( const Pathname & path_r );
 
+    /** Explicitly specify checksum string and timestamp to use. */
+    RepoStatus( std::string checksum_r, Date timestamp_r );
+
     /** Dtor */
     ~RepoStatus();
 

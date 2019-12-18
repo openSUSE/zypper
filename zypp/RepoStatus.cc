@@ -34,6 +34,21 @@ namespace zypp
     string _checksum;
     Date _timestamp;
 
+    // NOTE: Changing magic will at once invalidate all solv file caches.
+    // Helpfull if solv file content must be refreshed (e.g. due to different
+    // repo2* arguments) even if raw metadata are unchanged.
+    // Only values set from a RepoStatus ctor need magic to be added.
+    void assignFromCtor( std::string && checksum_r, Date && timestamp_r )
+    {
+      _checksum = std::move(checksum_r);
+      _timestamp = std::move(timestamp_r);
+      if ( !_checksum.empty() )
+      {
+	static const std::string magic( "43" );
+	_checksum += magic;
+      }
+    }
+
     /** Recursive computation of max dir timestamp. */
     static void recursive_timestamp( const Pathname & dir_r, time_t & max_r )
     {
@@ -83,23 +98,21 @@ namespace zypp
     {
       if ( info.isFile() )
       {
-	_pimpl->_timestamp = Date( info.mtime() );
-	_pimpl->_checksum = filesystem::sha1sum( path_r );
+	_pimpl->assignFromCtor( filesystem::sha1sum( path_r ), Date( info.mtime() ) );
       }
       else if ( info.isDir() )
       {
 	time_t t = info.mtime();
 	Impl::recursive_timestamp( path_r, t );
-	_pimpl->_timestamp = Date(t);
-	_pimpl->_checksum = CheckSum::sha1FromString( str::numstring( t ) ).checksum();
+	_pimpl->assignFromCtor( CheckSum::sha1FromString( str::numstring( t ) ).checksum(), Date( t ) );
       }
-
-      // NOTE: changing magic will once invalidate all solv file caches
-      // Helpfull if solv file content must be refreshed (e.g. due to different
-      // repo2* arguments) even if raw metadata are unchanged.
-      static const std::string magic( "43" );
-      _pimpl->_checksum += magic;
     }
+  }
+
+  RepoStatus::RepoStatus( std::string checksum_r, Date timestamp_r )
+  : _pimpl( new Impl() )
+  {
+    _pimpl->assignFromCtor( std::move(checksum_r), std::move(timestamp_r) );
   }
 
   RepoStatus::~RepoStatus()
