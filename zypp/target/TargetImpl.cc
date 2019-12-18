@@ -62,6 +62,40 @@
 using namespace std;
 
 ///////////////////////////////////////////////////////////////////
+extern "C"
+{
+#include <solv/repo_rpmdb.h>
+}
+namespace zypp
+{
+  namespace target
+  {
+    inline std::string rpmDbStateHash( const Pathname & root_r )
+    {
+      std::string ret;
+      AutoDispose<void*> state { ::rpm_state_create( sat::Pool::instance().get(), root_r.c_str() ), ::rpm_state_free };
+      AutoDispose<Chksum*> chk { ::solv_chksum_create( REPOKEY_TYPE_SHA1 ), []( Chksum *chk ) -> void {
+	::solv_chksum_free( chk, nullptr );
+      } };
+      if ( ::rpm_hash_database_state( state, chk ) == 0 )
+      {
+	int md5l;
+	const unsigned char * md5 = ::solv_chksum_get( chk, &md5l );
+	ret = ::pool_bin2hex( sat::Pool::instance().get(), md5, md5l );
+      }
+      else
+	WAR << "rpm_hash_database_state failed" << endl;
+      return ret;
+    }
+
+    inline RepoStatus rpmDbRepoStatus( const Pathname & root_r )
+    { return RepoStatus( rpmDbStateHash( root_r ), Date() ); }
+
+  } // namespace target
+} // namespace
+///////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////
 namespace zypp
 {
   /////////////////////////////////////////////////////////////////
@@ -843,7 +877,7 @@ namespace zypp
       bool build_rpm_solv = true;
       // lets see if the rpm solv cache exists
 
-      RepoStatus rpmstatus( RepoStatus(_root/"var/lib/rpm/Name") && RepoStatus(_root/"etc/products.d") );
+      RepoStatus rpmstatus( rpmDbRepoStatus(_root) && RepoStatus(_root/"etc/products.d") );
 
       bool solvexisted = PathInfo(rpmsolv).isExist();
       if ( solvexisted )
