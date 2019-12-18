@@ -17,7 +17,7 @@ msgstr ""
 "Project-Id-Version: zypper.de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-11-28 17:54+0100\n"
-"PO-Revision-Date: 2019-12-11 17:55+0000\n"
+"PO-Revision-Date: 2019-12-18 11:55+0000\n"
 "Last-Translator: Sarah Kriesch <ada.lovelace@gmx.de>\n"
 "Language-Team: German <https://l10n.opensuse.org/projects/zypper/master/de/>"
 "\n"
@@ -7226,7 +7226,7 @@ msgstr "a/w/i"
 #, c-format, boost-format
 msgid "Autoselecting '%s' after %u second."
 msgid_plural "Autoselecting '%s' after %u seconds."
-msgstr[0] "'%s' nach %u Sekunden automatisch wählen."
+msgstr[0] "'%s' nach %u Sekunde automatisch wählen."
 msgstr[1] "'%s' nach %u Sekunden automatisch wählen."
 
 #: src/utils/prompt.cc:284
