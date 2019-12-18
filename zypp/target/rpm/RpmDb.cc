@@ -33,11 +33,13 @@ extern "C"
 #include "zypp/base/String.h"
 #include "zypp/base/Gettext.h"
 #include "zypp/base/LocaleGuard.h"
+#include "zypp/base/DtorReset.h"
 
 #include "zypp/Date.h"
 #include "zypp/Pathname.h"
 #include "zypp/PathInfo.h"
 #include "zypp/PublicKey.h"
+#include "zypp/ProgressData.h"
 
 #include "zypp/target/rpm/RpmDb.h"
 #include "zypp/target/rpm/RpmCallbacks.h"
@@ -388,59 +390,73 @@ void RpmDb::rebuildDatabase()
 void RpmDb::doRebuildDatabase(callback::SendReport<RebuildDBReport> & report)
 {
   FAILIFNOTINITIALIZED;
-
   MIL << "RpmDb::rebuildDatabase" << *this << endl;
-  // FIXME  Timecount _t( "RpmDb::rebuildDatabase" );
 
-  PathInfo dbMaster( root() + dbPath() + "Packages" );
-  PathInfo dbMasterBackup( dbMaster.path().extend( ".y2backup" ) );
+  const Pathname mydbpath { root()/dbPath() };	// the configured path used in reports
+  {
+    // For --rebuilddb take care we're using the real db directory
+    // and not a symlink. Otherwise rpm will rename the symlink and
+    // replace it with a real directory containing the converted db.
+    DtorReset guardRoot  { _root };
+    DtorReset guardDbPath{ _dbPath };
+    _root = "/";
+    _dbPath = filesystem::expandlink( mydbpath );
 
-  // run rpm
-  RpmArgVec opts;
-  opts.push_back("--rebuilddb");
-  opts.push_back("-vv");
-  run_rpm (opts, ExternalProgram::Stderr_To_Stdout);
+    // run rpm
+    RpmArgVec opts;
+    opts.push_back("--rebuilddb");
+    opts.push_back("-vv");
+    run_rpm (opts, ExternalProgram::Stderr_To_Stdout);
+  }
 
-  // progress report: watch this file growing
-  PathInfo newMaster( root()
-                      + dbPath().extend( str::form( "rebuilddb.%d",
-                                                    process?process->getpid():0) )
-                      + "Packages" );
+  // generate and report progress
+  ProgressData tics;
+  {
+    ProgressData::value_type hdrTotal = 0;
+    for ( librpmDb::db_const_iterator it; *it; ++it, ++hdrTotal )
+    {;}
+    tics.range( hdrTotal );
+  }
+  tics.sendTo( [&report,&mydbpath]( const ProgressData & tics_r ) -> bool {
+    return report->progress( tics_r.reportValue(), mydbpath );
+  } );
+  tics.toMin();
 
-  std::string       line;
-  std::string       errmsg;
-
+  std::string line;
+  std::string errmsg;
   while ( systemReadLine( line ) )
   {
-    if ( newMaster() )
-    { // file is removed at the end of rebuild.
-      // current size should be upper limit for new db
-      if ( ! report->progress( (100 * newMaster.size()) / dbMaster.size(), root() + dbPath()) )
+    static const std::string debugPrefix    { "D:" };
+    static const std::string progressPrefix { "D:  read h#" };
+    static const std::string ignoreSuffix   { "digest: OK" };
+
+    if ( ! str::startsWith( line, debugPrefix ) )
+    {
+      if ( ! str::endsWith( line, ignoreSuffix ) )
       {
-        WAR << "User requested abort." << endl;
-        systemKill();
-        filesystem::recursive_rmdir( newMaster.path().dirname() );
+	errmsg += line;
+	errmsg += '\n';
+	WAR << line << endl;
       }
     }
-
-    if ( line.compare( 0, 2, "D:" ) )
+    else if ( str::startsWith( line, progressPrefix ) )
     {
-      errmsg += line + '\n';
-      //      report.notify( line );
-      WAR << line << endl;
+      if ( ! tics.incr() )
+      {
+	WAR << "User requested abort." << endl;
+	systemKill();
+      }
     }
   }
 
-  int rpm_status = systemStatus();
-
-  if ( rpm_status != 0 )
+  if ( systemStatus() != 0 )
   {
     //TranslatorExplanation after semicolon is error message
     ZYPP_THROW(RpmSubprocessException(std::string(_("RPM failed: ")) + (errmsg.empty() ? error_message: errmsg) ) );
   }
   else
   {
-    report->progress( 100, root() + dbPath() ); // 100%
+    tics.toMax();
   }
 }
 
