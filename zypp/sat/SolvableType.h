@@ -147,10 +147,8 @@ namespace zypp
       SolvableType() {}
       SolvableType( const SolvableType & ) {}
       void operator=( const SolvableType & ) {}
-#ifndef SWIG
       SolvableType( SolvableType && ) {}
       void operator=( SolvableType && ) {}
-#endif
       ~SolvableType() {}
     };
 

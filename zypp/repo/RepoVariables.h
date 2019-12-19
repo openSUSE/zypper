@@ -61,10 +61,9 @@ namespace zypp
 
       /** Return a copy of \a value_r with embedded variables expanded. */
       std::string operator()( const std::string & value_r, VarRetriever varRetriever_r ) const;
-#ifndef SWIG // Swig treats it as syntax error
+
       /** \overload moving */
       std::string operator()( std::string && value_r, VarRetriever varRetriever_r ) const;
-#endif
     };
 
     /**
@@ -106,10 +105,9 @@ namespace zypp
     struct RepoVariablesStringReplacer : public std::unary_function<const std::string &, std::string>
     {
       std::string operator()( const std::string & value_r ) const;
-#ifndef SWIG // Swig treats it as syntax error
+
       /** \overload moving */
       std::string operator()( std::string && value_r ) const;
-#endif
     };
 
     /**
