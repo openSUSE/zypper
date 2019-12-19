@@ -1,4 +1,16 @@
 -------------------------------------------------------------------
+Thu Dec 19 13:28:00 CET 2019 - ma@suse.de
+
+- BuildRequires:  libsolv-devel >= 0.7.10.
+- RpmDb: Become rpmdb backend independent (jsc#SLE-7272)
+- RpmDb: Close API offering a custom rpmdb path
+  It's actually not needed and for this to work also libsolv needs
+  to support it. You can sill use a librpmDb::db_const_iterator to
+  access a database at a custom location (ro).
+- Remove legacy rpmV3database conversion code.
+- version 17.20.0 (20)
+
+-------------------------------------------------------------------
 Wed Dec 11 09:51:10 CET 2019 - ma@suse.de
 
 - MediaCurl: assert cookie file has mode 0600 (bsc#1158763, CVE-2019-18900)
