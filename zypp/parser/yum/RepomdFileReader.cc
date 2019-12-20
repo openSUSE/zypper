@@ -43,37 +43,15 @@ namespace zypp
   class RepomdFileReader::Impl : private base::NonCopyable
   {
   public:
-
-    /**
-     * Enumeration of repomd.xml tags.
-     * \see _tag
-     */
-    enum Tag
-    {
-      tag_NONE,
-      tag_Repomd,
-      tag_Data,
-      tag_Location,
-      tag_CheckSum,
-      tag_Timestamp,
-      tag_OpenCheckSum
-    };
-
-  public:
-    /** Ctro taking a ProcessResource2 callback */
-    Impl(const Pathname &repomd_file, const ProcessResource2 & callback )
+    /** Ctro taking a ProcessResource callback */
+    Impl(const Pathname &repomd_file, const ProcessResource & callback )
     : _callback( callback )
-    , _tag( tag_NONE )
     , _type( ResourceType::NONE_e )
     {
       Reader reader( repomd_file );
       MIL << "Reading " << repomd_file << endl;
       reader.foreachNode( bind( &RepomdFileReader::Impl::consumeNode, this, _1 ) );
     }
-   /** \overload Redirect an old ProcessResource callback */
-    Impl(const Pathname &repomd_file, const ProcessResource & callback)
-    : Impl( repomd_file, ProcessResource2( bind( callback, _1, _2 ) ) )
-    {}
 
     /**
      * Callback provided to the XML parser.
@@ -83,10 +61,7 @@ namespace zypp
 
   private:
     /** Function for processing collected data. Passed-in through constructor. */
-    ProcessResource2 _callback;
-
-    /** Used to remember currently processed tag */
-    Tag _tag;
+    ProcessResource _callback;
 
     /** Type of metadata file (string) */
     std::string _typeStr;
@@ -117,14 +92,12 @@ namespace zypp
       // xpath: /repomd
       if ( reader_r->name() == "repomd" )
       {
-        _tag = tag_Repomd;
         return true;
       }
 
       // xpath: /repomd/data (+)
       if ( reader_r->name() == "data" )
       {
-        _tag = tag_Data;
 	_typeStr = reader_r->getAttribute("type").asString();
         _type = ResourceType(_typeStr);
         return true;
@@ -133,7 +106,6 @@ namespace zypp
       // xpath: /repomd/location
       if ( reader_r->name() == "location" )
       {
-        _tag = tag_Location;
         _location.setLocation( reader_r->getAttribute("href").asString(), 1 );
         // ignoring attribute xml:base
         return true;
@@ -142,10 +114,9 @@ namespace zypp
       // xpath: /repomd/checksum
       if ( reader_r->name() == "checksum" )
       {
-        _tag = tag_CheckSum;
         string checksum_type = reader_r->getAttribute("type").asString() ;
         string checksum_vaue = reader_r.nodeText().asString();
-        _location.setChecksum( CheckSum( checksum_type, checksum_vaue ) );
+	_location.setChecksum( CheckSum( std::move(checksum_type), std::move(checksum_vaue) ) );
         return true;
       }
 
@@ -159,9 +130,7 @@ namespace zypp
       // xpath: /repomd/size
       if ( reader_r->name() == "size" )
       {
-        string size_value = reader_r.nodeText().asString();
-        zypp::ByteCount size = zypp::ByteCount( str::strtonum<ByteCount::SizeType>( size_value ) );
-        _location.setDownloadSize( size );
+	_location.setDownloadSize( ByteCount( str::strtonum<ByteCount::SizeType>( reader_r.nodeText().asString() ) ) );
         return true;
       }
 
@@ -173,9 +142,12 @@ namespace zypp
       // xpath: /repomd/data
       if ( reader_r->name() == "data" )
       {
-        if (_callback)
-          _callback( _location, _type, _typeStr );
-
+        if (_callback) {
+          _callback( std::move(_location), _type, _typeStr );
+	  _location = OnMediaLocation();
+	  _type = ResourceType::NONE_e;
+	  _typeStr.clear();
+	}
         return true;
       }
     }
@@ -191,10 +163,6 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
 
   RepomdFileReader::RepomdFileReader( const Pathname & repomd_file, const ProcessResource & callback )
-  : _pimpl( new Impl(repomd_file, callback) )
-  {}
-
-  RepomdFileReader::RepomdFileReader( const Pathname & repomd_file, const ProcessResource2 & callback )
   : _pimpl( new Impl(repomd_file, callback) )
   {}
 

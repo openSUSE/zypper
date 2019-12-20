@@ -33,24 +33,14 @@ namespace zypp
    *
    * After each file entry is read, a \ref OnMediaLocation
    * and \ref repo::yum::ResourceType are prepared and passed to the \ref _callback.
-   *
-   * Depending on the \ref _callback type provided on construction, ResourceType may
-   * additionally be passed as a plain string. This form allows handling custom
-   * resource types (e.g. ones with embedded locale tag).
-   *
-   * \code
-   * RepomdFileReader reader(repomd_file, 
-   *                  bind( &SomeClass::callbackfunc, &SomeClassInstance, _1, _2 ) );
-   * \endcode
+   * ResourceType is additionally be passed as a plain string. This form allows
+   * handling custom resource types (e.g. ones with embedded locale tag).
    */
   class RepomdFileReader : private base::NonCopyable
   {
   public:
-   /** Callbacl taking \ref OnMediaLocation and \ref repo::yum::ResourceType */
-    typedef function< bool( const OnMediaLocation &, const repo::yum::ResourceType & )> ProcessResource;
-
-    /** Alternate callback also receiving the ResourceType as string. */
-    typedef function< bool( const OnMediaLocation &, const repo::yum::ResourceType &, const std::string & )> ProcessResource2;
+    /** Callback taking \ref OnMediaLocation and \ref repo::yum::ResourceType (also as String)*/
+    typedef function< bool( OnMediaLocation &&, const repo::yum::ResourceType &, const std::string & )> ProcessResource;
 
    /**
     * CTOR. Creates also \ref xml::Reader and starts reading.
@@ -61,8 +51,6 @@ namespace zypp
     * \see RepomdFileReader::ProcessResource
     */
     RepomdFileReader( const Pathname & repomd_file, const ProcessResource & callback );
-    /** \overload taking ProcessResource2 callback */
-    RepomdFileReader( const Pathname & repomd_file, const ProcessResource2 & callback );
 
     /** DTOR */
     ~RepomdFileReader();

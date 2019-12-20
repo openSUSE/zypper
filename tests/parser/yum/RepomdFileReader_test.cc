@@ -23,17 +23,14 @@ class Collector
 public:
   Collector()
   {}
-  
-  bool callback( const OnMediaLocation &loc, const ResourceType &t )
+
+  bool operator()( OnMediaLocation &&loc, const ResourceType &t, const std::string & )
   {
-    items.push_back( make_pair( t, loc ) );
-    //items.push_back(loc);
-    //cout << items.size() << endl;
+    items.push_back( make_pair( t, std::move(loc) ) );
     return true;
   }
   
   vector<pair<ResourceType, OnMediaLocation> > items;
-  //vector<OnMediaLocation> items;
 };
 
 BOOST_AUTO_TEST_CASE(repomd_read)
@@ -48,28 +45,32 @@ BOOST_AUTO_TEST_CASE(repomd_read)
     if ( ( file.basename().substr(0, 6) == "repomd" ) && (file.extension() == ".xml" ) )
     {
       cout << *it << endl;
-      
+
       Collector collect;
-      RepomdFileReader( file, RepomdFileReader::ProcessResource(bind( &Collector::callback, &collect, _1, _2 )) );
-      
+      RepomdFileReader( file, std::ref(collect) );
+
       std::ifstream ifs( file.extend(".solution").asString().c_str() );
-      
+
       unsigned int count = 0;
-      while ( ifs && ! ifs.eof() && count < collect.items.size() )
+      while ( ifs && !ifs.eof() )
       {
         string dtype;
+	getline(ifs, dtype);
+	if ( dtype.empty() )
+	  break;
+	BOOST_REQUIRE( count < collect.items.size() );
+        BOOST_CHECK_EQUAL( collect.items[count].first, ResourceType(dtype));
+
         string checksum_type;
         string checksum;
-        string loc;
-        
-        getline(ifs, dtype);
-        BOOST_CHECK_EQUAL( collect.items[count].first, ResourceType(dtype));
         getline(ifs, checksum_type);
         getline(ifs, checksum);
         BOOST_CHECK_EQUAL( collect.items[count].second.checksum(), CheckSum(checksum_type, checksum) );
+
+	string loc;
         getline(ifs, loc);
         BOOST_CHECK_EQUAL( collect.items[count].second.filename(), Pathname(loc) );
-        
+
         count++;
       }
       BOOST_CHECK_EQUAL( collect.items.size(), count );

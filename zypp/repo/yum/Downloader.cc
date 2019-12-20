@@ -105,7 +105,9 @@ namespace
   ///////////////////////////////////////////////////////////////////
   struct RepomdFileReaderCallback2
   {
-    RepomdFileReaderCallback2( const RepomdFileReader::ProcessResource & origCallback_r )
+    typedef function< bool( const OnMediaLocation &, const ResourceType & )> LegacyProcessResource;
+
+    RepomdFileReaderCallback2( const LegacyProcessResource & origCallback_r )
     : _origCallback( origCallback_r )
     {
       addWantedLocale( ZConfig::instance().textLocale() );
@@ -146,7 +148,7 @@ namespace
     }
 
   private:
-    RepomdFileReader::ProcessResource _origCallback;	///< Original Downloader callback
+    LegacyProcessResource _origCallback;	///< Original Downloader callback
     LocaleSet _wantedLocales;				///< Locales do download
 
   };
@@ -190,7 +192,7 @@ void Downloader::download( MediaSetAccess & media, const Pathname & dest_dir, co
 
   // setup parser
   RepomdFileReader( dest_dir / masterIndex,
-		    RepomdFileReader::ProcessResource2( bind(&RepomdFileReaderCallback2::repomd_Callback2, &pimpl, _1, _2, _3) ) );
+		    bind(&RepomdFileReaderCallback2::repomd_Callback2, &pimpl, _1, _2, _3) );
 
   // ready, go!
   start( dest_dir, media );
