@@ -53,11 +53,11 @@ namespace zypp
          */
         void download( MediaSetAccess &media,
                        const Pathname &dest_dir,
-                       const ProgressData::ReceiverFnc & progress = ProgressData::ReceiverFnc() );
+                       const ProgressData::ReceiverFnc & progress = ProgressData::ReceiverFnc() ) override;
         /**
          * \short Status of the remote repository
          */
-        RepoStatus status( MediaSetAccess &media );
+        RepoStatus status( MediaSetAccess &media ) override;
         
         /**
          * Content file parser consumer
