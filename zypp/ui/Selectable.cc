@@ -172,6 +172,12 @@ namespace zypp
 
     ////////////////////////////////////////////////////////////////////////
 
+    bool Selectable::hasRetracted() const
+    { return _pimpl->hasRetracted(); }
+
+    bool Selectable::hasRetractedInstalled() const
+    { return _pimpl->hasRetractedInstalled(); }
+
     bool Selectable::isUnmaintained() const
     { return _pimpl->isUnmaintained(); }
 

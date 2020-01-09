@@ -125,6 +125,8 @@ namespace zypp
       /** The 'best' or 'most interesting' among all available objects.
        * One that is, or is likely to be, chosen for installation, unless
        * it violated any solver policy (see \ref updateCandidateObj).
+       * \note Might return a retracted item if explicitly set by \ref setCandidate
+       * or nothing else available.
        */
       PoolItem candidateObj() const;
 
@@ -132,6 +134,7 @@ namespace zypp
        * In contrary to \ref candidateObj, this may return no item even if
        * there are available objects. This simply means the \ref Repository
        * does not provide this object.
+       * \note Avoids to return retracted items.
        */
       PoolItem candidateObjFrom( Repository repo_r ) const;
 
@@ -140,6 +143,7 @@ namespace zypp
        * there are available objects. This simply means the best object is
        * already installed, and all available objects violate at least one
        * update policy.
+       * \note Avoids to return retracted items.
        */
       PoolItem updateCandidateObj() const;
 
@@ -147,6 +151,7 @@ namespace zypp
        * It's doubtful whether solely looking at the version makes a good
        * candidate, but apps ask for it. Beware that different vendors may
        * use different (uncomparable) version schemata.
+       * \note Avoids to return retracted items.
        */
       PoolItem highestAvailableVersionObj() const;
 
@@ -320,6 +325,12 @@ namespace zypp
       /** True if candidate object is present but no installed. */
       bool hasCandidateObjOnly() const
       { return ( installedEmpty() ) && candidateObj(); }
+
+      /** True if this Selectable contains a retracted item. */
+      bool hasRetracted() const;
+
+      /** True if this Selectable contains an installed retracted item. */
+      bool hasRetractedInstalled() const;
       //@}
 
       /**

@@ -109,9 +109,9 @@ namespace zypp
       PoolItem candidateObj() const
       {
         PoolItem ret( transactingCandidate() );
-        if ( ret )
-          return ret;
-        return _candidate ? _candidate : defaultCandidate();
+        if ( ! ret )
+	  ret = _candidate ? _candidate : defaultCandidate();
+	return ret;
       }
 
       /** Set a userCandidate (out of available objects).
@@ -129,6 +129,8 @@ namespace zypp
       {
         for ( const PoolItem & pi : available() )
         {
+	  if ( pi.isRetracted() )
+	    continue;
           if ( pi.repository() == repo_r )
             return pi;
         }
@@ -148,7 +150,10 @@ namespace zypp
 	// multiversionInstall: This returns the candidate for the last
 	// instance installed. Actually we'd need a list here.
 
-        if ( installedEmpty() || ! defaultCand )
+	if ( ! defaultCand || defaultCand.isRetracted() )
+	  return PoolItem();
+
+        if ( installedEmpty() )
           return defaultCand;
         // Here: installed and defaultCand are non NULL and it's not a
         //       multiversion install.
@@ -177,6 +182,8 @@ namespace zypp
         PoolItem ret;
         for ( const PoolItem & pi : available() )
         {
+	  if ( pi.isRetracted() )
+	    continue;
           if ( !ret || pi.edition() > ret.edition() )
             ret = pi;
         }
@@ -297,6 +304,17 @@ namespace zypp
       { return picklist().end(); }
 
       ////////////////////////////////////////////////////////////////////////
+
+      bool hasRetracted() const
+      { return !_availableItems.empty() && _availableItems.rbegin()->isRetracted(); }
+
+      bool hasRetractedInstalled() const
+      {
+	for ( const PoolItem & pi : installed() )
+	  if ( pi.isRetracted() )
+	    return true;
+	return false;
+      }
 
       bool isUnmaintained() const
       { return availableEmpty(); }
