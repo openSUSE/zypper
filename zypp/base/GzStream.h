@@ -26,6 +26,8 @@
 #include <vector>
 #include <zlib.h>
 
+#include "zypp/base/fXstream.h"
+
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
@@ -86,6 +88,8 @@ namespace zypp
     class fgzstreambuf : public std::streambuf {
 
     public:
+
+      using error_type = ZlibError;
 
       fgzstreambuf( unsigned bufferSize_r = 512 )
       : _fd( -1 )
@@ -182,102 +186,17 @@ namespace zypp
       pos_type
       seekTo( off_type off_r, std::ios_base::seekdir way_r );
     };
-    ///////////////////////////////////////////////////////////////////
-
-    ///////////////////////////////////////////////////////////////////
-    //
-    //	CLASS NAME : fXstream<class TBStr,class TSBuf>
-    /**
-     * @short Common template to define ifgzstream/ofgzstream
-     * reading/writing gzip files.
-     *
-     * Don't use fXstream directly, but @ref ifgzstream or
-     * @ref ofgzstream. fXstream is just to avoid almost
-     * duplicate code.
-     **/
-    template<class TBStream,class TStreamBuf>
-      class fXstream : public TBStream
-      {
-      public:
-
-        typedef gzstream_detail::ZlibError ZlibError;
-        typedef TBStream                   stream_type;
-        typedef TStreamBuf                 streambuf_type;
-
-        fXstream()
-        : stream_type( NULL )
-        { this->init( &_streambuf ); }
-
-        explicit
-        fXstream( const char * file_r )
-        : stream_type( NULL )
-        { this->init( &_streambuf ); this->open( file_r ); }
-
-        virtual
-        ~fXstream()
-        {}
-
-        bool
-        is_open() const
-        { return _streambuf.isOpen(); }
-
-        void
-        open( const char * file_r )
-        {
-          if ( !_streambuf.open( file_r, defMode(*this) ) )
-            this->setstate(std::ios_base::failbit);
-          else
-            this->clear();
-        }
-
-        void
-        close()
-        {
-          if ( !_streambuf.close() )
-            this->setstate(std::ios_base::failbit);
-        }
-
-        /**
-         * The last error returned retuned fron zlib.
-         **/
-        ZlibError
-        zError() const
-        { return _streambuf.zError(); }
-
-	//! Similar to ios::rdbuf.
-	//! But it returns our specific type, not the generic streambuf *.
-	const streambuf_type&
-        getbuf() const
-        { return _streambuf; }
-
-      private:
-
-        streambuf_type _streambuf;
-
-        std::ios_base::openmode
-        defMode( const std::istream & str_r )
-        { return std::ios_base::in; }
-
-        std::ios_base::openmode
-        defMode( const std::ostream & str_r )
-        { return std::ios_base::out; }
-
-      };
-    ///////////////////////////////////////////////////////////////////
-
-    /////////////////////////////////////////////////////////////////
   } // namespace gzstream_detail
-  ///////////////////////////////////////////////////////////////////
 
   /**
    * istream reading gzip files as well as plain files.
    **/
-  typedef gzstream_detail::fXstream<std::istream,gzstream_detail::fgzstreambuf> ifgzstream;
+  typedef detail::fXstream<std::istream,gzstream_detail::fgzstreambuf> ifgzstream;
 
   /**
    * ostream writing gzip files.
    **/
-  typedef gzstream_detail::fXstream<std::ostream,gzstream_detail::fgzstreambuf> ofgzstream;
+  typedef detail::fXstream<std::ostream,gzstream_detail::fgzstreambuf> ofgzstream;
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp

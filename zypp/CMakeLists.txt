@@ -239,6 +239,7 @@ SET( zypp_base_HEADERS
   base/Easy.h
   base/Env.h
   base/Errno.h
+  base/fXstream.h
   base/Random.h
   base/Algorithm.h
   base/Counter.h
