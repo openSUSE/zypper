@@ -94,6 +94,7 @@ namespace zypp
     /** Set the \ref checksum. */
     OnMediaLocation & setChecksum( CheckSum val_r );
 
+  public:
     /** The size of the resource once it has been uncompressed or unpacked. */
     const ByteCount & openSize() const;
     /** Set the \ref openSize. */
@@ -105,15 +106,15 @@ namespace zypp
     OnMediaLocation & setOpenChecksum( CheckSum val_r );
 
   public:
-    /** zchunk: The size of the zchunk header prepending the resource. */
-    const ByteCount & zchunkHeaderSize() const;
-    /** zchunk: Set the \ref zchunkHeaderSize. */
-    OnMediaLocation & setZchunkHeaderSize( ByteCount val_r );
+    /** The size of the header prepending the resource (e.g. for zchunk). */
+    const ByteCount & headerSize() const;
+    /** Set the \ref headerSize. */
+    OnMediaLocation & setHeaderSize( ByteCount val_r );
 
-    /** zchunk: The checksum of the zchunk header prepending the resource. */
-    const CheckSum & zchunkHeaderChecksum() const;
-    /** zchunk: Set the \ref zchunkHeaderChecksum. */
-    OnMediaLocation & setZchunkHeaderChecksum( CheckSum val_r );
+    /** The checksum of the header prepending the resource (e.g. for zchunk). */
+    const CheckSum & headerChecksum() const;
+    /** Set the \ref headerChecksum. */
+    OnMediaLocation & setHeaderChecksum( CheckSum val_r );
 
   public:
     class Impl;                 ///< Implementation class.

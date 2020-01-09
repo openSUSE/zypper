@@ -45,8 +45,8 @@ namespace zypp
     ByteCount _openSize;
     CheckSum  _openChecksum;
 
-    ByteCount _zchunkHeaderSize;
-    CheckSum  _zchunkHeaderChecksum;
+    ByteCount _headerSize;
+    CheckSum  _headerChecksum;
 
   public:
     /** Offer default Impl. */
@@ -133,17 +133,17 @@ namespace zypp
   OnMediaLocation & OnMediaLocation::setOpenChecksum( CheckSum val_r )
   { _pimpl->_openChecksum = val_r; return *this; }
 
-  const ByteCount & OnMediaLocation::zchunkHeaderSize() const
-  { return _pimpl->_zchunkHeaderSize; }
+  const ByteCount & OnMediaLocation::headerSize() const
+  { return _pimpl->_headerSize; }
 
-  OnMediaLocation & OnMediaLocation::setZchunkHeaderSize( ByteCount val_r )
-  { _pimpl->_zchunkHeaderSize = val_r; return *this; }
+  OnMediaLocation & OnMediaLocation::setHeaderSize( ByteCount val_r )
+  { _pimpl->_headerSize = val_r; return *this; }
 
-  const CheckSum & OnMediaLocation::zchunkHeaderChecksum() const
-  { return _pimpl->_zchunkHeaderChecksum; }
+  const CheckSum & OnMediaLocation::headerChecksum() const
+  { return _pimpl->_headerChecksum; }
 
-  OnMediaLocation & OnMediaLocation::setZchunkHeaderChecksum( CheckSum val_r )
-  { _pimpl->_zchunkHeaderChecksum = val_r; return *this; }
+  OnMediaLocation & OnMediaLocation::setHeaderChecksum( CheckSum val_r )
+  { _pimpl->_headerChecksum = val_r; return *this; }
 
 
   std::ostream & operator<<( std::ostream & str, const OnMediaLocation & obj )
