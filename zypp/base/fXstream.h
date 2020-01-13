@@ -69,7 +69,7 @@ namespace zypp {
              **/
       ZlibError
       zError() const
-      { return _streambuf.zError(); }
+      { return _streambuf.error(); }
 
       //! Similar to ios::rdbuf.
       //! But it returns our specific type, not the generic streambuf *.

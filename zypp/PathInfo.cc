@@ -1081,7 +1081,7 @@ namespace zypp
       int fd = open( file.asString().c_str(), O_RDONLY|O_CLOEXEC );
 
       if ( fd != -1 ) {
-        const int magicSize = 3;
+        const int magicSize = 5;
         unsigned char magic[magicSize];
         memset( magic, 0, magicSize );
         if ( read( fd, magic, magicSize ) == magicSize ) {
@@ -1089,6 +1089,9 @@ namespace zypp
             ret = ZT_GZ;
           } else if ( magic[0] == 'B' && magic[1] == 'Z' && magic[2] == 'h' ) {
             ret = ZT_BZ2;
+          } else if ( magic[0] == '\0' && magic[1] == 'Z' && magic[2] == 'C' && magic[3] == 'K' && magic[4] == '1') {
+            ret = ZT_ZCHNK;
+
           }
         }
         close( fd );

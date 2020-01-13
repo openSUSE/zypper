@@ -775,7 +775,7 @@ namespace zypp
      *
      * @return ZT_GZ, ZT_BZ2 if file is compressed, otherwise ZT_NONE.
      **/
-    enum ZIP_TYPE { ZT_NONE, ZT_GZ, ZT_BZ2 };
+    enum ZIP_TYPE { ZT_NONE, ZT_GZ, ZT_BZ2, ZT_ZCHNK };
 
     ZIP_TYPE zipType( const Pathname & file );
 

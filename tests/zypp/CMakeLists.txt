@@ -21,6 +21,7 @@ ADD_TESTS(
   Fetcher
   FileChecker
   Flags
+  GZStream
   InstanceId
   KeyRing
   Locale
@@ -53,4 +54,10 @@ ADD_TESTS(
   Vendor
   Vendor2
 )
+
+IF (ENABLE_ZCHUNK_COMPRESSION)
+  ADD_TESTS (
+    ZChunk
+  )
+ENDIF(ENABLE_ZCHUNK_COMPRESSION)
 

@@ -15,6 +15,10 @@
 #include "zypp/base/InputStream.h"
 #include "zypp/base/GzStream.h"
 
+#ifdef ENABLE_ZCHUNK_COMPRESSION
+  #include "zypp/base/ZckStream.h"
+#endif
+
 #include "zypp/PathInfo.h"
 
 using std::endl;
@@ -27,12 +31,25 @@ namespace zypp
   namespace
   { /////////////////////////////////////////////////////////////////
 
-    inline std::streamoff _heplerInitSize( const Pathname & file_r )
+    inline std::streamoff _helperInitSize( const Pathname & file_r )
     {
       PathInfo p( file_r );
       if ( p.isFile() && filesystem::zipType( file_r ) == filesystem::ZT_NONE )
 	return p.size();
       return -1;
+    }
+
+    inline shared_ptr<std::istream> streamForFile ( const Pathname & file_r )
+    {
+      const auto zType = filesystem::zipType( file_r );
+
+#ifdef ENABLE_ZCHUNK_COMPRESSION
+      if ( zType == filesystem::ZT_ZCHNK )
+        return shared_ptr<std::istream>( new ifzckstream( file_r.asString().c_str() ) );
+#endif
+
+      //fall back to gzstream
+      return shared_ptr<std::istream>( new ifgzstream( file_r.asString().c_str() ) );
     }
 
     /////////////////////////////////////////////////////////////////
@@ -67,9 +84,9 @@ namespace zypp
   //
   InputStream::InputStream( const Pathname & file_r )
   : _path( file_r )
-  , _stream( new ifgzstream( _path.asString().c_str() ) )
+  , _stream( streamForFile( _path.asString() ) )
   , _name( _path.asString() )
-  , _size( _heplerInitSize( _path ) )
+  , _size( _helperInitSize( _path ) )
   {}
 
   ///////////////////////////////////////////////////////////////////
@@ -80,9 +97,9 @@ namespace zypp
   InputStream::InputStream( const Pathname & file_r,
                             const std::string & name_r )
   : _path( file_r )
-  , _stream( new ifgzstream( _path.asString().c_str() ) )
+  , _stream( streamForFile( _path.asString() ) )
   , _name( name_r )
-  , _size( _heplerInitSize( _path ) )
+  , _size( _helperInitSize( _path ) )
   {}
 
   ///////////////////////////////////////////////////////////////////
@@ -92,9 +109,9 @@ namespace zypp
   //
   InputStream::InputStream( const std::string & file_r )
   : _path( file_r )
-  , _stream( new ifgzstream( _path.asString().c_str() ) )
+  , _stream( streamForFile( _path.asString() ) )
   , _name( _path.asString() )
-  , _size( _heplerInitSize( _path ) )
+  , _size( _helperInitSize( _path ) )
   {}
 
   ///////////////////////////////////////////////////////////////////
@@ -105,9 +122,9 @@ namespace zypp
   InputStream::InputStream( const std::string & file_r,
                             const std::string & name_r )
   : _path( file_r )
-  , _stream( new ifgzstream( _path.asString().c_str() ) )
+  , _stream( streamForFile( _path.asString() ) )
   , _name( name_r )
-  , _size( _heplerInitSize( _path ) )
+  , _size( _helperInitSize( _path ) )
   {}
 
   ///////////////////////////////////////////////////////////////////
@@ -117,9 +134,9 @@ namespace zypp
   //
   InputStream::InputStream( const char * file_r )
   : _path( file_r )
-  , _stream( new ifgzstream( _path.asString().c_str() ) )
+  , _stream( streamForFile( _path.asString() ) )
   , _name( _path.asString() )
-  , _size( _heplerInitSize( _path ) )
+  , _size( _helperInitSize( _path ) )
   {}
 
   ///////////////////////////////////////////////////////////////////
@@ -130,9 +147,9 @@ namespace zypp
   InputStream::InputStream( const char * file_r,
                             const std::string & name_r )
   : _path( file_r )
-  , _stream( new ifgzstream( _path.asString().c_str() ) )
+  , _stream( streamForFile( _path.asString() ) )
   , _name( name_r )
-  , _size( _heplerInitSize( _path ) )
+  , _size( _helperInitSize( _path ) )
   {}
 
   ///////////////////////////////////////////////////////////////////

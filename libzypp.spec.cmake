@@ -15,6 +15,11 @@
 # Please submit bugfixes or comments via http://bugs.opensuse.org/
 #
 
+%if 0%{?is_opensuse} && (0%{?sle_version} >= 150000 || 0%{?suse_version} >= 1500)
+%bcond_without zchunk
+%else
+%bcond_with zchunk
+%endif
 
 Name:           @PACKAGE@
 Version:        @VERSION@
@@ -129,6 +134,10 @@ BuildRequires:  asciidoc
 BuildRequires:  libxslt-tools
 %endif
 
+%if %{with zchunk}
+BuildRequires:  libzck-devel
+%endif
+
 %description
 libzypp is the package management library that powers applications
 like YaST, zypper and the openSUSE/SLE implementation of PackageKit.
@@ -220,6 +229,7 @@ cmake -DCMAKE_INSTALL_PREFIX=%{_prefix} \
       -DLIB=%{_lib} \
       -DCMAKE_BUILD_TYPE=Release \
       -DCMAKE_SKIP_RPATH=1 \
+      %{?with_zchunk:-DENABLE_ZCHUNK_COMPRESSION=1} \
       ${EXTRA_CMAKE_OPTIONS} \
       ..
 make %{?_smp_mflags} VERBOSE=1

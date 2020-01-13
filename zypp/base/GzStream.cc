@@ -67,64 +67,53 @@ namespace zypp
 
     ///////////////////////////////////////////////////////////////////
     //
-    //	METHOD NAME : fgzstreambuf::open
-    //	METHOD TYPE : fgzstreambuf *
+    //	METHOD NAME : gzstreambufimpl::openImpl
+    //	METHOD TYPE : bool
     //
-    fgzstreambuf *
-    fgzstreambuf::open( const char * name_r, std::ios_base::openmode mode_r )
+    bool
+    gzstreambufimpl::openImpl(const char *name_r, std::ios_base::openmode mode_r)
     {
-      fgzstreambuf * ret = NULL;
+      bool ret = false;
       if ( ! isOpen() )
+      {
+        // we expect gzdopen to handle errors of ::open
+        if ( mode_r == std::ios_base::in )
         {
-	  // we expect gzdopen to handle errors of ::open
-          if ( mode_r == std::ios_base::in )
-	  {
-            _fd = ::open( name_r, O_RDONLY | O_CLOEXEC );
-            _file = gzdopen( _fd, "rb" );
-	  }
-          else if ( mode_r == std::ios_base::out )
-	  {
-            _fd = ::open( name_r, O_WRONLY|O_CREAT|O_CLOEXEC, 0666 );
-            _file = gzdopen( _fd, "wb" );
-	  }
-          // else: not supported
-
-          if ( isOpen() )
-            {
-              // Store mode and initialize the internal buffer.
-              _mode = mode_r;
-              if ( inReadMode() )
-                {
-                  setp( NULL, NULL );
-                  setg( &(_buffer[0]), &(_buffer[0]), &(_buffer[0]) );
-                }
-              else
-                {
-                  setp( &(_buffer[0]), &(_buffer[_buffer.size()-1]) );
-                  setg( NULL, NULL, NULL );
-                }
-              ret = this;
-            }
-          else
-            setZError();
+          _fd = ::open( name_r, O_RDONLY | O_CLOEXEC );
+          _file = gzdopen( _fd, "rb" );
         }
+        else if ( mode_r == std::ios_base::out )
+        {
+          _fd = ::open( name_r, O_WRONLY|O_CREAT|O_CLOEXEC, 0666 );
+          _file = gzdopen( _fd, "wb" );
+        }
+        // else: not supported
+
+        if ( isOpen() )
+        {
+          // Store mode
+          _mode = mode_r;
+          ret   = true;
+        }
+        else
+          setZError();
+      }
       return ret;
     }
 
     ///////////////////////////////////////////////////////////////////
     //
-    //	METHOD NAME : fgzstreambuf::close
-    //	METHOD TYPE : fgzstreambuf *
+    //	METHOD NAME : gzstreambufimpl::closeImpl
+    //	METHOD TYPE : bool
     //
-    fgzstreambuf *
-    fgzstreambuf::close()
+    bool
+    gzstreambufimpl::closeImpl()
     {
-      fgzstreambuf * ret = NULL;
+      bool ret = false;
       if ( isOpen() )
         {
           bool failed = false;
-          if ( sync() != 0 )
-            failed = true;
+
 	  // it also closes _fd, fine
           int r = gzclose( _file );
           if ( r != Z_OK )
@@ -139,97 +128,19 @@ namespace zypp
 	  _fd = -1;
           _file = NULL;
           _mode = std::ios_base::openmode(0);
-          setp( NULL, NULL );
-          setg( NULL, NULL, NULL );
           if ( ! failed )
-            ret = this;
+            ret = true;
         }
       return ret;
     }
 
     ///////////////////////////////////////////////////////////////////
     //
-    //	METHOD NAME : fgzstreambuf::sync
-    //	METHOD TYPE : int
-    //
-    int
-    fgzstreambuf::sync()
-    {
-      int ret = 0;
-      if ( pbase() < pptr() ) {
-        const int_type res = overflow();
-        if ( traits_type::eq_int_type( res, traits_type::eof() ) )
-          ret = -1;
-      }
-      return ret;
-    }
-
-    ///////////////////////////////////////////////////////////////////
-    //
-    //	METHOD NAME : fgzstreambuf::overflow
-    //	METHOD TYPE : fgzstreambuf::int_type
-    //
-    fgzstreambuf::int_type
-    fgzstreambuf::overflow( int_type c )
-    {
-      int_type ret = traits_type::eof();
-      if ( inWriteMode() )
-        {
-          if ( ! traits_type::eq_int_type( c, traits_type::eof() ) )
-            {
-              *pptr() = traits_type::to_char_type( c );
-              pbump(1);
-            }
-          if ( pbase() <= pptr() )
-            {
-              if ( zWriteFrom( pbase(), pptr() - pbase() ) )
-                {
-                  setp( &(_buffer[0]), &(_buffer[_buffer.size()-1]) );
-                  ret = traits_type::not_eof( c );
-                }
-              // else: error writing the file
-            }
-        }
-      return ret;
-    }
-
-    ///////////////////////////////////////////////////////////////////
-    //
-    //	METHOD NAME : fgzstreambuf::underflow
-    //	METHOD TYPE : fgzstreambuf::int_type
-    //
-    fgzstreambuf::int_type
-    fgzstreambuf::underflow()
-    {
-      int_type ret = traits_type::eof();
-      if ( inReadMode() )
-        {
-          if ( gptr() < egptr() )
-            return traits_type::to_int_type( *gptr() );
-
-          const std::streamsize got = zReadTo( &(_buffer[0]), _buffer.size() );
-          if ( got > 0 )
-            {
-              setg( &(_buffer[0]), &(_buffer[0]), &(_buffer.data()[got]) );
-              ret = traits_type::to_int_type( *gptr() );
-            }
-          else if ( got == 0 )
-            {
-              // EOF
-              setg( &(_buffer[0]), &(_buffer[0]), &(_buffer[0]) );
-            }
-          // else: error reading the file
-        }
-      return ret;
-    }
-
-    ///////////////////////////////////////////////////////////////////
-    //
-    //	METHOD NAME : fgzstreambuf::zReadTo
+    //	METHOD NAME : gzstreambufimpl::readData
     //	METHOD TYPE : std::streamsize
     //
     std::streamsize
-    fgzstreambuf::zReadTo( char * buffer_r, std::streamsize maxcount_r )
+    gzstreambufimpl::readData( char * buffer_r, std::streamsize maxcount_r )
     {
       int read = gzread( _file, buffer_r, maxcount_r );
       if ( read < 0 )
@@ -239,11 +150,11 @@ namespace zypp
 
     ///////////////////////////////////////////////////////////////////
     //
-    //	METHOD NAME : fgzstreambuf::zWriteFrom
+    //	METHOD NAME : gzstreambufimpl::writeData
     //	METHOD TYPE : bool
     //
     bool
-    fgzstreambuf::zWriteFrom( const char * buffer_r, std::streamsize count_r )
+    gzstreambufimpl::writeData( const char * buffer_r, std::streamsize count_r )
     {
       int written = 0;
       if ( count_r )
@@ -256,11 +167,11 @@ namespace zypp
 
     ///////////////////////////////////////////////////////////////////
     //
-    //	METHOD NAME : fgzstreambuf::zSeekTo
-    //	METHOD TYPE : fgzstreambuf::pos_type
+    //	METHOD NAME : gzstreambufimpl::seekTo
+    //	METHOD TYPE : off_t
     //
-    fgzstreambuf::pos_type
-    fgzstreambuf::zSeekTo( off_type off_r, std::ios_base::seekdir way_r )
+    off_t
+    gzstreambufimpl::seekTo( off_t off_r, std::ios_base::seekdir way_r, std::ios_base::openmode )
     {
       z_off_t ret = gzseek( _file, off_r, way_r );
       if ( ret == -1 )
@@ -270,11 +181,11 @@ namespace zypp
 
     ///////////////////////////////////////////////////////////////////
     //
-    //	METHOD NAME : fgzstreambuf::zTell
-    //	METHOD TYPE : fgzstreambuf::pos_type
+    //	METHOD NAME : gzstreambufimpl::tell
+    //	METHOD TYPE : off_t
     //
-    fgzstreambuf::pos_type
-    fgzstreambuf::zTell()
+    off_t
+    gzstreambufimpl::tell() const
     {
       z_off_t ret = gztell( _file );
       if ( ret == -1 )
@@ -282,78 +193,12 @@ namespace zypp
       return ret;
     }
 
-    ///////////////////////////////////////////////////////////////////
-    //
-    //	METHOD NAME : fgzstreambuf::seekTo
-    //	METHOD TYPE : fgzstreambuf::pos_type
-    //
-    fgzstreambuf::pos_type
-    fgzstreambuf::seekTo( off_type off_r, std::ios_base::seekdir way_r )
-    {
-      pos_type ret = pos_type(off_type(-1));
-      if ( isOpen() )
-        {
-          if ( inWriteMode() )
-            {
-              if ( sync() == 0 )
-                ret = zSeekTo( off_r, way_r );
-            }
-          else
-            {
-              off_type zegptr = zTell();
-              if ( zegptr != off_type(-1) )
-                {
-                  if ( way_r == std::ios_base::end )
-                    {
-                      // Invalidate buffer and seek.
-                      // XXX improve by transformation into ios_base::beg
-                      // to see whether we stay inside the buffer.
-                      setg( &(_buffer[0]), &(_buffer[0]), &(_buffer[0]) );
-                      ret = zSeekTo( off_r, way_r );
-                    }
-                  else
-                    {
-                      // Transform into ios_base::beg and seek.
-                      off_type zeback = zegptr - ( egptr() - eback() );
-                      off_type zgptr  = zegptr - ( egptr() - gptr() );
-                      off_type zngptr = off_r;
-                      if ( way_r == std::ios_base::cur )
-                        {
-                          zngptr += zgptr;
-                          way_r = std::ios_base::beg;
-                        }
-
-                      if ( way_r == std::ios_base::beg )
-                        {
-                          if ( zeback <= zngptr && zngptr <= zegptr )
-                            {
-                              // Still inside buffer, adjust gptr and
-                              // calculate new position.
-                              setg( eback(),
-                                    eback() + (zngptr-zeback),
-                                    egptr() );
-                              ret = pos_type(zngptr);
-                            }
-                          else
-                            {
-                              // Invalidate buffer and seek.
-                              setg( &(_buffer[0]), &(_buffer[0]), &(_buffer[0]) );
-                              ret = zSeekTo( off_r, way_r );
-                            }
-                        }
-                    }
-                }
-            }
-        }
-      return ret;
-    }
-
-    fgzstreambuf::pos_type
-    fgzstreambuf::compressed_tell() const
+    off_t
+    gzstreambufimpl::compressed_tell() const
     {
 	off_t pos = lseek (_fd, 0, SEEK_CUR);
 	// hopefully the conversion is ok
-	return pos;
+        return pos;
     }
 
     /////////////////////////////////////////////////////////////////

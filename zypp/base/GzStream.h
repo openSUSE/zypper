@@ -26,6 +26,7 @@
 #include <vector>
 #include <zlib.h>
 
+#include "zypp/base/SimpleStreambuf.h"
 #include "zypp/base/fXstream.h"
 
 ///////////////////////////////////////////////////////////////////
@@ -70,9 +71,10 @@ namespace zypp
     inline std::ostream & operator<<( std::ostream & str, const ZlibError & obj )
     { return str << obj.strerror(); }
 
+
     ///////////////////////////////////////////////////////////////////
     //
-    //	CLASS NAME : fgzstreambuf
+    //	CLASS NAME : gzstreambufimpl
     /**
      * @short Streambuffer reading or writing gzip files.
      *
@@ -85,107 +87,68 @@ namespace zypp
      *
      * This streambuf is used in @ref ifgzstream and  @ref ofgzstream.
      **/
-    class fgzstreambuf : public std::streambuf {
-
+    class gzstreambufimpl {
     public:
 
       using error_type = ZlibError;
 
-      fgzstreambuf( unsigned bufferSize_r = 512 )
-      : _fd( -1 )
-      ,_file( NULL )
-      , _mode( std::ios_base::openmode(0) )
-      , _buffer( (bufferSize_r?bufferSize_r:1), 0 )
-      {}
-
-      virtual
-      ~fgzstreambuf()
-      { close(); }
+      ~gzstreambufimpl()
+      { closeImpl(); }
 
       bool
-      isOpen() const
+      isOpen   () const
       { return _file; }
 
       bool
-      inReadMode() const
+      canRead  () const
       { return( _mode == std::ios_base::in ); }
 
       bool
-      inWriteMode() const
+      canWrite () const
       { return( _mode == std::ios_base::out ); }
 
-      fgzstreambuf *
-      open( const char * name_r, std::ios_base::openmode mode_r = std::ios_base::in );
-
-        fgzstreambuf *
-        close();
-
-	//! Tell the file position in the compressed file.
-	//! Analogous to tell(2), complementary to gztell.
-	pos_type compressed_tell() const;
-
-        /**
-         * The last error returned fron zlib.
-         **/
-        ZlibError
-        zError() const
-        { return _error; }
+      bool
+      canSeek  ( std::ios_base::seekdir way_r ) const
+      { return ( way_r == std::ios_base::beg || way_r == std::ios_base::cur ); }
 
     protected:
+      bool openImpl( const char * name_r, std::ios_base::openmode mode_r );
+      bool closeImpl ();
 
-      virtual int
-      sync();
+      //! Tell the file position in the compressed file.
+      //! Analogous to tell(2), complementary to gztell.
+      off_t compressed_tell() const;
 
-      virtual int_type
-      overflow( int_type c = traits_type::eof() );
+    public:
+      /**
+         * The last error returned fron zlib.
+         **/
+      error_type
+      error() const
+      { return _error; }
 
-      virtual int_type
-      underflow();
-
-      virtual pos_type
-      seekoff( off_type off_r, std::ios_base::seekdir way_r, std::ios_base::openmode /* ignored */ )
-      { return seekTo( off_r, way_r ); }
-
-      virtual pos_type
-      seekpos( pos_type pos_r, std::ios_base::openmode /* ignored */ )
-      { return seekTo( off_type(pos_r), std::ios_base::beg ); }
-
-    private:
-
-      typedef std::vector<char> buffer_type;
-
-      //! file descriptor of the compressed file
-      int		       _fd;
-
-      gzFile                   _file;
-
-      std::ios_base::openmode  _mode;
-
-      buffer_type              _buffer;
-
-      ZlibError                _error;
+      std::streamsize readData ( char * buffer_r, std::streamsize maxcount_r  );
+      bool writeData( const char * buffer_r, std::streamsize count_r );
+      off_t seekTo( off_t off_r, std::ios_base::seekdir way_r, std::ios_base::openmode omode_r );
+      off_t tell() const;
 
     private:
 
       void
-      setZError()
+      setZError() const
       { gzerror( _file, &_error._zError ); }
 
-      std::streamsize
-      zReadTo( char * buffer_r, std::streamsize maxcount_r );
+      //! file descriptor of the compressed file
+      int		         _fd = -1;
 
-      bool
-      zWriteFrom( const char * buffer_r, std::streamsize count_r );
+      gzFile                   _file = nullptr;
 
-      pos_type
-      zSeekTo( off_type off_r, std::ios_base::seekdir way_r );
+      std::ios_base::openmode  _mode = std::ios_base::openmode(0);
 
-      pos_type
-      zTell();
+      mutable ZlibError        _error;
 
-      pos_type
-      seekTo( off_type off_r, std::ios_base::seekdir way_r );
     };
+    using fgzstreambuf = detail::SimpleStreamBuf<gzstreambufimpl>;
   } // namespace gzstream_detail
 
   /**
