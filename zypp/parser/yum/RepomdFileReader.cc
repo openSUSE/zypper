@@ -58,6 +58,15 @@ namespace zypp
      */
     bool consumeNode( Reader & reader_r );
 
+  private:
+    /** Retrieve a checksum node. */
+    CheckSum getChecksum( Reader & reader_r )
+    { return CheckSum( reader_r->getAttribute("type").asString(), reader_r.nodeText().asString() ); }
+
+    /** Retrieve a size node. */
+    ByteCount getSize( Reader & reader_r )
+    { return ByteCount( str::strtonum<ByteCount::SizeType>( reader_r.nodeText().asString() ) ); }
+
 
   private:
     /** Function for processing collected data. Passed-in through constructor. */
@@ -114,9 +123,14 @@ namespace zypp
       // xpath: /repomd/checksum
       if ( reader_r->name() == "checksum" )
       {
-        string checksum_type = reader_r->getAttribute("type").asString() ;
-        string checksum_vaue = reader_r.nodeText().asString();
-	_location.setChecksum( CheckSum( std::move(checksum_type), std::move(checksum_vaue) ) );
+	_location.setChecksum( getChecksum( reader_r ) );
+        return true;
+      }
+
+      // xpath: /repomd/header-checksum
+      if ( reader_r->name() == "header-checksum" )
+      {
+	_location.setHeaderChecksum( getChecksum( reader_r ) );
         return true;
       }
 
@@ -130,7 +144,14 @@ namespace zypp
       // xpath: /repomd/size
       if ( reader_r->name() == "size" )
       {
-	_location.setDownloadSize( ByteCount( str::strtonum<ByteCount::SizeType>( reader_r.nodeText().asString() ) ) );
+	_location.setDownloadSize( getSize( reader_r ) );
+        return true;
+      }
+
+      // xpath: /repomd/header-size
+      if ( reader_r->name() == "header-size" )
+      {
+	_location.setHeaderSize( getSize( reader_r ) );
         return true;
       }
 
