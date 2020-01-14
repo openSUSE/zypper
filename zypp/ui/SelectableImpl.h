@@ -180,10 +180,15 @@ namespace zypp
       PoolItem highestAvailableVersionObj() const
       {
         PoolItem ret;
+	bool retractedOk = false;
         for ( const PoolItem & pi : available() )
         {
-	  if ( pi.isRetracted() )
-	    continue;
+	  if ( !retractedOk && pi.isRetracted() )
+	  {
+	    if ( ret )
+	      break;	// prefer a not retracted candidate
+	    retractedOk = true;
+	  }
           if ( !ret || pi.edition() > ret.edition() )
             ret = pi;
         }
@@ -310,10 +315,25 @@ namespace zypp
 
       bool hasRetractedInstalled() const
       {
-	for ( const PoolItem & pi : installed() )
-	  if ( pi.isRetracted() )
-	    return true;
-	return false;
+	bool ret = false;
+	if ( hasRetracted() )
+	{
+	  for ( const PoolItem & ipi : installed() )
+	  {
+	    PoolItem pi { identicalAvailableObj( ipi ) };
+	    if ( pi && pi.isRetracted() )
+	    {
+	      ret = true;
+	      break;
+	    }
+	  }
+	}
+	return ret;
+// later if pool index is available:
+// 	for ( const PoolItem & pi : installed() )
+// 	  if ( pi.isRetracted() )
+// 	    return true;
+// 	return false;
       }
 
       bool isUnmaintained() const
