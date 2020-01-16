@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-11-28 17:54+0100\n"
-"PO-Revision-Date: 2019-05-02 20:15+0000\n"
-"Last-Translator: Andika Triwidada <andika@gmail.com>\n"
+"PO-Revision-Date: 2020-01-16 16:54+0000\n"
+"Last-Translator: Kukuh Syafaat <syafaatkukuh@gmail.com>\n"
 "Language-Team: Indonesian <https://l10n.opensuse.org/projects/zypper/master/"
 "id/>\n"
 "Language: id\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 3.3\n"
+"X-Generator: Weblate 3.6.1\n"
 
 #: src/SolverRequester.h:52
 #, boost-format
@@ -470,6 +470,8 @@ msgid_plural ""
 "%1% packages had to be excluded from file conflicts check because they are "
 "not yet downloaded."
 msgstr[0] ""
+"%1% paket harus dikeluarkan dari pemeriksaan konflik berkas karena belum "
+"diunduh."
 
 #. TranslatorExplanation %1%(commandline option)
 #: src/callbacks/rpm.h:460
@@ -821,9 +823,9 @@ msgstr "Jangan menyingkat teks dalam tabel."
 
 #. translators: --table-style, -s, %1% denotes the supported range of the integer argument (e.g. "1-11")
 #: src/Config.cc:420
-#, fuzzy, boost-format
+#, boost-format
 msgid "Table style (%1%)."
-msgstr "Gaya tabel (bilangan bulat)."
+msgstr "Gaya tabel (%1%)."
 
 #: src/Config.cc:424 src/commands/optionsets.cc:284
 msgid "Entering non-interactive mode."
@@ -2760,6 +2762,8 @@ msgid ""
 "A meaningful file conflict check can only be performed if used together with "
 "'%1%'."
 msgstr ""
+"Pemeriksaan konflik berkas yang bermakna hanya dapat dilakukan jika "
+"digunakan bersama dengan '%1%'."
 
 #. translators: -r, --repo <ALIAS|#|URI>
 #: src/commands/optionsets.cc:67
@@ -4013,6 +4017,8 @@ msgid ""
 "Search for all packages that provide any of the provides of the package(s) "
 "matched by the input parameters."
 msgstr ""
+"Cari semua paket yang menyediakan salah satu dari paket yang cocok dengan "
+"parameter masukan."
 
 #. translators: --requires-pkg
 #: src/commands/search/search.cc:178
@@ -4020,6 +4026,8 @@ msgid ""
 "Search for all packages that require any of the provides of the package(s) "
 "matched by the input parameters."
 msgstr ""
+"Cari semua paket yang memerlukan salah satu dari paket yang cocok dengan "
+"parameter masukan."
 
 #. translators: --recommends-pkg
 #: src/commands/search/search.cc:182
@@ -4027,6 +4035,8 @@ msgid ""
 "Search for all packages that recommend any of the provides of the package(s) "
 "matched by the input parameters."
 msgstr ""
+"Cari semua paket yang merekomendasikan salah satu dari paket yang cocok "
+"dengan parameter masukan."
 
 #. translators: --supplements-pkg
 #: src/commands/search/search.cc:186
@@ -4034,6 +4044,8 @@ msgid ""
 "Search for all packages that supplement any of the provides of the "
 "package(s) matched by the input parameters."
 msgstr ""
+"Cari semua paket yang melengkapi salah satu dari penawaran paket yang cocok "
+"dengan parameter masukan."
 
 #. translators: --conflicts-pkg
 #: src/commands/search/search.cc:190
@@ -4041,6 +4053,8 @@ msgid ""
 "Search for all packages that conflict with any of the package(s) matched by "
 "the input parameters."
 msgstr ""
+"Cari semua paket yang konflik dengan salah satu paket yang cocok dengan "
+"parameter masukan."
 
 #. translators: --obsoletes-pkg
 #: src/commands/search/search.cc:194
@@ -4048,6 +4062,8 @@ msgid ""
 "Search for all packages that obsolete any of the package(s) matched by the "
 "input parameters."
 msgstr ""
+"Cari semua paket yang usang dari salah satu paket yang cocok dengan "
+"parameter masukan."
 
 #. translators: --suggests-pkg
 #: src/commands/search/search.cc:198
@@ -4055,6 +4071,8 @@ msgid ""
 "Search for all packages that suggest any of the provides of the package(s) "
 "matched by the input parameters."
 msgstr ""
+"Cari semua paket yang menyarankan salah satu dari paket yang cocok dengan "
+"parameter masukan."
 
 #. translators: -t, --type <TYPE>
 #: src/commands/search/search.cc:202
@@ -4504,7 +4522,7 @@ msgstr "Perintah ini hanya berguna di zypper shell."
 #: src/commands/solveroptionset.cc:23
 #, boost-format
 msgid "Valid values: %1%"
-msgstr ""
+msgstr "Nilai valid: %1%"
 
 #: src/commands/solveroptionset.cc:35 src/commands/solveroptionset.cc:58
 msgid "Solver options"
@@ -4535,7 +4553,7 @@ msgstr "Jangan paksa pemecah untuk mencari solusinya, biarkan bertanya."
 
 #: src/commands/solveroptionset.cc:63
 msgid "Set the solvers general attitude when resolving a job."
-msgstr ""
+msgstr "Tetapkan sikap umum pemecah saat menyelesaikan suatu pekerjaan."
 
 #: src/commands/solveroptionset.cc:83
 msgid "Expert options"
@@ -4890,12 +4908,12 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/utils/purge-kernels.cc:26
 msgid "purge-kernels [OPTIONS]"
-msgstr ""
+msgstr "purge-kernel [OPSI]"
 
 #. translators: command summary: targetos, tos
 #: src/commands/utils/purge-kernels.cc:28
 msgid "Remove old kernels."
-msgstr ""
+msgstr "Hapus kernel lama."
 
 #. translators: command description
 #: src/commands/utils/purge-kernels.cc:30
@@ -4904,25 +4922,28 @@ msgid ""
 "zypp/zypp.conf:multiversion.kernels which can be given as <version>, latest(-"
 "N), running, oldest(+N)."
 msgstr ""
+"Autoremoves memasang kernel sesuai dengan daftar kernel untuk disimpan dari /"
+"etc/zypp/zypp.conf:multiversion.kernels yang dapat diberikan sebagai "
+"<version>, terbaru (-N), berjalan, tertua (+N)."
 
 #: src/commands/utils/purge-kernels.cc:51
 msgid "Preparing to purge obsolete kernels..."
-msgstr ""
+msgstr "Bersiap untuk membersihkan kernel yang sudah usang..."
 
 #: src/commands/utils/purge-kernels.cc:52
 #, boost-format
 msgid "Configuration: %1%"
-msgstr ""
+msgstr "Konfigurasi: %1%"
 
 #: src/commands/utils/purge-kernels.cc:53
 #, boost-format
 msgid "Running kernel release: %1%"
-msgstr ""
+msgstr "Menjalankan rilis kernel: %1%"
 
 #: src/commands/utils/purge-kernels.cc:54
 #, boost-format
 msgid "Running kernel arch: %1%"
-msgstr ""
+msgstr "Menjalankan arsitektur kernel: %1%"
 
 #: src/commands/utils/source-download.cc:203
 #, c-format, boost-format
@@ -6093,7 +6114,7 @@ msgstr "Masalah: "
 
 #: src/solve-commit.cc:48
 msgid "Detailed information: "
-msgstr ""
+msgstr "Informasi detail: "
 
 #. TranslatorExplanation %d is the solution number
 #: src/solve-commit.cc:61
@@ -6122,7 +6143,7 @@ msgstr[0] "Pilih solusi di atas menggunakan '1' atau batalkan menggunakan 'c'"
 #. The answers should be lower case letters.
 #: src/solve-commit.cc:111
 msgid "s/r/c/d"
-msgstr ""
+msgstr "s/r/c/d"
 
 #. translators: answers for dependency problem solution input prompt:
 #. "Choose from above solutions by number or cancel"
@@ -6133,28 +6154,28 @@ msgstr ""
 #. please report a bug against zypper at bugzilla.suse.com, we'll try to solve it.
 #: src/solve-commit.cc:127
 msgid "c/d"
-msgstr ""
+msgstr "c/d"
 
 #: src/solve-commit.cc:133
 #, boost-format
 msgid "Choose solution %1%"
-msgstr ""
+msgstr "Pilih solusi %1%"
 
 #: src/solve-commit.cc:135
 msgid "Skip problem and continue."
-msgstr ""
+msgstr "Lewati masalah dan lanjutkan."
 
 #: src/solve-commit.cc:138
 msgid "Retry solving immediately."
-msgstr ""
+msgstr "Coba lagi pemecahan segera."
 
 #: src/solve-commit.cc:140
 msgid "Choose no solution and cancel."
-msgstr ""
+msgstr "Pilih tidak ada solusi dan batalkan."
 
 #: src/solve-commit.cc:141
 msgid "Toggle show detailed conflict information."
-msgstr ""
+msgstr "Beralih menampilkan informasi konflik terperinci."
 
 #: src/solve-commit.cc:174
 #, c-format, boost-format
