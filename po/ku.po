@@ -6,14 +6,16 @@ msgstr ""
 "Project-Id-Version: memory.ku.po\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-11-28 17:54+0100\n"
-"PO-Revision-Date: 2005-09-23 00:15+0200\n"
-"Last-Translator: Kurdish Team <i18n@suse.de>\n"
-"Language-Team: Kurdish Team <i18n@suse.de>\n"
-"Language: \n"
+"PO-Revision-Date: 2020-01-16 16:54+0000\n"
+"Last-Translator: Yunus YAŞAR <yunus.yasar@ozguryazilim.com.tr>\n"
+"Language-Team: Kurdish <https://l10n.opensuse.org/projects/zypper/master/ku/>"
+"\n"
+"Language: ku\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: Plural-Forms: nplurals=2; plural=n != 1\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 3.6.1\n"
 
 #: src/SolverRequester.h:52
 #, boost-format
@@ -112,9 +114,9 @@ msgstr ""
 
 #. translator: %1% is a file name
 #: src/callbacks/keyring.h:156
-#, boost-format
+#, boost-format, fuzzy
 msgid "File '%1%' is unsigned."
-msgstr ""
+msgstr "Hevnivîs nederbasdar e."
 
 #. translator: %1% is a file name, %2% a repositories name
 #: src/callbacks/keyring.h:159
