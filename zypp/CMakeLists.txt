@@ -466,12 +466,10 @@ INSTALL(  FILES
 
 SET( zypp_parser_yum_SRCS
   parser/yum/RepomdFileReader.cc
-  parser/yum/PatchesFileReader.cc
 )
 
 SET( zypp_parser_yum_HEADERS
   parser/yum/RepomdFileReader.h
-  parser/yum/PatchesFileReader.h
 )
 
 INSTALL(  FILES

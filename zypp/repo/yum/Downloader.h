@@ -41,7 +41,7 @@ namespace zypp
       class Downloader : public repo::Downloader
       {
       public:
-         
+
         /**
          * \short Constructor from the repository information
          *
@@ -50,34 +50,28 @@ namespace zypp
          *
          * \param info Repository information
          */
-        Downloader( const RepoInfo &info , const Pathname &delta_dir = Pathname());
+        Downloader( const RepoInfo & info_r, const Pathname & deltaDir_r = Pathname() );
 
         /**
          * \short Download metadata to a local directory
          *
          * \param media Media access to the repository url
-         * \param dest_dir Local destination directory
+         * \param destDir Local destination directory
          * \param progress progress receiver
          */
-        void download( MediaSetAccess &media,
-                       const Pathname &dest_dir,
-                       const ProgressData::ReceiverFnc & progress = ProgressData::ReceiverFnc() ) override;
-        
+        void download( MediaSetAccess & media_r,
+                       const Pathname & destDir_r,
+                       const ProgressData::ReceiverFnc & progress_r = ProgressData::ReceiverFnc() ) override;
+
         /**
          * \short Status of the remote repository
          */
-        RepoStatus status( MediaSetAccess &media ) override;
-        
-       protected:
-        bool repomd_Callback( const OnMediaLocation &loc, const ResourceType &dtype );
-        bool patches_Callback( const OnMediaLocation &loc, const std::string &id );
-       private:
-	// TODO: Use pimpl to be extensible; but breaks bincompat :(
-        Pathname _dest_dir;
-        Pathname _delta_dir;
-        std::list<OnMediaLocation> _patches_files;
-        
-        MediaSetAccess *_media_ptr;
+        RepoStatus status( MediaSetAccess & media_r ) override;
+
+      private:
+	class Impl;
+	friend class Impl;
+	Pathname _deltaDir;
       };
 
     } // ns yum

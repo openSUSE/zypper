@@ -1,4 +1,0 @@
-to generate a solution, take the
-patches.xml, remove the namespace and do:
-
-xsltproc patches.xsl patches2.xml | html2tex

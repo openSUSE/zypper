@@ -8,19 +8,18 @@
 \---------------------------------------------------------------------*/
 
 #include <fstream>
+#include <solv/solvversion.h>
 #include "zypp/base/String.h"
 #include "zypp/base/LogTools.h"
 #include "zypp/base/Function.h"
 #include "zypp/ZConfig.h"
 
-#include "zypp/parser/yum/RepomdFileReader.h"
-#include "zypp/parser/yum/PatchesFileReader.h"
 #include "Downloader.h"
 #include "zypp/repo/MediaInfoDownloader.h"
 #include "zypp/base/UserRequestException.h"
 #include "zypp/parser/xml/Reader.h"
+#include "zypp/parser/yum/RepomdFileReader.h"
 
-using namespace std;
 using namespace zypp::xml;
 using namespace zypp::parser::yum;
 
@@ -30,111 +29,124 @@ namespace repo
 {
 namespace yum
 {
-
-Downloader::Downloader( const RepoInfo &repoinfo , const Pathname &delta_dir)
-  : repo::Downloader(repoinfo), _delta_dir(delta_dir), _media_ptr(0L)
-{}
-
-RepoStatus Downloader::status( MediaSetAccess &media )
-{
-  RepoStatus ret( media.provideOptionalFile( repoInfo().path() / "/repodata/repomd.xml" ) );
-  if ( !ret.empty() )	// else: mandatory master index is missing
-    ret = ret && RepoStatus( media.provideOptionalFile( "/media.1/media" ) );
-  // else: mandatory master index is missing -> stay empty
-  return ret;
-}
-
-static OnMediaLocation loc_with_path_prefix( const OnMediaLocation & loc, const Pathname & prefix )
-{
-  if (prefix.empty() || prefix == "/")
-    return loc;
-
-  OnMediaLocation loc_with_path(loc);
-  loc_with_path.changeFilename(prefix / loc.filename());
-  return loc_with_path;
-}
-
-// search old repository file file to run the delta algorithm on
-static Pathname search_deltafile( const Pathname & dir, const Pathname & file )
-{
-  Pathname deltafile;
-  if (!PathInfo(dir).isDir())
-    return deltafile;
-  string base = file.basename();
-  size_t hypoff = base.find("-");
-  if (hypoff != string::npos)
-    base.replace(0, hypoff + 1, "");
-  size_t basesize = base.size();
-  std::list<Pathname> retlist;
-  if (!filesystem::readdir(retlist, dir, false))
-  {
-    for_( it, retlist.begin(), retlist.end() )
-    {
-      string fn = it->asString();
-      if (fn.size() >= basesize && fn.substr(fn.size() - basesize, basesize) == base)
-	deltafile = *it;
-    }
-  }
-  return deltafile;
-}
-
-bool Downloader::patches_Callback( const OnMediaLocation & loc_r, const string & id_r )
-{
-  OnMediaLocation loc_with_path(loc_with_path_prefix(loc_r, repoInfo().path()));
-  MIL << id_r << " : " << loc_with_path << endl;
-  this->enqueueDigested(loc_with_path,  FileChecker(), search_deltafile(_delta_dir + "repodata", loc_r.filename()));
-  return true;
-}
-
-
-//bool repomd_Callback2( const OnMediaLocation &loc, const ResourceType &dtype, const std::string &typestr, UserData & userData_r );
-
-///////////////////////////////////////////////////////////////////
-namespace
-{
   ///////////////////////////////////////////////////////////////////
-  /// \class Impl
+  namespace
+  {
+    inline OnMediaLocation loc_with_path_prefix( OnMediaLocation loc_r, const Pathname & prefix_r )
+    {
+      if ( ! prefix_r.empty() && prefix_r != "/" )
+	loc_r.changeFilename( prefix_r / loc_r.filename() );
+      return loc_r;
+    }
+
+    // search old repository file to run the delta algorithm on
+    Pathname search_deltafile( const Pathname & dir, const Pathname & file )
+    {
+      Pathname deltafile;
+      if ( ! PathInfo(dir).isDir() )
+	return deltafile;
+
+      // Strip the checksum preceding the file stem so we can look for an
+      // old *-primary.xml which may contain some reusable blocks.
+      std::string base { file.basename() };
+      size_t hypoff = base.find( "-" );
+      if ( hypoff != std::string::npos )
+	base.replace( 0, hypoff + 1, "" );
+
+      std::list<std::string> retlist;
+      if ( ! filesystem::readdir( retlist, dir, false ) )
+      {
+	for ( const auto & fn : retlist )
+	{
+	  if ( str::endsWith( fn, base ) )
+	    deltafile = fn;
+	}
+      }
+      return deltafile;
+    }
+  } // namespace
+  ///////////////////////////////////////////////////////////////////
+
+  ///////////////////////////////////////////////////////////////////
+  /// \class Downloader::Impl
   /// \brief Helper filtering the files offered by a RepomdFileReader
   ///
   /// Clumsy construct; basically an Impl class for Downloader, maintained
   /// in Downloader::download only while parsing a repomd.xml.
-  ///
-  /// Introduced because Downloader itself lacks an Impl class, thus can't
-  /// be extended to provide more data to the callbacks without losing
-  /// binary compatibility.
+  ///     File types:
+  ///         type        (plain)
+  ///         type_db     (sqlite, ignored by zypp)
+  ///         type_zck    (zchunk, preferred)
+  ///     Localized type:
+  ///         susedata.LOCALE
   ///////////////////////////////////////////////////////////////////
-  struct RepomdFileReaderCallback2
+  struct Downloader::Impl
   {
-    typedef function< bool( const OnMediaLocation &, const ResourceType & )> LegacyProcessResource;
+    NON_COPYABLE( Impl );
+    NON_MOVABLE( Impl );
 
-    RepomdFileReaderCallback2( const LegacyProcessResource & origCallback_r )
-    : _origCallback( origCallback_r )
+    Impl( Downloader & downloader_r, MediaSetAccess & media_r, const Pathname & destDir_r )
+    : _downloader { downloader_r }
+    , _media { media_r }
+    , _destDir { destDir_r }
     {
       addWantedLocale( ZConfig::instance().textLocale() );
       for ( const Locale & it : ZConfig::instance().repoRefreshLocales() )
 	addWantedLocale( it );
     }
 
-    /** The callback invoked by the RepomdFileReader */
-    bool repomd_Callback2( const OnMediaLocation & loc_r, const ResourceType & dtype_r, const std::string & typestr_r )
+    /** The callback invoked by the RepomdFileReader.
+     * It's a pity, but in the presence of separate "type" and "type_zck" entries,
+     * we have to scan the whole file before deciding what to download....
+     */
+    bool operator()( const OnMediaLocation & loc_r, const ResourceType & /*dtype_r*/, const std::string & typestr_r )
     {
+      if ( str::endsWith( typestr_r, "_db" ) )
+	return true;	// skip sqlitedb
+
+      bool zchk { str::endsWith( typestr_r, "_zck" ) };
+#ifdef LIBSOLVEXT_FEATURE_ZSTD_COMPRESSION
+      const std::string & basetype { zchk ? typestr_r.substr( 0, typestr_r.size()-4 ) : typestr_r };
+#else
+      if ( zchk )
+	return true;	// skip zchunk if not supported by libsolv
+      const std::string & basetype { typestr_r };
+#endif
+
       // filter well known resource types
-      if ( dtype_r == ResourceType::OTHER || dtype_r == ResourceType::FILELISTS )
+      if ( basetype == "other" || basetype == "filelists" )
 	return true;	// skip it
 
-      // filter custom resource types (by string)
-      if ( dtype_r == ResourceType::NONE )
+      // filter localized susedata
+      if ( str::startsWith( basetype, "susedata." ) )
       {
 	// susedata.LANG
-	if ( str::hasPrefix( typestr_r, "susedata." ) && ! wantLocale( Locale(typestr_r.c_str()+9) ) )
+	if ( ! wantLocale( Locale(basetype.c_str()+9) ) )
 	  return true;	// skip it
       }
 
-      // take it
-      return( _origCallback ? _origCallback( loc_r, dtype_r ) : true );
+      // may take it... (prefer zchnk)
+      if ( zchk || !_wantedFiles.count( basetype ) )
+	_wantedFiles[basetype] = loc_r;
+
+      return true;
+    }
+
+    void finalize()
+    {
+      // schedule fileS for download
+      for ( const auto & el : _wantedFiles )
+      {
+	const OnMediaLocation & loc { el.second };
+	const OnMediaLocation & loc_with_path { loc_with_path_prefix( loc, _downloader.repoInfo().path() ) };
+	_downloader.enqueueDigested( loc_with_path, FileChecker(), search_deltafile( deltaDir()/"repodata", loc.filename() ) );
+      }
     }
 
   private:
+    const Pathname & deltaDir() const
+    { return _downloader._deltaDir; }
+
     bool wantLocale( const Locale & locale_r ) const
     { return _wantedLocales.count( locale_r ); }
 
@@ -148,56 +160,49 @@ namespace
     }
 
   private:
-    LegacyProcessResource _origCallback;	///< Original Downloader callback
-    LocaleSet _wantedLocales;				///< Locales do download
+    Downloader & _downloader;
+    MediaSetAccess & _media;
+    const Pathname & _destDir;
 
+    LocaleSet _wantedLocales;	///< Locales do download
+    std::map<std::string,OnMediaLocation> _wantedFiles;
   };
-} // namespace
-///////////////////////////////////////////////////////////////////
 
-bool Downloader::repomd_Callback( const OnMediaLocation & loc_r, const ResourceType & dtype_r )
-{
-  // NOTE: Filtering of unwanted files is done in RepomdFileReaderCallback2!
+  ///////////////////////////////////////////////////////////////////
+  //
+  // class Downloader
+  //
+  ///////////////////////////////////////////////////////////////////
 
-  // schedule file for download
-  const OnMediaLocation & loc_with_path(loc_with_path_prefix(loc_r, repoInfo().path()));
-  this->enqueueDigested(loc_with_path, FileChecker(), search_deltafile(_delta_dir + "repodata", loc_r.filename()));
+  Downloader::Downloader( const RepoInfo & info_r, const Pathname & deltaDir_r )
+  : repo::Downloader { info_r}
+  , _deltaDir { deltaDir_r }
+  {}
 
-  // We got a patches file we need to read, to add patches listed
-  // there, so we transfer what we have in the queue, and
-  // queue the patches in the patches callback
-  if ( dtype_r == ResourceType::PATCHES )
+  void Downloader::download( MediaSetAccess & media_r, const Pathname & destDir_r, const ProgressData::ReceiverFnc & progress_r )
   {
-    this->start( _dest_dir, *_media_ptr );
-    // now the patches.xml file must exists
-    PatchesFileReader( _dest_dir + repoInfo().path() + loc_r.filename(),
-                       bind( &Downloader::patches_Callback, this, _1, _2));
+    downloadMediaInfo( destDir_r, media_r );
+
+    Pathname masterIndex { repoInfo().path() / "/repodata/repomd.xml" };
+    defaultDownloadMasterIndex( media_r, destDir_r, masterIndex );
+
+    // setup parser
+    Impl pimpl( *this, media_r, destDir_r );
+    RepomdFileReader( destDir_r / masterIndex, std::ref(pimpl) );
+    pimpl.finalize();
+
+    // ready, go!
+    start( destDir_r, media_r );
   }
-  return true;
-}
 
-void Downloader::download( MediaSetAccess & media, const Pathname & dest_dir, const ProgressData::ReceiverFnc & progressrcv )
-{
-  downloadMediaInfo( dest_dir, media );
-
-  Pathname masterIndex( repoInfo().path() / "/repodata/repomd.xml" );
-  defaultDownloadMasterIndex( media, dest_dir, masterIndex );
-
-  // init the data stored in Downloader itself
-  _media_ptr = (&media);
-  _dest_dir = dest_dir;
-
-  // init the extended data
-  RepomdFileReaderCallback2 pimpl( bind(&Downloader::repomd_Callback, this, _1, _2) );
-
-  // setup parser
-  RepomdFileReader( dest_dir / masterIndex,
-		    bind(&RepomdFileReaderCallback2::repomd_Callback2, &pimpl, _1, _2, _3) );
-
-  // ready, go!
-  start( dest_dir, media );
-}
-
+  RepoStatus Downloader::status( MediaSetAccess & media_r )
+  {
+    RepoStatus ret { media_r.provideOptionalFile( repoInfo().path() / "/repodata/repomd.xml" ) };
+    if ( !ret.empty() )	// else: mandatory master index is missing
+      ret = ret && RepoStatus( media_r.provideOptionalFile( "/media.1/media" ) );
+    // else: mandatory master index is missing -> stay empty
+    return ret;
+  }
 } // namespace yum
 } // namespace repo
 } // namespace zypp

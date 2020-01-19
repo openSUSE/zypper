@@ -1,1 +1,1 @@
-ADD_TESTS(RepomdFileReader PatchesFileReader)
+ADD_TESTS(RepomdFileReader)
