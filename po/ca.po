@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-11-28 17:54+0100\n"
-"PO-Revision-Date: 2019-11-29 00:54+0000\n"
+"PO-Revision-Date: 2020-01-22 12:54+0000\n"
 "Last-Translator: David Medina <medipas@gmail.com>\n"
 "Language-Team: Catalan <https://l10n.opensuse.org/projects/zypper/master/ca/>"
 "\n"
@@ -1191,7 +1191,7 @@ msgid ""
 "upgrade, or downgrade."
 msgstr ""
 "El paquet %s no està disponible als repositoris. No es pot reinstal·lar, "
-"actualitzar o desactualitzar."
+"actualitzar o degradar."
 
 #: src/RequestFeedback.cc:158
 #, c-format, boost-format
@@ -1423,36 +1423,36 @@ msgstr[1] "S'actualitzaran les %d aplicacions següents:"
 #, c-format, boost-format
 msgid "The following package is going to be downgraded:"
 msgid_plural "The following %d packages are going to be downgraded:"
-msgstr[0] "Es desactualitzarà el paquet següent:"
-msgstr[1] "Es desactualitzaran els %d paquets següents:"
+msgstr[0] "Es degradarà el paquet següent:"
+msgstr[1] "Es degradaran els %d paquets següents:"
 
 #: src/Summary.cc:715
 #, c-format, boost-format
 msgid "The following patch is going to be downgraded:"
 msgid_plural "The following %d patches are going to be downgraded:"
-msgstr[0] "Es desactualitzarà el pedaç següent:"
-msgstr[1] "Es desactualitzaran els %d pedaços següents:"
+msgstr[0] "Es degradarà el pedaç següent:"
+msgstr[1] "Es degradaran els %d pedaços següents:"
 
 #: src/Summary.cc:720
 #, c-format, boost-format
 msgid "The following pattern is going to be downgraded:"
 msgid_plural "The following %d patterns are going to be downgraded:"
-msgstr[0] "Es desactualitzarà el patró següent:"
-msgstr[1] "Es desactualitzaran els %d patrons següents:"
+msgstr[0] "Es degradarà el patró següent:"
+msgstr[1] "Es degradaran els %d patrons següents:"
 
 #: src/Summary.cc:725
 #, c-format, boost-format
 msgid "The following product is going to be downgraded:"
 msgid_plural "The following %d products are going to be downgraded:"
-msgstr[0] "Es desactualitzarà el producte següent:"
-msgstr[1] "Es desactualitzaran els %d productes següents:"
+msgstr[0] "Es degradarà el producte següent:"
+msgstr[1] "Es degradaran els %d productes següents:"
 
 #: src/Summary.cc:731
 #, c-format, boost-format
 msgid "The following application is going to be downgraded:"
 msgid_plural "The following %d applications are going to be downgraded:"
-msgstr[0] "Es desactualitzarà l'aplicació següent:"
-msgstr[1] "Es desactualitzaran les %d aplicacions següents:"
+msgstr[0] "Es degradarà l'aplicació següent:"
+msgstr[1] "Es degradaran les %d aplicacions següents:"
 
 #: src/Summary.cc:753
 #, c-format, boost-format
@@ -1863,15 +1863,15 @@ msgstr[1] "paquets per actualitzar"
 #: src/Summary.cc:1426
 msgid "to downgrade"
 msgid_plural "to downgrade"
-msgstr[0] "per desactualitzar"
-msgstr[1] "per desactualitzar"
+msgstr[0] "per degradar"
+msgstr[1] "per degradar"
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
 #: src/Summary.cc:1429
 msgid "package to downgrade"
 msgid_plural "packages to downgrade"
-msgstr[0] "paquet per desactualitzar"
-msgstr[1] "paquets per desactualitzar"
+msgstr[0] "paquet per degradar"
+msgstr[1] "paquets per degradar"
 
 #. translators: this text will be preceded by a number e.g. "5 new"
 #: src/Summary.cc:1440
@@ -4670,7 +4670,7 @@ msgstr "Opcions d'expert"
 
 #: src/commands/solveroptionset.cc:86
 msgid "Whether to allow downgrading installed resolvables."
-msgstr "Si s'ha de permetre desactualitzar els resolubles instal·lats."
+msgstr "Si s'ha de permetre degradar els resolubles instal·lats."
 
 #: src/commands/solveroptionset.cc:88
 msgid "Whether to allow changing the names of installed resolvables."
