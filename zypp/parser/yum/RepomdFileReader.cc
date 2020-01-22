@@ -26,7 +26,6 @@
 
 using namespace std;
 using namespace zypp::xml;
-using zypp::repo::yum::ResourceType;
 
 namespace zypp
 {
@@ -46,7 +45,6 @@ namespace zypp
     /** Ctro taking a ProcessResource callback */
     Impl(const Pathname &repomd_file, const ProcessResource & callback )
     : _callback( callback )
-    , _type( ResourceType::NONE_e )
     {
       Reader reader( repomd_file );
       MIL << "Reading " << repomd_file << endl;
@@ -72,11 +70,8 @@ namespace zypp
     /** Function for processing collected data. Passed-in through constructor. */
     ProcessResource _callback;
 
-    /** Type of metadata file (string) */
+    /** The resource type string. */
     std::string _typeStr;
-
-    /** Type of metadata file as enum of well known repoinded.xml entries. */
-    repo::yum::ResourceType _type;
 
     /** Location of metadata file. */
     OnMediaLocation _location;
@@ -108,7 +103,6 @@ namespace zypp
       if ( reader_r->name() == "data" )
       {
 	_typeStr = reader_r->getAttribute("type").asString();
-        _type = ResourceType(_typeStr);
         return true;
       }
 
@@ -164,9 +158,8 @@ namespace zypp
       if ( reader_r->name() == "data" )
       {
         if (_callback) {
-          _callback( std::move(_location), _type, _typeStr );
+          _callback( std::move(_location), _typeStr );
 	  _location = OnMediaLocation();
-	  _type = ResourceType::NONE_e;
 	  _typeStr.clear();
 	}
         return true;

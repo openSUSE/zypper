@@ -17,7 +17,6 @@
 #include "zypp/base/Function.h"
 
 #include "zypp/OnMediaLocation.h"
-#include "zypp/repo/yum/ResourceType.h"
 
 namespace zypp
 {
@@ -31,16 +30,14 @@ namespace zypp
    * Reads through a repomd.xml file and collects type, location, checksum and
    * other data about metadata files to be processed.
    *
-   * After each file entry is read, a \ref OnMediaLocation
-   * and \ref repo::yum::ResourceType are prepared and passed to the \ref _callback.
-   * ResourceType is additionally be passed as a plain string. This form allows
-   * handling custom resource types (e.g. ones with embedded locale tag).
+   * After each file entry is read, an \ref OnMediaLocation and the resource type
+   * string are prepared and passed to the \ref _callback.
    */
   class RepomdFileReader : private base::NonCopyable
   {
   public:
-    /** Callback taking \ref OnMediaLocation and \ref repo::yum::ResourceType (also as String)*/
-    typedef function< bool( OnMediaLocation &&, const repo::yum::ResourceType &, const std::string & )> ProcessResource;
+    /** Callback taking \ref OnMediaLocation and the resource type string */
+    typedef function< bool( OnMediaLocation &&, const std::string & )> ProcessResource;
 
    /**
     * CTOR. Creates also \ref xml::Reader and starts reading.

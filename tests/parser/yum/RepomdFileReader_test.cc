@@ -14,7 +14,6 @@ using namespace zypp;
 using namespace boost::unit_test;
 
 using namespace zypp::parser::yum;
-using repo::yum::ResourceType;
 
 #define DATADIR (Pathname(TESTS_SRC_DIR) + "parser/yum/data")
 
@@ -24,13 +23,13 @@ public:
   Collector()
   {}
 
-  bool operator()( OnMediaLocation &&loc, const ResourceType &t, const std::string & )
+  bool operator()( OnMediaLocation &&loc, const std::string &t )
   {
     items.push_back( make_pair( t, std::move(loc) ) );
     return true;
   }
   
-  vector<pair<ResourceType, OnMediaLocation> > items;
+  vector<pair<std::string, OnMediaLocation> > items;
 };
 
 BOOST_AUTO_TEST_CASE(repomd_read)
@@ -59,7 +58,7 @@ BOOST_AUTO_TEST_CASE(repomd_read)
 	if ( dtype.empty() )
 	  break;
 	BOOST_REQUIRE( count < collect.items.size() );
-        BOOST_CHECK_EQUAL( collect.items[count].first, ResourceType(dtype));
+        BOOST_CHECK_EQUAL( collect.items[count].first, dtype );
 
         string checksum_type;
         string checksum;

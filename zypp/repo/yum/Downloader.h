@@ -19,7 +19,6 @@
 #include "zypp/RepoInfo.h"
 #include "zypp/RepoStatus.h"
 #include "zypp/repo/Downloader.h"
-#include "zypp/repo/yum/ResourceType.h"
 
 namespace zypp
 {

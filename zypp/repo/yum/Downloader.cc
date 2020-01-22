@@ -99,7 +99,7 @@ namespace yum
      * It's a pity, but in the presence of separate "type" and "type_zck" entries,
      * we have to scan the whole file before deciding what to download....
      */
-    bool operator()( const OnMediaLocation & loc_r, const ResourceType & /*dtype_r*/, const std::string & typestr_r )
+    bool operator()( const OnMediaLocation & loc_r, const std::string & typestr_r )
     {
       if ( str::endsWith( typestr_r, "_db" ) )
 	return true;	// skip sqlitedb
