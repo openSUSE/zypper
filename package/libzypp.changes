@@ -1,9 +1,17 @@
 -------------------------------------------------------------------
+Thu Jan 23 16:30:19 CET 2020 - ma@suse.de
+
+- yum::Downloader: Prefer zchunk compressed metadata if libvsolv
+  supports it.
+- BuildRequires:  libsolv-devel >= 0.7.11.
+- version 17.22.0 (22)
+
+-------------------------------------------------------------------
 Mon Jan 20 12:53:12 CET 2020 - ma@suse.de
 
 - Selectable: Fix highestAvailableVersionObj if only retracted
   packages are available. Avoid using retracted items as candidate
-  (jira#SLE-8905)
+  (jsc#SLE-8770)
 - version 17.21.0 (20)
 
 -------------------------------------------------------------------
