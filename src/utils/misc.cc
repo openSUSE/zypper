@@ -27,6 +27,7 @@
 #include "Zypper.h"
 #include "Table.h"
 #include "repos.h"
+#include "global-settings.h"
 
 #include "utils/misc.h"
 #include "utils/XmlFilter.h"
@@ -697,4 +698,76 @@ void packagekit_suggest_quit()
 
   ExternalProgram pkcall( argv );
   pkcall.close();
+}
+
+const char *computeStatusIndicator( const PoolItem &pi_r )
+{
+  bool isLocked = pi_r.status().isLocked();
+  ui::Selectable::Ptr sel( ui::Selectable::get( pi_r ) );
+
+  if ( pi_r->isSystem() )
+    return lockStatusTag( "i", isLocked, pi_r.identIsAutoInstalled() );
+
+  // picklist: ==> available, maybe identical installed too
+  // only check for sel->installedEmpty() if NOT pseudo installed
+  if ( !traits::isPseudoInstalled( pi_r->kind() ) && sel->installedEmpty() )
+    return lockStatusTag( "", isLocked );
+
+  bool identicalInstalledToo = ( traits::isPseudoInstalled( pi_r->kind() )
+                                   ? ( pi_r.isSatisfied() )
+                                   : ( sel->identicalInstalled( pi_r ) ) );
+  if ( identicalInstalledToo )
+    return lockStatusTag( "i", isLocked, pi_r.identIsAutoInstalled() );
+
+  return lockStatusTag( "v", isLocked );
+}
+
+const char *computeStatusIndicator(const ui::Selectable &s, const Edition &installedMustHaveEd )
+{
+  // whether to show the solvable as 'installed'
+  bool installed = false;
+
+
+  Zypper &zypper = Zypper::instance();
+  const auto &repos = zypper.runtimeData().repos;
+
+  if ( traits::isPseudoInstalled( s.kind() ) )
+    installed = s.theObj().isSatisfied();
+  // check for installed counterpart in one of specified repos (bnc #467106)
+  else if ( InitRepoSettings::instance()._repoFilter.size() )
+  {
+    for_( ait, s.availableBegin(), s.availableEnd() ) {
+      for_( iit, s.installedBegin(), s.installedEnd() ) {
+        const auto pred = [ &ait ]( const auto &ri ){ return ait->repoInfo().alias() == ri.alias(); };
+        if ( identical( *ait, *iit ) && std::find_if( repos.begin(), repos.end(), pred ) != repos.end() ){
+
+          // check if the installed package has the requested edition
+          if ( !installedMustHaveEd.empty() && iit->edition() != installedMustHaveEd )
+            continue;
+
+          installed = true;
+          break;
+        }
+      }
+    }
+  }
+  // if no --repo is specified, we don't care where does the installed package
+  // come from
+  else
+    installed = !s.installedEmpty();
+
+
+  bool isLocked = s.locked();
+  if ( s.kind() != ResKind::srcpackage )
+  {
+    if ( installed ) {
+      return lockStatusTag( "i", isLocked, s.identIsAutoInstalled() );
+
+    // this happens if the solvable has installed objects, but no counterpart
+    // of them in specified repos
+    } else if ( s.hasInstalledObj() ) {
+      return lockStatusTag( "v", isLocked );
+    }
+  }
+  return lockStatusTag( "", isLocked );
 }

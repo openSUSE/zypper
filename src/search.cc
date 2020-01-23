@@ -66,54 +66,15 @@ bool FillSearchTableSolvable::operator()( const PoolItem & pi_r ) const
   if ( pi_r->isKind<Pattern>() && ! pi_r->asKind<Pattern>()->userVisible() )
     return false;
 
+  const char *statusIndicator = computeStatusIndicator( pi_r );
+  if ( ( _instNotinst == true && ( statusIndicator[0] == 'v' || statusIndicator[0] == '\0' || statusIndicator[0] == ' ' ) ) || ( _instNotinst == false && statusIndicator[0] == 'i' ) )
+    return true;
 
-  TableRow row;
-  // compute status indicator:
-  //   i  - exactly this version installed
-  //   v  - installed, but in different version
-  //      - not installed at all
-  bool isLocked = pi_r.status().isLocked();
   ui::Selectable::Ptr sel( ui::Selectable::get( pi_r ) );
 
-  if ( pi_r->isSystem() )
-  {
-    // pi_rcklist: ==> not available
-    if ( _instNotinst == false || sel->identicalAvailable( pi_r ) )
-      return false;	// show only not installed
-    row << lockStatusTag( "i", isLocked, pi_r.identIsAutoInstalled() );
-  }
-  else
-  {
-    // picklist: ==> available, maybe identical installed too
-
-    // only check for sel->installedEmpty() if NOT pseudo installed
-    if ( !traits::isPseudoInstalled( pi_r->kind() ) && sel->installedEmpty() )
-    {
-      if ( _instNotinst == true )
-	return false;	// show only installed
-      row << lockStatusTag( "", isLocked );
-    }
-    else
-    {
-      bool identicalInstalledToo = ( traits::isPseudoInstalled( pi_r->kind() )
-				   ? ( pi_r.isSatisfied() )
-				   : ( sel->identicalInstalled( pi_r ) ) );
-      if ( identicalInstalledToo )
-      {
-	if ( _instNotinst == false )
-	  return false;	// show only not installed
-	row << lockStatusTag( "i", isLocked, pi_r.identIsAutoInstalled() );
-      }
-      else
-      {
-	if ( _instNotinst == true )
-	  return false;	// show only installed
-	row << lockStatusTag( "v", isLocked );
-      }
-    }
-  }
-
+  TableRow row;
   row
+    << statusIndicator
     << pi_r->name()
     << kind_to_string_localized( pi_r->kind(), 1 )
     << pi_r->edition().asString()
@@ -211,13 +172,6 @@ FillSearchTableSelectable::FillSearchTableSelectable( Table & table, TriBool ins
 : _table( &table )
 , inst_notinst( installed_only )
 {
-  Zypper & zypper( Zypper::instance() );
-  if ( InitRepoSettings::instance()._repoFilter.size() )
-  {
-    for ( const auto & ri : zypper.runtimeData().repos )
-      _repos.insert( ri.alias() );
-  }
-
   //
   // *** CAUTION: It's a mess, but adding/changing colums here requires
   //              adapting OutXML::searchResult !
@@ -243,66 +197,16 @@ bool FillSearchTableSelectable::operator()( const ui::Selectable::constPtr & s )
 
   TableRow row;
 
-  // whether to show the solvable as 'installed'
-  bool installed = false;
+  const char *statusIndicator = computeStatusIndicator( *s );
+  if ( ( inst_notinst == true && ( statusIndicator[0] == 'v' || statusIndicator[0] == '\0' || statusIndicator[0] == ' ' ) ) || ( inst_notinst == false && statusIndicator[0] == 'i' ) )
+    return true;
 
-  if ( traits::isPseudoInstalled( s->kind() ) )
-    installed = s->theObj().isSatisfied();
-  // check for installed counterpart in one of specified repos (bnc #467106)
-  else if (!_repos.empty())
-  {
-    for_( ait, s->availableBegin(), s->availableEnd() )
-      for_( iit, s->installedBegin(), s->installedEnd() )
-        if ( identical( *ait, *iit ) && _repos.find( ait->repoInfo().alias() ) != _repos.end() )
-        {
-          installed = true;
-          break;
-        }
-  }
-  // if no --repo is specified, we don't care where does the installed package
-  // come from
-  else
-    installed = !s->installedEmpty();
-
-  bool isLocked = s->locked();
-  if ( s->kind() != ResKind::srcpackage )
-  {
-    if ( installed )
-    {
-      // not-installed only
-      if ( inst_notinst == false )
-        return true;
-      row << lockStatusTag( "i", isLocked, s->identIsAutoInstalled() );
-    }
-    // this happens if the solvable has installed objects, but no counterpart
-    // of them in specified repos
-    else if ( s->hasInstalledObj() )
-    {
-      // not-installed only
-      if ( inst_notinst == true )
-        return true;
-      row << lockStatusTag( "v", isLocked );
-    }
-    else
-    {
-      // installed only
-      if ( inst_notinst == true )
-        return true;
-      row << lockStatusTag( "", isLocked );
-    }
-  }
-  else
-  {
-    // installed only
-    if ( inst_notinst == true )
-      return true;
-    row << lockStatusTag( "", isLocked );
-  }
-
+  row << statusIndicator;
   row << s->name();
   row << s->theObj()->summary();
   row << kind_to_string_localized( s->kind(), 1 );
   *_table << row;
+
   return true;
 }
 
@@ -604,39 +508,31 @@ void list_product_table(Zypper & zypper , SolvableFilterMode mode_r)
     for_( it, s->availableBegin(), s->availableEnd() )
     {
       Product::constPtr product = asKind<Product>(it->resolvable());
-      TableRow tr;
       PoolItem pi = *it;
-      bool isLocked = pi.status().isLocked();
       bool forceShowAsBaseProduct = false;
 
-      if ( installed )
-      {
-        if ( missedInstalled && identical( installed, pi ) )
-        {
-          if ( notinst_only )
-            continue;
-          tr << lockStatusTag( "i", isLocked, pi.identIsAutoInstalled() );
+      std::string si = computeStatusIndicator( pi );
+      if ( si[0] == 'i' ) {
+        if ( missedInstalled  && identical( installed, pi ) ) {
           // isTargetDistribution (i.e. is Base Product) needs to be taken from the installed item!
           forceShowAsBaseProduct = installed->asKind<Product>()->isTargetDistribution();
           missedInstalled = false;
-	  // bnc#841473: Downside of reporting the installed product (repo: @System)
-	  // instead of the available one (repo the product originated from) is that
-	  // you see multiple identical '@System' entries if multiple repos contain
-	  // the same product. Thus don't report again, if !missedInstalled.
+          // bnc#841473: Downside of reporting the installed product (repo: @System)
+          // instead of the available one (repo the product originated from) is that
+          // you see multiple identical '@System' entries if multiple repos contain
+          // the same product. Thus don't report again, if !missedInstalled.
         }
-        else
-        {
-          if ( installed_only )
-            continue;
-          tr << lockStatusTag( "v", isLocked );
+        else {
+          si[0] = 'v';
+          str::replaceAll( si, "+", "" );
         }
       }
-      else
-      {
-        if ( installed_only )
-          continue;
-        tr << lockStatusTag( "", isLocked );
-      }
+
+      if ( (si[0] == 'i' && notinst_only) || ( ( si[0] == 'v' || si[0] == '\0' || si[0] == ' ') && installed_only) )
+        continue;
+
+      TableRow tr;
+      tr << si;
       add_product_table_row( zypper, tr, product, forceShowAsBaseProduct );
       tbl << tr;
     }

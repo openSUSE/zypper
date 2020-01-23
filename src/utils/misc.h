@@ -17,6 +17,7 @@
 
 #include <zypp/ResKind.h>
 #include <zypp/RepoInfo.h>
+#include <zypp/Edition.h>
 #include <zypp/ZYppCommitPolicy.h>
 #include <zypp/base/Logger.h>
 
@@ -30,6 +31,10 @@ namespace zypp
   class Product;
   class Pattern;
   class Patch;
+
+  namespace ui {
+    class Selectable;
+  }
 }
 using namespace zypp;
 
@@ -45,6 +50,19 @@ enum class SolvableFilterMode {
   ShowOnlyInstalled,
   ShowOnlyNotInstalled
 };
+
+/*!
+ * Computes the status indicator for a given \ref PoolItem or \ref ui::Selectable
+ *   i  - exactly this version installed
+ *   v  - installed, but in different version
+ *      - not installed at all
+ *
+ *  Adds additional suffices for additional information:
+ *   l  - The package is locked
+ *   +  - Only for the "i" status, the package is auto installed
+ */
+const char * computeStatusIndicator ( const PoolItem & pi_r );
+const char * computeStatusIndicator ( const ui::Selectable &s , const Edition &installedMustHaveEd = Edition() );
 
 
 /** Build search status column tag */

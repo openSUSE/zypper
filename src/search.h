@@ -47,8 +47,6 @@ struct FillSearchTableSelectable
 {
   // the table used for output
   Table * _table;
-  /** Aliases of repos specified as --repo */
-  std::set<std::string> _repos;
   TriBool inst_notinst;
 
   FillSearchTableSelectable(
