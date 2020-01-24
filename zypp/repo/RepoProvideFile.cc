@@ -213,7 +213,7 @@ namespace zypp
             }
             else
             {
-              WAR << "No media verifier for repo '" << repo.alias() << "' media/media.1 does not exist in '" << repo.metadataPath() << "'" << endl;
+              WAR << "No media verifier for repo '" << repo.alias() << "' media.1/media does not exist in '" << repo.metadataPath() << "'" << endl;
             }
           }
           else
