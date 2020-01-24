@@ -452,7 +452,6 @@ SATResolver::solving(const CapabilitySet & requires_caps,
 	      {
 		for ( const auto & cap : droplist )
 		{
-		  INT << "  => " << cap << endl;
 		  queue_push( &_jobQueue, SOLVER_DROP_ORPHANED | SOLVER_SOLVABLE_NAME );
 		  queue_push( &_jobQueue, cap.id() );
 		}
