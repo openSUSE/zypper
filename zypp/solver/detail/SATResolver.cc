@@ -441,7 +441,7 @@ SATResolver::solving(const CapabilitySet & requires_caps,
 	  {
 	    if ( id < 0 )
 	      continue;
-	    sat::Solvable slv { id };
+	    sat::Solvable slv { (sat::detail::SolvableIdType)id };
 	    // get product buddies (they carry the weakremover)...
 	    static const Capability productCap { "product()" };
 	    if ( slv && slv.provides().matches( productCap ) )
@@ -484,7 +484,7 @@ SATResolver::solving(const CapabilitySet & requires_caps,
       if ( p < 0 )
 	continue;
 
-      sat::Solvable slv { p };
+      sat::Solvable slv { (sat::detail::SolvableIdType)p };
       if ( ! slv || slv.isSystem() )
 	continue;
 
@@ -895,7 +895,7 @@ void SATResolver::doUpdate()
       if ( p < 0 )
 	continue;
 
-      sat::Solvable solv { p };
+      sat::Solvable solv { (sat::detail::SolvableIdType)p };
       if ( ! solv || solv.isSystem() )
 	continue;
 
