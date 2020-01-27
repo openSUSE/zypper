@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-11-28 17:54+0100\n"
-"PO-Revision-Date: 2020-01-22 12:54+0000\n"
+"PO-Revision-Date: 2020-01-27 17:54+0000\n"
 "Last-Translator: David Medina <medipas@gmail.com>\n"
 "Language-Team: Catalan <https://l10n.opensuse.org/projects/zypper/master/ca/>"
 "\n"
@@ -5033,8 +5033,8 @@ msgid ""
 "zypp/zypp.conf:multiversion.kernels which can be given as <version>, latest(-"
 "N), running, oldest(+N)."
 msgstr ""
-"Suprimeix automàticament nuclis instal·lats d'acord amb la llista de nuclis "
-"per mantenir de /etc/zypp/zypp.conf:multiversion.kernels, els quals es poden "
+"Suprimeix automàticament nuclis instal·lats segons la llista de nuclis per "
+"mantenir de /etc/zypp/zypp.conf:multiversion.kernels, els quals es poden "
 "proporcionar com a <versió>, darrer(-N), en execució, antic(+N)."
 
 #: src/commands/utils/purge-kernels.cc:51
@@ -5554,7 +5554,7 @@ msgstr ""
 #. lincense prompt
 #: src/misc.cc:187
 msgid "Do you agree with the terms of the license?"
-msgstr "Esteu d'acord amb els termes de la llicència?"
+msgstr "Esteu d'acord en els termes de la llicència?"
 
 #: src/misc.cc:193
 msgid "Aborting installation due to the need for license confirmation."
