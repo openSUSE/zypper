@@ -297,9 +297,57 @@ namespace zypp
       //@}
 
     public:
-      /** \name Special iterators. */
+      /** \name Misc Data. */
       //@{
+      ///////////////////////////////////////////////////////////////////
+      /// A copy of the Pools initial ValidateValues of pseudo installed items.
+      ///
+      /// AKA Patch status. Whenever the Pools content changes, the status
+      /// of pseudo installed items (like Patches) is computed (roughly whether
+      /// their dependencies are broken or satisfied) and remembered.
+      ///
+      /// Comparing the items established state against it's current state
+      /// tells how the current transaction would influence the item (break
+      /// or repair a Patch).
+      ///
+      class EstablishedStates
+      {
+      public:
+	~EstablishedStates();
+	/** Map holding pseudo installed items where current and established status differ. */
+	typedef std::map<PoolItem,ResStatus::ValidateValue> ChangedPseudoInstalled;
+	/** Return all pseudo installed items whose current state differs from the established one */
+	ChangedPseudoInstalled changedPseudoInstalled() const;
+      private:
+	class Impl;
+	RW_pointer<Impl> _pimpl;
+      private:
+	friend class pool::PoolImpl;
+	/** Factory: \ref ResPool::establishedStates */
+	EstablishedStates( shared_ptr<Impl> pimpl_r )
+	: _pimpl { pimpl_r }
+	{}
+      };
+      ///////////////////////////////////////////////////////////////////
 
+      /** Factory for \ref EstablishedStates.
+       * A few internal algorithms benefit from keeping an instance across pool
+       * content changes. User code usually want's to call \ref changedPseudoInstalled
+       * directly.
+       */
+      EstablishedStates establishedStates() const;
+
+      /** Map holding pseudo installed items where current and established status differ. */
+      typedef EstablishedStates::ChangedPseudoInstalled ChangedPseudoInstalled;
+
+      /** Return all pseudo installed items whose current state differs from their initial one.
+       * E.g. a Patch may become SATISFIED by updating the packages it refers to.
+       * For this to happen it does not matter whether you selected the Patch or
+       * whether you selected the individual Packages.
+       * A Patches status is computed and updated with every solver run.
+       */
+      ChangedPseudoInstalled changedPseudoInstalled() const
+      { return establishedStates().changedPseudoInstalled(); }
       //@}
    public:
       /** \name Iterate over all Repositories that contribute ResObjects.

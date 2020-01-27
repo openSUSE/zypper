@@ -105,6 +105,57 @@ namespace zypp
   }
 
   ///////////////////////////////////////////////////////////////////
+  namespace solver {
+    namespace detail {
+      void establish( sat::Queue & pseudoItems_r, sat::Queue & pseudoFlags_r );	// in solver/detail/SATResolver.cc
+    }
+  }
+  ///////////////////////////////////////////////////////////////////
+  /// Store initial establish status of pseudo installed items.
+  ///
+  class ResPool::EstablishedStates::Impl
+  {
+  public:
+    Impl()
+    { solver::detail::establish( _pseudoItems, _pseudoFlags ); }
+
+    /** Return all pseudo installed items whose current state differs from their initial one. */
+    ResPool::EstablishedStates::ChangedPseudoInstalled changedPseudoInstalled() const
+    {
+      ChangedPseudoInstalled ret;
+
+      if ( ! _pseudoItems.empty() )
+      {
+	for ( sat::Queue::size_type i = 0; i < _pseudoItems.size(); ++i )
+	{
+	  PoolItem pi { sat::Solvable(_pseudoItems[i]) };
+	  ResStatus::ValidateValue vorig { validateValue( i ) };
+	  if ( pi.status().validate() != vorig )
+	    ret[pi] = vorig;
+	}
+      }
+      return ret;
+    }
+
+  private:
+    ResStatus::ValidateValue validateValue( sat::Queue::size_type i ) const
+    {
+      ResStatus::ValidateValue ret { ResStatus::UNDETERMINED };
+      switch ( _pseudoFlags[i] )
+      {
+	case  0: ret = ResStatus::BROKEN      /*2*/; break;
+	case  1: ret = ResStatus::SATISFIED   /*4*/; break;
+	case -1: ret = ResStatus::NONRELEVANT /*6*/; break;
+      }
+      return ret;
+    }
+
+  private:
+    sat::Queue _pseudoItems;
+    sat::Queue _pseudoFlags;
+  };
+
+  ///////////////////////////////////////////////////////////////////
   namespace pool
   { /////////////////////////////////////////////////////////////////
 
@@ -127,6 +178,8 @@ namespace zypp
         typedef PoolTraits::repository_iterator		repository_iterator;
 
         typedef sat::detail::SolvableIdType		SolvableIdType;
+
+	typedef ResPool::EstablishedStates::Impl	EstablishedStatesImpl;
 
       public:
         /** Default ctor */
@@ -197,6 +250,14 @@ namespace zypp
           }
           return *_poolProxy;
         }
+
+        /** True factory for \ref ResPool::EstablishedStates.
+	 * Internally we maintain the ResPool::EstablishedStates::Impl
+	 * reference shared_ptr. Updated whenever the pool content changes.
+	 * On demand hand it out as ResPool::EstablishedStates Impl.
+	 */
+        ResPool::EstablishedStates establishedStates() const
+        { store(); return ResPool::EstablishedStates( _establishedStates ); }
 
       public:
         /** Forward list of Repositories that contribute ResObjects from \ref sat::Pool */
@@ -352,6 +413,10 @@ namespace zypp
             {
               reapplyHardLocks();
             }
+
+	    // Compute the initial status of Patches etc.
+            if ( !_establishedStates )
+	      _establishedStates.reset( new EstablishedStatesImpl );
           }
           return _store;
         }
@@ -394,6 +459,7 @@ namespace zypp
 	  _id2itemDirty = true;
 	  _id2item.clear();
           _poolProxy.reset();
+	  _establishedStates.reset();
         }
 
       private:
@@ -408,6 +474,7 @@ namespace zypp
 
       private:
         mutable shared_ptr<ResPoolProxy>      _poolProxy;
+	mutable shared_ptr<EstablishedStatesImpl> _establishedStates;
 
       private:
         /** Set of queries that define hardlocks. */

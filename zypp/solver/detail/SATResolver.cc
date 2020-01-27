@@ -37,6 +37,7 @@ extern "C"
 
 #include "zypp/ZConfig.h"
 #include "zypp/Product.h"
+#include "zypp/AutoDispose.h"
 #include "zypp/sat/WhatProvides.h"
 #include "zypp/sat/WhatObsoletes.h"
 #include "zypp/sat/detail/PoolImpl.h"
@@ -178,6 +179,50 @@ int vendorCheck( sat::detail::CPool *pool, Solvable *solvable1, Solvable *solvab
                                             IdString(solvable2->vendor) ) ? 0 : 1;
 }
 
+/** ResPool helper to compute the initial status of Patches etc.
+ * An empty solver run (no jobs) just to compute the initial status
+ * of pseudo installed items (patches).
+ */
+void establish( sat::Queue & pseudoItems_r, sat::Queue & pseudoFlags_r )
+{
+  pseudoItems_r = collectPseudoInstalled( ResPool::instance() );
+  if ( ! pseudoItems_r.empty() )
+  {
+    MIL << "Establish..." << endl;
+    sat::detail::CPool * cPool { sat::Pool::instance().get() };
+    ::pool_set_custom_vendorcheck( cPool, &vendorCheck );
+
+    sat::Queue jobQueue;
+    // Add rules for parallel installable resolvables with different versions
+    for ( const sat::Solvable & solv : sat::Pool::instance().multiversion() )
+    {
+      jobQueue.push( SOLVER_NOOBSOLETES | SOLVER_SOLVABLE );
+      jobQueue.push( solv.id() );
+    }
+
+    AutoDispose<sat::detail::CSolver*> cSolver { ::solver_create( cPool ), ::solver_free };
+    sat::Pool::instance().prepare();
+    if ( ::solver_solve( cSolver, jobQueue ) != 0 )
+      INT << "How can establish fail?" << endl;
+
+    ::solver_trivial_installable( cSolver, pseudoItems_r, pseudoFlags_r );
+
+    for ( sat::Queue::size_type i = 0; i < pseudoItems_r.size(); ++i )
+    {
+      PoolItem pi { sat::Solvable(pseudoItems_r[i]) };
+      switch ( pseudoFlags_r[i] )
+      {
+	case 0:  pi.status().setBroken(); break;
+	case 1:  pi.status().setSatisfied(); break;
+	case -1: pi.status().setNonRelevant(); break;
+	default: pi.status().setUndetermined(); break;
+      }
+    }
+    MIL << "Establish DONE" << endl;
+  }
+  else
+    MIL << "Establish not needed." << endl;
+}
 
 inline std::string itemToString( const PoolItem & item )
 {

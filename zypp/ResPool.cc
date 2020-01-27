@@ -26,6 +26,10 @@ namespace zypp
 { /////////////////////////////////////////////////////////////////
 
   ///////////////////////////////////////////////////////////////////
+  // class ResPool
+  ///////////////////////////////////////////////////////////////////
+
+  ///////////////////////////////////////////////////////////////////
   //
   //	METHOD NAME : ResPool::instance
   //	METHOD TYPE : ResPool
@@ -66,10 +70,11 @@ namespace zypp
   ResPool::size_type ResPool::size() const
   { return _pimpl->size(); }
 
-
   PoolItem ResPool::find( const sat::Solvable & slv_r ) const
   { return _pimpl->find( slv_r ); }
 
+  ResPool::EstablishedStates ResPool::establishedStates() const
+  { return _pimpl->establishedStates(); }
 
   ResPool::size_type ResPool::knownRepositoriesSize() const
   { return _pimpl->knownRepositoriesSize(); }

@@ -20,6 +20,12 @@ using std::endl;
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
+  ResPool::EstablishedStates::~EstablishedStates()
+  {}
+
+  ResPool::EstablishedStates::ChangedPseudoInstalled ResPool::EstablishedStates::changedPseudoInstalled() const
+  { return _pimpl->changedPseudoInstalled(); }
+
   ///////////////////////////////////////////////////////////////////
   namespace pool
   { /////////////////////////////////////////////////////////////////
