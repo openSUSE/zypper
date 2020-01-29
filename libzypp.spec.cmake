@@ -21,7 +21,7 @@
 %bcond_with zchunk
 %endif
 
-Name:           @PACKAGE@
+Name:           libzypp
 Version:        @VERSION@
 Release:        0
 License:        GPL-2.0+
