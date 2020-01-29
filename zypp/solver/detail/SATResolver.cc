@@ -90,6 +90,74 @@ namespace zypp
 	  }
 	}
 
+	/** Helper collecting pseudo installed items from the pool.
+	 * \todo: pseudoItems are cachable as long as pool content does not change
+	 */
+	inline sat::Queue collectPseudoInstalled( const ResPool & pool_r )
+	{
+	  sat::Queue ret;
+	  for ( const PoolItem & pi : pool_r )
+	    if ( traits::isPseudoInstalled( pi.kind() ) ) ret.push( pi.id() );
+	  return ret;
+	}
+
+	/** Copy back new \ref WeakValue to \ref PoolItem after solving.
+	 * On the fly collect orphaned items (cached by the solver for the UI)
+	 */
+	inline void solverCopyBackWeak( sat::detail::CSolver & satSolver_r, PoolItemList & orphanedItems_r )
+	{
+	  // NOTE: assert all items weak stati are reset (resetWeak was called)
+	  {
+	    sat::Queue recommendations;
+	    sat::Queue suggestions;
+	    ::solver_get_recommendations( &satSolver_r, recommendations, suggestions, 0 );
+	    for ( sat::Queue::size_type i = 0; i < recommendations.size(); ++i )
+	      PoolItem(sat::Solvable(i)).status().setRecommended( true );
+	    for ( sat::Queue::size_type i = 0; i < suggestions.size(); ++i )
+	      PoolItem(sat::Solvable(i)).status().setSuggested( true );
+	  }
+	  {
+	    orphanedItems_r.clear();	// cached on the fly
+	    sat::Queue orphaned;
+	    ::solver_get_orphaned( &satSolver_r, orphaned );
+	    for ( sat::Queue::size_type i = 0; i < orphaned.size(); ++i )
+	    {
+	      PoolItem pi { sat::Solvable(i) };
+	      pi.status().setOrphaned( true );
+	      orphanedItems_r.push_back( pi );
+	    }
+	  }
+	  {
+	    sat::Queue unneeded;
+	    ::solver_get_unneeded( &satSolver_r, unneeded, 1 );
+	    for ( sat::Queue::size_type i = 0; i < unneeded.size(); ++i )
+	      PoolItem(sat::Solvable(i)).status().setUnneeded( true );
+	  }
+	}
+
+	/** Copy back new \ref ValidateValue to \ref PoolItem after solving. */
+	inline void solverCopyBackValidate( sat::detail::CSolver & satSolver_r, const ResPool & pool_r )
+	{
+	  sat::Queue pseudoItems { collectPseudoInstalled( pool_r ) };
+	  if ( ! pseudoItems.empty() )
+	  {
+	    sat::Queue pseudoFlags;
+	    ::solver_trivial_installable( &satSolver_r, pseudoItems, pseudoFlags );
+
+	    for ( sat::Queue::size_type i = 0; i < pseudoItems.size(); ++i )
+	    {
+	      PoolItem pi { sat::Solvable(pseudoItems[i]) };
+	      switch ( pseudoFlags[i] )
+	      {
+		case 0:  pi.status().setBroken(); break;
+		case 1:  pi.status().setSatisfied(); break;
+		case -1: pi.status().setNonRelevant(); break;
+		default: pi.status().setUndetermined(); break;
+	      }
+	    }
+	  }
+	}
+
       } //namespace
       ///////////////////////////////////////////////////////////////////////
 
@@ -124,14 +192,6 @@ inline std::string itemToString( const PoolItem & item )
     ret += slv.repository().alias();
     ret += "]";
   }
-  return ret;
-}
-
-inline PoolItem getPoolItem( Id id_r )
-{
-  PoolItem ret( (sat::Solvable( id_r )) );
-  if ( !ret && id_r )
-    INT << "id " << id_r << " not found in ZYPP pool." << endl;
   return ret;
 }
 
@@ -358,24 +418,6 @@ class CheckIfUpdate : public resfilter::PoolItemFilterFunctor
 };
 
 
-class CollectPseudoInstalled : public resfilter::PoolItemFilterFunctor
-{
-  public:
-    Queue *solvableQueue;
-
-    CollectPseudoInstalled( Queue *queue )
-	:solvableQueue (queue)
-    {}
-
-    // collecting PseudoInstalled items
-    bool operator()( PoolItem item )
-    {
-      if ( traits::isPseudoInstalled( item.satSolvable().kind() ) )
-        queue_push( solvableQueue, item.satSolvable().id() );
-      return true;
-    }
-};
-
 bool
 SATResolver::solving(const CapabilitySet & requires_caps,
 		     const CapabilitySet & conflict_caps)
@@ -534,81 +576,10 @@ SATResolver::solving(const CapabilitySet & requires_caps,
       }
     }
 
-    Queue recommendations;
-    Queue suggestions;
-    Queue orphaned;
-    Queue unneeded;
-    queue_init(&recommendations);
-    queue_init(&suggestions);
-    queue_init(&orphaned);
-    queue_init(&unneeded);
-    solver_get_recommendations(_satSolver, &recommendations, &suggestions, 0);
-    solver_get_orphaned(_satSolver, &orphaned);
-    solver_get_unneeded(_satSolver, &unneeded, 1);
-    /*  solvables which are recommended */
-    for ( int i = 0; i < recommendations.count; ++i )
-    {
-      PoolItem poolItem( getPoolItem( recommendations.elements[i] ) );
-      poolItem.status().setRecommended( true );
-    }
-
-    /*  solvables which are suggested */
-    for ( int i = 0; i < suggestions.count; ++i )
-    {
-      PoolItem poolItem( getPoolItem( suggestions.elements[i] ) );
-      poolItem.status().setSuggested( true );
-    }
-
-    _problem_items.clear();
-    /*  solvables which are orphaned */
-    for ( int i = 0; i < orphaned.count; ++i )
-    {
-      PoolItem poolItem( getPoolItem( orphaned.elements[i] ) );
-      poolItem.status().setOrphaned( true );
-      _problem_items.push_back( poolItem );
-    }
-
-    /*  solvables which are unneeded */
-    for ( int i = 0; i < unneeded.count; ++i )
-    {
-      PoolItem poolItem( getPoolItem( unneeded.elements[i] ) );
-      poolItem.status().setUnneeded( true );
-    }
-
-    queue_free(&recommendations);
-    queue_free(&suggestions);
-    queue_free(&orphaned);
-    queue_free(&unneeded);
-
-    /* Write validation state back to pool */
-    Queue flags, solvableQueue;
-
-    queue_init(&flags);
-    queue_init(&solvableQueue);
-
-    CollectPseudoInstalled collectPseudoInstalled(&solvableQueue);
-    invokeOnEach( _pool.begin(),
-		  _pool.end(),
-		  functor::functorRef<bool,PoolItem> (collectPseudoInstalled) );
-    solver_trivial_installable(_satSolver, &solvableQueue, &flags );
-    for (int i = 0; i < solvableQueue.count; i++) {
-	PoolItem item = _pool.find (sat::Solvable(solvableQueue.elements[i]));
-	item.status().setUndetermined();
-
-	if (flags.elements[i] == -1) {
-	    item.status().setNonRelevant();
-	    XDEBUG("SATSolutionToPool(" << item << " ) nonRelevant !");
-	} else if (flags.elements[i] == 1) {
-	    item.status().setSatisfied();
-	    XDEBUG("SATSolutionToPool(" << item << " ) satisfied !");
-	} else if (flags.elements[i] == 0) {
-	    item.status().setBroken();
-	    XDEBUG("SATSolutionToPool(" << item << " ) broken !");
-	}
-    }
-    queue_free(&(solvableQueue));
-    queue_free(&flags);
-
+    // copy back computed status values to pool
+    // (on the fly cache orphaned items for the UI)
+    solverCopyBackWeak( *_satSolver, _problem_items );
+    solverCopyBackValidate( *_satSolver, _pool );
 
     // Solvables which were selected due requirements which have been made by the user will
     // be selected by APPL_LOW. We can't use any higher level, because this setting must
@@ -927,6 +898,12 @@ void SATResolver::doUpdate()
 	  ERR << "id " << i << " not found in ZYPP pool." << endl;
       }
     }
+
+    // copy back computed status values to pool
+    // (on the fly cache orphaned items for the UI)
+    solverCopyBackWeak( *_satSolver, _problem_items );
+    solverCopyBackValidate( *_satSolver, _pool );
+
     MIL << "SATResolver::doUpdate() done" << endl;
 }
 
