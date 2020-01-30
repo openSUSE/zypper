@@ -698,6 +698,31 @@ namespace zypp
         sendNotification( root_r, result_r.updateMessages() );
       }
 
+      /** jsc#SLE-5116: Log patch status changes to history.
+       * Adjust precomputed set if transaction is incomplete.
+       */
+      void logPatchStatusChanges( const sat::Transaction & transaction_r, TargetImpl & target_r )
+      {
+	ResPool::ChangedPseudoInstalled changedPseudoInstalled { ResPool::instance().changedPseudoInstalled() };
+	if ( changedPseudoInstalled.empty() )
+	  return;
+
+	if ( ! transaction_r.actionEmpty( ~sat::Transaction::STEP_DONE ) )
+	{
+	  // Need to recompute the patch list if commit is incomplete!
+	  // We remember the initially established status, then reload the
+	  // Target to get the current patch status. Then compare.
+	  WAR << "Need to recompute the patch status changes as commit is incomplete!" << endl;
+	  ResPool::EstablishedStates establishedStates{ ResPool::instance().establishedStates() };
+	  target_r.load();
+	  changedPseudoInstalled = establishedStates.changedPseudoInstalled();
+	}
+
+	HistoryLog historylog;
+	for ( const auto & el : changedPseudoInstalled )
+	  historylog.patchStateChange( el.first, el.second );
+      }
+
       /////////////////////////////////////////////////////////////////
     } // namespace
     ///////////////////////////////////////////////////////////////////
@@ -1711,8 +1736,14 @@ namespace zypp
 			   result_r );
       }
 
+      // jsc#SLE-5116: Log patch status changes to history
+      // NOTE: Should be the last action as it may need to reload
+      // the Target in case of an incomplete transaction.
+      logPatchStatusChanges( result_r.transaction(), *this );
+
       if ( abort )
       {
+	HistoryLog().comment( "Commit was aborted." );
         ZYPP_THROW( TargetAbortedException( ) );
       }
     }
