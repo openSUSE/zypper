@@ -332,7 +332,7 @@ namespace zypp
     }
   }
 
-  void HistoryLog::patchStateChange( const PoolItem & pi, const std::string &oldstate )
+  void HistoryLog::patchStateChange( const PoolItem & pi, ResStatus::ValidateValue oldstate )
   {
     if ( ! pi.isKind<Patch>() ) return;
     const Patch::constPtr p = asKind<Patch>(pi.resolvable());
@@ -346,8 +346,8 @@ namespace zypp
       << _sep << p->repoInfo().alias()					// 6 repo alias
       << _sep << p->severity()   					// 7 severity
       << _sep << p->category()  					// 8 category
-      << _sep << oldstate       					// 9 old state
-      << _sep << pi.patchStatusAsString()     				// 10 new state
+      << _sep << ResStatus::validateValueAsString( oldstate )		// 9 old state
+      << _sep << pi.status().validateValueAsString()			// 10 new state
       << _sep << str::escape(ZConfig::instance().userData(), _sep)	// 11 userdata
       << endl;
   }

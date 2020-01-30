@@ -60,7 +60,7 @@ namespace zypp
       _table["ralias"]	= REPO_CHANGE_ALIAS_e;
       _table["rurl"]	= REPO_CHANGE_URL_e;
       _table["command"]	= STAMP_COMMAND_e;
-      _table["pstate"]	= PATCH_STATE_CHANGE_e;
+      _table["patch"]	= PATCH_STATE_CHANGE_e;
       _table["NONE"]	= _table["none"] = NONE_e;
     }
 
@@ -88,7 +88,7 @@ namespace zypp
       _table[REPO_CHANGE_ALIAS_e] = PairType( "ralias"	, "ralias " );
       _table[REPO_CHANGE_URL_e]   = PairType( "rurl"	, "rurl   " );
       _table[STAMP_COMMAND_e]     = PairType( "command"	, "command" );
-      _table[PATCH_STATE_CHANGE_e]= PairType( "pstate"  , "pstate " );
+      _table[PATCH_STATE_CHANGE_e]= PairType( "patch"   , "patch  " );
       _table[NONE_e]              = PairType( "NONE"	, "NONE   " );
     }
 

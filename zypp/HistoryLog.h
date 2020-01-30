@@ -15,6 +15,7 @@
 #include <iosfwd>
 
 #include "zypp/Pathname.h"
+#include "zypp/ResStatus.h"
 
 namespace zypp
 {
@@ -128,7 +129,7 @@ namespace zypp
      *
      * \param oldstate info about the old state
      */
-    void patchStateChange ( const PoolItem & pi, const std::string &oldstate );
+    void patchStateChange( const PoolItem & pi, ResStatus::ValidateValue oldstate );
 
   };
   ///////////////////////////////////////////////////////////////////

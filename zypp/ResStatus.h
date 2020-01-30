@@ -225,6 +225,15 @@ namespace zypp
     bool isNonRelevant() const
     { return fieldValueIs<ValidateField>( NONRELEVANT ); }
 
+    std::string validateValueAsString() const
+    { return validateValueAsString( validate() ); }
+
+    /** ValidateValue to string used in the history file. */
+    static std::string validateValueAsString( ValidateValue val_r );
+
+    /** ValidateValue from string used in the history file. */
+    static ValidateValue stringToValidateValue( const std::string & str_r );
+
   public:
     // These two are IMMUTABLE!
 

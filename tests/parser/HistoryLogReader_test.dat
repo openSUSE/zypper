@@ -11,4 +11,4 @@
 discard\|one field
 discard|to fields but bad date
 2015-08-11 18:42:49|command|root@fibonacci|'/Local/ma/zypp/BUILD/zypper/src/zypper' 'in' '-f' 'xteddy'|
-2011-07-18 18:08:09|pstate|patch-name|2.6.37.6-0.5.1|noarch|repo-update|moderate|security|needed|satisfied
+2011-07-18 18:08:09|patch|patch-name|2.6.37.6-0.5.1|noarch|repo-update|moderate|security|needed|applied|

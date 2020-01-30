@@ -77,6 +77,7 @@ namespace zypp
 
       /** Reset status. */
       ResStatus & statusReset() const;
+      //@}
 
 
       /** \name Status validation.
@@ -104,12 +105,8 @@ namespace zypp
 
       /** Broken (needed) but locked patches. */
       bool isUnwanted() const;
-
-      std::string patchStatusAsString () const;
-
       //@}
 
-      //@}
     public:
       /** Return the \ref ResPool the item belongs to. */
       ResPool pool() const;

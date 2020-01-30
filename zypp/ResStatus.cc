@@ -62,6 +62,37 @@ namespace zypp
     }
   }
 
+  namespace
+  {
+    // NOTE: Strings defined here are written to the history file
+    // and used by zypper. Do not change them!
+    static const char* strBROKEN = "needed";
+    static const char* strSATISFIED = "applied";
+    static const char* strNONRELEVANT = "not-needed";
+    static const char* strUNDETERMINED = "undetermined";
+  }
+
+  std::string ResStatus::validateValueAsString( ValidateValue val_r )
+  {
+    const char* ret = strUNDETERMINED;
+    switch ( val_r )
+    {
+      case BROKEN:	ret = strBROKEN; break;
+      case SATISFIED:	ret = strSATISFIED; break;
+      case NONRELEVANT:	ret = strNONRELEVANT; break;
+      case UNDETERMINED:break;// to avoid default:
+    }
+    return ret;
+  }
+
+  ResStatus::ValidateValue ResStatus::stringToValidateValue( const std::string & str_r )
+  {
+    ValidateValue ret = UNDETERMINED;
+    if      ( str_r == strBROKEN )      ret = BROKEN;
+    else if ( str_r == strSATISFIED )   ret = SATISFIED;
+    else if ( str_r == strNONRELEVANT ) ret = NONRELEVANT;
+    return ret;
+  }
 
   /******************************************************************
   **
