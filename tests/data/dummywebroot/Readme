@@ -1,0 +1,3 @@
+This is just a dummy directory for all tests
+that start a WebServer but do not really need a root
+directory to provide any content

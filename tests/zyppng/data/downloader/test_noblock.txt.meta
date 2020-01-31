@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metalink version="3.0"
+  xmlns="http://www.metalinker.org/"
+  generator="http://metalinks.sourceforge.net/"
+  >
+<files>
+	<file name="test.txt">
+		<size>2148018</size>
+		<verification>
+			<hash type="md5">7e562d52c100b68e9d6a561fa8519575</hash>
+			<hash type="sha1">52cabd59ecb55096447322ca99364d50094997a0</hash>
+		</verification>
+		<resources>
+                        %1%
+		</resources>
+	</file>
+</files>
+</metalink>

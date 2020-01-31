@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metalink version="3.0"
+  xmlns="http://www.metalinker.org/"
+  generator="http://metalinks.sourceforge.net/"
+  >
+<files>
+	<file name="test.txt">
+		<size>2148018</size>
+		<verification>
+			<hash type="md5">7e562d52c100b68e9d6a561fa8519575</hash>
+			<hash type="sha1">52cabd59ecb55096447322ca99364d50094997a0</hash>
+			<pieces length="262144" type="sha1">
+				<hash piece="0">9916af41e079f5758d62f7bae3d74d8c5f0557c1</hash>
+				<hash piece="1">852e21a1e914971c0544253e5d8f853b181b13b1</hash>
+				<hash piece="2">f4cff1a07588a9ea22d8c193f75988fb00c45306</hash>
+				<hash piece="3">c4ef102565900f4f6669ab8596bedcb1ea6f1451</hash>
+				<hash piece="4">3cf13de7699c8a97e0334b4c5a1982f28d297f0a</hash>
+				<hash piece="5">489f0546839a4cd49e0eee1738953b327bbb4bf4</hash>
+				<hash piece="6">d5739177bc6adf319988055388d20dc0908aec27</hash>
+				<hash piece="7">a29de2657b5bbfb9da52d44858fd41eb09d972e8</hash>
+				<hash piece="8">496bdfb70ed41fa5d98ae7d94843206f2578c328</hash>
+			</pieces>
+		</verification>
+		<resources>
+			<url preference="100" location="de" type="https">https://localhost:10001/handler/test.txt</url> 
+			<url preference="90" location="de" type="https">https://localhost:10001/handler/test.txt</url>
+			<url preference="80" location="de" type="https">https://localhost:10001/handler/test.txt</url>
+			<url preference="70" location="de" type="https">https://localhost:10001/handler/test.txt</url>
+			<url preference="60" location="de" type="https">https://localhost:10001/handler/test.txt</url>
+			<url preference="50" location="de" type="https">https://localhost:10001/handler/test.txt</url>
+			<url preference="40" location="de" type="https">https://localhost:10001/handler/test.txt</url>
+			<url preference="30" location="de" type="https">https://localhost:10001/handler/test.txt</url>
+		</resources>
+	</file>
+</files>
+</metalink>

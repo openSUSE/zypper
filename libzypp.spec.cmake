@@ -87,8 +87,8 @@ Requires:       libsolv-tools
 BuildRequires:  glib2-devel
 BuildRequires:  libsigc++2-devel
 
-# required for testsuite, webrick
-BuildRequires:  ruby
+# required for testsuite
+BuildRequires:  nginx
 
 Requires:       rpm
 
@@ -97,20 +97,22 @@ BuildRequires:  rpm-devel > 4.4
 %endif
 
 %if 0%{?fedora_version} || 0%{?rhel_version} >= 600 || 0%{?centos_version} >= 600
-BuildRequires:  glib2-devel
 BuildRequires:  popt-devel
 BuildRequires:  rpm-devel > 4.4
 %endif
 
 %if 0%{?mandriva_version}
-BuildRequires:  glib2-devel
 BuildRequires:  librpm-devel > 4.4
 %endif
 
 %if 0%{?suse_version}
 BuildRequires:  libgpgme-devel
+#testsuite
+BuildRequires:  FastCGI-devel
 %else
 BuildRequires:  gpgme-devel
+#testsuite
+BuildRequires:	fcgi-devel
 %endif
 
 %define min_curl_version 7.19.4
@@ -275,7 +277,7 @@ cd ..
 
 %check
 pushd build/tests
-LD_LIBRARY_PATH="%{buildroot}/%{_libdir}:$LD_LIBRARY_PATH" ctest --output-on-failure .
+LD_LIBRARY_PATH="$(pwd)/../zypp:$LD_LIBRARY_PATH" ctest --output-on-failure .
 popd
 
 %post

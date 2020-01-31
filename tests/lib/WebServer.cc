@@ -1,53 +1,50 @@
 #include <sstream>
 #include <string>
-#include "boost/version.hpp"
-
-#if BOOST_VERSION >= 106800
-#define BOOST_ERROR_CODE_HEADER_ONLY
-#endif
-
-#include "boost/bind.hpp"
-#include "boost/thread.hpp"
+#include <stdio.h>
+#include <poll.h>
+#include <signal.h>
 
 #include "zypp/base/Logger.h"
 #include "zypp/base/String.h"
 #include "zypp/base/Exception.h"
 #include "zypp/ExternalProgram.h"
+#include "zypp/TmpPath.h"
+#include "zypp/PathInfo.h"
 #include "WebServer.h"
 
-#include "mongoose.h"
+#include <thread>
+#include <atomic>
+#include <mutex>
+#include <condition_variable>
+#include <fastcgi/fcgiapp.h>
+#include <fastcgi/fcgio.h>
+#include <iostream>
+#include <fstream>
+
+#ifndef TESTS_SRC_DIR
+#error "TESTS_SRC_DIR not defined"
+#endif
 
 using namespace zypp;
 using namespace std;
 
-#if ( BOOST_VERSION >= 105000 ) && ( BOOST_VERSION < 106800)
-// https://svn.boost.org/trac/boost/ticket/7085
-namespace boost
-{
-  namespace system
+namespace  {
+
+  /** ExternalProgram extended to kill the child process if the parent thread exits
+     */
+  class ZYPP_LOCAL ExternalTrackedProgram : public ExternalProgram
   {
-    class fake_error_category : public error_category
+  public:
+    ExternalTrackedProgram (const char *const *argv, const Environment & environment,
+      Stderr_Disposition stderr_disp = Normal_Stderr,
+      bool use_pty = false, int stderr_fd = -1, bool default_locale = false,
+      const Pathname& root = "") : ExternalProgram()
     {
-      virtual const char *     name() const noexcept(true)
-      { return "falke_name"; }
-      virtual std::string      message( int ev ) const
-      { return "falke_message"; }
-    };
-    const error_category &  generic_category()
-    {
-      static fake_error_category _e;
-      return _e;
-      throw std::exception(/*"boost/ticket/7085 workaound sucks :("*/);
+      start_program( argv, environment, stderr_disp, stderr_fd, default_locale, root.c_str(), false, true );
     }
-    const error_category &  system_category()
-    {
-      static fake_error_category _e;
-      return _e;
-      throw std::exception(/*"boost/ticket/7085 workaound sucks :("*/);
-    }
-  }
+
+  };
 }
-#endif
 
 static inline string hostname()
 {
@@ -60,198 +57,360 @@ static inline string hostname()
     return result;
 }
 
-#define WEBRICK 0
+static inline std::string handlerPrefix()
+{
+  static std::string pref("/handler/");
+  return pref;
+}
+
+WebServer::Request::Request( std::istream::__streambuf_type *rinbuf, std::ostream::__streambuf_type *routbuf, std::ostream::__streambuf_type *rerrbuf )
+  : rin  ( rinbuf )
+  , rout ( routbuf )
+  , rerr ( rerrbuf )
+{ }
 
 class WebServer::Impl
 {
 public:
-    Impl()
-    {}
-
-    virtual ~Impl()
-    {}
-
-    virtual string log() const
-    { return string(); }
-
-    virtual void start()
-    {}
-
-    virtual void stop()
-    {}
-
-    virtual void worker_thread()
-    {}
-
-    virtual int port() const
+    Impl(const Pathname &root, unsigned int port, bool ssl)
+      : _docroot(root), _port(port), _stop(false), _stopped(true), _ssl( ssl )
     {
-        return 0;
+      FCGX_Init();
+
+      // wake up pipe to interrupt poll()
+      pipe ( _wakeupPipe );
+      fcntl( _wakeupPipe[0], F_SETFL, O_NONBLOCK );
+
+      MIL << "Working dir is " << _workingDir << endl;
+
+      filesystem::assert_dir( _workingDir / "log" );
+      filesystem::assert_dir( _workingDir / "tmp" );
+#ifdef HTTP_USE_LIGHTTPD
+      filesystem::assert_dir( _workingDir / "state" );
+      filesystem::assert_dir( _workingDir / "home" );
+      filesystem::assert_dir( _workingDir / "cache" );
+      filesystem::assert_dir( _workingDir / "upload" );
+      filesystem::assert_dir( _workingDir / "sockets" );
+#endif
     }
 
-
-
-private:
-    friend Impl * rwcowClone<Impl>( const Impl * rhs );
-    /** clone for RWCOW_pointer */
-    Impl * clone() const
-    { return new Impl( *this ); }
-};
-
-class WebServerWebrickImpl : public WebServer::Impl
-{
-public:
-    WebServerWebrickImpl(const Pathname &root, unsigned int port)
-        : _docroot(root), _port(port), _stop(false), _stopped(true)
-    {
-    }
-
-    ~WebServerWebrickImpl()
+    ~Impl()
     {
         if ( ! _stopped )
             stop();
+
+        close (_wakeupPipe[0]);
+        close (_wakeupPipe[1]);
     }
 
-    virtual int port() const
+    Pathname socketPath () const {
+      return ( _workingDir.path() / "fcgi.sock" );
+    }
+
+    int port() const
     {
         return _port;
     }
 
-
-    virtual void worker_thread()
+    void worker_thread()
     {
-        _log.clear();
+      int sockFD = -1;
 
-        stringstream strlog(_log);
+      ExternalProgram::Environment env;
 
-        string webrick_code = str::form("require \"webrick\"; s = WEBrick::HTTPServer.new(:Port => %d, :DocumentRoot    => \"%s\"); trap(\"INT\"){ s.shutdown }; trap(\"SIGKILL\") { s.shutdown }; s.start;", _port, _docroot.c_str());
+#ifdef HTTP_USE_LIGHTTPD
+      bool canContinue = true;
+      Pathname confDir = Pathname(TESTS_SRC_DIR) / "data" / "lighttpdconf";
+      Pathname sslDir  = Pathname(TESTS_SRC_DIR) / "data" / "webconf" / "ssl";
+      env["ZYPP_TEST_SRVCONF"] = confDir.asString();
 
-        const char* argv[] =
+      std::string confFile    = ( confDir / "lighttpd.conf" ).asString();
+
+      {
+        std::lock_guard<std::mutex> lock ( _mut );
+        sockFD = FCGX_OpenSocket( socketPath().c_str(), 128 );
+        env["ZYPP_TEST_SRVROOT"] = _workingDir.path().c_str();
+        env["ZYPP_TEST_PORT"] = str::numstring( _port );
+        env["ZYPP_TEST_DOCROOT"] = _docroot.c_str();
+        env["ZYPP_TEST_SOCKPATH"] = socketPath().c_str();
+        env["ZYPP_SSL_CONFDIR"] = sslDir.c_str();
+        if ( _ssl )
+          env["ZYPP_TEST_USE_SSL"] = "1";
+      }
+
+      const char* argv[] =
         {
-            "/usr/bin/ruby",
-            "-e",
-            webrick_code.c_str(),
-            NULL
+          "/usr/sbin/lighttpd",
+          "-D",
+          "-f", confFile.c_str(),
+          nullptr
+        };
+#else
+
+      const auto writeConfFile = []( const Pathname &fileName, const std::string &data ){
+        ofstream file;
+        file.open( fileName.c_str() );
+        if ( file.fail() ) {
+          std::cerr << "Failed to create file " << fileName << std::endl;
+          return false;
+        }
+        file << data;
+        file.close();
+        return true;
+      };
+
+      const auto confPath = _workingDir.path();
+      const auto confFile = confPath/"nginx.conf";
+      bool canContinue = true;
+
+      {
+        std::lock_guard<std::mutex> lock ( _mut );
+        bool canContinue = ( zypp::filesystem::symlink( Pathname(TESTS_SRC_DIR)/"data"/"nginxconf"/"nginx.conf",  confFile ) == 0 );
+        if ( canContinue ) canContinue = writeConfFile( confPath / "srvroot.conf", str::Format("root    %1%;") % _docroot );
+        if ( canContinue ) canContinue = writeConfFile( confPath / "fcgisock.conf", str::Format("fastcgi_pass unix:%1%;") % socketPath().c_str() );
+        if ( canContinue ) {
+          if ( _ssl )
+            canContinue = writeConfFile( confPath / "port.conf", str::Format("listen    %1% ssl;") % _port );
+          else
+            canContinue = writeConfFile( confPath / "port.conf", str::Format("listen    %1%;") % _port );
+        }
+        if ( canContinue ) {
+          if ( _ssl )
+            canContinue = ( zypp::filesystem::symlink( Pathname(TESTS_SRC_DIR)/"data"/"nginxconf"/"ssl.conf",  confPath/"ssl.conf" ) == 0 );
+          else
+            canContinue = ( zypp::filesystem::symlink( Pathname(TESTS_SRC_DIR)/"data"/"nginxconf"/"nossl.conf",  confPath/"ssl.conf" ) == 0);
+        }
+        if ( canContinue ) canContinue = zypp::filesystem::symlink( Pathname(TESTS_SRC_DIR)/"data"/"nginxconf"/"mime.types",  confPath/"mime.types") == 0;
+        if ( canContinue && _ssl ) canContinue = zypp::filesystem::symlink( Pathname(TESTS_SRC_DIR)/"data"/"webconf"/"ssl"/"server.pem",  confPath/"cert.pem") == 0;
+        if ( canContinue && _ssl ) canContinue = zypp::filesystem::symlink( Pathname(TESTS_SRC_DIR)/"data"/"webconf"/"ssl"/"server.key",  confPath/"cert.key") == 0;
+
+        if ( canContinue )
+          sockFD = FCGX_OpenSocket( socketPath().c_str(), 128 );
+      }
+
+      const char* argv[] =
+      {
+          "/usr/sbin/nginx",
+          "-p", confPath.c_str(),
+          "-c", confFile.c_str(),
+          nullptr
+      };
+#endif
+
+      if ( !canContinue ) {
+        _stopped = true;
+        _cv.notify_all();
+        return;
+      }
+
+        ExternalTrackedProgram prog( argv, env, ExternalProgram::Stderr_To_Stdout, false, -1, true);
+        prog.setBlocking( false );
+
+        //wait some time so we can read config
+        std::this_thread::sleep_for(std::chrono::milliseconds(100));
+
+        while(1) {
+          std::string line = prog.receiveLine();
+          if ( line.empty() )
+            break;
+          if ( line.find_first_of( "nginx: [alert] could not open error log file:") == 0 )
+            continue;
+          std::cerr << line << endl;
         };
 
-        ExternalProgram prog(argv,ExternalProgram::Discard_Stderr, false, -1, true);
-        string line;
+        if ( !prog.running() ) {
+          _stop = true;
+          _stopped = true;
+        } else {
+          _stopped = false;
+        }
 
-        _stopped = false;
+        FCGX_Request request;
+        FCGX_InitRequest(&request, sockFD,0);
 
-        while ( ! _stop );
+        struct pollfd fds[] { {
+            _wakeupPipe[0],
+            POLLIN,
+            0
+          }, {
+            sockFD,
+            POLLIN,
+            0
+          }, {
+            fileno( prog.inputFile() ),
+            POLLIN | POLLHUP | POLLERR,
+            0
+          }
+        };
 
-        MIL << "Thread end requested" << endl;
-        //prog.close();
-        if ( prog.running() )
-            prog.kill();
-        MIL << "Thread about to finish" << endl;
+        bool firstLoop = true;
+
+        while ( 1 ) {
+
+          if ( firstLoop ) {
+            firstLoop = false;
+            _cv.notify_all();
+            if ( _stopped )
+              return;
+          }
+
+          //there is no way to give a timeout to FCGX_Accept_r, so we poll the socketfd for new
+          //connections and listen on a pipe for a wakeup event to stop the worker if required
+          int ret = ::poll( fds, 3, INT_MAX );
+          if ( ret == 0 ) {
+            //timeout just continue the loop condition will stop if required
+            continue;
+          }
+
+          if ( ret < 0 ) {
+            std::cerr << "Poll error " << endl;
+            continue;
+          }
+
+          if ( fds[0].revents ) {
+            //clear pipe
+            char dummy;
+            while ( read( _wakeupPipe[0], &dummy, 1 ) > 0 ) { continue; }
+          }
+
+          if ( fds[2].revents ) {
+            while(1) {
+              std::string line = prog.receiveLine();
+              if ( line.empty() )
+                break;
+              std::cerr << line << endl;
+            };
+
+            if ( !prog.running() ) {
+              std::cerr << "Webserver exited too early" << endl;
+              _stop = true;
+              _stopped = true;
+            }
+          }
+
+          if ( _stop )
+            break;
+
+          //no events on the listen socket, repoll
+          if ( ! ( fds[1].revents & POLLIN ) )
+            continue;
+
+          if ( FCGX_Accept_r(&request) == 0 ) {
+
+            fcgi_streambuf cout_fcgi(request.out);
+            fcgi_streambuf cin_fcgi(request.in);
+            fcgi_streambuf cerr_fcgi(request.err);
+
+            WebServer::Request req( &cin_fcgi, &cout_fcgi, &cerr_fcgi );
+
+            int i = 0;
+            for ( char *env = request.envp[i]; env != nullptr; env = request.envp[++i] ) {
+              char * eq = strchr( env, '=' );
+              if ( !eq ) {
+                continue;
+              }
+              req.params.insert( { std::string( env, eq ), std::string( eq+1 ) } );
+            }
+
+            if ( !req.params.count("SCRIPT_NAME") ) {
+              req.rerr << "Status: 400 Bad Request\r\n"
+                       << "Content-Type: text/html\r\n"
+                       << "\r\n"
+                       << "Invalid request";
+              FCGX_Finish_r(&request);
+              continue;
+            }
+
+            {
+              std::lock_guard<std::mutex> lock( _mut );
+              //remove "/handler/" prefix
+              std::string key = req.params.at("SCRIPT_NAME").substr( handlerPrefix().length() );
+
+              auto it = _handlers.find( key );
+              if ( it == _handlers.end() ) {
+                req.rerr << "Status: 404 Not Found\r\n"
+                         << "Content-Type: text/html\r\n"
+                         << "\r\n"
+                         << "Request handler was not found";
+                FCGX_Finish_r(&request);
+                continue;
+              }
+              //call the handler
+              it->second( req );
+              FCGX_Finish_r(&request);
+            }
+          }
+        }
+
+        if ( prog.running() ) {
+            prog.kill( SIGQUIT );
+            prog.close();
+        }
     }
 
-    virtual string log() const
+    string log() const
     {
-        return _log;
+      //read logfile
+      return std::string();
     }
 
-    virtual void stop()
+    void stop()
     {
-        MIL << "Waiting for Webrick thread to finish" << endl;
+        MIL << "Waiting for server thread to finish" << endl;
         _stop = true;
+
+        //signal the thread to wake up
+        write( _wakeupPipe[1], "\n", 1);
+
         _thrd->join();
-        MIL << "Webrick thread finished" << endl;
+        MIL << "server thread finished" << endl;
+
         _thrd.reset();
         _stopped = true;
     }
 
-    virtual void start()
+    void start()
     {
-        //_thrd.reset( new boost::thread( boost::bind(&WebServerWebrickImpl::worker_thread, this) ) );
+      if ( !filesystem::PathInfo( _docroot ).isExist() ) {
+        std::cerr << "Invalid docroot" << std::endl;
+        throw zypp::Exception("Invalid docroot");
+      }
+
+      if ( !_stopped ) {
+        stop();
+      }
+
+      MIL << "Using socket " <<  socketPath() << std::endl;
+      _stop = _stopped = false;
+
+      std::unique_lock<std::mutex> lock( _mut );
+      _thrd.reset( new std::thread( &Impl::worker_thread, this ) );
+      _cv.wait(lock);
+
+      if ( _stopped ) {
+        _thrd->join();
+        throw zypp::Exception("Failed to start the webserver");
+      }
     }
 
+    std::mutex _mut; //<one mutex to rule em all
+    std::condition_variable _cv; //< to sync server startup
+
+    filesystem::TmpDir _workingDir;
     zypp::Pathname _docroot;
+    zypp::shared_ptr<std::thread> _thrd;
+    std::map<std::string, WebServer::RequestHandler> _handlers;
     unsigned int _port;
-    zypp::shared_ptr<boost::thread> _thrd;
-    bool _stop;
+    int _wakeupPipe[2];
+
+    std::atomic_bool _stop;
     bool _stopped;
-    std::string _log;
-};
-
-class WebServerMongooseImpl : public WebServer::Impl
-{
-public:
-    WebServerMongooseImpl(const Pathname &root, unsigned int port)
-        : _ctx(0L), _docroot(root)
-        , _port(port)
-        , _stopped(true)
-    {
-    }
-
-    ~WebServerMongooseImpl()
-    {
-        MIL << "Destroying web server" << endl;
-
-        if ( ! _stopped )
-            stop();
-    }
-
-    virtual void start()
-    {
-        if ( ! _stopped )
-        {
-            MIL << "mongoose server already running, stopping." << endl;
-            stop();
-        }
-
-        MIL << "Starting shttpd (mongoose)" << endl;
-        _log.clear();
-        _ctx = mg_start();
-
-        int ret = 0;
-        ret = mg_set_option(_ctx, "ports", str::form("%d", _port).c_str());
-        if (  ret != 1 )
-            ZYPP_THROW(Exception(str::form("Failed to set port: %d", ret)));
-
-        MIL << "Setting root directory to : '" << _docroot << "'" << endl;
-        ret = mg_set_option(_ctx, "root", _docroot.c_str());
-        if (  ret != 1 )
-            ZYPP_THROW(Exception(str::form("Failed to set docroot: %d", ret)));
-
-        _stopped = false;
-    }
-
-    virtual int port() const
-    {
-        return _port;
-    }
-
-
-    virtual string log() const
-    {
-        return _log;
-    }
-
-    virtual void stop()
-    {
-        MIL << "Stopping shttpd" << endl;
-        mg_stop(_ctx);
-        MIL << "shttpd finished" << endl;
-        _ctx = 0;
-        _stopped = true;
-    }
-
-    mg_context *_ctx;
-    zypp::Pathname _docroot;
-    unsigned int _port;
-    bool _stopped;
-    std::string _log;
+    bool _ssl;
 };
 
 
-WebServer::WebServer(const Pathname &root, unsigned int port)
-#if WEBRICK
-    : _pimpl(new WebServerWebrickImpl(root, port))
-#else
-    : _pimpl(new WebServerMongooseImpl(root, port))
-#endif
+WebServer::WebServer(const Pathname &root, unsigned int port, bool useSSL)
+    : _pimpl(new Impl(root, port, useSSL))
 {
 }
 
@@ -263,7 +422,26 @@ void WebServer::start()
 
 std::string WebServer::log() const
 {
-    return _pimpl->log();
+  return _pimpl->log();
+}
+
+bool WebServer::isStopped() const
+{
+  return _pimpl->_stopped;
+}
+
+void WebServer::addRequestHandler( const string &path, RequestHandler &&handler )
+{
+  std::lock_guard<std::mutex> lock( _pimpl->_mut );
+  _pimpl->_handlers[path] = std::move(handler);
+}
+
+void WebServer::removeRequestHandler(const string &path)
+{
+  std::lock_guard<std::mutex> lock( _pimpl->_mut );
+  auto it = _pimpl->_handlers.find( path );
+  if ( it != _pimpl->_handlers.end() )
+    _pimpl->_handlers.erase( it );
 }
 
 int WebServer::port() const
@@ -277,8 +455,19 @@ Url WebServer::url() const
     Url url;
     url.setHost("localhost");
     url.setPort(str::numstring(port()));
-    url.setScheme("http");
+    if ( _pimpl->_ssl )
+      url.setScheme("https");
+    else
+      url.setScheme("http");
+
     return url;
+}
+
+media::TransferSettings WebServer::transferSettings() const
+{
+  media::TransferSettings set;
+  set.setCertificateAuthoritiesPath(zypp::Pathname(TESTS_SRC_DIR)/"data/webconf/ssl/certstore");
+  return set;
 }
 
 void WebServer::stop()
@@ -286,8 +475,47 @@ void WebServer::stop()
     _pimpl->stop();
 }
 
+WebServer::RequestHandler WebServer::makeResponse( std::string resp )  {
+  return [ resp ]( WebServer::Request & req ){
+    req.rout << resp;
+  };
+};
+
+WebServer::RequestHandler WebServer::makeResponse( std::string status, std::string content )  {
+  return makeResponse( status , std::vector<std::string>(), content );
+};
+
+WebServer::RequestHandler WebServer::makeResponse( const std::string &status, const std::vector<std::string> &headers, const std::string &content )  {
+  return makeResponse( makeResponseString( status, headers, content ) );
+}
+
+string WebServer::makeResponseString(const string &status, const std::vector<string> &headers, const string &content)
+{
+  static const std::string genericResp = "Status: %1%\r\n"
+                                         "%2%"
+                                         "\r\n"
+                                         "%3%";
+  bool hasCType = false;
+  bool hasLType = false;
+  for( const std::string &hdr : headers ) {
+    if ( zypp::str::startsWith( hdr, "Content-Type:" ) ) {
+      hasCType = true;
+    }
+    if ( zypp::str::startsWith( hdr, "Content-Length:" ) ) {
+      hasLType = true;
+    }
+  }
+
+  std::string allHeaders;
+  if ( !hasCType )
+    allHeaders += "Content-Type: text/html; charset=utf-8\r\n";
+  if ( !hasLType )
+    allHeaders += str::Format("Content-Length: %1%\r\n") % content.length();
+  allHeaders += zypp::str::join( headers.begin(), headers.end(), "\r\n");
+
+  return ( zypp::str::Format( genericResp ) % status % allHeaders %content );
+};
+
 WebServer::~WebServer()
 {
 }
-
-

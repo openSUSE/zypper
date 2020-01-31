@@ -1,5 +1,4 @@
-
-INCLUDE_DIRECTORIES( ${LIBZYPP_SOURCE_DIR}/vendor/mongoose )
+add_definitions( -DSRCDIR="${CMAKE_CURRENT_SOURCE_DIR}")
 
 ADD_LIBRARY(zypp_test_utils
  TestSetup.h
@@ -7,4 +6,4 @@ ADD_LIBRARY(zypp_test_utils
  WebServer.cc
 )
 
-TARGET_LINK_LIBRARIES(zypp_test_utils mongoose zypp-allsym ${Boost_THREAD_LIBRARY})
+TARGET_LINK_LIBRARIES( zypp_test_utils zypp-allsym fcgi fcgi++ pthread )
