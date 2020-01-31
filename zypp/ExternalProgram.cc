@@ -581,6 +581,14 @@ namespace zypp {
       return true;
     }
 
+    bool ExternalProgram::kill(int sig)
+    {
+      if (pid > 0)
+      {
+        ::kill(pid, sig);
+      }
+      return true;
+    }
 
     bool
     ExternalProgram::running()

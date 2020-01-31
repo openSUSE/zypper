@@ -156,6 +156,11 @@ namespace zypp {
       bool kill();
 
       /**
+       * Send a signal to the program
+       */
+      bool kill( int sig );
+
+      /**
        * Return whether program is running
        */
       bool running();
