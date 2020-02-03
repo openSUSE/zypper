@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-11-28 17:54+0100\n"
-"PO-Revision-Date: 2020-01-27 17:54+0000\n"
+"PO-Revision-Date: 2020-02-03 17:54+0000\n"
 "Last-Translator: David Medina <medipas@gmail.com>\n"
 "Language-Team: Catalan <https://l10n.opensuse.org/projects/zypper/master/ca/>"
 "\n"
@@ -1791,9 +1791,8 @@ msgstr[1] "Les següents %d aplicacions NO s'instal·laran:"
 msgid "The following item is locked and will not be changed by any action:"
 msgid_plural ""
 "The following %d items are locked and will not be changed by any action:"
-msgstr[0] "L'element següent està bloquejat i no el canviarà cap acció:"
-msgstr[1] ""
-"Els %d elements següents estan bloquejats i no els canviarà cap acció:"
+msgstr[0] "L'element següent està blocat i no el canviarà cap acció:"
+msgstr[1] "Els %d elements següents estan blocats i no els canviarà cap acció:"
 
 #. always as plain name list
 #. translators: used as 'tag:' (i.e. followed by ':')
@@ -1810,7 +1809,7 @@ msgstr "Instal·lat"
 #: src/Summary.cc:1332
 #, boost-format
 msgid "Run '%1%' to see the complete list of locked items."
-msgstr "Feu servir \"%s\" per veure una llista completa dels ítems bloquejats."
+msgstr "Feu servir \"%s\" per veure una llista completa dels elements blocats."
 
 #: src/Summary.cc:1341
 #, c-format, boost-format
@@ -1987,9 +1986,9 @@ msgid ""
 "PackageKit is blocking zypper. This happens if you have an updater applet or "
 "other software management application using PackageKit running."
 msgstr ""
-"El PackageKit està bloquejant el zypper. Això passa si teniu una altra "
-"aplicació d'actualització o de gestió de paquets que està utilitzant el "
-"PackageKit en funcionament."
+"El PackageKit està blocant el zypper. Això passa si teniu una altra "
+"aplicació d'actualització o de gestió de paquets que està usant el "
+"PackageKit en execució."
 
 #: src/Zypper.cc:97
 msgid ""
@@ -2586,8 +2585,8 @@ msgid ""
 "Add a package lock. Specify packages to lock by exact name or by a glob "
 "pattern using '*' and '?' wildcard characters."
 msgstr ""
-"Afegeix un blocatge de paquet. Especifiqueu els paquets per bloquejar per "
-"nom o per un patró general amb '*' i '?' amb caràcters wildcard."
+"Afegeix un blocatge de paquet. Especifiqueu els paquets per blocar amb el "
+"nom exacte o amb un patró general amb els caràcters de comodí * i ?."
 
 #: src/commands/locks/add.cc:42
 msgid "Restrict the lock to the specified repository."
@@ -6588,8 +6587,8 @@ msgstr[1] "S'han trobat %1% pedaços aplicables:"
 #, c-format, boost-format
 msgid "%d patch locked"
 msgid_plural "%d patches locked"
-msgstr[0] "%d pedaç bloquejat"
-msgstr[1] "%d pedaços bloquejats"
+msgstr[0] "%d pedaç blocat"
+msgstr[1] "%d pedaços blocats"
 
 #. translator: stats summary
 #: src/update.cc:349
@@ -6635,7 +6634,7 @@ msgstr "Pedaços"
 #. translator: Table column header.
 #: src/update.cc:403
 msgid "Locked"
-msgstr "Bloquejat"
+msgstr "Blocat"
 
 #. translator: Table column header
 #. Used if stats collect data for more than one category name.
