@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-11-28 17:54+0100\n"
-"PO-Revision-Date: 2020-02-03 17:54+0000\n"
+"PO-Revision-Date: 2020-02-03 23:54+0000\n"
 "Last-Translator: David Medina <medipas@gmail.com>\n"
 "Language-Team: Catalan <https://l10n.opensuse.org/projects/zypper/master/ca/>"
 "\n"
@@ -346,9 +346,9 @@ msgstr ""
 "Tot i això, si teniu clar que el fitxer amb la suma \"%1%..\" és segur, "
 "correcte\n"
 "i que s'hauria d'usar en aquesta operació, escriviu els primers 4 caràcters "
-"de la suma\n"
-"per desbloquejar-ne l'ús al vostre risc. Si ho deixeu en blanc es descartarà "
-"el fitxer.\n"
+"de la suma per\n"
+"desblocar-lo segons la vostra responsabilitat. Si ho deixeu en blanc es "
+"descartarà el fitxer.\n"
 
 #. translators: A prompt option
 #: src/callbacks/keyring.h:522
@@ -368,27 +368,26 @@ msgstr "Descarta el fitxer."
 #. translators: A prompt text
 #: src/callbacks/keyring.h:530
 msgid "Unblock or discard?"
-msgstr "El desbloquejo o el descarto?"
+msgstr "El desbloco o el descarto?"
 
 #: src/callbacks/locks.h:27
 msgid ""
 "The following query locks the same objects as the one you want to remove:"
 msgstr ""
-"La consulta següent bloqueja els mateixos objectes que el que voleu suprimir:"
+"La consulta següent bloca els mateixos objectes que el que voleu suprimir:"
 
 #: src/callbacks/locks.h:30
 msgid "The following query locks some of the objects you want to unlock:"
-msgstr ""
-"La consulta següent bloqueja alguns dels objectes que voleu desbloquejar:"
+msgstr "La consulta següent bloca alguns dels objectes que voleu desblocar:"
 
 # power-off message
 #: src/callbacks/locks.h:35 src/callbacks/locks.h:50
 msgid "Do you want to remove this lock?"
-msgstr "Voleu alliberar aquest blocatge?"
+msgstr "Voleu suprimir aquest bloqueig?"
 
 #: src/callbacks/locks.h:45
 msgid "The following query does not lock anything:"
-msgstr "La consulta següent no bloqueja res:"
+msgstr "La consulta següent no bloca res:"
 
 #: src/callbacks/repo.h:49
 msgid "Retrieving delta"
@@ -735,7 +734,7 @@ msgstr "Consulta:"
 
 #: src/Command.cc:149
 msgid "Package Locks:"
-msgstr "Blocatge de paquets:"
+msgstr "Bloqueig de paquets:"
 
 #: src/Command.cc:154
 msgid "Locale Management:"
@@ -1181,8 +1180,8 @@ msgid ""
 "There is an update candidate for '%s', but it is locked. Use '%s' to unlock "
 "it."
 msgstr ""
-"Hi ha una actualització canditata per a %s, però té un blocatge. Utilitzeu "
-"\"%s\" per desbloquejar-la."
+"Hi ha una actualització canditata per a %s, però està blocada. Useu \"%s\" "
+"per desblocar-la."
 
 #: src/RequestFeedback.cc:148
 #, c-format, boost-format
@@ -1231,8 +1230,8 @@ msgstr ""
 #, c-format, boost-format
 msgid "Patch '%s' is locked. Use '%s' to install it, or unlock it using '%s'."
 msgstr ""
-"El pedaç %s està bloquejat. Feu servir \"%s\" per instal·lar-lo, o "
-"desbloquegeu-lo fent servir \"%s\"."
+"El pedaç %s està blocat. Useu \"%s\" per instal·lar-lo, o desbloqueu-lo amb  "
+"\"%s\"."
 
 #: src/RequestFeedback.cc:199
 #, c-format, boost-format
@@ -1267,7 +1266,7 @@ msgstr "Seleccionant %s per surpimir."
 #: src/RequestFeedback.cc:233
 #, c-format, boost-format
 msgid "'%s' is locked. Use '%s' to unlock it."
-msgstr "%s està bloquejat. Feu servir \"%s\" per desbloquejar-lo."
+msgstr "%s està blocat. Useu \"%s\" per desblocar-lo."
 
 #: src/RequestFeedback.cc:238
 #, c-format, boost-format
@@ -2577,7 +2576,7 @@ msgstr "addlock (al) [OPCIONS] <NOMDELPAQUET> ..."
 #. translators: command summary
 #: src/commands/locks/add.cc:31
 msgid "Add a package lock."
-msgstr "Afegeix un blocatge de paquet."
+msgstr "Afegeix un bloqueig de paquet."
 
 #. translators: command description
 #: src/commands/locks/add.cc:33
@@ -2585,22 +2584,22 @@ msgid ""
 "Add a package lock. Specify packages to lock by exact name or by a glob "
 "pattern using '*' and '?' wildcard characters."
 msgstr ""
-"Afegeix un blocatge de paquet. Especifiqueu els paquets per blocar amb el "
+"Afegeix un bloqueig de paquet. Especifiqueu els paquets per blocar amb el "
 "nom exacte o amb un patró general amb els caràcters de comodí * i ?."
 
 #: src/commands/locks/add.cc:42
 msgid "Restrict the lock to the specified repository."
-msgstr "Restringeix el blocatge al repositori especificat."
+msgstr "Restringeix el bloqueig al repositori especificat."
 
 #: src/commands/locks/add.cc:76
 msgid "Specified lock has been successfully added."
 msgid_plural "Specified locks have been successfully added."
-msgstr[0] "El blocatge especificat s'ha afegit correctament."
-msgstr[1] "Els blocatges especificats s'han afegit correctament."
+msgstr[0] "El bloqueig especificat s'ha afegit correctament."
+msgstr[1] "Els bloquejos especificats s'han afegit correctament."
 
 #: src/commands/locks/add.cc:83
 msgid "Problem adding the package lock:"
-msgstr "Problema afegint el blocatge de paquet:"
+msgstr "Problema afegint el bloqueig de paquet:"
 
 # =============================================================================
 #: src/commands/locks/clean.cc:16
@@ -2610,12 +2609,12 @@ msgstr "cleanlocks (cl)"
 #. translators: command summary
 #: src/commands/locks/clean.cc:18
 msgid "Remove useless locks."
-msgstr "Treu els blocatges inútils."
+msgstr "Suprimeix els bloquejos inútils."
 
 #. translators: -d, --only-duplicates
 #: src/commands/locks/clean.cc:36
 msgid "Clean only duplicate locks."
-msgstr "Neteja només els blocatges duplicats."
+msgstr "Neteja només els bloquejos duplicats."
 
 #. translators: -e, --only-empty
 #: src/commands/locks/clean.cc:39
@@ -2626,8 +2625,8 @@ msgstr "Neteja només els que no bloquegin res."
 #, c-format, boost-format
 msgid "Removed %lu lock."
 msgid_plural "Removed %lu locks."
-msgstr[0] "Tret %lu blocatge."
-msgstr[1] "Trets %lu blocatges."
+msgstr[0] "Suprimit %lu bloqueig."
+msgstr[1] "Suprimits %lu bloquejos."
 
 #. translators: property name; short; used like "Name: value"
 #. translators: Table column header
@@ -2688,7 +2687,7 @@ msgstr "locks (ll) [opcions]"
 
 #: src/commands/locks/list.cc:257
 msgid "List current package locks."
-msgstr "Llista els bloqueigs de paquets actuals."
+msgstr "Llista els bloquejos de paquets actuals."
 
 #: src/commands/locks/list.cc:285
 msgid "Show the number of resolvables matched by each lock."
@@ -2700,11 +2699,11 @@ msgstr "Llista els resolubles coincidents amb cada bloqueig."
 
 #: src/commands/locks/list.cc:300
 msgid "Error reading the locks file:"
-msgstr "Error en llegir l'arxiu de blocatges:"
+msgstr "Error en llegir el fitxer de bloquejos:"
 
 #: src/commands/locks/list.cc:307
 msgid "There are no package locks defined."
-msgstr "No hi ha blocatges de paquet definits."
+msgstr "No hi ha bloquejos de paquet definits."
 
 # =============================================================================
 #: src/commands/locks/remove.cc:25
@@ -2713,7 +2712,7 @@ msgstr "removelock (rl) [OPCIONS] <NÚMERODEBLOQUEIG|NOMDELPAQUET> ..."
 
 #: src/commands/locks/remove.cc:26
 msgid "Remove a package lock."
-msgstr "Suprimeix un blocatge de paquet."
+msgstr "Suprimeix un bloqueig de paquet."
 
 #. translators: command description; %1% is acoomand like 'zypper locks'
 #: src/commands/locks/remove.cc:28
@@ -2727,26 +2726,26 @@ msgstr ""
 
 #: src/commands/locks/remove.cc:45
 msgid "Remove only locks with specified repository."
-msgstr "Suprimeix només bloqueigs amb un repositori especificat."
+msgstr "Suprimeix només bloquejos amb un repositori especificat."
 
 #: src/commands/locks/remove.cc:81
 msgid "Specified lock has been successfully removed."
-msgstr "El blocatge especificat s'ha suprimit correctament."
+msgstr "El bloqueig especificat s'ha suprimit correctament."
 
 #: src/commands/locks/remove.cc:94
 msgid "No lock has been removed."
-msgstr "No s'ha alliberat cap blocatge."
+msgstr "No s'ha suprimit cap bloqueig."
 
 #: src/commands/locks/remove.cc:98
 #, c-format
 msgid "%zu lock has been successfully removed."
 msgid_plural "%zu locks have been successfully removed."
-msgstr[0] "%zu blocatge s'ha suprimit correctament."
-msgstr[1] "%zu blocatges s'han suprimit correctament."
+msgstr[0] "%zu bloqueig s'ha suprimit correctament."
+msgstr[1] "%zu bloquejos s'han suprimit correctament."
 
 #: src/commands/locks/remove.cc:105
 msgid "Problem removing the package lock:"
-msgstr "Problema suprimint el blocatge del paquet:"
+msgstr "Problema suprimint el bloqueig del paquet:"
 
 #. translators: command summary: needs-rebooting
 #: src/commands/needs-rebooting.cc:22
