@@ -24,6 +24,9 @@
 #ifndef TESTS_SRC_DIR
 #error "TESTS_SRC_DIR not defined"
 #endif
+#ifndef WEBSRV_BINARY
+#error "WEBSRV_BINARY not defined"
+#endif
 
 using namespace zypp;
 using namespace std;
@@ -190,7 +193,7 @@ public:
 
       const char* argv[] =
       {
-          "/usr/sbin/nginx",
+          WEBSRV_BINARY,
           "-p", confPath.c_str(),
           "-c", confFile.c_str(),
           nullptr
