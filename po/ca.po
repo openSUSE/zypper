@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-11-28 17:54+0100\n"
-"PO-Revision-Date: 2020-02-03 23:54+0000\n"
+"PO-Revision-Date: 2020-02-04 10:55+0000\n"
 "Last-Translator: David Medina <medipas@gmail.com>\n"
 "Language-Team: Catalan <https://l10n.opensuse.org/projects/zypper/master/ca/>"
 "\n"
@@ -358,7 +358,7 @@ msgstr "descarta"
 #. translators: A prompt option help text
 #: src/callbacks/keyring.h:524
 msgid "Unblock using this file on your own risk."
-msgstr "Desbloquegeu l'ús d'aquest fitxer sota la vostra responsabilitat."
+msgstr "Desbloqueu l'ús d'aquest fitxer segons la vostra responsabilitat."
 
 #. translators: A prompt option help text
 #: src/callbacks/keyring.h:526
@@ -2619,7 +2619,7 @@ msgstr "Neteja només els bloquejos duplicats."
 #. translators: -e, --only-empty
 #: src/commands/locks/clean.cc:39
 msgid "Clean only locks which doesn't lock anything."
-msgstr "Neteja només els que no bloquegin res."
+msgstr "Neteja només els bloquejos que no bloquin res."
 
 #: src/commands/locks/clean.cc:66
 #, c-format, boost-format
