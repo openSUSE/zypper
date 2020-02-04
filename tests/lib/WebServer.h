@@ -57,8 +57,10 @@ class WebServer
   ~WebServer();
   /**
    * Starts the webserver worker thread
+   * Waits up to 10 seconds and returns whether the port is now active.
    */
-  void start();
+  bool start();
+
   /**
    * Stops the worker thread
    */

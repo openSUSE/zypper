@@ -29,7 +29,7 @@ using namespace zypp::repo;
 BOOST_AUTO_TEST_CASE(repoinfo_test)
 {
   WebServer web((Pathname(TESTS_SRC_DIR) + "/data/Mirrorlist/remote-site").c_str(), 10001);
-  web.start();
+  BOOST_REQUIRE( web.start() );
 
   Url weburl (web.url());
   weburl.setPathName("/metalink.xml");

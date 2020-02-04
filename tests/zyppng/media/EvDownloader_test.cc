@@ -63,7 +63,7 @@ BOOST_DATA_TEST_CASE( dltest_basic, bdata::make( withSSL ), withSSL)
 
   WebServer web((zypp::Pathname(TESTS_SRC_DIR)/"data"/"dummywebroot").c_str(), 10001, withSSL );
   web.addRequestHandler("getData", WebServer::makeResponse("200", dummyContent ) );
-  web.start();
+  BOOST_REQUIRE( web.start() );
 
   zypp::filesystem::TmpFile targetFile;
   zyppng::Url weburl (web.url());
@@ -309,7 +309,7 @@ BOOST_DATA_TEST_CASE( test1, bdata::make( generateMirr() ) * bdata::make( withSS
   auto ev = zyppng::EventDispatcher::createMain();
 
   WebServer web((zypp::Pathname(TESTS_SRC_DIR)/"/zyppng/data/downloader").c_str(), 10001, withSSL );
-  web.start();
+  BOOST_REQUIRE( web.start() );
 
   zypp::filesystem::TmpFile targetFile;
   zyppng::Downloader downloader;
@@ -474,7 +474,7 @@ BOOST_DATA_TEST_CASE( dltest_auth, bdata::make( withSSL ), withSSL )
   zyppng::Downloader downloader;
 
   WebServer web((zypp::Pathname(TESTS_SRC_DIR)/"/zyppng/data/downloader").c_str(), 10001, withSSL );
-  web.start();
+  BOOST_REQUIRE( web.start() );
 
   zypp::filesystem::TmpFile targetFile;
   zyppng::Url weburl (web.url());

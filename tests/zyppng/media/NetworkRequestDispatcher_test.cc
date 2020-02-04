@@ -84,7 +84,7 @@ BOOST_DATA_TEST_CASE(nwdispatcher_basic, bdata::make( withSSL ), withSSL)
 
   WebServer web((zypp::Pathname(TESTS_SRC_DIR)/"data"/"dummywebroot").c_str(), 10001, withSSL );
   web.addRequestHandler("getData", WebServer::makeResponse("200 OK", dummyContent ) );
-  web.start();
+  BOOST_REQUIRE( web.start() );
 
   BOOST_REQUIRE( !web.isStopped() );
 
@@ -149,7 +149,7 @@ BOOST_DATA_TEST_CASE(nwdispatcher_http_errors, bdata::make( withSSL ), withSSL)
   web.addRequestHandler("get418", makeErrorResponder( "418 I'm a teapot" ) );
   web.addRequestHandler("delayMe", []( WebServer::Request &req ) {
   });
-  web.start();
+  BOOST_REQUIRE( web.start() );
 
   zyppng::TransferSettings set = web.transferSettings();
 
@@ -248,7 +248,7 @@ BOOST_DATA_TEST_CASE(nwdispatcher_http_download, bdata::make( withSSL ), withSSL
   disp.run();
 
   WebServer web((zypp::Pathname(TESTS_SRC_DIR)/"zypp/data/Fetcher/remote-site").c_str(), 10001, withSSL );
-  web.start();
+  BOOST_REQUIRE( web.start() );
 
   zyppng::TransferSettings set = web.transferSettings();
 
@@ -312,7 +312,7 @@ BOOST_DATA_TEST_CASE(nwdispatcher_delay_download, bdata::make( withSSL ), withSS
               "Hello";
   });
 
-  web.start();
+  BOOST_REQUIRE( web.start() );
 
   zyppng::TransferSettings set = web.transferSettings();
   set.setTimeout( 1 );

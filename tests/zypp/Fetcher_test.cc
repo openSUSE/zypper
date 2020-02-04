@@ -321,7 +321,7 @@ BOOST_AUTO_TEST_CASE(enqueue_broken_content_noindex)
 BOOST_AUTO_TEST_CASE(enqueuedir_http)
 {
     WebServer web((Pathname(TESTS_SRC_DIR) + "/zypp/data/Fetcher/remote-site").c_str(), 10001);
-    web.start();
+    BOOST_REQUIRE( web.start() );
 
   // at this point the key is already trusted
   {

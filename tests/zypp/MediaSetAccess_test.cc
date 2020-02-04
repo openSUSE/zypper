@@ -248,7 +248,7 @@ BOOST_AUTO_TEST_CASE(msa_file_exist_local)
 BOOST_AUTO_TEST_CASE(msa_remote_tests)
 {
   WebServer web( DATADIR / "/src1/cd1", 10002 );
-  web.start();
+  BOOST_REQUIRE( web.start() );
   MediaSetAccess setaccess( web.url(), "/" );
 
   BOOST_CHECK(!setaccess.doesFileExist("/testBADNAME.txt"));

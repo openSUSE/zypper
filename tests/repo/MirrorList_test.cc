@@ -13,7 +13,7 @@ using namespace zypp::repo;
 BOOST_AUTO_TEST_CASE(get_mirrorlist)
 {
   WebServer web((Pathname(TESTS_SRC_DIR) + "/data/Mirrorlist/remote-site").c_str(), 10001);
-  web.start();
+  BOOST_REQUIRE( web.start() );
 
   Url weburl1 (web.url());
   Url weburl2 (web.url());
