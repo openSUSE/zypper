@@ -171,6 +171,7 @@ public:
         bool canContinue = ( zypp::filesystem::symlink( Pathname(TESTS_SRC_DIR)/"data"/"nginxconf"/"nginx.conf",  confFile ) == 0 );
         if ( canContinue ) canContinue = writeConfFile( confPath / "srvroot.conf", str::Format("root    %1%;") % _docroot );
         if ( canContinue ) canContinue = writeConfFile( confPath / "fcgisock.conf", str::Format("fastcgi_pass unix:%1%;") % socketPath().c_str() );
+	if ( canContinue ) canContinue = writeConfFile( confPath / "user.conf", getuid() != 0 ? "" : "user root;" );
         if ( canContinue ) {
           if ( _ssl )
             canContinue = writeConfFile( confPath / "port.conf", str::Format("listen    %1% ssl;") % _port );
