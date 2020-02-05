@@ -186,13 +186,16 @@ namespace yum
     Pathname masterIndex { repoInfo().path() / "/repodata/repomd.xml" };
     defaultDownloadMasterIndex( media_r, destDir_r, masterIndex );
 
+    //enable precache
+    setMediaSetAccess( media_r );
+
     // setup parser
     Impl pimpl( *this, media_r, destDir_r );
     RepomdFileReader( destDir_r / masterIndex, std::ref(pimpl) );
     pimpl.finalize();
 
     // ready, go!
-    start( destDir_r, media_r );
+    start( destDir_r );
   }
 
   RepoStatus Downloader::status( MediaSetAccess & media_r )

@@ -19,6 +19,7 @@
 #include <zypp/base/PtrTypes.h>
 #include <zypp/Pathname.h>
 #include <zypp/Url.h>
+#include <zypp/OnMediaLocation.h>
 
 #include <list>
 
@@ -833,6 +834,20 @@ namespace zypp
       void
       setDeltafile(MediaAccessId   accessId,
                   const Pathname &filename ) const;
+
+      /**
+         * Tries to fetch the given files and precaches them. Those files
+         * need to be queried using provideFile and can be read from the cache directly.
+         * The implementation is not allowed to block but needs to use seperate means to
+         * download the files concurrently.
+         * A backend can choose to completely ignore this functionaly, the default implementation
+         * does nothing.
+         *
+         * \param accessId Medium id.
+         * \param files List of files that should be precached
+         */
+      void precacheFiles( MediaAccessId   accessId,
+                         const std::vector<OnMediaLocation> &files);
 
     public:
       /**

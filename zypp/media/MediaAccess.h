@@ -27,6 +27,7 @@
 
 #include <zypp/media/MediaException.h>
 #include <zypp/media/MediaSource.h>
+#include <zypp/OnMediaLocation.h>
 
 #include <zypp/Url.h>
 
@@ -321,6 +322,8 @@ namespace zypp {
          *
          **/
         bool doesFileExist( const Pathname & filename ) const;
+
+        void precacheFiles(const std::vector<OnMediaLocation> &files);
 
 	/**
 	 * Destructor

@@ -656,6 +656,15 @@ namespace zypp
       ref.handler->setDeltafile(filename);
     }
 
+    void MediaManager::precacheFiles(MediaAccessId accessId, const std::vector<OnMediaLocation> &files)
+    {
+      ManagedMedia &ref( m_impl->findMM(accessId));
+
+      ref.checkDesired(accessId);
+
+      ref.handler->precacheFiles( files );
+    }
+
     // ---------------------------------------------------------------
     void
     MediaManager::provideDir(MediaAccessId   accessId,

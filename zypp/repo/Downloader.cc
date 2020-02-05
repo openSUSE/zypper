@@ -144,9 +144,12 @@ void Downloader::defaultDownloadMasterIndex( MediaSetAccess & media_r, const Pat
   Pathname keypath = masterIndex_r.extend( ".key" );
 
   // always download them, even if repoGpgCheck is disabled
+
+  //enable precache for next start() call
+  setMediaSetAccess( media_r );
   enqueue( OnMediaLocation( sigpath, 1 ).setOptional( true ).setDownloadSize( ByteCount( 20, ByteCount::MB ) ) );
   enqueue( OnMediaLocation( keypath, 1 ).setOptional( true ).setDownloadSize( ByteCount( 20, ByteCount::MB ) ) );
-  start( destdir_r, media_r );
+  start( destdir_r );
   reset();
 
   FileChecker checker;	// set to sigchecker if appropriate, else Null.

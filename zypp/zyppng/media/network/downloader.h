@@ -40,6 +40,7 @@ namespace zyppng {
     using WeakPtr = std::shared_ptr<Downloader>;
 
     Downloader( );
+    virtual ~Downloader();
 
     /*!
      * Generates a new Download object in waiting state
@@ -148,6 +149,8 @@ namespace zyppng {
      */
     Download ( DownloadPrivate &&prv );
 
+    virtual ~Download();
+
     /*!
      * Returns the source URL of the download
      */
@@ -190,6 +193,11 @@ namespace zyppng {
      * to advance.
      */
     void start ();
+
+    /*!
+     * Aborts the current download
+     */
+    void cancel ();
 
     /*!
      * Enabled or disabled multipart handling. Enabled by default.

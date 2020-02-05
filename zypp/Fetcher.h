@@ -308,6 +308,25 @@ namespace zypp
     void reset();
 
     /**
+     * Sets the media set access that will be used to precache and
+     * to download the files when \ref start is called. Calling \ref start
+     * will reset the media access.
+     */
+    void setMediaSetAccess ( MediaSetAccess &media );
+
+    /**
+    * start the transfer to a destination directory
+    * \a dest_dir
+    * The media has to be provides with \ref setMediaSetAccess before
+    * calling this version of start.
+    * The file tree will be replicated inside this
+    * directory
+    *
+    */
+    void start( const Pathname &dest_dir,
+      const ProgressData::ReceiverFnc & progress = ProgressData::ReceiverFnc() );
+
+    /**
     * start the transfer to a destination directory
     * \a dest_dir
     * You have to provde a media set access

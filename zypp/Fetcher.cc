@@ -144,6 +144,9 @@ namespace zypp
     void enqueueDigested( const OnMediaLocation &resource, const FileChecker &checker = FileChecker(), const Pathname &deltafile = Pathname() );
     void addCachePath( const Pathname &cache_dir );
     void reset();
+    void setMediaSetAccess ( MediaSetAccess &media );
+    void start( const Pathname &dest_dir,
+                const ProgressData::ReceiverFnc &progress );
     void start( const Pathname &dest_dir,
                 MediaSetAccess &media,
                 const ProgressData::ReceiverFnc & progress_receiver );
@@ -227,12 +230,17 @@ namespace zypp
     // cache of dir contents
     std::map<std::string, filesystem::DirContent> _dircontent;
 
+    MediaSetAccess * _mediaSetAccess = nullptr;
+
     Fetcher::Options _options;
   };
   ///////////////////////////////////////////////////////////////////
 
   void Fetcher::Impl::enqueueDigested( const OnMediaLocation &resource, const FileChecker &checker, const Pathname &deltafile )
   {
+    if ( _mediaSetAccess )
+      _mediaSetAccess->precacheFiles( {resource} );
+
     FetcherJob_Ptr job;
     job.reset(new FetcherJob(resource, deltafile));
     job->flags |= FetcherJob:: AlwaysVerifyChecksum;
@@ -284,6 +292,9 @@ namespace zypp
 
   void Fetcher::Impl::enqueue( const OnMediaLocation &resource, const FileChecker &checker )
   {
+    if ( _mediaSetAccess )
+      _mediaSetAccess->precacheFiles( {resource} );
+
     FetcherJob_Ptr job;
     job.reset(new FetcherJob(resource));
     if ( checker )
@@ -304,6 +315,11 @@ namespace zypp
     _indexes.clear();
     _checksums.clear();
     _dircontent.clear();
+  }
+
+  void Fetcher::Impl::setMediaSetAccess( MediaSetAccess &media )
+  {
+    _mediaSetAccess = &media;
   }
 
   void Fetcher::Impl::addCachePath( const Pathname &cache_dir )
@@ -711,12 +727,22 @@ namespace zypp
       MIL << "done reading indexes" << endl;
   }
 
+  void Fetcher::Impl::start( const Pathname &dest_dir,
+                             const ProgressData::ReceiverFnc & progress )
+  {
+    if ( !_mediaSetAccess )
+      ZYPP_THROW( zypp::Exception("Called Fetcher::start without setting MediaSetAccess before.") );
+    start( dest_dir, *_mediaSetAccess, progress );
+  }
+
   // start processing all fetcher jobs.
   // it processes any user pointed index first
   void Fetcher::Impl::start( const Pathname &dest_dir,
                              MediaSetAccess &media,
                              const ProgressData::ReceiverFnc & progress_receiver )
   {
+    _mediaSetAccess = nullptr; //reset the internally stored MediaSetAccess
+
     ProgressData progress(_resources.size());
     progress.sendTo(progress_receiver);
 
@@ -867,6 +893,16 @@ namespace zypp
   void Fetcher::reset()
   {
     _pimpl->reset();
+  }
+
+  void Fetcher::setMediaSetAccess( MediaSetAccess &media )
+  {
+    _pimpl->setMediaSetAccess( media );
+  }
+
+  void Fetcher::start(const zypp::filesystem::Pathname &dest_dir, const ProgressData::ReceiverFnc &progress)
+  {
+    _pimpl->start( dest_dir, progress );
   }
 
   void Fetcher::start( const Pathname &dest_dir,

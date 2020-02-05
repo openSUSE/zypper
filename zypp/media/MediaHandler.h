@@ -26,6 +26,7 @@
 #include <zypp/media/MediaSource.h>
 #include <zypp/media/MediaException.h>
 #include <zypp/APIConfig.h>
+#include <zypp/OnMediaLocation.h>
 
 namespace zypp {
   namespace media {
@@ -709,6 +710,19 @@ class MediaHandler {
         virtual void
         getDetectedDevices(std::vector<std::string> & devices,
                            unsigned int & index) const;
+
+        /**
+         * Tries to fetch the given files and precaches them. Those files
+         * need to be queried using provideFile and can be read from the cache directly.
+         * The implementation is not allowed to block but needs to use seperate means to
+         * download the files concurrently.
+         * A backend can choose to completely ignore this functionaly, the default implementation
+         * does nothing.
+         *
+         * \param files List of files that should be precached, the OnMediaLocation needs to belong to the handler it is passed to
+         */
+        virtual void
+        precacheFiles ( const std::vector< OnMediaLocation > &files );
 };
 
 ///////////////////////////////////////////////////////////////////

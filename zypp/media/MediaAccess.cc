@@ -443,6 +443,15 @@ MediaAccess::doesFileExist( const Pathname & filename ) const
   return _handler->doesFileExist( filename );
 }
 
+void MediaAccess::precacheFiles(const std::vector<OnMediaLocation> &files)
+{
+  if ( !_handler ) {
+    ZYPP_THROW(MediaNotOpenException("precacheFiles()"));
+  }
+
+  return _handler->precacheFiles( files );
+}
+
 std::ostream &
 MediaAccess::dumpOn( std::ostream & str ) const
 {

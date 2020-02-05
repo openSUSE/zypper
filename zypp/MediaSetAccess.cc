@@ -231,6 +231,27 @@ IMPL_PTR_TYPE(MediaSetAccess);
     return op.result;
   }
 
+  void MediaSetAccess::precacheFiles(const std::vector<OnMediaLocation> &files)
+  {
+    media::MediaManager media_mgr;
+
+    for ( const auto &resource : files ) {
+      Pathname file(resource.filename());
+      unsigned media_nr(resource.medianr());
+      media::MediaAccessId media = getMediaAccessId( media_nr );
+
+      if ( !media_mgr.isOpen( media ) ) {
+        MIL << "Skipping precache of file " << resource.filename() << " media is not open";
+        continue;
+      }
+
+      if ( ! media_mgr.isAttached(media) )
+        media_mgr.attach(media);
+
+      media_mgr.precacheFiles( media, { resource } );
+    }
+  }
+
   void MediaSetAccess::provide( ProvideOperation op,
                                 const OnMediaLocation &resource,
                                 ProvideFileOptions options,

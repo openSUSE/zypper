@@ -1397,6 +1397,11 @@ void MediaHandler::getDetectedDevices(std::vector<std::string> & devices,
   DBG << "No devices for this medium" << endl;
 }
 
+void MediaHandler::precacheFiles( const std::vector<OnMediaLocation> & )
+{
+  /* do nothing */
+}
+
 void MediaHandler::setDeltafile( const Pathname & filename ) const
 {
   _deltafile = filename;
