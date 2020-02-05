@@ -1,6 +1,6 @@
 #include "zypp/Date.h"
 
-#include <boost/test/auto_unit_test.hpp>
+#include <boost/test/unit_test.hpp>
 
 BOOST_AUTO_TEST_CASE(date_test)
 {

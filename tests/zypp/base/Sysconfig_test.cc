@@ -5,7 +5,7 @@
 #include <map>
 #include <string>
 
-#include <boost/test/auto_unit_test.hpp>
+#include <boost/test/unit_test.hpp>
 
 #include "zypp/base/Logger.h"
 #include "zypp/base/Exception.h"

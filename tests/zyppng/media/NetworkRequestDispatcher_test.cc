@@ -1,4 +1,4 @@
-#include <boost/test/auto_unit_test.hpp>
+#include <boost/test/unit_test.hpp>
 #include <boost/test/data/test_case.hpp>
 #include <zypp/zyppng/base/EventDispatcher>
 #include <zypp/zyppng/media/network/request.h>

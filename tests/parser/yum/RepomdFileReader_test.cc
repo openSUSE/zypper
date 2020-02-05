@@ -3,7 +3,7 @@
 #include <fstream>
 #include <vector>
 #include <list>
-#include <boost/test/auto_unit_test.hpp>
+#include <boost/test/unit_test.hpp>
 
 #include "zypp/parser/yum/RepomdFileReader.h"
 #include "zypp/Url.h"

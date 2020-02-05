@@ -1,5 +1,5 @@
 #include <set>
-#include <boost/test/auto_unit_test.hpp>
+#include <boost/test/unit_test.hpp>
 #include "zypp/base/LogTools.h"
 #include "zypp/base/SetTracker.h"
 

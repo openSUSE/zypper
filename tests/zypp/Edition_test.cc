@@ -6,7 +6,7 @@
 #include "zypp/base/Logger.h"
 #include "zypp/Edition.h"
 
-#include <boost/test/auto_unit_test.hpp>
+#include <boost/test/unit_test.hpp>
 
 using boost::unit_test::test_case;
 

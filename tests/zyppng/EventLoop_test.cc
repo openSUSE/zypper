@@ -1,4 +1,4 @@
-#include <boost/test/auto_unit_test.hpp>
+#include <boost/test/unit_test.hpp>
 #include <zypp/zyppng/base/EventDispatcher>
 #include <zypp/zyppng/base/Timer>
 #include <zypp/base/Exception.h>

@@ -16,7 +16,7 @@
 #include <cassert>
 
 // Boost.Test
-#include <boost/test/auto_unit_test.hpp>
+#include <boost/test/unit_test.hpp>
 
 using boost::unit_test::test_case;
 using namespace zypp;

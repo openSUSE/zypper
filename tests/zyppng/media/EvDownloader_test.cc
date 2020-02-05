@@ -11,7 +11,7 @@
 #include <random>
 #include "WebServer.h"
 
-#include <boost/test/auto_unit_test.hpp>
+#include <boost/test/unit_test.hpp>
 #include <boost/test/data/test_case.hpp>
 
 #define BOOST_TEST_REQ_SUCCESS(REQ) \

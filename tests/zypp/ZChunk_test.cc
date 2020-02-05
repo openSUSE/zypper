@@ -1,5 +1,5 @@
 // Boost.Test
-#include <boost/test/auto_unit_test.hpp>
+#include <boost/test/unit_test.hpp>
 
 #include <zypp/base/ZckStream.h>
 #include <zypp/Pathname.h>

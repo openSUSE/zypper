@@ -1,6 +1,6 @@
 #include <iostream>
 #include <vector>
-#include <boost/test/auto_unit_test.hpp>
+#include <boost/test/unit_test.hpp>
 
 #include "WebServer.h"
 

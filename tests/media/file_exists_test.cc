@@ -9,7 +9,7 @@
 #include <unistd.h>
 
 #include <boost/test/unit_test.hpp>
-#include <boost/test/auto_unit_test.hpp>
+#include <boost/test/unit_test.hpp>
 #include "mymediaverifier.h"
 
 using namespace zypp;
