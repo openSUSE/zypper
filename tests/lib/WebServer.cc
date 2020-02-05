@@ -117,7 +117,7 @@ public:
 
     void worker_thread()
     {
-      int sockFD = -1;
+      AutoDispose<int> sockFD( -1, ::close );
 
       ExternalProgram::Environment env;
 
@@ -131,7 +131,7 @@ public:
 
       {
         std::lock_guard<std::mutex> lock ( _mut );
-        sockFD = FCGX_OpenSocket( socketPath().c_str(), 128 );
+        sockFD.value() = FCGX_OpenSocket( socketPath().c_str(), 128 );
         env["ZYPP_TEST_SRVROOT"] = _workingDir.path().c_str();
         env["ZYPP_TEST_PORT"] = str::numstring( _port );
         env["ZYPP_TEST_DOCROOT"] = _docroot.c_str();
@@ -188,7 +188,7 @@ public:
         if ( canContinue && _ssl ) canContinue = zypp::filesystem::symlink( Pathname(TESTS_SRC_DIR)/"data"/"webconf"/"ssl"/"server.key",  confPath/"cert.key") == 0;
 
         if ( canContinue )
-          sockFD = FCGX_OpenSocket( socketPath().c_str(), 128 );
+          sockFD.value() = FCGX_OpenSocket( socketPath().c_str(), 128 );
       }
 
       const char* argv[] =
@@ -230,6 +230,7 @@ public:
 
         FCGX_Request request;
         FCGX_InitRequest(&request, sockFD,0);
+	AutoDispose<FCGX_Request*> guard( &request, boost::bind( &FCGX_Free, _1, 0 ) );
 
         struct pollfd fds[] { {
             _wakeupPipe[0],
