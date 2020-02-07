@@ -1,4 +1,19 @@
 -------------------------------------------------------------------
+Fri Feb  7 14:56:40 CET 2020 - ma@suse.de
+
+- update translations
+- Replace mongoose/webrick with nginx in test suite.
+  This patch makes use of nginx to replace the current WebServer
+  mongoose implementation. Also adds support for registering
+  callback functions for certain URL requests via FCGI, making it
+  possible to mock HTTP responses and test more complex HTTP setups.
+- boost: Fix deprecated auto_unit_test.hpp includes.
+- Disable zchunk on Leap-15.0 and SLE15-* while there is no libzck.
+- Fix decision whether to download ZCHUNK files.
+  libzypp and libsolv must both be able to read the format.
+- version 17.22.1 (22)
+
+-------------------------------------------------------------------
 Thu Jan 23 16:30:19 CET 2020 - ma@suse.de
 
 - yum::Downloader: Prefer zchunk compressed metadata if libvsolv
