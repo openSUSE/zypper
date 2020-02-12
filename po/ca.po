@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-11-28 17:54+0100\n"
-"PO-Revision-Date: 2020-02-04 10:55+0000\n"
+"PO-Revision-Date: 2020-02-12 17:55+0000\n"
 "Last-Translator: David Medina <medipas@gmail.com>\n"
 "Language-Team: Catalan <https://l10n.opensuse.org/projects/zypper/master/ca/>"
 "\n"
@@ -3757,7 +3757,7 @@ msgstr "El repositori %s ha canviat al nom de \"%s\"."
 #, c-format, boost-format
 msgid "Repository named '%s' already exists. Please use another alias."
 msgstr ""
-"El repositori amb el nom %s ja existeix. Si us plau, escolliu-ne un altre."
+"El repositori amb el nom %s ja existeix. Si us plau, useu un altre àlies."
 
 #: src/commands/repos/rename.cc:52 src/repos.cc:1681
 msgid "Error while modifying the repository:"
@@ -4944,8 +4944,8 @@ msgid ""
 msgstr ""
 "Descarrega els rpm especificats a la línia d'ordres a un directori local. "
 "Per defecte, els paquets es descarreguen a la cau del paquet libzypp (/var/"
-"cache/zypp/packages; per a usuaris no root: $XDG_CACHE_HOME/zypp/packages), "
-"però això es pot canviar amb l'opció global --pkg-cache-dir."
+"cache/zypp/packages; per a usuaris que no són d'arrel: $XDG_CACHE_HOME/zypp/"
+"packages), però això es pot canviar amb l'opció global --pkg-cache-dir."
 
 #. translators: command description
 #: src/commands/utils/download.cc:153
@@ -4955,8 +4955,8 @@ msgid ""
 "result/localpath@path'."
 msgstr ""
 "A la sortida XML s'escriu un node <download-result> per cada paquet que el "
-"zypper ha provat de descarregar. Si hi ha èxit, la ruta local es troba a "
-"\"download-result/localpath@path\"."
+"zypper ha provat de descarregar. Si hi ha èxit, el camí local és a \""
+"download-result/localpath@path\"."
 
 #. translators: --all-matches
 #: src/commands/utils/download.cc:168
