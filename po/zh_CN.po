@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-11-28 17:54+0100\n"
-"PO-Revision-Date: 2019-11-16 04:54+0000\n"
-"Last-Translator: Marguerite Su <i@marguerite.su>\n"
+"PO-Revision-Date: 2020-02-17 05:56+0000\n"
+"Last-Translator: Grace Yu <grace.yu@excel-gits.com>\n"
 "Language-Team: Chinese (China) <https://l10n.opensuse.org/projects/zypper/"
 "master/zh_CN/>\n"
 "Language: zh_CN\n"
@@ -3838,49 +3838,49 @@ msgstr "搜索建议了搜索字符串内容的软件包。"
 msgid ""
 "Search for all packages that provide any of the provides of the package(s) "
 "matched by the input parameters."
-msgstr "搜索全部其提供栏中的任意一项匹配到了输入参数的软件包。"
+msgstr "搜索提供与输入参数匹配的任一软件包的所有软件包。"
 
 #. translators: --requires-pkg
 #: src/commands/search/search.cc:178
 msgid ""
 "Search for all packages that require any of the provides of the package(s) "
 "matched by the input parameters."
-msgstr ""
+msgstr "搜索需要与输入参数匹配的任一软件包的所有软件包。"
 
 #. translators: --recommends-pkg
 #: src/commands/search/search.cc:182
 msgid ""
 "Search for all packages that recommend any of the provides of the package(s) "
 "matched by the input parameters."
-msgstr ""
+msgstr "搜索推荐任何与输入参数匹配的软件包的所有软件包。"
 
 #. translators: --supplements-pkg
 #: src/commands/search/search.cc:186
 msgid ""
 "Search for all packages that supplement any of the provides of the "
 "package(s) matched by the input parameters."
-msgstr ""
+msgstr "搜索补充任何与输入参数匹配的软件包的所有软件包。"
 
 #. translators: --conflicts-pkg
 #: src/commands/search/search.cc:190
 msgid ""
 "Search for all packages that conflict with any of the package(s) matched by "
 "the input parameters."
-msgstr ""
+msgstr "搜索与输入参数匹配的任一软件包冲突的所有软件包。"
 
 #. translators: --obsoletes-pkg
 #: src/commands/search/search.cc:194
 msgid ""
 "Search for all packages that obsolete any of the package(s) matched by the "
 "input parameters."
-msgstr ""
+msgstr "搜索会废弃与输入参数匹配的任一软件包的所有软件包。"
 
 #. translators: --suggests-pkg
 #: src/commands/search/search.cc:198
 msgid ""
 "Search for all packages that suggest any of the provides of the package(s) "
 "matched by the input parameters."
-msgstr ""
+msgstr "搜索建议任何与输入参数匹配的软件包的所有软件包。"
 
 #. translators: -t, --type <TYPE>
 #: src/commands/search/search.cc:202
@@ -4311,7 +4311,7 @@ msgstr "此命令只有在 zypper 壳层中才有意义。"
 #: src/commands/solveroptionset.cc:23
 #, boost-format
 msgid "Valid values: %1%"
-msgstr ""
+msgstr "无效的值：%1%"
 
 #: src/commands/solveroptionset.cc:35 src/commands/solveroptionset.cc:58
 msgid "Solver options"
@@ -4341,7 +4341,7 @@ msgstr "不强迫解算器找出解决方案，允许它提问。"
 
 #: src/commands/solveroptionset.cc:63
 msgid "Set the solvers general attitude when resolving a job."
-msgstr ""
+msgstr "结算作业时设置结算器一般属性。"
 
 #: src/commands/solveroptionset.cc:83
 msgid "Expert options"
@@ -4678,12 +4678,12 @@ msgstr "报告当前已安装软件包的许可和最终用户许可协议 。"
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/utils/purge-kernels.cc:26
 msgid "purge-kernels [OPTIONS]"
-msgstr ""
+msgstr "purge-kernels [选项]"
 
 #. translators: command summary: targetos, tos
 #: src/commands/utils/purge-kernels.cc:28
 msgid "Remove old kernels."
-msgstr ""
+msgstr "移除旧内核。"
 
 #. translators: command description
 #: src/commands/utils/purge-kernels.cc:30
@@ -4692,25 +4692,27 @@ msgid ""
 "zypp/zypp.conf:multiversion.kernels which can be given as <version>, latest(-"
 "N), running, oldest(+N)."
 msgstr ""
+"根据 /etc/zypp/zypp.conf:multiversion.kernels 中要保留的内核列表（可能会以 "
+"<版本>、latest(-N)、running、oldest(+N) 指定）自动移除安装的内核。"
 
 #: src/commands/utils/purge-kernels.cc:51
 msgid "Preparing to purge obsolete kernels..."
-msgstr ""
+msgstr "正在准备清除过时的内核..."
 
 #: src/commands/utils/purge-kernels.cc:52
 #, boost-format
 msgid "Configuration: %1%"
-msgstr ""
+msgstr "配置：%1%"
 
 #: src/commands/utils/purge-kernels.cc:53
 #, boost-format
 msgid "Running kernel release: %1%"
-msgstr ""
+msgstr "正在运行的内核版本：%1%"
 
 #: src/commands/utils/purge-kernels.cc:54
 #, boost-format
 msgid "Running kernel arch: %1%"
-msgstr ""
+msgstr "正在运行的内核架构：%1%"
 
 #: src/commands/utils/source-download.cc:203
 #, c-format, boost-format
