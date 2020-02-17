@@ -13,8 +13,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-11-28 17:54+0100\n"
-"PO-Revision-Date: 2019-10-12 04:53+0000\n"
-"Last-Translator: Yi-Jyun Pan <pan93412@gmail.com>\n"
+"PO-Revision-Date: 2020-02-17 12:55+0000\n"
+"Last-Translator: Grace Yu <grace.yu@excel-gits.com>\n"
 "Language-Team: Chinese (Taiwan) <https://l10n.opensuse.org/projects/zypper/"
 "master/zh_TW/>\n"
 "Language: zh_TW\n"
@@ -790,9 +790,9 @@ msgstr "在表格中不要使用縮寫文字。"
 
 #. translators: --table-style, -s, %1% denotes the supported range of the integer argument (e.g. "1-11")
 #: src/Config.cc:420
-#, fuzzy, boost-format
+#, boost-format
 msgid "Table style (%1%)."
-msgstr "設定表格風格 (整數)。"
+msgstr "表格樣式 (%1%)。"
 
 #: src/Config.cc:424 src/commands/optionsets.cc:284
 msgid "Entering non-interactive mode."
@@ -3840,49 +3840,49 @@ msgstr "搜尋建議搜尋字串的套件。"
 msgid ""
 "Search for all packages that provide any of the provides of the package(s) "
 "matched by the input parameters."
-msgstr ""
+msgstr "搜尋提供任何與輸入參數相符的套件的所有套件。"
 
 #. translators: --requires-pkg
 #: src/commands/search/search.cc:178
 msgid ""
 "Search for all packages that require any of the provides of the package(s) "
 "matched by the input parameters."
-msgstr ""
+msgstr "搜尋需要任何與輸入參數相符的套件的所有套件。"
 
 #. translators: --recommends-pkg
 #: src/commands/search/search.cc:182
 msgid ""
 "Search for all packages that recommend any of the provides of the package(s) "
 "matched by the input parameters."
-msgstr ""
+msgstr "搜尋推薦任何與輸入參數相符的套件的所有套件。"
 
 #. translators: --supplements-pkg
 #: src/commands/search/search.cc:186
 msgid ""
 "Search for all packages that supplement any of the provides of the "
 "package(s) matched by the input parameters."
-msgstr ""
+msgstr "搜尋補充任何與輸入參數相符的套件的所有套件。"
 
 #. translators: --conflicts-pkg
 #: src/commands/search/search.cc:190
 msgid ""
 "Search for all packages that conflict with any of the package(s) matched by "
 "the input parameters."
-msgstr ""
+msgstr "搜尋與輸入參數相符的任何套件衝突的所有套件。"
 
 #. translators: --obsoletes-pkg
 #: src/commands/search/search.cc:194
 msgid ""
 "Search for all packages that obsolete any of the package(s) matched by the "
 "input parameters."
-msgstr ""
+msgstr "搜尋廢棄任何與輸入參數相符的套件的所有套件。"
 
 #. translators: --suggests-pkg
 #: src/commands/search/search.cc:198
 msgid ""
 "Search for all packages that suggest any of the provides of the package(s) "
 "matched by the input parameters."
-msgstr ""
+msgstr "搜尋建議任何與輸入參數相符的套件的所有套件。"
 
 #. translators: -t, --type <TYPE>
 #: src/commands/search/search.cc:202
@@ -4312,7 +4312,7 @@ msgstr "這個指令只在 zypper shell 中有意義。"
 #: src/commands/solveroptionset.cc:23
 #, boost-format
 msgid "Valid values: %1%"
-msgstr ""
+msgstr "有效的值：%1%"
 
 #: src/commands/solveroptionset.cc:35 src/commands/solveroptionset.cc:58
 msgid "Solver options"
@@ -4342,7 +4342,7 @@ msgstr "不要強迫找尋解決方案，要先詢問。"
 
 #: src/commands/solveroptionset.cc:63
 msgid "Set the solvers general attitude when resolving a job."
-msgstr ""
+msgstr "解析工作時設定解析程式一般屬性。"
 
 #: src/commands/solveroptionset.cc:83
 msgid "Expert options"
@@ -4679,12 +4679,12 @@ msgstr "報告目前已安裝軟體套件的授權合約和 EULA 。"
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/utils/purge-kernels.cc:26
 msgid "purge-kernels [OPTIONS]"
-msgstr ""
+msgstr "purge-kernels [選項]"
 
 #. translators: command summary: targetos, tos
 #: src/commands/utils/purge-kernels.cc:28
 msgid "Remove old kernels."
-msgstr ""
+msgstr "移除舊核心。"
 
 #. translators: command description
 #: src/commands/utils/purge-kernels.cc:30
@@ -4693,25 +4693,27 @@ msgid ""
 "zypp/zypp.conf:multiversion.kernels which can be given as <version>, latest(-"
 "N), running, oldest(+N)."
 msgstr ""
+"依據 /etc/zypp/zypp.conf:multiversion.kernels 中要保留的核心清單 (可以指定為 "
+"<版本>、latest(-N)、running、oldest(+N)) 自動移除安裝的核心。"
 
 #: src/commands/utils/purge-kernels.cc:51
 msgid "Preparing to purge obsolete kernels..."
-msgstr ""
+msgstr "正在準備清除過時的核心..."
 
 #: src/commands/utils/purge-kernels.cc:52
 #, boost-format
 msgid "Configuration: %1%"
-msgstr ""
+msgstr "組態：%1%"
 
 #: src/commands/utils/purge-kernels.cc:53
 #, boost-format
 msgid "Running kernel release: %1%"
-msgstr ""
+msgstr "執行中核心版本：%1%"
 
 #: src/commands/utils/purge-kernels.cc:54
 #, boost-format
 msgid "Running kernel arch: %1%"
-msgstr ""
+msgstr "執行中核心架構：%1%"
 
 #: src/commands/utils/source-download.cc:203
 #, c-format, boost-format
