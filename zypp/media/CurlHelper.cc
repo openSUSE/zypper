@@ -384,4 +384,74 @@ zypp::Url propagateQueryParams( zypp::Url url_r, const zypp::Url & template_r )
   return url_r;
 }
 
+ProgressData::ProgressData(CURL *_curl, time_t _timeout, const Url &_url, ByteCount expectedFileSize_r, zypp::callback::SendReport< zypp::media::DownloadProgressReport> *_report)
+: curl( _curl )
+, url( _url )
+, timeout( _timeout )
+, reached( false )
+, fileSizeExceeded ( false )
+, report( _report )
+, _expectedFileSize( expectedFileSize_r )
+{}
+
+void ProgressData::updateStats(double dltotal, double dlnow)
+{
+  time_t now = _timeNow = time(0);
+
+  // If called without args (0.0), recompute based on the last values seen
+  if ( dltotal && dltotal != _dnlTotal )
+    _dnlTotal = dltotal;
+
+  if ( dlnow && dlnow != _dnlNow )
+  {
+    _timeRcv = now;
+    _dnlNow = dlnow;
+  }
+  else if ( !_dnlNow && !_dnlTotal )
+  {
+    // Start time counting as soon as first data arrives.
+    // Skip the connection / redirection time at begin.
+    return;
+  }
+
+  // init or reset if time jumps back
+  if ( !_timeStart || _timeStart > now )
+    _timeStart = _timeLast = _timeRcv = now;
+
+  // timeout condition
+  if ( timeout )
+    reached = ( (now - _timeRcv) > timeout );
+
+  // check if the downloaded data is already bigger than what we expected
+  fileSizeExceeded = _expectedFileSize > 0 && _expectedFileSize < static_cast<ByteCount::SizeType>(_dnlNow);
+
+  // percentage:
+  if ( _dnlTotal )
+    _dnlPercent = int(_dnlNow * 100 / _dnlTotal);
+
+  // download rates:
+  _drateTotal = _dnlNow / std::max( int(now - _timeStart), 1 );
+
+  if ( _timeLast < now )
+  {
+    _drateLast = (_dnlNow - _dnlLast) / int(now - _timeLast);
+    // start new period
+    _timeLast  = now;
+    _dnlLast   = _dnlNow;
+  }
+  else if ( _timeStart == _timeLast )
+    _drateLast = _drateTotal;
+}
+
+int ProgressData::reportProgress() const
+{
+  if ( fileSizeExceeded )
+    return 1;
+  if ( reached )
+    return 1;	// no-data timeout
+  if ( report && !(*report)->progress( _dnlPercent, url, _drateTotal, _drateLast ) )
+    return 1;	// user requested abort
+  return 0;
+}
+
 }

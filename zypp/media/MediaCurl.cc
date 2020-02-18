@@ -47,121 +47,6 @@ namespace zypp {
 
   namespace media {
 
-  namespace {
-    struct ProgressData
-    {
-      ProgressData( CURL *_curl, time_t _timeout = 0, const Url & _url = Url(),
-                    ByteCount expectedFileSize_r = 0,
-		    callback::SendReport<DownloadProgressReport> *_report = nullptr )
-        : curl( _curl )
-	, url( _url )
-	, timeout( _timeout )
-        , reached( false )
-        , fileSizeExceeded ( false )
-        , report( _report )
-        , _expectedFileSize( expectedFileSize_r )
-      {}
-
-      CURL	*curl;
-      Url	url;
-      time_t	timeout;
-      bool	reached;
-      bool      fileSizeExceeded;
-      callback::SendReport<DownloadProgressReport> *report;
-      ByteCount _expectedFileSize;
-
-      time_t _timeStart	= 0;	///< Start total stats
-      time_t _timeLast	= 0;	///< Start last period(~1sec)
-      time_t _timeRcv	= 0;	///< Start of no-data timeout
-      time_t _timeNow	= 0;	///< Now
-
-      double _dnlTotal	= 0.0;	///< Bytes to download or 0 if unknown
-      double _dnlLast	= 0.0;	///< Bytes downloaded at period start
-      double _dnlNow	= 0.0;	///< Bytes downloaded now
-
-      int    _dnlPercent= 0;	///< Percent completed or 0 if _dnlTotal is unknown
-
-      double _drateTotal= 0.0;	///< Download rate so far
-      double _drateLast	= 0.0;	///< Download rate in last period
-
-      void updateStats( double dltotal = 0.0, double dlnow = 0.0 )
-      {
-	time_t now = _timeNow = time(0);
-
-	// If called without args (0.0), recompute based on the last values seen
-	if ( dltotal && dltotal != _dnlTotal )
-	  _dnlTotal = dltotal;
-
-	if ( dlnow && dlnow != _dnlNow )
-	{
-	  _timeRcv = now;
-	  _dnlNow = dlnow;
-	}
-	else if ( !_dnlNow && !_dnlTotal )
-	{
-	  // Start time counting as soon as first data arrives.
-	  // Skip the connection / redirection time at begin.
-	  return;
-	}
-
-	// init or reset if time jumps back
-	if ( !_timeStart || _timeStart > now )
-	  _timeStart = _timeLast = _timeRcv = now;
-
-	// timeout condition
-	if ( timeout )
-	  reached = ( (now - _timeRcv) > timeout );
-
-        // check if the downloaded data is already bigger than what we expected
-  	fileSizeExceeded = _expectedFileSize > 0 && _expectedFileSize < static_cast<ByteCount::SizeType>(_dnlNow);
-
-	// percentage:
-	if ( _dnlTotal )
-	  _dnlPercent = int(_dnlNow * 100 / _dnlTotal);
-
-	// download rates:
-	_drateTotal = _dnlNow / std::max( int(now - _timeStart), 1 );
-
-	if ( _timeLast < now )
-	{
-	  _drateLast = (_dnlNow - _dnlLast) / int(now - _timeLast);
-	  // start new period
-	  _timeLast  = now;
-	  _dnlLast   = _dnlNow;
-	}
-	else if ( _timeStart == _timeLast )
-	  _drateLast = _drateTotal;
-      }
-
-      int reportProgress() const
-      {
-        if ( fileSizeExceeded )
-          return 1;
-	if ( reached )
-	  return 1;	// no-data timeout
-	if ( report && !(*report)->progress( _dnlPercent, url, _drateTotal, _drateLast ) )
-	  return 1;	// user requested abort
-	return 0;
-      }
-
-
-      // download rate of the last period (cca 1 sec)
-      double                                        drate_period;
-      // bytes downloaded at the start of the last period
-      double                                        dload_period;
-      // seconds from the start of the download
-      long                                          secs;
-      // average download rate
-      double                                        drate_avg;
-      // last time the progress was reported
-      time_t                                        ltime;
-      // bytes downloaded at the moment the progress was last reported
-      double                                        dload;
-      // bytes uploaded at the moment the progress was last reported
-      double                                        uload;
-    };
-  }
-
 Pathname MediaCurl::_cookieFile = "/var/lib/YaST2/cookies";
 
 // we use this define to unbloat code as this C setting option
@@ -1168,7 +1053,7 @@ void MediaCurl::doGetFileCopyFile(const Pathname & filename , const Pathname & d
     }
 
     // Set callback and perform.
-    ProgressData progressData(_curl, _settings.timeout(), url, expectedFileSize_r, &report);
+    internal::ProgressData progressData(_curl, _settings.timeout(), url, expectedFileSize_r, &report);
     if (!(options & OPTION_NO_REPORT_START))
       report->start(url, dest);
     if ( curl_easy_setopt( _curl, CURLOPT_PROGRESSDATA, &progressData ) != 0 ) {
@@ -1285,7 +1170,7 @@ void MediaCurl::getDirInfo( filesystem::DirContent & retlist,
 //
 int MediaCurl::aliveCallback( void *clientp, double /*dltotal*/, double dlnow, double /*ultotal*/, double /*ulnow*/ )
 {
-  ProgressData *pdata = reinterpret_cast<ProgressData *>( clientp );
+  internal::ProgressData *pdata = reinterpret_cast<internal::ProgressData *>( clientp );
   if( pdata )
   {
     // Do not propagate dltotal in alive callbacks. MultiCurl uses this to
@@ -1299,7 +1184,7 @@ int MediaCurl::aliveCallback( void *clientp, double /*dltotal*/, double dlnow, d
 
 int MediaCurl::progressCallback( void *clientp, double dltotal, double dlnow, double ultotal, double ulnow )
 {
-  ProgressData *pdata = reinterpret_cast<ProgressData *>( clientp );
+  internal::ProgressData *pdata = reinterpret_cast<internal::ProgressData *>( clientp );
   if( pdata )
   {
     // work around curl bug that gives us old data
@@ -1315,7 +1200,7 @@ int MediaCurl::progressCallback( void *clientp, double dltotal, double dlnow, do
 
 CURL *MediaCurl::progressCallback_getcurl( void *clientp )
 {
-  ProgressData *pdata = reinterpret_cast<ProgressData *>(clientp);
+  internal::ProgressData *pdata = reinterpret_cast<internal::ProgressData *>(clientp);
   return pdata ? pdata->curl : 0;
 }
 
@@ -1342,7 +1227,7 @@ std::string MediaCurl::getAuthHint() const
  */
 void MediaCurl::resetExpectedFileSize(void *clientp, const ByteCount &expectedFileSize)
 {
-  ProgressData *data = reinterpret_cast<ProgressData *>(clientp);
+  internal::ProgressData *data = reinterpret_cast<internal::ProgressData *>(clientp);
   if ( data ) {
     data->_expectedFileSize = expectedFileSize;
   }
