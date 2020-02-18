@@ -165,6 +165,8 @@ namespace zypp
 	/** Pointer behind the last action step in transaction. */
 	action_iterator actionEnd() const;
 
+	/** Iterate the [filtered] transaction steps. */
+	Iterable<action_iterator> action( StepStages filter_r = StepStages() ) const;
 	//@}
 
       public:
@@ -391,6 +393,9 @@ namespace zypp
 	++cnt;
       return cnt;
     }
+
+    inline Iterable<Transaction::action_iterator> Transaction::action( StepStages filter_r ) const
+    { return makeIterable( actionBegin( filter_r ), actionEnd() ); }
 
      /////////////////////////////////////////////////////////////////
   } // namespace sat
