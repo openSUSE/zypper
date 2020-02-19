@@ -17,7 +17,7 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-12-05 14:22+0100\n"
-"PO-Revision-Date: 2019-03-23 20:19+0000\n"
+"PO-Revision-Date: 2020-02-19 23:54+0000\n"
 "Last-Translator: Juan Sarria <juansarriam@gmail.com>\n"
 "Language-Team: Spanish <https://l10n.opensuse.org/projects/libzypp/master/es/"
 ">\n"
@@ -26,7 +26,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 3.3\n"
+"X-Generator: Weblate 3.6.1\n"
 
 #. dubious: Throw on malformed known types, otherwise log a warning.
 #: zypp/CheckSum.cc:136
@@ -4640,19 +4640,19 @@ msgstr "instalar %s desde el repositorio excluido"
 #: zypp/solver/detail/SATResolver.cc:1386
 #, boost-format
 msgid "install %1% although it has been retracted"
-msgstr ""
+msgstr "instalar %1% aunque se haya retraído"
 
 #. translator: %1% is a package name
 #: zypp/solver/detail/SATResolver.cc:1389
 #, boost-format
 msgid "allow to install the PTF %1%"
-msgstr ""
+msgstr "permitir la instalación de PTF %1%"
 
 #. translator: %1% is a package name
 #: zypp/solver/detail/SATResolver.cc:1392
 #, boost-format
 msgid "install %1% although it is blacklisted"
-msgstr ""
+msgstr "instalar %1% aunque esté en la lista negra"
 
 #: zypp/solver/detail/SATResolver.cc:1412
 #, c-format, boost-format
