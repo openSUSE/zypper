@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-11-28 17:54+0100\n"
-"PO-Revision-Date: 2020-02-19 14:30+0000\n"
-"Last-Translator: Marina Latini <marina.latini@suse.com>\n"
+"PO-Revision-Date: 2020-02-19 18:55+0000\n"
+"Last-Translator: Davide Aiello <davidea@novilinguists.com>\n"
 "Language-Team: Italian <https://l10n.opensuse.org/projects/zypper/master/it/>"
 "\n"
 "Language: it\n"
@@ -474,11 +474,11 @@ msgid_plural ""
 "%1% packages had to be excluded from file conflicts check because they are "
 "not yet downloaded."
 msgstr[0] ""
-"È stato necessario escludere %1% pacchetto dal controllo dei conflitti tra "
-"file poiché non è stato ancora scaricato."
+"Il pacchetto è stato escluso dal controllo dei conflitti in quanto non è "
+"ancora stato scaricato."
 msgstr[1] ""
-"È stato necessario escludere %1% pacchetti dal controllo dei conflitti tra "
-"file poiché non sono stati ancora scaricati."
+"Il pacchetti sono stati esclusi dal controllo dei conflitti in quanto non "
+"sono ancora stati scaricati."
 
 #. TranslatorExplanation %1%(commandline option)
 #: src/callbacks/rpm.h:460
@@ -4727,8 +4727,7 @@ msgstr "Non forza il risolutore a trovare una soluzione, lascia che chieda."
 #: src/commands/solveroptionset.cc:63
 msgid "Set the solvers general attitude when resolving a job."
 msgstr ""
-"Definisci il comportamento generale dei risolutori quando si esegue un "
-"compito."
+"Imposta il comportamento generale dei risolutori quando risolve un lavoro."
 
 #: src/commands/solveroptionset.cc:83
 msgid "Expert options"
@@ -5100,25 +5099,29 @@ msgid ""
 "zypp/zypp.conf:multiversion.kernels which can be given as <version>, latest(-"
 "N), running, oldest(+N)."
 msgstr ""
+"Rimuove automaticamente i kernel installati in base all'elenco di kernel da "
+"evitare in /etc/zypp/zypp.conf:multiversion.kernels che può essere fornito "
+"come  <versione>, più recente (-N), in esecuzione, meno recente (+N)."
 
 #: src/commands/utils/purge-kernels.cc:51
 msgid "Preparing to purge obsolete kernels..."
 msgstr ""
+"Preparazione per eliminare definitivamente i kernel obsoleti in corso..."
 
 #: src/commands/utils/purge-kernels.cc:52
 #, boost-format
 msgid "Configuration: %1%"
-msgstr ""
+msgstr "Configurazione: %1%"
 
 #: src/commands/utils/purge-kernels.cc:53
 #, boost-format
 msgid "Running kernel release: %1%"
-msgstr ""
+msgstr "Esecuzione della release del kernel: %1%"
 
 #: src/commands/utils/purge-kernels.cc:54
 #, boost-format
 msgid "Running kernel arch: %1%"
-msgstr ""
+msgstr "Esecuzione dell'architettura del kernel: %1%"
 
 #: src/commands/utils/source-download.cc:203
 #, c-format, boost-format
