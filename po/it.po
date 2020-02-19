@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-11-28 17:54+0100\n"
-"PO-Revision-Date: 2020-02-19 14:29+0000\n"
+"PO-Revision-Date: 2020-02-19 14:30+0000\n"
 "Last-Translator: Marina Latini <marina.latini@suse.com>\n"
 "Language-Team: Italian <https://l10n.opensuse.org/projects/zypper/master/it/>"
 "\n"
@@ -4727,6 +4727,8 @@ msgstr "Non forza il risolutore a trovare una soluzione, lascia che chieda."
 #: src/commands/solveroptionset.cc:63
 msgid "Set the solvers general attitude when resolving a job."
 msgstr ""
+"Definisci il comportamento generale dei risolutori quando si esegue un "
+"compito."
 
 #: src/commands/solveroptionset.cc:83
 msgid "Expert options"
