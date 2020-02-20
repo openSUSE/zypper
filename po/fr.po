@@ -14,10 +14,10 @@ msgstr ""
 "Project-Id-Version: zypper.fr\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-11-28 17:54+0100\n"
-"PO-Revision-Date: 2019-11-01 22:53+0000\n"
-"Last-Translator: Antoine Belvire <antoine.belvire@opensuse.org>\n"
-"Language-Team: French <https://l10n.opensuse.org/projects/zypper/master/fr/"
-">\n"
+"PO-Revision-Date: 2020-02-20 17:55+0000\n"
+"Last-Translator: Christine Gabriel <christine@stoquart.com>\n"
+"Language-Team: French <https://l10n.opensuse.org/projects/zypper/master/fr/>"
+"\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -115,8 +115,8 @@ msgstr "Le fichier de signature de clé GPG '%1%' est arrivé à expiration."
 #, boost-format
 msgid "The gpg key signing file '%1%' will expire in %2% day."
 msgid_plural "The gpg key signing file '%1%' will expire in %2% days."
-msgstr[0] "Le fichier de signature de clé gpg '%1%' expirera dans %2% jour."
-msgstr[1] "Le fichier de signature de clé gpg '%1%' expirera dans %2% jours."
+msgstr[0] "Le fichier de signature de clé GPG '%1%' expirera dans %2% jour."
+msgstr[1] "Le fichier de signature de clé GPG '%1%' expirera dans %2% jours."
 
 #: src/callbacks/keyring.h:142
 #, c-format, boost-format
@@ -269,7 +269,7 @@ msgstr ""
 #: src/callbacks/keyring.h:380
 msgid "Double-check this is not caused by some malicious changes in the file!"
 msgstr ""
-"Vérifiez bien que cela n'est pas causé par une modification non autorisée du "
+"Vérifiez bien que cela n'est pas dû à une modification non autorisée du "
 "fichier !"
 
 #. translator: %1% is a file name
@@ -4196,6 +4196,8 @@ msgid ""
 "Search for all packages that provide any of the provides of the package(s) "
 "matched by the input parameters."
 msgstr ""
+"Rechercher tous les paquets qui fournissent un ou plusieurs des paquets "
+"correspondant aux paramètres saisis."
 
 #. translators: --requires-pkg
 #: src/commands/search/search.cc:178
@@ -4203,6 +4205,8 @@ msgid ""
 "Search for all packages that require any of the provides of the package(s) "
 "matched by the input parameters."
 msgstr ""
+"Rechercher tous les paquets qui nécessitent un ou plusieurs des paquets "
+"correspondant aux paramètres saisis."
 
 #. translators: --recommends-pkg
 #: src/commands/search/search.cc:182
@@ -4210,6 +4214,8 @@ msgid ""
 "Search for all packages that recommend any of the provides of the package(s) "
 "matched by the input parameters."
 msgstr ""
+"Rechercher tous les paquets qui recommandent un ou plusieurs des paquets "
+"correspondant aux paramètres saisis."
 
 #. translators: --supplements-pkg
 #: src/commands/search/search.cc:186
@@ -4217,6 +4223,8 @@ msgid ""
 "Search for all packages that supplement any of the provides of the "
 "package(s) matched by the input parameters."
 msgstr ""
+"Rechercher tous les paquets qui complètent un ou plusieurs des paquets "
+"correspondant aux paramètres saisis."
 
 #. translators: --conflicts-pkg
 #: src/commands/search/search.cc:190
@@ -4224,6 +4232,8 @@ msgid ""
 "Search for all packages that conflict with any of the package(s) matched by "
 "the input parameters."
 msgstr ""
+"Rechercher tous les paquets qui entrent en conflit avec un ou plusieurs des "
+"paquets correspondant aux paramètres saisis."
 
 #. translators: --obsoletes-pkg
 #: src/commands/search/search.cc:194
@@ -4231,6 +4241,8 @@ msgid ""
 "Search for all packages that obsolete any of the package(s) matched by the "
 "input parameters."
 msgstr ""
+"Rechercher tous les paquets qui rendent obsolètes un ou plusieurs des "
+"paquets correspondant aux paramètres saisis."
 
 #. translators: --suggests-pkg
 #: src/commands/search/search.cc:198
@@ -4238,6 +4250,8 @@ msgid ""
 "Search for all packages that suggest any of the provides of the package(s) "
 "matched by the input parameters."
 msgstr ""
+"Rechercher tous les paquets qui suggèrent un ou plusieurs des paquets "
+"correspondant aux paramètres saisis."
 
 #. translators: -t, --type <TYPE>
 #: src/commands/search/search.cc:202
@@ -4726,6 +4740,7 @@ msgstr "Ne pas forcer le solveur à trouver une solution, le laisser demander."
 #: src/commands/solveroptionset.cc:63
 msgid "Set the solvers general attitude when resolving a job."
 msgstr ""
+"Définir l'attitude générale des résolveurs lors de la résolution d'une tâche."
 
 #: src/commands/solveroptionset.cc:83
 msgid "Expert options"
@@ -5091,12 +5106,12 @@ msgstr "Liste les licences et CLUF (EULA) des paquets actuellement installés."
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/utils/purge-kernels.cc:26
 msgid "purge-kernels [OPTIONS]"
-msgstr ""
+msgstr "purge-kernels [OPTIONS]"
 
 #. translators: command summary: targetos, tos
 #: src/commands/utils/purge-kernels.cc:28
 msgid "Remove old kernels."
-msgstr ""
+msgstr "Supprime les anciens kernels."
 
 #. translators: command description
 #: src/commands/utils/purge-kernels.cc:30
@@ -5105,25 +5120,29 @@ msgid ""
 "zypp/zypp.conf:multiversion.kernels which can be given as <version>, latest(-"
 "N), running, oldest(+N)."
 msgstr ""
+"Supprime automatiquement les kernels installés conformément à la liste de "
+"kernels à conserver de /etc/zypp/zypp.conf:multiversion.kernels, lesquels "
+"peuvent être spécifiés comme suit :<version>, les plus récents (-N), en "
+"cours d'exécution, les plus anciens (+N)."
 
 #: src/commands/utils/purge-kernels.cc:51
 msgid "Preparing to purge obsolete kernels..."
-msgstr ""
+msgstr "Préparation de la purge des kernels obsolètes..."
 
 #: src/commands/utils/purge-kernels.cc:52
 #, boost-format
 msgid "Configuration: %1%"
-msgstr ""
+msgstr "Configuration : %1%"
 
 #: src/commands/utils/purge-kernels.cc:53
 #, boost-format
 msgid "Running kernel release: %1%"
-msgstr ""
+msgstr "Version de kernel en cours d'exécution : %1%"
 
 #: src/commands/utils/purge-kernels.cc:54
 #, boost-format
 msgid "Running kernel arch: %1%"
-msgstr ""
+msgstr "Arch. de kernel en cours d'exécution : %1%"
 
 #: src/commands/utils/source-download.cc:203
 #, c-format, boost-format
