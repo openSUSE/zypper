@@ -20,16 +20,16 @@ msgstr ""
 "Project-Id-Version: zypp.fr\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-12-05 14:22+0100\n"
-"PO-Revision-Date: 2019-03-23 20:19+0000\n"
+"PO-Revision-Date: 2020-02-20 18:54+0000\n"
 "Last-Translator: Christine Gabriel <christine@stoquart.com>\n"
-"Language-Team: French <https://l10n.opensuse.org/projects/libzypp/master/fr/"
-">\n"
+"Language-Team: French <https://l10n.opensuse.org/projects/libzypp/master/fr/>"
+"\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 3.3\n"
+"X-Generator: Weblate 3.6.1\n"
 
 #. dubious: Throw on malformed known types, otherwise log a warning.
 #: zypp/CheckSum.cc:136
@@ -124,7 +124,7 @@ msgstr "Aruba"
 #. :ABW:533:
 #: zypp/CountryCode.cc:173
 msgid "Aland Islands"
-msgstr "Îles Aland"
+msgstr "Îles Åland"
 
 #. :ALA:248:
 #: zypp/CountryCode.cc:174
@@ -4642,19 +4642,19 @@ msgstr "installer %s depuis le dépôt exclu"
 #: zypp/solver/detail/SATResolver.cc:1386
 #, boost-format
 msgid "install %1% although it has been retracted"
-msgstr ""
+msgstr "installer %1% bien qu'il ait été retiré"
 
 #. translator: %1% is a package name
 #: zypp/solver/detail/SATResolver.cc:1389
 #, boost-format
 msgid "allow to install the PTF %1%"
-msgstr ""
+msgstr "autoriser l'installation du PTF %1%"
 
 #. translator: %1% is a package name
 #: zypp/solver/detail/SATResolver.cc:1392
 #, boost-format
 msgid "install %1% although it is blacklisted"
-msgstr ""
+msgstr "installer %1% bien qu'il ait été placé en liste noire"
 
 #: zypp/solver/detail/SATResolver.cc:1412
 #, c-format, boost-format
