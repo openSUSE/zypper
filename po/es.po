@@ -18,7 +18,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-11-28 17:54+0100\n"
-"PO-Revision-Date: 2020-02-20 00:55+0000\n"
+"PO-Revision-Date: 2020-02-21 01:55+0000\n"
 "Last-Translator: Juan Sarria <juansarriam@gmail.com>\n"
 "Language-Team: Spanish <https://l10n.opensuse.org/projects/zypper/master/es/>"
 "\n"
@@ -478,7 +478,11 @@ msgid_plural ""
 "%1% packages had to be excluded from file conflicts check because they are "
 "not yet downloaded."
 msgstr[0] ""
+"Se ha tenido que excluir %1% paquete de la comprobación de conflictos de "
+"archivos porque aún no se había descargado."
 msgstr[1] ""
+"Se han tenido que excluir %1% paquetes de la comprobación de conflictos de "
+"archivos porque aún no se habían descargado."
 
 #. TranslatorExplanation %1%(commandline option)
 #: src/callbacks/rpm.h:460
@@ -837,9 +841,9 @@ msgstr "No abreviar el texto en las tablas."
 
 #. translators: --table-style, -s, %1% denotes the supported range of the integer argument (e.g. "1-11")
 #: src/Config.cc:420
-#, fuzzy, boost-format
+#, boost-format
 msgid "Table style (%1%)."
-msgstr "Estilo de tabla (entero)."
+msgstr "Estilo de tabla (%1%)."
 
 #: src/Config.cc:424 src/commands/optionsets.cc:284
 msgid "Entering non-interactive mode."
@@ -2910,6 +2914,8 @@ msgid ""
 "A meaningful file conflict check can only be performed if used together with "
 "'%1%'."
 msgstr ""
+"Solo es posible realizar una comprobación significativa de conflictos de "
+"archivos si se usa junto con %1%."
 
 #. translators: -r, --repo <ALIAS|#|URI>
 #: src/commands/optionsets.cc:67
@@ -4173,6 +4179,8 @@ msgid ""
 "Search for all packages that provide any of the provides of the package(s) "
 "matched by the input parameters."
 msgstr ""
+"Busca todos los paquetes que proporcionan alguno de los paquetes que "
+"coinciden con los parámetros de entrada."
 
 #. translators: --requires-pkg
 #: src/commands/search/search.cc:178
@@ -4180,6 +4188,8 @@ msgid ""
 "Search for all packages that require any of the provides of the package(s) "
 "matched by the input parameters."
 msgstr ""
+"Busca todos los archivos que requieren alguno de los paquetes que coinciden "
+"con los parámetros de entrada."
 
 #. translators: --recommends-pkg
 #: src/commands/search/search.cc:182
@@ -4187,6 +4197,8 @@ msgid ""
 "Search for all packages that recommend any of the provides of the package(s) "
 "matched by the input parameters."
 msgstr ""
+"Busca todos los paquetes que recomiendan alguno de los paquetes que "
+"coinciden con los parámetros de entrada."
 
 #. translators: --supplements-pkg
 #: src/commands/search/search.cc:186
@@ -4194,6 +4206,8 @@ msgid ""
 "Search for all packages that supplement any of the provides of the "
 "package(s) matched by the input parameters."
 msgstr ""
+"Busca todos los paquetes que suplementan a alguno de los paquetes que "
+"coinciden con los parámetros de entrada."
 
 #. translators: --conflicts-pkg
 #: src/commands/search/search.cc:190
@@ -4201,6 +4215,8 @@ msgid ""
 "Search for all packages that conflict with any of the package(s) matched by "
 "the input parameters."
 msgstr ""
+"Busca todos los paquetes que tienen un conflicto con alguno de los paquetes "
+"que coinciden con los parámetros de entrada."
 
 #. translators: --obsoletes-pkg
 #: src/commands/search/search.cc:194
@@ -4208,6 +4224,8 @@ msgid ""
 "Search for all packages that obsolete any of the package(s) matched by the "
 "input parameters."
 msgstr ""
+"Busca todos los paquetes que quedarán obsoletos por alguno de los paquetes "
+"que coinciden con los parámetros de entrada."
 
 #. translators: --suggests-pkg
 #: src/commands/search/search.cc:198
@@ -4215,6 +4233,8 @@ msgid ""
 "Search for all packages that suggest any of the provides of the package(s) "
 "matched by the input parameters."
 msgstr ""
+"Busca todos los paquetes que sugieren alguno de los paquetes que coinciden "
+"con los parámetros de entrada."
 
 #. translators: -t, --type <TYPE>
 #: src/commands/search/search.cc:202
@@ -4681,7 +4701,7 @@ msgstr "Este comando solo tiene sentido en la shell de zypper."
 #: src/commands/solveroptionset.cc:23
 #, boost-format
 msgid "Valid values: %1%"
-msgstr ""
+msgstr "Valores válidos: %1%"
 
 #: src/commands/solveroptionset.cc:35 src/commands/solveroptionset.cc:58
 msgid "Solver options"
@@ -4712,6 +4732,8 @@ msgstr "No fuerza una solución, solo pregunta."
 #: src/commands/solveroptionset.cc:63
 msgid "Set the solvers general attitude when resolving a job."
 msgstr ""
+"Define la actitud general de los sistemas de resolución cuando se resuelve "
+"una tarea."
 
 #: src/commands/solveroptionset.cc:83
 msgid "Expert options"
@@ -5083,12 +5105,12 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/utils/purge-kernels.cc:26
 msgid "purge-kernels [OPTIONS]"
-msgstr ""
+msgstr "purge-kernels [OPCIONES]"
 
 #. translators: command summary: targetos, tos
 #: src/commands/utils/purge-kernels.cc:28
 msgid "Remove old kernels."
-msgstr ""
+msgstr "Elimina los kernel antiguos."
 
 #. translators: command description
 #: src/commands/utils/purge-kernels.cc:30
@@ -5097,25 +5119,28 @@ msgid ""
 "zypp/zypp.conf:multiversion.kernels which can be given as <version>, latest(-"
 "N), running, oldest(+N)."
 msgstr ""
+"Elimina automáticamente los kernels instalados según la lista de kernels que "
+"se deben conservar de /etc/zypp/zypp.conf:multiversion.kernels, que puede "
+"proporcionarse con el formato <version>, latest(-N), running, oldest(+N)."
 
 #: src/commands/utils/purge-kernels.cc:51
 msgid "Preparing to purge obsolete kernels..."
-msgstr ""
+msgstr "Preparando la limpieza de kernels obsoletos..."
 
 #: src/commands/utils/purge-kernels.cc:52
 #, boost-format
 msgid "Configuration: %1%"
-msgstr ""
+msgstr "Configuración: %1%"
 
 #: src/commands/utils/purge-kernels.cc:53
 #, boost-format
 msgid "Running kernel release: %1%"
-msgstr ""
+msgstr "Versión del kernel en ejecución: %1%"
 
 #: src/commands/utils/purge-kernels.cc:54
 #, boost-format
 msgid "Running kernel arch: %1%"
-msgstr ""
+msgstr "Arquitectura del kernel en ejecución: %1%"
 
 #: src/commands/utils/source-download.cc:203
 #, c-format, boost-format
@@ -6315,7 +6340,7 @@ msgstr "Problema: "
 
 #: src/solve-commit.cc:48
 msgid "Detailed information: "
-msgstr ""
+msgstr "Información detallada: "
 
 #. TranslatorExplanation %d is the solution number
 #: src/solve-commit.cc:61
@@ -6345,7 +6370,7 @@ msgstr[1] "Elija las soluciones usando '1' o cancele usando 'c'"
 #. The answers should be lower case letters.
 #: src/solve-commit.cc:111
 msgid "s/r/c/d"
-msgstr ""
+msgstr "o/r/c/i"
 
 #. translators: answers for dependency problem solution input prompt:
 #. "Choose from above solutions by number or cancel"
@@ -6356,28 +6381,28 @@ msgstr ""
 #. please report a bug against zypper at bugzilla.suse.com, we'll try to solve it.
 #: src/solve-commit.cc:127
 msgid "c/d"
-msgstr ""
+msgstr "c/i"
 
 #: src/solve-commit.cc:133
 #, boost-format
 msgid "Choose solution %1%"
-msgstr ""
+msgstr "Seleccionar solución %1%"
 
 #: src/solve-commit.cc:135
 msgid "Skip problem and continue."
-msgstr ""
+msgstr "Omitir el problema y continuar."
 
 #: src/solve-commit.cc:138
 msgid "Retry solving immediately."
-msgstr ""
+msgstr "Reintentar la resolución de inmediato."
 
 #: src/solve-commit.cc:140
 msgid "Choose no solution and cancel."
-msgstr ""
+msgstr "No seleccionar ninguna solución y cancelar."
 
 #: src/solve-commit.cc:141
 msgid "Toggle show detailed conflict information."
-msgstr ""
+msgstr "Mostrar u ocultar información detallada del conflicto."
 
 #: src/solve-commit.cc:174
 #, c-format, boost-format
