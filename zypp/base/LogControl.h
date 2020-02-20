@@ -13,6 +13,7 @@
 #define ZYPP_BASE_LOGCONTROL_H
 
 #include <iosfwd>
+#include <ostream> //for std::endl
 
 #include "zypp/base/Logger.h"
 #include "zypp/base/PtrTypes.h"
