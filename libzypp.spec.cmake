@@ -21,6 +21,8 @@
 %bcond_with zchunk
 %endif
 
+%bcond_without mediabackend_tests
+
 Name:           libzypp
 Version:        @VERSION@
 Release:        0
@@ -88,7 +90,9 @@ BuildRequires:  glib2-devel
 BuildRequires:  libsigc++2-devel
 
 # required for testsuite
+%if %{with mediabackend_tests}
 BuildRequires:  nginx
+%endif
 
 Requires:       rpm
 
@@ -108,11 +112,15 @@ BuildRequires:  librpm-devel > 4.4
 %if 0%{?suse_version}
 BuildRequires:  libgpgme-devel
 #testsuite
+%if %{with mediabackend_tests}
 BuildRequires:  FastCGI-devel
+%endif
 %else
 BuildRequires:  gpgme-devel
 #testsuite
+%if %{with mediabackend_tests}
 BuildRequires:	fcgi-devel
+%endif
 %endif
 
 %define min_curl_version 7.19.4
@@ -235,6 +243,7 @@ cmake -DCMAKE_INSTALL_PREFIX=%{_prefix} \
       -DCMAKE_BUILD_TYPE=Release \
       -DCMAKE_SKIP_RPATH=1 \
       %{?with_zchunk:-DENABLE_ZCHUNK_COMPRESSION=1} \
+      %{!?with_mediabackend_tests:-DDISABLE_MEDIABACKEND_TESTS=1} \
       ${EXTRA_CMAKE_OPTIONS} \
       ..
 make %{?_smp_mflags} VERBOSE=1

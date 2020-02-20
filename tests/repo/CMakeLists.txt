@@ -7,9 +7,14 @@ INCLUDE_DIRECTORIES( ${LIBZYPP_SOURCE_DIR}/tests/zypp )
 ADD_TESTS(
   DUdata
   ExtendedMetadata
-  MirrorList
   PluginServices
   RepoLicense
   RepoSigcheck
   RepoVariables
 )
+
+IF( NOT DISABLE_MEDIABACKEND_TESTS )
+ADD_TESTS(
+  MirrorList
+)
+ENDIF()

@@ -18,7 +18,6 @@ ADD_TESTS(
   Deltarpm
   Edition
   ExtendedPool
-  Fetcher
   FileChecker
   Flags
   GZStream
@@ -26,7 +25,6 @@ ADD_TESTS(
   KeyRing
   Locale
   Locks
-  MediaSetAccess
   PathInfo
   Pathname
   PluginFrame
@@ -37,7 +35,6 @@ ADD_TESTS(
   PublicKey
   PurgeKernels
   RWPtr
-  RepoInfo
   RepoManager
   RepoStatus
   ResKind
@@ -60,4 +57,12 @@ IF (ENABLE_ZCHUNK_COMPRESSION)
     ZChunk
   )
 ENDIF(ENABLE_ZCHUNK_COMPRESSION)
+
+IF( NOT DISABLE_MEDIABACKEND_TESTS )
+  ADD_TESTS(
+    Fetcher
+    MediaSetAccess
+    RepoInfo
+  )
+ENDIF()
 
