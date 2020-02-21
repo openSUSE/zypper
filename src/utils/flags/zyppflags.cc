@@ -9,6 +9,7 @@
 #include "exceptions.h"
 #include "utils/messages.h"
 #include "Zypper.h"
+#include <zypp/base/Regex.h>
 
 #include <getopt.h>
 #include <unordered_map>
@@ -300,10 +301,15 @@ int parseCLI( const int argc, char * const *argv, const std::vector<CommandGroup
   //the key of the map is the index of options in allOpts
   std::map<int, std::vector< boost::optional<std::string> > > parsedValues;
 
+  //regular expression used to match against flags later in the code
+  //kept here to avoid constant recompilation of the regex during the loop
+  const zypp::str::regex rxexpr("^--([^=]+)(=.*)?$");
+
   while ( true ) {
 
+    const int currOptInd = optind == 0 ?  1 : optind; //optind 0 always points to the command name
     int option_index = -1;      //index of the last found long option, same as in allOpts
-    int optc = getopt_long( argc, argv, shortopts.c_str(), longopts.data(), &option_index );
+    const int optc = getopt_long( argc, argv, shortopts.c_str(), longopts.data(), &option_index );
 
     if ( optc == -1 )
       break;
@@ -326,6 +332,7 @@ int parseCLI( const int argc, char * const *argv, const std::vector<CommandGroup
       }
       default: {
         int index = -1;
+        bool longOpt = false;
         if ( option_index == -1 ) {
           //we have a short option
           auto it = shortOptIndex.find( (char) optc );
@@ -334,6 +341,7 @@ int parseCLI( const int argc, char * const *argv, const std::vector<CommandGroup
           }
         } else {
           //we have a long option
+          longOpt = true;
           index = option_index;
         }
 
@@ -348,6 +356,21 @@ int parseCLI( const int argc, char * const *argv, const std::vector<CommandGroup
           }
 
           CommandOption &opt = allOpts[index];
+
+          // getopt_long supports unqiue abbreviation of flags, e.g. --reposd-dir can be abbreviated
+          // with --repos. We need to check here if the flag that was parsed is matching exactly
+          // the option name, otherwise we error out (bsc#1164543)
+          if ( longOpt ) {
+            const std::string scanned( argv[currOptInd] );
+
+            zypp::str::smatch what;
+            if ( zypp::str::regex_match( scanned, what, rxexpr ) && what.size() >= 2 ) {
+              if( opt.name != what[1] )
+                ZYPP_THROW( UnknownFlagException( scanned ) );
+            } else {
+              ZYPP_THROW( ZyppFlagsException( scanned + " did not match the expected flag format." ) );
+            }
+          }
 
           // check if a conflicting option was used before
           std::vector<std::string> conflictingList;
