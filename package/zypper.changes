@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Fri Feb 21 16:19:13 CET 2020 - ma@suse.de
+
+- Do not allow the abbreviation of cli arguments (bsc#1164543)
+- accoring to according in all translation files.
+- Always show exception history if available.
+- Use default package cache location for temporary repos (bsc#1130873)
+- version 1.14.34
+
+-------------------------------------------------------------------
 Thu Nov 28 18:22:11 CET 2019 - ma@suse.de
 
 - Introduce purge-kernels command (bsc#1155198)
