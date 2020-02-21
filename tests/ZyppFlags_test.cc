@@ -109,6 +109,22 @@ BOOST_AUTO_TEST_CASE( simpleOptions )
     BOOST_CHECK_EQUAL ( optionalArgOption, 42 );
   }
 
+
+  {
+    //write value mixed long and short options
+    resetVals();
+    const char *testArgs[] {
+      "command",
+      "-ac42",
+      "--reqArg","10"
+    };
+
+    BOOST_CHECK_NO_THROW( parseCLI( sizeof(testArgs) / sizeof(char *),  ( char *const* )testArgs, { grp } ) );
+    BOOST_CHECK_EQUAL ( noArgOption, true );
+    BOOST_CHECK_EQUAL ( requiredArgOption, 10 );
+    BOOST_CHECK_EQUAL ( optionalArgOption, 42 );
+  }
+
   {
     //missing argument for a flag that requires arguments
     resetVals();
@@ -137,6 +153,32 @@ BOOST_AUTO_TEST_CASE( simpleOptions )
     const char *testArgs[] {
       "command",
       "-z"
+    };
+
+    BOOST_REQUIRE_THROW( parseCLI( sizeof(testArgs) / sizeof(char *),  ( char* const* )testArgs, { grp } ), UnknownFlagException );
+  }
+
+  {
+    //stop CLI parsing on --
+    resetVals();
+    const char *testArgs[] {
+      "command",
+      "--optionalArg",
+      "--",
+      "-noArg"
+    };
+
+    parseCLI( sizeof(testArgs) / sizeof(char *),  ( char *const* )testArgs, { grp } );
+    BOOST_CHECK_EQUAL ( optionalArgOption, 22 );
+    BOOST_CHECK_EQUAL ( noArgOption, false );
+  }
+
+  {
+    //abbreviated flags should not be supported (bsc#1164543)
+    resetVals();
+    const char *testArgs[] {
+      "command",
+      "--optional"
     };
 
     BOOST_REQUIRE_THROW( parseCLI( sizeof(testArgs) / sizeof(char *),  ( char* const* )testArgs, { grp } ), UnknownFlagException );
