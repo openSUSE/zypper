@@ -12,6 +12,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <mutex>
 
 #include <zypp/base/Logger.h>
 #include <zypp/base/LogControl.h>
@@ -21,6 +22,8 @@
 #include <zypp/PathInfo.h>
 
 using std::endl;
+
+std::once_flag flagReadEnvAutomatically;
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -376,14 +379,8 @@ namespace zypp
         StreamTable _streamtable;
 
       private:
-        /** Singleton ctor.
-         * No logging per default, unless enabled via $ZYPP_LOGFILE.
-        */
-        LogControlImpl()
-        : _no_stream( NULL )
-        , _excessive( getenv("ZYPP_FULLLOG") )
-        , _lineFormater( new LogControl::LineFormater )
-        {
+
+        void readEnvVars () {
           if ( getenv("ZYPP_LOGFILE") )
             logfile( getenv("ZYPP_LOGFILE") );
 
@@ -392,6 +389,16 @@ namespace zypp
             shared_ptr<LogControl::LineFormater> formater(new ProfilingFormater);
             setLineFormater(formater);
           }
+        }
+        /** Singleton ctor.
+         * No logging per default, unless enabled via $ZYPP_LOGFILE.
+        */
+        LogControlImpl()
+        : _no_stream( NULL )
+        , _excessive( getenv("ZYPP_FULLLOG") )
+        , _lineFormater( new LogControl::LineFormater )
+        {
+          std::call_once( flagReadEnvAutomatically, &LogControlImpl::readEnvVars, this);
         }
 
         ~LogControlImpl()
@@ -413,7 +420,7 @@ namespace zypp
       // 'THE' LogControlImpl singleton
       inline LogControlImpl & LogControlImpl::instance()
       {
-        static LogControlImpl _instance;
+        thread_local static LogControlImpl _instance;
         return _instance;
       }
 
