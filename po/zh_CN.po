@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-11-28 17:54+0100\n"
-"PO-Revision-Date: 2020-02-27 05:55+0000\n"
+"PO-Revision-Date: 2020-02-27 09:55+0000\n"
 "Last-Translator: Marguerite Su <i@marguerite.su>\n"
 "Language-Team: Chinese (China) <https://l10n.opensuse.org/projects/zypper/"
 "master/zh_CN/>\n"
@@ -274,9 +274,7 @@ msgstr "查看密钥调用 '%1%' 详情。"
 msgid ""
 "Unless you believe the key in question is still in use, you can remove it "
 "from the rpm database calling '%1%'."
-msgstr ""
-"除非您确信这些有问题的密钥还在使用中，您可以从 RPM 数据库调用 '%1%' 中移除他"
-"们。"
+msgstr "除非您确信该问题密钥仍在使用，否则您可调用 '%1%' 从 RPM 数据中移除该密钥。"
 
 #: src/callbacks/keyring.h:470
 #, c-format, boost-format
@@ -307,8 +305,7 @@ msgstr ""
 msgid ""
 "Accepting packages with wrong checksums can lead to a corrupted system and "
 "in extreme cases even to a system compromise."
-msgstr ""
-"接受校验和错误的软件包可能导致系统损坏，在极端情况下甚至会导致系统被入侵。"
+msgstr "使用校验码错误的软件包可能造成系统毁损，极端情况下甚至会导致系统被入侵。"
 
 #: src/callbacks/keyring.h:515
 #, boost-format
@@ -320,9 +317,7 @@ msgid ""
 "to unblock using this file on your own risk. Empty input will discard the "
 "file.\n"
 msgstr ""
-"然而若您确信校验和为 '%1%..' 的文件安全正确，应用于此操作中，\n"
-"可输入该校验和的前 4 个字符来取消阻止使用该文件但风险自负。\n"
-"不输入将丢弃该文件。\n"
+"然而若您确信校验码为 '%1%..' 的文件安全且正确，应用于此操作中，可输入该校验码的前 4 个字符来使用该文件但风险自负。不输入将丢弃该文件。\n"
 
 #. translators: A prompt option
 #: src/callbacks/keyring.h:522
@@ -332,7 +327,7 @@ msgstr "丢弃"
 #. translators: A prompt option help text
 #: src/callbacks/keyring.h:524
 msgid "Unblock using this file on your own risk."
-msgstr "开放对此文件的使用，但风险自负。"
+msgstr "使用该文件，风险自负。"
 
 #. translators: A prompt option help text
 #: src/callbacks/keyring.h:526
@@ -342,7 +337,7 @@ msgstr "丢弃该文件。"
 #. translators: A prompt text
 #: src/callbacks/keyring.h:530
 msgid "Unblock or discard?"
-msgstr "取消阻止或是丢弃？"
+msgstr "使用或丢弃？"
 
 #: src/callbacks/locks.h:27
 msgid ""
@@ -364,7 +359,7 @@ msgstr "以下查询未锁定任何对象："
 
 #: src/callbacks/repo.h:49
 msgid "Retrieving delta"
-msgstr "正在检索增量升级"
+msgstr "正在撷取增量升级"
 
 #. translators: this text is a progress display label e.g. "Applying delta foo [42%]"
 #: src/callbacks/repo.h:74
@@ -385,7 +380,7 @@ msgstr "在缓存 %1% 中"
 #: src/callbacks/repo.h:128
 #, c-format, boost-format
 msgid "Retrieving %s %s-%s.%s"
-msgstr "正在检索 %s %s-%s.%s"
+msgstr "正在撷取 %s %s-%s.%s"
 
 #: src/callbacks/repo.h:217
 msgid "Signature verification failed"
@@ -393,7 +388,7 @@ msgstr "签名校验失败"
 
 #: src/callbacks/repo.h:237
 msgid "Accepting package despite the error."
-msgstr "尽管有错误仍接受了该软件包。"
+msgstr "容忍有瑕疵的软件包。"
 
 #. TranslatorExplanation speaking of a script - "Running: script file name (package name, script dir)"
 #: src/callbacks/rpm.h:184
