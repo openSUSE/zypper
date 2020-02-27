@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-11-28 17:54+0100\n"
-"PO-Revision-Date: 2020-02-26 18:55+0000\n"
+"PO-Revision-Date: 2020-02-27 05:55+0000\n"
 "Last-Translator: Marguerite Su <i@marguerite.su>\n"
 "Language-Team: Chinese (China) <https://l10n.opensuse.org/projects/zypper/"
 "master/zh_CN/>\n"
@@ -244,7 +244,7 @@ msgstr "正在忽略文件 '%s'（来自软件源 '%s'）的失败签名校验�
 
 #: src/callbacks/keyring.h:380
 msgid "Double-check this is not caused by some malicious changes in the file!"
-msgstr "请再次检查这是否由文件中的某些恶意修改所造成！"
+msgstr "请复查这是否由于恶意篡改文件造成!"
 
 #. translator: %1% is a file name
 #: src/callbacks/keyring.h:390
@@ -262,14 +262,12 @@ msgstr "文件 '%1%'（来自软件源 '%2%'）的签名校验失败。"
 msgid ""
 "The rpm database seems to contain old V3 version gpg keys which are "
 "meanwhile obsolete and considered insecure:"
-msgstr ""
-"该 RPM 数据库好像包含了旧的 V3 版本 GPG 密钥。这些密钥已经过期所以被认为是不"
-"安全的："
+msgstr "该 RPM 数据库似乎含有旧的 V3 版本 GPG 密钥。这种密钥已被淘汰因此被公认为不安全："
 
 #: src/callbacks/keyring.h:444
 #, boost-format
 msgid "To see details about a key call '%1%'."
-msgstr "查看密钥调用 '%1%' 的详细信息。"
+msgstr "查看密钥调用 '%1%' 详情。"
 
 #: src/callbacks/keyring.h:448
 #, boost-format
