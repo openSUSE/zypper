@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-11-28 17:54+0100\n"
-"PO-Revision-Date: 2020-02-27 17:55+0000\n"
+"PO-Revision-Date: 2020-02-28 12:55+0000\n"
 "Last-Translator: Marguerite Su <i@marguerite.su>\n"
 "Language-Team: Chinese (China) <https://l10n.opensuse.org/projects/zypper/"
 "master/zh_CN/>\n"
@@ -460,15 +460,13 @@ msgid ""
 "File conflicts happen when two packages attempt to install files with the "
 "same name but different contents. If you continue, conflicting files will be "
 "replaced losing the previous content."
-msgstr ""
-"当两个软件包试图安装同名但内容不同的文件时就会产生文件冲突。若您继续，冲突的"
-"文件将会被替换，之前的内容会因此丢失。"
+msgstr "当两个软件包试图安装同名但内容不同的文件时就会产生文件冲突。若您继续，将替换冲突的文件，并覆盖之前的内容。"
 
 #. translator: %s is an other command: "This is an alias for 'zypper info -t patch'."
 #: src/commands/commandhelpformatter.h:94
 #, c-format, boost-format
 msgid "This is an alias for '%s'."
-msgstr "这是 '%s' 的一个别名。"
+msgstr "这是 '%s' 的别名。"
 
 #: src/commands/commandhelpformatter.h:107
 msgid "Examples:"
@@ -531,7 +529,7 @@ msgstr "软件包类型 (%1%)。"
 msgid ""
 "Do a 'best effort' approach to update. Updates to a lower than the latest "
 "version are also acceptable."
-msgstr "'尽量'更新，更新到比最新版本 低一些的版本也是可以接受的。"
+msgstr "'尽量'更新，更新到比最新版本低一些的版本也是可以接受的。"
 
 #: src/commands/commonflags.h:45
 msgid "Consider only patches which affect the package management itself."
@@ -778,7 +776,7 @@ msgstr "在表格中不要缩写文本。"
 #: src/Config.cc:420
 #, boost-format
 msgid "Table style (%1%)."
-msgstr "表格风格 (%1%)."
+msgstr "表格样式 (%1%)."
 
 #: src/Config.cc:424 src/commands/optionsets.cc:284
 msgid "Entering non-interactive mode."
@@ -848,12 +846,12 @@ msgstr "软件源选项"
 
 #: src/Config.cc:552
 msgid "Entering 'no-gpg-checks' mode."
-msgstr "正在进入无 gpg 检查模式。"
+msgstr "正在进入无 gpg 校验模式。"
 
 #. translators: --no-gpg-checks
 #: src/Config.cc:556
 msgid "Ignore GPG check failures and continue."
-msgstr "忽略失败的 GPG 检查并继续。"
+msgstr "忽略失败的 GPG 校验并继续。"
 
 #: src/Config.cc:561
 #, c-format, boost-format
