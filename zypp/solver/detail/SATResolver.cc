@@ -113,9 +113,9 @@ namespace zypp
 	    sat::Queue suggestions;
 	    ::solver_get_recommendations( &satSolver_r, recommendations, suggestions, 0 );
 	    for ( sat::Queue::size_type i = 0; i < recommendations.size(); ++i )
-	      PoolItem(sat::Solvable(i)).status().setRecommended( true );
+	      PoolItem(sat::Solvable(recommendations[i])).status().setRecommended( true );
 	    for ( sat::Queue::size_type i = 0; i < suggestions.size(); ++i )
-	      PoolItem(sat::Solvable(i)).status().setSuggested( true );
+	      PoolItem(sat::Solvable(suggestions[i])).status().setSuggested( true );
 	  }
 	  {
 	    orphanedItems_r.clear();	// cached on the fly
@@ -123,7 +123,7 @@ namespace zypp
 	    ::solver_get_orphaned( &satSolver_r, orphaned );
 	    for ( sat::Queue::size_type i = 0; i < orphaned.size(); ++i )
 	    {
-	      PoolItem pi { sat::Solvable(i) };
+	      PoolItem pi { sat::Solvable(orphaned[i]) };
 	      pi.status().setOrphaned( true );
 	      orphanedItems_r.push_back( pi );
 	    }
@@ -132,7 +132,7 @@ namespace zypp
 	    sat::Queue unneeded;
 	    ::solver_get_unneeded( &satSolver_r, unneeded, 1 );
 	    for ( sat::Queue::size_type i = 0; i < unneeded.size(); ++i )
-	      PoolItem(sat::Solvable(i)).status().setUnneeded( true );
+	      PoolItem(sat::Solvable(unneeded[i])).status().setUnneeded( true );
 	  }
 	}
 
