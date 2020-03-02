@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Mon Mar  2 19:53:51 CET 2020 - ma@suse.de
+
+- Fix package status computation regarding unneeded, orphaned, recommended
+  and suggested packages (broken in 17.23.0) (bsc#1165476)
+- version 17.23.1 (22)
+
+-------------------------------------------------------------------
 Fri Feb 21 16:06:57 CET 2020 - ma@suse.de
 
 - Log patch status changes to history (jsc#SLE-5116)
