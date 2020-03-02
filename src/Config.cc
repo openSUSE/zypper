@@ -317,6 +317,14 @@ std::vector<ZyppFlags::CommandGroup> Config::cliOptions()
     OUTPUT  = 2000,
     ROOT    = 1000
   };
+
+  auto notifyDisableRepos = [](){
+    MIL << "Repositories disabled, using target only." << endl;
+    Zypper::instance().out().info(
+      _("Repositories disabled, using the database of installed packages only."),
+      Out::HIGH);
+  };
+
   return {
     {
       "", //unnamed section
@@ -575,14 +583,15 @@ std::vector<ZyppFlags::CommandGroup> Config::cliOptions()
               _("Additionally use disabled repositories providing a specific keyword. Try '--plus-content debug' to enable repos indicating to provide debug packages.")
         },
         { "disable-repositories", 0, ZyppFlags::NoArgument, std::move(ZyppFlags::BoolType( &disable_system_sources, ZyppFlags::StoreTrue )
-              .after([](){
-                MIL << "Repositories disabled, using target only." << endl;
-                Zypper::instance().out().info(
-                  _("Repositories disabled, using the database of installed packages only."),
-                  Out::HIGH);
-              })),
+              .after([ notifyDisableRepos ](){ notifyDisableRepos(); })),
               // translators: --disable-repositories
               _("Do not read meta-data from repositories.")
+        },
+        // synonym for --disable-repositories for SUMA
+        // @TODO remove this once SUMA has reverted their SALT stack
+        { "disable-repos", 0, ZyppFlags::NoArgument | ZyppFlags::Hidden, std::move(ZyppFlags::BoolType( &disable_system_sources, ZyppFlags::StoreTrue )
+              .after([ notifyDisableRepos ](){ notifyDisableRepos(); })),
+          ""
         },
         { "no-refresh", 0, ZyppFlags::NoArgument, std::move(ZyppFlags::BoolType( &no_refresh, ZyppFlags::StoreTrue )
               .after( []() {
