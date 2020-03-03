@@ -220,6 +220,12 @@ namespace ZyppFlags {
   };
 
   /**
+   * parseCLI normally fails instantly if a switch given is not a exact match
+   * to one of the registered switches. Setting this to true it will only write a warning instead.
+   */
+  bool &onlyWarnOnAbbrevSwitches();
+
+  /**
    * Parses the command line arguments based on \a options.
    * \returns The first index in argv that was not parsed
    * \throws ZyppFlagsException or any subtypes of it
