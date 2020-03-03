@@ -63,7 +63,15 @@ namespace {
 
     //we do not use the flag and val types, instead we use optind to figure out what happend
     using OptType = struct option;
-    opts.push_back( OptType{opt.name.c_str(), has_arg, 0 ,0} );
+
+    opts.push_back( OptType{
+      opt.name.c_str(),
+      has_arg,
+      0 ,
+      // set the "val" member to some unique number to allow a correct detection of a ambigous switch name (bsc#1165573)
+      // also add 100 so we do not accidently have a val equal to '?' or ':' which would break the parser.
+      100 + static_cast<int>(opts.size())
+    });
   }
 }
 
@@ -163,6 +171,12 @@ Value & Value::after( PostWriteHook &&postWriteHook )
   return *this;
 }
 
+
+bool &onlyWarnOnAbbrevSwitches()
+{
+  static bool enable = false;
+  return enable;
+}
 
 int parseCLI( const int argc, char * const *argv, const std::vector<CommandGroup> &options )
 {
@@ -365,10 +379,15 @@ int parseCLI( const int argc, char * const *argv, const std::vector<CommandGroup
 
             zypp::str::smatch what;
             if ( zypp::str::regex_match( scanned, what, rxexpr ) && what.size() >= 2 ) {
-              if( opt.name != what[1] )
-                ZYPP_THROW( UnknownFlagException( scanned ) );
+              if( opt.name != what[1] ) {
+                if ( onlyWarnOnAbbrevSwitches() )
+                  WAR << "Allowing abbreviated switch";
+                else
+                  ZYPP_THROW( UnknownFlagException( scanned ) );
+              }
             } else {
-              ZYPP_THROW( ZyppFlagsException( scanned + " did not match the expected flag format." ) );
+              if ( !onlyWarnOnAbbrevSwitches() )
+                ZYPP_THROW( ZyppFlagsException( scanned + " did not match the expected flag format." ) );
             }
           }
 

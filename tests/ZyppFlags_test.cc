@@ -199,6 +199,31 @@ BOOST_AUTO_TEST_CASE( simpleOptions )
 #endif
 }
 
+BOOST_AUTO_TEST_CASE( getopt_workaround )
+{
+  bool noArgOption;
+  bool neyArgOption;
+
+  CommandGroup grp {{{
+    { "noArg", 'n', NoArgument, BoolCompatibleType ( noArgOption, StoreTrue, boost::optional<bool>( noArgOption ) ), "Help text 1" },
+    { "neyArg", 'i' , NoArgument, BoolCompatibleType ( neyArgOption, StoreTrue, boost::optional<bool>( neyArgOption ) ), "Help text 2" }
+  }}};
+
+  {
+    //(bsc#1165573) getopt_long detects ambigous abbreviations by checking the longopt struct fields, INSTEAD of actually
+    //checking the strings for the available flags. This results in very weird behaviour
+    const char *testArgs[] {
+      "command",
+      "--n"
+    };
+
+    onlyWarnOnAbbrevSwitches() = true;
+    BOOST_REQUIRE_THROW( parseCLI( sizeof(testArgs) / sizeof(char *),  ( char* const* )testArgs, { grp } ), UnknownFlagException );
+    onlyWarnOnAbbrevSwitches() = false;
+  }
+
+}
+
 BOOST_AUTO_TEST_CASE( hooks )
 {
 
