@@ -118,6 +118,12 @@ std::string legacyCLIStr( const std::string & old_r, const std::string & new_r, 
        _("Legacy commandline option %1% detected. This option is ignored."))
        % NEGATIVEString(dashdash(old_r));
     break;
+  case LegacyCLIMsgType::Abbreviated:
+    return str::Format(
+       _("Abbreviated commandline options will not be supported in future versions. Please use %2% instead of %1% .") )
+       % NEGATIVEString(dashdash(old_r))
+       % POSITIVEString(dashdash(new_r));
+    break;
   }
   return std::string();
 }

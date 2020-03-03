@@ -41,7 +41,8 @@ void exit_rug_compat ();
 enum class LegacyCLIMsgType {
   Local,
   Global,
-  Ignored
+  Ignored,
+  Abbreviated
 };
 std::string legacyCLIStr( const std::string & old_r, const std::string & new_r, LegacyCLIMsgType type_r );
 void print_legacyCLIStr(Out & out, const std::string & old_r, const std::string & new_r, Out::Verbosity verbosity_r = Out::NORMAL, LegacyCLIMsgType type_r = LegacyCLIMsgType::Local );

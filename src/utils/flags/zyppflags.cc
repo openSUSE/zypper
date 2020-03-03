@@ -63,7 +63,15 @@ namespace {
 
     //we do not use the flag and val types, instead we use optind to figure out what happend
     using OptType = struct option;
-    opts.push_back( OptType{opt.name.c_str(), has_arg, 0 ,0} );
+
+    opts.push_back( OptType{
+      opt.name.c_str(),
+      has_arg,
+      0 ,
+      // set the "val" member to some unique number to allow a correct detection of a ambigous switch name (bsc#1165573)
+      // make sure the number is negative so we can differ between short and long options in case of error
+      - 100 - static_cast<int>(opts.size())
+    });
   }
 }
 
@@ -163,6 +171,12 @@ Value & Value::after( PostWriteHook &&postWriteHook )
   return *this;
 }
 
+
+bool &onlyWarnOnAbbrevSwitches()
+{
+  static bool enable = false;
+  return enable;
+}
 
 int parseCLI( const int argc, char * const *argv, const std::vector<CommandGroup> &options )
 {
@@ -319,7 +333,7 @@ int parseCLI( const int argc, char * const *argv, const std::vector<CommandGroup
       case '?': {
         // wrong option in the last argument
         // last argument was a short option
-        if ( option_index == -1 && optopt)
+        if ( option_index == -1 && optopt > 0 )
           ZYPP_THROW( UnknownFlagException( std::string( 1, optopt ) ) );
         else
           ZYPP_THROW( UnknownFlagException( std::string( argv[optind - 1] ) ) );
@@ -365,10 +379,16 @@ int parseCLI( const int argc, char * const *argv, const std::vector<CommandGroup
 
             zypp::str::smatch what;
             if ( zypp::str::regex_match( scanned, what, rxexpr ) && what.size() >= 2 ) {
-              if( opt.name != what[1] )
-                ZYPP_THROW( UnknownFlagException( scanned ) );
+              if( opt.name != what[1] ) {
+                if ( onlyWarnOnAbbrevSwitches() ) {
+		  WAR << "Abbreviated commandline options will not be supported in future versions: --" << what[1] << ": use --" << opt.name << endl;
+		  Zypper::instance().out().warning( legacyCLIStr( what[1], opt.name, LegacyCLIMsgType::Abbreviated ) );
+		} else
+                  ZYPP_THROW( UnknownFlagException( scanned ) );
+              }
             } else {
-              ZYPP_THROW( ZyppFlagsException( scanned + " did not match the expected flag format." ) );
+              if ( !onlyWarnOnAbbrevSwitches() )
+                ZYPP_THROW( ZyppFlagsException( scanned + " did not match the expected flag format." ) );
             }
           }
 
