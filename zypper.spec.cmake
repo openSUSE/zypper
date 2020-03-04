@@ -127,7 +127,17 @@ Authors:
 mkdir -p build
 cd build
 
-cmake -DCMAKE_INSTALL_PREFIX=%{_prefix} \
+CMAKE_FLAGS=
+
+%if 0%{?suse_version} == 1500 && 0%{?sle_version} && 0%{?sle_version} <= 150100
+  # Fixed in 1.14.34: Do not allow the abbreviation of cli arguments (bsc#1164543)
+  # On SLE15/Leap 15.0 and 15.1 we will stay bug-compatible and accept the
+  # abbreviations in order not to break tools. In 15.2 they must be fixed.
+  CMAKE_FLAGS="$CMAKE_FLAGS -DLEGACY_ENABLE_LONGOPT_ABBREV=1"
+%endif
+
+cmake $CMAKE_FLAGS \
+      -DCMAKE_INSTALL_PREFIX=%{_prefix} \
       -DSYSCONFDIR=%{_sysconfdir} \
       -DMANDIR=%{_mandir} \
       -DCMAKE_VERBOSE_MAKEFILE=TRUE \
