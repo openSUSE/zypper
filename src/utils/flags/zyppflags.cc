@@ -174,7 +174,11 @@ Value & Value::after( PostWriteHook &&postWriteHook )
 
 bool &onlyWarnOnAbbrevSwitches()
 {
+#if LEGACY_ENABLE_LONGOPT_ABBREV
+  static bool enable = true;
+#else
   static bool enable = false;
+#endif
   return enable;
 }
 

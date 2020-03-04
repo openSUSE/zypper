@@ -25,6 +25,14 @@ SET( CMAKE_C_FLAGS_RELEASE   "${CMAKE_C_FLAGS_RELEASE}   -O3" )
 SET( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -Wall -Woverloaded-virtual -Wnon-virtual-dtor -fstack-protector -fvisibility-inlines-hidden" )
 SET( CMAKE_C_FLAGS   "${CMAKE_C_FLAGS}   -g -Wall -fstack-protector" )
 
+IF ( LEGACY_ENABLE_LONGOPT_ABBREV )
+  # Fixed in 1.14.34: Do not allow the abbreviation of cli arguments (bsc#1164543)
+  # On SLE15/Leap 15.0 and 15.1 we will stay bug-compatible and accept the
+  # abbreviations in order not to break tools. In 15.2 they must be fixed.
+  MESSAGE( STATUS "LEGACY_ENABLE_LONGOPT_ABBREV" )
+  ADD_DEFINITIONS( -DLEGACY_ENABLE_LONGOPT_ABBREV=1 )
+ENDIF ( LEGACY_ENABLE_LONGOPT_ABBREV )
+
 
 GENERATE_PACKAGING(${PACKAGE} ${VERSION})
 
@@ -120,3 +128,4 @@ INSTALL(
   DIRECTORY tools/apt-packagemap.d/
   DESTINATION ${SYSCONFDIR}/zypp/apt-packagemap.d
 )
+
