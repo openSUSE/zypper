@@ -63,7 +63,7 @@ BuildRequires:  boost-devel
 %endif
 BuildRequires:  dejagnu
 BuildRequires:  doxygen
-BuildRequires:  gcc-c++ >= 4.6
+BuildRequires:  gcc-c++ >= 7
 BuildRequires:  gettext-devel
 BuildRequires:  graphviz
 BuildRequires:  libxml2-devel

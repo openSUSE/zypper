@@ -18,7 +18,7 @@ OPTION (EXPORT_NG_API "Export experimental libzypp API" OFF)
 #--------------------------------------------------------------------------------
 SET (have_system x)
 
-set (CMAKE_CXX_STANDARD 14)
+set (CMAKE_CXX_STANDARD 17)
 
 IF (DEBIAN)
   MESSAGE (STATUS "Building for Debian")
