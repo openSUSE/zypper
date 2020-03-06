@@ -55,7 +55,7 @@ namespace zypp
   /** std::set ordering (less semantic) */
   struct SameFetcherIndex
   {
-    bool operator()( const FetcherIndex_Ptr & lhs, const FetcherIndex_Ptr & rhs )
+    bool operator()( const FetcherIndex_Ptr & lhs, const FetcherIndex_Ptr & rhs ) const
     {
       if ( lhs == rhs )
         return false; // incl. NULL == NULL
