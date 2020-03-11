@@ -14,6 +14,7 @@
 #include "update.h"
 #include "main.h"
 #include "global-settings.h"
+#include "utils/misc.h"
 
 using namespace zypp;
 typedef std::set<PoolItem> Candidates;
@@ -796,7 +797,7 @@ void list_updates(Zypper & zypper, const ResKindSet & kinds, bool best_effort, b
     for ( const PoolItem & pi : candidates )
     {
       TableRow tr (cols);
-      tr << "v";
+      tr << computeStatusIndicator( pi );
       if (!hide_repo) {
         tr << pi.repoInfo().asUserString();
       }

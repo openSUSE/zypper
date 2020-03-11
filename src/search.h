@@ -47,9 +47,8 @@ struct FillSearchTableSelectable
 {
   // the table used for output
   Table * _table;
-  /** Aliases of repos specified as --repo */
-  std::set<std::string> _repos;
-  TriBool inst_notinst;
+  TriBool _instNotinst;
+  bool _tagForeign;		//!< see NOTE in operator()
 
   FillSearchTableSelectable(
       Table & table, TriBool installed_only = indeterminate);
