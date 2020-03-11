@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-03-11 12:14+0100\n"
-"PO-Revision-Date: 2019-11-29 07:54+0000\n"
+"PO-Revision-Date: 2020-03-11 14:55+0000\n"
 "Last-Translator: Yasuhiko Kamata <belphegor@belbel.or.jp>\n"
 "Language-Team: Japanese <https://l10n.opensuse.org/projects/zypper/master/ja/"
 ">\n"
@@ -6753,7 +6753,7 @@ msgstr ""
 msgid ""
 "Abbreviated commandline options will not be supported in future versions. "
 "Please use %2% instead of %1% ."
-msgstr ""
+msgstr "コマンドラインオプションの省略形は将来バージョンでサポートされなくなる予定です。 %1% ではなく %2% をお使いください。"
 
 #. translators: %s is "help" or "zypper help" depending on whether
 #. zypper shell is running or not
