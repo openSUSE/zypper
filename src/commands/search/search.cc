@@ -285,6 +285,13 @@ int SearchCmd::execute( Zypper &zypper, const std::vector<std::string> &position
     inst_notinst = true;
     zypper.configNoConst().no_refresh = true;
     //  query.setInstalledOnly();
+    // NOTE Not sure why setInstalledOnly was disabled. Anyway, if you consider
+    // to re-enable it, check (at least) FillSearchTableSolvable. The code there
+    // discards an installed item if an identicalAvailable is present, expecting
+    // that the query will deliver this too (even if inst_notinst == true).
+    // Maybe done to print the correct repo (rather than @System), but if that's
+    // all, the overhead of processing all available (and discarding most of them)
+    // is bigger than chacking for an identicalAvailable when printing the installed.
   }
 
   switch ( _mode  ) {

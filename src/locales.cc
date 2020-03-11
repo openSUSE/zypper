@@ -206,12 +206,7 @@ namespace
     for_( it, myLocale.selectableBegin(), myLocale.selectableEnd() )
     {
       TableRow tr(3);
-      zypp::ui::Status status = (*it)->status();
-
-      if ( status == zypp::ui::S_KeepInstalled || status == zypp::ui::S_Protected )
-	tr << "i";
-      else
-	tr << " ";
+      tr << computeStatusIndicator( *(*it) );
       tr << (*it)->name();
       tr << (*it)->theObj()->summary();
 
