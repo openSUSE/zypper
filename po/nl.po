@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypper.nl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-03-11 12:14+0100\n"
-"PO-Revision-Date: 2019-11-29 00:54+0000\n"
+"PO-Revision-Date: 2020-03-11 14:55+0000\n"
 "Last-Translator: Freek de Kruijf <freek@opensuse.org>\n"
 "Language-Team: Dutch <https://l10n.opensuse.org/projects/zypper/master/nl/>\n"
 "Language: nl\n"
@@ -6969,6 +6969,8 @@ msgid ""
 "Abbreviated commandline options will not be supported in future versions. "
 "Please use %2% instead of %1% ."
 msgstr ""
+"Afgekorte opties op de opdrachtregel zulenl in toekomstige versies niet "
+"worden ondersteund. Gebruik %2% in plaats van %1% ."
 
 #. translators: %s is "help" or "zypper help" depending on whether
 #. zypper shell is running or not
