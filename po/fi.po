@@ -22,11 +22,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper.fi\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-28 17:54+0100\n"
+"POT-Creation-Date: 2020-03-11 12:14+0100\n"
 "PO-Revision-Date: 2020-01-13 20:00+0000\n"
 "Last-Translator: Tommi Nieminen <software@legisign.org>\n"
-"Language-Team: Finnish <https://l10n.opensuse.org/projects/zypper/master/fi/>"
-"\n"
+"Language-Team: Finnish <https://l10n.opensuse.org/projects/zypper/master/fi/"
+">\n"
 "Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -539,7 +539,7 @@ msgstr "Esimerkkejä:"
 msgid "Arguments:"
 msgstr "Parametrit:"
 
-#: src/commands/commandhelpformatter.h:123 src/utils/flags/zyppflags.cc:577
+#: src/commands/commandhelpformatter.h:123 src/utils/flags/zyppflags.cc:624
 msgid "Command options:"
 msgstr "Komentovalinnat:"
 
@@ -1796,7 +1796,8 @@ msgid "The following item is locked and will not be changed by any action:"
 msgid_plural ""
 "The following %d items are locked and will not be changed by any action:"
 msgstr[0] "Seuraava kohde on lukittu, eikä sitä muuteta millään toimella:"
-msgstr[1] "Seuraavat %d kohteet on lukittu, eikä niitä muuteta millään toimella:"
+msgstr[1] ""
+"Seuraavat %d kohteet on lukittu, eikä niitä muuteta millään toimella:"
 
 #. always as plain name list
 #. translators: used as 'tag:' (i.e. followed by ':')
@@ -2016,7 +2017,7 @@ msgstr "PackageKit on yhä toiminnassa (todennäköisesti kiireinen)."
 msgid "Try again?"
 msgstr "Yritetäänkö uudelleen?"
 
-#: src/Zypper.cc:248 src/Zypper.cc:712 src/commands/basecommand.cc:282
+#: src/Zypper.cc:248 src/Zypper.cc:715 src/commands/basecommand.cc:282
 msgid "Unexpected exception."
 msgstr "Odottamaton poikkeus."
 
@@ -2047,12 +2048,12 @@ msgstr ""
 
 #. TranslatorExplanation The %s is "--plus-repo"
 #. TranslatorExplanation The %s is "--option-name"
-#: src/Zypper.cc:535 src/Zypper.cc:584
+#: src/Zypper.cc:535 src/Zypper.cc:587
 #, c-format, boost-format
 msgid "The %s option has no effect here, ignoring."
 msgstr "Valinta %s ei vaikuta täällä. Jätetään huomioimatta."
 
-#: src/Zypper.cc:655
+#: src/Zypper.cc:658
 msgid "Non-option program arguments: "
 msgstr "Pakolliset ohjelman parametrit: "
 
@@ -2535,19 +2536,19 @@ msgstr ""
 "Nouda ”de”- ja ”en”-kielikoodeille käytettävissä olevien pakettien luettelo:"
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/commands/locale/removelocalecmd.cc:12
+#: src/commands/locale/removelocalecmd.cc:18
 msgid "removelocale (rloc) [OPTIONS] <LOCALE> ..."
 msgstr "removelocale (rloc) [VALINNAT] <MAA-ASETUS>…"
 
-#: src/commands/locale/removelocalecmd.cc:13
+#: src/commands/locale/removelocalecmd.cc:19
 msgid "Remove locale(s) from requested locales."
 msgstr "Poista maa-asetukset pyydetyistä."
 
-#: src/commands/locale/removelocalecmd.cc:14
+#: src/commands/locale/removelocalecmd.cc:20
 msgid "Remove given locale(s) from the list of supported languages."
 msgstr "Poista annetut maa-asetukset tuettujen kielten luettelosta."
 
-#: src/commands/locale/removelocalecmd.cc:29
+#: src/commands/locale/removelocalecmd.cc:35
 #, c-format, boost-format
 msgid ""
 "Specify locales which shall be removed by the language code. Get the list of "
@@ -2556,7 +2557,7 @@ msgstr ""
 "Määritä maa-asetukset, jotka kielikoodin perusteella poistetaan. Pyydettyjen "
 "maa-asetusten luettelon saat komennolla ”%s”."
 
-#: src/commands/locale/removelocalecmd.cc:40
+#: src/commands/locale/removelocalecmd.cc:46
 msgid "Do not remove corresponding packages for given locale(s)."
 msgstr "Älä poista annettuja maa-asetuksia vastaavia paketteja."
 
@@ -6834,9 +6835,16 @@ msgid "Legacy commandline option %1% detected. This option is ignored."
 msgstr ""
 "Havaittiin vanhentunut komentorivivalitsin %1%. Valitsin jätetään huomiotta."
 
+#: src/utils/messages.cc:123
+#, boost-format
+msgid ""
+"Abbreviated commandline options will not be supported in future versions. "
+"Please use %2% instead of %1% ."
+msgstr ""
+
 #. translators: %s is "help" or "zypper help" depending on whether
 #. zypper shell is running or not
-#: src/utils/messages.cc:135
+#: src/utils/messages.cc:141
 #, c-format, boost-format
 msgid "Type '%s' to get a list of global options and commands."
 msgstr "Kirjoita \"%s\" saadaksesi ohjeita komennoista ja parametreista."
@@ -6844,7 +6852,7 @@ msgstr "Kirjoita \"%s\" saadaksesi ohjeita komennoista ja parametreista."
 #. translators: %1% is the name of an (unknown) command
 #. translators: %2% something providing more info (like 'zypper help subcommand')
 #. translators: The word 'subcommand' also refers to a zypper command and should not be translated.
-#: src/utils/messages.cc:142
+#: src/utils/messages.cc:148
 #, boost-format
 msgid ""
 "In case '%1%' is not a typo it's probably not a built-in command, but "
@@ -6855,7 +6863,7 @@ msgstr ""
 
 #. translators: %1% and %2% are plug-in packages which might provide it.
 #. translators: The word 'subcommand' also refers to a zypper command and should not be translated.
-#: src/utils/messages.cc:149
+#: src/utils/messages.cc:155
 #, boost-format
 msgid ""
 "In this case a specific package providing the subcommand needs to be "

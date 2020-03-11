@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-28 17:54+0100\n"
+"POT-Creation-Date: 2020-03-11 12:14+0100\n"
 "PO-Revision-Date: 2019-11-29 07:54+0000\n"
 "Last-Translator: Yasuhiko Kamata <belphegor@belbel.or.jp>\n"
 "Language-Team: Japanese <https://l10n.opensuse.org/projects/zypper/master/ja/"
@@ -518,7 +518,7 @@ msgstr "例:"
 msgid "Arguments:"
 msgstr "パラメータ:"
 
-#: src/commands/commandhelpformatter.h:123 src/utils/flags/zyppflags.cc:577
+#: src/commands/commandhelpformatter.h:123 src/utils/flags/zyppflags.cc:624
 msgid "Command options:"
 msgstr "コマンドオプション:"
 
@@ -1912,7 +1912,7 @@ msgstr "PackageKitが稼働中です(おそらくビジーです)。"
 msgid "Try again?"
 msgstr "再試行しますか？"
 
-#: src/Zypper.cc:248 src/Zypper.cc:712 src/commands/basecommand.cc:282
+#: src/Zypper.cc:248 src/Zypper.cc:715 src/commands/basecommand.cc:282
 msgid "Unexpected exception."
 msgstr "予期しない例外が発生しました。"
 
@@ -1944,12 +1944,12 @@ msgstr ""
 
 #. TranslatorExplanation The %s is "--plus-repo"
 #. TranslatorExplanation The %s is "--option-name"
-#: src/Zypper.cc:535 src/Zypper.cc:584
+#: src/Zypper.cc:535 src/Zypper.cc:587
 #, c-format, boost-format
 msgid "The %s option has no effect here, ignoring."
 msgstr "%s オプションはここでは意味がありません。無視します。"
 
-#: src/Zypper.cc:655
+#: src/Zypper.cc:658
 msgid "Non-option program arguments: "
 msgstr "オプション以外のプログラム引数: "
 
@@ -2444,19 +2444,19 @@ msgid "Get the list of packages which are available for 'de' and 'en':"
 msgstr "'de' と 'en' の両方に対して、利用可能なパッケージを表示します:"
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/commands/locale/removelocalecmd.cc:12
+#: src/commands/locale/removelocalecmd.cc:18
 msgid "removelocale (rloc) [OPTIONS] <LOCALE> ..."
 msgstr "removelocale (rloc) [オプション] <ロケール> ..."
 
-#: src/commands/locale/removelocalecmd.cc:13
+#: src/commands/locale/removelocalecmd.cc:19
 msgid "Remove locale(s) from requested locales."
 msgstr "指定したロケールを削除します。"
 
-#: src/commands/locale/removelocalecmd.cc:14
+#: src/commands/locale/removelocalecmd.cc:20
 msgid "Remove given locale(s) from the list of supported languages."
 msgstr "指定したロケールを、必要なロケールの一覧から削除します。"
 
-#: src/commands/locale/removelocalecmd.cc:29
+#: src/commands/locale/removelocalecmd.cc:35
 #, c-format, boost-format
 msgid ""
 "Specify locales which shall be removed by the language code. Get the list of "
@@ -2465,7 +2465,7 @@ msgstr ""
 "削除すべきロケールを、言語コードで指定します。利用可能なロケールの一覧は、 "
 "'%s' を実行することで表示することができます。"
 
-#: src/commands/locale/removelocalecmd.cc:40
+#: src/commands/locale/removelocalecmd.cc:46
 msgid "Do not remove corresponding packages for given locale(s)."
 msgstr "指定したロケールに対するパッケージを削除しません。"
 
@@ -4925,9 +4925,10 @@ msgid ""
 "zypp/zypp.conf:multiversion.kernels which can be given as <version>, latest(-"
 "N), running, oldest(+N)."
 msgstr ""
-"/etc/zypp/zypp.conf 内の multiversion.kernels "
-"で指定された「保持すべきカーネル」の設定に従って、不要なカーネルを自動削除します。なお multiversion.kernels "
-"の値には、バージョン番号そのもののほか、新しいものから n 個分や古いものから n 個分のように設定することができます。"
+"/etc/zypp/zypp.conf 内の multiversion.kernels で指定された「保持すべきカーネ"
+"ル」の設定に従って、不要なカーネルを自動削除します。なお multiversion."
+"kernels の値には、バージョン番号そのもののほか、新しいものから n 個分や古いも"
+"のから n 個分のように設定することができます。"
 
 #: src/commands/utils/purge-kernels.cc:51
 msgid "Preparing to purge obsolete kernels..."
@@ -6747,9 +6748,16 @@ msgstr ""
 "古い形式のコマンドラインオプション %1% が指定されています。このオプションは無"
 "視されます。"
 
+#: src/utils/messages.cc:123
+#, boost-format
+msgid ""
+"Abbreviated commandline options will not be supported in future versions. "
+"Please use %2% instead of %1% ."
+msgstr ""
+
 #. translators: %s is "help" or "zypper help" depending on whether
 #. zypper shell is running or not
-#: src/utils/messages.cc:135
+#: src/utils/messages.cc:141
 #, c-format, boost-format
 msgid "Type '%s' to get a list of global options and commands."
 msgstr ""
@@ -6758,7 +6766,7 @@ msgstr ""
 #. translators: %1% is the name of an (unknown) command
 #. translators: %2% something providing more info (like 'zypper help subcommand')
 #. translators: The word 'subcommand' also refers to a zypper command and should not be translated.
-#: src/utils/messages.cc:142
+#: src/utils/messages.cc:148
 #, boost-format
 msgid ""
 "In case '%1%' is not a typo it's probably not a built-in command, but "
@@ -6770,7 +6778,7 @@ msgstr ""
 
 #. translators: %1% and %2% are plug-in packages which might provide it.
 #. translators: The word 'subcommand' also refers to a zypper command and should not be translated.
-#: src/utils/messages.cc:149
+#: src/utils/messages.cc:155
 #, boost-format
 msgid ""
 "In this case a specific package providing the subcommand needs to be "

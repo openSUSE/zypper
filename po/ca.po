@@ -8,11 +8,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-28 17:54+0100\n"
+"POT-Creation-Date: 2020-03-11 12:14+0100\n"
 "PO-Revision-Date: 2020-02-12 17:55+0000\n"
 "Last-Translator: David Medina <medipas@gmail.com>\n"
-"Language-Team: Catalan <https://l10n.opensuse.org/projects/zypper/master/ca/>"
-"\n"
+"Language-Team: Catalan <https://l10n.opensuse.org/projects/zypper/master/ca/"
+">\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -520,7 +520,7 @@ msgstr "Exemples:"
 msgid "Arguments:"
 msgstr "Arguments:"
 
-#: src/commands/commandhelpformatter.h:123 src/utils/flags/zyppflags.cc:577
+#: src/commands/commandhelpformatter.h:123 src/utils/flags/zyppflags.cc:624
 msgid "Command options:"
 msgstr "Opcions de l'ordre:"
 
@@ -2009,7 +2009,7 @@ msgstr "El PackageKit encara està actiu (probablement ocupat)."
 msgid "Try again?"
 msgstr "Ho torno a intentar?"
 
-#: src/Zypper.cc:248 src/Zypper.cc:712 src/commands/basecommand.cc:282
+#: src/Zypper.cc:248 src/Zypper.cc:715 src/commands/basecommand.cc:282
 msgid "Unexpected exception."
 msgstr "Excepció inesperada."
 
@@ -2039,12 +2039,12 @@ msgstr ""
 
 #. TranslatorExplanation The %s is "--plus-repo"
 #. TranslatorExplanation The %s is "--option-name"
-#: src/Zypper.cc:535 src/Zypper.cc:584
+#: src/Zypper.cc:535 src/Zypper.cc:587
 #, c-format, boost-format
 msgid "The %s option has no effect here, ignoring."
 msgstr "L'opció %s no té cap efecte aquí, ignorant-la."
 
-#: src/Zypper.cc:655
+#: src/Zypper.cc:658
 msgid "Non-option program arguments: "
 msgstr "Arguments del programa sense opcions: "
 
@@ -2541,19 +2541,19 @@ msgstr ""
 "\":"
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/commands/locale/removelocalecmd.cc:12
+#: src/commands/locale/removelocalecmd.cc:18
 msgid "removelocale (rloc) [OPTIONS] <LOCALE> ..."
 msgstr "removelocale (rloc) [OPCIONS] <LLENGUA> ..."
 
-#: src/commands/locale/removelocalecmd.cc:13
+#: src/commands/locale/removelocalecmd.cc:19
 msgid "Remove locale(s) from requested locales."
 msgstr "Suprimeix llengües de les llengües sol·licitades."
 
-#: src/commands/locale/removelocalecmd.cc:14
+#: src/commands/locale/removelocalecmd.cc:20
 msgid "Remove given locale(s) from the list of supported languages."
 msgstr "Suprimeix llengües específiques de la llista de llengües admeses."
 
-#: src/commands/locale/removelocalecmd.cc:29
+#: src/commands/locale/removelocalecmd.cc:35
 #, c-format, boost-format
 msgid ""
 "Specify locales which shall be removed by the language code. Get the list of "
@@ -2562,7 +2562,7 @@ msgstr ""
 "Especifiqueu les llengües que s'han de suprimir segons el codi de llengua. "
 "Obteniu la llista de llengües sol·licitades amb l'ordre \"%s\"."
 
-#: src/commands/locale/removelocalecmd.cc:40
+#: src/commands/locale/removelocalecmd.cc:46
 msgid "Do not remove corresponding packages for given locale(s)."
 msgstr ""
 "No suprimeixis els paquets corresponents de les llengües especificades."
@@ -4955,8 +4955,8 @@ msgid ""
 "result/localpath@path'."
 msgstr ""
 "A la sortida XML s'escriu un node <download-result> per cada paquet que el "
-"zypper ha provat de descarregar. Si hi ha èxit, el camí local és a \""
-"download-result/localpath@path\"."
+"zypper ha provat de descarregar. Si hi ha èxit, el camí local és a "
+"\"download-result/localpath@path\"."
 
 #. translators: --all-matches
 #: src/commands/utils/download.cc:168
@@ -6873,9 +6873,16 @@ msgstr ""
 "S'ha detectat una opció de línia d'ordres de llegat: %1%. Aquesta opció "
 "s'ignora."
 
+#: src/utils/messages.cc:123
+#, boost-format
+msgid ""
+"Abbreviated commandline options will not be supported in future versions. "
+"Please use %2% instead of %1% ."
+msgstr ""
+
 #. translators: %s is "help" or "zypper help" depending on whether
 #. zypper shell is running or not
-#: src/utils/messages.cc:135
+#: src/utils/messages.cc:141
 #, c-format, boost-format
 msgid "Type '%s' to get a list of global options and commands."
 msgstr "Escriviu \"%s\" per obtenir una llista global d'opcions i ordres."
@@ -6883,7 +6890,7 @@ msgstr "Escriviu \"%s\" per obtenir una llista global d'opcions i ordres."
 #. translators: %1% is the name of an (unknown) command
 #. translators: %2% something providing more info (like 'zypper help subcommand')
 #. translators: The word 'subcommand' also refers to a zypper command and should not be translated.
-#: src/utils/messages.cc:142
+#: src/utils/messages.cc:148
 #, boost-format
 msgid ""
 "In case '%1%' is not a typo it's probably not a built-in command, but "
@@ -6895,7 +6902,7 @@ msgstr ""
 
 #. translators: %1% and %2% are plug-in packages which might provide it.
 #. translators: The word 'subcommand' also refers to a zypper command and should not be translated.
-#: src/utils/messages.cc:149
+#: src/utils/messages.cc:155
 #, boost-format
 msgid ""
 "In this case a specific package providing the subcommand needs to be "

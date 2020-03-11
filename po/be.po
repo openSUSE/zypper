@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-28 17:54+0100\n"
+"POT-Creation-Date: 2020-03-11 12:14+0100\n"
 "PO-Revision-Date: 2020-03-01 14:55+0000\n"
 "Last-Translator: Yahor Pravdikov <mocachin@protonmail.com>\n"
 "Language-Team: Belarusian <https://l10n.opensuse.org/projects/zypper/master/"
@@ -15,8 +15,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<="
-"4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: Weblate 3.6.1\n"
 
 #: src/SolverRequester.h:52
@@ -525,7 +525,7 @@ msgstr "Прыклады:"
 msgid "Arguments:"
 msgstr "Аргументы:"
 
-#: src/commands/commandhelpformatter.h:123 src/utils/flags/zyppflags.cc:577
+#: src/commands/commandhelpformatter.h:123 src/utils/flags/zyppflags.cc:624
 msgid "Command options:"
 msgstr "Параметры каманды:"
 
@@ -755,7 +755,7 @@ msgid "Subcommands:"
 msgstr "Падкаманды:"
 
 #: src/Command.cc:292
-#, boost-format, c-format
+#, c-format, boost-format
 msgid "Unknown command '%s'"
 msgstr "Невядомая каманда: '%s'"
 
@@ -880,7 +880,8 @@ msgstr ""
 #. translators: --reposd-dir, -D <DIR>
 #: src/Config.cc:487
 msgid "Use alternative repository definition file directory."
-msgstr "Выкарыстоўваць альтэрнатыўны каталог файлаў з азначэннямі рэпазіторыяў."
+msgstr ""
+"Выкарыстоўваць альтэрнатыўны каталог файлаў з азначэннямі рэпазіторыяў."
 
 #. translators: --cache-dir, -C <DIR>
 #: src/Config.cc:502
@@ -1053,12 +1054,12 @@ msgid "Patch '%s' not found."
 msgstr "Выпраўленне '%s' не знойдзена."
 
 #: src/RequestFeedback.cc:50
-#, boost-format, c-format
+#, c-format, boost-format
 msgid "Product '%s' not found."
 msgstr "Прадукт '%s' не знойдзены."
 
 #: src/RequestFeedback.cc:52
-#, boost-format, c-format
+#, c-format, boost-format
 msgid "Pattern '%s' not found."
 msgstr "Шаблон '%s' не знойдзены."
 
@@ -1069,7 +1070,7 @@ msgstr "Пакет з зыходным кодам '%s' не знойдзены."
 
 #. just in case
 #: src/RequestFeedback.cc:56
-#, boost-format, c-format
+#, c-format, boost-format
 msgid "Object '%s' not found."
 msgstr "Аб'ект '%s' не знойдзены."
 
@@ -1107,7 +1108,7 @@ msgstr "Аб'ект '%s' не знойдзены ў рэпазіторыях, я
 
 #. translators: meaning a package %s or provider of capability %s
 #: src/RequestFeedback.cc:76
-#, boost-format, c-format
+#, c-format, boost-format
 msgid "No provider of '%s' found."
 msgstr "Пастаўшчык '%s' не знойдзены."
 
@@ -2017,7 +2018,7 @@ msgstr ""
 msgid "Try again?"
 msgstr "Запуск усталёўкі..."
 
-#: src/Zypper.cc:248 src/Zypper.cc:712 src/commands/basecommand.cc:282
+#: src/Zypper.cc:248 src/Zypper.cc:715 src/commands/basecommand.cc:282
 msgid "Unexpected exception."
 msgstr ""
 
@@ -2045,12 +2046,12 @@ msgstr ""
 
 #. TranslatorExplanation The %s is "--plus-repo"
 #. TranslatorExplanation The %s is "--option-name"
-#: src/Zypper.cc:535 src/Zypper.cc:584
+#: src/Zypper.cc:535 src/Zypper.cc:587
 #, c-format, boost-format
 msgid "The %s option has no effect here, ignoring."
 msgstr ""
 
-#: src/Zypper.cc:655
+#: src/Zypper.cc:658
 msgid "Non-option program arguments: "
 msgstr ""
 
@@ -2494,26 +2495,26 @@ msgid "Get the list of packages which are available for 'de' and 'en':"
 msgstr ""
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/commands/locale/removelocalecmd.cc:12
+#: src/commands/locale/removelocalecmd.cc:18
 msgid "removelocale (rloc) [OPTIONS] <LOCALE> ..."
 msgstr ""
 
-#: src/commands/locale/removelocalecmd.cc:13
+#: src/commands/locale/removelocalecmd.cc:19
 msgid "Remove locale(s) from requested locales."
 msgstr ""
 
-#: src/commands/locale/removelocalecmd.cc:14
+#: src/commands/locale/removelocalecmd.cc:20
 msgid "Remove given locale(s) from the list of supported languages."
 msgstr ""
 
-#: src/commands/locale/removelocalecmd.cc:29
+#: src/commands/locale/removelocalecmd.cc:35
 #, c-format, boost-format
 msgid ""
 "Specify locales which shall be removed by the language code. Get the list of "
 "requested locales by calling '%s'."
 msgstr ""
 
-#: src/commands/locale/removelocalecmd.cc:40
+#: src/commands/locale/removelocalecmd.cc:46
 msgid "Do not remove corresponding packages for given locale(s)."
 msgstr ""
 
@@ -6589,9 +6590,16 @@ msgstr ""
 msgid "Legacy commandline option %1% detected. This option is ignored."
 msgstr ""
 
+#: src/utils/messages.cc:123
+#, boost-format
+msgid ""
+"Abbreviated commandline options will not be supported in future versions. "
+"Please use %2% instead of %1% ."
+msgstr ""
+
 #. translators: %s is "help" or "zypper help" depending on whether
 #. zypper shell is running or not
-#: src/utils/messages.cc:135
+#: src/utils/messages.cc:141
 #, c-format, boost-format
 msgid "Type '%s' to get a list of global options and commands."
 msgstr ""
@@ -6599,7 +6607,7 @@ msgstr ""
 #. translators: %1% is the name of an (unknown) command
 #. translators: %2% something providing more info (like 'zypper help subcommand')
 #. translators: The word 'subcommand' also refers to a zypper command and should not be translated.
-#: src/utils/messages.cc:142
+#: src/utils/messages.cc:148
 #, boost-format
 msgid ""
 "In case '%1%' is not a typo it's probably not a built-in command, but "
@@ -6608,7 +6616,7 @@ msgstr ""
 
 #. translators: %1% and %2% are plug-in packages which might provide it.
 #. translators: The word 'subcommand' also refers to a zypper command and should not be translated.
-#: src/utils/messages.cc:149
+#: src/utils/messages.cc:155
 #, boost-format
 msgid ""
 "In this case a specific package providing the subcommand needs to be "

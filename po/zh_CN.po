@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-28 17:54+0100\n"
+"POT-Creation-Date: 2020-03-11 12:14+0100\n"
 "PO-Revision-Date: 2020-02-28 12:55+0000\n"
 "Last-Translator: Marguerite Su <i@marguerite.su>\n"
 "Language-Team: Chinese (China) <https://l10n.opensuse.org/projects/zypper/"
@@ -39,7 +39,9 @@ msgid ""
 "after the data were signed. Accepting data with no, wrong or unknown "
 "signature can lead to a corrupted system and in extreme cases even to a "
 "system compromise."
-msgstr "数据签名可让用户验证签名后的数据是否被篡改。使用无签名、签名校验有误或未知签署方的数据可能造成系统毁损，极端情况下甚至导致系统被入侵。"
+msgstr ""
+"数据签名可让用户验证签名后的数据是否被篡改。使用无签名、签名校验有误或未知签"
+"署方的数据可能造成系统毁损，极端情况下甚至导致系统被入侵。"
 
 #. translator: %1% is a file name
 #: src/callbacks/keyring.h:40
@@ -53,14 +55,18 @@ msgstr "文件 '%1%' 是软件源的主索引文件。它确保了整个软件�
 msgid ""
 "We can't verify that no one meddled with this file, so it might not be "
 "trustworthy anymore! You should not continue unless you know it's safe."
-msgstr "我们无法核实该文件是否为外界所干涉，因而该文件或许已不再可信！除非您知道它是安全的，否则不应继续使用它。"
+msgstr ""
+"我们无法核实该文件是否为外界所干涉，因而该文件或许已不再可信！除非您知道它是"
+"安全的，否则不应继续使用它。"
 
 #: src/callbacks/keyring.h:51
 msgid ""
 "This file was modified after it has been signed. This may have been a "
 "malicious change, so it might not be trustworthy anymore! You should not "
 "continue unless you know it's safe."
-msgstr "该文件签名后被篡改过。那或许是一次恶意的篡改，因而该文件或许已不再可信！除非您知道它是安全的，否则不应继续使用它。"
+msgstr ""
+"该文件签名后被篡改过。那或许是一次恶意的篡改，因而该文件或许已不再可信！除非"
+"您知道它是安全的，否则不应继续使用它。"
 
 #: src/callbacks/keyring.h:79
 msgid "Repository:"
@@ -262,7 +268,9 @@ msgstr "文件 '%1%'（来自软件源 '%2%'）的签名校验失败。"
 msgid ""
 "The rpm database seems to contain old V3 version gpg keys which are "
 "meanwhile obsolete and considered insecure:"
-msgstr "该 RPM 数据库似乎含有旧的 V3 版本 GPG 密钥。这种密钥已被淘汰因此被公认为不安全："
+msgstr ""
+"该 RPM 数据库似乎含有旧的 V3 版本 GPG 密钥。这种密钥已被淘汰因此被公认为不安"
+"全："
 
 #: src/callbacks/keyring.h:444
 #, boost-format
@@ -274,7 +282,8 @@ msgstr "查看密钥调用 '%1%' 详情。"
 msgid ""
 "Unless you believe the key in question is still in use, you can remove it "
 "from the rpm database calling '%1%'."
-msgstr "除非您确信该问题密钥仍在使用，否则您可调用 '%1%' 从 RPM 数据中移除该密钥。"
+msgstr ""
+"除非您确信该问题密钥仍在使用，否则您可调用 '%1%' 从 RPM 数据中移除该密钥。"
 
 #: src/callbacks/keyring.h:470
 #, c-format, boost-format
@@ -305,7 +314,8 @@ msgstr ""
 msgid ""
 "Accepting packages with wrong checksums can lead to a corrupted system and "
 "in extreme cases even to a system compromise."
-msgstr "使用校验码错误的软件包可能造成系统毁损，极端情况下甚至会导致系统被入侵。"
+msgstr ""
+"使用校验码错误的软件包可能造成系统毁损，极端情况下甚至会导致系统被入侵。"
 
 #: src/callbacks/keyring.h:515
 #, boost-format
@@ -317,7 +327,8 @@ msgid ""
 "to unblock using this file on your own risk. Empty input will discard the "
 "file.\n"
 msgstr ""
-"然而若您确信校验码为 '%1%..' 的文件安全且正确，应用于此操作中，可输入该校验码的前 4 个字符来使用该文件但风险自负。不输入将丢弃该文件。\n"
+"然而若您确信校验码为 '%1%..' 的文件安全且正确，应用于此操作中，可输入该校验码"
+"的前 4 个字符来使用该文件但风险自负。不输入将丢弃该文件。\n"
 
 #. translators: A prompt option
 #: src/callbacks/keyring.h:522
@@ -441,7 +452,9 @@ msgid ""
 "Checking for file conflicts requires not installed packages to be downloaded "
 "in advance in order to access their file lists. See option '%1%' in the "
 "zypper manual page for details."
-msgstr "检查文件冲突需要先下载尚未安装的软件包以访问其文件列表。细节请参考 zypper 手册页中的 '%1%' 选项。"
+msgstr ""
+"检查文件冲突需要先下载尚未安装的软件包以访问其文件列表。细节请参考 zypper 手"
+"册页中的 '%1%' 选项。"
 
 #. TranslatorExplanation %1%(number of conflicts); detailed list follows
 #: src/callbacks/rpm.h:470
@@ -460,7 +473,9 @@ msgid ""
 "File conflicts happen when two packages attempt to install files with the "
 "same name but different contents. If you continue, conflicting files will be "
 "replaced losing the previous content."
-msgstr "当两个软件包试图安装同名但内容不同的文件时就会产生文件冲突。若您继续，将替换冲突的文件，并覆盖之前的内容。"
+msgstr ""
+"当两个软件包试图安装同名但内容不同的文件时就会产生文件冲突。若您继续，将替换"
+"冲突的文件，并覆盖之前的内容。"
 
 #. translator: %s is an other command: "This is an alias for 'zypper info -t patch'."
 #: src/commands/commandhelpformatter.h:94
@@ -476,7 +491,7 @@ msgstr "示例："
 msgid "Arguments:"
 msgstr "参数："
 
-#: src/commands/commandhelpformatter.h:123 src/utils/flags/zyppflags.cc:577
+#: src/commands/commandhelpformatter.h:123 src/utils/flags/zyppflags.cc:624
 msgid "Command options:"
 msgstr "命令选项："
 
@@ -1821,7 +1836,7 @@ msgstr "PackageKit 仍在运行（或许正忙）。"
 msgid "Try again?"
 msgstr "重试吗？"
 
-#: src/Zypper.cc:248 src/Zypper.cc:712 src/commands/basecommand.cc:282
+#: src/Zypper.cc:248 src/Zypper.cc:715 src/commands/basecommand.cc:282
 msgid "Unexpected exception."
 msgstr "意外异常。"
 
@@ -1851,12 +1866,12 @@ msgstr ""
 
 #. TranslatorExplanation The %s is "--plus-repo"
 #. TranslatorExplanation The %s is "--option-name"
-#: src/Zypper.cc:535 src/Zypper.cc:584
+#: src/Zypper.cc:535 src/Zypper.cc:587
 #, c-format, boost-format
 msgid "The %s option has no effect here, ignoring."
 msgstr "%s 选项在此无效，正在忽略。"
 
-#: src/Zypper.cc:655
+#: src/Zypper.cc:658
 msgid "Non-option program arguments: "
 msgstr "无选项程序参数： "
 
@@ -2316,26 +2331,26 @@ msgid "Get the list of packages which are available for 'de' and 'en':"
 msgstr "获取 ‘de’ 和 ‘en’ 语言可用的软件包列表："
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/commands/locale/removelocalecmd.cc:12
+#: src/commands/locale/removelocalecmd.cc:18
 msgid "removelocale (rloc) [OPTIONS] <LOCALE> ..."
 msgstr "removelocale (rloc) [选项] <区域> ..."
 
-#: src/commands/locale/removelocalecmd.cc:13
+#: src/commands/locale/removelocalecmd.cc:19
 msgid "Remove locale(s) from requested locales."
 msgstr "从所请求区域中移除区域。"
 
-#: src/commands/locale/removelocalecmd.cc:14
+#: src/commands/locale/removelocalecmd.cc:20
 msgid "Remove given locale(s) from the list of supported languages."
 msgstr "从所支持语言列表中移除给定区域。"
 
-#: src/commands/locale/removelocalecmd.cc:29
+#: src/commands/locale/removelocalecmd.cc:35
 #, c-format, boost-format
 msgid ""
 "Specify locales which shall be removed by the language code. Get the list of "
 "requested locales by calling '%s'."
 msgstr "通过语言代码指定应移除的区域。可调用 ‘%s’ 获取所请求区域列表。"
 
-#: src/commands/locale/removelocalecmd.cc:40
+#: src/commands/locale/removelocalecmd.cc:46
 msgid "Do not remove corresponding packages for given locale(s)."
 msgstr "不移除给定区域的相关软件包。"
 
@@ -4675,8 +4690,8 @@ msgid ""
 "zypp/zypp.conf:multiversion.kernels which can be given as <version>, latest(-"
 "N), running, oldest(+N)."
 msgstr ""
-"根据 /etc/zypp/zypp.conf:multiversion.kernels 中要保留的内核列表（可能会以 "
-"<版本>、latest(-N)、running、oldest(+N) 指定）自动移除安装的内核。"
+"根据 /etc/zypp/zypp.conf:multiversion.kernels 中要保留的内核列表（可能会以 <"
+"版本>、latest(-N)、running、oldest(+N) 指定）自动移除安装的内核。"
 
 #: src/commands/utils/purge-kernels.cc:51
 msgid "Preparing to purge obsolete kernels..."
@@ -6417,9 +6432,16 @@ msgstr "检测到了过时的命令行选项 %1%。请使用 %2% 代替。"
 msgid "Legacy commandline option %1% detected. This option is ignored."
 msgstr "检测到了过时的命令行选项 %1%。该选项已被忽略。"
 
+#: src/utils/messages.cc:123
+#, boost-format
+msgid ""
+"Abbreviated commandline options will not be supported in future versions. "
+"Please use %2% instead of %1% ."
+msgstr ""
+
 #. translators: %s is "help" or "zypper help" depending on whether
 #. zypper shell is running or not
-#: src/utils/messages.cc:135
+#: src/utils/messages.cc:141
 #, c-format, boost-format
 msgid "Type '%s' to get a list of global options and commands."
 msgstr "输入 '%s' 获取全局选项和命令的列表。"
@@ -6427,7 +6449,7 @@ msgstr "输入 '%s' 获取全局选项和命令的列表。"
 #. translators: %1% is the name of an (unknown) command
 #. translators: %2% something providing more info (like 'zypper help subcommand')
 #. translators: The word 'subcommand' also refers to a zypper command and should not be translated.
-#: src/utils/messages.cc:142
+#: src/utils/messages.cc:148
 #, boost-format
 msgid ""
 "In case '%1%' is not a typo it's probably not a built-in command, but "
@@ -6438,7 +6460,7 @@ msgstr ""
 
 #. translators: %1% and %2% are plug-in packages which might provide it.
 #. translators: The word 'subcommand' also refers to a zypper command and should not be translated.
-#: src/utils/messages.cc:149
+#: src/utils/messages.cc:155
 #, boost-format
 msgid ""
 "In this case a specific package providing the subcommand needs to be "
