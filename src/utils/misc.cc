@@ -116,6 +116,11 @@ std::string i18nPatchStatus( const PoolItem & pi_r )
   static const char * tApplied		= /* translator: patch status */ _("applied");
   static const char * tNotneeded	= /* translator: patch status */ _("not needed");
   static const char * tUndetermined	= /* translator: patch status */ _("undetermined");	// pi_r is no patch!
+  static const char * tRetracted	= /* translator: patch status */ _("retracted");
+
+  if ( pi_r.isRetracted() )
+    return NEGATIVEString( tRetracted ).str();
+
   switch ( pi_r.status().validate() )
   {
     case ResStatus::BROKEN:
@@ -145,6 +150,10 @@ const char * textPatchStatus( const PoolItem & pi_r )
   static const char * tApplied		= "applied";
   static const char * tNotneeded	= "not-needed";
   static const char * tUndetermined	= "undetermined";	// pi_r is no patch!
+  static const char * tRetracted	= "retracted";
+
+  if ( pi_r.isRetracted() )
+    return tRetracted;
 
   switch ( pi_r.status().validate() )
   {
