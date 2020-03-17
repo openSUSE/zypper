@@ -89,6 +89,8 @@ Zypper works with several types of resource objects, called 'resolvables'. A res
 	Depending on the kind of defect, patches are classified by 'category' and 'severity'. Commonly used values for 'category' are *security*, *recommended*, *optional*, *feature*, *document* or *yast*. Commonly used values for 'severity' are *critical*, *important*, *moderate*, *low* or *unspecified*.
 	+
 	Note that the *patch* command does 'not apply optional patches' (category *optional* or *feature*) by default. If you actually want to consider all optional patches as being needed, say *patch --with-optional*. Specific patches can be applied using the *install* command (e.g. *zypper install patch:openSUSE-2014-7*).
+	+
+	If the issuer decides to retract a released patch, the patch status will be shown as *retracted*. The packages provided by the retracted patch are still visible but also tagged as having been retracted (*R*). The resolver will avoid selecting retracted packages automatically. If you are sure that a retracted package should be installed on your system, you must explicitely select it.
 *pattern*::
 	A group of packages required or recommended to install some functionality.
 *product*::
@@ -751,7 +753,10 @@ Query Commands
 	*i*;;	installed automatically (by the resolver, see section *Automatically installed packages*)
 	*v*;;	a different version is installed
 	'empty';;	neither of the above cases
+	*!*;;	a patch in *needed* state
+	{nop};;	{nop}
 	.*l*;;	is shown in the 2nd column if the item is locked (see section *Package Locks Management*)
+	.*R*;;	is shown in the 2nd column if the item has been retracted (see *patch* in section *Package Types*)
 --
 +
 {nop}
