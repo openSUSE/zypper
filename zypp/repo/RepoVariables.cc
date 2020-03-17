@@ -400,6 +400,11 @@ namespace zypp
       private:
 	const std::string * _lookup( const std::string & name_r )
 	{
+	  // Safe guard in case the caller does not own a zypp instance. In this case
+	  // getZYpp()->getTarget() in checkOverride would create a zypp instance which
+	  // would clear the variables parsed so far.
+	  auto guard { getZYpp() };
+
 	  if ( empty() )	// at init / after reset
 	  {
 	    // load user definitions from vars.d
