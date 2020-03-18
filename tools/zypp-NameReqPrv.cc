@@ -60,59 +60,95 @@ int usage( const std::string & msg_r = std::string(), int exit_r = 100 )
 #define COL_WH  "\033[1;37m"
 #define COL_OFF "\033[0m"
 
-std::string colorId( sat::Solvable solv_r )
-{
-  // return solv_r.asString();
-  std::string ret;
-  if ( solv_r )
-  {
-    static str::Format fmt { COL_B "%s" COL_OFF "-" COL_G "%s" COL_OFF ".%s" };
-    ret = fmt % solv_r.name() % solv_r.edition() % solv_r.arch();
-  }
-  else
-  {
-    ret = ( solv_r.id() == sat::detail::systemSolvableId ?  "systemSolvable" : "noSolvable" );
-  }
-  return ret;
-}
-
-void tableOut( const std::string & s1 = std::string(),
-               const std::string & s2 = std::string(),
-               const std::string & s3 = std::string(),
-               const std::string & s4 = std::string(),
-               const std::string & s5 = std::string() )
-{
-  message << "  ";
-#define TABEL(N) static unsigned w##N = 0; if ( ! s##N.empty() ) w##N = std::max( w##N, unsigned(s##N.size()) ); message << str::form( " %-*s ", w##N, s##N.c_str() )
-#define TABER(N) static unsigned w##N = 0; if ( ! s##N.empty() ) w##N = std::max( w##N, unsigned(s##N.size()) ); message << str::form( " %*s ", w##N, s##N.c_str() )
-  TABER( 1 ); TABEL( 2 ); TABEL( 3 ); TABEL( 4 ); TABEL( 5 );
-#undef TABEL
-  message << endl;
-}
-
 struct PQSort
 {
   // std::less semantic
-  bool operator()( const PoolQuery::const_iterator & lhs, const PoolQuery::const_iterator & rhs ) const
+  bool operator()( const sat::Solvable & lhs, const sat::Solvable & rhs ) const
   {
     {
-      bool l = lhs->isSystem();
-      bool r = rhs->isSystem();
+      bool l = lhs.isSystem();
+      bool r = rhs.isSystem();
       if ( l != r )
 	return r;
     }
     {
-      std::string l( lhs->ident().asString() );
-      std::string r( rhs->ident().asString() );
+      IdString l { lhs.ident() };
+      IdString r { rhs.ident() };
       if ( l != r )
 	return l < r;
     }
-    return avo( PoolItem(*lhs), PoolItem(*rhs) );
-    return lhs->id() > rhs->id();
+    return avo( PoolItem(lhs), PoolItem(rhs) );
+    return lhs.id() > rhs.id();
   }
 
   ui::SelectableTraits::AVOrder avo;
 };
+
+struct Table
+{
+  void row( PoolQuery::const_iterator it_r )
+  {
+    //smax( _maxSID,  );
+    smax( _maxNAME, it_r->ident().size() + it_r->edition().size() + it_r->arch().size() );
+    smax( _maxREPO, it_r->repository().name().size(), it_r->repository().name() );
+    //smax( _maxTIME, );
+    //smax( _maxVEND, it_r->vendor().size() );
+
+    std::vector<std::string> & details { _map[*it_r] };
+    for_( match, it_r.matchesBegin(), it_r.matchesEnd() ) {
+      details.push_back( match->inSolvAttr().asString().substr( 9, 3 )+": " +match->asString() );
+    }
+  }
+
+  std::ostream & dumpOn( std::ostream & str ) const
+  {
+    #define S "  "
+
+    #define fmtSID  "%*d"
+    #define argSID  _maxSID, slv.id()
+
+    #define fmtNAME COL_B "%s" COL_OFF "-" COL_G "%s" COL_OFF ".%-*s"
+    #define argNAME slv.ident().c_str(), slv.edition().c_str(), _maxNAME-slv.ident().size()-slv.edition().size(), slv.arch().c_str()
+
+    #define fmtREPO "(%2d)%-*s"
+    #define argREPO slv.repository().info().priority(), _maxREPO, slv.repository().name().c_str()
+
+    #define fmtTIME "%10ld"
+    #define argTIME time_t( slv.isSystem() ? slv.installtime() : slv.buildtime() )
+
+    #define fmtVEND "%s"
+    #define argVEND slv.vendor().c_str()
+
+    std::string dind( _maxSID + _maxNAME+2/*-.*/ + 2*strlen(S), ' ' );
+
+    for ( const auto & el : _map ) {
+      sat::Solvable slv { el.first };
+      const char * tagCol = slv.isSystem() ? COL_M : ui::Selectable::get(slv)->identicalInstalled(PoolItem(slv)) ? COL_C : "";
+
+      str << str::form( "%s"    fmtSID S fmtNAME S "%s"    fmtREPO S fmtTIME S fmtVEND COL_OFF "\n",
+			tagCol, argSID,  argNAME,  tagCol, argREPO,  argTIME,  argVEND );
+
+      for ( const auto & d : el.second )
+	str << dind << d << endl;
+    }
+    return str;
+  }
+
+private:
+  static void smax( unsigned & var_r, unsigned val_r, std::string_view n = {} )
+  { if ( val_r > var_r ) var_r = val_r; }
+
+private:
+  unsigned _maxSID  = 7;	// size + indent
+  unsigned _maxNAME = 0;
+  unsigned _maxREPO = 0;
+  //unsigned _maxTIME = 10;
+  //unsigned _maxVEND = 0;
+  std::map<sat::Solvable, std::vector<std::string>, PQSort> _map;
+};
+
+inline std::ostream & operator<<( std::ostream & str, const Table & table_r )
+{ return table_r.dumpOn( str ); }
 
 ///////////////////////////////////////////////////////////////////
 
@@ -247,7 +283,6 @@ int main( int argc, char * argv[] )
       }
     }
   }
-
   ///////////////////////////////////////////////////////////////////
 
   bool ignorecase	( true );
@@ -385,28 +420,14 @@ int main( int argc, char * argv[] )
     << (conflicts?'c':'_') << (obsoletes?'o':'_') << (recommends?'m':'_') << (supplements?'s':'_') << (enhacements?'e':'_')
     << "] {" << endl;
 
-    std::set<PoolQuery::const_iterator,PQSort> qsorted;
+    Table t;
     for_( it, q.begin(), q.end() )
-      qsorted.insert( it );
-
-    for ( auto && it : qsorted )
     {
       if ( it->isKind( ResKind::srcpackage ) && !withSrcPackages )
 	continue;
-
-      tableOut( str::numstring( it->id() ), colorId(*it),
-		str::form( "(%d)%s", it->repository().info().priority(), it->repository().name().c_str() ),
-		str::numstring( PoolItem(*it)->buildtime() ) );
-      tableOut( "", "",
-		it->vendor().asString() );
-      if ( ! it.matchesEmpty() )
-      {
-	for_( match, it.matchesBegin(), it.matchesEnd() )
-	{
-	  tableOut( "", "", match->inSolvAttr().asString().substr( 9, 3 )+": " +match->asString() );
-	}
-      }
+      t.row( it );
     }
+    message << t << endl;
 
     message << "}" << endl;
   }
