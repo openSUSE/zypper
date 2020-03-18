@@ -208,7 +208,7 @@ MediaBlockList::checkChecksum(size_t blkno, const unsigned char *buf, size_t buf
   return verifyDigest(blkno, dig);
 }
 
-std::vector<unsigned char> MediaBlockList::getChecksum(size_t blkno)
+std::vector<unsigned char> MediaBlockList::getChecksum(size_t blkno) const
 {
   if ( !haveChecksum(blkno) )
     return {};

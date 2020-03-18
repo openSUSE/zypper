@@ -14,6 +14,7 @@
 #include <chrono>
 
 #include "WebServer.h"
+#include "TestTools.h"
 
 
 #define BOOST_TEST_REQ_ERR(REQ, EXPECERR) \
@@ -262,14 +263,14 @@ BOOST_DATA_TEST_CASE(nwdispatcher_http_download, bdata::make( withSSL ), withSSL
   BOOST_REQUIRE_MESSAGE( dig->create( zypp::Digest::sha1() ), "Unable to create Digest " );
 
   reqDLFile->transferSettings() = set;
-  reqDLFile->setDigest( dig );
-  reqDLFile->setExpectedChecksum( convertHexStrToVector("f1d2d2f924e986ac86fdf7b36c94bcdf32beec15") );
+  reqDLFile->addRequestRange(0, 0, dig, convertHexStrToVector("f1d2d2f924e986ac86fdf7b36c94bcdf32beec15") );
   disp.enqueue( reqDLFile );
   ev->run();
   BOOST_TEST_REQ_SUCCESS( reqDLFile );
 
   //modify the checksum -> request should fail now
-  reqDLFile->setExpectedChecksum( convertHexStrToVector("f1d2d2f924e986ac86fdf7b36c94bcdf32beec20") );
+  reqDLFile->resetRequestRanges();
+  reqDLFile->addRequestRange(0, 0, dig, convertHexStrToVector("f1d2d2f924e986ac86fdf7b36c94bcdf32beec20") );
   disp.enqueue( reqDLFile );
   ev->run();
   BOOST_TEST_REQ_ERR( reqDLFile, zyppng::NetworkRequestError::InvalidChecksum );
@@ -279,7 +280,7 @@ BOOST_DATA_TEST_CASE(nwdispatcher_http_download, bdata::make( withSSL ), withSSL
   reqDLFile = std::make_shared<zyppng::NetworkRequest>( weburl, targetFile.path() );
   reqDLFile->transferSettings() = set;
   reqDLFile->setUrl( weburl );
-  reqDLFile->setRequestRange( 0, 7 );
+  reqDLFile->addRequestRange( 0, 7 );
   disp.enqueue( reqDLFile );
   ev->run();
   BOOST_TEST_REQ_SUCCESS( reqDLFile );
@@ -331,3 +332,243 @@ BOOST_DATA_TEST_CASE(nwdispatcher_delay_download, bdata::make( withSSL ), withSS
   BOOST_TEST_REQ_ERR( reqDLFile, zyppng::NetworkRequestError::Timeout );
 }
 
+//Get a simple range from a existing file
+BOOST_DATA_TEST_CASE(nwdispatcher_multipart_dl, bdata::make( withSSL ), withSSL )
+{
+  auto ev = zyppng::EventDispatcher::createMain();
+  zyppng::NetworkRequestDispatcher disp;
+  disp.sigQueueFinished().connect( [&ev]( const zyppng::NetworkRequestDispatcher& ){
+    ev->quit();
+  });
+
+  disp.run();
+
+  WebServer web((zypp::Pathname(TESTS_SRC_DIR)/"zypp/data/Fetcher/remote-site").c_str(), 10001, withSSL );
+  BOOST_REQUIRE( web.start() );
+
+  auto weburl = web.url();
+  weburl.setPathName("/file-1.txt");
+
+  zyppng::TransferSettings set = web.transferSettings();
+  zypp::filesystem::TmpFile targetFile;
+
+  auto reqDLFile = std::make_shared<zyppng::NetworkRequest>( weburl, targetFile.path() );
+  reqDLFile->transferSettings() = set;
+  reqDLFile->setUrl( weburl );
+  reqDLFile->addRequestRange(  13, 4 );
+  reqDLFile->addRequestRange( 248, 6 );
+  reqDLFile->addRequestRange(  76, 9 );
+  disp.enqueue( reqDLFile );
+  ev->run();
+  auto err = reqDLFile->error();
+  BOOST_TEST_REQ_SUCCESS( reqDLFile );
+
+  std::string downloaded = TestTools::readFile ( targetFile.path() );
+  BOOST_REQUIRE( !downloaded.empty() );
+  BOOST_REQUIRE_EQUAL( std::string_view ( downloaded.data()+13 , 4 ), "SUSE" );
+  BOOST_REQUIRE_EQUAL( std::string_view ( downloaded.data()+248, 6 ), "TCP/IP" );
+  BOOST_REQUIRE_EQUAL( std::string_view ( downloaded.data()+76 , 9 ), "Slackware" );
+}
+
+struct RangeData {
+  off_t offset;
+  std::string payload;
+};
+
+auto makeMultiPartHandler ( std::vector<RangeData> &&values )
+{
+  return [ values = std::move(values) ]( WebServer::Request &r ){
+    const char *boundary = "THIS_STRING_SEPARATES";
+    r.rout << "Status: 206\r\n"
+              "Content-Type: multipart/byteranges; boundary="<<boundary<<"\r\n"
+                          "\r\n";
+
+    int fullSize = std::accumulate( values.begin(), values.end(), 0, []( const auto &val1, const auto &val2) { return val1 + val2.payload.length();} );
+    for ( const RangeData &val : values ) {
+      off_t end = val.offset + val.payload.length() - 1;
+      r.rout << "--"<<boundary<<"\r\n"
+             << "Content-Type: text/plain\r\n"
+             << "Content-Range: bytes "<<val.offset<<"-"<<end<<"/"<<fullSize<<"\r\n"
+             << "\r\n"
+             << val.payload;
+    }
+  };
+}
+
+//Get a range response with the ranges out of order
+BOOST_DATA_TEST_CASE(nwdispatcher_multipart_dl_no_order, bdata::make( withSSL ), withSSL )
+{
+  auto ev = zyppng::EventDispatcher::createMain();
+  zyppng::NetworkRequestDispatcher disp;
+  disp.sigQueueFinished().connect( [&ev]( const zyppng::NetworkRequestDispatcher& ){
+    ev->quit();
+  });
+
+  disp.run();
+
+  const std::string_view str1 = "Hello";
+  const std::string_view str2 = "World";
+  const std::string_view str3 = "in Multibyte";
+
+  WebServer web((zypp::Pathname(TESTS_SRC_DIR)/"data"/"dummywebroot").c_str(), 10001, withSSL );
+  web.addRequestHandler("mbyte", makeMultiPartHandler( {
+    { 10, str2.data() },
+    {  0, str1.data() },
+    { 25, str3.data() }
+  }));
+
+  BOOST_REQUIRE( web.start() );
+
+  auto weburl = web.url();
+  weburl.setPathName("/handler/mbyte");
+
+  zyppng::TransferSettings set = web.transferSettings();
+  zypp::filesystem::TmpFile targetFile;
+
+  auto reqDLFile = std::make_shared<zyppng::NetworkRequest>( weburl, targetFile.path() );
+  reqDLFile->transferSettings() = set;
+  reqDLFile->setUrl( weburl );
+  reqDLFile->addRequestRange(  0, str1.length() );
+  reqDLFile->addRequestRange( 10, str2.length() );
+  reqDLFile->addRequestRange( 25, str3.length() );
+  disp.enqueue( reqDLFile );
+  ev->run();
+  BOOST_TEST_REQ_SUCCESS( reqDLFile );
+
+  std::string downloaded = TestTools::readFile ( targetFile.path() );
+  BOOST_REQUIRE( !downloaded.empty() );
+  BOOST_REQUIRE_EQUAL( std::string_view ( downloaded.data(), 5 )   , str1 );
+  BOOST_REQUIRE_EQUAL( std::string_view ( downloaded.data()+10, 5 ), str2 );
+  BOOST_REQUIRE_EQUAL( std::string_view ( downloaded.data()+25 )   , str3 );
+}
+
+//Get a range response where the boundary string is part of the data
+//Some servers like nginx do not check if the boundary string is inside the data, thus we need
+//to make sure the parser is not affected by that
+BOOST_DATA_TEST_CASE(nwdispatcher_multipart_dl_weird_data, bdata::make( withSSL ), withSSL )
+{
+  auto ev = zyppng::EventDispatcher::createMain();
+  zyppng::NetworkRequestDispatcher disp;
+  disp.sigQueueFinished().connect( [&ev]( const zyppng::NetworkRequestDispatcher& ){
+    ev->quit();
+  });
+
+  disp.run();
+
+  const std::string_view str1 = "SUSE Linux";
+  const std::string_view str2 = "World--THIS_STRING_SEPARATES A";
+  const std::string_view str3 = "Other String";
+
+  WebServer web((zypp::Pathname(TESTS_SRC_DIR)/"data"/"dummywebroot").c_str(), 10001, withSSL );
+  web.addRequestHandler("mbyte", makeMultiPartHandler( {
+                                    { 0,   str1.data() },
+                                    { 25,  str2.data() },
+                                    { 70,  str3.data() },
+                                  }));
+
+  BOOST_REQUIRE( web.start() );
+
+  auto weburl = web.url();
+  weburl.setPathName("/handler/mbyte");
+
+  zyppng::TransferSettings set = web.transferSettings();
+  zypp::filesystem::TmpFile targetFile;
+
+  auto reqDLFile = std::make_shared<zyppng::NetworkRequest>( weburl, targetFile.path() );
+  reqDLFile->transferSettings() = set;
+  reqDLFile->setUrl( weburl );
+  reqDLFile->addRequestRange(  0, str1.length() );
+  reqDLFile->addRequestRange( 25, str2.length() );
+  reqDLFile->addRequestRange( 70, str3.length() );
+  disp.enqueue( reqDLFile );
+  ev->run();
+  BOOST_TEST_REQ_SUCCESS( reqDLFile );
+
+  std::string downloaded = TestTools::readFile ( targetFile.path() );
+  BOOST_REQUIRE( !downloaded.empty() );
+  BOOST_REQUIRE_EQUAL( std::string_view ( downloaded.data()   , str1.length() ), str1 );
+  BOOST_REQUIRE_EQUAL( std::string_view ( downloaded.data()+25, str2.length() ), str2 );
+  BOOST_REQUIRE_EQUAL( std::string_view ( downloaded.data()+70, str3.length() ), str3 );
+}
+
+BOOST_DATA_TEST_CASE(nwdispatcher_multipart_dl_overlap, bdata::make( withSSL ), withSSL )
+{
+  auto ev = zyppng::EventDispatcher::createMain();
+  zyppng::NetworkRequestDispatcher disp;
+  disp.sigQueueFinished().connect( [&ev]( const zyppng::NetworkRequestDispatcher& ){
+    ev->quit();
+  });
+  disp.run();
+
+  const char *data = "The SUSE Linux distribution was originally a German translation of Slackware Linux. In mid-1992, Softlanding Linux System (SLS) was founded by Peter MacDonald, and was the first comprehensive distribution to contain elements such as X and TCP/IP. The Slackware distribution (maintained by Patrick Volkerding) was initially based largely on SLS.";
+  const std::string_view str1 = std::string_view( data, 50 );
+  const std::string_view str2 = std::string_view( data+40 );
+
+  WebServer web((zypp::Pathname(TESTS_SRC_DIR)/"data"/"dummywebroot").c_str(), 10001, withSSL );
+  web.addRequestHandler("mbyte", makeMultiPartHandler( {
+                                    { 0,   std::string( str1.data(), str1.length() ) },
+                                    { 40,  str2.data() }
+                                    }));
+
+  BOOST_REQUIRE( web.start() );
+
+  auto weburl = web.url();
+  weburl.setPathName("/handler/mbyte");
+
+  zyppng::TransferSettings set = web.transferSettings();
+  zypp::filesystem::TmpFile targetFile;
+
+  auto reqDLFile = std::make_shared<zyppng::NetworkRequest>( weburl, targetFile.path() );
+  reqDLFile->transferSettings() = set;
+  reqDLFile->setUrl( weburl );
+  reqDLFile->addRequestRange(  0, str1.length() );
+  reqDLFile->addRequestRange( 40, str2.length() );
+  disp.enqueue( reqDLFile );
+  ev->run();
+  BOOST_TEST_REQ_SUCCESS( reqDLFile );
+
+  std::string downloaded = TestTools::readFile ( targetFile.path() );
+  BOOST_REQUIRE( !downloaded.empty() );
+  BOOST_REQUIRE_EQUAL( downloaded, std::string(data) );
+}
+
+//Get a range response with missing data
+BOOST_DATA_TEST_CASE(nwdispatcher_multipart_data_missing, bdata::make( withSSL ), withSSL )
+{
+  auto ev = zyppng::EventDispatcher::createMain();
+  zyppng::NetworkRequestDispatcher disp;
+  disp.sigQueueFinished().connect( [&ev]( const zyppng::NetworkRequestDispatcher& ){
+    ev->quit();
+  });
+
+  disp.run();
+
+  const std::string_view str1 = "Hello";
+  const std::string_view str2 = "World";
+  const std::string_view str3 = "in Multibyte";
+
+  WebServer web((zypp::Pathname(TESTS_SRC_DIR)/"data"/"dummywebroot").c_str(), 10001, withSSL );
+  web.addRequestHandler("mbyte", makeMultiPartHandler( {
+                                    { 10, str2.data() },
+                                    {  0, str1.data() },
+                                    { 25, str3.data() }
+                                  }));
+
+  BOOST_REQUIRE( web.start() );
+
+  auto weburl = web.url();
+  weburl.setPathName("/handler/mbyte");
+
+  zyppng::TransferSettings set = web.transferSettings();
+  zypp::filesystem::TmpFile targetFile;
+
+  auto reqDLFile = std::make_shared<zyppng::NetworkRequest>( weburl, targetFile.path() );
+  reqDLFile->transferSettings() = set;
+  reqDLFile->setUrl( weburl );
+  reqDLFile->addRequestRange(  0, str1.length() );
+  reqDLFile->addRequestRange( 10, str2.length() + 1 );
+  reqDLFile->addRequestRange( 25, str3.length() );
+  disp.enqueue( reqDLFile );
+  ev->run();
+  BOOST_TEST_REQ_ERR( reqDLFile, zyppng::NetworkRequestError::MissingData );
+}

@@ -271,22 +271,41 @@ namespace zyppng {
       } else if ( _state == Download::RunningMulti ) {
 
         //if a error happens during a multi download we try to use another mirror to download the failed block
-        DBG << "Request failed " << reqLocked->_myBlock << " " << reqLocked->extendedErrorString() << std::endl;
+        DBG << "Request failed " << reqLocked->extendedErrorString() << std::endl;
+        auto failed = reqLocked->failedRanges();
+
         NetworkRequestError dummyErr;
 
-        //try to init a new multi request, if we have leftover mirrors we get a valid one
-        auto newReq = initMultiRequest( reqLocked->_myBlock, dummyErr );
-        if ( newReq ) {
-          newReq->_retryCount = reqLocked->_retryCount + 1;
-          addNewRequest( newReq );
-          return;
-        } else {
-          //no mirrors left but if we still have running requests, there is hope to finish the block
-          if ( !_runningRequests.empty() ) {
-            DBG << "Adding to failed blocklist " << reqLocked->_myBlock <<std::endl;
-            _failedBlocks.push_back( FailedBlock{ reqLocked->_myBlock, reqLocked->_retryCount, err } );
+        const auto fRanges = reqLocked->failedRanges();
+        std::vector<Block> blocks;
+
+        try {
+          std::transform( fRanges.begin(), fRanges.end(), std::back_inserter(_failedBlocks), [ &reqLocked ]( const auto &r ){
+            auto ind = std::find_if( reqLocked->_myBlocks.begin(), reqLocked->_myBlocks.end(), [ &r ](const auto &elem){ return elem._block == std::any_cast<size_t>(r.userData); } );
+
+            if ( ind == reqLocked->_myBlocks.end() ){
+              throw zypp::Exception( "User data did not point to a valid block in the request set, this is a bug" );
+            }
+
+            Block b = *ind;
+            b._failedWithErr = reqLocked->error();
+            DBG << "Adding failed block to failed blocklist: " << b._block << " " << r.start << " " << r.len << " (" << reqLocked->error().toString() << ")" << std::endl;
+            return b;
+          });
+
+          //try to init a new multi request, if we have leftover mirrors we get a valid one
+          auto newReq = initMultiRequest( dummyErr, true );
+          if ( newReq ) {
+            addNewRequest( newReq );
             return;
           }
+          // we got no mirror this time, but since we still have running requests there is hope this will be finished later
+          if ( _runningRequests.size() && _failedBlocks.size() )
+            return;
+
+        } catch ( const zypp::Exception &ex ) {
+          //we just log the exception and fall back to a normal download
+          WAR << "Multipart download failed: " << ex.asString() << std::endl;
         }
       }
 
@@ -398,8 +417,8 @@ namespace zyppng {
           if ( _blockList.haveFileChecksum() ) {
             std::shared_ptr<zypp::Digest> fileDigest = std::make_shared<zypp::Digest>();
             if ( _blockList.createFileDigest( *fileDigest ) ) {
-              req->setDigest( fileDigest );
-              req->setExpectedChecksum( _blockList.getFileChecksum() );
+              // to run the checksum for the full file we need to request one big range with open end
+              req->addRequestRange( 0, 0, fileDigest, _blockList.getFileChecksum() );
             }
           }
 
@@ -416,9 +435,9 @@ namespace zyppng {
           off_t filesize = _blockList.getFilesize();
           while ( currOff <  filesize )  {
 
-            size_t blksize = static_cast<size_t>( filesize - currOff );
-            if ( blksize > BLKSIZE)
-              blksize = BLKSIZE;
+            auto blksize = filesize - currOff ;
+            if ( blksize > _preferredChunkSize )
+              blksize = _preferredChunkSize;
 
             _blockList.addBlock( currOff, blksize );
             currOff += blksize;
@@ -454,14 +473,13 @@ namespace zyppng {
     } else if ( _state == Download::RunningMulti ) {
       _downloadedMultiByteCount += req.downloadedByteCount();
 
-      DBG << "Request finished " << reqLocked->_myBlock <<std::endl;
+      DBG << "Request finished "<<std::endl;
+      std::for_each( reqLocked->_myBlocks.begin(), reqLocked->_myBlocks.end(), []( const auto &b ){ DBG << "-> Block " << b._block << " finished." << std::endl; } );
 
-      auto restartReqWithBlock = [ this ]( std::shared_ptr<Request> &req, size_t block, int retryCount ) {
-        zypp::media::MediaBlock blk = _blockList.getBlock( block );
-        req->_myBlock = block;
-        req->_retryCount = retryCount;
-        req->setRequestRange( blk.off, static_cast<off_t>( blk.size ) );
-        req->setExpectedChecksum( _blockList.getChecksum( block ) );
+      auto restartReqWithBlock = [ this ]( std::shared_ptr<Request> &req, std::vector<Block> &&blocks ) {
+        DBG << "Reusing Request to download blocks:"<<std::endl;
+        req->_myBlocks = std::move( blocks );
+        addBlockRanges( req );
 
         //this is not a new request, only add to queues but do not connect signals again
         _runningRequests.push_back( req );
@@ -470,22 +488,17 @@ namespace zyppng {
 
       //check if we already have enqueued all blocks if not reuse the request
       if ( _blockIter  < _blockList.numBlocks() ) {
-
-        DBG << "Reusing to download block: " << _blockIter <<std::endl;
-        restartReqWithBlock( reqLocked, _blockIter, 0 );
-        _blockIter++;
+        DBG << "Reusing to download blocks: "<<std::endl;
+        restartReqWithBlock( reqLocked, getNextBlocks( reqLocked->url().getScheme() ) );
         return;
 
       } else {
         //if we have failed blocks, try to download them with this mirror
         if ( !_failedBlocks.empty() ) {
 
-          FailedBlock blk = std::move( _failedBlocks.front() );
-          _failedBlocks.pop_front();
-
-          DBG << "Reusing to download failed block: " << blk._block <<std::endl;
-
-          restartReqWithBlock( reqLocked, blk._block, blk._retryCount+1 );
+          auto fblks = getNextFailedBlocks( reqLocked->url().getScheme() );
+          DBG << "Reusing to download failed blocks: "<<std::endl;
+          restartReqWithBlock( reqLocked, std::move(fblks) );
           return;
         }
 
@@ -500,29 +513,23 @@ namespace zyppng {
       NetworkRequestError lastErr = _requestError;
 
       //we try to allocate as many requests as possible but stop if we cannot find a valid mirror for one
-      for ( ; _blockIter < _blockList.numBlocks(); _blockIter++ ){
-
-        if ( _runningRequests.size() >= 10 )
+      while( _runningRequests.size() < 10 ) {
+        std::shared_ptr<Request> req = initMultiRequest( lastErr );
+        if (!req ) {
           break;
-
-        std::shared_ptr<Request> req = initMultiRequest( _blockIter, lastErr );
-        if ( !req )
-          break;
-
+        }
         addNewRequest( req );
       }
 
-      while ( _failedBlocks.size() ) {
+      while ( lastErr.type() == NetworkRequestError::NoError && _failedBlocks.size() ) {
 
         if ( _runningRequests.size() >= 10 )
           break;
 
-        FailedBlock blk = std::move( _failedBlocks.front() );
-        _failedBlocks.pop_front();
-
-        auto req = initMultiRequest( blk._block, lastErr );
-        if ( !req )
+        auto req = initMultiRequest( lastErr, true );
+        if ( !req ) {
           break;
+        }
 
         addNewRequest( req );
       }
@@ -568,40 +575,56 @@ namespace zyppng {
 
   void DownloadPrivate::addNewRequest( std::shared_ptr<Request> req )
   {
-    auto slot = _sigStarted.slots().front();
     req->connectSignals( *this );
     _runningRequests.push_back( req );
     _requestDispatcher->enqueue( req );
   }
 
-  std::shared_ptr<DownloadPrivate::Request> DownloadPrivate::initMultiRequest( size_t block, NetworkRequestError &err )
+  std::shared_ptr<DownloadPrivate::Request> DownloadPrivate::initMultiRequest( NetworkRequestError &err, bool useFailed )
   {
-    zypp::media::MediaBlock blk = _blockList.getBlock( block );
-
     Url myUrl;
     TransferSettings settings;
     if ( !findNextMirror( myUrl, settings, err ) )
       return nullptr;
 
-    DBG << "Starting block " << block << std::endl;
+    auto blocks = useFailed ?  getNextFailedBlocks( myUrl.getScheme() ) : getNextBlocks( myUrl.getScheme() );
+    if ( !blocks.size() ) {
+      _multiPartMirrors.push_front( myUrl );
+      return nullptr;
+    }
 
-    std::shared_ptr<Request> req = std::make_shared<Request>( internal::clearQueryString( myUrl ), _targetPath, blk.off, blk.size, NetworkRequest::WriteShared );
+    std::shared_ptr<Request> req = std::make_shared<Request>( internal::clearQueryString( myUrl ), _targetPath, NetworkRequest::WriteShared );
     req->_originalUrl = myUrl;
-    req->_myBlock = block;
     req->setPriority( NetworkRequest::High );
     req->transferSettings() = settings;
+    req->_myBlocks = std::move(blocks);
 
-    if ( _blockList.haveChecksum( block ) ) {
-      std::shared_ptr<zypp::Digest> dig = std::make_shared<zypp::Digest>();
-      _blockList.createDigest( *dig );
-      req->setDigest( dig );
-      std::vector<unsigned char> checksumVec = _blockList.getChecksum( block );
-      req->setExpectedChecksum( checksumVec );
-      DBG << "Starting block  " << block << " with checksum " << zypp::Digest::digestVectorToString( checksumVec ) << std::endl;
-    } else {
-      DBG << "Block " << block << " has no checksum." << std::endl;
-    }
+    DBG << "Creating Request to download blocks:"<<std::endl;
+    addBlockRanges( req );
+
     return req;
+  }
+
+  /**
+   * Just initialize the requests ranges from the internal blocklist
+   */
+  void DownloadPrivate::addBlockRanges( std::shared_ptr<DownloadPrivate::Request> req ) const
+  {
+    req->resetRequestRanges();
+    for ( const auto &block : req->_myBlocks ) {
+      zypp::media::MediaBlock blk = _blockList.getBlock( block._block );
+      std::shared_ptr<zypp::Digest> dig;
+      std::vector<unsigned char> checksumVec;
+      if ( _blockList.haveChecksum( block._block ) ) {
+        dig = std::make_shared<zypp::Digest>();
+        _blockList.createDigest( *dig );
+        checksumVec = _blockList.getChecksum( block._block);
+        DBG << "Starting block " << block._block << " with checksum " << zypp::Digest::digestVectorToString( checksumVec ) << "." << std::endl;
+      } else {
+        DBG << "Starting block " << block._block << " without checksum." << std::endl;
+      }
+      req->addRequestRange( blk.off, blk.size, dig, checksumVec, block._block );
+    }
   }
 
   bool DownloadPrivate::findNextMirror( Url &url, TransferSettings &set, NetworkRequestError &err )
@@ -649,6 +672,63 @@ namespace zyppng {
   {
     setState( success ? Download::Success : Download::Failed );
     _sigFinished.emit( *z_func() );
+  }
+
+  std::vector<DownloadPrivate::Block> DownloadPrivate::getNextBlocks( const std::string &urlScheme )
+  {
+    std::vector<DownloadPrivate::Block> blocks;
+    size_t accumulatedSize = 0;
+
+    bool canDoRandomBlocks = ( zypp::str::hasPrefixCI( urlScheme, "http") );
+    std::optional<size_t> lastBlockEnd;
+    for (; _blockIter < _blockList.numBlocks() &&  accumulatedSize < static_cast<size_t>( _preferredChunkSize ); _blockIter++ ){
+      const auto block = _blockList.getBlock( _blockIter );
+
+      if ( !canDoRandomBlocks && lastBlockEnd ) {
+        if ( static_cast<const size_t>(block.off) != (*lastBlockEnd)+1 )
+          break;
+      }
+
+      lastBlockEnd = block.off + block.size - 1;
+      accumulatedSize += block.size;
+      blocks.push_back( { _blockIter } );
+    }
+    return blocks;
+  }
+
+  std::vector<DownloadPrivate::Block> DownloadPrivate::getNextFailedBlocks( const std::string &urlScheme )
+  {
+    // sort the failed requests by block number, this should make sure get them in offset order as well
+    std::sort( _failedBlocks.begin(), _failedBlocks.end(), []( const auto &a , const auto &b ){ return a._block < b._block; } );
+
+    bool canDoRandomBlocks = ( zypp::str::hasPrefixCI( urlScheme, "http") );
+
+    std::vector<DownloadPrivate::Block> fblks;
+    std::optional<size_t> lastBlockEnd;
+    size_t accumulatedSize = 0;
+    while ( _failedBlocks.size() ) {
+
+      const auto block = _blockList.getBlock( _failedBlocks.front()._block );
+
+      //we need to check if we have consecutive blocks because only http mirrors support random request ranges
+      if ( !canDoRandomBlocks && lastBlockEnd ) {
+        if ( static_cast<const size_t>(block.off) != (*lastBlockEnd)+1 )
+          break;
+      }
+
+      fblks.push_back( std::move( _failedBlocks.front() ));
+      _failedBlocks.pop_front();
+
+      fblks.back()._retryCount += 1;
+
+      lastBlockEnd = block.off + block.size - 1;
+      accumulatedSize += block.size;
+
+      if ( accumulatedSize >= static_cast<size_t>( _preferredChunkSize ) )
+        break;
+    }
+
+    return fblks;
   }
 
   NetworkRequestError DownloadPrivate::safeFillSettingsFromURL( const Url &url, TransferSettings &set)
@@ -701,8 +781,7 @@ namespace zyppng {
 
   Download::~Download()
   {
-    if ( this->state() > Download::InitialState && this->state() < Download::Success )
-      cancel();
+    cancel();
   }
 
   Url Download::url() const
@@ -748,14 +827,16 @@ namespace zyppng {
   void Download::cancel()
   {
     Z_D();
-    //we do not have more mirrors left we can try or we do not have a multi download, abort
-    while( d->_runningRequests.size() ) {
-      auto req = d->_runningRequests.back();
-      req->disconnectSignals();
-      d->_runningRequests.pop_back();
-      d->_requestDispatcher->cancel( *req, "Download cancelled" );
+    if ( this->state() >= Download::InitialState && this->state() < Download::Success ) {
+      //we do not have more mirrors left we can try or we do not have a multi download, abort
+      while( d->_runningRequests.size() ) {
+        auto req = d->_runningRequests.back();
+        req->disconnectSignals();
+        d->_runningRequests.pop_back();
+        d->_requestDispatcher->cancel( *req, "Download cancelled" );
+      }
+      d->setFailed( "Download was cancelled explicitely" );
     }
-    d->setFailed( "Download was cancelled explicitely" );
   }
 
   void Download::setMultiPartHandlingEnabled( bool enable )
@@ -776,6 +857,11 @@ namespace zyppng {
   void Download::setDeltaFile( const zypp::filesystem::Pathname &file )
   {
     d_func()->_deltaFilePath = file;
+  }
+
+  void Download::setPreferredChunkSize(const zypp::ByteCount &bc)
+  {
+    d_func()->_preferredChunkSize = bc;
   }
 
   zyppng::NetworkRequestDispatcher &Download::dispatcher() const

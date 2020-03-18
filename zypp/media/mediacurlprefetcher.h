@@ -62,8 +62,10 @@ private:
 
   std::atomic_bool _stop;
   std::recursive_mutex _lock;
+
   ReqQueue _requests;
   ReqQueue _requestsToCleanup;
+  std::vector<size_t> _cachesToClose;
 
   size_t _nextCacheId = 0;
   off_t _lastFinishedIndex = -1;

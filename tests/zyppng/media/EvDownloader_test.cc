@@ -11,6 +11,7 @@
 #include <fstream>
 #include <random>
 #include "WebServer.h"
+#include "TestTools.h"
 
 #include <boost/test/unit_test.hpp>
 #include <boost/test/data/test_case.hpp>
@@ -32,23 +33,6 @@
 namespace bdata = boost::unit_test::data;
 
 bool withSSL[] = {true, false};
-
-//read all contents of a file into a string)
-std::string readFile ( const zypp::Pathname &file )
-{
-  if ( ! zypp::PathInfo( file ).isFile() ) {
-    return std::string();
-  }
-  std::ifstream istr( file.asString().c_str() );
-  if ( ! istr ) {
-    return std::string();
-  }
-
-  std::string str((std::istreambuf_iterator<char>(istr)),
-    std::istreambuf_iterator<char>());
-  return str;
-}
-
 
 BOOST_DATA_TEST_CASE( dltest_basic, bdata::make( withSSL ), withSSL)
 {
@@ -129,6 +113,7 @@ struct MirrorSet
   int expectedHandlerDownloads; //< how many started downloads are handler requests
   std::vector<zyppng::Download::State> expectedStates;
   bool expectSuccess; //< should the download work out?
+  zypp::ByteCount chunkSize = zypp::ByteCount( 256, zypp::ByteCount::K );
 
   std::ostream & operator<<( std::ostream & str ) const {
     str << "MirrorSet{ " << name << " }";
@@ -155,6 +140,17 @@ std::vector< MirrorSet > generateMirr ()
   res.back().expectSuccess = true;
   res.back().expectedHandlerDownloads  = 1;
   res.back().expectedFileDownloads  = 9;
+  res.back().expectedStates = {zyppng::Download::Initializing, zyppng::Download::RunningMulti, zyppng::Download::Success};
+  for ( int i = 100 ; i >= 10; i -= 10 )
+    res.back().mirrors.push_back( std::make_pair( i, "/test.txt") );
+
+  //all mirrors good big chunk
+  res.push_back( MirrorSet() );
+  res.back().name = "All good mirrors, 1024 chunk size";
+  res.back().expectSuccess = true;
+  res.back().expectedHandlerDownloads  = 1;
+  res.back().expectedFileDownloads  = 3;
+  res.back().chunkSize = zypp::ByteCount( 1024, zypp::ByteCount::K );
   res.back().expectedStates = {zyppng::Download::Initializing, zyppng::Download::RunningMulti, zyppng::Download::Success};
   for ( int i = 100 ; i >= 10; i -= 10 )
     res.back().mirrors.push_back( std::make_pair( i, "/test.txt") );
@@ -283,12 +279,14 @@ WebServer::RequestHandler makeJunkBlockHandler ( )
 
         if ( start != -1 && end != -1 ) {
           std::string block;
-          for ( off_t curr = 0; curr < ( end - start); curr++ ) {
+          for ( off_t curr = start; curr <= end; curr++ ) {
             block += 'a';
           }
           req.rout << "Status: 206 Partial Content\r\n"
                    << "Accept-Ranges: bytes\r\n"
-                   << "Content-Length: "<<( end - start)<<"\r\n\r\n"
+                   << "Content-Length: "<< block.length() <<"\r\n"
+                   << "Content-Range: bytes "<<start<<"-"<<end<<"/"<<block.length()<<"\r\n"
+                   <<"\r\n"
                    << block;
           return;
         }
@@ -304,7 +302,7 @@ BOOST_DATA_TEST_CASE( test1, bdata::make( generateMirr() ) * bdata::make( withSS
 {
   //each URL in the metalink file has a preference , a schema and of course the URL, we need to adapt those to our test setup
   //so we generate the file on the fly from a template in the test data
-  std::string metaTempl = readFile ( zypp::Pathname(TESTS_SRC_DIR)/"/zyppng/data/downloader/test.txt.meta" );
+  std::string metaTempl = TestTools::readFile ( zypp::Pathname(TESTS_SRC_DIR)/"/zyppng/data/downloader/test.txt.meta" );
   BOOST_REQUIRE( !metaTempl.empty() );
 
   auto ev = zyppng::EventDispatcher::createMain();
@@ -349,6 +347,7 @@ BOOST_DATA_TEST_CASE( test1, bdata::make( generateMirr() ) * bdata::make( withSS
 
   auto dl = downloader.downloadFile( weburl, targetFile );
   dl->settings() = web.transferSettings();
+  dl->setPreferredChunkSize( elem.chunkSize );
 
   dl->dispatcher().sigDownloadStarted().connect( [&]( zyppng::NetworkRequestDispatcher &, zyppng::NetworkRequest &req){
     startedDownloads++;

@@ -1,3 +1,6 @@
+#ifndef ZYPP_NG_MEDIA_CURL_PRIVATE_NETWORKREQUESTERROR_P_H_INCLUDED
+#define ZYPP_NG_MEDIA_CURL_PRIVATE_NETWORKREQUESTERROR_P_H_INCLUDED
+
 #include <zypp/zyppng/media/network/networkrequesterror.h>
 #include <map>
 
@@ -21,3 +24,5 @@ public:
 };
 
 }
+
+#endif

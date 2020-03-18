@@ -264,6 +264,8 @@ std::string NetworkRequestErrorPrivate::typeToString( NetworkRequestError::Type 
       return "Login failed.";
     case NetworkRequestError::ServerReturnedError:
       return "Server returned an error for the given request.";
+    case NetworkRequestError::MissingData:
+      return "Server did not send all requested ranges.";
   }
   return std::string();
 }

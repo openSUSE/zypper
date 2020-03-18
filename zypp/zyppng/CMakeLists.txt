@@ -33,6 +33,8 @@ SET( zyppng_core_HEADERS
   ${CMAKE_CURRENT_SOURCE_DIR}/core/Url
   ${CMAKE_CURRENT_SOURCE_DIR}/core/idstring.h
   ${CMAKE_CURRENT_SOURCE_DIR}/core/IdString
+  ${CMAKE_CURRENT_SOURCE_DIR}/core/string.h
+  ${CMAKE_CURRENT_SOURCE_DIR}/core/String
 )
 
 SET( zyppng_media_SRCS
@@ -58,6 +60,7 @@ SET( zyppng_media_private_HEADERS
   ${CMAKE_CURRENT_SOURCE_DIR}/media/network/private/networkrequestdispatcher_p.h
   ${CMAKE_CURRENT_SOURCE_DIR}/media/network/private/networkrequesterror_p.h
   ${CMAKE_CURRENT_SOURCE_DIR}/media/network/private/request_p.h
+
 )
 
 SET ( zyppng_HEADERS

@@ -218,6 +218,12 @@ namespace zyppng {
     void setDeltaFile ( const zypp::Pathname &file );
 
     /*!
+     * Sets the prefered amount of bytes the downloader tries to request from a single server per metalink chunk request.
+     * If the metalink description has smaller chunks those are coalesced to match the preferred size.
+     */
+    void setPreferredChunkSize ( const zypp::ByteCount &bc );
+
+    /*!
      * Returns a reference to the internally used \sa zyppng::NetworkRequestDispatcher
      */
     NetworkRequestDispatcher &dispatcher () const;

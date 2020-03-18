@@ -8,7 +8,9 @@
 #include <zypp/zyppng/base/zyppglobal.h>
 #include <zypp/zyppng/base/signals.h>
 #include <zypp/base/Flags.h>
+#include <zypp/ByteCount.h>
 #include <vector>
+#include <any>
 
 namespace zypp {
   class Digest;
@@ -38,6 +40,8 @@ namespace zyppng {
 
     using Ptr = std::shared_ptr<NetworkRequest>;
     using WeakPtr = std::weak_ptr<NetworkRequest>;
+    using DigestPtr = std::shared_ptr<zypp::Digest>;
+    using CheckSum = std::vector<unsigned char>;
 
     enum State {
       Pending,    //< waiting to be dispatched
@@ -61,15 +65,37 @@ namespace zyppng {
     };
     ZYPP_DECLARE_FLAGS(Options, OptionBits);
 
+    struct Range {
+      size_t start = 0;
+      size_t len = 0;
+      size_t bytesWritten = 0;
+      DigestPtr _digest; //< zypp::Digest that is updated when data is written, can be used to validate the file contents with a checksum
+
+      /**
+      * Enables automated checking of downloaded contents against a checksum.
+      * Only makes a difference \ref _digest is initialized too
+      *
+      * \note expects checksum in byte NOT in string format
+      */
+      CheckSum _checksum;
+      bool _valid = false;
+      std::any userData; //< Custom data the user can associate with the Range
+    };
+
     /*!
      * \param url The source URL of the download
      * \param targetFile The path where the file should be stored
-     * \param start File offset, if set this will create a range download request
-     * \param len File range length
      * \param fMode The mode in which the file is opened in.
      */
-    NetworkRequest( Url url, zypp::Pathname targetFile, off_t start = -1, off_t len = 0, FileMode fMode = WriteExclusive );
+    NetworkRequest(Url url, zypp::Pathname targetFile, FileMode fMode = WriteExclusive );
     virtual ~NetworkRequest();
+
+    /*!
+     * Sets the expected file size for the download.
+     * In case of a Multi-Range-Download the \a NetworkRequest will check if the download
+     * would write behind the expectedFileSize and fail.
+     */
+    void setExpectedFileSize ( zypp::ByteCount expectedFileSize );
 
     /*!
      * Sets the priority of the NetworkRequest, this will affect where
@@ -96,12 +122,18 @@ namespace zyppng {
     Options options () const;
 
     /*!
-     * Sets the range description
+     * Adds a new range to the requested range list, the ranges can not overlap
      * \note This will not change a running download
-     * \param start
-     * \param len
      */
-    void setRequestRange ( off_t start = -1, off_t len = 0 );
+    void addRequestRange ( size_t start, size_t len = 0, DigestPtr digest = nullptr, CheckSum expectedChkSum = CheckSum(), std::any userData = std::any() );
+
+    /*!
+     * Clears all requested ranges, the next download will get the complete file
+     * \note This will not change a running download
+     */
+    void resetRequestRanges ( );
+
+    std::vector<Range> failedRanges () const;
 
     /*!
      * Returns the last redirect information from the headers.
@@ -144,47 +176,17 @@ namespace zyppng {
      */
     std::string contentType () const;
 
-    /**
-     * Returns the requested start offset
-     */
-    off_t downloadOffset () const;
 
     /**
      * Returns the number of bytes that are reported from the backend as the full download size, those can
      * be 0 even when the download is already running.
      */
-    off_t reportedByteCount   () const;
-
-    /**
-     * Returns the expected byte count that was passed to the constructor, zero if
-     * none was given
-     */
-    off_t expectedByteCount   () const;
+    zypp::ByteCount reportedByteCount() const;
 
     /**
      * Returns the number of already downloaded bytes as reported by the backend
      */
-    off_t downloadedByteCount () const;
-
-    /**
-     * Set a \sa zypp::Digest that is updated when data is written, can be used to
-     * validate the file contents with a checksum
-     */
-    void setDigest ( std::shared_ptr<zypp::Digest> dig );
-
-    /**
-     * Returns the currently used \sa zypp::Digest, null if non was set.
-     */
-    std::shared_ptr<zypp::Digest> digest () const;
-
-    /**
-     * Enables automated checking of downloaded contents against a checksum.
-     * Only makes a difference if a \sa zypp::Digest was with with \sa setDigest.
-     *
-     * \note expects checksum in byte NOT in string format
-     */
-    void setExpectedChecksum (std::vector<unsigned char> checksum );
-
+    zypp::ByteCount downloadedByteCount() const;
 
     /*!
      * Returns a writeable reference to the internal \sa zyppng::TransferSettings.
@@ -200,7 +202,7 @@ namespace zyppng {
     /**
      * Returns the last set Error
      */
-    const NetworkRequestError &error () const;
+    NetworkRequestError error () const;
 
     /**
      * In some cases curl can provide extended error informations collected at
@@ -225,7 +227,14 @@ namespace zyppng {
     SignalProxy<void ( NetworkRequest &req )> sigStarted  ();
 
     /**
+     * Signals that new data has been downloaded, this is only the payload and does not include control data bytes
+     */
+    SignalProxy<void ( NetworkRequest &req, zypp::ByteCount count )> sigBytesDownloaded ();
+
+    /**
      * Signals if there was data read from the download
+     * \note this signals the raw numbers of bytes that were downloaded, for the number of payload data bytes ( excluding control data )
+     *       use \ref downloadedByteCount
      */
     SignalProxy<void ( NetworkRequest &req, off_t dltotal, off_t dlnow, off_t ultotal, off_t ulnow )> sigProgress ();
 

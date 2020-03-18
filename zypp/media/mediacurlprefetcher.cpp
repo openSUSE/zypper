@@ -6,6 +6,8 @@
 #include "zypp/zyppng/media/network/networkrequestdispatcher.h"
 #include "zypp/media/CurlHelper.h"
 #include "zypp/PathInfo.h"
+
+#define ZYPP_BASE_LOGGER_LOGGROUP "zypp::prefetcher"
 #include "zypp/base/Logger.h"
 #include "zypp/base/LogControl.h"
 
@@ -13,6 +15,7 @@
 #include <fcntl.h>
 #include <algorithm>
 #include <iostream>
+
 namespace zypp
 {
   namespace media
@@ -86,22 +89,11 @@ namespace zypp
 
     void MediaCurlPrefetcher::closeCache( const MediaCurlPrefetcher::CacheId id )
     {
-      MIL << "DESTROYING CACHE" << id << std::endl;
       std::unique_lock<std::recursive_mutex> guard( _lock );
-      bool found = false;
-      for ( auto i = _requests.begin(); i != _requests.end(); ) {
-        if ( (*i)->r.cache == id ) {
-          found = true;
-          i = markRequestForCleanup(i);
-        } else {
-          ++i;
-        }
-      }
+      _cachesToClose.push_back( id );
 
-      if ( found ) {
-        //signal the thread to wake up
-        write( _wakeupPipe[1], "\n", 1);
-      }
+      //signal the thread to wake up
+      write( _wakeupPipe[1], "\n", 1);
     }
 
     void MediaCurlPrefetcher::precacheFiles( std::vector<Request> &&files )
@@ -155,6 +147,7 @@ namespace zypp
             fut = request->result.get_future();
           } catch ( const std::future_error &e ) {
             ZYPP_CAUGHT( e );
+            WAR << "Future error while requiring file from precache." << std::endl;
             return false;
           }
 
@@ -164,10 +157,11 @@ namespace zypp
             internal::ProgressData prog( nullptr, 0, url, 0, &report );
             while( fut.wait_for(std::chrono::milliseconds(100)) != std::future_status::ready ) {
               prog.updateStats( request->_dlNow.load(), request->_dlTotal.load() );
+              prog.reportProgress();
             }
           } else {
             report->finish( url, zypp::media::DownloadProgressReport::ERROR, "Failed to precache." );
-            WAR << "Got a invalid future, can't continue";
+            WAR << "Got a invalid future, can't continue" << std::endl;
             return false;
           }
 
@@ -176,15 +170,19 @@ namespace zypp
 
         // at this point the download is either done or in error state
         if ( request->dl->state() < zyppng::Download::Success ) {
-          WAR << "Request in invalid state, can't continue";
+          WAR << "Request in invalid state, can't continue" << std::endl;
           return false;
         }
 
         if ( request->dl->state() == zyppng::Download::Success ) {
           bool success = true;
-          MIL << "Download finished by MediaCurlPrefetcher: " << url;
-          if( zypp::filesystem::hardlinkCopy( request->f.path(), targetPath ) != 0 ) {
-            MIL << "Failed to hardlinkCopy the requested file <<"<<request->dl->targetPath()<<" to the targetPath " << targetPath;
+          MIL << "Download finished by MediaCurlPrefetcher: " << url << std::endl;
+          if(  zypp::filesystem::assert_dir( targetPath.dirname() ) ) {
+            DBG << "assert_dir " << targetPath.dirname() << " failed" << std::endl;
+            success = false;
+          }
+          if( success && zypp::filesystem::hardlinkCopy( request->f.path(), targetPath ) != 0 ) {
+            DBG << "Failed to hardlinkCopy the requested file <<"<<request->dl->targetPath()<<" to the targetPath " << targetPath;
             success = false;
           }
           request->requestCount--;
@@ -209,13 +207,14 @@ namespace zypp
 
           guard.unlock();
 
-          MIL << "REQUEST FOR URL "<< url <<" CLAIMS TO FAIL " << request->dl->errorString() << std::endl;
+          MIL << "Request for "<< url <<" fails for reason: " << request->dl->errorString() << std::endl;
 
           report->finish( url, zypp::media::DownloadProgressReport::ERROR, "Failed to precache." );
         }
       }
 
       //never heard of that file, the MediaHandler needs to take care of it
+      MIL << "Request for "<< url <<" was never precached." << std::endl;
       return false;
     }
 
@@ -233,7 +232,7 @@ namespace zypp
         std::lock_guard<std::recursive_mutex> guard( _lock );
         auto i = std::find_if( _requests.begin(), _requests.end(), [ &req ]( const auto &elem ) { return ( elem->dl.get() == &req ); });
         if ( i == _requests.end() ) {
-          WAR << "Received a progress signal for a unknown request" << std::endl;
+          DBG << "Received a progress signal for a unknown request " << req.url() << std::endl;
           req.cancel();
           return;
         }
@@ -248,13 +247,15 @@ namespace zypp
 
       auto dlFinished = [ this ]( zyppng::Download &req ) {
         std::lock_guard<std::recursive_mutex> guard( _lock );
-        auto i = std::find_if( _requests.begin(), _requests.end(), [ &req ]( const auto &elem ) { return ( elem->dl.get() == &req ); });
+        auto i = std::find_if( _requests.begin(), _requests.end(), [ &req ]( const auto &elem ) {
+          return ( elem->dl.get() == &req ); }
+        );
         if ( i == _requests.end() ) {
-          WAR << "Received a finished signal for a unknown request ignoring" << std::endl;
+          WAR << "Received a finished signal for a unknown request ignoring " << req.url() << std::endl;
           return;
         }
 
-        MIL << "Finished download of " << req.url() << " with state " << req.state() << std::endl;
+        MIL << "Finished download of " << req.url() << " with state " << req.state() << "(" << req.errorString() << ")" <<std::endl;
 
         auto index = std::distance( _requests.begin(), i );
 
@@ -279,6 +280,9 @@ namespace zypp
           std::unique_lock<std::recursive_mutex> guard( _lock );
           _requests.clear();
           _requestsToCleanup.clear();
+          _cachesToClose.clear();
+          _lastFinishedIndex = -1;
+          _firstWaitingIndex = -1;
           dispatch->quit();
           guard.unlock();
           _waitCond.notify_all();
@@ -287,6 +291,20 @@ namespace zypp
         }
 
         std::lock_guard<std::recursive_mutex> guard( _lock );
+
+        //close caches we do not need anymore
+        for ( const auto id : _cachesToClose ) {
+          DBG << "Destroying prefetch cache" << id << std::endl;
+          for ( auto i = _requests.begin(); i != _requests.end(); ) {
+            if ( (*i)->r.cache == id ) {
+              (*i)->dl->cancel();
+              i = markRequestForCleanup(i);
+            } else {
+              ++i;
+            }
+          }
+        }
+        _cachesToClose.clear();
 
         //first clean up old requests
         _requestsToCleanup.clear();

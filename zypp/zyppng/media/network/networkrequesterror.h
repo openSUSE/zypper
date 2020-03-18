@@ -34,9 +34,10 @@ class NetworkRequestErrorPrivate;
       Timeout,                //< The request timed out
       Forbidden,              //< Accessing the requested ressource on the server was forbidden
       NotFound,               //< The requested path in the URL does not exist on the server
-      Unauthorized,       //<< No auth data given but authorization required
-      AuthFailed,         //<< Auth data was given, but authorization failed
-      ServerReturnedError //<< A error was returned by the server that is not explicitely handled
+      Unauthorized,        //<< No auth data given but authorization required
+      AuthFailed,          //<< Auth data was given, but authorization failed
+      ServerReturnedError, //<< A error was returned by the server that is not explicitely handled
+      MissingData          //<< The download was a multirange download and we did not get all data that was requested, if that is returned some ranges might have been downloaded successful
     };
 
     NetworkRequestError ();

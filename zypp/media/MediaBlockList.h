@@ -92,7 +92,7 @@ public:
    **/
   void setChecksum(size_t blkno, std::string cstype, int csl, unsigned char *cs, size_t cspad=0);
   bool checkChecksum(size_t blkno, const unsigned char *buf, size_t bufl) const;
-  std::vector<unsigned char> getChecksum( size_t blkno );
+  std::vector<unsigned char> getChecksum( size_t blkno ) const;
   bool createDigest(Digest &digest) const;
   bool verifyDigest(size_t blkno, Digest &digest) const;
   inline bool haveChecksum(size_t blkno) const {

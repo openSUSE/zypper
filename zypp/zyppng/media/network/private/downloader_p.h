@@ -21,6 +21,17 @@ namespace zyppng {
     ZYPP_DECLARE_PUBLIC(Download)
     DownloadPrivate ( Downloader &parent, std::shared_ptr<NetworkRequestDispatcher> requestDispatcher, Url &&file, zypp::filesystem::Pathname &&targetPath, zypp::ByteCount &&expectedFileSize );
 
+    struct Block {
+      Block( size_t blockNr ) : _block(blockNr) {}
+      Block( Block &&other ) = default;
+      Block( const Block &other ) = default;
+      Block &operator=( const Block &other) = default;
+
+      size_t _block   = -1;
+      int _retryCount = 0;  //< how many times was this request restarted
+      NetworkRequestError _failedWithErr; //< what was the error this request failed with
+    };
+
     struct Request : public NetworkRequest {
 
       using NetworkRequest::NetworkRequest;
@@ -30,8 +41,7 @@ namespace zyppng {
       void connectSignals ( DownloadPrivate &dl );
       void disconnectSignals ();
 
-      size_t _myBlock = -1;
-      int _retryCount = 0;       //< how many times was this request restarted
+      std::vector<Block> _myBlocks;
       bool _triedCredFromStore = false; //< already tried to authenticate from credential store?
       Url _originalUrl;  //< The unstripped URL as it was passed to Download , before transfer settings are removed
 
@@ -39,15 +49,6 @@ namespace zyppng {
       connection _sigProgressConn;
       connection _sigFinishedConn;
     };
-
-    //keep a list with failed blocks in case we run out of mirrors,
-    //in that case we can retry to download them once we have a finished download
-    struct FailedBlock {
-      size_t _block = -1;
-      int    _retryCount = 0;
-      NetworkRequestError _failedWithErr;
-    };
-    std::deque<FailedBlock> _failedBlocks;
 
     std::vector< std::shared_ptr<Request> > _runningRequests;
     std::shared_ptr<NetworkRequestDispatcher> _requestDispatcher;
@@ -66,6 +67,11 @@ namespace zyppng {
     std::deque<Url> _multiPartMirrors;
     zypp::media::MediaBlockList _blockList;
     size_t _blockIter    = 0;
+    zypp::ByteCount _preferredChunkSize = zypp::ByteCount( 4096, zypp::ByteCount::K );
+
+    //keep a list with failed blocks in case we run out of mirrors,
+    //in that case we can retry to download them once we have a finished download
+    std::deque<Block> _failedBlocks;
 
     Downloader *_parent = nullptr;
     Download::State _state = Download::InitialState;
@@ -88,10 +94,14 @@ namespace zyppng {
     void onRequestProgress ( NetworkRequest &req, off_t dltotal, off_t dlnow, off_t, off_t );
     void onRequestFinished ( NetworkRequest &req , const NetworkRequestError &err );
     void addNewRequest     (std::shared_ptr<Request> req );
-    std::shared_ptr<Request> initMultiRequest(size_t block , NetworkRequestError &err);
+    std::shared_ptr<Request> initMultiRequest( NetworkRequestError &err, bool useFailed = false );
+    void addBlockRanges    ( std::shared_ptr<Request> req ) const;
     bool findNextMirror( Url &url, TransferSettings &set, NetworkRequestError &err );
     void setFailed         ( std::string && reason );
     void setFinished       ( bool success = true );
+    std::vector<Block> getNextBlocks ( const std::string &urlScheme );
+    std::vector<Block> getNextFailedBlocks( const std::string &urlScheme );
+
     NetworkRequestError safeFillSettingsFromURL ( const Url &url, TransferSettings &set );
   };
 

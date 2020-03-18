@@ -25,6 +25,7 @@ add_definitions( -DSRCDIR="${CMAKE_CURRENT_SOURCE_DIR}")
 
 ADD_LIBRARY(zypp_test_utils
  TestSetup.h
+ TestTools.h
  WebServer.h
  WebServer.cc
 )
