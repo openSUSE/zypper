@@ -57,9 +57,9 @@ ENDIF( NOT DEFINED DOC_INSTALL_DIR )
 # INCLUDES                                                         #
 ####################################################################
 
+SET( ZYPPCOMMON_CXX_STANDARD 17 )
 #SET (CMAKE_INCLUDE_DIRECTORIES_BEFORE ON)
 INCLUDE_DIRECTORIES( ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR} SYSTEM )
-
 
 ####################################################################
 # RPM SPEC                                                         #

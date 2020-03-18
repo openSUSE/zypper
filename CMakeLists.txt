@@ -1,9 +1,9 @@
+cmake_minimum_required(VERSION 3.1)
 PROJECT(LIBZYPP)
 SET( PACKAGE "libzypp" )
 # where to look first for cmake modules, before ${CMAKE_ROOT}/Modules/ is checked
 SET( CMAKE_MODULE_PATH ${LIBZYPP_SOURCE_DIR}/cmake/modules )
-
-cmake_minimum_required(VERSION 2.6)
+INCLUDE(ZyppCommon)
 
 OPTION (ENABLE_BUILD_DOCS "Build documentation by default?" OFF)
 OPTION (ENABLE_BUILD_TRANS "Build translation files by default?" OFF)
@@ -17,8 +17,6 @@ OPTION (DISABLE_AUTODOCS "Do not require doxygen being installed (required to bu
 OPTION (EXPORT_NG_API "Export experimental libzypp API" OFF)
 #--------------------------------------------------------------------------------
 SET (have_system x)
-
-set (CMAKE_CXX_STANDARD 17)
 
 IF (DEBIAN)
   MESSAGE (STATUS "Building for Debian")
@@ -43,7 +41,6 @@ if(COMMAND cmake_policy)
   cmake_policy(SET CMP0003 NEW)
 endif(COMMAND cmake_policy)
 
-INCLUDE(ZyppCommon)
 find_package(FindPkgConfig)
 INCLUDE( ${LIBZYPP_SOURCE_DIR}/VERSION.cmake )
 
@@ -56,6 +53,7 @@ MATH( EXPR LIBZYPP_SO_FIRST  "${LIBZYPP_CURRENT}-${LIBZYPP_AGE}" )
 SET( VERSION "${LIBZYPP_MAJOR}.${LIBZYPP_MINOR}.${LIBZYPP_PATCH}" )
 CONFIGURE_FILE ( zypp/APIConfig.h.in zypp/APIConfig.h )
 
+SET (CMAKE_CXX_STANDARD ${ZYPPCOMMON_CXX_STANDARD})
 include(CheckCCompilerFlag)
 include(CheckCXXCompilerFlag)
 CHECK_C_COMPILER_FLAG("-Werror=format-security" CC_FORMAT_SECURITY)
