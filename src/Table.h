@@ -88,6 +88,57 @@ enum TableLineStyle {
 
 class Table;
 
+///////////////////////////////////////////////////////////////////
+// Conditional Table column helpers.
+namespace ctcdetail
+{
+  /// Remember either \a _if or \a _else function.
+  template<class Tif_,class Telse_>
+  struct ColumnIf
+  {
+    ColumnIf( bool condition_r, std::function<Tif_()> if_r,  std::function<Telse_()> else_r )
+    { if ( condition_r ) _if = std::move(if_r); else _else = std::move(else_r); }
+    std::function<Tif_()> _if;
+    std::function<Telse_()> _else;
+  };
+  /// Specialization both functions return the same type
+  template<class Tif_>
+  struct ColumnIf<Tif_,Tif_>
+  {
+    ColumnIf( bool condition_r, std::function<Tif_()> if_r,  std::function<Tif_()> else_r )
+    : _ifelse { condition_r ? std::move(if_r) : std::move(else_r) }
+    {}
+    ColumnIf( bool condition_r, std::function<Tif_()> && if_r )
+    { if ( condition_r ) _ifelse = std::move(if_r); }
+    std::function<Tif_()> _ifelse;
+  };
+}
+///////////////////////////////////////////////////////////////////
+/// Conditional Table column factory.
+///
+/// Creates an conditional \ref TableRow or \ref TableHeader entry,
+/// depending on the value of \a condition_r. The columns content,
+/// if needed, is determined calling the function object matching the
+/// condition.
+///
+/// An empty function object will cause the column to be hidden and no
+/// content will be retrieved (see overloaded operator<<(TableRow &,..)).
+///
+/// \code
+///   TableRow()
+///     << "first"
+///     << ColumnIf( condition, [](){ return "second"; }, [](){ return "one but last"; } )
+///     << "last";
+/// \endcode
+template<class Tif_, class Telse_>
+auto ColumnIf( bool condition_r, Tif_ && if_r, Telse_ && else_r ) -> ctcdetail::ColumnIf<decltype(if_r()),decltype(else_r())>
+{ return { condition_r, std::forward<Tif_>(if_r), std::forward<Telse_>(else_r) }; }
+/** \overload no column on 'else' */
+template<class Tif_>
+auto ColumnIf( bool condition_r, Tif_ && if_r ) -> ctcdetail::ColumnIf<decltype(if_r()),decltype(if_r())>
+{ return { condition_r, std::forward<Tif_>(if_r) }; }
+
+
 class TableRow
 {
 private:
@@ -233,6 +284,26 @@ TableRow & operator<<( TableRow & tr, Tp_ && val )
 template<class Tp_>
 TableRow && operator<<( TableRow && tr, Tp_ && val )
 { return std::move( tr << std::forward<Tp_>(val) ); }
+
+/** \overload universal refernce for conditional Table columns */
+template<class Tif_, class Telse_> TableRow & operator<<( TableRow & tr, const ctcdetail::ColumnIf<Tif_,Telse_> & val )
+{ if ( val._if ) tr.add( val._if() ); else if ( val._else ) tr.add( val._else() ); return tr; }
+/** \overload universal refernce for conditional Table columns */
+template<class Tif_, class Telse_> TableRow & operator<<( TableRow & tr, ctcdetail::ColumnIf<Tif_,Telse_> & val )
+{ if ( val._if ) tr.add( val._if() ); else if ( val._else ) tr.add( val._else() ); return tr; }
+/** \overload universal refernce for conditional Table columns */
+template<class Tif_, class Telse_> TableRow & operator<<( TableRow & tr, ctcdetail::ColumnIf<Tif_,Telse_> && val )
+{ if ( val._if ) tr.add( val._if() ); else if ( val._else ) tr.add( val._else() ); return tr; }
+
+/** \overload universal refernce for conditional Table columns (specialized) */
+template<class Tif_> TableRow & operator<<( TableRow & tr, const ctcdetail::ColumnIf<Tif_,Tif_> & val )
+{ if ( val._ifelse ) tr.add( val._ifelse() ); return tr; }
+/** \overload universal refernce for conditional Table columns (specialized) */
+template<class Tif_> TableRow & operator<<( TableRow & tr, ctcdetail::ColumnIf<Tif_,Tif_> & val )
+{ if ( val._ifelse ) tr.add( val._ifelse() ); return tr; }
+/** \overload universal refernce for conditional Table columns (specialized) */
+template<class Tif_> TableRow & operator<<( TableRow & tr, ctcdetail::ColumnIf<Tif_,Tif_> && val )
+{ if ( val._ifelse ) tr.add( val._ifelse() ); return tr; }
 
 
 class TableHeader : public TableRow {
