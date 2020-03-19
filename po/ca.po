@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-12-05 14:22+0100\n"
-"PO-Revision-Date: 2020-02-03 17:54+0000\n"
+"PO-Revision-Date: 2020-05-02 19:50+0000\n"
 "Last-Translator: David Medina <medipas@gmail.com>\n"
 "Language-Team: Catalan <https://l10n.opensuse.org/projects/libzypp/master/ca/"
 ">\n"
@@ -24,7 +24,7 @@ msgstr ""
 #: zypp/CheckSum.cc:136
 #, c-format, boost-format
 msgid "Dubious type '%s' for %u byte checksum '%s'"
-msgstr "Tipus dubtós \"%s\" per a la suma de comprovació \"%s\" de %u bytes."
+msgstr "Tipus dubtós %s per a byte %u, suma de verificació \"%s\""
 
 #: zypp/CountryCode.cc:50
 msgid "Unknown country: "
@@ -790,7 +790,7 @@ msgstr "Líban"
 #. :LBN:422:
 #: zypp/CountryCode.cc:284
 msgid "Saint Lucia"
-msgstr "Saint Lucia"
+msgstr "Santa Lucia"
 
 # LI
 #. :LCA:662:
@@ -5046,7 +5046,7 @@ msgstr ""
 #: zypp/solver/detail/SATResolver.cc:1437
 #, c-format, boost-format
 msgid "replacement of %s with %s"
-msgstr "substitució de %s per %s"
+msgstr "reemplaçament de %s per %s"
 
 #: zypp/solver/detail/SATResolver.cc:1448
 #, c-format, boost-format
