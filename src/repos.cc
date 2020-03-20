@@ -1473,7 +1473,7 @@ RepoInfoSet collect_repos_by_option( Zypper & zypper, const RepoServiceCommonSel
 
   if ( selectOpts._all )
   {
-    std::for_each( repos.begin(), repos.end(), [&toModify] (const RepoInfo &info) { toModify.insert( info ); } );
+    //std::for_each( repos.begin(), repos.end(), [&toModify] (const RepoInfo &info) { toModify.insert( info ); } );
   }
   else
   {

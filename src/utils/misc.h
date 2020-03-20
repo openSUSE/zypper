@@ -182,7 +182,7 @@ std::string & indent( std::string & text, int columns );
 // comparator for RepoInfo set
 struct RepoInfoAliasComparator
 {
-  bool operator()( const RepoInfo & a, const RepoInfo & b )
+  bool operator()( const RepoInfo & a, const RepoInfo & b ) const
   { return a.alias() < b.alias(); }
 };
 
@@ -190,7 +190,7 @@ struct RepoInfoAliasComparator
 // comparator for Service set
 struct ServiceAliasComparator
 {
-  bool operator()( const repo::RepoInfoBase_Ptr & a, const repo::RepoInfoBase_Ptr & b )
+  bool operator()( const repo::RepoInfoBase_Ptr & a, const repo::RepoInfoBase_Ptr & b ) const
   { return a->alias() < b->alias(); }
 };
 

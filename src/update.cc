@@ -248,7 +248,7 @@ namespace
 
     struct CategorySort
     {
-      bool operator()( const Patch::Category & lhs, const Patch::Category & rhs )
+      bool operator()( const Patch::Category & lhs, const Patch::Category & rhs ) const
       {
 	if ( lhs == rhs )
 	  return false;
