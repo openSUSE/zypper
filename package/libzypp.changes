@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Fri Mar 20 12:28:18 CET 2020 - ma@suse.de
+
+- RepoVariables: Add safe guard in case the caller does not own a
+  zypp instance.
+- Enable c++17. Define libyzpp CXX_STANDARD in ZyppCommon.cmake.
+- version 17.23.2 (22)
+
+-------------------------------------------------------------------
 Mon Mar  2 19:53:51 CET 2020 - ma@suse.de
 
 - Fix package status computation regarding unneeded, orphaned, recommended
