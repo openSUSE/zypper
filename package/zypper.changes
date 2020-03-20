@@ -1,4 +1,17 @@
 -------------------------------------------------------------------
+Fri Mar 20 12:31:18 CET 2020 - ma@suse.de
+- Tag 'retracted' patch status in info and list-patches (jsc#SLE-8770)
+- Tag 'R'etracted items in search tabes status columns (jsc#SLE-8770)
+- Relax 'Do not allow the abbreviation of cli arguments' in
+  legacy distibutions (bsc#1164543)
+- Correctly detect ambigous switch abbreviations (bsc#1165573)
+- zypper-aptitude: don't supplement zypper.
+  supplementing zypper means zypper-aptitude gets installed by
+  default and pulls in perl. Neither is desired on small systems.
+- BuildRequires:  libzypp-devel >= 17.23.2.
+- version 1.14.35
+
+-------------------------------------------------------------------
 Fri Feb 21 16:19:13 CET 2020 - ma@suse.de
 
 - Do not allow the abbreviation of cli arguments (bsc#1164543)
