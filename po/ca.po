@@ -8,11 +8,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-11 12:14+0100\n"
+"POT-Creation-Date: 2020-03-24 10:02+0100\n"
 "PO-Revision-Date: 2020-03-11 18:55+0000\n"
 "Last-Translator: David Medina <medipas@gmail.com>\n"
-"Language-Team: Catalan <https://l10n.opensuse.org/projects/zypper/master/ca/>"
-"\n"
+"Language-Team: Catalan <https://l10n.opensuse.org/projects/zypper/master/ca/"
+">\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1801,7 +1801,7 @@ msgstr "Disponible"
 
 #. translators: used as 'tag:' (i.e. followed by ':')
 #. translators: property name; short; used like "Name: value"
-#: src/Summary.cc:1327 src/info.cc:335 src/info.cc:426 src/info.cc:557
+#: src/Summary.cc:1327 src/info.cc:332 src/info.cc:423 src/info.cc:554
 msgid "Installed"
 msgstr "Instal·lat"
 
@@ -2634,9 +2634,9 @@ msgstr[1] "Suprimits %lu bloquejos."
 #. translators: name (general header)
 #: src/commands/locks/list.cc:135 src/commands/repos/list.cc:41
 #: src/commands/repos/list.cc:223 src/commands/services/list.cc:105
-#: src/info.cc:58 src/info.cc:449 src/info.cc:693 src/locales.cc:201
-#: src/search.cc:48 src/search.cc:228 src/search.cc:375 src/search.cc:519
-#: src/search.cc:583 src/update.cc:778 src/utils/misc.cc:228
+#: src/info.cc:58 src/info.cc:446 src/info.cc:692 src/locales.cc:201
+#: src/search.cc:48 src/search.cc:199 src/search.cc:304 src/search.cc:436
+#: src/search.cc:483 src/update.cc:779 src/utils/misc.cc:238
 msgid "Name"
 msgstr "Nom"
 
@@ -2648,15 +2648,15 @@ msgstr "Coincideix amb"
 #. translators: type (general header)
 #: src/commands/locks/list.cc:138 src/commands/repos/list.cc:52
 #: src/commands/repos/list.cc:261 src/commands/services/list.cc:114
-#: src/info.cc:450 src/search.cc:50 src/search.cc:231
+#: src/info.cc:447 src/search.cc:50 src/search.cc:202
 msgid "Type"
 msgstr "Tipus"
 
 #. translators: property name; short; used like "Name: value"
 #. translators: package's repository (header)
 #: src/commands/locks/list.cc:138 src/info.cc:56 src/search.cc:56
-#: src/search.cc:377 src/search.cc:518 src/search.cc:579 src/update.cc:775
-#: src/utils/misc.cc:227
+#: src/search.cc:306 src/search.cc:435 src/search.cc:479 src/update.cc:776
+#: src/utils/misc.cc:237
 msgid "Repository"
 msgstr "Repositori"
 
@@ -4217,25 +4217,25 @@ msgstr ""
 "Com --details, amb la informació addicional d'on la cerca ha coincidit (útil "
 "per a cerques a les dependències)."
 
-#: src/commands/search/search.cc:331 src/repos.cc:782
+#: src/commands/search/search.cc:338 src/repos.cc:782
 #, c-format, boost-format
 msgid "Specified repository '%s' is disabled."
 msgstr "El repositori especificat '%s' està inhabilitat."
 
 #. translators: empty search result message
-#: src/commands/search/search.cc:509
+#: src/commands/search/search.cc:516
 msgid "No matching items found."
 msgstr "No s'ha trobat cap element que coincideixi."
 
-#: src/commands/search/search.cc:546
+#: src/commands/search/search.cc:553
 msgid "Problem occurred initializing or executing the search query"
 msgstr "Problema a l'hora d'iniciar o executar l'ordre de cerca"
 
-#: src/commands/search/search.cc:547
+#: src/commands/search/search.cc:554
 msgid "See the above message for a hint."
 msgstr "Llegiu l'error anterior per tenir-ne una pista."
 
-#: src/commands/search/search.cc:548 src/repos.cc:991
+#: src/commands/search/search.cc:555 src/repos.cc:991
 msgid "Running 'zypper refresh' as root might resolve the problem."
 msgstr ""
 "Amb l'ordre \"zypper refresh\" com a administrador es podria resoldre el "
@@ -5099,7 +5099,7 @@ msgstr "Paquets de codi font superflus al directori de baixada:"
 
 #. translators: table headers
 #. translators: property name; short; used like "Name: value"
-#: src/commands/utils/source-download.cc:318 src/info.cc:348
+#: src/commands/utils/source-download.cc:318 src/info.cc:345
 msgid "Source package"
 msgstr "Paquet de codi font"
 
@@ -5264,15 +5264,15 @@ msgstr "%s és més antic que %s"
 #. translators: property name; short; used like "Name: value"
 #. translators: Table column header
 #. translators: package version (header)
-#: src/info.cc:60 src/info.cc:694 src/search.cc:52 src/search.cc:376
-#: src/search.cc:520 src/search.cc:584
+#: src/info.cc:60 src/info.cc:693 src/search.cc:52 src/search.cc:305
+#: src/search.cc:437 src/search.cc:484
 msgid "Version"
 msgstr "Versió"
 
 #. translators: property name; short; used like "Name: value"
 #. translators: package architecture (header)
-#: src/info.cc:62 src/search.cc:54 src/search.cc:521 src/search.cc:585
-#: src/update.cc:784
+#: src/info.cc:62 src/search.cc:54 src/search.cc:438 src/search.cc:485
+#: src/update.cc:785
 msgid "Arch"
 msgstr "Arquitectura"
 
@@ -5283,7 +5283,7 @@ msgstr "Proveïdor"
 
 #. translators: property name; short; used like "Name: value"
 #. translators: package summary (header)
-#: src/info.cc:70 src/search.cc:230 src/utils/misc.cc:233 src/utils/misc.cc:274
+#: src/info.cc:70 src/search.cc:201 src/utils/misc.cc:243 src/utils/misc.cc:284
 msgid "Summary"
 msgstr "Resum"
 
@@ -5297,7 +5297,7 @@ msgstr "Descripció"
 msgid "automatically"
 msgstr "automàticament"
 
-#: src/info.cc:174
+#: src/info.cc:171
 #, boost-format
 msgid "There would be %1% match for '%2%'."
 msgid_plural "There would be %1% matches for '%2%'."
@@ -5305,80 +5305,80 @@ msgstr[0] "Hi hauria %1% coincidència per a %2%."
 msgstr[1] "Hi hauria %1% coincidències per a %2%."
 
 #. TranslatorExplanation E.g. "package 'zypper' not found."
-#: src/info.cc:224
+#: src/info.cc:221
 #, c-format, boost-format
 msgid "%s '%s' not found."
 msgstr "No s'ha trobat %s \"%s\"."
 
 #. TranslatorExplanation E.g. "Information for package zypper:"
-#: src/info.cc:248
+#: src/info.cc:245
 #, c-format, boost-format
 msgid "Information for %s %s:"
 msgstr "Informació per a  %s %s:"
 
 # SR
-#: src/info.cc:330
+#: src/info.cc:327
 msgid "Support Level"
 msgstr "Nivell de suport"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:333
+#: src/info.cc:330
 msgid "Installed Size"
 msgstr "Mida un cop feta la instal·lació"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:337 src/info.cc:385 src/info.cc:560 src/utils/misc.cc:232
-#: src/utils/misc.cc:273
+#: src/info.cc:334 src/info.cc:382 src/info.cc:557 src/utils/misc.cc:242
+#: src/utils/misc.cc:283
 msgid "Status"
 msgstr "Estat"
 
-#: src/info.cc:341 src/info.cc:564
+#: src/info.cc:338 src/info.cc:561
 #, c-format, boost-format
 msgid "out-of-date (version %s installed)"
 msgstr "caducat (hi ha la versió %s instal·lada)"
 
-#: src/info.cc:343 src/info.cc:566
+#: src/info.cc:340 src/info.cc:563
 msgid "up-to-date"
 msgstr "actualitzat"
 
-#: src/info.cc:346 src/info.cc:569
+#: src/info.cc:343 src/info.cc:566
 msgid "not installed"
 msgstr "no instal·lat"
 
 #. translators: property name; short; used like "Name: value"
 #. translator: Table column header.
 #. Name
-#: src/info.cc:387 src/update.cc:397 src/utils/misc.cc:229
-#: src/utils/misc.cc:270
+#: src/info.cc:384 src/update.cc:398 src/utils/misc.cc:239
+#: src/utils/misc.cc:280
 msgid "Category"
 msgstr "Categoria"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:389 src/utils/misc.cc:230 src/utils/misc.cc:271
+#: src/info.cc:386 src/utils/misc.cc:240 src/utils/misc.cc:281
 msgid "Severity"
 msgstr "Gravetat"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:391
+#: src/info.cc:388
 msgid "Created On"
 msgstr "Creació"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:393 src/utils/misc.cc:231 src/utils/misc.cc:272
+#: src/info.cc:390 src/utils/misc.cc:241 src/utils/misc.cc:282
 msgid "Interactive"
 msgstr "Interactiu"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:428
+#: src/info.cc:425
 msgid "Visible to User"
 msgstr "Visible per a l'usuari"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:442 src/info.cc:478
+#: src/info.cc:439 src/info.cc:475
 msgid "Contents"
 msgstr "Contingut"
 
-#: src/info.cc:442
+#: src/info.cc:439
 msgid "(empty)"
 msgstr "(buit)"
 
@@ -5387,92 +5387,92 @@ msgstr "(buit)"
 #. translators: S for 'installed Status'
 #. translators: S for installed Status
 #. TranslatorExplanation S stands for Status
-#: src/info.cc:448 src/info.cc:692 src/locales.cc:199 src/search.cc:46
-#: src/search.cc:227 src/search.cc:374 src/search.cc:517 src/search.cc:578
-#: src/update.cc:773
+#: src/info.cc:445 src/info.cc:691 src/locales.cc:199 src/search.cc:46
+#: src/search.cc:198 src/search.cc:303 src/search.cc:434 src/search.cc:478
+#: src/update.cc:774
 msgid "S"
 msgstr "S"
 
 #. translators: Table column header
-#: src/info.cc:451 src/search.cc:378
+#: src/info.cc:448 src/search.cc:307
 msgid "Dependency"
 msgstr "Dependència"
 
-#: src/info.cc:456 src/info.cc:470
+#: src/info.cc:453 src/info.cc:467
 msgid "Required"
 msgstr "Requerit"
 
-#: src/info.cc:461 src/info.cc:470 src/search.cc:314
+#: src/info.cc:458 src/info.cc:467 src/search.cc:243
 msgid "Recommended"
 msgstr "Recomanat"
 
-#: src/info.cc:467 src/info.cc:470 src/search.cc:316
+#: src/info.cc:464 src/info.cc:467 src/search.cc:245
 msgid "Suggested"
 msgstr "Suggerit"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:537
+#: src/info.cc:534
 msgid "End of Support"
 msgstr "Final del suport"
 
-#: src/info.cc:542
+#: src/info.cc:539
 msgid "unknown"
 msgstr "desconegut"
 
 #. translators: %1% is an URL or Path pointing to some document
-#: src/info.cc:547
+#: src/info.cc:544
 #, boost-format
 msgid "See %1%"
 msgstr "Vegeu %1%"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:553
+#: src/info.cc:550
 msgid "Flavor"
 msgstr "Gust"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:555 src/search.cc:586
+#: src/info.cc:552 src/search.cc:486
 msgid "Is Base"
 msgstr "És Base"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:576 src/info.cc:603
+#: src/info.cc:573 src/info.cc:600
 msgid "Update Repositories"
 msgstr "Actualitza els repositoris"
 
-#: src/info.cc:581
+#: src/info.cc:578
 msgid "Content Id"
 msgstr "Contingut d'Id"
 
-#: src/info.cc:593
+#: src/info.cc:590
 msgid "Provided by enabled repository"
 msgstr "Proveït pel repositori habilitat"
 
-#: src/info.cc:598
+#: src/info.cc:595
 msgid "Not provided by any enabled repository"
 msgstr "No proveït per cap repositori habilitat"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:608
+#: src/info.cc:605
 msgid "CPE Name"
 msgstr "Nom de CPE"
 
-#: src/info.cc:613
+#: src/info.cc:610
 msgid "undefined"
 msgstr "no definit"
 
-#: src/info.cc:615
+#: src/info.cc:612
 msgid "invalid CPE Name"
 msgstr "Nom de CPE no vàlid"
 
 # SR
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:618
+#: src/info.cc:615
 msgid "Short Name"
 msgstr "Nom curt"
 
 #. translators: property name; short; used like "Name: value"; is followed by a list of binary packages built from this source package
-#: src/info.cc:702
+#: src/info.cc:701
 msgid "Builds binary package"
 msgstr "Construeix un paquet binari"
 
@@ -5495,27 +5495,27 @@ msgstr "Codi"
 msgid "Language"
 msgstr "Llengua"
 
-#: src/locales.cc:245
+#: src/locales.cc:240
 #, c-format, boost-format
 msgid "Packages for %s (locale '%s', requested: %s):"
 msgstr "Paquets per a %s (llengua: %s, sol·licitada: %s):"
 
-#: src/locales.cc:258
+#: src/locales.cc:253
 #, c-format, boost-format
 msgid "Added locale: %s"
 msgstr "Llengua afegida: %s"
 
-#: src/locales.cc:263
+#: src/locales.cc:258
 #, c-format, boost-format
 msgid " %s is already requested."
 msgstr " %s ja s'ha sol·licitat."
 
-#: src/locales.cc:281
+#: src/locales.cc:276
 #, c-format, boost-format
 msgid "Removed locale: %s"
 msgstr "Llengua suprimida: %s"
 
-#: src/locales.cc:286
+#: src/locales.cc:281
 #, c-format, boost-format
 msgid "%s was not requested."
 msgstr "%s no s'ha sol·licitat."
@@ -6206,29 +6206,29 @@ msgstr "Problema llegint la capçalera RPM de %s. És un fitxer RPM?"
 msgid "Plain RPM files cache"
 msgstr "Memòria cau de fitxers RPM simple"
 
-#: src/search.cc:122
+#: src/search.cc:99
 msgid "System Packages"
 msgstr "Paquets de sistema"
 
-#: src/search.cc:332
+#: src/search.cc:261
 msgid "No needed patches found."
 msgstr "No s'ha trobat cap pedaç necessari."
 
-#: src/search.cc:412
+#: src/search.cc:340
 msgid "No patterns found."
 msgstr "No s'ha trobat cap patró."
 
-#: src/search.cc:511
+#: src/search.cc:428
 msgid "No packages found."
 msgstr "No s'ha trobat cap paquet."
 
 #. translators: used in products. Internal Name is the unix name of the
 #. product whereas simply Name is the official full name of the product.
-#: src/search.cc:582
+#: src/search.cc:482
 msgid "Internal Name"
 msgstr "Nom intern"
 
-#: src/search.cc:660
+#: src/search.cc:520
 msgid "No products found."
 msgstr "No s'ha trobat cap producte."
 
@@ -6566,7 +6566,7 @@ msgid "Dependencies of all installed packages are satisfied."
 msgstr "Es satisfan totes les dependències dels paquets instal·lats."
 
 #. translator: stats table header (plural number is %2%)
-#: src/update.cc:327
+#: src/update.cc:328
 #, boost-format
 msgid "Considering %1% out of %2% applicable patches:"
 msgid_plural "Considering %1% out of %2% applicable patches:"
@@ -6574,7 +6574,7 @@ msgstr[0] "Es té en compte %1% de %2% pedaç aplicable:"
 msgstr[1] "Es tenen en compte %1% de %2% pedaços aplicables:"
 
 #. translator: stats table header
-#: src/update.cc:331
+#: src/update.cc:332
 #, boost-format
 msgid "Found %1% applicable patch:"
 msgid_plural "Found %1% applicable patches:"
@@ -6582,7 +6582,7 @@ msgstr[0] "S'ha trobat %1% pedaç aplicable:"
 msgstr[1] "S'han trobat %1% pedaços aplicables:"
 
 #. translator: stats summary
-#: src/update.cc:341
+#: src/update.cc:342
 #, c-format, boost-format
 msgid "%d patch locked"
 msgid_plural "%d patches locked"
@@ -6590,7 +6590,7 @@ msgstr[0] "%d pedaç blocat"
 msgstr[1] "%d pedaços blocats"
 
 #. translator: stats summary
-#: src/update.cc:349
+#: src/update.cc:350
 #, c-format, boost-format
 msgid "%d patch optional"
 msgid_plural "%d patches optional"
@@ -6599,13 +6599,13 @@ msgstr[1] "%d pedaços opcionals"
 
 #. translator: Hint displayed right adjusted; %1% is a CLI option
 #. "42 patches optional                  (use --with-optional to include optional patches)"
-#: src/update.cc:353
+#: src/update.cc:354
 #, boost-format
 msgid "use '%1%' to include optional patches"
 msgstr "useu \"%1%\" per incloure-hi els pedaços opcionals"
 
 #. translator: stats summary
-#: src/update.cc:362
+#: src/update.cc:363
 #, c-format, boost-format
 msgid "%d patch needed"
 msgid_plural "%d patches needed"
@@ -6613,7 +6613,7 @@ msgstr[0] "%d pedaç necessaris"
 msgstr[1] "%d pedaços necessaris"
 
 #. translator: stats summary
-#: src/update.cc:365
+#: src/update.cc:366
 #, c-format, boost-format
 msgid "%d security patch"
 msgid_plural "%d security patches"
@@ -6621,17 +6621,17 @@ msgstr[0] "%d pedaç de seguretat"
 msgstr[1] "%d pedaços de seguretat"
 
 #. translator: Table column header.
-#: src/update.cc:399
+#: src/update.cc:400
 msgid "Updatestack"
 msgstr "Pila d'actualització"
 
 #. translator: Table column header.
-#: src/update.cc:401 src/update.cc:693
+#: src/update.cc:402 src/update.cc:694
 msgid "Patches"
 msgstr "Pedaços"
 
 #. translator: Table column header.
-#: src/update.cc:403
+#: src/update.cc:404
 msgid "Locked"
 msgstr "Blocat"
 
@@ -6640,67 +6640,67 @@ msgstr "Blocat"
 #. Category    | Updatestack | Patches | Locked | Included categories
 #. ------------+-------------+---------+--------+---------------------
 #. optional   | ...                      ..... | enhancement, feature
-#: src/update.cc:409
+#: src/update.cc:410
 msgid "Included categories"
 msgstr "Categories incloses"
 
 #. translator: Table headline; 'Needed' refers to patches with status 'needed'
-#: src/update.cc:583
+#: src/update.cc:584
 msgid "Needed software management updates will be installed first:"
 msgstr ""
 "Primer s'instal·laran les actualitzacions de gestió de programari "
 "necessàries:"
 
-#: src/update.cc:591 src/update.cc:831
+#: src/update.cc:592 src/update.cc:832
 msgid "No updates found."
 msgstr "No s'ha trobat cap actualització."
 
 #. translator: Table headline
-#: src/update.cc:598
+#: src/update.cc:599
 msgid "The following updates are also available:"
 msgstr "Les següents actualitzacions també estan disponibles:"
 
-#: src/update.cc:691
+#: src/update.cc:692
 msgid "Package updates"
 msgstr "Actualitzacions de paquets"
 
-#: src/update.cc:695
+#: src/update.cc:696
 msgid "Pattern updates"
 msgstr "Actualitzacions de patrons"
 
-#: src/update.cc:697
+#: src/update.cc:698
 msgid "Product updates"
 msgstr "Actualitzacions de productes"
 
-#: src/update.cc:783
+#: src/update.cc:784
 msgid "Current Version"
 msgstr "Versió actual"
 
-#: src/update.cc:784
+#: src/update.cc:785
 msgid "Available Version"
 msgstr "Versió disponible"
 
-#: src/update.cc:959
+#: src/update.cc:960
 msgid "No matching issues found."
 msgstr "No s'ha trobat cap assumpte que coincideixi."
 
-#: src/update.cc:965
+#: src/update.cc:966
 msgid "The following matches in issue numbers have been found:"
 msgstr "S'han trobat les següents coincidències d'aspecte numèric:"
 
-#: src/update.cc:975
+#: src/update.cc:976
 msgid "Matches in patch descriptions of the following patches have been found:"
 msgstr ""
 "S'han trobat coincidències en descripcions de pedaços dels pedaços següents:"
 
-#: src/update.cc:1037
+#: src/update.cc:1038
 #, c-format, boost-format
 msgid "Fix for bugzilla issue number %s was not found or is not needed."
 msgstr ""
 "La reparació de l'assumpte de Bugzilla amb el número %s no s'ha trobat o no "
 "es necessita."
 
-#: src/update.cc:1039
+#: src/update.cc:1040
 #, c-format, boost-format
 msgid "Fix for CVE issue number %s was not found or is not needed."
 msgstr ""
@@ -6708,7 +6708,7 @@ msgstr ""
 "necessita."
 
 #. translators: keep '%s issue' together, it's something like 'CVE issue' or 'Bugzilla issue'
-#: src/update.cc:1042
+#: src/update.cc:1043
 #, c-format, boost-format
 msgid "Fix for %s issue number %s was not found or is not needed."
 msgstr ""
@@ -6913,44 +6913,44 @@ msgstr ""
 "En aquest cas cal que primer s'instal·li un paquet específic que proporcioni "
 "la subordre. Aquests paquets sovint s'anomenen \"%1%\" o \"%2%\"."
 
-#: src/utils/misc.cc:91
+#: src/utils/misc.cc:92
 msgid "package"
 msgid_plural "packages"
 msgstr[0] "el paquet"
 msgstr[1] "els paquets"
 
-#: src/utils/misc.cc:93
+#: src/utils/misc.cc:94
 msgid "pattern"
 msgid_plural "patterns"
 msgstr[0] "el patró"
 msgstr[1] "els patrons"
 
-#: src/utils/misc.cc:95
+#: src/utils/misc.cc:96
 msgid "product"
 msgid_plural "product"
 msgstr[0] "el producte"
 msgstr[1] "els productes"
 
-#: src/utils/misc.cc:97
+#: src/utils/misc.cc:98
 msgid "patch"
 msgid_plural "patches"
 msgstr[0] "el pedaç"
 msgstr[1] "els pedaços"
 
-#: src/utils/misc.cc:99
+#: src/utils/misc.cc:100
 msgid "srcpackage"
 msgid_plural "srcpackages"
 msgstr[0] "paquet src"
 msgstr[1] "paquets src"
 
-#: src/utils/misc.cc:101
+#: src/utils/misc.cc:102
 msgid "application"
 msgid_plural "applications"
 msgstr[0] "aplicació"
 msgstr[1] "aplicacions"
 
 #. default
-#: src/utils/misc.cc:103
+#: src/utils/misc.cc:104
 msgid "resolvable"
 msgid_plural "resolvables"
 msgstr[0] "resoluble"
@@ -6958,93 +6958,99 @@ msgstr[1] "resolubles"
 
 #. Patch status: i18n + color
 #. translator: patch status
-#: src/utils/misc.cc:112
+#: src/utils/misc.cc:113
 msgid "unwanted"
 msgstr "no volgut"
 
 #. translator: patch status
-#: src/utils/misc.cc:113
+#: src/utils/misc.cc:114
 msgid "optional"
 msgstr "opcional"
 
 #. translator: patch status
-#: src/utils/misc.cc:114
+#: src/utils/misc.cc:115
 msgid "needed"
 msgstr "necessari"
 
 #. translator: patch status
-#: src/utils/misc.cc:115
+#: src/utils/misc.cc:116
 msgid "applied"
 msgstr "aplicat"
 
 #. translator: patch status
-#: src/utils/misc.cc:116
+#: src/utils/misc.cc:117
 msgid "not needed"
 msgstr "no és necessari"
 
 #. translator: patch status
-#: src/utils/misc.cc:117
+#: src/utils/misc.cc:118
 msgid "undetermined"
 msgstr "sense determinar"
 
+#. pi_r is no patch!
+#. translator: patch status
+#: src/utils/misc.cc:119
+msgid "retracted"
+msgstr ""
+
 #. << _("Repository")
-#: src/utils/misc.cc:267
+#: src/utils/misc.cc:277
 msgid "Issue"
 msgstr "Problema"
 
-#: src/utils/misc.cc:268
+#: src/utils/misc.cc:278
 msgid "No."
 msgstr "No."
 
-#: src/utils/misc.cc:269
+#: src/utils/misc.cc:279
 msgid "Patch"
 msgstr "Pedaç"
 
-#: src/utils/misc.cc:345
+#: src/utils/misc.cc:355
 msgid "Specified local path does not exist or is not accessible."
 msgstr "L'adreça local especificada no existeix o no és accessible."
 
-#: src/utils/misc.cc:357
+#: src/utils/misc.cc:367
 msgid "Given URI is invalid"
 msgstr "L'URI introduït no és vàlid."
 
 #. Guess failed:
 #. translators: don't translate '<platform>'
-#: src/utils/misc.cc:447
+#: src/utils/misc.cc:457
 msgid "Unable to guess a value for <platform>."
 msgstr "No es pot estimar un valor per a <platform>."
 
-#: src/utils/misc.cc:448
+#: src/utils/misc.cc:458
 msgid "Please use obs://<project>/<platform>"
 msgstr "Si us plau, useu obs://<project>/<platform>"
 
-#: src/utils/misc.cc:449 src/utils/misc.cc:486
+#: src/utils/misc.cc:459 src/utils/misc.cc:496
 #, c-format, boost-format
 msgid "Example: %s"
 msgstr "Exemple: %s"
 
-#: src/utils/misc.cc:485
+#: src/utils/misc.cc:495
 msgid "Invalid OBS URI."
 msgstr "OBS URI no vàlid."
 
-#: src/utils/misc.cc:485
+#: src/utils/misc.cc:495
 msgid "Correct form is obs://<project>/[platform]"
 msgstr "La forma correcta és obs://<project>/[platform]"
 
-#: src/utils/misc.cc:535
+#: src/utils/misc.cc:545
 msgid "Problem copying the specified RPM file to the cache directory."
 msgstr ""
 "Problema copiant el fitxer RPM especificat a la memòria cau del directori."
 
-#: src/utils/misc.cc:536
+#: src/utils/misc.cc:546
 msgid "Perhaps you are running out of disk space."
 msgstr "Potser s'està esgotant l'espai del disc."
 
-#: src/utils/misc.cc:544
+#: src/utils/misc.cc:554
 msgid "Problem retrieving the specified RPM file"
 msgstr "Problema obtenint el fitxer RPM especificat"
 
-#: src/utils/misc.cc:545
+#: src/utils/misc.cc:555
 msgid "Please check whether the file is accessible."
 msgstr "Si us plau, comproveu si el fitxer és accessible."
 

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper.km\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-11 12:14+0100\n"
+"POT-Creation-Date: 2020-03-24 10:02+0100\n"
 "PO-Revision-Date: 2012-05-24 15:15+0700\n"
 "Last-Translator: Khoem Sokhem <khoemsokhem@khmeros.info>\n"
 "Language-Team: Khmer <support@khmeros.info>\n"
@@ -1640,7 +1640,7 @@ msgstr "កំណែ​ដែល​មាន"
 
 #. translators: used as 'tag:' (i.e. followed by ':')
 #. translators: property name; short; used like "Name: value"
-#: src/Summary.cc:1327 src/info.cc:335 src/info.cc:426 src/info.cc:557
+#: src/Summary.cc:1327 src/info.cc:332 src/info.cc:423 src/info.cc:554
 msgid "Installed"
 msgstr "បាន​ដំឡើង"
 
@@ -2400,9 +2400,9 @@ msgstr[0] "សោ %lu ដែលបាន​យកចេញ ។"
 #. translators: name (general header)
 #: src/commands/locks/list.cc:135 src/commands/repos/list.cc:41
 #: src/commands/repos/list.cc:223 src/commands/services/list.cc:105
-#: src/info.cc:58 src/info.cc:449 src/info.cc:693 src/locales.cc:201
-#: src/search.cc:48 src/search.cc:228 src/search.cc:375 src/search.cc:519
-#: src/search.cc:583 src/update.cc:778 src/utils/misc.cc:228
+#: src/info.cc:58 src/info.cc:446 src/info.cc:692 src/locales.cc:201
+#: src/search.cc:48 src/search.cc:199 src/search.cc:304 src/search.cc:436
+#: src/search.cc:483 src/update.cc:779 src/utils/misc.cc:238
 msgid "Name"
 msgstr "ឈ្មោះ"
 
@@ -2415,15 +2415,15 @@ msgstr "បំណះ"
 #. translators: type (general header)
 #: src/commands/locks/list.cc:138 src/commands/repos/list.cc:52
 #: src/commands/repos/list.cc:261 src/commands/services/list.cc:114
-#: src/info.cc:450 src/search.cc:50 src/search.cc:231
+#: src/info.cc:447 src/search.cc:50 src/search.cc:202
 msgid "Type"
 msgstr "ប្រភេទ"
 
 #. translators: property name; short; used like "Name: value"
 #. translators: package's repository (header)
 #: src/commands/locks/list.cc:138 src/info.cc:56 src/search.cc:56
-#: src/search.cc:377 src/search.cc:518 src/search.cc:579 src/update.cc:775
-#: src/utils/misc.cc:227
+#: src/search.cc:306 src/search.cc:435 src/search.cc:479 src/update.cc:776
+#: src/utils/misc.cc:237
 msgid "Repository"
 msgstr "ឃ្លាំង"
 
@@ -3899,26 +3899,26 @@ msgid ""
 "(useful for search in dependencies)."
 msgstr ""
 
-#: src/commands/search/search.cc:331 src/repos.cc:782
+#: src/commands/search/search.cc:338 src/repos.cc:782
 #, c-format, boost-format
 msgid "Specified repository '%s' is disabled."
 msgstr "ឃ្លាំង​ដែល​បាន​បញ្ជាក់​ '%s' ត្រូវ​បាន​បិទ ។"
 
 #. translators: empty search result message
-#: src/commands/search/search.cc:509
+#: src/commands/search/search.cc:516
 #, fuzzy
 msgid "No matching items found."
 msgstr "រក​មិនឃើញ​ការ​ចេញផ្សាយ​​ដែល​ផ្គូផ្គង ។​"
 
-#: src/commands/search/search.cc:546
+#: src/commands/search/search.cc:553
 msgid "Problem occurred initializing or executing the search query"
 msgstr "មាន​បញ្ហា​កើតឡើង​​នៅពេល​ចាប់ផ្ដើម ឬ​ប្រតិបត្តិ​សំណួរ​ស្វែងរក"
 
-#: src/commands/search/search.cc:547
+#: src/commands/search/search.cc:554
 msgid "See the above message for a hint."
 msgstr "មើល​សារ​ខាងលើ​សម្រាប់​ព័ត៌មាន​ជំនួយ ។"
 
-#: src/commands/search/search.cc:548 src/repos.cc:991
+#: src/commands/search/search.cc:555 src/repos.cc:991
 msgid "Running 'zypper refresh' as root might resolve the problem."
 msgstr "ការ​រត់ 'zypper refresh' ជា root គឺ​អាច​ដោះស្រាយ​បញ្ហា​បាន ។"
 
@@ -4723,7 +4723,7 @@ msgstr ""
 
 #. translators: table headers
 #. translators: property name; short; used like "Name: value"
-#: src/commands/utils/source-download.cc:318 src/info.cc:348
+#: src/commands/utils/source-download.cc:318 src/info.cc:345
 #, fuzzy
 msgid "Source package"
 msgstr "កញ្ចប់​ប្រភព"
@@ -4882,15 +4882,15 @@ msgstr "%s គឺ​ចាស់​ជាង %s"
 #. translators: property name; short; used like "Name: value"
 #. translators: Table column header
 #. translators: package version (header)
-#: src/info.cc:60 src/info.cc:694 src/search.cc:52 src/search.cc:376
-#: src/search.cc:520 src/search.cc:584
+#: src/info.cc:60 src/info.cc:693 src/search.cc:52 src/search.cc:305
+#: src/search.cc:437 src/search.cc:484
 msgid "Version"
 msgstr "កំណែ"
 
 #. translators: property name; short; used like "Name: value"
 #. translators: package architecture (header)
-#: src/info.cc:62 src/search.cc:54 src/search.cc:521 src/search.cc:585
-#: src/update.cc:784
+#: src/info.cc:62 src/search.cc:54 src/search.cc:438 src/search.cc:485
+#: src/update.cc:785
 msgid "Arch"
 msgstr "ស្ថាបត្យកម្ម"
 
@@ -4901,7 +4901,7 @@ msgstr "ក្រុមហ៊ុន​លក់ ៖ "
 
 #. translators: property name; short; used like "Name: value"
 #. translators: package summary (header)
-#: src/info.cc:70 src/search.cc:230 src/utils/misc.cc:233 src/utils/misc.cc:274
+#: src/info.cc:70 src/search.cc:201 src/utils/misc.cc:243 src/utils/misc.cc:284
 msgid "Summary"
 msgstr "សង្ខេប"
 
@@ -4915,87 +4915,87 @@ msgstr "សេចក្តី​ពិពណ៌នា"
 msgid "automatically"
 msgstr ""
 
-#: src/info.cc:174
+#: src/info.cc:171
 #, boost-format
 msgid "There would be %1% match for '%2%'."
 msgid_plural "There would be %1% matches for '%2%'."
 msgstr[0] ""
 
 #. TranslatorExplanation E.g. "package 'zypper' not found."
-#: src/info.cc:224
+#: src/info.cc:221
 #, c-format, boost-format
 msgid "%s '%s' not found."
 msgstr "រក​មិនឃើញ %s '%s' ទេ ។"
 
 #. TranslatorExplanation E.g. "Information for package zypper:"
-#: src/info.cc:248
+#: src/info.cc:245
 #, c-format, boost-format
 msgid "Information for %s %s:"
 msgstr "ព័ត៌មាន​សម្រាប់ %s %s ៖"
 
-#: src/info.cc:330
+#: src/info.cc:327
 msgid "Support Level"
 msgstr "កម្រិត​គាំទ្រ ៖"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:333
+#: src/info.cc:330
 msgid "Installed Size"
 msgstr "ទំហំ​ដំឡើង ៖ "
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:337 src/info.cc:385 src/info.cc:560 src/utils/misc.cc:232
-#: src/utils/misc.cc:273
+#: src/info.cc:334 src/info.cc:382 src/info.cc:557 src/utils/misc.cc:242
+#: src/utils/misc.cc:283
 msgid "Status"
 msgstr "ស្ថានភាព"
 
-#: src/info.cc:341 src/info.cc:564
+#: src/info.cc:338 src/info.cc:561
 #, c-format, boost-format
 msgid "out-of-date (version %s installed)"
 msgstr "ហួស​សម័យ (បាន​ដំឡើង​កំណែ %s)"
 
-#: src/info.cc:343 src/info.cc:566
+#: src/info.cc:340 src/info.cc:563
 msgid "up-to-date"
 msgstr "ទាន់សម័យ"
 
-#: src/info.cc:346 src/info.cc:569
+#: src/info.cc:343 src/info.cc:566
 msgid "not installed"
 msgstr "មិន​បាន​ដំឡើង"
 
 #. translators: property name; short; used like "Name: value"
 #. translator: Table column header.
 #. Name
-#: src/info.cc:387 src/update.cc:397 src/utils/misc.cc:229
-#: src/utils/misc.cc:270
+#: src/info.cc:384 src/update.cc:398 src/utils/misc.cc:239
+#: src/utils/misc.cc:280
 msgid "Category"
 msgstr "ប្រភេទ"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:389 src/utils/misc.cc:230 src/utils/misc.cc:271
+#: src/info.cc:386 src/utils/misc.cc:240 src/utils/misc.cc:281
 msgid "Severity"
 msgstr "ភាព​ត្រឹមត្រូវ"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:391
+#: src/info.cc:388
 msgid "Created On"
 msgstr "បាន​បង្កើត​នៅ ៖"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:393 src/utils/misc.cc:231 src/utils/misc.cc:272
+#: src/info.cc:390 src/utils/misc.cc:241 src/utils/misc.cc:282
 #, fuzzy
 msgid "Interactive"
 msgstr "អន្តរ​សកម្ម ៖ "
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:428
+#: src/info.cc:425
 msgid "Visible to User"
 msgstr ""
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:442 src/info.cc:478
+#: src/info.cc:439 src/info.cc:475
 msgid "Contents"
 msgstr "មាតិកា"
 
-#: src/info.cc:442
+#: src/info.cc:439
 msgid "(empty)"
 msgstr "(ទទេ)"
 
@@ -5004,98 +5004,98 @@ msgstr "(ទទេ)"
 #. translators: S for 'installed Status'
 #. translators: S for installed Status
 #. TranslatorExplanation S stands for Status
-#: src/info.cc:448 src/info.cc:692 src/locales.cc:199 src/search.cc:46
-#: src/search.cc:227 src/search.cc:374 src/search.cc:517 src/search.cc:578
-#: src/update.cc:773
+#: src/info.cc:445 src/info.cc:691 src/locales.cc:199 src/search.cc:46
+#: src/search.cc:198 src/search.cc:303 src/search.cc:434 src/search.cc:478
+#: src/update.cc:774
 msgid "S"
 msgstr "ស"
 
 #. translators: Table column header
-#: src/info.cc:451 src/search.cc:378
+#: src/info.cc:448 src/search.cc:307
 msgid "Dependency"
 msgstr "ភាព​អាស្រ័យ"
 
-#: src/info.cc:456 src/info.cc:470
+#: src/info.cc:453 src/info.cc:467
 #, fuzzy
 msgid "Required"
 msgstr "ទាមទារ"
 
-#: src/info.cc:461 src/info.cc:470 src/search.cc:314
+#: src/info.cc:458 src/info.cc:467 src/search.cc:243
 msgid "Recommended"
 msgstr "បាន​ផ្ដល់​ជា​អនុសាសន៍"
 
-#: src/info.cc:467 src/info.cc:470 src/search.cc:316
+#: src/info.cc:464 src/info.cc:467 src/search.cc:245
 msgid "Suggested"
 msgstr "បាន​ស្នើ"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:537
+#: src/info.cc:534
 msgid "End of Support"
 msgstr ""
 
-#: src/info.cc:542
+#: src/info.cc:539
 msgid "unknown"
 msgstr "មិន​ស្គាល់"
 
 #. translators: %1% is an URL or Path pointing to some document
-#: src/info.cc:547
+#: src/info.cc:544
 #, boost-format
 msgid "See %1%"
 msgstr ""
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:553
+#: src/info.cc:550
 msgid "Flavor"
 msgstr "លក្ខណៈ"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:555 src/search.cc:586
+#: src/info.cc:552 src/search.cc:486
 msgid "Is Base"
 msgstr "ជា​មូលដ្ឋាន"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:576 src/info.cc:603
+#: src/info.cc:573 src/info.cc:600
 #, fuzzy
 msgid "Update Repositories"
 msgstr "ឃ្លាំង​ដែលបាន​បញ្ជាក់ ៖ "
 
-#: src/info.cc:581
+#: src/info.cc:578
 #, fuzzy
 msgid "Content Id"
 msgstr "មាតិកា"
 
-#: src/info.cc:593
+#: src/info.cc:590
 #, fuzzy
 msgid "Provided by enabled repository"
 msgstr "បាន​បើក​ឃ្លាំង"
 
-#: src/info.cc:598
+#: src/info.cc:595
 #, fuzzy
 msgid "Not provided by any enabled repository"
 msgstr "រក​មិនឃើញ​កញ្ចប់​ប្រភព '%s' នៅ​ក្នុង​ឃ្លាំង​ដែលបានបញ្ជាក់​ទេ ។"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:608
+#: src/info.cc:605
 #, fuzzy
 msgid "CPE Name"
 msgstr "ឈ្មោះ"
 
-#: src/info.cc:613
+#: src/info.cc:610
 msgid "undefined"
 msgstr ""
 
-#: src/info.cc:615
+#: src/info.cc:612
 #, fuzzy
 msgid "invalid CPE Name"
 msgstr "caName មិន​ត្រឹមត្រូវ ៖ %1 ។"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:618
+#: src/info.cc:615
 msgid "Short Name"
 msgstr "ឈ្មោះ​កាត់"
 
 #. translators: property name; short; used like "Name: value"; is followed by a list of binary packages built from this source package
-#: src/info.cc:702
+#: src/info.cc:701
 msgid "Builds binary package"
 msgstr ""
 
@@ -5118,27 +5118,27 @@ msgstr ""
 msgid "Language"
 msgstr ""
 
-#: src/locales.cc:245
+#: src/locales.cc:240
 #, c-format, boost-format
 msgid "Packages for %s (locale '%s', requested: %s):"
 msgstr ""
 
-#: src/locales.cc:258
+#: src/locales.cc:253
 #, c-format, boost-format
 msgid "Added locale: %s"
 msgstr ""
 
-#: src/locales.cc:263
+#: src/locales.cc:258
 #, c-format, boost-format
 msgid " %s is already requested."
 msgstr ""
 
-#: src/locales.cc:281
+#: src/locales.cc:276
 #, c-format, boost-format
 msgid "Removed locale: %s"
 msgstr ""
 
-#: src/locales.cc:286
+#: src/locales.cc:281
 #, c-format, boost-format
 msgid "%s was not requested."
 msgstr ""
@@ -5805,29 +5805,29 @@ msgstr "មាន​បញ្ហា​ក្នុងការ​អាន​ប
 msgid "Plain RPM files cache"
 msgstr "ឃ្លាំង​សម្ងាត់​ឯកសារ RPM ធម្មតា"
 
-#: src/search.cc:122
+#: src/search.cc:99
 msgid "System Packages"
 msgstr "កញ្ចប់​ប្រព័ន្ធ"
 
-#: src/search.cc:332
+#: src/search.cc:261
 msgid "No needed patches found."
 msgstr "រក​មិន​ឃើញ​បំណះ​ដែល​ត្រូវការ ។"
 
-#: src/search.cc:412
+#: src/search.cc:340
 msgid "No patterns found."
 msgstr "រក​មិនឃើញ​លំនាំ​ទេ ។"
 
-#: src/search.cc:511
+#: src/search.cc:428
 msgid "No packages found."
 msgstr "រកមិនឃើញ​កញ្ចប់​ទេ ។"
 
 #. translators: used in products. Internal Name is the unix name of the
 #. product whereas simply Name is the official full name of the product.
-#: src/search.cc:582
+#: src/search.cc:482
 msgid "Internal Name"
 msgstr "ឈ្មោះ​ខាង​ក្នុង"
 
-#: src/search.cc:660
+#: src/search.cc:520
 msgid "No products found."
 msgstr "រកមិនឃើញ​ផលិតផល​ទេ ។"
 
@@ -6141,28 +6141,28 @@ msgid "Dependencies of all installed packages are satisfied."
 msgstr "ភាព​អាស្រ័យ​របស់​កញ្ចប់​ដែល​បាន​ដំឡើង​គឺ​ត្រឹមត្រូវ ។"
 
 #. translator: stats table header (plural number is %2%)
-#: src/update.cc:327
+#: src/update.cc:328
 #, boost-format
 msgid "Considering %1% out of %2% applicable patches:"
 msgid_plural "Considering %1% out of %2% applicable patches:"
 msgstr[0] ""
 
 #. translator: stats table header
-#: src/update.cc:331
+#: src/update.cc:332
 #, boost-format
 msgid "Found %1% applicable patch:"
 msgid_plural "Found %1% applicable patches:"
 msgstr[0] ""
 
 #. translator: stats summary
-#: src/update.cc:341
+#: src/update.cc:342
 #, fuzzy, c-format, boost-format
 msgid "%d patch locked"
 msgid_plural "%d patches locked"
 msgstr[0] "ត្រូវការ​បំណះ %d"
 
 #. translator: stats summary
-#: src/update.cc:349
+#: src/update.cc:350
 #, fuzzy, c-format, boost-format
 msgid "%d patch optional"
 msgid_plural "%d patches optional"
@@ -6170,37 +6170,37 @@ msgstr[0] "ត្រូវការ​បំណះ %d"
 
 #. translator: Hint displayed right adjusted; %1% is a CLI option
 #. "42 patches optional                  (use --with-optional to include optional patches)"
-#: src/update.cc:353
+#: src/update.cc:354
 #, boost-format
 msgid "use '%1%' to include optional patches"
 msgstr ""
 
 #. translator: stats summary
-#: src/update.cc:362
+#: src/update.cc:363
 #, c-format, boost-format
 msgid "%d patch needed"
 msgid_plural "%d patches needed"
 msgstr[0] "ត្រូវការ​បំណះ %d"
 
 #. translator: stats summary
-#: src/update.cc:365
+#: src/update.cc:366
 #, c-format, boost-format
 msgid "%d security patch"
 msgid_plural "%d security patches"
 msgstr[0] "បំណះ​សុវត្ថិភាព %d"
 
 #. translator: Table column header.
-#: src/update.cc:399
+#: src/update.cc:400
 msgid "Updatestack"
 msgstr ""
 
 #. translator: Table column header.
-#: src/update.cc:401 src/update.cc:693
+#: src/update.cc:402 src/update.cc:694
 msgid "Patches"
 msgstr "បំណះ"
 
 #. translator: Table column header.
-#: src/update.cc:403
+#: src/update.cc:404
 msgid "Locked"
 msgstr ""
 
@@ -6209,69 +6209,69 @@ msgstr ""
 #. Category    | Updatestack | Patches | Locked | Included categories
 #. ------------+-------------+---------+--------+---------------------
 #. optional   | ...                      ..... | enhancement, feature
-#: src/update.cc:409
+#: src/update.cc:410
 msgid "Included categories"
 msgstr ""
 
 #. translator: Table headline; 'Needed' refers to patches with status 'needed'
-#: src/update.cc:583
+#: src/update.cc:584
 #, fuzzy
 msgid "Needed software management updates will be installed first:"
 msgstr "ត្រូវ​ដំឡើងបច្ចុប្បន្នភាព​​នៃ​ការ​គ្រប់គ្រង​កម្មវិធីដូច​ខាងក្រោម​សិន ។"
 
-#: src/update.cc:591 src/update.cc:831
+#: src/update.cc:592 src/update.cc:832
 msgid "No updates found."
 msgstr "រក​មិន​ឃើញ​បច្ចុប្បន្នភាព ។"
 
 #. translator: Table headline
-#: src/update.cc:598
+#: src/update.cc:599
 msgid "The following updates are also available:"
 msgstr "បច្ចុប្បន្នភាព​​ដូច​ខាងក្រោម​អាច​ប្រើ​បាន​ដែរ ៖"
 
-#: src/update.cc:691
+#: src/update.cc:692
 msgid "Package updates"
 msgstr "បច្ចុប្បន្នភាព​​របស់​កញ្ចប់​"
 
-#: src/update.cc:695
+#: src/update.cc:696
 msgid "Pattern updates"
 msgstr "បច្ចុប្បន្នភាព​​របស់​លំនាំ"
 
-#: src/update.cc:697
+#: src/update.cc:698
 msgid "Product updates"
 msgstr "បច្ចុប្បន្នភាព​​របស់​ផលិតផល"
 
-#: src/update.cc:783
+#: src/update.cc:784
 msgid "Current Version"
 msgstr "កំណែ​បច្ចុប្បន្ន"
 
-#: src/update.cc:784
+#: src/update.cc:785
 msgid "Available Version"
 msgstr "កំណែ​ដែល​មាន"
 
-#: src/update.cc:959
+#: src/update.cc:960
 msgid "No matching issues found."
 msgstr "រក​មិនឃើញ​ការ​ចេញផ្សាយ​​ដែល​ផ្គូផ្គង ។​"
 
-#: src/update.cc:965
+#: src/update.cc:966
 msgid "The following matches in issue numbers have been found:"
 msgstr "រក​ឃើញ​កា​រផ្គូផ្គង​ដូច​ខាងក្រោម​នៅ​ក្នុង​លេខ​ចេញ​ផ្សាយ ៖"
 
-#: src/update.cc:975
+#: src/update.cc:976
 msgid "Matches in patch descriptions of the following patches have been found:"
 msgstr "ផ្គូផ្គង​នៅ​ក្នុង​សេចក្ដី​ពិពណ៌នា​បំណះ​នៃ​បំណះ​ដូច​ខាងក្រោម​ដែល​បានរកឃើញ ៖"
 
-#: src/update.cc:1037
+#: src/update.cc:1038
 #, c-format, boost-format
 msgid "Fix for bugzilla issue number %s was not found or is not needed."
 msgstr "ជួសជុល​លេខ​ចេញផ្សាយ bugzilla %s ដែល​រក​មិនឃើញ​ ឬ​មិន​ត្រូវ​ការ ។"
 
-#: src/update.cc:1039
+#: src/update.cc:1040
 #, c-format, boost-format
 msgid "Fix for CVE issue number %s was not found or is not needed."
 msgstr "ជួសជុល​លេខ​ចេញ​ផ្សាយ​របស់ CVE  %s ដែល​រក​មិនឃើញ​ ឬ​មិន​ត្រូវការ ។"
 
 #. translators: keep '%s issue' together, it's something like 'CVE issue' or 'Bugzilla issue'
-#: src/update.cc:1042
+#: src/update.cc:1043
 #, fuzzy, c-format, boost-format
 msgid "Fix for %s issue number %s was not found or is not needed."
 msgstr "ជួសជុល​លេខ​ចេញ​ផ្សាយ​របស់ CVE  %s ដែល​រក​មិនឃើញ​ ឬ​មិន​ត្រូវការ ។"
@@ -6455,131 +6455,137 @@ msgid ""
 "installed first. Those packages are often named '%1%' or '%2%'."
 msgstr ""
 
-#: src/utils/misc.cc:91
+#: src/utils/misc.cc:92
 msgid "package"
 msgid_plural "packages"
 msgstr[0] "កញ្ចប់"
 
-#: src/utils/misc.cc:93
+#: src/utils/misc.cc:94
 msgid "pattern"
 msgid_plural "patterns"
 msgstr[0] "លំនាំ"
 
-#: src/utils/misc.cc:95
+#: src/utils/misc.cc:96
 msgid "product"
 msgid_plural "product"
 msgstr[0] "ផលិតផល"
 
-#: src/utils/misc.cc:97
+#: src/utils/misc.cc:98
 msgid "patch"
 msgid_plural "patches"
 msgstr[0] "បំណះ"
 
-#: src/utils/misc.cc:99
+#: src/utils/misc.cc:100
 msgid "srcpackage"
 msgid_plural "srcpackages"
 msgstr[0] "កញ្ចប់​ប្រភព"
 
-#: src/utils/misc.cc:101
+#: src/utils/misc.cc:102
 msgid "application"
 msgid_plural "applications"
 msgstr[0] ""
 
 #. default
-#: src/utils/misc.cc:103
+#: src/utils/misc.cc:104
 msgid "resolvable"
 msgid_plural "resolvables"
 msgstr[0] "កញ្ចប់​ដោះស្រាយ"
 
 #. Patch status: i18n + color
 #. translator: patch status
-#: src/utils/misc.cc:112
+#: src/utils/misc.cc:113
 msgid "unwanted"
 msgstr ""
 
 #. translator: patch status
-#: src/utils/misc.cc:113
+#: src/utils/misc.cc:114
 msgid "optional"
 msgstr ""
 
 #. translator: patch status
-#: src/utils/misc.cc:114
+#: src/utils/misc.cc:115
 msgid "needed"
 msgstr "ត្រូវការ"
 
 #. translator: patch status
-#: src/utils/misc.cc:115
+#: src/utils/misc.cc:116
 msgid "applied"
 msgstr ""
 
 #. translator: patch status
-#: src/utils/misc.cc:116
+#: src/utils/misc.cc:117
 msgid "not needed"
 msgstr "មិន​ត្រូវការ"
 
 #. translator: patch status
-#: src/utils/misc.cc:117
+#: src/utils/misc.cc:118
 msgid "undetermined"
 msgstr ""
 
+#. pi_r is no patch!
+#. translator: patch status
+#: src/utils/misc.cc:119
+msgid "retracted"
+msgstr ""
+
 #. << _("Repository")
-#: src/utils/misc.cc:267
+#: src/utils/misc.cc:277
 msgid "Issue"
 msgstr "​ចេញ​ផ្សាយ"
 
-#: src/utils/misc.cc:268
+#: src/utils/misc.cc:278
 msgid "No."
 msgstr "ទេ"
 
-#: src/utils/misc.cc:269
+#: src/utils/misc.cc:279
 msgid "Patch"
 msgstr "បំណះ"
 
-#: src/utils/misc.cc:345
+#: src/utils/misc.cc:355
 msgid "Specified local path does not exist or is not accessible."
 msgstr "មិនមាន​ផ្លូវ​មូលដ្ឋាន​ពិសេស​ទេ ឬ​មិនអាច​ចូល​ដំណើរការបាន ។"
 
-#: src/utils/misc.cc:357
+#: src/utils/misc.cc:367
 msgid "Given URI is invalid"
 msgstr "URI ដែល​បាន​ផ្ដល់​មិនត្រឹមត្រូវ"
 
 #. Guess failed:
 #. translators: don't translate '<platform>'
-#: src/utils/misc.cc:447
+#: src/utils/misc.cc:457
 msgid "Unable to guess a value for <platform>."
 msgstr ""
 
-#: src/utils/misc.cc:448
+#: src/utils/misc.cc:458
 #, fuzzy
 msgid "Please use obs://<project>/<platform>"
 msgstr "ទម្រង់​ត្រឹមត្រូវ​គឺ obs://<project>/[platform]"
 
-#: src/utils/misc.cc:449 src/utils/misc.cc:486
+#: src/utils/misc.cc:459 src/utils/misc.cc:496
 #, c-format, boost-format
 msgid "Example: %s"
 msgstr "ឧទាហរណ៍ ៖ %s"
 
-#: src/utils/misc.cc:485
+#: src/utils/misc.cc:495
 msgid "Invalid OBS URI."
 msgstr "URI របស់​ OBS មិន​ត្រឹមត្រូវ ។"
 
-#: src/utils/misc.cc:485
+#: src/utils/misc.cc:495
 msgid "Correct form is obs://<project>/[platform]"
 msgstr "ទម្រង់​ត្រឹមត្រូវ​គឺ obs://<project>/[platform]"
 
-#: src/utils/misc.cc:535
+#: src/utils/misc.cc:545
 msgid "Problem copying the specified RPM file to the cache directory."
 msgstr "មាន​បញ្ហា​ក្នុង​ការ​ចម្លង​ឯកសារ RPM ដែល​បាន​បញ្ជាក់​ទៅ​ថត​ឃ្លាំង​សម្ងាត់ ។"
 
-#: src/utils/misc.cc:536
+#: src/utils/misc.cc:546
 msgid "Perhaps you are running out of disk space."
 msgstr "ប្រហែល​ជា​អ្នក​អស់​ទំហំ​ថាស​ហើយ ។"
 
-#: src/utils/misc.cc:544
+#: src/utils/misc.cc:554
 msgid "Problem retrieving the specified RPM file"
 msgstr "បញ្ហា​ក្នុងការ​ទៅ​យក​ឯកសារ RPM ដែល​បាន​បញ្ជាក់"
 
-#: src/utils/misc.cc:545
+#: src/utils/misc.cc:555
 msgid "Please check whether the file is accessible."
 msgstr "សូ​ម​ពិនិត្យ​មើល ថាតើ​អាច​ចូលដំណើរការ​ឯកសារ​បាន ឬ​អត់ ។"
 
