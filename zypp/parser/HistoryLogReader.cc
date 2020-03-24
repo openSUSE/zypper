@@ -47,9 +47,18 @@ namespace zypp
     void readFrom( const Date & date_r, const ProgressData::ReceiverFnc & progress_r );
     void readFromTo( const Date & fromDate_r, const Date & toDate_r, const ProgressData::ReceiverFnc & progress_r );
 
+    void addActionFilter( const HistoryActionID & action_r )
+    {
+      if ( action_r == HistoryActionID::NONE )
+	_actionfilter.clear();
+      else
+	_actionfilter.insert( action_r.asString() );
+    }
+
     Pathname _filename;
     Options  _options;
     ProcessData _callback;
+    std::set<std::string> _actionfilter;
   };
 
   bool HistoryLogReader::Impl::parseLine( const std::string & line_r, unsigned lineNr_r )
@@ -59,6 +68,9 @@ namespace zypp
     str::splitEscaped( line_r, std::back_inserter(fields), "|", true );
     if ( fields.size() >= 2 )
       fields[1] = str::trim( std::move(fields[1]) );	// for whatever reason writer is padding the action field
+
+    if ( !_actionfilter.empty() && !_actionfilter.count( fields[1] ) )
+      return true;
 
     // move into data class
     HistoryLogData::Ptr data;
@@ -217,6 +229,9 @@ namespace zypp
 
   void HistoryLogReader::readFromTo( const Date & fromDate_r, const Date & toDate_r, const ProgressData::ReceiverFnc & progress_r )
   { _pimpl->readFromTo( fromDate_r, toDate_r, progress_r ); }
+
+  void HistoryLogReader::addActionFilter( const HistoryActionID & action_r )
+  { _pimpl->addActionFilter( action_r ); }
 
   } // namespace parser
   ///////////////////////////////////////////////////////////////////

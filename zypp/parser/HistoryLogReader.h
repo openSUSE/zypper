@@ -139,6 +139,18 @@ namespace zypp
      */
     bool ignoreInvalidItems() const;
 
+
+    /** Process only specific HistoryActionIDs.
+     * Call repeatedly to add multiple HistoryActionIDs to process.
+     * Passing an empty HistoryActionID (HistoryActionID::NONE) clears
+     * the filter.
+     */
+    void addActionFilter( const HistoryActionID & action_r );
+
+    /** Clear any HistoryActionIDs. */
+    void clearActionFilter()
+    { addActionFilter( HistoryActionID::NONE ); }
+
   private:
     /** Implementation */
     struct Impl;
