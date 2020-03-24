@@ -58,7 +58,7 @@ namespace zypp
     HistoryLogData::FieldVector fields;
     str::splitEscaped( line_r, std::back_inserter(fields), "|", true );
     if ( fields.size() >= 2 )
-      str::trim( fields[1] );	// for whatever reason writer is padding the action field
+      fields[1] = str::trim( std::move(fields[1]) );	// for whatever reason writer is padding the action field
 
     // move into data class
     HistoryLogData::Ptr data;
