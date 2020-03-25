@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Wed Mar 25 15:26:14 CET 2020 - ma@suse.de
+
+- Add HistoryLogReader actionFilter to parse only specific
+  HistoryActionIDs.
+- version 17.23.3 (22)
+
+-------------------------------------------------------------------
 Fri Mar 20 12:28:18 CET 2020 - ma@suse.de
 
 - RepoVariables: Add safe guard in case the caller does not own a
