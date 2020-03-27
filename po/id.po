@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-03-11 12:14+0100\n"
-"PO-Revision-Date: 2020-01-16 16:54+0000\n"
-"Last-Translator: Kukuh Syafaat <syafaatkukuh@gmail.com>\n"
+"PO-Revision-Date: 2020-05-02 19:51+0000\n"
+"Last-Translator: Andika Triwidada <andika@gmail.com>\n"
 "Language-Team: Indonesian <https://l10n.opensuse.org/projects/zypper/master/"
 "id/>\n"
 "Language: id\n"
@@ -5367,7 +5367,7 @@ msgstr "Diminta"
 
 #: src/locales.cc:70
 msgid "Fallback"
-msgstr "Fallback"
+msgstr "Cadangan"
 
 #. translators: header of table column - the language code, e.g. en_US
 #: src/locales.cc:174
@@ -6364,7 +6364,7 @@ msgstr "mengkomit"
 
 #: src/solve-commit.cc:800
 msgid "(dry run)"
-msgstr "(dry run)"
+msgstr "(percobaan)"
 
 #: src/solve-commit.cc:824 src/solve-commit.cc:857
 msgid "Problem retrieving the package file from the repository:"
@@ -6727,6 +6727,8 @@ msgid ""
 "Abbreviated commandline options will not be supported in future versions. "
 "Please use %2% instead of %1% ."
 msgstr ""
+"Opsi baris perintah yang disingkat tidak akan didukung di versi mendatang. "
+"Harap gunakan %2% bukan %1%."
 
 #. translators: %s is "help" or "zypper help" depending on whether
 #. zypper shell is running or not
