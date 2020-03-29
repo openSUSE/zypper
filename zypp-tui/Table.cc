@@ -89,6 +89,7 @@ std::ostream & TableRow::dumpTo( std::ostream & stream, const Table & parent ) c
   std::string::size_type editionSep( std::string::npos );
 
   container::const_iterator i = _columns.begin (), e = _columns.end ();
+  const unsigned lastCol = _columns.size() - 1;
   for ( unsigned c = 0; i != e ; ++i, ++c )
   {
     const std::string & s( *i );
@@ -168,7 +169,7 @@ std::ostream & TableRow::dumpTo( std::ostream & stream, const Table & parent ) c
       {
 	stream << ( _ctxt << s );
       }
-      stream.width( parent._max_width[c] - ssize );
+      stream.width( c == lastCol ? 0 : parent._max_width[c] - ssize );
     }
     stream << "";
     curpos += parent._max_width[c] + (parent._style == none ? 2 : 3);
