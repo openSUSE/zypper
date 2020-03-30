@@ -252,7 +252,7 @@ void list_patches( Zypper & zypper )
   MIL << "Pool contains " << God->pool().size() << " items. Checking whether available patches are needed." << std::endl;
 
   Table tbl;
-  FillPatchesTable callback( tbl );
+  FillPatchesTable callback( tbl, PatchHistoryData() );
   invokeOnEach( God->pool().byKindBegin(ResKind::patch),
 		God->pool().byKindEnd(ResKind::patch),
 		callback);
