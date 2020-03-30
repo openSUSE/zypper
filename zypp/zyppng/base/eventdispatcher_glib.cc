@@ -221,6 +221,10 @@ static gboolean  eventLoopIdleFunc ( gpointer user_data )
       return G_SOURCE_CONTINUE;
     }
   }
+
+  g_source_unref ( dPtr->_idleSource );
+  dPtr->_idleSource = nullptr;
+
   return G_SOURCE_REMOVE;
 }
 
@@ -245,9 +249,6 @@ EventDispatcherPrivate::EventDispatcherPrivate ( GMainContext *ctx )
   g_main_context_push_thread_default( _ctx );
 
   _loop = g_main_loop_new( _ctx, false );
-
-  _idleSource = g_idle_source_new ();
-  g_source_set_callback ( _idleSource, eventLoopIdleFunc, this, nullptr );
 }
 
 EventDispatcherPrivate::~EventDispatcherPrivate()
@@ -260,8 +261,10 @@ EventDispatcherPrivate::~EventDispatcherPrivate()
   });
   _runningTimers.clear();
 
-  g_source_destroy( _idleSource );
-  g_source_unref ( _idleSource );
+  if ( _idleSource ) {
+    g_source_destroy( _idleSource );
+    g_source_unref ( _idleSource );
+  }
 
   g_main_context_pop_thread_default( _ctx );
   g_main_context_unref( _ctx );
@@ -272,16 +275,15 @@ bool EventDispatcherPrivate::runIdleTasks()
 {
   //run all user defined idle functions
   //if they return true, they are executed again in the next idle run
-  decltype ( _idleFuncs ) rerunQueue;
-  while ( _idleFuncs.size() ) {
-    EventDispatcher::IdleFunction fun( std::move( _idleFuncs.front() ) );
-    _idleFuncs.pop();
-    if ( fun() )
-      rerunQueue.push( std::move(fun) );
-  }
-  if ( !rerunQueue.empty() )
-    _idleFuncs.swap( rerunQueue );
+  decltype ( _idleFuncs ) runQueue;
+  runQueue.swap( _idleFuncs );
 
+  while ( runQueue.size() ) {
+    EventDispatcher::IdleFunction fun( std::move( runQueue.front() ) );
+    runQueue.pop();
+    if ( fun() )
+      _idleFuncs.push( std::move(fun) );
+  }
 
   //keep this as the last thing to call after all user code was executed
   if ( _unrefLater.size() )
@@ -292,8 +294,11 @@ bool EventDispatcherPrivate::runIdleTasks()
 
 void EventDispatcherPrivate::enableIdleSource()
 {
-  if ( !_idleSource->context )
+  if ( !_idleSource ) {
+    _idleSource = g_idle_source_new ();
+    g_source_set_callback ( _idleSource, eventLoopIdleFunc, this, nullptr );
     g_source_attach ( _idleSource, _ctx );
+  }
 }
 
 
