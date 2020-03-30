@@ -16,6 +16,7 @@
 #include <zypp/media/MediaManager.h>
 #include <zypp/ExternalProgram.h>
 #include <zypp/parser/ProductFileReader.h>
+#include <zypp/parser/HistoryLogReader.h>
 
 #include <zypp/ZYpp.h>
 #include <zypp/Target.h>
@@ -228,10 +229,95 @@ std::string patchInteractiveFlags( const Patch & patch_r )
   return ret;
 }
 
-/** Default format patches table */
-FillPatchesTable::FillPatchesTable( Table & table_r, TriBool inst_notinst_r )
-: _table( &table_r )
+///////////////////////////////////////////////////////////////////
+/// class  PatchHistoryData
+struct PatchHistoryData::D
+{
+  void remember( HistoryLogPatchStateChange::Ptr ptr_r )
+  {
+    if ( ! ptr_r )
+      return;
+
+    value_type & value { _data[IdString("patch:"+ptr_r->name()).id()][ptr_r->edition().id()][ptr_r->arch().id()] };
+    if ( Date date { ptr_r->date() }; date > value.first ) {
+      value.first = std::move(date);
+      value.second = ResStatus::stringToValidateValue( ptr_r->newstate() );
+    }
+  }
+
+  const PatchHistoryData::value_type & get( const sat::Solvable & solv_r  ) const
+  {
+    if ( auto n { _data.find( solv_r.ident().id() ) }; n != _data.end() ) {
+      if ( auto v { n->second.find( solv_r.edition().id() ) }; v != n->second.end() ) {
+	if ( auto a { v->second.find( solv_r.arch().id() ) }; a != v->second.end() ) {
+	  return a->second;
+	}
+      }
+    }
+    return noData;
+  }
+
+private:
+  using IdType = IdString::IdType;
+  template <class Tv>
+  using MapType = std::unordered_map<IdType,Tv>;
+
+  MapType<MapType<MapType<value_type>>> _data; 	///> N V A ids to value_type
+};
+
+const PatchHistoryData::value_type PatchHistoryData::noData( Date(), ResStatus::UNDETERMINED );
+
+PatchHistoryData PatchHistoryData::placeholder()
+{ return PatchHistoryData( false ); }
+
+PatchHistoryData::PatchHistoryData( bool doparse_r )
+{
+  if ( doparse_r )
+  {
+    const Pathname & historyFile { Pathname::assertprefix( Zypper::instance().config().root_dir, ZConfig::instance().historyLogFile() ) };
+    parser::HistoryLogReader parser( historyFile, parser::HistoryLogReader::IGNORE_INVALID_ITEMS,
+				     [=]( HistoryLogData::Ptr ptr_r )->bool {
+				       if ( ! this->_d )
+					 this->_d.reset( new D );
+				       this->_d->remember( dynamic_pointer_cast<HistoryLogPatchStateChange>(ptr_r) );
+				       return true;
+				     } );
+    parser.addActionFilter( HistoryActionID::PATCH_STATE_CHANGE );
+    parser.readAll();
+  }
+}
+
+PatchHistoryData::operator bool() const
+{ return bool(_d); }
+
+const PatchHistoryData::value_type & PatchHistoryData::operator[]( const sat::Solvable & solv_r ) const
+{ return _d ? _d->get( solv_r ) : noData; }
+
+namespace
+{
+  /** PatchesTable 'Since' column value. */
+  std::string patchesTableSinceString( const PatchHistoryData & historyData_r, const PoolItem & pi_r )
+  {
+    std::string ret { "-" };
+    if ( PatchHistoryData::value_type res { historyData_r[pi_r] }; res != PatchHistoryData::noData )
+    {
+      if ( res.second == pi_r.status().validate() )
+	ret = res.first.printISO( Date::TimeFormat::none, Date::TimeZoneFormat::none );
+      else
+	// patch status was changed by a non zypp transaction (not mentioned in the history)
+	DBG << "PatchHistoryData " << res.second << " but " << pi_r << endl;
+    }
+    return ret;
+  }
+}
+
+///////////////////////////////////////////////////////////////////
+/// class  FillPatchesTable
+/// Default format patches table
+FillPatchesTable::FillPatchesTable( Table & table_r, const PatchHistoryData & historyData_r, TriBool inst_notinst_r )
+: _table( table_r )
 , _inst_notinst( inst_notinst_r )
+, _historyData( historyData_r )
 {
   table_r << ( TableHeader()
   << _("Repository")
@@ -240,11 +326,11 @@ FillPatchesTable::FillPatchesTable( Table & table_r, TriBool inst_notinst_r )
   << _("Severity")
   << _("Interactive")
   << _("Status")
+  << ColumnIf( bool(_historyData), [](){ return _("Since"); } )
   << _("Summary")
   );
   table_r.defaultSortColumn( 1 );	// by Name
-  // if ( ! Zypper::instance().globalOpts().no_abbrev ) table.allowAbbrev( 6 );	// Summary
-};
+}
 
 bool FillPatchesTable::operator()( const PoolItem & pi_r ) const
 {
@@ -255,22 +341,23 @@ bool FillPatchesTable::operator()( const PoolItem & pi_r ) const
 
   Patch::constPtr patch = asKind<Patch>(pi_r);
 
-  *_table << ( TableRow()
+  _table << ( TableRow()
   /* Repository		*/ << patch->repoInfo().asUserString()
   /* Name		*/ << patch->name()
   /* Category		*/ << patchHighlightCategory( *patch )
   /* Severity		*/ << patchHighlightSeverity( *patch )
   /* Interactive	*/ << patchInteractiveFlags( *patch )
   /* Status		*/ << i18nPatchStatus( pi_r )
+  /* Since		*/ << ColumnIf( bool(_historyData), [&](){ return patchesTableSinceString( _historyData, pi_r ); } )
   /* Summary		*/ << patch->summary()
   );
   return true;
 }
 
-
 /** Patches table when searching for issues */
-FillPatchesTableForIssue::FillPatchesTableForIssue( Table & table_r )
-: _table( &table_r )
+FillPatchesTableForIssue::FillPatchesTableForIssue( Table & table_r, const PatchHistoryData & historyData_r )
+: _table( table_r )
+, _historyData( historyData_r )
 {
   table_r << ( TableHeader()
   //<< _("Repository")
@@ -281,15 +368,17 @@ FillPatchesTableForIssue::FillPatchesTableForIssue( Table & table_r )
   << _("Severity")
   << _("Interactive")
   << _("Status")
+  << ColumnIf( bool(_historyData), [](){ return _("Since"); } )
   << _("Summary")
   );
   table_r.defaultSortColumn( 2 );	// by Name
 }
+
 bool FillPatchesTableForIssue::operator()( const PoolItem & pi_r, std::string issue_r, std::string issueNo_r ) const
 {
   Patch::constPtr patch = asKind<Patch>(pi_r);
 
-  *_table << ( TableRow()
+  _table << ( TableRow()
   ///* Repository	*/ << patch->repoInfo().asUserString()
   /* Issue		*/ << std::move(issue_r)
   /* No.		*/ << std::move(issueNo_r)
@@ -298,9 +387,9 @@ bool FillPatchesTableForIssue::operator()( const PoolItem & pi_r, std::string is
   /* Severity		*/ << patchHighlightSeverity( *patch )
   /* Interactive	*/ << patchInteractiveFlags( *patch )
   /* Status		*/ << i18nPatchStatus( pi_r )
+  /* Since		*/ << ColumnIf( bool(_historyData), [&](){ return patchesTableSinceString( _historyData, pi_r ); } )
   /* Summary		*/ << patch->summary()
   );
-
 
   return true;
 }

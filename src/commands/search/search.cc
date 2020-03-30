@@ -484,7 +484,11 @@ int SearchCmd::execute( Zypper &zypper, const std::vector<std::string> &position
     } else {
       if ( _cmdMode == CmdMode::RugPatchSearch )
       {
-        FillPatchesTable callback( t, inst_notinst );
+	// TODO: PatchHistoryData::placeholder just added to get it compiled. In fact
+	// 'zypper.out().searchResult( t )' in XML mode understands just FillSearchTable*
+	// formats. The output is wrong in this case. RugPatchSearch is an undocumented rug legacy.
+	// Maybe we should drop it.
+	FillPatchesTable callback( t, PatchHistoryData::placeholder(), inst_notinst );
         invokeOnEach( query.poolItemBegin(), query.poolItemEnd(), callback );
       }
       else if ( details )

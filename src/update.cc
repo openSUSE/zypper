@@ -101,7 +101,7 @@ namespace
   }
 
   /** RNC: Print patch-update element */
-  inline std::ostream & xmlPrintPatchUpdateOn( std::ostream & str, const PoolItem & pi_r )
+  inline std::ostream & xmlPrintPatchUpdateOn( std::ostream & str, const PoolItem & pi_r, const PatchHistoryData & patchHistoryData_r )
   {
     Patch::constPtr patch = pi_r->asKind<Patch>();
 
@@ -125,6 +125,14 @@ namespace
       { "interactive", asString( patch->interactiveWhenIgnoring(ignoreFlags) ) },
     } };
 
+    if ( PatchHistoryData::value_type res { patchHistoryData_r[pi_r] }; res != PatchHistoryData::noData )
+    {
+      if ( res.second == pi_r.status().validate() )
+	dumpAsXmlOn( *parent, res.first, "status-since" );
+      else
+	// patch status was changed by a non zypp transaction (not mentioned in the history)
+	DBG << "PatchHistoryData " << res.second << " but " << pi_r << endl;
+    }
     dumpAsXmlOn( *parent, patch->summary(), "summary" );
     dumpAsXmlOn( *parent, patch->description(), "description" );
     dumpAsXmlOn( *parent, patch->licenseToConfirm(), "license" );
@@ -144,11 +152,11 @@ namespace
 
   /** RNC: Print element containing patch-update-list */
   template <typename TContainer>
-  inline std::ostream & xmlPrintPatchUpdateListOn( std::ostream & str, std::string nodename_r, TContainer container_r )
+  inline std::ostream & xmlPrintPatchUpdateListOn( std::ostream & str, std::string nodename_r, TContainer container_r, const PatchHistoryData & patchHistoryData_r )
   {
     xmlout::Node parent { str, std::move(nodename_r), xmlout::Node::optionalContent };
     for ( const auto & pi : container_r )
-      xmlPrintPatchUpdateOn( *parent, pi );
+      xmlPrintPatchUpdateOn( *parent, pi, patchHistoryData_r );
     return str;
   }
 
@@ -462,7 +470,7 @@ void patch_check( bool updatestackOnly )
 }
 
 // returns true if NEEDED! restartSuggested() patches are available
-static bool xml_list_patches (Zypper & zypper, bool all_r )
+static bool xml_list_patches (Zypper & zypper, bool all_r, const PatchHistoryData & patchHistoryData_r )
 {
   const ResPool& pool = God->pool();
 
@@ -488,7 +496,7 @@ static bool xml_list_patches (Zypper & zypper, bool all_r )
       // if updates stack patches are available, show only those
       if ( all_r || !pkg_mgr_available || patchIsNeededRestartSuggested( pi ) )
       {
-	xmlPrintPatchUpdateOn( cout, pi );
+	xmlPrintPatchUpdateOn( cout, pi, patchHistoryData_r );
       }
     }
     ++patchcount;
@@ -513,7 +521,7 @@ static bool xml_list_patches (Zypper & zypper, bool all_r )
 	const PoolItem & pi( *it );
 	Patch::constPtr patch = pi->asKind<Patch>();
 	if ( ! patchIsNeededRestartSuggested( pi ) )
-	  xmlPrintPatchUpdateOn( cout, pi );
+	  xmlPrintPatchUpdateOn( cout, pi, patchHistoryData_r );
       }
     }
     cout << "</blocked-update-list>" << endl;
@@ -539,13 +547,13 @@ static void xml_list_updates(const ResKindSet & kinds, bool all_r )
 // ----------------------------------------------------------------------------
 
 // returns true if NEEDED! restartSuggested() patches are available
-static bool list_patch_updates( Zypper & zypper, bool all_r, const PatchSelector &sel )
+static bool list_patch_updates( Zypper & zypper, bool all_r, const PatchSelector &sel, const PatchHistoryData & historyData_r )
 {
   Table tbl;
-  FillPatchesTable intoTbl( tbl );
+  FillPatchesTable intoTbl( tbl, historyData_r );
 
   Table pmTbl; // only NEEDED! that affect packagemanager (restartSuggested()), they have priority
-  FillPatchesTable intoPMTbl( pmTbl );
+  FillPatchesTable intoPMTbl( pmTbl, historyData_r );
 
   PatchCheckStats stats( zypper.config().exclude_optional_patches );
   CliMatchPatch cliMatchPatch( zypper, sel._requestedPatchDates, sel._requestedPatchCategories, sel._requestedPatchSeverity );
@@ -706,6 +714,8 @@ std::string i18n_kind_updates(const ResKind & kind)
 
 void list_updates(Zypper & zypper, const ResKindSet & kinds, bool best_effort, bool all_r, const PatchSelector &patchSel_r )
 {
+  PatchHistoryData patchHistoryData;	// commonly used by all tables
+
   if (zypper.out().type() == Out::TYPE_XML)
   {
     // TODO: go for XmlNode
@@ -728,7 +738,7 @@ void list_updates(Zypper & zypper, const ResKindSet & kinds, bool best_effort, b
   if(it != localkinds.end())
   {
     if (zypper.out().type() == Out::TYPE_XML)
-      affects_pkgmgr = xml_list_patches( zypper, all_r );
+      affects_pkgmgr = xml_list_patches( zypper, all_r, patchHistoryData );
     else
     {
       if (kinds.size() > 1)
@@ -736,7 +746,7 @@ void list_updates(Zypper & zypper, const ResKindSet & kinds, bool best_effort, b
         zypper.out().info("", Out::NORMAL, Out::TYPE_NORMAL);
         zypper.out().info(i18n_kind_updates(*it), Out::QUIET, Out::TYPE_NORMAL);
       }
-      affects_pkgmgr = list_patch_updates( zypper, all_r, patchSel_r );
+      affects_pkgmgr = list_patch_updates( zypper, all_r, patchSel_r, patchHistoryData );
     }
     localkinds.erase(it);
   }
@@ -838,6 +848,8 @@ void list_updates(Zypper & zypper, const ResKindSet & kinds, bool best_effort, b
 // ----------------------------------------------------------------------------
 void list_patches_by_issue( Zypper & zypper, bool all_r, const PatchSelector & sel_r )
 {
+  PatchHistoryData patchHistoryData;	// commonly used by all tables
+
   // Overall CLI filter
   bool only_needed = !all_r;
   CliMatchPatch cliMatchPatch( zypper,
@@ -928,14 +940,14 @@ void list_patches_by_issue( Zypper & zypper, bool all_r, const PatchSelector & s
   if (zypper.out().type() == Out::TYPE_XML)
   {
     xmlout::Node parent { cout, "list-patches-byissue", xmlout::Node::optionalContent };
-    xmlPrintPatchUpdateListOn( *parent, "issue-matches", zypp_pending::make_map_key_Iterable( iresult ) );
-    xmlPrintPatchUpdateListOn( *parent, "description-matches", dresult );
+    xmlPrintPatchUpdateListOn( *parent, "issue-matches", zypp_pending::make_map_key_Iterable( iresult ), patchHistoryData );
+    xmlPrintPatchUpdateListOn( *parent, "description-matches", dresult, patchHistoryData );
   }
   else
   {
     // iresult to table
     Table issueMatchesTbl;
-    FillPatchesTableForIssue intoIssueMatchesTbl( issueMatchesTbl );
+    FillPatchesTableForIssue intoIssueMatchesTbl( issueMatchesTbl, patchHistoryData );
     for ( const auto & res : iresult )
     {
       const PoolItem & pi { res.first };
@@ -949,7 +961,7 @@ void list_patches_by_issue( Zypper & zypper, bool all_r, const PatchSelector & s
 
     // dresult to table
     Table descrMatchesTbl;
-    FillPatchesTable intoDescrMatchesTbl( descrMatchesTbl );
+    FillPatchesTable intoDescrMatchesTbl( descrMatchesTbl, patchHistoryData );
     for ( const auto & pi : dresult )
     {
       intoDescrMatchesTbl( pi );

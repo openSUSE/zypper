@@ -8,11 +8,13 @@
 #ifndef ZYPPER_UTILS_H
 #define ZYPPER_UTILS_H
 
+#include <functional>
 #include <string>
 #include <set>
 #include <list>
 
 #include <zypp/Url.h>
+#include <zypp/Date.h>
 #include <zypp/Pathname.h>
 
 #include <zypp/ui/Selectable.h>
@@ -121,23 +123,58 @@ std::string patchHighlightCategory( const Patch & patch_r );	///< Patch Category
 std::string patchHighlightSeverity( const Patch & patch_r );	///< Patch Severity + color
 std::string patchInteractiveFlags( const Patch & patch_r );	///< Patch interactive properties (reboot|message|license|restart or ---) + color
 
+///////////////////////////////////////////////////////////////////
+/// Last Patch status changes parsed from the history file.
+/// If these data are made available to \ref FillPatchesTable a
+/// \c Since column is shown.
+class PatchHistoryData
+{
+public:
+  using value_type = std::pair<Date,ResStatus::ValidateValue>;
+
+  static const value_type noData;	///< Date() and ResStatus::UNDETERMINED
+
+  /** Ctor parsing the history file. */
+  PatchHistoryData() : PatchHistoryData( true ) {}
+
+  /** Return an empty instance without data. */
+  static PatchHistoryData placeholder();
+
+  /** Whether patch status data are available at all. */
+  explicit operator bool() const;
+
+  /** Return the last status change of \a pi_r or \ref noData. */
+  const value_type & operator[]( const sat::Solvable & solv_r ) const;
+  /** \overload */
+  const value_type & operator[]( const PoolItem & pi_r ) const
+  { return  operator[]( pi_r.satSolvable() ); }
+
+private:
+  PatchHistoryData( bool );
+  struct D;
+  RW_pointer<D> _d;
+};
+
+
 /** Patches table default format */
 struct FillPatchesTable
 {
-  FillPatchesTable( Table & table_r, TriBool inst_notinst_r = indeterminate );
+  FillPatchesTable( Table & table_r, const PatchHistoryData & historyData_r, TriBool inst_notinst_r = indeterminate );
   bool operator()( const PoolItem & pi_r ) const;
 private:
-  Table * _table;	///< table used for output
-  TriBool _inst_notinst;///< LEGACY: internally filter [not]installed
+  std::reference_wrapper<Table> _table;	///< table used for output.
+  TriBool _inst_notinst;	///< LEGACY: internally filter [not]installed.
+  PatchHistoryData _historyData;///< optional history data pass to the ctor.
 };
 
 /** Patches table when searching for issues */
 struct FillPatchesTableForIssue
 {
-  FillPatchesTableForIssue( Table & table_r );
+  FillPatchesTableForIssue( Table & table_r, const PatchHistoryData & historyData_r );
   bool operator()( const PoolItem & pi_r, std::string issue_r, std::string issueNo_r ) const;
 private:
-  Table * _table;	///< table used for output
+  std::reference_wrapper<Table> _table;	///< table used for output
+  PatchHistoryData _historyData;///< optional history data pass to the ctor.
 };
 
 // ----------------------------------------------------------------------------
