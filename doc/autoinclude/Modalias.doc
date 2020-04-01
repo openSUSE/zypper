@@ -1,0 +1,18 @@
+/**
+
+\page zypp-modalias Hardware (modalias) dependencies
+
+\author Michael Andres <ma@suse.de>
+
+<HR><!-- ====================================================================== -->
+
+Rpm packages which support a specific hardware and should be installed automatically if this hardware is present use \c modalias() supplements. \c FNMATCH(3) is used to match the defined pattern against the systems modalias definitions.
+
+\note Special characters not allowed to occur in a spec-files \c Supplements: definition may be %Hexencoded.
+
+\code
+   #                     of:NfirmwareT*Craspberrypi,bcm2835-firmwareC*
+   Supplements: modalias(of:NfirmwareT*Craspberrypi%2Cbcm2835-firmwareC*)
+\endcode
+
+*/
