@@ -129,7 +129,6 @@ namespace zypp
       << "DeltaRpm[" << obj.name() << "-" << obj.edition() << "." << obj.arch()
       << "](" << obj.location()
       << '|' << obj.baseversion().edition()
-      << ',' << obj.baseversion().sequenceinfo()
       << ')';
     }
 
