@@ -9,7 +9,6 @@
 #include "locales.h"
 #include "repos.h"
 
-using namespace std;
 using namespace zypp;
 
 extern ZYpp::Ptr God;
@@ -52,7 +51,7 @@ BOOST_GLOBAL_FIXTURE( TestInit );
 
 BOOST_AUTO_TEST_CASE( add_locales )
 {
-  vector<string> localeArgs;
+  std::vector<std::string> localeArgs;
   localeArgs.push_back( "de" );
   localeArgs.push_back( "en" );
   localeArgs.push_back( "invalid" );
@@ -75,7 +74,7 @@ BOOST_AUTO_TEST_CASE( add_locales )
 
 BOOST_AUTO_TEST_CASE( remove_locales )
 {
-  vector<string> localeArgs;
+  std::vector<std::string> localeArgs;
   localeArgs.push_back( "de" );
   localeArgs.push_back( "cs" );
   // remove "de" and "cs"

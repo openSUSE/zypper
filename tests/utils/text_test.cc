@@ -1,8 +1,6 @@
 #include "TestSetup.h"
 #include "utils/text.h"
 
-using namespace std;
-
 BOOST_AUTO_TEST_CASE(out_of_bounds_read_issue_167)
 {
   /*See https://github.com/openSUSE/zypper/issues/167
@@ -78,7 +76,7 @@ BOOST_AUTO_TEST_CASE(mbs_width_test)
 
 BOOST_AUTO_TEST_CASE(mbs_substr_by_width_test)
 {
-  string s = "玄米茶空想紅茶です";
+  std::string s = "玄米茶空想紅茶です";
   BOOST_CHECK_EQUAL(mbs_substr_by_width(s, 0, 6),	"玄米茶");
   BOOST_CHECK_EQUAL(mbs_substr_by_width(s, 6),		"空想紅茶です");
   // the third character cut in halfL
