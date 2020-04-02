@@ -41,10 +41,8 @@ namespace zypp
 
     inline shared_ptr<std::istream> streamForFile ( const Pathname & file_r )
     {
-      const auto zType = filesystem::zipType( file_r );
-
 #ifdef ENABLE_ZCHUNK_COMPRESSION
-      if ( zType == filesystem::ZT_ZCHNK )
+      if ( const auto zType = filesystem::zipType( file_r ); zType == filesystem::ZT_ZCHNK )
         return shared_ptr<std::istream>( new ifzckstream( file_r.asString().c_str() ) );
 #endif
 
