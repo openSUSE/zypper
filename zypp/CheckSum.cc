@@ -12,12 +12,12 @@
 #include <iostream>
 #include <sstream>
 
-#include "zypp/base/Logger.h"
-#include "zypp/base/Gettext.h"
-#include "zypp/base/String.h"
+#include <zypp/base/Logger.h>
+#include <zypp/base/Gettext.h>
+#include <zypp/base/String.h>
 
-#include "zypp/CheckSum.h"
-#include "zypp/Digest.h"
+#include <zypp/CheckSum.h>
+#include <zypp/Digest.h>
 
 using std::endl;
 

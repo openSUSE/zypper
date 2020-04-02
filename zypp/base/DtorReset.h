@@ -12,7 +12,7 @@
 #ifndef ZYPP_BASE_DTORRESET_H
 #define ZYPP_BASE_DTORRESET_H
 
-#include "zypp/base/PtrTypes.h"
+#include <zypp/base/PtrTypes.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

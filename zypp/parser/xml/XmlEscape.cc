@@ -11,7 +11,7 @@
 */
 
 #include <string>
-#include "zypp/parser/xml/XmlEscape.h"
+#include <zypp/parser/xml/XmlEscape.h>
 
 /*
 IoBind Library License:

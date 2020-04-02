@@ -21,19 +21,19 @@ extern "C"
 }
 #include <iostream>
 #include <fstream>
-#include "zypp/base/LogTools.h"
-#include "zypp/base/IOStream.h"
-#include "zypp/base/InputStream.h"
-#include "zypp/base/String.h"
-#include "zypp/base/Regex.h"
+#include <zypp/base/LogTools.h>
+#include <zypp/base/IOStream.h>
+#include <zypp/base/InputStream.h>
+#include <zypp/base/String.h>
+#include <zypp/base/Regex.h>
 
-#include "zypp/ZConfig.h"
-#include "zypp/ZYppFactory.h"
-#include "zypp/PathInfo.h"
-#include "zypp/parser/IniDict.h"
+#include <zypp/ZConfig.h>
+#include <zypp/ZYppFactory.h>
+#include <zypp/PathInfo.h>
+#include <zypp/parser/IniDict.h>
 
-#include "zypp/sat/Pool.h"
-#include "zypp/sat/detail/PoolImpl.h"
+#include <zypp/sat/Pool.h>
+#include <zypp/sat/detail/PoolImpl.h>
 
 using std::endl;
 using namespace zypp::filesystem;

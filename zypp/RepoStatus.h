@@ -13,9 +13,9 @@
 #define ZYPP2_REPOSTATUS_H
 
 #include <iosfwd>
-#include "zypp/base/PtrTypes.h"
-#include "zypp/CheckSum.h"
-#include "zypp/Date.h"
+#include <zypp/base/PtrTypes.h>
+#include <zypp/CheckSum.h>
+#include <zypp/Date.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

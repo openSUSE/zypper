@@ -15,25 +15,25 @@
 #include <iostream>
 #include <map>
 
-#include "zypp/base/Logger.h"
-#include "zypp/ZConfig.h"
-#include "zypp/PluginScript.h"
-#include "zypp/ExternalProgram.h"
+#include <zypp/base/Logger.h>
+#include <zypp/ZConfig.h>
+#include <zypp/PluginScript.h>
+#include <zypp/ExternalProgram.h>
 
-#include "zypp/media/MediaException.h"
-#include "zypp/media/MediaAccess.h"
-#include "zypp/media/MediaHandler.h"
+#include <zypp/media/MediaException.h>
+#include <zypp/media/MediaAccess.h>
+#include <zypp/media/MediaHandler.h>
 
-#include "zypp/media/MediaNFS.h"
-#include "zypp/media/MediaCD.h"
-#include "zypp/media/MediaDIR.h"
-#include "zypp/media/MediaDISK.h"
-#include "zypp/media/MediaCIFS.h"
-#include "zypp/media/MediaCurl.h"
-#include "zypp/media/MediaMultiCurl.h"
-#include "zypp/media/MediaISO.h"
-#include "zypp/media/MediaPlugin.h"
-#include "zypp/media/UrlResolverPlugin.h"
+#include <zypp/media/MediaNFS.h>
+#include <zypp/media/MediaCD.h>
+#include <zypp/media/MediaDIR.h>
+#include <zypp/media/MediaDISK.h>
+#include <zypp/media/MediaCIFS.h>
+#include <zypp/media/MediaCurl.h>
+#include <zypp/media/MediaMultiCurl.h>
+#include <zypp/media/MediaISO.h>
+#include <zypp/media/MediaPlugin.h>
+#include <zypp/media/UrlResolverPlugin.h>
 
 using std::endl;
 

@@ -1,13 +1,13 @@
 #include <iostream>
 #include <sstream>
-#include "zypp/base/Logger.h"
-#include "zypp/repo/ServiceRepos.h"
-#include "zypp/repo/RepoException.h"
-#include "zypp/media/MediaException.h"
-#include "zypp/parser/RepoFileReader.h"
-#include "zypp/media/MediaManager.h"
-#include "zypp/parser/RepoindexFileReader.h"
-#include "zypp/ExternalProgram.h"
+#include <zypp/base/Logger.h>
+#include <zypp/repo/ServiceRepos.h>
+#include <zypp/repo/RepoException.h>
+#include <zypp/media/MediaException.h>
+#include <zypp/parser/RepoFileReader.h>
+#include <zypp/media/MediaManager.h>
+#include <zypp/parser/RepoindexFileReader.h>
+#include <zypp/ExternalProgram.h>
 
 using std::stringstream;
 using std::endl;

@@ -13,16 +13,16 @@
  *
  */
 #include <iostream>
-#include "zypp/base/Logger.h"
+#include <zypp/base/Logger.h>
 
-#include "zypp/ui/UserWantedPackages.h"
+#include <zypp/ui/UserWantedPackages.h>
 
-#include "zypp/base/PtrTypes.h"
-#include "zypp/ui/Selectable.h"
+#include <zypp/base/PtrTypes.h>
+#include <zypp/ui/Selectable.h>
 
-#include "zypp/ResObjects.h"
-#include "zypp/ZYppFactory.h"
-#include "zypp/ResPoolProxy.h"
+#include <zypp/ResObjects.h>
+#include <zypp/ZYppFactory.h>
+#include <zypp/ResPoolProxy.h>
 
 
 using std::string;

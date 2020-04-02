@@ -12,9 +12,9 @@
 #define ZYPP_REPO_VARIABLES_H_
 
 #include <string>
-#include "zypp/base/Function.h"
-#include "zypp/base/ValueTransform.h"
-#include "zypp/Url.h"
+#include <zypp/base/Function.h>
+#include <zypp/base/ValueTransform.h>
+#include <zypp/Url.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

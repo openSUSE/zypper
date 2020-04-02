@@ -14,7 +14,7 @@
 
 #include <boost/functional.hpp>
 
-#include "zypp/base/Function.h"
+#include <zypp/base/Function.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

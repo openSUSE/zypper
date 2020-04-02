@@ -1,7 +1,7 @@
 #include "TestSetup.h"
 
-#include "zypp/MediaSetAccess.h"
-#include "zypp/Fetcher.h"
+#include <zypp/MediaSetAccess.h>
+#include <zypp/Fetcher.h>
 
 #include "WebServer.h"
 

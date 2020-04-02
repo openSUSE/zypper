@@ -16,9 +16,9 @@
 
 #include <fstream>
 
-#include "zypp/Pathname.h"
-#include "zypp/PoolQuery.h"
-#include "zypp/base/String.h"
+#include <zypp/Pathname.h>
+#include <zypp/PoolQuery.h>
+#include <zypp/base/String.h>
 
 namespace zypp
 {

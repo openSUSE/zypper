@@ -12,12 +12,12 @@
 #include <ostream>
 #include <iostream>
 
-#include "zypp/base/String.h"
-#include "zypp/base/DefaultIntegral.h"
-#include "zypp/parser/xml/XmlEscape.h"
+#include <zypp/base/String.h>
+#include <zypp/base/DefaultIntegral.h>
+#include <zypp/parser/xml/XmlEscape.h>
 
-#include "zypp/RepoInfo.h"
-#include "zypp/ServiceInfo.h"
+#include <zypp/RepoInfo.h>
+#include <zypp/ServiceInfo.h>
 
 using std::endl;
 using zypp::xml::escape;

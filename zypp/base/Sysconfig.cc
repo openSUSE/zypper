@@ -13,16 +13,16 @@
 #include <iostream>
 #include <fstream>
 
-#include "zypp/base/Logger.h"
-#include "zypp/base/String.h"
-#include "zypp/base/StrMatcher.h"
-#include "zypp/base/IOStream.h"
-#include "zypp/base/InputStream.h"
-#include "zypp/Pathname.h"
-#include "zypp/PathInfo.h"
-#include "zypp/TmpPath.h"
+#include <zypp/base/Logger.h>
+#include <zypp/base/String.h>
+#include <zypp/base/StrMatcher.h>
+#include <zypp/base/IOStream.h>
+#include <zypp/base/InputStream.h>
+#include <zypp/Pathname.h>
+#include <zypp/PathInfo.h>
+#include <zypp/TmpPath.h>
 
-#include "zypp/base/Sysconfig.h"
+#include <zypp/base/Sysconfig.h>
 
 using std::endl;
 using namespace zypp::base;

@@ -10,12 +10,12 @@
  *
 */
 //#include <iostream>
-//#include "zypp/base/Logger.h"
+//#include <zypp/base/Logger.h>
 
-#include "zypp/sat/SolvIterMixin.h"
-#include "zypp/sat/Solvable.h"
-#include "zypp/ResPoolProxy.h"
-#include "zypp/pool/PoolTraits.h"
+#include <zypp/sat/SolvIterMixin.h>
+#include <zypp/sat/Solvable.h>
+#include <zypp/ResPoolProxy.h>
+#include <zypp/pool/PoolTraits.h>
 
 using std::endl;
 

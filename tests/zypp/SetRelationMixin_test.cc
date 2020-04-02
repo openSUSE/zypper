@@ -1,5 +1,5 @@
 #include <boost/test/unit_test.hpp>
-#include "zypp/base/SetRelationMixin.h"
+#include <zypp/base/SetRelationMixin.h>
 
 using zypp::SetCompare;
 using zypp::SetRelation;

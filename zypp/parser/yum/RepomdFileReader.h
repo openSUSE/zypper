@@ -12,11 +12,11 @@
 #ifndef zypp_source_yum_RepomdFileReader_H
 #define zypp_source_yum_RepomdFileReader_H
 
-#include "zypp/base/PtrTypes.h"
-#include "zypp/base/NonCopyable.h"
-#include "zypp/base/Function.h"
+#include <zypp/base/PtrTypes.h>
+#include <zypp/base/NonCopyable.h>
+#include <zypp/base/Function.h>
 
-#include "zypp/OnMediaLocation.h"
+#include <zypp/OnMediaLocation.h>
 
 namespace zypp
 {

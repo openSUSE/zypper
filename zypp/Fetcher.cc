@@ -14,18 +14,18 @@
 #include <list>
 #include <map>
 
-#include "zypp/base/Easy.h"
-#include "zypp/base/LogControl.h"
-#include "zypp/base/LogTools.h"
-#include "zypp/base/PtrTypes.h"
-#include "zypp/base/DefaultIntegral.h"
-#include "zypp/base/String.h"
-#include "zypp/Fetcher.h"
-#include "zypp/ZYppFactory.h"
-#include "zypp/CheckSum.h"
-#include "zypp/base/UserRequestException.h"
-#include "zypp/parser/susetags/ContentFileReader.h"
-#include "zypp/parser/susetags/RepoIndex.h"
+#include <zypp/base/Easy.h>
+#include <zypp/base/LogControl.h>
+#include <zypp/base/LogTools.h>
+#include <zypp/base/PtrTypes.h>
+#include <zypp/base/DefaultIntegral.h>
+#include <zypp/base/String.h>
+#include <zypp/Fetcher.h>
+#include <zypp/ZYppFactory.h>
+#include <zypp/CheckSum.h>
+#include <zypp/base/UserRequestException.h>
+#include <zypp/parser/susetags/ContentFileReader.h>
+#include <zypp/parser/susetags/RepoIndex.h>
 
 #undef ZYPP_BASE_LOGGER_LOGGROUP
 #define ZYPP_BASE_LOGGER_LOGGROUP "zypp:fetcher"

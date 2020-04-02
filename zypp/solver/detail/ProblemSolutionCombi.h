@@ -27,8 +27,8 @@
 
 #include <string>
 
-#include "zypp/ProblemSolution.h"
-#include "zypp/solver/detail/SolutionAction.h" // TransactionKind
+#include <zypp/ProblemSolution.h>
+#include <zypp/solver/detail/SolutionAction.h> // TransactionKind
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp

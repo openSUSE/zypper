@@ -14,22 +14,22 @@
 #include <sstream>
 #include <set>
 
-#include "zypp/base/Gettext.h"
-#include "zypp/base/Logger.h"
-#include "zypp/base/String.h"
-#include "zypp/base/UserRequestException.h"
-#include "zypp/repo/RepoProvideFile.h"
-#include "zypp/ZYppCallbacks.h"
-#include "zypp/MediaSetAccess.h"
-#include "zypp/ZConfig.h"
-#include "zypp/ZYppFactory.h"
-#include "zypp/repo/SUSEMediaVerifier.h"
-#include "zypp/repo/RepoException.h"
+#include <zypp/base/Gettext.h>
+#include <zypp/base/Logger.h>
+#include <zypp/base/String.h>
+#include <zypp/base/UserRequestException.h>
+#include <zypp/repo/RepoProvideFile.h>
+#include <zypp/ZYppCallbacks.h>
+#include <zypp/MediaSetAccess.h>
+#include <zypp/ZConfig.h>
+#include <zypp/ZYppFactory.h>
+#include <zypp/repo/SUSEMediaVerifier.h>
+#include <zypp/repo/RepoException.h>
 
-#include "zypp/repo/SUSEMediaVerifier.h"
-#include "zypp/repo/RepoException.h"
-#include "zypp/FileChecker.h"
-#include "zypp/Fetcher.h"
+#include <zypp/repo/SUSEMediaVerifier.h>
+#include <zypp/repo/RepoException.h>
+#include <zypp/FileChecker.h>
+#include <zypp/Fetcher.h>
 
 using std::endl;
 using std::set;

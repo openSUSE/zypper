@@ -12,9 +12,9 @@
 #ifndef ZYPP_PATTERN_H
 #define ZYPP_PATTERN_H
 
-#include "zypp/ResObject.h"
-#include "zypp/Pathname.h"
-#include "zypp/sat/SolvableSet.h"
+#include <zypp/ResObject.h>
+#include <zypp/Pathname.h>
+#include <zypp/sat/SolvableSet.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

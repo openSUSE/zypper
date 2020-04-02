@@ -10,9 +10,9 @@
  *
 */
 #include <iostream>
-//#include "zypp/base/Logger.h"
+//#include <zypp/base/Logger.h>
 
-#include "zypp/ResStatus.h"
+#include <zypp/ResStatus.h>
 
 using std::endl;
 

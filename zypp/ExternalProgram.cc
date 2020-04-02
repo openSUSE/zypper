@@ -24,11 +24,11 @@
 #include <iostream>
 #include <sstream>
 
-#include "zypp/base/Logger.h"
-#include "zypp/base/String.h"
-#include "zypp/base/Gettext.h"
-#include "zypp/ExternalProgram.h"
-#include "zypp/base/CleanerThread_p.h"
+#include <zypp/base/Logger.h>
+#include <zypp/base/String.h>
+#include <zypp/base/Gettext.h>
+#include <zypp/ExternalProgram.h>
+#include <zypp/base/CleanerThread_p.h>
 
 using std::endl;
 

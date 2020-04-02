@@ -15,13 +15,13 @@
 #include <iosfwd>
 #include <list>
 
-#include "zypp/OnMediaLocation.h"
-#include "zypp/Edition.h"
-#include "zypp/Arch.h"
-#include "zypp/Date.h"
+#include <zypp/OnMediaLocation.h>
+#include <zypp/Edition.h>
+#include <zypp/Arch.h>
+#include <zypp/Date.h>
 
-#include "zypp/sat/detail/PoolMember.h"
-#include "zypp/Repository.h"
+#include <zypp/sat/detail/PoolMember.h>
+#include <zypp/Repository.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

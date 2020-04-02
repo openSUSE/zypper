@@ -15,9 +15,9 @@
 #include <set>
 #include <vector>
 
-#include "zypp/base/Iterator.h"
-#include "zypp/PoolItem.h"
-#include "zypp/pool/ByIdent.h"
+#include <zypp/base/Iterator.h>
+#include <zypp/PoolItem.h>
+#include <zypp/pool/ByIdent.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

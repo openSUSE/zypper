@@ -19,9 +19,9 @@
 #include <set>
 #include <map>
 
-#include "zypp/base/Easy.h"
-#include "zypp/base/String.h"
-#include "zypp/parser/xml/XmlEscape.h"
+#include <zypp/base/Easy.h>
+#include <zypp/base/String.h>
+#include <zypp/parser/xml/XmlEscape.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

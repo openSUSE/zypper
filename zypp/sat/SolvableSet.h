@@ -14,10 +14,10 @@
 
 #include <iosfwd>
 
-#include "zypp/base/PtrTypes.h"
-#include "zypp/base/Hash.h"
-#include "zypp/sat/Solvable.h"
-#include "zypp/sat/SolvIterMixin.h"
+#include <zypp/base/PtrTypes.h>
+#include <zypp/base/Hash.h>
+#include <zypp/sat/Solvable.h>
+#include <zypp/sat/SolvIterMixin.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

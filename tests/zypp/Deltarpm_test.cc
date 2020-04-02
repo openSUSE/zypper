@@ -6,14 +6,14 @@
 
 #include <boost/test/unit_test.hpp>
 
-#include "zypp/base/Logger.h"
-#include "zypp/base/Exception.h"
-#include "zypp/TmpPath.h"
-#include "zypp/PathInfo.h"
-#include "zypp/RepoManager.h"
-#include "zypp/sat/Pool.h"
-#include "zypp/repo/DeltaCandidates.h"
-#include "zypp/repo/PackageDelta.h"
+#include <zypp/base/Logger.h>
+#include <zypp/base/Exception.h>
+#include <zypp/TmpPath.h>
+#include <zypp/PathInfo.h>
+#include <zypp/RepoManager.h>
+#include <zypp/sat/Pool.h>
+#include <zypp/repo/DeltaCandidates.h>
+#include <zypp/repo/PackageDelta.h>
 #include "KeyRingTestReceiver.h"
 
 using boost::unit_test::test_case;

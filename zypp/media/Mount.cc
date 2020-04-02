@@ -20,12 +20,12 @@
 #include <fstream>
 #include <string>
 
-#include "zypp/base/ExternalDataSource.h"
-#include "zypp/base/Logger.h"
-#include "zypp/media/Mount.h"
-#include "zypp/media/MediaException.h"
+#include <zypp/base/ExternalDataSource.h>
+#include <zypp/base/Logger.h>
+#include <zypp/media/Mount.h>
+#include <zypp/media/MediaException.h>
 
-#include "zypp/PathInfo.h"
+#include <zypp/PathInfo.h>
 
 using std::endl;
 

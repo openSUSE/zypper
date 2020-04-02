@@ -11,10 +11,10 @@
  */
 #include <iostream>
 
-#include "zypp/base/Logger.h"
-#include "zypp/media/Mount.h"
+#include <zypp/base/Logger.h>
+#include <zypp/media/Mount.h>
 
-#include "zypp/media/MediaISO.h"
+#include <zypp/media/MediaISO.h>
 
 using std::endl;
 

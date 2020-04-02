@@ -12,12 +12,12 @@
  */
 #include <iostream>
 
-#include "zypp/base/InputStream.h"
-#include "zypp/base/IOStream.h"
-#include "zypp/base/Logger.h"
-#include "zypp/parser/ParseException.h"
+#include <zypp/base/InputStream.h>
+#include <zypp/base/IOStream.h>
+#include <zypp/base/Logger.h>
+#include <zypp/parser/ParseException.h>
 
-#include "zypp/parser/HistoryLogReader.h"
+#include <zypp/parser/HistoryLogReader.h>
 
 using std::endl;
 

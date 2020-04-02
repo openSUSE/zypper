@@ -1,12 +1,12 @@
 #include <iostream>
 #include <boost/test/unit_test.hpp>
 
-#include "zypp/Url.h"
-#include "zypp/TmpPath.h"
-#include "zypp/media/CredentialFileReader.cc"
-#include "zypp/media/CredentialManager.h"
+#include <zypp/Url.h>
+#include <zypp/TmpPath.h>
+#include <zypp/media/CredentialFileReader.cc>
+#include <zypp/media/CredentialManager.h>
 
-#include "zypp/PathInfo.h"
+#include <zypp/PathInfo.h>
 
 using std::cout;
 using std::endl;

@@ -12,8 +12,8 @@
 
 #include <iostream>
 
-#include "zypp/base/Logger.h"
-#include "zypp/media/MediaDIR.h"
+#include <zypp/base/Logger.h>
+#include <zypp/media/MediaDIR.h>
 
 #include <sys/mount.h>
 #include <errno.h>

@@ -23,7 +23,7 @@
  */
 #define ZYPP_USE_RESOLVER_INTERNALS
 
-#include "zypp/solver/detail/ProblemSolutionCombi.h"
+#include <zypp/solver/detail/ProblemSolutionCombi.h>
 
 
 /////////////////////////////////////////////////////////////////////////

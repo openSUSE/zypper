@@ -13,17 +13,17 @@
 #include <iostream>
 #include <fstream>
 
-#include "zypp/base/Logger.h"
-#include "zypp/base/Gettext.h"
-#include "zypp/TmpPath.h"
-#include "zypp/KVMap.h"
-#include "zypp/media/Mount.h"
-#include "zypp/media/MediaUserAuth.h"
-#include "zypp/media/CredentialManager.h"
-#include "zypp/ZYppCallbacks.h"
-#include "zypp/ZConfig.h"
+#include <zypp/base/Logger.h>
+#include <zypp/base/Gettext.h>
+#include <zypp/TmpPath.h>
+#include <zypp/KVMap.h>
+#include <zypp/media/Mount.h>
+#include <zypp/media/MediaUserAuth.h>
+#include <zypp/media/CredentialManager.h>
+#include <zypp/ZYppCallbacks.h>
+#include <zypp/ZConfig.h>
 
-#include "zypp/media/MediaCIFS.h"
+#include <zypp/media/MediaCIFS.h>
 
 #include <sys/types.h>
 #include <sys/mount.h>

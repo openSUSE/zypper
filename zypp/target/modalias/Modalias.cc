@@ -21,13 +21,13 @@ extern "C"
 #undef ZYPP_BASE_LOGGER_LOGGROUP
 #define ZYPP_BASE_LOGGER_LOGGROUP "MODALIAS"
 
-#include "zypp/base/LogTools.h"
-#include "zypp/base/IOStream.h"
-#include "zypp/base/InputStream.h"
-#include "zypp/AutoDispose.h"
-#include "zypp/PathInfo.h"
+#include <zypp/base/LogTools.h>
+#include <zypp/base/IOStream.h>
+#include <zypp/base/InputStream.h>
+#include <zypp/AutoDispose.h>
+#include <zypp/PathInfo.h>
 
-#include "zypp/target/modalias/Modalias.h"
+#include <zypp/target/modalias/Modalias.h>
 
 using std::endl;
 

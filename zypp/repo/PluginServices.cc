@@ -8,16 +8,16 @@
 \---------------------------------------------------------------------*/
 #include <iostream>
 #include <sstream>
-#include "zypp/base/Logger.h"
-#include "zypp/base/Gettext.h"
-#include "zypp/base/String.h"
-#include "zypp/base/InputStream.h"
-#include "zypp/base/UserRequestException.h"
+#include <zypp/base/Logger.h>
+#include <zypp/base/Gettext.h>
+#include <zypp/base/String.h>
+#include <zypp/base/InputStream.h>
+#include <zypp/base/UserRequestException.h>
 
-#include "zypp/repo/PluginServices.h"
-#include "zypp/ServiceInfo.h"
-#include "zypp/RepoInfo.h"
-#include "zypp/PathInfo.h"
+#include <zypp/repo/PluginServices.h>
+#include <zypp/ServiceInfo.h>
+#include <zypp/RepoInfo.h>
+#include <zypp/PathInfo.h>
 
 using std::endl;
 using std::stringstream;

@@ -14,7 +14,7 @@
 
 #include <inttypes.h>
 #include <iosfwd>
-#include "zypp/Bit.h"
+#include <zypp/Bit.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

@@ -9,16 +9,16 @@
 
 #include <fstream>
 #include <solv/solvversion.h>
-#include "zypp/base/String.h"
-#include "zypp/base/LogTools.h"
-#include "zypp/base/Function.h"
-#include "zypp/ZConfig.h"
+#include <zypp/base/String.h>
+#include <zypp/base/LogTools.h>
+#include <zypp/base/Function.h>
+#include <zypp/ZConfig.h>
 
 #include "Downloader.h"
-#include "zypp/repo/MediaInfoDownloader.h"
-#include "zypp/base/UserRequestException.h"
-#include "zypp/parser/xml/Reader.h"
-#include "zypp/parser/yum/RepomdFileReader.h"
+#include <zypp/repo/MediaInfoDownloader.h>
+#include <zypp/base/UserRequestException.h>
+#include <zypp/parser/xml/Reader.h>
+#include <zypp/parser/yum/RepomdFileReader.h>
 
 using namespace zypp::xml;
 using namespace zypp::parser::yum;

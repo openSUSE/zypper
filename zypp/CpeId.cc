@@ -11,11 +11,11 @@
 #include <iostream>
 #include <array>
 
-#include "zypp/base/String.h"
-#include "zypp/base/LogTools.h"
-#include "zypp/base/NonCopyable.h"
+#include <zypp/base/String.h>
+#include <zypp/base/LogTools.h>
+#include <zypp/base/NonCopyable.h>
 
-#include "zypp/CpeId.h"
+#include <zypp/CpeId.h>
 
 using std::endl;
 

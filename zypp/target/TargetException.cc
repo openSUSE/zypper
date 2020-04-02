@@ -13,8 +13,8 @@
 #include <string>
 #include <iostream>
 
-#include "zypp/target/TargetException.h"
-#include "zypp/base/Gettext.h"
+#include <zypp/target/TargetException.h>
+#include <zypp/base/Gettext.h>
 
 
 ///////////////////////////////////////////////////////////////////

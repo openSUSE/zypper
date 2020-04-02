@@ -19,45 +19,45 @@
 #include <sys/types.h>
 #include <dirent.h>
 
-#include "zypp/base/LogTools.h"
-#include "zypp/base/Exception.h"
-#include "zypp/base/Iterator.h"
-#include "zypp/base/Gettext.h"
-#include "zypp/base/IOStream.h"
-#include "zypp/base/Functional.h"
-#include "zypp/base/UserRequestException.h"
-#include "zypp/base/Json.h"
+#include <zypp/base/LogTools.h>
+#include <zypp/base/Exception.h>
+#include <zypp/base/Iterator.h>
+#include <zypp/base/Gettext.h>
+#include <zypp/base/IOStream.h>
+#include <zypp/base/Functional.h>
+#include <zypp/base/UserRequestException.h>
+#include <zypp/base/Json.h>
 
-#include "zypp/ZConfig.h"
-#include "zypp/ZYppFactory.h"
-#include "zypp/PathInfo.h"
+#include <zypp/ZConfig.h>
+#include <zypp/ZYppFactory.h>
+#include <zypp/PathInfo.h>
 
-#include "zypp/PoolItem.h"
-#include "zypp/ResObjects.h"
-#include "zypp/Url.h"
-#include "zypp/TmpPath.h"
-#include "zypp/RepoStatus.h"
-#include "zypp/ExternalProgram.h"
-#include "zypp/Repository.h"
-#include "zypp/ShutdownLock_p.h"
+#include <zypp/PoolItem.h>
+#include <zypp/ResObjects.h>
+#include <zypp/Url.h>
+#include <zypp/TmpPath.h>
+#include <zypp/RepoStatus.h>
+#include <zypp/ExternalProgram.h>
+#include <zypp/Repository.h>
+#include <zypp/ShutdownLock_p.h>
 
-#include "zypp/ResFilters.h"
-#include "zypp/HistoryLog.h"
-#include "zypp/target/TargetImpl.h"
-#include "zypp/target/TargetCallbackReceiver.h"
-#include "zypp/target/rpm/librpmDb.h"
-#include "zypp/target/CommitPackageCache.h"
-#include "zypp/target/RpmPostTransCollector.h"
+#include <zypp/ResFilters.h>
+#include <zypp/HistoryLog.h>
+#include <zypp/target/TargetImpl.h>
+#include <zypp/target/TargetCallbackReceiver.h>
+#include <zypp/target/rpm/librpmDb.h>
+#include <zypp/target/CommitPackageCache.h>
+#include <zypp/target/RpmPostTransCollector.h>
 
-#include "zypp/parser/ProductFileReader.h"
-#include "zypp/repo/SrcPackageProvider.h"
+#include <zypp/parser/ProductFileReader.h>
+#include <zypp/repo/SrcPackageProvider.h>
 
-#include "zypp/sat/Pool.h"
-#include "zypp/sat/detail/PoolImpl.h"
-#include "zypp/sat/SolvableSpec.h"
-#include "zypp/sat/Transaction.h"
+#include <zypp/sat/Pool.h>
+#include <zypp/sat/detail/PoolImpl.h>
+#include <zypp/sat/SolvableSpec.h>
+#include <zypp/sat/Transaction.h>
 
-#include "zypp/PluginExecutor.h"
+#include <zypp/PluginExecutor.h>
 
 using std::endl;
 

@@ -16,11 +16,11 @@
 #include <string>
 #include <vector>
 
-#include "zypp/base/PtrTypes.h"
-#include "zypp/Pathname.h"
+#include <zypp/base/PtrTypes.h>
+#include <zypp/Pathname.h>
 
-#include "zypp/PluginFrame.h"
-#include "zypp/PluginScriptException.h"
+#include <zypp/PluginFrame.h>
+#include <zypp/PluginScriptException.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

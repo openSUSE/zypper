@@ -12,18 +12,18 @@
 #include <iostream>
 #include <sstream>
 
-#include "zypp/base/Gettext.h"
-#include "zypp/base/LogTools.h"
-#include "zypp/base/Algorithm.h"
-#include "zypp/base/String.h"
-#include "zypp/repo/RepoException.h"
-#include "zypp/RelCompare.h"
+#include <zypp/base/Gettext.h>
+#include <zypp/base/LogTools.h>
+#include <zypp/base/Algorithm.h>
+#include <zypp/base/String.h>
+#include <zypp/repo/RepoException.h>
+#include <zypp/RelCompare.h>
 
-#include "zypp/sat/Pool.h"
-#include "zypp/sat/Solvable.h"
-#include "zypp/base/StrMatcher.h"
+#include <zypp/sat/Pool.h>
+#include <zypp/sat/Solvable.h>
+#include <zypp/base/StrMatcher.h>
 
-#include "zypp/PoolQuery.h"
+#include <zypp/PoolQuery.h>
 
 #undef ZYPP_BASE_LOGGER_LOGGROUP
 #define ZYPP_BASE_LOGGER_LOGGROUP "PoolQuery"

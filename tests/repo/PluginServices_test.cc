@@ -5,13 +5,13 @@
 #include <list>
 #include <boost/test/unit_test.hpp>
 
-#include "zypp/ZYppFactory.h"
-#include "zypp/Url.h"
-#include "zypp/PathInfo.h"
-#include "zypp/TmpPath.h"
-#include "zypp/ZConfig.h"
-#include "zypp/repo/PluginServices.h"
-#include "zypp/ServiceInfo.h"
+#include <zypp/ZYppFactory.h>
+#include <zypp/Url.h>
+#include <zypp/PathInfo.h>
+#include <zypp/TmpPath.h>
+#include <zypp/ZConfig.h>
+#include <zypp/repo/PluginServices.h>
+#include <zypp/ServiceInfo.h>
 
 using std::cout;
 using std::endl;

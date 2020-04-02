@@ -10,12 +10,12 @@
  *
 */
 #include <iostream>
-#include "zypp/base/Logger.h"
+#include <zypp/base/Logger.h>
 
-#include "zypp/ZYpp.h"
-#include "zypp/zypp_detail/ZYppImpl.h"
-#include "zypp/sat/Pool.h"
-#include "zypp/ManagedFile.h"
+#include <zypp/ZYpp.h>
+#include <zypp/zypp_detail/ZYppImpl.h>
+#include <zypp/sat/Pool.h>
+#include <zypp/ManagedFile.h>
 
 using std::endl;
 

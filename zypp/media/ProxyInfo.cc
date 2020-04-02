@@ -12,11 +12,11 @@
 
 #include <iostream>
 
-#include "zypp/base/Logger.h"
+#include <zypp/base/Logger.h>
 
-#include "zypp/media/ProxyInfo.h"
-#include "zypp/media/proxyinfo/ProxyInfoImpl.h"
-#include "zypp/media/proxyinfo/ProxyInfos.h"
+#include <zypp/media/ProxyInfo.h>
+#include <zypp/media/proxyinfo/ProxyInfoImpl.h>
+#include <zypp/media/proxyinfo/ProxyInfos.h>
 
 using namespace zypp::base;
 

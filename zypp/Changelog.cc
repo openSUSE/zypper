@@ -12,7 +12,7 @@
 #include <iostream>
 #include <set>
 
-#include "zypp/Changelog.h"
+#include <zypp/Changelog.h>
 
 using std::endl;
 

@@ -14,10 +14,10 @@
 
 #include <string>
 
-#include "zypp/base/Exception.h"
-#include "zypp/base/NonCopyable.h"
-#include "zypp/media/MediaBlockList.h"
-#include "zypp/Url.h"
+#include <zypp/base/Exception.h>
+#include <zypp/base/NonCopyable.h>
+#include <zypp/media/MediaBlockList.h>
+#include <zypp/Url.h>
 
 namespace zypp {
   namespace media {

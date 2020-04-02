@@ -11,9 +11,9 @@
 #include <zypp/TmpPath.h>
 #include <zypp/ResPoolProxy.h>
 #include <zypp/repo/PackageProvider.h>
-#include "zypp/media/MediaManager.h"
-#include "zypp/MediaSetAccess.h"
-#include "zypp/Fetcher.h"
+#include <zypp/media/MediaManager.h>
+#include <zypp/MediaSetAccess.h>
+#include <zypp/Fetcher.h>
 
 static const Pathname sysRoot( "/" );
 

@@ -1,7 +1,7 @@
 #include <boost/test/unit_test.hpp>
 #include <iostream>
 #include <set>
-#include "zypp/ContentType.h"
+#include <zypp/ContentType.h>
 
 using std::cout;
 using std::endl;

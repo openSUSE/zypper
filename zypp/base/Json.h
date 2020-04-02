@@ -19,8 +19,8 @@
 #include <set>
 #include <map>
 
-#include "zypp/base/Easy.h"
-#include "zypp/base/String.h"
+#include <zypp/base/Easy.h>
+#include <zypp/base/String.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

@@ -12,26 +12,26 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
-#include "zypp/repo/PackageDelta.h"
-#include "zypp/base/Logger.h"
-#include "zypp/base/Gettext.h"
-#include "zypp/base/UserRequestException.h"
-#include "zypp/base/NonCopyable.h"
-#include "zypp/repo/PackageProvider.h"
-#include "zypp/repo/Applydeltarpm.h"
-#include "zypp/repo/PackageDelta.h"
+#include <zypp/repo/PackageDelta.h>
+#include <zypp/base/Logger.h>
+#include <zypp/base/Gettext.h>
+#include <zypp/base/UserRequestException.h>
+#include <zypp/base/NonCopyable.h>
+#include <zypp/repo/PackageProvider.h>
+#include <zypp/repo/Applydeltarpm.h>
+#include <zypp/repo/PackageDelta.h>
 
-#include "zypp/TmpPath.h"
-#include "zypp/ZConfig.h"
-#include "zypp/RepoInfo.h"
-#include "zypp/RepoManager.h"
-#include "zypp/SrcPackage.h"
+#include <zypp/TmpPath.h>
+#include <zypp/ZConfig.h>
+#include <zypp/RepoInfo.h>
+#include <zypp/RepoManager.h>
+#include <zypp/SrcPackage.h>
 
-#include "zypp/ZYppFactory.h"
-#include "zypp/Target.h"
-#include "zypp/target/rpm/RpmDb.h"
-#include "zypp/FileChecker.h"
-#include "zypp/target/rpm/RpmHeader.h"
+#include <zypp/ZYppFactory.h>
+#include <zypp/Target.h>
+#include <zypp/target/rpm/RpmDb.h>
+#include <zypp/FileChecker.h>
+#include <zypp/target/rpm/RpmHeader.h>
 
 using std::endl;
 

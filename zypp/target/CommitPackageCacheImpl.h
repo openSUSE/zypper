@@ -14,10 +14,10 @@
 
 #include <iosfwd>
 
-#include "zypp/base/Logger.h"
-#include "zypp/base/Exception.h"
+#include <zypp/base/Logger.h>
+#include <zypp/base/Exception.h>
 
-#include "zypp/target/CommitPackageCache.h"
+#include <zypp/target/CommitPackageCache.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

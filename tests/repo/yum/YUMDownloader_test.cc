@@ -6,11 +6,11 @@
 #include <boost/test/unit_test.hpp>
 #include <solv/solvversion.h>
 
-#include "zypp/base/Logger.h"
-#include "zypp/Url.h"
-#include "zypp/PathInfo.h"
-#include "zypp/TmpPath.h"
-#include "zypp/repo/yum/Downloader.h"
+#include <zypp/base/Logger.h>
+#include <zypp/Url.h>
+#include <zypp/PathInfo.h>
+#include <zypp/TmpPath.h>
+#include <zypp/repo/yum/Downloader.h>
 #include "tests/zypp/KeyRingTestReceiver.h"
 
 using std::cout;

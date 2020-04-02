@@ -15,11 +15,11 @@
 #include <iosfwd>
 #include <string>
 
-#include "zypp/base/Hash.h"
+#include <zypp/base/Hash.h>
 
-#include "zypp/IdStringType.h"
-#include "zypp/LanguageCode.h"
-#include "zypp/CountryCode.h"
+#include <zypp/IdStringType.h>
+#include <zypp/LanguageCode.h>
+#include <zypp/CountryCode.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

@@ -12,8 +12,8 @@
 #include <iosfwd>
 #include <streambuf>
 #include <vector>
-#include "zypp/base/SimpleStreambuf.h"
-#include "zypp/base/fXstream.h"
+#include <zypp/base/SimpleStreambuf.h>
+#include <zypp/base/fXstream.h>
 
 typedef struct zckCtx zckCtx;
 

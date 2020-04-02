@@ -12,13 +12,13 @@
 #include <iostream>
 #include <fstream>
 
-#include "zypp/base/Logger.h"
-#include "zypp/base/String.h"
-#include "zypp/Package.h"
-#include "zypp/sat/LookupAttr.h"
-#include "zypp/ZYppFactory.h"
-#include "zypp/target/rpm/RpmDb.h"
-#include "zypp/target/rpm/RpmHeader.h"
+#include <zypp/base/Logger.h>
+#include <zypp/base/String.h>
+#include <zypp/Package.h>
+#include <zypp/sat/LookupAttr.h>
+#include <zypp/ZYppFactory.h>
+#include <zypp/target/rpm/RpmDb.h>
+#include <zypp/target/rpm/RpmHeader.h>
 
 
 ///////////////////////////////////////////////////////////////////

@@ -14,9 +14,9 @@
 
 #include <iosfwd>
 
-#include "zypp/base/DefaultIntegral.h"
-#include "zypp/sat/detail/PoolMember.h"
-#include "zypp/Capability.h"
+#include <zypp/base/DefaultIntegral.h>
+#include <zypp/sat/detail/PoolMember.h>
+#include <zypp/Capability.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

@@ -14,8 +14,8 @@
 
 #include <set>
 
-#include "zypp/Pathname.h"
-#include "zypp/media/MediaUserAuth.h"
+#include <zypp/Pathname.h>
+#include <zypp/media/MediaUserAuth.h>
 
 //////////////////////////////////////////////////////////////////////
 namespace zypp

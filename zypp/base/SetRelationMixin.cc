@@ -10,7 +10,7 @@
  */
 
 #include <map>
-#include "zypp/base/SetRelationMixin.h"
+#include <zypp/base/SetRelationMixin.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

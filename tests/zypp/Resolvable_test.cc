@@ -6,11 +6,11 @@
 // Boost.Test
 #include <boost/test/unit_test.hpp>
 
-#include "zypp/base/Logger.h"
-#include "zypp/base/Exception.h"
-#include "zypp/ZYppFactory.h"
-#include "zypp/ZYpp.h"
-#include "zypp/Pattern.h"
+#include <zypp/base/Logger.h>
+#include <zypp/base/Exception.h>
+#include <zypp/ZYppFactory.h>
+#include <zypp/ZYpp.h>
+#include <zypp/Pattern.h>
 
 #include "TestSetup.h"
 

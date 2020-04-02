@@ -2,9 +2,9 @@
 #include <iostream>
 #include <boost/test/unit_test.hpp>
 
-#include "zypp/base/LogTools.h"
-#include "zypp/base/Easy.h"
-#include "zypp/sat/Queue.h"
+#include <zypp/base/LogTools.h>
+#include <zypp/base/Easy.h>
+#include <zypp/sat/Queue.h>
 
 
 #define BOOST_TEST_MODULE Queue

@@ -9,9 +9,9 @@
 /** \file	zypp/base/Unit.cc
  *
 */
-#include "zypp/base/String.h"
+#include <zypp/base/String.h>
 
-#include "zypp/base/Unit.h"
+#include <zypp/base/Unit.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

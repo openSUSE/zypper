@@ -14,10 +14,10 @@
 #include <iosfwd>
 #include <string>
 
-#include "zypp/base/PtrTypes.h"
-#include "zypp/base/Flags.h"
-#include "zypp/base/EnumClass.h"
-#include "zypp/base/SetRelationMixin.h"
+#include <zypp/base/PtrTypes.h>
+#include <zypp/base/Flags.h>
+#include <zypp/base/EnumClass.h>
+#include <zypp/base/SetRelationMixin.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

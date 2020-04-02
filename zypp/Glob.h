@@ -19,13 +19,13 @@ extern "C"
 
 #include <iosfwd>
 
-#include "zypp/base/Easy.h"
-#include "zypp/base/Flags.h"
-#include "zypp/base/Iterator.h"
-#include "zypp/base/NonCopyable.h"
-#include "zypp/base/DefaultIntegral.h"
+#include <zypp/base/Easy.h>
+#include <zypp/base/Flags.h>
+#include <zypp/base/Iterator.h>
+#include <zypp/base/NonCopyable.h>
+#include <zypp/base/DefaultIntegral.h>
 
-#include "zypp/Pathname.h"
+#include <zypp/Pathname.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

@@ -14,19 +14,19 @@
 #include <unordered_set>
 #include <iterator>
 #include <stdio.h>
-#include "zypp/base/LogTools.h"
-#include "zypp/base/String.h"
-#include "zypp/base/Gettext.h"
-#include "zypp/base/Exception.h"
+#include <zypp/base/LogTools.h>
+#include <zypp/base/String.h>
+#include <zypp/base/Gettext.h>
+#include <zypp/base/Exception.h>
 
-#include "zypp/PathInfo.h"
-#include "zypp/ExternalProgram.h"
-#include "zypp/base/Regex.h"
-#include "zypp/base/IOStream.h"
-#include "zypp/base/InputStream.h"
-#include "zypp/target/rpm/librpmDb.h"
+#include <zypp/PathInfo.h>
+#include <zypp/ExternalProgram.h>
+#include <zypp/base/Regex.h>
+#include <zypp/base/IOStream.h>
+#include <zypp/base/InputStream.h>
+#include <zypp/target/rpm/librpmDb.h>
 
-#include "zypp/misc/CheckAccessDeleted.h"
+#include <zypp/misc/CheckAccessDeleted.h>
 
 using std::endl;
 

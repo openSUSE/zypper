@@ -12,8 +12,8 @@
 #ifndef ZYPP_RESTRAITS_H
 #define ZYPP_RESTRAITS_H
 
-#include "zypp/base/PtrTypes.h"
-#include "zypp/ResKind.h"
+#include <zypp/base/PtrTypes.h>
+#include <zypp/ResKind.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

@@ -14,7 +14,7 @@
 
 #include <string>
 #include <map>
-#include "zypp/Pathname.h"
+#include <zypp/Pathname.h>
 
 namespace zypp {
   namespace base {

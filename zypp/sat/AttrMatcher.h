@@ -13,7 +13,7 @@
 #define ZYPP_SAT_ATTRMATCHER_H
 #warning sat::AttrMatcher was renamed to StrMatcher. Deprecated include of zypp/sat/AttrMatcher.h use zypp/base/StrMatcher.h
 
-#include "zypp/base/StrMatcher.h"
+#include <zypp/base/StrMatcher.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

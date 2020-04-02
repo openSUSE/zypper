@@ -13,12 +13,12 @@
 
 #include <iosfwd>
 
-#include "zypp/base/PtrTypes.h"
+#include <zypp/base/PtrTypes.h>
 
-#include "zypp/APIConfig.h"
-#include "zypp/Pathname.h"
-#include "zypp/ByteCount.h"
-#include "zypp/CheckSum.h"
+#include <zypp/APIConfig.h>
+#include <zypp/Pathname.h>
+#include <zypp/ByteCount.h>
+#include <zypp/CheckSum.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

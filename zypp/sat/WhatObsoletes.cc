@@ -11,11 +11,11 @@
 */
 #include <iostream>
 
-#include "zypp/base/LogTools.h"
-#include "zypp/base/Hash.h"
-#include "zypp/sat/WhatObsoletes.h"
-#include "zypp/sat/detail/PoolImpl.h"
-#include "zypp/PoolItem.h"
+#include <zypp/base/LogTools.h>
+#include <zypp/base/Hash.h>
+#include <zypp/sat/WhatObsoletes.h>
+#include <zypp/sat/detail/PoolImpl.h>
+#include <zypp/PoolItem.h>
 
 using std::endl;
 

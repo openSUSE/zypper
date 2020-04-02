@@ -15,12 +15,12 @@
 #include <iterator>
 #include <iostream>
 #include <fstream>
-#include "zypp/ZConfig.h"
-#include "zypp/base/Logger.h"
-#include "zypp/media/MediaManager.h"
-#include "zypp/base/UserRequestException.h"
+#include <zypp/ZConfig.h>
+#include <zypp/base/Logger.h>
+#include <zypp/media/MediaManager.h>
+#include <zypp/base/UserRequestException.h>
 
-#include "zypp/ProgressData.h"
+#include <zypp/ProgressData.h>
 
 namespace zypp
 {

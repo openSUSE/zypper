@@ -11,7 +11,7 @@
 #include <zypp/base/LogTools.h>
 #include <zypp/base/LogControl.h>
 
-#include "zypp/ExternalProgram.h"
+#include <zypp/ExternalProgram.h>
 
 using std::endl;
 using zypp::debug::Measure;

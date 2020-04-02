@@ -2,10 +2,10 @@
 #include <iostream>
 #include <boost/test/unit_test.hpp>
 
-#include "zypp/base/Logger.h"
-#include "zypp/base/Easy.h"
-#include "zypp/Pattern.h"
-#include "zypp/sat/Solvable.h"
+#include <zypp/base/Logger.h>
+#include <zypp/base/Easy.h>
+#include <zypp/Pattern.h>
+#include <zypp/sat/Solvable.h>
 #include "TestSetup.h"
 
 

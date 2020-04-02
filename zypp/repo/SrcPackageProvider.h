@@ -14,12 +14,12 @@
 
 #include <iosfwd>
 
-#include "zypp/base/NonCopyable.h"
-#include "zypp/base/PtrTypes.h"
+#include <zypp/base/NonCopyable.h>
+#include <zypp/base/PtrTypes.h>
 
-#include "zypp/repo/RepoProvideFile.h"
-#include "zypp/ManagedFile.h"
-#include "zypp/ResTraits.h"
+#include <zypp/repo/RepoProvideFile.h>
+#include <zypp/ManagedFile.h>
+#include <zypp/ResTraits.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

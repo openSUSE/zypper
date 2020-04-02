@@ -10,12 +10,12 @@
  *
 */
 #include <iostream>
-//#include "zypp/base/Logger.h"
+//#include <zypp/base/Logger.h>
 
-#include "zypp/base/String.h"
-#include "zypp/base/Xml.h"
+#include <zypp/base/String.h>
+#include <zypp/base/Xml.h>
 
-#include "zypp/Date.h"
+#include <zypp/Date.h>
 
 using std::endl;
 

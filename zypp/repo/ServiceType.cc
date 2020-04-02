@@ -9,7 +9,7 @@
 
 #include <iostream>
 #include <map>
-#include "zypp/repo/RepoException.h"
+#include <zypp/repo/RepoException.h>
 #include "ServiceType.h"
 
 namespace zypp

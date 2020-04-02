@@ -14,8 +14,8 @@
 
 #include <string>
 
-#include "zypp/base/Functional.h"
-#include "zypp/ui/Selectable.h"
+#include <zypp/base/Functional.h>
+#include <zypp/ui/Selectable.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

@@ -14,12 +14,12 @@
 
 #include <iosfwd>
 
-#include "zypp/base/Hash.h"
-#include "zypp/base/Exception.h"
-#include "zypp/sat/SolvIterMixin.h"
+#include <zypp/base/Hash.h>
+#include <zypp/base/Exception.h>
+#include <zypp/sat/SolvIterMixin.h>
 
-#include "zypp/PoolItem.h"
-#include "zypp/PoolQuery.h"
+#include <zypp/PoolItem.h>
+#include <zypp/PoolQuery.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

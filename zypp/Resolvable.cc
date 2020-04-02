@@ -9,9 +9,9 @@
 /** \file zypp/Resolvable.cc
  *
 */
-#include "zypp/Resolvable.h"
-#include "zypp/ResObject.h"
-#include "zypp/PoolItem.h"
+#include <zypp/Resolvable.h>
+#include <zypp/ResObject.h>
+#include <zypp/PoolItem.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

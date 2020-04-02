@@ -25,7 +25,7 @@
 #include <iosfwd>
 #include <string>
 
-#include "zypp/solver/detail/SolverQueueItem.h"
+#include <zypp/solver/detail/SolverQueueItem.h>
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp

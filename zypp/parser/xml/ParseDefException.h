@@ -14,7 +14,7 @@
 
 #include <string>
 
-#include "zypp/base/Exception.h"
+#include <zypp/base/Exception.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

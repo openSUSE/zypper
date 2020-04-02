@@ -10,11 +10,11 @@
  */
 #include <iostream>
 
-#include "zypp/base/LogTools.h"
-#include "zypp/base/IOStream.h"
+#include <zypp/base/LogTools.h>
+#include <zypp/base/IOStream.h>
 
-#include "zypp/sat/SolvableSpec.h"
-#include "zypp/sat/WhatProvides.h"
+#include <zypp/sat/SolvableSpec.h>
+#include <zypp/sat/WhatProvides.h>
 
 using std::endl;
 

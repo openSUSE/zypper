@@ -14,7 +14,7 @@
 
 #include <iostream>
 
-#include "zypp/base/Regex.h"
+#include <zypp/base/Regex.h>
 
 using namespace zypp;
 using namespace zypp::str;

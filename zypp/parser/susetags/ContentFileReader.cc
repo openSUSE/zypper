@@ -12,14 +12,14 @@
 #include <iostream>
 #include <sstream>
 
-#include "zypp/base/LogTools.h"
-#include "zypp/base/String.h"
-#include "zypp/base/IOStream.h"
-#include "zypp/base/UserRequestException.h"
-#include "zypp/parser/ParseException.h"
+#include <zypp/base/LogTools.h>
+#include <zypp/base/String.h>
+#include <zypp/base/IOStream.h>
+#include <zypp/base/UserRequestException.h>
+#include <zypp/parser/ParseException.h>
 
-#include "zypp/parser/susetags/ContentFileReader.h"
-#include "zypp/parser/susetags/RepoIndex.h"
+#include <zypp/parser/susetags/ContentFileReader.h>
+#include <zypp/parser/susetags/RepoIndex.h>
 
 using std::endl;
 #undef  ZYPP_BASE_LOGGER_LOGGROUP

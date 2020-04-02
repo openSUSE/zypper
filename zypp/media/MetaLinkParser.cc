@@ -10,8 +10,8 @@
  *
  */
 
-#include "zypp/media/MetaLinkParser.h"
-#include "zypp/base/Logger.h"
+#include <zypp/media/MetaLinkParser.h>
+#include <zypp/base/Logger.h>
 
 #include <sys/types.h>
 #include <stdio.h>

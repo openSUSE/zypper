@@ -19,10 +19,10 @@
 #include <set>
 #include <map>
 
-#include "zypp/base/Hash.h"
-#include "zypp/base/Logger.h"
-#include "zypp/base/Iterator.h"
-#include "zypp/APIConfig.h"
+#include <zypp/base/Hash.h>
+#include <zypp/base/Logger.h>
+#include <zypp/base/Iterator.h>
+#include <zypp/APIConfig.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

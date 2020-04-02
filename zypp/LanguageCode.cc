@@ -11,12 +11,12 @@
 */
 #include <iostream>
 
-#include "zypp/base/Logger.h"
-#include "zypp/base/String.h"
-#include "zypp/base/Gettext.h"
-#include "zypp/base/Hash.h"
+#include <zypp/base/Logger.h>
+#include <zypp/base/String.h>
+#include <zypp/base/Gettext.h>
+#include <zypp/base/Hash.h>
 
-#include "zypp/LanguageCode.h"
+#include <zypp/LanguageCode.h>
 
 using std::endl;
 

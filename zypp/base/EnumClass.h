@@ -13,7 +13,7 @@
 
 #include <iosfwd>
 
-#include "zypp/base/PtrTypes.h"
+#include <zypp/base/PtrTypes.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

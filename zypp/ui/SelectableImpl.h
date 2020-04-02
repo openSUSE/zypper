@@ -13,14 +13,14 @@
 #define ZYPP_UI_SELECTABLEIMPL_H
 
 #include <iostream>
-#include "zypp/base/LogTools.h"
+#include <zypp/base/LogTools.h>
 
-#include "zypp/base/PtrTypes.h"
+#include <zypp/base/PtrTypes.h>
 
-#include "zypp/ResPool.h"
-#include "zypp/Resolver.h"
-#include "zypp/ui/Selectable.h"
-#include "zypp/ui/SelectableTraits.h"
+#include <zypp/ResPool.h>
+#include <zypp/Resolver.h>
+#include <zypp/ui/Selectable.h>
+#include <zypp/ui/SelectableTraits.h>
 
 using std::endl;
 

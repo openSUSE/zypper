@@ -14,10 +14,10 @@
 
 #include <iostream>
 
-#include "zypp/base/String.h"
-#include "zypp/base/LogTools.h"
+#include <zypp/base/String.h>
+#include <zypp/base/LogTools.h>
 
-#include "zypp/TriBool.h"
+#include <zypp/TriBool.h>
 
 using std::string;
 

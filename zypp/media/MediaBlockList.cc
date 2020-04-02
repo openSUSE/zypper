@@ -19,9 +19,9 @@
 #include <iostream>
 #include <fstream>
 
-#include "zypp/media/MediaBlockList.h"
-#include "zypp/base/Logger.h"
-#include "zypp/base/String.h"
+#include <zypp/media/MediaBlockList.h>
+#include <zypp/base/Logger.h>
+#include <zypp/base/String.h>
 
 using namespace zypp::base;
 

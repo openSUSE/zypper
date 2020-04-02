@@ -11,12 +11,12 @@
  */
 #include <iostream>
 
-#include "zypp/ZConfig.h"
-#include "zypp/repo/RepoVariables.h"
+#include <zypp/ZConfig.h>
+#include <zypp/repo/RepoVariables.h>
 
-#include "zypp/repo/RepoInfoBase.h"
-#include "zypp/TriBool.h"
-#include "zypp/Pathname.h"
+#include <zypp/repo/RepoInfoBase.h>
+#include <zypp/TriBool.h>
+#include <zypp/Pathname.h>
 
 using std::endl;
 

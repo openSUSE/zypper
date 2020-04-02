@@ -15,8 +15,8 @@
 #include <iosfwd>
 #include <string>
 
-#include "zypp/base/Function.h"
-#include "zypp/Pathname.h"
+#include <zypp/base/Function.h>
+#include <zypp/Pathname.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

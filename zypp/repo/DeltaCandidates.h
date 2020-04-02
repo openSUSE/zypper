@@ -13,11 +13,11 @@
 #include <iosfwd>
 #include <list>
 
-#include "zypp/base/PtrTypes.h"
-#include "zypp/base/Function.h"
-#include "zypp/repo/PackageDelta.h"
-#include "zypp/Repository.h"
-#include "zypp/Package.h"
+#include <zypp/base/PtrTypes.h>
+#include <zypp/base/Function.h>
+#include <zypp/repo/PackageDelta.h>
+#include <zypp/Repository.h>
+#include <zypp/Package.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

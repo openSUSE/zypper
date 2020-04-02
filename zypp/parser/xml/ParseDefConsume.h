@@ -12,13 +12,13 @@
 #ifndef ZYPP_PARSER_XML_PARSEDEFCONSUME_H
 #define ZYPP_PARSER_XML_PARSEDEFCONSUME_H
 
-#include "zypp/base/PtrTypes.h"
-#include "zypp/base/Function.h"
-#include "zypp/base/Hash.h"
-#include "zypp/base/String.h"
-#include "zypp/base/DefaultIntegral.h"
+#include <zypp/base/PtrTypes.h>
+#include <zypp/base/Function.h>
+#include <zypp/base/Hash.h>
+#include <zypp/base/String.h>
+#include <zypp/base/DefaultIntegral.h>
 
-#include "zypp/parser/xml/Node.h"
+#include <zypp/parser/xml/Node.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

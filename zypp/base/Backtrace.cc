@@ -12,9 +12,9 @@
 #include <cxxabi.h>
 
 #include <iostream>
-#include "zypp/base/LogTools.h"
-#include "zypp/base/String.h"
-#include "zypp/base/Backtrace.h"
+#include <zypp/base/LogTools.h>
+#include <zypp/base/String.h>
+#include <zypp/base/Backtrace.h>
 
 using std::endl;
 

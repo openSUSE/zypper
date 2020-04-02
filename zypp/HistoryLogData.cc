@@ -12,12 +12,12 @@
  */
 #include <sstream>
 
-#include "zypp/base/PtrTypes.h"
-#include "zypp/base/String.h"
-#include "zypp/base/Logger.h"
-#include "zypp/parser/ParseException.h"
+#include <zypp/base/PtrTypes.h>
+#include <zypp/base/String.h>
+#include <zypp/base/Logger.h>
+#include <zypp/parser/ParseException.h>
 
-#include "zypp/HistoryLogData.h"
+#include <zypp/HistoryLogData.h>
 
 using std::endl;
 

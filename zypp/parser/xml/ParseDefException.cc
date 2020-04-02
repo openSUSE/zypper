@@ -9,7 +9,7 @@
 /** \file	zypp/parser/xml/ParseDefException.cc
  *
 */
-#include "zypp/parser/xml/ParseDefException.h"
+#include <zypp/parser/xml/ParseDefException.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

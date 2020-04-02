@@ -12,19 +12,19 @@
 #include <climits>
 #include <iostream>
 
-#include "zypp/base/Logger.h"
-#include "zypp/base/Gettext.h"
-#include "zypp/base/Exception.h"
-#include "zypp/base/Xml.h"
+#include <zypp/base/Logger.h>
+#include <zypp/base/Gettext.h>
+#include <zypp/base/Exception.h>
+#include <zypp/base/Xml.h>
 
-#include "zypp/AutoDispose.h"
-#include "zypp/Pathname.h"
+#include <zypp/AutoDispose.h>
+#include <zypp/Pathname.h>
 
-#include "zypp/sat/detail/PoolImpl.h"
-#include "zypp/Repository.h"
-#include "zypp/ResPool.h"
-#include "zypp/Product.h"
-#include "zypp/sat/Pool.h"
+#include <zypp/sat/detail/PoolImpl.h>
+#include <zypp/Repository.h>
+#include <zypp/ResPool.h>
+#include <zypp/Product.h>
+#include <zypp/sat/Pool.h>
 
 using std::endl;
 

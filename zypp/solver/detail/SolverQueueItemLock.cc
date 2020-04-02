@@ -24,8 +24,8 @@ extern "C"
 
 #define ZYPP_USE_RESOLVER_INTERNALS
 
-#include "zypp/base/Logger.h"
-#include "zypp/solver/detail/SolverQueueItemLock.h"
+#include <zypp/base/Logger.h>
+#include <zypp/solver/detail/SolverQueueItemLock.h>
 
 using std::endl;
 

@@ -15,10 +15,10 @@
 #include <iosfwd>
 #include <string>
 
-#include "zypp/base/PtrTypes.h"
+#include <zypp/base/PtrTypes.h>
 
-#include "zypp/parser/xml/libxmlfwd.h"
-#include "zypp/parser/xml/XmlEscape.h"
+#include <zypp/parser/xml/libxmlfwd.h>
+#include <zypp/parser/xml/XmlEscape.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

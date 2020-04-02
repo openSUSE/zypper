@@ -13,33 +13,33 @@
 #include <vector>
 #include <fstream>
 
-#include "zypp/base/Gettext.h"
-#include "zypp/base/LogTools.h"
-#include "zypp/base/DefaultIntegral.h"
-#include "zypp/parser/xml/XmlEscape.h"
+#include <zypp/base/Gettext.h>
+#include <zypp/base/LogTools.h>
+#include <zypp/base/DefaultIntegral.h>
+#include <zypp/parser/xml/XmlEscape.h>
 
-#include "zypp/ManagedFile.h"
-#include "zypp/PublicKey.h"
-#include "zypp/MediaSetAccess.h"
-#include "zypp/RepoInfo.h"
-#include "zypp/Glob.h"
-#include "zypp/TriBool.h"
-#include "zypp/Pathname.h"
-#include "zypp/ZConfig.h"
-#include "zypp/repo/RepoMirrorList.h"
-#include "zypp/ExternalProgram.h"
-#include "zypp/media/MediaAccess.h"
+#include <zypp/ManagedFile.h>
+#include <zypp/PublicKey.h>
+#include <zypp/MediaSetAccess.h>
+#include <zypp/RepoInfo.h>
+#include <zypp/Glob.h>
+#include <zypp/TriBool.h>
+#include <zypp/Pathname.h>
+#include <zypp/ZConfig.h>
+#include <zypp/repo/RepoMirrorList.h>
+#include <zypp/ExternalProgram.h>
+#include <zypp/media/MediaAccess.h>
 
-#include "zypp/base/IOStream.h"
-#include "zypp/base/InputStream.h"
-#include "zypp/parser/xml/Reader.h"
+#include <zypp/base/IOStream.h>
+#include <zypp/base/InputStream.h>
+#include <zypp/parser/xml/Reader.h>
 
 
-#include "zypp/base/StrMatcher.h"
-#include "zypp/KeyRing.h"
-#include "zypp/TmpPath.h"
-#include "zypp/ZYppFactory.h"
-#include "zypp/ZYppCallbacks.h"
+#include <zypp/base/StrMatcher.h>
+#include <zypp/KeyRing.h>
+#include <zypp/TmpPath.h>
+#include <zypp/ZYppFactory.h>
+#include <zypp/ZYppCallbacks.h>
 
 using std::endl;
 using zypp::xml::escape;

@@ -13,12 +13,12 @@
 #include <iostream>
 #include <fstream>
 
-#include "zypp/base/Logger.h"
-#include "zypp/base/String.h"
-#include "zypp/base/WatchFile.h"
-#include "zypp/Pathname.h"
+#include <zypp/base/Logger.h>
+#include <zypp/base/String.h>
+#include <zypp/base/WatchFile.h>
+#include <zypp/Pathname.h>
 
-#include "zypp/media/proxyinfo/ProxyInfoLibproxy.h"
+#include <zypp/media/proxyinfo/ProxyInfoLibproxy.h>
 
 using std::endl;
 using namespace zypp::base;

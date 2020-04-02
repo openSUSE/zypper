@@ -15,10 +15,10 @@
 #include <iosfwd>
 #include <functional>
 
-#include "zypp/base/ReferenceCounted.h"
+#include <zypp/base/ReferenceCounted.h>
 
-#include "zypp/solver/Types.h"
-#include "zypp/solver/detail/Types.h"
+#include <zypp/solver/Types.h>
+#include <zypp/solver/detail/Types.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

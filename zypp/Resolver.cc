@@ -13,11 +13,11 @@
 
 #define ZYPP_USE_RESOLVER_INTERNALS
 
-#include "zypp/Resolver.h"
-#include "zypp/solver/detail/Resolver.h"
-#include "zypp/solver/detail/Testcase.h"
-#include "zypp/solver/detail/ItemCapKind.h"
-#include "zypp/sat/Transaction.h"
+#include <zypp/Resolver.h>
+#include <zypp/solver/detail/Resolver.h>
+#include <zypp/solver/detail/Testcase.h>
+#include <zypp/solver/detail/ItemCapKind.h>
+#include <zypp/sat/Transaction.h>
 
 
 ///////////////////////////////////////////////////////////////////

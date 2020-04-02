@@ -10,15 +10,15 @@
  *
 */
 #include <iostream>
-#include "zypp/base/LogTools.h"
+#include <zypp/base/LogTools.h>
 
-#include "zypp/base/Iterator.h"
-#include "zypp/base/Algorithm.h"
-#include "zypp/base/Functional.h"
+#include <zypp/base/Iterator.h>
+#include <zypp/base/Algorithm.h>
+#include <zypp/base/Functional.h>
 
-#include "zypp/ResPoolProxy.h"
-#include "zypp/pool/PoolImpl.h"
-#include "zypp/ui/SelectableImpl.h"
+#include <zypp/ResPoolProxy.h>
+#include <zypp/pool/PoolImpl.h>
+#include <zypp/ui/SelectableImpl.h>
 
 using std::endl;
 

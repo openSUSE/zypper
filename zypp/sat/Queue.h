@@ -13,8 +13,8 @@
 
 #include <iosfwd>
 
-#include "zypp/base/PtrTypes.h"
-#include "zypp/sat/detail/PoolMember.h"
+#include <zypp/base/PtrTypes.h>
+#include <zypp/sat/detail/PoolMember.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

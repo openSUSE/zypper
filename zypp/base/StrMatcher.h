@@ -15,8 +15,8 @@
 #include <iosfwd>
 #include <string>
 
-#include "zypp/base/PtrTypes.h"
-#include "zypp/base/Exception.h"
+#include <zypp/base/PtrTypes.h>
+#include <zypp/base/Exception.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

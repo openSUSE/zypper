@@ -10,21 +10,21 @@
  *
 */
 #include <iostream>
-#include "zypp/base/Logger.h"
+#include <zypp/base/Logger.h>
 
-#include "zypp/base/String.h"
-#include "zypp/base/Regex.h"
-#include "zypp/base/Gettext.h"
-#include "zypp/base/Exception.h"
+#include <zypp/base/String.h>
+#include <zypp/base/Regex.h>
+#include <zypp/base/Gettext.h>
+#include <zypp/base/Exception.h>
 
-#include "zypp/Arch.h"
-#include "zypp/Rel.h"
-#include "zypp/Edition.h"
-#include "zypp/Capability.h"
+#include <zypp/Arch.h>
+#include <zypp/Rel.h>
+#include <zypp/Edition.h>
+#include <zypp/Capability.h>
 
-#include "zypp/sat/detail/PoolImpl.h"
-#include "zypp/sat/Pool.h"
-#include "zypp/ResPool.h"
+#include <zypp/sat/detail/PoolImpl.h>
+#include <zypp/sat/Pool.h>
+#include <zypp/ResPool.h>
 
 using std::endl;
 

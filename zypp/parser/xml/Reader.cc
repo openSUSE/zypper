@@ -14,12 +14,12 @@
 
 #include <iostream>
 
-#include "zypp/base/LogControl.h"
-#include "zypp/base/LogTools.h"
-#include "zypp/base/Exception.h"
-#include "zypp/base/String.h"
+#include <zypp/base/LogControl.h>
+#include <zypp/base/LogTools.h>
+#include <zypp/base/Exception.h>
+#include <zypp/base/String.h>
 
-#include "zypp/parser/xml/Reader.h"
+#include <zypp/parser/xml/Reader.h>
 
 using std::endl;
 

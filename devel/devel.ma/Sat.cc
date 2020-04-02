@@ -11,10 +11,10 @@ namespace boost
   }
 }
 
-#include "zypp/ByteCount.h"
-#include "zypp/Pathname.h"
-#include "zypp/base/Logger.h"
-#include "zypp/base/LogControl.h"
+#include <zypp/ByteCount.h>
+#include <zypp/Pathname.h>
+#include <zypp/base/Logger.h>
+#include <zypp/base/LogControl.h>
 
 using std::endl;
 using namespace zypp;

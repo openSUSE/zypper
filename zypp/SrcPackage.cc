@@ -9,7 +9,7 @@
 /** \file	zypp/SrcPackage.cc
  *
 */
-#include "zypp/SrcPackage.h"
+#include <zypp/SrcPackage.h>
 ///////////////////////////////////////////////////////////////////
 namespace zyppintern
 {

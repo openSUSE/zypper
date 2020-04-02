@@ -1,6 +1,6 @@
 #include <fcntl.h>
 #include <unistd.h>
-#include "zypp/base/Random.h"
+#include <zypp/base/Random.h>
 
 
 namespace zypp { namespace base {

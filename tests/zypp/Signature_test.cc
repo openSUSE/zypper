@@ -3,9 +3,9 @@
 #include <list>
 #include <string>
 
-#include "zypp/base/Logger.h"
-#include "zypp/base/Exception.h"
-#include "zypp/Signature.h"
+#include <zypp/base/Logger.h>
+#include <zypp/base/Exception.h>
+#include <zypp/Signature.h>
 
 #include <boost/test/unit_test.hpp>
 

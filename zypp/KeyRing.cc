@@ -15,22 +15,22 @@
 #include <cstdio>
 #include <unistd.h>
 
-#include "zypp/TmpPath.h"
-#include "zypp/ZYppFactory.h"
-#include "zypp/ZYpp.h"
+#include <zypp/TmpPath.h>
+#include <zypp/ZYppFactory.h>
+#include <zypp/ZYpp.h>
 
-#include "zypp/base/LogTools.h"
-#include "zypp/base/IOStream.h"
-#include "zypp/base/String.h"
-#include "zypp/base/Regex.h"
-#include "zypp/base/Gettext.h"
-#include "zypp/base/WatchFile.h"
-#include "zypp/PathInfo.h"
-#include "zypp/KeyRing.h"
-#include "zypp/ExternalProgram.h"
-#include "zypp/TmpPath.h"
-#include "zypp/ZYppCallbacks.h"       // JobReport::instance
-#include "zypp/KeyManager.h"
+#include <zypp/base/LogTools.h>
+#include <zypp/base/IOStream.h>
+#include <zypp/base/String.h>
+#include <zypp/base/Regex.h>
+#include <zypp/base/Gettext.h>
+#include <zypp/base/WatchFile.h>
+#include <zypp/PathInfo.h>
+#include <zypp/KeyRing.h>
+#include <zypp/ExternalProgram.h>
+#include <zypp/TmpPath.h>
+#include <zypp/ZYppCallbacks.h>       // JobReport::instance
+#include <zypp/KeyManager.h>
 
 using std::endl;
 

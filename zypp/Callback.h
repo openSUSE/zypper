@@ -12,8 +12,8 @@
 #ifndef ZYPP_CALLBACK_H
 #define ZYPP_CALLBACK_H
 
-#include "zypp/base/NonCopyable.h"
-#include "zypp/UserData.h"
+#include <zypp/base/NonCopyable.h>
+#include <zypp/UserData.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

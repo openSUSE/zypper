@@ -13,20 +13,20 @@
 #include <fstream>
 #include <unistd.h>
 
-#include "zypp/ZConfig.h"
-#include "zypp/base/String.h"
-#include "zypp/base/Logger.h"
-#include "zypp/base/IOStream.h"
+#include <zypp/ZConfig.h>
+#include <zypp/base/String.h>
+#include <zypp/base/Logger.h>
+#include <zypp/base/IOStream.h>
 
-#include "zypp/PathInfo.h"
-#include "zypp/Date.h"
+#include <zypp/PathInfo.h>
+#include <zypp/Date.h>
 
-#include "zypp/PoolItem.h"
-#include "zypp/Package.h"
-#include "zypp/RepoInfo.h"
+#include <zypp/PoolItem.h>
+#include <zypp/Package.h>
+#include <zypp/RepoInfo.h>
 
-#include "zypp/HistoryLog.h"
-#include "zypp/HistoryLogData.h"
+#include <zypp/HistoryLog.h>
+#include <zypp/HistoryLogData.h>
 
 using std::endl;
 using std::string;

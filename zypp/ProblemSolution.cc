@@ -24,11 +24,11 @@
 
 #define ZYPP_USE_RESOLVER_INTERNALS
 
-#include "zypp/base/Gettext.h"
-#include "zypp/solver/detail/SolutionAction.h"
-#include "zypp/ProblemSolution.h"
-#include "zypp/base/Logger.h"
-#include "zypp/solver/detail/Resolver.h"
+#include <zypp/base/Gettext.h>
+#include <zypp/solver/detail/SolutionAction.h>
+#include <zypp/ProblemSolution.h>
+#include <zypp/base/Logger.h>
+#include <zypp/solver/detail/Resolver.h>
 
 using std::endl;
 

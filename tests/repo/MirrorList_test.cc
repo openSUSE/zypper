@@ -4,7 +4,7 @@
 
 #include "WebServer.h"
 
-#include "zypp/repo/RepoMirrorList.cc"
+#include <zypp/repo/RepoMirrorList.cc>
 
 using namespace zypp;
 using namespace zypp::repo;

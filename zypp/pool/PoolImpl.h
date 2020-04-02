@@ -14,17 +14,17 @@
 
 #include <iosfwd>
 
-#include "zypp/base/Easy.h"
-#include "zypp/base/LogTools.h"
-#include "zypp/base/SerialNumber.h"
-#include "zypp/APIConfig.h"
+#include <zypp/base/Easy.h>
+#include <zypp/base/LogTools.h>
+#include <zypp/base/SerialNumber.h>
+#include <zypp/APIConfig.h>
 
-#include "zypp/pool/PoolTraits.h"
-#include "zypp/ResPoolProxy.h"
-#include "zypp/PoolQueryResult.h"
+#include <zypp/pool/PoolTraits.h>
+#include <zypp/ResPoolProxy.h>
+#include <zypp/PoolQueryResult.h>
 
-#include "zypp/sat/Pool.h"
-#include "zypp/Product.h"
+#include <zypp/sat/Pool.h>
+#include <zypp/Product.h>
 
 using std::endl;
 

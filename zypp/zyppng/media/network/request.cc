@@ -10,7 +10,7 @@
 #include <zypp/Pathname.h>
 #include <stdio.h>
 #include <fcntl.h>
-#include <strstream>
+#include <sstream>
 
 
 namespace zyppng {

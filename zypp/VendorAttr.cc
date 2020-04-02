@@ -22,17 +22,17 @@
 #include <map>
 #include <vector>
 
-#include "zypp/base/LogTools.h"
-#include "zypp/base/IOStream.h"
-#include "zypp/base/String.h"
+#include <zypp/base/LogTools.h>
+#include <zypp/base/IOStream.h>
+#include <zypp/base/String.h>
 
-#include "zypp/PathInfo.h"
-#include "zypp/VendorAttr.h"
-#include "zypp/ZYppFactory.h"
+#include <zypp/PathInfo.h>
+#include <zypp/VendorAttr.h>
+#include <zypp/ZYppFactory.h>
 
-#include "zypp/ZConfig.h"
-#include "zypp/PathInfo.h"
-#include "zypp/parser/IniDict.h"
+#include <zypp/ZConfig.h>
+#include <zypp/PathInfo.h>
+#include <zypp/parser/IniDict.h>
 
 #undef  ZYPP_BASE_LOGGER_LOGGROUP
 #define ZYPP_BASE_LOGGER_LOGGROUP "zypp::VendorAttr"

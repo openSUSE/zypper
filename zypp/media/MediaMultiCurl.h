@@ -17,11 +17,11 @@
 #include <list>
 #include <set>
 
-#include "zypp/media/MediaHandler.h"
-#include "zypp/media/MediaCurl.h"
-#include "zypp/media/MediaBlockList.h"
-#include "zypp/media/TransferSettings.h"
-#include "zypp/ZYppCallbacks.h"
+#include <zypp/media/MediaHandler.h>
+#include <zypp/media/MediaCurl.h>
+#include <zypp/media/MediaBlockList.h>
+#include <zypp/media/TransferSettings.h>
+#include <zypp/ZYppCallbacks.h>
 
 namespace zypp {
   namespace media {

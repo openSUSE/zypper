@@ -1,7 +1,7 @@
 #ifndef KEYCONTEXT_H_
 #define KEYCONTEXT_H_
 
-#include "zypp/RepoInfo.h"
+#include <zypp/RepoInfo.h>
 
 namespace zypp {
 

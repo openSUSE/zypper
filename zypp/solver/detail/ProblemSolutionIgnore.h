@@ -27,8 +27,8 @@
 
 #include <list>
 
-#include "zypp/ProblemSolution.h"
-#include "zypp/PoolItem.h"
+#include <zypp/ProblemSolution.h>
+#include <zypp/PoolItem.h>
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp

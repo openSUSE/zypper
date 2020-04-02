@@ -1,8 +1,8 @@
 #ifndef ZYPP_MEDIA_CURLRCONFIG_H_
 #define ZYPP_MEDIA_CURLRCONFIG_H_
 
-//#include "zypp/base/NonCopyable.h"
-#include "zypp/base/String.h"
+//#include <zypp/base/NonCopyable.h>
+#include <zypp/base/String.h>
 
 namespace zypp
 {

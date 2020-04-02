@@ -25,7 +25,7 @@
 #include <vector>
 #include <map>
 
-#include "zypp/base/String.h"
+#include <zypp/base/String.h>
 
 namespace zypp {
   namespace kvmap {

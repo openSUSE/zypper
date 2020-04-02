@@ -14,15 +14,15 @@
 #include <iostream>
 #include <typeinfo>
 
-#include "zypp/media/MediaException.h"
-#include "zypp/media/MediaManager.h"
-#include "zypp/media/MediaHandler.h"
-#include "zypp/media/Mount.h"
+#include <zypp/media/MediaException.h>
+#include <zypp/media/MediaManager.h>
+#include <zypp/media/MediaHandler.h>
+#include <zypp/media/Mount.h>
 
-#include "zypp/base/String.h"
-#include "zypp/base/Logger.h"
-#include "zypp/Pathname.h"
-#include "zypp/PathInfo.h"
+#include <zypp/base/String.h>
+#include <zypp/base/Logger.h>
+#include <zypp/Pathname.h>
+#include <zypp/PathInfo.h>
 
 //////////////////////////////////////////////////////////////////////
 namespace zypp

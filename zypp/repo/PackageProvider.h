@@ -14,11 +14,11 @@
 
 #include <iosfwd>
 
-#include "zypp/ZYppCallbacks.h"
-#include "zypp/Package.h"
-#include "zypp/ManagedFile.h"
-#include "zypp/repo/DeltaCandidates.h"
-#include "zypp/repo/RepoProvideFile.h"
+#include <zypp/ZYppCallbacks.h>
+#include <zypp/Package.h>
+#include <zypp/ManagedFile.h>
+#include <zypp/repo/DeltaCandidates.h>
+#include <zypp/repo/RepoProvideFile.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

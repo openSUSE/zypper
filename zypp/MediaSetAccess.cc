@@ -10,14 +10,14 @@
 #include <iostream>
 #include <fstream>
 
-#include "zypp/base/LogTools.h"
-#include "zypp/base/Regex.h"
-#include "zypp/base/UserRequestException.h"
-#include "zypp/ZYppCallbacks.h"
-#include "zypp/MediaSetAccess.h"
-#include "zypp/PathInfo.h"
-#include "zypp/TmpPath.h"
-//#include "zypp/source/MediaSetAccessReportReceivers.h"
+#include <zypp/base/LogTools.h>
+#include <zypp/base/Regex.h>
+#include <zypp/base/UserRequestException.h>
+#include <zypp/ZYppCallbacks.h>
+#include <zypp/MediaSetAccess.h>
+#include <zypp/PathInfo.h>
+#include <zypp/TmpPath.h>
+//#include <zypp/source/MediaSetAccessReportReceivers.h>
 
 using std::endl;
 

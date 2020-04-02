@@ -5,11 +5,11 @@
 #include <list>
 #include <boost/test/unit_test.hpp>
 
-#include "zypp/base/Logger.h"
-#include "zypp/base/InputStream.h"
-#include "zypp/parser/IniDict.h"
-#include "zypp/Url.h"
-#include "zypp/PathInfo.h"
+#include <zypp/base/Logger.h>
+#include <zypp/base/InputStream.h>
+#include <zypp/parser/IniDict.h>
+#include <zypp/Url.h>
+#include <zypp/PathInfo.h>
 
 using std::cout;
 using std::endl;

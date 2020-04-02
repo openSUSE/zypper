@@ -18,17 +18,17 @@
 #include <fstream>
 #include <iomanip>
 
-#include "zypp/base/LogTools.h"
-#include "zypp/base/String.h"
-#include "zypp/base/IOStream.h"
-#include "zypp/base/StrMatcher.h"
-#include "zypp/base/Errno.h"
+#include <zypp/base/LogTools.h>
+#include <zypp/base/String.h>
+#include <zypp/base/IOStream.h>
+#include <zypp/base/StrMatcher.h>
+#include <zypp/base/Errno.h>
 
-#include "zypp/AutoDispose.h"
-#include "zypp/ExternalProgram.h"
-#include "zypp/PathInfo.h"
-#include "zypp/Digest.h"
-#include "zypp/TmpPath.h"
+#include <zypp/AutoDispose.h>
+#include <zypp/ExternalProgram.h>
+#include <zypp/PathInfo.h>
+#include <zypp/Digest.h>
+#include <zypp/TmpPath.h>
 
 using std::endl;
 using std::string;

@@ -10,11 +10,11 @@
  *
 */
 //#include <iostream>
-//#include "zypp/base/LogTools.h"
-#include "zypp/base/String.h"
+//#include <zypp/base/LogTools.h>
+#include <zypp/base/String.h>
 
-#include "zypp/InstanceId.h"
-#include "zypp/ResPool.h"
+#include <zypp/InstanceId.h>
+#include <zypp/ResPool.h>
 
 using std::endl;
 

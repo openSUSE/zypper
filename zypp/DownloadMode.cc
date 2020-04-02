@@ -11,8 +11,8 @@
 */
 #include <iostream>
 
-#include "zypp/base/String.h"
-#include "zypp/DownloadMode.h"
+#include <zypp/base/String.h>
+#include <zypp/DownloadMode.h>
 
 using std::endl;
 

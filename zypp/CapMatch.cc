@@ -10,9 +10,9 @@
  *
 */
 #include <iostream>
-//#include "zypp/base/Logger.h"
+//#include <zypp/base/Logger.h>
 
-#include "zypp/CapMatch.h"
+#include <zypp/CapMatch.h>
 
 using std::endl;
 

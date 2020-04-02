@@ -2,8 +2,8 @@
 
 #include <boost/test/unit_test.hpp>
 
-#include "zypp/ZYppFactory.h"
-#include "zypp/RepoManager.h"
+#include <zypp/ZYppFactory.h>
+#include <zypp/RepoManager.h>
 #include "TestSetup.h"
 
 using namespace boost::unit_test;

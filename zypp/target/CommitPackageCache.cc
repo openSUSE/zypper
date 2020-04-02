@@ -10,19 +10,19 @@
  *
 */
 #include <iostream>
-#include "zypp/base/Logger.h"
-#include "zypp/base/Exception.h"
+#include <zypp/base/Logger.h>
+#include <zypp/base/Exception.h>
 
-#include "zypp/target/CommitPackageCache.h"
-#include "zypp/target/CommitPackageCacheImpl.h"
-#include "zypp/target/CommitPackageCacheReadAhead.h"
+#include <zypp/target/CommitPackageCache.h>
+#include <zypp/target/CommitPackageCacheImpl.h>
+#include <zypp/target/CommitPackageCacheReadAhead.h>
 
 using std::endl;
 
-#include "zypp/target/rpm/librpmDb.h"
-#include "zypp/repo/PackageProvider.h"
-#include "zypp/repo/DeltaCandidates.h"
-#include "zypp/ResPool.h"
+#include <zypp/target/rpm/librpmDb.h>
+#include <zypp/repo/PackageProvider.h>
+#include <zypp/repo/DeltaCandidates.h>
+#include <zypp/ResPool.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

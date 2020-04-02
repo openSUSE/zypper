@@ -10,10 +10,10 @@
 #ifndef ZYPP_REPO_SERVICE_REPOS
 #define ZYPP_REPO_SERVICE_REPOS
 
-#include "zypp/base/NonCopyable.h"
-#include "zypp/ProgressData.h"
-#include "zypp/ServiceInfo.h"
-#include "zypp/RepoInfo.h"
+#include <zypp/base/NonCopyable.h>
+#include <zypp/ProgressData.h>
+#include <zypp/ServiceInfo.h>
+#include <zypp/RepoInfo.h>
 
 namespace zypp
 {

@@ -15,10 +15,10 @@
 #include <iosfwd>
 #include <boost/io/ios_state.hpp>
 
-#include "zypp/base/Flags.h"
-#include "zypp/base/PtrTypes.h"
-#include "zypp/base/Function.h"
-#include "zypp/base/NonCopyable.h"
+#include <zypp/base/Flags.h>
+#include <zypp/base/PtrTypes.h>
+#include <zypp/base/Function.h>
+#include <zypp/base/NonCopyable.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

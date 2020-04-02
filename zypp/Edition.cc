@@ -13,10 +13,10 @@ extern "C"
 {
 #include <solv/evr.h>
 }
-#include "zypp/base/String.h"
+#include <zypp/base/String.h>
 
-#include "zypp/Edition.h"
-#include "zypp/sat/detail/PoolImpl.h"
+#include <zypp/Edition.h>
+#include <zypp/sat/detail/PoolImpl.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

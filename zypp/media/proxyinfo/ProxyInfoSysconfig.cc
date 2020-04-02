@@ -13,11 +13,11 @@
 #include <iostream>
 #include <fstream>
 
-#include "zypp/base/Logger.h"
-#include "zypp/base/String.h"
-#include "zypp/Pathname.h"
+#include <zypp/base/Logger.h>
+#include <zypp/base/String.h>
+#include <zypp/Pathname.h>
 
-#include "zypp/media/proxyinfo/ProxyInfoSysconfig.h"
+#include <zypp/media/proxyinfo/ProxyInfoSysconfig.h>
 
 using namespace zypp::base;
 

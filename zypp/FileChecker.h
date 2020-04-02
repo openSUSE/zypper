@@ -14,12 +14,12 @@
 
 #include <iosfwd>
 #include <list>
-#include "zypp/base/DefaultIntegral.h"
-#include "zypp/base/Exception.h"
-#include "zypp/base/Function.h"
-#include "zypp/PathInfo.h"
-#include "zypp/CheckSum.h"
-#include "zypp/KeyContext.h"
+#include <zypp/base/DefaultIntegral.h>
+#include <zypp/base/Exception.h>
+#include <zypp/base/Function.h>
+#include <zypp/PathInfo.h>
+#include <zypp/CheckSum.h>
+#include <zypp/KeyContext.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

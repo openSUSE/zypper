@@ -10,11 +10,11 @@
  *
 */
 #include <iostream>
-#include "zypp/base/Logger.h"
-#include "zypp/media/UrlResolverPlugin.h"
-#include "zypp/media/MediaException.h"
-#include "zypp/PluginScript.h"
-#include "zypp/ZConfig.h"
+#include <zypp/base/Logger.h>
+#include <zypp/media/UrlResolverPlugin.h>
+#include <zypp/media/MediaException.h>
+#include <zypp/PluginScript.h>
+#include <zypp/ZConfig.h>
 
 using std::endl;
 

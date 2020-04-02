@@ -14,7 +14,7 @@
 #include <locale.h>
 #include <string>
 
-#include "zypp/base/Easy.h"
+#include <zypp/base/Easy.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

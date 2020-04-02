@@ -18,13 +18,13 @@
 #include <set>
 #include <string>
 
-#include "zypp/base/ReferenceCounted.h"
-#include "zypp/base/Flags.h"
-#include "zypp/Callback.h"
-#include "zypp/base/PtrTypes.h"
-#include "zypp/Locale.h"
-#include "zypp/PublicKey.h"
-#include "zypp/KeyContext.h"
+#include <zypp/base/ReferenceCounted.h>
+#include <zypp/base/Flags.h>
+#include <zypp/Callback.h>
+#include <zypp/base/PtrTypes.h>
+#include <zypp/Locale.h>
+#include <zypp/PublicKey.h>
+#include <zypp/KeyContext.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

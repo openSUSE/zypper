@@ -14,8 +14,8 @@
 
 #include <iosfwd>
 
-#include "zypp/base/PtrTypes.h"
-#include "zypp/parser/xml/ParseDefTraits.h"
+#include <zypp/base/PtrTypes.h>
+#include <zypp/parser/xml/ParseDefTraits.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

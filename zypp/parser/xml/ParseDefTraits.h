@@ -12,7 +12,7 @@
 #ifndef ZYPP_PARSER_XML_PARSEDEFTRAITS_H
 #define ZYPP_PARSER_XML_PARSEDEFTRAITS_H
 
-#include "zypp/Bit.h"
+#include <zypp/Bit.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

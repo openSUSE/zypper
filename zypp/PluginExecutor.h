@@ -13,8 +13,8 @@
 
 #include <iosfwd>
 
-#include "zypp/base/PtrTypes.h"
-#include "zypp/PluginScript.h"
+#include <zypp/base/PtrTypes.h>
+#include <zypp/PluginScript.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

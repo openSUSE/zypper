@@ -9,7 +9,7 @@
 
 #include <string>
 #include <iostream>
-#include "zypp/Signature.h"
+#include <zypp/Signature.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

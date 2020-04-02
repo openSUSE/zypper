@@ -12,7 +12,7 @@
 
 #include <iostream>
 
-#include "zypp/parser/xml/XmlString.h"
+#include <zypp/parser/xml/XmlString.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

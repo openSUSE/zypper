@@ -6,12 +6,12 @@
 // Boost.Test
 #include <boost/test/unit_test.hpp>
 
-#include "zypp/base/Logger.h"
-#include "zypp/base/Exception.h"
-#include "zypp/ZYppFactory.h"
-#include "zypp/ZYpp.h"
-#include "zypp/ZYppFactory.h"
-#include "zypp/TmpPath.h"
+#include <zypp/base/Logger.h>
+#include <zypp/base/Exception.h>
+#include <zypp/ZYppFactory.h>
+#include <zypp/ZYpp.h>
+#include <zypp/ZYppFactory.h>
+#include <zypp/TmpPath.h>
 
 using boost::unit_test::test_case;
 using namespace zypp;

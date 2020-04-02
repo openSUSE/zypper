@@ -17,7 +17,7 @@
 
 #include <boost/utility/string_ref_fwd.hpp>
 
-#include "zypp/sat/detail/PoolMember.h"
+#include <zypp/sat/detail/PoolMember.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

@@ -10,11 +10,11 @@
  *
 */
 #include <iostream>
-//#include "zypp/base/Logger.h"
+//#include <zypp/base/Logger.h>
 
-#include "zypp/ui/Selectable.h"
-#include "zypp/ui/SelectableImpl.h"
-#include "zypp/ResPool.h"
+#include <zypp/ui/Selectable.h>
+#include <zypp/ui/SelectableImpl.h>
+#include <zypp/ResPool.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

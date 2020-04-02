@@ -23,8 +23,8 @@
 #include <sstream>
 #include <string>
 
-#include "zypp/base/Logger.h"
-#include "zypp/base/ExternalDataSource.h"
+#include <zypp/base/Logger.h>
+#include <zypp/base/ExternalDataSource.h>
 
 using std::endl;
 

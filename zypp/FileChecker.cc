@@ -10,11 +10,11 @@
  *
 */
 #include <iostream>
-#include "zypp/base/Logger.h"
-#include "zypp/FileChecker.h"
-#include "zypp/ZYppFactory.h"
-#include "zypp/Digest.h"
-#include "zypp/KeyRing.h"
+#include <zypp/base/Logger.h>
+#include <zypp/FileChecker.h>
+#include <zypp/ZYppFactory.h>
+#include <zypp/Digest.h>
+#include <zypp/KeyRing.h>
 
 using std::endl;
 

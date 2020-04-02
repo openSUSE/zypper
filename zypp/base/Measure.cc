@@ -16,9 +16,9 @@ extern "C"
 }
 #include <iostream>
 
-#include "zypp/base/Logger.h"
-#include "zypp/base/Measure.h"
-#include "zypp/base/String.h"
+#include <zypp/base/Logger.h>
+#include <zypp/base/Measure.h>
+#include <zypp/base/String.h>
 
 using std::endl;
 

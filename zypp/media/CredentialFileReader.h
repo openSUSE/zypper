@@ -12,11 +12,11 @@
 #ifndef ZYPP_MEDIA_CREDENTIALFILEREADER_H
 #define ZYPP_MEDIA_CREDENTIALFILEREADER_H
 
-#include "zypp/base/Function.h"
-#include "zypp/Url.h"
-#include "zypp/Pathname.h"
+#include <zypp/base/Function.h>
+#include <zypp/Url.h>
+#include <zypp/Pathname.h>
 
-#include "zypp/media/MediaUserAuth.h"
+#include <zypp/media/MediaUserAuth.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

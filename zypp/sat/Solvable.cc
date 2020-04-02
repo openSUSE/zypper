@@ -11,23 +11,23 @@
 */
 #include <iostream>
 
-#include "zypp/base/Logger.h"
-#include "zypp/base/Gettext.h"
-#include "zypp/base/Exception.h"
-#include "zypp/base/Functional.h"
-#include "zypp/base/Collector.h"
-#include "zypp/base/Xml.h"
+#include <zypp/base/Logger.h>
+#include <zypp/base/Gettext.h>
+#include <zypp/base/Exception.h>
+#include <zypp/base/Functional.h>
+#include <zypp/base/Collector.h>
+#include <zypp/base/Xml.h>
 
-#include "zypp/sat/detail/PoolImpl.h"
-#include "zypp/sat/Solvable.h"
-#include "zypp/sat/Pool.h"
-#include "zypp/sat/LookupAttr.h"
+#include <zypp/sat/detail/PoolImpl.h>
+#include <zypp/sat/Solvable.h>
+#include <zypp/sat/Pool.h>
+#include <zypp/sat/LookupAttr.h>
 
-#include "zypp/Repository.h"
-#include "zypp/OnMediaLocation.h"
-#include "zypp/ZConfig.h"
+#include <zypp/Repository.h>
+#include <zypp/OnMediaLocation.h>
+#include <zypp/ZConfig.h>
 
-#include "zypp/ui/Selectable.h"
+#include <zypp/ui/Selectable.h>
 
 using std::endl;
 

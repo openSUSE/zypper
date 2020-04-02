@@ -12,10 +12,10 @@
 
 #include <iostream>
 
-#include "zypp/base/String.h"
+#include <zypp/base/String.h>
 
-#include "zypp/ZConfig.h"
-#include "zypp/ZYppCommitPolicy.h"
+#include <zypp/ZConfig.h>
+#include <zypp/ZYppCommitPolicy.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

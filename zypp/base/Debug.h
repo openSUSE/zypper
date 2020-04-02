@@ -18,10 +18,10 @@
 #include <iosfwd>
 //#include <sstream>
 //#include <string>
-#include "zypp/base/Logger.h"
-#include "zypp/base/String.h"
-#include "zypp/ExternalProgram.h"
-#include "zypp/base/ProvideNumericId.h"
+#include <zypp/base/Logger.h>
+#include <zypp/base/String.h>
+#include <zypp/ExternalProgram.h>
+#include <zypp/base/ProvideNumericId.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

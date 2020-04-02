@@ -3,10 +3,10 @@
 using namespace boost::unit_test;
 
 #include "TestSetup.h"
-#include "zypp/ResPool.h"
-#include "zypp/ResPoolProxy.h"
-#include "zypp/pool/PoolStats.h"
-#include "zypp/ui/Selectable.h"
+#include <zypp/ResPool.h>
+#include <zypp/ResPoolProxy.h>
+#include <zypp/pool/PoolStats.h>
+#include <zypp/ui/Selectable.h>
 
 static TestSetup test( TestSetup::initLater );
 

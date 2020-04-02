@@ -14,11 +14,11 @@ extern "C"
 }
 #include <iostream>
 #include <exception>
-#include "zypp/base/LogTools.h"
-#include "zypp/base/String.h"
+#include <zypp/base/LogTools.h>
+#include <zypp/base/String.h>
 
-#include "zypp/sat/Map.h"
-#include "zypp/sat/Pool.h"
+#include <zypp/sat/Map.h>
+#include <zypp/sat/Pool.h>
 
 using std::endl;
 

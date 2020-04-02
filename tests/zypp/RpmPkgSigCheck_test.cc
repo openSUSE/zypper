@@ -1,6 +1,6 @@
 #include "TestSetup.h"
 
-#include "zypp/target/rpm/RpmDb.h"
+#include <zypp/target/rpm/RpmDb.h>
 using target::rpm::RpmDb;
 
 #define DATADIR (Pathname(TESTS_SRC_DIR) / "/zypp/data/RpmPkgSigCheck")

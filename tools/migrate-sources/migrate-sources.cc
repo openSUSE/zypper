@@ -3,15 +3,15 @@
 #include <iostream>
 #include <fstream>
 
-#include "zypp/base/Logger.h"
-#include "zypp/ZYpp.h"
-#include "zypp/zypp_detail/ZYppReadOnlyHack.h"
-#include "zypp/ZYppFactory.h"
-#include "zypp/PathInfo.h"
-#include "zypp/RepoManager.h"
-#include "zypp/cache/CacheFSCK.h"
+#include <zypp/base/Logger.h>
+#include <zypp/ZYpp.h>
+#include <zypp/zypp_detail/ZYppReadOnlyHack.h>
+#include <zypp/ZYppFactory.h>
+#include <zypp/PathInfo.h>
+#include <zypp/RepoManager.h>
+#include <zypp/cache/CacheFSCK.h>
 
-#include "zypp/parser/xmlstore/XMLSourceCacheParser.h"
+#include <zypp/parser/xmlstore/XMLSourceCacheParser.h>
 
 #undef ZYPP_BASE_LOGGER_LOGGROUP
 #define ZYPP_BASE_LOGGER_LOGGROUP "zypp-cache"

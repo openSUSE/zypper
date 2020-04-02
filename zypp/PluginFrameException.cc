@@ -10,10 +10,10 @@
  *
 */
 #include <iostream>
-//#include "zypp/base/LogTools.h"
+//#include <zypp/base/LogTools.h>
 
-#include "zypp/PluginFrameException.h"
-#include "zypp/PluginFrame.h"
+#include <zypp/PluginFrameException.h>
+#include <zypp/PluginFrame.h>
 
 using std::endl;
 

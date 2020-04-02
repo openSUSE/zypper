@@ -12,10 +12,10 @@
 #ifndef ZYPP_MEDIA_USER_AUTH_H
 #define ZYPP_MEDIA_USER_AUTH_H
 
-#include "zypp/APIConfig.h"
+#include <zypp/APIConfig.h>
 
-#include "zypp/Url.h"
-#include "zypp/base/PtrTypes.h"
+#include <zypp/Url.h>
+#include <zypp/base/PtrTypes.h>
 
 namespace zypp {
   namespace media {

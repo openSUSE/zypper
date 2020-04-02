@@ -12,7 +12,7 @@
 #ifndef ZYPP_PACKAGEKEYWORD_H
 #define ZYPP_PACKAGEKEYWORD_H
 
-#include "zypp/IdStringType.h"
+#include <zypp/IdStringType.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

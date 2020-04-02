@@ -17,9 +17,9 @@
 
 #include <proxy.h>
 
-#include "zypp/base/DefaultIntegral.h"
-#include "zypp/media/ProxyInfo.h"
-#include "zypp/media/proxyinfo/ProxyInfoImpl.h"
+#include <zypp/base/DefaultIntegral.h>
+#include <zypp/media/ProxyInfo.h>
+#include <zypp/media/proxyinfo/ProxyInfoImpl.h>
 
 namespace zypp {
   namespace media {

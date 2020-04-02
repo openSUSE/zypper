@@ -19,7 +19,7 @@
 #include <typeinfo>
 #include <type_traits>
 
-#include "zypp/base/Errno.h"
+#include <zypp/base/Errno.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

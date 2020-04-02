@@ -10,14 +10,14 @@
  *
 */
 #include <iostream>
-#include "zypp/base/LogTools.h"
-#include "zypp/base/String.h"
-#include "zypp/base/Regex.h"
-#include "zypp/base/InputStream.h"
-#include "zypp/base/UserRequestException.h"
+#include <zypp/base/LogTools.h>
+#include <zypp/base/String.h>
+#include <zypp/base/Regex.h>
+#include <zypp/base/InputStream.h>
+#include <zypp/base/UserRequestException.h>
 
-#include "zypp/parser/IniDict.h"
-#include "zypp/parser/RepoFileReader.h"
+#include <zypp/parser/IniDict.h>
+#include <zypp/parser/RepoFileReader.h>
 
 using std::endl;
 

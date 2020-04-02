@@ -20,16 +20,16 @@
 #include <vector>
 #include <string>
 
-#include "zypp/Pathname.h"
-#include "zypp/ExternalProgram.h"
+#include <zypp/Pathname.h>
+#include <zypp/ExternalProgram.h>
 
-#include "zypp/Package.h"
-#include "zypp/KeyRing.h"
+#include <zypp/Package.h>
+#include <zypp/KeyRing.h>
 
-#include "zypp/target/rpm/RpmFlags.h"
-#include "zypp/target/rpm/RpmHeader.h"
-#include "zypp/target/rpm/RpmCallbacks.h"
-#include "zypp/ZYppCallbacks.h"
+#include <zypp/target/rpm/RpmFlags.h>
+#include <zypp/target/rpm/RpmHeader.h>
+#include <zypp/target/rpm/RpmCallbacks.h>
+#include <zypp/ZYppCallbacks.h>
 
 namespace zypp
 {

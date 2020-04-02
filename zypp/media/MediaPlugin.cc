@@ -11,13 +11,13 @@
 */
 #include <iostream>
 
-#include "zypp/base/LogTools.h"
-#include "zypp/base/String.h"
+#include <zypp/base/LogTools.h>
+#include <zypp/base/String.h>
 
-#include "zypp/ExternalProgram.h"
+#include <zypp/ExternalProgram.h>
 
-#include "zypp/media/MediaPlugin.h"
-#include "zypp/media/MediaManager.h"
+#include <zypp/media/MediaPlugin.h>
+#include <zypp/media/MediaManager.h>
 
 using std::endl;
 

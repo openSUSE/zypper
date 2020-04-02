@@ -1,4 +1,4 @@
-#include "zypp/zyppng/base/private/base_p.h"
+#include <zypp/zyppng/base/private/base_p.h>
 
 namespace zyppng {
 

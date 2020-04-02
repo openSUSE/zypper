@@ -13,13 +13,13 @@
 
 #include <iosfwd>
 
-#include "zypp/sat/Solvable.h"
-#include "zypp/Repository.h"
-#include "zypp/OnMediaLocation.h"
-#include "zypp/ByteCount.h"
-#include "zypp/CheckSum.h"
-#include "zypp/CpeId.h"
-#include "zypp/Date.h"
+#include <zypp/sat/Solvable.h>
+#include <zypp/Repository.h>
+#include <zypp/OnMediaLocation.h>
+#include <zypp/ByteCount.h>
+#include <zypp/CheckSum.h>
+#include <zypp/CpeId.h>
+#include <zypp/Date.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

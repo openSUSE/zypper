@@ -10,12 +10,12 @@
  *
 */
 #include <iostream>
-#include "zypp/base/Logger.h"
+#include <zypp/base/Logger.h>
 
-#include "zypp/SysContent.h"
-#include "zypp/parser/xml/Reader.h"
-#include "zypp/parser/xml/ParseDef.h"
-#include "zypp/parser/xml/ParseDefConsume.h"
+#include <zypp/SysContent.h>
+#include <zypp/parser/xml/Reader.h>
+#include <zypp/parser/xml/ParseDef.h>
+#include <zypp/parser/xml/ParseDefConsume.h>
 
 using std::endl;
 

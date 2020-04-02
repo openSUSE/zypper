@@ -14,11 +14,11 @@
 
 #include <iosfwd>
 
-#include "zypp/base/PtrTypes.h"
-#include "zypp/base/DefaultIntegral.h"
+#include <zypp/base/PtrTypes.h>
+#include <zypp/base/DefaultIntegral.h>
 
-#include "zypp/sat/detail/PoolMember.h"
-#include "zypp/sat/SolvAttr.h"
+#include <zypp/sat/detail/PoolMember.h>
+#include <zypp/sat/SolvAttr.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

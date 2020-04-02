@@ -8,12 +8,12 @@
 \---------------------------------------------------------------------*/
 
 #include <fstream>
-#include "zypp/base/String.h"
-#include "zypp/base/Logger.h"
-#include "zypp/base/Function.h"
+#include <zypp/base/String.h>
+#include <zypp/base/Logger.h>
+#include <zypp/base/Function.h>
 
 #include "MediaInfoDownloader.h"
-#include "zypp/base/UserRequestException.h"
+#include <zypp/base/UserRequestException.h>
 
 
 namespace zypp

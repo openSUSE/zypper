@@ -12,7 +12,7 @@
 #ifndef ZYPP_POOL_BYIDENT_H
 #define ZYPP_POOL_BYIDENT_H
 
-#include "zypp/PoolItem.h"
+#include <zypp/PoolItem.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

@@ -10,8 +10,8 @@
 #ifndef ZYPP_SUSE_MEDIAVERIFIER_H
 #define ZYPP_SUSE_MEDIAVERIFIER_H
 
-#include "zypp/media/MediaManager.h"
-#include "zypp/media/MediaAccess.h"
+#include <zypp/media/MediaManager.h>
+#include <zypp/media/MediaAccess.h>
 
 namespace zypp
 {

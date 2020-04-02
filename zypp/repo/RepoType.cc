@@ -8,8 +8,8 @@
 \---------------------------------------------------------------------*/
 
 #include <iostream>
-#include "zypp/base/NamedValue.h"
-#include "zypp/repo/RepoException.h"
+#include <zypp/base/NamedValue.h>
+#include <zypp/repo/RepoException.h>
 #include "RepoType.h"
 
 namespace zypp

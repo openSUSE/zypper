@@ -11,11 +11,11 @@
  */
 #include <iostream>
 
-#include "zypp/base/Logger.h"
-#include "zypp/base/InputStream.h"
-#include "zypp/parser/IniDict.h"
+#include <zypp/base/Logger.h>
+#include <zypp/base/InputStream.h>
+#include <zypp/parser/IniDict.h>
 
-#include "zypp/media/CredentialFileReader.h"
+#include <zypp/media/CredentialFileReader.h>
 
 using std::endl;
 

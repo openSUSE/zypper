@@ -14,11 +14,11 @@
 
 #include <iosfwd>
 
-#include "zypp/base/NonCopyable.h"
-#include "zypp/base/InputStream.h"
-#include "zypp/base/Function.h"
+#include <zypp/base/NonCopyable.h>
+#include <zypp/base/InputStream.h>
+#include <zypp/base/Function.h>
 
-#include "zypp/parser/xml/Node.h"
+#include <zypp/parser/xml/Node.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

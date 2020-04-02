@@ -11,7 +11,7 @@
 */
 #include <iostream>
 
-#include "zypp/ByteCount.h"
+#include <zypp/ByteCount.h>
 
 using std::endl;
 

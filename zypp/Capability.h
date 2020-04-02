@@ -14,15 +14,15 @@
 
 #include <iosfwd>
 
-#include "zypp/APIConfig.h"
-#include "zypp/sat/detail/PoolMember.h"
+#include <zypp/APIConfig.h>
+#include <zypp/sat/detail/PoolMember.h>
 
-#include "zypp/IdString.h"
-#include "zypp/Edition.h"
-#include "zypp/Rel.h"
-#include "zypp/ResTraits.h"
-#include "zypp/ResolverNamespace.h"
-#include "zypp/CapMatch.h"
+#include <zypp/IdString.h>
+#include <zypp/Edition.h>
+#include <zypp/Rel.h>
+#include <zypp/ResTraits.h>
+#include <zypp/ResolverNamespace.h>
+#include <zypp/CapMatch.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

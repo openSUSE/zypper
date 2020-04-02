@@ -17,12 +17,12 @@ extern "C"
 #include <iostream>
 #include <sstream>
 
-#include "zypp/base/LogTools.h"
-#include "zypp/base/Gettext.h"
-#include "zypp/base/String.h"
+#include <zypp/base/LogTools.h>
+#include <zypp/base/Gettext.h>
+#include <zypp/base/String.h>
 
-#include "zypp/base/StrMatcher.h"
-#include "zypp/sat/detail/PoolMember.h"
+#include <zypp/base/StrMatcher.h>
+#include <zypp/sat/detail/PoolMember.h>
 
 using std::endl;
 

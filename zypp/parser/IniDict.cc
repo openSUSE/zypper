@@ -10,10 +10,10 @@
  *
 */
 #include <iostream>
-#include "zypp/base/Logger.h"
+#include <zypp/base/Logger.h>
 #include <map>
 #include <string>
-#include "zypp/parser/IniDict.h"
+#include <zypp/parser/IniDict.h>
 
 using std::endl;
 

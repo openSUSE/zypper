@@ -17,8 +17,8 @@
 
 #include <iosfwd>
 
-#include "zypp/base/NonCopyable.h"
-#include "zypp/Capability.h"
+#include <zypp/base/NonCopyable.h>
+#include <zypp/Capability.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

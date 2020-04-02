@@ -17,18 +17,18 @@
 #include <list>
 #include <string>
 
-#include "zypp/base/ReferenceCounted.h"
-#include "zypp/base/NonCopyable.h"
-#include "zypp/base/PtrTypes.h"
-#include "zypp/APIConfig.h"
+#include <zypp/base/ReferenceCounted.h>
+#include <zypp/base/NonCopyable.h>
+#include <zypp/base/PtrTypes.h>
+#include <zypp/APIConfig.h>
 
-#include "zypp/Pathname.h"
-#include "zypp/PathInfo.h"
+#include <zypp/Pathname.h>
+#include <zypp/PathInfo.h>
 
-#include "zypp/media/MediaException.h"
-#include "zypp/media/MediaSource.h"
+#include <zypp/media/MediaException.h>
+#include <zypp/media/MediaSource.h>
 
-#include "zypp/Url.h"
+#include <zypp/Url.h>
 
 namespace zypp {
   namespace media {

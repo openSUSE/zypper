@@ -9,7 +9,7 @@
 #include <set>
 
 #define INCLUDE_TESTSETUP_WITHOUT_BOOST
-#include "zypp/../tests/lib/TestSetup.h"
+#include <zypp/../tests/lib/TestSetup.h>
 #undef  INCLUDE_TESTSETUP_WITHOUT_BOOST
 
 #include <zypp/base/Easy.h>
@@ -21,10 +21,10 @@
 #include <zypp/ResObject.h>
 #include <zypp/pool/PoolStats.h>
 
-#include "zypp/ZYppFactory.h"
-#include "zypp/ResPool.h"
-#include "zypp/ResPoolProxy.h"
-#include "zypp/ui/Selectable.h"
+#include <zypp/ZYppFactory.h>
+#include <zypp/ResPool.h>
+#include <zypp/ResPoolProxy.h>
+#include <zypp/ui/Selectable.h>
 #include <zypp/Repository.h>
 #include <zypp/RepoManager.h>
 

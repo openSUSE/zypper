@@ -4,12 +4,12 @@
 #include <list>
 #include <string>
 
-#include "zypp/base/Logger.h"
-#include "zypp/base/Exception.h"
+#include <zypp/base/Logger.h>
+#include <zypp/base/Exception.h>
 
 #include <boost/test/unit_test.hpp>
 
-#include "zypp/ProgressData.h"
+#include <zypp/ProgressData.h>
 
 using boost::unit_test::test_case;
 

@@ -10,9 +10,9 @@
  *
 */
 #include <iostream>
-#include "zypp/base/LogTools.h"
+#include <zypp/base/LogTools.h>
 
-#include "zypp/Glob.h"
+#include <zypp/Glob.h>
 
 using std::endl;
 

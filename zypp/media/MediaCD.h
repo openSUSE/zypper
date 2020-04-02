@@ -12,8 +12,8 @@
 #ifndef ZYPP_MEDIA_MEDIACD_H
 #define ZYPP_MEDIA_MEDIACD_H
 
-#include "zypp/media/MediaHandler.h"
-#include "zypp/media/MediaManager.h"
+#include <zypp/media/MediaHandler.h>
+#include <zypp/media/MediaManager.h>
 
 namespace zypp {
   namespace media {

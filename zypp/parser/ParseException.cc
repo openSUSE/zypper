@@ -10,9 +10,9 @@
  *
 */
 #include <iostream>
-//#include "zypp/base/Logger.h"
+//#include <zypp/base/Logger.h>
 
-#include "zypp/parser/ParseException.h"
+#include <zypp/parser/ParseException.h>
 
 using std::endl;
 

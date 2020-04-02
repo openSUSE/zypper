@@ -10,9 +10,9 @@
  *
 */
 #include <iostream>
-//#include "zypp/base/Logger.h"
+//#include <zypp/base/Logger.h>
 
-#include "zypp/pool/PoolStats.h"
+#include <zypp/pool/PoolStats.h>
 
 using std::endl;
 

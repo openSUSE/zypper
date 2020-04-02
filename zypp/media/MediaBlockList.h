@@ -15,7 +15,7 @@
 #include <sys/types.h>
 #include <vector>
 
-#include "zypp/Digest.h"
+#include <zypp/Digest.h>
 
 namespace zypp {
   namespace media {

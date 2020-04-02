@@ -15,10 +15,10 @@
 #include <iosfwd>
 #include <vector>
 
-#include "zypp/base/PtrTypes.h"
-#include "zypp/sat/detail/PoolMember.h"
-#include "zypp/sat/Solvable.h"
-#include "zypp/sat/SolvIterMixin.h"
+#include <zypp/base/PtrTypes.h>
+#include <zypp/sat/detail/PoolMember.h>
+#include <zypp/sat/Solvable.h>
+#include <zypp/sat/SolvIterMixin.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

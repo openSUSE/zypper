@@ -14,14 +14,14 @@
 
 #include <iosfwd>
 
-#include "zypp/TmpPath.h"
-#include "zypp/Target.h"
-#include "zypp/Resolver.h"
-#include "zypp/KeyRing.h"
-#include "zypp/ZYppCommit.h"
-#include "zypp/ResTraits.h"
-#include "zypp/DiskUsageCounter.h"
-#include "zypp/ManagedFile.h"
+#include <zypp/TmpPath.h>
+#include <zypp/Target.h>
+#include <zypp/Resolver.h>
+#include <zypp/KeyRing.h>
+#include <zypp/ZYppCommit.h>
+#include <zypp/ResTraits.h>
+#include <zypp/DiskUsageCounter.h>
+#include <zypp/ManagedFile.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

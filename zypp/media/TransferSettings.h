@@ -4,10 +4,10 @@
 
 #include <string>
 #include <vector>
-#include "zypp/base/Flags.h"
-#include "zypp/base/PtrTypes.h"
-#include "zypp/Pathname.h"
-#include "zypp/Url.h"
+#include <zypp/base/Flags.h>
+#include <zypp/base/PtrTypes.h>
+#include <zypp/Pathname.h>
+#include <zypp/Url.h>
 
 namespace zypp
 {

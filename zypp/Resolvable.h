@@ -15,13 +15,13 @@
 #include <iosfwd>
 #include <string>
 
-#include "zypp/APIConfig.h"
+#include <zypp/APIConfig.h>
 
-#include "zypp/base/ReferenceCounted.h"
-#include "zypp/base/NonCopyable.h"
-#include "zypp/base/PtrTypes.h"
+#include <zypp/base/ReferenceCounted.h>
+#include <zypp/base/NonCopyable.h>
+#include <zypp/base/PtrTypes.h>
 
-#include "zypp/sat/SolvableType.h"
+#include <zypp/sat/SolvableType.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

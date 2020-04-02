@@ -10,16 +10,16 @@
  *
 */
 #include <iostream>
-#include "zypp/base/Logger.h"
-#include "zypp/base/Exception.h"
-#include "zypp/base/Functional.h"
+#include <zypp/base/Logger.h>
+#include <zypp/base/Exception.h>
+#include <zypp/base/Functional.h>
 
-#include "zypp/PathInfo.h"
+#include <zypp/PathInfo.h>
 
-#include "zypp/parser/ProductFileReader.h"
-#include "zypp/parser/xml/ParseDef.h"
-#include "zypp/parser/xml/ParseDefConsume.h"
-#include "zypp/parser/xml/Reader.h"
+#include <zypp/parser/ProductFileReader.h>
+#include <zypp/parser/xml/ParseDef.h>
+#include <zypp/parser/xml/ParseDefConsume.h>
+#include <zypp/parser/xml/Reader.h>
 
 using std::endl;
 

@@ -14,8 +14,8 @@
 
 #include <iosfwd>
 
-#include "zypp/Pathname.h"
-#include "zypp/base/Flags.h"
+#include <zypp/Pathname.h>
+#include <zypp/base/Flags.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

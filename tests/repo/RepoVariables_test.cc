@@ -3,11 +3,11 @@
 #include <list>
 #include <map>
 
-#include "zypp/ZConfig.h"
-#include "zypp/Pathname.h"
-#include "zypp/Url.h"
-#include "zypp/base/ValueTransform.h"
-#include "zypp/repo/RepoVariables.h"
+#include <zypp/ZConfig.h>
+#include <zypp/Pathname.h>
+#include <zypp/Url.h>
+#include <zypp/base/ValueTransform.h>
+#include <zypp/repo/RepoVariables.h>
 
 using std::cout;
 using std::endl;

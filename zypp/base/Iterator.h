@@ -20,7 +20,7 @@
 #include <boost/iterator/transform_iterator.hpp>
 #include <boost/function_output_iterator.hpp>
 
-#include "zypp/base/Iterable.h"
+#include <zypp/base/Iterable.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

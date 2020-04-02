@@ -10,12 +10,12 @@
 #ifndef ZYPP_REPO_MEDIAINFO_DOWNLOADER
 #define ZYPP_REPO_MEDIAINFO_DOWNLOADER
 
-#include "zypp/Url.h"
-#include "zypp/Pathname.h"
-#include "zypp/Fetcher.h"
-#include "zypp/OnMediaLocation.h"
-#include "zypp/MediaSetAccess.h"
-#include "zypp/ProgressData.h"
+#include <zypp/Url.h>
+#include <zypp/Pathname.h>
+#include <zypp/Fetcher.h>
+#include <zypp/OnMediaLocation.h>
+#include <zypp/MediaSetAccess.h>
+#include <zypp/ProgressData.h>
 
 namespace zypp
 {

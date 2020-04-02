@@ -12,9 +12,9 @@
 
 #include <iosfwd>
 
-#include "zypp/base/Function.h"
-#include "zypp/base/Functional.h"
-#include "zypp/FileChecker.h"
+#include <zypp/base/Function.h>
+#include <zypp/base/Functional.h>
+#include <zypp/FileChecker.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

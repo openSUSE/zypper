@@ -15,11 +15,11 @@
 #include <iosfwd>
 #include <string>
 
-#include "zypp/base/PtrTypes.h"
-#include "zypp/base/Function.h"
-#include "zypp/base/ProvideNumericId.h"
+#include <zypp/base/PtrTypes.h>
+#include <zypp/base/Function.h>
+#include <zypp/base/ProvideNumericId.h>
 
-#include "zypp/Date.h"
+#include <zypp/Date.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

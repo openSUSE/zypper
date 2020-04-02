@@ -14,13 +14,13 @@
 
 #include <iosfwd>
 
-#include "zypp/base/PtrTypes.h"
-#include "zypp/base/Iterator.h"
-#include "zypp/base/Hash.h"
+#include <zypp/base/PtrTypes.h>
+#include <zypp/base/Iterator.h>
+#include <zypp/base/Hash.h>
 
-#include "zypp/sat/Solvable.h"
-#include "zypp/PoolItem.h"
-#include "zypp/ui/Selectable.h"
+#include <zypp/sat/Solvable.h>
+#include <zypp/PoolItem.h>
+#include <zypp/ui/Selectable.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

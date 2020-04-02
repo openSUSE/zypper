@@ -31,27 +31,27 @@ extern "C"
 
 #define ZYPP_USE_RESOLVER_INTERNALS
 
-#include "zypp/base/LogTools.h"
-#include "zypp/base/Gettext.h"
-#include "zypp/base/Algorithm.h"
+#include <zypp/base/LogTools.h>
+#include <zypp/base/Gettext.h>
+#include <zypp/base/Algorithm.h>
 
-#include "zypp/ZConfig.h"
-#include "zypp/Product.h"
-#include "zypp/AutoDispose.h"
-#include "zypp/sat/WhatProvides.h"
-#include "zypp/sat/WhatObsoletes.h"
-#include "zypp/sat/detail/PoolImpl.h"
+#include <zypp/ZConfig.h>
+#include <zypp/Product.h>
+#include <zypp/AutoDispose.h>
+#include <zypp/sat/WhatProvides.h>
+#include <zypp/sat/WhatObsoletes.h>
+#include <zypp/sat/detail/PoolImpl.h>
 
-#include "zypp/solver/detail/Resolver.h"
-#include "zypp/solver/detail/SATResolver.h"
+#include <zypp/solver/detail/Resolver.h>
+#include <zypp/solver/detail/SATResolver.h>
 
-#include "zypp/solver/detail/ProblemSolutionCombi.h"
-#include "zypp/solver/detail/ProblemSolutionIgnore.h"
-#include "zypp/solver/detail/SolverQueueItemInstall.h"
-#include "zypp/solver/detail/SolverQueueItemDelete.h"
-#include "zypp/solver/detail/SystemCheck.h"
-#include "zypp/solver/detail/SolutionAction.h"
-#include "zypp/solver/detail/SolverQueueItem.h"
+#include <zypp/solver/detail/ProblemSolutionCombi.h>
+#include <zypp/solver/detail/ProblemSolutionIgnore.h>
+#include <zypp/solver/detail/SolverQueueItemInstall.h>
+#include <zypp/solver/detail/SolverQueueItemDelete.h>
+#include <zypp/solver/detail/SystemCheck.h>
+#include <zypp/solver/detail/SolutionAction.h>
+#include <zypp/solver/detail/SolverQueueItem.h>
 
 using std::endl;
 

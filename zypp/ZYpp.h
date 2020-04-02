@@ -14,20 +14,20 @@
 
 #include <iosfwd>
 
-#include "zypp/base/NonCopyable.h"
-#include "zypp/base/PtrTypes.h"
-#include "zypp/APIConfig.h"
+#include <zypp/base/NonCopyable.h>
+#include <zypp/base/PtrTypes.h>
+#include <zypp/APIConfig.h>
 
-#include "zypp/ZConfig.h"
-#include "zypp/ManagedFile.h"
+#include <zypp/ZConfig.h>
+#include <zypp/ManagedFile.h>
 
-#include "zypp/ZYppCommit.h"
-#include "zypp/ResTraits.h"
+#include <zypp/ZYppCommit.h>
+#include <zypp/ResTraits.h>
 
-#include "zypp/Target.h"
-#include "zypp/Resolver.h"
-#include "zypp/KeyRing.h"
-#include "zypp/DiskUsageCounter.h"
+#include <zypp/Target.h>
+#include <zypp/Resolver.h>
+#include <zypp/KeyRing.h>
+#include <zypp/DiskUsageCounter.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

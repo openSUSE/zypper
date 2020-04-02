@@ -9,11 +9,11 @@
 /** \file	zypp/base/DrunkenBishop.cc
  */
 #include <iostream>
-//#include "zypp/base/LogTools.h"
-#include "zypp/base/Flags.h"
-#include "zypp/base/String.h"
-#include "zypp/base/NonCopyable.h"
-#include "zypp/base/DrunkenBishop.h"
+//#include <zypp/base/LogTools.h>
+#include <zypp/base/Flags.h>
+#include <zypp/base/String.h>
+#include <zypp/base/NonCopyable.h>
+#include <zypp/base/DrunkenBishop.h>
 
 using std::endl;
 

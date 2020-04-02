@@ -15,7 +15,7 @@
 #include <string>
 #include <list>
 
-#include "zypp/base/PtrTypes.h"
+#include <zypp/base/PtrTypes.h>
 
 namespace zypp {
 

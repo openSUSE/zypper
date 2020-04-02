@@ -10,7 +10,7 @@
 */
 #include <iostream>
 
-#include "zypp/media/MediaSource.h"
+#include <zypp/media/MediaSource.h>
 
 namespace zypp {
   namespace media {

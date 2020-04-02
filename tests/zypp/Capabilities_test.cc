@@ -9,9 +9,9 @@
 #include <boost/test/unit_test.hpp>
 
 #include "TestSetup.h"
-#include "zypp/Arch.h"
-#include "zypp/Capability.h"
-#include "zypp/Capabilities.h"
+#include <zypp/Arch.h>
+#include <zypp/Capability.h>
+#include <zypp/Capabilities.h>
 
 using boost::unit_test::test_suite;
 using boost::unit_test::test_case;

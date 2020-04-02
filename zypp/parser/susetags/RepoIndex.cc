@@ -10,9 +10,9 @@
  *
 */
 #include <iostream>
-#include "zypp/base/LogTools.h"
+#include <zypp/base/LogTools.h>
 
-#include "zypp/parser/susetags/RepoIndex.h"
+#include <zypp/parser/susetags/RepoIndex.h>
 
 using std::endl;
 #undef  ZYPP_BASE_LOGGER_LOGGROUP

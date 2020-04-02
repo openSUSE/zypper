@@ -13,7 +13,7 @@
 
 #include <iosfwd>
 
-#include "zypp/base/Iterator.h"
+#include <zypp/base/Iterator.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

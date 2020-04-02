@@ -13,7 +13,7 @@
 #include <string>
 #include <iostream>
 
-#include "zypp/target/rpm/RpmException.h"
+#include <zypp/target/rpm/RpmException.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

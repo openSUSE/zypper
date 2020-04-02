@@ -11,9 +11,9 @@
 */
 #include <iostream>
 
-#include "zypp/target/TargetCallbackReceiver.h"
+#include <zypp/target/TargetCallbackReceiver.h>
 
-#include "zypp/target/rpm/RpmCallbacks.h"
+#include <zypp/target/rpm/RpmCallbacks.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

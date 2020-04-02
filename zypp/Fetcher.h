@@ -15,15 +15,15 @@
 #include <iosfwd>
 #include <list>
 
-#include "zypp/base/Flags.h"
-#include "zypp/base/PtrTypes.h"
-#include "zypp/Pathname.h"
-#include "zypp/Url.h"
-#include "zypp/OnMediaLocation.h"
-#include "zypp/Digest.h"
-#include "zypp/MediaSetAccess.h"
-#include "zypp/FileChecker.h"
-#include "zypp/ProgressData.h"
+#include <zypp/base/Flags.h>
+#include <zypp/base/PtrTypes.h>
+#include <zypp/Pathname.h>
+#include <zypp/Url.h>
+#include <zypp/OnMediaLocation.h>
+#include <zypp/Digest.h>
+#include <zypp/MediaSetAccess.h>
+#include <zypp/FileChecker.h>
+#include <zypp/ProgressData.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

@@ -14,8 +14,8 @@
 
 #include <iosfwd>
 
-#include "zypp/ZYppCommitPolicy.h"
-#include "zypp/ZYppCommitResult.h"
+#include <zypp/ZYppCommitPolicy.h>
+#include <zypp/ZYppCommitResult.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

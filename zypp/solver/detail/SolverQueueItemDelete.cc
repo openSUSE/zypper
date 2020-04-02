@@ -24,10 +24,10 @@ extern "C"
 
 #define ZYPP_USE_RESOLVER_INTERNALS
 
-#include "zypp/base/Logger.h"
-#include "zypp/IdString.h"
-#include "zypp/Resolver.h"
-#include "zypp/solver/detail/SolverQueueItemDelete.h"
+#include <zypp/base/Logger.h>
+#include <zypp/IdString.h>
+#include <zypp/Resolver.h>
+#include <zypp/solver/detail/SolverQueueItemDelete.h>
 
 using std::endl;
 

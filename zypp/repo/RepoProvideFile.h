@@ -14,13 +14,13 @@
 
 #include <iosfwd>
 
-#include "zypp/base/PtrTypes.h"
-#include "zypp/base/Function.h"
-#include "zypp/base/Functional.h"
-#include "zypp/RepoInfo.h"
-#include "zypp/ManagedFile.h"
-#include "zypp/OnMediaLocation.h"
-#include "zypp/ProvideFilePolicy.h"
+#include <zypp/base/PtrTypes.h>
+#include <zypp/base/Function.h>
+#include <zypp/base/Functional.h>
+#include <zypp/RepoInfo.h>
+#include <zypp/ManagedFile.h>
+#include <zypp/OnMediaLocation.h>
+#include <zypp/ProvideFilePolicy.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

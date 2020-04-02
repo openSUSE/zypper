@@ -15,16 +15,16 @@
 #include <list>
 #include <set>
 
-#include "zypp/base/Iterator.h"
-#include "zypp/APIConfig.h"
+#include <zypp/base/Iterator.h>
+#include <zypp/APIConfig.h>
 
-#include "zypp/Url.h"
-#include "zypp/Locale.h"
-#include "zypp/TriBool.h"
-#include "zypp/repo/RepoType.h"
-#include "zypp/repo/RepoVariables.h"
+#include <zypp/Url.h>
+#include <zypp/Locale.h>
+#include <zypp/TriBool.h>
+#include <zypp/repo/RepoType.h>
+#include <zypp/repo/RepoVariables.h>
 
-#include "zypp/repo/RepoInfoBase.h"
+#include <zypp/repo/RepoInfoBase.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

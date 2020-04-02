@@ -10,9 +10,9 @@
  *
 */
 #include <iostream>
-//#include "zypp/base/Logger.h"
+//#include <zypp/base/Logger.h>
 
-#include "zypp/base/SerialNumber.h"
+#include <zypp/base/SerialNumber.h>
 
 using std::endl;
 

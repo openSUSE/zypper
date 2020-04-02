@@ -12,7 +12,7 @@
 #ifndef ZYPP_IDSTRINGTYPE_H
 #define ZYPP_IDSTRINGTYPE_H
 
-#include "zypp/IdString.h"
+#include <zypp/IdString.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

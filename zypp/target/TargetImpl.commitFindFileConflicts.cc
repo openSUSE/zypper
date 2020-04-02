@@ -22,19 +22,19 @@ extern "C"
 #include <unordered_set>
 #include <string>
 
-#include "zypp/base/LogTools.h"
-#include "zypp/base/Gettext.h"
-#include "zypp/base/Exception.h"
-#include "zypp/base/UserRequestException.h"
+#include <zypp/base/LogTools.h>
+#include <zypp/base/Gettext.h>
+#include <zypp/base/Exception.h>
+#include <zypp/base/UserRequestException.h>
 
-#include "zypp/sat/Queue.h"
-#include "zypp/sat/FileConflicts.h"
-#include "zypp/sat/Pool.h"
+#include <zypp/sat/Queue.h>
+#include <zypp/sat/FileConflicts.h>
+#include <zypp/sat/Pool.h>
 
-#include "zypp/target/TargetImpl.h"
-#include "zypp/target/CommitPackageCache.h"
+#include <zypp/target/TargetImpl.h>
+#include <zypp/target/CommitPackageCache.h>
 
-#include "zypp/ZYppCallbacks.h"
+#include <zypp/ZYppCallbacks.h>
 
 using std::endl;
 

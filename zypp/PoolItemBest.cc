@@ -10,10 +10,10 @@
  *
 */
 #include <iostream>
-#include "zypp/base/LogTools.h"
+#include <zypp/base/LogTools.h>
 
-#include "zypp/PoolItemBest.h"
-#include "zypp/ui/SelectableTraits.h"
+#include <zypp/PoolItemBest.h>
+#include <zypp/ui/SelectableTraits.h>
 
 using std::endl;
 

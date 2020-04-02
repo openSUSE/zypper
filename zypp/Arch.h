@@ -17,11 +17,11 @@
 #include <set>
 #include <string>
 
-#include "zypp/base/String.h"
-#include "zypp/base/Iterator.h"
+#include <zypp/base/String.h>
+#include <zypp/base/Iterator.h>
 
-#include "zypp/IdStringType.h"
-#include "zypp/RelCompare.h"
+#include <zypp/IdStringType.h>
+#include <zypp/RelCompare.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

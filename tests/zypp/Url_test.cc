@@ -5,12 +5,12 @@
 ** differently than configured.
 */
 
-#include "zypp/base/Exception.h"
-#include "zypp/base/String.h"
+#include <zypp/base/Exception.h>
+#include <zypp/base/String.h>
 
-#include "zypp/RepoInfo.h"
+#include <zypp/RepoInfo.h>
 
-#include "zypp/Url.h"
+#include <zypp/Url.h>
 #include <stdexcept>
 #include <iostream>
 #include <cassert>

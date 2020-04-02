@@ -5,11 +5,11 @@
 // Boost.Test
 #include <boost/test/unit_test.hpp>
 
-#include "zypp/base/Logger.h"
-#include "zypp/base/Exception.h"
-#include "zypp/ZYppFactory.h"
-#include "zypp/Digest.h"
-#include "zypp/ZYpp.h"
+#include <zypp/base/Logger.h>
+#include <zypp/base/Exception.h>
+#include <zypp/ZYppFactory.h>
+#include <zypp/Digest.h>
+#include <zypp/ZYpp.h>
 
 
 using boost::unit_test::test_case;

@@ -11,9 +11,9 @@
 */
 
 #include <iostream>
-#include "zypp/base/LogTools.h"
+#include <zypp/base/LogTools.h>
 
-#include "zypp/ZYppCommitResult.h"
+#include <zypp/ZYppCommitResult.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

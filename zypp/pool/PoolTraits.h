@@ -17,12 +17,12 @@
 #include <list>
 #include <vector>
 
-#include "zypp/base/Iterator.h"
-#include "zypp/base/Hash.h"
+#include <zypp/base/Iterator.h>
+#include <zypp/base/Hash.h>
 
-#include "zypp/PoolItem.h"
-#include "zypp/pool/ByIdent.h"
-#include "zypp/sat/Pool.h"
+#include <zypp/PoolItem.h>
+#include <zypp/pool/ByIdent.h>
+#include <zypp/sat/Pool.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

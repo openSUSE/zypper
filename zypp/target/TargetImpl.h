@@ -15,21 +15,21 @@
 #include <iosfwd>
 #include <set>
 
-#include "zypp/base/ReferenceCounted.h"
-#include "zypp/base/NonCopyable.h"
-#include "zypp/base/PtrTypes.h"
-#include "zypp/PoolItem.h"
-#include "zypp/ZYppCommit.h"
+#include <zypp/base/ReferenceCounted.h>
+#include <zypp/base/NonCopyable.h>
+#include <zypp/base/PtrTypes.h>
+#include <zypp/PoolItem.h>
+#include <zypp/ZYppCommit.h>
 
-#include "zypp/Pathname.h"
-#include "zypp/media/MediaAccess.h"
-#include "zypp/Target.h"
-#include "zypp/target/rpm/RpmDb.h"
-#include "zypp/target/TargetException.h"
-#include "zypp/target/RequestedLocalesFile.h"
-#include "zypp/target/SolvIdentFile.h"
-#include "zypp/target/HardLocksFile.h"
-#include "zypp/ManagedFile.h"
+#include <zypp/Pathname.h>
+#include <zypp/media/MediaAccess.h>
+#include <zypp/Target.h>
+#include <zypp/target/rpm/RpmDb.h>
+#include <zypp/target/TargetException.h>
+#include <zypp/target/RequestedLocalesFile.h>
+#include <zypp/target/SolvIdentFile.h>
+#include <zypp/target/HardLocksFile.h>
+#include <zypp/ManagedFile.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

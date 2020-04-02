@@ -12,10 +12,10 @@ extern "C"
 }
 
 #include <iostream>
-#include "zypp/base/Logger.h"
-#include "zypp/Repository.h"
-#include "zypp/repo/DeltaCandidates.h"
-#include "zypp/sat/Pool.h"
+#include <zypp/base/Logger.h>
+#include <zypp/Repository.h>
+#include <zypp/repo/DeltaCandidates.h>
+#include <zypp/sat/Pool.h>
 
 
 using std::endl;

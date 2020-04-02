@@ -15,15 +15,15 @@
 #include <iostream>
 #include <sstream>
 
-#include "zypp/base/LogTools.h"
-#include "zypp/base/DefaultIntegral.h"
-#include "zypp/base/String.h"
-#include "zypp/base/Signal.h"
-#include "zypp/base/IOStream.h"
+#include <zypp/base/LogTools.h>
+#include <zypp/base/DefaultIntegral.h>
+#include <zypp/base/String.h>
+#include <zypp/base/Signal.h>
+#include <zypp/base/IOStream.h>
 
-#include "zypp/PluginScript.h"
-#include "zypp/ExternalProgram.h"
-#include "zypp/PathInfo.h"
+#include <zypp/PluginScript.h>
+#include <zypp/ExternalProgram.h>
+#include <zypp/PathInfo.h>
 
 using std::endl;
 

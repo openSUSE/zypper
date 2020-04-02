@@ -12,7 +12,7 @@
 #ifndef ZYPP_RANGE_H
 #define ZYPP_RANGE_H
 
-#include "zypp/RelCompare.h"
+#include <zypp/RelCompare.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

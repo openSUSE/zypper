@@ -12,7 +12,7 @@
 #ifndef ZYPP_SRCPACKAGE_H
 #define ZYPP_SRCPACKAGE_H
 
-#include "zypp/ResObject.h"
+#include <zypp/ResObject.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

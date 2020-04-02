@@ -13,9 +13,9 @@
 
 #include <iosfwd>
 
-#include "zypp/base/PtrTypes.h"
-#include "zypp/sat/Queue.h"
-#include "zypp/sat/Solvable.h"
+#include <zypp/base/PtrTypes.h>
+#include <zypp/sat/Queue.h>
+#include <zypp/sat/Solvable.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

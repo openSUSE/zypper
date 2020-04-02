@@ -14,13 +14,13 @@
 
 #include <iosfwd>
 
-#include "zypp/Pathname.h"
+#include <zypp/Pathname.h>
 
-#include "zypp/sat/detail/PoolMember.h"
-#include "zypp/Repository.h"
-#include "zypp/sat/WhatProvides.h"
-#include "zypp/sat/SolvableSet.h"
-#include "zypp/sat/Queue.h"
+#include <zypp/sat/detail/PoolMember.h>
+#include <zypp/Repository.h>
+#include <zypp/sat/WhatProvides.h>
+#include <zypp/sat/SolvableSet.h>
+#include <zypp/sat/Queue.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

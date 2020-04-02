@@ -12,15 +12,15 @@
 #include <iostream>
 #include <fstream>
 
-#include "zypp/base/LogTools.h"
-#include "zypp/base/IOStream.h"
-#include "zypp/base/String.h"
+#include <zypp/base/LogTools.h>
+#include <zypp/base/IOStream.h>
+#include <zypp/base/String.h>
 
-#include "zypp/PathInfo.h"
-#include "zypp/TmpPath.h"
-#include "zypp/Date.h"
+#include <zypp/PathInfo.h>
+#include <zypp/TmpPath.h>
+#include <zypp/Date.h>
 
-#include "zypp/target/SolvIdentFile.h"
+#include <zypp/target/SolvIdentFile.h>
 
 using std::endl;
 

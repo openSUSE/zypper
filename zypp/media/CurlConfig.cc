@@ -1,12 +1,12 @@
 #include <iostream>
 #include <fstream>
 
-#include "zypp/base/Logger.h"
-#include "zypp/base/IOStream.h"
-#include "zypp/Pathname.h"
-#include "zypp/PathInfo.h"
+#include <zypp/base/Logger.h>
+#include <zypp/base/IOStream.h>
+#include <zypp/Pathname.h>
+#include <zypp/PathInfo.h>
 
-#include "zypp/media/CurlConfig.h"
+#include <zypp/media/CurlConfig.h>
 
 using std::endl;
 

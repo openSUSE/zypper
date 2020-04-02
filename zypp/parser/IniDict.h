@@ -16,10 +16,10 @@
 #include <map>
 #include <string>
 
-#include "zypp/base/PtrTypes.h"
-#include "zypp/base/InputStream.h"
-#include "zypp/base/Iterator.h"
-#include "zypp/parser/IniParser.h"
+#include <zypp/base/PtrTypes.h>
+#include <zypp/base/InputStream.h>
+#include <zypp/base/Iterator.h>
+#include <zypp/parser/IniParser.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

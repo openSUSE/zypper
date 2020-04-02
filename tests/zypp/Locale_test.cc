@@ -2,7 +2,7 @@
 #include <iostream>
 #include <boost/test/unit_test.hpp>
 
-#include "zypp/Locale.h"
+#include <zypp/Locale.h>
 
 #define BOOST_TEST_MODULE Locale
 

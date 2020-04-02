@@ -2,8 +2,8 @@
 #include <zypp/base/String.h>
 #include <zypp/base/LogTools.h>
 
-#include "zypp/PoolQuery.h"
-#include "zypp/PoolQueryUtil.tcc"
+#include <zypp/PoolQuery.h>
+#include <zypp/PoolQueryUtil.tcc>
 
 #define BOOST_TEST_MODULE PoolQuery_CC
 

@@ -7,8 +7,8 @@
 #include <list>
 #include <string>
 
-#include "zypp/base/Logger.h"
-#include "zypp/Arch.h"
+#include <zypp/base/Logger.h>
+#include <zypp/Arch.h>
 
 // Boost.Test
 #include <boost/test/unit_test.hpp>

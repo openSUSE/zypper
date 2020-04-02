@@ -11,16 +11,16 @@
 */
 #include <iostream>
 
-#include "zypp/base/LogTools.h"
-#include "zypp/PathInfo.h"
+#include <zypp/base/LogTools.h>
+#include <zypp/PathInfo.h>
 
-#include "zypp/misc/DefaultLoadSystem.h"
+#include <zypp/misc/DefaultLoadSystem.h>
 
-#include "zypp/ZYppFactory.h"
-#include "zypp/zypp_detail/ZYppReadOnlyHack.h"
-#include "zypp/Target.h"
-#include "zypp/RepoManager.h"
-#include "zypp/sat/Pool.h"
+#include <zypp/ZYppFactory.h>
+#include <zypp/zypp_detail/ZYppReadOnlyHack.h>
+#include <zypp/Target.h>
+#include <zypp/RepoManager.h>
+#include <zypp/sat/Pool.h>
 
 using std::endl;
 

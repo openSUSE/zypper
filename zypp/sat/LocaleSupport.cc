@@ -10,9 +10,9 @@
  *
 */
 #include <iostream>
-#include "zypp/base/LogTools.h"
+#include <zypp/base/LogTools.h>
 
-#include "zypp/sat/LocaleSupport.h"
+#include <zypp/sat/LocaleSupport.h>
 
 using std::endl;
 

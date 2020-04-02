@@ -14,14 +14,14 @@
 
 #include <iosfwd>
 
-#include "zypp/base/ReferenceCounted.h"
-#include "zypp/base/NonCopyable.h"
-#include "zypp/base/PtrTypes.h"
-#include "zypp/APIConfig.h"
+#include <zypp/base/ReferenceCounted.h>
+#include <zypp/base/NonCopyable.h>
+#include <zypp/base/PtrTypes.h>
+#include <zypp/APIConfig.h>
 
-#include "zypp/Product.h"
-#include "zypp/Pathname.h"
-#include "zypp/ResPool.h"
+#include <zypp/Product.h>
+#include <zypp/Pathname.h>
+#include <zypp/ResPool.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

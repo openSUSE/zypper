@@ -17,15 +17,15 @@ extern "C"
 #include <iostream>
 #include <fstream>
 
-#include "zypp/base/Easy.h"
-#include "zypp/base/LogTools.h"
-#include "zypp/base/DtorReset.h"
-#include "zypp/base/String.h"
+#include <zypp/base/Easy.h>
+#include <zypp/base/LogTools.h>
+#include <zypp/base/DtorReset.h>
+#include <zypp/base/String.h>
 
-#include "zypp/DiskUsageCounter.h"
-#include "zypp/ExternalProgram.h"
-#include "zypp/sat/Pool.h"
-#include "zypp/sat/detail/PoolImpl.h"
+#include <zypp/DiskUsageCounter.h>
+#include <zypp/ExternalProgram.h>
+#include <zypp/sat/Pool.h>
+#include <zypp/sat/detail/PoolImpl.h>
 
 using std::endl;
 

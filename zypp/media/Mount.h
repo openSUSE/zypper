@@ -20,8 +20,8 @@
 #include <string>
 #include <iosfwd>
 
-#include "zypp/ExternalProgram.h"
-#include "zypp/KVMap.h"
+#include <zypp/ExternalProgram.h>
+#include <zypp/KVMap.h>
 
 namespace zypp {
   namespace media {

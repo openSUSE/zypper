@@ -1,6 +1,6 @@
 #include <boost/test/unit_test.hpp>
 #include <iostream>
-#include "zypp/base/DrunkenBishop.h"
+#include <zypp/base/DrunkenBishop.h>
 
 using boost::unit_test::test_case;
 

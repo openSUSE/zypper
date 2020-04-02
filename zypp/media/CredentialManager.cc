@@ -12,15 +12,15 @@
 #include <iostream>
 #include <fstream>
 
-#include "zypp/ZConfig.h"
-#include "zypp/base/Function.h"
-#include "zypp/base/Logger.h"
-#include "zypp/base/Easy.h"
-#include "zypp/PathInfo.h"
+#include <zypp/ZConfig.h>
+#include <zypp/base/Function.h>
+#include <zypp/base/Logger.h>
+#include <zypp/base/Easy.h>
+#include <zypp/PathInfo.h>
 
-#include "zypp/media/CredentialFileReader.h"
+#include <zypp/media/CredentialFileReader.h>
 
-#include "zypp/media/CredentialManager.h"
+#include <zypp/media/CredentialManager.h>
 
 using std::endl;
 

@@ -10,14 +10,14 @@
 #ifndef ZYPP_SOURCE_SUSETAGS_DOWNLOADER
 #define ZYPP_SOURCE_SUSETAGS_DOWNLOADER
 
-#include "zypp/Url.h"
-#include "zypp/Pathname.h"
-#include "zypp/ProgressData.h"
-#include "zypp/RepoInfo.h"
-#include "zypp/RepoStatus.h"
-#include "zypp/MediaSetAccess.h"
-#include "zypp/repo/Downloader.h"
-#include "zypp/parser/susetags/ContentFileReader.h"
+#include <zypp/Url.h>
+#include <zypp/Pathname.h>
+#include <zypp/ProgressData.h>
+#include <zypp/RepoInfo.h>
+#include <zypp/RepoStatus.h>
+#include <zypp/MediaSetAccess.h>
+#include <zypp/repo/Downloader.h>
+#include <zypp/parser/susetags/ContentFileReader.h>
 
 namespace zypp
 {

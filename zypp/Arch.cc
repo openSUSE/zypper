@@ -13,12 +13,12 @@
 #include <list>
 #include <inttypes.h>
 
-#include "zypp/base/Logger.h"
-#include "zypp/base/Exception.h"
-#include "zypp/base/NonCopyable.h"
-#include "zypp/base/Hash.h"
-#include "zypp/Arch.h"
-#include "zypp/Bit.h"
+#include <zypp/base/Logger.h>
+#include <zypp/base/Exception.h>
+#include <zypp/base/NonCopyable.h>
+#include <zypp/base/Hash.h>
+#include <zypp/Arch.h>
+#include <zypp/Bit.h>
 
 using std::endl;
 

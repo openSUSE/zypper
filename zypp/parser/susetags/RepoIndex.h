@@ -16,14 +16,14 @@
 #include <list>
 #include <map>
 
-#include "zypp/base/ReferenceCounted.h"
-#include "zypp/base/NonCopyable.h"
-#include "zypp/base/PtrTypes.h"
+#include <zypp/base/ReferenceCounted.h>
+#include <zypp/base/NonCopyable.h>
+#include <zypp/base/PtrTypes.h>
 
-#include "zypp/Arch.h"
-#include "zypp/CheckSum.h"
-#include "zypp/Pathname.h"
-#include "zypp/Locale.h"
+#include <zypp/Arch.h>
+#include <zypp/CheckSum.h>
+#include <zypp/Pathname.h>
+#include <zypp/Locale.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

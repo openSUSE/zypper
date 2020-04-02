@@ -12,10 +12,10 @@
 #include <iostream>
 #include <fstream>
 
-#include "zypp/repo/SrcPackageProvider.h"
-#include "zypp/PathInfo.h"
-#include "zypp/TmpPath.h"
-#include "zypp/SrcPackage.h"
+#include <zypp/repo/SrcPackageProvider.h>
+#include <zypp/PathInfo.h>
+#include <zypp/TmpPath.h>
+#include <zypp/SrcPackage.h>
 
 using std::endl;
 

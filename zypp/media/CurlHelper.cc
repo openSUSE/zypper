@@ -1,13 +1,13 @@
 #include "CurlHelper.h"
 
-#include "zypp/PathInfo.h"
-#include "zypp/Pathname.h"
-#include "zypp/Target.h"
-#include "zypp/base/Logger.h"
-#include "zypp/base/String.h"
-#include "zypp/media/ProxyInfo.h"
-#include "zypp/media/MediaUserAuth.h"
-#include "zypp/media/MediaException.h"
+#include <zypp/PathInfo.h>
+#include <zypp/Pathname.h>
+#include <zypp/Target.h>
+#include <zypp/base/Logger.h>
+#include <zypp/base/String.h>
+#include <zypp/media/ProxyInfo.h>
+#include <zypp/media/MediaUserAuth.h>
+#include <zypp/media/MediaException.h>
 #include <list>
 
 using std::endl;

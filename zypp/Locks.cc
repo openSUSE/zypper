@@ -13,21 +13,21 @@
 #include <boost/function_output_iterator.hpp>
 #include <algorithm>
 
-#include "zypp/base/Regex.h"
-#include "zypp/base/String.h"
-#include "zypp/base/LogTools.h"
-#include "zypp/base/IOStream.h"
-#include "zypp/PoolItem.h"
-#include "zypp/PoolQueryUtil.tcc"
-#include "zypp/ZYppCallbacks.h"
-#include "zypp/sat/SolvAttr.h"
-#include "zypp/sat/Solvable.h"
-#include "zypp/PathInfo.h"
+#include <zypp/base/Regex.h>
+#include <zypp/base/String.h>
+#include <zypp/base/LogTools.h>
+#include <zypp/base/IOStream.h>
+#include <zypp/PoolItem.h>
+#include <zypp/PoolQueryUtil.tcc>
+#include <zypp/ZYppCallbacks.h>
+#include <zypp/sat/SolvAttr.h>
+#include <zypp/sat/Solvable.h>
+#include <zypp/PathInfo.h>
 
 #undef ZYPP_BASE_LOGGER_LOGGROUP
 #define ZYPP_BASE_LOGGER_LOGGROUP "locks"
 
-#include "zypp/Locks.h"
+#include <zypp/Locks.h>
 
 using std::endl;
 

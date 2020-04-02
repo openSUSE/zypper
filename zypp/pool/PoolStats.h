@@ -14,10 +14,10 @@
 
 #include <iosfwd>
 
-#include "zypp/base/Iterator.h"
-#include "zypp/base/Functional.h"
-#include "zypp/base/Counter.h"
-#include "zypp/ResObject.h"
+#include <zypp/base/Iterator.h>
+#include <zypp/base/Functional.h>
+#include <zypp/base/Counter.h>
+#include <zypp/ResObject.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

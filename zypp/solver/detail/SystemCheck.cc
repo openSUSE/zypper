@@ -15,15 +15,15 @@
 
 #define ZYPP_USE_RESOLVER_INTERNALS
 
-#include "zypp/base/LogTools.h"
-#include "zypp/base/IOStream.h"
-#include "zypp/base/String.h"
+#include <zypp/base/LogTools.h>
+#include <zypp/base/IOStream.h>
+#include <zypp/base/String.h>
 
-#include "zypp/ZYppFactory.h"
-#include "zypp/ZConfig.h"
-#include "zypp/Pathname.h"
-#include "zypp/PathInfo.h"
-#include "zypp/solver/detail/SystemCheck.h"
+#include <zypp/ZYppFactory.h>
+#include <zypp/ZConfig.h>
+#include <zypp/Pathname.h>
+#include <zypp/PathInfo.h>
+#include <zypp/solver/detail/SystemCheck.h>
 
 using std::endl;
 

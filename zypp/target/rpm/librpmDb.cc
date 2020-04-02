@@ -13,11 +13,11 @@
 
 #include <iostream>
 
-#include "zypp/base/Logger.h"
-#include "zypp/PathInfo.h"
-#include "zypp/target/rpm/librpmDb.h"
-#include "zypp/target/rpm/RpmHeader.h"
-#include "zypp/target/rpm/RpmException.h"
+#include <zypp/base/Logger.h>
+#include <zypp/PathInfo.h>
+#include <zypp/target/rpm/librpmDb.h>
+#include <zypp/target/rpm/RpmHeader.h>
+#include <zypp/target/rpm/RpmException.h>
 
 #undef ZYPP_BASE_LOGGER_LOGGROUP
 #define ZYPP_BASE_LOGGER_LOGGROUP "librpmDb"

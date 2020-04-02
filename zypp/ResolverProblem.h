@@ -13,8 +13,8 @@
 #include <string>
 #include <vector>
 
-#include "zypp/ProblemTypes.h"
-#include "zypp/ProblemSolution.h"
+#include <zypp/ProblemTypes.h>
+#include <zypp/ProblemSolution.h>
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp

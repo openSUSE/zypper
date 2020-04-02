@@ -16,11 +16,11 @@
 #include <string>
 #include <set>
 
-#include "zypp/base/PtrTypes.h"
+#include <zypp/base/PtrTypes.h>
 
-#include "zypp/PoolItem.h"
-#include "zypp/Edition.h"
-#include "zypp/Date.h"
+#include <zypp/PoolItem.h>
+#include <zypp/Edition.h>
+#include <zypp/Date.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

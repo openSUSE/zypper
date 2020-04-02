@@ -14,18 +14,18 @@ extern "C"
 #include <solv/solver.h>
 }
 #include <iostream>
-#include "zypp/base/LogTools.h"
-#include "zypp/base/SerialNumber.h"
-#include "zypp/base/DefaultIntegral.h"
-#include "zypp/base/NonCopyable.h"
-#include "zypp/base/Hash.h"
+#include <zypp/base/LogTools.h>
+#include <zypp/base/SerialNumber.h>
+#include <zypp/base/DefaultIntegral.h>
+#include <zypp/base/NonCopyable.h>
+#include <zypp/base/Hash.h>
 
-#include "zypp/sat/detail/PoolImpl.h"
-#include "zypp/sat/Transaction.h"
-#include "zypp/sat/Solvable.h"
-#include "zypp/sat/Queue.h"
-#include "zypp/sat/Map.h"
-#include "zypp/ResPool.h"
+#include <zypp/sat/detail/PoolImpl.h>
+#include <zypp/sat/Transaction.h>
+#include <zypp/sat/Solvable.h>
+#include <zypp/sat/Queue.h>
+#include <zypp/sat/Map.h>
+#include <zypp/ResPool.h>
 
 using std::endl;
 

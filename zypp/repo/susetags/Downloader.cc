@@ -2,20 +2,20 @@
 #include <iostream>
 #include <fstream>
 
-#include "zypp/base/LogTools.h"
-#include "zypp/base/Gettext.h"
-#include "zypp/base/String.h"
-#include "zypp/base/Regex.h"
-#include "zypp/OnMediaLocation.h"
-#include "zypp/MediaSetAccess.h"
-#include "zypp/Fetcher.h"
-#include "zypp/Locale.h"
-#include "zypp/ZConfig.h"
-#include "zypp/repo/MediaInfoDownloader.h"
-#include "zypp/repo/susetags/Downloader.h"
-#include "zypp/parser/ParseException.h"
-#include "zypp/parser/susetags/RepoIndex.h"
-#include "zypp/base/UserRequestException.h"
+#include <zypp/base/LogTools.h>
+#include <zypp/base/Gettext.h>
+#include <zypp/base/String.h>
+#include <zypp/base/Regex.h>
+#include <zypp/OnMediaLocation.h>
+#include <zypp/MediaSetAccess.h>
+#include <zypp/Fetcher.h>
+#include <zypp/Locale.h>
+#include <zypp/ZConfig.h>
+#include <zypp/repo/MediaInfoDownloader.h>
+#include <zypp/repo/susetags/Downloader.h>
+#include <zypp/parser/ParseException.h>
+#include <zypp/parser/susetags/RepoIndex.h>
+#include <zypp/base/UserRequestException.h>
 
 using namespace zypp::parser;
 using namespace zypp::parser::susetags;

@@ -12,8 +12,8 @@
 #include <list>
 #include <string>
 
-#include "zypp/ProblemTypes.h"
-#include "zypp/ResolverProblem.h"
+#include <zypp/ProblemTypes.h>
+#include <zypp/ResolverProblem.h>
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp

@@ -30,8 +30,8 @@
 #include <list>
 #include <map>
 
-#include "zypp/solver/Types.h"
-#include "zypp/base/SerialNumber.h"
+#include <zypp/solver/Types.h>
+#include <zypp/base/SerialNumber.h>
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp

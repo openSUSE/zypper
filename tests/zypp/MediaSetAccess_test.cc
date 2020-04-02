@@ -4,9 +4,9 @@
 #include <boost/test/parameterized_test.hpp>
 #include <boost/test/unit_test_log.hpp>
 
-#include "zypp/MediaSetAccess.h"
-#include "zypp/Url.h"
-#include "zypp/PathInfo.h"
+#include <zypp/MediaSetAccess.h>
+#include <zypp/Url.h>
+#include <zypp/PathInfo.h>
 
 #include "WebServer.h"
 

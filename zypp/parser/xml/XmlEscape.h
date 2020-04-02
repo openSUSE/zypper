@@ -14,7 +14,7 @@
 
 #include <sstream>
 #include <string>
-#include "zypp/APIConfig.h"
+#include <zypp/APIConfig.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

@@ -10,7 +10,7 @@
  *
 */
 
-#include "zypp/ResObject.h"
+#include <zypp/ResObject.h>
 
 using namespace zypp;
 
@@ -35,7 +35,7 @@ namespace zypp
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
 
-#include "zypp/ResObjects.h"
+#include <zypp/ResObjects.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

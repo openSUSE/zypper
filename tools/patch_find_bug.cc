@@ -1,8 +1,8 @@
 #define INCLUDE_TESTSETUP_WITHOUT_BOOST
-#include "zypp/../tests/lib/TestSetup.h"
+#include "../tests/lib/TestSetup.h"
 #undef  INCLUDE_TESTSETUP_WITHOUT_BOOST
 
-#include "zypp/PoolQuery.h"
+#include <zypp/PoolQuery.h>
 
 using namespace zypp;
 using std::flush;

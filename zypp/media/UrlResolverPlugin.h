@@ -16,9 +16,9 @@
 #include <map>
 #include <string>
 
-#include "zypp/base/PtrTypes.h"
-#include "zypp/Url.h"
-#include "zypp/PathInfo.h"
+#include <zypp/base/PtrTypes.h>
+#include <zypp/Url.h>
+#include <zypp/PathInfo.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

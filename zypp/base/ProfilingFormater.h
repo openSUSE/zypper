@@ -14,7 +14,7 @@
 
 #include <iosfwd>
 #include <string>
-#include "zypp/base/LogControl.h"
+#include <zypp/base/LogControl.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

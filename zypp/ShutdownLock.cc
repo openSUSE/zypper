@@ -1,6 +1,6 @@
 #include "ShutdownLock_p.h"
 
-#include "zypp/ExternalProgram.h"
+#include <zypp/ExternalProgram.h>
 #include <iostream>
 
 zypp::ShutdownLock::ShutdownLock(const std::string &reason)

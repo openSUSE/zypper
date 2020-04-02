@@ -13,12 +13,12 @@
 
 #include <iosfwd>
 
-#include "zypp/APIConfig.h"
-#include "zypp/base/PtrTypes.h"
-#include "zypp/base/InputStream.h"
-#include "zypp/base/String.h"
+#include <zypp/APIConfig.h>
+#include <zypp/base/PtrTypes.h>
+#include <zypp/base/InputStream.h>
+#include <zypp/base/String.h>
 
-#include "zypp/sat/SolvableType.h"
+#include <zypp/sat/SolvableType.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

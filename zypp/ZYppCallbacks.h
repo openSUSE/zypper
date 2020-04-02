@@ -12,17 +12,17 @@
 #ifndef ZYPP_ZYPPCALLBACKS_H
 #define ZYPP_ZYPPCALLBACKS_H
 
-#include "zypp/base/EnumClass.h"
-#include "zypp/Callback.h"
-#include "zypp/UserData.h"
-#include "zypp/Resolvable.h"
-#include "zypp/RepoInfo.h"
-#include "zypp/Pathname.h"
-#include "zypp/Package.h"
-#include "zypp/Patch.h"
-#include "zypp/Url.h"
-#include "zypp/ProgressData.h"
-#include "zypp/media/MediaUserAuth.h"
+#include <zypp/base/EnumClass.h>
+#include <zypp/Callback.h>
+#include <zypp/UserData.h>
+#include <zypp/Resolvable.h>
+#include <zypp/RepoInfo.h>
+#include <zypp/Pathname.h>
+#include <zypp/Package.h>
+#include <zypp/Patch.h>
+#include <zypp/Url.h>
+#include <zypp/ProgressData.h>
+#include <zypp/media/MediaUserAuth.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

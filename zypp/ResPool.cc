@@ -10,14 +10,14 @@
  *
 */
 #include <iostream>
-//#include "zypp/base/Logger.h"
+//#include <zypp/base/Logger.h>
 
-#include "zypp/base/SerialNumber.h"
+#include <zypp/base/SerialNumber.h>
 
-#include "zypp/ZYppFactory.h"
-#include "zypp/ResPool.h"
-#include "zypp/pool/PoolImpl.h"
-#include "zypp/pool/PoolStats.h"
+#include <zypp/ZYppFactory.h>
+#include <zypp/ResPool.h>
+#include <zypp/pool/PoolImpl.h>
+#include <zypp/pool/PoolStats.h>
 
 using std::endl;
 

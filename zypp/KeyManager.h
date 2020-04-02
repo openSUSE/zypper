@@ -12,9 +12,9 @@
 #ifndef ZYPP_KEYMANAGER_H
 #define ZYPP_KEYMANAGER_H
 
-#include "zypp/base/PtrTypes.h"
-#include "zypp/Pathname.h"
-#include "zypp/PublicKey.h"
+#include <zypp/base/PtrTypes.h>
+#include <zypp/Pathname.h>
+#include <zypp/PublicKey.h>
 
 #include <memory>
 

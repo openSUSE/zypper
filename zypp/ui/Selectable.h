@@ -14,13 +14,13 @@
 
 #include <iosfwd>
 
-#include "zypp/base/ReferenceCounted.h"
-#include "zypp/base/NonCopyable.h"
-#include "zypp/base/PtrTypes.h"
-#include "zypp/base/Iterator.h"
+#include <zypp/base/ReferenceCounted.h>
+#include <zypp/base/NonCopyable.h>
+#include <zypp/base/PtrTypes.h>
+#include <zypp/base/Iterator.h>
 
-#include "zypp/ui/SelectableTraits.h"
-#include "zypp/ui/Status.h"
+#include <zypp/ui/SelectableTraits.h>
+#include <zypp/ui/Status.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

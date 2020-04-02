@@ -12,16 +12,16 @@
 #include <iostream>
 #include <sstream>
 
-#include "zypp/base/LogTools.h"
-#include "zypp/base/String.h"
+#include <zypp/base/LogTools.h>
+#include <zypp/base/String.h>
 
-#include "zypp/sat/detail/PoolImpl.h"
+#include <zypp/sat/detail/PoolImpl.h>
 
-#include "zypp/sat/Pool.h"
-#include "zypp/sat/LookupAttr.h"
-#include "zypp/base/StrMatcher.h"
+#include <zypp/sat/Pool.h>
+#include <zypp/sat/LookupAttr.h>
+#include <zypp/base/StrMatcher.h>
 
-#include "zypp/CheckSum.h"
+#include <zypp/CheckSum.h>
 
 using std::endl;
 

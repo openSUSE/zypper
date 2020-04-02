@@ -15,9 +15,9 @@
 #include <iosfwd>
 #include <ostream> //for std::endl
 
-#include "zypp/base/Logger.h"
-#include "zypp/base/PtrTypes.h"
-#include "zypp/Pathname.h"
+#include <zypp/base/Logger.h>
+#include <zypp/base/PtrTypes.h>
+#include <zypp/Pathname.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

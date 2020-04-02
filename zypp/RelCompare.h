@@ -14,7 +14,7 @@
 
 #include <functional>
 
-#include "zypp/Rel.h"
+#include <zypp/Rel.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

@@ -13,14 +13,14 @@
 #define ZYPP_SAT_REPOSITORY_H
 
 #include <iosfwd>
-#include "zypp/base/Iterator.h"
-#include "zypp/Pathname.h"
-#include "zypp/sat/detail/PoolMember.h"
-#include "zypp/sat/LookupAttr.h"     // LookupAttrTools.h included at EOF
-#include "zypp/sat/Solvable.h"
-#include "zypp/RepoInfo.h"
-#include "zypp/Date.h"
-#include "zypp/CpeId.h"
+#include <zypp/base/Iterator.h>
+#include <zypp/Pathname.h>
+#include <zypp/sat/detail/PoolMember.h>
+#include <zypp/sat/LookupAttr.h>     // LookupAttrTools.h included at EOF
+#include <zypp/sat/Solvable.h>
+#include <zypp/RepoInfo.h>
+#include <zypp/Date.h>
+#include <zypp/CpeId.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -499,6 +499,6 @@ namespace zypp
 ///////////////////////////////////////////////////////////////////
 
 // Late include as sat::ArrayAttr requires Repository.h
-#include "zypp/sat/LookupAttrTools.h"
+#include <zypp/sat/LookupAttrTools.h>
 
 #endif // ZYPP_SAT_REPOSITORY_H

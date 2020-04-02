@@ -12,8 +12,8 @@
 #ifndef ZYPP_TARGET_TARGETCALLBACKRECEIVER_H
 #define ZYPP_TARGET_TARGETCALLBACKRECEIVER_H
 
-#include "zypp/ZYppCallbacks.h"
-#include "zypp/target/rpm/RpmCallbacks.h"
+#include <zypp/ZYppCallbacks.h>
+#include <zypp/target/rpm/RpmCallbacks.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

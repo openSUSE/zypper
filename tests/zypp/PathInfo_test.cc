@@ -6,11 +6,11 @@
 
 #include <boost/test/unit_test.hpp>
 
-#include "zypp/base/Logger.h"
-#include "zypp/base/LogControl.h"
-#include "zypp/base/Exception.h"
-#include "zypp/PathInfo.h"
-#include "zypp/TmpPath.h"
+#include <zypp/base/Logger.h>
+#include <zypp/base/LogControl.h>
+#include <zypp/base/Exception.h>
+#include <zypp/PathInfo.h>
+#include <zypp/TmpPath.h>
 
 using boost::unit_test::test_suite;
 using boost::unit_test::test_case;

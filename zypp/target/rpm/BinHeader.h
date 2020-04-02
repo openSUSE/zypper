@@ -22,10 +22,10 @@ extern "C"
 #include <vector>
 #include <list>
 
-#include "zypp/base/ReferenceCounted.h"
-#include "zypp/base/NonCopyable.h"
-#include "zypp/base/PtrTypes.h"
-#include "zypp/target/rpm/librpm.h"
+#include <zypp/base/ReferenceCounted.h>
+#include <zypp/base/NonCopyable.h>
+#include <zypp/base/PtrTypes.h>
+#include <zypp/target/rpm/librpm.h>
 
 namespace zypp
 {

@@ -18,13 +18,13 @@
 #include <set>
 #include <string>
 
-#include "zypp/base/Iterable.h"
-#include "zypp/base/PtrTypes.h"
-#include "zypp/base/Exception.h"
-#include "zypp/base/DrunkenBishop.h"
-#include "zypp/Pathname.h"
-#include "zypp/Edition.h"
-#include "zypp/Date.h"
+#include <zypp/base/Iterable.h>
+#include <zypp/base/PtrTypes.h>
+#include <zypp/base/Exception.h>
+#include <zypp/base/DrunkenBishop.h>
+#include <zypp/Pathname.h>
+#include <zypp/Edition.h>
+#include <zypp/Date.h>
 
 struct _gpgme_key;
 struct _gpgme_subkey;

@@ -16,9 +16,9 @@
 #include <string>
 #include <functional>
 
-#include "zypp/IdStringType.h"
-#include "zypp/RelCompare.h"
-#include "zypp/Range.h"
+#include <zypp/IdStringType.h>
+#include <zypp/RelCompare.h>
+#include <zypp/Range.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

@@ -21,9 +21,9 @@
 #include <boost/format.hpp>
 #include <boost/utility/string_ref.hpp>
 
-#include "zypp/base/Easy.h"
-#include "zypp/base/PtrTypes.h"
-#include "zypp/base/Function.h"
+#include <zypp/base/Easy.h>
+#include <zypp/base/PtrTypes.h>
+#include <zypp/base/Function.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace boost { namespace logic { class tribool; } }

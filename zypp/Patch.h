@@ -12,10 +12,10 @@
 #ifndef ZYPP_PATCH_H
 #define ZYPP_PATCH_H
 
-#include "zypp/base/Flags.h"
-#include "zypp/sat/SolvAttr.h"
-#include "zypp/ResObject.h"
-#include "zypp/sat/SolvableSet.h"
+#include <zypp/base/Flags.h>
+#include <zypp/sat/SolvAttr.h>
+#include <zypp/ResObject.h>
+#include <zypp/sat/SolvableSet.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

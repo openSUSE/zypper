@@ -14,10 +14,10 @@
 
 #include <iosfwd>
 
-#include "zypp/base/PtrTypes.h"
+#include <zypp/base/PtrTypes.h>
 
-#include "zypp/Pathname.h"
-#include "zypp/Locale.h"
+#include <zypp/Pathname.h>
+#include <zypp/Locale.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

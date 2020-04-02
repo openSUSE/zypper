@@ -14,7 +14,7 @@
 
 #include <iosfwd>
 
-#include "zypp/base/Unit.h"
+#include <zypp/base/Unit.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

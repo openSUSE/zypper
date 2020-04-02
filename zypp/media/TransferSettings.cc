@@ -1,14 +1,14 @@
 #include <iostream>
 #include <sstream>
 
-#include "zypp/base/String.h"
-#include "zypp/base/Logger.h"
-#include "zypp/base/WatchFile.h"
-#include "zypp/base/ReferenceCounted.h"
-#include "zypp/base/NonCopyable.h"
-#include "zypp/ExternalProgram.h"
-#include "zypp/media/TransferSettings.h"
-#include "zypp/ZConfig.h"
+#include <zypp/base/String.h>
+#include <zypp/base/Logger.h>
+#include <zypp/base/WatchFile.h>
+#include <zypp/base/ReferenceCounted.h>
+#include <zypp/base/NonCopyable.h>
+#include <zypp/ExternalProgram.h>
+#include <zypp/media/TransferSettings.h>
+#include <zypp/ZConfig.h>
 
 using std::endl;
 

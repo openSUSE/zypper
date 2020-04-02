@@ -8,13 +8,13 @@
 \---------------------------------------------------------------------*/
 
 #include <fstream>
-#include "zypp/base/String.h"
-#include "zypp/base/Logger.h"
-#include "zypp/base/Gettext.h"
+#include <zypp/base/String.h>
+#include <zypp/base/Logger.h>
+#include <zypp/base/Gettext.h>
 
 #include "Downloader.h"
-#include "zypp/KeyContext.h"
-#include "zypp/ZYppCallbacks.h"
+#include <zypp/KeyContext.h>
+#include <zypp/ZYppCallbacks.h>
 
 using std::endl;
 

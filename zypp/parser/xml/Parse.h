@@ -14,9 +14,9 @@
 
 #include <iosfwd>
 
-#include "zypp/parser/xml/Reader.h"
-#include "zypp/parser/xml/ParseDef.h"
-#include "zypp/parser/xml/ParseDefConsume.h"
+#include <zypp/parser/xml/Reader.h>
+#include <zypp/parser/xml/ParseDef.h>
+#include <zypp/parser/xml/ParseDefConsume.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

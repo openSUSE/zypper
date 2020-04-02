@@ -6,13 +6,13 @@
 
 #include <boost/test/unit_test.hpp>
 
-#include "zypp/base/Logger.h"
-#include "zypp/base/Exception.h"
-#include "zypp/PathInfo.h"
-#include "zypp/TmpPath.h"
-#include "zypp/Package.h"
-#include "zypp/RepoManager.h"
-#include "zypp/sat/Pool.h"
+#include <zypp/base/Logger.h>
+#include <zypp/base/Exception.h>
+#include <zypp/PathInfo.h>
+#include <zypp/TmpPath.h>
+#include <zypp/Package.h>
+#include <zypp/RepoManager.h>
+#include <zypp/sat/Pool.h>
 #include "KeyRingTestReceiver.h"
 
 #include "TestSetup.h"

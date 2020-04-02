@@ -13,8 +13,8 @@
 
 #include <iostream>
 
-#include "zypp/Target.h"
-#include "zypp/target/TargetImpl.h"
+#include <zypp/Target.h>
+#include <zypp/target/TargetImpl.h>
 
 using std::endl;
 

@@ -1,7 +1,7 @@
 #include <boost/test/unit_test.hpp>
 #include <iostream>
 #include <set>
-#include "zypp/UserData.h"
+#include <zypp/UserData.h>
 
 using std::cout;
 using std::endl;

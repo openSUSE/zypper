@@ -14,8 +14,8 @@
 
 #include <iosfwd>
 
-#include "zypp/base/Exception.h"
-#include "zypp/ZYpp.h"
+#include <zypp/base/Exception.h>
+#include <zypp/ZYpp.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

@@ -16,14 +16,14 @@
 #include <fstream>
 #include <string>
 
-#include "zypp/base/Logger.h"
-#include "zypp/base/LogControl.h"
-#include "zypp/base/String.h"
-#include "zypp/Date.h"
-#include "zypp/PathInfo.h"
+#include <zypp/base/Logger.h>
+#include <zypp/base/LogControl.h>
+#include <zypp/base/String.h>
+#include <zypp/Date.h>
+#include <zypp/PathInfo.h>
 
 
-#include "zypp/base/ProfilingFormater.h"
+#include <zypp/base/ProfilingFormater.h>
 
 using std::endl;
 

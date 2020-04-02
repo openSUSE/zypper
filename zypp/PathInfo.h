@@ -27,9 +27,9 @@ extern "C"
 #include <set>
 #include <map>
 
-#include "zypp/Pathname.h"
-#include "zypp/CheckSum.h"
-#include "zypp/ByteCount.h"
+#include <zypp/Pathname.h>
+#include <zypp/CheckSum.h>
+#include <zypp/ByteCount.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

@@ -11,9 +11,9 @@
 */
 #include <iostream>
 
-#include "zypp/base/String.h"
-#include "zypp/Pathname.h"
-#include "zypp/Url.h"
+#include <zypp/base/String.h>
+#include <zypp/Pathname.h>
+#include <zypp/Url.h>
 
 using std::string;
 

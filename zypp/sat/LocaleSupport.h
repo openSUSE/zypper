@@ -14,10 +14,10 @@
 
 #include <iosfwd>
 
-#include "zypp/sat/detail/PoolMember.h"
-#include "zypp/sat/SolvIterMixin.h"
-#include "zypp/Locale.h"
-#include "zypp/Filter.h"
+#include <zypp/sat/detail/PoolMember.h>
+#include <zypp/sat/SolvIterMixin.h>
+#include <zypp/Locale.h>
+#include <zypp/Filter.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

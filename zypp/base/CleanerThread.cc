@@ -9,7 +9,7 @@
 /** \file	zypp/base/CleanerThread.cc
  */
 
-#include "zypp/base/CleanerThread_p.h"
+#include <zypp/base/CleanerThread_p.h>
 #include <algorithm>
 #include <thread>
 #include <mutex>

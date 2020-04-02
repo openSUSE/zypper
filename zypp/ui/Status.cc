@@ -11,9 +11,9 @@
 */
 #include <iostream>
 
-#include "zypp/base/Logger.h"
+#include <zypp/base/Logger.h>
 
-#include "zypp/ui/Status.h"
+#include <zypp/ui/Status.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

@@ -12,7 +12,7 @@
 #ifndef ZYPP_MISC_H
 #define ZYPP_MISC_H
 
-#include "zypp/misc/DefaultLoadSystem.h"
-#include "zypp/misc/CheckAccessDeleted.h"
+#include <zypp/misc/DefaultLoadSystem.h>
+#include <zypp/misc/CheckAccessDeleted.h>
 
 #endif // ZYPP_MISC_H

@@ -15,10 +15,10 @@
 
 #include <iosfwd>
 
-#include "zypp/Url.h"
-#include "zypp/Callback.h"
-#include "zypp/base/Exception.h"
-#include "zypp/Pathname.h"
+#include <zypp/Url.h>
+#include <zypp/Callback.h>
+#include <zypp/base/Exception.h>
+#include <zypp/Pathname.h>
 
 namespace zypp
 {

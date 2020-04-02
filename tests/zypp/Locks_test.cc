@@ -4,10 +4,10 @@
 #include <boost/test/unit_test.hpp>
 #include <list>
 
-#include "zypp/PoolQuery.h"
-#include "zypp/PoolQueryUtil.tcc"
-#include "zypp/TmpPath.h"
-#include "zypp/Locks.h"
+#include <zypp/PoolQuery.h>
+#include <zypp/PoolQueryUtil.tcc>
+#include <zypp/TmpPath.h>
+#include <zypp/Locks.h>
 #include "TestSetup.h"
 
 #define BOOST_TEST_MODULE Locks

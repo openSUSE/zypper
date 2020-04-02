@@ -10,16 +10,16 @@
  *
 */
 
-#include "zypp/base/String.h"
-#include "zypp/base/Logger.h"
-#include "zypp/base/Regex.h"
-#include "zypp/ui/Selectable.h"
-#include "zypp/PurgeKernels.h"
-#include "zypp/PoolQuery.h"
-#include "zypp/ResPool.h"
-#include "zypp/Resolver.h"
-#include "zypp/Filter.h"
-#include "zypp/ZConfig.h"
+#include <zypp/base/String.h>
+#include <zypp/base/Logger.h>
+#include <zypp/base/Regex.h>
+#include <zypp/ui/Selectable.h>
+#include <zypp/PurgeKernels.h>
+#include <zypp/PoolQuery.h>
+#include <zypp/ResPool.h>
+#include <zypp/Resolver.h>
+#include <zypp/Filter.h>
+#include <zypp/ZConfig.h>
 
 #include <iostream>
 #include <fstream>

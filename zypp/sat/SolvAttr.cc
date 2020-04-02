@@ -16,8 +16,8 @@ extern "C"
 
 #include <iostream>
 
-#include "zypp/base/String.h"
-#include "zypp/sat/SolvAttr.h"
+#include <zypp/base/String.h>
+#include <zypp/sat/SolvAttr.h>
 
 using std::endl;
 

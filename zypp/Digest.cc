@@ -26,8 +26,8 @@
 #include <fstream>
 #endif
 
-#include "zypp/Digest.h"
-#include "zypp/base/PtrTypes.h"
+#include <zypp/Digest.h>
+#include <zypp/base/PtrTypes.h>
 
 using std::endl;
 

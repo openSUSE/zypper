@@ -21,10 +21,10 @@
  * 02111-1307, USA.
  */
 
-#include "zypp/base/LogTools.h"
+#include <zypp/base/LogTools.h>
 
-#include "zypp/ResolverProblem.h"
-#include "zypp/ProblemSolution.h"
+#include <zypp/ResolverProblem.h>
+#include <zypp/ProblemSolution.h>
 
 using std::endl;
 

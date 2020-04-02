@@ -12,7 +12,7 @@
 #ifndef ZYPP_MEDIA_MEDIANFS_H
 #define ZYPP_MEDIA_MEDIANFS_H
 
-#include "zypp/media/MediaHandler.h"
+#include <zypp/media/MediaHandler.h>
 
 /**
  * Value of NFS mount minor timeout (passed to <code>timeo</code> option

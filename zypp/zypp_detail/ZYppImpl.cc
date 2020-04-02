@@ -11,20 +11,20 @@
 */
 
 #include <iostream>
-#include "zypp/TmpPath.h"
-#include "zypp/base/Logger.h"
-#include "zypp/base/String.h"
-#include "zypp/base/Env.h"
+#include <zypp/TmpPath.h>
+#include <zypp/base/Logger.h>
+#include <zypp/base/String.h>
+#include <zypp/base/Env.h>
 
-#include "zypp/zypp_detail/ZYppImpl.h"
-#include "zypp/target/TargetImpl.h"
-#include "zypp/ZYpp.h"
-#include "zypp/DiskUsageCounter.h"
-#include "zypp/ZConfig.h"
-#include "zypp/sat/Pool.h"
-#include "zypp/PoolItem.h"
+#include <zypp/zypp_detail/ZYppImpl.h>
+#include <zypp/target/TargetImpl.h>
+#include <zypp/ZYpp.h>
+#include <zypp/DiskUsageCounter.h>
+#include <zypp/ZConfig.h>
+#include <zypp/sat/Pool.h>
+#include <zypp/PoolItem.h>
 
-#include "zypp/ZYppCallbacks.h"	// JobReport::instance
+#include <zypp/ZYppCallbacks.h>	// JobReport::instance
 
 using std::endl;
 

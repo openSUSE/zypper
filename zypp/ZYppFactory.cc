@@ -17,16 +17,16 @@ extern "C"
 #include <fstream>
 #include <signal.h>
 
-#include "zypp/base/Logger.h"
-#include "zypp/base/Gettext.h"
-#include "zypp/base/IOStream.h"
-#include "zypp/base/Functional.h"
-#include "zypp/base/Backtrace.h"
-#include "zypp/PathInfo.h"
+#include <zypp/base/Logger.h>
+#include <zypp/base/Gettext.h>
+#include <zypp/base/IOStream.h>
+#include <zypp/base/Functional.h>
+#include <zypp/base/Backtrace.h>
+#include <zypp/PathInfo.h>
 
-#include "zypp/ZYppFactory.h"
-#include "zypp/zypp_detail/ZYppImpl.h"
-#include "zypp/zypp_detail/ZYppReadOnlyHack.h"
+#include <zypp/ZYppFactory.h>
+#include <zypp/zypp_detail/ZYppImpl.h>
+#include <zypp/zypp_detail/ZYppReadOnlyHack.h>
 
 #include <boost/interprocess/sync/file_lock.hpp>
 #include <boost/interprocess/sync/scoped_lock.hpp>

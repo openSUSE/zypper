@@ -12,8 +12,8 @@
 #ifndef ZYPP_SAT_LOOKUPATTRTOOLS_H
 #define ZYPP_SAT_LOOKUPATTRTOOLS_H
 
-#include "zypp/sat/LookupAttr.h"
-#include "zypp/Repository.h"
+#include <zypp/sat/LookupAttr.h>
+#include <zypp/Repository.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

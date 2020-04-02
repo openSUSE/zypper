@@ -4,8 +4,8 @@
 #include <zypp/target/rpm/librpmDb.h>
 #include <zypp/parser/ProductFileReader.h>
 
-#include "zypp/sat/WhatObsoletes.h"
-#include "zypp/ExternalProgram.h"
+#include <zypp/sat/WhatObsoletes.h>
+#include <zypp/ExternalProgram.h>
 
 ///////////////////////////////////////////////////////////////////
 

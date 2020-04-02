@@ -10,9 +10,9 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
-#include "zypp/base/Logger.h"
+#include <zypp/base/Logger.h>
 
-#include "zypp/ProvideFilePolicy.h"
+#include <zypp/ProvideFilePolicy.h>
 
 using std::endl;
 

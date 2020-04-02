@@ -29,28 +29,28 @@ extern "C"
 #include <vector>
 #include <algorithm>
 
-#include "zypp/base/Logger.h"
-#include "zypp/base/String.h"
-#include "zypp/base/Gettext.h"
-#include "zypp/base/LocaleGuard.h"
-#include "zypp/base/DtorReset.h"
+#include <zypp/base/Logger.h>
+#include <zypp/base/String.h>
+#include <zypp/base/Gettext.h>
+#include <zypp/base/LocaleGuard.h>
+#include <zypp/base/DtorReset.h>
 
-#include "zypp/Date.h"
-#include "zypp/Pathname.h"
-#include "zypp/PathInfo.h"
-#include "zypp/PublicKey.h"
-#include "zypp/ProgressData.h"
+#include <zypp/Date.h>
+#include <zypp/Pathname.h>
+#include <zypp/PathInfo.h>
+#include <zypp/PublicKey.h>
+#include <zypp/ProgressData.h>
 
-#include "zypp/target/rpm/RpmDb.h"
-#include "zypp/target/rpm/RpmCallbacks.h"
+#include <zypp/target/rpm/RpmDb.h>
+#include <zypp/target/rpm/RpmCallbacks.h>
 
-#include "zypp/HistoryLog.h"
-#include "zypp/target/rpm/librpmDb.h"
-#include "zypp/target/rpm/RpmException.h"
-#include "zypp/TmpPath.h"
-#include "zypp/KeyRing.h"
-#include "zypp/ZYppFactory.h"
-#include "zypp/ZConfig.h"
+#include <zypp/HistoryLog.h>
+#include <zypp/target/rpm/librpmDb.h>
+#include <zypp/target/rpm/RpmException.h>
+#include <zypp/TmpPath.h>
+#include <zypp/KeyRing.h>
+#include <zypp/ZYppFactory.h>
+#include <zypp/ZConfig.h>
 
 using std::endl;
 using namespace zypp::filesystem;

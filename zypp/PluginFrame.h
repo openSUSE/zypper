@@ -16,9 +16,9 @@
 #include <string>
 #include <map>
 
-#include "zypp/base/PtrTypes.h"
+#include <zypp/base/PtrTypes.h>
 
-#include "zypp/PluginFrameException.h"
+#include <zypp/PluginFrameException.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

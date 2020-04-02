@@ -16,14 +16,14 @@
 #include <set>
 #include <map>
 
-#include "zypp/base/Regex.h"
-#include "zypp/base/PtrTypes.h"
-#include "zypp/base/Function.h"
+#include <zypp/base/Regex.h>
+#include <zypp/base/PtrTypes.h>
+#include <zypp/base/Function.h>
 
-#include "zypp/sat/SolvIterMixin.h"
-#include "zypp/sat/LookupAttr.h"
-#include "zypp/base/StrMatcher.h"
-#include "zypp/sat/Pool.h"
+#include <zypp/sat/SolvIterMixin.h>
+#include <zypp/sat/LookupAttr.h>
+#include <zypp/base/StrMatcher.h>
+#include <zypp/sat/Pool.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

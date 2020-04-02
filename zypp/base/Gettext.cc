@@ -17,7 +17,7 @@ extern "C" {
 #include <libintl.h>
 }
 
-#include "zypp/base/Gettext.h"
+#include <zypp/base/Gettext.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

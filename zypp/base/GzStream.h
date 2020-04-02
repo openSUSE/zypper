@@ -26,8 +26,8 @@
 #include <vector>
 #include <zlib.h>
 
-#include "zypp/base/SimpleStreambuf.h"
-#include "zypp/base/fXstream.h"
+#include <zypp/base/SimpleStreambuf.h>
+#include <zypp/base/fXstream.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

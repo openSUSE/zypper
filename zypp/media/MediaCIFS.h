@@ -12,7 +12,7 @@
 #ifndef ZYPP_MEDIA_MEDIACIFS_H
 #define ZYPP_MEDIA_MEDIACIFS_H
 
-#include "zypp/media/MediaHandler.h"
+#include <zypp/media/MediaHandler.h>
 
 namespace zypp {
   namespace media {

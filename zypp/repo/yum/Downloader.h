@@ -10,15 +10,15 @@
 #ifndef ZYPP_SOURCE_YUM_DOWNLOADER
 #define ZYPP_SOURCE_YUM_DOWNLOADER
 
-#include "zypp/Url.h"
-#include "zypp/Pathname.h"
-#include "zypp/Fetcher.h"
-#include "zypp/OnMediaLocation.h"
-#include "zypp/MediaSetAccess.h"
-#include "zypp/ProgressData.h"
-#include "zypp/RepoInfo.h"
-#include "zypp/RepoStatus.h"
-#include "zypp/repo/Downloader.h"
+#include <zypp/Url.h>
+#include <zypp/Pathname.h>
+#include <zypp/Fetcher.h>
+#include <zypp/OnMediaLocation.h>
+#include <zypp/MediaSetAccess.h>
+#include <zypp/ProgressData.h>
+#include <zypp/RepoInfo.h>
+#include <zypp/RepoStatus.h>
+#include <zypp/repo/Downloader.h>
 
 namespace zypp
 {

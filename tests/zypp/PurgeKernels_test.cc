@@ -1,5 +1,5 @@
 #include "TestSetup.h"
-#include "zypp/PurgeKernels.h"
+#include <zypp/PurgeKernels.h>
 
 #include <boost/test/data/test_case.hpp>
 

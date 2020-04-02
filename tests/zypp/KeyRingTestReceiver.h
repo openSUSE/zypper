@@ -2,10 +2,10 @@
 #ifndef ZYPP_KEYRING_TEST_RECEIVER_H
 #define ZYPP_KEYRING_TEST_RECEIVER_H
 
-#include "zypp/Callback.h"
-#include "zypp/KeyRing.h"
-#include "zypp/PublicKey.h"
-#include "zypp/KeyContext.h"
+#include <zypp/Callback.h>
+#include <zypp/KeyRing.h>
+#include <zypp/PublicKey.h>
+#include <zypp/KeyContext.h>
 
 /**
  * Keyring Callback Receiver with some features

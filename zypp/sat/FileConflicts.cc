@@ -11,11 +11,11 @@
 #include <iostream>
 #include <string>
 
-#include "zypp/sat/FileConflicts.h"
-#include "zypp/base/LogTools.h"
-#include "zypp/base/Gettext.h"
-#include "zypp/base/Xml.h"
-#include "zypp/CheckSum.h"
+#include <zypp/sat/FileConflicts.h>
+#include <zypp/base/LogTools.h>
+#include <zypp/base/Gettext.h>
+#include <zypp/base/Xml.h>
+#include <zypp/CheckSum.h>
 
 using std::endl;
 

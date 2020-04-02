@@ -13,12 +13,12 @@
 #ifndef ZYPP_PARSER_HISTORYLOGREADER_H_
 #define ZYPP_PARSER_HISTORYLOGREADER_H_
 
-#include "zypp/base/PtrTypes.h"
-#include "zypp/base/Flags.h"
-#include "zypp/ProgressData.h"
-#include "zypp/Pathname.h"
+#include <zypp/base/PtrTypes.h>
+#include <zypp/base/Flags.h>
+#include <zypp/ProgressData.h>
+#include <zypp/Pathname.h>
 
-#include "zypp/HistoryLogData.h"
+#include <zypp/HistoryLogData.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

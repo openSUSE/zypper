@@ -14,12 +14,12 @@
 
 #include <boost/function.hpp>
 
-#include "zypp/base/Functional.h"
-#include "zypp/Filter.h"
-#include "zypp/Resolvable.h"
+#include <zypp/base/Functional.h>
+#include <zypp/Filter.h>
+#include <zypp/Resolvable.h>
 
-#include "zypp/PoolItem.h"
-#include "zypp/Repository.h"
+#include <zypp/PoolItem.h>
+#include <zypp/Repository.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

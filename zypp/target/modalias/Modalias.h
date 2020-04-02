@@ -16,8 +16,8 @@
 #include <vector>
 #include <string>
 
-#include "zypp/base/PtrTypes.h"
-#include "zypp/IdString.h"
+#include <zypp/base/PtrTypes.h>
+#include <zypp/IdString.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

@@ -15,7 +15,7 @@
 #include <list>
 #include <string>
 
-#include "zypp/ResObject.h"
+#include <zypp/ResObject.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

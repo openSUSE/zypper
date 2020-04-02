@@ -1,5 +1,5 @@
 #include "TestSetup.h"
-#include "zypp/ExternalProgram.h"
+#include <zypp/ExternalProgram.h>
 
 #include <chrono>
 #include <thread>

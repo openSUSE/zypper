@@ -7,10 +7,10 @@
 
 #include <boost/test/unit_test.hpp>
 
-#include "zypp/base/Logger.h"
-#include "zypp/base/Exception.h"
-#include "zypp/PathInfo.h"
-#include "zypp/Digest.h"
+#include <zypp/base/Logger.h>
+#include <zypp/base/Exception.h>
+#include <zypp/PathInfo.h>
+#include <zypp/Digest.h>
 
 using boost::unit_test::test_case;
 

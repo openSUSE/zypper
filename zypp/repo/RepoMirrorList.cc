@@ -13,12 +13,12 @@
 #include <iostream>
 #include <vector>
 #include <time.h>
-#include "zypp/repo/RepoMirrorList.h"
-#include "zypp/media/MetaLinkParser.h"
-#include "zypp/MediaSetAccess.h"
-#include "zypp/base/LogTools.h"
-#include "zypp/ZConfig.h"
-#include "zypp/PathInfo.h"
+#include <zypp/repo/RepoMirrorList.h>
+#include <zypp/media/MetaLinkParser.h>
+#include <zypp/MediaSetAccess.h>
+#include <zypp/base/LogTools.h>
+#include <zypp/ZConfig.h>
+#include <zypp/PathInfo.h>
 
 
 ///////////////////////////////////////////////////////////////////

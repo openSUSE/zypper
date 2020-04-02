@@ -15,8 +15,8 @@
 #include <iosfwd>
 #include <string>
 
-#include "zypp/base/String.h"
-#include "zypp/IdStringType.h"
+#include <zypp/base/String.h>
+#include <zypp/IdStringType.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

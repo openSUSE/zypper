@@ -13,7 +13,7 @@
 
 #include <iosfwd>
 
-#include "zypp/ResObject.h"
+#include <zypp/ResObject.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

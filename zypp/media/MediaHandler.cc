@@ -14,15 +14,15 @@
 #include <fstream>
 #include <sstream>
 
-#include "zypp/ZConfig.h"
-#include "zypp/TmpPath.h"
-#include "zypp/Date.h"
-#include "zypp/base/LogTools.h"
-#include "zypp/base/Gettext.h"
-#include "zypp/base/String.h"
-#include "zypp/media/MediaHandler.h"
-#include "zypp/media/MediaManager.h"
-#include "zypp/media/Mount.h"
+#include <zypp/ZConfig.h>
+#include <zypp/TmpPath.h>
+#include <zypp/Date.h>
+#include <zypp/base/LogTools.h>
+#include <zypp/base/Gettext.h>
+#include <zypp/base/String.h>
+#include <zypp/media/MediaHandler.h>
+#include <zypp/media/MediaManager.h>
+#include <zypp/media/Mount.h>
 #include <limits.h>
 #include <stdlib.h>
 #include <errno.h>

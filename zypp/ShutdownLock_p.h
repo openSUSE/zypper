@@ -15,8 +15,8 @@
 
 #include <string>
 
-#include "zypp/APIConfig.h"
-#include "zypp/base/PtrTypes.h"
+#include <zypp/APIConfig.h>
+#include <zypp/base/PtrTypes.h>
 
 namespace zypp
 {

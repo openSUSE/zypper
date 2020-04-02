@@ -12,10 +12,10 @@
 #ifndef ZYPP_SAT_DETAIL_POOLMEMBER_H
 #define ZYPP_SAT_DETAIL_POOLMEMBER_H
 
-#include "zypp/base/Hash.h"
-#include "zypp/base/Iterator.h"
-#include "zypp/base/String.h"
-#include "zypp/base/Easy.h"
+#include <zypp/base/Hash.h>
+#include <zypp/base/Iterator.h>
+#include <zypp/base/String.h>
+#include <zypp/base/Easy.h>
 
 extern "C"
 {

@@ -15,7 +15,7 @@
 #include <iosfwd>
 #include <vector>
 
-#include "zypp/sat/WhatProvides.h"
+#include <zypp/sat/WhatProvides.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

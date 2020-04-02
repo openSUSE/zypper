@@ -13,10 +13,10 @@ extern "C"
 #include <solv/queue.h>
 }
 #include <iostream>
-#include "zypp/base/LogTools.h"
+#include <zypp/base/LogTools.h>
 
-#include "zypp/sat/Queue.h"
-#include "zypp/sat/Solvable.h"
+#include <zypp/sat/Queue.h>
+#include <zypp/sat/Solvable.h>
 
 using std::endl;
 

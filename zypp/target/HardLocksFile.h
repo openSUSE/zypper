@@ -14,11 +14,11 @@
 
 #include <iosfwd>
 
-#include "zypp/base/PtrTypes.h"
+#include <zypp/base/PtrTypes.h>
 
-#include "zypp/Pathname.h"
-#include "zypp/pool/PoolTraits.h"
-#include "zypp/PoolQuery.h"
+#include <zypp/Pathname.h>
+#include <zypp/pool/PoolTraits.h>
+#include <zypp/PoolQuery.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

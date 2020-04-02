@@ -12,12 +12,12 @@
 #ifndef ZYPP_RESOBJECT_H
 #define ZYPP_RESOBJECT_H
 
-#include "zypp/APIConfig.h"
+#include <zypp/APIConfig.h>
 
-#include "zypp/Resolvable.h"
-#include "zypp/Vendor.h"
+#include <zypp/Resolvable.h>
+#include <zypp/Vendor.h>
 
-#include "zypp/sat/LookupAttr.h"
+#include <zypp/sat/LookupAttr.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

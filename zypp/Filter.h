@@ -14,11 +14,11 @@
 
 #include <iosfwd>
 
-#include "zypp/base/Functional.h"
-#include "zypp/base/Function.h"
-// #include "zypp/ResFilters.h"  included at the end!
-#include "zypp/sat/Pool.h"
-#include "zypp/PoolItem.h"
+#include <zypp/base/Functional.h>
+#include <zypp/base/Function.h>
+// #include <zypp/ResFilters.h>  included at the end!
+#include <zypp/sat/Pool.h>
+#include <zypp/PoolItem.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -213,6 +213,6 @@ namespace zypp
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
 
-#include "zypp/ResFilters.h"
+#include <zypp/ResFilters.h>
 
 #endif // ZYPP_FILTER_H

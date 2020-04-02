@@ -15,11 +15,11 @@
 #include <iosfwd>
 #include <functional>
 
-#include "zypp/base/PtrTypes.h"
-#include "zypp/ResObject.h"
+#include <zypp/base/PtrTypes.h>
+#include <zypp/ResObject.h>
 
-#include "zypp/sat/SolvableType.h"
-#include "zypp/ResStatus.h"
+#include <zypp/sat/SolvableType.h>
+#include <zypp/ResStatus.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

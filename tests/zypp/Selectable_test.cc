@@ -1,6 +1,6 @@
 #include "TestSetup.h"
-#include "zypp/ResPool.h"
-#include "zypp/ui/Selectable.h"
+#include <zypp/ResPool.h>
+#include <zypp/ui/Selectable.h>
 
 #define BOOST_TEST_MODULE Selectable
 

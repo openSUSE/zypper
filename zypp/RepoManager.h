@@ -15,19 +15,19 @@
 #include <iosfwd>
 #include <list>
 
-#include "zypp/base/PtrTypes.h"
-#include "zypp/base/Iterator.h"
-#include "zypp/base/Flags.h"
+#include <zypp/base/PtrTypes.h>
+#include <zypp/base/Iterator.h>
+#include <zypp/base/Flags.h>
 
-#include "zypp/Pathname.h"
-#include "zypp/ZConfig.h"
-#include "zypp/RepoInfo.h"
-#include "zypp/repo/RepoException.h"
-#include "zypp/repo/RepoType.h"
-#include "zypp/repo/ServiceType.h"
-#include "zypp/ServiceInfo.h"
-#include "zypp/RepoStatus.h"
-#include "zypp/ProgressData.h"
+#include <zypp/Pathname.h>
+#include <zypp/ZConfig.h>
+#include <zypp/RepoInfo.h>
+#include <zypp/repo/RepoException.h>
+#include <zypp/repo/RepoType.h>
+#include <zypp/repo/ServiceType.h>
+#include <zypp/ServiceInfo.h>
+#include <zypp/RepoStatus.h>
+#include <zypp/ProgressData.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

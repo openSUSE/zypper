@@ -12,10 +12,10 @@
 #ifndef ZYPP_PACKAGE_H
 #define ZYPP_PACKAGE_H
 
-#include "zypp/ResObject.h"
-#include "zypp/PackageKeyword.h"
-#include "zypp/Changelog.h"
-#include "zypp/VendorSupportOptions.h"
+#include <zypp/ResObject.h>
+#include <zypp/PackageKeyword.h>
+#include <zypp/Changelog.h>
+#include <zypp/VendorSupportOptions.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

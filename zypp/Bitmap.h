@@ -12,7 +12,7 @@
 #ifndef ZYPP_BITMAP_H
 #define ZYPP_BITMAP_H
 
-#include "zypp/sat/Map.h"
+#include <zypp/sat/Map.h>
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 {

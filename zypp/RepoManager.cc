@@ -20,37 +20,37 @@
 
 #include <solv/solvversion.h>
 
-#include "zypp/base/InputStream.h"
-#include "zypp/base/LogTools.h"
-#include "zypp/base/Gettext.h"
-#include "zypp/base/DefaultIntegral.h"
-#include "zypp/base/Function.h"
-#include "zypp/base/Regex.h"
-#include "zypp/PathInfo.h"
-#include "zypp/TmpPath.h"
+#include <zypp/base/InputStream.h>
+#include <zypp/base/LogTools.h>
+#include <zypp/base/Gettext.h>
+#include <zypp/base/DefaultIntegral.h>
+#include <zypp/base/Function.h>
+#include <zypp/base/Regex.h>
+#include <zypp/PathInfo.h>
+#include <zypp/TmpPath.h>
 
-#include "zypp/ServiceInfo.h"
-#include "zypp/repo/RepoException.h"
-#include "zypp/RepoManager.h"
+#include <zypp/ServiceInfo.h>
+#include <zypp/repo/RepoException.h>
+#include <zypp/RepoManager.h>
 
-#include "zypp/media/MediaManager.h"
-#include "zypp/media/CredentialManager.h"
-#include "zypp/MediaSetAccess.h"
-#include "zypp/ExternalProgram.h"
-#include "zypp/ManagedFile.h"
+#include <zypp/media/MediaManager.h>
+#include <zypp/media/CredentialManager.h>
+#include <zypp/MediaSetAccess.h>
+#include <zypp/ExternalProgram.h>
+#include <zypp/ManagedFile.h>
 
-#include "zypp/parser/RepoFileReader.h"
-#include "zypp/parser/ServiceFileReader.h"
-#include "zypp/repo/ServiceRepos.h"
-#include "zypp/repo/yum/Downloader.h"
-#include "zypp/repo/susetags/Downloader.h"
-#include "zypp/repo/PluginServices.h"
+#include <zypp/parser/RepoFileReader.h>
+#include <zypp/parser/ServiceFileReader.h>
+#include <zypp/repo/ServiceRepos.h>
+#include <zypp/repo/yum/Downloader.h>
+#include <zypp/repo/susetags/Downloader.h>
+#include <zypp/repo/PluginServices.h>
 
-#include "zypp/Target.h" // for Target::targetDistribution() for repo index services
-#include "zypp/ZYppFactory.h" // to get the Target from ZYpp instance
-#include "zypp/HistoryLog.h" // to write history :O)
+#include <zypp/Target.h> // for Target::targetDistribution() for repo index services
+#include <zypp/ZYppFactory.h> // to get the Target from ZYpp instance
+#include <zypp/HistoryLog.h> // to write history :O)
 
-#include "zypp/ZYppCallbacks.h"
+#include <zypp/ZYppCallbacks.h>
 
 #include "sat/Pool.h"
 

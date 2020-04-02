@@ -10,9 +10,9 @@
  *
 */
 #include <iostream>
-//#include "zypp/base/Logger.h"
+//#include <zypp/base/Logger.h>
 
-#include "zypp/OnMediaLocation.h"
+#include <zypp/OnMediaLocation.h>
 
 using std::endl;
 

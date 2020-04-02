@@ -11,10 +11,10 @@
 */
 #include <iostream>
 
-#include "zypp/base/LogTools.h"
-#include "zypp/base/String.h"
-#include "zypp/Patch.h"
-#include "zypp/sat/WhatProvides.h"
+#include <zypp/base/LogTools.h>
+#include <zypp/base/String.h>
+#include <zypp/Patch.h>
+#include <zypp/sat/WhatProvides.h>
 
 using std::endl;
 

@@ -15,9 +15,9 @@
 #include <string>
 #include <list>
 
-#include "zypp/Url.h"
-#include "zypp/base/String.h"
-#include "zypp/media/ProxyInfo.h"
+#include <zypp/Url.h>
+#include <zypp/base/String.h>
+#include <zypp/media/ProxyInfo.h>
 
 namespace zypp {
   namespace media {

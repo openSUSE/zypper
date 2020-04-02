@@ -14,9 +14,9 @@
 
 #include <iosfwd>
 
-#include "zypp/base/PtrTypes.h"
-#include "zypp/base/DefaultIntegral.h"
-#include "zypp/Pathname.h"
+#include <zypp/base/PtrTypes.h>
+#include <zypp/base/DefaultIntegral.h>
+#include <zypp/Pathname.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

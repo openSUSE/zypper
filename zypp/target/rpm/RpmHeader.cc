@@ -146,14 +146,14 @@ int gnameToGid(const char * thisGname, gid_t * gid)
 #include <set>
 #include <vector>
 
-#include "zypp/base/Easy.h"
-#include "zypp/base/Logger.h"
-#include "zypp/base/Exception.h"
+#include <zypp/base/Easy.h>
+#include <zypp/base/Logger.h>
+#include <zypp/base/Exception.h>
 
-#include "zypp/target/rpm/librpmDb.h"
-#include "zypp/target/rpm/RpmHeader.h"
-#include "zypp/Package.h"
-#include "zypp/PathInfo.h"
+#include <zypp/target/rpm/librpmDb.h>
+#include <zypp/target/rpm/RpmHeader.h>
+#include <zypp/Package.h>
+#include <zypp/PathInfo.h>
 
 using std::endl;
 

@@ -14,16 +14,16 @@
 
 #include <iosfwd>
 
-#include "zypp/sat/detail/PoolMember.h"
-#include "zypp/sat/SolvAttr.h"
-#include "zypp/ResTraits.h"
-#include "zypp/IdString.h"
-#include "zypp/Edition.h"
-#include "zypp/Arch.h"
-#include "zypp/Dep.h"
-#include "zypp/Capabilities.h"
-#include "zypp/Capability.h"
-#include "zypp/Locale.h"
+#include <zypp/sat/detail/PoolMember.h>
+#include <zypp/sat/SolvAttr.h>
+#include <zypp/ResTraits.h>
+#include <zypp/IdString.h>
+#include <zypp/Edition.h>
+#include <zypp/Arch.h>
+#include <zypp/Dep.h>
+#include <zypp/Capabilities.h>
+#include <zypp/Capability.h>
+#include <zypp/Locale.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

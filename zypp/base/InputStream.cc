@@ -10,16 +10,16 @@
  *
 */
 #include <iostream>
-#include "zypp/base/LogTools.h"
+#include <zypp/base/LogTools.h>
 
-#include "zypp/base/InputStream.h"
-#include "zypp/base/GzStream.h"
+#include <zypp/base/InputStream.h>
+#include <zypp/base/GzStream.h>
 
 #ifdef ENABLE_ZCHUNK_COMPRESSION
-  #include "zypp/base/ZckStream.h"
+  #include <zypp/base/ZckStream.h>
 #endif
 
-#include "zypp/PathInfo.h"
+#include <zypp/PathInfo.h>
 
 using std::endl;
 

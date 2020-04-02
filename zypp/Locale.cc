@@ -12,8 +12,8 @@
 #include <iostream>
 #include <map>
 
-#include "zypp/Locale.h"
-#include "zypp/ZConfig.h"
+#include <zypp/Locale.h>
+#include <zypp/ZConfig.h>
 
 using std::endl;
 

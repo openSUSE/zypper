@@ -13,26 +13,26 @@
 #include <fstream>
 #include <boost/mpl/int.hpp>
 
-#include "zypp/base/Easy.h"
-#include "zypp/base/LogTools.h"
-#include "zypp/base/Gettext.h"
-#include "zypp/base/Exception.h"
-#include "zypp/base/Measure.h"
-#include "zypp/base/WatchFile.h"
-#include "zypp/base/Sysconfig.h"
-#include "zypp/base/IOStream.h"
+#include <zypp/base/Easy.h>
+#include <zypp/base/LogTools.h>
+#include <zypp/base/Gettext.h>
+#include <zypp/base/Exception.h>
+#include <zypp/base/Measure.h>
+#include <zypp/base/WatchFile.h>
+#include <zypp/base/Sysconfig.h>
+#include <zypp/base/IOStream.h>
 
-#include "zypp/ZConfig.h"
+#include <zypp/ZConfig.h>
 
-#include "zypp/sat/detail/PoolImpl.h"
-#include "zypp/sat/SolvableSet.h"
-#include "zypp/sat/Pool.h"
-#include "zypp/Capability.h"
-#include "zypp/Locale.h"
-#include "zypp/PoolItem.h"
+#include <zypp/sat/detail/PoolImpl.h>
+#include <zypp/sat/SolvableSet.h>
+#include <zypp/sat/Pool.h>
+#include <zypp/Capability.h>
+#include <zypp/Locale.h>
+#include <zypp/PoolItem.h>
 
-#include "zypp/target/modalias/Modalias.h"
-#include "zypp/media/MediaPriority.h"
+#include <zypp/target/modalias/Modalias.h>
+#include <zypp/media/MediaPriority.h>
 
 extern "C"
 {

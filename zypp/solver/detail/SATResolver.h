@@ -35,7 +35,7 @@ extern "C"
 #include <map>
 #include <string>
 
-#include "zypp/solver/Types.h"
+#include <zypp/solver/Types.h>
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp

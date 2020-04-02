@@ -5,11 +5,11 @@
 #include <list>
 #include <boost/test/unit_test.hpp>
 
-#include "zypp/base/Logger.h"
-#include "zypp/Url.h"
-#include "zypp/PathInfo.h"
-#include "zypp/TmpPath.h"
-#include "zypp/repo/susetags/Downloader.h"
+#include <zypp/base/Logger.h>
+#include <zypp/Url.h>
+#include <zypp/PathInfo.h>
+#include <zypp/TmpPath.h>
+#include <zypp/repo/susetags/Downloader.h>
 
 #include "tests/zypp/KeyRingTestReceiver.h"
 

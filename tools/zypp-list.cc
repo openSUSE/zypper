@@ -1,5 +1,5 @@
 #define INCLUDE_TESTSETUP_WITHOUT_BOOST
-#include "zypp/../tests/lib/TestSetup.h"
+#include "../tests/lib/TestSetup.h"
 #undef  INCLUDE_TESTSETUP_WITHOUT_BOOST
 
 #include <algorithm>

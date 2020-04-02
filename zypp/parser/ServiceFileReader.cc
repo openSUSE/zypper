@@ -10,15 +10,15 @@
  *
 */
 #include <iostream>
-#include "zypp/base/Logger.h"
-#include "zypp/base/String.h"
-#include "zypp/base/Regex.h"
-#include "zypp/base/InputStream.h"
-#include "zypp/base/UserRequestException.h"
+#include <zypp/base/Logger.h>
+#include <zypp/base/String.h>
+#include <zypp/base/Regex.h>
+#include <zypp/base/InputStream.h>
+#include <zypp/base/UserRequestException.h>
 
-#include "zypp/parser/IniDict.h"
-#include "zypp/parser/ServiceFileReader.h"
-#include "zypp/ServiceInfo.h"
+#include <zypp/parser/IniDict.h>
+#include <zypp/parser/ServiceFileReader.h>
+#include <zypp/ServiceInfo.h>
 
 using std::endl;
 using zypp::parser::IniDict;

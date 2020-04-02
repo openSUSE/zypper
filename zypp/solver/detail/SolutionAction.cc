@@ -23,11 +23,11 @@
 
 #define ZYPP_USE_RESOLVER_INTERNALS
 
-#include "zypp/solver/detail/Resolver.h"
-#include "zypp/solver/detail/SolutionAction.h"
-#include "zypp/solver/detail/SolverQueueItem.h"
-#include "zypp/Capabilities.h"
-#include "zypp/base/Logger.h"
+#include <zypp/solver/detail/Resolver.h>
+#include <zypp/solver/detail/SolutionAction.h>
+#include <zypp/solver/detail/SolverQueueItem.h>
+#include <zypp/Capabilities.h>
+#include <zypp/base/Logger.h>
 
 using std::endl;
 

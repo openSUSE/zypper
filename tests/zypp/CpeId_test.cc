@@ -1,6 +1,6 @@
 #include <boost/test/unit_test.hpp>
 #include <iostream>
-#include "zypp/CpeId.h"
+#include <zypp/CpeId.h>
 
 using std::cout;
 using std::endl;

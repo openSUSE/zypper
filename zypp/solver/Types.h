@@ -14,11 +14,11 @@
 #ifndef ZYPP_SOLVER_TYPES_H
 #define ZYPP_SOLVER_TYPES_H
 
-#include "zypp/ResPool.h"
+#include <zypp/ResPool.h>
 
-#include "zypp/ResolverFocus.h"
-#include "zypp/ResolverNamespace.h"
+#include <zypp/ResolverFocus.h>
+#include <zypp/ResolverNamespace.h>
 
-#include "zypp/ResolverProblem.h"
+#include <zypp/ResolverProblem.h>
 
 #endif // ZYPP_SOLVER_TYPES_H

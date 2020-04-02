@@ -23,16 +23,16 @@ extern "C"
 #include <iostream>
 #include <fstream>
 
-#include "zypp/base/Easy.h"
-#include "zypp/base/Logger.h"
-#include "zypp/base/Gettext.h"
-#include "zypp/base/Exception.h"
+#include <zypp/base/Easy.h>
+#include <zypp/base/Logger.h>
+#include <zypp/base/Gettext.h>
+#include <zypp/base/Exception.h>
 
-#include "zypp/AutoDispose.h"
+#include <zypp/AutoDispose.h>
 
-#include "zypp/sat/detail/PoolImpl.h"
-#include "zypp/sat/Pool.h"
-#include "zypp/sat/LookupAttr.h"
+#include <zypp/sat/detail/PoolImpl.h>
+#include <zypp/sat/Pool.h>
+#include <zypp/sat/LookupAttr.h>
 
 using std::endl;
 

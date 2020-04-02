@@ -2,10 +2,10 @@
 #ifndef ZYPP_TEST_WEBSERVER_H
 #define ZYPP_TEST_WEBSERVER_H
 
-#include "zypp/Url.h"
-#include "zypp/Pathname.h"
-#include "zypp/base/PtrTypes.h"
-#include "zypp/media/TransferSettings.h"
+#include <zypp/Url.h>
+#include <zypp/Pathname.h>
+#include <zypp/base/PtrTypes.h>
+#include <zypp/media/TransferSettings.h>
 
 #include <functional>
 

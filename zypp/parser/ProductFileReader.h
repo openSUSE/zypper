@@ -14,14 +14,14 @@
 
 #include <iosfwd>
 
-#include "zypp/base/PtrTypes.h"
-#include "zypp/base/Function.h"
-#include "zypp/base/InputStream.h"
+#include <zypp/base/PtrTypes.h>
+#include <zypp/base/Function.h>
+#include <zypp/base/InputStream.h>
 
-#include "zypp/Pathname.h"
-#include "zypp/IdString.h"
-#include "zypp/Edition.h"
-#include "zypp/Arch.h"
+#include <zypp/Pathname.h>
+#include <zypp/IdString.h>
+#include <zypp/Edition.h>
+#include <zypp/Arch.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

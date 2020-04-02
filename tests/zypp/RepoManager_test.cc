@@ -4,15 +4,15 @@
 #include <list>
 #include <string>
 
-#include "zypp/base/LogTools.h"
-#include "zypp/base/Exception.h"
-#include "zypp/KeyRing.h"
-#include "zypp/PublicKey.h"
-#include "zypp/TmpPath.h"
-#include "zypp/PathInfo.h"
-#include "zypp/ServiceInfo.h"
+#include <zypp/base/LogTools.h>
+#include <zypp/base/Exception.h>
+#include <zypp/KeyRing.h>
+#include <zypp/PublicKey.h>
+#include <zypp/TmpPath.h>
+#include <zypp/PathInfo.h>
+#include <zypp/ServiceInfo.h>
 
-#include "zypp/RepoManager.h"
+#include <zypp/RepoManager.h>
 
 #include "TestSetup.h"
 

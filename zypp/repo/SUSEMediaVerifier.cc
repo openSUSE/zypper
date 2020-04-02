@@ -8,8 +8,8 @@
 \---------------------------------------------------------------------*/
 
 #include <fstream>
-#include "zypp/base/Logger.h"
-#include "zypp/repo/SUSEMediaVerifier.h"
+#include <zypp/base/Logger.h>
+#include <zypp/repo/SUSEMediaVerifier.h>
 
 using std::endl;
 

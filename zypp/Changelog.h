@@ -15,7 +15,7 @@
 #include <string>
 #include <list>
 
-#include "zypp/Date.h"
+#include <zypp/Date.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

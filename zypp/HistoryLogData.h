@@ -15,13 +15,13 @@
 
 #include <iosfwd>
 
-#include "zypp/APIConfig.h"
-#include "zypp/Date.h"
-#include "zypp/Edition.h"
-#include "zypp/Arch.h"
-#include "zypp/CheckSum.h"
-#include "zypp/Url.h"
-#include "zypp/Patch.h"
+#include <zypp/APIConfig.h>
+#include <zypp/Date.h>
+#include <zypp/Edition.h>
+#include <zypp/Arch.h>
+#include <zypp/CheckSum.h>
+#include <zypp/Url.h>
+#include <zypp/Patch.h>
 
 #define HISTORY_LOG_DATE_FORMAT "%Y-%m-%d %H:%M:%S"
 

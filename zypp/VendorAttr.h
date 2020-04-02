@@ -16,8 +16,8 @@
 #include <string>
 #include <vector>
 
-#include "zypp/PathInfo.h"
-#include "zypp/Vendor.h"
+#include <zypp/PathInfo.h>
+#include <zypp/Vendor.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp {

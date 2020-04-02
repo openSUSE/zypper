@@ -14,15 +14,15 @@
 #include <string>
 #include <map>
 
-#include "zypp/base/Logger.h"
-#include "zypp/base/String.h"
-#include "zypp/base/DtorReset.h"
-#include "zypp/base/DefaultIntegral.h"
+#include <zypp/base/Logger.h>
+#include <zypp/base/String.h>
+#include <zypp/base/DtorReset.h>
+#include <zypp/base/DefaultIntegral.h>
 
-#include "zypp/parser/xml/ParseDef.h"
-#include "zypp/parser/xml/ParseDefException.h"
-#include "zypp/parser/xml/ParseDefConsume.h"
-#include "zypp/parser/xml/Reader.h"
+#include <zypp/parser/xml/ParseDef.h>
+#include <zypp/parser/xml/ParseDefException.h>
+#include <zypp/parser/xml/ParseDefConsume.h>
+#include <zypp/parser/xml/Reader.h>
 
 using std::endl;
 

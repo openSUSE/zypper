@@ -10,20 +10,20 @@
  */
 #include <iostream>
 #include <fstream>
-#include "zypp/base/LogTools.h"
-#include "zypp/base/NonCopyable.h"
-#include "zypp/base/Gettext.h"
-#include "zypp/target/RpmPostTransCollector.h"
+#include <zypp/base/LogTools.h>
+#include <zypp/base/NonCopyable.h>
+#include <zypp/base/Gettext.h>
+#include <zypp/target/RpmPostTransCollector.h>
 
-#include "zypp/TmpPath.h"
-#include "zypp/PathInfo.h"
-#include "zypp/HistoryLog.h"
-#include "zypp/ZYppCallbacks.h"
-#include "zypp/ExternalProgram.h"
-#include "zypp/target/rpm/RpmHeader.h"
-#include "zypp/target/rpm/librpmDb.h"
-#include "zypp/ZConfig.h"
-#include "zypp/ZYppCallbacks.h"
+#include <zypp/TmpPath.h>
+#include <zypp/PathInfo.h>
+#include <zypp/HistoryLog.h>
+#include <zypp/ZYppCallbacks.h>
+#include <zypp/ExternalProgram.h>
+#include <zypp/target/rpm/RpmHeader.h>
+#include <zypp/target/rpm/librpmDb.h>
+#include <zypp/ZConfig.h>
+#include <zypp/ZYppCallbacks.h>
 
 using std::endl;
 #undef ZYPP_BASE_LOGGER_LOGGROUP

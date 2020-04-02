@@ -2,13 +2,13 @@
 #include <iostream>
 #include <boost/test/unit_test.hpp>
 
-#include "zypp/base/Logger.h"
-#include "zypp/TmpPath.h"
-#include "zypp/RepoManager.h"
-#include "zypp/base/Easy.h"
-#include "zypp/ZYppFactory.h"
-#include "zypp/Package.h"
-#include "zypp/sat/Solvable.h"
+#include <zypp/base/Logger.h>
+#include <zypp/TmpPath.h>
+#include <zypp/RepoManager.h>
+#include <zypp/base/Easy.h>
+#include <zypp/ZYppFactory.h>
+#include <zypp/Package.h>
+#include <zypp/sat/Solvable.h>
 
 // allows us to control signature
 // callbacks

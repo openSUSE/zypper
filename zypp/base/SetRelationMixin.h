@@ -14,8 +14,8 @@
 #include <iosfwd>
 #include <string>
 
-#include "zypp/base/Easy.h"
-#include "zypp/base/EnumClass.h"
+#include <zypp/base/Easy.h>
+#include <zypp/base/EnumClass.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

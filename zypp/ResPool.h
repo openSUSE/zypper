@@ -14,12 +14,12 @@
 
 #include <iosfwd>
 
-#include "zypp/APIConfig.h"
-#include "zypp/base/Iterator.h"
+#include <zypp/APIConfig.h>
+#include <zypp/base/Iterator.h>
 
-#include "zypp/pool/PoolTraits.h"
-#include "zypp/PoolItem.h"
-#include "zypp/Filter.h"
+#include <zypp/pool/PoolTraits.h>
+#include <zypp/PoolItem.h>
+#include <zypp/Filter.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -477,6 +477,6 @@ namespace zypp
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
 
-#include "zypp/ResPoolProxy.h"
+#include <zypp/ResPoolProxy.h>
 
 #endif // ZYPP_RESPOOL_H

@@ -1,5 +1,5 @@
 #include "TestSetup.h"
-#include "zypp/InstanceId.h"
+#include <zypp/InstanceId.h>
 
 #define BOOST_TEST_MODULE InstanceId
 

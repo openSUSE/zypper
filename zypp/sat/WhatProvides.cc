@@ -11,9 +11,9 @@
 */
 #include <iostream>
 
-#include "zypp/base/LogTools.h"
-#include "zypp/sat/WhatProvides.h"
-#include "zypp/sat/detail/PoolImpl.h"
+#include <zypp/base/LogTools.h>
+#include <zypp/sat/WhatProvides.h>
+#include <zypp/sat/detail/PoolImpl.h>
 
 using std::endl;
 

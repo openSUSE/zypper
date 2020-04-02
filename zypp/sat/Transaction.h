@@ -13,16 +13,16 @@
 
 #include <iosfwd>
 
-#include "zypp/base/PtrTypes.h"
-#include "zypp/base/Flags.h"
-#include "zypp/base/Iterator.h"
-#include "zypp/base/DefaultIntegral.h"
+#include <zypp/base/PtrTypes.h>
+#include <zypp/base/Flags.h>
+#include <zypp/base/Iterator.h>
+#include <zypp/base/DefaultIntegral.h>
 
-#include "zypp/sat/SolvIterMixin.h"
-#include "zypp/sat/Solvable.h"
-#include "zypp/sat/Queue.h"
+#include <zypp/sat/SolvIterMixin.h>
+#include <zypp/sat/Solvable.h>
+#include <zypp/sat/Queue.h>
 
-#include "zypp/PoolItem.h"
+#include <zypp/PoolItem.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

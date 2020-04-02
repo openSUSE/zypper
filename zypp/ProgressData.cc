@@ -10,11 +10,11 @@
  *
 */
 #include <iostream>
-#include "zypp/base/Logger.h"
-#include "zypp/base/InputStream.h"
-#include "zypp/base/String.h"
+#include <zypp/base/Logger.h>
+#include <zypp/base/InputStream.h>
+#include <zypp/base/String.h>
 
-#include "zypp/ProgressData.h"
+#include <zypp/ProgressData.h>
 
 using std::endl;
 

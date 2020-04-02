@@ -15,9 +15,9 @@
 #include <iosfwd>
 #include <boost/call_traits.hpp>
 
-#include "zypp/base/NonCopyable.h"
-#include "zypp/base/PtrTypes.h"
-#include "zypp/base/Function.h"
+#include <zypp/base/NonCopyable.h>
+#include <zypp/base/PtrTypes.h>
+#include <zypp/base/Function.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

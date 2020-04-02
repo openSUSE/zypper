@@ -14,13 +14,13 @@
 
 #include <iosfwd>
 
-#include "zypp/base/ReferenceCounted.h"
-#include "zypp/base/NonCopyable.h"
-#include "zypp/base/PtrTypes.h"
-#include "zypp/PathInfo.h"
-#include "zypp/Package.h"
-#include "zypp/target/rpm/RpmHeader.h"
-#include "zypp/target/rpm/RpmException.h"
+#include <zypp/base/ReferenceCounted.h>
+#include <zypp/base/NonCopyable.h>
+#include <zypp/base/PtrTypes.h>
+#include <zypp/PathInfo.h>
+#include <zypp/Package.h>
+#include <zypp/target/rpm/RpmHeader.h>
+#include <zypp/target/rpm/RpmException.h>
 
 namespace zypp
 {

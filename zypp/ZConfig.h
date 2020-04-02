@@ -16,18 +16,18 @@
 #include <set>
 #include <string>
 
-#include "zypp/APIConfig.h"
-#include "zypp/base/NonCopyable.h"
-#include "zypp/base/PtrTypes.h"
+#include <zypp/APIConfig.h>
+#include <zypp/base/NonCopyable.h>
+#include <zypp/base/PtrTypes.h>
 
-#include "zypp/Arch.h"
-#include "zypp/Locale.h"
-#include "zypp/Pathname.h"
-#include "zypp/IdString.h"
-#include "zypp/TriBool.h"
-#include "zypp/ResolverFocus.h"
-#include "zypp/DownloadMode.h"
-#include "zypp/target/rpm/RpmFlags.h"
+#include <zypp/Arch.h>
+#include <zypp/Locale.h>
+#include <zypp/Pathname.h>
+#include <zypp/IdString.h>
+#include <zypp/TriBool.h>
+#include <zypp/ResolverFocus.h>
+#include <zypp/DownloadMode.h>
+#include <zypp/target/rpm/RpmFlags.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

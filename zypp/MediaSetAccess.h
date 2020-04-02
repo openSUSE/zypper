@@ -13,17 +13,17 @@
 #include <iosfwd>
 #include <string>
 #include <vector>
-#include "zypp/base/Function.h"
+#include <zypp/base/Function.h>
 
-#include "zypp/base/ReferenceCounted.h"
-#include "zypp/base/NonCopyable.h"
-#include "zypp/base/Flags.h"
-#include "zypp/base/PtrTypes.h"
-#include "zypp/media/MediaManager.h"
-#include "zypp/Pathname.h"
-#include "zypp/CheckSum.h"
-#include "zypp/OnMediaLocation.h"
-#include "zypp/ManagedFile.h"
+#include <zypp/base/ReferenceCounted.h>
+#include <zypp/base/NonCopyable.h>
+#include <zypp/base/Flags.h>
+#include <zypp/base/PtrTypes.h>
+#include <zypp/media/MediaManager.h>
+#include <zypp/Pathname.h>
+#include <zypp/CheckSum.h>
+#include <zypp/OnMediaLocation.h>
+#include <zypp/ManagedFile.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

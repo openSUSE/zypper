@@ -14,10 +14,10 @@
 
 #include <iosfwd>
 
-#include "zypp/base/PtrTypes.h"
-#include "zypp/base/InputStream.h"
-#include "zypp/RepoInfo.h"
-#include "zypp/ProgressData.h"
+#include <zypp/base/PtrTypes.h>
+#include <zypp/base/InputStream.h>
+#include <zypp/RepoInfo.h>
+#include <zypp/ProgressData.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

@@ -21,12 +21,12 @@ typedef rpmuint32_t rpm_count_t;
 
 #include <iostream>
 
-#include "zypp/base/Logger.h"
-#include "zypp/base/NonCopyable.h"
-#include "zypp/base/String.h"
-#include "zypp/AutoDispose.h"
+#include <zypp/base/Logger.h>
+#include <zypp/base/NonCopyable.h>
+#include <zypp/base/String.h>
+#include <zypp/AutoDispose.h>
 
-#include "zypp/target/rpm/BinHeader.h"
+#include <zypp/target/rpm/BinHeader.h>
 
 using std::endl;
 

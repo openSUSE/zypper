@@ -9,12 +9,12 @@
 /** \file	zypp/PluginExecutor.cc
  */
 #include <iostream>
-#include "zypp/base/LogTools.h"
-#include "zypp/base/NonCopyable.h"
+#include <zypp/base/LogTools.h>
+#include <zypp/base/NonCopyable.h>
 
-#include "zypp/ZConfig.h"
-#include "zypp/PathInfo.h"
-#include "zypp/PluginExecutor.h"
+#include <zypp/ZConfig.h>
+#include <zypp/PathInfo.h>
+#include <zypp/PluginExecutor.h>
 
 using std::endl;
 

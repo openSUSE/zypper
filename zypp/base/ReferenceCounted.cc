@@ -11,9 +11,9 @@
 */
 #include <iostream>
 
-#include "zypp/base/Logger.h"
-#include "zypp/base/Exception.h"
-#include "zypp/base/ReferenceCounted.h"
+#include <zypp/base/Logger.h>
+#include <zypp/base/Exception.h>
+#include <zypp/base/ReferenceCounted.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

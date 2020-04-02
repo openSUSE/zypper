@@ -9,7 +9,7 @@
 /** \file	zypp/parser/xml/ParseDefConsume.cc
  *
 */
-#include "zypp/parser/xml/ParseDefConsume.h"
+#include <zypp/parser/xml/ParseDefConsume.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

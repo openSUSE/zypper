@@ -14,10 +14,10 @@
 
 #include <iosfwd>
 
-#include "zypp/base/PtrTypes.h"
+#include <zypp/base/PtrTypes.h>
 
-#include "zypp/DownloadMode.h"
-#include "zypp/target/rpm/RpmFlags.h"
+#include <zypp/DownloadMode.h>
+#include <zypp/target/rpm/RpmFlags.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

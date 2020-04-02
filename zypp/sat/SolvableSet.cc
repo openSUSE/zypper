@@ -10,9 +10,9 @@
  *
 */
 #include <iostream>
-#include "zypp/base/LogTools.h"
+#include <zypp/base/LogTools.h>
 
-#include "zypp/sat/SolvableSet.h"
+#include <zypp/sat/SolvableSet.h>
 
 using std::endl;
 

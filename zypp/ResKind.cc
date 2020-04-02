@@ -11,10 +11,10 @@
 */
 #include <iostream>
 
-#include "zypp/base/String.h"
+#include <zypp/base/String.h>
 
-#include "zypp/ResKind.h"
-#include "zypp/ResTraits.h"
+#include <zypp/ResKind.h>
+#include <zypp/ResTraits.h>
 
 using std::endl;
 

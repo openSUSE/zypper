@@ -6,8 +6,8 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-#include "zypp/base/ZckStream.h"
-#include "zypp/base/String.h"
+#include <zypp/base/ZckStream.h>
+#include <zypp/base/String.h>
 
 #include <sys/types.h>
 #include <sys/stat.h>

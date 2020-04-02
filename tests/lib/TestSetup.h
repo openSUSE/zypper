@@ -7,19 +7,19 @@
 using boost::unit_test::test_case;
 #endif
 
-#include "zypp/base/LogControl.h"
-#include "zypp/base/LogTools.h"
-#include "zypp/base/InputStream.h"
-#include "zypp/base/IOStream.h"
-#include "zypp/base/Flags.h"
-#include "zypp/ZYppFactory.h"
-#include "zypp/ZYpp.h"
-#include "zypp/TmpPath.h"
-#include "zypp/Glob.h"
-#include "zypp/PathInfo.h"
-#include "zypp/RepoManager.h"
-#include "zypp/Target.h"
-#include "zypp/ResPool.h"
+#include <zypp/base/LogControl.h>
+#include <zypp/base/LogTools.h>
+#include <zypp/base/InputStream.h>
+#include <zypp/base/IOStream.h>
+#include <zypp/base/Flags.h>
+#include <zypp/ZYppFactory.h>
+#include <zypp/ZYpp.h>
+#include <zypp/TmpPath.h>
+#include <zypp/Glob.h>
+#include <zypp/PathInfo.h>
+#include <zypp/RepoManager.h>
+#include <zypp/Target.h>
+#include <zypp/ResPool.h>
 
 using std::cin;
 using std::cout;

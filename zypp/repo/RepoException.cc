@@ -10,9 +10,9 @@
  *
 */
 #include <iostream>
-#include "zypp/repo/RepoException.h"
-#include "zypp/base/String.h"
-#include "zypp/base/Gettext.h"
+#include <zypp/repo/RepoException.h>
+#include <zypp/base/String.h>
+#include <zypp/base/Gettext.h>
 
 using std::endl;
 

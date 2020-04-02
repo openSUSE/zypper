@@ -14,11 +14,11 @@
 
 #include <iosfwd>
 
-#include "zypp/base/PtrTypes.h"
+#include <zypp/base/PtrTypes.h>
 
-#include "zypp/ResPool.h"
-#include "zypp/ui/Selectable.h"
-#include "zypp/ui/SelFilters.h"
+#include <zypp/ResPool.h>
+#include <zypp/ui/Selectable.h>
+#include <zypp/ui/SelFilters.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

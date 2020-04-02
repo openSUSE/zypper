@@ -22,7 +22,7 @@
 #define ZYPP_SOLVER_DETAIL_TYPES_H
 
 #include <list>
-#include "zypp/base/PtrTypes.h"
+#include <zypp/base/PtrTypes.h>
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp 

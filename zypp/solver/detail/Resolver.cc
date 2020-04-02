@@ -22,18 +22,18 @@
 
 #define ZYPP_USE_RESOLVER_INTERNALS
 
-#include "zypp/base/LogTools.h"
-#include "zypp/base/Algorithm.h"
+#include <zypp/base/LogTools.h>
+#include <zypp/base/Algorithm.h>
 
-#include "zypp/solver/detail/Resolver.h"
-#include "zypp/solver/detail/Testcase.h"
-#include "zypp/solver/detail/SATResolver.h"
-#include "zypp/solver/detail/ItemCapKind.h"
-#include "zypp/solver/detail/SolutionAction.h"
-#include "zypp/solver/detail/SolverQueueItem.h"
+#include <zypp/solver/detail/Resolver.h>
+#include <zypp/solver/detail/Testcase.h>
+#include <zypp/solver/detail/SATResolver.h>
+#include <zypp/solver/detail/ItemCapKind.h>
+#include <zypp/solver/detail/SolutionAction.h>
+#include <zypp/solver/detail/SolverQueueItem.h>
 
-#include "zypp/ZConfig.h"
-#include "zypp/sat/Transaction.h"
+#include <zypp/ZConfig.h>
+#include <zypp/sat/Transaction.h>
 
 #define MAXSOLVERRUNS 5
 

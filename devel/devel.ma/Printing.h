@@ -3,8 +3,8 @@
 
 #include <iostream>
 
-#include "zypp/base/LogControl.h"
-#include "zypp/base/LogTools.h"
+#include <zypp/base/LogControl.h>
+#include <zypp/base/LogTools.h>
 #include <zypp/base/Logger.h>
 
 #include <zypp/base/String.h>

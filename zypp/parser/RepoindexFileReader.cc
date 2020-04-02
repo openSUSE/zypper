@@ -12,20 +12,20 @@
 #include <iostream>
 #include <unordered_map>
 
-#include "zypp/base/String.h"
-#include "zypp/base/Logger.h"
-#include "zypp/base/Gettext.h"
-#include "zypp/base/InputStream.h"
-#include "zypp/base/DefaultIntegral.h"
+#include <zypp/base/String.h>
+#include <zypp/base/Logger.h>
+#include <zypp/base/Gettext.h>
+#include <zypp/base/InputStream.h>
+#include <zypp/base/DefaultIntegral.h>
 
-#include "zypp/Pathname.h"
+#include <zypp/Pathname.h>
 
-#include "zypp/parser/xml/Reader.h"
-#include "zypp/parser/ParseException.h"
+#include <zypp/parser/xml/Reader.h>
+#include <zypp/parser/ParseException.h>
 
-#include "zypp/RepoInfo.h"
+#include <zypp/RepoInfo.h>
 
-#include "zypp/parser/RepoindexFileReader.h"
+#include <zypp/parser/RepoindexFileReader.h>
 
 
 #undef ZYPP_BASE_LOGGER_LOGGROUP

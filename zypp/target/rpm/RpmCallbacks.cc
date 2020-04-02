@@ -12,6 +12,6 @@
 
 #include <iostream>
 
-#include "zypp/target/rpm/RpmCallbacks.h"
+#include <zypp/target/rpm/RpmCallbacks.h>
 
 ///////////////////////////////////////////////////////////////////

@@ -1,6 +1,6 @@
 #include "Tools.h"
 
-#include "zypp/PoolQueryResult.h"
+#include <zypp/PoolQueryResult.h>
 
 #include <zypp/base/PtrTypes.h>
 #include <zypp/base/Exception.h>
@@ -15,41 +15,41 @@
 #include <zypp/base/StrMatcher.h>
 #include <zypp/AutoDispose.h>
 
-#include "zypp/ResPoolProxy.h"
+#include <zypp/ResPoolProxy.h>
 
-#include "zypp/ZYppCallbacks.h"
-#include "zypp/ResPool.h"
-#include "zypp/ResFilters.h"
-#include "zypp/ResObjects.h"
-#include "zypp/Digest.h"
-#include "zypp/PackageKeyword.h"
-#include "zypp/TmpPath.h"
-#include "zypp/ManagedFile.h"
-#include "zypp/MediaSetAccess.h"
+#include <zypp/ZYppCallbacks.h>
+#include <zypp/ResPool.h>
+#include <zypp/ResFilters.h>
+#include <zypp/ResObjects.h>
+#include <zypp/Digest.h>
+#include <zypp/PackageKeyword.h>
+#include <zypp/TmpPath.h>
+#include <zypp/ManagedFile.h>
+#include <zypp/MediaSetAccess.h>
 
 
-#include "zypp/RepoManager.h"
-#include "zypp/Repository.h"
-#include "zypp/RepoInfo.h"
-#include "zypp/TriBool.h"
-#include "zypp/repo/PackageProvider.h"
+#include <zypp/RepoManager.h>
+#include <zypp/Repository.h>
+#include <zypp/RepoInfo.h>
+#include <zypp/TriBool.h>
+#include <zypp/repo/PackageProvider.h>
 
-#include "zypp/ResPoolProxy.h"
+#include <zypp/ResPoolProxy.h>
 
-#include "zypp/sat/Pool.h"
-#include "zypp/sat/LocaleSupport.h"
-#include "zypp/sat/LookupAttr.h"
-#include "zypp/sat/SolvableSet.h"
-#include "zypp/sat/SolvIterMixin.h"
-#include "zypp/sat/detail/PoolImpl.h"
-#include "zypp/sat/WhatObsoletes.h"
-#include "zypp/PoolQuery.h"
-#include "zypp/ServiceInfo.h"
-#include "zypp/media/MediaPriority.h"
+#include <zypp/sat/Pool.h>
+#include <zypp/sat/LocaleSupport.h>
+#include <zypp/sat/LookupAttr.h>
+#include <zypp/sat/SolvableSet.h>
+#include <zypp/sat/SolvIterMixin.h>
+#include <zypp/sat/detail/PoolImpl.h>
+#include <zypp/sat/WhatObsoletes.h>
+#include <zypp/PoolQuery.h>
+#include <zypp/ServiceInfo.h>
+#include <zypp/media/MediaPriority.h>
 
-#include "zypp/target/rpm/RpmDb.h"
-#include "zypp/target/rpm/RpmHeader.h"
-#include "zypp/target/rpm/librpmDb.h"
+#include <zypp/target/rpm/RpmDb.h>
+#include <zypp/target/rpm/RpmHeader.h>
+#include <zypp/target/rpm/librpmDb.h>
 
 #include <boost/mpl/int.hpp>
 
@@ -395,8 +395,8 @@ void testCMP( const L & lhs, const R & rhs )
 #undef OUTS
 }
 
-#include "zypp/Locks.h"
-#include "zypp/target/HardLocksFile.h"
+#include <zypp/Locks.h>
+#include <zypp/target/HardLocksFile.h>
 inline PoolQuery makeTrivialQuery( IdString ident_r )
 {
   sat::Solvable::SplitIdent ident( ident_r );

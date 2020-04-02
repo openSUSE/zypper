@@ -10,9 +10,9 @@
  *
 */
 #include <iostream>
-//#include "zypp/base/Logger.h"
+//#include <zypp/base/Logger.h>
 
-#include "zypp/ui/SelectableImpl.h"
+#include <zypp/ui/SelectableImpl.h>
 
 using std::endl;
 

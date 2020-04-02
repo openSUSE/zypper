@@ -10,13 +10,13 @@
  *
 */
 #include <iostream>
-#include "zypp/base/Logger.h"
-#include "zypp/base/DefaultIntegral.h"
+#include <zypp/base/Logger.h>
+#include <zypp/base/DefaultIntegral.h>
 
-#include "zypp/PoolItem.h"
-#include "zypp/ResPool.h"
-#include "zypp/Package.h"
-#include "zypp/VendorAttr.h"
+#include <zypp/PoolItem.h>
+#include <zypp/ResPool.h>
+#include <zypp/Package.h>
+#include <zypp/VendorAttr.h>
 
 using std::endl;
 

@@ -16,26 +16,26 @@
 
 #define ZYPP_USE_RESOLVER_INTERNALS
 
-#include "zypp/solver/detail/Testcase.h"
-#include "zypp/base/Logger.h"
-#include "zypp/base/LogControl.h"
-#include "zypp/base/GzStream.h"
-#include "zypp/base/String.h"
-#include "zypp/base/PtrTypes.h"
-#include "zypp/base/NonCopyable.h"
-#include "zypp/base/ReferenceCounted.h"
+#include <zypp/solver/detail/Testcase.h>
+#include <zypp/base/Logger.h>
+#include <zypp/base/LogControl.h>
+#include <zypp/base/GzStream.h>
+#include <zypp/base/String.h>
+#include <zypp/base/PtrTypes.h>
+#include <zypp/base/NonCopyable.h>
+#include <zypp/base/ReferenceCounted.h>
 
-#include "zypp/parser/xml/XmlEscape.h"
+#include <zypp/parser/xml/XmlEscape.h>
 
-#include "zypp/ZConfig.h"
-#include "zypp/PathInfo.h"
-#include "zypp/ResPool.h"
-#include "zypp/Repository.h"
-#include "zypp/target/modalias/Modalias.h"
+#include <zypp/ZConfig.h>
+#include <zypp/PathInfo.h>
+#include <zypp/ResPool.h>
+#include <zypp/Repository.h>
+#include <zypp/target/modalias/Modalias.h>
 
-#include "zypp/sat/detail/PoolImpl.h"
-#include "zypp/solver/detail/Resolver.h"
-#include "zypp/solver/detail/SystemCheck.h"
+#include <zypp/sat/detail/PoolImpl.h>
+#include <zypp/solver/detail/Resolver.h>
+#include <zypp/solver/detail/SystemCheck.h>
 
 using std::endl;
 

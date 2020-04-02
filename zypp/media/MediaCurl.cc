@@ -13,22 +13,22 @@
 #include <iostream>
 #include <list>
 
-#include "zypp/base/Logger.h"
-#include "zypp/ExternalProgram.h"
-#include "zypp/base/String.h"
-#include "zypp/base/Gettext.h"
-#include "zypp/base/Sysconfig.h"
-#include "zypp/base/Gettext.h"
+#include <zypp/base/Logger.h>
+#include <zypp/ExternalProgram.h>
+#include <zypp/base/String.h>
+#include <zypp/base/Gettext.h>
+#include <zypp/base/Sysconfig.h>
+#include <zypp/base/Gettext.h>
 
-#include "zypp/media/MediaCurl.h"
-#include "zypp/media/ProxyInfo.h"
-#include "zypp/media/MediaUserAuth.h"
-#include "zypp/media/CredentialManager.h"
-#include "zypp/media/CurlConfig.h"
-#include "zypp/media/CurlHelper.h"
-#include "zypp/Target.h"
-#include "zypp/ZYppFactory.h"
-#include "zypp/ZConfig.h"
+#include <zypp/media/MediaCurl.h>
+#include <zypp/media/ProxyInfo.h>
+#include <zypp/media/MediaUserAuth.h>
+#include <zypp/media/CredentialManager.h>
+#include <zypp/media/CurlConfig.h>
+#include <zypp/media/CurlHelper.h>
+#include <zypp/Target.h>
+#include <zypp/ZYppFactory.h>
+#include <zypp/ZConfig.h>
 
 #include <cstdlib>
 #include <sys/types.h>

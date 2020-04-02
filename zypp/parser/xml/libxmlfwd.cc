@@ -12,7 +12,7 @@
 
 #include <iostream>
 
-#include "zypp/parser/xml/libxmlfwd.h"
+#include <zypp/parser/xml/libxmlfwd.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

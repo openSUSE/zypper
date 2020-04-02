@@ -16,11 +16,11 @@
 
 #include <iostream>
 
-#include "zypp/base/ReferenceCounted.h"
-#include "zypp/base/NonCopyable.h"
-#include "zypp/base/Logger.h"
-#include "zypp/PathInfo.h"
-#include "zypp/TmpPath.h"
+#include <zypp/base/ReferenceCounted.h>
+#include <zypp/base/NonCopyable.h>
+#include <zypp/base/Logger.h>
+#include <zypp/PathInfo.h>
+#include <zypp/TmpPath.h>
 
 using std::endl;
 

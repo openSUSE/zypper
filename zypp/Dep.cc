@@ -12,11 +12,11 @@
 #include <map>
 #include <iostream>
 
-#include "zypp/base/Exception.h"
-#include "zypp/base/Gettext.h"
-#include "zypp/base/String.h"
+#include <zypp/base/Exception.h>
+#include <zypp/base/Gettext.h>
+#include <zypp/base/String.h>
 
-#include "zypp/Dep.h"
+#include <zypp/Dep.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

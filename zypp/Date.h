@@ -16,8 +16,8 @@
 #include <iosfwd>
 #include <string>
 
-#include "zypp/base/Exception.h"
-#include "zypp/base/EnumClass.h"
+#include <zypp/base/Exception.h>
+#include <zypp/base/EnumClass.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

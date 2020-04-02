@@ -15,11 +15,11 @@
 #include <iosfwd>
 #include <list>
 
-#include "zypp/target/rpm/BinHeader.h"
+#include <zypp/target/rpm/BinHeader.h>
 
-#include "zypp/Package.h"
-#include "zypp/Changelog.h"
-#include "zypp/Pathname.h"
+#include <zypp/Package.h>
+#include <zypp/Changelog.h>
+#include <zypp/Pathname.h>
 
 
 namespace zypp

@@ -16,9 +16,9 @@
 #include <vector>
 #include <list>
 
-#include "zypp/PoolItem.h"
-#include "zypp/sat/Transaction.h"
-#include "zypp/base/DefaultIntegral.h"
+#include <zypp/PoolItem.h>
+#include <zypp/sat/Transaction.h>
+#include <zypp/base/DefaultIntegral.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

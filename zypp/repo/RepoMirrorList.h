@@ -11,8 +11,8 @@
 #define ZYPP_REPO_MIRRORLIST_H_
 
 #include <vector>
-#include "zypp/Url.h"
-#include "zypp/Pathname.h"
+#include <zypp/Url.h>
+#include <zypp/Pathname.h>
 
 namespace zypp
 {

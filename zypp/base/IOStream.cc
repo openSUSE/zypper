@@ -12,10 +12,10 @@
 #include <iostream>
 #include <boost/mpl/assert.hpp>
 #include <boost/mpl/int.hpp>
-//#include "zypp/base/Logger.h"
+//#include <zypp/base/Logger.h>
 
-#include "zypp/base/IOStream.h"
-#include "zypp/base/String.h"
+#include <zypp/base/IOStream.h>
+#include <zypp/base/String.h>
 
 using std::endl;
 ///////////////////////////////////////////////////////////////////

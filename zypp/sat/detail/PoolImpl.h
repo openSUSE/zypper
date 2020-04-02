@@ -21,17 +21,17 @@ extern "C"
 }
 #include <iosfwd>
 
-#include "zypp/base/Hash.h"
-#include "zypp/base/NonCopyable.h"
-#include "zypp/base/SerialNumber.h"
-#include "zypp/base/SetTracker.h"
-#include "zypp/sat/detail/PoolMember.h"
-#include "zypp/sat/SolvableSpec.h"
-#include "zypp/sat/Queue.h"
-#include "zypp/RepoInfo.h"
-#include "zypp/Locale.h"
-#include "zypp/Capability.h"
-#include "zypp/IdString.h"
+#include <zypp/base/Hash.h>
+#include <zypp/base/NonCopyable.h>
+#include <zypp/base/SerialNumber.h>
+#include <zypp/base/SetTracker.h>
+#include <zypp/sat/detail/PoolMember.h>
+#include <zypp/sat/SolvableSpec.h>
+#include <zypp/sat/Queue.h>
+#include <zypp/RepoInfo.h>
+#include <zypp/Locale.h>
+#include <zypp/Capability.h>
+#include <zypp/IdString.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

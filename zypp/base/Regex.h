@@ -16,7 +16,7 @@
 #include <string>
 #include <regex.h>
 
-#include "zypp/base/Exception.h"
+#include <zypp/base/Exception.h>
 
 //////////////////////////////////////////////////////////////////
 namespace zypp
