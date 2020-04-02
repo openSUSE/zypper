@@ -25,7 +25,6 @@
 #include <zypp/PathInfo.h>
 
 
-using namespace std;
 using namespace zypp;
 using namespace zypp::functor;
 using namespace zypp::ui;

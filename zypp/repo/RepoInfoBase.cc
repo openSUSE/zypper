@@ -18,7 +18,7 @@
 #include "zypp/TriBool.h"
 #include "zypp/Pathname.h"
 
-using namespace std;
+using std::endl;
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -78,7 +78,7 @@ namespace zypp
     : _pimpl( new Impl() )
   {}
 
-  RepoInfoBase::RepoInfoBase(const string & alias)
+  RepoInfoBase::RepoInfoBase(const std::string & alias)
     : _pimpl( new Impl(alias) )
   {}
 

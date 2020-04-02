@@ -16,7 +16,7 @@
 #include "zypp/Digest.h"
 #include "zypp/KeyRing.h"
 
-using namespace std;
+using std::endl;
 
 #undef ZYPP_BASE_LOGGER_LOGGROUP
 #define ZYPP_BASE_LOGGER_LOGGROUP "FileChecker"
@@ -91,7 +91,7 @@ namespace zypp
   void CompositeFileChecker::operator()(const Pathname &file ) const
   {
     //MIL << _checkers.size() << " checkers" << endl;
-    for ( list<FileChecker>::const_iterator it = _checkers.begin(); it != _checkers.end(); ++it )
+    for ( std::list<FileChecker>::const_iterator it = _checkers.begin(); it != _checkers.end(); ++it )
     {
       if ( *it )
       {

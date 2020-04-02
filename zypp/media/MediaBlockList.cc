@@ -23,7 +23,6 @@
 #include "zypp/base/Logger.h"
 #include "zypp/base/String.h"
 
-using namespace std;
 using namespace zypp::base;
 
 namespace zypp {
@@ -73,7 +72,7 @@ MediaBlockList::verifyFileDigest(Digest &digest) const
 {
   if (!haveFileChecksum())
     return true;
-  vector<unsigned char>dig = digest.digestVector();
+  std::vector<unsigned char>dig = digest.digestVector();
   if (dig.empty() || dig.size() < fsum.size())
     return false;
   return memcmp(&dig[0], &fsum[0], fsum.size()) ? false : true;
@@ -135,7 +134,7 @@ MediaBlockList::verifyDigest(size_t blkno, Digest &digest) const
       memset(pad, 0, chksumpad - size);
       digest.update(pad, chksumpad - size);
     }
-  vector<unsigned char>dig = digest.digestVector();
+  std::vector<unsigned char>dig = digest.digestVector();
   if (dig.empty() || dig.size() < size_t(chksumlen))
     return false;
   return memcmp(&dig[0], &chksums[chksumlen * blkno], chksumlen) ? false : true;
@@ -240,7 +239,7 @@ MediaBlockList::checkChecksumRotated(size_t blkno, const unsigned char *buf, siz
 
 // write block to the file. can also deal with "rotated" buffers
 void
-MediaBlockList::writeBlock(size_t blkno, FILE *fp, const unsigned char *buf, size_t bufl, size_t start, vector<bool> &found) const
+MediaBlockList::writeBlock(size_t blkno, FILE *fp, const unsigned char *buf, size_t bufl, size_t start, std::vector<bool> &found) const
 {
   if (blkno >= blocks.size() || bufl < blocks[blkno].size)
     return;
@@ -287,14 +286,14 @@ fetchnext(FILE *fp, unsigned char *bp, size_t blksize, size_t pushback, unsigned
 
 
 void
-MediaBlockList::reuseBlocks(FILE *wfp, string filename)
+MediaBlockList::reuseBlocks(FILE *wfp, std::string filename)
 {
   FILE *fp;
 
   if (!chksumlen || (fp = fopen(filename.c_str(), "r")) == 0)
     return;
   size_t nblks = blocks.size();
-  vector<bool> found;
+  std::vector<bool> found;
   found.resize(nblks + 1);
   if (rsumlen && !rsums.empty())
     {

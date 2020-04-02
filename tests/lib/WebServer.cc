@@ -36,8 +36,8 @@
 #error "WEBSRV_BINARY not defined"
 #endif
 
+using std::endl;
 using namespace zypp;
-using namespace std;
 
 namespace  {
 
@@ -84,12 +84,12 @@ namespace  {
 }
 
 
-static inline string hostname()
+static inline std::string hostname()
 {
     static char buf[256];
-    string result;
+    std::string result;
     if (!::gethostname(buf, 255))
-        result += string(buf);
+        result += std::string(buf);
     else
         return "localhost";
     return result;
@@ -186,7 +186,7 @@ public:
 #else
 
       const auto writeConfFile = []( const Pathname &fileName, const std::string &data ){
-        ofstream file;
+        std::ofstream file;
         file.open( fileName.c_str() );
         if ( file.fail() ) {
           std::cerr << "Failed to create file " << fileName << std::endl;
@@ -401,7 +401,7 @@ public:
         }
     }
 
-    string log() const
+    std::string log() const
     {
       //read logfile
       return std::string();
@@ -484,13 +484,13 @@ bool WebServer::isStopped() const
   return _pimpl->_stopped;
 }
 
-void WebServer::addRequestHandler( const string &path, RequestHandler &&handler )
+void WebServer::addRequestHandler( const std::string &path, RequestHandler &&handler )
 {
   std::lock_guard<std::mutex> lock( _pimpl->_mut );
   _pimpl->_handlers[path] = std::move(handler);
 }
 
-void WebServer::removeRequestHandler(const string &path)
+void WebServer::removeRequestHandler(const std::string &path)
 {
   std::lock_guard<std::mutex> lock( _pimpl->_mut );
   auto it = _pimpl->_handlers.find( path );
@@ -543,7 +543,7 @@ WebServer::RequestHandler WebServer::makeResponse( const std::string &status, co
   return makeResponse( makeResponseString( status, headers, content ) );
 }
 
-string WebServer::makeResponseString(const string &status, const std::vector<string> &headers, const string &content)
+std::string WebServer::makeResponseString(const std::string &status, const std::vector<std::string> &headers, const std::string &content)
 {
   static const std::string genericResp = "Status: %1%\r\n"
                                          "%2%"

@@ -19,7 +19,7 @@
 #include "zypp/TmpPath.h"
 //#include "zypp/source/MediaSetAccessReportReceivers.h"
 
-using namespace std;
+using std::endl;
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -268,7 +268,7 @@ IMPL_PTR_TYPE(MediaSetAccess);
 	  media_mgr.setDeltafile(media, Pathname());
         media::MediaChangeReport::Action user = media::MediaChangeReport::ABORT;
         unsigned int devindex = 0;
-        vector<string> devices;
+        std::vector<std::string> devices;
         media_mgr.getDetectedDevices(media, devices, devindex);
 
         do

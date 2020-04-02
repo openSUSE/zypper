@@ -10,6 +10,7 @@
 #include "zypp/media/MediaException.h"
 #include <list>
 
+using std::endl;
 using namespace zypp;
 
 namespace internal

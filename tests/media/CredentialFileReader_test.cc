@@ -9,7 +9,8 @@
 
 #include "zypp/media/CredentialFileReader.h"
 
-using namespace std;
+using std::cout;
+using std::endl;
 using namespace zypp;
 using namespace zypp::media;
 

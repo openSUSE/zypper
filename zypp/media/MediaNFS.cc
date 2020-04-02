@@ -20,7 +20,7 @@
 
 #include <dirent.h>
 
-using namespace std;
+using std::endl;
 
 namespace zypp {
   namespace media {
@@ -63,7 +63,7 @@ namespace zypp {
       if(next)
 	ZYPP_THROW(MediaNotSupportedException(_url));
 
-      string path = _url.getHost();
+      std::string path = _url.getHost();
       path += ':';
       path += Pathname(_url.getPathName()).asString();
 
@@ -98,15 +98,15 @@ namespace zypp {
         filesystem = "nfs4";
       }
 
-      string options = _url.getQueryParam("mountoptions");
+      std::string options = _url.getQueryParam("mountoptions");
       if(options.empty())
       {
     	options="ro";
       }
 
-      vector<string> optionList;
+      std::vector<std::string> optionList;
       str::split( options, std::back_inserter(optionList), "," );
-      vector<string>::const_iterator it;
+      std::vector<std::string>::const_iterator it;
       bool contains_lock  = false, contains_soft = false,
            contains_timeo = false, contains_hard = false;
 
@@ -114,7 +114,7 @@ namespace zypp {
         if ( *it == "lock" || *it == "nolock" ) contains_lock = true;
         else if ( *it == "soft") contains_soft = true;
         else if ( *it == "hard") contains_hard = true;
-        else if ( it->find("timeo") != string::npos ) contains_timeo = true;
+	else if ( it->find("timeo") != std::string::npos ) contains_timeo = true;
       }
 
       if ( !(contains_lock && contains_soft) ) {
@@ -132,7 +132,7 @@ namespace zypp {
         if ( !(contains_soft || contains_hard) ) {
           optionList.push_back( "soft" );
           if ( !contains_timeo ) {
-            ostringstream s;
+	    std::ostringstream s;
             s << "timeo=" << NFS_MOUNT_TIMEOUT;
             optionList.push_back( s.str() );
           }

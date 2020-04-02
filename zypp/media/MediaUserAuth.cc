@@ -19,8 +19,7 @@
 #include "zypp/media/MediaException.h"
 #include "zypp/media/MediaUserAuth.h"
 
-
-using namespace std;
+using std::endl;
 
 namespace zypp {
   namespace media {

@@ -20,7 +20,6 @@
 #include "zypp/ZConfig.h"
 #include "zypp/PathInfo.h"
 
-using namespace std;
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -76,7 +75,7 @@ namespace zypp
       {
 	InputStream tmpfstream (tmpfile);
 	std::vector<Url> my_urls;
-	string tmpurl;
+	std::string tmpurl;
 	while (getline(tmpfstream.stream(), tmpurl))
 	{
 	  if ( tmpurl[0] == '#' )
@@ -96,7 +95,7 @@ namespace zypp
 	USR << url_r << " " << listfile_r << endl;
 
 	std::vector<Url> mirrorurls;
-	if ( mirrorListForceMetalink_r || url_r.asString().find( "/metalink" ) != string::npos )
+	if ( mirrorListForceMetalink_r || url_r.asString().find( "/metalink" ) != std::string::npos )
 	  mirrorurls = RepoMirrorListParseXML( listfile_r );
 	else
 	  mirrorurls = RepoMirrorListParseTXT( listfile_r );
@@ -108,7 +107,7 @@ namespace zypp
 	  if ( murl.getScheme() != "rsync" )
 	  {
 	    size_t delpos = murl.getPathName().find("repodata/repomd.xml");
-	    if( delpos != string::npos )
+	    if( delpos != std::string::npos )
 	    {
 	      murl.setPathName( murl.getPathName().erase(delpos)  );
 	    }
@@ -141,7 +140,7 @@ namespace zypp
       {
 	// have cachedir
 	Pathname cachefile( metadatapath_r );
-	if ( mirrorListForceMetalink_r || url_r.asString().find( "/metalink" ) != string::npos )
+	if ( mirrorListForceMetalink_r || url_r.asString().find( "/metalink" ) != std::string::npos )
 	  cachefile /= "mirrorlist.xml";
 	else
 	  cachefile /= "mirrorlist.txt";

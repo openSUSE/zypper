@@ -15,7 +15,8 @@
 using boost::unit_test::test_suite;
 using boost::unit_test::test_case;
 
-using namespace std;
+using std::cout;
+using std::endl;
 using namespace zypp;
 using namespace zypp::filesystem;
 
@@ -28,7 +29,7 @@ BOOST_AUTO_TEST_CASE(pathinfo_checksum_test)
 {
   const char *buffer = "I will test the checksum of this";
   TmpFile file;
-  ofstream str(file.path().asString().c_str(),ofstream::out);
+  std::ofstream str(file.path().asString().c_str(),std::ofstream::out);
 
   if (!str.good())
     ZYPP_THROW(Exception("cant open file"));
@@ -55,7 +56,7 @@ BOOST_AUTO_TEST_CASE(pathinfo_is_exist_test)
   BOOST_CHECK_EQUAL( filesystem::mkdir(dir.path() + subdir), 0 );
 
   Pathname filepath = (dir.path() + subdir+ "filename");
-  ofstream str(filepath.asString().c_str(),ofstream::out);
+  std::ofstream str(filepath.asString().c_str(),std::ofstream::out);
   str << "foo bar" << endl;
   str.flush();
   str.close();
@@ -79,7 +80,7 @@ BOOST_AUTO_TEST_CASE(pathinfo_expandlink_test)
 
   // create a file
   Pathname file(dir / "file");
-  ofstream str(file.asString().c_str(),ofstream::out);
+  std::ofstream str(file.asString().c_str(),std::ofstream::out);
   str << "foo bar" << endl;
   str.flush();
   str.close();

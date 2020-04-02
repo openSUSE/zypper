@@ -22,7 +22,7 @@
 #undef ZYPP_BASE_LOGGER_LOGGROUP
 #define ZYPP_BASE_LOGGER_LOGGROUP "librpmDb"
 
-using namespace std;
+using std::endl;
 
 namespace zypp
 {
@@ -47,7 +47,7 @@ public:
   rpmts _ts;              // transaction handle, includes database
   shared_ptr<RpmException> _error;  // database error
 
-  friend ostream & operator<<( ostream & str, const D & obj )
+  friend std::ostream & operator<<( std::ostream & str, const D & obj )
   {
     str << "{" << obj._error  << "(" << obj._root << ")" << obj._dbPath << "}";
     return str;
@@ -152,7 +152,7 @@ std::string librpmDb::expand( const std::string & macro_r )
   if ( !val )
     return "";
 
-  string ret( val );
+  std::string ret( val );
   free( val );
   return ret;
 }
@@ -323,7 +323,7 @@ void librpmDb::unblockAccess()
 //	METHOD NAME : librpmDb::dumpState
 //	METHOD TYPE : ostream &
 //
-ostream & librpmDb::dumpState( ostream & str )
+std::ostream & librpmDb::dumpState( std::ostream & str )
 {
   if ( !_defaultDb )
   {
@@ -458,7 +458,7 @@ void * librpmDb::dont_call_it() const
 //
 //	DESCRIPTION :
 //
-ostream & librpmDb::dumpOn( ostream & str ) const
+std::ostream & librpmDb::dumpOn( std::ostream & str ) const
 {
   ReferenceCounted::dumpOn( str ) << _d;
   return str;
@@ -692,7 +692,7 @@ shared_ptr<RpmException> librpmDb::db_const_iterator::dbError() const
 **	FUNCTION NAME : operator<<
 **	FUNCTION TYPE : ostream &
 */
-ostream & operator<<( ostream & str, const librpmDb::db_const_iterator & obj )
+std::ostream & operator<<( std::ostream & str, const librpmDb::db_const_iterator & obj )
 {
   str << "db_const_iterator(" << obj._d._dbptr
   << " Size:" << obj._d.size()
@@ -762,7 +762,7 @@ bool librpmDb::db_const_iterator::findByConflicts( const std::string & tag_r )
 //	METHOD NAME : librpmDb::findByName
 //	METHOD TYPE : bool
 //
-bool librpmDb::db_const_iterator::findByName( const string & name_r )
+bool librpmDb::db_const_iterator::findByName( const std::string & name_r )
 {
   return _d.init( RPMTAG_NAME, name_r.c_str() );
 }
@@ -773,7 +773,7 @@ bool librpmDb::db_const_iterator::findByName( const string & name_r )
 //	METHOD NAME : librpmDb::db_const_iterator::findPackage
 //	METHOD TYPE : bool
 //
-bool librpmDb::db_const_iterator::findPackage( const string & name_r )
+bool librpmDb::db_const_iterator::findPackage( const std::string & name_r )
 {
   if ( ! _d.init( RPMTAG_NAME, name_r.c_str() ) )
     return false;

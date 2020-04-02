@@ -17,7 +17,6 @@
 #include "zypp/parser/susetags/RepoIndex.h"
 #include "zypp/base/UserRequestException.h"
 
-using namespace std;
 using namespace zypp::parser;
 using namespace zypp::parser::susetags;
 

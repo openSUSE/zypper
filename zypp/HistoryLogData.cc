@@ -19,7 +19,7 @@
 
 #include "zypp/HistoryLogData.h"
 
-using namespace std;
+using std::endl;
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -264,8 +264,8 @@ namespace zypp
     std::string	HistoryLogPatchStateChange::repoAlias()	const { return optionalAt( REPOALIAS_INDEX ); }
     Patch::SeverityFlag HistoryLogPatchStateChange::severity() const { return Patch::severityFlag( optionalAt( SEVERITY_INDEX ) ); }
     Patch::Category HistoryLogPatchStateChange::category() const { return Patch::categoryEnum( optionalAt( CATEGORY_INDEX ) ); }
-    string HistoryLogPatchStateChange::oldstate() const { return optionalAt( OLDSTATE_INDEX ); }
-    string HistoryLogPatchStateChange::newstate() const { return optionalAt( NEWSTATE_INDEX ); }
+    std::string HistoryLogPatchStateChange::oldstate() const { return optionalAt( OLDSTATE_INDEX ); }
+    std::string HistoryLogPatchStateChange::newstate() const { return optionalAt( NEWSTATE_INDEX ); }
     std::string	HistoryLogPatchStateChange::userdata()	const { return optionalAt( USERDATA_INDEX ); }
 
   ///////////////////////////////////////////////////////////////////

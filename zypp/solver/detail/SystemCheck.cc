@@ -25,7 +25,7 @@
 #include "zypp/PathInfo.h"
 #include "zypp/solver/detail/SystemCheck.h"
 
-using namespace std;
+using std::endl;
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -36,7 +36,7 @@ namespace zypp
     CapabilitySet	_require;
     CapabilitySet	_conflict;
 
-    typedef vector<string> CapList;
+    typedef std::vector<std::string> CapList;
 
     const SystemCheck & SystemCheck::instance()
     {

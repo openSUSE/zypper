@@ -35,7 +35,7 @@ extern "C"
 #include "zypp/sat/Pool.h"
 #include "zypp/sat/detail/PoolImpl.h"
 
-using namespace std;
+using std::endl;
 using namespace zypp::filesystem;
 using namespace zypp::parser;
 
@@ -360,14 +360,14 @@ namespace zypp
                 sit != dict.sectionsEnd();
                 ++sit )
           {
-            string section(*sit);
+            std::string section(*sit);
             //MIL << section << endl;
             for ( IniDict::entry_const_iterator it = dict.entriesBegin(*sit);
                   it != dict.entriesEnd(*sit);
                   ++it )
             {
-              string entry(it->first);
-              string value(it->second);
+              std::string entry(it->first);
+              std::string value(it->second);
               //DBG << (*it).first << "=" << (*it).second << endl;
               if ( section == "main" )
               {
@@ -1187,7 +1187,7 @@ namespace zypp
   Pathname ZConfig::pluginsPath() const
   { return _pimpl->pluginsPath.get(); }
 
-  string ZConfig::multiversionKernels() const
+  std::string ZConfig::multiversionKernels() const
   {
     return _pimpl->cfg_kernel_keep_spec;
   }

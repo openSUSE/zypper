@@ -27,8 +27,7 @@
 #include <stdlib.h>
 #include <errno.h>
 
-
-using namespace std;
+using std::endl;
 
 // use directory.yast on every media (not just via ftp/http)
 #define NONREMOTE_DIRECTORY_YAST 1
@@ -1180,14 +1179,14 @@ void MediaHandler::getDirectoryYast( filesystem::DirContent & retlist,
   DBG << "provideFile(" << dirFile << "): " << "OK" << endl;
 
   // using directory.yast
-  ifstream dir( localPath( dirFile ).asString().c_str() );
+  std::ifstream dir( localPath( dirFile ).asString().c_str() );
   if ( dir.fail() ) {
     ERR << "Unable to load '" << localPath( dirFile ) << "'" << endl;
     ZYPP_THROW(MediaSystemException(url(),
       "Unable to load '" + localPath( dirFile ).asString() + "'"));
   }
 
-  string line;
+  std::string line;
   while( getline( dir, line ) ) {
     if ( line.empty() ) continue;
     if ( line == "directory.yast" ) continue;
@@ -1216,7 +1215,7 @@ void MediaHandler::getDirectoryYast( filesystem::DirContent & retlist,
 **	FUNCTION NAME : operator<<
 **	FUNCTION TYPE : ostream &
 */
-ostream & operator<<( ostream & str, const MediaHandler & obj )
+std::ostream & operator<<( std::ostream & str, const MediaHandler & obj )
 {
   str << obj.url() << ( obj.isAttached() ? "" : " not" )
     << " attached; localRoot \"" << obj.localRoot() << "\"";

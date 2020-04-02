@@ -22,9 +22,9 @@
 
 #include "zypp/media/CredentialManager.h"
 
-#define USER_CREDENTIALS_FILE ".zypp/credentials.cat"
+using std::endl;
 
-using namespace std;
+#define USER_CREDENTIALS_FILE ".zypp/credentials.cat"
 
 //////////////////////////////////////////////////////////////////////
 namespace zypp
@@ -174,7 +174,7 @@ namespace zypp
                              const Url & url,
                              url::ViewOption vopt)
   {
-    const string & username = url.getUsername();
+    const std::string & username = url.getUsername();
     for(CredentialManager::CredentialIterator it = set.begin(); it != set.end(); ++it)
     {
       // this ignores url params - not sure if it is good or bad...
@@ -291,7 +291,7 @@ namespace zypp
 
   AuthData_Ptr CredentialManager::getCred(const Url & url)
   {
-    string credfile = url.getQueryParam("credentials");
+    std::string credfile = url.getQueryParam("credentials");
     if (credfile.empty())
       return _pimpl->getCred(url);
     return _pimpl->getCredFromFile(credfile);
@@ -317,7 +317,7 @@ namespace zypp
   {
     AuthData_Ptr c_ptr;
     c_ptr.reset(new AuthData(cred)); // FIX for child classes if needed
-    pair<CredentialIterator, bool> ret = _pimpl->_credsGlobal.insert(c_ptr);
+    std::pair<CredentialIterator, bool> ret = _pimpl->_credsGlobal.insert(c_ptr);
     if (ret.second)
       _pimpl->_globalDirty = true;
     else if ((*ret.first)->password() != cred.password())
@@ -333,7 +333,7 @@ namespace zypp
   {
     AuthData_Ptr c_ptr;
     c_ptr.reset(new AuthData(cred)); // FIX for child classes if needed
-    pair<CredentialIterator, bool> ret = _pimpl->_credsUser.insert(c_ptr);
+    std::pair<CredentialIterator, bool> ret = _pimpl->_credsUser.insert(c_ptr);
     if (ret.second)
       _pimpl->_userDirty = true;
     else if ((*ret.first)->password() != cred.password())

@@ -27,11 +27,12 @@
 
 #include "zypp/PathInfo.h"
 
+using std::endl;
+
 #ifndef N_
 #define N_(STR) STR
 #endif
 
-using namespace std;
 
 namespace zypp {
   namespace media {
@@ -87,17 +88,17 @@ void Mount::mount( const std::string & source,
       ZYPP_THROW(MediaMountException("Mounting media failed", source, target));
     }
 
-    string value;
-    string output = process->receiveLine();
+    std::string value;
+    std::string output = process->receiveLine();
 
     // parse error messages
     while ( output.length() > 0)
     {
-	string::size_type 	ret;
+	std::string::size_type 	ret;
 
 	// extract \n
 	ret = output.find_first_of ( "\n" );
-	if ( ret != string::npos )
+	if ( ret != std::string::npos )
 	{
 	    value.assign ( output, 0, ret );
 	}
@@ -108,23 +109,23 @@ void Mount::mount( const std::string & source,
 
 	DBG << "stdout: " << value << endl;
 
-	if  ( value.find ( "is already mounted on" ) != string::npos )
+	if  ( value.find ( "is already mounted on" ) != std::string::npos )
 	{
 	    err = "Media already mounted";
 	}
-	else if  ( value.find ( "ermission denied" ) != string::npos )
+	else if  ( value.find ( "ermission denied" ) != std::string::npos )
 	{
 	    err = "Permission denied";
 	}
-	else if  ( value.find ( "wrong fs type" ) != string::npos )
+	else if  ( value.find ( "wrong fs type" ) != std::string::npos )
 	{
 	    err = "Invalid filesystem on media";
 	}
-	else if  ( value.find ( "No medium found" ) != string::npos )
+	else if  ( value.find ( "No medium found" ) != std::string::npos )
 	{
 	    err = "No medium found";
 	}
-	else if  ( value.find ( "Not a directory" ) != string::npos )
+	else if  ( value.find ( "Not a directory" ) != std::string::npos )
 	{
 	    if( filesystem == "nfs" || filesystem == "nfs4" )
 	    {
@@ -176,17 +177,17 @@ void Mount::umount( const std::string & path )
         ZYPP_THROW(MediaUnmountException("E_mount_failed", path));
     }
 
-    string value;
-    string output = process->receiveLine();
+    std::string value;
+    std::string output = process->receiveLine();
 
     // parse error messages
     while ( output.length() > 0)
     {
-	string::size_type 	ret;
+	std::string::size_type 	ret;
 
 	// extract \n
 	ret = output.find_first_of ( "\n" );
-	if ( ret != string::npos )
+	if ( ret != std::string::npos )
 	{
 	    value.assign ( output, 0, ret );
 	}
@@ -197,12 +198,12 @@ void Mount::umount( const std::string & path )
 
 	DBG << "stdout: " << value << endl;
 
-	// if  ( value.find ( "not mounted" ) != string::npos )
+	// if  ( value.find ( "not mounted" ) != std::string::npos )
 	// {
 	//    err = Error::E_already_mounted;
 	// }
 
-	if  ( value.find ( "device is busy" ) != string::npos )
+	if  ( value.find ( "device is busy" ) != std::string::npos )
 	{
 	    err = "Device is busy";
 	}

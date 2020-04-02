@@ -14,7 +14,6 @@
 #include "zypp/TmpPath.h"
 
 using boost::unit_test::test_case;
-using namespace std;
 using namespace zypp;
 using namespace zypp::filesystem;
 

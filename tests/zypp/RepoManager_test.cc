@@ -24,7 +24,6 @@
 using boost::unit_test::test_suite;
 using boost::unit_test::test_case;
 
-using namespace std;
 using namespace zypp;
 using namespace zypp::filesystem;
 using namespace zypp::repo;
@@ -146,7 +145,7 @@ BOOST_AUTO_TEST_CASE(repomanager_test)
 
   RepoManager manager(opts);
 
-  list<RepoInfo> repos;
+  std::list<RepoInfo> repos;
   repos.insert(repos.end(), manager.repoBegin(), manager.repoEnd());
   BOOST_CHECK_EQUAL(repos.size(), (unsigned) 4);
 
@@ -207,7 +206,7 @@ BOOST_AUTO_TEST_CASE(repomanager_test)
 
   std::list<RepoInfo> infos;
   manager.getRepositoriesInService("test",
-    insert_iterator<std::list<RepoInfo> >(infos,infos.begin()));
+    std::insert_iterator<std::list<RepoInfo> >(infos,infos.begin()));
   BOOST_CHECK_EQUAL(infos.size(), 2); // 2 from new repoindex
 
 
@@ -276,7 +275,7 @@ BOOST_AUTO_TEST_CASE(repo_seting_test)
 {
   RepoInfo repo;
   repo.setAlias("foo");
-  repo.setBaseUrl(string("http://test.org"));
+  repo.setBaseUrl(std::string("http://test.org"));
   BOOST_CHECK_MESSAGE( !repo.keepPackages(), "keepPackages must default to OFF");
 }
 

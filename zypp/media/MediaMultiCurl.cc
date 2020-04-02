@@ -29,7 +29,7 @@
 #include "zypp/ManagedFile.h"
 #include "zypp/media/CurlHelper.h"
 
-using namespace std;
+using std::endl;
 using namespace zypp::base;
 
 #undef CURLVERSION_AT_LEAST
@@ -93,7 +93,7 @@ private:
 
   multifetchrequest *_request;
   int _pass;
-  string _urlbuf;
+  std::string _urlbuf;
   off_t _off;
   size_t _size;
   Digest _dig;
@@ -252,7 +252,7 @@ multifetchworker::headerfunction(char *p, size_t size)
   size_t l = size;
   if (l > 9 && !strncasecmp(p, "Location:", 9))
     {
-      string line(p + 9, l - 9);
+      std::string line(p + 9, l - 9);
       if (line[l - 10] == '\r')
 	line.erase(l - 10, 1);
       XXX << "#" << _workerno << ": redirecting to" << line << endl;
@@ -361,7 +361,7 @@ multifetchworker::multifetchworker(int no, multifetchrequest &request, const Url
       if ( _settings.userPassword().size() )
 	{
 	  curl_easy_setopt(_curl, CURLOPT_USERPWD, _settings.userPassword().c_str());
-	  string use_auth = _settings.authType();
+	  std::string use_auth = _settings.authType();
 	  if (use_auth.empty())
 	    use_auth = "digest,basic";        // our default
 	  long auth = CurlAuthData::auth_type_str2long(use_auth);
@@ -417,7 +417,7 @@ multifetchworker::~multifetchworker()
   disconnectFrom();
 }
 
-static inline bool env_isset(string name)
+static inline bool env_isset(std::string name)
 {
   const char *s = getenv(name.c_str());
   return s && *s ? true : false;
@@ -426,7 +426,7 @@ static inline bool env_isset(string name)
 void
 multifetchworker::checkdns()
 {
-  string host = _url.getHost();
+  std::string host = _url.getHost();
 
   if (host.empty())
     return;
@@ -446,7 +446,7 @@ multifetchworker::checkdns()
     return;
   if (env_isset("all_proxy") || env_isset("ALL_PROXY"))
     return;
-  string schemeproxy = _url.getScheme() + "_proxy";
+  std::string schemeproxy = _url.getScheme() + "_proxy";
   if (env_isset(schemeproxy))
     return;
   if (schemeproxy != "http_proxy")
@@ -1269,7 +1269,7 @@ int MediaMultiCurl::progressCallback( void *clientp, double dltotal, double dlno
   bool ismetalink = false;
   if (curl_easy_getinfo(_curl, CURLINFO_CONTENT_TYPE, &ptr) == CURLE_OK && ptr) 
     {    
-      string ct = string(ptr);
+      std::string ct = std::string(ptr);
       if (ct.find("application/metalink+xml") == 0 || ct.find("application/metalink4+xml") == 0)
         ismetalink = true;
     }    
@@ -1389,7 +1389,7 @@ void MediaMultiCurl::doGetFileCopy( const Pathname & filename , const Pathname &
   char *ptr = NULL;
   if (curl_easy_getinfo(_curl, CURLINFO_CONTENT_TYPE, &ptr) == CURLE_OK && ptr)
     {
-      string ct = string(ptr);
+      std::string ct = std::string(ptr);
       if (ct.find("application/metalink+xml") == 0 || ct.find("application/metalink4+xml") == 0)
 	ismetalink = true;
     }
@@ -1413,7 +1413,7 @@ void MediaMultiCurl::doGetFileCopy( const Pathname & filename , const Pathname &
 	  MetaLinkParser mlp;
 	  mlp.parse(destNew);
 	  MediaBlockList bl = mlp.getBlockList();
-	  vector<Url> urls = mlp.getUrls();
+	  std::vector<Url> urls = mlp.getUrls();
 	  XXX << bl << endl;
 	  file = fopen((*destNew).c_str(), "w+e");
 	  if (!file)
@@ -1529,7 +1529,7 @@ void MediaMultiCurl::multifetch(const Pathname & filename, FILE *fp, std::vector
     {
       try
 	{
-	  string scheme = urliter->getScheme();
+	  std::string scheme = urliter->getScheme();
 	  if (scheme == "http" || scheme == "https" || scheme == "ftp" || scheme == "tftp")
 	    {
 	      checkProtocol(*urliter);
@@ -1562,17 +1562,17 @@ void MediaMultiCurl::checkFileDigest(Url &url, FILE *fp, MediaBlockList *blklist
     ZYPP_THROW(MediaCurlException(url, "file verification failed", "checksum error"));
 }
 
-bool MediaMultiCurl::isDNSok(const string &host) const
+bool MediaMultiCurl::isDNSok(const std::string &host) const
 {
   return _dnsok.find(host) == _dnsok.end() ? false : true;
 }
 
-void MediaMultiCurl::setDNSok(const string &host) const
+void MediaMultiCurl::setDNSok(const std::string &host) const
 {
   _dnsok.insert(host);
 }
 
-CURL *MediaMultiCurl::fromEasyPool(const string &host) const
+CURL *MediaMultiCurl::fromEasyPool(const std::string &host) const
 {
   if (_easypool.find(host) == _easypool.end())
     return 0;

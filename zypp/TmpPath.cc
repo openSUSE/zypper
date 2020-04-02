@@ -22,7 +22,7 @@
 #include "zypp/PathInfo.h"
 #include "zypp/TmpPath.h"
 
-using namespace std;
+using std::endl;
 
 namespace zypp {
   namespace filesystem {
@@ -243,7 +243,7 @@ namespace zypp {
     const std::string &
     TmpFile::defaultPrefix()
     {
-      static string p( "TmpFile." );
+      static std::string p( "TmpFile." );
       return p;
     }
 
@@ -312,7 +312,7 @@ namespace zypp {
     const std::string &
     TmpDir::defaultPrefix()
     {
-      static string p( "TmpDir." );
+      static std::string p( "TmpDir." );
       return p;
     }
 

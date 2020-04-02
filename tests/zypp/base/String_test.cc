@@ -7,7 +7,6 @@ using boost::unit_test::test_suite;
 using boost::unit_test::test_case;
 using namespace boost::unit_test;
 
-using namespace std;
 using namespace zypp;
 using namespace zypp::str;
 
@@ -63,8 +62,8 @@ BOOST_AUTO_TEST_CASE(glob2rx)
 
 BOOST_AUTO_TEST_CASE(gsubTest)
 {
-  string olds = "olds";
-  string news = "new string";
+  std::string olds = "olds";
+  std::string news = "new string";
 
   BOOST_CHECK_EQUAL(gsub("test olds string",olds,news), "test new string string");
   BOOST_CHECK_EQUAL(gsub("no string",olds,news),"no string");
@@ -73,9 +72,9 @@ BOOST_AUTO_TEST_CASE(gsubTest)
 
 BOOST_AUTO_TEST_CASE(replaceAllTest)
 {
-  string olds = "olds";
-  string news = "new string";
-  string tests;
+  std::string olds = "olds";
+  std::string news = "new string";
+  std::string tests;
 
   tests = "test olds string";
   replaceAll(tests,olds,news);
@@ -92,8 +91,8 @@ BOOST_AUTO_TEST_CASE(replaceAllTest)
 
 BOOST_AUTO_TEST_CASE(testsplitEscaped)
 {
-  string s( "simple non-escaped string" );
-  vector<string> v;
+  std::string s( "simple non-escaped string" );
+  std::vector<std::string> v;
 
   splitEscaped( s, std::back_inserter(v) );
   BOOST_CHECK_EQUAL( v.size(), 3 );
@@ -102,19 +101,19 @@ BOOST_AUTO_TEST_CASE(testsplitEscaped)
   BOOST_CHECK_EQUAL( v[2], "string" );
 
   v.clear();
-  s = string( "\"escaped sentence \"" );
+  s = std::string( "\"escaped sentence \"" );
   splitEscaped( s, std::back_inserter(v) );
   BOOST_CHECK_EQUAL( v.size(), 1 );
   BOOST_CHECK_EQUAL( v[0], "escaped sentence " );
 
   v.clear();
-  s = string( "\"escaped \\\\sent\\\"ence \\\\\"" );
+  s = std::string( "\"escaped \\\\sent\\\"ence \\\\\"" );
   splitEscaped( s, std::back_inserter(v) );
   BOOST_CHECK_EQUAL( v.size(), 1 );
   BOOST_CHECK_EQUAL( v[0], "escaped \\sent\"ence \\" );
 
   v.clear();
-  s = string( "escaped sentence\\ with\\ space" );
+  s = std::string( "escaped sentence\\ with\\ space" );
   splitEscaped( s, std::back_inserter(v) );
   BOOST_CHECK_EQUAL( v.size(), 2 );
   BOOST_CHECK_EQUAL( v[0], "escaped" );
@@ -179,8 +178,8 @@ BOOST_AUTO_TEST_CASE(bnc_909772)
 
 BOOST_AUTO_TEST_CASE(testsplitEscapedWithEmpty)
 {
-  string s( "simple:non-escaped:string" );
-  vector<string> v;
+  std::string s( "simple:non-escaped:string" );
+  std::vector<std::string> v;
 
   BOOST_CHECK_EQUAL(splitFieldsEscaped(s, std::back_inserter(v)), 3);
   BOOST_CHECK_EQUAL(v.size(), 3);
@@ -203,8 +202,8 @@ BOOST_AUTO_TEST_CASE(testsplitEscapedWithEmpty)
 
 BOOST_AUTO_TEST_CASE(test_escape)
 {
-  string badass = "bad|ass\\|worse";
-  string escaped = str::escape(badass, '|');
+  std::string badass = "bad|ass\\|worse";
+  std::string escaped = str::escape(badass, '|');
 
   BOOST_CHECK_EQUAL( escaped, "bad\\|ass\\\\\\|worse" );
 }
@@ -294,28 +293,28 @@ BOOST_AUTO_TEST_CASE(operations)
 
     // strip first
     {
-        string tostrip(" Oh! la la ");
-        string word( str::stripFirstWord(tostrip, true) ); // ltrim first
+        std::string tostrip(" Oh! la la ");
+        std::string word( str::stripFirstWord(tostrip, true) ); // ltrim first
         BOOST_CHECK_EQUAL(word, "Oh!");
         BOOST_CHECK_EQUAL(tostrip, "la la ");
     }
     {
-        string tostrip(" Oh! la la ");
-        string word( str::stripFirstWord(tostrip, false) ); // no ltrim first
+        std::string tostrip(" Oh! la la ");
+        std::string word( str::stripFirstWord(tostrip, false) ); // no ltrim first
         BOOST_CHECK_EQUAL(word, "");
         BOOST_CHECK_EQUAL(tostrip, "Oh! la la ");
     }
 
     // strip last
     {
-        string tostrip(" Oh! la la ");
-        string word( str::stripLastWord(tostrip, true) ); // rtrim first
+        std::string tostrip(" Oh! la la ");
+        std::string word( str::stripLastWord(tostrip, true) ); // rtrim first
         BOOST_CHECK_EQUAL(word, "la");
         BOOST_CHECK_EQUAL(tostrip, " Oh! la");
     }
     {
-        string tostrip(" Oh! la la ");
-        string word( str::stripLastWord(tostrip, false) ); // no rtrim first
+        std::string tostrip(" Oh! la la ");
+        std::string word( str::stripLastWord(tostrip, false) ); // no rtrim first
         BOOST_CHECK_EQUAL(word, "");
         BOOST_CHECK_EQUAL(tostrip, " Oh! la la");
     }

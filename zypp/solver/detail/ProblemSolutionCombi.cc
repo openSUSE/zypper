@@ -25,7 +25,6 @@
 
 #include "zypp/solver/detail/ProblemSolutionCombi.h"
 
-using namespace std;
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp

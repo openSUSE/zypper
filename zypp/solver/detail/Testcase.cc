@@ -37,6 +37,8 @@
 #include "zypp/solver/detail/Resolver.h"
 #include "zypp/solver/detail/SystemCheck.h"
 
+using std::endl;
+
 /////////////////////////////////////////////////////////////////////////
 namespace zypp
 { ///////////////////////////////////////////////////////////////////////
@@ -50,7 +52,6 @@ namespace zypp
 #define TAB "\t"
 #define TAB2 "\t\t"
 
-using namespace std;
 using namespace zypp::str;
 
 //---------------------------------------------------------------------------
@@ -62,7 +63,7 @@ inline std::string xml_escape( const std::string &text )
 
 inline std::string xml_tag_enclose( const std::string &text, const std::string &tag, bool escape = false )
 {
-  string result;
+  std::string result;
   result += "<" + tag + ">";
 
   if ( escape)
@@ -80,7 +81,7 @@ std::string helixXML( const T &obj ); //undefined
 template<>
 std::string helixXML( const Edition &edition )
 {
-    stringstream str;
+    std::stringstream str;
     str << xml_tag_enclose(edition.version(), "version");
     if (!edition.release().empty())
 	str << xml_tag_enclose(edition.release(), "release");
@@ -92,7 +93,7 @@ std::string helixXML( const Edition &edition )
 template<>
 std::string helixXML( const Arch &arch )
 {
-    stringstream str;
+    std::stringstream str;
     str << xml_tag_enclose(arch.asString(), "arch");
     return str.str();
 }
@@ -100,7 +101,7 @@ std::string helixXML( const Arch &arch )
 template<>
 std::string helixXML( const Capability &cap )
 {
-    stringstream str;
+    std::stringstream str;
     CapDetail detail = cap.detail();
     if (detail.isSimple()) {
 	if (detail.isVersioned()) {
@@ -154,7 +155,7 @@ std::string helixXML( const Capability &cap )
 template<>
 std::string helixXML( const Capabilities &caps )
 {
-    stringstream str;
+    std::stringstream str;
     Capabilities::const_iterator it = caps.begin();
     str << endl;
     for ( ; it != caps.end(); ++it)
@@ -168,7 +169,7 @@ std::string helixXML( const Capabilities &caps )
 template<>
 std::string helixXML( const CapabilitySet &caps )
 {
-    stringstream str;
+    std::stringstream str;
     CapabilitySet::const_iterator it = caps.begin();
     str << endl;
     for ( ; it != caps.end(); ++it)
@@ -179,9 +180,9 @@ std::string helixXML( const CapabilitySet &caps )
     return str.str();
 }
 
-inline string helixXML( const PoolItem & obj, Dep deptag_r )
+inline std::string helixXML( const PoolItem & obj, Dep deptag_r )
 {
-  stringstream out;
+  std::stringstream out;
   Capabilities caps( obj[deptag_r] );
   if ( ! caps.empty() )
     out << TAB << xml_tag_enclose(helixXML(caps), deptag_r.asString()) << endl;
@@ -190,7 +191,7 @@ inline string helixXML( const PoolItem & obj, Dep deptag_r )
 
 std::string helixXML( const PoolItem & item )
 {
-  stringstream str;
+  std::stringstream str;
   str << "<" << item.kind() << ">" << endl;
   str << TAB << xml_tag_enclose( item.name(), "name", true ) << endl;
   str << TAB << xml_tag_enclose( item.vendor().asString(), "vendor", true ) << endl;
@@ -324,7 +325,7 @@ HelixControl::HelixControl(const std::string & controlPath,
     :dumpFile (controlPath)
     ,_inSetup( true )
 {
-    file = new ofstream(controlPath.c_str());
+    file = new std::ofstream(controlPath.c_str());
     if (!file) {
 	ZYPP_THROW (Exception( "Can't open " + controlPath ) );
     }

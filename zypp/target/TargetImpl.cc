@@ -59,7 +59,7 @@
 
 #include "zypp/PluginExecutor.h"
 
-using namespace std;
+using std::endl;
 
 ///////////////////////////////////////////////////////////////////
 extern "C"
@@ -605,7 +605,7 @@ namespace zypp
         else if ( format == DIGEST || format == BULK )
         {
           filesystem::TmpFile tmpfile;
-          ofstream out( tmpfile.path().c_str() );
+	  std::ofstream out( tmpfile.path().c_str() );
           for_( it, notifications_r.begin(), notifications_r.end() )
           {
             if ( format == DIGEST )
@@ -773,9 +773,9 @@ namespace zypp
      */
     void updateFileContent( const Pathname &filename,
                             boost::function<bool ()> condition,
-                            boost::function<string ()> value )
+			    boost::function<std::string ()> value )
     {
-        string val = value();
+        std::string val = value();
         // if the value is empty, then just dont
         // do anything, regardless of the condition
         if ( val.empty() )
@@ -847,7 +847,7 @@ namespace zypp
           return;
       }
 
-      string flavor = p->flavor();
+      std::string flavor = p->flavor();
 
       try
       {
@@ -855,7 +855,7 @@ namespace zypp
         updateFileContent( flavorpath,
                            // only if flavor is not empty
                            functor::Constant<bool>( ! flavor.empty() ),
-                           functor::Constant<string>(flavor) );
+			   functor::Constant<std::string>(flavor) );
       }
       catch ( const Exception &e )
       {

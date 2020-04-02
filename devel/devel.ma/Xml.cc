@@ -11,7 +11,6 @@
 //#include <zypp/parser/xml/ParseDef.h>
 //#include <zypp/parser/xml/ParseDefConsume.h>
 
-using namespace std;
 using namespace zypp;
 
 #include <zypp/base/Measure.h>

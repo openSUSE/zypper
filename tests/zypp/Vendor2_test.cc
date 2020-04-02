@@ -13,7 +13,6 @@
 #include "zypp/VendorAttr.h"
 
 using boost::unit_test::test_case;
-using namespace std;
 using namespace zypp;
 
 namespace zypp

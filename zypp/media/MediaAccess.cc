@@ -35,7 +35,7 @@
 #include "zypp/media/MediaPlugin.h"
 #include "zypp/media/UrlResolverPlugin.h"
 
-using namespace std;
+using std::endl;
 
 namespace zypp {
   namespace media {
@@ -135,7 +135,7 @@ MediaAccess::open (const Url& o_url, const Pathname & preferred_attach_point)
     else if (scheme == "ftp" || scheme == "tftp" || scheme == "http" || scheme == "https")
     {
         bool use_multicurl = true;
-        string urlmediahandler ( url.getQueryParam("mediahandler") );
+	std::string urlmediahandler ( url.getQueryParam("mediahandler") );
         if ( urlmediahandler == "multicurl" )
         {
           use_multicurl = true;
@@ -459,7 +459,7 @@ void MediaAccess::getFile( const Url &from, const Pathname &to )
 
   Pathname path = from.getPathData();
   Pathname dir = path.dirname();
-  string base = path.basename();
+  std::string base = path.basename();
 
   Url u = from;
   u.setPathData( dir.asString() );

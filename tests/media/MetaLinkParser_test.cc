@@ -4,7 +4,6 @@
 
 #include "zypp/media/MetaLinkParser.h"
 
-using namespace std;
 using namespace zypp;
 using namespace zypp::media;
 
@@ -18,11 +17,11 @@ BOOST_AUTO_TEST_CASE(parse_metalink)
 
   mlp3.parse(meta3file);
   MediaBlockList bl3 = mlp3.getBlockList();
-  vector<Url> urls3 = mlp3.getUrls();
+  std::vector<Url> urls3 = mlp3.getUrls();
 
   mlp4.parse(meta4file);
   MediaBlockList bl4 = mlp4.getBlockList();
-  vector<Url> urls4 = mlp4.getUrls();
+  std::vector<Url> urls4 = mlp4.getUrls();
 
 
   BOOST_CHECK(bl3.asString() == bl4.asString());

@@ -8,7 +8,7 @@
 
 #include "zypp/media/CurlConfig.h"
 
-using namespace std;
+using std::endl;
 
 namespace zypp
 {
@@ -30,7 +30,7 @@ namespace zypp
       // attempts to load .curlrc from the homedir
       char *home = getenv("HOME");
       if(home)
-        curlrcFile = string( home ) + string( "/.curlrc" );
+	curlrcFile = std::string( home ) + std::string( "/.curlrc" );
     }
     else
       curlrcFile = filename;
@@ -54,10 +54,10 @@ namespace zypp
       return 1;
     }
 
-    ifstream inp(curlrcFile.c_str());
+    std::ifstream inp(curlrcFile.c_str());
     for(iostr::EachLine in( inp ); in; in.next())
     {
-      string line = str::trim(*in);
+      std::string line = str::trim(*in);
 
       // skip empty lines and comments
       if (line.empty())
@@ -90,7 +90,7 @@ namespace zypp
       while (*cur && !ISSEP(*cur))
         cur++;
 
-      string option(beg, cur - beg);
+      std::string option(beg, cur - beg);
 
       // skip separator characters
       while (*cur && ISSEP(*cur))
@@ -101,7 +101,7 @@ namespace zypp
       while (*cur)
         cur++;
 
-      string value(beg, cur - beg);
+      std::string value(beg, cur - beg);
 
       DBG << "GOT: " << option << endl;
 
@@ -111,7 +111,7 @@ namespace zypp
         if (value[0] == '\"')
         {
           // remove the quotes
-          string::size_type pos = value.rfind('\"');
+	  std::string::size_type pos = value.rfind('\"');
           bool cut_last =
             pos == value.size() - 1 && pos > 1 && value[pos-1] != '\\';
           value = value.substr(1,
@@ -119,7 +119,7 @@ namespace zypp
 
           // replace special characters:
           pos = 0;
-          while ((pos = value.find('\\', pos)) != string::npos)
+	  while ((pos = value.find('\\', pos)) != std::string::npos)
           {
             // just erase the backslash if it is found at the end
             if (pos == value.size() - 1)

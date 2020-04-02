@@ -16,7 +16,7 @@
 #include "zypp/Target.h"
 #include "zypp/target/TargetImpl.h"
 
-using namespace std;
+using std::endl;
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

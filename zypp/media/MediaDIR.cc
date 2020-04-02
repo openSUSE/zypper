@@ -18,7 +18,7 @@
 #include <sys/mount.h>
 #include <errno.h>
 
-using namespace std;
+using std::endl;
 
 namespace zypp {
   namespace media {

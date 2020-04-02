@@ -28,7 +28,7 @@
 #undef ZYPP_BASE_LOGGER_LOGGROUP
 #define ZYPP_BASE_LOGGER_LOGGROUP "PoolQuery"
 
-using namespace std;
+using std::endl;
 using namespace zypp::sat;
 
 ///////////////////////////////////////////////////////////////////
@@ -426,7 +426,7 @@ namespace zypp
 
   public:
     /** String representation */
-    string asString() const;
+    std::string asString() const;
 
     /** \name Raw query options. */
     //@{
@@ -534,7 +534,7 @@ namespace zypp
   {
     MyInserter(PoolQuery::StrContainer & cont) : _cont(cont) {}
 
-    bool operator()(const string & str)
+    bool operator()(const std::string & str)
     {
       _cont.insert(str);
       return true;
@@ -546,7 +546,7 @@ namespace zypp
 
   struct EmptyFilter
   {
-    bool operator()(const string & str)
+    bool operator()(const std::string & str)
     {
       return !str.empty();
     }
@@ -768,9 +768,9 @@ namespace zypp
     return StrMatcher( ret, retflags );
   }
 
-  string PoolQuery::Impl::asString() const
+  std::string PoolQuery::Impl::asString() const
   {
-    ostringstream o;
+    std::ostringstream o;
 
     o << "kinds: ";
     if ( _kinds.empty() )
@@ -867,7 +867,7 @@ namespace zypp
   void PoolQuery::addKind(const ResKind & kind)
   { _pimpl->_kinds.insert(kind); }
 
-  void PoolQuery::addString(const string & value)
+  void PoolQuery::addString(const std::string & value)
   { _pimpl->_strings.insert(value); }
 
   void PoolQuery::addAttribute(const sat::SolvAttr & attr, const std::string & value)
@@ -1132,10 +1132,10 @@ namespace zypp
 
   //\TODO maybe ctor with stream can be usefull
   //\TODO let it throw, let it throw, let it throw.
-  bool PoolQuery::recover( istream &str, char delim )
+  bool PoolQuery::recover( std::istream &str, char delim )
   {
     bool finded_something = false; //indicates some atributes is finded
-    string s;
+    std::string s;
     do {
       if ( str.eof() )
         break;
@@ -1147,7 +1147,7 @@ namespace zypp
         continue;
       }
 
-      string::size_type pos = s.find(':');
+      std::string::size_type pos = s.find(':');
       if (s.empty() || pos == s.npos) // some garbage on line... act like blank line
       {
         if (finded_something) //is first blank line after record?
@@ -1162,8 +1162,8 @@ namespace zypp
 
       finded_something = true;
 
-      string attrName(str::trim(string(s,0,pos))); // trimmed name of atribute
-      string attrValue(str::trim(string(s,pos+1,s.npos))); //trimmed value
+      std::string attrName(str::trim(std::string(s,0,pos))); // trimmed name of atribute
+      std::string attrValue(str::trim(std::string(s,pos+1,s.npos))); //trimmed value
 
       PoolQueryAttr attribute( attrName );
 
@@ -1255,7 +1255,7 @@ namespace zypp
       }
       else if ( attribute == PoolQueryAttr::editionAttr)
       {
-        string::size_type pos;
+        std::string::size_type pos;
         Rel rel("==");
         if (attrValue.find_first_of("=<>!") == 0)
         {
@@ -1284,7 +1284,7 @@ namespace zypp
       }
       else
       {
-        string s = attrName;
+        std::string s = attrName;
         str::replaceAll( s,"_",":" );
         SolvAttr a(s);
 	if ( a == SolvAttr::name || isDependencyAttribute( a ) )
@@ -1369,7 +1369,7 @@ namespace zypp
     return finded_something;
   }
 
-  void PoolQuery::serialize( ostream &str, char delim ) const
+  void PoolQuery::serialize( std::ostream &str, char delim ) const
   {
     //separating delim
     str << delim;
@@ -1448,7 +1448,7 @@ namespace zypp
 
     for_( it, attributes().begin(), attributes().end() )
     {
-      string s = it->first.asString();
+      std::string s = it->first.asString();
       str::replaceAll(s,":","_");
       for_( it2,it->second.begin(),it->second.end() )
       {
@@ -1465,10 +1465,10 @@ namespace zypp
     str << delim;
   }
 
-  string PoolQuery::asString() const
+  std::string PoolQuery::asString() const
   { return _pimpl->asString(); }
 
-  ostream & operator<<( ostream & str, const PoolQuery & obj )
+  std::ostream & operator<<( std::ostream & str, const PoolQuery & obj )
   { return str << obj.asString(); }
 
   std::ostream & dumpOn( std::ostream & str, const PoolQuery & obj )

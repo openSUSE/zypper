@@ -331,11 +331,11 @@ namespace zypp
       }
 
       string spath = path.asString()+"/";
-      string::size_type lastpos = ( path.relative() ? 2 : 1 ); // skip leasding './' or '/'
-      string::size_type pos = string::npos;
+      std::string::size_type lastpos = ( path.relative() ? 2 : 1 ); // skip leasding './' or '/'
+      std::string::size_type pos = std::string::npos;
       int ret = 0;
 
-      while ( (pos = spath.find('/',lastpos)) != string::npos )
+      while ( (pos = spath.find('/',lastpos)) != std::string::npos )
       {
         string dir( spath.substr(0,pos) );
         ret = ::mkdir( dir.c_str(), mode );

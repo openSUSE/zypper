@@ -30,7 +30,7 @@
 #include "zypp/ExternalProgram.h"
 #include "zypp/base/CleanerThread_p.h"
 
-using namespace std;
+using std::endl;
 
 #undef  ZYPP_BASE_LOGGER_LOGGROUP
 #define ZYPP_BASE_LOGGER_LOGGROUP "zypp::exec"
@@ -243,7 +243,7 @@ namespace zypp {
       // do not remove the single quotes around every argument, copy&paste of
       // command to shell will not work otherwise!
       {
-        stringstream cmdstr;
+	std::stringstream cmdstr;
         for (int i = 0; argv[i]; i++)
         {
           if (i>0) cmdstr << ' ';

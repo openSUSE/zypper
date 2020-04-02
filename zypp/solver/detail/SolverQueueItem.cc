@@ -27,6 +27,8 @@ extern "C"
 #include "zypp/base/Logger.h"
 #include "zypp/solver/detail/SolverQueueItem.h"
 
+using std::endl;
+
 /////////////////////////////////////////////////////////////////////////
 namespace zypp
 { ///////////////////////////////////////////////////////////////////////
@@ -37,7 +39,6 @@ namespace zypp
     namespace detail
     { ///////////////////////////////////////////////////////////////////
 
-using namespace std;
 
 IMPL_PTR_TYPE(SolverQueueItem);
 
@@ -59,8 +60,8 @@ SolverQueueItem::dumpOn( std::ostream & os ) const
 }
 
 
-ostream&
-operator<<( ostream & os, const SolverQueueItemList & itemlist )
+std::ostream&
+operator<<( std::ostream & os, const SolverQueueItemList & itemlist )
 {
     for (SolverQueueItemList::const_iterator iter = itemlist.begin(); iter != itemlist.end(); ++iter) {
 	if (iter != itemlist.begin())

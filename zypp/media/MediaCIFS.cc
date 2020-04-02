@@ -30,7 +30,7 @@
 #include <errno.h>
 #include <dirent.h>
 
-using namespace std;
+using std::endl;
 
 namespace zypp {
   namespace media {
@@ -43,20 +43,20 @@ namespace zypp {
     **
     ** Get the 1st path component (CIFS share name).
     */
-    inline string getShare( Pathname spath_r )
+    inline std::string getShare( Pathname spath_r )
     {
       if ( spath_r.empty() )
-        return string();
+        return std::string();
 
-      string share( spath_r.absolutename().asString() );
-      string::size_type sep = share.find( "/", 1 );
-      if ( sep == string::npos )
+      std::string share( spath_r.absolutename().asString() );
+      std::string::size_type sep = share.find( "/", 1 );
+      if ( sep == std::string::npos )
         share = share.erase( 0, 1 ); // nothing but the share name in spath_r
       else
         share = share.substr( 1, sep-1 );
 
       // deescape %2f in sharename
-      while ( (sep = share.find( "%2f" )) != string::npos ) {
+      while ( (sep = share.find( "%2f" )) != std::string::npos ) {
         share.replace( sep, 3, "/" );
       }
 
@@ -76,9 +76,9 @@ namespace zypp {
       if ( spath_r.empty() )
         return Pathname();
 
-      string striped( spath_r.absolutename().asString() );
-      string::size_type sep = striped.find( "/", 1 );
-      if ( sep == string::npos )
+      std::string striped( spath_r.absolutename().asString() );
+      std::string::size_type sep = striped.find( "/", 1 );
+      if ( sep == std::string::npos )
         return "/"; // nothing but the share name in spath_r
 
       return striped.substr( sep );
@@ -133,7 +133,7 @@ namespace zypp {
       if(next)
 	ZYPP_THROW(MediaNotSupportedException(_url));
 
-      string path = "//";
+      std::string path = "//";
       path += _url.getHost() + "/" + getShare( _url.getPathName() );
 
       MediaSourceRef media( new MediaSource( "cifs", path));
@@ -165,15 +165,15 @@ namespace zypp {
       CredentialManager cm(CredManagerOptions(ZConfig::instance().repoManagerRoot()));
 
       Mount::Options options( _url.getQueryParam("mountoptions") );
-      string username = _url.getUsername();
-      string password = _url.getPassword();
+      std::string username = _url.getUsername();
+      std::string password = _url.getPassword();
 
       if ( ! options.has( "rw" ) ) {
         options["ro"];
       }
 
       // look for a workgroup
-      string workgroup = _url.getQueryParam("workgroup");
+      std::string workgroup = _url.getQueryParam("workgroup");
       if ( workgroup.empty() )
         workgroup = _url.getQueryParam("domain");
       if ( !workgroup.empty() )
@@ -248,7 +248,7 @@ namespace zypp {
         if ( !username.empty() || !password.empty() )
         {
           filesystem::TmpFile tmp;
-          ofstream outs( tmp.path().asString().c_str() );
+          std::ofstream outs( tmp.path().asString().c_str() );
           outs << "username=" <<  username << endl;
           outs << "password=" <<  password << endl;
           outs.close();
@@ -422,7 +422,7 @@ namespace zypp {
       // indicate we have no good credentials from CM
       cmcred.reset();
 
-      string prompt_msg = str::form(
+      std::string prompt_msg = str::form(
         //!\todo add comma to the message for the next release
         _("Authentication required for '%s'"), _url.asString().c_str());
 

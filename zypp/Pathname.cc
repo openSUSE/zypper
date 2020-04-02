@@ -131,9 +131,9 @@ namespace zypp
         return Pathname();
 
       Pathname ret_t( name_r );
-      string::size_type idx = ret_t._name.find_last_of( '/' );
+      std::string::size_type idx = ret_t._name.find_last_of( '/' );
 
-      if ( idx == string::npos ) {
+      if ( idx == std::string::npos ) {
         ret_t._name = ".";
       } else if ( idx == 0 ) {
         ret_t._name = "/";
@@ -155,8 +155,8 @@ namespace zypp
         return string();
 
       string ret_t( name_r.asString() );
-      string::size_type idx = ret_t.find_last_of( '/' );
-      if ( idx != string::npos && ( idx != 0 || ret_t.size() != 1 ) ) {
+      std::string::size_type idx = ret_t.find_last_of( '/' );
+      if ( idx != std::string::npos && ( idx != 0 || ret_t.size() != 1 ) ) {
         ret_t.erase( 0, idx+1 );
       }
 
@@ -209,7 +209,7 @@ namespace zypp
         return string();
 
       string base( basename( name_r ) );
-      string::size_type pos = base.rfind( '.' );
+      std::string::size_type pos = base.rfind( '.' );
       switch ( pos )
       {
 	case 0:
@@ -220,7 +220,7 @@ namespace zypp
 	  if ( base.size() == 2 && base[0] == '.' )	// ..
 	    return string();
 	  break;
-	case string::npos:
+	case std::string::npos:
 	  return string();
 	  break;
       }

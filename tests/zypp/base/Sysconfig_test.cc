@@ -19,7 +19,6 @@ using boost::unit_test::test_suite;
 using boost::unit_test::test_case;
 using namespace boost::unit_test;
 
-using namespace std;
 using namespace zypp;
 
 #define DATADIR (Pathname(TESTS_SRC_DIR) + "/zypp/base/data/Sysconfig")
@@ -27,7 +26,7 @@ using namespace zypp;
 BOOST_AUTO_TEST_CASE(Sysconfig)
 {
   Pathname file = DATADIR / "proxy";
-  map<string,string> values = zypp::base::sysconfig::read(file);
+  std::map<std::string,std::string> values = zypp::base::sysconfig::read(file);
   BOOST_CHECK_EQUAL( values.size(), 6 );
   BOOST_CHECK_EQUAL( values["PROXY_ENABLED"], "no");
   BOOST_CHECK_EQUAL( values["GOPHER_PROXY"], "");

@@ -19,7 +19,6 @@
 
 using boost::unit_test::test_case;
 
-using namespace std;
 using namespace zypp;
 using namespace zypp::repo;
 using namespace zypp::filesystem;
@@ -48,8 +47,8 @@ BOOST_AUTO_TEST_CASE(extended_metadata)
 
   // check that the attributes of product compatibility are ok
   int count = 0;
-  vector<CpeId> cpeids;
-  vector<string> labels;
+  std::vector<CpeId> cpeids;
+  std::vector<std::string> labels;
 
   for_( it,
         repo.compatibleWithProductBegin(),

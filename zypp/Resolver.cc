@@ -19,7 +19,6 @@
 #include "zypp/solver/detail/ItemCapKind.h"
 #include "zypp/sat/Transaction.h"
 
-using namespace std;
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

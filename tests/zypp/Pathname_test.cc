@@ -9,7 +9,6 @@
 using boost::unit_test::test_suite;
 using boost::unit_test::test_case;
 
-using namespace std;
 using namespace zypp;
 
 BOOST_AUTO_TEST_CASE(pathname_default_ctor)

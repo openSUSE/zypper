@@ -46,7 +46,6 @@
 
 #include <boost/mpl/int.hpp>
 
-using namespace std;
 using namespace zypp;
 using namespace zypp::functor;
 using namespace zypp::ui;

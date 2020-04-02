@@ -25,12 +25,13 @@
 #include <errno.h>
 #include <dirent.h>
 
+using std::endl;
+
 /*
 ** verify devices names as late as possible (while attach)
 */
 #define DELAYED_VERIFY           1
 
-using namespace std;
 
 namespace zypp {
   namespace media {
@@ -270,7 +271,7 @@ namespace zypp {
       std::string mountpoint( attachPoint().asString() );
 
       Mount mount;
-      string options = _url.getQueryParam("mountoptions");
+      std::string options = _url.getQueryParam("mountoptions");
       if(options.empty())
       {
     	options = "ro";

@@ -9,7 +9,7 @@ using std::stringstream;
 using std::string;
 using namespace zypp;
 
-static string suse_repo = "[factory-oss]\n"
+static std::string suse_repo = "[factory-oss]\n"
 "name=factory-oss\n"
 "enabled=1\n"
 "autorefresh=0\n"
@@ -20,7 +20,7 @@ static string suse_repo = "[factory-oss]\n"
 "type=yast2\n"
 "keeppackages=0\n";
 
-static string fedora_repo = "[fedora]\n"
+static std::string fedora_repo = "[fedora]\n"
 "name=Fedora $releasever - $basearch\n"
 "failovermethod=priority\n"
 "baseurl=http://download.fedora.redhat.com/pub/fedora/linux/releases/$releasever/Everything/$basearch/os/\n"
@@ -48,7 +48,7 @@ struct RepoCollector : private base::NonCopyable
 BOOST_AUTO_TEST_CASE(read_repo_file)
 {
   {
-    stringstream input(suse_repo);
+    std::stringstream input(suse_repo);
     RepoCollector collector;
     parser::RepoFileReader parser( input, bind( &RepoCollector::collect, &collector, _1 ) );
     BOOST_CHECK_EQUAL(1, collector.repos.size());
@@ -59,7 +59,7 @@ BOOST_AUTO_TEST_CASE(read_repo_file)
   }
   // fedora
   {
-    stringstream input(fedora_repo);
+    std::stringstream input(fedora_repo);
     RepoCollector collector;
     parser::RepoFileReader parser( input, bind( &RepoCollector::collect, &collector, _1 ) );
     BOOST_REQUIRE_EQUAL(1, collector.repos.size());

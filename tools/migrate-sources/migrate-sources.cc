@@ -17,7 +17,6 @@
 #define ZYPP_BASE_LOGGER_LOGGROUP "zypp-cache"
 
 
-using namespace std;
 using namespace zypp;
 
 struct Options

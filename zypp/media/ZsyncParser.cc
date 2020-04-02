@@ -22,7 +22,7 @@
 #include <iostream>
 #include <fstream>
 
-using namespace std;
+using std::endl;
 using namespace zypp::base;
 
 namespace zypp {
@@ -61,14 +61,14 @@ hexstr2bytes(unsigned char *buf, const char *str, int buflen)
 }
 
 void
-ZsyncParser::parse(string filename)
+ZsyncParser::parse(std::string filename)
 {
   char buf[4096];
 
   std::ifstream is(filename.c_str());
   if (!is)
     ZYPP_THROW(Exception("ZsyncParser: no such file"));
-  is.exceptions(ifstream::eofbit | ifstream::failbit | ifstream::badbit);
+  is.exceptions(std::ifstream::eofbit | std::ifstream::failbit | std::ifstream::badbit);
   off_t filesize = off_t(-1);
   while (is.good())
     {

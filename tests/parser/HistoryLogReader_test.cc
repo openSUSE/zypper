@@ -4,17 +4,6 @@
 
 using namespace zypp;
 
-namespace
-{
-  bool ProcessData( const HistoryLogData::Ptr & ptr )
-  {
-    DBG << ptr->date() << " | " << ptr << endl;
-
-    return true;
-  }
-}
-
-
 BOOST_AUTO_TEST_CASE(basic)
 {
   std::vector<HistoryLogData::Ptr> history;

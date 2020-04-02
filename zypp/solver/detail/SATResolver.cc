@@ -53,6 +53,8 @@ extern "C"
 #include "zypp/solver/detail/SolutionAction.h"
 #include "zypp/solver/detail/SolverQueueItem.h"
 
+using std::endl;
+
 #define XDEBUG(x) do { if (base::logger::isExcessive()) XXX << x << std::endl;} while (0)
 
 #undef ZYPP_BASE_LOGGER_LOGGROUP
@@ -163,7 +165,6 @@ namespace zypp
       ///////////////////////////////////////////////////////////////////////
 
 
-using namespace std;
 
 IMPL_PTR_TYPE(SATResolver);
 
@@ -1042,7 +1043,7 @@ std::vector<std::string> SATResolver::SATgetCompleteProblemInfoStrings ( Id prob
   return ret;
 }
 
-string SATResolver::SATprobleminfoString(Id problem, string &detail, Id &ignoreId)
+std::string SATResolver::SATprobleminfoString(Id problem, std::string &detail, Id &ignoreId)
 {
   // FIXME: solver_findallproblemrules to get all rules for this problem
   // (the 'most relevabt' one returned by solver_findproblemrule is embedded
@@ -1052,7 +1053,7 @@ string SATResolver::SATprobleminfoString(Id problem, string &detail, Id &ignoreI
 
 std::string SATResolver::SATproblemRuleInfoString (Id probr, std::string &detail, Id &ignoreId)
 {
-  string ret;
+  std::string ret;
   sat::detail::CPool *pool = _satSolver->pool;
   Id dep, source, target;
   SolverRuleinfo type = solver_ruleinfo(_satSolver, probr, &source, &target, &dep);
@@ -1124,7 +1125,7 @@ std::string SATResolver::SATproblemRuleInfoString (Id probr, std::string &detail
 	  sat::WhatProvides possibleProviders(cap);
 
 	  // check, if a provider will be deleted
-	  typedef list<PoolItem> ProviderList;
+	  typedef std::list<PoolItem> ProviderList;
 	  ProviderList providerlistInstalled, providerlistUninstalled;
 	  for_( iter1, possibleProviders.begin(), possibleProviders.end() ) {
 	      PoolItem provider1 = ResPool::instance().find( *iter1 );
@@ -1200,9 +1201,9 @@ SATResolver::problems ()
 	while ((problem = solver_next_problem(_satSolver, problem)) != 0) {
 	    MIL << "Problem " <<  pcnt++ << ":" << endl;
 	    MIL << "====================================" << endl;
-	    string detail;
+	    std::string detail;
 	    Id ignoreId;
-	    string whatString = SATprobleminfoString (problem,detail,ignoreId);
+	    std::string whatString = SATprobleminfoString (problem,detail,ignoreId);
 	    MIL << whatString << endl;
 	    MIL << "------------------------------------" << endl;
             ResolverProblem_Ptr resolverProblem = new ResolverProblem (whatString, detail, SATgetCompleteProblemInfoStrings( problem ));
@@ -1223,12 +1224,12 @@ SATResolver::problems ()
 				if (poolItem) {
 				    if (pool->installed && s.get()->repo == pool->installed) {
 					problemSolution->addSingleAction (poolItem, REMOVE);
-					string description = str::form (_("remove lock to allow removal of %s"),  s.asString().c_str() );
+					std::string description = str::form (_("remove lock to allow removal of %s"),  s.asString().c_str() );
 					MIL << description << endl;
 					problemSolution->addDescription (description);
 				    } else {
 					problemSolution->addSingleAction (poolItem, KEEP);
-					string description = str::form (_("do not install %s"), s.asString().c_str());
+					std::string description = str::form (_("do not install %s"), s.asString().c_str());
 					MIL << description << endl;
 					problemSolution->addDescription (description);
 				    }
@@ -1243,12 +1244,12 @@ SATResolver::problems ()
 				if (poolItem) {
 				    if (pool->installed && s.get()->repo == pool->installed) {
 					problemSolution->addSingleAction (poolItem, KEEP);
-					string description = str::form (_("keep %s"), s.asString().c_str());
+					std::string description = str::form (_("keep %s"), s.asString().c_str());
 					MIL << description << endl;
 					problemSolution->addDescription (description);
 				    } else {
 					problemSolution->addSingleAction (poolItem, UNLOCK);
-					string description = str::form (_("remove lock to allow installation of %s"), itemToString( poolItem ).c_str());
+					std::string description = str::form (_("remove lock to allow installation of %s"), itemToString( poolItem ).c_str());
 					MIL << description << endl;
 					problemSolution->addDescription (description);
 				    }
@@ -1264,7 +1265,7 @@ SATResolver::problems ()
 				    new SolverQueueItemInstall(_pool, ident.asString(), false );
 				problemSolution->addSingleAction (install, REMOVE_SOLVE_QUEUE_ITEM);
 
-				string description = str::form (_("do not install %s"), ident.c_str() );
+				std::string description = str::form (_("do not install %s"), ident.c_str() );
 				MIL << description << endl;
 				problemSolution->addDescription (description);
 				}
@@ -1285,7 +1286,7 @@ SATResolver::problems ()
 				    new SolverQueueItemDelete(_pool, ident.asString(), false );
 				problemSolution->addSingleAction (del, REMOVE_SOLVE_QUEUE_ITEM);
 
-				string description = str::form (_("keep %s"), ident.c_str());
+				std::string description = str::form (_("keep %s"), ident.c_str());
 				MIL << description << endl;
 				problemSolution->addDescription (description);
 				}
@@ -1293,7 +1294,7 @@ SATResolver::problems ()
 			    case SOLVER_INSTALL | SOLVER_SOLVABLE_PROVIDES:
 				{
 				problemSolution->addSingleAction (Capability(what), REMOVE_EXTRA_REQUIRE);
-				string description = "";
+				std::string description = "";
 
 				// Checking if this problem solution would break your system
 				if (system_requires.find(Capability(what)) != system_requires.end()) {
@@ -1301,7 +1302,7 @@ SATResolver::problems ()
 				    resolverProblem->setDetails( resolverProblem->description() + "\n" + resolverProblem->details() );
 				    resolverProblem->setDescription(_("This request will break your system!"));
 				    description = _("ignore the warning of a broken system");
-                                    description += string(" (requires:")+pool_dep2str(pool, what)+")";
+				    description += std::string(" (requires:")+pool_dep2str(pool, what)+")";
                                     MIL << description << endl;
                                     problemSolution->addFrontDescription (description);
 				} else {
@@ -1314,7 +1315,7 @@ SATResolver::problems ()
 			    case SOLVER_ERASE | SOLVER_SOLVABLE_PROVIDES:
 				{
 				problemSolution->addSingleAction (Capability(what), REMOVE_EXTRA_CONFLICT);
-				string description = "";
+				std::string description = "";
 
 				// Checking if this problem solution would break your system
 				if (system_conflicts.find(Capability(what)) != system_conflicts.end()) {
@@ -1322,7 +1323,7 @@ SATResolver::problems ()
 				    resolverProblem->setDetails( resolverProblem->description() + "\n" + resolverProblem->details() );
 				    resolverProblem->setDescription(_("This request will break your system!"));
 				    description = _("ignore the warning of a broken system");
-                                    description += string(" (conflicts:")+pool_dep2str(pool, what)+")";
+				    description += std::string(" (conflicts:")+pool_dep2str(pool, what)+")";
                                     MIL << description << endl;
                                     problemSolution->addFrontDescription (description);
 
@@ -1340,7 +1341,7 @@ SATResolver::problems ()
 				if (poolItem) {
 				    if (pool->installed && s.get()->repo == pool->installed) {
 					problemSolution->addSingleAction (poolItem, KEEP);
-					string description = str::form (_("do not install most recent version of %s"), s.asString().c_str());
+					std::string description = str::form (_("do not install most recent version of %s"), s.asString().c_str());
 					MIL << description << endl;
 					problemSolution->addDescription (description);
 				    } else {
@@ -1361,12 +1362,12 @@ SATResolver::problems ()
 			PoolItem poolItem = _pool.find (s);
 			if (pool->installed && s.get()->repo == pool->installed) {
 			    problemSolution->addSingleAction (poolItem, LOCK);
-			    string description = str::form (_("keep %s despite the inferior architecture"), s.asString().c_str());
+			    std::string description = str::form (_("keep %s despite the inferior architecture"), s.asString().c_str());
 			    MIL << description << endl;
 			    problemSolution->addDescription (description);
 			} else {
 			    problemSolution->addSingleAction (poolItem, INSTALL);
-			    string description = str::form (_("install %s despite the inferior architecture"), s.asString().c_str());
+			    std::string description = str::form (_("install %s despite the inferior architecture"), s.asString().c_str());
 			    MIL << description << endl;
 			    problemSolution->addDescription (description);
 			}
@@ -1375,12 +1376,12 @@ SATResolver::problems ()
 			PoolItem poolItem = _pool.find (s);
 			if (pool->installed && s.get()->repo == pool->installed) {
 			    problemSolution->addSingleAction (poolItem, LOCK);
-			    string description = str::form (_("keep obsolete %s"), s.asString().c_str());
+			    std::string description = str::form (_("keep obsolete %s"), s.asString().c_str());
 			    MIL << description << endl;
 			    problemSolution->addDescription (description);
 			} else {
 			    problemSolution->addSingleAction (poolItem, INSTALL);
-			    string description = str::form (_("install %s from excluded repository"), s.asString().c_str());
+			    std::string description = str::form (_("install %s from excluded repository"), s.asString().c_str());
 			    MIL << description << endl;
 			    problemSolution->addDescription (description);
 			}
@@ -1391,7 +1392,7 @@ SATResolver::problems ()
 			PoolItem poolItem = _pool.find (s);
 
 			problemSolution->addSingleAction (poolItem, INSTALL);
-			string description;
+			std::string description;
 			if ( s.isRetracted() ) {
 			  // translator: %1% is a package name
 			  description = str::Format(_("install %1% although it has been retracted")) % s.asString();
@@ -1420,14 +1421,14 @@ SATResolver::problems ()
 
 				if ((illegal & POLICY_ILLEGAL_DOWNGRADE) != 0)
 				{
-				    string description = str::form (_("downgrade of %s to %s"), s.asString().c_str(), sd.asString().c_str());
+				    std::string description = str::form (_("downgrade of %s to %s"), s.asString().c_str(), sd.asString().c_str());
 				    MIL << description << endl;
 				    problemSolution->addDescription (description);
 				    gotone = 1;
 				}
 				if ((illegal & POLICY_ILLEGAL_ARCHCHANGE) != 0)
 				{
-				    string description = str::form (_("architecture change of %s to %s"), s.asString().c_str(), sd.asString().c_str());
+				    std::string description = str::form (_("architecture change of %s to %s"), s.asString().c_str(), sd.asString().c_str());
 				    MIL << description << endl;
 				    problemSolution->addDescription (description);
 				    gotone = 1;
@@ -1436,7 +1437,7 @@ SATResolver::problems ()
 				{
                                     IdString s_vendor( s.vendor() );
                                     IdString sd_vendor( sd.vendor() );
-				    string description = str::form (_("install %s (with vendor change)\n  %s  -->  %s") ,
+				    std::string description = str::form (_("install %s (with vendor change)\n  %s  -->  %s") ,
 								    sd.asString().c_str(),
                                                                     ( s_vendor ? s_vendor.c_str() : " (no vendor) " ),
                                                                     ( sd_vendor ? sd_vendor.c_str() : " (no vendor) " ) );
@@ -1445,7 +1446,7 @@ SATResolver::problems ()
 				    gotone = 1;
 				}
 				if (!gotone) {
-				    string description = str::form (_("replacement of %s with %s"), s.asString().c_str(), sd.asString().c_str());
+				    std::string description = str::form (_("replacement of %s with %s"), s.asString().c_str(), sd.asString().c_str());
 				    MIL << description << endl;
 				    problemSolution->addDescription (description);
 				}
@@ -1456,7 +1457,7 @@ SATResolver::problems ()
 			else
 			{
 			    if (itemFrom) {
-				string description = str::form (_("deinstallation of %s"), s.asString().c_str());
+				std::string description = str::form (_("deinstallation of %s"), s.asString().c_str());
 				MIL << description << endl;
 				problemSolution->addDescription (description);
 				problemSolution->addSingleAction (itemFrom, REMOVE);

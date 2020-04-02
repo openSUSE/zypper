@@ -19,7 +19,7 @@
 #include "zypp/RepoInfo.h"
 #include "zypp/ServiceInfo.h"
 
-using namespace std;
+using std::endl;
 using zypp::xml::escape;
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -85,11 +85,11 @@ namespace zypp
 
   ServiceInfo::ServiceInfo() : _pimpl( new Impl() ) {}
 
-  ServiceInfo::ServiceInfo(const string & alias)
+  ServiceInfo::ServiceInfo(const std::string & alias)
     : repo::RepoInfoBase(alias), _pimpl( new Impl() )
   {}
 
-  ServiceInfo::ServiceInfo(const string & alias, const Url & url)
+  ServiceInfo::ServiceInfo(const std::string & alias, const Url & url)
     : repo::RepoInfoBase(alias), _pimpl( new Impl(url) )
   {}
 
@@ -207,7 +207,7 @@ namespace zypp
     return str;
   }
 
-  ostream & ServiceInfo::dumpAsXmlOn( ostream & str, const string & content ) const
+  std::ostream & ServiceInfo::dumpAsXmlOn( std::ostream & str, const std::string & content ) const
   {
     str
       << "<service"

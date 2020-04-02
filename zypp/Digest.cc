@@ -29,6 +29,8 @@
 #include "zypp/Digest.h"
 #include "zypp/base/PtrTypes.h"
 
+using std::endl;
+
 namespace zypp {
 
     bool DigestReport::askUserToAcceptNoDigest( const zypp::Pathname &file )
@@ -86,7 +88,6 @@ namespace zypp {
     };
 
 
-    using namespace std;
 
     bool Digest::P::openssl_digests_added = false;
 
@@ -190,7 +191,7 @@ namespace zypp {
       return digestVectorToString( digestVector() );
     }
 
-    string Digest::digestVectorToString(const std::vector<unsigned char> &vec)
+    std::string Digest::digestVectorToString(const std::vector<unsigned char> &vec)
     {
       if ( vec.empty() )
         return std::string();
@@ -245,7 +246,7 @@ namespace zypp {
       return true;
     }
 
-    bool Digest::update(istream &is, size_t bufsize)
+    bool Digest::update(std::istream &is, size_t bufsize)
     {
       if( !is )
         return false;
@@ -267,21 +268,21 @@ namespace zypp {
     std::string Digest::digest(const std::string& name, std::istream& is, size_t bufsize)
     {
       if(name.empty() || !is)
-    	return string();
+    	return std::string();
 
       Digest digest;
       if(!digest.create(name))
-        return string();
+        return std::string();
 
       if ( !digest.update( is, bufsize ))
-        return string();
+        return std::string();
 
       return digest.digest();
     }
 
     std::string Digest::digest( const std::string & name, const std::string & input, size_t bufsize )
     {
-      istringstream is( input );
+      std::istringstream is( input );
       return digest( name, is, bufsize );
     }
 
@@ -291,7 +292,7 @@ namespace zypp {
       bool openssl = false;
       unsigned argpos = 1;
 
-      if(argc > 1 && string(argv[argpos]) == "--openssl")
+      if(argc > 1 && std::string(argv[argpos]) == "--openssl")
       {
     	openssl = true;
     	++argpos;
@@ -306,9 +307,9 @@ namespace zypp {
       const char* digestname = argv[argpos++];
       const char* fn = argv[argpos++];
 
-      ifstream file(fn);
+      std::ifstream file(fn);
 
-      string digest = Digest::digest(digestname, file);
+      std::string digest = Digest::digest(digestname, file);
 
       if(openssl)
     	cout << digestname << "(" << fn << ")= " << digest << endl;

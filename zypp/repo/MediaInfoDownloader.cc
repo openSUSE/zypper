@@ -15,7 +15,6 @@
 #include "MediaInfoDownloader.h"
 #include "zypp/base/UserRequestException.h"
 
-using namespace std;
 
 namespace zypp
 {

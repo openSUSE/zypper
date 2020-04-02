@@ -16,7 +16,6 @@
 #include "zypp/target/TargetException.h"
 #include "zypp/base/Gettext.h"
 
-using namespace std;
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

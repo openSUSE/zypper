@@ -17,7 +17,6 @@
 
 static const Pathname sysRoot( "/" );
 
-using namespace std;
 using namespace zypp;
 using namespace zypp::ui;
 

@@ -16,7 +16,7 @@
 #include "zypp/KeyContext.h"
 #include "zypp/ZYppCallbacks.h"
 
-using namespace std;
+using std::endl;
 
 namespace zypp
 {

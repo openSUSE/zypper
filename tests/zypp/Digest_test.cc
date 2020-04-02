@@ -14,7 +14,6 @@
 
 using boost::unit_test::test_case;
 
-using namespace std;
 using namespace zypp;
 using namespace zypp::filesystem;
 
@@ -24,10 +23,10 @@ using namespace zypp::filesystem;
  */
 BOOST_AUTO_TEST_CASE(digest)
 {
-  string data("I will test the checksum of this");
-  stringstream str1(data);
-  stringstream str2(data);
-  stringstream str3(data);
+  std::string data("I will test the checksum of this");
+  std::stringstream str1(data);
+  std::stringstream str2(data);
+  std::stringstream str3(data);
 
   BOOST_CHECK_EQUAL( Digest::digest( "sha1", str1 ), "142df4277c326f3549520478c188cab6e3b5d042" ); 
   BOOST_CHECK_EQUAL( Digest::digest( "md5", str2 ), "f139a810b84d82d1f29fc53c5e59beae" ); 

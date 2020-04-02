@@ -10,7 +10,7 @@
 #include "zypp/media/TransferSettings.h"
 #include "zypp/ZConfig.h"
 
-using namespace std;
+using std::endl;
 
 #define CURL_BINARY "/usr/bin/curl"
 
@@ -52,15 +52,15 @@ namespace zypp
       { return new Impl( *this ); }
 
     public:
-      vector<string> _headers;
-      string _useragent;
-      string _username;
-      string _password;
+      std::vector<std::string> _headers;
+      std::string _useragent;
+      std::string _username;
+      std::string _password;
       bool _useproxy;
-      string _proxy;
-      string _proxy_username;
-      string _proxy_password;
-      string _authtype;
+      std::string _proxy;
+      std::string _proxy_username;
+      std::string _proxy_password;
+      std::string _authtype;
       long _timeout;
       long _connect_timeout;
       Url _url;
@@ -120,7 +120,7 @@ namespace zypp
 
     std::string TransferSettings::userPassword() const
     {
-      string userpwd = username();
+      std::string userpwd = username();
       if ( password().size() ) {
 	userpwd += ":" + password();
       }
@@ -162,7 +162,7 @@ namespace zypp
 
     std::string TransferSettings::proxyUserPassword() const
     {
-      string userpwd = proxyUsername();
+      std::string userpwd = proxyUsername();
       if ( proxyPassword().size() ) {
 	userpwd += ":" + proxyPassword();
       }

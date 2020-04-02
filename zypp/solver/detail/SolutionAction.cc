@@ -29,6 +29,8 @@
 #include "zypp/Capabilities.h"
 #include "zypp/base/Logger.h"
 
+using std::endl;
+
 /////////////////////////////////////////////////////////////////////////
 namespace zypp
 { ///////////////////////////////////////////////////////////////////////
@@ -39,7 +41,6 @@ namespace zypp
     namespace detail
     { ///////////////////////////////////////////////////////////////////
 
-using namespace std;
 
 IMPL_PTR_TYPE(SolutionAction);
 
@@ -57,8 +58,8 @@ SolutionAction::~SolutionAction()
 
 //---------------------------------------------------------------------------
 
-ostream &
-TransactionSolutionAction::dumpOn( ostream& os) const
+std::ostream &
+TransactionSolutionAction::dumpOn( std::ostream& os) const
 {
     os << "TransactionSolutionAction: ";
     switch (_action) {
@@ -76,8 +77,8 @@ TransactionSolutionAction::dumpOn( ostream& os) const
 }
 
 
-ostream&
-operator<<( ostream& os, const SolutionActionList & actionlist)
+std::ostream&
+operator<<( std::ostream& os, const SolutionActionList & actionlist)
 {
     for (SolutionActionList::const_iterator iter = actionlist.begin(); iter != actionlist.end(); ++iter) {
 	os << *(*iter);
@@ -88,8 +89,8 @@ operator<<( ostream& os, const SolutionActionList & actionlist)
 
 //---------------------------------------------------------------------------
 
-ostream &
-InjectSolutionAction::dumpOn( ostream& os ) const
+std::ostream &
+InjectSolutionAction::dumpOn( std::ostream& os ) const
 {
     os << "InjectSolutionAction: ";
     switch (_kind) {
@@ -104,7 +105,7 @@ InjectSolutionAction::dumpOn( ostream& os ) const
 //---------------------------------------------------------------------------
 
 
-ostream &
+std::ostream &
 SolutionAction::dumpOn( std::ostream & os ) const
 {
     os << "SolutionAction<";

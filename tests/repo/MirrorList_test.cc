@@ -6,7 +6,6 @@
 
 #include "zypp/repo/RepoMirrorList.cc"
 
-using namespace std;
 using namespace zypp;
 using namespace zypp::repo;
 

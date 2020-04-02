@@ -11,7 +11,7 @@
 #include "zypp/base/Logger.h"
 #include "zypp/repo/SUSEMediaVerifier.h"
 
-using namespace std;
+using std::endl;
 
 namespace zypp
 {

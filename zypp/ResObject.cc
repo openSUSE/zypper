@@ -13,7 +13,6 @@
 #include "zypp/ResObject.h"
 
 using namespace zypp;
-using namespace std;
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

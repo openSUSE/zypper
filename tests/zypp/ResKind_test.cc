@@ -3,7 +3,6 @@
 #include "zypp/ResKind.h"
 
 using boost::unit_test::test_case;
-using namespace std;
 using namespace zypp;
 
 BOOST_AUTO_TEST_CASE(reskind_test)
@@ -21,11 +20,11 @@ BOOST_AUTO_TEST_CASE(reskind_test)
   BOOST_CHECK_EQUAL( ResKind("FOO").asString(), "foo" );
   // Caseinsensitive comparison
   BOOST_CHECK_EQUAL( ResKind("FOO"), ResKind("foo") );
-  BOOST_CHECK_EQUAL( ResKind("FOO"), string("Foo") );
+  BOOST_CHECK_EQUAL( ResKind("FOO"), std::string("Foo") );
   BOOST_CHECK_EQUAL( ResKind("FOO"), "Foo" );
-  BOOST_CHECK_EQUAL( ResKind("FOO"), string("foo") );
+  BOOST_CHECK_EQUAL( ResKind("FOO"), std::string("foo") );
   BOOST_CHECK_EQUAL( ResKind("FOO"), "foo" );
-  BOOST_CHECK_EQUAL( string("foo"), ResKind("FOO") );
+  BOOST_CHECK_EQUAL( std::string("foo"), ResKind("FOO") );
   BOOST_CHECK_EQUAL( "foo", ResKind("FOO") );
 
   BOOST_CHECK_EQUAL( ResKind::compare( "FOO", "foo" ), 0 );

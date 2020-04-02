@@ -25,7 +25,6 @@
 
 #include <libxml2/libxml/SAX2.h>
 
-using namespace std;
 using namespace zypp::base;
 
 namespace zypp {
@@ -54,7 +53,7 @@ enum state {
 
 struct stateswitch {
   enum state from;
-  string ename;
+  std::string ename;
   enum state to;
   int docontent;
 };
@@ -84,7 +83,7 @@ struct ml_url {
     : priority( 0 )
   {}
   int priority;
-  string url;
+  std::string url;
 };
 
 static void XMLCALL startElement(void *userData, const xmlChar *name, const xmlChar **atts);
@@ -156,20 +155,20 @@ struct ml_parsedata : private zypp::base::NonCopyable {
   int called;
   int gotfile;
   off_t size;
-  vector<struct ml_url> urls;
+  std::vector<struct ml_url> urls;
   int nurls;
   size_t blksize;
 
-  vector<unsigned char> piece;
+  std::vector<unsigned char> piece;
   int npiece;
   int piecel;
 
-  vector<unsigned char> sha1;
+  std::vector<unsigned char> sha1;
   int nsha1;
-  vector<unsigned char> zsync;
+  std::vector<unsigned char> zsync;
   int nzsync;
 
-  vector<unsigned char> chksum;
+  std::vector<unsigned char> chksum;
   int chksuml;
 };
 
@@ -385,7 +384,7 @@ endElement(void *userData, const xmlChar *name)
     case STATE_M4URL:
       if (*pd->content)
 	{
-	  pd->urls[pd->nurls].url = string(pd->content);
+	  pd->urls[pd->nurls].url = std::string(pd->content);
 	  pd->nurls++;
 	}
       break;

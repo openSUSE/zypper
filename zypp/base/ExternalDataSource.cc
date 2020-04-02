@@ -26,7 +26,7 @@
 #include "zypp/base/Logger.h"
 #include "zypp/base/ExternalDataSource.h"
 
-using namespace std;
+using std::endl;
 
 namespace zypp {
   namespace externalprogram {
@@ -69,7 +69,7 @@ namespace zypp {
     }
 
 
-    string
+    std::string
     ExternalDataSource::receiveUpto (char c)
     {
       if (inputfile && !feof(inputfile))
@@ -84,7 +84,7 @@ namespace zypp {
 	 }
 	 return datas.str();
       }
-      return string();
+      return std::string();
     }
 
 
@@ -122,7 +122,7 @@ namespace zypp {
     	{ ERR << strerror(errno) << endl; return; }
     }
 
-    string
+    std::string
     ExternalDataSource::receiveLine()
     {
       if (inputfile)
@@ -131,7 +131,7 @@ namespace zypp {
     	if (nread == -1)
     	    return "";
     	else
-    	    return string (linebuffer, nread);
+    	    return std::string (linebuffer, nread);
       }
       else
     	return "";

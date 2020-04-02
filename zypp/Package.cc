@@ -20,7 +20,6 @@
 #include "zypp/target/rpm/RpmDb.h"
 #include "zypp/target/rpm/RpmHeader.h"
 
-using namespace std;
 
 ///////////////////////////////////////////////////////////////////
 namespace zyppintern

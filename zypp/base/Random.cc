@@ -2,7 +2,6 @@
 #include <unistd.h>
 #include "zypp/base/Random.h"
 
-using namespace std;
 
 namespace zypp { namespace base {
 

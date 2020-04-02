@@ -9,7 +9,8 @@
 #include "zypp/Url.h"
 #include "zypp/PathInfo.h"
 
-using namespace std;
+using std::cout;
+using std::endl;
 using namespace zypp;
 using namespace boost::unit_test;
 
@@ -29,16 +30,16 @@ public:
     return true;
   }
   
-  vector<pair<std::string, OnMediaLocation> > items;
+  std::vector<std::pair<std::string, OnMediaLocation> > items;
 };
 
 BOOST_AUTO_TEST_CASE(repomd_read)
 {
-  list<Pathname> entries;
+  std::list<Pathname> entries;
   if ( filesystem::readdir( entries, DATADIR, false ) != 0 )
     ZYPP_THROW(Exception("failed to read directory"));
     
-  for ( list<Pathname>::const_iterator it = entries.begin(); it != entries.end(); ++it )
+  for ( std::list<Pathname>::const_iterator it = entries.begin(); it != entries.end(); ++it )
   {
     Pathname file = *it;
     if ( ( file.basename().substr(0, 6) == "repomd" ) && (file.extension() == ".xml" ) )
@@ -53,20 +54,20 @@ BOOST_AUTO_TEST_CASE(repomd_read)
       unsigned int count = 0;
       while ( ifs && !ifs.eof() )
       {
-        string dtype;
+        std::string dtype;
 	getline(ifs, dtype);
 	if ( dtype.empty() )
 	  break;
 	BOOST_REQUIRE( count < collect.items.size() );
         BOOST_CHECK_EQUAL( collect.items[count].first, dtype );
 
-        string checksum_type;
-        string checksum;
+        std::string checksum_type;
+        std::string checksum;
         getline(ifs, checksum_type);
         getline(ifs, checksum);
         BOOST_CHECK_EQUAL( collect.items[count].second.checksum(), CheckSum(checksum_type, checksum) );
 
-	string loc;
+	std::string loc;
         getline(ifs, loc);
         BOOST_CHECK_EQUAL( collect.items[count].second.filename(), Pathname(loc) );
 

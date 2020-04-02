@@ -15,7 +15,6 @@
 using boost::unit_test::test_suite;
 using boost::unit_test::test_case;
 
-using namespace std;
 using namespace zypp;
 
 #define DATADIR (Pathname(TESTS_SRC_DIR) +  "/zypp/data/PublicKey")

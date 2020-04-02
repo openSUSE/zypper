@@ -38,7 +38,8 @@
 #include <dirent.h>
 #include <unistd.h>
 
-using namespace std;
+using std::endl;
+
 using namespace internal;
 using namespace zypp::base;
 
@@ -389,7 +390,7 @@ void MediaCurl::setupEasy()
   if ( _settings.userPassword().size() )
   {
     SET_OPTION(CURLOPT_USERPWD, _settings.userPassword().c_str());
-    string use_auth = _settings.authType();
+    std::string use_auth = _settings.authType();
     if (use_auth.empty())
       use_auth = "digest,basic";	// our default
     long auth = CurlAuthData::auth_type_str2long(use_auth);
@@ -413,7 +414,7 @@ void MediaCurl::setupEasy()
      *  If not provided, $HOME/.curlrc is evaluated
      *---------------------------------------------------------------*/
 
-    string proxyuserpwd = _settings.proxyUserPassword();
+    std::string proxyuserpwd = _settings.proxyUserPassword();
 
     if ( proxyuserpwd.empty() )
     {
@@ -707,12 +708,12 @@ void MediaCurl::evaluateCurlCode(const Pathname &filename,
                                               &httpReturnCode );
         if ( infoRet == CURLE_OK )
         {
-          string msg = "HTTP response: " + str::numstring( httpReturnCode );
+          std::string msg = "HTTP response: " + str::numstring( httpReturnCode );
           switch ( httpReturnCode )
           {
           case 401:
           {
-            string auth_hint = getAuthHint();
+            std::string auth_hint = getAuthHint();
 
             DBG << msg << " Login failed (URL: " << url.asString() << ")" << std::endl;
             DBG << "MediaUnauthorizedException auth hint: '" << auth_hint << "'" << std::endl;
@@ -729,10 +730,10 @@ void MediaCurl::evaluateCurlCode(const Pathname &filename,
             ZYPP_THROW(MediaTimeoutException(url));
           case 403:
           {
-            string msg403;
-	    if ( url.getHost().find(".suse.com") != string::npos )
+            std::string msg403;
+	    if ( url.getHost().find(".suse.com") != std::string::npos )
 	      msg403 = _("Visit the SUSE Customer Center to check whether your registration is valid and has not expired.");
-	    else if (url.asString().find("novell.com") != string::npos)
+	    else if (url.asString().find("novell.com") != std::string::npos)
               msg403 = _("Visit the Novell Customer Center to check whether your registration is valid and has not expired.");
             ZYPP_THROW(MediaForbiddenException(url, msg403));
           }
@@ -746,7 +747,7 @@ void MediaCurl::evaluateCurlCode(const Pathname &filename,
         }
         else
         {
-          string msg = "Unable to retrieve HTTP response:";
+          std::string msg = "Unable to retrieve HTTP response:";
           DBG << msg << " (URL: " << url.asString() << ")" << std::endl;
           ZYPP_THROW(MediaCurlException(url, msg, _curlError));
         }
@@ -835,7 +836,7 @@ bool MediaCurl::doGetDoesFileExist( const Pathname & filename ) const
     // contains an absolute path.
   //
   _lastRedirect.clear();
-  string urlBuffer( curlUrl.asString());
+  std::string urlBuffer( curlUrl.asString());
   CURLcode ret = curl_easy_setopt( _curl, CURLOPT_URL,
                                    urlBuffer.c_str() );
   if ( ret != 0 ) {
@@ -1131,7 +1132,7 @@ void MediaCurl::doGetFileCopyFile(const Pathname & filename , const Pathname & d
     // contains an absolute path.
     //
     _lastRedirect.clear();
-    string urlBuffer( curlUrl.asString());
+    std::string urlBuffer( curlUrl.asString());
     CURLcode ret = curl_easy_setopt( _curl, CURLOPT_URL,
                                      urlBuffer.c_str() );
     if ( ret != 0 ) {
@@ -1297,7 +1298,7 @@ CURL *MediaCurl::progressCallback_getcurl( void *clientp )
 
 ///////////////////////////////////////////////////////////////////
 
-string MediaCurl::getAuthHint() const
+std::string MediaCurl::getAuthHint() const
 {
   long auth_info = CURLAUTH_NONE;
 
@@ -1326,7 +1327,7 @@ void MediaCurl::resetExpectedFileSize(void *clientp, const ByteCount &expectedFi
 
 ///////////////////////////////////////////////////////////////////
 
-bool MediaCurl::authenticate(const string & availAuthTypes, bool firstTry) const
+bool MediaCurl::authenticate(const std::string & availAuthTypes, bool firstTry) const
 {
   //! \todo need a way to pass different CredManagerOptions here
   CredentialManager cm(CredManagerOptions(ZConfig::instance().repoManagerRoot()));
@@ -1358,7 +1359,7 @@ bool MediaCurl::authenticate(const string & availAuthTypes, bool firstTry) const
     // indicate we have no good credentials from CM
     cmcred.reset();
 
-    string prompt_msg = str::Format(_("Authentication required for '%s'")) % _url.asString();
+    std::string prompt_msg = str::Format(_("Authentication required for '%s'")) % _url.asString();
 
     // set available authentication types from the exception
     // might be needed in prompt

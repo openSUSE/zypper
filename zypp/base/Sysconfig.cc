@@ -24,20 +24,20 @@
 
 #include "zypp/base/Sysconfig.h"
 
-using namespace std;
+using std::endl;
 using namespace zypp::base;
 
 namespace zypp {
   namespace base {
     namespace sysconfig {
 
-      map<string,string> read( const Pathname & _path )
+      std::map<std::string,std::string> read( const Pathname & _path )
       {
 	DBG << "Load '" << _path << "'" << endl;
-	map<string,string> ret;
+	std::map<std::string,std::string> ret;
 
-	string line;
-	ifstream in( _path.asString().c_str() );
+	std::string line;
+	std::ifstream in( _path.asString().c_str() );
 	if ( in.fail() ) {
 	  WAR << "Unable to load '" << _path << "'" << endl;
 	  return ret;
@@ -46,12 +46,12 @@ namespace zypp {
 	while( getline( in, line ) ) {
 	  if ( *line.begin() != '#' ) {
 
-	    string::size_type pos = line.find( '=', 0 );
+	    std::string::size_type pos = line.find( '=', 0 );
 
-	    if ( pos != string::npos ) {
+	    if ( pos != std::string::npos ) {
 
-	      string key = str::trim( line.substr( 0, pos ) );
-	      string value = str::trim( line.substr( pos + 1, line.length() - pos - 1 ) );
+	      std::string key = str::trim( line.substr( 0, pos ) );
+	      std::string value = str::trim( line.substr( pos + 1, line.length() - pos - 1 ) );
 
 	      if ( value.length() >= 2
 		   && *(value.begin()) == '"'

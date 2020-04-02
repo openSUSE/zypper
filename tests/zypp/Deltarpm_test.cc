@@ -18,7 +18,8 @@
 
 using boost::unit_test::test_case;
 
-using namespace std;
+using std::cout;
+using std::endl;
 using namespace zypp;
 using namespace zypp::repo;
 using namespace zypp::filesystem;
@@ -43,11 +44,11 @@ BOOST_AUTO_TEST_CASE(delta)
   }
   catch (const Exception & e)
   {
-    BOOST_FAIL( string("Problem getting the data: ")+ e.msg()) ;
+    BOOST_FAIL( std::string("Problem getting the data: ")+ e.msg()) ;
   }
   sat::Pool pool(sat::Pool::instance());
 
-  repo::DeltaCandidates dc(list<Repository>(pool.reposBegin(),pool.reposEnd()), "libzypp");
+  repo::DeltaCandidates dc(std::list<Repository>(pool.reposBegin(),pool.reposEnd()), "libzypp");
 
   std::list<packagedelta::DeltaRpm> deltas = dc.deltaRpms(0);
   for_ (it,deltas.begin(),deltas.end())

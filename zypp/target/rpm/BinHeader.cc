@@ -28,7 +28,7 @@ typedef rpmuint32_t rpm_count_t;
 
 #include "zypp/target/rpm/BinHeader.h"
 
-using namespace std;
+using std::endl;
 
 #undef Y2LOG
 #define Y2LOG "BinHeader"
@@ -373,7 +373,7 @@ std::string BinHeader::string_val( tag tag_r ) const
   return "";
 }
 
-string BinHeader::format(const char *fmt) const
+std::string BinHeader::format(const char *fmt) const
 {
   zypp::AutoDispose<char *> form(headerFormat(_h, fmt, NULL), free);
   if ( !form )
@@ -414,7 +414,7 @@ std::list<std::string> BinHeader::stringList_val( tag tag_r ) const
 //
 //      DESCRIPTION :
 //
-ostream & BinHeader::dumpOn( ostream & str ) const
+std::ostream & BinHeader::dumpOn( std::ostream & str ) const
 {
   ReferenceCounted::dumpOn( str );
   return str << '{' << (void*)_h << '}';

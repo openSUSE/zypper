@@ -17,7 +17,7 @@
 #include "zypp/RepoStatus.h"
 #include "zypp/PathInfo.h"
 
-using namespace std;
+using std::endl;
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -31,7 +31,7 @@ namespace zypp
   struct RepoStatus::Impl
   {
   public:
-    string _checksum;
+    std::string _checksum;
     Date _timestamp;
 
     // NOTE: Changing magic will at once invalidate all solv file caches.
@@ -168,7 +168,7 @@ namespace zypp
       // order strings to assert && is kommutativ
       std::string lchk( lhs._pimpl->_checksum );
       std::string rchk( rhs._pimpl->_checksum );
-      stringstream ss( lchk < rchk ? lchk+rchk : rchk+lchk );
+      std::stringstream ss( lchk < rchk ? lchk+rchk : rchk+lchk );
 
       result._pimpl->_checksum = CheckSum::sha1(ss).checksum();
       result._pimpl->_timestamp = std::max( lhs._pimpl->_timestamp, rhs._pimpl->_timestamp );

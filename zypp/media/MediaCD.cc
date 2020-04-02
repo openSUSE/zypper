@@ -30,7 +30,7 @@ extern "C"
 #include "zypp/Url.h"
 #include "zypp/AutoDispose.h"
 
-
+using std::endl;
 
 /*
 ** if to throw exception on eject errors or ignore them
@@ -44,7 +44,6 @@ extern "C"
 #define EJECT_TOOL_PATH "/bin/eject"
 
 
-using namespace std;
 
 //////////////////////////////////////////////////////////////////
 namespace zypp
@@ -147,7 +146,7 @@ namespace zypp
       ZYPP_THROW(MediaUnsupportedUrlSchemeException(_url));
     }
 
-    string devices = _url.getQueryParam( "devices" );
+    std::string devices = _url.getQueryParam( "devices" );
     if ( ! devices.empty() )
     {
       std::vector<std::string> words;
@@ -289,7 +288,7 @@ namespace zypp
     {
       DBG << "creating on-demand device list" << endl;
       //default is /dev/cdrom; for dvd: /dev/dvd if it exists
-      string device( "/dev/cdrom" );
+      std::string device( "/dev/cdrom" );
       if ( _url.getScheme() == "dvd" && PathInfo( "/dev/dvd" ).isBlk() )
       {
         device = "/dev/dvd";
@@ -346,14 +345,14 @@ namespace zypp
     Mount mount;
     MediaMountException merr;
 
-    string options = _url.getQueryParam( "mountoptions" );
+    std::string options = _url.getQueryParam( "mountoptions" );
     if ( options.empty() )
     {
       options="ro";
     }
 
     //TODO: make configurable
-    list<string> filesystems;
+    std::list<std::string> filesystems;
 
     filesystems.push_back("iso9660");
 
@@ -454,7 +453,7 @@ namespace zypp
       closeTray( it->name );
 
       // try all filesystems in sequence
-      for(list<string>::iterator fsit = filesystems.begin()
+      for(std::list<std::string>::iterator fsit = filesystems.begin()
           ; !mountsucceeded && fsit != filesystems.end()
           ; ++fsit)
       {

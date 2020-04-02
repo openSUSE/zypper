@@ -20,7 +20,7 @@
 
 #include "zypp/media/proxyinfo/ProxyInfoLibproxy.h"
 
-using namespace std;
+using std::endl;
 using namespace zypp::base;
 
 namespace zypp {

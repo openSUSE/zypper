@@ -14,7 +14,7 @@
 
 #include "zypp/Changelog.h"
 
-using namespace std;
+using std::endl;
 
 namespace zypp
 { /////////////////////////////////////////////////////////////////
