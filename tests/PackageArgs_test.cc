@@ -8,7 +8,6 @@
 #include "TestSetup.h"
 #include "PackageArgs.h"
 
-using namespace std;
 using namespace zypp;
 
 static TestSetup test;
@@ -38,13 +37,13 @@ std::ostream & operator<<( std::ostream & str_r, const PackageArgs & obj_r )
 BOOST_AUTO_TEST_CASE(preprocess_test)
 {
   {
-    vector<string> rawargs;
+    std::vector<std::string> rawargs;
     rawargs.push_back("zypper");
     rawargs.push_back("libzypp");
     rawargs.push_back("satsolver-tools");
 
     PackageArgs args(rawargs);
-    set<string> sargs = args.asStringSet();
+    std::set<std::string> sargs = args.asStringSet();
 
     BOOST_CHECK((sargs.find("zypper") != sargs.end()));
     BOOST_CHECK((sargs.find("libzypp") != sargs.end()));
@@ -53,14 +52,14 @@ BOOST_AUTO_TEST_CASE(preprocess_test)
   }
 
   {
-    vector<string> rawargs;
+    std::vector<std::string> rawargs;
     rawargs.push_back("zypper");
     rawargs.push_back("libzypp");
     rawargs.push_back(">=");
     rawargs.push_back("6.30.0");
 
     PackageArgs args(rawargs);
-    set<string> sargs = args.asStringSet();
+    std::set<std::string> sargs = args.asStringSet();
 
     BOOST_CHECK((sargs.find("zypper") != sargs.end()));
     BOOST_CHECK((sargs.find("libzypp>=6.30.0") != sargs.end()));
@@ -68,7 +67,7 @@ BOOST_AUTO_TEST_CASE(preprocess_test)
   }
 
   {
-    vector<string> rawargs;
+    std::vector<std::string> rawargs;
     rawargs.push_back("vim");
     rawargs.push_back("zypper>1.4.0");
     rawargs.push_back("libzypp");
@@ -77,7 +76,7 @@ BOOST_AUTO_TEST_CASE(preprocess_test)
     rawargs.push_back("6.30.0");
 
     PackageArgs args(rawargs);
-    set<string> sargs = args.asStringSet();
+    std::set<std::string> sargs = args.asStringSet();
 
     BOOST_CHECK((sargs.find("vim") != sargs.end()));
     BOOST_CHECK((sargs.find("zypper>1.4.0") != sargs.end()));
@@ -87,7 +86,7 @@ BOOST_AUTO_TEST_CASE(preprocess_test)
   }
 
   {
-    vector<string> rawargs;
+    std::vector<std::string> rawargs;
     rawargs.push_back("=");
     rawargs.push_back("zypper=1.4.0");
     rawargs.push_back("libzypp");
@@ -96,7 +95,7 @@ BOOST_AUTO_TEST_CASE(preprocess_test)
     rawargs.push_back("=>");
 
     PackageArgs args(rawargs);
-    set<string> sargs = args.asStringSet();
+    std::set<std::string> sargs = args.asStringSet();
 
     BOOST_CHECK((sargs.find("=") != sargs.end()));
     BOOST_CHECK((sargs.find("zypper=1.4.0") != sargs.end()));
@@ -106,7 +105,7 @@ BOOST_AUTO_TEST_CASE(preprocess_test)
   }
 
   {
-    vector<string> rawargs;
+    std::vector<std::string> rawargs;
     rawargs.push_back("=zypper");
     rawargs.push_back("libzypp");
     rawargs.push_back(">6.30.0");
@@ -116,7 +115,7 @@ BOOST_AUTO_TEST_CASE(preprocess_test)
     rawargs.push_back("tree<=");
 
     PackageArgs args(rawargs);
-    set<string> sargs = args.asStringSet();
+    std::set<std::string> sargs = args.asStringSet();
 
     BOOST_CHECK((sargs.find("=zypper") != sargs.end()));
     BOOST_CHECK((sargs.find("libzypp>6.30.0") != sargs.end()));
@@ -127,12 +126,12 @@ BOOST_AUTO_TEST_CASE(preprocess_test)
   }
 
   {
-    vector<string> rawargs;
+    std::vector<std::string> rawargs;
     rawargs.push_back("perl(Math::BigInt)");
     rawargs.push_back("pattern:laptop");
 
     PackageArgs args(rawargs);
-    set<string> sargs = args.asStringSet();
+    std::set<std::string> sargs = args.asStringSet();
 
     BOOST_CHECK((sargs.find("perl(Math::BigInt)") != sargs.end()));
     BOOST_CHECK((sargs.find("pattern:laptop") != sargs.end()));
@@ -143,7 +142,7 @@ BOOST_AUTO_TEST_CASE(preprocess_test)
 BOOST_AUTO_TEST_CASE(argToCaps_test)
 {
   {
-    vector<string> rawargs;
+    std::vector<std::string> rawargs;
     rawargs.push_back("zypper>=1.4.0");
     rawargs.push_back("perl(Math::BigInt)");
     rawargs.push_back("pattern:laptop");
@@ -185,7 +184,7 @@ BOOST_AUTO_TEST_CASE(argToCaps_test)
 BOOST_AUTO_TEST_CASE(dupes_test)
 {
   {
-    vector<string> rawargs;
+    std::vector<std::string> rawargs;
     rawargs.push_back("zypper>=1.4.0");
     rawargs.push_back("zypper");
     rawargs.push_back(">=");
@@ -201,7 +200,7 @@ BOOST_AUTO_TEST_CASE(dupes_test)
 BOOST_AUTO_TEST_CASE(dont_by_default_test)
 {
   {
-    vector<string> rawargs;
+    std::vector<std::string> rawargs;
     rawargs.push_back("package");
     rawargs.push_back("-simon");
     rawargs.push_back("+garfunkel");
@@ -218,7 +217,7 @@ BOOST_AUTO_TEST_CASE(dont_by_default_test)
 BOOST_AUTO_TEST_CASE(argToCaps_with_patch_test)
 {
   {
-    vector<string> rawargs;
+    std::vector<std::string> rawargs;
     rawargs.push_back("openssl-CVE-2009-4355.patch");
 
     PackageArgs args(rawargs, ResKind::patch);

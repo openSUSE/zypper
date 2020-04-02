@@ -73,12 +73,11 @@
 
 #include "SolverRequester.h"
 
-using namespace std;
 using namespace zypp;
 
 bool hasPoolItem(
-    const set<PoolItem> & set,
-    const string & name,
+    const std::set<PoolItem> & set,
+    const std::string & name,
     const Edition & ed = Edition(),
     const Arch & arch = Arch_empty,
     const ResKind & kind = ResKind::package)
@@ -147,7 +146,7 @@ BOOST_AUTO_TEST_CASE(install1)
 {
   MIL << "<=============install1==============>" << endl;
 
-  vector<string> rawargs;
+  std::vector<std::string> rawargs;
   rawargs.push_back("nonsense");
   SolverRequester sr;
 
@@ -163,7 +162,7 @@ BOOST_AUTO_TEST_CASE(install2)
 {
   MIL << "<============install2===============>" << endl;
 
-  vector<string> rawargs;
+  std::vector<std::string> rawargs;
   rawargs.push_back("vim");
   SolverRequester sr;
 
@@ -180,7 +179,7 @@ BOOST_AUTO_TEST_CASE(install3)
 {
   MIL << "<============install3===============>" << endl;
 
-  vector<string> rawargs;
+  std::vector<std::string> rawargs;
   rawargs.push_back("zypper");
   SolverRequester sr;
 
@@ -198,7 +197,7 @@ BOOST_AUTO_TEST_CASE(install4)
 {
   MIL << "<============install4===============>" << endl;
 
-  vector<string> rawargs;
+  std::vector<std::string> rawargs;
   rawargs.push_back("netcfg");
   SolverRequester sr;
 
@@ -214,7 +213,7 @@ BOOST_AUTO_TEST_CASE(install5)
 {
   MIL << "<============install5===============>" << endl;
 
-  vector<string> rawargs;
+  std::vector<std::string> rawargs;
   rawargs.push_back("login");
   SolverRequester sr;
 
@@ -231,7 +230,7 @@ BOOST_AUTO_TEST_CASE(install6)
 {
   MIL << "<============install6===============>" << endl;
 
-  vector<string> rawargs;
+  std::vector<std::string> rawargs;
   rawargs.push_back("perl(Net::SSL)");
   SolverRequester sr;
 
@@ -251,7 +250,7 @@ BOOST_AUTO_TEST_CASE(install7)
 {
   MIL << "<============install7===============>" << endl;
 
-  vector<string> rawargs;
+  std::vector<std::string> rawargs;
   rawargs.push_back("perl(Net::SSL)");
   SolverRequester::Options sropts;
   sropts.force_by_name = true;
@@ -269,7 +268,7 @@ BOOST_AUTO_TEST_CASE(install8)
 {
   MIL << "<============install8===============>" << endl;
 
-  vector<string> rawargs;
+  std::vector<std::string> rawargs;
   rawargs.push_back("y2pmsh");
   SolverRequester::Options sropts;
   sropts.force_by_cap = true;
@@ -291,7 +290,7 @@ BOOST_AUTO_TEST_CASE(install9)
 {
   MIL << "<============install9===============>" << endl;
 
-  vector<string> rawargs;
+  std::vector<std::string> rawargs;
   rawargs.push_back("info");
   SolverRequester sr;
 
@@ -310,7 +309,7 @@ BOOST_AUTO_TEST_CASE(install10)
 {
   MIL << "<============install10===============>" << endl;
 
-  vector<string> rawargs;
+  std::vector<std::string> rawargs;
   rawargs.push_back("stellarium");
   SolverRequester sr;
 
@@ -327,7 +326,7 @@ BOOST_AUTO_TEST_CASE(install11)
 {
   MIL << "<============install11===============>" << endl;
 
-  vector<string> rawargs;
+  std::vector<std::string> rawargs;
   rawargs.push_back("diffutils");
   SolverRequester sr;
 
@@ -347,7 +346,7 @@ BOOST_AUTO_TEST_CASE(install12)
 {
   MIL << "<============install12===============>" << endl;
 
-  vector<string> rawargs;
+  std::vector<std::string> rawargs;
   rawargs.push_back("info-4.13-1.1");
   SolverRequester sr;
 
@@ -366,7 +365,7 @@ BOOST_AUTO_TEST_CASE(install13)
 {
   MIL << "<============install13===============>" << endl;
 
-  vector<string> rawargs;
+  std::vector<std::string> rawargs;
   rawargs.push_back("misc:info");
   SolverRequester sr;
 
@@ -385,7 +384,7 @@ BOOST_AUTO_TEST_CASE(install14)
 {
   MIL << "<============install14===============>" << endl;
 
-  vector<string> rawargs;
+  std::vector<std::string> rawargs;
   rawargs.push_back("info>4.12-1.109");
   SolverRequester sr;
 
@@ -405,7 +404,7 @@ BOOST_AUTO_TEST_CASE(install15)
 {
   MIL << "<============install15===============>" << endl;
 
-  vector<string> rawargs;
+  std::vector<std::string> rawargs;
   rawargs.push_back("openSUSE-release-usb-x11");
   SolverRequester sr;
 
@@ -435,7 +434,7 @@ BOOST_AUTO_TEST_CASE(install100)
 
   ApplyLock()(q);
 
-  vector<string> rawargs;
+  std::vector<std::string> rawargs;
   rawargs.push_back("zypper");
   SolverRequester sr;
 
@@ -461,7 +460,7 @@ BOOST_AUTO_TEST_CASE(install200)
 {
   MIL << "<============install200===============>" << endl;
 
-  vector<string> rawargs;
+  std::vector<std::string> rawargs;
   rawargs.push_back("cron");
   SolverRequester sr;
 
@@ -481,7 +480,7 @@ BOOST_AUTO_TEST_CASE(install201)
 {
   MIL << "<============install201===============>" << endl;
 
-  vector<string> rawargs;
+  std::vector<std::string> rawargs;
   rawargs.push_back("cron-4.1-195.0.x86_64");
   SolverRequester sr;
 
@@ -505,7 +504,7 @@ BOOST_AUTO_TEST_CASE(install300)
 {
   MIL << "<============install300===============>" << endl;
 
-  vector<string> rawargs;
+  std::vector<std::string> rawargs;
   rawargs.push_back("patch:dbus-1");
   SolverRequester sr;
 
@@ -522,7 +521,7 @@ BOOST_AUTO_TEST_CASE(install301)
 {
   MIL << "<============install301===============>" << endl;
 
-  vector<string> rawargs;
+  std::vector<std::string> rawargs;
   rawargs.push_back("patch:imap");
   SolverRequester sr;
 
@@ -539,7 +538,7 @@ BOOST_AUTO_TEST_CASE(install302)
 {
   MIL << "<============install302===============>" << endl;
 
-  vector<string> rawargs;
+  std::vector<std::string> rawargs;
   rawargs.push_back("patch:libxml2-434");
   SolverRequester sr;
   //getZYpp()->resolver()->createSolverTestcase(TESTS_BUILD_DIR "/testcase");
@@ -557,7 +556,7 @@ BOOST_AUTO_TEST_CASE(install303)
 {
   MIL << "<============install303===============>" << endl;
 
-  vector<string> rawargs;
+  std::vector<std::string> rawargs;
   rawargs.push_back("patch:libxml2");
   SolverRequester sr;
 
@@ -584,7 +583,7 @@ BOOST_AUTO_TEST_CASE(install400)
 {
   MIL << "<============install400===============>" << endl;
 
-  vector<string> rawargs;
+  std::vector<std::string> rawargs;
   rawargs.push_back("cron");
   SolverRequester::Options sropts;
   sropts.force = true;
@@ -605,7 +604,7 @@ BOOST_AUTO_TEST_CASE(install401)
 {
   MIL << "<============install401===============>" << endl;
 
-  vector<string> rawargs;
+  std::vector<std::string> rawargs;
   rawargs.push_back("info");
   SolverRequester::Options sropts;
   sropts.force = true;
@@ -627,7 +626,7 @@ BOOST_AUTO_TEST_CASE(install402)
 {
   MIL << "<============install402===============>" << endl;
 
-  vector<string> rawargs;
+  std::vector<std::string> rawargs;
   rawargs.push_back("netcfg");
   SolverRequester::Options sropts;
   sropts.force = true;
@@ -647,7 +646,7 @@ BOOST_AUTO_TEST_CASE(install403)
 {
   MIL << "<============install403===============>" << endl;
 
-  vector<string> rawargs;
+  std::vector<std::string> rawargs;
   rawargs.push_back("popt");
   SolverRequester::Options sropts;
   sropts.force = true;
@@ -676,7 +675,7 @@ BOOST_AUTO_TEST_CASE(remove1)
   PackageArgs::Options argopts;
   argopts.do_by_default = false;
 
-  vector<string> rawargs;
+  std::vector<std::string> rawargs;
   rawargs.push_back("nonsense");
   PackageArgs args(rawargs, ResKind::package, argopts);
   SolverRequester sr;
@@ -696,7 +695,7 @@ BOOST_AUTO_TEST_CASE(remove2)
   PackageArgs::Options argopts;
   argopts.do_by_default = false;
 
-  vector<string> rawargs;
+  std::vector<std::string> rawargs;
   rawargs.push_back("nonsense");
   PackageArgs args(rawargs, ResKind::package, argopts);
 
@@ -718,7 +717,7 @@ BOOST_AUTO_TEST_CASE(remove3)
   PackageArgs::Options argopts;
   argopts.do_by_default = false;
 
-  vector<string> rawargs;
+  std::vector<std::string> rawargs;
   rawargs.push_back("mc");
   PackageArgs args(rawargs, ResKind::package, argopts);
   SolverRequester sr;
@@ -732,15 +731,15 @@ BOOST_AUTO_TEST_CASE(remove3)
 
 // request : remove mc
 // response: not installed, fall back to caps, no provider installed
-// this one is done by sr.remove(vector<string>) instead of PackageArgs
+// this one is done by sr.remove(std::vector<std::string>) instead of PackageArgs
 BOOST_AUTO_TEST_CASE(remove4)
 {
   MIL << "<==============remove4=============>" << endl;
-  // beware of implicit conversion from vector<string> to PackageArgs
+  // beware of implicit conversion from std::vector<std::string> to PackageArgs
   // if not avoided, the resulting PackageArgs would have
   // PackageArgs::Options::do_by_default == true! => args without +/- modifiers
   // would default to install/doCaps, not remove/dontCaps!
-  vector<string> rawargs;
+  std::vector<std::string> rawargs;
   rawargs.push_back("mc");
   SolverRequester sr;
 
@@ -756,7 +755,7 @@ BOOST_AUTO_TEST_CASE(remove4)
 BOOST_AUTO_TEST_CASE(remove5)
 {
   MIL << "<=============remove5==============>" << endl;
-  vector<string> rawargs;
+  std::vector<std::string> rawargs;
   rawargs.push_back("mc");
   SolverRequester::Options sropts;
   sropts.force_by_name = true;
@@ -774,7 +773,7 @@ BOOST_AUTO_TEST_CASE(remove5)
 BOOST_AUTO_TEST_CASE(remove6)
 {
   MIL << "<=============remove6==============>" << endl;
-  vector<string> rawargs;
+  std::vector<std::string> rawargs;
   rawargs.push_back("libzypp");
   SolverRequester sr;
 
@@ -792,7 +791,7 @@ BOOST_AUTO_TEST_CASE(remove6)
 BOOST_AUTO_TEST_CASE(remove7)
 {
   MIL << "<=============remove7==============>" << endl;
-  vector<string> rawargs;
+  std::vector<std::string> rawargs;
   rawargs.push_back("y2pmsh");
 
   SolverRequester::Options sropts;
@@ -816,7 +815,7 @@ BOOST_AUTO_TEST_CASE(remove7)
 BOOST_AUTO_TEST_CASE(remove8)
 {
   MIL << "<=============remove8==============>" << endl;
-  vector<string> rawargs;
+  std::vector<std::string> rawargs;
   rawargs.push_back("onekit");
   SolverRequester sr;
 
@@ -854,7 +853,7 @@ BOOST_AUTO_TEST_CASE(update1)
 {
   MIL << "<============update1===============>" << endl;
 
-  vector<string> rawargs;
+  std::vector<std::string> rawargs;
   rawargs.push_back("vim");
   PackageArgs args(rawargs);
   SolverRequester sr;
@@ -871,7 +870,7 @@ BOOST_AUTO_TEST_CASE(update2)
 {
   MIL << "<============update2===============>" << endl;
 
-  vector<string> rawargs;
+  std::vector<std::string> rawargs;
   rawargs.push_back("nonsense");
   PackageArgs args(rawargs);
   SolverRequester sr;
@@ -886,7 +885,7 @@ BOOST_AUTO_TEST_CASE(update3)
 {
   MIL << "<============update3===============>" << endl;
 
-  vector<string> rawargs;
+  std::vector<std::string> rawargs;
   rawargs.push_back("info");
   SolverRequester sr;
 
@@ -906,7 +905,7 @@ BOOST_AUTO_TEST_CASE(update3)
 {
   MIL << "<===========================>" << endl;
 
-  vector<string> rawargs;
+  std::vector<std::string> rawargs;
   rawargs.push_back("");
   SolverRequester::Options sropts;
   sropts.force_by_name = true;
