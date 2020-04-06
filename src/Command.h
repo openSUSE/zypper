@@ -87,15 +87,6 @@ struct ZypperCommand
   static const ZypperCommand RUG_PATCH_INFO;
   static const ZypperCommand RUG_PATTERN_INFO;
   static const ZypperCommand RUG_PRODUCT_INFO;
-  static const ZypperCommand RUG_SERVICE_TYPES;
-  static const ZypperCommand RUG_LIST_RESOLVABLES;
-  static const ZypperCommand RUG_MOUNT;
-  //static const ZypperCommand RUG_INFO_PROVIDES;
-  //static const ZypperCommand RUG_INFO_CONFLICTS;
-  //static const ZypperCommand RUG_INFO_OBSOLETES;
-  //static const ZypperCommand RUG_INFO_REQUIREMENTS;
-  static const ZypperCommand RUG_PATCH_SEARCH;
-  static const ZypperCommand RUG_PING;
   //!@}
 
   static const ZypperCommand NEEDS_REBOOTING;
@@ -170,8 +161,6 @@ struct ZypperCommand
     RUG_PATCH_INFO_e,
     RUG_PATTERN_INFO_e,
     RUG_PRODUCT_INFO_e,
-    RUG_PATCH_SEARCH_e,
-    RUG_PING_e,
 
     LOCALES_e,
     ADD_LOCALE_e,

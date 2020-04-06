@@ -135,7 +135,7 @@ namespace
       makeCmd<DistUpgradeCmd> ( ZypperCommand::DIST_UPGRADE_e , std::string(), { "dist-upgrade", "dup" } ),
       makeCmd<PatchCheckCmd> ( ZypperCommand::PATCH_CHECK_e , std::string(), { "patch-check", "pchk"} ),
 
-      makeCmd<SearchCmd> ( ZypperCommand::SEARCH_e , _("Querying:"), { "search", "se" }, SearchCmd::CmdMode::Search ),
+      makeCmd<SearchCmd> ( ZypperCommand::SEARCH_e , _("Querying:"), { "search", "se" } ),
       makeCmd<InfoCmd> ( ZypperCommand::INFO_e , std::string(), { "info", "if" } ),
       makeCmd<InfoCmd> ( ZypperCommand::RUG_PATCH_INFO_e , std::string(), { "patch-info" }, InfoCmd::Mode::RugPatchInfo ),
       makeCmd<InfoCmd> ( ZypperCommand::RUG_PATTERN_INFO_e , std::string(), { "pattern-info" }, InfoCmd::Mode::RugPatternInfo ),
@@ -167,9 +167,7 @@ namespace
       makeCmd<SubCmd> ( ZypperCommand::SUBCOMMAND_e, _("Subcommands:"), { "subcommand" }),
 
       //all commands in this group will be hidden from help
-      makeCmd<SearchCmd> ( ZypperCommand::RUG_PATCH_SEARCH_e , "HIDDEN", { "patch-search", "pse" }, SearchCmd::CmdMode::RugPatchSearch ),
       makeCmd<ConfigTestCmd> ( ZypperCommand::CONFIGTEST_e , std::string(), { "configtest" } ),
-      makeCmd<RupPingCmd> ( ZypperCommand::RUG_PING_e , std::string(), { "ping" } ),
       makeCmd<ShellQuitCmd> ( ZypperCommand::SHELL_QUIT_e , std::string(), { "quit", "exit", "\004" } ),
       makeCmd<MooCmd> ( ZypperCommand::MOO_e , std::string(), { "moo" } ),
       std::make_tuple ( ZypperCommand::NONE_e, std::string(), std::vector< const char *>{ "none", ""}, ZypperCommand::CmdFactory( voidCmd ) )
@@ -257,8 +255,6 @@ DEF_ZYPPER_COMMAND( MOO );
 DEF_ZYPPER_COMMAND( RUG_PATCH_INFO );
 DEF_ZYPPER_COMMAND( RUG_PATTERN_INFO );
 DEF_ZYPPER_COMMAND( RUG_PRODUCT_INFO );
-DEF_ZYPPER_COMMAND( RUG_PATCH_SEARCH );
-DEF_ZYPPER_COMMAND( RUG_PING );
 
 DEF_ZYPPER_COMMAND( LOCALES );
 DEF_ZYPPER_COMMAND( ADD_LOCALE );

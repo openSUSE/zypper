@@ -53,21 +53,11 @@ namespace
 }
 
 
-SearchCmd::SearchCmd(std::vector<std::string> &&commandAliases_r, CmdMode cmdMode_r  ) :
-  ZypperBaseCommand (
-    std::move( commandAliases_r ),
-    std::string(),
-    std::string(),
-    std::string(),
-    ResetRepoManager
-  ), _cmdMode ( cmdMode_r )
+SearchCmd::SearchCmd( std::vector<std::string> &&commandAliases_r )
+: ZypperBaseCommand( std::move( commandAliases_r ), std::string(), std::string(), std::string(), ResetRepoManager )
 {
-  if ( _cmdMode == CmdMode::Search ) {
-    this->addOptionSet( _initReposOpts );
-    this->addOptionSet( _notInstalledOpts );
-  }
-  _sortOpts.setCompatibilityMode( CompatModeBits::EnableNewOpt | CompatModeBits::EnableNewOpt );
-  _initReposOpts.setCompatibilityMode( CompatModeBits::EnableNewOpt | CompatModeBits::EnableNewOpt );
+  _sortOpts.setCompatibilityMode( CompatModeBits::EnableNewOpt );
+  _initReposOpts.setCompatibilityMode( CompatModeBits::EnableNewOpt );
 }
 
 void SearchCmd::setMode(const MatchMode &mode_r)
@@ -88,31 +78,20 @@ std::string SearchCmd::summary() const
 
 std::vector<std::string> SearchCmd::synopsis() const
 {
-  if ( _cmdMode == CmdMode::Search ) {
-    return {
-      // translators: command synopsis; do not translate lowercase words
-      _("search (se) [OPTIONS] [QUERYSTRING] ...")
-    };
-  }
   return {
     // translators: command synopsis; do not translate lowercase words
-    _("patch-search [OPTIONS] [QUERYSTRING...]")
+    _("search (se) [OPTIONS] [QUERYSTRING] ...")
   };
 }
 
 std::string SearchCmd::description() const
 {
-  if ( _cmdMode == CmdMode::Search ) {
-    return (
-      // translators: command description
-      std::string( _("Search for packages matching any of the given search strings.") ) + "\n\n"
-      // translators: command description
-      + _("* and ? wildcards can also be used within search strings. If a search string is enclosed in '/', it's interpreted as a regular expression.")
-    );
-  }
-
-  // translators: command description
-  return _("Search for patches matching given search strings.");
+  return (
+    // translators: command description
+    std::string( _("Search for packages matching any of the given search strings.") ) + "\n\n"
+    // translators: command description
+    + _("* and ? wildcards can also be used within search strings. If a search string is enclosed in '/', it's interpreted as a regular expression.")
+  );
 }
 
 zypp::ZyppFlags::CommandGroup SearchCmd::cmdOptions() const
@@ -132,129 +111,104 @@ zypp::ZyppFlags::CommandGroup SearchCmd::cmdOptions() const
       { "match-exact", 'x', ZyppFlags::NoArgument, ZyppFlags::WriteFixedValueType( that._mode, MatchMode::Exact ),
             // translators: -x, --match-exact
             _("Searches for an exact match of the search strings.")
-      }
-    },{
-      { "match-substrings", "match-words", "match-exact" }
-    }
-  };
-
-  if ( _cmdMode == CmdMode::Search ) {
-    grp.options.insert( grp.options.end(),
-    {
-        { "provides", '\0', ZyppFlags::NoArgument, ZyppFlags::appendSolvAttrToSet( that._requestedDeps, sat::SolvAttr::provides ),
-              // translators: --provides
-              _("Search for packages which provide the search strings.")
-        },
-        { "requires", '\0', ZyppFlags::NoArgument, ZyppFlags::appendSolvAttrToSet( that._requestedDeps, sat::SolvAttr::requires ),
-              // translators: --requires
-              _("Search for packages which require the search strings.")
-        },
-        { "recommends", '\0', ZyppFlags::NoArgument, ZyppFlags::appendSolvAttrToSet( that._requestedDeps, sat::SolvAttr::recommends ),
-              // translators: --recommends
-              _("Search for packages which recommend the search strings.")
-        },
-        { "supplements", '\0', ZyppFlags::NoArgument, ZyppFlags::appendSolvAttrToSet( that._requestedDeps, sat::SolvAttr::supplements ),
-              // translators: --supplements
-              _("Search for packages which supplement the search strings.")
-        },
-        { "conflicts", '\0', ZyppFlags::NoArgument, ZyppFlags::appendSolvAttrToSet( that._requestedDeps, sat::SolvAttr::conflicts ),
-              // translators: --conflicts
-              _("Search packages conflicting with search strings.")
-        },
-        { "obsoletes", '\0', ZyppFlags::NoArgument, ZyppFlags::appendSolvAttrToSet( that._requestedDeps, sat::SolvAttr::obsoletes ),
-              // translators: --obsoletes
-              _("Search for packages which obsolete the search strings.")
-        },
-        { "suggests", '\0', ZyppFlags::NoArgument, ZyppFlags::appendSolvAttrToSet( that._requestedDeps, sat::SolvAttr::suggests ),
-              // translators: --suggests
-              _("Search for packages which suggest the search strings.")
-        },
-        { "provides-pkg", '\0', ZyppFlags::NoArgument, ZyppFlags::setSolvAttrOptional( that._requestedReverseSearch, sat::SolvAttr::provides ),
-          // translators: --provides-pkg
-          _("Search for all packages that provide any of the provides of the package(s) matched by the input parameters.")
-        },
-        { "requires-pkg", '\0', ZyppFlags::NoArgument, ZyppFlags::setSolvAttrOptional( that._requestedReverseSearch, sat::SolvAttr::requires ),
-          // translators: --requires-pkg
-          _("Search for all packages that require any of the provides of the package(s) matched by the input parameters.")
-        },
-        { "recommends-pkg", '\0', ZyppFlags::NoArgument, ZyppFlags::setSolvAttrOptional( that._requestedReverseSearch, sat::SolvAttr::recommends ),
-          // translators: --recommends-pkg
-          _("Search for all packages that recommend any of the provides of the package(s) matched by the input parameters.")
-        },
-        { "supplements-pkg", '\0', ZyppFlags::NoArgument, ZyppFlags::setSolvAttrOptional( that._requestedReverseSearch, sat::SolvAttr::supplements ),
-          // translators: --supplements-pkg
-          _("Search for all packages that supplement any of the provides of the package(s) matched by the input parameters.")
-        },
-        { "conflicts-pkg", '\0', ZyppFlags::NoArgument, ZyppFlags::setSolvAttrOptional( that._requestedReverseSearch, sat::SolvAttr::conflicts ),
-          // translators: --conflicts-pkg
-          _("Search for all packages that conflict with any of the package(s) matched by the input parameters.")
-        },
-        { "obsoletes-pkg", '\0', ZyppFlags::NoArgument, ZyppFlags::setSolvAttrOptional( that._requestedReverseSearch, sat::SolvAttr::obsoletes ),
-          // translators: --obsoletes-pkg
-          _("Search for all packages that obsolete any of the package(s) matched by the input parameters.")
-        },
-        { "suggests-pkg", '\0', ZyppFlags::NoArgument, ZyppFlags::setSolvAttrOptional( that._requestedReverseSearch, sat::SolvAttr::suggests ),
-          // translators: --suggests-pkg
-          _("Search for all packages that suggest any of the provides of the package(s) matched by the input parameters.")
-        },
-        CommonFlags::resKindSetFlag( that._requestedTypes,
-              // translators: -t, --type <TYPE>
-              _("Search only for packages of the specified type.")
-        ),
-        { "name", 'n', ZyppFlags::NoArgument, ZyppFlags::BoolType( &that._forceNameAttr, ZyppFlags::StoreTrue ),
-              // translators: -n, --name
-             _("Useful together with dependency options, otherwise searching in package name is default.")
-        },
-        { "file-list", 'f', ZyppFlags::NoArgument, ZyppFlags::appendSolvAttrToSet( that._requestedDeps, sat::SolvAttr::filelist ),
-              // translators: -f, --file-list
-              _("Search for a match in the file list of packages.")
-        }
-    } );
-
-    grp.conflictingOptions.push_back( { "provides-pkg", "requires-pkg", "recommends-pkg", "supplements-pkg", "conflicts-pkg", "obsoletes-pkg", "suggests-pkg"  } );
-  }
-
-  grp.options.insert( grp.options.end(),
-  {
+      },
+      { "provides", '\0', ZyppFlags::NoArgument, ZyppFlags::appendSolvAttrToSet( that._requestedDeps, sat::SolvAttr::provides ),
+	// translators: --provides
+	_("Search for packages which provide the search strings.")
+      },
+      { "requires", '\0', ZyppFlags::NoArgument, ZyppFlags::appendSolvAttrToSet( that._requestedDeps, sat::SolvAttr::requires ),
+	// translators: --requires
+	_("Search for packages which require the search strings.")
+      },
+      { "recommends", '\0', ZyppFlags::NoArgument, ZyppFlags::appendSolvAttrToSet( that._requestedDeps, sat::SolvAttr::recommends ),
+	// translators: --recommends
+	_("Search for packages which recommend the search strings.")
+      },
+      { "supplements", '\0', ZyppFlags::NoArgument, ZyppFlags::appendSolvAttrToSet( that._requestedDeps, sat::SolvAttr::supplements ),
+	// translators: --supplements
+	_("Search for packages which supplement the search strings.")
+      },
+      { "conflicts", '\0', ZyppFlags::NoArgument, ZyppFlags::appendSolvAttrToSet( that._requestedDeps, sat::SolvAttr::conflicts ),
+	// translators: --conflicts
+	_("Search packages conflicting with search strings.")
+      },
+      { "obsoletes", '\0', ZyppFlags::NoArgument, ZyppFlags::appendSolvAttrToSet( that._requestedDeps, sat::SolvAttr::obsoletes ),
+	// translators: --obsoletes
+	_("Search for packages which obsolete the search strings.")
+      },
+      { "suggests", '\0', ZyppFlags::NoArgument, ZyppFlags::appendSolvAttrToSet( that._requestedDeps, sat::SolvAttr::suggests ),
+	// translators: --suggests
+	_("Search for packages which suggest the search strings.")
+      },
+      { "provides-pkg", '\0', ZyppFlags::NoArgument, ZyppFlags::setSolvAttrOptional( that._requestedReverseSearch, sat::SolvAttr::provides ),
+	// translators: --provides-pkg
+	_("Search for all packages that provide any of the provides of the package(s) matched by the input parameters.")
+      },
+      { "requires-pkg", '\0', ZyppFlags::NoArgument, ZyppFlags::setSolvAttrOptional( that._requestedReverseSearch, sat::SolvAttr::requires ),
+	// translators: --requires-pkg
+	_("Search for all packages that require any of the provides of the package(s) matched by the input parameters.")
+      },
+      { "recommends-pkg", '\0', ZyppFlags::NoArgument, ZyppFlags::setSolvAttrOptional( that._requestedReverseSearch, sat::SolvAttr::recommends ),
+	// translators: --recommends-pkg
+	_("Search for all packages that recommend any of the provides of the package(s) matched by the input parameters.")
+      },
+      { "supplements-pkg", '\0', ZyppFlags::NoArgument, ZyppFlags::setSolvAttrOptional( that._requestedReverseSearch, sat::SolvAttr::supplements ),
+	// translators: --supplements-pkg
+	_("Search for all packages that supplement any of the provides of the package(s) matched by the input parameters.")
+      },
+      { "conflicts-pkg", '\0', ZyppFlags::NoArgument, ZyppFlags::setSolvAttrOptional( that._requestedReverseSearch, sat::SolvAttr::conflicts ),
+	// translators: --conflicts-pkg
+	_("Search for all packages that conflict with any of the package(s) matched by the input parameters.")
+      },
+      { "obsoletes-pkg", '\0', ZyppFlags::NoArgument, ZyppFlags::setSolvAttrOptional( that._requestedReverseSearch, sat::SolvAttr::obsoletes ),
+	// translators: --obsoletes-pkg
+	_("Search for all packages that obsolete any of the package(s) matched by the input parameters.")
+      },
+      { "suggests-pkg", '\0', ZyppFlags::NoArgument, ZyppFlags::setSolvAttrOptional( that._requestedReverseSearch, sat::SolvAttr::suggests ),
+	// translators: --suggests-pkg
+	_("Search for all packages that suggest any of the provides of the package(s) matched by the input parameters.")
+      },
+      CommonFlags::resKindSetFlag( that._requestedTypes,
+				   // translators: -t, --type <TYPE>
+				   _("Search only for packages of the specified type.")
+      ),
+      { "name", 'n', ZyppFlags::NoArgument, ZyppFlags::BoolType( &that._forceNameAttr, ZyppFlags::StoreTrue ),
+	// translators: -n, --name
+	_("Useful together with dependency options, otherwise searching in package name is default.")
+      },
+      { "file-list", 'f', ZyppFlags::NoArgument, ZyppFlags::appendSolvAttrToSet( that._requestedDeps, sat::SolvAttr::filelist ),
+	// translators: -f, --file-list
+	_("Search for a match in the file list of packages.")
+      },
       { "search-descriptions", 'd', ZyppFlags::NoArgument, ZyppFlags::BoolType( &that._searchDesc, ZyppFlags::StoreTrue, _searchDesc ),
-            // translators: -d, --search-descriptions
-            _("Search also in package summaries and descriptions.")
+	// translators: -d, --search-descriptions
+	_("Search also in package summaries and descriptions.")
       },
       {"case-sensitive", 'C', ZyppFlags::NoArgument, ZyppFlags::BoolType( &that._caseSensitive, ZyppFlags::StoreTrue, _caseSensitive ),
-            // translators: -C, --case-sensitive
-            _("Perform case-sensitive search.")
-      }
-  });
-
-  if ( _cmdMode == CmdMode::Search ) {
-    grp.options.insert( grp.options.end(),
-    {
+	// translators: -C, --case-sensitive
+	_("Perform case-sensitive search.")
+      },
       CommonFlags::detailsFlag( that._details, 's',
-            // translators: -s, --details
-            _("Show each available version in each repository on a separate line.")
+				// translators: -s, --details
+				_("Show each available version in each repository on a separate line.")
       ),
       {"verbose", 'v', ZyppFlags::NoArgument, ZyppFlags::BoolType( &that._verbose, ZyppFlags::StoreTrue, _caseSensitive ),
-            // translators: -v, --verbose
-            _("Like --details, with additional information where the search has matched (useful for search in dependencies).")
+	// translators: -v, --verbose
+	_("Like --details, with additional information where the search has matched (useful for search in dependencies).")
       }
-    });
-  }
+    },
+    {
+      { "match-substrings", "match-words", "match-exact" },
+      { "provides-pkg", "requires-pkg", "recommends-pkg", "supplements-pkg", "conflicts-pkg", "obsoletes-pkg", "suggests-pkg"  }
+    }
+  };
 
   return grp;
 }
 
 std::string SearchCmd::help()
 {
-  if ( _cmdMode == CmdMode::Search )
-    return ZypperBaseCommand::help();
-
-  CommandHelpFormater cliHlp;
-  for ( const std::string &syn : synopsis() )
-    cliHlp.synopsis( syn );
-
-  cliHlp.description( description())
-      .descriptionAliasCmd( "zypper -r search -t patch --detail ..." );
-  return cliHlp;
+  return ZypperBaseCommand::help();
 }
 
 void SearchCmd::doReset()
@@ -311,9 +265,7 @@ int SearchCmd::execute( Zypper &zypper, const std::vector<std::string> &position
   if ( _caseSensitive )
     query.setCaseSensitive();
 
-  if ( _cmdMode == CmdMode::RugPatchSearch )
-    query.addKind( ResKind::patch );
-  else if ( _requestedTypes.size() > 0 )
+  if ( _requestedTypes.size() > 0 )
   {
     for ( const ResKind &knd : _requestedTypes )
       query.addKind( knd );
@@ -482,16 +434,7 @@ int SearchCmd::execute( Zypper &zypper, const std::vector<std::string> &position
       }
 
     } else {
-      if ( _cmdMode == CmdMode::RugPatchSearch )
-      {
-	// TODO: PatchHistoryData::placeholder just added to get it compiled. In fact
-	// 'zypper.out().searchResult( t )' in XML mode understands just FillSearchTable*
-	// formats. The output is wrong in this case. RugPatchSearch is an undocumented rug legacy.
-	// Maybe we should drop it.
-	FillPatchesTable callback( t, PatchHistoryData::placeholder(), inst_notinst );
-        invokeOnEach( query.poolItemBegin(), query.poolItemEnd(), callback );
-      }
-      else if ( details )
+      if ( details )
       {
         FillSearchTableSolvable callback( t, inst_notinst );
         if ( _verbose )
@@ -524,14 +467,7 @@ int SearchCmd::execute( Zypper &zypper, const std::vector<std::string> &position
     {
       cout << endl; //! \todo  out().separator()?
 
-      if ( _cmdMode == CmdMode::RugPatchSearch )
-      {
-        if ( _sortOpts._mode == SortResultOptionSet::ByRepo )
-          t.sort( { 0, 1, Table::UserData } );
-        else
-          t.sort( { 1, Table::UserData } ); // sort by name
-      }
-      else if ( _details )
+      if ( _details )
       {
         if ( _sortOpts._mode == SortResultOptionSet::ByRepo )
           t.sort( { 5, 1, Table::UserData } );
