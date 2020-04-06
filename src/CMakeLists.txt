@@ -267,13 +267,6 @@ INSTALL(
   RENAME zypper.sh
 )
 
-
-# installation_sources script
-INSTALL(
-  PROGRAMS installation_sources
-  DESTINATION ${INSTALL_PREFIX}/bin
-)
-
 # logrotate config file
 INSTALL(
   FILES zypper.lr zypp-refresh.lr

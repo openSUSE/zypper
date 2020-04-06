@@ -130,3 +130,8 @@ INSTALL(
   DESTINATION ${SYSCONFDIR}/zypp/apt-packagemap.d
 )
 
+# installation_sources script (deprecated)
+INSTALL(
+  PROGRAMS deprecated/installation_sources
+  DESTINATION ${INSTALL_PREFIX}/bin
+)
