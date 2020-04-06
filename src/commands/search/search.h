@@ -26,18 +26,12 @@ public:
     Exact
   };
 
-  enum CmdMode {
-    Search,
-    RugPatchSearch
-  };
-
-  SearchCmd ( std::vector<std::string> &&commandAliases_r, CmdMode cmdMode_r = CmdMode::Search );
+  SearchCmd ( std::vector<std::string> &&commandAliases_r );
 
   void setMode(const MatchMode &mode_r );
   void addRequestedDependency ( const zypp::sat::SolvAttr &dep_r );
 
 private:
-  CmdMode _cmdMode;
   MatchMode _mode = MatchMode::Default;
   bool _forceNameAttr = false;
   bool _searchDesc = false;
@@ -50,9 +44,9 @@ private:
   std::set<ResKind> _requestedTypes;
 
   //careful when adding new optionsets, only enable them for the right command mode
-  NotInstalledOnlyOptionSet _notInstalledOpts;
+  NotInstalledOnlyOptionSet _notInstalledOpts { *this };
   SortResultOptionSet _sortOpts { *this };
-  InitReposOptionSet _initReposOpts;
+  InitReposOptionSet _initReposOpts { *this };
 
   // ZypperBaseCommand interface
 protected:

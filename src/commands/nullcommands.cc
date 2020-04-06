@@ -60,28 +60,3 @@ int WhatProvidesCmd::execute( Zypper &zypper, const std::vector<std::string> &po
   return cmd.run( zypper );
 }
 
-RupPingCmd::RupPingCmd( std::vector<std::string> &&commandAliases_r ):
-  ZypperBaseCommand (
-    std::move( commandAliases_r ),
-    // translators: command synopsis; do not translate lowercase words
-    _("ping [OPTIONS]"),
-    // translators: command summary
-    _("This command has dummy implementation which always returns 0."),
-    // translators: command description
-    _("This command has dummy implementation which always returns 0."),
-    DisableAll
-  )
-{}
-
-int RupPingCmd::execute(Zypper &, const std::vector<std::string> &)
-{
-  return ZYPPER_EXIT_OK;
-}
-
-ZyppFlags::CommandGroup RupPingCmd::cmdOptions() const
-{
-  return {{
-      { "if-active", 'a', ZyppFlags::NoArgument | ZyppFlags::Hidden, ZyppFlags::NoValue(), "" }
-    }
-  };
-}
