@@ -1,0 +1,9 @@
+#!/bin/bash
+export ZYPP_LOGFILE=${ZYPP_LOGFILE:-/var/log/zypp-refresh.log}
+/usr/bin/zypper --non-interactive refresh --force
+cat >&2 <<EOF
+***
+*** This script is deprecated and will be removed in future versions!
+***
+EOF
+exit 1

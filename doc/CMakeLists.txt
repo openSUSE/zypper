@@ -54,7 +54,7 @@ SET (my_MAN1
      needs-restarting.1)
 
 SET (my_MAN8
-     zypper.8 zypper-log.8 zypp-refresh.8)
+     zypper.8 zypper-log.8)
 
 ADD_A2X_MANPAGES(
     MAN_INST_PATH ${MANDIR}

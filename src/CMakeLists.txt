@@ -250,16 +250,6 @@ INSTALL(  FILES
   DESTINATION ${CMAKE_INSTALL_PREFIX}/share/zypper/xml
 )
 
-# zypp-refresh utility
-ADD_EXECUTABLE( zypp-refresh zypp-refresh.cc )
-TARGET_LINK_LIBRARIES( zypp-refresh ${ZYPP_LIBRARY} )
-SET_TARGET_PROPERTIES( zypp-refresh PROPERTIES LINK_FLAGS "-pie -Wl,-z,relro,-z,now")
-SET_TARGET_PROPERTIES( zypp-refresh PROPERTIES COMPILE_FLAGS "-fwhole-program -fpie -fPIE")
-INSTALL(
-  TARGETS zypp-refresh
-  RUNTIME DESTINATION ${INSTALL_PREFIX}/sbin
-)
-
 # bash completion script
 INSTALL(
   FILES bash-completion.sh
@@ -269,7 +259,7 @@ INSTALL(
 
 # logrotate config file
 INSTALL(
-  FILES zypper.lr zypp-refresh.lr
+  FILES zypper.lr
   DESTINATION ${SYSCONFDIR}/logrotate.d
 )
 

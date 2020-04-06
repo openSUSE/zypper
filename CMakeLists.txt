@@ -130,8 +130,23 @@ INSTALL(
   DESTINATION ${SYSCONFDIR}/zypp/apt-packagemap.d
 )
 
+
 # installation_sources script (deprecated)
 INSTALL(
   PROGRAMS deprecated/installation_sources
   DESTINATION ${INSTALL_PREFIX}/bin
+)
+
+# zypp-refresh script (deprecated)
+INSTALL(
+  PROGRAMS deprecated/zypp-refresh
+  DESTINATION ${INSTALL_PREFIX}/sbin
+)
+INSTALL (
+  FILES deprecated/zypp-refresh.8
+  DESTINATION "${INSTALL_PREFIX}/share/man/man8"
+)
+INSTALL(
+  FILES deprecated/zypp-refresh.lr
+  DESTINATION ${SYSCONFDIR}/logrotate.d
 )
