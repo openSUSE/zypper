@@ -2,6 +2,12 @@
 # this is a compatibility replacement for a C++ program
 # that was in yast2-packagemanager.rpm
 
+cat >&2 <<EOF
+***
+*** This script is deprecated and will be removed in future versions!
+***
+EOF
+
 ZYPPER=zypper
 
 # be even more compatible, #223795
