@@ -167,7 +167,7 @@ namespace
       makeCmd<SubCmd> ( ZypperCommand::SUBCOMMAND_e, _("Subcommands:"), { "subcommand" }),
 
       //all commands in this group will be hidden from help
-      makeCmd<ConfigTestCmd> ( ZypperCommand::CONFIGTEST_e , std::string(), { "configtest" } ),
+      makeCmd<ConfigTestCmd> ( ZypperCommand::CONFIGTEST_e , "HIDDEN", { "configtest" } ),
       makeCmd<ShellQuitCmd> ( ZypperCommand::SHELL_QUIT_e , std::string(), { "quit", "exit", "\004" } ),
       makeCmd<MooCmd> ( ZypperCommand::MOO_e , std::string(), { "moo" } ),
       std::make_tuple ( ZypperCommand::NONE_e, std::string(), std::vector< const char *>{ "none", ""}, ZypperCommand::CmdFactory( voidCmd ) )
