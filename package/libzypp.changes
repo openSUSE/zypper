@@ -1,4 +1,14 @@
 -------------------------------------------------------------------
+Thu Apr  9 12:52:10 CEST 2020 - ma@suse.de
+
+- Get retracted patch status from updateinfo data (jsc#SLE-8770)
+  libsolv injects the indicator provides into packages only.
+- remove 'using namespace std;' (bsc#1166610, fixes #218)
+- Online doc: add 'Hardware (modalias) dependencies' page
+  (fixes #216)
+- version 17.23.4 (22)
+
+-------------------------------------------------------------------
 Wed Mar 25 15:26:14 CET 2020 - ma@suse.de
 
 - Add HistoryLogReader actionFilter to parse only specific
