@@ -399,7 +399,11 @@ namespace zypp
     bool Solvable::isRetracted() const
     {
       NO_SOLVABLE_RETURN( false );
-      return provides().contains( Capability( retractedToken.id() ) );
+      if ( isKind<Package>() )
+	return provides().contains( Capability( retractedToken.id() ) );
+      if ( isKind<Patch>() )
+	return lookupStrAttribute( SolvAttr::updateStatus ) == "retracted";
+      return false;
     }
 
     bool Solvable::isPtf() const
