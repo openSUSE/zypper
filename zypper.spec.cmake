@@ -39,12 +39,7 @@ Requires:       augeas >= 1.10.0
 %endif
 
 # required for documentation
-%if 0%{?suse_version} >= 1330
 BuildRequires:  rubygem(asciidoctor)
-%else
-BuildRequires:  asciidoc
-BuildRequires:  libxslt-tools
-%endif
 
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 Summary:        Command line software manager using libzypp

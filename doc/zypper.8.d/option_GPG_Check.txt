@@ -15,10 +15,10 @@
 
 *-G*, *--no-gpgcheck*::
 	Disable GPG check for this repository.
-	+
-	*Disabling GPG checks is not recommended.* Signing data enables the recipient to verify that no modifications occurred after the data were signed. Accepting data with no, wrong or unknown signature can lead to a corrupted system and in extreme cases even to a system compromise.
++
+*Disabling GPG checks is not recommended.* Signing data enables the recipient to verify that no modifications occurred after the data were signed. Accepting data with no, wrong or unknown signature can lead to a corrupted system and in extreme cases even to a system compromise.
 
 *--default-gpgcheck*::
 	Use the global GPG check settings defined in */etc/zypp/zypp.conf*. This is the default.
-	+
-	Unless you have modified your zypp.conf settings, this is the same as *--gpgcheck*, the behavior as described in section *GPG checks*.
++
+Unless you have modified your zypp.conf settings, this is the same as *--gpgcheck*, the behavior as described in section *GPG checks*.

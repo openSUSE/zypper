@@ -7,5 +7,5 @@
 	*-t*, *--remote*::
 		Apply changes to all remote repositories (http/https/ftp).
 
-	*-m*, *--medium-type* 'type'::
+	*-m*, *--medium-type* _type_::
 		Apply changes to repositories of specified type. The type corresponds to the repository URI scheme identifier like http, dvd, etc. You can find complete list of valid types at http://en.opensuse.org/openSUSE:Libzypp_URIs.

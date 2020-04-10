@@ -1,9 +1,3 @@
-FIND_PROGRAM(A2X a2x)
-IF (A2X)
-MESSAGE("a2x found: ${A2X}")
-SET(ASCDOC_CMD ${A2X} -D ${CMAKE_CURRENT_BINARY_DIR} -f manpage)
-ENDIF (A2X)
-
 FIND_PROGRAM(ASCIIDOC asciidoctor)
 IF (ASCIIDOC)
 MESSAGE("asciidoctor found: ${ASCIIDOC}")
@@ -11,7 +5,7 @@ SET(ASCDOC_CMD ${ASCIIDOC} -D ${CMAKE_CURRENT_BINARY_DIR} -b manpage -d manpage)
 ENDIF (ASCIIDOC)
 
 IF (NOT ASCDOC_CMD)
-MESSAGE(FATAL_ERROR "Could not find a2x or asciidoctor, please install either one of them.")
+MESSAGE(FATAL_ERROR "Could not find asciidoctor, please install the package")
 ENDIF()
 
 function(ADD_A2X_MANPAGES)

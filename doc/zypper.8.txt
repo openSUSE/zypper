@@ -8,6 +8,7 @@ ZYPPER(8)
 :asterisk: *
 :incdir: zypper.8.d
 
+
 NAME
 ----
 zypper - Command-line interface to ZYpp system management library (libzypp)
@@ -15,11 +16,11 @@ zypper - Command-line interface to ZYpp system management library (libzypp)
 
 SYNOPSIS
 --------
-*zypper* ['--global-opts'] 'command' ['--command-opts'] ['command-arguments']
+*zypper* [_--global-opts_] _command_ [_--command-opts_] [_command-arguments_]
 
-*zypper* 'subcommand' ['--command-opts'] ['command-arguments']
+*zypper* _subcommand_ [_--command-opts_] [_command-arguments_]
 
-*zypper* *help* 'command'
+*zypper* *help* _command_
 
 
 DESCRIPTION
@@ -31,15 +32,18 @@ CONCEPTS
 --------
 Most of the following concepts are common for all applications based on the libzypp package management library, but there are some zypper specifics.
 
+
 System Packages
 ~~~~~~~~~~~~~~~
-The set of installed packages on a system is sometimes denoted as repository *@System* or *System Packages*. In contrast to available repositories providing packages which can be installed, *@System* provides packages which can only be deleted. Installed packages which are not also provided by at least one of the available repositories are often denoted as being 'unwanted', 'orphaned' or 'dropped'.
+The set of installed packages on a system is sometimes denoted as repository *@System* or *System Packages*. In contrast to available repositories providing packages which can be installed, *@System* provides packages which can only be deleted. Installed packages which are not also provided by at least one of the available repositories are often denoted as being _unwanted_, _orphaned_ or _dropped_.
+
 
 Repositories
 ~~~~~~~~~~~~
-Libzypp works with repository metadata, this is information about packages and their relations extracted from RPM packages and other data like patch information, pattern definitions, etc. These data are stored together with the RPM files in folders called 'repositories'. Repositories can be placed on various media like an HTTP or FTP server, DVD, or a folder on a local disc.
+Libzypp works with repository metadata, this is information about packages and their relations extracted from RPM packages and other data like patch information, pattern definitions, etc. These data are stored together with the RPM files in folders called _repositories_. Repositories can be placed on various media like an HTTP or FTP server, DVD, or a folder on a local disc.
 
 There is a special set of commands in zypper intended to manipulate repositories. Also many commands and options take a repository as an argument. See section *COMMANDS*, subsection *Repository Management* for more details.
+
 
 GPG checks
 ~~~~~~~~~~
@@ -53,75 +57,86 @@ The above is the default behavior defined by settings in /etc/zypp/zypp.conf.
 
 The *addrepo* and *modifyrepo* commands provide further options to tune the behavior per repository. It is for example possible to relax the need to confirm installing unsigned packages for a specific repository. But if you do so, you should be very certain that an attacker can hardly modify the package data within the repository or on the way to your machine. See section *COMMANDS* for details about the command options.
 
+
 Resource Identifiers (URI)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
-To specify locations of repositories or other resources (RPM files, .repo files) you can use any type of URI supported by libzypp. In addition Zypper accepts a special URI identifying openSUSE Build Service (OBS) repositories in the *addrepo* command. These URIs have the form of *obs://*'project'*/*['platform'].
+To specify locations of repositories or other resources (RPM files, .repo files) you can use any type of URI supported by libzypp. In addition Zypper accepts a special URI identifying openSUSE Build Service (OBS) repositories in the *addrepo* command. These URIs have the form of **obs://**__project__**/**[_platform_].
 
 See section *COMMANDS*, subsection *Repository Management* for a complete list and examples of *supported URI formats*.
 
+
 Refresh
 ~~~~~~~
-Refreshing a repository means downloading metadata of packages from the medium (if needed), storing it in local cache (typically under */var/cache/zypp/raw/*'alias' directory) and preparsing the metadata into '.solv' files (building the solv cache), typically under */var/cache/zypp/solv/*'alias'.
+Refreshing a repository means downloading metadata of packages from the medium (if needed), storing it in local cache (typically under **/var/cache/zypp/raw/**__alias__ directory) and preparsing the metadata into _.solv_ files (building the solv cache), typically under **/var/cache/zypp/solv/**__alias__.
 
-The metadata get refreshed either automatically or on user request. An 'automatic refresh' takes place right before reading metadata from the database if the *auto-refresh is enabled* for the repository and the metadata is reported to be out of date. If the 'auto-refresh is disabled', the repository will only be refreshed on user request. You can request a refresh by calling *zypper refresh* (see the documentation of the *refresh* command for details).
+The metadata get refreshed either automatically or on user request. An _automatic refresh_ takes place right before reading metadata from the database if the *auto-refresh is enabled* for the repository and the metadata is reported to be out of date. If the _auto-refresh is disabled_, the repository will only be refreshed on user request. You can request a refresh by calling *zypper refresh* (see the documentation of the *refresh* command for details).
 
 The repository metadata are checked for changes before actually doing the refresh. A change is detected by downloading one or two metadata index files (small files) and comparing the checksums of the cached ones and the remote ones. If the files differ, the repository is out of date and will be refreshed.
 
 To delay the up-to-date check (and thus the automatic refresh) for a certain number of minutes, edit the value of the *repo.refresh.delay* attribute of ZYpp config file (*/etc/zypp/zypp.conf*). This means, zypper will not even try to download and check the index files, and you will be able to use zypper for operations like search or info without internet access or root privileges.
 
+
 Services
 ~~~~~~~~
-Services are one level above repositories and serve to manage repositories or to do some special tasks. Libzypp currently supports 'Repository Index Service' (RIS) and 'Plugin Service'.
+Services are one level above repositories and serve to manage repositories or to do some special tasks. Libzypp currently supports _Repository Index Service_ (RIS) and _Plugin Service_.
 
 Repository Index Service (RIS) is a special type of repository which contains a list of other repositories. This list can be generated dynamically by the server according to some URI parameters or user name, or can be static. Once such service is added to your system, zypper takes care of adding, modifying, or removing these repositories on your system to reflect the current list. See section *Service Management* and https://en.opensuse.org/openSUSE:Standards_Repository_Index_Service for more details.
 
+
 Package Types
 ~~~~~~~~~~~~~
-Zypper works with several types of resource objects, called 'resolvables'. A resolvable might be a *package*, *patch*, *pattern*, *product*; basically any 'kind of object' with dependencies to other objects.
+Zypper works with several types of resource objects, called _resolvables_. A resolvable might be a *package*, *patch*, *pattern*, *product*; basically any _kind of object_ with dependencies to other objects.
 
 *package*::
 	An ordinary RPM package.
+
 *patch*::
 	A released patch conflicts with the affected/vulnerable versions of a collection of packages. As long as any of these affected/vulnerable versions are installed, the conflict triggers and the patch is classified as *needed*, or as *unwanted* if the patch is locked.
-	+
-	Selecting the patch, the conflict is resolved by updating all installed and affected/vulnerable packages to a version providing the fix. When updating the packages zypper always aims for the latest available version. Resolved patches are classified as either *applied* or *not needed*, depending on whether they refer to actually installed packages.
-	+
-	So installation, update or removal of packages may change the classification of patches refering to these packages. Since libyzpp-17.23.0 the /var/log/zypp/history remembers if a commited transaction changes a patchs classification. If history data are available, patch tables show a column telling 'since' when the patch is in it's current state.
-	+
-	Depending on the kind of defect, patches are classified by 'category' and 'severity'. Commonly used values for 'category' are *security*, *recommended*, *optional*, *feature*, *document* or *yast*. Commonly used values for 'severity' are *critical*, *important*, *moderate*, *low* or *unspecified*.
-	+
-	Note that the *patch* command does 'not apply optional patches' (category *optional* or *feature*) by default. If you actually want to consider all optional patches as being needed, say *patch --with-optional*. Specific patches can be applied using the *install* command (e.g. *zypper install patch:openSUSE-2014-7*).
-	+
-	If the issuer decides to retract a released patch, the patch status will be shown as *retracted*. The packages provided by the retracted patch are still visible but also tagged as having been retracted (*R*). The resolver will avoid selecting retracted packages automatically. If you are sure that a retracted package should be installed on your system, you must explicitely select it.
++
+Selecting the patch, the conflict is resolved by updating all installed and affected/vulnerable packages to a version providing the fix. When updating the packages zypper always aims for the latest available version. Resolved patches are classified as either *applied* or *not needed*, depending on whether they refer to actually installed packages.
++
+So installation, update or removal of packages may change the classification of patches refering to these packages. Since libyzpp-17.23.0 the /var/log/zypp/history remembers if a commited transaction changes a patchs classification. If history data are available, patch tables show a column telling _since_ when the patch is in it's current state.
++
+Depending on the kind of defect, patches are classified by _category_ and _severity_. Commonly used values for _category_ are *security*, *recommended*, *optional*, *feature*, *document* or *yast*. Commonly used values for _severity_ are *critical*, *important*, *moderate*, *low* or *unspecified*.
++
+Note that the *patch* command does _not apply optional patches_ (category *optional* or *feature*) by default. If you actually want to consider all optional patches as being needed, say *patch --with-optional*. Specific patches can be applied using the *install* command (e.g. *zypper install patch:openSUSE-2014-7*).
++
+If the issuer decides to retract a released patch, the patch status will be shown as *retracted*. The packages provided by the retracted patch are still visible but also tagged as having been retracted (*R*). The resolver will avoid selecting retracted packages automatically. If you are sure that a retracted package should be installed on your system, you must explicitely select it.
+
 *pattern*::
 	A group of packages required or recommended to install some functionality.
+
 *product*::
 	A group of packages which are necessary to install a product.
+
 *srcpackage*::
 	Source code package (.src.rpm). This type works in *search* and *install* commands.
+
 *application*::
 	Legacy: Since libzypp-17.7.0 this type is no longer available.
 
-Throughout this manual we will often refer to resolvables simply as 'packages' and to resolvable types as 'package type' or 'kind'. These type names can be used as arguments of *--type* option in several commands like *install*, *info*, or *search*. Commands should also allow to specify resolvables as 'KIND'*:*'NAME' (e.g. *patch:openSUSE-2014-7*).
+Throughout this manual we will often refer to resolvables simply as _packages_ and to resolvable types as _package type_ or _kind_. These type names can be used as arguments of *--type* option in several commands like *install*, *info*, or *search*. Commands should also allow to specify resolvables as __KIND__**:**__NAME__ (e.g. *patch:openSUSE-2014-7*).
+
 
 Package Dependencies
 ~~~~~~~~~~~~~~~~~~~~
-Software packages depend on each other in various ways. Packages usually 'require' or 'recommend' other packages, but they can also 'conflict' with them. Packages may support specific hardware or language settings. Zypper uses a 'dependency solver' to find out which packages need to be installed to satisfy the user's request.
+Software packages depend on each other in various ways. Packages usually _require_ or _recommend_ other packages, but they can also _conflict_ with them. Packages may support specific hardware or language settings. Zypper uses a _dependency solver_ to find out which packages need to be installed to satisfy the user's request.
 
-If you do not request a specific version of a package the solver will pick a reasonable one. The solvers general attitude when resolving a job is to focus on installing the best version of the requested package and to add or update dependencies as they are needed. Aside from this 'Focus on Job', which is the default, two other focus modes are available:
+If you do not request a specific version of a package the solver will pick a reasonable one. The solvers general attitude when resolving a job is to focus on installing the best version of the requested package and to add or update dependencies as they are needed. Aside from this _Focus on Job_, which is the default, two other focus modes are available:
 
-In 'Focus on Installed' mode the solver focuses on applying as little changes to the installed packages as needed. Choosing an older version of a requested package is valid if it's dependencies require less changes to the system. The solver will try to avoid updating already installed packages.
+In _Focus on Installed_ mode the solver focuses on applying as little changes to the installed packages as needed. Choosing an older version of a requested package is valid if it's dependencies require less changes to the system. The solver will try to avoid updating already installed packages.
 
-In 'Focus on Update' mode the solver focuses on updating the requested package and all its dependencies as much as possible. Beware, installing a single package in this mode may easily lead to a mini system update.
+In _Focus on Update_ mode the solver focuses on updating the requested package and all its dependencies as much as possible. Beware, installing a single package in this mode may easily lead to a mini system update.
 
 For a single command the focus mode can be set using the *--solver-focus MODE* switch. Valid modes are *Job*, *Installed* or *Update*. If you want to change the default mode for your system, set [/etc/zypp/zypp.conf:solver.focus] to the desired value.
 
 
 Automatically installed packages
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Packages added by the dependency solver in order to resolve a user\'s request are remembered as having been 'automatically installed'. They may later be removed, if no more user installed packages depend on them (e.g. by *zypper remove --clean-deps*).
+Packages added by the dependency solver in order to resolve a user's request are remembered as having been _automatically installed_. They may later be removed, if no more user installed packages depend on them (e.g. by *zypper remove --clean-deps*).
 
-In the *S*+tatus+ column the *search* command distinguishes between user installed packages (*i+*) and automatically installed packages (*i*).
+In the **S**tatus column the *search* command distinguishes between user installed packages (*i+*) and automatically installed packages (*i*).
+
 
 Package File Conflicts
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -131,44 +146,47 @@ As checking for file conflicts requires access to the full filelist of each pack
 
 As the reason for file conflicts usually is a poor package design or lack of coordination between the people building the packages, they are not easy to resolve. By using the *--replacefiles* option you can force zypper to replace the conflicting files. Nevertheless this may damage the package whose file gets replaced.
 
+
 COMMANDS
 --------
-zypper provides a number of 'commands'. Each command accepts the options listed in the *GLOBAL OPTIONS* section. These options must be specified 'before' the command name. In addition, many commands have specific options, which are listed in this section. These command-specific options must be specified 'after' the name of the command and 'before' any of the command arguments.
+zypper provides a number of _commands_. Each command accepts the options listed in the *GLOBAL OPTIONS* section. These options must be specified _before_ the command name. In addition, many commands have specific options, which are listed in this section. These command-specific options must be specified _after_ the name of the command and _before_ any of the command arguments.
 
 Zypper also provides limited support for writing extensions/subcommands in any language. See section *SUBCOMMANDS* for details.
 
+
 General Commands
 ~~~~~~~~~~~~~~~~
-*help* ['command']::
-	Shows help texts. If invoked without any argument (just *zypper* or *zypper help*), zypper displays global help text which lists all available global options and commands.
-	+
-	If invoked with a 'command' name argument, zypper displays help for the specified command, if such command exists. Long as well as short variants of the command names can be used.
-	+
-	For your convenience, *zypper help* can also be invoked in any of the following ways:
 
-[horizontal]
-	;; $ *zypper -h*|*--help* ['command']
-	;; $ *zypper* ['command'] *-h*|*--help*
+*help* [_command_]::
+	Shows help texts. If invoked without any argument (just *zypper* or *zypper help*), zypper displays global help text which lists all available global options and commands.
++
+If invoked with a _command_ name argument, zypper displays help for the specified command, if such command exists. Long as well as short variants of the command names can be used.
++
+For your convenience, *zypper help* can also be invoked in any of the following ways:
+
+	;; $ *zypper -h*|*--help* [_command_]
+	;; $ *zypper* [_command_] *-h*|*--help*
 
 
 *shell* (*sh*)::
-	Starts a shell for entering multiple commands in one session. Exit the shell using *exit*, *quit*, or 'Ctrl-D'.
-	+
-	The shell support is not complete so expect bugs there. However, there's no urgent need to use the shell since libzypp became so fast thanks to the SAT solver and its tools (openSUSE 11.0), but still, you're welcome to experiment with it.
+	Starts a shell for entering multiple commands in one session. Exit the shell using *exit*, *quit*, or _Ctrl-D_.
++
+The shell support is not complete so expect bugs there. However, there's no urgent need to use the shell since libzypp became so fast thanks to the SAT solver and its tools (openSUSE 11.0), but still, you're welcome to experiment with it.
 
 
 Package Management Commands
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
-*info* (*if*) ['options'] 'name'...::
+
+*info* (*if*) [_options_] _name_...::
 	Displays detailed information about the specified packages.
-	+
-	For each specified package, zypper finds the best available version in defined repositories and shows information for this package.
++
+For each specified package, zypper finds the best available version in defined repositories and shows information for this package.
 +
 --
-	*-r*, *--repo* 'alias'|'name'|'#'|'URI'::
+	*-r*, *--repo* _alias_|_name_|_#_|_URI_::
 		Work only with the repository specified by the alias, name, number or URI. This option can be used multiple times.
 
-	*-t*, *--type* 'type'::
+	*-t*, *--type* _type_::
 		Type of package (default: package). See section *Package Types* for list of available package types.
 	*--provides*::
 		Show symbols the package provides.
@@ -194,58 +212,59 @@ Package Management Commands
 	Examples: :: {nop}
 
 		$ *zypper info workrave*;;
-		Show information about 'package workrave'
+		Show information about _package workrave_
 
 		$ *zypper info -t patch libzypp*;;
-		Show information about 'patch libzypp'
+		Show information about _patch libzypp_
 
 		$ *zypper info -t pattern lamp_server*;;
-		Show information about 'pattern lamp_server'
+		Show information about _pattern lamp_server_
 --
 
-*install* (*in*) ['options'] 'name'|'capability'|'rpm_file_uri'...::
+*install* (*in*) [_options_] _name_|_capability_|_rpm_file_uri_...::
 	Install or update packages.
++
+The packages can be selected by their _name_ or by a _capability_ they provide.
++
+A _capability_ is formed by "_NAME_[**.**__ARCH__][ _OP EDITION_]", where _ARCH_ is an architecture code, _OP_ is one of *<*, *\<=*, *=*, *>=*, or *>* and _EDITION_ is "_VERSION_[**-**__RELEASE__]". For example: *zypper=0.8.8-2*.:::
++
+The _NAME_ component of a capability is not only a package name but any symbol provided by packages: */bin/vi*, *libcurl.so.3*, *perl(Time::ParseDate)*. Just remember to quote to protect the special characters from the shell, for example: *zypper\>0.8.10* or *\'zypper>0.8.10'*.
++
+If _EDITION_ is not specified, the newest installable version will be installed. This also means that if the package is already installed and newer versions are available, it will get upgraded to the newest installable version.
++
+If _ARCH_ is not specified, or the last dot of the capability name string is not followed by known architecture, the solver will treat the whole string as a capability name. If the ARCH is known, the solver will select a package matching that architecture and complain if such package cannot be found.
 
-	The packages can be selected by their 'name' or by a 'capability' they provide.;;
-		+
-		A 'capability' is formed by "'NAME'[*.*'ARCH'][ 'OP EDITION']", where 'ARCH' is an architecture code, 'OP' is one of *<*, *\<=*, *=*, *>=*, or *>* and 'EDITION' is "'VERSION'[*-*'RELEASE']". For example: *zypper=0.8.8-2*
-		+
-		The 'NAME' component of a capability is not only a package name but any symbol provided by packages: */bin/vi*, *libcurl.so.3*, *perl(Time::ParseDate)*. Just remember to quote to protect the special characters from the shell, for example: *zypper\>0.8.10* or *\'zypper>0.8.10'*.
-		+
-		If 'EDITION' is not specified, the newest installable version will be installed. This also means that if the package is already installed and newer versions are available, it will get upgraded to the newest installable version.
-		+
-		If 'ARCH' is not specified, or the last dot of the capability name string is not followed by known architecture, the solver will treat the whole string as a capability name. If the ARCH is known, the solver will select a package matching that architecture and complain if such package cannot be found.
+Zypper is also able to install _plain RPM files_ while trying to satisfy their dependencies using packages from defined repositories. You can install a plain RPM file by specifying its location in the install command arguments either as a local path or an URI. E.g.: :::
++
+$ *zypper install ~/rpms/foo.rpm \http://some.site/bar.rpm*.
++
+Zypper will report packages that it cannot find. Further, in interactive mode, zypper proceeds with installation of the rest of requested packages, and it will abort immediately in non-interactive mode. In both cases zypper returns *ZYPPER_EXIT_INF_CAP_NOT_FOUND* after finishing the operation.
++
+Zypper will collect the files in a temporary *plaindir* repository and mark the respective packages for installation. If *--download-only* is used, the downloaded packages will be available in */var/cache/zypper/RPMS* until you actually install them or call *zypper clean* to clear the package caches.
 
-	Zypper is also able to install 'plain RPM files' while trying to satisfy their dependencies using packages from defined repositories. You can install a plain RPM file by specifying its location in the install command arguments either as a local path or an URI. E.g.: ;;
-		+
-		$ *zypper install ~/rpms/foo.rpm http://some.site/bar.rpm*.
-		+
-		Zypper will report packages that it cannot find. Further, in interactive mode, zypper proceeds with installation of the rest of requested packages, and it will abort immediately in non-interactive mode. In both cases zypper returns *ZYPPER_EXIT_INF_CAP_NOT_FOUND* after finishing the operation.
-		+
-		Zypper will collect the files in a temporary *plaindir* repository and mark the respective packages for installation. If *--download-only* is used, the downloaded packages will be available in */var/cache/zypper/RPMS* until you actually install them or call *zypper clean* to clear the package caches.
-
-	In the install command, you can also specify packages you wish to remove by prepending their names by a '-' or '!' character. For example: ;;
-		+
-		$ *zypper install \!Firefox*{nbsp}
-		+
-		In contrast to *zypper remove Firefox* which removes Firefox and its dependent packages, the install command will try to keep dependent packages installed by looking for Firefox alternatives.
-		+ Note that if you choose to use *-* with the first package you specify, you need to write *--* before it to prevent its interpretation as a command option:
-		+
-		$ *zypper install --{nbsp} -boring-game great-game great-game-manual*{nbsp}
+In the install command, you can also specify packages you wish to remove by prepending their names by a _-_ or _!_ character. For example: :::
++
+$ *zypper install \!Firefox*{nbsp}
++
+In contrast to *zypper remove Firefox* which removes Firefox and its dependent packages, the install command will try to keep dependent packages installed by looking for Firefox alternatives.
++
+Note that if you choose to use *-* with the first package you specify, you need to write *--* before it to prevent its interpretation as a command option:
++
+$ *zypper install --{nbsp} -boring-game great-game great-game-manual*{nbsp}
 
 +
 --
 	-r, --repo alias|name|#|URI::
 		Work only with the repository specified by the alias, name, number or URI. This option can be used multiple times.
-		+
-		Using --repo is 'discouraged' as it currently hides unmentioned repositories from the resolver, leading to inexpertly decisions. In the future --repo will become an alias for *--from*.
++
+Using --repo is _discouraged_ as it currently hides unmentioned repositories from the resolver, leading to inexpertly decisions. In the future --repo will become an alias for *--from*.
 
-	*-t*, *--type* 'type'::
-		Type of package to install (default: package). See section *Package Types* for list of available package types. Use '*zypper se -t* type' ['name'] to look for available items of this type and '*zypper info -t* type name' to display more detailed information about the item.
-		+
-		If 'patch' is specified, zypper will install and/or remove packages to satisfy specified patch. This is a way to ensure that specific bug fix is installed. Use *zypper list-patches* to look for applicable patches.
-		+
-		If 'product' or 'pattern' are specified, zypper ensures that all required (and optionally recommended) packages are installed.
+	*-t*, *--type* _type_::
+		Type of package to install (default: package). See section *Package Types* for list of available package types. Use *zypper se -t* _type_ [_name_] to look for available items of this type and *zypper info -t* _type name_ to display more detailed information about the item.
++
+If _patch_ is specified, zypper will install and/or remove packages to satisfy specified patch. This is a way to ensure that specific bug fix is installed. Use *zypper list-patches* to look for applicable patches.
++
+If _product_ or _pattern_ are specified, zypper ensures that all required (and optionally recommended) packages are installed.
 
 	*-n*, *--name*::
 		Select packages by their name, don't try to select by capabilities.
@@ -256,14 +275,14 @@ Package Management Commands
 	*--oldpackage*::
 		Allow to replace a newer item with an older one. Handy if you are doing a rollback. Unlike --force it will not enforce a reinstall, if the item is already installed with the requested version.
 
-	*--from* 'alias|name|#|URI'::
+	*--from* _alias_|_name_|_#_|_URI_::
 		Select packages from specified repository. If strings specified as arguments to the install command match packages in repositories specified in this option, they will be marked for installation. This option currently implies *--name*, but allows using wildcards for specifying packages.
 
 	*-C*, *--capability*::
 		Select packages by capabilities.
 
 	*-l*, *--auto-agree-with-licenses*::
-		Automatically say 'yes' to third party license confirmation prompt. By using this option, you choose to agree with licenses of all third-party software this command will install. This option is particularly useful for administrators installing the same set of packages on multiple machines (by an automated process) and have the licenses confirmed before.
+		Automatically say _yes_ to third party license confirmation prompt. By using this option, you choose to agree with licenses of all third-party software this command will install. This option is particularly useful for administrators installing the same set of packages on multiple machines (by an automated process) and have the licenses confirmed before.
 
 	*--auto-agree-with-product-licenses*::
 		Automatically accept product licenses only. This is used by tools like SUSEconnect, which ask for confirmation before the product gets registered. So there's no need to confirm the product license again at install time.
@@ -299,20 +318,20 @@ include::{incdir}/option_Solver_Flags_Recommends.txt[]
 		Download a minimal set of packages that can be installed without leaving
 		the system in broken state, and install them. Then download and install another
 		heap until all are installed. This helps to keep the system in consistent state
-		without the need to download 'all' packages in advance, which combines the
+		without the need to download _all_ packages in advance, which combines the
 		advantages of *--download-in-advance* and *--download-as-needed*.
 		This is the default mode.
-		+
-		NOTE: While the resolver is not capable of building heaps, this behaves the same as *--download-in-advance*.
++
+NOTE: While the resolver is not capable of building heaps, this behaves the same as *--download-in-advance*.
 
 	*--download-as-needed*::
 		Download one package, install it immediately, and continue with the rest
 		until all are installed.
 
-	*--download* 'mode'::
+	*--download* _mode_::
 		Use the specified download-and-install mode. Available modes are:
 		*only*, *in-advance*, *in-heaps*, *as-needed*.
-		See corresponding *--download-*'mode' options for their description.
+		See corresponding **--download-**__mode__ options for their description.
 
 	Expert Options: :: Don't use them unless you know you need them.
 
@@ -332,14 +351,14 @@ include::{incdir}/option_Solver_Flags_Installs.txt[]
 		Install version 2.0.6 of virtualbox-ose package.
 --
 
-*source-install* (*si*) 'name'...::
+*source-install* (*si*) _name_...::
 	Install specified source packages and their build dependencies. If the name of a binary package is given, the corresponding source package is looked up and installed instead.
-	+
-	This command will try to find the newest available versions of the source packages and uses *rpm -i* to install them, optionally together with all the packages that are required to build the source package. The default location where rpm installs source packages to is '/usr/src/packages/{SPECS,SOURCES}', but the values can be changed in your local rpm configuration. In case of doubt try executing *rpm --eval "%\{_specdir\} and %\{_sourcedir\}"*.
-	+
-	Note that the source packages must be available in repositories you are using. You can check whether a repository contains any source packages using the following command:
++
+This command will try to find the newest available versions of the source packages and uses *rpm -i* to install them, optionally together with all the packages that are required to build the source package. The default location where rpm installs source packages to is _/usr/src/packages/{SPECS,SOURCES}_, but the values can be changed in your local rpm configuration. In case of doubt try executing *rpm --eval "%\{_specdir\} and %\{_sourcedir\}"*.
++
+Note that the source packages must be available in repositories you are using. You can check whether a repository contains any source packages using the following command:
 
-	;; $ '*zypper search -t srcpackage -r* alias'|'name'|'#'|'URI'
+	;; $ *zypper search -t srcpackage -r* _alias_|_name_|_#_|_URI_
 
 +
 --
@@ -349,7 +368,7 @@ include::{incdir}/option_Solver_Flags_Installs.txt[]
 	*-D*, *--no-build-deps*::
 		Don't install build dependencies.
 
-	*-r*, *--repo* 'alias'|'name'|'#'|'URI'::
+	*-r*, *--repo* _alias_|_name_|_#_|_URI_::
 		Work only with the repository specified by the alias, name, number, or URI. This option can be used multiple times.
 
 	*--download-only*::
@@ -361,10 +380,10 @@ include::{incdir}/option_Solver_Flags_Installs.txt[]
 		Install build dependencies of dbus-1 source package.
 --
 
-*verify* (*ve*) ['options']::
+*verify* (*ve*) [_options_]::
 	Check whether dependencies of installed packages are satisfied.
-	+
-	In case that any dependency problems are found, zypper suggests packages to install or remove to fix them.
++
+In case that any dependency problems are found, zypper suggests packages to install or remove to fix them.
 +
 --
 	*-D*, *--dry-run*::
@@ -373,7 +392,7 @@ include::{incdir}/option_Solver_Flags_Installs.txt[]
 	*--details*::
 		Show the detailed installation summary.
 
-	*-r*, *--repo* 'alias'|'name'|'#'|'URI'::
+	*-r*, *--repo* _alias_|_name_|_#_|_URI_::
 		Work only with the repository specified by the alias, name, number, or URI. This option can be used multiple times.
 
 	*-y*, *--no-confirm*::
@@ -390,13 +409,13 @@ include::{incdir}/option_Solver_Flags_Installs.txt[]
 	This command also accepts the *Download-and-install mode options* described in the *install* command.:: {nop}
 --
 
-*install-new-recommends* (*inr*) ['options']::
-	Install newly added packages recommended by already installed ones. This command basically re-evaluates the recommendations of all installed packages and fills up the system accordingly. 'You don't want to call this unconditionally' on small or minimal systems, as it may easily add a large number of packages.
-	+
-	Called as *zypper inr --no-recommends*, it restricts the command to just look for packages supporting available hardware, languages or filesystems. Usefull after having added e.g. new hardware or driver repos. This is also the default behavior if you have set [zypp.conf:solver.onlyRequires].
+*install-new-recommends* (*inr*) [_options_]::
+	Install newly added packages recommended by already installed ones. This command basically re-evaluates the recommendations of all installed packages and fills up the system accordingly. _You don't want to call this unconditionally_ on small or minimal systems, as it may easily add a large number of packages.
++
+Called as *zypper inr --no-recommends*, it restricts the command to just look for packages supporting available hardware, languages or filesystems. Usefull after having added e.g. new hardware or driver repos. This is also the default behavior if you have set [zypp.conf:solver.onlyRequires].
 +
 --
-	*-r*, *--repo* 'alias'|'name'|'#'|'URI'::
+	*-r*, *--repo* _alias_|_name_|_#_|_URI_::
 		Work only with the repository specified by the alias, name, number, or URI. This option can be used multiple times.
 
 	*-D*, *--dry-run*::
@@ -416,22 +435,22 @@ include::{incdir}/option_Solver_Flags_Installs.txt[]
 This command also accepts the *Download-and-install mode options* described in the *install* command.:: {nop}
 --
 
-*remove* (*rm*) ['options'] 'name'...:: {nop}
-*remove* (*rm*) ['options'] *--capability* 'capability'...::
+*remove* (*rm*) [_options_] _name_...:: {nop}
+*remove* (*rm*) [_options_] *--capability* _capability_...::
 	Remove (uninstall) packages.
-	+
-	The remove command will uninstall the selected and their dependent packages. It will not try to install alternatives in order to keep dependent packages installed. If you want this, use *zypper install !'name'*.
-	+
-	The packages can be selected by their name or by a capability they provide. For details on package selection see the *install* command description.
++
+The remove command will uninstall the selected and their dependent packages. It will not try to install alternatives in order to keep dependent packages installed. If you want this, use **zypper install !**__name__.
++
+The packages can be selected by their name or by a capability they provide. For details on package selection see the *install* command description.
 +
 --
-	*-r*, *--repo* 'alias'|'name'|'#'|'URI'::
+	*-r*, *--repo* _alias_|_name_|_#_|_URI_::
 		Work only with the repository specified by the alias, name, number, or URI. This option can be used multiple times.
 
-	*-t*, *--type* 'type'::
+	*-t*, *--type* _type_::
 		Type of package (default: package). See section *Package Types* for list of available package types.
-		+
-		Since *patches* are not installed in sense of copying files or recording a database entry, they cannot be uninstalled, even though zypper shows them as installed. The installed status is determined solely based on the installed status of its required dependencies. If these dependencies are satisfied, the patch is rendered installed.
++
+Since *patches* are not installed in sense of copying files or recording a database entry, they cannot be uninstalled, even though zypper shows them as installed. The installed status is determined solely based on the installed status of its required dependencies. If these dependencies are satisfied, the patch is rendered installed.
 
 	*-n*, *--name*::
 		Select packages by their name (default).
@@ -459,10 +478,10 @@ include::{incdir}/option_Solver_Flags_Common.txt[]
 		No automatic removal of unneeded dependencies.
 --
 
-*purge-kernels* ['options']::
+*purge-kernels* [_options_]::
 	Autoremoves installed kernels.
-	+
-	Automatically cleans up installed kernels according to the rules defined in [zypp.conf:multiversion.kernels] which can be given as <version>, latest(-N), running, oldest(+N).
++
+Automatically cleans up installed kernels according to the rules defined in [zypp.conf:multiversion.kernels] which can be given as _<version>_, *latest*[**-**__N__], *running*, *oldest*[**+**__N__].
 +
 --
 	*--details*::
@@ -472,21 +491,22 @@ include::{incdir}/option_Solver_Flags_Common.txt[]
 		Test the removal of packages, do not actually remove anything.
 --
 
+
 Update Management Commands
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-*list-updates* (*lu*) ['options']::
+*list-updates* (*lu*) [_options_]::
 	List available updates.
-	+
-	This command will list only installable updates, i.e. updates which have no dependency problems, or which do not change package vendor. This list is what the *update* command will propose to install. To list all packages for which newer version are available, use *--all* option.
++
+This command will list only installable updates, i.e. updates which have no dependency problems, or which do not change package vendor. This list is what the *update* command will propose to install. To list all packages for which newer version are available, use *--all* option.
 +
 --
-	*-t*, *--type* 'type'::
+	*-t*, *--type* _type_::
 		Type of package (default: package). See section *Package Types* for list of available package types.
-		+
-		If *patch* is specified, zypper acts as if the *list-patches* command was executed.
++
+If *patch* is specified, zypper acts as if the *list-patches* command was executed.
 
-	*-r*, *--repo* 'alias'|'name'|'#'|'URI'::
+	*-r*, *--repo* _alias_|_name_|_#_|_URI_::
 		Work only with the repository specified by the alias, name, number, or URI. This option can be used multiple times.
 
 	*-a*, *--all*::
@@ -501,20 +521,20 @@ include::{incdir}/option_Solver_Flags_Installs.txt[]
 
 --
 
-*update* (*up*) ['options'] ['packagename']...::
+*update* (*up*) [_options_] [_packagename_]...::
 	Update installed packages with newer versions, where possible.
-	+
-	This command will not update packages which would require change of package vendor unless the vendor is specified in */etc/zypp/vendors.d*, or which would require manual resolution of problems with dependencies. Such non-installable updates will then be listed in separate section of the summary as "'The following package updates will NOT be installed:'".
-	+
-	To update individual packages, specify one or more package names. You can use the *** and *?* wildcard characters in the package names to specify multiple packages matching the pattern.
++
+This command will not update packages which would require change of package vendor unless the vendor is specified in */etc/zypp/vendors.d*, or which would require manual resolution of problems with dependencies. Such non-installable updates will then be listed in separate section of the summary as "_The following package updates will NOT be installed:_".
++
+To update individual packages, specify one or more package names. You can use the *** and *?* wildcard characters in the package names to specify multiple packages matching the pattern.
 +
 --
-	*-t*, *--type* 'type'::
+	*-t*, *--type* _type_::
 		Type of package (default: package). See section *Package Types* for list of available package types.
-		+
-		If *patch* is specified, zypper acts as if the *patches* command was executed.
++
+If *patch* is specified, zypper acts as if the *patches* command was executed.
 
-	*-r*, *--repo* 'alias'|'name'|'#'|'URI'::
+	*-r*, *--repo* _alias_|_name_|_#_|_URI_::
 		Work only with the repository specified by the alias, name, number, or URI. This option can be used multiple times.
 
 	*--skip-interactive*::
@@ -524,7 +544,7 @@ include::{incdir}/option_Solver_Flags_Installs.txt[]
 		Avoid skipping of interactive patches when in non-interactive mode.
 
 	*-l*, *--auto-agree-with-licenses*::
-		Automatically say 'yes' to third party license confirmation prompt. By using this option, you choose to agree with licenses of all third-party software this command will install. This option is particularly useful for administrators installing the same set of packages on multiple machines (by an automated process) and have the licenses confirmed before.
+		Automatically say _yes_ to third party license confirmation prompt. By using this option, you choose to agree with licenses of all third-party software this command will install. This option is particularly useful for administrators installing the same set of packages on multiple machines (by an automated process) and have the licenses confirmed before.
 
 	*--auto-agree-with-product-licenses*::
 		Automatically accept product licenses only. This is used by tools like SUSEconnect, which ask for confirmation before the product gets registered. So there's no need to confirm the product license again at install time.
@@ -539,7 +559,7 @@ include::{incdir}/option_Solver_Flags_Installs.txt[]
 		Show the detailed installation summary.
 
 	*--best-effort*::
-		Do a 'best effort' approach to update. This method does not explicitly select packages with best version and architecture, but instead requests installation of a package with higher version than the installed one and leaves the rest on the dependency solver. This method is always used for packages, and is optional for products and patterns. It is not applicable to patches.
+		Do a _best effort_ approach to update. This method does not explicitly select packages with best version and architecture, but instead requests installation of a package with higher version than the installed one and leaves the rest on the dependency solver. This method is always used for packages, and is optional for products and patterns. It is not applicable to patches.
 
 	*-y*, *--no-confirm*::
 		Don't require user interaction. Alias for the --non-interactive global option.
@@ -555,31 +575,31 @@ include::{incdir}/option_Solver_Flags_Installs.txt[]
 	This command also accepts the *Download-and-install mode options* described in the *install* command description.:: {nop}
 --
 
-*list-patches* (*lp*) ['options']::
+*list-patches* (*lp*) [_options_]::
 	List all applicable patches.
-	+
-	This command is similar to *zypper list-updates -t patch*.
-	+
-	Note that 'optional arguments' of some of the following options must be specified using *=* instead of a space.
++
+This command is similar to *zypper list-updates -t patch*.
++
+Note that _optional arguments_ of some of the following options must be specified using *=* instead of a space.
 +
 --
-	*-b*, *--bugzilla*[*=*'#'[,'...']]::
+	*-b*, *--bugzilla*[**=**__#__[,_..._]]::
 		List applicable patches for all Bugzilla issues, or issues whose number matches the given string.
 
-	*--cve*[*=*'#'[,'...']]::
+	*--cve*[**=**__#__[,_..._]]::
 		List applicable patches for all CVE issues, or issues whose number matches the given string.
 
-	*--date* 'YYYY-MM-DD'[,'...']::
+	*--date* _YYYY-MM-DD_[,_..._]::
 		List only patches issued up to, but not including, the specified date.
 
-	*-g*, *--category* 'category'[,'...']::
-		List only patches with this category. See section *Package Types* for a list of commonly used 'category' values.
+	*-g*, *--category* _category_[,_..._]::
+		List only patches with this category. See section *Package Types* for a list of commonly used _category_ values.
 
-	*--severity* 'severity'[,'...']::
-		List only patches with this severity. See section *Package Types* for a list of commonly used 'severity' values.
+	*--severity* _severity_[,_..._]::
+		List only patches with this severity. See section *Package Types* for a list of commonly used _severity_ values.
 
-	*--issues*[*=*'string'[,'...']]::
-		Look for issues whose number, summary, or description matches the specified 'string'. Issues found by number are displayed separately from those found by descriptions. In the latter case, use '*zypper patch-info* patchname' to get information about issues the patch fixes.
+	*--issues*[**=**__string__[,_..._]]::
+		Look for issues whose number, summary, or description matches the specified _string_. Issues found by number are displayed separately from those found by descriptions. In the latter case, use *zypper patch-info* _patchname_ to get information about issues the patch fixes.
 
 	*-a*, *--all::
 		By default, only patches that are applicable on your system are listed. This option causes all available released patches to be listed. This option can be combined with all the rest of the *list-updates* command options.
@@ -588,14 +608,14 @@ include::{incdir}/option_Solver_Flags_Installs.txt[]
 	*--without-optional*::
 		Whether applicable optional patches should be treated as needed or be excluded. The default is to exclude optional patches.
 
-	*-r*, *--repo* 'alias'|'name'|'#'|'URI'::
+	*-r*, *--repo* _alias_|_name_|_#_|_URI_::
 		Work only with the repository specified by the alias, name, number, or URI. This option can be used multiple times.
 --
 
 *patch-check* (*pchk*)::
 	Check for patches. Displays a count of applicable patches and how many of them have the security category.
-	+
-	See also the *EXIT CODES* section for details on exit status of *0*, *100*, and *101* returned by this command.
++
+See also the *EXIT CODES* section for details on exit status of *0*, *100*, and *101* returned by this command.
 +
 --
 	*--updatestack-only*::
@@ -605,16 +625,16 @@ include::{incdir}/option_Solver_Flags_Installs.txt[]
 	*--without-optional*::
 		Whether applicable optional patches should be treated as needed or be excluded. The default is to exclude optional patches.
 
-	*-r*, *--repo* 'alias'|'name'|'#'|'URI'::
+	*-r*, *--repo* _alias_|_name_|_#_|_URI_::
 		Check for patches only in the repository specified by the alias, name, number, or URI. This option can be used multiple times.
 --
 
-*patch* ['options']::
+*patch* [_options_]::
 	Install all available needed patches.
-	+
-	If there are patches that affect the package management itself, those will be installed first and you will be asked to run the *patch* command again.
-	+
-	This command is similar to *zypper update -t patch*.
++
+If there are patches that affect the package management itself, those will be installed first and you will be asked to run the *patch* command again.
++
+This command is similar to *zypper update -t patch*.
 +
 --
 	*--updatestack-only*::
@@ -622,29 +642,29 @@ include::{incdir}/option_Solver_Flags_Installs.txt[]
 
 	*--with-update*::
 		Additionally try to update all packages not covered by patches. This is basically the same as running *zypper update* afterwards.
-		+
-		The option is ignored, if the patch command must update the update stack first, thus it can not be combined with the *--updatestack-only* option.
++
+The option is ignored, if the patch command must update the update stack first, thus it can not be combined with the *--updatestack-only* option.
 
 	*--with-optional*::
 	*--without-optional*::
 		Whether applicable optional patches should be treated as needed or be excluded. The default is to exclude optional patches.
 
-	*-b*, *--bugzilla* '#'[,'...']::
+	*-b*, *--bugzilla* _#_[,_..._]::
 		Install patch fixing a Bugzilla issue specified by number. Use *list-patches --bugzilla* command to get a list of applicable patches for specific issues.
 
-	*--cve* '#'[,'...']::
+	*--cve* _#_[,_..._]::
 		Install patch fixing a MITRE's CVE issue specified by number. Use *list-patches --cve* command to get a list of applicable patches for specific issues.
 
-	*--date* 'YYYY-MM-DD'[,'...']::
+	*--date* _YYYY-MM-DD_[,_..._]::
 		Install only patches issued up to, but not including, the specified date.
 
-	*-g*, *--category* 'category'[,'...']::
-		Install only patches with this category. Use *list-patches --category* command to get a list of available patches with a specific category. See section *Package Types* for a list of commonly used 'category' values.
+	*-g*, *--category* _category_[,_..._]::
+		Install only patches with this category. Use *list-patches --category* command to get a list of available patches with a specific category. See section *Package Types* for a list of commonly used _category_ values.
 
-	*--severity* 'severity'[,'...']::
-		Install only patches with this severity. Use *list-patches --severity* command to get a list of available patches with a specific severity. See section *Package Types* for a list of commonly used 'severity' values.
+	*--severity* _severity_[,_..._]::
+		Install only patches with this severity. Use *list-patches --severity* command to get a list of available patches with a specific severity. See section *Package Types* for a list of commonly used _severity_ values.
 
-	*-r*, *--repo* 'alias'|'name'|'#'|'URI'::
+	*-r*, *--repo* _alias_|_name_|_#_|_URI_::
 		Work only with the repository specified by the alias, name, number, or URI. This option can be used multiple times.
 
 	*--skip-interactive*::
@@ -654,7 +674,7 @@ include::{incdir}/option_Solver_Flags_Installs.txt[]
 		Avoid skipping of interactive patches when in non-interactive mode.
 
 	*-l*, *--auto-agree-with-licenses*::
-		Automatically say 'yes' to third party license confirmation prompt. By using this option, you choose to agree with licenses of all third-party software this command will install. This option is particularly useful for administrators installing the same set of packages on multiple machines (by an automated process) and have the licenses confirmed before.
+		Automatically say _yes_ to third party license confirmation prompt. By using this option, you choose to agree with licenses of all third-party software this command will install. This option is particularly useful for administrators installing the same set of packages on multiple machines (by an automated process) and have the licenses confirmed before.
 
 	*--auto-agree-with-product-licenses*::
 		Automatically accept product licenses only. This is used by tools like SUSEconnect, which ask for confirmation before the product gets registered. So there's no need to confirm the product license again at install time.
@@ -682,30 +702,30 @@ include::{incdir}/option_Solver_Flags_Installs.txt[]
 	This command also accepts the *Download-and-install mode options* described in the *install* command description.:: {nop}
 --
 
-*dist-upgrade* (*dup*) ['options']::
+*dist-upgrade* (*dup*) [_options_]::
 	Perform a distribution upgrade. This command applies the state of (specified) repositories onto the system; upgrades (or even downgrades) installed packages to versions found in repositories, removes packages that are no longer in the repositories and pose a dependency problem for the upgrade, handles package splits and renames, etc.
-	+
-	If no repositories are specified via the *--from* option, zypper will do a global upgrade with all defined repositories. This global form of dup will also consider unchanged installed packages and re-evaluate their dependencies. This can be a problem if the system contains conflicting repositories, like repositories for two different distribution releases. This often happens if one forgets to remove an older release repository after adding a new one, say openSUSE 13.1 and openSUSE 13.2.
-	+
-	For all repositories which have the distribution version within their URL (like https://download.opensuse.org/distribution/'13.1'/repo/oss) using the *$releasever* variable instead may be helpful (https://download.opensuse.org/distribution/*$releasever*/repo/oss). The variable is per default substituted by the current distributions version ('13.1').
-	+
-	This value can be temporarily overwritten in the current zypper command by using the *--releasever* global option. Calling *zypper --releasever 13.2*'...' will cause these repos to use the new location (https://download.opensuse.org/distribution/'13.2'/repo/oss) without the need to add/remove anything. But you'll need to use *--releasever 13.2* with every zypper command until the distribution upgrade was actually performed. Once the *dup* is done, *$releasever* will default to the new distribution version '13.2' and *--releasever* is no longer needed.
-	+
-	It might be less tedious to persistently set *$releasever* to the target distribution value, so --releasever is not needed at all. See section *Repository Management* for more info about variable substitution and the definition of custom variables.
-	+
-	Note: distribution upgrades in openSUSE are currently only supported between consecutive releases. To upgrade multiple releases, upgrade each consecutive release one at a time. For more details see *http://en.opensuse.org/SDB:System_upgrade* and the 'openSUSE release notes' at *http://doc.opensuse.org/release-notes/*.
++
+If no repositories are specified via the *--from* option, zypper will do a global upgrade with all defined repositories. This global form of dup will also consider unchanged installed packages and re-evaluate their dependencies. This can be a problem if the system contains conflicting repositories, like repositories for two different distribution releases. This often happens if one forgets to remove an older release repository after adding a new one, say openSUSE 13.1 and openSUSE 13.2.
++
+For all repositories which have the distribution version within their URL (like \https://download.opensuse.org/distribution/_13.1_/repo/oss) using the *$releasever* variable instead may be helpful (\https://download.opensuse.org/distribution/*$releasever*/repo/oss). The variable is per default substituted by the current distributions version (_13.1_).
++
+This value can be temporarily overwritten in the current zypper command by using the *--releasever* global option. Calling **zypper --releasever 13.2**__...__ will cause these repos to use the new location (\https://download.opensuse.org/distribution/_13.2_/repo/oss) without the need to add/remove anything. But you'll need to use *--releasever 13.2* with every zypper command until the distribution upgrade was actually performed. Once the *dup* is done, *$releasever* will default to the new distribution version _13.2_ and *--releasever* is no longer needed.
++
+It might be less tedious to persistently set *$releasever* to the target distribution value, so --releasever is not needed at all. See section *Repository Management* for more info about variable substitution and the definition of custom variables.
++
+Note: distribution upgrades in openSUSE are currently only supported between consecutive releases. To upgrade multiple releases, upgrade each consecutive release one at a time. For more details see *http://en.opensuse.org/SDB:System_upgrade* and the _openSUSE release notes_ at *http://doc.opensuse.org/release-notes/*.
 +
 --
-	*--from* 'alias'|'name'|'#'|'URI'::
+	*--from* _alias_|_name_|_#_|_URI_::
 		The option can be used multiple times and restricts the upgrade to the specified repositories only. Nevertheless all enabled repositories are visible to the resolver and will be considered to satisfy dependency problems.
 
 	-r, --repo alias|name|#|URI::
 		Work only with the repository specified by the alias, name, number, or URI.
-		+
-		Using --repo is 'discouraged' as it currently hides unmentioned repositories from the resolver, leading to inexpertly decisions. This is because packages originally installed from the hidden repos will now be treated as 'orphaned' or 'dropped'. They can be silently removed if involved in a dependency conflict. In the future --repo will become an alias for *--from*.
++
+Using --repo is _discouraged_ as it currently hides unmentioned repositories from the resolver, leading to inexpertly decisions. This is because packages originally installed from the hidden repos will now be treated as _orphaned_ or _dropped_. They can be silently removed if involved in a dependency conflict. In the future --repo will become an alias for *--from*.
 
 	*-l*, *--auto-agree-with-licenses*::
-		Automatically say 'yes' to third party license confirmation prompt. By using this option, you choose to agree with licenses of all third-party software this command will install. This option is particularly useful for administrators installing the same set of packages on multiple machines (by an automated process) and have the licenses confirmed before.
+		Automatically say _yes_ to third party license confirmation prompt. By using this option, you choose to agree with licenses of all third-party software this command will install. This option is particularly useful for administrators installing the same set of packages on multiple machines (by an automated process) and have the licenses confirmed before.
 
 	*--auto-agree-with-product-licenses*::
 		Automatically accept product licenses only. This is used by tools like SUSEconnect, which ask for confirmation before the product gets registered. So there's no need to confirm the product license again at install time.
@@ -735,36 +755,34 @@ include::{incdir}/option_Solver_Flags_Installs.txt[]
 	Examples: :: {nop}
 
 		$ *zypper dup --from factory --from packman*;;
-		Upgrade the system to the latest versions provided by the 'factory' and 'packman' repositories.
+		Upgrade the system to the latest versions provided by the _factory_ and _packman_ repositories.
 --
+
 
 Query Commands
 ~~~~~~~~~~~~~~
-*search* (*se*) ['options'] ['querystring'|'capability']...::
-	Search for packages matching any of the given search strings. *** and '*?* wildcard' characters can be used within search strings. If the search string is enclosed in */*  (e.g. */^k.*e$/*) it's interpreted as a 'regular expression'. See the *install* command for details about how to specify a 'capability'.
-	+
-	Results of the search are printed in a table with columns *S*+tatus+, *Name*, *Summary* and *Type* of package.
-	+
-	In the detailed view (*se -s*) all available instances of matching packages are shown; each version in each repository on a separate line, with columns *S*+tatus+, *Name*, *Type*, *Version*, *Arch*+itecture+ and *Repository*. For installed packages *Repository* shows either a repository that provides exactly the installed version of the package, or, if the exact version is not provided by any known repo, *(System Packages)* (or *@System*). Those installed packages not provided by any repo are often denoted as being 'unwanted', 'orphaned' or 'dropped'.
-	+
-	The *S*+tatus+ column can contain the following values:
+*search* (*se*) [_options_] [_querystring_|_capability_]...::
+	Search for packages matching any of the given search strings. *** and *?* _wildcard_ characters can be used within search strings. If the search string is enclosed in */*  (e.g. */^k.*e$/*) it's interpreted as a _regular expression_. See the *install* command for details about how to specify a _capability_.
 +
---
-[horizontal]
-	*i+*;;	installed by user request
-	*i*;;	installed automatically (by the resolver, see section *Automatically installed packages*)
-	*v*;;	a different version is installed
-	'empty';;	neither of the above cases
-	*!*;;	a patch in *needed* state
-	{nop};;	{nop}
-	.*l*;;	is shown in the 2nd column if the item is locked (see section *Package Locks Management*)
-	.*R*;;	is shown in the 2nd column if the item has been retracted (see *patch* in section *Package Types*)
---
+Results of the search are printed in a table with columns **S**tatus, *Name*, *Summary* and *Type* of package.
 +
-{nop}
+In the detailed view (*se -s*) all available instances of matching packages are shown; each version in each repository on a separate line, with columns **S**tatus, *Name*, *Type*, *Version*, **Arch**itecture and *Repository*. For installed packages *Repository* shows either a repository that provides exactly the installed version of the package, or, if the exact version is not provided by any known repo, *(System Packages)* (or *@System*). Those installed packages not provided by any repo are often denoted as being _unwanted_, _orphaned_ or _dropped_.
++
+The **S**tatus column can contain the following values: :::
++
+*i+*:::: 	installed by user request
+*i*::::	installed automatically (by the resolver, see section *Automatically installed packages*)
+*v*::::	a different version is installed
+_empty_::::	neither of the above cases
+*!*::::	a patch in *needed* state
+{nop} ::::	 {nop}
+.*l*::::	is shown in the 2nd column if the item is locked (see section *Package Locks Management*)
+.*R*::::	is shown in the 2nd column if the item has been retracted (see *patch* in section *Package Types*)
+
+{nop}::
 	The *v* status is only shown if the version or the repository matters (see *--details* or *--repo*), and the installed instance differs from the one listed in version or repository.
-	+
-	This command accepts the following options:
++
+This command accepts the following options:
 +
 --
 	*--match-substrings*::
@@ -835,15 +853,15 @@ Query Commands
 
 	*-u*, *--not-installed-only*::
 		Show only packages which are not installed.
-		+
-		The old option name --uninstalled-only is still acceptable, but should be considered deprecated.
++
+The old option name --uninstalled-only is still acceptable, but should be considered deprecated.
 
-	*-t*, *--type* 'type'::
+	*-t*, *--type* _type_::
 		Search only for packages of specified type. See section *Package Types* for a list of available package types. Multiple *--type* options are allowed.
-		+
-		See also the type-specific query commands like *packages*, *patterns*, etc.
++
+See also the type-specific query commands like *packages*, *patterns*, etc.
 
-	*-r*, *--repo* 'alias'|'name'|'#'|'URI'::
+	*-r*, *--repo* _alias_|_name_|_#_|_URI_::
 		Work only with the repository specified by the alias, name, number, or URI. This option can be used multiple times.
 
 	*--sort-by-name*::
@@ -870,11 +888,11 @@ Query Commands
 		Look for RSI acronym (case-sensitively), also in summaries and descriptions.
 --
 
-*packages* (*pa*) ['options'] ['repository']...::
+*packages* (*pa*) [_options_] [_repository_]...::
 	List all available packages or all packages from specified repositories. Similar to *zypper search -s -t package*.
 +
 --
-	*-r*, *--repo* 'alias'|'name'|'#'|'URI'::
+	*-r*, *--repo* _alias_|_name_|_#_|_URI_::
 		Just another means to specify repositories.
 
 	*-i*, *--installed-only*::
@@ -882,8 +900,8 @@ Query Commands
 
 	*-u*, *--not-installed-only*::
 		Show only packages which are not installed.
-		+
-		The old option name --uninstalled-only is still acceptable, but should be considered deprecated.
++
+The old option name --uninstalled-only is still acceptable, but should be considered deprecated.
 
 	*--orphaned*::
 		Show packages which are orphaned (without repository).
@@ -898,19 +916,19 @@ Query Commands
 		Show packages which are unneeded.
 --
 
-*patches* (*pch*) ['options'] ['repository']...::
+*patches* (*pch*) [_options_] [_repository_]...::
 	List all available patches from specified repositories, including those not needed. Short for *zypper lp -a*.
 +
 --
-	*-r*, *--repo* 'alias'|name'|'#'|'URI'::
+	*-r*, *--repo* _alias_|name_|_#_|_URI_::
 		Just another means to specify repositories.
 --
 
-*patterns* (*pt*) ['options'] ['repository']...::
+*patterns* (*pt*) [_options_] [_repository_]...::
 	List all available patterns or all patterns from specified repositories. Similar to *zypper search -s -t pattern*.
 +
 --
-	*-r*, *--repo* 'alias'|'name'|'#'|'URI'::
+	*-r*, *--repo* _alias_|_name_|_#_|_URI_::
 		Just another means to specify repositories.
 
 	*-i*, *--installed-only*::
@@ -918,15 +936,15 @@ Query Commands
 
 	*-u*, *--not-installed-only*::
 		Show only patterns which are not installed.
-		+
-		The old option name --uninstalled-only is still acceptable, but should be considered deprecated.
++
+The old option name --uninstalled-only is still acceptable, but should be considered deprecated.
 --
 
-*products* (*pd*) ['options'] ['repository']...::
+*products* (*pd*) [_options_] [_repository_]...::
 	List all available products or all products from specified repositories. Similar to *zypper search -s -t product*, but shows also the type of the product (*base*, *add-on*).
 +
 --
-	*-r*, *--repo* ''alias'|'name'|'#'|'URI'::
+	*-r*, *--repo* _alias_|_name_|_#_|_URI_::
 		Just another means to specify repositories.
 
 	*-i*, *--installed-only*::
@@ -934,17 +952,17 @@ Query Commands
 
 	*-u*, *--not-installed-only*::
 		Show only products which are not installed.
-		+
-		The old option name --uninstalled-only is still acceptable, but should be considered deprecated.
++
+The old option name --uninstalled-only is still acceptable, but should be considered deprecated.
 
-	*--xmlfwd* 'tag'::
-		XML output only: Literally forward the XML 'tag', if it is found in an installed products .prod-file (in */etc/products.d*). 
-		+
-		Using this option, for each installed product an *<xmlfwd>* node will be created inside the *<product>* output node of the product.
-		+
-		Tag defines the name (or '/'-separated path) of a xml-tag inside an installed products .prod-file. If the tag is present inside the products .prod-file, the tag and it's content is literally forwarded into the products *<xmlfwd>* output node.
-		+
-		The option may be specified multiple times.
+	*--xmlfwd* _tag_::
+		XML output only: Literally forward the XML _tag_, if it is found in an installed products .prod-file (in */etc/products.d*).
++
+Using this option, for each installed product an *<xmlfwd>* node will be created inside the *<product>* output node of the product.
++
+Tag defines the name (or _/_-separated path) of a xml-tag inside an installed products .prod-file. If the tag is present inside the products .prod-file, the tag and it's content is literally forwarded into the products *<xmlfwd>* output node.
++
+The option may be specified multiple times.
 
 	Examples: :: {nop}
 
@@ -952,8 +970,8 @@ Query Commands
 		{nop}
 --
 
-*what-provides* (*wp*) 'capability'::
-	List all packages providing the specified capability. See also the *install* command for info about specifying 'capabilities'.
+*what-provides* (*wp*) _capability_::
+	List all packages providing the specified capability. See also the *install* command for info about specifying _capabilities_.
 +
 --
 	The command line is automatically transformed into the appropriate *search* command, e.g.: :: {nop}
@@ -963,20 +981,21 @@ Query Commands
 		$ *zypper se --provides --match-exact \'zypper>1.6'*;; {nop}
 --
 
+
 Repository Management
 ~~~~~~~~~~~~~~~~~~~~~
 Zypper is able to work with YaST, RPM-MD (yum) software repositories, and plain directories containing .rpm files.
 
-Repositories are primarily identified using their 'URI' or 'alias'. Alias serves as a shorthand for the long URI or name of the repository. The 'name' of the repository should briefly describe the repository and is shown to the user in tables and messages. The name is not required, and if not known, the alias is shown instead. The alias is required and uniquely identifies the repository on the system.
+Repositories are primarily identified using their _URI_ or _alias_. Alias serves as a shorthand for the long URI or name of the repository. The _name_ of the repository should briefly describe the repository and is shown to the user in tables and messages. The name is not required, and if not known, the alias is shown instead. The alias is required and uniquely identifies the repository on the system.
 
-The 'alias', 'name', 'URI', or the 'number' from *zypper repos* list can be used to specify a repository as an argument of various zypper commands and options like *refresh*, *--repo*, or *--from*.
+The _alias_, _name_, _URI_, or the _number_ from *zypper repos* list can be used to specify a repository as an argument of various zypper commands and options like *refresh*, *--repo*, or *--from*.
 
 Apart from the above, repositories have several other properties which can be set using the commands described in this section below, or by manually editing the repository definition files (*.repo* files, see section *FILES*).
 
-Variable substitution:
-^^^^^^^^^^^^^^^^^^^^^^
 
-You can use the following variables within a *.repo* or *.service* files 'name' and 'URI' values:
+Variable substitution:
+~~~~~~~~~~~~~~~~~~~~~~
+You can use the following variables within a *.repo* or *.service* files _name_ and _URI_ values:
 
 	*$arch*:::
 		Use this variable to refer to the system's CPU architecture.
@@ -987,15 +1006,15 @@ You can use the following variables within a *.repo* or *.service* files 'name' 
 	*$releasever*:::
 	*$releasever_major*:::
 	*$releasever_minor*:::
-		Use this variable to refer to the version of your openSUSE or SUSE Linux. The value is obtained from the '/product/version' XML-node in */etc/products.d/baseproduct*.
-		+
-		This is useful for related repositories like packman (*http://ftp.gwdg.de/pub/linux/packman/suse/$releasever*), which shall always fit the installed distribution, even after a distribution upgrade.
-		+
-		To help performing a distribution upgrade, the value of *$releasever* can be persistently set to a user defined value by creating a custom variable with that name (see below). This way you can easily switch all repositories using *$releasever* to the new version (provided the server layouts did not change and new repos are already available).
-		+
-		For a single zypper command the value of *$releasever* can be temporarily overwritten by using the *--releasever* global option.
-		+
-		In addition *$releasever_major* will be set to the leading portion up to (but not including) the 1st dot; *$releasever_minor* to the trailing portion after the 1st dot. If there's no dot in *$releasever*, *$releasever_major* is the same as *$releasever* and *$releasever_minor* is empty.
+		Use this variable to refer to the version of your openSUSE or SUSE Linux. The value is obtained from the _/product/version_ XML-node in */etc/products.d/baseproduct*.
++
+This is useful for related repositories like packman (*\http://ftp.gwdg.de/pub/linux/packman/suse/$releasever*), which shall always fit the installed distribution, even after a distribution upgrade.
++
+To help performing a distribution upgrade, the value of *$releasever* can be persistently set to a user defined value by creating a custom variable with that name (see below). This way you can easily switch all repositories using *$releasever* to the new version (provided the server layouts did not change and new repos are already available).
++
+For a single zypper command the value of *$releasever* can be temporarily overwritten by using the *--releasever* global option.
++
+In addition *$releasever_major* will be set to the leading portion up to (but not including) the 1st dot; *$releasever_minor* to the trailing portion after the 1st dot. If there's no dot in *$releasever*, *$releasever_major* is the same as *$releasever* and *$releasever_minor* is empty.
 
 	*Custom Variables*:::
 		A custom repository variable is defined by creating a file in */etc/zypp/vars.d*. The variable name equals the file name. The files first line (up to but not including the newline character) defines the variables value.  Valid variable(file) names consist of alphanumeric chars and underscore only.
@@ -1010,105 +1029,102 @@ You can use the following variables within a *.repo* or *.service* files 'name' 
 		*zypper --releasever @--HERE--@ lr -u*
 
 	Remember to protect the *$* when using these variables on a shell command line: :::
-		zypper ar -f http://ftp.gwdg.de/pub/linux/packman/suse/*\$*{nop}releasever packman
+		zypper ar -f \http://ftp.gwdg.de/pub/linux/packman/suse/**\$**releasever packman
 
 	If a variable is followed by an alphanumeric character or underscore it needs to be enclosed in *{}*: :::
-		zypper ar -f http://ftp.gwdg.de/pub/linux/packman/suse/*\${*'releasever'*}*{nop}_packman
+		zypper ar -f \http://ftp.gwdg.de/pub/linux/packman/suse/**\${**__releasever__**}**_packman
 
-	Bash style definition of default *${*'variable'*:-*'word'*}* and alternate *${*'variable'*:+*'word'*}* values: :::
-		SLE-*${*'releasever_major'*}${*'releasever_minor'*:+*-SP-'$releasever_minor'*}*
-
+	Bash style definition of default **${**__variable__**:-**__word__**}** and alternate **${**__variable__**:+**__word__**}** values: :::
+		SLE-**${**__releasever_major__**}${**__releasever_minor__**:+**-SP-__$releasever_minor__**}**
 
 	NOTE: :::
-		Variable substitution within an URIs authority is limited to *host* and *port*. Bash style definition of default and alternate values is not supported. No variables can be used in an URIs *scheme*, *user* and *password*.
-
+		Variable substitution within an URIs authority is limited to *host* and *port*. Bash style definition of default and alternate values is not supported. No variables can be used in an URIs *scheme*, *user* and *password* .
 
 
 Supported URI formats:
-^^^^^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~~~~~
+__scheme__**:**[**//**__user__[**:**__password__]*@*]__host__[**:**__port__]]**/**__path__[**?**__query__][**#**__fragment__]::
+	Special characters occurring in URI components (like a \'**@**' in a password) must be %-encoded (\'*%40*').
 
-	'scheme'*:* [*//*['user'[*:*'password']'*@*']'host'[*:*'port']] */*'path' [*?*'query'] [*#*'fragment']:::
-		Special characters occurring in URI components (like a '*@*' in a password) must be %-encoded ('*%40*').
+CD or DVD drive::
+	Optionally with _devices_ list for probing.
 
-	CD or DVD drive:::
-		Optionally with 'devices' list for probing.
-[horizontal]
-		;; *cd:///*
-		;; *dvd:/subdir*'?devices=/dev/sr0,/dev/sr1'
+		* *cd:///* +
+		**dvd:/subdir**__?devices=/dev/sr0,/dev/sr1__
 
-	FTP/HTTP/HTTPS directory tree:::
-		The ftp URL scheme supports absolute and relative paths to the default ftp server directory (RFC1738, Section 3.2.2). To use an absolute path, you have to prepend the path with an additional slash, what results in a */%2f* combination (second */* encoded to *%2f*) at the begin of the URL path. This is important, especially in user authenticated ftp, where the users home is usually the default directory of the server (except when the server chroots into the users home directory).
-		+
-		Explicit proxy settings may be passed via optional parameters 'proxy', 'proxyport', 'proxyuser' and 'proxypass'.
-		+
-		HTTP authentication methods to use can be defined as comma separated list via optional parameter 'auth'. Valid methods are e.g. 'basic', 'digest', 'ntlm', 'negotiate'. Note, that this list depends on the list of methods supported by the curl library.
-		+
-		SSL verification behavior can be changed using the 'ssl_verify' option (this should be used with care). Valid values are *yes* (the secure default), *host*, *peer* or *no*. 'Host' just checks that the "Common Name" field or a "Subject Alternate Name" field in the servers certificate matches the host name in the URL. 'Peer' just verifies whether the certificate provided by the server is authentic against the chain of digital signatures found in ssl_capath. 'No' performs no checks at all. 'Yes' is the secure default, performing host and peer check.
-		+
-		For SSL client certificate authentication use the options 'ssl_clientcert' to define the path to the ssl client certificate and 'ssl_clientkey' to define the path to the SSL client key. Use 'ssl_capath' to change the directory holding the CA certificates (default is */etc/ssl/certs*).
-[horizontal]
-		;; *ftp://user:pass@server/path/to/media/dir*
-		;; *ftp://user:pass@server/%2fhome/user/path/to/media/dir*
-		;; *http://user:pass@server/path*
-		;; *https://user:pass@server/path*'?proxy=foo&proxyuser=me&proxypass=pw'
-		;; *https://server/path*'?ssl_clientcert=/entitlement/1234.pem&ssl_clientkey=/entitlement/1234-key.pem'
+FTP/HTTP/HTTPS directory tree::
+	The ftp URL scheme supports absolute and relative paths to the default ftp server directory (RFC1738, Section 3.2.2). To use an absolute path, you have to prepend the path with an additional slash, what results in a */%2f* combination (second */* encoded to *%2f*) at the begin of the URL path. This is important, especially in user authenticated ftp, where the users home is usually the default directory of the server (except when the server chroots into the users home directory).
++
+Explicit proxy settings may be passed via optional parameters _proxy_, _proxyport_, _proxyuser_ and _proxypass_.
++
+HTTP authentication methods to use can be defined as comma separated list via optional parameter _auth_. Valid methods are e.g. _basic_, _digest_, _ntlm_, _negotiate_. Note, that this list depends on the list of methods supported by the curl library.
++
+SSL verification behavior can be changed using the _ssl_verify_ option (this should be used with care). Valid values are *yes* (the secure default), *host*, *peer* or *no*. _Host_ just checks that the "Common Name" field or a "Subject Alternate Name" field in the servers certificate matches the host name in the URL. _Peer_ just verifies whether the certificate provided by the server is authentic against the chain of digital signatures found in ssl_capath. _No_ performs no checks at all. _Yes_ is the secure default, performing host and peer check.
++
+For SSL client certificate authentication use the options _ssl_clientcert_ to define the path to the ssl client certificate and _ssl_clientkey_ to define the path to the SSL client key. Use _ssl_capath_ to change the directory holding the CA certificates (default is */etc/ssl/certs*).
 
-	Disk volume (partition):::
-		Mandatory *device* parameter specifying the name of the block device to mount. The name of the optional 'filesystem' defaults to "auto".
+		* *\ftp://user:pass@server/path/to/media/dir* +
+		*\ftp://user:pass@server/%2fhome/user/path/to/media/dir* +
+		*\http://user:pass@server/path* +
+		**\https://user:pass@server/path**__?proxy=foo{amp}proxyuser=me{amp}proxypass=pw__ +
+		**\https://server/path**__?ssl_clientcert=/entitlement/1234.pem{amp}ssl_clientkey=/entitlement/1234-key.pem__
 
-		;; *hd:/subdir?device=/dev/sda1*'&filesystem=reiserfs'
+Disk volume (partition)::
+	Mandatory *device* parameter specifying the name of the block device to mount. The name of the optional _filesystem_ defaults to "auto".
 
-	Local directory tree:::
+		* **hd:/subdir?device=/dev/sda1**__{amp}filesystem=reiserfs__
 
-		;; *dir:/directory/name*
+Local directory tree::
 
-	Media in an ISO image (loopback mounted):::
-		+
-		Mandatory *iso* parameter specifying the name of the iso file. Optional 'url' parameter specifying the URL to the directory containing the iso file. Optional 'mnt' parameter specifying the preferred attach point for the source media url. Optional 'filesystem' name of the filesystem used in the iso file. Defaults to "auto".
-[horizontal]
-		;; *iso:/?iso=CD1.iso*'&url=nfs://server/path/to/media'
-		;; *iso:/?iso=CD1.iso*'&url=hd:/?device=/dev/hda'
-		;; *iso:/subdir?iso=DVD1.iso*'&url=nfs://nfs-server/directory&mnt=/nfs/attach/point&filesystem=udf'
+		* *dir:/directory/name*
 
-	NFS exported directory tree:::
-		To use NFSv4 either use schema 'tnfsv4://' or pass an optional parameter 'type=nfs4'. Additional 'mountoptions' can be passed as comma separated list. Defaults to "ro".
-[horizontal]
-		;; *nfs://nfs-server/exported/path*
-		;; *nfs://nfs-server/exported/path*'?mountoptions=ro&type=nfs4'
-		;; *nfs4://nfs-server/exported/path*'?mountoptions=ro'
+Media in an ISO image (loopback mounted)::
+	Mandatory *iso* parameter specifying the name of the iso file. Optional _url_ parameter specifying the URL to the directory containing the iso file. Optional _mnt_ parameter specifying the preferred attach point for the source media url. Optional _filesystem_ name of the filesystem used in the iso file. Defaults to "auto".
 
-	CIFS/SMB directory tree:::
-		There is no difference between cifs and smb scheme (any more). In both cases the 'cifs' filesystem is used. Additional 'mountoptions' can be passed as comma separated list. Defaults to "ro,guest". Specify "noguest" to turn off "guest". This is necessary if Samba is configured to reject guest connections.
-		+
-		Optional 'workgroup' or 'domain' parameter set the name of the workgroup. As alternative to passing 'username:password' in the URI authority the parameters 'user' and 'pass' can be used.
-[horizontal]
-		;; *smb://servername/share/path/on/the/share*
-		;; *cifs://usern:passw@servername/share/path/on/the/share*'?mountoptions=ro,noguest'
-		;; *cifs://usern:passw@servername/share/path/on/the/share*'?workgroup=mygroup'
-		;; *cifs://servername/share/path/on/the/share*'?user=usern&pass=passw'
+		* **iso:/?iso=CD1.iso**__{amp}url=nfs://server/path/to/media__ +
+		**iso:/?iso=CD1.iso**__{amp}url=hd:/?device=/dev/hda__ +
+		**iso:/subdir?iso=DVD1.iso**__{amp}url=nfs://nfs-server/directory{amp}mnt=/nfs/attach/point{amp}filesystem=udf__
 
-	OpenSUSE Build Build Service (OBS) repositories:::
-		Zypper also accepts special URIs identifying openSUSE Build Service (OBS) repositories in the *addrepo* command. These URIs have the form of *obs://*'project'*/*['platform'], where 'project' is the name of the OBS project and 'platform' is the target platform (OS) for which the repository is intended.
-		+
-		If 'platform' is omitted, *openSUSE_$releasever* is used unless a value for *obs.platform* is defined in zypper.conf. If you are following *openSUSE_Factory* or *openSUSE_Tumbleweed* you may need to set these as your default platform. But we can only guess, how the directory containing the repository that fits your distribution is named on the server. In case of doubt you need to look up the right URL in a browser.
-[horizontal]
-		;; *obs://zypp:Head/*
-		;; *obs://zypp:Head/openSUSE_Factory*
-		;; *obs://zypp:Head/openSUSE_Factory_Staging_Gcc49_standard*
+NFS exported directory tree::
+	To use NFSv4 either use schema _tnfsv4://_ or pass an optional parameter _type=nfs4_. Additional _mountoptions_ can be passed as comma separated list. Defaults to "ro".
 
- {nop}
-~~~~~~
+		* *nfs://nfs-server/exported/path* +
+		**nfs://nfs-server/exported/path**__?mountoptions=ro{amp}type=nfs4__ +
+		**nfs4://nfs-server/exported/path**__?mountoptions=ro__
 
-*addrepo* (*ar*) ['options'] 'URI' 'alias':: {nop}
-*addrepo* (*ar*) ['options'] 'FILE'*.repo*::
+CIFS/SMB directory tree::
+	There is no difference between cifs and smb scheme (any more). In both cases the _cifs_ filesystem is used. Additional _mountoptions_ can be passed as comma separated list. Defaults to "ro,guest". Specify "noguest" to turn off "guest". This is necessary if Samba is configured to reject guest connections.
++
+Optional _workgroup_ or _domain_ parameter set the name of the workgroup. As alternative to passing _username:password_ in the URI authority the parameters _user_ and _pass_ can be used.
+
+		* *smb://servername/share/path/on/the/share* +
+		**cifs://usern:passw@servername/share/path/on/the/share**__?mountoptions=ro,noguest__ +
+		**cifs://usern:passw@servername/share/path/on/the/share**__?workgroup=mygroup__ +
+		**cifs://servername/share/path/on/the/share**__?user=usern{amp}pass=passw__
+
+OpenSUSE Build Build Service (OBS) repositories::
+	Zypper also accepts special URIs identifying openSUSE Build Service (OBS) repositories in the *addrepo* command. These URIs have the form of **obs://**__project__**/**[_platform_], where _project_ is the name of the OBS project and _platform_ is the target platform (OS) for which the repository is intended.
++
+If _platform_ is omitted, *openSUSE_$releasever* is used unless a value for *obs.platform* is defined in zypper.conf. If you are following *openSUSE_Factory* or *openSUSE_Tumbleweed* you may need to set these as your default platform. But we can only guess, how the directory containing the repository that fits your distribution is named on the server. In case of doubt you need to look up the right URL in a browser.
+
+		* *obs://zypp:Head/* +
+		*obs://zypp:Head/openSUSE_Factory* +
+		*obs://zypp:Head/openSUSE_Factory_Staging_Gcc49_standard*
+
+
+Commands:
+~~~~~~~~~
+
+*addrepo* (*ar*) [_options_] _URI_ _alias_:: {nop}
+*addrepo* (*ar*) [_options_] _FILE_*.repo*::
 	Add a new repository specified by URI and assign specified alias to it or specify URI to a .repo file.
-	+
-	Newly added repositories have auto-refresh disabled by default (except for repositories imported from a .repo, having the auto-refresh enabled). To enable auto-refresh use *addrepo -f*, or the *--refresh* option of the *modifyrepo* command.
-	+
-	Also, this command does not automatically refresh the newly added repositories. The repositories will get refreshed when used for the first time, or you can use the *refresh* command after finishing your modifications with **repo* commands.
++
+Newly added repositories have auto-refresh disabled by default (except for repositories imported from a .repo, having the auto-refresh enabled). To enable auto-refresh use *addrepo -f*, or the *--refresh* option of the *modifyrepo* command.
++
+Also, this command does not automatically refresh the newly added repositories. The repositories will get refreshed when used for the first time, or you can use the *refresh* command after finishing your modifications with **repo* commands.
 +
 --
-	*-r*, *--repo* 'file'*.repo*::
+	*-r*, *--repo* __file__**.repo**::
 		Read URI and alias from specified .repo file
 
 	*-c*, *--check*::
@@ -1117,7 +1133,7 @@ Supported URI formats:
 	*-C*, *--no-check*::
 		Don't probe URI, probe later during refresh.
 
-	*-n*, *--name* 'name'::
+	*-n*, *--name* _name_::
 		Specify descriptive name for the repository.
 
 	*-e*, *--enable*::
@@ -1132,7 +1148,7 @@ Supported URI formats:
 	*-F*, *--no-refresh*::
 		Disable auto-refresh for the repository.
 
-	*-p*, *--priority* 'positive-integer'::
+	*-p*, *--priority* _positive-integer_::
 		Set the priority of the repository. Priority of *1* is the highest, the higher the number the lower the priority. *-p 0* will set the priority back to the default (*99*). Packages from repositories with higher priority will be preferred even in case there is a higher installable version available in the repository with a lower priority.
 
 	*-k*, *--keep-packages*::
@@ -1145,15 +1161,15 @@ include::{incdir}/option_GPG_Check.txt[]
 
 	Examples: :: {nop}
 
-		$ *zypper ar -c -n \'Packman 11.1 repo' http://packman.iu-bremen.de/suse/11.1 packman*;;
-		Add a HTTP repository, probe it, name it 'Packman 11.1 repo', and use 'packman' as alias.
+		$ *zypper ar -c -n \'Packman 11.1 repo' \http://packman.iu-bremen.de/suse/11.1 packman*;;
+		Add a HTTP repository, probe it, name it _Packman 11.1 repo_, and use _packman_ as alias.
 
-		$ *zypper ar https://download.opensuse.org/repositories/zypp:/svn/openSUSE_Factory/zypp:svn.repo*;; {nop}
+		$ *zypper ar \https://download.opensuse.org/repositories/zypp:/svn/openSUSE_Factory/zypp:svn.repo*;; {nop}
 		$ *zypper ar myreposbackup.repo*;;
 		Add repositories from a .repo file.
 --
 
-*removerepo* (*rr*) ['options'] 'alias'|'name'|'#'|'URI'...::
+*removerepo* (*rr*) [_options_] _alias_|_name_|_#_|_URI_...::
 	Delete repositories specified by aliases, names, numbers, URIs or one of the aggregate options.
 +
 --
@@ -1166,17 +1182,17 @@ include::{incdir}/option_GPG_Check.txt[]
 include::{incdir}/option_Repo_Aggregates.txt[]
 --
 
-*repos* (*lr*) ['options'] ['repo']...::
+*repos* (*lr*) [_options_] [_repo_]...::
 	List all defined repositories or show detailed information about those specified as arguments
-	+
-	The following data can be printed for each repository found on the system: '#' (repository number), 'Alias' (unique identifier), 'Name', 'Enabled' (whether the repository is enabled), 'GPG Check' (whether GPG check for repository metadata (*r*) and/or downloaded rpm packages (*p*) is enabled), 'Refresh' (whether auto-refresh is enabled for the repository), 'Priority', 'Type' (repository meta-data type: rpm-md, yast2, plaindir). Which of the data is shown is determined by command line options listed below and the main.repoListColumns setting from zypper.conf. By default, #, Alias, Name, Enabled, GPG Check and Refresh is shown.
-	+
-	Repository number is a unique identifier of the repository in current set of repositories. If you add, remove or change a repository, the numbers may change. Keep that in mind when using the numbers with the repository handling commands. On the other hand, using the alias instead of the number is always safe.
-	+
-	To show detailed information about specific repositories, specify them as arguments, either by alias, name, number from simple *zypper lr*, or by URI; e.g. fB *zypper lr factory*, or *zypper lr 2*.
++
+The following data can be printed for each repository found on the system: _#_ (repository number), _Alias_ (unique identifier), _Name_, _Enabled_ (whether the repository is enabled), _GPG Check_ (whether GPG check for repository metadata (*r*) and/or downloaded rpm packages (*p*) is enabled), _Refresh_ (whether auto-refresh is enabled for the repository), _Priority_, _Type_ (repository meta-data type: rpm-md, yast2, plaindir). Which of the data is shown is determined by command line options listed below and the main.repoListColumns setting from zypper.conf. By default, #, Alias, Name, Enabled, GPG Check and Refresh is shown.
++
+Repository number is a unique identifier of the repository in current set of repositories. If you add, remove or change a repository, the numbers may change. Keep that in mind when using the numbers with the repository handling commands. On the other hand, using the alias instead of the number is always safe.
++
+To show detailed information about specific repositories, specify them as arguments, either by alias, name, number from simple *zypper lr*, or by URI; e.g. fB *zypper lr factory*, or *zypper lr 2*.
 +
 --
-	*-e*, *--export* 'FILE'*.repo*|'-'::
+	*-e*, *--export* __FILE__**.repo**|_-_::
 		This option causes zypper to write repository definition of all defined repositories into a single file in repo file format. If *-* is specified instead of a file name, the repositories will be written to the standard output.
 
 	*-a*, *--alias*::
@@ -1221,23 +1237,23 @@ include::{incdir}/option_Repo_Aggregates.txt[]
 		List repositories with their URIs and priorities:
 --
 
-*renamerepo* (*nr*) 'alias'|'name'|'#'|'URI' 'new-alias'::
+*renamerepo* (*nr*) _alias_|_name_|_#_|_URI_ _new-alias_::
 	Assign new alias to the repository specified by alias, name, number, or URI.
 +
 --
 	Examples: :: {nop}
 
 		$ *zypper nr 8 myrepo* ;;
-		Rename repository 'number 8' to *myrepo* (useful if the repo has some
+		Rename repository _number 8_ to *myrepo* (useful if the repo has some
 		dreadful alias which is not usable on the command line).
 --
 
-*modifyrepo* (*mr*) 'options' 'alias'|'name'|'#'|'URI'...:: {nop}
-*modifyrepo* (*mr*) 'options' *--all*|*--remote*|*--local*|*--medium-type*::
+*modifyrepo* (*mr*) _options_ _alias_|_name_|_#_|_URI_...:: {nop}
+*modifyrepo* (*mr*) _options_ *--all*|*--remote*|*--local*|*--medium-type*::
 	Modify properties of repositories specified by alias, name, number, or URI or one of the aggregate options.
 +
 --
-	*-n*, *--name* 'name'::
+	*-n*, *--name* _name_::
 		Set a descriptive name for the repository.
 
 	*-e*, *--enable*::
@@ -1252,7 +1268,7 @@ include::{incdir}/option_Repo_Aggregates.txt[]
 	*-F*, *--no-refresh* (legacy: -R)::
 		Disable auto-refresh for the repository.
 
-	*-p*, *--priority* 'positive-integer'::
+	*-p*, *--priority* _positive-integer_::
 		Set the priority of the repository. Priority of *1* is the highest, the higher the number the lower the priority. *-p 0* will set the priority back to the default (*99*). Packages from repositories with higher priority will be preferred even in case there is a higher installable version available in the repository with a lower priority.
 
 	*-k*, *--keep-packages*::
@@ -1271,13 +1287,13 @@ include::{incdir}/option_Repo_Aggregates.txt[]
 		Enable keeping of packages for all remote repositories.
 
 		$ *zypper mr -er updates*;;
-		Enable repository 'updates' and switch on autorefresh for the repo.
+		Enable repository _updates_ and switch on autorefresh for the repo.
 
 		$ *zypper mr -da*;;
 		Disable all repositories.
 --
 
-*refresh* (*ref*) ['alias'|'name'|'#'|'URI']...::
+*refresh* (*ref*) [_alias_|_name_|_#_|_URI_]...::
 	Refresh repositories specified by their alias, name, number, or URI. If no repositories are specified, all enabled repositories will be refreshed.
 +
 --
@@ -1300,7 +1316,7 @@ include::{incdir}/option_Repo_Aggregates.txt[]
 		Refresh also services before refreshing repositories.
 --
 
-*clean* (*cc*) ['options'] ['alias'|'name'|'#'|'URI']...::
+*clean* (*cc*) [_options_] [_alias_|_name_|_#_|_URI_]...::
 	Clean the local caches for all known or specified repositories. By default, only caches of downloaded packages are cleaned.
 +
 --
@@ -1314,19 +1330,20 @@ include::{incdir}/option_Repo_Aggregates.txt[]
 		Clean both repository metadata and package caches.
 --
 
+
 Service Management
 ~~~~~~~~~~~~~~~~~~
 The *services*, *addservice*, *removeservice*, *modifyservice*, and *refresh-services* commands serve for manipulating services. A service is specified by its URI and needs to have a unique alias defined (among both services and repositories).
 
 Standalone repositories (not belonging to any service) are treated like services, too. The *ls* command will list them, *ms* command will modify them, etc. Repository specific options, like *--keep-packages* are not available here, though. You can use repository handling commands to manipulate them.
 
-*addservice* (*as*) ['options'] 'URI' 'alias'::
-	Adds a service specified by *URI* to the system. The 'alias' must be unique and serves to identify the service.
-	+
-	Newly added services are not refreshed automatically. Use the *refresh-services* command to refresh them. Zypper does not access the service URI when adding the service, so the type of the services is unknown until it is refreshed.
-	+
+*addservice* (*as*) [_options_] _URI_ _alias_::
+	Adds a service specified by *URI* to the system. The _alias_ must be unique and serves to identify the service.
++
+Newly added services are not refreshed automatically. Use the *refresh-services* command to refresh them. Zypper does not access the service URI when adding the service, so the type of the services is unknown until it is refreshed.
++
 --
-	*-n*, *--name* 'name'::
+	*-n*, *--name* _name_::
 		Specify descriptive name for the service.
 
 	*-e*, *--enable*::
@@ -1343,7 +1360,7 @@ Standalone repositories (not belonging to any service) are treated like services
 
 --
 
-*removeservice* (*rs*) ['options'] 'alias'|'name'|'#'|'URI'...::
+*removeservice* (*rs*) [_options_] _alias_|_name_|_#_|_URI_...::
 	Remove specified service from the system. Removing a service will also remove of all of its repositories.
 +
 --
@@ -1354,15 +1371,15 @@ Standalone repositories (not belonging to any service) are treated like services
 		Ignore query string in the URI.
 --
 
-*modifyservice* (*ms*) 'options' 'alias'|'name'|'#'|'URI':: {nop}
-*modifyservice* (*ms*) 'options' *--all*|*--remote*|*--local*|*--medium-type*::
+*modifyservice* (*ms*) _options_ _alias_|_name_|_#_|_URI_:: {nop}
+*modifyservice* (*ms*) _options_ *--all*|*--remote*|*--local*|*--medium-type*::
 	Modify properties of specified services.
 +
 --
 	Common Options::
 		These options are common to all types of services and repositories.
 
-	*-n*, *--name* 'name'::
+	*-n*, *--name* _name_::
 		Set a descriptive name for the service.
 
 	*-e*, *--enable*::
@@ -1386,22 +1403,22 @@ Standalone repositories (not belonging to any service) are treated like services
 	*-t*, *--remote*::
 		Apply changes to all remote services.
 
-	*-m*, *--medium-type* 'type'::
+	*-m*, *--medium-type* _type_::
 		Apply changes to services of specified type.
 
 	RIS Service Specific Options::
 		These options are ignored by services other than Repository Index Services.
 
-	*-i*, *--ar-to-enable* 'alias'::
+	*-i*, *--ar-to-enable* _alias_::
 		Schedule an RIS service repository to be enabled at next service refresh.
 
-	*-I*, *--ar-to-disable* 'alias'::
+	*-I*, *--ar-to-disable* _alias_::
 		Schedule an RIS service repository to be disabled at next service refresh.
 
-	*-j*, *--rr-to-enable* 'alias'::
+	*-j*, *--rr-to-enable* _alias_::
 		Remove a RIS service repository to enable.
 
-	*-J*, *--rr-to-disable* "alias'::
+	*-J*, *--rr-to-disable* _alias_::
 		Remove a RIS service repository to disable.
 
 	*-k*, *--cl-to-enable*::
@@ -1411,7 +1428,7 @@ Standalone repositories (not belonging to any service) are treated like services
 		Clear the list of RIS repositories to disable.
 --
 
-*services* (*ls*) ['options']::
+*services* (*ls*) [_options_]::
 	List services defined on the system.
 +
 --
@@ -1440,12 +1457,12 @@ Standalone repositories (not belonging to any service) are treated like services
 		Sort the list by name.
 --
 
-*refresh-services* (*refs*) ['options'] 'alias'|'name'|'#'|'URI'...::
+*refresh-services* (*refs*) [_options_] _alias_|_name_|_#_|_URI_...::
 	Refreshing a service means executing the service's special task.
-	+
-	RIS services add, remove, or modify repositories on your system based on current content of the repository index. A differing enabled/disabled state caused by manually calling *modify-repo* on a service repository however will not be reverted unless the *--restore-status* option is used, or the repository index explicitly requests the change.
-	+
-	Services only manage defined repositories, they do not refresh them. To refresh also repositories, use *--with-repos* option or the *refresh* command.
++
+RIS services add, remove, or modify repositories on your system based on current content of the repository index. A differing enabled/disabled state caused by manually calling *modify-repo* on a service repository however will not be reverted unless the *--restore-status* option is used, or the repository index explicitly requests the change.
++
+Services only manage defined repositories, they do not refresh them. To refresh also repositories, use *--with-repos* option or the *refresh* command.
 +
 --
 	*-f*, *--force*::
@@ -1458,9 +1475,10 @@ Standalone repositories (not belonging to any service) are treated like services
 		Also restore service repositories enabled/disabled state to the repository index default. Useful after you manually changed some service repositories enabled state.
 --
 
+
 Package Locks Management
 ~~~~~~~~~~~~~~~~~~~~~~~~
-Package locks serve the purpose of preventing changes to the set of installed packages on the system. The locks are stored in form of a 'query' in /etc/zypp/locks file (see also locks(5)). Packages matching this query are then forbidden to change their installed status; an installed package can't be removed or upgraded, not installed package can't be installed. When requesting to install, upgrade or remove such locked package, you will get a dependency problem dialog.
+Package locks serve the purpose of preventing changes to the set of installed packages on the system. The locks are stored in form of a _query_ in /etc/zypp/locks file (see also locks(5)). Packages matching this query are then forbidden to change their installed status; an installed package can't be removed or upgraded, not installed package can't be installed. When requesting to install, upgrade or remove such locked package, you will get a dependency problem dialog.
 
 *locks* (*ll*)::
 	List currently active package locks.
@@ -1473,35 +1491,36 @@ Package locks serve the purpose of preventing changes to the set of installed pa
 		 List the resolvables matched by each lock. This option requires loading the repositories.
 --
 
-*addlock* (*al*) ['options'] 'package-name'...::
-	Add a package lock. Specify packages to lock by exact name or by a glob pattern using *** and '*?*' wildcard characters.
+*addlock* (*al*) [_options_] _package-name_...::
+	Add a package lock. Specify packages to lock by exact name or by a glob pattern using *** and *?* wildcard characters.
 +
 --
-	*-r*, *--repo* 'alias'|'name'|'#'|'URI'::
+	*-r*, *--repo* _alias_|_name_|_#_|_URI_::
 		Restrict the lock to the specified repository.
 
-	*-t*, *--type* 'type'::
+	*-t*, *--type* _type_::
 		Lock only packages of specified type (default: package). See section *Package Types* for list of available package types.
 --
 
-*removelock* (*rl*) ['options'] 'lock-number'|'package-name'...::
+*removelock* (*rl*) [_options_] _lock-number_|_package-name_...::
 	Remove specified package lock. Specify the lock to remove by its number obtained with *zypper locks* or by the package name.
 +
 --
-	*-r*, *--repo* 'alias'|'name'|'#'|'URI'::
+	*-r*, *--repo* _alias_|_name_|_#_|_URI_::
 		Restrict the lock to the specified repository.
 
-	*-t*, *--type* 'type'::
+	*-t*, *--type* _type_::
 		Restrict the lock to packages of specified type (default: package). See section *Package Types* for list of available package types.
 --
 
 *cleanlocks* (*cl*)::
 	Remove unused locks.
-	+
-	This command looks for locks that do not currently (with regard to repositories used) lock any package and for each such lock it asks user whether to remove it.
++
+This command looks for locks that do not currently (with regard to repositories used) lock any package and for each such lock it asks user whether to remove it.
+
 
 Locale Management
-~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~
 These commands give information about requested locales and the possibilty to manage those. A locale is defined by a language code. For many packages there are locale dependent packages available which provide translations or dictionaries. To get these installed, the locale for the desired language must be marked as requested by the package manager library.
 
 *locales* (*lloc*) [OPTIONS] [LOCALE] ...::
@@ -1537,23 +1556,24 @@ Examples: :: {nop}
 	List requested locales.
 
 	$ *zypper locales --packages de en*;;
-	Get the lists of packages which are available for 'de' and 'en' (exact match).
+	Get the lists of packages which are available for _de_ and _en_ (exact match).
 
 	$ *zypper locales en_*;;
-	Get all locales with lang code 'en' that have their own country code, excluding the fallback 'en'.
+	Get all locales with lang code _en_ that have their own country code, excluding the fallback _en_.
 
 	$ *zypper locales en**;;
-	Get all locales with lang code 'en' with or without country code.	
+	Get all locales with lang code _en_ with or without country code.
 	
 	$ *zypper aloc --packages de_CH* ;;
 	Request *de_CH* and install language dependent packages.
 
+
 Other Commands
 ~~~~~~~~~~~~~~
-*versioncmp* (*vcmp*) 'version1' 'version2'::
+*versioncmp* (*vcmp*) _version1_ _version2_::
 	Compare the versions supplied as arguments and tell whether version1 is older or newer than version2 or the two version strings match.
-	+
-	The default output is in human-friendly form. If *--terse* global option is used, the result is an integer number, negative/positive if version1 is older/newer than version2, zero if they match.
++
+The default output is in human-friendly form. If *--terse* global option is used, the result is an integer number, negative/positive if version1 is older/newer than version2, zero if they match.
 +
 --
 	*-m*, *--match*::
@@ -1562,29 +1582,29 @@ Other Commands
 		For example: :::
 
 			$ *zypper vcmp -m 0.15.3 0.15.3-2*;;
-			0.15.3 'matches' 0.15.3-2
+			0.15.3 _matches_ 0.15.3-2
 
 			$ *zypper vcmp 0.15.3 0.15.3-2*;;
-			0.15.3 'is older than' 0.15.3-2
+			0.15.3 _is older than_ 0.15.3-2
 --
 
 *targetos* (*tos*)::
-	Shows the ID string of the target operating system. The string has a form of 'distroname-architecture'. The string is determined by libzypp, the 'distroname' is read from ('current-rootdir')*/etc/products.d/baseproduct* and the 'architecture' is determined from *uname* and 'CPU flags'.
+	Shows the ID string of the target operating system. The string has a form of _distroname-architecture_. The string is determined by libzypp, the _distroname_ is read from (_current-rootdir_)*/etc/products.d/baseproduct* and the _architecture_ is determined from *uname* and _CPU flags_.
 
 *licenses*::
-	Prints a report about 'licenses' and 'EULA's of installed packages to standard output.
-	+
-	First, a list of all packages and their licenses and/or EULAs is shown. This is followed by a summary, including the total number of installed packages, the number of installed packages with EULAs that required a confirmation from the user. Since the EULAs are not stored on the system and can only be read from repository metadata, the summary includes also the number of installed packages that have their counterpart in repositories. The report ends with a list of all licenses uses by the installed packages.
-	+
-	This command can be useful for companies redistributing a custom distribution (like appliances) to figure out what licenses they are bound by.
+	Prints a report about _licenses_ and __EULA__'s of installed packages to standard output.
++
+First, a list of all packages and their licenses and/or EULAs is shown. This is followed by a summary, including the total number of installed packages, the number of installed packages with EULAs that required a confirmation from the user. Since the EULAs are not stored on the system and can only be read from repository metadata, the summary includes also the number of installed packages that have their counterpart in repositories. The report ends with a list of all licenses uses by the installed packages.
++
+This command can be useful for companies redistributing a custom distribution (like appliances) to figure out what licenses they are bound by.
 
-*download*::
+*download* [OPTIONS]::
 	Download rpms specified on the commandline to a local directory.
-	+
-	Per default packages are downloaded to the libzypp package cache (*/var/cache/zypp/packages*; for non-root users *$XDG_CACHE_HOME/zypp/packages*), but this can be changed by using the global *--pkg-cache-dir* option.
-	+
-	Parsable XML-output produced by *zypper --xmlout* will include a *<download-result>* node for each package zypper tried to download. Upon success the location of the downloaded package is found in the *path* attribute of the *<localfile>* subnode (xpath: *download-result/localpath@path*):
-	+
++
+Per default packages are downloaded to the libzypp package cache (*/var/cache/zypp/packages*; for non-root users *$XDG_CACHE_HOME/zypp/packages*), but this can be changed by using the global *--pkg-cache-dir* option.
++
+Parsable XML-output produced by *zypper --xmlout* will include a *<download-result>* node for each package zypper tried to download. Upon success the location of the downloaded package is found in the *path* attribute of the *<localfile>* subnode (xpath: *download-result/localpath@path*):
++
 .....
 	<download-result>
 	  <solvable>
@@ -1597,6 +1617,7 @@ Other Commands
 	  <localfile path="/var/cache/zypp/pac.../zypper-1.9.17-26.1.x86_64.rpm"/>
 	</download-result>
 .....
++
 --
 	*--all-matches*::
 		Download all versions matching the commandline arguments. Otherwise only the best version of
@@ -1605,18 +1626,18 @@ Other Commands
 	*--dry-run*::
 		Don't download any package, just report what would be done.
 
-	*-r*, *--repo* 'alias'|'name'|'#'|'URI'::
+	*-r*, *--repo* _alias_|_name_|_#_|_URI_::
 		Work only with the repository specified by the alias, name, number or URI. This option can be used multiple times.
 
-	*--from* 'alias'|'name'|'#'|'URI'::
+	*--from* _alias_|_name_|_#_|_URI_::
 		Select packages from the specified repository only. This option can be used multiple times.
 --
 
-*source-download*::
+*source-download* [OPTIONS]::
 	Download source rpms for all installed packages to a local directory.
 +
 --
-	*-d*, *--directory* 'dir'::
+	*-d*, *--directory* _dir_::
 		Download all source rpms to this directory. Default is */var/cache/zypper/source-download*.
 
 	*--delete*::
@@ -1629,26 +1650,27 @@ Other Commands
 		Don't download any source rpms, but show which source rpms are missing or extraneous.
 --
 
-*ps*::
+*ps* [OPTIONS]::
 	After each upgrade or removal of packages, there may be running processes on the system which continue to use meanwhile deleted files. *zypper ps* lists all processes using deleted files, together with the corresponding files, and a service name hint, in case it's a known service. This gives a hint which services may need to be restarted after an update. Usually programs which continue to use deleted shared libraries. The list contains the following information:
 +
 --
-[horizontal]
-	*PID*;;		ID of the process
-	*PPID*;;	ID of the parent process
-	*UID*;;		ID of the user running the process
-	*Login*;;	Login name of the user running the process
-	*Command*;;	Command used to execute the process
-	*Service*;;	Service name, if command is associated with a system service
-	*Files*;;	The list of the deleted files
-
+	*PID*:::		ID of the process
+	*PPID*:::	ID of the parent process
+	*UID*:::		ID of the user running the process
+	*Login*:::	Login name of the user running the process
+	*Command*:::	Command used to execute the process
+	*Service*:::	Service name, if command is associated with a system service
+	*Files*:::	The list of the deleted files
+--
++
+--
 	*-s*, *--short*::
 		Create a short table not showing the deleted files. Given twice, show only processes which are associated with a system service. Given three times, list the associated system service names only.
 
-	*--print* 'format'::
-		For each associated system service print 'format' on the standard output, followed by a newline. Any *%s* directive in 'format' is replaced by the system service name.
+	*--print* _format_::
+		For each associated system service print _format_ on the standard output, followed by a newline. Any *%s* directive in _format_ is replaced by the system service name.
 
-	*-d*, *--debugFile* 'filename'::
+	*-d*, *--debugFile* _filename_::
 		Output a file with all proc entries that make it into the final set of used open files. This can be submitted as additional information in a bug report.
 
 	Examples: :: {nop}
@@ -1665,13 +1687,13 @@ Other Commands
 
 *needs-rebooting* ::
 	Checks if the reboot-needed flag was set by a previous update or install of a core library or service.
-	+
-	The reboot-needed flag is set when a package from a predefined list (/etc/zypp/needreboot) is updated or installed. Exit code ZYPPER_EXIT_INF_REBOOT_NEEDED indicates that a reboot is needed, otherwise the exit code is set to ZYPPER_EXIT_OK.
++
+The reboot-needed flag is set when a package from a predefined list (/etc/zypp/needreboot) is updated or installed. Exit code ZYPPER_EXIT_INF_REBOOT_NEEDED indicates that a reboot is needed, otherwise the exit code is set to ZYPPER_EXIT_OK.
 
 
 
-Subommands
-~~~~~~~~~~
+Subcommands
+~~~~~~~~~~~
 *subcommand*::
 	Lists available subcommands in */usr/lib/zypper/commands* and from elsewhere on your *$PATH*. See section *SUBCOMMANDS* for details.
 
@@ -1680,24 +1702,25 @@ GLOBAL OPTIONS
 --------------
 
 *-h*, *--help*::
-	Help. If a 'command' is specified together with *--help* option, command specific help is displayed.
+	Help. If a _command_ is specified together with *--help* option, command specific help is displayed.
 
 *-V*, *--version*::
 	Print zypper version number and exit.
 
-*-c*, *--config* 'file'::
+*-c*, *--config* _file_::
 	Use the specified zypper config file instead of the default *zypper.conf*. Other command line options specified together with *--config* and having their counterpart in the zypper config file are still preferred.
-	+
-	The order of preference with *--config* is as follows:
-
++
+The order of preference with *--config* is as follows:
++
+--
 	. Command line options
-	. *--config 'file'*
+	. *--config* _file_
 	. [*/etc/zypp/zypp.conf*] (system-wide defaults for all libzypp based applications)
-
+--
 +
-{nop}	NOTE: Use and location of the system-wide */etc/zypp/zypp.conf* can not be changed this way. It's mentioned here just because some zypper command line options allow to overwrite system-wide defaults defined in *zypp.conf*.
+NOTE: Use and location of the system-wide */etc/zypp/zypp.conf* can not be changed this way. It's mentioned here just because some zypper command line options allow to overwrite system-wide defaults defined in *zypp.conf*.
 +
-{nop}	See also *FILES* section for more information.
+See also *FILES* section for more information.
 
 *-v*, *--verbose*::
 	Increase verbosity. For debugging output specify this option twice.
@@ -1715,7 +1738,7 @@ GLOBAL OPTIONS
 *-t*, *--terse*::
 	Terse output for machine consumption. Implies *--no-abbrev* and *--no-color*.
 
-*-s*, *--table-style* 'integer'::
+*-s*, *--table-style* _integer_::
 	Choose among different predefined line drawing character sets to use when drawing a table. The table style is identified by an integer number. Style *0* is the default, styles *1*-*9* use combinations of different box drawing characters whose shape may depend on the font the terminal is using. Style *10* separates columns by a colon and style *11* draws no lines at all.
 
 *-n*, *--non-interactive*::
@@ -1730,50 +1753,48 @@ GLOBAL OPTIONS
 *-i*, *--ignore-unknown*::
 	Ignore unknown packages. This option is useful for scripts, because when installing in *--non-interactive* mode zypper expects each command line argument to match at least one known package. Unknown names or globbing expressions with no match are treated as an error unless this option is used.
 
-*-D*, *--reposd-dir* 'dir'::
+*-D*, *--reposd-dir* _dir_::
 	Use the specified directory to look for the repository definition (*.repo*) files. The default value is */etc/zypp/repos.d*.
 
-*-C*, *--cache-dir* 'dir'::
+*-C*, *--cache-dir* _dir_::
 	Use an alternative root directory for all caches. The default value is */var/cache/zypp*.
 
-*--raw-cache-dir* 'dir'::
+*--raw-cache-dir* _dir_::
 	Use the specified directory for storing raw copies of repository metadata files. The default value is */var/cache/zypp/raw*.
 
-*--solv-cache-dir* 'dir'::
+*--solv-cache-dir* _dir_::
 	Use the specified directory to store the repository metadata cache database files (solv files). The default value is */var/cache/zypp/solv*.
 
-*--pkg-cache-dir* 'dir'::
+*--pkg-cache-dir* _dir_::
 	Use the specified directory for storing downloaded rpm packages. (see *addrepo --keep-packages*) The default value is */var/cache/zypp/packages*.
 
-*--userdata* 'string'::
+*--userdata* _string_::
 	User data is expected to be a simple string without special chars or embedded newlines and may serve as transaction id. It will be written to all install history log entries created throughout this specific zypper call. It will also be passed on to zypp plugins executed during commit. This will enable e.g. a btrfs plugin to tag created snapshots with this string. For zypper itself this string has no special meaning.
 
 Repository Options: :: {nop}
 
 *--no-gpg-checks*::
 	Ignore GPG check failures and continue. If a GPG issue occurs when using this option zypper prints and logs a warning and automatically continues without interrupting the operation. Use this option with caution, as you can easily overlook security problems by using it. (see section *GPG checks*)
-	+
-
 
 *--gpg-auto-import-keys*::
 	If new repository signing key is found, do not ask what to do; trust and import it automatically. This option causes that the new key is imported also in non-interactive mode, where it would otherwise got rejected.
 
-*-p*, *--plus-repo* 'URI'::
+*-p*, *--plus-repo* _URI_::
 	Use an additional repository for this operation. The repository aliased tmp# and named by the specified URI will be added for this operation and removed at the end. You can specify this option multiple times.
 
-*--plus-content* 'tag'::
-	Additionally use disabled repositories denoted by 'tag' for this operation. If 'tag' matches a repositories 'alias', 'name' or 'URL', or is a 'keyword' defined in the repositories metadata, the repository will be temporarily enabled for this operation. The repository will then be refreshed and used according to the commands rules. You can specify this option multiple times.
-	+
-	If a disabled repositories metadata are not available in the local cache, they will be downloaded to scan for matching keywords. Otherwise the keyword scan will use the metadata available in the local cache. Only if used together with the *refresh* command, a keyword scan will refresh 'all' disabled repositories.
-	+
+*--plus-content* _tag_::
+	Additionally use disabled repositories denoted by _tag_ for this operation. If _tag_ matches a repositories _alias_, _name_ or _URL_, or is a _keyword_ defined in the repositories metadata, the repository will be temporarily enabled for this operation. The repository will then be refreshed and used according to the commands rules. You can specify this option multiple times.
++
+If a disabled repositories metadata are not available in the local cache, they will be downloaded to scan for matching keywords. Otherwise the keyword scan will use the metadata available in the local cache. Only if used together with the *refresh* command, a keyword scan will refresh _all_ disabled repositories.
+
 	To refresh all disabled repositories metadata: :::
 		*zypper --plus-content '' ref*
-	To include a disabled repository 'repo-debug' in a search: :::
-		*zypper --plus-content repo-debug search* '...'
-	To search only in a disabled repository 'repo-debug': :::
-		*zypper --plus-content repo-debug search -r repo-debug* '...'
-	To enable all repos providing the 'debug' keyword: :::
-		*zypper in --plus-content debug* '{nop} some -debuginfo or -debugsource package'
+	To include a disabled repository _repo-debug_ in a search: :::
+		*zypper --plus-content repo-debug search* _..._
+	To search only in a disabled repository _repo-debug_: :::
+		*zypper --plus-content repo-debug search -r repo-debug* _..._
+	To enable all repos providing the _debug_ keyword: :::
+		*zypper in --plus-content debug* _some -debuginfo or -debugsource package_
 
 *--disable-repositories*::
 	Do not read metadata from repositories. This option will prevent loading of packages from repositories, thus making zypper work only with the installed packages (if *--disable-system-resolvables* was not specified).
@@ -1787,18 +1808,18 @@ Repository Options: :: {nop}
 *--no-remote*::
 	Ignore remote repositories like http, ftp, smb and similar. This makes using zypper easier when being offline. When this option is specified, zypper acts as if the remote repositories were not defined at all.
 
-*--releasever* 'version'::
-	For the current command set the value of the *$releasever* repository variable to 'version'. This can be used to switch to new distribution repositories when performing a distribution upgrade. See the *dist-upgrade* (*dup*) command and section *Repository Management* for more details about using the *$releasever* repository variable.
-	+
+*--releasever* _version_::
+	For the current command set the value of the *$releasever* repository variable to _version_. This can be used to switch to new distribution repositories when performing a distribution upgrade. See the *dist-upgrade* (*dup*) command and section *Repository Management* for more details about using the *$releasever* repository variable.
+
 	To check where you already use *$releasever* call: :::
 		*zypper --releasever @--HERE--@ lr -u*
 
 Target Options: :: {nop}
 
-*-R*, *--root* 'dir'::
+*-R*, *--root* _dir_::
 	Operates on a different root directory. This option influences the location of the repos.d directory and the metadata cache directory and also causes rpm to be run with the *--root* option to do the actual installation or removal of packages. See also the *FILES* section.
 	
-*--installroot* 'dir'::
+*--installroot* _dir_::
 	Behaves like *--root* but shares the repositories with the host system.
 
 *--disable-system-resolvables*::
@@ -1809,13 +1830,13 @@ SUBCOMMANDS
 -----------
 Zypper subcommands are inspired by *git*(1). Subcommands are standalone executables that live in the zypper_execdir (*/usr/lib/zypper/commands*). For subcommands zypper provides a wrapper that knows where the subcommands live, and runs them by passing command options and arguments to them.  If a subcommand is not found in the zypper_execdir, the wrapper will look in the rest of your *$PATH* for it. Thus, it’s possible to write local zypper extensions that don’t live in system space.
 
-This is how to add your own subcommand *zypper 'mytask'*:
+This is how to add your own subcommand *zypper* _mytask_:
 
-- The executable must be named *zypper-*'mytask'.
+- The executable must be named **zypper-**__mytask__.
 
 - The executable must be located your *$PATH*.
 
-- A manpage for *zypper-*'mytask' should be provided and explaining the commands options and return values. It will be shown when calling *zypper help 'mytask'*.
+- A manpage for **zypper-**__mytask__ should be provided and explaining the commands options and return values. It will be shown when calling *zypper help* _mytask_.
 
 - Zypper built-in commands take precedence over subcommands with the same name.
 
@@ -1823,64 +1844,64 @@ This is how to add your own subcommand *zypper 'mytask'*:
 
 You can use the built-in *zypper subcommand* command to get a list of all subcommands in zypper_execdir and from elsewhere on your $PATH.
 
-Using zypper 'global-options' together with subcommands, as well as executing subcommands in *zypper shell* is currently not supported.
+Using zypper _global-options_ together with subcommands, as well as executing subcommands in *zypper shell* is currently not supported.
 
 
 FILES
 -----
 */etc/zypp/zypper.conf*, *$HOME/.zypper.conf*::
-	Global (system-wide) and user's configuration file for 'zypper'. These files are read when zypper starts up and *--config* option is not used.
-	+
-	User's settings are preferred over global settings. Similarly, command line options override the settings in either of these files. To sum it up, the order of preference is as follows (from highest to lowest):
+	Global (system-wide) and user's configuration file for _zypper_. These files are read when zypper starts up and *--config* option is not used.
++
+User's settings are preferred over global settings. Similarly, command line options override the settings in either of these files. To sum it up, the order of preference is as follows (from highest to lowest):
 +
 --
-	. 'Command line options'
+	. _Command line options_
 	. *$HOME/.zypper.conf*
 	. */etc/zypp/zypper.conf*
 	. [*/etc/zypp/zypp.conf*] (system-wide defaults for all libzypp based applications)
 --
 +
-{nop}	See the comments in */etc/zypp/zypper.conf* for a list and description of available options.
+See the comments in */etc/zypp/zypper.conf* for a list and description of available options.
 +
-{nop}	NOTE: The system-wide */etc/zypp/zypp.conf* is mentioned here just because some zypper command line options allow to overwrite system-wide defaults defined there. *zypp.conf* and *zypper.conf* have different content and serve different purpose.
+NOTE: The system-wide */etc/zypp/zypp.conf* is mentioned here just because some zypper command line options allow to overwrite system-wide defaults defined there. *zypp.conf* and *zypper.conf* have different content and serve different purpose.
 
 */etc/zypp/zypp.conf*::
 	ZYpp configuration file affecting all libzypp based applications. See the comments in the file for description of configurable properties. Many locations of files and directories listed in this section are configurable via zypp.conf. The location for this file itself can be redefined only by setting *$ZYPP_CONF* in the environment.
 
 */etc/zypp/locks*::
-	File with package lock definitions, see 'locks(5)' manual page for details. The package lock commands (*addlock*, *removelock*, etc.) can be used to manipulate this file.
-	+
-	This file is used by all ZYpp-based applications.
+	File with package lock definitions, see _locks(5)_ manual page for details. The package lock commands (*addlock*, *removelock*, etc.) can be used to manipulate this file.
++
+This file is used by all ZYpp-based applications.
 
 */etc/zypp/repos.d*::
-	Directory containing repository definition ('\*.repo') files. You can use the Repository Management commands to manipulate these files, or you can edit them yourself. In either case, after doing the modifications, executing *zypper refresh* is strongly recommended.
-	+
-	You can use the *--reposd-dir* global option to use an alternative directory for this purpose or the *--root* option to make this directory relative to the specified root directory.
-	+
-	This directory is used by all ZYpp-based applications.
+	Directory containing repository definition (_\*.repo_) files. You can use the Repository Management commands to manipulate these files, or you can edit them yourself. In either case, after doing the modifications, executing *zypper refresh* is strongly recommended.
++
+You can use the *--reposd-dir* global option to use an alternative directory for this purpose or the *--root* option to make this directory relative to the specified root directory.
++
+This directory is used by all ZYpp-based applications.
 
 */etc/zypp/services.d*::
-	Directory containing service definition ('\*.service') files. You can use the Service Management Commands to manipulate these files, or you can edit them yourself. Running *zypper refs* is recommended after modifications have been done.
-	+
-	This directory is used by all ZYpp-based applications.
+	Directory containing service definition (_\*.service_) files. You can use the Service Management Commands to manipulate these files, or you can edit them yourself. Running *zypper refs* is recommended after modifications have been done.
++
+This directory is used by all ZYpp-based applications.
 
 */usr/lib/zypper/commands*::
 	System directory containing zypper extensions (see section *SUBCOMMANDS*)
 
 */var/cache/zypp/raw*::
 	Directory for storing raw metadata contained in repositories. Use the *--raw-cache-dir* global option to use an alternative directory for this purpose or the *--root* option to make this directory relative to the specified root directory.
-	+
-	This directory is used by all ZYpp-based applications.
++
+This directory is used by all ZYpp-based applications.
 
 */var/cache/zypp/solv*::
-	Directory containing preparsed metadata in form of 'solv' files.
-	+
-	This directory is used by all ZYpp-based applications.
+	Directory containing preparsed metadata in form of _solv_ files.
++
+This directory is used by all ZYpp-based applications.
 
 */var/cache/zypp/packages*::
 	If *keeppackages* property is set for a repository (see the *modifyrepo* command), all the RPM file downloaded during installation will be kept here. See also the *clean* command for cleaning these cache directories.
-	+
-	This directory is used by all ZYpp-based applications.
++
+This directory is used by all ZYpp-based applications.
 
 */var/log/zypp/history*::
 	Installation history log.
@@ -1934,15 +1955,18 @@ There are several exit codes defined for zypper built-in commands for use e.g. w
 	Installation basically succeeded, but some of the packages %post install scripts returned an error. These packages were successfully unpacked to disk and are registered in the rpm database, but due to the failed install script they may not work as expected. The failed scripts output might reveal what actually went wrong. Any scripts output is also logged to */var/log/zypp/history*.
 
 
-Zypper subcommands (see section *SUBCOMMANDS*) may return *different codes* which should be described in the commands man page. Call *zypper help 'subcommand'* to see the subcommands man page if one is provided.
+Zypper subcommands (see section *SUBCOMMANDS*) may return *different codes* which should be described in the commands man page. Call *zypper help* _subcommand_ to see the subcommands man page if one is provided.
+
 
 HOMEPAGE
 --------
 https://github.com/openSUSE/zypper
 
+
 AUTHORS
 -------
 The zypper project was started by Martin Vidner, Jan Kupec, Michael Andres, Duncan Mac-Vicar Prett, Josef Reidinger and Stanislav Visnovsky. Many people have later contributed to it.
+
 
 SEE ALSO
 --------

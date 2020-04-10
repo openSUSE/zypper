@@ -7,5 +7,5 @@
 *-R*, *--no-force-resolution*::
 	Do not force the solver to find a solution. Instead, report dependency problems and prompt the user to resolve them manually. This is the default except when removing packages (*zypper remove*).
 
-*--solver-focus* 'MODE'::
+*--solver-focus* _MODE_::
 	Set the solvers general attitude when resolving a job. Valid modes are *Job*, *Installed* or *Update*. See section *Package Dependencies* for details.
