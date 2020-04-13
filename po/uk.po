@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper.uk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-24 10:02+0100\n"
+"POT-Creation-Date: 2020-04-12 15:27+0200\n"
 "PO-Revision-Date: 2018-07-30 17:07+0000\n"
 "Last-Translator: Mikhail Kasimov <mikhail.kasimov@gmail.com>\n"
 "Language-Team: Ukrainian <https://l10n.opensuse.org/projects/zypper/master/"
@@ -746,7 +746,7 @@ msgstr "Інші команди:"
 msgid "Subcommands:"
 msgstr "Підкоманди:"
 
-#: src/Command.cc:292
+#: src/Command.cc:288
 #, c-format, boost-format
 msgid "Unknown command '%s'"
 msgstr "Невідома команда «%s»"
@@ -2671,7 +2671,7 @@ msgstr[2] "Вилучено %lu блокувань."
 #: src/commands/repos/list.cc:223 src/commands/services/list.cc:105
 #: src/info.cc:58 src/info.cc:446 src/info.cc:692 src/locales.cc:201
 #: src/search.cc:48 src/search.cc:199 src/search.cc:304 src/search.cc:436
-#: src/search.cc:483 src/update.cc:779 src/utils/misc.cc:238
+#: src/search.cc:483 src/update.cc:789 src/utils/misc.cc:324
 msgid "Name"
 msgstr "Назва"
 
@@ -2690,8 +2690,8 @@ msgstr "Тип"
 #. translators: property name; short; used like "Name: value"
 #. translators: package's repository (header)
 #: src/commands/locks/list.cc:138 src/info.cc:56 src/search.cc:56
-#: src/search.cc:306 src/search.cc:435 src/search.cc:479 src/update.cc:776
-#: src/utils/misc.cc:237
+#: src/search.cc:306 src/search.cc:435 src/search.cc:479 src/update.cc:786
+#: src/utils/misc.cc:323
 msgid "Repository"
 msgstr "Сховище"
 
@@ -2863,17 +2863,6 @@ msgstr "Команду '%s' замінено на '%s'."
 #, c-format, boost-format
 msgid "See '%s' for all available options."
 msgstr "Усі доступні параметри наведені в '%s'."
-
-#. translators: command synopsis; do not translate lowercase words
-#: src/commands/nullcommands.cc:67
-msgid "ping [OPTIONS]"
-msgstr "ping [параметри]"
-
-#. translators: command summary
-#. translators: command description
-#: src/commands/nullcommands.cc:69 src/commands/nullcommands.cc:71
-msgid "This command has dummy implementation which always returns 0."
-msgstr "Ця команда має порожнє впровадження, яке завжди повертає 0."
 
 #: src/commands/optionsets.cc:33
 msgid "Don't change anything, just report what would be done."
@@ -4032,27 +4021,22 @@ msgid "Run '%1%' to search in not yet activated remote resources."
 msgstr ""
 
 #. translators: command summary: search, se
-#: src/commands/search/search.cc:86
+#: src/commands/search/search.cc:76
 msgid "Search for packages matching a pattern."
 msgstr "Шукати пакунки, що відповідають шаблону."
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/commands/search/search.cc:94
+#: src/commands/search/search.cc:83
 msgid "search (se) [OPTIONS] [QUERYSTRING] ..."
 msgstr "search (se) [параметри] [рядок запиту] ..."
 
-#. translators: command synopsis; do not translate lowercase words
-#: src/commands/search/search.cc:99
-msgid "patch-search [OPTIONS] [QUERYSTRING...]"
-msgstr "patch-search [параметри] [рядок запиту...]"
-
 #. translators: command description
-#: src/commands/search/search.cc:108
+#: src/commands/search/search.cc:91
 msgid "Search for packages matching any of the given search strings."
 msgstr "Шукати пакунки, які збігаються з даними рядка пошуку"
 
 #. translators: command description
-#: src/commands/search/search.cc:110
+#: src/commands/search/search.cc:93
 msgid ""
 "* and ? wildcards can also be used within search strings. If a search string "
 "is enclosed in '/', it's interpreted as a regular expression."
@@ -4060,117 +4044,112 @@ msgstr ""
 "Також можна використовувати шаблони заміни * і ? для пошуку в рядках. Якщо "
 "рядок пошуку завершується '/', то він інтерпретується як регулярний вираз."
 
-#. translators: command description
-#: src/commands/search/search.cc:115
-msgid "Search for patches matching given search strings."
-msgstr "Шукає латки, що відповідають заданим рядкам пошуку."
-
 #. translators: --match-substrings
-#: src/commands/search/search.cc:126
+#: src/commands/search/search.cc:105
 msgid "Search for a match to partial words (default)."
 msgstr "Збіг з рядками пошуку може включати частини слів (типовий)."
 
 #. translators: --match-words
-#: src/commands/search/search.cc:130
+#: src/commands/search/search.cc:109
 msgid "Search for a match to whole words only."
 msgstr "Збіг з рядками пошуку може включати тільки цілі слова."
 
 #. translators: -x, --match-exact
-#: src/commands/search/search.cc:134
+#: src/commands/search/search.cc:113
 msgid "Searches for an exact match of the search strings."
 msgstr "Шукає за точною збігом рядка пошуку."
 
 #. translators: --provides
-#: src/commands/search/search.cc:146
+#: src/commands/search/search.cc:117
 msgid "Search for packages which provide the search strings."
 msgstr "Шукає пакунки за збігом рядка у полі Надає."
 
 #. translators: --requires
-#: src/commands/search/search.cc:150
+#: src/commands/search/search.cc:121
 msgid "Search for packages which require the search strings."
 msgstr "Шукає пакунки за збігом рядка у полі Вимагає."
 
 #. translators: --recommends
-#: src/commands/search/search.cc:154
+#: src/commands/search/search.cc:125
 msgid "Search for packages which recommend the search strings."
 msgstr "Шукає пакунки за збігом рядка у полі Рекомендує."
 
 #. translators: --supplements
-#: src/commands/search/search.cc:158
+#: src/commands/search/search.cc:129
 msgid "Search for packages which supplement the search strings."
 msgstr "Пошук пакетів, які відповідають строкам для пошуку."
 
 #. translators: --conflicts
-#: src/commands/search/search.cc:162
+#: src/commands/search/search.cc:133
 msgid "Search packages conflicting with search strings."
 msgstr "Шукає пакунки за збігом рядка у полі Конфліктує."
 
 #. translators: --obsoletes
-#: src/commands/search/search.cc:166
+#: src/commands/search/search.cc:137
 msgid "Search for packages which obsolete the search strings."
 msgstr "Шукає пакунки за збігом рядка у полі Робить застарілим."
 
 #. translators: --suggests
-#: src/commands/search/search.cc:170
+#: src/commands/search/search.cc:141
 msgid "Search for packages which suggest the search strings."
 msgstr "Шукає пакунки за збігом рядка у полі Пропонує."
 
 #. translators: --provides-pkg
-#: src/commands/search/search.cc:174
+#: src/commands/search/search.cc:145
 msgid ""
 "Search for all packages that provide any of the provides of the package(s) "
 "matched by the input parameters."
 msgstr ""
 
 #. translators: --requires-pkg
-#: src/commands/search/search.cc:178
+#: src/commands/search/search.cc:149
 msgid ""
 "Search for all packages that require any of the provides of the package(s) "
 "matched by the input parameters."
 msgstr ""
 
 #. translators: --recommends-pkg
-#: src/commands/search/search.cc:182
+#: src/commands/search/search.cc:153
 msgid ""
 "Search for all packages that recommend any of the provides of the package(s) "
 "matched by the input parameters."
 msgstr ""
 
 #. translators: --supplements-pkg
-#: src/commands/search/search.cc:186
+#: src/commands/search/search.cc:157
 msgid ""
 "Search for all packages that supplement any of the provides of the "
 "package(s) matched by the input parameters."
 msgstr ""
 
 #. translators: --conflicts-pkg
-#: src/commands/search/search.cc:190
+#: src/commands/search/search.cc:161
 msgid ""
 "Search for all packages that conflict with any of the package(s) matched by "
 "the input parameters."
 msgstr ""
 
 #. translators: --obsoletes-pkg
-#: src/commands/search/search.cc:194
+#: src/commands/search/search.cc:165
 msgid ""
 "Search for all packages that obsolete any of the package(s) matched by the "
 "input parameters."
 msgstr ""
 
 #. translators: --suggests-pkg
-#: src/commands/search/search.cc:198
+#: src/commands/search/search.cc:169
 msgid ""
 "Search for all packages that suggest any of the provides of the package(s) "
 "matched by the input parameters."
 msgstr ""
 
 #. translators: -t, --type <TYPE>
-#: src/commands/search/search.cc:202
+#: src/commands/search/search.cc:173
 msgid "Search only for packages of the specified type."
 msgstr "Шукати тільки серед пакунків вказаного типу."
 
 #. translators: -n, --name
-#: src/commands/search/search.cc:206
+#: src/commands/search/search.cc:177
 msgid ""
 "Useful together with dependency options, otherwise searching in package name "
 "is default."
@@ -4179,27 +4158,27 @@ msgstr ""
 "назвах пакунків."
 
 #. translators: -f, --file-list
-#: src/commands/search/search.cc:210
+#: src/commands/search/search.cc:181
 msgid "Search for a match in the file list of packages."
 msgstr "Шукає збіг у списку файлів пакунків."
 
 #. translators: -d, --search-descriptions
-#: src/commands/search/search.cc:221
+#: src/commands/search/search.cc:185
 msgid "Search also in package summaries and descriptions."
 msgstr "Також шукає в описах і зведеннях пакунків."
 
 #. translators: -C, --case-sensitive
-#: src/commands/search/search.cc:225
+#: src/commands/search/search.cc:189
 msgid "Perform case-sensitive search."
 msgstr "Шукати з врахуванням регістру літер."
 
 #. translators: -s, --details
-#: src/commands/search/search.cc:234
+#: src/commands/search/search.cc:193
 msgid "Show each available version in each repository on a separate line."
 msgstr "Показувати кожну доступну версію у кожному зі сховищ у окремому рядку."
 
 #. translators: -v, --verbose
-#: src/commands/search/search.cc:238
+#: src/commands/search/search.cc:197
 msgid ""
 "Like --details, with additional information where the search has matched "
 "(useful for search in dependencies)."
@@ -4207,25 +4186,25 @@ msgstr ""
 "Аналогічно --details, з додатковими відомостями про місце збігу (корисно для "
 "пошуку в залежностях)."
 
-#: src/commands/search/search.cc:338 src/repos.cc:782
+#: src/commands/search/search.cc:290 src/repos.cc:782
 #, c-format, boost-format
 msgid "Specified repository '%s' is disabled."
 msgstr "Віддалене сховище '%s' вимкнено."
 
 #. translators: empty search result message
-#: src/commands/search/search.cc:516
+#: src/commands/search/search.cc:463
 msgid "No matching items found."
 msgstr "Збігів не знайдено."
 
-#: src/commands/search/search.cc:553
+#: src/commands/search/search.cc:493
 msgid "Problem occurred initializing or executing the search query"
 msgstr "Під час започаткування та виконання пошукового запиту сталася помилка"
 
-#: src/commands/search/search.cc:554
+#: src/commands/search/search.cc:494
 msgid "See the above message for a hint."
 msgstr "Прочитайте повідомлення розміщене вище, щоб зрозуміти ситуацію краще."
 
-#: src/commands/search/search.cc:555 src/repos.cc:991
+#: src/commands/search/search.cc:495 src/repos.cc:991
 msgid "Running 'zypper refresh' as root might resolve the problem."
 msgstr ""
 "Виконання команди «zypper refresh» від адміністратора може зарадити проблемі."
@@ -5234,7 +5213,7 @@ msgstr "Версія"
 #. translators: property name; short; used like "Name: value"
 #. translators: package architecture (header)
 #: src/info.cc:62 src/search.cc:54 src/search.cc:438 src/search.cc:485
-#: src/update.cc:785
+#: src/update.cc:795
 msgid "Arch"
 msgstr "Арх."
 
@@ -5245,7 +5224,7 @@ msgstr "Постачальник"
 
 #. translators: property name; short; used like "Name: value"
 #. translators: package summary (header)
-#: src/info.cc:70 src/search.cc:201 src/utils/misc.cc:243 src/utils/misc.cc:284
+#: src/info.cc:70 src/search.cc:201 src/utils/misc.cc:330 src/utils/misc.cc:372
 msgid "Summary"
 msgstr "Підсумок"
 
@@ -5289,8 +5268,8 @@ msgid "Installed Size"
 msgstr "Встановлений розмір"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:334 src/info.cc:382 src/info.cc:557 src/utils/misc.cc:242
-#: src/utils/misc.cc:283
+#: src/info.cc:334 src/info.cc:382 src/info.cc:557 src/utils/misc.cc:328
+#: src/utils/misc.cc:370
 msgid "Status"
 msgstr "Стан"
 
@@ -5310,13 +5289,13 @@ msgstr "не встановлено"
 #. translators: property name; short; used like "Name: value"
 #. translator: Table column header.
 #. Name
-#: src/info.cc:384 src/update.cc:398 src/utils/misc.cc:239
-#: src/utils/misc.cc:280
+#: src/info.cc:384 src/update.cc:406 src/utils/misc.cc:325
+#: src/utils/misc.cc:367
 msgid "Category"
 msgstr "Категорія"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:386 src/utils/misc.cc:240 src/utils/misc.cc:281
+#: src/info.cc:386 src/utils/misc.cc:326 src/utils/misc.cc:368
 msgid "Severity"
 msgstr "Серйозність"
 
@@ -5326,7 +5305,7 @@ msgid "Created On"
 msgstr "Створено"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:390 src/utils/misc.cc:241 src/utils/misc.cc:282
+#: src/info.cc:390 src/utils/misc.cc:327 src/utils/misc.cc:369
 msgid "Interactive"
 msgstr "Інтерактивний"
 
@@ -5351,7 +5330,7 @@ msgstr "(порожній)"
 #. TranslatorExplanation S stands for Status
 #: src/info.cc:445 src/info.cc:691 src/locales.cc:199 src/search.cc:46
 #: src/search.cc:198 src/search.cc:303 src/search.cc:434 src/search.cc:478
-#: src/update.cc:774
+#: src/update.cc:784
 msgid "S"
 msgstr "S"
 
@@ -6524,7 +6503,7 @@ msgid "Dependencies of all installed packages are satisfied."
 msgstr "Залежності всіх встановлених пакунків задоволено."
 
 #. translator: stats table header (plural number is %2%)
-#: src/update.cc:328
+#: src/update.cc:336
 #, boost-format
 msgid "Considering %1% out of %2% applicable patches:"
 msgid_plural "Considering %1% out of %2% applicable patches:"
@@ -6533,7 +6512,7 @@ msgstr[1] "Враховуються %1% із %2% застосовних лато
 msgstr[2] "Враховуються %1% із %2% застосовних латок:"
 
 #. translator: stats table header
-#: src/update.cc:332
+#: src/update.cc:340
 #, boost-format
 msgid "Found %1% applicable patch:"
 msgid_plural "Found %1% applicable patches:"
@@ -6542,7 +6521,7 @@ msgstr[1] "Знайдено %1% застосовні латки:"
 msgstr[2] "Знайдено %1% застосовних латок:"
 
 #. translator: stats summary
-#: src/update.cc:342
+#: src/update.cc:350
 #, c-format, boost-format
 msgid "%d patch locked"
 msgid_plural "%d patches locked"
@@ -6551,7 +6530,7 @@ msgstr[1] "заблоковані %d латки"
 msgstr[2] "заблоковано %d латок"
 
 #. translator: stats summary
-#: src/update.cc:350
+#: src/update.cc:358
 #, c-format, boost-format
 msgid "%d patch optional"
 msgid_plural "%d patches optional"
@@ -6561,13 +6540,13 @@ msgstr[2] "%d необов'язкових латок"
 
 #. translator: Hint displayed right adjusted; %1% is a CLI option
 #. "42 patches optional                  (use --with-optional to include optional patches)"
-#: src/update.cc:354
+#: src/update.cc:362
 #, boost-format
 msgid "use '%1%' to include optional patches"
 msgstr "використовуйте '%1%', щоби включити необов'язкові латки"
 
 #. translator: stats summary
-#: src/update.cc:363
+#: src/update.cc:371
 #, c-format, boost-format
 msgid "%d patch needed"
 msgid_plural "%d patches needed"
@@ -6576,7 +6555,7 @@ msgstr[1] "потрібні %d латки"
 msgstr[2] "потрібні %d латок"
 
 #. translator: stats summary
-#: src/update.cc:366
+#: src/update.cc:374
 #, c-format, boost-format
 msgid "%d security patch"
 msgid_plural "%d security patches"
@@ -6585,17 +6564,17 @@ msgstr[1] "%d латки безпеки"
 msgstr[2] "%d латок безпеки"
 
 #. translator: Table column header.
-#: src/update.cc:400
+#: src/update.cc:408
 msgid "Updatestack"
 msgstr "Стек оновлень"
 
 #. translator: Table column header.
-#: src/update.cc:402 src/update.cc:694
+#: src/update.cc:410 src/update.cc:702
 msgid "Patches"
 msgstr "Латки"
 
 #. translator: Table column header.
-#: src/update.cc:404
+#: src/update.cc:412
 msgid "Locked"
 msgstr "Заблоковано"
 
@@ -6604,71 +6583,71 @@ msgstr "Заблоковано"
 #. Category    | Updatestack | Patches | Locked | Included categories
 #. ------------+-------------+---------+--------+---------------------
 #. optional   | ...                      ..... | enhancement, feature
-#: src/update.cc:410
+#: src/update.cc:418
 msgid "Included categories"
 msgstr "Включені категорії"
 
 #. translator: Table headline; 'Needed' refers to patches with status 'needed'
-#: src/update.cc:584
+#: src/update.cc:592
 msgid "Needed software management updates will be installed first:"
 msgstr "Спочатку будуть встановлені оновлення керування ПЗ:"
 
-#: src/update.cc:592 src/update.cc:832
+#: src/update.cc:600 src/update.cc:842
 msgid "No updates found."
 msgstr "Не знайдено оновлень."
 
 #. translator: Table headline
-#: src/update.cc:599
+#: src/update.cc:607
 msgid "The following updates are also available:"
 msgstr "Також наявні наступні оновлення:"
 
-#: src/update.cc:692
+#: src/update.cc:700
 msgid "Package updates"
 msgstr "Оновлення пакунків"
 
-#: src/update.cc:696
+#: src/update.cc:704
 msgid "Pattern updates"
 msgstr "Оновлення шаблона"
 
-#: src/update.cc:698
+#: src/update.cc:706
 msgid "Product updates"
 msgstr "Оновлення продукту"
 
-#: src/update.cc:784
+#: src/update.cc:794
 msgid "Current Version"
 msgstr "Поточна версія"
 
-#: src/update.cc:785
+#: src/update.cc:795
 msgid "Available Version"
 msgstr "Наявна версія"
 
-#: src/update.cc:960
+#: src/update.cc:972
 msgid "No matching issues found."
 msgstr "Збігів не знайдено."
 
-#: src/update.cc:966
+#: src/update.cc:978
 msgid "The following matches in issue numbers have been found:"
 msgstr "Знайдено наступні збіги номерів:"
 
-#: src/update.cc:976
+#: src/update.cc:988
 msgid "Matches in patch descriptions of the following patches have been found:"
 msgstr "Було знайдено збіги в описах наступних пакунків:"
 
-#: src/update.cc:1038
+#: src/update.cc:1050
 #, c-format, boost-format
 msgid "Fix for bugzilla issue number %s was not found or is not needed."
 msgstr ""
 "Не було знайдено (або не потрібне) виправлення для питання bugzilla, номер "
 "%s."
 
-#: src/update.cc:1040
+#: src/update.cc:1052
 #, c-format, boost-format
 msgid "Fix for CVE issue number %s was not found or is not needed."
 msgstr ""
 "Не було знайдено (або не потрібне) виправлення для питання CVE, номер %s."
 
 #. translators: keep '%s issue' together, it's something like 'CVE issue' or 'Bugzilla issue'
-#: src/update.cc:1043
+#: src/update.cc:1055
 #, c-format, boost-format
 msgid "Fix for %s issue number %s was not found or is not needed."
 msgstr "Виправлення для %s проблеми номер %s не знайдено або не потрібне."
@@ -6863,42 +6842,42 @@ msgstr ""
 "У цьому випадку повинен бути встановлений певний пакунок, який забезпечує "
 "підкоманди. Ці пакунки часто називають '%1%' або '%2%'."
 
-#: src/utils/misc.cc:92
+#: src/utils/misc.cc:93
 msgid "package"
 msgid_plural "packages"
 msgstr[0] "пакунок"
 msgstr[1] "пакунки"
 msgstr[2] "пакунків"
 
-#: src/utils/misc.cc:94
+#: src/utils/misc.cc:95
 msgid "pattern"
 msgid_plural "patterns"
 msgstr[0] "шаблон"
 msgstr[1] "шаблони"
 msgstr[2] "шаблонів"
 
-#: src/utils/misc.cc:96
+#: src/utils/misc.cc:97
 msgid "product"
 msgid_plural "product"
 msgstr[0] "продукт"
 msgstr[1] "продукти"
 msgstr[2] "продуктів"
 
-#: src/utils/misc.cc:98
+#: src/utils/misc.cc:99
 msgid "patch"
 msgid_plural "patches"
 msgstr[0] "латка"
 msgstr[1] "латки"
 msgstr[2] "латок"
 
-#: src/utils/misc.cc:100
+#: src/utils/misc.cc:101
 msgid "srcpackage"
 msgid_plural "srcpackages"
 msgstr[0] "пакунок з сирцями"
 msgstr[1] "пакунки з сирцями"
 msgstr[2] "пакунків з сирцями"
 
-#: src/utils/misc.cc:102
+#: src/utils/misc.cc:103
 msgid "application"
 msgid_plural "applications"
 msgstr[0] "програма"
@@ -6906,7 +6885,7 @@ msgstr[1] "програми"
 msgstr[2] "програм"
 
 #. default
-#: src/utils/misc.cc:104
+#: src/utils/misc.cc:105
 msgid "resolvable"
 msgid_plural "resolvables"
 msgstr[0] "потрібний"
@@ -6915,98 +6894,102 @@ msgstr[2] "потрібних"
 
 #. Patch status: i18n + color
 #. translator: patch status
-#: src/utils/misc.cc:113
+#: src/utils/misc.cc:114
 msgid "unwanted"
 msgstr "небажано"
 
 #. translator: patch status
-#: src/utils/misc.cc:114
+#: src/utils/misc.cc:115
 msgid "optional"
 msgstr "необов'язково"
 
 #. translator: patch status
-#: src/utils/misc.cc:115
+#: src/utils/misc.cc:116
 msgid "needed"
 msgstr "потрібні"
 
 #. translator: patch status
-#: src/utils/misc.cc:116
+#: src/utils/misc.cc:117
 msgid "applied"
 msgstr "застосовано"
 
 #. translator: patch status
-#: src/utils/misc.cc:117
+#: src/utils/misc.cc:118
 msgid "not needed"
 msgstr "не потрібні"
 
 #. translator: patch status
-#: src/utils/misc.cc:118
+#: src/utils/misc.cc:119
 msgid "undetermined"
 msgstr "невизначено"
 
 #. pi_r is no patch!
 #. translator: patch status
-#: src/utils/misc.cc:119
+#: src/utils/misc.cc:120
 msgid "retracted"
 msgstr ""
 
+#: src/utils/misc.cc:329 src/utils/misc.cc:371
+msgid "Since"
+msgstr ""
+
 #. << _("Repository")
-#: src/utils/misc.cc:277
+#: src/utils/misc.cc:364
 msgid "Issue"
 msgstr "Питання"
 
-#: src/utils/misc.cc:278
+#: src/utils/misc.cc:365
 msgid "No."
 msgstr "No."
 
-#: src/utils/misc.cc:279
+#: src/utils/misc.cc:366
 msgid "Patch"
 msgstr "Латка"
 
-#: src/utils/misc.cc:355
+#: src/utils/misc.cc:444
 msgid "Specified local path does not exist or is not accessible."
 msgstr "Вказаний локальний шлях або не існує, або доступ до нього неможливий."
 
-#: src/utils/misc.cc:367
+#: src/utils/misc.cc:456
 msgid "Given URI is invalid"
 msgstr "Вказана адреса URI - нечинна"
 
 #. Guess failed:
 #. translators: don't translate '<platform>'
-#: src/utils/misc.cc:457
+#: src/utils/misc.cc:546
 msgid "Unable to guess a value for <platform>."
 msgstr "Неможливо вгадати значення для <platform>."
 
-#: src/utils/misc.cc:458
+#: src/utils/misc.cc:547
 msgid "Please use obs://<project>/<platform>"
 msgstr "Вживайте obs://<проект>/<платформа>"
 
-#: src/utils/misc.cc:459 src/utils/misc.cc:496
+#: src/utils/misc.cc:548 src/utils/misc.cc:585
 #, c-format, boost-format
 msgid "Example: %s"
 msgstr "Приклад: %s"
 
-#: src/utils/misc.cc:495
+#: src/utils/misc.cc:584
 msgid "Invalid OBS URI."
 msgstr "Не чинний OBS URI."
 
-#: src/utils/misc.cc:495
+#: src/utils/misc.cc:584
 msgid "Correct form is obs://<project>/[platform]"
 msgstr "Коректна форма — obs://<проект>/[платформа]"
 
-#: src/utils/misc.cc:545
+#: src/utils/misc.cc:634
 msgid "Problem copying the specified RPM file to the cache directory."
 msgstr "Проблема з копіюванням зазначеного файла RPM до теки кеша."
 
-#: src/utils/misc.cc:546
+#: src/utils/misc.cc:635
 msgid "Perhaps you are running out of disk space."
 msgstr "Можливо, ви вичерпали вільне місце на диску."
 
-#: src/utils/misc.cc:554
+#: src/utils/misc.cc:643
 msgid "Problem retrieving the specified RPM file"
 msgstr "Проблема із звантаженням зазначеного файла RPM"
 
-#: src/utils/misc.cc:555
+#: src/utils/misc.cc:644
 msgid "Please check whether the file is accessible."
 msgstr "Будь ласка, перевірте чи доступний файл."
 
@@ -7111,6 +7094,18 @@ msgid ""
 "If nothing else works enter '#1' to select the 1st option, '#2' for the 2nd "
 "one, ..."
 msgstr ""
+
+#~ msgid "ping [OPTIONS]"
+#~ msgstr "ping [параметри]"
+
+#~ msgid "This command has dummy implementation which always returns 0."
+#~ msgstr "Ця команда має порожнє впровадження, яке завжди повертає 0."
+
+#~ msgid "patch-search [OPTIONS] [QUERYSTRING...]"
+#~ msgstr "patch-search [параметри] [рядок запиту...]"
+
+#~ msgid "Search for patches matching given search strings."
+#~ msgstr "Шукає латки, що відповідають заданим рядкам пошуку."
 
 #~ msgid ""
 #~ "The following package had to be excluded from file conflicts check "

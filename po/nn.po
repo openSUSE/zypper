@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-24 10:02+0100\n"
+"POT-Creation-Date: 2020-04-12 15:27+0200\n"
 "PO-Revision-Date: 2018-07-13 21:04+0000\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <https://l10n.opensuse.org/projects/zypper/"
@@ -730,7 +730,7 @@ msgstr "Andre kommandoar:"
 msgid "Subcommands:"
 msgstr "Underkommandoar:"
 
-#: src/Command.cc:292
+#: src/Command.cc:288
 #, c-format, boost-format
 msgid "Unknown command '%s'"
 msgstr "Ukjend kommando «%s»"
@@ -2538,7 +2538,7 @@ msgstr[1] "Fjerna %lu låsar."
 #: src/commands/repos/list.cc:223 src/commands/services/list.cc:105
 #: src/info.cc:58 src/info.cc:446 src/info.cc:692 src/locales.cc:201
 #: src/search.cc:48 src/search.cc:199 src/search.cc:304 src/search.cc:436
-#: src/search.cc:483 src/update.cc:779 src/utils/misc.cc:238
+#: src/search.cc:483 src/update.cc:789 src/utils/misc.cc:324
 msgid "Name"
 msgstr "Namn"
 
@@ -2557,8 +2557,8 @@ msgstr "Type"
 #. translators: property name; short; used like "Name: value"
 #. translators: package's repository (header)
 #: src/commands/locks/list.cc:138 src/info.cc:56 src/search.cc:56
-#: src/search.cc:306 src/search.cc:435 src/search.cc:479 src/update.cc:776
-#: src/utils/misc.cc:237
+#: src/search.cc:306 src/search.cc:435 src/search.cc:479 src/update.cc:786
+#: src/utils/misc.cc:323
 msgid "Repository"
 msgstr "Pakkebrønn"
 
@@ -2729,17 +2729,6 @@ msgstr "Kommandoen «%s» er no erstatta av «%s»."
 #, c-format, boost-format
 msgid "See '%s' for all available options."
 msgstr "Sjå «%s» for oversikt over alle tilgjengelege val."
-
-#. translators: command synopsis; do not translate lowercase words
-#: src/commands/nullcommands.cc:67
-msgid "ping [OPTIONS]"
-msgstr ""
-
-#. translators: command summary
-#. translators: command description
-#: src/commands/nullcommands.cc:69 src/commands/nullcommands.cc:71
-msgid "This command has dummy implementation which always returns 0."
-msgstr ""
 
 #: src/commands/optionsets.cc:33
 msgid "Don't change anything, just report what would be done."
@@ -3880,194 +3869,184 @@ msgid "Run '%1%' to search in not yet activated remote resources."
 msgstr ""
 
 #. translators: command summary: search, se
-#: src/commands/search/search.cc:86
+#: src/commands/search/search.cc:76
 msgid "Search for packages matching a pattern."
 msgstr "Søk etter pakkar i samsvar med mønster."
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/commands/search/search.cc:94
+#: src/commands/search/search.cc:83
 msgid "search (se) [OPTIONS] [QUERYSTRING] ..."
 msgstr ""
 
-#. translators: command synopsis; do not translate lowercase words
-#: src/commands/search/search.cc:99
-msgid "patch-search [OPTIONS] [QUERYSTRING...]"
-msgstr ""
-
 #. translators: command description
-#: src/commands/search/search.cc:108
+#: src/commands/search/search.cc:91
 msgid "Search for packages matching any of the given search strings."
 msgstr ""
 
 #. translators: command description
-#: src/commands/search/search.cc:110
+#: src/commands/search/search.cc:93
 msgid ""
 "* and ? wildcards can also be used within search strings. If a search string "
 "is enclosed in '/', it's interpreted as a regular expression."
 msgstr ""
 
-#. translators: command description
-#: src/commands/search/search.cc:115
-msgid "Search for patches matching given search strings."
-msgstr ""
-
 #. translators: --match-substrings
-#: src/commands/search/search.cc:126
+#: src/commands/search/search.cc:105
 msgid "Search for a match to partial words (default)."
 msgstr ""
 
 #. translators: --match-words
-#: src/commands/search/search.cc:130
+#: src/commands/search/search.cc:109
 msgid "Search for a match to whole words only."
 msgstr ""
 
 #. translators: -x, --match-exact
-#: src/commands/search/search.cc:134
+#: src/commands/search/search.cc:113
 msgid "Searches for an exact match of the search strings."
 msgstr ""
 
 #. translators: --provides
-#: src/commands/search/search.cc:146
+#: src/commands/search/search.cc:117
 msgid "Search for packages which provide the search strings."
 msgstr ""
 
 #. translators: --requires
-#: src/commands/search/search.cc:150
+#: src/commands/search/search.cc:121
 msgid "Search for packages which require the search strings."
 msgstr ""
 
 #. translators: --recommends
-#: src/commands/search/search.cc:154
+#: src/commands/search/search.cc:125
 msgid "Search for packages which recommend the search strings."
 msgstr ""
 
 #. translators: --supplements
-#: src/commands/search/search.cc:158
+#: src/commands/search/search.cc:129
 msgid "Search for packages which supplement the search strings."
 msgstr ""
 
 #. translators: --conflicts
-#: src/commands/search/search.cc:162
+#: src/commands/search/search.cc:133
 msgid "Search packages conflicting with search strings."
 msgstr ""
 
 #. translators: --obsoletes
-#: src/commands/search/search.cc:166
+#: src/commands/search/search.cc:137
 msgid "Search for packages which obsolete the search strings."
 msgstr ""
 
 #. translators: --suggests
-#: src/commands/search/search.cc:170
+#: src/commands/search/search.cc:141
 msgid "Search for packages which suggest the search strings."
 msgstr ""
 
 #. translators: --provides-pkg
-#: src/commands/search/search.cc:174
+#: src/commands/search/search.cc:145
 msgid ""
 "Search for all packages that provide any of the provides of the package(s) "
 "matched by the input parameters."
 msgstr ""
 
 #. translators: --requires-pkg
-#: src/commands/search/search.cc:178
+#: src/commands/search/search.cc:149
 msgid ""
 "Search for all packages that require any of the provides of the package(s) "
 "matched by the input parameters."
 msgstr ""
 
 #. translators: --recommends-pkg
-#: src/commands/search/search.cc:182
+#: src/commands/search/search.cc:153
 msgid ""
 "Search for all packages that recommend any of the provides of the package(s) "
 "matched by the input parameters."
 msgstr ""
 
 #. translators: --supplements-pkg
-#: src/commands/search/search.cc:186
+#: src/commands/search/search.cc:157
 msgid ""
 "Search for all packages that supplement any of the provides of the "
 "package(s) matched by the input parameters."
 msgstr ""
 
 #. translators: --conflicts-pkg
-#: src/commands/search/search.cc:190
+#: src/commands/search/search.cc:161
 msgid ""
 "Search for all packages that conflict with any of the package(s) matched by "
 "the input parameters."
 msgstr ""
 
 #. translators: --obsoletes-pkg
-#: src/commands/search/search.cc:194
+#: src/commands/search/search.cc:165
 msgid ""
 "Search for all packages that obsolete any of the package(s) matched by the "
 "input parameters."
 msgstr ""
 
 #. translators: --suggests-pkg
-#: src/commands/search/search.cc:198
+#: src/commands/search/search.cc:169
 msgid ""
 "Search for all packages that suggest any of the provides of the package(s) "
 "matched by the input parameters."
 msgstr ""
 
 #. translators: -t, --type <TYPE>
-#: src/commands/search/search.cc:202
+#: src/commands/search/search.cc:173
 msgid "Search only for packages of the specified type."
 msgstr ""
 
 #. translators: -n, --name
-#: src/commands/search/search.cc:206
+#: src/commands/search/search.cc:177
 msgid ""
 "Useful together with dependency options, otherwise searching in package name "
 "is default."
 msgstr ""
 
 #. translators: -f, --file-list
-#: src/commands/search/search.cc:210
+#: src/commands/search/search.cc:181
 msgid "Search for a match in the file list of packages."
 msgstr ""
 
 #. translators: -d, --search-descriptions
-#: src/commands/search/search.cc:221
+#: src/commands/search/search.cc:185
 msgid "Search also in package summaries and descriptions."
 msgstr ""
 
 #. translators: -C, --case-sensitive
-#: src/commands/search/search.cc:225
+#: src/commands/search/search.cc:189
 msgid "Perform case-sensitive search."
 msgstr ""
 
 #. translators: -s, --details
-#: src/commands/search/search.cc:234
+#: src/commands/search/search.cc:193
 msgid "Show each available version in each repository on a separate line."
 msgstr ""
 
 #. translators: -v, --verbose
-#: src/commands/search/search.cc:238
+#: src/commands/search/search.cc:197
 msgid ""
 "Like --details, with additional information where the search has matched "
 "(useful for search in dependencies)."
 msgstr ""
 
-#: src/commands/search/search.cc:338 src/repos.cc:782
+#: src/commands/search/search.cc:290 src/repos.cc:782
 #, c-format, boost-format
 msgid "Specified repository '%s' is disabled."
 msgstr "Den valde pakkebrønnen «%s» er uverksam."
 
 #. translators: empty search result message
-#: src/commands/search/search.cc:516
+#: src/commands/search/search.cc:463
 msgid "No matching items found."
 msgstr "Fann ikkje nokon samsvarande element."
 
-#: src/commands/search/search.cc:553
+#: src/commands/search/search.cc:493
 msgid "Problem occurred initializing or executing the search query"
 msgstr "Det oppstod ein feil ved klargjering eller køyring av søket"
 
-#: src/commands/search/search.cc:554
+#: src/commands/search/search.cc:494
 msgid "See the above message for a hint."
 msgstr "Sjå feilmeldinga ovanfor for eit hint."
 
-#: src/commands/search/search.cc:555 src/repos.cc:991
+#: src/commands/search/search.cc:495 src/repos.cc:991
 msgid "Running 'zypper refresh' as root might resolve the problem."
 msgstr "Det kan hjelpa å køyra «zypper refresh» som rotbrukar."
 
@@ -5069,7 +5048,7 @@ msgstr "Versjon"
 #. translators: property name; short; used like "Name: value"
 #. translators: package architecture (header)
 #: src/info.cc:62 src/search.cc:54 src/search.cc:438 src/search.cc:485
-#: src/update.cc:785
+#: src/update.cc:795
 msgid "Arch"
 msgstr "Arkitektur"
 
@@ -5080,7 +5059,7 @@ msgstr "Leverandør"
 
 #. translators: property name; short; used like "Name: value"
 #. translators: package summary (header)
-#: src/info.cc:70 src/search.cc:201 src/utils/misc.cc:243 src/utils/misc.cc:284
+#: src/info.cc:70 src/search.cc:201 src/utils/misc.cc:330 src/utils/misc.cc:372
 msgid "Summary"
 msgstr "Samandrag"
 
@@ -5123,8 +5102,8 @@ msgid "Installed Size"
 msgstr "Installert storleik"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:334 src/info.cc:382 src/info.cc:557 src/utils/misc.cc:242
-#: src/utils/misc.cc:283
+#: src/info.cc:334 src/info.cc:382 src/info.cc:557 src/utils/misc.cc:328
+#: src/utils/misc.cc:370
 msgid "Status"
 msgstr "Status"
 
@@ -5144,13 +5123,13 @@ msgstr "ikkje installert"
 #. translators: property name; short; used like "Name: value"
 #. translator: Table column header.
 #. Name
-#: src/info.cc:384 src/update.cc:398 src/utils/misc.cc:239
-#: src/utils/misc.cc:280
+#: src/info.cc:384 src/update.cc:406 src/utils/misc.cc:325
+#: src/utils/misc.cc:367
 msgid "Category"
 msgstr "Kategori"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:386 src/utils/misc.cc:240 src/utils/misc.cc:281
+#: src/info.cc:386 src/utils/misc.cc:326 src/utils/misc.cc:368
 msgid "Severity"
 msgstr "Alvorsgrad"
 
@@ -5160,7 +5139,7 @@ msgid "Created On"
 msgstr "Oppretta"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:390 src/utils/misc.cc:241 src/utils/misc.cc:282
+#: src/info.cc:390 src/utils/misc.cc:327 src/utils/misc.cc:369
 msgid "Interactive"
 msgstr "Interaktiv"
 
@@ -5185,7 +5164,7 @@ msgstr "(tom)"
 #. TranslatorExplanation S stands for Status
 #: src/info.cc:445 src/info.cc:691 src/locales.cc:199 src/search.cc:46
 #: src/search.cc:198 src/search.cc:303 src/search.cc:434 src/search.cc:478
-#: src/update.cc:774
+#: src/update.cc:784
 msgid "S"
 msgstr "S"
 
@@ -6331,7 +6310,7 @@ msgid "Dependencies of all installed packages are satisfied."
 msgstr "Avhengnadane til alle installerte pakkar er tilfredsstilte."
 
 #. translator: stats table header (plural number is %2%)
-#: src/update.cc:328
+#: src/update.cc:336
 #, boost-format
 msgid "Considering %1% out of %2% applicable patches:"
 msgid_plural "Considering %1% out of %2% applicable patches:"
@@ -6339,7 +6318,7 @@ msgstr[0] "Vurderer %1% av %2% aktuelle programfiksar:"
 msgstr[1] "Vurderer %1% av %2% aktuelle programfiksar:"
 
 #. translator: stats table header
-#: src/update.cc:332
+#: src/update.cc:340
 #, boost-format
 msgid "Found %1% applicable patch:"
 msgid_plural "Found %1% applicable patches:"
@@ -6347,7 +6326,7 @@ msgstr[0] "Fann %1% aktuell programfiks:"
 msgstr[1] "Fann %1% aktuelle programfiksar:"
 
 #. translator: stats summary
-#: src/update.cc:342
+#: src/update.cc:350
 #, c-format, boost-format
 msgid "%d patch locked"
 msgid_plural "%d patches locked"
@@ -6355,7 +6334,7 @@ msgstr[0] "%d låst programfiks"
 msgstr[1] "%d låste programfiksar"
 
 #. translator: stats summary
-#: src/update.cc:350
+#: src/update.cc:358
 #, c-format, boost-format
 msgid "%d patch optional"
 msgid_plural "%d patches optional"
@@ -6364,13 +6343,13 @@ msgstr[1] "%d valfrie programfiksar"
 
 #. translator: Hint displayed right adjusted; %1% is a CLI option
 #. "42 patches optional                  (use --with-optional to include optional patches)"
-#: src/update.cc:354
+#: src/update.cc:362
 #, boost-format
 msgid "use '%1%' to include optional patches"
 msgstr "bruk «%1%» for å ta med valfrie programfiksar"
 
 #. translator: stats summary
-#: src/update.cc:363
+#: src/update.cc:371
 #, c-format, boost-format
 msgid "%d patch needed"
 msgid_plural "%d patches needed"
@@ -6378,7 +6357,7 @@ msgstr[0] "%d nødvendig programfiks"
 msgstr[1] "%d nødvendige programfiksar"
 
 #. translator: stats summary
-#: src/update.cc:366
+#: src/update.cc:374
 #, c-format, boost-format
 msgid "%d security patch"
 msgid_plural "%d security patches"
@@ -6386,17 +6365,17 @@ msgstr[0] "%d tryggleiksoppdatering"
 msgstr[1] "%d tryggleiksoppdateringar"
 
 #. translator: Table column header.
-#: src/update.cc:400
+#: src/update.cc:408
 msgid "Updatestack"
 msgstr "Oppdateringsstabel"
 
 #. translator: Table column header.
-#: src/update.cc:402 src/update.cc:694
+#: src/update.cc:410 src/update.cc:702
 msgid "Patches"
 msgstr "Programfiksar"
 
 #. translator: Table column header.
-#: src/update.cc:404
+#: src/update.cc:412
 msgid "Locked"
 msgstr "Låst"
 
@@ -6405,64 +6384,64 @@ msgstr "Låst"
 #. Category    | Updatestack | Patches | Locked | Included categories
 #. ------------+-------------+---------+--------+---------------------
 #. optional   | ...                      ..... | enhancement, feature
-#: src/update.cc:410
+#: src/update.cc:418
 msgid "Included categories"
 msgstr "Brukte kategoriar"
 
 #. translator: Table headline; 'Needed' refers to patches with status 'needed'
-#: src/update.cc:584
+#: src/update.cc:592
 msgid "Needed software management updates will be installed first:"
 msgstr "Nødvendige pakkehandsamingsoppdateringar vert installerte først:"
 
-#: src/update.cc:592 src/update.cc:832
+#: src/update.cc:600 src/update.cc:842
 msgid "No updates found."
 msgstr "Fann ikkje nokon oppdateringar."
 
 #. translator: Table headline
-#: src/update.cc:599
+#: src/update.cc:607
 msgid "The following updates are also available:"
 msgstr "Desse oppdateringane er òg tilgjengelege:"
 
-#: src/update.cc:692
+#: src/update.cc:700
 msgid "Package updates"
 msgstr "Pakkeoppdateringar"
 
-#: src/update.cc:696
+#: src/update.cc:704
 msgid "Pattern updates"
 msgstr "Mønsteroppdateringar"
 
-#: src/update.cc:698
+#: src/update.cc:706
 msgid "Product updates"
 msgstr "Produktoppdateringar"
 
-#: src/update.cc:784
+#: src/update.cc:794
 msgid "Current Version"
 msgstr "Gjeldande versjon"
 
-#: src/update.cc:785
+#: src/update.cc:795
 msgid "Available Version"
 msgstr "Tilgjengelege versjon"
 
-#: src/update.cc:960
+#: src/update.cc:972
 msgid "No matching issues found."
 msgstr "Fann ikkje nokon samsvarande feilrapportar."
 
-#: src/update.cc:966
+#: src/update.cc:978
 msgid "The following matches in issue numbers have been found:"
 msgstr "Fann treff i følgjande feilrapport-ID-ar:"
 
-#: src/update.cc:976
+#: src/update.cc:988
 msgid "Matches in patch descriptions of the following patches have been found:"
 msgstr "Fann treff i programfiksskildringar til desse programfiksane:"
 
-#: src/update.cc:1038
+#: src/update.cc:1050
 #, c-format, boost-format
 msgid "Fix for bugzilla issue number %s was not found or is not needed."
 msgstr ""
 "Programfiks for Bugzilla-feilrapport-ID %s vart ikkje funnen eller er ikkje "
 "nødvendig."
 
-#: src/update.cc:1040
+#: src/update.cc:1052
 #, c-format, boost-format
 msgid "Fix for CVE issue number %s was not found or is not needed."
 msgstr ""
@@ -6470,7 +6449,7 @@ msgstr ""
 "nødvendig."
 
 #. translators: keep '%s issue' together, it's something like 'CVE issue' or 'Bugzilla issue'
-#: src/update.cc:1043
+#: src/update.cc:1055
 #, c-format, boost-format
 msgid "Fix for %s issue number %s was not found or is not needed."
 msgstr ""
@@ -6668,44 +6647,44 @@ msgstr ""
 "I så fall må du installera ein eigen pakke som gjev støtte for "
 "underkommandoen. Desse pakkane har ofte namn som «%1%» eller «%2%»."
 
-#: src/utils/misc.cc:92
+#: src/utils/misc.cc:93
 msgid "package"
 msgid_plural "packages"
 msgstr[0] "pakke"
 msgstr[1] "pakkar"
 
-#: src/utils/misc.cc:94
+#: src/utils/misc.cc:95
 msgid "pattern"
 msgid_plural "patterns"
 msgstr[0] "mønster"
 msgstr[1] "mønster"
 
-#: src/utils/misc.cc:96
+#: src/utils/misc.cc:97
 msgid "product"
 msgid_plural "product"
 msgstr[0] "produkt"
 msgstr[1] "produkt"
 
-#: src/utils/misc.cc:98
+#: src/utils/misc.cc:99
 msgid "patch"
 msgid_plural "patches"
 msgstr[0] "programfiks"
 msgstr[1] "programfiksar"
 
-#: src/utils/misc.cc:100
+#: src/utils/misc.cc:101
 msgid "srcpackage"
 msgid_plural "srcpackages"
 msgstr[0] "kjeldepakke"
 msgstr[1] "kjeldepakkar"
 
-#: src/utils/misc.cc:102
+#: src/utils/misc.cc:103
 msgid "application"
 msgid_plural "applications"
 msgstr[0] "program"
 msgstr[1] "program"
 
 #. default
-#: src/utils/misc.cc:104
+#: src/utils/misc.cc:105
 msgid "resolvable"
 msgid_plural "resolvables"
 msgstr[0] "element"
@@ -6713,99 +6692,103 @@ msgstr[1] "element"
 
 #. Patch status: i18n + color
 #. translator: patch status
-#: src/utils/misc.cc:113
+#: src/utils/misc.cc:114
 msgid "unwanted"
 msgstr "uønskt"
 
 #. translator: patch status
-#: src/utils/misc.cc:114
+#: src/utils/misc.cc:115
 msgid "optional"
 msgstr "valfri"
 
 #. translator: patch status
-#: src/utils/misc.cc:115
+#: src/utils/misc.cc:116
 msgid "needed"
 msgstr "nødvendig"
 
 #. translator: patch status
-#: src/utils/misc.cc:116
+#: src/utils/misc.cc:117
 msgid "applied"
 msgstr "brukt"
 
 #. translator: patch status
-#: src/utils/misc.cc:117
+#: src/utils/misc.cc:118
 msgid "not needed"
 msgstr "ikkje nødvendig"
 
 #. translator: patch status
-#: src/utils/misc.cc:118
+#: src/utils/misc.cc:119
 msgid "undetermined"
 msgstr "uavklart"
 
 #. pi_r is no patch!
 #. translator: patch status
-#: src/utils/misc.cc:119
+#: src/utils/misc.cc:120
 msgid "retracted"
 msgstr ""
 
+#: src/utils/misc.cc:329 src/utils/misc.cc:371
+msgid "Since"
+msgstr ""
+
 #. << _("Repository")
-#: src/utils/misc.cc:277
+#: src/utils/misc.cc:364
 msgid "Issue"
 msgstr "Feilrapport"
 
-#: src/utils/misc.cc:278
+#: src/utils/misc.cc:365
 msgid "No."
 msgstr "Nr."
 
-#: src/utils/misc.cc:279
+#: src/utils/misc.cc:366
 msgid "Patch"
 msgstr "Programfiks"
 
-#: src/utils/misc.cc:355
+#: src/utils/misc.cc:444
 msgid "Specified local path does not exist or is not accessible."
 msgstr ""
 "Den valde lokale adressa finst ikkje, eller så har du ikkje tilgang til ho."
 
-#: src/utils/misc.cc:367
+#: src/utils/misc.cc:456
 msgid "Given URI is invalid"
 msgstr "Den valde nettadressa er ugyldig"
 
 #. Guess failed:
 #. translators: don't translate '<platform>'
-#: src/utils/misc.cc:457
+#: src/utils/misc.cc:546
 msgid "Unable to guess a value for <platform>."
 msgstr "Klarte ikkje gjetta verdi for <platform>."
 
-#: src/utils/misc.cc:458
+#: src/utils/misc.cc:547
 msgid "Please use obs://<project>/<platform>"
 msgstr "Bruk obs://<prosjekt>/<plattform>"
 
-#: src/utils/misc.cc:459 src/utils/misc.cc:496
+#: src/utils/misc.cc:548 src/utils/misc.cc:585
 #, c-format, boost-format
 msgid "Example: %s"
 msgstr "Eksempel: %s"
 
-#: src/utils/misc.cc:495
+#: src/utils/misc.cc:584
 msgid "Invalid OBS URI."
 msgstr "Ugyldig OBS-adresse."
 
-#: src/utils/misc.cc:495
+#: src/utils/misc.cc:584
 msgid "Correct form is obs://<project>/[platform]"
 msgstr "Rett format er obs://<prosjekt>/[plattform]"
 
-#: src/utils/misc.cc:545
+#: src/utils/misc.cc:634
 msgid "Problem copying the specified RPM file to the cache directory."
 msgstr "Feil ved kopiering av den valde RPM-fila til mellomlagermappa."
 
-#: src/utils/misc.cc:546
+#: src/utils/misc.cc:635
 msgid "Perhaps you are running out of disk space."
 msgstr "Det kan vera at du ikkje nok ledig diskplass."
 
-#: src/utils/misc.cc:554
+#: src/utils/misc.cc:643
 msgid "Problem retrieving the specified RPM file"
 msgstr "Feil ved henting av den valde RPM-fila"
 
-#: src/utils/misc.cc:555
+#: src/utils/misc.cc:644
 msgid "Please check whether the file is accessible."
 msgstr "Sjå til at fila er tilgjengeleg."
 
