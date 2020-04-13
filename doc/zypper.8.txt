@@ -164,8 +164,8 @@ If invoked with a _command_ name argument, zypper displays help for the specifie
 +
 For your convenience, *zypper help* can also be invoked in any of the following ways:
 
-	;; $ *zypper -h*|*--help* [_command_]
-	;; $ *zypper* [_command_] *-h*|*--help*
+	{nop}::: $ *zypper -h*|*--help* [_command_]
+	{nop}::: $ *zypper* [_command_] *-h*|*--help*
 
 
 *shell* (*sh*)::
@@ -211,13 +211,13 @@ For each specified package, zypper finds the best available version in defined r
 
 	Examples: :: {nop}
 
-		$ *zypper info workrave*;;
+		$ *zypper info workrave*:::
 		Show information about _package workrave_
 
-		$ *zypper info -t patch libzypp*;;
+		$ *zypper info -t patch libzypp*:::
 		Show information about _patch libzypp_
 
-		$ *zypper info -t pattern lamp_server*;;
+		$ *zypper info -t pattern lamp_server*:::
 		Show information about _pattern lamp_server_
 --
 
@@ -339,15 +339,15 @@ include::{incdir}/option_Solver_Flags_Installs.txt[]
 
 	Examples: :: {nop}
 
-		$ *zypper install -t pattern lamp_server*;;
+		$ *zypper install -t pattern lamp_server*:::
 		Install lamp_server pattern.
 
-		$ *zypper install --no-recommends gv*;;
+		$ *zypper install --no-recommends gv*:::
 		Install GhostScript viewer, but ignore recommended packages.
 
-		$ *zypper install virtualbox-ose-2.0.6*;; {nop}
-		$ *zypper install virtualbox-ose=2.0.6*;; {nop}
-		$ *zypper install virtualbox-ose = 2.0.6*;;
+		$ *zypper install virtualbox-ose-2.0.6*::: {nop}
+		$ *zypper install virtualbox-ose=2.0.6*::: {nop}
+		$ *zypper install virtualbox-ose = 2.0.6*:::
 		Install version 2.0.6 of virtualbox-ose package.
 --
 
@@ -358,7 +358,8 @@ This command will try to find the newest available versions of the source packag
 +
 Note that the source packages must be available in repositories you are using. You can check whether a repository contains any source packages using the following command:
 
-	;; $ *zypper search -t srcpackage -r* _alias_|_name_|_#_|_URI_
+		{nop}::: $ *zypper search -t srcpackage -r* _alias_|_name_|_#_|_URI_
+		{nop}::: $ *zypper search -t srcpackage -r* _alias_|_name_|_#_|_URI_
 
 +
 --
@@ -376,7 +377,7 @@ Note that the source packages must be available in repositories you are using. Y
 
 	Examples: :: {nop}
 
-		$ *zypper si -d dbus-1*;;
+		$ *zypper si -d dbus-1*:::
 		Install build dependencies of dbus-1 source package.
 --
 
@@ -754,7 +755,7 @@ include::{incdir}/option_Solver_Flags_Installs.txt[]
 
 	Examples: :: {nop}
 
-		$ *zypper dup --from factory --from packman*;;
+		$ *zypper dup --from factory --from packman*:::
 		Upgrade the system to the latest versions provided by the _factory_ and _packman_ repositories.
 --
 
@@ -878,13 +879,13 @@ See also the type-specific query commands like *packages*, *patterns*, etc.
 
 	Examples: :: {nop}
 
-		$ *zypper se \'yast+++*+++'*;;
+		$ *zypper se \'yast+++*+++'*:::
 		Search for YaST packages (quote the string to prevent the shell from expanding the wildcard).
 
-		$ *zypper se -s --match-exact kernel-default*;;
+		$ *zypper se -s --match-exact kernel-default*:::
 		Show all available versions of package kernel-default
 
-		$ *zypper se -dC --match-words RSI*;;
+		$ *zypper se -dC --match-words RSI*:::
 		Look for RSI acronym (case-sensitively), also in summaries and descriptions.
 --
 
@@ -966,8 +967,7 @@ The option may be specified multiple times.
 
 	Examples: :: {nop}
 
-		$ *zypper -x pd --xmlfwd name --xmlfwd register/target*;;
-		{nop}
+		$ *zypper -x pd --xmlfwd name --xmlfwd register/target*::: {nop}
 --
 
 *what-provides* (*wp*) _capability_::
@@ -976,9 +976,9 @@ The option may be specified multiple times.
 --
 	The command line is automatically transformed into the appropriate *search* command, e.g.: :: {nop}
 
-		$ *zypper what-provides \'zypper>1.6'*;; {nop}
+		$ *zypper what-provides \'zypper>1.6'*::: {nop}
 
-		$ *zypper se --provides --match-exact \'zypper>1.6'*;; {nop}
+		$ *zypper se --provides --match-exact \'zypper>1.6'*::: {nop}
 --
 
 
@@ -1038,7 +1038,7 @@ In addition *$releasever_major* will be set to the leading portion up to (but no
 		SLE-**${**__releasever_major__**}${**__releasever_minor__**:+**-SP-__$releasever_minor__**}**
 
 	NOTE: :::
-		Variable substitution within an URIs authority is limited to *host* and *port*. Bash style definition of default and alternate values is not supported. No variables can be used in an URIs *scheme*, *user* and *password* .
+		Variable substitution within an URIs authority is limited to *host* and *port*. Bash style definition of default and alternate values is not supported. No variables can be used in an URIs *scheme*, *user* and *password*.
 
 
 Supported URI formats:
@@ -1161,11 +1161,11 @@ include::{incdir}/option_GPG_Check.txt[]
 
 	Examples: :: {nop}
 
-		$ *zypper ar -c -n \'Packman 11.1 repo' \http://packman.iu-bremen.de/suse/11.1 packman*;;
+		$ *zypper ar -c -n \'Packman 11.1 repo' \http://packman.iu-bremen.de/suse/11.1 packman*:::
 		Add a HTTP repository, probe it, name it _Packman 11.1 repo_, and use _packman_ as alias.
 
-		$ *zypper ar \https://download.opensuse.org/repositories/zypp:/svn/openSUSE_Factory/zypp:svn.repo*;; {nop}
-		$ *zypper ar myreposbackup.repo*;;
+		$ *zypper ar \https://download.opensuse.org/repositories/zypp:/svn/openSUSE_Factory/zypp:svn.repo*::: {nop}
+		$ *zypper ar myreposbackup.repo*:::
 		Add repositories from a .repo file.
 --
 
@@ -1230,10 +1230,10 @@ To show detailed information about specific repositories, specify them as argume
 
 	Examples: :: {nop}
 
-		$ *zypper repos -e myreposbackup.repo* ;;
+		$ *zypper repos -e myreposbackup.repo*:::
 		Backup your repository setup:
 
-		$ *zypper lr -pu* ;;
+		$ *zypper lr -pu*:::
 		List repositories with their URIs and priorities:
 --
 
@@ -1243,7 +1243,7 @@ To show detailed information about specific repositories, specify them as argume
 --
 	Examples: :: {nop}
 
-		$ *zypper nr 8 myrepo* ;;
+		$ *zypper nr 8 myrepo*:::
 		Rename repository _number 8_ to *myrepo* (useful if the repo has some
 		dreadful alias which is not usable on the command line).
 --
@@ -1283,13 +1283,13 @@ include::{incdir}/option_Repo_Aggregates.txt[]
 
 	Examples: :: {nop}
 
-		$ *zypper mr -kt*;;
+		$ *zypper mr -kt*:::
 		Enable keeping of packages for all remote repositories.
 
-		$ *zypper mr -er updates*;;
+		$ *zypper mr -er updates*:::
 		Enable repository _updates_ and switch on autorefresh for the repo.
 
-		$ *zypper mr -da*;;
+		$ *zypper mr -da*:::
 		Disable all repositories.
 --
 
@@ -1552,19 +1552,19 @@ These commands give information about requested locales and the possibilty to ma
 
 Examples: :: {nop}
 
-	$ *zypper locales*;;
+	$ *zypper locales*:::
 	List requested locales.
 
-	$ *zypper locales --packages de en*;;
+	$ *zypper locales --packages de en*:::
 	Get the lists of packages which are available for _de_ and _en_ (exact match).
 
-	$ *zypper locales en_*;;
+	$ *zypper locales en_*:::
 	Get all locales with lang code _en_ that have their own country code, excluding the fallback _en_.
 
-	$ *zypper locales en**;;
+	$ *zypper locales en**:::
 	Get all locales with lang code _en_ with or without country code.
 	
-	$ *zypper aloc --packages de_CH* ;;
+	$ *zypper aloc --packages de_CH*:::
 	Request *de_CH* and install language dependent packages.
 
 
@@ -1578,13 +1578,13 @@ The default output is in human-friendly form. If *--terse* global option is used
 --
 	*-m*, *--match*::
 		Takes missing release number as any release.
++
+For example:
 
-		For example: :::
-
-			$ *zypper vcmp -m 0.15.3 0.15.3-2*;;
+			$ *zypper vcmp -m 0.15.3 0.15.3-2*:::
 			0.15.3 _matches_ 0.15.3-2
 
-			$ *zypper vcmp 0.15.3 0.15.3-2*;;
+			$ *zypper vcmp 0.15.3 0.15.3-2*:::
 			0.15.3 _is older than_ 0.15.3-2
 --
 
@@ -1675,13 +1675,13 @@ Parsable XML-output produced by *zypper --xmlout* will include a *<download-resu
 
 	Examples: :: {nop}
 
-		$ *zypper ps -ss*;;
+		$ *zypper ps -ss*:::
 		Show only processes associated with a system service.
 
-		$ *zypper ps -sss*;;
+		$ *zypper ps -sss*:::
 		Short for *zypper ps --print "%s"*; list services which might need a restart.
 
-		$ *zypper ps --print "systemctl status %s"* ;;
+		$ *zypper ps --print "systemctl status %s"*:::
 		Let zypper print the commands to retrieve status information for services which might need a restart.
 --
 
