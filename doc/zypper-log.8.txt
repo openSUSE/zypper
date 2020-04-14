@@ -11,7 +11,7 @@ zypper-log - Zypper logfile reader
 
 SYNOPSIS
 --------
-*zypper-log* ['OPTIONS'] ['PID']
+*zypper-log* [_OPTIONS_] [_PID_]
 
 
 DESCRIPTION
@@ -36,12 +36,12 @@ When you provide a pid, you will get the complete log for the corresponding zypp
 
 OPTIONS
 -------
-*-d* 'YYYY-MM-DD'::
+*-d* _YYYY-MM-DD_::
           Only view zypper runs of the specified day.
-*-l* 'FILE'::
+*-l* _FILE_::
           Only read this logfile.
-*-r* 'NUMBER'::
-          Also read the 'NUMBER' latest rotated logfiles.
+*-r* _NUMBER_::
+          Also read the _NUMBER_ latest rotated logfiles.
 *--help*::
           Print help and quit.
 

@@ -10,7 +10,7 @@ needs-restarting - Report running processes which should be restarted
 
 SYNOPSIS
 --------
-*needs-restartin* ['OPTIONS']
+*needs-restarting* [_OPTIONS_]
 
 
 DESCRIPTION
