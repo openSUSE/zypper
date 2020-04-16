@@ -1,6 +1,7 @@
 #include <boost/test/unit_test.hpp>
 #include <boost/test/data/test_case.hpp>
 #include <zypp/zyppng/base/EventDispatcher>
+#include <zypp/media/MetaLinkParser.h> // for hexstr2bytes
 #include <zypp/zyppng/media/network/request.h>
 #include <zypp/zyppng/media/network/networkrequestdispatcher.h>
 #include <zypp/zyppng/media/network/networkrequesterror.h>
@@ -53,29 +54,6 @@ const char * err401 = "Status: 401 Unauthorized\r\n"
                      "Sorry you are not authorized.";
 
 bool withSSL[] = { true, false };
-
-// convert a string in its byte representation
-std::vector<unsigned char> convertHexStrToVector( const std::string &str )
-{
-  std::vector<unsigned char> bytes;
-  for ( size_t i = 0; i < str.length(); i+=2 )
-  {
-#define c2h(c) (((c)>='0' && (c)<='9') ? ((c)-'0')              \
-                : ((c)>='a' && (c)<='f') ? ((c)-('a'-10))       \
-                : ((c)>='A' && (c)<='F') ? ((c)-('A'-10))       \
-                : -1)
-    int v = c2h(str[i]);
-    if (v < 0)
-      return {};
-    bytes.push_back(v);
-    v = c2h(str[i+1]);
-    if (v < 0)
-      return {};
-    bytes.back() = (bytes.back() << 4) | v;
-#undef c2h
-  }
-  return bytes;
-}
 
 BOOST_DATA_TEST_CASE(nwdispatcher_basic, bdata::make( withSSL ), withSSL)
 {
@@ -263,14 +241,14 @@ BOOST_DATA_TEST_CASE(nwdispatcher_http_download, bdata::make( withSSL ), withSSL
   BOOST_REQUIRE_MESSAGE( dig->create( zypp::Digest::sha1() ), "Unable to create Digest " );
 
   reqDLFile->transferSettings() = set;
-  reqDLFile->addRequestRange(0, 0, dig, convertHexStrToVector("f1d2d2f924e986ac86fdf7b36c94bcdf32beec15") );
+  reqDLFile->addRequestRange(0, 0, dig, zypp::media::hexstr2bytes("f1d2d2f924e986ac86fdf7b36c94bcdf32beec15") );
   disp.enqueue( reqDLFile );
   ev->run();
   BOOST_TEST_REQ_SUCCESS( reqDLFile );
 
   //modify the checksum -> request should fail now
   reqDLFile->resetRequestRanges();
-  reqDLFile->addRequestRange(0, 0, dig, convertHexStrToVector("f1d2d2f924e986ac86fdf7b36c94bcdf32beec20") );
+  reqDLFile->addRequestRange(0, 0, dig, zypp::media::hexstr2bytes("f1d2d2f924e986ac86fdf7b36c94bcdf32beec20") );
   disp.enqueue( reqDLFile );
   ev->run();
   BOOST_TEST_REQ_ERR( reqDLFile, zyppng::NetworkRequestError::InvalidChecksum );

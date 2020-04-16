@@ -12,79 +12,99 @@
 
 #include <zypp/media/MetaLinkParser.h>
 #include <zypp/base/Logger.h>
+#include <zypp/ByteArray.h>
+#include <zypp/AutoDispose.h>
 
-#include <sys/types.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-
+#include <stack>
 #include <vector>
 #include <algorithm>
-#include <iostream>
-#include <fstream>
 
 #include <libxml2/libxml/SAX2.h>
 
 using namespace zypp::base;
 
-namespace zypp {
-  namespace media {
+namespace zypp::media {
+  enum ParserState {
+    STATE_START,
+    STATE_METALINK,
+    STATE_FILES,
+    STATE_FILE,
+    STATE_M4FILE,
+    STATE_SIZE,
+    STATE_M4SIZE,
+    STATE_VERIFICATION,
+    STATE_HASH,
+    STATE_M4HASH,
+    STATE_PIECES,
+    STATE_M4PIECES,
+    STATE_PHASH,
+    STATE_M4PHASH,
+    STATE_RESOURCES,
+    STATE_URL,
+    STATE_M4URL,
+    NUMSTATES
+  };
 
-enum state {
-  STATE_START,
-  STATE_METALINK,
-  STATE_FILES,
-  STATE_FILE,
-  STATE_M4FILE,
-  STATE_SIZE,
-  STATE_M4SIZE,
-  STATE_VERIFICATION,
-  STATE_HASH,
-  STATE_M4HASH,
-  STATE_PIECES,
-  STATE_M4PIECES,
-  STATE_PHASH,
-  STATE_M4PHASH,
-  STATE_RESOURCES,
-  STATE_URL,
-  STATE_M4URL,
-  NUMSTATES
-};
+  struct transition {
+    std::string elementName; //< Name of the element for the transition to trigger
+    ParserState transitionTo; //< The state we go into when the element name in \a elementName is encountered
+    int docontent;   //< Store the content of the element in the \a content member
+  };
 
-struct stateswitch {
-  enum state from;
-  std::string ename;
-  enum state to;
-  int docontent;
-};
+  /*!
+   * Returns a map of all state transitions that are supported.
+   * Key of the map is the current state, the value is a list of all supported transitions
+   * of the the current state.
+   */
+  const std::unordered_map<ParserState, std::vector<transition> > & transitions () {
+    static std::unordered_map<ParserState, std::vector<transition> > map {
+      { STATE_START, {
+          { "metalink", STATE_METALINK, 0},
+          }
+        },
+      { STATE_METALINK, {
+          { "files", STATE_FILES, 0 },
+          { "file", STATE_M4FILE, 0 },
+          }
+        },
+      { STATE_FILES, {
+          { "file", STATE_FILE, 0},
+          }
+        },
+      { STATE_FILE, {
+          { "size",         STATE_SIZE, 1 },
+          { "verification", STATE_VERIFICATION, 0 },
+          { "resources",    STATE_RESOURCES, 0 },
+          }
+        },
+      { STATE_VERIFICATION, {
+          { "hash",         STATE_HASH, 1 },
+          { "pieces",       STATE_PIECES, 0 },
+          }
+        },
+      { STATE_PIECES, {
+          { "hash",         STATE_PHASH, 1 },
+          }
+        },
+      { STATE_RESOURCES, {
+          { "url",          STATE_URL, 1 },
+          }
+        },
+      { STATE_M4FILE, {
+          { "size",         STATE_M4SIZE, 1 },
+          { "hash",         STATE_M4HASH, 1},
+          { "url",          STATE_M4URL, 1},
+          { "pieces",       STATE_M4PIECES, 0},
+          }
+        },
+      { STATE_M4PIECES, {
+          { "hash",         STATE_M4PHASH, 1 },
+          }
+        },
+      };
 
-static struct stateswitch stateswitches[] = {
-  { STATE_START,        "metalink",     STATE_METALINK, 0 },
-  { STATE_METALINK,     "files",        STATE_FILES, 0 },
-  { STATE_METALINK,     "file",         STATE_M4FILE, 0 },
-  { STATE_FILES,        "file",         STATE_FILE, 0 },
-  { STATE_FILE,         "size",         STATE_SIZE, 1 },
-  { STATE_FILE,         "verification", STATE_VERIFICATION, 0 },
-  { STATE_FILE,         "resources",    STATE_RESOURCES, 0 },
-  { STATE_VERIFICATION, "hash",         STATE_HASH, 1 },
-  { STATE_VERIFICATION, "pieces",       STATE_PIECES, 0 },
-  { STATE_PIECES,       "hash",         STATE_PHASH, 1 },
-  { STATE_RESOURCES,    "url",          STATE_URL, 1 },
-  { STATE_M4FILE,       "size",         STATE_M4SIZE, 1 },
-  { STATE_M4FILE,       "hash",         STATE_M4HASH, 1},
-  { STATE_M4FILE,       "url",          STATE_M4URL, 1},
-  { STATE_M4FILE,       "pieces",       STATE_M4PIECES, 0},
-  { STATE_M4PIECES,     "hash",         STATE_M4PHASH, 1 },
-  { NUMSTATES }
-};
-
-struct ml_url {
-  ml_url()
-    : priority( 0 )
-  {}
-  int priority;
-  std::string url;
-};
+    return map;
+  }
 
 static void XMLCALL startElement(void *userData, const xmlChar *name, const xmlChar **atts);
 static void XMLCALL endElement(void *userData, const xmlChar *name);
@@ -93,34 +113,17 @@ static void XMLCALL characterData(void *userData, const xmlChar *s, int len);
 struct ml_parsedata : private zypp::base::NonCopyable {
   ml_parsedata()
     : parser( nullptr )
-    , depth( 0 )
     , state( STATE_START )
+    , depth( 0 )
     , statedepth( 0 )
-    , content( reinterpret_cast<char *>(malloc(256)) )
-    , lcontent( 0 )
-    , acontent( 256 )
     , docontent( 0 )
-    , called( 0 )
     , gotfile( 0 )
     , size( -1 )
-    , nurls( 0 )
     , blksize( 0 )
-    , npiece( 0 )
     , piecel( 0 )
-    , nsha1( 0 )
-    , nzsync( 0 )
     , chksuml( 0 )
   {
-    struct stateswitch *sw;
-    int i;
-    memset( swtab, 0, sizeof(swtab) );
-    memset( sbtab, 0, sizeof(sbtab) );
-    for (i = 0, sw = stateswitches; sw->from != NUMSTATES; i++, sw++)
-    {
-      if (!swtab[sw->from])
-	swtab[sw->from] = sw;
-      sbtab[sw->to] = sw->from;
-    }
+    content.reserve( 256 );
 
     xmlSAXHandler sax;
     memset(&sax, 0, sizeof(sax));
@@ -129,54 +132,65 @@ struct ml_parsedata : private zypp::base::NonCopyable {
     sax.characters = characterData;
 
     //internally creates a copy of xmlSaxHandler, so having it as local variable is save
-    parser = xmlCreatePushParserCtxt(&sax, this, NULL, 0, NULL);
+    parser = AutoDispose<xmlParserCtxtPtr>( xmlCreatePushParserCtxt(&sax, this, NULL, 0, NULL), xmlFreeParserCtxt );
   }
 
-  ~ml_parsedata()
-  {
-    if (parser) {
-      xmlFreeParserCtxt(parser);
-      parser = nullptr;
-    }
-    free(content);
+  void doTransition ( const transition &t ) {
+    parentStates.push( state );
+    state = t.transitionTo;
+    docontent = t.docontent;
+    statedepth = depth;
+    content.clear();
   }
 
-  xmlParserCtxtPtr parser;
-  int depth;
-  enum state state;
+  void popState () {
+    state = parentStates.top();
+    statedepth--;
+    parentStates.pop();
+
+  }
+
+  AutoDispose<xmlParserCtxtPtr> parser;
+
+  ParserState state;  //< current state as defined in \ref stateswitch
+  std::stack<ParserState> parentStates;
+
+  int depth;         //< current element depth of traversing the document elements
+
+  /*!
+   * Current element depts expected by the current state,
+   * if depth != statedepth we ignore all elements and just increase and decrease depth until they match again.
+   * This is basically a helper variable that allows us to ignore elements we do not care about
+   */
   int statedepth;
-  char *content;
-  int lcontent;
-  int acontent;
-  int docontent;
-  struct stateswitch *swtab[NUMSTATES];
-  enum state sbtab[NUMSTATES];
 
-  int called;
+  std::string content; //< content of the current element
+  int docontent;     //< should the content of the current elem be parsed
+
   int gotfile;
   off_t size;
-  std::vector<struct ml_url> urls;
-  int nurls;
+  std::vector<MetalinkMirror> urls;
   size_t blksize;
 
-  std::vector<unsigned char> piece;
-  int npiece;
+  std::vector<ByteArray> piece;
   int piecel;
 
-  std::vector<unsigned char> sha1;
-  int nsha1;
-  std::vector<unsigned char> zsync;
-  int nzsync;
+  std::vector<ByteArray> sha1;
+  std::vector<ByteArray> zsync;
 
-  std::vector<unsigned char> chksum;
+  ByteArray chksum;
   int chksuml;
 };
 
+/**
+ * Look up a xml attribute in the passed array \a atts.
+ * Returns a pointer to the value of the attribute if one is found, otherwise nullptr.
+ */
 static const char *
 find_attr(const char *txt, const xmlChar **atts)
 {
   if(!atts) {
-    return 0;
+    return nullptr;
   }
 
   for (; *atts; atts += 2)
@@ -184,51 +198,64 @@ find_attr(const char *txt, const xmlChar **atts)
       if (!strcmp(reinterpret_cast<const char*>(*atts), txt))
         return reinterpret_cast<const char*>(atts[1]);
     }
-  return 0;
+  return nullptr;
 }
 
 static void XMLCALL
 startElement(void *userData, const xmlChar *name, const xmlChar **atts)
 {
   struct ml_parsedata *pd = reinterpret_cast<struct ml_parsedata *>(userData);
-  struct stateswitch *sw;
-  if (pd->depth != pd->statedepth)
-    {
-      pd->depth++;
-      return;
-    }
+
+  // if the current element depth does not match the expected depth for the current state we
+  // ignore the element and just increase the depth
+  if (pd->depth != pd->statedepth) {
+    pd->depth++;
+    return;
+  }
   pd->depth++;
-  if (!pd->swtab[pd->state])
+
+  const auto &trMap = transitions();
+  const auto currStateTrs = trMap.find( pd->state );
+  if ( currStateTrs == trMap.end() )
     return;
-  for (sw = pd->swtab[pd->state]; sw->from == pd->state; sw++)  /* find name in statetable */
-    if (sw->ename == reinterpret_cast<const char *>(name))
-      break;
-  if (sw->from != pd->state)
+
+  // check if the current element name is part of our transitions
+  auto foundTr = std::find_if( currStateTrs->second.begin(), currStateTrs->second.end(), [name]( const auto &tr ){
+    return tr.elementName == reinterpret_cast<const char *>(name);
+  });
+
+  if ( foundTr == currStateTrs->second.end() ) {
+    // we found no possible transition, ignore
     return;
-  if ((sw->to == STATE_FILE || sw->to == STATE_M4FILE) && pd->gotfile++)
+  }
+
+  if ( ( foundTr->transitionTo == STATE_FILE || foundTr->transitionTo == STATE_M4FILE )  && pd->gotfile++)
     return;	/* ignore all but the first file */
-  //printf("start depth %d name %s\n", pd->depth, name);
-  pd->state = sw->to;
-  pd->docontent = sw->docontent;
-  pd->statedepth = pd->depth;
-  pd->lcontent = 0;
-  *pd->content = 0;
+
+  // advance the state machine and prepare variables for the new state
+  pd->doTransition( *foundTr );
+
   switch(pd->state)
     {
     case STATE_URL:
     case STATE_M4URL:
       {
-	const char *priority = find_attr("priority", atts);
-	const char *preference = find_attr("preference", atts);
+	const char *priority       = find_attr("priority", atts);
+	const char *preference     = find_attr("preference", atts);
+        const char *maxconnections = find_attr("maxconnections", atts);
 	int prio;
-        pd->urls.push_back(ml_url());
+        auto &mirr = pd->urls.emplace_back();
         if (priority)
-	  prio = atoi(priority);
+	  prio = str::strtonum<int>(priority);
 	else if (preference)
-	  prio = 101 - atoi(preference);
+          prio = 101 - str::strtonum<int>(preference);
 	else
 	  prio = 999999;
-	pd->urls.back().priority = prio;
+        mirr.priority = prio;
+
+        if ( maxconnections )
+          mirr.maxConnections = str::strtonum<int>( maxconnections );
+
 	break;
       }
     case STATE_PIECES:
@@ -240,19 +267,16 @@ startElement(void *userData, const xmlChar *name, const xmlChar **atts)
 
 	if (!type || !length)
 	  {
-	    pd->state = pd->sbtab[pd->state];
-	    pd->statedepth--;
+            pd->popState();
 	    break;
 	  }
-	blksize = strtoul(length, 0, 10);
+	blksize = str::strtonum<unsigned long>(length);
 	if (!blksize || (pd->blksize && pd->blksize != blksize))
 	  {
-	    pd->state = pd->sbtab[pd->state];
-	    pd->statedepth--;
+	    pd->popState();
 	    break;
 	  }
 	pd->blksize = blksize;
-	pd->npiece = 0;
         pd->piece.clear();
 	if (!strcmp(type, "sha1") || !strcmp(type, "sha-1"))
 	  pd->piecel = 20;
@@ -260,8 +284,7 @@ startElement(void *userData, const xmlChar *name, const xmlChar **atts)
 	  pd->piecel = 4;
 	else
 	  {
-	    pd->state = pd->sbtab[pd->state];
-	    pd->statedepth--;
+	    pd->popState();
 	    break;
 	  }
 	break;
@@ -278,8 +301,7 @@ startElement(void *userData, const xmlChar *name, const xmlChar **atts)
 	  pd->chksuml = 32;
 	else
 	  {
-	    pd->state = pd->sbtab[pd->state];
-	    pd->statedepth--;
+	    pd->popState();
 	    pd->docontent = 0;
 	  }
 	break;
@@ -288,10 +310,9 @@ startElement(void *userData, const xmlChar *name, const xmlChar **atts)
     case STATE_M4PHASH:
       {
 	const char *piece = find_attr("piece", atts);
-	if (pd->state == STATE_PHASH && (!piece || atoi(piece) != pd->npiece))
+        if ( pd->state == STATE_PHASH && (!piece || str::strtonum<uint>(piece) != pd->piece.size()) )
 	  {
-	    pd->state = pd->sbtab[pd->state];
-	    pd->statedepth--;
+	    pd->popState();
 	  }
         break;
       }
@@ -300,98 +321,88 @@ startElement(void *userData, const xmlChar *name, const xmlChar **atts)
     }
 }
 
-static int
-hexstr2bytes(unsigned char *buf, const char *str, int buflen)
+ByteArray hexstr2bytes( std::string str )
 {
-  int i;
-  for (i = 0; i < buflen; i++)
-    {
+  ByteArray bytes;
+  for ( std::string::size_type i = 0; i < str.length(); i+=2 )
+  {
 #define c2h(c) (((c)>='0' && (c)<='9') ? ((c)-'0')              \
                 : ((c)>='a' && (c)<='f') ? ((c)-('a'-10))       \
                 : ((c)>='A' && (c)<='F') ? ((c)-('A'-10))       \
                 : -1)
-      int v = c2h(*str);
-      str++;
-      if (v < 0)
-        return 0;
-      buf[i] = v;
-      v = c2h(*str);
-      str++;
-      if (v < 0)
-        return 0;
-      buf[i] = (buf[i] << 4) | v;
+    int v = c2h(str[i]);
+    if (v < 0)
+      return {};
+    bytes.push_back(v);
+    v = c2h(str[i+1]);
+    if (v < 0)
+      return {};
+    bytes.back() = (bytes.back() << 4) | v;
 #undef c2h
-    }
-  return buflen;
+  }
+  return bytes;
 }
 
 static void XMLCALL
-endElement(void *userData, const xmlChar *name)
+endElement(void *userData, const xmlChar *)
 {
   struct ml_parsedata *pd = reinterpret_cast<struct ml_parsedata *>(userData);
-  // printf("end depth %d-%d name %s\n", pd->depth, pd->statedepth, name);
+  //printf("end depth %d-%d name %s\n", pd->depth, pd->statedepth, name);
   if (pd->depth != pd->statedepth)
     {
       pd->depth--;
       return;
     }
-  pd->depth--;
-  pd->statedepth--;
   switch (pd->state)
     {
     case STATE_SIZE:
     case STATE_M4SIZE:
-      pd->size = (off_t)strtoull(pd->content, 0, 10);
+      pd->size = (off_t)str::strtonum<off_t>(pd->content); //strtoull(pd->content, 0, 10);
       break;
     case STATE_HASH:
     case STATE_M4HASH:
       pd->chksum.clear();
-      pd->chksum.resize(pd->chksuml, 0);
-      if (strlen(pd->content) != size_t(pd->chksuml) * 2 || !hexstr2bytes(&pd->chksum[0], pd->content, pd->chksuml))
+      pd->chksum = hexstr2bytes( pd->content );
+      if ( pd->content.length() != size_t(pd->chksuml) * 2 || !pd->chksum.size() )
 	{
 	  pd->chksum.clear();
           pd->chksuml = 0;
 	}
       break;
     case STATE_PHASH:
-    case STATE_M4PHASH:
-      if (strlen(pd->content) != size_t(pd->piecel) * 2)
+    case STATE_M4PHASH: {
+      if ( pd->content.length() != size_t(pd->piecel) * 2 )
 	break;
-      pd->piece.resize(pd->piecel * (pd->npiece + 1), 0);
-      if (!hexstr2bytes(&pd->piece[pd->piecel * pd->npiece], pd->content, pd->piecel))
-	{
-	  pd->piece.resize(pd->piecel * pd->npiece, 0);
-	  break;
-	}
-      pd->npiece++;
+      ByteArray pieceHash = hexstr2bytes( pd->content );
+      if ( !pieceHash.size() )
+        pieceHash.resize( pd->piecel, 0 );
+      pd->piece.push_back( pieceHash );
       break;
+    }
     case STATE_PIECES:
     case STATE_M4PIECES:
       if (pd->piecel == 4)
-	{
-	  pd->zsync = pd->piece;
-	  pd->nzsync = pd->npiece;
-	}
+	pd->zsync = pd->piece;
       else
-	{
-	  pd->sha1 = pd->piece;
-	  pd->nsha1 = pd->npiece;
-	}
-      pd->piecel = pd->npiece = 0;
+        pd->sha1 = pd->piece;
+
+      pd->piecel = 0;
       pd->piece.clear();
       break;
     case STATE_URL:
     case STATE_M4URL:
-      if (*pd->content)
-	{
-	  pd->urls[pd->nurls].url = std::string(pd->content);
-	  pd->nurls++;
-	}
+      if ( pd->content.length() )
+        pd->urls.back().url =   std::string(pd->content);
+      else
+        // without a actual URL the mirror is useless
+        pd->urls.pop_back();
       break;
     default:
       break;
     }
-  pd->state = pd->sbtab[pd->state];
+
+  pd->depth--;
+  pd->popState();
   pd->docontent = 0;
 }
 
@@ -399,21 +410,12 @@ static void XMLCALL
 characterData(void *userData, const xmlChar *s, int len)
 {
   struct ml_parsedata *pd = reinterpret_cast<struct ml_parsedata *>(userData);
-  int l;
-  char *c;
   if (!pd->docontent)
     return;
-  l = pd->lcontent + len + 1;
-  if (l > pd->acontent)
-    {
-      pd->content = reinterpret_cast<char *>(realloc(pd->content, l + 256));
-      pd->acontent = l + 256;
-    }
-  c = pd->content + pd->lcontent;
-  pd->lcontent += len;
-  while (len-- > 0)
-    *c++ = *s++;
-  *c = 0;
+
+  if ( pd->content.length() + len + 1 > pd->content.capacity() )
+    pd->content.reserve( pd->content.capacity() + 256 );
+  pd->content.append( s, s+len );
 }
 
 
@@ -457,46 +459,46 @@ MetaLinkParser::parseBytes(const char *buf, size_t len)
   }
 }
 
-static bool urlcmp(const ml_url &a, const ml_url &b)
-{
-  return a.priority < b.priority;
-}
-
 void
 MetaLinkParser::parseEnd()
 {
   if (xmlParseChunk(pd->parser, NULL, 0, 1)) {
     ZYPP_THROW(Exception("Parse Error"));
   }
-  if (pd->nurls)
-    stable_sort(pd->urls.begin(), pd->urls.end(), urlcmp);
+  if (pd->urls.size() ) {
+    stable_sort(pd->urls.begin(), pd->urls.end(), []( const auto &a, const auto &b ){
+      return a.priority < b.priority;
+    });
+  }
 }
 
 std::vector<Url>
-MetaLinkParser::getUrls()
+MetaLinkParser::getUrls() const
 {
   std::vector<Url> urls;
-  int i;
-  for (i = 0; i < pd->nurls; ++i)
-    urls.push_back(Url(pd->urls[i].url));
+  for ( const auto &mirr : pd->urls )
+    urls.push_back( mirr.url );
   return urls;
 }
 
-MediaBlockList
-MetaLinkParser::getBlockList()
+const std::vector<MetalinkMirror> &MetaLinkParser::getMirrors() const
 {
-  size_t i;
+  return pd->urls;
+}
+
+MediaBlockList MetaLinkParser::getBlockList() const
+{
   MediaBlockList bl(pd->size);
   if (pd->chksuml == 20)
-    bl.setFileChecksum("SHA1", pd->chksuml, &pd->chksum[0]);
+    bl.setFileChecksum("SHA1", pd->chksuml, pd->chksum.data() );
   else if (pd->chksuml == 32)
-    bl.setFileChecksum("SHA256", pd->chksuml, &pd->chksum[0]);
+    bl.setFileChecksum("SHA256", pd->chksuml, pd->chksum.data());
   if (pd->size != off_t(-1) && pd->blksize)
     {
       size_t nb = (pd->size + pd->blksize - 1) / pd->blksize;
       off_t off = 0;
       size_t size = pd->blksize;
-      for (i = 0; i < nb; i++)
+      for ( size_t i = 0; i < nb; i++ )
 	{
 	  if (i == nb - 1)
 	    {
@@ -505,12 +507,12 @@ MetaLinkParser::getBlockList()
 		size = pd->blksize;
 	    }
           size_t blkno = bl.addBlock(off, size);
-          if (int(i) < pd->nsha1)
+          if ( i < pd->sha1.size())
 	    {
-	      bl.setChecksum(blkno, "SHA1", 20, &pd->sha1[20 * i]);
-	      if (int(i) < pd->nzsync)
+	      bl.setChecksum(blkno, "SHA1", 20, pd->sha1[i].data());
+              if ( i < pd->zsync.size())
 		{
-		  unsigned char *p = &pd->zsync[4 * i];
+		  unsigned char *p = pd->zsync[i].data();
 		  bl.setRsum(blkno, 4, p[0] | p[1] << 8 | p[2] << 16 | p[3] << 24, pd->blksize);
 		}
 	    }
@@ -520,6 +522,14 @@ MetaLinkParser::getBlockList()
   return bl;
 }
 
-  } // namespace media
-} // namespace zypp
+const std::vector<ByteArray> &MetaLinkParser::getZsyncBlockHashes() const
+{
+  return pd->zsync;
+}
 
+const std::vector<ByteArray> &MetaLinkParser::getSHA1BlockHashes() const
+{
+  return pd->sha1;
+}
+
+} // namespace zypp::media

@@ -1,0 +1,634 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metalink xmlns="urn:ietf:params:xml:ns:metalink">
+  <generator>MirrorBrain/2.19.0</generator>
+  <origin dynamic="true">http://download.opensuse.org/update/leap/15.0/oss/repodata/702d2a63e32b11a60ef853247f7901a71d0ec12731003a433dc17d200021a121-other.xml.gz.meta4</origin>
+  <published>2020-04-17T10:35:59Z</published>
+  <publisher>
+    <name>openSUSE</name>
+    <url>http://download.opensuse.org</url>
+  </publisher>
+
+  <file name="702d2a63e32b11a60ef853247f7901a71d0ec12731003a433dc17d200021a121-other.xml.gz">
+    <size>16108851</size>
+
+    <!-- <mtime>1579190526</mtime> -->
+
+    <!-- internal id: 639054365 -->
+    <hash type="md5">b0e3ea6121ce4a0a9efc732fa61498b4</hash>
+    <hash type="sha-1">9bf6ebc95bbf7776c8ee2a7d0a59ec94ab34953b</hash>
+    <hash type="sha-256">702d2a63e32b11a60ef853247f7901a71d0ec12731003a433dc17d200021a121</hash>
+    <pieces length="65536" type="zsync">
+      <hash>52c0a614</hash>
+      <hash>1d1b0484</hash>
+      <hash>a6eedb22</hash>
+      <hash>774ee5fd</hash>
+      <hash>48b1afe4</hash>
+      <hash>99676335</hash>
+      <hash>237f7e44</hash>
+      <hash>6716b34d</hash>
+      <hash>9de0b6b5</hash>
+      <hash>eeb79c2c</hash>
+      <hash>91a32ff3</hash>
+      <hash>cb7d3528</hash>
+      <hash>6821642b</hash>
+      <hash>4afbbfeb</hash>
+      <hash>4b3dd85a</hash>
+      <hash>06d847bf</hash>
+      <hash>0d4062b0</hash>
+      <hash>cf9421e9</hash>
+      <hash>ccc6bff3</hash>
+      <hash>d0469103</hash>
+      <hash>10f29244</hash>
+      <hash>078e5f5a</hash>
+      <hash>fb01f0a1</hash>
+      <hash>a4cb6923</hash>
+      <hash>b08fc953</hash>
+      <hash>49caabcc</hash>
+      <hash>1793fa09</hash>
+      <hash>b36e811d</hash>
+      <hash>b1a3bbe7</hash>
+      <hash>2956918c</hash>
+      <hash>53523172</hash>
+      <hash>254f3914</hash>
+      <hash>7f220a9c</hash>
+      <hash>bd30c70f</hash>
+      <hash>d8b1add2</hash>
+      <hash>d395e95e</hash>
+      <hash>3e979f77</hash>
+      <hash>930b076b</hash>
+      <hash>378c8b81</hash>
+      <hash>30ef4edf</hash>
+      <hash>dab0d9fc</hash>
+      <hash>5e391464</hash>
+      <hash>6ac489c6</hash>
+      <hash>36fa94f0</hash>
+      <hash>f3063b42</hash>
+      <hash>9f566ad4</hash>
+      <hash>6c12a5aa</hash>
+      <hash>1a25ae6b</hash>
+      <hash>5918c9ba</hash>
+      <hash>259ac921</hash>
+      <hash>f4957810</hash>
+      <hash>e6d0f681</hash>
+      <hash>7bd396e9</hash>
+      <hash>ae538fc9</hash>
+      <hash>f89b0b44</hash>
+      <hash>03d057ee</hash>
+      <hash>ab803b05</hash>
+      <hash>08b08ed8</hash>
+      <hash>c2917a7d</hash>
+      <hash>863d0b85</hash>
+      <hash>aa1f9d90</hash>
+      <hash>991afb80</hash>
+      <hash>4edf38ea</hash>
+      <hash>b5e40f1a</hash>
+      <hash>d4d4e483</hash>
+      <hash>f65e306b</hash>
+      <hash>7912c783</hash>
+      <hash>f6819c0c</hash>
+      <hash>04e266f2</hash>
+      <hash>187905a5</hash>
+      <hash>32711d10</hash>
+      <hash>86d5f0d4</hash>
+      <hash>850439c0</hash>
+      <hash>f804e0e4</hash>
+      <hash>ead17338</hash>
+      <hash>171a26ce</hash>
+      <hash>1140a195</hash>
+      <hash>40e5ab93</hash>
+      <hash>1c4141d1</hash>
+      <hash>65375cd7</hash>
+      <hash>85dbcc3b</hash>
+      <hash>4e3fe5e3</hash>
+      <hash>b39121ef</hash>
+      <hash>ce4798ee</hash>
+      <hash>712af259</hash>
+      <hash>2ed654bb</hash>
+      <hash>749ed9d5</hash>
+      <hash>98e286c7</hash>
+      <hash>6cdc3999</hash>
+      <hash>1992b5b9</hash>
+      <hash>14a34c09</hash>
+      <hash>8f2bdad5</hash>
+      <hash>adde2ef2</hash>
+      <hash>fcda3990</hash>
+      <hash>af59b0b0</hash>
+      <hash>d6b197ea</hash>
+      <hash>48a7fc22</hash>
+      <hash>e6303467</hash>
+      <hash>da1fff7c</hash>
+      <hash>ce22618c</hash>
+      <hash>c3058796</hash>
+      <hash>15225499</hash>
+      <hash>9f1bf1f1</hash>
+      <hash>380172a2</hash>
+      <hash>a1b44a09</hash>
+      <hash>c9d9f6f1</hash>
+      <hash>a8c78564</hash>
+      <hash>9cbd2bc3</hash>
+      <hash>64d0dcec</hash>
+      <hash>f465da8f</hash>
+      <hash>6a9d15f0</hash>
+      <hash>64fdc6da</hash>
+      <hash>f3dc5c56</hash>
+      <hash>11c6fc79</hash>
+      <hash>08d33205</hash>
+      <hash>39f3b762</hash>
+      <hash>fbcabbba</hash>
+      <hash>4b549193</hash>
+      <hash>367aa49b</hash>
+      <hash>0066daf1</hash>
+      <hash>2c1762d9</hash>
+      <hash>2e8a4128</hash>
+      <hash>358b5696</hash>
+      <hash>101e02b4</hash>
+      <hash>01b563a3</hash>
+      <hash>af77bfc1</hash>
+      <hash>1baa1682</hash>
+      <hash>21170038</hash>
+      <hash>bf1938f8</hash>
+      <hash>fc833941</hash>
+      <hash>4f4af457</hash>
+      <hash>2e69237a</hash>
+      <hash>339aa64a</hash>
+      <hash>6fc4603a</hash>
+      <hash>2bd4258e</hash>
+      <hash>2d96b5ca</hash>
+      <hash>5f1f0d5a</hash>
+      <hash>6e96399d</hash>
+      <hash>ac0c374c</hash>
+      <hash>3b1b78ef</hash>
+      <hash>13ea3a71</hash>
+      <hash>b7235e19</hash>
+      <hash>983b7750</hash>
+      <hash>6346a1cf</hash>
+      <hash>1c4674f2</hash>
+      <hash>29401c27</hash>
+      <hash>d20d75d9</hash>
+      <hash>58fe3a80</hash>
+      <hash>36046fa4</hash>
+      <hash>30f1bb0a</hash>
+      <hash>0d6bfb04</hash>
+      <hash>ba03494d</hash>
+      <hash>ddab80c6</hash>
+      <hash>3ebe0e52</hash>
+      <hash>717f3b33</hash>
+      <hash>4c1d18b4</hash>
+      <hash>194996e3</hash>
+      <hash>c0a5b547</hash>
+      <hash>46701b77</hash>
+      <hash>1fee6657</hash>
+      <hash>5c0b188e</hash>
+      <hash>36b0b261</hash>
+      <hash>542d6ecb</hash>
+      <hash>8075ad43</hash>
+      <hash>fec52502</hash>
+      <hash>58b78958</hash>
+      <hash>3cb977f5</hash>
+      <hash>d723f5f1</hash>
+      <hash>acce65f2</hash>
+      <hash>b8971b43</hash>
+      <hash>284701af</hash>
+      <hash>7806f59f</hash>
+      <hash>5d316f76</hash>
+      <hash>0744df06</hash>
+      <hash>74a71b65</hash>
+      <hash>af52e37a</hash>
+      <hash>36182408</hash>
+      <hash>dfb2d5e7</hash>
+      <hash>eb1837ae</hash>
+      <hash>06ebb86a</hash>
+      <hash>e29d708e</hash>
+      <hash>f41ddba4</hash>
+      <hash>3ca24f76</hash>
+      <hash>3ec2d12c</hash>
+      <hash>a05085e8</hash>
+      <hash>b3901429</hash>
+      <hash>5c7168b6</hash>
+      <hash>3b61dd7a</hash>
+      <hash>8ebabd02</hash>
+      <hash>27c0e98a</hash>
+      <hash>5ace82d6</hash>
+      <hash>321df0de</hash>
+      <hash>0b8f5b4c</hash>
+      <hash>4bae8466</hash>
+      <hash>68101f66</hash>
+      <hash>980da2ba</hash>
+      <hash>81d50c1a</hash>
+      <hash>4e84bd20</hash>
+      <hash>9b61208a</hash>
+      <hash>205a556b</hash>
+      <hash>057d34ba</hash>
+      <hash>31f20187</hash>
+      <hash>9e718b2a</hash>
+      <hash>d0b8e062</hash>
+      <hash>0872e972</hash>
+      <hash>b49a2bde</hash>
+      <hash>760271ef</hash>
+      <hash>6f76f48a</hash>
+      <hash>1c611d36</hash>
+      <hash>064db936</hash>
+      <hash>e7329863</hash>
+      <hash>cbfee98e</hash>
+      <hash>f3bcd1ec</hash>
+      <hash>926fbb8f</hash>
+      <hash>8c385a88</hash>
+      <hash>1b24f948</hash>
+      <hash>d7eb6751</hash>
+      <hash>f4d38846</hash>
+      <hash>a8599d87</hash>
+      <hash>78b0a47b</hash>
+      <hash>07ae8db1</hash>
+      <hash>f186b800</hash>
+      <hash>b46b9174</hash>
+      <hash>fae79ab0</hash>
+      <hash>737f9ce2</hash>
+      <hash>09cd0215</hash>
+      <hash>115a6c03</hash>
+      <hash>20a53586</hash>
+      <hash>d54c989a</hash>
+      <hash>c80e7714</hash>
+      <hash>9fb08412</hash>
+      <hash>765695e9</hash>
+      <hash>f7071fd6</hash>
+      <hash>b0acf700</hash>
+      <hash>67ee5560</hash>
+      <hash>fe631438</hash>
+      <hash>fb4f23ae</hash>
+      <hash>bb560d0b</hash>
+      <hash>60cc375c</hash>
+      <hash>5c02ef6d</hash>
+      <hash>58864bc2</hash>
+      <hash>232e0528</hash>
+      <hash>2851bfa6</hash>
+      <hash>24a78b42</hash>
+      <hash>54f4fba1</hash>
+      <hash>349ad053</hash>
+    </pieces>
+    <pieces length="65536" type="sha-1">
+      <hash>b9f77f48f4a49f3438fc1bb6de90df39657597aa</hash>
+      <hash>eb519d03cea235bd24f57941495cd917f84bd897</hash>
+      <hash>bbc848cfe07fc2588d94115dca1b6933b5b2c3e3</hash>
+      <hash>8cef145c2e633fe14f29be5692683e55aa70b543</hash>
+      <hash>c508c1c5dfb4684fb20ae91cfe6231fa0e6ba174</hash>
+      <hash>23ac327f06a38b40f10dc9b8c26f6563820fbaee</hash>
+      <hash>ca25b93d0744a27f31b9c50e680fb37fda988f6a</hash>
+      <hash>027e02287e26a679610d4d26f27ae03d0d90480d</hash>
+      <hash>9c63ede3e63de810e41d88b99f4ff29d236d0765</hash>
+      <hash>f5f60eabcdea574a4b25ed7892e5ff893d28e3e6</hash>
+      <hash>cac3ce8115413ad842cde8a8a5b3c376533695d4</hash>
+      <hash>b7ad7d09e62a1a581e58b33467a3afe012c51163</hash>
+      <hash>898aa214396d911d01e84b06ea7606fb834f6f82</hash>
+      <hash>664f445146b0548ac6b62400681d0ae651be8d59</hash>
+      <hash>c39c214f2fb452b1be664839df1a371f863970cd</hash>
+      <hash>5cc9e11746124ebf0282c1ea1f18e72cfaf6b60d</hash>
+      <hash>b3f7e9b52fe2a3630b9547e495e847ca530e283b</hash>
+      <hash>0ddaaa89b57a47a76cf8e870dd2adf3064c5b7d2</hash>
+      <hash>6863ae28830c18b39bbe40ccf663f36178dbaabe</hash>
+      <hash>c111b32adb590650b10c6131016bd118669fad9c</hash>
+      <hash>8a2941fddacbf7b2a144eb246e761c7c48134fa9</hash>
+      <hash>d222fe76b95e9034275121b86a124977a8a2a0f4</hash>
+      <hash>7072c00f004d82533321d0c99a6106a089ee4acd</hash>
+      <hash>026ea21296d66729725274dde37fb07b25a6bc90</hash>
+      <hash>a799bb63224e7ae4e2ac48c83548c0e7f4339ed9</hash>
+      <hash>090f7ed2f2a21712f1297ffbffc7441de521c72c</hash>
+      <hash>28a25cbd545c6b8936a58dbfbc6f3df66b1ff1f2</hash>
+      <hash>0b2df923da1a425330738bb0690723db59574ed8</hash>
+      <hash>3787396a99a302e8020a4936484a0548244e4696</hash>
+      <hash>836809523b244b31a70ecc9b8cfbc92b6189703a</hash>
+      <hash>6d26a0b6abe7961b1013540194dfd1568246e39b</hash>
+      <hash>eaa06966730e2960dff6b318739c47f53afb48fc</hash>
+      <hash>25840fe2bf327ce91d8920b595702de770efe901</hash>
+      <hash>0c5cd1b57bc8d833a0ec6cbcc2e983851672ff8a</hash>
+      <hash>4ab9385e1eea1f6dc45c4ea4cce55bc1689cb162</hash>
+      <hash>28f0d7c20caefbe1052db07410d6a22465a77768</hash>
+      <hash>0d52b5cc32cdc5ca3589210240b0e5b7173d71b4</hash>
+      <hash>b6412c472de727869867918d2186effc129334e0</hash>
+      <hash>c193530764f9fc5c2b008ecdc0ed454fd09a2016</hash>
+      <hash>325e3e4211f9815b4f647c3cef57bccaf3e4bcc1</hash>
+      <hash>e5583176f956725ac4f0d6618a22575dea4996a6</hash>
+      <hash>03dfdb60cb43e5a55d0c61678ca4698cffb403e4</hash>
+      <hash>226dc7d7c836d0397d0aa96b2d29706afb1100ae</hash>
+      <hash>f1b6075e2f073a270dd22e23afe0f0a68f685cb9</hash>
+      <hash>56b9d3b2d8b4a574d17d5e063f2a59e3be39c10e</hash>
+      <hash>8ff09431921fa287749cde787c7fe730826593c8</hash>
+      <hash>e24b0cd9b8fe9485d269f46856fc7b67689b8e93</hash>
+      <hash>33dc95d1b5b070010f08aca43a4496409168fed2</hash>
+      <hash>6dce6f86912a57890b0c801a39c7bac95ecd4304</hash>
+      <hash>7d7cc195b098047e04c8e667a5cd91649e50fdee</hash>
+      <hash>3059a0a978572cda808d4ddc402df2b67458733d</hash>
+      <hash>d9184e997d4737bf9966b56dbb20b9a5c74f6645</hash>
+      <hash>64addf29c0b35eac2ce21ae2fe6d8ce232af8ff9</hash>
+      <hash>2170eb72b643a229e1e33a28e1b7e554398b423d</hash>
+      <hash>4b7bacad11b4762e54cbd412d41ae043b7388706</hash>
+      <hash>4c5f8f1926419001ff88122a3d426dff0e2fcff5</hash>
+      <hash>ccd0dd77c83da20d7f4ddf13dab89d472f816398</hash>
+      <hash>5a66f1fdb6189de62f91e3c13b7859434eb2ae10</hash>
+      <hash>362f956e4061b1d4ae60654c3b59bc18a9aa8b5b</hash>
+      <hash>9712c3dfcea2ff067a4c510fae5dbcc90599ffe6</hash>
+      <hash>699440f8b691774ec9060caa988d008b79b0b272</hash>
+      <hash>b0638b719cdf6a634516b2cb7ec85e41b866bdbd</hash>
+      <hash>49afa1c7fdae319b4325edba0e19814459bd3d9a</hash>
+      <hash>aecf9ee3948c3530122e8839ffb450ebceb4df5b</hash>
+      <hash>d9709a7431c3c9c4ec42e76efbbbf7e7a2eb964a</hash>
+      <hash>a254ba5f983e12bffba48af2cae35783fbe3da6d</hash>
+      <hash>7a6ff90e51fce74e528ce3968507ebc6000614b5</hash>
+      <hash>44aea5f544bd0ea25774f392eab846f873e5fff8</hash>
+      <hash>75d7c5d1e09d73c368248835da602ed9bb785490</hash>
+      <hash>eb8b75f5ad07a6459ad05a9d88e22f529a21944d</hash>
+      <hash>993b71f98128b7f2c929d56b430f5e514b7c457a</hash>
+      <hash>72b582d7cb77f901f86e405c84b3e8eecb2bc22b</hash>
+      <hash>49bff42f3e2eefa5c53c03b698488c903f76fe55</hash>
+      <hash>248bc7caba7b75ca7edee72e1645e6ee0207b8e2</hash>
+      <hash>156215ff516ef914f28268b31dd27a360b4797e1</hash>
+      <hash>fe0c489135d495aea711c01d37d31f40d638cea2</hash>
+      <hash>5697a51c38f075aebea5e0593d48e899e79f5054</hash>
+      <hash>a146d446f52c08a4aa2515a76ac39003f62b588e</hash>
+      <hash>619386f78b66eac122d61c8028a992ca3cdf6eb3</hash>
+      <hash>ec216f4ef6a5983c448d1b63de347a0753b053ed</hash>
+      <hash>83e08e5f9d347d75337d77c01b38cbf8326e3982</hash>
+      <hash>5c60ba2c86df1b65e41eeff93481b99ee90e7a21</hash>
+      <hash>bed0f7975dbe0abb3e09d76ca239d5a8e8231974</hash>
+      <hash>a245c5324a6ca6626e0903d892712d8cd93cca84</hash>
+      <hash>cdbbc69c35540f4527ab858cb547ea599b5dabc4</hash>
+      <hash>e8bc63208646ff1db2c653a931eca96d3790e56f</hash>
+      <hash>75ce34d9dd80a13d00cc73f30c63dbc242ffe187</hash>
+      <hash>03a1c7dbd3cd99536600bf19b5275c4c58b82e58</hash>
+      <hash>f0d0d1fc1155a1dcfb804c952166ebdadb30a926</hash>
+      <hash>31e699f38b24cd4fdd89440904887c0c6490b2b1</hash>
+      <hash>387c9fde6f3d817da8bfbe791967ac7bed10b0bb</hash>
+      <hash>bd18d25208a69f60bc9ed47703b0598d05e88a65</hash>
+      <hash>88ec754b99b1d1a301665b52d0f5078a8313ced4</hash>
+      <hash>5c8d406fa3325410513c3f82abb839e68bd8cc5d</hash>
+      <hash>8fb9bbf106b201846af4827ea8f18151d1e54f1a</hash>
+      <hash>4d4a23f492a786868b2a8326108578eb222915c7</hash>
+      <hash>4c9a257ffd6aaecc8649f9fcd7658dc12886cc45</hash>
+      <hash>2999f114c2afc1d381b61f393ae9041042ea4c1b</hash>
+      <hash>c9f20744675482835bb4e307df78a0eb33ee9597</hash>
+      <hash>8f5c1d36a94e28b979232e75f5a09895670d43ba</hash>
+      <hash>b80f0f22d35d561a6f19ad414583692ad1a6baf7</hash>
+      <hash>d2e607369e972154e5cfb644b6b9065fe0ec8cc7</hash>
+      <hash>f8dfc2d1cb12c28fc393aa01db2fa4b6a473fffb</hash>
+      <hash>0695ec9bea77cdf4cfbbd40024bb23f415a96846</hash>
+      <hash>4e92c4015ac67f2ece37f29f31fc14ba4b5138fd</hash>
+      <hash>629dc485fee76e0f18dcfad4b1cae81e9d890cc8</hash>
+      <hash>fc14106f32b3ffef1bc04efc9cfd517004a0bccc</hash>
+      <hash>25c13c97f2a16b1fc222ad65a87adf1da03d3f13</hash>
+      <hash>f512eab85491096e799a78a22dbf18cd52314f05</hash>
+      <hash>12b559864bb0932a3773077a5dab5753479ca4a1</hash>
+      <hash>7e44c02f91d0e6fe04687e709db3787b370c910a</hash>
+      <hash>9f6f67023a05fd7bfa00bb39faf367ef00303aae</hash>
+      <hash>39c467877e9d220a52d570f303e76344b3a2608d</hash>
+      <hash>174a697aecf5d38b0f114b9bfa372a8f18c42c81</hash>
+      <hash>9f879aecaf6569cb3cfd164bc44c725ec0c3c100</hash>
+      <hash>a0f37fcf36cc62ec7028b0136a601a9743a11bb6</hash>
+      <hash>28d780cb009c6ec45f3d96f061d342cfcc39a116</hash>
+      <hash>f91a54e70e648566847152dc6da160a43c354462</hash>
+      <hash>8f1356a866020fa3403d001b1b9d8704c9ec014d</hash>
+      <hash>72d1935f0dbd5bbb4261d642b5a84c56fde79461</hash>
+      <hash>0019d698709935d84730ead1e75a88ce34d56047</hash>
+      <hash>8136920b4ec15543f69841411497930b9a0756ea</hash>
+      <hash>8d8d23fdf4a45991475bea88f8f4ae41313204d8</hash>
+      <hash>270ee2b97fdf893361fb0d1e6cd2b3dcc2a56cca</hash>
+      <hash>a46ed235e4e2350ce55d929437bef2696c73e58f</hash>
+      <hash>ffde235c872520ff2a4fb1686612422157b3da4e</hash>
+      <hash>70156892aaa72c869cb4de9f178211acd91386db</hash>
+      <hash>577030eac9eeb0149484d59e4675a0675ec29aba</hash>
+      <hash>51b73a522f31981f46fd9c93088dc649c9e18ded</hash>
+      <hash>eb1d66156a4de48f02550198d258c21987272094</hash>
+      <hash>8bf73b8e4ed442733be764995b19854dad16ad74</hash>
+      <hash>df2aac249fe67e78ed7efc88cf8373ca9664d25f</hash>
+      <hash>2087445ccafa2f380f8fd3083dd371be0c791011</hash>
+      <hash>dd95e88e8eec80074466a5629cc2bf27c0caa405</hash>
+      <hash>df0ae393f8c15b6c79764e0c20c23a63816b265f</hash>
+      <hash>6a3d41b1d89219b8e55f92d0c9e6d7c490ed3a9d</hash>
+      <hash>b77f200b3feeac052155676bebd7d79ff7c521b4</hash>
+      <hash>40a85837934de7349e4b7d499e45c8f0c89f0380</hash>
+      <hash>86f4ec3d1997356df228c2f8e12f7ec34376dad9</hash>
+      <hash>18b1eafaa4cbcc5246341f02120ef5a751b2a07a</hash>
+      <hash>4bce3c8d51fd178c83b92856d5a6d91a73b8c270</hash>
+      <hash>77e395ea41c389823415d295d43654c1ea0a13f8</hash>
+      <hash>0e5bc24274fcc33dc0bad9e793843ff004d14e6b</hash>
+      <hash>1f8e4e250a637126869934b3be7ea2dd4def9697</hash>
+      <hash>6c9e951e83951c7189f9a7cae64114f2d068b149</hash>
+      <hash>ee358a80270841ec34573070bc44a9a973e975f7</hash>
+      <hash>52bd4e79805c4b82c582a0e54a16eb64a41e0265</hash>
+      <hash>beeab96f0955f21d919047b1548cc63dda681e99</hash>
+      <hash>1a1dcc661db31042e679d8aba08050fe4ac46eb4</hash>
+      <hash>50bc05e6b0117a66737fe0ed916f7f399fe99e08</hash>
+      <hash>e3324f3cda3c99be671c6fb194b6333f6dc9ebcd</hash>
+      <hash>f8a657caa0609cb1735b2f89df79a58085692fbe</hash>
+      <hash>68e81283af7bfa5be9f34c2a20c7e1c176447f47</hash>
+      <hash>c9b06b781e3c1206f98efd4e129d500e84140aac</hash>
+      <hash>5ea9392a721308c336c4947f650ae1d67e0219b2</hash>
+      <hash>ea395621e73a3cdf0c810c9b66fa14db08fb318b</hash>
+      <hash>80c5e69781257a49808d7dd41e8607ae85354230</hash>
+      <hash>798c5481862e497135160472d11d9588a2d67a14</hash>
+      <hash>1bcae9f627068040e89bddc27797dd9d9c8db03e</hash>
+      <hash>2b47afadd5782554928703669796bd39239271b2</hash>
+      <hash>782bcea66a64ace7c2a5a0cef1f9607bd8d27520</hash>
+      <hash>5cf8116d576d670d6be3a116383cdf7f0d9c8484</hash>
+      <hash>c721d424f73d1dcb1ec1964a7b8274d01932eb6a</hash>
+      <hash>93240a9223131a0179d979f2dce69a3eddffbc02</hash>
+      <hash>349abb4775ac5696ccee9c69ebcc609701bd58aa</hash>
+      <hash>5add463a4edb0ae91f7ccea535dfb7746d7d6dd9</hash>
+      <hash>b1515c806cf9b3e5d6e4583983469830c4a280d5</hash>
+      <hash>b3673a2dfae021812831b56f0f5b728e9ed18f16</hash>
+      <hash>d8334d5c17258b6ae3b81e465174543d624f3d60</hash>
+      <hash>9ed0e5219d14aac67748cd5224f6348db4975cfa</hash>
+      <hash>4ae31784ea2ed429d97badf0fcf4c0476629837a</hash>
+      <hash>5fbec5ca9e444ac869e307ad9c202266174aec52</hash>
+      <hash>9c76b3f2f5fe557e89935e83239c6f077b5a15c0</hash>
+      <hash>89416abb164886ab6d62a5069f6372dbb1d5aed6</hash>
+      <hash>4ab5bfc5a77c9bd9a02f4387a2a156ad435ca734</hash>
+      <hash>5e4f901d92f1a028a8600ae6d1733d1a1447c30f</hash>
+      <hash>002ca76cf81c26feb9e45a0f839c89ba6cbb61ab</hash>
+      <hash>3e200848aaaa4f6c4f47724e81b7ca756c41e843</hash>
+      <hash>e7fe994aa2131b3daff2f55c5b3e655089ff91df</hash>
+      <hash>27147f6cb293f64e7c92dd8ae456ebef7936b40b</hash>
+      <hash>21622d7ef1ca2927d6228f6d22e9a9ad840decf5</hash>
+      <hash>189e3e39639d1b21268c6f92bfb4c76a6d9d1675</hash>
+      <hash>94f8084e4d6439d5381fb008061c68831d54eca8</hash>
+      <hash>468346108131da81828a06effb7105fa9908570f</hash>
+      <hash>6a2c40a1161acb3e3192ba56f114a287d1bd8075</hash>
+      <hash>8364b1e1722b18c25e013290ac83f2e9826cd0b0</hash>
+      <hash>085a690dc2f967ebef514b0eedbb65b5acabc6ec</hash>
+      <hash>23c83426d57e5026a649aa567f33424c10ed26a0</hash>
+      <hash>8e64b4ff663e3f70ea8f78df0fa1f4c8a8fd6964</hash>
+      <hash>71a4e3c72ee14ebc3790feee49c1f9171b2c3b0b</hash>
+      <hash>07505ef63db167bb46b17ca93f00f358bc0bca70</hash>
+      <hash>18376e3f57aaef28a167d53da5641aa6c52aba51</hash>
+      <hash>25f657d2985d243f908db3e10610ebc925a871da</hash>
+      <hash>bd1d54dbad5b26d69f0b563f1871790814aae02c</hash>
+      <hash>d441456e1f7c43e7aef24a7eaa4a761640e0868e</hash>
+      <hash>9f8e36d32e573dbd34eaaabd5f55c50a81a597cf</hash>
+      <hash>3f79e9a63d018fda063efe1367a1933bfb95cff6</hash>
+      <hash>a3eb8c31e8fef133e1041ddbb645cb18f112c8bf</hash>
+      <hash>00eac6ff6914ae5fefc5d38f62dfb2f702d3438f</hash>
+      <hash>7837845b7cdd1374ad35543094c637b8a61a508d</hash>
+      <hash>9ecb417b572d73a8698e009cbace10d0f49bc1f4</hash>
+      <hash>58efd0711cdcb0d59bf63ac2cecd8b45b4699f14</hash>
+      <hash>f83e6c8ae5f654a7f62974f8cc48f7874e87608f</hash>
+      <hash>fef21cedd6aeecac6c65dcffcb07726cd7491bfc</hash>
+      <hash>6131018fa558299e5df017d50d206e54d12fdac6</hash>
+      <hash>9ad2d8009f5958ee0714f7104cf73b06340c651e</hash>
+      <hash>99bd899a87a9ae07e50cf0a8eee6b209a5ebce49</hash>
+      <hash>c25f16d3deffb6e9d362f072791ddc994d0d1a70</hash>
+      <hash>06a3f40e2a1ed91d4d0b6bbd1aadbdbe8dda9b95</hash>
+      <hash>ebd13b83c8a14249ed95fcf6900e5c58de46b881</hash>
+      <hash>81e55b598eb22532f5b48898f59e1c0a4619c078</hash>
+      <hash>ef81c3884c81def482f667886494d6f93ce52c1e</hash>
+      <hash>555a16832d6b8acb9c8184a5eff52ba082e62000</hash>
+      <hash>4ac5ad095910ef4148dc526a147edaf38fc894e5</hash>
+      <hash>78cf92a1f62daf43273e0e5189e4969b3f40c284</hash>
+      <hash>a3b9ee6f0d9e00c5f2b0155f18288ec5656707b8</hash>
+      <hash>f7e7ae7cc6d63c8947aa87a9dc37642c13292401</hash>
+      <hash>7d6d48f8721f4b3c9b9dedc95ad55b1c6573d71c</hash>
+      <hash>db8bfaa26b11df13d8896e14731861fccdc477b1</hash>
+      <hash>848ed4b02af9b094459def417cc7c11736975d85</hash>
+      <hash>02d15cb753a295103146621251e51d61dff48351</hash>
+      <hash>55fd50c584c10365cacaffe437e60b01883687e6</hash>
+      <hash>52e09e6ea21b615131a55ccc3c3889693d357555</hash>
+      <hash>51f4a27756d001bc2861e09fa66e1c61e733c96a</hash>
+      <hash>d74b8360e3e79fdae041f352dc43b5c47fbe9d6c</hash>
+      <hash>b1c9de6514a7b4674aa1d902e4ffcfb5cb3dd653</hash>
+      <hash>76e85afeca22666bd9fe882baf184ab16bbd42d2</hash>
+      <hash>654e52677ceb84aea219d4d4fea61e79db34a631</hash>
+      <hash>7fa1c90807ca53c64553ae9538dc9b3a545538ea</hash>
+      <hash>2158c837a32a3e6deac4458985898be39696cea8</hash>
+      <hash>d6499e8d4d0e6dab8a9acee357312be7fd93c195</hash>
+      <hash>e92698d28f58b976527799619f68c98fd6b1f365</hash>
+      <hash>5c706b017ed4d74765d3c7015ab76370f961acf9</hash>
+      <hash>f143b67707f982a488d864a2d1e148f07eef1dd0</hash>
+      <hash>709a783cb5ba13dcc0b309cb12b8a5fc9582d1b7</hash>
+      <hash>452244a5246739fa8ba424b1b754da9fe5e8f6a4</hash>
+      <hash>b1b3bc21c6054382d40b6309de3f307e03ab8814</hash>
+      <hash>863a5fcb1f90350550bb366eb2b5d9af4f952beb</hash>
+      <hash>fd1100fc41b85a27dd5144a64e9552a09cea327c</hash>
+      <hash>31c2f06b23a797c8252b0efc6cb55e86531582f5</hash>
+      <hash>91ba8885fd33e935ea57f4936f41cad8afee735c</hash>
+      <hash>9320db884775a370709c7fc6dcb37eca77c46dd4</hash>
+      <hash>e219dc3a4cd44d2785fa6f4c7f930f2eadfb37ff</hash>
+      <hash>2a2ac760f2944c4e1b6ac7d3001ecc09ad49b1bc</hash>
+      <hash>693d0e7a7af313dd849c48222276e25d635512bc</hash>
+      <hash>23788c5daf28813cdc6a14f1f02add712c020fd9</hash>
+    </pieces>
+
+
+    <!-- Found 118 mirrors: 0 in the same network prefix, 0 in the same autonomous system,
+         15 handling this country, 43 in the same region, 45 elsewhere -->
+
+    <!-- Mirrors in the same network (unknown): -->
+
+    <!-- Mirrors in the same AS (3320): -->
+
+    <!-- Mirrors which handle this country (DE): -->
+    <url location="de" priority="1" maxconnections="10">http://ftp.uni-erlangen.de/pub/mirrors/opensuse/update/leap/15.0/oss/repodata/702d2a63e32b11a60ef853247f7901a71d0ec12731003a433dc17d200021a121-other.xml.gz</url>
+    <url location="de" priority="2">http://widehat.opensuse.org/update/leap/15.0/oss/repodata/702d2a63e32b11a60ef853247f7901a71d0ec12731003a433dc17d200021a121-other.xml.gz</url>
+    <url location="de" priority="3">http://ftp.uni-bayreuth.de/linux/opensuse/update/leap/15.0/oss/repodata/702d2a63e32b11a60ef853247f7901a71d0ec12731003a433dc17d200021a121-other.xml.gz</url>
+    <url location="de" priority="4">http://ftp.rz.uni-wuerzburg.de/linux/opensuse/update/leap/15.0/oss/repodata/702d2a63e32b11a60ef853247f7901a71d0ec12731003a433dc17d200021a121-other.xml.gz</url>
+    <url location="de" priority="5">http://ftp.tu-chemnitz.de/pub/linux/opensuse/update/leap/15.0/oss/repodata/702d2a63e32b11a60ef853247f7901a71d0ec12731003a433dc17d200021a121-other.xml.gz</url>
+    <url location="de" priority="6">https://ftp.gwdg.de/pub/opensuse/update/leap/15.0/oss/repodata/702d2a63e32b11a60ef853247f7901a71d0ec12731003a433dc17d200021a121-other.xml.gz</url>
+    <url location="de" priority="7">http://opensuse.schlundtech.de/update/leap/15.0/oss/repodata/702d2a63e32b11a60ef853247f7901a71d0ec12731003a433dc17d200021a121-other.xml.gz</url>
+    <url location="de" priority="8">http://mirror.de.leaseweb.net/opensuse/update/leap/15.0/oss/repodata/702d2a63e32b11a60ef853247f7901a71d0ec12731003a433dc17d200021a121-other.xml.gz</url>
+    <url location="de" priority="9">http://mirror.braun-software-solutions.de/opensuse/update/leap/15.0/oss/repodata/702d2a63e32b11a60ef853247f7901a71d0ec12731003a433dc17d200021a121-other.xml.gz</url>
+    <url location="de" priority="10">http://mirror1.hs-esslingen.de/pub/Mirrors/ftp.opensuse.org/update/leap/15.0/oss/repodata/702d2a63e32b11a60ef853247f7901a71d0ec12731003a433dc17d200021a121-other.xml.gz</url>
+    <url location="de" priority="11">http://suse.uni-leipzig.de/pub/ftp.opensuse.org/opensuse/update/leap/15.0/oss/repodata/702d2a63e32b11a60ef853247f7901a71d0ec12731003a433dc17d200021a121-other.xml.gz</url>
+    <url location="de" priority="12">http://opensuse.mirror.iphh.net/update/leap/15.0/oss/repodata/702d2a63e32b11a60ef853247f7901a71d0ec12731003a433dc17d200021a121-other.xml.gz</url>
+    <url location="de" priority="13">http://ftp.uni-kl.de/pub/linux/opensuse/update/leap/15.0/oss/repodata/702d2a63e32b11a60ef853247f7901a71d0ec12731003a433dc17d200021a121-other.xml.gz</url>
+    <url location="de" priority="14">http://ftp.tu-ilmenau.de/mirror/opensuse/update/leap/15.0/oss/repodata/702d2a63e32b11a60ef853247f7901a71d0ec12731003a433dc17d200021a121-other.xml.gz</url>
+    <url location="de" priority="15">http://ftp.halifax.rwth-aachen.de/opensuse/update/leap/15.0/oss/repodata/702d2a63e32b11a60ef853247f7901a71d0ec12731003a433dc17d200021a121-other.xml.gz</url>
+
+    <!-- Mirrors in the same continent (EU): -->
+    <url location="cz" priority="16">http://ftp.sh.cvut.cz/opensuse/update/leap/15.0/oss/repodata/702d2a63e32b11a60ef853247f7901a71d0ec12731003a433dc17d200021a121-other.xml.gz</url>
+    <url location="cz" priority="17">http://mirrors.nic.cz/opensuse/opensuse/update/leap/15.0/oss/repodata/702d2a63e32b11a60ef853247f7901a71d0ec12731003a433dc17d200021a121-other.xml.gz</url>
+    <url location="ch" priority="18">http://mirror.hostsuisse.com/opensuse/update/leap/15.0/oss/repodata/702d2a63e32b11a60ef853247f7901a71d0ec12731003a433dc17d200021a121-other.xml.gz</url>
+    <url location="ch" priority="19">http://pkg.adfinis-sygroup.ch/opensuse/opensuse/update/leap/15.0/oss/repodata/702d2a63e32b11a60ef853247f7901a71d0ec12731003a433dc17d200021a121-other.xml.gz</url>
+    <url location="si" priority="20">http://mirrors.xgroup.si/opensuse/update/leap/15.0/oss/repodata/702d2a63e32b11a60ef853247f7901a71d0ec12731003a433dc17d200021a121-other.xml.gz</url>
+    <url location="cz" priority="21">http://ftp.linux.cz/pub/linux/opensuse/update/leap/15.0/oss/repodata/702d2a63e32b11a60ef853247f7901a71d0ec12731003a433dc17d200021a121-other.xml.gz</url>
+    <url location="cz" priority="22">http://mirror.karneval.cz/pub/linux/opensuse/update/leap/15.0/oss/repodata/702d2a63e32b11a60ef853247f7901a71d0ec12731003a433dc17d200021a121-other.xml.gz</url>
+    <url location="at" priority="23">http://mirror.easyname.at/opensuse/update/leap/15.0/oss/repodata/702d2a63e32b11a60ef853247f7901a71d0ec12731003a433dc17d200021a121-other.xml.gz</url>
+    <url location="dk" priority="24">http://mirrors.dotsrc.org/opensuse/update/leap/15.0/oss/repodata/702d2a63e32b11a60ef853247f7901a71d0ec12731003a433dc17d200021a121-other.xml.gz</url>
+    <url location="dk" priority="25">http://ftp.klid.dk/ftp/opensuse/update/leap/15.0/oss/repodata/702d2a63e32b11a60ef853247f7901a71d0ec12731003a433dc17d200021a121-other.xml.gz</url>
+    <url location="pl" priority="26">http://ftp.man.poznan.pl/linux/opensuse/update/leap/15.0/oss/repodata/702d2a63e32b11a60ef853247f7901a71d0ec12731003a433dc17d200021a121-other.xml.gz</url>
+    <url location="nl" priority="27">http://ftp1.nluug.nl/os/Linux/distr/opensuse/update/leap/15.0/oss/repodata/702d2a63e32b11a60ef853247f7901a71d0ec12731003a433dc17d200021a121-other.xml.gz</url>
+    <url location="nl" priority="28">http://ftp2.nluug.nl/os/Linux/distr/opensuse/update/leap/15.0/oss/repodata/702d2a63e32b11a60ef853247f7901a71d0ec12731003a433dc17d200021a121-other.xml.gz</url>
+    <url location="nl" priority="29">http://mirror.nl.leaseweb.net/opensuse/update/leap/15.0/oss/repodata/702d2a63e32b11a60ef853247f7901a71d0ec12731003a433dc17d200021a121-other.xml.gz</url>
+    <url location="nl" priority="30">http://opensuse.mirror.liteserver.nl/update/leap/15.0/oss/repodata/702d2a63e32b11a60ef853247f7901a71d0ec12731003a433dc17d200021a121-other.xml.gz</url>
+    <url location="be" priority="31">http://ftp.belnet.be/mirror/ftp.opensuse.org/update/leap/15.0/oss/repodata/702d2a63e32b11a60ef853247f7901a71d0ec12731003a433dc17d200021a121-other.xml.gz</url>
+    <url location="it" priority="32">http://opensuse.mirror.garr.it/mirrors/opensuse/update/leap/15.0/oss/repodata/702d2a63e32b11a60ef853247f7901a71d0ec12731003a433dc17d200021a121-other.xml.gz</url>
+    <url location="pl" priority="33">http://ftp.pbone.net/pub/opensuse/update/leap/15.0/oss/repodata/702d2a63e32b11a60ef853247f7901a71d0ec12731003a433dc17d200021a121-other.xml.gz</url>
+    <url location="hu" priority="34">http://quantum-mirror.hu/mirrors/pub/opensuse/update/leap/15.0/oss/repodata/702d2a63e32b11a60ef853247f7901a71d0ec12731003a433dc17d200021a121-other.xml.gz</url>
+    <url location="hu" priority="35">http://ftp.fsn.hu/pub/linux/distributions/opensuse/update/leap/15.0/oss/repodata/702d2a63e32b11a60ef853247f7901a71d0ec12731003a433dc17d200021a121-other.xml.gz</url>
+    <url location="fr" priority="36">http://fr2.rpmfind.net/linux/opensuse/update/leap/15.0/oss/repodata/702d2a63e32b11a60ef853247f7901a71d0ec12731003a433dc17d200021a121-other.xml.gz</url>
+    <url location="sk" priority="37">http://tux.rainside.sk/opensuse/update/leap/15.0/oss/repodata/702d2a63e32b11a60ef853247f7901a71d0ec12731003a433dc17d200021a121-other.xml.gz</url>
+    <url location="fr" priority="38">http://opensuse.mirrors.proxad.net/opensuse/update/leap/15.0/oss/repodata/702d2a63e32b11a60ef853247f7901a71d0ec12731003a433dc17d200021a121-other.xml.gz</url>
+    <url location="se" priority="39">http://ftp.lysator.liu.se/pub/opensuse/update/leap/15.0/oss/repodata/702d2a63e32b11a60ef853247f7901a71d0ec12731003a433dc17d200021a121-other.xml.gz</url>
+    <url location="pl" priority="40">http://ftp.icm.edu.pl/pub/Linux/opensuse/update/leap/15.0/oss/repodata/702d2a63e32b11a60ef853247f7901a71d0ec12731003a433dc17d200021a121-other.xml.gz</url>
+    <url location="pl" priority="41">http://ftp.vectranet.pl/opensuse/update/leap/15.0/oss/repodata/702d2a63e32b11a60ef853247f7901a71d0ec12731003a433dc17d200021a121-other.xml.gz</url>
+    <url location="se" priority="42">http://ftp.acc.umu.se/mirror/opensuse.org/update/leap/15.0/oss/repodata/702d2a63e32b11a60ef853247f7901a71d0ec12731003a433dc17d200021a121-other.xml.gz</url>
+    <url location="nl" priority="43">http://opensuse.hro.nl/opensuse/update/leap/15.0/oss/repodata/702d2a63e32b11a60ef853247f7901a71d0ec12731003a433dc17d200021a121-other.xml.gz</url>
+    <url location="gb" priority="44">http://mirrors.coreix.net/opensuse/update/leap/15.0/oss/repodata/702d2a63e32b11a60ef853247f7901a71d0ec12731003a433dc17d200021a121-other.xml.gz</url>
+    <url location="gb" priority="45">http://mirror.ox.ac.uk/sites/ftp.opensuse.org/pub/opensuse/update/leap/15.0/oss/repodata/702d2a63e32b11a60ef853247f7901a71d0ec12731003a433dc17d200021a121-other.xml.gz</url>
+    <url location="hu" priority="46">http://ftp.novell.hu/pub/mirrors/ftp.opensuse.org/opensuse/update/leap/15.0/oss/repodata/702d2a63e32b11a60ef853247f7901a71d0ec12731003a433dc17d200021a121-other.xml.gz</url>
+    <url location="lv" priority="47">http://opensuse.koyanet.lv/update/leap/15.0/oss/repodata/702d2a63e32b11a60ef853247f7901a71d0ec12731003a433dc17d200021a121-other.xml.gz</url>
+    <url location="gb" priority="48">http://mirror.rackspace.co.uk/openSUSE/update/leap/15.0/oss/repodata/702d2a63e32b11a60ef853247f7901a71d0ec12731003a433dc17d200021a121-other.xml.gz</url>
+    <url location="bg" priority="49">http://opensuse.ipacct.com/opensuse/update/leap/15.0/oss/repodata/702d2a63e32b11a60ef853247f7901a71d0ec12731003a433dc17d200021a121-other.xml.gz</url>
+    <url location="bg" priority="50">http://mirrors.netix.net/opensuse/update/leap/15.0/oss/repodata/702d2a63e32b11a60ef853247f7901a71d0ec12731003a433dc17d200021a121-other.xml.gz</url>
+    <url location="gb" priority="51">http://www.mirrorservice.org/sites/download.opensuse.org/update/leap/15.0/oss/repodata/702d2a63e32b11a60ef853247f7901a71d0ec12731003a433dc17d200021a121-other.xml.gz</url>
+    <url location="ro" priority="52">http://mirrors.nxthost.com/opensuse/update/leap/15.0/oss/repodata/702d2a63e32b11a60ef853247f7901a71d0ec12731003a433dc17d200021a121-other.xml.gz</url>
+    <url location="se" priority="53">http://ftp.acc.umu.se/mirror/opensuse.org/update/leap/15.0/oss/repodata/702d2a63e32b11a60ef853247f7901a71d0ec12731003a433dc17d200021a121-other.xml.gz</url>
+    <url location="fi" priority="54">http://ftp.funet.fi/pub/mirrors/ftp.opensuse.com/pub/opensuse/update/leap/15.0/oss/repodata/702d2a63e32b11a60ef853247f7901a71d0ec12731003a433dc17d200021a121-other.xml.gz</url>
+    <url location="pt" priority="55">http://ftp.rnl.tecnico.ulisboa.pt/pub/opensuse/update/leap/15.0/oss/repodata/702d2a63e32b11a60ef853247f7901a71d0ec12731003a433dc17d200021a121-other.xml.gz</url>
+    <url location="cy" priority="56">http://mirror.library.ucy.ac.cy/linux/opensuse/update/leap/15.0/oss/repodata/702d2a63e32b11a60ef853247f7901a71d0ec12731003a433dc17d200021a121-other.xml.gz</url>
+    <url location="ru" priority="57">http://mirror.yandex.ru/opensuse/update/leap/15.0/oss/repodata/702d2a63e32b11a60ef853247f7901a71d0ec12731003a433dc17d200021a121-other.xml.gz</url>
+    <url location="nl" priority="58">http://ams.edge.kernel.org/opensuse/update/leap/15.0/oss/repodata/702d2a63e32b11a60ef853247f7901a71d0ec12731003a433dc17d200021a121-other.xml.gz</url>
+
+    <!-- Mirrors in the rest of the world: -->
+    <url location="am" priority="59">http://opensuse.ucom.am/update/leap/15.0/oss/repodata/702d2a63e32b11a60ef853247f7901a71d0ec12731003a433dc17d200021a121-other.xml.gz</url>
+    <url location="ir" priority="60">http://repo.iut.ac.ir/repo/opensuse/update/leap/15.0/oss/repodata/702d2a63e32b11a60ef853247f7901a71d0ec12731003a433dc17d200021a121-other.xml.gz</url>
+    <url location="uz" priority="61">http://mirror.dc.uz/opensuse/update/leap/15.0/oss/repodata/702d2a63e32b11a60ef853247f7901a71d0ec12731003a433dc17d200021a121-other.xml.gz</url>
+    <url location="om" priority="62">http://mirror.squ.edu.om/opensuse/opensuse/update/leap/15.0/oss/repodata/702d2a63e32b11a60ef853247f7901a71d0ec12731003a433dc17d200021a121-other.xml.gz</url>
+    <url location="ke" priority="63">http://opensuse.mirror.liquidtelecom.com/update/leap/15.0/oss/repodata/702d2a63e32b11a60ef853247f7901a71d0ec12731003a433dc17d200021a121-other.xml.gz</url>
+    <url location="ca" priority="64">http://mirror.its.dal.ca/opensuse/update/leap/15.0/oss/repodata/702d2a63e32b11a60ef853247f7901a71d0ec12731003a433dc17d200021a121-other.xml.gz</url>
+    <url location="us" priority="65">http://mirror.siena.edu/opensuse/update/leap/15.0/oss/repodata/702d2a63e32b11a60ef853247f7901a71d0ec12731003a433dc17d200021a121-other.xml.gz</url>
+    <url location="jp" priority="66">http://nrt.edge.kernel.org/opensuse/update/leap/15.0/oss/repodata/702d2a63e32b11a60ef853247f7901a71d0ec12731003a433dc17d200021a121-other.xml.gz</url>
+    <url location="us" priority="67">http://sjc.edge.kernel.org/opensuse/update/leap/15.0/oss/repodata/702d2a63e32b11a60ef853247f7901a71d0ec12731003a433dc17d200021a121-other.xml.gz</url>
+    <url location="us" priority="68">http://ewr.edge.kernel.org/opensuse/update/leap/15.0/oss/repodata/702d2a63e32b11a60ef853247f7901a71d0ec12731003a433dc17d200021a121-other.xml.gz</url>
+    <url location="us" priority="69">http://mirror.clarkson.edu/opensuse/update/leap/15.0/oss/repodata/702d2a63e32b11a60ef853247f7901a71d0ec12731003a433dc17d200021a121-other.xml.gz</url>
+    <url location="us" priority="70">http://mirror.math.princeton.edu/pub/opensuse-full/opensuse/update/leap/15.0/oss/repodata/702d2a63e32b11a60ef853247f7901a71d0ec12731003a433dc17d200021a121-other.xml.gz</url>
+    <url location="br" priority="71">http://opensuse.c3sl.ufpr.br/update/leap/15.0/oss/repodata/702d2a63e32b11a60ef853247f7901a71d0ec12731003a433dc17d200021a121-other.xml.gz</url>
+    <url location="us" priority="72">http://mirror.us.leaseweb.net/opensuse/update/leap/15.0/oss/repodata/702d2a63e32b11a60ef853247f7901a71d0ec12731003a433dc17d200021a121-other.xml.gz</url>
+    <url location="us" priority="73">http://mirror.vtti.vt.edu/opensuse/update/leap/15.0/oss/repodata/702d2a63e32b11a60ef853247f7901a71d0ec12731003a433dc17d200021a121-other.xml.gz</url>
+    <url location="ca" priority="74">http://mirror.csclub.uwaterloo.ca/opensuse/update/leap/15.0/oss/repodata/702d2a63e32b11a60ef853247f7901a71d0ec12731003a433dc17d200021a121-other.xml.gz</url>
+    <url location="us" priority="75">http://mirrors.rit.edu/opensuse/update/leap/15.0/oss/repodata/702d2a63e32b11a60ef853247f7901a71d0ec12731003a433dc17d200021a121-other.xml.gz</url>
+    <url location="cn" priority="76">http://mirror.lzu.edu.cn/opensuse/update/leap/15.0/oss/repodata/702d2a63e32b11a60ef853247f7901a71d0ec12731003a433dc17d200021a121-other.xml.gz</url>
+    <url location="us" priority="77">http://plug-mirror.rcac.purdue.edu/opensuse/update/leap/15.0/oss/repodata/702d2a63e32b11a60ef853247f7901a71d0ec12731003a433dc17d200021a121-other.xml.gz</url>
+    <url location="cr" priority="78">http://mirrors.ucr.ac.cr/opensuse/update/leap/15.0/oss/repodata/702d2a63e32b11a60ef853247f7901a71d0ec12731003a433dc17d200021a121-other.xml.gz</url>
+    <url location="ec" priority="79">http://mirror.cedia.org.ec/opensuse/update/leap/15.0/oss/repodata/702d2a63e32b11a60ef853247f7901a71d0ec12731003a433dc17d200021a121-other.xml.gz</url>
+    <url location="cn" priority="80">http://mirror.bjtu.edu.cn/opensuse/update/leap/15.0/oss/repodata/702d2a63e32b11a60ef853247f7901a71d0ec12731003a433dc17d200021a121-other.xml.gz</url>
+    <url location="cn" priority="81">http://mirrors.tuna.tsinghua.edu.cn/opensuse/update/leap/15.0/oss/repodata/702d2a63e32b11a60ef853247f7901a71d0ec12731003a433dc17d200021a121-other.xml.gz</url>
+    <url location="hk" priority="82">http://mirror.rackspace.hk/openSUSE/update/leap/15.0/oss/repodata/702d2a63e32b11a60ef853247f7901a71d0ec12731003a433dc17d200021a121-other.xml.gz</url>
+    <url location="cn" priority="83">http://mirrors.ustc.edu.cn/opensuse/update/leap/15.0/oss/repodata/702d2a63e32b11a60ef853247f7901a71d0ec12731003a433dc17d200021a121-other.xml.gz</url>
+    <url location="uy" priority="84">http://espejito.fder.edu.uy/opensuse/update/leap/15.0/oss/repodata/702d2a63e32b11a60ef853247f7901a71d0ec12731003a433dc17d200021a121-other.xml.gz</url>
+    <url location="ca" priority="85">http://www.muug.mb.ca/pub/opensuse/update/leap/15.0/oss/repodata/702d2a63e32b11a60ef853247f7901a71d0ec12731003a433dc17d200021a121-other.xml.gz</url>
+    <url location="us" priority="86">http://mirror.dal10.us.leaseweb.net/opensuse/update/leap/15.0/oss/repodata/702d2a63e32b11a60ef853247f7901a71d0ec12731003a433dc17d200021a121-other.xml.gz</url>
+    <url location="us" priority="87">http://mirror.datto.com/opensuse/update/leap/15.0/oss/repodata/702d2a63e32b11a60ef853247f7901a71d0ec12731003a433dc17d200021a121-other.xml.gz</url>
+    <url location="us" priority="88">http://mirror.rackspace.com/openSUSE/update/leap/15.0/oss/repodata/702d2a63e32b11a60ef853247f7901a71d0ec12731003a433dc17d200021a121-other.xml.gz</url>
+    <url location="tw" priority="89">http://ftp.yzu.edu.tw/Linux/openSUSE/update/leap/15.0/oss/repodata/702d2a63e32b11a60ef853247f7901a71d0ec12731003a433dc17d200021a121-other.xml.gz</url>
+    <url location="kr" priority="90">http://ftp.kaist.ac.kr/pub/opensuse/update/leap/15.0/oss/repodata/702d2a63e32b11a60ef853247f7901a71d0ec12731003a433dc17d200021a121-other.xml.gz</url>
+    <url location="us" priority="91">https://provo-mirror.opensuse.org/update/leap/15.0/oss/repodata/702d2a63e32b11a60ef853247f7901a71d0ec12731003a433dc17d200021a121-other.xml.gz</url>
+    <url location="us" priority="92">http://opensuse.cs.utah.edu/update/leap/15.0/oss/repodata/702d2a63e32b11a60ef853247f7901a71d0ec12731003a433dc17d200021a121-other.xml.gz</url>
+    <url location="jp" priority="93">http://ftp.jaist.ac.jp/pub/Linux/openSUSE/update/leap/15.0/oss/repodata/702d2a63e32b11a60ef853247f7901a71d0ec12731003a433dc17d200021a121-other.xml.gz</url>
+    <url location="jp" priority="94">http://ftp.kddilabs.jp/Linux/packages/opensuse/update/leap/15.0/oss/repodata/702d2a63e32b11a60ef853247f7901a71d0ec12731003a433dc17d200021a121-other.xml.gz</url>
+    <url location="jp" priority="95">http://ftp.riken.jp/Linux/opensuse/update/leap/15.0/oss/repodata/702d2a63e32b11a60ef853247f7901a71d0ec12731003a433dc17d200021a121-other.xml.gz</url>
+    <url location="us" priority="96">http://mirror.sjc02.svwh.net/opensuse/update/leap/15.0/oss/repodata/702d2a63e32b11a60ef853247f7901a71d0ec12731003a433dc17d200021a121-other.xml.gz</url>
+    <url location="us" priority="97">http://mirror.sfo12.us.leaseweb.net/opensuse/update/leap/15.0/oss/repodata/702d2a63e32b11a60ef853247f7901a71d0ec12731003a433dc17d200021a121-other.xml.gz</url>
+    <url location="us" priority="98">http://opensuse-mirror-gce-ap.susecloud.net/update/leap/15.0/oss/repodata/702d2a63e32b11a60ef853247f7901a71d0ec12731003a433dc17d200021a121-other.xml.gz</url>
+    <url location="us" priority="99">http://opensuse-mirror-gce-us.opensu.se/update/leap/15.0/oss/repodata/702d2a63e32b11a60ef853247f7901a71d0ec12731003a433dc17d200021a121-other.xml.gz</url>
+    <url location="us" priority="100">http://sfo-korg-mirror.kernel.org/opensuse/update/leap/15.0/oss/repodata/702d2a63e32b11a60ef853247f7901a71d0ec12731003a433dc17d200021a121-other.xml.gz</url>
+    <url location="us" priority="101">http://suse.mobile-central.org/update/leap/15.0/oss/repodata/702d2a63e32b11a60ef853247f7901a71d0ec12731003a433dc17d200021a121-other.xml.gz</url>
+    <url location="nz" priority="102">http://opensuse.mirrors.theom.nz/update/leap/15.0/oss/repodata/702d2a63e32b11a60ef853247f7901a71d0ec12731003a433dc17d200021a121-other.xml.gz</url>
+    <url location="au" priority="103">http://mirror.internode.on.net/pub/opensuse/update/leap/15.0/oss/repodata/702d2a63e32b11a60ef853247f7901a71d0ec12731003a433dc17d200021a121-other.xml.gz</url>
+  </file>
+</metalink>

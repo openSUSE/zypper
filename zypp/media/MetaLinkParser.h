@@ -19,11 +19,17 @@
 #include <zypp/base/InputStream.h>
 #include <zypp/media/MediaBlockList.h>
 #include <zypp/Url.h>
+#include <zypp/ByteArray.h>
 
-namespace zypp {
-  namespace media {
+namespace zypp::media {
 
 struct ml_parsedata;
+
+struct MetalinkMirror {
+  int priority = 0;
+  int maxConnections = -1; //< How many connections can be opened to that mirror, -1 means no limit was defined.
+  Url url;
+};
 
 class MetaLinkParser : private zypp::base::NonCopyable {
 public:
@@ -56,17 +62,27 @@ public:
   /**
    * return the download urls from the parsed metalink data
    **/
-  std::vector<Url> getUrls();
+  std::vector<Url> getUrls() const;
+
+  /**
+   * return the mirrors from the parsed metalink data
+   */
+  const std::vector<MetalinkMirror> &getMirrors() const;
+
   /**
    * return the block list from the parsed metalink data
    **/
-  MediaBlockList getBlockList();
+  MediaBlockList getBlockList() const;
+
+  const std::vector<ByteArray> &getZsyncBlockHashes () const;
+  const std::vector<ByteArray> &getSHA1BlockHashes () const;
 
 private:
   struct ml_parsedata *pd;
 };
 
-  } // namespace media
-} // namespace zypp
+ByteArray hexstr2bytes( std::string str );
+
+} // namespace zypp::media
 
 #endif // ZYPP_MEDIA_METALINKPARSER_H
