@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-03-11 12:14+0100\n"
-"PO-Revision-Date: 2020-03-11 18:55+0000\n"
+"PO-Revision-Date: 2020-05-02 19:50+0000\n"
 "Last-Translator: David Medina <medipas@gmail.com>\n"
 "Language-Team: Catalan <https://l10n.opensuse.org/projects/zypper/master/ca/>"
 "\n"
@@ -493,7 +493,7 @@ msgstr[1] "S'han detectat %1% conflictes de fitxer:"
 
 #: src/callbacks/rpm.h:478
 msgid "Conflicting files will be replaced."
-msgstr "Els fitxers conflictius se substituiran."
+msgstr "Els fitxers conflictius es reemplaçaran."
 
 #. TranslatorExplanation Problem description before asking whether to "Continue? [yes/no] (no):"
 #: src/callbacks/rpm.h:484
@@ -502,9 +502,9 @@ msgid ""
 "same name but different contents. If you continue, conflicting files will be "
 "replaced losing the previous content."
 msgstr ""
-"Els conflictes entre fitxers succeeixen quan dos paquets intenten instal·lar "
-"fitxers amb el mateix nom però amb contingut diferent. Si continueu, els "
-"fitxers conflictius seran substituïts i es perdrà el contingut previ."
+"Els conflictes entre fitxers s'esdevenen quan dos paquets intenten instal·"
+"lar fitxers amb el mateix nom però amb contingut diferent. Si continueu, els "
+"fitxers conflictius es reemplaçaran i se'n perdrà el contingut previ."
 
 #. translator: %s is an other command: "This is an alias for 'zypper info -t patch'."
 #: src/commands/commandhelpformatter.h:94
@@ -2827,7 +2827,7 @@ msgstr "Llista tots els paquets que proporcionin la capacitat especificada."
 #: src/commands/nullcommands.cc:52
 #, c-format, boost-format
 msgid "Command '%s' is replaced by '%s'."
-msgstr "L'ordre \"%s\" se substitueix per \"%s\"."
+msgstr "L'ordre \"%s\" es reemplaça per \"%s\"."
 
 #: src/commands/nullcommands.cc:53
 #, c-format, boost-format
@@ -2918,8 +2918,8 @@ msgid ""
 "installed, packages. Default is to treat file conflicts as an error. --"
 "download-as-needed disables the fileconflict check."
 msgstr ""
-"Instal·la els paquets fins i tot si substitueixen fitxers d'altres paquets "
-"ja instal·lats. Per defecte es tracten els conflictes entre fitxers com a "
+"Instal·la els paquets fins i tot si reemplacen fitxers d'altres paquets ja "
+"instal·lats. Per defecte es tracten els conflictes entre fitxers com a "
 "errors. --download-as-needed inhabilita la comprovació de conflictes."
 
 #. translators: -y, --no-confirm
@@ -3049,7 +3049,7 @@ msgid ""
 msgstr ""
 "Per a cada servei associat del sistema imprimeix en <format> a la sortida "
 "estàndard, seguit per una línia nova. Qualsevol directiva \"%s\" en <format> "
-"se substitueix pel nom de servei del sistema."
+"es reemplaça pel nom del servei del sistema."
 
 #. translators: -d, --debugFile <path>
 #: src/commands/ps.cc:52
