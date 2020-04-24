@@ -1,6 +1,6 @@
 #include "mediacurlprefetcher.h"
 
-#include "zypp/zyppng/base/EventDispatcher"
+#include "zypp/zyppng/base/EventLoop"
 #include "zypp/zyppng/base/SocketNotifier"
 #include "zypp/zyppng/media/network/downloader.h"
 #include "zypp/zyppng/media/network/networkrequestdispatcher.h"
@@ -223,7 +223,7 @@ namespace zypp
       if ( getenv("ZYPP_PREFETCHER_LOGFILE") )
         zypp::base::LogControl::instance().logfile( getenv("ZYPP_PREFETCHER_LOGFILE") );
 
-      auto dispatch = zyppng::EventDispatcher::createForThread();
+      auto dispatch = zyppng::EventLoop::create();
 
       zyppng::Downloader downloader;
       downloader.requestDispatcher()->setMaximumConcurrentConnections( 30 );

@@ -1,4 +1,5 @@
 #include <boost/test/unit_test.hpp>
+#include <zypp/zyppng/base/EventLoop>
 #include <zypp/zyppng/base/EventDispatcher>
 #include <zypp/zyppng/base/Timer>
 #include <zypp/base/Exception.h>
@@ -7,7 +8,7 @@
 
 BOOST_AUTO_TEST_CASE(eventloop)
 {
-  zyppng::EventDispatcher::Ptr loop = zyppng::EventDispatcher::createMain();
+  zyppng::EventLoop::Ptr loop = zyppng::EventLoop::create();
 
   //we should hit that timer first
   zyppng::Timer::Ptr t1 = zyppng::Timer::create();
@@ -27,7 +28,7 @@ BOOST_AUTO_TEST_CASE(eventloop)
   int executedIdle = 0;
   int executedIdleOnce = 0;
 
-  t1->sigExpired().connect( [ &hitT1, &t3 ]( zyppng::Timer &t) {
+  t1->sigExpired().connect( [ &hitT1, &t3 ]( zyppng::Timer & ) {
     hitT1++;
     t3.reset();
   });
@@ -44,7 +45,7 @@ BOOST_AUTO_TEST_CASE(eventloop)
   });
 
   t4->setSingleShot( true );
-  t4->sigExpired().connect( [ &hitT4 ]( zyppng::Timer &t ){
+  t4->sigExpired().connect( [ &hitT4 ]( zyppng::Timer & ){
     hitT4++;
 
     //timer deviation should not be too big, can only be tested on a singleShot timer
@@ -73,7 +74,7 @@ BOOST_AUTO_TEST_CASE(eventloop)
   t1->stop();
   t2->stop();
 
-  BOOST_REQUIRE_EQUAL( loop->runningTimers(), 0 );
+  BOOST_REQUIRE_EQUAL( loop->eventDispatcher()->runningTimers(), 0 );
 }
 
 BOOST_AUTO_TEST_CASE(createTimerWithoutEV)
@@ -83,8 +84,8 @@ BOOST_AUTO_TEST_CASE(createTimerWithoutEV)
 
 BOOST_AUTO_TEST_CASE(checkcleanup)
 {
-  zyppng::EventDispatcher::Ptr loop = zyppng::EventDispatcher::createMain();
-  BOOST_REQUIRE_EQUAL( loop.get(), zyppng::EventDispatcher::instance().get() );
+  zyppng::EventLoop::Ptr loop = zyppng::EventLoop::create();
+  BOOST_REQUIRE_EQUAL( loop->eventDispatcher().get(), zyppng::EventDispatcher::instance().get() );
 
   //explicit cleanup
   loop.reset();
@@ -92,13 +93,7 @@ BOOST_AUTO_TEST_CASE(checkcleanup)
 
   //implicit cleanup
   {
-    zyppng::EventDispatcher::createMain();
+    zyppng::EventLoop::create();
     BOOST_REQUIRE_EQUAL( static_cast<zyppng::EventDispatcher *>(nullptr), zyppng::EventDispatcher::instance().get() );
   }
-
-  //only one instance per thread
-  loop = zyppng::EventDispatcher::createMain();
-  BOOST_REQUIRE_THROW( zyppng::EventDispatcher::createMain(), zypp::Exception );
-
-  BOOST_REQUIRE_EQUAL( loop.get(), zyppng::EventDispatcher::instance().get() );
 }

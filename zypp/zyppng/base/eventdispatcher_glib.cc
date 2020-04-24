@@ -1,6 +1,6 @@
-#include "eventdispatcher.h"
 #include "timer.h"
 #include "private/eventdispatcher_glib_p.h"
+#include "private/threaddata_p.h"
 
 #include <zypp/base/Exception.h>
 #include <zypp/base/Logger.h>
@@ -16,18 +16,6 @@ static int inline writeMask () {
 
 static int inline excpMask () {
   return ( G_IO_PRI );
-}
-
-//returns the thread local dispatcher, we only support one EventDispatcher per thread
-static EventDispatcher **threadLocalDispatcher ( EventDispatcher * set = nullptr )
-{
-  static __thread EventDispatcher *threadDispatch = nullptr;
-  if ( set ) {
-    if ( threadDispatch )
-      ZYPP_THROW( zypp::Exception( "EventDispatcher can only be created once per thread" ) );
-    threadDispatch = set;
-  }
-  return &threadDispatch;
 }
 
 static GSourceFuncs abstractEventSourceFuncs = {
@@ -239,16 +227,10 @@ EventDispatcherPrivate::EventDispatcherPrivate ( GMainContext *ctx )
     _ctx = ctx;
     g_main_context_ref ( _ctx );
   } else {
-    _ctx = g_main_context_get_thread_default();
-    if ( !_ctx ) {
-      _ctx = g_main_context_new();
-    } else {
-      g_main_context_ref ( _ctx );
-    }
+    _ctx = g_main_context_new();
   }
-  g_main_context_push_thread_default( _ctx );
-
-  _loop = g_main_loop_new( _ctx, false );
+  // Enable this again once we switch to a full async API that requires a eventloop before calling any zypp functions
+  // g_main_context_push_thread_default( _ctx );
 }
 
 EventDispatcherPrivate::~EventDispatcherPrivate()
@@ -266,9 +248,8 @@ EventDispatcherPrivate::~EventDispatcherPrivate()
     g_source_unref ( _idleSource );
   }
 
-  g_main_context_pop_thread_default( _ctx );
+  //g_main_context_pop_thread_default( _ctx );
   g_main_context_unref( _ctx );
-  g_main_loop_unref( _loop );
 }
 
 bool EventDispatcherPrivate::runIdleTasks()
@@ -301,26 +282,18 @@ void EventDispatcherPrivate::enableIdleSource()
   }
 }
 
-
-EventDispatcher::EventDispatcher(void *ctx)
-  : Base ( * new EventDispatcherPrivate( reinterpret_cast<GMainContext*>(ctx) ) )
-{
-  threadLocalDispatcher( this );
-}
-
-std::shared_ptr<EventDispatcher> EventDispatcher::createMain()
-{
-  return std::shared_ptr<EventDispatcher>( new EventDispatcher(g_main_context_default()) );
-}
-
-std::shared_ptr<EventDispatcher> EventDispatcher::createForThread()
+std::shared_ptr<EventDispatcher> EventDispatcherPrivate::create()
 {
   return std::shared_ptr<EventDispatcher>( new EventDispatcher() );
 }
 
+EventDispatcher::EventDispatcher(void *ctx)
+  : Base ( * new EventDispatcherPrivate( reinterpret_cast<GMainContext*>(ctx) ) )
+{
+}
+
 EventDispatcher::~EventDispatcher()
 {
-  *threadLocalDispatcher() = nullptr;
 }
 
 void EventDispatcher::updateEventSource( AbstractEventSource *notifier, int fd, int mode )
@@ -440,19 +413,14 @@ void EventDispatcher::removeTimer( Timer *timer )
   }
 }
 
+void *EventDispatcher::nativeDispatcherHandle() const
+{
+  return d_func()->_ctx;
+}
+
 bool EventDispatcher::run_once()
 {
   return g_main_context_iteration( d_func()->_ctx, false );
-}
-
-void EventDispatcher::run()
-{
-  g_main_loop_run( d_func()->_loop );
-}
-
-void EventDispatcher::quit()
-{
-  g_main_loop_quit( d_func()->_loop );
 }
 
 void EventDispatcher::invokeOnIdleImpl(EventDispatcher::IdleFunction &&callback)
@@ -476,10 +444,12 @@ ulong EventDispatcher::runningTimers() const
 
 std::shared_ptr<EventDispatcher> EventDispatcher::instance()
 {
-  auto ev = *threadLocalDispatcher();
-  if ( ev )
-    return ev->shared_this<EventDispatcher>();
-  return std::shared_ptr<EventDispatcher>();
+  return ThreadData::current().dispatcher.lock();
+}
+
+void EventDispatcher::setThreadDispatcher(const std::shared_ptr<EventDispatcher> &disp)
+{
+  ThreadData::current().setDispatcher( disp );
 }
 
 }

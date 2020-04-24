@@ -1,6 +1,6 @@
 #include <boost/test/unit_test.hpp>
 #include <boost/test/data/test_case.hpp>
-#include <zypp/zyppng/base/EventDispatcher>
+#include <zypp/zyppng/base/EventLoop>
 #include <zypp/media/MetaLinkParser.h> // for hexstr2bytes
 #include <zypp/zyppng/media/network/request.h>
 #include <zypp/zyppng/media/network/networkrequestdispatcher.h>
@@ -59,7 +59,7 @@ BOOST_DATA_TEST_CASE(nwdispatcher_basic, bdata::make( withSSL ), withSSL)
 {
   std::string dummyContent = "This is just some dummy content,\nto test downloading and signals.";
 
-  auto ev = zyppng::EventDispatcher::createMain();
+  auto ev = zyppng::EventLoop::create();
 
   WebServer web((zypp::Pathname(TESTS_SRC_DIR)/"data"/"dummywebroot").c_str(), 10001, withSSL );
   web.addRequestHandler("getData", WebServer::makeResponse("200 OK", dummyContent ) );
@@ -115,7 +115,7 @@ BOOST_DATA_TEST_CASE(nwdispatcher_http_errors, bdata::make( withSSL ), withSSL)
     return WebServer::makeResponse( err, "This is a error." );
   };
 
-  auto ev = zyppng::EventDispatcher::createMain();
+  auto ev = zyppng::EventLoop::create();
   WebServer web((zypp::Pathname(TESTS_SRC_DIR)/"data"/"dummywebroot").c_str(), 10001, withSSL );
 
   web.addRequestHandler("get404", WebServer::makeResponse( err404 ) );
@@ -218,7 +218,7 @@ BOOST_DATA_TEST_CASE(nwdispatcher_http_errors, bdata::make( withSSL ), withSSL)
 
 BOOST_DATA_TEST_CASE(nwdispatcher_http_download, bdata::make( withSSL ), withSSL )
 {
-  auto ev = zyppng::EventDispatcher::createMain();
+  auto ev = zyppng::EventLoop::create();
   zyppng::NetworkRequestDispatcher disp;
   disp.sigQueueFinished().connect( [&ev]( const zyppng::NetworkRequestDispatcher& ){
     ev->quit();
@@ -274,7 +274,7 @@ BOOST_DATA_TEST_CASE(nwdispatcher_http_download, bdata::make( withSSL ), withSSL
 
 BOOST_DATA_TEST_CASE(nwdispatcher_delay_download, bdata::make( withSSL ), withSSL )
 {
-  auto ev = zyppng::EventDispatcher::createMain();
+  auto ev = zyppng::EventLoop::create();
   zyppng::NetworkRequestDispatcher disp;
   disp.sigQueueFinished().connect( [&ev]( const zyppng::NetworkRequestDispatcher& ){
     ev->quit();
@@ -313,7 +313,7 @@ BOOST_DATA_TEST_CASE(nwdispatcher_delay_download, bdata::make( withSSL ), withSS
 //Get a simple range from a existing file
 BOOST_DATA_TEST_CASE(nwdispatcher_multipart_dl, bdata::make( withSSL ), withSSL )
 {
-  auto ev = zyppng::EventDispatcher::createMain();
+  auto ev = zyppng::EventLoop::create();
   zyppng::NetworkRequestDispatcher disp;
   disp.sigQueueFinished().connect( [&ev]( const zyppng::NetworkRequestDispatcher& ){
     ev->quit();
@@ -376,7 +376,7 @@ auto makeMultiPartHandler ( std::vector<RangeData> &&values )
 //Get a range response with the ranges out of order
 BOOST_DATA_TEST_CASE(nwdispatcher_multipart_dl_no_order, bdata::make( withSSL ), withSSL )
 {
-  auto ev = zyppng::EventDispatcher::createMain();
+  auto ev = zyppng::EventLoop::create();
   zyppng::NetworkRequestDispatcher disp;
   disp.sigQueueFinished().connect( [&ev]( const zyppng::NetworkRequestDispatcher& ){
     ev->quit();
@@ -425,7 +425,7 @@ BOOST_DATA_TEST_CASE(nwdispatcher_multipart_dl_no_order, bdata::make( withSSL ),
 //to make sure the parser is not affected by that
 BOOST_DATA_TEST_CASE(nwdispatcher_multipart_dl_weird_data, bdata::make( withSSL ), withSSL )
 {
-  auto ev = zyppng::EventDispatcher::createMain();
+  auto ev = zyppng::EventLoop::create();
   zyppng::NetworkRequestDispatcher disp;
   disp.sigQueueFinished().connect( [&ev]( const zyppng::NetworkRequestDispatcher& ){
     ev->quit();
@@ -471,7 +471,7 @@ BOOST_DATA_TEST_CASE(nwdispatcher_multipart_dl_weird_data, bdata::make( withSSL 
 
 BOOST_DATA_TEST_CASE(nwdispatcher_multipart_dl_overlap, bdata::make( withSSL ), withSSL )
 {
-  auto ev = zyppng::EventDispatcher::createMain();
+  auto ev = zyppng::EventLoop::create();
   zyppng::NetworkRequestDispatcher disp;
   disp.sigQueueFinished().connect( [&ev]( const zyppng::NetworkRequestDispatcher& ){
     ev->quit();
@@ -513,7 +513,7 @@ BOOST_DATA_TEST_CASE(nwdispatcher_multipart_dl_overlap, bdata::make( withSSL ), 
 //Get a range response with missing data
 BOOST_DATA_TEST_CASE(nwdispatcher_multipart_data_missing, bdata::make( withSSL ), withSSL )
 {
-  auto ev = zyppng::EventDispatcher::createMain();
+  auto ev = zyppng::EventLoop::create();
   zyppng::NetworkRequestDispatcher disp;
   disp.sigQueueFinished().connect( [&ev]( const zyppng::NetworkRequestDispatcher& ){
     ev->quit();

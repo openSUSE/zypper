@@ -2,7 +2,7 @@
 
 #include <zypp/base/Logger.h>
 #include <zypp/media/MediaException.h>
-#include <zypp/zyppng/base/EventDispatcher>
+#include <zypp/zyppng/base/EventLoop>
 #include <zypp/zyppng/media/network/downloader.h>
 #include <zypp/zyppng/media/network/networkrequestdispatcher.h>
 #include <zypp/zyppng/media/network/request.h>
@@ -286,7 +286,7 @@ std::shared_ptr<Download> MediaHandlerNetwork::prepareRequest( Downloader &dlMan
 
 bool MediaHandlerNetwork::getDoesFileExist( const zypp::filesystem::Pathname &filename ) const
 {
-  auto ev = EventDispatcher::createForThread();
+  auto ev = EventLoop::create();
   Downloader::Ptr dlManager = std::make_shared<Downloader>();
 
   Download::Ptr dl = prepareRequest( *dlManager, filename );
@@ -327,7 +327,7 @@ void MediaHandlerNetwork::getFile(const zypp::filesystem::Pathname &filename, co
     MIL << "Precache failed for file " << filename << std::endl;
   }
 
-  auto ev = EventDispatcher::createForThread();
+  auto ev = EventLoop::create();
   Downloader::Ptr dlManager = std::make_shared<Downloader>();
 
   ProgressData data( fileurl, &report );

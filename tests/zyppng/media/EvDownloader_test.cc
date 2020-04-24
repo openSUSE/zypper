@@ -1,4 +1,4 @@
-#include <zypp/zyppng/base/EventDispatcher>
+#include <zypp/zyppng/base/EventLoop>
 #include <zypp/zyppng/media/network/downloader.h>
 #include <zypp/zyppng/media/network/networkrequesterror.h>
 #include <zypp/zyppng/media/network/networkrequestdispatcher.h>
@@ -36,7 +36,7 @@ bool withSSL[] = {true, false};
 
 BOOST_DATA_TEST_CASE( dltest_basic, bdata::make( withSSL ), withSSL)
 {
-  auto ev = zyppng::EventDispatcher::createMain();
+  auto ev = zyppng::EventLoop::create();
 
   zyppng::Downloader downloader;
 
@@ -305,7 +305,7 @@ BOOST_DATA_TEST_CASE( test1, bdata::make( generateMirr() ) * bdata::make( withSS
   std::string metaTempl = TestTools::readFile ( zypp::Pathname(TESTS_SRC_DIR)/"/zyppng/data/downloader/test.txt.meta" );
   BOOST_REQUIRE( !metaTempl.empty() );
 
-  auto ev = zyppng::EventDispatcher::createMain();
+  auto ev = zyppng::EventLoop::create();
 
   WebServer web((zypp::Pathname(TESTS_SRC_DIR)/"/zyppng/data/downloader").c_str(), 10001, withSSL );
   BOOST_REQUIRE( web.start() );
@@ -469,7 +469,7 @@ BOOST_DATA_TEST_CASE( dltest_auth, bdata::make( withSSL ), withSSL )
   zypp::filesystem::TmpDir repoManagerRoot;
   zypp::ZConfig::instance().setRepoManagerRoot( repoManagerRoot.path() );
 
-  auto ev = zyppng::EventDispatcher::createMain();
+  auto ev = zyppng::EventLoop::create();
 
   zyppng::Downloader downloader;
 

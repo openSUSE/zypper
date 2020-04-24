@@ -29,7 +29,7 @@ class SocketNotifierPrivate;
  *
  * \code
  * // Example code that uses a pipe() to communicate between a thread and the main loop
- * zyppng::EventDispatcher::Ptr loop = zyppng::EventDispatcher::createMain();
+ * zyppng::EventLoop::Ptr loop = zyppng::EventLoop::create();
  *
  * int wakeupPipe[2] = { -1, -1 };
  * pipe2 ( wakeupPipe, O_NONBLOCK );

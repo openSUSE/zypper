@@ -67,8 +67,9 @@ public:
   bool runIdleTasks();
   void enableIdleSource ();
 
+  static std::shared_ptr<EventDispatcher> create ( );
+
   std::thread::id _myThreadId;
-  GMainLoop *_loop = nullptr;
   GMainContext *_ctx = nullptr;
 
   GSource *_idleSource  = nullptr;

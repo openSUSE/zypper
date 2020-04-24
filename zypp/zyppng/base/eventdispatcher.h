@@ -31,20 +31,12 @@ class EventDispatcher;
 class EventDispatcherPrivate;
 
 /*!
- * The EventDispatcher class implements the libzypp event loop.
+ * The EventDispatcher class implements the libzypp event loop native backend.
  *
- * A event loop is used to execute multiple tasks concurrently. This is not implemented using threads but usually by either
- * using Timers to poll a ressource or by reacting on events from a file descriptor or socket.
- * In a application like zypper where we heavily make use of I/O heavy tasks like downloading packages, rebuilding the repo metadata
- * or generating a checksum over a file the application needs to wait more for those tasks to finish than actually doing anything.
- * By using a event loop we can start one of those tasks and let the OS handle the execution and subscribe to certain events that can happen,
- * utilizing more of the CPU compared to starting all the tasks serially.
- *
- * Libzypp is using a thread local eventloop, means each thread needs to start its own loop. Only special case is when
+ * Libzypp is using a thread local dispatcher, means each thread has its own unique disptacher. Only special case is when
  * we need to work together with a already exisiting event loop, for example in a Qt application. The default implementation however
  * uses the glib eventloop, just like Qt and GTK, so integrating libzypp here is just a matter of passing the default main context
- * to the constructor of \a EventDispatcher.
- *
+ * to the constructor of \ref EventDispatcher.
  */
 class LIBZYPP_NG_EXPORT EventDispatcher : public Base
 {
@@ -58,24 +50,6 @@ public:
   using WeakPtr = std::shared_ptr<EventDispatcher>;
   using IdleFunction = std::function<bool ()>;
 
-  /*!
-   * Creates a new EventDispatcher, use this function to create a Dispatcher
-   * running on the default thread
-   *
-   * \note the glib implementation will use the g_default_context(), this means
-   * it will attach to any running main loop
-   */
-  static std::shared_ptr<EventDispatcher> createMain ( );
-
-  /*!
-   * Creates a new EventDispatcher, use this function to create a Dispatcher
-   * running on a threads aside the main thread
-   *
-   * \note the glib implementation will use the g_main_context_get_thread_default(), this means
-   * it will attach to any loop that was set as the default for the current thread, if there is no
-   * default context a new one will be created
-   */
-  static std::shared_ptr<EventDispatcher> createForThread ( );
 
   virtual ~EventDispatcher();
 
@@ -84,16 +58,6 @@ public:
    * function returns
    */
   virtual bool run_once();
-
-  /*!
-   * Start dispatching events, this function will block until \sa quit was called for the EventDispatcher instance
-   */
-  virtual void run ();
-
-  /*!
-   * Stop dispatching events and return from the main loop.
-   */
-  virtual void quit ();
 
   /*!
    * \brief Convenience function to schedule a callback to be called later.
@@ -130,6 +94,19 @@ public:
    * Returns the EventDispatcher instance for the current thread.
    */
   static std::shared_ptr<EventDispatcher> instance();
+
+  /*!
+   * Registers the given event dispatcher as the default for the current thread. The reference count for the
+   * shared pointer will not be increased, so the application is responsible to keep it until the application exits.
+   * \note This must be called before the default dispatcher is registered, otherwise its ignored.
+   */
+  static void setThreadDispatcher ( const std::shared_ptr<EventDispatcher> &disp );
+
+  /**
+   * Returns the native dispatcher handle if the used implementation supports it
+   * \note the glib backend will return the used glib \a GMainContext
+   */
+  void *nativeDispatcherHandle () const;
 
 protected:
 
@@ -174,6 +151,7 @@ protected:
    * Removes a timer from the internal timer list, once a Timer is removed it does not fire anymore
    */
   virtual void removeTimer ( Timer *timer );
+
 };
 
 }

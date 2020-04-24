@@ -2,7 +2,9 @@ SET( zyppng_base_SRCS
   ${CMAKE_CURRENT_SOURCE_DIR}/base/abstracteventsource.cc
   ${CMAKE_CURRENT_SOURCE_DIR}/base/base.cc
   ${CMAKE_CURRENT_SOURCE_DIR}/base/eventdispatcher_glib.cc
+  ${CMAKE_CURRENT_SOURCE_DIR}/base/eventloop_glib.cc
   ${CMAKE_CURRENT_SOURCE_DIR}/base/timer.cc
+  ${CMAKE_CURRENT_SOURCE_DIR}/base/threaddata.cc
   ${CMAKE_CURRENT_SOURCE_DIR}/base/socketnotifier.cc
 )
 
@@ -13,6 +15,8 @@ SET( zyppng_base_HEADERS
   ${CMAKE_CURRENT_SOURCE_DIR}/base/base.h
   ${CMAKE_CURRENT_SOURCE_DIR}/base/EventDispatcher
   ${CMAKE_CURRENT_SOURCE_DIR}/base/eventdispatcher.h
+  ${CMAKE_CURRENT_SOURCE_DIR}/base/EventLoop
+  ${CMAKE_CURRENT_SOURCE_DIR}/base/eventloop.h
   ${CMAKE_CURRENT_SOURCE_DIR}/base/signals.h
   ${CMAKE_CURRENT_SOURCE_DIR}/base/SocketNotifier
   ${CMAKE_CURRENT_SOURCE_DIR}/base/socketnotifier.h
@@ -25,6 +29,8 @@ SET( zyppng_base_private_HEADERS
   ${CMAKE_CURRENT_SOURCE_DIR}/base/private/abstracteventsource_p.h
   ${CMAKE_CURRENT_SOURCE_DIR}/base/private/base_p.h
   ${CMAKE_CURRENT_SOURCE_DIR}/base/private/eventdispatcher_glib_p.h
+  ${CMAKE_CURRENT_SOURCE_DIR}/base/private/eventloop_glib_p.h
+  ${CMAKE_CURRENT_SOURCE_DIR}/base/private/threaddata_p.h
 )
 
 
