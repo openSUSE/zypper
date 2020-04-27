@@ -87,11 +87,10 @@ namespace  {
         _drateLast = _drateTotal;
     }
 
-    int reportProgress() const
+    void reportProgress( bool &cancel ) const
     {
       if ( report && !(*report)->progress( _dnlPercent, url, _drateTotal, _drateLast ) )
-        return 1;	// user requested abort
-      return 0;
+        cancel = true;	// user requested abort
     }
   };
 }
@@ -339,14 +338,22 @@ void MediaHandlerNetwork::getFile(const zypp::filesystem::Pathname &filename, co
   dl->sigFinished().connect( [&ev]( zyppng::Download & ){
     ev->quit();
   });
-  dl->sigAlive().connect( [&data]( Download &, off_t dlnow ){
+  dl->sigAlive().connect( [&data]( Download &d, off_t dlnow ){
     data.updateStats( 0.0, dlnow );
-    data.reportProgress();
+
+    bool cancel = false;
+    data.reportProgress( cancel );
+    if ( cancel ) d.cancel();
   });
-  dl->sigProgress().connect( [&data]( Download &, off_t dltotal, off_t dlnow ){
+  dl->sigProgress().connect( [&data]( Download &d, off_t dltotal, off_t dlnow ){
     data.updateStats( dltotal, dlnow );
-    data.reportProgress();
+
+    bool cancel = false;
+    data.reportProgress( cancel );
+    if ( cancel ) d.cancel();
   });
+
+  report->start( fileurl, localPath( filename ) );
 
   dl->start();
   ev->run();
