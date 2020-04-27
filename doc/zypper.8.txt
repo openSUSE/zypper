@@ -599,7 +599,7 @@ Note that _optional arguments_ of some of the following options must be specifie
 	*--severity* _severity_[,_..._]::
 		List only patches with this severity. See section *Package Types* for a list of commonly used _severity_ values.
 
-	*--issues*[**=**__string__[,_..._]]::
+	*--issue*[**=**__string__[,_..._]]::
 		Look for issues whose number, summary, or description matches the specified _string_. Issues found by number are displayed separately from those found by descriptions. In the latter case, use *zypper patch-info* _patchname_ to get information about issues the patch fixes.
 
 	*-a*, *--all::
