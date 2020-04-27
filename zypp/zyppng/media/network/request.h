@@ -10,6 +10,7 @@
 #include <zypp/base/Flags.h>
 #include <zypp/ByteCount.h>
 #include <vector>
+#include <chrono>
 #include <any>
 
 namespace zypp {
@@ -61,7 +62,8 @@ namespace zyppng {
     };
 
     enum OptionBits {
-      HeadRequest = 0x01 //< only request the header part of the file
+      HeadRequest = 0x01, //< only request the header part of the file
+      ConnectionTest = 0x02  //< only connect to collect connection speed information
     };
     ZYPP_DECLARE_FLAGS(Options, OptionBits);
 
@@ -80,6 +82,15 @@ namespace zyppng {
       CheckSum _checksum;
       bool _valid = false;
       std::any userData; //< Custom data the user can associate with the Range
+    };
+
+    struct Timings {
+      std::chrono::microseconds namelookup;
+      std::chrono::microseconds connect;
+      std::chrono::microseconds appconnect;
+      std::chrono::microseconds pretransfer;
+      std::chrono::microseconds total;
+      std::chrono::microseconds redirect;
     };
 
     /*!
@@ -147,6 +158,12 @@ namespace zyppng {
      *       In case we ever decide to switch out the CURL backend your code will break
      */
     void *nativeHandle () const;
+
+    /**
+     * After the request is finished query the timings that were collected
+     * during download
+     */
+    std::optional<Timings> timings () const;
 
     /*!
      * Will return the data at \a offset with length \a count.

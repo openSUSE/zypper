@@ -1,15 +1,16 @@
 #include "mediacurlprefetcher.h"
 
-#include "zypp/zyppng/base/EventLoop"
-#include "zypp/zyppng/base/SocketNotifier"
-#include "zypp/zyppng/media/network/downloader.h"
-#include "zypp/zyppng/media/network/networkrequestdispatcher.h"
-#include "zypp/media/CurlHelper.h"
-#include "zypp/PathInfo.h"
+#include <zypp/zyppng/base/EventLoop>
+#include <zypp/zyppng/base/SocketNotifier>
+#include <zypp/zyppng/media/network/downloader.h>
+#include <zypp/zyppng/media/network/networkrequestdispatcher.h>
+#include <zypp/zyppng/media/network/private/mirrorcontrol_p.h>
+#include <zypp/media/CurlHelper.h>
+#include <zypp/PathInfo.h>
 
 #define ZYPP_BASE_LOGGER_LOGGROUP "zypp::prefetcher"
-#include "zypp/base/Logger.h"
-#include "zypp/base/LogControl.h"
+#include <zypp/base/Logger.h>
+#include <zypp/base/LogControl.h>
 
 #include <unistd.h>
 #include <fcntl.h>
@@ -225,7 +226,8 @@ namespace zypp
 
       auto dispatch = zyppng::EventLoop::create();
 
-      zyppng::Downloader downloader;
+      // make sure to not use the main threads mirror control
+      zyppng::Downloader downloader( zyppng::MirrorControl::create() ) ;
       downloader.requestDispatcher()->setMaximumConcurrentConnections( 30 );
 
       auto dlProgress = [ this ]( zyppng::Download &req, off_t dltotal, off_t dlnow ){

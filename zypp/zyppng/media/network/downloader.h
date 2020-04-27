@@ -21,6 +21,7 @@ namespace zyppng {
   class NetworkRequestDispatcher;
   class DownloaderPrivate;
   class Download;
+  class MirrorControl;
 
   using TransferSettings = zypp::media::TransferSettings;
 
@@ -39,7 +40,8 @@ namespace zyppng {
     using Ptr = std::shared_ptr<Downloader>;
     using WeakPtr = std::shared_ptr<Downloader>;
 
-    Downloader( );
+    Downloader();
+    Downloader( std::shared_ptr<MirrorControl> mc );
     virtual ~Downloader();
 
     /*!
@@ -83,7 +85,7 @@ namespace zyppng {
    * it is represented internally as a state machine. All transitions are signalled and can be followed.
    *
    * \code
-   * zyppng::EventDispatcher::Ptr loop = zyppng::EventDispatcher::createMain();
+   * zyppng::EventLoop::Ptr loop = zyppng::EventLoop::create();
    * zyppng::Downloader dl;
    *
    * dl.queueEmpty().connect( [ &loop ]( zyppng::Downloader & ) {
@@ -138,6 +140,7 @@ namespace zyppng {
       InitialState,  //< This is the initial state, its only set before a download starts
       Initializing = 10,  //< This state is kept during the first 265Bytes or until the data looks like a Metalink download
       Running      = 20,  //< This state is set once there have been more than 256 bytes downloaded and it does not look like a metalink download
+      PrepareMulti = 25,  //< This state is set for async preparations of the multi download, like mirror rating
       RunningMulti = 30,  //< Signals that the file is downloaded in chunks from different mirrors
       Success = 200, //< Shows that the Download was successful
       Failed         //< Shows that the Download failed

@@ -19,7 +19,7 @@ public:
   NetworkRequestDispatcherPrivate ( );
   virtual ~NetworkRequestDispatcherPrivate();
 
-  size_t _maxConnections = 10;
+  int _maxConnections = 10;
 
   std::deque< std::shared_ptr<NetworkRequest> > _pendingDownloads;
   std::vector< std::shared_ptr<NetworkRequest> > _runningDownloads;

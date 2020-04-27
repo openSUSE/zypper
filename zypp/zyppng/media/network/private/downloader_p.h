@@ -7,6 +7,7 @@
 #include <zypp/zyppng/media/network/request.h>
 #include <zypp/zyppng/media/network/TransferSettings>
 #include <zypp/zyppng/media/network/networkrequesterror.h>
+#include <zypp/zyppng/media/network/private/mirrorcontrol_p.h>
 #include <zypp/media/MediaBlockList.h>
 
 #include <deque>
@@ -19,7 +20,8 @@ namespace zyppng {
   {
   public:
     ZYPP_DECLARE_PUBLIC(Download)
-    DownloadPrivate ( Downloader &parent, std::shared_ptr<NetworkRequestDispatcher> requestDispatcher, Url &&file, zypp::filesystem::Pathname &&targetPath, zypp::ByteCount &&expectedFileSize );
+    DownloadPrivate ( Downloader &parent, std::shared_ptr<NetworkRequestDispatcher> requestDispatcher, std::shared_ptr<MirrorControl> mirrors, Url &&file, zypp::filesystem::Pathname &&targetPath, zypp::ByteCount &&expectedFileSize );
+    ~DownloadPrivate ();
 
     struct Block {
       Block( size_t blockNr ) : _block(blockNr) {}
@@ -42,8 +44,10 @@ namespace zyppng {
       void disconnectSignals ();
 
       std::vector<Block> _myBlocks;
+
       bool _triedCredFromStore = false; //< already tried to authenticate from credential store?
       Url _originalUrl;  //< The unstripped URL as it was passed to Download , before transfer settings are removed
+      MirrorControl::MirrorHandle _myMirror;
 
       connection _sigStartedConn;
       connection _sigProgressConn;
@@ -52,6 +56,10 @@ namespace zyppng {
 
     std::vector< std::shared_ptr<Request> > _runningRequests;
     std::shared_ptr<NetworkRequestDispatcher> _requestDispatcher;
+
+    std::shared_ptr<MirrorControl> _mirrorControl;
+    std::vector<Url> _mirrors;
+    connection _mirrorControlReadyConn;
 
     Url _url;
     zypp::filesystem::Pathname _targetPath;
@@ -64,7 +72,6 @@ namespace zyppng {
 
     //data requires for multi part downloads
     off_t _downloadedMultiByteCount = 0; //< the number of bytes that were already fetched in RunningMulti state
-    std::deque<Url> _multiPartMirrors;
     zypp::media::MediaBlockList _blockList;
     size_t _blockIter    = 0;
     zypp::ByteCount _preferredChunkSize = zypp::ByteCount( 4096, zypp::ByteCount::K );
@@ -93,12 +100,17 @@ namespace zyppng {
     void onRequestStarted  ( NetworkRequest & );
     void onRequestProgress ( NetworkRequest &req, off_t dltotal, off_t dlnow, off_t, off_t );
     void onRequestFinished ( NetworkRequest &req , const NetworkRequestError &err );
-    void addNewRequest     (std::shared_ptr<Request> req );
+    void addNewRequest     (std::shared_ptr<Request> req, const bool connectSignals = true );
     std::shared_ptr<Request> initMultiRequest( NetworkRequestError &err, bool useFailed = false );
     void addBlockRanges    ( std::shared_ptr<Request> req ) const;
-    bool findNextMirror( Url &url, TransferSettings &set, NetworkRequestError &err );
+    MirrorControl::MirrorHandle findNextMirror( Url &url, TransferSettings &set, NetworkRequestError &err );
     void setFailed         ( std::string && reason );
     void setFinished       ( bool success = true );
+    void handleRequestError ( std::shared_ptr<Request> req, const zyppng::NetworkRequestError &err );
+    void upgradeToMultipart ( NetworkRequest &req );
+    void mirrorsReady ();
+    void ensureDownloadsRunning ();
+    void enqueueNewPartsOrFinish ();
     std::vector<Block> getNextBlocks ( const std::string &urlScheme );
     std::vector<Block> getNextFailedBlocks( const std::string &urlScheme );
 
@@ -109,7 +121,7 @@ namespace zyppng {
   {
     ZYPP_DECLARE_PUBLIC(Downloader)
   public:
-    DownloaderPrivate( );
+    DownloaderPrivate( std::shared_ptr<MirrorControl> mc = {} );
 
     std::vector< std::shared_ptr<Download> > _runningDownloads;
     std::shared_ptr<NetworkRequestDispatcher> _requestDispatcher;
@@ -120,6 +132,7 @@ namespace zyppng {
     signal<void ( Downloader &parent, Download& download )> _sigStarted;
     signal<void ( Downloader &parent, Download& download )> _sigFinished;
     signal<void ( Downloader &parent )> _queueEmpty;
+    std::shared_ptr<MirrorControl> _mirrors;
   };
 
 }

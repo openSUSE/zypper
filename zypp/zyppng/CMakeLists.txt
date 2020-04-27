@@ -46,6 +46,7 @@ SET( zyppng_core_HEADERS
 SET( zyppng_media_SRCS
   ${CMAKE_CURRENT_SOURCE_DIR}/media/medianetwork.cc
   ${CMAKE_CURRENT_SOURCE_DIR}/media/network/downloader.cc
+  ${CMAKE_CURRENT_SOURCE_DIR}/media/network/mirrorcontrol.cc
   ${CMAKE_CURRENT_SOURCE_DIR}/media/network/networkrequestdispatcher.cc
   ${CMAKE_CURRENT_SOURCE_DIR}/media/network/networkrequesterror.cc
   ${CMAKE_CURRENT_SOURCE_DIR}/media/network/request.cc
@@ -66,13 +67,25 @@ SET( zyppng_media_HEADERS
 
 SET( zyppng_media_private_HEADERS
   ${CMAKE_CURRENT_SOURCE_DIR}/media/network/private/downloader_p.h
+  ${CMAKE_CURRENT_SOURCE_DIR}/media/network/private/mirrorcontrol_p.h
   ${CMAKE_CURRENT_SOURCE_DIR}/media/network/private/networkrequestdispatcher_p.h
   ${CMAKE_CURRENT_SOURCE_DIR}/media/network/private/networkrequesterror_p.h
   ${CMAKE_CURRENT_SOURCE_DIR}/media/network/private/request_p.h
-
 )
 
+SET( zyppng_appcode_HEADERS
+  ${CMAKE_CURRENT_SOURCE_DIR}/Context
+  ${CMAKE_CURRENT_SOURCE_DIR}/context.h
+)
+
+SET( zyppng_appcode_SRCS
+  ${CMAKE_CURRENT_SOURCE_DIR}/context.cc
+)
+
+
 SET ( zyppng_HEADERS
+  ${zyppng_appcode_HEADERS}
+  ${zyppng_appcode_SRCS}
   ${zyppng_base_HEADERS}
   ${zyppng_base_private_HEADERS}
   ${zyppng_core_HEADERS}

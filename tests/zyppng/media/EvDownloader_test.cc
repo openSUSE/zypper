@@ -140,7 +140,7 @@ std::vector< MirrorSet > generateMirr ()
   res.back().expectSuccess = true;
   res.back().expectedHandlerDownloads  = 1;
   res.back().expectedFileDownloads  = 9;
-  res.back().expectedStates = {zyppng::Download::Initializing, zyppng::Download::RunningMulti, zyppng::Download::Success};
+  res.back().expectedStates = {zyppng::Download::Initializing, zyppng::Download::PrepareMulti, zyppng::Download::RunningMulti, zyppng::Download::Success};
   for ( int i = 100 ; i >= 10; i -= 10 )
     res.back().mirrors.push_back( std::make_pair( i, "/test.txt") );
 
@@ -151,7 +151,7 @@ std::vector< MirrorSet > generateMirr ()
   res.back().expectedHandlerDownloads  = 1;
   res.back().expectedFileDownloads  = 3;
   res.back().chunkSize = zypp::ByteCount( 1024, zypp::ByteCount::K );
-  res.back().expectedStates = {zyppng::Download::Initializing, zyppng::Download::RunningMulti, zyppng::Download::Success};
+  res.back().expectedStates = {zyppng::Download::Initializing, zyppng::Download::PrepareMulti, zyppng::Download::RunningMulti, zyppng::Download::Success};
   for ( int i = 100 ; i >= 10; i -= 10 )
     res.back().mirrors.push_back( std::make_pair( i, "/test.txt") );
 
@@ -161,7 +161,7 @@ std::vector< MirrorSet > generateMirr ()
   res.back().expectSuccess = true;
   res.back().expectedHandlerDownloads  = 10;
   res.back().expectedFileDownloads  = 0;
-  res.back().expectedStates = {zyppng::Download::Initializing, zyppng::Download::RunningMulti, zyppng::Download::Success};
+  res.back().expectedStates = {zyppng::Download::Initializing, zyppng::Download::PrepareMulti, zyppng::Download::RunningMulti, zyppng::Download::Success};
 
   //only broken mirrors:
   res.push_back( MirrorSet() );
@@ -169,7 +169,7 @@ std::vector< MirrorSet > generateMirr ()
   res.back().expectSuccess = true;
   res.back().expectedHandlerDownloads  = 2; //has to fall back to url handler download
   res.back().expectedFileDownloads  = 10; //should try all mirrors and fail
-  res.back().expectedStates = {zyppng::Download::Initializing, zyppng::Download::RunningMulti, zyppng::Download::Running, zyppng::Download::Success};
+  res.back().expectedStates = {zyppng::Download::Initializing, zyppng::Download::PrepareMulti, zyppng::Download::RunningMulti, zyppng::Download::Running, zyppng::Download::Success};
   for ( int i = 100 ; i >= 10; i -= 10 )
     res.back().mirrors.push_back( std::make_pair( i, "/doesnotexist.txt") );
 
@@ -179,7 +179,7 @@ std::vector< MirrorSet > generateMirr ()
   res.back().expectSuccess = true;
   res.back().expectedHandlerDownloads = 1;
   res.back().expectedFileDownloads = 9 + 3; // 3 should fail due to broken mirrors
-  res.back().expectedStates = {zyppng::Download::Initializing, zyppng::Download::RunningMulti, zyppng::Download::Success};
+  res.back().expectedStates = {zyppng::Download::Initializing, zyppng::Download::PrepareMulti, zyppng::Download::RunningMulti, zyppng::Download::Success};
   for ( int i = 10 ; i >= 5; i-- ) {
     if ( i % 2 ) {
       res.back().mirrors.push_back( std::make_pair( i*10, "/doesnotexist.txt") );
@@ -197,7 +197,7 @@ std::vector< MirrorSet > generateMirr ()
   //5 broken mirrors in the set, but if a working mirror is done before the last broken
   //URL is picked from the dataset not all broken URLs will be used
   res.back().expectedFileDownloads  = -1;
-  res.back().expectedStates = {zyppng::Download::Initializing, zyppng::Download::RunningMulti, zyppng::Download::Success};
+  res.back().expectedStates = {zyppng::Download::Initializing, zyppng::Download::PrepareMulti, zyppng::Download::RunningMulti, zyppng::Download::Success};
   for ( int i = 10 ; i >= 1; i-- ) {
     if ( i % 2 ) {
       res.back().mirrors.push_back( std::make_pair( i*10, "/doesnotexist.txt") );
@@ -215,7 +215,7 @@ std::vector< MirrorSet > generateMirr ()
   //5 broken mirrors in the set, but if a working mirror is done before the last broken
   //URL is picked from the dataset not all broken URLs will be used
   res.back().expectedFileDownloads  = -1;
-  res.back().expectedStates = {zyppng::Download::Initializing, zyppng::Download::RunningMulti, zyppng::Download::Success};
+  res.back().expectedStates = {zyppng::Download::Initializing, zyppng::Download::PrepareMulti, zyppng::Download::RunningMulti, zyppng::Download::Success};
   for ( int i = 10 ; i >= 1; i-- ) {
     if ( i % 2 ) {
       res.back().mirrors.push_back( std::make_pair( i*10, "/handler/random") );
@@ -548,7 +548,7 @@ BOOST_DATA_TEST_CASE( dltest_auth, bdata::make( withSSL ), withSSL )
     ev->run();
     BOOST_TEST_REQ_SUCCESS( dl );
     BOOST_REQUIRE_EQUAL( gotAuthRequest, 1 );
-    BOOST_REQUIRE ( allStates == std::vector<zyppng::Download::State>({zyppng::Download::Initializing, zyppng::Download::RunningMulti, zyppng::Download::Success}) );
+    BOOST_REQUIRE ( allStates == std::vector<zyppng::Download::State>({zyppng::Download::Initializing, zyppng::Download::PrepareMulti, zyppng::Download::RunningMulti, zyppng::Download::Success}) );
   }
 
   {

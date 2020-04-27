@@ -7,6 +7,7 @@
 #include <zypp/zyppng/media/network/networkrequestdispatcher.h>
 #include <zypp/zyppng/media/network/request.h>
 #include <zypp/zyppng/media/network/AuthData>
+#include <zypp/zyppng/Context>
 #include <zypp/media/mediacurlprefetcher.h>
 #include <zypp/media/CurlHelper.h>
 #include <zypp/media/MediaUserAuth.h>
@@ -16,6 +17,7 @@
 #include <zypp/ZYppCallbacks.h>
 #include <zypp/base/String.h>
 #include <zypp/base/Gettext.h>
+#include <zypp/ZYppFactory.h>
 
 #include "zypp/ZYppCallbacks.h"
 
@@ -286,7 +288,7 @@ std::shared_ptr<Download> MediaHandlerNetwork::prepareRequest( Downloader &dlMan
 
 bool MediaHandlerNetwork::getDoesFileExist( const zypp::filesystem::Pathname &filename ) const
 {
-  auto ev = EventLoop::create();
+  auto ev = zypp::getZYpp()->ngContext()->evLoop();
   Downloader::Ptr dlManager = std::make_shared<Downloader>();
 
   Download::Ptr dl = prepareRequest( *dlManager, filename );
@@ -327,7 +329,7 @@ void MediaHandlerNetwork::getFile(const zypp::filesystem::Pathname &filename, co
     MIL << "Precache failed for file " << filename << std::endl;
   }
 
-  auto ev = EventLoop::create();
+  auto ev = zypp::getZYpp()->ngContext()->evLoop();
   Downloader::Ptr dlManager = std::make_shared<Downloader>();
 
   ProgressData data( fileurl, &report );

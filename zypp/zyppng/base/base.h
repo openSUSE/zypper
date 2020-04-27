@@ -19,6 +19,7 @@
 #include <memory>
 #include <unordered_set>
 #include <vector>
+#include <thread>
 
 namespace zyppng {
 
@@ -62,6 +63,11 @@ namespace zyppng {
      * Returns all child objects of this object
      */
     const std::unordered_set<Ptr> &children() const;
+
+    /*!
+     * Returns the thread ID this object was created in
+     */
+    std::thread::id threadId () const;
 
     /*!
      * Returns all children that can be casted to type T

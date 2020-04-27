@@ -2,6 +2,7 @@
 #define ZYPP_BASE_THREADDATA_P_DEFINED
 
 #include <memory>
+#include <thread>
 
 namespace zyppng {
 
@@ -15,6 +16,7 @@ namespace zyppng {
 
 
     std::weak_ptr<EventDispatcher> dispatcher;
+    std::thread::id threadId;
 
   private:
     ThreadData();

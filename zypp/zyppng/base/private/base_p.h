@@ -5,6 +5,7 @@
 #include <zypp/zyppng/base/base.h>
 #include <zypp/zyppng/base/signals.h>
 #include <unordered_set>
+#include <thread>
 
 namespace zyppng
 {
@@ -17,6 +18,7 @@ namespace zyppng
     Base::WeakPtr parent;
     std::unordered_set< Base::Ptr > children;
     Base *z_ptr = nullptr;
+    std::thread::id threadId = std::this_thread::get_id();
   };
 
 }

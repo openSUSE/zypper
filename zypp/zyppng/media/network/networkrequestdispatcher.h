@@ -24,7 +24,7 @@ namespace zyppng {
    * the load on the network.
    *
    * \code
-   * zyppng::EventDispatcher::Ptr loop = zyppng::EventDispatcher::createMain();
+   * zyppng::EventLoop::Ptr loop = zyppng::EventLoop::create();
    * zyppng::NetworkRequestDispatcher downloader;
    *
    * zypp::Url url ( "https://download.opensuse.org/distribution/leap/15.0/repo/oss/x86_64/0ad-0.0.22-lp150.2.10.x86_64.rpm" );
@@ -91,8 +91,9 @@ namespace zyppng {
 
       /*!
        * Change the number of the concurrently started requests, the default is 10.
+       * Setting this to -1 means there is no limit.
        */
-      void setMaximumConcurrentConnections (size_t maxConn );
+      void setMaximumConcurrentConnections ( const int maxConn );
 
       /*!
        * Enqueues a new \a request and puts it into the waiting queue. If the dispatcher
@@ -114,6 +115,11 @@ namespace zyppng {
        * Start dispatching requests, this needs to be done explicitely before any request can be executed.
        */
       void run ( );
+
+      /*!
+       * Returns the number of requests in the running and waiting queues
+       */
+      size_t count ();
 
       /*!
        * Returns the last encountered error in a request.

@@ -23,6 +23,8 @@
 #include <zypp/DiskUsageCounter.h>
 #include <zypp/ManagedFile.h>
 
+#include <zypp/zyppng/Context>
+
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
@@ -94,6 +96,8 @@ namespace zypp
       /** Install a source package on the Target. */
       ManagedFile provideSrcPackage( const SrcPackage_constPtr & srcPackage_r );
 
+      zyppng::Context::Ptr ngContext();
+
     public:
       /** Get the path where zypp related plugins store persistent data and caches   */
       Pathname homePath() const;
@@ -120,6 +124,8 @@ namespace zypp
       Pathname _home_path;
       /** defined mount points, used for disk usage counting */
       shared_ptr<DiskUsageCounter> _disk_usage;
+
+      zyppng::Context::Ptr _ngContext;
     };
     ///////////////////////////////////////////////////////////////////
 

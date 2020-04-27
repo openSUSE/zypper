@@ -17,12 +17,14 @@
 #include <sigc++/trackable.h>
 #include <sigc++/signal.h>
 #include <sigc++/connection.h>
+#include <sigc++/adaptors/adaptors.h>
 
 namespace zyppng {
 
 using sigc::signal;
 using sigc::connection;
 using sigc::trackable;
+using sigc::track_obj;
 
 template <class R, class... T>
 class SignalProxy;

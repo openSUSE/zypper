@@ -93,6 +93,11 @@ namespace zypp
   void ZYpp::setHomePath( const Pathname & path )
   { _pimpl->setHomePath(path); }
 
+  std::shared_ptr<zyppng::Context> ZYpp::ngContext()
+  {
+    return _pimpl->ngContext();
+  }
+
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////

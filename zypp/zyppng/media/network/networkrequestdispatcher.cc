@@ -26,6 +26,7 @@ NetworkRequestDispatcherPrivate::NetworkRequestDispatcherPrivate( )
   curl_multi_setopt( _multi, CURLMOPT_SOCKETFUNCTION, NetworkRequestDispatcherPrivate::static_socket_callback );
   curl_multi_setopt( _multi, CURLMOPT_SOCKETDATA, reinterpret_cast<void *>( this ) );
 
+  _timer->setSingleShot( true );
   _timer->sigExpired().connect( sigc::mem_fun( *this, &NetworkRequestDispatcherPrivate::multiTimerTimout ) );
 }
 
@@ -162,8 +163,10 @@ void NetworkRequestDispatcherPrivate::handleMultiSocketAction(curl_socket_t nati
       CURLcode res = msg->data.result;
 
       void *privatePtr = nullptr;
-      if ( curl_easy_getinfo( easy, CURLINFO_PRIVATE, &privatePtr ) != CURLE_OK )
+      if ( curl_easy_getinfo( easy, CURLINFO_PRIVATE, &privatePtr ) != CURLE_OK ) {
+        DBG << "Unable to get CURLINFO_PRIVATE" << std::endl;
         continue;
+      }
 
       if ( !privatePtr ) {
         //broken easy handle not associated, should never happen but clean it up
@@ -251,7 +254,7 @@ void NetworkRequestDispatcherPrivate::dequeuePending()
   if ( !_isRunning || _locked )
     return;
 
-  while ( _maxConnections > _runningDownloads.size() ) {
+  while ( _maxConnections == -1 || ( _maxConnections > _runningDownloads.size() ) ) {
     if ( !_pendingDownloads.size() )
       break;
 
@@ -312,7 +315,7 @@ bool NetworkRequestDispatcher::supportsProtocol( const Url &url )
   return true;
 }
 
-void NetworkRequestDispatcher::setMaximumConcurrentConnections( size_t maxConn )
+void NetworkRequestDispatcher::setMaximumConcurrentConnections( const int maxConn )
 {
   d_func()->_maxConnections = maxConn;
 }
@@ -375,6 +378,12 @@ void NetworkRequestDispatcher::run()
 
   if ( d->_pendingDownloads.size() )
     d->dequeuePending();
+}
+
+size_t NetworkRequestDispatcher::count()
+{
+  Z_D();
+  return d->_pendingDownloads.size() + d->_runningDownloads.size();
 }
 
 const zyppng::NetworkRequestError &NetworkRequestDispatcher::lastError() const

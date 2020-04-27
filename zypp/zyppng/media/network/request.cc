@@ -10,6 +10,7 @@
 #include <zypp/base/Logger.h>
 #include <zypp/base/String.h>
 #include <zypp/Pathname.h>
+#include <curl/curl.h>
 #include <stdio.h>
 #include <fcntl.h>
 #include <sstream>
@@ -114,6 +115,10 @@ namespace zyppng {
       setCurlOption( CURLOPT_WRITEFUNCTION, nwr_writeCallback );
       setCurlOption( CURLOPT_WRITEDATA, this );
 
+      if ( _options & NetworkRequest::ConnectionTest ) {
+        setCurlOption( CURLOPT_CONNECT_ONLY, 1L );
+        setCurlOption( CURLOPT_FRESH_CONNECT, 1L );
+      }
       if ( _options & NetworkRequest::HeadRequest ) {
         // instead of returning no data with NOBODY, we return
         // little data, that works with broken servers, and
@@ -124,7 +129,9 @@ namespace zyppng {
           setCurlOption( CURLOPT_NOBODY, 1L );
         else
           setCurlOption( CURLOPT_RANGE, "0-1" );
-      } else {
+      }
+
+      if( !( _options & NetworkRequest::ConnectionTest ) && !( _options & NetworkRequest::HeadRequest ) ){
         std::string rangeDesc;
 
         if ( _requestedRanges.size() ) {
@@ -446,7 +453,7 @@ namespace zyppng {
     resState._downloaded = rmode._downloaded;
     resState._contentLenght = rmode._contentLenght;
 
-    if ( resState._result.type() == NetworkRequestError::NoError ) {
+    if ( resState._result.type() == NetworkRequestError::NoError && !(_options & NetworkRequest::HeadRequest) && !(_options & NetworkRequest::ConnectionTest) ) {
 
       // check if the current range is a open range, if it is set it valid by checking the checksum
       if ( rmode._currentRange >= 0 ) {
@@ -456,10 +463,8 @@ namespace zyppng {
       }
 
       //we have a successful download lets see if we got everything we needed
-      auto _state = NetworkRequest::Finished;
       for ( const auto &r : _requestedRanges ) {
         if ( !r._valid ) {
-          _state = NetworkRequest::Error;
           if ( r.len > 0 && r.bytesWritten != r.len )
             resState._result = NetworkRequestErrorPrivate::customError( NetworkRequestError::MissingData, (zypp::str::Format("Did not receive all requested data from the server.") ) );
           else if ( r._digest && r._checksum != r._digest->digestVector() )  {
@@ -940,6 +945,34 @@ namespace zyppng {
   void *NetworkRequest::nativeHandle() const
   {
     return d_func()->_easyHandle;
+  }
+
+  std::optional<zyppng::NetworkRequest::Timings> NetworkRequest::timings() const
+  {
+    const auto myerr = error();
+    const auto mystate = state();
+    if ( mystate != Finished )
+      return {};
+
+    Timings t;
+
+    auto getMeasurement = [ this ]( const CURLINFO info, std::chrono::microseconds &target ){
+      using FPSeconds = std::chrono::duration<double, std::chrono::seconds::period>;
+      double val = 0;
+      const auto res = curl_easy_getinfo( d_func()->_easyHandle, info, &val );
+      if ( CURLE_OK == res ) {
+        target = std::chrono::duration_cast<std::chrono::microseconds>( FPSeconds(val) );
+      }
+    };
+
+    getMeasurement( CURLINFO_NAMELOOKUP_TIME, t.namelookup );
+    getMeasurement( CURLINFO_CONNECT_TIME, t.connect);
+    getMeasurement( CURLINFO_APPCONNECT_TIME, t.appconnect);
+    getMeasurement( CURLINFO_PRETRANSFER_TIME , t.pretransfer);
+    getMeasurement( CURLINFO_TOTAL_TIME, t.total);
+    getMeasurement( CURLINFO_REDIRECT_TIME, t.redirect);
+
+    return t;
   }
 
   std::vector<char> NetworkRequest::peekData( off_t offset, size_t count ) const

@@ -6,6 +6,7 @@
 namespace zyppng {
 
   ThreadData::ThreadData()
+  : threadId( std::this_thread::get_id() )
   {
 
   }

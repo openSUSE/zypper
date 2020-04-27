@@ -64,4 +64,9 @@ namespace zyppng {
     return d_func()->children;
   }
 
+  std::thread::id Base::threadId() const
+  {
+    return d_func()->threadId;
+  }
+
 } // namespace zyppng

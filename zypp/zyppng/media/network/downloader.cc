@@ -5,6 +5,7 @@
 #include <zypp/zyppng/media/network/request.h>
 #include <zypp/zyppng/base/Timer>
 #include <zypp/zyppng/base/EventDispatcher>
+#include <zypp/zyppng/Context>
 #include <zypp/Pathname.h>
 #include <zypp/media/TransferSettings.h>
 #include <zypp/media/MetaLinkParser.h>
@@ -15,6 +16,7 @@
 #include <zypp/media/CredentialManager.h>
 #include <zypp/ZConfig.h>
 #include <zypp/base/Logger.h>
+#include <zypp/ZYppFactory.h>
 
 #include <queue>
 #include <fcntl.h>
@@ -57,13 +59,20 @@ namespace  {
 
 namespace zyppng {
 
-  DownloadPrivate::DownloadPrivate(Downloader &parent, std::shared_ptr<NetworkRequestDispatcher> requestDispatcher, Url &&file, zypp::filesystem::Pathname &&targetPath, zypp::ByteCount &&expectedFileSize )
-    : _requestDispatcher ( requestDispatcher )
+  DownloadPrivate::DownloadPrivate(Downloader &parent, std::shared_ptr<NetworkRequestDispatcher> requestDispatcher, std::shared_ptr<MirrorControl> mirrors, Url &&file, zypp::filesystem::Pathname &&targetPath, zypp::ByteCount &&expectedFileSize )
+    : _requestDispatcher ( std::move(requestDispatcher) )
+    , _mirrorControl( std::move(mirrors) )
     , _url( std::move(file) )
     , _targetPath( std::move(targetPath) )
     , _expectedFileSize( std::move(expectedFileSize) )
-    , _parent( &parent )
+  , _parent( &parent )
   { }
+
+  DownloadPrivate::~DownloadPrivate()
+  {
+    if ( _mirrorControlReadyConn )
+      _mirrorControlReadyConn.disconnect();
+  }
 
   void DownloadPrivate::Request::connectSignals(DownloadPrivate &dl)
   {
@@ -89,7 +98,8 @@ namespace zyppng {
     //reset state variables
     _isMultiDownload = false;
     _downloadedMultiByteCount = 0;
-    _multiPartMirrors.clear();
+    _mirrors.clear();
+    _mirrorControlReadyConn.disconnect();
     _blockList    = zypp::media::MediaBlockList ();
     _blockIter    = 0;
     _errorString  = std::string();
@@ -203,151 +213,15 @@ namespace zyppng {
     //remove from running
     _runningRequests.erase( it );
 
+    if ( reqLocked->_myMirror )
+      reqLocked->_myMirror->finishTransfer( !err.isError() );
+
     if ( err.isError() ) {
-
-      bool retry = false;
-
-      //Handle the auth errors explicitely, we need to give the user a way to put in new credentials
-      //if we get valid new credentials we can retry the request
-      if ( err.type() == NetworkRequestError::Unauthorized || err.type() == NetworkRequestError::AuthFailed ) {
-
-        zypp::media::CredentialManager cm( zypp::media::CredManagerOptions( zypp::ZConfig::instance().repoManagerRoot()) );
-        auto authDataPtr = cm.getCred( req.url() );
-
-        // get stored credentials
-        NetworkAuthData_Ptr cmcred( authDataPtr ? new NetworkAuthData( *authDataPtr ) : new NetworkAuthData() );
-        TransferSettings &ts = req.transferSettings();
-
-        // We got credentials from store, _triedCredFromStore makes sure we just try the auth from store once
-        if ( cmcred && !reqLocked->_triedCredFromStore ) {
-          DBG << "got stored credentials:" << std::endl << *cmcred << std::endl;
-          ts.setUsername( cmcred->username() );
-          ts.setPassword( cmcred->password() );
-          retry = true;
-          reqLocked->_triedCredFromStore = true;
-        } else {
-
-          //we did not get credentials from the store, emit a signal that allows
-          //setting new auth data
-
-          NetworkAuthData credFromUser;
-          credFromUser.setUrl( req.url() );
-
-          //in case we got a auth hint from the server the error object will contain it
-          auto authHintIt = err.extraInfo().find("authHint");
-          std::string authHint;
-
-          if ( authHintIt != err.extraInfo().end() ){
-            try {
-              authHint = boost::any_cast<std::string>( authHintIt->second );
-            } catch ( const boost::bad_any_cast &) { }
-          }
-
-          //preset from store if we found something
-          if ( cmcred && !cmcred->username().empty() )
-            credFromUser.setUsername( cmcred->username() );
-
-          _sigAuthRequired.emit( *z_func(), credFromUser, authHint );
-          if ( credFromUser.valid() ) {
-            ts.setUsername( credFromUser.username() );
-            ts.setPassword( credFromUser.password() );
-
-            // set available authentication types from the error
-            if ( credFromUser.authType() == CURLAUTH_NONE )
-              credFromUser.setAuthType( authHint );
-
-            // set auth type (seems this must be set _after_ setting the userpwd)
-            if ( credFromUser.authType()  != CURLAUTH_NONE ) {
-              // FIXME: only overwrite if not empty?
-              req.transferSettings().setAuthType(credFromUser.authTypeAsString());
-            }
-
-            cm.addCred( credFromUser );
-            cm.save();
-
-            retry = true;
-          }
-        }
-      } else if ( _state == Download::RunningMulti ) {
-
-        //if a error happens during a multi download we try to use another mirror to download the failed block
-        DBG << "Request failed " << reqLocked->extendedErrorString() << std::endl;
-        auto failed = reqLocked->failedRanges();
-
-        NetworkRequestError dummyErr;
-
-        const auto fRanges = reqLocked->failedRanges();
-        std::vector<Block> blocks;
-
-        try {
-          std::transform( fRanges.begin(), fRanges.end(), std::back_inserter(_failedBlocks), [ &reqLocked ]( const auto &r ){
-            auto ind = std::find_if( reqLocked->_myBlocks.begin(), reqLocked->_myBlocks.end(), [ &r ](const auto &elem){ return elem._block == std::any_cast<size_t>(r.userData); } );
-
-            if ( ind == reqLocked->_myBlocks.end() ){
-              throw zypp::Exception( "User data did not point to a valid block in the request set, this is a bug" );
-            }
-
-            Block b = *ind;
-            b._failedWithErr = reqLocked->error();
-            DBG << "Adding failed block to failed blocklist: " << b._block << " " << r.start << " " << r.len << " (" << reqLocked->error().toString() << ")" << std::endl;
-            return b;
-          });
-
-          //try to init a new multi request, if we have leftover mirrors we get a valid one
-          auto newReq = initMultiRequest( dummyErr, true );
-          if ( newReq ) {
-            addNewRequest( newReq );
-            return;
-          }
-          // we got no mirror this time, but since we still have running requests there is hope this will be finished later
-          if ( _runningRequests.size() && _failedBlocks.size() )
-            return;
-
-        } catch ( const zypp::Exception &ex ) {
-          //we just log the exception and fall back to a normal download
-          WAR << "Multipart download failed: " << ex.asString() << std::endl;
-        }
-      }
-
-      //if rety is true we just enqueue the request again, usually this means authentication was updated
-      if ( retry ) {
-        //make sure this request will run asap
-        reqLocked->setPriority( NetworkRequest::High );
-
-        //this is not a new request, only add to queues but do not connect signals again
-        _runningRequests.push_back( reqLocked );
-        _requestDispatcher->enqueue( reqLocked );
-        return;
-      }
-
-      //we do not have more mirrors left we can try or we do not have a multi download, abort
-      while( _runningRequests.size() ) {
-        auto req = _runningRequests.back();
-        req->disconnectSignals();
-        _runningRequests.pop_back();
-        _requestDispatcher->cancel( *req, err );
-      }
-
-      //not all hope is lost, maybe a normal download can work out?
-      if ( _state == Download::RunningMulti ) {
-        //fall back to normal download
-        DBG << "Falling back to download from initial URL." << std::endl;
-        _isMultiDownload = false;
-        _isMultiPartEnabled = false;
-        setState( Download::Running );
-
-        auto req = std::make_shared<Request>( internal::clearQueryString(_url), _targetPath ) ;
-        req->transferSettings() = _transferSettings;
-        addNewRequest( req );
-        return;
-      }
-
-      _requestError = err;
-      setFailed( "Download failed ");
-      return;
+      return handleRequestError( reqLocked, err );
     }
 
     if ( _state == Download::Initializing || _state == Download::Running ) {
+
       if ( _isMultiPartEnabled && !_isMultiDownload )
         _isMultiDownload = looks_like_metalink_file( req.targetFilePath() );
       if ( !_isMultiDownload ) {
@@ -355,120 +229,8 @@ namespace zyppng {
         return;
       }
 
-      DBG << " Upgrading request for URL: "<< req.url() << " to multipart download " << std::endl;
-
-      //we have a metalink download, lets parse it and see what we got
-      _multiPartMirrors.clear();
-
-      try {
-        zypp::media::MetaLinkParser parser;
-        parser.parse( req.targetFilePath() );
-
-        _blockList = parser.getBlockList();
-
-        //migrate some settings from the base url to the mirror
-        std::vector<Url> urllist = parser.getUrls();
-        for (std::vector<Url>::iterator urliter = urllist.begin(); urliter != urllist.end(); ++urliter) {
-          try {
-            std::string scheme = urliter->getScheme();
-            if (scheme == "http" || scheme == "https" || scheme == "ftp" || scheme == "tftp") {
-              if ( !_requestDispatcher->supportsProtocol( *urliter ))
-                continue;
-              _multiPartMirrors.push_back(internal::propagateQueryParams(*urliter, _url));
-            }
-          }
-          catch (...) {  }
-        }
-
-        if ( _multiPartMirrors.empty() )
-          _multiPartMirrors.push_back( _url );
-
-      } catch ( const zypp::Exception &ex ) {
-        setFailed( zypp::str::Format("Failed to parse metalink information.(%1%)" ) % ex.asUserString() );
-        return;
-      }
-
-      if ( _multiPartMirrors.size() == 0 ) {
-        setFailed( zypp::str::Format("Invalid metalink information.( No mirrors in metalink file)" ) );
-        return;
-      }
-
-      if ( !_blockList.haveBlocks() ) {
-
-        //if we have no filesize we can not generate a blocklist, we need to fall back to normal download
-        if ( !_blockList.haveFilesize() ) {
-          DBG << "No blocklist and no filesize, falling back to normal download for URL " << _url << std::endl;
-
-          //fall back to normal download but use a mirror from the mirror list
-          //otherwise we get HTTPS to HTTP redirect errors
-          _isMultiDownload = false;
-          _isMultiPartEnabled = false;
-
-          Url url;
-          TransferSettings set;
-          NetworkRequestError dummyErr;
-          if ( !findNextMirror( url, set, dummyErr ) ) {
-            url = _url;
-            set = _transferSettings;
-          }
-
-          auto req = std::make_shared<Request>( internal::clearQueryString(url), _targetPath ) ;
-
-          if ( _blockList.haveFileChecksum() ) {
-            std::shared_ptr<zypp::Digest> fileDigest = std::make_shared<zypp::Digest>();
-            if ( _blockList.createFileDigest( *fileDigest ) ) {
-              // to run the checksum for the full file we need to request one big range with open end
-              req->addRequestRange( 0, 0, fileDigest, _blockList.getFileChecksum() );
-            }
-          }
-
-          req->transferSettings() = set;
-          addNewRequest( req );
-          return;
-
-        } else {
-          //we generate a blocklist on the fly based on the filesize
-
-          DBG << "Generate blocklist, since there was none in the metalink file." << _url  << std::endl;
-
-          off_t currOff = 0;
-          off_t filesize = _blockList.getFilesize();
-          while ( currOff <  filesize )  {
-
-            auto blksize = filesize - currOff ;
-            if ( blksize > _preferredChunkSize )
-              blksize = _preferredChunkSize;
-
-            _blockList.addBlock( currOff, blksize );
-            currOff += blksize;
-          }
-
-          XXX << "Generated blocklist: " << std::endl << _blockList << std::endl << " End blocklist " << std::endl;
-        }
-      }
-
-      //remove the metalink file
-      zypp::filesystem::unlink( _targetPath );
-
-      if ( !_deltaFilePath.empty() ) {
-        zypp::PathInfo dFileInfo ( _deltaFilePath );
-        if ( dFileInfo.isFile() && dFileInfo.isR() ) {
-          FILE *f = fopen( _targetPath.asString().c_str(), "w+b" );
-          if ( !f ) {
-            setFailed( zypp::str::Format("Failed to open target file.(errno %1%)" ) % errno );
-            return;
-          }
-
-          try {
-            _blockList.reuseBlocks ( f, _deltaFilePath.asString() );
-          } catch ( ... ) { }
-
-          fclose( f );
-        }
-      }
-
-      setState( Download::RunningMulti );
-      _blockIter = 0;
+      //if we get to here we have a multipart request
+      return upgradeToMultipart( req );
 
     } else if ( _state == Download::RunningMulti ) {
       _downloadedMultiByteCount += req.downloadedByteCount();
@@ -482,8 +244,7 @@ namespace zyppng {
         addBlockRanges( req );
 
         //this is not a new request, only add to queues but do not connect signals again
-        _runningRequests.push_back( req );
-        _requestDispatcher->enqueue( req );
+        addNewRequest( req, false );
       };
 
       //check if we already have enqueued all blocks if not reuse the request
@@ -503,10 +264,301 @@ namespace zyppng {
         }
 
         //feed the working URL back into the mirrors in case there are still running requests that might fail
-        _multiPartMirrors.push_front( reqLocked->_originalUrl );
+        _mirrors.push_back( reqLocked->_originalUrl );
       }
     }
 
+    // make sure downloads are running, at this p
+    ensureDownloadsRunning();
+  }
+
+  void DownloadPrivate::handleRequestError( std::shared_ptr<Request> req, const zyppng::NetworkRequestError &err )
+  {
+    bool retry = false;
+
+    //Handle the auth errors explicitely, we need to give the user a way to put in new credentials
+    //if we get valid new credentials we can retry the request
+    if ( err.type() == NetworkRequestError::Unauthorized || err.type() == NetworkRequestError::AuthFailed ) {
+
+      zypp::media::CredentialManager cm( zypp::media::CredManagerOptions( zypp::ZConfig::instance().repoManagerRoot()) );
+      auto authDataPtr = cm.getCred( req->url() );
+
+      // get stored credentials
+      NetworkAuthData_Ptr cmcred( authDataPtr ? new NetworkAuthData( *authDataPtr ) : new NetworkAuthData() );
+      TransferSettings &ts = req->transferSettings();
+
+      // We got credentials from store, _triedCredFromStore makes sure we just try the auth from store once
+      if ( cmcred && !req->_triedCredFromStore ) {
+        DBG << "got stored credentials:" << std::endl << *cmcred << std::endl;
+        ts.setUsername( cmcred->username() );
+        ts.setPassword( cmcred->password() );
+        retry = true;
+        req->_triedCredFromStore = true;
+      } else {
+
+        //we did not get credentials from the store, emit a signal that allows
+        //setting new auth data
+
+        NetworkAuthData credFromUser;
+        credFromUser.setUrl( req->url() );
+
+        //in case we got a auth hint from the server the error object will contain it
+        auto authHintIt = err.extraInfo().find("authHint");
+        std::string authHint;
+
+        if ( authHintIt != err.extraInfo().end() ){
+          try {
+            authHint = boost::any_cast<std::string>( authHintIt->second );
+          } catch ( const boost::bad_any_cast &) { }
+        }
+
+        //preset from store if we found something
+        if ( cmcred && !cmcred->username().empty() )
+          credFromUser.setUsername( cmcred->username() );
+
+        _sigAuthRequired.emit( *z_func(), credFromUser, authHint );
+        if ( credFromUser.valid() ) {
+          ts.setUsername( credFromUser.username() );
+          ts.setPassword( credFromUser.password() );
+
+          // set available authentication types from the error
+          if ( credFromUser.authType() == CURLAUTH_NONE )
+            credFromUser.setAuthType( authHint );
+
+          // set auth type (seems this must be set _after_ setting the userpwd)
+          if ( credFromUser.authType()  != CURLAUTH_NONE ) {
+            // FIXME: only overwrite if not empty?
+            req->transferSettings().setAuthType(credFromUser.authTypeAsString());
+          }
+
+          cm.addCred( credFromUser );
+          cm.save();
+
+          retry = true;
+        }
+      }
+    } else if ( _state == Download::RunningMulti ) {
+
+      //if a error happens during a multi download we try to use another mirror to download the failed block
+      DBG << "Request failed " << req->extendedErrorString() << std::endl;
+      auto failed = req->failedRanges();
+
+      NetworkRequestError dummyErr;
+
+      const auto fRanges = req->failedRanges();
+      std::vector<Block> blocks;
+
+      try {
+        std::transform( fRanges.begin(), fRanges.end(), std::back_inserter(_failedBlocks), [ &req ]( const auto &r ){
+          auto ind = std::find_if( req->_myBlocks.begin(), req->_myBlocks.end(), [ &r ](const auto &elem){ return elem._block == std::any_cast<size_t>(r.userData); } );
+
+          if ( ind == req->_myBlocks.end() ){
+            throw zypp::Exception( "User data did not point to a valid block in the request set, this is a bug" );
+          }
+
+          Block b = *ind;
+          b._failedWithErr = req->error();
+          DBG << "Adding failed block to failed blocklist: " << b._block << " " << r.start << " " << r.len << " (" << req->error().toString() << ")" << std::endl;
+          return b;
+        });
+
+        //try to init a new multi request, if we have leftover mirrors we get a valid one
+        auto newReq = initMultiRequest( dummyErr, true );
+        if ( newReq ) {
+          addNewRequest( newReq );
+          return;
+        }
+        // we got no mirror this time, but since we still have running requests there is hope this will be finished later
+        if ( _runningRequests.size() && _failedBlocks.size() )
+          return;
+
+      } catch ( const zypp::Exception &ex ) {
+        //we just log the exception and fall back to a normal download
+        WAR << "Multipart download failed: " << ex.asString() << std::endl;
+      }
+    }
+
+    //if rety is true we just enqueue the request again, usually this means authentication was updated
+    if ( retry ) {
+      //make sure this request will run asap
+      req->setPriority( NetworkRequest::High );
+
+      //this is not a new request, only add to queues but do not connect signals again
+      addNewRequest( req, false );
+      return;
+    }
+
+    //we do not have more mirrors left we can try or we do not have a multi download, abort
+    while( _runningRequests.size() ) {
+      auto req = _runningRequests.back();
+      req->disconnectSignals();
+      _runningRequests.pop_back();
+      _requestDispatcher->cancel( *req, err );
+      if ( req->_myMirror )
+        req->_myMirror->cancelTransfer();
+    }
+
+    //not all hope is lost, maybe a normal download can work out?
+    if ( _state == Download::RunningMulti ) {
+      //fall back to normal download
+      DBG << "Falling back to download from initial URL." << std::endl;
+      _isMultiDownload = false;
+      _isMultiPartEnabled = false;
+      setState( Download::Running );
+
+      auto req = std::make_shared<Request>( internal::clearQueryString(_url), _targetPath ) ;
+      req->transferSettings() = _transferSettings;
+      addNewRequest( req );
+      return;
+    }
+
+    _requestError = err;
+    setFailed( "Download failed ");
+  }
+
+
+  void DownloadPrivate::upgradeToMultipart( NetworkRequest &req )
+  {
+    DBG << " Upgrading request for URL: "<< req.url() << " to multipart download " << std::endl;
+
+    //we have a metalink download, lets parse it and see what we got
+    _mirrors.clear();
+
+    std::vector<zypp::media::MetalinkMirror> mirrs;
+
+    try {
+      zypp::media::MetaLinkParser parser;
+      parser.parse( req.targetFilePath() );
+
+      _blockList = parser.getBlockList();
+
+      //migrate some settings from the base url to the mirror
+      mirrs = parser.getMirrors();
+      for ( auto urliter = mirrs.begin(); urliter != mirrs.end(); ++urliter ) {
+        try {
+          const std::string scheme = urliter->url.getScheme();
+          if (scheme == "http" || scheme == "https" || scheme == "ftp" || scheme == "tftp") {
+            if ( !_requestDispatcher->supportsProtocol( urliter->url )) {
+              urliter = mirrs.erase( urliter );
+              continue;
+            }
+            urliter->url = internal::propagateQueryParams( urliter->url, _url );
+            _mirrors.push_back( urliter->url );
+          }
+        }
+        catch (...) {  }
+      }
+
+      if ( mirrs.empty() ) {
+        mirrs.push_back( { 0, -1, _url } );
+        _mirrors.push_back( _url );
+      }
+
+    } catch ( const zypp::Exception &ex ) {
+      setFailed( zypp::str::Format("Failed to parse metalink information.(%1%)" ) % ex.asUserString() );
+      return;
+    }
+
+    if ( mirrs.size() == 0 ) {
+      setFailed( zypp::str::Format("Invalid metalink information.( No mirrors in metalink file)" ) );
+      return;
+    }
+
+    if ( !_blockList.haveBlocks() ) {
+
+      //if we have no filesize we can not generate a blocklist, we need to fall back to normal download
+      if ( !_blockList.haveFilesize() ) {
+        DBG << "No blocklist and no filesize, falling back to normal download for URL " << _url << std::endl;
+
+        //fall back to normal download but use a mirror from the mirror list
+        //otherwise we get HTTPS to HTTP redirect errors
+        _isMultiDownload = false;
+        _isMultiPartEnabled = false;
+
+        Url url;
+        TransferSettings set;
+        NetworkRequestError dummyErr;
+        MirrorControl::MirrorHandle mirror = findNextMirror( url, set, dummyErr );
+        if ( !mirror ) {
+          url = _url;
+          set = _transferSettings;
+        }
+
+        auto req = std::make_shared<Request>( internal::clearQueryString(url), _targetPath ) ;
+        req->_myMirror = mirror;
+
+        if ( _blockList.haveFileChecksum() ) {
+          std::shared_ptr<zypp::Digest> fileDigest = std::make_shared<zypp::Digest>();
+          if ( _blockList.createFileDigest( *fileDigest ) ) {
+            // to run the checksum for the full file we need to request one big range with open end
+            req->addRequestRange( 0, 0, fileDigest, _blockList.getFileChecksum() );
+          }
+        }
+
+        req->transferSettings() = set;
+        addNewRequest( req );
+        return;
+
+      } else {
+        //we generate a blocklist on the fly based on the filesize
+
+        DBG << "Generate blocklist, since there was none in the metalink file." << _url  << std::endl;
+
+        off_t currOff = 0;
+        off_t filesize = _blockList.getFilesize();
+        while ( currOff <  filesize )  {
+
+          auto blksize = filesize - currOff ;
+          if ( blksize > _preferredChunkSize )
+            blksize = _preferredChunkSize;
+
+          _blockList.addBlock( currOff, blksize );
+          currOff += blksize;
+        }
+
+        XXX << "Generated blocklist: " << std::endl << _blockList << std::endl << " End blocklist " << std::endl;
+      }
+    }
+
+    //remove the metalink file
+    zypp::filesystem::unlink( _targetPath );
+
+    if ( !_deltaFilePath.empty() ) {
+      zypp::PathInfo dFileInfo ( _deltaFilePath );
+      if ( dFileInfo.isFile() && dFileInfo.isR() ) {
+        FILE *f = fopen( _targetPath.asString().c_str(), "w+b" );
+        if ( !f ) {
+          setFailed( zypp::str::Format("Failed to open target file.(errno %1%)" ) % errno );
+          return;
+        }
+
+        try {
+          _blockList.reuseBlocks ( f, _deltaFilePath.asString() );
+        } catch ( ... ) { }
+
+        fclose( f );
+      }
+    }
+
+    setState( Download::PrepareMulti );
+    _mirrorControlReadyConn = _mirrorControl->sigAllMirrorsReady().connect( track_obj( [ this ](){
+      _mirrorControlReadyConn.disconnect();
+      mirrorsReady();
+    }, this ) );
+
+    // this will emit a mirrorsReady signal once all connection tests have been done
+    _mirrorControl->registerMirrors( mirrs );
+  }
+
+  void DownloadPrivate::mirrorsReady()
+  {
+    setState( Download::RunningMulti );
+    _blockIter = 0;
+    ensureDownloadsRunning();
+  }
+
+  void DownloadPrivate::ensureDownloadsRunning()
+  {
     //check if there is still work to do
     if ( _runningRequests.size() < 10 ) {
 
@@ -573,11 +625,16 @@ namespace zyppng {
     }
   }
 
-  void DownloadPrivate::addNewRequest( std::shared_ptr<Request> req )
+  void DownloadPrivate::addNewRequest(std::shared_ptr<Request> req , const bool connectSignals)
   {
-    req->connectSignals( *this );
+    if ( connectSignals )
+      req->connectSignals( *this );
+
     _runningRequests.push_back( req );
     _requestDispatcher->enqueue( req );
+
+    if ( req->_myMirror )
+      req->_myMirror->startTransfer();
   }
 
   std::shared_ptr<DownloadPrivate::Request> DownloadPrivate::initMultiRequest( NetworkRequestError &err, bool useFailed )
@@ -589,7 +646,7 @@ namespace zyppng {
 
     auto blocks = useFailed ?  getNextFailedBlocks( myUrl.getScheme() ) : getNextBlocks( myUrl.getScheme() );
     if ( !blocks.size() ) {
-      _multiPartMirrors.push_front( myUrl );
+      _mirrors.push_back( myUrl );
       return nullptr;
     }
 
@@ -627,14 +684,21 @@ namespace zyppng {
     }
   }
 
-  bool DownloadPrivate::findNextMirror( Url &url, TransferSettings &set, NetworkRequestError &err )
+  MirrorControl::MirrorHandle DownloadPrivate::findNextMirror( Url &url, TransferSettings &set, NetworkRequestError &err )
   {
+
     Url myUrl;
-    bool foundMirror = false;
     TransferSettings settings;
-    while ( _multiPartMirrors.size() ) {
-      myUrl = _multiPartMirrors.front();
-      _multiPartMirrors.pop_front();
+    MirrorControl::MirrorHandle mirror;
+
+    while ( !mirror ) {
+
+      const auto nextBest = _mirrorControl->pickBestMirror( _mirrors );
+      if ( !nextBest.second )
+        return nullptr;
+
+      myUrl = *nextBest.first;
+      _mirrors.erase( nextBest.first );
 
       settings = _transferSettings;
       //if this is a different host than the initial request, we reset username/password
@@ -649,16 +713,16 @@ namespace zyppng {
         continue;
       }
 
-      foundMirror = true;
+      mirror = nextBest.second;
       break;
     }
 
-    if ( !foundMirror )
-      return false;
+    if ( !mirror )
+      return nullptr;
 
     url = myUrl;
     set = settings;
-    return true;
+    return mirror;
   }
 
   void DownloadPrivate::setFailed(std::string &&reason)
@@ -899,9 +963,15 @@ namespace zyppng {
     return d_func()->_sigAuthRequired;
   }
 
-  DownloaderPrivate::DownloaderPrivate( )
+  DownloaderPrivate::DownloaderPrivate(std::shared_ptr<MirrorControl> mc)
+    : _mirrors( std::move(mc) )
   {
-    _requestDispatcher = std::make_shared<NetworkRequestDispatcher>(  );
+    _requestDispatcher = std::make_shared<NetworkRequestDispatcher>( );
+
+    if ( !_mirrors ) {
+      auto zyppContext = zypp::getZYpp()->ngContext();
+      _mirrors = zyppContext->mirrorControl();
+    }
   }
 
   void DownloaderPrivate::onDownloadStarted(Download &download)
@@ -933,6 +1003,10 @@ namespace zyppng {
 
   }
 
+  Downloader::Downloader( std::shared_ptr<MirrorControl> mc )
+    : Base ( *new DownloaderPrivate( mc ) )
+  { }
+
   Downloader::~Downloader()
   {
     Z_D();
@@ -945,7 +1019,7 @@ namespace zyppng {
   std::shared_ptr<Download> Downloader::downloadFile(zyppng::Url file, zypp::filesystem::Pathname targetPath, zypp::ByteCount expectedFileSize )
   {
     Z_D();
-    std::shared_ptr<Download> dl = std::make_shared<Download>( std::move( *new DownloadPrivate( *this, d->_requestDispatcher, std::move(file), std::move(targetPath), std::move(expectedFileSize) ) ) );
+    std::shared_ptr<Download> dl = std::make_shared<Download>( std::move( *new DownloadPrivate( *this, d->_requestDispatcher, d->_mirrors, std::move(file), std::move(targetPath), std::move(expectedFileSize) ) ) );
 
     d->_runningDownloads.push_back( dl );
     dl->sigFinished().connect( sigc::mem_fun( *d , &DownloaderPrivate::onDownloadFinished ) );

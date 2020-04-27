@@ -29,6 +29,10 @@
 #include <zypp/KeyRing.h>
 #include <zypp/DiskUsageCounter.h>
 
+namespace zyppng {
+  class Context;
+}
+
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
@@ -139,6 +143,9 @@ namespace zypp
 
     /** set the home, if you need to change it */
     void setHomePath( const Pathname & path );
+
+
+    std::shared_ptr<zyppng::Context> ngContext();
 
   private:
     /** Factory */
