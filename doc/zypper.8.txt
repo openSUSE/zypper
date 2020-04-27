@@ -523,7 +523,7 @@ include::{incdir}/option_Solver_Flags_Recommends.txt[]
 	*--severity* 'severity'[,'...']::
 		List only patches with this severity. See section *Package Types* for a list of commonly used 'severity' values.
 
-	*--issues*[*=*'string'[,'...']]::
+	*--issue*[*=*'string'[,'...']]::
 		Look for issues whose number, summary, or description matches the specified 'string'. Issues found by number are displayed separately from those found by descriptions. In the latter case, use '*zypper patch-info* patchname' to get information about issues the patch fixes.
 
 	*-a*, *--all::
