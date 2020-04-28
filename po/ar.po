@@ -13,17 +13,17 @@ msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-12-05 14:22+0100\n"
-"PO-Revision-Date: 2019-03-23 20:19+0000\n"
-"Last-Translator: Iman Abd Elaziz <Iman.AbdelAziz@arabize.com>\n"
-"Language-Team: Arabic <https://l10n.opensuse.org/projects/libzypp/master/ar/"
-">\n"
+"PO-Revision-Date: 2020-05-02 19:50+0000\n"
+"Last-Translator: mohammad alhargan <malham1@gmail.com>\n"
+"Language-Team: Arabic <https://l10n.opensuse.org/projects/libzypp/master/ar/>"
+"\n"
 "Language: ar\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
-"X-Generator: Weblate 3.3\n"
+"X-Generator: Weblate 3.6.1\n"
 "X-Language-English: Arabic\n"
 "X-Language-Local: Arabic*\n"
 
@@ -3773,7 +3773,7 @@ msgstr "(ستنتهي الصلاحية خلال 24 ساعة)"
 #, c-format, boost-format
 msgid "(expires in %d day)"
 msgid_plural "(expires in %d days)"
-msgstr[0] "(ستنتهي الصلاحية خلال %d من الأيام)"
+msgstr[0] "(ستنتهي الصلاحية خلال %d يوم)"
 msgstr[1] "(ستنتهي الصلاحية خلال يوم واحد)"
 msgstr[2] "(ستنتهي الصلاحية خلال يومين)"
 msgstr[3] "(ستنتهي الصلاحية خلال بضعة أيام)"
@@ -4058,7 +4058,7 @@ msgstr "التعبير العادي '%s' غير صالح"
 #: zypp/media/MediaCIFS.cc:427 zypp/media/MediaCurl.cc:1738
 #, c-format, boost-format
 msgid "Authentication required for '%s'"
-msgstr "التصديق مطلوب لـ '%s'"
+msgstr "التصديق '%s' مطلوب"
 
 #: zypp/media/MediaCurl.cc:1111
 msgid ""
@@ -4079,7 +4079,7 @@ msgstr ""
 #: zypp/media/MediaException.cc:33
 #, c-format, boost-format
 msgid "Failed to mount %s on %s"
-msgstr "فشل توصيل %s بـ %s"
+msgstr "فشل توصيل %s على %s"
 
 #: zypp/media/MediaException.cc:43
 #, c-format, boost-format
@@ -4118,7 +4118,7 @@ msgstr "نقطة إرفاق وسائط غير صالحة"
 #: zypp/media/MediaException.cc:79
 #, c-format, boost-format
 msgid "Download (curl) initialization failed for '%s'"
-msgstr "فشلت تهيئة إنزال (curl) لـ '%s'"
+msgstr "فشلت تهيئة تحميل (curl) لـ '%s'"
 
 #: zypp/media/MediaException.cc:84
 #, c-format, boost-format
@@ -4622,19 +4622,19 @@ msgstr "تثبيت %s من المخزن المستبعد"
 #: zypp/solver/detail/SATResolver.cc:1386
 #, boost-format
 msgid "install %1% although it has been retracted"
-msgstr ""
+msgstr "بتثبيت %1% على الرغم من أنه تم سحبه"
 
 #. translator: %1% is a package name
 #: zypp/solver/detail/SATResolver.cc:1389
 #, boost-format
 msgid "allow to install the PTF %1%"
-msgstr ""
+msgstr "تسمح بتثبيت  PTF %1%"
 
 #. translator: %1% is a package name
 #: zypp/solver/detail/SATResolver.cc:1392
 #, boost-format
 msgid "install %1% although it is blacklisted"
-msgstr ""
+msgstr "تثبيت %1% على الرغم من أنه مدرج في القائمة السوداء"
 
 #: zypp/solver/detail/SATResolver.cc:1412
 #, c-format, boost-format
