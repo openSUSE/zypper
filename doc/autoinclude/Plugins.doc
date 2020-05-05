@@ -140,11 +140,24 @@ type=rpm-md
 
 [repo2]
 ...
-
 \endverbatim
 
 The repositories will be added on service refresh with the alias present in the output, prefixed by the service alias (in this case, the executable name).
 
+To protect your code from e.g python modules writing their own messages to stdout, you should use a copy of stdout and redirect stdout to stderr (Python3 may need a slightly different print syntax):
+
+\verbatim
+#!/usr/bin/python
+import sys
+sendback = sys.stdout
+sys.stdout = sys.stderr
+
+print >>sendback, "# example plugin output"
+print >>sendback, "# comments are ignored"
+print >>sendback, "[repo1]"
+print >>sendback, "name=Base repository"
+...
+\endverbatim
 
 <HR><!-- ====================================================================== -->
 \section plugin-url-resolver Url Resolver plugins
