@@ -73,6 +73,19 @@ SET( zyppng_media_private_HEADERS
   ${CMAKE_CURRENT_SOURCE_DIR}/media/network/private/request_p.h
 )
 
+SET( zyppng_thread_SRCS
+  ${CMAKE_CURRENT_SOURCE_DIR}/thread/asyncqueue.cc
+)
+
+SET( zyppng_thread_HEADERS
+  ${CMAKE_CURRENT_SOURCE_DIR}/thread/AsyncQueue
+  ${CMAKE_CURRENT_SOURCE_DIR}/thread/asyncqueue.h
+  ${CMAKE_CURRENT_SOURCE_DIR}/thread/private/asyncqueue_p.h
+)
+
+SET( zyppng_thread_private_HEADERS
+)
+
 SET( zyppng_appcode_HEADERS
   ${CMAKE_CURRENT_SOURCE_DIR}/Context
   ${CMAKE_CURRENT_SOURCE_DIR}/context.h
@@ -91,11 +104,14 @@ SET ( zyppng_HEADERS
   ${zyppng_core_HEADERS}
   ${zyppng_media_HEADERS}
   ${zyppng_media_private_HEADERS}
+  ${zyppng_thread_HEADERS}
+  ${zyppng_thread_private_HEADERS}
   PARENT_SCOPE
 )
 
 SET ( zyppng_SRCS
   ${zyppng_base_SRCS}
   ${zyppng_media_SRCS}
+  ${zyppng_thread_SRCS}
   PARENT_SCOPE
 )
