@@ -17,10 +17,10 @@ msgstr ""
 "Project-Id-Version: zypper.de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-04-12 15:27+0200\n"
-"PO-Revision-Date: 2019-12-18 11:55+0000\n"
+"PO-Revision-Date: 2020-05-14 23:22+0000\n"
 "Last-Translator: Sarah Kriesch <ada.lovelace@gmx.de>\n"
-"Language-Team: German <https://l10n.opensuse.org/projects/zypper/master/de/"
-">\n"
+"Language-Team: German <https://l10n.opensuse.org/projects/zypper/master/de/>"
+"\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -6987,6 +6987,8 @@ msgid ""
 "Abbreviated commandline options will not be supported in future versions. "
 "Please use %2% instead of %1% ."
 msgstr ""
+"Verkürzte Kommandozeilen-Optionen werden in zukünftigen Versionen nicht "
+"unterstützt. Bitte %2% statt %1% verwenden."
 
 #. translators: %s is "help" or "zypper help" depending on whether
 #. zypper shell is running or not
@@ -7099,11 +7101,11 @@ msgstr "unbestimmt"
 #. translator: patch status
 #: src/utils/misc.cc:120
 msgid "retracted"
-msgstr ""
+msgstr "eingezogen"
 
 #: src/utils/misc.cc:329 src/utils/misc.cc:371
 msgid "Since"
-msgstr ""
+msgstr "Seit"
 
 #. << _("Repository")
 #: src/utils/misc.cc:364
