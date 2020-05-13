@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-04-12 15:27+0200\n"
-"PO-Revision-Date: 2020-03-11 14:55+0000\n"
-"Last-Translator: Rodrigo Macedo <rmsolucoeseminformatic4@gmail.com>\n"
+"PO-Revision-Date: 2020-05-14 23:22+0000\n"
+"Last-Translator: Leonardo Teodoro <leonardosilvateodoro@hotmail.com>\n"
 "Language-Team: Portuguese (Brazil) <https://l10n.opensuse.org/projects/"
 "zypper/master/pt_BR/>\n"
 "Language: pt_BR\n"
@@ -6966,11 +6966,11 @@ msgstr "não determinada"
 #. translator: patch status
 #: src/utils/misc.cc:120
 msgid "retracted"
-msgstr ""
+msgstr "retraído"
 
 #: src/utils/misc.cc:329 src/utils/misc.cc:371
 msgid "Since"
-msgstr ""
+msgstr "Desde"
 
 #. << _("Repository")
 #: src/utils/misc.cc:364
