@@ -785,7 +785,7 @@ void do_init_repos( Zypper & zypper, const Container & container )
     }
     if ( ! ok )
     {
-      zypper.out().info( str::Format(_("Global option '%s' can be used to temporarily enable repositories.")) % "--plus-content" );
+      zypper.out().info( str::Format(_("Global option '%s' can be used to temporarily enable repositories.")) % "--plus-content <TAG>" );
       zypper.setExitCode( ZYPPER_EXIT_ERR_INVALID_ARGS );
       return;
     }
