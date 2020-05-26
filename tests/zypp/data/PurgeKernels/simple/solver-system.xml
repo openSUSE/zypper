@@ -144,6 +144,43 @@
 </package>
 
 <package>
+        <name>kernel-devel</name>
+        <vendor>openSUSE</vendor>
+        <history>
+        <update>
+                <arch>noarch</arch>
+                <version>1</version><release>1.2</release>
+        </update>
+        </history>
+        <provides>
+                <dep name='multiversion(kernel)' />
+                <dep name='kernel-devel' op='==' version='1' release='1.2' />
+        </provides>
+        <requires>
+                <dep name='kernel-macros' />
+        </requires>
+</package>
+
+
+<package>
+        <name>kernel-source</name>
+        <vendor>openSUSE</vendor>
+        <history>
+        <update>
+                <arch>noarch</arch>
+                <version>1</version><release>1.2</release>
+        </update>
+        </history>
+        <provides>
+                <dep name='kernel-source' op='==' version='1' release='1.2' />
+        </provides>
+        <requires>
+                <dep name='kernel-devel' op='==' version='1' release='1.2' />
+        </requires>
+</package>
+
+
+<package>
 	<name>kernel-syms</name>
 	<vendor>openSUSE</vendor>
 	<buildtime>1570603549</buildtime>
@@ -316,6 +353,64 @@
 		<dep name='packageand(kernel-default:kernel-devel)' />
 	</supplements>
 </package>
+
+<package>
+        <name>kernel-default-devel</name>
+        <vendor>openSUSE</vendor>
+        <history>
+        <update>
+                <arch>x86_64</arch>
+                <version>1</version><release>3.2</release>
+        </update>
+        </history>
+        <provides>
+                <dep name='multiversion(kernel)' />
+                <dep name='kernel-default-devel' op='==' version='1' release='3.2' />
+        </provides>
+        <requires>
+                <dep name='kernel-devel' op='==' version='1' release='3.2' />
+        </requires>
+        <supplements>
+                <dep name='packageand(kernel-default:kernel-devel)' />
+        </supplements>
+</package>
+
+<package>
+        <name>kernel-devel</name>
+        <vendor>openSUSE</vendor>
+        <history>
+        <update>
+                <arch>noarch</arch>
+                <version>1</version><release>3.2</release>
+        </update>
+        </history>
+        <provides>
+                <dep name='multiversion(kernel)' />
+                <dep name='kernel-devel' op='==' version='1' release='3.2' />
+        </provides>
+        <requires>
+                <dep name='kernel-macros' />
+        </requires>
+</package>
+
+<package>
+        <name>kernel-source</name>
+        <vendor>openSUSE</vendor>
+        <history>
+        <update>
+                <arch>noarch</arch>
+                <version>1</version><release>3.2</release>
+        </update>
+        </history>
+        <provides>
+                <dep name='kernel-source' op='==' version='1' release='3.2' />
+        </provides>
+        <requires>
+                <dep name='kernel-devel' op='==' version='1' release='3.2' />
+        </requires>
+</package>
+
+
 
 <package>
 	<name>kernel-default-devel-debuginfo</name>

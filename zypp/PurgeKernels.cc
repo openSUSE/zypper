@@ -227,10 +227,11 @@ namespace zypp {
     q.setMatchExact();
 
     for ( auto installedSrcPck : q ) {
-
+      // For now print a message that we are removing a source package that has no corresponding kernel installed.
+      // This was changed due to bug #1171224 because orphaned kernel-source/devel packages were kept due to package
+      // rebuilds that did not obsolete the previously installed release, e.g. kernel-source-1-1.1 vs kernel-source-1-1.2
       if ( validEditions.find( installedSrcPck.edition() ) == validEditions.end() ) {
-        MIL << "Skipping source package " << installedSrcPck <<  " no corresponding kernel with the same version was installed." << std::endl;
-        continue;
+        MIL << "Trying to remove source package " << installedSrcPck <<  " no corresponding kernel with the same version was installed." << std::endl;
       }
 
       //if no package providing kernel-flavour = VERSION is installed , we are free to remove the package

@@ -45,6 +45,12 @@ namespace  {
           { "kernel-default-devel-debuginfo-1-4.x86_64", false },
           { "kernel-devel-1-4.noarch", false },
           { "kernel-syms-1-4.x86_64", false },
+          // left over devel packages that need to go away too
+          { "kernel-devel-1-1.2.noarch", false },
+          { "kernel-source-1-1.2.noarch", false },
+          { "kernel-default-devel-1-3.2.x86_64", false },
+          { "kernel-devel-1-3.2.noarch", false },
+          { "kernel-source-1-3.2.noarch", false },
         }
       },
       //test that keeps only the running kernel
@@ -78,6 +84,12 @@ namespace  {
           { "kernel-devel-1-5.noarch", false },
           { "kernel-syms-1-5.x86_64", false },
           { "dummy-kmp-default-1-0.x86_64", false },
+          // left over devel packages that need to go away too
+          { "kernel-devel-1-1.2.noarch", false },
+          { "kernel-source-1-1.2.noarch", false },
+          { "kernel-default-devel-1-3.2.x86_64", false },
+          { "kernel-devel-1-3.2.noarch", false },
+          { "kernel-source-1-3.2.noarch", false },
         }
       },
       TestSample {
@@ -99,6 +111,12 @@ namespace  {
           { "kernel-devel-1-5.noarch", false },
           { "kernel-syms-1-5.x86_64", false },
           { "dummy-kmp-default-1-0.x86_64", false },
+          // left over devel packages that need to go away too
+          { "kernel-devel-1-1.2.noarch", false },
+          { "kernel-source-1-1.2.noarch", false },
+          { "kernel-default-devel-1-3.2.x86_64", false },
+          { "kernel-devel-1-3.2.noarch", false },
+          { "kernel-source-1-3.2.noarch", false },
         }
       },
       TestSample {
