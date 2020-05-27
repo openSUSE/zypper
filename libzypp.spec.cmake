@@ -18,7 +18,11 @@
 %if 0%{?is_opensuse} && (0%{?sle_version} >= 150100 || 0%{?suse_version} > 1500)
 %bcond_without zchunk
 %else
+%if 0%{?sle_version} >= 150200
+%bcond_without zchunk
+%else
 %bcond_with zchunk
+%endif
 %endif
 
 %bcond_without mediabackend_tests
