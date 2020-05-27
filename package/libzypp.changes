@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Wed May 27 18:50:32 CEST 2020 - ma@suse.de
+
+- Enable zchunk on SLE-15-SP2.
+- Older kernel-devel packages are not properly purged (bsc#1171224)
+- doc: enhance service plugin example.
+- version 17.23.5 (22)
+
+-------------------------------------------------------------------
 Thu Apr  9 12:52:10 CEST 2020 - ma@suse.de
 
 - Get retracted patch status from updateinfo data (jsc#SLE-8770)
