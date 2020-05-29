@@ -86,15 +86,19 @@ struct PQSort
 
 struct Table
 {
-  void row( PoolQuery::const_iterator it_r )
+  std::vector<std::string> & row( const sat::Solvable & solv_r )
   {
     //smax( _maxSID,  );
-    smax( _maxNAME, it_r->ident().size() + it_r->edition().size() + it_r->arch().size() );
-    smax( _maxREPO, it_r->repository().name().size(), it_r->repository().name() );
+    smax( _maxNAME, solv_r.ident().size() + solv_r.edition().size() + solv_r.arch().size() );
+    smax( _maxREPO, solv_r.repository().name().size(), solv_r.repository().name() );
     //smax( _maxTIME, );
-    //smax( _maxVEND, it_r->vendor().size() );
+    //smax( _maxVEND, solv_r.vendor().size() );
+    return _map[solv_r];
+  }
 
-    std::vector<std::string> & details { _map[*it_r] };
+  void row( PoolQuery::const_iterator it_r )
+  {
+    std::vector<std::string> & details { row( *it_r ) };
     for_( match, it_r.matchesBegin(), it_r.matchesEnd() ) {
       details.push_back( match->inSolvAttr().asString().substr( 9, 3 )+": " +match->asString() );
     }
@@ -176,6 +180,75 @@ void dDump( const std::string & spec_r )
     }
   }
   message << endl << "}" << endl;
+}
+
+///////////////////////////////////////////////////////////////////
+
+void dTree( const std::string & cmd_r, const std::string & spec_r )
+{
+  message << "tree " << spec_r << " {";
+
+  sat::WhatProvides spec( Capability::guessPackageSpec( spec_r ) );
+  if ( spec.empty() )
+  {
+    message << "}" << endl;
+    return;
+  }
+
+  static const std::list<sat::SolvAttr> attrs {
+    sat::SolvAttr::requires,
+    sat::SolvAttr::recommends,
+    sat::SolvAttr::obsoletes,
+    sat::SolvAttr::conflicts,
+    sat::SolvAttr::supplements,
+  };
+
+  std::map<sat::SolvAttr,std::map<sat::Solvable,std::set<std::string>>> result;	// solvables recommending provided capability
+  {
+    Table t;
+    for ( const auto & el : spec )
+    {
+      auto & details { t.row( el ) };
+      for ( const auto & cap : el.provides() )
+      {
+	//details.push_back( "prv: "+cap.asString() );	// list only matching ones
+
+	// get attrs matching cap
+	for ( const auto & attr : attrs )
+	{
+	  PoolQuery q;
+	  q.addDependency( attr, cap );
+	  if ( q.empty() )
+	    continue;
+	  for_( it, q.begin(), q.end() ) {
+	    for_( match, it.matchesBegin(), it.matchesEnd() ) {
+	      result[attr][*it].insert( match->inSolvAttr().asString().substr( 9, 3 )+": " +match->asString()
+	      + " (" + cap.asString() + ")"
+	      );
+	    }
+	  }
+	}
+      }
+    }
+    message << endl << t;
+  }
+
+  for ( const auto & attr : attrs )
+  {
+    if ( result[attr].empty() )
+      continue;
+
+    message << endl << "======== " << attr << " by:" << endl;
+    Table t;
+    for ( const auto & el : result[attr] )
+    {
+      auto & details { t.row( el.first ) };
+      for ( const auto & cap : el.second )
+	details.push_back( cap );
+    }
+    message << endl << t << endl;
+  }
+  message << "}" << endl;
 }
 
 /******************************************************************
@@ -317,6 +390,16 @@ int main( int argc, char * argv[] )
 	    else
 	      return errexit("-D <pkgspec> requires an argument.");
 	    break;
+	  case 'T':
+	    if ( argc > 1 )
+	    {
+	      std::string cmd { *argv };
+	      --argc,++argv;
+	      dTree( cmd, *argv );
+	    }
+	    else
+	      return errexit("-T <pkgspec> requires an argument.");
+	    break;
 	  case 'i': ignorecase =	true;	break;
 	  case 'I': ignorecase =	false;	break;
 	  case 'x': matechexact =	true;	break;
@@ -427,9 +510,7 @@ int main( int argc, char * argv[] )
 	continue;
       t.row( it );
     }
-    message << t << endl;
-
-    message << "}" << endl;
+    message << t << "}" << endl;
   }
 
   INT << "===[END]============================================" << endl << endl;
