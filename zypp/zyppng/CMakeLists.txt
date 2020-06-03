@@ -1,98 +1,97 @@
 SET( zyppng_base_SRCS
-  ${CMAKE_CURRENT_SOURCE_DIR}/base/abstracteventsource.cc
-  ${CMAKE_CURRENT_SOURCE_DIR}/base/base.cc
-  ${CMAKE_CURRENT_SOURCE_DIR}/base/eventdispatcher_glib.cc
-  ${CMAKE_CURRENT_SOURCE_DIR}/base/eventloop_glib.cc
-  ${CMAKE_CURRENT_SOURCE_DIR}/base/timer.cc
-  ${CMAKE_CURRENT_SOURCE_DIR}/base/threaddata.cc
-  ${CMAKE_CURRENT_SOURCE_DIR}/base/socketnotifier.cc
+  base/abstracteventsource.cc
+  base/base.cc
+  base/eventdispatcher_glib.cc
+  base/eventloop_glib.cc
+  base/timer.cc
+  base/threaddata.cc
+  base/socketnotifier.cc
 )
 
 SET( zyppng_base_HEADERS
-  ${CMAKE_CURRENT_SOURCE_DIR}/base/AbstractEventSource
-  ${CMAKE_CURRENT_SOURCE_DIR}/base/abstracteventsource.h
-  ${CMAKE_CURRENT_SOURCE_DIR}/base/Base
-  ${CMAKE_CURRENT_SOURCE_DIR}/base/base.h
-  ${CMAKE_CURRENT_SOURCE_DIR}/base/EventDispatcher
-  ${CMAKE_CURRENT_SOURCE_DIR}/base/eventdispatcher.h
-  ${CMAKE_CURRENT_SOURCE_DIR}/base/EventLoop
-  ${CMAKE_CURRENT_SOURCE_DIR}/base/eventloop.h
-  ${CMAKE_CURRENT_SOURCE_DIR}/base/signals.h
-  ${CMAKE_CURRENT_SOURCE_DIR}/base/SocketNotifier
-  ${CMAKE_CURRENT_SOURCE_DIR}/base/socketnotifier.h
-  ${CMAKE_CURRENT_SOURCE_DIR}/base/Timer
-  ${CMAKE_CURRENT_SOURCE_DIR}/base/timer.h
-  ${CMAKE_CURRENT_SOURCE_DIR}/base/zyppglobal.h
+  base/AbstractEventSource
+  base/abstracteventsource.h
+  base/Base
+  base/base.h
+  base/EventDispatcher
+  base/eventdispatcher.h
+  base/EventLoop
+  base/eventloop.h
+  base/signals.h
+  base/SocketNotifier
+  base/socketnotifier.h
+  base/Timer
+  base/timer.h
+  base/zyppglobal.h
 )
 
 SET( zyppng_base_private_HEADERS
-  ${CMAKE_CURRENT_SOURCE_DIR}/base/private/abstracteventsource_p.h
-  ${CMAKE_CURRENT_SOURCE_DIR}/base/private/base_p.h
-  ${CMAKE_CURRENT_SOURCE_DIR}/base/private/eventdispatcher_glib_p.h
-  ${CMAKE_CURRENT_SOURCE_DIR}/base/private/eventloop_glib_p.h
-  ${CMAKE_CURRENT_SOURCE_DIR}/base/private/threaddata_p.h
+  base/private/abstracteventsource_p.h
+  base/private/base_p.h
+  base/private/eventdispatcher_glib_p.h
+  base/private/eventloop_glib_p.h
+  base/private/threaddata_p.h
 )
 
-
 SET( zyppng_core_HEADERS
-  ${CMAKE_CURRENT_SOURCE_DIR}/core/url.h
-  ${CMAKE_CURRENT_SOURCE_DIR}/core/Url
-  ${CMAKE_CURRENT_SOURCE_DIR}/core/idstring.h
-  ${CMAKE_CURRENT_SOURCE_DIR}/core/IdString
-  ${CMAKE_CURRENT_SOURCE_DIR}/core/string.h
-  ${CMAKE_CURRENT_SOURCE_DIR}/core/String
+  core/url.h
+  core/Url
+  core/idstring.h
+  core/IdString
+  core/string.h
+  core/String
 )
 
 SET( zyppng_media_SRCS
-  ${CMAKE_CURRENT_SOURCE_DIR}/media/medianetwork.cc
-  ${CMAKE_CURRENT_SOURCE_DIR}/media/network/downloader.cc
-  ${CMAKE_CURRENT_SOURCE_DIR}/media/network/mirrorcontrol.cc
-  ${CMAKE_CURRENT_SOURCE_DIR}/media/network/networkrequestdispatcher.cc
-  ${CMAKE_CURRENT_SOURCE_DIR}/media/network/networkrequesterror.cc
-  ${CMAKE_CURRENT_SOURCE_DIR}/media/network/request.cc
+  media/medianetwork.cc
+  media/network/downloader.cc
+  media/network/mirrorcontrol.cc
+  media/network/networkrequestdispatcher.cc
+  media/network/networkrequesterror.cc
+  media/network/request.cc
 )
 
 SET( zyppng_media_HEADERS
-  ${CMAKE_CURRENT_SOURCE_DIR}/media/MediaNetwork
-  ${CMAKE_CURRENT_SOURCE_DIR}/media/medianetwork.h
-  ${CMAKE_CURRENT_SOURCE_DIR}/media/network/AuthData
-  ${CMAKE_CURRENT_SOURCE_DIR}/media/network/authdata.h
-  ${CMAKE_CURRENT_SOURCE_DIR}/media/network/downloader.h
-  ${CMAKE_CURRENT_SOURCE_DIR}/media/network/networkrequestdispatcher.h
-  ${CMAKE_CURRENT_SOURCE_DIR}/media/network/networkrequesterror.h
-  ${CMAKE_CURRENT_SOURCE_DIR}/media/network/request.h
-  ${CMAKE_CURRENT_SOURCE_DIR}/media/network/transfersettings.h
-  ${CMAKE_CURRENT_SOURCE_DIR}/media/network/TransferSettings
+  media/MediaNetwork
+  media/medianetwork.h
+  media/network/AuthData
+  media/network/authdata.h
+  media/network/downloader.h
+  media/network/networkrequestdispatcher.h
+  media/network/networkrequesterror.h
+  media/network/request.h
+  media/network/transfersettings.h
+  media/network/TransferSettings
 )
 
 SET( zyppng_media_private_HEADERS
-  ${CMAKE_CURRENT_SOURCE_DIR}/media/network/private/downloader_p.h
-  ${CMAKE_CURRENT_SOURCE_DIR}/media/network/private/mirrorcontrol_p.h
-  ${CMAKE_CURRENT_SOURCE_DIR}/media/network/private/networkrequestdispatcher_p.h
-  ${CMAKE_CURRENT_SOURCE_DIR}/media/network/private/networkrequesterror_p.h
-  ${CMAKE_CURRENT_SOURCE_DIR}/media/network/private/request_p.h
+  media/network/private/downloader_p.h
+  media/network/private/mirrorcontrol_p.h
+  media/network/private/networkrequestdispatcher_p.h
+  media/network/private/networkrequesterror_p.h
+  media/network/private/request_p.h
 )
 
 SET( zyppng_thread_SRCS
-  ${CMAKE_CURRENT_SOURCE_DIR}/thread/asyncqueue.cc
+  thread/asyncqueue.cc
 )
 
 SET( zyppng_thread_HEADERS
-  ${CMAKE_CURRENT_SOURCE_DIR}/thread/AsyncQueue
-  ${CMAKE_CURRENT_SOURCE_DIR}/thread/asyncqueue.h
-  ${CMAKE_CURRENT_SOURCE_DIR}/thread/private/asyncqueue_p.h
+  thread/AsyncQueue
+  thread/asyncqueue.h
+  thread/private/asyncqueue_p.h
 )
 
 SET( zyppng_thread_private_HEADERS
 )
 
 SET( zyppng_appcode_HEADERS
-  ${CMAKE_CURRENT_SOURCE_DIR}/Context
-  ${CMAKE_CURRENT_SOURCE_DIR}/context.h
+  Context
+  context.h
 )
 
 SET( zyppng_appcode_SRCS
-  ${CMAKE_CURRENT_SOURCE_DIR}/context.cc
+  context.cc
 )
 
 
@@ -106,12 +105,13 @@ SET ( zyppng_HEADERS
   ${zyppng_media_private_HEADERS}
   ${zyppng_thread_HEADERS}
   ${zyppng_thread_private_HEADERS}
-  PARENT_SCOPE
 )
 
 SET ( zyppng_SRCS
   ${zyppng_base_SRCS}
   ${zyppng_media_SRCS}
   ${zyppng_thread_SRCS}
-  PARENT_SCOPE
 )
+
+ADD_LIBRARY( zyppng-objlib OBJECT ${zyppng_SRCS} ${zyppng_HEADERS} )
+
