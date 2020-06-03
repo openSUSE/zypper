@@ -34,6 +34,8 @@ SET( zyppng_base_private_HEADERS
 )
 
 SET( zyppng_core_HEADERS
+  core/bytearray.h
+  core/ByteArray
   core/url.h
   core/Url
   core/idstring.h
@@ -41,6 +43,18 @@ SET( zyppng_core_HEADERS
   core/string.h
   core/String
 )
+
+SET( zyppng_io_private_HEADERS
+  io/private/iobuffer_p.h
+)
+
+SET( zyppng_io_SRCS
+  io/iobuffer.cc
+  )
+
+SET( zyppng_io_HEADERS
+)
+
 
 SET( zyppng_media_SRCS
   media/medianetwork.cc
@@ -101,6 +115,8 @@ SET ( zyppng_HEADERS
   ${zyppng_base_HEADERS}
   ${zyppng_base_private_HEADERS}
   ${zyppng_core_HEADERS}
+  ${zyppng_io_HEADERS}
+  ${zyppng_io_private_HEADERS}
   ${zyppng_media_HEADERS}
   ${zyppng_media_private_HEADERS}
   ${zyppng_thread_HEADERS}
@@ -109,6 +125,7 @@ SET ( zyppng_HEADERS
 
 SET ( zyppng_SRCS
   ${zyppng_base_SRCS}
+  ${zyppng_io_SRCS}
   ${zyppng_media_SRCS}
   ${zyppng_thread_SRCS}
 )
