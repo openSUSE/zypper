@@ -108,6 +108,14 @@ public:
    */
   void *nativeDispatcherHandle () const;
 
+  /*!
+   * Waits until one of the requested events in \a events happens on the file descriptor.
+   * Use \ref AbstractEventSource::EventTypes to define for which events should be polled.
+   * Returns true on success, \a revents will contain the bitwise combination of \ref AbstractEventSource::EventTypes
+   * that triggered the wakeup.
+   */
+  static bool waitForFdEvent ( const int fd, int events, int &revents, int &timeout );
+
 protected:
 
   /*!

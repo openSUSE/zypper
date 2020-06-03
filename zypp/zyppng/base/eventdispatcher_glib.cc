@@ -4,6 +4,8 @@
 
 #include <zypp/base/Exception.h>
 #include <zypp/base/Logger.h>
+#include <zypp/AutoDispose.h>
+
 namespace zyppng {
 
 static int inline readMask () {
@@ -16,6 +18,35 @@ static int inline writeMask () {
 
 static int inline excpMask () {
   return ( G_IO_PRI );
+}
+
+static int inline evModeToMask ( int mode ) {
+  int cond = 0;
+  if ( mode & AbstractEventSource::Read ) {
+    cond = readMask() | G_IO_ERR;
+  }
+  if ( mode & AbstractEventSource::Write ) {
+    cond = cond | writeMask() | G_IO_ERR;
+  }
+  if ( mode & AbstractEventSource::Exception ) {
+    cond = cond | excpMask() | G_IO_ERR;
+  }
+  return cond;
+}
+
+static int inline gioConditionToEventTypes ( const GIOCondition rEvents, const int requestedEvs ) {
+  int ev = 0;
+  if ( ( rEvents & requestedEvs ) != 0 ) {
+    if ( ( rEvents & readMask() ) && ( requestedEvs & readMask() ) )
+      ev = AbstractEventSource::Read;
+    if ( ( rEvents & writeMask() ) && ( requestedEvs & writeMask() ) )
+      ev = ev | AbstractEventSource::Write;
+    if ( ( rEvents & excpMask()) && ( requestedEvs & excpMask() ) )
+      ev = ev | AbstractEventSource::Exception;
+    if ( ( rEvents & G_IO_ERR) && ( requestedEvs & G_IO_ERR ) )
+      ev = ev | AbstractEventSource::Error;
+  }
+  return ev;
 }
 
 static GSourceFuncs abstractEventSourceFuncs = {
@@ -115,16 +146,7 @@ gboolean GAbstractEventSource::dispatch(GSource *source, GSourceFunc, gpointer)
       GIOCondition pendEvents = g_source_query_unix_fd( source, pollfd.tag );
 
       if ( (pendEvents & pollfd.reqEvents ) != 0 ) {
-        int ev = 0;
-        if ( ( pendEvents & readMask() ) && ( pollfd.reqEvents & readMask() ) )
-          ev = AbstractEventSource::Read;
-        if ( (pendEvents & writeMask() ) && ( pollfd.reqEvents & writeMask() ) )
-          ev = ev | AbstractEventSource::Write;
-        if ( (pendEvents & excpMask()) && ( pollfd.reqEvents & excpMask() ) )
-          ev = ev | AbstractEventSource::Exception;
-        if ( (pendEvents & G_IO_ERR) && ( pollfd.reqEvents & G_IO_ERR ) )
-          ev = ev | AbstractEventSource::Error;
-
+        int ev = gioConditionToEventTypes( pendEvents, pollfd.reqEvents );
         src->eventSource->onFdReady( pollfd.pollfd, ev );
       }
     }
@@ -316,17 +338,7 @@ void EventDispatcher::updateEventSource( AbstractEventSource *notifier, int fd, 
   } else
     evSrc = (*itToEvSrc);
 
-  int cond = 0;
-  if ( mode & AbstractEventSource::Read ) {
-    cond = readMask() | G_IO_ERR;
-  }
-  if ( mode & AbstractEventSource::Write ) {
-    cond = cond | writeMask() | G_IO_ERR;
-  }
-  if ( mode & AbstractEventSource::Exception ) {
-    cond = cond | excpMask() | G_IO_ERR;
-  }
-
+  int cond = evModeToMask( mode );
   auto it = std::find_if( evSrc->pollfds.begin(), evSrc->pollfds.end(), [fd]( const auto &currPollFd ) {
     return currPollFd.pollfd == fd;
   });
@@ -416,6 +428,40 @@ void EventDispatcher::removeTimer( Timer *timer )
 void *EventDispatcher::nativeDispatcherHandle() const
 {
   return d_func()->_ctx;
+}
+
+bool EventDispatcher::waitForFdEvent( const int fd, int events , int &revents , int &timeout )
+{
+  GPollFD pollFd;
+  pollFd.fd = fd;
+  pollFd.events = evModeToMask(events);
+
+  bool eventTriggered = false;
+  zypp::AutoDispose<GTimer *> timer( g_timer_new(), &g_timer_destroy );
+  while ( !eventTriggered ) {
+    g_timer_start( *timer );
+    const int res = g_poll( &pollFd, 1, timeout );
+    switch ( res ) {
+      case 0: //timeout
+        return false;
+      case -1: {
+        // interrupt
+        if ( timeout > -1 ) {
+          timeout -= g_timer_elapsed( *timer, NULL );
+          if ( timeout < 0 ) timeout = 0;
+          if ( timeout <= 0 )
+            return false;
+        }
+        break;
+      }
+      case 1:
+        eventTriggered = true;
+        break;
+    }
+  }
+
+  revents = gioConditionToEventTypes( (GIOCondition)pollFd.revents, events );
+  return true;
 }
 
 bool EventDispatcher::run_once()
