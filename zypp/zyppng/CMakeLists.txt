@@ -46,13 +46,17 @@ SET( zyppng_core_HEADERS
 
 SET( zyppng_io_private_HEADERS
   io/private/iobuffer_p.h
+  io/private/iodevice_p.h
 )
 
 SET( zyppng_io_SRCS
   io/iobuffer.cc
+  io/iodevice.cc
   )
 
 SET( zyppng_io_HEADERS
+  io/IODevice
+  io/iodevice.h
 )
 
 
