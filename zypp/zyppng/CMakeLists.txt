@@ -3,6 +3,7 @@ SET( zyppng_base_SRCS
   base/base.cc
   base/eventdispatcher_glib.cc
   base/eventloop_glib.cc
+  base/linuxhelpers.cc
   base/timer.cc
   base/threaddata.cc
   base/socketnotifier.cc
@@ -30,6 +31,7 @@ SET( zyppng_base_private_HEADERS
   base/private/base_p.h
   base/private/eventdispatcher_glib_p.h
   base/private/eventloop_glib_p.h
+  base/private/linuxhelpers_p.h
   base/private/threaddata_p.h
 )
 

@@ -72,6 +72,11 @@ public:
   static uint64_t now ();
 
   /*!
+   * \return the time that has elapsed since the timepoint given in \a start
+   */
+  static uint64_t elapsedSince ( const uint64_t start );
+
+  /*!
    * \returns the monotonic system time when the timer started
    */
   uint64_t started  () const;

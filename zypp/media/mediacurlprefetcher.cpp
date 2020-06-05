@@ -2,6 +2,7 @@
 
 #include <zypp/zyppng/base/EventLoop>
 #include <zypp/zyppng/base/SocketNotifier>
+#include <zypp/zyppng/base/private/linuxhelpers_p.h>
 #include <zypp/zyppng/media/network/downloader.h>
 #include <zypp/zyppng/media/network/networkrequestdispatcher.h>
 #include <zypp/zyppng/media/network/private/mirrorcontrol_p.h>
@@ -16,6 +17,7 @@
 #include <fcntl.h>
 #include <algorithm>
 #include <iostream>
+#include <csignal>
 
 namespace zypp
 {
@@ -60,6 +62,7 @@ namespace zypp
 
     MediaCurlPrefetcher &MediaCurlPrefetcher::instance()
     {
+      MIL << "Initializing prefetcher" << std::endl;
       static MediaCurlPrefetcher prefetch;
       return prefetch;
     }
@@ -214,8 +217,9 @@ namespace zypp
 
     void MediaCurlPrefetcher::workerMain()
     {
-      if ( getenv("ZYPP_PREFETCHER_LOGFILE") )
-        zypp::base::LogControl::instance().logfile( getenv("ZYPP_PREFETCHER_LOGFILE") );
+
+      // force the kernel to pick another thread to handle those signals
+      zyppng::blockSignalsForCurrentThread( { SIGTERM, SIGINT, SIGPIPE, } );
 
       auto dispatch = zyppng::EventLoop::create();
 

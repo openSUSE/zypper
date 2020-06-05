@@ -145,6 +145,9 @@ namespace zypp
       /** Log to std::err. */
       void logToStdErr();
 
+      /** will cause the log thread to exit and flush all sockets */
+      void emergencyShutdown();
+
     public:
       /** Get the current LineWriter */
       shared_ptr<LineWriter> getLineWriter() const;

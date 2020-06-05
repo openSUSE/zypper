@@ -74,6 +74,12 @@ uint64_t Timer::now()
 #endif
 }
 
+uint64_t Timer::elapsedSince( const uint64_t start )
+{
+  uint64_t nowMs = now();
+  return ( nowMs - start );
+}
+
 uint64_t Timer::started() const
 {
   return d_func()->_beginMs;
@@ -97,8 +103,7 @@ uint64_t Timer::remaining() const
 uint64_t Timer::elapsed() const
 {
   Z_D();
-  uint64_t nowMs = now();
-  return ( nowMs - d->_beginMs );
+  return elapsedSince( d->_beginMs );
 }
 
 uint64_t Timer::expires() const
