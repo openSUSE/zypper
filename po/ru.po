@@ -10,17 +10,17 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-04-12 15:27+0200\n"
-"PO-Revision-Date: 2019-03-21 12:50+0000\n"
-"Last-Translator: Nikita Maynagashev <maynagashev@palex.ru>\n"
-"Language-Team: Russian <https://l10n.opensuse.org/projects/zypper/master/ru/"
-">\n"
+"PO-Revision-Date: 2020-06-29 19:46+0000\n"
+"Last-Translator: Alex Minton <alex239@gmail.com>\n"
+"Language-Team: Russian <https://l10n.opensuse.org/projects/zypper/master/ru/>"
+"\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 3.3\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<="
+"4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Generator: Weblate 3.6.1\n"
 
 #: src/SolverRequester.h:52
 #, boost-format
@@ -474,8 +474,13 @@ msgid_plural ""
 "%1% packages had to be excluded from file conflicts check because they are "
 "not yet downloaded."
 msgstr[0] ""
+"%1% пакет ещё не загружен и поэтому исключён из проверки на конфликты файлов."
 msgstr[1] ""
+"%1% пакета ещё не загружено и поэтому исключено из проверки на конфликты "
+"файлов."
 msgstr[2] ""
+"%1% пакетов ещё не загружено и поэтому исключено из проверки на конфликты "
+"файлов."
 
 #. TranslatorExplanation %1%(commandline option)
 #: src/callbacks/rpm.h:460
@@ -831,9 +836,9 @@ msgstr "Не использовать аббревиатуры в таблица
 
 #. translators: --table-style, -s, %1% denotes the supported range of the integer argument (e.g. "1-11")
 #: src/Config.cc:420
-#, fuzzy, boost-format
+#, boost-format
 msgid "Table style (%1%)."
-msgstr "Табличный стиль."
+msgstr "Табличный стиль (%1%)."
 
 #: src/Config.cc:424 src/commands/optionsets.cc:284
 msgid "Entering non-interactive mode."
@@ -2924,6 +2929,8 @@ msgid ""
 "A meaningful file conflict check can only be performed if used together with "
 "'%1%'."
 msgstr ""
+"Реальная проверка на конфликты файлов может быть выполнена только совместно "
+"с \"%1%\"."
 
 #. translators: -r, --repo <ALIAS|#|URI>
 #: src/commands/optionsets.cc:67
@@ -4168,6 +4175,8 @@ msgid ""
 "Search for all packages that provide any of the provides of the package(s) "
 "matched by the input parameters."
 msgstr ""
+"Искать все пакеты, предоставляющие любые предоставляемые возможности "
+"пакетов, соответствующих входным параметрам."
 
 #. translators: --requires-pkg
 #: src/commands/search/search.cc:149
@@ -4175,6 +4184,8 @@ msgid ""
 "Search for all packages that require any of the provides of the package(s) "
 "matched by the input parameters."
 msgstr ""
+"Искать все пакеты, требующие любые предоставляемые возможности пакетов, "
+"соответствующих входным параметрам."
 
 #. translators: --recommends-pkg
 #: src/commands/search/search.cc:153
@@ -4182,6 +4193,8 @@ msgid ""
 "Search for all packages that recommend any of the provides of the package(s) "
 "matched by the input parameters."
 msgstr ""
+"Искать все пакеты, рекомендующие любые предоставляемые возможности пакетов, "
+"соответствующих входным параметрам."
 
 #. translators: --supplements-pkg
 #: src/commands/search/search.cc:157
@@ -4189,6 +4202,8 @@ msgid ""
 "Search for all packages that supplement any of the provides of the "
 "package(s) matched by the input parameters."
 msgstr ""
+"Искать все пакеты, дополняющие любые предоставляемые возможности пакетов, "
+"соответствующих входным параметрам."
 
 #. translators: --conflicts-pkg
 #: src/commands/search/search.cc:161
@@ -4196,6 +4211,8 @@ msgid ""
 "Search for all packages that conflict with any of the package(s) matched by "
 "the input parameters."
 msgstr ""
+"Искать все пакеты, конфликтующие с любыми пакетами, соответствующими входным "
+"параметрам."
 
 #. translators: --obsoletes-pkg
 #: src/commands/search/search.cc:165
@@ -4203,6 +4220,8 @@ msgid ""
 "Search for all packages that obsolete any of the package(s) matched by the "
 "input parameters."
 msgstr ""
+"Искать все пакеты, делающие устаревшими любые пакеты, соответствующие "
+"входным параметрам."
 
 #. translators: --suggests-pkg
 #: src/commands/search/search.cc:169
@@ -4210,6 +4229,8 @@ msgid ""
 "Search for all packages that suggest any of the provides of the package(s) "
 "matched by the input parameters."
 msgstr ""
+"Искать все пакеты, предлагающие любые предоставляемые возможности пакетов, "
+"соответствующих входным параметрам."
 
 #. translators: -t, --type <TYPE>
 #: src/commands/search/search.cc:173
@@ -4672,7 +4693,7 @@ msgstr "Эта команда имеет смысл только в оболоч
 #: src/commands/solveroptionset.cc:23
 #, boost-format
 msgid "Valid values: %1%"
-msgstr ""
+msgstr "Верные значения: %1%"
 
 #: src/commands/solveroptionset.cc:35 src/commands/solveroptionset.cc:58
 msgid "Solver options"
@@ -4704,7 +4725,7 @@ msgstr ""
 
 #: src/commands/solveroptionset.cc:63
 msgid "Set the solvers general attitude when resolving a job."
-msgstr ""
+msgstr "Задать основное поведение решающей программы при выполнении задания."
 
 #: src/commands/solveroptionset.cc:83
 msgid "Expert options"
@@ -5070,12 +5091,12 @@ msgstr "Отчёт о лицензиях и EULA установленных на
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/utils/purge-kernels.cc:26
 msgid "purge-kernels [OPTIONS]"
-msgstr ""
+msgstr "purge-kernels [ПАРАМЕТРЫ]"
 
 #. translators: command summary: targetos, tos
 #: src/commands/utils/purge-kernels.cc:28
 msgid "Remove old kernels."
-msgstr ""
+msgstr "Удалить старые ядра."
 
 #. translators: command description
 #: src/commands/utils/purge-kernels.cc:30
@@ -5084,25 +5105,28 @@ msgid ""
 "zypp/zypp.conf:multiversion.kernels which can be given as <version>, latest(-"
 "N), running, oldest(+N)."
 msgstr ""
+"Автоматически удаляет установленные ядра в соответствии со списком в /etc/"
+"zypp/zypp.conf:multiversion.kernels, принимает указания в виде <версия>, "
+"последние(-N), запущенное, старые(+N)."
 
 #: src/commands/utils/purge-kernels.cc:51
 msgid "Preparing to purge obsolete kernels..."
-msgstr ""
+msgstr "Подготовка к удалению устаревших ядер…"
 
 #: src/commands/utils/purge-kernels.cc:52
 #, boost-format
 msgid "Configuration: %1%"
-msgstr ""
+msgstr "Конфигурация: %1%"
 
 #: src/commands/utils/purge-kernels.cc:53
 #, boost-format
 msgid "Running kernel release: %1%"
-msgstr ""
+msgstr "Версия текущего ядра: %1%"
 
 #: src/commands/utils/purge-kernels.cc:54
 #, boost-format
 msgid "Running kernel arch: %1%"
-msgstr ""
+msgstr "Архитектура текущего ядра: %1%"
 
 #: src/commands/utils/source-download.cc:203
 #, c-format, boost-format
@@ -6276,7 +6300,7 @@ msgstr "Проблема: "
 
 #: src/solve-commit.cc:48
 msgid "Detailed information: "
-msgstr ""
+msgstr "Подробные сведения: "
 
 #. TranslatorExplanation %d is the solution number
 #: src/solve-commit.cc:61
@@ -6314,7 +6338,7 @@ msgstr[2] "Выберите по номеру одно из вышеуказан
 #. The answers should be lower case letters.
 #: src/solve-commit.cc:111
 msgid "s/r/c/d"
-msgstr ""
+msgstr "п/е/о/д"
 
 #. translators: answers for dependency problem solution input prompt:
 #. "Choose from above solutions by number or cancel"
@@ -6325,28 +6349,28 @@ msgstr ""
 #. please report a bug against zypper at bugzilla.suse.com, we'll try to solve it.
 #: src/solve-commit.cc:127
 msgid "c/d"
-msgstr ""
+msgstr "о/д"
 
 #: src/solve-commit.cc:133
 #, boost-format
 msgid "Choose solution %1%"
-msgstr ""
+msgstr "Выбрать решение %1%"
 
 #: src/solve-commit.cc:135
 msgid "Skip problem and continue."
-msgstr ""
+msgstr "Пропустить проблему и продолжить."
 
 #: src/solve-commit.cc:138
 msgid "Retry solving immediately."
-msgstr ""
+msgstr "Повторить попытку решения."
 
 #: src/solve-commit.cc:140
 msgid "Choose no solution and cancel."
-msgstr ""
+msgstr "Не выбирать решение и отменить."
 
 #: src/solve-commit.cc:141
 msgid "Toggle show detailed conflict information."
-msgstr ""
+msgstr "Переключение показа подробных сведений о конфликтах."
 
 #: src/solve-commit.cc:174
 #, c-format, boost-format
@@ -6912,6 +6936,8 @@ msgid ""
 "Abbreviated commandline options will not be supported in future versions. "
 "Please use %2% instead of %1% ."
 msgstr ""
+"Аббревиатуры параметров командной строки не будут поддерживаться в будущих "
+"версиях. Используйте %2% вместо %1%."
 
 #. translators: %s is "help" or "zypper help" depending on whether
 #. zypper shell is running or not
@@ -7028,11 +7054,11 @@ msgstr "неопределено"
 #. translator: patch status
 #: src/utils/misc.cc:120
 msgid "retracted"
-msgstr ""
+msgstr "отозвано"
 
 #: src/utils/misc.cc:329 src/utils/misc.cc:371
 msgid "Since"
-msgstr ""
+msgstr "С"
 
 #. << _("Repository")
 #: src/utils/misc.cc:364
