@@ -2,12 +2,13 @@
 #define MEDIACURLPREFETCHER_H
 
 
-#include "zypp/Url.h"
-#include "zypp/Pathname.h"
-#include "zypp/ByteCount.h"
-#include "zypp/media/TransferSettings.h"
-#include "zypp/TmpPath.h"
-#include "zypp/ZYppCallbacks.h"
+#include <zypp/Url.h>
+#include <zypp/Pathname.h>
+#include <zypp/ByteCount.h>
+#include <zypp/media/TransferSettings.h>
+#include <zypp/TmpPath.h>
+#include <zypp/ZYppCallbacks.h>
+#include <zypp/zyppng/thread/Wakeup>
 
 #include <list>
 #include <thread>
@@ -58,7 +59,7 @@ private:
    */
   ReqQueue::iterator markRequestForCleanup (const ReqQueue::iterator position );
 
-  int _wakeupPipe[2] = {-1, -1};
+  zyppng::Wakeup _wakeup;
 
   std::atomic_bool _stop;
   std::recursive_mutex _lock;

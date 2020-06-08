@@ -100,12 +100,15 @@ SET( zyppng_media_private_HEADERS
 
 SET( zyppng_thread_SRCS
   thread/asyncqueue.cc
+  thread/wakeup.cpp
 )
 
 SET( zyppng_thread_HEADERS
   thread/AsyncQueue
   thread/asyncqueue.h
   thread/private/asyncqueue_p.h
+  thread/Wakeup
+  thread/wakeup.h
 )
 
 SET( zyppng_thread_private_HEADERS

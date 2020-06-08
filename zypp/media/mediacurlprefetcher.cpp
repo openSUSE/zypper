@@ -56,10 +56,6 @@ namespace zypp
 
       //start up thread
       _fetcherThread = std::thread( [this](){ workerMain(); });
-
-      // wake up pipe to interrupt the event main loop
-      pipe ( _wakeupPipe );
-      fcntl( _wakeupPipe[0], F_SETFL, O_NONBLOCK );
     }
 
     MediaCurlPrefetcher &MediaCurlPrefetcher::instance()
@@ -74,12 +70,9 @@ namespace zypp
       _stop = true;
 
       //signal the thread to wake up
-      write( _wakeupPipe[1], "\n", 1);
+      _wakeup.notify();
 
       _fetcherThread.join();
-
-      close (_wakeupPipe[0]);
-      close (_wakeupPipe[1]);
     }
 
     MediaCurlPrefetcher::CacheId MediaCurlPrefetcher::createCache()
@@ -94,7 +87,7 @@ namespace zypp
       _cachesToClose.push_back( id );
 
       //signal the thread to wake up
-      write( _wakeupPipe[1], "\n", 1);
+      _wakeup.notify();
     }
 
     void MediaCurlPrefetcher::precacheFiles( std::vector<Request> &&files )
@@ -125,7 +118,7 @@ namespace zypp
       }
 
       //signal the thread to wake up
-      write( _wakeupPipe[1], "\n", 1);
+      _wakeup.notify();
     }
 
     bool MediaCurlPrefetcher::requireFile(const CacheId id, const Url &url, const zypp::filesystem::Pathname &targetPath , zypp::callback::SendReport<zypp::media::DownloadProgressReport> &report)
@@ -271,9 +264,9 @@ namespace zypp
       };
 
       auto wakeupReceived = [ &, this]( ){
-        //clear pipe
-        char dummy;
-        while ( read( _wakeupPipe[0], &dummy, 1 ) > 0 ) { continue; }
+
+        //clear the wakeup signal
+        _wakeup.ack();
 
         MIL << "Thread wakeup " << std::endl;
 
@@ -331,7 +324,7 @@ namespace zypp
 
       // we are using a pipe to wake up from the event loop, the SocketNotifier will throw a signal every
       // time there is data available
-      auto sNotify = zyppng::SocketNotifier::create( _wakeupPipe[0], zyppng::SocketNotifier::Read, false );
+      auto sNotify = _wakeup.makeNotifier( false );
       sNotify->sigActivated().connect( [&wakeupReceived]( const zyppng::SocketNotifier &, int ) { wakeupReceived(); } );
       sNotify->setEnabled( true );
 
