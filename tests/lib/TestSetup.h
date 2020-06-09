@@ -271,7 +271,7 @@ public:
         continue; // master index currently unevaluated
       if ( str::hasPrefix( basename, "solver-system.xml" ) )
         loadTargetHelix( *it );
-      else
+      else if ( repoi.count( basename ) )
       {
         const RepoD & repod( repoi[basename] );
 
