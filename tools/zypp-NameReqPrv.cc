@@ -178,6 +178,10 @@ void dDump( const std::string & spec_r )
     {
       message << endl << "CONTENT: " << make<Pattern>(el)->contents();
     }
+    else if ( isKind<Patch>(el) )
+    {
+      message << endl << "STATUS: " << PoolItem(el);
+    }
   }
   message << endl << "}" << endl;
 }
