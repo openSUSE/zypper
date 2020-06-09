@@ -28,6 +28,7 @@
 #include <zypp/zyppng/base/Timer>
 #include <zypp/zyppng/base/private/linuxhelpers_p.h>
 #include <zypp/zyppng/thread/Wakeup>
+#include <zypp/zyppng/base/private/threaddata_p.h>
 #include <zypp/zyppng/base/SocketNotifier>
 
 #include <thread>
@@ -119,6 +120,8 @@ namespace zypp
 
       // force the kernel to pick another thread to handle those signals
       zyppng::blockSignalsForCurrentThread( { SIGTERM, SIGINT, SIGPIPE, } );
+
+      zyppng::ThreadData::current().setName("Zypp-Log");
 
       auto ev = zyppng::EventLoop::create();
       auto server = zyppng::Socket::create( AF_UNIX, SOCK_STREAM, 0 );
@@ -391,14 +394,11 @@ namespace zypp
       static char nohostname[] = "unknown";
       std::string now( Date::now().form( "%Y-%m-%d %H:%M:%S" ) );
 
-      std::stringstream strStr;
-      strStr << std::this_thread::get_id();
-
-      return str::form( "%s <%d> %s(%d) [%s] [%s] %s(%s):%d %s",
+      return str::form( "%s <%d> %s(%d) [Thread: %s] [%s] %s(%s):%d %s",
                         now.c_str(), level_r,
                         ( gethostname( hostname, 1024 ) ? nohostname : hostname ),
                         getpid(),
-                        strStr.str().c_str(),
+                        zyppng::ThreadData::current().name().c_str(),
                         group_r.c_str(),
                         file_r, func_r, line_r,
                         message_r.c_str() );

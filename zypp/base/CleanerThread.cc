@@ -10,6 +10,8 @@
  */
 
 #include <zypp/base/CleanerThread_p.h>
+#include <zypp/zyppng/base/private/threaddata_p.h>
+#include <zypp/zyppng/base/private/linuxhelpers_p.h>
 #include <algorithm>
 #include <thread>
 #include <mutex>
@@ -39,6 +41,11 @@ struct CleanerData
 
   void run ()
   {
+    // force the kernel to pick another thread to handle those signals
+    zyppng::blockSignalsForCurrentThread( { SIGTERM, SIGINT, SIGPIPE, } );
+
+    zyppng::ThreadData::current().setName("Zypp-Cleaner");
+
     std::unique_lock<std::mutex> lk( _m );
 
     while ( true )

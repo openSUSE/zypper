@@ -3,6 +3,7 @@
 #include <zypp/zyppng/base/EventLoop>
 #include <zypp/zyppng/base/SocketNotifier>
 #include <zypp/zyppng/base/private/linuxhelpers_p.h>
+#include <zypp/zyppng/base/private/threaddata_p.h>
 #include <zypp/zyppng/media/network/downloader.h>
 #include <zypp/zyppng/media/network/networkrequestdispatcher.h>
 #include <zypp/zyppng/media/network/private/mirrorcontrol_p.h>
@@ -220,6 +221,8 @@ namespace zypp
 
       // force the kernel to pick another thread to handle those signals
       zyppng::blockSignalsForCurrentThread( { SIGTERM, SIGINT, SIGPIPE, } );
+
+      zyppng::ThreadData::current().setName("Zypp-Prefetcher");
 
       auto dispatch = zyppng::EventLoop::create();
 
