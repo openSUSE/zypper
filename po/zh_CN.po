@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-04-12 15:27+0200\n"
-"PO-Revision-Date: 2020-02-28 12:55+0000\n"
-"Last-Translator: Marguerite Su <i@marguerite.su>\n"
+"PO-Revision-Date: 2020-06-29 19:46+0000\n"
+"Last-Translator: Dingzhong Chen <wsxy162@gmail.com>\n"
 "Language-Team: Chinese (China) <https://l10n.opensuse.org/projects/zypper/"
 "master/zh_CN/>\n"
 "Language: zh_CN\n"
@@ -6416,7 +6416,7 @@ msgstr "检测到了过时的命令行选项 %1%。该选项已被忽略。"
 msgid ""
 "Abbreviated commandline options will not be supported in future versions. "
 "Please use %2% instead of %1% ."
-msgstr ""
+msgstr "在未来版本中，将不支持缩写的命令行选项。请使用 %2% 代替 %1%。"
 
 #. translators: %s is "help" or "zypper help" depending on whether
 #. zypper shell is running or not
@@ -6519,11 +6519,11 @@ msgstr "未确定"
 #. translator: patch status
 #: src/utils/misc.cc:120
 msgid "retracted"
-msgstr ""
+msgstr "已撤回"
 
 #: src/utils/misc.cc:329 src/utils/misc.cc:371
 msgid "Since"
-msgstr ""
+msgstr "自从"
 
 #. << _("Repository")
 #: src/utils/misc.cc:364
