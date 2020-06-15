@@ -386,7 +386,10 @@ int parseCLI( const int argc, char * const *argv, const std::vector<CommandGroup
               if( opt.name != what[1] ) {
                 if ( onlyWarnOnAbbrevSwitches() ) {
 		  WAR << "Abbreviated commandline options will not be supported in future versions: --" << what[1] << ": use --" << opt.name << endl;
-		  Zypper::instance().out().warning( legacyCLIStr( what[1], opt.name, LegacyCLIMsgType::Abbreviated ) );
+
+                  // Since this message will be emitted before we know if the current output is XML or Normal we need to send this message to stderr
+                  // to not break scripts that use xml output (bsc#1172925)
+                  Zypper::instance().out().error( std::string( _("Warning: ") ) + legacyCLIStr( what[1], opt.name, LegacyCLIMsgType::Abbreviated ) );
 		} else
                   ZYPP_THROW( UnknownFlagException( scanned ) );
               }
