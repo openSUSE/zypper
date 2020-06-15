@@ -152,3 +152,23 @@ BOOST_AUTO_TEST_CASE(readline)
   BOOST_REQUIRE_EQUAL( std::string_view( r1.data(), r1.size() ), std::string_view(b4.data(), b4.size()) );
 
 }
+
+BOOST_AUTO_TEST_CASE(move)
+{
+  zyppng::IOBuffer buf(10);
+
+  zyppng::ByteArray b1("Hello World\n");
+  buf.append( b1 );
+  zyppng::ByteArray b2("Another\n");
+  buf.append( b2 );
+  zyppng::ByteArray b3("1234\n");
+  buf.append( b3 );
+  zyppng::ByteArray b4("6789\n");
+  buf.append( b4 );
+
+  const auto size = buf.size();
+  zyppng::IOBuffer buf2( std::move( buf ) );
+
+  BOOST_REQUIRE_EQUAL( size, buf2.size() );
+
+}

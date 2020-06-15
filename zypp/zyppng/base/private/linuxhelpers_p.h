@@ -22,7 +22,7 @@ namespace zyppng {
     return res;
   }
 
-  bool blockSignalsForCurrentThread ( std::vector<int> sigs );
+  bool blockSignalsForCurrentThread ( const std::vector<int> &sigs );
 }
 
 #endif // LINUXHELPERS_P_H

@@ -25,6 +25,7 @@
 #include <zypp/zyppng/io/Socket>
 #include <zypp/zyppng/io/SockAddr>
 #include <zypp/zyppng/base/EventLoop>
+#include <zypp/zyppng/base/EventDispatcher>
 #include <zypp/zyppng/base/Timer>
 #include <zypp/zyppng/base/private/linuxhelpers_p.h>
 #include <zypp/zyppng/thread/Wakeup>
@@ -152,8 +153,9 @@ namespace zypp
         });
 
         // once a client disconnects we remove it from the std::vector so that the socket is not leaked
-        cl->sigDisconnected().connect( [&clients, sock = cl.get()](){
+        cl->sigDisconnected().connect( [&clients, &ev, sock = cl.get()](){
           auto idx = std::find_if( clients.begin(), clients.end(), [sock]( const auto &s ){ return sock == s.get(); } );
+          ev->eventDispatcher()->unrefLater( *idx );
           clients.erase( idx );
         });
 

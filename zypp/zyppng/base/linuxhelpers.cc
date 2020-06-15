@@ -6,7 +6,7 @@
 
 namespace zyppng {
 
-  bool blockSignalsForCurrentThread( std::vector<int> sigs )
+  bool blockSignalsForCurrentThread( const std::vector<int> &sigs )
   {
     sigset_t set;
     ::sigemptyset(&set);

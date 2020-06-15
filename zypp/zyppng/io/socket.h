@@ -22,6 +22,16 @@
 namespace zyppng {
 
   class SocketPrivate;
+
+  /*!
+   * Combines Sockets with the zypp event loop. Generally every socket type that is supported
+   * by the socket(2) API should work, however currently only Unix Domain sockets are tested.
+   *
+   * The useage pattern of this class is similar to the socket(2) API, on the server endpoint
+   * one listening socket is created and bound to a adress to accept incoming connections.
+   * For every appected connections a connected socket instance is returned which can be used for communication with the peer.
+   *
+   */
   class Socket : public IODevice
   {
     ZYPP_DECLARE_PRIVATE(Socket);
@@ -60,17 +70,48 @@ namespace zyppng {
 
     using Ptr = std::shared_ptr<Socket>;
 
+    /*!
+     * Creates a new socket with the given \a doman , \a type and \a protocol.
+     * See socket(2) for available arguments.
+     *
+     * \note currently only AF_UNIX, SOCK_STREAM sockets are tested
+     */
     static Ptr create ( int domain, int type, int protocol );
     virtual ~Socket();
 
-    // IODevice interface
+    /*!
+     * Closed the socket and disconnects from the peer.
+     * The \a disconnected signal will be emitted.
+     * This is similar to calling \ref disconnect.
+     */
     void close() override;
+
+    /*!
+     * Returns the current number of bytes that can be read from the socket.
+     */
     size_t bytesAvailable() const override;
 
+    /*!
+     * Returns the current state the socket is in,
+     * check \ref SocketState for possible values.
+     */
     SocketState state () const;
 
+    /*!
+     * Bind the socket to a local address, this is usually required to listen for incoming connections.
+     */
     bool bind ( std::shared_ptr<SockAddr> addr );
+
+    /*!
+     * Puts the socket in listen mode, the state is set accordingly.
+     */
     bool listen ( int backlog = 50 );
+
+    /*!
+     * Accepts a pending incoming connection and returns it as a
+     * intialized connected socket.
+     * Returns nullptr if there is no pending connection.
+     */
     Ptr accept ();
 
     /*!
@@ -93,21 +134,72 @@ namespace zyppng {
      */
     void abort ();
 
+    /*!
+     * Starts the connection process to the given adress in \a addr.
+     * Returns true on success, if false is returned the current state should be
+     * checked if the connection was simply delayed. In that case the state is \ref ConnectingState
+     * and error is set to \ref ConnectionDelayed and the socket still tries to connect.
+     */
     bool connect ( std::shared_ptr<SockAddr> addr );
 
+    /*!
+     * Blocks the current event loop to wait for the connected event on the socket.
+     * \note do not use until there is no other way
+     */
     bool waitForConnected ( int timeout = -1 );
+
+    /*!
+     * Blocks the current event loop to wait until all bytes from the buffer have been written
+     * to the device.
+     *
+     * \note do not use until there is no other way
+     */
     bool waitForAllBytesWritten ( int timeout = -1 );
 
+    /*!
+     * Returns the native socket handle.
+     */
     int nativeSocket () const;
+
+    /*!
+     * Return the last error that was encountered by the socket.
+     */
     SocketError lastError () const;
 
+    /*!
+     * Signals when there are new incoming connection pending.
+     * \note Make sure to accept all connection otherwise the event loop keeps triggering that signal
+     */
     SignalProxy<void ()> sigIncomingConnection ();
 
+    /*!
+     * Signal is emitted as soon as the socket enters the connected state. It is not possible to
+     * read and write data.
+     */
     SignalProxy<void ()> sigConnected ();
+
+    /*!
+     * Signal is emitted always when the socket was closed.
+     * \note when the socket should be deleted in a slot connected to this signal make sure
+     *       to delay the delete using the EventDispatcher.
+     */
     SignalProxy<void ()> sigDisconnected ();
+
+    /*!
+     * Signal is emitted when there is data available to read
+     */
     SignalProxy<void ()> sigReadyRead ();
+
+    /*!
+     * Signal is emitted every time bytes have been written to the underlying socket.
+     * This can be used to track how much data was actually sent.
+     */
     SignalProxy<void ( std::size_t )> sigBytesWritten ();
 
+    /*!
+     * Signal is emitted whenever a error happend in the socket. Make sure to check
+     * the actual error code to determine if the error is fatal.
+     */
     SignalProxy<void (Socket::SocketError)> sigError ();
 
   protected:

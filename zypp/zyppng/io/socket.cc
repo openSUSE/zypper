@@ -10,6 +10,8 @@
 #include <sys/socket.h>
 #include <fcntl.h>
 
+#include <iostream>
+
 namespace zyppng {
 
   SocketPrivate::ClosingState::ClosingState(IOBuffer &&writeBuffer)
@@ -104,7 +106,9 @@ namespace zyppng {
           setError( Socket::InternalError, "Invalid state transition" );
           return false;
         }
-        auto &s = _state.emplace<SocketPrivate::ClosingState>( std::move( std::get<ConnectedState>(_state)._writeBuffer) );
+
+        auto wbOld =  std::move( std::get<ConnectedState>(_state)._writeBuffer );
+        auto &s = _state.emplace<SocketPrivate::ClosingState>(  std::move( wbOld ) );
         s._socketNotifier = SocketNotifier::create( _socket, SocketNotifier::Write, true );
         s._socketNotifier->sigActivated().connect( [this]( const auto & , auto ev){ onSocketActivated( ev );} );
         break;
@@ -205,6 +209,9 @@ namespace zyppng {
     char *buf = _readBuf.reserve( bytesToRead );
     const auto bytesRead = z_func()->readData( buf, bytesToRead );
 
+    if ( bytesRead < 0 )
+      return false;
+
     if ( bytesToRead > bytesRead )
       _readBuf.chop( bytesToRead-bytesRead );
 
@@ -230,7 +237,6 @@ namespace zyppng {
     return std::visit( [this]( auto &s ){
       using T = std::decay_t<decltype (s)>;
       if constexpr ( std::is_same_v<T, ConnectedState> || std::is_same_v<T, ClosingState> ) {
-
         const auto nwrite = s._writeBuffer.frontSize();
         if ( !nwrite ) {
           // disable Write notifications so we do not wake up without the need to
@@ -648,12 +654,35 @@ namespace zyppng {
       return count;
     }
 
-    const auto written = eintrSafeCall( ::send, d->_socket, data, count, MSG_NOSIGNAL );
-    if ( written >= 0 && written < count ) {
-      // append the rest of the data to the buffer, so we can return always the full count
-      s._writeBuffer.append( data + written, count - written );
-      s._socketNotifier->setMode( SocketNotifier::Read | SocketNotifier::Write | SocketNotifier::Error );
-      d->_sigBytesWritten.emit( written );
+    auto written = eintrSafeCall( ::send, d->_socket, data, count, MSG_NOSIGNAL );
+    if ( written == -1  ) {
+      switch ( errno ) {
+#if EAGAIN != EWOULDBLOCK
+        case EWOULDBLOCK:
+#endif
+        case EAGAIN: {
+          written = 0;
+          break;
+        }
+        case ECONNRESET: {
+          d->setError( Socket::ConnectionClosedByRemote, strerr_cxx( errno ) );
+          return -1;
+        }
+        default: {
+          d->setError( Socket::UnknownSocketError, strerr_cxx( errno ) );
+          return -1;
+        }
+      }
+    }
+
+    if ( written >= 0 ) {
+      if ( written < count ) {
+        // append the rest of the data to the buffer, so we can return always the full count
+        s._writeBuffer.append( data + written, count - written );
+        s._socketNotifier->setMode( SocketNotifier::Read | SocketNotifier::Write | SocketNotifier::Error );
+      }
+      if ( written > 0 )
+        d->_sigBytesWritten.emit( written );
     }
     return count;
   }
@@ -723,7 +752,29 @@ namespace zyppng {
     if ( d->state() != SocketState::ConnectedState )
       return -1;
 
-    return ::read( d->_socket, buffer, bufsize );
+    const auto read = ::read( d->_socket, buffer, bufsize );
+
+    // special case for remote close
+    if ( read == 0 ) {
+      d->setError( ConnectionClosedByRemote, "The remote host closed the connection" );
+      abort();
+      return -1;
+    } else if ( read < 0 ) {
+      switch ( errno ) {
+#if EAGAIN != EWOULDBLOCK
+        case EWOULDBLOCK:
+#endif
+        case EAGAIN: {
+          return 0;
+        }
+        default: {
+          d->setError( UnknownSocketError, strerr_cxx( errno ) );
+          abort();
+          return -1;
+        }
+      }
+    }
+    return read;
   }
 
   size_t Socket::bytesAvailable() const

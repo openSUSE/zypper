@@ -238,3 +238,172 @@ BOOST_AUTO_TEST_CASE ( echo )
   ev->run();
   clientThread.join();
 }
+
+BOOST_AUTO_TEST_CASE ( err )
+{
+  auto ev   = zyppng::EventLoop::create();
+  {
+    auto sock = zyppng::Socket::create( AF_UNIX, SOCK_STREAM, 0 );
+
+    const auto res = sock->connect( std::make_shared<zyppng::UnixSockAddr>( "socktest", true ) );
+    BOOST_REQUIRE( !res );
+    BOOST_REQUIRE_EQUAL( sock->state(), zyppng::Socket::ClosedState );
+    BOOST_REQUIRE_EQUAL ( sock->lastError() ,  zyppng::Socket::ConnectionRefused );
+  }
+
+  {
+    auto sock = zyppng::Socket::create( AF_UNIX, SOCK_STREAM, 0 );
+
+    const auto res = sock->bind( std::make_shared<zyppng::UnixSockAddr>( "/root/socketicannotcreate", false ) );
+    BOOST_REQUIRE( !res );
+    BOOST_REQUIRE_EQUAL( sock->state(), zyppng::Socket::ClosedState );
+    BOOST_REQUIRE_EQUAL ( sock->lastError() ,  zyppng::Socket::InsufficientPermissions );
+  }
+
+  {
+    auto sock = zyppng::Socket::create( AF_UNIX, SOCK_STREAM, 0 );
+    auto addr = std::make_shared<zyppng::UnixSockAddr>( "socktest", true );
+    sock->bind( addr );
+    const auto res = sock->bind( addr );
+    BOOST_REQUIRE( !res );
+    BOOST_REQUIRE_EQUAL( sock->state(), zyppng::Socket::ClosedState );
+    BOOST_REQUIRE_EQUAL ( sock->lastError() ,  zyppng::Socket::SocketAlreadyBound );
+  }
+
+  {
+    auto sock  = zyppng::Socket::create( AF_UNIX, SOCK_STREAM, 0 );
+    auto sock2 = zyppng::Socket::create( AF_UNIX, SOCK_STREAM, 0 );
+
+    auto addr = std::make_shared<zyppng::UnixSockAddr>( "socktest", true );
+    sock->bind( addr );
+
+    const auto res = sock2->bind( addr );
+    BOOST_REQUIRE( !res );
+    BOOST_REQUIRE_EQUAL ( sock2->lastError() ,  zyppng::Socket::AddressInUse );
+  }
+}
+
+BOOST_AUTO_TEST_CASE ( lotsofdata )
+{
+
+  const std::string payload =
+    "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, "
+    "sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem "
+    "ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore "
+    "magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata "
+    "sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut "
+    "labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, "
+    "no sea takimata sanctus est Lorem ipsum dolor sit amet.";
+
+  auto ev = zyppng::EventLoop::create();
+  auto listeningSock = zyppng::Socket::create( AF_UNIX, SOCK_STREAM, 0 );
+  auto error = zyppng::Socket::NoError;
+
+  const int iterations = 1000000;
+  size_t bytesShouldBeWritten = 0;
+  size_t bytesWritten = 0;
+  size_t bytesWrittenSignaled = 0;
+  size_t bytesReceived = 0;
+
+  auto addr = std::make_shared<zyppng::UnixSockAddr>( "socktest", true );
+  BOOST_REQUIRE( listeningSock->bind( addr ) );
+  BOOST_REQUIRE( listeningSock->listen() );
+  BOOST_REQUIRE_EQUAL( listeningSock->state(), zyppng::Socket::ListeningState );
+
+  zyppng::Socket::Ptr connection;
+
+  listeningSock->sigIncomingConnection().connect( [&](){
+    connection = listeningSock->accept();
+    BOOST_REQUIRE_EQUAL( connection->state(), zyppng::Socket::ConnectedState );
+
+    connection->sigError().connect([&]( const auto err ){
+      if ( err == zyppng::Socket::ConnectionDelayed )
+        return;
+      error = err;
+      ev->quit();
+    });
+
+    connection->sigDisconnected().connect( [&](){
+      BOOST_REQUIRE_EQUAL( connection->state(), zyppng::Socket::ClosedState );
+      ev->quit();
+    });
+
+    connection->sigReadyRead().connect([&](){
+      auto all = connection->readAll();
+      bytesReceived += all.size();
+    });
+  });
+
+  std::thread clientThread( [ payload, &bytesWritten, &bytesWrittenSignaled, &bytesShouldBeWritten ](){
+    auto cev   = zyppng::EventLoop::create();
+    auto sock = zyppng::Socket::create( AF_UNIX, SOCK_STREAM, 0 );
+    auto timer = zyppng::Timer::create();
+
+    bool timedOut = false;
+    bool gotConnected = false;
+    bool gotDisconnected = false;
+
+    auto error = zyppng::Socket::NoError;
+
+    sock->sigError().connect( [&]( const zyppng::Socket::SocketError err ){
+      if ( err == zyppng::Socket::ConnectionDelayed )
+        return;
+      error = err;
+      cev->quit();
+    });
+
+    sock->sigConnected().connect( [&](){
+      BOOST_REQUIRE_EQUAL( sock->state(), zyppng::Socket::ConnectedState );
+      gotConnected = true;
+
+      for ( int i = 0; i < iterations; i++ ) {
+        auto thisBytesWritten = sock->write( payload.data(), payload.length() );
+        bytesShouldBeWritten += payload.length();
+        bytesWritten += thisBytesWritten;
+
+      }
+      sock->disconnect();
+    });
+
+    sock->sigBytesWritten().connect( [&]( const auto bytes ){
+      timer->start();
+      bytesWrittenSignaled += bytes;
+    });
+
+    sock->sigDisconnected().connect( [&](){
+      gotDisconnected = true;
+      BOOST_REQUIRE_EQUAL( sock->state(), zyppng::Socket::ClosedState );
+      cev->quit();
+    });
+
+    timer->sigExpired().connect([&]( zyppng::Timer &) {
+      timedOut = true;
+      cev->quit();
+    });
+
+    timer->start( 30000 );
+
+    sock->connect( std::make_shared<zyppng::UnixSockAddr>( "socktest", true ) );
+
+    if ( sock->state() == zyppng::Socket::ConnectingState
+         || sock->state() == zyppng::Socket::ConnectedState
+         || sock->state() == zyppng::Socket::ClosingState ) {
+      cev->run();
+    }
+
+    BOOST_REQUIRE_EQUAL( sock->state(), zyppng::Socket::ClosedState );
+    BOOST_REQUIRE_EQUAL( error, zyppng::Socket::NoError );
+    BOOST_REQUIRE( gotConnected );
+    BOOST_REQUIRE( gotDisconnected );
+    BOOST_REQUIRE_EQUAL( timedOut, false );
+  });
+
+  ev->run();
+  clientThread.join();
+
+  BOOST_REQUIRE_EQUAL( error, zyppng::Socket::ConnectionClosedByRemote );
+  BOOST_REQUIRE_EQUAL( bytesWritten, payload.size() * iterations );
+  BOOST_REQUIRE_EQUAL( bytesWritten, bytesReceived );
+  BOOST_REQUIRE_EQUAL( bytesWritten, bytesWrittenSignaled );
+
+}

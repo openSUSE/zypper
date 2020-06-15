@@ -33,6 +33,7 @@ namespace zyppng {
 
   public:
     IOBuffer( unsigned chunkSize = 0);
+
     char *reserve( size_t bytes );
     char *front ();
     size_t frontSize () const;
