@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Mon Jun 15 17:12:57 CEST 2020 - bzeller@suse.de
+
+- Print switch abbrev warning to stderr (bsc#1172925)
+- Fix typo in man page (bsc#1169947)
+- version 1.14.37
+
+-------------------------------------------------------------------
 Mon Apr 13 15:20:38 CEST 2020 - ma@suse.de
 
 - Reformat manpages to workaround asciidoctor shortcomings
