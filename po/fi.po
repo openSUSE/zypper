@@ -20,8 +20,8 @@ msgstr ""
 "Project-Id-Version: zypp.fi\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-12-05 14:22+0100\n"
-"PO-Revision-Date: 2020-01-13 19:59+0000\n"
-"Last-Translator: Tommi Nieminen <software@legisign.org>\n"
+"PO-Revision-Date: 2020-06-28 06:55+0000\n"
+"Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
 "Language-Team: Finnish <https://l10n.opensuse.org/projects/libzypp/master/fi/"
 ">\n"
 "Language: fi\n"
@@ -4133,7 +4133,7 @@ msgstr "Virheellinen viittaus tyhjään URL-objektiin"
 
 #: zypp/Url.cc:327 zypp/Url.cc:341
 msgid "Unable to parse Url components"
-msgstr "Verkko-osoitteen jäsentäminen ei onnistu."
+msgstr "Verkko-osoitteen jäsentäminen ei onnistu"
 
 #: zypp/VendorSupportOptions.cc:14
 msgid "unknown"
@@ -4365,7 +4365,7 @@ msgstr ""
 #: zypp/media/MediaException.cc:146
 #, c-format, boost-format
 msgid "Error occurred while setting download (curl) options for '%s':"
-msgstr "Virhe asetettaessa lataajan (curl) valintoja osoitteelle \"%s\"."
+msgstr "Virhe määritettäessä kohteen '%s' latausasetuksia (curl):"
 
 #: zypp/media/MediaException.cc:153
 #, c-format, boost-format
