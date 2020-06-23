@@ -136,6 +136,7 @@
 	</update>
 	</history>
 	<provides>
+		<dep name='multiversion(kernel)' />
 		<dep name='kernel-source' op='==' version='1' release='1' />
 	</provides>
 	<requires>
@@ -154,6 +155,7 @@
         </history>
         <provides>
                 <dep name='multiversion(kernel)' />
+				<dep name='kernel-devel' op='==' version='1' release='1' />
                 <dep name='kernel-devel' op='==' version='1' release='1.2' />
         </provides>
         <requires>
@@ -172,6 +174,8 @@
         </update>
         </history>
         <provides>
+				<dep name='multiversion(kernel)' />
+				<dep name='kernel-source' op='==' version='1' release='1' />
                 <dep name='kernel-source' op='==' version='1' release='1.2' />
         </provides>
         <requires>
@@ -365,6 +369,7 @@
         </history>
         <provides>
                 <dep name='multiversion(kernel)' />
+				<dep name='kernel-default-devel' op='==' version='1' release='3' />
                 <dep name='kernel-default-devel' op='==' version='1' release='3.2' />
         </provides>
         <requires>
@@ -386,6 +391,7 @@
         </history>
         <provides>
                 <dep name='multiversion(kernel)' />
+				<dep name='kernel-devel' op='==' version='1' release='3' />
                 <dep name='kernel-devel' op='==' version='1' release='3.2' />
         </provides>
         <requires>
@@ -403,6 +409,8 @@
         </update>
         </history>
         <provides>
+				<dep name='multiversion(kernel)' />
+				<dep name='kernel-source' op='==' version='1' release='3' />
                 <dep name='kernel-source' op='==' version='1' release='3.2' />
         </provides>
         <requires>
@@ -668,7 +676,7 @@
 	</provides>
 	<requires>
 		<dep name='kernel-default-devel'/>
-    <dep name='ksym(foobar)' op='==' version='abdcfee' />
+        <dep name='ksym(foobar)' op='==' version='abdcfee' />
 	</requires>
 </package>
 

@@ -24,7 +24,13 @@ namespace  {
     return pck.name() + "-" + pck.edition().asString() + "." + pck.arch().asString();
   }
 
-  using TestSample = std::tuple<Pathname, std::string, zypp::Arch, std::string, std::map<std::string, bool> >;
+  using TestSample = std::tuple<
+    Pathname,    // repoPath
+    std::string, // uname_r
+    zypp::Arch,  // arch
+    std::string, // keepSpec
+    std::map<std::string, bool> // expectedRems
+    >;
 
   std::vector<TestSample>  maketestdata() {
     return {
@@ -48,9 +54,9 @@ namespace  {
           // left over devel packages that need to go away too
           { "kernel-devel-1-1.2.noarch", false },
           { "kernel-source-1-1.2.noarch", false },
-          { "kernel-default-devel-1-3.2.x86_64", false },
-          { "kernel-devel-1-3.2.noarch", false },
-          { "kernel-source-1-3.2.noarch", false },
+          { "kernel-default-devel-1-3.x86_64", false },
+          { "kernel-default-devel-debuginfo-1-3.x86_64", false },
+          { "kernel-devel-1-3.noarch", false },
         }
       },
       //test that keeps only the running kernel
@@ -87,9 +93,10 @@ namespace  {
           // left over devel packages that need to go away too
           { "kernel-devel-1-1.2.noarch", false },
           { "kernel-source-1-1.2.noarch", false },
-          { "kernel-default-devel-1-3.2.x86_64", false },
-          { "kernel-devel-1-3.2.noarch", false },
-          { "kernel-source-1-3.2.noarch", false },
+          { "kernel-default-devel-1-3.x86_64", false },
+          { "kernel-devel-1-3.noarch", false },
+          { "kernel-default-devel-1-3.x86_64", false },
+          { "kernel-default-devel-debuginfo-1-3.x86_64", false },
         }
       },
       TestSample {
@@ -112,11 +119,9 @@ namespace  {
           { "kernel-syms-1-5.x86_64", false },
           { "dummy-kmp-default-1-0.x86_64", false },
           // left over devel packages that need to go away too
-          { "kernel-devel-1-1.2.noarch", false },
-          { "kernel-source-1-1.2.noarch", false },
-          { "kernel-default-devel-1-3.2.x86_64", false },
-          { "kernel-devel-1-3.2.noarch", false },
-          { "kernel-source-1-3.2.noarch", false },
+          { "kernel-default-devel-1-3.x86_64", false },
+          { "kernel-default-devel-debuginfo-1-3.x86_64", false },
+          { "kernel-devel-1-3.noarch", false },
         }
       },
       TestSample {
@@ -132,6 +137,11 @@ namespace  {
           { "kernel-devel-1-2.noarch", false },
           { "kernel-livepatch-default-1-2.x86_64", false },
           { "kernel-syms-1-2.x86_64", false },
+          // the following packages are not held back because they do not fit keep spec and no deps are keeping them
+          { "kernel-default-devel-1-1.x86_64", false },
+          { "kernel-default-devel-debuginfo-1-1.x86_64", false },
+          { "kernel-devel-1-1.noarch", false},
+          { "kernel-syms-1-1.x86_64", false},
         }
       },
       TestSample {
@@ -147,6 +157,10 @@ namespace  {
           { "kernel-devel-1-2.noarch", false },
           { "kernel-livepatch-default-1-2.x86_64", false },
           { "kernel-syms-1-2.x86_64", false },
+          { "kernel-default-devel-1-5.x86_64", false },
+          { "kernel-default-devel-debuginfo-1-5.x86_64", false },
+          { "kernel-devel-1-5.noarch", false },
+          { "kernel-syms-1-5.x86_64", false },
         }
       },
       TestSample {
@@ -157,6 +171,10 @@ namespace  {
         Arch("x86_64"),
         "running,1-2",
         {
+          { "kernel-default-devel-1-5.x86_64", false },
+          { "kernel-default-devel-debuginfo-1-5.x86_64", false },
+          { "kernel-devel-1-5.noarch", false },
+          { "kernel-syms-1-5.x86_64", false },
         }
       },
       TestSample {
@@ -170,11 +188,9 @@ namespace  {
           { "kernel-default-1-1.aarch64", false },
           { "kernel-default-1-1.i686", false },
 
-          /*
-          { "kernel-default-devel-1-1.x86_64", false },
-          { "kernel-default-devel-debuginfo-1-1.x86_64", false },
-          { "kernel-syms-1-1.x86_64", false },
-          */
+          //{ "kernel-syms-1-1.x86_64", false },
+          //{ "kernel-default-devel-1-1.x86_64", false },
+          //{ "kernel-default-devel-debuginfo-1-1.x86_64", false },
 
           { "kernel-default-1-2.aarch64", false },
           { "kernel-default-1-2.i686", false },
@@ -198,17 +214,23 @@ namespace  {
           { "kernel-livepatch-default-1-2.i686", false },
           { "kernel-livepatch-default-1-2.x86_64", false },
 
-          /*
-           Since kernel-syms package requires do not care about architecture, every kernel-syms
-           package for flavour-version will be kept as long as a kernel-flavour-devel package of any arch is installed
           { "kernel-syms-1-1.aarch64", false },
           { "kernel-syms-1-1.i686", false },
-          */
+
           { "kernel-syms-1-2.aarch64", false },
           { "kernel-syms-1-2.i686", false },
           { "kernel-syms-1-2.x86_64", false },
         }
       },
+      TestSample {
+        TESTS_SRC_DIR"/zypp/data/PurgeKernels/rebuild",
+        "1-1-default",
+        Arch("x86_64"),
+        "running",
+        {
+          { "kernel-source-1-1.noarch", false },
+        }
+      }
     };
   }
 }
@@ -237,7 +259,7 @@ BOOST_DATA_TEST_CASE(purge_kernels, bdata::make( maketestdata() ), repoPath, una
     removeCount++;
 
     auto pck = expectedRemovals.find( makeNVRA(*it) );
-    BOOST_REQUIRE_MESSAGE(  pck != expectedRemovals.end(), std::string("Unexpected package removed: ") + makeNVRA(*it) );
+    BOOST_REQUIRE_MESSAGE(  pck != expectedRemovals.end(), std::string("Unexpected package removed: ") + makeNVRA(*it) + (it->status().isByUser() ? " (by user)" : " (autoremoved)") );
 
     pck->second = true;
   }

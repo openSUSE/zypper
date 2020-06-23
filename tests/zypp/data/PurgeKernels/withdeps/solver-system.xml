@@ -385,7 +385,7 @@
 	</provides>
 	<requires>
 		<dep name='kernel-default-devel'/>
-    <dep name='ksym(foobar)' op='==' version='abdcfee' />
+    	<dep name='ksym(foobar)' op='==' version='abdcfee' />
 	</requires>
 </package>
 
@@ -401,7 +401,7 @@
 		<dep name='package-needing-krnlmodule' op='==' version='1' release='0' />
 	</provides>
 	<requires>
-	<dep name='dummy-kmp-default' op='==' version='1' release='0' />
+		<dep name='dummy-kmp-default' op='==' version='1' release='0' />
 	</requires>
 </package>
 
