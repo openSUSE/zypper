@@ -105,7 +105,7 @@ namespace yum
 	return true;	// skip sqlitedb
 
       bool zchk { str::endsWith( typestr_r, "_zck" ) };
-#if ENABLE_ZCHUNK_COMPRESSION && defined(LIBSOLVEXT_FEATURE_ZCHUNK_COMPRESSION)
+#if defined(LIBSOLVEXT_FEATURE_ZCHUNK_COMPRESSION)
       const std::string & basetype { zchk ? typestr_r.substr( 0, typestr_r.size()-4 ) : typestr_r };
 #else
       if ( zchk )

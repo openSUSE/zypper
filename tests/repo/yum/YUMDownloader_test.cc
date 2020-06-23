@@ -38,7 +38,7 @@ BOOST_AUTO_TEST_CASE(yum_download)
 
   yum.download(media, localdir);
 
-#if ENABLE_ZCHUNK_COMPRESSION && defined(LIBSOLVEXT_FEATURE_ZCHUNK_COMPRESSION)
+#if defined(LIBSOLVEXT_FEATURE_ZCHUNK_COMPRESSION)
     const bool zchunk = true;
 #else
     const bool zchunk = false;
