@@ -13,6 +13,33 @@
 using std::endl;
 using namespace zypp;
 
+namespace zypp
+{
+  namespace env
+  {
+    namespace
+    {
+      inline int getZYPP_MEDIA_CURL_IPRESOLVE()
+      {
+	int ret = 0;
+	if ( const char * envp = getenv( "ZYPP_MEDIA_CURL_IPRESOLVE" ) )
+	{
+	  WAR << "env set: $ZYPP_MEDIA_CURL_IPRESOLVE='" << envp << "'" << std::endl;
+	  if (      strcmp( envp, "4" ) == 0 )	ret = 4;
+	  else if ( strcmp( envp, "6" ) == 0 )	ret = 6;
+	}
+	  return ret;
+      }
+    } //namespace
+
+    int ZYPP_MEDIA_CURL_IPRESOLVE()
+    {
+      static int _v = getZYPP_MEDIA_CURL_IPRESOLVE();
+      return _v;
+    }
+  } // namespace env
+} // namespace zypp
+
 namespace internal
 {
 
@@ -267,19 +294,6 @@ void fillSettingsSystemProxy( const Url& url, media::TransferSettings &s )
     }
     catch (...) {}	// no proxy if URL is malformed
   }
-}
-
-
-int env::getZYPP_MEDIA_CURL_IPRESOLVE()
-{
-  int ret = 0;
-  if ( const char * envp = getenv( "ZYPP_MEDIA_CURL_IPRESOLVE" ) )
-  {
-    WAR << "env set: $ZYPP_MEDIA_CURL_IPRESOLVE='" << envp << "'" << std::endl;
-    if (      strcmp( envp, "4" ) == 0 )	ret = 4;
-    else if ( strcmp( envp, "6" ) == 0 )	ret = 6;
-  }
-  return ret;
 }
 
 

@@ -3,6 +3,7 @@
 #include <zypp/zyppng/media/network/networkrequestdispatcher.h>
 #include <zypp/zyppng/base/EventDispatcher>
 #include <zypp/zyppng/core/String>
+#include <zypp/zyppng/core/Env>
 #include <zypp/media/CurlHelper.h>
 #include <zypp/media/CurlConfig.h>
 #include <zypp/media/MediaUserAuth.h>
@@ -230,8 +231,7 @@ namespace zyppng {
       locSet.setUserAgentString( internal::agentString() );
 
       {
-        char *ptr = getenv("ZYPP_MEDIA_CURL_DEBUG");
-        _curlDebug = (ptr && *ptr) ? zypp::str::strtonum<long>( ptr) : 0L;
+	_curlDebug = env::ZYPP_MEDIA_CURL_DEBUG();
         if( _curlDebug > 0)
         {
           setCurlOption( CURLOPT_VERBOSE, 1L);
@@ -241,7 +241,7 @@ namespace zyppng {
       }
 
       /** Force IPv4/v6 */
-      switch ( internal::env::ZYPP_MEDIA_CURL_IPRESOLVE() )
+      switch ( env::ZYPP_MEDIA_CURL_IPRESOLVE() )
       {
         case 4: setCurlOption( CURLOPT_IPRESOLVE, CURL_IPRESOLVE_V4 ); break;
         case 6: setCurlOption( CURLOPT_IPRESOLVE, CURL_IPRESOLVE_V6 ); break;

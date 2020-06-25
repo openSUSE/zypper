@@ -28,6 +28,23 @@
 #undef CURLVERSION_AT_LEAST
 #define CURLVERSION_AT_LEAST(M,N,O) LIBCURL_VERSION_NUM >= ((((M)<<8)+(N))<<8)+(O)
 
+namespace zypp
+{
+  namespace env
+  {
+    /** Long number for setting CURLOPT_DEBUGDATA */
+    inline long ZYPP_MEDIA_CURL_DEBUG()
+    {
+      long ret = 0L;
+      if ( char *ptr = ::getenv("ZYPP_MEDIA_CURL_DEBUG"); ptr && *ptr )
+	str::strtonum( ptr, ret );
+      return ret;
+    }
+
+    /** 4/6 to force IPv4/v6 */
+    int ZYPP_MEDIA_CURL_IPRESOLVE();
+  } // namespace env
+} //namespace zypp
 
 //do not export
 namespace internal {
@@ -80,15 +97,6 @@ struct ProgressData
   // bytes uploaded at the moment the progress was last reported
   double                                        uload;
 };
-
-namespace env {
-  int getZYPP_MEDIA_CURL_IPRESOLVE();
-  inline int ZYPP_MEDIA_CURL_IPRESOLVE()
-  {
-    static int _v = getZYPP_MEDIA_CURL_IPRESOLVE();
-    return _v;
-  }
-}
 
 void globalInitCurlOnce();
 int  log_curl(CURL *curl, curl_infotype info,  char *ptr, size_t len, void *max_lvl);

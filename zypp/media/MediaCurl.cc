@@ -145,8 +145,7 @@ void MediaCurl::checkProtocol(const Url &url) const
 void MediaCurl::setupEasy()
 {
   {
-    char *ptr = getenv("ZYPP_MEDIA_CURL_DEBUG");
-    _curlDebug = (ptr && *ptr) ? str::strtonum<long>( ptr) : 0L;
+    _curlDebug = env::ZYPP_MEDIA_CURL_DEBUG();
     if( _curlDebug > 0)
     {
       curl_easy_setopt( _curl, CURLOPT_VERBOSE, 1L);
@@ -200,13 +199,10 @@ void MediaCurl::setupEasy()
   }
 
   /** Force IPv4/v6 */
-  if ( env::ZYPP_MEDIA_CURL_IPRESOLVE() )
+  switch ( env::ZYPP_MEDIA_CURL_IPRESOLVE() )
   {
-    switch ( env::ZYPP_MEDIA_CURL_IPRESOLVE() )
-    {
-      case 4: SET_OPTION(CURLOPT_IPRESOLVE, CURL_IPRESOLVE_V4); break;
-      case 6: SET_OPTION(CURLOPT_IPRESOLVE, CURL_IPRESOLVE_V6); break;
-    }
+    case 4: SET_OPTION(CURLOPT_IPRESOLVE, CURL_IPRESOLVE_V4); break;
+    case 6: SET_OPTION(CURLOPT_IPRESOLVE, CURL_IPRESOLVE_V6); break;
   }
 
  /**
