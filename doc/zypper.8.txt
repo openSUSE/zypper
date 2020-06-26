@@ -236,11 +236,11 @@ If _ARCH_ is not specified, or the last dot of the capability name string is not
 
 Zypper is also able to install _plain RPM files_ while trying to satisfy their dependencies using packages from defined repositories. You can install a plain RPM file by specifying its location in the install command arguments either as a local path or an URI. E.g.: :::
 +
-$ *zypper install ~/rpms/foo.rpm \http://some.site/bar.rpm*.
+$ *zypper install ~/rpms/foo.rpm \http://some.site/bar.rpm*
 +
 Zypper will report packages that it cannot find. Further, in interactive mode, zypper proceeds with installation of the rest of requested packages, and it will abort immediately in non-interactive mode. In both cases zypper returns *ZYPPER_EXIT_INF_CAP_NOT_FOUND* after finishing the operation.
 +
-Zypper will collect the files in a temporary *plaindir* repository and mark the respective packages for installation. If *--download-only* is used, the downloaded packages will be available in */var/cache/zypper/RPMS* until you actually install them or call *zypper clean* to clear the package caches.
+Zypper will collect the files in a temporary *plaindir* repository and mark the respective packages for installation. If *--download-only* is used, the downloaded packages will be available in */var/cache/zypper/RPMS* until you actually install them or call *zypper clean* to clear the package caches. They will _not_ become part of the global package cache at */var/cache/zypp/packages*.
 
 In the install command, you can also specify packages you wish to remove by prepending their names by a _-_ or _!_ character. For example: :::
 +
