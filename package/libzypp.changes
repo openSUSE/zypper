@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Jun 26 14:13:10 CEST 2020 - ma@suse.de
+
+- Fix core dump with corrupted history file (bsc#1170801)
+- version 17.23.8 (22)
+
+-------------------------------------------------------------------
 Tue Jun 23 17:44:21 CEST 2020 - ma@suse.de
 
 - Enable zchunk metadata download if libsolv supports it.
