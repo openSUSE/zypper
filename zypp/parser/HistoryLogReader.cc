@@ -66,8 +66,12 @@ namespace zypp
     // parse into fields
     HistoryLogData::FieldVector fields;
     str::splitEscaped( line_r, std::back_inserter(fields), "|", true );
-    if ( fields.size() >= 2 )
-      fields[1] = str::trim( std::move(fields[1]) );	// for whatever reason writer is padding the action field
+
+    if ( fields.size() < 2 ) {
+      WAR << "Ignore invalid history log entry on line #" << lineNr_r << " '"<< line_r << "'" << endl;
+      return true;	// At least an action field[1] is needed!
+    }
+    fields[1] = str::trim( std::move(fields[1]) );	// for whatever reason writer is padding the action field
 
     if ( !_actionfilter.empty() && !_actionfilter.count( fields[1] ) )
       return true;
