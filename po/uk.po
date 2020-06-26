@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: zypper.uk\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-04-12 15:27+0200\n"
-"PO-Revision-Date: 2020-06-26 14:22+0000\n"
+"PO-Revision-Date: 2020-06-29 19:46+0000\n"
 "Last-Translator: Lesath <4lesath@gmail.com>\n"
 "Language-Team: Ukrainian <https://l10n.opensuse.org/projects/zypper/master/"
 "uk/>\n"
@@ -217,11 +217,13 @@ msgstr "Ви хочете відхилити ключ або завжди йом
 #. correspond to reject/trusttemporarily/trustalways in that order.
 #. The answers should be lower case letters.
 #: src/callbacks/keyring.h:308
+#, fuzzy
 msgid "r/t/a/"
 msgstr "в/т/п/"
 
 #. translators: the same as r/t/a, but without 'a'
 #: src/callbacks/keyring.h:311
+#, fuzzy
 msgid "r/t"
 msgstr "в/т"
 
@@ -231,6 +233,7 @@ msgstr "в/т"
 #. correspond to reject/trusttemporarily/trustalways in that order.
 #. The answers should be lower case letters.
 #: src/callbacks/keyring.h:318
+#, fuzzy
 msgid "r/a/"
 msgstr "в/з/"
 
@@ -389,12 +392,12 @@ msgstr "Наступний запит нічого не блокує:"
 
 #: src/callbacks/repo.h:49
 msgid "Retrieving delta"
-msgstr "Звантаження дельти"
+msgstr "Звантаження розбіжності"
 
 #. translators: this text is a progress display label e.g. "Applying delta foo [42%]"
 #: src/callbacks/repo.h:74
 msgid "Applying delta"
-msgstr "Застосування дельти"
+msgstr "Застосування розбіжності"
 
 #. TranslatorExplanation %s is package size like "5.6 M"
 #: src/callbacks/repo.h:103
@@ -546,7 +549,7 @@ msgstr "Застарілі параметри:"
 #: src/commands/commandhelpformatter.h:139
 #, boost-format
 msgid "The same as %1%."
-msgstr "Те саме, що й %1%."
+msgstr "Те саме що і %1%."
 
 #: src/commands/commandhelpformatter.h:187
 msgid "Usage:"
@@ -581,8 +584,7 @@ msgstr ""
 
 #: src/commands/commonflags.h:45
 msgid "Consider only patches which affect the package management itself."
-msgstr ""
-"Розглядати лише ті виправлення які впливають на систему керування пакетами."
+msgstr "Розглядати лише ті латки які впливають на систему керування пакетами."
 
 #: src/output/Out.h:26 src/repos.cc:126 src/repos.cc:154
 msgid "Yes"
@@ -687,7 +689,6 @@ msgstr "URI"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:51
-#, fuzzy
 msgid "YYYY-MM-DD"
 msgstr "РРРР-ММ-ДД"
 
@@ -854,7 +855,8 @@ msgstr ""
 msgid ""
 "Do not treat patches as interactive, which have the rebootSuggested-flag set."
 msgstr ""
-"Вважати інтерактивними виправлення з встановленим прапорцем rebootSuggested."
+"Не ставитись до латок які мають прапорець rebootSuggested як до "
+"інтерактивних."
 
 #. translators: --xmlout, -x
 #: src/Config.cc:447
@@ -1223,8 +1225,8 @@ msgid ""
 "Patch '%1%' is optional. Use '%2%' to install it, or '%3%' to include all "
 "optional patches."
 msgstr ""
-"Виправлення «%1%» необов'язкове. Використовуйте «%2%» для встановлення, або "
-"«%3%» для включення усіх необов'язкових виправлень."
+"Латка «%1%» необов'язкова. Використовуйте «%2%» для встановлення, або «%3%» "
+"для включення усіх необов'язкових латок."
 
 #: src/RequestFeedback.cc:192
 #, c-format, boost-format
@@ -1319,9 +1321,9 @@ msgstr[2] "Буде встановлено наступні %d НОВИХ пак
 #, c-format, boost-format
 msgid "The following NEW patch is going to be installed:"
 msgid_plural "The following %d NEW patches are going to be installed:"
-msgstr[0] "Буде встановлено наступне НОВЕ виправлення:"
-msgstr[1] "Буде встановлено наступні %d НОВИХ виправлення:"
-msgstr[2] "Буде встановлено наступні %d НОВИХ виправлень:"
+msgstr[0] "Буде встановлено наступна НОВА латка:"
+msgstr[1] "Буде встановлено наступні %d НОВІ латки:"
+msgstr[2] "Буде встановлено наступні %d НОВИХ латок:"
 
 #: src/Summary.cc:579
 #, c-format, boost-format
@@ -1367,9 +1369,9 @@ msgstr[2] "Буде ВИЛУЧЕНО наступні %d пакунків:"
 #, c-format, boost-format
 msgid "The following patch is going to be REMOVED:"
 msgid_plural "The following %d patches are going to be REMOVED:"
-msgstr[0] "Буде ВИЛУЧЕНО наступне виправлення:"
-msgstr[1] "Буде ВИЛУЧЕНО наступні %d виправлення:"
-msgstr[2] "Буде ВИЛУЧЕНО наступні %d виправлень:"
+msgstr[0] "Буде ВИЛУЧЕНО наступну латку:"
+msgstr[1] "Буде ВИЛУЧЕНО наступні %d латки:"
+msgstr[2] "Буде ВИЛУЧЕНО наступних %d латок:"
 
 #: src/Summary.cc:630
 #, c-format, boost-format
@@ -1407,9 +1409,9 @@ msgstr[2] "Буде оновлено наступних %d пакунків:"
 #, c-format, boost-format
 msgid "The following patch is going to be upgraded:"
 msgid_plural "The following %d patches are going to be upgraded:"
-msgstr[0] "Буде оновлено таке виправлення:"
-msgstr[1] "Буде оновлено наступні %d виправлення:"
-msgstr[2] "Буде оновлено наступних %d виправлень:"
+msgstr[0] "Буде оновлено таку латку:"
+msgstr[1] "Буде оновлено наступні %d латки:"
+msgstr[2] "Буде оновлено наступних %d латок:"
 
 #: src/Summary.cc:674
 #, c-format, boost-format
@@ -1447,9 +1449,9 @@ msgstr[2] "Буде повернено до старішої версії нас
 #, c-format, boost-format
 msgid "The following patch is going to be downgraded:"
 msgid_plural "The following %d patches are going to be downgraded:"
-msgstr[0] "Буде повернено до старішої версії таке виправлення:"
-msgstr[1] "Буде повернено до старішої версії наступні %d виправлення:"
-msgstr[2] "Буде повернено до старішої версії наступних %d виправлень:"
+msgstr[0] "Буде повернено до старішої версії таку латку:"
+msgstr[1] "Буде повернено до старішої версії наступні %d латки:"
+msgstr[2] "Буде повернено до старішої версії наступних %d латок:"
 
 #: src/Summary.cc:720
 #, c-format, boost-format
@@ -1487,9 +1489,9 @@ msgstr[2] "Буде перевстановлено наступних %d пак�
 #, c-format, boost-format
 msgid "The following patch is going to be reinstalled:"
 msgid_plural "The following %d patches are going to be reinstalled:"
-msgstr[0] "Буде перевстановлено наступне виправлення:"
-msgstr[1] "Буде перевстановлено наступні %d виправлення:"
-msgstr[2] "Буде перевстановлено наступних %d виправлень:"
+msgstr[0] "Буде перевстановлено наступну латку:"
+msgstr[1] "Буде перевстановлено наступні %d латки:"
+msgstr[2] "Буде перевстановлено наступних %d латок:"
 
 #: src/Summary.cc:763
 #, c-format, boost-format
@@ -1529,9 +1531,9 @@ msgstr[2] "Було автоматично вибрано наступних %d 
 msgid "The following recommended patch was automatically selected:"
 msgid_plural ""
 "The following %d recommended patches were automatically selected:"
-msgstr[0] "Було автоматично вибрано наступне рекомендоване виправлення:"
-msgstr[1] "Було автоматично вибрано наступні %d рекомендовані виправлення:"
-msgstr[2] "Було автоматично вибрано наступних %d рекомендованих виправлень:"
+msgstr[0] "Було автоматично вибрано наступну рекомендовану латку:"
+msgstr[1] "Було автоматично вибрано наступні %d рекомендовані латки:"
+msgstr[2] "Було автоматично вибрано наступних %d рекомендованих латок:"
 
 #: src/Summary.cc:928
 #, c-format, boost-format
@@ -1628,9 +1630,9 @@ msgstr[2] ""
 msgid "The following patch is recommended, but will not be installed:"
 msgid_plural ""
 "The following %d patches are recommended, but will not be installed:"
-msgstr[0] "Наступне виправлення рекомендовано, але не буде встановлено:"
-msgstr[1] "Наступні %d виправлення рекомендовано, але не буде встановлено:"
-msgstr[2] "Наступні %d виправлень рекомендовано, але не буде встановлено:"
+msgstr[0] "Наступна латка рекомендована, але не буде встановлена:"
+msgstr[1] "Наступні %d латки рекомендовано, але не буде встановлено:"
+msgstr[2] "Наступні %d латок рекомендовано, але не буде встановлено:"
 
 #: src/Summary.cc:1030
 #, c-format, boost-format
@@ -1673,10 +1675,9 @@ msgstr[2] "Наступних %d пакунків запропоновано, а
 msgid "The following patch is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d patches are suggested, but will not be installed:"
-msgstr[0] "Наступне виправлення було запропоновано, але її не буде встановлено:"
-msgstr[1] ""
-"Наступних %d виправлення було запропоновано, але їх не буде встановлено:"
-msgstr[2] "Наступні %d виправлень було запропоновано, але їх не буде встановлено:"
+msgstr[0] "Була запропонована наступна латка, але її не буде встановлено:"
+msgstr[1] "Були запропоновані наступні %d латки, але вони не будуть встановлені:"
+msgstr[2] "Було запропоновано наступних %d латок, але вони не будуть встановлені:"
 
 #: src/Summary.cc:1082
 #, c-format, boost-format
@@ -1719,9 +1720,9 @@ msgstr[2] "У %d наступних пакунків буде змінено а�
 #, c-format, boost-format
 msgid "The following patch is going to change architecture:"
 msgid_plural "The following %d patches are going to change architecture:"
-msgstr[0] "Наступне виправлення змінить архітектуру:"
-msgstr[1] "У наступних %d виправлень буде змінено архітектуру:"
-msgstr[2] "У %d наступних виправлень буде змінено архітектуру:"
+msgstr[0] "Наступна латка змінить архітектуру:"
+msgstr[1] "У наступних %d латок буде змінено архітектуру:"
+msgstr[2] "У %d наступних латок буде змінено архітектуру:"
 
 #: src/Summary.cc:1128
 #, c-format, boost-format
@@ -1759,9 +1760,9 @@ msgstr[2] "У %d наступних пакунків буде змінено п�
 #, c-format, boost-format
 msgid "The following patch is going to change vendor:"
 msgid_plural "The following %d patches are going to change vendor:"
-msgstr[0] "Наступне виправлення змінить постачальника:"
-msgstr[1] "У наступних %d виправлень буде змінено постачальника:"
-msgstr[2] "У %d наступних виправлень буде змінено постачальника:"
+msgstr[0] "Наступна латка змінить постачальника:"
+msgstr[1] "У наступних %d латок буде змінено постачальника:"
+msgstr[2] "У %d наступних латок буде змінено постачальника:"
 
 #: src/Summary.cc:1174
 #, c-format, boost-format
@@ -1874,9 +1875,9 @@ msgstr "Запустіть «%1%», щоб переглянути повний �
 #, c-format, boost-format
 msgid "The following patch requires a system reboot:"
 msgid_plural "The following %d patches require a system reboot:"
-msgstr[0] "Наступне виправлення вимагає перезавантаження системи:"
-msgstr[1] "Наступні %d виправлення вимагають перезавантаження системи:"
-msgstr[2] "Наступні %d виправлень вимагають перезавантаження системи:"
+msgstr[0] "Наступна латка вимагає перезавантаження системи:"
+msgstr[1] "Наступні %d латки вимагають перезавантаження системи:"
+msgstr[2] "Наступних %d латок вимагають перезавантаження системи:"
 
 #: src/Summary.cc:1345
 #, c-format, boost-format
@@ -2169,7 +2170,7 @@ msgstr "Вимкнути перевірку повноваження серти�
 #: src/callbacks/media.cc:81 src/callbacks/media.cc:173
 #: src/callbacks/media.cc:253 src/utils/prompt.cc:219 src/utils/prompt.cc:303
 msgid "Abort, retry, ignore?"
-msgstr "Відмовитись, повторити, ігнорувати?"
+msgstr "Перервати, повторити, ігнорувати?"
 
 #: src/callbacks/media.cc:89
 msgid "SSL certificate authority check disabled."
@@ -2198,7 +2199,7 @@ msgstr "Виберіть пристрій, який треба вилучити.
 
 #: src/callbacks/media.cc:150
 msgid "Insert the CD/DVD and press ENTER to continue."
-msgstr "Вставте диск і натисніть ENTER."
+msgstr "Вставте диск CD/DVD та натисніть ENTER щоб продовжити."
 
 # window title for kernel loading (see txt_load_kernel)
 #: src/callbacks/media.cc:153
@@ -2213,7 +2214,7 @@ msgstr "Повторна спроба…"
 #. 'e' stands for Eject medium
 #: src/callbacks/media.cc:168
 msgid "a/r/i/u/e"
-msgstr "в/п/і/з/н"
+msgstr "а/п/і/з/н"
 
 #: src/callbacks/media.cc:170
 msgid "Eject medium."
@@ -2237,7 +2238,7 @@ msgstr ""
 #. the 'u' reply means 'Change URI'.
 #: src/callbacks/media.cc:249
 msgid "a/r/i/u"
-msgstr "в/п/і/з"
+msgstr "а/п/і/з"
 
 #: src/callbacks/media.cc:291
 #, c-format, boost-format
@@ -2415,7 +2416,7 @@ msgstr "Потрібна хоча б одна назва пакунка."
 
 #: src/commands/installremove.cc:116
 msgid "Cannot uninstall patches."
-msgstr "Неможливо вилучити виправлення."
+msgstr "Неможливо вилучити латки."
 
 #: src/commands/installremove.cc:117
 msgid ""
@@ -2423,10 +2424,8 @@ msgid ""
 "Patches are not installed in sense of copied files, database records,\n"
 "or similar."
 msgstr ""
-"Стан встановлення виправлення визначається тільки на основі його залежностей."
-"\n"
-"Виправлення не встановлюються в значенні копіювання файлів, записів баз "
-"даних,\n"
+"Стан встановлення латок визначається тільки на основі її залежностей.\n"
+"Латки не встановлюються в значенні копіювання файлів, записів баз даних,\n"
 "чи чогось подібного."
 
 #: src/commands/installremove.cc:126
@@ -2506,12 +2505,12 @@ msgstr "Надати список наявних оновлень."
 #. translators: command description
 #: src/commands/listpatches.cc:20
 msgid "List all applicable patches."
-msgstr "Список усіх застосовних виправлень."
+msgstr "Список усіх застосовних латок."
 
 #. translators: -a, --all
 #: src/commands/listpatches.cc:31
 msgid "List all patches, not only applicable ones."
-msgstr "Список усіх виправлень, не тільки застосовних."
+msgstr "Список усіх латок, не тільки застосовних."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/listupdates.cc:16
@@ -2992,16 +2991,16 @@ msgid ""
 "Whether applicable optional patches should be treated as needed or be "
 "excluded."
 msgstr ""
-"Відповідні необов'язкові виправлення слід розглядати як необхідні або варто "
-"їх вилучити."
+"Відповідні необов'язкові латки слід розглядати як необхідні або варто їх "
+"вилучити."
 
 #: src/commands/optionsets.cc:312
 msgid "The default is to exclude optional patches."
-msgstr "Вилучити необов'язкові виправлення це типове значення."
+msgstr "Вилучити необов'язкові латки це типова дія."
 
 #: src/commands/optionsets.cc:313
 msgid "The default is to include optional patches."
-msgstr "Включити необов'язкові виправлення це типове значення."
+msgstr "Включити необов'язкові латки це типова дія."
 
 #. translators: --with-interactive
 #: src/commands/optionsets.cc:348
@@ -3032,12 +3031,12 @@ msgstr "patch [ПАРАМЕТРИ]"
 #. translators: command summary: patch
 #: src/commands/patch.cc:26
 msgid "Install needed patches."
-msgstr "Встановити потрібні виправлення."
+msgstr "Встановити потрібні латки."
 
 #. translators: command description
 #: src/commands/patch.cc:28
 msgid "Install all available needed patches."
-msgstr "Встановити всі потрібні наявні виправлення."
+msgstr "Встановити всі потрібні наявні латки."
 
 #: src/commands/patch.cc:48
 msgid ""
@@ -3045,10 +3044,9 @@ msgid ""
 "is ignored, if the patch command must update the update stack first. Can not "
 "be combined with --updatestack-only."
 msgstr ""
-"Додатково намагатися оновити всі пакунки, які не охоплюються виправленнями. "
-"Цей параметр ігнорується, якщо при установці виправлення спочатку "
-"оновлюється стек оновлень. Параметр можна використовувати разом з "
-"--updatestack-only."
+"Додатково намагатися оновити всі пакунки, які не охоплюються латками. Цей "
+"параметр ігнорується, якщо при установці латки спочатку оновлюється стек "
+"оновлень. Параметр можна використовувати разом з --updatestack-only."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/patchcheck.cc:17
@@ -3058,7 +3056,7 @@ msgstr "patch-check (pchk) [ПАРАМЕТРИ]"
 #. translators: command summary: patch-check, pchk
 #: src/commands/patchcheck.cc:19
 msgid "Check for patches."
-msgstr "Перевірити наявність виправлень."
+msgstr "Перевірити наявність латок."
 
 #. translators: command description
 #: src/commands/patchcheck.cc:21
@@ -3066,9 +3064,9 @@ msgid ""
 "Display stats about applicable patches. The command returns 100 if needed "
 "patches were found, 101 if there is at least one needed security patch."
 msgstr ""
-"Відображає статистику про застосовні виправлення. Повертає значення 100, "
-"коли потрібні виправлення знайдені, або 101, коли наявне хоча би одне "
-"виправлення безпеки."
+"Переглянути статистику щодо застосовуваних латок. Повертає значення 100, "
+"коли потрібні латки знайдені, або 101, коли наявна хоча би одна латка "
+"безпеки."
 
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
 #: src/commands/ps.cc:27
@@ -3259,7 +3257,7 @@ msgstr "Вжиток"
 #. translators: command summary: patch-info
 #: src/commands/query/info.cc:138
 msgid "Show full information for specified patches."
-msgstr "Шукати повну інформацію щодо вказаних виправлень."
+msgstr "Шукати повну інформацію щодо вказаних латок."
 
 #. translators: command summary: pattern-info
 #: src/commands/query/info.cc:141
@@ -3289,7 +3287,7 @@ msgstr "product-info <НАЗВА_ПРОДУКТУ> …"
 #. translators: command description
 #: src/commands/query/info.cc:175
 msgid "Show detailed information for patches."
-msgstr "Показати докладну інформацію про виправлення."
+msgstr "Показати докладну інформацію про латки."
 
 #. translators: command description
 #: src/commands/query/info.cc:178
@@ -3354,12 +3352,12 @@ msgstr "patches (pch) [СХОВИЩЕ] …"
 #. translators: command summary: patches, pch
 #: src/commands/query/patches.cc:20
 msgid "List all available patches."
-msgstr "Надати список всіх наявних виправлень."
+msgstr "Надати список всіх наявних латок."
 
 #. translators: command description
 #: src/commands/query/patches.cc:22
 msgid "List all patches available in specified repositories."
-msgstr "Список всіх наявних виправлень у конкретних сховищах."
+msgstr "Список всіх наявних латок у конкретних сховищах."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/query/patterns.cc:18
@@ -4285,27 +4283,27 @@ msgstr ""
 #. translators: -g, --category <CATEGORY>
 #: src/commands/selectpatchoptionset.cc:24
 msgid "Select patches with the specified category."
-msgstr "Обрати виправлення у вказаній категорії."
+msgstr "Обрати латки у вказаній категорії."
 
 #. translators: --severity <SEVERITY>
 #: src/commands/selectpatchoptionset.cc:28
 msgid "Select patches with the specified severity."
-msgstr "Обрати виправлення за вказаною важливістю."
+msgstr "Обрати латки за вказаною важливістю."
 
 #. translators: --date <YYYY-MM-DD>
 #: src/commands/selectpatchoptionset.cc:32
 msgid "Select patches issued up to, but not including, the specified date"
-msgstr "Обрати виправлення надані до вказаної дати, але не включаючи її."
+msgstr "Обрати латки надані до вказаної дати, але не включаючи її."
 
 #. translators: -b, --bugzilla
 #: src/commands/selectpatchoptionset.cc:36
 msgid "Select applicable patches for the specified Bugzilla issues."
-msgstr "Обрати відповідні виправлення для вказаних у Bugzilla проблем."
+msgstr "Обрати відповідні латки для проблем вказаних у Bugzilla."
 
 #. translators: --cve
 #: src/commands/selectpatchoptionset.cc:41
 msgid "Select applicable patches for the specified CVE issues."
-msgstr "Обрати відповідні виправлення для вказаних у CVE вразливостей."
+msgstr "Обрати відповідні латки для вказаних у CVE вразливостей."
 
 #. any
 #. translators: --cve
@@ -6253,7 +6251,7 @@ msgstr "Проблема: "
 
 #: src/solve-commit.cc:48
 msgid "Detailed information: "
-msgstr ""
+msgstr "Детальна інформація: "
 
 #. TranslatorExplanation %d is the solution number
 #: src/solve-commit.cc:61
@@ -6297,7 +6295,7 @@ msgstr[2] ""
 #. The answers should be lower case letters.
 #: src/solve-commit.cc:111
 msgid "s/r/c/d"
-msgstr ""
+msgstr "р/п/с/д"
 
 #. translators: answers for dependency problem solution input prompt:
 #. "Choose from above solutions by number or cancel"
@@ -6307,34 +6305,35 @@ msgstr ""
 #. One letter string  for translation can be tricky, so in case of problems,
 #. please report a bug against zypper at bugzilla.suse.com, we'll try to solve it.
 #: src/solve-commit.cc:127
+#, fuzzy
 msgid "c/d"
-msgstr ""
+msgstr "о/с"
 
 #: src/solve-commit.cc:133
 #, boost-format
 msgid "Choose solution %1%"
-msgstr ""
+msgstr "Оберіть вирішення %1%"
 
 #: src/solve-commit.cc:135
 msgid "Skip problem and continue."
-msgstr ""
+msgstr "Пропустити проблему та продовжувати."
 
 #: src/solve-commit.cc:138
 msgid "Retry solving immediately."
-msgstr ""
+msgstr "Негайно спробувати вирішення знову."
 
 #: src/solve-commit.cc:140
 msgid "Choose no solution and cancel."
-msgstr ""
+msgstr "Не обирати вирішення."
 
 #: src/solve-commit.cc:141
 msgid "Toggle show detailed conflict information."
-msgstr ""
+msgstr "Увімкнути показ детальної конфліктної інформації."
 
 #: src/solve-commit.cc:174
 #, c-format, boost-format
 msgid "Applying solution %s"
-msgstr "Застосування рішення %s"
+msgstr "Застосування вирішення %s"
 
 #: src/solve-commit.cc:190
 #, c-format, boost-format
@@ -6404,6 +6403,10 @@ msgid ""
 "updated by recent upgrades. They should be restarted to benefit from the "
 "latest updates. Run '%1%' to list these programs."
 msgstr ""
+"Існують запущені програми, які все ще використовують файли та бібліотеки, "
+"видалені або оновлені останніми оновленнями. Їх слід перезапустити, щоб "
+"скористатися останніми оновленнями. Запустіть «%1%», щоб отримати список цих "
+"програм."
 
 #: src/solve-commit.cc:517
 msgid "Update notifications were received from the following packages:"
@@ -6603,18 +6606,18 @@ msgstr[2] "Знайдено %1% застосовних латок:"
 #, c-format, boost-format
 msgid "%d patch locked"
 msgid_plural "%d patches locked"
-msgstr[0] "заблоковано %d виправлення"
-msgstr[1] "заблоковані %d виправлення"
-msgstr[2] "заблоковано %d виправлень"
+msgstr[0] "заблоковано %d латку"
+msgstr[1] "заблоковані %d латки"
+msgstr[2] "заблоковано %d латок"
 
 #. translator: stats summary
 #: src/update.cc:358
 #, c-format, boost-format
 msgid "%d patch optional"
 msgid_plural "%d patches optional"
-msgstr[0] "%d необов'язкове виправлення"
-msgstr[1] "%d необов'язкових виправлення"
-msgstr[2] "%d необов'язкових виправлень"
+msgstr[0] "%d необов'язкова латка"
+msgstr[1] "%d необов'язкових латки"
+msgstr[2] "%d необов'язкових латок"
 
 #. translator: Hint displayed right adjusted; %1% is a CLI option
 #. "42 patches optional                  (use --with-optional to include optional patches)"
@@ -6628,9 +6631,9 @@ msgstr "використовуйте «%1%», щоби включити необ
 #, c-format, boost-format
 msgid "%d patch needed"
 msgid_plural "%d patches needed"
-msgstr[0] "потрібно %d виправлення"
-msgstr[1] "потрібні %d виправлення"
-msgstr[2] "потрібні %d виправлень"
+msgstr[0] "потрібно %d латку"
+msgstr[1] "потрібні %d латки"
+msgstr[2] "потрібні %d латок"
 
 #. translator: stats summary
 #: src/update.cc:374
@@ -6737,45 +6740,46 @@ msgstr "Неможливо започаткувати аналізатор фа�
 #: src/utils/Augeas.cc:510
 #, boost-format
 msgid "Malformed option name '%1%'."
-msgstr ""
+msgstr "Спотворене ім'я параметру «%1%»."
 
 #: src/utils/Augeas.cc:522
 msgid "Could not save the config file."
-msgstr ""
+msgstr "Не вдалося зберегти файл налаштувань."
 
 #: src/utils/Augeas.cc:564
 #, boost-format
 msgid "Config file '%1%' exists but is not a file."
-msgstr ""
+msgstr "Файл налаштувань «%1%» існує але це не файл."
 
 #: src/utils/Augeas.cc:580
 msgid "Could not load the config files."
-msgstr ""
+msgstr "Не вдалося завантажити файл налаштувань."
 
 #: src/utils/Augeas.cc:606
 #, boost-format
 msgid "Config file '%1%' does not exist."
-msgstr ""
+msgstr "Файл налаштувань «%1%» не існує."
 
 #. translator: %1% is the path to a config file, %2% is the name of an options inside the file
 #: src/utils/Augeas.cc:637
 #, boost-format
 msgid "%1%: Option '%2%' is defined multiple times. Using the last one."
 msgstr ""
+"%1%: Параметр «%2%» визначено декілька разів. Використовується останній."
 
 #: src/utils/Augeas.cc:658
 msgid "No config file is in use."
-msgstr ""
+msgstr "Не використовується файл налаштувань."
 
 #: src/utils/flags/exceptions.cc:22
 #, boost-format
 msgid "The flag %1% is not known."
-msgstr ""
+msgstr "Невідомий прапорець %1%."
 
 #: src/utils/flags/exceptions.cc:28
 #, boost-format
 msgid "The flag %1% is not compatible with argument %2% (%3%)."
-msgstr ""
+msgstr "Прапорець %1% не сумісний з аргументом %2% (%3%)."
 
 #: src/utils/flags/exceptions.cc:34
 #, boost-format
@@ -6785,21 +6789,21 @@ msgstr "Прапорець %1% вимагає аргументу."
 #: src/utils/flags/exceptions.cc:40
 #, boost-format
 msgid "The flag %1% can only be used once."
-msgstr ""
+msgstr "Прапорець %1% може бути використано лише один раз."
 
 #: src/utils/flags/exceptions.cc:46
 #, c-format, boost-format
 msgid "%s used together with %s, which contradict each other."
-msgstr ""
+msgstr "%s та %s що суперечать одне одному, використано разом."
 
 #: src/utils/flags/flagtypes.cc:24
 msgid "Unknown package type"
-msgstr ""
+msgstr "Невідомий тип пакунку"
 
 #: src/utils/flags/flagtypes.cc:100
 #, boost-format
 msgid "The flag '%1%' can only be used a maximum of %2% times."
-msgstr ""
+msgstr "Прапорець «%1%» можна використати лише %2% рази."
 
 #: src/utils/flags/flagtypes.cc:195
 #, c-format, boost-format
@@ -6812,12 +6816,12 @@ msgstr ""
 
 #: src/utils/flags/flagtypes.cc:235
 msgid "Out of range"
-msgstr ""
+msgstr "Поза межами"
 
 #: src/utils/flags/flagtypes.cc:237
 #, boost-format
 msgid "Unknown error while assigning the value %1% to flag %2%."
-msgstr ""
+msgstr "Невідома помилка під час призначення значення %1% прапорцю %2%."
 
 #. For '-garbage' argument, with 'a', 'b', and 'e' as known options,
 #. getopt_long reports 'a', 'b', and 'e' as known options.
@@ -6889,6 +6893,8 @@ msgid ""
 "Abbreviated commandline options will not be supported in future versions. "
 "Please use %2% instead of %1% ."
 msgstr ""
+"Скорочені параметри командного рядка не підтримуватимуться в наступних "
+"версіях. Будь ласка, використовуйте %2% замість %1%."
 
 #. translators: %s is "help" or "zypper help" depending on whether
 #. zypper shell is running or not
@@ -6944,9 +6950,9 @@ msgstr[2] "продуктів"
 #: src/utils/misc.cc:99
 msgid "patch"
 msgid_plural "patches"
-msgstr[0] "виправлення"
-msgstr[1] "виправлення"
-msgstr[2] "виправлень"
+msgstr[0] "латка"
+msgstr[1] "латки"
+msgstr[2] "латок"
 
 #: src/utils/misc.cc:101
 msgid "srcpackage"
@@ -7005,16 +7011,16 @@ msgstr "невизначено"
 #. translator: patch status
 #: src/utils/misc.cc:120
 msgid "retracted"
-msgstr ""
+msgstr "відкликаний"
 
 #: src/utils/misc.cc:329 src/utils/misc.cc:371
 msgid "Since"
-msgstr ""
+msgstr "Відтоді"
 
 #. << _("Repository")
 #: src/utils/misc.cc:364
 msgid "Issue"
-msgstr "Питання"
+msgstr "Проблема"
 
 #: src/utils/misc.cc:365
 msgid "No."
@@ -7022,7 +7028,7 @@ msgstr "No."
 
 #: src/utils/misc.cc:366
 msgid "Patch"
-msgstr "Виправлення"
+msgstr "Латка"
 
 #: src/utils/misc.cc:444
 msgid "Specified local path does not exist or is not accessible."
@@ -7132,11 +7138,11 @@ msgstr "Повторна спроба…"
 
 #: src/utils/prompt.cc:321
 msgid "always"
-msgstr ""
+msgstr "завжди"
 
 #: src/utils/prompt.cc:321
 msgid "never"
-msgstr ""
+msgstr "ніколи"
 
 #: src/utils/prompt.cc:367
 msgid "Cannot read input: bad stream or EOF."
@@ -7159,7 +7165,7 @@ msgstr "Нечинна відповідь «%s»."
 #: src/utils/prompt.cc:410
 #, c-format, boost-format
 msgid "Ambiguous answer '%s'."
-msgstr ""
+msgstr "Неоднозначна відповідь «%s»."
 
 #. translators: the %s are: 'y', 'yes' (translated), 'n', and 'no' (translated).
 #: src/utils/prompt.cc:418
@@ -7172,6 +7178,8 @@ msgid ""
 "If nothing else works enter '#1' to select the 1st option, '#2' for the 2nd "
 "one, ..."
 msgstr ""
+"Якщо нічого не працює введіть «#1» для першого варіанту, «#2» для другого "
+"ітд.."
 
 #~ msgid "ping [OPTIONS]"
 #~ msgstr "ping [параметри]"
