@@ -14,23 +14,23 @@ msgstr ""
 "Project-Id-Version: zypp.uk\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-12-05 14:22+0100\n"
-"PO-Revision-Date: 2018-04-14 04:38+0000\n"
-"Last-Translator: Andriy Bandura <andriykopanytsia@gmail.com>\n"
+"PO-Revision-Date: 2020-06-29 19:45+0000\n"
+"Last-Translator: Lesath <4lesath@gmail.com>\n"
 "Language-Team: Ukrainian <https://l10n.opensuse.org/projects/libzypp/master/"
 "uk/>\n"
 "Language: uk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 2.18\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<="
+"4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Generator: Weblate 3.6.1\n"
 
 #. dubious: Throw on malformed known types, otherwise log a warning.
 #: zypp/CheckSum.cc:136
 #, c-format, boost-format
 msgid "Dubious type '%s' for %u byte checksum '%s'"
-msgstr "Сумнівний тип \"%s\" для %u байтової контрольної суми \"%s\""
+msgstr "Сумнівний тип «%s» для %u байтової контрольної суми «%s»"
 
 #: zypp/CountryCode.cc:50
 msgid "Unknown country: "
@@ -60,7 +60,7 @@ msgstr "Афганістан"
 #. :AFG:004:
 #: zypp/CountryCode.cc:161
 msgid "Antigua and Barbuda"
-msgstr "Тринідад та Тобаго"
+msgstr "Антигуа і Барбуда"
 
 #. :ATG:028:
 #: zypp/CountryCode.cc:162
@@ -77,14 +77,14 @@ msgstr "Албанія"
 #. :ALB:008:
 #: zypp/CountryCode.cc:164
 msgid "Armenia"
-msgstr "Аргентина"
+msgstr "Вірменія"
 
 # AN
 # fuzzy
 #. :ARM:051:
 #: zypp/CountryCode.cc:165
 msgid "Netherlands Antilles"
-msgstr "Голландія"
+msgstr "Нідерландські Антильські острови"
 
 #. :ANT:530:
 #: zypp/CountryCode.cc:166
@@ -106,7 +106,7 @@ msgstr "Аргентина"
 #. :ARG:032:
 #: zypp/CountryCode.cc:169
 msgid "American Samoa"
-msgstr "Африка, північ"
+msgstr "Американське Самоа"
 
 #. :ASM:016:
 #: zypp/CountryCode.cc:170
@@ -160,7 +160,7 @@ msgstr "Бельгія"
 #. :BEL:056:
 #: zypp/CountryCode.cc:179
 msgid "Burkina Faso"
-msgstr "Буркіна Фасо"
+msgstr "Буркіна-Фасо"
 
 #. :BFA:854:
 #: zypp/CountryCode.cc:180
@@ -172,7 +172,7 @@ msgstr "Болгарія"
 #. :BGR:100:
 #: zypp/CountryCode.cc:181
 msgid "Bahrain"
-msgstr "Бразилія"
+msgstr "Бахрейн"
 
 #. :BHR:048:
 #: zypp/CountryCode.cc:182
@@ -210,7 +210,7 @@ msgstr "Бразилія"
 #. :BRA:076:
 #: zypp/CountryCode.cc:188
 msgid "Bahamas"
-msgstr "Панама"
+msgstr "Багамські острови"
 
 # BH
 # fuzzy
@@ -239,7 +239,7 @@ msgstr "Білорусь"
 #. :BLR:112:
 #: zypp/CountryCode.cc:193
 msgid "Belize"
-msgstr "Бельгія"
+msgstr "Беліз"
 
 #. :BLZ:084:
 #: zypp/CountryCode.cc:194
@@ -315,7 +315,7 @@ msgstr "Куба"
 #. :CUB:192:
 #: zypp/CountryCode.cc:208
 msgid "Cape Verde"
-msgstr "Капо Верде"
+msgstr "Кабо-Верде"
 
 #. :CPV:132:
 #: zypp/CountryCode.cc:209
@@ -352,7 +352,7 @@ msgstr "Данія"
 #. :DNK:208:
 #: zypp/CountryCode.cc:215
 msgid "Dominica"
-msgstr "Румунія"
+msgstr "Домініка"
 
 #. :DMA:212:
 #: zypp/CountryCode.cc:216
@@ -399,7 +399,7 @@ msgstr "Іспанія"
 #. :ESP:724:
 #: zypp/CountryCode.cc:224
 msgid "Ethiopia"
-msgstr "Естонія"
+msgstr "Ефіопія"
 
 #. :ETH:231:
 #: zypp/CountryCode.cc:225
@@ -446,7 +446,7 @@ msgstr "Габон"
 #. :GAB:266:
 #: zypp/CountryCode.cc:233
 msgid "United Kingdom"
-msgstr "Об'єднане Королівство"
+msgstr "Сполучене Королівство"
 
 # GD
 #. :GBR:826:
@@ -473,7 +473,7 @@ msgstr "Гернсі"
 # fuzzy
 #: zypp/CountryCode.cc:238
 msgid "Ghana"
-msgstr "Китай"
+msgstr "Гана"
 
 #. :GHA:288:
 #: zypp/CountryCode.cc:239
@@ -490,7 +490,7 @@ msgstr "Гренландія"
 #. :GRL:304:
 #: zypp/CountryCode.cc:241
 msgid "Gambia"
-msgstr "Ямайка"
+msgstr "Гамбія"
 
 # GU
 # fuzzy
@@ -529,7 +529,7 @@ msgstr "Гватемала"
 #. :GTM:320:
 #: zypp/CountryCode.cc:248
 msgid "Guam"
-msgstr "Гватемала"
+msgstr "Гуам"
 
 #. :GUM:316:
 #: zypp/CountryCode.cc:249
@@ -546,7 +546,7 @@ msgstr "Гвіана"
 #. :GUY:328:
 #: zypp/CountryCode.cc:251
 msgid "Hong Kong"
-msgstr "Гонг Конг"
+msgstr "Гонконг"
 
 #. :HKG:344:
 #: zypp/CountryCode.cc:252
@@ -612,7 +612,7 @@ msgstr "Ірак"
 #. :IRQ:368:
 #: zypp/CountryCode.cc:264
 msgid "Iran"
-msgstr "Ізраїль"
+msgstr "Іран"
 
 #. :IRN:364:
 #: zypp/CountryCode.cc:265
@@ -662,7 +662,7 @@ msgstr "Киргизстан"
 #. :KGZ:417:
 #: zypp/CountryCode.cc:273
 msgid "Cambodia"
-msgstr "Колумбія"
+msgstr "Камбоджа"
 
 #. :KHM:116:
 #: zypp/CountryCode.cc:274
@@ -706,7 +706,7 @@ msgstr "Кайманові острови"
 #. :CYM:136:
 #: zypp/CountryCode.cc:281
 msgid "Kazakhstan"
-msgstr "Тайвань"
+msgstr "Казахстан"
 
 #. :KAZ:398:
 #: zypp/CountryCode.cc:282
@@ -740,7 +740,7 @@ msgstr "Шрі-Ланка"
 #. :LKA:144:
 #: zypp/CountryCode.cc:287
 msgid "Liberia"
-msgstr "Сербія"
+msgstr "Ліберія"
 
 #. :LBR:430:
 #: zypp/CountryCode.cc:288
@@ -808,21 +808,21 @@ msgstr "Маршаллові острови"
 #. :MHL:584:
 #: zypp/CountryCode.cc:300
 msgid "Macedonia"
-msgstr "Македонія"
+msgstr "Північна Македонія"
 
 # ML
 # fuzzy
 #. :MKD:807:
 #: zypp/CountryCode.cc:301
 msgid "Mali"
-msgstr "Мальта"
+msgstr "Малі"
 
 # MM
 # fuzzy
 #. :MLI:466:
 #: zypp/CountryCode.cc:302
 msgid "Myanmar"
-msgstr "Панама"
+msgstr "М’янма"
 
 #. :MMR:104:
 #: zypp/CountryCode.cc:303
@@ -834,7 +834,7 @@ msgstr "Монголія"
 #. :MNG:496:
 #: zypp/CountryCode.cc:304
 msgid "Macao"
-msgstr "Мальта"
+msgstr "Аоминь"
 
 #. :MAC:446:
 #: zypp/CountryCode.cc:305
@@ -853,7 +853,7 @@ msgstr "Мартиніка"
 #. :MTQ:474:
 #: zypp/CountryCode.cc:307
 msgid "Mauritania"
-msgstr "Литва"
+msgstr "Маврітанія"
 
 #. :MRT:478:
 #: zypp/CountryCode.cc:308
@@ -870,21 +870,21 @@ msgstr "Мальта"
 #. :MLT:470:
 #: zypp/CountryCode.cc:310
 msgid "Mauritius"
-msgstr "Литва"
+msgstr "Маврікій"
 
 # MV
 # fuzzy
 #. :MUS:480:
 #: zypp/CountryCode.cc:311
 msgid "Maldives"
-msgstr "Мальта"
+msgstr "Мальдіви"
 
 # MW
 # fuzzy
 #. :MDV:462:
 #: zypp/CountryCode.cc:312
 msgid "Malawi"
-msgstr "Мальта"
+msgstr "Малаві"
 
 #. :MWI:454:
 #: zypp/CountryCode.cc:313
@@ -913,7 +913,7 @@ msgstr "Намібія"
 #. :NAM:516:
 #: zypp/CountryCode.cc:317
 msgid "New Caledonia"
-msgstr "Македонія"
+msgstr "Нова Каледонія"
 
 # NG
 # fuzzy
@@ -1023,7 +1023,7 @@ msgstr "Піткерн"
 #. :PCN:612:
 #: zypp/CountryCode.cc:338
 msgid "Puerto Rico"
-msgstr "Пуерто ріко"
+msgstr "Пуерто-Ріко"
 
 #. :PRI:630:
 #: zypp/CountryCode.cc:339
@@ -1040,7 +1040,7 @@ msgstr "Португалія"
 #. :PRT:620:
 #: zypp/CountryCode.cc:341
 msgid "Palau"
-msgstr "Парагвай"
+msgstr "Палау"
 
 #. :PLW:585:
 #: zypp/CountryCode.cc:342
@@ -1076,7 +1076,7 @@ msgstr "Російська Федерація"
 #. :RUS:643:
 #: zypp/CountryCode.cc:348
 msgid "Rwanda"
-msgstr "Канада"
+msgstr "Руанда"
 
 #. :RWA:646:
 #: zypp/CountryCode.cc:349
@@ -1126,7 +1126,7 @@ msgstr "Свальбард і Ян Маєн"
 #. :SJM:744:
 #: zypp/CountryCode.cc:358
 msgid "Slovakia"
-msgstr "Словацька"
+msgstr "Словаччина"
 
 #. :SVK:703:
 #: zypp/CountryCode.cc:359
@@ -1148,7 +1148,7 @@ msgstr "Сенегал"
 #. :SEN:686:
 #: zypp/CountryCode.cc:362
 msgid "Somalia"
-msgstr "Румунія"
+msgstr "Сомалі"
 
 #. :SOM:706:
 #: zypp/CountryCode.cc:363
@@ -1170,14 +1170,14 @@ msgstr "Ель Сальвадор"
 #. :SLV:222:
 #: zypp/CountryCode.cc:366
 msgid "Syria"
-msgstr "Сербія"
+msgstr "Сирія"
 
 # SZ
 # fuzzy
 #. :SYR:760:
 #: zypp/CountryCode.cc:367
 msgid "Swaziland"
-msgstr "Таїланд"
+msgstr "Есватіні"
 
 #. :SWZ:748:
 #: zypp/CountryCode.cc:368
@@ -1189,7 +1189,7 @@ msgstr "Острови Теркс і Кайкос"
 #. :TCA:796:
 #: zypp/CountryCode.cc:369
 msgid "Chad"
-msgstr "Китай"
+msgstr "Чад"
 
 #. :TCD:148:
 #: zypp/CountryCode.cc:370
@@ -1274,14 +1274,14 @@ msgstr "Україна"
 #. :UKR:804:
 #: zypp/CountryCode.cc:385
 msgid "Uganda"
-msgstr "Канада"
+msgstr "Уганда"
 
 # UM
 # fuzzy
 #. :UGA:800:
 #: zypp/CountryCode.cc:386
 msgid "United States Minor Outlying Islands"
-msgstr "США"
+msgstr "Віддалені острови США"
 
 # US
 # fuzzy
@@ -1303,7 +1303,7 @@ msgstr "Узбекистан"
 #. :UZB:860:
 #: zypp/CountryCode.cc:390
 msgid "Holy See (Vatican City State)"
-msgstr "Святий Престіл (Ватикан, місто-держава)"
+msgstr "Святий Престол (Ватикан, місто-держава)"
 
 # VC
 # fuzzy
@@ -1336,7 +1336,7 @@ msgstr "Віргінські острови, США"
 #. :VIR:850:
 #: zypp/CountryCode.cc:395
 msgid "Vietnam"
-msgstr "В'єтнамська"
+msgstr "В'єтнам"
 
 #. :VNM:704:
 #: zypp/CountryCode.cc:396
@@ -1375,7 +1375,7 @@ msgstr "Південна Африка"
 #. :ZAF:710:
 #: zypp/CountryCode.cc:402
 msgid "Zambia"
-msgstr "Ямайка"
+msgstr "Замбія"
 
 #. :ZMB:894:
 #: zypp/CountryCode.cc:403
@@ -1384,7 +1384,7 @@ msgstr "Зімбабве"
 
 #: zypp/Dep.cc:96
 msgid "Provides"
-msgstr "Надає"
+msgstr "Ознаки"
 
 #: zypp/Dep.cc:97
 msgid "Prerequires"
@@ -1431,24 +1431,23 @@ msgstr "Неможливо відкрити канал (%s)."
 #: zypp/ExternalProgram.cc:362
 #, c-format, boost-format
 msgid "Can't chroot to '%s' (%s)."
-msgstr "Не вдалося створити chroot для \"%s\" (%s)."
+msgstr "Не вдалося створити chroot для «%s» (%s)."
 
 #: zypp/ExternalProgram.cc:372
 #, c-format, boost-format
 msgid "Can't chdir to '%s' inside chroot '%s' (%s)."
-msgstr ""
-"Неможливо змінити каталог на '%s' всередині середовища chroot '%s' (%s)."
+msgstr "Неможливо зробити chdir «%s» всередині chroot «%s» (%s)."
 
 #: zypp/ExternalProgram.cc:373
 #, c-format, boost-format
 msgid "Can't chdir to '%s' (%s)."
-msgstr "Неможливо змінити каталог на '%s' (%s)."
+msgstr "Неможливо змінити директорію на «%s» (%s)."
 
 #. don't want to get here
 #: zypp/ExternalProgram.cc:385
 #, c-format, boost-format
 msgid "Can't exec '%s' (%s)."
-msgstr "Не вдалося виконати \"%s\" (%s)."
+msgstr "Не вдалося виконати «%s» (%s)."
 
 #: zypp/ExternalProgram.cc:393
 #, c-format, boost-format
@@ -1463,7 +1462,7 @@ msgstr "Команда завершила роботу зі станом %d."
 #: zypp/ExternalProgram.cc:542
 #, c-format, boost-format
 msgid "Command was killed by signal %d (%s)."
-msgstr "Команду було зупинено за сигналом %d (%s)."
+msgstr "Команду було вбито за сигналом %d (%s)."
 
 #: zypp/ExternalProgram.cc:547
 msgid "Command exited with unknown error."
@@ -1486,7 +1485,7 @@ msgstr "Не вдалось вилучити ключ."
 #: zypp/KeyRing.cc:609
 #, c-format, boost-format
 msgid "Signature file %s not found"
-msgstr "Файл підпису \"%s\" не знайдено"
+msgstr "Файл підпису «%s» не знайдено"
 
 #: zypp/LanguageCode.cc:49
 msgid "Unknown language: "
@@ -1590,7 +1589,7 @@ msgstr "Мови апачі"
 #. language code: ara ar
 #: zypp/LanguageCode.cc:201
 msgid "Arabic"
-msgstr "Арабський"
+msgstr "Арабська"
 
 #. language code: arc
 #: zypp/LanguageCode.cc:203
@@ -1629,7 +1628,7 @@ msgstr "Штучні (інші)"
 #. language code: arw
 #: zypp/LanguageCode.cc:217
 msgid "Arawak"
-msgstr "Аравак"
+msgstr "Аравацька"
 
 #. language code: asm as
 #: zypp/LanguageCode.cc:219
@@ -1659,7 +1658,7 @@ msgstr "Аварська"
 #. language code: ave ae
 #: zypp/LanguageCode.cc:229
 msgid "Avestan"
-msgstr "Авестан"
+msgstr "Авестійська"
 
 # SZ
 # fuzzy
@@ -3956,32 +3955,32 @@ msgstr[2] "(закінчується через %d днів)"
 #: zypp/RepoInfo.cc:517
 #, boost-format
 msgid "Looking for gpg key ID %1% in cache %2%."
-msgstr ""
+msgstr "Пошук ID ключа для gpg %1% у кеші %2%."
 
 #. translator: %1% is a gpg key ID like 3DBDC284
 #. %2% is a repositories name
 #: zypp/RepoInfo.cc:545
 #, boost-format
 msgid "Looking for gpg key ID %1% in repository %2%."
-msgstr ""
+msgstr "Пошук ID ключа для gpg %1% у сховищі %2%."
 
 #. translator: %1% is a repositories name
 #: zypp/RepoInfo.cc:569
 #, boost-format
 msgid "Repository %1% does not define additional 'gpgkey=' URLs."
-msgstr ""
+msgstr "Сховище %1% не визначає додаткові мережеві адреси для «gpgkey=»."
 
 #: zypp/RepoManager.cc:312
 #, boost-format
 msgid "Cannot read repo directory '%1%': Permission denied"
-msgstr "Неможливо прочитати каталог сховища '%1%': Доступ заборонений"
+msgstr "Неможливо прочитати директорію сховища '%1%': Доступ заборонено"
 
 #. TranslatorExplanation '%s' is a pathname
 #: zypp/RepoManager.cc:320 zypp/RepoManager.cc:783 zypp/RepoManager.cc:1536
 #: zypp/repo/PluginServices.cc:49
 #, c-format, boost-format
 msgid "Failed to read directory '%s'"
-msgstr "Не вдалось прочитати каталог «%s»"
+msgstr "Не вдалось прочитати директорію «%s»"
 
 #: zypp/RepoManager.cc:330
 #, boost-format
@@ -4026,12 +4025,12 @@ msgstr "Неможливо створити %s"
 
 #: zypp/RepoManager.cc:1148
 msgid "Can't create metadata cache directory."
-msgstr "Неможливо створити каталог кешу метаданих."
+msgstr "Неможливо створити директорію кешу метаданих."
 
 #: zypp/RepoManager.cc:1294
 #, c-format, boost-format
 msgid "Building repository '%s' cache"
-msgstr "Створення кешу сховища \"%s\""
+msgstr "Створення кешу сховища «%s»"
 
 #: zypp/RepoManager.cc:1314
 #, c-format, boost-format
@@ -4067,7 +4066,7 @@ msgstr "Невідома помилка читання з «%s»"
 #: zypp/RepoManager.cc:1618
 #, c-format, boost-format
 msgid "Adding repository '%s'"
-msgstr "Додавання сховища \"%s\""
+msgstr "Додавання сховища «%s»"
 
 #. TranslatorExplanation '%s' is an URL
 #: zypp/RepoManager.cc:1706
@@ -4078,7 +4077,7 @@ msgstr "Не чинна назва файла сховища «%s»"
 #: zypp/RepoManager.cc:1747
 #, c-format, boost-format
 msgid "Removing repository '%s'"
-msgstr "Вилучення сховища \"%s\""
+msgstr "Вилучення сховища «%s»"
 
 #: zypp/RepoManager.cc:1766 zypp/RepoManager.cc:1844
 msgid "Can't figure out where the repo is stored."
@@ -4101,7 +4100,7 @@ msgstr "Не чинний рядок запиту URL LDAP"
 #: zypp/Url.cc:153
 #, c-format, boost-format
 msgid "Invalid LDAP URL query parameter '%s'"
-msgstr "Не чинний параметр запиту \"%s\" URL LDAP"
+msgstr "Не чинний параметр запиту «%s» URL LDAP"
 
 #: zypp/Url.cc:301
 msgid "Unable to clone Url object"
@@ -4141,7 +4140,7 @@ msgstr "Потрібний додатковий контракт клієнта"
 
 #: zypp/VendorSupportOptions.cc:31
 msgid "invalid"
-msgstr "нечинний"
+msgstr "недійсний"
 
 #: zypp/VendorSupportOptions.cc:39
 msgid "The level of support is unspecified"
@@ -4218,24 +4217,26 @@ msgstr "Невідомий режим збігу «%s» для шаблона «
 #: zypp/base/StrMatcher.cc:157
 #, c-format, boost-format
 msgid "Invalid regular expression '%s': regcomp returned %d"
-msgstr "Некоректний формальний вираз \"%s\": regcomp повернула %d"
+msgstr "Некоректний формальний вираз «%s»: regcomp повернула %d"
 
 #: zypp/base/StrMatcher.cc:158
 #, c-format, boost-format
 msgid "Invalid regular expression '%s'"
-msgstr "Нечинний формальний вираз «%s»"
+msgstr "Недійсний формальний вираз «%s»"
 
 #. !\todo add comma to the message for the next release
 #: zypp/media/MediaCIFS.cc:427 zypp/media/MediaCurl.cc:1738
 #, c-format, boost-format
 msgid "Authentication required for '%s'"
-msgstr "Потрібна автентифікація для \"%s\""
+msgstr "Потрібна автентифікація для «%s»"
 
 #: zypp/media/MediaCurl.cc:1111
 msgid ""
 "Visit the SUSE Customer Center to check whether your registration is valid "
 "and has not expired."
 msgstr ""
+"Відвідайте Центр клієнтів SUSE, щоб перевірити, чи ваша реєстрація дійсна та "
+"чи не закінчився термін дії."
 
 #: zypp/media/MediaCurl.cc:1113
 msgid ""
@@ -4262,17 +4263,17 @@ msgstr "Некоректна назва файла: %s"
 #: zypp/media/MediaException.cc:53
 #, c-format, boost-format
 msgid "Medium not opened when trying to perform action '%s'."
-msgstr "Носій не було відкрито під час спроби виконання дії \"%s\"."
+msgstr "Носій не було відкрито під час спроби виконання дії «%s»."
 
 #: zypp/media/MediaException.cc:58
 #, c-format, boost-format
 msgid "File '%s' not found on medium '%s'"
-msgstr "Файл \"%s\" не знайдено на носії \"%s\""
+msgstr "Файл «%s» не знайдено на носії «%s»"
 
 #: zypp/media/MediaException.cc:63
 #, c-format, boost-format
 msgid "Cannot write file '%s'."
-msgstr "Неможливо записати у файл \"%s\"."
+msgstr "Неможливо записати у файл «%s»."
 
 #: zypp/media/MediaException.cc:68
 msgid "Medium not attached"
@@ -4286,22 +4287,22 @@ msgstr "Некоректна точка з’єднання носія"
 #: zypp/media/MediaException.cc:79
 #, c-format, boost-format
 msgid "Download (curl) initialization failed for '%s'"
-msgstr "Започаткування завантаження (curl) зазнало невдачі для \"%s\""
+msgstr "Започаткування завантаження (curl) зазнало невдачі для «%s»"
 
 #: zypp/media/MediaException.cc:84
 #, c-format, boost-format
 msgid "System exception '%s' on medium '%s'."
-msgstr "Системне виключення \"%s\" на носії \"%s\"."
+msgstr "Системне виключення «%s» на носії «%s»."
 
 #: zypp/media/MediaException.cc:89
 #, c-format, boost-format
 msgid "Path '%s' on medium '%s' is not a file."
-msgstr "Шлях \"%s\" на носії \"%s\" не є файлом."
+msgstr "Шлях «%s» на носії «%s» не є файлом."
 
 #: zypp/media/MediaException.cc:94
 #, c-format, boost-format
 msgid "Path '%s' on medium '%s' is not a directory."
-msgstr "Шлях \"%s\" на носії \"%s\" не є каталогом."
+msgstr "Шлях «%s» на носії «%s» не є директорією."
 
 #: zypp/media/MediaException.cc:101
 msgid "Malformed URI"
@@ -4322,7 +4323,7 @@ msgstr "Порожнє місце призначення за URI"
 #: zypp/media/MediaException.cc:126
 #, c-format, boost-format
 msgid "Unsupported URI scheme in '%s'."
-msgstr "Непідтримувана схема URI у \"%s\"."
+msgstr "Непідтримувана схема URI у «%s»."
 
 #: zypp/media/MediaException.cc:131
 msgid "Operation not supported by medium"
@@ -4335,7 +4336,7 @@ msgid ""
 "Error code: %s\n"
 "Error message: %s\n"
 msgstr ""
-"Помилка завантаження (curl) для \"%s\":\n"
+"Помилка завантаження (curl) для «%s»:\n"
 "Код помилки: %s\n"
 "Повідомлення про помилку: %s\n"
 
@@ -4344,18 +4345,17 @@ msgstr ""
 #, c-format, boost-format
 msgid "Error occurred while setting download (curl) options for '%s':"
 msgstr ""
-"Під час встановлення параметрів завантаження (curl) для \"%s\" сталася "
-"помилка:"
+"Під час встановлення параметрів завантаження (curl) для «%s» сталася помилка:"
 
 #: zypp/media/MediaException.cc:153
 #, c-format, boost-format
 msgid "Media source '%s' does not contain the desired medium"
-msgstr "Пристрій носія \"%s\" не містить бажаного носія"
+msgstr "Пристрій носія «%s» не містить бажаного носія"
 
 #: zypp/media/MediaException.cc:158
 #, c-format, boost-format
 msgid "Medium '%s' is in use by another instance"
-msgstr "Носій \"%s\" використовується іншою копією програми"
+msgstr "Носій «%s» використовується іншою копією програми"
 
 #: zypp/media/MediaException.cc:164
 msgid "Cannot eject any media"
@@ -4364,22 +4364,22 @@ msgstr "Не вдається виштовхнути жодного носія"
 #: zypp/media/MediaException.cc:166
 #, c-format, boost-format
 msgid "Cannot eject media '%s'"
-msgstr "Не вдається виштовхнути носія \"%s\""
+msgstr "Не вдається виштовхнути носія «%s»"
 
 #: zypp/media/MediaException.cc:181
 #, c-format, boost-format
 msgid "Permission to access '%s' denied."
-msgstr "Дозвіл на доступ до \"%s\" заборонено."
+msgstr "Дозвіл на доступ до «%s» заборонено."
 
 #: zypp/media/MediaException.cc:189
 #, c-format, boost-format
 msgid "Timeout exceeded when accessing '%s'."
-msgstr "Перевищено час очікування при спробі доступу до '%s'."
+msgstr "Перевищено час очікування при спробі доступу до «%s»."
 
 #: zypp/media/MediaException.cc:197
 #, c-format, boost-format
 msgid "Downloaded data exceeded the expected filesize '%s' of '%s'."
-msgstr ""
+msgstr "Завантажені дані перевищили очікуваний розмір файлу «%s» у «%s»."
 
 #: zypp/media/MediaException.cc:205
 #, c-format, boost-format
@@ -4391,20 +4391,20 @@ msgstr "Адреса «%s» тимчасово недоступна."
 msgid " SSL certificate problem, verify that the CA cert is OK for '%s'."
 msgstr ""
 " Проблема з сертифікатом SSL, перевірте чи все гаразд з сертифікатом CA для "
-"\"%s\"."
+"«%s»."
 
 #: zypp/media/MediaHandler.cc:370
 msgid ""
 "Create attach point: Can't find a writable directory to create an attach "
 "point"
 msgstr ""
-"Створюємо точку монтування: неможливо знайти каталог з можливістю запису для "
-"створення точки монтування"
+"Створюємо точку монтування: неможливо знайти директорію з можливістю запису "
+"для створення точки монтування"
 
 #: zypp/media/MediaUserAuth.cc:136
 #, c-format, boost-format
 msgid "Unsupported HTTP authentication method '%s'"
-msgstr "Метод автентифікації HTTP \"%s\", який не підтримується"
+msgstr "Метод автентифікації HTTP «%s», який не підтримується"
 
 #: zypp/misc/CheckAccessDeleted.cc:444
 msgid "Please install package 'lsof' first."
@@ -4454,7 +4454,7 @@ msgstr "Модуль служби не підтримує зміну атриб�
 #: zypp/repo/RepoProvideFile.cc:261
 #, c-format, boost-format
 msgid "Can't provide file '%s' from repository '%s'"
-msgstr "Неможливо надати файл \"%s\" зі сховища \"%s\""
+msgstr "Неможливо надати файл «%s» зі сховища «%s»"
 
 #: zypp/repo/RepoProvideFile.cc:267
 msgid "No url in repository."
@@ -4795,19 +4795,19 @@ msgstr "Встановити %s з невключеного сховища"
 #: zypp/solver/detail/SATResolver.cc:1386
 #, boost-format
 msgid "install %1% although it has been retracted"
-msgstr ""
+msgstr "встановити %1% хоч він і був відкладений"
 
 #. translator: %1% is a package name
 #: zypp/solver/detail/SATResolver.cc:1389
 #, boost-format
 msgid "allow to install the PTF %1%"
-msgstr ""
+msgstr "дозволити встановити PTF %1%"
 
 #. translator: %1% is a package name
 #: zypp/solver/detail/SATResolver.cc:1392
 #, boost-format
 msgid "install %1% although it is blacklisted"
-msgstr ""
+msgstr "встановити %1% хоч він і був у чорному списку"
 
 #: zypp/solver/detail/SATResolver.cc:1412
 #, c-format, boost-format
@@ -5000,7 +5000,7 @@ msgstr "Схема Url не дозволяє %s"
 #: zypp/url/UrlBase.cc:173
 #, c-format, boost-format
 msgid "Invalid %s component '%s'"
-msgstr "Не чинний %s компонент \"%s\""
+msgstr "Не чинний %s компонент «%s»"
 
 #: zypp/url/UrlBase.cc:180
 #, c-format, boost-format
@@ -5018,7 +5018,7 @@ msgstr "Схема URL - це потрібний компонент"
 #: zypp/url/UrlBase.cc:830
 #, c-format, boost-format
 msgid "Invalid Url scheme '%s'"
-msgstr "Не чинна схема URL \"%s\""
+msgstr "Не чинна схема URL «%s»"
 
 #: zypp/url/UrlBase.cc:949
 msgid "Url scheme does not allow a username"
@@ -5039,7 +5039,7 @@ msgstr "Схема URL не дозволяє компонент вузла"
 #: zypp/url/UrlBase.cc:1049
 #, c-format, boost-format
 msgid "Invalid host component '%s'"
-msgstr "Не чинний компонент вузла \"%s\""
+msgstr "Не чинний компонент вузла «%s»"
 
 #: zypp/url/UrlBase.cc:1070
 msgid "Url scheme does not allow a port"
@@ -5048,7 +5048,7 @@ msgstr "Схема URL не дозволяє порт"
 #: zypp/url/UrlBase.cc:1081
 #, c-format, boost-format
 msgid "Invalid port component '%s'"
-msgstr "Не чинний компонент порту \"%s\""
+msgstr "Не чинний компонент порту «%s»"
 
 #: zypp/url/UrlBase.cc:1098
 msgid "Url scheme requires path name"

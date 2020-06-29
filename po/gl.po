@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-12-05 14:22+0100\n"
-"PO-Revision-Date: 2019-08-26 11:51+0000\n"
+"PO-Revision-Date: 2020-06-29 19:45+0000\n"
 "Last-Translator: Manuel Vazquez <xixirei@yahoo.es>\n"
 "Language-Team: Galician <https://l10n.opensuse.org/projects/libzypp/master/"
 "gl/>\n"
@@ -4951,13 +4951,13 @@ msgstr ""
 #: zypp/solver/detail/SATResolver.cc:1389
 #, boost-format
 msgid "allow to install the PTF %1%"
-msgstr ""
+msgstr "permitir a instalación de PTF %1%"
 
 #. translator: %1% is a package name
 #: zypp/solver/detail/SATResolver.cc:1392
 #, boost-format
 msgid "install %1% although it is blacklisted"
-msgstr ""
+msgstr "instalar %1% aínda que estea na lista negra"
 
 #: zypp/solver/detail/SATResolver.cc:1412
 #, c-format, boost-format
