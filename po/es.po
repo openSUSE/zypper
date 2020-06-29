@@ -18,8 +18,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-04-12 15:27+0200\n"
-"PO-Revision-Date: 2020-05-14 23:22+0000\n"
-"Last-Translator: Ioannes Andreas <ioannes@disroot.org>\n"
+"PO-Revision-Date: 2020-05-26 14:40+0000\n"
+"Last-Translator: Adolfo Jayme Barrientos <fitoschido@gmail.com>\n"
 "Language-Team: Spanish <https://l10n.opensuse.org/projects/zypper/master/es/>"
 "\n"
 "Language: es\n"
@@ -6954,15 +6954,15 @@ msgid ""
 "Abbreviated commandline options will not be supported in future versions. "
 "Please use %2% instead of %1% ."
 msgstr ""
-"Las opciones de línea de comandos abreviadas no serán compatibles en "
-"versiones futuras. Por favor, utilice %2% en lugar de %1%."
+"Las opciones de línea de órdenes abreviadas no serán compatibles en "
+"versiones futuras. Utilice %2% en lugar de %1%."
 
 #. translators: %s is "help" or "zypper help" depending on whether
 #. zypper shell is running or not
 #: src/utils/messages.cc:141
 #, c-format, boost-format
 msgid "Type '%s' to get a list of global options and commands."
-msgstr "Escriba '%s' para obtener una lista de comandos y opciones globales."
+msgstr "Escriba «%s» para obtener una lista de órdenes y opciones globales."
 
 #. translators: %1% is the name of an (unknown) command
 #. translators: %2% something providing more info (like 'zypper help subcommand')
@@ -6973,8 +6973,8 @@ msgid ""
 "In case '%1%' is not a typo it's probably not a built-in command, but "
 "provided as a subcommand or plug-in (see '%2%')."
 msgstr ""
-"En caso de que '%1%' no sea un error tipográfico, es probable que no sea un "
-"comando integrado, sino un subcomando o un módulo auxiliar (consulte '%2%')."
+"En caso de que «%1%» no sea un error de tecleo, es probable que no sea una "
+"orden incorporada, sino una suborden o un módulo auxiliar (consulte «%2%»)."
 
 #. translators: %1% and %2% are plug-in packages which might provide it.
 #. translators: The word 'subcommand' also refers to a zypper command and should not be translated.
@@ -6985,7 +6985,7 @@ msgid ""
 "installed first. Those packages are often named '%1%' or '%2%'."
 msgstr ""
 "En este caso, es necesario instalar primero un paquete específico que "
-"proporcione el subcomando. Dichos paquetes se llaman a menudo '%1%' o '%2%'."
+"proporcione la suborden. Dichos paquetes se llaman a menudo «%1%» o «%2%»."
 
 #: src/utils/misc.cc:93
 msgid "package"
@@ -7065,7 +7065,7 @@ msgstr "sin determinar"
 #. translator: patch status
 #: src/utils/misc.cc:120
 msgid "retracted"
-msgstr "retraído"
+msgstr "retirado"
 
 #: src/utils/misc.cc:329 src/utils/misc.cc:371
 msgid "Since"
@@ -7117,7 +7117,9 @@ msgstr "El formato correcto es obs://<proyecto>/[plataforma]"
 
 #: src/utils/misc.cc:634
 msgid "Problem copying the specified RPM file to the cache directory."
-msgstr "Problema al copiar el archivo RPM especificado en el directorio caché."
+msgstr ""
+"Problema al copiar el archivo RPM especificado en el directorio de "
+"antememoria."
 
 #: src/utils/misc.cc:635
 msgid "Perhaps you are running out of disk space."
