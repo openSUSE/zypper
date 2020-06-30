@@ -77,6 +77,14 @@ namespace zypp
     inline bool regex_match( const std::string & s, const regex & regex )
     { return regex_match( s.c_str(), regex ); }
 
+    /**
+     * Replaces the matched regex with the string passed in \a replacement.
+     * If \a global is set the search continues after the first match
+     *
+     * \note Using backreferences in the replacement string is NOT supported.
+     */
+    std::string regex_substitute ( const std::string & s, const regex & regex, const std::string &replacement, bool global = true );
+
     //////////////////////////////////////////////////////////////////
     /// \class regex
     /// \brief Regular expression
@@ -91,6 +99,12 @@ namespace zypp
         icase		= REG_ICASE,	///< Do not differentiate case
         nosubs		= REG_NOSUB,	///< Support for substring addressing of matches is not required
         match_extended	= REG_EXTENDED, ///< Use POSIX Extended Regular Expression syntax when interpreting regex.
+        newline         = REG_NEWLINE   ///< Match newline
+      };
+
+      enum MatchFlags {
+        none    = 0,
+        not_bol = REG_NOTBOL ///< Do not match begin of line
       };
 
       regex();
@@ -109,6 +123,9 @@ namespace zypp
       std::string asString() const
       { return m_str; }
 
+      bool matches (const char * s, str::smatch& matches, int flags = none ) const;
+      bool matches ( const char * s ) const;
+
     public:
       /** Expert backdoor. Returns pointer to the compiled regex for direct use in regexec() */
       regex_t * get()
@@ -119,8 +136,6 @@ namespace zypp
 
     private:
       friend class smatch;
-      friend bool regex_match(const char * s, str::smatch& matches, const regex& regex);
-      friend bool regex_match(const char * s,  const regex& regex);
       std::string m_str;
       int m_flags;
       regex_t m_preg;
@@ -161,7 +176,7 @@ namespace zypp
       std::string::size_type size( unsigned i ) const;
 
       std::string match_str;
-      regmatch_t pmatch[12];
+      std::vector<regmatch_t> pmatch;
     };
 
   } // namespace str

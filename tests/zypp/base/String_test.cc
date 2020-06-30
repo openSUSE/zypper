@@ -2,6 +2,7 @@
 
 #include <zypp/base/LogTools.h>
 #include <zypp/base/String.h>
+#include <zypp/base/Regex.h>
 
 using boost::unit_test::test_suite;
 using boost::unit_test::test_case;
@@ -394,4 +395,59 @@ BOOST_AUTO_TEST_CASE(hexencode_hexdecode)
 	BOOST_CHECK_EQUAL( l, el );
      }
     }
+}
+
+BOOST_AUTO_TEST_CASE(regex_subst)
+{
+  const std::string input = "StRi_g: Hello this is a StRiNg with multiple Stri_g mentions to replace StRi_g";
+  str::regex rxexpr( "(St[rR]i[nN_]g)" );
+  BOOST_REQUIRE_EQUAL( rxexpr.get()->re_nsub, 1 );
+
+  {
+    const std::string result = str::regex_substitute( input, rxexpr, "FooBar", true );
+    BOOST_REQUIRE_EQUAL( result, "FooBar: Hello this is a FooBar with multiple FooBar mentions to replace FooBar"  );
+  }
+
+  {
+    const std::string result = str::regex_substitute( input, rxexpr, "FooBar", false );
+    BOOST_REQUIRE_EQUAL( result, "FooBar: Hello this is a StRiNg with multiple Stri_g mentions to replace StRi_g"  );
+  }
+
+  {
+    const std::string nomatch = "Text with no match";
+    const std::string result = str::regex_substitute( nomatch , rxexpr, "FooBar", false );
+    BOOST_REQUIRE_EQUAL( result, nomatch  );
+  }
+
+  {
+    const std::string input = "StRi_gString: Hello this is a StRiNg with multiple Stri_g mentions to replace StRi_g";
+    str::regex rxexpr( "(^St[rR]i[nN_]g)" );
+    const std::string result = str::regex_substitute( input, rxexpr, "FooBar", true );
+    BOOST_REQUIRE_EQUAL( result, "FooBarString: Hello this is a StRiNg with multiple Stri_g mentions to replace StRi_g"  );
+  }
+
+  {
+    const std::string input = "StRi_gString\n: Hello this is a StRiNg with multiple Stri_g mentions to replace StRi_g";
+    str::regex rxexpr( "(String$)", str::regex::match_extended | str::regex::newline );
+    const std::string result = str::regex_substitute( input, rxexpr, "FooBar", true );
+    BOOST_REQUIRE_EQUAL( result, "StRi_gFooBar\n: Hello this is a StRiNg with multiple Stri_g mentions to replace StRi_g"  );
+  }
+
+  {
+    const std::string input = "Hello StRi_gString\n: Hello.";
+    str::regex rxexpr( "((^: Hello)|(String\n))", str::regex::match_extended);
+    const std::string result = str::regex_substitute( input, rxexpr, " FooBar", true );
+    BOOST_REQUIRE_EQUAL( result, "Hello StRi_g FooBar FooBar."  );
+  }
+
+  {
+    const std::string input = "4.12.14-lp151.28.48-default";
+    const std::string flavour = str::regex_substitute( input, str::regex( ".*-", str::regex::match_extended ), "", true );
+    BOOST_REQUIRE_EQUAL( flavour, "default"  );
+    std::string version = str::regex_substitute( input, str::regex( "-[^-]*$", str::regex::match_extended ), "", true );
+    BOOST_REQUIRE_EQUAL( version, "4.12.14-lp151.28.48"  );
+    const std::string release = str::regex_substitute( version, str::regex( ".*-", str::regex::match_extended ), "", true );
+    BOOST_REQUIRE_EQUAL( release, "lp151.28.48"  );
+  }
+
 }
