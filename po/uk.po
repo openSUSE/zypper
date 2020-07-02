@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: zypper.uk\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-04-12 15:27+0200\n"
-"PO-Revision-Date: 2020-07-02 07:26+0000\n"
+"PO-Revision-Date: 2020-07-02 21:24+0000\n"
 "Last-Translator: Lesath <4lesath@gmail.com>\n"
 "Language-Team: Ukrainian <https://l10n.opensuse.org/projects/zypper/master/"
 "uk/>\n"
@@ -218,12 +218,12 @@ msgstr "Ви хочете відхилити ключ або завжди йом
 #. The answers should be lower case letters.
 #: src/callbacks/keyring.h:308
 msgid "r/t/a/"
-msgstr "в/т/п/"
+msgstr "r/t/a/"
 
 #. translators: the same as r/t/a, but without 'a'
 #: src/callbacks/keyring.h:311
 msgid "r/t"
-msgstr "в/т"
+msgstr "r/t"
 
 #. translators: r/a stands for Reject/trustAlways(import)
 #. translate to whatever is appropriate for your language
@@ -232,7 +232,7 @@ msgstr "в/т"
 #. The answers should be lower case letters.
 #: src/callbacks/keyring.h:318
 msgid "r/a/"
-msgstr "в/п/"
+msgstr "r/a/"
 
 #. translators: help text for the 'r' option in the 'r/t/a' prompt
 #: src/callbacks/keyring.h:324
@@ -2157,7 +2157,7 @@ msgstr "Новий URI"
 #. 's' stands for Disable SSL certificate authority check
 #: src/callbacks/media.cc:76
 msgid "a/r/i/u/s"
-msgstr "в/п/і/з/и"
+msgstr "a/r/i/u/s"
 
 #: src/callbacks/media.cc:78
 msgid "Disable SSL certificate authority check and continue."
@@ -2211,7 +2211,7 @@ msgstr "Повторна спроба…"
 #. 'e' stands for Eject medium
 #: src/callbacks/media.cc:168
 msgid "a/r/i/u/e"
-msgstr "а/п/і/з/н"
+msgstr "a/r/i/u/e"
 
 #: src/callbacks/media.cc:170
 msgid "Eject medium."
@@ -2235,7 +2235,7 @@ msgstr ""
 #. the 'u' reply means 'Change URI'.
 #: src/callbacks/media.cc:249
 msgid "a/r/i/u"
-msgstr "а/п/і/з"
+msgstr "a/r/i/u"
 
 #: src/callbacks/media.cc:291
 #, c-format, boost-format
@@ -2409,7 +2409,7 @@ msgstr "Замало аргументів."
 
 #: src/commands/installremove.cc:105 src/commands/installremove.cc:225
 msgid "At least one package name is required."
-msgstr "Потрібна хоча б одна назва пакунка."
+msgstr "Потрібна хоча би одна назва пакунка."
 
 #: src/commands/installremove.cc:116
 msgid "Cannot uninstall patches."
@@ -3836,7 +3836,7 @@ msgid ""
 "Invalid priority '%s'. Use a positive integer number. The greater the "
 "number, the lower the priority."
 msgstr ""
-"Нечинний пріоритет «%s». Для зазначення пріоритету використовуйте додатне "
+"Недійсний пріоритет «%s». Для зазначення пріоритету використовуйте додатне "
 "ціле число. Чим вище число, тим нижчий пріоритет."
 
 #: src/commands/reposerviceoptionsets.cc:72
@@ -5805,7 +5805,7 @@ msgstr "Для цього сховища немає псевдоніму."
 #: src/repos.cc:389
 #, c-format, boost-format
 msgid "Repository '%s' is invalid."
-msgstr "Сховище «%s» — нечинне."
+msgstr "Сховище «%s» – недійсне."
 
 #: src/repos.cc:390
 msgid ""
@@ -5837,10 +5837,10 @@ msgid ""
 "report by following instructions at http://en.opensuse.org/Zypper/"
 "Troubleshooting"
 msgstr ""
-"Це може трапитись через нечинні метадані в сховищі або через помилку в "
+"Це може трапитись через недійсні метадані в сховищі або через помилку в "
 "аналізаторі метаданих. В останньому випадку або, якщо ви непевні, будь "
-"ласка, надішліть звіт про помилку згідно до вказівок на сторінці http://en."
-"opensuse.org/Zypper/Troubleshooting"
+"ласка, надішліть звіт про помилку згідно до вказівок на сторінці "
+"http://en.opensuse.org/Zypper/Troubleshooting"
 
 #: src/repos.cc:451
 #, c-format, boost-format
@@ -5964,12 +5964,12 @@ msgstr "Всі сховища було очищено."
 #: src/repos.cc:1174
 msgid "This is a changeable read-only media (CD/DVD), disabling autorefresh."
 msgstr ""
-"Це змінний носій тільки для читання (КД/DVD), автооновлення буде вимкнено."
+"Це змінний носій тільки для читання (CD/DVD), автооновлення буде вимкнено."
 
 #: src/repos.cc:1195
 #, c-format, boost-format
 msgid "Invalid repository alias: '%s'"
-msgstr "Неправильне псевдо сховища «%s»"
+msgstr "Недійсний псевдонім сховища: «%s»"
 
 #: src/repos.cc:1212
 msgid ""
@@ -6291,7 +6291,7 @@ msgstr[2] ""
 #. The answers should be lower case letters.
 #: src/solve-commit.cc:111
 msgid "s/r/c/d"
-msgstr "п/р/с/д"
+msgstr "s/r/c/d"
 
 #. translators: answers for dependency problem solution input prompt:
 #. "Choose from above solutions by number or cancel"
@@ -6302,7 +6302,7 @@ msgstr "п/р/с/д"
 #. please report a bug against zypper at bugzilla.suse.com, we'll try to solve it.
 #: src/solve-commit.cc:127
 msgid "c/d"
-msgstr "с/д"
+msgstr "c/d"
 
 #: src/solve-commit.cc:133
 #, boost-format
@@ -6414,7 +6414,7 @@ msgstr "Повідомлення від пакунка %s:"
 
 #: src/solve-commit.cc:534
 msgid "y/n"
-msgstr "т/н"
+msgstr "y/n"
 
 #: src/solve-commit.cc:535
 msgid "View the notifications now?"
@@ -6454,7 +6454,7 @@ msgstr ""
 #. ! \todo add c for changelog and x for explain (show the dep tree)
 #: src/solve-commit.cc:669
 msgid "y/n/p/v/a/r/m/d/g"
-msgstr "т/н/п/в/а/с/м/д/з"
+msgstr "y/n/p/v/a/r/m/d/g"
 
 #. translators: help text for 'y' option in the 'Continue?' prompt
 #: src/solve-commit.cc:674
@@ -7019,7 +7019,7 @@ msgstr "Проблема"
 
 #: src/utils/misc.cc:365
 msgid "No."
-msgstr "No."
+msgstr "№."
 
 #: src/utils/misc.cc:366
 msgid "Patch"
@@ -7031,7 +7031,7 @@ msgstr "Вказаний локальний шлях або не існує, а�
 
 #: src/utils/misc.cc:456
 msgid "Given URI is invalid"
-msgstr "Вказана адреса URI - нечинна"
+msgstr "Вказана адреса URI - недійсна"
 
 #. Guess failed:
 #. translators: don't translate '<platform>'
@@ -7050,7 +7050,7 @@ msgstr "Приклад: %s"
 
 #: src/utils/misc.cc:584
 msgid "Invalid OBS URI."
-msgstr "Не чинний OBS URI."
+msgstr "Недійсний OBS URI."
 
 #: src/utils/misc.cc:584
 msgid "Correct form is obs://<project>/[platform]"
@@ -7117,7 +7117,7 @@ msgstr "Повторна спроба через %u сек. …"
 #. The answers should be lower case letters.
 #: src/utils/prompt.cc:218 src/utils/prompt.cc:302
 msgid "a/r/i"
-msgstr "п/с/і"
+msgstr "a/r/i"
 
 #: src/utils/prompt.cc:267
 #, c-format, boost-format
@@ -7155,7 +7155,7 @@ msgstr ""
 #: src/utils/prompt.cc:407
 #, c-format, boost-format
 msgid "Invalid answer '%s'."
-msgstr "Нечинна відповідь «%s»."
+msgstr "Недійсна відповідь «%s»."
 
 #: src/utils/prompt.cc:410
 #, c-format, boost-format
