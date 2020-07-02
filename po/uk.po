@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: zypp.uk\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-12-05 14:22+0100\n"
-"PO-Revision-Date: 2020-06-29 19:45+0000\n"
+"PO-Revision-Date: 2020-07-07 20:01+0000\n"
 "Last-Translator: Lesath <4lesath@gmail.com>\n"
 "Language-Team: Ukrainian <https://l10n.opensuse.org/projects/libzypp/master/"
 "uk/>\n"
@@ -4095,12 +4095,12 @@ msgstr "Неможливо визначити, де знаходиться сл�
 
 #: zypp/Url.cc:114
 msgid "Invalid LDAP URL query string"
-msgstr "Не чинний рядок запиту URL LDAP"
+msgstr "Недійсний рядок запиту URL LDAP"
 
 #: zypp/Url.cc:153
 #, c-format, boost-format
 msgid "Invalid LDAP URL query parameter '%s'"
-msgstr "Не чинний параметр запиту «%s» URL LDAP"
+msgstr "Недійсний параметр запиту «%s» URL LDAP"
 
 #: zypp/Url.cc:301
 msgid "Unable to clone Url object"
@@ -4960,7 +4960,7 @@ msgstr "створено резервну копію %s"
 #. translators: possible rpm package signature check result [brief]
 #: zypp/target/rpm/RpmDb.cc:2445
 msgid "Signature is OK"
-msgstr "Із підписом усе гаразд"
+msgstr "З підписом усе гаразд"
 
 #. translators: possible rpm package signature check result [brief]
 #: zypp/target/rpm/RpmDb.cc:2447
@@ -4975,7 +4975,7 @@ msgstr "Підпис не перевіряється"
 #. translators: possible rpm package signature check result [brief]
 #: zypp/target/rpm/RpmDb.cc:2451
 msgid "Signature is OK, but key is not trusted"
-msgstr "Із підписом усе гаразд, але ключ - ненадійний"
+msgstr "З підписом усе гаразд, але ключ - ненадійний"
 
 #. translators: possible rpm package signature check result [brief]
 #: zypp/target/rpm/RpmDb.cc:2453
@@ -5000,12 +5000,12 @@ msgstr "Схема Url не дозволяє %s"
 #: zypp/url/UrlBase.cc:173
 #, c-format, boost-format
 msgid "Invalid %s component '%s'"
-msgstr "Не чинний %s компонент «%s»"
+msgstr "Недійсний %s компонент «%s»"
 
 #: zypp/url/UrlBase.cc:180
 #, c-format, boost-format
 msgid "Invalid %s component"
-msgstr "Не чинний компонент %s"
+msgstr "Недійсний компонент %s"
 
 #: zypp/url/UrlBase.cc:786 zypp/url/UrlBase.cc:1231
 msgid "Query string parsing not supported for this URL"
@@ -5018,7 +5018,7 @@ msgstr "Схема URL - це потрібний компонент"
 #: zypp/url/UrlBase.cc:830
 #, c-format, boost-format
 msgid "Invalid Url scheme '%s'"
-msgstr "Не чинна схема URL «%s»"
+msgstr "Недійсна схема URL «%s»"
 
 #: zypp/url/UrlBase.cc:949
 msgid "Url scheme does not allow a username"
@@ -5039,7 +5039,7 @@ msgstr "Схема URL не дозволяє компонент вузла"
 #: zypp/url/UrlBase.cc:1049
 #, c-format, boost-format
 msgid "Invalid host component '%s'"
-msgstr "Не чинний компонент вузла «%s»"
+msgstr "Недійсний компонент вузла «%s»"
 
 #: zypp/url/UrlBase.cc:1070
 msgid "Url scheme does not allow a port"
@@ -5048,7 +5048,7 @@ msgstr "Схема URL не дозволяє порт"
 #: zypp/url/UrlBase.cc:1081
 #, c-format, boost-format
 msgid "Invalid port component '%s'"
-msgstr "Не чинний компонент порту «%s»"
+msgstr "Недійсний компонент порту «%s»"
 
 #: zypp/url/UrlBase.cc:1098
 msgid "Url scheme requires path name"
@@ -5064,15 +5064,15 @@ msgstr "Закодований рядок містить нульовий бай
 
 #: zypp/url/UrlUtils.cc:173
 msgid "Invalid parameter array split separator character"
-msgstr "Не чинний символ розділення масиву параметрів"
+msgstr "Недійсний символ розділення масиву параметрів"
 
 #: zypp/url/UrlUtils.cc:213
 msgid "Invalid parameter map split separator character"
-msgstr "Не чинний символ розділення карти параметрів"
+msgstr "Недійсний символ розділення карти параметрів"
 
 #: zypp/url/UrlUtils.cc:283
 msgid "Invalid parameter array join separator character"
-msgstr "Не чинний символ сполучення масиву параметрів"
+msgstr "Недійсний символ сполучення масиву параметрів"
 
 #~ msgid "Can't open lock file: %s"
 #~ msgstr "Не вдалося відкрити файл замка: %s"
