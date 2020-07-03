@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: zypper.uk\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-04-12 15:27+0200\n"
-"PO-Revision-Date: 2020-07-02 21:24+0000\n"
+"PO-Revision-Date: 2020-07-03 12:12+0000\n"
 "Last-Translator: Lesath <4lesath@gmail.com>\n"
 "Language-Team: Ukrainian <https://l10n.opensuse.org/projects/zypper/master/"
 "uk/>\n"
@@ -5286,7 +5286,7 @@ msgstr "Версія"
 #: src/info.cc:62 src/search.cc:54 src/search.cc:438 src/search.cc:485
 #: src/update.cc:795
 msgid "Arch"
-msgstr "Архітектура"
+msgstr "Арх."
 
 #. translators: property name; short; used like "Name: value"
 #: src/info.cc:64
