@@ -220,6 +220,9 @@ class Resolver : private base::NonCopyable
     ItemCapKindList satifiedByInstalled (const PoolItem & item );
     ItemCapKindList installedSatisfied( const PoolItem & item );
 
+public:
+    /** Expert backdoor. */
+    sat::detail::CSolver * get() const;
 };
 
 ///////////////////////////////////////////////////////////////////

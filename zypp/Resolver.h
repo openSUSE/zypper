@@ -437,6 +437,9 @@ namespace zypp
      */
     solver::detail::ItemCapKindList installedSatisfied( const PoolItem & item );
 
+  public:
+    /** Expert backdoor. */
+    sat::detail::CSolver * get() const;
 
   private:
     friend std::ostream & operator<<( std::ostream & str, const Resolver & obj );

@@ -214,6 +214,10 @@ class SATResolver : public base::ReferenceCounted, private base::NonCopyable, pr
 
     sat::StringQueue autoInstalled() const;
     sat::StringQueue userInstalled() const;
+
+public:
+  /** Expert backdoor. */
+  sat::detail::CSolver * get() const { return _satSolver; }
 };
 
 ///////////////////////////////////////////////////////////////////

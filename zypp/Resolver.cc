@@ -50,6 +50,9 @@ namespace zypp
   //	Resolver interface forwarded to implementation
   //
   ///////////////////////////////////////////////////////////////////
+  sat::detail::CSolver * Resolver::get() const
+  { return _pimpl->get(); }
+
   bool Resolver::verifySystem ()
   { return _pimpl->verifySystem(); }
 

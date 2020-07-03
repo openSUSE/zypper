@@ -97,6 +97,9 @@ Resolver::~Resolver()
   delete _satResolver;
 }
 
+sat::detail::CSolver * Resolver::get() const
+{ return _satResolver->get(); }
+
 //---------------------------------------------------------------------------
 // forward flags too SATResolver
 
