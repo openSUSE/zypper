@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: zypper.uk\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-04-12 15:27+0200\n"
-"PO-Revision-Date: 2020-07-03 12:12+0000\n"
+"PO-Revision-Date: 2020-07-03 13:12+0000\n"
 "Last-Translator: Lesath <4lesath@gmail.com>\n"
 "Language-Team: Ukrainian <https://l10n.opensuse.org/projects/zypper/master/"
 "uk/>\n"
@@ -7010,7 +7010,7 @@ msgstr "відкликаний"
 
 #: src/utils/misc.cc:329 src/utils/misc.cc:371
 msgid "Since"
-msgstr "Відтоді"
+msgstr "Від"
 
 #. << _("Repository")
 #: src/utils/misc.cc:364
