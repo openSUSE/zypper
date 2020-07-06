@@ -14,8 +14,8 @@ ListPatchesCmd::ListPatchesCmd(std::vector<std::string> &&commandAliases_r)
       std::move( commandAliases_r ),
       // translators: command synopsis; do not translate lowercase words
       _("list-patches (lp) [OPTIONS]"),
-      // translators: command summary: list-updates, lu
-      _("List available updates."),
+      // translators: command summary: list-patches, lp
+      _("List available patches."),
       // translators: command description
       _("List all applicable patches."),
       ResetRepoManager
