@@ -1118,20 +1118,24 @@ namespace zypp
 	  if ( repokind != probed )
 	  {
 	    repokind = probed;
-	    // Adjust the probed type in RepoInfo
-	    info.setProbedType( repokind ); // lazy init!
-	    //save probed type only for repos in system
+	    // update probed type only for repos in system
 	    for_( it, repoBegin(), repoEnd() )
 	    {
 	      if ( info.alias() == (*it).alias() )
 	      {
 		RepoInfo modifiedrepo = *it;
 		modifiedrepo.setType( repokind );
-		modifyRepository( info.alias(), modifiedrepo );
+		// don't modify .repo in refresh.
+		// modifyRepository( info.alias(), modifiedrepo );
 		break;
 	      }
 	    }
+	    // Adjust the probed type in RepoInfo
+	    info.setProbedType( repokind ); // lazy init!
 	  }
+	  // no need to continue with an unknown type
+	  if ( repokind.toEnum() == RepoType::NONE_e )
+	    ZYPP_THROW(RepoUnknownTypeException( info ));
 	}
 
         Pathname mediarootpath = rawcache_path_for_repoinfo( _options, info );

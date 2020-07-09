@@ -920,7 +920,8 @@ namespace zypp
     if ( ! (rawMirrorListUrl().asString().empty()) )
       str << (_pimpl->_mirrorListForceMetalink ? "metalink=" : "mirrorlist=") << rawMirrorListUrl() << endl;
 
-    str << "type=" << type().asString() << endl;
+    if ( type() != repo::RepoType::NONE )
+      str << "type=" << type().asString() << endl;
 
     if ( priority() != defaultPriority() )
       str << "priority=" << priority() << endl;
