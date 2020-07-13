@@ -40,6 +40,9 @@ namespace zypp
 
 	virtual void reportend();
 
+	/** Forwards generic reports. */
+	void report( const UserData & userData_r ) override;
+
         /** Start the operation */
         virtual void start( const Pathname & name );
 
@@ -84,6 +87,9 @@ namespace zypp
 	virtual void reportend();
 
         /** Start the operation */
+	/** Forwards generic reports. */
+	void report( const UserData & userData_r ) override;
+
         virtual void start( const std::string & name );
 
         /**

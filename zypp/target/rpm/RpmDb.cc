@@ -85,6 +85,9 @@ namespace target
 {
 namespace rpm
 {
+  const callback::UserData::ContentType InstallResolvableReport::contentRpmout( "rpmout","installpkg" );
+  const callback::UserData::ContentType RemoveResolvableReport::contentRpmout( "rpmout","removepkg" );
+
 namespace
 {
 #if 1 // No more need to escape whitespace since rpm-4.4.2.3
@@ -1683,11 +1686,18 @@ void RpmDb::doInstallPackage( const Pathname & filename, RpmInstFlags flags, cal
   opts.push_back ( quotedFilename.c_str() );
   run_rpm( opts, ExternalProgram::Stderr_To_Stdout );
 
+  // forward additional rpm output via report;
   std::string line;
+  unsigned    lineno = 0;
+  callback::UserData cmdout( InstallResolvableReport::contentRpmout );
+  // Key "solvable" injected by RpmInstallPackageReceiver
+  cmdout.set( "line",   std::cref(line) );
+  cmdout.set( "lineno", lineno );
+
+  // LEGACY: collect and forward additional rpm output in finish
   std::string rpmmsg;				// TODO: immediately forward lines via Callback::report rather than collecting
   std::vector<std::string> configwarnings;	// TODO: immediately process lines rather than collecting
 
-  unsigned linecnt = 0;
   while ( systemReadLine( line ) )
   {
     if ( str::startsWith( line, "%%" ) )
@@ -1697,18 +1707,21 @@ void RpmDb::doInstallPackage( const Pathname & filename, RpmInstFlags flags, cal
       report->progress( percent );
       continue;
     }
+    ++lineno;
+    cmdout.set( "lineno", lineno );
+    report->report( cmdout );
 
-    if ( linecnt < MAXRPMMESSAGELINES )
-      ++linecnt;
-    else if ( line.find( " scriptlet failed, " ) == std::string::npos )	// always log %script errors
-      continue;
+    if ( lineno >= MAXRPMMESSAGELINES ) {
+      if ( line.find( " scriptlet failed, " ) == std::string::npos )	// always log %script errors
+	continue;
+    }
 
     rpmmsg += line+'\n';
 
     if ( str::startsWith( line, "warning:" ) )
       configwarnings.push_back(line);
   }
-  if ( linecnt >= MAXRPMMESSAGELINES )
+  if ( lineno >= MAXRPMMESSAGELINES )
     rpmmsg += "[truncated]\n";
 
   int rpm_status = systemStatus();
@@ -1852,7 +1865,16 @@ void RpmDb::doRemovePackage( const std::string & name_r, RpmInstFlags flags, cal
   opts.push_back(name_r.c_str());
   run_rpm (opts, ExternalProgram::Stderr_To_Stdout);
 
+  // forward additional rpm output via report;
   std::string line;
+  unsigned    lineno = 0;
+  callback::UserData cmdout( RemoveResolvableReport::contentRpmout );
+  // Key "solvable" injected by RpmInstallPackageReceiver
+  cmdout.set( "line",   std::cref(line) );
+  cmdout.set( "lineno", lineno );
+
+
+  // LEGACY: collect and forward additional rpm output in finish
   std::string rpmmsg;		// TODO: immediately forward lines via Callback::report rather than collecting
 
   // got no progress from command, so we fake it:
@@ -1860,16 +1882,19 @@ void RpmDb::doRemovePackage( const std::string & name_r, RpmInstFlags flags, cal
   // 50 - command completed
   // 100 if no error
   report->progress( 5 );
-  unsigned linecnt = 0;
   while (systemReadLine(line))
   {
-    if ( linecnt < MAXRPMMESSAGELINES )
-      ++linecnt;
-    else if ( line.find( " scriptlet failed, " ) == std::string::npos )	// always log %script errors
-      continue;
+    ++lineno;
+    cmdout.set( "lineno", lineno );
+    report->report( cmdout );
+
+    if ( lineno >= MAXRPMMESSAGELINES ) {
+      if ( line.find( " scriptlet failed, " ) == std::string::npos )	// always log %script errors
+	continue;
+    }
     rpmmsg += line+'\n';
   }
-  if ( linecnt >= MAXRPMMESSAGELINES )
+  if ( lineno >= MAXRPMMESSAGELINES )
     rpmmsg += "[truncated]\n";
   report->progress( 50 );
   int rpm_status = systemStatus();

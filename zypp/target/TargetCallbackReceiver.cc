@@ -42,6 +42,13 @@ namespace zypp
 	{
 	}
 
+	void RpmInstallPackageReceiver::report( const UserData & userData_r )
+	{
+	  if ( ! userData_r.haskey( "solvable" ) )
+	    userData_r.set( "solvable", _resolvable->satSolvable() );
+	  _report->report( userData_r );
+	}
+
         /** Start the operation */
         void RpmInstallPackageReceiver::start( const Pathname & name )
 	{
@@ -129,6 +136,13 @@ namespace zypp
 	}
 
         /** Start the operation */
+	void RpmRemovePackageReceiver::report( const UserData & userData_r )
+	{
+	  if ( ! userData_r.haskey( "solvable" ) )
+	    userData_r.set( "solvable", _resolvable->satSolvable() );
+	  _report->report( userData_r );
+	}
+
         void RpmRemovePackageReceiver::start( const std::string & name )
 	{
 	    _report->start( _resolvable );

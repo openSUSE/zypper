@@ -556,6 +556,14 @@ namespace zypp
 	  , const std::string &/*reason*/
 	  , RpmLevel /*level*/
         ) {}
+
+        /** "rpmout/installpkg": Additional rpm output (sent immediately).
+	 * Data:
+	 * solvable : satSolvable processed
+	 * line     : std::reference_wrapper<const std::string>
+	 * lineno   : unsigned
+	 */
+	static const UserData::ContentType contentRpmout;
       };
 
       // progress for removing a resolvable
@@ -592,6 +600,11 @@ namespace zypp
           , Error /*error*/
 	  , const std::string &/*reason*/
         ) {}
+
+        /** "rpmout/removepkg": Additional rpm output (sent immediately).
+	 * For data \see \ref InstallResolvableReport::contentRpmout
+	 */
+        static const UserData::ContentType contentRpmout;
       };
 
       // progress for rebuilding the database
