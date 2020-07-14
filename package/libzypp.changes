@@ -1,4 +1,14 @@
 -------------------------------------------------------------------
+Tue Jul 14 13:19:56 CEST 2020 - ma@suse.de
+
+- Completey rework the purge-kernels algorithm (fix bsc#1173106)
+  The new code is closer to the original perl script, grouping the
+  packages by name before applying the keep spec.
+- Set ZYPP_RPM_DEBUG=1 to capture verbose rpm command output
+  (implements #228)
+- version 17.24.0 (22)
+
+-------------------------------------------------------------------
 Fri Jun 26 14:13:10 CEST 2020 - ma@suse.de
 
 - Fix core dump with corrupted history file (bsc#1170801)
