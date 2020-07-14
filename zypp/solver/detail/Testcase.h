@@ -17,6 +17,7 @@
 #else
 
 #include <string>
+#include <map>
 
 /////////////////////////////////////////////////////////////////////////
 namespace zypp
@@ -46,7 +47,7 @@ namespace zypp
 	  Testcase( const std::string & path );
 	  ~Testcase();
 
-	  bool createTestcase( Resolver & resolver, bool dumpPool = true, bool runSolver = true );
+          bool createTestcase( Resolver & resolver, bool dumpPool = true, bool runSolver = true );
       };
 
       ///////////////////////////////////////////////////////////////////

@@ -293,6 +293,15 @@ namespace zypp
          */
         void addHelix( const Pathname & file_r );
 
+        /** Load \ref Solvables from a libsolv testtags-file.
+         * Supports loading of gzip compressed files (.gz). In case of an exception
+         * the repository remains in the \ref Pool.
+         * \throws Exception if this is \ref noRepository
+         * \throws Exception if loading the helix-file fails.
+         * \see \ref Pool::addRepoTesttags and \ref Repository::EraseFromPool
+         */
+        void addTesttags(const Pathname &file_r);
+
        /** Add \c count_r new empty \ref Solvable to this \ref Repository. */
         sat::Solvable::IdType addSolvables( unsigned count_r );
         /** \overload Add only one new \ref Solvable. */
@@ -316,7 +325,6 @@ namespace zypp
         int satInternalPriority() const;
         int satInternalSubPriority() const;
         //@}
-
     private:
         IdType _id;
     };

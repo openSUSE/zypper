@@ -13,6 +13,7 @@
 #include <fstream>
 #include <sstream>
 #include <streambuf>
+#include <boost/function_output_iterator.hpp>
 
 #define ZYPP_USE_RESOLVER_INTERNALS
 
@@ -25,8 +26,7 @@
 #include <zypp/base/NonCopyable.h>
 #include <zypp/base/ReferenceCounted.h>
 
-#include <zypp/parser/xml/XmlEscape.h>
-
+#include <zypp/AutoDispose.h>
 #include <zypp/ZConfig.h>
 #include <zypp/PathInfo.h>
 #include <zypp/ResPool.h>
@@ -36,6 +36,12 @@
 #include <zypp/sat/detail/PoolImpl.h>
 #include <zypp/solver/detail/Resolver.h>
 #include <zypp/solver/detail/SystemCheck.h>
+
+#include <yaml-cpp/yaml.h>
+
+extern "C" {
+#include <solv/testcase.h>
+}
 
 using std::endl;
 
@@ -49,566 +55,317 @@ namespace zypp
     namespace detail
     { ///////////////////////////////////////////////////////////////////
 
-#define TAB "\t"
-#define TAB2 "\t\t"
+      //---------------------------------------------------------------------------
 
-using namespace zypp::str;
+      Testcase::Testcase()
+        :dumpPath("/var/log/YaST2/solverTestcase")
+      {}
 
-//---------------------------------------------------------------------------
+      Testcase::Testcase(const std::string & path)
+        :dumpPath(path)
+      {}
 
-inline std::string xml_escape( const std::string &text )
-{
-  return zypp::xml::escape(text);
-}
+      Testcase::~Testcase()
+      {}
 
-inline std::string xml_tag_enclose( const std::string &text, const std::string &tag, bool escape = false )
-{
-  std::string result;
-  result += "<" + tag + ">";
-
-  if ( escape)
-   result += xml_escape(text);
-  else
-   result += text;
-
-  result += "</" + tag + ">";
-  return result;
-}
-
-template<class T>
-std::string helixXML( const T &obj ); //undefined
-
-template<>
-std::string helixXML( const Edition &edition )
-{
-    std::stringstream str;
-    str << xml_tag_enclose(edition.version(), "version");
-    if (!edition.release().empty())
-	str << xml_tag_enclose(edition.release(), "release");
-    if (edition.epoch() != Edition::noepoch)
-	str << xml_tag_enclose(numstring(edition.epoch()), "epoch");
-    return str.str();
-}
-
-template<>
-std::string helixXML( const Arch &arch )
-{
-    std::stringstream str;
-    str << xml_tag_enclose(arch.asString(), "arch");
-    return str.str();
-}
-
-template<>
-std::string helixXML( const Capability &cap )
-{
-    std::stringstream str;
-    CapDetail detail = cap.detail();
-    if (detail.isSimple()) {
-	if (detail.isVersioned()) {
-	    str << "<dep name='" << xml_escape(detail.name().asString()) << "'"
-		<< " op='" << xml_escape(detail.op().asString()) << "'"
-		<< " version='" <<  xml_escape(detail.ed().version()) << "'";
-	    if (!detail.ed().release().empty())
-		str << " release='" << xml_escape(detail.ed().release()) << "'";
-	    if (detail.ed().epoch() != Edition::noepoch)
-		str << " epoch='" << xml_escape(numstring(detail.ed().epoch())) << "'";
-	    str << " />" << endl;
-	} else {
-	    str << "<dep name='" << xml_escape(cap.asString()) << "' />" << endl;
-	}
-    } else if (detail.isExpression()) {
-	if (detail.capRel() == CapDetail::CAP_AND
-	    && detail.lhs().detail().isNamed()
-	    && detail.rhs().detail().isNamed()) {
-	    // packageand dependency
-	    str << "<dep name='packageand("
-		<< IdString(detail.lhs().id()) << ":"
-		<< IdString(detail.rhs().id()) << ")' />" << endl;
-	} else if (detail.capRel() == CapDetail::CAP_NAMESPACE
-	    && detail.lhs().id() == NAMESPACE_OTHERPROVIDERS) {
-	    str << "<dep name='otherproviders("
-		<< IdString(detail.rhs().id()) << ")' />" << endl;
-	} else {
-	    // modalias ?
-	    IdString packageName;
-	    if (detail.capRel() == CapDetail::CAP_AND) {
-		packageName = IdString(detail.lhs().id());
-		detail = detail.rhs().detail();
-	    }
-	    if (detail.capRel() == CapDetail::CAP_NAMESPACE
-		&& detail.lhs().id() == NAMESPACE_MODALIAS) {
-		str << "<dep name='modalias(";
-		if (!packageName.empty())
-		    str << packageName << ":";
-		str << IdString(detail.rhs().id()) << ")' />" << endl;
-	    } else {
-		str << "<!--- ignoring '" << xml_escape(cap.asString()) << "' -->" << endl;
-	    }
-	}
-    } else {
-	str << "<!--- ignoring '" << xml_escape(cap.asString()) << "' -->" << endl;
-    }
-
-    return str.str();
-}
-
-template<>
-std::string helixXML( const Capabilities &caps )
-{
-    std::stringstream str;
-    Capabilities::const_iterator it = caps.begin();
-    str << endl;
-    for ( ; it != caps.end(); ++it)
-    {
-	str << TAB2 << helixXML((*it));
-    }
-    str << TAB;
-    return str.str();
-}
-
-template<>
-std::string helixXML( const CapabilitySet &caps )
-{
-    std::stringstream str;
-    CapabilitySet::const_iterator it = caps.begin();
-    str << endl;
-    for ( ; it != caps.end(); ++it)
-    {
-	str << TAB2 << helixXML((*it));
-    }
-    str << TAB;
-    return str.str();
-}
-
-inline std::string helixXML( const PoolItem & obj, Dep deptag_r )
-{
-  std::stringstream out;
-  Capabilities caps( obj[deptag_r] );
-  if ( ! caps.empty() )
-    out << TAB << xml_tag_enclose(helixXML(caps), deptag_r.asString()) << endl;
-  return out.str();
-}
-
-std::string helixXML( const PoolItem & item )
-{
-  std::stringstream str;
-  str << "<" << item.kind() << ">" << endl;
-  str << TAB << xml_tag_enclose( item.name(), "name", true ) << endl;
-  str << TAB << xml_tag_enclose( item.vendor().asString(), "vendor", true ) << endl;
-  str << TAB << xml_tag_enclose( item.buildtime().asSeconds(), "buildtime", true ) << endl;
-  if ( isKind<Package>( item ) ) {
-      str << TAB << "<history>" << endl << TAB << "<update>" << endl;
-      str << TAB2 << helixXML( item.arch() ) << endl;
-      str << TAB2 << helixXML( item.edition() ) << endl;
-      str << TAB << "</update>" << endl << TAB << "</history>" << endl;
-  } else {
-      str << TAB << helixXML( item.arch() ) << endl;
-      str << TAB << helixXML( item.edition() ) << endl;
-  }
-  str << helixXML( item, Dep::PROVIDES );
-  str << helixXML( item, Dep::PREREQUIRES );
-  str << helixXML( item, Dep::CONFLICTS );
-  str << helixXML( item, Dep::OBSOLETES );
-  str << helixXML( item, Dep::REQUIRES );
-  str << helixXML( item, Dep::RECOMMENDS );
-  str << helixXML( item, Dep::ENHANCES );
-  str << helixXML( item, Dep::SUPPLEMENTS );
-  str << helixXML( item, Dep::SUGGESTS );
-
-  str << "</" << item.kind() << ">" << endl;
-  return str.str();
-}
-
-///////////////////////////////////////////////////////////////////
-//
-//	CLASS NAME : HelixResolvable
-/**
- * Creates a file in helix format which includes all available
- * or installed packages,patches,selections.....
- **/
-class  HelixResolvable : public base::ReferenceCounted, private base::NonCopyable{
-
-  private:
-    std::string dumpFile; // Path of the generated testcase
-    ofgzstream *file;
-
-  public:
-    HelixResolvable (const std::string & path);
-    ~HelixResolvable ();
-
-    void addResolvable (const PoolItem item)
-    { *file << helixXML (item); }
-
-    std::string filename ()
-    { return dumpFile; }
-};
-
-DEFINE_PTR_TYPE(HelixResolvable);
-IMPL_PTR_TYPE(HelixResolvable);
-
-typedef std::map<Repository, HelixResolvable_Ptr> RepositoryTable;
-
-HelixResolvable::HelixResolvable(const std::string & path)
-    :dumpFile (path)
-{
-    file = new ofgzstream(path.c_str());
-    if (!file) {
-	ZYPP_THROW (Exception( "Can't open " + path ) );
-    }
-
-    *file << "<channel><subchannel>" << endl;
-}
-
-HelixResolvable::~HelixResolvable()
-{
-    *file << "</subchannel></channel>" << endl;
-    delete(file);
-}
-
-///////////////////////////////////////////////////////////////////
-//
-//	CLASS NAME : HelixControl
-/**
- * Creates a file in helix format which contains all controll
- * action of a testcase ( file is known as *-test.xml)
- **/
-class  HelixControl {
-
-  private:
-    std::string dumpFile; // Path of the generated testcase
-    std::ofstream *file;
-    bool _inSetup;
-
-  public:
-    HelixControl (const std::string & controlPath,
-		  const RepositoryTable & sourceTable,
-		  const Arch & systemArchitecture,
-		  const target::Modalias::ModaliasList & modaliasList,
-		  const std::set<std::string> & multiversionSpec,
-		  const std::string & systemPath);
-    ~HelixControl ();
-
-    void closeSetup()
-    {
-      if ( _inSetup )
+      bool Testcase::createTestcase(Resolver & resolver, bool dumpPool, bool runSolver)
       {
-	*file << "</setup>" << endl << "<trial>" << endl;
-	_inSetup = false;
+        PathInfo path (dumpPath);
+
+        if ( !path.isExist() ) {
+          if (zypp::filesystem::assert_dir (dumpPath)!=0) {
+            ERR << "Cannot create directory " << dumpPath << endl;
+            return false;
+          }
+        } else {
+          if (!path.isDir()) {
+            ERR << dumpPath << " is not a directory." << endl;
+            return false;
+          }
+          // remove old stuff if pool will be dump
+          if (dumpPool)
+            zypp::filesystem::clean_dir (dumpPath);
+        }
+
+        if (runSolver) {
+          zypp::base::LogControl::TmpLineWriter tempRedirect;
+          zypp::base::LogControl::instance().logfile( dumpPath +"/y2log" );
+          zypp::base::LogControl::TmpExcessive excessive;
+
+          resolver.resolvePool();
+        }
+
+        ResPool pool 	= resolver.pool();
+        PoolItemList	items_to_install;
+        PoolItemList 	items_to_remove;
+        PoolItemList 	items_locked;
+        PoolItemList 	items_keep;
+
+
+        const std::string slvTestcaseName = "testcase.t";
+        const std::string slvResult       = "solver.result";
+
+        zypp::AutoDispose<const char **> repoFileNames( testcase_mangle_repo_names( resolver.get()->pool ),
+          [ nrepos = resolver.get()->pool->nrepos ]( auto **x ){
+            if (!x) return;
+            for ( int i = 1; i < nrepos; i++ )
+                solv_free((void *)x[i]);
+            solv_free((void *)x);
+        });
+
+        if ( ::testcase_write( resolver.get(), dumpPath.c_str(), TESTCASE_RESULT_TRANSACTION | TESTCASE_RESULT_PROBLEMS, slvTestcaseName.c_str(), slvResult.c_str() ) == 0 ) {
+          ERR << "Failed to write solv data, aborting." << endl;
+          return false;
+        }
+
+        // HACK: directly access sat::pool
+        const sat::Pool & satpool( sat::Pool::instance() );
+
+        YAML::Emitter yOut;
+
+        const auto addTag = [&]( const std::string & tag_r, bool yesno_r = true ){
+          yOut << YAML::Key << tag_r << YAML::Value << yesno_r;
+        };
+
+        yOut << YAML::BeginMap  << YAML::Key << "version" << YAML::Value << "1.0";
+
+        yOut << YAML::Key << "setup" << YAML::Value << YAML::BeginMap;
+
+        yOut << YAML::Key << "channels";
+        yOut << YAML::Value << YAML::BeginSeq;
+
+        std::set<Repository::IdType> repos;
+        for ( const PoolItem & pi : pool ) {
+          if ( pi.status().isToBeInstalled()
+               && !(pi.status().isBySolver())) {
+            items_to_install.push_back( pi );
+          }
+          if ( pi.status().isKept()
+               && !(pi.status().isBySolver())) {
+            items_keep.push_back( pi );
+          }
+          if ( pi.status().isToBeUninstalled()
+               && !(pi.status().isBySolver())) {
+            items_to_remove.push_back( pi );
+          }
+          if ( pi.status().isLocked()
+               && !(pi.status().isBySolver())) {
+            items_locked.push_back( pi );
+          }
+
+          const auto &myRepo = pi.repository();
+          const auto &myRepoInfo = myRepo.info();
+          if ( repos.find( myRepo.id()) == repos.end() ) {
+            repos.insert( myRepo.id() );
+            yOut << YAML::Value << YAML::BeginMap;
+            yOut << YAML::Key << "alias" << YAML::Value << myRepo.alias();
+            yOut << YAML::Key << "url" << YAML::BeginSeq;
+            for ( auto itUrl = myRepoInfo.baseUrlsBegin(); itUrl != myRepoInfo.baseUrlsEnd(); ++itUrl ) {
+              yOut << YAML::Value << itUrl->asString();
+            }
+            yOut << YAML::EndSeq;
+            yOut << YAML::Key << "path" << YAML::Value << myRepoInfo.path().asString();
+            yOut << YAML::Key << "type" << YAML::Value << myRepoInfo.type().asString();
+            yOut << YAML::Key << "generated" << YAML::Value << myRepo.generatedTimestamp().form( "%Y-%m-%d %H:%M:%S" );
+            yOut << YAML::Key << "outdated" << YAML::Value << myRepo.suggestedExpirationTimestamp().form( "%Y-%m-%d %H:%M:%S" );
+            yOut << YAML::Key << "priority" << YAML::Value << myRepoInfo.priority();
+            yOut << YAML::Key << "file" << YAML::Value << str::Format("%1%.repo.gz") % repoFileNames[myRepo.id()->repoid];
+
+            yOut << YAML::EndMap;
+          }
+
+        }
+
+        yOut << YAML::EndSeq;
+
+        yOut << YAML::Key << "arch" << YAML::Value << ZConfig::instance().systemArchitecture().asString() ;
+        yOut << YAML::Key << "solverTestcase" << YAML::Value << slvTestcaseName ;
+        yOut << YAML::Key << "solverResult" << YAML::Value << slvResult ;
+
+        // RequestedLocales
+        const LocaleSet & addedLocales( satpool.getAddedRequestedLocales() );
+        const LocaleSet & removedLocales( satpool.getRemovedRequestedLocales() );
+        const LocaleSet & requestedLocales( satpool.getRequestedLocales() );
+
+        yOut << YAML::Key << "locales" << YAML::Value << YAML::BeginSeq ;
+        for ( Locale l : requestedLocales ) {
+          yOut << YAML::Value << YAML::BeginMap;
+          yOut << YAML::Key << "fate" << YAML::Value << ( addedLocales.count(l) ? "added" : "" ) ;
+          yOut << YAML::Key << "name" << YAML::Value << l.asString() ;
+          yOut << YAML::EndMap;
+        }
+
+        for ( Locale l : removedLocales ) {
+          yOut << YAML::Value << YAML::BeginMap;
+          yOut << YAML::Key << "fate" << YAML::Value << "removed" ;
+          yOut << YAML::Key << "name" << YAML::Value << l.asString() ;
+          yOut << YAML::EndMap;
+        }
+        yOut << YAML::EndSeq; // locales
+
+        // helper lambda to write a list of elements into a external file instead of the main file
+        const auto &writeListOrFile = [&]( const std::string &name, const auto &list, const auto &callback ) {
+          if ( list.size() > 10 ) {
+            const std::string fName = str::Format("zypp-%1%.yaml") % name;
+            yOut << YAML::Key << name << YAML::Value << fName;
+
+            YAML::Emitter yOutFile;
+            callback( yOutFile, list );
+
+            std::ofstream fout( dumpPath+"/"+fName );
+            fout << yOutFile.c_str();
+          } else {
+            yOut << YAML::Key << name << YAML::Value ;
+            callback( yOut, list );
+          }
+        };
+
+        // AutoInstalled
+        const auto &writeAutoInst = [] ( YAML::Emitter &out, const auto &autoInstalledList ) {
+          out << YAML::BeginSeq;
+          for ( IdString::IdType n : autoInstalledList ) {
+            out << YAML::Value << IdString(n).asString() ;
+          }
+          out << YAML::EndSeq;
+        };
+        writeListOrFile( "autoinst", satpool.autoInstalled(), writeAutoInst );
+
+        // ModAlias
+        const auto &writeModalias = []( YAML::Emitter &out, const auto &modAliasList ){
+          out << YAML::BeginSeq;
+          for ( const auto &modAlias : modAliasList ) {
+            out << YAML::Value << modAlias ;
+          }
+          out << YAML::EndSeq;
+        };
+        writeListOrFile( "modalias", target::Modalias::instance().modaliasList(), writeModalias );
+
+        // Multiversion
+        const auto &writeMultiVersion = [] ( YAML::Emitter &out, const auto &multiversionList ) {
+          out << YAML::BeginSeq;
+          for ( const auto &multiver : multiversionList ) {
+            out << YAML::Value << multiver ;
+          }
+          out << YAML::EndSeq;
+        };
+        writeListOrFile( "multiversion", ZConfig::instance().multiversionSpec(), writeMultiVersion );
+
+
+        yOut << YAML::Key << "resolverFlags" << YAML::Value << YAML::BeginMap;
+        yOut << YAML::Key << "focus" << YAML::Value << asString( resolver.focus() );
+
+        addTag( "ignorealreadyrecommended", resolver.ignoreAlreadyRecommended() );
+        addTag( "onlyRequires",             resolver.onlyRequires() );
+        addTag( "forceResolve",             resolver.forceResolve() );
+
+        addTag( "cleandepsOnRemove",        resolver.cleandepsOnRemove() );
+
+        addTag( "allowDowngrade",           resolver.allowDowngrade() );
+        addTag( "allowNameChange",          resolver.allowNameChange() );
+        addTag( "allowArchChange",          resolver.allowArchChange() );
+        addTag( "allowVendorChange",        resolver.allowVendorChange() );
+
+        addTag( "dupAllowDowngrade",        resolver.dupAllowDowngrade() );
+        addTag( "dupAllowNameChange",       resolver.dupAllowNameChange() );
+        addTag( "dupAllowArchChange",       resolver.dupAllowArchChange() );
+        addTag( "dupAllowVendorChange",     resolver.dupAllowVendorChange() );
+
+
+        yOut << YAML::EndMap; // resolverFlags
+        yOut << YAML::EndMap; // setup
+
+        yOut << YAML::Key << "trials" << YAML::Value << YAML::BeginSeq;
+
+        yOut << YAML::Value << YAML::BeginMap << YAML::Key << "trial" << YAML::Value;
+
+        yOut << YAML::BeginSeq;
+
+        const auto &writeJobsToFile = [&]( const std::string &fName, const auto &data, const auto &cb ){
+          yOut << YAML::Value << YAML::BeginMap;
+          yOut << YAML::Key << "include" << YAML::Value << fName;
+          yOut << YAML::EndMap;
+
+          YAML::Emitter yOutFile;
+          yOutFile << YAML::BeginSeq;
+          cb( yOutFile, data );
+          yOutFile << YAML::EndSeq;
+
+          std::ofstream fout( dumpPath+"/"+fName );
+          fout << yOutFile.c_str();
+        };
+
+        // Multiversion
+        const auto &writePoolItemJobs = []( const std::string &jobName ){
+          return [ &jobName ] ( YAML::Emitter &yOut, const PoolItemList &poolItems, bool shortInfo = false ) {
+            for ( const PoolItem & pi : poolItems ) {
+              yOut << YAML::Value << YAML::BeginMap;
+
+              std::stringstream status;
+              status << pi.status();
+
+              yOut << YAML::Key << "job"     << YAML::Value << jobName
+                   << YAML::Key << "kind"    << YAML::Value << pi.kind().asString()
+                   << YAML::Key << "name"    << YAML::Value << pi.name()
+                   << YAML::Key << "status"  << YAML::Value << status.str();
+              if ( !shortInfo ) {
+                yOut << YAML::Key << "channel" << YAML::Value << pi.repoInfo().alias()
+                     << YAML::Key << "arch"    << YAML::Value << pi.arch().asString()
+                     << YAML::Key << "version" << YAML::Value << pi.edition().version()
+                     << YAML::Key << "release" << YAML::Value << pi.edition().release();
+              }
+              yOut << YAML::EndMap;
+            }
+          };
+        };
+
+        const auto &writeMapJob = []( YAML::Emitter &yOut, const std::string &name, const std::map<std::string, std::string> &values = std::map<std::string, std::string>() ){
+          yOut << YAML::Value << YAML::BeginMap;
+          yOut << YAML::Key << "job"     << YAML::Value << name;
+          for ( const auto &v : values )
+            yOut << YAML::Key << v.first << YAML::Value << v.second;
+          yOut << YAML::EndMap;
+        };
+
+        writePoolItemJobs("install")( yOut, items_to_install );
+        writePoolItemJobs("keep")( yOut, items_keep );
+        writePoolItemJobs("uninstall")( yOut, items_to_remove, true );
+
+        if ( items_locked.size() )
+          writeJobsToFile("zypp-locks.yaml", items_locked, writePoolItemJobs("lock") );
+
+        for ( const auto &v : resolver.extraRequires() )
+          writeMapJob( yOut, "addRequire", { { "name", v.asString() } } );
+        for ( const auto &v : SystemCheck::instance().requiredSystemCap() )
+          writeMapJob( yOut, "addRequire", { { "name", v.asString() } } );
+
+        for ( const auto &v : resolver.extraConflicts() )
+          writeMapJob( yOut, "addConflict", { { "name", v.asString() } } );
+        for ( const auto &v : SystemCheck::instance().conflictSystemCap() )
+          writeMapJob( yOut, "addConflict", { { "name", v.asString() } } );
+
+        for ( const auto &v : resolver.upgradeRepos() )
+          writeMapJob( yOut, "upgradeRepo", { { "name", v.alias() } } );
+
+        if ( resolver.isUpgradeMode() )
+          writeMapJob( yOut, "distupgrade" );
+
+        if ( resolver.isUpdateMode() )
+          writeMapJob( yOut, "update" );
+
+        if ( resolver.isVerifyingMode() )
+          writeMapJob( yOut, "verify" );
+
+        yOut << YAML::EndSeq;
+        yOut << YAML::EndMap; // trial
+        yOut << YAML::EndSeq; // trials list
+        yOut << YAML::EndMap; // trials
+        yOut << YAML::EndMap; // root
+
+        std::ofstream fout( dumpPath+"/zypp-control.yaml" );
+        fout << yOut.c_str();
+
+        return true;
       }
-    }
-
-    std::ostream & writeTag()
-    { return *file << (_inSetup ? TAB : ""); }
-
-    void addTagIf( const std::string & tag_r, bool yesno_r = true )
-    {
-      if ( yesno_r )
-	writeTag() << "<" << tag_r << "/>" << endl;
-    }
-
-    void installResolvable( const PoolItem & pi_r );
-    void lockResolvable( const PoolItem & pi_r );
-    void keepResolvable( const PoolItem & pi_r );
-    void deleteResolvable( const PoolItem & pi_r );
-    void addDependencies (const CapabilitySet &capRequire, const CapabilitySet &capConflict);
-    void addUpgradeRepos( const std::set<Repository> & upgradeRepos_r );
-
-    std::string filename () { return dumpFile; }
-};
-
-HelixControl::HelixControl(const std::string & controlPath,
-			   const RepositoryTable & repoTable,
-			   const Arch & systemArchitecture,
-			   const target::Modalias::ModaliasList & modaliasList,
-			   const std::set<std::string> & multiversionSpec,
-			   const std::string & systemPath)
-    :dumpFile (controlPath)
-    ,_inSetup( true )
-{
-    file = new std::ofstream(controlPath.c_str());
-    if (!file) {
-	ZYPP_THROW (Exception( "Can't open " + controlPath ) );
-    }
-
-    *file << "<?xml version=\"1.0\"?>" << endl
-	  << "<!-- libzypp resolver testcase -->" << endl
-	  << "<test>" << endl
-	  << "<setup arch=\"" << systemArchitecture << "\">" << endl
-	  << TAB << "<system file=\"" << systemPath << "\"/>" << endl << endl;
-    for ( RepositoryTable::const_iterator it = repoTable.begin();
-	  it != repoTable.end(); ++it ) {
-	RepoInfo repo = it->first.info();
-	*file << TAB << "<!-- " << endl
-	      << TAB << "- alias       : " << repo.alias() << endl;
-	for ( RepoInfo::urls_const_iterator itUrl = repo.baseUrlsBegin();
-	      itUrl != repo.baseUrlsEnd();
-	      ++itUrl )
-	{
-	    *file << TAB << "- url         : " << *itUrl << endl;
-	}
-	*file << TAB << "- path        : " << repo.path() << endl;
-	*file << TAB << "- type        : " << repo.type() << endl;
-	*file << TAB << "- generated   : " << (it->first.generatedTimestamp()).form( "%Y-%m-%d %H:%M:%S" ) << endl;
-	*file << TAB << "- outdated    : " << (it->first.suggestedExpirationTimestamp()).form( "%Y-%m-%d %H:%M:%S" ) << endl;
-	*file << TAB << " -->" << endl;
-
-	*file << TAB << "<channel file=\"" << str::numstring((long)it->first.id())
-	      << "-package.xml.gz\" name=\"" << repo.alias() << "\""
-	      << " priority=\"" << repo.priority()
-	      << "\" />" << endl << endl;
-    }
-
-    // HACK: directly access sat::pool
-    const sat::Pool & satpool( sat::Pool::instance() );
-
-    // RequestedLocales
-    const LocaleSet & addedLocales( satpool.getAddedRequestedLocales() );
-    const LocaleSet & removedLocales( satpool.getRemovedRequestedLocales() );
-    const LocaleSet & requestedLocales( satpool.getRequestedLocales() );
-
-    for ( Locale l : requestedLocales )
-    {
-      const char * fate = ( addedLocales.count(l) ? "\" fate=\"added" : "" );
-      *file << TAB << "<locale name=\"" << l << fate << "\" />" << endl;
-    }
-    for ( Locale l : removedLocales )
-    {
-      *file << TAB << "<locale name=\"" << l << "\" fate=\"removed\" />" << endl;
-    }
-
-    // AutoInstalled
-    for ( IdString::IdType n : satpool.autoInstalled() )
-    {
-      *file << TAB << "<autoinst name=\"" << IdString(n) << "\" />" << endl;
-    }
-
-
-
-    for_( it, modaliasList.begin(), modaliasList.end() ) {
-	*file << TAB << "<modalias name=\"" <<  xml_escape(*it)
-	      << "\" />" << endl;
-    }
-
-    for_( it, multiversionSpec.begin(), multiversionSpec.end() ) {
-	*file << TAB << "<multiversion name=\"" <<  *it
-	      << "\" />" << endl;
-    }
-
-    // setup continued outside....
-}
-
-HelixControl::~HelixControl()
-{
-    closeSetup();	// in case it is still open
-    *file << "</trial>" << endl
-	  << "</test>" << endl;
-    delete(file);
-}
-
-void HelixControl::installResolvable( const PoolItem & pi_r )
-{
-    *file << "<install channel=\"" << pi_r.repoInfo().alias() << "\""
-          << " kind=\"" << pi_r.kind() << "\""
-	  << " name=\"" << pi_r.name() << "\""
-	  << " arch=\"" << pi_r.arch() << "\""
-	  << " version=\"" << pi_r.edition().version() << "\""
-	  << " release=\"" << pi_r.edition().release() << "\""
-	  << " status=\"" << pi_r.status() << "\""
-	  << "/>" << endl;
-}
-
-void HelixControl::lockResolvable( const PoolItem & pi_r )
-{
-    *file << "<lock channel=\"" << pi_r.repoInfo().alias() << "\""
-          << " kind=\"" << pi_r.kind() << "\""
-	  << " name=\"" << pi_r.name() << "\""
-	  << " arch=\"" << pi_r.arch() << "\""
-	  << " version=\"" << pi_r.edition().version() << "\""
-	  << " release=\"" << pi_r.edition().release() << "\""
-	  << " status=\"" << pi_r.status() << "\""
-	  << "/>" << endl;
-}
-
-void HelixControl::keepResolvable( const PoolItem & pi_r )
-{
-    *file << "<keep channel=\"" << pi_r.repoInfo().alias() << "\""
-          << " kind=\"" << pi_r.kind() << "\""
-	  << " name=\"" << pi_r.name() << "\""
-	  << " arch=\"" << pi_r.arch() << "\""
-	  << " version=\"" << pi_r.edition().version() << "\""
-	  << " release=\"" << pi_r.edition().release() << "\""
-	  << " status=\"" << pi_r.status() << "\""
-	  << "/>" << endl;
-}
-
-void HelixControl::deleteResolvable( const PoolItem & pi_r )
-{
-    *file << "<uninstall  kind=\"" << pi_r.kind() << "\""
-	  << " name=\"" << pi_r.name() << "\""
-	  << " status=\"" << pi_r.status() << "\""
-	  << "/>" << endl;
-}
-
-void HelixControl::addDependencies (const CapabilitySet & capRequire, const CapabilitySet & capConflict)
-{
-    for (CapabilitySet::const_iterator iter = capRequire.begin(); iter != capRequire.end(); iter++) {
-	*file << "<addRequire " <<  " name=\"" << iter->asString() << "\"" << "/>" << endl;
-    }
-    for (CapabilitySet::const_iterator iter = capConflict.begin(); iter != capConflict.end(); iter++) {
-	*file << "<addConflict " << " name=\"" << iter->asString() << "\"" << "/>" << endl;
-    }
-}
-
-void HelixControl::addUpgradeRepos( const std::set<Repository> & upgradeRepos_r )
-{
-  for_( it, upgradeRepos_r.begin(), upgradeRepos_r.end() )
-  {
-    *file << "<upgradeRepo name=\"" << it->alias() << "\"/>" << endl;
-  }
-}
-
-//---------------------------------------------------------------------------
-
-Testcase::Testcase()
-    :dumpPath("/var/log/YaST2/solverTestcase")
-{}
-
-Testcase::Testcase(const std::string & path)
-    :dumpPath(path)
-{}
-
-Testcase::~Testcase()
-{}
-
-bool Testcase::createTestcase(Resolver & resolver, bool dumpPool, bool runSolver)
-{
-    PathInfo path (dumpPath);
-
-    if ( !path.isExist() ) {
-	if (zypp::filesystem::assert_dir (dumpPath)!=0) {
-	    ERR << "Cannot create directory " << dumpPath << endl;
-	    return false;
-	}
-    } else {
-	if (!path.isDir()) {
-	    ERR << dumpPath << " is not a directory." << endl;
-	    return false;
-	}
-	// remove old stuff if pool will be dump
-	if (dumpPool)
-	    zypp::filesystem::clean_dir (dumpPath);
-    }
-
-    if (runSolver) {
-        zypp::base::LogControl::TmpLineWriter tempRedirect;
-	zypp::base::LogControl::instance().logfile( dumpPath +"/y2log" );
-	zypp::base::LogControl::TmpExcessive excessive;
-
-	resolver.resolvePool();
-    }
-
-    ResPool pool 	= resolver.pool();
-    RepositoryTable	repoTable;
-    PoolItemList	items_to_install;
-    PoolItemList 	items_to_remove;
-    PoolItemList 	items_locked;
-    PoolItemList 	items_keep;
-    HelixResolvable_Ptr	system = NULL;
-
-    if (dumpPool)
-	system = new HelixResolvable(dumpPath + "/solver-system.xml.gz");
-
-    for ( const PoolItem & pi : pool )
-    {
-	if ( system && pi.status().isInstalled() ) {
-	    // system channel
-	    system->addResolvable( pi );
-	} else {
-	    // repo channels
-	    Repository repo  = pi.repository();
-	    if (dumpPool) {
-		if (repoTable.find (repo) == repoTable.end()) {
-		    repoTable[repo] = new HelixResolvable(dumpPath + "/"
-							  + str::numstring((long)repo.id())
-							  + "-package.xml.gz");
-		}
-		repoTable[repo]->addResolvable( pi );
-	    }
-	}
-
-	if ( pi.status().isToBeInstalled()
-	     && !(pi.status().isBySolver())) {
-	    items_to_install.push_back( pi );
-	}
-	if ( pi.status().isKept()
-	     && !(pi.status().isBySolver())) {
-	    items_keep.push_back( pi );
-	}
-	if ( pi.status().isToBeUninstalled()
-	     && !(pi.status().isBySolver())) {
-	    items_to_remove.push_back( pi );
-	}
-	if ( pi.status().isLocked()
-	     && !(pi.status().isBySolver())) {
-	    items_locked.push_back( pi );
-	}
-    }
-
-    // writing control file "*-test.xml"
-    HelixControl control (dumpPath + "/solver-test.xml",
-			  repoTable,
-			  ZConfig::instance().systemArchitecture(),
-			  target::Modalias::instance().modaliasList(),
-			  ZConfig::instance().multiversionSpec(),
-			  "solver-system.xml.gz");
-
-    // In <setup>: resolver flags,...
-    control.writeTag() << "<focus value=\"" << resolver.focus() << "\"/>" << endl;
-
-    control.addTagIf( "ignorealreadyrecommended",	resolver.ignoreAlreadyRecommended() );
-    control.addTagIf( "onlyRequires",		resolver.onlyRequires() );
-    control.addTagIf( "forceResolve",		resolver.forceResolve() );
-
-    control.addTagIf( "cleandepsOnRemove",	resolver.cleandepsOnRemove() );
-
-    control.addTagIf( "allowDowngrade",		resolver.allowDowngrade() );
-    control.addTagIf( "allowNameChange",	resolver.allowNameChange() );
-    control.addTagIf( "allowArchChange",	resolver.allowArchChange() );
-    control.addTagIf( "allowVendorChange",	resolver.allowVendorChange() );
-
-    control.addTagIf( "dupAllowDowngrade",	resolver.dupAllowDowngrade() );
-    control.addTagIf( "dupAllowNameChange",	resolver.dupAllowNameChange() );
-    control.addTagIf( "dupAllowArchChange",	resolver.dupAllowArchChange() );
-    control.addTagIf( "dupAllowVendorChange",	resolver.dupAllowVendorChange() );
-
-    control.closeSetup();
-    // Entering <trial>...
-
-    for ( const PoolItem & pi : items_to_install )
-    { control.installResolvable( pi ); }
-
-    for ( const PoolItem & pi : items_locked )
-    { control.lockResolvable( pi ); }
-
-    for ( const PoolItem & pi : items_keep )
-    { control.keepResolvable( pi ); }
-
-    for ( const PoolItem & pi : items_to_remove )
-    { control.deleteResolvable( pi ); }
-
-    control.addDependencies (resolver.extraRequires(), resolver.extraConflicts());
-    control.addDependencies (SystemCheck::instance().requiredSystemCap(),
-			     SystemCheck::instance().conflictSystemCap());
-    control.addUpgradeRepos( resolver.upgradeRepos() );
-
-    control.addTagIf( "distupgrade",	resolver.isUpgradeMode() );
-    control.addTagIf( "update",	 	resolver.isUpdateMode() );
-    control.addTagIf( "verify",	 	resolver.isVerifyingMode() );
-
-    return true;
-}
-
-
       ///////////////////////////////////////////////////////////////////
     };// namespace detail
     /////////////////////////////////////////////////////////////////////

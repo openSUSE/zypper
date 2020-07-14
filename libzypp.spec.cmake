@@ -67,6 +67,7 @@ BuildRequires:  gcc-c++ >= 7
 BuildRequires:  gettext-devel
 BuildRequires:  graphviz
 BuildRequires:  libxml2-devel
+BuildRequires:  yaml-cpp-devel
 %if 0%{?suse_version} != 1110
 # No libproxy on SLES
 BuildRequires:  libproxy-devel

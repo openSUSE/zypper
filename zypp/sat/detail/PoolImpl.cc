@@ -39,7 +39,9 @@ extern "C"
 // Workaround libsolv project not providing a common include
 // directory. (the -devel package does, but the git repo doesn't).
 // #include <solv/repo_helix.h>
+// #include <solv/testcase.h>
 int repo_add_helix( ::Repo *repo, FILE *fp, int flags );
+int testcase_add_testtags(Repo *repo, FILE *fp, int flags);
 }
 
 using std::endl;
@@ -337,6 +339,15 @@ namespace zypp
       {
         setDirty(__FUNCTION__, repo_r->name );
         int ret = ::repo_add_helix( repo_r, file_r, 0 );
+        if ( ret == 0 )
+          _postRepoAdd( repo_r );
+        return 0;
+      }
+
+      int PoolImpl::_addTesttags(CRepo *repo_r, FILE *file_r)
+      {
+        setDirty(__FUNCTION__, repo_r->name );
+        int ret = ::testcase_add_testtags( repo_r, file_r, 0 );
         if ( ret == 0 )
           _postRepoAdd( repo_r );
         return 0;

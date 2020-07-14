@@ -183,6 +183,15 @@ ELSE ( NOT ZLIB_FOUND)
 ENDIF( NOT ZLIB_FOUND)
 
 
+FIND_PACKAGE(YAML-CPP REQUIRED)
+IF ( NOT YAML-CPP_FOUND)
+  MESSAGE( FATAL_ERROR " yaml-cpp not found" )
+ELSE ( NOT YAML-CPP_FOUND)
+  INCLUDE_DIRECTORIES(${YAML_CPP_INCLUDE_DIR})
+ENDIF( NOT YAML-CPP_FOUND)
+
+
+
 #Allow to override the libsolv install location
 IF( LIBSOLV_SRCDIR AND LIBSOLV_BUILDDIR )
   execute_process(
@@ -196,7 +205,7 @@ IF( LIBSOLV_SRCDIR AND LIBSOLV_BUILDDIR )
   )
 
   INCLUDE_DIRECTORIES( ${CMAKE_BINARY_DIR}/libsolv/include ${CMAKE_BINARY_DIR}/libsolv/ext ${CMAKE_BINARY_DIR}/libsolv/solvversion ${CMAKE_BINARY_DIR}/libsolv/solvversion/solv ${CMAKE_BINARY_DIR}/libsolv/ext/solv ${CMAKE_BINARY_DIR}/libsolv/include/solv )
-  SET( LibSolv_LIBRARIES ${LIBSOLV_BUILDDIR}/src/libsolv.a ${LIBSOLV_BUILDDIR}/ext/libsolvext.a )
+  SET( LibSolv_LIBRARIES ${LIBSOLV_BUILDDIR}/ext/libsolvext.a ${LIBSOLV_BUILDDIR}/src/libsolv.a )
 
 ELSE()
   FIND_PACKAGE(LibSolv REQUIRED ext)

@@ -143,6 +143,12 @@ namespace zypp
           */
           int _addHelix( CRepo * repo_r, FILE * file_r );
 
+          /** Adding testtags file to a repo.
+           * Except for \c isSystemRepo_r, solvables of incompatible architecture
+           * are filtered out.
+          */
+          int _addTesttags( CRepo * repo_r, FILE * file_r );
+
           /** Adding Solvables to a repo. */
           detail::SolvableIdType _addSolvables( CRepo * repo_r, unsigned count_r );
           //@}
