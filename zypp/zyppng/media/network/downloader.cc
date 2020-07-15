@@ -665,6 +665,26 @@ namespace zyppng {
       internal::fillSettingsFromUrl( url, set );
       if ( _transferSettings.proxy().empty() )
         internal::fillSettingsSystemProxy( url, set );
+
+      /* Fixes bsc#1174011 "auth=basic ignored in some cases"
+       * We should proactively add the password to the request if basic auth is configured
+       * and a password is available in the credentials but not in the URL.
+       *
+       * We will be a bit paranoid here and require that the URL has a user embedded, otherwise we go the default route
+       * and ask the server first about the auth method
+       */
+      if ( set.authType() == "basic"
+           && set.username().size()
+           && !set.password().size() ) {
+        zypp::media::CredentialManager cm( zypp::media::CredManagerOptions( zypp::ZConfig::instance().repoManagerRoot()) );
+        const auto cred = cm.getCred( url );
+        if ( cred && cred->valid() ) {
+          if ( !set.username().size() )
+            set.setUsername(cred->username());
+          set.setPassword(cred->password());
+        }
+      }
+
     } catch ( const zypp::media::MediaBadUrlException & e ) {
       res = NetworkRequestErrorPrivate::customError( NetworkRequestError::MalformedURL, e.asString(), buildExtraInfo() );
     } catch ( const zypp::media::MediaUnauthorizedException & e ) {

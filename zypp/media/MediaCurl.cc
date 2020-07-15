@@ -380,6 +380,26 @@ void MediaCurl::setupEasy()
 
   SET_OPTION(CURLOPT_USERAGENT, _settings.userAgentString().c_str() );
 
+  /* Fixes bsc#1174011 "auth=basic ignored in some cases"
+       * We should proactively add the password to the request if basic auth is configured
+       * and a password is available in the credentials but not in the URL.
+       *
+       * We will be a bit paranoid here and require that the URL has a user embedded, otherwise we go the default route
+       * and ask the server first about the auth method
+       */
+  if ( _settings.authType() == "basic"
+       && _settings.username().size()
+       && !_settings.password().size() ) {
+
+    CredentialManager cm(CredManagerOptions(ZConfig::instance().repoManagerRoot()));
+    const auto cred = cm.getCred( _url );
+    if ( cred && cred->valid() ) {
+      if ( !_settings.username().size() )
+        _settings.setUsername(cred->username());
+      _settings.setPassword(cred->password());
+    }
+  }
+
   /*---------------------------------------------------------------*
    CURLOPT_USERPWD: [user name]:[password]
 

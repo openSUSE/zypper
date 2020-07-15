@@ -90,7 +90,7 @@ std::ostream & CurlAuthData::dumpOn( std::ostream & str ) const
   return str;
 }
 
-long CurlAuthData::auth_type_str2long(std::string & auth_type_str)
+long CurlAuthData::auth_type_str2long( const std::string & auth_type_str )
 {
   curl_version_info_data *curl_info = curl_version_info(CURLVERSION_NOW);
 

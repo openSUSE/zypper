@@ -3,6 +3,7 @@
 #include <zypp/zyppng/media/network/networkrequesterror.h>
 #include <zypp/zyppng/media/network/networkrequestdispatcher.h>
 #include <zypp/zyppng/media/network/request.h>
+#include <zypp/media/CredentialManager.h>
 #include <zypp/TmpPath.h>
 #include <zypp/PathInfo.h>
 #include <zypp/ZConfig.h>
@@ -569,5 +570,68 @@ BOOST_DATA_TEST_CASE( dltest_auth, bdata::make( withSSL ), withSSL )
     ev->run();
     BOOST_TEST_REQ_SUCCESS( dl );
     BOOST_REQUIRE( !gotAuthRequest );
+  }
+}
+
+/**
+ * Test for bsc#1174011 auth=basic ignored in some cases
+ *
+ * If the URL specifes ?auth=basic libzypp should proactively send credentials we have available in the cred store
+ */
+BOOST_DATA_TEST_CASE( dltest_auth_basic, bdata::make( withSSL ), withSSL )
+{
+  //don't write or read creds from real settings dir
+  zypp::filesystem::TmpDir repoManagerRoot;
+  zypp::ZConfig::instance().setRepoManagerRoot( repoManagerRoot.path() );
+
+  auto ev = zyppng::EventDispatcher::createMain();
+
+  zyppng::Downloader downloader;
+
+  WebServer web((zypp::Pathname(TESTS_SRC_DIR)/"/zyppng/data/downloader").c_str(), 10001, withSSL );
+  BOOST_REQUIRE( web.start() );
+
+  zypp::filesystem::TmpFile targetFile;
+  zyppng::Url weburl (web.url());
+  weburl.setPathName("/handler/test.txt");
+  weburl.setQueryParam("auth", "basic");
+  weburl.setUsername("test");
+
+  // make sure the creds are already available
+  zypp::media::CredentialManager cm( repoManagerRoot.path() );
+  zypp::media::AuthData data ("test", "test");
+  data.setUrl( weburl );
+  cm.addCred( data );
+  cm.save();
+
+  zyppng::TransferSettings set = web.transferSettings();
+
+  web.addRequestHandler( "test.txt", createAuthHandler() );
+  web.addRequestHandler( "quit", [ &ev ]( WebServer::Request & ){ ev->quit();} );
+
+  {
+    // simply check by request count if the test was successfull:
+    // if the proactive code adding the credentials to the first request is not executed we will
+    // have more than 1 request.
+    int reqCount = 0;
+    auto dispatcher = downloader.requestDispatcher();
+    dispatcher->sigDownloadStarted().connect([&]( zyppng::NetworkRequestDispatcher &, zyppng::NetworkRequest & ){
+      reqCount++;
+    });
+
+
+    auto dl = downloader.downloadFile( weburl, targetFile.path() );
+    dl->setMultiPartHandlingEnabled( false );
+
+    dl->settings() = set;
+
+    dl->sigFinished( ).connect([ &ev ]( zyppng::Download & ){
+      ev->quit();
+    });
+
+    dl->start();
+    ev->run();
+    BOOST_TEST_REQ_SUCCESS( dl );
+    BOOST_REQUIRE_EQUAL( reqCount, 1 );
   }
 }
