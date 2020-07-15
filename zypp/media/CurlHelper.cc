@@ -28,25 +28,33 @@ void globalInitCurlOnce()
 int log_curl(CURL *curl, curl_infotype info,
   char *ptr, size_t len, void *max_lvl)
 {
-  std::string pfx(" ");
-  long        lvl = 0;
-  switch( info)
+  if ( max_lvl == nullptr )
+    return 0;
+
+  long maxlvl = *((long *)max_lvl);
+
+  char pfx = ' ';
+  switch( info )
   {
-    case CURLINFO_TEXT:       lvl = 1; pfx = "*"; break;
-    case CURLINFO_HEADER_IN:  lvl = 2; pfx = "<"; break;
-    case CURLINFO_HEADER_OUT: lvl = 2; pfx = ">"; break;
-    default:                                      break;
+    case CURLINFO_TEXT:       if ( maxlvl < 1 ) return 0; pfx = '*'; break;
+    case CURLINFO_HEADER_IN:  if ( maxlvl < 2 ) return 0; pfx = '<'; break;
+    case CURLINFO_HEADER_OUT: if ( maxlvl < 2 ) return 0; pfx = '>'; break;
+    default:
+      return 0;
   }
-  if( lvl > 0 && max_lvl != NULL && lvl <= *((long *)max_lvl))
+
+  std::vector<std::string> lines;
+  str::split( std::string(ptr,len), std::back_inserter(lines), "\r\n" );
+  for( const auto & line : lines )
   {
-    std::string                            msg(ptr, len);
-    std::list<std::string>                 lines;
-    std::list<std::string>::const_iterator line;
-    zypp::str::split(msg, std::back_inserter(lines), "\r\n");
-    for(line = lines.begin(); line != lines.end(); ++line)
-    {
-      DBG << pfx << " " << *line << std::endl;
+    if ( str::startsWith( line, "Authorization:" ) ) {
+      std::string::size_type pos { line.find( " ", 15 ) }; // Authorization: <type> <credentials>
+      if ( pos == std::string::npos )
+	pos = 15;
+      DBG << pfx << " " << line.substr( 0, pos ) << " <credentials removed>" << std::endl;
     }
+    else
+      DBG << pfx << " " << line << std::endl;
   }
   return 0;
 }
