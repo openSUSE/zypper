@@ -135,7 +135,8 @@ public:
    * \throws MediaException if an invalid authentication type name is
    *         encountered.
    */
-  static long auth_type_str2long(const std::string &auth_type_str);
+  static long auth_type_str2long( std::string & auth_type_str );
+  static long auth_type_str2long( const std::string &auth_type_str );
 
   /**
    * Converts a long of ORed CURLAUTH_* identifiers into a string of comma
