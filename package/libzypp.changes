@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Thu Jul 16 18:04:18 CEST 2020 - ma@suse.de
+
+- Fix bsc#1174011 auth=basic ignored in some cases (bsc#1174011)
+  Proactively send credentials if the URL specifes '?auth=basic'
+  and a username.
+- ZYPP_MEDIA_CURL_DEBUG: Strip credentials in header log (bsc#1174011)
+- version 17.24.1 (22)
+
+-------------------------------------------------------------------
 Tue Jul 14 13:19:56 CEST 2020 - ma@suse.de
 
 - Completey rework the purge-kernels algorithm (fix bsc#1173106)
