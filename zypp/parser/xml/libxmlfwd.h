@@ -12,11 +12,8 @@
 #ifndef ZYPP_PARSER_XML_LIBXMLFWD_H
 #define ZYPP_PARSER_XML_LIBXMLFWD_H
 
-extern "C"
-{
 #include <libxml/xmlreader.h>
 #include <libxml/xmlerror.h>
-}
 
 #include <iosfwd>
 
