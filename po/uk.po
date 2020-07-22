@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: zypper.uk\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-04-12 15:27+0200\n"
-"PO-Revision-Date: 2020-07-07 20:01+0000\n"
+"PO-Revision-Date: 2020-07-26 08:51+0000\n"
 "Last-Translator: Lesath <4lesath@gmail.com>\n"
 "Language-Team: Ukrainian <https://l10n.opensuse.org/projects/zypper/master/"
 "uk/>\n"
@@ -1060,7 +1060,7 @@ msgstr "Шаблон «%s» не знайдено."
 #: src/RequestFeedback.cc:54
 #, c-format, boost-format
 msgid "Source package '%s' not found."
-msgstr "Пакунок з сирцями «%s» не знайдено."
+msgstr "Cирцевий пакунок «%s» не знайдено."
 
 #. just in case
 #: src/RequestFeedback.cc:56
@@ -1091,7 +1091,7 @@ msgstr "Шаблон «%s» не знайдено у вказаних схови
 #: src/RequestFeedback.cc:69
 #, c-format, boost-format
 msgid "Source package '%s' not found in specified repositories."
-msgstr "Пакунок з сирцями «%s» не знайдений в зазначених репозиторіях."
+msgstr "Cирцевий пакунок «%s» не знайдений в зазначених репозиторіях."
 
 #. just in case
 #: src/RequestFeedback.cc:71
@@ -5617,32 +5617,32 @@ msgstr "Встановлені пакунки з ліцензійними уго
 #: src/misc.cc:350
 #, c-format, boost-format
 msgid "Package '%s' has source package '%s'."
-msgstr "У пакунку «%s» наявний пакунок з сирцями «%s»."
+msgstr "Пакунок «%s» має сирцевий пакунок «%s»."
 
 #: src/misc.cc:359
 #, c-format, boost-format
 msgid "Source package '%s' for package '%s' not found."
-msgstr "Пакет з сирцями «%s» для пакунку «%s» не знайдено."
+msgstr "Сирцевий пакунок «%s» для пакунку «%s» не знайдено."
 
 #: src/misc.cc:433
 #, c-format, boost-format
 msgid "Installing source package %s-%s"
-msgstr "Встановлення пакунка з сирцями %s-%s"
+msgstr "Встановлення сирцевого пакунку %s-%s"
 
 #: src/misc.cc:442
 #, c-format, boost-format
 msgid "Source package %s-%s successfully retrieved."
-msgstr "Пакунок з сирцями %s-%s було успішно отримано."
+msgstr "Сирцевий пакунок %s-%s було успішно отримано."
 
 #: src/misc.cc:448
 #, c-format, boost-format
 msgid "Source package %s-%s successfully installed."
-msgstr "Пакунок з сирцями %s-%s було успішно встановлено."
+msgstr "Сирцевий пакунок %s-%s було успішно встановлено."
 
 #: src/misc.cc:454
 #, c-format, boost-format
 msgid "Problem installing source package %s-%s:"
-msgstr "Проблема встановленням пакунка з сирцями %s-%s:"
+msgstr "Проблема встановлення сирцевого пакунку %s-%s:"
 
 #: src/output/OutNormal.cc:81
 msgid "Warning: "
