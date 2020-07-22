@@ -1221,6 +1221,8 @@ namespace
       { lineres = RpmDb::CHK_NOTFOUND; }
       else if ( line.find( ": NOTRUSTED" ) != std::string::npos )
       { lineres = RpmDb::CHK_NOTTRUSTED; }
+      else if ( line.find( ": NOTFOUND" ) != std::string::npos )
+      { continue; } // just collect details for signatures found (#229)
 
       ++count[lineres];
       detail_r.push_back( RpmDb::CheckPackageDetail::value_type( lineres, std::move(line) ) );
