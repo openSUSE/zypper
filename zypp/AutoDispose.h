@@ -162,7 +162,7 @@ namespace zypp
       void resetDispose()
       { setDispose( Dispose() ); }
 
-      /** Exchange the dispose function. +*/
+      /** Exchange the dispose function. */
       void swapDispose( Dispose & dispose_r )
       { _pimpl->_dispose.swap( dispose_r ); }
 
@@ -187,6 +187,83 @@ namespace zypp
 
       shared_ptr<Impl> _pimpl;
     };
+
+    template<>
+    class AutoDispose<void>
+    {
+    public:
+      /** Dispose function signatue. */
+      typedef function<void ()> Dispose;
+
+    public:
+      /** Default Ctor using default constructed value and no dispose function. */
+      AutoDispose()
+        : _pimpl( new Impl() )
+      {}
+
+      /** Ctor taking dispose function and using default constructed value. */
+      explicit AutoDispose( const Dispose & dispose_r )
+        : _pimpl( new Impl( dispose_r ) )
+      {}
+
+    public:
+
+      /** Reset to default Ctor values. */
+      void reset()
+      { AutoDispose().swap( *this ); }
+
+      /** Exchange the contents of two AutoDispose objects. */
+      void swap( AutoDispose & rhs )
+      { _pimpl.swap( rhs._pimpl ); }
+
+    public:
+      /** Return the current dispose function. */
+      const Dispose & getDispose() const
+      { return _pimpl->_dispose; }
+
+      /** Set a new dispose function. */
+      void setDispose( const Dispose & dispose_r )
+      { _pimpl->_dispose = dispose_r; }
+
+      /** Set no dispose function. */
+      void resetDispose()
+      { setDispose( Dispose() ); }
+
+      /** Exchange the dispose function. */
+      void swapDispose( Dispose & dispose_r )
+      { _pimpl->_dispose.swap( dispose_r ); }
+
+    private:
+      struct Impl : private base::NonCopyable
+      {
+        Impl( )
+        {}
+
+        Impl( const Dispose & dispose_r )
+          : _dispose( dispose_r )
+        {}
+
+        ~Impl()
+        {
+          if ( _dispose )
+            try { _dispose(); } catch(...) {}
+        }
+        Dispose    _dispose;
+      };
+      shared_ptr<Impl> _pimpl;
+    };
+
+  /*!
+   * Simple way to run a function at scope exit:
+   * \code
+   * bool wasBlocking = unblockFile( fd, true );
+   * OnScopeExit cleanup( [wasBlocking, fd](){
+   *  if ( wasBlocking ) unblockFile( fd, false );
+   * });
+   * \endcode
+   */
+  using OnScopeExit = AutoDispose<void>;
+
   ///////////////////////////////////////////////////////////////////
 
   /** \relates AutoDispose Stream output of the \c Tp object. */
