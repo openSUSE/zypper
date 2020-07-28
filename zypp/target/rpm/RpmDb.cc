@@ -51,6 +51,7 @@ extern "C"
 #include <zypp/KeyRing.h>
 #include <zypp/ZYppFactory.h>
 #include <zypp/ZConfig.h>
+#include <zypp/base/IOTools.h>
 
 using std::endl;
 using namespace zypp::filesystem;
@@ -1402,65 +1403,39 @@ bool RpmDb::systemReadLine( std::string & line )
   {
     process->setBlocking( false );
     FILE * inputfile = process->inputFile();
-    int    inputfileFd = ::fileno( inputfile );
-    do
-    {
-      /* Watch inputFile to see when it has input. */
-      fd_set rfds;
-      FD_ZERO( &rfds );
-      FD_SET( inputfileFd, &rfds );
+    do {
+      // Check every 5 seconds if the process is still running to prevent against
+      // daemons launched in rpm %post that do not close their filedescriptors,
+      // causing us to block for infinity. (bnc#174548)
+      const auto &readResult = io::receiveUpto( inputfile, '\n', 5 * 1000, false );
+      switch ( readResult.first ) {
+        case io::ReceiveUpToResult::Timeout: {
+          if ( !process->running() )
+            return false;
 
-      /* Wait up to 5 seconds. */
-      struct timeval tv;
-      tv.tv_sec = 5;
-      tv.tv_usec = 0;
+          // we might have received a partial line, lets not forget about it
+          line += readResult.second;
+        }
+        case io::ReceiveUpToResult::Error:
+        case io::ReceiveUpToResult::EndOfFile: {
+          line += readResult.second;
+          if ( line.size() && line.back() == '\n')
+            line.pop_back();
+          return line.size(); // in case of pending output
+        }
+        case io::ReceiveUpToResult::Success: {
+          line += readResult.second;
 
-      int retval = select( inputfileFd+1, &rfds, NULL, NULL, &tv );
+          if ( line.size() && line.back() == '\n')
+            line.pop_back();
 
-      if ( retval == -1 )
-      {
-	ERR << "select error: " << strerror(errno) << endl;
-	if ( errno != EINTR )
-	  return false;
+          if ( env::ZYPP_RPM_DEBUG() )
+            L_DBG("RPM_DEBUG") << line << endl;
+          return true; // complete line
+        }
       }
-      else if ( retval )
-      {
-	// Data is available now.
-	static size_t linebuffer_size = 0;	// static because getline allocs
-	static char * linebuffer = 0; 		// and reallocs if buffer is too small
-	ssize_t nread = getline( &linebuffer, &linebuffer_size, inputfile );
-	if ( nread == -1 )
-	{
-	  if ( ::feof( inputfile ) )
-	    return line.size(); // in case of pending output
-	}
-	else
-	{
-	  if ( nread > 0 )
-	  {
-	    if ( linebuffer[nread-1] == '\n' )
-	      --nread;
-	    line += std::string( linebuffer, nread );
-	  }
-
-	  if ( ! ::ferror( inputfile ) || ::feof( inputfile ) )
-	  {
-	    if ( env::ZYPP_RPM_DEBUG() )
-	      L_DBG("RPM_DEBUG") << line << endl;
-	    return true; // complete line
-	  }
-	}
-	clearerr( inputfile );
-      }
-      else
-      {
-	// No data within time.
-	if ( ! process->running() )
-	  return false;
-      }
-    } while ( true );
+    } while( true );
   }
-
   return false;
 }
 
