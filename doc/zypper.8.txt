@@ -984,7 +984,7 @@ The option may be specified multiple times.
 
 Repository Management
 ~~~~~~~~~~~~~~~~~~~~~
-Zypper is able to work with YaST, RPM-MD (yum) software repositories, and plain directories containing .rpm files.
+Zypper is able to work with YaST, RPM-MD (yum) software repositories, and plain directories containing .rpm files (no symlinks).
 
 Repositories are primarily identified using their _URI_ or _alias_. Alias serves as a shorthand for the long URI or name of the repository. The _name_ of the repository should briefly describe the repository and is shown to the user in tables and messages. The name is not required, and if not known, the alias is shown instead. The alias is required and uniquely identifies the repository on the system.
 
