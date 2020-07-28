@@ -396,7 +396,7 @@ namespace zypp
 
     pid_t cachepid = 0;
     FilterRunsInContainer runsInLXC;
-    for( std::string line = source.receiveLine(); ! line.empty(); line = source.receiveLine() )
+    for( std::string line = source.receiveLine( 30 * 1000 ); ! line.empty(); line = source.receiveLine(  30 * 1000  ) )
     {
       // NOTE: line contains '\0' separeated fields!
       if ( line[0] == 'p' )
@@ -434,7 +434,15 @@ namespace zypp
     _pimpl->_fromLsofFileMode = false;
 
     ExternalProgram prog( argv, ExternalProgram::Discard_Stderr );
-    std::map<pid_t,CacheEntry> cachemap = _pimpl->filterInput( prog );
+    std::map<pid_t,CacheEntry> cachemap;
+
+    try {
+      cachemap = _pimpl->filterInput( prog );
+    } catch ( const io::TimeoutException &e ) {
+      ZYPP_CAUGHT( e );
+      prog.close();
+      ZYPP_THROW ( Exception( "Reading data from 'lsof' timed out.") );
+    }
 
     int ret = prog.close();
     if ( ret != 0 )
