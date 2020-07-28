@@ -217,6 +217,7 @@ SET( zypp_base_SRCS
   base/Gettext.cc
   base/GzStream.cc
   base/IOStream.cc
+  base/IOTools.cc
   base/InputStream.cc
   base/ReferenceCounted.cc
   base/SetRelationMixin.cc
@@ -260,6 +261,7 @@ SET( zypp_base_HEADERS
   base/GzStream.h
   base/Hash.h
   base/IOStream.h
+  base/IOTools.h
   base/InputStream.h
   base/Iterable.h
   base/Iterator.h
