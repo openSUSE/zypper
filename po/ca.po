@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-12-05 14:22+0100\n"
-"PO-Revision-Date: 2020-05-02 19:50+0000\n"
+"PO-Revision-Date: 2020-07-29 20:49+0000\n"
 "Last-Translator: David Medina <medipas@gmail.com>\n"
 "Language-Team: Catalan <https://l10n.opensuse.org/projects/libzypp/master/ca/"
 ">\n"
@@ -4954,7 +4954,7 @@ msgstr "no instal·lis %s"
 #: zypp/solver/detail/SATResolver.cc:1277
 #, c-format, boost-format
 msgid "keep %s"
-msgstr "conserva %s"
+msgstr "mantén %s"
 
 #: zypp/solver/detail/SATResolver.cc:1240
 #, c-format, boost-format
