@@ -15,6 +15,7 @@
 #include <stdio.h>
 #include <utility>
 #include <string>
+#include <zypp/base/Exception.h>
 
 namespace zypp::io {
 
@@ -30,6 +31,25 @@ namespace zypp::io {
    */
   BlockingMode setFILEBlocking ( FILE *file, bool mode = true );
 
+
+  class TimeoutException : public Exception
+  {
+  public:
+    /** Ctor taking message.
+       * Use \ref ZYPP_THROW to throw exceptions.
+      */
+    TimeoutException() : Exception( "Timeout Exception" )
+    {}
+    /** Ctor taking message.
+       * Use \ref ZYPP_THROW to throw exceptions.
+      */
+    TimeoutException( const std::string & msg_r )
+      : Exception( msg_r )
+    {}
+
+    /** Dtor. */
+    virtual ~TimeoutException() noexcept override;
+  };
 
   enum ReceiveUpToResult {
     Success,

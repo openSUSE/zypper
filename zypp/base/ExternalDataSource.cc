@@ -19,41 +19,41 @@
 #include <iostream>
 #include <stdlib.h>
 #include <string.h>
-
 #include <sstream>
 #include <string>
 
 #include <zypp/base/Logger.h>
 #include <zypp/base/ExternalDataSource.h>
+#include <zypp/AutoDispose.h>
 
 using std::endl;
 
 namespace zypp {
   namespace externalprogram {
 
-    ExternalDataSource::ExternalDataSource (FILE *ifile, FILE *ofile)
-      : inputfile (ifile),
-        outputfile (ofile),
-        linebuffer (0),
-        linebuffer_size (0)
+    ExternalDataSource::ExternalDataSource( FILE *ifile, FILE *ofile )
+      : inputfile( ifile ),
+        outputfile( ofile ),
+        linebuffer( 0 ),
+        linebuffer_size( 0 )
     {
     }
 
 
-    ExternalDataSource::~ExternalDataSource ()
+    ExternalDataSource::~ExternalDataSource()
     {
       if (linebuffer)
-    	free (linebuffer);
+    	free( linebuffer );
       close ();
     }
 
 
     bool
-    ExternalDataSource::send (const char *buffer, size_t length)
+    ExternalDataSource::send( const char *buffer, size_t length )
     {
-      if (outputfile) {
-    	bool success = fwrite (buffer, length, 1, outputfile) != 0;
-    	fflush (outputfile);
+      if ( outputfile ) {
+    	bool success = fwrite( buffer, length, 1, outputfile ) != 0;
+    	fflush( outputfile );
     	return success;
       }
       else
@@ -62,94 +62,86 @@ namespace zypp {
 
 
     bool
-    ExternalDataSource::send (std::string s)
+    ExternalDataSource::send( std::string s )
     {
       DBG << "send (" << s << ")";
-      return send(s.data(), s.length());
+      return send( s.data(), s.length() );
     }
 
 
     std::string
-    ExternalDataSource::receiveUpto (char c)
+    ExternalDataSource::receiveUpto( char c )
     {
-      if (inputfile && !feof(inputfile))
+      if ( inputfile && !feof( inputfile ) )
       {
     	std::ostringstream datas;
 	 while ( true )
 	 {
-	   int readc = fgetc(inputfile);
-	   if (readc == EOF) break;
+	   int readc = fgetc( inputfile );
+	   if ( readc == EOF ) break;
 	   datas << (char)readc;
-	   if ((char)readc == c) break;
+	   if ( (char)readc == c ) break;
 	 }
 	 return datas.str();
       }
       return std::string();
     }
 
+    std::string ExternalDataSource::receiveUpto( char c, io::timeout_type timeout )
+    {
+      const auto &received = io::receiveUpto( inputFile(), c, timeout );
+
+      if ( received.first == io::Timeout )
+        ZYPP_THROW( io::TimeoutException() );
+
+      return received.second;
+    }
 
     size_t
-    ExternalDataSource::receive (char *buffer, size_t length)
+    ExternalDataSource::receive( char *buffer, size_t length )
     {
-      if (inputfile)
-    	return fread (buffer, 1, length, inputfile);
+      if ( inputfile )
+    	return fread( buffer, 1, length, inputfile );
       else
     	return 0;
     }
 
-    void ExternalDataSource::setBlocking(bool mode)
+    void ExternalDataSource::setBlocking( bool mode )
     {
-      if(!inputfile) return;
-
-      int fd = ::fileno(inputfile);
-
-      if(fd == -1)
-    	{ ERR << strerror(errno) << endl; return; }
-
-      int flags = ::fcntl(fd,F_GETFL);
-
-      if(flags == -1)
-    	{ ERR << strerror(errno) << endl; return; }
-
-      if(!mode)
-    	flags = flags | O_NONBLOCK;
-      else if(flags & O_NONBLOCK)
-    	flags = flags ^ O_NONBLOCK;
-
-      flags = ::fcntl(fd,F_SETFL,flags);
-
-      if(flags == -1)
-    	{ ERR << strerror(errno) << endl; return; }
+      io::setFILEBlocking( inputfile, mode );
     }
 
     std::string
     ExternalDataSource::receiveLine()
     {
-      if (inputfile)
+      if ( inputfile )
       {
-    	ssize_t nread = getline (&linebuffer, &linebuffer_size, inputfile);
-    	if (nread == -1)
+    	ssize_t nread = getline( &linebuffer, &linebuffer_size, inputfile );
+    	if ( nread == -1 )
     	    return "";
     	else
-    	    return std::string (linebuffer, nread);
+    	    return std::string( linebuffer, nread );
       }
       else
-    	return "";
+        return "";
     }
 
+    std::string ExternalDataSource::receiveLine( io::timeout_type timeout )
+    {
+      return receiveUpto( '\n', timeout );
+    }
 
     int
-    ExternalDataSource::close ()
+    ExternalDataSource::close()
     {
-      if (inputfile && inputfile != outputfile)
-    	fclose (inputfile);
-      if (outputfile)
-    	fclose (outputfile);
+      if ( inputfile && inputfile != outputfile )
+    	fclose( inputfile );
+      if ( outputfile )
+    	fclose( outputfile );
       inputfile = 0;
       outputfile = 0;
       return 0;
     }
-
 
   } // namespace externalprogram
 } // namespace zypp

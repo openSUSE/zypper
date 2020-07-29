@@ -126,4 +126,7 @@ namespace zypp::io {
       }
     } while ( true );
   }
+
+  TimeoutException::~TimeoutException() noexcept
+  { }
 }

@@ -15,6 +15,8 @@
 #include <stdio.h>
 
 #include <string>
+#include <optional>
+#include <zypp/base/IOTools.h>
 
 namespace zypp {
   namespace externalprogram {
@@ -39,25 +41,25 @@ namespace zypp {
        * @param outputfile The stream for writing
        * Either can be NULL if no reading/writing is allowed.
        */
-      ExternalDataSource(FILE *inputfile = 0, FILE *outputfile = 0);
+      ExternalDataSource( FILE *inputfile = 0, FILE *outputfile = 0 );
 
       /**
        * Implicitly close the connection.
        */
-      virtual ~ExternalDataSource();
+      virtual ~ExternalDataSource ();
 
       /**
        * Send some data to the output stream.
        * @param buffer The data to send
        * @param length The size of it
        */
-      bool send (const char *buffer, size_t length);
+      bool send( const char *buffer, size_t length );
 
       /**
        * Send some data down the stream.
        * @param string The data to send
        */
-      bool send (std::string s);
+      bool send( std::string s );
 
       /**
        * Read some data from the input stream.
@@ -65,7 +67,7 @@ namespace zypp {
        * @param length How much to read at most
        * Returns the amount actually received
        */
-      size_t receive(char *buffer, size_t length);
+      size_t receive( char *buffer, size_t length );
 
       /**
        * Read one line from the input stream.
@@ -74,16 +76,36 @@ namespace zypp {
       std::string receiveLine();
 
       /**
-       * Read characters into a string until character c is
-       * read. C is put at the end of the string.
+       * Read one line from the input stream.
+       * Returns the line read, including the terminator.
+       * \note The delimiter is not removed from the string.
+       * \note The \a timeout value is to be specified in milliseconds.
+       * \throws io::TimeoutException if the timeout is reached
        */
-      std::string receiveUpto(char c);
+      std::string receiveLine( io::timeout_type timeout );
+
+      /**
+       * Read characters into a string until delimiter \a c or EOF is
+       * read.
+       * \note The delimiter is not removed from the string.
+       */
+      std::string receiveUpto( char c );
+
+      /**
+       * Read characters into a string until delimiter \a c or EOF is
+       * read or the \a timeout is reached.
+       * \note The delimiter is not removed from the string.
+       * \note The \a timeout value is to be specified in milliseconds.
+       * \throws io::TimeoutException if the timeout is reached
+       */
+      std::string receiveUpto( char c, io::timeout_type timeout );
+
       /**
        * Set the blocking mode of the input stream.
        * @param mode True if the reader should be blocked waiting for input.
        * This is the initial default.
        */
-      void setBlocking(bool mode);
+      void setBlocking( bool mode );
 
       /**
        * Close the input and output streams.
