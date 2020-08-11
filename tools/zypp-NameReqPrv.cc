@@ -86,7 +86,9 @@ struct PQSort
 
 struct Table
 {
-  std::vector<std::string> & row( const sat::Solvable & solv_r )
+  using ResultLInes = std::set<std::string>;
+
+  ResultLInes & row( const sat::Solvable & solv_r )
   {
     //smax( _maxSID,  );
     smax( _maxNAME, solv_r.ident().size() + solv_r.edition().size() + solv_r.arch().size() );
@@ -98,9 +100,9 @@ struct Table
 
   void row( PoolQuery::const_iterator it_r )
   {
-    std::vector<std::string> & details { row( *it_r ) };
+    ResultLInes & details { row( *it_r ) };
     for_( match, it_r.matchesBegin(), it_r.matchesEnd() ) {
-      details.push_back( match->inSolvAttr().asString().substr( 9, 3 )+": " +match->asString() );
+      details.insert( match->inSolvAttr().asString().substr( 9, 3 )+": " +match->asString() );
     }
   }
 
@@ -148,7 +150,7 @@ private:
   unsigned _maxREPO = 0;
   //unsigned _maxTIME = 10;
   //unsigned _maxVEND = 0;
-  std::map<sat::Solvable, std::vector<std::string>, PQSort> _map;
+  std::map<sat::Solvable, ResultLInes, PQSort> _map;
 };
 
 inline std::ostream & operator<<( std::ostream & str, const Table & table_r )
@@ -248,7 +250,7 @@ void dTree( const std::string & cmd_r, const std::string & spec_r )
     {
       auto & details { t.row( el.first ) };
       for ( const auto & cap : el.second )
-	details.push_back( cap );
+	details.insert( cap );
     }
     message << endl << t << endl;
   }
