@@ -102,7 +102,14 @@ struct Table
   {
     ResultLInes & details { row( *it_r ) };
     for_( match, it_r.matchesBegin(), it_r.matchesEnd() ) {
-      details.insert( match->inSolvAttr().asString().substr( 9, 3 )+": " +match->asString() );
+      std::string ent { match->inSolvAttr().asString().substr( 9, 3 )+": " +match->asString() };
+      if ( match->inSolvAttr() == sat::SolvAttr::requires
+	&& match->inSolvable().prerequires().contains( Capability(match->id()) ) ) {
+	static const char * pre = "   " COL_C "[PRE]" COL_OFF;
+	ent[3] = '+';
+	ent += pre;
+      }
+      details.insert( std::move(ent) );
     }
   }
 
