@@ -59,12 +59,6 @@ public:
   //
   ///////////////////////////////////////////////////////////////////
 private:
-#if LEGACY(1712)
-  enum DbStateInfoBits {
-    DbSI_NO_INIT	= 0x0000
-  };
-  DbStateInfoBits _dbStateInfo;
-#endif
 
   /**
    * Root directory for all operations.
@@ -330,10 +324,6 @@ private:
   /** create package backups? */
   bool _packagebackups;
 
-#if LEGACY(1712)
-  /** whether <_root>/<WARNINGMAILPATH> was already created */
-  bool _warndirexists;
-#endif
   /**
    * handle rpm messages like "/etc/testrc saved as /etc/testrc.rpmorig"
    *
