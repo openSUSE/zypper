@@ -6,16 +6,8 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/*
-  File:       VendorAttr.cc
-
-  Author:     Michael Andres <ma@suse.de>
-  Maintainer: Michael Andres <ma@suse.de>
-
-  Purpose: Manage vendor attributes
-
-/-*/
-
+/** \file zypp/VendorAttr.cc
+*/
 #include <iostream>
 #include <fstream>
 #include <set>
@@ -24,7 +16,7 @@
 
 #include <zypp/base/LogTools.h>
 #include <zypp/base/IOStream.h>
-#include <zypp/base/String.h>
+#include <zypp/base/StringV.h>
 
 #include <zypp/PathInfo.h>
 #include <zypp/VendorAttr.h>
@@ -42,27 +34,47 @@ namespace zypp
 { /////////////////////////////////////////////////////////////////
 
   ///////////////////////////////////////////////////////////////////
-  namespace
-  { /////////////////////////////////////////////////////////////////
-
-    typedef std::map<Vendor,unsigned> VendorMap;
-    VendorMap _vendorMap;
-    unsigned vendorGroupCounter;
-
-    /////////////////////////////////////////////////////////////////
-  } // namespace
+  /// \class VendorAttr::Impl
+  /// \brief VendorAttr implementation.
   ///////////////////////////////////////////////////////////////////
+  class VendorAttr::Impl // : private base::NonCopyable
+  {
+    friend std::ostream & operator<<( std::ostream & str, const Impl & obj );
+  public:
+    /** bsc#1030686: The legacy default equivalence of 'suse' and 'opensuse'
+     * has been removed. Unless they are mentioned in a custom rule, create
+     * separate classes for them.
+     */
+    void legacySetup()
+    {
+      if ( _vendorMap.find("suse") == _vendorMap.end() )
+	_vendorMap["suse"] = ++vendorGroupCounter;
 
-  ///////////////////////////////////////////////////////////////////
-  namespace
-  { /////////////////////////////////////////////////////////////////
+      if ( _vendorMap.find("opensuse") == _vendorMap.end() )
+	_vendorMap["opensuse"] = ++vendorGroupCounter;
+    }
+
+  public:
+    /** Add a new equivalent vendor set. */
+    void addVendorList( VendorList && vendorList_r );
+
+    /** Return whether two vendor strings should be treated as equivalent.*/
+    bool equivalent( IdString lVendor, IdString rVendor ) const
+    { return lVendor == rVendor || vendorMatchId( lVendor ) == vendorMatchId( rVendor ); }
+
+  private:
+    using VendorMap = std::map<std::string,unsigned>;
+    mutable VendorMap _vendorMap;
+    unsigned vendorGroupCounter = 1;
+
+  private:
     typedef DefaultIntegral<int,0>				VendorMatchEntry;
     typedef std::unordered_map<IdString, VendorMatchEntry>	VendorMatch;
-    int         _nextId = -1;
-    VendorMatch _vendorMatch;
+    mutable int         _nextId = -1;
+    mutable VendorMatch _vendorMatch;
 
     /** Reset match cache if global VendorMap was changed. */
-    inline void vendorMatchIdReset()
+    void vendorMatchIdReset()
     {
       _nextId = -1;
       _vendorMatch.clear();
@@ -76,83 +88,65 @@ namespace zypp
      * \li If not found, assign and return a new ID (look into the predefined VendorMap (id>0),
      *     otherwise create a new ID (<0)).
      */
-    inline unsigned vendorMatchId( IdString vendor )
+    unsigned vendorMatchId( IdString vendor ) const;
+
+  private:
+    friend Impl * rwcowClone<Impl>( const Impl * rhs );
+    /** clone for RWCOW_pointer */
+    Impl * clone() const
+    { return new Impl( *this ); }
+  };
+
+  unsigned VendorAttr::Impl::vendorMatchId( IdString vendor ) const
+  {
+    VendorMatchEntry & ent( _vendorMatch[vendor] );
+    if ( ! ent )
     {
-      VendorMatchEntry & ent( _vendorMatch[vendor] );
-      if ( ! ent )
+      IdString lcvendor( str::toLower( vendor.asString() ) );
+      VendorMatchEntry & lcent( _vendorMatch[lcvendor] );
+      if ( ! lcent )
       {
-        IdString lcvendor( str::toLower( vendor.asString() ) );
-        VendorMatchEntry & lcent( _vendorMatch[lcvendor] );
-        if ( ! lcent )
-        {
-          unsigned myid = 0;
-	  // bnc#812608: no pefix compare in opensuse namespace
-	  static const IdString openSUSE( "opensuse" );
-	  if ( lcvendor == openSUSE || ! str::hasPrefix( lcvendor.c_str(), openSUSE.c_str() ) )
+	unsigned myid = 0;
+	// bnc#812608: no pefix compare in opensuse namespace
+	static const IdString openSUSE( "opensuse" );
+	if ( lcvendor == openSUSE || ! str::hasPrefix( lcvendor.c_str(), openSUSE.c_str() ) )
+	{
+	  // Compare this entry with the global vendor map.
+	  // Reversed to get the longest prefix.
+	  for ( VendorMap::reverse_iterator it = _vendorMap.rbegin(); it != _vendorMap.rend(); ++it )
 	  {
-	    // Compare this entry with the global vendor map.
-	    // Reversed to get the longest prefix.
-	    for ( VendorMap::reverse_iterator it = _vendorMap.rbegin(); it != _vendorMap.rend(); ++it )
+	    if ( str::hasPrefix( lcvendor.c_str(), it->first ) )
 	    {
-	      if ( str::hasPrefix( lcvendor.c_str(), it->first ) )
-	      {
-		myid = it->second;
-		break; // found
-	      }
+	      myid = it->second;
+	      break; // found
 	    }
 	  }
-	  if ( ! myid )
-          {
-            myid = --_nextId; // get a new class ID
-          }
-          ent = lcent = myid; // remember the new DI
-        }
-        else
-        {
-          ent = lcent; // take the ID from the lowercased vendor string
 	}
+	if ( ! myid )
+	{
+	  myid = --_nextId; // get a new class ID
+	}
+	ent = lcent = myid; // remember the new DI
       }
-      return ent;
-    }
-    /////////////////////////////////////////////////////////////////
-  } // namespace
-  ///////////////////////////////////////////////////////////////////
-
-  const VendorAttr & VendorAttr::instance()
-  {
-      static VendorAttr _val;
-      return _val;
-  }
-
-  VendorAttr::VendorAttr ()
-  {
-      vendorGroupCounter = 1;
-      Pathname vendorPath (ZConfig::instance().vendorPath());
+      else
       {
-	Target_Ptr trg( getZYpp()->getTarget() );
-	if ( trg )
-	  vendorPath = trg->root() / vendorPath;
+	ent = lcent; // take the ID from the lowercased vendor string
       }
-      // creating entries
-      addVendorDirectory (vendorPath);
-
-      // bsc#1030686: The legacy default equivalence of 'suse' and 'opensuse'
-      // has been removed. Unless they are mentioned in a custom rule, create
-      // separate classes for them.
-      if ( _vendorMap.find("suse") == _vendorMap.end() )
-	_vendorMap["suse"] = ++vendorGroupCounter;
-
-      if ( _vendorMap.find("opensuse") == _vendorMap.end() )
-	_vendorMap["opensuse"] = ++vendorGroupCounter;
-
-      MIL << *this << endl;
+    }
+    return ent;
   }
 
-  void VendorAttr::_addVendorList( VendorList & vendorList_r ) const
+  void VendorAttr::Impl::addVendorList( VendorList && vendorList_rr )
   {
+#warning REIMPLEMENT
+    std::vector<std::string> vendorList_r;
+    for ( const auto & el : vendorList_rr ) {
+      vendorList_r.push_back( el.asString() );
+    }
+
     unsigned int nextId = vendorGroupCounter + 1;
-	// convert to lowercase and check if a vendor is already defined
-	// in an existing group.
+    // convert to lowercase and check if a vendor is already defined
+    // in an existing group.
 
     for_( it, vendorList_r.begin(), vendorList_r.end() )
     {
@@ -190,98 +184,127 @@ namespace zypp
     vendorMatchIdReset();
   }
 
-  bool VendorAttr::addVendorFile( const Pathname & filename ) const
+  /** \relates VendorAttr::Impl Stream output */
+  inline std::ostream & operator<<( std::ostream & str, const VendorAttr::Impl & obj )
   {
-      parser::IniDict dict;
-
-      if ( PathInfo(filename).isExist())
-      {
-          InputStream is(filename);
-          dict.read(is);
-      }
-      else
-      {
-          MIL << filename << " not found." << endl;
-          return false;
-      }
-
-      for ( parser::IniDict::section_const_iterator sit = dict.sectionsBegin();
-	    sit != dict.sectionsEnd();
-	    ++sit )
-      {
-          std::string section(*sit);
-          //MIL << section << endl;
-          for ( parser::IniDict::entry_const_iterator it = dict.entriesBegin(*sit);
-                it != dict.entriesEnd(*sit);
-                ++it )
-          {
-	      std::string entry(it->first);
-	      std::string value(it->second);
-	      if ( section == "main" )
-	      {
-		  if ( entry == "vendors" )
-		  {
-		      VendorList vendorlist;
-		      str::split( value, back_inserter(vendorlist), "," );
-		      _addVendorList (vendorlist);
-		      break;
-		  }
-	      }
-	  }
-      }
-
-      return true;
+    str << "Equivalent vendors:";
+    for( const auto & p : obj._vendorMap ) {
+      str << endl << "   [" << p.second << "] " << p.first;
+    }
+    return str;
   }
 
+  ///////////////////////////////////////////////////////////////////
+  //
+  //	CLASS NAME : VendorAttr
+  //
+  ///////////////////////////////////////////////////////////////////
+
+  const VendorAttr & VendorAttr::instance()
+  {
+    Target_Ptr trg { getZYpp()->getTarget() };
+    return trg ? trg->vendorAttr() : noTargetInstance();
+  }
+
+  VendorAttr & VendorAttr::noTargetInstance()
+  {
+    static VendorAttr _val { ZConfig::instance().vendorPath() };
+    return _val;
+  }
+
+  VendorAttr::VendorAttr()
+  : _pimpl( new Impl )
+  {
+    _pimpl->legacySetup();
+    MIL << "Initial: " << *this << endl;
+  }
+
+  VendorAttr::VendorAttr( const Pathname & initial_r )
+  : _pimpl( new Impl )
+  {
+    addVendorDirectory( initial_r );
+    _pimpl->legacySetup();
+    MIL << "Initial " << initial_r << ": " << *this << endl;
+  }
+
+  VendorAttr::~VendorAttr()
+  {}
+
+  bool VendorAttr::addVendorDirectory( const Pathname & dirname_r )
+  {
+    if ( PathInfo pi { dirname_r }; ! pi.isDir() ) {
+      MIL << "Not a directory " << pi << endl;
+      return false;
+    }
+
+    filesystem::dirForEach( dirname_r, filesystem::matchNoDots(),
+			    [this]( const Pathname & dir_r, const std::string & str_r )->bool
+			    {
+			      this->addVendorFile( dir_r/str_r );
+			      return true;
+			    }
+    );
+    return true;
+  }
+
+  bool VendorAttr::addVendorFile( const Pathname & filename_r )
+  {
+    if ( PathInfo pi { filename_r }; ! pi.isFile() ) {
+      MIL << "Not a file " << pi << endl;
+      return false;
+    }
+
+    parser::IniDict dict { InputStream(filename_r) };
+    for ( const auto & el : dict.entries("main") )
+    {
+      if ( el.first == "vendors" )
+      {
+	VendorList tmp;
+	strv::split( el.second, ",", strv::Trim::trim,
+		     [&tmp]( std::string_view word ) {
+		       if ( ! word.empty() )
+			 tmp.push_back( IdString( word ) );
+		     } );
+	_addVendorList( std::move(tmp) );
+	break;
+      }
+    }
+    return true;
+  }
+
+  void VendorAttr::_addVendorList( VendorList && vendorList_r )
+  { _pimpl->addVendorList( std::move(vendorList_r) ); }
+
+#if LEGACY(1722)
   bool VendorAttr::addVendorDirectory( const Pathname & dirname ) const
-  {
-      if ( ! PathInfo(dirname).isExist() )
-      {
-          MIL << dirname << " not found." << endl;
-          return false;
-      }
+  { return const_cast<VendorAttr*>(this)->addVendorDirectory( dirname ); }
 
-      std::list<Pathname> filenames;
-      filesystem::readdir( filenames, dirname, false );
-      for_( it, filenames.begin(), filenames.end() ) {
-	  MIL << "Adding file " << *it << endl;
-	  addVendorFile( *it );
-      }
-      return true;
-  }
+  bool VendorAttr::addVendorFile( const Pathname & filename ) const
+  { return const_cast<VendorAttr*>(this)->addVendorFile( filename ); }
 
+  void VendorAttr::_addVendorList( std::vector<std::string> & vendorList_r ) const
+  { return const_cast<VendorAttr*>(this)->_addVendorList( VendorList( vendorList_r.begin(), vendorList_r.end() ) ); }
+#endif
   //////////////////////////////////////////////////////////////////
   // vendor equivalence:
   //////////////////////////////////////////////////////////////////
 
   bool VendorAttr::equivalent( IdString lVendor, IdString rVendor ) const
-  {
-    if ( lVendor == rVendor )
-      return true;
-    return vendorMatchId( lVendor ) == vendorMatchId( rVendor );
-  }
+  { return _pimpl->equivalent( lVendor, rVendor );}
 
   bool VendorAttr::equivalent( const Vendor & lVendor, const Vendor & rVendor ) const
-  { return equivalent( IdString( lVendor ), IdString( rVendor ) );
-  }
+  { return _pimpl->equivalent( IdString( lVendor ), IdString( rVendor ) ); }
 
   bool VendorAttr::equivalent( sat::Solvable lVendor, sat::Solvable rVendor ) const
-  { return equivalent( lVendor.vendor(), rVendor.vendor() ); }
+  { return _pimpl->equivalent( lVendor.vendor(), rVendor.vendor() ); }
 
   bool VendorAttr::equivalent( const PoolItem & lVendor, const PoolItem & rVendor ) const
-  { return equivalent( lVendor.satSolvable().vendor(), rVendor.satSolvable().vendor() ); }
+  { return _pimpl->equivalent( lVendor.satSolvable().vendor(), rVendor.satSolvable().vendor() ); }
 
   //////////////////////////////////////////////////////////////////
 
-  std::ostream & operator<<( std::ostream & str, const VendorAttr & /*obj*/ )
-  {
-    str << "Equivalent vendors:";
-    for_( it, _vendorMap.begin(), _vendorMap.end() )
-    {
-      str << endl << "   [" << it->second << "] " << it->first;
-    }
-    return str;
-  }
+  std::ostream & operator<<( std::ostream & str, const VendorAttr & obj )
+  { return str << *obj._pimpl; }
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp

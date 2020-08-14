@@ -134,6 +134,11 @@ namespace zypp
   std::string Target::anonymousUniqueId( const Pathname & root_r )
   { return target::TargetImpl::anonymousUniqueId( root_r ); }
 
+  const VendorAttr & Target::vendorAttr() const
+  { return _pimpl->vendorAttr(); }
+  void Target::vendorAttr( VendorAttr vendorAttr_r )
+  { _pimpl->vendorAttr( std::move(vendorAttr_r) ); }
+
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////

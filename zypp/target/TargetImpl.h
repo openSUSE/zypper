@@ -30,6 +30,7 @@
 #include <zypp/target/SolvIdentFile.h>
 #include <zypp/target/HardLocksFile.h>
 #include <zypp/ManagedFile.h>
+#include <zypp/VendorAttr.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -197,6 +198,14 @@ namespace zypp
       /** \overload */
       static std::string anonymousUniqueId( const Pathname & root_r );
 
+      /** \copydoc Target::vendorAttr() */
+      const VendorAttr & vendorAttr() const
+      { return _vendorAttr; }
+      /** \overload */
+      void vendorAttr( VendorAttr vendorAttr_r );
+    //@}
+
+  public:
     private:
       /** Commit ordered changes (internal helper) */
       void commit( const ZYppCommitPolicy & policy_r,
@@ -218,6 +227,8 @@ namespace zypp
       HardLocksFile _hardLocksFile;
       /** Cache distributionVersion */
       mutable std::string _distributionVersion;
+      /** vendor equivalence settings. */
+      VendorAttr _vendorAttr;
     };
     ///////////////////////////////////////////////////////////////////
 

@@ -747,6 +747,7 @@ namespace zypp
     , _requestedLocalesFile( home() / "RequestedLocales" )
     , _autoInstalledFile( home() / "AutoInstalled" )
     , _hardLocksFile( Pathname::assertprefix( _root, ZConfig::instance().locksFile() ) )
+    , _vendorAttr( Pathname::assertprefix( _root, ZConfig::instance().vendorPath() ) )
     {
       _rpm.initDatabase( root_r, doRebuild_r );
 
@@ -1956,6 +1957,13 @@ namespace zypp
       return guessAnonymousUniqueId( staticGuessRoot(root_r) );
     }
 
+    ///////////////////////////////////////////////////////////////////
+
+    void TargetImpl::vendorAttr( VendorAttr vendorAttr_r )
+    {
+      MIL << "New VendorAttr: " << vendorAttr_r << endl;
+      _vendorAttr = std::move(vendorAttr_r);
+    }
     ///////////////////////////////////////////////////////////////////
 
     void TargetImpl::installSrcPackage( const SrcPackage_constPtr & srcPackage_r )

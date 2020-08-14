@@ -349,7 +349,9 @@ namespace zypp
         else
         {
           // Inject this into ZConfig. Be shure this is
-          // allocated via new. See: reconfigureZConfig
+          // allocated via new.
+          // ma: override_r might not be needed anymore since the
+          //     Vendor_test is now able to initialize VendorAttr directly.
           INT << "Reconfigure to " << _parsedZyppConf << endl;
           ZConfig::instance()._pimpl.reset( this );
         }
@@ -788,14 +790,6 @@ namespace zypp
     mutable MultiversionMap _multiversionMap;
   };
   ///////////////////////////////////////////////////////////////////
-
-  // Backdoor to redirect ZConfig from within the running
-  // TEST-application. HANDLE WITH CARE!
-  void reconfigureZConfig( const Pathname & override_r )
-  {
-    // ctor puts itself unter smart pointer control.
-    new ZConfig::Impl( override_r );
-  }
 
   ///////////////////////////////////////////////////////////////////
   //

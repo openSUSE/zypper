@@ -1,10 +1,5 @@
 ADD_SUBDIRECTORY(base)
 
-# set the vendor.d paths correctly for the tests
-SET(VENDOR_D "${LIBZYPP_SOURCE_DIR}/tests/zypp/data/Vendor/vendors.d")
-FILE(MAKE_DIRECTORY "${LIBZYPP_BINARY_DIR}/tests/zypp/data/Vendor")
-CONFIGURE_FILE(${LIBZYPP_SOURCE_DIR}/tests/zypp/data/Vendor/zypp2.conf.cmake ${LIBZYPP_BINARY_DIR}/tests/zypp/data/Vendor/zypp2.conf @ONLY)
-
 ADD_TESTS(
   Arch
   Capabilities
@@ -50,7 +45,6 @@ ADD_TESTS(
   Url
   UserData
   Vendor
-  Vendor2
 )
 
 IF (ENABLE_ZCHUNK_COMPRESSION)

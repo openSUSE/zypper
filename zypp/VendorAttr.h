@@ -7,7 +7,6 @@
 |                                                                      |
 \---------------------------------------------------------------------*/
 /** \file zypp/VendorAttr.h
- *
 */
 #ifndef ZYPP_VENDORATTR_H
 #define ZYPP_VENDORATTR_H
@@ -16,8 +15,12 @@
 #include <string>
 #include <vector>
 
+#include <zypp/base/PtrTypes.h>
+#include <zypp/IdString.h>
 #include <zypp/PathInfo.h>
 #include <zypp/Vendor.h>
+
+#include <zypp/APIConfig.h>	// LEGACY macros
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp {
@@ -42,28 +45,58 @@ namespace zypp {
 */
 class VendorAttr
 {
-  public:
-    typedef std::vector<std::string> VendorList;
+    friend std::ostream & operator<<( std::ostream & str, const VendorAttr & obj );
 
-    /** Singleton */
+  public:
+    /** (Pseudo)Singleton, mapped to the current \ref Target::vendorAttr settings or to \ref noTargetInstance. */
     static const VendorAttr & instance();
+
+    /** Singleton, settings used if no \ref Target is active.
+     * The instance is initialized with the settings found in the system below /.
+     * The active Targets settings can be changed via \ref Target::vendorAttr.
+     */
+    static VendorAttr & noTargetInstance();
+
+  public:
+    /** Ctor providing the default set. */
+    VendorAttr();
+
+    /** Ctor reading the \a initial_r definitions from a dir or file. */
+    VendorAttr( const Pathname & initial_r );
+
+    /** Dtor */
+    ~VendorAttr();
 
     /**
      * Adding new equivalent vendors described in a directory
      **/
-    bool addVendorDirectory( const Pathname & dirname ) const;
+    bool addVendorDirectory( const Pathname & dirname_r );
+#if LEGACY(1722)
+    /** \deprecated This is NOT a CONST operation. */
+    bool addVendorDirectory( const Pathname & dirname_r ) const ZYPP_DEPRECATED;
+#endif
 
     /**
      * Adding new equivalent vendors described in a file
      **/
-    bool addVendorFile( const Pathname & filename ) const;
+    bool addVendorFile( const Pathname & filename_r );
+#if LEGACY(1722)
+    /** \deprecated This is NOT a CONST operation. */
+    bool addVendorFile( const Pathname & filename_r ) const ZYPP_DEPRECATED;
+#endif
 
     /**
-     * Adding new equivalent vendor set from list
+     * Adding a new equivalent vendor set from string container (via \ref C_Str)
+     * \note The container must own the strings returned by the iterator.
      **/
-    template <class TIterator>
-    void addVendorList( TIterator begin, TIterator end ) const
-    { VendorList tmp( begin, end ); _addVendorList( tmp ); }
+    template <class TContainer>
+    void addVendorList( const TContainer & container_r )
+    {
+      VendorList tmp;
+      for ( const auto & el : container_r )
+	tmp.push_back( IdString(el) );
+      _addVendorList( std::move(tmp) );
+    }
 
     /** Return whether two vendor strings should be treated as the same vendor.
      * Usually the solver is allowed to automatically select a package of an
@@ -78,9 +111,17 @@ class VendorAttr
     /** \overload using \ref PoolItem */
     bool equivalent( const PoolItem & lVendor, const PoolItem & rVendor ) const;
 
+  public:
+    class Impl;                 ///< Implementation class.
+    typedef std::vector<IdString> VendorList;
   private:
-    VendorAttr();
-    void _addVendorList( VendorList & ) const;
+    RWCOW_pointer<Impl> _pimpl; ///< Pointer to implementation.
+
+#if LEGACY(1722)
+    /** \deprecated */
+    void _addVendorList( std::vector<std::string> & list_r ) const ZYPP_DEPRECATED;
+#endif
+    void _addVendorList( VendorList && list_r );
 };
 
 /** \relates VendorAttr Stream output */

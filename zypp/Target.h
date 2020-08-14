@@ -26,6 +26,7 @@
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
+  class VendorAttr;
   namespace target
   {
     class TargetImpl;
@@ -203,6 +204,19 @@ namespace zypp
     std::string anonymousUniqueId() const;
     /** \overload */
     static std::string anonymousUniqueId( const Pathname & root_r );
+    //@}
+
+  public:
+    /** \name Definition of vendor equivalence.
+     * \see \ref VendorAttr
+     */
+    //@{
+    /** The targets current vendor equivalence settings.
+     * Initialized from the targets /etc/zypp/vendors.d.
+     */
+    const VendorAttr & vendorAttr() const;
+    /** Assign new vendor equivalence settings to the target. */
+    void vendorAttr( VendorAttr vendorAttr_r );
     //@}
 
   public:
