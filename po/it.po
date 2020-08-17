@@ -4439,7 +4439,7 @@ msgstr "Impossibile creare sat-pool."
 #: zypp/solver/detail/ProblemSolutionIgnore.cc:42
 #, c-format, boost-format
 msgid "break %s by ignoring some of its dependencies"
-msgstr "interrompi %s ignorando alcune delle sue dipendenze"
+msgstr "installa comunque %s ignorando alcune delle sue dipendenze"
 
 #: zypp/solver/detail/ProblemSolutionIgnore.cc:48
 msgid "generally ignore of some dependencies"
