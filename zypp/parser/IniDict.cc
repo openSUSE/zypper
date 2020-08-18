@@ -91,6 +91,16 @@ namespace zypp
       return (secit->second).end();
     }
 
+    Iterable<IniDict::entry_const_iterator> IniDict::entries(const std::string &section) const
+    {
+      SectionSet::const_iterator secit = _dict.find(section);
+      if ( secit == _dict.end() )
+      {
+        return makeIterable( _empty_map.begin(), _empty_map.end() );
+      }
+
+      return makeIterable( (secit->second).begin(), (secit->second).end() );
+    }
 
     IniDict::section_const_iterator IniDict::sectionsBegin() const
     {
@@ -102,12 +112,18 @@ namespace zypp
       return make_map_key_end( _dict );
     }
 
+    Iterable<IniDict::section_const_iterator> IniDict::sections() const
+    {
+      return makeIterable( sectionsBegin(), sectionsEnd() );
+    }
+
     void IniDict::insertEntry( const std::string &section,
                                const std::string &key,
                                const std::string &value )
     {
       consume( section, key, value );
     }
+
 
     void IniDict::deleteSection( const std::string &section )
     {

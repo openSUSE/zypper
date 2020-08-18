@@ -19,6 +19,7 @@
 #include <zypp/base/PtrTypes.h>
 #include <zypp/base/InputStream.h>
 #include <zypp/base/Iterator.h>
+#include <zypp/base/Iterable.h>
 #include <zypp/parser/IniParser.h>
 
 ///////////////////////////////////////////////////////////////////
@@ -61,6 +62,7 @@ namespace zypp
        //@{
       section_const_iterator sectionsBegin() const;
       section_const_iterator sectionsEnd() const;
+      Iterable<section_const_iterator> sections() const;
       //@}
       
       /**
@@ -79,6 +81,7 @@ namespace zypp
       //@{
       entry_const_iterator entriesBegin(const std::string &section) const;
       entry_const_iterator entriesEnd(const std::string &section) const;
+      Iterable<entry_const_iterator> entries(const std::string &section) const;
       //@{
       
       /**
