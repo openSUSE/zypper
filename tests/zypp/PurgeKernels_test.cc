@@ -230,7 +230,28 @@ namespace  {
         {
           { "kernel-source-1-1.noarch", false },
         }
-      }
+      },
+      TestSample {
+        TESTS_SRC_DIR"/zypp/data/PurgeKernels/fancybuildnr",
+        "5.8.1-3.g846658e-default",
+        Arch("x86_64"),
+        "latest,latest-1,running",
+        {
+          { "kernel-default-5.7.8-1.1.g8f507a0.x86_64", false },
+          { "kernel-default-5.7.9-1.1.ga010166.x86_64", false },
+          { "kernel-default-5.7.10-1.1.g6a1b5cf.x86_64", false },
+          { "kernel-default-5.7.10-3.1.gd1148b9.x86_64", false },
+          { "kernel-default-5.7.11-1.1.g5015994.x86_64", false },
+          { "kernel-default-5.7.12-1.1.g9c98feb.x86_64", false },
+          { "kernel-default-5.8.0-1.1.gd3bf2d6.x86_64", false },
+          { "kernel-default-5.8.0-2.1.g9bc0044.x86_64", false },
+          { "kernel-default-5.8.0-3.1.gd4e7682.x86_64", false },
+          { "kernel-default-5.8.1-1.1.ge6658c9.x86_64", false },
+          // those are running, latest and latest-1 , they should stay
+          //{ "kernel-default-5.8.1-2.1.g553537d.x86_64", false },
+          //{ "kernel-default-5.8.1-3.1.g846658e.x86_64", false },
+          }
+      },
     };
   }
 }

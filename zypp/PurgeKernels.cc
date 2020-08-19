@@ -236,12 +236,21 @@ namespace zypp {
    */
   bool PurgeKernels::Impl::versionMatch( const Edition &a, const Edition &b )
   {
+    if ( a == b )
+      return true;
+
     // the build counter should not be considered here, so if there is one we cut it off
-    const auto dotOffset = b.release().find_last_of(".");
-    if ( dotOffset != std::string::npos ) {
-      return a == zypp::Edition( b.version(), b.release().substr( 0, dotOffset ), b.epoch() );
+    const str::regex buildCntRegex( "\\.[0-9]+($|\\.g[0-9a-f]{7}$)", str::regex::match_extended );
+
+    std::string versionStr = b.asString();
+    str::smatch matches;
+    if ( buildCntRegex.matches( versionStr.data(), matches ) ) {
+      if ( matches.size() >= 2 ) {
+        versionStr.replace( matches.begin(0), (matches.end(0) - matches.begin(0))+1, matches[1] );
+        return a == Edition(versionStr);
+      }
     }
-    return a == b;
+    return false;
   }
 
   /*!
