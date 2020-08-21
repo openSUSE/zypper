@@ -222,6 +222,7 @@ SET( zypp_base_SRCS
   base/ReferenceCounted.cc
   base/SetRelationMixin.cc
   base/String.cc
+  base/StringV.cc
   base/StrMatcher.h
   base/StrMatcher.cc
   base/Regex.cc
@@ -282,6 +283,7 @@ SET( zypp_base_HEADERS
   base/Signal.h
   base/SimpleStreambuf.h
   base/String.h
+  base/StringV.h
   base/StrMatcher.h
   base/Regex.h
   base/Sysconfig.h

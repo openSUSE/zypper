@@ -14,6 +14,7 @@
 
 #include <iosfwd>
 #include <string>
+#include <string_view>
 
 #include <boost/utility/string_ref_fwd.hpp>
 
@@ -61,6 +62,12 @@ namespace zypp
 
       /** Ctor from boost::string_ref. */
       explicit IdString( boost::string_ref str_r );
+
+#ifdef __cpp_lib_string_view
+      explicit IdString( std::string_view str_r )
+      : IdString( str_r.data(), str_r.size() )
+      {}
+#endif
 
     public:
       /** No or Null string ( Id \c 0 ). */

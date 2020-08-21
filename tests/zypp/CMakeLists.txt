@@ -45,6 +45,7 @@ ADD_TESTS(
   SetRelationMixin
   SetTracker
   StrMatcher
+  StringV
   Target
   Url
   UserData
