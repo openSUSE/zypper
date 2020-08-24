@@ -950,6 +950,7 @@ INSTALL(TARGETS zypp LIBRARY DESTINATION ${LIB_INSTALL_DIR} )
 
 #library build just for using it in tests, contains all symbols
 ADDZYPPLIB(zypp-allsym)
+ADD_DEPENDENCIES( zypp-allsym zypp )
 
 #this part does nothing yet, only when switching away from using a map file to
 #a approach where symbols are exported explicitely it would make a difference
