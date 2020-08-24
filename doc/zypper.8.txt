@@ -101,7 +101,7 @@ Depending on the kind of defect, patches are classified by _category_ and _sever
 +
 Note that the *patch* command does _not apply optional patches_ (category *optional* or *feature*) by default. If you actually want to consider all optional patches as being needed, say *patch --with-optional*. Specific patches can be applied using the *install* command (e.g. *zypper install patch:openSUSE-2014-7*).
 +
-If the issuer decides to retract a released patch, the patch status will be shown as *retracted*. The packages provided by the retracted patch are still visible but also tagged as having been retracted (*R*). The resolver will avoid selecting retracted packages automatically. If you are sure that a retracted package should be installed on your system, you must explicitely select it.
+If the issuer decides to retract a released patch, the patch status will be shown as *retracted*. The packages provided by the retracted patch are still visible but also tagged as having been retracted (*R*). The resolver will avoid selecting retracted packages automatically. If you are sure that a retracted package should be installed on your system, you must explicitly select it.
 
 *pattern*::
 	A group of packages required or recommended to install some functionality.
@@ -240,7 +240,7 @@ $ *zypper install ~/rpms/foo.rpm \http://some.site/bar.rpm*
 +
 Zypper will report packages that it cannot find. Further, in interactive mode, zypper proceeds with installation of the rest of requested packages, and it will abort immediately in non-interactive mode. In both cases zypper returns *ZYPPER_EXIT_INF_CAP_NOT_FOUND* after finishing the operation.
 +
-Zypper will collect the files in a temporary *plaindir* repository and mark the respective packages for installation. If *--download-only* is used, the downloaded packages will be available in */var/cache/zypper/RPMS* until you actually install them or call *zypper clean* to clear the package caches. They will _not_ become part of the global package cache at */var/cache/zypp/packages*.
+Zypper will collect the files in a temporary *plaindir* repository and mark the respective packages for installation. If *--download-only* is used, the downloaded packages will be available in */var/cache/zypper/RPMS* until you actually install them or call *zypper clean* to clear the package caches. They will _not_ become part of the global package cache at */var/cache/zypp/packages* (see also the global *--pkg-cache-dir* option).
 
 In the install command, you can also specify packages you wish to remove by prepending their names by a _-_ or _!_ character. For example: :::
 +
@@ -309,7 +309,9 @@ include::{incdir}/option_Solver_Flags_Recommends.txt[]
 	Download-and-install mode options: :: {nop}
 
 	*-d*, *--download-only*::
-		Only download the packages for later installation. If used together with *--dry-run* a meaningful file conflict check can be performed (see section *Package File Conflicts*).
+		Only download the packages for later installation (see also the global *--pkg-cache-dir* option).
++
+If used together with *--dry-run* a meaningful file conflict check can be performed (see section *Package File Conflicts*).
 
 	*--download-in-advance*::
 		First download all packages, then start installing. This is the default.
@@ -1766,7 +1768,8 @@ See also *FILES* section for more information.
 	Use the specified directory to store the repository metadata cache database files (solv files). The default value is */var/cache/zypp/solv*.
 
 *--pkg-cache-dir* _dir_::
-	Use the specified directory for storing downloaded rpm packages. (see *addrepo --keep-packages*) The default value is */var/cache/zypp/packages*.
+	Use the specified directory for storing rpm packages downloaded from repositories (see *addrepo --keep-packages*). The default value is */var/cache/zypp/packages*.
++ Packages are stored in subdirectories named after the repositories alias and using the same path as on the repositories medium.
 
 *--userdata* _string_::
 	User data is expected to be a simple string without special chars or embedded newlines and may serve as transaction id. It will be written to all install history log entries created throughout this specific zypper call. It will also be passed on to zypp plugins executed during commit. This will enable e.g. a btrfs plugin to tag created snapshots with this string. For zypper itself this string has no special meaning.
