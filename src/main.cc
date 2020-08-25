@@ -1,5 +1,6 @@
 #include <iostream>
 #include <signal.h>
+#include <poll.h>
 //#include <readline/readline.h>
 
 #include <zypp/base/LogTools.h>
@@ -52,6 +53,33 @@ void signal_handler(int sig)
   }
 }
 
+bool testPipe( int fd_r )
+{
+  bool ret = true;
+  struct pollfd pfd = { fd_r, POLLERR, 0 };
+  if ( ::poll( &pfd, 1, 0 ) >= 0 && pfd.revents & POLLERR )
+  {
+    WAR << "FD(" << fd_r << ") " << "pipe is broken" << endl;
+    ret = false;
+  }
+  return ret;
+}
+
+void signal_nopipe( int sig )
+{
+  if ( testPipe(STDOUT_FILENO) && testPipe(STDERR_FILENO) )
+  {
+    // bsc#1145521/1175652 - STDOUT/STDERR are OK. Ignore; might be triggered from libcurl.
+    DBG << "Ignore SIGPIPE (STDOUT/STDERR are OK)" << endl;
+    ::signal( SIGPIPE, signal_nopipe );
+  }
+  else
+  {
+    WAR << "Exiting on SIGPIPE..." << endl << endl;
+    Zypper::instance()->cleanup();
+    exit( ZYPPER_EXIT_ON_SIGNAL );
+  }
+}
 
 int main(int argc, char **argv)
 {
@@ -81,6 +109,9 @@ int main(int argc, char **argv)
     out.error("Failed to set SIGINT handler.");
   if (::signal(SIGTERM, signal_handler) == SIG_ERR)
     out.error("Failed to set SIGTERM handler.");
+
+  if ( ::signal( SIGPIPE, signal_nopipe ) == SIG_ERR )
+    out.error("Failed to set SIGPIPE handler.");
 
   try
   {
