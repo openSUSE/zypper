@@ -794,11 +794,13 @@ SET( zypp_misc_HEADERS
   Misc.h
   misc/DefaultLoadSystem.h
   misc/CheckAccessDeleted.h
+  misc/LoadTestcase.h
 )
 
 SET( zypp_misc_SRCS
   misc/DefaultLoadSystem.cc
   misc/CheckAccessDeleted.cc
+  misc/LoadTestcase.cc
 )
 
 INSTALL( FILES
