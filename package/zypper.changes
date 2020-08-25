@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Aug 25 14:27:51 CEST 2020 - ma@suse.de
+
+- Ignore SIGPIPE while STDOUT/STDERR are OK (bsc#1175652)
+- version 1.6.340
+
+-------------------------------------------------------------------
 Thu Jul 18 14:49:21 CEST 2019 - ma@suse.de
 
 - repos: return not-zero if not existing repos are passed
