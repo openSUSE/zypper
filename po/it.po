@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-04-12 15:27+0200\n"
-"PO-Revision-Date: 2020-08-24 00:40+0000\n"
+"PO-Revision-Date: 2020-09-09 19:14+0000\n"
 "Last-Translator: Paolo Za <zapaolo@email.it>\n"
 "Language-Team: Italian <https://l10n.opensuse.org/projects/zypper/master/it/>"
 "\n"
@@ -6963,6 +6963,8 @@ msgid ""
 "Abbreviated commandline options will not be supported in future versions. "
 "Please use %2% instead of %1% ."
 msgstr ""
+"Le opzioni abbreviate della riga di comando non saranno supportate nelle "
+"versioni future. Utilizzare %2% anziché %1% ."
 
 #. translators: %s is "help" or "zypper help" depending on whether
 #. zypper shell is running or not
@@ -7074,7 +7076,7 @@ msgstr "non determinato"
 #. translator: patch status
 #: src/utils/misc.cc:120
 msgid "retracted"
-msgstr ""
+msgstr "ritirata"
 
 #: src/utils/misc.cc:329 src/utils/misc.cc:371
 msgid "Since"
