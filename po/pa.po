@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper.pa\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-12 15:27+0200\n"
+"POT-Creation-Date: 2020-08-24 08:14+0200\n"
 "PO-Revision-Date: 2008-11-23 08:36+0530\n"
 "Last-Translator: KDB <brar.kd@gmail.com>\n"
 "Language-Team: Panjabi <punjabi-l10n@list.sf.net>\n"
@@ -479,7 +479,7 @@ msgstr ""
 msgid "Arguments:"
 msgstr ""
 
-#: src/commands/commandhelpformatter.h:123 src/utils/flags/zyppflags.cc:624
+#: src/commands/commandhelpformatter.h:123 src/utils/flags/zyppflags.cc:627
 msgid "Command options:"
 msgstr ""
 
@@ -2294,9 +2294,9 @@ msgstr "ਕੋਈ ਢੁੱਕਵੀਂ ਮੰਗ ਫਾਇਲ ਨਹੀਂ ਦ�
 msgid "list-patches (lp) [OPTIONS]"
 msgstr ""
 
-#. translators: command summary: list-updates, lu
-#: src/commands/listpatches.cc:18 src/commands/listupdates.cc:18
-msgid "List available updates."
+#. translators: command summary: list-patches, lp
+#: src/commands/listpatches.cc:18
+msgid "List available patches."
 msgstr ""
 
 #. translators: command description
@@ -2312,6 +2312,11 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/listupdates.cc:16
 msgid "list-updates (lu) [OPTIONS]"
+msgstr ""
+
+#. translators: command summary: list-updates, lu
+#: src/commands/listupdates.cc:18
+msgid "List available updates."
 msgstr ""
 
 #. translators: command description
@@ -5333,7 +5338,9 @@ msgstr "ਸੋਰਸ ਪੈਕੇਜ %s-%s ਠੀਕ ਤਰ੍ਹਾਂ ਇੰ�
 msgid "Problem installing source package %s-%s:"
 msgstr "ਸੋਰਸ ਪੈਕੇਜ %s-%s ਇੰਸਟਾਲ ਕਰਨ ਦੌਰਾਨ ਸਮੱਸਿਆ:"
 
-#: src/output/OutNormal.cc:81
+#. Since this message will be emitted before we know if the current output is XML or Normal we need to send this message to stderr
+#. to not break scripts that use xml output (bsc#1172925)
+#: src/output/OutNormal.cc:81 src/utils/flags/zyppflags.cc:392
 msgid "Warning: "
 msgstr "ਸਾਵਧਾਨ: "
 
@@ -6402,41 +6409,41 @@ msgstr ""
 msgid "Fix for %s issue number %s was not found or is not needed."
 msgstr ""
 
-#: src/utils/Augeas.cc:104
+#: src/utils/Augeas.cc:102
 #, fuzzy
 msgid "Cannot initialize configuration file parser."
 msgstr "ਸੰਰਚਨਾ ਟੈਪਲੇਟ ਨਕਲ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸਕਦਾ ਹੈ।"
 
-#: src/utils/Augeas.cc:510
+#: src/utils/Augeas.cc:508
 #, boost-format
 msgid "Malformed option name '%1%'."
 msgstr ""
 
-#: src/utils/Augeas.cc:522
+#: src/utils/Augeas.cc:520
 msgid "Could not save the config file."
 msgstr ""
 
-#: src/utils/Augeas.cc:564
+#: src/utils/Augeas.cc:562
 #, boost-format
 msgid "Config file '%1%' exists but is not a file."
 msgstr ""
 
-#: src/utils/Augeas.cc:580
+#: src/utils/Augeas.cc:578
 msgid "Could not load the config files."
 msgstr ""
 
-#: src/utils/Augeas.cc:606
+#: src/utils/Augeas.cc:604
 #, boost-format
 msgid "Config file '%1%' does not exist."
 msgstr ""
 
 #. translator: %1% is the path to a config file, %2% is the name of an options inside the file
-#: src/utils/Augeas.cc:637
+#: src/utils/Augeas.cc:635
 #, boost-format
 msgid "%1%: Option '%2%' is defined multiple times. Using the last one."
 msgstr ""
 
-#: src/utils/Augeas.cc:658
+#: src/utils/Augeas.cc:656
 msgid "No config file is in use."
 msgstr ""
 

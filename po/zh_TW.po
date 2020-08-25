@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-12 15:27+0200\n"
+"POT-Creation-Date: 2020-08-24 08:14+0200\n"
 "PO-Revision-Date: 2020-06-29 19:46+0000\n"
 "Last-Translator: Ramax Lo <ramaxlo@gmail.com>\n"
 "Language-Team: Chinese (Taiwan) <https://l10n.opensuse.org/projects/zypper/"
@@ -493,7 +493,7 @@ msgstr "範例："
 msgid "Arguments:"
 msgstr "引數："
 
-#: src/commands/commandhelpformatter.h:123 src/utils/flags/zyppflags.cc:624
+#: src/commands/commandhelpformatter.h:123 src/utils/flags/zyppflags.cc:627
 msgid "Command options:"
 msgstr "指令選項："
 
@@ -2226,10 +2226,10 @@ msgstr "沒有指定有效的引數。"
 msgid "list-patches (lp) [OPTIONS]"
 msgstr "list-patches (lp) [選項]"
 
-#. translators: command summary: list-updates, lu
-#: src/commands/listpatches.cc:18 src/commands/listupdates.cc:18
-msgid "List available updates."
-msgstr "列出可用的更新。"
+#. translators: command summary: list-patches, lp
+#: src/commands/listpatches.cc:18
+msgid "List available patches."
+msgstr ""
 
 #. translators: command description
 #: src/commands/listpatches.cc:20
@@ -2245,6 +2245,11 @@ msgstr "列出所有修補程式，不僅僅是適用的那些。"
 #: src/commands/listupdates.cc:16
 msgid "list-updates (lu) [OPTIONS]"
 msgstr "list-updates (lu) [選項]"
+
+#. translators: command summary: list-updates, lu
+#: src/commands/listupdates.cc:18
+msgid "List available updates."
+msgstr "列出可用的更新。"
 
 #. translators: command description
 #: src/commands/listupdates.cc:20
@@ -5255,7 +5260,9 @@ msgstr "來源套件 %s-%s 已成功安裝。"
 msgid "Problem installing source package %s-%s:"
 msgstr "安裝來源套件 %s-%s 發生問題："
 
-#: src/output/OutNormal.cc:81
+#. Since this message will be emitted before we know if the current output is XML or Normal we need to send this message to stderr
+#. to not break scripts that use xml output (bsc#1172925)
+#: src/output/OutNormal.cc:81 src/utils/flags/zyppflags.cc:392
 msgid "Warning: "
 msgstr "警告︰ "
 
@@ -6270,40 +6277,40 @@ msgstr "CVS 問題編號 %s 的修正未發現或不需要。"
 msgid "Fix for %s issue number %s was not found or is not needed."
 msgstr "%s 問題編號 %s 的修正未發現或不需要。"
 
-#: src/utils/Augeas.cc:104
+#: src/utils/Augeas.cc:102
 msgid "Cannot initialize configuration file parser."
 msgstr "無法初始化組態檔案分析器。"
 
-#: src/utils/Augeas.cc:510
+#: src/utils/Augeas.cc:508
 #, boost-format
 msgid "Malformed option name '%1%'."
 msgstr "格式錯誤的選項名稱「%1%」。"
 
-#: src/utils/Augeas.cc:522
+#: src/utils/Augeas.cc:520
 msgid "Could not save the config file."
 msgstr "無法儲存組態檔案。"
 
-#: src/utils/Augeas.cc:564
+#: src/utils/Augeas.cc:562
 #, boost-format
 msgid "Config file '%1%' exists but is not a file."
 msgstr "組態檔案「%1%」存在但不是檔案。"
 
-#: src/utils/Augeas.cc:580
+#: src/utils/Augeas.cc:578
 msgid "Could not load the config files."
 msgstr "無法載入組態檔案。"
 
-#: src/utils/Augeas.cc:606
+#: src/utils/Augeas.cc:604
 #, boost-format
 msgid "Config file '%1%' does not exist."
 msgstr "組態檔案「%1%」不存在。"
 
 #. translator: %1% is the path to a config file, %2% is the name of an options inside the file
-#: src/utils/Augeas.cc:637
+#: src/utils/Augeas.cc:635
 #, boost-format
 msgid "%1%: Option '%2%' is defined multiple times. Using the last one."
 msgstr "%1%：多次定義選項「%2%」。將使用最後定義的那個。"
 
-#: src/utils/Augeas.cc:658
+#: src/utils/Augeas.cc:656
 msgid "No config file is in use."
 msgstr "沒有使用中的組態檔案。"
 

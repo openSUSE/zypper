@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-12 15:27+0200\n"
+"POT-Creation-Date: 2020-08-24 08:14+0200\n"
 "PO-Revision-Date: 2019-09-13 20:52+0000\n"
 "Last-Translator: Mariusz Fik <fisiu@opensuse.org>\n"
 "Language-Team: Polish <https://l10n.opensuse.org/projects/zypper/master/pl/"
@@ -519,7 +519,7 @@ msgstr "Przykłady:"
 msgid "Arguments:"
 msgstr "Argumenty:"
 
-#: src/commands/commandhelpformatter.h:123 src/utils/flags/zyppflags.cc:624
+#: src/commands/commandhelpformatter.h:123 src/utils/flags/zyppflags.cc:627
 msgid "Command options:"
 msgstr "Opcje polecenia:"
 
@@ -2555,10 +2555,10 @@ msgstr "Nie podano prawidłowych parametrów."
 msgid "list-patches (lp) [OPTIONS]"
 msgstr "list-patches (lp) [OPCJE]"
 
-#. translators: command summary: list-updates, lu
-#: src/commands/listpatches.cc:18 src/commands/listupdates.cc:18
-msgid "List available updates."
-msgstr "Wyświetlenie dostępnych aktualizacji."
+#. translators: command summary: list-patches, lp
+#: src/commands/listpatches.cc:18
+msgid "List available patches."
+msgstr ""
 
 #. translators: command description
 #: src/commands/listpatches.cc:20
@@ -2574,6 +2574,11 @@ msgstr "Wyświetla listę wszystkich poprawek, nie tylko odpowiednich."
 #: src/commands/listupdates.cc:16
 msgid "list-updates (lu) [OPTIONS]"
 msgstr "list-updates (lu) [opcje]"
+
+#. translators: command summary: list-updates, lu
+#: src/commands/listupdates.cc:18
+msgid "List available updates."
+msgstr "Wyświetlenie dostępnych aktualizacji."
 
 #. translators: command description
 #: src/commands/listupdates.cc:20
@@ -5738,7 +5743,9 @@ msgstr "Pakiet źródłowy %s-%s został zainstalowany pomyślnie."
 msgid "Problem installing source package %s-%s:"
 msgstr "Problem podczas instalacji pakietu źródłowego %s-%s:"
 
-#: src/output/OutNormal.cc:81
+#. Since this message will be emitted before we know if the current output is XML or Normal we need to send this message to stderr
+#. to not break scripts that use xml output (bsc#1172925)
+#: src/output/OutNormal.cc:81 src/utils/flags/zyppflags.cc:392
 msgid "Warning: "
 msgstr "Ostrzeżenie: "
 
@@ -6837,41 +6844,41 @@ msgstr ""
 "Poprawka dla problemu %s numer %s nie została znaleziona lub nie jest "
 "potrzebna."
 
-#: src/utils/Augeas.cc:104
+#: src/utils/Augeas.cc:102
 msgid "Cannot initialize configuration file parser."
 msgstr "Nie można zainicjalizować analizatora pliku konfiguracyjnego."
 
-#: src/utils/Augeas.cc:510
+#: src/utils/Augeas.cc:508
 #, boost-format
 msgid "Malformed option name '%1%'."
 msgstr "Błędna nazwa opcji '%1%'."
 
-#: src/utils/Augeas.cc:522
+#: src/utils/Augeas.cc:520
 msgid "Could not save the config file."
 msgstr "Nie można zapisać pliku konfiguracyjnego."
 
-#: src/utils/Augeas.cc:564
+#: src/utils/Augeas.cc:562
 #, boost-format
 msgid "Config file '%1%' exists but is not a file."
 msgstr "Plik konfiguracyjny '%1%' istnieje, ale nie jest plikiem."
 
-#: src/utils/Augeas.cc:580
+#: src/utils/Augeas.cc:578
 msgid "Could not load the config files."
 msgstr "Nie można wczytać plików konfiguracyjnych."
 
-#: src/utils/Augeas.cc:606
+#: src/utils/Augeas.cc:604
 #, boost-format
 msgid "Config file '%1%' does not exist."
 msgstr "Plik konfiguracyjny '%1%' nie istnieje."
 
 #. translator: %1% is the path to a config file, %2% is the name of an options inside the file
-#: src/utils/Augeas.cc:637
+#: src/utils/Augeas.cc:635
 #, boost-format
 msgid "%1%: Option '%2%' is defined multiple times. Using the last one."
 msgstr ""
 "%1%: Opcja '%2%' została zdefiniowana wiele razy. Użyto ostatniej definicji."
 
-#: src/utils/Augeas.cc:658
+#: src/utils/Augeas.cc:656
 msgid "No config file is in use."
 msgstr "Brak pliku konfiguracyjnego w użyciu."
 

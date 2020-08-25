@@ -22,11 +22,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper.fi\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-12 15:27+0200\n"
+"POT-Creation-Date: 2020-08-24 08:14+0200\n"
 "PO-Revision-Date: 2020-06-29 19:46+0000\n"
 "Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
-"Language-Team: Finnish <https://l10n.opensuse.org/projects/zypper/master/fi/>"
-"\n"
+"Language-Team: Finnish <https://l10n.opensuse.org/projects/zypper/master/fi/"
+">\n"
 "Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -539,7 +539,7 @@ msgstr "Esimerkkejä:"
 msgid "Arguments:"
 msgstr "Parametrit:"
 
-#: src/commands/commandhelpformatter.h:123 src/utils/flags/zyppflags.cc:624
+#: src/commands/commandhelpformatter.h:123 src/utils/flags/zyppflags.cc:627
 msgid "Command options:"
 msgstr "Komentovalinnat:"
 
@@ -2425,10 +2425,10 @@ msgstr "Yhtään virheetöntä valintaa ei määritetty."
 msgid "list-patches (lp) [OPTIONS]"
 msgstr "list-patches (lp) [VALINNAT]"
 
-#. translators: command summary: list-updates, lu
-#: src/commands/listpatches.cc:18 src/commands/listupdates.cc:18
-msgid "List available updates."
-msgstr "Listaa saatavilla olevat päivitykset."
+#. translators: command summary: list-patches, lp
+#: src/commands/listpatches.cc:18
+msgid "List available patches."
+msgstr ""
 
 #. translators: command description
 #: src/commands/listpatches.cc:20
@@ -2444,6 +2444,11 @@ msgstr "Luettele kaikki korjaukset, ei voi saatavilla olevia."
 #: src/commands/listupdates.cc:16
 msgid "list-updates (lu) [OPTIONS]"
 msgstr "list-updates (lu) [valinnat]"
+
+#. translators: command summary: list-updates, lu
+#: src/commands/listupdates.cc:18
+msgid "List available updates."
+msgstr "Listaa saatavilla olevat päivitykset."
 
 #. translators: command description
 #: src/commands/listupdates.cc:20
@@ -5595,7 +5600,9 @@ msgstr "Lähdekoodipaketti %s-%s asennettiin onnistuneesti."
 msgid "Problem installing source package %s-%s:"
 msgstr "Virhe asennettaessa lähdekoodipakettia %s-%s:"
 
-#: src/output/OutNormal.cc:81
+#. Since this message will be emitted before we know if the current output is XML or Normal we need to send this message to stderr
+#. to not break scripts that use xml output (bsc#1172925)
+#: src/output/OutNormal.cc:81 src/utils/flags/zyppflags.cc:392
 msgid "Warning: "
 msgstr "Varoitus: "
 
@@ -6662,40 +6669,40 @@ msgstr "CVE-merkintää %s ei löydy tai se ei ole tarpeellinen."
 msgid "Fix for %s issue number %s was not found or is not needed."
 msgstr "Korjausta %s-ongelmalle %s ei löytynyt tai sitä ei tarvita."
 
-#: src/utils/Augeas.cc:104
+#: src/utils/Augeas.cc:102
 msgid "Cannot initialize configuration file parser."
 msgstr "Asetusten jäsentimen alustaminen ei onnistu."
 
-#: src/utils/Augeas.cc:510
+#: src/utils/Augeas.cc:508
 #, boost-format
 msgid "Malformed option name '%1%'."
 msgstr "Virheellinen valinnan nimi ”%1%”."
 
-#: src/utils/Augeas.cc:522
+#: src/utils/Augeas.cc:520
 msgid "Could not save the config file."
 msgstr "Asetustiedostoa ei voitu tallentaa."
 
-#: src/utils/Augeas.cc:564
+#: src/utils/Augeas.cc:562
 #, boost-format
 msgid "Config file '%1%' exists but is not a file."
 msgstr "Asetustiedosto ”%1%” on olemassa muttei tiedosto."
 
-#: src/utils/Augeas.cc:580
+#: src/utils/Augeas.cc:578
 msgid "Could not load the config files."
 msgstr "Asetustiedostoja ei voitu ladata."
 
-#: src/utils/Augeas.cc:606
+#: src/utils/Augeas.cc:604
 #, boost-format
 msgid "Config file '%1%' does not exist."
 msgstr "Asetustiedostoa ”%1%” ei ole olemassa."
 
 #. translator: %1% is the path to a config file, %2% is the name of an options inside the file
-#: src/utils/Augeas.cc:637
+#: src/utils/Augeas.cc:635
 #, boost-format
 msgid "%1%: Option '%2%' is defined multiple times. Using the last one."
 msgstr "%1%: Valinta ”%2%” on määritetty useamman kerran. Käytetään viimeistä."
 
-#: src/utils/Augeas.cc:658
+#: src/utils/Augeas.cc:656
 msgid "No config file is in use."
 msgstr "Ei käytössä olevaa asetustiedostoa."
 

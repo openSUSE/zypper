@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-12 15:27+0200\n"
+"POT-Creation-Date: 2020-08-24 08:14+0200\n"
 "PO-Revision-Date: 2019-03-21 12:50+0000\n"
 "Last-Translator: Sven Åhr <anders.ahr@gmail.com>\n"
 "Language-Team: Swedish <https://l10n.opensuse.org/projects/zypper/master/sv/"
@@ -514,7 +514,7 @@ msgstr "Exempel:"
 msgid "Arguments:"
 msgstr "Argument:"
 
-#: src/commands/commandhelpformatter.h:123 src/utils/flags/zyppflags.cc:624
+#: src/commands/commandhelpformatter.h:123 src/utils/flags/zyppflags.cc:627
 msgid "Command options:"
 msgstr "Kommandoalternativ:"
 
@@ -2395,10 +2395,10 @@ msgstr "Inget giltigt argument har angetts."
 msgid "list-patches (lp) [OPTIONS]"
 msgstr "list-patches (lp) [ALTERNATIV]"
 
-#. translators: command summary: list-updates, lu
-#: src/commands/listpatches.cc:18 src/commands/listupdates.cc:18
-msgid "List available updates."
-msgstr "Visa tillgängliga uppdateringar."
+#. translators: command summary: list-patches, lp
+#: src/commands/listpatches.cc:18
+msgid "List available patches."
+msgstr ""
 
 #. translators: command description
 #: src/commands/listpatches.cc:20
@@ -2414,6 +2414,11 @@ msgstr "Lista alla programfixar, inte bara de som är tillgängliga."
 #: src/commands/listupdates.cc:16
 msgid "list-updates (lu) [OPTIONS]"
 msgstr "list-updates (lu) [ALTERNATIV]"
+
+#. translators: command summary: list-updates, lu
+#: src/commands/listupdates.cc:18
+msgid "List available updates."
+msgstr "Visa tillgängliga uppdateringar."
 
 #. translators: command description
 #: src/commands/listupdates.cc:20
@@ -5530,7 +5535,9 @@ msgstr "Källpaketet %s-%s har installerats."
 msgid "Problem installing source package %s-%s:"
 msgstr "Ett problem uppstod vid installationen av källpaket %s-%s:"
 
-#: src/output/OutNormal.cc:81
+#. Since this message will be emitted before we know if the current output is XML or Normal we need to send this message to stderr
+#. to not break scripts that use xml output (bsc#1172925)
+#: src/output/OutNormal.cc:81 src/utils/flags/zyppflags.cc:392
 msgid "Warning: "
 msgstr "Varning: "
 
@@ -6598,40 +6605,40 @@ msgstr ""
 "Programfix för problemet %s, utgåva nummer %s, hittades inte eller behövs "
 "inte."
 
-#: src/utils/Augeas.cc:104
+#: src/utils/Augeas.cc:102
 msgid "Cannot initialize configuration file parser."
 msgstr "Det går inte att initiera konfigurationsfiltolk."
 
-#: src/utils/Augeas.cc:510
+#: src/utils/Augeas.cc:508
 #, boost-format
 msgid "Malformed option name '%1%'."
 msgstr "Felformaterat alternativnamn  '%1%'."
 
-#: src/utils/Augeas.cc:522
+#: src/utils/Augeas.cc:520
 msgid "Could not save the config file."
 msgstr "Det gick inte att spara konfigurationsfilen."
 
-#: src/utils/Augeas.cc:564
+#: src/utils/Augeas.cc:562
 #, boost-format
 msgid "Config file '%1%' exists but is not a file."
 msgstr "Konfigurationsfilen '%1%' finns men är inte en fil."
 
-#: src/utils/Augeas.cc:580
+#: src/utils/Augeas.cc:578
 msgid "Could not load the config files."
 msgstr "Det gick inte att läsa in konfigurationsfilen."
 
-#: src/utils/Augeas.cc:606
+#: src/utils/Augeas.cc:604
 #, boost-format
 msgid "Config file '%1%' does not exist."
 msgstr "Konfigurationsfilen '%1%' finns inte."
 
 #. translator: %1% is the path to a config file, %2% is the name of an options inside the file
-#: src/utils/Augeas.cc:637
+#: src/utils/Augeas.cc:635
 #, boost-format
 msgid "%1%: Option '%2%' is defined multiple times. Using the last one."
 msgstr "%1%: Alternativ '%2%' definieras flera gånger. Använder senaste."
 
-#: src/utils/Augeas.cc:658
+#: src/utils/Augeas.cc:656
 msgid "No config file is in use."
 msgstr "Ingen konfigurationsfil används."
 
