@@ -23,6 +23,7 @@
 #include "Table.h"
 #include "subcommand.h"
 #include "utils/messages.h"
+#include "commands/commandhelpformatter.h"
 
 #include <boost/utility/string_ref.hpp>
 
@@ -40,74 +41,65 @@ namespace env
 ///////////////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////////////////////
-namespace
-{
-
-  std::ostream & dumpNameTableOn( std::ostream & str, const std::vector<boost::string_ref> & names_r )
-  {
-    const std::string indent( 2, ' ' );
-
-    if ( names_r.empty() )
-    {
-      str << indent << "<" << _("none") << ">" << endl;
-    }
-    else
-    {
-      unsigned colw = 0;
-      for ( const auto & el : names_r )
-      {
-	unsigned w = el.size();
-	if ( w > colw ) colw = w;
-      }
-
-      str::Format fmter( indent+"%-"+str::numstring(colw)+"s" );
-      unsigned maxcols = Zypper::instance().out().defaultFormatWidth() / ( colw + indent.size() );
-      if ( maxcols == 0 ) maxcols = 1;
-
-#if 1
-      // vertical
-      unsigned maxrows = ( names_r.size() + maxcols - 1 ) / maxcols;
-      maxcols = ( names_r.size() + maxrows - 1 ) / maxrows;
-
-      for ( unsigned r = 0; r < maxrows; ++r )
-      {
-	unsigned idx = r;
-	for ( unsigned c = 0; c < maxcols; ++c )
-	{
-	  str << ( fmter % names_r[idx] );
-	  if ( (idx += maxrows) >= names_r.size() )
-	    break;
-	}
-	str << endl;
-      }
-#else
-      // horizontal
-      for ( unsigned idx = 0; idx < names_r.size(); ++idx )
-      {
-	if ( idx && idx % maxcols == 0 )
-	  str << endl;
-	str << ( fmter % names_r[idx] );
-      }
-      str << endl;
-#endif
-    }
-    return str;
-  }
-
-  template <class Container_>
-  std::ostream & dumpNameTableOn( std::ostream & str, const Container_ & container_r )
-  { return dumpNameTableOn( str, std::vector<boost::string_ref>( container_r.begin(), container_r.end() ) ); }
-
-} // namespace env
-///////////////////////////////////////////////////////////////////
-
-
-///////////////////////////////////////////////////////////////////
 // SubcommandOptions
 ///////////////////////////////////////////////////////////////////
 
 namespace	// subcommand detetction
 {///////////////////////////////////////////////////////////////////
+
+  /** Strictly compare \ref SubcommandOptions::Detected according to _cmd. */
+  struct DetectedCommandsCompare
+  {
+    bool operator()( const SubcommandOptions::Detected & lhs, const SubcommandOptions::Detected & rhs ) const
+    { return lhs._cmd < rhs._cmd; }
+  };
+
+  /** First cmd detected shadows later ones. */
+  using DetectedCommands = std::set<SubcommandOptions::Detected, DetectedCommandsCompare>;
+
+  /** Command name,summaries for help. */
+  using CommandSummaries = std::map<std::string,std::string>;
+
+  /** Get command summaries for help. */
+  inline CommandSummaries getCommandsummaries( const DetectedCommands & commands_r )
+  {
+    CommandSummaries ret;
+    for ( auto & cmd : commands_r ) {
+      std::string sum { ExternalProgram( "man -f "+cmd._name ).receiveLine() };
+      if ( ! sum.empty() ) {
+	// # man -f zypper
+	// zypper (8)           - Command-line interface to ZYpp system management library (libzypp)
+	static const std::string_view sep { " - " };
+	std::string::size_type pos = sum.find( sep );
+	if ( pos != std::string::npos )
+	  sum.erase( 0, pos + sep.size() );
+      }
+      else {
+	// translators: %1% is the name of the command which has no man page available.
+	static str::Format fmt( "<"+ LOWLIGHTString(_("No manual entry for %1%")).str() + ">" );
+	sum = ( fmt % cmd._name ).str();
+      }
+      ret[cmd._cmd] = sum;
+    }
+    return ret;
+  }
+
+  inline std::ostream & dumpDetectedCommandsOn( std::ostream & str, const DetectedCommands & commands_r )
+  {
+    CommandHelpFormater fmt;
+
+    if ( commands_r.empty() ) {
+      fmt.gDef( "<"+std::string(_("none"))+">" );
+    }
+    else {
+      for ( const auto & p : getCommandsummaries( std::move(commands_r) ) ) {
+	fmt.gDef( p.first, p.second );
+      }
+    }
+
+    return str << std::string(fmt) << endl;
+  }
+
 
   SubcommandOptions::Detected & lastSubcommandDetected()
   {
@@ -144,37 +136,78 @@ namespace	// subcommand detetction
     return false;
   }
 
-  template <class OutputIterator_>
-  unsigned collectSubommandsIn( const Pathname & dir_r, OutputIterator_ result_r )
+  /** Return whether \a dir_r/name_r forms a valid subcommand. */
+  inline SubcommandOptions::Detected detectSubcommand( const Pathname & dir_r, std::string name_r )
   {
-    unsigned cnt = 0;
-    filesystem::dirForEach( dir_r,
-			    [&result_r]( const Pathname & dir_r, std::string str_r )->bool
-			    {
-			      if ( str::startsWith( str_r, "zypper-" ) && canExecute( dir_r/str_r ) )
-			      {
-				str_r.erase( 0, 7 /*"zypper-"*/ );
-				*result_r = str_r;
-			      }
-			      return true;
-			    } );
-    return cnt;
+    SubcommandOptions::Detected ret;
+    if ( str::startsWith( name_r, "zypper-" ) && canExecute( dir_r/name_r ) ) {
+      ret._cmd  = name_r.substr( 7 /*"zypper-"*/ );
+      ret._name = std::move(name_r);
+      ret._path = dir_r;
+    }
+    return ret;
   }
 
-  inline void collectAllSubommands( std::set<std::string> & execdirCommands_r, std::set<std::string> & pathCommands_r )
+  /** Collect subcommands found in \a dir_r. */
+  inline void detectSubcommandsIn( const Pathname & dir_r, std::function<void(SubcommandOptions::Detected)> fnc_r )
   {
-    collectSubommandsIn( SubcommandOptions::_execdir, std::inserter(execdirCommands_r,execdirCommands_r.end()) );
+    if ( !fnc_r )
+      return;
+
+    filesystem::dirForEach( dir_r,
+			    [&fnc_r]( const Pathname & dir_r, std::string name_r )->bool
+			    {
+			      SubcommandOptions::Detected cmd { detectSubcommand( dir_r, std::move(name_r) ) };
+			      if ( ! cmd._cmd.empty() )
+				fnc_r( std::move(cmd) );
+			      return true;
+			    } );
+  }
+
+  /* Just the command names for the short help. */
+  inline void collectAllSubcommandNames( std::set<std::string> & allCommands_r )
+  {
+    auto collectSubcommandsIn = [&allCommands_r]( const Pathname & dir_r ) {
+      detectSubcommandsIn( dir_r,
+			   [&allCommands_r]( SubcommandOptions::Detected cmd_r )
+			   {
+			     allCommands_r.insert( std::move(cmd_r._cmd) );
+			   } );
+    };
+
+    collectSubcommandsIn( SubcommandOptions::_execdir );
 
     std::set<Pathname> dirs;
     str::split( env::PATH(), std::inserter(dirs,dirs.end()), ":" );
     for ( const auto & dir : dirs )
     {
-      collectSubommandsIn( dir, std::inserter(pathCommands_r,pathCommands_r.end()) );
+      collectSubcommandsIn( dir );
     }
   }
 
-  inline void collectAllSubommands( std::set<std::string> & allCommands_r )
-  { collectAllSubommands( allCommands_r, allCommands_r ); }
+  /* The command details for the long help. */
+  inline void collectAllSubcommands( DetectedCommands & execdirCommands_r,
+				     DetectedCommands & pathCommands_r )
+  {
+    // Commands in _execdir shadow commands in the path.
+    auto collectSubcommandsIn = []( const Pathname & dir_r, DetectedCommands & commands_r, DetectedCommands * shaddow_r = nullptr ) {
+      detectSubcommandsIn( dir_r,
+			   [&commands_r,shaddow_r]( SubcommandOptions::Detected cmd_r )
+			   {
+			     if ( ! ( shaddow_r && shaddow_r->count( cmd_r ) ) )
+			       commands_r.insert( std::move(cmd_r) );
+			   } );
+    };
+
+    collectSubcommandsIn( SubcommandOptions::_execdir, execdirCommands_r );
+
+    std::set<Pathname> dirs;
+    str::split( env::PATH(), std::inserter(dirs,dirs.end()), ":" );
+    for ( const auto & dir : dirs )
+    {
+      collectSubcommandsIn( dir, pathCommands_r, &execdirCommands_r );
+    }
+  }
 
 } // namespace
 ///////////////////////////////////////////////////////////////////
@@ -425,25 +458,19 @@ std::ostream & SubcommandOptions::showHelpOn( std::ostream & out ) const
       out << endl;
 
 
-      std::set<std::string> execdirCommands;
-      std::set<std::string> pathCommandsALL;
-      collectAllSubommands( execdirCommands, pathCommandsALL );
-
-      std::set<std::string> pathCommands;	// filter out execdirCommands
-      std::set_difference( pathCommandsALL.begin(), pathCommandsALL.end(),
-			   execdirCommands.begin(), execdirCommands.end(),
-			   std::inserter(pathCommands,pathCommands.end()) );
-
+      DetectedCommands execdirCommands;
+      DetectedCommands pathCommands;
+      collectAllSubcommands( execdirCommands, pathCommands );
 
       // translators: headline of an enumeration; %1% is a directory name
       out << str::Format(_("Available zypper subcommands in '%1%'") ) % _execdir << endl;
       out << endl;
-      dumpNameTableOn( out, execdirCommands ) << endl;
+      dumpDetectedCommandsOn( out, execdirCommands ) << endl;
 
       // translators: headline of an enumeration
       out << _("Zypper subcommands available from elsewhere on your $PATH") << endl;
       out << endl;
-      dumpNameTableOn( out, pathCommands ) << endl;
+      dumpDetectedCommandsOn( out, pathCommands ) << endl;
 
       // translators: helptext; %1% is a zypper command
       out << str::Format(_("Type '%1%' to get subcommand-specific help if available.") ) % "zypper help <subcommand>" << endl;
@@ -451,7 +478,7 @@ std::ostream & SubcommandOptions::showHelpOn( std::ostream & out ) const
     else
     {
       std::set<std::string> allCommands;
-      collectAllSubommands( allCommands );
+      collectAllSubcommandNames( allCommands );
       if ( ! allCommands.empty() )
 	dumpRange( out, allCommands.begin(),allCommands.end(), "", "", ", ", "", "" );
     }
@@ -497,7 +524,7 @@ SubCmd::SubCmd(std::vector<std::string> &&commandAliases_r , boost::shared_ptr<S
   }
 }
 
-bool SubCmd::isSubCommand(const std::string &strval_r )
+bool SubCmd::isSubcommand(const std::string &strval_r )
 {
   if ( strval_r.empty() )
   {
@@ -525,6 +552,13 @@ bool SubCmd::isSubCommand(const std::string &strval_r )
   }
 
   return false;
+}
+
+CommandSummaries SubCmd::getSubcommandSummaries()
+{
+  DetectedCommands detetctedCommands;
+  collectAllSubcommands( detetctedCommands, detetctedCommands ); // all in one is ok
+  return getCommandsummaries( detetctedCommands );
 }
 
 int SubCmd::runCmd( Zypper &zypper )

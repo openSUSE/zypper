@@ -85,7 +85,10 @@ public:
   /** Test whether \c strval_r denotes a subcommand and remember the \ref Detected details.
    * \ref SubcommandOptions can load the last detected details if necessary.
    */
-  static bool isSubCommand (const std::string &strval_r );
+  static bool isSubcommand (const std::string &strval_r );
+
+  /** Return name and summary of each available subcommd. */
+  static std::map<std::string,std::string> getSubcommandSummaries();
 
   /** Execute subcommand (or show its help).
    *

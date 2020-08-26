@@ -283,7 +283,7 @@ ZypperCommand::Command ZypperCommand::toEnum( const std::string &strval_r )
   ZypperCommand::Command cmd = SUBCOMMAND_e;	// Exception if not true
   if ( ! cmdTable().getValue( strval_r, cmd ) )
   {
-    if ( ! SubCmd::isSubCommand( strval_r ) )
+    if ( ! SubCmd::isSubcommand( strval_r ) )
     {
       ZYPP_THROW( Exception( str::form(_("Unknown command '%s'"), strval_r.c_str() ) ) );
     }
