@@ -8,6 +8,7 @@
 #include "utils/messages.h"
 #include "commands/commandhelpformatter.h"
 #include "commands/search/search-packages-hinthack.h"
+#include "commands/subcommand.h"
 #include "Zypper.h"
 
 namespace
@@ -59,6 +60,13 @@ std::string renderGlobalHelp ()
         cmdTxt += ", " + aliases.at(1);
 
       help.gDef( cmdTxt, cmd->summary() );
+
+      if ( std::get<ZypperCommand::CmdDescField::Id>(desc) == ZypperCommand::SUBCOMMAND_e ) {
+	// Get and print the detailed list of available subcommands
+	for ( const auto & p : SubCmd::getSubcommandSummaries() ) {
+	  help.gDef( p.first, p.second );
+	}
+      }
     }
   }
   return help;
