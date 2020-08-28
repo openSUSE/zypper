@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper.de\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-08-24 08:14+0200\n"
+"POT-Creation-Date: 2020-08-28 11:39+0200\n"
 "PO-Revision-Date: 2020-05-14 23:22+0000\n"
 "Last-Translator: Sarah Kriesch <ada.lovelace@gmx.de>\n"
 "Language-Team: German <https://l10n.opensuse.org/projects/zypper/master/de/"
@@ -2282,17 +2282,17 @@ msgstr ""
 "Kommando finden Sie unter '%s'."
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/commands/help.cc:21
+#: src/commands/help.cc:22
 msgid "zypper [--GLOBAL-OPTIONS] <COMMAND> [--COMMAND-OPTIONS] [ARGUMENTS]"
 msgstr ""
 "zypper [--Globale-Optionen] <Kommando> [--Kommandooptionen] [Argumente]"
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/commands/help.cc:24
+#: src/commands/help.cc:25
 msgid "zypper <SUBCOMMAND> [--COMMAND-OPTIONS] [ARGUMENTS]"
 msgstr "zypper <Unterkommando> [--Kommandooptionen] [Argumente]"
 
-#: src/commands/help.cc:72 src/commands/help.cc:73
+#: src/commands/help.cc:80 src/commands/help.cc:81
 msgid "Print zypper help"
 msgstr "Zypper Hilfe drucken"
 
@@ -4829,25 +4829,31 @@ msgstr "Die Angabe eines Quellpaketnamens ist zwingend erforderlich."
 msgid "Uninstalling source packages is not supported."
 msgstr "Die Deinstallation von Quellpaketen wird nicht unterstützt."
 
-#: src/commands/subcommand.cc:52
+#. translators: %1% is the name of the command which has no man page available.
+#: src/commands/subcommand.cc:79
+#, boost-format
+msgid "No manual entry for %1%"
+msgstr ""
+
+#: src/commands/subcommand.cc:92
 msgid "none"
 msgstr "Keine"
 
-#: src/commands/subcommand.cc:296
+#: src/commands/subcommand.cc:329
 #, boost-format
 msgid "cannot exec %1% (%2%)"
 msgstr "Ausführen von %1% (%2%) nicht möglich"
 
 #. translators: %1% - command name or path
 #. translators: %2% - system error message
-#: src/commands/subcommand.cc:305
+#: src/commands/subcommand.cc:338
 #, boost-format
 msgid "fork for %1% failed (%2%)"
 msgstr "Fehler beim Abzweigen für %1% (%2%)"
 
 #. translators: %1% - command name or path
 #. translators: %2% - system error message
-#: src/commands/subcommand.cc:324
+#: src/commands/subcommand.cc:357
 #, boost-format
 msgid "waitpid for %1% failed (%2%)"
 msgstr "Fehler bei waitpid für %1% (%2%)"
@@ -4855,7 +4861,7 @@ msgstr "Fehler bei waitpid für %1% (%2%)"
 #. translators: %1% - command name or path
 #. translators: %2% - returned PID (number)
 #. translators: %3% - expected PID (number)
-#: src/commands/subcommand.cc:334
+#: src/commands/subcommand.cc:367
 #, boost-format
 msgid "waitpid for %1% returns unexpected pid %2% while waiting for %3%"
 msgstr "waitpid für %1% gibt unerwartete PID %2% beim Warten auf %3% zurück"
@@ -4863,30 +4869,30 @@ msgstr "waitpid für %1% gibt unerwartete PID %2% beim Warten auf %3% zurück"
 #. translators: %1% - command name or path
 #. translators: %2% - signal number
 #. translators: %3% - signal name
-#: src/commands/subcommand.cc:345
+#: src/commands/subcommand.cc:378
 #, boost-format
 msgid "%1% was killed by signal %2% (%3%)"
 msgstr "%1% wurde mit Signal %2% (%3%) beendet"
 
-#: src/commands/subcommand.cc:349
+#: src/commands/subcommand.cc:382
 msgid "core dumped"
 msgstr "Speicherauszug erstellt"
 
 #. translators: %1% - command name or path
 #. translators: %2% - exit code (number)
-#: src/commands/subcommand.cc:359
+#: src/commands/subcommand.cc:392
 #, boost-format
 msgid "%1% exited with status %2%"
 msgstr "%1% mit Status %2% beendet"
 
 #. translators: %1% - command name or path
 #. translators: %2% - status (number)
-#: src/commands/subcommand.cc:374
+#: src/commands/subcommand.cc:407
 #, boost-format
 msgid "waitpid for %1% returns unexpected exit status %2%"
 msgstr "waitpid für %1% gibt unerwarteten Beendigungsstatus %2% zurück"
 
-#: src/commands/subcommand.cc:407
+#: src/commands/subcommand.cc:440
 #, boost-format
 msgid ""
 "Zypper subcommands are standalone executables that live in the\n"
@@ -4914,7 +4920,7 @@ msgstr ""
 "lokale zypper-Erweiterungen geschrieben werden, die sich nicht im "
 "Systembereich befinden.\n"
 
-#: src/commands/subcommand.cc:422
+#: src/commands/subcommand.cc:455
 #, boost-format
 msgid ""
 "Using zypper global-options together with subcommands, as well as\n"
@@ -4925,41 +4931,41 @@ msgstr ""
 "Ausführen von Unterkommandos in '%1%' wird derzeit nicht unterstützt.\n"
 
 #. translators: headline of an enumeration; %1% is a directory name
-#: src/commands/subcommand.cc:439
+#: src/commands/subcommand.cc:466
 #, boost-format
 msgid "Available zypper subcommands in '%1%'"
 msgstr "Verfügbare zypper-Unterkommandos in '%1%'"
 
 #. translators: headline of an enumeration
-#: src/commands/subcommand.cc:444
+#: src/commands/subcommand.cc:471
 msgid "Zypper subcommands available from elsewhere on your $PATH"
 msgstr "Zypper-Unterkommandos in anderen Ordnern im $PATH"
 
 #. translators: helptext; %1% is a zypper command
-#: src/commands/subcommand.cc:449
+#: src/commands/subcommand.cc:476
 #, boost-format
 msgid "Type '%1%' to get subcommand-specific help if available."
 msgstr ""
 "Mit '%1%' erhalten Sie Hilfe zu einzelnen Unterkommandos (sofern verfügbar)."
 
 #. translators: %1% - command name
-#: src/commands/subcommand.cc:472
+#: src/commands/subcommand.cc:499
 #, boost-format
 msgid "Manual entry for %1% can't be shown"
 msgstr "Anzeige der manuellen Eingabe für %1% nicht möglich"
 
 #. translators: command summary: subcommand
-#: src/commands/subcommand.cc:485
+#: src/commands/subcommand.cc:512
 msgid "Lists available subcommands."
 msgstr "Verfügbare Unterkommandos auflisten."
 
 #. Currently no concept how to handle global options and ZYPPlock
-#: src/commands/subcommand.cc:582
+#: src/commands/subcommand.cc:616
 msgid "Zypper shell does not support execution of subcommands."
 msgstr "Die zypper-Shell unterstützt nicht die Ausführung von Unterbefehlen."
 
 #. translators: %1%  - is the name of a subcommand
-#: src/commands/subcommand.cc:596
+#: src/commands/subcommand.cc:630
 #, boost-format
 msgid "Subcommand %1% does not support zypper global options."
 msgstr "Unterkommando %1% unterstützt keine globalen zypper-Optionen."

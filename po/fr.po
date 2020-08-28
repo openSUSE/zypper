@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper.fr\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-08-24 08:14+0200\n"
+"POT-Creation-Date: 2020-08-28 11:39+0200\n"
 "PO-Revision-Date: 2020-05-26 14:39+0000\n"
 "Last-Translator: Antoine Belvire <antoine.belvire@opensuse.org>\n"
 "Language-Team: French <https://l10n.opensuse.org/projects/zypper/master/fr/"
@@ -2294,16 +2294,16 @@ msgstr ""
 "cette commande."
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/commands/help.cc:21
+#: src/commands/help.cc:22
 msgid "zypper [--GLOBAL-OPTIONS] <COMMAND> [--COMMAND-OPTIONS] [ARGUMENTS]"
 msgstr "zypper [--global-options] <commande> [--command-options] [arguments]"
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/commands/help.cc:24
+#: src/commands/help.cc:25
 msgid "zypper <SUBCOMMAND> [--COMMAND-OPTIONS] [ARGUMENTS]"
 msgstr "zypper <sous-commande> [--command-options] [arguments]"
 
-#: src/commands/help.cc:72 src/commands/help.cc:73
+#: src/commands/help.cc:80 src/commands/help.cc:81
 msgid "Print zypper help"
 msgstr "Affiche l'aide"
 
@@ -4803,25 +4803,31 @@ msgstr "Le nom du paquet source est un argument requis."
 msgid "Uninstalling source packages is not supported."
 msgstr "La suppression des paquets source n'est pas prise en charge."
 
-#: src/commands/subcommand.cc:52
+#. translators: %1% is the name of the command which has no man page available.
+#: src/commands/subcommand.cc:79
+#, boost-format
+msgid "No manual entry for %1%"
+msgstr ""
+
+#: src/commands/subcommand.cc:92
 msgid "none"
 msgstr "aucun"
 
-#: src/commands/subcommand.cc:296
+#: src/commands/subcommand.cc:329
 #, boost-format
 msgid "cannot exec %1% (%2%)"
 msgstr "impossible d'exécuter %1% (%2%)"
 
 #. translators: %1% - command name or path
 #. translators: %2% - system error message
-#: src/commands/subcommand.cc:305
+#: src/commands/subcommand.cc:338
 #, boost-format
 msgid "fork for %1% failed (%2%)"
 msgstr "échec du fork pour %1% (%2%)"
 
 #. translators: %1% - command name or path
 #. translators: %2% - system error message
-#: src/commands/subcommand.cc:324
+#: src/commands/subcommand.cc:357
 #, boost-format
 msgid "waitpid for %1% failed (%2%)"
 msgstr "échec du waitpid pour %1% (%2%)"
@@ -4829,7 +4835,7 @@ msgstr "échec du waitpid pour %1% (%2%)"
 #. translators: %1% - command name or path
 #. translators: %2% - returned PID (number)
 #. translators: %3% - expected PID (number)
-#: src/commands/subcommand.cc:334
+#: src/commands/subcommand.cc:367
 #, boost-format
 msgid "waitpid for %1% returns unexpected pid %2% while waiting for %3%"
 msgstr ""
@@ -4838,30 +4844,30 @@ msgstr ""
 #. translators: %1% - command name or path
 #. translators: %2% - signal number
 #. translators: %3% - signal name
-#: src/commands/subcommand.cc:345
+#: src/commands/subcommand.cc:378
 #, boost-format
 msgid "%1% was killed by signal %2% (%3%)"
 msgstr "%1% a été tué par le signal %2% (%3%)"
 
-#: src/commands/subcommand.cc:349
+#: src/commands/subcommand.cc:382
 msgid "core dumped"
 msgstr "mémoire vidée"
 
 #. translators: %1% - command name or path
 #. translators: %2% - exit code (number)
-#: src/commands/subcommand.cc:359
+#: src/commands/subcommand.cc:392
 #, boost-format
 msgid "%1% exited with status %2%"
 msgstr "%1% s'est terminé avec le statut %2%"
 
 #. translators: %1% - command name or path
 #. translators: %2% - status (number)
-#: src/commands/subcommand.cc:374
+#: src/commands/subcommand.cc:407
 #, boost-format
 msgid "waitpid for %1% returns unexpected exit status %2%"
 msgstr "waitpid pour %1% a retourné le statut de sortie inattendu %2%"
 
-#: src/commands/subcommand.cc:407
+#: src/commands/subcommand.cc:440
 #, boost-format
 msgid ""
 "Zypper subcommands are standalone executables that live in the\n"
@@ -4886,7 +4892,7 @@ msgstr ""
 "possible d'écrire des extensions locales pour zypper, en dehors\n"
 "de l'espace système.\n"
 
-#: src/commands/subcommand.cc:422
+#: src/commands/subcommand.cc:455
 #, boost-format
 msgid ""
 "Using zypper global-options together with subcommands, as well as\n"
@@ -4897,20 +4903,20 @@ msgstr ""
 "pas supportés.\n"
 
 #. translators: headline of an enumeration; %1% is a directory name
-#: src/commands/subcommand.cc:439
+#: src/commands/subcommand.cc:466
 #, boost-format
 msgid "Available zypper subcommands in '%1%'"
 msgstr "Sous-commandes zypper disponibles dans '%1%'"
 
 #. translators: headline of an enumeration
-#: src/commands/subcommand.cc:444
+#: src/commands/subcommand.cc:471
 msgid "Zypper subcommands available from elsewhere on your $PATH"
 msgstr ""
 "Sous-commandes Zypper disponibles depuis un autre emplacement de votre "
 "chemin $PATH"
 
 #. translators: helptext; %1% is a zypper command
-#: src/commands/subcommand.cc:449
+#: src/commands/subcommand.cc:476
 #, boost-format
 msgid "Type '%1%' to get subcommand-specific help if available."
 msgstr ""
@@ -4918,23 +4924,23 @@ msgstr ""
 "commande."
 
 #. translators: %1% - command name
-#: src/commands/subcommand.cc:472
+#: src/commands/subcommand.cc:499
 #, boost-format
 msgid "Manual entry for %1% can't be shown"
 msgstr "L'entrée du manuel pour %1% ne peut être affichée"
 
 #. translators: command summary: subcommand
-#: src/commands/subcommand.cc:485
+#: src/commands/subcommand.cc:512
 msgid "Lists available subcommands."
 msgstr "Liste les sous-commandes disponibles."
 
 #. Currently no concept how to handle global options and ZYPPlock
-#: src/commands/subcommand.cc:582
+#: src/commands/subcommand.cc:616
 msgid "Zypper shell does not support execution of subcommands."
 msgstr "Le shell de zypper ne supporte pas l'exécution des sous-commandes."
 
 #. translators: %1%  - is the name of a subcommand
-#: src/commands/subcommand.cc:596
+#: src/commands/subcommand.cc:630
 #, boost-format
 msgid "Subcommand %1% does not support zypper global options."
 msgstr ""

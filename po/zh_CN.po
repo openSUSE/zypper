@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-08-24 08:14+0200\n"
+"POT-Creation-Date: 2020-08-28 11:39+0200\n"
 "PO-Revision-Date: 2020-06-29 19:46+0000\n"
 "Last-Translator: Dingzhong Chen <wsxy162@gmail.com>\n"
 "Language-Team: Chinese (China) <https://l10n.opensuse.org/projects/zypper/"
@@ -2048,16 +2048,16 @@ msgstr ""
 "考 '%s' 获知更多关于此命令的信息。"
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/commands/help.cc:21
+#: src/commands/help.cc:22
 msgid "zypper [--GLOBAL-OPTIONS] <COMMAND> [--COMMAND-OPTIONS] [ARGUMENTS]"
 msgstr "zypper [--全局选项] <命令> [--命令选项] [参数]"
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/commands/help.cc:24
+#: src/commands/help.cc:25
 msgid "zypper <SUBCOMMAND> [--COMMAND-OPTIONS] [ARGUMENTS]"
 msgstr "zypper <子命令> [--命令选项] [参数]"
 
-#: src/commands/help.cc:72 src/commands/help.cc:73
+#: src/commands/help.cc:80 src/commands/help.cc:81
 msgid "Print zypper help"
 msgstr "打印 zypper 帮助"
 
@@ -4398,25 +4398,31 @@ msgstr "源代码包名称是一个必需的参数。"
 msgid "Uninstalling source packages is not supported."
 msgstr "不支持卸载源代码软件包。"
 
-#: src/commands/subcommand.cc:52
+#. translators: %1% is the name of the command which has no man page available.
+#: src/commands/subcommand.cc:79
+#, boost-format
+msgid "No manual entry for %1%"
+msgstr ""
+
+#: src/commands/subcommand.cc:92
 msgid "none"
 msgstr "无"
 
-#: src/commands/subcommand.cc:296
+#: src/commands/subcommand.cc:329
 #, boost-format
 msgid "cannot exec %1% (%2%)"
 msgstr "无法执行 %1% (%2%)"
 
 #. translators: %1% - command name or path
 #. translators: %2% - system error message
-#: src/commands/subcommand.cc:305
+#: src/commands/subcommand.cc:338
 #, boost-format
 msgid "fork for %1% failed (%2%)"
 msgstr "%1% 派生失败 (%2%)"
 
 #. translators: %1% - command name or path
 #. translators: %2% - system error message
-#: src/commands/subcommand.cc:324
+#: src/commands/subcommand.cc:357
 #, boost-format
 msgid "waitpid for %1% failed (%2%)"
 msgstr "%1% 的 waitpid 失败 (%2%)"
@@ -4424,7 +4430,7 @@ msgstr "%1% 的 waitpid 失败 (%2%)"
 #. translators: %1% - command name or path
 #. translators: %2% - returned PID (number)
 #. translators: %3% - expected PID (number)
-#: src/commands/subcommand.cc:334
+#: src/commands/subcommand.cc:367
 #, boost-format
 msgid "waitpid for %1% returns unexpected pid %2% while waiting for %3%"
 msgstr "%1% 的 waitpid 返回了意外的 pid %2% 而期待的是 %3%"
@@ -4432,30 +4438,30 @@ msgstr "%1% 的 waitpid 返回了意外的 pid %2% 而期待的是 %3%"
 #. translators: %1% - command name or path
 #. translators: %2% - signal number
 #. translators: %3% - signal name
-#: src/commands/subcommand.cc:345
+#: src/commands/subcommand.cc:378
 #, boost-format
 msgid "%1% was killed by signal %2% (%3%)"
 msgstr "%1% 已被 %2% 信号杀死 (%3%)"
 
-#: src/commands/subcommand.cc:349
+#: src/commands/subcommand.cc:382
 msgid "core dumped"
 msgstr "核心已转储"
 
 #. translators: %1% - command name or path
 #. translators: %2% - exit code (number)
-#: src/commands/subcommand.cc:359
+#: src/commands/subcommand.cc:392
 #, boost-format
 msgid "%1% exited with status %2%"
 msgstr "%1% 已退出，状态为 %2%"
 
 #. translators: %1% - command name or path
 #. translators: %2% - status (number)
-#: src/commands/subcommand.cc:374
+#: src/commands/subcommand.cc:407
 #, boost-format
 msgid "waitpid for %1% returns unexpected exit status %2%"
 msgstr "%1% 的 waitpid 返回了意外的退出状态 %2%"
 
-#: src/commands/subcommand.cc:407
+#: src/commands/subcommand.cc:440
 #, boost-format
 msgid ""
 "Zypper subcommands are standalone executables that live in the\n"
@@ -4477,7 +4483,7 @@ msgstr ""
 "若未在 zypper_execdir 中找到子命令，该封装将在您 $PATH 中的其它位置查找该子命"
 "令。因此，编写一些不存放在系统空间仅供局部使用的 zypper 扩展是可以做到的。\n"
 
-#: src/commands/subcommand.cc:422
+#: src/commands/subcommand.cc:455
 #, boost-format
 msgid ""
 "Using zypper global-options together with subcommands, as well as\n"
@@ -4487,40 +4493,40 @@ msgstr ""
 "令。\n"
 
 #. translators: headline of an enumeration; %1% is a directory name
-#: src/commands/subcommand.cc:439
+#: src/commands/subcommand.cc:466
 #, boost-format
 msgid "Available zypper subcommands in '%1%'"
 msgstr "'%1%' 中可用的 zypper 子命令"
 
 #. translators: headline of an enumeration
-#: src/commands/subcommand.cc:444
+#: src/commands/subcommand.cc:471
 msgid "Zypper subcommands available from elsewhere on your $PATH"
 msgstr "来自您 $PATH 中其它位置的可用 zypper 子命令"
 
 #. translators: helptext; %1% is a zypper command
-#: src/commands/subcommand.cc:449
+#: src/commands/subcommand.cc:476
 #, boost-format
 msgid "Type '%1%' to get subcommand-specific help if available."
 msgstr "输入 '%1%' 获取或有的特定于子命令的帮助。"
 
 #. translators: %1% - command name
-#: src/commands/subcommand.cc:472
+#: src/commands/subcommand.cc:499
 #, boost-format
 msgid "Manual entry for %1% can't be shown"
 msgstr "无法显示 %1% 的手动输入项"
 
 #. translators: command summary: subcommand
-#: src/commands/subcommand.cc:485
+#: src/commands/subcommand.cc:512
 msgid "Lists available subcommands."
 msgstr "列出可用子命令。"
 
 #. Currently no concept how to handle global options and ZYPPlock
-#: src/commands/subcommand.cc:582
+#: src/commands/subcommand.cc:616
 msgid "Zypper shell does not support execution of subcommands."
 msgstr "Zypper shell 不支持执行子命令。"
 
 #. translators: %1%  - is the name of a subcommand
-#: src/commands/subcommand.cc:596
+#: src/commands/subcommand.cc:630
 #, boost-format
 msgid "Subcommand %1% does not support zypper global options."
 msgstr "子命令 %1% 不支持 zypper 全局选项。"

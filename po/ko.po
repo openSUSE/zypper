@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper.ko\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-08-24 08:14+0200\n"
+"POT-Creation-Date: 2020-08-28 11:39+0200\n"
 "PO-Revision-Date: 2019-04-04 18:36+0000\n"
 "Last-Translator: Hwajin Kim <hwajin.kim@e4net.net>\n"
 "Language-Team: Korean <https://l10n.opensuse.org/projects/zypper/master/ko/"
@@ -2089,16 +2089,16 @@ msgstr ""
 "용은 '%s'을(를) 확인하십시오."
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/commands/help.cc:21
+#: src/commands/help.cc:22
 msgid "zypper [--GLOBAL-OPTIONS] <COMMAND> [--COMMAND-OPTIONS] [ARGUMENTS]"
 msgstr "zypper [--글로벌 옵션] <명령> [--명령-옵션] [인수]"
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/commands/help.cc:24
+#: src/commands/help.cc:25
 msgid "zypper <SUBCOMMAND> [--COMMAND-OPTIONS] [ARGUMENTS]"
 msgstr "zypper <하위 명령> [--명령-옵션] [인수]"
 
-#: src/commands/help.cc:72 src/commands/help.cc:73
+#: src/commands/help.cc:80 src/commands/help.cc:81
 msgid "Print zypper help"
 msgstr "도움말을 인쇄합니다."
 
@@ -4497,25 +4497,31 @@ msgstr "소스 패키지 이름은 필수 인수입니다."
 msgid "Uninstalling source packages is not supported."
 msgstr "소프 패키지 제거는 지원되지 않습니다."
 
-#: src/commands/subcommand.cc:52
+#. translators: %1% is the name of the command which has no man page available.
+#: src/commands/subcommand.cc:79
+#, boost-format
+msgid "No manual entry for %1%"
+msgstr ""
+
+#: src/commands/subcommand.cc:92
 msgid "none"
 msgstr "없음"
 
-#: src/commands/subcommand.cc:296
+#: src/commands/subcommand.cc:329
 #, boost-format
 msgid "cannot exec %1% (%2%)"
 msgstr "%1%(%2%) 실행 불가"
 
 #. translators: %1% - command name or path
 #. translators: %2% - system error message
-#: src/commands/subcommand.cc:305
+#: src/commands/subcommand.cc:338
 #, boost-format
 msgid "fork for %1% failed (%2%)"
 msgstr "%1%에 대한 포크 실패(%2%)"
 
 #. translators: %1% - command name or path
 #. translators: %2% - system error message
-#: src/commands/subcommand.cc:324
+#: src/commands/subcommand.cc:357
 #, boost-format
 msgid "waitpid for %1% failed (%2%)"
 msgstr "%1%에 대한 waitpid 실패(%2%)"
@@ -4523,7 +4529,7 @@ msgstr "%1%에 대한 waitpid 실패(%2%)"
 #. translators: %1% - command name or path
 #. translators: %2% - returned PID (number)
 #. translators: %3% - expected PID (number)
-#: src/commands/subcommand.cc:334
+#: src/commands/subcommand.cc:367
 #, boost-format
 msgid "waitpid for %1% returns unexpected pid %2% while waiting for %3%"
 msgstr "%3% 대기 중 %1%에 대한 waitpid에서 예기치 못한 pid %2%이(가) 반환됨"
@@ -4531,30 +4537,30 @@ msgstr "%3% 대기 중 %1%에 대한 waitpid에서 예기치 못한 pid %2%이(�
 #. translators: %1% - command name or path
 #. translators: %2% - signal number
 #. translators: %3% - signal name
-#: src/commands/subcommand.cc:345
+#: src/commands/subcommand.cc:378
 #, boost-format
 msgid "%1% was killed by signal %2% (%3%)"
 msgstr "%1%이(가) %2%(%3%) 신호로 강제 종료됨"
 
-#: src/commands/subcommand.cc:349
+#: src/commands/subcommand.cc:382
 msgid "core dumped"
 msgstr "코어 덤프됨"
 
 #. translators: %1% - command name or path
 #. translators: %2% - exit code (number)
-#: src/commands/subcommand.cc:359
+#: src/commands/subcommand.cc:392
 #, boost-format
 msgid "%1% exited with status %2%"
 msgstr "%1%이(가) %2% 상태로 종료됨"
 
 #. translators: %1% - command name or path
 #. translators: %2% - status (number)
-#: src/commands/subcommand.cc:374
+#: src/commands/subcommand.cc:407
 #, boost-format
 msgid "waitpid for %1% returns unexpected exit status %2%"
 msgstr "%1%에 대한 waitpid에서 예기치 않은 종료 상태 %2% 반환"
 
-#: src/commands/subcommand.cc:407
+#: src/commands/subcommand.cc:440
 #, boost-format
 msgid ""
 "Zypper subcommands are standalone executables that live in the\n"
@@ -4580,7 +4586,7 @@ msgstr ""
 "$PATH의 나머지 위치를 찾아봅니다. 따라서 \n"
 "시스템 영역에 상주하지 않는 로컬 zypper 확장명을 쓰는 것도 가능합니다.\n"
 
-#: src/commands/subcommand.cc:422
+#: src/commands/subcommand.cc:455
 #, boost-format
 msgid ""
 "Using zypper global-options together with subcommands, as well as\n"
@@ -4590,40 +4596,40 @@ msgstr ""
 "'%1%'의 실행 하위 명령과 함께 사용하는 것은 현재 지원되지 않습니다.\n"
 
 #. translators: headline of an enumeration; %1% is a directory name
-#: src/commands/subcommand.cc:439
+#: src/commands/subcommand.cc:466
 #, boost-format
 msgid "Available zypper subcommands in '%1%'"
 msgstr "'%1%'의 사용 가능한 zypper 하위 명령"
 
 #. translators: headline of an enumeration
-#: src/commands/subcommand.cc:444
+#: src/commands/subcommand.cc:471
 msgid "Zypper subcommands available from elsewhere on your $PATH"
 msgstr "Zypper 하위 명령은 $PATH의 다른 곳에서도 이용 가능"
 
 #. translators: helptext; %1% is a zypper command
-#: src/commands/subcommand.cc:449
+#: src/commands/subcommand.cc:476
 #, boost-format
 msgid "Type '%1%' to get subcommand-specific help if available."
 msgstr "하위 명령별 도움말을 보려면 '%1%'을(를) 입력합니다."
 
 #. translators: %1% - command name
-#: src/commands/subcommand.cc:472
+#: src/commands/subcommand.cc:499
 #, boost-format
 msgid "Manual entry for %1% can't be shown"
 msgstr "%1%에 대한 수동 엔트리는 표시할 수 없음"
 
 #. translators: command summary: subcommand
-#: src/commands/subcommand.cc:485
+#: src/commands/subcommand.cc:512
 msgid "Lists available subcommands."
 msgstr "사용 가능한 하위 명령을 나열합니다."
 
 #. Currently no concept how to handle global options and ZYPPlock
-#: src/commands/subcommand.cc:582
+#: src/commands/subcommand.cc:616
 msgid "Zypper shell does not support execution of subcommands."
 msgstr "Zypper 셸은 하위 명령의 실행을 지원하지 않습니다."
 
 #. translators: %1%  - is the name of a subcommand
-#: src/commands/subcommand.cc:596
+#: src/commands/subcommand.cc:630
 #, boost-format
 msgid "Subcommand %1% does not support zypper global options."
 msgstr "하위 명령 %1%은(는) zypper 전역 옵션을 지원하지 않습니다."
