@@ -1,4 +1,17 @@
 -------------------------------------------------------------------
+Fri Aug 28 11:43:49 CEST 2020 - ma@suse.de
+
+- Directly list subcommands in 'zypper help' (bsc#1165424)
+- man: enhance description of the global package cache (bsc#1175592)
+- Remove extern C block wrapping augeas.h as it breaks the build
+  on Arch Linux.
+- Point out that plaindir repos do not follow symlinks (bsc#1174561)
+- Fix help command for list-patches
+- man: Point out that plain rpm packages are not downloaded to the
+  global package cache (bsc#1173273)
+- version 1.14.38
+
+-------------------------------------------------------------------
 Mon Jun 15 17:12:57 CEST 2020 - bzeller@suse.de
 
 - Print switch abbrev warning to stderr (bsc#1172925)
