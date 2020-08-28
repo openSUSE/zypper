@@ -1,4 +1,18 @@
 -------------------------------------------------------------------
+Fri Aug 28 17:09:59 CEST 2020 - ma@suse.de
+
+- VendorAttr: Const-correct API and let Target provide its
+  settings (bsc#1174918)
+- Support buildnr with commit hash in purge-kernels (bsc#1175342)
+  This adds special behaviour for when a kernel version has the
+  rebuild counter before the kernel commit hash.
+- Improve Italian traslation of the "breaking dependencies"
+  message (bsc#1173529)
+- Make sure reading from lsof does not block forever (bsc#1174240)
+- Just collect details for the signatures found (fixes #229)
+- version 17.24.2 (22)
+
+-------------------------------------------------------------------
 Thu Jul 16 18:04:18 CEST 2020 - ma@suse.de
 
 - Fix bsc#1174011 auth=basic ignored in some cases (bsc#1174011)
