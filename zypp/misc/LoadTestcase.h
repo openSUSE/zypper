@@ -26,6 +26,10 @@
 #include <optional>
 #include <memory>
 
+namespace zypp {
+  class RepoManager;
+}
+
 namespace zypp::misc::testcase {
 
   enum class TestcaseRepoType {
@@ -84,6 +88,10 @@ namespace zypp::misc::testcase {
     bool dupAllowNameChange    = false;
     bool dupAllowArchChange    = false;
     bool dupAllowVendorChange  = false;
+
+    bool applySetup ( zypp::RepoManager &manager ) const;
+
+    static bool loadRepo (zypp::RepoManager &manager, const TestcaseSetup &setup, const RepoData &data );
   };
 
   struct TestcaseTrial

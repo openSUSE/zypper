@@ -14,6 +14,12 @@
 #include "YamlTestcaseHelpers.h"
 #include <zypp/PathInfo.h>
 #include <zypp/base/LogControl.h>
+#include <zypp/Repository.h>
+#include <zypp/RepoManager.h>
+#include <zypp/sat/Pool.h>
+
+#define ZYPP_USE_RESOLVER_INTERNALS
+#include <zypp/solver/detail/SystemCheck.h>
 
 namespace zypp::misc::testcase {
 
@@ -181,6 +187,112 @@ namespace zypp::misc::testcase {
     if ( properties.find( name) == properties.end() )
       return def;
     return properties.at( name );
+  }
+
+  bool TestcaseSetup::applySetup( RepoManager &manager) const
+  {
+    const auto &setup = *this;
+    if ( !setup.architecture.empty() )
+    {
+      MIL << "Setting architecture to '" << setup.architecture << "'" << std::endl;
+      ZConfig::instance().setSystemArchitecture( setup.architecture );
+      setenv ("ZYPP_TESTSUITE_FAKE_ARCH", setup.architecture.c_str(), 1);
+    }
+
+    if ( setup.systemRepo ) {
+      if (!loadRepo( manager, setup, *setup.systemRepo ) )
+      {
+        ERR << "Can't setup 'system'" << std::endl;
+        return false;
+      }
+    }
+
+    if ( !setup.hardwareInfoFile.empty() ) {
+      setenv( "ZYPP_MODALIAS_SYSFS", setup.hardwareInfoFile.asString().c_str(), 1 );
+      MIL << "setting HardwareInfo to: " << setup.hardwareInfoFile.asString() << std::endl;
+    }
+
+    for ( const auto &channel : setup.repos ) {
+      if ( !loadRepo( manager, setup, channel )  )
+      {
+        ERR << "Can't setup 'channel'" << std::endl;
+        return false;
+      }
+    }
+
+    if ( !setup.systemCheck.empty() ) {
+      MIL << "setting systemCheck to: " << setup.systemCheck.asString() << std::endl;
+      SystemCheck::instance().setFile( setup.systemCheck );
+    }
+
+    return true;
+  }
+
+  bool TestcaseSetup::loadRepo( zypp::RepoManager &manager, const TestcaseSetup &setup, const RepoData &data )
+  {
+    Pathname pathname = setup.globalPath + data.path;
+    MIL << "'" << pathname << "'" << std::endl;
+
+    Repository repo;
+
+    using TrType = zypp::misc::testcase::TestcaseRepoType;
+
+    if ( data.type == TrType::Url ) {
+      try {
+        MIL << "Load from Url '" << data.path << "'" << std::endl;
+
+        RepoInfo nrepo;
+        nrepo.setAlias      ( data.alias );
+        nrepo.setName       ( data.alias );
+        nrepo.setEnabled    ( true );
+        nrepo.setAutorefresh( false );
+        nrepo.setPriority   ( data.priority );
+        nrepo.addBaseUrl   ( Url(data.path) );
+
+        manager.refreshMetadata( nrepo );
+        manager.buildCache( nrepo );
+        manager.loadFromCache( nrepo );
+      }
+      catch ( Exception & excpt_r ) {
+        ZYPP_CAUGHT (excpt_r);
+        ERR << "Couldn't load packages from Url '" << data.path << "'" << std::endl;
+        return false;
+      }
+    }
+    else {
+      try {
+        MIL << "Load from File '" << pathname << "'" << std::endl;
+        zypp::Repository satRepo;
+
+        if ( data.alias == "@System" ) {
+          satRepo = zypp::sat::Pool::instance().systemRepo();
+        } else {
+          satRepo = zypp::sat::Pool::instance().reposInsert( data.alias );
+        }
+
+        RepoInfo nrepo;
+
+        nrepo.setAlias      ( data.alias );
+        nrepo.setName       ( data.alias );
+        nrepo.setEnabled    ( true );
+        nrepo.setAutorefresh( false );
+        nrepo.setPriority   ( data.priority );
+        nrepo.addBaseUrl   ( pathname.asUrl() );
+
+        satRepo.setInfo (nrepo);
+        if ( data.type == TrType::Helix )
+          satRepo.addHelix( pathname );
+        else
+          satRepo.addTesttags( pathname );
+        MIL << "Loaded " << satRepo.solvablesSize() << " resolvables from " << ( data.path.empty()?pathname.asString():data.path) << "." << std::endl;
+      }
+      catch ( Exception & excpt_r ) {
+        ZYPP_CAUGHT (excpt_r);
+        ERR << "Couldn't load packages from XML file '" << data.path << "'" << std::endl;
+        return false;
+      }
+    }
+    return true;
   }
 
 

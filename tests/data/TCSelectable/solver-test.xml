@@ -1,12 +1,16 @@
 <?xml version="1.0"?>
 <test>
 <setup arch="x86_64">
-	<system file="solver-system.xml"/>
 	<!--
 	- alias       : RepoHIGH
 	- url         : http://foo.org/distribution/HIGH
 	-->
 	<channel file="RepoHIGH.xml" name="RepoHIGH" priority="10" />
+	<!--
+	- alias       : RepoLOW
+	- url         : http://foo.org/distribution/LOW
+	-->
+	<channel file="RepoLOW.xml" name="RepoLOW" priority="99" />
 	<!--
 	- alias       : RepoMID
 	- url         : http://foo.org/distribution/MID
@@ -16,12 +20,10 @@
 	- alias       : RepoLOW
 	- url         : http://foo.org/distribution/LOW
 	-->
-	<channel file="RepoLOW.xml" name="RepoLOW" priority="99" />
-	<!--
-	- alias       : RepoLOW
-	- url         : http://foo.org/distribution/LOW
-	-->
 	<channel file="RepoSRC.xml" name="RepoSRC" priority="99" />
+
+    <!-- Load system repo as a channel, otherwise the solv IDs won't match up what the testcase expects -->
+    <channel file="solver-system.xml" name="@System" priority="99" />
 	<locale name="en_US" />
 	<locale name="de" />
 </setup>

@@ -20,6 +20,7 @@ using boost::unit_test::test_case;
 #include <zypp/RepoManager.h>
 #include <zypp/Target.h>
 #include <zypp/ResPool.h>
+#include <zypp/misc/LoadTestcase.h>
 
 using std::cin;
 using std::cout;
@@ -33,18 +34,6 @@ using namespace zypp;
 #endif
 
 #define LABELED(V) #V << ":\t" << V
-
-inline std::string getXmlNodeVal( const std::string & line_r, const std::string & node_r )
-{
-  std::string::size_type pos = line_r.find( node_r + "=\"" );
-  if ( pos != std::string::npos )
-  {
-    pos += node_r.size() + 2;
-    std::string::size_type epos = line_r.find( "\"", pos );
-    return line_r.substr( pos, epos-pos );
-  }
-  return std::string();
-}
 
 enum TestSetupOptionBits
 {
@@ -107,7 +96,7 @@ public:
   /** Whether directory \a path_r contains a solver testcase. */
   static bool isTestcase( const Pathname & path_r )
   {
-    return filesystem::PathInfo( path_r / "solver-test.xml" ).isFile();
+    return  zypp::misc::testcase::LoadTestcase::None != zypp::misc::testcase::LoadTestcase::testcaseTypeAt( path_r );
   }
 
   /** Whether directory \a path_r contains a testsetup. */
@@ -196,18 +185,9 @@ public:
   void loadRepo( const char * loc_r, const std::string & alias_r = std::string() )
   { loadRepo( std::string( loc_r ? loc_r : "" ), alias_r ); }
 
-private:
-  // repo data from solver-test.xml
-  struct RepoD {
-    DefaultIntegral<unsigned,0> priority;
-    std::string alias;
-    Url url;
-  };
-
-public:
   /** Directly load a helix repo from some testcase.
-     * An empty alias is guessed.
-     */
+   ** An empty alias is guessed.
+   **/
   void loadHelix( const Pathname & path_r, const std::string & alias_r = std::string() )
   {
     // .solv file is loaded directly using a faked RepoInfo
@@ -219,70 +199,26 @@ public:
   // Load repos included in a solver testcase.
   void loadTestcaseRepos( const Pathname & path_r )
   {
-    filesystem::PathInfo pi( path_r / "solver-test.xml" );
-    if ( ! pi.isFile() )
-    {
-      ERR << "No testcase in " << filesystem::PathInfo( path_r ) << endl;
-      return;
-    }
-    // dumb parse
-    InputStream infile( pi.path() );
-    Arch sysarch( Arch_empty );
-    Url guessedUrl;
-    typedef std::map<std::string,RepoD> RepoI;
-    RepoI repoi;
-    for( iostr::EachLine in( infile ); in; in.next() )
-    {
-      if ( str::hasPrefix( *in, "\t<channel" ) )
-      {
-        RepoD & repod( repoi[getXmlNodeVal( *in, "file" )] );
-
-        repod.alias = getXmlNodeVal( *in, "name" );
-        repod.priority = str::strtonum<unsigned>( getXmlNodeVal( *in, "priority" ) );
-        repod.url = guessedUrl;
-        guessedUrl = Url();
-      }
-      else if ( str::hasPrefix( *in, "\t- url " ) )
-      {
-        std::string::size_type pos = in->find( ": " );
-        if ( pos != std::string::npos )
-        {
-          guessedUrl = Url( in->substr( pos+2 ) );
-        }
-      }
-      else if ( str::hasPrefix( *in, "\t<locale" ) )
-      {
-        satpool().addRequestedLocale( Locale( getXmlNodeVal( *in, "name" ) ) );
-      }
-      else if ( sysarch.empty() && str::hasPrefix( *in, "<setup" ) )
-      {
-        sysarch = Arch( getXmlNodeVal( *in, "arch" ) );
-        if ( ! sysarch.empty() )
-          ZConfig::instance().setSystemArchitecture( sysarch );
-      }
+    zypp::misc::testcase::LoadTestcase loader;
+    std::string err;
+    if (!loader.loadTestcaseAt( path_r, &err ) ) {
+      ZYPP_THROW( Exception(err) );
     }
 
-    //
-    filesystem::Glob files( path_r/"*{.xml,.xml.gz}", filesystem::Glob::kBrace );
-    for_( it, files.begin(), files.end() )
-    {
-      std::string basename( Pathname::basename( *it ) );
-      if ( str::hasPrefix( basename, "solver-test.xml" ) )
-        continue; // master index currently unevaluated
-      if ( str::hasPrefix( basename, "solver-system.xml" ) )
-        loadTargetHelix( *it );
-      else if ( repoi.count( basename ) )
-      {
-        const RepoD & repod( repoi[basename] );
-
-        RepoInfo nrepo;
-        nrepo.setAlias( repod.alias.empty() ? basename : repod.alias );
-        nrepo.setPriority( repod.priority );
-        nrepo.setBaseUrl( repod.url );
-        satpool().addRepoHelix( *it, nrepo );
-      }
+    const auto &setup = loader.setupInfo();
+    auto tempRepoManager = repomanager();
+    if ( !setup.applySetup( tempRepoManager ) ) {
+      ZYPP_THROW( Exception("Failed to apply setup!") );
     }
 
+    {
+      base::SetTracker<LocaleSet> localesTracker = setup.localesTracker;
+      localesTracker.removed().insert( localesTracker.current().begin(), localesTracker.current().end() );
+      satpool().initRequestedLocales( localesTracker.removed() );
+
+      localesTracker.added().insert( localesTracker.current().begin(), localesTracker.current().end() );
+      satpool().setRequestedLocales( localesTracker.added() );
+    }
     poolProxy(); // prepare
   }
 
