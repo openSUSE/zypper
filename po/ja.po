@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-08-28 11:39+0200\n"
-"PO-Revision-Date: 2020-05-26 14:40+0000\n"
+"PO-Revision-Date: 2020-09-10 00:48+0000\n"
 "Last-Translator: Yasuhiko Kamata <belphegor@belbel.or.jp>\n"
 "Language-Team: Japanese <https://l10n.opensuse.org/projects/zypper/master/ja/"
 ">\n"
@@ -2334,7 +2334,7 @@ msgstr "list-patches (lp) [オプション]"
 #. translators: command summary: list-patches, lp
 #: src/commands/listpatches.cc:18
 msgid "List available patches."
-msgstr ""
+msgstr "利用可能なパッチを一覧で表示します。"
 
 #. translators: command description
 #: src/commands/listpatches.cc:20
@@ -4619,7 +4619,7 @@ msgstr "ソースパッケージの削除の機能は用意されていません
 #: src/commands/subcommand.cc:79
 #, boost-format
 msgid "No manual entry for %1%"
-msgstr ""
+msgstr "%1% に対するマニュアルページはありません"
 
 #: src/commands/subcommand.cc:92
 msgid "none"
