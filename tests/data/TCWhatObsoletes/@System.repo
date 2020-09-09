@@ -1,0 +1,26 @@
+=Ver: 3.0
+=Pkg: test1 1 1 i586
++Prv:
+test1 = 1-1
+-Prv:
++Obs:
+goaway < 2-1
+-Obs:
+=Pkg: goaway 1 1 i586
++Prv:
+goaway = 1-1
+-Prv:
+=Pkg: goaway 2 1 i586
++Prv:
+goaway = 2-1
+-Prv:
+=Pkg: meetoo 1 1 i586
++Prv:
+goaway = 1-1
+meetoo = 1-1
+-Prv:
+=Pkg: meetoo 2 1 i586
++Prv:
+goaway = 2-1
+meetoo = 2-1
+-Prv:

@@ -1,0 +1,155 @@
+=Ver: 3.0
+=Pkg: glibc 1 1 x86_64
++Prv:
+glibc = 1-1
+-Prv:
+=Vnd: openSUSE
+=Pkg: kernel-firmware <NULL> - noarch
++Prv:
+kernel-firmware = 20190312-lp151.2.3.1
+kernel-firmware = <NULL>
+-Prv:
+=Pkg: kernel-default 5.7.8 1.1.g8f507a0 x86_64
++Prv:
+multiversion(kernel)
+kernel-default-5.7.8-1.1.g8f507a0
+kernel = 5.7.8-1.1.g8f507a0
+kernel-uname-r = 5.7.8-1.g8f507a0-default
+kernel-default = 5.7.8-1.1.g8f507a0
+-Prv:
++Rec:
+kernel-firmware
+-Rec:
+=Vnd: openSUSE
+=Pkg: kernel-default 5.7.9 1.1.ga010166 x86_64
++Prv:
+multiversion(kernel)
+kernel-default-5.7.9-1.1.ga010166
+kernel = 5.7.9-1.1.ga010166
+kernel-uname-r = 5.7.9-1.ga010166-default
+kernel-default = 5.7.9-1.1.ga010166
+-Prv:
++Rec:
+kernel-firmware
+-Rec:
+=Vnd: openSUSE
+=Pkg: kernel-default 5.7.10 1.1.g6a1b5cf x86_64
++Prv:
+multiversion(kernel)
+kernel-default-5.7.10-1.1.g6a1b5cf
+kernel = 5.7.10-1.1.g6a1b5cf
+kernel-uname-r = 5.7.10-1.g6a1b5cf-default
+kernel-default = 5.7.10-1.1.g6a1b5cf
+-Prv:
++Rec:
+kernel-firmware
+-Rec:
+=Vnd: openSUSE
+=Pkg: kernel-default 5.7.10 3.1.gd1148b9 x86_64
++Prv:
+multiversion(kernel)
+kernel-default-5.7.10-3.1.gd1148b9
+kernel = 5.7.10-3.1.gd1148b9
+kernel-uname-r = 5.7.10-3.gd1148b9-default
+kernel-default = 5.7.10-3.1.gd1148b9
+-Prv:
++Rec:
+kernel-firmware
+-Rec:
+=Vnd: openSUSE
+=Pkg: kernel-default 5.7.11 1.1.g5015994 x86_64
++Prv:
+multiversion(kernel)
+kernel-default-5.7.11-1.1.g5015994
+kernel = 5.7.11-1.1.g5015994
+kernel-uname-r = 5.7.11-1.g5015994-default
+kernel-default = 5.7.11-1.1.g5015994
+-Prv:
++Rec:
+kernel-firmware
+-Rec:
+=Vnd: openSUSE
+=Pkg: kernel-default 5.7.12 1.1.g9c98feb x86_64
++Prv:
+multiversion(kernel)
+kernel-default-5.7.12-1.1.g9c98feb
+kernel = 5.7.12-1.1.g9c98feb
+kernel-uname-r = 5.7.12-1.g9c98feb-default
+kernel-default = 5.7.12-1.1.g9c98feb
+-Prv:
++Rec:
+kernel-firmware
+-Rec:
+=Vnd: openSUSE
+=Pkg: kernel-default 5.8.0 1.1.gd3bf2d6 x86_64
++Prv:
+multiversion(kernel)
+kernel-default-5.8.0-1.1.gd3bf2d6
+kernel = 5.8.0-1.1.gd3bf2d6
+kernel-uname-r = 5.8.0-1.gd3bf2d6-default
+kernel-default = 5.8.0-1.1.gd3bf2d6
+-Prv:
++Rec:
+kernel-firmware
+-Rec:
+=Vnd: openSUSE
+=Pkg: kernel-default 5.8.0 2.1.g9bc0044 x86_64
++Prv:
+multiversion(kernel)
+kernel-default-5.8.0-2.1.g9bc0044
+kernel = 5.8.0-2.1.g9bc0044
+kernel-uname-r = 5.8.0-2.g9bc0044-default
+kernel-default = 5.8.0-2.1.g9bc0044
+-Prv:
++Rec:
+kernel-firmware
+-Rec:
+=Vnd: openSUSE
+=Pkg: kernel-default 5.8.0 3.1.gd4e7682 x86_64
++Prv:
+multiversion(kernel)
+kernel-default-5.8.0-3.1.gd4e7682
+kernel = 5.8.0-3.1.gd4e7682
+kernel-uname-r = 5.8.0-3.gd4e7682-default
+kernel-default = 5.8.0-3.1.gd4e7682
+-Prv:
++Rec:
+kernel-firmware
+-Rec:
+=Vnd: openSUSE
+=Pkg: kernel-default 5.8.1 1.1.ge6658c9 x86_64
++Prv:
+multiversion(kernel)
+kernel-default-5.8.1-1.1.ge6658c9
+kernel = 5.8.1-1.1.ge6658c9
+kernel-uname-r = 5.8.1-1.ge6658c9-default
+kernel-default = 5.8.1-1.1.ge6658c9
+-Prv:
++Rec:
+kernel-firmware
+-Rec:
+=Vnd: openSUSE
+=Pkg: kernel-default 5.8.1 2.1.g553537d x86_64
++Prv:
+multiversion(kernel)
+kernel-default-5.8.1-2.1.g553537d
+kernel = 5.8.1-2.1.g553537d
+kernel-uname-r = 5.8.1-2.g553537d-default
+kernel-default = 5.8.1-2.1.g553537d
+-Prv:
++Rec:
+kernel-firmware
+-Rec:
+=Vnd: openSUSE
+=Pkg: kernel-default 5.8.1 3.1.g846658e x86_64
++Prv:
+multiversion(kernel)
+kernel-default-5.8.1-3.1.g846658e
+kernel = 5.8.1-3.1.g846658e
+kernel-uname-r = 5.8.1-3.g846658e-default
+kernel-default = 5.8.1-3.1.g846658e
+-Prv:
++Rec:
+kernel-firmware
+-Rec:
+=Vnd: openSUSE

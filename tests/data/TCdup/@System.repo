@@ -1,0 +1,31 @@
+=Ver: 3.0
+=Pkg: product:Product 1 1 i586
++Prv:
+product:Product = 1-1
+-Prv:
+=Vnd: openSUSE
+=Pkg: release-package 1 1 i586
++Prv:
+product()
+product(Product) = 1-1
+release-package = 1-1
+-Prv:
+=Vnd: openSUSE
+=Pkg: glibc 1 1 i586
++Req:
+dropped_required
+-Req:
++Prv:
+glibc = 1-1
+-Prv:
+=Vnd: openSUSE
+=Pkg: dropped_required 1 1 i586
++Prv:
+dropped_required = 1-1
+-Prv:
+=Vnd: openSUSE
+=Pkg: dropped 1 1 i586
++Prv:
+dropped = 1-1
+-Prv:
+=Vnd: openSUSE

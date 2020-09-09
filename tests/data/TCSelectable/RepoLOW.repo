@@ -1,0 +1,35 @@
+=Ver: 3.0
+=Pkg: candidate 2 1 x86_64
++Prv:
+candidate = 2-1
+-Prv:
+=Vnd: openSUSE
+=Pkg: candidate 2 1 i586
++Prv:
+candidate = 2-1
+-Prv:
+=Vnd: openSUSE
+=Pkg: installed_and_available 1 1 i586
++Prv:
+installed_and_available = 1-1
+-Prv:
+=Pkg: installed_and_available 2 1 i586
++Prv:
+installed_and_available = 2-1
+-Prv:
+=Pkg: installed_and_available 3 1 i586
++Prv:
+installed_and_available = 3-1
+-Prv:
+=Pkg: available_only 1 1 i586
++Prv:
+available_only = 1-1
+-Prv:
+=Pkg: available_only 2 1 i586
++Prv:
+available_only = 2-1
+-Prv:
+=Pkg: available_only 3 1 i586
++Prv:
+available_only = 3-1
+-Prv:

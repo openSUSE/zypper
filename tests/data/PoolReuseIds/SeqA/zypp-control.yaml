@@ -1,0 +1,35 @@
+version: 1.0
+setup:
+  channels:
+    - alias: SEQA
+      url: []
+      path: ""
+      type: NONE
+      generated: 0
+      outdated: 0
+      priority: 99
+      file: SEQA.repo
+  arch: x86_64
+  locales:
+    []
+  autoinst:
+    []
+  modalias:
+    []
+  multiversion:
+    []
+  resolverFlags:
+    focus: Job
+    ignorealreadyrecommended: false
+    onlyRequires: false
+    forceResolve: false
+    cleandepsOnRemove: false
+    allowDowngrade: false
+    allowNameChange: false
+    allowArchChange: false
+    allowVendorChange: false
+    dupAllowDowngrade: false
+    dupAllowNameChange: false
+    dupAllowArchChange: false
+    dupAllowVendorChange: false
+trials: []

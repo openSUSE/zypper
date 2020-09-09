@@ -1,0 +1,350 @@
+=Ver: 3.0
+=Pkg: glibc 1 1 x86_64
++Prv:
+glibc = 1-1
+-Prv:
+=Vnd: openSUSE
+=Pkg: kernel-firmware <NULL> - noarch
++Prv:
+kernel-firmware = 20190312-lp151.2.3.1
+kernel-firmware = <NULL>
+-Prv:
+=Pkg: kernel-macros 1 0 noarch
++Prv:
+kernel-subpackage-macros
+kernel-macros = 1-0
+-Prv:
+=Vnd: openSUSE
+=Pkg: kernel-default 1 1 x86_64
++Prv:
+multiversion(kernel)
+kernel-default-1-1
+kernel = 1-1
+kernel-uname-r = 1-1-default
+kernel-default = 1-1
+-Prv:
++Rec:
+kernel-firmware
+-Rec:
+=Vnd: openSUSE
+=Pkg: kernel-livepatch-default 1 1 x86_64
++Req:
+kernel = 1-1
+-Req:
++Prv:
+kernel-livepatch-default-1-1
+kernel-livepatch-default = 1-1
+-Prv:
+=Vnd: openSUSE
+=Pkg: kernel-default-devel 1 1 x86_64
++Req:
+kernel-devel = 1-1
+-Req:
++Prv:
+multiversion(kernel)
+kernel-default-devel = 1-1
+-Prv:
++Sup:
+kernel-default & kernel-devel
+-Sup:
+=Vnd: openSUSE
+=Pkg: kernel-default-devel-debuginfo 1 1 x86_64
++Prv:
+kernel-default-devel-debuginfo = 1-1
+-Prv:
+=Vnd: openSUSE
+=Pkg: kernel-devel 1 1 noarch
++Req:
+kernel-macros
+-Req:
++Prv:
+multiversion(kernel)
+kernel-devel = 1-1
+-Prv:
+=Vnd: openSUSE
+=Pkg: kernel-source 1 1 noarch
++Req:
+kernel-devel = 1-1
+-Req:
++Prv:
+multiversion(kernel)
+kernel-source = 1-1
+-Prv:
+=Vnd: openSUSE
+=Pkg: kernel-devel 1 1.2 noarch
++Req:
+kernel-macros
+-Req:
++Prv:
+multiversion(kernel)
+kernel-devel = 1-1
+kernel-devel = 1-1.2
+-Prv:
+=Vnd: openSUSE
+=Pkg: kernel-source 1 1.2 noarch
++Req:
+kernel-devel = 1-1.2
+-Req:
++Prv:
+multiversion(kernel)
+kernel-source = 1-1
+kernel-source = 1-1.2
+-Prv:
+=Vnd: openSUSE
+=Pkg: kernel-syms 1 1 x86_64
++Req:
+kernel-devel = 1-1
+kernel-default-devel = 1-1
+-Req:
++Prv:
+multiversion(kernel)
+kernel-syms = 1-1
+-Prv:
+=Vnd: openSUSE
+=Tim: 1570603549
+=Pkg: kernel-default 1 2 x86_64
++Prv:
+multiversion(kernel)
+kernel-default-1-2
+kernel = 1-2
+kernel-uname-r = 1-2-default
+kernel-default = 1-2
+-Prv:
++Rec:
+kernel-firmware
+-Rec:
+=Vnd: openSUSE
+=Pkg: kernel-livepatch-default 1 2 x86_64
++Req:
+kernel = 1-2
+-Req:
++Prv:
+kernel-livepatch-default-1-2
+kernel-livepatch-default = 1-2
+-Prv:
+=Vnd: openSUSE
+=Pkg: kernel-default-devel 1 2 x86_64
++Req:
+kernel-devel = 1-2
+-Req:
++Prv:
+multiversion(kernel)
+kernel-default-devel = 1-2
+-Prv:
++Sup:
+kernel-default & kernel-devel
+-Sup:
+=Vnd: openSUSE
+=Pkg: kernel-default-devel-debuginfo 1 2 x86_64
++Prv:
+kernel-default-devel-debuginfo = 1-2
+-Prv:
+=Vnd: openSUSE
+=Pkg: kernel-devel 1 2 noarch
++Req:
+kernel-macros
+-Req:
++Prv:
+multiversion(kernel)
+kernel-devel = 1-2
+-Prv:
+=Vnd: openSUSE
+=Pkg: kernel-syms 1 2 x86_64
++Req:
+kernel-devel = 1-2
+kernel-default-devel = 1-2
+-Req:
++Prv:
+multiversion(kernel)
+kernel-syms = 1-2
+-Prv:
+=Vnd: openSUSE
+=Pkg: kernel-default 1 3 x86_64
++Prv:
+multiversion(kernel)
+kernel-default-1-3
+kernel = 1-3
+kernel-uname-r = 1-3-default
+kernel-default = 1-3
+-Prv:
++Rec:
+kernel-firmware
+-Rec:
+=Vnd: openSUSE
+=Pkg: kernel-default-devel 1 3 x86_64
++Req:
+kernel-devel = 1-3
+-Req:
++Prv:
+multiversion(kernel)
+kernel-default-devel = 1-3
+-Prv:
++Sup:
+kernel-default & kernel-devel
+-Sup:
+=Vnd: openSUSE
+=Pkg: kernel-default-devel 1 3.2 x86_64
++Req:
+kernel-devel = 1-3.2
+-Req:
++Prv:
+multiversion(kernel)
+kernel-default-devel = 1-3
+kernel-default-devel = 1-3.2
+-Prv:
++Sup:
+kernel-default & kernel-devel
+-Sup:
+=Vnd: openSUSE
+=Pkg: kernel-devel 1 3.2 noarch
++Req:
+kernel-macros
+-Req:
++Prv:
+multiversion(kernel)
+kernel-devel = 1-3
+kernel-devel = 1-3.2
+-Prv:
+=Vnd: openSUSE
+=Pkg: kernel-source 1 3.2 noarch
++Req:
+kernel-devel = 1-3.2
+-Req:
++Prv:
+multiversion(kernel)
+kernel-source = 1-3
+kernel-source = 1-3.2
+-Prv:
+=Vnd: openSUSE
+=Pkg: kernel-default-devel-debuginfo 1 3 x86_64
++Prv:
+kernel-default-devel-debuginfo = 1-3
+-Prv:
+=Vnd: openSUSE
+=Pkg: kernel-devel 1 3 noarch
++Req:
+kernel-macros
+-Req:
++Prv:
+multiversion(kernel)
+kernel-devel = 1-3
+-Prv:
+=Vnd: openSUSE
+=Pkg: kernel-syms 1 3 x86_64
++Req:
+kernel-devel = 1-3
+kernel-default-devel = 1-3
+-Req:
++Prv:
+multiversion(kernel)
+kernel-syms = 1-3
+-Prv:
+=Vnd: openSUSE
+=Pkg: kernel-default 1 4 x86_64
++Prv:
+multiversion(kernel)
+kernel-default-1-4
+kernel = 1-4
+kernel-uname-r = 1-4-default
+kernel-default = 1-4
+-Prv:
++Rec:
+kernel-firmware
+-Rec:
+=Vnd: openSUSE
+=Pkg: kernel-default-devel 1 4 x86_64
++Req:
+kernel-devel = 1-4
+-Req:
++Prv:
+multiversion(kernel)
+kernel-default-devel = 1-4
+-Prv:
++Sup:
+kernel-default & kernel-devel
+-Sup:
+=Vnd: openSUSE
+=Pkg: kernel-default-devel-debuginfo 1 4 x86_64
++Prv:
+kernel-default-devel-debuginfo = 1-4
+-Prv:
+=Vnd: openSUSE
+=Pkg: kernel-devel 1 4 noarch
++Req:
+kernel-macros
+-Req:
++Prv:
+multiversion(kernel)
+kernel-devel = 1-4
+-Prv:
+=Vnd: openSUSE
+=Pkg: kernel-syms 1 4 x86_64
++Req:
+kernel-devel = 1-4
+kernel-default-devel = 1-4
+-Req:
++Prv:
+multiversion(kernel)
+kernel-syms = 1-4
+-Prv:
+=Vnd: openSUSE
+=Tim: 1570603549
+=Pkg: kernel-default 1 5 x86_64
++Prv:
+multiversion(kernel)
+kernel-default-1-5
+kernel = 1-5
+kernel-uname-r = 1-5-default
+ksym(foobar) = abdcfee
+kernel-default = 1-5
+-Prv:
++Rec:
+kernel-firmware
+-Rec:
+=Vnd: openSUSE
+=Pkg: kernel-default-devel 1 5 x86_64
++Req:
+kernel-devel = 1-5
+-Req:
++Prv:
+multiversion(kernel)
+kernel-default-devel = 1-5
+-Prv:
++Sup:
+kernel-default & kernel-devel
+-Sup:
+=Vnd: openSUSE
+=Pkg: kernel-default-devel-debuginfo 1 5 x86_64
++Prv:
+kernel-default-devel-debuginfo = 1-5
+-Prv:
+=Vnd: openSUSE
+=Pkg: kernel-devel 1 5 noarch
++Req:
+kernel-macros
+-Req:
++Prv:
+multiversion(kernel)
+kernel-devel = 1-5
+-Prv:
+=Vnd: openSUSE
+=Pkg: kernel-syms 1 5 x86_64
++Req:
+kernel-devel = 1-5
+kernel-default-devel = 1-5
+-Req:
++Prv:
+multiversion(kernel)
+kernel-syms = 1-5
+-Prv:
+=Vnd: openSUSE
+=Tim: 1570603549
+=Pkg: dummy-kmp-default 1 0 x86_64
++Req:
+kernel-default-devel
+ksym(foobar) = abdcfee
+-Req:
++Prv:
+kmod(dummy)
+dummy-kmp-default = 1-0
+-Prv:

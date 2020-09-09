@@ -1,0 +1,31 @@
+=Ver: 3.0
+=Pkg: candidate 4 1 x86_64
++Prv:
+candidate = 4-1
+-Prv:
+=Vnd: unkown
+=Pkg: candidate 4 1 i586
++Prv:
+candidate = 4-1
+-Prv:
+=Vnd: unknown
+=Pkg: candidatenoarch 5 1 noarch
++Prv:
+candidatenoarch = 5-1
+-Prv:
+=Vnd: unknown
+=Pkg: candidatenoarch 4 1 x86_64
++Prv:
+candidatenoarch = 4-1
+-Prv:
+=Vnd: unknown
+=Pkg: candidatenoarch 4 1 i586
++Prv:
+candidatenoarch = 4-1
+-Prv:
+=Vnd: unknown
+=Pkg: candidatenoarch 4 1 noarch
++Prv:
+candidatenoarch = 4-1
+-Prv:
+=Vnd: unknown

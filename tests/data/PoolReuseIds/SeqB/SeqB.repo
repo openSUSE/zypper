@@ -1,0 +1,28 @@
+=Ver: 3.0
+=Pkg: application:application 4 1 x86_64
++Prv:
+application:application = 4-1
+-Prv:
+=Vnd: unkown
+=Pkg: package 4 1 x86_64
++Prv:
+package = 4-1
+-Prv:
+=Vnd: unkown
+=Pkg: patch:patch 4 1 x86_64
++Prv:
+patch:patch = 4-1
+-Prv:
+=Vnd: unkown
+=Pkg: pattern:pattern 4 1 x86_64
++Prv:
+pattern:pattern = 4-1
+-Prv:
+=Vnd: unkown
+=Pkg: product:product 4 1 x86_64
++Prv:
+product:product = 4-1
+-Prv:
+=Vnd: unkown
+=Pkg: srcpackage 4 1 src
+=Vnd: unkown

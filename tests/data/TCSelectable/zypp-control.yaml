@@ -1,0 +1,70 @@
+version: 1.0
+setup:
+  channels:
+    - alias: RepoHIGH
+      url: []
+      path: ""
+      type: NONE
+      generated: 0
+      outdated: 0
+      priority: 10
+      file: RepoHIGH.repo
+    - alias: RepoLOW
+      url: []
+      path: ""
+      type: NONE
+      generated: 0
+      outdated: 0
+      priority: 99
+      file: RepoLOW.repo
+    - alias: RepoMID
+      url: []
+      path: ""
+      type: NONE
+      generated: 0
+      outdated: 0
+      priority: 50
+      file: RepoMID.repo
+    - alias: RepoSRC
+      url: []
+      path: ""
+      type: NONE
+      generated: 0
+      outdated: 0
+      priority: 99
+      file: RepoSRC.repo
+    - alias: "@System"
+      url: []
+      path: ""
+      type: NONE
+      generated: 0
+      outdated: 0
+      priority: 99
+      file: "@System.repo"
+  arch: x86_64
+  locales:
+    - fate: ""
+      name: en_US
+    - fate: ""
+      name: de
+  autoinst:
+    []
+  modalias:
+    []
+  multiversion:
+    []
+  resolverFlags:
+    focus: Job
+    ignorealreadyrecommended: false
+    onlyRequires: false
+    forceResolve: false
+    cleandepsOnRemove: false
+    allowDowngrade: false
+    allowNameChange: false
+    allowArchChange: false
+    allowVendorChange: false
+    dupAllowDowngrade: false
+    dupAllowNameChange: false
+    dupAllowArchChange: false
+    dupAllowVendorChange: false
+trials: []

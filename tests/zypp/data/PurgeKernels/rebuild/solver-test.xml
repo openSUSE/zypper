@@ -1,8 +1,0 @@
-<?xml version="1.0"?>
-<test>
-<setup arch="x86_64">
-	<system file="solver-system.xml"/>
-	<locale name="en_US" />
-	<locale name="de" />
-</setup>
-</test>

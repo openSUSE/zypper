@@ -1,0 +1,27 @@
+=Ver: 3.0
+=Pkg: candidate 1 1 i586
++Prv:
+candidate = 1-1
+-Prv:
+=Vnd: openSUSE
+=Pkg: candidatenoarch 1 1 i586
++Prv:
+candidatenoarch = 1-1
+-Prv:
+=Vnd: unknown
+=Pkg: installed_only 1 1 i586
++Prv:
+installed_only = 1-1
+-Prv:
+=Pkg: installed_only 1 0 i586
++Prv:
+installed_only = 1-0
+-Prv:
+=Pkg: installed_and_available 1 1 i586
++Prv:
+installed_and_available = 1-1
+-Prv:
+=Pkg: installed_and_available 1 0 i586
++Prv:
+installed_and_available = 1-0
+-Prv:

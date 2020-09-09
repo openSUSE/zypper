@@ -1,0 +1,86 @@
+=Ver: 3.0
+=Pkg: glibc 1 1 x86_64
++Prv:
+glibc = 1-1
+-Prv:
+=Vnd: openSUSE
+=Pkg: kernel-firmware <NULL> - noarch
++Prv:
+kernel-firmware = 20190312-lp151.2.3.1
+kernel-firmware = <NULL>
+-Prv:
+=Pkg: kernel-macros 1 0 noarch
++Prv:
+kernel-subpackage-macros
+kernel-macros = 1-0
+-Prv:
+=Vnd: openSUSE
+=Pkg: kernel-default 1 1.2 x86_64
++Prv:
+multiversion(kernel)
+kernel-default-1-1
+kernel = 1-1
+kernel-default = 1-1
+kernel-default = 1-1.2
+kernel-uname-r = 1-1-default
+-Prv:
++Rec:
+kernel-firmware
+-Rec:
+=Vnd: openSUSE
+=Pkg: kernel-default-devel 1 1.2 x86_64
++Req:
+kernel-devel = 1-1.2
+-Req:
++Prv:
+multiversion(kernel)
+kernel-default-devel = 1-1.2
+-Prv:
++Sup:
+kernel-default & kernel-devel
+-Sup:
+=Vnd: openSUSE
+=Pkg: kernel-default-devel-debuginfo 1 1.2 x86_64
++Prv:
+kernel-default-devel-debuginfo = 1-1.2
+-Prv:
+=Vnd: openSUSE
+=Pkg: kernel-devel 1 1 noarch
++Req:
+kernel-macros
+-Req:
++Prv:
+multiversion(kernel)
+kernel-devel = 1-1
+kernel-devel = 1-1.2
+-Prv:
+=Vnd: openSUSE
+=Pkg: kernel-source 1 1 noarch
++Req:
+kernel-devel = 1-1
+-Req:
++Prv:
+multiversion(kernel)
+kernel-source = 1-1
+-Prv:
+=Vnd: openSUSE
+=Pkg: kernel-source 1 1.2 noarch
++Req:
+kernel-devel = 1-1.2
+-Req:
++Prv:
+multiversion(kernel)
+kernel-source = 1-1.2
+-Prv:
+=Vnd: openSUSE
+=Pkg: kernel-syms 1 1 x86_64
++Req:
+kernel-devel = 1-1
+kernel-default-devel = 1-1
+-Req:
++Prv:
+multiversion(kernel)
+kernel-syms = 1-1
+-Prv:
+=Vnd: openSUSE
+=Tim: 1570603549

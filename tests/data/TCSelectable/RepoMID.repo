@@ -1,0 +1,31 @@
+=Ver: 3.0
+=Pkg: candidate 0 1 x86_64
++Prv:
+candidate = 0-1
+-Prv:
+=Vnd: openSUSE
+=Pkg: candidate 0 1 i586
++Prv:
+candidate = 0-1
+-Prv:
+=Vnd: openSUSE
+=Pkg: candidatenoarch 0 2 noarch
++Prv:
+candidatenoarch = 0-2
+-Prv:
+=Vnd: openSUSE
+=Pkg: candidatenoarch 0 1 x86_64
++Prv:
+candidatenoarch = 0-1
+-Prv:
+=Vnd: openSUSE
+=Pkg: candidatenoarch 0 1 i586
++Prv:
+candidatenoarch = 0-1
+-Prv:
+=Vnd: openSUSE
+=Pkg: candidatenoarch 0 1 noarch
++Prv:
+candidatenoarch = 0-1
+-Prv:
+=Vnd: openSUSE

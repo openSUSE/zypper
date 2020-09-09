@@ -1,0 +1,20 @@
+=Ver: 3.0
+=Pkg: product:Product 2 1 i586
++Prv:
+product:Product = 2-1
+-Prv:
+=Vnd: openSUSE
+=Pkg: release-package 2 1 i586
++Prv:
+product()
+product(Product) = 2-1
+weakremover(dropped_required)
+weakremover(dropped)
+release-package = 2-1
+-Prv:
+=Vnd: openSUSE
+=Pkg: package 2 1 i586
++Prv:
+package = 2-1
+-Prv:
+=Vnd: openSUSE

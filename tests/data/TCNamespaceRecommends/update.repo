@@ -1,0 +1,37 @@
+=Ver: 3.0
+=Pkg: aspell 1 1 x86_64
++Prv:
+aspell = 1-1
+-Prv:
++Rec:
+aspell-en
+recommended-pkg
+-Rec:
+=Pkg: aspell-en 1 1 x86_64
++Prv:
+locale(aspell:en)
+aspell-en = 1-1
+-Prv:
++Sup:
+aspell & namespace:language(en)
+-Sup:
+=Pkg: aspell-de 1 1 x86_64
++Prv:
+locale(aspell:de)
+aspell-de = 1-1
+-Prv:
++Sup:
+aspell & namespace:language(de)
+-Sup:
+=Pkg: aspell-fr 1 1 x86_64
++Prv:
+locale(aspell:fr)
+aspell-fr = 1-1
+-Prv:
++Sup:
+aspell & namespace:language(fr)
+-Sup:
+=Pkg: recommended-pkg 1 1 x86_64
++Prv:
+recommended-pkg = 1-1
+-Prv:
