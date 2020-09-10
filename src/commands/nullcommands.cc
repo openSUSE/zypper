@@ -37,8 +37,13 @@ WhatProvidesCmd::WhatProvidesCmd( std::vector<std::string> &&commandAliases_r ):
     _("what-provides (wp) <CAPABILITY>"),
     // translators: command summary: what-provides, wp
     _("List packages providing specified capability."),
-    // translators: command description
-    _("List all packages providing the specified capability."),
+    // translators: command description what-provides
+    str::Format("%1%\n\n%2%")
+    % _("List all packages providing the specified capability.")
+    // translators: command description what-provides: %1% is a zypper command line, %2% a command line option
+    % ( str::Format(_("The command is an alias for '%1%' and performs a case-insensitive search. For a case-sensitive search call the search command and add the '%2%' option."))
+	% "search --provides --match-exact"
+        % "--case-sensitive" ),
     DisableAll
   )
 { }

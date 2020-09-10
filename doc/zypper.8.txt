@@ -973,14 +973,14 @@ The option may be specified multiple times.
 --
 
 *what-provides* (*wp*) _capability_::
-	List all packages providing the specified capability. See also the *install* command for info about specifying _capabilities_.
+	List all packages providing the specified capability (case-insensitive search). See also the *install* command for info about specifying _capabilities_.
 +
 --
-	The command line is automatically transformed into the appropriate *search* command, e.g.: :: {nop}
+	The command line is automatically transformed into the corresponding *search* command: :: {nop}
 
-		$ *zypper what-provides \'zypper>1.6'*::: {nop}
+		$ *zypper what-provides \'zypper>1.6'*::: $ *zypper search --provides --match-exact \'zypper>1.6'*
 
-		$ *zypper se --provides --match-exact \'zypper>1.6'*::: {nop}
+		For a case-sensitive search call::: $ *zypper search --provides --match-exact --case-sensitive \'zypper>1.6'*
 --
 
 
