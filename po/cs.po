@@ -21,8 +21,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-08-28 11:39+0200\n"
-"PO-Revision-Date: 2020-06-29 19:46+0000\n"
-"Last-Translator: Jan Papež <honyczek@centrum.cz>\n"
+"PO-Revision-Date: 2020-09-10 18:48+0000\n"
+"Last-Translator: Aleš Kastner <alkas@volny.cz>\n"
 "Language-Team: Czech <https://l10n.opensuse.org/projects/zypper/master/cs/>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
@@ -112,20 +112,20 @@ msgstr "Název Rpm:"
 #: src/callbacks/keyring.h:113
 #, boost-format
 msgid "The gpg key signing file '%1%' has expired."
-msgstr "Platnost podpisového souboru klíče GPG %1% vypršela."
+msgstr "Platnost klíče GPG podepisujícího soubor %1% vypršela."
 
 #: src/callbacks/keyring.h:119
 #, boost-format
 msgid "The gpg key signing file '%1%' will expire in %2% day."
 msgid_plural "The gpg key signing file '%1%' will expire in %2% days."
-msgstr[0] "Gpg klíč z podpisového souboru '%1%' vyprší za %2% den."
-msgstr[1] "Gpg klíč z podpisového souboru '%1%' vyprší za %2% dny."
-msgstr[2] "Gpg klíč z podpisového souboru '%1%' vyprší za %2% dní."
+msgstr[0] "Gpg klíč podepisující soubor '%1%' vyprší za %2% den."
+msgstr[1] "Gpg klíč podepisující soubor '%1%' vyprší za %2% dny."
+msgstr[2] "Gpg klíč podepisující soubor '%1%' vyprší za %2% dnů."
 
 #: src/callbacks/keyring.h:142
 #, c-format, boost-format
 msgid "Accepting an unsigned file '%s'."
-msgstr "Je přijímán nepodepsaný soubor '%s'."
+msgstr "Přijímám nepodepsaný soubor '%s'."
 
 #: src/callbacks/keyring.h:146
 #, c-format, boost-format
@@ -165,9 +165,7 @@ msgstr "Je přijímán soubor '%s', který je podepsaný neznámým klíčem '%s
 #, c-format, boost-format
 msgid ""
 "Accepting file '%s' from repository '%s' signed with an unknown key '%s'."
-msgstr ""
-"Je přijímán soubor '%s' z úložiště '%s', který je podepsaný neznámým klíčem "
-"'%s'."
+msgstr "Přijímám soubor '%s' z úložiště '%s' podepsaný neznámým klíčem '%s'."
 
 #. translator: %1% is a file name, %2% is a gpg key ID
 #: src/callbacks/keyring.h:216
@@ -193,7 +191,7 @@ msgstr "Soubor '%s' je podepsaný neznámým klíčem '%s'. Chcete pokračovat?"
 msgid ""
 "File '%s' from repository '%s' is signed with an unknown key '%s'. Continue?"
 msgstr ""
-"Soubor '%s' z úložiště '%s' je podepsaný neznámým klíčem '%s'. Chcete "
+"Soubor '%s' z úložiště '%s' je podepsán neznámým klíčem '%s'. Chcete "
 "pokračovat?"
 
 #: src/callbacks/keyring.h:260
@@ -2496,7 +2494,7 @@ msgstr "list-patches (lp) [VOLBY]"
 #. translators: command summary: list-patches, lp
 #: src/commands/listpatches.cc:18
 msgid "List available patches."
-msgstr ""
+msgstr "Vypsat dostupné záplaty."
 
 #. translators: command description
 #: src/commands/listpatches.cc:20
@@ -4765,7 +4763,7 @@ msgstr "Odinstalace zdrojových balíčků není podporována."
 #: src/commands/subcommand.cc:79
 #, boost-format
 msgid "No manual entry for %1%"
-msgstr ""
+msgstr "Pro %1% neexistuje záznam příručky"
 
 #: src/commands/subcommand.cc:92
 msgid "none"
