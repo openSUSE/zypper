@@ -111,6 +111,15 @@ class VendorAttr
 	tmp.push_back( IdString(el) );
       _addVendorList( std::move(tmp) );
     }
+    /** \overload for std::initializer_list */
+    template <class TStr>
+    void addVendorList( const std::initializer_list<TStr> & container_r )
+    {
+      VendorList tmp;
+      for ( const auto & el : container_r )
+	tmp.push_back( IdString(el) );
+      _addVendorList( std::move(tmp) );
+    }
 
     /** Return whether two vendor strings should be treated as the same vendor.
      * Usually the solver is allowed to automatically select a package of an
