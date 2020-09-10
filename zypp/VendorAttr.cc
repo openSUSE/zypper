@@ -107,7 +107,7 @@ namespace zypp
       if ( ! lcent )
       {
 	unsigned myid = 0;
-	// bnc#812608: no pefix compare in opensuse namespace
+	// bnc#812608: no prefix compare in opensuse namespace
 	static const IdString openSUSE( "opensuse" );
 	if ( lcvendor == openSUSE || ! str::hasPrefix( lcvendor.c_str(), openSUSE.c_str() ) )
 	{

@@ -25,6 +25,9 @@ BOOST_AUTO_TEST_CASE(vendor_empty)
   BOOST_REQUIRE( VendorAttr::instance().equivalent("", "") );
   BOOST_REQUIRE( !VendorAttr::instance().equivalent("a", "") );
   BOOST_REQUIRE( !VendorAttr::instance().equivalent("", "a") );
+  BOOST_REQUIRE( VendorAttr::instance().equivalent("a", "a") );
+  BOOST_REQUIRE( !VendorAttr::instance().equivalent("a", "aa") );
+  BOOST_REQUIRE( !VendorAttr::instance().equivalent("aa", "a") );
 
   BOOST_REQUIRE( VendorAttr::instance().equivalent( IdString::Null, IdString::Null ) );
   BOOST_REQUIRE( VendorAttr::instance().equivalent( IdString::Empty, IdString::Null ) );
@@ -36,24 +39,17 @@ BOOST_AUTO_TEST_CASE(vendor_test1)
 {
 
   VendorAttr::noTargetInstance() = VendorAttr(); // suse defaults; no configfiles read
-
   // bsc#1030686: Remove legacy vendor equivalence between 'suse' and 'opensuse'
   // No vendor definition files has been read. So only suse* vendors are
   // equivalent
-  BOOST_REQUIRE( VendorAttr::instance().equivalent("suse", "suse") );
-  BOOST_REQUIRE( VendorAttr::instance().equivalent("equal", "equal") );
-  BOOST_REQUIRE( VendorAttr::instance().equivalent("suse", "SuSE") );
-  BOOST_REQUIRE( !VendorAttr::instance().equivalent("opensuse", "SuSE") );
-  BOOST_REQUIRE( !VendorAttr::instance().equivalent("open", "SuSE") );
-  BOOST_REQUIRE( !VendorAttr::instance().equivalent("nothing", "SuSE") );
-
-  // but "opensuse build service" gets its own class:
-  BOOST_REQUIRE( !VendorAttr::instance().equivalent("opensuse build service", "suse") );
-  BOOST_REQUIRE( !VendorAttr::instance().equivalent("opensuse build service", "opensuse") );
-  // bnc#812608: All opensuse projects get their own class
-  BOOST_REQUIRE( !VendorAttr::instance().equivalent("opensuse-education", "suse") );
-  BOOST_REQUIRE( !VendorAttr::instance().equivalent("opensuse-education", "opensuse") );
-  BOOST_REQUIRE( !VendorAttr::instance().equivalent("opensuse-education", "opensuse build service") );
+  BOOST_REQUIRE( VendorAttr::instance().equivalent("suse", "SuSE as prefix") );
+  BOOST_REQUIRE( VendorAttr::instance().equivalent("SuSE as prefix", "suse") );
+  BOOST_REQUIRE( !VendorAttr::instance().equivalent("SuSE as prefix","foreign") );
+  // bnc#812608: All opensuse projects get their own class (no prefix compare in opensuse namespace)
+  BOOST_REQUIRE( !VendorAttr::instance().equivalent("opensuse",           "SuSE as prefix") );
+  BOOST_REQUIRE( !VendorAttr::instance().equivalent("opensuse as prefix", "SuSE as prefix") );
+  BOOST_REQUIRE( !VendorAttr::instance().equivalent("opensuse",           "opensuse as prefix") );
+  BOOST_REQUIRE( !VendorAttr::instance().equivalent("opensuse as prefix", "opensuse but different prefix") );
 }
 
 BOOST_AUTO_TEST_CASE(vendor_test2)
@@ -74,3 +70,18 @@ BOOST_AUTO_TEST_CASE(vendor_test2)
   BOOST_REQUIRE( VendorAttr::instance().equivalent("ati_new", "ati") );
 }
 
+BOOST_AUTO_TEST_CASE(vendor_test3)
+{
+  VendorAttr::noTargetInstance() = VendorAttr(); // suse defaults; no configfiles read
+  VendorAttr::noTargetInstance().addVendorList( { "suse", "opensuse", "opensuse too" } );
+
+  BOOST_REQUIRE( VendorAttr::instance().equivalent("SuSE as prefix", "opensuse") );
+  BOOST_REQUIRE( VendorAttr::instance().equivalent("SuSE as prefix", "opensuse too") );
+  BOOST_REQUIRE( VendorAttr::instance().equivalent("opensuse", "opensuse too") );
+  // bnc#812608: All opensuse projects get their own class (no prefix compare in opensuse namespace)
+  BOOST_REQUIRE( !VendorAttr::instance().equivalent("SuSE as prefix", "opensuse as prefix") );
+  BOOST_REQUIRE( !VendorAttr::instance().equivalent("SuSE as prefix", "opensuse too as prefix") );
+  BOOST_REQUIRE( !VendorAttr::instance().equivalent("opensuse",           "opensuse too as prefix") );
+  BOOST_REQUIRE( !VendorAttr::instance().equivalent("opensuse as prefix", "opensuse too") );
+  BOOST_REQUIRE( !VendorAttr::instance().equivalent("opensuse as prefix", "opensuse too as prefix") );
+}
