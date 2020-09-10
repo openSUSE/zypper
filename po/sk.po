@@ -6,10 +6,10 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-08-28 11:39+0200\n"
-"PO-Revision-Date: 2020-05-11 08:31+0000\n"
+"PO-Revision-Date: 2020-09-10 18:48+0000\n"
 "Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
-"Language-Team: Slovak <https://l10n.opensuse.org/projects/zypper/master/sk/"
-">\n"
+"Language-Team: Slovak <https://l10n.opensuse.org/projects/zypper/master/sk/>"
+"\n"
 "Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2489,7 +2489,7 @@ msgstr "list-patches (lp) [VOĽBY]"
 #. translators: command summary: list-patches, lp
 #: src/commands/listpatches.cc:18
 msgid "List available patches."
-msgstr ""
+msgstr "Vypísať zoznam dostupných opráv."
 
 #. translators: command description
 #: src/commands/listpatches.cc:20
@@ -4764,7 +4764,7 @@ msgstr "Odinštalovanie zdrojových balíkov nie je podporované."
 #: src/commands/subcommand.cc:79
 #, boost-format
 msgid "No manual entry for %1%"
-msgstr ""
+msgstr "Žiadna manuálový záznam pre %1%"
 
 #: src/commands/subcommand.cc:92
 msgid "none"
