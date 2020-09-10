@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypper.nl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-08-28 11:39+0200\n"
-"PO-Revision-Date: 2020-03-11 14:55+0000\n"
+"PO-Revision-Date: 2020-09-10 18:48+0000\n"
 "Last-Translator: Freek de Kruijf <freek@opensuse.org>\n"
 "Language-Team: Dutch <https://l10n.opensuse.org/projects/zypper/master/nl/>\n"
 "Language: nl\n"
@@ -2480,7 +2480,7 @@ msgstr "list-patches (lp) [OPTIES]"
 #. translators: command summary: list-patches, lp
 #: src/commands/listpatches.cc:18
 msgid "List available patches."
-msgstr ""
+msgstr "Bechikbare patches tonen."
 
 #. translators: command description
 #: src/commands/listpatches.cc:20
@@ -4813,7 +4813,7 @@ msgstr ""
 #: src/commands/subcommand.cc:79
 #, boost-format
 msgid "No manual entry for %1%"
-msgstr ""
+msgstr "Geen handmatig item voor  %1%"
 
 #: src/commands/subcommand.cc:92
 msgid "none"
@@ -7074,11 +7074,11 @@ msgstr "onbepaald"
 #. translator: patch status
 #: src/utils/misc.cc:120
 msgid "retracted"
-msgstr ""
+msgstr "ingetrokken"
 
 #: src/utils/misc.cc:329 src/utils/misc.cc:371
 msgid "Since"
-msgstr ""
+msgstr "Sinds"
 
 #. << _("Repository")
 #: src/utils/misc.cc:364
