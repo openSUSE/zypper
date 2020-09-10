@@ -41,6 +41,20 @@ namespace zypp {
  * being equivalent. This may be tuned by providing customized
  * vendor description files in \c /etc/zypp/vendors.d.
  *
+ * \code
+ * [main]
+ * vendors = MyVendor,AlternateName
+ * \endcode
+ *
+ * By this vendor strings starting with "MyVendor" or "AlternateName"
+ * are considered to be equivalent. Packages from equivalent vendors
+ * may replace each other without being considered as a 'vendor change'.
+ *
+ * \note bnc#812608: Within the "opensuse*" namespace exact matches
+ * (case insensitive) are required. "vendors = suse,opensuse" will
+ * allow switching between "suse*" and "opensuse", but not e.g.
+ * "opensuse build service".
+ *
  * \see \ref pg_zypp-solv-vendorchange
 */
 class VendorAttr

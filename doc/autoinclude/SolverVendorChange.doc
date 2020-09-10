@@ -76,6 +76,7 @@ vendors = <PUT YOUR LIST HERE>
 
 \note A built in rule unifying \c "suse"  and \c "opensuse" was disabled in libzypp-16.7.1. The above example would recreate it.
 
+\note Within the \c "opensuse*" namespace exact matches (case insensitive) are required. The above example will allow switching between \c "suse*" and \c "opensuse" but not e.g. \c "opensuse build service".
 
 
 \section zypp-solv-vendorchange-Impl Related classes
