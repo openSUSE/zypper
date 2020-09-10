@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-08-28 11:39+0200\n"
-"PO-Revision-Date: 2020-05-14 23:22+0000\n"
-"Last-Translator: Leonardo Teodoro <leonardosilvateodoro@hotmail.com>\n"
+"PO-Revision-Date: 2020-09-10 13:48+0000\n"
+"Last-Translator: Rodrigo Macedo <rmsolucoeseminformatic4@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) <https://l10n.opensuse.org/projects/"
 "zypper/master/pt_BR/>\n"
 "Language: pt_BR\n"
@@ -2445,7 +2445,7 @@ msgstr "list-patches (lp) [opções]"
 #. translators: command summary: list-patches, lp
 #: src/commands/listpatches.cc:18
 msgid "List available patches."
-msgstr ""
+msgstr "Liste os patches disponíveis."
 
 #. translators: command description
 #: src/commands/listpatches.cc:20
@@ -4745,7 +4745,7 @@ msgstr "A desinstalação de pacotes de origem não é suportada."
 #: src/commands/subcommand.cc:79
 #, boost-format
 msgid "No manual entry for %1%"
-msgstr ""
+msgstr "Sem entrada manual para %1%"
 
 #: src/commands/subcommand.cc:92
 msgid "none"
