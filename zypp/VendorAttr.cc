@@ -48,7 +48,7 @@ namespace zypp
      * a class for 'suse*'
      */
     Impl()
-    { _vendorMap["suse"] = ++vendorGroupCounter; }
+    { _vendorGroupMap["suse"] = ++_vendorGroupId; }
 
   public:
     /** Add a new equivalent vendor set. */
@@ -59,29 +59,28 @@ namespace zypp
     { return lVendor == rVendor || vendorMatchId( lVendor ) == vendorMatchId( rVendor ); }
 
   private:
-    using VendorMap = std::map<std::string,unsigned>;
-    mutable VendorMap _vendorMap;
-    unsigned vendorGroupCounter = 1;
+    using VendorGroupMap = std::map<std::string,unsigned>;
+    VendorGroupMap _vendorGroupMap;	///< Vendor group definition. Equivalent groups share the same ID.
+    unsigned _vendorGroupId = 0;	///< Highest group ID in use (incremented).
 
   private:
-    typedef DefaultIntegral<int,0>				VendorMatchEntry;
+    typedef DefaultIntegral<unsigned,0>				VendorMatchEntry;
     typedef std::unordered_map<IdString, VendorMatchEntry>	VendorMatch;
-    mutable int         _nextId = -1;
-    mutable VendorMatch _vendorMatch;
+    mutable VendorMatch _vendorMatch;	///< Cache mapping vendor strings to equivalence class ID
+    mutable unsigned _nextId = 0;	///< Least equivalence class ID in use (decremented).
 
-    /** Reset match cache if global VendorMap was changed. */
+    /** Reset vendor match cache if _vendorGroupMap was changed. */
     void vendorMatchIdReset()
     {
-      _nextId = -1;
+      _nextId = 0;
       _vendorMatch.clear();
     }
 
-    /**
-     * Helper mapping vendor string to eqivalence class ID.
+    /** Helper mapping a vendor string to it's eqivalence class ID.
      *
      * \li Return the vendor strings eqivalence class ID stored in _vendorMatch.
      * \li If not found, assign and return the eqivalence class ID of the lowercased string.
-     * \li If not found, assign and return a new ID (look into the predefined VendorMap (id>0),
+     * \li If not found, assign and return a new ID (look into the predefined VendorGroupMap (id>0),
      *     otherwise create a new ID (<0)).
      */
     unsigned vendorMatchId( IdString vendor ) const;
@@ -95,82 +94,83 @@ namespace zypp
 
   unsigned VendorAttr::Impl::vendorMatchId( IdString vendor ) const
   {
-    VendorMatchEntry & ent( _vendorMatch[vendor] );
+    VendorMatchEntry & ent { _vendorMatch[vendor] };
     if ( ! ent )
     {
-      IdString lcvendor( str::toLower( vendor.asString() ) );
+      IdString lcvendor { str::toLower( vendor.asString() ) };
       VendorMatchEntry & lcent( _vendorMatch[lcvendor] );
       if ( ! lcent )
       {
+	// Cache miss - check whether it belongs to a vendor group.
+	// Otherwise assign a new class ID to it.
 	unsigned myid = 0;
+
 	// bnc#812608: no prefix compare in opensuse namespace
-	static const IdString openSUSE( "opensuse" );
-	if ( lcvendor == openSUSE || ! str::hasPrefix( lcvendor.c_str(), openSUSE.c_str() ) )
+	if ( str::hasPrefix( lcvendor.c_str(), "opensuse" ) )
+	{
+	  if ( auto it = _vendorGroupMap.find( lcvendor.c_str() ); it != _vendorGroupMap.end() )
+	    myid = it->second;
+	}
+	else
 	{
 	  // Compare this entry with the global vendor map.
 	  // Reversed to get the longest prefix.
-	  for ( VendorMap::reverse_iterator it = _vendorMap.rbegin(); it != _vendorMap.rend(); ++it )
+	  for ( VendorGroupMap::const_reverse_iterator it = _vendorGroupMap.rbegin(); it != _vendorGroupMap.rend(); ++it )
 	  {
-	    if ( str::hasPrefix( lcvendor.c_str(), it->first ) )
-	    {
+	    if ( str::hasPrefix( lcvendor.c_str(), it->first ) ) {
 	      myid = it->second;
 	      break; // found
 	    }
 	  }
 	}
+
 	if ( ! myid )
-	{
 	  myid = --_nextId; // get a new class ID
-	}
+
 	ent = lcent = myid; // remember the new DI
       }
       else
-      {
 	ent = lcent; // take the ID from the lowercased vendor string
-      }
     }
     return ent;
   }
 
   void VendorAttr::Impl::addVendorList( VendorList && vendorList_r )
   {
-#warning REIMPLEMENT
+    // Will add a new equivalence group unless we merge with existing groups.
+    unsigned targetId = _vendorGroupId + 1;
 
-    unsigned int nextId = vendorGroupCounter + 1;
-    // convert to lowercase and check if a vendor is already defined
-    // in an existing group.
-
-    for_( it, vendorList_r.begin(), vendorList_r.end() )
+    // (!) Convert the group strings in place to lowercase before adding/checking.
+    // Extend/join already existing groups if they are referenced.
+    for ( std::string & vendor : vendorList_r )
     {
-      *it = str::toLower( *it );
-      if (_vendorMap.find(*it) != _vendorMap.end())
+      vendor = str::toLower( std::move(vendor) );
+
+      if ( _vendorGroupMap.count( vendor ) )
       {
-        if (nextId != vendorGroupCounter + 1 &&
-            nextId != _vendorMap[*it])
-        {
-	  // We have at least 3 groups which has to be mixed --> mix the third group to the first
-          unsigned int moveID = _vendorMap[*it];
-          for_( itMap, _vendorMap.begin(), _vendorMap.end() )
-          {
-            if (itMap->second == moveID)
-              itMap->second = nextId;
-          }
-        }
-        else
-        {
-          nextId = _vendorMap[*it];
-          WAR << "Vendor " << *it << " is already used in another vendor group. --> mixing these groups" << endl;
-        }
+	unsigned joinId = _vendorGroupMap[vendor];
+	if ( targetId == _vendorGroupId + 1 ) {
+	  targetId = joinId;	// will extend the existing group
+	}
+	else if ( targetId != joinId ) {
+	  // yet another existing group -> join it into the target group
+	  for ( auto & el : _vendorGroupMap ) {
+	    if ( el.second == joinId )
+	      el.second = targetId;
+	  }
+	}
+	vendor.clear();	// no need to add it later
       }
     }
-	// add new entries
-    for_( it, vendorList_r.begin(), vendorList_r.end() )
-    {
-      _vendorMap[*it] = nextId;
+
+    // Now add the new entries
+    for ( std::string & vendor : vendorList_r ) {
+      if ( ! vendor.empty() )
+	_vendorGroupMap[vendor] = targetId;
     }
 
-    if (nextId == vendorGroupCounter + 1)
-      ++vendorGroupCounter;
+    if ( targetId == _vendorGroupId + 1 )
+      ++_vendorGroupId;
 
     // invalidate any match cache
     vendorMatchIdReset();
@@ -180,7 +180,7 @@ namespace zypp
   inline std::ostream & operator<<( std::ostream & str, const VendorAttr::Impl & obj )
   {
     str << "Equivalent vendors:";
-    for( const auto & p : obj._vendorMap ) {
+    for( const auto & p : obj._vendorGroupMap ) {
       str << endl << "   [" << p.second << "] " << p.first;
     }
     return str;
