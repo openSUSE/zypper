@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-09-11 10:04+0200\n"
-"PO-Revision-Date: 2020-09-10 00:48+0000\n"
+"PO-Revision-Date: 2020-09-12 00:48+0000\n"
 "Last-Translator: Yasuhiko Kamata <belphegor@belbel.or.jp>\n"
 "Language-Team: Japanese <https://l10n.opensuse.org/projects/zypper/master/ja/"
 ">\n"
@@ -2729,6 +2729,8 @@ msgid ""
 "The command is an alias for '%1%' and performs a case-insensitive search. "
 "For a case-sensitive search call the search command and add the '%2%' option."
 msgstr ""
+"このコマンドは '%1%' の別名で、大文字と小文字を区別せずに検索します。大文字と小文字を区別して検索したい場合は、検索コマンドのオプションに '%2%"
+"' オプションを追加してください。"
 
 #. "what-provides" is obsolete
 #. The "what-provides" now is included in "search" command, e.g.
