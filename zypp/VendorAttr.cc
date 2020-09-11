@@ -132,13 +132,9 @@ namespace zypp
     return ent;
   }
 
-  void VendorAttr::Impl::addVendorList( VendorList && vendorList_rr )
+  void VendorAttr::Impl::addVendorList( VendorList && vendorList_r )
   {
 #warning REIMPLEMENT
-    std::vector<std::string> vendorList_r;
-    for ( const auto & el : vendorList_rr ) {
-      vendorList_r.push_back( el.asString() );
-    }
 
     unsigned int nextId = vendorGroupCounter + 1;
     // convert to lowercase and check if a vendor is already defined
@@ -257,7 +253,7 @@ namespace zypp
 	strv::split( el.second, ",", strv::Trim::trim,
 		     [&tmp]( std::string_view word ) {
 		       if ( ! word.empty() )
-			 tmp.push_back( IdString( word ) );
+			 tmp.push_back( std::string(word) );
 		     } );
 	_addVendorList( std::move(tmp) );
 	break;
@@ -278,6 +274,14 @@ namespace zypp
 
   void VendorAttr::_addVendorList( std::vector<std::string> & vendorList_r ) const
   { return const_cast<VendorAttr*>(this)->_addVendorList( VendorList( vendorList_r.begin(), vendorList_r.end() ) ); }
+
+  void VendorAttr::_addVendorList( std::vector<IdString> && list_r )
+  {
+    VendorList tmp;
+    for ( const auto & el : list_r )
+      tmp.push_back( std::string(el) );
+    _addVendorList( std::move(tmp) );
+  }
 #endif
   //////////////////////////////////////////////////////////////////
   // vendor equivalence:

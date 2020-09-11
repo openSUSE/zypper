@@ -108,7 +108,7 @@ class VendorAttr
     {
       VendorList tmp;
       for ( const auto & el : container_r )
-	tmp.push_back( IdString(el) );
+	tmp.push_back( std::string(el) );
       _addVendorList( std::move(tmp) );
     }
     /** \overload for std::initializer_list */
@@ -117,7 +117,7 @@ class VendorAttr
     {
       VendorList tmp;
       for ( const auto & el : container_r )
-	tmp.push_back( IdString(el) );
+	tmp.push_back( std::string(el) );
       _addVendorList( std::move(tmp) );
     }
 
@@ -136,13 +136,15 @@ class VendorAttr
 
   public:
     class Impl;                 ///< Implementation class.
-    typedef std::vector<IdString> VendorList;
+    typedef std::vector<std::string> VendorList;
   private:
     RWCOW_pointer<Impl> _pimpl; ///< Pointer to implementation.
 
 #if LEGACY(1722)
     /** \deprecated */
     void _addVendorList( std::vector<std::string> & list_r ) const ZYPP_DEPRECATED;
+    /** \deprecated */
+    void _addVendorList( std::vector<IdString> && list_r );
 #endif
     void _addVendorList( VendorList && list_r );
 };
