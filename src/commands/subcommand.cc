@@ -65,7 +65,7 @@ namespace	// subcommand detetction
   {
     CommandSummaries ret;
     for ( auto & cmd : commands_r ) {
-      std::string sum { ExternalProgram( "man -f "+cmd._name ).receiveLine() };
+      std::string sum { ExternalProgram( { "man", "-f", cmd._name }, ExternalProgram::Discard_Stderr ).receiveLine() };
       if ( ! sum.empty() ) {
 	// # man -f zypper
 	// zypper (8)           - Command-line interface to ZYpp system management library (libzypp)
