@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper.ko\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-08-28 11:39+0200\n"
+"POT-Creation-Date: 2020-09-11 10:04+0200\n"
 "PO-Revision-Date: 2019-04-04 18:36+0000\n"
 "Last-Translator: Hwajin Kim <hwajin.kim@e4net.net>\n"
 "Language-Team: Korean <https://l10n.opensuse.org/projects/zypper/master/ko/"
@@ -2662,21 +2662,28 @@ msgstr "what-provides (wp) <기능>"
 msgid "List packages providing specified capability."
 msgstr "지정된 기능을 제공하는 패키지를 나열합니다."
 
-#. translators: command description
-#: src/commands/nullcommands.cc:41
+#: src/commands/nullcommands.cc:42
 msgid "List all packages providing the specified capability."
 msgstr "지정한 기능을 제공하는 모든 패키지를 나열합니다."
+
+#. translators: command description what-provides: %1% is a zypper command line, %2% a command line option
+#: src/commands/nullcommands.cc:44
+#, boost-format
+msgid ""
+"The command is an alias for '%1%' and performs a case-insensitive search. "
+"For a case-sensitive search call the search command and add the '%2%' option."
+msgstr ""
 
 #. "what-provides" is obsolete
 #. The "what-provides" now is included in "search" command, e.g.
 #. zypper what-provides 'zypper>1.6'
 #. zypper se --match-exact --provides 'zypper>1.6'
-#: src/commands/nullcommands.cc:52
+#: src/commands/nullcommands.cc:57
 #, c-format, boost-format
 msgid "Command '%s' is replaced by '%s'."
 msgstr "'%s' 명령이 '%s'(으)로 바뀌었습니다."
 
-#: src/commands/nullcommands.cc:53
+#: src/commands/nullcommands.cc:58
 #, c-format, boost-format
 msgid "See '%s' for all available options."
 msgstr "사용 가능한 옵션은 '%s'을(를) 참조하십시오."

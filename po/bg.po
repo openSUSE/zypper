@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-08-28 11:39+0200\n"
+"POT-Creation-Date: 2020-09-11 10:04+0200\n"
 "PO-Revision-Date: 2017-02-23 21:17+0000\n"
 "Last-Translator: Shyukri Shyukriev <shshyukriev@suse.com>\n"
 "Language-Team: Bulgarian <https://l10n.opensuse.org/projects/zypper/master/"
@@ -2671,21 +2671,28 @@ msgstr ""
 msgid "List packages providing specified capability."
 msgstr ""
 
-#. translators: command description
-#: src/commands/nullcommands.cc:41
+#: src/commands/nullcommands.cc:42
 msgid "List all packages providing the specified capability."
+msgstr ""
+
+#. translators: command description what-provides: %1% is a zypper command line, %2% a command line option
+#: src/commands/nullcommands.cc:44
+#, boost-format
+msgid ""
+"The command is an alias for '%1%' and performs a case-insensitive search. "
+"For a case-sensitive search call the search command and add the '%2%' option."
 msgstr ""
 
 #. "what-provides" is obsolete
 #. The "what-provides" now is included in "search" command, e.g.
 #. zypper what-provides 'zypper>1.6'
 #. zypper se --match-exact --provides 'zypper>1.6'
-#: src/commands/nullcommands.cc:52
+#: src/commands/nullcommands.cc:57
 #, fuzzy, c-format, boost-format
 msgid "Command '%s' is replaced by '%s'."
 msgstr "%s е заменен от %s"
 
-#: src/commands/nullcommands.cc:53
+#: src/commands/nullcommands.cc:58
 #, c-format, boost-format
 msgid "See '%s' for all available options."
 msgstr ""

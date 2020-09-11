@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-08-28 11:39+0200\n"
+"POT-Creation-Date: 2020-09-11 10:04+0200\n"
 "PO-Revision-Date: 2020-02-19 18:55+0000\n"
 "Last-Translator: Davide Aiello <davidea@novilinguists.com>\n"
 "Language-Team: Italian <https://l10n.opensuse.org/projects/zypper/master/it/"
@@ -2881,21 +2881,28 @@ msgstr "what-provides (wp) <capacità>"
 msgid "List packages providing specified capability."
 msgstr "Elenca i pacchetti che forniscono una funzionalità specificata."
 
-#. translators: command description
-#: src/commands/nullcommands.cc:41
+#: src/commands/nullcommands.cc:42
 msgid "List all packages providing the specified capability."
 msgstr "Elenca tutti i pacchetti che forniscono la capacità specificata."
+
+#. translators: command description what-provides: %1% is a zypper command line, %2% a command line option
+#: src/commands/nullcommands.cc:44
+#, boost-format
+msgid ""
+"The command is an alias for '%1%' and performs a case-insensitive search. "
+"For a case-sensitive search call the search command and add the '%2%' option."
+msgstr ""
 
 #. "what-provides" is obsolete
 #. The "what-provides" now is included in "search" command, e.g.
 #. zypper what-provides 'zypper>1.6'
 #. zypper se --match-exact --provides 'zypper>1.6'
-#: src/commands/nullcommands.cc:52
+#: src/commands/nullcommands.cc:57
 #, c-format, boost-format
 msgid "Command '%s' is replaced by '%s'."
 msgstr "Comando '%s' è sostituito da '%s'."
 
-#: src/commands/nullcommands.cc:53
+#: src/commands/nullcommands.cc:58
 #, c-format, boost-format
 msgid "See '%s' for all available options."
 msgstr "Consultare '%s' per visualizzare tutte le opzioni disponibili."
