@@ -41,18 +41,14 @@ namespace zypp
   {
     friend std::ostream & operator<<( std::ostream & str, const Impl & obj );
   public:
-    /** bsc#1030686: The legacy default equivalence of 'suse' and 'opensuse'
-     * has been removed. Unless they are mentioned in a custom rule, create
-     * separate classes for them.
+    /** Ctor.
+     * bsc#1030686: The legacy default equivalence of 'suse' and 'opensuse'
+     * has been removed.
+     * bnc#812608: No prefix compare in opensuse namespace, so just create
+     * a class for 'suse*'
      */
-    void legacySetup()
-    {
-      if ( _vendorMap.find("suse") == _vendorMap.end() )
-	_vendorMap["suse"] = ++vendorGroupCounter;
-
-      if ( _vendorMap.find("opensuse") == _vendorMap.end() )
-	_vendorMap["opensuse"] = ++vendorGroupCounter;
-    }
+    Impl()
+    { _vendorMap["suse"] = ++vendorGroupCounter; }
 
   public:
     /** Add a new equivalent vendor set. */
@@ -215,7 +211,6 @@ namespace zypp
   VendorAttr::VendorAttr()
   : _pimpl( new Impl )
   {
-    _pimpl->legacySetup();
     MIL << "Initial: " << *this << endl;
   }
 
@@ -223,7 +218,6 @@ namespace zypp
   : _pimpl( new Impl )
   {
     addVendorDirectory( initial_r );
-    _pimpl->legacySetup();
     MIL << "Initial " << initial_r << ": " << *this << endl;
   }
 
