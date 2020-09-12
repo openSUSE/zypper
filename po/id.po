@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-09-11 10:04+0200\n"
-"PO-Revision-Date: 2020-05-14 23:22+0000\n"
+"PO-Revision-Date: 2020-09-12 14:48+0000\n"
 "Last-Translator: Kukuh Syafaat <syafaatkukuh@gmail.com>\n"
 "Language-Team: Indonesian <https://l10n.opensuse.org/projects/zypper/master/"
 "id/>\n"
@@ -2343,7 +2343,7 @@ msgstr "list-patches (lp) [OPSI]"
 #. translators: command summary: list-patches, lp
 #: src/commands/listpatches.cc:18
 msgid "List available patches."
-msgstr ""
+msgstr "Daftar tambalan yang tersedia."
 
 #. translators: command description
 #: src/commands/listpatches.cc:20
@@ -2737,6 +2737,9 @@ msgid ""
 "The command is an alias for '%1%' and performs a case-insensitive search. "
 "For a case-sensitive search call the search command and add the '%2%' option."
 msgstr ""
+"Perintahnya adalah alias untuk '%1%' dan melakukan pencarian tidak peka "
+"huruf besar/kecil. Untuk pencarian peka huruf besar/kecil, panggil perintah "
+"pencarian dan tambahkan opsi '%2%'."
 
 #. "what-provides" is obsolete
 #. The "what-provides" now is included in "search" command, e.g.
@@ -4626,7 +4629,7 @@ msgstr "Menghapus instalasi paket sumber tidak didukung."
 #: src/commands/subcommand.cc:79
 #, boost-format
 msgid "No manual entry for %1%"
-msgstr ""
+msgstr "Tidak ada entri manual untuk %1%"
 
 #: src/commands/subcommand.cc:92
 msgid "none"
