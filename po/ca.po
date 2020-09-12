@@ -9,10 +9,10 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-09-11 10:04+0200\n"
-"PO-Revision-Date: 2020-06-29 19:46+0000\n"
+"PO-Revision-Date: 2020-09-12 11:48+0000\n"
 "Last-Translator: David Medina <medipas@gmail.com>\n"
-"Language-Team: Catalan <https://l10n.opensuse.org/projects/zypper/master/ca/"
-">\n"
+"Language-Team: Catalan <https://l10n.opensuse.org/projects/zypper/master/ca/>"
+"\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2429,7 +2429,7 @@ msgstr "list-patches (lp) [OPCIONS]"
 #. translators: command summary: list-patches, lp
 #: src/commands/listpatches.cc:18
 msgid "List available patches."
-msgstr ""
+msgstr "Llista els pedaços disponibles."
 
 #. translators: command description
 #: src/commands/listpatches.cc:20
@@ -2831,6 +2831,9 @@ msgid ""
 "The command is an alias for '%1%' and performs a case-insensitive search. "
 "For a case-sensitive search call the search command and add the '%2%' option."
 msgstr ""
+"L'ordre és un àlies de %1% i fa una cerca que no distingeix entre majúscules "
+"i minúscules. Per a una cerca sensible a majúscules i minúscules, crideu "
+"l'ordre de cerca i afegiu l'opció \"%2%\"."
 
 #. "what-provides" is obsolete
 #. The "what-provides" now is included in "search" command, e.g.
@@ -4734,7 +4737,7 @@ msgstr "No s'admet la desinstal·lació de paquets font."
 #: src/commands/subcommand.cc:79
 #, boost-format
 msgid "No manual entry for %1%"
-msgstr ""
+msgstr "No hi ha entrada del manual per a %1%."
 
 #: src/commands/subcommand.cc:92
 msgid "none"
