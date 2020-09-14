@@ -14,12 +14,12 @@ namespace zyppng {
     }
   }
 
-  sockaddr *UnixSockAddr::nativeSockAddr()
+  sockaddr *UnixSockAddr::nativeSockAddr() const
   {
     return reinterpret_cast<sockaddr *>(_data.get());
   }
 
-  std::size_t UnixSockAddr::size()
+  std::size_t UnixSockAddr::size() const
   {
     return sizeof(struct sockaddr_un);
   }

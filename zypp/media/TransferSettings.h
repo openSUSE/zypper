@@ -9,6 +9,10 @@
 #include <zypp/Pathname.h>
 #include <zypp/Url.h>
 
+namespace zypp::proto {
+  class TransferSettings;
+}
+
 namespace zypp
 {
   namespace media
@@ -23,6 +27,8 @@ namespace zypp
       /** Constructs a transfer program cmd line access. */
       TransferSettings();
 
+      TransferSettings( const zypp::proto::TransferSettings &settings );
+
       typedef std::vector<std::string> Headers;
 
       /** reset the settings to the defaults */
@@ -32,12 +38,8 @@ namespace zypp
       /** add a header, on the form "Foo: Bar" */
       void addHeader( std::string && val_r );
 
-      /** begin iterators to additional headers */
-      Headers::const_iterator headersBegin() const;
-
-      /** end iterators to additional headers */
-      Headers::const_iterator headersEnd() const;
-
+      /** returns a list of all added headers */
+      Headers headers() const;
 
       /** sets the user agent ie: "Mozilla v3" */
       void setUserAgentString( std::string && val_r );
@@ -184,6 +186,9 @@ namespace zypp
 
       /** SSL client key file */
       Pathname clientKeyPath() const;
+
+      const zypp::proto::TransferSettings &protoData() const;
+      zypp::proto::TransferSettings &protoData();
 
     protected:
       class Impl;

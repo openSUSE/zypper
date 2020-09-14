@@ -215,19 +215,8 @@ namespace zypp
       if ( _sockFD == -1 )
         return false;
 
-      const auto opStarted = zyppng::Timer::now();
-
       zyppng::UnixSockAddr addr( LogThread::sockPath(), true );
-      int res = -1;
-      do {
-        res = zyppng::eintrSafeCall( ::connect, _sockFD, addr.nativeSockAddr(), addr.size() );
-        if ( res < 0 && errno != ECONNREFUSED && errno != EADDRNOTAVAIL ) {
-          ::close(_sockFD);
-          _sockFD = -1;
-          return false;
-        }
-      } while ( res == -1 && zyppng::Timer::elapsedSince( opStarted ) < 100 );
-      return true;
+      return zyppng::trySocketConnection( _sockFD, addr, 100 );
     }
 
     /*!

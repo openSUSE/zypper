@@ -223,9 +223,15 @@ namespace zyppng {
      */
     SignalProxy<void (Socket::SocketError)> sigError ();
 
+
+    /*!
+     * Makes a socket instance out of a existing socket file descriptor,
+     * the instance takes ownership of the fd
+     */
+    static Ptr fromSocket ( int fd, SocketState state );
+
   protected:
     Socket ( int domain, int type, int protocol );
-    static Ptr fromSocket ( int fd, SocketState state );
 
 
     // IODevice interface

@@ -1,4 +1,5 @@
 #include <zypp/zyppng/base/EventLoop>
+#include <zypp/zyppng/base/EventDispatcher>
 #include <zypp/zyppng/media/network/downloader.h>
 #include <zypp/zyppng/media/network/networkrequesterror.h>
 #include <zypp/zyppng/media/network/networkrequestdispatcher.h>
@@ -583,7 +584,7 @@ BOOST_DATA_TEST_CASE( dltest_auth_basic, bdata::make( withSSL ), withSSL )
   zypp::filesystem::TmpDir repoManagerRoot;
   zypp::ZConfig::instance().setRepoManagerRoot( repoManagerRoot.path() );
 
-  auto ev = zyppng::EventDispatcher::createMain();
+  auto ev = zyppng::EventLoop::create();
 
   zyppng::Downloader downloader;
 

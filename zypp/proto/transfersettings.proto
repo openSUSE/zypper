@@ -1,0 +1,35 @@
+syntax = "proto3";
+option optimize_for = LITE_RUNTIME;
+
+package zypp.proto;
+
+
+message TransferSettings {
+    repeated string header = 1;
+    string useragent = 2;
+    string username = 3;
+    string password = 4;
+    bool useproxy = 5;
+    string proxy = 6;
+    string proxy_username = 7;
+    string proxy_password = 8;
+    string authtype = 9;
+    int64 timeout = 10;
+    int64 connect_timeout = 11;
+    string url = 12;
+    string targetdir = 13;
+
+    int64 maxConcurrentConnections = 14;
+    int64 minDownloadSpeed = 15;
+    int64 maxDownloadSpeed = 16;
+    int64 maxSilentTries = 17;
+
+    bool verify_host = 18;
+    bool verify_peer = 19;
+    string ca_path = 20;
+    string client_cert_path = 21;
+    string client_key_path = 22;
+
+    // workarounds
+    bool head_requests_allowed = 23;
+}

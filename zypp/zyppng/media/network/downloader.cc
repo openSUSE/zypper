@@ -5,7 +5,6 @@
 #include <zypp/zyppng/media/network/request.h>
 #include <zypp/zyppng/base/Timer>
 #include <zypp/zyppng/base/EventDispatcher>
-#include <zypp/zyppng/Context>
 #include <zypp/Pathname.h>
 #include <zypp/media/TransferSettings.h>
 #include <zypp/media/MetaLinkParser.h>
@@ -288,12 +287,14 @@ namespace zyppng {
       TransferSettings &ts = req->transferSettings();
 
       // We got credentials from store, _triedCredFromStore makes sure we just try the auth from store once
-      if ( cmcred && !req->_triedCredFromStore ) {
+      // if its timestamp does not change between 2 retries
+      if ( cmcred && ( !req->_triedCredFromStore || req->_authTimestamp < cmcred->lastDatabaseUpdate() ) ) {
         DBG << "got stored credentials:" << std::endl << *cmcred << std::endl;
         ts.setUsername( cmcred->username() );
         ts.setPassword( cmcred->password() );
         retry = true;
         req->_triedCredFromStore = true;
+        _lastTriedAuthTime = req->_authTimestamp = cmcred->lastDatabaseUpdate();
       } else {
 
         //we did not get credentials from the store, emit a signal that allows
@@ -303,14 +304,7 @@ namespace zyppng {
         credFromUser.setUrl( req->url() );
 
         //in case we got a auth hint from the server the error object will contain it
-        auto authHintIt = err.extraInfo().find("authHint");
-        std::string authHint;
-
-        if ( authHintIt != err.extraInfo().end() ){
-          try {
-            authHint = boost::any_cast<std::string>( authHintIt->second );
-          } catch ( const boost::bad_any_cast &) { }
-        }
+        std::string authHint = err.extraInfoValue("authHint", std::string());
 
         //preset from store if we found something
         if ( cmcred && !cmcred->username().empty() )
@@ -334,14 +328,18 @@ namespace zyppng {
           cm.addCred( credFromUser );
           cm.save();
 
+          // potentially setting this after the file has been touched we might miss a change
+          // in a later loop, if another update to the store happens right in the few ms difference
+          // between the actual file write and calling time() here. However this is highly unlikely
+          _lastTriedAuthTime = req->_authTimestamp = time( nullptr ) ;
+
           retry = true;
         }
       }
     } else if ( _state == Download::RunningMulti ) {
 
       //if a error happens during a multi download we try to use another mirror to download the failed block
-      DBG << "Request failed " << req->extendedErrorString() << std::endl;
-      auto failed = req->failedRanges();
+      DBG << "Request failed " << req->extendedErrorString() << "(" << req->url() << ")" << std::endl;
 
       NetworkRequestError dummyErr;
 
@@ -358,7 +356,7 @@ namespace zyppng {
 
           Block b = *ind;
           b._failedWithErr = req->error();
-          DBG << "Adding failed block to failed blocklist: " << b._block << " " << r.start << " " << r.len << " (" << req->error().toString() << ")" << std::endl;
+          DBG << "Adding failed block to failed blocklist: " << b._block << " " << r.start << " " << r.len << " (" << req->error().toString() << " [" << req->error().nativeErrorString()<< "])" << std::endl;
           return b;
         });
 
@@ -381,7 +379,7 @@ namespace zyppng {
     //if rety is true we just enqueue the request again, usually this means authentication was updated
     if ( retry ) {
       //make sure this request will run asap
-      req->setPriority( NetworkRequest::High );
+      req->setPriority( _defaultSubRequestPriority );
 
       //this is not a new request, only add to queues but do not connect signals again
       addNewRequest( req, false );
@@ -652,8 +650,12 @@ namespace zyppng {
 
     std::shared_ptr<Request> req = std::make_shared<Request>( internal::clearQueryString( myUrl ), _targetPath, NetworkRequest::WriteShared );
     req->_originalUrl = myUrl;
-    req->setPriority( NetworkRequest::High );
+    req->setPriority( _defaultSubRequestPriority );
     req->transferSettings() = settings;
+
+    // if we download chunks we do not want to wait for too long on mirrors that are slow to answer
+    req->transferSettings().setTimeout( 2 );
+
     req->_myBlocks = std::move(blocks);
 
     DBG << "Creating Request to download blocks:"<<std::endl;
@@ -895,6 +897,8 @@ namespace zyppng {
     if ( !d->_requestDispatcher )
       return;
 
+    d->_defaultSubRequestPriority = NetworkRequest::Critical;
+
     bool triggerResched = false;
     for ( auto &req : d->_runningRequests ) {
       if ( req->state() == NetworkRequest::Pending ) {
@@ -946,6 +950,11 @@ namespace zyppng {
     d_func()->_preferredChunkSize = bc;
   }
 
+  uint64_t Download::lastAuthTimestamp() const
+  {
+    return d_func()->_lastTriedAuthTime;
+  }
+
   zyppng::NetworkRequestDispatcher &Download::dispatcher() const
   {
     return *d_func()->_requestDispatcher;
@@ -985,10 +994,8 @@ namespace zyppng {
     : _mirrors( std::move(mc) )
   {
     _requestDispatcher = std::make_shared<NetworkRequestDispatcher>( );
-
     if ( !_mirrors ) {
-      auto zyppContext = zypp::getZYpp()->ngContext();
-      _mirrors = zyppContext->mirrorControl();
+      _mirrors = MirrorControl::create();
     }
   }
 

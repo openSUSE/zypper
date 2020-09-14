@@ -115,7 +115,7 @@ namespace zyppng {
       }
       case Socket::ClosedState: {
         _state.emplace<SocketPrivate::ClosedState>();
-        if ( _socket >= 0 )
+        if ( _socket >= 0 && !_borrowedSocket )
           ::close( _socket );
         _socket = -1;
         _targetAddr.reset();
@@ -585,7 +585,7 @@ namespace zyppng {
   {
     Z_D();
 
-    if ( !addr || d->state() != Socket::InitialState )
+    if ( !addr || ( d->state() != Socket::InitialState &&  d->state() != Socket::ClosedState ) )
       return false;
 
     if ( !d->initSocket() )

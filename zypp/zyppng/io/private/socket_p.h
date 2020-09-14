@@ -56,6 +56,7 @@ namespace zyppng {
     std::shared_ptr<SockAddr> _targetAddr;
 
     int _socket = -1;
+    bool _borrowedSocket = false;
 
     //error handling
     Socket::SocketError _error = Socket::NoError;

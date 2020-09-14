@@ -18,19 +18,26 @@
 #include <zypp/zyppng/core/Url>
 #include <zypp/zyppng/media/network/AuthData>
 #include <zypp/zyppng/media/network/TransferSettings>
+#include <zypp/zyppng/messages.pb.h>
+#include <zypp/zyppng/io/private/iobuffer_p.h>
+#include <zypp/TmpPath.h>
 #include <optional>
+#include <variant>
 
 namespace zyppng {
 
 class Download;
 class Downloader;
+class Socket;
 class EventDispatcher;
+
+using RequestId = uint32_t;
 
 class MediaHandlerNetwork : public zypp::media::MediaHandler
 {
 public:
   MediaHandlerNetwork(const Url &url_r, const zypp::Pathname &attach_point_hint_r);
-  virtual ~MediaHandlerNetwork() override { try { release(); } catch(...) {} }
+  virtual ~MediaHandlerNetwork() override;
 
   TransferSettings & settings();
 
@@ -48,15 +55,32 @@ protected:
 
 
   Url getFileUrl(const zypp::Pathname &filename_r) const;
-  void handleRequestResult (const Download &req ) const;
 
 private:
-  void authenticate(const Download &, NetworkAuthData &auth, const std::string & availAuth) const;
-  std::shared_ptr<Download> prepareRequest (Downloader &dlManager, const zypp::filesystem::Pathname &filename, const zypp::ByteCount &expectedFileSize_r = zypp::ByteCount() ) const;
+  struct ProgressData;
+  struct DispatchContext;
+  struct Request;
+
+  std::unique_ptr<DispatchContext> ensureConnected () const;
+  bool retry ( DispatchContext &ctx, Request &req ) const;
+  void retryRequest ( DispatchContext &ctx, Request &req ) const;
+  void handleStreamMessage ( DispatchContext &ctx, const zypp::proto::Envelope &e ) const;
+  void handleRequestResult ( const Request &req , const zypp::filesystem::Pathname &filename ) const;
+
+  Request makeRequest ( const zypp::filesystem::Pathname &filename, const zypp::ByteCount &expectedFileSize_r = {}, const zypp::filesystem::Pathname &deltaFile = {} ) const;
+  void trackRequest ( DispatchContext &ctx, Request &req ) const ;
+
+  Request *findRequest ( const zyppng::Url url ) const;
+  Request *findRequest ( const RequestId id ) const;
+
 
 private:
-  TransferSettings _settings;
-  std::optional<size_t> _prefetchCacheId;
+  zypp::filesystem::TmpDir   _workingDir;
+  mutable TransferSettings   _settings;
+  mutable RequestId          _nextRequestId = 0;
+  mutable std::list<Request> _requests;
+  mutable std::optional<int> _socket;
+  mutable IOBuffer           _readBuffer;
 
   // MediaHandler interface
 protected:

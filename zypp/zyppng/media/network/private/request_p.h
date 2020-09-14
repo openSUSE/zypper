@@ -37,13 +37,17 @@ namespace zyppng {
     void aboutToStart ();
     void setResult ( NetworkRequestError &&err );
     void reset ();
+    void resetActivityTimer ();
     void onActivityTimeout (Timer &);
     void validateRange ( NetworkRequest::Range &rng );
     bool parseContentRangeHeader (const boost::string_view &line, size_t &start , size_t &len);
     bool parseContentTypeMultiRangeHeader ( const boost::string_view &line, std::string &boundary );
 
+    std::string errorMessage () const;
+
 
     std::array<char, CURL_ERROR_SIZE+1> _errorBuf; //provide a buffer for a nicely formatted error for CURL
+    std::optional<std::string> _originalError; // if this is initialized we manually set a error that caused the error stored in _errorBuf
 
     template<typename T>
     void setCurlOption ( CURLoption opt, T data )

@@ -12,6 +12,8 @@ SET( zyppng_base_SRCS
 SET( zyppng_base_HEADERS
   base/AbstractEventSource
   base/abstracteventsource.h
+  base/AutoDisconnect
+  base/autodisconnect.h
   base/Base
   base/base.h
   base/EventDispatcher
@@ -72,6 +74,7 @@ SET( zyppng_io_HEADERS
 
 SET( zyppng_media_SRCS
   media/medianetwork.cc
+  media/medianetworkserver.cc
   media/network/downloader.cc
   media/network/mirrorcontrol.cc
   media/network/networkrequestdispatcher.cc
@@ -93,6 +96,7 @@ SET( zyppng_media_HEADERS
 )
 
 SET( zyppng_media_private_HEADERS
+  media/private/medianetworkserver_p.h
   media/network/private/downloader_p.h
   media/network/private/mirrorcontrol_p.h
   media/network/private/networkrequestdispatcher_p.h
@@ -125,6 +129,13 @@ SET( zyppng_appcode_SRCS
   context.cc
 )
 
+SET( zyppng_PROTOBUF_SOURCES
+    proto/messages.proto
+    proto/networkrequesterror.proto
+)
+
+protobuf_generate_cpp(ZYPPNG_PROTO_SRCS ZYPPNG_PROTO_HDRS ${zyppng_PROTOBUF_SOURCES})
+
 
 SET ( zyppng_HEADERS
   ${zyppng_appcode_HEADERS}
@@ -138,6 +149,7 @@ SET ( zyppng_HEADERS
   ${zyppng_media_private_HEADERS}
   ${zyppng_thread_HEADERS}
   ${zyppng_thread_private_HEADERS}
+  ${ZYPPNG_PROTO_HDRS}
 )
 
 SET ( zyppng_SRCS
@@ -145,6 +157,7 @@ SET ( zyppng_SRCS
   ${zyppng_io_SRCS}
   ${zyppng_media_SRCS}
   ${zyppng_thread_SRCS}
+  ${ZYPPNG_PROTO_SRCS}
 )
 
 ADD_LIBRARY( zyppng-objlib OBJECT ${zyppng_SRCS} ${zyppng_HEADERS} )

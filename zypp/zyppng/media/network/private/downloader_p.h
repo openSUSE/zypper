@@ -46,6 +46,7 @@ namespace zyppng {
       std::vector<Block> _myBlocks;
 
       bool _triedCredFromStore = false; //< already tried to authenticate from credential store?
+      time_t _authTimestamp = 0; //< timestamp of the AuthData we tried from the store
       Url _originalUrl;  //< The unstripped URL as it was passed to Download , before transfer settings are removed
       MirrorControl::MirrorHandle _myMirror;
 
@@ -86,6 +87,8 @@ namespace zyppng {
     bool _isMultiDownload = false;   //< State flag, shows if we are currently downloading a multi part file
     bool _isMultiPartEnabled = true; //< Enables/Disables automatic multipart downloads
     bool _checkExistsOnly = false;   //< Set to true if Downloader should only check if the URL exits
+    time_t _lastTriedAuthTime = 0; //< if initialized this shows the last timestamp that we loaded a cred for the given URL from CredentialManager
+    NetworkRequest::Priority _defaultSubRequestPriority = NetworkRequest::High;
 
     signal<void ( Download &req )> _sigStarted;
     signal<void ( Download &req, Download::State state )> _sigStateChanged;

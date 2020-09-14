@@ -16,6 +16,9 @@ class NetworkRequestErrorPrivate;
    * @brief The NetworkRequestError class
    * Represents a error that occured in \see NetworkDownloadRequest
    * or \see NetworkRequestDispatcher
+   *
+   *
+   * \attention Keep in sync with zypp/zyppng/proto/networkrequest.proto !!!
    */
   class LIBZYPP_NG_EXPORT NetworkRequestError
   {

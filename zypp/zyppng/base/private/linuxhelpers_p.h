@@ -7,6 +7,8 @@
 
 namespace zyppng {
 
+  class SockAddr;
+
   inline std::string strerr_cxx ( const int err = -1 ) {
     ByteArray strBuf( 1024, '\0' );
     strerror_r( err == -1 ? errno : err , strBuf.data(), strBuf.size() );
@@ -23,6 +25,8 @@ namespace zyppng {
   }
 
   bool blockSignalsForCurrentThread ( const std::vector<int> &sigs );
+
+  bool trySocketConnection (int &sockFD, const SockAddr &addr, uint64_t timeout );
 }
 
 #endif // LINUXHELPERS_P_H

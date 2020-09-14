@@ -18,7 +18,7 @@ public:
   std::map<std::string, boost::any> _extraInfo;
 
   static zyppng::NetworkRequestError customError( NetworkRequestError::Type t, std::string &&errorMsg = "", std::map<std::string, boost::any> &&extraInfo = {} );
-  static zyppng::NetworkRequestError fromCurlError( NetworkRequest &req, int nativeCode , const char *errBuf );
+  static zyppng::NetworkRequestError fromCurlError( NetworkRequest &req, int nativeCode , const std::string &nativeError );
   static zyppng::NetworkRequestError fromCurlMError ( int nativeCode );
   static std::string typeToString( NetworkRequestError::Type t );
 };

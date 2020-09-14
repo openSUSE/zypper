@@ -93,6 +93,7 @@ namespace zyppng {
     else
       _easyHandle = curl_easy_init();
 
+    _originalError.reset();
     _errorBuf.fill( '\0' );
     curl_easy_setopt( _easyHandle, CURLOPT_ERRORBUFFER, this->_errorBuf.data() );
 
@@ -405,10 +406,8 @@ namespace zyppng {
 #endif
 
       // append settings custom headers to curl
-      for ( TransferSettings::Headers::const_iterator it = locSet.headersBegin();
-            it != locSet.headersEnd();
-            ++it ) {
-        if ( !z_func()->addRequestHeader( it->c_str() ) )
+      for ( const auto &header : locSet.headers() ) {
+        if ( !z_func()->addRequestHeader( header.c_str() ) )
           ZYPP_THROW(zypp::media::MediaCurlInitException(_url));
       }
 
@@ -432,7 +431,7 @@ namespace zyppng {
 
     if ( m._activityTimer ) {
       m._activityTimer->sigExpired().connect( sigc::mem_fun( this, &NetworkRequestPrivate::onActivityTimeout ));
-      m._activityTimer->start( static_cast<uint64_t>( _settings.timeout() ) * 1000 );
+      m._activityTimer->start( static_cast<uint64_t>( _settings.timeout() * 1000 ) );
     }
 
     _sigStarted.emit( *z_func() );
@@ -486,6 +485,7 @@ namespace zyppng {
   {
     _protocolMode = ProtocolMode::Default;
     _headers.reset( nullptr );
+    _originalError.reset();
     _errorBuf.fill( 0 );
     _runningMode = pending_t();
   }
@@ -514,7 +514,7 @@ namespace zyppng {
     zypp::str::smatch what;
     if( !zypp::str::regex_match( line.to_string(), what, regex ) || what.size() != 4 ) {
       DBG << "Invalid Content-Range Header format: '" << line.to_string() << std::endl;
-      strncpy( _errorBuf.data(), "Invalid Content-Range header format.", CURL_ERROR_SIZE);
+      _originalError = "Invalid Content-Range header format.";
       return false;
     }
 
@@ -539,6 +539,24 @@ namespace zyppng {
     return false;
   }
 
+  std::string NetworkRequestPrivate::errorMessage() const
+  {
+    if ( _originalError )
+      return *_originalError;
+
+    return std::string( _errorBuf.data() );
+  }
+
+  void NetworkRequestPrivate::resetActivityTimer()
+  {
+    if ( std::holds_alternative<running_t>( _runningMode ) ){
+      auto &rmode = std::get<running_t>( _runningMode );
+      if ( rmode._activityTimer && rmode._activityTimer->isRunning() )
+        rmode._activityTimer->start();
+    }
+
+  }
+
   int NetworkRequestPrivate::curlProgressCallback( void *clientp, curl_off_t dltotal, curl_off_t dlnow, curl_off_t ultotal, curl_off_t ulnow )
   {
     if ( !clientp )
@@ -553,8 +571,7 @@ namespace zyppng {
     auto &rmode = std::get<running_t>( that->_runningMode );
 
     //reset the timer
-    if ( rmode._activityTimer && rmode._activityTimer->isRunning() )
-      rmode._activityTimer->start();
+    that->resetActivityTimer();
 
     rmode._isInCallback = true;
     that->_sigProgress.emit( *that->z_func(), dltotal, dlnow, ultotal, ulnow );
@@ -568,6 +585,8 @@ namespace zyppng {
     //it is valid to call this function with no data to write, just return OK
     if ( size * nmemb == 0)
       return 0;
+
+    resetActivityTimer();
 
     if ( _protocolMode == ProtocolMode::HTTP ) {
 
@@ -591,7 +610,7 @@ namespace zyppng {
         // ignore other status codes, maybe we are redirected etc.
         if ( statuscode >= 200 && statuscode <= 299 ) {
           if ( rmode._requireStatusPartial && statuscode != 206 ) {
-            strncpy( _errorBuf.data(), "Expected range status code 206, but got none.", CURL_ERROR_SIZE);
+            _originalError = "Expected range status code 206, but got none.";
             return 0;
           }
         }
@@ -631,6 +650,8 @@ namespace zyppng {
   {
     const auto max = ( size * nmemb );
 
+    resetActivityTimer();
+
     //it is valid to call this function with no data to write, just return OK
     if ( max == 0)
       return 0;
@@ -644,8 +665,10 @@ namespace zyppng {
 
     auto writeDataToFile = [ this, &rmode ]( off_t offset, const char *data, size_t len ) -> off_t {
 
-      if ( rmode._currentRange < 0 )
+      if ( rmode._currentRange < 0 ) {
+        DBG << "Current range is zero in write request" << std::endl;
         return 0;
+      }
 
       // if we have no open file create or open it
       if ( !rmode._outFile ) {
@@ -661,7 +684,7 @@ namespace zyppng {
         }
 
         if ( !rmode._outFile ) {
-          strncpy( _errorBuf.data(), "Unable to open target file.", CURL_ERROR_SIZE);
+          _originalError = "Unable to open target file.";
           return 0;
         }
       }
@@ -669,7 +692,7 @@ namespace zyppng {
       // seek to the given offset
       if ( offset >= 0 ) {
         if ( fseek( rmode._outFile, offset, SEEK_SET ) != 0 ) {
-          strncpy( _errorBuf.data(), "Unable to set output file pointer.", CURL_ERROR_SIZE);
+          _originalError = "Unable to set output file pointer.";
           return 0;
         }
       }
@@ -679,7 +702,7 @@ namespace zyppng {
 
       //make sure we do not write after the expected file size
       if ( _expectedFileSize && _expectedFileSize <= static_cast<zypp::ByteCount::SizeType>(rng.start + rng.bytesWritten + bytesToWrite) ) {
-        strncpy( _errorBuf.data(), "Downloaded data exceeds expected length.", CURL_ERROR_SIZE);
+        _originalError = "Downloaded data exceeds expected length.";
         return 0;
       }
 
@@ -730,7 +753,7 @@ namespace zyppng {
 
           if ( rmode._requireStatusPartial ) {
             //we got a invalid response, the status code pointed to being partial but we got no range definition
-            strncpy( _errorBuf.data(), "Invalid data from server, range respone was announced but there was no range definiton.", CURL_ERROR_SIZE);
+            _originalError = "Invalid data from server, range respone was announced but there was no range definiton.";
             return 0;
           }
 
@@ -780,7 +803,7 @@ namespace zyppng {
           }
         }
         if ( !foundRange ) {
-          strncpy( _errorBuf.data(), "Unable to find a matching range for data returned by the server.", CURL_ERROR_SIZE);
+          _originalError = "Unable to find a matching range for data returned by the server.";
           return 0;
         }
 
@@ -832,7 +855,7 @@ namespace zyppng {
         boost::string_view data( rmode._rangePrefaceBuffer.data(), rmode._rangePrefaceBuffer.size() );
         auto sepStrIndex = data.find( rmode._seperatorString );
         if ( sepStrIndex == data.npos ) {
-          strncpy( _errorBuf.data(), "Invalid multirange header format, seperator string missing.", CURL_ERROR_SIZE);
+          _originalError = "Invalid multirange header format, seperator string missing.";
           return 0;
         }
 

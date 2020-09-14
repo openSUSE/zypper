@@ -1,0 +1,16 @@
+syntax = "proto3";
+option optimize_for = LITE_RUNTIME;
+
+import "google/protobuf/any.proto";
+
+package zypp.proto;
+
+message NetworkRequestError {
+  /**
+    * This will always correspond to the enum value specified in NetworkRequestError::Type
+    */
+  int32  error = 1;
+  string errorDesc = 2;
+  string nativeError = 3;
+  map<string, string> extra_info = 4;
+}

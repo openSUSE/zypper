@@ -179,7 +179,7 @@ void NetworkRequestDispatcherPrivate::handleMultiSocketAction(curl_socket_t nati
       NetworkRequestPrivate *request = reinterpret_cast<NetworkRequestPrivate *>( privatePtr );
 
       //trigger notification about file downloaded
-      NetworkRequestError e = NetworkRequestErrorPrivate::fromCurlError( *request->z_func(), res, request->_errorBuf.data() );
+      NetworkRequestError e = NetworkRequestErrorPrivate::fromCurlError( *request->z_func(), res, request->errorMessage() );
       setFinished( *request->z_func(), e );
 
       //attention request could be deleted from here on

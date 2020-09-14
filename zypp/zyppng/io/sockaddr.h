@@ -26,8 +26,8 @@ namespace zyppng {
   class SockAddr {
   public:
     virtual ~SockAddr(){};
-    virtual struct ::sockaddr* nativeSockAddr () = 0;
-    virtual std::size_t size () = 0;
+    virtual struct ::sockaddr* nativeSockAddr () const = 0;
+    virtual std::size_t size () const = 0;
   protected:
 
   };
@@ -41,8 +41,8 @@ namespace zyppng {
     UnixSockAddr( const std::string &path, bool abstract );
 
     // SockAddr interface
-    sockaddr *nativeSockAddr() override;
-    std::size_t size() override;
+    sockaddr *nativeSockAddr() const override;
+    std::size_t size() const override;
 
     bool isAbstract () const;
 

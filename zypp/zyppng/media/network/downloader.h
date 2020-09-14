@@ -235,6 +235,13 @@ namespace zyppng {
      */
     void setPreferredChunkSize ( const zypp::ByteCount &bc );
 
+
+    /*!
+     * Returns the timestamp of the last auth credentials that were loaded from the CredentialManager.
+     * If no credentials were tried, this returns 0
+     */
+    uint64_t lastAuthTimestamp () const;
+
     /*!
      * Returns a reference to the internally used \sa zyppng::NetworkRequestDispatcher
      */

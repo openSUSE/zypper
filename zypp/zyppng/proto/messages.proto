@@ -1,0 +1,110 @@
+syntax = "proto3";
+option optimize_for = LITE_RUNTIME;
+
+import "transfersettings.proto";
+import "networkrequesterror.proto";
+
+package zypp.proto;
+
+// the download is silently enqueued and prefetched
+// will return a Status object to the sender
+message Request {
+    uint32 requestId = 1;
+    TransferSettings settings = 2;
+    string url = 3;
+    string delta = 4;
+    uint64 expectedFileSize = 5;
+    string targetPath = 6;
+    bool   checkExistanceOnly = 7; //< this will NOT download the file but only query the server if its existant
+    bool   prioritize = 8;         //< this is usually set when a download is required right away, it will be enqueued with highest prio
+    bool   streamProgress = 9;     //< immediately start to stream download updates
+}
+
+// the downloads are silently enqueued and prefetched
+// will return a Status object to the sender
+message Prefetch {
+    uint32 requestId = 1;
+    repeated Request requests = 2;
+}
+
+// Will reprioritize a download that is not yet started
+message Prioritize {
+    uint32 requestId = 1;
+}
+
+// Download has been started in the server, updates are streamed if streamProgress was
+// set to true in the initial request or if SubscribeProgress was issued for this request
+message DownloadStart {
+    uint32 requestId = 1;
+    string url = 2;
+}
+
+// constant updates about the state of the download
+// if total is NOT set, its a "Alive" update only
+message DownloadProgress {
+    uint32 requestId = 1;
+    string url = 2;
+    uint64 total = 3;
+    uint64 now = 4;
+}
+
+// last message sent about a tracked download
+message DownloadFin {
+    uint32 requestId = 1;
+    NetworkRequestError error = 2;
+    int64 last_auth_timestamp = 3; //< this field is only set if a timestamp from CredentialManager was used
+}
+
+// will start streaming updates about download download progress
+// usually only download start and finished messages are sent
+message SubscribeProgress {
+  uint32 requestId  = 1;
+  bool   prioritize = 2; //< setting this flag will also prioritize the download
+}
+
+// will stop streaming updates about download download progress
+// usually only download start and finished messages are sent
+message UnSubscribeProgress {
+  uint32 requestId = 1;
+}
+
+// this message can only be sent when a download is tracked
+// otherwise its silenty ignored without even a return code
+// the expected answer message for this is a DownloadFin with
+// its status code set to cancelled ( if it was not finished before )
+message CancelDownload {
+    uint32 requestId = 1;
+}
+
+// message sent to server to indicate that new auth data was stored
+// in the credential manager, this will restart all requests currently
+// sitting in AuthFailed status
+message NewAuthDataAvailable {
+  uint32 requestId = 1;
+  TransferSettings settings = 2;
+}
+
+// all messages will be enclosed in this type
+message Envelope {
+  string messageTypeName = 1;
+  bytes  value = 2;
+}
+
+// generic status object, showing if a request that has no explicit return message
+// was successful or not. However it can also be returned in place of any other response message
+// which usually means there is a error we can not recover from.
+message Status {
+    enum Code {
+      Ok = 0;
+      InvalidMessage = 1; //< The message could not be parsed from the stream, this will close the stream
+      UnknownRequest = 2; //< The Payload in the request was valid but unknown
+      MalformedRequest = 3; //< The payload type in the request was known, but it was not possible to deserialize it
+      UnknownId = 4; //< The request ID was not found
+    }
+    uint32 requestId = 1;
+    Code   code   = 2;
+    string reason = 3; //< if rejected is false, this will contain the reason why
+}
+
+
+

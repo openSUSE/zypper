@@ -25,7 +25,7 @@ NetworkRequestError NetworkRequestErrorPrivate::customError( NetworkRequestError
   return NetworkRequestError( *new NetworkRequestErrorPrivate(t, errorMsg.empty() ? typeToString(t) : std::move(errorMsg), std::move(extraInfo)) );
 }
 
-NetworkRequestError NetworkRequestErrorPrivate::fromCurlError( NetworkRequest &req, int nativeCode , const char *errBuf )
+NetworkRequestError NetworkRequestErrorPrivate::fromCurlError(NetworkRequest &req, int nativeCode , const std::string &nativeError )
 {
 
   Url url = req.url();
@@ -39,8 +39,8 @@ NetworkRequestError NetworkRequestErrorPrivate::fromCurlError( NetworkRequest &r
     if ( nativeErr != nullptr )
       extraInfo.insert( { "nativeErrorCodeDesc",  std::string( nativeErr ) } );
 
-    if ( errBuf != nullptr )
-      extraInfo.insert( { "nativeErrorDesc",  std::string( errBuf ) } );
+    if ( !nativeError.empty() )
+      extraInfo.insert( { "nativeErrorDesc",  nativeError } );
 
     extraInfo.insert( { "requestUrl", url } );
     extraInfo.insert( { "curlCode", nativeCode } );

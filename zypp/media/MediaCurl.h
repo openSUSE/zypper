@@ -18,8 +18,6 @@
 #include <zypp/ZYppCallbacks.h>
 
 #include <curl/curl.h>
-#include <boost/optional.hpp>
-
 namespace zypp {
   namespace media {
 
@@ -95,8 +93,6 @@ class MediaCurl : public MediaHandler
 
     virtual bool checkAttachPoint(const Pathname &apoint) const override;
 
-    virtual void precacheFiles(const std::vector<OnMediaLocation> &files) override;
-
   public:
 
     MediaCurl( const Url &      url_r,
@@ -169,7 +165,6 @@ class MediaCurl : public MediaHandler
 
   private:
     long _curlDebug;
-    boost::optional<size_t> _prefetchCacheId;
 
     std::string _currentCookieFile;
     static Pathname _cookieFile;
