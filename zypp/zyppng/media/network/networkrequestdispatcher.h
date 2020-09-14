@@ -117,6 +117,11 @@ namespace zyppng {
       void run ( );
 
       /*!
+       * Reschedule enqueued requests based on their priorities
+       */
+      void reschedule ();
+
+      /*!
        * Returns the number of requests in the running and waiting queues
        */
       size_t count ();

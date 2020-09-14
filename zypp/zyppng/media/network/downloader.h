@@ -198,6 +198,15 @@ namespace zyppng {
     void start ();
 
     /*!
+     * This will raise all requests currenty in pending state to have \ref NetworkRequest::Critial priority,
+     * which means they will be started even before requests with \ref NetworkRequest::High priority.
+     *
+     * \note Use this feature only if the request result is required right away because the application is waiting for it, overuse of this
+     *       might hurt performance
+     */
+    void prioritize();
+
+    /*!
      * Aborts the current download
      */
     void cancel ();

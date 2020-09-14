@@ -340,11 +340,11 @@ void NetworkRequestDispatcher::enqueue(const std::shared_ptr<NetworkRequest> &re
   if ( req->priority() == NetworkRequest::Normal )
     d->_pendingDownloads.push_back( req );
   else {
-    auto it = std::find_if( d->_pendingDownloads.begin(), d->_pendingDownloads.end(), []( const auto &req ){
-      return req->priority() ==  NetworkRequest::Normal;
+    auto it = std::find_if( d->_pendingDownloads.begin(), d->_pendingDownloads.end(), [ prio = req->priority() ]( const auto &pendingReq ){
+      return pendingReq->priority() < prio;
     });
 
-    //if we have a valid iterator, decrement we found a Normal pending download request, insert before that
+    //if we have a valid iterator, decrement we found a pending download request with lower prio, insert before that
     if ( it != d->_pendingDownloads.end() && it != d->_pendingDownloads.begin() )
       it--;
     d->_pendingDownloads.insert( it, req );
@@ -378,6 +378,19 @@ void NetworkRequestDispatcher::run()
 
   if ( d->_pendingDownloads.size() )
     d->dequeuePending();
+}
+
+void NetworkRequestDispatcher::reschedule()
+{
+  Z_D();
+  if ( !d->_pendingDownloads.size() )
+    return;
+
+  std::stable_sort( d->_pendingDownloads.begin(), d->_pendingDownloads.end(), []( const auto &a, const auto &b ){
+    return a->priority() < b->priority();
+  });
+
+  d->dequeuePending();
 }
 
 size_t NetworkRequestDispatcher::count()

@@ -888,6 +888,24 @@ namespace zyppng {
     d_func()->start();
   }
 
+  void Download::prioritize()
+  {
+    Z_D();
+
+    if ( !d->_requestDispatcher )
+      return;
+
+    bool triggerResched = false;
+    for ( auto &req : d->_runningRequests ) {
+      if ( req->state() == NetworkRequest::Pending ) {
+        triggerResched = true;
+        req->setPriority( NetworkRequest::Critical, false );
+      }
+    }
+    if ( triggerResched )
+      d->_requestDispatcher->reschedule();
+  }
+
   void Download::cancel()
   {
     Z_D();

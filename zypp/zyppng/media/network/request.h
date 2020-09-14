@@ -52,8 +52,9 @@ namespace zyppng {
     };
 
     enum Priority {
-      Normal, //< Requests with normal priority will be enqueued at the end
-      High    //< Request with high priority will be moved to the front of the queue
+      Normal,         //< Requests with normal priority will be enqueued as they come in
+      High,           //< Request with high priority will be moved to the front of the queue
+      Critical = 100, //< Those requests will be enqueued as fast as possible, even before High priority requests, this should be used only if requests needs to start immediately
     };
 
     enum FileMode {
@@ -111,9 +112,9 @@ namespace zyppng {
     /*!
      * Sets the priority of the NetworkRequest, this will affect where
      * the \sa NetworkRequestDispatcher puts the Request in the Queue.
-     * \note changing this makes only sense before enqueueing the request
+     * \note changing this makes only sense in Pending state.
      */
-    void setPriority ( Priority prio );
+    void setPriority ( Priority prio, bool triggerReschedule = true );
 
     /*!
      * Returns the requested priority of the NetworkRequest

@@ -877,9 +877,12 @@ namespace zyppng {
     d_func()->_expectedFileSize = std::move( expectedFileSize );
   }
 
-  void NetworkRequest::setPriority(NetworkRequest::Priority prio)
+  void NetworkRequest::setPriority( NetworkRequest::Priority prio, bool triggerReschedule )
   {
-    d_func()->_priority = prio;
+    Z_D();
+    d->_priority = prio;
+    if ( state() == Pending && triggerReschedule && d->_dispatcher )
+      d->_dispatcher->reschedule();
   }
 
   NetworkRequest::Priority NetworkRequest::priority() const
