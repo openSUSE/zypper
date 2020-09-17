@@ -48,6 +48,25 @@ using zypp::xml::escape;
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
+  namespace
+  {
+    repo::RepoType probeCache( const Pathname & path_r )
+    {
+      repo::RepoType ret = repo::RepoType::NONE;
+      if ( PathInfo(path_r).isDir() )
+      {
+	if ( PathInfo(path_r/"/repodata/repomd.xml").isFile() )
+	{ ret = repo::RepoType::RPMMD; }
+	else if ( PathInfo(path_r/"/content").isFile() )
+	{ ret = repo::RepoType::YAST2; }
+	else if ( PathInfo(path_r/"/cookie").isFile() )
+	{ ret = repo::RepoType::RPMPLAINDIR; }
+      }
+      MIL << "Probed cached type " << ret << " at " << path_r << endl;
+      return ret;
+    }
+  } // namespace
+
   ///////////////////////////////////////////////////////////////////
   //
   //	CLASS NAME : RepoInfo::Impl
@@ -60,9 +79,9 @@ namespace zypp
       , _rawRepoGpgCheck( indeterminate )
       , _rawPkgGpgCheck( indeterminate )
       , _validRepoSignature( indeterminate )
+      , _type(repo::RepoType::NONE_e)
       ,	keeppackages(indeterminate)
       , _mirrorListForceMetalink(false)
-      , type(repo::RepoType::NONE_e)
       , emptybaseurls(false)
     {}
 
@@ -73,14 +92,20 @@ namespace zypp
     static const unsigned defaultPriority = 99;
     static const unsigned noPriority = unsigned(-1);
 
+    void setType( const repo::RepoType & t )
+    { _type = t; }
+
     void setProbedType( const repo::RepoType & t ) const
     {
-      if ( type == repo::RepoType::NONE
-           && t != repo::RepoType::NONE )
-      {
-        // lazy init!
-        const_cast<Impl*>(this)->type = t;
-      }
+      if ( _type == repo::RepoType::NONE && t != repo::RepoType::NONE )
+      { const_cast<Impl*>(this)->_type = t; }
+    }
+
+    repo::RepoType type() const
+    {
+      if ( _type == repo::RepoType::NONE )
+	setProbedType( probeCache( metadataPath() / path ) );
+      return _type;
     }
 
   public:
@@ -290,12 +315,12 @@ namespace zypp
     { return indeterminate(_rawGpgCheck) && indeterminate(_rawPkgGpgCheck) ? ZConfig::instance().pkgGpgCheck() : _rawPkgGpgCheck; }
 
   private:
-    TriBool _validRepoSignature;///< have  signed and valid repo metadata
+    TriBool _validRepoSignature; ///< have  signed and valid repo metadata
+    repo::RepoType _type;
   public:
     TriBool keeppackages;
     RepoVariablesReplacedUrl _mirrorListUrl;
     bool                     _mirrorListForceMetalink;
-    repo::RepoType type;
     Pathname path;
     std::string service;
     std::string targetDistro;
@@ -622,7 +647,7 @@ namespace zypp
   { _pimpl->path = path; }
 
   void RepoInfo::setType( const repo::RepoType &t )
-  { _pimpl->type = t; }
+  { _pimpl->setType( t ); }
 
   void RepoInfo::setProbedType( const repo::RepoType &t ) const
   { _pimpl->setProbedType( t ); }
@@ -656,7 +681,7 @@ namespace zypp
   { return _pimpl->usesAutoMethadataPaths(); }
 
   repo::RepoType RepoInfo::type() const
-  { return _pimpl->type; }
+  { return _pimpl->type(); }
 
   Url RepoInfo::mirrorListUrl() const			// Variables replaced!
   { return _pimpl->_mirrorListUrl.transformed(); }
