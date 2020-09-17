@@ -99,10 +99,18 @@ class VendorAttr
     bool addVendorFile( const Pathname & filename_r ) const ZYPP_DEPRECATED;
 #endif
 
+    /** Preferred type to pass equivalent vendor strings. */
+    typedef std::vector<std::string> VendorList;
+
     /**
-     * Adding a new equivalent vendor set from string container (via \ref C_Str)
-     * \note The container must own the strings returned by the iterator.
+     * Adding new equivalent vendor strings container.
      **/
+    void addVendorList( VendorList && list_r )
+    { _addVendorList( std::move(list_r) ); }
+    /** \overload copying the data */
+    void addVendorList( const VendorList & list_r )
+    { _addVendorList( VendorList(list_r) ); }
+    /** \overload from arbitrary string container */
     template <class TContainer>
     void addVendorList( const TContainer & container_r )
     {
@@ -111,7 +119,7 @@ class VendorAttr
 	tmp.push_back( std::string(el) );
       _addVendorList( std::move(tmp) );
     }
-    /** \overload for std::initializer_list */
+    /** \overload from std::initializer_list */
     template <class TStr>
     void addVendorList( const std::initializer_list<TStr> & container_r )
     {
@@ -136,8 +144,6 @@ class VendorAttr
 
   public:
     class Impl;                 ///< Implementation class.
-    typedef std::vector<std::string> VendorList;
-  private:
     RWCOW_pointer<Impl> _pimpl; ///< Pointer to implementation.
 
 #if LEGACY(1722)
