@@ -214,6 +214,8 @@ ELSE()
     MESSAGE( FATAL_ERROR " libsolv not found" )
   ELSE()
     INCLUDE_DIRECTORIES( ${LibSolv_INCLUDE_DIRS} )
+    # static case: Assert libsolv.a ist the last one linked
+    SET(LibSolv_LIBRARIES ${LibSolv_LIBRARIES} ${LIBSOLV_LIBRARY})
   ENDIF()
 ENDIF( LIBSOLV_SRCDIR AND LIBSOLV_BUILDDIR )
 
