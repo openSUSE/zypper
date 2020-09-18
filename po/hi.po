@@ -4,11 +4,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypp.hi\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-05 14:22+0100\n"
+"POT-Creation-Date: 2020-09-18 16:45+0200\n"
 "PO-Revision-Date: 2020-06-29 19:45+0000\n"
 "Last-Translator: Panwar <caspian7pena@gmail.com>\n"
-"Language-Team: Hindi <https://l10n.opensuse.org/projects/libzypp/master/hi/>"
-"\n"
+"Language-Team: Hindi <https://l10n.opensuse.org/projects/libzypp/master/hi/"
+">\n"
 "Language: hi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1295,53 +1295,53 @@ msgstr ""
 msgid "Supplements"
 msgstr ""
 
-#: zypp/ExternalProgram.cc:268
+#: zypp/ExternalProgram.cc:269
 #, fuzzy, c-format, boost-format
 msgid "Can't open pty (%s)."
 msgstr "Couldn't open file: %s."
 
-#: zypp/ExternalProgram.cc:279
+#: zypp/ExternalProgram.cc:280
 #, fuzzy, c-format, boost-format
 msgid "Can't open pipe (%s)."
 msgstr "फाइल %1 को नहीं खोल सकता है।"
 
-#: zypp/ExternalProgram.cc:362
+#: zypp/ExternalProgram.cc:365
 #, c-format, boost-format
 msgid "Can't chroot to '%s' (%s)."
 msgstr ""
 
-#: zypp/ExternalProgram.cc:372
+#: zypp/ExternalProgram.cc:375
 #, c-format, boost-format
 msgid "Can't chdir to '%s' inside chroot '%s' (%s)."
 msgstr ""
 
-#: zypp/ExternalProgram.cc:373
+#: zypp/ExternalProgram.cc:376
 #, fuzzy, c-format, boost-format
 msgid "Can't chdir to '%s' (%s)."
 msgstr "%s को नहीं ढूंढ सकता।"
 
 #. don't want to get here
-#: zypp/ExternalProgram.cc:385
+#: zypp/ExternalProgram.cc:405
 #, c-format, boost-format
 msgid "Can't exec '%s' (%s)."
 msgstr ""
 
-#: zypp/ExternalProgram.cc:393
+#: zypp/ExternalProgram.cc:413
 #, fuzzy, c-format, boost-format
 msgid "Can't fork (%s)."
 msgstr "%s को नहीं ढूंढ सकता।"
 
-#: zypp/ExternalProgram.cc:522
+#: zypp/ExternalProgram.cc:542
 #, c-format, boost-format
 msgid "Command exited with status %d."
 msgstr ""
 
-#: zypp/ExternalProgram.cc:542
+#: zypp/ExternalProgram.cc:562
 #, c-format, boost-format
 msgid "Command was killed by signal %d (%s)."
 msgstr ""
 
-#: zypp/ExternalProgram.cc:547
+#: zypp/ExternalProgram.cc:567
 #, fuzzy
 msgid "Command exited with unknown error."
 msgstr "जब कनेक्ट हो रहे हों तब चलाया जाने वाला कमांड"
@@ -3769,20 +3769,20 @@ msgstr[1] ""
 
 #. translator: %1% is a gpg key ID like 3DBDC284
 #. %2% is a cache directories path
-#: zypp/RepoInfo.cc:517
+#: zypp/RepoInfo.cc:542
 #, boost-format
 msgid "Looking for gpg key ID %1% in cache %2%."
 msgstr ""
 
 #. translator: %1% is a gpg key ID like 3DBDC284
 #. %2% is a repositories name
-#: zypp/RepoInfo.cc:545
+#: zypp/RepoInfo.cc:570
 #, boost-format
 msgid "Looking for gpg key ID %1% in repository %2%."
 msgstr ""
 
 #. translator: %1% is a repositories name
-#: zypp/RepoInfo.cc:569
+#: zypp/RepoInfo.cc:594
 #, boost-format
 msgid "Repository %1% does not define additional 'gpgkey=' URLs."
 msgstr ""
@@ -3793,7 +3793,7 @@ msgid "Cannot read repo directory '%1%': Permission denied"
 msgstr ""
 
 #. TranslatorExplanation '%s' is a pathname
-#: zypp/RepoManager.cc:320 zypp/RepoManager.cc:783 zypp/RepoManager.cc:1536
+#: zypp/RepoManager.cc:320 zypp/RepoManager.cc:783 zypp/RepoManager.cc:1540
 #: zypp/repo/PluginServices.cc:49
 #, fuzzy, c-format, boost-format
 msgid "Failed to read directory '%s'"
@@ -3813,8 +3813,8 @@ msgid "Service alias cannot start with dot."
 msgstr ""
 
 #. TranslatorExplanation '%s' is a filename
-#: zypp/RepoManager.cc:738 zypp/RepoManager.cc:1654 zypp/RepoManager.cc:1720
-#: zypp/RepoManager.cc:1798 zypp/RepoManager.cc:1863 zypp/RepoManager.cc:1994
+#: zypp/RepoManager.cc:738 zypp/RepoManager.cc:1658 zypp/RepoManager.cc:1724
+#: zypp/RepoManager.cc:1802 zypp/RepoManager.cc:1867 zypp/RepoManager.cc:1998
 #, fuzzy, c-format, boost-format
 msgid "Can't open file '%s' for writing."
 msgstr "लेखन के लिए फाइल नहीं खोल सकता है।"
@@ -3834,32 +3834,32 @@ msgid_plural "Valid metadata not found at specified URLs"
 msgstr[0] ""
 msgstr[1] ""
 
-#: zypp/RepoManager.cc:1140 zypp/RepoManager.cc:1252 zypp/RepoManager.cc:1308
+#: zypp/RepoManager.cc:1144 zypp/RepoManager.cc:1256 zypp/RepoManager.cc:1312
 #, fuzzy, c-format, boost-format
 msgid "Can't create %s"
 msgstr "डेस्कटॉप आइटम '%s'"
 
-#: zypp/RepoManager.cc:1148
+#: zypp/RepoManager.cc:1152
 #, fuzzy
 msgid "Can't create metadata cache directory."
 msgstr "डायरेक्टरी को सृजित नहीं कर सकता %1 : %2"
 
-#: zypp/RepoManager.cc:1294
+#: zypp/RepoManager.cc:1298
 #, c-format, boost-format
 msgid "Building repository '%s' cache"
 msgstr ""
 
-#: zypp/RepoManager.cc:1314
+#: zypp/RepoManager.cc:1318
 #, c-format, boost-format
 msgid "Can't create cache at %s - no writing permissions."
 msgstr ""
 
-#: zypp/RepoManager.cc:1379
+#: zypp/RepoManager.cc:1383
 #, fuzzy, c-format, boost-format
 msgid "Failed to cache repo (%d)."
 msgstr "Failed to parse: %s."
 
-#: zypp/RepoManager.cc:1390
+#: zypp/RepoManager.cc:1394
 msgid "Unhandled repository type"
 msgstr ""
 
@@ -3869,44 +3869,44 @@ msgstr ""
 #. on ftp file-not-found(bnc #335906). Instead we'll check another types
 #. before throwing.
 #. TranslatorExplanation '%s' is an URL
-#: zypp/RepoManager.cc:1427 zypp/RepoManager.cc:2489
+#: zypp/RepoManager.cc:1431 zypp/RepoManager.cc:2493
 #, c-format, boost-format
 msgid "Error trying to read from '%s'"
 msgstr ""
 
 #. TranslatorExplanation '%s' is an URL
-#: zypp/RepoManager.cc:1480 zypp/RepoManager.cc:2497
+#: zypp/RepoManager.cc:1484 zypp/RepoManager.cc:2501
 #, fuzzy, c-format, boost-format
 msgid "Unknown error reading from '%s'"
 msgstr "फ्लोपी डिस्क पढ़ने में त्रुटि।"
 
-#: zypp/RepoManager.cc:1618
+#: zypp/RepoManager.cc:1622
 #, fuzzy, c-format, boost-format
 msgid "Adding repository '%s'"
 msgstr "संसाधन जोड़ रहा"
 
 #. TranslatorExplanation '%s' is an URL
-#: zypp/RepoManager.cc:1706
+#: zypp/RepoManager.cc:1710
 #, fuzzy, c-format, boost-format
 msgid "Invalid repo file name at '%s'"
 msgstr "अमान्य निर्यात फाइलनाम।"
 
-#: zypp/RepoManager.cc:1747
+#: zypp/RepoManager.cc:1751
 #, fuzzy, c-format, boost-format
 msgid "Removing repository '%s'"
 msgstr "संसाधन जोड़ रहा"
 
-#: zypp/RepoManager.cc:1766 zypp/RepoManager.cc:1844
+#: zypp/RepoManager.cc:1770 zypp/RepoManager.cc:1848
 msgid "Can't figure out where the repo is stored."
 msgstr ""
 
 #. TranslatorExplanation '%s' is a filename
-#: zypp/RepoManager.cc:1780 zypp/RepoManager.cc:1982
+#: zypp/RepoManager.cc:1784 zypp/RepoManager.cc:1986
 #, fuzzy, c-format, boost-format
 msgid "Can't delete '%s'"
 msgstr "डेस्कटॉप आइटम '%s'"
 
-#: zypp/RepoManager.cc:1970 zypp/RepoManager.cc:2420
+#: zypp/RepoManager.cc:1974 zypp/RepoManager.cc:2424
 msgid "Can't figure out where the service is stored."
 msgstr ""
 
@@ -4030,18 +4030,20 @@ msgid "Invalid regular expression '%s'"
 msgstr "अमान्य Url स्कीम '%s'"
 
 #. !\todo add comma to the message for the next release
-#: zypp/media/MediaCIFS.cc:427 zypp/media/MediaCurl.cc:1738
+#: zypp/media/MediaCIFS.cc:427 zypp/media/MediaCurl.cc:1382
 #, c-format, boost-format
 msgid "Authentication required for '%s'"
 msgstr ""
 
-#: zypp/media/MediaCurl.cc:1111
+#: zypp/media/MediaCurl.cc:755
+#: zypp/zyppng/media/network/networkrequesterror.cc:116
 msgid ""
 "Visit the SUSE Customer Center to check whether your registration is valid "
 "and has not expired."
 msgstr ""
 
-#: zypp/media/MediaCurl.cc:1113
+#: zypp/media/MediaCurl.cc:757
+#: zypp/zyppng/media/network/networkrequesterror.cc:118
 msgid ""
 "Visit the Novell Customer Center to check whether your registration is valid "
 "and has not expired."
@@ -4068,6 +4070,7 @@ msgid "Medium not opened when trying to perform action '%s'."
 msgstr ""
 
 #: zypp/media/MediaException.cc:58
+#: zypp/zyppng/media/network/networkrequesterror.cc:127
 #, fuzzy, c-format, boost-format
 msgid "File '%s' not found on medium '%s'"
 msgstr "कोष में फाइल %1 नहीं प्राप्त हुई।"
@@ -4171,6 +4174,7 @@ msgid "Permission to access '%s' denied."
 msgstr "अनुमति अस्वीकृत"
 
 #: zypp/media/MediaException.cc:189
+#: zypp/zyppng/media/network/networkrequesterror.cc:111
 #, c-format, boost-format
 msgid "Timeout exceeded when accessing '%s'."
 msgstr ""
@@ -4181,6 +4185,7 @@ msgid "Downloaded data exceeded the expected filesize '%s' of '%s'."
 msgstr ""
 
 #: zypp/media/MediaException.cc:205
+#: zypp/zyppng/media/network/networkrequesterror.cc:107
 #, c-format, boost-format
 msgid "Location '%s' is temporarily unaccessible."
 msgstr ""
@@ -4190,18 +4195,18 @@ msgstr ""
 msgid " SSL certificate problem, verify that the CA cert is OK for '%s'."
 msgstr ""
 
-#: zypp/media/MediaHandler.cc:370
+#: zypp/media/MediaHandler.cc:369
 msgid ""
 "Create attach point: Can't find a writable directory to create an attach "
 "point"
 msgstr ""
 
-#: zypp/media/MediaUserAuth.cc:136
+#: zypp/media/MediaUserAuth.cc:140
 #, c-format, boost-format
 msgid "Unsupported HTTP authentication method '%s'"
 msgstr ""
 
-#: zypp/misc/CheckAccessDeleted.cc:444
+#: zypp/misc/CheckAccessDeleted.cc:452
 msgid "Please install package 'lsof' first."
 msgstr ""
 
@@ -4359,7 +4364,7 @@ msgid ""
 "     %4%"
 msgstr ""
 
-#: zypp/sat/detail/PoolImpl.cc:193
+#: zypp/sat/detail/PoolImpl.cc:195
 #, fuzzy
 msgid "Can not create sat-pool."
 msgstr "फाइल को सृजित नहीं कर सकता है।"
@@ -4375,222 +4380,222 @@ msgstr "सिर्फ यहां पर इस आवश्यकता क�
 msgid "generally ignore of some dependencies"
 msgstr "सिर्फ यहां पर इस आवश्यकता की अनदेखी कर दें"
 
-#: zypp/solver/detail/SATResolver.cc:1060
+#: zypp/solver/detail/SATResolver.cc:1072
 #, c-format, boost-format
 msgid "%s does not belong to a distupgrade repository"
 msgstr ""
 
-#: zypp/solver/detail/SATResolver.cc:1063
+#: zypp/solver/detail/SATResolver.cc:1075
 #, fuzzy, c-format, boost-format
 msgid "%s has inferior architecture"
 msgstr "%s ही %s प्रदान करता है, लेकिन इसके पास कोई और स्थापत्य है।"
 
-#: zypp/solver/detail/SATResolver.cc:1066
+#: zypp/solver/detail/SATResolver.cc:1078
 #, fuzzy, c-format, boost-format
 msgid "problem with installed package %s"
 msgstr "पैकेजों को असंस्थापित करने का कमांड"
 
-#: zypp/solver/detail/SATResolver.cc:1069
+#: zypp/solver/detail/SATResolver.cc:1081
 #, fuzzy
 msgid "conflicting requests"
 msgstr "के लिए कनेक्शन आवेदन : "
 
-#: zypp/solver/detail/SATResolver.cc:1072
+#: zypp/solver/detail/SATResolver.cc:1084
 #, fuzzy
 msgid "some dependency problem"
 msgstr "निर्भरता समस्याओं के कारण %s का संस्थापन नहीं कर सकता"
 
-#: zypp/solver/detail/SATResolver.cc:1075
+#: zypp/solver/detail/SATResolver.cc:1087
 #, fuzzy, c-format, boost-format
 msgid "nothing provides requested %s"
 msgstr "कोई नहीं %s प्रदान करता"
 
-#: zypp/solver/detail/SATResolver.cc:1076
-#: zypp/solver/detail/SATResolver.cc:1080
+#: zypp/solver/detail/SATResolver.cc:1088
+#: zypp/solver/detail/SATResolver.cc:1092
 msgid "Have you enabled all requested repositories?"
 msgstr ""
 
-#: zypp/solver/detail/SATResolver.cc:1079
+#: zypp/solver/detail/SATResolver.cc:1091
 #, fuzzy, c-format, boost-format
 msgid "package %s does not exist"
 msgstr "प्रमाण पत्र %1 मौजूद नहीं है।"
 
-#: zypp/solver/detail/SATResolver.cc:1083
+#: zypp/solver/detail/SATResolver.cc:1095
 msgid "unsupported request"
 msgstr ""
 
-#: zypp/solver/detail/SATResolver.cc:1086
+#: zypp/solver/detail/SATResolver.cc:1098
 #, fuzzy, c-format, boost-format
 msgid "%s is provided by the system and cannot be erased"
 msgstr "%s लॉक हो गया है और इसे असंस्थापित नहीं किया जा सकता।"
 
-#: zypp/solver/detail/SATResolver.cc:1089
+#: zypp/solver/detail/SATResolver.cc:1101
 #, fuzzy, c-format, boost-format
 msgid "%s is not installable"
 msgstr "इंस्टाल नहीं हुआ"
 
 #. for setting weak dependencies
-#: zypp/solver/detail/SATResolver.cc:1093
+#: zypp/solver/detail/SATResolver.cc:1105
 #, fuzzy, c-format, boost-format
 msgid "nothing provides %s needed by %s"
 msgstr "%s को %s की आवश्यकता है"
 
-#: zypp/solver/detail/SATResolver.cc:1096
+#: zypp/solver/detail/SATResolver.cc:1108
 #, fuzzy, c-format, boost-format
 msgid "cannot install both %s and %s"
 msgstr "%s का संस्थापन नहीं कर सकता"
 
-#: zypp/solver/detail/SATResolver.cc:1099
+#: zypp/solver/detail/SATResolver.cc:1111
 #, fuzzy, c-format, boost-format
 msgid "%s conflicts with %s provided by %s"
 msgstr "%s का %s से टकराव है "
 
-#: zypp/solver/detail/SATResolver.cc:1102
+#: zypp/solver/detail/SATResolver.cc:1114
 #, fuzzy, c-format, boost-format
 msgid "%s obsoletes %s provided by %s"
 msgstr "%s को %s पुराना कर देता है"
 
-#: zypp/solver/detail/SATResolver.cc:1105
+#: zypp/solver/detail/SATResolver.cc:1117
 #, fuzzy, c-format, boost-format
 msgid "installed %s obsoletes %s provided by %s"
 msgstr "%s को %s पुराना कर देता है"
 
-#: zypp/solver/detail/SATResolver.cc:1108
+#: zypp/solver/detail/SATResolver.cc:1120
 #, fuzzy, c-format, boost-format
 msgid "solvable %s conflicts with %s provided by itself"
 msgstr "%s का %s से टकराव है "
 
-#: zypp/solver/detail/SATResolver.cc:1139
+#: zypp/solver/detail/SATResolver.cc:1151
 #, c-format, boost-format
 msgid "%s requires %s, but this requirement cannot be provided"
 msgstr ""
 
-#: zypp/solver/detail/SATResolver.cc:1141
+#: zypp/solver/detail/SATResolver.cc:1153
 #, fuzzy
 msgid "deleted providers: "
 msgstr "कोई नहीं %s प्रदान करता"
 
-#: zypp/solver/detail/SATResolver.cc:1151
+#: zypp/solver/detail/SATResolver.cc:1163
 #, fuzzy
 msgid ""
 "\n"
 "not installable providers: "
 msgstr "%s का कोई संस्थापनयोग्य प्रदाता नहीं है"
 
-#: zypp/solver/detail/SATResolver.cc:1153
+#: zypp/solver/detail/SATResolver.cc:1165
 #, fuzzy
 msgid "not installable providers: "
 msgstr "%s का कोई संस्थापनयोग्य प्रदाता नहीं है"
 
-#: zypp/solver/detail/SATResolver.cc:1215
+#: zypp/solver/detail/SATResolver.cc:1227
 #, c-format, boost-format
 msgid "remove lock to allow removal of %s"
 msgstr ""
 
-#: zypp/solver/detail/SATResolver.cc:1220
-#: zypp/solver/detail/SATResolver.cc:1256
+#: zypp/solver/detail/SATResolver.cc:1232
+#: zypp/solver/detail/SATResolver.cc:1268
 #, c-format, boost-format
 msgid "do not install %s"
 msgstr "%s संस्थापित न करें"
 
-#: zypp/solver/detail/SATResolver.cc:1235
-#: zypp/solver/detail/SATResolver.cc:1277
+#: zypp/solver/detail/SATResolver.cc:1247
+#: zypp/solver/detail/SATResolver.cc:1289
 #, c-format, boost-format
 msgid "keep %s"
 msgstr "%s रखें"
 
-#: zypp/solver/detail/SATResolver.cc:1240
+#: zypp/solver/detail/SATResolver.cc:1252
 #, fuzzy, c-format, boost-format
 msgid "remove lock to allow installation of %s"
 msgstr "%s संस्थापित न करें"
 
-#: zypp/solver/detail/SATResolver.cc:1291
-#: zypp/solver/detail/SATResolver.cc:1312
+#: zypp/solver/detail/SATResolver.cc:1303
+#: zypp/solver/detail/SATResolver.cc:1324
 #, fuzzy
 msgid "This request will break your system!"
 msgstr "अनुरोध पहले से ही मौजूद है।"
 
-#: zypp/solver/detail/SATResolver.cc:1292
-#: zypp/solver/detail/SATResolver.cc:1313
+#: zypp/solver/detail/SATResolver.cc:1304
+#: zypp/solver/detail/SATResolver.cc:1325
 msgid "ignore the warning of a broken system"
 msgstr ""
 
-#: zypp/solver/detail/SATResolver.cc:1297
+#: zypp/solver/detail/SATResolver.cc:1309
 #, fuzzy, c-format, boost-format
 msgid "do not ask to install a solvable providing %s"
 msgstr "%s का कोई संस्थापनयोग्य प्रदाता नहीं है"
 
-#: zypp/solver/detail/SATResolver.cc:1319
+#: zypp/solver/detail/SATResolver.cc:1331
 #, fuzzy, c-format, boost-format
 msgid "do not ask to delete all solvables providing %s"
 msgstr "संबंधित रिजॉल्वेबल को संस्थापित या मिटाएं नहीं"
 
-#: zypp/solver/detail/SATResolver.cc:1332
+#: zypp/solver/detail/SATResolver.cc:1344
 #, c-format, boost-format
 msgid "do not install most recent version of %s"
 msgstr ""
 
-#: zypp/solver/detail/SATResolver.cc:1353
+#: zypp/solver/detail/SATResolver.cc:1365
 #, fuzzy, c-format, boost-format
 msgid "keep %s despite the inferior architecture"
 msgstr "%s ही %s प्रदान करता है, लेकिन इसके पास कोई और स्थापत्य है।"
 
-#: zypp/solver/detail/SATResolver.cc:1358
+#: zypp/solver/detail/SATResolver.cc:1370
 #, fuzzy, c-format, boost-format
 msgid "install %s despite the inferior architecture"
 msgstr "%s को संस्थापित करें यद्यपि यह स्थापत्य को बदल देगा"
 
-#: zypp/solver/detail/SATResolver.cc:1367
+#: zypp/solver/detail/SATResolver.cc:1379
 #, fuzzy, c-format, boost-format
 msgid "keep obsolete %s"
 msgstr "%s को %s पुराना कर देता है"
 
-#: zypp/solver/detail/SATResolver.cc:1372
+#: zypp/solver/detail/SATResolver.cc:1384
 #, c-format, boost-format
 msgid "install %s from excluded repository"
 msgstr ""
 
 #. translator: %1% is a package name
-#: zypp/solver/detail/SATResolver.cc:1386
+#: zypp/solver/detail/SATResolver.cc:1398
 #, boost-format
 msgid "install %1% although it has been retracted"
 msgstr ""
 
 #. translator: %1% is a package name
-#: zypp/solver/detail/SATResolver.cc:1389
+#: zypp/solver/detail/SATResolver.cc:1401
 #, boost-format
 msgid "allow to install the PTF %1%"
 msgstr ""
 
 #. translator: %1% is a package name
-#: zypp/solver/detail/SATResolver.cc:1392
+#: zypp/solver/detail/SATResolver.cc:1404
 #, boost-format
 msgid "install %1% although it is blacklisted"
 msgstr ""
 
-#: zypp/solver/detail/SATResolver.cc:1412
+#: zypp/solver/detail/SATResolver.cc:1424
 #, fuzzy, c-format, boost-format
 msgid "downgrade of %s to %s"
 msgstr "%s से %s तक अपडेट कर रहा है"
 
-#: zypp/solver/detail/SATResolver.cc:1419
+#: zypp/solver/detail/SATResolver.cc:1431
 #, c-format, boost-format
 msgid "architecture change of %s to %s"
 msgstr ""
 
-#: zypp/solver/detail/SATResolver.cc:1428
+#: zypp/solver/detail/SATResolver.cc:1440
 #, c-format, boost-format
 msgid ""
 "install %s (with vendor change)\n"
 "  %s  -->  %s"
 msgstr ""
 
-#: zypp/solver/detail/SATResolver.cc:1437
+#: zypp/solver/detail/SATResolver.cc:1449
 #, c-format, boost-format
 msgid "replacement of %s with %s"
 msgstr ""
 
-#: zypp/solver/detail/SATResolver.cc:1448
+#: zypp/solver/detail/SATResolver.cc:1460
 #, fuzzy, c-format, boost-format
 msgid "deinstallation of %s"
 msgstr "अधिष्ठापन"
@@ -4607,16 +4612,16 @@ msgstr ""
 msgid "Executing %posttrans scripts"
 msgstr ""
 
-#: zypp/target/TargetException.cc:28
+#: zypp/target/TargetException.cc:27
 msgid "Installation has been aborted as directed."
 msgstr "जैसा निर्देशित था, संस्थापन छोड़ दिया गया।"
 
-#: zypp/target/TargetImpl.cc:313
+#: zypp/target/TargetImpl.cc:347
 #, fuzzy
 msgid " executed"
 msgstr "निष्‍पादन"
 
-#: zypp/target/TargetImpl.cc:335
+#: zypp/target/TargetImpl.cc:369
 #, fuzzy
 msgid " execution failed"
 msgstr "DBI Execution failed: %s"
@@ -4624,65 +4629,65 @@ msgstr "DBI Execution failed: %s"
 #. translators: We may find the same script content in files with different names.
 #. Only the first occurence is executed, subsequent ones are skipped. It's a one-line
 #. message for a log file. Preferably start translation with "%s"
-#: zypp/target/TargetImpl.cc:452
+#: zypp/target/TargetImpl.cc:486
 #, c-format, boost-format
 msgid "%s already executed as %s)"
 msgstr ""
 
-#: zypp/target/TargetImpl.cc:462
+#: zypp/target/TargetImpl.cc:496
 msgid " execution skipped while aborting"
 msgstr ""
 
-#: zypp/target/TargetImpl.cc:517 zypp/target/TargetImpl.cc:537
-#: zypp/target/TargetImpl.cc:565 zypp/target/TargetImpl.cc:602
-#: zypp/target/TargetImpl.cc:610
+#: zypp/target/TargetImpl.cc:551 zypp/target/TargetImpl.cc:571
+#: zypp/target/TargetImpl.cc:599 zypp/target/TargetImpl.cc:636
+#: zypp/target/TargetImpl.cc:644
 #, fuzzy
 msgid "Error sending update message notification."
 msgstr "कुंजी एन्क्रिप्शन के दौरान त्रुटि।"
 
-#: zypp/target/TargetImpl.cc:661
+#: zypp/target/TargetImpl.cc:695
 msgid "New update message"
 msgstr ""
 
 #. TranslatorExplanation after semicolon is error message
 #. TranslatorExplanation the colon is followed by an error message
-#: zypp/target/rpm/RpmDb.cc:843 zypp/target/rpm/RpmDb.cc:2123
-#: zypp/target/rpm/RpmDb.cc:2269
+#: zypp/target/rpm/RpmDb.cc:470 zypp/target/rpm/RpmDb.cc:1731
+#: zypp/target/rpm/RpmDb.cc:1887
 #, fuzzy
 msgid "RPM failed: "
 msgstr "विफल"
 
 #. Translator: %1% is a gpg public key
-#: zypp/target/rpm/RpmDb.cc:1173
+#: zypp/target/rpm/RpmDb.cc:795
 #, boost-format
 msgid "Failed to import public key %1%"
 msgstr ""
 
 #. Translator: %1% is a gpg public key
-#: zypp/target/rpm/RpmDb.cc:1243
+#: zypp/target/rpm/RpmDb.cc:862
 #, boost-format
 msgid "Failed to remove public key %1%"
 msgstr ""
 
-#: zypp/target/rpm/RpmDb.cc:1629
+#: zypp/target/rpm/RpmDb.cc:1250
 msgid "Package is not signed!"
 msgstr ""
 
 #. Translator: %s = name of an rpm package. A list of diffs follows
 #. this message.
-#: zypp/target/rpm/RpmDb.cc:1929
+#: zypp/target/rpm/RpmDb.cc:1529
 #, c-format, boost-format
 msgid "Changed configuration files for %s:"
 msgstr "%s हेतु विन्यास फ़ाइलें जिन्हें बदला गया :"
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:2104
+#: zypp/target/rpm/RpmDb.cc:1712
 #, fuzzy, c-format, boost-format
 msgid "rpm saved %s as %s, but it was impossible to determine the difference"
 msgstr "rpm ने %s के  रूप में %s सहेजा लेकिन अंतर निर्धारित करना असंभव था "
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:2106
+#: zypp/target/rpm/RpmDb.cc:1714
 #, c-format, boost-format
 msgid ""
 "rpm saved %s as %s.\n"
@@ -4692,13 +4697,13 @@ msgstr ""
 "यहां अंतर की पहली 25 पंक्तियां हैं :\n"
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:2109
+#: zypp/target/rpm/RpmDb.cc:1717
 #, fuzzy, c-format, boost-format
 msgid "rpm created %s as %s, but it was impossible to determine the difference"
 msgstr "rpm ने %s के  रूप में %s सृजित किया लेकिन अंतर निर्धारित करना असंभव था"
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:2111
+#: zypp/target/rpm/RpmDb.cc:1719
 #, c-format, boost-format
 msgid ""
 "rpm created %s as %s.\n"
@@ -4709,51 +4714,51 @@ msgstr ""
 
 #. report additional rpm output in finish
 #. TranslatorExplanation Text is followed by a ':'  and the actual output.
-#: zypp/target/rpm/RpmDb.cc:2136 zypp/target/rpm/RpmDb.cc:2282
+#: zypp/target/rpm/RpmDb.cc:1744 zypp/target/rpm/RpmDb.cc:1900
 #, fuzzy
 msgid "Additional rpm output"
 msgstr "अतिरिक्त rpm आउटपुट :"
 
-#: zypp/target/rpm/RpmDb.cc:2424
+#: zypp/target/rpm/RpmDb.cc:2042
 #, c-format, boost-format
 msgid "created backup %s"
 msgstr "बैकअप %s सृजित"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2445
+#: zypp/target/rpm/RpmDb.cc:2063
 #, fuzzy
 msgid "Signature is OK"
 msgstr "%s %s नहीं मिला"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2447
+#: zypp/target/rpm/RpmDb.cc:2065
 msgid "Unknown type of signature"
 msgstr ""
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2449
+#: zypp/target/rpm/RpmDb.cc:2067
 #, fuzzy
 msgid "Signature does not verify"
 msgstr "%s %s नहीं मिला"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2451
+#: zypp/target/rpm/RpmDb.cc:2069
 #, fuzzy
 msgid "Signature is OK, but key is not trusted"
 msgstr "%s %s नहीं मिला"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2453
+#: zypp/target/rpm/RpmDb.cc:2071
 msgid "Signatures public key is not available"
 msgstr ""
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2455
+#: zypp/target/rpm/RpmDb.cc:2073
 msgid "File does not exist or signature can't be checked"
 msgstr ""
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2457
+#: zypp/target/rpm/RpmDb.cc:2075
 msgid "File is unsigned"
 msgstr ""
 
@@ -4838,6 +4843,20 @@ msgstr "अमान्य मानक मानचित्र सेपरे
 #: zypp/url/UrlUtils.cc:283
 msgid "Invalid parameter array join separator character"
 msgstr "अमान्य मानक क्रमविन्यास सेपरेटर वर्ण जोड़ें"
+
+#: zypp/zyppng/media/network/networkrequesterror.cc:132
+#, c-format, boost-format
+msgid ""
+"Download (curl) error for '%s':\n"
+"Error code: %s\n"
+msgstr ""
+
+#: zypp/zyppng/media/network/networkrequesterror.cc:138
+#, c-format, boost-format
+msgid ""
+"Download (curl) error for '%s':\n"
+"Unable to retrieve HTTP response\n"
+msgstr ""
 
 #, fuzzy
 #~ msgid "Can't open lock file: %s"

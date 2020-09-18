@@ -19,7 +19,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypp.fi\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-05 14:22+0100\n"
+"POT-Creation-Date: 2020-09-18 16:45+0200\n"
 "PO-Revision-Date: 2020-06-28 06:55+0000\n"
 "Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
 "Language-Team: Finnish <https://l10n.opensuse.org/projects/libzypp/master/fi/"
@@ -1428,53 +1428,53 @@ msgstr "Parannukset"
 msgid "Supplements"
 msgstr "Täydentää"
 
-#: zypp/ExternalProgram.cc:268
+#: zypp/ExternalProgram.cc:269
 #, c-format, boost-format
 msgid "Can't open pty (%s)."
 msgstr "pty:n (%s) avaaminen ei onnistu."
 
-#: zypp/ExternalProgram.cc:279
+#: zypp/ExternalProgram.cc:280
 #, c-format, boost-format
 msgid "Can't open pipe (%s)."
 msgstr "Putken (%s) avaaminen ei onnistu."
 
-#: zypp/ExternalProgram.cc:362
+#: zypp/ExternalProgram.cc:365
 #, c-format, boost-format
 msgid "Can't chroot to '%s' (%s)."
 msgstr "Hakemistorajoitus (chroot) ei onnistu hakemistoon \"%s\" (%s)."
 
-#: zypp/ExternalProgram.cc:372
+#: zypp/ExternalProgram.cc:375
 #, c-format, boost-format
 msgid "Can't chdir to '%s' inside chroot '%s' (%s)."
 msgstr "chdir '%s' ei onnistu chroot '%s' sisällä (%s)."
 
-#: zypp/ExternalProgram.cc:373
+#: zypp/ExternalProgram.cc:376
 #, c-format, boost-format
 msgid "Can't chdir to '%s' (%s)."
 msgstr "chdir  '%s' ei onnistu (%s)."
 
 #. don't want to get here
-#: zypp/ExternalProgram.cc:385
+#: zypp/ExternalProgram.cc:405
 #, c-format, boost-format
 msgid "Can't exec '%s' (%s)."
 msgstr "\"%s\" (%s) suorittaminen ei onnistu."
 
-#: zypp/ExternalProgram.cc:393
+#: zypp/ExternalProgram.cc:413
 #, c-format, boost-format
 msgid "Can't fork (%s)."
 msgstr "Haarauttaminen (fork) ei onnistu (%s)."
 
-#: zypp/ExternalProgram.cc:522
+#: zypp/ExternalProgram.cc:542
 #, c-format, boost-format
 msgid "Command exited with status %d."
 msgstr "Komento päättyi tilaan %d."
 
-#: zypp/ExternalProgram.cc:542
+#: zypp/ExternalProgram.cc:562
 #, c-format, boost-format
 msgid "Command was killed by signal %d (%s)."
 msgstr "Komento lopetettiin signaalilla %d (%s)."
 
-#: zypp/ExternalProgram.cc:547
+#: zypp/ExternalProgram.cc:567
 msgid "Command exited with unknown error."
 msgstr "Komento päättyi tuntemattomaan virheeseen."
 
@@ -3974,20 +3974,20 @@ msgstr[1] "(vanhenee %d päivässä)"
 
 #. translator: %1% is a gpg key ID like 3DBDC284
 #. %2% is a cache directories path
-#: zypp/RepoInfo.cc:517
+#: zypp/RepoInfo.cc:542
 #, boost-format
 msgid "Looking for gpg key ID %1% in cache %2%."
 msgstr "Etsitään GPG-avainta %1% välimuistista %2%."
 
 #. translator: %1% is a gpg key ID like 3DBDC284
 #. %2% is a repositories name
-#: zypp/RepoInfo.cc:545
+#: zypp/RepoInfo.cc:570
 #, boost-format
 msgid "Looking for gpg key ID %1% in repository %2%."
 msgstr "Etsitään GPG-avainta %1% asennuslähteestä %2%."
 
 #. translator: %1% is a repositories name
-#: zypp/RepoInfo.cc:569
+#: zypp/RepoInfo.cc:594
 #, boost-format
 msgid "Repository %1% does not define additional 'gpgkey=' URLs."
 msgstr "Asennuslähde %1% ei ole asettanut ”gpgkey=”-lisäverkko-osoitteita."
@@ -3998,7 +3998,7 @@ msgid "Cannot read repo directory '%1%': Permission denied"
 msgstr "repo hakemiston lukeminen ei onnistu '%1%': Pääsy estetty"
 
 #. TranslatorExplanation '%s' is a pathname
-#: zypp/RepoManager.cc:320 zypp/RepoManager.cc:783 zypp/RepoManager.cc:1536
+#: zypp/RepoManager.cc:320 zypp/RepoManager.cc:783 zypp/RepoManager.cc:1540
 #: zypp/repo/PluginServices.cc:49
 #, c-format, boost-format
 msgid "Failed to read directory '%s'"
@@ -4018,8 +4018,8 @@ msgid "Service alias cannot start with dot."
 msgstr "Palvelun alias ei voi alkaa pisteellä."
 
 #. TranslatorExplanation '%s' is a filename
-#: zypp/RepoManager.cc:738 zypp/RepoManager.cc:1654 zypp/RepoManager.cc:1720
-#: zypp/RepoManager.cc:1798 zypp/RepoManager.cc:1863 zypp/RepoManager.cc:1994
+#: zypp/RepoManager.cc:738 zypp/RepoManager.cc:1658 zypp/RepoManager.cc:1724
+#: zypp/RepoManager.cc:1802 zypp/RepoManager.cc:1867 zypp/RepoManager.cc:1998
 #, c-format, boost-format
 msgid "Can't open file '%s' for writing."
 msgstr "Tiedostoa \"%s\" ei voida avata kirjoitusta varten."
@@ -4039,31 +4039,31 @@ msgid_plural "Valid metadata not found at specified URLs"
 msgstr[0] "Annetusta verkko-osoitteesta ei löytynyt kelvollista metatietoa"
 msgstr[1] "Annetuista verkko-osoitteista ei löytynyt kelvollista metatietoa"
 
-#: zypp/RepoManager.cc:1140 zypp/RepoManager.cc:1252 zypp/RepoManager.cc:1308
+#: zypp/RepoManager.cc:1144 zypp/RepoManager.cc:1256 zypp/RepoManager.cc:1312
 #, c-format, boost-format
 msgid "Can't create %s"
 msgstr "Ei voi luoda %s"
 
-#: zypp/RepoManager.cc:1148
+#: zypp/RepoManager.cc:1152
 msgid "Can't create metadata cache directory."
 msgstr "Metatiedon välimuistihakemistoa ei voi luoda."
 
-#: zypp/RepoManager.cc:1294
+#: zypp/RepoManager.cc:1298
 #, c-format, boost-format
 msgid "Building repository '%s' cache"
 msgstr "Rakennetaan asennuslähteen \"%s\" välimuistia"
 
-#: zypp/RepoManager.cc:1314
+#: zypp/RepoManager.cc:1318
 #, c-format, boost-format
 msgid "Can't create cache at %s - no writing permissions."
 msgstr "Välimuistia %s ei voida luoda - ei kirjoitusoikeuksia."
 
-#: zypp/RepoManager.cc:1379
+#: zypp/RepoManager.cc:1383
 #, c-format, boost-format
 msgid "Failed to cache repo (%d)."
 msgstr "Virhe asennuslähteen puskuroinnissa (%d)."
 
-#: zypp/RepoManager.cc:1390
+#: zypp/RepoManager.cc:1394
 msgid "Unhandled repository type"
 msgstr "Virheellinen asennuslähteen tyyppi"
 
@@ -4073,44 +4073,44 @@ msgstr "Virheellinen asennuslähteen tyyppi"
 #. on ftp file-not-found(bnc #335906). Instead we'll check another types
 #. before throwing.
 #. TranslatorExplanation '%s' is an URL
-#: zypp/RepoManager.cc:1427 zypp/RepoManager.cc:2489
+#: zypp/RepoManager.cc:1431 zypp/RepoManager.cc:2493
 #, c-format, boost-format
 msgid "Error trying to read from '%s'"
 msgstr "Virhe luettaessa \"%s\""
 
 #. TranslatorExplanation '%s' is an URL
-#: zypp/RepoManager.cc:1480 zypp/RepoManager.cc:2497
+#: zypp/RepoManager.cc:1484 zypp/RepoManager.cc:2501
 #, c-format, boost-format
 msgid "Unknown error reading from '%s'"
 msgstr "Tuntematon virhe luettaessa \"%s\""
 
-#: zypp/RepoManager.cc:1618
+#: zypp/RepoManager.cc:1622
 #, c-format, boost-format
 msgid "Adding repository '%s'"
 msgstr "Lisätään asennuslähdettä \"%s\""
 
 #. TranslatorExplanation '%s' is an URL
-#: zypp/RepoManager.cc:1706
+#: zypp/RepoManager.cc:1710
 #, c-format, boost-format
 msgid "Invalid repo file name at '%s'"
 msgstr "Virheellinen asennuslähteen tiedostonimi \"%s\""
 
-#: zypp/RepoManager.cc:1747
+#: zypp/RepoManager.cc:1751
 #, c-format, boost-format
 msgid "Removing repository '%s'"
 msgstr "Poistetaan asennuslähdettä \"%s\""
 
-#: zypp/RepoManager.cc:1766 zypp/RepoManager.cc:1844
+#: zypp/RepoManager.cc:1770 zypp/RepoManager.cc:1848
 msgid "Can't figure out where the repo is stored."
 msgstr "Asennuslähteen sijaintia ei voida päätellä."
 
 #. TranslatorExplanation '%s' is a filename
-#: zypp/RepoManager.cc:1780 zypp/RepoManager.cc:1982
+#: zypp/RepoManager.cc:1784 zypp/RepoManager.cc:1986
 #, c-format, boost-format
 msgid "Can't delete '%s'"
 msgstr "\"%s\" poistaminen ei onnistu"
 
-#: zypp/RepoManager.cc:1970 zypp/RepoManager.cc:2420
+#: zypp/RepoManager.cc:1974 zypp/RepoManager.cc:2424
 msgid "Can't figure out where the service is stored."
 msgstr "Palvelun sijaintia ei voida päätellä."
 
@@ -4246,19 +4246,21 @@ msgid "Invalid regular expression '%s'"
 msgstr "Virhe säännöllisessä lausekkeessa \"%s\""
 
 #. !\todo add comma to the message for the next release
-#: zypp/media/MediaCIFS.cc:427 zypp/media/MediaCurl.cc:1738
+#: zypp/media/MediaCIFS.cc:427 zypp/media/MediaCurl.cc:1382
 #, c-format, boost-format
 msgid "Authentication required for '%s'"
 msgstr "\"%s\" vaatii tunnistautumisen"
 
-#: zypp/media/MediaCurl.cc:1111
+#: zypp/media/MediaCurl.cc:755
+#: zypp/zyppng/media/network/networkrequesterror.cc:116
 msgid ""
 "Visit the SUSE Customer Center to check whether your registration is valid "
 "and has not expired."
 msgstr ""
 "Tarkista SUSEn asiakaskeskuksessa käymällä, onko rekisteröitymisesi voimassa."
 
-#: zypp/media/MediaCurl.cc:1113
+#: zypp/media/MediaCurl.cc:757
+#: zypp/zyppng/media/network/networkrequesterror.cc:118
 msgid ""
 "Visit the Novell Customer Center to check whether your registration is valid "
 "and has not expired."
@@ -4287,6 +4289,7 @@ msgid "Medium not opened when trying to perform action '%s'."
 msgstr "Tietolähdettä ei avattu suoritettaessa \"%s\"."
 
 #: zypp/media/MediaException.cc:58
+#: zypp/zyppng/media/network/networkrequesterror.cc:127
 #, c-format, boost-format
 msgid "File '%s' not found on medium '%s'"
 msgstr "Tiedostoa \"%s\" ei löydy tietovälineeltä \"%s\""
@@ -4392,6 +4395,7 @@ msgid "Permission to access '%s' denied."
 msgstr "Pääsy evätty kohteeseen \"%s\"."
 
 #: zypp/media/MediaException.cc:189
+#: zypp/zyppng/media/network/networkrequesterror.cc:111
 #, c-format, boost-format
 msgid "Timeout exceeded when accessing '%s'."
 msgstr "Aikakatkaisu avattaessa \"%s\"."
@@ -4402,6 +4406,7 @@ msgid "Downloaded data exceeded the expected filesize '%s' of '%s'."
 msgstr "Ladattu tieto ylittää odotetun tiedostokoon ”%s”/”%s”."
 
 #: zypp/media/MediaException.cc:205
+#: zypp/zyppng/media/network/networkrequesterror.cc:107
 #, c-format, boost-format
 msgid "Location '%s' is temporarily unaccessible."
 msgstr "\"%s\" ei ole hetkellisesti saatavilla."
@@ -4411,7 +4416,7 @@ msgstr "\"%s\" ei ole hetkellisesti saatavilla."
 msgid " SSL certificate problem, verify that the CA cert is OK for '%s'."
 msgstr " SSL-ongelma: Tarkista että CA-varmenne kuuluu \"%s\"."
 
-#: zypp/media/MediaHandler.cc:370
+#: zypp/media/MediaHandler.cc:369
 msgid ""
 "Create attach point: Can't find a writable directory to create an attach "
 "point"
@@ -4419,12 +4424,12 @@ msgstr ""
 "Luo liitospiste: Kirjoitettavissa olevaa kansiota ei löydy liitospisteen "
 "luomiseksi"
 
-#: zypp/media/MediaUserAuth.cc:136
+#: zypp/media/MediaUserAuth.cc:140
 #, c-format, boost-format
 msgid "Unsupported HTTP authentication method '%s'"
 msgstr "HTTP-tunnistautumistapa \"%s\" ei ole tuettu"
 
-#: zypp/misc/CheckAccessDeleted.cc:444
+#: zypp/misc/CheckAccessDeleted.cc:452
 msgid "Please install package 'lsof' first."
 msgstr "Asenna 'lsof' paketti ensiksi."
 
@@ -4623,7 +4628,7 @@ msgstr ""
 "  asennuksesta\n"
 "     %4%"
 
-#: zypp/sat/detail/PoolImpl.cc:193
+#: zypp/sat/detail/PoolImpl.cc:195
 msgid "Can not create sat-pool."
 msgstr "Sat-varaston luonti ei onnistu."
 
@@ -4637,99 +4642,99 @@ msgstr "jätä %s riippuvuuksia huomioimatta"
 msgid "generally ignore of some dependencies"
 msgstr "jätä joitakin riippuvuuksia huomiotta"
 
-#: zypp/solver/detail/SATResolver.cc:1060
+#: zypp/solver/detail/SATResolver.cc:1072
 #, c-format, boost-format
 msgid "%s does not belong to a distupgrade repository"
 msgstr "%s ei kuulu jakeluversion päivitysasennuslähteeseen"
 
-#: zypp/solver/detail/SATResolver.cc:1063
+#: zypp/solver/detail/SATResolver.cc:1075
 #, c-format, boost-format
 msgid "%s has inferior architecture"
 msgstr "%s on alempaa arkkitehtuuria"
 
-#: zypp/solver/detail/SATResolver.cc:1066
+#: zypp/solver/detail/SATResolver.cc:1078
 #, c-format, boost-format
 msgid "problem with installed package %s"
 msgstr "virhe asennettaessa pakettia %s"
 
-#: zypp/solver/detail/SATResolver.cc:1069
+#: zypp/solver/detail/SATResolver.cc:1081
 msgid "conflicting requests"
 msgstr "ristiriitaiset kyselyt"
 
-#: zypp/solver/detail/SATResolver.cc:1072
+#: zypp/solver/detail/SATResolver.cc:1084
 msgid "some dependency problem"
 msgstr "jokin riippuvuusongelma"
 
-#: zypp/solver/detail/SATResolver.cc:1075
+#: zypp/solver/detail/SATResolver.cc:1087
 #, c-format, boost-format
 msgid "nothing provides requested %s"
 msgstr "Mikään ei tarjoa pyydettyä %s"
 
-#: zypp/solver/detail/SATResolver.cc:1076
-#: zypp/solver/detail/SATResolver.cc:1080
+#: zypp/solver/detail/SATResolver.cc:1088
+#: zypp/solver/detail/SATResolver.cc:1092
 msgid "Have you enabled all requested repositories?"
 msgstr "Oletko ottanut käyttöön kaikki pyydetyt asennuslähteet?"
 
-#: zypp/solver/detail/SATResolver.cc:1079
+#: zypp/solver/detail/SATResolver.cc:1091
 #, c-format, boost-format
 msgid "package %s does not exist"
 msgstr "pakettia %s ei ole olemassa"
 
-#: zypp/solver/detail/SATResolver.cc:1083
+#: zypp/solver/detail/SATResolver.cc:1095
 msgid "unsupported request"
 msgstr "pyyntöä ei tueta"
 
-#: zypp/solver/detail/SATResolver.cc:1086
+#: zypp/solver/detail/SATResolver.cc:1098
 #, c-format, boost-format
 msgid "%s is provided by the system and cannot be erased"
 msgstr "%s on järjestelmän tarjoama ja sitä ei voi poistaa"
 
-#: zypp/solver/detail/SATResolver.cc:1089
+#: zypp/solver/detail/SATResolver.cc:1101
 #, c-format, boost-format
 msgid "%s is not installable"
 msgstr "%s ei ole asennettavissa"
 
 #. for setting weak dependencies
-#: zypp/solver/detail/SATResolver.cc:1093
+#: zypp/solver/detail/SATResolver.cc:1105
 #, c-format, boost-format
 msgid "nothing provides %s needed by %s"
 msgstr "mikään ei tarjoa %s, jota %s tarvitsee"
 
-#: zypp/solver/detail/SATResolver.cc:1096
+#: zypp/solver/detail/SATResolver.cc:1108
 #, c-format, boost-format
 msgid "cannot install both %s and %s"
 msgstr "Ei voida asentaa molempia %s ja %s"
 
-#: zypp/solver/detail/SATResolver.cc:1099
+#: zypp/solver/detail/SATResolver.cc:1111
 #, c-format, boost-format
 msgid "%s conflicts with %s provided by %s"
 msgstr "%s on ristiriidassa %s (%s) kanssa"
 
-#: zypp/solver/detail/SATResolver.cc:1102
+#: zypp/solver/detail/SATResolver.cc:1114
 #, c-format, boost-format
 msgid "%s obsoletes %s provided by %s"
 msgstr "%s vanhentaa %s (%s)"
 
-#: zypp/solver/detail/SATResolver.cc:1105
+#: zypp/solver/detail/SATResolver.cc:1117
 #, c-format, boost-format
 msgid "installed %s obsoletes %s provided by %s"
 msgstr "asennettu %s vanhentaa %s (%s)"
 
-#: zypp/solver/detail/SATResolver.cc:1108
+#: zypp/solver/detail/SATResolver.cc:1120
 #, c-format, boost-format
 msgid "solvable %s conflicts with %s provided by itself"
 msgstr "%s on ristiriidassa itsensä kanssa (%s)"
 
-#: zypp/solver/detail/SATResolver.cc:1139
+#: zypp/solver/detail/SATResolver.cc:1151
 #, c-format, boost-format
 msgid "%s requires %s, but this requirement cannot be provided"
 msgstr "%s tarvitsee %s, mutta sen asentaminen ei onnistu"
 
-#: zypp/solver/detail/SATResolver.cc:1141
+#: zypp/solver/detail/SATResolver.cc:1153
 msgid "deleted providers: "
 msgstr "poistetut tarjoajat: "
 
-#: zypp/solver/detail/SATResolver.cc:1151
+#: zypp/solver/detail/SATResolver.cc:1163
 msgid ""
 "\n"
 "not installable providers: "
@@ -4737,106 +4742,106 @@ msgstr ""
 "\n"
 "Poistettavissa olevat tarjoajat: "
 
-#: zypp/solver/detail/SATResolver.cc:1153
+#: zypp/solver/detail/SATResolver.cc:1165
 msgid "not installable providers: "
 msgstr "poistetut tarjoajat: "
 
-#: zypp/solver/detail/SATResolver.cc:1215
+#: zypp/solver/detail/SATResolver.cc:1227
 #, c-format, boost-format
 msgid "remove lock to allow removal of %s"
 msgstr "poista lukitus salliaksesi %s poiston"
 
-#: zypp/solver/detail/SATResolver.cc:1220
-#: zypp/solver/detail/SATResolver.cc:1256
+#: zypp/solver/detail/SATResolver.cc:1232
+#: zypp/solver/detail/SATResolver.cc:1268
 #, c-format, boost-format
 msgid "do not install %s"
 msgstr "älä asenna %s"
 
-#: zypp/solver/detail/SATResolver.cc:1235
-#: zypp/solver/detail/SATResolver.cc:1277
+#: zypp/solver/detail/SATResolver.cc:1247
+#: zypp/solver/detail/SATResolver.cc:1289
 #, c-format, boost-format
 msgid "keep %s"
 msgstr "pidä %s"
 
-#: zypp/solver/detail/SATResolver.cc:1240
+#: zypp/solver/detail/SATResolver.cc:1252
 #, c-format, boost-format
 msgid "remove lock to allow installation of %s"
 msgstr "poista lukitus asentaaksesi: %s"
 
-#: zypp/solver/detail/SATResolver.cc:1291
-#: zypp/solver/detail/SATResolver.cc:1312
+#: zypp/solver/detail/SATResolver.cc:1303
+#: zypp/solver/detail/SATResolver.cc:1324
 msgid "This request will break your system!"
 msgstr "Tämä pyyntö rikkoo järjestelmän!"
 
-#: zypp/solver/detail/SATResolver.cc:1292
-#: zypp/solver/detail/SATResolver.cc:1313
+#: zypp/solver/detail/SATResolver.cc:1304
+#: zypp/solver/detail/SATResolver.cc:1325
 msgid "ignore the warning of a broken system"
 msgstr "ohita varoitus rikkinäisestä järjestelmästä"
 
-#: zypp/solver/detail/SATResolver.cc:1297
+#: zypp/solver/detail/SATResolver.cc:1309
 #, c-format, boost-format
 msgid "do not ask to install a solvable providing %s"
 msgstr "älä kysy asennettaessa paketteja, jotka tuo %s"
 
-#: zypp/solver/detail/SATResolver.cc:1319
+#: zypp/solver/detail/SATResolver.cc:1331
 #, c-format, boost-format
 msgid "do not ask to delete all solvables providing %s"
 msgstr "älä kysy poistettaessa paketteja, jotka tuo %s"
 
-#: zypp/solver/detail/SATResolver.cc:1332
+#: zypp/solver/detail/SATResolver.cc:1344
 #, c-format, boost-format
 msgid "do not install most recent version of %s"
 msgstr "älä asenna uusinta %s"
 
-#: zypp/solver/detail/SATResolver.cc:1353
+#: zypp/solver/detail/SATResolver.cc:1365
 #, c-format, boost-format
 msgid "keep %s despite the inferior architecture"
 msgstr "Pidä %s vaikka se on alempaa arkkitehtuuria"
 
-#: zypp/solver/detail/SATResolver.cc:1358
+#: zypp/solver/detail/SATResolver.cc:1370
 #, c-format, boost-format
 msgid "install %s despite the inferior architecture"
 msgstr "asenna %s vaikka se on alempaa arkkitehtuuria"
 
-#: zypp/solver/detail/SATResolver.cc:1367
+#: zypp/solver/detail/SATResolver.cc:1379
 #, c-format, boost-format
 msgid "keep obsolete %s"
 msgstr "pidä vanhentunut %s"
 
-#: zypp/solver/detail/SATResolver.cc:1372
+#: zypp/solver/detail/SATResolver.cc:1384
 #, c-format, boost-format
 msgid "install %s from excluded repository"
 msgstr "Asennetaan %s poisjätetystä asennuslähteestä"
 
 #. translator: %1% is a package name
-#: zypp/solver/detail/SATResolver.cc:1386
+#: zypp/solver/detail/SATResolver.cc:1398
 #, boost-format
 msgid "install %1% although it has been retracted"
 msgstr "asenna %1%, vaikka se on vedetty takaisin"
 
 #. translator: %1% is a package name
-#: zypp/solver/detail/SATResolver.cc:1389
+#: zypp/solver/detail/SATResolver.cc:1401
 #, boost-format
 msgid "allow to install the PTF %1%"
 msgstr "salli asentaa PTF %1%"
 
 #. translator: %1% is a package name
-#: zypp/solver/detail/SATResolver.cc:1392
+#: zypp/solver/detail/SATResolver.cc:1404
 #, boost-format
 msgid "install %1% although it is blacklisted"
 msgstr "asenna %1%, vaikka se on mustalistattu"
 
-#: zypp/solver/detail/SATResolver.cc:1412
+#: zypp/solver/detail/SATResolver.cc:1424
 #, c-format, boost-format
 msgid "downgrade of %s to %s"
 msgstr "päivitetään vanhempaan %s -> %s"
 
-#: zypp/solver/detail/SATResolver.cc:1419
+#: zypp/solver/detail/SATResolver.cc:1431
 #, c-format, boost-format
 msgid "architecture change of %s to %s"
 msgstr "arkkitehtuurin vaihto %s -> %s"
 
-#: zypp/solver/detail/SATResolver.cc:1428
+#: zypp/solver/detail/SATResolver.cc:1440
 #, c-format, boost-format
 msgid ""
 "install %s (with vendor change)\n"
@@ -4845,12 +4850,12 @@ msgstr ""
 "asenna %s (vaihtaa tarjoajaa)\n"
 "  %s --> %s"
 
-#: zypp/solver/detail/SATResolver.cc:1437
+#: zypp/solver/detail/SATResolver.cc:1449
 #, c-format, boost-format
 msgid "replacement of %s with %s"
 msgstr "Korvataan %s -> %s"
 
-#: zypp/solver/detail/SATResolver.cc:1448
+#: zypp/solver/detail/SATResolver.cc:1460
 #, c-format, boost-format
 msgid "deinstallation of %s"
 msgstr "poista %s"
@@ -4867,79 +4872,79 @@ msgstr "Suoritetaan %%posttrans-skriptiä ”%1%”"
 msgid "Executing %posttrans scripts"
 msgstr "Suoritetaan %posttrans-skriptejä"
 
-#: zypp/target/TargetException.cc:28
+#: zypp/target/TargetException.cc:27
 msgid "Installation has been aborted as directed."
 msgstr "Asennus keskeytettiin."
 
-#: zypp/target/TargetImpl.cc:313
+#: zypp/target/TargetImpl.cc:347
 msgid " executed"
 msgstr " suoritettu"
 
-#: zypp/target/TargetImpl.cc:335
+#: zypp/target/TargetImpl.cc:369
 msgid " execution failed"
 msgstr " suoritus epäonnistui"
 
 #. translators: We may find the same script content in files with different names.
 #. Only the first occurence is executed, subsequent ones are skipped. It's a one-line
 #. message for a log file. Preferably start translation with "%s"
-#: zypp/target/TargetImpl.cc:452
+#: zypp/target/TargetImpl.cc:486
 #, c-format, boost-format
 msgid "%s already executed as %s)"
 msgstr "%s on jo suoritettu nimellä %s)"
 
-#: zypp/target/TargetImpl.cc:462
+#: zypp/target/TargetImpl.cc:496
 msgid " execution skipped while aborting"
 msgstr " suoritus ohitettiin keskeytettäessä"
 
-#: zypp/target/TargetImpl.cc:517 zypp/target/TargetImpl.cc:537
-#: zypp/target/TargetImpl.cc:565 zypp/target/TargetImpl.cc:602
-#: zypp/target/TargetImpl.cc:610
+#: zypp/target/TargetImpl.cc:551 zypp/target/TargetImpl.cc:571
+#: zypp/target/TargetImpl.cc:599 zypp/target/TargetImpl.cc:636
+#: zypp/target/TargetImpl.cc:644
 msgid "Error sending update message notification."
 msgstr "Virhe lähetettäessä päivityshuomautusta."
 
-#: zypp/target/TargetImpl.cc:661
+#: zypp/target/TargetImpl.cc:695
 msgid "New update message"
 msgstr "Uusi päivitysviesti"
 
 #. TranslatorExplanation after semicolon is error message
 #. TranslatorExplanation the colon is followed by an error message
-#: zypp/target/rpm/RpmDb.cc:843 zypp/target/rpm/RpmDb.cc:2123
-#: zypp/target/rpm/RpmDb.cc:2269
+#: zypp/target/rpm/RpmDb.cc:470 zypp/target/rpm/RpmDb.cc:1731
+#: zypp/target/rpm/RpmDb.cc:1887
 msgid "RPM failed: "
 msgstr "RPM-virhe: "
 
 #. Translator: %1% is a gpg public key
-#: zypp/target/rpm/RpmDb.cc:1173
+#: zypp/target/rpm/RpmDb.cc:795
 #, boost-format
 msgid "Failed to import public key %1%"
 msgstr "Avaimen tuonti tiedostosta %1% epäonnistui"
 
 #. Translator: %1% is a gpg public key
-#: zypp/target/rpm/RpmDb.cc:1243
+#: zypp/target/rpm/RpmDb.cc:862
 #, boost-format
 msgid "Failed to remove public key %1%"
 msgstr "Julkisen avaimen %1% poisto epäonnistui"
 
-#: zypp/target/rpm/RpmDb.cc:1629
+#: zypp/target/rpm/RpmDb.cc:1250
 msgid "Package is not signed!"
 msgstr "Pakettia ei ole allekirjoitettu!"
 
 #. Translator: %s = name of an rpm package. A list of diffs follows
 #. this message.
-#: zypp/target/rpm/RpmDb.cc:1929
+#: zypp/target/rpm/RpmDb.cc:1529
 #, c-format, boost-format
 msgid "Changed configuration files for %s:"
 msgstr "Muunnettiin paketin %s asetustiedostoja:"
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:2104
+#: zypp/target/rpm/RpmDb.cc:1712
 #, c-format, boost-format
 msgid "rpm saved %s as %s, but it was impossible to determine the difference"
 msgstr ""
 "rpm tallensi tiedoston %s nimellä %s. Erojen selvittäminen ei onnistunut"
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:2106
+#: zypp/target/rpm/RpmDb.cc:1714
 #, c-format, boost-format
 msgid ""
 "rpm saved %s as %s.\n"
@@ -4949,13 +4954,13 @@ msgstr ""
 "Tässä ensimmäiset 25 muuttunutta riviä:\n"
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:2109
+#: zypp/target/rpm/RpmDb.cc:1717
 #, c-format, boost-format
 msgid "rpm created %s as %s, but it was impossible to determine the difference"
 msgstr "rpm loi tiedoston %s nimellä %s, erojen selvittäminen ei onnistunut"
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:2111
+#: zypp/target/rpm/RpmDb.cc:1719
 #, c-format, boost-format
 msgid ""
 "rpm created %s as %s.\n"
@@ -4966,47 +4971,47 @@ msgstr ""
 
 #. report additional rpm output in finish
 #. TranslatorExplanation Text is followed by a ':'  and the actual output.
-#: zypp/target/rpm/RpmDb.cc:2136 zypp/target/rpm/RpmDb.cc:2282
+#: zypp/target/rpm/RpmDb.cc:1744 zypp/target/rpm/RpmDb.cc:1900
 msgid "Additional rpm output"
 msgstr "rpm-lisätuloste"
 
-#: zypp/target/rpm/RpmDb.cc:2424
+#: zypp/target/rpm/RpmDb.cc:2042
 #, c-format, boost-format
 msgid "created backup %s"
 msgstr "luotiin varmuuskopio %s"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2445
+#: zypp/target/rpm/RpmDb.cc:2063
 msgid "Signature is OK"
 msgstr "Allekirjoitus kelpaa"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2447
+#: zypp/target/rpm/RpmDb.cc:2065
 msgid "Unknown type of signature"
 msgstr "Tuntematon allekirjoituksen tyyppi"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2449
+#: zypp/target/rpm/RpmDb.cc:2067
 msgid "Signature does not verify"
 msgstr "Allekirjoitusta ei voida todentaa"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2451
+#: zypp/target/rpm/RpmDb.cc:2069
 msgid "Signature is OK, but key is not trusted"
 msgstr "Allekirjoitus kelpaa, mutta avain ei ole luotettu"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2453
+#: zypp/target/rpm/RpmDb.cc:2071
 msgid "Signatures public key is not available"
 msgstr "Allekirjoituksen julkinen avain ei ole saatavilla"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2455
+#: zypp/target/rpm/RpmDb.cc:2073
 msgid "File does not exist or signature can't be checked"
 msgstr "Tiedostoa ei ole tai allekirjoitusta ei voi tarkistaa"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2457
+#: zypp/target/rpm/RpmDb.cc:2075
 msgid "File is unsigned"
 msgstr "Tiedosto on allekirjoittamaton"
 
@@ -5093,6 +5098,20 @@ msgstr "Virheellinen parametrikartan jaon erotin"
 #: zypp/url/UrlUtils.cc:283
 msgid "Invalid parameter array join separator character"
 msgstr "Virheellinen parametritaulukon liitoksen erotin"
+
+#: zypp/zyppng/media/network/networkrequesterror.cc:132
+#, c-format, boost-format
+msgid ""
+"Download (curl) error for '%s':\n"
+"Error code: %s\n"
+msgstr ""
+
+#: zypp/zyppng/media/network/networkrequesterror.cc:138
+#, c-format, boost-format
+msgid ""
+"Download (curl) error for '%s':\n"
+"Unable to retrieve HTTP response\n"
+msgstr ""
 
 #~ msgid "Can't open lock file: %s"
 #~ msgstr "Lukitustiedoston avaaminen ei onnistu: %s"
