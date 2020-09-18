@@ -1,4 +1,18 @@
 -------------------------------------------------------------------
+Fri Sep 18 16:45:49 CEST 2020 - ma@suse.de
+
+- RepoInfo: Return the type of the local metadata cache as
+  fallback (bsc#1176435)
+- VendorAttr: Fix broken "suse,opensuse" equivalence handling.
+  Enhance API and testcases. (bsc#1174918)
+- Update docs regarding 'opensuse' namepace matching.
+- New solver testcase format.
+- Link against libzsd to close libsolvs open references
+  (as we link statically)
+- BuildRequires:  libsolv-devel >= 0.7.15.
+- version 17.25.0 (22)
+
+-------------------------------------------------------------------
 Fri Aug 28 17:09:59 CEST 2020 - ma@suse.de
 
 - VendorAttr: Const-correct API and let Target provide its
