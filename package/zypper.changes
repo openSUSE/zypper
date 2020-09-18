@@ -1,4 +1,14 @@
 -------------------------------------------------------------------
+Fri Sep 18 16:55:48 CEST 2020 - ma@suse.de
+
+- Use new testcase API in libzypp.
+- BuildRequires:  libzypp-devel >= 17.25.0.
+- help: prevent 'whatis' from writing to stderr (bsc#1176712)
+- wp: point out that command is aliased to a search command and
+  searches case-insensitive (jsc#SLE-16271)
+- version 1.14.39
+
+-------------------------------------------------------------------
 Fri Aug 28 11:43:49 CEST 2020 - ma@suse.de
 
 - Directly list subcommands in 'zypper help' (bsc#1165424)
