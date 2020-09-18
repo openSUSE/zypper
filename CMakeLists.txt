@@ -9,6 +9,7 @@ OPTION (ENABLE_BUILD_DOCS "Build documentation by default?" OFF)
 OPTION (ENABLE_BUILD_TRANS "Build translation files by default?" OFF)
 OPTION (ENABLE_BUILD_TESTS "Build and run test suite by default?" OFF)
 OPTION (ENABLE_USE_THREADS "Enable using threads (NOT being used by threads!)?" OFF)
+OPTION (ENABLE_ZSTD_COMPRESSION "Build with zstd compression support?" OFF)
 OPTION (ENABLE_ZCHUNK_COMPRESSION "Build with zchunk compression support?" OFF)
 OPTION (DISABLE_MEDIABACKEND_TESTS "Disable Tests depending on Nginx and libfcgi?" OFF)
 
@@ -258,6 +259,14 @@ IF ( NOT DOXYGEN )
 ELSE ( NOT DOXYGEN )
   MESSAGE( STATUS "doxygen found: ${DOXYGEN}" )
 ENDIF ( NOT DOXYGEN )
+
+# By now just libsolvs external references require us to link against it:
+IF (ENABLE_ZSTD_COMPRESSION)
+  MESSAGE("Building with zstd support enabled.")
+  FIND_LIBRARY (ZSTD_LIBRARY NAMES zstd)
+  FIND_PATH (ZSTD_INCLUDE_DIRS zstd.h)
+  #INCLUDE_DIRECTORIES (${ZSTD_INCLUDE_DIRS})
+ENDIF (ENABLE_ZSTD_COMPRESSION)
 
 IF (ENABLE_ZCHUNK_COMPRESSION)
   MESSAGE("Building with zchunk support enabled.")

@@ -20,6 +20,12 @@
 %else
 %bcond_with zchunk
 %endif
+# libsolvs external references require us to link against it:
+%if 0%{?sle_version} >= 150000 || 0%{?suse_version} >= 1500
+%bcond_without zstd
+%else
+%bcond_with zstd
+%endif
 
 %bcond_without mediabackend_tests
 
@@ -151,6 +157,9 @@ BuildRequires:  libxslt-tools
 %if %{with zchunk}
 BuildRequires:  libzck-devel
 %endif
+%if %{with zstd}
+BuildRequires:  libzstd-devel
+%endif
 
 %description
 libzypp is the package management library that powers applications
@@ -244,6 +253,7 @@ cmake -DCMAKE_INSTALL_PREFIX=%{_prefix} \
       -DCMAKE_BUILD_TYPE=Release \
       -DCMAKE_SKIP_RPATH=1 \
       %{?with_zchunk:-DENABLE_ZCHUNK_COMPRESSION=1} \
+      %{?with_zstd:-DENABLE_ZSTD_COMPRESSION=1} \
       %{!?with_mediabackend_tests:-DDISABLE_MEDIABACKEND_TESTS=1} \
       ${EXTRA_CMAKE_OPTIONS} \
       ..
