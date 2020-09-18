@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-09-18 16:45+0200\n"
-"PO-Revision-Date: 2020-07-29 20:49+0000\n"
+"PO-Revision-Date: 2020-09-19 00:48+0000\n"
 "Last-Translator: David Medina <medipas@gmail.com>\n"
 "Language-Team: Catalan <https://l10n.opensuse.org/projects/libzypp/master/ca/"
 ">\n"
@@ -4560,7 +4560,7 @@ msgstr ""
 #, c-format, boost-format
 msgid "Error occurred while setting download (curl) options for '%s':"
 msgstr ""
-"Hi ha hagut un error en establir les opcions de baixada (curl) per a '%s':"
+"Hi ha hagut un error en establir les opcions de baixada (curl) per a %s:"
 
 #: zypp/media/MediaException.cc:153
 #, c-format, boost-format
@@ -5306,6 +5306,8 @@ msgid ""
 "Download (curl) error for '%s':\n"
 "Error code: %s\n"
 msgstr ""
+"Error de baixada (curl) per a %s.\n"
+"Codi de l'error: %s\n"
 
 #: zypp/zyppng/media/network/networkrequesterror.cc:138
 #, c-format, boost-format
@@ -5313,6 +5315,8 @@ msgid ""
 "Download (curl) error for '%s':\n"
 "Unable to retrieve HTTP response\n"
 msgstr ""
+"Error de baixada (curl) per a %s.\n"
+"No es pot obtenir la resposta d'HTTP.\n"
 
 #~ msgid "Can't open lock file: %s"
 #~ msgstr "No es pot obrir el fitxer de blocatge: %s"
