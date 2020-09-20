@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-09-18 16:45+0200\n"
-"PO-Revision-Date: 2020-01-16 14:53+0000\n"
+"PO-Revision-Date: 2020-09-20 05:48+0000\n"
 "Last-Translator: Kukuh Syafaat <syafaatkukuh@gmail.com>\n"
 "Language-Team: Indonesian <https://l10n.opensuse.org/projects/libzypp/master/"
 "id/>\n"
@@ -299,7 +299,7 @@ msgstr "Kepulauan Cook"
 #. :COK:184:
 #: zypp/CountryCode.cc:202
 msgid "Chile"
-msgstr "Chile"
+msgstr "Chili"
 
 # CM
 #. :CHL:152:
@@ -518,7 +518,7 @@ msgstr "Ghana"
 #. :GHA:288:
 #: zypp/CountryCode.cc:239
 msgid "Gibraltar"
-msgstr "Jibraltar"
+msgstr "Gibraltar"
 
 # GL
 #. :GIB:292:
@@ -656,7 +656,7 @@ msgstr "India"
 #. :IND:356:
 #: zypp/CountryCode.cc:262
 msgid "British Indian Ocean Territory"
-msgstr "Inggris, Teritori Samudera Indonesia"
+msgstr "Wilayah Samudra Hindia Britania"
 
 # IQ
 #. :IOT:086:
@@ -735,7 +735,7 @@ msgstr "Kiribati"
 #. :KIR:296:
 #: zypp/CountryCode.cc:275
 msgid "Comoros"
-msgstr "Comoros"
+msgstr "Komoro"
 
 # KN
 # fuzzy
@@ -1190,7 +1190,7 @@ msgstr "Arab Saudi"
 #. :SAU:682:
 #: zypp/CountryCode.cc:350
 msgid "Solomon Islands"
-msgstr "Pulau Sulaiman"
+msgstr "Kepulauan Solomon"
 
 # SC
 #. :SLB:090:
@@ -1411,7 +1411,7 @@ msgstr "Uganda"
 #. :UGA:800:
 #: zypp/CountryCode.cc:386
 msgid "United States Minor Outlying Islands"
-msgstr "Kepulauan Luar Minor Amerika Serikat"
+msgstr "Kepulauan Terluar Kecil Amerika Serikat"
 
 # US
 #. :UMI:581:
@@ -1436,7 +1436,7 @@ msgstr "Uzbekistan"
 #. :UZB:860:
 #: zypp/CountryCode.cc:390
 msgid "Holy See (Vatican City State)"
-msgstr "Holy See (Kota Vatikan)"
+msgstr "Tahta Suci (Negara Kota Vatikan)"
 
 # VC
 # fuzzy
@@ -1456,14 +1456,14 @@ msgstr "Venezuela"
 #. :VEN:862:
 #: zypp/CountryCode.cc:393
 msgid "British Virgin Islands"
-msgstr "Kepulauan Virgin Britania Raya"
+msgstr "Kepulauan Virgin Inggris"
 
 # VI
 # fuzzy
 #. :VGB:092:
 #: zypp/CountryCode.cc:394
 msgid "Virgin Islands, U.S."
-msgstr "Kepulauan Virgin, U.S."
+msgstr "Kepulauan Virgin, A.S."
 
 # VN
 # fuzzy
@@ -1722,7 +1722,7 @@ msgstr "Amharic"
 #. language code: ang
 #: zypp/LanguageCode.cc:197
 msgid "English, Old (ca.450-1100)"
-msgstr "English, Lampau (ca.450-1100)"
+msgstr "English, Kuno (sekitar 450-1100)"
 
 # LK
 #. language code: apa
@@ -2120,7 +2120,7 @@ msgstr "Korsika"
 #. language code: cpe
 #: zypp/LanguageCode.cc:353
 msgid "Creoles and Pidgins, English-Based (Other)"
-msgstr "Creoles dan Pidgins, Berbasis Bahasa English(Lainnya)"
+msgstr "Creoles dan Pidgins, Berbasis Bahasa Inggris (Lainnya)"
 
 #. language code: cpf
 #: zypp/LanguageCode.cc:355
@@ -2232,7 +2232,7 @@ msgstr "Duala"
 #. language code: dum
 #: zypp/LanguageCode.cc:399
 msgid "Dutch, Middle (ca.1050-1350)"
-msgstr "Belanda, Antara (Th.1050-1350)"
+msgstr "Belanda, Tengah (sekitar 1050-1350)"
 
 #. language code: dut nld nl
 #: zypp/LanguageCode.cc:401 zypp/LanguageCode.cc:403
@@ -2353,12 +2353,12 @@ msgstr "Prancis"
 #. language code: frm
 #: zypp/LanguageCode.cc:449
 msgid "French, Middle (ca.1400-1600)"
-msgstr "Prancis, Antara (Thn.1400-1600)"
+msgstr "Prancis, Antara (sekitar1400-1600)"
 
 #. language code: fro
 #: zypp/LanguageCode.cc:451
 msgid "French, Old (842-ca.1400)"
-msgstr "Prancis, Kuno (Thn.842-1400)"
+msgstr "Prancis, Kuno (842-sekitar 1400)"
 
 # FR
 #. language code: fry fy
@@ -2446,12 +2446,12 @@ msgstr "Manx"
 #. language code: gmh
 #: zypp/LanguageCode.cc:487
 msgid "German, Middle High (ca.1050-1500)"
-msgstr "Jerman, Menengah Tinggi (Thn.1050-1500)"
+msgstr "Jerman, Menengah Tinggi (sekitar 1050-1500)"
 
 #. language code: goh
 #: zypp/LanguageCode.cc:489
 msgid "German, Old High (ca.750-1050)"
-msgstr "German, Kuno Tinggi (Thn.750-1050)"
+msgstr "German, Kuno Tinggi (sekitar750-1050)"
 
 # IN
 #. language code: gon
@@ -2478,12 +2478,12 @@ msgstr "Grebo"
 #. language code: grc
 #: zypp/LanguageCode.cc:499
 msgid "Greek, Ancient (to 1453)"
-msgstr "Yunani, Kuno (untuk 1453)"
+msgstr "Yunani, Kuno (hingga 1453)"
 
 #. language code: gre ell el
 #: zypp/LanguageCode.cc:501 zypp/LanguageCode.cc:503
 msgid "Greek, Modern (1453-)"
-msgstr "Yunani, Modern (1453 keatas)"
+msgstr "Yunani, Modern (1453-)"
 
 #. language code: grn gn
 #: zypp/LanguageCode.cc:505
@@ -2659,7 +2659,7 @@ msgstr "Ingush"
 #. language code: ipk ik
 #: zypp/LanguageCode.cc:571
 msgid "Inupiaq"
-msgstr "IndiaInupiaq"
+msgstr "Inupiaq"
 
 #. language code: ira
 #: zypp/LanguageCode.cc:573
@@ -3294,7 +3294,7 @@ msgstr "Norwegia"
 #. language code: nso
 #: zypp/LanguageCode.cc:813
 msgid "Northern Sotho"
-msgstr "Utara Sothi=o"
+msgstr "Sotho Utara"
 
 # LK
 #. language code: nub
@@ -3305,7 +3305,7 @@ msgstr "Bahasa Nubian"
 #. language code: nwc
 #: zypp/LanguageCode.cc:817
 msgid "Classical Newari"
-msgstr "Classical Newari"
+msgstr "Newari Klasik"
 
 # CL
 #. language code: nya ny
@@ -3374,7 +3374,7 @@ msgstr "Turkish, Ottoman (1500-1928)"
 #. language code: oto
 #: zypp/LanguageCode.cc:843
 msgid "Otomian Languages"
-msgstr "Bahasa Otomia"
+msgstr "Bahasa Otomian"
 
 #. language code: paa
 #: zypp/LanguageCode.cc:845
@@ -3418,12 +3418,12 @@ msgstr "Palauan"
 #. language code: peo
 #: zypp/LanguageCode.cc:859
 msgid "Persian, Old (ca.600-400 B.C.)"
-msgstr "Persia, Kuno (ca.600-400 B.C.)"
+msgstr "Persia, Kuno (sekitar 600-400 SM.)"
 
 #. language code: per fas fa
 #: zypp/LanguageCode.cc:861 zypp/LanguageCode.cc:863
 msgid "Persian"
-msgstr "SerbiaPersian"
+msgstr "Persia"
 
 # PH
 #. language code: phi
@@ -3466,7 +3466,7 @@ msgstr "Bahasa Prakrit"
 #. language code: pro
 #: zypp/LanguageCode.cc:879
 msgid "Provencal, Old (to 1500)"
-msgstr "Provencal, Kuno (ke 1500)"
+msgstr "Provencal, Kuno (hingga 1500)"
 
 #. language code: pus ps
 #: zypp/LanguageCode.cc:881
@@ -3609,7 +3609,7 @@ msgstr "Semitic (Lainnya)"
 #. language code: sga
 #: zypp/LanguageCode.cc:939
 msgid "Irish, Old (to 900)"
-msgstr "Irish, Kuno (ke 900)"
+msgstr "Irish, Kuno (hingga 900)"
 
 # LK
 #. language code: sgn
@@ -3638,7 +3638,7 @@ msgstr "Sinhala"
 #. language code: sio
 #: zypp/LanguageCode.cc:949
 msgid "Siouan Languages"
-msgstr "Siouan Languages"
+msgstr "Bahasa Siouan"
 
 #. language code: sit
 #: zypp/LanguageCode.cc:951
@@ -4059,7 +4059,7 @@ msgstr "Walamo"
 #. language code: war
 #: zypp/LanguageCode.cc:1111
 msgid "Waray"
-msgstr "ParaguayWaray"
+msgstr "Waray"
 
 #. language code: was
 #: zypp/LanguageCode.cc:1113
@@ -4122,7 +4122,7 @@ msgstr "Yoruba"
 #. language code: ypk
 #: zypp/LanguageCode.cc:1137
 msgid "Yupik Languages"
-msgstr "Bahasa Yupi"
+msgstr "Bahasa Yupik"
 
 #. language code: zap
 #: zypp/LanguageCode.cc:1139
@@ -4186,26 +4186,26 @@ msgstr "(Tidak berakhir)"
 #. translators: an annotation to a gpg keys expiry date
 #: zypp/PublicKey.cc:91
 msgid "(EXPIRED)"
-msgstr "(BERAKHIR)"
+msgstr "(KEDALUWARSA)"
 
 #. translators: an annotation to a gpg keys expiry date
 #: zypp/PublicKey.cc:95
 msgid "(expires within 24h)"
-msgstr "(Berakhir dalam waktu 24 jam)"
+msgstr "(Kedaluwarsa dalam waktu 24 jam)"
 
 #. translators: an annotation to a gpg keys expiry date
 #: zypp/PublicKey.cc:99
 #, c-format, boost-format
 msgid "(expires in %d day)"
 msgid_plural "(expires in %d days)"
-msgstr[0] "(Berakhir dalam %d hari)"
+msgstr[0] "(Kedaluwarsa dalam %d hari)"
 
 #. translator: %1% is a gpg key ID like 3DBDC284
 #. %2% is a cache directories path
 #: zypp/RepoInfo.cc:542
 #, boost-format
 msgid "Looking for gpg key ID %1% in cache %2%."
-msgstr "Mencari kunci gpg ID %1% dalam cache %2%."
+msgstr "Mencari kunci gpg ID %1% dalam singgahan %2%."
 
 #. translator: %1% is a gpg key ID like 3DBDC284
 #. %2% is a repositories name
@@ -4239,7 +4239,7 @@ msgstr "Tidak dapat membaca berkas repo '%1%': Izin ditolak"
 
 #: zypp/RepoManager.cc:353
 msgid "Repository alias cannot start with dot."
-msgstr "Alias repository tidak dapat dijalankan dengan dot."
+msgstr "Alias repositori tidak dapat dijalankan dengan dot."
 
 #: zypp/RepoManager.cc:364
 msgid "Service alias cannot start with dot."
@@ -4250,7 +4250,7 @@ msgstr "Alias layanan tidak dapat dimulai dengan dot."
 #: zypp/RepoManager.cc:1802 zypp/RepoManager.cc:1867 zypp/RepoManager.cc:1998
 #, c-format, boost-format
 msgid "Can't open file '%s' for writing."
-msgstr "Tidak dapat membuka '%s' untuk menulis."
+msgstr "Tidak dapat membuka berkas '%s' untuk menulis."
 
 #. translators: Cleanup a repository previously owned by a meanwhile unknown (deleted) service.
 #. %1% = service name
@@ -4275,22 +4275,22 @@ msgstr "Tidak dapat membuat %s"
 
 #: zypp/RepoManager.cc:1152
 msgid "Can't create metadata cache directory."
-msgstr "Tidak dapat membuat metadata direktori cache."
+msgstr "Tidak dapat membuat metadata direktori singgahan."
 
 #: zypp/RepoManager.cc:1298
 #, c-format, boost-format
 msgid "Building repository '%s' cache"
-msgstr "Membangun repositori cache '%s'"
+msgstr "Membangun repositori singgahan '%s'"
 
 #: zypp/RepoManager.cc:1318
 #, c-format, boost-format
 msgid "Can't create cache at %s - no writing permissions."
-msgstr "Tidak dapat membuat cache di %s - tidak ada izin untuk menulis."
+msgstr "Tidak dapat membuat singgahan di %s - tidak ada izin untuk menulis."
 
 #: zypp/RepoManager.cc:1383
 #, c-format, boost-format
 msgid "Failed to cache repo (%d)."
-msgstr "Gagal untuk membuat cache repo (%d)."
+msgstr "Gagal untuk membuat repo singgahan (%d)."
 
 #: zypp/RepoManager.cc:1394
 msgid "Unhandled repository type"
@@ -4311,7 +4311,7 @@ msgstr "Galat saat membaca dari '%s'"
 #: zypp/RepoManager.cc:1484 zypp/RepoManager.cc:2501
 #, c-format, boost-format
 msgid "Unknown error reading from '%s'"
-msgstr "Error tidak diketahui dari '%s'"
+msgstr "Galat tidak diketahui dari '%s'"
 
 #: zypp/RepoManager.cc:1622
 #, c-format, boost-format
@@ -4386,7 +4386,7 @@ msgstr "Level 3"
 
 #: zypp/VendorSupportOptions.cc:29
 msgid "Additional Customer Contract Necessary"
-msgstr "Kontrak pelanggan tambahan diperlukan"
+msgstr "Kontrak Pelanggan Tambahan Diperlukan"
 
 #: zypp/VendorSupportOptions.cc:31
 msgid "invalid"
@@ -4394,7 +4394,7 @@ msgstr "tidak valid"
 
 #: zypp/VendorSupportOptions.cc:39
 msgid "The level of support is unspecified"
-msgstr "Tingkat dukungan ini tidak ditentukan"
+msgstr "Tingkat dukungan tidak ditentukan"
 
 #: zypp/VendorSupportOptions.cc:42
 msgid "The vendor does not provide support."
@@ -4458,12 +4458,12 @@ msgstr "Riwayat:"
 #: zypp/base/StrMatcher.cc:152
 #, c-format, boost-format
 msgid "Unknown match mode '%s'"
-msgstr "Kesesuaian mode '%s' tidak diketahui"
+msgstr "Mode kecocokan '%s' tidak dikenal"
 
 #: zypp/base/StrMatcher.cc:153
 #, c-format, boost-format
 msgid "Unknown match mode '%s' for pattern '%s'"
-msgstr "Kesesuaian mode '%s' tidak diketahui untuk pola '%s'"
+msgstr "Mode kecocokan '%s' tidak dikenal untuk pola '%s'"
 
 #: zypp/base/StrMatcher.cc:157
 #, c-format, boost-format
@@ -4561,7 +4561,7 @@ msgstr "Lokasi '%s' pada medium '%s' bukan sebuah direktori."
 
 #: zypp/media/MediaException.cc:101
 msgid "Malformed URI"
-msgstr "URI cacat"
+msgstr "URI yang salah bentuk"
 
 #: zypp/media/MediaException.cc:111
 msgid "Empty host name in URI"
@@ -4591,16 +4591,15 @@ msgid ""
 "Error code: %s\n"
 "Error message: %s\n"
 msgstr ""
-"Unduh (curl) gagal untuk '%s':\n"
-"Kode kesalahan: %s\n"
-"Pesan kesalahan: %s\n"
+"Unduh (curl) galat untuk '%s':\n"
+"Kode galat: %s\n"
+"Pesan galat: %s\n"
 
 #. TranslatorExplanation: curl is the name of a library, don't translate
 #: zypp/media/MediaException.cc:146
 #, c-format, boost-format
 msgid "Error occurred while setting download (curl) options for '%s':"
-msgstr ""
-"Kesalahan terjadi ketika mengatur download (curl) pada opsi untuk '%s':"
+msgstr "Galat terjadi ketika mengatur unduhan (curl) pada opsi untuk '%s':"
 
 #: zypp/media/MediaException.cc:153
 #, c-format, boost-format
@@ -4610,7 +4609,7 @@ msgstr "Sumber media '%s' tidak berisi media yang diinginkan"
 #: zypp/media/MediaException.cc:158
 #, c-format, boost-format
 msgid "Medium '%s' is in use by another instance"
-msgstr "Medium '%s' sedabg digunakan oleh instansi lain"
+msgstr "Medium '%s' sedang digunakan oleh instance lain"
 
 #: zypp/media/MediaException.cc:164
 msgid "Cannot eject any media"
@@ -4630,7 +4629,7 @@ msgstr "Izin untuk mengakses '%s' ditolak."
 #: zypp/zyppng/media/network/networkrequesterror.cc:111
 #, c-format, boost-format
 msgid "Timeout exceeded when accessing '%s'."
-msgstr "Timeout melebihi ketika mengakses '%s'."
+msgstr "Batas waktu terlampaui saat mengakses '%s'."
 
 #: zypp/media/MediaException.cc:197
 #, c-format, boost-format
@@ -4706,7 +4705,7 @@ msgstr "applydeltarpm gagal."
 
 #: zypp/repo/RepoException.cc:129
 msgid "Service plugin does not support changing an attribute."
-msgstr "Layanan Plugin tidak mendukung perubahan atribut."
+msgstr "Layanan pengaya tidak mendukung perubahan atribut."
 
 #: zypp/repo/RepoProvideFile.cc:261
 #, c-format, boost-format
@@ -5135,7 +5134,7 @@ msgstr " Eksekusi dilewati ketika diberhentikan"
 #: zypp/target/TargetImpl.cc:599 zypp/target/TargetImpl.cc:636
 #: zypp/target/TargetImpl.cc:644
 msgid "Error sending update message notification."
-msgstr "Gagal mengirim pesan notifikasi pembaharuan."
+msgstr "Galat mengirim pesan notifikasi pemutakhiran."
 
 #: zypp/target/TargetImpl.cc:695
 msgid "New update message"
@@ -5216,7 +5215,7 @@ msgstr "Tambahan keluaran RPM"
 #: zypp/target/rpm/RpmDb.cc:2042
 #, c-format, boost-format
 msgid "created backup %s"
-msgstr "membuat backup %s"
+msgstr "membuat cadangan %s"
 
 #. translators: possible rpm package signature check result [brief]
 #: zypp/target/rpm/RpmDb.cc:2063
@@ -5287,7 +5286,7 @@ msgstr "Skema Url tidak memperbolehkan nama pengguna"
 
 #: zypp/url/UrlBase.cc:983
 msgid "Url scheme does not allow a password"
-msgstr "Skema Url tidak memperbolehkan password"
+msgstr "Skema Url tidak memperbolehkan kata sandi"
 
 #: zypp/url/UrlBase.cc:1012
 msgid "Url scheme requires a host component"
@@ -5321,7 +5320,7 @@ msgstr "Path relatif tidak dibolehkan bila otorita ada"
 
 #: zypp/url/UrlUtils.cc:111
 msgid "Encoded string contains a NUL byte"
-msgstr "String encoded memuat byte NUL"
+msgstr "String yang dikodekan berisi byte NUL"
 
 #: zypp/url/UrlUtils.cc:173
 msgid "Invalid parameter array split separator character"
@@ -5341,6 +5340,8 @@ msgid ""
 "Download (curl) error for '%s':\n"
 "Error code: %s\n"
 msgstr ""
+"Kesalahan unduhan (curl) untuk '%s':\n"
+"Kode kesalahan: %s\n"
 
 #: zypp/zyppng/media/network/networkrequesterror.cc:138
 #, c-format, boost-format
@@ -5348,6 +5349,8 @@ msgid ""
 "Download (curl) error for '%s':\n"
 "Unable to retrieve HTTP response\n"
 msgstr ""
+"Kesalahan unduhan (curl) untuk '%s':\n"
+"Tidak dapat mengambil respon HTTP\n"
 
 #~ msgid "Can't open lock file: %s"
 #~ msgstr "Tidak dapat membuka berkas kunci: %s"
