@@ -95,7 +95,7 @@ class TestSetup
     /** Whether directory \a path_r contains a solver testcase. */
     static bool isTestcase( const Pathname & path_r )
     {
-      return  zypp::misc::LoadTestcase::None != zypp::misc::LoadTestcase::testcaseTypeAt( path_r );
+      return  zypp::misc::testcase::LoadTestcase::None != zypp::misc::testcase::LoadTestcase::testcaseTypeAt( path_r );
     }
 
     /** Whether directory \a path_r contains a testsetup. */
@@ -185,7 +185,7 @@ class TestSetup
     // Load repos included in a solver testcase.
     void loadTestcaseRepos( const Pathname & path_r )
     {
-      zypp::misc::LoadTestcase loader;
+      zypp::misc::testcase::LoadTestcase loader;
       std::string err;
       if (!loader.loadTestcaseAt( path_r, &err ) ) {
         ZYPP_THROW( Exception(err) );
