@@ -1,0 +1,81 @@
+=Ver: 3.0
+
+=Pkg: glibc 1 1 x86_64
++Prv:
+glibc = 1-1
+-Prv:
+=Vnd: openSUSE
+
+=Pkg: kernel-firmware <NULL> - noarch
++Prv:
+kernel-firmware = <NULL>
+-Prv:
+=Vnd: openSUSE
+
+=Pkg: kernel-default-base 5.7.8 1.1.1.1 x86_64
++Prv:
+multiversion(kernel)
+kernel-default-5.7.8-1
+kernel = 5.7.8-1
+kernel-base = 5.7.8-1
+kernel-uname-r = 5.7.8-1-default
+kernel-default-base = 5.7.8-1
+kernel-default-base = 5.7.8-1.1
+kernel-default-base = 5.7.8-1.1.1
+kernel-default-base = 5.7.8-1.1.1.1
+-Prv:
++Rec:
+kernel-firmware
+-Rec:
+=Vnd: openSUSE
+
+=Pkg: kernel-default-base 5.7.8 2.1.1.1 x86_64
++Prv:
+multiversion(kernel)
+kernel-default-5.7.8-2
+kernel = 5.7.8-2
+kernel-base = 5.7.8-2
+kernel-uname-r = 5.7.8-2-default
+kernel-default-base = 5.7.8-2
+kernel-default-base = 5.7.8-2.1
+kernel-default-base = 5.7.8-2.1.1
+kernel-default-base = 5.7.8-2.1.1.1
+-Prv:
++Rec:
+kernel-firmware
+-Rec:
+=Vnd: openSUSE
+
+=Pkg: kernel-default-base 5.7.8 3.1.1.1 x86_64
++Prv:
+multiversion(kernel)
+kernel-default-5.7.8-3
+kernel = 5.7.8-3
+kernel-base = 5.7.8-3
+kernel-uname-r = 5.7.8-3-default
+kernel-default-base = 5.7.8-3
+kernel-default-base = 5.7.8-3.1
+kernel-default-base = 5.7.8-3.1.1
+kernel-default-base = 5.7.8-3.1.1.1
+-Prv:
++Rec:
+kernel-firmware
+-Rec:
+=Vnd: openSUSE
+
+=Pkg: kernel-default-base 5.8.8 2.1.1.1 x86_64
++Prv:
+multiversion(kernel)
+kernel-default-5.8.8-1
+kernel = 5.8.8-1
+kernel-base = 5.8.8-1
+kernel-uname-r = 5.8.8-1-default
+kernel-default-base = 5.8.8-1
+kernel-default-base = 5.8.8-1.1
+kernel-default-base = 5.8.8-1.1.1
+kernel-default-base = 5.8.8-1.1.1.1
+-Prv:
++Rec:
+kernel-firmware
+-Rec:
+=Vnd: openSUSE

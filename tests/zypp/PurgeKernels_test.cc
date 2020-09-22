@@ -252,6 +252,30 @@ namespace  {
           //{ "kernel-default-5.8.1-3.1.g846658e.x86_64", false },
           }
       },
+      TestSample {
+        TESTS_SRC_DIR"/zypp/data/PurgeKernels/kernel-base",
+        "5.7.8-3-default",
+        Arch("x86_64"),
+        "running",
+        {
+          { "kernel-default-base-5.7.8-1.1.1.1.x86_64", false },
+          { "kernel-default-base-5.7.8-2.1.1.1.x86_64", false },
+          //{ "kernel-default-base-5.7.8-3.1.1.1.x86_64", false },
+          { "kernel-default-base-5.8.8-2.1.1.1.x86_64", false },
+          }
+      },
+      TestSample {
+        TESTS_SRC_DIR"/zypp/data/PurgeKernels/kernel-base",
+        "5.7.8-3-default",
+        Arch("x86_64"),
+        "running, 5.7.8-2.1.1",
+        {
+          { "kernel-default-base-5.7.8-1.1.1.1.x86_64", false },
+          { "kernel-default-base-5.8.8-2.1.1.1.x86_64", false },
+          //{ "kernel-default-base-5.7.8-2.1.1.1.x86_64", false },
+          //{ "kernel-default-base-5.7.8-3.1.1.1.x86_64", false },
+          }
+      },
     };
   }
 }

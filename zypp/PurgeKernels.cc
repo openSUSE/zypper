@@ -395,19 +395,23 @@ namespace zypp {
 
         for ( const auto &kernelMap : map ) {
           //if we find one of the running offsets in the keepspec, we add the kernel id the the list of packages to keep
-          if (  _keepOldestOffsets.find( currOff ) != _keepOldestOffsets.end()
-               || _keepLatestOffsets.find( currROff ) != _keepLatestOffsets.end()
-               // a kernel might be explicitely locked by version
-               // this will currently keep all editions that match, so if keep spec has 1-1 , this will keep 1-1 but also all 1-1.n
-               ||  std::find_if( _keepSpecificEditions.begin(), _keepSpecificEditions.end(),
-                    [ edition = &kernelMap.first ]( const auto &elem ) { return versionMatch( *edition, elem ); } ) != _keepSpecificEditions.end() ) {
-
-            for( const auto &pck : kernelMap.second ) {
-              markAsKeep(pck);
-            }
+          if (  _keepOldestOffsets.find( currOff ) != _keepOldestOffsets.end() || _keepLatestOffsets.find( currROff ) != _keepLatestOffsets.end() ) {
+            std::for_each( kernelMap.second.begin(), kernelMap.second.end(), markAsKeep );
           }
           currOff++;
           currROff--;
+
+          // a kernel package might be explicitely locked by version
+          // We need to go over all package name provides ( provides is named like the package ) and match
+          // them against the specified version to know which ones to keep. (bsc#1176740  bsc#1176192)
+          std::for_each( kernelMap.second.begin(), kernelMap.second.end(), [ & ]( const auto &solvId ){
+            const auto &pck = sat::Solvable(solvId);
+            for ( const auto &prov : pck.provides() ) {
+              if ( prov.detail().name() == pck.name() && _keepSpecificEditions.count( prov.detail().ed() ) ) {
+                markAsKeep( solvId );
+              }
+            }
+          });
         }
       }
     }
@@ -469,11 +473,33 @@ namespace zypp {
 
       auto &editionToSolvableMap = groupInfo.archToEdMap[ currArch ];
 
-      const auto currEd  = installedKrnlPck.edition();
-      if ( !editionToSolvableMap.count( currEd ) )
-        editionToSolvableMap.insert( std::make_pair( currEd, SolvableList{} ) );
+      // calculate the "shortest" or most generic edition of all the package name provides
+      // ( the key of the provides is the package name ). This generic edition is used to
+      // group the packages together. This should get us around the issue that uname -r does
+      // not represent the actual rpm package version anymore. ( bsc#1176740 )
+      auto currCount = INT_MAX;
+      Edition edToUse;
+      for ( const auto &prov : installedKrnlPck.provides() ) {
+        if ( prov.detail().name() == installedKrnlPck.name() ) {
+          if ( edToUse == Edition::noedition ) {
+            edToUse = installedKrnlPck.edition();
+            const auto &relStr = edToUse.release();
+            currCount = std::count( relStr.begin(), relStr.end(), '.');
+          } else {
+            const auto &pckEd = prov.detail().ed();
+            const auto &relStr = pckEd.release();
+            if ( const auto pntCnt = std::count( relStr.begin(), relStr.end(), '.'); pntCnt < currCount ) {
+              currCount = pntCnt;
+              edToUse = pckEd;
+            }
+          }
+        }
+      }
 
-      editionToSolvableMap[currEd].push_back( installedKrnlPck.id() );
+      if ( !editionToSolvableMap.count( edToUse ) )
+        editionToSolvableMap.insert( std::make_pair( edToUse, SolvableList{} ) );
+
+      editionToSolvableMap[edToUse].push_back( installedKrnlPck.id() );
 
       //in the first step we collect all packages in this list, then later we will remove the packages we want to explicitely keep
       packagesToRemove.insert( installedKrnlPck.id() );
@@ -544,7 +570,6 @@ namespace zypp {
 
           MIL << "Handling package explicitely due to name match."<< std::endl;
           addPackageToMap ( GroupInfo::RelatedBinaries, installedKrnlPck.name(), flav, installedKrnlPck );
-
         } else {
           MIL << "Package not explicitely handled" << std::endl;
         }
