@@ -716,7 +716,9 @@ This value can be temporarily overwritten in the current zypper command by using
 +
 It might be less tedious to persistently set *$releasever* to the target distribution value, so --releasever is not needed at all. See section *Repository Management* for more info about variable substitution and the definition of custom variables.
 +
-Note: distribution upgrades in openSUSE are currently only supported between consecutive releases. To upgrade multiple releases, upgrade each consecutive release one at a time. For more details see *http://en.opensuse.org/SDB:System_upgrade* and the _openSUSE release notes_ at *http://doc.opensuse.org/release-notes/*.
+'Note:' Performing a distribution upgrade will automatically create a solver test case at /var/log/updateTestcase-YYYY-MM-DD-hh-mm-ss (the date and time the command was executed).
++
+'Note:' distribution upgrades in openSUSE are currently only supported between consecutive releases. To upgrade multiple releases, upgrade each consecutive release one at a time. For more details see *http://en.opensuse.org/SDB:System_upgrade* and the _openSUSE release notes_ at *http://doc.opensuse.org/release-notes/*.
 +
 --
 	*--from* _alias_|_name_|_#_|_URI_::
@@ -1905,6 +1907,15 @@ This directory is used by all ZYpp-based applications.
 	If *keeppackages* property is set for a repository (see the *modifyrepo* command), all the RPM file downloaded during installation will be kept here. See also the *clean* command for cleaning these cache directories.
 +
 This directory is used by all ZYpp-based applications.
+
+*/var/log/zypper.log*::
+	Zypper log file. It should be attached to all bugreports. (see also zypper-log(8)).
+
+*/var/log/zypper.solverTestCase*::
+	Solver testcase created by using the *--debug-solver* option.
+
+*/var/log/updateTestcase-YYYY-MM-DD-hh-mm-ss*::
+	Solver testcase auto created when performing a *zypper dup*.
 
 */var/log/zypp/history*::
 	Installation history log.
