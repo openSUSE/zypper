@@ -148,8 +148,8 @@ namespace zypp {
 
     //remember which packages are already marked for removal, we do not need to check them again
     std::set<sat::Solvable> currentSetOfRemovals;
-    for ( auto it = pool.byStatusBegin( toBeUninstalledFilter ); it != pool.byStatusEnd( toBeUninstalledFilter );  it++  ) {
-      currentSetOfRemovals.insert( it->satSolvable() );
+    for ( auto p : pool.byStatus( toBeUninstalledFilter ) ) {
+      currentSetOfRemovals.insert( p.satSolvable() );
     }
 
     pi.status().setToBeUninstalled( ResStatus::USER );
@@ -165,32 +165,32 @@ namespace zypp {
     std::set<sat::Solvable> removedInThisRun;
     removedInThisRun.insert( slv );
 
-    for ( auto it = pool.byStatusBegin( toBeUninstalledFilter ); it != pool.byStatusEnd( toBeUninstalledFilter );  it++  ) {
+    for ( auto p : pool.byStatus( toBeUninstalledFilter ) ) {
 
       //check if that package is removeable
-      if ( it->status().isByUser()      //this was set by us, ignore it
-           || (currentSetOfRemovals.find( it->satSolvable() ) != currentSetOfRemovals.end()) //this was marked by a previous removal, ignore them
+      if ( p.status().isByUser()      //this was set by us, ignore it
+           || (currentSetOfRemovals.find( p.satSolvable() ) != currentSetOfRemovals.end()) //this was marked by a previous removal, ignore them
         )
         continue;
 
       // remember for later we need remove the debugsource and debuginfo packages as well
-      removedInThisRun.insert( it->satSolvable() );
+      removedInThisRun.insert( p.satSolvable() );
 
-      MIL << "Package " << *it << " was marked by the solver for removal." << std::endl;
+      MIL << "Package " << p << " was marked by the solver for removal." << std::endl;
 
       // if we do not plan to remove that package anyway, we need to check if its allowed to be removed ( package in removelist can never be in keep list )
-      if ( removeList.find( it->satSolvable() ) != removeList.end() )
+      if ( removeList.find( p.satSolvable() ) != removeList.end() )
         continue;
 
-      if ( keepList.find( it->satSolvable() ) != keepList.end() ) {
-        MIL << "Package " << *it << " is in keep spec, skipping" << pi << std::endl;
+      if ( keepList.find( p.satSolvable() ) != keepList.end() ) {
+        MIL << "Package " << p << " is in keep spec, skipping" << pi << std::endl;
         pi.statusReset();
         return false;
       }
 
       str::smatch what;
-      if ( !str::regex_match( it->name(), what, validRemovals) ) {
-        MIL << "Package " << *it << " should not be removed, skipping " << pi << std::endl;
+      if ( !str::regex_match( p.name(), what, validRemovals) ) {
+        MIL << "Package " << p << " should not be removed, skipping " << pi << std::endl;
         pi.statusReset();
         return false;
       }
