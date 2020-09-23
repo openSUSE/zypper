@@ -14,7 +14,6 @@
 #include <zypp/base/Logger.h>
 #include <zypp/base/Regex.h>
 #include <zypp/base/Iterator.h>
-#include <zypp/ui/Selectable.h>
 #include <zypp/PurgeKernels.h>
 #include <zypp/PoolQuery.h>
 #include <zypp/ResPool.h>
@@ -142,7 +141,7 @@ namespace zypp {
     //list of packages that are allowed to be removed automatically.
     const str::regex validRemovals("(kernel-syms(-.*)?|kgraft-patch(-.*)?|kernel-livepatch(-.*)?|.*-kmp(-.*)?)");
 
-    if ( ui::asSelectable()( pi )->hasLocks() ) {
+    if ( pi.status().isLocked() ) {
       MIL << "Package " << pi << " is locked by the user, not removing." << std::endl;
       return false;
     }
