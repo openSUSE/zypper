@@ -35,7 +35,7 @@
 namespace zypp {
 
   using Flavour                = std::string;
-  using SolvableList           = std::list<sat::Solvable::IdType>;
+  using SolvableList           = std::list<sat::Solvable>;
   using EditionToSolvableMap   = std::map<Edition, SolvableList >;
   using ArchToEditionMap       = std::map<Arch, EditionToSolvableMap >;
 
@@ -101,10 +101,10 @@ namespace zypp {
       MIL << "Kernel Edition: " << _runningKernelEdition << std::endl;
     }
 
-    bool removePackageAndCheck( const sat::Solvable::IdType id, const std::set<sat::Solvable::IdType> &keepList , const std::set<sat::Solvable::IdType> &removeList ) const;
+    bool removePackageAndCheck( const sat::Solvable slv, const std::set<sat::Solvable> &keepList , const std::set<sat::Solvable> &removeList ) const;
     static bool versionMatch ( const Edition &a, const Edition &b );
     void parseKeepSpec();
-    void fillKeepList(const GroupMap &installedKernels, std::set<sat::Solvable::IdType> &keepList , std::set<sat::Solvable::IdType> &removeList ) const;
+    void fillKeepList(const GroupMap &installedKernels, std::set<sat::Solvable> &keepList , std::set<sat::Solvable> &removeList ) const;
 
     std::set<size_t>  _keepLatestOffsets = { 0 };
     std::set<size_t>  _keepOldestOffsets;
@@ -122,11 +122,11 @@ namespace zypp {
    * tries to remove a the \ref PoolItem \a pi from the pool, solves and checks if no unexpected packages are removed due to the \a validRemovals regex.
    * If the constraint fails the changes are reverted and \a false is returned.
    */
-  bool PurgeKernels::Impl::removePackageAndCheck( const sat::Solvable::IdType id, const std::set<sat::Solvable::IdType> &keepList , const std::set<sat::Solvable::IdType> &removeList ) const
+  bool PurgeKernels::Impl::removePackageAndCheck( const sat::Solvable slv, const std::set<sat::Solvable> &keepList , const std::set<sat::Solvable> &removeList ) const
   {
     const filter::ByStatus toBeUninstalledFilter( &ResStatus::isToBeUninstalled );
 
-    PoolItem pi ( (sat::Solvable(id)) );
+    PoolItem pi ( slv );
 
     auto pool = ResPool::instance();
 
@@ -147,9 +147,9 @@ namespace zypp {
     }
 
     //remember which packages are already marked for removal, we do not need to check them again
-    std::set< sat::Solvable::IdType> currentSetOfRemovals;
+    std::set<sat::Solvable> currentSetOfRemovals;
     for ( auto it = pool.byStatusBegin( toBeUninstalledFilter ); it != pool.byStatusEnd( toBeUninstalledFilter );  it++  ) {
-      currentSetOfRemovals.insert( it->id() );
+      currentSetOfRemovals.insert( it->satSolvable() );
     }
 
     pi.status().setToBeUninstalled( ResStatus::USER );
@@ -162,35 +162,35 @@ namespace zypp {
       return false;
     }
 
-    std::set<sat::Solvable::IdType> removedInThisRun;
-    removedInThisRun.insert( pi.id() );
+    std::set<sat::Solvable> removedInThisRun;
+    removedInThisRun.insert( slv );
 
     for ( auto it = pool.byStatusBegin( toBeUninstalledFilter ); it != pool.byStatusEnd( toBeUninstalledFilter );  it++  ) {
 
       //check if that package is removeable
       if ( it->status().isByUser()      //this was set by us, ignore it
-           || (currentSetOfRemovals.find( it->id() ) != currentSetOfRemovals.end()) //this was marked by a previous removal, ignore them
+           || (currentSetOfRemovals.find( it->satSolvable() ) != currentSetOfRemovals.end()) //this was marked by a previous removal, ignore them
         )
         continue;
 
       // remember for later we need remove the debugsource and debuginfo packages as well
-      removedInThisRun.insert( it->id() );
+      removedInThisRun.insert( it->satSolvable() );
 
-      MIL << "Package " << PoolItem(*it) << " was marked by the solver for removal." << std::endl;
+      MIL << "Package " << *it << " was marked by the solver for removal." << std::endl;
 
       // if we do not plan to remove that package anyway, we need to check if its allowed to be removed ( package in removelist can never be in keep list )
-      if ( removeList.find( it->id() ) != removeList.end() )
+      if ( removeList.find( it->satSolvable() ) != removeList.end() )
         continue;
 
-      if ( keepList.find( it->id() ) != keepList.end() ) {
-        MIL << "Package " << PoolItem(*it) << " is in keep spec, skipping" << pi << std::endl;
+      if ( keepList.find( it->satSolvable() ) != keepList.end() ) {
+        MIL << "Package " << *it << " is in keep spec, skipping" << pi << std::endl;
         pi.statusReset();
         return false;
       }
 
       str::smatch what;
       if ( !str::regex_match( it->name(), what, validRemovals) ) {
-        MIL << "Package " << PoolItem(*it) << " should not be removed, skipping " << pi << std::endl;
+        MIL << "Package " << *it << " should not be removed, skipping " << pi << std::endl;
         pi.statusReset();
         return false;
       }
@@ -200,9 +200,8 @@ namespace zypp {
 
     //now check and mark the -debugsource and -debuginfo packages for this package and all the packages that were removed. Maybe collect it before and just remove here
     MIL << "Trying to remove debuginfo for: " << pi <<"."<<std::endl;
-    for ( const auto id : removedInThisRun ) {
+    for ( const auto solvable : removedInThisRun ) {
 
-      const auto solvable = sat::Solvable(id);
       if ( solvable.arch() == Arch_noarch ||
            solvable.arch() == Arch_empty )
         continue;
@@ -221,7 +220,7 @@ namespace zypp {
 
           MIL << "Found debug package for " << solvable << " : " << debugPackage << std::endl;
           //if removing the package fails it will not stop us from going on , so no need to check
-          removePackageAndCheck( debugPackage.id(), keepList, removeList );
+          removePackageAndCheck( debugPackage, keepList, removeList );
         }
       }
     }
@@ -324,7 +323,7 @@ namespace zypp {
    * doable. This is also what the perl script did.
    *
    */
-  void PurgeKernels::Impl::fillKeepList( const GroupMap &installedKernels, std::set<sat::Solvable::IdType> &keepList, std::set<sat::Solvable::IdType> &removeList ) const
+  void PurgeKernels::Impl::fillKeepList( const GroupMap &installedKernels, std::set<sat::Solvable> &keepList, std::set<sat::Solvable> &removeList ) const
   {
 
     const auto markAsKeep = [ &keepList, &removeList ]( const auto &pck ) {
@@ -452,9 +451,9 @@ namespace zypp {
 
 
     // packages that we plan to remove
-    std::set<sat::Solvable::IdType> packagesToRemove;
+    std::set<sat::Solvable> packagesToRemove;
 
-    const auto addPackageToMap = [&installedKrnlPackages, &packagesToRemove] ( const GroupInfo::GroupType type, const std::string &ident, const std::string &flavour, const auto &installedKrnlPck ) {
+    const auto addPackageToMap = [&installedKrnlPackages, &packagesToRemove] ( const GroupInfo::GroupType type, const std::string &ident, const std::string &flavour, const sat::Solvable &installedKrnlPck ) {
 
       if ( !installedKrnlPackages.count( ident ) )
         installedKrnlPackages.insert( std::make_pair( ident, GroupInfo(type, flavour) ) );
@@ -498,14 +497,14 @@ namespace zypp {
       if ( !editionToSolvableMap.count( edToUse ) )
         editionToSolvableMap.insert( std::make_pair( edToUse, SolvableList{} ) );
 
-      editionToSolvableMap[edToUse].push_back( installedKrnlPck.id() );
+      editionToSolvableMap[edToUse].push_back( installedKrnlPck );
 
       //in the first step we collect all packages in this list, then later we will remove the packages we want to explicitely keep
-      packagesToRemove.insert( installedKrnlPck.id() );
+      packagesToRemove.insert( installedKrnlPck );
     };
 
-    // the set of package IDs that have to be kept always
-    std::set<sat::Solvable::IdType> packagesToKeep;
+    // the set of satSolvables that have to be kept always
+    std::set<sat::Solvable> packagesToKeep;
 
     //collect the list of installed kernel packages
     PoolQuery q;
@@ -594,8 +593,8 @@ namespace zypp {
 
     _pimpl->fillKeepList( installedKrnlPackages, packagesToKeep, packagesToRemove );
 
-    for ( const auto id : packagesToRemove )
-      _pimpl->removePackageAndCheck( id, packagesToKeep, packagesToRemove );
+    for ( const auto slv : packagesToRemove )
+      _pimpl->removePackageAndCheck( slv, packagesToKeep, packagesToRemove );
   }
 
   void PurgeKernels::setUnameR( const std::string &val )
