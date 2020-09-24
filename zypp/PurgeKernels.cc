@@ -148,7 +148,7 @@ namespace zypp {
 
     //remember which packages are already marked for removal, we do not need to check them again
     std::set<sat::Solvable> currentSetOfRemovals;
-    for ( auto p : pool.byStatus( toBeUninstalledFilter ) ) {
+    for ( const PoolItem & p : pool.byStatus( toBeUninstalledFilter ) ) {
       currentSetOfRemovals.insert( p.satSolvable() );
     }
 
@@ -165,7 +165,7 @@ namespace zypp {
     std::set<sat::Solvable> removedInThisRun;
     removedInThisRun.insert( slv );
 
-    for ( auto p : pool.byStatus( toBeUninstalledFilter ) ) {
+    for ( const PoolItem & p : pool.byStatus( toBeUninstalledFilter ) ) {
 
       //check if that package is removeable
       if ( p.status().isByUser()      //this was set by us, ignore it
@@ -200,20 +200,20 @@ namespace zypp {
 
     //now check and mark the -debugsource and -debuginfo packages for this package and all the packages that were removed. Maybe collect it before and just remove here
     MIL << "Trying to remove debuginfo for: " << pi <<"."<<std::endl;
-    for ( const auto solvable : removedInThisRun ) {
+    for ( sat::Solvable solvable : removedInThisRun ) {
 
       if ( solvable.arch() == Arch_noarch ||
            solvable.arch() == Arch_empty )
         continue;
 
-      for ( const auto suffix : { "-debugsource", "-debuginfo" } ) {
+      for ( const char * suffix : { "-debugsource", "-debuginfo" } ) {
         PoolQuery q;
         q.addKind( zypp::ResKind::package );
         q.addDependency( sat::SolvAttr::provides, Capability( solvable.name()+suffix, Rel::EQ, solvable.edition() ) );
         q.setInstalledOnly();
         q.setMatchExact();
 
-        for ( const auto debugPackage : q ) {
+        for ( sat::Solvable debugPackage : q ) {
 
           if ( debugPackage.arch() != solvable.arch() )
             continue;
@@ -326,8 +326,8 @@ namespace zypp {
   void PurgeKernels::Impl::fillKeepList( const GroupMap &installedKernels, std::set<sat::Solvable> &keepList, std::set<sat::Solvable> &removeList ) const
   {
 
-    const auto markAsKeep = [ &keepList, &removeList ]( const auto &pck ) {
-      MIL << "Marking package " << sat::Solvable(pck) << " as to keep." << std::endl;
+    const auto markAsKeep = [ &keepList, &removeList ]( sat::Solvable pck ) {
+      MIL << "Marking package " << pck << " as to keep." << std::endl;
       keepList.insert( pck ) ;
       removeList.erase( pck );
     };
@@ -367,7 +367,7 @@ namespace zypp {
               MIL << "NOT removing any packages for flavor "<<_runningKernelFlavour<<"-"<<_kernelArch<<" ."<<std::endl;
 
               for ( const auto &kernelMap : map ) {
-                for( const auto &pck : kernelMap.second )
+                for( sat::Solvable pck : kernelMap.second )
                   markAsKeep(pck);
               }
               continue;
@@ -385,7 +385,7 @@ namespace zypp {
 
           // mark all packages of the running version as keep
           if ( it != map.end() ) {
-            for( const auto &pck : it->second ) {
+            for( sat::Solvable pck : it->second ) {
               markAsKeep(pck);
             }
           }
@@ -402,11 +402,10 @@ namespace zypp {
           // a kernel package might be explicitely locked by version
           // We need to go over all package name provides ( provides is named like the package ) and match
           // them against the specified version to know which ones to keep. (bsc#1176740  bsc#1176192)
-          std::for_each( kernelMap.second.begin(), kernelMap.second.end(), [ & ]( const auto &solvId ){
-            const auto &pck = sat::Solvable(solvId);
-            for ( const auto &prov : pck.provides() ) {
-              if ( prov.detail().name() == pck.name() && _keepSpecificEditions.count( prov.detail().ed() ) ) {
-                markAsKeep( solvId );
+          std::for_each( kernelMap.second.begin(), kernelMap.second.end(), [ & ]( sat::Solvable solv ){
+            for ( Capability prov : solv.provides() ) {
+              if ( prov.detail().name() == solv.name() && _keepSpecificEditions.count( prov.detail().ed() ) ) {
+                markAsKeep( solv );
               }
             }
           });
@@ -477,7 +476,7 @@ namespace zypp {
       // not represent the actual rpm package version anymore. ( bsc#1176740 )
       auto currCount = INT_MAX;
       Edition edToUse;
-      for ( const auto &prov : installedKrnlPck.provides() ) {
+      for ( Capability prov : installedKrnlPck.provides() ) {
         if ( prov.detail().name() == installedKrnlPck.name() ) {
           if ( edToUse == Edition::noedition ) {
             edToUse = installedKrnlPck.edition();
@@ -515,7 +514,7 @@ namespace zypp {
 
     MIL << "Searching for obsolete multiversion kernel packages." << std::endl;
 
-    for ( auto installedKrnlPck : q ) {
+    for ( sat::Solvable installedKrnlPck : q ) {
 
       MIL << "Found installed multiversion kernel package " << installedKrnlPck << std::endl;
 
@@ -593,7 +592,7 @@ namespace zypp {
 
     _pimpl->fillKeepList( installedKrnlPackages, packagesToKeep, packagesToRemove );
 
-    for ( const auto slv : packagesToRemove )
+    for ( sat::Solvable slv : packagesToRemove )
       _pimpl->removePackageAndCheck( slv, packagesToKeep, packagesToRemove );
   }
 
