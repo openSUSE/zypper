@@ -276,6 +276,42 @@ namespace  {
           //{ "kernel-default-base-5.7.8-3.1.1.1.x86_64", false },
           }
       },
+      TestSample {
+        TESTS_SRC_DIR"/zypp/data/PurgeKernels/flavour",
+        "1-3-rt",
+        Arch("x86_64"),
+        "running",
+        {
+          { "kernel-rt-1-1.x86_64", false },
+          { "kernel-rt-devel-1-1.x86_64", false },
+          { "kernel-rt-devel-debuginfo-1-1.x86_64", false },
+          { "kernel-devel-rt-1-1.noarch", false },
+          { "kernel-syms-rt-1-1.x86_64", false },
+          { "kernel-source-rt-1-1.noarch", false },
+          { "kernel-rt-1-2.x86_64", false },
+          { "kernel-rt-devel-1-2.x86_64", false },
+          { "kernel-rt-devel-debuginfo-1-2.x86_64", false },
+          { "kernel-devel-rt-1-2.noarch", false },
+          { "kernel-syms-rt-1-2.x86_64", false },
+          { "kernel-rt-1-4.x86_64", false },
+          { "kernel-rt-devel-1-4.x86_64", false },
+          { "kernel-rt-devel-debuginfo-1-4.x86_64", false },
+          { "kernel-devel-rt-1-4.noarch", false },
+          { "kernel-syms-rt-1-4.x86_64", false },
+          { "kernel-rt-1-5.x86_64", false },
+          { "kernel-rt-devel-1-5.x86_64", false },
+          { "kernel-rt-devel-debuginfo-1-5.x86_64", false },
+          { "kernel-devel-rt-1-5.noarch", false },
+          { "kernel-syms-rt-1-5.x86_64", false },
+          // left over devel packages that need to go away too
+          { "kernel-devel-rt-1-1.2.noarch", false },
+          { "kernel-source-rt-1-1.2.noarch", false },
+          { "kernel-rt-devel-1-3.x86_64", false },
+          { "kernel-devel-rt-1-3.noarch", false },
+          { "kernel-rt-devel-1-3.x86_64", false },
+          { "kernel-rt-devel-debuginfo-1-3.x86_64", false },
+        }
+      },
     };
   }
 }

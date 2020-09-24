@@ -542,6 +542,7 @@ namespace zypp {
 
       } else {
 
+        // if adapting the groups do not forget to explicitely handle the group when querying the matches
         const str::regex explicitelyHandled("kernel-syms(-.*)?|kernel(-.*)?-devel");
 
         MIL << "Not a kernel package, inspecting more closely " << std::endl;
@@ -559,11 +560,15 @@ namespace zypp {
           // getting no flavour for a kernel(-*)?-devel means we have the kernel-devel package otherwise the flavour specific one
           // ...yes this is horrible
           std::string flav;
-          if ( match.size() > 1 )  {
+
+          // first group match is a kernel-syms
+          if ( match.size() > 1 && match[1].size() )
+            flav = match[1].substr(1);
+          // second group match is a kernel-flavour-devel
+          else if ( match.size() > 2 &&  match[2].size() )
             flav = match[2].substr(1);
-          } else if ( installedKrnlPck.name() == "kernel-syms" ) {
+          else if ( installedKrnlPck.name() == "kernel-syms" )
             flav = "default";
-          }
 
           MIL << "Handling package explicitely due to name match."<< std::endl;
           addPackageToMap ( GroupInfo::RelatedBinaries, installedKrnlPck.name(), flav, installedKrnlPck );
