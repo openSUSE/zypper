@@ -5,10 +5,10 @@
 #include <sstream>
 #include <pthread.h>
 
-namespace zyppng {
-
+namespace zyppng
+{
   ThreadData::ThreadData()
-  : threadId( std::this_thread::get_id() ),
+  : _threadId( std::this_thread::get_id() ),
     _nativeHandle( pthread_self() )
   {
   }
@@ -19,36 +19,37 @@ namespace zyppng {
     return data;
   }
 
-  std::string ThreadData::name() const
+  const std::string &ThreadData::name() const
   {
-    if ( threadName.empty() ) {
+    if ( _threadName.empty() ) {
       std::stringstream strStr;
-      strStr << threadId;
-      return strStr.str();
+      strStr << _threadId;
+      _threadName = strStr.str();
     }
-    return threadName;
+    return _threadName;
   }
 
   std::shared_ptr<EventDispatcher> ThreadData::ensureDispatcher()
   {
-    auto sp = dispatcher.lock();
+    auto sp = _dispatcher.lock();
     if (!sp) {
-      dispatcher = sp = EventDispatcherPrivate::create();
+      _dispatcher = sp = EventDispatcherPrivate::create();
     }
     return sp;
   }
 
   void ThreadData::setDispatcher( const std::shared_ptr<EventDispatcher> &disp )
   {
-    if ( dispatcher.lock() ) {
+    if ( _dispatcher.lock() ) {
       WAR << "Dispatcher was already created for the current thread" << std::endl;
       return;
     }
-    dispatcher = disp;
+    _dispatcher = disp;
   }
 
   void ThreadData::syncNativeName()
   {
-    pthread_setname_np( _nativeHandle, threadName.c_str() );
+    // length is restricted to 16 characters, including the terminating null byte ('\0')
+    pthread_setname_np( _nativeHandle, name().substr(0,15).c_str() );
   }
 }

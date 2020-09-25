@@ -496,7 +496,7 @@ ulong EventDispatcher::runningTimers() const
 
 std::shared_ptr<EventDispatcher> EventDispatcher::instance()
 {
-  return ThreadData::current().dispatcher.lock();
+  return ThreadData::current().dispatcher();
 }
 
 void EventDispatcher::setThreadDispatcher(const std::shared_ptr<EventDispatcher> &disp)
