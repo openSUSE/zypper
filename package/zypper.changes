@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Fri Sep 25 13:42:42 CEST 2020 - ma@suse.de
+
+- info: Assume descriptions starting with '<p>' are richtext
+  (bsc#935885)
+- version 1.14.40
+
+-------------------------------------------------------------------
 Fri Sep 18 16:55:48 CEST 2020 - ma@suse.de
 
 - Use new testcase API in libzypp.
