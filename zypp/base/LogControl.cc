@@ -19,6 +19,7 @@
 #include <zypp/base/ProfilingFormater.h>
 #include <zypp/base/String.h>
 #include <zypp/Date.h>
+#include <zypp/TriBool.h>
 #include <zypp/PathInfo.h>
 #include <zypp/AutoDispose.h>
 
@@ -43,6 +44,7 @@ std::once_flag flagReadEnvAutomatically;
 
 namespace zypp
 {
+  constexpr std::string_view ZYPP_MAIN_THREAD_NAME( "Zypp-main" );
 
   template<class> inline constexpr bool always_false_v = false;
 
@@ -112,6 +114,8 @@ namespace zypp
 
     LogThread ()
     {
+      // Name the thread that started the logger assuming it's main thread.
+      zyppng::ThreadData::current().setName(ZYPP_MAIN_THREAD_NAME);
       _thread = std::thread( [this] () {
         workerMain();
       });
@@ -370,31 +374,6 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
   namespace base
   { /////////////////////////////////////////////////////////////////
-
-    ///////////////////////////////////////////////////////////////////
-    // LineFormater
-    ///////////////////////////////////////////////////////////////////
-    std::string LogControl::LineFormater::format( const std::string & group_r,
-                                                  logger::LogLevel    level_r,
-                                                  const char *        file_r,
-                                                  const char *        func_r,
-                                                  int                 line_r,
-                                                  const std::string & message_r )
-    {
-      static char hostname[1024];
-      static char nohostname[] = "unknown";
-      std::string now( Date::now().form( "%Y-%m-%d %H:%M:%S" ) );
-
-      return str::form( "%s <%d> %s(%d) [Thread: %s] [%s] %s(%s):%d %s",
-                        now.c_str(), level_r,
-                        ( gethostname( hostname, 1024 ) ? nohostname : hostname ),
-                        getpid(),
-                        zyppng::ThreadData::current().name().c_str(),
-                        group_r.c_str(),
-                        file_r, func_r, line_r,
-                        message_r.c_str() );
-    }
-
     ///////////////////////////////////////////////////////////////////
     namespace logger
     { /////////////////////////////////////////////////////////////////
@@ -534,7 +513,7 @@ namespace zypp
       //
       //	CLASS NAME : LogControlImpl
       //
-      /** LogControl implementation (Singleton).
+      /** LogControl implementation (thread_local Singleton).
        *
        * \note There is a slight difference in using the _lineFormater and _lineWriter!
        * \li \c _lineFormater must not be NULL (create default LogControl::LineFormater)
@@ -546,11 +525,36 @@ namespace zypp
       struct LogControlImpl
       {
       public:
-	bool isExcessive()
+	bool isExcessive() const
 	{ return _excessive; }
 
         void excessive( bool onOff_r )
         { _excessive = onOff_r; }
+
+
+        /** Hint for Formater whether to hide the thread name. */
+	bool hideThreadName() const
+	{
+	  if ( indeterminate(_hideThreadName) )
+	    _hideThreadName = ( zyppng::ThreadData::current().name() == ZYPP_MAIN_THREAD_NAME );
+	  return _hideThreadName;
+	}
+	/** \overload Setter */
+        void hideThreadName( bool onOff_r )
+        { _hideThreadName = onOff_r; }
+        /** \overload Static getter */
+	static bool instanceHideThreadName()
+	{
+	  auto impl = LogControlImpl::instance();
+	  return impl ? impl->hideThreadName() : false;
+	}
+	/** \overload Static setter */
+        static void instanceHideThreadName( bool onOff_r )
+        {
+	  auto impl = LogControlImpl::instance();
+	  if ( impl ) impl->hideThreadName( onOff_r );
+	}
+
 
         /** NULL _lineWriter indicates no loggin. */
         void setLineWriter( const shared_ptr<LogControl::LineWriter> & writer_r )
@@ -582,6 +586,7 @@ namespace zypp
         LogClient    _logClient;
         std::ostream _no_stream;
         bool         _excessive;
+	mutable TriBool _hideThreadName = indeterminate;	///< Hint for Formater whether to hide the thread name.
 
         shared_ptr<LogControl::LineFormater> _lineFormater;
 
@@ -743,6 +748,42 @@ namespace zypp
     } // namespace logger
     ///////////////////////////////////////////////////////////////////
 
+    using logger::LogControlImpl;
+
+    ///////////////////////////////////////////////////////////////////
+    // LineFormater
+    ///////////////////////////////////////////////////////////////////
+    std::string LogControl::LineFormater::format( const std::string & group_r,
+                                                  logger::LogLevel    level_r,
+                                                  const char *        file_r,
+                                                  const char *        func_r,
+                                                  int                 line_r,
+                                                  const std::string & message_r )
+    {
+      static char hostname[1024];
+      static char nohostname[] = "unknown";
+      std::string now( Date::now().form( "%Y-%m-%d %H:%M:%S" ) );
+      std::string ret;
+      if ( LogControlImpl::instanceHideThreadName() )
+	ret = str::form( "%s <%d> %s(%d) [%s] %s(%s):%d %s",
+			 now.c_str(), level_r,
+			 ( gethostname( hostname, 1024 ) ? nohostname : hostname ),
+			 getpid(),
+			 group_r.c_str(),
+			 file_r, func_r, line_r,
+			 message_r.c_str() );
+      else
+	ret = str::form( "%s <%d> %s(%d) [%s] %s(%s):%d {T:%s} %s",
+			 now.c_str(), level_r,
+			 ( gethostname( hostname, 1024 ) ? nohostname : hostname ),
+			 getpid(),
+			 group_r.c_str(),
+			 file_r, func_r, line_r,
+			 zyppng::ThreadData::current().name().c_str(),
+			 message_r.c_str() );
+      return ret;
+    }
+
     ///////////////////////////////////////////////////////////////////
     //
     //	CLASS NAME : LogControl
@@ -750,7 +791,6 @@ namespace zypp
     //
     ///////////////////////////////////////////////////////////////////
 
-    using logger::LogControlImpl;
 
     void LogControl::logfile( const Pathname & logfile_r )
     {

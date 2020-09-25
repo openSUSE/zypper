@@ -24,7 +24,6 @@ extern "C"
 #include <zypp/base/Functional.h>
 #include <zypp/base/Backtrace.h>
 #include <zypp/base/LogControl.h>
-#include <zypp/zyppng/base/private/threaddata_p.h>
 #include <zypp/PathInfo.h>
 
 #include <zypp/ZYppFactory.h>
@@ -313,7 +312,6 @@ namespace zypp
   ZYpp::ZYpp( const Impl_Ptr & impl_r )
   : _pimpl( impl_r )
   {
-    zyppng::ThreadData::current().setName("Zypp-Main");
     ::zyppintern::repoVariablesReset();	// upon re-acquiring the lock...
     MIL << "ZYpp is on..." << endl;
   }
