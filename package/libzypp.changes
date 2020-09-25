@@ -1,4 +1,21 @@
 -------------------------------------------------------------------
+Fri Sep 25 13:39:38 CEST 2020 - ma@suse.de
+
+- Fix bsc#1176902: When kernel-rt has been installed, the
+  purge-kernels service fails during boot.
+- Use package name provides as group key in purge-kernel
+  (bsc#1176740 bsc#1176192)
+  kernel-default-base has new packaging, where the kernel uname -r
+  does not reflect the full package version anymore. This patch
+  adds additional logic to use the most generic/shortest edition
+  each package provides with %{packagename}=<version> to group the
+  kernel packages instead of the rpm versions.
+  This also changes how the keep-spec for specific versions is
+  applied, instead of matching the package versions, each of the
+  package name provides will be matched.
+- version 17.25.1 (22)
+
+-------------------------------------------------------------------
 Fri Sep 18 16:45:49 CEST 2020 - ma@suse.de
 
 - RepoInfo: Return the type of the local metadata cache as
