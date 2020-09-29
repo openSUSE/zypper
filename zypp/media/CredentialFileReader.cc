@@ -14,6 +14,7 @@
 #include <zypp/base/Logger.h>
 #include <zypp/base/InputStream.h>
 #include <zypp/parser/IniDict.h>
+#include <zypp/PathInfo.h>
 
 #include <zypp/media/CredentialFileReader.h>
 
@@ -57,6 +58,9 @@ namespace zypp
 	: _input( input_r )
 	, _callback( callback_r )
 	{
+          zypp::PathInfo pi( input_r );
+          _lastChange = pi.mtime();
+
 	  try
 	  {
 	    parse( input_r );
@@ -109,6 +113,7 @@ namespace zypp
 	  {
 	    if ( _secret->valid() )
 	    {
+              _secret->setLastDatabaseUpdate( _lastChange );
 	      if ( !_callback( _secret ) )
 		throw( StopParsing() );
 	    }
@@ -121,6 +126,7 @@ namespace zypp
 	const Pathname & 		_input;
 	const ProcessCredentials &	_callback;
 	AuthData_Ptr			_secret;
+        time_t                          _lastChange;
       };
     } // namespace
     ///////////////////////////////////////////////////////////////////

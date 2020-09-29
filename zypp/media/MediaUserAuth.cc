@@ -26,7 +26,7 @@ namespace zypp {
 
 
 AuthData::AuthData(const Url & url)
-  : _url(url)
+      : _url(url), _lastChange(0)
 {
   _username = url.getUsername();
   _password = url.getPassword();
@@ -36,6 +36,16 @@ AuthData::AuthData(const Url & url)
 bool AuthData::valid() const
 {
   return username().size() && password().size();
+}
+
+time_t AuthData::lastDatabaseUpdate() const
+{
+  return _lastChange;
+}
+
+void AuthData::setLastDatabaseUpdate( time_t time )
+{
+  _lastChange = time;
 }
 
 std::ostream & AuthData::dumpOn( std::ostream & str ) const

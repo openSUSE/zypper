@@ -36,7 +36,7 @@ public:
   AuthData(const Url & url);
 
   AuthData(const std::string & username, const std::string & password)
-    : _username(username), _password(password)
+    : _username(username), _password(password), _lastChange(0)
   {}
 
   virtual ~AuthData() {};
@@ -56,6 +56,13 @@ public:
   std::string username() const { return _username; }
   std::string password() const { return _password; }
 
+  /*!
+   * Returns the timestamp of the last change to the database this
+   * credential is stored in, or 0 if its not known.
+   */
+  time_t lastDatabaseUpdate () const;
+  void setLastDatabaseUpdate ( time_t time );
+
   virtual std::ostream & dumpOn( std::ostream & str ) const;
 
   virtual std::ostream & dumpAsIniOn( std::ostream & str ) const;
@@ -64,6 +71,7 @@ private:
   Url _url;
   std::string _username;
   std::string _password;
+  time_t _lastChange; //< timestamp of the last change to the database this credential is stored in
 };
 
 typedef shared_ptr<AuthData> AuthData_Ptr;
