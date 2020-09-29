@@ -533,6 +533,15 @@ namespace zypp
       std::string _msg;
     };
 
+    class MediaInvalidCredentialsException : public MediaException
+    {
+    public:
+      MediaInvalidCredentialsException( const std::string & msg = "" )
+        : MediaException(msg)
+      {}
+      virtual ~MediaInvalidCredentialsException() noexcept {}
+    };
+
   /////////////////////////////////////////////////////////////////
   } // namespace media
 } // namespace zypp

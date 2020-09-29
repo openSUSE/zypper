@@ -19,8 +19,8 @@
 #include <zypp/PathInfo.h>
 
 #include <zypp/media/CredentialFileReader.h>
-
 #include <zypp/media/CredentialManager.h>
+#include <zypp/media/MediaException.h>
 
 using std::endl;
 
@@ -175,12 +175,15 @@ namespace zypp
                              url::ViewOption vopt)
   {
     const std::string & username = url.getUsername();
-    for(CredentialManager::CredentialIterator it = set.begin(); it != set.end(); ++it)
+    for( CredentialManager::CredentialIterator it = set.begin(); it != set.end(); ++it )
     {
+      if ( !(*it)->url().isValid() )
+        continue;
+
       // this ignores url params - not sure if it is good or bad...
-      if (url.asString(vopt).find((*it)->url().asString(vopt)) == 0)
+      if ( url.asString(vopt).find((*it)->url().asString(vopt)) == 0 )
       {
-        if (username.empty() || username == (*it)->username())
+        if ( username.empty() || username == (*it)->username() )
           return *it;
       }
     }
@@ -304,6 +307,9 @@ namespace zypp
 
   void CredentialManager::addCred(const AuthData & cred)
   {
+    if ( !cred.url().isValid() )
+      ZYPP_THROW( MediaInvalidCredentialsException( "URL must be valid in order to save AuthData." ) );
+
     Pathname credfile = cred.url().getQueryParam("credentials");
     if (credfile.empty())
       //! \todo ask user where to store these creds. saving to user creds for now
@@ -315,6 +321,9 @@ namespace zypp
 
   void CredentialManager::addGlobalCred(const AuthData & cred)
   {
+    if ( !cred.url().isValid() )
+      ZYPP_THROW( MediaInvalidCredentialsException( "URL must be valid in order to save AuthData." ) );
+
     AuthData_Ptr c_ptr;
     c_ptr.reset(new AuthData(cred)); // FIX for child classes if needed
     std::pair<CredentialIterator, bool> ret = _pimpl->_credsGlobal.insert(c_ptr);
@@ -331,6 +340,9 @@ namespace zypp
 
   void CredentialManager::addUserCred(const AuthData & cred)
   {
+    if ( !cred.url().isValid() )
+      ZYPP_THROW( MediaInvalidCredentialsException( "URL must be valid in order to save AuthData." ) );
+
     AuthData_Ptr c_ptr;
     c_ptr.reset(new AuthData(cred)); // FIX for child classes if needed
     std::pair<CredentialIterator, bool> ret = _pimpl->_credsUser.insert(c_ptr);
