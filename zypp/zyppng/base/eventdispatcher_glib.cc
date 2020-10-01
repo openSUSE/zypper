@@ -443,15 +443,18 @@ bool EventDispatcher::waitForFdEvent( const int fd, int events , int &revents , 
     const int res = g_poll( &pollFd, 1, timeout );
     switch ( res ) {
       case 0: //timeout
+        timeout = 0;
         return false;
-      case -1: {
-        // interrupt
-        if ( timeout > -1 ) {
-          timeout -= g_timer_elapsed( *timer, NULL );
-          if ( timeout < 0 ) timeout = 0;
-          if ( timeout <= 0 )
-            return false;
-        }
+      case -1: { // interrupt
+        // if timeout is -1 we wait until eternity
+        if ( timeout == -1 )
+          continue;
+
+        timeout -= g_timer_elapsed( *timer, NULL );
+        if ( timeout < 0 ) timeout = 0;
+        if ( timeout <= 0 )
+          return false;
+
         break;
       }
       case 1:
@@ -460,7 +463,7 @@ bool EventDispatcher::waitForFdEvent( const int fd, int events , int &revents , 
     }
   }
 
-  revents = gioConditionToEventTypes( (GIOCondition)pollFd.revents, events );
+  revents = gioConditionToEventTypes( (GIOCondition)pollFd.revents, evModeToMask(events) );
   return true;
 }
 
