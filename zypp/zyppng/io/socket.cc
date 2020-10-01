@@ -209,8 +209,10 @@ namespace zyppng {
     char *buf = _readBuf.reserve( bytesToRead );
     const auto bytesRead = z_func()->readData( buf, bytesToRead );
 
-    if ( bytesRead < 0 )
+    if ( bytesRead < 0 ) {
+      _readBuf.chop( bytesToRead );
       return false;
+    }
 
     if ( bytesToRead > bytesRead )
       _readBuf.chop( bytesToRead-bytesRead );
@@ -604,6 +606,15 @@ namespace zyppng {
     return d->_socket;
   }
 
+  int Socket::releaseSocket()
+  {
+    Z_D();
+    auto sock = d->_socket;
+    d->_socket = -1;
+    d->transition( Socket::ClosedState );
+    return sock;
+  }
+
   Socket::SocketError Socket::lastError() const
   {
     Z_D();
@@ -697,6 +708,9 @@ namespace zyppng {
       int rEvents = 0;
       if ( EventDispatcher::waitForFdEvent( d->_socket, AbstractEventSource::Write, rEvents, timeout ) ) {
         d->onSocketActivated( rEvents );
+      } else {
+        // timeout
+        return false;
       }
     }
     return d->state() == Socket::ConnectedState;
@@ -709,18 +723,6 @@ namespace zyppng {
     bool canContinue = true;
     bool bufferEmpty = false;
 
-    const auto bytesWrittenCB = [ & ]( const auto ){
-      std::visit([&]( const auto &s ){
-        using T = std::decay_t<decltype (s)>;
-        if constexpr ( std::is_same_v<T, SocketPrivate::ConnectedState> || std::is_same_v<T, SocketPrivate::ClosingState> ) {
-          bufferEmpty = (s._writeBuffer.size() == 0);
-          if ( bufferEmpty ) canContinue = false;
-        }
-      }, d->_state );
-    };
-
-    zypp::AutoDispose<sigc::connection> conn( d->_sigBytesWritten.connect( bytesWrittenCB ), []( auto conn ) { conn.disconnect(); } );
-
     while ( canContinue && !bufferEmpty ) {
 
       if ( d->state() != Socket::ConnectedState &&  d->state() != Socket::ClosingState)
@@ -729,20 +731,41 @@ namespace zyppng {
       std::visit([&]( const auto &s ){
         using T = std::decay_t<decltype (s)>;
         if constexpr ( std::is_same_v<T, SocketPrivate::ConnectedState> || std::is_same_v<T, SocketPrivate::ClosingState> ) {
-          if ( s._writeBuffer.size() == 0 ) {
-            canContinue = false;
-            bufferEmpty = true;
-          } else {
+          if ( s._writeBuffer.size() > 0 ) {
             int rEvents = 0;
-            if ( EventDispatcher::waitForFdEvent( d->_socket, AbstractEventSource::Write | AbstractEventSource::Read, rEvents, timeout ) ) {
+            canContinue = EventDispatcher::waitForFdEvent( d->_socket, AbstractEventSource::Write | AbstractEventSource::Read, rEvents, timeout );
+            if ( canContinue ) {
               //this will trigger the bytesWritten signal, we check there if the buffer is empty
               d->onSocketActivated( rEvents );
             }
+          }
+          if ( s._writeBuffer.size() == 0 ){
+            canContinue = false;
+            bufferEmpty = true;
           }
         }
       }, d->_state );
     }
     return bufferEmpty;
+  }
+
+  bool Socket::waitForReadyRead(int timeout)
+  {
+    Z_D();
+    if ( d->state() != Socket::ConnectedState )
+      return false;
+
+    // we can only wait if we are in connected state
+    while ( d->state() == Socket::ConnectedState && bytesAvailable() <= 0 ) {
+      int rEvents = 0;
+      if ( EventDispatcher::waitForFdEvent( d->_socket,  AbstractEventSource::Read | AbstractEventSource::Error , rEvents, timeout ) ) {
+        d->onSocketActivated( rEvents );
+      } else {
+        //timeout
+        return false;
+      }
+    }
+    return bytesAvailable() > 0;
   }
 
   off_t Socket::readData( char *buffer, off_t bufsize )
@@ -781,6 +804,18 @@ namespace zyppng {
   {
     Z_D();
     return IODevice::bytesAvailable() + d->rawBytesAvailable();
+  }
+
+  size_t Socket::bytesPending() const
+  {
+    Z_D();
+    return std::visit([&]( const auto &s ) -> size_t {
+      using T = std::decay_t<decltype (s)>;
+      if constexpr ( std::is_same_v<T, SocketPrivate::ConnectedState> || std::is_same_v<T, SocketPrivate::ClosingState> ) {
+        return s._writeBuffer.size();
+      }
+      return 0;
+    }, d->_state );
   }
 
   Socket::SocketState Socket::state() const

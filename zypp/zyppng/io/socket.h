@@ -92,6 +92,11 @@ namespace zyppng {
     size_t bytesAvailable() const override;
 
     /*!
+     * Returns the current number of bytes that are not yet written to the socket.
+     */
+    size_t bytesPending() const;
+
+    /*!
      * Returns the current state the socket is in,
      * check \ref SocketState for possible values.
      */
@@ -157,9 +162,25 @@ namespace zyppng {
     bool waitForAllBytesWritten ( int timeout = -1 );
 
     /*!
+     * Blocks the current event loop to wait until there are bytes available to read from the device
+     *
+     * \note do not use until there is no other way
+     */
+    bool waitForReadyRead ( int timeout = -1 );
+
+    /*!
      * Returns the native socket handle.
      */
     int nativeSocket () const;
+
+    /*!
+     * This will release the current socket and instantly transition into
+     * ClosedState. All unwritten data in the buffers will be discarded,
+     * so consider to use \ref waitForAllBytesWritten before you call this function.
+     *
+     * \returns the socket or -1 if there was no socket connected
+     */
+    int releaseSocket ();
 
     /*!
      * Return the last error that was encountered by the socket.
