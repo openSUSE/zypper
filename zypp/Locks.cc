@@ -10,7 +10,7 @@
 #include <set>
 #include <fstream>
 #include <boost/function.hpp>
-#include <boost/function_output_iterator.hpp>
+#include <boost/iterator/function_output_iterator.hpp>
 #include <algorithm>
 
 #include <zypp/base/Regex.h>
