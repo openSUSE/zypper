@@ -584,7 +584,6 @@ public:
   {
     if ( ! create( RPMDBI_PACKAGES ) )
       return false;
-#warning TESTCASE: rpmdbAppendIterator and (non)sequential access?
 #ifdef RPMFILEITERMAX	// since rpm.4.12
     ::rpmdbAppendIterator( _mi, (const unsigned *)&off_r, 1 );
 #else
@@ -603,7 +602,6 @@ public:
     if ( !_mi )
       return 0;
     int ret = ::rpmdbGetIteratorCount( _mi );
-#warning TESTCASE: rpmdbGetIteratorCount returns 0 on sequential access?
     return( ret ? ret : -1 ); // -1: sequential access
   }
 };

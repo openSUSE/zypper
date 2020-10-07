@@ -1528,7 +1528,6 @@ namespace zypp
               continue;
             }
 
-#warning Exception handling
             // create a installation progress report proxy
             RpmInstallPackageReceiver progress( citem.resolvable() );
             progress.connect(); // disconnected on destruction.

@@ -392,7 +392,7 @@ Date RpmHeader::tag_buildtime() const
 {
   return int_val( RPMTAG_BUILDTIME );
 }
-#warning CHECK IF FILE REQUIRES HANDLING IS OBSOLETE
+
 ///////////////////////////////////////////////////////////////////
 //
 //

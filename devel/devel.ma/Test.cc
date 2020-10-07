@@ -3,7 +3,6 @@
 
 #include <zypp/sat/LookupAttr.h>
 #include <zypp/PoolQuery.h>
-#include <zypp/sat/AttrMatcher.h>
 
 static const Pathname sysRoot( "/tmp/ToolScanRepos" );
 

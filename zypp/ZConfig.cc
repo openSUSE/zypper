@@ -879,7 +879,7 @@ namespace zypp
     {
       WAR << "Overriding text locale (" << _pimpl->cfg_textLocale << "): " << locale_r << endl;
       _pimpl->cfg_textLocale = locale_r;
-#warning prefer signal
+      // Propagate changes
       sat::Pool::instance().setTextLocale( locale_r );
     }
   }

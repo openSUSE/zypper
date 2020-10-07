@@ -30,7 +30,7 @@ namespace sat
   const SolvAttr SolvAttr::allAttr( detail::noId );
   const SolvAttr SolvAttr::noAttr;
 
-#warning STILL ATTRIBUTES HERE WHICH ARE NOT PROVIDED BY SOLV FILES
+// There are some attributes here which are not provided by solv files.
 // At least the ones that do nat have a solv/knownid.
 
   const SolvAttr SolvAttr::name         ( SOLVABLE_NAME );
