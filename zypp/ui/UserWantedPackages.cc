@@ -44,9 +44,6 @@ namespace zypp
 	static inline PoolProxyIterator pkgBegin()		{ return poolProxyBegin<Package>();	}
 	static inline PoolProxyIterator pkgEnd()		{ return poolProxyEnd<Package>();	}
 
-// 	static inline PoolProxyIterator langBegin()		{ return poolProxyBegin<Language>();	}
-// 	static inline PoolProxyIterator langEnd()		{ return poolProxyEnd<Language>();	}
-
 	static inline PoolProxyIterator patchesBegin()		{ return poolProxyBegin<Patch>();	}
 	static inline PoolProxyIterator patchesEnd()		{ return poolProxyEnd<Patch>();		}
 
@@ -60,7 +57,6 @@ namespace zypp
 	static void addDirectlySelectedPackages	( set<string> & pkgNames );
         template<class PkgSet_T> void addPkgSetPackages( set<string> & pkgNames );
 
-	static void addPatternPackages		( set<string> & pkgNames );
 	static void addPatchPackages		( set<string> & pkgNames );
 
 
@@ -72,7 +68,6 @@ namespace zypp
 	    DBG << "Collecting packages the user explicitly asked for" << endl;
 
 	    addDirectlySelectedPackages	( pkgNames );
-	    addPatternPackages		( pkgNames );
 	    addPatchPackages		( pkgNames );
 
 	    return pkgNames;
@@ -94,42 +89,6 @@ namespace zypp
 		    DBG << "Explicit user transaction on pkg \"" << (*it)->name() << "\"" << endl;
 
 		    pkgNames.insert( (*it)->name() );
-		}
-	    }
-	}
-
-
-
-	static void addPatternPackages( set<string> & pkgNames )
-	{
-	    addPkgSetPackages<Pattern>( pkgNames );
-	}
-
-
-	/**
-	 * Template to handle Patterns
-	 **/
-        template<class PkgSet_T> void addPkgSetPackages( set<string> & pkgNames )
-	{
-	    for ( PoolProxyIterator it = poolProxyBegin<PkgSet_T>();
-		  it != poolProxyEnd<PkgSet_T>();
-		  ++it )
-	    {
-		// Take all pkg sets (patterns) into account that
-		// will be transacted, no matter if the user explicitly asked
-		// for that pkg set or if the patterns is required by another
-		// pkg set of the same class
-
-          typename PkgSet_T::constPtr pkgSet = dynamic_pointer_cast<const PkgSet_T>( (*it)->theObj() ? (*it)->theObj().resolvable() : 0L );
-
-		if ( pkgSet && (*it)->toModify() )
-		{
-		    DBG << (*it)->theObj()->kind().asString()
-			<< " will be transacted: \"" << pkgSet->name() << "\"" << endl;
-
-#warning NEEDS FIX
-		    set<string> setPkgs;// = pkgSet->install_packages();
-		    pkgNames.insert( setPkgs.begin(), setPkgs.end() );
 		}
 	    }
 	}
