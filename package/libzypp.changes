@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Wed Oct  7 12:05:33 CEST 2020 - ma@suse.de
+
+- Bump version to force rebuild against a fixed libsolv.
+  (bsc#1177238, bsc#1177275)
+- version 17.25.2 (22)
+
+-------------------------------------------------------------------
 Fri Sep 25 13:39:38 CEST 2020 - ma@suse.de
 
 - Fix bsc#1176902: When kernel-rt has been installed, the
