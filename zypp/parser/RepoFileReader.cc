@@ -137,7 +137,7 @@ namespace zypp
           else if ( it->first == "path" )
             info.setPath( Pathname(it->second) );
           else if ( it->first == "type" )
-            info.setType(repo::RepoType(it->second));
+            ; // bsc#1177427 et.al.: type in a .repo file is legacy - ignore it and let RepoManager probe
           else if ( it->first == "autorefresh" )
             info.setAutorefresh( str::strToTrue( it->second ) );
           else if ( it->first == "mirrorlist" && !it->second.empty())
