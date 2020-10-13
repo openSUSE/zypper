@@ -22,6 +22,13 @@
 #include <zypp/media/CredentialManager.h>
 #include <zypp/media/MediaException.h>
 
+#include <boost/interprocess/sync/file_lock.hpp>
+#include <boost/interprocess/sync/scoped_lock.hpp>
+#include <boost/interprocess/sync/sharable_lock.hpp>
+
+namespace bpci = boost::interprocess;
+
+
 using std::endl;
 
 #define USER_CREDENTIALS_FILE ".zypp/credentials.cat"
@@ -234,6 +241,10 @@ namespace zypp
       // get from /etc/zypp/credentials.d, delete the leading path
       credfile = _options.customCredFileDir / file.basename();
 
+    // make sure only our thread accesses the file
+    bpci::file_lock lockFile ( credfile.c_str() );
+    bpci::scoped_lock lock( lockFile );
+
     CredentialFileReader(credfile, bind(&Impl::processCredentials, this, _1));
     if (_credsTmp.empty())
       WAR << file << " does not contain valid credentials or is not readable." << endl;
@@ -258,9 +269,15 @@ namespace zypp
     if (!fs)
       ret = 1;
 
+    // make sure only our thread accesses the file
+    bpci::file_lock lockFile ( file.c_str() );
+    bpci::scoped_lock lock( lockFile );
+
+
     for_(it, creds.begin(), creds.end())
     {
       (*it)->dumpAsIniOn(fs);
+      (*it)->setLastDatabaseUpdate( time( nullptr ) );
       fs << endl;
     }
     fs.close();
