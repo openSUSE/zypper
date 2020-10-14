@@ -29,7 +29,7 @@
 #include <zypp/parser/susetags/RepoIndex.h>
 
 #undef ZYPP_BASE_LOGGER_LOGGROUP
-#define ZYPP_BASE_LOGGER_LOGGROUP "zypp:fetcher"
+#define ZYPP_BASE_LOGGER_LOGGROUP "zypp::fetcher"
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

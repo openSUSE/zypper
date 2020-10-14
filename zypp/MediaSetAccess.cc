@@ -20,6 +20,9 @@
 #include <zypp/TmpPath.h>
 //#include <zypp/source/MediaSetAccessReportReceivers.h>
 
+#undef ZYPP_BASE_LOGGER_LOGGROUP
+#define ZYPP_BASE_LOGGER_LOGGROUP "zypp::fetcher"
+
 using std::endl;
 
 ///////////////////////////////////////////////////////////////////

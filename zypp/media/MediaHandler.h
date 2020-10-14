@@ -28,6 +28,9 @@
 #include <zypp/APIConfig.h>
 #include <zypp/OnMediaLocation.h>
 
+#undef ZYPP_BASE_LOGGER_LOGGROUP
+#define ZYPP_BASE_LOGGER_LOGGROUP "zypp::media"
+
 namespace zypp {
   namespace media {
 
