@@ -189,7 +189,7 @@ namespace zyppng {
                 currentZippedRange = std::make_pair( range.start, rangeEnd );
               } else {
                 //range is directly consecutive to the previous range
-                if ( currentZippedRange->second == range.start+1 ) {
+                if ( currentZippedRange->second + 1 == range.start ) {
                   currentZippedRange->second = rangeEnd;
                 } else {
                   //this range does not directly follow the previous one, we build the string and start a new one

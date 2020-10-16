@@ -343,9 +343,7 @@ namespace zyppng {
 
       NetworkRequestError dummyErr;
 
-      const auto fRanges = req->failedRanges();
-      std::vector<Block> blocks;
-
+      const auto &fRanges = req->failedRanges();
       try {
         std::transform( fRanges.begin(), fRanges.end(), std::back_inserter(_failedBlocks), [ &req ]( const auto &r ){
           auto ind = std::find_if( req->_myBlocks.begin(), req->_myBlocks.end(), [ &r ](const auto &elem){ return elem._block == std::any_cast<size_t>(r.userData); } );
