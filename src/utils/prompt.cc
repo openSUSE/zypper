@@ -229,8 +229,11 @@ int read_action_ari_with_timeout( PromptId pid, unsigned timeout, int default_ac
 
     //! \todo poll() reports the file is ready only after it contains newline
     //!       is there a way to do this without waiting for newline?
-    while ( poll( &pollfds, 1, 5 ) ) // some user input, timeout 5msec
+    while ( const auto pollRes = poll( &pollfds, 1, 5 ) ) // some user input, timeout 5msec
     {
+      if ( pollRes == -1 && errno == EINTR )
+        continue;
+
       reply = getchar();
       char reply_str[2] = { reply, 0 };
       DBG << pid << " reply: " << reply << " (" << str::toLower(reply_str) << " lowercase)" << endl;

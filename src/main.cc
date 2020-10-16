@@ -51,7 +51,11 @@ bool testPipe( int fd_r )
 {
   bool ret = true;
   struct pollfd pfd = { fd_r, POLLERR, 0 };
-  if ( ::poll( &pfd, 1, 0 ) >= 0 && pfd.revents & POLLERR )
+  auto pollRes = 0;
+
+  while ( (pollRes = ::poll( &pfd, 1, 0 )) == -1 && errno == EINTR );
+
+  if ( pollRes >= 0 && pfd.revents & POLLERR )
   {
     WAR << "FD(" << fd_r << ") " << "pipe is broken" << endl;
     ret = false;
