@@ -18,6 +18,8 @@
 #include <zypp/ExternalProgram.h>
 #include <zypp/TmpPath.h>
 #include <zypp/PathInfo.h>
+#include <zypp/zyppng/base/private/linuxhelpers_p.h>
+
 #include "WebServer.h"
 
 #include <thread>
@@ -309,14 +311,10 @@ public:
 
           //there is no way to give a timeout to FCGX_Accept_r, so we poll the socketfd for new
           //connections and listen on a pipe for a wakeup event to stop the worker if required
-          int ret = ::poll( fds, 3, INT_MAX );
-          if ( ret == 0 ) {
-            //timeout just continue the loop condition will stop if required
-            continue;
-          }
+          int ret = zyppng::eintrSafeCall( ::poll, fds, 3, -1 );
 
           if ( ret < 0 ) {
-            std::cerr << "Poll error " << endl;
+            std::cerr << "Poll error " << errno << endl;
             continue;
           }
 
@@ -396,7 +394,7 @@ public:
         }
 
         if ( prog.running() ) {
-            prog.kill( SIGQUIT );
+            prog.kill( SIGTERM );
             prog.close();
         }
     }
