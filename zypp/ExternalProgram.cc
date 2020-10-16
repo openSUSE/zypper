@@ -483,9 +483,10 @@ namespace zypp {
 
 	    if ( retval == -1 )
 	    {
-	      ERR << "select error: " << strerror(errno) << endl;
-	      if ( errno != EINTR )
+              if ( errno != EINTR ) {
+                ERR << "select error: " << strerror(errno) << endl;
 		break;
+              }
 	    }
 	    else if ( retval )
 	    {

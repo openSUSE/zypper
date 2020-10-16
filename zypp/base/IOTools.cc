@@ -94,9 +94,10 @@ namespace zypp::io {
       int retval = g_poll( &fd, 1, timeout );
       if ( retval == -1 )
       {
-        ERR << "select error: " << strerror(errno) << std::endl;
-        if ( errno != EINTR )
+        if ( errno != EINTR ) {
+          ERR << "select error: " << strerror(errno) << std::endl;
           return std::make_pair( ReceiveUpToResult::Error, std::string() );
+        }
       }
       else if ( retval )
       {
