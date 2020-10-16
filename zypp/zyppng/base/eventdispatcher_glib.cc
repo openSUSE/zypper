@@ -455,6 +455,9 @@ bool EventDispatcher::waitForFdEvent( const int fd, int events , int &revents , 
         if ( timeout <= 0 )
           return false;
 
+        if ( errno == EINTR )
+          continue;
+
         break;
       }
       case 1:
