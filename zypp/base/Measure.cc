@@ -138,10 +138,11 @@ namespace zypp
     class Measure::Impl
     {
     public:
-      Impl( const std::string & ident_r )
+      Impl( const std::string & ident_r, std::ostream * log_r = nullptr )
       : _ident  ( ident_r )
       , _level  ( _glevel )
       , _seq    ( 0 )
+      , _log    ( log_r )
       {
 	_glevel += "..";
         log() << _level << "START MEASURE(" << _ident << ")" << endl;
@@ -172,11 +173,13 @@ namespace zypp
         _elapsed = _stop;
       }
 
-    private:
       /** Return the log stream. */
       std::ostream & log() const
-      { return INT; }
+      { return _log ? *_log : INT; }
+      std::ostream * logp() const
+      { return _log; }
 
+    private:
       std::ostream & dumpMeasure( std::ostream & str_r, const std::string & tag_r = std::string() ) const
       {
         str_r << ( _stop - _start );
@@ -198,6 +201,8 @@ namespace zypp
       mutable unsigned _seq;
       mutable Tm       _elapsed;
       mutable Tm       _stop;
+
+      std::ostream *   _log = nullptr;
     };
 
     std::string Measure::Impl::_glevel;
@@ -217,11 +222,15 @@ namespace zypp
     : _pimpl( new Impl( ident_r ) )
     {}
 
+    Measure::Measure( const std::string & ident_r, std::ostream & out_r )
+    : _pimpl( new Impl( ident_r, &out_r ) )
+    {}
+
     Measure::~Measure()
     {}
 
     void Measure::start( const std::string & ident_r )
-    { stop(); _pimpl.reset( new Impl( ident_r ) ); }
+    { stop(); _pimpl.reset( _pimpl ? new Impl( ident_r, _pimpl->logp() ) : new Impl( ident_r ) ); }
 
     void Measure::restart()
     { _pimpl->restart(); }

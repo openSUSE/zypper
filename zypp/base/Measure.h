@@ -74,6 +74,8 @@ namespace zypp
       /** Ctor taking \a ident_r string and auto starts timer. */
       explicit
       Measure( const std::string & ident_r );
+      /** \overload log to custom ostream */
+      Measure( const std::string & ident_r, std::ostream & out_r );
 
       /** Dtor. */
       ~Measure();
