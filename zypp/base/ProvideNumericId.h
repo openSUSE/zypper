@@ -61,6 +61,13 @@ namespace zypp
         /** Assign */
         ProvideNumericId & operator=( const ProvideNumericId & /*rhs*/ )
         { return *this; }
+        /** Move ctor */
+        ProvideNumericId( ProvideNumericId && rhs )
+        : _numericId( rhs._numericId )
+        { /*rhs._numericId = 0;*/ }
+        /** Move Assign */
+        ProvideNumericId & operator=( ProvideNumericId && rhs )
+        { if ( &rhs != this ) { _numericId = rhs._numericId; /*rhs._numericId = 0;*/ } return *this; }
         /** Dtor */
         ~ProvideNumericId()
         {}
