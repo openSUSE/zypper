@@ -52,7 +52,7 @@ class MediaCurl : public MediaHandler
 
     virtual void attachTo (bool next = false) override;
     virtual void releaseFrom( const std::string & ejectDev ) override;
-    virtual void getFile( const Pathname & filename, const ByteCount &expectedFileSize_r ) const override;
+    virtual void getFile( const OnMediaLocation & file, const ByteCount &expectedFileSize_r ) const override;
     virtual void getDir( const Pathname & dirname, bool recurse_r ) const override;
     virtual void getDirInfo( std::list<std::string> & retlist,
                              const Pathname & dirname, bool dots = true ) const override;
@@ -81,7 +81,7 @@ class MediaCurl : public MediaHandler
      * \throws MediaException
      *
      */
-    virtual void getFileCopy( const Pathname & srcFilename, const Pathname & targetFilename, const ByteCount &expectedFileSize_r) const override;
+    virtual void getFileCopy( const OnMediaLocation& srcFile, const Pathname & targetFilename, const ByteCount &expectedFileSize_r ) const override;
 
     /**
      *

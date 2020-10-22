@@ -22,7 +22,6 @@
 #include <zypp/ZYppCommit.h>
 
 #include <zypp/Pathname.h>
-#include <zypp/media/MediaAccess.h>
 #include <zypp/Target.h>
 #include <zypp/target/rpm/RpmDb.h>
 #include <zypp/target/TargetException.h>

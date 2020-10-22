@@ -39,7 +39,7 @@ namespace zypp
     void MediaPlugin::releaseFrom( const std::string & ejectDev_r )
     {}
 
-    void MediaPlugin::getFile(const Pathname & filename_r , const ByteCount & expectedFileSize_r) const
+    void MediaPlugin::getFile( const OnMediaLocation &file , const ByteCount & expectedFileSize_r ) const
     {}
 
     void MediaPlugin::getDir( const Pathname & dirname_r, bool recurse_r ) const

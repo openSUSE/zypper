@@ -990,28 +990,28 @@ MediaHandler::dependsOnParent(MediaAccessId parentId, bool exactIdMatch)
 //
 //	DESCRIPTION :
 //
-void MediaHandler::provideFileCopy(Pathname srcFilename,
-                                       Pathname targetFilename , const ByteCount &expectedFileSize_r) const
+void MediaHandler::provideFileCopy( const OnMediaLocation &srcFile,
+                                    Pathname targetFilename , const ByteCount &expectedFileSize_r ) const
 {
   if ( !isAttached() ) {
-    INT << "Media not_attached on provideFileCopy(" << srcFilename
+    INT << "Media not_attached on provideFileCopy(" << srcFile
         << "," << targetFilename << ")" << endl;
     ZYPP_THROW(MediaNotAttachedException(url()));
   }
 
-  getFileCopy( srcFilename, targetFilename, expectedFileSize_r ); // pass to concrete handler
-  DBG << "provideFileCopy(" << srcFilename << "," << targetFilename  << ")" << endl;
+  getFileCopy( srcFile, targetFilename, expectedFileSize_r ); // pass to concrete handler
+  DBG << "provideFileCopy(" << srcFile << "," << targetFilename  << ")" << endl;
 }
 
-void MediaHandler::provideFile(Pathname filename , const ByteCount &expectedFileSize_r) const
+void MediaHandler::provideFile( const OnMediaLocation &file , const ByteCount &expectedFileSize_r ) const
 {
   if ( !isAttached() ) {
-    INT << "Error: Not attached on provideFile(" << filename << ")" << endl;
+    INT << "Error: Not attached on provideFile(" << file << ")" << endl;
     ZYPP_THROW(MediaNotAttachedException(url()));
   }
 
-  getFile( filename, expectedFileSize_r ); // pass to concrete handler
-  DBG << "provideFile(" << filename << ")" << endl;
+  getFile( file, expectedFileSize_r ); // pass to concrete handler
+  DBG << "provideFile(" << file << ")" << endl;
 }
 
 
@@ -1222,44 +1222,26 @@ std::ostream & operator<<( std::ostream & str, const MediaHandler & obj )
   return str;
 }
 
-///////////////////////////////////////////////////////////////////
-//
-//
-//	METHOD NAME : MediaHandler::getFile
-//	METHOD TYPE : PMError
-//
-//	DESCRIPTION : Asserted that media is attached.
-//                    Default implementation of pure virtual.
-//
-void MediaHandler::getFile(const Pathname & filename , const ByteCount &) const
+void MediaHandler::getFile(const OnMediaLocation &file, const ByteCount &) const
 {
-    PathInfo info( localPath( filename ) );
-    if( info.isFile() ) {
-        return;
-    }
+  PathInfo info( localPath( file.filename() ) );
+  if( info.isFile() ) {
+    return;
+  }
 
-    if (info.isExist())
-      ZYPP_THROW(MediaNotAFileException(url(), localPath(filename)));
-    else
-      ZYPP_THROW(MediaFileNotFoundException(url(), filename));
+  if (info.isExist())
+    ZYPP_THROW(MediaNotAFileException(url(), localPath(file.filename())));
+  else
+    ZYPP_THROW(MediaFileNotFoundException(url(), file.filename()));
 }
 
-void MediaHandler::getFiles(const std::vector<std::pair<zypp::filesystem::Pathname, ByteCount> > &files) const
+void MediaHandler::getFileCopy(const OnMediaLocation &file, const zypp::filesystem::Pathname &targetFilename, const ByteCount &expectedFileSize_r) const
 {
-  for ( const auto &req : files )
-    getFile( req.first, req.second );
-}
-
-
-void MediaHandler::getFileCopy (const Pathname & srcFilename, const Pathname & targetFilename , const ByteCount &expectedFileSize_r) const
-{
-  getFile(srcFilename, expectedFileSize_r);
-
-  if ( copy( localPath( srcFilename ), targetFilename ) != 0 ) {
+  getFile( file, expectedFileSize_r );
+  if ( copy( localPath( file.filename() ), targetFilename ) != 0 ) {
     ZYPP_THROW(MediaWriteException(targetFilename));
   }
 }
-
 
 
 ///////////////////////////////////////////////////////////////////

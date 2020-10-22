@@ -793,9 +793,9 @@ namespace zyppng {
   }
 
 
-  void MediaHandlerNetwork::getFile(const zypp::filesystem::Pathname &filename, const zypp::ByteCount &expectedFileSize_r) const
+  void MediaHandlerNetwork::getFile( const zypp::OnMediaLocation &file, const zypp::ByteCount &expectedFileSize_r ) const
   {
-
+    const auto &filename = file.filename();
     auto ctx = ensureConnected();
 
     const auto url = getFileUrl( filename );
@@ -893,11 +893,6 @@ namespace zyppng {
     }
 
     report->finish(url, zypp::media::DownloadProgressReport::NO_ERROR, "");
-  }
-
-  void MediaHandlerNetwork::getFiles( const std::vector<std::pair<zypp::filesystem::Pathname, zypp::ByteCount> > &files ) const
-  {
-    return MediaHandler::getFiles( files );
   }
 
   void MediaHandlerNetwork::getDir(const zypp::filesystem::Pathname &dirname, bool recurse_r) const

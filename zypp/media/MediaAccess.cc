@@ -358,11 +358,17 @@ MediaAccess::release( const std::string & ejectDev )
 void
 MediaAccess::provideFile(const Pathname & filename , const ByteCount &expectedFileSize) const
 {
+  return provideFile( OnMediaLocation(filename), expectedFileSize );
+}
+
+void
+MediaAccess::provideFile(const OnMediaLocation & file , const ByteCount &expectedFileSize) const
+{
   if ( !_handler ) {
-    ZYPP_THROW(MediaNotOpenException("provideFile(" + filename.asString() + ")"));
+    ZYPP_THROW(MediaNotOpenException("provideFile(" + file.filename().asString() + ")"));
   }
 
-  _handler->provideFile( filename, expectedFileSize );
+  _handler->provideFile( file, expectedFileSize );
 }
 
 void
@@ -498,7 +504,7 @@ void MediaAccess::getFile( const Url &from, const Pathname &to )
   try {
     media.open( u );
     media.attach();
-    media._handler->provideFileCopy( base, to, 0 );
+    media._handler->provideFileCopy( OnMediaLocation(base), to, 0 );
     media.release();
   }
   catch (const MediaException & excpt_r)

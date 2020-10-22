@@ -203,6 +203,8 @@ namespace zypp {
          **/
         void release( const std::string & ejectDev = "" );
 
+        ZYPP_DEPRECATED void provideFile( const Pathname & filename, const ByteCount &expectedFileSize ) const;
+
 	/**
 	 * Use concrete handler to provide file denoted by path below
 	 * 'attach point'. Filename is interpreted relative to the
@@ -220,7 +222,7 @@ namespace zypp {
 	 * \throws MediaException
 	 *
 	 **/
-	void provideFile( const Pathname & filename, const ByteCount &expectedFileSize ) const;
+	void provideFile( const OnMediaLocation & file, const ByteCount &expectedFileSize ) const;
 
 	/**
 	 * Remove filename below attach point IFF handler downloads files
@@ -278,7 +280,7 @@ namespace zypp {
 	/**
 	 * set a deltafile to be used in the next download
 	 */
-	void setDeltafile( const Pathname & filename ) const;
+	ZYPP_DEPRECATED void setDeltafile( const Pathname & filename ) const;
 
     public:
 
@@ -345,94 +347,7 @@ namespace zypp {
 	 * \throws MediaException
 	 *
          **/
-        void getFile( const Url &from, const Pathname &to );
-
-    public:
-
-      /**
-       * Helper class that provides file on construction
-       * and cleans up on destruction.
-       *
-       * <b>Caution:</b> There's no synchronisation between multiple
-       * FileProvider instances, that provide the same file from the
-       * same media. If the first one goes out of scope, the file is
-       * cleaned. It's just a convenience for 'access and forgett'.
-       *
-       * <b>Caution:</b> We should either store the reference MediaAccess'
-       * MediaHandler here (for this MediaHandler must become a
-       * ref counting pointer class), or we need more info from MediaHandler
-       * (whether he's downloading to the local fs. If not, no releasefile
-       * is necessary).
-       * Currently we can not releaseFile after the media was closed
-       * (it's passed to the handler, which is deleted on close).
-       *
-       * \throws MediaBadFilenameException
-       * \throws MediaException
-       **/
-      class FileProvider {
-	FileProvider( const FileProvider & );             // no copy
-	FileProvider & operator=( const FileProvider & ); // no assign
-	private:
-	  MediaAccess::constPtr _media;
-	  Pathname              _file;
-	  Pathname		_local_file;
-	public:
-	  /**
-           * \throws MediaException
-           */
-	  FileProvider( MediaAccess::constPtr media_r, const Pathname & file_r )
-	    : _media( media_r )
-	    , _file( file_r )
-	    , _local_file( "" )
-	  {
-	    if ( _file.empty() ) {
-	      ZYPP_THROW(MediaBadFilenameException(_file.asString()));
-	    } else if ( _media ) {
-	      try {
-		_media->provideFile( _file, 0 );
-		_local_file = _media->localPath( _file );
-	      }
-	      catch (const MediaException & excpt_r)
-              {
-		ZYPP_CAUGHT(excpt_r);
-		_media = NULL;
-		ZYPP_RETHROW(excpt_r);
-	      }
-	    }
-	  }
-
-	  ~FileProvider() {
-	    if ( _media )
-	    {
-	      try {
-		_media->releaseFile( _file );
-	      }
-	      catch (const MediaException &excpt_r)
-	      {
-		ZYPP_CAUGHT(excpt_r);
-	      }
-              catch(...) {} // No exception from dtor!
-	    }
-	  }
-
-	public:
-
-	  /**
-	   * If no error, expect operator() to return the local
-	   * Pathname of the provided file.
-	   **/
-	  Pathname localFile() const { return _local_file; }
-
-	  /**
-	   * Return the local Pathname of the provided file or
-	   * an empty Pathname on error.
-	   **/
-	  Pathname operator()() const {
-	    if ( _media )
-	      return _media->localPath( _file );
-	    return Pathname();
-	  }
-      };
+        ZYPP_DEPRECATED void getFile( const Url &from, const Pathname &to );
     };
 
     std::ostream & operator<<( std::ostream & str, const MediaAccess & obj );

@@ -28,7 +28,6 @@
 #include <zypp/ZConfig.h>
 #include <zypp/repo/RepoMirrorList.h>
 #include <zypp/ExternalProgram.h>
-#include <zypp/media/MediaAccess.h>
 
 #include <zypp/base/IOStream.h>
 #include <zypp/base/InputStream.h>

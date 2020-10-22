@@ -45,8 +45,7 @@ public:
 protected:
   void attachTo(bool next) override;
   void releaseFrom(const std::string &ejectDev) override;
-  void getFile(const zypp::filesystem::Pathname &filename, const zypp::ByteCount &expectedFileSize_r) const override;
-  void getFiles(const std::vector<std::pair<zypp::filesystem::Pathname, zypp::ByteCount> > &files) const override;
+  void getFile (const zypp::OnMediaLocation &file, const zypp::ByteCount &expectedFileSize_r) const override;
   void getDir(const zypp::filesystem::Pathname &dirname, bool recurse_r) const override;
   void getDirInfo(std::list<std::string> &retlist, const zypp::filesystem::Pathname &dirname, bool dots) const override;
   void getDirInfo(zypp::filesystem::DirContent &retlist, const zypp::filesystem::Pathname &dirname, bool dots) const override;

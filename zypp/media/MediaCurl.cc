@@ -487,17 +487,20 @@ Url MediaCurl::getFileUrl( const Pathname & filename_r ) const
 
 ///////////////////////////////////////////////////////////////////
 
-void MediaCurl::getFile(const Pathname & filename , const ByteCount &expectedFileSize_r) const
+void MediaCurl::getFile(const OnMediaLocation &file , const ByteCount &expectedFileSize_r) const
 {
     // Use absolute file name to prevent access of files outside of the
     // hierarchy below the attach point.
-    getFileCopy(filename, localPath(filename).absolutename(), expectedFileSize_r);
+    getFileCopy( file, localPath(file.filename()).absolutename(), expectedFileSize_r );
 }
 
 ///////////////////////////////////////////////////////////////////
 
-void MediaCurl::getFileCopy( const Pathname & filename , const Pathname & target, const ByteCount &expectedFileSize_r ) const
+void MediaCurl::getFileCopy( const OnMediaLocation & srcFile , const Pathname & target, const ByteCount &expectedFileSize_r ) const
 {
+
+  const auto &filename = srcFile.filename();
+
   callback::SendReport<DownloadProgressReport> report;
 
   Url fileurl(getFileUrl(filename));

@@ -348,7 +348,7 @@ class MediaHandler {
 	 **/
 	virtual void forceEject( const std::string & device ) {}
 
-	/**
+        /**
 	 * Call concrete handler to provide file below attach point.
 	 *
 	 * Default implementation provided, that returns whether a file
@@ -359,20 +359,7 @@ class MediaHandler {
 	 * \throws MediaException
 	 *
 	 **/
-	virtual void getFile( const Pathname & filename, const ByteCount &expectedFileSize_r ) const;
-
-
-        /**
-	 * Call concrete handler to provide all files below attach point.
-	 *
-	 * Default implementation provided, that calls getFile for each files in the list
-	 *
-	 * Asserted that media is attached.
-	 *
-	 * \throws MediaException
-	 *
-	 **/
-        virtual void getFiles( const std::vector< std::pair<Pathname, ByteCount> > &files ) const;
+        virtual void getFile( const OnMediaLocation &file, const ByteCount &expectedFileSize_r ) const;
 
         /**
          * Call concrete handler to provide a file under a different place
@@ -385,7 +372,7 @@ class MediaHandler {
 	 * \throws MediaException
 	 *
          **/
-        virtual void getFileCopy( const Pathname & srcFilename, const Pathname & targetFilename, const ByteCount &expectedFileSize_r ) const;
+        virtual void getFileCopy( const OnMediaLocation & file, const Pathname & targetFilename, const ByteCount &expectedFileSize_r ) const;
 
 
 	/**
@@ -585,7 +572,7 @@ class MediaHandler {
 	 * \throws MediaException
 	 *
 	 **/
-	void provideFile( Pathname filename, const ByteCount &expectedFileSize_r ) const;
+	void provideFile( const OnMediaLocation &file, const ByteCount &expectedFileSize_r ) const;
 
 	/**
 	 * Call concrete handler to provide a copy of a file under a different place
@@ -598,7 +585,7 @@ class MediaHandler {
 	 * \throws MediaException
 	 *
 	 **/
-        void provideFileCopy( Pathname srcFilename, Pathname targetFilename, const ByteCount &expectedFileSize_r ) const;
+        void provideFileCopy( const OnMediaLocation &srcFile, Pathname targetFilename, const ByteCount &expectedFileSize_r ) const;
 
 	/**
 	 * Use concrete handler to provide directory denoted
@@ -657,12 +644,12 @@ class MediaHandler {
         /*
          * set a deltafile to be used in the next download
          */
-	void setDeltafile( const Pathname &filename = Pathname()) const;
+	ZYPP_DEPRECATED void setDeltafile( const Pathname &filename = Pathname()) const;
 
 	/*
 	 * return the deltafile set with setDeltafile()
 	 */
-	Pathname deltafile () const;
+	ZYPP_DEPRECATED Pathname deltafile () const;
 
     public:
 

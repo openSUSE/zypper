@@ -354,9 +354,9 @@ namespace zypp {
     //
     //	DESCRIPTION : Asserted that media is attached.
     //
-    void MediaDISK::getFile (const Pathname & filename, const ByteCount &expectedFileSize_r) const
+    void MediaDISK::getFile ( const OnMediaLocation &file, const ByteCount &expectedFileSize_r ) const
     {
-      MediaHandler::getFile( filename, expectedFileSize_r );
+      MediaHandler::getFile( file, expectedFileSize_r );
     }
 
     ///////////////////////////////////////////////////////////////////
