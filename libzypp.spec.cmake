@@ -92,6 +92,7 @@ Requires:       libsolv-tools
 
 BuildRequires:  glib2-devel
 BuildRequires:  libsigc++2-devel
+BuildRequires:  protobuf-devel
 
 # required for testsuite
 %if %{with mediabackend_tests}
