@@ -16,6 +16,7 @@
 
 #include <zypp/media/MediaException.h>
 #include <zypp/media/MediaManager.h>
+#include <zypp/media/MediaHandlerFactory.h>
 #include <zypp/media/MediaHandler.h>
 #include <zypp/media/Mount.h>
 
@@ -36,37 +37,91 @@ namespace zypp
     namespace // anonymous
     { ////////////////////////////////////////////////////////////////
 
+      struct ManagedMedia;
+      std::ostream & operator<<( std::ostream & str, const ManagedMedia & obj );
+
       // -------------------------------------------------------------
       struct ManagedMedia
       {
         ~ManagedMedia()
+        {
+          try
+          {
+            close(); // !!! make sure handler gets properly deleted.
+          }
+          catch(...) {}
+        }
+
+        ManagedMedia( ManagedMedia &&m )
+          : desired ( m.desired )
+          , verifier( std::move(m.verifier) )
+          , _handler ( std::move(m._handler) )
         {}
 
-        ManagedMedia()
-          : desired (false)
-        {}
+        static ManagedMedia makeManagedMedia ( const Url &o_url, const Pathname &preferred_attach_point, const MediaVerifierRef &v )
+        {
+          auto handler = MediaHandlerFactory::createHandler( o_url, preferred_attach_point );
+          if ( !handler ) {
+            ERR << "Failed to create media handler" << std::endl;
+            ZYPP_THROW( MediaSystemException(o_url, "Failed to create media handler"));
+          }
+          return ManagedMedia( std::move(handler), v );
+        }
 
-        ManagedMedia(const ManagedMedia &m)
-          : desired (m.desired)
-          , handler (m.handler)
-          , verifier(m.verifier)
-        {}
+        ManagedMedia &operator= ( ManagedMedia &&other ) = default;
 
-        ManagedMedia(const MediaAccessRef &h, const MediaVerifierRef &v)
-          : desired (false)
-          , handler (h)
-          , verifier(v)
-        {}
+        operator bool () const {
+          return ( _handler ? true : false );
+        }
+
+        inline MediaHandler &handler() {
+          if ( !_handler )
+              ZYPP_THROW(MediaNotOpenException("Accessing ManagedMedia after it was closed"));
+          return *_handler;
+        }
+
+        inline const MediaHandler &handler() const {
+          if ( !_handler )
+            ZYPP_THROW(MediaNotOpenException("Accessing ManagedMedia after it was closed"));
+          return *_handler;
+        }
+
+        std::ostream & dumpOn( std::ostream & str ) const {
+          if ( !_handler )
+            return str << "ManagedMedia( closed )";
+
+          str << _handler->protocol() << "(" << *_handler << ")";
+          return str;
+        }
+
+        inline void close ()
+        {
+          ///////////////////////////////////////////////////////////////////
+          // !!! make shure handler gets properly deleted.
+          // I.e. release attached media before deleting the handler.
+          ///////////////////////////////////////////////////////////////////
+
+          try {
+            handler().release();
+          }
+          catch (const MediaException & excpt_r)
+          {
+            ZYPP_CAUGHT(excpt_r);
+            WAR << "Close: " << *this << " (" << excpt_r << ")" << std::endl;
+            ZYPP_RETHROW(excpt_r);
+          }
+          MIL << "Close: " << *this << " (OK)" << std::endl;
+        }
 
         inline void
         checkAttached(MediaAccessId id)
         {
-          if( !handler->isAttached())
+          if( !handler().isAttached())
           {
             DBG << "checkAttached(" << id << ") not attached" << std::endl;
             desired = false;
             ZYPP_THROW(MediaNotAttachedException(
-              handler->url()
+              handler().url()
             ));
           }
         }
@@ -77,12 +132,13 @@ namespace zypp
 
           if ( !desired )
           {
+            const auto &hdl = handler();
             try {
-              desired = verifier->isDesiredMedia(handler);
+              desired = verifier->isDesiredMedia( handler() );
             } catch ( const zypp::Exception &e ) {
                 ZYPP_CAUGHT( e );
 
-                media::MediaNotDesiredException newEx ( handler->url() );
+                media::MediaNotDesiredException newEx ( hdl.url() );
                 newEx.remember( e );
                 ZYPP_THROW( newEx );
             }
@@ -90,7 +146,7 @@ namespace zypp
             if( !desired )
             {
               DBG << "checkDesired(" << id << "): not desired (report by " << verifier->info() << ")" << std::endl;
-              ZYPP_THROW( MediaNotDesiredException( handler->url() ) );
+              ZYPP_THROW( MediaNotDesiredException( hdl.url() ) );
             }
 
             DBG << "checkDesired(" << id << "): desired (report by " << verifier->info() << ")" << std::endl;
@@ -100,10 +156,21 @@ namespace zypp
         }
 
         bool             desired;
-        MediaAccessRef   handler;
         MediaVerifierRef verifier;
+
+      private:
+        ManagedMedia( std::unique_ptr<MediaHandler> &&h, const MediaVerifierRef &v)
+          : desired (false)
+          , verifier(v)
+          , _handler ( std::move(h) )
+        {}
+
+        std::unique_ptr<MediaHandler>  _handler;
       };
 
+      std::ostream & operator<<( std::ostream & str, const ManagedMedia & obj ) {
+        return obj.dumpOn( str );
+      }
 
       // -------------------------------------------------------------
       typedef std::map<MediaAccessId, ManagedMedia> ManagedMediaMap;
@@ -155,13 +222,13 @@ namespace zypp
             found = false;
             for(it = mediaMap.begin(); it != mediaMap.end(); /**/)
             {
-              if( it->second.handler->dependsOnParent())
+              if( it->second && it->second.handler().dependsOnParent() )
               {
                 found = true;
                 // let it forget its parent, we will
                 // destroy it later (in clear())...
-                it->second.handler->resetParentId();
-                mediaMap.erase( it++ ); // postfix! Incrementing before erase
+                it->second.handler().resetParentId();
+                it = mediaMap.erase( it ); // postfix! Incrementing before erase
               } else {
                 ++it;
               }
@@ -245,15 +312,13 @@ namespace zypp
     MediaManager::open(const Url &url, const Pathname &preferred_attach_point)
     {
       // create new access handler for it
-      MediaAccessRef handler( new MediaAccess());
       MediaVerifierRef verifier( new NoVerifier());
-      ManagedMedia tmp( handler, verifier);
-
-      tmp.handler->open(url, preferred_attach_point);
+      ManagedMedia tmp = ManagedMedia::makeManagedMedia( url, preferred_attach_point, verifier );
 
       MediaAccessId nextId = m_impl->nextAccessId();
 
-      m_impl->mediaMap[nextId] = tmp;
+      m_impl->mediaMap.insert( std::make_pair( nextId, std::move(tmp) ) );
+      //m_impl->mediaMap[nextId] = std::move(tmp);
 
       DBG << "Opened new media access using id " << nextId
           << " to " << url.asString() << std::endl;
@@ -277,10 +342,10 @@ namespace zypp
       ManagedMediaMap::iterator m(m_impl->mediaMap.begin());
       for( ; m != m_impl->mediaMap.end(); ++m)
       {
-        if( m->second.handler->dependsOnParent(accessId, true))
+        if( m->second.handler().dependsOnParent(accessId, true))
         {
           ZYPP_THROW(MediaIsSharedException(
-            m->second.handler->url().asString()
+            m->second.handler().url().asString()
           ));
         }
       }
@@ -289,7 +354,7 @@ namespace zypp
           << accessId << " requested" << std::endl;
 
       ManagedMedia &ref( m_impl->findMM(accessId));
-      ref.handler->close();
+      ref.close();
 
       m_impl->mediaMap.erase(accessId);
     }
@@ -299,8 +364,7 @@ namespace zypp
     MediaManager::isOpen(MediaAccessId accessId) const
     {
       ManagedMediaMap::iterator it( m_impl->mediaMap.find(accessId));
-      return it != m_impl->mediaMap.end() &&
-             it->second.handler->isOpen();
+      return it != m_impl->mediaMap.end();
     }
 
     // ---------------------------------------------------------------
@@ -309,7 +373,7 @@ namespace zypp
     {
       ManagedMedia &ref( m_impl->findMM(accessId));
 
-      return ref.handler->protocol();
+      return ref.handler().protocol();
     }
 
     // ---------------------------------------------------------------
@@ -318,7 +382,7 @@ namespace zypp
     {
       ManagedMedia &ref( m_impl->findMM(accessId));
 
-      return ref.handler->downloads();
+      return ref.handler().downloads();
     }
 
     // ---------------------------------------------------------------
@@ -327,7 +391,7 @@ namespace zypp
     {
       ManagedMedia &ref( m_impl->findMM(accessId));
 
-      return ref.handler->url();
+      return ref.handler().url();
     }
 
     // ---------------------------------------------------------------
@@ -372,11 +436,12 @@ namespace zypp
     void MediaManager::attach(MediaAccessId accessId)
     {
       ManagedMedia &ref( m_impl->findMM(accessId));
+      auto &hdl = ref.handler();
 
       DBG << "attach(id=" << accessId << ")" << std::endl;
 
       // try first mountable/mounted device
-      ref.handler->attach(false);
+      hdl.attach(false);
       try
       {
         ref.checkDesired(accessId);
@@ -386,22 +451,22 @@ namespace zypp
       {
         ZYPP_CAUGHT(ex);
 
-        if (!ref.handler->hasMoreDevices())
+        if (!hdl.hasMoreDevices())
           ZYPP_RETHROW(ex);
 
-        if (ref.handler->isAttached())
-          ref.handler->release();
+        if (hdl.isAttached())
+          hdl.release();
       }
 
       MIL << "checkDesired(" << accessId << ") of first device failed,"
         " going to try others with attach(true)" << std::endl;
 
-      while (ref.handler->hasMoreDevices())
+      while (hdl.hasMoreDevices())
       {
         try
         {
           // try to attach next device
-          ref.handler->attach(true);
+          hdl.attach(true);
           ref.checkDesired(accessId);
           return;
         }
@@ -409,28 +474,28 @@ namespace zypp
         {
           ZYPP_CAUGHT(ex);
 
-          if (!ref.handler->hasMoreDevices())
+          if (!hdl.hasMoreDevices())
           {
             MIL << "No desired media found after trying all detected devices." << std::endl;
             ZYPP_RETHROW(ex);
           }
 
-          AttachedMedia media(ref.handler->attachedMedia());
+          AttachedMedia media(hdl.attachedMedia());
           DBG << "Skipping " << media.mediaSource->asString() << ": not desired media." << std::endl;
 
-          ref.handler->release();
+          hdl.release();
         }
         catch (const MediaException & ex)
         {
           ZYPP_CAUGHT(ex);
 
-          if (!ref.handler->hasMoreDevices())
+          if (!hdl.hasMoreDevices())
             ZYPP_RETHROW(ex);
 
-          AttachedMedia media(ref.handler->attachedMedia());
+          AttachedMedia media(hdl.attachedMedia());
           DBG << "Skipping " << media.mediaSource->asString() << " because of exception thrown by attach(true)" << std::endl;
 
-          if (ref.handler->isAttached()) ref.handler->release();
+          if (hdl.isAttached()) hdl.release();
         }
       }
     }
@@ -457,14 +522,15 @@ namespace zypp
         ManagedMediaMap::iterator m(m_impl->mediaMap.begin());
         for( ; m != m_impl->mediaMap.end(); ++m)
         {
-          if( m->second.handler->dependsOnParent(accessId, false))
+          auto &hdl = m->second.handler();
+          if( hdl.dependsOnParent(accessId, false))
           {
             try
             {
               DBG << "Forcing release of handler depending on access id "
                   << accessId << std::endl;
               m->second.desired  = false;
-              m->second.handler->release();
+              hdl.release();
             }
             catch(const MediaException &e)
             {
@@ -474,7 +540,7 @@ namespace zypp
         }
       }
       ref.desired  = false;
-      ref.handler->release(ejectDev);
+      ref.handler().release(ejectDev);
     }
 
     // ---------------------------------------------------------------
@@ -486,16 +552,17 @@ namespace zypp
       ManagedMediaMap::iterator m(m_impl->mediaMap.begin());
       for( ; m != m_impl->mediaMap.end(); ++m)
       {
-        if( m->second.handler->dependsOnParent())
+        auto &hdl = m->second.handler();
+        if( hdl.dependsOnParent())
           continue;
 
         try
         {
-          if(m->second.handler->isAttached())
+          if(hdl.isAttached())
           {
             DBG << "Releasing media id " << m->first << std::endl;
             m->second.desired  = false;
-            m->second.handler->release();
+            hdl.release();
           }
           else
           {
@@ -518,7 +585,7 @@ namespace zypp
     {
       ManagedMedia &ref( m_impl->findMM(accessId));
 
-      ref.handler->disconnect();
+      ref.handler().disconnect();
     }
 
     // ---------------------------------------------------------------
@@ -527,7 +594,7 @@ namespace zypp
     {
       ManagedMedia &ref( m_impl->findMM(accessId));
 
-      return ref.handler->isAttached();
+      return ref.handler().isAttached();
     }
 
     // ---------------------------------------------------------------
@@ -535,7 +602,7 @@ namespace zypp
     {
       ManagedMedia &ref( m_impl->findMM(accessId));
 
-      return ref.handler->isSharedMedia();
+      return ref.handler().isSharedMedia();
     }
 
     // ---------------------------------------------------------------
@@ -544,14 +611,14 @@ namespace zypp
     {
       ManagedMedia &ref( m_impl->findMM(accessId));
 
-      if( !ref.handler->isAttached())
+      if( !ref.handler().isAttached())
       {
         ref.desired = false;
       }
       else
       {
         try {
-          ref.desired = ref.verifier->isDesiredMedia(ref.handler);
+          ref.desired = ref.verifier->isDesiredMedia( ref.handler() );
         }
         catch(const zypp::Exception &e) {
           ZYPP_CAUGHT(e);
@@ -577,10 +644,10 @@ namespace zypp
       ManagedMedia &ref( m_impl->findMM(accessId));
 
       bool desired = false;
-      if( ref.handler->isAttached())
+      if( ref.handler().isAttached())
       {
         try {
-          desired = v->isDesiredMedia(ref.handler);
+          desired = v->isDesiredMedia( ref.handler() );
         }
         catch(const zypp::Exception &e) {
           ZYPP_CAUGHT(e);
@@ -608,7 +675,7 @@ namespace zypp
       ManagedMedia &ref( m_impl->findMM(accessId));
 
       Pathname path;
-      path = ref.handler->localRoot();
+      path = ref.handler().localRoot();
       return path;
     }
 
@@ -620,7 +687,7 @@ namespace zypp
       ManagedMedia &ref( m_impl->findMM(accessId));
 
       Pathname path;
-      path = ref.handler->localPath(pathname);
+      path = ref.handler().localPath(pathname);
       return path;
     }
 
@@ -633,7 +700,7 @@ namespace zypp
 
       ref.checkDesired(accessId);
 
-      ref.handler->provideFile(filename, expectedFileSize);
+      ref.handler().provideFile(filename, expectedFileSize);
     }
 
     // ---------------------------------------------------------------
@@ -653,7 +720,7 @@ namespace zypp
 
       ref.checkDesired(accessId);
 
-      ref.handler->setDeltafile(filename);
+      ref.handler().setDeltafile(filename);
     }
 
     void MediaManager::precacheFiles(MediaAccessId accessId, const std::vector<OnMediaLocation> &files)
@@ -662,7 +729,7 @@ namespace zypp
 
       ref.checkDesired(accessId);
 
-      ref.handler->precacheFiles( files );
+      ref.handler().precacheFiles( files );
     }
 
     // ---------------------------------------------------------------
@@ -674,7 +741,7 @@ namespace zypp
 
       ref.checkDesired(accessId);
 
-      ref.handler->provideDir(dirname);
+      ref.handler().provideDir(dirname);
     }
 
     // ---------------------------------------------------------------
@@ -686,7 +753,7 @@ namespace zypp
 
       ref.checkDesired(accessId);
 
-      ref.handler->provideDirTree(dirname);
+      ref.handler().provideDirTree(dirname);
     }
 
     // ---------------------------------------------------------------
@@ -698,7 +765,7 @@ namespace zypp
 
       ref.checkAttached(accessId);
 
-      ref.handler->releaseFile(filename);
+      ref.handler().releaseFile(filename);
     }
 
     // ---------------------------------------------------------------
@@ -710,7 +777,7 @@ namespace zypp
 
       ref.checkAttached(accessId);
 
-      ref.handler->releaseDir(dirname);
+      ref.handler().releaseDir(dirname);
     }
 
 
@@ -723,7 +790,7 @@ namespace zypp
 
       ref.checkAttached(accessId);
 
-      ref.handler->releasePath(pathname);
+      ref.handler().releasePath(pathname);
     }
 
     // ---------------------------------------------------------------
@@ -738,7 +805,7 @@ namespace zypp
       // FIXME: ref.checkDesired(accessId); ???
       ref.checkAttached(accessId);
 
-      ref.handler->dirInfo(retlist, dirname, dots);
+      ref.handler().dirInfo(retlist, dirname, dots);
     }
 
     // ---------------------------------------------------------------
@@ -753,7 +820,7 @@ namespace zypp
       // FIXME: ref.checkDesired(accessId); ???
       ref.checkAttached(accessId);
 
-      ref.handler->dirInfo(retlist, dirname, dots);
+      ref.handler().dirInfo(retlist, dirname, dots);
     }
 
     // ---------------------------------------------------------------
@@ -765,7 +832,7 @@ namespace zypp
       // FIXME: ref.checkDesired(accessId); ???
       ref.checkAttached(accessId);
 
-      return ref.handler->doesFileExist(filename);
+      return ref.handler().doesFileExist(filename);
     }
 
     // ---------------------------------------------------------------
@@ -775,7 +842,7 @@ namespace zypp
                                      unsigned int & index) const
     {
       ManagedMedia &ref( m_impl->findMM(accessId));
-      return ref.handler->getDetectedDevices(devices, index);
+      return ref.handler().getDetectedDevices(devices, index);
     }
 
     // ---------------------------------------------------------------
@@ -808,7 +875,7 @@ namespace zypp
       ManagedMediaMap::const_iterator m(m_impl->mediaMap.begin());
       for( ; m != m_impl->mediaMap.end(); ++m)
       {
-        AttachedMedia ret = m->second.handler->attachedMedia();
+        AttachedMedia ret = m->second.handler().attachedMedia();
         if( ret.mediaSource && ret.attachPoint)
         {
           std::string mnt(ret.attachPoint->path.asString());
@@ -869,7 +936,7 @@ namespace zypp
     {
       ManagedMedia &ref( m_impl->findMM(accessId));
 
-      return ref.handler->attachedMedia();
+      return ref.handler().attachedMedia();
     }
 
     // ---------------------------------------------------------------
@@ -882,10 +949,10 @@ namespace zypp
       ManagedMediaMap::const_iterator m(m_impl->mediaMap.begin());
       for( ; m != m_impl->mediaMap.end(); ++m)
       {
-        if( !m->second.handler->isAttached())
+        if( !m->second.handler().isAttached())
           continue;
 
-        AttachedMedia ret = m->second.handler->attachedMedia();
+        AttachedMedia ret = m->second.handler().attachedMedia();
         if( ret.mediaSource && ret.mediaSource->equals( *media))
             return ret;
       }
@@ -902,13 +969,13 @@ namespace zypp
       ManagedMediaMap::iterator m(m_impl->mediaMap.begin());
       for( ; m != m_impl->mediaMap.end(); ++m)
       {
-        if( !m->second.handler->isAttached())
+        if( !m->second.handler().isAttached())
           continue;
 
-        AttachedMedia ret = m->second.handler->attachedMedia();
+        AttachedMedia ret = m->second.handler().attachedMedia();
         if( ret.mediaSource && ret.mediaSource->equals( *media))
         {
-          m->second.handler->release();
+          m->second.handler().release();
           m->second.desired  = false;
         }
       }

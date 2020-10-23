@@ -13,7 +13,7 @@
 #include <iosfwd>
 
 #include <zypp/media/MediaManager.h>
-#include <zypp/media/MediaAccess.h>
+#include <zypp/media/MediaHandler.h>
 #include <zypp/base/PtrTypes.h>
 
 namespace zypp
@@ -69,7 +69,7 @@ namespace zypp
        * we nevertheless assume the media is valid. File downloads will fail if
        * this was not true.
        */
-      bool isDesiredMedia( const media::MediaAccessRef & ref_r ) const override;
+      bool isDesiredMedia( const media::MediaHandler & ref_r ) const override;
 
     public:
       class Impl;                 ///< Implementation class.

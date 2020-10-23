@@ -31,6 +31,8 @@
 namespace zypp {
   namespace media {
 
+    class MediaManager;
+
 
 ///////////////////////////////////////////////////////////////////
 //
@@ -115,14 +117,7 @@ class MediaHandler {
 	 */
 	MediaAccessId    _parentId;
 
-        /**
-	 * MediaAccess (MediaManager) needs access to the attachedMedia()
-	 * function to deliver a shared media source and its attach point
-	 * to the media manager and then to other media handler instances.
-	 * Further, is needs to be able to forward the dependsOnParent()
-	 * and resetParentId() functions to the media manager.
-	 */
-	friend class MediaAccess;
+     public:
 
 	/**
 	 * Check if the current media handler depends on an

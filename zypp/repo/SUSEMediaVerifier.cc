@@ -11,6 +11,7 @@
 #include <zypp/base/Logger.h>
 #include <zypp/base/Gettext.h>
 #include <zypp/repo/SUSEMediaVerifier.h>
+#include <zypp/media/MediaHandler.h>
 
 using std::endl;
 
@@ -148,7 +149,7 @@ namespace zypp
     { return _pimpl->mediaNr(); }
 
 
-    bool SUSEMediaVerifier::isDesiredMedia( const media::MediaAccessRef & ref ) const
+    bool SUSEMediaVerifier::isDesiredMedia( const media::MediaHandler & ref ) const
     {
       bool ret = true;	// optimistic return unless we definitely now it does not match
 
@@ -158,14 +159,14 @@ namespace zypp
 
       // bsc#1180851: If there is just one not-volatile medium in the set
       // tolerate a missing (vanished) media identifier and let the URL rule.
-      bool relaxed = smvData._totalMedia == 1 && ! Url::schemeIsVolatile( ref->protocol() );
+      bool relaxed = smvData._totalMedia == 1 && ! Url::schemeIsVolatile( ref.protocol() );
       SEC << smvData << endl;
-      SEC << ref->protocol() << " " <<  Url::schemeIsVolatile( ref->protocol() ) << endl;
+      SEC << ref.protocol() << " " <<  Url::schemeIsVolatile( ref.protocol() ) << endl;
 
       Pathname mediaFile { _pimpl->mediaFilePath() };
       try {
-	ref->provideFile( mediaFile, 0 );
-	mediaFile = ref->localPath( mediaFile );
+	ref.provideFile( mediaFile, 0 );
+	mediaFile = ref.localPath( mediaFile );
       }
       catch ( media::MediaFileNotFoundException & excpt_r )
       {

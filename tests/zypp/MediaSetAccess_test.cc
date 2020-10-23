@@ -5,6 +5,7 @@
 #include <boost/test/unit_test_log.hpp>
 
 #include <zypp/MediaSetAccess.h>
+#include <zypp/media/MediaHandler.h>
 #include <zypp/Url.h>
 #include <zypp/PathInfo.h>
 
@@ -26,9 +27,9 @@ public:
     _media_id = id;
   }
 
-  bool isDesiredMedia(const media::MediaAccessRef &ref) const override
+  bool isDesiredMedia(const media::MediaAHandler &ref) const override
   {
-    return ref->doesFileExist(Pathname("/x." + _media_id ));
+    return ref.doesFileExist(Pathname("/x." + _media_id ));
   }
 
 private:

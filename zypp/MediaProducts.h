@@ -90,7 +90,7 @@ namespace zypp
   {
     media::MediaManager media_mgr;
     // open the media
-    media::MediaId id = media_mgr.open(url_r);
+    media::MediaAccessId id = media_mgr.open(url_r);
     media_mgr.attach(id);
     Pathname products_file = Pathname("media.1/products");
 

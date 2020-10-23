@@ -20,6 +20,7 @@
 #include <zypp/base/PtrTypes.h>
 #include <zypp/base/DefaultIntegral.h>
 #include <zypp/base/String.h>
+#include <zypp/media/MediaException.h>
 #include <zypp/Fetcher.h>
 #include <zypp/ZYppFactory.h>
 #include <zypp/CheckSum.h>
