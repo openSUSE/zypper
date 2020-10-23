@@ -113,12 +113,12 @@ namespace zyppng {
   };
 
 
-  struct MediaHandlerNetwork::Request : public zypp::proto::Request {
+  struct MediaHandlerNetwork::Request {
 
     Request ( const zypp::Pathname &path, RequestId id ) : _targetFile(path) {
       _targetFile.autoCleanup( true );
-      set_requestid( id );
-      set_targetpath( _targetFile.path().asString() );
+      _proto.set_requestid( id );
+      _proto.set_targetpath( _targetFile.path().asString() );
     }
 
     void ref   () {
@@ -157,7 +157,16 @@ namespace zyppng {
       _result = std::move(res);
     }
 
+    zypp::proto::Request &proto () {
+      return _proto;
+    }
+
+    const zypp::proto::Request &proto () const {
+      return _proto;
+    }
+
   private:
+    zypp::proto::Request _proto;
     std::optional<zypp::proto::DownloadFin> _result;
     zypp::filesystem::TmpFile _targetFile;
     ProgressData *_report = nullptr;
@@ -493,7 +502,7 @@ namespace zyppng {
   void MediaHandlerNetwork::handleRequestResult(const Request &req, const zypp::filesystem::Pathname &filename ) const
   {
     if ( !req.result() ) {
-      ZYPP_THROW( zypp::media::MediaCurlException( req.url(), "Request did not return a result" , "" ) );
+      ZYPP_THROW( zypp::media::MediaCurlException( req.proto().url(), "Request did not return a result" , "" ) );
     }
 
     if ( !req.result()->has_error() )
@@ -528,7 +537,7 @@ namespace zyppng {
       }
       ZYPP_THROW( zypp::media::MediaCurlException( reqUrl, err.errordesc(), err.nativeerror() ) );
     }
-    ZYPP_THROW( zypp::media::MediaCurlException( req.url(), err.errordesc() , "" ) );
+    ZYPP_THROW( zypp::media::MediaCurlException( req.proto().url(), err.errordesc() , "" ) );
   }
 
   bool MediaHandlerNetwork::retry( DispatchContext &ctx, Request &req ) const
@@ -631,7 +640,7 @@ namespace zyppng {
       if ( !r )
         return;
 
-      MIL << "Received the download started event for file "<< zypp::Url( r->url() ) <<" from server." << std::endl;
+      MIL << "Received the download started event for file "<< zypp::Url( r->proto().url() ) <<" from server." << std::endl;
       dlId = st.requestid();
       r->setProgress( 0.0, 0.0, cancel );
 
@@ -655,7 +664,7 @@ namespace zyppng {
       if ( !r )
         return;
 
-      MIL << "Received FIN for download: " << zypp::Url( r->url() ) << std::endl;
+      MIL << "Received FIN for download: " << zypp::Url( r->proto().url() ) << std::endl;
       r->setResult( std::move(fin) );
     } else {
       // error , unknown message
@@ -684,16 +693,16 @@ namespace zyppng {
 
 
     Request fileReq( _workingDir, ++_nextRequestId );
-    *fileReq.mutable_settings() = _settings.protoData();
-    fileReq.set_url( url.asCompleteString() );
+    *fileReq.proto().mutable_settings() = _settings.protoData();
+    fileReq.proto().set_url( url.asCompleteString() );
 
     if ( expectedFileSize_r != 0 )
-      fileReq.set_expectedfilesize( expectedFileSize_r );
+      fileReq.proto().set_expectedfilesize( expectedFileSize_r );
 
-    fileReq.set_streamprogress( false );
+    fileReq.proto().set_streamprogress( false );
 
     if ( !deltaFile.empty() )
-      fileReq.set_delta( deltaFile.asString() );
+      fileReq.proto().set_delta( deltaFile.asString() );
 
     return fileReq;
   }
@@ -708,7 +717,7 @@ namespace zyppng {
       retry = false; // try to stop after this iteration
 
       if ( !req.result() ) {
-        result = ctx.waitFor<zypp::proto::DownloadFin>( req.requestid(), std::bind( &MediaHandlerNetwork::handleStreamMessage, this, std::placeholders::_1, std::placeholders::_2 ) );
+        result = ctx.waitFor<zypp::proto::DownloadFin>( req.proto().requestid(), std::bind( &MediaHandlerNetwork::handleStreamMessage, this, std::placeholders::_1, std::placeholders::_2 ) );
         req.setResult( std::move(result) );
       }
 
@@ -722,9 +731,9 @@ namespace zyppng {
   {
     req.reset();
     // update request with new settings
-    *req.mutable_settings() = _settings.protoData();
-    ctx.sendEnvelope( req );
-    const auto &s = ctx.waitForStatus( req.requestid(), std::bind( &MediaHandlerNetwork::handleStreamMessage, this, std::placeholders::_1, std::placeholders::_2 ) );
+    *req.proto().mutable_settings() = _settings.protoData();
+    ctx.sendEnvelope( req.proto() );
+    const auto &s = ctx.waitForStatus( req.proto().requestid(), std::bind( &MediaHandlerNetwork::handleStreamMessage, this, std::placeholders::_1, std::placeholders::_2 ) );
     if ( s.code() != zypp::proto::Status::Ok ) {
       ZYPP_THROW( zypp::media::MediaException( s.reason() ) );
     }
@@ -733,7 +742,7 @@ namespace zyppng {
   MediaHandlerNetwork::Request *MediaHandlerNetwork::findRequest( const Url url ) const
   {
     const auto &i = std::find_if( _requests.begin(), _requests.end(), [ &url ]( const auto &r ) {
-      return ( url == zyppng::Url( r.url() ) );
+      return ( url == zyppng::Url( r.proto().url() ) );
     });
     if ( i == _requests.end() )
       return nullptr;
@@ -743,7 +752,7 @@ namespace zyppng {
   MediaHandlerNetwork::Request *MediaHandlerNetwork::findRequest(const RequestId id ) const
   {
     const auto &i = std::find_if( _requests.begin(), _requests.end(), [ &id ]( const auto &r ) {
-      return ( id == r.requestid() );
+      return ( id == r.proto().requestid() );
     });
     if ( i == _requests.end() )
       return nullptr;
@@ -757,12 +766,12 @@ namespace zyppng {
 
     // here we always send a new request without even considering probably already existing ones
     auto req = makeRequest( filename );
-    req.set_checkexistanceonly( true );
-    req.set_prioritize( true );
+    req.proto().set_checkexistanceonly( true );
+    req.proto().set_prioritize( true );
 
 
-    ctx->sendEnvelope( req );
-    const auto &s = ctx->waitForStatus( req.requestid(), std::bind( &MediaHandlerNetwork::handleStreamMessage, this, std::placeholders::_1, std::placeholders::_2 ) );
+    ctx->sendEnvelope( req.proto() );
+    const auto &s = ctx->waitForStatus( req.proto().requestid(), std::bind( &MediaHandlerNetwork::handleStreamMessage, this, std::placeholders::_1, std::placeholders::_2 ) );
     if ( s.code() != zypp::proto::Status::Ok ) {
       ZYPP_THROW( zypp::media::MediaException( s.reason() ) );
     }
@@ -800,12 +809,12 @@ namespace zyppng {
     if ( !downloadReq ) {
       auto newReq = makeRequest( filename, expectedFileSize_r, deltafile() );
 
-      newReq.set_streamprogress( true );
-      newReq.set_prioritize( true );
+      newReq.proto().set_streamprogress( true );
+      newReq.proto().set_prioritize( true );
 
-      ctx->sendEnvelope( newReq );
+      ctx->sendEnvelope( newReq.proto() );
 
-      const auto &s = ctx->waitForStatus( newReq.requestid(), std::bind( &MediaHandlerNetwork::handleStreamMessage, this, std::placeholders::_1, std::placeholders::_2 ) );
+      const auto &s = ctx->waitForStatus( newReq.proto().requestid(), std::bind( &MediaHandlerNetwork::handleStreamMessage, this, std::placeholders::_1, std::placeholders::_2 ) );
       if ( s.code() != zypp::proto::Status::Ok && s.code() ) {
         ZYPP_THROW( zypp::media::MediaException( s.reason() ) );
       }
@@ -818,7 +827,7 @@ namespace zyppng {
       if ( !downloadReq->result() ) {
 
         zypp::proto::SubscribeProgress sub;
-        sub.set_requestid( downloadReq->requestid() );
+        sub.set_requestid( downloadReq->proto().requestid() );
         sub.set_prioritize( true );
         ctx->sendEnvelope( sub );
 
@@ -866,8 +875,8 @@ namespace zyppng {
       ZYPP_THROW( zypp::media::MediaCurlException( url, err, "" ) );
     }
 
-    if( zypp::filesystem::hardlinkCopy( downloadReq->targetpath(), targetPath ) != 0 ) {
-      std::string err = zypp::str::Str() << "Failed to hardlinkCopy the requested file <<" << downloadReq->targetpath() << " to the targetPath " << targetPath;
+    if( zypp::filesystem::hardlinkCopy( downloadReq->proto().targetpath(), targetPath ) != 0 ) {
+      std::string err = zypp::str::Str() << "Failed to hardlinkCopy the requested file <<" << downloadReq->proto().targetpath() << " to the targetPath " << targetPath;
       DBG << err << std::endl;
       ZYPP_THROW( zypp::media::MediaCurlException( url, err, "" ) );
     }
@@ -879,7 +888,7 @@ namespace zyppng {
     // check if the file was required the same number of times it was requested
     if ( downloadReq->unref() <= 0 ) {
       _requests.remove_if( [ & ]( const auto &r ){
-        return ( r.requestid() == downloadReq->requestid() );
+        return ( r.proto().requestid() == downloadReq->proto().requestid() );
       });
     }
 
@@ -937,8 +946,8 @@ namespace zyppng {
         existingReq->ref();
       else {
         Request fileReq = makeRequest( file.filename(), file.downloadSize() );
-        fileReq.set_streamprogress( false );
-        *req.mutable_requests()->Add() = zypp::proto::Request(fileReq);
+        fileReq.proto().set_streamprogress( false );
+        *req.mutable_requests()->Add() = fileReq.proto();
         sentRequests.push_back( fileReq );
       }
     }
