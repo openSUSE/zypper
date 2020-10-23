@@ -596,7 +596,7 @@ msgid ""
 "Patch '%1%' is optional. Use '%2%' to install it, or '%3%' to include all "
 "optional patches."
 msgstr ""
-"El parche %s es opcional. Utilice %2% para instalarlo o %3% para incluir "
+"El parche %1% es opcional. Utilice %2% para instalarlo o %3% para incluir "
 "todos los parches opcionales."
 
 #: src/RequestFeedback.cc:192
