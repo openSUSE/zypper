@@ -315,7 +315,7 @@ namespace Pimpl
     Table t;
     TableHeader th;
     // translators: table headers
-    th << "#" << _("Source package") << _("Installed package");
+    th << "#" << N_("Source package") << N_("Installed package");
     t << th;
 
     for ( const auto & item : _manifest )

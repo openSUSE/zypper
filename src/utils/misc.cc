@@ -320,14 +320,14 @@ FillPatchesTable::FillPatchesTable( Table & table_r, const PatchHistoryData & hi
 , _historyData( historyData_r )
 {
   table_r << ( TableHeader()
-  << _("Repository")
-  << _("Name")
-  << _("Category")
-  << _("Severity")
-  << _("Interactive")
-  << _("Status")
-  << ColumnIf( bool(_historyData), [](){ return _("Since"); } )
-  << _("Summary")
+  << N_("Repository")
+  << N_("Name")
+  << N_("Category")
+  << N_("Severity")
+  << N_("Interactive")
+  << N_("Status")
+  << ColumnIf( bool(_historyData), [](){ return N_("Since"); } )
+  << N_("Summary")
   );
   table_r.defaultSortColumn( 1 );	// by Name
 }
@@ -361,15 +361,15 @@ FillPatchesTableForIssue::FillPatchesTableForIssue( Table & table_r, const Patch
 {
   table_r << ( TableHeader()
   //<< _("Repository")
-  << _("Issue")
-  << _("No.")
-  << _("Patch")	// Name
-  << _("Category")
-  << _("Severity")
-  << _("Interactive")
-  << _("Status")
-  << ColumnIf( bool(_historyData), [](){ return _("Since"); } )
-  << _("Summary")
+  << N_("Issue")
+  << N_("No.")
+  << N_("Patch")	// Name
+  << N_("Category")
+  << N_("Severity")
+  << N_("Interactive")
+  << N_("Status")
+  << ColumnIf( bool(_historyData), [](){ return N_("Since"); } )
+  << N_("Summary")
   );
   table_r.defaultSortColumn( 2 );	// by Name
 }

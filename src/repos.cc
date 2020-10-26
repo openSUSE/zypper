@@ -20,7 +20,6 @@
 #include <zypp/repo/RepoException.h>
 #include <zypp/parser/ParseException.h>
 #include <zypp/media/MediaException.h>
-#include <zypp/media/MediaAccess.h>
 #include <zypp/target/rpm/RpmHeader.h>
 
 #include "output/Out.h"

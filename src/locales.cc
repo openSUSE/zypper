@@ -171,11 +171,11 @@ namespace
     Table tbl;
     tbl << ( TableHeader()
     // translators: header of table column - the language code, e.g. en_US
-    << _("Code")
+    << N_("Code")
     // translators: header of table column - the language, e.g. English (United States)
-    << _("Language")
+    << N_("Language")
     // translators: header of table column - is the language requested? (Yes/No)
-    << _("Requested")
+    << N_("Requested")
     );
 
     for ( const auto & el : locales_r )
@@ -196,11 +196,11 @@ namespace
     Table tbl;
     tbl << ( TableHeader()
     // translators: header of table column - S is for 'Status' (package installed or not)
-    << _("S")
+    << N_("S")
     // translators: header of table column - the name of the package
-    << _("Name")
+    << N_("Name")
     // translators: header of table column - the package summary
-    << _("Description")
+    << N_("Description")
     );
 
     for_( it, myLocale.selectableBegin(), myLocale.selectableEnd() )

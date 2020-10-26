@@ -43,17 +43,17 @@ FillSearchTableSolvable::FillSearchTableSolvable( Table & table_r, TriBool instN
   //
   *_table << ( TableHeader()
 	  // translators: S for 'installed Status'
-	  << _("S")
+	  << N_("S")
 	  // translators: name (general header)
-	  << _("Name")
+	  << N_("Name")
 	  // translators: type (general header)
-	  << _("Type")
+	  << N_("Type")
 	  // translators: package version (header)
-	  << table::EditionStyleSetter( *_table, _("Version") )
+	  << table::EditionStyleSetter( *_table, N_("Version") )
 	  // translators: package architecture (header)
-	  << _("Arch")
+	  << N_("Arch")
 	  // translators: package's repository (header)
-	  << _("Repository") );
+	  << N_("Repository") );
 }
 
 bool FillSearchTableSolvable::operator()( const PoolItem & pi_r ) const
@@ -195,11 +195,11 @@ FillSearchTableSelectable::FillSearchTableSelectable( Table & table, TriBool ins
   //
   *_table << ( TableHeader()
 	  // translators: S for installed Status
-	  << _("S")
-	  << _("Name")
+	  << N_("S")
+	  << N_("Name")
 	  // translators: package summary (header)
-	  << _("Summary")
-	  << _("Type") );
+	  << N_("Summary")
+	  << N_("Type") );
 }
 
 bool FillSearchTableSelectable::operator()( const ui::Selectable::constPtr & s ) const
@@ -300,11 +300,11 @@ static void list_pattern_table( Zypper & zypper, SolvableFilterMode mode_r )
 
   // translators: S for installed Status
   tbl << ( TableHeader()
-      << _("S")
-      << _("Name")
-      << table::EditionStyleSetter( tbl, _("Version") )
-      << _("Repository")
-      << _("Dependency") );
+      << N_("S")
+      << N_("Name")
+      << table::EditionStyleSetter( tbl, N_("Version") )
+      << N_("Repository")
+      << N_("Dependency") );
 
   bool repofilter =  InitRepoSettings::instance()._repoFilter.size() ;	// suppress @System if repo filter is on
   bool installed_only = mode_r == SolvableFilterMode::ShowOnlyInstalled;
@@ -431,11 +431,11 @@ void list_packages(Zypper & zypper , ListPackagesFlags flags_r )
     // display the result, even if --quiet specified
     tbl << ( TableHeader()
 	// translators: S for installed Status
-	<< _("S")
-	<< _("Repository")
-	<< _("Name")
-	<< table::EditionStyleSetter( tbl, _("Version") )
-	<< _("Arch") );
+	<< N_("S")
+	<< N_("Repository")
+	<< N_("Name")
+	<< table::EditionStyleSetter( tbl, N_("Version") )
+	<< N_("Arch") );
 
     if ( flags_r.testFlag( ListPackagesBits::SortByRepo ) )
       tbl.sort( 1 ); // Repo
@@ -475,15 +475,15 @@ void list_product_table(Zypper & zypper , SolvableFilterMode mode_r)
 
   tbl << ( TableHeader()
       // translators: S for installed Status
-      << _("S")
-      << _("Repository")
+      << N_("S")
+      << N_("Repository")
       // translators: used in products. Internal Name is the unix name of the
       // product whereas simply Name is the official full name of the product.
-      << _("Internal Name")
-      << _("Name")
-      << table::EditionStyleSetter( tbl, _("Version") )
-      << _("Arch")
-      << _("Is Base") );
+      << N_("Internal Name")
+      << N_("Name")
+      << table::EditionStyleSetter( tbl, N_("Version") )
+      << N_("Arch")
+      << N_("Is Base") );
 
   bool repofilter =  InitRepoSettings::instance()._repoFilter.size() ;	// suppress @System if repo filter is on
   bool installed_only = mode_r == SolvableFilterMode::ShowOnlyInstalled;

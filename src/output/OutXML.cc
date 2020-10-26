@@ -164,7 +164,7 @@ void OutXML::searchResult( const Table & table_r )
     std::vector<std::string> header;
     {
       const TableHeader & theader( table_r.header() );
-      for_( it, theader.columns().begin(), theader.columns().end() )
+      for_( it, theader.columnsNoTr().begin(), theader.columnsNoTr().end() )
       {
 	if ( *it == "S" )
 	  header.push_back( "status" );

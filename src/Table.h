@@ -263,17 +263,25 @@ public:
   };
 
   const container & columns() const
-  { return _columns; }
+  { return _translateColumns ? _translatedColumns : _columns; }
 
   container & columns()
+  { return _translateColumns ? _translatedColumns : _columns; }
+
+  const container & columnsNoTr() const
   { return _columns; }
 
+  container & columnsNoTr()
+  { return _columns; }
+
+protected:
+  bool      _translateColumns = false;
 private:
   container _columns;
+  container _translatedColumns;
   container _details;
   ColorContext _ctxt;
   boost::any _userData;	///< user defined sort index, e.g. if string values don't work due to coloring
-  friend class Table;
 };
 
 /** \relates TableRow Add colummn. */
@@ -309,7 +317,7 @@ template<class Tif_> TableRow & operator<<( TableRow & tr, ctcdetail::ColumnIf<T
 class TableHeader : public TableRow {
 public:
   //! Constructor. Reserve place for c columns.
-  TableHeader (unsigned c = 0): TableRow (c) {}
+  TableHeader (unsigned c = 0): TableRow (c) { _translateColumns = true; }
 };
 
 /** \relates TableHeader  Add column. */

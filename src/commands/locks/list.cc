@@ -132,10 +132,10 @@ namespace out
     TableHeader header() const
     {
       TableHeader th;
-      th << "#" << _("Name");
+      th << "#" << N_("Name");
       if ( _withMatches )
-	th << _("Matches");
-      th << _("Type") << _("Repository");
+	th << N_("Matches");
+      th << N_("Type") << N_("Repository");
       return th;
     }
 

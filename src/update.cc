@@ -403,19 +403,19 @@ namespace
       {
 	TableHeader hdr;
 	// translator: Table column header.
-	hdr << _("Category");
+	hdr << N_("Category");
 	// translator: Table column header.
-	if ( haveUPD )	hdr << _("Updatestack");
+	if ( haveUPD )	hdr << N_("Updatestack");
 	// translator: Table column header.
-	if ( havePAT )	hdr << _("Patches");
+	if ( havePAT )	hdr << N_("Patches");
 	// translator: Table column header.
-	if ( haveLCK )	hdr << ColorString( ctxtLocked, _("Locked") );
+	if ( haveLCK )	hdr << ColorString( ctxtLocked, N_("Locked") );
 	// translator: Table column header
 	// Used if stats collect data for more than one category name.
 	// Category    | Updatestack | Patches | Locked | Included categories
 	// ------------+-------------+---------+--------+---------------------
 	//  optional   | ...                      ..... | enhancement, feature
-	if ( haveAKA )	hdr << _("Included categories");
+	if ( haveAKA )	hdr << N_("Included categories");
 	tbl << std::move(hdr);
       }
 
@@ -781,18 +781,18 @@ void list_updates(Zypper & zypper, const ResKindSet & kinds, bool best_effort, b
     TableHeader th;
     unsigned name_col;
     // TranslatorExplanation S stands for Status
-    th << _("S");
+    th << N_("S");
     if (!hide_repo)
-      th << _("Repository");
+      th << N_("Repository");
 
     name_col = th.cols();
-    th << _("Name");
+    th << N_("Name");
     // best_effort does not know version or arch yet
     if (!best_effort)
     {
       if (*it == ResKind::package)
-        th << table::EditionStyleSetter( tbl, _("Current Version") );
-      th << table::EditionStyleSetter( tbl, _("Available Version") ) << _("Arch");
+        th << table::EditionStyleSetter( tbl, N_("Current Version") );
+      th << table::EditionStyleSetter( tbl, N_("Available Version") ) << N_("Arch");
     }
 
     tbl << th;

@@ -101,19 +101,19 @@ void ListServicesCmd::printServiceList( Zypper &zypper )
     TableHeader th;
     // fixed 'zypper services' columns
     th << "#"
-       << _("Alias")
-       << _("Name")
-       << _("Enabled")
-       << _("GPG Check")
+       << N_("Alias")
+       << N_("Name")
+       << N_("Enabled")
+       << N_("GPG Check")
           // translators: 'zypper repos' column - whether autorefresh is enabled for the repository
-       << _("Refresh");
+       << N_("Refresh");
     // optional columns
     if ( _listOptions._flags.testFlag( RSCommonListOptions::ShowPriority ) )
       // translators: repository priority (in zypper repos -p or -d)
-      th << _("Priority");
-    th << _("Type");
+      th << N_("Priority");
+    th << N_("Type");
     if ( _listOptions._flags.testFlag( RSCommonListOptions::ShowURI ) )
-      th << _("URI");
+      th << N_("URI");
     tbl << std::move(th);
   }
 
