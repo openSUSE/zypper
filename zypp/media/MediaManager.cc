@@ -696,11 +696,9 @@ namespace zypp
                               const Pathname &filename,
                               const ByteCount &expectedFileSize ) const
     {
-      ManagedMedia &ref( m_impl->findMM(accessId));
-
-      ref.checkDesired(accessId);
-
-      ref.handler().provideFile(filename, expectedFileSize);
+      OnMediaLocation loc( filename );
+      loc.setDownloadSize( expectedFileSize );
+      provideFile( accessId, loc );
     }
 
     // ---------------------------------------------------------------
@@ -708,7 +706,16 @@ namespace zypp
     MediaManager::provideFile(MediaAccessId   accessId,
                               const Pathname &filename ) const
     {
-      provideFile( accessId, filename, 0);
+      provideFile( accessId, OnMediaLocation( filename ) );
+    }
+
+    void MediaManager::provideFile( MediaAccessId accessId, const OnMediaLocation &file ) const
+    {
+      ManagedMedia &ref( m_impl->findMM(accessId));
+
+      ref.checkDesired(accessId);
+
+      ref.handler().provideFile( file );
     }
 
     // ---------------------------------------------------------------

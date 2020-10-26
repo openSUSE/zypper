@@ -990,8 +990,7 @@ MediaHandler::dependsOnParent(MediaAccessId parentId, bool exactIdMatch)
 //
 //	DESCRIPTION :
 //
-void MediaHandler::provideFileCopy( const OnMediaLocation &srcFile,
-                                    Pathname targetFilename , const ByteCount &expectedFileSize_r ) const
+void MediaHandler::provideFileCopy( const OnMediaLocation &srcFile, Pathname targetFilename ) const
 {
   if ( !isAttached() ) {
     INT << "Media not_attached on provideFileCopy(" << srcFile
@@ -999,18 +998,18 @@ void MediaHandler::provideFileCopy( const OnMediaLocation &srcFile,
     ZYPP_THROW(MediaNotAttachedException(url()));
   }
 
-  getFileCopy( srcFile, targetFilename, expectedFileSize_r ); // pass to concrete handler
+  getFileCopy( srcFile, targetFilename ); // pass to concrete handler
   DBG << "provideFileCopy(" << srcFile << "," << targetFilename  << ")" << endl;
 }
 
-void MediaHandler::provideFile( const OnMediaLocation &file , const ByteCount &expectedFileSize_r ) const
+void MediaHandler::provideFile( const OnMediaLocation &file ) const
 {
   if ( !isAttached() ) {
     INT << "Error: Not attached on provideFile(" << file << ")" << endl;
     ZYPP_THROW(MediaNotAttachedException(url()));
   }
 
-  getFile( file, expectedFileSize_r ); // pass to concrete handler
+  getFile( file ); // pass to concrete handler
   DBG << "provideFile(" << file << ")" << endl;
 }
 
@@ -1174,16 +1173,16 @@ void MediaHandler::getDirectoryYast( filesystem::DirContent & retlist,
   retlist.clear();
 
   // look for directory.yast
-  Pathname dirFile = dirname + "directory.yast";
-  getFile( dirFile, 0 );
+  auto dirFile = OnMediaLocation( dirname + "directory.yast" );
+  getFile( dirFile );
   DBG << "provideFile(" << dirFile << "): " << "OK" << endl;
 
   // using directory.yast
-  std::ifstream dir( localPath( dirFile ).asString().c_str() );
+  std::ifstream dir( localPath( dirFile.filename() ).asString().c_str() );
   if ( dir.fail() ) {
-    ERR << "Unable to load '" << localPath( dirFile ) << "'" << endl;
+    ERR << "Unable to load '" << localPath( dirFile.filename() ) << "'" << endl;
     ZYPP_THROW(MediaSystemException(url(),
-      "Unable to load '" + localPath( dirFile ).asString() + "'"));
+      "Unable to load '" + localPath( dirFile.filename() ).asString() + "'"));
   }
 
   std::string line;
@@ -1222,7 +1221,7 @@ std::ostream & operator<<( std::ostream & str, const MediaHandler & obj )
   return str;
 }
 
-void MediaHandler::getFile(const OnMediaLocation &file, const ByteCount &) const
+void MediaHandler::getFile( const OnMediaLocation &file ) const
 {
   PathInfo info( localPath( file.filename() ) );
   if( info.isFile() ) {
@@ -1235,9 +1234,9 @@ void MediaHandler::getFile(const OnMediaLocation &file, const ByteCount &) const
     ZYPP_THROW(MediaFileNotFoundException(url(), file.filename()));
 }
 
-void MediaHandler::getFileCopy(const OnMediaLocation &file, const zypp::filesystem::Pathname &targetFilename, const ByteCount &expectedFileSize_r) const
+void MediaHandler::getFileCopy( const OnMediaLocation &file, const Pathname &targetFilename ) const
 {
-  getFile( file, expectedFileSize_r );
+  getFile( file );
   if ( copy( localPath( file.filename() ), targetFilename ) != 0 ) {
     ZYPP_THROW(MediaWriteException(targetFilename));
   }

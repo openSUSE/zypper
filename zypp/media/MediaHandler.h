@@ -354,7 +354,7 @@ class MediaHandler {
 	 * \throws MediaException
 	 *
 	 **/
-        virtual void getFile( const OnMediaLocation &file, const ByteCount &expectedFileSize_r ) const;
+        virtual void getFile( const OnMediaLocation &file ) const;
 
         /**
          * Call concrete handler to provide a file under a different place
@@ -367,7 +367,7 @@ class MediaHandler {
 	 * \throws MediaException
 	 *
          **/
-        virtual void getFileCopy( const OnMediaLocation & file, const Pathname & targetFilename, const ByteCount &expectedFileSize_r ) const;
+        virtual void getFileCopy( const OnMediaLocation & file, const Pathname & targetFilename ) const;
 
 
 	/**
@@ -567,7 +567,7 @@ class MediaHandler {
 	 * \throws MediaException
 	 *
 	 **/
-	void provideFile( const OnMediaLocation &file, const ByteCount &expectedFileSize_r ) const;
+	void provideFile( const OnMediaLocation &file ) const;
 
 	/**
 	 * Call concrete handler to provide a copy of a file under a different place
@@ -580,7 +580,7 @@ class MediaHandler {
 	 * \throws MediaException
 	 *
 	 **/
-        void provideFileCopy( const OnMediaLocation &srcFile, Pathname targetFilename, const ByteCount &expectedFileSize_r ) const;
+        void provideFileCopy( const OnMediaLocation &srcFile, Pathname targetFilename ) const;
 
 	/**
 	 * Use concrete handler to provide directory denoted
@@ -639,12 +639,12 @@ class MediaHandler {
         /*
          * set a deltafile to be used in the next download
          */
-	ZYPP_DEPRECATED void setDeltafile( const Pathname &filename = Pathname()) const;
+	void setDeltafile( const Pathname &filename = Pathname()) const;
 
 	/*
 	 * return the deltafile set with setDeltafile()
 	 */
-	ZYPP_DEPRECATED Pathname deltafile () const;
+	Pathname deltafile () const;
 
     public:
 

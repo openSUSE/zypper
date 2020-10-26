@@ -35,7 +35,7 @@ namespace zypp {
 
       virtual void attachTo (bool next = false) override;
       virtual void releaseFrom( const std::string & ejectDev ) override;
-      virtual void getFile( const OnMediaLocation & file, const ByteCount &expectedFileSize_r ) const override;
+      virtual void getFile( const OnMediaLocation & file ) const override;
       virtual void getDir( const Pathname & dirname, bool recurse_r ) const override;
       virtual void getDirInfo( std::list<std::string> & retlist,
                                const Pathname & dirname, bool dots = true ) const override;

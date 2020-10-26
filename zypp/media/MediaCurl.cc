@@ -487,16 +487,16 @@ Url MediaCurl::getFileUrl( const Pathname & filename_r ) const
 
 ///////////////////////////////////////////////////////////////////
 
-void MediaCurl::getFile(const OnMediaLocation &file , const ByteCount &expectedFileSize_r) const
+void MediaCurl::getFile( const OnMediaLocation &file ) const
 {
     // Use absolute file name to prevent access of files outside of the
     // hierarchy below the attach point.
-    getFileCopy( file, localPath(file.filename()).absolutename(), expectedFileSize_r );
+    getFileCopy( file, localPath(file.filename()).absolutename() );
 }
 
 ///////////////////////////////////////////////////////////////////
 
-void MediaCurl::getFileCopy( const OnMediaLocation & srcFile , const Pathname & target, const ByteCount &expectedFileSize_r ) const
+void MediaCurl::getFileCopy( const OnMediaLocation & srcFile , const Pathname & target ) const
 {
 
   const auto &filename = srcFile.filename();
@@ -511,7 +511,7 @@ void MediaCurl::getFileCopy( const OnMediaLocation & srcFile , const Pathname & 
   {
     try
     {
-      doGetFileCopy(filename, target, report, expectedFileSize_r);
+      doGetFileCopy(filename, target, report, srcFile.downloadSize() );
       retry = false;
     }
     // retry with proper authentication data
@@ -1132,7 +1132,7 @@ void MediaCurl::getDir( const Pathname & dirname, bool recurse_r ) const
       switch ( it->type ) {
       case filesystem::FT_NOT_AVAIL: // old directory.yast contains no typeinfo at all
       case filesystem::FT_FILE:
-        getFile( filename, 0 );
+        getFile( OnMediaLocation( filename ) );
         break;
       case filesystem::FT_DIR: // newer directory.yast contain at least directory info
         if ( recurse_r ) {

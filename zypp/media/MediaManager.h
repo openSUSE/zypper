@@ -720,14 +720,32 @@ namespace zypp::media
     localPath(MediaAccessId accessId, const Pathname & pathname) const;
 
   public:
+
+    /**
+     * \deprecated Deprecated function, please use the provideFile version that
+     * takes a \ref OnMediaLocation argument
+     */
+    ZYPP_DEPRECATED void
+    provideFile(MediaAccessId accessId,
+                const Pathname &filename,
+                const ByteCount &expectedFileSize) const;
+
+    /**
+     * \deprecated Deprecated function, please use the provideFile version that
+     * takes a \ref OnMediaLocation argument
+     */
+    ZYPP_DEPRECATED void
+    provideFile(MediaAccessId   accessId,
+                const Pathname &filename ) const;
+
+
     /**
      * Provide provide file denoted by relative path below of the
      * 'attach point' of the specified media and the path prefix
      * on the media.
      *
      * \param accessId  The media access id to use.
-     * \param filename  The filename to provide, relative to localRoot().
-     * \param expectedFileSize The expected filesize, download will stop if it is exceeded
+     * \param file The \ref OnMediaLocation specifiying the file to download
      *
      * \throws MediaNotOpenException in case of invalid access id.
      * \throws MediaNotAttachedException in case, that the media is not attached.
@@ -738,15 +756,9 @@ namespace zypp::media
      * \throws MediaSystemException in case a system operation fails.
      * \throws MediaException derived exception, depending on the url (handler).
      */
-
     void
     provideFile(MediaAccessId accessId,
-                const Pathname &filename,
-                const ByteCount &expectedFileSize) const;
-
-    void
-    provideFile(MediaAccessId   accessId,
-                const Pathname &filename ) const;
+      const OnMediaLocation &file ) const;
 
     /**
      * FIXME: see MediaAccess class.
@@ -821,7 +833,7 @@ namespace zypp::media
                        std::vector<std::string> & devices,
                        unsigned int & index) const;
 
-    void
+    ZYPP_DEPRECATED void
     setDeltafile(MediaAccessId   accessId,
                 const Pathname &filename ) const;
 

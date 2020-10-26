@@ -793,7 +793,7 @@ namespace zyppng {
   }
 
 
-  void MediaHandlerNetwork::getFile( const zypp::OnMediaLocation &file, const zypp::ByteCount &expectedFileSize_r ) const
+  void MediaHandlerNetwork::getFile( const zypp::OnMediaLocation &file ) const
   {
     const auto &filename = file.filename();
     auto ctx = ensureConnected();
@@ -807,7 +807,7 @@ namespace zyppng {
     report->start( url, filename );
 
     if ( !downloadReq ) {
-      auto newReq = makeRequest( filename, expectedFileSize_r, deltafile() );
+      auto newReq = makeRequest( filename, file.downloadSize(), deltafile() );
 
       newReq.proto().set_streamprogress( true );
       newReq.proto().set_prioritize( true );
@@ -908,7 +908,7 @@ namespace zyppng {
       switch ( it->type ) {
         case zypp::filesystem::FT_NOT_AVAIL: // old directory.yast contains no typeinfo at all
         case zypp::filesystem::FT_FILE:
-          getFile( filename, 0 );
+          getFile( zypp::OnMediaLocation( filename ) );
           break;
         case zypp::filesystem::FT_DIR: // newer directory.yast contain at least directory info
           if ( recurse_r ) {

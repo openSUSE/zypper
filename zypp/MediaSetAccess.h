@@ -351,7 +351,7 @@ namespace zypp
        */
       Pathname provideFileInternal( const OnMediaLocation &resource, ProvideFileOptions options );
 
-      typedef function<void( media::MediaAccessId, const Pathname & )> ProvideOperation;
+      typedef function<void( media::MediaAccessId, const OnMediaLocation & )> ProvideOperation;
 
       void provide( ProvideOperation op, const OnMediaLocation &resource, ProvideFileOptions options, const Pathname &deltafile );
 

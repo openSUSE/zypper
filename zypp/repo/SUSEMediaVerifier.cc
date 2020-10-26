@@ -165,7 +165,7 @@ namespace zypp
 
       Pathname mediaFile { _pimpl->mediaFilePath() };
       try {
-	ref.provideFile( mediaFile, 0 );
+	ref.provideFile( OnMediaLocation(mediaFile) );
 	mediaFile = ref.localPath( mediaFile );
       }
       catch ( media::MediaFileNotFoundException & excpt_r )

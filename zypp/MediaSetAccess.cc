@@ -112,34 +112,35 @@ IMPL_PTR_TYPE(MediaSetAccess);
   struct ProvideFileOperation
   {
     Pathname result;
-    ByteCount expectedFileSize;
-    void operator()( media::MediaAccessId media, const Pathname &file )
+    void operator()( media::MediaAccessId media, const OnMediaLocation &file )
     {
       media::MediaManager media_mgr;
-      media_mgr.provideFile(media, file, expectedFileSize);
-      result = media_mgr.localPath(media, file);
+      media_mgr.provideFile( media, file );
+      result = media_mgr.localPath( media, file.filename() );
     }
   };
 
   struct ProvideDirTreeOperation
   {
     Pathname result;
-    void operator()( media::MediaAccessId media, const Pathname &file )
+    void operator()( media::MediaAccessId media, const OnMediaLocation &file )
     {
+      const auto &fName = file.filename();
       media::MediaManager media_mgr;
-      media_mgr.provideDirTree(media, file);
-      result = media_mgr.localPath(media, file);
+      media_mgr.provideDirTree( media, fName );
+      result = media_mgr.localPath( media, fName );
     }
   };
 
   struct ProvideDirOperation
   {
     Pathname result;
-    void operator()( media::MediaAccessId media, const Pathname &file )
+    void operator()( media::MediaAccessId media, const OnMediaLocation &file )
     {
+      const auto &fName = file.filename();
       media::MediaManager media_mgr;
-      media_mgr.provideDir(media, file);
-      result = media_mgr.localPath(media, file);
+      media_mgr.provideDir( media, fName );
+      result = media_mgr.localPath( media, fName );
     }
   };
 
@@ -150,10 +151,11 @@ IMPL_PTR_TYPE(MediaSetAccess);
         : result(false)
     {}
 
-    void operator()( media::MediaAccessId media, const Pathname &file )
+    void operator()( media::MediaAccessId media, const OnMediaLocation &file )
     {
+      const auto &fName = file.filename();
       media::MediaManager media_mgr;
-      result = media_mgr.doesFileExist(media, file);
+      result = media_mgr.doesFileExist( media, fName );
     }
   };
 
@@ -162,7 +164,6 @@ IMPL_PTR_TYPE(MediaSetAccess);
   Pathname MediaSetAccess::provideFile( const OnMediaLocation & resource, ProvideFileOptions options, const Pathname &deltafile )
   {
     ProvideFileOperation op;
-    op.expectedFileSize = resource.downloadSize();
     provide( boost::ref(op), resource, options, deltafile );
     return op.result;
   }
@@ -258,7 +259,7 @@ IMPL_PTR_TYPE(MediaSetAccess);
                                 ProvideFileOptions options,
                                 const Pathname &deltafile )
   {
-    Pathname file(resource.filename());
+    const auto &file(resource.filename());
     unsigned media_nr(resource.medianr());
 
     callback::SendReport<media::MediaChangeReport> report;
@@ -281,7 +282,7 @@ IMPL_PTR_TYPE(MediaSetAccess);
           media_mgr.attach(media);
 	media_mgr.setDeltafile(media, deltafile);
 	deltafileset = true;
-        op(media, file);
+        op(media, resource);
 	media_mgr.setDeltafile(media, Pathname());
         break;
       }
