@@ -442,10 +442,10 @@ void printPatternInfo(Zypper & zypper, const ui::Selectable & s , const PrintInf
     {
       Table t;
       t << ( TableHeader()
-	  /* translators: Table column header */	<< _("S")
-	  /* translators: Table column header */	<< _("Name")
-	  /* translators: Table column header */	<< _("Type")
-	  /* translators: Table column header */	<< _("Dependency") );
+	  /* translators: Table column header */	<< N_("S")
+	  /* translators: Table column header */	<< N_("Name")
+	  /* translators: Table column header */	<< N_("Type")
+	  /* translators: Table column header */	<< N_("Dependency") );
 
       for ( ui::Selectable::Ptr sel : collect.req.selectable() )
       {
@@ -688,9 +688,9 @@ void printSrcPackageInfo(Zypper & zypper, const ui::Selectable & s, const PrintI
   {
     Table t;
     t << ( TableHeader()
-	/* translators: Table column header */	<< _("S")
-	/* translators: Table column header */	<< _("Name")
-	/* translators: Table column header */	<< _("Version") );
+	/* translators: Table column header */	<< N_("S")
+	/* translators: Table column header */	<< N_("Name")
+	/* translators: Table column header */	<< N_("Version") );
 
     for ( auto binPkg : builtFrom )
     { t << ( TableRow() << BinPkgStatus( binPkg ) << binPkg.first << binPkg.second ); }

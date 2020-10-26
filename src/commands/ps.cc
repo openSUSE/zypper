@@ -139,21 +139,21 @@ int PSCommand::execute( Zypper &zypper, const std::vector<std::string> &position
   {
     TableHeader th;
     // process ID
-    th << _("PID")
+    th << N_("PID")
     // parent process ID
-    << _("PPID")
+    << N_("PPID")
     // process user ID
-    << _("UID")
+    << N_("UID")
     // process login name
-    << _("User")
+    << N_("User")
     // process command name
-    << _("Command")
+    << N_("Command")
     // "/etc/init.d/ script that might be used to restart the command (guessed)
-    << _("Service");
+    << N_("Service");
     if ( tableWithFiles )
     {
       // "list of deleted files or libraries accessed"
-      th << _("Files");
+      th << N_("Files");
     }
     t << std::move(th);
   }

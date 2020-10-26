@@ -37,6 +37,8 @@ static const char * lines[][3] = {
 
 TableRow & TableRow::add( std::string s )
 {
+  if ( _translateColumns )
+    _translatedColumns.push_back( _(s.c_str()) );
   _columns.push_back( std::move(s) );
   return *this;
 }
@@ -230,14 +232,15 @@ void Table::updateColWidths( const TableRow & tr ) const
   _width = -sepwidth;
 
   // ensure that _max_width[col] exists
-  if ( _max_width.size() < tr._columns.size() )
+  const auto &columns = tr.columns();
+  if ( _max_width.size() < columns.size() )
   {
-    _max_width.resize( tr._columns.size(), 0 );
+    _max_width.resize( columns.size(), 0 );
     _max_col = _max_width.size()-1;
   }
 
   unsigned c = 0;
-  for ( const auto & col : tr._columns )
+  for ( const auto & col : columns )
   {
     unsigned &max = _max_width[c++];
     unsigned cur = mbs_width( col );

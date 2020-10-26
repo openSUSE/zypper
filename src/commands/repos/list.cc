@@ -209,7 +209,7 @@ void ListReposCmd::printRepoList( Zypper & zypper, const std::list<RepoInfo> & r
   // alias
   if ( all || showalias )
   {
-    th << _("Alias");
+    th << N_("Alias");
     ++index;
     // if (zypper.cOpts().count("sort-by-alias")
     //    || (list_cols.find("A") != std::string::npos && !sort_override))
@@ -220,18 +220,18 @@ void ListReposCmd::printRepoList( Zypper & zypper, const std::list<RepoInfo> & r
   // name
   if ( all || showname )
   {
-     th << _("Name");
+     th << N_("Name");
      ++index;
      if ( _listOptions._flags.testFlag( RSCommonListOptions::SortByName ) || ( list_cols.find("N") != std::string::npos && !sort_override ) )
        sort_index = index;
   }
 
   // 'enabled' flag
-  th << _("Enabled");
+  th << N_("Enabled");
   ++index;
 
   // GPG Check
-  th << _("GPG Check");
+  th << N_("GPG Check");
   ++index;
 
   // 'autorefresh' flag
@@ -239,7 +239,7 @@ void ListReposCmd::printRepoList( Zypper & zypper, const std::list<RepoInfo> & r
   {
     // translators: 'zypper repos' column - whether autorefresh is enabled
     // for the repository
-    th << _("Refresh");
+    th << N_("Refresh");
     ++index;
     if ( list_cols.find("R") != std::string::npos && !sort_override )
       sort_index = index;
@@ -249,7 +249,7 @@ void ListReposCmd::printRepoList( Zypper & zypper, const std::list<RepoInfo> & r
   if ( all || showprio )
   {
     // translators: repository priority (in zypper repos -p or -d)
-    th << _("Priority");
+    th << N_("Priority");
     ++index;
     if ( _listOptions._flags.testFlag( RSCommonListOptions::SortByPrio ) || ( list_cols.find("P") != std::string::npos && !sort_override ) )
       sort_index = Table::UserData;
@@ -258,14 +258,14 @@ void ListReposCmd::printRepoList( Zypper & zypper, const std::list<RepoInfo> & r
   // type
   if ( all )
   {
-    th << _("Type");
+    th << N_("Type");
     ++index;
   }
 
   // URI
   if ( all || showuri )
   {
-    th << _("URI");
+    th << N_("URI");
     ++index;
     if ( _listOptions._flags.testFlag( RSCommonListOptions::SortByURI ) || ( list_cols.find("U") != std::string::npos && !sort_override ) )
       sort_index = index;
@@ -274,7 +274,7 @@ void ListReposCmd::printRepoList( Zypper & zypper, const std::list<RepoInfo> & r
   // service alias
   if ( all || showservice )
   {
-    th << _("Service");
+    th << N_("Service");
     ++index;
   }
 
