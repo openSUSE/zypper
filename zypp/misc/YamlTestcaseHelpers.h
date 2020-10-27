@@ -197,6 +197,18 @@ namespace yamltest::detail {
         }, err );
         if ( !success ) return false;
       }
+      else if ( key == ("vendors") )
+      {
+        bool success = readListInlineOrFromFile( [&target]( const YAML::Node & dataNode, std::string * err ) {
+	  std::vector<std::string> vlist;
+	  for ( const auto & node : dataNode )
+	    vlist.push_back( node.as<std::string>() );
+	  if ( ! vlist.empty() )
+	    target.vendorLists.push_back( std::move(vlist) );
+          return true;
+        }, err );
+        if ( !success ) return false;
+      }
       else if ( key == ("autoinst") ) {
         bool success = readListInlineOrFromFile( [&]( const YAML::Node &dataNode, auto ){
           target.autoinstalled.push( zypp::IdString( dataNode.as<std::string>() ).id() );

@@ -67,6 +67,7 @@ namespace zypp::misc::testcase {
 
     target::Modalias::ModaliasList modaliasList;
     base::SetTracker<LocaleSet> localesTracker;
+    std::vector<std::vector<std::string>> vendorLists;
     sat::StringQueue autoinstalled;
     std::set<std::string> multiversionSpec;
     std::vector<ForceInstall> forceInstallTasks;

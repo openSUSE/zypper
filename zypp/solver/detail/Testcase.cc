@@ -31,6 +31,7 @@
 #include <zypp/PathInfo.h>
 #include <zypp/ResPool.h>
 #include <zypp/Repository.h>
+#include <zypp/VendorAttr.h>
 #include <zypp/target/modalias/Modalias.h>
 
 #include <zypp/sat/detail/PoolImpl.h>
@@ -70,6 +71,7 @@ namespace zypp
 
       bool Testcase::createTestcase(Resolver & resolver, bool dumpPool, bool runSolver)
       {
+	MIL << "createTestcase at " << dumpPath << (dumpPool?" dumpPool":"") << (runSolver?" runSolver":"") << endl;
         PathInfo path (dumpPath);
 
         if ( !path.isExist() ) {
@@ -202,6 +204,19 @@ namespace zypp
           yOut << YAML::EndMap;
         }
         yOut << YAML::EndSeq; // locales
+
+        // Vendor settings
+        yOut << YAML::Key << "vendors" << YAML::Value << YAML::BeginSeq ;
+	VendorAttr::instance().foreachVendorList( [&]( VendorAttr::VendorList vlist )->bool {
+	  if ( ! vlist.empty() ) {
+	    yOut << YAML::Value << YAML::BeginSeq;
+	    for( const auto & v : vlist )
+	      yOut << YAML::Value << v ;
+	    yOut << YAML::EndSeq;
+	  }
+	  return true;
+	} );
+	yOut << YAML::EndSeq; // vendors
 
         // helper lambda to write a list of elements into a external file instead of the main file
         const auto &writeListOrFile = [&]( const std::string &name, const auto &list, const auto &callback ) {
@@ -364,6 +379,7 @@ namespace zypp
         std::ofstream fout( dumpPath+"/zypp-control.yaml" );
         fout << yOut.c_str();
 
+	MIL << "createTestcase done at " << dumpPath << endl;
         return true;
       }
       ///////////////////////////////////////////////////////////////////
