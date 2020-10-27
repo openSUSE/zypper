@@ -38,7 +38,7 @@ namespace zypp
 	media::MediaManager mediamanager;
 	media::MediaAccessId mid = mediamanager.open( serviceUrl );
 	mediamanager.attach( mid );
-	mediamanager.provideFile( mid, "repo/repoindex.xml" );
+        mediamanager.provideFile( mid, OnMediaLocation("repo/repoindex.xml") );
 	Pathname path = mediamanager.localPath(mid, "repo/repoindex.xml" );
 	try {
 	  parser::RepoindexFileReader reader(path, callback);

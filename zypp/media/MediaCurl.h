@@ -88,7 +88,7 @@ class MediaCurl : public MediaHandler
      * \throws MediaException
      *
      */
-    virtual void doGetFileCopy( const Pathname & srcFilename, const Pathname & targetFilename, callback::SendReport<DownloadProgressReport> & _report, const ByteCount &expectedFileSize_r,  RequestOptions options = OPTION_NONE ) const;
+    virtual void doGetFileCopy( const OnMediaLocation &srcFile, const Pathname & targetFilename, callback::SendReport<DownloadProgressReport> & _report,  RequestOptions options = OPTION_NONE ) const;
 
 
     virtual bool checkAttachPoint(const Pathname &apoint) const override;
@@ -148,7 +148,7 @@ class MediaCurl : public MediaHandler
      */
     void evaluateCurlCode(const zypp::Pathname &filename, CURLcode code, bool timeout) const;
 
-    void doGetFileCopyFile( const Pathname & srcFilename, const Pathname & dest, FILE *file, callback::SendReport<DownloadProgressReport> & _report, const ByteCount &expectedFileSize_r, RequestOptions options = OPTION_NONE ) const;
+    void doGetFileCopyFile( const OnMediaLocation & srcFile, const Pathname & dest, FILE *file, callback::SendReport<DownloadProgressReport> & report, RequestOptions options = OPTION_NONE ) const;
 
     static void resetExpectedFileSize ( void *clientp, const ByteCount &expectedFileSize );
 

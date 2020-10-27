@@ -807,7 +807,7 @@ namespace zyppng {
     report->start( url, filename );
 
     if ( !downloadReq ) {
-      auto newReq = makeRequest( filename, file.downloadSize(), deltafile() );
+      auto newReq = makeRequest( filename, file.downloadSize(), file.deltafile() );
 
       newReq.proto().set_streamprogress( true );
       newReq.proto().set_prioritize( true );

@@ -116,6 +116,12 @@ namespace zypp
     /** Set the \ref headerChecksum. */
     OnMediaLocation & setHeaderChecksum( CheckSum val_r );
 
+    /** The existing deltafile that can be used to reduce download size ( zchunk or metalink ) */
+    const Pathname & deltafile() const;
+    /** Set the \ref deltafile. */
+    OnMediaLocation & setDeltafile( Pathname path );
+
+
   public:
     class Impl;                 ///< Implementation class.
   private:

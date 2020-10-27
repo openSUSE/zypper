@@ -95,7 +95,7 @@ namespace zypp
     Pathname products_file = Pathname("media.1/products");
 
     try  {
-      media_mgr.provideFile (id, products_file);
+      media_mgr.provideFile (id, OnMediaLocation(products_file) );
       products_file = media_mgr.localPath (id, products_file);
       scanProductsFile (products_file, result);
     }

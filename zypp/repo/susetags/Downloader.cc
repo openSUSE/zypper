@@ -155,9 +155,10 @@ void Downloader::download( MediaSetAccess &media,
       }
     }
     MIL << "adding job " << it->first << endl;
-    OnMediaLocation location( repoInfo().path() + descr_dir + it->first, 1 );
-    location.setChecksum( it->second );
-    enqueueDigested(location, FileChecker(), search_deltafile(_delta_dir + descr_dir, it->first));
+    auto location = std::move( OnMediaLocation( repoInfo().path() + descr_dir + it->first, 1 )
+                                 .setChecksum( it->second )
+                                 .setDeltafile( search_deltafile(_delta_dir + descr_dir, it->first) ));
+    enqueueDigested( location, FileChecker() );
   }
 
   // check whether to download more package translations:
@@ -170,9 +171,10 @@ void Downloader::download( MediaSetAccess &media,
 	{
 	  auto mit( it->second );
 	  MIL << "adding job " << mit->first << endl;
-	  OnMediaLocation location( repoInfo().path() + descr_dir + mit->first, 1 );
-	  location.setChecksum( mit->second );
-	  enqueueDigested(location, FileChecker(), search_deltafile(_delta_dir + descr_dir, mit->first));
+          auto location = std::move( OnMediaLocation( repoInfo().path() + descr_dir + mit->first, 1 )
+                                       .setChecksum( mit->second )
+                                       .setDeltafile( search_deltafile(_delta_dir + descr_dir, mit->first) ));
+	  enqueueDigested(location, FileChecker());
 	  break;
 	}
       }
@@ -191,9 +193,10 @@ void Downloader::download( MediaSetAccess &media,
       continue;
 
     MIL << "adding job " << it->first << endl;
-    OnMediaLocation location( repoInfo().path() + it->first, 1 );
-    location.setChecksum( it->second );
-    enqueueDigested(location, FileChecker(), search_deltafile(_delta_dir, it->first));
+    auto location = std::move( OnMediaLocation ( repoInfo().path() + it->first, 1 )
+                                 .setChecksum( it->second )
+                                 .setDeltafile( search_deltafile( _delta_dir, it->first ) ));
+    enqueueDigested(location, FileChecker() );
   }
 
   for_( it, _repoindex->signingKeys.begin(),_repoindex->signingKeys.end() )

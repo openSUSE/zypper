@@ -48,6 +48,8 @@ namespace zypp
     ByteCount _headerSize;
     CheckSum  _headerChecksum;
 
+    Pathname  _deltafile;
+
   public:
     /** Offer default Impl. */
     static shared_ptr<Impl> nullimpl()
@@ -60,7 +62,7 @@ namespace zypp
 
   /** \relates OnMediaLocation::Impl Stream output */
   inline std::ostream & operator<<( std::ostream & str, const OnMediaLocation::Impl & obj )
-  { return str << "[" << obj._medianr << "]" << obj._filename << "{" << obj._downloadSize << "|" << obj._checksum << "}"; }
+  { return str << "[" << obj._medianr << "]" << obj._filename << "{" << obj._downloadSize << "|" << obj._checksum << "|" << obj._deltafile <<  "}"; }
 
   /** \relates OnMediaLocation::Impl Verbose stream output */
   inline std::ostream & dumpOn( std::ostream & str, const OnMediaLocation::Impl & obj )
@@ -145,6 +147,11 @@ namespace zypp
   OnMediaLocation & OnMediaLocation::setHeaderChecksum( CheckSum val_r )
   { _pimpl->_headerChecksum = val_r; return *this; }
 
+  const Pathname &OnMediaLocation::deltafile() const
+  { return _pimpl->_deltafile; }
+
+  OnMediaLocation &OnMediaLocation::setDeltafile( Pathname path )
+  { _pimpl->_deltafile = std::move(path); return *this; }
 
   std::ostream & operator<<( std::ostream & str, const OnMediaLocation & obj )
   { return str << *obj._pimpl; }

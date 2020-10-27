@@ -155,7 +155,7 @@ namespace zypp
 
       try
       {
-        manager.provideFile(_parentId, _isofile);
+        manager.provideFile(_parentId, OnMediaLocation(_isofile) );
       }
       catch(const MediaException &e1)
       {

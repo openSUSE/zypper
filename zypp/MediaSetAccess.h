@@ -160,7 +160,12 @@ namespace zypp
        *
        * \see zypp::media::MediaManager::provideFile()
        */
-      Pathname provideFile( const OnMediaLocation & resource, ProvideFileOptions options = PROVIDE_DEFAULT, const Pathname &deltafile = Pathname() );
+      Pathname provideFile( const OnMediaLocation & resource, ProvideFileOptions options = PROVIDE_DEFAULT );
+
+      /**
+       * \deprecated The deltafile argument is part of the OnMediaLocation now, use the version of \ref provideFile( const OnMediaLocation & resource, ProvideFileOptions options )
+       */
+      ZYPP_DEPRECATED Pathname provideFile( const OnMediaLocation & resource, ProvideFileOptions options, const Pathname &deltafile );
 
       /**
        * Provides \a file from media \a media_nr.
@@ -353,7 +358,7 @@ namespace zypp
 
       typedef function<void( media::MediaAccessId, const OnMediaLocation & )> ProvideOperation;
 
-      void provide( ProvideOperation op, const OnMediaLocation &resource, ProvideFileOptions options, const Pathname &deltafile );
+      void provide( ProvideOperation op, const OnMediaLocation &resource, ProvideFileOptions options );
 
       media::MediaAccessId getMediaAccessId (media::MediaNr medianr);
       virtual std::ostream & dumpOn( std::ostream & str ) const;

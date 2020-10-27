@@ -159,22 +159,21 @@ IMPL_PTR_TYPE(MediaSetAccess);
     }
   };
 
-
+  Pathname MediaSetAccess::provideFile( const OnMediaLocation &resource, ProvideFileOptions options )
+  {
+    ProvideFileOperation op;
+    provide( boost::ref(op), resource, options );
+    return op.result;
+  }
 
   Pathname MediaSetAccess::provideFile( const OnMediaLocation & resource, ProvideFileOptions options, const Pathname &deltafile )
   {
-    ProvideFileOperation op;
-    provide( boost::ref(op), resource, options, deltafile );
-    return op.result;
+    return provideFile( OnMediaLocation( resource ).setDeltafile( deltafile ), options );
   }
 
   Pathname MediaSetAccess::provideFile(const Pathname & file, unsigned media_nr, ProvideFileOptions options )
   {
-    OnMediaLocation resource;
-    ProvideFileOperation op;
-    resource.setLocation(file, media_nr);
-    provide( boost::ref(op), resource, options, Pathname() );
-    return op.result;
+    return provideFile( OnMediaLocation( file, media_nr ), options );
   }
 
   Pathname MediaSetAccess::provideOptionalFile( const Pathname & file, unsigned media_nr )
@@ -182,7 +181,7 @@ IMPL_PTR_TYPE(MediaSetAccess);
     try
     {
       if ( doesFileExist( file, media_nr ) )
-	return provideFile( file, media_nr, PROVIDE_NON_INTERACTIVE );
+        return provideFile( OnMediaLocation( file, media_nr ), PROVIDE_NON_INTERACTIVE );
     }
     catch ( const media::MediaFileNotFoundException & excpt_r )
     { ZYPP_CAUGHT( excpt_r ); }
@@ -197,12 +196,13 @@ IMPL_PTR_TYPE(MediaSetAccess);
   {
     Url url(file_url);
     Pathname path(url.getPathName());
+
     url.setPathName ("/");
     MediaSetAccess access(url);
 
     ManagedFile tmpFile = filesystem::TmpFile::asManagedFile();
 
-    Pathname file = access.provideFile(path, 1, options);
+    Pathname file = access.provideFile( OnMediaLocation(path, 1), options );
 
     //prevent the file from being deleted when MediaSetAccess gets out of scope
     if ( filesystem::hardlinkCopy(file, tmpFile) != 0 )
@@ -227,9 +227,8 @@ IMPL_PTR_TYPE(MediaSetAccess);
   bool MediaSetAccess::doesFileExist(const Pathname & file, unsigned media_nr )
   {
     ProvideFileExistenceOperation op;
-    OnMediaLocation resource;
-    resource.setLocation(file, media_nr);
-    provide( boost::ref(op), resource, PROVIDE_DEFAULT, Pathname());
+    OnMediaLocation resource(file, media_nr);
+    provide( boost::ref(op), resource, PROVIDE_DEFAULT );
     return op.result;
   }
 
@@ -256,8 +255,7 @@ IMPL_PTR_TYPE(MediaSetAccess);
 
   void MediaSetAccess::provide( ProvideOperation op,
                                 const OnMediaLocation &resource,
-                                ProvideFileOptions options,
-                                const Pathname &deltafile )
+                                ProvideFileOptions options )
   {
     const auto &file(resource.filename());
     unsigned media_nr(resource.medianr());
@@ -271,7 +269,6 @@ IMPL_PTR_TYPE(MediaSetAccess);
     {
       // get the mediaId, but don't try to attach it here
       media = getMediaAccessId( media_nr);
-      bool deltafileset = false;
 
       try
       {
@@ -280,17 +277,12 @@ IMPL_PTR_TYPE(MediaSetAccess);
         // try to attach the media
         if ( ! media_mgr.isAttached(media) )
           media_mgr.attach(media);
-	media_mgr.setDeltafile(media, deltafile);
-	deltafileset = true;
         op(media, resource);
-	media_mgr.setDeltafile(media, Pathname());
         break;
       }
       catch ( media::MediaException & excp )
       {
         ZYPP_CAUGHT(excp);
-	if (deltafileset)
-	  media_mgr.setDeltafile(media, Pathname());
         media::MediaChangeReport::Action user = media::MediaChangeReport::ABORT;
         unsigned int devindex = 0;
         std::vector<std::string> devices;
@@ -414,16 +406,15 @@ IMPL_PTR_TYPE(MediaSetAccess);
                                       unsigned media_nr,
                                       ProvideFileOptions options )
   {
-    OnMediaLocation resource;
-    resource.setLocation(dir, media_nr);
+    OnMediaLocation resource(dir, media_nr);
     if ( recursive )
     {
         ProvideDirTreeOperation op;
-        provide( boost::ref(op), resource, options, Pathname());
+        provide( boost::ref(op), resource, options );
         return op.result;
     }
     ProvideDirOperation op;
-    provide( boost::ref(op), resource, options, Pathname());
+    provide( boost::ref(op), resource, options );
     return op.result;
   }
 

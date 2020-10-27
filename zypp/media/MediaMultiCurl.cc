@@ -1296,13 +1296,13 @@ int MediaMultiCurl::progressCallback( void *clientp, double dltotal, double dlno
   return MediaCurl::progressCallback(clientp, dltotal, dlnow, ultotal, ulnow);
 }
 
-void MediaMultiCurl::doGetFileCopy( const Pathname & filename , const Pathname & target, callback::SendReport<DownloadProgressReport> & report, const ByteCount &expectedFileSize_r, RequestOptions options ) const
+void MediaMultiCurl::doGetFileCopy( const OnMediaLocation &srcFile , const Pathname & target, callback::SendReport<DownloadProgressReport> & report, RequestOptions options ) const
 {
   Pathname dest = target.absolutename();
   if( assert_dir( dest.dirname() ) )
   {
     DBG << "assert_dir " << dest.dirname() << " failed" << endl;
-    ZYPP_THROW( MediaSystemException(getFileUrl(filename), "System error on " + dest.dirname().asString()) );
+    ZYPP_THROW( MediaSystemException(getFileUrl(srcFile.filename()), "System error on " + dest.dirname().asString()) );
   }
 
   ManagedFile destNew { target.extend( ".new.zypp.XXXXXX" ) };
@@ -1312,7 +1312,7 @@ void MediaMultiCurl::doGetFileCopy( const Pathname & filename , const Pathname &
     if( ! buf )
     {
       ERR << "out of memory for temp file name" << endl;
-      ZYPP_THROW(MediaSystemException(getFileUrl(filename), "out of memory for temp file name"));
+      ZYPP_THROW(MediaSystemException(getFileUrl(srcFile.filename()), "out of memory for temp file name"));
     }
 
     AutoFD tmp_fd { ::mkostemp( buf, O_CLOEXEC ) };
@@ -1353,7 +1353,7 @@ void MediaMultiCurl::doGetFileCopy( const Pathname & filename , const Pathname &
   curl_easy_setopt(_curl, CURLOPT_PRIVATE, (*file) );	// important to pass the FILE* explicitly (passing through varargs)
   try
     {
-      MediaCurl::doGetFileCopyFile(filename, dest, file, report, expectedFileSize_r, options);
+      MediaCurl::doGetFileCopyFile( srcFile, dest, file, report, options );
     }
   catch (Exception &ex)
     {
@@ -1441,7 +1441,7 @@ void MediaMultiCurl::doGetFileCopy( const Pathname & filename , const Pathname &
 	      XXX << bl << endl;
 	      filesystem::unlink(failedFile);
 	    }
-	  Pathname df = deltafile();
+	  Pathname df = srcFile.deltafile();
 	  if (!df.empty())
 	    {
 	      XXX << "reusing blocks from file " << df << endl;
@@ -1450,7 +1450,7 @@ void MediaMultiCurl::doGetFileCopy( const Pathname & filename , const Pathname &
 	    }
 	  try
 	    {
-	      multifetch(filename, file, &urls, &report, &bl, expectedFileSize_r);
+	      multifetch(srcFile.filename(), file, &urls, &report, &bl, srcFile.downloadSize());
 	    }
 	  catch (MediaCurlException &ex)
 	    {
@@ -1477,7 +1477,7 @@ void MediaMultiCurl::doGetFileCopy( const Pathname & filename , const Pathname &
 	  file = fopen((*destNew).c_str(), "w+e");
 	  if (!file)
 	    ZYPP_THROW(MediaWriteException(destNew));
-	  MediaCurl::doGetFileCopyFile(filename, dest, file, report, expectedFileSize_r, options | OPTION_NO_REPORT_START);
+	  MediaCurl::doGetFileCopyFile(srcFile, dest, file, report, options | OPTION_NO_REPORT_START);
 	}
     }
 

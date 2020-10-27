@@ -511,7 +511,7 @@ void MediaCurl::getFileCopy( const OnMediaLocation & srcFile , const Pathname & 
   {
     try
     {
-      doGetFileCopy(filename, target, report, srcFile.downloadSize() );
+      doGetFileCopy( srcFile, target, report );
       retry = false;
     }
     // retry with proper authentication data
@@ -903,13 +903,13 @@ bool MediaCurl::detectDirIndex() const
 
 ///////////////////////////////////////////////////////////////////
 
-void MediaCurl::doGetFileCopy(const Pathname & filename , const Pathname & target, callback::SendReport<DownloadProgressReport> & report, const ByteCount &expectedFileSize_r, RequestOptions options ) const
+void MediaCurl::doGetFileCopy( const OnMediaLocation &srcFile , const Pathname & target, callback::SendReport<DownloadProgressReport> & report, RequestOptions options ) const
 {
     Pathname dest = target.absolutename();
     if( assert_dir( dest.dirname() ) )
     {
       DBG << "assert_dir " << dest.dirname() << " failed" << endl;
-      ZYPP_THROW( MediaSystemException(getFileUrl(filename), "System error on " + dest.dirname().asString()) );
+      ZYPP_THROW( MediaSystemException(getFileUrl(srcFile.filename()), "System error on " + dest.dirname().asString()) );
     }
 
     ManagedFile destNew { target.extend( ".new.zypp.XXXXXX" ) };
@@ -919,7 +919,7 @@ void MediaCurl::doGetFileCopy(const Pathname & filename , const Pathname & targe
       if( ! buf )
       {
 	ERR << "out of memory for temp file name" << endl;
-	ZYPP_THROW(MediaSystemException(getFileUrl(filename), "out of memory for temp file name"));
+	ZYPP_THROW(MediaSystemException(getFileUrl(srcFile.filename()), "out of memory for temp file name"));
       }
 
       AutoFD tmp_fd { ::mkostemp( buf, O_CLOEXEC ) };
@@ -955,7 +955,7 @@ void MediaCurl::doGetFileCopy(const Pathname & filename , const Pathname & targe
     }
     try
     {
-      doGetFileCopyFile(filename, dest, file, report, expectedFileSize_r, options);
+      doGetFileCopyFile( srcFile, dest, file, report, options);
     }
     catch (Exception &e)
     {
@@ -1013,9 +1013,9 @@ void MediaCurl::doGetFileCopy(const Pathname & filename , const Pathname & targe
 
 ///////////////////////////////////////////////////////////////////
 
-void MediaCurl::doGetFileCopyFile(const Pathname & filename , const Pathname & dest, FILE *file, callback::SendReport<DownloadProgressReport> & report, const ByteCount &expectedFileSize_r, RequestOptions options ) const
+void MediaCurl::doGetFileCopyFile( const OnMediaLocation & srcFile, const Pathname & dest, FILE *file, callback::SendReport<DownloadProgressReport> & report, RequestOptions options ) const
 {
-    DBG << filename.asString() << endl;
+    DBG << srcFile.filename().asString() << endl;
 
     if(!_url.isValid())
       ZYPP_THROW(MediaBadUrlException(_url));
@@ -1023,7 +1023,7 @@ void MediaCurl::doGetFileCopyFile(const Pathname & filename , const Pathname & d
     if(_url.getHost().empty())
       ZYPP_THROW(MediaBadUrlEmptyHostException(_url));
 
-    Url url(getFileUrl(filename));
+    Url url(getFileUrl(srcFile.filename()));
 
     DBG << "URL: " << url.asString() << endl;
     // Use URL without options and without username and passwd
@@ -1054,7 +1054,7 @@ void MediaCurl::doGetFileCopyFile(const Pathname & filename , const Pathname & d
     }
 
     // Set callback and perform.
-    internal::ProgressData progressData(_curl, _settings.timeout(), url, expectedFileSize_r, &report);
+    internal::ProgressData progressData(_curl, _settings.timeout(), url, srcFile.downloadSize(), &report);
     if (!(options & OPTION_NO_REPORT_START))
       report->start(url, dest);
     if ( curl_easy_setopt( _curl, CURLOPT_PROGRESSDATA, &progressData ) != 0 ) {
@@ -1102,7 +1102,7 @@ void MediaCurl::doGetFileCopyFile(const Pathname & filename , const Pathname & d
         if ( progressData.fileSizeExceeded )
           ZYPP_THROW(MediaFileSizeExceededException(url, progressData._expectedFileSize));
 
-        evaluateCurlCode( filename, ret, progressData.reached );
+        evaluateCurlCode( srcFile.filename(), ret, progressData.reached );
       }
       catch ( const MediaException &e ) {
         // some error, we are not sure about file existence, rethrw

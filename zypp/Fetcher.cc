@@ -68,7 +68,7 @@ namespace zypp
       if ( lhs->location.medianr() == rhs->location.medianr() )
         return lhs->location.filename() < rhs->location.filename();
       //else
-        return lhs->location.medianr() < rhs->location.medianr();
+      return lhs->location.medianr() < rhs->location.medianr();
     }
   };
 
@@ -91,9 +91,8 @@ namespace zypp
     ZYPP_DECLARE_FLAGS(Flags, Flag);
 
 
-    FetcherJob( const OnMediaLocation &loc, const Pathname dfile = Pathname())
+    FetcherJob( const OnMediaLocation &loc )
       : location(loc)
-      , deltafile(dfile)
       , flags(None)
     {
       //MIL << location << endl;
@@ -105,7 +104,6 @@ namespace zypp
     }
 
     OnMediaLocation location;
-    Pathname deltafile;
     //CompositeFileChecker checkers;
     std::list<FileChecker> checkers;
     Flags flags;
@@ -142,7 +140,7 @@ namespace zypp
     void enqueueDigestedDir( const OnMediaLocation &resource, bool recursive, const FileChecker &checker = FileChecker() );
 
     void enqueue( const OnMediaLocation &resource, const FileChecker &checker = FileChecker()  );
-    void enqueueDigested( const OnMediaLocation &resource, const FileChecker &checker = FileChecker(), const Pathname &deltafile = Pathname() );
+    void enqueueDigested( const OnMediaLocation &resource, const FileChecker &checker = FileChecker() );
     void addCachePath( const Pathname &cache_dir );
     void reset();
     void setMediaSetAccess ( MediaSetAccess &media );
@@ -237,13 +235,13 @@ namespace zypp
   };
   ///////////////////////////////////////////////////////////////////
 
-  void Fetcher::Impl::enqueueDigested( const OnMediaLocation &resource, const FileChecker &checker, const Pathname &deltafile )
+  void Fetcher::Impl::enqueueDigested( const OnMediaLocation &resource, const FileChecker & )
   {
     if ( _mediaSetAccess )
       _mediaSetAccess->precacheFiles( {resource} );
 
     FetcherJob_Ptr job;
-    job.reset(new FetcherJob(resource, deltafile));
+    job.reset(new FetcherJob(resource));
     job->flags |= FetcherJob:: AlwaysVerifyChecksum;
     _resources.push_back(job);
   }
@@ -533,7 +531,7 @@ namespace zypp
       if ( tmpFile.empty() )
       {
 	MIL << "Not found in cache, retrieving..." << endl;
-	tmpFile = media_r.provideFile( resource, resource.optional() ? MediaSetAccess::PROVIDE_NON_INTERACTIVE : MediaSetAccess::PROVIDE_DEFAULT, jobp_r->deltafile );
+	tmpFile = media_r.provideFile( resource, resource.optional() ? MediaSetAccess::PROVIDE_NON_INTERACTIVE : MediaSetAccess::PROVIDE_DEFAULT );
 	releaseFileGuard.reset( new MediaSetAccess::ReleaseFileGuard( media_r, resource ) ); // release it when we leave the block
       }
 
@@ -857,7 +855,12 @@ namespace zypp
 
   void Fetcher::enqueueDigested( const OnMediaLocation &resource, const FileChecker &checker, const Pathname &deltafile )
   {
-    _pimpl->enqueueDigested(resource, checker, deltafile);
+    enqueueDigested( OnMediaLocation(resource).setDeltafile(deltafile), checker );
+  }
+
+  void Fetcher::enqueueDigested( const OnMediaLocation &resource, const FileChecker &checker )
+  {
+    _pimpl->enqueueDigested( resource, checker );
   }
 
   void Fetcher::enqueueDir( const OnMediaLocation &resource,
@@ -885,6 +888,7 @@ namespace zypp
   {
     _pimpl->enqueue(resource, checker);
   }
+
 
   void Fetcher::addCachePath( const Pathname &cache_dir )
   {

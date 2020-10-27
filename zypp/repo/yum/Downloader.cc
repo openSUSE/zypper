@@ -139,7 +139,7 @@ namespace yum
       {
 	const OnMediaLocation & loc { el.second };
 	const OnMediaLocation & loc_with_path { loc_with_path_prefix( loc, _downloader.repoInfo().path() ) };
-	_downloader.enqueueDigested( loc_with_path, FileChecker(), search_deltafile( deltaDir()/"repodata", loc.filename() ) );
+        _downloader.enqueueDigested( OnMediaLocation(loc_with_path).setDeltafile( search_deltafile( deltaDir()/"repodata", loc.filename() ) ), FileChecker() );
       }
     }
 

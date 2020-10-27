@@ -1389,15 +1389,6 @@ void MediaHandler::precacheFiles( const std::vector<OnMediaLocation> & )
   /* do nothing */
 }
 
-void MediaHandler::setDeltafile( const Pathname & filename ) const
-{
-  _deltafile = filename;
-}
-
-Pathname MediaHandler::deltafile() const {
-  return _deltafile;
-}
-
   } // namespace media
 } // namespace zypp
 // vim: set ts=8 sts=2 sw=2 ai noet:

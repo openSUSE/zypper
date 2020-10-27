@@ -157,6 +157,7 @@ namespace zypp
 
         bool             desired;
         MediaVerifierRef verifier;
+        Pathname         deltafile;
 
       private:
         ManagedMedia( std::unique_ptr<MediaHandler> &&h, const MediaVerifierRef &v)
@@ -696,8 +697,12 @@ namespace zypp
                               const Pathname &filename,
                               const ByteCount &expectedFileSize ) const
     {
-      OnMediaLocation loc( filename );
-      loc.setDownloadSize( expectedFileSize );
+      ManagedMedia &ref( m_impl->findMM(accessId));
+
+      auto loc = OnMediaLocation( filename )
+                   .setDownloadSize( expectedFileSize )
+                   .setDeltafile( ref.deltafile );
+
       provideFile( accessId, loc );
     }
 
@@ -706,7 +711,12 @@ namespace zypp
     MediaManager::provideFile(MediaAccessId   accessId,
                               const Pathname &filename ) const
     {
-      provideFile( accessId, OnMediaLocation( filename ) );
+      ManagedMedia &ref( m_impl->findMM(accessId));
+
+      auto loc = OnMediaLocation( filename )
+                   .setDeltafile( ref.deltafile );
+
+      provideFile( accessId, loc );
     }
 
     void MediaManager::provideFile( MediaAccessId accessId, const OnMediaLocation &file ) const
@@ -727,7 +737,7 @@ namespace zypp
 
       ref.checkDesired(accessId);
 
-      ref.handler().setDeltafile(filename);
+      ref.deltafile = filename;
     }
 
     void MediaManager::precacheFiles(MediaAccessId accessId, const std::vector<OnMediaLocation> &files)
