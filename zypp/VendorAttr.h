@@ -143,6 +143,12 @@ class VendorAttr
     bool equivalent( const PoolItem & lVendor, const PoolItem & rVendor ) const;
 
   public:
+    /** Call \a fnc_r for each equivalent vendor list (return \c false to break).
+     * \return The number of calls to \a fnc_r.
+     */
+    unsigned foreachVendorList( std::function<bool(VendorList)> fnc_r ) const;
+
+  public:
     class Impl;                 ///< Implementation class.
     RWCOW_pointer<Impl> _pimpl; ///< Pointer to implementation.
 

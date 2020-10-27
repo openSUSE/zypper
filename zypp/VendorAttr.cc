@@ -58,6 +58,24 @@ namespace zypp
     bool equivalent( IdString lVendor, IdString rVendor ) const
     { return lVendor == rVendor || vendorMatchId( lVendor ) == vendorMatchId( rVendor ); }
 
+    unsigned foreachVendorList( std::function<bool(VendorList)> fnc_r ) const
+    {
+      std::map<unsigned,VendorList> lists;
+      for( const auto & el : _vendorGroupMap )
+	lists[el.second].push_back( el.first );
+
+      unsigned ret = 0;
+      for ( auto el : lists ) {
+	VendorList & vlist { el.second };
+	if ( vlist.empty() )
+	  continue;
+	++ret;
+	if ( fnc_r && !fnc_r( std::move(vlist) ) )
+	  break;
+      }
+      return ret;
+    }
+
   private:
     using VendorGroupMap = std::map<std::string,unsigned>;
     VendorGroupMap _vendorGroupMap;	///< Vendor group definition. Equivalent groups share the same ID.
@@ -264,6 +282,9 @@ namespace zypp
 
   void VendorAttr::_addVendorList( VendorList && vendorList_r )
   { _pimpl->addVendorList( std::move(vendorList_r) ); }
+
+  unsigned VendorAttr::foreachVendorList( std::function<bool(VendorList)> fnc_r ) const
+  { return _pimpl->foreachVendorList( std::move(fnc_r) ); }
 
 #if LEGACY(1722)
   bool VendorAttr::addVendorDirectory( const Pathname & dirname ) const
