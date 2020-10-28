@@ -14,6 +14,7 @@
 
 #include <zypp/base/LogControl.h>
 #include "LoadTestcase.h"
+#include "TestcaseSetupImpl.h"
 
 #include <yaml-cpp/yaml.h>
 
@@ -21,8 +22,9 @@
 
 namespace yamltest::detail {
 
-  bool parseSetup ( const YAML::Node &setup, zypp::misc::testcase::TestcaseSetup &target, std::string *err ) {
+  bool parseSetup ( const YAML::Node &setup, zypp::misc::testcase::TestcaseSetup &t, std::string *err ) {
 
+    auto &target = t.data();
     MIL << "Parsing setup node " << std::endl;
     for ( YAML::const_iterator it = setup.begin(); it != setup.end(); it++ ) {
 
@@ -89,7 +91,7 @@ namespace yamltest::detail {
           target.resolverFocus = zypp::resolverFocusFromString( data["focus"].as<std::string>() );
         }
       } else if ( key == ("system") ) {
-        target.systemRepo = zypp::misc::testcase::RepoData {
+        target.systemRepo = zypp::misc::testcase::RepoDataImpl {
           zypp::misc::testcase::TestcaseRepoType::Testtags,
           "@System",
           99,
@@ -123,7 +125,7 @@ namespace yamltest::detail {
           if ( dataNode["priority"] )
             prio = dataNode["priority"].as<unsigned>();
 
-          target.repos.push_back( zypp::misc::testcase::RepoData{
+          target.repos.push_back( zypp::misc::testcase::RepoDataImpl{
             zypp::misc::testcase::TestcaseRepoType::Testtags,
             name,
             prio,
@@ -138,7 +140,7 @@ namespace yamltest::detail {
         bool success = readListInlineOrFromFile( [&target]( const YAML::Node &dataNode, auto ){
           std::string url   = dataNode["url"].as<std::string>();
           std::string alias = dataNode["name"].as<std::string>();
-          target.repos.push_back( zypp::misc::testcase::RepoData{
+          target.repos.push_back( zypp::misc::testcase::RepoDataImpl{
             zypp::misc::testcase::TestcaseRepoType::Url,
             alias,
             99,
@@ -151,7 +153,7 @@ namespace yamltest::detail {
       else if ( key == ("force-install") )
       {
         bool success = readListInlineOrFromFile( [&target]( const YAML::Node &dataNode, auto ){
-          target.forceInstallTasks.push_back( zypp::misc::testcase::ForceInstall{
+          target.forceInstallTasks.push_back( zypp::misc::testcase::ForceInstallImpl{
             dataNode["channel"].as<std::string>(),
             dataNode["package"].as<std::string>(),
             dataNode["kind"].as<std::string>()
@@ -273,23 +275,23 @@ namespace yamltest::detail {
       const std::string &key = elem.first.as<std::string>();
       const auto &data = elem.second;
       if ( key == "job" ) {
-        n.name = data.as<std::string>();
+        n.name() = data.as<std::string>();
       } else if ( key == "__content") {
-        n.value = data.as<std::string>();
+        n.value() = data.as<std::string>();
       } else {
         if( data.IsScalar() ) {
-          n.properties.insert( { key, data.as<std::string>() } );
+          n.properties().insert( { key, data.as<std::string>() } );
         } if ( data.IsSequence() ) {
           // if the type of a data field is a sequence, we treat all the elements in there
           // as sub elements. Just like in XML you can have sub nodes its the same here
           // the key name is ignored in those cases and can be chosen freely
-          if ( !parseJobs( data, n.children, err ) )
+          if ( !parseJobs( data, n.children(), err ) )
             return false;
         } else if ( data.IsMap() ) {
           // if the type of a data field is a map, we build a child node from it.
           // Just like with sequence but a single field.
           // The key name is ignored in those cases and can be chosen freely
-          if ( !parseSingleJob( data, n.children, err) )
+          if ( !parseSingleJob( data, n.children(), err) )
             return false;
         } else {
           ERR << "Ignoring field " << key << " with unsupported type." << std::endl;
@@ -315,7 +317,7 @@ namespace yamltest::detail {
 
   bool parseTrial ( const YAML::Node &trial, zypp::misc::testcase::TestcaseTrial &target, std::string *err ) {
     MIL << "Parsing trials." << std::endl;
-    return parseJobs( trial, target.nodes, err );
+    return parseJobs( trial, target.nodes(), err );
   }
 }
 

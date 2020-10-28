@@ -15,6 +15,7 @@
 #include <zypp/AutoDispose.h>
 #include <zypp/base/LogControl.h>
 #include <zypp/misc/LoadTestcase.h>
+#include <zypp/misc/TestcaseSetupImpl.h>
 
 #include <libxml/parser.h>
 #include <libxml/xmlmemory.h>
@@ -134,8 +135,9 @@ namespace helix::detail {
     return res;
   }
 
-  bool parseSetup ( const XmlNode &setup, zypp::misc::testcase::TestcaseSetup &target, std::string *err )
+  bool parseSetup ( const XmlNode &setup, zypp::misc::testcase::TestcaseSetup &t, std::string *err )
   {
+    auto &target = t.data();
     auto architecture = setup.getProp( "arch" );
     if ( !architecture.empty() )
     {
@@ -178,7 +180,7 @@ namespace helix::detail {
         target.resolverFocus = zypp::resolverFocusFromString( node->getProp("value") );
       }
       else if ( node->equals("system") ) {
-        target.systemRepo = zypp::misc::testcase::RepoData {
+        target.systemRepo = zypp::misc::testcase::RepoDataImpl {
           zypp::misc::testcase::TestcaseRepoType::Helix,
           "@System",
           99,
@@ -205,7 +207,7 @@ namespace helix::detail {
           prio = zypp::str::strtonum<unsigned>( priority );
         }
 
-        target.repos.push_back( zypp::misc::testcase::RepoData{
+        target.repos.push_back( zypp::misc::testcase::RepoDataImpl{
           zypp::misc::testcase::TestcaseRepoType::Helix,
           name,
           prio,
@@ -216,7 +218,7 @@ namespace helix::detail {
       {
         std::string url = node->getProp("url");
         std::string alias = node->getProp("name");
-        target.repos.push_back( zypp::misc::testcase::RepoData{
+        target.repos.push_back( zypp::misc::testcase::RepoDataImpl{
           zypp::misc::testcase::TestcaseRepoType::Url,
           alias,
           99,
@@ -225,7 +227,7 @@ namespace helix::detail {
       }
       else if ( node->equals("force-install") )
       {
-        target.forceInstallTasks.push_back( zypp::misc::testcase::ForceInstall{
+        target.forceInstallTasks.push_back( zypp::misc::testcase::ForceInstallImpl{
           node->getProp("channel"),
           node->getProp("package"),
           node->getProp("kind")
@@ -282,18 +284,18 @@ namespace helix::detail {
 
   bool parseTrialNode ( const XmlNode &node, zypp::misc::testcase::TestcaseTrial::Node &testcaseNode )
   {
-    testcaseNode.name = node.name();
+    testcaseNode.name() = node.name();
     const auto & content = node.getContent();
     if ( !content.empty() ) {
-      testcaseNode.value = content;
+      testcaseNode.value() = content;
     }
-    testcaseNode.properties = node.getAllProps();
+    testcaseNode.properties() = node.getAllProps();
 
     for ( auto childNode = node.children(); childNode; childNode = childNode->next() ) {
       auto testNode = std::make_shared<zypp::misc::testcase::TestcaseTrial::Node>();
       if ( !parseTrialNode( *childNode, *testNode ) )
         return false;
-      testcaseNode.children.push_back( testNode );
+      testcaseNode.children().push_back( testNode );
     }
     return true;
   }
@@ -309,7 +311,7 @@ namespace helix::detail {
 
       zypp::misc::testcase::TestcaseTrial::Node testcaseNode;
       parseTrialNode( *node, testcaseNode );
-      target.nodes.push_back( testcaseNode );
+      target.nodes().push_back( testcaseNode );
       node = node->next();
     }
     return true;
