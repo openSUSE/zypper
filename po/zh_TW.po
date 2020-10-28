@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-09-11 10:04+0200\n"
-"PO-Revision-Date: 2020-06-29 19:46+0000\n"
+"PO-Revision-Date: 2020-10-28 13:50+0000\n"
 "Last-Translator: Ramax Lo <ramaxlo@gmail.com>\n"
 "Language-Team: Chinese (Taiwan) <https://l10n.opensuse.org/projects/zypper/"
 "master/zh_TW/>\n"
@@ -2229,7 +2229,7 @@ msgstr "list-patches (lp) [選項]"
 #. translators: command summary: list-patches, lp
 #: src/commands/listpatches.cc:18
 msgid "List available patches."
-msgstr ""
+msgstr "列出已就緒的修補程式。"
 
 #. translators: command description
 #: src/commands/listpatches.cc:20
@@ -2613,7 +2613,7 @@ msgstr "列出所有提供指定功能的套件。"
 msgid ""
 "The command is an alias for '%1%' and performs a case-insensitive search. "
 "For a case-sensitive search call the search command and add the '%2%' option."
-msgstr ""
+msgstr "這個指令是 '%1%' 的別名，並且執行不區分大小寫的搜尋。若要執行區分大小寫的搜尋，請呼叫該搜尋指令並加上 '%2%' 選項。"
 
 #. "what-provides" is obsolete
 #. The "what-provides" now is included in "search" command, e.g.
@@ -4412,7 +4412,7 @@ msgstr "不支援解除安裝來源套件。"
 #: src/commands/subcommand.cc:79
 #, boost-format
 msgid "No manual entry for %1%"
-msgstr ""
+msgstr "沒有 %1% 的說明文件"
 
 #: src/commands/subcommand.cc:92
 msgid "none"
