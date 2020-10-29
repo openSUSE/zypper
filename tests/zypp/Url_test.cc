@@ -90,13 +90,15 @@ BOOST_AUTO_TEST_CASE(test_url1)
 
     // asString shouldn't print the password, asCompleteString should.
     // further, the "//" at the begin of the path should be keept.
-    str = "http://user:pass@localhost//srv/ftp";
-    one = "http://user@localhost//srv/ftp";
+    str = "http://user:pass@localhost//srv/ftp?proxypass=@PROXYPASS@&proxy=proxy.my&proxyuser=@PROXYUSER@&Xproxypass=NOTTHIS&proxypass=@PROXYPASS@&proxypass=@PROXYPASS@";
+    one = "http://user@localhost//srv/ftp?proxy=proxy.my&proxyuser=@PROXYUSER@&Xproxypass=NOTTHIS";
     two = str;
     url = str;
 
     BOOST_CHECK_EQUAL( one, url.asString() );
     BOOST_CHECK_EQUAL( two, url.asCompleteString() );
+    // hidden proxypass in the query is available when explicitely asked for
+    BOOST_CHECK_EQUAL( url.getQueryParam( "proxypass" ), "@PROXYPASS@" );
 
     // absolute path defaults to 'file://'
     str = "/some/local/path";

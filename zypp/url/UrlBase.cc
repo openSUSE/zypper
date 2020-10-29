@@ -13,6 +13,7 @@
 #include <zypp/base/String.h>
 #include <zypp/base/Gettext.h>
 #include <zypp/base/Regex.h>
+#include <zypp/base/StringV.h>
 
 #include <stdexcept>
 #include <climits>
@@ -106,6 +107,68 @@ namespace zypp
 
 
     // ---------------------------------------------------------------
+
+    /// \brief Hide passwords embedded in a querystr,
+    ///
+    /// Stores the full querystring and maintains a safe version with
+    /// password field stripped. Url::asString will print the passwords
+    /// on demand only.
+    ///
+    /// \see bsc#1050625: VUL-1: CVE-2017-9271: zypper: proxy credentials written to log files
+    class SafeQuerystr
+    {
+    public:
+      SafeQuerystr()
+      {}
+
+      SafeQuerystr( std::string rhs )
+      { _assign( std::move(rhs) ); }
+
+      SafeQuerystr & operator=( std::string rhs )
+      { _assign( std::move(rhs) ); return *this; }
+
+
+      operator const std::string &() const
+      { return str(); }
+
+      const std::string & str() const
+      { return fullStr(); }
+
+      const std::string & str( const ViewOptions & viewopts_r ) const
+      { return viewopts_r.has( ViewOptions::WITH_PASSWORD ) ? fullStr() : safeStr(); }
+
+      const std::string & fullStr() const
+      { return _fullQuerytsr; }
+
+      const std::string & safeStr() const
+      { return _safeQuerytsr ? _safeQuerytsr.value() : _fullQuerytsr; }
+
+    private:
+      void _assign( std::string && rhs )
+      {
+	_fullQuerytsr = std::move(rhs);
+
+	static constexpr std::string_view tag { "proxypass=" };
+	if ( _fullQuerytsr.find( tag ) != std::string::npos )
+	{
+	  std::string safe;
+	  strv::split( _fullQuerytsr, "&", [&safe]( std::string_view val ) {
+	    if ( val.substr( 0, tag.size()  ) != tag ) {
+	      if ( ! safe.empty() )
+		safe += "&";
+	      safe += val;
+	    }
+	  });
+	  _safeQuerytsr = std::move(safe);
+	}
+	else
+	  _safeQuerytsr = std::nullopt;
+      }
+    private:
+      std::string                _fullQuerytsr;	///<
+      std::optional<std::string> _safeQuerytsr;	///<.
+    };
+
     /**
      * \brief Internal data used by UrlBase.
      */
@@ -129,7 +192,7 @@ namespace zypp
       std::string     port;
       std::string     pathname;
       std::string     pathparams;
-      std::string     querystr;
+      SafeQuerystr    querystr;
       std::string     fragment;
     };
 
@@ -547,10 +610,10 @@ namespace zypp
 
       if( opts.has(ViewOptions::WITH_QUERY_STR))
       {
-        tmp.querystr = getQueryString();
-        if( !tmp.querystr.empty())
+	const std::string & querystr { getQueryString( opts ) };	// full or safe depending on opts
+        if( !querystr.empty() )
         {
-          url += "?" + tmp.querystr;
+          url += "?" + querystr;
         }
         else if( opts.has(ViewOptions::EMPTY_QUERY_STR))
         {
@@ -627,6 +690,11 @@ namespace zypp
       return m_data->querystr;
     }
 
+    std::string
+    UrlBase::getQueryString( const ViewOptions & viewopts_r ) const
+    {
+      return m_data->querystr.str( viewopts_r );
+    }
 
     // ---------------------------------------------------------------
     std::string

@@ -594,6 +594,10 @@ namespace zypp
       virtual std::string
       getQueryString() const;
 
+      /** \overload Returns the safe query string (passwds stripped) unless WITH_PASSWORD is set. */
+      virtual std::string
+      getQueryString( const ViewOptions & viewopts_r ) const;
+
       /**
        * Returns a vector with query string parameter substrings.
        *
