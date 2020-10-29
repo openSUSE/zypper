@@ -198,7 +198,7 @@ class TestSetup
       }
 
       {
-        base::SetTracker<LocaleSet> localesTracker = setup.localesTracker;
+        base::SetTracker<LocaleSet> localesTracker = setup.localesTracker();
         localesTracker.removed().insert( localesTracker.current().begin(), localesTracker.current().end() );
         satpool().initRequestedLocales( localesTracker.removed() );
 
