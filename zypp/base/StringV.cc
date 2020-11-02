@@ -22,7 +22,8 @@ namespace zypp
     {
 #warning REIMPLEMENT
       std::vector<std::string> words;
-      str::split( std::string(line_r), std::back_inserter(words), ",", str::TRIM );
+      str::split( std::string(line_r), std::back_inserter(words), std::string(sep_r), str::TRIM );
+
       if ( fnc_r ) {
 	for ( const auto & w : words )
 	  fnc_r( std::string_view(w) );
