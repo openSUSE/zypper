@@ -10,10 +10,8 @@
 
 #include <zypp/ByteCount.h>
 
-namespace zypp {
-  namespace media {
-    class TransferSettings;
-  }
+namespace zypp::media {
+  class TransferSettings;
 }
 
 namespace zyppng {
@@ -21,9 +19,11 @@ namespace zyppng {
   class NetworkRequestDispatcher;
   class DownloaderPrivate;
   class Download;
+  class DownloadSpec;
   class MirrorControl;
 
   using TransferSettings = zypp::media::TransferSettings;
+
 
   /**
    * @brief The Downloader class
@@ -46,11 +46,8 @@ namespace zyppng {
 
     /*!
      * Generates a new Download object in waiting state
-     * \param file the \sa zyppng::Url to the source file that should be downloaded
-     * \param targetPath the local file path where the downloaded file needs to be stored
-     * \param expectedFileSize The expected file size of the source file, can be empty
      */
-    std::shared_ptr<Download> downloadFile ( Url file, zypp::filesystem::Pathname targetPath, zypp::ByteCount expectedFileSize = zypp::ByteCount() );
+    std::shared_ptr<Download> downloadFile ( const DownloadSpec &spec );
 
     /*!
      * Returns the internally used \sa zyppng::NetworkRequestDispatcher used by the \a Downloader
@@ -95,7 +92,7 @@ namespace zyppng {
    * zypp::Url url ( "https://download.opensuse.org/distribution/leap/15.0/repo/oss/x86_64/0ad-0.0.22-lp150.2.10.x86_64.rpm" );
    * zypp::Pathname target("/tmp/0ad-0.0.22-lp150.2.10.x86_64.rpm");
    *
-   * std::shared_ptr<zyppng::Download> req = dl.downloadFile( url, target );
+   * std::shared_ptr<zyppng::Download> req = dl.downloadFile( zypp::DownloadSpec(url, target) );
    * req->sigStarted().connect( []( zyppng::Download &dl ) {
    *   std::cout << "Download started: " << dl.targetPath() << std::endl;
    * });
@@ -137,13 +134,15 @@ namespace zyppng {
      * stage of the lifetime of a Download.
      */
     enum State {
-      InitialState,  //< This is the initial state, its only set before a download starts
-      Initializing = 10,  //< This state is kept during the first 265Bytes or until the data looks like a Metalink download
-      Running      = 20,  //< This state is set once there have been more than 256 bytes downloaded and it does not look like a metalink download
-      PrepareMulti = 25,  //< This state is set for async preparations of the multi download, like mirror rating
-      RunningMulti = 30,  //< Signals that the file is downloaded in chunks from different mirrors
-      Success = 200, //< Shows that the Download was successful
-      Failed         //< Shows that the Download failed
+      InitialState,   //< This is the initial state, its only set before a download starts
+      DetectMetaLink, //< Metalink downloads are enabled, trying to detect if we get a metalink or not
+      DlMetaLinkInfo, //< Downloading the metalink description file
+      PrepareMulti,   //< This state is set for async preparations of the multi download, like mirror rating
+      DlMetalink,     //< Metalink download is running
+      DlZChunkHead,   //< Zchunk header download is running
+      DlZChunk,       //< Zchunk download is running
+      DlSimple,       //< Simple download running, no optimizations
+      Finished,       //< Download has finished
     };
 
 
@@ -153,16 +152,6 @@ namespace zyppng {
     Download ( DownloadPrivate &&prv );
 
     virtual ~Download();
-
-    /*!
-     * Returns the source URL of the download
-     */
-    Url url () const;
-
-    /*!
-     * Returns the target file path, this is where the downloaded data is stored
-     */
-    zypp::Pathname targetPath () const;
 
     /*!
      * Returns the current internal state of the Download
@@ -179,17 +168,15 @@ namespace zyppng {
     NetworkRequestError lastRequestError () const;
 
     /*!
+     * Returns true if \ref lastRequestError would return a valid \ref NetworkRequestError
+     */
+    bool hasError () const;
+
+    /*!
      * Returns a readable reason why the download failed.
      * \sa lastRequestError
      */
     std::string errorString () const;
-
-    /*!
-     * Returns a writeable reference to the \sa zyppng::TransferSettings for the download. The settings are reused for
-     * possible sub downloads, however authentication data is stripped if the subdownload uses a different host to
-     * fetch the data from. If there is no auth data known \sa sigAuthRequired is emitted.
-     */
-    TransferSettings &settings ();
 
     /*!
      * Triggers the start of the download, this needs to be called in order for the statemachine
@@ -212,29 +199,12 @@ namespace zyppng {
     void cancel ();
 
     /*!
-     * Enabled or disabled multipart handling. Enabled by default.
-     * \note if Multipart is enabled the Download tells the server that it accepts metalink files by adding a specific header
-     *       to the request.
+     * Returns a reference to the internally used download spec.
+     * \sa zyppng::DownloadSpec
+     * \note Changing settings after the download started might result in undefined or weird behaviour
      */
-    void setMultiPartHandlingEnabled ( bool enable = true );
-
-    /*!
-     * Enables a special mode, in this case only the existance of the file is checked but no data is actually downloaded
-     */
-    void setCheckExistsOnly ( bool set = true );
-
-    /*!
-     * Set a already existing local file to be used for partial downloading, in case of a multichunk download all chunks from the
-     * file that have the expected checksum will be reused instead of downloaded
-     */
-    void setDeltaFile ( const zypp::Pathname &file );
-
-    /*!
-     * Sets the prefered amount of bytes the downloader tries to request from a single server per metalink chunk request.
-     * If the metalink description has smaller chunks those are coalesced to match the preferred size.
-     */
-    void setPreferredChunkSize ( const zypp::ByteCount &bc );
-
+    DownloadSpec &spec ();
+    const DownloadSpec &spec () const;
 
     /*!
      * Returns the timestamp of the last auth credentials that were loaded from the CredentialManager.

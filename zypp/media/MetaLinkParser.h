@@ -74,14 +74,14 @@ public:
    **/
   MediaBlockList getBlockList() const;
 
-  const std::vector<ByteArray> &getZsyncBlockHashes () const;
-  const std::vector<ByteArray> &getSHA1BlockHashes () const;
+  const std::vector<UByteArray> &getZsyncBlockHashes() const;
+  const std::vector<UByteArray> &getSHA1BlockHashes() const;
 
 private:
   struct ml_parsedata *pd;
 };
 
-ByteArray hexstr2bytes( std::string str );
+UByteArray hexstr2bytes( std::string str );
 
 } // namespace zypp::media
 

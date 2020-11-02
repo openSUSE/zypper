@@ -39,6 +39,7 @@ namespace zyppng {
     void reset ();
     void resetActivityTimer ();
     void onActivityTimeout (Timer &);
+    bool checkIfRangeChkSumIsValid(const NetworkRequest::Range &rng);
     void validateRange ( NetworkRequest::Range &rng );
     bool parseContentRangeHeader (const boost::string_view &line, size_t &start , size_t &len);
     bool parseContentTypeMultiRangeHeader ( const boost::string_view &line, std::string &boundary );

@@ -14,6 +14,7 @@
 
 #include <sys/types.h>
 #include <vector>
+#include <optional>
 
 #include <zypp/Digest.h>
 
@@ -80,7 +81,9 @@ public:
    * set / verify the checksum over the whole file
    **/
   void setFileChecksum(std::string ctype, int cl, unsigned char *c);
-  const std::vector<unsigned char> &getFileChecksum( );
+  std::string fileChecksumType () const;
+
+  const UByteArray &getFileChecksum( );
   bool createFileDigest(Digest &digest) const;
   bool verifyFileDigest(Digest &digest) const;
   inline bool haveFileChecksum() const {
@@ -92,7 +95,8 @@ public:
    **/
   void setChecksum(size_t blkno, std::string cstype, int csl, unsigned char *cs, size_t cspad=0);
   bool checkChecksum(size_t blkno, const unsigned char *buf, size_t bufl) const;
-  std::vector<unsigned char> getChecksum( size_t blkno ) const;
+  UByteArray getChecksum( size_t blkno ) const;
+  std::string getChecksumType( ) const;
   bool createDigest(Digest &digest) const;
   bool verifyDigest(size_t blkno, Digest &digest) const;
   inline bool haveChecksum(size_t blkno) const {
@@ -127,7 +131,7 @@ private:
 
   off_t filesize;
   std::string fsumtype;
-  std::vector<unsigned char> fsum;
+  UByteArray fsum;
 
   bool haveblocks;
   std::vector<MediaBlock> blocks;

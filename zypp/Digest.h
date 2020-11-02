@@ -21,6 +21,7 @@
 
 #include <zypp/Callback.h>
 #include <zypp/Pathname.h>
+#include <zypp/ByteArray.h>
 
 namespace zypp {
 
@@ -119,7 +120,14 @@ namespace zypp {
     	 *
     	 * @return hex string representation of the digest
     	 * */
-        static std::string digestVectorToString ( const std::vector<unsigned char> &vec );
+        static std::string digestVectorToString ( const UByteArray &vec );
+
+        /** \brief convert the hex string representation of the digest vector given as parameter into the actual byte array representation
+    	 *
+    	 * @return hex string representation of the digest
+    	 * */
+        static ByteArray hexStringToByteArray ( std::string_view str );
+        static UByteArray hexStringToUByteArray ( std::string_view str );
 
     	/** \brief get vector of unsigned char representation of the digest
     	 *
@@ -128,7 +136,7 @@ namespace zypp {
     	 *
     	 * @return vector representation of the digest
     	 * */
-    	std::vector<unsigned char> digestVector();
+    	UByteArray digestVector();
 
     	/** \brief reset internal digest state
     	 *

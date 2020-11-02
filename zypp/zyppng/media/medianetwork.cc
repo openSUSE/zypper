@@ -14,6 +14,7 @@
 #include <zypp/zyppng/base/EventLoop>
 #include <zypp/zyppng/base/AutoDisconnect>
 #include <zypp/zyppng/io/SockAddr>
+#include <zypp/zyppng/media/network/downloadspec.h>
 
 #include <zypp/zyppng/media/network/networkrequestdispatcher.h>
 #include <zypp/zyppng/media/network/networkrequesterror.h>
@@ -117,10 +118,13 @@ namespace zyppng {
 
   struct MediaNetwork::Request {
 
-    Request ( const zypp::Pathname &path, RequestId id ) : _targetFile(path) {
+    Request ( DownloadSpec &&spec, const zypp::Pathname &path, RequestId id ) : _targetFile(path) {
       _targetFile.autoCleanup( true );
       _proto.set_requestid( id );
-      _proto.set_targetpath( _targetFile.path().asString() );
+
+      // download to temporary path instead of the real one
+      spec.setTargetPath( _targetFile.path().asString() );
+      *_proto.mutable_spec() = std::move( spec.protoData() );
     }
 
     void ref   () {
@@ -504,7 +508,7 @@ namespace zyppng {
   void MediaNetwork::handleRequestResult(const Request &req, const zypp::filesystem::Pathname &filename ) const
   {
     if ( !req.result() ) {
-      ZYPP_THROW( zypp::media::MediaCurlException( req.proto().url(), "Request did not return a result" , "" ) );
+      ZYPP_THROW( zypp::media::MediaCurlException( req.proto().spec().url(), "Request did not return a result" , "" ) );
     }
 
     if ( !req.result()->has_error() )
@@ -539,7 +543,7 @@ namespace zyppng {
       }
       ZYPP_THROW( zypp::media::MediaCurlException( reqUrl, err.errordesc(), err.nativeerror() ) );
     }
-    ZYPP_THROW( zypp::media::MediaCurlException( req.proto().url(), err.errordesc() , "" ) );
+    ZYPP_THROW( zypp::media::MediaCurlException( req.proto().spec().url(), err.errordesc() , "" ) );
   }
 
   bool MediaNetwork::retry( DispatchContext &ctx, Request &req ) const
@@ -642,7 +646,7 @@ namespace zyppng {
       if ( !r )
         return;
 
-      MIL << "Received the download started event for file "<< zypp::Url( r->proto().url() ) <<" from server." << std::endl;
+      MIL << "Received the download started event for file "<< zypp::Url( r->proto().spec().url() ) <<" from server." << std::endl;
       dlId = st.requestid();
       r->setProgress( 0.0, 0.0, cancel );
 
@@ -666,7 +670,7 @@ namespace zyppng {
       if ( !r )
         return;
 
-      MIL << "Received FIN for download: " << zypp::Url( r->proto().url() ) << std::endl;
+      MIL << "Received FIN for download: " << zypp::Url( r->proto().spec().url() ) << std::endl;
       r->setResult( std::move(fin) );
     } else {
       // error , unknown message
@@ -681,9 +685,9 @@ namespace zyppng {
     }
   }
 
-  MediaNetwork::Request MediaNetwork::makeRequest ( const zypp::filesystem::Pathname &filename, const zypp::ByteCount &expectedFileSize_r , const zypp::filesystem::Pathname &deltaFile ) const
+  MediaNetwork::Request MediaNetwork::makeRequest ( const zypp::OnMediaLocation &loc ) const
   {
-    DBG << filename.asString() << std::endl;
+    DBG << loc.filename().asString() << std::endl;
 
     if(!_url.isValid())
       ZYPP_THROW(zypp::media::MediaBadUrlException(_url));
@@ -691,21 +695,17 @@ namespace zyppng {
     if(_url.getHost().empty())
       ZYPP_THROW(zypp::media::MediaBadUrlEmptyHostException(_url));
 
-    Url url( getFileUrl(filename) );
+    Url url( getFileUrl(loc.filename()) );
 
+    DownloadSpec spec( url, loc.filename(), loc.downloadSize() );
+    spec.setTransferSettings( _settings )
+      .setHeaderSize( loc.headerSize() )
+      .setHeaderChecksum( loc.headerChecksum() )
+      .setDeltaFile( loc.deltafile() );
 
-    Request fileReq( _workingDir, ++_nextRequestId );
-    *fileReq.proto().mutable_settings() = _settings.protoData();
-    fileReq.proto().set_url( url.asCompleteString() );
-
-    if ( expectedFileSize_r != 0 )
-      fileReq.proto().set_expectedfilesize( expectedFileSize_r );
-
+    // we are downloading the file into a temporary location first
+    Request fileReq( std::move(spec), _workingDir, ++_nextRequestId );
     fileReq.proto().set_streamprogress( false );
-
-    if ( !deltaFile.empty() )
-      fileReq.proto().set_delta( deltaFile.asString() );
-
     return fileReq;
   }
 
@@ -733,7 +733,7 @@ namespace zyppng {
   {
     req.reset();
     // update request with new settings
-    *req.proto().mutable_settings() = _settings.protoData();
+    *req.proto().mutable_spec()->mutable_settings() = _settings.protoData();
     ctx.sendEnvelope( req.proto() );
     const auto &s = ctx.waitForStatus( req.proto().requestid(), std::bind( &MediaNetwork::handleStreamMessage, this, std::placeholders::_1, std::placeholders::_2 ) );
     if ( s.code() != zypp::proto::Status::Ok ) {
@@ -744,7 +744,7 @@ namespace zyppng {
   MediaNetwork::Request *MediaNetwork::findRequest( const Url url ) const
   {
     const auto &i = std::find_if( _requests.begin(), _requests.end(), [ &url ]( const auto &r ) {
-      return ( url == zyppng::Url( r.proto().url() ) );
+      return ( url == zyppng::Url( r.proto().spec().url() ) );
     });
     if ( i == _requests.end() )
       return nullptr;
@@ -768,7 +768,7 @@ namespace zyppng {
 
     // here we always send a new request without even considering probably already existing ones
     auto req = makeRequest( filename );
-    req.proto().set_checkexistanceonly( true );
+    req.proto().mutable_spec()->set_checkexistanceonly( true );
     req.proto().set_prioritize( true );
 
 
@@ -809,7 +809,7 @@ namespace zyppng {
     report->start( url, filename );
 
     if ( !downloadReq ) {
-      auto newReq = makeRequest( filename, file.downloadSize(), file.deltafile() );
+      auto newReq = makeRequest( file );
 
       newReq.proto().set_streamprogress( true );
       newReq.proto().set_prioritize( true );
@@ -877,8 +877,8 @@ namespace zyppng {
       ZYPP_THROW( zypp::media::MediaCurlException( url, err, "" ) );
     }
 
-    if( zypp::filesystem::hardlinkCopy( downloadReq->proto().targetpath(), targetPath ) != 0 ) {
-      std::string err = zypp::str::Str() << "Failed to hardlinkCopy the requested file <<" << downloadReq->proto().targetpath() << " to the targetPath " << targetPath;
+    if( zypp::filesystem::hardlinkCopy( downloadReq->proto().spec().targetpath(), targetPath ) != 0 ) {
+      std::string err = zypp::str::Str() << "Failed to hardlinkCopy the requested file <<" << downloadReq->proto().spec().targetpath() << " to the targetPath " << targetPath;
       DBG << err << std::endl;
       ZYPP_THROW( zypp::media::MediaCurlException( url, err, "" ) );
     }
@@ -942,7 +942,7 @@ namespace zyppng {
       if ( existingReq )
         existingReq->ref();
       else {
-        Request fileReq = makeRequest( file.filename(), file.downloadSize() );
+        Request fileReq = makeRequest( file );
         fileReq.proto().set_streamprogress( false );
         *req.mutable_requests()->Add() = fileReq.proto();
         sentRequests.push_back( fileReq );

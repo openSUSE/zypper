@@ -1,6 +1,7 @@
 syntax = "proto3";
 option optimize_for = LITE_RUNTIME;
 
+import "download.proto";
 import "transfersettings.proto";
 import "networkrequesterror.proto";
 
@@ -10,14 +11,9 @@ package zypp.proto;
 // will return a Status object to the sender
 message Request {
     uint32 requestId = 1;
-    TransferSettings settings = 2;
-    string url = 3;
-    string delta = 4;
-    uint64 expectedFileSize = 5;
-    string targetPath = 6;
-    bool   checkExistanceOnly = 7; //< this will NOT download the file but only query the server if its existant
-    bool   prioritize = 8;         //< this is usually set when a download is required right away, it will be enqueued with highest prio
-    bool   streamProgress = 9;     //< immediately start to stream download updates
+    DownloadSpec spec = 2;
+    bool   prioritize = 3;         //< this is usually set when a download is required right away, it will be enqueued with highest prio
+    bool   streamProgress = 4;     //< immediately start to stream download updates
 }
 
 // the downloads are silently enqueued and prefetched

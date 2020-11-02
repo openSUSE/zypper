@@ -77,6 +77,7 @@ SET( zyppng_media_SRCS
   media/medianetwork.cc
   media/medianetworkserver.cc
   media/network/downloader.cc
+  media/network/downloadspec.cc
   media/network/mirrorcontrol.cc
   media/network/networkrequestdispatcher.cc
   media/network/networkrequesterror.cc
@@ -89,6 +90,7 @@ SET( zyppng_media_HEADERS
   media/network/AuthData
   media/network/authdata.h
   media/network/downloader.h
+  media/network/downloadspec.h
   media/network/networkrequestdispatcher.h
   media/network/networkrequesterror.h
   media/network/request.h
@@ -131,6 +133,7 @@ SET( zyppng_appcode_SRCS
 )
 
 SET( zyppng_PROTOBUF_SOURCES
+    proto/download.proto
     proto/messages.proto
     proto/networkrequesterror.proto
 )

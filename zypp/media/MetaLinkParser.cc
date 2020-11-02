@@ -172,13 +172,13 @@ struct ml_parsedata : private zypp::base::NonCopyable {
   std::vector<MetalinkMirror> urls;
   size_t blksize;
 
-  std::vector<ByteArray> piece;
+  std::vector<UByteArray> piece;
   int piecel;
 
-  std::vector<ByteArray> sha1;
-  std::vector<ByteArray> zsync;
+  std::vector<UByteArray> sha1;
+  std::vector<UByteArray> zsync;
 
-  ByteArray chksum;
+  UByteArray chksum;
   int chksuml;
 };
 
@@ -321,26 +321,9 @@ startElement(void *userData, const xmlChar *name, const xmlChar **atts)
     }
 }
 
-ByteArray hexstr2bytes( std::string str )
+UByteArray hexstr2bytes( std::string str )
 {
-  ByteArray bytes;
-  for ( std::string::size_type i = 0; i < str.length(); i+=2 )
-  {
-#define c2h(c) (((c)>='0' && (c)<='9') ? ((c)-'0')              \
-                : ((c)>='a' && (c)<='f') ? ((c)-('a'-10))       \
-                : ((c)>='A' && (c)<='F') ? ((c)-('A'-10))       \
-                : -1)
-    int v = c2h(str[i]);
-    if (v < 0)
-      return {};
-    bytes.push_back(v);
-    v = c2h(str[i+1]);
-    if (v < 0)
-      return {};
-    bytes.back() = (bytes.back() << 4) | v;
-#undef c2h
-  }
-  return bytes;
+  return Digest::hexStringToUByteArray( str );
 }
 
 static void XMLCALL
@@ -373,7 +356,7 @@ endElement(void *userData, const xmlChar *)
     case STATE_M4PHASH: {
       if ( pd->content.length() != size_t(pd->piecel) * 2 )
 	break;
-      ByteArray pieceHash = hexstr2bytes( pd->content );
+      UByteArray pieceHash = hexstr2bytes( pd->content );
       if ( !pieceHash.size() )
         pieceHash.resize( pd->piecel, 0 );
       pd->piece.push_back( pieceHash );
@@ -522,12 +505,12 @@ MediaBlockList MetaLinkParser::getBlockList() const
   return bl;
 }
 
-const std::vector<ByteArray> &MetaLinkParser::getZsyncBlockHashes() const
+const std::vector<UByteArray> &MetaLinkParser::getZsyncBlockHashes() const
 {
   return pd->zsync;
 }
 
-const std::vector<ByteArray> &MetaLinkParser::getSHA1BlockHashes() const
+const std::vector<UByteArray> &MetaLinkParser::getSHA1BlockHashes() const
 {
   return pd->sha1;
 }

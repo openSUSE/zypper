@@ -3,7 +3,6 @@ option optimize_for = LITE_RUNTIME;
 
 package zypp.proto;
 
-
 message TransferSettings {
     repeated string header = 1;
     string useragent = 2;
@@ -18,6 +17,7 @@ message TransferSettings {
     int64 connect_timeout = 11;
     string url = 12;
     string targetdir = 13;
+
 
     int64 maxConcurrentConnections = 14;
     int64 minDownloadSpeed = 15;

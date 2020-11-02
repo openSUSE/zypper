@@ -66,7 +66,7 @@ private:
   void handleStreamMessage ( DispatchContext &ctx, const zypp::proto::Envelope &e ) const;
   void handleRequestResult ( const Request &req , const zypp::filesystem::Pathname &filename ) const;
 
-  Request makeRequest ( const zypp::filesystem::Pathname &filename, const zypp::ByteCount &expectedFileSize_r = {}, const zypp::filesystem::Pathname &deltaFile = {} ) const;
+  Request makeRequest ( const zypp::OnMediaLocation &loc ) const;
   void trackRequest ( DispatchContext &ctx, Request &req ) const ;
 
   Request *findRequest ( const zyppng::Url url ) const;

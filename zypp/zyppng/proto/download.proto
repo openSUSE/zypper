@@ -1,0 +1,27 @@
+syntax = "proto3";
+option optimize_for = LITE_RUNTIME;
+
+import "transfersettings.proto";
+
+package zypp.proto;
+
+message Checksum {
+  string type = 1;
+  bytes  sum  = 2;
+}
+
+/*!
+ * Specifies a file that needs to be downloaded
+ */
+message DownloadSpec {
+    string url = 1;
+    TransferSettings settings = 2;
+    string delta = 3;
+    uint64 expectedFileSize = 4;
+    string targetPath = 5;
+    bool   checkExistanceOnly = 6; //< this will NOT download the file but only query the server if its existant
+    bool   metalink_enabled = 7;   //< should the download try to use metalinks
+    uint32   headerSize = 8;         //< Optional file header size for things like zchunk
+    Checksum headerChecksum = 9;     //< Optional file header checksum
+    uint32 preferred_chunk_size = 10;
+}

@@ -191,7 +191,7 @@ namespace zypp {
       return digestVectorToString( digestVector() );
     }
 
-    std::string Digest::digestVectorToString(const std::vector<unsigned char> &vec)
+    std::string Digest::digestVectorToString(const UByteArray &vec)
     {
       if ( vec.empty() )
         return std::string();
@@ -205,9 +205,41 @@ namespace zypp {
       return std::string( resData.data() );
     }
 
-    std::vector<unsigned char> Digest::digestVector()
+    template <typename BArr>
+    static BArr hexStrToBArr ( std::string_view &&str ) {
+      BArr bytes;
+      for ( std::string::size_type i = 0; i < str.length(); i+=2 )
+      {
+#define c2h(c) (((c)>='0' && (c)<='9') ? ((c)-'0')              \
+              : ((c)>='a' && (c)<='f') ? ((c)-('a'-10))       \
+              : ((c)>='A' && (c)<='F') ? ((c)-('A'-10))       \
+              : -1)
+        int v = c2h(str[i]);
+        if (v < 0)
+          return {};
+        bytes.push_back(v);
+        v = c2h(str[i+1]);
+        if (v < 0)
+          return {};
+        bytes.back() = (bytes.back() << 4) | v;
+#undef c2h
+      }
+      return bytes;
+    }
+
+    ByteArray Digest::hexStringToByteArray(std::string_view str)
     {
-      std::vector<unsigned char> r;
+      return hexStrToBArr<ByteArray>( std::move(str) );
+    }
+
+    UByteArray Digest::hexStringToUByteArray( std::string_view str )
+    {
+      return hexStrToBArr<UByteArray>( std::move(str) );
+    }
+
+    UByteArray Digest::digestVector()
+    {
+      UByteArray r;
       if(!_dp->maybeInit())
         return r;
 

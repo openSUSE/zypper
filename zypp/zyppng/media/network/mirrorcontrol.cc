@@ -125,7 +125,7 @@ namespace zyppng {
     });
 
     for ( const auto &mirr : possibleMirrs ) {
-      const auto maxConn = mirr.second->maxConnections > 0 ? mirr.second->maxConnections : 10; //max connections per mirror @todo make this configurable
+      const auto maxConn = mirr.second->maxConnections > 0 ? mirr.second->maxConnections : 5; //max connections per mirror @todo make this configurable
       if ( mirr.second->runningTransfers >= maxConn )
         continue;
       if ( mirr.second->failedTransfers >= 10 )

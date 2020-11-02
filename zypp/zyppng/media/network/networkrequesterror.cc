@@ -9,6 +9,9 @@ namespace zyppng {
 
 ZYPP_IMPL_PRIVATE(NetworkRequestError);
 
+constexpr std::string_view CurlNativeErrorCodeDescKey = "nativeErrorCodeDesc";
+constexpr std::string_view CurlNativeErrorDescKey = "nativeErrorDesc";
+
 NetworkRequestErrorPrivate::NetworkRequestErrorPrivate(NetworkRequestError::Type code, std::string &&msg, std::map<std::string, boost::any> &&extraInfo)
   : _errorCode(code)
   , _errorMessage( std::move(msg) )
@@ -37,10 +40,10 @@ NetworkRequestError NetworkRequestErrorPrivate::fromCurlError(NetworkRequest &re
 
     const char *nativeErr = curl_easy_strerror( static_cast<CURLcode>(nativeCode) );
     if ( nativeErr != nullptr )
-      extraInfo.insert( { "nativeErrorCodeDesc",  std::string( nativeErr ) } );
+      extraInfo.insert( { CurlNativeErrorCodeDescKey.data(),  std::string( nativeErr ) } );
 
     if ( !nativeError.empty() )
-      extraInfo.insert( { "nativeErrorDesc",  nativeError } );
+      extraInfo.insert( { CurlNativeErrorDescKey.data(),  nativeError } );
 
     extraInfo.insert( { "requestUrl", url } );
     extraInfo.insert( { "curlCode", nativeCode } );
@@ -274,14 +277,14 @@ std::string NetworkRequestError::nativeErrorString() const
 {
   Z_D();
 
-  auto it = d->_extraInfo.find("nativeErrorDesc");
+  auto it = d->_extraInfo.find(CurlNativeErrorDescKey.data());
   if ( it != d->_extraInfo.end() ) {
     try {
       return boost::any_cast<std::string>( it->second );
     } catch ( const boost::bad_any_cast &) { }
   }
 
-  it = d->_extraInfo.find("nativeErrorCodeDesc");
+  it = d->_extraInfo.find(CurlNativeErrorCodeDescKey.data());
   if ( it != d->_extraInfo.end() ) {
     try {
       return boost::any_cast<std::string>( it->second );

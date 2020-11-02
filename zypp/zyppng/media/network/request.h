@@ -5,6 +5,7 @@
 #include <zypp/zyppng/media/network/TransferSettings>
 #include <zypp/zyppng/base/Base>
 #include <zypp/zyppng/core/Url>
+#include <zypp/zyppng/core/ByteArray>
 #include <zypp/zyppng/base/zyppglobal.h>
 #include <zypp/zyppng/base/signals.h>
 #include <zypp/base/Flags.h>
@@ -42,7 +43,7 @@ namespace zyppng {
     using Ptr = std::shared_ptr<NetworkRequest>;
     using WeakPtr = std::weak_ptr<NetworkRequest>;
     using DigestPtr = std::shared_ptr<zypp::Digest>;
-    using CheckSum = std::vector<unsigned char>;
+    using CheckSumBytes = UByteArray;
 
     enum State {
       Pending,    //< waiting to be dispatched
@@ -76,13 +77,16 @@ namespace zyppng {
 
       /**
       * Enables automated checking of downloaded contents against a checksum.
-      * Only makes a difference \ref _digest is initialized too
+      * Only makes a difference if \ref _digest is initialized too
       *
       * \note expects checksum in byte NOT in string format
       */
-      CheckSum _checksum;
+      CheckSumBytes _checksum;
+      std::optional<size_t> _relevantDigestLen; //< If this is initialized , it defines how many bytes of the resulting checkum are compared
       bool _valid = false;
       std::any userData; //< Custom data the user can associate with the Range
+
+      static Range make ( size_t start, size_t len = 0, DigestPtr &&digest = nullptr, CheckSumBytes &&expectedChkSum = CheckSumBytes(), std::any &&userData = std::any(), std::optional<size_t> digestCompareLen = {} );
     };
 
     struct Timings {
@@ -137,7 +141,9 @@ namespace zyppng {
      * Adds a new range to the requested range list, the ranges can not overlap
      * \note This will not change a running download
      */
-    void addRequestRange ( size_t start, size_t len = 0, DigestPtr digest = nullptr, CheckSum expectedChkSum = CheckSum(), std::any userData = std::any() );
+    void addRequestRange ( size_t start, size_t len = 0, DigestPtr digest = nullptr, CheckSumBytes expectedChkSum = CheckSumBytes(), std::any userData = std::any(), std::optional<size_t> digestCompareLen = {}  );
+
+    void addRequestRange ( const Range &range );
 
     /*!
      * Clears all requested ranges, the next download will get the complete file
@@ -146,6 +152,7 @@ namespace zyppng {
     void resetRequestRanges ( );
 
     std::vector<Range> failedRanges () const;
+    const std::vector<Range> &requestedRanges () const;
 
     /*!
      * Returns the last redirect information from the headers.

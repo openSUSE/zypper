@@ -3,7 +3,6 @@
 #include <zypp/zyppng/media/network/networkrequestdispatcher.h>
 #include <zypp/zyppng/base/EventDispatcher>
 #include <zypp/zyppng/core/String>
-#include <zypp/zyppng/core/Env>
 #include <zypp/media/CurlHelper.h>
 #include <zypp/media/CurlConfig.h>
 #include <zypp/media/MediaUserAuth.h>
@@ -60,6 +59,20 @@ namespace zyppng {
       return {};
 
     return data;
+  }
+
+  NetworkRequest::Range NetworkRequest::Range::make(size_t start, size_t len, zyppng::NetworkRequest::DigestPtr &&digest, zyppng::NetworkRequest::CheckSumBytes &&expectedChkSum, std::any &&userData, std::optional<size_t> digestCompareLen )
+  {
+    return NetworkRequest::Range {
+      start,
+      len,
+      0,
+      std::move( digest ),
+      std::move( expectedChkSum ),
+      std::move( digestCompareLen ),
+      false,
+      std::move( userData )
+    };
   }
 
   NetworkRequestPrivate::running_t::running_t( pending_t &&prevState )
@@ -231,7 +244,8 @@ namespace zyppng {
       locSet.setUserAgentString( internal::agentString() );
 
       {
-	_curlDebug = env::ZYPP_MEDIA_CURL_DEBUG();
+        char *ptr = getenv("ZYPP_MEDIA_CURL_DEBUG");
+        _curlDebug = (ptr && *ptr) ? zypp::str::strtonum<long>( ptr) : 0L;
         if( _curlDebug > 0)
         {
           setCurlOption( CURLOPT_VERBOSE, 1L);
@@ -241,7 +255,7 @@ namespace zyppng {
       }
 
       /** Force IPv4/v6 */
-      switch ( env::ZYPP_MEDIA_CURL_IPRESOLVE() )
+      switch ( zypp::env::ZYPP_MEDIA_CURL_IPRESOLVE() )
       {
         case 4: setCurlOption( CURLOPT_IPRESOLVE, CURL_IPRESOLVE_V4 ); break;
         case 6: setCurlOption( CURLOPT_IPRESOLVE, CURL_IPRESOLVE_V6 ); break;
@@ -439,40 +453,39 @@ namespace zyppng {
 
   void NetworkRequestPrivate::setResult( NetworkRequestError &&err )
   {
-    if ( !std::holds_alternative<running_t>(_runningMode) ) {
-      DBG << "Set result called in state " << z_func()->state() << std::endl;
-      return;
-    }
-
-    auto &rmode = std::get<running_t>( _runningMode );
-    rmode._outFile.reset();
 
     finished_t resState;
     resState._result = std::move(err);
-    resState._downloaded = rmode._downloaded;
-    resState._contentLenght = rmode._contentLenght;
 
-    if ( resState._result.type() == NetworkRequestError::NoError && !(_options & NetworkRequest::HeadRequest) && !(_options & NetworkRequest::ConnectionTest) ) {
+    if ( std::holds_alternative<running_t>(_runningMode) ) {
 
-      // check if the current range is a open range, if it is set it valid by checking the checksum
-      if ( rmode._currentRange >= 0 ) {
-        auto &currR = _requestedRanges[rmode._currentRange];
-        rmode._currentRange = -1;
-        validateRange( currR );
-      }
+      auto &rmode = std::get<running_t>( _runningMode );
+      rmode._outFile.reset();
+      resState._downloaded = rmode._downloaded;
+      resState._contentLenght = rmode._contentLenght;
 
-      //we have a successful download lets see if we got everything we needed
-      for ( const auto &r : _requestedRanges ) {
-        if ( !r._valid ) {
-          if ( r.len > 0 && r.bytesWritten != r.len )
-            resState._result = NetworkRequestErrorPrivate::customError( NetworkRequestError::MissingData, (zypp::str::Format("Did not receive all requested data from the server.") ) );
-          else if ( r._digest && r._checksum != r._digest->digestVector() )  {
-            resState._result = NetworkRequestErrorPrivate::customError( NetworkRequestError::InvalidChecksum, (zypp::str::Format("Invalid checksum %1%, expected checksum %2%") % r._digest->digest() % zypp::Digest::digestVectorToString( r._checksum ) ) );
-          } else {
-            resState._result = NetworkRequestErrorPrivate::customError( NetworkRequestError::InternalError, (zypp::str::Format("Download of block failed.") ) );
+      if ( resState._result.type() == NetworkRequestError::NoError && !(_options & NetworkRequest::HeadRequest) && !(_options & NetworkRequest::ConnectionTest) ) {
+
+        // check if the current range is a open range, if it is set it valid by checking the checksum
+        if ( rmode._currentRange >= 0 ) {
+          auto &currR = _requestedRanges[rmode._currentRange];
+          rmode._currentRange = -1;
+          validateRange( currR );
+        }
+
+        //we have a successful download lets see if we got everything we needed
+        for ( const auto &r : _requestedRanges ) {
+          if ( !r._valid ) {
+            if ( r.len > 0 && r.bytesWritten != r.len )
+              resState._result = NetworkRequestErrorPrivate::customError( NetworkRequestError::MissingData, (zypp::str::Format("Did not receive all requested data from the server.") ) );
+            else if ( r._digest && r._checksum.size() && ! checkIfRangeChkSumIsValid(r) )  {
+              resState._result = NetworkRequestErrorPrivate::customError( NetworkRequestError::InvalidChecksum, (zypp::str::Format("Invalid checksum %1%, expected checksum %2%") % r._digest->digest() % zypp::Digest::digestVectorToString( r._checksum ) ) );
+            } else {
+              resState._result = NetworkRequestErrorPrivate::customError( NetworkRequestError::InternalError, (zypp::str::Format("Download of block failed.") ) );
+            }
+            //we only report the first error
+            break;
           }
-          //we only report the first error
-          break;
         }
       }
     }
@@ -498,10 +511,22 @@ namespace zyppng {
     _dispatcher->cancel( *z_func(), NetworkRequestErrorPrivate::customError( NetworkRequestError::Timeout, "Download timed out", std::move(extraInfo) ) );
   }
 
+  bool NetworkRequestPrivate::checkIfRangeChkSumIsValid ( const NetworkRequest::Range &rng )
+  {
+    if ( rng._digest && rng._checksum.size() ) {
+      auto digVec = rng._digest->digestVector();
+      if ( rng._relevantDigestLen ) {
+        digVec.resize( *rng._relevantDigestLen );
+      }
+      return ( digVec == rng._checksum );
+    }
+    return false;
+  }
+
   void NetworkRequestPrivate::validateRange( NetworkRequest::Range &rng )
   {
     if ( rng._digest && rng._checksum.size() ) {
-      rng._valid = (rng._digest->digestVector() == rng._checksum);
+      rng._valid = checkIfRangeChkSumIsValid(rng);
     } else {
       rng._valid = rng.len == 0 ? true : rng.bytesWritten == rng.len;
     }
@@ -780,8 +805,12 @@ namespace zyppng {
         for ( uint i = 0; i < _requestedRanges.size(); i++ ) {
           const auto &currR = _requestedRanges[i];
 
-          //do not allow double ranges
+          // do not allow double ranges
           if ( currR._valid )
+            continue;
+
+          // check if the range was already written
+          if ( currR.len == currR.bytesWritten )
             continue;
 
           const auto currRBegin = currR.start + currR.bytesWritten;
@@ -923,20 +952,22 @@ namespace zyppng {
     return d_func()->_options;
   }
 
-  void NetworkRequest::addRequestRange(size_t start, size_t len, DigestPtr digest, CheckSum expectedChkSum , std::any userData)
+  void NetworkRequest::addRequestRange( size_t start, size_t len, DigestPtr digest, CheckSumBytes expectedChkSum , std::any userData, std::optional<size_t> digestCompareLen  )
   {
     Z_D();
     if ( state() == Running )
       return;
 
-    NetworkRequest::Range r;
-    r.start = start;
-    r.len = len;
-    r._digest   = std::move( digest );
-    r._checksum = std::move( expectedChkSum );
-    r.userData  = std::move( userData );
+    d->_requestedRanges.push_back( Range::make( start, len, std::move(digest), std::move( expectedChkSum ), std::move( userData ), digestCompareLen ) );
+  }
 
-    d->_requestedRanges.push_back( std::move(r) );
+  void NetworkRequest::addRequestRange( const NetworkRequest::Range &range )
+  {
+    Z_D();
+    if ( state() == Running )
+      return;
+
+     d->_requestedRanges.push_back( range );
   }
 
   void NetworkRequest::resetRequestRanges()
@@ -961,6 +992,11 @@ namespace zyppng {
         failed.push_back( r );
     }
     return failed;
+  }
+
+  const std::vector<NetworkRequest::Range> &NetworkRequest::requestedRanges() const
+  {
+    return d_func()->_requestedRanges;
   }
 
   const std::string &NetworkRequest::lastRedirectInfo() const
@@ -1142,5 +1178,4 @@ namespace zyppng {
   {
     return d_func()->_sigFinished;
   }
-
 }

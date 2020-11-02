@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metalink version="3.0"
+  xmlns="http://www.metalinker.org/"
+  generator="http://metalinks.sourceforge.net/"
+  >
+<files>
+	<file name="primary.xml.zck">
+		<size>274638</size>
+		<verification>
+			<hash type="md5">e5b4a4abe414f4d71ab4074605b05c09</hash>
+			<hash type="sha1">22d7d67a9f7dd879906c58842973957dc4fe506a</hash>
+			<pieces length="262144" type="sha1">
+				<hash piece="0">2f13f8abd8501a05a66e4b9dd70e7af5b3977bb8</hash>
+				<hash piece="1">836b510886ff38a29d344ffa629087be134d1053</hash>
+			</pieces>
+		</verification>
+		<resources>
+			%1%
+		</resources>
+	</file>
+</files>
+</metalink>

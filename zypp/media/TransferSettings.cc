@@ -73,7 +73,7 @@ namespace zypp
 
 
     void TransferSettings::addHeader( std::string && val_r )
-    { if ( ! val_r.empty() ) _impl->_settingsObj.add_header( std::move(val_r) ); }
+    { if ( ! val_r.empty() ) *_impl->_settingsObj.add_header() = std::move(val_r); }
 
     TransferSettings::Headers TransferSettings::headers() const
     {

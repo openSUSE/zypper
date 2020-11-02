@@ -8,16 +8,18 @@
 ----------------------------------------------------------------------*/
 #include "private/medianetworkserver_p.h"
 #include <zypp/zyppng/media/network/downloader.h>
+#include <zypp/zyppng/media/network/downloadspec.h>
 #include <zypp/zyppng/media/network/private/mirrorcontrol_p.h>
 #include <zypp/zyppng/base/private/threaddata_p.h>
 #include <zypp/zyppng/base/private/linuxhelpers_p.h>
 #include <zypp/zyppng/base/EventLoop>
 #include <zypp/zyppng/base/EventDispatcher>
 #include <zypp/zyppng/base/SocketNotifier>
-#include <zypp/zyppng/messages.pb.h>
 
 #include <zypp/media/TransferSettings.h>
 #include <zypp/PathInfo.h>
+
+#include <zypp/zyppng/messages.pb.h>
 
 #define ZYPP_BASE_LOGGER_LOGGROUP "zypp::MediaNetworkServer"
 #include <zypp/base/Logger.h>
@@ -151,12 +153,7 @@ namespace zyppng {
     const auto &makeNewRequest = [this] ( zypp::proto::Request &&req ){
       auto newRequest = std::make_shared<Request>( );
       newRequest->request = std::move( req );
-      newRequest->dl = _server.downloader()->downloadFile( newRequest->request.url(), newRequest->request.targetpath(), newRequest->request.expectedfilesize() );
-      newRequest->dl->settings() = zyppng::TransferSettings( newRequest->request.settings() );
-
-      if ( newRequest->request.checkexistanceonly() )
-        newRequest->dl->setCheckExistsOnly( true );
-
+      newRequest->dl = _server.downloader()->downloadFile( newRequest->request.spec() );
       newRequest->dl->start();
 
       if ( newRequest->request.prioritize() )
@@ -251,10 +248,10 @@ namespace zyppng {
         // we got new auth data in the CredentialManager, lets restart all our requests that are currently
         // in failed auth state.
         for ( auto &req : _requests ) {
-          if ( req->dl->state() == Download::Failed
+          if ( req->dl->state() == Download::Finished && req->dl->hasError()
                && ( req->dl->lastRequestError().type() == NetworkRequestError::AuthFailed || req->dl->lastRequestError().type() == NetworkRequestError::Unauthorized ) ) {
-            MIL << "Found request waiting for Auth, restarting " << req->dl->url() << std::endl;
-            req->dl->settings().protoData() = data.settings();
+            MIL << "Found request waiting for Auth, restarting " << req->dl->spec().url() << std::endl;
+            req->dl->spec().settings().protoData() = data.settings();
             req->dl->start();
           }
         }
@@ -327,7 +324,7 @@ namespace zyppng {
 
         zypp::proto::DownloadProgress prog;
         prog.set_requestid( r.request.requestid() );
-        prog.set_url( r.request.url() );
+        prog.set_url( r.request.spec().url() );
         prog.set_now( now );
         this->sendMessage( prog );
       }),
@@ -340,7 +337,7 @@ namespace zyppng {
 
         zypp::proto::DownloadProgress prog;
         prog.set_requestid( r.request.requestid() );
-        prog.set_url( r.request.url() );
+        prog.set_url( r.request.spec().url() );
         prog.set_now( now );
         prog.set_total( total );
         this->sendMessage( prog );
@@ -355,13 +352,13 @@ namespace zyppng {
   {
     zypp::proto::DownloadStart start;
     start.set_requestid( r.request.requestid() );
-    start.set_url( r.request.url() );
+    start.set_url( r.request.spec().url() );
     this->sendMessage( start );
   }
 
   void MediaNetworkConn::trackedDlFinished( MediaNetworkConn::Request &r )
   {
-    MIL << "Download finished by MediaNetworkServer: " << r.request.url() << std::endl;
+    MIL << "Download finished by MediaNetworkServer: " << r.request.spec().url() << std::endl;
 
     zypp::proto::DownloadFin fin;
     fin.set_requestid( r.request.requestid() );
@@ -370,7 +367,7 @@ namespace zyppng {
     r.clearConnections();
 
     std::string err;
-    if ( r.dl->state() == Download::Success ) {
+    if ( !r.dl->hasError() ) {
       fin.clear_error();
     } else {
       const auto &lerr = r.dl->lastRequestError();
@@ -380,7 +377,7 @@ namespace zyppng {
 
       // this is rather ugly, we need to convert the extra infos to string
       // we will only handle the ones the client actually cares about
-      fin.mutable_error()->mutable_extra_info()->insert( { "requestUrl", lerr.extraInfoValue("requestUrl", r.dl->url()).asString() } );
+      fin.mutable_error()->mutable_extra_info()->insert( { "requestUrl", lerr.extraInfoValue("requestUrl", r.dl->spec().url()).asString() } );
       if ( lerr.type() == NetworkRequestError::Unauthorized )
         fin.mutable_error()->mutable_extra_info()->insert( { "authHint", lerr.extraInfoValue("authHint", std::string()) } );
     }

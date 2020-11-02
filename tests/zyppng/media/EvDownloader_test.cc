@@ -1,10 +1,12 @@
 #include <zypp/zyppng/base/EventLoop>
 #include <zypp/zyppng/base/EventDispatcher>
 #include <zypp/zyppng/media/network/downloader.h>
+#include <zypp/zyppng/media/network/downloadspec.h>
 #include <zypp/zyppng/media/network/networkrequesterror.h>
 #include <zypp/zyppng/media/network/networkrequestdispatcher.h>
 #include <zypp/zyppng/media/network/request.h>
 #include <zypp/media/CredentialManager.h>
+#include <zypp/Digest.h>
 #include <zypp/TmpPath.h>
 #include <zypp/PathInfo.h>
 #include <zypp/ZConfig.h>
@@ -19,14 +21,15 @@
 
 #define BOOST_TEST_REQ_SUCCESS(REQ) \
   do { \
-      BOOST_REQUIRE_MESSAGE( REQ->state() == zyppng::Download::Success, zypp::str::Format(" %1% != zyppng::Download::Success (%2%)") % REQ->state() % REQ->errorString() ); \
+      BOOST_REQUIRE_MESSAGE( REQ->state() == zyppng::Download::Finished && !REQ->hasError(), zypp::str::Format(" %1% != zyppng::Download::Success (%2%)") % REQ->state() % REQ->errorString() ); \
       BOOST_REQUIRE_EQUAL( REQ->lastRequestError().type(), zyppng::NetworkRequestError::NoError ); \
       BOOST_REQUIRE( REQ->errorString().empty() ); \
   } while(false)
 
 #define BOOST_TEST_REQ_FAILED(REQ) \
   do { \
-      BOOST_REQUIRE_EQUAL( REQ->state(), zyppng::Download::Failed ); \
+      BOOST_REQUIRE_EQUAL( REQ->state(), zyppng::Download::Finished ); \
+      BOOST_REQUIRE( REQ->hasError() ); \
       BOOST_REQUIRE_NE( REQ->lastRequestError().type(), zyppng::NetworkRequestError::NoError ); \
       BOOST_REQUIRE( !REQ->errorString().empty() ); \
   } while(false)
@@ -39,7 +42,7 @@ BOOST_DATA_TEST_CASE( dltest_basic, bdata::make( withSSL ), withSSL)
 {
   auto ev = zyppng::EventLoop::create();
 
-  zyppng::Downloader downloader;
+  zyppng::Downloader::Ptr downloader = std::make_shared<zyppng::Downloader>();
 
   //make sure the data here is big enough to cross the threshold of 256 bytes so we get a progress signal emitted and not only the alive signal.
   std::string dummyContent = "This is just some dummy content,\nto test downloading and signals.\n"
@@ -66,8 +69,8 @@ BOOST_DATA_TEST_CASE( dltest_basic, bdata::make( withSSL ), withSSL)
   std::vector<zyppng::Download::State> allStates;
 
 
-  zyppng::Download::Ptr dl = downloader.downloadFile(  weburl, targetFile.path(), dummyContent.length() );
-  dl->settings() = set;
+  zyppng::Download::Ptr dl = downloader->downloadFile(  zyppng::DownloadSpec(weburl, targetFile.path(), dummyContent.length()) );
+  dl->spec().setTransferSettings( set );
 
   dl->sigFinished().connect([&]( zyppng::Download & ){
     gotFinished = true;
@@ -101,20 +104,25 @@ BOOST_DATA_TEST_CASE( dltest_basic, bdata::make( withSSL ), withSSL)
   BOOST_REQUIRE( gotAlive );
   BOOST_REQUIRE_EQUAL( totalDL, dummyContent.length() );
   BOOST_REQUIRE_EQUAL( lastProgress, dummyContent.length() );
-  BOOST_REQUIRE ( allStates == std::vector<zyppng::Download::State>({zyppng::Download::Initializing,zyppng::Download::Running, zyppng::Download::Success}) );
+  BOOST_REQUIRE ( allStates == std::vector<zyppng::Download::State>({zyppng::Download::DlMetaLinkInfo, zyppng::Download::Finished}) );
 }
-
 
 struct MirrorSet
 {
   std::string name; //<dataset name, used only in debug output if the test fails
-  std::string handlerPath; //< the webhandler path used to query the resource
+  std::string filename; //< the name of the file we want to query, the test will base all other handlers and filenames on this
+  zypp::ByteCount dlTotal;
   std::vector< std::pair<int, std::string> > mirrors; //all mirrors injected into the metalink file
   int expectedFileDownloads; //< how many downloads are direct file downloads
   int expectedHandlerDownloads; //< how many started downloads are handler requests
   std::vector<zyppng::Download::State> expectedStates;
   bool expectSuccess; //< should the download work out?
   zypp::ByteCount chunkSize = zypp::ByteCount( 256, zypp::ByteCount::K );
+
+  //zck data
+  zypp::CheckSum  headerChecksum; //< ZChunk header checksum
+  zypp::ByteCount headerSize;     //< ZChunk header size
+  std::string     deltaFilePath;  //< ZChunk delta file
 
   std::ostream & operator<<( std::ostream & str ) const {
     str << "MirrorSet{ " << name << " }";
@@ -134,53 +142,63 @@ struct print_log_value< MirrorSet > {
 std::vector< MirrorSet > generateMirr ()
 {
   std::vector< MirrorSet > res;
-
+#if 1
   //all mirrors good:
   res.push_back( MirrorSet() );
   res.back().name = "All good mirrors";
+  res.back().filename = "test.txt";
+  res.back().dlTotal = 2148018;
   res.back().expectSuccess = true;
   res.back().expectedHandlerDownloads  = 1;
   res.back().expectedFileDownloads  = 9;
-  res.back().expectedStates = {zyppng::Download::Initializing, zyppng::Download::PrepareMulti, zyppng::Download::RunningMulti, zyppng::Download::Success};
+  res.back().expectedStates = { zyppng::Download::DlMetaLinkInfo, zyppng::Download::PrepareMulti, zyppng::Download::DlMetalink, zyppng::Download::Finished};
   for ( int i = 100 ; i >= 10; i -= 10 )
     res.back().mirrors.push_back( std::make_pair( i, "/test.txt") );
 
   //all mirrors good big chunk
   res.push_back( MirrorSet() );
   res.back().name = "All good mirrors, 1024 chunk size";
+  res.back().filename = "test.txt";
+  res.back().dlTotal = 2148018;
   res.back().expectSuccess = true;
   res.back().expectedHandlerDownloads  = 1;
   res.back().expectedFileDownloads  = 3;
   res.back().chunkSize = zypp::ByteCount( 1024, zypp::ByteCount::K );
-  res.back().expectedStates = {zyppng::Download::Initializing, zyppng::Download::PrepareMulti, zyppng::Download::RunningMulti, zyppng::Download::Success};
+  res.back().expectedStates = { zyppng::Download::DlMetaLinkInfo, zyppng::Download::PrepareMulti, zyppng::Download::DlMetalink, zyppng::Download::Finished};
   for ( int i = 100 ; i >= 10; i -= 10 )
     res.back().mirrors.push_back( std::make_pair( i, "/test.txt") );
 
   //no mirrors:
   res.push_back( MirrorSet() );
   res.back().name = "Empty mirrors";
+  res.back().filename = "test.txt";
+  res.back().dlTotal = 2148018;
   res.back().expectSuccess = true;
   res.back().expectedHandlerDownloads  = 10;
   res.back().expectedFileDownloads  = 0;
-  res.back().expectedStates = {zyppng::Download::Initializing, zyppng::Download::PrepareMulti, zyppng::Download::RunningMulti, zyppng::Download::Success};
+  res.back().expectedStates = { zyppng::Download::DlMetaLinkInfo, zyppng::Download::PrepareMulti, zyppng::Download::DlMetalink, zyppng::Download::Finished};
 
   //only broken mirrors:
   res.push_back( MirrorSet() );
   res.back().name = "All broken mirrors";
+  res.back().filename = "test.txt";
+  res.back().dlTotal = 2148018;
   res.back().expectSuccess = true;
   res.back().expectedHandlerDownloads  = 2; //has to fall back to url handler download
   res.back().expectedFileDownloads  = 10; //should try all mirrors and fail
-  res.back().expectedStates = {zyppng::Download::Initializing, zyppng::Download::PrepareMulti, zyppng::Download::RunningMulti, zyppng::Download::Running, zyppng::Download::Success};
+  res.back().expectedStates = { zyppng::Download::DlMetaLinkInfo, zyppng::Download::PrepareMulti, zyppng::Download::DlMetalink, zyppng::Download::DlSimple, zyppng::Download::Finished};
   for ( int i = 100 ; i >= 10; i -= 10 )
     res.back().mirrors.push_back( std::make_pair( i, "/doesnotexist.txt") );
 
   //some broken mirrors:
   res.push_back( MirrorSet() );
   res.back().name = "Some broken mirrors less URLs than blocks";
+  res.back().filename = "test.txt";
+  res.back().dlTotal = 2148018;
   res.back().expectSuccess = true;
   res.back().expectedHandlerDownloads = 1;
   res.back().expectedFileDownloads = 9 + 3; // 3 should fail due to broken mirrors
-  res.back().expectedStates = {zyppng::Download::Initializing, zyppng::Download::PrepareMulti, zyppng::Download::RunningMulti, zyppng::Download::Success};
+  res.back().expectedStates = { zyppng::Download::DlMetaLinkInfo, zyppng::Download::PrepareMulti, zyppng::Download::DlMetalink, zyppng::Download::Finished};
   for ( int i = 10 ; i >= 5; i-- ) {
     if ( i % 2 ) {
       res.back().mirrors.push_back( std::make_pair( i*10, "/doesnotexist.txt") );
@@ -192,13 +210,15 @@ std::vector< MirrorSet > generateMirr ()
   //some broken mirrors with more URLs than blocks:
   res.push_back( MirrorSet() );
   res.back().name = "Some broken mirrors more URLs than blocks";
+  res.back().filename = "test.txt";
+  res.back().dlTotal = 2148018;
   res.back().expectSuccess = true;
   res.back().expectedHandlerDownloads = 1;
   //its not really possible to know how many times the downloads will fail, there are
   //5 broken mirrors in the set, but if a working mirror is done before the last broken
   //URL is picked from the dataset not all broken URLs will be used
   res.back().expectedFileDownloads  = -1;
-  res.back().expectedStates = {zyppng::Download::Initializing, zyppng::Download::PrepareMulti, zyppng::Download::RunningMulti, zyppng::Download::Success};
+  res.back().expectedStates = { zyppng::Download::DlMetaLinkInfo, zyppng::Download::PrepareMulti, zyppng::Download::DlMetalink, zyppng::Download::Finished};
   for ( int i = 10 ; i >= 1; i-- ) {
     if ( i % 2 ) {
       res.back().mirrors.push_back( std::make_pair( i*10, "/doesnotexist.txt") );
@@ -210,13 +230,15 @@ std::vector< MirrorSet > generateMirr ()
   //mirrors where some return a invalid block
   res.push_back( MirrorSet() );
   res.back().name = "Some mirrors return broken blocks";
+  res.back().filename = "test.txt";
+  res.back().dlTotal = 2148018;
   res.back().expectSuccess = true;
   res.back().expectedHandlerDownloads  = 1;
   //its not really possible to know how many times the downloads will fail, there are
   //5 broken mirrors in the set, but if a working mirror is done before the last broken
   //URL is picked from the dataset not all broken URLs will be used
   res.back().expectedFileDownloads  = -1;
-  res.back().expectedStates = {zyppng::Download::Initializing, zyppng::Download::PrepareMulti, zyppng::Download::RunningMulti, zyppng::Download::Success};
+  res.back().expectedStates = { zyppng::Download::DlMetaLinkInfo, zyppng::Download::PrepareMulti, zyppng::Download::DlMetalink, zyppng::Download::Finished};
   for ( int i = 10 ; i >= 1; i-- ) {
     if ( i % 2 ) {
       res.back().mirrors.push_back( std::make_pair( i*10, "/handler/random") );
@@ -224,6 +246,23 @@ std::vector< MirrorSet > generateMirr ()
       res.back().mirrors.push_back( std::make_pair( i*10, "/test.txt") );
     }
   }
+#endif
+  //all mirrors good with zck:
+  res.push_back( MirrorSet() );
+  res.back().name = "All good mirrors with zck";
+  res.back().filename = "primary.xml.zck";
+  res.back().dlTotal = 274638;
+  res.back().expectSuccess = true;
+  res.back().expectedHandlerDownloads  = 1;
+  res.back().expectedFileDownloads  = 9;
+  res.back().expectedStates = { zyppng::Download::DetectMetaLink, zyppng::Download::DlMetaLinkInfo, zyppng::Download::PrepareMulti, zyppng::Download::DlZChunkHead, zyppng::Download::DlZChunk, zyppng::Download::Finished};
+  res.back().headerChecksum = zypp::CheckSum( zypp::Digest::sha256(), "90a1a1b99ba3b6c8ae9f14b0c8b8c43141c69ec3388bfa3b9915fbeea03926b7");
+  res.back().headerSize     = 11717;
+  res.back().deltaFilePath  = "primary-deltatemplate.xml.zck";
+  res.back().chunkSize      = zypp::ByteCount( 4, zypp::ByteCount::K );
+  for ( int i = 100 ; i >= 10; i -= 10 )
+    res.back().mirrors.push_back( std::make_pair( i, "/primary.xml.zck") );
+
   return res;
 }
 
@@ -249,23 +288,23 @@ static bool requestWantsMetaLink ( const WebServer::Request &req )
 
 //creates a request handler for the Mock WebServer that returns the metalink data
 //specified in \a data if the request has the metalink accept handler
-WebServer::RequestHandler makeMetaFileHandler ( const std::string *data )
+WebServer::RequestHandler makeMetaFileHandler ( const std::string &fName, const std::string *data )
 {
-  return [ data ]( WebServer::Request &req ){
+  return [ data, fName ]( WebServer::Request &req ){
     if ( requestWantsMetaLink( req ) ) {
       req.rout << WebServer::makeResponseString( "200", { "Content-Type: application/metalink+xml; charset=utf-8\r\n" }, *data );
       return;
     }
-    req.rout << "Location: /test.txt\r\n\r\n";
+    req.rout << "Location: /"<<fName<<"\r\n\r\n";
     return;
   };
 };
 
 //creates a request handler for the Mock WebServer that returns a junk block of
 //data for a range request, otherwise relocates the request
-WebServer::RequestHandler makeJunkBlockHandler ( )
+WebServer::RequestHandler makeJunkBlockHandler ( const std::string &fName )
 {
-  return [ ]( WebServer::Request &req ){
+  return [ fName ]( WebServer::Request &req ){
     auto it = req.params.find( "HTTP_RANGE" );
     if ( it != req.params.end() && zypp::str::startsWith( it->second, "bytes=" ) ) {
         //bytes=786432-1048575
@@ -292,23 +331,26 @@ WebServer::RequestHandler makeJunkBlockHandler ( )
           return;
         }
     }
-    req.rout << "Location: /test.txt\r\n\r\n";
+    req.rout << "Location: /"<<fName<<"\r\n\r\n";
     return;
   };
 };
 
-int maxConcurrentDLs[] = { 1, 2, 4, 8, 10, 15 };
+int maxConcurrentDLs[] = { /*1, 2, 4, 8, 10, 15*/ 10 };
 
 BOOST_DATA_TEST_CASE( test1, bdata::make( generateMirr() ) * bdata::make( withSSL ) * bdata::make( maxConcurrentDLs )  , elem, withSSL, maxDLs )
 {
+
+  zypp::Pathname testRoot = zypp::Pathname(TESTS_SRC_DIR)/"zyppng/data/downloader";
+
   //each URL in the metalink file has a preference , a schema and of course the URL, we need to adapt those to our test setup
   //so we generate the file on the fly from a template in the test data
-  std::string metaTempl = TestTools::readFile ( zypp::Pathname(TESTS_SRC_DIR)/"/zyppng/data/downloader/test.txt.meta" );
+  std::string metaTempl = TestTools::readFile ( testRoot/( zypp::str::Format("%1%.meta") % elem.filename ).str() );
   BOOST_REQUIRE( !metaTempl.empty() );
 
   auto ev = zyppng::EventLoop::create();
 
-  WebServer web((zypp::Pathname(TESTS_SRC_DIR)/"/zyppng/data/downloader").c_str(), 10001, withSSL );
+  WebServer web( testRoot.c_str(), 10001, withSSL );
   BOOST_REQUIRE( web.start() );
 
   zypp::filesystem::TmpFile targetFile;
@@ -317,7 +359,7 @@ BOOST_DATA_TEST_CASE( test1, bdata::make( generateMirr() ) * bdata::make( withSS
 
   //first metalink download, generate a fully valid one
   zyppng::Url weburl (web.url());
-  weburl.setPathName("/handler/test.txt");
+  weburl.setPathName( zypp::str::Format("/handler/%1%") % elem.filename );
 
   std::string urls;
   if ( elem.mirrors.size() ) {
@@ -329,8 +371,8 @@ BOOST_DATA_TEST_CASE( test1, bdata::make( generateMirr() ) * bdata::make( withSS
   }
 
   std::string metaFile = zypp::str::Format( metaTempl ) % urls;
-  web.addRequestHandler("test.txt", makeMetaFileHandler( &metaFile ) );
-  web.addRequestHandler("random", makeJunkBlockHandler( ) );
+  web.addRequestHandler( elem.filename, makeMetaFileHandler(  elem.filename, &metaFile ) );
+  web.addRequestHandler("random", makeJunkBlockHandler( elem.filename ) );
 
   int expectedDownloads = elem.expectedHandlerDownloads + elem.expectedFileDownloads;
   int startedDownloads = 0;
@@ -346,9 +388,13 @@ BOOST_DATA_TEST_CASE( test1, bdata::make( generateMirr() ) * bdata::make( withSS
   int countHandlerReq = 0; //the requests made to the handler slot
   int countFileReq = 0;    //the requests made to the file directly, e.g. a mirror read from the metalink file
 
-  auto dl = downloader.downloadFile( weburl, targetFile );
-  dl->settings() = web.transferSettings();
-  dl->setPreferredChunkSize( elem.chunkSize );
+  auto dl = downloader.downloadFile( zyppng::DownloadSpec(weburl, targetFile) );
+  dl->spec().setTransferSettings( web.transferSettings() )
+    .setPreferredChunkSize( elem.chunkSize )
+    .setHeaderSize( elem.headerSize )
+    .setHeaderChecksum( elem.headerChecksum )
+    .setDeltaFile( elem.deltaFilePath.empty() ? zypp::Pathname() : testRoot/elem.deltaFilePath )
+    .setExpectedFileSize( elem.dlTotal );
 
   dl->dispatcher().sigDownloadStarted().connect( [&]( zyppng::NetworkRequestDispatcher &, zyppng::NetworkRequest &req){
     startedDownloads++;
@@ -381,7 +427,7 @@ BOOST_DATA_TEST_CASE( test1, bdata::make( generateMirr() ) * bdata::make( withSS
   });
 
   dl->sigStateChanged().connect([&]( zyppng::Download &, zyppng::Download::State state ){
-    if ( state == zyppng::Download::RunningMulti )
+    if ( state == zyppng::Download::DlMetalink )
       gotMultiDLState = true;
   });
 
@@ -406,7 +452,8 @@ BOOST_DATA_TEST_CASE( test1, bdata::make( generateMirr() ) * bdata::make( withSS
   BOOST_REQUIRE( gotAlive );
   BOOST_REQUIRE( gotProgress );
   BOOST_REQUIRE( gotMultiDLState );
-  BOOST_REQUIRE_EQUAL( lastProgress, 2148018 );
+  if ( elem.dlTotal > 0 )
+    BOOST_REQUIRE_EQUAL( lastProgress, elem.dlTotal );
   BOOST_REQUIRE_EQUAL( lastProgress, gotTotal );
 
   if ( elem.expectedHandlerDownloads > -1 )
@@ -486,8 +533,8 @@ BOOST_DATA_TEST_CASE( dltest_auth, bdata::make( withSSL ), withSSL )
   web.addRequestHandler( "quit", [ &ev ]( WebServer::Request & ){ ev->quit();} );
 
   {
-    auto dl = downloader.downloadFile( weburl, targetFile.path() );
-    dl->settings() = set;
+    auto dl = downloader.downloadFile( zyppng::DownloadSpec(weburl, targetFile.path()) );
+    dl->spec().setTransferSettings(set);
 
     dl->sigFinished( ).connect([ &ev ]( zyppng::Download & ){
       ev->quit();
@@ -500,8 +547,8 @@ BOOST_DATA_TEST_CASE( dltest_auth, bdata::make( withSSL ), withSSL )
   }
 
   {
-    auto dl = downloader.downloadFile( weburl, targetFile.path() );
-    dl->settings() = set;
+    auto dl = downloader.downloadFile( zyppng::DownloadSpec(weburl, targetFile.path()) );
+    dl->spec().setTransferSettings(set);
 
     int gotAuthRequest = 0;
 
@@ -527,8 +574,8 @@ BOOST_DATA_TEST_CASE( dltest_auth, bdata::make( withSSL ), withSSL )
   {
     int gotAuthRequest = 0;
     std::vector<zyppng::Download::State> allStates;
-    auto dl = downloader.downloadFile( weburl, targetFile.path() );
-    dl->settings() = set;
+    auto dl = downloader.downloadFile( zyppng::DownloadSpec(weburl, targetFile.path()) );
+    dl->spec().setTransferSettings(set);
 
     dl->sigFinished( ).connect([ &ev ]( zyppng::Download & ){
       ev->quit();
@@ -549,14 +596,14 @@ BOOST_DATA_TEST_CASE( dltest_auth, bdata::make( withSSL ), withSSL )
     ev->run();
     BOOST_TEST_REQ_SUCCESS( dl );
     BOOST_REQUIRE_EQUAL( gotAuthRequest, 1 );
-    BOOST_REQUIRE ( allStates == std::vector<zyppng::Download::State>({zyppng::Download::Initializing, zyppng::Download::PrepareMulti, zyppng::Download::RunningMulti, zyppng::Download::Success}) );
+    BOOST_REQUIRE ( allStates == std::vector<zyppng::Download::State>({ zyppng::Download::DlMetaLinkInfo, zyppng::Download::PrepareMulti, zyppng::Download::DlMetalink, zyppng::Download::Finished}) );
   }
 
   {
     //the creds should be in the credential manager now, we should not need to specify them again in the slot
     bool gotAuthRequest = false;
-    auto dl = downloader.downloadFile( weburl, targetFile.path() );
-    dl->settings() = set;
+    auto dl = downloader.downloadFile( zyppng::DownloadSpec(weburl, targetFile.path()) );
+    dl->spec().setTransferSettings(set);
 
     dl->sigFinished( ).connect([ &ev ]( zyppng::Download & ){
       ev->quit();
@@ -620,10 +667,10 @@ BOOST_DATA_TEST_CASE( dltest_auth_basic, bdata::make( withSSL ), withSSL )
     });
 
 
-    auto dl = downloader.downloadFile( weburl, targetFile.path() );
-    dl->setMultiPartHandlingEnabled( false );
-
-    dl->settings() = set;
+    auto dl = downloader.downloadFile( zyppng::DownloadSpec(weburl, targetFile.path())
+      .setMetalinkEnabled( false )
+      .setTransferSettings( set )
+    );
 
     dl->sigFinished( ).connect([ &ev ]( zyppng::Download & ){
       ev->quit();

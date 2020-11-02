@@ -56,7 +56,12 @@ MediaBlockList::setFileChecksum(std::string ctype, int cl, unsigned char *c)
   memcpy(&fsum[0], c, cl);
 }
 
-const std::vector<unsigned char> &MediaBlockList::getFileChecksum()
+std::string MediaBlockList::fileChecksumType() const
+{
+  return fsumtype;
+}
+
+const UByteArray &MediaBlockList::getFileChecksum()
 {
   return fsum;
 }
@@ -208,14 +213,19 @@ MediaBlockList::checkChecksum(size_t blkno, const unsigned char *buf, size_t buf
   return verifyDigest(blkno, dig);
 }
 
-std::vector<unsigned char> MediaBlockList::getChecksum(size_t blkno) const
+UByteArray MediaBlockList::getChecksum(size_t blkno) const
 {
   if ( !haveChecksum(blkno) )
     return {};
 
-  std::vector<unsigned char> buf ( chksumlen, '\0' );
+  UByteArray buf ( chksumlen, '\0' );
   memcpy( buf.data(), chksums.data()+(chksumlen * blkno), chksumlen );
   return buf;
+}
+
+std::string MediaBlockList::getChecksumType() const
+{
+  return chksumtype;
 }
 
 // specialized version of checkChecksum that can deal with a "rotated" buffer
