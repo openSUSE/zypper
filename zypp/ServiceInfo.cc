@@ -173,7 +173,7 @@ namespace zypp
   std::ostream & ServiceInfo::dumpAsIniOn( std::ostream & str ) const
   {
     RepoInfoBase::dumpAsIniOn(str)
-      << "url = " << rawUrl() << endl
+      << "url = " << hotfix1050625::asString( rawUrl() ) << endl
       << "type = " << type() << endl;
 
     if ( ttl() )

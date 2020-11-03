@@ -934,7 +934,7 @@ namespace zypp
       std::string indent;
       for ( const auto & url : _pimpl->baseUrls().raw() )
       {
-        str << indent << url << endl;
+        str << indent << hotfix1050625::asString( url ) << endl;
 	if ( indent.empty() ) indent = "        ";	// "baseurl="
       }
     }
@@ -943,7 +943,7 @@ namespace zypp
       str << "path="<< path() << endl;
 
     if ( ! (rawMirrorListUrl().asString().empty()) )
-      str << (_pimpl->_mirrorListForceMetalink ? "metalink=" : "mirrorlist=") << rawMirrorListUrl() << endl;
+      str << (_pimpl->_mirrorListForceMetalink ? "metalink=" : "mirrorlist=") << hotfix1050625::asString( rawMirrorListUrl() ) << endl;
 
     if ( type() != repo::RepoType::NONE )
       str << "type=" << type().asString() << endl;

@@ -877,6 +877,11 @@ namespace zypp
     return (lhs.asCompleteString() != rhs.asCompleteString());
   }
 
+  namespace hotfix1050625 {
+    std::string asString( const Url & url_r )
+    { return url_r.m_impl->asString1050625(); }
+  }
+
   ////////////////////////////////////////////////////////////////////
 } // namespace zypp
 //////////////////////////////////////////////////////////////////////

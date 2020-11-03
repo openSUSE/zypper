@@ -230,6 +230,7 @@ namespace zypp
         return o.opt & opt;
       }
 
+      static const ViewOption hotfix1050625;
     private:
       ViewOption(int option);
       int opt;
@@ -999,7 +1000,7 @@ namespace zypp
       void
       setViewOptions(const ViewOptions &vopts);
 
-
+      std::string asString1050625() const;
     protected:
       /**
        * Utility method to cleanup an encoded path name.

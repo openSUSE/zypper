@@ -75,6 +75,8 @@ namespace zypp
     const ViewOption  ViewOption::EMPTY_QUERY_STR   = 0x1000;
     const ViewOption  ViewOption::EMPTY_FRAGMENT    = 0x2000;
     const ViewOption  ViewOption::DEFAULTS          = 0x07bb;
+
+    const ViewOption  ViewOption::hotfix1050625     = 0x8000;
     /*
     const ViewOption  ViewOption::DEFAULTS          =
                       ViewOption::WITH_SCHEME       +
@@ -135,7 +137,7 @@ namespace zypp
       { return fullStr(); }
 
       const std::string & str( const ViewOptions & viewopts_r ) const
-      { return viewopts_r.has( ViewOptions::WITH_PASSWORD ) ? fullStr() : safeStr(); }
+      { return (viewopts_r.has( ViewOptions::WITH_PASSWORD ) || viewopts_r.has( ViewOptions::hotfix1050625 )) ? fullStr() : safeStr(); }
 
       const std::string & fullStr() const
       { return _fullQuerytsr; }
@@ -503,6 +505,12 @@ namespace zypp
       return asString(getViewOptions());
     }
 
+    std::string UrlBase::asString1050625() const
+    {
+      // Temp. fix to keep the proxypass in the query when writing the .repo files,
+      // but otherwise hiding it, when WITH_PASSWORD is not set.
+      return asString(getViewOptions()+ViewOptions::hotfix1050625);
+    }
 
     // ---------------------------------------------------------------
     std::string

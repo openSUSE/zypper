@@ -20,6 +20,10 @@
 namespace zypp
 { ////////////////////////////////////////////////////////////////////
 
+  class Url;
+  namespace hotfix1050625 {
+    std::string asString( const Url & url_r );
+  }
   namespace filesystem {
     class Pathname;
   }
@@ -821,6 +825,7 @@ namespace zypp
     setViewOptions(const ViewOptions &vopts);
 
   private:
+    friend std::string hotfix1050625::asString( const Url & url_r );
     url::UrlRef m_impl;
   };
 
