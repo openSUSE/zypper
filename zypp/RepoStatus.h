@@ -73,14 +73,14 @@ namespace zypp
     void saveToCookieFile( const Pathname & path_r ) const;
 
   public:
-    /** Whether the status is empty (default constucted) */
+    /** Whether the status is empty (empty checksum) */
     bool empty() const;
 
     /** The time the data were changed the last time */
     Date timestamp() const;
 
   public:
-    struct Impl;			///< Implementation
+    struct Impl;		///< Implementation
   private:
     RWCOW_pointer<Impl> _pimpl;	///< Pointer to implementation
   };

@@ -12,6 +12,7 @@
 #include <iostream>
 #include <sstream>
 #include <fstream>
+#include <set>
 #include <zypp/base/Logger.h>
 #include <zypp/base/String.h>
 #include <zypp/RepoStatus.h>
@@ -21,36 +22,12 @@ using std::endl;
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
-{ /////////////////////////////////////////////////////////////////
-
+{
   ///////////////////////////////////////////////////////////////////
-  //
-  //	CLASS NAME : RepoStatus::Impl
-  //
-  /** RepoStatus implementation. */
-  struct RepoStatus::Impl
+  namespace
   {
-  public:
-    std::string _checksum;
-    Date _timestamp;
-
-    // NOTE: Changing magic will at once invalidate all solv file caches.
-    // Helpfull if solv file content must be refreshed (e.g. due to different
-    // repo2* arguments) even if raw metadata are unchanged.
-    // Only values set from a RepoStatus ctor need magic to be added.
-    void assignFromCtor( std::string && checksum_r, Date && timestamp_r )
-    {
-      _checksum = std::move(checksum_r);
-      _timestamp = std::move(timestamp_r);
-      if ( !_checksum.empty() )
-      {
-	static const std::string magic( "43" );
-	_checksum += magic;
-      }
-    }
-
     /** Recursive computation of max dir timestamp. */
-    static void recursive_timestamp( const Pathname & dir_r, time_t & max_r )
+    void recursiveTimestamp( const Pathname & dir_r, time_t & max_r )
     {
       std::list<std::string> dircontent;
       if ( filesystem::readdir( dircontent, dir_r, false/*no dots*/ ) != 0 )
@@ -63,10 +40,101 @@ namespace zypp
 	{
 	  if ( pi.mtime() > max_r )
 	    max_r = pi.mtime();
-	  recursive_timestamp( pi.path(), max_r );
+	  recursiveTimestamp( pi.path(), max_r );
 	}
       }
     }
+  } // namespace
+  ///////////////////////////////////////////////////////////////////
+
+  ///////////////////////////////////////////////////////////////////
+  //
+  //	CLASS NAME : RepoStatus::Impl
+  //
+  /** RepoStatus implementation. */
+  struct RepoStatus::Impl
+  {
+    using Checksums = std::set<std::string>;
+
+  public:
+    /** Assign data called from RepoStatus ctor (adds magic).
+     *
+     * \Note Changing magic will at once invalidate all solv file caches.
+     * Helpfull if solv file content must be refreshed (e.g. due to different
+     * repo2solv arguments) even if raw metadata are unchanged. Only values
+     * set from a RepoStatus ctor need magic to be added!
+     */
+    void assignFromCtor( std::string && checksum_r, Date && timestamp_r )
+    {
+      if ( !checksum_r.empty() ) {
+	static const std::string magic( "43" );
+	checksum_r += magic;
+	_checksums.insert( std::move(checksum_r) );
+      }
+      _timestamp = std::move(timestamp_r);
+    }
+
+    /** Inject raw data (no magic added). */
+    void inject( std::string && checksum_r, Date && timestamp_r )
+    {
+      if ( !checksum_r.empty() ) {
+	_checksums.insert( std::move(checksum_r) );
+	_cachedchecksum.reset();
+      }
+
+      if ( timestamp_r > _timestamp )
+	_timestamp = timestamp_r;
+    }
+
+    /** Inject the raw data from rhs */
+    void injectFrom( const Impl & rhs )
+    {
+      if ( &rhs != this ) {	// no self insert
+
+	if ( !rhs._checksums.empty() ) {
+	  _checksums.insert( rhs._checksums.begin(), rhs._checksums.end() );
+	  _cachedchecksum.reset();
+	}
+
+	if ( rhs._timestamp > _timestamp )
+	  _timestamp = rhs._timestamp;
+      }
+    }
+
+    bool empty() const
+    { return _checksums.empty(); }
+
+    std::string checksum() const
+    {
+      std::string ret;
+      if ( !_checksums.empty() ) {
+	if ( _checksums.size() == 1 )
+	  ret = *_checksums.begin();
+	else {
+	  if ( !_cachedchecksum ) {
+	    std::stringstream ss;
+	    for ( std::string_view c : _checksums )
+	      ss << c;
+	    _cachedchecksum = CheckSum::sha1(ss).checksum();
+	  }
+	  ret = *_cachedchecksum;
+	}
+      }
+      return ret;
+    }
+
+    Date timestamp() const
+    { return _timestamp; }
+
+    /** Dump to log file (not to/from CookieFile). */
+    std::ostream & dumpOn( std::ostream & str ) const
+    { return str << ( empty() ? "NO_REPOSTATUS" : checksum() ) << " " << time_t(_timestamp); }
+
+  private:
+    Checksums _checksums;
+    Date _timestamp;
+
+    mutable std::optional<std::string> _cachedchecksum;
 
   private:
     friend Impl * rwcowClone<Impl>( const Impl * rhs );
@@ -75,10 +143,6 @@ namespace zypp
     { return new Impl( *this ); }
   };
   ///////////////////////////////////////////////////////////////////
-
-  /** \relates RepoStatus::Impl Stream output */
-  inline std::ostream & operator<<( std::ostream & str, const RepoStatus::Impl & obj )
-  { return str << obj._checksum << " " << (time_t)obj._timestamp; }
 
   ///////////////////////////////////////////////////////////////////
   //
@@ -103,7 +167,7 @@ namespace zypp
       else if ( info.isDir() )
       {
 	time_t t = info.mtime();
-	Impl::recursive_timestamp( path_r, t );
+	recursiveTimestamp( path_r, t );
 	_pimpl->assignFromCtor( CheckSum::sha1FromString( str::numstring( t ) ).checksum(), Date( t ) );
       }
     }
@@ -128,10 +192,10 @@ namespace zypp
     }
     else
     {
-      // line := "[checksum] time_t"
-      std::string line( str::getline( file ) );
-      ret._pimpl->_timestamp = Date( str::strtonum<time_t>( str::stripLastWord( line ) ) );
-      ret._pimpl->_checksum = line;
+      // line := "[checksum] time_t"  !!! strip time from line
+      std::string line { str::getline( file ) };
+      Date        stmp { str::strtonum<time_t>( str::stripLastWord( line ) ) };
+      ret._pimpl->inject( std::move(line), std::move(stmp) );	// raw inject to avoid magic being added
     }
     return ret;
   }
@@ -142,42 +206,28 @@ namespace zypp
     if (!file) {
       ZYPP_THROW (Exception( "Can't open " + path_r.asString() ) );
     }
-    file << _pimpl->_checksum << " " << (time_t)_pimpl->_timestamp << endl;
+    file << _pimpl->checksum() << " " << time_t(_pimpl->timestamp()) << endl;
     file.close();
   }
 
   bool RepoStatus::empty() const
-  { return _pimpl->_checksum.empty(); }
+  { return _pimpl->empty(); }
 
   Date RepoStatus::timestamp() const
-  { return _pimpl->_timestamp; }
+  { return _pimpl->timestamp(); }
 
   std::ostream & operator<<( std::ostream & str, const RepoStatus & obj )
-  { return str << *obj._pimpl; }
+  { return obj._pimpl->dumpOn( str ); }
 
   RepoStatus operator&&( const RepoStatus & lhs, const RepoStatus & rhs )
   {
-    RepoStatus result;
-
-    if ( lhs.empty() )
-      result = rhs;
-    else if ( rhs.empty() )
-      result = lhs;
-    else
-    {
-      // order strings to assert && is kommutativ
-      std::string lchk( lhs._pimpl->_checksum );
-      std::string rchk( rhs._pimpl->_checksum );
-      std::stringstream ss( lchk < rchk ? lchk+rchk : rchk+lchk );
-
-      result._pimpl->_checksum = CheckSum::sha1(ss).checksum();
-      result._pimpl->_timestamp = std::max( lhs._pimpl->_timestamp, rhs._pimpl->_timestamp );
-    }
+    RepoStatus result { lhs };
+    result._pimpl->injectFrom( *rhs._pimpl );
     return result;
   }
 
   bool operator==( const RepoStatus & lhs, const RepoStatus & rhs )
-  { return lhs._pimpl->_checksum == rhs._pimpl->_checksum; }
+  { return lhs._pimpl->checksum() == rhs._pimpl->checksum(); }
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
