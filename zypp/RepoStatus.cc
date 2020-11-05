@@ -16,6 +16,7 @@
 #include <zypp/base/Logger.h>
 #include <zypp/base/String.h>
 #include <zypp/RepoStatus.h>
+#include <zypp/RepoInfo.h>
 #include <zypp/PathInfo.h>
 
 using std::endl;
@@ -89,16 +90,16 @@ namespace zypp
     /** Inject the raw data from rhs */
     void injectFrom( const Impl & rhs )
     {
-      if ( &rhs != this ) {	// no self insert
+      if ( &rhs == this )	// no self insert
+	return;
 
-	if ( !rhs._checksums.empty() ) {
-	  _checksums.insert( rhs._checksums.begin(), rhs._checksums.end() );
-	  _cachedchecksum.reset();
-	}
-
-	if ( rhs._timestamp > _timestamp )
-	  _timestamp = rhs._timestamp;
+      if ( !rhs._checksums.empty() ) {
+	_checksums.insert( rhs._checksums.begin(), rhs._checksums.end() );
+	_cachedchecksum.reset();
       }
+
+      if ( rhs._timestamp > _timestamp )
+	_timestamp = rhs._timestamp;
     }
 
     bool empty() const
@@ -107,18 +108,19 @@ namespace zypp
     std::string checksum() const
     {
       std::string ret;
-      if ( !_checksums.empty() ) {
-	if ( _checksums.size() == 1 )
-	  ret = *_checksums.begin();
-	else {
-	  if ( !_cachedchecksum ) {
-	    std::stringstream ss;
-	    for ( std::string_view c : _checksums )
-	      ss << c;
-	    _cachedchecksum = CheckSum::sha1(ss).checksum();
-	  }
-	  ret = *_cachedchecksum;
+      if ( _checksums.empty() )
+	return ret;
+
+      if ( _checksums.size() == 1 )
+	ret = *_checksums.begin();
+      else {
+	if ( !_cachedchecksum ) {
+	  std::stringstream ss;
+	  for ( std::string_view c : _checksums )
+	    ss << c;
+	  _cachedchecksum = CheckSum::sha1(ss).checksum();
 	}
+	ret = *_cachedchecksum;
       }
       return ret;
     }
@@ -171,6 +173,12 @@ namespace zypp
 	_pimpl->assignFromCtor( CheckSum::sha1FromString( str::numstring( t ) ).checksum(), Date( t ) );
       }
     }
+  }
+
+  RepoStatus::RepoStatus( const RepoInfo & info_r )
+  : _pimpl( new Impl() )
+  {
+    _pimpl->assignFromCtor( CheckSum::sha1FromString( info_r.url().asString() ).checksum(), Date() );
   }
 
   RepoStatus::RepoStatus( std::string checksum_r, Date timestamp_r )

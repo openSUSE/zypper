@@ -21,6 +21,8 @@
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
+  class RepoInfo;
+
   ///////////////////////////////////////////////////////////////////
   /// \class RepoStatus
   /// \brief Track changing files or directories.
@@ -51,6 +53,9 @@ namespace zypp
      * in an empty status.
      */
     explicit RepoStatus( const Pathname & path_r );
+
+    /** Compute status of a \a RepoInfo to track changes requiring a refresh. */
+    explicit RepoStatus( const RepoInfo & info_r );
 
     /** Explicitly specify checksum string and timestamp to use. */
     RepoStatus( std::string checksum_r, Date timestamp_r );

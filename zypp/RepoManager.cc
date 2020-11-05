@@ -901,6 +901,10 @@ namespace zypp
     if ( repokind == RepoType::NONE )
       repokind = probeCache( productdatapath );
 
+    // NOTE: The calling code expects an empty RepoStatus being returned
+    // if the metadata cache is empty. So additioanl components like the
+    // RepoInfos status are joined after the switch IFF the status is not
+    // empty.
     RepoStatus status;
     switch ( repokind.toEnum() )
     {
@@ -913,7 +917,7 @@ namespace zypp
 	break;
 
       case RepoType::RPMPLAINDIR_e :
-	status = RepoStatus::fromCookieFile( productdatapath/"cookie" );
+	status = RepoStatus::fromCookieFile( productdatapath/"cookie" );	// dir status at last refresh
 	break;
 
       case RepoType::NONE_e :
@@ -922,6 +926,10 @@ namespace zypp
         // ZYPP_THROW(RepoUnknownTypeException());
 	break;
     }
+
+    if ( ! status.empty() )
+      status = status && RepoStatus( info );
+
     return status;
   }
 
@@ -968,12 +976,13 @@ namespace zypp
     assert_alias(info);
     try
     {
-      MIL << "Going to try to check whether refresh is needed for " << url << " (" << info.type() << ")" << endl;
+      MIL << "Check if to refresh repo " << info.alias() << " at " << url << " (" << info.type() << ")" << endl;
 
       // first check old (cached) metadata
       Pathname mediarootpath = rawcache_path_for_repoinfo( _options, info );
       filesystem::assert_dir( mediarootpath );
       RepoStatus oldstatus = metadataStatus( info );
+
       if ( oldstatus.empty() )
       {
         MIL << "No cached metadata, going to refresh" << endl;
@@ -997,33 +1006,37 @@ namespace zypp
 	policy = RefreshIfNeededIgnoreDelay;
       }
 
-      // now we've got the old (cached) status, we can decide repo.refresh.delay
+      // Check whether repo.refresh.delay applies...
       if ( policy != RefreshIfNeededIgnoreDelay )
       {
-        // difference in seconds
-        double diff = difftime(
-          (Date::ValueType)Date::now(),
-          (Date::ValueType)oldstatus.timestamp()) / 60;
+	// bsc#1174016: Prerequisite to skipping the refresh is that metadata
+	// and solv cache status match. They will not, if the repos URL was
+	// changed e.g. due to changed repovars.
+	RepoStatus cachestatus = cacheStatus( info );
 
-        DBG << "oldstatus: " << (Date::ValueType)oldstatus.timestamp() << endl;
-        DBG << "current time: " << (Date::ValueType)Date::now() << endl;
-        DBG << "last refresh = " << diff << " minutes ago" << endl;
-
-        if ( diff < ZConfig::instance().repo_refresh_delay() )
-        {
-	  if ( diff < 0 )
+	if ( oldstatus == cachestatus )
+	{
+	  // difference in seconds
+	  double diff = ::difftime( (Date::ValueType)Date::now(), (Date::ValueType)oldstatus.timestamp() ) / 60;
+	  if ( diff < ZConfig::instance().repo_refresh_delay() )
 	  {
-	    WAR << "Repository '" << info.alias() << "' was refreshed in the future!" << endl;
+	    if ( diff < 0 )
+	    {
+	      WAR << "Repository '" << info.alias() << "' was refreshed in the future!" << endl;
+	    }
+	    else
+	    {
+	      MIL << "Repository '" << info.alias()
+	      << "' has been refreshed less than repo.refresh.delay ("
+	      << ZConfig::instance().repo_refresh_delay()
+	      << ") minutes ago. Advising to skip refresh" << endl;
+	      return REPO_CHECK_DELAYED;
+	    }
 	  }
-	  else
-	  {
-	    MIL << "Repository '" << info.alias()
-		<< "' has been refreshed less than repo.refresh.delay ("
-		<< ZConfig::instance().repo_refresh_delay()
-		<< ") minutes ago. Advising to skip refresh" << endl;
-	    return REPO_CHECK_DELAYED;
-	  }
-        }
+	}
+	else {
+	  MIL << "Metadata and solv cache don't match. Check data on server..." << endl;
+	}
       }
 
       repo::RepoType repokind = info.type();
@@ -1038,19 +1051,19 @@ namespace zypp
 	case RepoType::RPMMD_e:
 	{
 	  MediaSetAccess media( url );
-	  newstatus = yum::Downloader( info, mediarootpath ).status( media );
+	  newstatus = RepoStatus( info ) && yum::Downloader( info, mediarootpath ).status( media );
 	}
 	break;
 
 	case RepoType::YAST2_e:
 	{
 	  MediaSetAccess media( url );
-	  newstatus = susetags::Downloader( info, mediarootpath ).status( media );
+	  newstatus = RepoStatus( info ) && susetags::Downloader( info, mediarootpath ).status( media );
 	}
 	break;
 
 	case RepoType::RPMPLAINDIR_e:
-	  newstatus = RepoStatus( MediaMounter(url).getPathName(info.path()) );	// dir status
+	  newstatus = RepoStatus( info ) && RepoStatus( MediaMounter(url).getPathName(info.path()) );	// dir status
 	  break;
 
 	default:
@@ -1183,6 +1196,7 @@ namespace zypp
         }
         else if ( repokind.toEnum() == RepoType::RPMPLAINDIR_e )
         {
+	  // as substitute for real metadata remember the checksum of the directory we refreshed
           MediaMounter media( url );
           RepoStatus newstatus = RepoStatus( media.getPathName( info.path() ) );	// dir status
 

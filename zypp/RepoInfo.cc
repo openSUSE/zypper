@@ -62,7 +62,7 @@ namespace zypp
 	else if ( PathInfo(path_r/"/cookie").isFile() )
 	{ ret = repo::RepoType::RPMPLAINDIR; }
       }
-      MIL << "Probed cached type " << ret << " at " << path_r << endl;
+      DBG << "Probed cached type " << ret << " at " << path_r << endl;
       return ret;
     }
   } // namespace
