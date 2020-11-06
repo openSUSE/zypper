@@ -67,8 +67,6 @@ BOOST_AUTO_TEST_CASE(LookupAttr_existingattr_matcher)
   BOOST_CHECK( q.strMatcher() );
 
   BOOST_CHECK_EQUAL( q.size(), 9 );
-  for_(it,q.begin(),q.end())
-  { cout << it << endl;}
 }
 
 BOOST_AUTO_TEST_CASE(LookupAttr_iterate_solvables)
@@ -205,8 +203,14 @@ BOOST_AUTO_TEST_CASE(LookupAttr_solvable_attribute_substructure)
   BOOST_CHECK_EQUAL( q.size(), 1212 );
 
   // search any id in any parent-structure:
+  // - https://github.com/openSUSE/libsolv/pull/402 added an additional
+  // <update:collection> flexarray to each of the 2287 entries. This is
+  // why the total size varies depending on the libsolv version used.
   q = sat::LookupAttr( sat::SolvAttr::allAttr, sat::SolvAttr::allAttr );
-  BOOST_CHECK_EQUAL( q.size(), 10473 );
+  auto qs = q.size();
+  BOOST_CHECK( qs == 10473 || qs == 12760 );
+  // for_(it,q.begin(),q.end())
+  // { cout << it << endl;}
 }
 
 BOOST_AUTO_TEST_CASE(LookupAttr_repoattr)
