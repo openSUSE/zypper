@@ -23,6 +23,7 @@ SET( zyppng_base_HEADERS
   base/signals.h
   base/SocketNotifier
   base/socketnotifier.h
+  base/statemachine.h
   base/Timer
   base/timer.h
   base/zyppglobal.h
