@@ -221,11 +221,8 @@ void dTree( const std::string & cmd_r, const std::string & spec_r )
     Table t;
     for ( const auto & el : spec )
     {
-      auto & details { t.row( el ) };
       for ( const auto & cap : el.provides() )
       {
-	//details.push_back( "prv: "+cap.asString() );	// list only matching ones
-
 	// get attrs matching cap
 	for ( const auto & attr : attrs )
 	{
