@@ -33,11 +33,11 @@ class EventDispatcher;
 
 using RequestId = uint32_t;
 
-class MediaHandlerNetwork : public zypp::media::MediaHandler
+class MediaNetwork : public zypp::media::MediaHandler
 {
 public:
-  MediaHandlerNetwork(const Url &url_r, const zypp::Pathname &attach_point_hint_r);
-  virtual ~MediaHandlerNetwork() override;
+  MediaNetwork(const Url &url_r, const zypp::Pathname &attach_point_hint_r);
+  virtual ~MediaNetwork() override;
 
   TransferSettings & settings();
 

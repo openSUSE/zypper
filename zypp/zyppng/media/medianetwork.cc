@@ -31,17 +31,19 @@
 #include <zypp/base/Gettext.h>
 #include <zypp/ZYppFactory.h>
 
-#define ZYPP_BASE_LOGGER_LOGGROUP "zypp::MediaHandlerNetwork"
 #include <zypp/base/Logger.h>
 #include <zypp/base/LogControl.h>
 
 #include <zypp/ZYppCallbacks.h>
 
+#undef ZYPP_BASE_LOGGER_LOGGROUP
+#define ZYPP_BASE_LOGGER_LOGGROUP "zypp::MediaNetwork"
+
 namespace zyppng {
 
   using HeaderSizeType = uint32_t;
 
-  struct MediaHandlerNetwork::ProgressData
+  struct MediaNetwork::ProgressData
   {
     ProgressData( const zyppng::Url & _url = zyppng::Url(),
       zypp::callback::SendReport<zypp::media::DownloadProgressReport> *_report = nullptr )
@@ -113,7 +115,7 @@ namespace zyppng {
   };
 
 
-  struct MediaHandlerNetwork::Request {
+  struct MediaNetwork::Request {
 
     Request ( const zypp::Pathname &path, RequestId id ) : _targetFile(path) {
       _targetFile.autoCleanup( true );
@@ -183,9 +185,9 @@ namespace zyppng {
  * the sync entry points are done. It will tear down the event loop and release the socket fd so we
  * can reuse it at a later point again.
  */
-  struct MediaHandlerNetwork::DispatchContext {
+  struct MediaNetwork::DispatchContext {
 
-    DispatchContext( MediaHandlerNetwork &p ) : parent(&p), ev( zyppng::EventLoop::create() ){
+    DispatchContext( MediaNetwork &p ) : parent(&p), ev( zyppng::EventLoop::create() ){
       if ( parent->_socket ) {
         MIL << "Reusing open connection" << std::endl;
         sock = zyppng::Socket::fromSocket( *parent->_socket, zyppng::Socket::ConnectedState );
@@ -345,7 +347,7 @@ namespace zyppng {
             zypp::proto::Envelope m;
             if (! m.ParseFromArray( message.data(), message.size() ) ) {
               //abort, we can not recover from this. Bytes might be mixed up on the socket
-              ZYPP_THROW( zypp::media::MediaException("MediaHandlerNetwork backend connection broken.") );
+              ZYPP_THROW( zypp::media::MediaException("MediaNetwork backend connection broken.") );
             }
 
             //MIL << "Dispatching message " << m.DebugString() << std::endl;
@@ -369,7 +371,7 @@ namespace zyppng {
 
       auto disConn = AutoDisconnect ( sock->sigDisconnected().connect( [&excp, this](){
         try {
-          ZYPP_THROW( zypp::media::MediaException("MediaHandlerNetwork backend disconnected.") );
+          ZYPP_THROW( zypp::media::MediaException("MediaNetwork backend disconnected.") );
         } catch ( ... ) {
           // we cannot let the exception travel through the event loop, instead we remember it for later
           excp = std::current_exception();
@@ -389,12 +391,12 @@ namespace zyppng {
       assert( !pendingMessageSize );
     }
 
-    MediaHandlerNetwork *parent;
+    MediaNetwork *parent;
     zyppng::EventLoop::Ptr ev;
     zyppng::Socket::Ptr sock;
   };
 
-  MediaHandlerNetwork::MediaHandlerNetwork(
+  MediaNetwork::MediaNetwork(
     const Url & url_r,
     const zypp::Pathname & attach_point_hint_r )
     : MediaHandler( url_r, attach_point_hint_r,
@@ -403,7 +405,7 @@ namespace zyppng {
   {
     _workingDir.autoCleanup( true );
 
-    MIL << "MediaHandlerNetwork::MediaHandlerNetwork(" << url_r << ", " << attach_point_hint_r << ")" << std::endl;
+    MIL << "MediaNetwork::MediaNetwork(" << url_r << ", " << attach_point_hint_r << ")" << std::endl;
 
     if( !attachPoint().empty()){
       zypp::PathInfo ainfo(attachPoint());
@@ -424,22 +426,22 @@ namespace zyppng {
     }
   }
 
-  MediaHandlerNetwork::~MediaHandlerNetwork() { try { release(); } catch(...) {} }
+  MediaNetwork::~MediaNetwork() { try { release(); } catch(...) {} }
 
-  TransferSettings &MediaHandlerNetwork::settings()
+  TransferSettings &MediaNetwork::settings()
   {
     return _settings;
   }
 
-  std::unique_ptr<MediaHandlerNetwork::DispatchContext> MediaHandlerNetwork::ensureConnected() const
+  std::unique_ptr<MediaNetwork::DispatchContext> MediaNetwork::ensureConnected() const
   {
-    auto ctx = std::make_unique<DispatchContext>( *const_cast<MediaHandlerNetwork *>(this) );
+    auto ctx = std::make_unique<DispatchContext>( *const_cast<MediaNetwork *>(this) );
     if ( !ctx->sock )
       ZYPP_THROW( zypp::media::MediaException("Failed to connect to backend") );
     return ctx;
   }
 
-  void MediaHandlerNetwork::disconnectFrom()
+  void MediaNetwork::disconnectFrom()
   {
     if ( _socket ) {
       zyppng::eintrSafeCall( ::close, *_socket );
@@ -453,7 +455,7 @@ namespace zyppng {
     MediaHandler::disconnectFrom();
   }
 
-  void MediaHandlerNetwork::attachTo(bool next)
+  void MediaNetwork::attachTo(bool next)
   {
     if ( next )
       ZYPP_THROW( zypp::media::MediaNotSupportedException(_url) );
@@ -480,12 +482,12 @@ namespace zyppng {
     setMediaSource(media);
   }
 
-  void MediaHandlerNetwork::releaseFrom(const std::string &)
+  void MediaNetwork::releaseFrom(const std::string &)
   {
     disconnect();
   }
 
-  Url MediaHandlerNetwork::getFileUrl( const zypp::Pathname & filename_r ) const
+  Url MediaNetwork::getFileUrl( const zypp::Pathname & filename_r ) const
   {
     // Simply extend the URLs pathname. An 'absolute' URL path
     // is achieved by encoding the leading '/' in an URL path:
@@ -499,7 +501,7 @@ namespace zyppng {
     return newurl;
   }
 
-  void MediaHandlerNetwork::handleRequestResult(const Request &req, const zypp::filesystem::Pathname &filename ) const
+  void MediaNetwork::handleRequestResult(const Request &req, const zypp::filesystem::Pathname &filename ) const
   {
     if ( !req.result() ) {
       ZYPP_THROW( zypp::media::MediaCurlException( req.proto().url(), "Request did not return a result" , "" ) );
@@ -540,7 +542,7 @@ namespace zyppng {
     ZYPP_THROW( zypp::media::MediaCurlException( req.proto().url(), err.errordesc() , "" ) );
   }
 
-  bool MediaHandlerNetwork::retry( DispatchContext &ctx, Request &req ) const
+  bool MediaNetwork::retry( DispatchContext &ctx, Request &req ) const
   {
     const auto &res = req.result();
     if ( !res || !res->has_error() )
@@ -626,7 +628,7 @@ namespace zyppng {
     return false;
   }
 
-  void MediaHandlerNetwork::handleStreamMessage( DispatchContext &ctx, const zypp::proto::Envelope &e ) const
+  void MediaNetwork::handleStreamMessage( DispatchContext &ctx, const zypp::proto::Envelope &e ) const
   {
     RequestId dlId = -1;
     bool cancel = false;
@@ -679,7 +681,7 @@ namespace zyppng {
     }
   }
 
-  MediaHandlerNetwork::Request MediaHandlerNetwork::makeRequest ( const zypp::filesystem::Pathname &filename, const zypp::ByteCount &expectedFileSize_r , const zypp::filesystem::Pathname &deltaFile ) const
+  MediaNetwork::Request MediaNetwork::makeRequest ( const zypp::filesystem::Pathname &filename, const zypp::ByteCount &expectedFileSize_r , const zypp::filesystem::Pathname &deltaFile ) const
   {
     DBG << filename.asString() << std::endl;
 
@@ -707,7 +709,7 @@ namespace zyppng {
     return fileReq;
   }
 
-  void MediaHandlerNetwork::trackRequest ( DispatchContext &ctx, Request &req ) const
+  void MediaNetwork::trackRequest ( DispatchContext &ctx, Request &req ) const
   {
     zypp::proto::DownloadFin result;
 
@@ -717,7 +719,7 @@ namespace zyppng {
       retry = false; // try to stop after this iteration
 
       if ( !req.result() ) {
-        result = ctx.waitFor<zypp::proto::DownloadFin>( req.proto().requestid(), std::bind( &MediaHandlerNetwork::handleStreamMessage, this, std::placeholders::_1, std::placeholders::_2 ) );
+        result = ctx.waitFor<zypp::proto::DownloadFin>( req.proto().requestid(), std::bind( &MediaNetwork::handleStreamMessage, this, std::placeholders::_1, std::placeholders::_2 ) );
         req.setResult( std::move(result) );
       }
 
@@ -727,19 +729,19 @@ namespace zyppng {
 
 
 
-  void MediaHandlerNetwork::retryRequest ( DispatchContext &ctx, MediaHandlerNetwork::Request &req ) const
+  void MediaNetwork::retryRequest ( DispatchContext &ctx, MediaNetwork::Request &req ) const
   {
     req.reset();
     // update request with new settings
     *req.proto().mutable_settings() = _settings.protoData();
     ctx.sendEnvelope( req.proto() );
-    const auto &s = ctx.waitForStatus( req.proto().requestid(), std::bind( &MediaHandlerNetwork::handleStreamMessage, this, std::placeholders::_1, std::placeholders::_2 ) );
+    const auto &s = ctx.waitForStatus( req.proto().requestid(), std::bind( &MediaNetwork::handleStreamMessage, this, std::placeholders::_1, std::placeholders::_2 ) );
     if ( s.code() != zypp::proto::Status::Ok ) {
       ZYPP_THROW( zypp::media::MediaException( s.reason() ) );
     }
   }
 
-  MediaHandlerNetwork::Request *MediaHandlerNetwork::findRequest( const Url url ) const
+  MediaNetwork::Request *MediaNetwork::findRequest( const Url url ) const
   {
     const auto &i = std::find_if( _requests.begin(), _requests.end(), [ &url ]( const auto &r ) {
       return ( url == zyppng::Url( r.proto().url() ) );
@@ -749,7 +751,7 @@ namespace zyppng {
     return &(*i);
   }
 
-  MediaHandlerNetwork::Request *MediaHandlerNetwork::findRequest(const RequestId id ) const
+  MediaNetwork::Request *MediaNetwork::findRequest(const RequestId id ) const
   {
     const auto &i = std::find_if( _requests.begin(), _requests.end(), [ &id ]( const auto &r ) {
       return ( id == r.proto().requestid() );
@@ -759,7 +761,7 @@ namespace zyppng {
     return &(*i);
   }
 
-  bool MediaHandlerNetwork::getDoesFileExist( const zypp::filesystem::Pathname &filename ) const
+  bool MediaNetwork::getDoesFileExist( const zypp::filesystem::Pathname &filename ) const
   {
 
     auto ctx = ensureConnected();
@@ -771,7 +773,7 @@ namespace zyppng {
 
 
     ctx->sendEnvelope( req.proto() );
-    const auto &s = ctx->waitForStatus( req.proto().requestid(), std::bind( &MediaHandlerNetwork::handleStreamMessage, this, std::placeholders::_1, std::placeholders::_2 ) );
+    const auto &s = ctx->waitForStatus( req.proto().requestid(), std::bind( &MediaNetwork::handleStreamMessage, this, std::placeholders::_1, std::placeholders::_2 ) );
     if ( s.code() != zypp::proto::Status::Ok ) {
       ZYPP_THROW( zypp::media::MediaException( s.reason() ) );
     }
@@ -793,7 +795,7 @@ namespace zyppng {
   }
 
 
-  void MediaHandlerNetwork::getFile( const zypp::OnMediaLocation &file ) const
+  void MediaNetwork::getFile( const zypp::OnMediaLocation &file ) const
   {
     const auto &filename = file.filename();
     auto ctx = ensureConnected();
@@ -814,7 +816,7 @@ namespace zyppng {
 
       ctx->sendEnvelope( newReq.proto() );
 
-      const auto &s = ctx->waitForStatus( newReq.proto().requestid(), std::bind( &MediaHandlerNetwork::handleStreamMessage, this, std::placeholders::_1, std::placeholders::_2 ) );
+      const auto &s = ctx->waitForStatus( newReq.proto().requestid(), std::bind( &MediaNetwork::handleStreamMessage, this, std::placeholders::_1, std::placeholders::_2 ) );
       if ( s.code() != zypp::proto::Status::Ok && s.code() ) {
         ZYPP_THROW( zypp::media::MediaException( s.reason() ) );
       }
@@ -831,7 +833,7 @@ namespace zyppng {
         sub.set_prioritize( true );
         ctx->sendEnvelope( sub );
 
-        const auto &s = ctx->waitForStatus( sub.requestid(), std::bind( &MediaHandlerNetwork::handleStreamMessage, this, std::placeholders::_1, std::placeholders::_2 ) );
+        const auto &s = ctx->waitForStatus( sub.requestid(), std::bind( &MediaNetwork::handleStreamMessage, this, std::placeholders::_1, std::placeholders::_2 ) );
 
         // status could be unknown ID if the request was already in finished state and the message was stuck in our socket!
         if ( s.code() != zypp::proto::Status::Ok && s.code() != zypp::proto::Status::UnknownId ) {
@@ -895,7 +897,7 @@ namespace zyppng {
     report->finish(url, zypp::media::DownloadProgressReport::NO_ERROR, "");
   }
 
-  void MediaHandlerNetwork::getDir(const zypp::filesystem::Pathname &dirname, bool recurse_r) const
+  void MediaNetwork::getDir(const zypp::filesystem::Pathname &dirname, bool recurse_r) const
   {
     //we could make this download concurrently, but its not used anywhere in the code, so why bother
     zypp::filesystem::DirContent content;
@@ -927,7 +929,7 @@ namespace zyppng {
     }
   }
 
-  void MediaHandlerNetwork::precacheFiles(const std::vector<zypp::OnMediaLocation> &files)
+  void MediaNetwork::precacheFiles(const std::vector<zypp::OnMediaLocation> &files)
   {
     zypp::proto::Prefetch req;
     req.set_requestid( ++_nextRequestId );
@@ -952,7 +954,7 @@ namespace zyppng {
       auto ctx = ensureConnected();
       ctx->sendEnvelope( req );
 
-      const auto &status = ctx->waitForStatus( req.requestid(), std::bind( &MediaHandlerNetwork::handleStreamMessage, this, std::placeholders::_1, std::placeholders::_2 ) );
+      const auto &status = ctx->waitForStatus( req.requestid(), std::bind( &MediaNetwork::handleStreamMessage, this, std::placeholders::_1, std::placeholders::_2 ) );
       if ( status.code() == zypp::proto::Status::Ok ) {
         MIL << "Request was acknowledged by server, downloads should start soon" << std::endl;
         _requests.insert( _requests.end(), std::move_iterator(sentRequests.begin()), std::move_iterator(sentRequests.end()) );
@@ -964,17 +966,17 @@ namespace zyppng {
     }
   }
 
-  void MediaHandlerNetwork::getDirInfo(std::list<std::string> &retlist, const zypp::filesystem::Pathname &dirname, bool dots) const
+  void MediaNetwork::getDirInfo(std::list<std::string> &retlist, const zypp::filesystem::Pathname &dirname, bool dots) const
   {
     getDirectoryYast( retlist, dirname, dots );
   }
 
-  void MediaHandlerNetwork::getDirInfo(zypp::filesystem::DirContent &retlist, const zypp::filesystem::Pathname &dirname, bool dots) const
+  void MediaNetwork::getDirInfo(zypp::filesystem::DirContent &retlist, const zypp::filesystem::Pathname &dirname, bool dots) const
   {
     getDirectoryYast( retlist, dirname, dots );
   }
 
-  bool MediaHandlerNetwork::checkAttachPoint(const zypp::Pathname &apoint) const
+  bool MediaNetwork::checkAttachPoint(const zypp::Pathname &apoint) const
   {
     return MediaHandler::checkAttachPoint( apoint, true, true);
   }

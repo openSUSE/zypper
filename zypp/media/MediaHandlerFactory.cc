@@ -62,7 +62,7 @@ namespace zypp::media {
       bool use_network = ( networkenv && strcmp(networkenv, "1" ) == 0 );
       if ( use_network ) {
         WAR << "network backend manually enabled." << std::endl;
-        auto hdl = std::make_unique<zyppng::MediaHandlerNetwork> (url,preferred_attach_point);
+        auto hdl = std::make_unique<zyppng::MediaNetwork> (url,preferred_attach_point);
 
         UrlResolverPlugin::HeaderList::const_iterator it;
         for ( const auto & el : custom_headers ) {
