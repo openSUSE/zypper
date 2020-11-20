@@ -286,7 +286,8 @@ void RpmDb::initDatabase( Pathname root_r, bool doRebuild_r )
   if ( ! PathInfo( root_r/"/var/lib/rpm" ).isExist()
     && PathInfo( root_r/"/usr/lib/sysimage/rpm" ).isDir() )
   {
-    WAR << "Rpm package was deleted? Injecting missing rpmdb compat symlink." << endl;
+    WAR << "No /var/lib/rpm: Injecting missing rpmdb compat symlink." << endl;
+    filesystem::assert_dir( root_r/"/var/lib" );
     filesystem::symlink( "../../usr/lib/sysimage/rpm", root_r/"/var/lib/rpm" );
   }
 
