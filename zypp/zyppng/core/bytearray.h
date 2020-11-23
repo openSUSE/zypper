@@ -15,18 +15,11 @@
 #ifndef ZYPP_NG_CORE_BYTEARRAY_H_INCLUDED
 #define ZYPP_NG_CORE_BYTEARRAY_H_INCLUDED
 
-#include <vector>
-#include <cstring>
+#include <zypp/ByteArray.h>
 
 namespace zyppng {
-
-  class ByteArray : public std::vector<char>
-  {
-  public:
-    using vector<char>::vector;
-    explicit ByteArray ( const char *data, const int len = -1 ) : ByteArray( data, data + (len == -1 ? strlen(data) : len) ) { }
-  };
-
+  using ByteArray = zypp::ByteArray;
+  using UByteArray = zypp::UByteArray;
 }
 
 #endif
