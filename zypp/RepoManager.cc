@@ -814,11 +814,20 @@ namespace zypp
 	std::set<std::string> oldfiles;
 	set_difference( entries.begin(), entries.end(), repoEscAliases_r.begin(), repoEscAliases_r.end(),
 			std::inserter( oldfiles, oldfiles.end() ) );
+
+	// bsc#1178966: Files or symlinks here have been created by the user
+	// for whatever purpose. It's our cache, so we purge them now before
+	// they may later conflict with directories we need.
+	PathInfo pi;
 	for ( const std::string & old : oldfiles )
 	{
 	  if ( old == Repository::systemRepoAlias() )	// don't remove the @System solv file
 	    continue;
-	  filesystem::recursive_rmdir( cachePath_r / old );
+	  pi( cachePath_r/old );
+	  if ( pi.isDir() )
+	    filesystem::recursive_rmdir( pi.path() );
+	  else
+	    filesystem::unlink( pi.path() );
 	}
       }
     }
