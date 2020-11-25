@@ -108,7 +108,7 @@ public:
   }
 
   /**
-   * Prepare access to the rpm database at \c/var/lib/rpm.
+   * Prepare access to the rpm database below \a root_r.
    *
    * An optional argument denotes the root directory for all operations. If
    * an empty Pathname is given the default (\c/) is used.

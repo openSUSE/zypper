@@ -63,15 +63,19 @@ private:
 
   /**
    * Current root directory for all operations.
-   * (initialy /)
+   * (initially /)
    **/
   static Pathname _defaultRoot;
 
   /**
    * Current directory (below root) that contains the rpmdb.
-   * (initialy /var/lib/rpm)
    **/
-  static const Pathname _defaultDbPath;
+  static Pathname _defaultDbPath;
+
+  /**
+   * %_dbpath configured in rpm config.
+   **/
+  static Pathname _rpmDefaultDbPath;
 
   /**
    * Current rpmdb handle.
@@ -146,6 +150,16 @@ public:
   {
     return _defaultDbPath;
   }
+
+  /**
+   * \return The preferred location of the rpmdb below \a root_r.
+   * It's the location of an already exising db, otherwise the
+   * default location sugested by rpms config.
+   *
+   * \throws RpmInvalidRootException if root is not an absolute path or
+   * no directory for the rpmdb can determined.
+   **/
+  static Pathname suggestedDbPath( const Pathname & root_r );
 
   /**
    * Adjust access to the given database location, making it the new

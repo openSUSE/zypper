@@ -271,44 +271,38 @@ void RpmDb::initDatabase( Pathname root_r, bool doRebuild_r )
   if ( root_r.empty() )
     root_r = "/";
 
-  // NOTE: Former argument, but now locked to "/var/lib/rpm".
-  // A custom dbPath is not actually needed and would only work
-  // reliably if libsolv also supports it. By now no further
-  // cleanup in the code.
-  const Pathname & dbPath_r { librpmDb::defaultDbPath() };
+  const Pathname & dbPath_r { librpmDb::suggestedDbPath( root_r ) };	// also asserts root_r is absolute
 
-  if ( ! root_r.absolute() )
+  // The rpmdb compat symlink.
+  // Required at least until rpmdb2solv takes a dppath argument.
+  // Otherwise it creates a db at "/var/lib/rpm".
+  if ( dbPath_r != "/var/lib/rpm" && ! PathInfo( root_r/"/var/lib/rpm" ).isExist() )
   {
-    ERR << "Illegal root or dbPath: " << stringPath( root_r, dbPath_r ) << endl;
-    ZYPP_THROW(RpmInvalidRootException(root_r, dbPath_r));
-  }
-
-  if ( ! PathInfo( root_r/"/var/lib/rpm" ).isExist()
-    && PathInfo( root_r/"/usr/lib/sysimage/rpm" ).isDir() )
-  {
-    WAR << "No /var/lib/rpm: Injecting missing rpmdb compat symlink." << endl;
+    WAR << "Inject missing /var/lib/rpm compat symlink to " << dbPath_r << endl;
     filesystem::assert_dir( root_r/"/var/lib" );
-    filesystem::symlink( "../../usr/lib/sysimage/rpm", root_r/"/var/lib/rpm" );
+    filesystem::symlink( "../../"/dbPath_r, root_r/"/var/lib/rpm" );
   }
-
-  MIL << "Calling initDatabase: " << stringPath( root_r, dbPath_r )
-      << ( doRebuild_r ? " (rebuilddb)" : "" )
-      << ( quickinit ? " (quickinit)" : "" ) << endl;
 
   ///////////////////////////////////////////////////////////////////
   // Check whether already initialized
   ///////////////////////////////////////////////////////////////////
   if ( initialized() )
   {
-    if ( root_r == _root && dbPath_r == _dbPath )
-    {
+    // Just check for a changing root because the librpmDb::suggestedDbPath
+    // may indeed change: rpm %post moving the db from /var/lib/rpm
+    // to /usr/lib/sysimage/rpm. We continue to use the old dbpath
+    // (via the compat symlink) until a re-init.
+    if ( root_r == _root ) {
+      MIL << "Calling initDatabase: already initialized at " << stringPath( _root, _dbPath ) << endl;
       return;
     }
     else
-    {
       ZYPP_THROW(RpmDbAlreadyOpenException(_root, _dbPath, root_r, dbPath_r));
-    }
   }
+
+  MIL << "Calling initDatabase: " << stringPath( root_r, dbPath_r )
+      << ( doRebuild_r ? " (rebuilddb)" : "" )
+      << ( quickinit ? " (quickinit)" : "" ) << endl;
 
   ///////////////////////////////////////////////////////////////////
   // init database
