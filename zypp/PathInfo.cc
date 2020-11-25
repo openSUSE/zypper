@@ -423,6 +423,15 @@ namespace zypp
         return logResult( ENOTDIR );
       }
 
+      p.lstat();	// get dir symlinks
+      if ( !p.isDir() ) {
+	MIL << "unlink symlink ";
+	if ( ::unlink( path.asString().c_str() ) == -1 ) {
+	  return logResult( errno );
+	}
+	return logResult( 0 );
+      }
+
       return logResult( recursive_rmdir_1( path ) );
     }
 
