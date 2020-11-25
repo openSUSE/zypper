@@ -113,7 +113,7 @@ namespace zypp
 	    // still use it to synchronsize.
 	    ftruncate( fileno(_zyppLockFile), 0 );
 	  }
-	  MIL << "Cleanned lock file. (" << getpid() << ")" << std::endl;
+	  MIL << "Cleaned lock file. (" << getpid() << ")" << std::endl;
 	}
 	catch(...) {} // let no exception escape.
     }
