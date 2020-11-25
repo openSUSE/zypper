@@ -2869,10 +2869,10 @@ msgstr ""
 
 #: src/Zypper.cc:2551
 msgid ""
-"--issues[=STRING]\n"
+"--issue[=STRING]\n"
 "Look for issues matching the specified string."
 msgstr ""
-"--issues[=字符串]\n"
+"--issue[=字符串]\n"
 "查找匹配指定字符串的问题。"
 
 #: src/Zypper.cc:2552
@@ -6713,7 +6713,7 @@ msgstr "若其它方法均不起作用，输入 '%s' 为 '%s'，输入 '%s' 为 
 #~ "  Command options:\n"
 #~ "-b, --bugzilla[=#]         List needed patches for Bugzilla issues.\n"
 #~ "    --cve[=#]              List needed patches for CVE issues.\n"
-#~ "    --issues[=string]      Look for issues matching the specified "
+#~ "    --issue[=string]      Look for issues matching the specified "
 #~ "string.\n"
 #~ "-a, --all                  List all patches, not only the needed ones.\n"
 #~ "-g  --category <category>  List only patches with this category.\n"
@@ -6730,7 +6730,7 @@ msgstr "若其它方法均不起作用，输入 '%s' 为 '%s'，输入 '%s' 为 
 #~ "  命令选项：\n"
 #~ "-b, --bugzilla[=#]        列出故障专区问题所需的补丁。\n"
 #~ "    --cve[=#]              列出 CVE 问题所需的补丁。\n"
-#~ "    --issues[=string]    列出匹配指定字符串的问题。\n"
+#~ "    --issue[=string]    列出匹配指定字符串的问题。\n"
 #~ "-a, --all        列出全部补丁，不仅是需要的补丁。\n"
 #~ "-g  --category <分类>  仅列出此分类中的补丁。\n"
 #~ "    --severity <严重性>  仅列出此严重性的补丁。\n"

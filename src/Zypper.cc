@@ -2550,7 +2550,7 @@ void Zypper::processCommandOptions()
     .optionSectionCommandOptions()
     .option(_("-b, --bugzilla[=#]"		"\n"	"List applicable patches for Bugzilla issues."))
     .option(_(    "--cve[=#]"			"\n"	"List applicable patches for CVE issues."))
-    .option(_(    "--issues[=STRING]"		"\n"	"Look for issues matching the specified string."))
+    .option(_(    "--issue[=STRING]"		"\n"	"Look for issues matching the specified string."))
     .option(_(    "--date <YYYY-MM-DD>"		"\n"	"List only patches issued up to, but not including, the specified date."))
     .option(_("-g, --category <CATEGORY>"	"\n"	"List only patches with this category."))
     .option(_(    "--severity <SEVERITY>"	"\n"	"List only patches with this severity."))
@@ -4801,7 +4801,7 @@ void Zypper::doCommand()
     if ( ( copts.count("bugzilla") || copts.count("bz") || copts.count("cve") )
       && copts.count("issues") )
     {
-      out().error(str::form( _("Cannot use %s together with %s."), "--issues", "--bz, --cve") );
+      out().error(str::form( _("Cannot use %s together with %s."), "--issue", "--bz, --cve") );
       setExitCode( ZYPPER_EXIT_ERR_INVALID_ARGS );
       return;
     }

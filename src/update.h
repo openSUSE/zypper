@@ -24,7 +24,7 @@ void list_updates(Zypper & zypper,
 
 /**
  * List available fixes to all issues or issues specified in --bugzilla
- * or --cve options, or look for --issues[=str[ in numbers and descriptions
+ * or --cve options, or look for --issue=str[ in numbers and descriptions
  */
 void list_patches_by_issue(Zypper & zypper);
 

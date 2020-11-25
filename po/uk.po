@@ -3207,10 +3207,10 @@ msgstr ""
 
 #: src/Zypper.cc:2551
 msgid ""
-"--issues[=STRING]\n"
+"--issue[=STRING]\n"
 "Look for issues matching the specified string."
 msgstr ""
-"--issues[=РЯДОК]\n"
+"--issue[=РЯДОК]\n"
 "Пошук проблем, які відповідають зазначеному рядку."
 
 #: src/Zypper.cc:2552
@@ -7227,7 +7227,7 @@ msgstr "Введіть «%s» для «%s» або «%s» для «%s», якщ�
 #~ "  Command options:\n"
 #~ "-b, --bugzilla[=#]         List needed patches for Bugzilla issues.\n"
 #~ "    --cve[=#]              List needed patches for CVE issues.\n"
-#~ "    --issues[=string]      Look for issues matching the specified "
+#~ "    --issue[=string]      Look for issues matching the specified "
 #~ "string.\n"
 #~ "-a, --all                  List all patches, not only the needed ones.\n"
 #~ "-g  --category <category>  List only patches with this category.\n"
@@ -7246,7 +7246,7 @@ msgstr "Введіть «%s» для «%s» або «%s» для «%s», якщ�
 #~ "у Bugzilla.\n"
 #~ "    --cve[=#]              Список потрібних латок для проблем, зазначених "
 #~ "у CVE.\n"
-#~ "    --issues[=string]      Пошук випусків, які збігаються із вказаним "
+#~ "    --issue[=string]      Пошук випусків, які збігаються із вказаним "
 #~ "рядком.\n"
 #~ "-a, --all                  Список всіх латок, а не тільки потрібних.\n"
 #~ " -g  --category <category>  Список усіх латок у цій категорії.\n"

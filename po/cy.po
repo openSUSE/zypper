@@ -2777,7 +2777,7 @@ msgstr ""
 
 #: src/Zypper.cc:2551
 msgid ""
-"--issues[=STRING]\n"
+"--issue[=STRING]\n"
 "Look for issues matching the specified string."
 msgstr ""
 

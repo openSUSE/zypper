@@ -4592,10 +4592,10 @@ msgstr ""
 
 #: src/Zypper.cc:2553
 msgid ""
-"--issues[=STRING]\n"
+"--issue[=STRING]\n"
 "Look for issues matching the specified string."
 msgstr ""
-"--issues[=STRENG]\n"
+"--issue[=STRENG]\n"
 "Kig efter issues som matcher den angivne streng."
 
 #: src/Zypper.cc:2554

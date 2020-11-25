@@ -2848,7 +2848,7 @@ msgstr ""
 
 #: src/Zypper.cc:2551
 msgid ""
-"--issues[=STRING]\n"
+"--issue[=STRING]\n"
 "Look for issues matching the specified string."
 msgstr ""
 
@@ -6531,7 +6531,7 @@ msgstr "បញ្ចូល '%s' សម្រាប់ '%s' ឬ '%s' សម្រ
 #~ "  Command options:\n"
 #~ "-b, --bugzilla[=#]         List needed patches for Bugzilla issues.\n"
 #~ "    --cve[=#]              List needed patches for CVE issues.\n"
-#~ "    --issues[=string]      Look for issues matching the specified "
+#~ "    --issue[=string]      Look for issues matching the specified "
 #~ "string.\n"
 #~ "-a, --all                  List all patches, not only the needed ones.\n"
 #~ "-g  --category <category>  List only patches with this category.\n"
@@ -6549,7 +6549,7 @@ msgstr "បញ្ចូល '%s' សម្រាប់ '%s' ឬ '%s' សម្រ
 #~ "-b, --bugzilla[=#]         រាយ​បំណះ​ដែល​ត្រូវការ​សម្រាប់​ការ​ចេញ​ផ្សាយ​​ Bugzilla ។\n"
 #~ "    --cve[=#]              រាយ​បំណះ​ដែល​ត្រូវការ​សម្រាប់​ការ​ចេញផ្សាយ​ CVE ​។\n"
 #~ "-g  --category <category>  រាយ​បំណះ​ទាំងអស់​នៅ​ក្នុង​ប្រភេទ​នេះ ។\n"
-#~ "    --issues[=string]      រក​មើល​ការ​ចេញផ្សាយ​ដែល​ផ្គូផ្គង​​នឹង​ខ្សែ​អក្សរ​ដែល​បាន​បញ្ជាក់ ។\n"
+#~ "    --issue[=string]      រក​មើល​ការ​ចេញផ្សាយ​ដែល​ផ្គូផ្គង​​នឹង​ខ្សែ​អក្សរ​ដែល​បាន​បញ្ជាក់ ។\n"
 #~ "-a, --all                  រាយ​បំណះ​ទាំងអស់ មិន​ត្រឹមតែ​បំណះ​ដែល​ត្រូវការ​នោះ​ទេ ។\n"
 #~ "-r, --repo <alias|#|URI>   រាយ​​តែ​បំណះ​ដែល​មក​ពី​ឃ្លាំង​ដែល​បាន​បញ្ជាក់​ប៉ុណ្ណោះ ។\n"
 #~ "    --date <YYYY-MM-DD>    រាយ​បំណះ​ដែល​ចេញផ្សាយ​រហូតដល់​កាលបរិច្ឆេទ​ដែល​បាន​បញ្ជាក់​\n"
