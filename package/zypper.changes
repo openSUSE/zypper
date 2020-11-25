@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Nov 25 17:01:20 CET 2020 - ma@suse.de
+
+- Fix typo in list-patches help (bsc#1178925)
+- version 1.13.58
+
+-------------------------------------------------------------------
 Fri Oct 23 16:23:29 CEST 2020 - ma@suse.de
 
 - Fix SEGV in Spanish translations (bsc#1178038)
