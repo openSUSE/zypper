@@ -537,7 +537,7 @@ namespace zypp
 	{
 	  if ( indeterminate(_hideThreadName) )
 	    _hideThreadName = ( zyppng::ThreadData::current().name() == ZYPP_MAIN_THREAD_NAME );
-	  return _hideThreadName;
+	  return bool(_hideThreadName);
 	}
 	/** \overload Setter */
         void hideThreadName( bool onOff_r )
