@@ -6,8 +6,8 @@ Fri Nov 27 10:17:50 CET 2020 - ma@suse.de
 - RpmDb: If no database exists use the _dbpath configured in rpm.
   Still makes sure a compat symlink at /var/lib/rpm exists in case
   the configures _dbpath is elsewhere. (bsc#1178910)
-- Url: Hide known password entires when writing the query part
-  (bsc#1050625 bsc#1177583)
+- Url: Hide known password entries when writing the query part
+  (bsc#1050625 bsc#1177583, CVE-2017-9271)
 - adapt testcase to change introduced by libsolv#402.
 - RepoManager: Force refresh if repo url has changed (bsc#1174016)
 - RepoInfo: ignore legacy type= in a .repo file and let RepoManager
