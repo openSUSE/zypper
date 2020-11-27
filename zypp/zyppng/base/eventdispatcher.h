@@ -86,6 +86,15 @@ public:
   }
 
   /*!
+   * Immediately clears the list of all shared_ptr's that were registered
+   * to be unreferenced later. Mainly used to be called when a event loop exits, otherwise we
+   * might have weird side effects when the main loop instance preserves pointers that should be cleared
+   * at that point already. Like child items still trying to access the parent object that was already cleaned
+   * up before the MainLoop instance.
+   */
+  void clearUnrefLaterList ();
+
+  /*!
    * Returns the number of the currently active timers
    */
   ulong runningTimers() const;

@@ -489,6 +489,11 @@ void EventDispatcher::unrefLaterImpl(std::shared_ptr<void> &&ptr )
   d->enableIdleSource();
 }
 
+void EventDispatcher::clearUnrefLaterList ()
+{
+  d_func()->_unrefLater.clear();
+}
+
 ulong EventDispatcher::runningTimers() const
 {
   return d_func()->_runningTimers.size();

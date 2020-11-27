@@ -26,6 +26,7 @@ namespace zyppng {
     Z_D();
     g_main_context_push_thread_default( reinterpret_cast<GMainContext*>(d->_dispatcher->nativeDispatcherHandle()) );
     g_main_loop_run( d->_loop );
+    d->_dispatcher->clearUnrefLaterList();
     g_main_context_pop_thread_default( reinterpret_cast<GMainContext*>(d->_dispatcher->nativeDispatcherHandle()) );
   }
 
