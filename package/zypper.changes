@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Fri Nov 27 10:24:19 CET 2020 - ma@suse.de
+
+- Avoid translated text in xml attributes ( fixes #361 )
+- BuildRequires:  libzypp-devel >= 17.25.3.
+  Adapt to new LoadTestcase API.
+- version 1.14.41
+
+-------------------------------------------------------------------
 Fri Sep 25 13:42:42 CEST 2020 - ma@suse.de
 
 - info: Assume descriptions starting with '<p>' are richtext
