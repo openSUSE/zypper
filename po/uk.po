@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: zypper.uk\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-09-11 10:04+0200\n"
-"PO-Revision-Date: 2020-07-26 08:51+0000\n"
+"PO-Revision-Date: 2020-12-01 18:26+0000\n"
 "Last-Translator: Lesath <4lesath@gmail.com>\n"
 "Language-Team: Ukrainian <https://l10n.opensuse.org/projects/zypper/master/"
 "uk/>\n"
@@ -22,8 +22,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<="
+"4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: Weblate 3.6.1\n"
 
 #: src/SolverRequester.h:52
@@ -392,7 +392,7 @@ msgstr "Наступний запит нічого не блокує:"
 
 #: src/callbacks/repo.h:49
 msgid "Retrieving delta"
-msgstr "Звантаження розбіжності"
+msgstr "Отримання розбіжності"
 
 #. translators: this text is a progress display label e.g. "Applying delta foo [42%]"
 #: src/callbacks/repo.h:74
@@ -413,7 +413,7 @@ msgstr "У кеші %1%"
 #: src/callbacks/repo.h:128
 #, c-format, boost-format
 msgid "Retrieving %s %s-%s.%s"
-msgstr "Звантаження %s %s-%s.%s"
+msgstr "Отримання %s %s-%s.%s"
 
 #: src/callbacks/repo.h:217
 msgid "Signature verification failed"
@@ -2509,7 +2509,7 @@ msgstr "list-patches (lp) [ПАРАМЕТРИ]"
 #. translators: command summary: list-patches, lp
 #: src/commands/listpatches.cc:18
 msgid "List available patches."
-msgstr ""
+msgstr "Список наявних латок."
 
 #. translators: command description
 #: src/commands/listpatches.cc:20
@@ -2906,6 +2906,8 @@ msgid ""
 "The command is an alias for '%1%' and performs a case-insensitive search. "
 "For a case-sensitive search call the search command and add the '%2%' option."
 msgstr ""
+"Команда є псевдонімом для «%1%» і виконує пошук без урахування регістру. Для "
+"пошуку з урахуванням регістру викличте команду пошуку та додайте опцію «%2%»."
 
 #. "what-provides" is obsolete
 #. The "what-provides" now is included in "search" command, e.g.
@@ -2948,13 +2950,13 @@ msgstr "Параметр «--%s» скасовує попередньо вста
 #: src/commands/optionsets.cc:116
 #, c-format, boost-format
 msgid "Available download modes: %s"
-msgstr "Наявні режими звантаження: %s"
+msgstr "Наявні режими завантаження: %s"
 
 #. translators: --download
 #: src/commands/optionsets.cc:178
 #, c-format, boost-format
 msgid "Set the download-install mode. Available modes: %s"
-msgstr "Встановити режим звантаження-встановлення. Наявні режими: %s"
+msgstr "Встановити режим завантаження-встановлення. Наявні режими: %s"
 
 #. translators: -d, --download-only
 #: src/commands/optionsets.cc:182
@@ -3681,7 +3683,7 @@ msgstr "Примусова перебудова бази даних."
 #. translators: -d, --force-download
 #: src/commands/repos/refresh.cc:59
 msgid "Force download of raw metadata."
-msgstr "Примусове звантаження необроблених метаданих."
+msgstr "Примусове завантаження необроблених метаданих."
 
 #. translators: -B, --build-only
 #: src/commands/repos/refresh.cc:64
@@ -4791,7 +4793,7 @@ msgstr "Видалення сирцевих пакунків не підтрим
 #: src/commands/subcommand.cc:79
 #, boost-format
 msgid "No manual entry for %1%"
-msgstr ""
+msgstr "Немає інструкції для %1%"
 
 #: src/commands/subcommand.cc:92
 msgid "none"
@@ -5109,7 +5111,7 @@ msgstr ""
 #: src/commands/utils/source-download.cc:216
 #, c-format, boost-format
 msgid "Using download directory at '%s'."
-msgstr "Використовується директорія звантаження «%s»."
+msgstr "Використовується директорія завантаження «%s»."
 
 #: src/commands/utils/source-download.cc:226
 #: src/commands/utils/source-download.cc:261
@@ -5697,7 +5699,7 @@ msgstr "завершено"
 #: src/output/OutNormal.cc:249 src/output/OutNormal.cc:283
 #: src/output/OutNormal.cc:321
 msgid "Retrieving:"
-msgstr "Звантаження:"
+msgstr "Отримання:"
 
 # window title for kernel loading (see txt_load_kernel)
 #: src/output/OutNormal.cc:256
@@ -5792,7 +5794,7 @@ msgstr "Примусове оновлення сирих метаданих"
 #: src/repos.cc:289
 #, c-format, boost-format
 msgid "Retrieving repository '%s' metadata"
-msgstr "Звантаження метаданих сховища «%s»"
+msgstr "Отримання метаданих сховища «%s»"
 
 # power-off message
 #: src/repos.cc:313
@@ -5852,7 +5854,7 @@ msgstr ""
 #: src/repos.cc:402
 #, c-format, boost-format
 msgid "Error retrieving metadata for '%s':"
-msgstr "Помилка звантаження метаданих для «%s»:"
+msgstr "Помилка отримання метаданих для «%s»:"
 
 #: src/repos.cc:415
 msgid "Forcing building of repository cache"
