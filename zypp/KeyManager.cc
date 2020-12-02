@@ -406,7 +406,11 @@ bool KeyManagerCtx::exportKey(const std::string &id, std::ostream &stream)
 
   //format as ascii armored
   gpgme_set_armor (_pimpl->_ctx, 1);
-  err = gpgme_op_export_keys (_pimpl->_ctx, keyarray, 0, out.get());
+  // bsc#1179222: Remove outdated self signatures when exporting the key.
+  // The keyring does not order the signatures when multiple versions of the
+  // same key are imported. Rpm however uses the 1st to compute the -release
+  // of the gpg-pubkey. So we export only the latest to get a proper-release.
+  err = gpgme_op_export_keys (_pimpl->_ctx, keyarray, GPGME_EXPORT_MODE_MINIMAL, out.get());
   if (!err) {
     int ret = gpgme_data_seek (out.get(), 0, SEEK_SET);
     if (ret) {

@@ -247,9 +247,17 @@ namespace zypp
     gpgme_subkey_t sKey = rawData->subkeys;
     if (sKey) {
       shared_ptr<PublicKeyData::Impl> data(new Impl);
-      //libzypp expects the date of the first signature on the first uid
-      if(rawData->uids && rawData->uids->signatures)
+      //libzypp expects the date of the latest signature on the first uid
+      if ( rawData->uids && rawData->uids->signatures ) {
         data->_created = zypp::Date(rawData->uids->signatures->timestamp);
+	// bsc#1179222: The keyring does not order the signatures when multiple
+	// versions of the same key are imported. We take the last signature here,
+	// the one GPGME_EXPORT_MODE_MINIMAL will later use in export.
+	for ( auto t = rawData->uids->signatures->next; t; t = t->next ) {
+	  if ( t->timestamp > data->_created )
+	    data->_created = t->timestamp;
+	}
+      }
       else
         data->_created = zypp::Date(sKey->timestamp);
 
