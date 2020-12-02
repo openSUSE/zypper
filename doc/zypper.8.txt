@@ -1692,9 +1692,7 @@ Parsable XML-output produced by *zypper --xmlout* will include a *<download-resu
 *needs-rebooting* ::
 	Checks if the reboot-needed flag was set by a previous update or install of a core library or service.
 +
-The reboot-needed flag is set when a package from a predefined list (/etc/zypp/needreboot) is updated or installed. Exit code ZYPPER_EXIT_INF_REBOOT_NEEDED indicates that a reboot is needed, otherwise the exit code is set to ZYPPER_EXIT_OK.
-
-
+The reboot-needed flag is set if a package that provides *installhint(reboot-needed)* is updated or installed. Additionally there is a predefined list (/etc/zypp/needreboot) of well-known packages which cause the reboot-needed flag being set unconditionally. Exit code ZYPPER_EXIT_INF_REBOOT_NEEDED indicates that a reboot is needed, otherwise the exit code is set to ZYPPER_EXIT_OK.
 
 Subcommands
 ~~~~~~~~~~~
