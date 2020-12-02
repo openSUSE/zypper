@@ -1138,6 +1138,7 @@ namespace zypp
       // Load the needreboot package specs
       {
 	sat::SolvableSpec needrebootSpec;
+	needrebootSpec.addProvides( Capability("installhint(reboot-needed)") );
 
 	Pathname needrebootFile { Pathname::assertprefix( root(), ZConfig::instance().needrebootFile() ) };
 	if ( PathInfo( needrebootFile ).isFile() )

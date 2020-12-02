@@ -4,7 +4,10 @@
 ## one of these packages was updated.
 ##
 ## This config file is maintained by libzypp unless you manually amend it.
-## Additional configuration files can be placed in /etc/zypp/needreboot.d.
+## Additional configuration files can be placed in /etc/zypp/needreboot.d
+##
+## For packages the intended way would be to provide 'installhint(reboot-needed)'
+## if the package wants to trigger the needreboot hint.
 ##
 ## Format: Each line must contain either a 'PACKAGENAME' or 'provides:CAPABILITY'
 ##         to include all packages providing a dependency match for 'CAPABILITY'.
@@ -22,4 +25,3 @@ kernel-firmware
 libopenssl1_0_0
 libopenssl1_1
 systemd
-udev
