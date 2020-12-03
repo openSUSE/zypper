@@ -14,6 +14,7 @@
 #include <unordered_set>
 #include <iterator>
 #include <stdio.h>
+#include <zypp/base/LogControl.h>
 #include <zypp/base/LogTools.h>
 #include <zypp/base/String.h>
 #include <zypp/base/Gettext.h>
@@ -396,6 +397,8 @@ namespace zypp
 
     pid_t cachepid = 0;
     FilterRunsInContainer runsInLXC;
+    MIL << "Silently scanning lsof output..." << endl;
+    zypp::base::LogControl::TmpLineWriter shutUp;	// suppress excessive readdir etc. logging in runsInLXC
     for( std::string line = source.receiveLine( 30 * 1000 ); ! line.empty(); line = source.receiveLine(  30 * 1000  ) )
     {
       // NOTE: line contains '\0' separeated fields!
