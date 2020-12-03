@@ -93,7 +93,7 @@ namespace zypp
   {
   public:
     ZYppGlobalLock()
-    : _zyppLockFilePath( env::ZYPP_LOCKFILE_ROOT() / "/var/run/zypp.pid" )
+    : _zyppLockFilePath( env::ZYPP_LOCKFILE_ROOT() / "/run/zypp.pid" )
     , _zyppLockFile( NULL )
     , _lockerPid( 0 )
     , _cleanLock( false )

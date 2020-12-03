@@ -1570,7 +1570,7 @@ namespace zypp
               else
               {
                 if ( citem.isNeedreboot() ) {
-                  auto rebootNeededFile = root() / "/var/run/reboot-needed";
+                  auto rebootNeededFile = root() / "/run/reboot-needed";
                   if ( filesystem::assert_file( rebootNeededFile ) == EEXIST)
                     filesystem::touch( rebootNeededFile );
                 }
