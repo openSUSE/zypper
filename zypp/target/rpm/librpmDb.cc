@@ -125,6 +125,10 @@ bool librpmDb::globalInit()
   initialized = true; // Necessary to be able to use exand().
   _rpmDefaultDbPath = expand( "%{_dbpath}" );
 
+  if ( _rpmDefaultDbPath.empty() ) {
+    _rpmDefaultDbPath = "/usr/lib/sysimage/";
+    WAR << "Looks like rpm has no %{_dbpath} set!?! Assuming " << _rpmDefaultDbPath << endl;
+  }
   MIL << "librpm init done: (_target:" << expand( "%{_target}" ) << ") (_dbpath:" << _rpmDefaultDbPath << ")" << endl;
   return initialized;
 }
@@ -162,6 +166,9 @@ librpmDb * librpmDb::newLibrpmDb()
   {
     ZYPP_THROW(GlobalRpmInitException());
   }
+
+  if ( _defaultDbPath.empty() )	// db_const_iterator access to /(default) without RpmDB/Tareget init.
+    _defaultDbPath = suggestedDbPath( _defaultRoot );
 
   // open rpmdb
   librpmDb * ret = 0;
