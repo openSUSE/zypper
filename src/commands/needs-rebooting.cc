@@ -28,7 +28,7 @@ NeedsRebootingCmd::NeedsRebootingCmd(std::vector<std::string> &&commandAliases_r
 
 int NeedsRebootingCmd::checkRebootNeeded( Zypper &zypper , TriBool printMessage_r )
 {
-  filesystem::Pathname rebootNeededFlag = filesystem::Pathname(zypper.config().root_dir) / "/var/run/reboot-needed";
+  filesystem::Pathname rebootNeededFlag = filesystem::Pathname(zypper.config().root_dir) / "/run/reboot-needed";
 
   if ( filesystem::PathInfo( rebootNeededFlag ).isExist() ) {
     if ( ! sameTriboolState( printMessage_r, false ) ) {
