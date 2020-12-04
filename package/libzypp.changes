@@ -3,7 +3,7 @@ Thu Dec  3 17:06:35 CET 2020 - ma@suse.de
 
 - Prevent librpmDb iterator from accidentally creating an empty
   rpmdb in / (repoened bsc#1178910)
-- Fix update of gpg keys with elongated expire date (bsc#179222)
+- Fix update of gpg keys with elongated expire date (bsc#1179222)
 - needreboot: remove udev from the list (bsc#1179083)
 - Prefer /run over /var/run.
 - version 17.25.4 (22)
