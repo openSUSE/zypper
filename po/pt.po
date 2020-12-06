@@ -13,16 +13,16 @@ msgstr ""
 "Project-Id-Version: zypp.pt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-09-18 16:45+0200\n"
-"PO-Revision-Date: 2008-06-10 16:04+0100\n"
-"Last-Translator: Antonio Cardoso Martins <digiplan.pt@gmail.com>\n"
-"Language-Team: Portuguese <opensuse-pt@opensuse.org>\n"
+"PO-Revision-Date: 2020-12-06 18:26+0000\n"
+"Last-Translator: Luís Tiago Favas <al62006@utad.eu>\n"
+"Language-Team: Portuguese <https://l10n.opensuse.org/projects/libzypp/master/"
+"pt/>\n"
 "Language: pt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-">\n"
-"Plural-Forms:  nplurals=2; plural=(n != 1);\n"
-"X-Generator: KBabel 1.11.4\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Weblate 3.6.1\n"
 
 #. dubious: Throw on malformed known types, otherwise log a warning.
 #: zypp/CheckSum.cc:136
@@ -32,7 +32,7 @@ msgstr "Tipo '%s' dúbio para soma de verificação de %u byte '%s'"
 
 #: zypp/CountryCode.cc:50
 msgid "Unknown country: "
-msgstr "Pais desconhecido:"
+msgstr "País desconhecido: "
 
 #. Defined CountryCode constants
 #. Defined LanguageCode constants
@@ -480,9 +480,8 @@ msgstr "Guiana Francesa"
 
 #. :GUF:254:
 #: zypp/CountryCode.cc:237
-#, fuzzy
 msgid "Guernsey"
-msgstr "Alemanha"
+msgstr "Guernsey"
 
 # name for GHA
 #: zypp/CountryCode.cc:238
@@ -608,7 +607,7 @@ msgstr "Israel"
 #. :ISR:376:
 #: zypp/CountryCode.cc:260
 msgid "Isle of Man"
-msgstr ""
+msgstr "Ilha de Man"
 
 #: zypp/CountryCode.cc:261
 msgid "India"
@@ -643,7 +642,7 @@ msgstr "Itália"
 #. :ITA:380:
 #: zypp/CountryCode.cc:267
 msgid "Jersey"
-msgstr ""
+msgstr "Jersey"
 
 # name for JAM
 #: zypp/CountryCode.cc:268
@@ -810,9 +809,8 @@ msgstr "Montenegro"
 
 # name for SMR
 #: zypp/CountryCode.cc:297
-#, fuzzy
 msgid "Saint Martin"
-msgstr "São Marino"
+msgstr "Coletividade de São Martinho"
 
 # name for MDG
 #: zypp/CountryCode.cc:298
@@ -1414,7 +1412,7 @@ msgstr "Providencia"
 
 #: zypp/Dep.cc:97
 msgid "Prerequires"
-msgstr ""
+msgstr "Pré requer"
 
 #: zypp/Dep.cc:98
 msgid "Requires"
@@ -1462,12 +1460,12 @@ msgstr "Não é possível fazer chroot para '%s' (%s)."
 #: zypp/ExternalProgram.cc:375
 #, c-format, boost-format
 msgid "Can't chdir to '%s' inside chroot '%s' (%s)."
-msgstr ""
+msgstr "Não foi possível fazer chdir a  '%s' dentro de chroot '%s' (%s)."
 
 #: zypp/ExternalProgram.cc:376
 #, c-format, boost-format
 msgid "Can't chdir to '%s' (%s)."
-msgstr ""
+msgstr "Não foi possível fazer chdir a '%s' (%s)."
 
 #. don't want to get here
 #: zypp/ExternalProgram.cc:405
