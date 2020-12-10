@@ -15,8 +15,8 @@ msgstr ""
 "Project-Id-Version: zypper.pt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-09-11 10:04+0200\n"
-"PO-Revision-Date: 2020-10-30 14:50+0000\n"
-"Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>\n"
+"PO-Revision-Date: 2020-12-11 00:27+0000\n"
+"Last-Translator: Luís Tiago Favas <al62006@utad.eu>\n"
 "Language-Team: Portuguese <https://l10n.opensuse.org/projects/zypper/master/"
 "pt/>\n"
 "Language: pt\n"
@@ -54,12 +54,17 @@ msgid ""
 "File '%1%' is the repositories master index file. It ensures the integrity "
 "of the whole repo."
 msgstr ""
+"O '%1%' é o ficheiro índice mestre dos repositórios. Garante a integridade "
+"de toda a repo."
 
 #: src/callbacks/keyring.h:46
 msgid ""
 "We can't verify that no one meddled with this file, so it might not be "
 "trustworthy anymore! You should not continue unless you know it's safe."
 msgstr ""
+"Não conseguimos garantir que ninguém mexeu neste ficheiro, por tanto pode já "
+"não ser confiável! Você não deve continuar a não ser que tenha a certa que é "
+"seguro."
 
 #: src/callbacks/keyring.h:51
 msgid ""
@@ -67,6 +72,9 @@ msgid ""
 "malicious change, so it might not be trustworthy anymore! You should not "
 "continue unless you know it's safe."
 msgstr ""
+"Este ficheiro foi modificado após ter sido assinado. Isto pode ter sido uma "
+"modificação maliciosa , portanto é melhor já não confiar mais! Você não deve "
+"continuar a não ser que tenha a certeza que é seguro."
 
 #: src/callbacks/keyring.h:79
 msgid "Repository:"
@@ -90,7 +98,7 @@ msgstr "Chave expira:"
 
 #: src/callbacks/keyring.h:86
 msgid "Subkey:"
-msgstr ""
+msgstr "Sub-chave:"
 
 #: src/callbacks/keyring.h:87
 msgid "Rpm Name:"
@@ -245,7 +253,7 @@ msgstr "Confiar na chave temporariamente."
 #. translators: help text for the 'a' option in the 'r/t/a' prompt
 #: src/callbacks/keyring.h:333
 msgid "Trust the key and import it into trusted keyring."
-msgstr "Confiar na chave e importa-la para o porta chaves de confiança?"
+msgstr "Confiar na chave e importa-la para o porta-chaves de confiança."
 
 #: src/callbacks/keyring.h:371
 #, c-format, boost-format
@@ -283,11 +291,13 @@ msgid ""
 "The rpm database seems to contain old V3 version gpg keys which are "
 "meanwhile obsolete and considered insecure:"
 msgstr ""
+"A base de dados rpm aparenta conter chaves gpg velhas da versão V3 que estão "
+"obsoletas e são consideradas inseguras:"
 
 #: src/callbacks/keyring.h:444
 #, boost-format
 msgid "To see details about a key call '%1%'."
-msgstr ""
+msgstr "Para ver detalhes sobre uma chamada chave '%1%'."
 
 #: src/callbacks/keyring.h:448
 #, boost-format
@@ -295,6 +305,8 @@ msgid ""
 "Unless you believe the key in question is still in use, you can remove it "
 "from the rpm database calling '%1%'."
 msgstr ""
+"A menos que acredite que a chave em questão ainda esteja em uso, pode removê-"
+"la da base de dados rpm ao chamar '%1%'."
 
 #: src/callbacks/keyring.h:470
 #, c-format, boost-format
@@ -463,7 +475,11 @@ msgid_plural ""
 "%1% packages had to be excluded from file conflicts check because they are "
 "not yet downloaded."
 msgstr[0] ""
+"%1% pacote teve de ser excluído da verificação de conflitos de ficheiros "
+"porque ainda não foi descarregado."
 msgstr[1] ""
+"%1% pacotes tiveram de ser excluídos da verificação de conflitos de "
+"ficheiros porque ainda não foram descarregados."
 
 #. TranslatorExplanation %1%(commandline option)
 #: src/callbacks/rpm.h:460
@@ -504,15 +520,15 @@ msgstr ""
 #: src/commands/commandhelpformatter.h:94
 #, c-format, boost-format
 msgid "This is an alias for '%s'."
-msgstr ""
+msgstr "Já existe um pseudónimo para '%s'."
 
 #: src/commands/commandhelpformatter.h:107
 msgid "Examples:"
-msgstr ""
+msgstr "Exemplos:"
 
 #: src/commands/commandhelpformatter.h:110
 msgid "Arguments:"
-msgstr ""
+msgstr "Argumentos:"
 
 #: src/commands/commandhelpformatter.h:123 src/utils/flags/zyppflags.cc:627
 msgid "Command options:"
@@ -540,29 +556,29 @@ msgstr "Opções para peritos:"
 #: src/commands/commandhelpformatter.h:139
 #, boost-format
 msgid "The same as %1%."
-msgstr ""
+msgstr "O mesmo a %1%."
 
 #: src/commands/commandhelpformatter.h:187
 msgid "Usage:"
-msgstr ""
+msgstr "Utilização:"
 
 #: src/commands/commandhelpformatter.h:189
 msgid "Global Options:"
-msgstr ""
+msgstr "Opções Globais:"
 
 #: src/commands/commandhelpformatter.h:191
 msgid "Commands:"
-msgstr ""
+msgstr "Comandos:"
 
 #. translators: --details
 #: src/commands/commonflags.h:23 src/commands/inrverify.cc:35
 msgid "Show the detailed installation summary."
-msgstr ""
+msgstr "Ver o resumo detalhado da instalação."
 
 #: src/commands/commonflags.h:30
 #, boost-format
 msgid "Type of package (%1%)."
-msgstr ""
+msgstr "Tipo de pacote (%1%)."
 
 #. translators: --best-effort
 #: src/commands/commonflags.h:38
@@ -570,10 +586,12 @@ msgid ""
 "Do a 'best effort' approach to update. Updates to a lower than the latest "
 "version are also acceptable."
 msgstr ""
+"Fazer uma abordagem 'melhor esforço' para a atualização. As atualizações "
+"para uma versão inferior à mais recente também são aceitáveis."
 
 #: src/commands/commonflags.h:45
 msgid "Consider only patches which affect the package management itself."
-msgstr ""
+msgstr "Considerar apenas os remendos que afetam a própria gestão do pacote."
 
 #: src/output/Out.h:26 src/repos.cc:126 src/repos.cc:154
 msgid "Yes"
@@ -586,7 +604,7 @@ msgstr "Não"
 #. translator: usually followed by a ' ' and some explanatory text
 #: src/output/Out.h:38
 msgid "Note:"
-msgstr ""
+msgstr "Nota:"
 
 #. translator: usually followed by a ' ' and some explanatory text
 #: src/output/Out.h:40
@@ -606,62 +624,62 @@ msgstr "Continuar?"
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:23
 msgid "ALIAS"
-msgstr ""
+msgstr "PSEUDÓNIMO"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:25
 msgid "ALIAS|#|URI"
-msgstr ""
+msgstr "PSEUDÓNIMO|#|URI"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:27
 msgid "CATEGORY"
-msgstr ""
+msgstr "CATEGORIA"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:29
 msgid "DIR"
-msgstr ""
+msgstr "DIR"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:31
 msgid "FILE"
-msgstr ""
+msgstr "FICHEIRO"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:33
 msgid "FILE.repo"
-msgstr ""
+msgstr "FICHEIRO.repo"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:35
 msgid "FORMAT"
-msgstr ""
+msgstr "FORMATO"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:37
 msgid "INTEGER"
-msgstr ""
+msgstr "INTEIRO"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:39
 msgid "PATH"
-msgstr ""
+msgstr "CAMINHO"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:41
 msgid "SEVERITY"
-msgstr ""
+msgstr "SEVERIDADE"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:43
 msgid "STRING"
-msgstr ""
+msgstr "STRING"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:45
 msgid "TAG"
-msgstr ""
+msgstr "ETIQUETA"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:47
@@ -679,12 +697,12 @@ msgstr "URI"
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:51
 msgid "YYYY-MM-DD"
-msgstr ""
+msgstr "AAAA-MM-DD"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:53
 msgid "MODE"
-msgstr ""
+msgstr "MODO"
 
 #. TranslatorExplanation These are reasons for various failures.
 #: src/utils/prompt.h:185
@@ -706,7 +724,7 @@ msgstr "Erro"
 
 #: src/Command.cc:93
 msgid "Invalid command"
-msgstr ""
+msgstr "Comando inválido"
 
 #: src/Command.cc:111
 msgid "Repository Management:"
@@ -714,35 +732,35 @@ msgstr "Gestão de Repositórios:"
 
 #: src/Command.cc:119
 msgid "Service Management:"
-msgstr ""
+msgstr "Gestão de Serviço:"
 
 #: src/Command.cc:125
 msgid "Software Management:"
-msgstr ""
+msgstr "Gestão de Software:"
 
 #: src/Command.cc:131
 msgid "Update Management:"
-msgstr ""
+msgstr "Gestão de Atualizações:"
 
 #: src/Command.cc:138
 msgid "Querying:"
-msgstr ""
+msgstr "Questionar:"
 
 #: src/Command.cc:149
 msgid "Package Locks:"
-msgstr ""
+msgstr "Fechos de Pacote:"
 
 #: src/Command.cc:154
 msgid "Locale Management:"
-msgstr ""
+msgstr "Gestão Local:"
 
 #: src/Command.cc:158
 msgid "Other Commands:"
-msgstr ""
+msgstr "Outros Comandos:"
 
 #: src/Command.cc:167
 msgid "Subcommands:"
-msgstr ""
+msgstr "Sub-comandos:"
 
 #: src/Command.cc:288
 #, c-format, boost-format
@@ -757,7 +775,7 @@ msgstr "Estilo de tabela inválido %d."
 #: src/Config.cc:54
 #, c-format, boost-format
 msgid " Use an integer number from %d to %d"
-msgstr ""
+msgstr " Utilize um número inteiro de %d até %d"
 
 #: src/Config.cc:248
 msgid "The path specified in the --root option must be absolute."
@@ -766,41 +784,45 @@ msgstr "O caminho especificado na opção --root deve ser absoluto."
 #. translators: --help, -h
 #: src/Config.cc:326
 msgid "Help."
-msgstr ""
+msgstr "Ajuda."
 
 #. translators: --version, -V
 #: src/Config.cc:335
 msgid "Output the version number."
-msgstr ""
+msgstr "Emitir o número da versão."
 
 #. translators: --promptids
 #: src/Config.cc:347
 msgid "Output a list of zypper's user prompts."
-msgstr ""
+msgstr "Emite uma lista de instruções de utilizadores do zypper."
 
 #. translators: --config, -c <FILE>
 #: src/Config.cc:360
 msgid "Use specified config file instead of the default."
-msgstr ""
+msgstr "Utilizar ficheiro de configuração específico em vez do padrão."
 
 #: src/Config.cc:367
 msgid "User data string must not contain nonprintable or newline characters!"
 msgstr ""
+"A string de dados do utilizador não deve conter caracteres não imprimíveis "
+"ou de nova linha!"
 
 #. translators: --userdata <STRING>
 #: src/Config.cc:373
 msgid "User defined transaction id used in history and plugins."
 msgstr ""
+"ID de transação definido pelo utilizador utilizada no histórico e nos "
+"plugins."
 
 #. translators: --quiet, -q
 #: src/Config.cc:381
 msgid "Suppress normal output, print only error messages."
-msgstr ""
+msgstr "Suprimir output normal, imprime apenas mensagens de erro."
 
 #. translators: --verbose, -v
 #: src/Config.cc:389
 msgid "Increase verbosity."
-msgstr ""
+msgstr "Incrementar a verbosidade."
 
 #. translators: --color / --no-color
 #: src/Config.cc:410
@@ -810,13 +832,13 @@ msgstr ""
 #. translators: --no-abbrev, -A
 #: src/Config.cc:415
 msgid "Do not abbreviate text in tables."
-msgstr ""
+msgstr "Não abreviar texto nas tabelas."
 
 #. translators: --table-style, -s, %1% denotes the supported range of the integer argument (e.g. "1-11")
 #: src/Config.cc:420
 #, boost-format
 msgid "Table style (%1%)."
-msgstr ""
+msgstr "Estilo da tabela (%1%)."
 
 #: src/Config.cc:424 src/commands/optionsets.cc:284
 msgid "Entering non-interactive mode."
@@ -825,29 +847,33 @@ msgstr "A entrar em modo não-interactivo."
 #. translators: --non-interactive, -n
 #: src/Config.cc:428
 msgid "Do not ask anything, use default answers automatically."
-msgstr ""
+msgstr "Não perguntar nada, usar as respostas padrão automaticamente."
 
 #: src/Config.cc:433
 msgid ""
 "Patches having the flag rebootSuggested set will not be treated as "
 "interactive."
 msgstr ""
+"Remendos com a bandeira de reiniciar. O conjunto sugerido não será tratado "
+"como interativo."
 
 #. translators: --non-interactive-include-reboot-patches
 #: src/Config.cc:437
 msgid ""
 "Do not treat patches as interactive, which have the rebootSuggested-flag set."
 msgstr ""
+"Não trate remendos como interativo, que têm  a bandeira sugerida de reinicio "
+"definida."
 
 #. translators: --xmlout, -x
 #: src/Config.cc:447
 msgid "Switch to XML output."
-msgstr ""
+msgstr "Mudar para output em XML."
 
 #. translators: --ignore-unknown, -i
 #: src/Config.cc:452
 msgid "Ignore unknown packages."
-msgstr ""
+msgstr "Ignorar pacotes desconhecidos."
 
 #. translators: --terse, -t
 #: src/Config.cc:463
@@ -859,62 +885,70 @@ msgstr ""
 #: src/Config.cc:487
 msgid "Use alternative repository definition file directory."
 msgstr ""
+"Utilizar diretoria de ficheiros de definição de repositório alternativo."
 
 #. translators: --cache-dir, -C <DIR>
 #: src/Config.cc:502
 msgid "Use alternative directory for all caches."
-msgstr ""
+msgstr "Utilizar diretoria alternativa para todas as caches."
 
 #. translators: --raw-cache-dir <DIR>
 #: src/Config.cc:515
 msgid "Use alternative raw meta-data cache directory."
-msgstr ""
+msgstr "Utilizar diretoria alternativa de cache de meta-dados em bruto."
 
 #. translators: --solv-cache-dir <DIR>
 #: src/Config.cc:529
 msgid "Use alternative solv file cache directory."
-msgstr ""
+msgstr "Utilizar diretoria alternativa de ficheiros de cache solv."
 
 #. translators: --pkg-cache-dir <DIR>
 #: src/Config.cc:543
 msgid "Use alternative package cache directory."
-msgstr ""
+msgstr "Utilizar diretoria de cache de pacotes alternativa."
 
 #: src/Config.cc:548
 msgid "Repository Options"
-msgstr ""
+msgstr "Opções de Repositório"
 
 #: src/Config.cc:552
 msgid "Entering 'no-gpg-checks' mode."
-msgstr "A entrar no modo 'sem-verificações-gpg'"
+msgstr "A entrar no modo 'sem-verificações-gpg'."
 
 #. translators: --no-gpg-checks
 #: src/Config.cc:556
 msgid "Ignore GPG check failures and continue."
-msgstr ""
+msgstr "Ignorar verificações falhadas de GPG e continuar."
 
 #: src/Config.cc:561
 #, c-format, boost-format
 msgid ""
 "Turning on '%s'. New repository signing keys will be automatically imported!"
 msgstr ""
+"Ligar em '%s'. Novas chaves de assinatura de repositório serão "
+"automaticamente importadas!"
 
 #. translators: --gpg-auto-import-keys
 #: src/Config.cc:567
 msgid "Automatically trust and import new repository signing keys."
 msgstr ""
+"Confiar e importar automaticamente novas chaves de assinatura de repositório."
 
 #. translators: --plus-repo, -p <URI>
 #: src/Config.cc:571
 msgid "Use an additional repository."
-msgstr ""
+msgstr "Utilizar um repositório adicional."
 
 #. translators: --plus-content <TAG>
 #: src/Config.cc:575
+#, fuzzy
 msgid ""
 "Additionally use disabled repositories providing a specific keyword. Try '--"
 "plus-content debug' to enable repos indicating to provide debug packages."
 msgstr ""
+"Adicionalmente, utilize repositórios desativado ao providenciar uma palavra-"
+"chave específica. Tente '--plus-content debug' para ativar repos indiquem "
+"para fornecer pacotes de debug."
 
 #: src/Config.cc:581
 msgid "Repositories disabled, using the database of installed packages only."
@@ -925,7 +959,7 @@ msgstr ""
 #. translators: --disable-repositories
 #: src/Config.cc:585
 msgid "Do not read meta-data from repositories."
-msgstr ""
+msgstr "Não ler meta-dados dos repositórios."
 
 #: src/Config.cc:589
 msgid "Autorefresh disabled."
@@ -934,7 +968,7 @@ msgstr "Auto-actualização desactivada."
 #. translators: --no-refresh
 #: src/Config.cc:593
 msgid "Do not refresh the repositories."
-msgstr ""
+msgstr "Não refrescar os repositórios."
 
 #: src/Config.cc:597
 msgid "CD/DVD repositories disabled."
@@ -943,7 +977,7 @@ msgstr "Repositórios de CD/DVD foram desativados."
 #. translators: --no-cd
 #: src/Config.cc:601
 msgid "Ignore CD/DVD repositories."
-msgstr ""
+msgstr "Ignorar repositórios CD/DVD."
 
 #: src/Config.cc:605
 msgid "Remote repositories disabled."
@@ -952,7 +986,7 @@ msgstr "Repositórios remotos foram desativados."
 #. translators: --no-remote
 #: src/Config.cc:609
 msgid "Ignore remote repositories."
-msgstr ""
+msgstr "Ignorar repositórios remotos."
 
 #. translators: --releasever
 #: src/Config.cc:616
@@ -960,21 +994,25 @@ msgid ""
 "Set the value of $releasever in all .repo files (default: distribution "
 "version)"
 msgstr ""
+"Defina o valor de $releasever em todos os ficheiros .repo (padrão: versão da "
+"distribuição)"
 
 #: src/Config.cc:620
 msgid "Target Options"
-msgstr ""
+msgstr "Opções Alvo"
 
 #. translators: --root, -R <DIR>
 #: src/Config.cc:625
 msgid "Operate on a different root directory."
-msgstr ""
+msgstr "Operar numa diretoria raiz diferente."
 
 #. translators: --installroot <DIR>
 #: src/Config.cc:631
 msgid ""
 "Operate on a different root directory, but share repositories with the host."
 msgstr ""
+"Operar numa diretoria raiz diferente, mas partilhar repositórios com o "
+"hospedeiro."
 
 #: src/Config.cc:637
 msgid "Ignoring installed resolvables."
@@ -983,20 +1021,20 @@ msgstr "A ignorar os resolúveis instalados."
 #. translators: --disable-system-resolvables
 #: src/Config.cc:640
 msgid "Do not read installed packages."
-msgstr ""
+msgstr "Não ler pacotes instalados."
 
 #: src/Config.cc:804
 msgid "No config file is in use. Can not save options."
-msgstr ""
+msgstr "Nenhum ficheiro de configuração em uso. Não é possível gravar opções."
 
 #: src/Config.cc:815
 #, boost-format
 msgid "Option '%1%' saved in '%2%'."
-msgstr ""
+msgstr "Opção '%1%' gravada em '%2%'."
 
 #: src/Config.cc:822
 msgid "Failed to save option."
-msgstr ""
+msgstr "Falha ao gravar a opção."
 
 #: src/PackageArgs.cc:208
 #, c-format, boost-format
@@ -1139,6 +1177,9 @@ msgid ""
 "There is an update candidate for '%s' from vendor '%s', while the current "
 "vendor is '%s'. Use '%s' to install this candidate."
 msgstr ""
+"Existe um candidato de atualização para \"%s\" do fornecedor \"%s\", "
+"enquanto que o fornecedor atual é \"%s\". Utilize '%s' para instalar este "
+"candidato."
 
 #: src/RequestFeedback.cc:132
 #, c-format, boost-format
@@ -1262,7 +1303,7 @@ msgstr "Será que quis dizer %1%?"
 #: src/SolverRequester.cc:487
 #, c-format, boost-format
 msgid "Ignoring option %s when updating the update stack first."
-msgstr ""
+msgstr "A ignorar a opção %s ao atualizar a pilha de atualizações primeiro."
 
 #. translator: '%1%' is a products name
 #. '%2%' is a command to call (like 'zypper dup')
@@ -1270,7 +1311,7 @@ msgstr ""
 #: src/Summary.cc:400
 #, boost-format
 msgid "Product '%1%' requires to be updated by calling '%2%'!"
-msgstr ""
+msgstr "O produto '%1%' requer ser atualizado ao chamar '%2%'!"
 
 #. translators: Appended when clipping a long enumeration:
 #. "ConsoleKit-devel ConsoleKit-doc ... and 20828 more items."
@@ -1768,13 +1809,13 @@ msgstr[1] "As seguintes correcções irão ser melhoradas:"
 #, c-format, boost-format
 msgid "The following package requires a system reboot:"
 msgid_plural "The following %d packages require a system reboot:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "O pacote seguinte requer um reiniciar do sistema:"
+msgstr[1] "Os %d pacotes seguintes requer um reiniciar do sistema:"
 
 #: src/Summary.cc:1374
 #, boost-format
 msgid "Overall download size: %1%. Already cached: %2%."
-msgstr ""
+msgstr "Tamanho total do descarregamento: %1%. Já em cache:  %2%."
 
 #: src/Summary.cc:1377
 msgid "Download only."
@@ -1911,6 +1952,8 @@ msgid ""
 "Package manager restart required. (Run this command once again after the "
 "update stack got updated)"
 msgstr ""
+"O reinicio do gestor de pacotes é requisitado. (Execute este comando outra "
+"vez depois de a pilha de atualizações ter sido atualizada)"
 
 #: src/Summary.cc:1589
 msgid "System reboot required."
@@ -1926,7 +1969,7 @@ msgstr "É necessário o reinicio do sistema."
 #. Continue? [y/n/...? shows all options] (y):
 #: src/Summary.cc:1606
 msgid "Consider to cancel:"
-msgstr ""
+msgstr "Considerar cancelar:"
 
 #: src/Zypper.cc:91
 msgid ""
@@ -1942,6 +1985,9 @@ msgid ""
 "We can ask PackageKit to interrupt the current action as soon as possible, "
 "but it depends on PackageKit how fast it will respond to this request."
 msgstr ""
+"Podemos pedir ao PackageKit que interrompa a ação atual o mais rapidamente "
+"possível, mas depende da rapidez com que o PackageKit responderá a este "
+"pedido."
 
 #: src/Zypper.cc:100
 msgid "Ask PackageKit to quit?"
@@ -1973,13 +2019,16 @@ msgstr "Verbosidade: %d"
 
 #: src/Zypper.cc:319
 msgid "Enforced setting"
-msgstr ""
+msgstr "Definição forçada"
 
 #: src/Zypper.cc:342
 msgid ""
 "The /etc/products.d/baseproduct symlink is dangling or missing!\n"
 "The link must point to your core products .prod file in /etc/products.d.\n"
 msgstr ""
+"O symlink /etc/products.d/baseproduct está pendente ou em falta!\n"
+"A ligação deve apontar para o núcleo do ficheiro de produtos .prod em /etc/"
+"products.d.\n"
 
 #. TranslatorExplanation The %s is "--plus-repo"
 #. TranslatorExplanation The %s is "--option-name"
@@ -2088,9 +2137,8 @@ msgid "a/r/i/u/e"
 msgstr "a/r/i"
 
 #: src/callbacks/media.cc:170
-#, fuzzy
 msgid "Eject medium."
-msgstr "Ejetar média."
+msgstr "Ejetar media de suporte."
 
 #. TranslatorExplanation translate letters 'y' and 'n' to whathever is appropriate for your language.
 #. Try to check what answers does zypper accept (it always accepts y/n at least)
@@ -2118,6 +2166,8 @@ msgid ""
 "Authentication required to access %s. You need to be root to be able to read "
 "the credentials from %s."
 msgstr ""
+"Autenticação necessária para aceder a %s. Você precisa de ser root para ser "
+"capaz de ler as credenciais em %s."
 
 #: src/callbacks/media.cc:313 src/callbacks/media.cc:320
 msgid "User Name"
@@ -2131,35 +2181,39 @@ msgstr "Palavra Passe"
 
 #: src/commands/conditions.cc:19
 msgid "Root privileges are required to run this command."
-msgstr ""
+msgstr "Privilégios de root são necessários para executar este comando."
 
 #: src/commands/conditions.cc:47
 msgid ""
 "This is a transactional-server, please use transactional-update to update or "
 "modify the system."
 msgstr ""
+"Isto é um servidor-transacional, por favor utilize transactional-update para "
+"atualizar ou modificar o sistema."
 
 #: src/commands/conditions.cc:49
 msgid ""
 "The target filesystem is mounted as read-only. Please make sure the target "
 "filesystem is writeable."
 msgstr ""
+"O sistema de ficheiros alvo está montado como apenas de leitura. Por favor "
+"garanta que é possível escrever para o sistema em questão."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/distupgrade.cc:20
 msgid "dist-upgrade (dup) [OPTIONS]"
-msgstr ""
+msgstr "dist-upgrade (dup) [OPÇÕES]"
 
 #. translators: command summary: dist-upgrade, dup
 #. translators: command description
 #: src/commands/distupgrade.cc:22 src/commands/distupgrade.cc:24
 msgid "Perform a distribution upgrade."
-msgstr ""
+msgstr "Executa uma atualização da distribuição."
 
 #. translators: --from <ALIAS|#|URI>
 #: src/commands/distupgrade.cc:37
 msgid "Restrict upgrade to specified repository."
-msgstr ""
+msgstr "Restringe a atualização para um repositório específico."
 
 #: src/commands/distupgrade.cc:68
 #, c-format, boost-format
@@ -2168,40 +2222,46 @@ msgid ""
 "Make sure these repositories are compatible before you continue. See '%s' "
 "for more information about this command."
 msgstr ""
+"Está prestes a fazer uma atualização da distribuição com todos os "
+"repositórios ativados. Certifique-se de que estes repositórios são "
+"compatíveis antes de continuar. Ver '%s' para mais informações sobre este "
+"comando."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/help.cc:22
 msgid "zypper [--GLOBAL-OPTIONS] <COMMAND> [--COMMAND-OPTIONS] [ARGUMENTS]"
-msgstr ""
+msgstr "zypper [--OPÇÕES-GLOBAIS] <COMANDO> [--OPÇÕES-DO-COMANDO] [ARGUMENTOS]"
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/help.cc:25
 msgid "zypper <SUBCOMMAND> [--COMMAND-OPTIONS] [ARGUMENTS]"
-msgstr ""
+msgstr "zypper <SUB-COMANDO> [--OPÇÕES-DO-COMANDO] [ARGUMENTOS]"
 
 #: src/commands/help.cc:80 src/commands/help.cc:81
 msgid "Print zypper help"
-msgstr ""
+msgstr "Imprimir a ajuda do zypper"
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/inrverify.cc:68
 msgid "install-new-recommends (inr) [OPTIONS]"
-msgstr ""
+msgstr "install-new-recommends (inr) [OPÇÕES]"
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/inrverify.cc:71
 msgid "verify (ve) [OPTIONS]"
-msgstr ""
+msgstr "verify (ve) [OPÇÕES]"
 
 #. translators: command summary: install-new-recommends, inr
 #: src/commands/inrverify.cc:81
 msgid "Install newly added packages recommended by installed packages."
 msgstr ""
+"Instalar os pacotes recentemente adicionados recomendados pelos pacotes "
+"instalados."
 
 #. translators: command summary: verify, ve
 #: src/commands/inrverify.cc:84
 msgid "Verify integrity of package dependencies."
-msgstr ""
+msgstr "Verificar a integridade das dependências dos pacotes."
 
 #. translators: command description
 #: src/commands/inrverify.cc:95
@@ -2212,6 +2272,11 @@ msgid ""
 "unconditionally on small or minimal systems, as it may easily add a large "
 "number of packages."
 msgstr ""
+"Instalar pacotes recentemente adicionados recomendados por pacotes já "
+"instalados. Este comando basicamente reavalia as recomendações de todos os "
+"pacotes instalados e preenche o sistema em conformidade. Você não quer "
+"chamar a isto incondicionalmente em sistemas pequenos ou mínimos, pois pode "
+"facilmente adicionar um grande número de pacotes."
 
 #. translators: command description, %1% is a zypper command
 #: src/commands/inrverify.cc:98
@@ -2221,6 +2286,9 @@ msgid ""
 "supporting available hardware, languages or filesystems. Useful after having "
 "added e.g. new hardware or driver repos."
 msgstr ""
+"Chamado como '%1%', restringe o comando a procurar apenas pacotes de suporte "
+"de hardware disponível, línguas ou sistemas de ficheiros. Útil depois de ter "
+"adicionado, por exemplo, novo hardware ou repositório de controladores."
 
 #. translators: command description
 #: src/commands/inrverify.cc:101
@@ -2228,24 +2296,27 @@ msgid ""
 "Check whether dependencies of installed packages are satisfied and suggest "
 "to install or remove packages in order to repair the dependency problems."
 msgstr ""
+"Verifique se as dependências dos pacotes instalados estão satisfeitas e "
+"sugira a instalação ou remoção de pacotes a fim de reparar os problemas de "
+"dependências."
 
 #: src/commands/installremove.cc:62
 msgid "Select packages by plain name, not by capability."
-msgstr ""
+msgstr "Selecionar os pacotes por nome simples, não por capacidade."
 
 #: src/commands/installremove.cc:63
 msgid "Select packages solely by capability."
-msgstr ""
+msgstr "Selecione os pacotes unicamente por capacidade."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/installremove.cc:82
 msgid "remove (rm) [OPTIONS] <CAPABILITY> ..."
-msgstr ""
+msgstr "remove (rm) [OPÇÕES] <CAPACIDADE> ..."
 
 #. translators: command summary: remove, rm
 #: src/commands/installremove.cc:84
 msgid "Remove packages."
-msgstr ""
+msgstr "Remover pacotes."
 
 #. translators: command description
 #: src/commands/installremove.cc:86
@@ -2253,11 +2324,13 @@ msgid ""
 "Remove packages with specified capabilities. A capability is NAME[.ARCH]"
 "[OP<VERSION>], where OP is one of <, <=, =, >=, >."
 msgstr ""
+"Remover pacotes com capacidades especificadas. Uma capacidade é um "
+"NOME[.ARCH] ou [OP<VERSÃO>], onde OP é um dos sinais <, <=, =, >=, >."
 
 #: src/commands/installremove.cc:104 src/commands/installremove.cc:224
 #: src/utils/messages.cc:53
 msgid "Too few arguments."
-msgstr "Demasiados argumentos."
+msgstr "Demasiados poucos argumentos."
 
 #: src/commands/installremove.cc:105 src/commands/installremove.cc:225
 msgid "At least one package name is required."
@@ -2328,7 +2401,7 @@ msgstr ""
 #. 'zypper in --entire-catalog foorepo someargument' is specified
 #: src/commands/installremove.cc:236
 msgid "Ignoring arguments, marking the entire repository."
-msgstr "A ignorar os argumentos, a marcar integralmente o repositório"
+msgstr "A ignorar os argumentos, a marcar integralmente o repositório."
 
 #: src/commands/installremove.cc:249 src/commands/sourceinstall.cc:92
 msgid "No valid arguments specified."
@@ -3497,7 +3570,7 @@ msgstr "Não são permitidos argumentos quando se utiliza '%s'."
 
 #: src/commands/repos/refresh.cc:195 src/repos.cc:1024
 msgid "Specified repositories: "
-msgstr "Repositórios especificados:"
+msgstr "Repositórios especificados: "
 
 #: src/commands/repos/refresh.cc:218
 #, fuzzy, c-format, boost-format
@@ -3595,7 +3668,7 @@ msgstr ""
 #: src/commands/repos/rename.cc:43
 #, c-format, boost-format
 msgid "Repository '%s' renamed to '%s'."
-msgstr "Repositório '%s' renomeado para '%s'"
+msgstr "Repositório '%s' renomeado para '%s'."
 
 #: src/commands/repos/rename.cc:47 src/repos.cc:1203
 #, c-format, boost-format
@@ -6846,8 +6919,8 @@ msgstr "a/r/i"
 #, c-format, boost-format
 msgid "Autoselecting '%s' after %u second."
 msgid_plural "Autoselecting '%s' after %u seconds."
-msgstr[0] "Auto-seleccionar '%s' depois de %u segundos."
-msgstr[1] "auto-seleccionar %s depois de %u"
+msgstr[0] "Auto-selecionar '%s' depois de %u segundos."
+msgstr[1] "Auto-selecionar os '%s' depois de %u segundos."
 
 #: src/utils/prompt.cc:284
 msgid "Trying again..."
