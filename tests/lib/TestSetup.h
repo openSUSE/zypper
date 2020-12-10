@@ -197,7 +197,7 @@ public:
   }
 
   // Load repos included in a solver testcase.
-  void loadTestcaseRepos( const Pathname & path_r )
+  void loadTestcaseRepos( const Pathname & path_r, misc::testcase::LoadTestcase::TestcaseTrials * trialsP_r = nullptr )
   {
     zypp::misc::testcase::LoadTestcase loader;
     std::string err;
@@ -220,6 +220,8 @@ public:
       satpool().setRequestedLocales( localesTracker.added() );
     }
     poolProxy(); // prepare
+    if ( trialsP_r )
+      *trialsP_r = loader.trialInfo();
   }
 
 public:

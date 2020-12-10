@@ -59,6 +59,7 @@ namespace zypp::misc::testcase {
   {
   public:
     struct Impl;
+    using TestcaseTrials = std::vector<TestcaseTrial>;
 
     enum Type {
       None,
@@ -73,7 +74,7 @@ namespace zypp::misc::testcase {
     static Type testcaseTypeAt ( const zypp::Pathname &path );
 
     const TestcaseSetup &setupInfo() const;
-    const std::vector<TestcaseTrial> &trialInfo() const;
+    const TestcaseTrials &trialInfo() const;
 
   private:
     std::unique_ptr<Impl> _pimpl;

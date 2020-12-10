@@ -22,7 +22,7 @@ namespace zypp::misc::testcase {
 
   struct LoadTestcase::Impl {
     TestcaseSetup _setup;
-    std::vector<TestcaseTrial> _trials;
+    TestcaseTrials _trials;
 
     bool loadHelix (const Pathname &filename, std::string *err);
 
@@ -235,7 +235,7 @@ namespace zypp::misc::testcase {
     return _pimpl->_setup;
   }
 
-  const std::vector<TestcaseTrial> &LoadTestcase::trialInfo() const
+  const LoadTestcase::TestcaseTrials &LoadTestcase::trialInfo() const
   {
     return _pimpl->_trials;
   }
