@@ -119,7 +119,6 @@ namespace yamltest::detail {
         bool success = readListInlineOrFromFile( [&target]( const YAML::Node &dataNode, auto ){
           std::string name = dataNode["alias"].as<std::string>();
           std::string file = dataNode["file"].as<std::string>();
-          std::string type = dataNode["type"].as<std::string>();
 
           unsigned prio = 99;
           if ( dataNode["priority"] )
@@ -281,7 +280,7 @@ namespace yamltest::detail {
       } else {
         if( data.IsScalar() ) {
           n.properties().insert( { key, data.as<std::string>() } );
-        } if ( data.IsSequence() ) {
+        } else if ( data.IsSequence() ) {
           // if the type of a data field is a sequence, we treat all the elements in there
           // as sub elements. Just like in XML you can have sub nodes its the same here
           // the key name is ignored in those cases and can be chosen freely
