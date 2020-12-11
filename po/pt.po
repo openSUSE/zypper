@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: zypper.pt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-09-11 10:04+0200\n"
-"PO-Revision-Date: 2020-12-11 00:27+0000\n"
+"PO-Revision-Date: 2020-12-11 19:27+0000\n"
 "Last-Translator: Luís Tiago Favas <al62006@utad.eu>\n"
 "Language-Team: Portuguese <https://l10n.opensuse.org/projects/zypper/master/"
 "pt/>\n"
@@ -2354,17 +2354,17 @@ msgstr ""
 
 #: src/commands/installremove.cc:126
 msgid "Uninstallation of a source package not defined and implemented."
-msgstr ""
+msgstr "A desinstalação de um pacote fonte não definida e implementada."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/installremove.cc:166
 msgid "install (in) [OPTIONS] <CAPABILITY|RPM_FILE_URI> ..."
-msgstr ""
+msgstr "install (in) [OPÇÕES] <Capacidade|URI_FICHEIRO_RPM> ..."
 
 #. translators: command summary: install, in
 #: src/commands/installremove.cc:168
 msgid "Install packages."
-msgstr ""
+msgstr "Instala pacotes."
 
 #. translators: command description
 #: src/commands/installremove.cc:170
@@ -2373,11 +2373,14 @@ msgid ""
 "location. A capability is NAME[.ARCH][OP<VERSION>], where OP is one of <, "
 "<=, =, >=, >."
 msgstr ""
+"Instala pacotes com capacidades específicas ou ficheiros RPM com localização "
+"especificada. Uma capacidade é NOME[.ARCH][OP<VERSÃO>], onde OP é um dos "
+"símbolos <, <=, =, >=, >."
 
 #. translators: --from <ALIAS|#|URI>
 #: src/commands/installremove.cc:185 src/commands/utils/download.cc:172
 msgid "Select packages from the specified repository."
-msgstr ""
+msgstr "Selecionar pacotes de um repositório específico."
 
 #. translators: --oldpackage
 #: src/commands/installremove.cc:189
@@ -2385,10 +2388,15 @@ msgid ""
 "Allow to replace a newer item with an older one. Handy if you are doing a "
 "rollback. Unlike --force it will not enforce a reinstall."
 msgstr ""
+"Permitir a substituição de um item mais recente por um mais antigo. Útil se "
+"estiver a fazer um recuo(rollback). Ao contrário de --force, não forçará uma "
+"reinstalação."
 
 #: src/commands/installremove.cc:193
 msgid "Silently install unsigned rpm packages given as commandline parameters."
 msgstr ""
+"Instalar silenciosamente pacotes rpm não assinados dados como parâmetros de "
+"linha de comando."
 
 #. translators: -f, --force
 #: src/commands/installremove.cc:198
@@ -2396,6 +2404,8 @@ msgid ""
 "Install even if the item is already installed (reinstall), downgraded or "
 "changes vendor or architecture."
 msgstr ""
+"Instalar mesmo que o item já esteja instalado (reinstalar), degradado ou "
+"tenha mudado de fornecedor ou de arquitetura."
 
 #. translators: rug related message, shown if
 #. 'zypper in --entire-catalog foorepo someargument' is specified
@@ -2410,37 +2420,37 @@ msgstr "Não foram especificados argumentos válido."
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/listpatches.cc:16
 msgid "list-patches (lp) [OPTIONS]"
-msgstr ""
+msgstr "list-patches (lp) [OPÇÕES]"
 
 #. translators: command summary: list-patches, lp
 #: src/commands/listpatches.cc:18
 msgid "List available patches."
-msgstr ""
+msgstr "Lista de remendos disponíveis."
 
 #. translators: command description
 #: src/commands/listpatches.cc:20
 msgid "List all applicable patches."
-msgstr ""
+msgstr "Lista todos os remendos aplicáveis."
 
 #. translators: -a, --all
 #: src/commands/listpatches.cc:31
 msgid "List all patches, not only applicable ones."
-msgstr ""
+msgstr "Lista todos os remendos, incluindo os não aplicáveis."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/listupdates.cc:16
 msgid "list-updates (lu) [OPTIONS]"
-msgstr ""
+msgstr "list-updates (lu) [OPÇÕES]"
 
 #. translators: command summary: list-updates, lu
 #: src/commands/listupdates.cc:18
 msgid "List available updates."
-msgstr ""
+msgstr "Lista atualizações disponíveis."
 
 #. translators: command description
 #: src/commands/listupdates.cc:20
 msgid "List all available updates."
-msgstr ""
+msgstr "Lista todas as atualizações disponíveis."
 
 #. translators: -a, --all
 #: src/commands/listupdates.cc:35
@@ -2448,23 +2458,25 @@ msgid ""
 "List all packages for which newer versions are available, regardless whether "
 "they are installable or not."
 msgstr ""
+"Lista todos os pacotes para os quais estão disponíveis versões mais "
+"recentes, independentemente de serem instaláveis ou não."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/locale/addlocalecmd.cc:20
 msgid "addlocale (aloc) [OPTIONS] <LOCALE> ..."
-msgstr ""
+msgstr "addlocale (aloc) [OPÇÕES] <DIALETO> ..."
 
 #: src/commands/locale/addlocalecmd.cc:21
 msgid "Add locale(s) to requested locales."
-msgstr ""
+msgstr "Adiciona dialeto(s) para requisitar os mesmos."
 
 #: src/commands/locale/addlocalecmd.cc:22
 msgid "Add given locale(s) to the list of requested locales."
-msgstr ""
+msgstr "Adicionar determinado(s) dialeto() à lista de dialetos solicitados."
 
 #: src/commands/locale/addlocalecmd.cc:33
 msgid "Do not install corresponding packages for given locale(s)."
-msgstr ""
+msgstr "Não instalar pacotes correspondentes para determinado(s) dialeto(s)."
 
 #: src/commands/locale/addlocalecmd.cc:57
 #, c-format, boost-format
@@ -2472,66 +2484,72 @@ msgid ""
 "Specify locale which shall be supported by the language code. Get a list of "
 "all available locales by calling '%s'."
 msgstr ""
+"Especificar o dialeto que deve ser suportado pelo código da língua. Obtenha "
+"uma lista de todos os dialetos disponíveis, ao chamar \"%s\"."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/locale/localescmd.cc:17
 msgid "locales (lloc) [OPTIONS] [LOCALE] ..."
-msgstr ""
+msgstr "locales (lloc) [OPÇÕES] [DIALETOS] ..."
 
 #: src/commands/locale/localescmd.cc:18
 msgid "List requested locales (languages codes)."
-msgstr ""
+msgstr "Lista dialetos requisitados (códigos de língua)."
 
 #: src/commands/locale/localescmd.cc:20
 msgid "List requested locales and corresponding packages."
-msgstr ""
+msgstr "Lista dialetos requisitados e os respetivos pacotes."
 
 #: src/commands/locale/localescmd.cc:34
 msgid "Show corresponding packages."
-msgstr ""
+msgstr "Mostrar pacotes correspondentes."
 
 #: src/commands/locale/localescmd.cc:35
 msgid "List all available locales."
-msgstr ""
+msgstr "Listar todos os dialetos disponíveis."
 
 #: src/commands/locale/localescmd.cc:48
 msgid "Ignoring positional arguments because --all argument was provided."
-msgstr ""
+msgstr "Ignorar argumentos posicionais porque o argumento --all foi fornecido."
 
 #: src/commands/locale/localescmd.cc:75
 msgid "The locale(s) for which the information shall be printed."
-msgstr ""
+msgstr "O(s) dialeto(s) para o(s) qual(is) a informação será apresentada."
 
 #: src/commands/locale/localescmd.cc:79
 msgid ""
 "Get all locales with lang code 'en' that have their own country code, "
 "excluding the fallback 'en':"
 msgstr ""
+"Obter todos os dialetos com código de linguagem 'en' que tenham o seu "
+"próprio código de país, excluindo o de reserva 'en':"
 
 #: src/commands/locale/localescmd.cc:86
 msgid "Get all locales with lang code 'en' with or without country code:"
 msgstr ""
+"Obter todos os dialetos com código de linguagem 'en' com ou sem código de "
+"país:"
 
 #: src/commands/locale/localescmd.cc:93
 msgid "Get the locale matching the argument exactly: "
-msgstr ""
+msgstr "Obter o dialeto que corresponde exatamente ao argumento: "
 
 #: src/commands/locale/localescmd.cc:100
 msgid "Get the list of packages which are available for 'de' and 'en':"
-msgstr ""
+msgstr "Obter a lista de pacotes que estão disponíveis para 'de' e 'en':"
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/locale/removelocalecmd.cc:18
 msgid "removelocale (rloc) [OPTIONS] <LOCALE> ..."
-msgstr ""
+msgstr "removelocale (rloc) [OPÇÃO] <DIALETO> ..."
 
 #: src/commands/locale/removelocalecmd.cc:19
 msgid "Remove locale(s) from requested locales."
-msgstr ""
+msgstr "Remover o(s) dialeto(s) dos dialetos solicitados."
 
 #: src/commands/locale/removelocalecmd.cc:20
 msgid "Remove given locale(s) from the list of supported languages."
-msgstr ""
+msgstr "Remover dado(s) dialeto(s) da lista de línguas suportadas."
 
 #: src/commands/locale/removelocalecmd.cc:35
 #, c-format, boost-format
@@ -2539,21 +2557,23 @@ msgid ""
 "Specify locales which shall be removed by the language code. Get the list of "
 "requested locales by calling '%s'."
 msgstr ""
+"Especificar os dialetos que devem ser removidos pelo código da língua. Obter "
+"a lista de dialetos solicitados, chamando \"%s\"."
 
 #: src/commands/locale/removelocalecmd.cc:46
 msgid "Do not remove corresponding packages for given locale(s)."
-msgstr ""
+msgstr "Não remover os pacotes correspondentes para determinado(s) dialeto(s)."
 
 # =============================================================================
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
 #: src/commands/locks/add.cc:29
 msgid "addlock (al) [OPTIONS] <PACKAGENAME> ..."
-msgstr ""
+msgstr "addlock (al) [OPÇÕES] <NOMEDOPACOTE> ..."
 
 #. translators: command summary
 #: src/commands/locks/add.cc:31
 msgid "Add a package lock."
-msgstr ""
+msgstr "Adicionar um bloqueio de pacote."
 
 #. translators: command description
 #: src/commands/locks/add.cc:33
@@ -2561,47 +2581,50 @@ msgid ""
 "Add a package lock. Specify packages to lock by exact name or by a glob "
 "pattern using '*' and '?' wildcard characters."
 msgstr ""
+"Adicionar um bloqueio de pacote. Especifique pacotes para bloquear ou pelo "
+"nome exato ou por um padrão global com recurso aos caracteres de wildcard '*"
+"' e '?'."
 
 #: src/commands/locks/add.cc:42
 msgid "Restrict the lock to the specified repository."
-msgstr ""
+msgstr "Restringir o bloqueio a um repositório específico."
 
 #: src/commands/locks/add.cc:76
 msgid "Specified lock has been successfully added."
 msgid_plural "Specified locks have been successfully added."
-msgstr[0] "A tranca especificada foi adicionada com sucesso."
-msgstr[1] "As trancas especificadas foram adicionadas com sucesso."
+msgstr[0] "O bloqueio especificado foi adicionado com sucesso."
+msgstr[1] "Os bloqueios especificados foram adicionados com sucesso."
 
 #: src/commands/locks/add.cc:83
 msgid "Problem adding the package lock:"
-msgstr "Problema ao adicionar a tranca ao pacote:"
+msgstr "Problema ao adicionar o bloqueio ao pacote:"
 
 # =============================================================================
 #: src/commands/locks/clean.cc:16
 msgid "cleanlocks (cl)"
-msgstr ""
+msgstr "cleanlocks (cl)"
 
 #. translators: command summary
 #: src/commands/locks/clean.cc:18
 msgid "Remove useless locks."
-msgstr "Suprime trancas inúteis."
+msgstr "Remove bloqueios inúteis."
 
 #. translators: -d, --only-duplicates
 #: src/commands/locks/clean.cc:36
 msgid "Clean only duplicate locks."
-msgstr "Apenas limpar trancas duplicadas."
+msgstr "Limpar apenas bloqueios duplicados."
 
 #. translators: -e, --only-empty
 #: src/commands/locks/clean.cc:39
 msgid "Clean only locks which doesn't lock anything."
-msgstr "Apenas limpar trancas que não trancam nada."
+msgstr "Limpar apenas bloqueios que não trancam nada."
 
 #: src/commands/locks/clean.cc:66
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Removed %lu lock."
 msgid_plural "Removed %lu locks."
-msgstr[0] "Pacote removido"
-msgstr[1] "Pacote removido"
+msgstr[0] "Removido %lu bloqueio."
+msgstr[1] "Removidos %lu bloqueios."
 
 #. translators: property name; short; used like "Name: value"
 #. translators: Table column header
@@ -2617,7 +2640,7 @@ msgstr "Nome"
 
 #: src/commands/locks/list.cc:137
 msgid "Matches"
-msgstr ""
+msgstr "Igualdades"
 
 #. translators: Table column header
 #. translators: type (general header)
@@ -2648,46 +2671,46 @@ msgstr "(qualquer)"
 #. translators: property name; short; used like "Name: value"
 #: src/commands/locks/list.cc:195
 msgid "Keep installed"
-msgstr ""
+msgstr "Manter instalado"
 
 #. translators: property name; short; used like "Name: value"
 #: src/commands/locks/list.cc:203
 msgid "Do not install"
-msgstr ""
+msgstr "Não instalar"
 
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
 #: src/commands/locks/list.cc:256
 msgid "locks (ll) [OPTIONS]"
-msgstr ""
+msgstr "locks (ll) [OPÇÕES]"
 
 #: src/commands/locks/list.cc:257
 msgid "List current package locks."
-msgstr ""
+msgstr "Lista os bloqueios de pacotes atuais."
 
 #: src/commands/locks/list.cc:285
 msgid "Show the number of resolvables matched by each lock."
-msgstr ""
+msgstr "Mostrar o número de resolvíveis igualados por cada bloqueio."
 
 #: src/commands/locks/list.cc:286
 msgid "List the resolvables matched by each lock."
-msgstr ""
+msgstr "Listar os elementos resolvíveis correspondentes a cada bloqueio."
 
 #: src/commands/locks/list.cc:300
 msgid "Error reading the locks file:"
-msgstr "Erro ao ler o ficheiro de trancas:"
+msgstr "Erro ao ler o ficheiro de bloqueios:"
 
 #: src/commands/locks/list.cc:307
 msgid "There are no package locks defined."
-msgstr "Não existem trancas de pacote definidas."
+msgstr "Não existem bloqueios de pacote definidos."
 
 # =============================================================================
 #: src/commands/locks/remove.cc:25
 msgid "removelock (rl) [OPTIONS] <LOCK-NUMBER|PACKAGENAME> ..."
-msgstr ""
+msgstr "removelock (rl) [OPÇÕES] <NUMERO-BLOQUEIO|NOMEDOPACOTE> ..."
 
 #: src/commands/locks/remove.cc:26
 msgid "Remove a package lock."
-msgstr ""
+msgstr "Remove um bloqueio de pacote."
 
 #. translators: command description; %1% is acoomand like 'zypper locks'
 #: src/commands/locks/remove.cc:28
@@ -2696,34 +2719,36 @@ msgid ""
 "Remove a package lock. Specify the lock to remove by its number obtained "
 "with '%1%' or by package name."
 msgstr ""
+"Remover um bloqueio de pacote. Especifica o bloqueio a remover pelo seu "
+"número obtido com recurso a '%1%' ou pelo nome do pacote."
 
 #: src/commands/locks/remove.cc:45
 msgid "Remove only locks with specified repository."
-msgstr ""
+msgstr "Remover apenas bloqueios com repositórios especificados."
 
 #: src/commands/locks/remove.cc:81
 msgid "Specified lock has been successfully removed."
-msgstr "A tranca especificada foi removida com sucesso."
+msgstr "O bloqueio especificado foi removido com sucesso."
 
 #: src/commands/locks/remove.cc:94
 msgid "No lock has been removed."
-msgstr "Nenhuma tranca foi removida."
+msgstr "Nenhum bloqueio foi removido."
 
 #: src/commands/locks/remove.cc:98
-#, fuzzy, c-format
+#, c-format
 msgid "%zu lock has been successfully removed."
 msgid_plural "%zu locks have been successfully removed."
-msgstr[0] "A tranca %zu foi removida com sucesso."
-msgstr[1] "As trancas %zu foram removidas com sucesso."
+msgstr[0] "O bloqueio %zu foi removido com sucesso."
+msgstr[1] "Os bloqueios %zu foram removidos com sucesso."
 
 #: src/commands/locks/remove.cc:105
 msgid "Problem removing the package lock:"
-msgstr "Problema ao remover a tranca do pacote:"
+msgstr "Problema ao remover o bloqueio do pacote:"
 
 #. translators: command summary: needs-rebooting
 #: src/commands/needs-rebooting.cc:22
 msgid "Check if the needs-reboot flag was set."
-msgstr ""
+msgstr "Verificar se a bandeira necessita-reiniciar foi definida."
 
 #: src/commands/needs-rebooting.cc:23
 msgid ""
