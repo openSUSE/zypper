@@ -443,7 +443,7 @@ namespace zypp
       cachemap = _pimpl->filterInput( prog );
     } catch ( const io::TimeoutException &e ) {
       ZYPP_CAUGHT( e );
-      prog.close();
+      prog.kill();
       ZYPP_THROW ( Exception( "Reading data from 'lsof' timed out.") );
     }
 

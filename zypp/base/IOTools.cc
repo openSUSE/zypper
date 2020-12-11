@@ -91,7 +91,7 @@ namespace zypp::io {
 
       clearerr( inputfile );
 
-      int retval = g_poll( &fd, 1, timeout );
+      int retval = g_poll( &fd, 1, remainingTimeout );
       if ( retval == -1 )
       {
         if ( errno != EINTR ) {
@@ -121,7 +121,7 @@ namespace zypp::io {
       // we timed out, or were interrupted for some reason
       // check if we can wait more
       if ( timer ) {
-        remainingTimeout -= g_timer_elapsed( timer, nullptr );
+        remainingTimeout -= g_timer_elapsed( timer, nullptr ) * 1000;
         if ( remainingTimeout <= 0 )
           return std::make_pair( ReceiveUpToResult::Timeout, line );
       }
