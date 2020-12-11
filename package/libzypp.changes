@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Dec 11 16:52:54 CET 2020 - ma@suse.de
+
+- Fix lsof monitoring (bsc#1179909)
+- version 17.25.5 (22)
+
+-------------------------------------------------------------------
 Thu Dec  3 17:06:35 CET 2020 - ma@suse.de
 
 - Prevent librpmDb iterator from accidentally creating an empty
