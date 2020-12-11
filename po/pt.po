@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: zypper.pt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-09-11 10:04+0200\n"
-"PO-Revision-Date: 2020-12-11 19:27+0000\n"
+"PO-Revision-Date: 2020-12-12 01:27+0000\n"
 "Last-Translator: Luís Tiago Favas <al62006@utad.eu>\n"
 "Language-Team: Portuguese <https://l10n.opensuse.org/projects/zypper/master/"
 "pt/>\n"
@@ -827,7 +827,7 @@ msgstr "Incrementar a verbosidade."
 #. translators: --color / --no-color
 #: src/Config.cc:410
 msgid "Whether to use colors in output if tty supports it."
-msgstr ""
+msgstr "Se é para utilizar cores no output se o tty tiver suporte para tal."
 
 #. translators: --no-abbrev, -A
 #: src/Config.cc:415
@@ -2757,34 +2757,40 @@ msgid ""
 "Exit code ZYPPER_EXIT_INF_REBOOT_NEEDED indicates that a reboot is needed, "
 "otherwise the exit code is set to ZYPPER_EXIT_OK."
 msgstr ""
+"Verifica se a bandeira de necessidade-reiniciar foi definida por uma "
+"atualização prévia, uma instalação de uma biblioteca núcleo ou serviço.\n"
+"O código de saída ZYPPER_EXIT_INF_REBOOT_NEEDED indica a necessidade de um "
+"reinicio, caso contrário o código de saída será definido como ZYPPER_EXIT_OK."
 
 #: src/commands/needs-rebooting.cc:35
 msgid "Core libraries or services have been updated."
-msgstr ""
+msgstr "Bibliotecas ou serviços núcleo foram atualizados."
 
 #: src/commands/needs-rebooting.cc:36
 msgid ""
 "Reboot is required to ensure that your system benefits from these updates."
 msgstr ""
+"Um reinicio é necessário para garantir que o seu sistema beneficia destas "
+"atualizações."
 
 #: src/commands/needs-rebooting.cc:41
 msgid "No core libraries or services have been updated."
-msgstr ""
+msgstr "Nenhum biblioteca ou serviço núcleo foi atualizado."
 
 #: src/commands/needs-rebooting.cc:42
 msgid "Reboot is probably not necessary."
-msgstr ""
+msgstr "Um reinicio não é em principio necessário."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/nullcommands.cc:17
 msgid "moo"
-msgstr ""
+msgstr "moo"
 
 #. translators: command summary
 #. translators: command description
 #: src/commands/nullcommands.cc:19 src/commands/nullcommands.cc:21
 msgid "Show an animal."
-msgstr ""
+msgstr "Mostra um animal."
 
 #. TranslatorExplanation this is a hedgehog, paint another animal, if you want
 #: src/commands/nullcommands.cc:29
@@ -2800,16 +2806,16 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/nullcommands.cc:37
 msgid "what-provides (wp) <CAPABILITY>"
-msgstr ""
+msgstr "what-provides (wp) <CAPACIDADE>"
 
 #. translators: command summary: what-provides, wp
 #: src/commands/nullcommands.cc:39
 msgid "List packages providing specified capability."
-msgstr ""
+msgstr "Lista os pacotes que providenciam uma capacidade específica."
 
 #: src/commands/nullcommands.cc:42
 msgid "List all packages providing the specified capability."
-msgstr ""
+msgstr "Lista todos os pacotes que providenciam a capacidade específica."
 
 #. translators: command description what-provides: %1% is a zypper command line, %2% a command line option
 #: src/commands/nullcommands.cc:44
@@ -2818,6 +2824,9 @@ msgid ""
 "The command is an alias for '%1%' and performs a case-insensitive search. "
 "For a case-sensitive search call the search command and add the '%2%' option."
 msgstr ""
+"O comando é um pseudónimo de '%1%' e efectua uma pesquisa não sensível a "
+"maiúsculas e minúsculas. Para uma pesquisa sensível a maiúsculas e "
+"minúsculas, chame o comando de pesquisa ao adicionar a opção '%2%'."
 
 #. "what-provides" is obsolete
 #. The "what-provides" now is included in "search" command, e.g.
@@ -2826,16 +2835,16 @@ msgstr ""
 #: src/commands/nullcommands.cc:57
 #, c-format, boost-format
 msgid "Command '%s' is replaced by '%s'."
-msgstr ""
+msgstr "O comando '%s' é substituído por '%s'."
 
 #: src/commands/nullcommands.cc:58
 #, c-format, boost-format
 msgid "See '%s' for all available options."
-msgstr ""
+msgstr "Ver '%s' para todas as opções disponíveis."
 
 #: src/commands/optionsets.cc:33
 msgid "Don't change anything, just report what would be done."
-msgstr ""
+msgstr "Não alterar nada, apenas informar o que seria feito."
 
 #. translators: %1% is a commandline option (like "--download-only")
 #: src/commands/optionsets.cc:35
@@ -2844,16 +2853,18 @@ msgid ""
 "A meaningful file conflict check can only be performed if used together with "
 "'%1%'."
 msgstr ""
+"Uma verificação significativa do conflito de ficheiros só pode ser efetuada "
+"se for utilizada em conjunto com '%1%'."
 
 #. translators: -r, --repo <ALIAS|#|URI>
 #: src/commands/optionsets.cc:67
 msgid "Work only with the specified repository."
-msgstr ""
+msgstr "Trabalhar apenas com o repositório especificado."
 
 #: src/commands/optionsets.cc:87
 #, c-format, boost-format
 msgid "Option '--%s' overrides a previously set download mode."
-msgstr ""
+msgstr "A opção '--%s' anula um modo de descarga previamente definido."
 
 #: src/commands/optionsets.cc:116
 #, fuzzy, c-format, boost-format
@@ -2864,34 +2875,38 @@ msgstr "Tamanho total da descarga: %s."
 #: src/commands/optionsets.cc:178
 #, c-format, boost-format
 msgid "Set the download-install mode. Available modes: %s"
-msgstr ""
+msgstr "Configurar o modo de descarga-instalação. Modos disponíveis: %s"
 
 #. translators: -d, --download-only
 #: src/commands/optionsets.cc:182
 msgid "Only download the packages, do not install."
-msgstr ""
+msgstr "Descarregar apenas os pacotes, não instalar."
 
 #. translators: -i, --installed-only
 #: src/commands/optionsets.cc:202
 msgid "Show only installed packages."
-msgstr ""
+msgstr "Mostrar apenas os pacotes instalados."
 
 #. translators: -u, --not-installed-only
 #: src/commands/optionsets.cc:206
 msgid "Show only packages which are not installed."
-msgstr ""
+msgstr "Mostrar apenas os pacotes não instalados."
 
 #: src/commands/optionsets.cc:239
 msgid ""
 "Automatically say 'yes' to third party license confirmation prompt. See 'man "
 "zypper' for more details."
 msgstr ""
+"Dizer automaticamente 'sim' à confirmação da licença de terceiros. Ver 'man "
+"zypper' para mais detalhes."
 
 #: src/commands/optionsets.cc:244
 msgid ""
 "Automatically accept product licenses only. See 'man zypper' for more "
 "details."
 msgstr ""
+"Aceitar automaticamente apenas licenças de produtos. Ver 'man zypper' para "
+"mais detalhes."
 
 #. translators: --replacefiles
 #: src/commands/optionsets.cc:264
@@ -2900,6 +2915,9 @@ msgid ""
 "installed, packages. Default is to treat file conflicts as an error. --"
 "download-as-needed disables the fileconflict check."
 msgstr ""
+"Instalar os pacotes mesmo que estes substituam ficheiros de outros pacotes "
+"já instalados. O padrão é tratar os conflitos de ficheiros como um erro. "
+"--download-as-needed  desativa a verificação de conflito de ficheiros."
 
 #. translators: -y, --no-confirm
 #: src/commands/optionsets.cc:291
@@ -2907,12 +2925,16 @@ msgid ""
 "Don't require user interaction. Alias for the --non-interactive global "
 "option."
 msgstr ""
+"Não é necessária a interação do utilizador. Pseudónimo para a opção global "
+"--non-interactive."
 
 #: src/commands/optionsets.cc:309
 msgid ""
 "Whether applicable optional patches should be treated as needed or be "
 "excluded."
 msgstr ""
+"Se os remendos opcionais aplicáveis devem ser tratados conforme necessário "
+"ou ser excluídos."
 
 #: src/commands/optionsets.cc:312
 msgid "The default is to exclude optional patches."
@@ -2925,38 +2947,38 @@ msgstr "A norma é incluir correções opcionais."
 #. translators: --with-interactive
 #: src/commands/optionsets.cc:348
 msgid "Do not skip interactive updates."
-msgstr ""
+msgstr "Não saltar atualizações interativas."
 
 #. translators: --skip-interactive
 #: src/commands/optionsets.cc:352
 msgid "Skip interactive updates."
-msgstr ""
+msgstr "Saltar atualizações interativas."
 
 #. translators: --sort-by-name
 #: src/commands/optionsets.cc:372
 msgid "Sort packages by name (default)."
-msgstr ""
+msgstr "Ordenar os pacotes pelo nome (por defeito)."
 
 #. translators: --sort-by-repo
 #. translators: --sort-by-catalog
 #: src/commands/optionsets.cc:382 src/commands/optionsets.cc:393
 msgid "Sort packages by repository."
-msgstr ""
+msgstr "Ordenar os pacotes por repositório."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/patch.cc:24
 msgid "patch [OPTIONS]"
-msgstr ""
+msgstr "patch [OPÇÕES]"
 
 #. translators: command summary: patch
 #: src/commands/patch.cc:26
 msgid "Install needed patches."
-msgstr ""
+msgstr "Instalar os remendos(patches) necessários."
 
 #. translators: command description
 #: src/commands/patch.cc:28
 msgid "Install all available needed patches."
-msgstr ""
+msgstr "Instalar todos os remendos necessários disponíveis."
 
 #: src/commands/patch.cc:48
 msgid ""
@@ -2964,16 +2986,19 @@ msgid ""
 "is ignored, if the patch command must update the update stack first. Can not "
 "be combined with --updatestack-only."
 msgstr ""
+"Além disso, tentar atualizar todos os pacotes não cobertos por remendos. A "
+"opção é ignorada, se o comando patch tiver de atualizar primeiro a pilha de "
+"atualizações. Não pode ser combinado com --updatestack-only."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/patchcheck.cc:17
 msgid "patch-check (pchk) [OPTIONS]"
-msgstr ""
+msgstr "patch-check (pchk) [OPÇÕES]"
 
 #. translators: command summary: patch-check, pchk
 #: src/commands/patchcheck.cc:19
 msgid "Check for patches."
-msgstr ""
+msgstr "Verificar se há remendos(patches)."
 
 #. translators: command description
 #: src/commands/patchcheck.cc:21
@@ -2981,11 +3006,14 @@ msgid ""
 "Display stats about applicable patches. The command returns 100 if needed "
 "patches were found, 101 if there is at least one needed security patch."
 msgstr ""
+"Mostrar as estatísticas sobre os remendos aplicáveis. O comando devolve 100 "
+"se forem encontrados remendos necessários, 101 se houver pelo menos um "
+"remendo de segurança necessário."
 
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
 #: src/commands/ps.cc:27
 msgid "ps [OPTIONS]"
-msgstr ""
+msgstr "ps [OPÇÕES]"
 
 #. translators: command description
 #: src/commands/ps.cc:29
@@ -2993,6 +3021,8 @@ msgid ""
 "List running processes which might still use files and libraries deleted by "
 "recent upgrades."
 msgstr ""
+"Listar processos em execução que ainda possam utilizar ficheiros e "
+"bibliotecas apagados por atualizações recentes."
 
 #. translators: -s, --short
 #: src/commands/ps.cc:46
@@ -3001,6 +3031,10 @@ msgid ""
 "processes which are associated with a system service. Given three times, "
 "list the associated system service names only."
 msgstr ""
+"Criar uma pequena tabela que não mostre os ficheiros apagados. Dado duas "
+"vezes, mostrar apenas os processos que estão associados a um serviço do "
+"sistema. Dado três vezes, listar apenas os nomes dos serviços de sistema "
+"associados."
 
 #. translators: --print <format>
 #: src/commands/ps.cc:49
@@ -3010,11 +3044,14 @@ msgid ""
 "followed by a newline. Any '%s' directive in <format> is replaced by the "
 "system service name."
 msgstr ""
+"Para cada impressão de serviço do sistema associado <formato> na saída "
+"padrão, seguido de uma nova linha. Qualquer diretiva '%s' em <formato> é "
+"substituída pelo nome do serviço do sistema."
 
 #. translators: -d, --debugFile <path>
 #: src/commands/ps.cc:52
 msgid "Write debug output to file <path>."
-msgstr ""
+msgstr "Escrever a saída de depuração para um ficheiro <caminho>."
 
 #: src/commands/ps.cc:72 src/solve-commit.cc:494
 msgid "Check failed:"
@@ -3034,22 +3071,22 @@ msgstr "PCI"
 #. parent process ID
 #: src/commands/ps.cc:144
 msgid "PPID"
-msgstr ""
+msgstr "PPID"
 
 #. process user ID
 #: src/commands/ps.cc:146
 msgid "UID"
-msgstr ""
+msgstr "UID"
 
 #. process login name
 #: src/commands/ps.cc:148
 msgid "User"
-msgstr ""
+msgstr "Utilizador"
 
 #. process command name
 #: src/commands/ps.cc:150
 msgid "Command"
-msgstr ""
+msgstr "Comando"
 
 #. "/etc/init.d/ script that might be used to restart the command (guessed)
 #: src/commands/ps.cc:152 src/commands/repos/list.cc:277
@@ -3088,16 +3125,19 @@ msgid ""
 "permission to examine with the system stat(2) function. The result might be "
 "incomplete."
 msgstr ""
+"Nota: Ao não executar como root você está a limitar a pesquisa a ficheiros "
+"dos quais você tem permissão para examinar com a função stat(2) do sistema. "
+"O resultado pode estar incompleto."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/query/info.cc:19
 msgid "info (if) [OPTIONS] <NAME> ..."
-msgstr ""
+msgstr "info (if) [OPÇÕES] <NOME> ..."
 
 #. translators: command summary: info, if
 #: src/commands/query/info.cc:21
 msgid "Show full information for specified packages."
-msgstr ""
+msgstr "Mostrar informação completa para pacotes especificados."
 
 #. translators: command description
 #: src/commands/query/info.cc:23
@@ -3107,46 +3147,51 @@ msgid ""
 "partially matching use option '--match-substrings' or use wildcards (*?) in "
 "name."
 msgstr ""
+"Mostrar informação detalhada para pacotes especificados. Por defeito, são "
+"mostrados os pacotes que correspondem exatamente aos nomes dados. Para obter "
+"também pacotes que correspondam parcialmente, utilize a opção '--match-"
+"substrings' ou utilize as wildcards (*?) no nome."
 
 #. translators: -s, --match-substrings
 #: src/commands/query/info.cc:62
 msgid "Print information for packages partially matching name."
-msgstr ""
+msgstr "Imprimir informação para pacotes que correspondam parcialmente ao nome."
 
 #. translators: --provides
 #: src/commands/query/info.cc:67
+#, fuzzy
 msgid "Show provides."
-msgstr ""
+msgstr "Mostrar providenciados."
 
 #. translators: --requires
 #: src/commands/query/info.cc:71
 msgid "Show requires and prerequires."
-msgstr ""
+msgstr "Mostrar requisitos e pré-requisitos."
 
 #. translators: --conflicts
 #: src/commands/query/info.cc:75
 msgid "Show conflicts."
-msgstr ""
+msgstr "Mostrar conflitos."
 
 #. translators: --obsoletes
 #: src/commands/query/info.cc:79
 msgid "Show obsoletes."
-msgstr ""
+msgstr "Mostrar obsoletos."
 
 #. translators: --recommends
 #: src/commands/query/info.cc:83
 msgid "Show recommends."
-msgstr ""
+msgstr "Mostrar recomendados."
 
 #. translators: --supplements
 #: src/commands/query/info.cc:87
 msgid "Show supplements."
-msgstr ""
+msgstr "Mostrar suplementos."
 
 #. translators: --suggests
 #: src/commands/query/info.cc:91
 msgid "Show suggests."
-msgstr ""
+msgstr "Mostrar sugeridos."
 
 #: src/commands/query/info.cc:105 src/utils/messages.cc:70
 msgid "Required argument missing."
@@ -3160,156 +3205,158 @@ msgstr "Uso"
 #. translators: command summary: patch-info
 #: src/commands/query/info.cc:138
 msgid "Show full information for specified patches."
-msgstr ""
+msgstr "Mostrar informação total para remendos específicos."
 
 #. translators: command summary: pattern-info
 #: src/commands/query/info.cc:141
 msgid "Show full information for specified patterns."
-msgstr ""
+msgstr "Mostrar informação total para padrões específicos."
 
 #. translators: command summary: product-info
 #: src/commands/query/info.cc:144
 msgid "Show full information for specified products."
-msgstr ""
+msgstr "Mostrar informação total para produtos específicos."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/query/info.cc:157
 msgid "patch-info <PATCHNAME> ..."
-msgstr ""
+msgstr "patch-info <NOMEREMENDO> ..."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/query/info.cc:160
 msgid "pattern-info <PATTERN_NAME> ..."
-msgstr ""
+msgstr "pattern-info <NOME_PADRÃO> ..."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/query/info.cc:163
 msgid "product-info <PRODUCT_NAME> ..."
-msgstr ""
+msgstr "product-info <NOME_PRODUTO> ..."
 
 #. translators: command description
 #: src/commands/query/info.cc:175
 msgid "Show detailed information for patches."
-msgstr ""
+msgstr "Mostrar informação detalhada para os remendos."
 
 #. translators: command description
 #: src/commands/query/info.cc:178
 msgid "Show detailed information for patterns."
-msgstr ""
+msgstr "Mostrar informação detalhada para os padrões."
 
 #. translators: command description
 #: src/commands/query/info.cc:181
 msgid "Show detailed information for products."
-msgstr ""
+msgstr "Mostrar informação detalhada para os produtos."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/query/packages.cc:18
 msgid "packages (pa) [OPTIONS] [REPOSITORY] ..."
-msgstr ""
+msgstr "packages (pa) [OPÇÕES] [REPOSITÓRIO] ..."
 
 #. translators: command summary: packages, pa
 #: src/commands/query/packages.cc:20
 msgid "List all available packages."
-msgstr ""
+msgstr "Listar todos os pacotes disponíveis."
 
 #. translators: command description
 #: src/commands/query/packages.cc:22
 msgid "List all packages available in specified repositories."
-msgstr ""
+msgstr "Listar todos os pacotes disponíveis em repositórios especificados."
 
 #. translators: --orphaned
 #: src/commands/query/packages.cc:36
 msgid "Show packages which are orphaned (without repository)."
-msgstr ""
+msgstr "Mostrar pacotes que são órfãos (sem repositório)."
 
 #. translators: --suggested
 #: src/commands/query/packages.cc:40
 msgid "Show packages which are suggested."
-msgstr ""
+msgstr "Mostrar pacotes que são sugeridos."
 
 #. translators: --recommended
 #: src/commands/query/packages.cc:44
 msgid "Show packages which are recommended."
-msgstr ""
+msgstr "Mostrar pacotes que são recomendados."
 
 #. translators: --unneeded
 #: src/commands/query/packages.cc:48
 msgid "Show packages which are unneeded."
-msgstr ""
+msgstr "Mostrar pacotes que são desnecessários."
 
 #. translators: -N, --sort-by-name
 #: src/commands/query/packages.cc:52
 msgid "Sort the list by package name."
-msgstr ""
+msgstr "Ordenar a lista pelo nome do pacote."
 
 #. translators: -R, --sort-by-repo
 #: src/commands/query/packages.cc:56
 msgid "Sort the list by repository."
-msgstr ""
+msgstr "Ordenar a lista por repositório."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/query/patches.cc:18
 msgid "patches (pch) [REPOSITORY] ..."
-msgstr ""
+msgstr "patches (pch) [REPOSITÓRIO] ..."
 
 #. translators: command summary: patches, pch
 #: src/commands/query/patches.cc:20
 msgid "List all available patches."
-msgstr ""
+msgstr "Listar todos os remendos disponíveis."
 
 #. translators: command description
 #: src/commands/query/patches.cc:22
 msgid "List all patches available in specified repositories."
-msgstr ""
+msgstr "Listar todos os remendos disponíveis em repositórios especificados."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/query/patterns.cc:18
 msgid "patterns (pt) [OPTIONS] [REPOSITORY] ..."
-msgstr ""
+msgstr "patterns (pt) [OPÇÕES] [REPOSITÓRIO] ..."
 
 #. translators: command summary: patterns, pt
 #: src/commands/query/patterns.cc:20
 msgid "List all available patterns."
-msgstr ""
+msgstr "Listar todos os padrões disponíveis."
 
 #. translators: command description
 #: src/commands/query/patterns.cc:22
 msgid "List all patterns available in specified repositories."
-msgstr ""
+msgstr "Listar todos os padrões disponíveis em repositórios especificados."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/query/products.cc:18
 msgid "products (pd) [OPTIONS] [REPOSITORY] ..."
-msgstr ""
+msgstr "products (pd) [OPÇÕES] [REPOSITÓRIO] ..."
 
 #. translators: command summary: products, pd
 #: src/commands/query/products.cc:20
 msgid "List all available products."
-msgstr ""
+msgstr "Listar todos os produtos disponíveis."
 
 #. translators: command description
 #: src/commands/query/products.cc:22
 msgid "List all products available in specified repositories."
-msgstr ""
+msgstr "Listar todos os produtos disponíveis em repositórios especificados."
 
 #. translators: --xmlfwd <TAG>
 #: src/commands/query/products.cc:36
 msgid ""
 "XML output only: Literally forward the XML tags found in a product file."
 msgstr ""
+"Apenas saída em XML: Encaminhar literalmente as etiquetas XML encontradas "
+"num ficheiro de produto."
 
 #: src/commands/query/products.cc:50
 #, boost-format
 msgid "Option %1% has no effect without the %2% global option."
-msgstr ""
+msgstr "A opção %1% não tem qualquer efeito sem a opção global %2%."
 
 #: src/commands/repos/add.cc:23
 msgid "addrepo (ar) [OPTIONS] <URI> <ALIAS>"
-msgstr ""
+msgstr "addrepo (ar) [OPÇÕES] <URI> <PSEUDÓNIMOS>"
 
 #: src/commands/repos/add.cc:23
 msgid "addrepo (ar) [OPTIONS] <FILE.repo>"
-msgstr ""
+msgstr "addrepo (ar) [OPÇÕES] <FICHEIRO.repo>"
 
 #: src/commands/repos/add.cc:24
 msgid "Add a new repository."
@@ -3320,10 +3367,13 @@ msgid ""
 "Add a repository to the system. The repository can be specified by its URI "
 "or can be read from specified .repo file (even remote)."
 msgstr ""
+"Adicionar um repositório ao sistema. O repositório pode ser especificado "
+"pelo seu URI ou pode ser lido a partir de um ficheiro .repo especificado ("
+"mesmo remoto)."
 
 #: src/commands/repos/add.cc:40
 msgid "Just another means to specify a .repo file to read."
-msgstr ""
+msgstr "Apenas mais um meio para especificar um ficheiro .repo a ler."
 
 #: src/commands/repos/add.cc:41
 #, fuzzy
@@ -3332,11 +3382,11 @@ msgstr "Problema: "
 
 #: src/commands/repos/add.cc:42
 msgid "Don't probe URI, probe later during refresh."
-msgstr ""
+msgstr "Não sondar URI, sondar mais tarde durante o refrescar."
 
 #: src/commands/repos/add.cc:46
 msgid "The repository type is always autodetected. This option is ignored."
-msgstr ""
+msgstr "O tipo de repositório é sempre auto-detetado. Esta opção é ignorada."
 
 #: src/commands/repos/add.cc:70
 #, c-format, boost-format
@@ -3362,7 +3412,7 @@ msgstr ""
 
 #: src/commands/repos/clean.cc:16
 msgid "clean (cc) [ALIAS|#|URI] ..."
-msgstr ""
+msgstr "clean (cc) [PSEUDÓNIMO|#|URI] ..."
 
 #: src/commands/repos/clean.cc:17 src/commands/repos/clean.cc:18
 msgid "Clean local caches."
@@ -3371,22 +3421,22 @@ msgstr "Limpa caches locais."
 #. translators: -r, --repo <ALIAS|#|URI>
 #: src/commands/repos/clean.cc:37
 msgid "Clean only specified repositories."
-msgstr ""
+msgstr "Limpar apenas repositórios especificados."
 
 #. translators: -m, --metadata
 #: src/commands/repos/clean.cc:42
 msgid "Clean metadata cache."
-msgstr ""
+msgstr "Limpar cache de meta-dados."
 
 #. translators: -M, --raw-metadata
 #: src/commands/repos/clean.cc:48
 msgid "Clean raw metadata cache."
-msgstr ""
+msgstr "Limpar cache de meta-dados puros."
 
 #. translators: -a, --all
 #: src/commands/repos/clean.cc:53
 msgid "Clean both metadata and package caches."
-msgstr ""
+msgstr "Limpar tanto os meta-dados como as caches de pacotes."
 
 #: src/commands/repos/list.cc:40 src/commands/repos/list.cc:212
 #: src/commands/services/list.cc:104
@@ -3433,7 +3483,7 @@ msgstr "Manter Pacotes"
 
 #: src/commands/repos/list.cc:53
 msgid "GPG Key URI"
-msgstr ""
+msgstr "URI da Chave GPG"
 
 #: src/commands/repos/list.cc:54
 #, fuzzy
@@ -3451,15 +3501,15 @@ msgstr "Palavras-chave"
 
 #: src/commands/repos/list.cc:57
 msgid "Repo Info Path"
-msgstr ""
+msgstr "Informação do Caminho da Repo"
 
 #: src/commands/repos/list.cc:58
 msgid "MD Cache Path"
-msgstr ""
+msgstr "Cache do Caminho MD"
 
 #: src/commands/repos/list.cc:74
 msgid "repos (lr) [OPTIONS] [REPO] ..."
-msgstr ""
+msgstr "repos (lr) [OPÇÕES] [REPO] ..."
 
 #: src/commands/repos/list.cc:75 src/commands/repos/list.cc:76
 msgid "List all defined repositories."
@@ -3469,6 +3519,7 @@ msgstr "Listar todos os repositórios definidos."
 #: src/commands/repos/list.cc:87
 msgid "Export all defined repositories as a single local .repo file."
 msgstr ""
+"Exportar todos os repositórios definidos como um único ficheiro local .repo."
 
 #: src/commands/repos/list.cc:118 src/repos.cc:1012
 msgid "Error reading repositories:"
@@ -3502,17 +3553,18 @@ msgstr "Sem repositórios definidos."
 #: src/commands/repos/list.cc:333
 msgid "Use the 'zypper addrepo' command to add one or more repositories."
 msgstr ""
+"Utilizar o comando 'zypper addrepo' para adicionar um ou mais repositórios."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/repos/modify.cc:24
 msgid "modifyrepo (mr) <OPTIONS> <ALIAS|#|URI>"
-msgstr ""
+msgstr "modifyrepo (mr) <OPÇÕES> <PSEUDÓNIMOS|#|URI>"
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/repos/modify.cc:26
 #, boost-format
 msgid "modifyrepo (mr) <OPTIONS> <%1%>"
-msgstr ""
+msgstr "modifyrepo (mr) <OPÇÕES> <%1%>"
 
 #. translators: command summary
 #: src/commands/repos/modify.cc:29
@@ -3526,6 +3578,8 @@ msgid ""
 "Modify properties of repositories specified by alias, number, or URI, or by "
 "the '%1%' aggregate options."
 msgstr ""
+"Modificar as propriedades dos repositórios especificados por pseudónimo, "
+"número, ou URI, ou pelas opções agregadas \"%1%\"."
 
 #: src/commands/repos/modify.cc:89
 #, c-format, boost-format
@@ -3534,7 +3588,7 @@ msgstr "Repositório %s não encontrado."
 
 #: src/commands/repos/refresh.cc:24
 msgid "refresh (ref) [ALIAS|#|URI] ..."
-msgstr ""
+msgstr "refresh (ref) [PSEUDÓNIMO|#|URI] ..."
 
 #. translators: command summary: refresh, ref
 #: src/commands/repos/refresh.cc:26
@@ -3547,41 +3601,43 @@ msgid ""
 "Refresh repositories specified by their alias, number or URI. If none are "
 "specified, all enabled repositories will be refreshed."
 msgstr ""
+"Atualizar os repositórios especificados pelo seu pseudónimo, número ou URI. "
+"Se nenhum for especificado, todos os repositórios ativados serão atualizados."
 
 #. translators: -f, --force
 #: src/commands/repos/refresh.cc:49 src/commands/services/refresh.cc:113
 msgid "Force a complete refresh."
-msgstr ""
+msgstr "Forçar uma atualização(refresh) completa."
 
 #. translators: -b, --force-build
 #: src/commands/repos/refresh.cc:54
 msgid "Force rebuild of the database."
-msgstr ""
+msgstr "Reconstrução forçada da base de dados."
 
 #. translators: -d, --force-download
 #: src/commands/repos/refresh.cc:59
 msgid "Force download of raw metadata."
-msgstr ""
+msgstr "Forçar a descarga de meta-dados em bruto."
 
 #. translators: -B, --build-only
 #: src/commands/repos/refresh.cc:64
 msgid "Only build the database, don't download metadata."
-msgstr ""
+msgstr "Construir apenas a base de dados, não descarregar meta-dados."
 
 #. translators: -D, --download-only
 #: src/commands/repos/refresh.cc:69
 msgid "Only download raw metadata, don't build the database."
-msgstr ""
+msgstr "Descarregar apenas meta-dados em bruto, não construir a base de dados."
 
 #. translators: -r, --repo <ALIAS|#|URI>
 #: src/commands/repos/refresh.cc:74
 msgid "Refresh only specified repositories."
-msgstr ""
+msgstr "Atualizar apenas os repositórios especificados."
 
 #. translators: -s, --services
 #: src/commands/repos/refresh.cc:80
 msgid "Refresh also services before refreshing repos."
-msgstr ""
+msgstr "Refrescar também os serviços antes de refrescar as reposições."
 
 #: src/commands/repos/refresh.cc:95
 #, c-format, boost-format
@@ -3654,7 +3710,7 @@ msgstr "Todos os repositórios foram refrescados."
 
 #: src/commands/repos/remove.cc:21
 msgid "removerepo (rr) [OPTIONS] <ALIAS|#|URI>"
-msgstr ""
+msgstr "removerepo (rr) [OPÇÕES] <PSEUDÓNIMO|#|URI>"
 
 #: src/commands/repos/remove.cc:22
 msgid "Remove specified repository."
@@ -3662,17 +3718,17 @@ msgstr "Remover o repositório especificado."
 
 #: src/commands/repos/remove.cc:23
 msgid "Remove repository specified by alias, number or URI."
-msgstr ""
+msgstr "Remover repositório especificado por pseudónimo, número ou URI."
 
 #. translators: --loose-auth
 #: src/commands/repos/remove.cc:44 src/commands/services/remove.cc:40
 msgid "Ignore user authentication data in the URI."
-msgstr ""
+msgstr "Ignorar os dados de autenticação do utilizador no URI."
 
 #. translators: --loose-query
 #: src/commands/repos/remove.cc:47 src/commands/services/remove.cc:43
 msgid "Ignore query string in the URI."
-msgstr ""
+msgstr "Ignorar cadeia de perguntas no URI."
 
 #. translators: %s is the supplied command line argument which
 #. for which no repository counterpart was found
@@ -3713,7 +3769,7 @@ msgstr "A deixar o repositório '%s' inalterado."
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/repos/rename.cc:64
 msgid "renamerepo (nr) [OPTIONS] <ALIAS|#|URI> <NEW-ALIAS>"
-msgstr ""
+msgstr "renamerepo (nr) [OPÇÕES] <PSEUDÓNIMO|#|URI> <NOVO-PSEUDÓNIMO>"
 
 #: src/commands/repos/rename.cc:65
 msgid "Rename specified repository."
@@ -3723,6 +3779,8 @@ msgstr "Renomear o repositório especificado."
 #: src/commands/repos/rename.cc:67
 msgid "Assign new alias to the repository specified by alias, number or URI."
 msgstr ""
+"Atribuir novo pseudónimo ao repositório especificado por pseudónimo, número "
+"ou URI."
 
 #: src/commands/repos/rename.cc:92
 msgid "Too few arguments. At least URI and alias are required."
@@ -3744,7 +3802,7 @@ msgstr ""
 
 #: src/commands/reposerviceoptionsets.cc:72
 msgid "Set a descriptive name for the service."
-msgstr ""
+msgstr "Definir um nome descritivo para o serviço."
 
 #: src/commands/reposerviceoptionsets.cc:72
 #, fuzzy
@@ -3763,15 +3821,15 @@ msgstr "A ignorar o repositório desativado '%s'"
 
 #: src/commands/reposerviceoptionsets.cc:78
 msgid "Disable the service (but don't remove it)."
-msgstr ""
+msgstr "Desativar o serviço (mas não o remover)."
 
 #: src/commands/reposerviceoptionsets.cc:78
 msgid "Disable the repository (but don't remove it)."
-msgstr ""
+msgstr "Desativar o repositório (mas não o remover)."
 
 #: src/commands/reposerviceoptionsets.cc:81
 msgid "Enable auto-refresh of the service."
-msgstr ""
+msgstr "Ativar o auto-refrescamento do serviço."
 
 #: src/commands/reposerviceoptionsets.cc:81
 #, fuzzy
@@ -3780,7 +3838,7 @@ msgstr "Nenhuma alcunha definida para este repositório."
 
 #: src/commands/reposerviceoptionsets.cc:84
 msgid "Disable auto-refresh of the service."
-msgstr ""
+msgstr "Desativar a auto-refrescamento do serviço."
 
 #: src/commands/reposerviceoptionsets.cc:84
 #, fuzzy
@@ -3789,35 +3847,35 @@ msgstr "Nenhuma alcunha definida para este repositório."
 
 #: src/commands/reposerviceoptionsets.cc:111
 msgid "Apply changes to all services."
-msgstr ""
+msgstr "Aplicar alterações a todos os serviços."
 
 #: src/commands/reposerviceoptionsets.cc:111
 msgid "Apply changes to all repositories."
-msgstr ""
+msgstr "Aplicar alterações a todos os repositórios."
 
 #: src/commands/reposerviceoptionsets.cc:114
 msgid "Apply changes to all local services."
-msgstr ""
+msgstr "Aplicar alterações a todos os serviços locais."
 
 #: src/commands/reposerviceoptionsets.cc:114
 msgid "Apply changes to all local repositories."
-msgstr ""
+msgstr "Aplicar alterações a todos os repositórios locais."
 
 #: src/commands/reposerviceoptionsets.cc:117
 msgid "Apply changes to all remote services."
-msgstr ""
+msgstr "Aplicar alterações a todos os serviços remotos."
 
 #: src/commands/reposerviceoptionsets.cc:117
 msgid "Apply changes to all remote repositories."
-msgstr ""
+msgstr "Aplicar alterações a todos os repositórios remotos."
 
 #: src/commands/reposerviceoptionsets.cc:120
 msgid "Apply changes to services of specified type."
-msgstr ""
+msgstr "Aplicar alterações a serviços de um tipo especificado."
 
 #: src/commands/reposerviceoptionsets.cc:120
 msgid "Apply changes to repositories of specified type."
-msgstr ""
+msgstr "Aplicar alterações a repositórios de um tipo especificado."
 
 #: src/commands/reposerviceoptionsets.cc:137
 #, fuzzy
@@ -3836,7 +3894,7 @@ msgstr "Cache de ficheiros RPM simples"
 
 #: src/commands/reposerviceoptionsets.cc:140
 msgid "Enable GPG check for this repository."
-msgstr ""
+msgstr "Ativar a verificação GPG para este repositório."
 
 #: src/commands/reposerviceoptionsets.cc:141
 #, fuzzy
@@ -3851,31 +3909,37 @@ msgstr "Nenhum candidato a atualização para '%s'."
 #: src/commands/reposerviceoptionsets.cc:143
 msgid "Enable GPG check but allow the repository metadata to be unsigned."
 msgstr ""
+"Ativar a verificação GPG mas permitir que os meta-dados do repositório não "
+"sejam assinados."
 
 #: src/commands/reposerviceoptionsets.cc:144
 msgid ""
 "Enable GPG check but allow installing unsigned packages from this repository."
 msgstr ""
+"Ativar a verificação GPG mas permitir a instalação de pacotes não assinados "
+"a partir deste repositório."
 
 #: src/commands/reposerviceoptionsets.cc:145
 msgid "Disable GPG check for this repository."
-msgstr ""
+msgstr "Desativar a verificação GPG para este repositório."
 
 #: src/commands/reposerviceoptionsets.cc:146
 msgid ""
 "Use the global GPG check setting defined in /etc/zypp/zypp.conf. This is the "
 "default."
 msgstr ""
+"Utilizar a definição global de verificação GPG definida em /etc/zypp/"
+"zypp.conf. Esta é o padrão."
 
 #. translators: -a, --alias
 #: src/commands/reposerviceoptionsets.cc:182
 msgid "Show also repository alias."
-msgstr ""
+msgstr "Mostrar também o pseudónimo do repositório."
 
 #. translators: -n, --name
 #: src/commands/reposerviceoptionsets.cc:185
 msgid "Show also repository name."
-msgstr ""
+msgstr "Mostrar também o nome do repositório."
 
 #. translators: -r, --refresh
 #: src/commands/reposerviceoptionsets.cc:188
