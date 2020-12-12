@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: zypper.pt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-09-11 10:04+0200\n"
-"PO-Revision-Date: 2020-12-12 01:27+0000\n"
+"PO-Revision-Date: 2020-12-12 22:27+0000\n"
 "Last-Translator: Luís Tiago Favas <al62006@utad.eu>\n"
 "Language-Team: Portuguese <https://l10n.opensuse.org/projects/zypper/master/"
 "pt/>\n"
@@ -37,15 +37,16 @@ msgid "Suspicious severity filter value '%1%'."
 msgstr "Valor do filtro de severidade suspeito '%1%'."
 
 #: src/callbacks/keyring.h:32
-#, fuzzy
 msgid ""
 "Signing data enables the recipient to verify that no modifications occurred "
 "after the data were signed. Accepting data with no, wrong or unknown "
 "signature can lead to a corrupted system and in extreme cases even to a "
 "system compromise."
 msgstr ""
-"Aceitar pacotes cuja soma de verificação está errada pode levar a um sistema "
-"corrompido e em casos extremos a um sistema comprometido."
+"A assinatura dos dados permite ao destinatário verificar que não ocorreram "
+"modificações depois de os dados terem sido assinados. A aceitação de dados "
+"sem assinatura, errada ou desconhecida, pode levar a um sistema corrompido "
+"e, em casos extremos, até a um sistema comprometido."
 
 #. translator: %1% is a file name
 #: src/callbacks/keyring.h:40
@@ -238,7 +239,7 @@ msgstr "r/t"
 #. The answers should be lower case letters.
 #: src/callbacks/keyring.h:318
 msgid "r/a/"
-msgstr ""
+msgstr "r/s/"
 
 #. translators: help text for the 'r' option in the 'r/t/a' prompt
 #: src/callbacks/keyring.h:324
@@ -535,9 +536,8 @@ msgid "Command options:"
 msgstr "Opções de comando:"
 
 #: src/commands/commandhelpformatter.h:126
-#, fuzzy
 msgid "Solver options:"
-msgstr "Opções para peritos:"
+msgstr "Opções de resolvedor:"
 
 #: src/commands/commandhelpformatter.h:129
 msgid "Expert options:"
@@ -548,9 +548,8 @@ msgid "This command has no additional options."
 msgstr "Este comando não possui opções adicionais."
 
 #: src/commands/commandhelpformatter.h:135
-#, fuzzy
 msgid "Legacy options:"
-msgstr "Opções para peritos:"
+msgstr "Opções legadas:"
 
 #. translator: '-r             The same as -f.
 #: src/commands/commandhelpformatter.h:139
@@ -880,6 +879,7 @@ msgstr "Ignorar pacotes desconhecidos."
 msgid ""
 "Terse output for machine consumption. Implies --no-abbrev and --no-color."
 msgstr ""
+"Output conciso para consumo de máquinas. Implica --no-abbrev e --no-color."
 
 #. translators: --reposd-dir, -D <DIR>
 #: src/Config.cc:487
@@ -941,14 +941,13 @@ msgstr "Utilizar um repositório adicional."
 
 #. translators: --plus-content <TAG>
 #: src/Config.cc:575
-#, fuzzy
 msgid ""
 "Additionally use disabled repositories providing a specific keyword. Try '--"
 "plus-content debug' to enable repos indicating to provide debug packages."
 msgstr ""
 "Adicionalmente, utilize repositórios desativado ao providenciar uma palavra-"
 "chave específica. Tente '--plus-content debug' para ativar repos indiquem "
-"para fornecer pacotes de debug."
+"para fornecer pacotes de depuração."
 
 #: src/Config.cc:581
 msgid "Repositories disabled, using the database of installed packages only."
@@ -1042,9 +1041,9 @@ msgid "'%s' not found in package names. Trying '%s'."
 msgstr "'%s' não foi encontrado o nome do pacote. Tente '%s'."
 
 #: src/PackageArgs.cc:218
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "'%s' is not a package name or capability."
-msgstr "'%s' não é um pacote ou nome de capacidade válida."
+msgstr "'%s' não é um nome válido nem de pacote nem de capacidade."
 
 #: src/RequestFeedback.cc:40
 #, c-format, boost-format
@@ -1514,85 +1513,103 @@ msgstr[1] ""
 "Os %d pacotes recomandados seguintes, foram selecionados automaticamente:"
 
 #: src/Summary.cc:923
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following recommended patch was automatically selected:"
 msgid_plural ""
 "The following %d recommended patches were automatically selected:"
-msgstr[0] "O seguinte NOVO padrão irá ser instalado:"
-msgstr[1] "Os seguintes NOVOS padrões irão ser instalados:"
+msgstr[0] "O seguinte remendo recomendado foi automaticamente selecionado:"
+msgstr[1] ""
+"Os seguintes %d remendos recomendados foram automaticamente selecionados:"
 
 #: src/Summary.cc:928
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following recommended pattern was automatically selected:"
 msgid_plural ""
 "The following %d recommended patterns were automatically selected:"
-msgstr[0] "O seguinte NOVO padrão irá ser instalado:"
-msgstr[1] "Os seguintes NOVOS padrões irão ser instalados:"
+msgstr[0] "O seguinte padrão recomendado foi automaticamente selecionado:"
+msgstr[1] ""
+"Os seguintes %d padrões recomendados foram automaticamente selecionados:"
 
 #: src/Summary.cc:933
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following recommended product was automatically selected:"
 msgid_plural ""
 "The following %d recommended products were automatically selected:"
-msgstr[0] "O seguinte NOVO produto irá ser instalado:"
-msgstr[1] "Os seguintes NOVOS produtos irão ser instalados:"
+msgstr[0] "O seguinte produto recomendado foi automaticamente selecionado:"
+msgstr[1] ""
+"Os seguintes %d produtos recomendados foram automaticamente seleccionados:"
 
 #: src/Summary.cc:938
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following recommended source package was automatically selected:"
 msgid_plural ""
 "The following %d recommended source packages were automatically selected:"
-msgstr[0] "O seguinte pacote fonte irá ser instalado:"
-msgstr[1] "Os seguintes pacotes fonte irão ser instalados:"
+msgstr[0] "O seguinte pacote fonte recomendado foi automaticamente seleccionado:"
+msgstr[1] ""
+"Os seguintes %d pacotes fonte recomendados foram automaticamente "
+"selecionados:"
 
 #: src/Summary.cc:944
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following recommended application was automatically selected:"
 msgid_plural ""
 "The following %d recommended applications were automatically selected:"
-msgstr[0] "O seguinte NOVO padrão irá ser instalado:"
-msgstr[1] "Os seguintes NOVOS padrões irão ser instalados:"
+msgstr[0] "A seguinte aplicação recomendada foi automaticamente selecionada:"
+msgstr[1] ""
+"As seguintes %d aplicações recomendadas foram automaticamente selecionadas:"
 
 #: src/Summary.cc:991
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid ""
 "The following package is recommended, but will not be installed (only "
 "required packages will be installed):"
 msgid_plural ""
 "The following %d packages are recommended, but will not be installed (only "
 "required packages will be installed):"
-msgstr[0] "O seguinte pacote irá ser reinstalado:"
-msgstr[1] "Os seguintes pacotes irão ser reinstalados:"
+msgstr[0] ""
+"O pacote seguinte é recomendado, mas não será instalado (apenas os pacotes "
+"necessários serão instalados):"
+msgstr[1] ""
+"Os seguintes %d pacotes são recomendados, mas não serão instalados (apenas "
+"os pacotes necessários serão instalados):"
 
 #: src/Summary.cc:1003
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid ""
 "The following package is recommended, but will not be installed because it's "
 "unwanted (was manually removed before):"
 msgid_plural ""
 "The following %d packages are recommended, but will not be installed because "
 "they are unwanted (were manually removed before):"
-msgstr[0] "O seguinte pacote irá ser reinstalado:"
-msgstr[1] "Os seguintes pacotes irão ser reinstalados:"
+msgstr[0] ""
+"O pacote seguinte é recomendado, mas não será instalado porque é indesejado ("
+"foi removido manualmente antes):"
+msgstr[1] ""
+"Os seguintes %d pacotes são recomendados, mas não serão instalados porque "
+"são indesejados (foram removidos manualmente antes):"
 
 #: src/Summary.cc:1013
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid ""
 "The following package is recommended, but will not be installed due to "
 "conflicts or dependency issues:"
 msgid_plural ""
 "The following %d packages are recommended, but will not be installed due to "
 "conflicts or dependency issues:"
-msgstr[0] "O seguinte pacote irá ser reinstalado:"
-msgstr[1] "Os seguintes pacotes irão ser reinstalados:"
+msgstr[0] ""
+"O pacote seguinte é recomendado, mas não será instalado devido a conflitos "
+"ou problemas de dependências:"
+msgstr[1] ""
+"Os seguintes %d pacotes são recomendados, mas não serão instalados devido a "
+"conflitos ou problemas de dependências:"
 
 #: src/Summary.cc:1026
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following patch is recommended, but will not be installed:"
 msgid_plural ""
 "The following %d patches are recommended, but will not be installed:"
-msgstr[0] "A seguinte correcção irá ser reinstalado:"
-msgstr[1] "As seguintes correcções irão ser reinstalados:"
+msgstr[0] "Recomenda-se o seguinte remendo, mas não será instalado:"
+msgstr[1] "Recomenda-se os %d seguintes remendos, mas não serão instalados:"
 
 #: src/Summary.cc:1030
 #, fuzzy, c-format, boost-format
@@ -3159,7 +3176,6 @@ msgstr "Imprimir informação para pacotes que correspondam parcialmente ao nome
 
 #. translators: --provides
 #: src/commands/query/info.cc:67
-#, fuzzy
 msgid "Show provides."
 msgstr "Mostrar providenciados."
 
@@ -3944,53 +3960,53 @@ msgstr "Mostrar também o nome do repositório."
 #. translators: -r, --refresh
 #: src/commands/reposerviceoptionsets.cc:188
 msgid "Show also the autorefresh flag."
-msgstr ""
+msgstr "Mostrar também a bandeira de auto-refrescamento."
 
 #. translators: -u, --uri
 #: src/commands/reposerviceoptionsets.cc:198
 msgid "Show also base URI of repositories."
-msgstr ""
+msgstr "Mostrar também URI base de repositórios."
 
 #. translators: -p, --priority
 #: src/commands/reposerviceoptionsets.cc:202
 msgid "Show also repository priority."
-msgstr ""
+msgstr "Mostrar também prioridade de repositório."
 
 #. translators: -d, --details
 #: src/commands/reposerviceoptionsets.cc:205
 msgid "Show more information like URI, priority, type."
-msgstr ""
+msgstr "Mostrar mais informações como URI, prioridade, tipo."
 
 #: src/commands/reposerviceoptionsets.cc:212
 msgid "Show also repositories belonging to the services."
-msgstr ""
+msgstr "Mostrar também os repositórios pertencentes aos serviços."
 
 #. translators: -s, --service
 #. translators: -A, --sort-by-alias
 #: src/commands/reposerviceoptionsets.cc:218
 #: src/commands/reposerviceoptionsets.cc:241
 msgid "Show also alias of parent service."
-msgstr ""
+msgstr "Mostra também pseudónimos de serviços pais."
 
 #. translators: -E, --show-enabled-only
 #: src/commands/reposerviceoptionsets.cc:225
 msgid "Show enabled repos only."
-msgstr ""
+msgstr "Mostrar apenas repos ativados."
 
 #. translators: -U, --sort-by-uri
 #: src/commands/reposerviceoptionsets.cc:228
 msgid "Sort the list by URI."
-msgstr ""
+msgstr "Ordenar a lista por URI."
 
 #. translators: -N, --sort-by-name
 #: src/commands/reposerviceoptionsets.cc:231
 msgid "Sort the list by name."
-msgstr ""
+msgstr "Ordenar a lista por nome."
 
 #. translators: -P, --sort-by-priority
 #: src/commands/reposerviceoptionsets.cc:234
 msgid "Sort the list by repository priority."
-msgstr ""
+msgstr "Ordenar a lista por prioridade de repositório."
 
 #. translator: %1% denotes a zypper command to execute. Like 'zypper search-packages'.
 #: src/commands/search/search-packages-hinthack.cc:81
@@ -3999,6 +4015,8 @@ msgid ""
 "For an extended search including not yet activated remote resources please "
 "use '%1%'."
 msgstr ""
+"Para uma pesquisa mais extensa, incluindo recursos remotos ainda não "
+"ativados, por favor utilize '%1%'."
 
 #. translator: %1% denotes a zypper command to execute. Like 'zypper search-packages'.
 #: src/commands/search/search-packages-hinthack.cc:85
@@ -4007,6 +4025,8 @@ msgid ""
 "The package providing this subcommand is currently not installed. You can "
 "install it by calling '%1%'."
 msgstr ""
+"O pacote que fornece este sub-comando não está atualmente instalado. Pode "
+"instalá-lo chamando '%1%'."
 
 #: src/commands/search/search-packages-hinthack.cc:98
 #, boost-format
@@ -4014,31 +4034,35 @@ msgid ""
 "For an extended search including not yet activated remote resources you may "
 "run '%1%' at any time."
 msgstr ""
+"Para uma pesquisa alargada, incluindo recursos remotos ainda não ativados, "
+"pode executar '%1%' em qualquer altura."
 
 #: src/commands/search/search-packages-hinthack.cc:99
 #, boost-format
 msgid "Do you want to run '%1%' now?"
-msgstr ""
+msgstr "Quer correr '%1%' agora?"
 
 #: src/commands/search/search-packages-hinthack.cc:115
 #, boost-format
 msgid "Run '%1%' to search in not yet activated remote resources."
-msgstr ""
+msgstr "Executar '%1%' para pesquisar em recursos remotos ainda não ativados."
 
 #. translators: command summary: search, se
 #: src/commands/search/search.cc:76
 msgid "Search for packages matching a pattern."
-msgstr ""
+msgstr "Procura de pacotes que correspondam a um padrão."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/search/search.cc:83
 msgid "search (se) [OPTIONS] [QUERYSTRING] ..."
-msgstr ""
+msgstr "search (se) [OPÇÕES] [QUERYSTRING] ..."
 
 #. translators: command description
 #: src/commands/search/search.cc:91
 msgid "Search for packages matching any of the given search strings."
 msgstr ""
+"Procurar por pacotes que correspondam a qualquer uma das palavras(strings) "
+"de pesquisa dadas."
 
 #. translators: command description
 #: src/commands/search/search.cc:93
@@ -4046,56 +4070,59 @@ msgid ""
 "* and ? wildcards can also be used within search strings. If a search string "
 "is enclosed in '/', it's interpreted as a regular expression."
 msgstr ""
+"As wildcards * e ? também podem ser utilizadas dentro de strings de "
+"pesquisa. Se uma string de busca for fechada em '/', é interpretada como uma "
+"expressão regular."
 
 #. translators: --match-substrings
 #: src/commands/search/search.cc:105
 msgid "Search for a match to partial words (default)."
-msgstr ""
+msgstr "Procura uma correspondência com palavras parciais (padrão)."
 
 #. translators: --match-words
 #: src/commands/search/search.cc:109
 msgid "Search for a match to whole words only."
-msgstr ""
+msgstr "Procurar uma correspondência apenas com palavras inteiras."
 
 #. translators: -x, --match-exact
 #: src/commands/search/search.cc:113
 msgid "Searches for an exact match of the search strings."
-msgstr ""
+msgstr "Procura uma correspondência exata das strings de pesquisa."
 
 #. translators: --provides
 #: src/commands/search/search.cc:117
 msgid "Search for packages which provide the search strings."
-msgstr ""
+msgstr "Procura pacotes que forneçam as strings de pesquisa."
 
 #. translators: --requires
 #: src/commands/search/search.cc:121
 msgid "Search for packages which require the search strings."
-msgstr ""
+msgstr "Procura pacotes que requerem as strings de pesquisa."
 
 #. translators: --recommends
 #: src/commands/search/search.cc:125
 msgid "Search for packages which recommend the search strings."
-msgstr ""
+msgstr "Procura de pacotes que recomendam as strings de pesquisa."
 
 #. translators: --supplements
 #: src/commands/search/search.cc:129
 msgid "Search for packages which supplement the search strings."
-msgstr ""
+msgstr "Procura de pacotes que complementem as strings de pesquisa."
 
 #. translators: --conflicts
 #: src/commands/search/search.cc:133
 msgid "Search packages conflicting with search strings."
-msgstr ""
+msgstr "Procurar pacotes que entrem em conflito com as strings de pesquisa."
 
 #. translators: --obsoletes
 #: src/commands/search/search.cc:137
 msgid "Search for packages which obsolete the search strings."
-msgstr ""
+msgstr "Procura pacotes que tornam obsoletas as strings de pesquisa."
 
 #. translators: --suggests
 #: src/commands/search/search.cc:141
 msgid "Search for packages which suggest the search strings."
-msgstr ""
+msgstr "Procura pacotes que sugiram as cadeias de pesquisa."
 
 #. translators: --provides-pkg
 #: src/commands/search/search.cc:145
@@ -4103,6 +4130,8 @@ msgid ""
 "Search for all packages that provide any of the provides of the package(s) "
 "matched by the input parameters."
 msgstr ""
+"Procurar todos os pacotes que forneçam qualquer uma das ofertas do(s) "
+"pacote(s) correspondente(s) aos parâmetros de entrada."
 
 #. translators: --requires-pkg
 #: src/commands/search/search.cc:149
@@ -4110,6 +4139,8 @@ msgid ""
 "Search for all packages that require any of the provides of the package(s) "
 "matched by the input parameters."
 msgstr ""
+"Procurar todos os pacotes que necessitem de qualquer uma das ofertas do(s) "
+"pacote(s) correspondente(s) pelos parâmetros de entrada."
 
 #. translators: --recommends-pkg
 #: src/commands/search/search.cc:153
@@ -4117,6 +4148,8 @@ msgid ""
 "Search for all packages that recommend any of the provides of the package(s) "
 "matched by the input parameters."
 msgstr ""
+"Procurar todos os pacotes que recomendam qualquer uma das ofertas do(s) "
+"pacote(s) correspondente(s) pelos parâmetros de entrada."
 
 #. translators: --supplements-pkg
 #: src/commands/search/search.cc:157
@@ -4124,6 +4157,8 @@ msgid ""
 "Search for all packages that supplement any of the provides of the "
 "package(s) matched by the input parameters."
 msgstr ""
+"Procurar todos os pacotes que complementem qualquer um dos fornecimentos "
+"do(s) pacote(s) correspondente(s) pelos parâmetros de entrada."
 
 #. translators: --conflicts-pkg
 #: src/commands/search/search.cc:161
@@ -4131,6 +4166,8 @@ msgid ""
 "Search for all packages that conflict with any of the package(s) matched by "
 "the input parameters."
 msgstr ""
+"Procurar todos os pacotes que entrem em conflito com qualquer um do(s) "
+"pacote(s) correspondido(s) pelos parâmetros de entrada."
 
 #. translators: --obsoletes-pkg
 #: src/commands/search/search.cc:165
@@ -4138,6 +4175,8 @@ msgid ""
 "Search for all packages that obsolete any of the package(s) matched by the "
 "input parameters."
 msgstr ""
+"Procurar todos os pacotes que tornem obsoleto qualquer (um dos) pacote(s) "
+"correspondido(s) pelos parâmetros de entrada."
 
 #. translators: --suggests-pkg
 #: src/commands/search/search.cc:169
@@ -4145,11 +4184,13 @@ msgid ""
 "Search for all packages that suggest any of the provides of the package(s) "
 "matched by the input parameters."
 msgstr ""
+"Procurar todos os pacotes que sugerem qualquer uma das ofertas do(s) "
+"pacote(s) correspondente(s) pelos parâmetros de entrada."
 
 #. translators: -t, --type <TYPE>
 #: src/commands/search/search.cc:173
 msgid "Search only for packages of the specified type."
-msgstr ""
+msgstr "Procurar apenas os pacotes do tipo especificado."
 
 #. translators: -n, --name
 #: src/commands/search/search.cc:177
@@ -4157,26 +4198,28 @@ msgid ""
 "Useful together with dependency options, otherwise searching in package name "
 "is default."
 msgstr ""
+"Útil juntamente com as opções de dependência, caso contrário a pesquisa no "
+"nome do pacote é padrão."
 
 #. translators: -f, --file-list
 #: src/commands/search/search.cc:181
 msgid "Search for a match in the file list of packages."
-msgstr ""
+msgstr "Procurar uma correspondência na lista de ficheiros de pacotes."
 
 #. translators: -d, --search-descriptions
 #: src/commands/search/search.cc:185
 msgid "Search also in package summaries and descriptions."
-msgstr ""
+msgstr "Pesquisa também em resumos de pacotes e descrições."
 
 #. translators: -C, --case-sensitive
 #: src/commands/search/search.cc:189
 msgid "Perform case-sensitive search."
-msgstr ""
+msgstr "Efetuar pesquisa sensível a maiúsculas e minúsculas."
 
 #. translators: -s, --details
 #: src/commands/search/search.cc:193
 msgid "Show each available version in each repository on a separate line."
-msgstr ""
+msgstr "Mostrar cada versão disponível em cada repositório numa linha separada."
 
 #. translators: -v, --verbose
 #: src/commands/search/search.cc:197
@@ -4184,21 +4227,22 @@ msgid ""
 "Like --details, with additional information where the search has matched "
 "(useful for search in dependencies)."
 msgstr ""
+"Como --details, com informação adicional onde a pesquisa se tenha igualado ("
+"útil para pesquisa em dependências)."
 
 #: src/commands/search/search.cc:290 src/repos.cc:782
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Specified repository '%s' is disabled."
-msgstr "Auto-actualização desactivada."
+msgstr "O repositório especificado '%s' está desativado."
 
 #. translators: empty search result message
 #: src/commands/search/search.cc:463
-#, fuzzy
 msgid "No matching items found."
-msgstr "Não foram encontradas igualdades"
+msgstr "Não foram encontradas igualdades."
 
 #: src/commands/search/search.cc:493
 msgid "Problem occurred initializing or executing the search query"
-msgstr "Ocurreram problemas a iniciar ou a executar a pesquisa"
+msgstr "Ocorreram problemas a iniciar ou a executar a consulta da pesquisa"
 
 #: src/commands/search/search.cc:494
 msgid "See the above message for a hint."
@@ -4206,45 +4250,47 @@ msgstr "Veja a mensagem acima para uma sugestão."
 
 #: src/commands/search/search.cc:495 src/repos.cc:991
 msgid "Running 'zypper refresh' as root might resolve the problem."
-msgstr ""
-"Executar 'zypper refresh' como administrador poderá resolver o problema."
+msgstr "Executar 'zypper refresh' como root poderá resolver o problema."
 
 #. translators: -g, --category <CATEGORY>
 #: src/commands/selectpatchoptionset.cc:24
 msgid "Select patches with the specified category."
-msgstr ""
+msgstr "Selecionar remendos com a categoria especificada."
 
 #. translators: --severity <SEVERITY>
 #: src/commands/selectpatchoptionset.cc:28
 msgid "Select patches with the specified severity."
-msgstr ""
+msgstr "Selecionar os remendos com a severidade especificada."
 
 #. translators: --date <YYYY-MM-DD>
 #: src/commands/selectpatchoptionset.cc:32
 msgid "Select patches issued up to, but not including, the specified date"
 msgstr ""
+"Selecionar remendos emitidos até, mas não incluindo, a data especificada"
 
 #. translators: -b, --bugzilla
 #: src/commands/selectpatchoptionset.cc:36
 msgid "Select applicable patches for the specified Bugzilla issues."
 msgstr ""
+"Selecionar as coreções aplicáveis para as questões Bugzilla especificadas."
 
 #. translators: --cve
 #: src/commands/selectpatchoptionset.cc:41
 msgid "Select applicable patches for the specified CVE issues."
-msgstr ""
+msgstr "Selecionar as correções aplicáveis a questões de CVE específicos."
 
 #. any
 #. translators: --cve
 #: src/commands/selectpatchoptionset.cc:50
 msgid "Select issues matching the specified string."
-msgstr ""
+msgstr "Selecionar questões que correspondam à string especificada."
 
 #: src/commands/services/add.cc:55
 #, c-format, boost-format
 msgid "Service aliased '%s' already exists. Please use another alias."
 msgstr ""
-"Já existe um serviço com a alcunha '%s'. Por favor utilize outra alcunha."
+"Já existe um serviço com o pseudónimo '%s'. Por favor utilize outro "
+"pseudónimo."
 
 #: src/commands/services/add.cc:62
 #, c-format, boost-format
@@ -4259,19 +4305,19 @@ msgstr "O serviço '%s' foi adicionado com sucesso."
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/services/add.cc:102
 msgid "addservice (as) [OPTIONS] <URI> <ALIAS>"
-msgstr ""
+msgstr "addservice (as) [OPÇÕES] <URI> <PSEUDÓNIMO>"
 
 #: src/commands/services/add.cc:103
 msgid "Add a new service."
-msgstr ""
+msgstr "Adicionar um novo serviço."
 
 #: src/commands/services/add.cc:104
 msgid "Add a repository index service to the system."
-msgstr ""
+msgstr "Acrescentar um serviço de índice de repositório ao sistema."
 
 #: src/commands/services/add.cc:118
 msgid "The type of service is always autodetected. This option is ignored."
-msgstr ""
+msgstr "O tipo de serviço é sempre auto-detetado. Esta opção é ignorada."
 
 #: src/commands/services/common.cc:37
 msgid "Error reading services:"
@@ -4310,15 +4356,15 @@ msgstr "O serviço '%s' foi removido."
 
 #: src/commands/services/list.cc:81
 msgid "services (ls) [OPTIONS]"
-msgstr ""
+msgstr "services (ls) [OPÇÕES]"
 
 #: src/commands/services/list.cc:82
 msgid "List all defined services."
-msgstr ""
+msgstr "Listar todos os serviços definidos."
 
 #: src/commands/services/list.cc:83
 msgid "List defined services."
-msgstr ""
+msgstr "Listar serviços definidos."
 
 #: src/commands/services/list.cc:167
 #, c-format, boost-format
@@ -4330,17 +4376,17 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/services/modify.cc:18
 msgid "modifyservice (ms) <OPTIONS> <ALIAS|#|URI>"
-msgstr ""
+msgstr "modifyservice (ms) <OPÇÕES> <PSEUDÓNIMO|#|URI>"
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/services/modify.cc:20
 #, boost-format
 msgid "modifyservice (ms) <OPTIONS> <%1%>"
-msgstr ""
+msgstr "modifyservice (ms) <OPÇÕES> <%1%>"
 
 #: src/commands/services/modify.cc:22
 msgid "Modify specified service."
-msgstr ""
+msgstr "Modificar o serviço especificado."
 
 #: src/commands/services/modify.cc:23
 #, boost-format
@@ -4348,14 +4394,16 @@ msgid ""
 "Modify properties of services specified by alias, number, or URI, or by the "
 "'%1%' aggregate options."
 msgstr ""
+"Modificar as propriedades dos serviços especificados por pseudónimo, número, "
+"ou URI, ou pelas opções agregadas '%1%'."
 
 #: src/commands/services/modify.cc:41
 msgid "Advanced:"
-msgstr ""
+msgstr "Avançado:"
 
 #: src/commands/services/modify.cc:43
 msgid "Add a RIS service repository to enable."
-msgstr ""
+msgstr "Adicionar um repositório de serviços RIS para ativar."
 
 #: src/commands/services/modify.cc:44
 #, fuzzy
@@ -4364,7 +4412,7 @@ msgstr "Auto-actualização desactivada."
 
 #: src/commands/services/modify.cc:45
 msgid "Remove a RIS service repository to enable."
-msgstr ""
+msgstr "Remover um repositório de serviços RIS para ativar."
 
 #: src/commands/services/modify.cc:46
 #, fuzzy
@@ -4373,7 +4421,7 @@ msgstr "Repositórios remotos foram desativados."
 
 #: src/commands/services/modify.cc:47
 msgid "Clear the list of RIS repositories to enable."
-msgstr ""
+msgstr "Limpar a lista de repositórios RIS para permitir."
 
 #: src/commands/services/modify.cc:48
 #, fuzzy
@@ -4396,12 +4444,12 @@ msgstr "Serviço '%s' não encontrado."
 #: src/commands/services/modify.cc:235
 #, c-format, boost-format
 msgid "Service '%s' has been successfully enabled."
-msgstr ""
+msgstr "O serviço '%s' foi ativado com sucesso."
 
 #: src/commands/services/modify.cc:237
 #, c-format, boost-format
 msgid "Service '%s' has been successfully disabled."
-msgstr ""
+msgstr "O serviço '%s' foi desativado com sucesso."
 
 #: src/commands/services/modify.cc:243
 #, c-format, boost-format
@@ -4490,23 +4538,23 @@ msgstr "Use '%s' para obter a lista dos serviços definidos."
 
 #: src/commands/services/refresh.cc:95
 msgid "refresh-services (refs) [OPTIONS]"
-msgstr ""
+msgstr "refresh-services (refs) [OPÇÕES]"
 
 #: src/commands/services/refresh.cc:96
 msgid "Refresh all services."
-msgstr ""
+msgstr "Refrescar todos os serviços."
 
 #: src/commands/services/refresh.cc:97
 msgid "Refresh defined repository index services."
-msgstr ""
+msgstr "Refrescar os serviços definidos de índice de repositório."
 
 #: src/commands/services/refresh.cc:114
 msgid "Refresh also the service repositories."
-msgstr ""
+msgstr "Refrescar também os repositórios de serviço."
 
 #: src/commands/services/refresh.cc:115
 msgid "Also restore service repositories enabled/disabled state."
-msgstr ""
+msgstr "Restaurar também os repositórios de serviços habilitados/desabilitados."
 
 #: src/commands/services/refresh.cc:179
 #, c-format, boost-format
@@ -4544,15 +4592,15 @@ msgstr "Todos os serviços foram refrescados."
 
 #: src/commands/services/remove.cc:20
 msgid "removeservice (rs) [OPTIONS] <ALIAS|#|URI>"
-msgstr ""
+msgstr "removeservice (rs) [OPÇÕES] <PSEUDÓNIMO|#|URI>"
 
 #: src/commands/services/remove.cc:21
 msgid "Remove specified service."
-msgstr ""
+msgstr "Remover serviço especificado."
 
 #: src/commands/services/remove.cc:22
 msgid "Remove specified repository index service from the system."
-msgstr ""
+msgstr "Remover o serviço especificado de índice de repositório do sistema."
 
 #. translators: %s is the supplied command line argument which
 #. for which no service counterpart was found
@@ -4564,12 +4612,12 @@ msgstr "O serviço '%s' não foi encontrado pela alcunha, número ou URI."
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/shell.cc:20
 msgid "shell (sh)"
-msgstr ""
+msgstr "shell (sh)"
 
 #. translators: command summary: shell, sh
 #: src/commands/shell.cc:22
 msgid "Accept multiple commands at once."
-msgstr ""
+msgstr "Aceitar múltiplos comandos ao mesmo tempo."
 
 #. translators: command description
 #: src/commands/shell.cc:24
@@ -4583,7 +4631,7 @@ msgstr "Você já está a correr o zypper na consola."
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/shell.cc:52
 msgid "quit (exit, ^D)"
-msgstr ""
+msgstr "sair (exit, ^D)"
 
 #. translators: command description
 #: src/commands/shell.cc:54 src/commands/shell.cc:56
@@ -4597,19 +4645,19 @@ msgstr "Este comando só faz sentido na consola do zypper."
 #: src/commands/solveroptionset.cc:23
 #, boost-format
 msgid "Valid values: %1%"
-msgstr ""
+msgstr "Valores válidos: %1%"
 
 #: src/commands/solveroptionset.cc:35 src/commands/solveroptionset.cc:58
 msgid "Solver options"
-msgstr ""
+msgstr "Opções de solução"
 
 #: src/commands/solveroptionset.cc:37
 msgid "Install also recommended packages in addition to the required ones."
-msgstr ""
+msgstr "Instalar também os pacotes recomendados, para além dos requeridos."
 
 #: src/commands/solveroptionset.cc:38
 msgid "Do not install recommended packages, only required ones."
-msgstr ""
+msgstr "Não instalar os pacotes recomendados, apenas os necessários."
 
 #: src/commands/solveroptionset.cc:60
 #, fuzzy
@@ -4621,59 +4669,62 @@ msgid ""
 "Force the solver to find a solution (even an aggressive one) rather than "
 "asking."
 msgstr ""
+"Forçar o resolvedor a encontrar uma solução (mesmo uma agressiva) em vez de "
+"pedir."
 
 #: src/commands/solveroptionset.cc:62
 msgid "Do not force the solver to find a solution, let it ask."
-msgstr ""
+msgstr "Não forçar o resolvedor a encontrar uma solução, deixe-o perguntar."
 
 #: src/commands/solveroptionset.cc:63
 msgid "Set the solvers general attitude when resolving a job."
-msgstr ""
+msgstr "Definir a atitude geral dos resolvedores ao resolver um trabalho."
 
 #: src/commands/solveroptionset.cc:83
 msgid "Expert options"
-msgstr ""
+msgstr "Opções de peritos"
 
 #: src/commands/solveroptionset.cc:86
 msgid "Whether to allow downgrading installed resolvables."
-msgstr ""
+msgstr "Se se deve permitir a degradação dos resolvíveis instalados."
 
 #: src/commands/solveroptionset.cc:88
 msgid "Whether to allow changing the names of installed resolvables."
-msgstr ""
+msgstr "Se se deve permitir a alteração dos nomes dos resolvíveis instalados."
 
 #: src/commands/solveroptionset.cc:90
 msgid "Whether to allow changing the architecture of installed resolvables."
-msgstr ""
+msgstr "Se se deve permitir alterar a arquitetura dos resolvíveis instalados."
 
 #: src/commands/solveroptionset.cc:92
 msgid "Whether to allow changing the vendor of installed resolvables."
-msgstr ""
+msgstr "Se se deve permitir a mudança do fabricante de resolvíveis instalados."
 
 #. translators: -u, --clean-deps
 #: src/commands/solveroptionset.cc:116
 msgid "Automatically remove unneeded dependencies."
-msgstr ""
+msgstr "Remover automaticamente as dependências desnecessárias."
 
 #. translators: -U, --no-clean-deps
 #: src/commands/solveroptionset.cc:120
 msgid "No automatic removal of unneeded dependencies."
-msgstr ""
+msgstr "Sem remoção automática de dependências desnecessárias."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/sourceinstall.cc:21
 msgid "source-install (si) [OPTIONS] <NAME> ..."
-msgstr ""
+msgstr "source-install (si) [OPÇÕES] <NOME> ..."
 
 #. translators: command summary: source-install, si
 #: src/commands/sourceinstall.cc:23
 msgid "Install source packages and their build dependencies."
-msgstr ""
+msgstr "Instalar pacotes fonte e as suas dependências de construção."
 
 #. translators: command description
 #: src/commands/sourceinstall.cc:25
 msgid "Install specified source packages and their build dependencies."
 msgstr ""
+"Instalar pacotes fonte especificados e as suas dependências de construção."
 
 #: src/commands/sourceinstall.cc:26
 #, boost-format
@@ -4682,16 +4733,19 @@ msgid ""
 "value can be changed in your local rpm configuration. In case of doubt try "
 "executing '%2%'."
 msgstr ""
+"O local padrão onde o rpm instala os pacotes fonte é '%1%', mas o valor pode "
+"ser alterado na sua configuração local de rpm. Em caso de dúvida, tente "
+"executar '%2%'."
 
 #. translators: -d, --build-deps-only
 #: src/commands/sourceinstall.cc:48
 msgid "Install only build dependencies of specified packages."
-msgstr ""
+msgstr "Instale apenas as dependências de construção de pacotes especificados."
 
 #. translators: -D, --no-build-deps
 #: src/commands/sourceinstall.cc:52
 msgid "Don't install build dependencies."
-msgstr ""
+msgstr "Não instalar dependências de construção."
 
 #: src/commands/sourceinstall.cc:70
 msgid "Source package name is a required argument."
@@ -4699,13 +4753,13 @@ msgstr "O nome do pacote de código é um argumento requirido."
 
 #: src/commands/sourceinstall.cc:86
 msgid "Uninstalling source packages is not supported."
-msgstr ""
+msgstr "A desinstalação de pacotes fontes não é suportada."
 
 #. translators: %1% is the name of the command which has no man page available.
 #: src/commands/subcommand.cc:79
 #, boost-format
 msgid "No manual entry for %1%"
-msgstr ""
+msgstr "Sem entrada manual para %1%"
 
 #: src/commands/subcommand.cc:92
 msgid "none"
@@ -4828,7 +4882,7 @@ msgstr "Entrada manual para %1% não pode ser exibida"
 #. translators: command summary: subcommand
 #: src/commands/subcommand.cc:512
 msgid "Lists available subcommands."
-msgstr ""
+msgstr "Lista de sub-comandos disponíveis."
 
 #. Currently no concept how to handle global options and ZYPPlock
 #: src/commands/subcommand.cc:616
@@ -4839,23 +4893,25 @@ msgstr "A shell do zypper não suporta a execução de sub-comandos."
 #: src/commands/subcommand.cc:630
 #, boost-format
 msgid "Subcommand %1% does not support zypper global options."
-msgstr ""
+msgstr "O sub-comando %1% não suporta opções globais do zypper."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/update.cc:22
 msgid "update (up) [OPTIONS] [PACKAGENAME] ..."
-msgstr ""
+msgstr "update (up) [OPÇÕES] [NOMEDOPACOTE] ..."
 
 #. translators: command summary: update, up
 #: src/commands/update.cc:24
 msgid "Update installed packages with newer versions."
-msgstr ""
+msgstr "Atualizar os pacotes instalados com versões mais recentes."
 
 #. translators: command description
 #: src/commands/update.cc:26
 msgid ""
 "Update all or specified installed packages with newer versions, if possible."
 msgstr ""
+"Atualizar todos os pacotes ou instalados ou especificados, com as versões "
+"mais recentes, se possível."
 
 #: src/commands/update.cc:69 src/commands/update.cc:76
 #: src/commands/update.cc:126
@@ -4866,7 +4922,7 @@ msgstr " - não suportado"
 #: src/commands/update.cc:70
 #, c-format, boost-format
 msgid "To update installed products use '%s'."
-msgstr ""
+msgstr "Para atualizar os produtos instalados, utilize '%s'."
 
 #: src/commands/update.cc:77
 #, c-format, boost-format
@@ -4874,26 +4930,33 @@ msgid ""
 "Zypper does not keep track of installed source packages. To install the "
 "latest source package and its build dependencies, use '%s'."
 msgstr ""
+"O Zypper não mantém um registo dos pacotes de fontes instalados. Para "
+"instalar os mais recentes pacotes fonte e as suas dependências de "
+"compilação, utilize '%s'."
 
 #: src/commands/update.cc:83
 msgid ""
 "Cannot use multiple types when specific packages are given as arguments."
 msgstr ""
+"Não é possível utilizar múltiplos tipos quando são dados pacotes específicos "
+"como argumentos."
 
 #: src/commands/utils/download.cc:131 src/commands/utils/source-download.cc:212
 #, c-format, boost-format
 msgid "Insufficient privileges to use download directory '%s'."
 msgstr ""
+"Privilégios insuficientes para utilizar a diretoria de descarregamento '%s'."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/utils/download.cc:144
 msgid "download [OPTIONS] <PACKAGES>..."
-msgstr ""
+msgstr "download [OPÇÕES] <PACOTES>..."
 
 #. translators: command summary: download
 #: src/commands/utils/download.cc:146
 msgid "Download rpms specified on the commandline to a local directory."
 msgstr ""
+"Descarregar rpms especificados na linha de comandos para uma diretoria local."
 
 #. translators: command description
 #: src/commands/utils/download.cc:150
@@ -4903,6 +4966,11 @@ msgid ""
 "packages; for non-root users $XDG_CACHE_HOME/zypp/packages), but this can be "
 "changed by using the global --pkg-cache-dir option."
 msgstr ""
+"Descarrega rpms especificados na linha de comandos para uma diretoria local. "
+"Por defeito os pacotes são descarregados para a chache de pacotes libzypp (/"
+"var/cache/zypp/packages; para utilizadores não-root $XDG_CACHE_HOME/zypp/"
+"packages), mas isto pode ser alterado ao utilizar a opção global --pkg-cache-"
+"dir."
 
 #. translators: command description
 #: src/commands/utils/download.cc:153
@@ -4911,6 +4979,9 @@ msgid ""
 "tried to download. Upon success the local path is is found in 'download-"
 "result/localpath@path'."
 msgstr ""
+"Na saída XML é escrito um nodo <download-result> para cada pacote que o "
+"zypper tenta descarregar. Após o sucesso, o caminho local é encontrado em "
+"'download-result/localpath@path'."
 
 #. translators: --all-matches
 #: src/commands/utils/download.cc:168
@@ -4918,11 +4989,14 @@ msgid ""
 "Download all versions matching the commandline arguments. Otherwise only the "
 "best version of each matching package is downloaded."
 msgstr ""
+"Descarregar todas as versões que correspondam aos argumentos da linha de "
+"comando. Caso contrário, apenas é descarregada a melhor versão de cada "
+"pacote correspondente."
 
 #. translators: Label text; is followed by ': cmdline argument'
 #: src/commands/utils/download.cc:235
 msgid "Argument resolves to no package"
-msgstr ""
+msgstr "O argumento não resolve para nenhum pacote"
 
 #: src/commands/utils/download.cc:250 src/solve-commit.cc:935
 msgid "Nothing to do."
@@ -4930,35 +5004,35 @@ msgstr "Nada para fazer."
 
 #: src/commands/utils/download.cc:257
 msgid "No prune to best version."
-msgstr ""
+msgstr "Sem forma de voltar para a melhor versão."
 
 #: src/commands/utils/download.cc:263
 msgid "Prune to best version..."
-msgstr ""
+msgstr "Voltar para a melhor versão..."
 
 #: src/commands/utils/download.cc:269
 msgid "Not downloading anything..."
-msgstr ""
+msgstr "Não descarregar nada..."
 
 #: src/commands/utils/download.cc:312
 #, c-format, boost-format
 msgid "Error downloading package '%s'."
-msgstr ""
+msgstr "Erro ao descarregar o pacote '%s'."
 
 #: src/commands/utils/download.cc:326
 #, c-format, boost-format
 msgid "Not downloading package '%s'."
-msgstr ""
+msgstr "A não descarregar o pacote '%s'."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/utils/licenses.cc:19
 msgid "licenses"
-msgstr ""
+msgstr "licenses"
 
 #. translators: command summary: licenses
 #: src/commands/utils/licenses.cc:21
 msgid "Print report about licenses and EULAs of installed packages."
-msgstr ""
+msgstr "Imprimir relatório sobre licenças e EULAs de pacotes instalados."
 
 #. translators: command description
 #: src/commands/utils/licenses.cc:23
@@ -4969,12 +5043,12 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/utils/purge-kernels.cc:26
 msgid "purge-kernels [OPTIONS]"
-msgstr ""
+msgstr "purge-kernels [OPÇÕES]"
 
 #. translators: command summary: targetos, tos
 #: src/commands/utils/purge-kernels.cc:28
 msgid "Remove old kernels."
-msgstr ""
+msgstr "Remover kernels antigos."
 
 #. translators: command description
 #: src/commands/utils/purge-kernels.cc:30
@@ -4983,74 +5057,77 @@ msgid ""
 "zypp/zypp.conf:multiversion.kernels which can be given as <version>, latest(-"
 "N), running, oldest(+N)."
 msgstr ""
+"Auto-remove kernels instalados de acordo com a lista de kernels a manter de /"
+"etc/zypp/zypp.conf:multiversion.kernels que pode ser dada como <version>, "
+"última(-N), a correr, antiga(+N)."
 
 #: src/commands/utils/purge-kernels.cc:51
 msgid "Preparing to purge obsolete kernels..."
-msgstr ""
+msgstr "A preparar para purgar kernels obsoletos..."
 
 #: src/commands/utils/purge-kernels.cc:52
 #, boost-format
 msgid "Configuration: %1%"
-msgstr ""
+msgstr "Configuração: %1%"
 
 #: src/commands/utils/purge-kernels.cc:53
 #, boost-format
 msgid "Running kernel release: %1%"
-msgstr ""
+msgstr "Lançamento do kernel em execução: %1%"
 
 #: src/commands/utils/purge-kernels.cc:54
 #, boost-format
 msgid "Running kernel arch: %1%"
-msgstr ""
+msgstr "A correr kernel arch: %1%"
 
 #: src/commands/utils/source-download.cc:203
 #, c-format, boost-format
 msgid "Can't create or access download directory '%s'."
-msgstr ""
+msgstr "Não é possível criar ou aceder à diretoria de descarga '%s'."
 
 #: src/commands/utils/source-download.cc:216
 #, c-format, boost-format
 msgid "Using download directory at '%s'."
-msgstr ""
+msgstr "A utilizando a diretoria de descarrega em '%s'."
 
 #: src/commands/utils/source-download.cc:226
 #: src/commands/utils/source-download.cc:261
 msgid "Failed to read download directory"
-msgstr ""
+msgstr "Falha na leitura da diretoria de descarregamento"
 
 #: src/commands/utils/source-download.cc:231
 msgid "Scanning download directory"
-msgstr ""
+msgstr "Leitura da diretoria de descarregamento"
 
 #: src/commands/utils/source-download.cc:265
 msgid "Scanning installed packages"
-msgstr ""
+msgstr "Leitura dos pacotes instalados"
 
 #: src/commands/utils/source-download.cc:284
 msgid "Installed packages:"
-msgstr ""
+msgstr "Pacotes instalados:"
 
 #: src/commands/utils/source-download.cc:287
 msgid "Required source packages:"
-msgstr ""
+msgstr "Pacotes fonte requisitados:"
 
 #: src/commands/utils/source-download.cc:296
 msgid "Required source packages available in download directory:"
-msgstr ""
+msgstr "Pacotes fonte necessários disponíveis na diretoria de descarregamento:"
 
 #: src/commands/utils/source-download.cc:300
 msgid "Required source packages to be downloaded:"
-msgstr ""
+msgstr "Pacotes fonte necessários a serem descarregados:"
 
 #: src/commands/utils/source-download.cc:304
 msgid "Superfluous source packages in download directory:"
-msgstr ""
+msgstr "Pacotes de fontes redundantes na diretoria de descarregamento:"
 
 #. translators: table headers
 #. translators: property name; short; used like "Name: value"
 #: src/commands/utils/source-download.cc:318 src/info.cc:345
 msgid "Source package"
-msgstr ""
+msgstr "Pacotes fonte"
 
 # /usr/lib/YaST2/clients/sw_single.ycp:12
 #: src/commands/utils/source-download.cc:318
@@ -5060,38 +5137,40 @@ msgstr "Pacote instalado"
 #: src/commands/utils/source-download.cc:368
 msgid "Use '--verbose' option for a full list of required source packages."
 msgstr ""
+"Utilize a opção '--verbose' para uma lista completa dos pacotes fonte "
+"necessários."
 
 #: src/commands/utils/source-download.cc:377
 msgid "Deleting superfluous source packages"
-msgstr ""
+msgstr "A apagar pacotes fonte redundantes"
 
 #: src/commands/utils/source-download.cc:388
 #, c-format, boost-format
 msgid "Failed to remove source package '%s'"
-msgstr ""
+msgstr "Falha ao remover o pacote fonte '%s'"
 
 #: src/commands/utils/source-download.cc:399
 msgid "No superfluous source packages to delete."
-msgstr ""
+msgstr "Nenhum pacote fonte redundante para apagar."
 
 #: src/commands/utils/source-download.cc:409
 msgid "Downloading required source packages..."
-msgstr ""
+msgstr "A descarregar os pacotes fonte requisitados..."
 
 #: src/commands/utils/source-download.cc:428
 #, c-format, boost-format
 msgid "Source package '%s' is not provided by any repository."
-msgstr ""
+msgstr "O pacote fonte '%s' não é fornecido por nenhum repositório."
 
 #: src/commands/utils/source-download.cc:447
 #: src/commands/utils/source-download.cc:461
 #, c-format, boost-format
 msgid "Error downloading source package '%s'."
-msgstr ""
+msgstr "Erro ao descarregar o pacote fonte '%s'."
 
 #: src/commands/utils/source-download.cc:472
 msgid "No source packages to download."
-msgstr ""
+msgstr "Nenhum pacote fonte a descarregar."
 
 #. translators: command summary: source-download
 #. translators: command description
@@ -5099,6 +5178,8 @@ msgstr ""
 #: src/commands/utils/source-download.cc:484
 msgid "Download source rpms for all installed packages to a local directory."
 msgstr ""
+"Descarregar o rpms fonte para todos os pacotes instalados para uma "
+"directoria local."
 
 #. translators: -d, --directory <DIR>
 #: src/commands/utils/source-download.cc:496
@@ -5106,12 +5187,14 @@ msgid ""
 "Download all source rpms to this directory. Default: /var/cache/zypper/"
 "source-download"
 msgstr ""
+"Descarregar todos os rpms fonte para esta diretoria. Por defeito: /var/cache/"
+"zypper/source-download"
 
 #. translators: --delete
 #: src/commands/utils/source-download.cc:500
 #: src/commands/utils/source-download.cc:504
 msgid "Delete extraneous source rpms in the local directory."
-msgstr ""
+msgstr "Eliminar rpms de fontes estranhas na diretoria local."
 
 #. translators: --status
 #: src/commands/utils/source-download.cc:508
@@ -5119,26 +5202,28 @@ msgid ""
 "Don't download any source rpms, but show which source rpms are missing or "
 "extraneous."
 msgstr ""
+"Não descarregue nenhum rpms de origem, mas mostre que rpms de origem estão "
+"em falta ou são estranhos."
 
 #. translators: --status
 #: src/commands/utils/source-download.cc:514
 msgid "Write a manifest file."
-msgstr ""
+msgstr "Escrever um ficheiro de manifesto."
 
 #. translators: --status
 #: src/commands/utils/source-download.cc:518
 msgid "Disable writing a manifest file."
-msgstr ""
+msgstr "Desativar a escritura de um ficheiro de manifesto."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/utils/targetos.cc:20
 msgid "targetos (tos) [OPTIONS]"
-msgstr ""
+msgstr "targetos (tos) [OPÇÕES]"
 
 #. translators: command summary: targetos, tos
 #: src/commands/utils/targetos.cc:22
 msgid "Print the target operating system ID string."
-msgstr ""
+msgstr "Imprimir a string ID do sistema operativo alvo."
 
 #. translators: command description
 #: src/commands/utils/targetos.cc:24
@@ -5146,14 +5231,16 @@ msgid ""
 "Show various information about the target operating system. By default, an "
 "ID string is shown."
 msgstr ""
+"Mostrar várias informações sobre o sistema operativo alvo. Por defeito, é "
+"mostrada uma string de ID(identificação)."
 
 #: src/commands/utils/targetos.cc:33
 msgid "Show the operating system label."
-msgstr ""
+msgstr "Mostrar a etiqueta do sistema operativo."
 
 #: src/commands/utils/targetos.cc:46
 msgid "XML output not implemented for this command."
-msgstr ""
+msgstr "Saída XML não implementada para este comando."
 
 #: src/commands/utils/targetos.cc:59
 #, fuzzy, c-format, boost-format
@@ -5173,7 +5260,7 @@ msgstr "versioncmp (vcmp) <versão1> <versão2>"
 #. translators: command summary
 #: src/commands/utils/versioncmp.cc:21
 msgid "Compare two version strings."
-msgstr ""
+msgstr "Comparar duas versões de strings ."
 
 #. translators: command description
 #: src/commands/utils/versioncmp.cc:23
@@ -5234,7 +5321,7 @@ msgstr "Descrição"
 
 #: src/info.cc:99
 msgid "automatically"
-msgstr ""
+msgstr "automaticamente"
 
 #: src/info.cc:171
 #, boost-format
@@ -5411,51 +5498,51 @@ msgstr "Nome Curto"
 #. translators: property name; short; used like "Name: value"; is followed by a list of binary packages built from this source package
 #: src/info.cc:701
 msgid "Builds binary package"
-msgstr ""
+msgstr "Constrói o pacote binário"
 
 #. translators: header of table column - is the language requested? (Yes/No)
 #: src/locales.cc:68 src/locales.cc:178
 msgid "Requested"
-msgstr ""
+msgstr "Requisitado"
 
 #: src/locales.cc:70
 msgid "Fallback"
-msgstr ""
+msgstr "Recuo(Fallback)"
 
 #. translators: header of table column - the language code, e.g. en_US
 #: src/locales.cc:174
 msgid "Code"
-msgstr ""
+msgstr "Código"
 
 #. translators: header of table column - the language, e.g. English (United States)
 #: src/locales.cc:176
 msgid "Language"
-msgstr ""
+msgstr "Linguagem"
 
 #: src/locales.cc:240
 #, c-format, boost-format
 msgid "Packages for %s (locale '%s', requested: %s):"
-msgstr ""
+msgstr "Pacotes para %s (dialeto '%s, pedido: %s):"
 
 #: src/locales.cc:253
 #, c-format, boost-format
 msgid "Added locale: %s"
-msgstr ""
+msgstr "Dialeto Adicionado: %s"
 
 #: src/locales.cc:258
 #, c-format, boost-format
 msgid " %s is already requested."
-msgstr ""
+msgstr " %s já está requisitado."
 
 #: src/locales.cc:276
 #, c-format, boost-format
 msgid "Removed locale: %s"
-msgstr ""
+msgstr "Dialeto removido: %s"
 
 #: src/locales.cc:281
 #, c-format, boost-format
 msgid "%s was not requested."
-msgstr ""
+msgstr "%s não foi requisitado."
 
 #. translators: this will show up if you press ctrl+c twice
 #: src/main.cc:33
@@ -5465,7 +5552,7 @@ msgstr "OK OK! A sair imediatamente..."
 #. translators: this will show up if you press ctrl+c twice
 #: src/main.cc:40
 msgid "Trying to exit gracefully..."
-msgstr ""
+msgstr "A tentar sair graciosamente..."
 
 #. translators: the first %s is name of the resolvable,
 #. the second is its kind (e.g. 'zypper package')
@@ -5545,12 +5632,12 @@ msgstr "Pacotes instalados com EULAs: %d"
 #: src/misc.cc:350
 #, c-format, boost-format
 msgid "Package '%s' has source package '%s'."
-msgstr ""
+msgstr "O pacote '%s' tem pacote fonte  '%s'."
 
 #: src/misc.cc:359
 #, c-format, boost-format
 msgid "Source package '%s' for package '%s' not found."
-msgstr ""
+msgstr "O pacote fonte '%s' para o pacote '%s' não foi encontrado."
 
 # /usr/lib/YaST2/clients/sw_single.ycp:12
 #: src/misc.cc:433
@@ -5561,7 +5648,7 @@ msgstr "A instalar o pacote de código %s-%s"
 #: src/misc.cc:442
 #, c-format, boost-format
 msgid "Source package %s-%s successfully retrieved."
-msgstr ""
+msgstr "Pacote fonte %s-%s recuperados com sucesso."
 
 #: src/misc.cc:448
 #, c-format, boost-format
@@ -5627,6 +5714,8 @@ msgid ""
 "Repo '%1%' is managed by service '%2%'. Volatile changes are reset by the "
 "next service refresh!"
 msgstr ""
+"A repo '%1%' é gerida pelo serviço '%2%'. As alterações voláteis são "
+"reiniciadas até à próxima atualização do serviço!"
 
 #: src/repos.cc:74
 msgid "default priority"
@@ -5645,6 +5734,8 @@ msgid ""
 "Repository priorities are without effect. All enabled repositories share the "
 "same priority."
 msgstr ""
+"As prioridades do repositório não têm efeito. Todos os repositórios "
+"habilitados partilham a mesma prioridade."
 
 #: src/repos.cc:183
 #, fuzzy
@@ -5829,7 +5920,7 @@ msgstr ""
 #: src/repos.cc:926
 #, c-format, boost-format
 msgid "Repository '%s' stays disabled."
-msgstr ""
+msgstr "O repositório '%s' permanece desativado."
 
 #: src/repos.cc:982
 msgid "Initializing Target"
@@ -5933,6 +6024,8 @@ msgid ""
 "GPG checking is disabled in configuration of repository '%1%'. Integrity and "
 "origin of packages cannot be verified."
 msgstr ""
+"A verificação GPG está desativada na configuração do repositório '%1%'. A "
+"integridade e a origem dos pacotes não podem ser verificadas."
 
 #: src/repos.cc:1249
 #, c-format, boost-format
@@ -5957,6 +6050,7 @@ msgstr "Por favor verifique se o seu suporte de instalação é válido e legív
 #, c-format, boost-format
 msgid "Reading data from '%s' media is delayed until next refresh."
 msgstr ""
+"A leitura dos dados dos meios \"%s\" é adiada até o próximo refrescamento."
 
 #: src/repos.cc:1358
 msgid "Problem accessing the file at the specified URI"
@@ -6067,6 +6161,8 @@ msgid ""
 "No repositories defined. Operating only with the installed resolvables. "
 "Nothing can be installed."
 msgstr ""
+"Nenhum repositórios definido. A funcionar apenas com os resolvedores "
+"instalados. Nada pode ser instalado."
 
 #: src/repos.cc:1791
 #, c-format, boost-format
@@ -6099,6 +6195,8 @@ msgid ""
 "Repository '%s' appears to be outdated. Consider using a different mirror or "
 "server."
 msgstr ""
+"O repositório '%s' parece estar desatualizado. Considerar a utilização de um "
+"espelho ou servidor diferente."
 
 #. translators: the first %s is 'zypper refresh' and the second 'zypper clean -m'
 #: src/repos.cc:1839
@@ -6168,7 +6266,7 @@ msgstr "Problema: "
 
 #: src/solve-commit.cc:48
 msgid "Detailed information: "
-msgstr ""
+msgstr "Informação detalhada: "
 
 #. TranslatorExplanation %d is the solution number
 #: src/solve-commit.cc:61
@@ -6198,7 +6296,7 @@ msgstr[1] "Escolha das soluções acima um número ou cancele"
 #. The answers should be lower case letters.
 #: src/solve-commit.cc:111
 msgid "s/r/c/d"
-msgstr ""
+msgstr "p/t/c/d"
 
 #. translators: answers for dependency problem solution input prompt:
 #. "Choose from above solutions by number or cancel"
@@ -6209,28 +6307,28 @@ msgstr ""
 #. please report a bug against zypper at bugzilla.suse.com, we'll try to solve it.
 #: src/solve-commit.cc:127
 msgid "c/d"
-msgstr ""
+msgstr "c/d"
 
 #: src/solve-commit.cc:133
 #, boost-format
 msgid "Choose solution %1%"
-msgstr ""
+msgstr "Solução escolhida %1%"
 
 #: src/solve-commit.cc:135
 msgid "Skip problem and continue."
-msgstr ""
+msgstr "Passar problema à frente e continuar."
 
 #: src/solve-commit.cc:138
 msgid "Retry solving immediately."
-msgstr ""
+msgstr "Tentar resolver de imediato."
 
 #: src/solve-commit.cc:140
 msgid "Choose no solution and cancel."
-msgstr ""
+msgstr "Não escolher nenhuma solução e cancelar."
 
 #: src/solve-commit.cc:141
 msgid "Toggle show detailed conflict information."
-msgstr ""
+msgstr "Alternar se mostra a informação detalhada sobre conflitos."
 
 #: src/solve-commit.cc:174
 #, c-format, boost-format
@@ -6290,6 +6388,8 @@ msgid ""
 "Check for running processes using deleted libraries is disabled in zypper."
 "conf. Run '%s' to check manually."
 msgstr ""
+"A verificação de processos em execução utilizando bibliotecas eliminadas "
+"está desativada em zypper.conf. Execute '%s' para verificar manualmente."
 
 #: src/solve-commit.cc:496
 #, fuzzy
@@ -6303,10 +6403,14 @@ msgid ""
 "updated by recent upgrades. They should be restarted to benefit from the "
 "latest updates. Run '%1%' to list these programs."
 msgstr ""
+"Existem programas em execução que ainda utilizam ficheiros e bibliotecas "
+"apagadas ou atualizadas por atualizações recentes. Devem ser reiniciados "
+"para beneficiarem das últimas atualizações. Execute '%1%' para listar esses "
+"programas."
 
 #: src/solve-commit.cc:517
 msgid "Update notifications were received from the following packages:"
-msgstr ""
+msgstr "Foram recebidas notificações de atualização dos seguintes pacotes:"
 
 #: src/solve-commit.cc:526
 #, fuzzy, c-format, boost-format
@@ -6315,7 +6419,7 @@ msgstr "Nome do pacote procurado"
 
 #: src/solve-commit.cc:534
 msgid "y/n"
-msgstr ""
+msgstr "y/n"
 
 #: src/solve-commit.cc:535
 #, fuzzy
@@ -6455,12 +6559,12 @@ msgstr "Ocorreu um erro durante ou depois da instalação ou remoção de pacote
 
 #: src/solve-commit.cc:887
 msgid "Installation has completed with error."
-msgstr ""
+msgstr "A instalação foi concluída com erro."
 
 #: src/solve-commit.cc:889
 #, boost-format
 msgid "You may run '%1%' to repair any dependency problems."
-msgstr ""
+msgstr "Pode correr '%1%' para reparar qualquer problema de dependências."
 
 #: src/solve-commit.cc:903
 msgid ""
@@ -6487,16 +6591,16 @@ msgstr "As dependências de todos os pacotes instalados estão satisfeitas."
 #, boost-format
 msgid "Considering %1% out of %2% applicable patches:"
 msgid_plural "Considering %1% out of %2% applicable patches:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "A considerar utilizar apenas %1% de %2% remendos aplicáveis:"
+msgstr[1] "A considerar utilizar %1% de %2% remendos aplicáveis:"
 
 #. translator: stats table header
 #: src/update.cc:340
 #, boost-format
 msgid "Found %1% applicable patch:"
 msgid_plural "Found %1% applicable patches:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Foi encontrado %1% remendo aplicável:"
+msgstr[1] "Foram encontrados %1% remendos aplicáveis:"
 
 #. translator: stats summary
 #: src/update.cc:350
@@ -6519,7 +6623,7 @@ msgstr[1] "%d correcções necessárias"
 #: src/update.cc:362
 #, boost-format
 msgid "use '%1%' to include optional patches"
-msgstr ""
+msgstr "utilize '%1%' para incluir remendos opcionais"
 
 #. translator: stats summary
 #: src/update.cc:371
@@ -6540,7 +6644,7 @@ msgstr[1] "%d correcções de segurança"
 #. translator: Table column header.
 #: src/update.cc:408
 msgid "Updatestack"
-msgstr ""
+msgstr "Pilha de atualização"
 
 #. translator: Table column header.
 #: src/update.cc:410 src/update.cc:702
@@ -6617,17 +6721,20 @@ msgstr ""
 #, c-format, boost-format
 msgid "Fix for bugzilla issue number %s was not found or is not needed."
 msgstr ""
+"A correção para o problema no bugzilla numero %s ou não foi encontrado ou "
+"não é necessário."
 
 #: src/update.cc:1052
 #, c-format, boost-format
 msgid "Fix for CVE issue number %s was not found or is not needed."
 msgstr ""
+"A correção para o CVE numero %s ou não foi encontrada ou não é necessária."
 
 #. translators: keep '%s issue' together, it's something like 'CVE issue' or 'Bugzilla issue'
 #: src/update.cc:1055
 #, c-format, boost-format
 msgid "Fix for %s issue number %s was not found or is not needed."
-msgstr ""
+msgstr "A correção para %s numero %s não foi encontrada ou não é necessária."
 
 #: src/utils/Augeas.cc:102
 #, fuzzy
@@ -6637,45 +6744,46 @@ msgstr "Não é possível copiar o modelo de configuração."
 #: src/utils/Augeas.cc:508
 #, boost-format
 msgid "Malformed option name '%1%'."
-msgstr ""
+msgstr "Nome de opção mal formado '%1%'."
 
 #: src/utils/Augeas.cc:520
 msgid "Could not save the config file."
-msgstr ""
+msgstr "Não foi possível gravar o ficheiro de configuração."
 
 #: src/utils/Augeas.cc:562
 #, boost-format
 msgid "Config file '%1%' exists but is not a file."
-msgstr ""
+msgstr "O ficheiro config '%1%' existe mas não é um ficheiro."
 
 #: src/utils/Augeas.cc:578
 msgid "Could not load the config files."
-msgstr ""
+msgstr "Não foi possível carregar os ficheiros de configuração."
 
 #: src/utils/Augeas.cc:604
 #, boost-format
 msgid "Config file '%1%' does not exist."
-msgstr ""
+msgstr "O ficheiro de configuração '%1%' não existe."
 
 #. translator: %1% is the path to a config file, %2% is the name of an options inside the file
 #: src/utils/Augeas.cc:635
 #, boost-format
 msgid "%1%: Option '%2%' is defined multiple times. Using the last one."
 msgstr ""
+"A opção '%2%' do %1% está definida múltiplas vezes. Será utilizada a última."
 
 #: src/utils/Augeas.cc:656
 msgid "No config file is in use."
-msgstr ""
+msgstr "Nenhum ficheiro de configuração está em uso."
 
 #: src/utils/flags/exceptions.cc:22
 #, boost-format
 msgid "The flag %1% is not known."
-msgstr ""
+msgstr "A bandeira %1% não é conhecida."
 
 #: src/utils/flags/exceptions.cc:28
 #, boost-format
 msgid "The flag %1% is not compatible with argument %2% (%3%)."
-msgstr ""
+msgstr "A bandeira %1% não é compatível com o argumento %2% (%3%)."
 
 #: src/utils/flags/exceptions.cc:34
 #, fuzzy, boost-format
@@ -6685,21 +6793,21 @@ msgstr "O nome do pacote de código é um argumento requirido."
 #: src/utils/flags/exceptions.cc:40
 #, boost-format
 msgid "The flag %1% can only be used once."
-msgstr ""
+msgstr "A bandeira %1% só pode ser utilizada uma vez."
 
 #: src/utils/flags/exceptions.cc:46
 #, c-format, boost-format
 msgid "%s used together with %s, which contradict each other."
-msgstr ""
+msgstr "%s utilizado em conjunto com %s, no entanto as mesmas contradizem-se."
 
 #: src/utils/flags/flagtypes.cc:24
 msgid "Unknown package type"
-msgstr ""
+msgstr "Tipo de pacote desconhecido"
 
 #: src/utils/flags/flagtypes.cc:100
 #, boost-format
 msgid "The flag '%1%' can only be used a maximum of %2% times."
-msgstr ""
+msgstr "A bandeira '%1%' só pode ser utilizada um máximo de %2% vezes."
 
 #: src/utils/flags/flagtypes.cc:195
 #, c-format, boost-format
@@ -6707,15 +6815,17 @@ msgid ""
 "Ignoring %s without argument because similar option with an argument has "
 "been specified."
 msgstr ""
+"Ignorar %s sem argumento porque foi especificada uma opção semelhante com um "
+"argumento."
 
 #: src/utils/flags/flagtypes.cc:235
 msgid "Out of range"
-msgstr ""
+msgstr "Fora de alcance"
 
 #: src/utils/flags/flagtypes.cc:237
 #, boost-format
 msgid "Unknown error while assigning the value %1% to flag %2%."
-msgstr ""
+msgstr "Erro desconhecido ao atribuir o valor %1% à bandeira %2%."
 
 #. For '-garbage' argument, with 'a', 'b', and 'e' as known options,
 #. getopt_long reports 'a', 'b', and 'e' as known options.
@@ -6759,22 +6869,29 @@ msgid ""
 "package which might lead to broken dependencies of other packages. It is "
 "recommended to run '%s' after the operation has finished."
 msgstr ""
+"Optou por ignorar um problema com o descarregamento ou instalação de um "
+"pacote que poderia levar à quebra de dependências de outros pacotes. "
+"Recomenda-se a execução de \"%s\" após a operação ter terminado."
 
 #: src/utils/messages.cc:111
 #, boost-format
 msgid ""
 "Legacy commandline option %1% detected. Please use global option %2% instead."
 msgstr ""
+"Opção legada de linha de comandos %1% detetada. Por favor, utilizar a opção "
+"global %2% em vez disso."
 
 #: src/utils/messages.cc:112
 #, boost-format
 msgid "Legacy commandline option %1% detected. Please use %2% instead."
 msgstr ""
+"Opção legada de linha de comandos %1% detetada. Por favor utilize %2% em vez "
+"disso."
 
 #: src/utils/messages.cc:118
 #, boost-format
 msgid "Legacy commandline option %1% detected. This option is ignored."
-msgstr ""
+msgstr "Opção legada de linha de comandos %1% detetada. Esta opção é ignorada."
 
 #: src/utils/messages.cc:123
 #, boost-format
@@ -6782,6 +6899,8 @@ msgid ""
 "Abbreviated commandline options will not be supported in future versions. "
 "Please use %2% instead of %1% ."
 msgstr ""
+"As opções de linha de comandos abreviadas não serão suportadas em versões "
+"futuras. Por favor use %2% em vez de %1% ."
 
 #. translators: %s is "help" or "zypper help" depending on whether
 #. zypper shell is running or not
@@ -6799,6 +6918,8 @@ msgid ""
 "In case '%1%' is not a typo it's probably not a built-in command, but "
 "provided as a subcommand or plug-in (see '%2%')."
 msgstr ""
+"No caso de '%1%' não ser uma gralha, provavelmente não é um comando "
+"incorporado, mas fornecido como um sub-comando ou plug-in (ver '%2%')."
 
 #. translators: %1% and %2% are plug-in packages which might provide it.
 #. translators: The word 'subcommand' also refers to a zypper command and should not be translated.
@@ -6808,6 +6929,9 @@ msgid ""
 "In this case a specific package providing the subcommand needs to be "
 "installed first. Those packages are often named '%1%' or '%2%'."
 msgstr ""
+"Neste caso, é necessário instalar primeiro um pacote específico que forneça "
+"o sub-comando. Esses pacotes são frequentemente designados por '%1%' ou "
+"'%2%'."
 
 #: src/utils/misc.cc:93
 msgid "package"
@@ -6842,8 +6966,8 @@ msgstr[1] "srcpackages"
 #: src/utils/misc.cc:103
 msgid "application"
 msgid_plural "applications"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "aplicação"
+msgstr[1] "aplicações"
 
 #. default
 #: src/utils/misc.cc:105
@@ -6856,12 +6980,12 @@ msgstr[1] "resolúveis"
 #. translator: patch status
 #: src/utils/misc.cc:114
 msgid "unwanted"
-msgstr ""
+msgstr "não desejado"
 
 #. translator: patch status
 #: src/utils/misc.cc:115
 msgid "optional"
-msgstr ""
+msgstr "opcional"
 
 #. translator: patch status
 #: src/utils/misc.cc:116
@@ -6872,7 +6996,7 @@ msgstr "Necessário"
 #. translator: patch status
 #: src/utils/misc.cc:117
 msgid "applied"
-msgstr ""
+msgstr "aplicado"
 
 #. translator: patch status
 #: src/utils/misc.cc:118
@@ -6889,11 +7013,11 @@ msgstr "indeterminado"
 #. translator: patch status
 #: src/utils/misc.cc:120
 msgid "retracted"
-msgstr ""
+msgstr "retirado"
 
 #: src/utils/misc.cc:329 src/utils/misc.cc:371
 msgid "Since"
-msgstr ""
+msgstr "Desde"
 
 #. << _("Repository")
 #: src/utils/misc.cc:364
@@ -6920,11 +7044,11 @@ msgstr "O URI fornecido é inválido"
 #. translators: don't translate '<platform>'
 #: src/utils/misc.cc:546
 msgid "Unable to guess a value for <platform>."
-msgstr ""
+msgstr "Incapaz de adivinhar um valor para <platform>."
 
 #: src/utils/misc.cc:547
 msgid "Please use obs://<project>/<platform>"
-msgstr ""
+msgstr "Por favor utilize obs://<project>/<platform>"
 
 #: src/utils/misc.cc:548 src/utils/misc.cc:585
 #, fuzzy, c-format, boost-format
@@ -6941,7 +7065,7 @@ msgstr "KeyID inválido."
 
 #: src/utils/misc.cc:584
 msgid "Correct form is obs://<project>/[platform]"
-msgstr ""
+msgstr "A forma correta é obs://<project>/[platform]"
 
 #: src/utils/misc.cc:634
 msgid "Problem copying the specified RPM file to the cache directory."
@@ -6968,6 +7092,8 @@ msgstr "Prima '%c' para procurar..."
 #: src/utils/pager.cc:42
 msgid "Use arrows or pgUp/pgDown keys to scroll the text by lines or pages."
 msgstr ""
+"Utilize as setas ou as teclas pgUp/pgDown para percorrer o texto por linhas "
+"ou páginas."
 
 #: src/utils/pager.cc:44
 #, fuzzy
@@ -6977,7 +7103,7 @@ msgstr "Utilize o a tecla de Retrocesso ou de Espaço para ..."
 #. translators: Press '?' to see all options embedded in this prompt: "Continue? [y/n/? shows all options] (y):"
 #: src/utils/prompt.cc:91
 msgid "shows all options"
-msgstr ""
+msgstr "mostrar todas as opções"
 
 #: src/utils/prompt.cc:194 src/utils/prompt.cc:312 src/utils/prompt.cc:321
 #: src/utils/prompt.cc:419
@@ -6992,7 +7118,7 @@ msgstr "não"
 #: src/utils/prompt.cc:212 src/utils/prompt.cc:257
 #, c-format, boost-format
 msgid "Retrying in %u seconds..."
-msgstr ""
+msgstr "A tentar novamente em %u segundos..."
 
 #. translators: "a/r/i" are the answers to the
 #. "Abort, retry, ignore?" prompt
@@ -7017,15 +7143,15 @@ msgstr "A tentar de novo..."
 
 #: src/utils/prompt.cc:321
 msgid "always"
-msgstr ""
+msgstr "sempre"
 
 #: src/utils/prompt.cc:321
 msgid "never"
-msgstr ""
+msgstr "nunca"
 
 #: src/utils/prompt.cc:367
 msgid "Cannot read input: bad stream or EOF."
-msgstr ""
+msgstr "Não é possível ler o input: mau fluxo(stream) ou EOF."
 
 #: src/utils/prompt.cc:368
 #, fuzzy, c-format, boost-format
@@ -7044,7 +7170,7 @@ msgstr "Resposta inválida '%s'."
 #: src/utils/prompt.cc:410
 #, c-format, boost-format
 msgid "Ambiguous answer '%s'."
-msgstr ""
+msgstr "Resposta ambígua '%s'."
 
 #. translators: the %s are: 'y', 'yes' (translated), 'n', and 'no' (translated).
 #: src/utils/prompt.cc:418
@@ -7059,6 +7185,8 @@ msgid ""
 "If nothing else works enter '#1' to select the 1st option, '#2' for the 2nd "
 "one, ..."
 msgstr ""
+"Se nada mais funcionar, introduza '#1' para selecionar a 1ª opção, '#2' para "
+"a 2ª, ..."
 
 #~ msgid ""
 #~ "The following package had to be excluded from file conflicts check "
