@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: zypper.pt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-09-11 10:04+0200\n"
-"PO-Revision-Date: 2020-12-14 02:26+0000\n"
+"PO-Revision-Date: 2020-12-14 18:27+0000\n"
 "Last-Translator: Luís Tiago Favas <al62006@utad.eu>\n"
 "Language-Team: Portuguese <https://l10n.opensuse.org/projects/zypper/master/"
 "pt/>\n"
@@ -1941,19 +1941,17 @@ msgstr[1] "os pacotes vão mudar de fornecedor"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
 #: src/Summary.cc:1496
-#, fuzzy
 msgid "to change arch"
 msgid_plural "to change arch"
-msgstr[0] "para mudar de fornecedor"
-msgstr[1] "para mudar de formador"
+msgstr[0] "irá mudar de arquitetura"
+msgstr[1] "irão mudar de arquitetura"
 
 #. translators: this text will be preceded by a number e.g. "5 packages ..."
 #: src/Summary.cc:1499
-#, fuzzy
 msgid "package will change arch"
 msgid_plural "packages will change arch"
-msgstr[0] "o pacote vai mudar de fornecedor"
-msgstr[1] "os pacotes vão mudar de fornecedor"
+msgstr[0] "o pacote irá mudar de arquitetura"
+msgstr[1] "os pacotes irão mudar de arquitetura"
 
 #. translators: this text will be preceded by a number e.g. "5 new"
 #: src/Summary.cc:1510
@@ -2100,9 +2098,8 @@ msgstr "Novo URI"
 #. https protocol-specific options:
 #. 's' stands for Disable SSL certificate authority check
 #: src/callbacks/media.cc:76
-#, fuzzy
 msgid "a/r/i/u/s"
-msgstr "a/r/i"
+msgstr "a/r/i/u/s"
 
 #: src/callbacks/media.cc:78
 msgid "Disable SSL certificate authority check and continue."
@@ -2155,9 +2152,8 @@ msgstr "A tentar novamente..."
 #. cd/dvd protocol-specific options:
 #. 'e' stands for Eject medium
 #: src/callbacks/media.cc:168
-#, fuzzy
 msgid "a/r/i/u/e"
-msgstr "a/r/i"
+msgstr "a/r/i/u/e"
 
 #: src/callbacks/media.cc:170
 msgid "Eject medium."
@@ -2890,9 +2886,9 @@ msgid "Option '--%s' overrides a previously set download mode."
 msgstr "A opção '--%s' anula um modo de descarga previamente definido."
 
 #: src/commands/optionsets.cc:116
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Available download modes: %s"
-msgstr "Tamanho total da descarga: %s."
+msgstr "Modos de descarga disponíveis: %s"
 
 #. translators: --download
 #: src/commands/optionsets.cc:178
@@ -3087,9 +3083,8 @@ msgstr "A verificar se processos em execução utilizam livrarias apagadas..."
 
 #. process ID
 #: src/commands/ps.cc:142
-#, fuzzy
 msgid "PID"
-msgstr "PCI"
+msgstr "PID"
 
 #. parent process ID
 #: src/commands/ps.cc:144
@@ -3131,9 +3126,8 @@ msgid "The following running processes use deleted files:"
 msgstr "Os seguintes processos em execução usam ficheiros apagados:"
 
 #: src/commands/ps.cc:194
-#, fuzzy
 msgid "You may wish to restart these processes."
-msgstr "Pode desejar reiniciar estes processos."
+msgstr "Você pode querer reiniciar estes processos."
 
 #: src/commands/ps.cc:195
 #, c-format, boost-format
@@ -3398,9 +3392,8 @@ msgid "Just another means to specify a .repo file to read."
 msgstr "Apenas mais um meio para especificar um ficheiro .repo a ler."
 
 #: src/commands/repos/add.cc:41
-#, fuzzy
 msgid "Probe URI."
-msgstr "Problema: "
+msgstr "Sondar URI."
 
 #: src/commands/repos/add.cc:42
 msgid "Don't probe URI, probe later during refresh."
@@ -3508,14 +3501,12 @@ msgid "GPG Key URI"
 msgstr "URI da Chave GPG"
 
 #: src/commands/repos/list.cc:54
-#, fuzzy
 msgid "Path Prefix"
-msgstr "Prefixo de Ligação"
+msgstr "Prefixo do Camimho"
 
 #: src/commands/repos/list.cc:55
-#, fuzzy
 msgid "Parent Service"
-msgstr "Servidor de Impressão"
+msgstr "Servidor Parente"
 
 #: src/commands/repos/list.cc:56
 msgid "Keywords"
@@ -3859,9 +3850,8 @@ msgid "Disable auto-refresh of the service."
 msgstr "Desativar a auto-refrescamento do serviço."
 
 #: src/commands/reposerviceoptionsets.cc:84
-#, fuzzy
 msgid "Disable auto-refresh of the repository."
-msgstr "Nenhuma alcunha definida para este repositório."
+msgstr "Desativar o auto-refrescamento neste repositório."
 
 #: src/commands/reposerviceoptionsets.cc:111
 msgid "Apply changes to all services."
@@ -3896,33 +3886,29 @@ msgid "Apply changes to repositories of specified type."
 msgstr "Aplicar alterações a repositórios de um tipo especificado."
 
 #: src/commands/reposerviceoptionsets.cc:137
-#, fuzzy
 msgid "Set priority of the repository."
-msgstr "Erro enquanto modificava o repositório:"
+msgstr "Definir a prioridade do repositório."
 
 #: src/commands/reposerviceoptionsets.cc:138
-#, fuzzy
 msgid "Enable RPM files caching."
-msgstr "Cache de ficheiros RPM simples"
+msgstr "Ativar a cache de ficheiros RPM."
 
 #: src/commands/reposerviceoptionsets.cc:139
-#, fuzzy
 msgid "Disable RPM files caching."
-msgstr "Cache de ficheiros RPM simples"
+msgstr "Desativar a cache de ficheiros RPM."
 
 #: src/commands/reposerviceoptionsets.cc:140
 msgid "Enable GPG check for this repository."
 msgstr "Ativar a verificação GPG para este repositório."
 
 #: src/commands/reposerviceoptionsets.cc:141
-#, fuzzy
 msgid "Enable strict GPG check for this repository."
-msgstr "Nenhuma alcunha definida para este repositório."
+msgstr "Ativar a verificação rigorosa GPG para este repositório."
 
 #: src/commands/reposerviceoptionsets.cc:142
-#, fuzzy, boost-format
+#, boost-format
 msgid "Short hand for '%1%'."
-msgstr "Nenhum candidato a atualização para '%s'."
+msgstr "Taquigrafia para '%1%'."
 
 #: src/commands/reposerviceoptionsets.cc:143
 msgid "Enable GPG check but allow the repository metadata to be unsigned."
@@ -4408,27 +4394,24 @@ msgid "Add a RIS service repository to enable."
 msgstr "Adicionar um repositório de serviços RIS para ativar."
 
 #: src/commands/services/modify.cc:44
-#, fuzzy
 msgid "Add a RIS service repository to disable."
-msgstr "Auto-actualização desactivada."
+msgstr "Adiciona um serviço de repositório RIS para desativar."
 
 #: src/commands/services/modify.cc:45
 msgid "Remove a RIS service repository to enable."
 msgstr "Remover um repositório de serviços RIS para ativar."
 
 #: src/commands/services/modify.cc:46
-#, fuzzy
 msgid "Remove a RIS service repository to disable."
-msgstr "Repositórios remotos foram desativados."
+msgstr "Remove um serviço de repositório RIS para desativar."
 
 #: src/commands/services/modify.cc:47
 msgid "Clear the list of RIS repositories to enable."
 msgstr "Limpar a lista de repositórios RIS para permitir."
 
 #: src/commands/services/modify.cc:48
-#, fuzzy
 msgid "Clear the list of RIS repositories to disable."
-msgstr "Repositórios remotos foram desativados."
+msgstr "Limpa a lista de repositórios RIS para desativar."
 
 #. translators: aggregate option is e.g. "--all". This message will be
 #. followed by ms command help text which will explain it
@@ -6180,9 +6163,9 @@ msgid "Problem loading data from '%s'"
 msgstr "Problema ao carregar dados de '%s'"
 
 #: src/repos.cc:1807
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Repository '%s' could not be refreshed. Using old cache."
-msgstr "Não foi encontrada a metadata do repositório '%s' na cache local."
+msgstr "O repositório '%s' não pôde ser refrescado. A utilizar cache antiga."
 
 #: src/repos.cc:1811 src/repos.cc:1840
 #, c-format, boost-format
@@ -6251,9 +6234,8 @@ msgstr "Nenhum pacote encontrado."
 #. translators: used in products. Internal Name is the unix name of the
 #. product whereas simply Name is the official full name of the product.
 #: src/search.cc:482
-#, fuzzy
 msgid "Internal Name"
-msgstr "Erro Interno"
+msgstr "Nome Interno"
 
 #: src/search.cc:520
 msgid "No products found."
@@ -6392,9 +6374,8 @@ msgstr ""
 "está desativada em zypper.conf. Execute '%s' para verificar manualmente."
 
 #: src/solve-commit.cc:496
-#, fuzzy
 msgid "Skip check:"
-msgstr "Verificação de DNS"
+msgstr "Passar à frente a verificação:"
 
 #: src/solve-commit.cc:503
 #, boost-format
@@ -6413,18 +6394,17 @@ msgid "Update notifications were received from the following packages:"
 msgstr "Foram recebidas notificações de atualização dos seguintes pacotes:"
 
 #: src/solve-commit.cc:526
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Message from package %s:"
-msgstr "Nome do pacote procurado"
+msgstr "Mensagem do pacote %s:"
 
 #: src/solve-commit.cc:534
 msgid "y/n"
 msgstr "y/n"
 
 #: src/solve-commit.cc:535
-#, fuzzy
 msgid "View the notifications now?"
-msgstr "Mostrar notificações"
+msgstr "Ver as notificações agora?"
 
 #: src/solve-commit.cc:580
 msgid "Computing distribution upgrade..."
@@ -6459,7 +6439,6 @@ msgstr ""
 #. string will do.
 #. ! \todo add c for changelog and x for explain (show the dep tree)
 #: src/solve-commit.cc:669
-#, fuzzy
 msgid "y/n/p/v/a/r/m/d/g"
 msgstr "y/n/p/v/a/r/m/d/g"
 
@@ -6604,19 +6583,19 @@ msgstr[1] "Foram encontrados %1% remendos aplicáveis:"
 
 #. translator: stats summary
 #: src/update.cc:350
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "%d patch locked"
 msgid_plural "%d patches locked"
-msgstr[0] "%d correcção necessária"
-msgstr[1] "%d correcções necessárias"
+msgstr[0] "%d remendo necessário"
+msgstr[1] "%d remendos necessários"
 
 #. translator: stats summary
 #: src/update.cc:358
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "%d patch optional"
 msgid_plural "%d patches optional"
-msgstr[0] "%d correcção necessária"
-msgstr[1] "%d correcções necessárias"
+msgstr[0] "%d remendo opcional"
+msgstr[1] "%d remendos opcionais"
 
 #. translator: Hint displayed right adjusted; %1% is a CLI option
 #. "42 patches optional                  (use --with-optional to include optional patches)"
@@ -6707,9 +6686,8 @@ msgid "No matching issues found."
 msgstr "Não foram encontrados problemas de correspondência."
 
 #: src/update.cc:978
-#, fuzzy
 msgid "The following matches in issue numbers have been found:"
-msgstr "O seguinte %s irá ser desactualizado:"
+msgstr "As seguintes correspondências foram encontradas em números de emissão:"
 
 #: src/update.cc:988
 msgid "Matches in patch descriptions of the following patches have been found:"
@@ -6737,9 +6715,8 @@ msgid "Fix for %s issue number %s was not found or is not needed."
 msgstr "A correção para %s numero %s não foi encontrada ou não é necessária."
 
 #: src/utils/Augeas.cc:102
-#, fuzzy
 msgid "Cannot initialize configuration file parser."
-msgstr "Não é possível copiar o modelo de configuração."
+msgstr "Não é possível inicializar o analisador de ficheiros de configuração."
 
 #: src/utils/Augeas.cc:508
 #, boost-format
@@ -6786,9 +6763,9 @@ msgid "The flag %1% is not compatible with argument %2% (%3%)."
 msgstr "A bandeira %1% não é compatível com o argumento %2% (%3%)."
 
 #: src/utils/flags/exceptions.cc:34
-#, fuzzy, boost-format
+#, boost-format
 msgid "The flag %1% requires a argument."
-msgstr "O nome do pacote de código é um argumento requirido."
+msgstr "A bandeira %1% requer um argumento."
 
 #: src/utils/flags/exceptions.cc:40
 #, boost-format
@@ -6853,9 +6830,8 @@ msgstr ""
 "Consulte http://en.opensuse.org/Zypper/Troubleshooting para instruções."
 
 #: src/utils/messages.cc:38
-#, fuzzy
 msgid "Too many arguments."
-msgstr "Demasiados argumentos"
+msgstr "Demasiados argumentos."
 
 #: src/utils/messages.cc:81
 #, c-format, boost-format
@@ -6989,9 +6965,8 @@ msgstr "opcional"
 
 #. translator: patch status
 #: src/utils/misc.cc:116
-#, fuzzy
 msgid "needed"
-msgstr "Necessário"
+msgstr "necessário"
 
 #. translator: patch status
 #: src/utils/misc.cc:117
@@ -7000,9 +6975,8 @@ msgstr "aplicado"
 
 #. translator: patch status
 #: src/utils/misc.cc:118
-#, fuzzy
 msgid "not needed"
-msgstr "É necessário reiniciar"
+msgstr "não é necessário"
 
 #. translator: patch status
 #: src/utils/misc.cc:119
@@ -7051,17 +7025,13 @@ msgid "Please use obs://<project>/<platform>"
 msgstr "Por favor utilize obs://<project>/<platform>"
 
 #: src/utils/misc.cc:548 src/utils/misc.cc:585
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Example: %s"
-msgstr ""
-"\n"
-"\n"
-"Exemplo: "
+msgstr "Exemplo: %s"
 
 #: src/utils/misc.cc:584
-#, fuzzy
 msgid "Invalid OBS URI."
-msgstr "KeyID inválido."
+msgstr "URI OBS inválido."
 
 #: src/utils/misc.cc:584
 msgid "Correct form is obs://<project>/[platform]"
@@ -7085,9 +7055,9 @@ msgid "Please check whether the file is accessible."
 msgstr "Por favor verifique se o ficheiro está acessível."
 
 #: src/utils/pager.cc:32
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Press '%c' to exit the pager."
-msgstr "Prima '%c' para procurar..."
+msgstr "Prima '%c' para sair do pager."
 
 #: src/utils/pager.cc:42
 msgid "Use arrows or pgUp/pgDown keys to scroll the text by lines or pages."
@@ -7096,9 +7066,10 @@ msgstr ""
 "ou páginas."
 
 #: src/utils/pager.cc:44
-#, fuzzy
 msgid "Use the Enter or Space key to scroll the text by lines or pages."
-msgstr "Utilize o a tecla de Retrocesso ou de Espaço para ..."
+msgstr ""
+"Utilize a tecla Enter ou a de Espaço para percorrer o texto por linhas ou "
+"páginas."
 
 #. translators: Press '?' to see all options embedded in this prompt: "Continue? [y/n/? shows all options] (y):"
 #: src/utils/prompt.cc:91
@@ -7154,13 +7125,13 @@ msgid "Cannot read input: bad stream or EOF."
 msgstr "Não é possível ler o input: mau fluxo(stream) ou EOF."
 
 #: src/utils/prompt.cc:368
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid ""
 "If you run zypper without a terminal, use '%s' global\n"
 "option to make zypper use default answers to prompts."
 msgstr ""
-"Se executa o zypper sem um terminal, utilize a opção global '%s' para que o "
-"zypper utilize as respostas padrão aos prompts."
+"Se executar o zypper sem um terminal, utilize a opção global\n"
+"'%s' para que o zypper utilize as respostas padrão aos prompts."
 
 #: src/utils/prompt.cc:407
 #, c-format, boost-format
@@ -7174,11 +7145,9 @@ msgstr "Resposta ambígua '%s'."
 
 #. translators: the %s are: 'y', 'yes' (translated), 'n', and 'no' (translated).
 #: src/utils/prompt.cc:418
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Enter '%s' for '%s' or '%s' for '%s' if nothing else works for you."
-msgstr ""
-"Resposta '%s' inválida. Introduza 'y' para '%s' ou 'n' para '%s', se nada "
-"mais funcionar"
+msgstr "Insira '%s' para '%s' ou '%s' para '%s' se nada mais funcionar consigo."
 
 #: src/utils/prompt.cc:423
 msgid ""
