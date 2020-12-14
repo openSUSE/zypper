@@ -1418,7 +1418,7 @@ void MediaMultiCurl::doGetFileCopy( const OnMediaLocation &srcFile , const Pathn
            * gihub issue libzipp:#277 Multicurl backend breaks with MirrorCache and Metalink with unknown filesize.
            * Fall back to a normal download if we have no knowledge about the filesize we want to download.
            */
-          if ( !bl.haveFilesize() && expectedFileSize_r == 0 ) {
+          if ( !bl.haveFilesize() && ! srcFile.downloadSize() ) {
             XXX << "No filesize in metalink file and no expected filesize, aborting multicurl." << std::endl;
             ZYPP_THROW( MediaException("Multicurl requires filesize but none was provided.") );
           }
