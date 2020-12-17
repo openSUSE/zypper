@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: zypper.uk\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-09-11 10:04+0200\n"
-"PO-Revision-Date: 2020-12-01 18:26+0000\n"
+"PO-Revision-Date: 2020-12-17 18:27+0000\n"
 "Last-Translator: Lesath <4lesath@gmail.com>\n"
 "Language-Team: Ukrainian <https://l10n.opensuse.org/projects/zypper/master/"
 "uk/>\n"
@@ -2679,7 +2679,7 @@ msgstr[2] "Вказані блокування було успішно здій�
 
 #: src/commands/locks/add.cc:83
 msgid "Problem adding the package lock:"
-msgstr "Проблема заблокувати пакунок:"
+msgstr "Проблема з блокуванням пакунку:"
 
 # =============================================================================
 #: src/commands/locks/clean.cc:16
