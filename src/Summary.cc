@@ -1403,6 +1403,7 @@ void Summary::writePackageCounts( std::ostream & out )
     return;
 
   std::ostringstream s;
+  s << endl;
   bool gotcha = false;
   unsigned count;
   KindToResPairSet::const_iterator i;
@@ -1521,6 +1522,8 @@ void Summary::writePackageCounts( std::ostream & out )
 
 void Summary::dumpTo( std::ostream & out )
 {
+  // bsc#1180077: Take care nothing is written to stdout/err if there's
+  //              nothing todo. At least not if --quiet is used.
   Zypper & zypper( Zypper::instance() );
 
   struct SetColor
@@ -1577,7 +1580,6 @@ void Summary::dumpTo( std::ostream & out )
     writeSupportNeedACC( out );
   }
   writeRebootNeeded( out );
-  out << endl;
   writePackageCounts( out );
   writeDownloadAndInstalledSizeSummary( out );
   if ( _need_restart && zypper.runtimeData().plain_patch_command && !(_viewop & UPDATESTACK_ONLY) )
