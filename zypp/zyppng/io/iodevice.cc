@@ -2,7 +2,10 @@
 
 namespace zyppng {
 
-  IODevice::IODevice() : Base( *( new IODevicePrivate) )
+  IODevicePrivate::IODevicePrivate(IODevice &p) : BasePrivate(p)
+  { }
+
+  IODevice::IODevice() : Base( *( new IODevicePrivate(*this)) )
   { }
 
   IODevice::IODevice(IODevicePrivate &d) : Base(d)
@@ -82,6 +85,5 @@ namespace zyppng {
   {
     return writeData( data, len );
   }
-
 }
 

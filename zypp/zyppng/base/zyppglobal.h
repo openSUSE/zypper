@@ -36,10 +36,12 @@ template <typename Ptr> inline auto zyppGetPtrHelper(Ptr &ptr) -> decltype(ptr.o
     const Class##Private* Class::d_func() const \
     { return reinterpret_cast<const Class##Private *>(zyppGetPtrHelper(d_ptr)); }
 
-#define ZYPP_DECLARE_PUBLIC(Class)                                    \
+#define ZYPP_DECLARE_PUBLIC(Class)            \
+    public:                                            \
     inline Class* z_func() { return static_cast<Class *>(z_ptr); } \
     inline const Class* z_func() const { return static_cast<const Class *>(z_ptr); } \
-    friend class Class;
+    friend class Class; \
+    private:
 
 #define Z_D() auto const d = d_func()
 #define Z_Z() auto const z = z_func()

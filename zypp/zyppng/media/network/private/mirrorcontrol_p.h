@@ -12,7 +12,7 @@
 
 namespace zyppng {
 
-  class MirrorControl : public sigc::trackable {
+  class MirrorControl : public Base {
 
   public:
 
@@ -54,7 +54,7 @@ namespace zyppng {
     NetworkRequestDispatcher::Ptr _dispatcher; //Mirror Control using its own NetworkRequestDispatcher, to avoid waiting for other downloads
     std::unordered_map<std::string, MirrorHandle> _handles;
 
-    signal<void()> _sigAllMirrorsReady;
+    Signal<void()> _sigAllMirrorsReady;
   };
 
 }

@@ -80,10 +80,15 @@ namespace zyppng {
   {
   }
 
-  NetworkRequestPrivate::NetworkRequestPrivate(Url &&url, zypp::Pathname &&targetFile, NetworkRequest::FileMode fMode )
-    : _url ( std::move(url) )
+  NetworkRequestPrivate::NetworkRequestPrivate(Url &&url, zypp::Pathname &&targetFile, NetworkRequest::FileMode fMode , NetworkRequest &p)
+    : BasePrivate(p)
+    , _url ( std::move(url) )
     , _targetFile ( std::move( targetFile) )
     , _fMode ( std::move(fMode) )
+    , _sigStarted(p)
+    , _sigBytesDownloaded(p)
+    , _sigProgress(p)
+    , _sigFinished(p)
     , _headers( std::unique_ptr< curl_slist, decltype (&curl_slist_free_all) >( nullptr, &curl_slist_free_all ) )
   { }
 
@@ -232,8 +237,8 @@ namespace zyppng {
       // add custom headers for download.opensuse.org (bsc#955801)
       if ( _url.getHost() == "download.opensuse.org" )
       {
-        locSet.addHeader( internal::anonymousIdHeader() );
-        locSet.addHeader( internal::distributionFlavorHeader() );
+        locSet.addHeader( ::internal::anonymousIdHeader() );
+        locSet.addHeader( ::internal::distributionFlavorHeader() );
       }
 
       locSet.addHeader("Pragma:");
@@ -241,7 +246,7 @@ namespace zyppng {
       locSet.setTimeout( zypp::ZConfig::instance().download_transfer_timeout() );
       locSet.setConnectTimeout( CONNECT_TIMEOUT );
 
-      locSet.setUserAgentString( internal::agentString() );
+      locSet.setUserAgentString( ::internal::agentString() );
 
       {
         char *ptr = getenv("ZYPP_MEDIA_CURL_DEBUG");
@@ -249,7 +254,7 @@ namespace zyppng {
         if( _curlDebug > 0)
         {
           setCurlOption( CURLOPT_VERBOSE, 1L);
-          setCurlOption( CURLOPT_DEBUGFUNCTION, internal::log_curl);
+          setCurlOption( CURLOPT_DEBUGFUNCTION, ::internal::log_curl);
           setCurlOption( CURLOPT_DEBUGDATA, &_curlDebug);
         }
       }
@@ -376,7 +381,7 @@ namespace zyppng {
 
         if ( ! proxyuserpwd.empty() )
         {
-          setCurlOption(CURLOPT_PROXYUSERPWD, internal::curlUnEscape( proxyuserpwd ).c_str());
+          setCurlOption(CURLOPT_PROXYUSERPWD, ::internal::curlUnEscape( proxyuserpwd ).c_str());
         }
       }
 #if CURLVERSION_AT_LEAST(7,19,4)
@@ -444,7 +449,7 @@ namespace zyppng {
     auto &m = std::get<running_t>( _runningMode );
 
     if ( m._activityTimer ) {
-      m._activityTimer->sigExpired().connect( sigc::mem_fun( this, &NetworkRequestPrivate::onActivityTimeout ));
+      m._activityTimer->connect( &Timer::sigExpired, *this, &NetworkRequestPrivate::onActivityTimeout );
       m._activityTimer->start( static_cast<uint64_t>( _settings.timeout() * 1000 ) );
     }
 
@@ -912,7 +917,7 @@ namespace zyppng {
   }
 
   NetworkRequest::NetworkRequest(zyppng::Url url, zypp::filesystem::Pathname targetFile, zyppng::NetworkRequest::FileMode fMode)
-    : Base ( *new NetworkRequestPrivate( std::move(url), std::move(targetFile), std::move(fMode) ) )
+    : Base ( *new NetworkRequestPrivate( std::move(url), std::move(targetFile), std::move(fMode), *this ) )
   {
   }
 

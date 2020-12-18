@@ -35,10 +35,10 @@ namespace zyppng {
   MirrorControl::MirrorControl()
   {
     _dispatcher = std::make_shared<NetworkRequestDispatcher>();
-    _dispatcher->sigQueueFinished().connect( track_obj( [ this ]( NetworkRequestDispatcher& ) {
+    _dispatcher->connectFunc( &NetworkRequestDispatcher::sigQueueFinished, [ this ]( NetworkRequestDispatcher& ) {
       //tell the world the queue is empty
       _sigAllMirrorsReady.emit();
-    }, this ) );
+    }, *this );
     _dispatcher->run();
   }
 
@@ -75,7 +75,7 @@ namespace zyppng {
         mirrorHandle->_request->setOptions( NetworkRequest::ConnectionTest );
         mirrorHandle->_request->transferSettings().setTimeout( defaultSampleTime );
         mirrorHandle->_request->transferSettings().setConnectTimeout( defaultSampleTime );
-        mirrorHandle->_finishedConn = mirrorHandle->_request->sigFinished().connect([ mirrorHandle ](  NetworkRequest &req, const NetworkRequestError & ){
+        mirrorHandle->_finishedConn = mirrorHandle->_request->connectFunc( &NetworkRequest::sigFinished, [ mirrorHandle ](  NetworkRequest &req, const NetworkRequestError & ){
 
           if ( req.hasError() )
             ERR << "Mirror request failed: " << req.error().toString() << " ; " << req.extendedErrorString() << "; for url: "<<req.url()<<std::endl;
@@ -95,7 +95,7 @@ namespace zyppng {
 
           // clean the request up
           mirrorHandle->_finishedConn.disconnect();
-          EventDispatcher::unrefLater( std::move(mirrorHandle->_request) );
+          // EventDispatcher::unrefLater( std::move(mirrorHandle->_request) );
           mirrorHandle->_request.reset();
         });
 

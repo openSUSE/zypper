@@ -23,7 +23,22 @@
 
 namespace zyppng {
 
+  class Base;
   class BasePrivate;
+
+  namespace internal {
+    template <typename Func>
+    struct MemberFunction;
+
+    template <typename BType, typename Ret, typename ...Args >
+    struct MemberFunction<Ret (BType::*)( Args... )> {
+      using ClassType = BType;
+    };
+
+    template <typename T>
+    inline constexpr bool is_base_receiver = std::is_base_of_v<Base, T> || std::is_base_of_v<BasePrivate, T>;
+
+  }
 
   /*!
    * The Base class is used as a common base class for objects that emit signals,
@@ -103,10 +118,53 @@ namespace zyppng {
       return std::static_pointer_cast<T>( weak_from_this().lock() );
     }
 
+    template<typename Obj, typename Functor >
+    static decltype (auto) make_base_slot( Obj *o, Functor &&f ) {
+      //static_assert ( !internal::is_base_receiver<Obj>, "Can not make a slot for a Object that does not derive from Base or BasePrivate.");
+      return internal::locking_fun( sigc::mem_fun( o, std::forward<Functor>(f) ), *o );
+    }
+
+    template< typename SenderFunc, typename ReceiverFunc >
+    static auto connect ( typename internal::MemberFunction<SenderFunc>::ClassType &s, SenderFunc &&sFun, typename internal::MemberFunction<ReceiverFunc>::ClassType &recv, ReceiverFunc &&rFunc ) {
+      return std::invoke( std::forward<SenderFunc>(sFun), &s ).connect( make_base_slot( &recv, std::forward<ReceiverFunc>(rFunc) ) );
+    }
+
+    template< typename SenderFunc, typename ReceiverFunc >
+    auto connect ( SenderFunc &&sFun, typename internal::MemberFunction<ReceiverFunc>::ClassType &recv, ReceiverFunc &&rFunc ) {
+      return connect( static_cast<typename internal::MemberFunction<SenderFunc>::ClassType &>(*this), std::forward<SenderFunc>(sFun), recv, std::forward<ReceiverFunc>(rFunc) );
+    }
+
+    template< typename SenderFunc, typename ReceiverFunc, typename ...Tracker >
+    static auto connectFunc ( typename internal::MemberFunction<SenderFunc>::ClassType &s, SenderFunc &&sFun, ReceiverFunc &&rFunc, const Tracker&...trackers ) {
+      return std::invoke( std::forward<SenderFunc>(sFun), &s ).connect( internal::locking_fun( std::forward<ReceiverFunc>(rFunc), trackers... ) );
+    }
+
+    template< typename SenderFunc, typename ReceiverFunc, typename ...Tracker  >
+    std::enable_if_t< std::is_member_function_pointer_v< SenderFunc >,  connection > connectFunc ( SenderFunc &&sFun, ReceiverFunc &&rFunc, const Tracker&...trackers  ) {
+      return connectFunc( static_cast<typename internal::MemberFunction<SenderFunc>::ClassType &>(*this), std::forward<SenderFunc>(sFun), std::forward<ReceiverFunc>(rFunc), trackers... );
+    }
+
   protected:
     Base ( BasePrivate &dd );
     std::unique_ptr<BasePrivate> d_ptr;
   };
+
+
+  template<typename Obj, typename Functor,
+    std::enable_if_t< std::is_base_of_v< Base, Obj> || std::is_base_of_v<BasePrivate, Obj>, bool> = true
+  >
+  inline decltype(auto) base_slot( Obj *o, Functor &&f )
+  {
+    return Base::make_base_slot(o, std::forward<Functor>(f) );
+  }
+
+  template<typename Obj, typename Functor,
+    std::enable_if_t< std::is_base_of_v< Base, Obj> || std::is_base_of_v<BasePrivate, Obj>, bool> = true
+    >
+  inline decltype(auto) base_slot( Obj &o, Functor &&f )
+  {
+    return Base::make_base_slot(&o, std::forward<Functor>(f) );
+  }
 
 } // namespace zyppng
 

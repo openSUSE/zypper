@@ -25,9 +25,9 @@ namespace zyppng {
 
   class DownloadPrivateBase : public BasePrivate
   {
-  public:
     ZYPP_DECLARE_PUBLIC(Download)
-    DownloadPrivateBase ( Downloader &parent, std::shared_ptr<NetworkRequestDispatcher> requestDispatcher, std::shared_ptr<MirrorControl> mirrors, DownloadSpec &&spec );
+  public:
+    DownloadPrivateBase ( Downloader &parent, std::shared_ptr<NetworkRequestDispatcher> requestDispatcher, std::shared_ptr<MirrorControl> mirrors, DownloadSpec &&spec, Download &p );
     ~DownloadPrivateBase ();
 
     struct Block {
@@ -50,9 +50,9 @@ namespace zyppng {
 
       template <typename Receiver>
       void connectSignals ( Receiver &dl ) {
-        _sigStartedConn  = sigStarted().connect ( sigc::mem_fun( dl, &Receiver::onRequestStarted) );
-        _sigProgressConn = sigProgress().connect( sigc::mem_fun( dl, &Receiver::onRequestProgress) );
-        _sigFinishedConn = sigFinished().connect( sigc::mem_fun( dl, &Receiver::onRequestFinished) );
+        _sigStartedConn  = connect ( &NetworkRequest::sigStarted,  dl, &Receiver::onRequestStarted );
+        _sigProgressConn = connect ( &NetworkRequest::sigProgress, dl, &Receiver::onRequestProgress );
+        _sigFinishedConn = connect ( &NetworkRequest::sigFinished, dl, &Receiver::onRequestFinished );
       }
       void disconnectSignals ();
 
@@ -101,13 +101,13 @@ namespace zyppng {
         return _sigTransitionToDlNormalFileState;
       }
 
-      std::unique_ptr<DLZckHeadState> toDLZckHeadState ();
+      std::shared_ptr<DLZckHeadState> toDLZckHeadState ();
 
     private:
-      signal<void()> _sigTransitionToDetectMetalinkState;
-      signal<void()> _sigTransitionToDlMetaLinkInfoState;
-      signal<void()> _sigTransitionToDLZckHeaderState;
-      signal<void()> _sigTransitionToDlNormalFileState;
+      Signal<void()> _sigTransitionToDetectMetalinkState;
+      Signal<void()> _sigTransitionToDlMetaLinkInfoState;
+      Signal<void()> _sigTransitionToDLZckHeaderState;
+      Signal<void()> _sigTransitionToDlNormalFileState;
     };
 
     struct DetectMetalinkState : public zyppng::SimpleState< DownloadPrivate, Download::DetectMetaLink, false > {
@@ -137,14 +137,14 @@ namespace zyppng {
       bool toZckHeadDownloadGuard () const;
       bool toSimpleDownloadGuard () const;
 
-      std::unique_ptr<DLZckHeadState> toDLZckHeadState();
+      std::shared_ptr<DLZckHeadState> toDLZckHeadState();
 
       std::shared_ptr<Request> _request;
 
     private:
       NetworkRequestError _error;
       bool _gotMetalink = false;
-      signal< void () > _sigFinished;
+      Signal< void () > _sigFinished;
     };
 
     struct BasicDownloaderStateBase : public zyppng::BasicState< DownloadPrivate, false > {
@@ -175,8 +175,8 @@ namespace zyppng {
     protected:
       virtual void handleRequestProgress (NetworkRequest &req, off_t dltotal, off_t dlnow );
       NetworkRequestError _error;
-      signal< void () > _sigFinished;
-      signal< void () > _sigFailed;
+      Signal< void () > _sigFinished;
+      Signal< void () > _sigFailed;
     };
 
     /*!
@@ -198,14 +198,14 @@ namespace zyppng {
         return _sigFailed;
       }
 
-      std::unique_ptr<FinishedState> transitionToFinished ();
+      std::shared_ptr<FinishedState> transitionToFinished ();
 
       bool initializeRequest( std::shared_ptr<Request> r ) override;
       virtual void gotFinished () override;
 
     protected:
       bool _isMetalink = false;
-      signal< void () > _sigGotMetalink;
+      Signal< void () > _sigGotMetalink;
 
       virtual void handleRequestProgress ( NetworkRequest &req, off_t dltotal, off_t dlnow ) override;
     };
@@ -214,7 +214,7 @@ namespace zyppng {
     /*!
      * Parses the downloaded Metalink file and sets up the mirror database
      */
-    struct PrepareMultiState : public zyppng::SimpleState< DownloadPrivate, Download::PrepareMulti, false >, public trackable {
+    struct PrepareMultiState : public zyppng::SimpleState< DownloadPrivate, Download::PrepareMulti, false > {
 
       PrepareMultiState ( DownloadPrivate &parent );
 
@@ -235,10 +235,10 @@ namespace zyppng {
         return _sigFallback;
       }
 
-      std::unique_ptr<DlNormalFileState>  fallbackToNormalTransition ();
-      std::unique_ptr<DLZckHeadState>     transitionToZckHeadDl ();
-      std::unique_ptr<DlMetalinkState>    transitionToMetalinkDl ();
-      std::unique_ptr<FinishedState>      transitionToFinished ();
+      std::shared_ptr<DlNormalFileState>  fallbackToNormalTransition ();
+      std::shared_ptr<DLZckHeadState>     transitionToZckHeadDl ();
+      std::shared_ptr<DlMetalinkState>    transitionToMetalinkDl ();
+      std::shared_ptr<FinishedState>      transitionToFinished ();
 
       bool toZckHeadDownloadGuard () const;
       bool toMetalinkDownloadGuard () const;
@@ -253,9 +253,9 @@ namespace zyppng {
 
       bool _haveZckData = false; //< do we have zck data ready
       NetworkRequestError _error;
-      signal< void () > _sigFinished;
-      signal< void () > _sigFallback;
-      signal< void () > _sigFailed;
+      Signal< void () > _sigFinished;
+      Signal< void () > _sigFallback;
+      Signal< void () > _sigFailed;
     };
 
 
@@ -302,8 +302,8 @@ namespace zyppng {
 
       // we only define the signals here and add the accessor functions in the subclasses, static casting of
       // the class type is not allowed at compile time, so they would not be useable in the transition table otherwise
-      signal< void () > _sigFinished;
-      signal< void () > _sigFailed;
+      Signal< void () > _sigFinished;
+      Signal< void () > _sigFailed;
 
 private:
       void handleRequestError( std::shared_ptr<Request> req, const zyppng::NetworkRequestError &err );
@@ -326,7 +326,7 @@ private:
       void exit ();
       virtual void setFinished () override;
 
-      std::unique_ptr<FinishedState> transitionToFinished ();
+      std::shared_ptr<FinishedState> transitionToFinished ();
 
       // in case of error we might fall back, except for the errors listed here
       bool toFinalStateCondition () {
@@ -360,7 +360,7 @@ private:
       static constexpr auto stateId = Download::DlSimple;
       DlNormalFileState( DownloadPrivate &parent );
 
-      std::unique_ptr<FinishedState> transitionToFinished ();
+      std::shared_ptr<FinishedState> transitionToFinished ();
 
       SignalProxy< void () > sigFinished() {
         return _sigFinished;
@@ -381,7 +381,7 @@ private:
       virtual bool initializeRequest( std::shared_ptr<Request> r ) override;
       virtual void gotFinished () override;
 
-      std::unique_ptr<DLZckState> transitionToDlZckState ();
+      std::shared_ptr<DLZckState> transitionToDlZckState ();
 
       SignalProxy< void () > sigFinished() {
         return _sigFinished;
@@ -406,7 +406,7 @@ private:
       void enter ();
       void exit ();
 
-      std::unique_ptr<FinishedState> transitionToFinished ();
+      std::shared_ptr<FinishedState> transitionToFinished ();
 
       SignalProxy< void () > sigFinished() {
         return _sigFinished;
@@ -446,12 +446,12 @@ private:
     time_t _lastTriedAuthTime = 0; //< if initialized this shows the last timestamp that we loaded a cred for the given URL from CredentialManager
     NetworkRequest::Priority _defaultSubRequestPriority = NetworkRequest::High;
 
-    signal<void ( Download &req )> _sigStarted;
-    signal<void ( Download &req, Download::State state )> _sigStateChanged;
-    signal<void ( Download &req, off_t dlnow  )> _sigAlive;
-    signal<void ( Download &req, off_t dltotal, off_t dlnow )> _sigProgress;
-    signal<void ( Download &req )> _sigFinished;
-    signal<void ( zyppng::Download &req, zyppng::NetworkAuthData &auth, const std::string &availAuth )> _sigAuthRequired;
+    MemSignal<Download, void ( Download &req )> _sigStarted;
+    MemSignal<Download, void ( Download &req, Download::State state )> _sigStateChanged;
+    MemSignal<Download, void ( Download &req, off_t dlnow  )> _sigAlive;
+    MemSignal<Download, void ( Download &req, off_t dltotal, off_t dlnow )> _sigProgress;
+    MemSignal<Download, void ( Download &req )> _sigFinished;
+    MemSignal<Download, void ( zyppng::Download &req, zyppng::NetworkAuthData &auth, const std::string &availAuth )> _sigAuthRequired;
 
   protected:
     NetworkRequestError safeFillSettingsFromURL ( const Url &url, TransferSettings &set );
@@ -506,7 +506,7 @@ private:
   class DownloadPrivate : public DownloadPrivateBase, public DownloadStatemachine<DownloadPrivate>
   {
   public:
-    DownloadPrivate ( Downloader &parent, std::shared_ptr<NetworkRequestDispatcher> requestDispatcher, std::shared_ptr<MirrorControl> mirrors, DownloadSpec &&spec );
+    DownloadPrivate ( Downloader &parent, std::shared_ptr<NetworkRequestDispatcher> requestDispatcher, std::shared_ptr<MirrorControl> mirrors, DownloadSpec &&spec, Download &p );
     void start ();
   };
 
@@ -514,7 +514,7 @@ private:
   {
     ZYPP_DECLARE_PUBLIC(Downloader)
   public:
-    DownloaderPrivate( std::shared_ptr<MirrorControl> mc = {} );
+    DownloaderPrivate( std::shared_ptr<MirrorControl> mc, Downloader &p );
 
     std::vector< std::shared_ptr<Download> > _runningDownloads;
     std::shared_ptr<NetworkRequestDispatcher> _requestDispatcher;
@@ -522,9 +522,9 @@ private:
     void onDownloadStarted ( Download &download );
     void onDownloadFinished ( Download &download );
 
-    signal<void ( Downloader &parent, Download& download )> _sigStarted;
-    signal<void ( Downloader &parent, Download& download )> _sigFinished;
-    signal<void ( Downloader &parent )> _queueEmpty;
+    MemSignal<Downloader, void ( Downloader &parent, Download& download )> _sigStarted;
+    MemSignal<Downloader, void ( Downloader &parent, Download& download )> _sigFinished;
+    MemSignal<Downloader, void ( Downloader &parent )> _queueEmpty;
     std::shared_ptr<MirrorControl> _mirrors;
   };
 

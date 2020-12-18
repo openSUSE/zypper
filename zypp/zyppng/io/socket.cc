@@ -87,7 +87,7 @@ namespace zyppng {
         }
         auto &s = _state.emplace<SocketPrivate::ConnectedState>();
         s._socketNotifier = SocketNotifier::create( _socket, SocketNotifier::Read | SocketNotifier::Error, true );
-        s._socketNotifier->sigActivated().connect( [this]( const auto &, auto ev){ onSocketActivated( ev );} );
+        s._socketNotifier->connect( &SocketNotifier::sigActivated, *this, &SocketPrivate::onSocketActivatedSlot );
         _connected.emit();
         break;
       }
@@ -98,7 +98,7 @@ namespace zyppng {
         }
         auto &s = _state.emplace<SocketPrivate::ListeningState>();
         s._socketNotifier = SocketNotifier::create( _socket, SocketNotifier::Read, true );
-        s._socketNotifier->sigActivated().connect( [this]( const auto & , auto ev){ onSocketActivated( ev );} );
+        s._socketNotifier->connect( &SocketNotifier::sigActivated, *this, &SocketPrivate::onSocketActivatedSlot );
         break;
       }
       case Socket::ClosingState: {
@@ -110,7 +110,7 @@ namespace zyppng {
         auto wbOld =  std::move( std::get<ConnectedState>(_state)._writeBuffer );
         auto &s = _state.emplace<SocketPrivate::ClosingState>(  std::move( wbOld ) );
         s._socketNotifier = SocketNotifier::create( _socket, SocketNotifier::Write, true );
-        s._socketNotifier->sigActivated().connect( [this]( const auto & , auto ev){ onSocketActivated( ev );} );
+        s._socketNotifier->connect( &SocketNotifier::sigActivated, *this, &SocketPrivate::onSocketActivatedSlot );
         break;
       }
       case Socket::ClosedState: {
@@ -136,16 +136,16 @@ namespace zyppng {
     auto doDelayedConnect = [ this, &state ](){
       if ( !state._connectNotifier ) {
         state._connectNotifier = SocketNotifier::create( _socket, SocketNotifier::Write, true );
-        state._connectNotifier->sigActivated().connect( [this]( const auto &, auto ev){ this->onSocketActivated( ev );} );
+        state._connectNotifier->connect( &SocketNotifier::sigActivated, *this, &SocketPrivate::onSocketActivatedSlot );
       }
 
       if ( !state._connectTimeout ) {
         state._connectTimeout = Timer::create();
-        state._connectTimeout->sigExpired().connect( [this, &state ]( const auto &) {
+        state._connectTimeout->connectFunc( &Timer::sigExpired, [this, &state ]( const auto &) {
           setError( Socket::ConnectionTimeout, "The connection timed out." );
           state._connectNotifier.reset();
           state._connectTimeout.reset();
-        });
+        }, *z_func());
       }
       state._connectTimeout->setSingleShot( true );
       state._connectTimeout->start( 30000 );
@@ -398,7 +398,7 @@ namespace zyppng {
   }
 
   Socket::Socket( int domain, int type, int protocol )
-    : IODevice( *( new SocketPrivate( domain, type, protocol )))
+    : IODevice( *( new SocketPrivate( domain, type, protocol, *this )))
   { }
 
   Socket::~Socket()
@@ -505,7 +505,7 @@ namespace zyppng {
           break;
         default:
           d->setError( Socket::InternalError, strerr_cxx() );
-          break;
+          return nullptr;
       }
     }
 

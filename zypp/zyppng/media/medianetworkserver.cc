@@ -46,7 +46,7 @@ namespace zyppng {
 
     // bind to a abstract unix domain socket address, which means we do not need to care about cleaning it up
     _serverSocket->bind( std::make_shared<zyppng::UnixSockAddr>( sockPath, true ) );
-    _serverSocket->sigIncomingConnection().connect( sigc::mem_fun( this, &MediaNetworkServer::onIncomingConnection ) );
+    _serverSocket->Base::connect( &zyppng::Socket::sigIncomingConnection, *this, &MediaNetworkServer::onIncomingConnection );
     _serverSocket->listen();
 
     MIL << "MediaNetworkServer started to listen for connections " << std::endl;
@@ -71,7 +71,7 @@ namespace zyppng {
     MIL << "MediaNetworkServer received new connection " << sock.get() << std::endl;
 
     auto client = std::make_shared<MediaNetworkConn>( *this, std::move(sock) );
-    client->sigDisconnected().connect([ this, wp = std::weak_ptr(client) ](){
+    client->connectFunc( &MediaNetworkConn::sigDisconnected, [ this, wp = std::weak_ptr(client) ](){
       auto p = wp.lock();
       if (!p) {
         MIL << "MediaNetworkServer client disconnected but the pointer was already deleted" << std::endl;
@@ -83,10 +83,7 @@ namespace zyppng {
       std::remove_if( _clients.begin(), _clients.end(), [ &p ]( auto listElem ){
         return p.get() == listElem.get();
       });
-
-      // never delete a object directly in a signal handler
-      EventDispatcher::instance()->unrefLater( p );
-    });
+    }, *this);
 
     _clients.push_back( client );
   }
@@ -112,9 +109,9 @@ namespace zyppng {
   MediaNetworkConn::MediaNetworkConn( MediaNetworkServer &server, std::shared_ptr<Socket> &&socket ) : _server(server), _connection ( std::move( socket ) )
   {
     MIL << "Initializing Connection object " << std::endl;
-    _connection->sigReadyRead().connect( sigc::mem_fun( this, &MediaNetworkConn::onReadyRead ) );
-    _connection->sigDisconnected().connect( sigc::mem_fun( this, &MediaNetworkConn::onDisconnected ) );
-    _connection->sigError().connect( sigc::mem_fun( this, &MediaNetworkConn::onError ) );
+    _connection->Base::connect( &Socket::sigReadyRead, *this, &MediaNetworkConn::onReadyRead );
+    _connection->Base::connect( &Socket::sigDisconnected, *this, &MediaNetworkConn::onDisconnected );
+    _connection->Base::connect( &Socket::sigError, *this, &MediaNetworkConn::onError );
 
     //make sure we read possibly available data
     onReadyRead();
@@ -313,23 +310,23 @@ namespace zyppng {
   void MediaNetworkConn::trackRequest( Request &r )
   {
     r.trackingConns = {
-      r.dl->sigStarted().connect( [ this, &r ]( auto & ) {
+      r.dl->connectFunc( &Download::sigStarted, [ this, &r ]( auto & ) {
         this->signalRequestStarted( r );
-      }),
+      }, *this),
 
-      r.dl->sigAlive().connect( [ this, &r ]( auto &, off_t now ) {
+      r.dl->connectFunc( &Download::sigAlive, [ this, &r ]( auto &, off_t now ) {
 
-        if ( !r.request.streamprogress() )
-          return;
+          if ( !r.request.streamprogress() )
+            return;
 
-        zypp::proto::DownloadProgress prog;
-        prog.set_requestid( r.request.requestid() );
-        prog.set_url( r.request.spec().url() );
-        prog.set_now( now );
-        this->sendMessage( prog );
-      }),
+          zypp::proto::DownloadProgress prog;
+          prog.set_requestid( r.request.requestid() );
+          prog.set_url( r.request.spec().url() );
+          prog.set_now( now );
+          this->sendMessage( prog );
+        }, *this ),
 
-      r.dl->sigProgress().connect( [ this, &r ]( auto &, off_t total, off_t now ) {
+      r.dl->connectFunc( &Download::sigProgress, [ this, &r ]( auto &, off_t total, off_t now ) {
 
         if ( !r.request.streamprogress() ) {
           return;
@@ -341,10 +338,10 @@ namespace zyppng {
         prog.set_now( now );
         prog.set_total( total );
         this->sendMessage( prog );
-      }),
-      r.dl->sigFinished().connect( [ this, &r ]( auto & ) {
+      }, *this ),
+      r.dl->connectFunc( &Download::sigFinished, [ this, &r ]( auto & ) {
         this->trackedDlFinished( r );
-      })
+      }, *this )
     };
   }
 
@@ -423,13 +420,13 @@ namespace zyppng {
 
     auto dispatch = zyppng::EventLoop::create();
 
-    MediaNetworkServer server;
-    server.listen( sockPath() );
+    auto server = std::make_shared<MediaNetworkServer>();
+    server->listen( sockPath() );
 
     // we are using a pipe to wake up from the event loop, the SocketNotifier will throw a signal every
     // time there is data available
     auto sNotify = _shutdownSignal.makeNotifier( false );
-    sNotify->sigActivated().connect( [&dispatch]( const zyppng::SocketNotifier &, int ) {
+    sNotify->connectFunc( &zyppng::SocketNotifier::sigActivated, [&dispatch]( const zyppng::SocketNotifier &, int ) {
       dispatch->quit();
     });
     sNotify->setEnabled( true );

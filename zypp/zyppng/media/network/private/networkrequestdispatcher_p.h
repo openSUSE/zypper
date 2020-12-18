@@ -16,7 +16,7 @@ class NetworkRequestDispatcherPrivate : public BasePrivate
 {
   ZYPP_DECLARE_PUBLIC(NetworkRequestDispatcher)
 public:
-  NetworkRequestDispatcherPrivate ( );
+  NetworkRequestDispatcherPrivate ( NetworkRequestDispatcher &p );
   virtual ~NetworkRequestDispatcherPrivate();
 
   int _maxConnections = 10;
@@ -34,10 +34,10 @@ public:
   NetworkRequestError _lastError;
 
   //signals
-  signal<void ( NetworkRequestDispatcher &, NetworkRequest & )> _sigDownloadStarted;
-  signal<void ( NetworkRequestDispatcher &, NetworkRequest & )> _sigDownloadFinished;
-  signal<void ( NetworkRequestDispatcher & )> _sigQueueFinished;
-  signal<void ( NetworkRequestDispatcher & )> _sigError;
+  MemSignal<NetworkRequestDispatcher, void ( NetworkRequestDispatcher &, NetworkRequest & )> _sigDownloadStarted;
+  MemSignal<NetworkRequestDispatcher, void ( NetworkRequestDispatcher &, NetworkRequest & )> _sigDownloadFinished;
+  MemSignal<NetworkRequestDispatcher, void ( NetworkRequestDispatcher & )> _sigQueueFinished;
+  MemSignal<NetworkRequestDispatcher, void ( NetworkRequestDispatcher & )> _sigError;
 
 private:
   static int multi_timer_cb ( CURLM *multi, long timeout_ms, void *g );

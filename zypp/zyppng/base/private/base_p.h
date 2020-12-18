@@ -14,6 +14,7 @@ namespace zyppng
   {
     ZYPP_DECLARE_PUBLIC(Base)
   public:
+    BasePrivate ( Base &b ) : z_ptr(&b){}
     virtual ~BasePrivate();
     Base::WeakPtr parent;
     std::unordered_set< Base::Ptr > children;

@@ -147,7 +147,10 @@ gboolean GAbstractEventSource::dispatch(GSource *source, GSourceFunc, gpointer)
 
       if ( (pendEvents & pollfd.reqEvents ) != 0 ) {
         int ev = gioConditionToEventTypes( pendEvents, pollfd.reqEvents );
-        src->eventSource->onFdReady( pollfd.pollfd, ev );
+        // we require all event objects to be used in shared_ptr form, by doing this we make sure that the object is not destroyed
+        // while we still use it. However this WILL throw in case of using the EventSource outside of shared_ptr bounds
+        auto eventSourceLocked = src->eventSource->shared_this<AbstractEventSource>();
+        eventSourceLocked->onFdReady( pollfd.pollfd, ev );
       }
     }
   }
@@ -202,7 +205,7 @@ gboolean GLibTimerSource::dispatch(GSource *src, GSourceFunc, gpointer)
     return true;
   //this will emit the expired signal and reset the timer
   //or stop it in case its a single shot timer
-  source->_t->expire();
+  source->_t->shared_this<Timer>()->expire();
   return true;
 }
 
@@ -239,7 +242,7 @@ static gboolean  eventLoopIdleFunc ( gpointer user_data )
 }
 
 
-EventDispatcherPrivate::EventDispatcherPrivate ( GMainContext *ctx )
+EventDispatcherPrivate::EventDispatcherPrivate (GMainContext *ctx , EventDispatcher &p) : BasePrivate(p)
 {
   _myThreadId = std::this_thread::get_id();
 
@@ -310,7 +313,7 @@ std::shared_ptr<EventDispatcher> EventDispatcherPrivate::create()
 }
 
 EventDispatcher::EventDispatcher(void *ctx)
-  : Base ( * new EventDispatcherPrivate( reinterpret_cast<GMainContext*>(ctx) ) )
+  : Base ( * new EventDispatcherPrivate( reinterpret_cast<GMainContext*>(ctx), *this ) )
 {
 }
 
@@ -318,19 +321,21 @@ EventDispatcher::~EventDispatcher()
 {
 }
 
-void EventDispatcher::updateEventSource( AbstractEventSource *notifier, int fd, int mode )
+void EventDispatcher::updateEventSource( AbstractEventSource &notifier, int fd, int mode )
 {
   Z_D();
-  if ( notifier->eventDispatcher().lock().get() != this )
+  if ( notifier.eventDispatcher().lock().get() != this )
     ZYPP_THROW( zypp::Exception("Invalid event dispatcher used to update event source") );
+
+  AbstractEventSource *notifyPtr = &notifier;
 
   GAbstractEventSource *evSrc = nullptr;
   auto &evSrcList = d->_eventSources;
-  auto itToEvSrc = std::find_if( evSrcList.begin(), evSrcList.end(), [ notifier ]( const auto elem ){ return elem->eventSource == notifier; } );
+  auto itToEvSrc = std::find_if( evSrcList.begin(), evSrcList.end(), [ notifyPtr ]( const auto elem ){ return elem->eventSource == notifyPtr; } );
   if ( itToEvSrc == evSrcList.end() ) {
 
     evSrc = GAbstractEventSource::create( d );
-    evSrc->eventSource = notifier;
+    evSrc->eventSource = notifyPtr;
     evSrcList.push_back( evSrc );
 
     g_source_attach( &evSrc->source, d->_ctx );
@@ -358,15 +363,17 @@ void EventDispatcher::updateEventSource( AbstractEventSource *notifier, int fd, 
   }
 }
 
-void EventDispatcher::removeEventSource( AbstractEventSource *notifier, int fd )
+void EventDispatcher::removeEventSource( zyppng::AbstractEventSource &notifier, int fd )
 {
   Z_D();
 
-  if ( notifier->eventDispatcher().lock().get() != this )
+  AbstractEventSource *ptr = &notifier;
+
+  if ( notifier.eventDispatcher().lock().get() != this )
     ZYPP_THROW( zypp::Exception("Invalid event dispatcher used to remove event source") );
 
   auto &evList = d->_eventSources;
-  auto it = std::find_if( evList.begin(), evList.end(), [ notifier ]( const auto elem ){ return elem->eventSource == notifier; } );
+  auto it = std::find_if( evList.begin(), evList.end(), [ ptr ]( const auto elem ){ return elem->eventSource == ptr; } );
 
   if ( it == evList.end() )
     return;
@@ -395,27 +402,27 @@ void EventDispatcher::removeEventSource( AbstractEventSource *notifier, int fd )
   }
 }
 
-void EventDispatcher::registerTimer( Timer *timer )
+void EventDispatcher::registerTimer( Timer &timer )
 {
   Z_D();
   //make sure timer is not double registered
   for ( const GLibTimerSource *t : d->_runningTimers ) {
-    if ( t->_t == timer )
+    if ( t->_t == &timer )
       return;
   }
 
   GLibTimerSource *newSrc = GLibTimerSource::create();
-  newSrc->_t = timer;
+  newSrc->_t = &timer;
   d->_runningTimers.push_back( newSrc );
 
   g_source_attach( &newSrc->source, d->_ctx );
 }
 
-void EventDispatcher::removeTimer( Timer *timer )
+void EventDispatcher::removeTimer( Timer &timer )
 {
   Z_D();
-  auto it = std::find_if( d->_runningTimers.begin(), d->_runningTimers.end(), [ timer ]( const GLibTimerSource *src ){
-    return src->_t == timer;
+  auto it = std::find_if( d->_runningTimers.begin(), d->_runningTimers.end(), [ &timer ]( const GLibTimerSource *src ){
+    return src->_t == &timer;
   });
 
   if ( it != d->_runningTimers.end() ) {

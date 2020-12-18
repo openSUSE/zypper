@@ -3,8 +3,11 @@
 
 namespace zyppng {
 
+  EventLoopPrivate::EventLoopPrivate( EventLoop &p ) : BasePrivate( p )
+  { }
+
   EventLoop::EventLoop()
-    : Base ( * new EventLoopPrivate() )
+    : Base ( * new EventLoopPrivate(*this) )
   {
     Z_D();
     d->_dispatcher = ThreadData::current().ensureDispatcher();
@@ -39,5 +42,4 @@ namespace zyppng {
   {
     return d_func()->_dispatcher;
   }
-
 }

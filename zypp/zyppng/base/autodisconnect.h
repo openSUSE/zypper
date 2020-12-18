@@ -18,9 +18,9 @@ namespace zyppng
 {
   struct AutoDisconnect
   {
-    AutoDisconnect( sigc::connection &&conn ) : _conn ( std::move(conn) ) {}
+    AutoDisconnect( connection &&conn ) : _conn ( std::move(conn) ) {}
     ~AutoDisconnect( ) { _conn.disconnect(); }
-    sigc::connection _conn;
+    connection _conn;
   };
 
 }

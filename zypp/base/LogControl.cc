@@ -139,7 +139,7 @@ namespace zypp
       server->listen();
 
       // wait for incoming connections from other threads
-      server->sigIncomingConnection().connect( [&](){
+      server->connectFunc( &zyppng::Socket::sigIncomingConnection, [&](){
 
         auto cl = server->accept();
         if ( !cl ) return;
@@ -147,25 +147,25 @@ namespace zypp
 
         // wait until data is available, we operate line by line so we only
         // log a string once we encounter \n
-        cl->sigReadyRead().connect( [ this, sock = cl.get() ](){
+        cl->connectFunc( &zyppng::Socket::sigReadyRead, [ this, sock = cl.get() ](){
           auto writer = getLineWriter();
           if ( !writer ) return;
           while ( sock->canReadLine() ) {
             auto br = sock->readLine();
             writer->writeOut( std::string( br.data(), br.size() - 1 ) );
           }
-        });
+        }, *cl);
 
         // once a client disconnects we remove it from the std::vector so that the socket is not leaked
-        cl->sigDisconnected().connect( [&clients, &ev, sock = cl.get()](){
+        cl->connectFunc( &zyppng::Socket::sigDisconnected, [&clients, &ev, sock = cl.get()](){
           auto idx = std::find_if( clients.begin(), clients.end(), [sock]( const auto &s ){ return sock == s.get(); } );
-          ev->eventDispatcher()->unrefLater( *idx );
+          //ev->eventDispatcher()->unrefLater( *idx );
           clients.erase( idx );
-        });
+        }, *cl);
 
       });
 
-      stopNotifyWatch->sigActivated().connect( [&ev]( const auto &, auto ) {
+      stopNotifyWatch->connectFunc( &zyppng::SocketNotifier::sigActivated, [&ev]( const auto &, auto ) {
         ev->quit();
       });
 

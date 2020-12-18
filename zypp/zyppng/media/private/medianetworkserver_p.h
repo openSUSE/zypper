@@ -89,7 +89,7 @@ namespace zyppng {
     ReqList _requests;
     std::shared_ptr<Socket> _connection;
     std::optional<int32_t> _pendingMessageSize;
-    zyppng::signal<void()> _disconnected;
+    Signal<void()> _disconnected;
   };
 
   class LIBZYPP_NG_NO_EXPORT MediaNetworkThread : public Base

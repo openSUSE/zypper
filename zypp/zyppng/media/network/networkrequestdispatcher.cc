@@ -15,11 +15,16 @@ using namespace boost;
 
 namespace zyppng {
 
-NetworkRequestDispatcherPrivate::NetworkRequestDispatcherPrivate( )
-  : _timer( Timer::create() )
-  , _multi ( curl_multi_init() )
+NetworkRequestDispatcherPrivate::NetworkRequestDispatcherPrivate(  NetworkRequestDispatcher &p  )
+    : BasePrivate( p )
+    , _timer( Timer::create() )
+    , _multi ( curl_multi_init() )
+    , _sigDownloadStarted(p)
+    , _sigDownloadFinished(p)
+    , _sigQueueFinished(p)
+    , _sigError(p)
 {
-  internal::globalInitCurlOnce();
+  ::internal::globalInitCurlOnce();
 
   curl_multi_setopt( _multi, CURLMOPT_TIMERFUNCTION, NetworkRequestDispatcherPrivate::multi_timer_cb );
   curl_multi_setopt( _multi, CURLMOPT_TIMERDATA, reinterpret_cast<void *>( this ) );
@@ -27,7 +32,7 @@ NetworkRequestDispatcherPrivate::NetworkRequestDispatcherPrivate( )
   curl_multi_setopt( _multi, CURLMOPT_SOCKETDATA, reinterpret_cast<void *>( this ) );
 
   _timer->setSingleShot( true );
-  _timer->sigExpired().connect( sigc::mem_fun( *this, &NetworkRequestDispatcherPrivate::multiTimerTimout ) );
+  _timer->connect( &Timer::sigExpired, *this, &NetworkRequestDispatcherPrivate::multiTimerTimout );
 }
 
 NetworkRequestDispatcherPrivate::~NetworkRequestDispatcherPrivate()
@@ -74,7 +79,7 @@ int NetworkRequestDispatcherPrivate::socketCallback(CURL *easy, curl_socket_t s,
     socketp = SocketNotifier::create( s, SocketNotifier::Read, false );
     _socketHandler.insert( std::make_pair( s, socketp ) );
 
-    socketp->sigActivated().connect( sigc::mem_fun(*this, &NetworkRequestDispatcherPrivate::onSocketActivated) );
+    socketp->connect( &SocketNotifier::sigActivated, *this, &NetworkRequestDispatcherPrivate::onSocketActivated );
   } else {
     socketp = _socketHandler[s];
   }
@@ -112,7 +117,7 @@ int NetworkRequestDispatcherPrivate::socketCallback(CURL *easy, curl_socket_t s,
     _socketHandler.erase( s );
 
     //keep the reference until this iteration is over
-    EventDispatcher::unrefLater( socketp );
+    // EventDispatcher::unrefLater( socketp );
     return 0;
   }
 
@@ -206,14 +211,17 @@ void NetworkRequestDispatcherPrivate::cancelAll( NetworkRequestError result )
 
 void NetworkRequestDispatcherPrivate::setFinished( NetworkRequest &req, NetworkRequestError result )
 {
-  auto delReq = []( auto &list, NetworkRequest &req ) {
+  auto delReq = []( auto &list, NetworkRequest &req ) -> std::shared_ptr<NetworkRequest> {
     auto it = std::find_if( list.begin(), list.end(), [ &req ]( const std::shared_ptr<NetworkRequest> &r ) {
       return req.d_func() == r->d_func();
     } );
     if ( it != list.end() ) {
-      EventDispatcher::unrefLater( *it );
+      // EventDispatcher::unrefLater( *it );
+      auto ptr = *it;
       list.erase( it );
+      return ptr;
     }
+    return nullptr;
   };
 
   // We have a tricky situation if a network request is called when inside a callback, in those cases its
@@ -231,8 +239,9 @@ void NetworkRequestDispatcherPrivate::setFinished( NetworkRequest &req, NetworkR
     }
   }
 
-  delReq( _runningDownloads, req );
-  delReq( _pendingDownloads, req );
+  auto rLocked = delReq( _runningDownloads, req );
+  if ( !rLocked )
+    rLocked = delReq( _pendingDownloads, req );
 
   void *easyHandle = req.d_func()->_easyHandle;
   if ( easyHandle )
@@ -264,14 +273,14 @@ void NetworkRequestDispatcherPrivate::dequeuePending()
     std::string errBuf = "Failed to initialize easy handle";
     if ( !req->d_func()->initialize( errBuf ) ) {
       //@TODO store the CURL error in the errors extra info
-      EventDispatcher::unrefLater( req );
+      // EventDispatcher::unrefLater( req );
       setFinished( *req, NetworkRequestErrorPrivate::customError( NetworkRequestError::InternalError, std::move(errBuf) ) );
       continue;
     }
 
     CURLMcode rc = curl_multi_add_handle( _multi, req->d_func()->_easyHandle );
     if ( rc != 0 ) {
-      EventDispatcher::unrefLater( req );
+      // EventDispatcher::unrefLater( req );
       setFinished( *req, NetworkRequestErrorPrivate::fromCurlMError( rc ) );
       continue;
     }
@@ -291,7 +300,7 @@ void NetworkRequestDispatcherPrivate::dequeuePending()
 }
 
 NetworkRequestDispatcher::NetworkRequestDispatcher( )
-  : Base( * new NetworkRequestDispatcherPrivate ( ) )
+  : Base( * new NetworkRequestDispatcherPrivate ( *this ) )
 {
 
 }

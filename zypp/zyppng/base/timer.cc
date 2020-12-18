@@ -18,7 +18,7 @@ class TimerPrivate : BasePrivate
 {
   ZYPP_DECLARE_PUBLIC(Timer)
 public:
-  TimerPrivate();
+  TimerPrivate( Timer &p );
   virtual ~TimerPrivate();
 
   uint64_t _beginMs = 0;
@@ -26,13 +26,13 @@ public:
   std::weak_ptr<EventDispatcher> _ev;
   bool _isRunning = false;
 
-  signal<void (Timer &t)> _expired;
+  MemSignal<Timer, void (Timer &t)> _expired;
 
   bool _singleShot = false;
 
 };
 
-TimerPrivate::TimerPrivate()
+TimerPrivate::TimerPrivate(Timer &p) : BasePrivate(p), _expired(p)
 {
   auto ev = EventDispatcher::instance();
   if ( !ev )
@@ -157,7 +157,7 @@ void Timer::start( uint64_t timeout )
     //if ev is null we are shutting down
     if ( !ev )
       return;
-    ev->registerTimer( this );
+    ev->registerTimer( *this );
 
     d->_isRunning = true;
   }
@@ -175,12 +175,12 @@ void Timer::stop()
 
   //event loop might be shutting down
   if ( ev )
-    ev->removeTimer( this );
+    ev->removeTimer( *this );
 
   d->_isRunning = false;
 }
 
-Timer::Timer() : Base ( *new TimerPrivate )
+Timer::Timer() : Base ( *new TimerPrivate( *this ) )
 { }
 
 }

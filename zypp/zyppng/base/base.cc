@@ -5,10 +5,8 @@ namespace zyppng {
   BasePrivate::~BasePrivate()
   { }
 
-  Base::Base() : d_ptr( new BasePrivate )
-  {
-    d_ptr->z_ptr = this;
-  }
+  Base::Base() : d_ptr( new BasePrivate(*this) )
+  { }
 
   Base::~Base()
   { }

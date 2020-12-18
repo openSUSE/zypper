@@ -26,8 +26,8 @@ struct GUnixPollFD
 struct GAbstractEventSource
 {
   GSource source;
-  AbstractEventSource *eventSource;
   EventDispatcherPrivate *_ev;
+  AbstractEventSource *eventSource;
   std::vector<GUnixPollFD> pollfds;
 
   static gboolean prepare(GSource *, gint *timeout);
@@ -59,9 +59,9 @@ struct GLibTimerSource
 
 class EventDispatcherPrivate : public BasePrivate
 {
-public:
   ZYPP_DECLARE_PUBLIC(EventDispatcher)
-  EventDispatcherPrivate( GMainContext *ctx );
+public:
+  EventDispatcherPrivate( GMainContext *ctx, EventDispatcher &p );
   virtual ~EventDispatcherPrivate();
 
   bool runIdleTasks();

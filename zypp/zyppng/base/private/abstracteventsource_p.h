@@ -24,7 +24,7 @@ class AbstractEventSourcePrivate : public BasePrivate
   ZYPP_DECLARE_PUBLIC(AbstractEventSource)
 
 public:
-  AbstractEventSourcePrivate();
+  AbstractEventSourcePrivate( AbstractEventSource &p );
   std::weak_ptr<EventDispatcher> _ev;
 };
 

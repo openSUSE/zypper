@@ -300,7 +300,7 @@ namespace yamltest::detail {
           if ( !parseSingleJob( data, n.children(), err) )
             return false;
         } else {
-          ERR << "Ignoring field " << key << " with unsupported type." << std::endl;
+          ERR << "Ignoring field " << key << " with unsupported type:" << data.Type() << std::endl;
         }
       }
     }

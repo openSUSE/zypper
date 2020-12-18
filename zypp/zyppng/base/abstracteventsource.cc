@@ -7,7 +7,7 @@
 
 namespace zyppng {
 
-AbstractEventSourcePrivate::AbstractEventSourcePrivate()
+AbstractEventSourcePrivate::AbstractEventSourcePrivate( AbstractEventSource &p ) : BasePrivate( p )
 {
   auto ev = EventDispatcher::instance();
   if ( !ev )
@@ -16,7 +16,7 @@ AbstractEventSourcePrivate::AbstractEventSourcePrivate()
 }
 
 AbstractEventSource::AbstractEventSource()
-  : Base ( * new AbstractEventSourcePrivate )
+  : Base ( * new AbstractEventSourcePrivate( *this ) )
 { }
 
 AbstractEventSource::AbstractEventSource( AbstractEventSourcePrivate &dd )
@@ -29,7 +29,7 @@ AbstractEventSource::~AbstractEventSource()
   auto ev = d->_ev.lock();
   //if ev is null , eventloop is shutting down
   if ( ev )
-    ev->removeEventSource( this );
+    ev->removeEventSource( *this );
 }
 
 std::weak_ptr<EventDispatcher> AbstractEventSource::eventDispatcher() const
@@ -44,7 +44,7 @@ void AbstractEventSource::updateFdWatch(int fd, int mode)
   //if ev is null we are shutting down
   if ( !ev )
     return;
-  ev->updateEventSource( this, fd, mode );
+  ev->updateEventSource( *this, fd, mode );
 }
 
 void AbstractEventSource::removeFdWatch(int fd)
@@ -54,7 +54,7 @@ void AbstractEventSource::removeFdWatch(int fd)
   //if ev is null we are shutting down
   if ( !ev )
     return;
-  ev->removeEventSource( this, fd );
+  ev->removeEventSource( *this , fd );
 }
 
 }

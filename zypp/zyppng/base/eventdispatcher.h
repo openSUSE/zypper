@@ -149,7 +149,7 @@ protected:
    * \param fd The file descriptor that is added to the internal watchlist
    * \param mode The watch mode for the given file desriptor \sa zyppng::AbstractEventSource::EventTypes
    */
-  virtual void updateEventSource ( AbstractEventSource *notifier, int fd, int mode );
+  virtual void updateEventSource ( AbstractEventSource &notifier, int fd, int mode );
 
   /*!
    * Removes a file descriptor from the internal watchlist, if \a fd is set to -1 all file descriptors
@@ -157,17 +157,17 @@ protected:
    * \param notifier The \sa AbstractEventSource parent of the file descriptor
    * \param fd The file descriptor to be removed, set to -1 to remove all descriptors for a \sa AbstractEventSource
    */
-  virtual void removeEventSource   ( AbstractEventSource *notifier, int fd = -1 );
+  virtual void removeEventSource   ( AbstractEventSource &notifier, int fd = -1 );
 
   /*!
    * Adds a new Timer instance to the internal timer list
    */
-  virtual void registerTimer ( Timer *timer );
+  virtual void registerTimer ( Timer &timer );
 
   /*!
    * Removes a timer from the internal timer list, once a Timer is removed it does not fire anymore
    */
-  virtual void removeTimer ( Timer *timer );
+  virtual void removeTimer ( Timer &timer );
 
 };
 

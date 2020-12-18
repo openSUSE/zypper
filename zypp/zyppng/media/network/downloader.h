@@ -145,12 +145,6 @@ namespace zyppng {
       Finished,       //< Download has finished
     };
 
-
-    /*!
-     * A download can only directly be created by the \sa zyppng::Downloader
-     */
-    Download ( DownloadPrivate &&prv );
-
     virtual ~Download();
 
     /*!
@@ -247,6 +241,13 @@ namespace zyppng {
      * A connected slot should fill in the \a auth information in order to provide login credentials.
      */
     SignalProxy<void ( Download &req, NetworkAuthData &auth, const std::string &availAuth )> sigAuthRequired ( );
+
+  private:
+    friend class zyppng::Downloader;
+    /*!
+     * A download can only directly be created by the \sa zyppng::Downloader
+     */
+    Download ( Downloader &parent, std::shared_ptr<NetworkRequestDispatcher> requestDispatcher, std::shared_ptr<MirrorControl> mirrors, DownloadSpec &&spec );
   };
 }
 

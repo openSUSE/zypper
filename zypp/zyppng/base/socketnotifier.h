@@ -108,7 +108,7 @@ public:
   SignalProxy<void (const SocketNotifier &sock, int evTypes)> sigActivated();
 
 protected:
-  SocketNotifier( int socket, int evTypes, bool enable  );
+  SocketNotifier( int socket, int evTypes  );
 
   // AbstractEventSource interface
 public:

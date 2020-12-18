@@ -15,6 +15,7 @@
 #define ZYPP_NG_BASE_STATEMACHINE_INCLUDED_H
 
 #include <zypp/zyppng/base/signals.h>
+#include <zypp/zyppng/base/Base>
 
 #include <variant>
 #include <tuple>
@@ -39,8 +40,8 @@ namespace zyppng {
       Transitions _transitions;
 
       template< typename StateMachine >
-      StateWithTransitions ( StateMachine &sm ) : _ptr ( std::make_unique<State>( sm )) { }
-      StateWithTransitions ( std::unique_ptr<State> &&s ) : _ptr ( std::move(s) ) {}
+      StateWithTransitions ( StateMachine &sm ) : _ptr ( std::make_shared<State>( sm )) { }
+      StateWithTransitions ( std::shared_ptr<State> &&s ) : _ptr ( std::move(s) ) {}
 
       // move construction is ok
       StateWithTransitions ( StateWithTransitions &&other ) = default;
@@ -74,7 +75,8 @@ namespace zyppng {
       }
 
     private:
-      std::unique_ptr<State> _ptr;
+      // we need to use a std::shared_ptr here so we can correctly reference the object during signal emission
+      std::shared_ptr<State> _ptr;
     };
 
 
@@ -238,13 +240,13 @@ namespace zyppng {
 
 
     template< typename Statemachine >
-    std::unique_ptr<Target> operator() ( Statemachine &sm, Source &oldState ) {
+    std::shared_ptr<Target> operator() ( Statemachine &sm, Source &oldState ) {
       using OpType = std::decay_t<decltype ( Op )>;
       // check if we have a member function pointer
       if constexpr (  std::is_member_function_pointer_v<OpType> ) {
         return std::invoke( Op, &oldState );
       } else if constexpr ( std::is_null_pointer_v<OpType> ) {
-        return std::make_unique<Target>(sm);
+        return std::make_shared<Target>(sm);
       } else {
         return std::invoke( Op, sm, oldState );
       }
@@ -263,6 +265,10 @@ namespace zyppng {
 
     SignalProxy< void() > eventSource ( Source *st ) {
       return std::invoke( ev, st );
+    }
+
+    auto eventAccessor () const {
+      return ev;
     }
 
   };
@@ -339,7 +345,8 @@ namespace zyppng {
    *
    * // by using CRTP we can have a reference to the concrete Statemachine type in the States, allowing us to be much
    * // more flexible with the implementation, since all states can now access API exported by the MyStateMachine type.
-   * class MyStateMachine : public SmBase<MyStateMachine> { };
+   * // since the Statemachine uses signals, make sure to derive it also from the \ref zyppng::Base type.
+   * class MyStateMachine : public SmBase<MyStateMachine>, public Base { };
    *
    * \endcode
    *
@@ -398,7 +405,7 @@ namespace zyppng {
        * If called before start() was called the std::optional will be empty
        */
       std::optional<StateId> currentState () const {
-        return std::visit( []( const auto &s ) -> StateId {
+        return std::visit( []( const auto &s ) -> std::optional<StateId> {
           using T = std::decay_t<decltype (s)>;
           if constexpr ( std::is_same_v< T, _InitialState > ) {
             return {};
@@ -524,7 +531,8 @@ namespace zyppng {
           return;
         } else {
           auto &transition = std::get<I>( transitions );
-          _currentStateConnections.push_back( transition.eventSource ( &std::forward<State>(nS).wrappedState() ).connect( makeEventCallback< std::decay_t<State> >(transition)) );
+          //_currentStateConnections.push_back( transition.eventSource ( &std::forward<State>(nS).wrappedState() ).connect( makeEventCallback< std::decay_t<State> >(transition)) );
+          _currentStateConnections.push_back( std::forward<State>(nS).wrappedState().Base::connectFunc( transition.eventAccessor(), makeEventCallback< std::decay_t<State> >(transition), *static_cast<Derived*>(this) ) );
           connectAllTransitions<I+1>( std::forward<State>(nS), transitions );
         }
       }
@@ -537,8 +545,8 @@ namespace zyppng {
 
     private:
       bool _isInFinalState = false;
-      signal <void ( StateId )> _sigStateChanged;
-      signal <void ()> _sigFinished;
+      Signal <void ( StateId )> _sigStateChanged;
+      Signal <void ()> _sigFinished;
       StateSet _state = _InitialState();
       std::optional<StateId> _previousState;
       std::vector<sigc::connection> _currentStateConnections;
@@ -549,7 +557,7 @@ namespace zyppng {
    * the functions enter() and exit() still need to be implemented in the base class
    */
   template < typename StatemachineType, bool isFin >
-  class BasicState {
+  class BasicState : public Base {
   public:
 
     static constexpr bool isFinal = isFin;

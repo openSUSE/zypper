@@ -29,8 +29,9 @@ namespace zyppng {
     });
   }
 
-  AsyncQueueWatchPrivate::AsyncQueueWatchPrivate(  std::shared_ptr<AsyncQueueBase> &&q  ) :
-    _queue( std::move(q) )
+  AsyncQueueWatchPrivate::AsyncQueueWatchPrivate(std::shared_ptr<AsyncQueueBase> &&q  , AsyncQueueWatch &p) : AbstractEventSourcePrivate(p)
+    , _queue( std::move(q) )
+    , _sigMessageAvailable(p)
   {
         GError *error = NULL;
 
@@ -48,16 +49,21 @@ namespace zyppng {
     close (fds[1]);
   }
 
-  AsyncQueueWatch::AsyncQueueWatch( std::shared_ptr<AsyncQueueBase> queue )
-    : AsyncQueueWatch( *( new AsyncQueueWatchPrivate( std::move(queue) ) ) )
+  AsyncQueueWatch::AsyncQueueWatch(std::shared_ptr<zyppng::AsyncQueueBase> &&queue )
+    : AsyncQueueWatch( *( new AsyncQueueWatchPrivate( std::move(queue), *this ) ) )
   {  }
 
   AsyncQueueWatch::AsyncQueueWatch(AsyncQueueWatchPrivate &dd)
     : AbstractEventSource( dd )
+  { }
+
+  std::shared_ptr<AsyncQueueWatch> AsyncQueueWatch::create( std::shared_ptr<AsyncQueueBase> queue )
   {
-    Z_D();
-    this->updateFdWatch( d->fds[0], AbstractEventSource::Read );
-    d->_queue->addWatch( *this );
+    std::shared_ptr<AsyncQueueWatch> ptr ( new AsyncQueueWatch( std::move(queue) ) );
+    auto d = ptr->d_func();
+    ptr->updateFdWatch( d->fds[0], AbstractEventSource::Read );
+    d->_queue->addWatch( *ptr );
+    return ptr;
   }
 
   AsyncQueueWatch::~AsyncQueueWatch()

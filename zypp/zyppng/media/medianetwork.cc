@@ -371,9 +371,9 @@ namespace zyppng {
         }
       };
 
-      auto rrConn = AutoDisconnect( sock->sigReadyRead().connect( readMessages ) );
+      auto rrConn = AutoDisconnect( sock->connectFunc( &zyppng::Socket::sigReadyRead, readMessages ) );
 
-      auto disConn = AutoDisconnect ( sock->sigDisconnected().connect( [&excp, this](){
+      auto disConn = AutoDisconnect ( sock->connectFunc( &zyppng::Socket::sigDisconnected, [&excp, this](){
         try {
           ZYPP_THROW( zypp::media::MediaException("MediaNetwork backend disconnected.") );
         } catch ( ... ) {

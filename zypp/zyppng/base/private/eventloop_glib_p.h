@@ -10,8 +10,9 @@ namespace zyppng {
 
   class EventLoopPrivate : public BasePrivate
   {
-  public:
     ZYPP_DECLARE_PUBLIC(EventLoop)
+  public:
+    EventLoopPrivate ( EventLoop &p );
 
     std::shared_ptr<EventDispatcher> _dispatcher;
     GMainLoop *_loop = nullptr;

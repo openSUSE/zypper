@@ -148,8 +148,8 @@ namespace zyppng {
   {
     ZYPP_DECLARE_PRIVATE(AsyncQueueWatch)
   public:
-    AsyncQueueWatch( std::shared_ptr<AsyncQueueBase> queue );
-    AsyncQueueWatch( AsyncQueueWatchPrivate &dd );
+
+    static std::shared_ptr<AsyncQueueWatch> create ( std::shared_ptr<AsyncQueueBase> queue );
     virtual ~AsyncQueueWatch();
 
     void postNotifyEvent ();
@@ -159,6 +159,10 @@ namespace zyppng {
     // AbstractEventSource interface
     void onFdReady(int fd, int events) override;
     void onSignal(int signal) override;
+
+  protected:
+    AsyncQueueWatch( std::shared_ptr<AsyncQueueBase> &&queue );
+    AsyncQueueWatch( AsyncQueueWatchPrivate &dd );
   };
 
 }

@@ -22,15 +22,14 @@ namespace zyppng {
 
   class NetworkRequestPrivate : public BasePrivate
   {
-  public:
     ZYPP_DECLARE_PUBLIC(NetworkRequest)
-
+  public:
     enum class ProtocolMode{
       Default, //< use this mode if no special checks are required in header or write callbacks
       HTTP    //< this mode is used for HTTP and HTTPS downloads
     } _protocolMode = ProtocolMode::Default;
 
-    NetworkRequestPrivate(Url &&url, zypp::Pathname &&targetFile, NetworkRequest::FileMode fMode );
+    NetworkRequestPrivate(Url &&url, zypp::Pathname &&targetFile, NetworkRequest::FileMode fMode, NetworkRequest &p );
     virtual ~NetworkRequestPrivate();
 
     bool initialize(std::string &errBuf );
@@ -77,10 +76,10 @@ namespace zyppng {
     NetworkRequestDispatcher *_dispatcher = nullptr; // the parent downloader owning this request
 
     //signals
-    signal<void ( NetworkRequest &req )> _sigStarted;
-    signal<void ( NetworkRequest &req, zypp::ByteCount count )> _sigBytesDownloaded;
-    signal<void ( NetworkRequest &req, off_t dltotal, off_t dlnow, off_t ultotal, off_t ulnow )> _sigProgress;
-    signal<void ( NetworkRequest &req, const NetworkRequestError &err )> _sigFinished;
+    MemSignal<NetworkRequest, void ( NetworkRequest &req )> _sigStarted;
+    MemSignal<NetworkRequest, void ( NetworkRequest &req, zypp::ByteCount count )> _sigBytesDownloaded;
+    MemSignal<NetworkRequest, void ( NetworkRequest &req, off_t dltotal, off_t dlnow, off_t ultotal, off_t ulnow )> _sigProgress;
+    MemSignal<NetworkRequest, void ( NetworkRequest &req, const NetworkRequestError &err )> _sigFinished;
 
     static int curlProgressCallback ( void *clientp, curl_off_t dltotal, curl_off_t dlnow, curl_off_t ultotal, curl_off_t ulnow );
     size_t headerCallback (  char *ptr, size_t size, size_t nmemb  );

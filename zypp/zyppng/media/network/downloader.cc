@@ -77,11 +77,18 @@ namespace  {
 
 namespace zyppng {
 
-  DownloadPrivateBase::DownloadPrivateBase(Downloader &parent, std::shared_ptr<NetworkRequestDispatcher> requestDispatcher, std::shared_ptr<MirrorControl> mirrors, DownloadSpec &&spec)
-    : _requestDispatcher ( std::move(requestDispatcher) )
+  DownloadPrivateBase::DownloadPrivateBase(Downloader &parent, std::shared_ptr<NetworkRequestDispatcher> requestDispatcher, std::shared_ptr<MirrorControl> mirrors, DownloadSpec &&spec, Download &p)
+    : BasePrivate(p)
+    , _requestDispatcher ( std::move(requestDispatcher) )
     , _mirrorControl( std::move(mirrors) )
     , _spec( std::move(spec) )
-  , _parent( &parent )
+    , _parent( &parent )
+    , _sigStarted(p)
+    , _sigStateChanged(p)
+    , _sigAlive(p)
+    , _sigProgress(p)
+    , _sigFinished(p)
+    , _sigAuthRequired(p)
   {}
 
   DownloadPrivateBase::~DownloadPrivateBase()
@@ -124,10 +131,10 @@ namespace zyppng {
     }
   }
 
-  std::unique_ptr<DownloadPrivateBase::DLZckHeadState> InitialState::toDLZckHeadState()
+  std::shared_ptr<DownloadPrivateBase::DLZckHeadState> InitialState::toDLZckHeadState()
   {
     // we have no mirrors, the range downloader would need to fall back to using the base URL
-    return std::make_unique<DLZckHeadState>( std::vector<Url> { stateMachine()._spec.url() }, stateMachine() );
+    return std::make_shared<DLZckHeadState>( std::vector<Url> { stateMachine()._spec.url() }, stateMachine() );
   }
 
   // Metalink detection state, we query the type of file from the server, in order to use metalink support the server
@@ -146,7 +153,7 @@ namespace zyppng {
 
     MIL << "Detecting if metalink is available on " << url << std::endl;
 
-    _request = std::make_shared<Request>( internal::clearQueryString( url ), zypp::Pathname("/dev/null") );
+    _request = std::make_shared<Request>( ::internal::clearQueryString( url ), zypp::Pathname("/dev/null") );
 
     _request->_originalUrl = url;
     _request->transferSettings() = sm._spec.settings();
@@ -175,6 +182,7 @@ namespace zyppng {
 
   void DownloadPrivateBase::DetectMetalinkState::onRequestFinished( NetworkRequest &req, const NetworkRequestError &err )
   {
+    auto lck = stateMachine().z_func()->shared_from_this();
     if ( req.hasError() ) {
       MIL << "Detecing if metalink is possible for url " << req.url() << " failed with error " << err.toString() << " falling back to download without metalink." << std::endl;
       _error = err;
@@ -198,10 +206,10 @@ namespace zyppng {
     return !toMetalinkGuard() && !toZckHeadDownloadGuard();
   }
 
-  std::unique_ptr<DownloadPrivateBase::DLZckHeadState> DetectMetalinkState::toDLZckHeadState()
+  std::shared_ptr<DownloadPrivateBase::DLZckHeadState> DetectMetalinkState::toDLZckHeadState()
   {
     // we have no mirrors, the range downloader would need to fall back to using the base URL
-    return std::make_unique<DLZckHeadState>( std::vector<Url> { stateMachine()._spec.url() }, stateMachine() );
+    return std::make_shared<DLZckHeadState>( std::vector<Url> { stateMachine()._spec.url() }, stateMachine() );
   }
 
   void DownloadPrivateBase::BasicDownloaderStateBase::enter()
@@ -227,7 +235,7 @@ namespace zyppng {
         return failed( std::move(err) );
     }
 
-    _request = std::make_shared<Request>( internal::clearQueryString(url), spec.targetPath() ) ;
+    _request = std::make_shared<Request>( ::internal::clearQueryString(url), spec.targetPath() ) ;
     _request->_myMirror = mirror;
     _request->_originalUrl = url;
 
@@ -308,6 +316,7 @@ namespace zyppng {
 
   void DownloadPrivateBase::BasicDownloaderStateBase::onRequestFinished( NetworkRequest &req, const NetworkRequestError &err )
   {
+    auto lck = stateMachine().z_func()->shared_from_this();
     auto &sm = stateMachine();
 
     if ( _request->_myMirror )
@@ -333,10 +342,10 @@ namespace zyppng {
     MIL << "Downloading metalink on " << parent._spec.url() << std::endl;
   }
 
-  std::unique_ptr<DownloadPrivateBase::FinishedState> DownloadPrivateBase::DlMetaLinkInfoState::transitionToFinished()
+  std::shared_ptr<DownloadPrivateBase::FinishedState> DownloadPrivateBase::DlMetaLinkInfoState::transitionToFinished()
   {
     MIL << "Downloading on " << stateMachine()._spec.url() << " transition to final state. " << std::endl;
-    return std::make_unique<FinishedState>( std::move(_error), stateMachine() );
+    return std::make_shared<FinishedState>( std::move(_error), stateMachine() );
   }
 
   bool DlMetaLinkInfoState::initializeRequest( std::shared_ptr<Request> r )
@@ -347,6 +356,8 @@ namespace zyppng {
 
   void DlMetaLinkInfoState::gotFinished()
   {
+    // some proxies do not store the content type, so also look at the file to find
+    // out if we received a metalink (bnc#649925)
     if ( !_isMetalink )
       _isMetalink = looks_like_metalink_file( _request->targetFilePath() );
     if ( !_isMetalink ) {
@@ -433,7 +444,7 @@ namespace zyppng {
               urliter = mirrs.erase( urliter );
               continue;
             }
-            urliter->url = internal::propagateQueryParams( urliter->url, url );
+            urliter->url = ::internal::propagateQueryParams( urliter->url, url );
             _mirrors.push_back( urliter->url );
           }
         }
@@ -459,7 +470,7 @@ namespace zyppng {
 
     //remove the metalink file
     zypp::filesystem::unlink( targetPath );
-    _mirrorControlReadyConn = sm._mirrorControl->sigAllMirrorsReady().connect( sigc::mem_fun( this, &PrepareMultiState::onMirrorsReady ));
+    _mirrorControlReadyConn = sm._mirrorControl->connect( &MirrorControl::sigAllMirrorsReady, *this, &PrepareMultiState::onMirrorsReady );
 
     // this will emit a mirrorsReady signal once all connection tests have been done
     sm._mirrorControl->registerMirrors( mirrs );
@@ -511,10 +522,10 @@ namespace zyppng {
     XXX << "Got control back" << std::endl;
   }
 
-  std::unique_ptr<DownloadPrivateBase::DlNormalFileState> DownloadPrivateBase::PrepareMultiState::fallbackToNormalTransition()
+  std::shared_ptr<DownloadPrivateBase::DlNormalFileState> DownloadPrivateBase::PrepareMultiState::fallbackToNormalTransition()
   {
     DBG << "No blocklist and no filesize, falling back to normal download for URL " << stateMachine()._spec.url() << std::endl;
-    auto ptr = std::make_unique<DlNormalFileState>( stateMachine() );
+    auto ptr = std::make_shared<DlNormalFileState>( stateMachine() );
     ptr->_mirrors = std::move(_mirrors);
 
     if ( _blockList.haveFileChecksum() ) {
@@ -525,19 +536,19 @@ namespace zyppng {
     return ptr;
   }
 
-  std::unique_ptr<DownloadPrivateBase::DLZckHeadState> PrepareMultiState::transitionToZckHeadDl()
+  std::shared_ptr<DownloadPrivateBase::DLZckHeadState> PrepareMultiState::transitionToZckHeadDl()
   {
-    return std::make_unique<DLZckHeadState>( std::move(_mirrors), stateMachine() );
+    return std::make_shared<DLZckHeadState>( std::move(_mirrors), stateMachine() );
   }
 
-  std::unique_ptr<DownloadPrivateBase::DlMetalinkState> PrepareMultiState::transitionToMetalinkDl()
+  std::shared_ptr<DownloadPrivateBase::DlMetalinkState> PrepareMultiState::transitionToMetalinkDl()
   {
-    return std::make_unique<DlMetalinkState>( std::move(_blockList), std::move(_mirrors), stateMachine() );
+    return std::make_shared<DlMetalinkState>( std::move(_blockList), std::move(_mirrors), stateMachine() );
   }
 
-  std::unique_ptr<DownloadPrivateBase::FinishedState> DownloadPrivateBase::PrepareMultiState::transitionToFinished()
+  std::shared_ptr<DownloadPrivateBase::FinishedState> DownloadPrivateBase::PrepareMultiState::transitionToFinished()
   {
-    return std::make_unique<FinishedState>( std::move(_error), stateMachine() );
+    return std::make_shared<FinishedState>( std::move(_error), stateMachine() );
   }
 
   bool DownloadPrivateBase::PrepareMultiState::toZckHeadDownloadGuard() const
@@ -564,7 +575,7 @@ namespace zyppng {
 
   void DownloadPrivateBase::RangeDownloaderBaseState::onRequestFinished( NetworkRequest &req, const zyppng::NetworkRequestError &err )
   {
-
+    auto lck = stateMachine().z_func()->shared_from_this();
     auto it = std::find_if( _runningRequests.begin(), _runningRequests.end(), [ &req ]( const std::shared_ptr<Request> &r ) {
       return ( r.get() == &req );
     });
@@ -790,7 +801,7 @@ namespace zyppng {
 
     const auto &spec = parent._spec;
 
-    std::shared_ptr<Request> req = std::make_shared<Request>( internal::clearQueryString( myUrl ), spec.targetPath(), NetworkRequest::WriteShared );
+    std::shared_ptr<Request> req = std::make_shared<Request>( ::internal::clearQueryString( myUrl ), spec.targetPath(), NetworkRequest::WriteShared );
     req->_myMirror = mirr;
     req->_originalUrl = myUrl;
     req->setPriority( parent._defaultSubRequestPriority );
@@ -1031,9 +1042,9 @@ namespace zyppng {
     RangeDownloaderBaseState::setFinished();
   }
 
-  std::unique_ptr<DownloadPrivateBase::FinishedState> DlMetalinkState::transitionToFinished()
+  std::shared_ptr<DownloadPrivateBase::FinishedState> DlMetalinkState::transitionToFinished()
   {
-    return std::make_unique<FinishedState>( std::move(_error), stateMachine() );
+    return std::make_shared<FinishedState>( std::move(_error), stateMachine() );
   }
 
   DlNormalFileState::DlNormalFileState(DownloadPrivate &parent) : BasicDownloaderStateBase( parent )
@@ -1041,9 +1052,9 @@ namespace zyppng {
     MIL << "About to enter DlNormalFileState for url " << parent._spec.url() << std::endl;
   }
 
-  std::unique_ptr<DownloadPrivateBase::FinishedState> DlNormalFileState::transitionToFinished()
+  std::shared_ptr<DownloadPrivateBase::FinishedState> DlNormalFileState::transitionToFinished()
   {
-    return std::make_unique<FinishedState>( std::move(_error), stateMachine() );
+    return std::make_shared<FinishedState>( std::move(_error), stateMachine() );
   }
 
   DLZckHeadState::DLZckHeadState(std::vector<Url> &&mirrors, DownloadPrivate &parent) :
@@ -1087,10 +1098,10 @@ namespace zyppng {
     failed ( "Downloaded header is not a zchunk header");
   }
 
-  std::unique_ptr<DownloadPrivateBase::DLZckState> DLZckHeadState::transitionToDlZckState()
+  std::shared_ptr<DownloadPrivateBase::DLZckState> DLZckHeadState::transitionToDlZckState()
   {
     MIL << "Downloaded the header of size: " << _request->downloadedByteCount() << std::endl;
-    return std::make_unique<DLZckState>( std::move(_mirrors), stateMachine() );
+    return std::make_shared<DLZckState>( std::move(_mirrors), stateMachine() );
   }
 
   DLZckState::DLZckState(std::vector<Url> &&mirrors, DownloadPrivate &parent)
@@ -1234,9 +1245,9 @@ namespace zyppng {
     cancelAll( NetworkRequestError() );
   }
 
-  std::unique_ptr<DownloadPrivateBase::FinishedState> DLZckState::transitionToFinished()
+  std::shared_ptr<DownloadPrivateBase::FinishedState> DLZckState::transitionToFinished()
   {
-    return std::make_unique<FinishedState>( std::move(_error), stateMachine() );
+    return std::make_shared<FinishedState>( std::move(_error), stateMachine() );
   }
 
   void DownloadPrivateBase::DLZckState::setFinished()
@@ -1363,18 +1374,18 @@ namespace zyppng {
     _sigFinishedConn.disconnect();
   }
 
-  DownloadPrivate::DownloadPrivate(Downloader &parent, std::shared_ptr<NetworkRequestDispatcher> requestDispatcher, std::shared_ptr<MirrorControl> mirrors, DownloadSpec &&spec) :
-    DownloadPrivateBase( parent, std::move(requestDispatcher), std::move(mirrors), std::move(spec) )
+  DownloadPrivate::DownloadPrivate(Downloader &parent, std::shared_ptr<NetworkRequestDispatcher> requestDispatcher, std::shared_ptr<MirrorControl> mirrors, DownloadSpec &&spec, Download &p) :
+    DownloadPrivateBase( parent, std::move(requestDispatcher), std::move(mirrors), std::move(spec), p)
   {
-    DownloadStatemachine<DownloadPrivate>::sigFinished().connect( [this](){
+    Base::connectFunc( *this, &DownloadStatemachine<DownloadPrivate>::sigFinished, [this](){
       DownloadPrivateBase::_sigFinished.emit( *z_func() );
     });
 
-    DownloadStatemachine<DownloadPrivate>::sigStateChanged().connect( [this]( const auto state ){
+    Base::connectFunc( *this, &DownloadStatemachine<DownloadPrivate>::sigStateChanged, [this]( const auto state ){
       DownloadPrivateBase::_sigStateChanged.emit( *z_func(), state );
     });
 
-    DownloadStatemachine<DownloadPrivate>::start();
+    //DownloadStatemachine<DownloadPrivate>::start();
   }
 
   void DownloadPrivate::start()
@@ -1413,9 +1424,9 @@ namespace zyppng {
 
     NetworkRequestError res;
     try {
-      internal::fillSettingsFromUrl( url, set );
+      ::internal::fillSettingsFromUrl( url, set );
       if ( _spec.settings().proxy().empty() )
-        internal::fillSettingsSystemProxy( url, set );
+        ::internal::fillSettingsSystemProxy( url, set );
 
       /* Fixes bsc#1174011 "auth=basic ignored in some cases"
        * We should proactively add the password to the request if basic auth is configured
@@ -1488,8 +1499,8 @@ namespace zyppng {
     return mirror;
   }
 
-  Download::Download(zyppng::DownloadPrivate &&prv)
-  : Base( prv )
+  Download::Download(zyppng::Downloader &parent, std::shared_ptr<zyppng::NetworkRequestDispatcher> requestDispatcher, std::shared_ptr<zyppng::MirrorControl> mirrors, zyppng::DownloadSpec &&spec)
+    : Base( *new DownloadPrivate( parent, std::move(requestDispatcher), std::move(mirrors), std::move(spec), *this )  )
   { }
 
   Download::~Download()
@@ -1607,8 +1618,12 @@ namespace zyppng {
     return d_func()->_sigAuthRequired;
   }
 
-  DownloaderPrivate::DownloaderPrivate(std::shared_ptr<MirrorControl> mc)
-    : _mirrors( std::move(mc) )
+  DownloaderPrivate::DownloaderPrivate(std::shared_ptr<MirrorControl> mc, Downloader &p)
+    : BasePrivate(p)
+    , _sigStarted(p)
+    , _sigFinished(p)
+    , _queueEmpty(p)
+    , _mirrors( std::move(mc) )
   {
     _requestDispatcher = std::make_shared<NetworkRequestDispatcher>( );
     if ( !_mirrors ) {
@@ -1631,7 +1646,7 @@ namespace zyppng {
 
     if ( it != _runningDownloads.end() ) {
       //make sure this is not deleted before all user code was done
-      EventDispatcher::unrefLater( *it );
+      // EventDispatcher::unrefLater( *it );
       _runningDownloads.erase( it );
     }
 
@@ -1640,13 +1655,13 @@ namespace zyppng {
   }
 
   Downloader::Downloader( )
-    : Base ( *new DownloaderPrivate( ) )
+    : Base ( *new DownloaderPrivate( {}, *this ) )
   {
 
   }
 
   Downloader::Downloader( std::shared_ptr<MirrorControl> mc )
-    : Base ( *new DownloaderPrivate( mc ) )
+    : Base ( *new DownloaderPrivate( mc, *this ) )
   { }
 
   Downloader::~Downloader()
@@ -1661,11 +1676,10 @@ namespace zyppng {
   std::shared_ptr<Download> Downloader::downloadFile(const zyppng::DownloadSpec &spec )
   {
     Z_D();
-    std::shared_ptr<Download> dl = std::make_shared<Download>( std::move( *new DownloadPrivate( *this, d->_requestDispatcher, d->_mirrors, DownloadSpec(spec) ) ) );
+    std::shared_ptr<Download> dl ( new Download ( *this, d->_requestDispatcher, d->_mirrors, DownloadSpec(spec) ) );
 
     d->_runningDownloads.push_back( dl );
-    dl->sigFinished().connect( sigc::mem_fun( *d , &DownloaderPrivate::onDownloadFinished ) );
-
+    dl->connect( &Download::sigFinished, *d, &DownloaderPrivate::onDownloadFinished );
     d->_requestDispatcher->run();
 
     return dl;

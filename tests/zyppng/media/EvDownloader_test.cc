@@ -354,8 +354,8 @@ BOOST_DATA_TEST_CASE( test1, bdata::make( generateMirr() ) * bdata::make( withSS
   BOOST_REQUIRE( web.start() );
 
   zypp::filesystem::TmpFile targetFile;
-  zyppng::Downloader downloader;
-  downloader.requestDispatcher()->setMaximumConcurrentConnections( maxDLs );
+  std::shared_ptr<zyppng::Downloader> downloader = std::make_shared<zyppng::Downloader>();
+  downloader->requestDispatcher()->setMaximumConcurrentConnections( maxDLs );
 
   //first metalink download, generate a fully valid one
   zyppng::Url weburl (web.url());
@@ -388,7 +388,7 @@ BOOST_DATA_TEST_CASE( test1, bdata::make( generateMirr() ) * bdata::make( withSS
   int countHandlerReq = 0; //the requests made to the handler slot
   int countFileReq = 0;    //the requests made to the file directly, e.g. a mirror read from the metalink file
 
-  auto dl = downloader.downloadFile( zyppng::DownloadSpec(weburl, targetFile) );
+  auto dl = downloader->downloadFile( zyppng::DownloadSpec(weburl, targetFile) );
   dl->spec().setTransferSettings( web.transferSettings() )
     .setPreferredChunkSize( elem.chunkSize )
     .setHeaderSize( elem.headerSize )
@@ -519,7 +519,7 @@ BOOST_DATA_TEST_CASE( dltest_auth, bdata::make( withSSL ), withSSL )
 
   auto ev = zyppng::EventLoop::create();
 
-  zyppng::Downloader downloader;
+  std::shared_ptr<zyppng::Downloader> downloader = std::make_shared<zyppng::Downloader>();
 
   WebServer web((zypp::Pathname(TESTS_SRC_DIR)/"/zyppng/data/downloader").c_str(), 10001, withSSL );
   BOOST_REQUIRE( web.start() );
@@ -533,7 +533,7 @@ BOOST_DATA_TEST_CASE( dltest_auth, bdata::make( withSSL ), withSSL )
   web.addRequestHandler( "quit", [ &ev ]( WebServer::Request & ){ ev->quit();} );
 
   {
-    auto dl = downloader.downloadFile( zyppng::DownloadSpec(weburl, targetFile.path()) );
+    auto dl = downloader->downloadFile( zyppng::DownloadSpec(weburl, targetFile.path()) );
     dl->spec().setTransferSettings(set);
 
     dl->sigFinished( ).connect([ &ev ]( zyppng::Download & ){
@@ -547,7 +547,7 @@ BOOST_DATA_TEST_CASE( dltest_auth, bdata::make( withSSL ), withSSL )
   }
 
   {
-    auto dl = downloader.downloadFile( zyppng::DownloadSpec(weburl, targetFile.path()) );
+    auto dl = downloader->downloadFile( zyppng::DownloadSpec(weburl, targetFile.path()) );
     dl->spec().setTransferSettings(set);
 
     int gotAuthRequest = 0;
@@ -574,7 +574,7 @@ BOOST_DATA_TEST_CASE( dltest_auth, bdata::make( withSSL ), withSSL )
   {
     int gotAuthRequest = 0;
     std::vector<zyppng::Download::State> allStates;
-    auto dl = downloader.downloadFile( zyppng::DownloadSpec(weburl, targetFile.path()) );
+    auto dl = downloader->downloadFile( zyppng::DownloadSpec(weburl, targetFile.path()) );
     dl->spec().setTransferSettings(set);
 
     dl->sigFinished( ).connect([ &ev ]( zyppng::Download & ){
@@ -602,7 +602,7 @@ BOOST_DATA_TEST_CASE( dltest_auth, bdata::make( withSSL ), withSSL )
   {
     //the creds should be in the credential manager now, we should not need to specify them again in the slot
     bool gotAuthRequest = false;
-    auto dl = downloader.downloadFile( zyppng::DownloadSpec(weburl, targetFile.path()) );
+    auto dl = downloader->downloadFile( zyppng::DownloadSpec(weburl, targetFile.path()) );
     dl->spec().setTransferSettings(set);
 
     dl->sigFinished( ).connect([ &ev ]( zyppng::Download & ){
@@ -633,7 +633,7 @@ BOOST_DATA_TEST_CASE( dltest_auth_basic, bdata::make( withSSL ), withSSL )
 
   auto ev = zyppng::EventLoop::create();
 
-  zyppng::Downloader downloader;
+  std::shared_ptr<zyppng::Downloader> downloader = std::make_shared<zyppng::Downloader>();
 
   WebServer web((zypp::Pathname(TESTS_SRC_DIR)/"/zyppng/data/downloader").c_str(), 10001, withSSL );
   BOOST_REQUIRE( web.start() );
@@ -661,13 +661,13 @@ BOOST_DATA_TEST_CASE( dltest_auth_basic, bdata::make( withSSL ), withSSL )
     // if the proactive code adding the credentials to the first request is not executed we will
     // have more than 1 request.
     int reqCount = 0;
-    auto dispatcher = downloader.requestDispatcher();
+    auto dispatcher = downloader->requestDispatcher();
     dispatcher->sigDownloadStarted().connect([&]( zyppng::NetworkRequestDispatcher &, zyppng::NetworkRequest & ){
       reqCount++;
     });
 
 
-    auto dl = downloader.downloadFile( zyppng::DownloadSpec(weburl, targetFile.path())
+    auto dl = downloader->downloadFile( zyppng::DownloadSpec(weburl, targetFile.path())
       .setMetalinkEnabled( false )
       .setTransferSettings( set )
     );

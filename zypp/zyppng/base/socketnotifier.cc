@@ -8,7 +8,11 @@ class SocketNotifierPrivate : public AbstractEventSourcePrivate
   ZYPP_DECLARE_PUBLIC(SocketNotifier)
 public:
 
-  signal<void (const SocketNotifier &, int)> _activated;
+  SocketNotifierPrivate ( SocketNotifier &p ) :
+    AbstractEventSourcePrivate(p),
+    _activated(p) {}
+
+  MemSignal<SocketNotifier, void (const SocketNotifier &, int)> _activated;
 
   int _socket = -1;
   int _mode = SocketNotifier::Read;
@@ -16,19 +20,19 @@ public:
 
 };
 
-SocketNotifier::SocketNotifier (int socket, int evTypes , bool enable)
-  : AbstractEventSource ( * new SocketNotifierPrivate )
+SocketNotifier::SocketNotifier (int socket, int evTypes )
+  : AbstractEventSource ( * new SocketNotifierPrivate( *this ) )
 {
   Z_D();
   d->_socket = socket;
   d->_mode = evTypes;
-
-  setEnabled( enable );
 }
 
 SocketNotifier::Ptr SocketNotifier::create(int socket, int evTypes, bool enable )
 {
-  return std::shared_ptr<SocketNotifier>( new SocketNotifier( socket, evTypes, enable ) );
+  auto ptr = std::shared_ptr<SocketNotifier>( new SocketNotifier( socket, evTypes ) );
+  ptr->setEnabled( enable );
+  return ptr;
 }
 
 void SocketNotifier::setMode(int mode)
@@ -74,7 +78,7 @@ SignalProxy<void (const SocketNotifier &, int)> SocketNotifier::sigActivated()
 
 void SocketNotifier::onFdReady( int, int events )
 {
-  d_func()->_activated( *this, events );
+  d_func()->_activated.emit( *this, events );
 }
 
 void SocketNotifier::onSignal( int )
