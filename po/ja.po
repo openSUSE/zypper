@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-09-18 16:45+0200\n"
-"PO-Revision-Date: 2020-09-19 00:48+0000\n"
+"PO-Revision-Date: 2020-12-21 06:26+0000\n"
 "Last-Translator: Yasuhiko Kamata <belphegor@belbel.or.jp>\n"
 "Language-Team: Japanese <https://l10n.opensuse.org/projects/libzypp/master/"
 "ja/>\n"
@@ -3734,13 +3734,13 @@ msgstr "無期限"
 #: zypp/PublicKey.cc:68
 #, boost-format
 msgid "expired: %1%"
-msgstr "期限切れ済み: %1%"
+msgstr "有効期限 (期限切れ済み): %1%"
 
 #. translators: an annotation to a gpg keys expiry date: "expires: 2111-04-12"
 #: zypp/PublicKey.cc:73
 #, boost-format
 msgid "expires: %1%"
-msgstr "期限切れ予定: %1%"
+msgstr "有効期限: %1%"
 
 #. translators: an annotation to a gpg keys expiry date
 #: zypp/PublicKey.cc:82
@@ -3762,7 +3762,7 @@ msgstr "(24 時間以内に期限切れ)"
 #, c-format, boost-format
 msgid "(expires in %d day)"
 msgid_plural "(expires in %d days)"
-msgstr[0] "(%d 日で期限切れ)"
+msgstr[0] "(あと %d 日で期限切れ)"
 
 #. translator: %1% is a gpg key ID like 3DBDC284
 #. %2% is a cache directories path
