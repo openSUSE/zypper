@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-09-11 10:04+0200\n"
-"PO-Revision-Date: 2020-09-12 00:48+0000\n"
+"PO-Revision-Date: 2020-12-21 06:27+0000\n"
 "Last-Translator: Yasuhiko Kamata <belphegor@belbel.or.jp>\n"
 "Language-Team: Japanese <https://l10n.opensuse.org/projects/zypper/master/ja/"
 ">\n"
@@ -91,7 +91,7 @@ msgstr "鍵の作成日時:"
 
 #: src/callbacks/keyring.h:84
 msgid "Key Expires:"
-msgstr "鍵の期限切れ日時:"
+msgstr "鍵の有効期限:"
 
 #: src/callbacks/keyring.h:86
 msgid "Subkey:"
