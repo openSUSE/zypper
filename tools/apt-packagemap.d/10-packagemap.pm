@@ -1,14 +1,19 @@
 #included by zypper-aptitude
 
 my %pkgmap=qw(
+debianutils		which
 dnsmasq-base		dnsmasq
 iputils-ping		iputils
+libegl1-mesa		Mesa-libEGL1
 libldap2-dev		openldap2-devel
 libsasl2-dev		cyrus-sasl-devel
+libsdl1.2-dev		libSDL-devel
 zlib1g-dev		zlib-devel
 locate			findutils
+mesa-common-dev		Mesa-devel
 open-iscsi-utils	open-iscsi
 pep8			python-pep8
+pylint3			python3-pylint
 python-cherrypy3	python-cherrypy
 python-libvirt		libvirt-python
 python-libxml2		libxml2-python
