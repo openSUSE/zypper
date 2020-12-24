@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-09-11 10:04+0200\n"
-"PO-Revision-Date: 2020-06-29 19:46+0000\n"
-"Last-Translator: Dingzhong Chen <wsxy162@gmail.com>\n"
+"PO-Revision-Date: 2020-12-24 17:27+0000\n"
+"Last-Translator: slb <shenlebantongying@gmail.com>\n"
 "Language-Team: Chinese (China) <https://l10n.opensuse.org/projects/zypper/"
 "master/zh_CN/>\n"
 "Language: zh_CN\n"
@@ -2230,7 +2230,7 @@ msgstr "list-patches (lp) [选项]"
 #. translators: command summary: list-patches, lp
 #: src/commands/listpatches.cc:18
 msgid "List available patches."
-msgstr ""
+msgstr "列出可获得的补丁。"
 
 #. translators: command description
 #: src/commands/listpatches.cc:20
@@ -2577,7 +2577,7 @@ msgstr "moo"
 #. translators: command description
 #: src/commands/nullcommands.cc:19 src/commands/nullcommands.cc:21
 msgid "Show an animal."
-msgstr "显示一只蜗牛。"
+msgstr "喵喵喵。"
 
 #. TranslatorExplanation this is a hedgehog, paint another animal, if you want
 #: src/commands/nullcommands.cc:29
@@ -2610,7 +2610,7 @@ msgstr "列出提供了指定功能的全部软件包。"
 msgid ""
 "The command is an alias for '%1%' and performs a case-insensitive search. "
 "For a case-sensitive search call the search command and add the '%2%' option."
-msgstr ""
+msgstr "此命令是 '%1%' 的缩写，可以进行不去分大小写的搜索，添加'%2%'以区分大小写。"
 
 #. "what-provides" is obsolete
 #. The "what-provides" now is included in "search" command, e.g.
@@ -4409,7 +4409,7 @@ msgstr "不支持卸载源代码软件包。"
 #: src/commands/subcommand.cc:79
 #, boost-format
 msgid "No manual entry for %1%"
-msgstr ""
+msgstr "%1% 没有man手册"
 
 #: src/commands/subcommand.cc:92
 msgid "none"
