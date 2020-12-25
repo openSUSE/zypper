@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-09-11 10:04+0200\n"
-"PO-Revision-Date: 2020-09-30 22:49+0000\n"
+"PO-Revision-Date: 2020-12-25 17:27+0000\n"
 "Last-Translator: Paolo Za <zapaolo@email.it>\n"
 "Language-Team: Italian <https://l10n.opensuse.org/projects/zypper/master/it/>"
 "\n"
@@ -2892,6 +2892,9 @@ msgid ""
 "The command is an alias for '%1%' and performs a case-insensitive search. "
 "For a case-sensitive search call the search command and add the '%2%' option."
 msgstr ""
+"Il comando è un alias di %1%'' ed esegue una ricerca senza distinzione tra "
+"maiuscole e minuscole. Per una ricerca con distinzione tra maiuscole e "
+"minuscole, invoca il comando di ricerca ed aggiungi l'opzione '%2%'."
 
 #. "what-provides" is obsolete
 #. The "what-provides" now is included in "search" command, e.g.
@@ -6983,6 +6986,8 @@ msgid ""
 "Abbreviated commandline options will not be supported in future versions. "
 "Please use %2% instead of %1% ."
 msgstr ""
+"Le opzioni di riga di comando abbreviate non saranno supportate nelle "
+"versioni future. Utilizza %2% invece di %1% ."
 
 #. translators: %s is "help" or "zypper help" depending on whether
 #. zypper shell is running or not
@@ -7094,7 +7099,7 @@ msgstr "non determinato"
 #. translator: patch status
 #: src/utils/misc.cc:120
 msgid "retracted"
-msgstr ""
+msgstr "ritirato"
 
 #: src/utils/misc.cc:329 src/utils/misc.cc:371
 msgid "Since"
