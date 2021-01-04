@@ -897,6 +897,7 @@ namespace zyppng {
       _ranges.pop_front();
       
     }
+    XXX << "Accumulated " << blocks.size() <<  " blocks with accumulated size of: " << accumulatedSize << "." << std::endl;
     return blocks;
   }
 
@@ -1058,9 +1059,9 @@ namespace zyppng {
   }
 
   DLZckHeadState::DLZckHeadState(std::vector<Url> &&mirrors, DownloadPrivate &parent) :
-    BasicDownloaderStateBase( parent ),
-    _mirrors( std::move(mirrors) )
+    BasicDownloaderStateBase( parent )
   {
+    _mirrors = std::move(mirrors);
     MIL << "About to enter DlZckHeadState for url " << parent._spec.url() << std::endl;
   }
 

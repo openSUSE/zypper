@@ -389,9 +389,6 @@ private:
       SignalProxy< void () > sigFailed() {
         return _sigFailed;
       }
-
-    private:
-      std::vector<Url> _mirrors;
     };
 
     /*!
