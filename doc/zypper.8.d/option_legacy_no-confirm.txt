@@ -1,0 +1,2 @@
+	-y, --no-confirm::
+		Don't require user interaction. It's recommended to use the *--non-interactive* global option instead. Global options are passed before the command (*zypper --non-interactive* 'COMMAND ...'). Unlike the no-confirm command option, the global option can be used together with any zypper command.

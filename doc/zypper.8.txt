@@ -296,8 +296,7 @@ If _product_ or _pattern_ are specified, zypper ensures that all required (and o
 	*--details*::
 		Show the detailed installation summary.
 
-	*-y*, *--no-confirm*::
-		Don't require user interaction. Alias for the --non-interactive global option.
+include::{incdir}/option_legacy_no-confirm.txt[]
 
 	*--allow-unsigned-rpm*::
 		Silently install unsigned rpm packages given as commandline parameters.
@@ -398,8 +397,7 @@ In case that any dependency problems are found, zypper suggests packages to inst
 	*-r*, *--repo* _alias_|_name_|_#_|_URI_::
 		Work only with the repository specified by the alias, name, number, or URI. This option can be used multiple times.
 
-	*-y*, *--no-confirm*::
-		Don't require user interaction. Alias for the --non-interactive global option.
+include::{incdir}/option_legacy_no-confirm.txt[]
 
 	Solver related options: :: {nop}
 include::{incdir}/option_Solver_Flags_Common.txt[]
@@ -467,8 +465,7 @@ Since *patches* are not installed in sense of copying files or recording a datab
 	*--details*::
 		Show the detailed installation summary.
 
-	*-y*, *--no-confirm*::
-		Don't require user interaction. Alias for the --non-interactive global option.
+include::{incdir}/option_legacy_no-confirm.txt[]
 
 	Solver related options: :: {nop}
 include::{incdir}/option_Solver_Flags_Common.txt[]
@@ -564,8 +561,7 @@ If *patch* is specified, zypper acts as if the *patches* command was executed.
 	*--best-effort*::
 		Do a _best effort_ approach to update. This method does not explicitly select packages with best version and architecture, but instead requests installation of a package with higher version than the installed one and leaves the rest on the dependency solver. This method is always used for packages, and is optional for products and patterns. It is not applicable to patches.
 
-	*-y*, *--no-confirm*::
-		Don't require user interaction. Alias for the --non-interactive global option.
+include::{incdir}/option_legacy_no-confirm.txt[]
 
 	Solver related options: :: {nop}
 include::{incdir}/option_Solver_Flags_Common.txt[]
@@ -691,8 +687,7 @@ The option is ignored, if the patch command must update the update stack first, 
 	*--details*::
 		Show the detailed installation summary.
 
-	*-y*, *--no-confirm*::
-		Don't require user interaction. Alias for the --non-interactive global option.
+include::{incdir}/option_legacy_no-confirm.txt[]
 
 	Solver related options: :: {nop}
 include::{incdir}/option_Solver_Flags_Common.txt[]
@@ -741,8 +736,7 @@ Using --repo is _discouraged_ as it currently hides unmentioned repositories fro
 	*-D*, *--dry-run*::
 		Test the upgrade, do not actually install or update any package. If used together with *--download-only* a meaningful file conflict check can be performed (see section *Package File Conflicts*).
 
-	*-y*, *--no-confirm*::
-		Don't require user interaction. Alias for the --non-interactive global option.
+include::{incdir}/option_legacy_no-confirm.txt[]
 
 	*--details*::
 		Show the detailed installation summary.
