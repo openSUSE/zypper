@@ -70,8 +70,10 @@ namespace zyppng {
     struct DetectMetalinkState;  //< First attempt to get the zchunk header, but we might receive metalink data instead
     struct DlMetaLinkInfoState;  //< We got Metalink, lets get the full metalink file or we got no zchunk in the first place
     struct PrepareMultiState;    //< Parsing the metalink file and preparing the mirrors
+#if ENABLE_ZCHUNK_COMPRESSION
     struct DLZckHeadState;       //< Download the ZChunk Header
     struct DLZckState;           //< Download the File in ZChunk Mode
+#endif
     struct DlMetalinkState;      //< Download the File in Metalink Mode
     struct DlNormalFileState;    //< Simple Plain download, no chunking
     struct FinishedState;        //< We are done
@@ -93,20 +95,26 @@ namespace zyppng {
         return _sigTransitionToDlMetaLinkInfoState;
       }
 
+#if ENABLE_ZCHUNK_COMPRESSION
       SignalProxy< void () > sigTransitionToDLZckHeaderState() {
         return _sigTransitionToDLZckHeaderState;
       }
+#endif
 
       SignalProxy< void () > sigTransitionToDlNormalFileState() {
         return _sigTransitionToDlNormalFileState;
       }
 
+#if ENABLE_ZCHUNK_COMPRESSION
       std::shared_ptr<DLZckHeadState> toDLZckHeadState ();
+#endif
 
     private:
       Signal<void()> _sigTransitionToDetectMetalinkState;
       Signal<void()> _sigTransitionToDlMetaLinkInfoState;
+#if ENABLE_ZCHUNK_COMPRESSION
       Signal<void()> _sigTransitionToDLZckHeaderState;
+#endif
       Signal<void()> _sigTransitionToDlNormalFileState;
     };
 
@@ -134,10 +142,12 @@ namespace zyppng {
         return _gotMetalink;
       }
 
-      bool toZckHeadDownloadGuard () const;
       bool toSimpleDownloadGuard () const;
 
+#if ENABLE_ZCHUNK_COMPRESSION
+      bool toZckHeadDownloadGuard () const;
       std::shared_ptr<DLZckHeadState> toDLZckHeadState();
+#endif
 
       std::shared_ptr<Request> _request;
 
@@ -236,11 +246,13 @@ namespace zyppng {
       }
 
       std::shared_ptr<DlNormalFileState>  fallbackToNormalTransition ();
-      std::shared_ptr<DLZckHeadState>     transitionToZckHeadDl ();
       std::shared_ptr<DlMetalinkState>    transitionToMetalinkDl ();
       std::shared_ptr<FinishedState>      transitionToFinished ();
-
+#if ENABLE_ZCHUNK_COMPRESSION
+      std::shared_ptr<DLZckHeadState>     transitionToZckHeadDl ();
       bool toZckHeadDownloadGuard () const;
+#endif
+
       bool toMetalinkDownloadGuard () const;
 
       std::vector<Url> _mirrors;
@@ -250,8 +262,9 @@ namespace zyppng {
       sigc::connection _mirrorControlReadyConn;
 
       void onMirrorsReady ();
-
+#if ENABLE_ZCHUNK_COMPRESSION
       bool _haveZckData = false; //< do we have zck data ready
+#endif
       NetworkRequestError _error;
       Signal< void () > _sigFinished;
       Signal< void () > _sigFallback;
@@ -370,6 +383,8 @@ private:
       }
     };
 
+#if ENABLE_ZCHUNK_COMPRESSION
+
     /*!
      * State that downloads the ZckHeader
      */
@@ -417,6 +432,8 @@ private:
 
     };
 
+#endif
+
     struct FinishedState : public SimpleState< DownloadPrivate, Download::Finished, true >
     {
       FinishedState ( NetworkRequestError &&error, DownloadPrivate &parent );
@@ -430,7 +447,9 @@ private:
     bool _emittedSigStart = false;
     bool handleRequestAuthError(std::shared_ptr<Request> req, const zyppng::NetworkRequestError &err);
 
+#if ENABLE_ZCHUNK_COMPRESSION
     bool hasZckInfo () const;
+#endif
 
     std::shared_ptr<NetworkRequestDispatcher> _requestDispatcher;
     std::shared_ptr<MirrorControl> _mirrorControl;
@@ -459,22 +478,29 @@ private:
   using DetectMetalinkState = DownloadPrivateBase::DetectMetalinkState;
   using DlMetaLinkInfoState = DownloadPrivateBase::DlMetaLinkInfoState;
   using PrepareMultiState = DownloadPrivateBase::PrepareMultiState;
-  using DLZckHeadState = DownloadPrivateBase::DLZckHeadState;
-  using DLZckState = DownloadPrivateBase::DLZckState;
   using DlMetalinkState = DownloadPrivateBase::DlMetalinkState;
   using DlNormalFileState = DownloadPrivateBase::DlNormalFileState;
   using FinishedState = DownloadPrivateBase::FinishedState;
+
+#if ENABLE_ZCHUNK_COMPRESSION
+  using DLZckHeadState = DownloadPrivateBase::DLZckHeadState;
+  using DLZckState = DownloadPrivateBase::DLZckState;
+#endif
 
   template <typename Derived>
   using DownloadStatemachine = Statemachine< Derived, Download::State,
     //          Source State,             State Change Event                     TargetState,    Transition Condition,  Transition operation
     Transition< InitialState, &InitialState::sigTransitionToDetectMetalinkState, DetectMetalinkState >,
     Transition< InitialState, &InitialState::sigTransitionToDlMetaLinkInfoState, DlMetaLinkInfoState >,
+#if ENABLE_ZCHUNK_COMPRESSION
     Transition< InitialState, &InitialState::sigTransitionToDLZckHeaderState,    DLZckHeadState, DefaultStateCondition, &InitialState::toDLZckHeadState >,
+#endif
     Transition< InitialState, &InitialState::sigTransitionToDlNormalFileState,   DlNormalFileState >,
 
     Transition< DetectMetalinkState, &DetectMetalinkState::sigFinished,   DlMetaLinkInfoState, &DetectMetalinkState::toMetalinkGuard >,
+#if ENABLE_ZCHUNK_COMPRESSION
     Transition< DetectMetalinkState, &DetectMetalinkState::sigFinished,   DLZckHeadState,      &DetectMetalinkState::toZckHeadDownloadGuard, &DetectMetalinkState::toDLZckHeadState  >,
+#endif
     Transition< DetectMetalinkState, &DetectMetalinkState::sigFinished,   DlNormalFileState,   &DetectMetalinkState::toSimpleDownloadGuard >,
 
     Transition< DlMetaLinkInfoState, &DlMetaLinkInfoState::sigFinished,    FinishedState, DefaultStateCondition, &DlMetaLinkInfoState::transitionToFinished >,
@@ -482,15 +508,19 @@ private:
     Transition< DlMetaLinkInfoState, &DlMetaLinkInfoState::sigFailed,      FinishedState, DefaultStateCondition, &DlMetaLinkInfoState::transitionToFinished >,
 
     Transition< PrepareMultiState, &PrepareMultiState::sigFinished,   DlMetalinkState,  &PrepareMultiState::toMetalinkDownloadGuard , &PrepareMultiState::transitionToMetalinkDl >,
+#if ENABLE_ZCHUNK_COMPRESSION
     Transition< PrepareMultiState, &PrepareMultiState::sigFinished,   DLZckHeadState,   &PrepareMultiState::toZckHeadDownloadGuard, &PrepareMultiState::transitionToZckHeadDl >,
+#endif
     Transition< PrepareMultiState, &PrepareMultiState::sigFallback,   DlNormalFileState, DefaultStateCondition, &PrepareMultiState::fallbackToNormalTransition >,
     Transition< PrepareMultiState, &PrepareMultiState::sigFailed,     DlNormalFileState >,
 
+#if ENABLE_ZCHUNK_COMPRESSION
     Transition< DLZckHeadState, &DLZckHeadState::sigFinished, DLZckState, DefaultStateCondition, &DLZckHeadState::transitionToDlZckState >,
     Transition< DLZckHeadState, &DLZckHeadState::sigFailed,   DlNormalFileState >,
 
     Transition< DLZckState, &DLZckState::sigFinished, FinishedState, DefaultStateCondition, &DLZckState::transitionToFinished >,
     Transition< DLZckState, &DLZckState::sigFallback, DlNormalFileState >,
+#endif
 
     Transition< DlMetalinkState, &DlMetalinkState::sigFinished, FinishedState, DefaultStateCondition, &DlMetalinkState::transitionToFinished >,
     Transition< DlMetalinkState, &DlMetalinkState::sigFailed, FinishedState, &DlMetalinkState::toFinalStateCondition, &DlMetalinkState::transitionToFinished   >,

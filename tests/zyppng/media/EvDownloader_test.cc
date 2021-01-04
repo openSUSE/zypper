@@ -142,7 +142,6 @@ struct print_log_value< MirrorSet > {
 std::vector< MirrorSet > generateMirr ()
 {
   std::vector< MirrorSet > res;
-#if 1
   //all mirrors good:
   res.push_back( MirrorSet() );
   res.back().name = "All good mirrors";
@@ -246,7 +245,8 @@ std::vector< MirrorSet > generateMirr ()
       res.back().mirrors.push_back( std::make_pair( i*10, "/test.txt") );
     }
   }
-#endif
+
+#if ENABLE_ZCHUNK_COMPRESSION
   //all mirrors good with zck:
   res.push_back( MirrorSet() );
   res.back().name = "All good mirrors with zck";
@@ -262,6 +262,7 @@ std::vector< MirrorSet > generateMirr ()
   res.back().chunkSize      = zypp::ByteCount( 4, zypp::ByteCount::K );
   for ( int i = 100 ; i >= 10; i -= 10 )
     res.back().mirrors.push_back( std::make_pair( i, "/primary.xml.zck") );
+#endif
 
   return res;
 }

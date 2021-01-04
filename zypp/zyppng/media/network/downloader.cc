@@ -17,9 +17,11 @@
 #include <zypp/base/Logger.h>
 #include <zypp/ZYppFactory.h>
 
+#if ENABLE_ZCHUNK_COMPRESSION
 extern "C" {
   #include <zck.h>
 }
+#endif
 
 #include <queue>
 #include <fcntl.h>
@@ -61,6 +63,7 @@ namespace  {
     return looks_like_metalink_data( zyppng::peek_data_fd( fd.get(), 0, minMetalinkProbeSize ) );
   }
 
+#if ENABLE_ZCHUNK_COMPRESSION
   bool isZchunkFile ( const zypp::Pathname &file ) {
     std::ifstream dFile( file.c_str() );
     if ( !dFile.is_open() )
@@ -73,6 +76,7 @@ namespace  {
     dFile.read( lead.data(), lead.size() );
     return ( magic == std::string_view( lead.data(), lead.size()) );
   }
+#endif
 }
 
 namespace zyppng {
@@ -104,38 +108,44 @@ namespace zyppng {
   {
     auto &sm = stateMachine();
     const auto &spec = sm._spec;
-    bool deltaZck = isZchunkFile( spec.deltaFile() );
 
     if ( spec.checkExistsOnly() ) {
       MIL << "Check exists only enabled" << std::endl;
       return _sigTransitionToDlNormalFileState.emit();
     }
 
+#if ENABLE_ZCHUNK_COMPRESSION
+    bool deltaZck = isZchunkFile( spec.deltaFile() );
+#endif
     if ( spec.metalinkEnabled() ) {
+#if ENABLE_ZCHUNK_COMPRESSION
       if ( deltaZck && spec.headerSize() > 0 ) {
         MIL << "We might have a zck file, detecting metalink first" << std::endl;
         return _sigTransitionToDetectMetalinkState.emit();
       }
-
+#endif
       MIL << "No zchunk data available but metalink requested, going to download metalink directly." << std::endl;
       return _sigTransitionToDlMetaLinkInfoState.emit();
     }
 
+#if ENABLE_ZCHUNK_COMPRESSION
     // no Metalink, maybe we can directly download zck
     if ( deltaZck && spec.headerSize() > 0 ) {
       MIL << "No metalink but zckunk data availble trying to download ZckHead directly." << std::endl;
-      _sigTransitionToDLZckHeaderState.emit();
-    } else {
-      MIL << "Fallback to normal DL" << std::endl;
-      _sigTransitionToDlNormalFileState.emit();
+      return _sigTransitionToDLZckHeaderState.emit();
     }
+#endif
+    MIL << "Fallback to normal DL" << std::endl;
+    _sigTransitionToDlNormalFileState.emit();
   }
 
+#if ENABLE_ZCHUNK_COMPRESSION
   std::shared_ptr<DownloadPrivateBase::DLZckHeadState> InitialState::toDLZckHeadState()
   {
     // we have no mirrors, the range downloader would need to fall back to using the base URL
     return std::make_shared<DLZckHeadState>( std::vector<Url> { stateMachine()._spec.url() }, stateMachine() );
   }
+#endif
 
   // Metalink detection state, we query the type of file from the server, in order to use metalink support the server
   // needs to correctly return the metalink file content type, otherwise we proceed to not downloading a metalink file
@@ -196,14 +206,19 @@ namespace zyppng {
     _sigFinished.emit();
   }
 
+  bool DownloadPrivateBase::DetectMetalinkState::toSimpleDownloadGuard() const
+  {
+#if ENABLE_ZCHUNK_COMPRESSION
+    return !toMetalinkGuard() && !toZckHeadDownloadGuard();
+#else
+    return !toMetalinkGuard();
+#endif
+  }
+
+#if ENABLE_ZCHUNK_COMPRESSION
   bool DownloadPrivateBase::DetectMetalinkState::toZckHeadDownloadGuard() const
   {
     return !toMetalinkGuard() && stateMachine().hasZckInfo();
-  }
-
-  bool DownloadPrivateBase::DetectMetalinkState::toSimpleDownloadGuard() const
-  {
-    return !toMetalinkGuard() && !toZckHeadDownloadGuard();
   }
 
   std::shared_ptr<DownloadPrivateBase::DLZckHeadState> DetectMetalinkState::toDLZckHeadState()
@@ -211,6 +226,7 @@ namespace zyppng {
     // we have no mirrors, the range downloader would need to fall back to using the base URL
     return std::make_shared<DLZckHeadState>( std::vector<Url> { stateMachine()._spec.url() }, stateMachine() );
   }
+#endif
 
   void DownloadPrivateBase::BasicDownloaderStateBase::enter()
   {
@@ -413,8 +429,13 @@ namespace zyppng {
     const auto &spec = sm._spec;
     const auto &url = spec.url();
     const auto &targetPath = spec.targetPath();
+#if ENABLE_ZCHUNK_COMPRESSION
     _haveZckData = (isZchunkFile( spec.deltaFile() )  && spec.headerSize() > 0);
     DBG << " Upgrading request for URL: "<< url << " to multipart download , which zckunk=" << _haveZckData << std::endl;
+#else
+    DBG << " Upgrading request for URL: "<< url << " to multipart download , which zckunk=false" << std::endl;
+#endif
+
 
     //we have a metalink download, lets parse it and see what we got
     _mirrors.clear();
@@ -426,7 +447,11 @@ namespace zyppng {
       parser.parse( targetPath );
 
       // we only care about the metalink chunks if we have no zchunk data
+#if ENABLE_ZCHUNK_COMPRESSION
       if ( !_haveZckData ) {
+#else
+      if ( true ) {
+#endif
         auto bl = parser.getBlockList();
         if ( !bl.haveBlocks() )
           MIL << "HERE! Got no blocks for URL " << spec.url() << " but got filesize? " << bl.getFilesize() << std::endl;
@@ -483,10 +508,12 @@ namespace zyppng {
     const auto &url = spec.url();
     _mirrorControlReadyConn.disconnect();
 
+#if ENABLE_ZCHUNK_COMPRESSION
     if ( _haveZckData  ) {
       _sigFinished.emit();
       return;
     }
+#endif
 
     // we have no zchunk data, so for a multi download we need a blocklist
     if ( !_blockList.haveBlocks() )  {
@@ -536,11 +563,6 @@ namespace zyppng {
     return ptr;
   }
 
-  std::shared_ptr<DownloadPrivateBase::DLZckHeadState> PrepareMultiState::transitionToZckHeadDl()
-  {
-    return std::make_shared<DLZckHeadState>( std::move(_mirrors), stateMachine() );
-  }
-
   std::shared_ptr<DownloadPrivateBase::DlMetalinkState> PrepareMultiState::transitionToMetalinkDl()
   {
     return std::make_shared<DlMetalinkState>( std::move(_blockList), std::move(_mirrors), stateMachine() );
@@ -551,14 +573,25 @@ namespace zyppng {
     return std::make_shared<FinishedState>( std::move(_error), stateMachine() );
   }
 
+#if ENABLE_ZCHUNK_COMPRESSION
+  std::shared_ptr<DownloadPrivateBase::DLZckHeadState> PrepareMultiState::transitionToZckHeadDl()
+  {
+    return std::make_shared<DLZckHeadState>( std::move(_mirrors), stateMachine() );
+  }
+
   bool DownloadPrivateBase::PrepareMultiState::toZckHeadDownloadGuard() const
   {
     return ( stateMachine().hasZckInfo() );
   }
+#endif
 
   bool DownloadPrivateBase::PrepareMultiState::toMetalinkDownloadGuard() const
   {
+#if ENABLE_ZCHUNK_COMPRESSION
     return (!toZckHeadDownloadGuard());
+#else
+    return true;
+#endif
   }
 
   void DownloadPrivateBase::RangeDownloaderBaseState::onRequestStarted( NetworkRequest & )
@@ -1058,6 +1091,7 @@ namespace zyppng {
     return std::make_shared<FinishedState>( std::move(_error), stateMachine() );
   }
 
+#if ENABLE_ZCHUNK_COMPRESSION
   DLZckHeadState::DLZckHeadState(std::vector<Url> &&mirrors, DownloadPrivate &parent) :
     BasicDownloaderStateBase( parent )
   {
@@ -1283,6 +1317,7 @@ namespace zyppng {
     // everything is valid
     RangeDownloaderBaseState::setFinished();
   }
+#endif
 
   FinishedState::FinishedState(NetworkRequestError &&error, DownloadPrivate &parent) : SimpleState( parent ),_error( std::move(error) )
   {
@@ -1360,13 +1395,14 @@ namespace zyppng {
     return retry;
   }
 
+#if ENABLE_ZCHUNK_COMPRESSION
   bool DownloadPrivateBase::hasZckInfo() const
   {
     if ( zypp::indeterminate(_specHasZckInfo) )
       _specHasZckInfo = ( _spec.headerSize() > 0 && isZchunkFile( _spec.deltaFile() ) );
     return bool(_specHasZckInfo);
   }
-
+#endif
 
   void DownloadPrivateBase::Request::disconnectSignals()
   {
@@ -1557,7 +1593,11 @@ namespace zyppng {
     // we only reschedule requests when we are in a state that downloads in blocks
     d->visitState( []( auto &s ){
       using T = std::decay_t<decltype (s)>;
-      if constexpr ( std::is_same_v<T, DlMetalinkState> || std::is_same_v<T, DLZckState> ) {
+      if constexpr ( std::is_same_v<T, DlMetalinkState>
+#if ENABLE_ZCHUNK_COMPRESSION
+          || std::is_same_v<T, DLZckState>
+#endif
+      ) {
         s.reschedule();
       }
     });
