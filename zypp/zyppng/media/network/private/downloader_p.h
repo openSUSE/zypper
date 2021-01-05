@@ -462,12 +462,12 @@ private:
     time_t _lastTriedAuthTime = 0; //< if initialized this shows the last timestamp that we loaded a cred for the given URL from CredentialManager
     NetworkRequest::Priority _defaultSubRequestPriority = NetworkRequest::High;
 
-    MemSignal<Download, void ( Download &req )> _sigStarted;
-    MemSignal<Download, void ( Download &req, Download::State state )> _sigStateChanged;
-    MemSignal<Download, void ( Download &req, off_t dlnow  )> _sigAlive;
-    MemSignal<Download, void ( Download &req, off_t dltotal, off_t dlnow )> _sigProgress;
-    MemSignal<Download, void ( Download &req )> _sigFinished;
-    MemSignal<Download, void ( zyppng::Download &req, zyppng::NetworkAuthData &auth, const std::string &availAuth )> _sigAuthRequired;
+    Signal< void ( Download &req )> _sigStarted;
+    Signal< void ( Download &req, Download::State state )> _sigStateChanged;
+    Signal< void ( Download &req, off_t dlnow  )> _sigAlive;
+    Signal< void ( Download &req, off_t dltotal, off_t dlnow )> _sigProgress;
+    Signal< void ( Download &req )> _sigFinished;
+    Signal< void ( zyppng::Download &req, zyppng::NetworkAuthData &auth, const std::string &availAuth )> _sigAuthRequired;
 
   protected:
     NetworkRequestError safeFillSettingsFromURL ( const Url &url, TransferSettings &set );
@@ -549,9 +549,9 @@ private:
     void onDownloadStarted ( Download &download );
     void onDownloadFinished ( Download &download );
 
-    MemSignal<Downloader, void ( Downloader &parent, Download& download )> _sigStarted;
-    MemSignal<Downloader, void ( Downloader &parent, Download& download )> _sigFinished;
-    MemSignal<Downloader, void ( Downloader &parent )> _queueEmpty;
+    Signal< void ( Downloader &parent, Download& download )> _sigStarted;
+    Signal< void ( Downloader &parent, Download& download )> _sigFinished;
+    Signal< void ( Downloader &parent )> _queueEmpty;
     std::shared_ptr<MirrorControl> _mirrors;
   };
 

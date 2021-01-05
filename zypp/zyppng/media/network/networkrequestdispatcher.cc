@@ -19,10 +19,6 @@ NetworkRequestDispatcherPrivate::NetworkRequestDispatcherPrivate(  NetworkReques
     : BasePrivate( p )
     , _timer( Timer::create() )
     , _multi ( curl_multi_init() )
-    , _sigDownloadStarted(p)
-    , _sigDownloadFinished(p)
-    , _sigQueueFinished(p)
-    , _sigError(p)
 {
   ::internal::globalInitCurlOnce();
 
@@ -115,9 +111,6 @@ int NetworkRequestDispatcherPrivate::socketCallback(CURL *easy, curl_socket_t s,
   if ( what == CURL_POLL_REMOVE ) {
     socketp->setEnabled( false );
     _socketHandler.erase( s );
-
-    //keep the reference until this iteration is over
-    // EventDispatcher::unrefLater( socketp );
     return 0;
   }
 
@@ -216,7 +209,6 @@ void NetworkRequestDispatcherPrivate::setFinished( NetworkRequest &req, NetworkR
       return req.d_func() == r->d_func();
     } );
     if ( it != list.end() ) {
-      // EventDispatcher::unrefLater( *it );
       auto ptr = *it;
       list.erase( it );
       return ptr;
@@ -263,7 +255,7 @@ void NetworkRequestDispatcherPrivate::dequeuePending()
   if ( !_isRunning || _locked )
     return;
 
-  while ( _maxConnections == -1 || ( _maxConnections > _runningDownloads.size() ) ) {
+  while ( _maxConnections == -1 || ( (std::size_t)_maxConnections > _runningDownloads.size() ) ) {
     if ( !_pendingDownloads.size() )
       break;
 
@@ -273,14 +265,12 @@ void NetworkRequestDispatcherPrivate::dequeuePending()
     std::string errBuf = "Failed to initialize easy handle";
     if ( !req->d_func()->initialize( errBuf ) ) {
       //@TODO store the CURL error in the errors extra info
-      // EventDispatcher::unrefLater( req );
       setFinished( *req, NetworkRequestErrorPrivate::customError( NetworkRequestError::InternalError, std::move(errBuf) ) );
       continue;
     }
 
     CURLMcode rc = curl_multi_add_handle( _multi, req->d_func()->_easyHandle );
     if ( rc != 0 ) {
-      // EventDispatcher::unrefLater( req );
       setFinished( *req, NetworkRequestErrorPrivate::fromCurlMError( rc ) );
       continue;
     }

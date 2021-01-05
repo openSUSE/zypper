@@ -85,10 +85,6 @@ namespace zyppng {
     , _url ( std::move(url) )
     , _targetFile ( std::move( targetFile) )
     , _fMode ( std::move(fMode) )
-    , _sigStarted(p)
-    , _sigBytesDownloaded(p)
-    , _sigProgress(p)
-    , _sigFinished(p)
     , _headers( std::unique_ptr< curl_slist, decltype (&curl_slist_free_all) >( nullptr, &curl_slist_free_all ) )
   { }
 

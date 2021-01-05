@@ -87,12 +87,6 @@ namespace zyppng {
     , _mirrorControl( std::move(mirrors) )
     , _spec( std::move(spec) )
     , _parent( &parent )
-    , _sigStarted(p)
-    , _sigStateChanged(p)
-    , _sigAlive(p)
-    , _sigProgress(p)
-    , _sigFinished(p)
-    , _sigAuthRequired(p)
   {}
 
   DownloadPrivateBase::~DownloadPrivateBase()
@@ -1661,9 +1655,6 @@ namespace zyppng {
 
   DownloaderPrivate::DownloaderPrivate(std::shared_ptr<MirrorControl> mc, Downloader &p)
     : BasePrivate(p)
-    , _sigStarted(p)
-    , _sigFinished(p)
-    , _queueEmpty(p)
     , _mirrors( std::move(mc) )
   {
     _requestDispatcher = std::make_shared<NetworkRequestDispatcher>( );
@@ -1687,7 +1678,6 @@ namespace zyppng {
 
     if ( it != _runningDownloads.end() ) {
       //make sure this is not deleted before all user code was done
-      // EventDispatcher::unrefLater( *it );
       _runningDownloads.erase( it );
     }
 

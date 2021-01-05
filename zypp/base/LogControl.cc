@@ -157,9 +157,8 @@ namespace zypp
         }, *cl);
 
         // once a client disconnects we remove it from the std::vector so that the socket is not leaked
-        cl->connectFunc( &zyppng::Socket::sigDisconnected, [&clients, &ev, sock = cl.get()](){
+        cl->connectFunc( &zyppng::Socket::sigDisconnected, [&clients, sock = cl.get()](){
           auto idx = std::find_if( clients.begin(), clients.end(), [sock]( const auto &s ){ return sock == s.get(); } );
-          //ev->eventDispatcher()->unrefLater( *idx );
           clients.erase( idx );
         }, *cl);
 
@@ -690,7 +689,7 @@ namespace zypp
       ///////////////////////////////////////////////////////////////////
 
       /** \relates LogControlImpl Stream output */
-      inline std::ostream & operator<<( std::ostream & str, const LogControlImpl & obj )
+      inline std::ostream & operator<<( std::ostream & str, const LogControlImpl & )
       {
         return str << "LogControlImpl";
       }
@@ -881,7 +880,7 @@ namespace zypp
      **	FUNCTION NAME : operator<<
      **	FUNCTION TYPE : std::ostream &
     */
-    std::ostream & operator<<( std::ostream & str, const LogControl & obj )
+    std::ostream & operator<<( std::ostream & str, const LogControl & )
     {
       auto impl = LogControlImpl::instance();
       if ( !impl )

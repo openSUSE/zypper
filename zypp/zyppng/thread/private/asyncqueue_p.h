@@ -18,7 +18,7 @@ namespace zyppng {
 
       std::shared_ptr<AsyncQueueBase> _queue;
       gint fds[2] = { -1, -1 };
-      MemSignal<AsyncQueueWatch, void()> _sigMessageAvailable;
+      Signal< void()> _sigMessageAvailable;
   };
 
 }

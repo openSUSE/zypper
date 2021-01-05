@@ -34,10 +34,10 @@ public:
   NetworkRequestError _lastError;
 
   //signals
-  MemSignal<NetworkRequestDispatcher, void ( NetworkRequestDispatcher &, NetworkRequest & )> _sigDownloadStarted;
-  MemSignal<NetworkRequestDispatcher, void ( NetworkRequestDispatcher &, NetworkRequest & )> _sigDownloadFinished;
-  MemSignal<NetworkRequestDispatcher, void ( NetworkRequestDispatcher & )> _sigQueueFinished;
-  MemSignal<NetworkRequestDispatcher, void ( NetworkRequestDispatcher & )> _sigError;
+  Signal< void ( NetworkRequestDispatcher &, NetworkRequest & )> _sigDownloadStarted;
+  Signal< void ( NetworkRequestDispatcher &, NetworkRequest & )> _sigDownloadFinished;
+  Signal< void ( NetworkRequestDispatcher & )> _sigQueueFinished;
+  Signal< void ( NetworkRequestDispatcher & )> _sigError;
 
 private:
   static int multi_timer_cb ( CURLM *multi, long timeout_ms, void *g );

@@ -33,13 +33,7 @@ namespace zyppng {
     SocketPrivate( int domain, int type, int protocol, Socket &p ) : IODevicePrivate(p),
       _domain(domain),
       _type( type ),
-      _protocol( protocol ),
-      _sigError(p),
-      _sigBytesWritten(p),
-      _readyRead(p),
-      _incomingConnection(p),
-      _connected(p),
-      _disconnected(p)
+      _protocol( protocol )
     { }
 
     bool initSocket () ;
@@ -72,12 +66,12 @@ namespace zyppng {
     std::string _errorDesc;
 
     //signals
-    MemSignal<Socket, void(Socket::SocketError)> _sigError;
-    MemSignal<Socket, void (std::size_t)> _sigBytesWritten;
-    MemSignal<Socket, void()> _readyRead;
-    MemSignal<Socket, void()> _incomingConnection;
-    MemSignal<Socket, void()> _connected;
-    MemSignal<Socket, void()> _disconnected;
+    Signal< void(Socket::SocketError)> _sigError;
+    Signal< void (std::size_t)> _sigBytesWritten;
+    Signal< void()> _readyRead;
+    Signal< void()> _incomingConnection;
+    Signal< void()> _connected;
+    Signal< void()> _disconnected;
 
 
     struct InitialState {

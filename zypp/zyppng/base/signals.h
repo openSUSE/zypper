@@ -29,11 +29,133 @@
 #include <zypp/base/Exception.h>
 #include <zypp/base/LogControl.h>
 
+/*!
+ * \file signals.h
+ *
+ * This file implements the signal and slot concept in libzypp.
+ *
+ * Signals and slots are basically a implementation of the observer pattern which makes it possible
+ * for objects to work together without them having to know about each other by connecting the
+ * signals of one object to the slots of another. Whenever the object owning the signal
+ * emits said signal, all connected slots are executed. This is especially helpful in async environments
+ * where we need to react on specific events like timers or filedescriptor events that can
+ * happen at any time during execution.
+ *
+ * Using signals and slots in libzypp requires the developer to make sure
+ * that all objects that are used in the signal chain can not be deleted
+ * during emission, for example a Socket emitting the closed() signal might result in
+ * its deletion. This is usually made sure by taking a reference to the sender object
+ * via shared_ptr, e.g. the \ref EventLoop does this for all \ref AbstractEventSource 's that are
+ * registered to receive events using shared_from_this.
+ *
+ * To have signals in a Object its recommended to subclass the Type from \ref zyppng::Base
+ * and always have the objects in a \ref std::shared_ptr.
+ * \ref zyppng::Base provides the \ref zyppng::Base::connect and \ref zyppng::Base::connectFunc
+ * helpers to connect signals and slots. Connections made with those helpers will make sure the
+ * receiving objects are properly locked.
+ *
+ * The \ref zyppng::Base::connect helper function can be used to connect a signal that is hosted by a \ref zyppng::Base
+ * derived type to a slot hosted by a \ref zyppng::Base derived type. No special care needs to be taken to make sure
+ * the receiver object is locked since the function is handling all the details about that:
+ * \code
+ * class Receiver : public zyppng::Base
+ * {
+ * public:
+ *   static std::shared_ptr<Receiver> create();
+ *   void writeOnTimeout() {
+ *    std::cout << "Hello World" << std::endl;
+ *   }
+ * }
+ *
+ * auto evLoop   = zyppng::EventLoop::create();
+ * auto sender   = zyppng::Timer::create();
+ * auto receiver = Receiver::create();
+ *
+ * // invoking the static Base::connect() function will make sure receiver is locked, the sender will be locked by the
+ * // eventloop triggering the timeout
+ * sender->connect( *sender, &zyppng::Timer::sigExpired, *receiver, &Receiver::writeOnTimeout );
+ * sender->start(1000);
+ * evLoop->run();
+ * \endcode
+ *
+ * The \ref zyppng::Base::connect helper function can be used to connect a signal that is hosted by a \ref zyppng::Base
+ * derived type to a lambda type slot, commonly used when the developer wants to have the code that is invoked by the signal
+ * right where the slot is connected, to make the code easier to read or when the slot code is not reused anywhere else.
+ *
+ * In this example the receiver object uses a slot to invoke the actual function that handles the event. Since we only connect
+ * a lambda that invokes the writeOnTimeout function using a caputured \a this pointer we need to manually take care of locking the receiver object during the
+ * slot invocation by passing it as a extra argument after the lambda. While the code would compile without doing that we
+ * introduce a bug that is very hard to track down because the subsequent signal emitted from the receiver object causes it to be deleted,
+ * making the code fail afterwards.
+ * \code
+ * class Receiver : public zyppng::Base
+ * {
+ * public:
+ *   static std::shared_ptr<Receiver> create();
+ *
+ *   void connectToTimer ( std::shared_ptr<Timer> &p ) {
+ *     p->connectFunc( *sender, &zyppng::Timer::sigExpired, [ this ](){
+ *       onTimeout();
+ *     }, *this );
+ *   }
+ *
+ *   SignalProxy<void()> sigGotTimeout() {
+ *    return _sigGotTimeout;
+ *   }
+ *
+ * private:
+ *   void onTimeout() {
+ *    std::cout << "Hello World" << std::endl;
+ *    // emits a subsequent signal
+ *    _sigGotTimeout.emit();
+ *
+ *    // calls another function on this after emitting the signal
+ *    // in cases where our instance was not locked by the caller and
+ *    // a slot that received our signal released the last reference to us
+ *    // this will run into a segfault
+ *    this->doSomethingElse();
+ *   }
+ *   void doSomethingElse() {
+ *    std::cout << "Something else" << std::endl;
+ *   }
+ *   Signal<void()> _sigGotTimeout;
+ * }
+ *
+ * auto evLoop   = zyppng::EventLoop::create();
+ * auto sender   = zyppng::Timer::create();
+ * auto receiver = Receiver::create();
+ *
+ * // invoking the static Base::connect() function will make sure receiver is locked, the sender will be locked by the
+ * // eventloop triggering the timeout
+ * receiver->connectToTimer( sender );
+ *
+ * // release the receiver after the timeout was triggered
+ * receiver->connectFunc( *receiver, &Receiver::sigGotTimeout, [ &receiver ](){
+ *   // releasing the receiver Object once the timer was triggered once. If the object
+ *   // is not properly referenced during signal emission we will run into a SEGFAULT
+ *   receiver.reset();
+ * });
+ *
+ * sender->start( 1000 );
+ * evLoop->run();
+ * \endcode
+ */
 namespace zyppng {
 
+
+  /*!
+   * \class Signal
+   * Simple signal that can be invoked with the given arguments.
+   */
   template <class R, class... T>
   class Signal;
 
+  /*!
+   * \class MemSignal
+   * This is a special type of signal that takes a reference to the sender
+   * object during signal emission. This is only required in cases where
+   * sending a signal might delete the sender and no external object holds a reference to it.
+   */
   template <class SignalHost, typename ReturnType, typename... Arguments>
   class MemSignal;
 
@@ -47,11 +169,11 @@ namespace zyppng {
   using SignalProxyBase = sywu::SignalConceptImpl<R(T...)>;
 
   template <class R, class... T>
-  class signal<R(T...)> : public sywu::Signal<R(T...)>
+  class Signal<R(T...)> : public sywu::Signal<R(T...)>
   { };
 
   template <class SignalHost, typename ReturnType, typename... Arguments>
-  class memsignal<SignalHost, ReturnType(Arguments...)> : public sywu::MemberSignal<SignalHost, ReturnType(Arguments...)>
+  class MemSignal<SignalHost, ReturnType(Arguments...)> : public sywu::MemberSignal<SignalHost, ReturnType(Arguments...)>
   { };
 
 #else
@@ -84,7 +206,7 @@ namespace zyppng {
 
     template<typename... Args>
     auto emit( Args&& ...arg ) const {
-      //auto ref = _host.shared_from_this();
+      auto ref = _host.shared_from_this();
       return sigc::signal<ReturnType(Arguments...)>::emit( std::forward<Args>(arg)...);
     }
 
@@ -100,6 +222,10 @@ namespace zyppng {
 
   namespace internal {
 
+    /*!
+     * Helper tool that always locks the public object in case a BasePrivate derived type
+     * is passed.
+     */
     template <typename T>
     inline auto lock_shared_makeLock ( const T& locker ) {
       try {
@@ -115,7 +241,8 @@ namespace zyppng {
     }
 
     /*!
-     * Adaptor that locks and tracks the given objects
+     * Adaptor that locks and tracks the given objects, this implements locking
+     * of the receiver object in a signal chain.
      */
     template <typename T_functor, typename ...Lockers>
     struct lock_shared : public sigc::adapts<T_functor>

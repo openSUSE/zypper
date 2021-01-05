@@ -95,7 +95,6 @@ namespace zyppng {
 
           // clean the request up
           mirrorHandle->_finishedConn.disconnect();
-          // EventDispatcher::unrefLater( std::move(mirrorHandle->_request) );
           mirrorHandle->_request.reset();
         });
 

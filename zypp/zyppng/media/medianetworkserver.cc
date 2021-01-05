@@ -92,7 +92,6 @@ namespace zyppng {
     Request ( ) { }
     ~Request() {
       clearConnections();
-      //zyppng::EventDispatcher::instance()->unrefLater( dl );
     }
 
     void clearConnections () {

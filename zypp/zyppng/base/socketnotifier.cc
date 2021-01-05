@@ -9,10 +9,9 @@ class SocketNotifierPrivate : public AbstractEventSourcePrivate
 public:
 
   SocketNotifierPrivate ( SocketNotifier &p ) :
-    AbstractEventSourcePrivate(p),
-    _activated(p) {}
+    AbstractEventSourcePrivate(p){}
 
-  MemSignal<SocketNotifier, void (const SocketNotifier &, int)> _activated;
+  Signal< void (const SocketNotifier &, int)> _activated;
 
   int _socket = -1;
   int _mode = SocketNotifier::Read;

@@ -31,7 +31,6 @@ namespace zyppng {
 
   AsyncQueueWatchPrivate::AsyncQueueWatchPrivate(std::shared_ptr<AsyncQueueBase> &&q  , AsyncQueueWatch &p) : AbstractEventSourcePrivate(p)
     , _queue( std::move(q) )
-    , _sigMessageAvailable(p)
   {
         GError *error = NULL;
 

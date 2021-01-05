@@ -76,10 +76,10 @@ namespace zyppng {
     NetworkRequestDispatcher *_dispatcher = nullptr; // the parent downloader owning this request
 
     //signals
-    MemSignal<NetworkRequest, void ( NetworkRequest &req )> _sigStarted;
-    MemSignal<NetworkRequest, void ( NetworkRequest &req, zypp::ByteCount count )> _sigBytesDownloaded;
-    MemSignal<NetworkRequest, void ( NetworkRequest &req, off_t dltotal, off_t dlnow, off_t ultotal, off_t ulnow )> _sigProgress;
-    MemSignal<NetworkRequest, void ( NetworkRequest &req, const NetworkRequestError &err )> _sigFinished;
+    Signal< void ( NetworkRequest &req )> _sigStarted;
+    Signal< void ( NetworkRequest &req, zypp::ByteCount count )> _sigBytesDownloaded;
+    Signal< void ( NetworkRequest &req, off_t dltotal, off_t dlnow, off_t ultotal, off_t ulnow )> _sigProgress;
+    Signal< void ( NetworkRequest &req, const NetworkRequestError &err )> _sigFinished;
 
     static int curlProgressCallback ( void *clientp, curl_off_t dltotal, curl_off_t dlnow, curl_off_t ultotal, curl_off_t ulnow );
     size_t headerCallback (  char *ptr, size_t size, size_t nmemb  );

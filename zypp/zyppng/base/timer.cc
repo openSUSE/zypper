@@ -26,13 +26,13 @@ public:
   std::weak_ptr<EventDispatcher> _ev;
   bool _isRunning = false;
 
-  MemSignal<Timer, void (Timer &t)> _expired;
+  Signal< void (Timer &t)> _expired;
 
   bool _singleShot = false;
 
 };
 
-TimerPrivate::TimerPrivate(Timer &p) : BasePrivate(p), _expired(p)
+TimerPrivate::TimerPrivate(Timer &p) : BasePrivate(p)
 {
   auto ev = EventDispatcher::instance();
   if ( !ev )
