@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypper.nl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-01-07 18:15+0100\n"
-"PO-Revision-Date: 2020-09-12 11:48+0000\n"
+"PO-Revision-Date: 2021-01-08 02:38+0000\n"
 "Last-Translator: Freek de Kruijf <freek@opensuse.org>\n"
 "Language-Team: Dutch <https://l10n.opensuse.org/projects/zypper/master/nl/>\n"
 "Language: nl\n"
@@ -5249,7 +5249,7 @@ msgstr "alle broncode-rpm's naar deze map downloaden."
 #. translators: --delete/--no-delete
 #: src/commands/utils/source-download.cc:502
 msgid "Whether to delete extraneous source rpms in the local directory."
-msgstr ""
+msgstr "Of overtollige broncode-rpms in de lokale map verwijderd moeten worden."
 
 #. translators: --status
 #: src/commands/utils/source-download.cc:506
