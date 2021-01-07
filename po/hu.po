@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper.hu\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-11 10:04+0200\n"
+"POT-Creation-Date: 2021-01-07 18:15+0100\n"
 "PO-Revision-Date: 2019-03-21 12:49+0000\n"
 "Last-Translator: Robert Taisz <robert.taisz@emerald.hu>\n"
 "Language-Team: Hungarian <https://l10n.opensuse.org/projects/zypper/master/"
@@ -594,11 +594,11 @@ msgstr ""
 "Csak olyan javításokat célszerű választania, amelyek magára a "
 "csomagkezelésre vonatkoznak."
 
-#: src/output/Out.h:26 src/repos.cc:126 src/repos.cc:154
+#: src/output/Out.h:26 src/repos.cc:125 src/repos.cc:153
 msgid "Yes"
 msgstr "Igen"
 
-#: src/output/Out.h:26 src/locales.cc:72 src/repos.cc:132 src/repos.cc:160
+#: src/output/Out.h:26 src/locales.cc:72 src/repos.cc:131 src/repos.cc:159
 msgid "No"
 msgstr "Nem"
 
@@ -690,7 +690,7 @@ msgstr "típus"
 #. translators: property name; short; used like "Name: value"
 #: src/utils/flags/zyppflags.h:49 src/commands/repos/list.cc:42
 #: src/commands/repos/list.cc:268 src/commands/services/list.cc:116
-#: src/repos.cc:1255
+#: src/repos.cc:1254
 msgid "URI"
 msgstr "URI"
 
@@ -1861,112 +1861,112 @@ msgid "After the operation, %s will be freed."
 msgstr "A művelet után további %s szabadul fel."
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
-#: src/Summary.cc:1415
+#: src/Summary.cc:1416
 msgid "package to upgrade"
 msgid_plural "packages to upgrade"
 msgstr[0] "csomag frissítése"
 msgstr[1] "csomag frissítése"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
-#: src/Summary.cc:1426
+#: src/Summary.cc:1427
 msgid "to downgrade"
 msgid_plural "to downgrade"
 msgstr[0] "visszafejlesztése"
 msgstr[1] "visszafejlesztése"
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
-#: src/Summary.cc:1429
+#: src/Summary.cc:1430
 msgid "package to downgrade"
 msgid_plural "packages to downgrade"
 msgstr[0] "csomag visszafejlesztése"
 msgstr[1] "csomag visszafejlesztése"
 
 #. translators: this text will be preceded by a number e.g. "5 new"
-#: src/Summary.cc:1440
+#: src/Summary.cc:1441
 msgid "new"
 msgid_plural "new"
 msgstr[0] "új"
 msgstr[1] "új"
 
 #. translators: this text will be preceded by a number e.g. "5 new to install"
-#: src/Summary.cc:1443
+#: src/Summary.cc:1444
 msgid "new package to install"
 msgid_plural "new packages to install"
 msgstr[0] "új csomag telepítése"
 msgstr[1] "új csomag telepítése"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
-#: src/Summary.cc:1454
+#: src/Summary.cc:1455
 msgid "to reinstall"
 msgid_plural "to reinstall"
 msgstr[0] "újratelepítés"
 msgstr[1] "újratelepítés"
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
-#: src/Summary.cc:1457
+#: src/Summary.cc:1458
 msgid "package to reinstall"
 msgid_plural "packages to reinstall"
 msgstr[0] "csomag újratelepítése"
 msgstr[1] "csomag újratelepítése"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
-#: src/Summary.cc:1468
+#: src/Summary.cc:1469
 msgid "to remove"
 msgid_plural "to remove"
 msgstr[0] "eltávolítása"
 msgstr[1] "eltávolítása"
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
-#: src/Summary.cc:1471
+#: src/Summary.cc:1472
 msgid "package to remove"
 msgid_plural "packages to remove"
 msgstr[0] "csomag eltávolítása"
 msgstr[1] "csomag eltávolítása"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
-#: src/Summary.cc:1482
+#: src/Summary.cc:1483
 msgid "to change vendor"
 msgid_plural " to change vendor"
 msgstr[0] "gyártója módosul"
 msgstr[1] "gyártója módosul"
 
 #. translators: this text will be preceded by a number e.g. "5 packages ..."
-#: src/Summary.cc:1485
+#: src/Summary.cc:1486
 msgid "package will change vendor"
 msgid_plural "packages will change vendor"
 msgstr[0] "csomag gyártója módosul"
 msgstr[1] "csomag gyártója módosul"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
-#: src/Summary.cc:1496
+#: src/Summary.cc:1497
 msgid "to change arch"
 msgid_plural "to change arch"
 msgstr[0] "architektúrája módosul"
 msgstr[1] "architektúrája módosul"
 
 #. translators: this text will be preceded by a number e.g. "5 packages ..."
-#: src/Summary.cc:1499
+#: src/Summary.cc:1500
 msgid "package will change arch"
 msgid_plural "packages will change arch"
 msgstr[0] "csomag architektúrája módosul"
 msgstr[1] "csomag architektúrája módosul"
 
 #. translators: this text will be preceded by a number e.g. "5 new"
-#: src/Summary.cc:1510
+#: src/Summary.cc:1511
 msgid "source package"
 msgid_plural "source packages"
 msgstr[0] "forráscsomag"
 msgstr[1] "forráscsomag"
 
 #. translators: this text will be preceded by a number e.g. "5 new to install"
-#: src/Summary.cc:1513
+#: src/Summary.cc:1514
 msgid "source package to install"
 msgid_plural "source packages to install"
 msgstr[0] "forráscsomag telepítése"
 msgstr[1] "forráscsomag telepítése"
 
 #. patch command (auto)restricted to update stack patches
-#: src/Summary.cc:1586
+#: src/Summary.cc:1588
 msgid ""
 "Package manager restart required. (Run this command once again after the "
 "update stack got updated)"
@@ -1974,7 +1974,7 @@ msgstr ""
 "A csomagkezelőt újra kell indítani. (Futtassa újra ezt a parancsot, miután "
 "frissült a frissítőcsomag)"
 
-#: src/Summary.cc:1589
+#: src/Summary.cc:1591
 msgid "System reboot required."
 msgstr "Rendszer-újraindítás szükséges."
 
@@ -1986,7 +1986,7 @@ msgstr "Rendszer-újraindítás szükséges."
 #. Consider to cancel:
 #. Product 'opennSUSE Tumbleweed' requires to be updated by calling 'zypper dup'!
 #. Continue? [y/n/...? shows all options] (y):
-#: src/Summary.cc:1606
+#: src/Summary.cc:1608
 msgid "Consider to cancel:"
 msgstr "Fontolja meg a megszakítást:"
 
@@ -2107,7 +2107,7 @@ msgstr ""
 
 #. translators: this is a prompt text
 #: src/callbacks/media.cc:81 src/callbacks/media.cc:173
-#: src/callbacks/media.cc:253 src/utils/prompt.cc:219 src/utils/prompt.cc:303
+#: src/callbacks/media.cc:253 src/utils/prompt.cc:219 src/utils/prompt.cc:306
 msgid "Abort, retry, ignore?"
 msgstr "Megszakítás, újra, mellőz?"
 
@@ -3471,26 +3471,26 @@ msgstr "Álnév"
 #. 'enabled' flag
 #. translators: property name; short; used like "Name: value"
 #: src/commands/repos/list.cc:47 src/commands/repos/list.cc:230
-#: src/commands/services/list.cc:106 src/repos.cc:1257
+#: src/commands/services/list.cc:106 src/repos.cc:1256
 msgid "Enabled"
 msgstr "Bekapcsolva"
 
 #. GPG Check
 #. translators: property name; short; used like "Name: value"
 #: src/commands/repos/list.cc:48 src/commands/repos/list.cc:234
-#: src/commands/services/list.cc:107 src/repos.cc:1259
+#: src/commands/services/list.cc:107 src/repos.cc:1258
 msgid "GPG Check"
 msgstr "GPG-ellenőrzés"
 
 #. translators: repository priority (in zypper repos -p or -d)
 #. translators: property name; short; used like "Name: value"
 #: src/commands/repos/list.cc:49 src/commands/repos/list.cc:252
-#: src/commands/services/list.cc:113 src/repos.cc:1263
+#: src/commands/services/list.cc:113 src/repos.cc:1262
 msgid "Priority"
 msgstr "Prioritás"
 
 #. translators: property name; short; used like "Name: value"
-#: src/commands/repos/list.cc:50 src/repos.cc:1261
+#: src/commands/repos/list.cc:50 src/repos.cc:1260
 msgid "Autorefresh"
 msgstr "Automatikus frissítés"
 
@@ -3545,7 +3545,7 @@ msgstr ""
 "Az összes definiált telepítési forrás exportálása egyetlen helyi .repo "
 "fájlként."
 
-#: src/commands/repos/list.cc:118 src/repos.cc:1012
+#: src/commands/repos/list.cc:118 src/repos.cc:1011
 msgid "Error reading repositories:"
 msgstr "Hiba a telepítési forrás olvasásakor:"
 
@@ -3675,7 +3675,7 @@ msgstr "Az '%s' kapcsolónak itt nincs szerepe, ezért figyelmen kívül marad."
 msgid "Arguments are not allowed if '%s' is used."
 msgstr "A(z) '%s' használata esetén a kapcsolók használata nem megengedett."
 
-#: src/commands/repos/refresh.cc:195 src/repos.cc:1024
+#: src/commands/repos/refresh.cc:195 src/repos.cc:1023
 msgid "Specified repositories: "
 msgstr "Megadott telepítési forrás: "
 
@@ -3684,7 +3684,7 @@ msgstr "Megadott telepítési forrás: "
 msgid "Refreshing repository '%s'."
 msgstr "A(z) '%s' telepítési forrás frissítése."
 
-#: src/commands/repos/refresh.cc:236 src/repos.cc:845
+#: src/commands/repos/refresh.cc:236 src/repos.cc:844
 #, c-format, boost-format
 msgid "Scanning content of disabled repository '%s'."
 msgstr "A letiltott '%s' telepítési forrás tartalmának vizsgálata."
@@ -3694,7 +3694,7 @@ msgstr "A letiltott '%s' telepítési forrás tartalmának vizsgálata."
 msgid "Skipping disabled repository '%s'"
 msgstr "A letiltott '%s' telepítési forrás kihagyása"
 
-#: src/commands/repos/refresh.cc:262 src/repos.cc:862 src/repos.cc:905
+#: src/commands/repos/refresh.cc:262 src/repos.cc:861 src/repos.cc:904
 #, c-format, boost-format
 msgid "Skipping repository '%s' because of the above error."
 msgstr "A jelzett hiba miatt a(z) %s telepítési forrás kihagyása."
@@ -3725,7 +3725,7 @@ msgstr ""
 msgid "Could not refresh the repositories because of errors."
 msgstr "A jelzett hiba miatt a telepítési forrás frissítése sikertelen."
 
-#: src/commands/repos/refresh.cc:298 src/repos.cc:934
+#: src/commands/repos/refresh.cc:298 src/repos.cc:933
 msgid "Some of the repositories have not been refreshed because of an error."
 msgstr "Hiba miatt néhány telepítési forrás nem került frissítésre."
 
@@ -3784,13 +3784,13 @@ msgstr ""
 msgid "Repository '%s' renamed to '%s'."
 msgstr "A(z) '%s' telepítési forrás átnevezése megtörtént. Az új neve '%s'."
 
-#: src/commands/repos/rename.cc:47 src/repos.cc:1203
+#: src/commands/repos/rename.cc:47 src/repos.cc:1202
 #, c-format, boost-format
 msgid "Repository named '%s' already exists. Please use another alias."
 msgstr ""
 "Ilyen nevű ('%s') telepítési forrás már létezik. Adjon egy másik álnevet."
 
-#: src/commands/repos/rename.cc:52 src/repos.cc:1681
+#: src/commands/repos/rename.cc:52 src/repos.cc:1680
 msgid "Error while modifying the repository:"
 msgstr "Hiba a telepítési forrás módosítása közben:"
 
@@ -3823,7 +3823,7 @@ msgstr "Kevés paraméter. Legalább az URI és álnév megadása szükséges."
 msgid "Repository '%s' not found."
 msgstr "A(z) '%s' telepítési forrás nem található."
 
-#: src/commands/reposerviceoptionsets.cc:35 src/repos.cc:108
+#: src/commands/reposerviceoptionsets.cc:35 src/repos.cc:107
 #, c-format, boost-format
 msgid ""
 "Invalid priority '%s'. Use a positive integer number. The greater the "
@@ -4229,7 +4229,7 @@ msgstr ""
 "A --details beállításhoz hasonlóan, további információkkal, ha találat "
 "lelhető fel (függőségekben való kereséshez hasznos)."
 
-#: src/commands/search/search.cc:290 src/repos.cc:782
+#: src/commands/search/search.cc:290 src/repos.cc:781
 #, c-format, boost-format
 msgid "Specified repository '%s' is disabled."
 msgstr "A megadott '%s' telepítési forrás le van tiltva."
@@ -4247,7 +4247,7 @@ msgstr "Probléma történt a keresés előkészítése vagy végrehajtásakor"
 msgid "See the above message for a hint."
 msgstr "Tekintse meg a fent található hibaüzenetet."
 
-#: src/commands/search/search.cc:495 src/repos.cc:991
+#: src/commands/search/search.cc:495 src/repos.cc:990
 msgid "Running 'zypper refresh' as root might resolve the problem."
 msgstr ""
 "A 'zypper refresh' root felhasználóként való futtatása megoldhatja a "
@@ -4333,7 +4333,7 @@ msgid "Problem retrieving the repository index file for service '%s':"
 msgstr "A(z) '%s' szolgáltatás jegyzékének lekérdezése sikertelen:"
 
 #: src/commands/services/common.cc:138 src/commands/services/refresh.cc:226
-#: src/repos.cc:1733
+#: src/repos.cc:1732
 #, c-format, boost-format
 msgid "Skipping service '%s' because of the above error."
 msgstr "A jelzett hiba miatt a(z) %s szolgáltatás kihagyása."
@@ -5184,21 +5184,16 @@ msgstr ""
 
 #. translators: -d, --directory <DIR>
 #: src/commands/utils/source-download.cc:496
-msgid ""
-"Download all source rpms to this directory. Default: /var/cache/zypper/"
-"source-download"
-msgstr ""
-"AZ összes forrás rpm letöltése ebbe a könyvtárba. Alapértelmezett: /var/"
-"cache/zypper/source-download"
+msgid "Download all source rpms to this directory."
+msgstr "AZ összes forrás rpm letöltése ebbe a könyvtárba."
 
-#. translators: --delete
-#: src/commands/utils/source-download.cc:500
-#: src/commands/utils/source-download.cc:504
-msgid "Delete extraneous source rpms in the local directory."
-msgstr "Törölje az össze nem oda való forráscsomagot a helyi könyvtárból."
+#. translators: --delete/--no-delete
+#: src/commands/utils/source-download.cc:502
+msgid "Whether to delete extraneous source rpms in the local directory."
+msgstr ""
 
 #. translators: --status
-#: src/commands/utils/source-download.cc:508
+#: src/commands/utils/source-download.cc:506
 msgid ""
 "Don't download any source rpms, but show which source rpms are missing or "
 "extraneous."
@@ -5207,12 +5202,12 @@ msgstr ""
 "forráscsomag hiányzik vagy nem oda való."
 
 #. translators: --status
-#: src/commands/utils/source-download.cc:514
+#: src/commands/utils/source-download.cc:512
 msgid "Write a manifest file."
 msgstr "Jegyzékfájl írása."
 
 #. translators: --status
-#: src/commands/utils/source-download.cc:518
+#: src/commands/utils/source-download.cc:516
 msgid "Disable writing a manifest file."
 msgstr "Jegyzékfájl írásának letiltása."
 
@@ -5706,12 +5701,12 @@ msgid "no help available for this option"
 msgstr "ehhez a paraméterhez nem tartozik súgó"
 
 #. translators: used as 'XYZ changed to SOMETHING [volatile]' to tag specific property changes.
-#: src/repos.cc:52
+#: src/repos.cc:51
 msgid "volatile"
 msgstr "átmeneti"
 
 #. translators: 'Volatile' refers to changes we previously tagged as 'XYZ changed to SOMETHING [volatile]'
-#: src/repos.cc:58
+#: src/repos.cc:57
 #, boost-format
 msgid ""
 "Repo '%1%' is managed by service '%2%'. Volatile changes are reset by the "
@@ -5720,19 +5715,19 @@ msgstr ""
 "A(z) '%1%' telepítési forrást a(z) '%2%' szolgáltatás kezeli. Az átmeneti "
 "változtatásokat a következő szolgáltatásfrissítés alaphelyzetbe állítja."
 
-#: src/repos.cc:74
+#: src/repos.cc:73
 msgid "default priority"
 msgstr "alapértelmezett prioritás"
 
-#: src/repos.cc:75
+#: src/repos.cc:74
 msgid "raised priority"
 msgstr "megemelt prioritás"
 
-#: src/repos.cc:75
+#: src/repos.cc:74
 msgid "lowered priority"
 msgstr "csökkentett prioritás"
 
-#: src/repos.cc:179
+#: src/repos.cc:178
 msgid ""
 "Repository priorities are without effect. All enabled repositories share the "
 "same priority."
@@ -5740,16 +5735,16 @@ msgstr ""
 "A telepítési források prioritásaira nincs hatással. Az összes engedélyezett "
 "telepítési forrás prioritása azonos."
 
-#: src/repos.cc:183
+#: src/repos.cc:182
 msgid "Repository priorities in effect:"
 msgstr "A telepítési forrásra alkalmazott prioritások:"
 
-#: src/repos.cc:184
+#: src/repos.cc:183
 #, boost-format
 msgid "See '%1%' for details"
 msgstr "Részletek: '%1%'"
 
-#: src/repos.cc:193
+#: src/repos.cc:192
 #, boost-format
 msgid "%1% repository"
 msgid_plural "%1% repositories"
@@ -5758,57 +5753,57 @@ msgstr[1] "Telepítési forrás"
 
 #. check whether libzypp indicates a refresh is needed, and if so,
 #. print a message
-#: src/repos.cc:226
+#: src/repos.cc:225
 #, c-format, boost-format
 msgid "Checking whether to refresh metadata for %s"
 msgstr "A(z) %s frissített metaadatainak keresése"
 
-#: src/repos.cc:255
+#: src/repos.cc:254
 #, c-format, boost-format
 msgid "Repository '%s' is up to date."
 msgstr "A(z) %s telepítési forrás naprakész."
 
-#: src/repos.cc:261
+#: src/repos.cc:260
 #, c-format, boost-format
 msgid "The up-to-date check of '%s' has been delayed."
 msgstr "A(z) '%s' telepítési forrás állapotellenőrzése késleltetve."
 
-#: src/repos.cc:283
+#: src/repos.cc:282
 msgid "Forcing raw metadata refresh"
 msgstr "Nyers metaadatok frissítésének kikényszerítése"
 
-#: src/repos.cc:289
+#: src/repos.cc:288
 #, c-format, boost-format
 msgid "Retrieving repository '%s' metadata"
 msgstr "A(z) %s telepítési forrás adatainak beolvasása"
 
-#: src/repos.cc:313
+#: src/repos.cc:312
 #, c-format, boost-format
 msgid "Do you want to disable the repository %s permanently?"
 msgstr "Végleg letiltja a(z) %s telepítési forrást?"
 
-#: src/repos.cc:329
+#: src/repos.cc:328
 #, c-format, boost-format
 msgid "Error while disabling repository '%s'."
 msgstr "Hiba történt a(z) '%s' telepítési forrás letiltásakor."
 
-#: src/repos.cc:345
+#: src/repos.cc:344
 #, c-format, boost-format
 msgid "Problem retrieving files from '%s'."
 msgstr "Hiba történt a fájlok letöltésekor a következő helyről: '%s'."
 
-#: src/repos.cc:346 src/repos.cc:1860 src/solve-commit.cc:825
+#: src/repos.cc:345 src/repos.cc:1859 src/solve-commit.cc:825
 #: src/solve-commit.cc:856 src/solve-commit.cc:880
 msgid "Please see the above error message for a hint."
 msgstr "Tekintse meg a fent található hibaüzenetet javaslatért."
 
-#: src/repos.cc:358
+#: src/repos.cc:357
 #, c-format, boost-format
 msgid "No URIs defined for '%s'."
 msgstr "Nincs megadva URI a következőhöz: '%s'."
 
 #. TranslatorExplanation the first %s is a .repo file path
-#: src/repos.cc:363
+#: src/repos.cc:362
 #, c-format, boost-format
 msgid ""
 "Please add one or more base URI (baseurl=URI) entries to %s for repository "
@@ -5817,38 +5812,38 @@ msgstr ""
 "Adjon meg egy vagy több URI-t (baseurl=URI) a(z) %s útvonalhoz a következő "
 "telepítési forráshoz: '%s'."
 
-#: src/repos.cc:377
+#: src/repos.cc:376
 msgid "No alias defined for this repository."
 msgstr "Ehhez a telepítési forráshoz nincs álnév megadva."
 
-#: src/repos.cc:389
+#: src/repos.cc:388
 #, c-format, boost-format
 msgid "Repository '%s' is invalid."
 msgstr "A(z) %s telepítési forrás nem érvényes."
 
-#: src/repos.cc:390
+#: src/repos.cc:389
 msgid ""
 "Please check if the URIs defined for this repository are pointing to a valid "
 "repository."
 msgstr ""
 "Ellenőrizze, hogy a telepítési forráshoz megadott URI megfelelő helyre mutat."
 
-#: src/repos.cc:402
+#: src/repos.cc:401
 #, c-format, boost-format
 msgid "Error retrieving metadata for '%s':"
 msgstr "Hiba történt a(z) '%s' metaadatainak feldolgozása közben:"
 
-#: src/repos.cc:415
+#: src/repos.cc:414
 msgid "Forcing building of repository cache"
 msgstr "Telepítési forrás gyorsítótárának felépítésének kikényszerítése"
 
-#: src/repos.cc:440
+#: src/repos.cc:439
 #, c-format, boost-format
 msgid "Error parsing metadata for '%s':"
 msgstr "Hiba történt a(z) '%s' metaadatainak feldolgozása közben:"
 
 #. TranslatorExplanation Don't translate the URL unless it is translated, too
-#: src/repos.cc:442
+#: src/repos.cc:441
 msgid ""
 "This may be caused by invalid metadata in the repository, or by a bug in the "
 "metadata parser. In the latter case, or if in doubt, please, file a bug "
@@ -5859,52 +5854,52 @@ msgstr ""
 "metaadat-feldolgozó kódban. Amennyiben úgy gondolja jelentse be a hibát a "
 "http://hu.opensuse.org/Zypper oldalon leírtaknak megfelelően"
 
-#: src/repos.cc:451
+#: src/repos.cc:450
 #, c-format, boost-format
 msgid "Repository metadata for '%s' not found in local cache."
 msgstr ""
 "A(z) %s telepítési forrás metaadata nem található a helyi gyorsítótárban."
 
-#: src/repos.cc:459
+#: src/repos.cc:458
 msgid "Error building the cache:"
 msgstr "Hiba történt a gyorsítótár adatbázisának felépítése közben:"
 
-#: src/repos.cc:678
+#: src/repos.cc:677
 #, c-format, boost-format
 msgid "Repository '%s' not found by its alias, number, or URI."
 msgstr ""
 "A(z) '%s' telepítési forrás nem található az álneve száma vagy az URI "
 "alapján."
 
-#: src/repos.cc:680
+#: src/repos.cc:679
 #, c-format, boost-format
 msgid "Use '%s' to get the list of defined repositories."
 msgstr ""
 "A beállított telepítési források listájához használja a '%s' parancsot."
 
-#: src/repos.cc:700
+#: src/repos.cc:699
 #, c-format, boost-format
 msgid "Ignoring disabled repository '%s'"
 msgstr "A letiltott '%s' telepítési forrás kihagyása"
 
-#: src/repos.cc:788
+#: src/repos.cc:787
 #, c-format, boost-format
 msgid "Global option '%s' can be used to temporarily enable repositories."
 msgstr ""
 "A telepítési források ideiglenes engedélyezéséhez használhatja a globális "
 "'%s' opciót."
 
-#: src/repos.cc:804 src/repos.cc:810
+#: src/repos.cc:803 src/repos.cc:809
 #, c-format, boost-format
 msgid "Ignoring repository '%s' because of '%s' option."
 msgstr "A(z) %s telepítési forrás figyelmen kívül hagyása '%s' kapcsoló miatt."
 
-#: src/repos.cc:831 src/repos.cc:919
+#: src/repos.cc:830 src/repos.cc:918
 #, c-format, boost-format
 msgid "Temporarily enabling repository '%s'."
 msgstr "A(z) '%s' telepítési forrás ideiglenes engedélyezése."
 
-#: src/repos.cc:883
+#: src/repos.cc:882
 #, c-format, boost-format
 msgid ""
 "Repository '%s' is out-of-date. You can run 'zypper refresh' as root to "
@@ -5913,7 +5908,7 @@ msgstr ""
 "A(z) '%s' telepítési forrás nem naprakész, frissítéséhez rendszergazdaként "
 "futtathatja a  'zypper refresh' parancsot."
 
-#: src/repos.cc:900
+#: src/repos.cc:899
 #, c-format, boost-format
 msgid ""
 "The metadata cache needs to be built for the '%s' repository. You can run "
@@ -5922,81 +5917,81 @@ msgstr ""
 "A gyorsítótár adatbázisát a(z) '%s' telepítési forráshoz újra kell építeni. "
 "Ennek érdekében rendszergazdaként futtathatja a 'zypper refresh' parancsot."
 
-#: src/repos.cc:926
+#: src/repos.cc:925
 #, c-format, boost-format
 msgid "Repository '%s' stays disabled."
 msgstr "A(z) '%s' telepítési forrás letiltva marad."
 
-#: src/repos.cc:982
+#: src/repos.cc:981
 msgid "Initializing Target"
 msgstr "Cél inicializálása"
 
-#: src/repos.cc:990
+#: src/repos.cc:989
 msgid "Target initialization failed:"
 msgstr "A cél inicializálása meghiúsult:"
 
-#: src/repos.cc:1072
+#: src/repos.cc:1071
 #, c-format, boost-format
 msgid "Cleaning metadata cache for '%s'."
 msgstr "A '%s' telepítési forrás metaadatainak kiürítése."
 
-#: src/repos.cc:1080
+#: src/repos.cc:1079
 #, c-format, boost-format
 msgid "Cleaning raw metadata cache for '%s'."
 msgstr "A '%s' telepítési forrás nyers metaadatainak kiürítése."
 
-#: src/repos.cc:1086
+#: src/repos.cc:1085
 #, c-format, boost-format
 msgid "Keeping raw metadata cache for %s '%s'."
 msgstr "A(z) %s '%s' nyers metaadat gyorsítótárban tartása."
 
 #. translators: meaning the cached rpm files
-#: src/repos.cc:1093
+#: src/repos.cc:1092
 #, c-format, boost-format
 msgid "Cleaning packages for '%s'."
 msgstr "A '%s' telepítési forrás csomagjainak kiürítése."
 
-#: src/repos.cc:1101
+#: src/repos.cc:1100
 #, c-format, boost-format
 msgid "Cannot clean repository '%s' because of an error."
 msgstr "A(z) %s telepítési forrás frissítése során hiba történt."
 
-#: src/repos.cc:1112
+#: src/repos.cc:1111
 msgid "Cleaning installed packages cache."
 msgstr "Telepített csomagok törlése a gyorsítótárból."
 
-#: src/repos.cc:1121
+#: src/repos.cc:1120
 msgid "Cannot clean installed packages cache because of an error."
 msgstr "Hiba miatt nem sikerült a telepített csomagok gyorsítótárának törlése."
 
-#: src/repos.cc:1139
+#: src/repos.cc:1138
 msgid "Could not clean the repositories because of errors."
 msgstr "A jelzett hibák miatt a telepítési források frissítése sikertelen."
 
-#: src/repos.cc:1145
+#: src/repos.cc:1144
 msgid "Some of the repositories have not been cleaned up because of an error."
 msgstr "Hiba miatt néhány telepítési forrás nem került frissítésre."
 
-#: src/repos.cc:1150
+#: src/repos.cc:1149
 msgid "Specified repositories have been cleaned up."
 msgstr "A megadott telepítési források frissítése megtörtént."
 
-#: src/repos.cc:1152
+#: src/repos.cc:1151
 msgid "All repositories have been cleaned up."
 msgstr "Az összes telepítési forrás frissítése megtörtént."
 
-#: src/repos.cc:1174
+#: src/repos.cc:1173
 msgid "This is a changeable read-only media (CD/DVD), disabling autorefresh."
 msgstr ""
 "Ez egy csak olvasható, cserélhető adathordozó (CD/DVD), ezért az automatikus "
 "frissítés letiltásra kerül."
 
-#: src/repos.cc:1195
+#: src/repos.cc:1194
 #, c-format, boost-format
 msgid "Invalid repository alias: '%s'"
 msgstr "Érvénytelen telepítési forrás álnév: '%s'"
 
-#: src/repos.cc:1212
+#: src/repos.cc:1211
 msgid ""
 "Could not determine the type of the repository. Please check if the defined "
 "URIs (see below) point to a valid repository:"
@@ -6004,26 +5999,26 @@ msgstr ""
 "A telepítési forrás típusa nem deríthető ki. Ellenőrizze, hogy az URI "
 "valóban egy érvényes telepítési forrásra mutat:"
 
-#: src/repos.cc:1218
+#: src/repos.cc:1217
 msgid "Can't find a valid repository at given location:"
 msgstr "A megadott helyen nem található érvényes telepítési forrás:"
 
-#: src/repos.cc:1226
+#: src/repos.cc:1225
 msgid "Problem transferring repository data from specified URI:"
 msgstr ""
 "A telepítési forrás adatainak lekérdezése a megadott URI-ról sikertelen:"
 
-#: src/repos.cc:1227
+#: src/repos.cc:1226
 msgid "Please check whether the specified URI is accessible."
 msgstr "Ellenőrizze, hogy a megadott URI valóban elérhető."
 
-#: src/repos.cc:1234
+#: src/repos.cc:1233
 msgid "Unknown problem when adding repository:"
 msgstr "Ismeretlen hiba történt a telepítés forrás hozzáadásakor:"
 
 #. translators: BOOST STYLE POSITIONAL DIRECTIVES ( %N% )
 #. translators: %1% - a repository name
-#: src/repos.cc:1244
+#: src/repos.cc:1243
 #, boost-format
 msgid ""
 "GPG checking is disabled in configuration of repository '%1%'. Integrity and "
@@ -6032,144 +6027,144 @@ msgstr ""
 "A GPG-ellenőrzés le van tiltva a(z) '%1%' telepítési forrásban. A csomagok "
 "sértetlensége és eredete nem ellenőrizhető."
 
-#: src/repos.cc:1249
+#: src/repos.cc:1248
 #, c-format, boost-format
 msgid "Repository '%s' successfully added"
 msgstr "A(z) '%s' telepítési forrás hozzáadása sikeres"
 
-#: src/repos.cc:1275
+#: src/repos.cc:1274
 #, c-format, boost-format
 msgid "Reading data from '%s' media"
 msgstr "Az adatok betöltése a következő a(z) '%s' adathordozóról"
 
-#: src/repos.cc:1281
+#: src/repos.cc:1280
 #, c-format, boost-format
 msgid "Problem reading data from '%s' media"
 msgstr "Az adatok betöltése  a(z) '%s' adathordozóról sikertelen"
 
-#: src/repos.cc:1282
+#: src/repos.cc:1281
 msgid "Please check if your installation media is valid and readable."
 msgstr ""
 "Ellenőrizze, hogy a telepítési adathordozó valóban érvényes és olvasható."
 
-#: src/repos.cc:1289
+#: src/repos.cc:1288
 #, c-format, boost-format
 msgid "Reading data from '%s' media is delayed until next refresh."
 msgstr ""
 "Az adatok „%s” adathordozóról történő olvasása nem működik a következő "
 "frissítésig."
 
-#: src/repos.cc:1358
+#: src/repos.cc:1357
 msgid "Problem accessing the file at the specified URI"
 msgstr "A fájl adatainak lekérdezése a megadott URI-ról sikertelen"
 
-#: src/repos.cc:1359
+#: src/repos.cc:1358
 msgid "Please check if the URI is valid and accessible."
 msgstr "Ellenőrizze, hogy a megadott URI érvényes és valóban elérhető."
 
-#: src/repos.cc:1366
+#: src/repos.cc:1365
 msgid "Problem parsing the file at the specified URI"
 msgstr "A fájl feldolgozása a megadott URI-ról sikertelen"
 
 #. TranslatorExplanation Don't translate the '.repo' string.
-#: src/repos.cc:1368
+#: src/repos.cc:1367
 msgid "Is it a .repo file?"
 msgstr "Ez egy .repo fájl?"
 
-#: src/repos.cc:1375
+#: src/repos.cc:1374
 msgid "Problem encountered while trying to read the file at the specified URI"
 msgstr "Hiba történt a megadott URI-n található fájl beolvasása közben"
 
-#: src/repos.cc:1388
+#: src/repos.cc:1387
 msgid "Repository with no alias defined found in the file, skipping."
 msgstr ""
 "A fájlban egy álnévvel nem rendelkező telepítési forrás lett megadva, amely "
 "így kihagyásra kerül."
 
-#: src/repos.cc:1394
+#: src/repos.cc:1393
 #, c-format, boost-format
 msgid "Repository '%s' has no URI defined, skipping."
 msgstr ""
 "A(z) %s telepítési forráshoz nincs megadva URI, ezért kihagyásra kerül."
 
-#: src/repos.cc:1442
+#: src/repos.cc:1441
 #, c-format, boost-format
 msgid "Repository '%s' has been removed."
 msgstr "A(z) '%s' telepítési forrás eltávolítása megtörtént."
 
-#: src/repos.cc:1590
+#: src/repos.cc:1589
 #, c-format, boost-format
 msgid "Repository '%s' priority has been left unchanged (%d)"
 msgstr "A(z) '%s' telepítési forrás prioritása változatlan maradt (%d)"
 
-#: src/repos.cc:1623
+#: src/repos.cc:1622
 #, c-format, boost-format
 msgid "Repository '%s' has been successfully enabled."
 msgstr "A(z) %s telepítési forrás engedélyezése sikeres."
 
-#: src/repos.cc:1625
+#: src/repos.cc:1624
 #, c-format, boost-format
 msgid "Repository '%s' has been successfully disabled."
 msgstr "A(z) %s telepítési forrás letiltása sikeres."
 
-#: src/repos.cc:1632
+#: src/repos.cc:1631
 #, c-format, boost-format
 msgid "Autorefresh has been enabled for repository '%s'."
 msgstr "A(z) '%s' telepítési forrás automatikus frissítése engedélyezve."
 
-#: src/repos.cc:1634
+#: src/repos.cc:1633
 #, c-format, boost-format
 msgid "Autorefresh has been disabled for repository '%s'."
 msgstr "A(z) '%s' telepítési forrás automatikus frissítése letiltva."
 
-#: src/repos.cc:1641
+#: src/repos.cc:1640
 #, c-format, boost-format
 msgid "RPM files caching has been enabled for repository '%s'."
 msgstr ""
 "Az RPM-fájlok gyorsítótárazása a(z) '%s' telepítési forráshoz engedélyezve "
 "lett."
 
-#: src/repos.cc:1643
+#: src/repos.cc:1642
 #, c-format, boost-format
 msgid "RPM files caching has been disabled for repository '%s'."
 msgstr ""
 "Az RPM-fájlok gyorsítótárazása a(z) '%s' telepítési forráshoz kikapcsolva."
 
-#: src/repos.cc:1650
+#: src/repos.cc:1649
 #, c-format, boost-format
 msgid "GPG check has been enabled for repository '%s'."
 msgstr "Az GPG-ellenőrzés engedélyezve van a(z) '%s' telepítési forráshoz."
 
-#: src/repos.cc:1652
+#: src/repos.cc:1651
 #, c-format, boost-format
 msgid "GPG check has been disabled for repository '%s'."
 msgstr "Az GPG-ellenőrzés le van tiltva a(z) '%s' telepítési forráshoz."
 
-#: src/repos.cc:1658
+#: src/repos.cc:1657
 #, c-format, boost-format
 msgid "Repository '%s' priority has been set to %d."
 msgstr "A(z) '%s' telepítési forrás %d prioritásának beállítása megtörtént."
 
-#: src/repos.cc:1664
+#: src/repos.cc:1663
 #, c-format, boost-format
 msgid "Name of repository '%s' has been set to '%s'."
 msgstr "A(z) '%s' telepítési forrás neve átállítva erre:'%s'."
 
-#: src/repos.cc:1675
+#: src/repos.cc:1674
 #, c-format, boost-format
 msgid "Nothing to change for repository '%s'."
 msgstr "A(z) '%s' telepítési forrásban nincs módosítás."
 
-#: src/repos.cc:1682
+#: src/repos.cc:1681
 #, c-format, boost-format
 msgid "Leaving repository %s unchanged."
 msgstr "A(z) %s telepítési forrás változatlan maradt."
 
-#: src/repos.cc:1769
+#: src/repos.cc:1768
 msgid "Loading repository data..."
 msgstr "Telepítési forrás adatainak beolvasása..."
 
-#: src/repos.cc:1771
+#: src/repos.cc:1770
 msgid ""
 "No repositories defined. Operating only with the installed resolvables. "
 "Nothing can be installed."
@@ -6177,35 +6172,35 @@ msgstr ""
 "Nincs megadva letöltési forrás. A művelet csak a telepített feloldandókkal "
 "történik. Egyetlen csomag sem telepíthető."
 
-#: src/repos.cc:1791
+#: src/repos.cc:1790
 #, c-format, boost-format
 msgid "Retrieving repository '%s' data..."
 msgstr "A(z) %s telepítési forrás adatainak beolvasása..."
 
-#: src/repos.cc:1797
+#: src/repos.cc:1796
 #, c-format, boost-format
 msgid "Repository '%s' not cached. Caching..."
 msgstr ""
 "A(z) '%s' telepítési forrás nincs a gyorsítótárban. Beolvasás folyamatban..."
 
-#: src/repos.cc:1803 src/repos.cc:1837
+#: src/repos.cc:1802 src/repos.cc:1836
 #, c-format, boost-format
 msgid "Problem loading data from '%s'"
 msgstr "Az adatok betöltése sikertelen a következő helyről: '%s'"
 
-#: src/repos.cc:1807
+#: src/repos.cc:1806
 #, c-format, boost-format
 msgid "Repository '%s' could not be refreshed. Using old cache."
 msgstr ""
 "A(z) '%s' telepítési forrás frissítése nem sikerült. A korábbi gyorsítótár "
 "kerül felhasználásra."
 
-#: src/repos.cc:1811 src/repos.cc:1840
+#: src/repos.cc:1810 src/repos.cc:1839
 #, c-format, boost-format
 msgid "Resolvables from '%s' not loaded because of error."
 msgstr "Hiba történt, így \"%s\" feloldhatói nem tölthetők be."
 
-#: src/repos.cc:1828
+#: src/repos.cc:1827
 #, c-format, boost-format
 msgid ""
 "Repository '%s' appears to be outdated. Consider using a different mirror or "
@@ -6215,38 +6210,38 @@ msgstr ""
 "kiszolgáló használatát."
 
 #. translators: the first %s is 'zypper refresh' and the second 'zypper clean -m'
-#: src/repos.cc:1839
+#: src/repos.cc:1838
 #, c-format, boost-format
 msgid "Try '%s', or even '%s' before doing so."
 msgstr "Próbálja ki ezt: '%s', vagy ezt: '%s', mielőtt tovább lép."
 
-#: src/repos.cc:1850
+#: src/repos.cc:1849
 msgid "Reading installed packages..."
 msgstr "Telepített csomagok beolvasása..."
 
-#: src/repos.cc:1859
+#: src/repos.cc:1858
 msgid "Problem occurred while reading the installed packages:"
 msgstr "Probléma adódott a telepített csomagok olvasása közben:"
 
-#: src/repos.cc:1876
+#: src/repos.cc:1875
 #, c-format, boost-format
 msgid "'%s' looks like an RPM file. Will try to download it."
 msgstr "A '%s' egy RPM-fájlnak tűnik. Letöltés megkísérlése."
 
-#: src/repos.cc:1885
+#: src/repos.cc:1884
 #, c-format, boost-format
 msgid "Problem with the RPM file specified as '%s', skipping."
 msgstr ""
 "Probléma van az RPM-fájl '%s' típusként történő megadásával, ezért figyelmen "
 "kívül marad."
 
-#: src/repos.cc:1907
+#: src/repos.cc:1906
 #, c-format, boost-format
 msgid "Problem reading the RPM header of %s. Is it an RPM file?"
 msgstr ""
 "Hiba történt a(z) %s RPM-fejléc beolvasása közben. Ez valóban RPM-fájl?"
 
-#: src/repos.cc:1927
+#: src/repos.cc:1926
 msgid "Plain RPM files cache"
 msgstr "RPM-fájlok gyorsítótára"
 
@@ -7130,17 +7125,17 @@ msgstr ""
 msgid "shows all options"
 msgstr "az összes lehetőség megjelenítése"
 
-#: src/utils/prompt.cc:194 src/utils/prompt.cc:312 src/utils/prompt.cc:321
-#: src/utils/prompt.cc:419
+#: src/utils/prompt.cc:194 src/utils/prompt.cc:315 src/utils/prompt.cc:324
+#: src/utils/prompt.cc:422
 msgid "yes"
 msgstr "igen"
 
-#: src/utils/prompt.cc:194 src/utils/prompt.cc:312 src/utils/prompt.cc:321
-#: src/utils/prompt.cc:419
+#: src/utils/prompt.cc:194 src/utils/prompt.cc:315 src/utils/prompt.cc:324
+#: src/utils/prompt.cc:422
 msgid "no"
 msgstr "nem"
 
-#: src/utils/prompt.cc:212 src/utils/prompt.cc:257
+#: src/utils/prompt.cc:212 src/utils/prompt.cc:260
 #, c-format, boost-format
 msgid "Retrying in %u seconds..."
 msgstr "Újrapróbálkozás %u másodperc múlva..."
@@ -7151,34 +7146,34 @@ msgstr "Újrapróbálkozás %u másodperc múlva..."
 #. the answers must be separated by slash characters '/' and must
 #. correspond to abort/retry/ignore in that order.
 #. The answers should be lower case letters.
-#: src/utils/prompt.cc:218 src/utils/prompt.cc:302
+#: src/utils/prompt.cc:218 src/utils/prompt.cc:305
 msgid "a/r/i"
 msgstr "m/r/l"
 
-#: src/utils/prompt.cc:267
+#: src/utils/prompt.cc:270
 #, c-format, boost-format
 msgid "Autoselecting '%s' after %u second."
 msgid_plural "Autoselecting '%s' after %u seconds."
 msgstr[0] "%s automatikus kiválasztása %u másodperc után."
 msgstr[1] "%s automatikus kiválasztása %u másodperc után."
 
-#: src/utils/prompt.cc:284
+#: src/utils/prompt.cc:287
 msgid "Trying again..."
 msgstr "Újrapróbálkozás..."
 
-#: src/utils/prompt.cc:321
+#: src/utils/prompt.cc:324
 msgid "always"
 msgstr "mindig"
 
-#: src/utils/prompt.cc:321
+#: src/utils/prompt.cc:324
 msgid "never"
 msgstr "soha"
 
-#: src/utils/prompt.cc:367
+#: src/utils/prompt.cc:370
 msgid "Cannot read input: bad stream or EOF."
 msgstr "A bemenet nem olvasható: rossz adatfolyam vagy véget ért a fájl (EOF)."
 
-#: src/utils/prompt.cc:368
+#: src/utils/prompt.cc:371
 #, c-format, boost-format
 msgid ""
 "If you run zypper without a terminal, use '%s' global\n"
@@ -7188,31 +7183,41 @@ msgstr ""
 "kapcsolót, hogy a zypper az alapértelmezett válaszokat használja kérdés\n"
 "esetén."
 
-#: src/utils/prompt.cc:407
+#: src/utils/prompt.cc:410
 #, c-format, boost-format
 msgid "Invalid answer '%s'."
 msgstr "Érvénytelen válasz: '%s'."
 
-#: src/utils/prompt.cc:410
+#: src/utils/prompt.cc:413
 #, c-format, boost-format
 msgid "Ambiguous answer '%s'."
 msgstr "Nem egyértelmű válasz: '%s'."
 
 #. translators: the %s are: 'y', 'yes' (translated), 'n', and 'no' (translated).
-#: src/utils/prompt.cc:418
+#: src/utils/prompt.cc:421
 #, c-format, boost-format
 msgid "Enter '%s' for '%s' or '%s' for '%s' if nothing else works for you."
 msgstr ""
 "Válassza az %s-t ha '%s'-hez vagy az '%s' ha '%s', amennyiben más nem "
 "működik."
 
-#: src/utils/prompt.cc:423
+#: src/utils/prompt.cc:426
 msgid ""
 "If nothing else works enter '#1' to select the 1st option, '#2' for the 2nd "
 "one, ..."
 msgstr ""
 "Ha semmi más nem működik, a '#1' beírásával választhatja ki az 1. "
 "lehetőséget, a '#2' beírásával a 2. lehetőséget..."
+
+#~ msgid ""
+#~ "Download all source rpms to this directory. Default: /var/cache/zypper/"
+#~ "source-download"
+#~ msgstr ""
+#~ "AZ összes forrás rpm letöltése ebbe a könyvtárba. Alapértelmezett: /var/"
+#~ "cache/zypper/source-download"
+
+#~ msgid "Delete extraneous source rpms in the local directory."
+#~ msgstr "Törölje az össze nem oda való forráscsomagot a helyi könyvtárból."
 
 #~ msgid "ping [OPTIONS]"
 #~ msgstr "ping [kapcsolók]"

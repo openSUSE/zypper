@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-11 10:04+0200\n"
+"POT-Creation-Date: 2021-01-07 18:15+0100\n"
 "PO-Revision-Date: 2019-05-14 15:33+0000\n"
 "Last-Translator: Mindaugas Baranauskas <opensuse.lietuviu.kalba@gmail.com>\n"
 "Language-Team: Lithuanian <https://l10n.opensuse.org/projects/zypper/master/"
@@ -561,11 +561,11 @@ msgstr ""
 msgid "Consider only patches which affect the package management itself."
 msgstr ""
 
-#: src/output/Out.h:26 src/repos.cc:126 src/repos.cc:154
+#: src/output/Out.h:26 src/repos.cc:125 src/repos.cc:153
 msgid "Yes"
 msgstr "Taip"
 
-#: src/output/Out.h:26 src/locales.cc:72 src/repos.cc:132 src/repos.cc:160
+#: src/output/Out.h:26 src/locales.cc:72 src/repos.cc:131 src/repos.cc:159
 msgid "No"
 msgstr "Ne"
 
@@ -659,7 +659,7 @@ msgstr "tipas"
 #. translators: property name; short; used like "Name: value"
 #: src/utils/flags/zyppflags.h:49 src/commands/repos/list.cc:42
 #: src/commands/repos/list.cc:268 src/commands/services/list.cc:116
-#: src/repos.cc:1255
+#: src/repos.cc:1254
 msgid "URI"
 msgstr "URI"
 
@@ -1939,7 +1939,7 @@ msgid "After the operation, %s will be freed."
 msgstr "Įvykdžius, bus atlaisvinta %s."
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
-#: src/Summary.cc:1415
+#: src/Summary.cc:1416
 msgid "package to upgrade"
 msgid_plural "packages to upgrade"
 msgstr[0] "naujovintinas paketas"
@@ -1948,7 +1948,7 @@ msgstr[2] "naujovintinų paketų"
 msgstr[3] "naujovintinas paketas"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
-#: src/Summary.cc:1426
+#: src/Summary.cc:1427
 msgid "to downgrade"
 msgid_plural "to downgrade"
 msgstr[0] "pakeistinas senesniu"
@@ -1957,7 +1957,7 @@ msgstr[2] "pakeistinų senesniais"
 msgstr[3] "pakeistinas senesniu"
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
-#: src/Summary.cc:1429
+#: src/Summary.cc:1430
 msgid "package to downgrade"
 msgid_plural "packages to downgrade"
 msgstr[0] "pakeistinas senesniu paketas"
@@ -1966,7 +1966,7 @@ msgstr[2] "pakeistinų senesniais paketų"
 msgstr[3] "pakeistinas senesniu paketas"
 
 #. translators: this text will be preceded by a number e.g. "5 new"
-#: src/Summary.cc:1440
+#: src/Summary.cc:1441
 msgid "new"
 msgid_plural "new"
 msgstr[0] "naujas"
@@ -1975,7 +1975,7 @@ msgstr[2] "naujų"
 msgstr[3] "naujas"
 
 #. translators: this text will be preceded by a number e.g. "5 new to install"
-#: src/Summary.cc:1443
+#: src/Summary.cc:1444
 msgid "new package to install"
 msgid_plural "new packages to install"
 msgstr[0] "naujai įdiegtinas paketas"
@@ -1984,7 +1984,7 @@ msgstr[2] "naujai įdiegtinų paketų"
 msgstr[3] "naujai įdiegtinas paketas"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
-#: src/Summary.cc:1454
+#: src/Summary.cc:1455
 msgid "to reinstall"
 msgid_plural "to reinstall"
 msgstr[0] "įdiegtinas iš naujo"
@@ -1993,7 +1993,7 @@ msgstr[2] "įdiegtinų iš naujo"
 msgstr[3] "įdiegtinas iš naujo"
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
-#: src/Summary.cc:1457
+#: src/Summary.cc:1458
 msgid "package to reinstall"
 msgid_plural "packages to reinstall"
 msgstr[0] "įdiegtinas iš naujo paketas"
@@ -2002,7 +2002,7 @@ msgstr[2] "įdiegtinų iš naujo paketų"
 msgstr[3] "įdiegtinas iš naujo paketas"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
-#: src/Summary.cc:1468
+#: src/Summary.cc:1469
 msgid "to remove"
 msgid_plural "to remove"
 msgstr[0] "pašalintinas"
@@ -2011,7 +2011,7 @@ msgstr[2] "pašalintinų"
 msgstr[3] "pašalintinas"
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
-#: src/Summary.cc:1471
+#: src/Summary.cc:1472
 msgid "package to remove"
 msgid_plural "packages to remove"
 msgstr[0] "pašalintinas paketas"
@@ -2020,7 +2020,7 @@ msgstr[2] "pašalintinų paketų"
 msgstr[3] "pašalintinas paketas"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
-#: src/Summary.cc:1482
+#: src/Summary.cc:1483
 msgid "to change vendor"
 msgid_plural " to change vendor"
 msgstr[0] "pakeis gamintoją"
@@ -2029,7 +2029,7 @@ msgstr[2] "pakeis gamintoją"
 msgstr[3] "pakeis gamintoją"
 
 #. translators: this text will be preceded by a number e.g. "5 packages ..."
-#: src/Summary.cc:1485
+#: src/Summary.cc:1486
 msgid "package will change vendor"
 msgid_plural "packages will change vendor"
 msgstr[0] "paketas pakeis gamintoją"
@@ -2038,7 +2038,7 @@ msgstr[2] "paketų pakeis gamintoją"
 msgstr[3] "paketas pakeis gamintoją"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
-#: src/Summary.cc:1496
+#: src/Summary.cc:1497
 msgid "to change arch"
 msgid_plural "to change arch"
 msgstr[0] "pakeis architektūrą"
@@ -2047,7 +2047,7 @@ msgstr[2] "pakeis architektūrą"
 msgstr[3] "pakeis architektūrą"
 
 #. translators: this text will be preceded by a number e.g. "5 packages ..."
-#: src/Summary.cc:1499
+#: src/Summary.cc:1500
 msgid "package will change arch"
 msgid_plural "packages will change arch"
 msgstr[0] "paketas pakeis architektūrą"
@@ -2056,7 +2056,7 @@ msgstr[2] "paketų pakeis architektūrą"
 msgstr[3] "paketas pakeis architektūrą"
 
 #. translators: this text will be preceded by a number e.g. "5 new"
-#: src/Summary.cc:1510
+#: src/Summary.cc:1511
 msgid "source package"
 msgid_plural "source packages"
 msgstr[0] "šaltinis paketas"
@@ -2065,7 +2065,7 @@ msgstr[2] "šaltinių paketų"
 msgstr[3] "šaltinis paketas"
 
 #. translators: this text will be preceded by a number e.g. "5 new to install"
-#: src/Summary.cc:1513
+#: src/Summary.cc:1514
 msgid "source package to install"
 msgid_plural "source packages to install"
 msgstr[0] "naujai įdiegsimas paketas"
@@ -2074,7 +2074,7 @@ msgstr[2] "naujai įdiegsimų paketų"
 msgstr[3] "naujai įdiegsimas paketas"
 
 #. patch command (auto)restricted to update stack patches
-#: src/Summary.cc:1586
+#: src/Summary.cc:1588
 msgid ""
 "Package manager restart required. (Run this command once again after the "
 "update stack got updated)"
@@ -2082,7 +2082,7 @@ msgstr ""
 "Reikia iš naujo paleisti paketų tvarkytuvę. (Kai atsinaujins pati "
 "atnaujinimo sistema, paleiskite šią komandą iš naujo)"
 
-#: src/Summary.cc:1589
+#: src/Summary.cc:1591
 msgid "System reboot required."
 msgstr "Reikia paleisti iš naujo."
 
@@ -2094,7 +2094,7 @@ msgstr "Reikia paleisti iš naujo."
 #. Consider to cancel:
 #. Product 'opennSUSE Tumbleweed' requires to be updated by calling 'zypper dup'!
 #. Continue? [y/n/...? shows all options] (y):
-#: src/Summary.cc:1606
+#: src/Summary.cc:1608
 msgid "Consider to cancel:"
 msgstr ""
 
@@ -2206,7 +2206,7 @@ msgstr "Uždrausti SSL liudijimo tapatumo patikrinimą ir tęsti."
 
 #. translators: this is a prompt text
 #: src/callbacks/media.cc:81 src/callbacks/media.cc:173
-#: src/callbacks/media.cc:253 src/utils/prompt.cc:219 src/utils/prompt.cc:303
+#: src/callbacks/media.cc:253 src/utils/prompt.cc:219 src/utils/prompt.cc:306
 msgid "Abort, retry, ignore?"
 msgstr "Nutraukti, kartoti, ignoruoti?"
 
@@ -3485,26 +3485,26 @@ msgstr "Pseudonimas"
 #. 'enabled' flag
 #. translators: property name; short; used like "Name: value"
 #: src/commands/repos/list.cc:47 src/commands/repos/list.cc:230
-#: src/commands/services/list.cc:106 src/repos.cc:1257
+#: src/commands/services/list.cc:106 src/repos.cc:1256
 msgid "Enabled"
 msgstr "Įgalinta"
 
 #. GPG Check
 #. translators: property name; short; used like "Name: value"
 #: src/commands/repos/list.cc:48 src/commands/repos/list.cc:234
-#: src/commands/services/list.cc:107 src/repos.cc:1259
+#: src/commands/services/list.cc:107 src/repos.cc:1258
 msgid "GPG Check"
 msgstr "GPG patikra"
 
 #. translators: repository priority (in zypper repos -p or -d)
 #. translators: property name; short; used like "Name: value"
 #: src/commands/repos/list.cc:49 src/commands/repos/list.cc:252
-#: src/commands/services/list.cc:113 src/repos.cc:1263
+#: src/commands/services/list.cc:113 src/repos.cc:1262
 msgid "Priority"
 msgstr "Prioritetas"
 
 #. translators: property name; short; used like "Name: value"
-#: src/commands/repos/list.cc:50 src/repos.cc:1261
+#: src/commands/repos/list.cc:50 src/repos.cc:1260
 msgid "Autorefresh"
 msgstr "Atsinaujinti"
 
@@ -3557,7 +3557,7 @@ msgstr "Pateikia aprašytų saugyklų sąrašą."
 msgid "Export all defined repositories as a single local .repo file."
 msgstr "Visas aprašytas saugyklas eksportuoja į vieną vietinę .repo rinkmeną."
 
-#: src/commands/repos/list.cc:118 src/repos.cc:1012
+#: src/commands/repos/list.cc:118 src/repos.cc:1011
 msgid "Error reading repositories:"
 msgstr "Klaida skaitant saugyklas:"
 
@@ -3684,7 +3684,7 @@ msgstr "Čia bendra parinktis „%s“ yra neveiksni."
 msgid "Arguments are not allowed if '%s' is used."
 msgstr "Argumentai neleiskite, jei naudojama  „%s“."
 
-#: src/commands/repos/refresh.cc:195 src/repos.cc:1024
+#: src/commands/repos/refresh.cc:195 src/repos.cc:1023
 msgid "Specified repositories: "
 msgstr "Nurodytos saugyklos:"
 
@@ -3693,7 +3693,7 @@ msgstr "Nurodytos saugyklos:"
 msgid "Refreshing repository '%s'."
 msgstr "Atnaujinama saugykla „%s“."
 
-#: src/commands/repos/refresh.cc:236 src/repos.cc:845
+#: src/commands/repos/refresh.cc:236 src/repos.cc:844
 #, c-format, boost-format
 msgid "Scanning content of disabled repository '%s'."
 msgstr "Peržvelgiamas uždraustos saugyklos „%s“ turinys."
@@ -3703,7 +3703,7 @@ msgstr "Peržvelgiamas uždraustos saugyklos „%s“ turinys."
 msgid "Skipping disabled repository '%s'"
 msgstr "Praleidžiama uždrausta saugykla „%s“."
 
-#: src/commands/repos/refresh.cc:262 src/repos.cc:862 src/repos.cc:905
+#: src/commands/repos/refresh.cc:262 src/repos.cc:861 src/repos.cc:904
 #, c-format, boost-format
 msgid "Skipping repository '%s' because of the above error."
 msgstr "Saugykla „%s“ praleidžiama dėl įvykusios klaidos."
@@ -3731,7 +3731,7 @@ msgstr "Saugyklų pridėjimui ar įgalinimui naudokite komandas „%s“ arba �
 msgid "Could not refresh the repositories because of errors."
 msgstr "Dėl įvykusių klaidų negalima atnaujinti saugyklų."
 
-#: src/commands/repos/refresh.cc:298 src/repos.cc:934
+#: src/commands/repos/refresh.cc:298 src/repos.cc:933
 msgid "Some of the repositories have not been refreshed because of an error."
 msgstr "Dėl įvykusių klaidų kai kurios saugyklos nebuvo atnaujintos."
 
@@ -3787,12 +3787,12 @@ msgstr ""
 msgid "Repository '%s' renamed to '%s'."
 msgstr "Saugyklos „%s“ pavadinimas pakeistas į „%s“"
 
-#: src/commands/repos/rename.cc:47 src/repos.cc:1203
+#: src/commands/repos/rename.cc:47 src/repos.cc:1202
 #, c-format, boost-format
 msgid "Repository named '%s' already exists. Please use another alias."
 msgstr "Saugykla pavadinimu „%s“ jau yra. Nurodykite kitą pseudonimą."
 
-#: src/commands/repos/rename.cc:52 src/repos.cc:1681
+#: src/commands/repos/rename.cc:52 src/repos.cc:1680
 msgid "Error while modifying the repository:"
 msgstr "Keičiant saugyklą įvyko klaida:"
 
@@ -3825,7 +3825,7 @@ msgstr "Per mažai argumentų. Bent jau turi būti nurodytas URI ir pseudonimas.
 msgid "Repository '%s' not found."
 msgstr "Saugykla „%s“ nerasta."
 
-#: src/commands/reposerviceoptionsets.cc:35 src/repos.cc:108
+#: src/commands/reposerviceoptionsets.cc:35 src/repos.cc:107
 #, c-format, boost-format
 msgid ""
 "Invalid priority '%s'. Use a positive integer number. The greater the "
@@ -4207,7 +4207,7 @@ msgid ""
 "(useful for search in dependencies)."
 msgstr ""
 
-#: src/commands/search/search.cc:290 src/repos.cc:782
+#: src/commands/search/search.cc:290 src/repos.cc:781
 #, c-format, boost-format
 msgid "Specified repository '%s' is disabled."
 msgstr "Nurodyta saugykla „%s“ yra uždrausta."
@@ -4225,7 +4225,7 @@ msgstr "Nesklandumai paruošiant ar paiešką"
 msgid "See the above message for a hint."
 msgstr "Žiūrėkite užuominą virš pranešimo."
 
-#: src/commands/search/search.cc:495 src/repos.cc:991
+#: src/commands/search/search.cc:495 src/repos.cc:990
 msgid "Running 'zypper refresh' as root might resolve the problem."
 msgstr ""
 "Šią bėdą galite išspręsti prisijungę kaip root naudotojas ir įvykdę „zypper "
@@ -4310,7 +4310,7 @@ msgid "Problem retrieving the repository index file for service '%s':"
 msgstr "Nesklandumai gaunant paslaugos „%s“ turinio rinkmeną."
 
 #: src/commands/services/common.cc:138 src/commands/services/refresh.cc:226
-#: src/repos.cc:1733
+#: src/repos.cc:1732
 #, c-format, boost-format
 msgid "Skipping service '%s' because of the above error."
 msgstr "Dėl įvykusios klaidos praleidžiama paslauga „%s“."
@@ -5111,21 +5111,16 @@ msgstr "Į vietinį katalogą parsiųsti visų paketų šaltinius paketus."
 
 #. translators: -d, --directory <DIR>
 #: src/commands/utils/source-download.cc:496
-msgid ""
-"Download all source rpms to this directory. Default: /var/cache/zypper/"
-"source-download"
-msgstr ""
-"Visus šaltinius paketus siųsti į šį katalogą. Numatytasis: /var/cache/zypper/"
-"source-download"
+msgid "Download all source rpms to this directory."
+msgstr "Visus šaltinius paketus siųsti į šį katalogą."
 
-#. translators: --delete
-#: src/commands/utils/source-download.cc:500
-#: src/commands/utils/source-download.cc:504
-msgid "Delete extraneous source rpms in the local directory."
-msgstr "Pašalinti nebereikalingus šaltinius rpm."
+#. translators: --delete/--no-delete
+#: src/commands/utils/source-download.cc:502
+msgid "Whether to delete extraneous source rpms in the local directory."
+msgstr ""
 
 #. translators: --status
-#: src/commands/utils/source-download.cc:508
+#: src/commands/utils/source-download.cc:506
 msgid ""
 "Don't download any source rpms, but show which source rpms are missing or "
 "extraneous."
@@ -5134,12 +5129,12 @@ msgstr ""
 "paketus."
 
 #. translators: --status
-#: src/commands/utils/source-download.cc:514
+#: src/commands/utils/source-download.cc:512
 msgid "Write a manifest file."
 msgstr ""
 
 #. translators: --status
-#: src/commands/utils/source-download.cc:518
+#: src/commands/utils/source-download.cc:516
 msgid "Disable writing a manifest file."
 msgstr ""
 
@@ -5629,12 +5624,12 @@ msgid "no help available for this option"
 msgstr "šiaip parinkčiai paaiškinimo nėra"
 
 #. translators: used as 'XYZ changed to SOMETHING [volatile]' to tag specific property changes.
-#: src/repos.cc:52
+#: src/repos.cc:51
 msgid "volatile"
 msgstr "kaprizingas"
 
 #. translators: 'Volatile' refers to changes we previously tagged as 'XYZ changed to SOMETHING [volatile]'
-#: src/repos.cc:58
+#: src/repos.cc:57
 #, boost-format
 msgid ""
 "Repo '%1%' is managed by service '%2%'. Volatile changes are reset by the "
@@ -5643,19 +5638,19 @@ msgstr ""
 "„%1%“ saugyklą tvarko „%2%“ paslauga. Atnaujinus paslaugą, kaprizingi "
 "pakeitimai atstatysimi į pradinę būseną!"
 
-#: src/repos.cc:74
+#: src/repos.cc:73
 msgid "default priority"
 msgstr "numatytasis prioritetas"
 
-#: src/repos.cc:75
+#: src/repos.cc:74
 msgid "raised priority"
 msgstr "aukštesnis prioritetas"
 
-#: src/repos.cc:75
+#: src/repos.cc:74
 msgid "lowered priority"
 msgstr "žemesnis prioritetas"
 
-#: src/repos.cc:179
+#: src/repos.cc:178
 msgid ""
 "Repository priorities are without effect. All enabled repositories share the "
 "same priority."
@@ -5663,16 +5658,16 @@ msgstr ""
 "Saugyklų prioritetai čia nieko nekeičia, nes visų jūsų įgalintų saugyklų "
 "prioritetai vienodi."
 
-#: src/repos.cc:183
+#: src/repos.cc:182
 msgid "Repository priorities in effect:"
 msgstr "Saugyklų prioritetų poveikis:"
 
-#: src/repos.cc:184
+#: src/repos.cc:183
 #, boost-format
 msgid "See '%1%' for details"
 msgstr "„%1%“ pateikia daugiau informacijos"
 
-#: src/repos.cc:193
+#: src/repos.cc:192
 #, boost-format
 msgid "%1% repository"
 msgid_plural "%1% repositories"
@@ -5683,57 +5678,57 @@ msgstr[3] "%1% saugykla"
 
 #. check whether libzypp indicates a refresh is needed, and if so,
 #. print a message
-#: src/repos.cc:226
+#: src/repos.cc:225
 #, c-format, boost-format
 msgid "Checking whether to refresh metadata for %s"
 msgstr "Tikrinama, ar atnaujinti %s metaduomenis "
 
-#: src/repos.cc:255
+#: src/repos.cc:254
 #, c-format, boost-format
 msgid "Repository '%s' is up to date."
 msgstr "Saugykla „%s“ atnaujinta."
 
-#: src/repos.cc:261
+#: src/repos.cc:260
 #, c-format, boost-format
 msgid "The up-to-date check of '%s' has been delayed."
 msgstr "„%s“ naujumo patikrinimas atidėtas."
 
-#: src/repos.cc:283
+#: src/repos.cc:282
 msgid "Forcing raw metadata refresh"
 msgstr "Priverstinai atnaujinami neapdoroti metaduomenys"
 
-#: src/repos.cc:289
+#: src/repos.cc:288
 #, c-format, boost-format
 msgid "Retrieving repository '%s' metadata"
 msgstr "Gaunami saugyklos „%s“ metaduomenys"
 
-#: src/repos.cc:313
+#: src/repos.cc:312
 #, c-format, boost-format
 msgid "Do you want to disable the repository %s permanently?"
 msgstr "Norite visam laikui uždrausti „%s“ saugyklą?"
 
-#: src/repos.cc:329
+#: src/repos.cc:328
 #, c-format, boost-format
 msgid "Error while disabling repository '%s'."
 msgstr "Klaida išjungiat saugyklą „%s“."
 
-#: src/repos.cc:345
+#: src/repos.cc:344
 #, c-format, boost-format
 msgid "Problem retrieving files from '%s'."
 msgstr "Nesklandumai gaunant rinkmenas iš „%s“."
 
-#: src/repos.cc:346 src/repos.cc:1860 src/solve-commit.cc:825
+#: src/repos.cc:345 src/repos.cc:1859 src/solve-commit.cc:825
 #: src/solve-commit.cc:856 src/solve-commit.cc:880
 msgid "Please see the above error message for a hint."
 msgstr "Žiūrėkite aukščiau esančią užuominą."
 
-#: src/repos.cc:358
+#: src/repos.cc:357
 #, c-format, boost-format
 msgid "No URIs defined for '%s'."
 msgstr "„%s“ neturi nurodyto URI."
 
 #. TranslatorExplanation the first %s is a .repo file path
-#: src/repos.cc:363
+#: src/repos.cc:362
 #, c-format, boost-format
 msgid ""
 "Please add one or more base URI (baseurl=URI) entries to %s for repository "
@@ -5742,37 +5737,37 @@ msgstr ""
 "Nurodykite vieną ar kelis pagrindinius URI (baseurl=URI) įrašui %s, "
 "saugyklai „%s“."
 
-#: src/repos.cc:377
+#: src/repos.cc:376
 msgid "No alias defined for this repository."
 msgstr "Šiai saugyklai nepriskirtas joks pseudonimas."
 
-#: src/repos.cc:389
+#: src/repos.cc:388
 #, c-format, boost-format
 msgid "Repository '%s' is invalid."
 msgstr "Saugykla „%s“ yra netinkama."
 
-#: src/repos.cc:390
+#: src/repos.cc:389
 msgid ""
 "Please check if the URIs defined for this repository are pointing to a valid "
 "repository."
 msgstr "Patikrinkite, ar šiai saugyklai nurodytas URI nurodo tinkamą saugyklą."
 
-#: src/repos.cc:402
+#: src/repos.cc:401
 #, c-format, boost-format
 msgid "Error retrieving metadata for '%s':"
 msgstr "Gaunant „%s“ metaduomenis įvyko klaida:"
 
-#: src/repos.cc:415
+#: src/repos.cc:414
 msgid "Forcing building of repository cache"
 msgstr "Priverstinai kuriamas saugyklų podėlis"
 
-#: src/repos.cc:440
+#: src/repos.cc:439
 #, c-format, boost-format
 msgid "Error parsing metadata for '%s':"
 msgstr "Nagrinėjant „%s“ metaduomenis įvyko klaida:"
 
 #. TranslatorExplanation Don't translate the URL unless it is translated, too
-#: src/repos.cc:442
+#: src/repos.cc:441
 msgid ""
 "This may be caused by invalid metadata in the repository, or by a bug in the "
 "metadata parser. In the latter case, or if in doubt, please, file a bug "
@@ -5784,48 +5779,48 @@ msgstr ""
 "prašytume užpildyti ydos pranešimą naudodamiesi http://en.opensuse.org/"
 "Zypper/Troubleshooting instrukcijomis."
 
-#: src/repos.cc:451
+#: src/repos.cc:450
 #, c-format, boost-format
 msgid "Repository metadata for '%s' not found in local cache."
 msgstr "Vietiniame podėlyje nerasti „%s“ saugyklos metaduomenys."
 
-#: src/repos.cc:459
+#: src/repos.cc:458
 msgid "Error building the cache:"
 msgstr "Kuriant podėlį įvyko klaida:"
 
-#: src/repos.cc:678
+#: src/repos.cc:677
 #, c-format, boost-format
 msgid "Repository '%s' not found by its alias, number, or URI."
 msgstr ""
 "Saugyklos „%s“ nepavyko rasti nei pagal jos pseudonimą, nei pagal numerį, "
 "nei pagal URI."
 
-#: src/repos.cc:680
+#: src/repos.cc:679
 #, c-format, boost-format
 msgid "Use '%s' to get the list of defined repositories."
 msgstr "Norėdami gauti aprašytų saugyklų sąrašą, naudokite „%s“."
 
-#: src/repos.cc:700
+#: src/repos.cc:699
 #, c-format, boost-format
 msgid "Ignoring disabled repository '%s'"
 msgstr "Praleidžiama uždrausta saugykla „%s“"
 
-#: src/repos.cc:788
+#: src/repos.cc:787
 #, fuzzy, c-format, boost-format
 msgid "Global option '%s' can be used to temporarily enable repositories."
 msgstr "Saugyklų pridėjimui ar įgalinimui naudokite komandas „%s“ arba „%s“."
 
-#: src/repos.cc:804 src/repos.cc:810
+#: src/repos.cc:803 src/repos.cc:809
 #, c-format, boost-format
 msgid "Ignoring repository '%s' because of '%s' option."
 msgstr "Saugyklos „%s“ nepaisoma, nes yra parinktis „%s“."
 
-#: src/repos.cc:831 src/repos.cc:919
+#: src/repos.cc:830 src/repos.cc:918
 #, c-format, boost-format
 msgid "Temporarily enabling repository '%s'."
 msgstr "Laikinai įgalinama saugykla „%s“."
 
-#: src/repos.cc:883
+#: src/repos.cc:882
 #, c-format, boost-format
 msgid ""
 "Repository '%s' is out-of-date. You can run 'zypper refresh' as root to "
@@ -5834,7 +5829,7 @@ msgstr ""
 "Saugykla „%s“ yra senstelėjusi. Prisijungę kaip root naudotojas, galite "
 "paleisti „zypper refresh“ ir taip ją atnaujinti."
 
-#: src/repos.cc:900
+#: src/repos.cc:899
 #, c-format, boost-format
 msgid ""
 "The metadata cache needs to be built for the '%s' repository. You can run "
@@ -5843,81 +5838,81 @@ msgstr ""
 "Saugyklai „%s“ reikia sukurti metaduomenų podėlį. Tai galite padaryti "
 "prisijungę kaip root naudotojas ir įvykdę „zypper refresh“."
 
-#: src/repos.cc:926
+#: src/repos.cc:925
 #, c-format, boost-format
 msgid "Repository '%s' stays disabled."
 msgstr "Saugykla „%s“ ir toliau bus uždrausta."
 
-#: src/repos.cc:982
+#: src/repos.cc:981
 msgid "Initializing Target"
 msgstr "Ruošiama paskirtis"
 
-#: src/repos.cc:990
+#: src/repos.cc:989
 msgid "Target initialization failed:"
 msgstr "Paskirties paruošti nepavyko:"
 
-#: src/repos.cc:1072
+#: src/repos.cc:1071
 #, c-format, boost-format
 msgid "Cleaning metadata cache for '%s'."
 msgstr "Išvalomas „%s“ metaduomenų podėlis."
 
-#: src/repos.cc:1080
+#: src/repos.cc:1079
 #, c-format, boost-format
 msgid "Cleaning raw metadata cache for '%s'."
 msgstr "Išvalomas „%s“ neapdorotas metaduomenų podėlis."
 
-#: src/repos.cc:1086
+#: src/repos.cc:1085
 #, c-format, boost-format
 msgid "Keeping raw metadata cache for %s '%s'."
 msgstr "Išlaikomas %s „%s“ neapdorotų metaduomenų podėlis."
 
 #. translators: meaning the cached rpm files
-#: src/repos.cc:1093
+#: src/repos.cc:1092
 #, c-format, boost-format
 msgid "Cleaning packages for '%s'."
 msgstr "Išvalomi „%s“ paketai."
 
-#: src/repos.cc:1101
+#: src/repos.cc:1100
 #, c-format, boost-format
 msgid "Cannot clean repository '%s' because of an error."
 msgstr "Dėl įvykusios klaidos negalima išvalyti saugyklos „%s“."
 
-#: src/repos.cc:1112
+#: src/repos.cc:1111
 msgid "Cleaning installed packages cache."
 msgstr "Išvalomas įdiegtų paketų podėlis."
 
-#: src/repos.cc:1121
+#: src/repos.cc:1120
 msgid "Cannot clean installed packages cache because of an error."
 msgstr "Dėl įvykusios klaidos negalima išvalyti įdiegtų paketų podėlio."
 
-#: src/repos.cc:1139
+#: src/repos.cc:1138
 msgid "Could not clean the repositories because of errors."
 msgstr "Dėl įvykusių klaidų negalima išvalyti saugyklų."
 
-#: src/repos.cc:1145
+#: src/repos.cc:1144
 msgid "Some of the repositories have not been cleaned up because of an error."
 msgstr "Dėl įvykusios klaidos nebuvo išvalytos kai kurios saugyklos."
 
-#: src/repos.cc:1150
+#: src/repos.cc:1149
 msgid "Specified repositories have been cleaned up."
 msgstr "Nurodytos saugyklos buvo išvalytos."
 
-#: src/repos.cc:1152
+#: src/repos.cc:1151
 msgid "All repositories have been cleaned up."
 msgstr "Buvo išvalytos visos saugyklos."
 
-#: src/repos.cc:1174
+#: src/repos.cc:1173
 msgid "This is a changeable read-only media (CD/DVD), disabling autorefresh."
 msgstr ""
 "Tai yra keičiama laikmena (CD/DVD), skirta tik rašymui, tad savaiminį "
 "atnaujinimą išjungiame."
 
-#: src/repos.cc:1195
+#: src/repos.cc:1194
 #, c-format, boost-format
 msgid "Invalid repository alias: '%s'"
 msgstr "Netinkamas saugyklos pseudonimas „%s“."
 
-#: src/repos.cc:1212
+#: src/repos.cc:1211
 msgid ""
 "Could not determine the type of the repository. Please check if the defined "
 "URIs (see below) point to a valid repository:"
@@ -5925,25 +5920,25 @@ msgstr ""
 "Nepavyksta apibrėžti saugyklos tipo. Patikrinkite, ar nurodytas URI "
 "(žiūrėkite žemiau) skirtas tinkamai saugyklai:"
 
-#: src/repos.cc:1218
+#: src/repos.cc:1217
 msgid "Can't find a valid repository at given location:"
 msgstr "Nurodytoje vietoje nepavyksta rasti tinkamos saugyklos:"
 
-#: src/repos.cc:1226
+#: src/repos.cc:1225
 msgid "Problem transferring repository data from specified URI:"
 msgstr "Nesklandumai perduodant duomenis iš nurodyto URI:"
 
-#: src/repos.cc:1227
+#: src/repos.cc:1226
 msgid "Please check whether the specified URI is accessible."
 msgstr "Patikrinkite, ar nurodytas URI yra prieinamas."
 
-#: src/repos.cc:1234
+#: src/repos.cc:1233
 msgid "Unknown problem when adding repository:"
 msgstr "Pridedant saugykla įvyko nežinoma klaida:"
 
 #. translators: BOOST STYLE POSITIONAL DIRECTIVES ( %N% )
 #. translators: %1% - a repository name
-#: src/repos.cc:1244
+#: src/repos.cc:1243
 #, boost-format
 msgid ""
 "GPG checking is disabled in configuration of repository '%1%'. Integrity and "
@@ -5952,135 +5947,135 @@ msgstr ""
 "„%1%“ saugyklos konfigūracijoje GPG tikrinimas uždraustas. Negalima "
 "patikrinti paketų vientisumo ir kilmės."
 
-#: src/repos.cc:1249
+#: src/repos.cc:1248
 #, c-format, boost-format
 msgid "Repository '%s' successfully added"
 msgstr "Saugykla „%s“ pridėta sėkmingai"
 
-#: src/repos.cc:1275
+#: src/repos.cc:1274
 #, c-format, boost-format
 msgid "Reading data from '%s' media"
 msgstr "Skaitomi duomenys iš laikmenos „%s“"
 
-#: src/repos.cc:1281
+#: src/repos.cc:1280
 #, c-format, boost-format
 msgid "Problem reading data from '%s' media"
 msgstr "Nesklandumai skaitant duomenis iš laikmenos %s“"
 
-#: src/repos.cc:1282
+#: src/repos.cc:1281
 msgid "Please check if your installation media is valid and readable."
 msgstr "Patikrinkite, ar jūsų diegimo laikmena yra tinkama ir nuskaitoma."
 
-#: src/repos.cc:1289
+#: src/repos.cc:1288
 #, c-format, boost-format
 msgid "Reading data from '%s' media is delayed until next refresh."
 msgstr "Duomenų skaitymas iš laikmenos „%s“ atidedamas iki kito atnaujinimo."
 
-#: src/repos.cc:1358
+#: src/repos.cc:1357
 msgid "Problem accessing the file at the specified URI"
 msgstr "Nesklandumai mėginant nurodytu URI prieiti prie rinkmenos"
 
-#: src/repos.cc:1359
+#: src/repos.cc:1358
 msgid "Please check if the URI is valid and accessible."
 msgstr "Patikrinkite, ar URI yra tinkamas ir prieinamas."
 
-#: src/repos.cc:1366
+#: src/repos.cc:1365
 msgid "Problem parsing the file at the specified URI"
 msgstr "Nesklandumai nagrinėjant rinkmeną duotuoju URI"
 
 #. TranslatorExplanation Don't translate the '.repo' string.
-#: src/repos.cc:1368
+#: src/repos.cc:1367
 msgid "Is it a .repo file?"
 msgstr "Ar tai .repo rinkmena?"
 
-#: src/repos.cc:1375
+#: src/repos.cc:1374
 msgid "Problem encountered while trying to read the file at the specified URI"
 msgstr "Nesklandumų kilo mėginant duotuoju URI nuskaityti rinkmeną"
 
-#: src/repos.cc:1388
+#: src/repos.cc:1387
 msgid "Repository with no alias defined found in the file, skipping."
 msgstr "Praleidžiama saugykla, neturinti rinkmenoje nurodyto pseudonimo."
 
-#: src/repos.cc:1394
+#: src/repos.cc:1393
 #, c-format, boost-format
 msgid "Repository '%s' has no URI defined, skipping."
 msgstr "Saugyklai „%s“ nenurodytas URI, praleidžiama."
 
-#: src/repos.cc:1442
+#: src/repos.cc:1441
 #, c-format, boost-format
 msgid "Repository '%s' has been removed."
 msgstr "Saugykla „%s“ pašalinta."
 
-#: src/repos.cc:1590
+#: src/repos.cc:1589
 #, c-format, boost-format
 msgid "Repository '%s' priority has been left unchanged (%d)"
 msgstr "Saugyklos „%s“ prioritetas nepakeistas (%d)"
 
-#: src/repos.cc:1623
+#: src/repos.cc:1622
 #, c-format, boost-format
 msgid "Repository '%s' has been successfully enabled."
 msgstr "Saugykla „%s“ sėkmingai įgalinta."
 
-#: src/repos.cc:1625
+#: src/repos.cc:1624
 #, c-format, boost-format
 msgid "Repository '%s' has been successfully disabled."
 msgstr "Saugykla „%s“ sėkmingai uždrausta."
 
-#: src/repos.cc:1632
+#: src/repos.cc:1631
 #, c-format, boost-format
 msgid "Autorefresh has been enabled for repository '%s'."
 msgstr "Saugyklai „%s“ savaiminis atnaujinimas sėkmingai įjungtas."
 
-#: src/repos.cc:1634
+#: src/repos.cc:1633
 #, c-format, boost-format
 msgid "Autorefresh has been disabled for repository '%s'."
 msgstr "Saugyklai „%s“ savaiminis atnaujinimas sėkmingai uždraustas."
 
-#: src/repos.cc:1641
+#: src/repos.cc:1640
 #, c-format, boost-format
 msgid "RPM files caching has been enabled for repository '%s'."
 msgstr "Saugyklai „%s“ įgalintas RPM rinkmenų podėlis."
 
-#: src/repos.cc:1643
+#: src/repos.cc:1642
 #, c-format, boost-format
 msgid "RPM files caching has been disabled for repository '%s'."
 msgstr "Saugyklai „%s“ uždraustas RPM rinkmenų podėlis."
 
-#: src/repos.cc:1650
+#: src/repos.cc:1649
 #, c-format, boost-format
 msgid "GPG check has been enabled for repository '%s'."
 msgstr "Saugyklai „%s“ įgalintas GPG tikrinimas."
 
-#: src/repos.cc:1652
+#: src/repos.cc:1651
 #, c-format, boost-format
 msgid "GPG check has been disabled for repository '%s'."
 msgstr "Saugyklai „%s“ uždraustas GPG tikrinimas."
 
-#: src/repos.cc:1658
+#: src/repos.cc:1657
 #, c-format, boost-format
 msgid "Repository '%s' priority has been set to %d."
 msgstr "Saugyklai „%s“ nustatytas prioritetas %d."
 
-#: src/repos.cc:1664
+#: src/repos.cc:1663
 #, c-format, boost-format
 msgid "Name of repository '%s' has been set to '%s'."
 msgstr "Saugyklai „%s“ nustatytas pavadinimas „%s“."
 
-#: src/repos.cc:1675
+#: src/repos.cc:1674
 #, c-format, boost-format
 msgid "Nothing to change for repository '%s'."
 msgstr "Saugykla „%s“ nepakeista."
 
-#: src/repos.cc:1682
+#: src/repos.cc:1681
 #, c-format, boost-format
 msgid "Leaving repository %s unchanged."
 msgstr "Saugykla „%s“ paliekama nepakeista."
 
-#: src/repos.cc:1769
+#: src/repos.cc:1768
 msgid "Loading repository data..."
 msgstr "Įkeliami saugyklų duomenys..."
 
-#: src/repos.cc:1771
+#: src/repos.cc:1770
 msgid ""
 "No repositories defined. Operating only with the installed resolvables. "
 "Nothing can be installed."
@@ -6088,32 +6083,32 @@ msgstr ""
 "Dėmesio: neapibrėžta jokia saugykla. Naudojami tik įdiegti paketai. Nieko "
 "negalima įdiegti."
 
-#: src/repos.cc:1791
+#: src/repos.cc:1790
 #, c-format, boost-format
 msgid "Retrieving repository '%s' data..."
 msgstr "Gaunami saugyklos „%s“ duomenys..."
 
-#: src/repos.cc:1797
+#: src/repos.cc:1796
 #, c-format, boost-format
 msgid "Repository '%s' not cached. Caching..."
 msgstr "Saugykla „%s“ neturi podėlio. Sukuriamas podėlis..."
 
-#: src/repos.cc:1803 src/repos.cc:1837
+#: src/repos.cc:1802 src/repos.cc:1836
 #, c-format, boost-format
 msgid "Problem loading data from '%s'"
 msgstr "Nesklandumai įkeliant duomenis iš „%s“"
 
-#: src/repos.cc:1807
+#: src/repos.cc:1806
 #, c-format, boost-format
 msgid "Repository '%s' could not be refreshed. Using old cache."
 msgstr "Negalima atnaujinti saugyklos „%s“. Naudojamas senas podėlis."
 
-#: src/repos.cc:1811 src/repos.cc:1840
+#: src/repos.cc:1810 src/repos.cc:1839
 #, c-format, boost-format
 msgid "Resolvables from '%s' not loaded because of error."
 msgstr "Dėl įvykusios klaidos neįkelti sprendimai iš „%s“."
 
-#: src/repos.cc:1828
+#: src/repos.cc:1827
 #, c-format, boost-format
 msgid ""
 "Repository '%s' appears to be outdated. Consider using a different mirror or "
@@ -6123,35 +6118,35 @@ msgstr ""
 "serverį."
 
 #. translators: the first %s is 'zypper refresh' and the second 'zypper clean -m'
-#: src/repos.cc:1839
+#: src/repos.cc:1838
 #, c-format, boost-format
 msgid "Try '%s', or even '%s' before doing so."
 msgstr "Prieš tai darydami, pabandykite „%s“ arba net „%s“."
 
-#: src/repos.cc:1850
+#: src/repos.cc:1849
 msgid "Reading installed packages..."
 msgstr "Skaitomi įdiegti paketai..."
 
-#: src/repos.cc:1859
+#: src/repos.cc:1858
 msgid "Problem occurred while reading the installed packages:"
 msgstr "Skaitant įdiegtus paketus, kilo nesklandumų:"
 
-#: src/repos.cc:1876
+#: src/repos.cc:1875
 #, c-format, boost-format
 msgid "'%s' looks like an RPM file. Will try to download it."
 msgstr "„%s“ regis yra RPM rinkmena. Bus bandoma ją parsiųsti."
 
-#: src/repos.cc:1885
+#: src/repos.cc:1884
 #, c-format, boost-format
 msgid "Problem with the RPM file specified as '%s', skipping."
 msgstr "Nesklandumai su RPM rinkmena, nurodyta kaip „%s“, praleidžiama."
 
-#: src/repos.cc:1907
+#: src/repos.cc:1906
 #, c-format, boost-format
 msgid "Problem reading the RPM header of %s. Is it an RPM file?"
 msgstr "Nesklandumai skaitant %s RPM antraštę. Ar tai RPM rinkmena?"
 
-#: src/repos.cc:1927
+#: src/repos.cc:1926
 msgid "Plain RPM files cache"
 msgstr "Ištisas RPM rinkmenų podėlis"
 
@@ -7028,17 +7023,17 @@ msgstr ""
 msgid "shows all options"
 msgstr "rodyti visas parinktis"
 
-#: src/utils/prompt.cc:194 src/utils/prompt.cc:312 src/utils/prompt.cc:321
-#: src/utils/prompt.cc:419
+#: src/utils/prompt.cc:194 src/utils/prompt.cc:315 src/utils/prompt.cc:324
+#: src/utils/prompt.cc:422
 msgid "yes"
 msgstr "taip"
 
-#: src/utils/prompt.cc:194 src/utils/prompt.cc:312 src/utils/prompt.cc:321
-#: src/utils/prompt.cc:419
+#: src/utils/prompt.cc:194 src/utils/prompt.cc:315 src/utils/prompt.cc:324
+#: src/utils/prompt.cc:422
 msgid "no"
 msgstr "ne"
 
-#: src/utils/prompt.cc:212 src/utils/prompt.cc:257
+#: src/utils/prompt.cc:212 src/utils/prompt.cc:260
 #, c-format, boost-format
 msgid "Retrying in %u seconds..."
 msgstr "Vėl bus bandoma po %u s..."
@@ -7049,11 +7044,11 @@ msgstr "Vėl bus bandoma po %u s..."
 #. the answers must be separated by slash characters '/' and must
 #. correspond to abort/retry/ignore in that order.
 #. The answers should be lower case letters.
-#: src/utils/prompt.cc:218 src/utils/prompt.cc:302
+#: src/utils/prompt.cc:218 src/utils/prompt.cc:305
 msgid "a/r/i"
 msgstr "n/k/i"
 
-#: src/utils/prompt.cc:267
+#: src/utils/prompt.cc:270
 #, c-format, boost-format
 msgid "Autoselecting '%s' after %u second."
 msgid_plural "Autoselecting '%s' after %u seconds."
@@ -7062,23 +7057,23 @@ msgstr[1] "Savaime pasirenkamas „%s“ po %u sekundžių."
 msgstr[2] "Savaime pasirenkamas „%s“ po %u sekundžių."
 msgstr[3] "Savaime pasirenkamas „%s“ po %u sekundės."
 
-#: src/utils/prompt.cc:284
+#: src/utils/prompt.cc:287
 msgid "Trying again..."
 msgstr "Bandoma iš naujo..."
 
-#: src/utils/prompt.cc:321
+#: src/utils/prompt.cc:324
 msgid "always"
 msgstr ""
 
-#: src/utils/prompt.cc:321
+#: src/utils/prompt.cc:324
 msgid "never"
 msgstr ""
 
-#: src/utils/prompt.cc:367
+#: src/utils/prompt.cc:370
 msgid "Cannot read input: bad stream or EOF."
 msgstr ""
 
-#: src/utils/prompt.cc:368
+#: src/utils/prompt.cc:371
 #, c-format, boost-format
 msgid ""
 "If you run zypper without a terminal, use '%s' global\n"
@@ -7087,28 +7082,38 @@ msgstr ""
 "Jei zypper paleidžiate ne terminale, naudokite bendrąją parinktį „%s“ \n"
 "tam, kad zypper išvestų pranešimus."
 
-#: src/utils/prompt.cc:407
+#: src/utils/prompt.cc:410
 #, c-format, boost-format
 msgid "Invalid answer '%s'."
 msgstr "Netinkamas atsakas „%s“."
 
-#: src/utils/prompt.cc:410
+#: src/utils/prompt.cc:413
 #, c-format, boost-format
 msgid "Ambiguous answer '%s'."
 msgstr ""
 
 #. translators: the %s are: 'y', 'yes' (translated), 'n', and 'no' (translated).
-#: src/utils/prompt.cc:418
+#: src/utils/prompt.cc:421
 #, c-format, boost-format
 msgid "Enter '%s' for '%s' or '%s' for '%s' if nothing else works for you."
 msgstr ""
 "Kuomet niekas kitas neveikia, įveskite „%s“, jei „%s“, arba „%s“, jei „%s“."
 
-#: src/utils/prompt.cc:423
+#: src/utils/prompt.cc:426
 msgid ""
 "If nothing else works enter '#1' to select the 1st option, '#2' for the 2nd "
 "one, ..."
 msgstr ""
+
+#~ msgid ""
+#~ "Download all source rpms to this directory. Default: /var/cache/zypper/"
+#~ "source-download"
+#~ msgstr ""
+#~ "Visus šaltinius paketus siųsti į šį katalogą. Numatytasis: /var/cache/"
+#~ "zypper/source-download"
+
+#~ msgid "Delete extraneous source rpms in the local directory."
+#~ msgstr "Pašalinti nebereikalingus šaltinius rpm."
 
 #~ msgid "ping [OPTIONS]"
 #~ msgstr "ping [parinktys]"
