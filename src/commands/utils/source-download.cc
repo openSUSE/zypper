@@ -493,15 +493,13 @@ ZyppFlags::CommandGroup SourceDownloadCmd::cmdOptions() const
       {
         "directory", 'd', ZyppFlags::RequiredArgument, ZyppFlags::PathNameType( that->_opt._directory, _opt._defaultDirectory.asString(), "DIR" ),
             // translators: -d, --directory <DIR>
-            _("Download all source rpms to this directory. Default: /var/cache/zypper/source-download")
+            _("Download all source rpms to this directory.")
       }, {
-        "delete", '\0', ZyppFlags::NoArgument, ZyppFlags::BoolType( &that->_opt._delete, ZyppFlags::StoreTrue, _opt._delete ),
-            // translators: --delete
-            _("Delete extraneous source rpms in the local directory.")
+        "delete", '\0', ZyppFlags::NoArgument, ZyppFlags::BoolType( &that->_opt._delete, ZyppFlags::StoreTrue, _opt._delete )
       }, {
         "no-delete", '\0', ZyppFlags::NoArgument, ZyppFlags::BoolType( &that->_opt._delete, ZyppFlags::StoreFalse, _opt._delete ),
-            // translators: --delete
-            _("Delete extraneous source rpms in the local directory.")
+            // translators: --delete/--no-delete
+            _("Whether to delete extraneous source rpms in the local directory.")
       }, {
         "status", '\0', ZyppFlags::NoArgument, ZyppFlags::BoolType( &that->_opt._dryrun, ZyppFlags::StoreTrue, _opt._dryrun ),
             // translators: --status
@@ -518,7 +516,12 @@ ZyppFlags::CommandGroup SourceDownloadCmd::cmdOptions() const
             _("Disable writing a manifest file.")
       }
 #endif
-  }};
+  },
+  {
+    //conflicting flags
+    { "delete" , "no-delete" },
+  }
+  };
 }
 
 void SourceDownloadCmd::doReset()
