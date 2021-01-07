@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-01-07 18:15+0100\n"
-"PO-Revision-Date: 2020-12-21 06:27+0000\n"
+"PO-Revision-Date: 2021-01-08 02:38+0000\n"
 "Last-Translator: Yasuhiko Kamata <belphegor@belbel.or.jp>\n"
 "Language-Team: Japanese <https://l10n.opensuse.org/projects/zypper/master/ja/"
 ">\n"
@@ -5057,7 +5057,7 @@ msgstr "全てのソース RPM を、このディレクトリにダウンロー�
 #. translators: --delete/--no-delete
 #: src/commands/utils/source-download.cc:502
 msgid "Whether to delete extraneous source rpms in the local directory."
-msgstr ""
+msgstr "ローカルディレクトリ内にある無関係なソース RPM を削除するかどうかを指定します。"
 
 #. translators: --status
 #: src/commands/utils/source-download.cc:506
