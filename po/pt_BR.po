@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-01-07 18:15+0100\n"
-"PO-Revision-Date: 2020-09-11 13:48+0000\n"
-"Last-Translator: Rodrigo Macedo <rmsolucoeseminformatic4@gmail.com>\n"
+"PO-Revision-Date: 2021-01-11 14:38+0000\n"
+"Last-Translator: Luiz Fernando Ranghetti <elchevive68@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) <https://l10n.opensuse.org/projects/"
 "zypper/master/pt_BR/>\n"
 "Language: pt_BR\n"
@@ -289,7 +289,7 @@ msgid ""
 "The rpm database seems to contain old V3 version gpg keys which are "
 "meanwhile obsolete and considered insecure:"
 msgstr ""
-"O banco de dados rpm parece conter antigas chaves gpg da versão V3 que, "
+"O banco de dados RPM parece conter antigas chaves GPG da versão V3 que, "
 "entretanto, são obsoletas e consideradas inseguras:"
 
 #: src/callbacks/keyring.h:444
@@ -304,7 +304,7 @@ msgid ""
 "from the rpm database calling '%1%'."
 msgstr ""
 "A menos que você acredite que a chave em questão ainda esteja em uso, você "
-"pode removê-la da chamada de banco de dados do rpm '%1%'."
+"pode removê-la da chamada de banco de dados RPM '%1%'."
 
 #: src/callbacks/keyring.h:470
 #, c-format, boost-format
@@ -819,7 +819,7 @@ msgstr "Aumenta a quantidade de detalhes."
 #. translators: --color / --no-color
 #: src/Config.cc:410
 msgid "Whether to use colors in output if tty supports it."
-msgstr "Quando usar cores na saída se o tty suportar."
+msgstr "Se é para usar cores na saída se o tty suportar."
 
 #. translators: --no-abbrev, -A
 #: src/Config.cc:415
@@ -2379,7 +2379,7 @@ msgstr "Desinstalação de um pacote fonte não definida nem implementada."
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/installremove.cc:166
 msgid "install (in) [OPTIONS] <CAPABILITY|RPM_FILE_URI> ..."
-msgstr "install (in) [opções] <recurso|uri_do_arquivo_rpm> ..."
+msgstr "install (in) [opções] <recurso|uri_do_arquivo_RPM> ..."
 
 #. translators: command summary: install, in
 #: src/commands/installremove.cc:168
@@ -4729,8 +4729,8 @@ msgid ""
 "value can be changed in your local rpm configuration. In case of doubt try "
 "executing '%2%'."
 msgstr ""
-"A localização padrão onde o rpm instala os pacotes fontes é '%1%', mas esse "
-"valor pode ser alterado na sua configuração local do rpm. Em caso de dúvida, "
+"A localização padrão onde o RPM instala os pacotes fontes é '%1%', mas esse "
+"valor pode ser alterado na sua configuração local do RPM. Em caso de dúvida, "
 "tente executar '%2%'."
 
 #. translators: -d, --build-deps-only
@@ -5176,7 +5176,7 @@ msgstr "Baixar todos os RPMs fonte para este diretório."
 #. translators: --delete/--no-delete
 #: src/commands/utils/source-download.cc:502
 msgid "Whether to delete extraneous source rpms in the local directory."
-msgstr ""
+msgstr "Se é para excluir RPMs fontes extra no diretório local."
 
 #. translators: --status
 #: src/commands/utils/source-download.cc:506
