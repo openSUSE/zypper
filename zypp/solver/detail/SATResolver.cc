@@ -1069,13 +1069,19 @@ std::string SATResolver::SATproblemRuleInfoString (Id probr, std::string &detail
   switch ( type )
   {
       case SOLVER_RULE_DISTUPGRADE:
-	  ret = str::form (_("%s does not belong to a distupgrade repository"), s.asString().c_str());
+	  if ( s.isSystem() )
+	    ret = str::Format(_("the installed %1% does not belong to a distupgrade repository and must be replaced") ) % s.asString();
+	  else /*just in case*/
+	    ret = str::Format(_("the to be installed %1% does not belong to a distupgrade repository") ) % s.asString();
   	  break;
       case SOLVER_RULE_INFARCH:
-	  ret = str::form (_("%s has inferior architecture"), s.asString().c_str());
+	  if ( s.isSystem() )
+	    ret = str::Format(_("the installed %1% has inferior architecture") ) % s.asString();
+	  else
+	    ret = str::Format(_("the to be installed %1% has inferior architecture") ) % s.asString();
 	  break;
       case SOLVER_RULE_UPDATE:
-	  ret = str::form (_("problem with installed package %s"), s.asString().c_str());
+	  ret = str::Format(_("problem with the installed %1%") ) % s.asString();
 	  break;
       case SOLVER_RULE_JOB:
 	  ret = _("conflicting requests");
@@ -1084,40 +1090,66 @@ std::string SATResolver::SATproblemRuleInfoString (Id probr, std::string &detail
 	  ret = _("some dependency problem");
 	  break;
       case SOLVER_RULE_JOB_NOTHING_PROVIDES_DEP:
-	  ret = str::form (_("nothing provides requested %s"), pool_dep2str(pool, dep));
-	  detail += _("Have you enabled all requested repositories?");
+	  ret = str::Format(_("nothing provides the requested '%1%'") ) % pool_dep2str(pool, dep);
+	  detail += _("Have you enabled all the required repositories?");
 	  break;
       case SOLVER_RULE_JOB_UNKNOWN_PACKAGE:
-	  ret = str::form (_("package %s does not exist"), pool_dep2str(pool, dep));
-	  detail += _("Have you enabled all requested repositories?");
+	  ret = str::Format(_("the requested package %1% does not exist") ) % pool_dep2str(pool, dep);
+	  detail += _("Have you enabled all the required repositories?");
 	  break;
       case SOLVER_RULE_JOB_UNSUPPORTED:
 	  ret = _("unsupported request");
 	  break;
       case SOLVER_RULE_JOB_PROVIDED_BY_SYSTEM:
-	  ret = str::form (_("%s is provided by the system and cannot be erased"), pool_dep2str(pool, dep));
+	  ret = str::Format(_("'%1%' is provided by the system and cannot be erased") ) % pool_dep2str(pool, dep);
 	  break;
       case SOLVER_RULE_PKG_NOT_INSTALLABLE:
-	  ret = str::form (_("%s is not installable"), s.asString().c_str());
+	  ret = str::Format(_("%1% is not installable") ) % s.asString();
 	  break;
       case SOLVER_RULE_PKG_NOTHING_PROVIDES_DEP:
 	  ignoreId = source; // for setting weak dependencies
-	  ret = str::form (_("nothing provides %s needed by %s"), pool_dep2str(pool, dep), s.asString().c_str());
+	  if ( s.isSystem() )
+	    ret = str::Format(_("nothing provides '%1%' needed by the installed %2%") ) % pool_dep2str(pool, dep) % s.asString();
+	  else
+	    ret = str::Format(_("nothing provides '%1%' needed by the to be installed %2%") ) % pool_dep2str(pool, dep) % s.asString();
 	  break;
       case SOLVER_RULE_PKG_SAME_NAME:
-	  ret = str::form (_("cannot install both %s and %s"), s.asString().c_str(), s2.asString().c_str());
+	  ret = str::Format(_("cannot install both %1% and %2%") ) % s.asString() % s2.asString();
 	  break;
       case SOLVER_RULE_PKG_CONFLICTS:
-	  ret = str::form (_("%s conflicts with %s provided by %s"), s.asString().c_str(), pool_dep2str(pool, dep), s2.asString().c_str());
+	  if ( s.isSystem() ) {
+	    if ( s2.isSystem() )
+	      ret = str::Format(_("the installed %1% conflicts with '%2%' provided by the installed %3%") ) % s.asString() % pool_dep2str(pool, dep) % s2.asString();
+	    else
+	      ret = str::Format(_("the installed %1% conflicts with '%2%' provided by the to be installed %3%") ) % s.asString() % pool_dep2str(pool, dep) % s2.asString();
+	  }
+	  else {
+	    if ( s2.isSystem() )
+	      ret = str::Format(_("the to be installed %1% conflicts with '%2%' provided by the installed %3%") ) % s.asString() % pool_dep2str(pool, dep) % s2.asString();
+	    else
+	      ret = str::Format(_("the to be installed %1% conflicts with '%2%' provided by the to be installed %3%") ) % s.asString() % pool_dep2str(pool, dep) % s2.asString();
+	  }
 	  break;
       case SOLVER_RULE_PKG_OBSOLETES:
-	  ret = str::form (_("%s obsoletes %s provided by %s"), s.asString().c_str(), pool_dep2str(pool, dep), s2.asString().c_str());
-	  break;
       case SOLVER_RULE_PKG_INSTALLED_OBSOLETES:
-	  ret = str::form (_("installed %s obsoletes %s provided by %s"), s.asString().c_str(), pool_dep2str(pool, dep), s2.asString().c_str());
+	  if ( s.isSystem() ) {
+	    if ( s2.isSystem() )
+	      ret = str::Format(_("the installed %1% obsoletes '%2%' provided by the installed %3%") ) % s.asString() % pool_dep2str(pool, dep) % s2.asString();
+	    else
+	      ret = str::Format(_("the installed %1% obsoletes '%2%' provided by the to be installed %3%") ) % s.asString() % pool_dep2str(pool, dep) % s2.asString();
+	  }
+	  else {
+	    if ( s2.isSystem() )
+	      ret = str::Format(_("the to be installed %1% obsoletes '%2%' provided by the installed %3%") ) % s.asString() % pool_dep2str(pool, dep) % s2.asString();
+	    else
+	      ret = str::Format(_("the to be installed %1% obsoletes '%2%' provided by the to be installed %3%") ) % s.asString() % pool_dep2str(pool, dep) % s2.asString();
+	  }
 	  break;
       case SOLVER_RULE_PKG_SELF_CONFLICT:
-	  ret = str::form (_("solvable %s conflicts with %s provided by itself"), s.asString().c_str(), pool_dep2str(pool, dep));
+	  if ( s.isSystem() )
+	    ret = str::Format(_("the installed %1% conflicts with '%2%' provided by itself") ) % s.asString() % pool_dep2str(pool, dep);
+	  else
+	    ret = str::Format(_("the to be installed %1% conflicts with '%2%' provided by itself") ) % s.asString() % pool_dep2str(pool, dep);
           break;
       case SOLVER_RULE_PKG_REQUIRES: {
 	  ignoreId = source; // for setting weak dependencies
@@ -1148,7 +1180,10 @@ std::string SATResolver::SATproblemRuleInfoString (Id probr, std::string &detail
 	      }
 	  }
 
-	  ret = str::form (_("%s requires %s, but this requirement cannot be provided"), s.asString().c_str(), pool_dep2str(pool, dep));
+	  if ( s.isSystem() )
+	    ret = str::Format(_("the installed %1% requires '%2%', but this requirement cannot be provided") ) % s.asString() % pool_dep2str(pool, dep);
+	  else
+	    ret = str::Format(_("the to be installed %1% requires '%2%', but this requirement cannot be provided") ) % s.asString() % pool_dep2str(pool, dep);
 	  if (providerlistInstalled.size() > 0) {
 	      detail += _("deleted providers: ");
 	      for (ProviderList::const_iterator iter = providerlistInstalled.begin(); iter != providerlistInstalled.end(); iter++) {
@@ -1224,12 +1259,12 @@ SATResolver::problems ()
 				if (poolItem) {
 				    if (pool->installed && s.get()->repo == pool->installed) {
 					problemSolution->addSingleAction (poolItem, REMOVE);
-					std::string description = str::form (_("remove lock to allow removal of %s"),  s.asString().c_str() );
+					std::string description = str::Format(_("remove lock to allow removal of %1%") ) % s.asString();
 					MIL << description << endl;
 					problemSolution->addDescription (description);
 				    } else {
 					problemSolution->addSingleAction (poolItem, KEEP);
-					std::string description = str::form (_("do not install %s"), s.asString().c_str());
+					std::string description = str::Format(_("do not install %1%") ) % s.asString();
 					MIL << description << endl;
 					problemSolution->addDescription (description);
 				    }
@@ -1244,12 +1279,12 @@ SATResolver::problems ()
 				if (poolItem) {
 				    if (pool->installed && s.get()->repo == pool->installed) {
 					problemSolution->addSingleAction (poolItem, KEEP);
-					std::string description = str::form (_("keep %s"), s.asString().c_str());
+					std::string description = str::Format(_("keep %1%") ) % s.asString();
 					MIL << description << endl;
 					problemSolution->addDescription (description);
 				    } else {
 					problemSolution->addSingleAction (poolItem, UNLOCK);
-					std::string description = str::form (_("remove lock to allow installation of %s"), itemToString( poolItem ).c_str());
+					std::string description = str::Format(_("remove lock to allow installation of %1%") ) % itemToString( poolItem );
 					MIL << description << endl;
 					problemSolution->addDescription (description);
 				    }
@@ -1265,7 +1300,7 @@ SATResolver::problems ()
 				    new SolverQueueItemInstall(_pool, ident.asString(), false );
 				problemSolution->addSingleAction (install, REMOVE_SOLVE_QUEUE_ITEM);
 
-				std::string description = str::form (_("do not install %s"), ident.c_str() );
+				std::string description = str::Format(_("do not install %1%") ) % ident;
 				MIL << description << endl;
 				problemSolution->addDescription (description);
 				}
@@ -1286,7 +1321,7 @@ SATResolver::problems ()
 				    new SolverQueueItemDelete(_pool, ident.asString(), false );
 				problemSolution->addSingleAction (del, REMOVE_SOLVE_QUEUE_ITEM);
 
-				std::string description = str::form (_("keep %s"), ident.c_str());
+				std::string description = str::Format(_("keep %1%") ) % ident;
 				MIL << description << endl;
 				problemSolution->addDescription (description);
 				}
@@ -1306,7 +1341,7 @@ SATResolver::problems ()
                                     MIL << description << endl;
                                     problemSolution->addFrontDescription (description);
 				} else {
-				    description = str::form (_("do not ask to install a solvable providing %s"), pool_dep2str(pool, what));
+				    description = str::Format(_("do not ask to install a solvable providing %1%") ) % pool_dep2str(pool, what);
                                     MIL << description << endl;
                                     problemSolution->addDescription (description);
 				}
@@ -1328,7 +1363,7 @@ SATResolver::problems ()
                                     problemSolution->addFrontDescription (description);
 
 				} else {
-				    description = str::form (_("do not ask to delete all solvables providing %s"), pool_dep2str(pool, what));
+				    description = str::Format(_("do not ask to delete all solvables providing %1%") ) % pool_dep2str(pool, what);
                                     MIL << description << endl;
                                     problemSolution->addDescription (description);
 				}
@@ -1341,7 +1376,7 @@ SATResolver::problems ()
 				if (poolItem) {
 				    if (pool->installed && s.get()->repo == pool->installed) {
 					problemSolution->addSingleAction (poolItem, KEEP);
-					std::string description = str::form (_("do not install most recent version of %s"), s.asString().c_str());
+					std::string description = str::Format(_("do not install most recent version of %1%") ) % s.asString();
 					MIL << description << endl;
 					problemSolution->addDescription (description);
 				    } else {
@@ -1362,12 +1397,12 @@ SATResolver::problems ()
 			PoolItem poolItem = _pool.find (s);
 			if (pool->installed && s.get()->repo == pool->installed) {
 			    problemSolution->addSingleAction (poolItem, LOCK);
-			    std::string description = str::form (_("keep %s despite the inferior architecture"), s.asString().c_str());
+			    std::string description = str::Format(_("keep %1% despite the inferior architecture") ) % s.asString();
 			    MIL << description << endl;
 			    problemSolution->addDescription (description);
 			} else {
 			    problemSolution->addSingleAction (poolItem, INSTALL);
-			    std::string description = str::form (_("install %s despite the inferior architecture"), s.asString().c_str());
+			    std::string description = str::Format(_("install %1% despite the inferior architecture") ) % s.asString();
 			    MIL << description << endl;
 			    problemSolution->addDescription (description);
 			}
@@ -1376,12 +1411,12 @@ SATResolver::problems ()
 			PoolItem poolItem = _pool.find (s);
 			if (pool->installed && s.get()->repo == pool->installed) {
 			    problemSolution->addSingleAction (poolItem, LOCK);
-			    std::string description = str::form (_("keep obsolete %s"), s.asString().c_str());
+			    std::string description = str::Format(_("keep obsolete %1%") ) % s.asString();
 			    MIL << description << endl;
 			    problemSolution->addDescription (description);
 			} else {
 			    problemSolution->addSingleAction (poolItem, INSTALL);
-			    std::string description = str::form (_("install %s from excluded repository"), s.asString().c_str());
+			    std::string description = str::Format(_("install %1% from excluded repository") ) % s.asString();
 			    MIL << description << endl;
 			    problemSolution->addDescription (description);
 			}
@@ -1421,14 +1456,14 @@ SATResolver::problems ()
 
 				if ((illegal & POLICY_ILLEGAL_DOWNGRADE) != 0)
 				{
-				    std::string description = str::form (_("downgrade of %s to %s"), s.asString().c_str(), sd.asString().c_str());
+				    std::string description = str::Format(_("downgrade of %1% to %2%") ) % s.asString() % sd.asString();
 				    MIL << description << endl;
 				    problemSolution->addDescription (description);
 				    gotone = 1;
 				}
 				if ((illegal & POLICY_ILLEGAL_ARCHCHANGE) != 0)
 				{
-				    std::string description = str::form (_("architecture change of %s to %s"), s.asString().c_str(), sd.asString().c_str());
+				    std::string description = str::Format(_("architecture change of %1% to %2%") ) % s.asString() % sd.asString();
 				    MIL << description << endl;
 				    problemSolution->addDescription (description);
 				    gotone = 1;
@@ -1437,16 +1472,13 @@ SATResolver::problems ()
 				{
                                     IdString s_vendor( s.vendor() );
                                     IdString sd_vendor( sd.vendor() );
-				    std::string description = str::form (_("install %s (with vendor change)\n  %s  -->  %s") ,
-								    sd.asString().c_str(),
-                                                                    ( s_vendor ? s_vendor.c_str() : " (no vendor) " ),
-                                                                    ( sd_vendor ? sd_vendor.c_str() : " (no vendor) " ) );
+				    std::string description = str::Format(_("install %1% (with vendor change)\n  %2%  -->  %3%") ) % sd.asString() % ( s_vendor ? s_vendor.c_str() : " (no vendor) " ) % ( sd_vendor ? sd_vendor.c_str() : " (no vendor) " );
 				    MIL << description << endl;
 				    problemSolution->addDescription (description);
 				    gotone = 1;
 				}
 				if (!gotone) {
-				    std::string description = str::form (_("replacement of %s with %s"), s.asString().c_str(), sd.asString().c_str());
+				    std::string description = str::Format(_("replacement of %1% with %2%") ) % s.asString() % sd.asString();
 				    MIL << description << endl;
 				    problemSolution->addDescription (description);
 				}
@@ -1457,7 +1489,7 @@ SATResolver::problems ()
 			else
 			{
 			    if (itemFrom) {
-				std::string description = str::form (_("deinstallation of %s"), s.asString().c_str());
+				std::string description = str::Format(_("deinstallation of %1%") ) % s.asString();
 				MIL << description << endl;
 				problemSolution->addDescription (description);
 				problemSolution->addSingleAction (itemFrom, REMOVE);
