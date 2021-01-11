@@ -1596,3 +1596,93 @@ sat::StringQueue SATResolver::userInstalled() const
 };// namespace zypp
 /////////////////////////////////////////////////////////////////////////
 
+#if 0
+// Legacy translations we want to keep for now:
+
+// - Rule infos:
+      case SOLVER_RULE_DISTUPGRADE:
+	  ret = str::form (_("%s does not belong to a distupgrade repository"), s.asString().c_str());
+      case SOLVER_RULE_INFARCH:
+	  ret = str::form (_("%s has inferior architecture"), s.asString().c_str());
+      case SOLVER_RULE_UPDATE:
+	  ret = str::form (_("problem with installed package %s"), s.asString().c_str());
+      case SOLVER_RULE_JOB:
+	  ret = _("conflicting requests");
+      case SOLVER_RULE_PKG:
+	  ret = _("some dependency problem");
+      case SOLVER_RULE_JOB_NOTHING_PROVIDES_DEP:
+	  ret = str::form (_("nothing provides requested %s"), pool_dep2str(pool, dep));
+	  detail += _("Have you enabled all requested repositories?");
+      case SOLVER_RULE_JOB_UNKNOWN_PACKAGE:
+	  ret = str::form (_("package %s does not exist"), pool_dep2str(pool, dep));
+	  detail += _("Have you enabled all requested repositories?");
+      case SOLVER_RULE_JOB_UNSUPPORTED:
+	  ret = _("unsupported request");
+      case SOLVER_RULE_JOB_PROVIDED_BY_SYSTEM:
+	  ret = str::form (_("%s is provided by the system and cannot be erased"), pool_dep2str(pool, dep));
+      case SOLVER_RULE_PKG_NOT_INSTALLABLE:
+	  ret = str::form (_("%s is not installable"), s.asString().c_str());
+      case SOLVER_RULE_PKG_NOTHING_PROVIDES_DEP:
+	  ignoreId = source; // for setting weak dependencies
+	  ret = str::form (_("nothing provides %s needed by %s"), pool_dep2str(pool, dep), s.asString().c_str());
+      case SOLVER_RULE_PKG_SAME_NAME:
+	  ret = str::form (_("cannot install both %s and %s"), s.asString().c_str(), s2.asString().c_str());
+      case SOLVER_RULE_PKG_CONFLICTS:
+	  ret = str::form (_("%s conflicts with %s provided by %s"), s.asString().c_str(), pool_dep2str(pool, dep), s2.asString().c_str());
+      case SOLVER_RULE_PKG_OBSOLETES:
+	  ret = str::form (_("%s obsoletes %s provided by %s"), s.asString().c_str(), pool_dep2str(pool, dep), s2.asString().c_str());
+      case SOLVER_RULE_PKG_INSTALLED_OBSOLETES:
+	  ret = str::form (_("installed %s obsoletes %s provided by %s"), s.asString().c_str(), pool_dep2str(pool, dep), s2.asString().c_str());
+      case SOLVER_RULE_PKG_SELF_CONFLICT:
+	  ret = str::form (_("solvable %s conflicts with %s provided by itself"), s.asString().c_str(), pool_dep2str(pool, dep));
+      case SOLVER_RULE_PKG_REQUIRES: {
+	  ret = str::form (_("%s requires %s, but this requirement cannot be provided"), s.asString().c_str(), pool_dep2str(pool, dep));
+	  if (providerlistInstalled.size() > 0) {
+	      detail += _("deleted providers: ");
+		  detail += _("\nnot installable providers: ");
+		  detail = _("not installable providers: ");
+
+// - Solution infos:
+	if (p == SOLVER_SOLUTION_JOB) {
+		case SOLVER_INSTALL | SOLVER_SOLVABLE: {
+			    std::string description = str::form (_("remove lock to allow removal of %s"),  s.asString().c_str() );
+			    std::string description = str::form (_("do not install %s"), s.asString().c_str());
+		case SOLVER_ERASE | SOLVER_SOLVABLE: {
+			    std::string description = str::form (_("keep %s"), s.asString().c_str());
+			    std::string description = str::form (_("remove lock to allow installation of %s"), itemToString( poolItem ).c_str());
+		case SOLVER_INSTALL | SOLVER_SOLVABLE_NAME:
+		    std::string description = str::form (_("do not install %s"), ident.c_str() );
+		case SOLVER_ERASE | SOLVER_SOLVABLE_NAME:
+		    std::string description = str::form (_("keep %s"), ident.c_str());
+		case SOLVER_INSTALL | SOLVER_SOLVABLE_PROVIDES:
+			resolverProblem->setDescription(_("This request will break your system!"));
+			description = _("ignore the warning of a broken system");
+			description = str::form (_("do not ask to install a solvable providing %s"), pool_dep2str(pool, what));
+		case SOLVER_ERASE | SOLVER_SOLVABLE_PROVIDES:
+			resolverProblem->setDescription(_("This request will break your system!"));
+			description = _("ignore the warning of a broken system");
+			description = str::form (_("do not ask to delete all solvables providing %s"), pool_dep2str(pool, what));
+		case SOLVER_UPDATE | SOLVER_SOLVABLE:
+			    std::string description = str::form (_("do not install most recent version of %s"), s.asString().c_str());
+
+	} else if (p == SOLVER_SOLUTION_INFARCH) {
+		std::string description = str::form (_("keep %s despite the inferior architecture"), s.asString().c_str());
+		std::string description = str::form (_("install %s despite the inferior architecture"), s.asString().c_str());
+
+	} else if (p == SOLVER_SOLUTION_DISTUPGRADE) {
+		std::string description = str::form (_("keep obsolete %s"), s.asString().c_str());
+		std::string description = str::form (_("install %s from excluded repository"), s.asString().c_str());
+
+	} else if ( p == SOLVER_SOLUTION_BLACK ) {
+	      description = str::Format(_("install %1% although it has been retracted")) % s.asString();
+	      description = str::Format(_("allow to install the PTF %1%")) % s.asString();
+	      description = str::Format(_("install %1% although it is blacklisted")) % s.asString();
+
+	} else if ( p > 0 ) {
+			std::string description = str::form (_("downgrade of %s to %s"), s.asString().c_str(), sd.asString().c_str());
+			std::string description = str::form (_("architecture change of %s to %s"), s.asString().c_str(), sd.asString().c_str());
+			std::string description = str::form (_("install %s (with vendor change)\n  %s  -->  %s") ,
+			std::string description = str::form (_("replacement of %s with %s"), s.asString().c_str(), sd.asString().c_str());
+
+			std::string description = str::form (_("deinstallation of %s"), s.asString().c_str());
+#endif
