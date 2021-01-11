@@ -182,24 +182,33 @@ std::list<std::string> KeyManagerCtx::Impl::readSignaturesFprsOptVerify( const P
   }
 
   bool foundBadSignature = false;
+  bool foundGoodSignature = false;
   std::list<std::string> signatures;
   for ( gpgme_signature_t sig = res->signatures; sig; sig = sig->next ) {
 
     if ( sig->fpr )
     {
-      // bsc#1100427: With ibgpgme11-1.11.0 and if a recent gpg version was used
+      // bsc#1100427: With libgpgme11-1.11.0 and if a recent gpg version was used
       // to create the signature, the field may contain the full fingerprint, but
       // we're expected to return the ID.
       // [https://github.com/gpg/gpgme/commit/478d1650bbef84958ccce439fac982ef57b16cd0]
       std::string id( sig->fpr );
       if ( id.size() > 16 )
 	id = id.substr( id.size()-16 );
+
+      DBG << "Found signature with ID: " << id  << " in " << file_r << std::endl;
       signatures.push_back( std::move(id) );
     }
 
-    if ( sig->status != GPG_ERR_NO_ERROR )
-    {
-      if ( gpgme_err_code(sig->status) != GPG_ERR_KEY_EXPIRED )
+    if ( sig->status != GPG_ERR_NO_ERROR ) {
+      DBG << "Verification failed with result: " << file_r << " " << GpgmeErr(sig->status) << std::endl;
+      const auto status = gpgme_err_code(sig->status);
+
+      // bsc#1180721: libgpgme started to return signatures of unknown keys, which breaks
+      // our workflow when verifying files that have multiple signatures, including some that are
+      // not in the trusted keyring. We should not fail if we have unknown or expired keys and at least a good one.
+      // We will however keep the behaviour of failing if we find a bad signatures even if others are good.
+      if ( status != GPG_ERR_KEY_EXPIRED && status != GPG_ERR_NO_PUBKEY )
       {
 	if ( !foundBadSignature )
 	  foundBadSignature = true;
@@ -208,14 +217,20 @@ std::list<std::string> KeyManagerCtx::Impl::readSignaturesFprsOptVerify( const P
       }
       else
       {
+        // for now treat expired keys as good signature
+        if ( status == GPG_ERR_KEY_EXPIRED )
+          foundGoodSignature = true;
+
 	if ( verify_r )
-	  WAR << "Legacy: Ignore expired key: " << file_r << " " << GpgmeErr(sig->status) << endl;
+	  WAR << "Legacy: Ignore expired or unknown key: " << file_r << " " << GpgmeErr(sig->status) << endl;
       }
+    } else {
+      foundGoodSignature = true;
     }
   }
 
   if ( verify_r )
-    *verify_r = (!foundBadSignature);
+    *verify_r = (!foundBadSignature) && foundGoodSignature;
   return signatures;
 }
 
