@@ -535,6 +535,7 @@ private:
   public:
     DownloadPrivate ( Downloader &parent, std::shared_ptr<NetworkRequestDispatcher> requestDispatcher, std::shared_ptr<MirrorControl> mirrors, DownloadSpec &&spec, Download &p );
     void start ();
+    void init() override;
   };
 
   class DownloaderPrivate : public BasePrivate

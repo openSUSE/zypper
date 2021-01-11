@@ -16,6 +16,9 @@ namespace zyppng
   public:
     BasePrivate ( Base &b ) : z_ptr(&b){}
     virtual ~BasePrivate();
+
+    virtual void init ();
+
     Base::WeakPtr parent;
     std::unordered_set< Base::Ptr > children;
     Base *z_ptr = nullptr;

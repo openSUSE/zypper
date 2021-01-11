@@ -1,13 +1,14 @@
 #include <zypp/zyppng/media/network/private/request_p.h>
 #include <zypp/zyppng/media/network/private/networkrequesterror_p.h>
 #include <zypp/zyppng/media/network/networkrequestdispatcher.h>
+#include <zypp/zyppng/media/network/private/mediadebug_p.h>
 #include <zypp/zyppng/base/EventDispatcher>
+#include <zypp/zyppng/base/private/linuxhelpers_p.h>
 #include <zypp/zyppng/core/String>
 #include <zypp/media/CurlHelper.h>
 #include <zypp/media/CurlConfig.h>
 #include <zypp/media/MediaUserAuth.h>
 #include <zypp/ZConfig.h>
-#include <zypp/base/Logger.h>
 #include <zypp/base/String.h>
 #include <zypp/Pathname.h>
 #include <curl/curl.h>
@@ -393,7 +394,7 @@ namespace zyppng {
       else
       {
         DBG << "Proxy: not explicitly set" << std::endl;
-        DBG << "Proxy: libcurl may look into the environment" << std::endl;
+        DBG_MEDIA << "Proxy: libcurl may look into the environment" << std::endl;
       }
 
       /** Speed limits */
@@ -580,7 +581,6 @@ namespace zyppng {
       if ( rmode._activityTimer && rmode._activityTimer->isRunning() )
         rmode._activityTimer->start();
     }
-
   }
 
   int NetworkRequestPrivate::curlProgressCallback( void *clientp, curl_off_t dltotal, curl_off_t dlnow, curl_off_t ultotal, curl_off_t ulnow )
@@ -590,7 +590,7 @@ namespace zyppng {
     NetworkRequestPrivate *that = reinterpret_cast<NetworkRequestPrivate *>( clientp );
 
     if ( !std::holds_alternative<running_t>(that->_runningMode) ){
-      DBG << "Curl progress callback was called in invalid state "<< that->z_func()->state() << std::endl;
+      DBG_MEDIA << "Curl progress callback was called in invalid state "<< that->z_func()->state() << std::endl;
       return -1;
     }
 
@@ -625,7 +625,7 @@ namespace zyppng {
       else
         hdr.clear();
 
-      XXX << "Received header: " << hdr << std::endl;
+      DBG_MEDIA << "Received header: " << hdr << std::endl;
 
       auto &rmode = std::get<running_t>( _runningMode );
       if ( hdr.starts_with("HTTP/") ) {
@@ -654,7 +654,7 @@ namespace zyppng {
         NetworkRequest::Range r;
         if ( !parseContentRangeHeader( hdr, r.start, r.len) )
           return 0;
-        DBG << "Got content range :" << r.start << " len " << r.len << std::endl;
+        DBG_MEDIA << "Got content range :" << r.start << " len " << r.len << std::endl;
         rmode._gotContentRangeHeader = true;
         rmode._currentSrvRange = r;
 
@@ -663,7 +663,7 @@ namespace zyppng {
         auto str = std::string ( lenStr.data(), lenStr.length() );
         auto len = zypp::str::strtonum<typename zypp::ByteCount::SizeType>( str.data() );
         if ( len > 0 ) {
-          DBG << "Got Content-Length Header: " << len << std::endl;
+          DBG_MEDIA << "Got Content-Length Header: " << len << std::endl;
           rmode._contentLenght = zypp::ByteCount(len, zypp::ByteCount::B);
         }
       }
@@ -692,7 +692,7 @@ namespace zyppng {
     auto writeDataToFile = [ this, &rmode ]( off_t offset, const char *data, size_t len ) -> off_t {
 
       if ( rmode._currentRange < 0 ) {
-        DBG << "Current range is zero in write request" << std::endl;
+        DBG_MEDIA << "Current range is zero in write request" << std::endl;
         return 0;
       }
 
@@ -710,7 +710,7 @@ namespace zyppng {
         }
 
         if ( !rmode._outFile ) {
-          _originalError = "Unable to open target file.";
+          _originalError = zypp::str::Format("Unable to open target file (%1%). Errno: (%2%:%3%)") % _targetFile.asString() % errno % strerr_cxx();
           return 0;
         }
       }

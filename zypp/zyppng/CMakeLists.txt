@@ -101,6 +101,7 @@ SET( zyppng_media_HEADERS
 SET( zyppng_media_private_HEADERS
   media/private/medianetworkserver_p.h
   media/network/private/downloader_p.h
+  media/network/private/mediadebug_p.h
   media/network/private/mirrorcontrol_p.h
   media/network/private/networkrequestdispatcher_p.h
   media/network/private/networkrequesterror_p.h

@@ -1,6 +1,6 @@
 #include "private/mirrorcontrol_p.h"
+#include "private/mediadebug_p.h"
 #include <zypp/zyppng/base/EventDispatcher>
-#include <zypp/base/Logger.h>
 #include <zypp/zyppng/base/Signals>
 #include <iostream>
 
@@ -89,9 +89,9 @@ namespace zyppng {
             connTime = std::chrono::seconds( defaultSampleTime );
           }
 
-          DBG << "Got rating for mirror: " <<  mirrorHandle->mirrorUrl << ", rating was " << mirrorHandle->rating;
+          DBG_MEDIA << "Got rating for mirror: " <<  mirrorHandle->mirrorUrl << ", rating was " << mirrorHandle->rating;
           mirrorHandle->rating += connTime.count();
-          DBG << " rating is now " << mirrorHandle->rating << " conn time was " << connTime.count() << std::endl;
+          DBG_MEDIA << " rating is now " << mirrorHandle->rating << " conn time was " << connTime.count() << std::endl;
 
           // clean the request up
           mirrorHandle->_finishedConn.disconnect();

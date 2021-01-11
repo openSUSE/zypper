@@ -708,7 +708,7 @@ namespace zypp
       {
         static std::ostream nstream(NULL);
         auto control = LogControlImpl::instance();
-        if ( !control ) {
+        if ( !control || !group_r || strlen(group_r ) == 0 ) {
           return nstream;
         }
 

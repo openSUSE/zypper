@@ -5,17 +5,21 @@ namespace zyppng {
   BasePrivate::~BasePrivate()
   { }
 
-  Base::Base() : d_ptr( new BasePrivate(*this) )
-  { }
-
-  Base::~Base()
+  void BasePrivate::init()
   { }
 
   Base::Base ( BasePrivate &dd )
     : d_ptr ( &dd )
   {
     d_ptr->z_ptr = this;
+    d_ptr->init();
   }
+
+  Base::Base() : Base( *new BasePrivate(*this) )
+  { }
+
+  Base::~Base()
+  { }
 
   Base::WeakPtr Base::parent() const
   {

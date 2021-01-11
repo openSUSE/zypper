@@ -1,5 +1,6 @@
 #include <zypp/zyppng/media/network/private/downloader_p.h>
 #include <zypp/zyppng/media/network/private/request_p.h>
+#include <zypp/zyppng/media/network/private/mediadebug_p.h>
 #include <zypp/zyppng/media/network/private/networkrequesterror_p.h>
 #include <zypp/zyppng/media/network/networkrequestdispatcher.h>
 #include <zypp/zyppng/media/network/request.h>
@@ -104,7 +105,7 @@ namespace zyppng {
     const auto &spec = sm._spec;
 
     if ( spec.checkExistsOnly() ) {
-      MIL << "Check exists only enabled" << std::endl;
+      MIL_MEDIA << "Check exists only enabled" << std::endl;
       return _sigTransitionToDlNormalFileState.emit();
     }
 
@@ -114,22 +115,22 @@ namespace zyppng {
     if ( spec.metalinkEnabled() ) {
 #if ENABLE_ZCHUNK_COMPRESSION
       if ( deltaZck && spec.headerSize() > 0 ) {
-        MIL << "We might have a zck file, detecting metalink first" << std::endl;
+        MIL_MEDIA << "We might have a zck file, detecting metalink first" << std::endl;
         return _sigTransitionToDetectMetalinkState.emit();
       }
 #endif
-      MIL << "No zchunk data available but metalink requested, going to download metalink directly." << std::endl;
+      MIL_MEDIA << "No zchunk data available but metalink requested, going to download metalink directly." << std::endl;
       return _sigTransitionToDlMetaLinkInfoState.emit();
     }
 
 #if ENABLE_ZCHUNK_COMPRESSION
     // no Metalink, maybe we can directly download zck
     if ( deltaZck && spec.headerSize() > 0 ) {
-      MIL << "No metalink but zckunk data availble trying to download ZckHead directly." << std::endl;
+      MIL_MEDIA << "No metalink but zckunk data availble trying to download ZckHead directly." << std::endl;
       return _sigTransitionToDLZckHeaderState.emit();
     }
 #endif
-    MIL << "Fallback to normal DL" << std::endl;
+    MIL_MEDIA << "Fallback to normal DL" << std::endl;
     _sigTransitionToDlNormalFileState.emit();
   }
 
@@ -144,7 +145,7 @@ namespace zyppng {
   // Metalink detection state, we query the type of file from the server, in order to use metalink support the server
   // needs to correctly return the metalink file content type, otherwise we proceed to not downloading a metalink file
   DetectMetalinkState::DetectMetalinkState(DownloadPrivate &parent) : SimpleState( parent ){
-    MIL << "Creating DetectMetalinkState" << std::endl;
+    MIL_MEDIA << "Creating DetectMetalinkState" << std::endl;
   }
 
   void DownloadPrivateBase::DetectMetalinkState::enter()
@@ -155,7 +156,7 @@ namespace zyppng {
     auto &sm = stateMachine();
     const auto &url = sm._spec.url();
 
-    MIL << "Detecting if metalink is available on " << url << std::endl;
+    MIL_MEDIA << "Detecting if metalink is available on " << url << std::endl;
 
     _request = std::make_shared<Request>( ::internal::clearQueryString( url ), zypp::Pathname("/dev/null") );
 
@@ -188,7 +189,7 @@ namespace zyppng {
   {
     auto lck = stateMachine().z_func()->shared_from_this();
     if ( req.hasError() ) {
-      MIL << "Detecing if metalink is possible for url " << req.url() << " failed with error " << err.toString() << " falling back to download without metalink." << std::endl;
+      WAR << "Detecing if metalink is possible for url " << req.url() << " failed with error " << err.toString() << " falling back to download without metalink." << std::endl;
       _error = err;
       _gotMetalink = false;
       return _sigFinished.emit();
@@ -340,7 +341,7 @@ namespace zyppng {
         sm._requestDispatcher->enqueue( _request );
         return;
       }
-      MIL << "Downloading on " << stateMachine()._spec.url() << " failed with error "<< err.toString() << " " << err.nativeErrorString() << std::endl;
+      MIL_MEDIA << "Downloading on " << stateMachine()._spec.url() << " failed with error "<< err.toString() << " " << err.nativeErrorString() << std::endl;
       return failed( NetworkRequestError(err) );
     }
 
@@ -349,12 +350,12 @@ namespace zyppng {
 
   DlMetaLinkInfoState::DlMetaLinkInfoState(DownloadPrivate &parent) : BasicDownloaderStateBase( parent )
   {
-    MIL << "Downloading metalink on " << parent._spec.url() << std::endl;
+    MIL_MEDIA << "Downloading metalink on " << parent._spec.url() << std::endl;
   }
 
   std::shared_ptr<DownloadPrivateBase::FinishedState> DownloadPrivateBase::DlMetaLinkInfoState::transitionToFinished()
   {
-    MIL << "Downloading on " << stateMachine()._spec.url() << " transition to final state. " << std::endl;
+    MIL_MEDIA << "Downloading on " << stateMachine()._spec.url() << " transition to final state. " << std::endl;
     return std::make_shared<FinishedState>( std::move(_error), stateMachine() );
   }
 
@@ -402,7 +403,7 @@ namespace zyppng {
     if ( _isMetalink ) {
       // this is a metalink file change the expected filesize
       if ( zypp::ByteCount( 2, zypp::ByteCount::MB) < static_cast<zypp::ByteCount::SizeType>( dlnow ) ) {
-        MIL << "Metalink file exceeds 2MB in filesize, aborting."<<std::endl;
+        WAR << "Metalink file exceeds 2MB in filesize, aborting."<<std::endl;
         sm._requestDispatcher->cancel( req, NetworkRequestErrorPrivate::customError( NetworkRequestError::ExceededMaxLen ) );
         return;
       }
@@ -414,7 +415,7 @@ namespace zyppng {
 
   PrepareMultiState::PrepareMultiState(DownloadPrivate &parent) : SimpleState( parent )
   {
-    MIL << "About to enter PrepareMultiState" << std::endl;
+    MIL_MEDIA << "About to enter PrepareMultiState" << std::endl;
   }
 
   void DownloadPrivateBase::PrepareMultiState::enter( )
@@ -425,9 +426,9 @@ namespace zyppng {
     const auto &targetPath = spec.targetPath();
 #if ENABLE_ZCHUNK_COMPRESSION
     _haveZckData = (isZchunkFile( spec.deltaFile() )  && spec.headerSize() > 0);
-    DBG << " Upgrading request for URL: "<< url << " to multipart download , which zckunk=" << _haveZckData << std::endl;
+    DBG_MEDIA << " Upgrading request for URL: "<< url << " to multipart download , which zckunk=" << _haveZckData << std::endl;
 #else
-    DBG << " Upgrading request for URL: "<< url << " to multipart download , which zckunk=false" << std::endl;
+    DBG_MEDIA << " Upgrading request for URL: "<< url << " to multipart download , which zckunk=false" << std::endl;
 #endif
 
 
@@ -448,7 +449,7 @@ namespace zyppng {
 #endif
         auto bl = parser.getBlockList();
         if ( !bl.haveBlocks() )
-          MIL << "HERE! Got no blocks for URL " << spec.url() << " but got filesize? " << bl.getFilesize() << std::endl;
+          MIL_MEDIA << "Got no blocks for URL " << spec.url() << " but got filesize? " << bl.getFilesize() << std::endl;
         if ( bl.haveBlocks() || bl.haveFilesize() )
           _blockList = std::move(bl);
       }
@@ -521,7 +522,7 @@ namespace zyppng {
       } else {
         //we generate a blocklist on the fly based on the filesize
 
-        XXX << "Generate blocklist, since there was none in the metalink file." << url  << std::endl;
+        MIL_MEDIA << "Generate blocklist, since there was none in the metalink file." << url  << std::endl;
 
         off_t currOff = 0;
         off_t filesize = _blockList.getFilesize();
@@ -535,17 +536,17 @@ namespace zyppng {
           currOff += blksize;
         }
 
-        XXX << "Generated blocklist: " << std::endl << _blockList << std::endl << " End blocklist " << std::endl;
+        MIL_MEDIA << "Generated blocklist: " << std::endl << _blockList << std::endl << " End blocklist " << std::endl;
       }
     }
 
     _sigFinished.emit();
-    XXX << "Got control back" << std::endl;
+    DBG_MEDIA<< "Got control back" << std::endl;
   }
 
   std::shared_ptr<DownloadPrivateBase::DlNormalFileState> DownloadPrivateBase::PrepareMultiState::fallbackToNormalTransition()
   {
-    DBG << "No blocklist and no filesize, falling back to normal download for URL " << stateMachine()._spec.url() << std::endl;
+    MIL_MEDIA << "No blocklist and no filesize, falling back to normal download for URL " << stateMachine()._spec.url() << std::endl;
     auto ptr = std::make_shared<DlNormalFileState>( stateMachine() );
     ptr->_mirrors = std::move(_mirrors);
 
@@ -625,12 +626,12 @@ namespace zyppng {
 
     _downloadedMultiByteCount += req.downloadedByteCount();
 
-    DBG << "Request finished "<<std::endl;
+    MIL_MEDIA << "Request finished "<<std::endl;
     const auto &rngs = reqLocked->requestedRanges();
     std::for_each( rngs.begin(), rngs.end(), []( const auto &b ){ DBG << "-> Block " << b.start << " finished." << std::endl; } );
 
     auto restartReqWithBlock = [ this ]( std::shared_ptr<Request> &req, std::vector<Block> &&blocks ) {
-      DBG << "Reusing Request to download blocks:"<<std::endl;
+      MIL_MEDIA << "Reusing Request to download blocks:"<<std::endl;
       if ( !addBlockRanges( req, std::move( blocks ) ) )
         return false;
 
@@ -641,7 +642,7 @@ namespace zyppng {
 
     //check if we already have enqueued all blocks if not reuse the request
     if ( _ranges.size() ) {
-      DBG << "Reusing to download blocks: "<<std::endl;
+      MIL_MEDIA << "Reusing to download blocks: "<<std::endl;
       if ( !restartReqWithBlock( reqLocked, getNextBlocks( reqLocked->url().getScheme() ) ) ) {
         return setFailed( "Failed to restart request with new blocks." );
       }
@@ -652,7 +653,7 @@ namespace zyppng {
       if ( !_failedRanges.empty() ) {
 
         auto fblks = getNextFailedBlocks( reqLocked->url().getScheme() );
-        DBG << "Reusing to download failed blocks: "<<std::endl;
+        MIL_MEDIA << "Reusing to download failed blocks: "<<std::endl;
         if ( !restartReqWithBlock( reqLocked, std::move(fblks) ) ) {
             return setFailed( "Failed to restart request with previously failed blocks." );
         }
@@ -680,7 +681,7 @@ namespace zyppng {
     } else {
 
       //if a error happens during a multi download we try to use another mirror to download the failed block
-      DBG << "Request failed " << req->extendedErrorString() << "(" << req->url() << ")" << std::endl;
+      MIL << "Request failed " << req->extendedErrorString() << "(" << req->url() << ")" << std::endl;
 
       NetworkRequestError dummyErr;
 
@@ -689,7 +690,7 @@ namespace zyppng {
         std::transform( fRanges.begin(), fRanges.end(), std::back_inserter(_failedRanges), [ &req ]( const auto &r ){
           Block b = std::any_cast<Block>(r.userData);;
           b._failedWithErr = req->error();
-          DBG << "Adding failed block to failed blocklist: " << b.start << " " << b.len << " (" << req->error().toString() << " [" << req->error().nativeErrorString()<< "])" << std::endl;
+          DBG_MEDIA << "Adding failed block to failed blocklist: " << b.start << " " << b.len << " (" << req->error().toString() << " [" << req->error().nativeErrorString()<< "])" << std::endl;
           return b;
         });
 
@@ -837,7 +838,7 @@ namespace zyppng {
     // if we download chunks we do not want to wait for too long on mirrors that are slow to answer
     req->transferSettings().setTimeout( 2 );
 
-    DBG << "Creating Request to download blocks:"<<std::endl;
+    DBG_MEDIA << "Creating Request to download blocks:"<<std::endl;
     if ( !addBlockRanges( req, std::move(blocks) ) ) {
       err = NetworkRequestErrorPrivate::customError( NetworkRequestError::InternalError, "Failed to add blocks to request." );
       return nullptr;
@@ -856,14 +857,14 @@ namespace zyppng {
       if ( block.chksumVec && block.chksumtype.size() ) {
         std::shared_ptr<zypp::Digest> dig = std::make_shared<zypp::Digest>();
         if ( !dig->create( block.chksumtype ) ) {
-          WAR << "Trying to create Digest with chksum type " << block.chksumtype << " failed " << std::endl;
+          WAR_MEDIA << "Trying to create Digest with chksum type " << block.chksumtype << " failed " << std::endl;
           return false;
         }
 
-        DBG << "Starting block " << block.start << " with checksum " << zypp::Digest::digestVectorToString( *block.chksumVec ) << "." << std::endl;
+        DBG_MEDIA << "Starting block " << block.start << " with checksum " << zypp::Digest::digestVectorToString( *block.chksumVec ) << "." << std::endl;
         req->addRequestRange( block.start, block.len, dig, *block.chksumVec, std::any( block ), block.chksumCompareLen );
       } else {
-        DBG << "Starting block " << block.start << " without checksum." << std::endl;
+        DBG_MEDIA << "Starting block " << block.start << " without checksum." << std::endl;
         req->addRequestRange( block.start, block.len, {}, {}, std::any( block ) );
       }
     }
@@ -924,7 +925,7 @@ namespace zyppng {
       _ranges.pop_front();
       
     }
-    XXX << "Accumulated " << blocks.size() <<  " blocks with accumulated size of: " << accumulatedSize << "." << std::endl;
+    DBG_MEDIA << "Accumulated " << blocks.size() <<  " blocks with accumulated size of: " << accumulatedSize << "." << std::endl;
     return blocks;
   }
 
@@ -967,7 +968,7 @@ namespace zyppng {
   DlMetalinkState::DlMetalinkState(zypp::media::MediaBlockList &&blockList, std::vector<Url> &&mirrors, DownloadPrivate &parent)
   : RangeDownloaderBaseState( std::move(mirrors), parent ), _blockList( std::move(blockList) )
   {
-    MIL << "About to enter DlMetalinkState for url " << parent._spec.url() << std::endl;
+    MIL_MEDIA << "About to enter DlMetalinkState for url " << parent._spec.url() << std::endl;
   }
 
   void DownloadPrivateBase::DlMetalinkState::enter()
@@ -1077,7 +1078,7 @@ namespace zyppng {
 
   DlNormalFileState::DlNormalFileState(DownloadPrivate &parent) : BasicDownloaderStateBase( parent )
   {
-    MIL << "About to enter DlNormalFileState for url " << parent._spec.url() << std::endl;
+    MIL_MEDIA << "About to enter DlNormalFileState for url " << parent._spec.url() << std::endl;
   }
 
   std::shared_ptr<DownloadPrivateBase::FinishedState> DlNormalFileState::transitionToFinished()
@@ -1090,7 +1091,7 @@ namespace zyppng {
     BasicDownloaderStateBase( parent )
   {
     _mirrors = std::move(mirrors);
-    MIL << "About to enter DlZckHeadState for url " << parent._spec.url() << std::endl;
+    MIL_MEDIA << "About to enter DlZckHeadState for url " << parent._spec.url() << std::endl;
   }
 
   bool DownloadPrivateBase::DLZckHeadState::initializeRequest(std::shared_ptr<DownloadPrivateBase::Request> r)
@@ -1099,7 +1100,7 @@ namespace zyppng {
 
     const auto &s = stateMachine()._spec;
     if ( s.headerSize() == 0 ) {
-      ERR << "Downloading the zck header was requested, but headersize is zero." << std::endl;
+      ERR_MEDIA << "Downloading the zck header was requested, but headersize is zero." << std::endl;
       return false;
     }
 
@@ -1129,14 +1130,14 @@ namespace zyppng {
 
   std::shared_ptr<DownloadPrivateBase::DLZckState> DLZckHeadState::transitionToDlZckState()
   {
-    MIL << "Downloaded the header of size: " << _request->downloadedByteCount() << std::endl;
+    MIL_MEDIA << "Downloaded the header of size: " << _request->downloadedByteCount() << std::endl;
     return std::make_shared<DLZckState>( std::move(_mirrors), stateMachine() );
   }
 
   DLZckState::DLZckState(std::vector<Url> &&mirrors, DownloadPrivate &parent)
   : RangeDownloaderBaseState( std::move(mirrors), parent )
   {
-    MIL << "About to enter DLZckState for url " << parent._spec.url() << std::endl;
+    MIL_MEDIA << "About to enter DLZckState for url " << parent._spec.url() << std::endl;
   }
 
   void DownloadPrivateBase::DLZckState::enter()
@@ -1251,7 +1252,7 @@ namespace zyppng {
       const auto s = static_cast<off_t>( zck_get_chunk_start( chunk ) );
       const auto l = static_cast<size_t>( zck_get_chunk_comp_size ( chunk ) );
 
-      MIL << "Downloading block " << s << " with length " << l << " checksum " << zckDigest.value() << " type " << chksumName << std::endl;
+      MIL_MEDIA << "Downloading block " << s << " with length " << l << " checksum " << zckDigest.value() << " type " << chksumName << std::endl;
 
       _ranges.push_back( Block{
         .start = s,
@@ -1315,7 +1316,7 @@ namespace zyppng {
 
   FinishedState::FinishedState(NetworkRequestError &&error, DownloadPrivate &parent) : SimpleState( parent ),_error( std::move(error) )
   {
-    MIL << "About to enter FinishedState for url " << parent._spec.url() << std::endl;
+    MIL_MEDIA << "About to enter FinishedState for url " << parent._spec.url() << std::endl;
   }
 
   bool DownloadPrivateBase::handleRequestAuthError( std::shared_ptr<Request> req, const zyppng::NetworkRequestError &err )
@@ -1407,16 +1408,17 @@ namespace zyppng {
 
   DownloadPrivate::DownloadPrivate(Downloader &parent, std::shared_ptr<NetworkRequestDispatcher> requestDispatcher, std::shared_ptr<MirrorControl> mirrors, DownloadSpec &&spec, Download &p) :
     DownloadPrivateBase( parent, std::move(requestDispatcher), std::move(mirrors), std::move(spec), p)
+  { }
+
+  void DownloadPrivate::init()
   {
     Base::connectFunc( *this, &DownloadStatemachine<DownloadPrivate>::sigFinished, [this](){
       DownloadPrivateBase::_sigFinished.emit( *z_func() );
-    });
+    } );
 
     Base::connectFunc( *this, &DownloadStatemachine<DownloadPrivate>::sigStateChanged, [this]( const auto state ){
       DownloadPrivateBase::_sigStateChanged.emit( *z_func(), state );
-    });
-
-    //DownloadStatemachine<DownloadPrivate>::start();
+    } );
   }
 
   void DownloadPrivate::start()

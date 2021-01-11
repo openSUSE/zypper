@@ -1,6 +1,7 @@
 #include <zypp/zyppng/media/network/private/networkrequestdispatcher_p.h>
 #include <zypp/zyppng/media/network/private/networkrequesterror_p.h>
 #include <zypp/zyppng/media/network/private/request_p.h>
+#include <zypp/zyppng/media/network/private/mediadebug_p.h>
 #include <zypp/zyppng/base/Timer>
 #include <zypp/zyppng/base/SocketNotifier>
 #include <zypp/zyppng/base/EventDispatcher>
@@ -12,6 +13,11 @@
 #include <zypp/base/String.h>
 
 using namespace boost;
+
+namespace zypp {
+  L_ENV_CONSTR_DEFINE_FUNC(ZYPP_MEDIA_CURL_DEBUG)
+}
+
 
 namespace zyppng {
 
@@ -100,7 +106,7 @@ int NetworkRequestDispatcherPrivate::socketCallback(CURL *easy, curl_socket_t s,
       return 0;
     } else {
       //a broken handle without anything assigned, also should never happen but make sure and clean it up
-      DBG << "Cleaning up unassigned  easy handle" << std::endl;
+      WAR_MEDIA << "Cleaning up unassigned  easy handle" << std::endl;
       curl_multi_remove_handle( _multi, easy );
       curl_easy_cleanup( easy );
       return 0;
@@ -162,13 +168,13 @@ void NetworkRequestDispatcherPrivate::handleMultiSocketAction(curl_socket_t nati
 
       void *privatePtr = nullptr;
       if ( curl_easy_getinfo( easy, CURLINFO_PRIVATE, &privatePtr ) != CURLE_OK ) {
-        DBG << "Unable to get CURLINFO_PRIVATE" << std::endl;
+        WAR_MEDIA << "Unable to get CURLINFO_PRIVATE" << std::endl;
         continue;
       }
 
       if ( !privatePtr ) {
         //broken easy handle not associated, should never happen but clean it up
-        DBG << "Cleaning up unassigned  easy handle" << std::endl;
+        WAR_MEDIA << "Cleaning up unassigned  easy handle" << std::endl;
         curl_multi_remove_handle( _multi, easy );
         curl_easy_cleanup( easy );
         continue;
@@ -326,12 +332,12 @@ void NetworkRequestDispatcher::enqueue(const std::shared_ptr<NetworkRequest> &re
   Z_D();
 
   if ( std::find( d->_runningDownloads.begin(), d->_runningDownloads.end(), req ) != d->_runningDownloads.end() )  {
-    WAR << "Ignoring request to enqueue download " << req->url().asString() << " request is already running " << std::endl;
+    WAR_MEDIA << "Ignoring request to enqueue download " << req->url().asString() << " request is already running " << std::endl;
     return;
   }
 
   if ( std::find( d->_pendingDownloads.begin(), d->_pendingDownloads.end(), req ) != d->_pendingDownloads.end() ) {
-    WAR << "Ignoring request to enqueue download " << req->url().asString() << " request is already enqueued " << std::endl;
+    WAR_MEDIA << "Ignoring request to enqueue download " << req->url().asString() << " request is already enqueued " << std::endl;
     return;
   }
 

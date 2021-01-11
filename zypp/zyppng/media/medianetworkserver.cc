@@ -21,9 +21,9 @@
 
 #include <zypp/zyppng/messages.pb.h>
 
+#undef ZYPP_BASE_LOGGER_LOGGROUP
 #define ZYPP_BASE_LOGGER_LOGGROUP "zypp::MediaNetworkServer"
-#include <zypp/base/Logger.h>
-#include <zypp/base/LogControl.h>
+#include <zypp/zyppng/media/network/private/mediadebug_p.h>
 
 #include <algorithm>
 
@@ -34,7 +34,6 @@ namespace zyppng {
   MediaNetworkServer::MediaNetworkServer( )
     : _downloadManager( std::make_shared<Downloader>( MirrorControl::create() ) )
   {
-    _workingDir.autoCleanup( true );
   }
 
   void MediaNetworkServer::listen( const std::string &sockPath )
@@ -50,11 +49,6 @@ namespace zyppng {
     _serverSocket->listen();
 
     MIL << "MediaNetworkServer started to listen for connections " << std::endl;
-  }
-
-  const zypp::filesystem::TmpDir &MediaNetworkServer::workingDir()
-  {
-    return _workingDir;
   }
 
   std::shared_ptr<Downloader> MediaNetworkServer::downloader()
@@ -74,7 +68,7 @@ namespace zyppng {
     client->connectFunc( &MediaNetworkConn::sigDisconnected, [ this, wp = std::weak_ptr(client) ](){
       auto p = wp.lock();
       if (!p) {
-        MIL << "MediaNetworkServer client disconnected but the pointer was already deleted" << std::endl;
+        MIL_MEDIA << "MediaNetworkServer client disconnected but the pointer was already deleted" << std::endl;
         return;
       }
 
@@ -107,7 +101,7 @@ namespace zyppng {
 
   MediaNetworkConn::MediaNetworkConn( MediaNetworkServer &server, std::shared_ptr<Socket> &&socket ) : _server(server), _connection ( std::move( socket ) )
   {
-    MIL << "Initializing Connection object " << std::endl;
+    MIL_MEDIA << "Initializing Connection object " << std::endl;
     _connection->Base::connect( &Socket::sigReadyRead, *this, &MediaNetworkConn::onReadyRead );
     _connection->Base::connect( &Socket::sigDisconnected, *this, &MediaNetworkConn::onDisconnected );
     _connection->Base::connect( &Socket::sigError, *this, &MediaNetworkConn::onError );
@@ -118,11 +112,18 @@ namespace zyppng {
 
   MediaNetworkConn::~MediaNetworkConn()
   {
-    MIL << "Closing connection " << std::endl;
-    for ( auto &req : _requests ) {
+    MIL_MEDIA << "Closing connection " << std::endl;
+    while( _requests.size() ) {
+      auto &req = _requests.front();
+      // make sure we do not receive signals while shutting down
+      // this would break due to weak_from_this
+      req->clearConnections();
       req->dl->cancel();
+
+      // still make sure we actually send all signals about finished downloads.
+      trackedDlFinished( *req );
     }
-    MIL << "Closing connection done!" << std::endl;
+    MIL_MEDIA << "Closing connection done!" << std::endl;
   }
 
   SignalProxy<void ()> MediaNetworkConn::sigDisconnected()
@@ -132,7 +133,7 @@ namespace zyppng {
 
   void MediaNetworkConn::onDisconnected()
   {
-    MIL << "Socket was closed, requesting cleanup." << std::endl;
+    MIL_MEDIA << "Socket was closed, requesting cleanup." << std::endl;
     _disconnected.emit();
   }
 
@@ -239,14 +240,14 @@ namespace zyppng {
           continue;
         }
 
-        MIL << "Got new Auth data, restarting failed requests" << std::endl;
+        MIL_MEDIA << "Got new Auth data, restarting failed requests" << std::endl;
 
         // we got new auth data in the CredentialManager, lets restart all our requests that are currently
         // in failed auth state.
         for ( auto &req : _requests ) {
           if ( req->dl->state() == Download::Finished && req->dl->hasError()
                && ( req->dl->lastRequestError().type() == NetworkRequestError::AuthFailed || req->dl->lastRequestError().type() == NetworkRequestError::Unauthorized ) ) {
-            MIL << "Found request waiting for Auth, restarting " << req->dl->spec().url() << std::endl;
+            MIL_MEDIA << "Found request waiting for Auth, restarting " << req->dl->spec().url() << std::endl;
             req->dl->spec().settings().protoData() = data.settings();
             req->dl->start();
           }
@@ -380,15 +381,19 @@ namespace zyppng {
 
     this->sendMessage( fin );
 
-    MIL << "Download was finished, releasing all ressources." << std::endl;
-    std::remove_if( _requests.begin(), _requests.end(), [ r ]( const auto &reqInList ){
-      return reqInList.get() == &r;
-    });
+    MIL_MEDIA << "Download was finished, releasing all ressources." << std::endl;
+    _requests.erase (
+      std::remove_if( _requests.begin(), _requests.end(), [ &r ]( const auto &reqInList ){
+        return reqInList.get() == &r;
+      }
+    ));
+    return;
     // ATTENTION, r will be dangling from here on out
   }
 
   template< typename T >
-  void MediaNetworkConn::sendMessage( T &m )
+  void MediaNetworkConn::
+  sendMessage( T &m )
   {
     zypp::proto::Envelope env;
     env.set_messagetypename( m.GetTypeName() );
@@ -405,7 +410,7 @@ namespace zyppng {
 
   MediaNetworkThread::MediaNetworkThread()
   {
-    MIL << "Initializing MediaNetworkThread" << std::endl;
+    MIL_MEDIA << "Initializing MediaNetworkThread" << std::endl;
     //start up thread
     _t = std::thread( [this](){ threadMain(); });
   }
@@ -430,11 +435,11 @@ namespace zyppng {
     });
     sNotify->setEnabled( true );
 
-    MIL << "Starting event loop " << std::endl;
+    MIL_MEDIA << "Starting event loop " << std::endl;
 
     dispatch->run();
 
-    MIL << "Thread exit " << std::endl;
+    MIL_MEDIA << "Thread exit " << std::endl;
   }
 
   MediaNetworkThread::~MediaNetworkThread()

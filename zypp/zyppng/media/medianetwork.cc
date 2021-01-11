@@ -19,6 +19,7 @@
 #include <zypp/zyppng/media/network/networkrequestdispatcher.h>
 #include <zypp/zyppng/media/network/networkrequesterror.h>
 #include <zypp/zyppng/media/network/AuthData>
+#include <zypp/zyppng/media/network/private/mediadebug_p.h>
 #include <zypp/zyppng/base/EventDispatcher>
 #include <zypp/zyppng/base/AbstractEventSource>
 
@@ -31,9 +32,6 @@
 #include <zypp/base/String.h>
 #include <zypp/base/Gettext.h>
 #include <zypp/ZYppFactory.h>
-
-#include <zypp/base/Logger.h>
-#include <zypp/base/LogControl.h>
 
 #include <zypp/ZYppCallbacks.h>
 
@@ -193,10 +191,10 @@ namespace zyppng {
 
     DispatchContext( MediaNetwork &p ) : parent(&p), ev( zyppng::EventLoop::create() ){
       if ( parent->_socket ) {
-        MIL << "Reusing open connection" << std::endl;
+        MIL_MEDIA << "Reusing open connection" << std::endl;
         sock = zyppng::Socket::fromSocket( *parent->_socket, zyppng::Socket::ConnectedState );
       } else {
-        MIL << "Connecting to backend" << std::endl;
+        MIL_MEDIA << "Connecting to backend" << std::endl;
         sock = zyppng::Socket::create(  AF_UNIX, SOCK_STREAM, 0 );
         parent->_readBuffer.clear();
 
@@ -208,7 +206,7 @@ namespace zyppng {
             sock.reset();
           } else {
             parent->_socket = sock->nativeSocket();
-            MIL << "Connected" << std::endl;
+            MIL_MEDIA << "Connected" << std::endl;
           }
           break;
         }
@@ -267,7 +265,7 @@ namespace zyppng {
           // we received a out of band response, there is only ONE active request to the
           // server allowed at any time
           if ( s.requestid() != reqId ) {
-            ERR << "Out of band status for a request that was not active" << std::endl;
+            ERR_MEDIA << "Out of band status for a request that was not active" << std::endl;
             ZYPP_THROW( zypp::media::MediaException( "Out of band status for a request that was not active" ) );
           }
           res = std::move(s);
@@ -430,7 +428,10 @@ namespace zyppng {
     }
   }
 
-  MediaNetwork::~MediaNetwork() { try { release(); } catch(...) {} }
+  MediaNetwork::~MediaNetwork() {
+    DBG << "Releasing MediaNetwork with tmpdir: " << _workingDir.path().asString() << std::endl;
+    try { release(); } catch(...) {}
+  }
 
   TransferSettings &MediaNetwork::settings()
   {
@@ -956,7 +957,7 @@ namespace zyppng {
 
       const auto &status = ctx->waitForStatus( req.requestid(), std::bind( &MediaNetwork::handleStreamMessage, this, std::placeholders::_1, std::placeholders::_2 ) );
       if ( status.code() == zypp::proto::Status::Ok ) {
-        MIL << "Request was acknowledged by server, downloads should start soon" << std::endl;
+        MIL_MEDIA << "Request was acknowledged by server, downloads should start soon" << std::endl;
         _requests.insert( _requests.end(), std::move_iterator(sentRequests.begin()), std::move_iterator(sentRequests.end()) );
         return;
       }

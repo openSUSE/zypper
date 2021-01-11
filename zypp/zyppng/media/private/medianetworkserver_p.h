@@ -49,7 +49,6 @@ namespace zyppng {
 
     void listen ( const std::string &sockPath );
 
-    const zypp::filesystem::TmpDir &workingDir ();
     std::shared_ptr<Downloader> downloader ();
 
   private:
@@ -59,7 +58,6 @@ namespace zyppng {
     std::shared_ptr<Socket> _serverSocket;
     std::shared_ptr<Downloader> _downloadManager;
     ConnectionList _clients;
-    zypp::filesystem::TmpDir _workingDir;
   };
 
   class LIBZYPP_NG_NO_EXPORT MediaNetworkConn : public Base
