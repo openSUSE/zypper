@@ -74,10 +74,7 @@ BuildRequires:  gettext-devel
 BuildRequires:  graphviz
 BuildRequires:  libxml2-devel
 BuildRequires:  yaml-cpp-devel
-%if 0%{?suse_version} != 1110
-# No libproxy on SLES
 BuildRequires:  libproxy-devel
-%endif
 
 %if 0%{?fedora_version} || 0%{?rhel_version} || 0%{?centos_version}
 BuildRequires:  pkgconfig
@@ -239,10 +236,6 @@ cd build
 export CFLAGS="%{optflags}"
 export CXXFLAGS="%{optflags}"
 unset EXTRA_CMAKE_OPTIONS
-# No libproxy on SLE11
-%if 0%{?suse_version} == 1110
-export EXTRA_CMAKE_OPTIONS="-DDISABLE_LIBPROXY=ON"
-%endif
 
 cmake -DCMAKE_INSTALL_PREFIX=%{_prefix} \
       -DENABLE_BUILD_DOCS=TRUE \
