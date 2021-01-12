@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Tue Jan 12 19:34:03 CET 2021 - ma@suse.de
+
+- Rephrase solver problem descriptions (jsc#SLE-8482)
+- Adapt to changed gpg2/libgpgme behavior (bsc#1180721)
+- Multicurl backend breaks with with unknown filesize (fixes #277)
+- version 17.25.6 (22)
+
+-------------------------------------------------------------------
 Fri Dec 11 16:52:54 CET 2020 - ma@suse.de
 
 - Fix lsof monitoring (bsc#1179909)
