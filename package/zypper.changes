@@ -1,4 +1,16 @@
 -------------------------------------------------------------------
+Tue Jan 12 20:24:56 CET 2021 - ma@suse.de
+
+- Fix source-download commnds help (bsc#1180663)
+- man: Recommend to use the --non-interactive global option
+  rather than the command option -y (bsc#1179816)
+- Extend apt packagemap (fixes #366)
+- --quitet: Fix install summary to write nothing if there's
+  nothing todo (bsc#1180077)
+- Prefer /run over /var/run.
+- version 1.14.42
+
+-------------------------------------------------------------------
 Fri Nov 27 10:24:19 CET 2020 - ma@suse.de
 
 - Avoid translated text in xml attributes ( fixes #361 )
