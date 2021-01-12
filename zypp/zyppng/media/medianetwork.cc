@@ -431,6 +431,12 @@ namespace zyppng {
   MediaNetwork::~MediaNetwork() {
     DBG << "Releasing MediaNetwork with tmpdir: " << _workingDir.path().asString() << std::endl;
     try { release(); } catch(...) {}
+
+    if ( _socket ) {
+      DBG_MEDIA << "Explicitely calling socket cleanup, this should've happened during release()" << std::endl;
+      zyppng::eintrSafeCall( ::close, *_socket );
+      _socket.reset();
+    }
   }
 
   TransferSettings &MediaNetwork::settings()

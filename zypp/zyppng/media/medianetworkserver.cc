@@ -74,9 +74,11 @@ namespace zyppng {
 
       MIL << "MediaNetworkServer client disconnected " << p.get() << std::endl;
 
-      std::remove_if( _clients.begin(), _clients.end(), [ &p ]( auto listElem ){
-        return p.get() == listElem.get();
-      });
+      _clients.erase(
+        std::remove_if( _clients.begin(), _clients.end(), [ &p ]( auto listElem ){
+          return p.get() == listElem.get();
+        }
+      ));
     }, *this);
 
     _clients.push_back( client );
