@@ -20,7 +20,7 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-01-12 19:27+0100\n"
-"PO-Revision-Date: 2021-01-13 13:38+0000\n"
+"PO-Revision-Date: 2021-01-13 20:38+0000\n"
 "Last-Translator: Aleš Kastner <alkas@volny.cz>\n"
 "Language-Team: Czech <https://l10n.opensuse.org/projects/libzypp/master/cs/>"
 "\n"
@@ -4713,7 +4713,7 @@ msgstr "Povolili jste všechna požadovaná úložiště?"
 #: zypp/solver/detail/SATResolver.cc:1099
 #, boost-format
 msgid "the requested package %1% does not exist"
-msgstr ""
+msgstr "požadovaný balíček %1% neexistuje"
 
 #: zypp/solver/detail/SATResolver.cc:1103
 #: zypp/solver/detail/SATResolver.cc:1571
@@ -4724,44 +4724,46 @@ msgstr "nepodporovaný požadavek"
 #: zypp/solver/detail/SATResolver.cc:1106
 #, boost-format
 msgid "'%1%' is provided by the system and cannot be erased"
-msgstr ""
+msgstr "'%1%' poskytuje systém a nelze jej vymazat"
 
 #: zypp/solver/detail/SATResolver.cc:1109
 #, boost-format
 msgid "%1% is not installable"
-msgstr ""
+msgstr "%1% není instalovatelný"
 
 #: zypp/solver/detail/SATResolver.cc:1114
 #, boost-format
 msgid "nothing provides '%1%' needed by the installed %2%"
-msgstr ""
+msgstr "nikdo neposkytuje '%1%' potřebné nainstalovaným %2%"
 
 #: zypp/solver/detail/SATResolver.cc:1116
 #, boost-format
 msgid "nothing provides '%1%' needed by the to be installed %2%"
-msgstr ""
+msgstr "nikdo neposkytuje '%1%' potřebné k instalaci %2%"
 
 #: zypp/solver/detail/SATResolver.cc:1119
 #, boost-format
 msgid "cannot install both %1% and %2%"
-msgstr ""
+msgstr "nelze nainstalovat %1% i %2%"
 
 #: zypp/solver/detail/SATResolver.cc:1124
 #, boost-format
 msgid "the installed %1% conflicts with '%2%' provided by the installed %3%"
-msgstr ""
+msgstr "nainstalovaný %1% je v konfliktu s '%2%' poskytnutým nainstalovaným %3%"
 
 #: zypp/solver/detail/SATResolver.cc:1126
 #, boost-format
 msgid ""
 "the installed %1% conflicts with '%2%' provided by the to be installed %3%"
-msgstr ""
+msgstr "nainstalovaný %1% je v konfliktu s '%2%' potřebným k instalaci %3%"
 
 #: zypp/solver/detail/SATResolver.cc:1130
 #, boost-format
 msgid ""
 "the to be installed %1% conflicts with '%2%' provided by the installed %3%"
 msgstr ""
+"%1%, který se má instalovat, je v konfliktu s '%2%' poskytnutým "
+"nainstalovaným %3%"
 
 #: zypp/solver/detail/SATResolver.cc:1132
 #, boost-format
@@ -4769,50 +4771,53 @@ msgid ""
 "the to be installed %1% conflicts with '%2%' provided by the to be installed "
 "%3%"
 msgstr ""
+"má se instalovat %1%, ale je v konfliktu s '%2%' poskytnutým %3% k instalaci"
 
 #: zypp/solver/detail/SATResolver.cc:1139
 #, boost-format
 msgid "the installed %1% obsoletes '%2%' provided by the installed %3%"
-msgstr ""
+msgstr "nainstalované %1% zastarává '%2%' poskytované nainstalovaným %3%"
 
 #: zypp/solver/detail/SATResolver.cc:1141
 #, boost-format
 msgid "the installed %1% obsoletes '%2%' provided by the to be installed %3%"
-msgstr ""
+msgstr "nainstalované %1% zastarává '%2%' poskytované %3%, jež se má instalovat"
 
 #: zypp/solver/detail/SATResolver.cc:1145
 #, boost-format
 msgid "the to be installed %1% obsoletes '%2%' provided by the installed %3%"
-msgstr ""
+msgstr "má se instalovat %1% jež zastarává '%2%' poskytované instalovaným %3%"
 
 #: zypp/solver/detail/SATResolver.cc:1147
 #, boost-format
 msgid ""
 "the to be installed %1% obsoletes '%2%' provided by the to be installed %3%"
 msgstr ""
+"Má se instalovat %1%, jež zastarává '%2%' poskytované %3%, jež se má "
+"instalovat"
 
 #: zypp/solver/detail/SATResolver.cc:1152
 #, boost-format
 msgid "the installed %1% conflicts with '%2%' provided by itself"
-msgstr ""
+msgstr "nainstalované %1% je v konfliktu s '%2%' poskytnutým samo sebou"
 
 #: zypp/solver/detail/SATResolver.cc:1154
 #, boost-format
 msgid "the to be installed %1% conflicts with '%2%' provided by itself"
-msgstr ""
+msgstr "má se instalovat %1%, ale je v konfliktu s '%2%' poskytnutým jím samým"
 
 #: zypp/solver/detail/SATResolver.cc:1186
 #, boost-format
 msgid ""
 "the installed %1% requires '%2%', but this requirement cannot be provided"
-msgstr ""
+msgstr "nainstalované %1% vyžaduje '%2%', ale tento požadavek nelze splnit"
 
 #: zypp/solver/detail/SATResolver.cc:1188
 #, boost-format
 msgid ""
 "the to be installed %1% requires '%2%', but this requirement cannot be "
 "provided"
-msgstr ""
+msgstr "má se instalovat %1% vyžadující '%2%', ale tento požadavek nelze splnit"
 
 #: zypp/solver/detail/SATResolver.cc:1190
 #: zypp/solver/detail/SATResolver.cc:1629
@@ -4839,24 +4844,24 @@ msgstr "neinstalovatelní poskytovatelé: "
 #: zypp/solver/detail/SATResolver.cc:1264
 #, boost-format
 msgid "remove lock to allow removal of %1%"
-msgstr ""
+msgstr "odstraňte zámek, aby šlo odebrat %1%"
 
 #: zypp/solver/detail/SATResolver.cc:1269
 #: zypp/solver/detail/SATResolver.cc:1305
 #, boost-format
 msgid "do not install %1%"
-msgstr ""
+msgstr "neinstalujte %1%"
 
 #: zypp/solver/detail/SATResolver.cc:1284
 #: zypp/solver/detail/SATResolver.cc:1326
 #, boost-format
 msgid "keep %1%"
-msgstr ""
+msgstr "ponechte %1%"
 
 #: zypp/solver/detail/SATResolver.cc:1289
 #, boost-format
 msgid "remove lock to allow installation of %1%"
-msgstr ""
+msgstr "odstraňte zámek a tím povolte instalaci %1%"
 
 #: zypp/solver/detail/SATResolver.cc:1340
 #: zypp/solver/detail/SATResolver.cc:1361
@@ -4879,37 +4884,37 @@ msgstr "ignorovat varování poškozeného systému"
 #: zypp/solver/detail/SATResolver.cc:1346
 #, boost-format
 msgid "do not ask to install a solvable providing %1%"
-msgstr ""
+msgstr "nežádejte instalaci řešení poskytující %1%"
 
 #: zypp/solver/detail/SATResolver.cc:1368
 #, boost-format
 msgid "do not ask to delete all solvables providing %1%"
-msgstr ""
+msgstr "nepožadujte smazání všech řešitelných problémů poskytujících %1%"
 
 #: zypp/solver/detail/SATResolver.cc:1381
 #, boost-format
 msgid "do not install most recent version of %1%"
-msgstr ""
+msgstr "neinstalujte nejnovější verzi %1%"
 
 #: zypp/solver/detail/SATResolver.cc:1402
 #, boost-format
 msgid "keep %1% despite the inferior architecture"
-msgstr ""
+msgstr "ponechte %1% navzdory starší architektuře"
 
 #: zypp/solver/detail/SATResolver.cc:1407
 #, boost-format
 msgid "install %1% despite the inferior architecture"
-msgstr ""
+msgstr "instalujte %1% navzdory starší architektuře"
 
 #: zypp/solver/detail/SATResolver.cc:1416
 #, boost-format
 msgid "keep obsolete %1%"
-msgstr ""
+msgstr "zachovejte zastaralou %1%"
 
 #: zypp/solver/detail/SATResolver.cc:1421
 #, boost-format
 msgid "install %1% from excluded repository"
-msgstr ""
+msgstr "nainstalujte %1% z vyloučeného úložiště"
 
 #. translator: %1% is a package name
 #: zypp/solver/detail/SATResolver.cc:1435
@@ -4938,12 +4943,12 @@ msgstr "instalovat %1%, ačkoli je na indexu"
 #: zypp/solver/detail/SATResolver.cc:1461
 #, boost-format
 msgid "downgrade of %1% to %2%"
-msgstr ""
+msgstr "downgrade z %1% na %2%"
 
 #: zypp/solver/detail/SATResolver.cc:1468
 #, boost-format
 msgid "architecture change of %1% to %2%"
-msgstr ""
+msgstr "změna architektury %1% na %2%"
 
 #: zypp/solver/detail/SATResolver.cc:1477
 #, boost-format
@@ -4951,16 +4956,18 @@ msgid ""
 "install %1% (with vendor change)\n"
 "  %2%  -->  %3%"
 msgstr ""
+"nainstalovat %1% (se změnou dodavatele)\n"
+"  %2%  -->  %3%"
 
 #: zypp/solver/detail/SATResolver.cc:1483
 #, boost-format
 msgid "replacement of %1% with %2%"
-msgstr ""
+msgstr "náhrada %1% %2%"
 
 #: zypp/solver/detail/SATResolver.cc:1494
 #, boost-format
 msgid "deinstallation of %1%"
-msgstr ""
+msgstr "odinstalace %1%"
 
 #: zypp/solver/detail/SATResolver.cc:1548
 #: zypp/solver/detail/SATResolver.cc:2081
