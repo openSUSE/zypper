@@ -21,7 +21,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-01-07 18:15+0100\n"
-"PO-Revision-Date: 2020-09-11 19:48+0000\n"
+"PO-Revision-Date: 2021-01-13 19:38+0000\n"
 "Last-Translator: Aleš Kastner <alkas@volny.cz>\n"
 "Language-Team: Czech <https://l10n.opensuse.org/projects/zypper/master/cs/>\n"
 "Language: cs\n"
@@ -5194,7 +5194,7 @@ msgstr "Všechny zdrojové rpm balíčky stáhnout do uvedeného adresáře."
 #. translators: --delete/--no-delete
 #: src/commands/utils/source-download.cc:502
 msgid "Whether to delete extraneous source rpms in the local directory."
-msgstr ""
+msgstr "Zda odstranit nadbytečné zdrojové rpms v místním adresáři."
 
 #. translators: --status
 #: src/commands/utils/source-download.cc:506
