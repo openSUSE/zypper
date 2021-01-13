@@ -68,9 +68,9 @@ BOOST_DATA_TEST_CASE(nwdispatcher_basic, bdata::make( withSSL ), withSSL)
   BOOST_REQUIRE( !web.isStopped() );
 
   zyppng::TransferSettings set = web.transferSettings();
-  zyppng::NetworkRequestDispatcher disp;
-  disp.run();
-  disp.sigQueueFinished().connect( [&ev]( const zyppng::NetworkRequestDispatcher& ){
+  auto disp = std::make_shared<zyppng::NetworkRequestDispatcher>();
+  disp->run();
+  disp->sigQueueFinished().connect( [&ev]( const zyppng::NetworkRequestDispatcher& ){
     ev->quit();
   });
 
@@ -98,7 +98,7 @@ BOOST_DATA_TEST_CASE(nwdispatcher_basic, bdata::make( withSSL ), withSSL)
     totalDL = dltotal;
   });
 
-  disp.enqueue( reqData );
+  disp->enqueue( reqData );
   ev->run();
 
   BOOST_TEST_REQ_SUCCESS( reqData );
@@ -132,8 +132,8 @@ BOOST_DATA_TEST_CASE(nwdispatcher_http_errors, bdata::make( withSSL ), withSSL)
 
   zyppng::TransferSettings set = web.transferSettings();
 
-  zyppng::NetworkRequestDispatcher disp;
-  disp.sigQueueFinished().connect( [&ev]( const zyppng::NetworkRequestDispatcher& ){
+  auto disp = std::make_shared<zyppng::NetworkRequestDispatcher>();
+  disp->sigQueueFinished().connect( [&ev]( const zyppng::NetworkRequestDispatcher& ){
     ev->quit();
   });
 
@@ -143,19 +143,19 @@ BOOST_DATA_TEST_CASE(nwdispatcher_http_errors, bdata::make( withSSL ), withSSL)
   zypp::filesystem::TmpFile targetFile;
   zyppng::NetworkRequest::Ptr req404 = std::make_shared<zyppng::NetworkRequest>( weburl, targetFile.path() );
   req404->transferSettings() = set;
-  disp.enqueue( req404 );
+  disp->enqueue( req404 );
 
   weburl = zyppng::Url( "bad://127.0.0.1" );
-  BOOST_REQUIRE( !disp.supportsProtocol(weburl) );
+  BOOST_REQUIRE( !disp->supportsProtocol(weburl) );
   zyppng::NetworkRequest::Ptr reqInvProto = std::make_shared<zyppng::NetworkRequest>( weburl, targetFile.path() );
   reqInvProto->transferSettings() = set;
-  disp.enqueue( reqInvProto );
+  disp->enqueue( reqInvProto );
 
   weburl = zyppng::Url( web.url() );
   weburl.setPathName("/handler/get401");
   zyppng::NetworkRequest::Ptr reqUnauthorized = std::make_shared<zyppng::NetworkRequest>( weburl, targetFile.path() );
   reqUnauthorized->transferSettings() = set;
-  disp.enqueue( reqUnauthorized );
+  disp->enqueue( reqUnauthorized );
 
   weburl = zyppng::Url( web.url() );
   weburl.setPathName("/handler/get401");
@@ -163,45 +163,45 @@ BOOST_DATA_TEST_CASE(nwdispatcher_http_errors, bdata::make( withSSL ), withSSL)
   reqAuthFailed->transferSettings() = set;
   reqAuthFailed->transferSettings().setUsername("test");
   reqAuthFailed->transferSettings().setPassword("test");
-  disp.enqueue( reqAuthFailed );
+  disp->enqueue( reqAuthFailed );
 
   weburl = zyppng::Url( web.url() );
   weburl.setPathName("/handler/get502");
   zyppng::NetworkRequest::Ptr req502 = std::make_shared<zyppng::NetworkRequest>( weburl, targetFile.path() );
   req502->transferSettings() = set;
-  disp.enqueue( req502 );
+  disp->enqueue( req502 );
 
   weburl = zyppng::Url( web.url() );
   weburl.setPathName("/handler/get503");
   zyppng::NetworkRequest::Ptr req503 = std::make_shared<zyppng::NetworkRequest>( weburl, targetFile.path() );
   req503->transferSettings() = set;
-  disp.enqueue( req503 );
+  disp->enqueue( req503 );
 
   weburl = zyppng::Url( web.url() );
   weburl.setPathName("/handler/get504");
   zyppng::NetworkRequest::Ptr req504 = std::make_shared<zyppng::NetworkRequest>( weburl, targetFile.path() );
   req504->transferSettings() = set;
-  disp.enqueue( req504 );
+  disp->enqueue( req504 );
 
   weburl = zyppng::Url( web.url() );
   weburl.setPathName("/handler/get403");
   zyppng::NetworkRequest::Ptr req403 = std::make_shared<zyppng::NetworkRequest>( weburl, targetFile.path() );
   req403->transferSettings() = set;
-  disp.enqueue( req403 );
+  disp->enqueue( req403 );
 
   weburl = zyppng::Url( web.url() );
   weburl.setPathName("/handler/get410");
   zyppng::NetworkRequest::Ptr req410 = std::make_shared<zyppng::NetworkRequest>( weburl, targetFile.path() );
   req410->transferSettings() = set;
-  disp.enqueue( req410 );
+  disp->enqueue( req410 );
 
   weburl = zyppng::Url( web.url() );
   weburl.setPathName("/handler/get418");
   zyppng::NetworkRequest::Ptr req418 = std::make_shared<zyppng::NetworkRequest>( weburl, targetFile.path() );
   req418->transferSettings() = set;
-  disp.enqueue( req418 );
+  disp->enqueue( req418 );
 
-  disp.run();
+  disp->run();
   ev->run();
 
   BOOST_TEST_REQ_ERR( req404, zyppng::NetworkRequestError::NotFound );
@@ -219,12 +219,12 @@ BOOST_DATA_TEST_CASE(nwdispatcher_http_errors, bdata::make( withSSL ), withSSL)
 BOOST_DATA_TEST_CASE(nwdispatcher_http_download, bdata::make( withSSL ), withSSL )
 {
   auto ev = zyppng::EventLoop::create();
-  zyppng::NetworkRequestDispatcher disp;
-  disp.sigQueueFinished().connect( [&ev]( const zyppng::NetworkRequestDispatcher& ){
+  auto disp = std::make_shared<zyppng::NetworkRequestDispatcher>();
+  disp->sigQueueFinished().connect( [&ev]( const zyppng::NetworkRequestDispatcher& ){
     ev->quit();
   });
   //start request dispatching, does not need to have requests enqueued
-  disp.run();
+  disp->run();
 
   WebServer web((zypp::Pathname(TESTS_SRC_DIR)/"zypp/data/Fetcher/remote-site").c_str(), 10001, withSSL );
   BOOST_REQUIRE( web.start() );
@@ -242,14 +242,14 @@ BOOST_DATA_TEST_CASE(nwdispatcher_http_download, bdata::make( withSSL ), withSSL
 
   reqDLFile->transferSettings() = set;
   reqDLFile->addRequestRange(0, 0, dig, zypp::media::hexstr2bytes("f1d2d2f924e986ac86fdf7b36c94bcdf32beec15") );
-  disp.enqueue( reqDLFile );
+  disp->enqueue( reqDLFile );
   ev->run();
   BOOST_TEST_REQ_SUCCESS( reqDLFile );
 
   //modify the checksum -> request should fail now
   reqDLFile->resetRequestRanges();
   reqDLFile->addRequestRange(0, 0, dig, zypp::media::hexstr2bytes("f1d2d2f924e986ac86fdf7b36c94bcdf32beec20") );
-  disp.enqueue( reqDLFile );
+  disp->enqueue( reqDLFile );
   ev->run();
   BOOST_TEST_REQ_ERR( reqDLFile, zyppng::NetworkRequestError::InvalidChecksum );
 
@@ -259,7 +259,7 @@ BOOST_DATA_TEST_CASE(nwdispatcher_http_download, bdata::make( withSSL ), withSSL
   reqDLFile->transferSettings() = set;
   reqDLFile->setUrl( weburl );
   reqDLFile->addRequestRange( 0, 7 );
-  disp.enqueue( reqDLFile );
+  disp->enqueue( reqDLFile );
   ev->run();
   BOOST_TEST_REQ_SUCCESS( reqDLFile );
   {
@@ -275,12 +275,12 @@ BOOST_DATA_TEST_CASE(nwdispatcher_http_download, bdata::make( withSSL ), withSSL
 BOOST_DATA_TEST_CASE(nwdispatcher_delay_download, bdata::make( withSSL ), withSSL )
 {
   auto ev = zyppng::EventLoop::create();
-  zyppng::NetworkRequestDispatcher disp;
-  disp.sigQueueFinished().connect( [&ev]( const zyppng::NetworkRequestDispatcher& ){
+  auto disp = std::make_shared<zyppng::NetworkRequestDispatcher>();
+  disp->sigQueueFinished().connect( [&ev]( const zyppng::NetworkRequestDispatcher& ){
     ev->quit();
   });
 
-  disp.run();
+  disp->run();
 
   WebServer web((zypp::Pathname(TESTS_SRC_DIR)/"data"/"dummywebroot").c_str(), 10001, withSSL );
 
@@ -304,7 +304,7 @@ BOOST_DATA_TEST_CASE(nwdispatcher_delay_download, bdata::make( withSSL ), withSS
   zyppng::NetworkRequest::Ptr reqDLFile = std::make_shared<zyppng::NetworkRequest>( weburl, targetFile.path() );
   reqDLFile->transferSettings() = set;
 
-  disp.enqueue( reqDLFile );
+  disp->enqueue( reqDLFile );
   ev->run();
 
   BOOST_TEST_REQ_ERR( reqDLFile, zyppng::NetworkRequestError::Timeout );
@@ -314,12 +314,12 @@ BOOST_DATA_TEST_CASE(nwdispatcher_delay_download, bdata::make( withSSL ), withSS
 BOOST_DATA_TEST_CASE(nwdispatcher_multipart_dl, bdata::make( withSSL ), withSSL )
 {
   auto ev = zyppng::EventLoop::create();
-  zyppng::NetworkRequestDispatcher disp;
-  disp.sigQueueFinished().connect( [&ev]( const zyppng::NetworkRequestDispatcher& ){
+  auto disp = std::make_shared<zyppng::NetworkRequestDispatcher>();
+  disp->sigQueueFinished().connect( [&ev]( const zyppng::NetworkRequestDispatcher& ){
     ev->quit();
   });
 
-  disp.run();
+  disp->run();
 
   WebServer web((zypp::Pathname(TESTS_SRC_DIR)/"zypp/data/Fetcher/remote-site").c_str(), 10001, withSSL );
   BOOST_REQUIRE( web.start() );
@@ -336,7 +336,7 @@ BOOST_DATA_TEST_CASE(nwdispatcher_multipart_dl, bdata::make( withSSL ), withSSL 
   reqDLFile->addRequestRange(  13, 4 );
   reqDLFile->addRequestRange( 248, 6 );
   reqDLFile->addRequestRange(  76, 9 );
-  disp.enqueue( reqDLFile );
+  disp->enqueue( reqDLFile );
   ev->run();
   auto err = reqDLFile->error();
   BOOST_TEST_REQ_SUCCESS( reqDLFile );
@@ -377,12 +377,12 @@ auto makeMultiPartHandler ( std::vector<RangeData> &&values )
 BOOST_DATA_TEST_CASE(nwdispatcher_multipart_dl_no_order, bdata::make( withSSL ), withSSL )
 {
   auto ev = zyppng::EventLoop::create();
-  zyppng::NetworkRequestDispatcher disp;
-  disp.sigQueueFinished().connect( [&ev]( const zyppng::NetworkRequestDispatcher& ){
+  auto disp = std::make_shared<zyppng::NetworkRequestDispatcher>();
+  disp->sigQueueFinished().connect( [&ev]( const zyppng::NetworkRequestDispatcher& ){
     ev->quit();
   });
 
-  disp.run();
+  disp->run();
 
   const std::string_view str1 = "Hello";
   const std::string_view str2 = "World";
@@ -409,7 +409,7 @@ BOOST_DATA_TEST_CASE(nwdispatcher_multipart_dl_no_order, bdata::make( withSSL ),
   reqDLFile->addRequestRange(  0, str1.length() );
   reqDLFile->addRequestRange( 10, str2.length() );
   reqDLFile->addRequestRange( 25, str3.length() );
-  disp.enqueue( reqDLFile );
+  disp->enqueue( reqDLFile );
   ev->run();
   BOOST_TEST_REQ_SUCCESS( reqDLFile );
 
@@ -426,12 +426,12 @@ BOOST_DATA_TEST_CASE(nwdispatcher_multipart_dl_no_order, bdata::make( withSSL ),
 BOOST_DATA_TEST_CASE(nwdispatcher_multipart_dl_weird_data, bdata::make( withSSL ), withSSL )
 {
   auto ev = zyppng::EventLoop::create();
-  zyppng::NetworkRequestDispatcher disp;
-  disp.sigQueueFinished().connect( [&ev]( const zyppng::NetworkRequestDispatcher& ){
+  auto disp = std::make_shared<zyppng::NetworkRequestDispatcher>();
+  disp->sigQueueFinished().connect( [&ev]( const zyppng::NetworkRequestDispatcher& ){
     ev->quit();
   });
 
-  disp.run();
+  disp->run();
 
   const std::string_view str1 = "SUSE Linux";
   const std::string_view str2 = "World--THIS_STRING_SEPARATES A";
@@ -458,7 +458,7 @@ BOOST_DATA_TEST_CASE(nwdispatcher_multipart_dl_weird_data, bdata::make( withSSL 
   reqDLFile->addRequestRange(  0, str1.length() );
   reqDLFile->addRequestRange( 25, str2.length() );
   reqDLFile->addRequestRange( 70, str3.length() );
-  disp.enqueue( reqDLFile );
+  disp->enqueue( reqDLFile );
   ev->run();
   BOOST_TEST_REQ_SUCCESS( reqDLFile );
 
@@ -472,11 +472,11 @@ BOOST_DATA_TEST_CASE(nwdispatcher_multipart_dl_weird_data, bdata::make( withSSL 
 BOOST_DATA_TEST_CASE(nwdispatcher_multipart_dl_overlap, bdata::make( withSSL ), withSSL )
 {
   auto ev = zyppng::EventLoop::create();
-  zyppng::NetworkRequestDispatcher disp;
-  disp.sigQueueFinished().connect( [&ev]( const zyppng::NetworkRequestDispatcher& ){
+  auto disp = std::make_shared<zyppng::NetworkRequestDispatcher>();
+  disp->sigQueueFinished().connect( [&ev]( const zyppng::NetworkRequestDispatcher& ){
     ev->quit();
   });
-  disp.run();
+  disp->run();
 
   const char *data = "The SUSE Linux distribution was originally a German translation of Slackware Linux. In mid-1992, Softlanding Linux System (SLS) was founded by Peter MacDonald, and was the first comprehensive distribution to contain elements such as X and TCP/IP. The Slackware distribution (maintained by Patrick Volkerding) was initially based largely on SLS.";
   const std::string_view str1 = std::string_view( data, 50 );
@@ -501,7 +501,7 @@ BOOST_DATA_TEST_CASE(nwdispatcher_multipart_dl_overlap, bdata::make( withSSL ), 
   reqDLFile->setUrl( weburl );
   reqDLFile->addRequestRange(  0, str1.length() );
   reqDLFile->addRequestRange( 40, str2.length() );
-  disp.enqueue( reqDLFile );
+  disp->enqueue( reqDLFile );
   ev->run();
   BOOST_TEST_REQ_SUCCESS( reqDLFile );
 
@@ -514,12 +514,12 @@ BOOST_DATA_TEST_CASE(nwdispatcher_multipart_dl_overlap, bdata::make( withSSL ), 
 BOOST_DATA_TEST_CASE(nwdispatcher_multipart_data_missing, bdata::make( withSSL ), withSSL )
 {
   auto ev = zyppng::EventLoop::create();
-  zyppng::NetworkRequestDispatcher disp;
-  disp.sigQueueFinished().connect( [&ev]( const zyppng::NetworkRequestDispatcher& ){
+  auto disp = std::make_shared<zyppng::NetworkRequestDispatcher>();
+  disp->sigQueueFinished().connect( [&ev]( const zyppng::NetworkRequestDispatcher& ){
     ev->quit();
   });
 
-  disp.run();
+  disp->run();
 
   const std::string_view str1 = "Hello";
   const std::string_view str2 = "World";
@@ -546,7 +546,7 @@ BOOST_DATA_TEST_CASE(nwdispatcher_multipart_data_missing, bdata::make( withSSL )
   reqDLFile->addRequestRange(  0, str1.length() );
   reqDLFile->addRequestRange( 10, str2.length() + 1 );
   reqDLFile->addRequestRange( 25, str3.length() );
-  disp.enqueue( reqDLFile );
+  disp->enqueue( reqDLFile );
   ev->run();
   BOOST_TEST_REQ_ERR( reqDLFile, zyppng::NetworkRequestError::MissingData );
 }
