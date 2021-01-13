@@ -102,8 +102,8 @@ int AddRepoCmd::execute(Zypper &zypper, const std::vector<std::string> &position
       }
     case 2:
       Url url;
-      if ( positionalArgs_r[0].find("obs") == 0 )
-        url = make_obs_url( positionalArgs_r[0], zypper.config().obs_baseUrl, zypper.config().obs_platform );
+      if ( positionalArgs_r[0].find("obs:") == 0 )
+        url = make_obs_url( positionalArgs_r[0] );
       else
         url = make_url( positionalArgs_r[0] );
       if ( !url.isValid() )

@@ -493,8 +493,12 @@ namespace
 } // namespace
 ///////////////////////////////////////////////////////////////////
 
-Url make_obs_url( const std::string & obsuri, const Url & base_url, const std::string & default_platform )
+Url make_obs_url( const std::string & obsuri )
 {
+  Zypper & zypper { Zypper::instance() };
+  const Url base_url { zypper.config().obs_baseUrl };
+  const std::string default_platform { zypper.config().obs_platform };
+
   // obs-server ==> < base_url, default_platform >
   static std::map<std::string, std::pair<Url,std::string>> wellKnownServers({
     { "build.opensuse.org",	{ Url("https://download.opensuse.org/repositories/"),	std::string() } }
@@ -533,8 +537,6 @@ Url make_obs_url( const std::string & obsuri, const Url & base_url, const std::s
 
     if ( platform.empty() )
     {
-      Zypper & zypper( Zypper::instance() );
-
       if ( default_platform.empty() )
       {
 	// Try to guess platform from baseproduct....
@@ -545,20 +547,24 @@ Url make_obs_url( const std::string & obsuri, const Url & base_url, const std::s
 			     // translators: don't translate '<platform>'
 	  zypper.out().error(_("Unable to guess a value for <platform>."),
 			     _("Please use obs://<project>/<platform>") );
-	  zypper.out().info(str::form(_("Example: %s"), "obs://server:http/openSUSE_11.3"));
+	  zypper.out().info(str::form(_("Example: %s"), "obs://zypp:Head/openSUSE_Factory"));
 	  return Url();	// FAIL!
 	}
 
 	platform = pdata.name().asString();
 	if ( platform == "openSUSE"  )
 	{
-
 	  if ( pdata.productline() == "Leap" )
 	    platform += "_Leap_$releasever";
 	  else if ( str::containsCI( pdata.summary(), "Tumbleweed" ) )
 	    platform += "_Tumbleweed";
 	  else
 	    platform += "_$releasever";
+	}
+	else if ( platform == "MicroOS" && pdata.vendor() == "openSUSE" )
+	{
+	  // bsc#1153687 Hotfix
+	  platform = "openSUSE_Tumbleweed";
 	}
 	else
 	  platform += "_$releasever";
@@ -581,8 +587,8 @@ Url make_obs_url( const std::string & obsuri, const Url & base_url, const std::s
   }
   else
   {
-    Zypper::instance().out().error(_("Invalid OBS URI."), _("Correct form is obs://<project>/[platform]"));
-    Zypper::instance().out().info(str::form(_("Example: %s"), "obs://server:http/openSUSE_11.3"));
+    zypper.out().error(_("Invalid OBS URI."), _("Correct form is obs://<project>/[platform]"));
+    zypper.out().info(str::form(_("Example: %s"), "obs://zypp:Head/openSUSE_Factory"));
   }
 
   return Url();
