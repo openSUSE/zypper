@@ -1442,7 +1442,7 @@ namespace zyppng {
       DownloadStatemachine<DownloadPrivate>::start();
 
     //jumpstart the process
-    state<InitialState>().initiate();
+    state<InitialState>()->initiate();
   }
 
 
@@ -1552,7 +1552,7 @@ namespace zyppng {
   NetworkRequestError Download::lastRequestError() const
   {
     if ( state() == Finished ) {
-      return d_func()->state<DownloadPrivateBase::FinishedState>()._error;
+      return d_func()->state<DownloadPrivateBase::FinishedState>()->_error;
     }
     return NetworkRequestError();
   }

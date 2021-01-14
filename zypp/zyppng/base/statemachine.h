@@ -62,16 +62,12 @@ namespace zyppng {
         return _ptr->exit( );
       }
 
-      operator State& () {
-        return wrappedState();
+      std::shared_ptr<State> wrappedState () {
+        return _ptr;
       }
 
-      State &wrappedState () {
-        return *_ptr;
-      }
-
-      const State &wrappedState () const {
-        return *_ptr;
+      const std::shared_ptr<State> wrappedState () const {
+        return _ptr;
       }
 
     private:
@@ -395,7 +391,8 @@ namespace zyppng {
           if constexpr ( std::is_same_v< T, _InitialState > ) {
             throw std::exception();
           } else {
-            return ( func( s.wrappedState() ) );
+            auto lock = s.wrappedState();
+            return ( func( *lock ) );
           }
         }, _state );
       }
@@ -428,7 +425,7 @@ namespace zyppng {
        * if the passed state type does not match the current states type.
        */
       template<typename T>
-      T& state () {
+      std::shared_ptr<T> state () {
         using WrappedEventType = typename detail::make_statewithtransition< std::decay_t<T>, Transitions...>::Type;
         return std::get<WrappedEventType>( _state ).wrappedState();
       }
@@ -438,7 +435,7 @@ namespace zyppng {
        * if the passed state type does not match the current states type.
        */
       template<typename T>
-      const T& state () const {
+      const std::shared_ptr<T> state () const {
         using WrappedEventType = typename detail::make_statewithtransition< std::decay_t<T>, Transitions...>::Type;
         return std::get<WrappedEventType>( _state ).wrappedState();
       }
@@ -518,9 +515,10 @@ namespace zyppng {
       auto makeEventCallback ( Transition &transition ) {
         using WrappedEventType = typename detail::make_statewithtransition< typename Transition::TargetType, Transitions...>::Type;
         return [ mytrans = &transition, this]() mutable {
-          if ( mytrans->checkCondition( std::get< State >(_state) ) ) {
+          auto stateLock = std::get< std::decay_t<State> >(_state).wrappedState();
+          if ( mytrans->checkCondition( *stateLock ) ) {
             auto &st = std::get< std::decay_t<State> >(_state);
-            enterState( st , WrappedEventType( (*mytrans)( static_cast<Derived &>(*this), st ) ) );
+            enterState( st , WrappedEventType( (*mytrans)( static_cast<Derived &>(*this), *stateLock ) ) );
           }
         };
       }
@@ -531,8 +529,8 @@ namespace zyppng {
           return;
         } else {
           auto &transition = std::get<I>( transitions );
-          //_currentStateConnections.push_back( transition.eventSource ( &std::forward<State>(nS).wrappedState() ).connect( makeEventCallback< std::decay_t<State> >(transition)) );
-          _currentStateConnections.push_back( std::forward<State>(nS).wrappedState().Base::connectFunc( transition.eventAccessor(), makeEventCallback< std::decay_t<State> >(transition), *static_cast<Derived*>(this) ) );
+          //_currentStateConnections.push_back( transition.eventSource ( std::forward<State>(nS).wrappedState().get() ).connect( makeEventCallback< std::decay_t<State> >(transition)) );
+          _currentStateConnections.push_back( std::forward<State>(nS).wrappedState()->Base::connectFunc( transition.eventAccessor(), makeEventCallback< std::decay_t<State> >(transition), *static_cast<Derived*>(this) ) );
           connectAllTransitions<I+1>( std::forward<State>(nS), transitions );
         }
       }
