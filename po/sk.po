@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: libzypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-01-12 19:27+0100\n"
-"PO-Revision-Date: 2021-01-13 20:38+0000\n"
+"PO-Revision-Date: 2021-01-14 09:38+0000\n"
 "Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
 "Language-Team: Slovak <https://l10n.opensuse.org/projects/libzypp/master/sk/>"
 "\n"
@@ -4484,17 +4484,17 @@ msgstr "problém so závislosťami"
 #: zypp/solver/detail/SATResolver.cc:1095
 #, boost-format
 msgid "nothing provides the requested '%1%'"
-msgstr ""
+msgstr "nič neposkytuje požadovaný '%1%'"
 
 #: zypp/solver/detail/SATResolver.cc:1096
 #: zypp/solver/detail/SATResolver.cc:1100
 msgid "Have you enabled all the required repositories?"
-msgstr ""
+msgstr "Máte povolené všetky požadované repozitáre?"
 
 #: zypp/solver/detail/SATResolver.cc:1099
 #, boost-format
 msgid "the requested package %1% does not exist"
-msgstr ""
+msgstr "požadovaný balík %1% neexistuje"
 
 #: zypp/solver/detail/SATResolver.cc:1103
 #: zypp/solver/detail/SATResolver.cc:1571
@@ -4505,27 +4505,28 @@ msgstr "nepodporovaná požiadavka"
 #: zypp/solver/detail/SATResolver.cc:1106
 #, boost-format
 msgid "'%1%' is provided by the system and cannot be erased"
-msgstr ""
+msgstr "'%1%' je poskytovaný systémom a nemôže byť vymazaný"
 
 #: zypp/solver/detail/SATResolver.cc:1109
 #, boost-format
 msgid "%1% is not installable"
-msgstr ""
+msgstr "%1% nie je inštalovateľný"
 
 #: zypp/solver/detail/SATResolver.cc:1114
 #, boost-format
 msgid "nothing provides '%1%' needed by the installed %2%"
-msgstr ""
+msgstr "nič neposkytuje '%1%', ktorý je potrebný pre nainštalovaný %2%"
 
 #: zypp/solver/detail/SATResolver.cc:1116
 #, boost-format
 msgid "nothing provides '%1%' needed by the to be installed %2%"
-msgstr "nič neposkytuje '%1%', ktorý je vyžadovaný %2%, ktorý sa má inštalovať"
+msgstr ""
+"nič neposkytuje '%1%', ktorý je potrebný pre %2%, ktorý sa má inštalovať"
 
 #: zypp/solver/detail/SATResolver.cc:1119
 #, boost-format
 msgid "cannot install both %1% and %2%"
-msgstr ""
+msgstr "nie je možné nainštalovať obidva %1% aj %2%"
 
 #: zypp/solver/detail/SATResolver.cc:1124
 #, boost-format
@@ -4778,7 +4779,7 @@ msgstr "nič neposkytuje požadovaný %s"
 #: zypp/solver/detail/SATResolver.cc:2092
 #: zypp/solver/detail/SATResolver.cc:2095
 msgid "Have you enabled all requested repositories?"
-msgstr "Máte zapnuté všetky požadované repozitáre?"
+msgstr "Máte povolené všetky požadované repozitáre?"
 
 #: zypp/solver/detail/SATResolver.cc:1567
 #: zypp/solver/detail/SATResolver.cc:2094
@@ -4803,13 +4804,13 @@ msgstr "%s nie je inštalovateľný"
 #: zypp/solver/detail/SATResolver.cc:2104
 #, c-format, boost-format
 msgid "nothing provides %s needed by %s"
-msgstr "nič neposkytuje %s, ktorý je vyžadovaný balíkom %s"
+msgstr "nič neposkytuje %s, ktorý je potrebný pre %s"
 
 #: zypp/solver/detail/SATResolver.cc:1584
 #: zypp/solver/detail/SATResolver.cc:2106
 #, c-format, boost-format
 msgid "cannot install both %s and %s"
-msgstr "Nie je možné nainštalovať oboje %s a %s"
+msgstr "nie je možné nainštalovať obidva %s aj %s"
 
 #: zypp/solver/detail/SATResolver.cc:1587
 #: zypp/solver/detail/SATResolver.cc:2108
