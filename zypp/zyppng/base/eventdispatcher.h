@@ -77,6 +77,9 @@ public:
    *
    * In some cases it might be required to delay the cleanup of a ressource until the current
    * event loop iteration was finished, in case there are more pending events for the ressource.
+   *
+   * \note Normally this should be handled by using correct shared_ptr semantics, and always owning a reference
+   *       to a object were functions are called on. Only if that is not possible unrefLater should be used.
    */
   template< typename T >
   static void unrefLater ( T &&ptr ) {

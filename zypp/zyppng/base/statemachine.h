@@ -581,6 +581,7 @@ namespace zyppng {
 
   /*!
    * Helper type that also includes the State ID, in more complex state machines
+   * utilizing subclassing in their State objects,
    * it might be desireable to have the State ID in the final class implementation
    */
   template < typename StatemachineType, auto sId, bool isFin >

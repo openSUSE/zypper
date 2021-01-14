@@ -16,9 +16,18 @@
 
 namespace zyppng
 {
+  /*!
+   * This can be used to scope a signal/slot connection.
+   * Basically just like \sa zypp::AutoDispose
+   */
   struct AutoDisconnect
   {
     AutoDisconnect( connection &&conn ) : _conn ( std::move(conn) ) {}
+    AutoDisconnect( AutoDisconnect &&other ) : _conn ( std::move(other._conn) ) {}
+
+    AutoDisconnect( const AutoDisconnect &other ) = delete;
+    AutoDisconnect & operator=( const AutoDisconnect & ) = delete;
+
     ~AutoDisconnect( ) { _conn.disconnect(); }
     connection _conn;
   };

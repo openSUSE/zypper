@@ -42,8 +42,19 @@ namespace zyppng {
 
   /*!
    * The Base class is used as a common base class for objects that emit signals,
-   * it also supports a parent/child relationship where the parent object tracks keeps
+   * it also supports a parent/child relationship where the parent object keeps
    * a reference for all its children.
+   *
+   * Generally all objects that want to send or receive signals should derive from Base since it
+   * will help on enforcing a correct use of shared_ptr semantics. Generally with signal/slot emission
+   * its easy to run into the issue of a object being deleted while it emits a signal. Think about a Socket
+   * that emits a \a closed signal. It might be removed from the list of connections and the last reference of the
+   * object deleted before the signal returns.
+   * In order to prevent this from happening we established a rule of "Always own a reference to the object you use".
+   * The connection helpers \ref Base::connect and \ref Base::connectFunc help with enforcing this rule, even asserting
+   * when compiled without NDEBUG defined.
+   *
+   * \sa zypp/zyppng/base/signals.h
    */
   class LIBZYPP_NG_EXPORT Base : public sigc::trackable, public std::enable_shared_from_this<Base>
   {
@@ -124,16 +135,30 @@ namespace zyppng {
       return internal::locking_fun( sigc::mem_fun( o, std::forward<Functor>(f) ), *o );
     }
 
+    /*!
+     * Preferred way to connect a signal to a slow, this will automatically take care of tracking the target object in the connection
+     */
     template< typename SenderFunc, typename ReceiverFunc >
     static auto connect ( typename internal::MemberFunction<SenderFunc>::ClassType &s, SenderFunc &&sFun, typename internal::MemberFunction<ReceiverFunc>::ClassType &recv, ReceiverFunc &&rFunc ) {
       return std::invoke( std::forward<SenderFunc>(sFun), &s ).connect( make_base_slot( &recv, std::forward<ReceiverFunc>(rFunc) ) );
     }
 
+
+    /*!
+     * Convenience func that uses "this" as the sender object in the signal / slot connection, this allows syntax like:
+     * \code
+     * object.connect( &Obj::signal, *targetObj, &TargetObj::onSignal );
+     * \endcode
+     */
     template< typename SenderFunc, typename ReceiverFunc >
     auto connect ( SenderFunc &&sFun, typename internal::MemberFunction<ReceiverFunc>::ClassType &recv, ReceiverFunc &&rFunc ) {
       return connect( static_cast<typename internal::MemberFunction<SenderFunc>::ClassType &>(*this), std::forward<SenderFunc>(sFun), recv, std::forward<ReceiverFunc>(rFunc) );
     }
 
+    /*!
+     * This allows to connect a lambda to a signal in a \ref Base derived type. Make sure to track the objects used inside the slot for shared_ptr
+     * correctness ( always own a reference to the object you are calling )
+     */
     template< typename SenderFunc, typename ReceiverFunc, typename ...Tracker >
     static auto connectFunc ( typename internal::MemberFunction<SenderFunc>::ClassType &s, SenderFunc &&sFun, ReceiverFunc &&rFunc, const Tracker&...trackers ) {
       return std::invoke( std::forward<SenderFunc>(sFun), &s ).connect( internal::locking_fun( std::forward<ReceiverFunc>(rFunc), trackers... ) );
