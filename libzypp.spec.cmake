@@ -29,6 +29,15 @@
 
 %bcond_without mediabackend_tests
 
+# older libsigc versions have a bug that causes a segfault
+# when clearing connections during signal emission
+# see https://bugzilla.gnome.org/show_bug.cgi?id=784550
+%if 0%{?sle_version} < 150200
+%bcond_without sigc_block_workaround
+%else
+%bcond_with sigc_block_workaround
+%endif
+
 Name:           libzypp
 Version:        @VERSION@
 Release:        0
@@ -249,6 +258,7 @@ cmake -DCMAKE_INSTALL_PREFIX=%{_prefix} \
       -DCMAKE_SKIP_RPATH=1 \
       %{?with_zchunk:-DENABLE_ZCHUNK_COMPRESSION=1} \
       %{?with_zstd:-DENABLE_ZSTD_COMPRESSION=1} \
+      %{?with_sigc_block_workaround:-DENABLE_SIGC_BLOCK_WORKAROUND=1} \
       %{!?with_mediabackend_tests:-DDISABLE_MEDIABACKEND_TESTS=1} \
       ${EXTRA_CMAKE_OPTIONS} \
       ..

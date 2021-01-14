@@ -190,6 +190,19 @@ namespace zyppng {
   {
   public:
     ~Signal() {
+      assert(this->impl()->exec_count_ == 0);
+      if ( this->impl()->exec_count_ > 0 ) {
+        WAR << "Deleting Signal during emission, this is usually a BUG, Slots will be blocked to prevent SIGSEGV." << std::endl;
+#ifdef LIBZYPP_USE_SIGC_BLOCK_WORKAROUND
+        // older sigc versions will segfault if clear() is called in signal emission
+        // we use block instead in those cases which seems to have the same result
+        // since we do not use the slot instances explicitely that _should_ not have side effects
+        // https://bugzilla.gnome.org/show_bug.cgi?id=784550
+        this->block();
+        return;
+#endif
+      }
+
       this->clear();
     }
   };
@@ -201,6 +214,19 @@ namespace zyppng {
     MemSignal ( SignalHost &host ) : _host(host) {}
 
     ~MemSignal() {
+
+      assert(this->impl()->exec_count_ == 0);
+      if ( this->impl()->exec_count_ > 0 ) {
+        WAR << "Deleting MemSignal during emission, this is definitely a BUG, Slots will be blocked to prevent SIGSEGV." << std::endl;
+#ifdef LIBZYPP_USE_SIGC_BLOCK_WORKAROUND
+        // older sigc versions will segfault if clear() is called in signal emission
+        // we use block instead in those cases which seems to have the same result
+        // since we do not use the slot instances explicitely that _should_ not have side effects
+        // https://bugzilla.gnome.org/show_bug.cgi?id=784550
+        this->block();
+        return;
+#endif
+      }
       this->clear();
     }
 

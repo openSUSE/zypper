@@ -11,6 +11,8 @@ OPTION (ENABLE_BUILD_TESTS "Build and run test suite by default?" OFF)
 OPTION (ENABLE_USE_THREADS "Enable using threads (NOT being used by threads!)?" OFF)
 OPTION (ENABLE_ZSTD_COMPRESSION "Build with zstd compression support?" OFF)
 OPTION (ENABLE_ZCHUNK_COMPRESSION "Build with zchunk compression support?" OFF)
+# Helps with bug https://bugzilla.gnome.org/show_bug.cgi?id=784550 , Segfault during signal emission when slots are cleared
+OPTION (ENABLE_SIGC_BLOCK_WORKAROUND "Enable a workaround for older sigcpp libraries?" OFF )
 OPTION (DISABLE_MEDIABACKEND_TESTS "Disable Tests depending on Nginx and libfcgi?" OFF)
 
 OPTION (DISABLE_LIBPROXY "Build without libproxy support even if package is installed?" OFF)
@@ -272,6 +274,7 @@ IF (ENABLE_ZSTD_COMPRESSION)
   #INCLUDE_DIRECTORIES (${ZSTD_INCLUDE_DIRS})
 ENDIF (ENABLE_ZSTD_COMPRESSION)
 
+# https://bugzilla.gnome.org/show_bug.cgi?id=784550
 IF (ENABLE_ZCHUNK_COMPRESSION)
   MESSAGE("Building with zchunk support enabled.")
   PKG_CHECK_MODULES (ZCHUNK zck REQUIRED)
@@ -279,6 +282,11 @@ IF (ENABLE_ZCHUNK_COMPRESSION)
   SET( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${ZCHUNK_CFLAGS}" )
   ADD_DEFINITIONS (-DENABLE_ZCHUNK_COMPRESSION=1)
 ENDIF(ENABLE_ZCHUNK_COMPRESSION)
+
+IF(ENABLE_SIGC_BLOCK_WORKAROUND)
+  message("Building with sigcpp block workaround")
+  ADD_DEFINITIONS (-DLIBZYPP_USE_SIGC_BLOCK_WORKAROUND=1)
+ENDIF(ENABLE_SIGC_BLOCK_WORKAROUND)
 
 pkg_check_modules ( SIGCPP REQUIRED sigc++-2.0 )
 INCLUDE_DIRECTORIES( ${SIGCPP_INCLUDE_DIRS} )
