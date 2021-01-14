@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: libzypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-01-12 19:27+0100\n"
-"PO-Revision-Date: 2021-01-14 09:38+0000\n"
+"PO-Revision-Date: 2021-01-14 21:38+0000\n"
 "Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
 "Language-Team: Slovak <https://l10n.opensuse.org/projects/libzypp/master/sk/>"
 "\n"
@@ -4505,7 +4505,7 @@ msgstr "nepodporovaná požiadavka"
 #: zypp/solver/detail/SATResolver.cc:1106
 #, boost-format
 msgid "'%1%' is provided by the system and cannot be erased"
-msgstr "'%1%' je poskytovaný systémom a nemôže byť vymazaný"
+msgstr "'%1%' poskytuje systém a nemôže sa vymazať"
 
 #: zypp/solver/detail/SATResolver.cc:1109
 #, boost-format
@@ -4532,22 +4532,23 @@ msgstr "nie je možné nainštalovať obidva %1% aj %2%"
 #, boost-format
 msgid "the installed %1% conflicts with '%2%' provided by the installed %3%"
 msgstr ""
+"nainštalovaný %1% je v konflikte s '%2%', ktorý poskytuje nainštalovaný %3%"
 
 #: zypp/solver/detail/SATResolver.cc:1126
 #, boost-format
 msgid ""
 "the installed %1% conflicts with '%2%' provided by the to be installed %3%"
 msgstr ""
-"nainštalovaný %1% je v konflikte s '%2%', ktorý je poskytnutý %3%, ktorý sa "
-"má inštalovať"
+"nainštalovaný %1% je v konflikte s '%2%', ktorý poskytuje %3%, ktorý sa má "
+"inštalovať"
 
 #: zypp/solver/detail/SATResolver.cc:1130
 #, boost-format
 msgid ""
 "the to be installed %1% conflicts with '%2%' provided by the installed %3%"
 msgstr ""
-"%1%, ktorý sa má inštalovať, je v konflikte s '%2%', ktorý je poskytnutý "
-"nainštalovaným %3%"
+"%1%, ktorý sa má inštalovať, je v konflikte s '%2%', ktorý poskytuje "
+"nainštalovaný %3%"
 
 #: zypp/solver/detail/SATResolver.cc:1132
 #, boost-format
@@ -4555,18 +4556,20 @@ msgid ""
 "the to be installed %1% conflicts with '%2%' provided by the to be installed "
 "%3%"
 msgstr ""
-"%1%, ktorý sa má inštalovať, je v konflikte s '%2%', ktorý je poskytnutý %3%"
-", ktorý sa má inštalovať"
+"%1%, ktorý sa má inštalovať, je v konflikte s '%2%', ktorý poskytuje %3%, "
+"ktorý sa má inštalovať"
 
 #: zypp/solver/detail/SATResolver.cc:1139
 #, boost-format
 msgid "the installed %1% obsoletes '%2%' provided by the installed %3%"
-msgstr ""
+msgstr "nainštalovaný %1% zastaráva '%2%', ktorý poskytuje nainštalovaný %3%"
 
 #: zypp/solver/detail/SATResolver.cc:1141
 #, boost-format
 msgid "the installed %1% obsoletes '%2%' provided by the to be installed %3%"
 msgstr ""
+"nainštalovaný %1% zastaráva '%2%', ktorý poskytuje %3%, ktorý sa má "
+"inštalovať"
 
 #: zypp/solver/detail/SATResolver.cc:1145
 #, boost-format
@@ -4791,7 +4794,7 @@ msgstr "balík %s neexistuje"
 #: zypp/solver/detail/SATResolver.cc:2099
 #, c-format, boost-format
 msgid "%s is provided by the system and cannot be erased"
-msgstr "%s je poskytovaný systémom a nemôže byť vymazaný"
+msgstr "%s poskytuje systém a nemôže sa vymazať"
 
 #: zypp/solver/detail/SATResolver.cc:1577
 #: zypp/solver/detail/SATResolver.cc:2101
@@ -4822,19 +4825,19 @@ msgstr "%s je v konflikte s %s poskytovaným %s"
 #: zypp/solver/detail/SATResolver.cc:2110
 #, c-format, boost-format
 msgid "%s obsoletes %s provided by %s"
-msgstr "%s zastarané %s poskytované %s"
+msgstr "%s zastaráva %s, ktorý poskytuje %s"
 
 #: zypp/solver/detail/SATResolver.cc:1593
 #: zypp/solver/detail/SATResolver.cc:2112
 #, c-format, boost-format
 msgid "installed %s obsoletes %s provided by %s"
-msgstr "nainštalované %s zastarané %s poskytované %s"
+msgstr "nainštalovaný %s zastaráva %s, ktorý poskytuje %s"
 
 #: zypp/solver/detail/SATResolver.cc:1596
 #: zypp/solver/detail/SATResolver.cc:2114
 #, c-format, boost-format
 msgid "solvable %s conflicts with %s provided by itself"
-msgstr "Riešenie %s je v konflikte s %s, ktorý je poskytnutý sám sebou"
+msgstr "Riešenie %s je v konflikte s %s, ktorý poskytuje sám"
 
 #: zypp/solver/detail/SATResolver.cc:1627
 #: zypp/solver/detail/SATResolver.cc:2116
