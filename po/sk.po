@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: libzypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-01-12 19:27+0100\n"
-"PO-Revision-Date: 2021-01-14 21:38+0000\n"
+"PO-Revision-Date: 2021-01-15 20:38+0000\n"
 "Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
 "Language-Team: Slovak <https://l10n.opensuse.org/projects/libzypp/master/sk/>"
 "\n"
@@ -4575,28 +4575,34 @@ msgstr ""
 #, boost-format
 msgid "the to be installed %1% obsoletes '%2%' provided by the installed %3%"
 msgstr ""
+"%1%, ktorý sa má inštalovať, zastaráva '%2%', ktorý poskytuje nainštalovaný "
+"%3%"
 
 #: zypp/solver/detail/SATResolver.cc:1147
 #, boost-format
 msgid ""
 "the to be installed %1% obsoletes '%2%' provided by the to be installed %3%"
 msgstr ""
+"%1%, ktorý sa má inštalovať, zastaráva '%2%', ktorý poskytuje %3%, ktorý sa "
+"má inštalovať"
 
 #: zypp/solver/detail/SATResolver.cc:1152
 #, boost-format
 msgid "the installed %1% conflicts with '%2%' provided by itself"
-msgstr ""
+msgstr "nainštalovaný %1% je v konflikte s '%2%', ktorý poskytuje sám"
 
 #: zypp/solver/detail/SATResolver.cc:1154
 #, boost-format
 msgid "the to be installed %1% conflicts with '%2%' provided by itself"
 msgstr ""
+"%1%, ktorý sa má inštalovať, je v konflikte s '%2%', ktorý poskytuje sám"
 
 #: zypp/solver/detail/SATResolver.cc:1186
 #, boost-format
 msgid ""
 "the installed %1% requires '%2%', but this requirement cannot be provided"
 msgstr ""
+"nainštalovaný %1% vyžaduje '%2%', ale túto požiadavku nie je možné splniť"
 
 #: zypp/solver/detail/SATResolver.cc:1188
 #, boost-format
@@ -4604,6 +4610,8 @@ msgid ""
 "the to be installed %1% requires '%2%', but this requirement cannot be "
 "provided"
 msgstr ""
+"%1%, ktorý sa má inštalovať, vyžaduje '%2%', ale túto požiadavku nie je "
+"možné splniť"
 
 #: zypp/solver/detail/SATResolver.cc:1190
 #: zypp/solver/detail/SATResolver.cc:1629
@@ -4630,24 +4638,24 @@ msgstr "neinštalovateľní poskytovatelia: "
 #: zypp/solver/detail/SATResolver.cc:1264
 #, boost-format
 msgid "remove lock to allow removal of %1%"
-msgstr ""
+msgstr "odstrániť zámok pre umožnenie odstránenia %1%"
 
 #: zypp/solver/detail/SATResolver.cc:1269
 #: zypp/solver/detail/SATResolver.cc:1305
 #, boost-format
 msgid "do not install %1%"
-msgstr ""
+msgstr "neinštalovať %1%"
 
 #: zypp/solver/detail/SATResolver.cc:1284
 #: zypp/solver/detail/SATResolver.cc:1326
 #, boost-format
 msgid "keep %1%"
-msgstr ""
+msgstr "ponechať %1%"
 
 #: zypp/solver/detail/SATResolver.cc:1289
 #, boost-format
 msgid "remove lock to allow installation of %1%"
-msgstr ""
+msgstr "odstrániť zámok pre umožnenie inštalácie %1%"
 
 #: zypp/solver/detail/SATResolver.cc:1340
 #: zypp/solver/detail/SATResolver.cc:1361
@@ -4670,7 +4678,7 @@ msgstr "ignorovať varovanie o porušení systému"
 #: zypp/solver/detail/SATResolver.cc:1346
 #, boost-format
 msgid "do not ask to install a solvable providing %1%"
-msgstr ""
+msgstr "nepožadovať inštaláciu riešenia, ktoré poskytuje %1%"
 
 #: zypp/solver/detail/SATResolver.cc:1368
 #, boost-format
@@ -4843,7 +4851,7 @@ msgstr "Riešenie %s je v konflikte s %s, ktorý poskytuje sám"
 #: zypp/solver/detail/SATResolver.cc:2116
 #, c-format, boost-format
 msgid "%s requires %s, but this requirement cannot be provided"
-msgstr "%s vyžaduje %s, ale táto požiadavka nemôže byť splnená"
+msgstr "%s vyžaduje %s, ale túto požiadavku nie je možné splniť"
 
 #: zypp/solver/detail/SATResolver.cc:1703
 #: zypp/solver/detail/SATResolver.cc:2125
@@ -4857,7 +4865,7 @@ msgstr "odstrániť zámok pre umožnenie odstránenia %s"
 #: zypp/solver/detail/SATResolver.cc:2131
 #, c-format, boost-format
 msgid "do not install %s"
-msgstr "neinštaluj %s"
+msgstr "neinštalovať %s"
 
 #: zypp/solver/detail/SATResolver.cc:1723
 #: zypp/solver/detail/SATResolver.cc:1765
@@ -4877,13 +4885,13 @@ msgstr "odstrániť zámok pre umožnenie inštalácie %s"
 #: zypp/solver/detail/SATResolver.cc:2137
 #, c-format, boost-format
 msgid "do not ask to install a solvable providing %s"
-msgstr "nepýtať sa či inštalovať riešenie, ktoré poskytuje %s"
+msgstr "nepožadovať inštaláciu riešenia, ktoré poskytuje %s"
 
 #: zypp/solver/detail/SATResolver.cc:1807
 #: zypp/solver/detail/SATResolver.cc:2141
 #, c-format, boost-format
 msgid "do not ask to delete all solvables providing %s"
-msgstr "nepýtaj sa či zmazať všetky riešenia poskytujúce %s"
+msgstr "nepožadovať zmazanie všetkých riešení, ktoré poskytuje %s"
 
 #: zypp/solver/detail/SATResolver.cc:1820
 #: zypp/solver/detail/SATResolver.cc:2143
