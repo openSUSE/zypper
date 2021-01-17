@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: libzypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-01-12 19:27+0100\n"
-"PO-Revision-Date: 2021-01-15 20:38+0000\n"
+"PO-Revision-Date: 2021-01-22 18:23+0000\n"
 "Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
 "Language-Team: Slovak <https://l10n.opensuse.org/projects/libzypp/master/sk/>"
 "\n"
@@ -4683,12 +4683,12 @@ msgstr "nepožadovať inštaláciu riešenia, ktoré poskytuje %1%"
 #: zypp/solver/detail/SATResolver.cc:1368
 #, boost-format
 msgid "do not ask to delete all solvables providing %1%"
-msgstr ""
+msgstr "nepožadovať zmazanie všetkých riešení, ktoré poskytuje %1%"
 
 #: zypp/solver/detail/SATResolver.cc:1381
 #, boost-format
 msgid "do not install most recent version of %1%"
-msgstr ""
+msgstr "neinštalovať najnovšiu verziu %1%"
 
 #: zypp/solver/detail/SATResolver.cc:1402
 #, boost-format
@@ -4703,12 +4703,12 @@ msgstr "nainštalovať %1% napriek nižšej architektúre"
 #: zypp/solver/detail/SATResolver.cc:1416
 #, boost-format
 msgid "keep obsolete %1%"
-msgstr ""
+msgstr "ponechať zastaraný %1%"
 
 #: zypp/solver/detail/SATResolver.cc:1421
 #, boost-format
 msgid "install %1% from excluded repository"
-msgstr ""
+msgstr "inštalovať %1% z vylúčeného repozitára"
 
 #. translator: %1% is a package name
 #: zypp/solver/detail/SATResolver.cc:1435
@@ -4737,12 +4737,12 @@ msgstr "inštalovať %1%, aj keď je nežiadúci"
 #: zypp/solver/detail/SATResolver.cc:1461
 #, boost-format
 msgid "downgrade of %1% to %2%"
-msgstr ""
+msgstr "znížiť verziu %1% na %2%"
 
 #: zypp/solver/detail/SATResolver.cc:1468
 #, boost-format
 msgid "architecture change of %1% to %2%"
-msgstr ""
+msgstr "zmena architektúry %1% na %2%"
 
 #: zypp/solver/detail/SATResolver.cc:1477
 #, boost-format
@@ -4750,16 +4750,18 @@ msgid ""
 "install %1% (with vendor change)\n"
 "  %2%  -->  %3%"
 msgstr ""
+"inštalovať %1% (so zmenou dodávateľa)\n"
+"  %2% -->  %3%"
 
 #: zypp/solver/detail/SATResolver.cc:1483
 #, boost-format
 msgid "replacement of %1% with %2%"
-msgstr ""
+msgstr "nahradenie %1% s %2%"
 
 #: zypp/solver/detail/SATResolver.cc:1494
 #, boost-format
 msgid "deinstallation of %1%"
-msgstr ""
+msgstr "odinštalovanie %1%"
 
 #: zypp/solver/detail/SATResolver.cc:1548
 #: zypp/solver/detail/SATResolver.cc:2081
@@ -4915,7 +4917,7 @@ msgstr "nainštalovať %s napriek nižšej architektúre"
 #: zypp/solver/detail/SATResolver.cc:2150
 #, c-format, boost-format
 msgid "keep obsolete %s"
-msgstr "ponechať zastarané %s"
+msgstr "ponechať zastaraný %s"
 
 #: zypp/solver/detail/SATResolver.cc:1860
 #: zypp/solver/detail/SATResolver.cc:2151
@@ -4927,13 +4929,13 @@ msgstr "inštalovať %s z vylúčeného repozitára"
 #: zypp/solver/detail/SATResolver.cc:2159
 #, c-format, boost-format
 msgid "downgrade of %s to %s"
-msgstr "znížiť verziu z %s na %s"
+msgstr "znížiť verziu %s na %s"
 
 #: zypp/solver/detail/SATResolver.cc:1907
 #: zypp/solver/detail/SATResolver.cc:2160
 #, c-format, boost-format
 msgid "architecture change of %s to %s"
-msgstr "zmena architektúry z %s na %s"
+msgstr "zmena architektúry %s na %s"
 
 #: zypp/solver/detail/SATResolver.cc:1916
 #: zypp/solver/detail/SATResolver.cc:2161
@@ -4949,7 +4951,7 @@ msgstr ""
 #: zypp/solver/detail/SATResolver.cc:2162
 #, c-format, boost-format
 msgid "replacement of %s with %s"
-msgstr "%s nahradiť %s"
+msgstr "nahradenie %s s %s"
 
 #: zypp/solver/detail/SATResolver.cc:1936
 #: zypp/solver/detail/SATResolver.cc:2164
