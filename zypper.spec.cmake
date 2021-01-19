@@ -57,6 +57,7 @@ Provides:       zypper(oldpackage)
 Provides:	zypper(updatestack-only)
 Provides:	zypper(auto-agree-with-product-licenses)
 Provides:	zypper(purge-kernels)
+Suggests:       scout-command-not-found
 
 %description
 Zypper is a command line tool for managing software. It can be used to add
