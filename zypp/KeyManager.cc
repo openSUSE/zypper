@@ -200,8 +200,7 @@ std::list<std::string> KeyManagerCtx::Impl::readSignaturesFprsOptVerify( const P
       signatures.push_back( std::move(id) );
     }
 
-    if ( sig->status != GPG_ERR_NO_ERROR ) {
-      DBG << "Verification failed with result: " << file_r << " " << GpgmeErr(sig->status) << std::endl;
+    if ( verify_r && sig->status != GPG_ERR_NO_ERROR ) {
       const auto status = gpgme_err_code(sig->status);
 
       // bsc#1180721: libgpgme started to return signatures of unknown keys, which breaks
@@ -210,19 +209,16 @@ std::list<std::string> KeyManagerCtx::Impl::readSignaturesFprsOptVerify( const P
       // We will however keep the behaviour of failing if we find a bad signatures even if others are good.
       if ( status != GPG_ERR_KEY_EXPIRED && status != GPG_ERR_NO_PUBKEY )
       {
+	WAR << "Failed signature check: " << file_r << " " << GpgmeErr(sig->status) << endl;
 	if ( !foundBadSignature )
 	  foundBadSignature = true;
-	if ( verify_r )
-	  WAR << "Failed signature check: " << file_r << " " << GpgmeErr(sig->status) << endl;
       }
       else
       {
+	WAR << "Legacy: Ignore expired or unknown key: " << file_r << " " << GpgmeErr(sig->status) << endl;
         // for now treat expired keys as good signature
         if ( status == GPG_ERR_KEY_EXPIRED )
           foundGoodSignature = true;
-
-	if ( verify_r )
-	  WAR << "Legacy: Ignore expired or unknown key: " << file_r << " " << GpgmeErr(sig->status) << endl;
       }
     } else {
       foundGoodSignature = true;
