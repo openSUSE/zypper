@@ -797,7 +797,6 @@ SET ( zypp_core_base_compat_HEADERS
   base/Gettext.h
   base/EnumClass.h
   base/Logger.h
-  base/CleanerThread_p.h
   base/Easy.h
   base/ProfilingFormater.h
   base/ExternalDataSource.h

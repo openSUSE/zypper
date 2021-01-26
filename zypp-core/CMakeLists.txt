@@ -2,6 +2,27 @@ INCLUDE_DIRECTORIES ( ${LIBZYPP_SOURCE_DIR} )
 
 ADD_DEFINITIONS( -DLOCALEDIR="${CMAKE_INSTALL_PREFIX}/share/locale" -DTEXTDOMAIN="zypp" -DZYPP_DLL )
 
+SET( zypp_toplevel_headers
+  AutoDispose.h
+  ByteArray.h
+  ByteCount.h
+  Date.h
+  ExternalProgram.h
+  Globals.h
+  Pathname.h
+  TriBool.h
+  Url.h
+)
+
+SET( zypp_toplevel_SRCS
+  ByteCount.cc
+  Date.cc
+  ExternalProgram.cc
+  Pathname.cc
+  Url.cc
+)
+INSTALL(  FILES ${zypp_toplevel_headers} DESTINATION "${INCLUDE_INSTALL_DIR}/zypp-core" )
+
 SET( zypp_base_HEADERS
   base/Easy.h
   base/EnumClass.h
@@ -45,6 +66,8 @@ SET( zypp_base_SRCS
   base/Xml.cc
 )
 
+INSTALL(  FILES ${zypp_base_HEADERS} DESTINATION "${INCLUDE_INSTALL_DIR}/zypp-core/base" )
+
 SET( zypp_url_SRCS
   url/UrlUtils.cc
   url/UrlBase.cc
@@ -56,6 +79,8 @@ SET( zypp_url_HEADERS
   url/UrlUtils.h
 )
 
+INSTALL(  FILES ${zypp_url_HEADERS} DESTINATION "${INCLUDE_INSTALL_DIR}/zypp-core/url" )
+
 SET( zypp_parser_xml_SRCS
   parser/xml/XmlEscape.cc
 )
@@ -63,6 +88,8 @@ SET( zypp_parser_xml_SRCS
 SET( zypp_parser_xml_HEADERS
   parser/xml/XmlEscape.h
 )
+
+INSTALL(  FILES ${zypp_parser_xml_HEADERS} DESTINATION "${INCLUDE_INSTALL_DIR}/zypp-core/parser/xml" )
 
 SET( zyppng_base_SRCS
   zyppng/base/abstracteventsource.cc
@@ -157,26 +184,6 @@ SET( zyppng_thread_HEADERS
 SET( zyppng_thread_private_HEADERS
 )
 
-SET( zypp_toplevel_headers
-  AutoDispose.h
-  ByteArray.h
-  ByteCount.h
-  Date.h
-  ExternalProgram.h
-  Globals.h
-  Pathname.h
-  TriBool.h
-  Url.h
-)
-
-SET( zypp_toplevel_SRCS
-  ByteCount.cc
-  Date.cc
-  ExternalProgram.cc
-  Pathname.cc
-  Url.cc
-)
-
 SET ( zypp_HEADERS
   ${zypp_toplevel_headers}
   ${zypp_base_HEADERS}
@@ -203,4 +210,3 @@ SET ( zypp_SRCS
 
 ADD_LIBRARY( zypp-core STATIC ${zypp_SRCS} ${zypp_HEADERS} )
 
-INSTALL(  FILES ${zypp_base_HEADERS} DESTINATION "${INCLUDE_INSTALL_DIR}/base" )

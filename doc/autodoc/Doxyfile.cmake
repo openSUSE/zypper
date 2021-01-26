@@ -14,8 +14,8 @@ ABBREVIATE_BRIEF       =
 ALWAYS_DETAILED_SEC    = NO
 INLINE_INHERITED_MEMB  = NO
 FULL_PATH_NAMES        = YES
-STRIP_FROM_PATH        = @CMAKE_SOURCE_DIR@
-STRIP_FROM_INC_PATH    =
+STRIP_FROM_PATH        = @ZYPP_PROJECT_ROOT@
+STRIP_FROM_INC_PATH    = @ZYPP_PROJECT_ROOT@/zypp @ZYPP_PROJECT_ROOT@/zypp-core
 SHORT_NAMES            = NO
 JAVADOC_AUTOBRIEF      = YES
 MULTILINE_CPP_IS_BRIEF = NO
@@ -69,7 +69,7 @@ WARN_LOGFILE           =
 #---------------------------------------------------------------------------
 # configuration options related to the input files
 #---------------------------------------------------------------------------
-INPUT                  = @ZYPP_DOCINCLUDE_DIR@ @ZYPP_SOURCE_DIR@
+INPUT                  = @ZYPP_DOCINCLUDE_DIR@ @ZYPP_SOURCE_DIR@ @ZYPP_CORE_SOURCE_DIR@
 FILE_PATTERNS          = *.h *.hh *.hxx *.hpp *.h++ *.c *.cc *.cxx *.cpp *.c++ *.tcc *.hcc *.doc
 RECURSIVE              = YES
 EXCLUDE                =

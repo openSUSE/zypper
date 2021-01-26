@@ -406,8 +406,9 @@ fi
 %files devel
 %defattr(-,root,root)
 %{_libdir}/libzypp.so
-%{_includedir}/zypp
 %{_datadir}/cmake/Modules/*
+%{_includedir}/zypp
+%{_includedir}/zypp-core
 %{_libdir}/pkgconfig/libzypp.pc
 
 %files devel-doc
