@@ -14,8 +14,8 @@
 #ifndef ZYPPNG_MEDIA_NETWORK_DOWNLOADSPEC_H
 #define ZYPPNG_MEDIA_NETWORK_DOWNLOADSPEC_H
 
-#include <zypp/zyppng/base/zyppglobal.h>
-#include <zypp/zyppng/core/Url>
+#include <zypp-core/zyppng/base/zyppglobal.h>
+#include <zypp-core/zyppng/core/Url>
 #include <zypp/Pathname.h>
 #include <zypp/base/PtrTypes.h>
 #include <zypp/ByteCount.h>

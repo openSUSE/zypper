@@ -2,9 +2,9 @@
 #include <zypp/zyppng/media/network/private/networkrequesterror_p.h>
 #include <zypp/zyppng/media/network/private/request_p.h>
 #include <zypp/zyppng/media/network/private/mediadebug_p.h>
-#include <zypp/zyppng/base/Timer>
-#include <zypp/zyppng/base/SocketNotifier>
-#include <zypp/zyppng/base/EventDispatcher>
+#include <zypp-core/zyppng/base/Timer>
+#include <zypp-core/zyppng/base/SocketNotifier>
+#include <zypp-core/zyppng/base/EventDispatcher>
 #include <zypp/media/CurlHelper.h>
 #include <zypp/media/MediaUserAuth.h>
 #include <assert.h>

@@ -1,10 +1,10 @@
 #ifndef ZYPP_NG_MEDIA_CURL_DOWNLOADER_H_INCLUDED
 #define ZYPP_NG_MEDIA_CURL_DOWNLOADER_H_INCLUDED
 
-#include <zypp/zyppng/base/zyppglobal.h>
-#include <zypp/zyppng/base/Base>
-#include <zypp/zyppng/base/signals.h>
-#include <zypp/zyppng/core/Url>
+#include <zypp-core/zyppng/base/zyppglobal.h>
+#include <zypp-core/zyppng/base/Base>
+#include <zypp-core/zyppng/base/signals.h>
+#include <zypp-core/zyppng/core/Url>
 #include <zypp/zyppng/media/network/networkrequesterror.h>
 #include <zypp/zyppng/media/network/AuthData>
 

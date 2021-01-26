@@ -1,6 +1,6 @@
 #include <boost/test/unit_test.hpp>
 #include <boost/test/data/test_case.hpp>
-#include <zypp/zyppng/base/EventLoop>
+#include <zypp-core/zyppng/base/EventLoop>
 #include <zypp/media/MetaLinkParser.h> // for hexstr2bytes
 #include <zypp/zyppng/media/network/request.h>
 #include <zypp/zyppng/media/network/networkrequestdispatcher.h>

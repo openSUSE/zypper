@@ -10,18 +10,18 @@
 #include "private/medianetworkserver_p.h"
 
 #include <zypp/media/MediaException.h>
-#include <zypp/zyppng/base/private/linuxhelpers_p.h>
-#include <zypp/zyppng/base/EventLoop>
-#include <zypp/zyppng/base/AutoDisconnect>
-#include <zypp/zyppng/io/SockAddr>
+#include <zypp-core/zyppng/base/private/linuxhelpers_p.h>
+#include <zypp-core/zyppng/base/EventLoop>
+#include <zypp-core/zyppng/base/AutoDisconnect>
+#include <zypp-core/zyppng/io/SockAddr>
 #include <zypp/zyppng/media/network/downloadspec.h>
 
 #include <zypp/zyppng/media/network/networkrequestdispatcher.h>
 #include <zypp/zyppng/media/network/networkrequesterror.h>
 #include <zypp/zyppng/media/network/AuthData>
 #include <zypp/zyppng/media/network/private/mediadebug_p.h>
-#include <zypp/zyppng/base/EventDispatcher>
-#include <zypp/zyppng/base/AbstractEventSource>
+#include <zypp-core/zyppng/base/EventDispatcher>
+#include <zypp-core/zyppng/base/AbstractEventSource>
 
 #include <zypp/media/CurlHelper.h>
 #include <zypp/media/MediaUserAuth.h>

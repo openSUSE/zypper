@@ -323,10 +323,13 @@ INSTALL( FILES ${LIBZYPP_SOURCE_DIR}/systemCheck DESTINATION ${SYSCONFDIR}/zypp 
 # logrotate config file
 INSTALL( FILES ${LIBZYPP_SOURCE_DIR}/zypp-history.lr DESTINATION ${SYSCONFDIR}/logrotate.d )
 
+
 ####################################################################
 # SUBDIRECTORIES                                                   #
 ####################################################################
 
+
+ADD_SUBDIRECTORY( zypp-core )
 ADD_SUBDIRECTORY( zypp )
 # do not build devel by default
 ADD_SUBDIRECTORY( devel EXCLUDE_FROM_ALL )

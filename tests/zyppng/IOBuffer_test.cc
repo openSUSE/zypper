@@ -1,5 +1,5 @@
 #include <boost/test/unit_test.hpp>
-#include <zypp/zyppng/io/private/iobuffer_p.h>
+#include <zypp-core/zyppng/io/private/iobuffer_p.h>
 #include <algorithm>
 
 BOOST_AUTO_TEST_CASE(iobuf)

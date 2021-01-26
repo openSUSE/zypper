@@ -1,8 +1,8 @@
 #include <boost/test/unit_test.hpp>
-#include <zypp/zyppng/base/EventLoop>
-#include <zypp/zyppng/base/Timer>
-#include <zypp/zyppng/io/Socket>
-#include <zypp/zyppng/io/SockAddr>
+#include <zypp-core/zyppng/base/EventLoop>
+#include <zypp-core/zyppng/base/Timer>
+#include <zypp-core/zyppng/io/Socket>
+#include <zypp-core/zyppng/io/SockAddr>
 #include <thread>
 #include <string_view>
 #include <iostream>

@@ -1,9 +1,9 @@
 #ifndef ZYPP_NG_MEDIA_HTTP_PRIVATE_DOWNLOADER_P_H_INCLUDED
 #define ZYPP_NG_MEDIA_HTTP_PRIVATE_DOWNLOADER_P_H_INCLUDED
 
-#include <zypp/zyppng/base/private/base_p.h>
-#include <zypp/zyppng/base/signals.h>
-#include <zypp/zyppng/core/ByteArray>
+#include <zypp-core/zyppng/base/private/base_p.h>
+#include <zypp-core/zyppng/base/signals.h>
+#include <zypp-core/zyppng/core/ByteArray>
 #include <zypp/zyppng/media/network/downloader.h>
 #include <zypp/zyppng/media/network/downloadspec.h>
 #include <zypp/zyppng/media/network/request.h>
@@ -11,7 +11,7 @@
 #include <zypp/zyppng/media/network/networkrequesterror.h>
 #include <zypp/zyppng/media/network/private/mirrorcontrol_p.h>
 #include <zypp/media/MediaBlockList.h>
-#include <zypp/zyppng/base/statemachine.h>
+#include <zypp-core/zyppng/base/statemachine.h>
 #include <zypp/TriBool.h>
 
 #include <deque>

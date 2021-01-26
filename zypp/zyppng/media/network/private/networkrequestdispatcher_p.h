@@ -2,7 +2,7 @@
 #define ZYPP_NG_MEDIA_CURL_PRIVATE_CURL_P_H_INCLUDED
 
 #include <zypp/zyppng/media/network/networkrequestdispatcher.h>
-#include <zypp/zyppng/base/private/base_p.h>
+#include <zypp-core/zyppng/base/private/base_p.h>
 #include <curl/curl.h>
 #include <deque>
 #include <set>

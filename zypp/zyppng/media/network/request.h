@@ -3,11 +3,11 @@
 
 #include <zypp/zyppng/media/network/networkrequesterror.h>
 #include <zypp/zyppng/media/network/TransferSettings>
-#include <zypp/zyppng/base/Base>
-#include <zypp/zyppng/core/Url>
-#include <zypp/zyppng/core/ByteArray>
-#include <zypp/zyppng/base/zyppglobal.h>
-#include <zypp/zyppng/base/signals.h>
+#include <zypp-core/zyppng/base/Base>
+#include <zypp-core/zyppng/core/Url>
+#include <zypp-core/zyppng/core/ByteArray>
+#include <zypp-core/zyppng/base/zyppglobal.h>
+#include <zypp-core/zyppng/base/signals.h>
 #include <zypp/base/Flags.h>
 #include <zypp/ByteCount.h>
 #include <vector>

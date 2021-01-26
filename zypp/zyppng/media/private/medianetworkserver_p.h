@@ -14,13 +14,13 @@
 #ifndef ZYPPNG_MEDIA_MEDIANETWORKSERVER_H_INCLUDED
 #define ZYPPNG_MEDIA_MEDIANETWORKSERVER_H_INCLUDED
 
-#include <zypp/zyppng/base/zyppglobal.h>
-#include <zypp/zyppng/base/signals.h>
+#include <zypp-core/zyppng/base/zyppglobal.h>
+#include <zypp-core/zyppng/base/signals.h>
 #include <zypp/base/String.h>
-#include <zypp/zyppng/base/Base>
-#include <zypp/zyppng/io/Socket>
+#include <zypp-core/zyppng/base/Base>
+#include <zypp-core/zyppng/io/Socket>
 #include <zypp/TmpPath.h>
-#include <zypp/zyppng/thread/Wakeup>
+#include <zypp-core/zyppng/thread/Wakeup>
 
 #include <sys/types.h>
 #include <unistd.h>

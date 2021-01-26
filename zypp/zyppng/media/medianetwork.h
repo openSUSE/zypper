@@ -15,11 +15,11 @@
 #define ZYPPNG_MEDIA_MEDIANETWORK_H_INCLUDED
 
 #include <zypp/media/MediaHandler.h>
-#include <zypp/zyppng/core/Url>
+#include <zypp-core/zyppng/core/Url>
 #include <zypp/zyppng/media/network/AuthData>
 #include <zypp/zyppng/media/network/TransferSettings>
 #include <zypp/zyppng/messages.pb.h>
-#include <zypp/zyppng/io/private/iobuffer_p.h>
+#include <zypp-core/zyppng/io/private/iobuffer_p.h>
 #include <zypp/TmpPath.h>
 #include <optional>
 #include <variant>

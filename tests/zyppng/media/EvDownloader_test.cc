@@ -1,5 +1,5 @@
-#include <zypp/zyppng/base/EventLoop>
-#include <zypp/zyppng/base/EventDispatcher>
+#include <zypp-core/zyppng/base/EventLoop>
+#include <zypp-core/zyppng/base/EventDispatcher>
 #include <zypp/zyppng/media/network/downloader.h>
 #include <zypp/zyppng/media/network/downloadspec.h>
 #include <zypp/zyppng/media/network/networkrequesterror.h>

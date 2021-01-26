@@ -18,7 +18,7 @@
 #include <zypp/ExternalProgram.h>
 #include <zypp/TmpPath.h>
 #include <zypp/PathInfo.h>
-#include <zypp/zyppng/base/private/linuxhelpers_p.h>
+#include <zypp-core/zyppng/base/private/linuxhelpers_p.h>
 
 #include "WebServer.h"
 

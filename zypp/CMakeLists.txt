@@ -3,8 +3,11 @@ FILE( GLOB_RECURSE POT_FILE_DEPENDS RELATIVE ${LIBZYPP_SOURCE_DIR} "*.h" "*.cc" 
 SET( POT_FILE_DEPENDS ${POT_FILE_DEPENDS} PARENT_SCOPE )
 
 
-ADD_DEFINITIONS(-DLOCALEDIR="${CMAKE_INSTALL_PREFIX}/share/locale" -DTEXTDOMAIN="zypp" -DZYPP_DLL )
+ADD_DEFINITIONS( -DZYPP_DLL )
 INCLUDE_DIRECTORIES( ${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_CURRENT_BINARY_DIR}/sywu/include )
+INCLUDE_DIRECTORIES( ${LIBZYPP_SOURCE_DIR} ${LIBZYPP_BINARY_DIR} ${LIBZYPP_SOURCE_DIR}/libs/zypp-core SYSTEM )
+
+message(${LIBZYPP_SOURCE_DIR}/zypp-core)
 
 # add_definitions( -DENABLE_SYWU )
 # add_subdirectory(sywu)
@@ -16,20 +19,17 @@ ENDIF(ENABLE_ZCHUNK_COMPRESSION)
 
 SET( zypp_SRCS
   Application.cc
-  ByteCount.cc
   Capabilities.cc
   Capability.cc
   CapMatch.cc
   Changelog.cc
   CheckSum.cc
   CpeId.cc
-  Date.cc
   Dep.cc
   Digest.cc
   DiskUsageCounter.cc
   DownloadMode.cc
   Edition.cc
-  ExternalProgram.cc
   PluginFrame.cc
   PluginFrameException.cc
   PluginScript.cc
@@ -51,7 +51,6 @@ SET( zypp_SRCS
   Package.cc
   Patch.cc
   PathInfo.cc
-  Pathname.cc
   Pattern.cc
   PoolItem.cc
   PoolItemBest.cc
@@ -85,7 +84,6 @@ SET( zypp_SRCS
   SysContent.cc
   Target.cc
   TmpPath.cc
-  Url.cc
   VendorAttr.cc
   VendorSupportOptions.cc
   ZYpp.cc
@@ -105,11 +103,8 @@ SET( zypp_HEADERS
   ${CMAKE_CURRENT_BINARY_DIR}/APIConfig.h
   Application.h
   Arch.h
-  AutoDispose.h
   Bit.h
   Bitmap.h
-  ByteArray.h
-  ByteCount.h
   Callback.h
   Capabilities.h
   Capability.h
@@ -119,13 +114,11 @@ SET( zypp_HEADERS
   ContentType.h
   CountryCode.h
   CpeId.h
-  Date.h
   Dep.h
   Digest.h
   DiskUsageCounter.h
   DownloadMode.h
   Edition.h
-  ExternalProgram.h
   PluginFrame.h
   PluginFrameException.h
   PluginScript.h
@@ -156,7 +149,6 @@ SET( zypp_HEADERS
   PackageKeyword.h
   Patch.h
   PathInfo.h
-  Pathname.h
   Pattern.h
   PoolItem.h
   PoolItemBest.h
@@ -197,8 +189,6 @@ SET( zypp_HEADERS
   SysContent.h
   Target.h
   TmpPath.h
-  TriBool.h
-  Url.h
   UserData.h
   VendorAttr.h
   VendorSupportOptions.h
@@ -215,31 +205,18 @@ INSTALL(  FILES ${zypp_HEADERS} DESTINATION "${INCLUDE_INSTALL_DIR}/zypp" )
 
 SET( zypp_base_SRCS
   base/Backtrace.cc
-  base/CleanerThread.cc
   base/DrunkenBishop.cc
   base/SerialNumber.cc
   base/Random.cc
   base/Measure.cc
-  base/Gettext.cc
   base/GzStream.cc
-  base/IOStream.cc
-  base/IOTools.cc
   base/InputStream.cc
   base/ReferenceCounted.cc
   base/SetRelationMixin.cc
-  base/String.cc
-  base/StringV.cc
   base/StrMatcher.h
   base/StrMatcher.cc
-  base/Regex.cc
-  base/Unit.cc
-  base/ExternalDataSource.cc
-  base/Exception.cc
   base/UserRequestException.cc
   base/Sysconfig.cc
-  base/ProfilingFormater.cc
-  base/LogControl.cc
-  base/Xml.cc
 )
 
 SET( zypp_base_HEADERS
@@ -247,9 +224,7 @@ SET( zypp_base_HEADERS
   base/Collector.h
   base/DrunkenBishop.h
   base/SerialNumber.h
-  base/Easy.h
   base/Env.h
-  base/Errno.h
   base/fXstream.h
   base/Random.h
   base/Algorithm.h
@@ -257,47 +232,25 @@ SET( zypp_base_HEADERS
   base/Debug.h
   base/DefaultIntegral.h
   base/DtorReset.h
-  base/Exception.h
   base/UserRequestException.h
-  base/EnumClass.h
-  base/ExternalDataSource.h
-  base/Flags.h
-  base/Function.h
   base/Functional.h
-  base/Gettext.h
   base/GzStream.h
-  base/Hash.h
-  base/IOStream.h
-  base/IOTools.h
   base/InputStream.h
-  base/Iterable.h
-  base/Iterator.h
   base/Json.h
   base/LocaleGuard.h
-  base/LogControl.h
-  base/LogTools.h
-  base/Logger.h
   base/Measure.h
   base/NamedValue.h
-  base/NonCopyable.h
-  base/ProfilingFormater.h
   base/ProvideNumericId.h
-  base/PtrTypes.h
   base/ReferenceCounted.h
   base/SetRelationMixin.h
   base/SetTracker.h
   base/Signal.h
   base/SimpleStreambuf.h
-  base/String.h
-  base/StringV.h
   base/StrMatcher.h
-  base/Regex.h
   base/Sysconfig.h
   base/TypeTraits.h
-  base/Unit.h
   base/ValueTransform.h
   base/WatchFile.h
-  base/Xml.h
 )
 
 IF (ENABLE_ZCHUNK_COMPRESSION)
@@ -452,7 +405,6 @@ SET( zypp_parser_xml_SRCS
   parser/xml/ParseDefConsume.cc
   parser/xml/ParseDefException.cc
   parser/xml/Reader.cc
-  parser/xml/XmlEscape.cc
   parser/xml/XmlString.cc
   parser/xml/libxmlfwd.cc
 )
@@ -465,7 +417,6 @@ SET( zypp_parser_xml_HEADERS
   parser/xml/ParseDefException.h
   parser/xml/ParseDefTraits.h
   parser/xml/Reader.h
-  parser/xml/XmlEscape.h
   parser/xml/XmlString.h
   parser/xml/libxmlfwd.h
 )
@@ -703,17 +654,6 @@ INSTALL(  FILES
   DESTINATION ${INCLUDE_INSTALL_DIR}/zypp/ui
 )
 
-SET( zypp_url_SRCS
-  url/UrlUtils.cc
-  url/UrlBase.cc
-)
-
-SET( zypp_url_HEADERS
-  url/UrlBase.h
-  url/UrlException.h
-  url/UrlUtils.h
-)
-
 INSTALL(  FILES
   ${zypp_url_HEADERS}
   DESTINATION ${INCLUDE_INSTALL_DIR}/zypp/url
@@ -823,6 +763,78 @@ INSTALL( FILES
 
 ####################################################################
 
+
+SET ( zypp_core_compat_HEADERS
+  ByteCount.h
+  Url.h
+  Globals.h
+  ExternalProgram.h
+  Date.h
+  AutoDispose.h
+  TriBool.h
+  Pathname.h
+  ByteArray.h
+)
+
+INSTALL( FILES
+  ${zypp_core_compat_HEADERS}
+  DESTINATION ${INCLUDE_INSTALL_DIR}/zypp
+)
+
+SET ( zypp_core_base_compat_HEADERS
+  base/Xml.h
+  base/Function.h
+  base/Flags.h
+  base/StringV.h
+  base/Iterator.h
+  base/NonCopyable.h
+  base/Exception.h
+  base/Unit.h
+  base/String.h
+  base/Regex.h
+  base/IOTools.h
+  base/IOStream.h
+  base/Gettext.h
+  base/EnumClass.h
+  base/Logger.h
+  base/CleanerThread_p.h
+  base/Easy.h
+  base/ProfilingFormater.h
+  base/ExternalDataSource.h
+  base/LogTools.h
+  base/LogControl.h
+  base/Hash.h
+  base/PtrTypes.h
+  base/Errno.h
+  base/Iterable.h
+)
+
+INSTALL( FILES
+  ${zypp_core_base_compat_HEADERS}
+  DESTINATION ${INCLUDE_INSTALL_DIR}/zypp/base
+)
+
+
+SET ( zypp_core_url_compat_HEADERS
+  url/UrlException.h
+  url/UrlUtils.h
+  url/UrlBase.h
+)
+
+INSTALL( FILES
+  ${zypp_core_url_compat_HEADERS}
+  DESTINATION ${INCLUDE_INSTALL_DIR}/zypp/url
+)
+
+SET ( zypp_core_parser_compat_HEADERS
+  parser/xml/XmlEscape.h
+)
+
+INSTALL( FILES
+  ${zypp_core_parser_compat_HEADERS}
+  DESTINATION ${INCLUDE_INSTALL_DIR}/zypp/parser/xml
+)
+
 add_subdirectory( zyppng )
 
 protobuf_generate_cpp(ZYPP_PROTO_SRCS ZYPP_PROTO_HDRS ${zypp_PROTOBUF_SOURCES})
@@ -881,6 +893,10 @@ ${zypp_target_HEADERS}
 ${zypp_pool_HEADERS}
 ${zypp_misc_HEADERS}
 ${ZYPP_PROTO_HDRS}
+${zypp_core_compat_HEADERS}
+${zypp_core_base_compat_HEADERS}
+${zypp_core_url_compat_HEADERS}
+${zypp_core_parser_compat_HEADERS}
 )
 
 #
@@ -930,6 +946,7 @@ macro( ADDZYPPLIB LIBNAME )
   SET_TARGET_PROPERTIES( ${LIBNAME} PROPERTIES SOVERSION "${LIBZYPP_SOVERSION_INFO}" )
   # System libraries
   SET(UTIL_LIBRARY util)
+  TARGET_LINK_LIBRARIES(${LIBNAME} zypp-core )
   TARGET_LINK_LIBRARIES(${LIBNAME} ${UTIL_LIBRARY} )
   TARGET_LINK_LIBRARIES(${LIBNAME} ${RPM_LIBRARY} )
   TARGET_LINK_LIBRARIES(${LIBNAME} ${GETTEXT_LIBRARIES} )

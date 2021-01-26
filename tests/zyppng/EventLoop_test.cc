@@ -1,7 +1,7 @@
 #include <boost/test/unit_test.hpp>
-#include <zypp/zyppng/base/EventLoop>
-#include <zypp/zyppng/base/EventDispatcher>
-#include <zypp/zyppng/base/Timer>
+#include <zypp-core/zyppng/base/EventLoop>
+#include <zypp-core/zyppng/base/EventDispatcher>
+#include <zypp-core/zyppng/base/Timer>
 #include <zypp/base/Exception.h>
 
 #include <iostream>

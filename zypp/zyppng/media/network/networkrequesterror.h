@@ -1,7 +1,7 @@
 #ifndef ZYPP_NG_MEDIA_CURL_NETWORK_REQUEST_ERROR_H_INCLUDED
 #define ZYPP_NG_MEDIA_CURL_NETWORK_REQUEST_ERROR_H_INCLUDED
 
-#include <zypp/zyppng/base/zyppglobal.h>
+#include <zypp-core/zyppng/base/zyppglobal.h>
 #include <zypp/base/PtrTypes.h>
 #include <boost/any.hpp>
 #include <string>

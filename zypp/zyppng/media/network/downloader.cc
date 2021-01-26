@@ -4,8 +4,8 @@
 #include <zypp/zyppng/media/network/private/networkrequesterror_p.h>
 #include <zypp/zyppng/media/network/networkrequestdispatcher.h>
 #include <zypp/zyppng/media/network/request.h>
-#include <zypp/zyppng/base/Timer>
-#include <zypp/zyppng/base/EventDispatcher>
+#include <zypp-core/zyppng/base/Timer>
+#include <zypp-core/zyppng/base/EventDispatcher>
 #include <zypp/Pathname.h>
 #include <zypp/media/TransferSettings.h>
 #include <zypp/media/MetaLinkParser.h>

@@ -1,7 +1,7 @@
 #include "private/mirrorcontrol_p.h"
 #include "private/mediadebug_p.h"
-#include <zypp/zyppng/base/EventDispatcher>
-#include <zypp/zyppng/base/Signals>
+#include <zypp-core/zyppng/base/EventDispatcher>
+#include <zypp-core/zyppng/base/Signals>
 #include <iostream>
 
 namespace zyppng {

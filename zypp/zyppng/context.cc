@@ -1,5 +1,5 @@
 #include "context.h"
-#include <zypp/zyppng/base/EventLoop>
+#include <zypp-core/zyppng/base/EventLoop>
 #include <zypp/zyppng/media/network/private/mirrorcontrol_p.h>
 
 namespace zyppng {

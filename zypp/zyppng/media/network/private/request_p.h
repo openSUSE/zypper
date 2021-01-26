@@ -1,10 +1,10 @@
 #ifndef ZYPP_NG_MEDIA_CURL_PRIVATE_REQUEST_P_H_INCLUDED
 #define ZYPP_NG_MEDIA_CURL_PRIVATE_REQUEST_P_H_INCLUDED
 
-#include <zypp/zyppng/base/private/base_p.h>
+#include <zypp-core/zyppng/base/private/base_p.h>
 #include <zypp/zyppng/media/network/request.h>
 #include <zypp/media/MediaException.h>
-#include <zypp/zyppng/base/Timer>
+#include <zypp-core/zyppng/base/Timer>
 #include <zypp/base/Regex.h>
 #include <curl/curl.h>
 #include <array>

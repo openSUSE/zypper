@@ -1,9 +1,9 @@
 #ifndef ZYPP_NG_MEDIA_HTTP_PRIVATE_MIRRORCONTROL_P_H
 #define ZYPP_NG_MEDIA_HTTP_PRIVATE_MIRRORCONTROL_P_H
 
-#include <zypp/zyppng/core/Url>
-#include <zypp/zyppng/base/Signals>
-#include <zypp/zyppng/base/Base>
+#include <zypp-core/zyppng/core/Url>
+#include <zypp-core/zyppng/base/Signals>
+#include <zypp-core/zyppng/base/Base>
 #include <zypp/zyppng/media/network/networkrequestdispatcher.h>
 #include <zypp/zyppng/media/network/request.h>
 #include <zypp/media/MetaLinkParser.h>
