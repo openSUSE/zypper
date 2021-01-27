@@ -1253,6 +1253,8 @@ namespace
       WAR << path_r << " (" << requireGPGSig_r << " -> " << ret << ")" << endl;
       WAR << vresult;
     }
+    else
+      DBG << path_r << " [0-Signature is OK]" << endl;
     return ret;
   }
 
