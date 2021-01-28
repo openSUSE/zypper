@@ -1,0 +1,2 @@
+SET( zypp_PROTOBUF_SOURCES
+)

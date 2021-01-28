@@ -188,7 +188,7 @@ ELSE ( NOT ZLIB_FOUND)
 ENDIF( NOT ZLIB_FOUND)
 
 FIND_PACKAGE(Protobuf REQUIRED)
-SET(Protobuf_IMPORT_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/zypp/proto ${CMAKE_CURRENT_SOURCE_DIR}/zypp/zyppng/proto)
+SET( Protobuf_IMPORT_DIRS ${CMAKE_CURRENT_SOURCE_DIR} )
 
 FIND_PACKAGE(YAML-CPP REQUIRED)
 IF ( NOT YAML-CPP_FOUND)
@@ -327,8 +327,7 @@ INSTALL( FILES ${LIBZYPP_SOURCE_DIR}/zypp-history.lr DESTINATION ${SYSCONFDIR}/l
 ####################################################################
 # SUBDIRECTORIES                                                   #
 ####################################################################
-
-
+ADD_SUBDIRECTORY( zypp-proto )
 ADD_SUBDIRECTORY( zypp-core )
 ADD_SUBDIRECTORY( zypp )
 # do not build devel by default

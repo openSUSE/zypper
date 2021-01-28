@@ -1,0 +1,10 @@
+syntax = "proto3";
+option optimize_for = LITE_RUNTIME;
+
+package zypp.proto;
+
+// all messages will be enclosed in this type
+message Envelope {
+  string messageTypeName = 1;
+  bytes  value = 2;
+}

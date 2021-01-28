@@ -735,10 +735,6 @@ SET( zypp_repo_susetags_HEADERS
   repo/susetags/Downloader.h
 )
 
-SET( zypp_PROTOBUF_SOURCES
-    proto/transfersettings.proto
-)
-
 
 ####################################################################
 
@@ -837,8 +833,6 @@ INSTALL( FILES
 
 add_subdirectory( zyppng )
 
-protobuf_generate_cpp(ZYPP_PROTO_SRCS ZYPP_PROTO_HDRS ${zypp_PROTOBUF_SOURCES})
-
 SET( zypp_lib_SRCS
 ${zypp_misc_SRCS}
 ${zypp_pool_SRCS}
@@ -865,7 +859,6 @@ ${zypp_sat_SRCS}
 ${zypp_sat_detail_SRCS}
 ${zypp_EARLY_SRCS}
 ${zypp_base_SRCS}
-${ZYPP_PROTO_SRCS}
 )
 
 SET( zypp_lib_HEADERS
@@ -892,7 +885,6 @@ ${zypp_target_modalias_HEADERS}
 ${zypp_target_HEADERS}
 ${zypp_pool_HEADERS}
 ${zypp_misc_HEADERS}
-${ZYPP_PROTO_HDRS}
 ${zypp_core_compat_HEADERS}
 ${zypp_core_base_compat_HEADERS}
 ${zypp_core_url_compat_HEADERS}
@@ -938,14 +930,17 @@ SET_LOGGROUP( "libsolv" ${zypp_sat_SRCS} )
 #SET_LOGGROUP( "group" ${zypp_pool_SRCS} )
 
 ADD_LIBRARY( zypp-objlib OBJECT ${zypp_lib_SRCS} ${zypp_lib_HEADERS} )
+#we include generated headers, so we need to wait for zypp-protobuf to be ready
+add_dependencies( zypp-objlib zypp-protobuf )
 
 macro( ADDZYPPLIB LIBNAME )
   message( "ADDING lib ${LIBNAME} to project" )
-  ADD_LIBRARY(${LIBNAME} SHARED $<TARGET_OBJECTS:zypp-objlib> $<TARGET_OBJECTS:zyppng-objlib> )
+  ADD_LIBRARY( ${LIBNAME} SHARED $<TARGET_OBJECTS:zypp-objlib> $<TARGET_OBJECTS:zyppng-objlib> )
   SET_TARGET_PROPERTIES( ${LIBNAME} PROPERTIES VERSION "${LIBZYPP_VERSION_INFO}" )
   SET_TARGET_PROPERTIES( ${LIBNAME} PROPERTIES SOVERSION "${LIBZYPP_SOVERSION_INFO}" )
   # System libraries
   SET(UTIL_LIBRARY util)
+  TARGET_LINK_LIBRARIES(${LIBNAME} zypp-protobuf )
   TARGET_LINK_LIBRARIES(${LIBNAME} zypp-core )
   TARGET_LINK_LIBRARIES(${LIBNAME} ${UTIL_LIBRARY} )
   TARGET_LINK_LIBRARIES(${LIBNAME} ${RPM_LIBRARY} )

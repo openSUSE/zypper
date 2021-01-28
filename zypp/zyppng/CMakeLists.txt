@@ -42,30 +42,17 @@ SET( zyppng_appcode_SRCS
   context.cc
 )
 
-SET( zyppng_PROTOBUF_SOURCES
-    proto/download.proto
-    proto/messages.proto
-    proto/networkrequesterror.proto
-)
-
-protobuf_generate_cpp(ZYPPNG_PROTO_SRCS ZYPPNG_PROTO_HDRS ${zyppng_PROTOBUF_SOURCES})
-
-
 SET ( zyppng_HEADERS
   ${zyppng_appcode_HEADERS}
-  ${zyppng_appcode_SRCS}
-  ${zyppng_base_HEADERS}
-  ${zyppng_base_private_HEADERS}
-  ${zyppng_core_HEADERS}
   ${zyppng_media_HEADERS}
   ${zyppng_media_private_HEADERS}
-  ${ZYPPNG_PROTO_HDRS}
 )
 
 SET ( zyppng_SRCS
+  ${zyppng_appcode_SRCS}
   ${zyppng_media_SRCS}
-  ${ZYPPNG_PROTO_SRCS}
 )
 
 ADD_LIBRARY( zyppng-objlib OBJECT ${zyppng_SRCS} ${zyppng_HEADERS} )
-
+#we include generated headers, so we need to wait for zypp-protobuf to be ready
+add_dependencies( zyppng-objlib zypp-protobuf )

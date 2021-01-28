@@ -1,0 +1,6 @@
+SET( zypp_core_PROTOBUF_SOURCES
+)
+
+protobuf_generate_cpp(ZYPPCORE_PROTO_SRCS ZYPPCORE_PROTO_HDRS ${zypp_core_PROTOBUF_SOURCES})
+
+

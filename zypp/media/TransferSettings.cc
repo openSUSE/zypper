@@ -10,7 +10,7 @@
 #include <zypp/media/TransferSettings.h>
 #include <zypp/ZConfig.h>
 
-#include <transfersettings.pb.h>
+#include <zypp-proto/transfersettings.pb.h>
 
 using std::endl;
 

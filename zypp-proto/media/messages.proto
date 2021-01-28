@@ -1,8 +1,8 @@
 syntax = "proto3";
 option optimize_for = LITE_RUNTIME;
 
-import "download.proto";
 import "transfersettings.proto";
+import "download.proto";
 import "networkrequesterror.proto";
 
 package zypp.proto;
@@ -78,12 +78,6 @@ message CancelDownload {
 message NewAuthDataAvailable {
   uint32 requestId = 1;
   TransferSettings settings = 2;
-}
-
-// all messages will be enclosed in this type
-message Envelope {
-  string messageTypeName = 1;
-  bytes  value = 2;
 }
 
 // generic status object, showing if a request that has no explicit return message

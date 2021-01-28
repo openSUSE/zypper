@@ -209,4 +209,6 @@ SET ( zypp_SRCS
 )
 
 ADD_LIBRARY( zypp-core STATIC ${zypp_SRCS} ${zypp_HEADERS} )
+#we include generated headers, so we need to wait for zypp-protobuf to be ready
+add_dependencies( zypp-core zypp-protobuf )
 

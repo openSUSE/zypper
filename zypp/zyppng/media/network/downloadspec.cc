@@ -1,6 +1,6 @@
 #include "downloadspec.h"
 #include <string>
-#include <zypp/zyppng/download.pb.h>
+#include <zypp-proto/download.pb.h>
 
 namespace zyppng {
 

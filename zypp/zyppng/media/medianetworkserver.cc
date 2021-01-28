@@ -19,7 +19,8 @@
 #include <zypp/media/TransferSettings.h>
 #include <zypp/PathInfo.h>
 
-#include <zypp/zyppng/messages.pb.h>
+#include <zypp-proto/envelope.pb.h>
+#include <zypp-proto/messages.pb.h>
 
 #undef ZYPP_BASE_LOGGER_LOGGROUP
 #define ZYPP_BASE_LOGGER_LOGGROUP "zypp::MediaNetworkServer"
