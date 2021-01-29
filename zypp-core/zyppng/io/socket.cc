@@ -56,6 +56,8 @@ namespace zyppng {
 
   void SocketPrivate::setError(Socket::SocketError error , std::string &&err )
   {
+    if ( _error == error )
+      return;
     _error = error;
     _errorDesc = std::move(err);
     _sigError.emit( error );
@@ -186,16 +188,24 @@ namespace zyppng {
     return true;
   }
 
+  /*!
+   * Returns the number of bytes available to read on a CONNECTED socket
+   */
+  int SocketPrivate::bytesAvailableOnSocket(int socket)
+  {
+    int value;
+    if ( ioctl( socket, FIONREAD, &value) >= 0 )
+      return value;
+
+    return 0;
+  }
+
   int zyppng::SocketPrivate::rawBytesAvailable() const
   {
     if ( state() != Socket::ConnectedState )
       return 0;
 
-    int value;
-    if ( ioctl( _socket, FIONREAD, &value) >= 0 )
-      return value;
-
-    return 0;
+    return bytesAvailableOnSocket( _socket );
   }
 
   bool SocketPrivate::readRawBytesToBuffer()
@@ -222,7 +232,7 @@ namespace zyppng {
       return true;
     }
     //handle remote close
-    else if ( bytesRead == 0 ) {
+    else if ( bytesRead == 0 && errno != EAGAIN && errno != EWOULDBLOCK  ) {
       setError( Socket::ConnectionClosedByRemote, "The remote host closed the connection" );
       return false;
     }

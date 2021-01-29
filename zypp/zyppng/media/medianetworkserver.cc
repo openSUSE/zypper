@@ -172,7 +172,7 @@ namespace zyppng {
 
       if ( !_pendingMessageSize ) {
         // if we cannot read the message size wait some more
-        if ( _connection->bytesAvailable() < sizeof( RequestId ) )
+        if ( _connection->bytesAvailable() < sizeof( HeaderSizeType ) )
           return;
 
         HeaderSizeType msgSize;
