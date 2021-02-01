@@ -312,6 +312,26 @@ std::shared_ptr<EventDispatcher> EventDispatcherPrivate::create()
   return std::shared_ptr<EventDispatcher>( new EventDispatcher() );
 }
 
+void EventDispatcherPrivate::waitPidCallback( GPid pid, gint status, gpointer user_data )
+{
+  EventDispatcherPrivate *that = reinterpret_cast<EventDispatcherPrivate *>( user_data );
+
+  try {
+    auto data = std::move( that->_waitPIDs[pid] );
+    that->_waitPIDs.erase( pid );
+
+    if ( data.callback )
+      data.callback( pid, status );
+
+    g_spawn_close_pid( pid );
+
+    // no need to take care of releasing the GSource, the event loop took care of that
+
+  }  catch ( const std::out_of_range &e ) {
+    return;
+  }
+}
+
 EventDispatcher::EventDispatcher(void *ctx)
   : Base ( * new EventDispatcherPrivate( reinterpret_cast<GMainContext*>(ctx), *this ) )
 {
@@ -475,6 +495,21 @@ bool EventDispatcher::waitForFdEvent( const int fd, int events , int &revents , 
 
   revents = gioConditionToEventTypes( (GIOCondition)pollFd.revents, evModeToMask(events) );
   return true;
+}
+
+void EventDispatcher::trackChildProcess( int pid, std::function<void (int, int)> callback )
+{
+  Z_D();
+   GlibWaitPIDData data;
+   data.source = g_child_watch_source_new( pid );
+   data.callback = std::move(callback);
+
+   g_source_set_callback ( data.source, (GSourceFunc) &EventDispatcherPrivate::waitPidCallback , d_ptr.get(), nullptr );
+
+   g_source_attach ( data.source, d->_ctx );
+   g_source_unref ( data.source );
+
+   d->_waitPIDs.insert( std::make_pair( pid, std::move(data) ) );
 }
 
 bool EventDispatcher::run_once()

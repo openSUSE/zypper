@@ -57,6 +57,12 @@ struct GLibTimerSource
   static void destruct ( GLibTimerSource *src );
 };
 
+struct GlibWaitPIDData
+{
+  GSource *source = nullptr;
+  EventDispatcher::WaitPidCallback callback;
+};
+
 class EventDispatcherPrivate : public BasePrivate
 {
   ZYPP_DECLARE_PUBLIC(EventDispatcher)
@@ -68,6 +74,7 @@ public:
   void enableIdleSource ();
 
   static std::shared_ptr<EventDispatcher> create ( );
+  static void waitPidCallback ( GPid pid, gint status, gpointer user_data );
 
   std::thread::id _myThreadId;
   GMainContext *_ctx = nullptr;
@@ -78,6 +85,7 @@ public:
   std::vector<GAbstractEventSource *> _eventSources;
   std::vector< std::shared_ptr<void> > _unrefLater;
   std::queue< EventDispatcher::IdleFunction > _idleFuncs;
+  std::unordered_map<int, GlibWaitPIDData> _waitPIDs;
 };
 
 }

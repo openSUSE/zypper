@@ -128,6 +128,14 @@ public:
    */
   static bool waitForFdEvent ( const int fd, int events, int &revents, int &timeout );
 
+  using WaitPidCallback = std::function<void(int, int)>;
+
+  /*!
+   * Tracks a child process until its execution did end.
+   * Callback is called when the child exits
+   */
+  void trackChildProcess ( int pid, std::function<void(int, int)> callback  );
+
 protected:
 
   /*!
