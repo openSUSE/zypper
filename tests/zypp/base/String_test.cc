@@ -3,6 +3,7 @@
 #include <zypp/base/LogTools.h>
 #include <zypp/base/String.h>
 #include <zypp/base/Regex.h>
+#include <zypp/base/StringV.h>
 
 using boost::unit_test::test_suite;
 using boost::unit_test::test_case;
@@ -450,4 +451,33 @@ BOOST_AUTO_TEST_CASE(regex_subst)
     BOOST_REQUIRE_EQUAL( release, "lp151.28.48"  );
   }
 
+}
+
+BOOST_AUTO_TEST_CASE(regex_subst2)
+{
+  auto gsub = [&]( const std::string & l, const std::string & rx, const std::string & res, bool global = true ) {
+    BOOST_CHECK_EQUAL( str::regex_substitute( l, rx, "@", global ), res );
+  };
+  auto fsub = [&]( const std::string & l, const std::string & rx, const std::string & res ) {
+    gsub( l, rx, res, false );
+  };
+
+  gsub( "123", "a*", "@1@2@3@" );
+  fsub( "123", "a*", "@123" );
+
+  gsub( "123", ".", "@@@" );
+  fsub( "123", ".", "@23" );
+
+  gsub( "123", "1", "@23" );
+  gsub( "123", "2", "1@3" );
+  gsub( "123", "3", "12@" );
+  gsub( "123", "4", "123" );
+
+  gsub( "123", "^", "@123" );
+  gsub( "123\n", "^", "@123\n" );
+  gsub( "123\n123", "^", "@123\n@123" );
+
+  gsub( "123", "$", "123@" );
+  gsub( "123\n", "$", "123@\n" );
+  gsub( "123\n123", "$", "123@\n123@" );
 }

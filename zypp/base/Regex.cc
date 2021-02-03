@@ -15,6 +15,7 @@
 #include <iostream>
 
 #include <zypp/base/Regex.h>
+#include <zypp/base/StringV.h>
 
 using namespace zypp;
 using namespace zypp::str;
@@ -119,33 +120,11 @@ unsigned smatch::size() const
 std::string zypp::str::regex_substitute( const std::string &s, const regex &regex, const std::string &replacement, bool global )
 {
   std::string result;
-  std::string::size_type off = 0;
-  int flags = regex::none;
-
-  while ( true ) {
-
-    smatch match;
-    if ( !regex.matches( s.data()+off, match, flags ) ) {
-      break;
-    }
-
-    if ( match.size() ) {
-      result += s.substr( off, match.begin(0) );
+  strv::splitRx( s, regex, [&result,&replacement,global]( std::string_view w, unsigned, bool last ) {
+    result += w;
+    if ( !last )
       result += replacement;
-      off = match.end(0) + off;
-    }
-
-    if ( !global )
-      break;
-
-    // once we passed the beginning of the string we should not match ^ anymore, except the last character was
-    // actually a newline
-    if ( off > 0 && off < s.size() && s[ off - 1 ] == '\n' )
-      flags = regex::none;
-    else
-      flags = regex::not_bol;
-  }
-
-  result += s.substr( off );
+    return global;
+  });
   return result;
 }
