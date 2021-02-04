@@ -99,7 +99,8 @@ namespace zypp
         icase		= REG_ICASE,	///< Do not differentiate case
         nosubs		= REG_NOSUB,	///< Support for substring addressing of matches is not required
         match_extended	= REG_EXTENDED, ///< Use POSIX Extended Regular Expression syntax when interpreting regex.
-        newline         = REG_NEWLINE   ///< Match newline
+        newline         = REG_NEWLINE,  ///< Match newline
+        rxdefault       = match_extended|newline ///< These are enforced even if you don't pass them as flag argument
       };
 
       enum MatchFlags {
@@ -108,14 +109,15 @@ namespace zypp
       };
 
       regex();
-      regex(const std::string& s,int flags = match_extended);
-      ~regex() throw();
+      regex( const std::string & s, int flags = rxdefault );
+      regex( const char* s, int flags = rxdefault ) : regex( std::string(s?s:""), flags ) {}
+      ~regex();
 
-      regex(const regex & rhs)
-      { assign(rhs.m_str, rhs.m_flags); }
+      regex( const regex & rhs )
+      { assign( rhs.m_str, rhs.m_flags ); }
 
-      regex & operator=(const regex & rhs)
-      { assign(rhs.m_str, rhs.m_flags); return *this; }
+      regex & operator=( const regex & rhs )
+      { assign( rhs.m_str, rhs.m_flags ); return *this; }
 
       /**
        * string representation of the regular expression
@@ -123,8 +125,8 @@ namespace zypp
       std::string asString() const
       { return m_str; }
 
-      bool matches (const char * s, str::smatch& matches, int flags = none ) const;
-      bool matches ( const char * s ) const;
+      bool matches( const char * s, str::smatch & matches, int flags = none ) const;
+      bool matches( const char * s ) const;
 
     public:
       /** Expert backdoor. Returns pointer to the compiled regex for direct use in regexec() */
@@ -132,14 +134,14 @@ namespace zypp
       { return & m_preg; }
 
     private:
-      void assign(const std::string& s,int flags = match_extended);
+      void assign( const std::string & s, int flags );
 
     private:
       friend class smatch;
       std::string m_str;
       int m_flags;
       regex_t m_preg;
-      bool m_valid;
+      bool m_valid = false;
     };
 
     /** \relates regex Stream output */

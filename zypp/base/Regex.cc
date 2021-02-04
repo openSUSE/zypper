@@ -20,72 +20,70 @@ using namespace zypp;
 using namespace zypp::str;
 
 regex::regex()
-  : m_flags(match_extended)
-  , m_valid(false)
-{
+: m_flags( match_extended )
+{}
 
+regex::regex( const std::string & str, int flags )
+{ assign( str, flags ); }
+
+regex::~regex()
+{
+  if ( m_valid )
+    regfree( &m_preg );
 }
 
-void regex::assign(const std::string& str,int flags)
+void regex::assign( const std::string & str, int flags )
 {
-  m_valid = true;
+  if ( m_valid )
+    regfree( &m_preg );
+
+  m_valid = false;
   m_str = str;
   m_flags = flags;
-  int err;
-  char errbuff[100];
-  static const int normal = 1<<16; // deprecated legacy, use match_extended
-  if (!(flags & normal)) {
-    flags |= match_extended;
-    flags &= ~(normal);
+
+  static constexpr int normal = 1<<16; // deprecated legacy, use match_extended
+  if ( flags & normal ) flags &= ~normal;
+  if ( (flags & rxdefault) != rxdefault ) flags |= rxdefault; // always enforced (legacy)
+
+  if ( int err = regcomp( &m_preg, str.c_str(), flags ) ) {
+    char errbuff[100];
+    regerror( err, &m_preg, errbuff, sizeof(errbuff) );
+    ZYPP_THROW( regex_error(std::string(errbuff)) );
   }
+  m_valid = true;
+}
 
-  if ((err = regcomp(&m_preg, str.c_str(), flags))) {
-    m_valid = false;
-    regerror(err, &m_preg, errbuff, sizeof(errbuff));
-    ZYPP_THROW(regex_error(std::string(errbuff)));
+bool regex::matches( const char* s, smatch & matches, int flags ) const
+{
+  if ( m_valid ) {
+    const auto possibleMatchCount = m_preg.re_nsub + 1;
+    matches.pmatch.resize( possibleMatchCount );
+    memset( matches.pmatch.data(), -1, sizeof( regmatch_t ) * ( possibleMatchCount ) );
+
+    if ( s && !regexec( &m_preg, s, matches.pmatch.size(), matches.pmatch.data(), flags ) ) {
+      matches.match_str = s;
+      return true;	// good match
+    }
   }
+  // Here: no match
+  matches.pmatch.clear();
+  matches.match_str.clear();
+  return false;
 }
 
-regex::regex(const std::string& str, int flags)
+bool regex::matches( const char* s ) const
 {
-  assign(str, flags);
+  return m_valid && s && !regexec( &m_preg, s, 0, NULL, 0 );
 }
 
-regex::~regex() throw()
-{
-  if (m_valid)
-    regfree(&m_preg);
-}
+bool zypp::str::regex_match( const char* s, smatch& matches, const regex& regex )
+{ return regex.matches( s, matches ); }
 
-bool regex::matches( const char *s, smatch &matches, int flags ) const
-{
-  const auto possibleMatchCount = m_preg.re_nsub + 1;
-  matches.pmatch.resize( possibleMatchCount );
-  memset( matches.pmatch.data(), -1, sizeof( regmatch_t ) * ( possibleMatchCount ) );
-
-  bool r = s && m_valid && !regexec( &m_preg, s, matches.pmatch.size(), matches.pmatch.data(), flags );
-  if (r)
-    matches.match_str = s;
-  return r;
-}
-
-bool regex::matches( const char *s ) const
-{
-  return s && !regexec(&m_preg, s, 0, NULL, 0);
-}
-
-bool zypp::str::regex_match(const char * s, smatch& matches, const regex& regex)
-{
-  return regex.matches( s, matches );
-}
-
-bool zypp::str::regex_match(const char * s,  const regex& regex)
-{
-  return regex.matches( s );
-}
+bool zypp::str::regex_match( const char* s,  const regex& regex )
+{ return regex.matches( s ); }
 
 smatch::smatch()
-{ }
+{}
 
 std::string smatch::operator[](unsigned i) const
 {
