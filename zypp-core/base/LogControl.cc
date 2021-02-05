@@ -166,10 +166,14 @@ namespace zypp
         }, *cl);
 
         // once a client disconnects we remove it from the std::vector so that the socket is not leaked
-        cl->connectFunc( &zyppng::Socket::sigDisconnected, [&clients, sock = cl.get()](){
-          auto idx = std::find_if( clients.begin(), clients.end(), [sock]( const auto &s ){ return sock == s.get(); } );
+        cl->connectFunc( &zyppng::Socket::sigDisconnected, [&clients, sock = std::weak_ptr(cl)](){
+          auto lock = sock.lock();
+          if ( !lock  )
+            return;
+
+          auto idx = std::find_if( clients.begin(), clients.end(), [lock]( const auto &s ){ return lock.get() == s.get(); } );
           clients.erase( idx );
-        }, *cl);
+        });
 
       });
 
