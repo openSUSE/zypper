@@ -99,6 +99,7 @@ BuildRequires:  nginx
 %endif
 
 Requires:       rpm
+BuildRequires:  rpm	# test suite
 
 %if 0%{?suse_version}
 BuildRequires:  rpm-devel > 4.4
