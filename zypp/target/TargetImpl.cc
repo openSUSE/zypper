@@ -1425,6 +1425,18 @@ namespace zypp
 	}
       }
 
+      {
+	// NOTE: Removing rpm in a transaction, rpm removes the /var/lib/rpm compat symlink.
+	// We re-create it, in case it was lost to prevent legacy tools from accidentally
+	// assuming no database is present.
+	if ( ! PathInfo(_root/"/var/lib/rpm",PathInfo::LSTAT).isExist()
+	  && PathInfo(_root/"/usr/lib/sysimage/rpm").isDir() ) {
+	  WAR << "(rpm removed in commit?) Inject missing /var/lib/rpm compat symlink to /usr/lib/sysimage/rpm" << endl;
+	  filesystem::assert_dir( _root/"/var/lib" );
+	  filesystem::symlink( "../../usr/lib/sysimage/rpm", _root/"/var/lib/rpm" );
+	}
+      }
+
       ///////////////////////////////////////////////////////////////////
       // Send result to commit plugins:
       ///////////////////////////////////////////////////////////////////
