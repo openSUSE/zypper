@@ -976,6 +976,8 @@ namespace zypp
           cmd.push_back( "-r" );
           cmd.push_back( _root.asString() );
         }
+        cmd.push_back( "-D" );
+        cmd.push_back( rpm().dbPath().asString() );
         cmd.push_back( "-X" );	// autogenerate pattern/product/... from -package
         // bsc#1104415: no more application support // cmd.push_back( "-A" );	// autogenerate application pseudo packages
         cmd.push_back( "-p" );
