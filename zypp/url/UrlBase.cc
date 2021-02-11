@@ -23,6 +23,7 @@
 #include <arpa/inet.h>
 
 #include <iostream>
+#include <optional>
 
 // in the Estonian locale, a-z excludes t, for example. #302525
 // http://en.wikipedia.org/wiki/Estonian_alphabet
