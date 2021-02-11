@@ -24,11 +24,15 @@
 #include <iostream>
 #include <sstream>
 
+#include <zypp-core/AutoDispose.h>
 #include <zypp-core/base/Logger.h>
 #include <zypp-core/base/String.h>
 #include <zypp-core/base/Gettext.h>
 #include <zypp-core/ExternalProgram.h>
 #include <zypp-core/base/CleanerThread_p.h>
+
+#include <zypp-core/zyppng/base/private/linuxhelpers_p.h>
+#include <zypp-core/zyppng/io/private/forkspawnengine_p.h>
 
 using std::endl;
 
@@ -37,9 +41,36 @@ using std::endl;
 
 namespace zypp {
 
+    namespace  {
+
+      enum class SpawnEngine {
+        GSPAWN,
+        PFORK
+      };
+
+      SpawnEngine initEngineFromEnv () {
+        const std::string fBackend ( zypp::str::asString( ::getenv("ZYPP_FORK_BACKEND") ) );
+        if ( fBackend.empty() || fBackend == "auto" || fBackend == "pfork" ) {
+          DBG << "Starting processes via posix fork" << std::endl;
+          return SpawnEngine::PFORK;
+        } else if ( fBackend == "gspawn" ) {
+          DBG << "Starting processes via glib spawn" << std::endl;
+          return SpawnEngine::GSPAWN;
+        }
+
+        DBG << "Falling back to starting process via posix fork" << std::endl;
+        return SpawnEngine::PFORK;
+      }
+
+      SpawnEngine engineFromEnv () {
+        static const SpawnEngine eng = initEngineFromEnv();
+        return eng;
+      }
+
+    }
+
+
     ExternalProgram::ExternalProgram()
-      : use_pty (false)
-      , pid( -1 )
     {}
 
 
@@ -49,8 +80,6 @@ namespace zypp {
                                       int stderr_fd,
                                       bool default_locale,
                                       const Pathname & root )
-      : use_pty (use_pty)
-      , pid( -1 )
     {
       const char *argv[4];
       argv[0] = "/bin/sh";
@@ -58,9 +87,8 @@ namespace zypp {
       argv[2] = commandline.c_str();
       argv[3] = 0;
 
-      start_program( argv, Environment(), stderr_disp, stderr_fd, default_locale, root.c_str() );
+      start_program( argv, Environment(), stderr_disp, stderr_fd, default_locale, root.c_str(), false, false, use_pty );
     }
-
 
     ExternalProgram::ExternalProgram( const Arguments & argv,
                                       Stderr_Disposition stderr_disp,
@@ -68,8 +96,6 @@ namespace zypp {
 				      int stderr_fd,
                                       bool default_locale,
                                       const Pathname & root )
-      : use_pty (use_pty)
-      , pid( -1 )
     {
       const char * argvp[argv.size() + 1];
       unsigned c = 0;
@@ -80,9 +106,8 @@ namespace zypp {
       }
       argvp[c] = 0;
 
-      start_program( argvp, Environment(), stderr_disp, stderr_fd, default_locale, root.c_str() );
+      start_program( argvp, Environment(), stderr_disp, stderr_fd, default_locale, root.c_str(), false, false, use_pty );
     }
-
 
     ExternalProgram::ExternalProgram( const Arguments & argv,
                                       const Environment & environment,
@@ -91,8 +116,6 @@ namespace zypp {
 				      int stderr_fd,
                                       bool default_locale,
 				      const Pathname & root )
-      : use_pty (use_pty)
-      , pid( -1 )
     {
       const char * argvp[argv.size() + 1];
       unsigned c = 0;
@@ -103,10 +126,8 @@ namespace zypp {
       }
       argvp[c] = 0;
 
-      start_program( argvp, environment, stderr_disp, stderr_fd, default_locale, root.c_str() );
+      start_program( argvp, environment, stderr_disp, stderr_fd, default_locale, root.c_str(), false, false, use_pty );
     }
-
-
 
     ExternalProgram::ExternalProgram( const char *const *argv,
                                       Stderr_Disposition stderr_disp,
@@ -114,12 +135,9 @@ namespace zypp {
                                       int stderr_fd,
                                       bool default_locale,
                                       const Pathname & root )
-      : use_pty (use_pty)
-      , pid( -1 )
     {
-      start_program( argv, Environment(), stderr_disp, stderr_fd, default_locale, root.c_str() );
+      start_program( argv, Environment(), stderr_disp, stderr_fd, default_locale, root.c_str(), false, false, use_pty );
     }
-
 
     ExternalProgram::ExternalProgram( const char *const * argv,
 				      const Environment & environment,
@@ -128,18 +146,14 @@ namespace zypp {
 				      int stderr_fd,
 				      bool default_locale,
 				      const Pathname & root )
-      : use_pty (use_pty)
-      , pid( -1 )
     {
-      start_program( argv, environment, stderr_disp, stderr_fd, default_locale, root.c_str() );
+      start_program( argv, environment, stderr_disp, stderr_fd, default_locale, root.c_str(), false, false, use_pty );
     }
 
 
     ExternalProgram::ExternalProgram( const char *binpath,
 				      const char *const *argv_1,
 				      bool use_pty )
-      : use_pty (use_pty)
-      , pid( -1 )
     {
       int i = 0;
       while (argv_1[i++])
@@ -147,16 +161,13 @@ namespace zypp {
       const char *argv[i + 1];
       argv[0] = binpath;
       memcpy( &argv[1], argv_1, (i - 1) * sizeof (char *) );
-      start_program( argv, Environment() );
+      start_program( argv, Environment(), Normal_Stderr, 1, false, NULL, false, false, use_pty );
     }
-
 
     ExternalProgram::ExternalProgram( const char *binpath,
 				      const char *const *argv_1,
 				      const Environment & environment,
 				      bool use_pty )
-      : use_pty (use_pty)
-      , pid( -1 )
     {
       int i = 0;
       while (argv_1[i++])
@@ -164,32 +175,38 @@ namespace zypp {
       const char *argv[i + 1];
       argv[0] = binpath;
       memcpy( &argv[1], argv_1, (i - 1) * sizeof (char *) );
-      start_program( argv, environment );
+      start_program( argv, environment, Normal_Stderr, 1, false, NULL, false, false, use_pty );
     }
-
 
     ExternalProgram::~ExternalProgram()
-    {
-      if ( running() ) {
-        // we got destructed while the external process is still alive
-        // make sure the zombie is cleaned up once it exits
-        CleanerThread::watchPID( pid );
-      }
-    }
+    { }
 
 
 
-    void ExternalProgram::start_program(const char *const *argv,
+    void ExternalProgram::start_program( const char *const *argv,
 					 const Environment & environment,
 					 Stderr_Disposition stderr_disp,
 					 int stderr_fd,
 					 bool default_locale,
-					 const char * root , bool switch_pgid, bool die_with_parent )
+					 const char * root , bool switch_pgid, bool die_with_parent , bool usePty )
     {
-      pid = -1;
-      _exitStatus = 0;
-      int to_external[2], from_external[2];	// fds for pair of pipes
-      int master_tty,	slave_tty;		// fds for pair of ttys
+      if ( _backend )
+        return;
+
+      // usePty is only supported by the forking backend
+      if ( usePty ) {
+        DBG << "usePty was set, forcing the ForkSpawnEngine to start external processes" << std::endl;
+        _backend = std::make_unique<zyppng::ForkSpawnEngine>();
+        static_cast<zyppng::ForkSpawnEngine&>(*_backend).setUsePty( true );
+      } else {
+        switch ( engineFromEnv() ) {
+          case SpawnEngine::GSPAWN:
+            _backend = std::make_unique<zyppng::GlibSpawnEngine>();
+          case SpawnEngine::PFORK:
+          default:
+            _backend = std::make_unique<zyppng::ForkSpawnEngine>();
+        }
+      }
 
       // retrieve options at beginning of arglist
       const char * redirectStdin = nullptr;	// <[file]
@@ -211,7 +228,7 @@ namespace zypp {
 	}
       }
 
-      for ( bool strip = false; argv[0]; ++argv )
+      for ( bool strip = false; argv[0] != nullptr; ++argv )
       {
 	strip = false;
 	switch ( argv[0][0] )
@@ -240,222 +257,128 @@ namespace zypp {
 	  break;
       }
 
-      // do not remove the single quotes around every argument, copy&paste of
-      // command to shell will not work otherwise!
-      {
-	std::stringstream cmdstr;
-        for (int i = 0; argv[i]; i++)
-        {
-          if (i>0) cmdstr << ' ';
-          cmdstr << '\'';
-          cmdstr << argv[i];
-          cmdstr << '\'';
-        }
-        if ( redirectStdin )
-          cmdstr << " < '" << redirectStdin << "'";
-        if ( redirectStdout )
-          cmdstr << " > '" << redirectStdout << "'";
-        _command = cmdstr.str();
-      }
-      DBG << "Executing" << (default_locale?"[C] ":" ") << _command << endl;
+      // those are the FDs that the new process will receive
+      // AutoFD will take care of closing them on our side
+      zypp::AutoFD stdinFd  = -1;
+      zypp::AutoFD stdoutFd = -1;
+      zypp::AutoFD stderrFd = -1;
 
+      // those are the fds we will keep, we put them into autofds in case
+      // we need to return early without actually spawning the new process
+      zypp::AutoFD childStdinParentFd = -1;
+      zypp::AutoFD childStdoutParentFd = -1;
 
-      if (use_pty)
+      if ( usePty )
       {
+
+        int master_tty,	slave_tty;		// fds for pair of ttys
+
     	// Create pair of ttys
         DBG << "Using ttys for communication with " << argv[0] << endl;
     	if (openpty (&master_tty, &slave_tty, 0, 0, 0) != 0)
     	{
-          _execError = str::form( _("Can't open pty (%s)."), strerror(errno) );
-          _exitStatus = 126;
-          ERR << _execError << endl;
+          _backend->setExecError( str::form( _("Can't open pty (%s)."), strerror(errno) ) );
+          _backend->setExitStatus( 126 );
+          ERR << _backend->execError() << endl;
           return;
     	}
+
+        stdinFd  = slave_tty;
+        stdoutFd = slave_tty;
+        childStdinParentFd = master_tty;
+        childStdoutParentFd = master_tty;
       }
       else
       {
-    	// Create pair of pipes
-    	if (pipe (to_external) != 0 || pipe (from_external) != 0)
-    	{
-          _execError = str::form( _("Can't open pipe (%s)."), strerror(errno) );
-          _exitStatus = 126;
-          ERR << _execError << endl;
-          return;
-    	}
-      }
-
-      pid_t ppid_before_fork = ::getpid();
-
-      // Create module process
-      if ((pid = fork()) == 0)
-      {
-        //////////////////////////////////////////////////////////////////////
-        // Don't write to the logfile after fork!
-        //////////////////////////////////////////////////////////////////////
-    	if (use_pty)
-    	{
-    	    setsid();
-    	    if(slave_tty != 1)
-    		dup2 (slave_tty, 1);	  // set new stdout
-    	    renumber_fd (slave_tty, 0);	  // set new stdin
-    	    ::close(master_tty);	  // Belongs to father process
-
-    	    // We currently have no controlling terminal (due to setsid).
-    	    // The first open call will also set the new ctty (due to historical
-    	    // unix guru knowledge ;-) )
-
-    	    char name[512];
-    	    ttyname_r(slave_tty, name, sizeof(name));
-    	    ::close(open(name, O_RDONLY));
-    	}
-    	else
-    	{
-            if ( switch_pgid )
-              setpgid( 0, 0);
-    	    renumber_fd (to_external[0], 0); // set new stdin
-    	    ::close(from_external[0]);	  // Belongs to father process
-
-    	    renumber_fd (from_external[1], 1); // set new stdout
-    	    ::close(to_external	 [1]);	  // Belongs to father process
-    	}
-
-        if ( redirectStdin )
-        {
-          ::close( 0 );
-          int inp_fd = open( redirectStdin, O_RDONLY );
-          dup2( inp_fd, 0 );
-        }
-
-        if ( redirectStdout )
-        {
-          ::close( 1 );
-          int inp_fd = open( redirectStdout, O_WRONLY|O_CREAT|O_APPEND, 0600 );
-          dup2( inp_fd, 1 );
-        }
-
-    	// Handle stderr
-    	if (stderr_disp == Discard_Stderr)
-    	{
-    	    int null_fd = open("/dev/null", O_WRONLY);
-    	    dup2(null_fd, 2);
-    	    ::close(null_fd);
-    	}
-    	else if (stderr_disp == Stderr_To_Stdout)
-    	{
-    	    dup2(1, 2);
-    	}
-    	else if (stderr_disp == Stderr_To_FileDesc)
-    	{
-    	    // Note: We don't have to close anything regarding stderr_fd.
-    	    // Our caller is responsible for that.
-    	    dup2 (stderr_fd, 2);
-    	}
-
-    	for ( Environment::const_iterator it = environment.begin(); it != environment.end(); ++it ) {
-    	  setenv( it->first.c_str(), it->second.c_str(), 1 );
-    	}
-
-    	if(default_locale)
-    		setenv("LC_ALL","C",1);
-
-    	if(root)
-    	{
-    	    if(chroot(root) == -1)
-    	    {
-                _execError = str::form( _("Can't chroot to '%s' (%s)."), root, strerror(errno) );
-                std::cerr << _execError << endl;// After fork log on stderr too
-    		_exit (128);			// No sense in returning! I am forked away!!
-    	    }
-	    if ( ! chdirTo )
-	      chdirTo = "/";
-    	}
-
-	if ( chdirTo && chdir( chdirTo ) == -1 )
-	{
-	  _execError = root ? str::form( _("Can't chdir to '%s' inside chroot '%s' (%s)."), chdirTo, root, strerror(errno) )
-			    : str::form( _("Can't chdir to '%s' (%s)."), chdirTo, strerror(errno) );
-	  std::cerr << _execError << endl;// After fork log on stderr too
-	  _exit (128);			// No sense in returning! I am forked away!!
-	}
-
-    	// close all filedesctiptors above stderr
-    	for ( int i = ::getdtablesize() - 1; i > 2; --i ) {
-    	  ::close( i );
-    	}
-
-        if ( die_with_parent ) {
-          // process dies with us
-          int r = prctl(PR_SET_PDEATHSIG, SIGTERM);
-          if (r == -1) {
-            //ignore if it did not work, worst case the process lives on after the parent dies
-            std::cerr << "Failed to set PR_SET_PDEATHSIG" << endl;// After fork log on stderr too
+        if ( redirectStdin ) {
+          stdinFd  = open( redirectStdin, O_RDONLY );
+        } else {
+          int to_external[2];
+          if ( pipe (to_external) != 0 )
+          {
+            _backend->setExecError( str::form( _("Can't open pipe (%s)."), strerror(errno) ) );
+            _backend->setExitStatus( 126 );
+            ERR << _backend->execError() << endl;
+            return;
           }
-
-          // test in case the original parent exited just
-          // before the prctl() call
-          pid_t ppidNow = getppid();
-          if (ppidNow != ppid_before_fork) {
-            std::cerr << "PPID changed from "<<ppid_before_fork<<" to "<< ppidNow << endl;// After fork log on stderr too
-            _exit(128);
-          }
+          stdinFd            = to_external[0];
+          childStdinParentFd = to_external[1];
         }
 
-    	execvp(argv[0], const_cast<char *const *>(argv));
-        // don't want to get here
-        _execError = str::form( _("Can't exec '%s' (%s)."), argv[0], strerror(errno) );
-        std::cerr << _execError << endl;// After fork log on stderr too
-        _exit (129);			// No sense in returning! I am forked away!!
-        //////////////////////////////////////////////////////////////////////
+        if ( redirectStdout ) {
+          stdoutFd = open( redirectStdout, O_WRONLY|O_CREAT|O_APPEND, 0600 );
+        } else {
+
+          int from_external[2];
+          // Create pair of pipes
+          if ( pipe (from_external) != 0 )
+          {
+            _backend->setExecError( str::form( _("Can't open pipe (%s)."), strerror(errno) ) );
+            _backend->setExitStatus( 126 );
+            ERR << _backend->execError() << endl;
+            return;
+          }
+          stdoutFd = from_external[1];
+          childStdoutParentFd = from_external[0];
+        }
       }
 
-      else if (pid == -1)	 // Fork failed, close everything.
+      // Handle stderr
+      if (stderr_disp == Discard_Stderr)
       {
-        _execError = str::form( _("Can't fork (%s)."), strerror(errno) );
-        _exitStatus = 127;
-        ERR << _execError << endl;
-
-   	if (use_pty) {
-    	    ::close(master_tty);
-    	    ::close(slave_tty);
-    	}
-    	else {
-    	    ::close(to_external[0]);
-    	    ::close(to_external[1]);
-    	    ::close(from_external[0]);
-    	    ::close(from_external[1]);
-    	}
+        stderrFd = open("/dev/null", O_WRONLY);
+      }
+      else if (stderr_disp == Stderr_To_Stdout)
+      {
+        stderrFd = *stdoutFd;
+        //no double close
+        stderrFd.resetDispose();
+      }
+      else if (stderr_disp == Stderr_To_FileDesc)
+      {
+        // Note: We don't have to close anything regarding stderr_fd.
+        // Our caller is responsible for that.
+        stderrFd = stderr_fd;
+        stderrFd.resetDispose();
       }
 
-      else {
-    	if (use_pty)
-    	{
-    	    ::close(slave_tty);	       // belongs to child process
-    	    inputfile  = fdopen(master_tty, "r");
-    	    outputfile = fdopen(master_tty, "w");
-    	}
-    	else
-    	{
-    	    ::close(to_external[0]);   // belongs to child process
-    	    ::close(from_external[1]); // belongs to child process
-    	    inputfile = fdopen(from_external[0], "r");
-    	    outputfile = fdopen(to_external[1], "w");
-    	}
+      if ( root )
+        _backend->setChroot( root );
+      if ( chdirTo )
+        _backend->setWorkingDirectory( chdirTo );
 
-    	DBG << "pid " << pid << " launched" << endl;
+      _backend->setDieWithParent( die_with_parent );
+      _backend->setSwitchPgid( switch_pgid );
+      _backend->setEnvironment( environment );
+      _backend->setUseDefaultLocale( default_locale );
+
+      if ( _backend->start( argv, stdinFd, stdoutFd, stderrFd ) ) {
+
+        inputfile  = fdopen( childStdoutParentFd, "r" );
+        childStdoutParentFd.resetDispose();
+        outputfile = fdopen( childStdinParentFd, "w" );
+        childStdinParentFd.resetDispose();
 
     	if (!inputfile || !outputfile)
     	{
     	    ERR << "Cannot create streams to external program " << argv[0] << endl;
-    	    close();
+            ExternalProgram::close();
     	}
+      } else {
+        // Fork failed, exit code and status was set by backend
+        return;
       }
     }
-
 
     int
     ExternalProgram::close()
     {
-      if (pid > 0)
+      if ( !_backend ) {
+        ExternalDataSource::close();
+        return -1;
+      }
+
+      if ( _backend->isRunning() )
       {
 	if ( inputFile() )
 	{
@@ -503,80 +426,26 @@ namespace zypp {
 	    else
 	    {
 	      // No data within time.
-	      if ( ! running() )
+	      if ( ! _backend->isRunning() )
 		break;
 	    }
 	  } while ( true );
 	}
 
-	if ( pid > 0 )	// bsc#1109877: must re-check! running() in the loop above may have already waited.
-	{
-	  // Wait for child to exit
-	  int ret;
-	  int status = 0;
-	  do
-	  {
-	    ret = waitpid(pid, &status, 0);
-	  }
-	  while (ret == -1 && errno == EINTR);
-
-	  if (ret != -1)
-	  {
-	    _exitStatus = checkStatus( status );
-	  }
-	  pid = -1;
-	}
+	// wait for the process to end)
+	_backend->isRunning( true );
       }
 
-      return _exitStatus;
-    }
-
-
-    int ExternalProgram::checkStatus( int status )
-    {
-      if (WIFEXITED (status))
-      {
-    	status = WEXITSTATUS (status);
-    	if(status)
-    	{
-    	    DBG << "Pid " << pid << " exited with status " << status << endl;
-            _execError = str::form( _("Command exited with status %d."), status );
-    	}
-    	else
-    	{
-    	    // if 'launch' is logged, completion should be logged,
-    	    // even if successfull.
-    	    DBG << "Pid " << pid << " successfully completed" << endl;
-            _execError.clear(); // empty if running or successfully completed
-    	}
-      }
-      else if (WIFSIGNALED (status))
-      {
-    	status = WTERMSIG (status);
-    	WAR << "Pid " << pid << " was killed by signal " << status
-    		<< " (" << strsignal(status);
-    	if (WCOREDUMP (status))
-    	{
-    	    WAR << ", core dumped";
-    	}
-    	WAR << ")" << endl;
-        _execError = str::form( _("Command was killed by signal %d (%s)."), status, strsignal(status) );
-    	status+=128;
-      }
-      else {
-    	ERR << "Pid " << pid << " exited with unknown error" << endl;
-        _execError = _("Command exited with unknown error.");
-      }
-
-      return status;
+      ExternalDataSource::close();
+      return _backend->exitStatus();
     }
 
     bool
     ExternalProgram::kill()
     {
-      if (pid > 0)
+      if ( _backend && _backend->isRunning() )
       {
-    	::kill(pid, SIGKILL);
+    	::kill( _backend->pid(), SIGKILL);
     	close();
       }
       return true;
@@ -584,9 +453,9 @@ namespace zypp {
 
     bool ExternalProgram::kill(int sig)
     {
-      if (pid > 0)
+      if ( _backend && _backend->isRunning()  )
       {
-        ::kill(pid, sig);
+        ::kill( _backend->pid(), sig );
       }
       return true;
     }
@@ -594,38 +463,39 @@ namespace zypp {
     bool
     ExternalProgram::running()
     {
-      if ( pid < 0 ) return false;
+      if ( !_backend ) return false;
+      return _backend->isRunning();
+    }
 
-      int status = 0;
-      int p = waitpid( pid, &status, WNOHANG );
-      switch ( p )
-        {
-        case -1:
-          ERR << "waitpid( " << pid << ") returned error '" << strerror(errno) << "'" << endl;
-          return false;
-          break;
-        case 0:
-          return true; // still running
-          break;
-        }
+    pid_t ExternalProgram::getpid()
+    {
+      if ( !_backend )
+        return -1;
+      return _backend->pid();
+    }
 
-      // Here: completed...
-      _exitStatus = checkStatus( status );
-      pid = -1;
-      return false;
+    const std::string &ExternalProgram::command() const
+    {
+      if ( !_backend ) {
+        static std::string empty;
+        return empty;
+      }
+      return _backend->executedCommand();
+    }
+
+    const std::string &ExternalProgram::execError() const
+    {
+      if ( !_backend ) {
+        static std::string empty;
+        return empty;
+      }
+      return _backend->execError();
     }
 
     // origfd will be accessible as newfd and closed (unless they were equal)
     void ExternalProgram::renumber_fd (int origfd, int newfd)
     {
-      // It may happen that origfd is already the one we want
-      // (Although in our circumstances, that would mean somebody has closed
-      // our stdin or stdout... weird but has appened to Cray, #49797)
-      if (origfd != newfd)
-      {
-    	dup2 (origfd, newfd);
-    	::close (origfd);
-      }
+      return zyppng::renumberFd( origfd, newfd );
     }
 
     std::ostream & ExternalProgram::operator>>( std::ostream & out_r )

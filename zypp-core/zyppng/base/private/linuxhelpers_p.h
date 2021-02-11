@@ -27,6 +27,9 @@ namespace zyppng {
   bool blockSignalsForCurrentThread ( const std::vector<int> &sigs );
 
   bool trySocketConnection (int &sockFD, const SockAddr &addr, uint64_t timeout );
+
+  // origfd will be accessible as newfd and closed (unless they were equal)
+  void renumberFd (int origfd, int newfd);
 }
 
 #endif // LINUXHELPERS_P_H

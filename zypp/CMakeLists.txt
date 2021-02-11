@@ -940,8 +940,13 @@ macro( ADDZYPPLIB LIBNAME )
   SET_TARGET_PROPERTIES( ${LIBNAME} PROPERTIES SOVERSION "${LIBZYPP_SOVERSION_INFO}" )
   # System libraries
   SET(UTIL_LIBRARY util)
-  TARGET_LINK_LIBRARIES(${LIBNAME} zypp-protobuf )
+
+  # CAUTION, link those 2 libs always first and always in that order,
+  # otherwise you get symbol lookup errors when linking against libzypp
   TARGET_LINK_LIBRARIES(${LIBNAME} zypp-core )
+  TARGET_LINK_LIBRARIES(${LIBNAME} zypp-protobuf )
+
+
   TARGET_LINK_LIBRARIES(${LIBNAME} ${UTIL_LIBRARY} )
   TARGET_LINK_LIBRARIES(${LIBNAME} ${RPM_LIBRARY} )
   TARGET_LINK_LIBRARIES(${LIBNAME} ${GETTEXT_LIBRARIES} )

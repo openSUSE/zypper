@@ -52,6 +52,8 @@ namespace zyppng {
     bool readRawBytesToBuffer ();
     bool writePendingData ();
 
+    static int bytesAvailableOnSocket ( int socket );
+
 
     int _domain;
     int _type;

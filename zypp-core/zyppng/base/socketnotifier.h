@@ -12,6 +12,9 @@
 *
 */
 
+#ifndef ZYPPNG_BASE_SOCKETNOTIFIER_H_DEFINED
+#define ZYPPNG_BASE_SOCKETNOTIFIER_H_DEFINED
+
 #include <zypp-core/zyppng/base/zyppglobal.h>
 #include <zypp-core/zyppng/base/AbstractEventSource>
 #include <zypp-core/zyppng/base/Signals>
@@ -117,3 +120,5 @@ public:
 };
 
 }
+
+#endif

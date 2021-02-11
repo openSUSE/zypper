@@ -23,6 +23,10 @@
 #include <zypp-core/base/ExternalDataSource.h>
 #include <zypp-core/Pathname.h>
 
+namespace zyppng {
+  class AbstractSpawnEngine;
+}
+
 namespace zypp {
 
     /**
@@ -73,7 +77,6 @@ namespace zypp {
     	Stderr_To_Stdout,
     	Stderr_To_FileDesc
       };
-
 
       /**
        * For passing additional environment variables to set
@@ -168,11 +171,10 @@ namespace zypp {
       /**
        * return pid
        * */
-      pid_t getpid() { return pid; }
+      pid_t getpid();
 
       /** The command we're executing. */
-      const std::string & command() const
-      { return _command; }
+      const std::string & command() const;
 
       /** Some detail telling why the execution failed, if it failed.
        * Empty if the command is still running or successfully completed.
@@ -183,8 +185,7 @@ namespace zypp {
        * \li <tt>Command exited with status %d.</tt>
        * \li <tt>Command was killed by signal %d (%s).</tt>
       */
-      const std::string & execError() const
-      { return _execError; }
+      const std::string & execError() const;
 
       /**
        * origfd will be accessible as newfd and closed (unless they were equal)
@@ -213,30 +214,15 @@ namespace zypp {
        */
       std::ostream & operator>>( std::ostream & out_r );
 
-    protected:
-      int checkStatus( int );
-
     private:
-
-      /**
-       * Set to true, if a pair of ttys is used for communication
-       * instead of a pair of pipes.
-       */
-      bool use_pty;
-
-      pid_t pid;
-      int _exitStatus;
-      /** Store the command we're executing. */
-      std::string _command;
-      /** Remember execution errors like failed fork/exec. */
-      std::string _execError;
+      std::unique_ptr<zyppng::AbstractSpawnEngine> _backend;
 
     protected:
 
       void start_program (const char *const *argv, const Environment & environment,
     			Stderr_Disposition stderr_disp = Normal_Stderr,
     			int stderr_fd = -1, bool default_locale = false,
-    			const char* root = NULL, bool switch_pgid = false, bool die_with_parent = false );
+    			const char* root = NULL, bool switch_pgid = false, bool die_with_parent = false, bool usePty = false );
 
     };
 

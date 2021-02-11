@@ -147,7 +147,8 @@ SET( zyppng_io_private_HEADERS
   zyppng/io/private/iodevice_p.h
   zyppng/io/private/socket_p.h
   zyppng/io/private/sockaddr_p.h
-  #zyppng/io/private/baseprocess_p.h
+  zyppng/io/private/abstractspawnengine_p.h
+  zyppng/io/private/forkspawnengine_p.h
 )
 
 SET( zyppng_io_SRCS
@@ -155,8 +156,9 @@ SET( zyppng_io_SRCS
   zyppng/io/iodevice.cc
   zyppng/io/socket.cc
   zyppng/io/sockaddr.cpp
-  #zyppng/io/baseprocess.cpp
-  )
+  zyppng/io/abstractspawnengine.cc
+  zyppng/io/forkspawnengine.cc
+)
 
 SET( zyppng_io_HEADERS
   zyppng/io/IODevice

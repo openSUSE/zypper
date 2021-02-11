@@ -28,12 +28,25 @@ namespace zyppng {
     do {
       res = zyppng::eintrSafeCall( ::connect, sockFD, addr.nativeSockAddr(), addr.size() );
       if ( res < 0 && errno != ECONNREFUSED && errno != EADDRNOTAVAIL ) {
+        ERR << "Connection failed with error: " << errno << " " << zyppng::strerr_cxx( errno ) << std::endl;
         ::close( sockFD );
         sockFD = -1;
         return false;
       }
     } while ( res == -1 && zyppng::Timer::elapsedSince( opStarted ) < timeout );
     return ( res == 0 );
+  }
+
+  void renumberFd (int origfd, int newfd)
+  {
+    // It may happen that origfd is already the one we want
+    // (Although in our circumstances, that would mean somebody has closed
+    // our stdin or stdout... weird but has appened to Cray, #49797)
+    if (origfd != newfd)
+    {
+      dup2 (origfd, newfd);
+      ::close (origfd);
+    }
   }
 
 }
