@@ -398,12 +398,10 @@ namespace zyppng {
     zyppng::Socket::Ptr sock;
   };
 
-  MediaNetwork::MediaNetwork(
-    const Url & url_r,
-    const zypp::Pathname & attach_point_hint_r )
-    : MediaHandler( url_r, attach_point_hint_r,
-        "/", // urlpath at attachpoint
-        true ) // does_download
+  MediaNetwork::MediaNetwork( const Url & url_r, const zypp::Pathname & attach_point_hint_r )
+  : MediaNetworkCommonHandler( url_r, attach_point_hint_r,
+			       "/", // urlpath at attachpoint
+			       true ) // does_download
   {
     _workingDir.autoCleanup( true );
 
@@ -437,11 +435,6 @@ namespace zyppng {
       zyppng::eintrSafeCall( ::close, *_socket );
       _socket.reset();
     }
-  }
-
-  TransferSettings &MediaNetwork::settings()
-  {
-    return _settings;
   }
 
   std::unique_ptr<MediaNetwork::DispatchContext> MediaNetwork::ensureConnected() const

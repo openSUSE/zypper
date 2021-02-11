@@ -14,10 +14,9 @@
 #ifndef ZYPPNG_MEDIA_MEDIANETWORK_H_INCLUDED
 #define ZYPPNG_MEDIA_MEDIANETWORK_H_INCLUDED
 
-#include <zypp/media/MediaHandler.h>
+#include <zypp/media/MediaNetworkCommonHandler.h>
 #include <zypp-core/zyppng/core/Url>
 #include <zypp/zyppng/media/network/AuthData>
-#include <zypp/zyppng/media/network/TransferSettings>
 #include <zypp/zyppng/messages.pb.h>
 #include <zypp-core/zyppng/io/private/iobuffer_p.h>
 #include <zypp/TmpPath.h>
@@ -33,13 +32,11 @@ class EventDispatcher;
 
 using RequestId = uint32_t;
 
-class MediaNetwork : public zypp::media::MediaHandler
+class MediaNetwork : public zypp::media::MediaNetworkCommonHandler
 {
 public:
   MediaNetwork(const Url &url_r, const zypp::Pathname &attach_point_hint_r);
   virtual ~MediaNetwork() override;
-
-  TransferSettings & settings();
 
   // MediaHandler interface
 protected:
@@ -75,7 +72,6 @@ private:
 
 private:
   zypp::filesystem::TmpDir   _workingDir;
-  mutable TransferSettings   _settings;
   mutable RequestId          _nextRequestId = 0;
   mutable std::list<Request> _requests;
   mutable std::optional<int> _socket;

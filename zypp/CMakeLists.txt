@@ -282,6 +282,7 @@ SET( zypp_media_SRCS
   media/MediaDISK.cc
   media/MediaCIFS.cc
   media/ProxyInfo.cc
+  media/MediaNetworkCommonHandler.h
   media/MediaCurl.cc
   media/MediaMultiCurl.cc
   media/MediaISO.cc

@@ -65,9 +65,9 @@ Pathname MediaCurl::_cookieFile = "/var/lib/YaST2/cookies";
 
 MediaCurl::MediaCurl( const Url &      url_r,
                       const Pathname & attach_point_hint_r )
-    : MediaHandler( url_r, attach_point_hint_r,
-                    "/", // urlpath at attachpoint
-                    true ), // does_download
+    : MediaNetworkCommonHandler( url_r, attach_point_hint_r,
+				 "/", // urlpath at attachpoint
+				 true ), // does_download
       _curl( NULL ),
       _customHeaders(0L)
 {
@@ -103,12 +103,6 @@ Url MediaCurl::clearQueryString(const Url &url) const
 {
   return internal::clearQueryString(url);
 }
-
-TransferSettings & MediaCurl::settings()
-{
-    return _settings;
-}
-
 
 void MediaCurl::setCookieFile( const Pathname &fileName )
 {

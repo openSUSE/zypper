@@ -13,9 +13,8 @@
 #define ZYPP_MEDIA_MEDIACURL_H
 
 #include <zypp/base/Flags.h>
-#include <zypp/media/TransferSettings.h>
-#include <zypp/media/MediaHandler.h>
 #include <zypp/ZYppCallbacks.h>
+#include <zypp/media/MediaNetworkCommonHandler.h>
 
 #include <curl/curl.h>
 namespace zypp {
@@ -28,7 +27,7 @@ namespace zypp {
  * @short Implementation class for FTP, HTTP and HTTPS MediaHandler
  * @see MediaHandler
  **/
-class MediaCurl : public MediaHandler
+class MediaCurl : public MediaNetworkCommonHandler
 {
   public:
     enum RequestOption
@@ -99,8 +98,6 @@ class MediaCurl : public MediaHandler
 	       const Pathname & attach_point_hint_r );
 
     virtual ~MediaCurl() override { try { release(); } catch(...) {} }
-
-    TransferSettings & settings();
 
     static void setCookieFile( const Pathname & );
 
@@ -175,8 +172,6 @@ class MediaCurl : public MediaHandler
     CURL *_curl;
     char _curlError[ CURL_ERROR_SIZE ];
     curl_slist *_customHeaders;
-    TransferSettings _settings;
-
 };
 ZYPP_DECLARE_OPERATORS_FOR_FLAGS(MediaCurl::RequestOptions);
 
