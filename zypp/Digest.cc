@@ -205,27 +205,30 @@ namespace zypp {
       return std::string( resData.data() );
     }
 
-    template <typename BArr>
-    static BArr hexStrToBArr ( std::string_view &&str ) {
-      BArr bytes;
-      for ( std::string::size_type i = 0; i < str.length(); i+=2 )
-      {
-#define c2h(c) (((c)>='0' && (c)<='9') ? ((c)-'0')              \
-              : ((c)>='a' && (c)<='f') ? ((c)-('a'-10))       \
-              : ((c)>='A' && (c)<='F') ? ((c)-('A'-10))       \
-              : -1)
-        int v = c2h(str[i]);
-        if (v < 0)
-          return {};
-        bytes.push_back(v);
-        v = c2h(str[i+1]);
-        if (v < 0)
-          return {};
-        bytes.back() = (bytes.back() << 4) | v;
-#undef c2h
+#ifdef __cpp_lib_string_view
+    namespace {
+      template <typename BArr>
+      BArr hexStrToBArr ( std::string_view &&str ) {
+	BArr bytes;
+	for ( std::string::size_type i = 0; i < str.length(); i+=2 )
+	{
+	  #define c2h(c) (((c)>='0' && (c)<='9') ? ((c)-'0')              \
+	  : ((c)>='a' && (c)<='f') ? ((c)-('a'-10))       \
+	  : ((c)>='A' && (c)<='F') ? ((c)-('A'-10))       \
+	  : -1)
+	  int v = c2h(str[i]);
+	  if (v < 0)
+	    return {};
+	  bytes.push_back(v);
+	  v = c2h(str[i+1]);
+	  if (v < 0)
+	    return {};
+	  bytes.back() = (bytes.back() << 4) | v;
+	  #undef c2h
+	}
+	return bytes;
       }
-      return bytes;
-    }
+    } // namespace
 
     ByteArray Digest::hexStringToByteArray(std::string_view str)
     {
@@ -236,6 +239,7 @@ namespace zypp {
     {
       return hexStrToBArr<UByteArray>( std::move(str) );
     }
+#endif
 
     UByteArray Digest::digestVector()
     {

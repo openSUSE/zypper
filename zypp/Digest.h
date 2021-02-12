@@ -122,12 +122,14 @@ namespace zypp {
     	 * */
         static std::string digestVectorToString ( const UByteArray &vec );
 
+#ifdef __cpp_lib_string_view
         /** \brief convert the hex string representation of the digest vector given as parameter into the actual byte array representation
     	 *
     	 * @return hex string representation of the digest
     	 * */
         static ByteArray hexStringToByteArray ( std::string_view str );
         static UByteArray hexStringToUByteArray ( std::string_view str );
+#endif
 
     	/** \brief get vector of unsigned char representation of the digest
     	 *
