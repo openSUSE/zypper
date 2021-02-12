@@ -58,69 +58,63 @@ namespace zypp::media {
       _handler = std::make_unique<MediaCIFS> (url,preferred_attach_point);
     else if (scheme == "ftp" || scheme == "tftp" || scheme == "http" || scheme == "https")
     {
-      const char *networkenv = getenv( "ZYPPNG_MEDIANETWORK" );
-      bool use_network = ( networkenv && strcmp(networkenv, "1" ) == 0 );
-      if ( use_network ) {
-        WAR << "network backend manually enabled." << std::endl;
-        auto hdl = std::make_unique<zyppng::MediaNetwork> (url,preferred_attach_point);
-
-        UrlResolverPlugin::HeaderList::const_iterator it;
-        for ( const auto & el : custom_headers ) {
-          std::string header { el.first };
-          header += ": ";
-          header += el.second;
-          MIL << "Added custom header -> " << header << std::endl;
-          hdl->settings().addHeader( std::move(header) );
-        }
-        _handler = std::move( hdl );
-
-      } else {
-        bool use_multicurl = true;
-        std::string urlmediahandler ( url.getQueryParam("mediahandler") );
-        if ( urlmediahandler == "multicurl" )
-        {
-          use_multicurl = true;
-        }
-        else if ( urlmediahandler == "curl" )
-        {
-          use_multicurl = false;
-        }
-        else
-        {
-          if ( ! urlmediahandler.empty() )
-          {
-            WAR << "unknown mediahandler set: " << urlmediahandler << std::endl;
-          }
-          const char *multicurlenv = getenv( "ZYPP_MULTICURL" );
-          // if user disabled it manually
-          if ( use_multicurl && multicurlenv && ( strcmp(multicurlenv, "0" ) == 0 ) )
-          {
-            WAR << "multicurl manually disabled." << std::endl;
-            use_multicurl = false;
-          }
-          else if ( !use_multicurl && multicurlenv && ( strcmp(multicurlenv, "1" ) == 0 ) )
-          {
-            WAR << "multicurl manually enabled." << std::endl;
-            use_multicurl = true;
-          }
-        }
-
-        std::unique_ptr<MediaCurl> curl;
-
-        if ( use_multicurl )
-          curl = std::make_unique<MediaMultiCurl> (url,preferred_attach_point);
-        else
-          curl = std::make_unique<MediaCurl> (url,preferred_attach_point);
-
-        for ( const auto & el : custom_headers ) {
-          std::string header { el.first };
-          header += ": ";
-          header += el.second;
-          MIL << "Added custom header -> " << header << std::endl;
-          curl->settings().addHeader( std::move(header) );
-        }
-        _handler = std::move(curl);
+      enum WhichHandler { choose, curl, multicurl, network };
+      WhichHandler which = choose;
+      // Leagcy: choose handler in UUrl query
+      if ( const std::string & queryparam = url.getQueryParam("mediahandler"); ! queryparam.empty() ) {
+	if ( queryparam == "network" )
+	  which = network;
+	else if ( queryparam == "multicurl" )
+	  which = multicurl;
+	else if ( queryparam == "curl" )
+	  which = curl;
+	else
+	  WAR << "Unknown mediahandler='" << queryparam << "' in URL; Choosing the default" << std::endl;
       }
+      // Otherwise choose handler through ENV
+      if ( which == choose ) {
+	auto getenvIs = []( std::string_view var, std::string_view val )->bool {
+	  const char * v = ::getenv( var.data() );
+	  return v && v == val;
+	};
+
+	if ( getenvIs( "ZYPPNG_MEDIANETWORK", "1" ) ) {
+	  WAR << "network backend manually enabled." << std::endl;
+	  which = network;
+	}
+	else if ( getenvIs( "ZYPP_MULTICURL", "0" ) ) {
+	  WAR << "multicurl manually disabled." << std::endl;
+	  which = curl;
+	}
+	else
+	  which = multicurl;
+      }
+      // Finally use the default
+      std::unique_ptr<MediaNetworkCommonHandler> handler;
+      switch ( which ) {
+	case network:
+	  handler = std::make_unique<zyppng::MediaNetwork>( url, preferred_attach_point );
+	  break;
+
+	default:
+	case multicurl:
+	  handler = std::make_unique<MediaMultiCurl>( url, preferred_attach_point );
+	  break;
+
+	case curl:
+	  handler = std::make_unique<MediaCurl>( url, preferred_attach_point );
+	  break;
+      }
+      // Set up the handler
+      for ( const auto & el : custom_headers ) {
+	std::string header { el.first };
+	header += ": ";
+	header += el.second;
+	MIL << "Added custom header -> " << header << std::endl;
+	handler->settings().addHeader( std::move(header) );
+      }
+      _handler = std::move(handler);
+
     }
     else if (scheme == "plugin" )
       _handler = std::make_unique<MediaPlugin> (url,preferred_attach_point);
