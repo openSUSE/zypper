@@ -97,7 +97,7 @@ Selecting the patch, the conflict is resolved by updating all installed and affe
 +
 So installation, update or removal of packages may change the classification of patches refering to these packages. Since libyzpp-17.23.0 the /var/log/zypp/history remembers if a commited transaction changes a patchs classification. If history data are available, patch tables show a column telling _since_ when the patch is in it's current state.
 +
-Depending on the kind of defect, patches are classified by _category_ and _severity_. Commonly used values for _category_ are *security*, *recommended*, *optional*, *feature*, *document* or *yast*. Commonly used values for _severity_ are *critical*, *important*, *moderate*, *low* or *unspecified*.
+Depending on the kind of defect, patches are classified by _category_ and _severity_. Commonly used values for _category_ are *security*, (*recommended*, *bugfix*), (*optional*, *feature*, *enhancement*) *document* or *yast*. Commonly used values for _severity_ are *critical*, *important*, *moderate*, *low* or *unspecified*. Names listed in parentheses are used synonymously.
 +
 Note that the *patch* command does _not apply optional patches_ (category *optional* or *feature*) by default. If you actually want to consider all optional patches as being needed, say *patch --with-optional*. Specific patches can be applied using the *install* command (e.g. *zypper install patch:openSUSE-2014-7*).
 +
