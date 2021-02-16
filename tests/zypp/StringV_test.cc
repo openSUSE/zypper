@@ -34,7 +34,7 @@ namespace tools
 
 } // namespace tools
 
-BOOST_AUTO_TEST_CASE(splitRxCallbacks)
+BOOST_AUTO_TEST_CASE(WordConsumerSignature)
 {
   std::string l { "0b2" };
   regex r { "^|b|$" };
@@ -88,57 +88,68 @@ BOOST_AUTO_TEST_CASE(splitRxCallbacks)
 
 namespace tools
 {
-  void expect( const std::string & l, const regex & rx, const std::initializer_list<const char*> & words )
+  using zypp::strv::detail::WordConsumer;
+
+  /* Call splitter_r and check whether CB results match word_r. May CB abort at stopAt_r. */
+  void checkSplit( std::function<unsigned(WordConsumer&&)> splitter_r, const std::initializer_list<const char*> & words_r,
+		   unsigned stopAt_r = -1U )
   {
-    //cout << "??? <" << rx << "> <" << l << "> " << words.size() << endl;
-    auto next = words.begin();
-    unsigned ret = splitRx( l, rx, [&]( std::string_view w, unsigned i ) {
+    //cout << "??? " << words_r.size() << endl;
+    auto next = words_r.begin();
+    unsigned ret = splitter_r( [&]( std::string_view w, unsigned i, bool f )->bool {
       //cout << "  ["<<i<<"] <"<<w<<">"<<endl;
-      BOOST_REQUIRE( next != words.end() );
+      BOOST_REQUIRE( next != words_r.end() );
       BOOST_CHECK_EQUAL( *next, w );
       ++next;
+      BOOST_CHECK_EQUAL( f, next == words_r.end() );
+      return i != stopAt_r;
     });
     //cout << " => " << ret << endl;
-    BOOST_CHECK_EQUAL( next, words.end() );
-    BOOST_CHECK_EQUAL( ret, words.size() );
+    BOOST_CHECK_EQUAL( next, words_r.end() );
+    BOOST_CHECK_EQUAL( ret, words_r.size() );
   }
+
+  void expectRx( const std::string & l, const regex & rx, const std::initializer_list<const char*> & words, unsigned stopAt = -1U )
+  { checkSplit( [&](WordConsumer && wc) { return splitRx( l, rx, wc ); }, words, stopAt ); }
+
 } // namespace tools
+
 
 BOOST_AUTO_TEST_CASE(splitRxResults)
 {
-  using tools::expect;
+  using tools::expectRx ;
 
   regex rx;	// no regex, no match ==> input reported
-  expect( "",  rx, {""} );
-  expect( "0",  rx, {"0"} );
-  expect( "01",  rx, {"01"} );
-  expect( "012",  rx, {"012"} );
+  expectRx( "",  rx, {""} );
+  expectRx( "0",  rx, {"0"} );
+  expectRx( "01",  rx, {"01"} );
+  expectRx( "012",  rx, {"012"} );
 
   rx = "";	// Empty regex, empty matches
-  expect( "",  rx, {"",""} );
-  expect( "0",  rx, {"","0",""} );
-  expect( "01",  rx, {"","0","1",""} );
-  expect( "012",  rx, {"","0","1","2",""} );
+  expectRx( "",  rx, {"",""} );
+  expectRx( "0",  rx, {"","0",""} );
+  expectRx( "01",  rx, {"","0","1",""} );
+  expectRx( "012",  rx, {"","0","1","2",""} );
 
   rx = "x*";	// Empty matches as above
-  expect( "",  rx, {"",""} );
-  expect( "0",  rx, {"","0",""} );
-  expect( "01",  rx, {"","0","1",""} );
-  expect( "012",  rx, {"","0","1","2",""} );
+  expectRx( "",  rx, {"",""} );
+  expectRx( "0",  rx, {"","0",""} );
+  expectRx( "01",  rx, {"","0","1",""} );
+  expectRx( "012",  rx, {"","0","1","2",""} );
 
   rx = "1*";
-  expect( "",  rx, {"",""} );
-  expect( "0",  rx, {"","0",""} );
-  expect( "01",  rx, {"","0",""} );
-  expect( "012",  rx, {"","0","2",""} );
-  expect( "012\n",  rx, {"","0","2","\n"} );	// no match behind a trailing NL
-  expect( "012\n\n",  rx, {"","0","2","\n","\n"} );	// no match behind a trailing NL
+  expectRx( "",  rx, {"",""} );
+  expectRx( "0",  rx, {"","0",""} );
+  expectRx( "01",  rx, {"","0",""} );
+  expectRx( "012",  rx, {"","0","2",""} );
+  expectRx( "012\n",  rx, {"","0","2","\n"} );	// no match behind a trailing NL
+  expectRx( "012\n\n",  rx, {"","0","2","\n","\n"} );	// no match behind a trailing NL
 
   rx = "^|1|$";
-  expect( "",  rx, {"",""} );
-  expect( "0",  rx, {"","0",""} );
-  expect( "01",  rx, {"","0",""} );
-  expect( "012",  rx, {"","0","2",""} );
-  expect( "012\n",  rx, {"","0","2","\n"} );	// no match behind a trailing NL
-  expect( "012\n\n",  rx, {"","0","2","\n","\n"} );	// no match behind a trailing NL
+  expectRx( "",  rx, {"",""} );
+  expectRx( "0",  rx, {"","0",""} );
+  expectRx( "01",  rx, {"","0",""} );
+  expectRx( "012",  rx, {"","0","2",""} );
+  expectRx( "012\n",  rx, {"","0","2","\n"} );	// no match behind a trailing NL
+  expectRx( "012\n\n",  rx, {"","0","2","\n","\n"} );	// no match behind a trailing NL
 }
