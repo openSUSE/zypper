@@ -1,4 +1,23 @@
 -------------------------------------------------------------------
+Wed Feb 17 09:06:49 CET 2021 - ma@suse.de
+
+- Patch: Identify well-known category names (bsc#117984)
+  This allows to use the RH and SUSE patch categrory names
+  synonymously:
+  (recommendedi = bugfix) and (optional = feature = enhancement).
+- Add missing includes for GCC 11 compatibility.
+- Fix %posttrans script execution (fixes #265)
+  The scripts are execuable. No need to call them through 'sh -c'.
+- Commit: Fix rpmdb compat symlink in case rpm got removed.
+- Repo: Allow multiple baseurls specified on one line (fixes #285)
+- Regex: Fix memory leak and undefined behavior.
+- Add rpm buildrequires for test suite (fixes #279)
+- Use rpmdb2solv new -D switch to tell the location ob the
+  rpmdatabase to use.
+- BuildRequires:  libsolv-devel >= 0.7.17.
+- version 17.25.7 (22)
+
+-------------------------------------------------------------------
 Tue Jan 12 19:34:03 CET 2021 - ma@suse.de
 
 - Rephrase solver problem descriptions (jsc#SLE-8482)
