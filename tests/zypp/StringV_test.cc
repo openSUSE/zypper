@@ -153,3 +153,35 @@ BOOST_AUTO_TEST_CASE(splitRxResults)
   expectRx( "012\n",  rx, {"","0","2","\n"} );	// no match behind a trailing NL
   expectRx( "012\n\n",  rx, {"","0","2","\n","\n"} );	// no match behind a trailing NL
 }
+
+BOOST_AUTO_TEST_CASE(trimming)
+{
+  BOOST_CHECK_EQUAL( ltrim(""),    "" );
+  BOOST_CHECK_EQUAL( ltrim(" "),   "" );
+  BOOST_CHECK_EQUAL( ltrim("1"),   "1" );
+  BOOST_CHECK_EQUAL( ltrim(" 1"),  "1" );
+  BOOST_CHECK_EQUAL( ltrim("1 "),  "1 " );
+  BOOST_CHECK_EQUAL( ltrim(" 1 "), "1 " );
+
+  BOOST_CHECK_EQUAL( rtrim(""),    "" );
+  BOOST_CHECK_EQUAL( rtrim(" "),   "" );
+  BOOST_CHECK_EQUAL( rtrim("1"),   "1" );
+  BOOST_CHECK_EQUAL( rtrim(" 1"),  " 1" );
+  BOOST_CHECK_EQUAL( rtrim("1 "),  "1" );
+  BOOST_CHECK_EQUAL( rtrim(" 1 "), " 1" );
+
+  BOOST_CHECK_EQUAL(  trim(""),     "" );
+  BOOST_CHECK_EQUAL(  trim(" "),    "" );
+  BOOST_CHECK_EQUAL(  trim("1"),    "1" );
+  BOOST_CHECK_EQUAL(  trim(" 1"),   "1" );
+  BOOST_CHECK_EQUAL(  trim("1 "),   "1" );
+  BOOST_CHECK_EQUAL(  trim(" 1 "),  "1" );
+
+  BOOST_CHECK_EQUAL( ltrim(" 1 "), trim(" 1 ", Trim::left) );
+  BOOST_CHECK_EQUAL( rtrim(" 1 "), trim(" 1 ", Trim::right) );
+  BOOST_CHECK_EQUAL(  trim(" 1 "), trim(" 1 ", Trim::left|Trim::right) );
+
+  BOOST_CHECK_EQUAL(  trim(" \t1\t "),         "1" );
+  BOOST_CHECK_EQUAL(  trim(" \t1\t ", " "),  "\t1\t" );
+  BOOST_CHECK_EQUAL(  trim(" \t1\t ", ""),  " \t1\t " );
+}
