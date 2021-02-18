@@ -112,6 +112,11 @@ namespace tools
   void expectRx( const std::string & l, const regex & rx, const std::initializer_list<const char*> & words, unsigned stopAt = -1U )
   { checkSplit( [&](WordConsumer && wc) { return splitRx( l, rx, wc ); }, words, stopAt ); }
 
+  void expectSp( std::string_view l, std::string_view sep, const std::initializer_list<const char*> & words, unsigned stopAt = -1U )
+  { checkSplit( [&](WordConsumer && wc) { return split( l, sep, wc ); }, words, stopAt ); }
+
+  void expectTp( std::string_view l, std::string_view sep, const std::initializer_list<const char*> & words, unsigned stopAt = -1U )
+  { checkSplit( [&](WordConsumer && wc) { return split( l, sep, Trim::trim, wc ); }, words, stopAt ); }
 } // namespace tools
 
 
@@ -152,6 +157,49 @@ BOOST_AUTO_TEST_CASE(splitRxResults)
   expectRx( "012",  rx, {"","0","2",""} );
   expectRx( "012\n",  rx, {"","0","2","\n"} );	// no match behind a trailing NL
   expectRx( "012\n\n",  rx, {"","0","2","\n","\n"} );	// no match behind a trailing NL
+}
+
+BOOST_AUTO_TEST_CASE(splitResults)
+{
+  using tools::expectSp;
+
+  std::string sep;	// empty sep; split [[:blank:]]+; report not empty words
+  expectSp( "",  sep, {} );
+  expectSp( " ",  sep, {} );
+  expectSp( "  ",  sep, {} );
+  expectSp( " 1 ",  sep, {"1"} );
+  expectSp( " 1 2 ",  sep, {"1","2"} );
+  expectSp( " 1  2 ",  sep, {"1","2"} );
+  expectSp( " 1  2 ",  sep, {"1","2"}, 0 );	// CB aborted
+  expectSp( " 1  2 ",  sep, {"1","2"}, 1 );	// CB aborted
+
+  sep = ",";	// not empty seps....
+  expectSp( "",  sep, {""} );
+  expectSp( ",",  sep, {"",""} );
+  expectSp( ",,",  sep, {"","",""} );
+  expectSp( "1",  sep, {"1"} );
+  expectSp( ",1,",  sep, {"","1",""} );
+  expectSp( ",1,2,",  sep, {"","1","2",""} );
+  expectSp( ",1,,2,",  sep, {"","1","","2",""} );
+
+  expectSp( " ",  sep, {" "} );
+  expectSp( " , ",  sep, {" "," "} );
+  expectSp( " , , ",  sep, {" "," "," "} );
+  expectSp( " 1 ",  sep, {" 1 "} );
+  expectSp( " , 1 , ",  sep, {" "," 1 "," "} );
+  expectSp( " , 1 , 2 , ",  sep, {" "," 1 "," 2 "," "} );
+  expectSp( " , 1 , , 2 , ",  sep, {" "," 1 "," "," 2 "," "} );
+  expectSp( " , 1 , , 2 , ",  sep, {" "," 1 , , 2 , "}, 0 );	// CB aborted
+
+  using tools::expectTp;	// trimmed split
+  expectTp( " ",  sep, {""} );
+  expectTp( " , ",  sep, {"",""} );
+  expectTp( " , , ",  sep, {"","",""} );
+  expectTp( " 1 ",  sep, {"1"} );
+  expectTp( " , 1 , ",  sep, {"","1",""} );
+  expectTp( " , 1 , 2 , ",  sep, {"","1","2",""} );
+  expectTp( " , 1 , , 2 , ",  sep, {"","1","","2",""} );
+  expectTp( " , 1 , , 2 , ",  sep, {"","1 , , 2 ,"}, 0 );	// CB aborted
 }
 
 BOOST_AUTO_TEST_CASE(trimming)

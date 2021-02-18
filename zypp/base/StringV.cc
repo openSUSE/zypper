@@ -16,21 +16,117 @@ namespace zypp
 {
   namespace strv
   {
-
-    unsigned split( std::string_view line_r, std::string_view sep_r, Trim trim_r,
-		    std::function<void(std::string_view)> fnc_r )
+    namespace detail
     {
-#warning REIMPLEMENT
-      std::vector<std::string> words;
-      str::split( std::string(line_r), std::back_inserter(words), std::string(sep_r), str::TRIM );
+      /** \ref split working horse for empty \a sep_r case.
+       * Split at /[BLANK,TAB]+/ and report no-empty words. Trim::right is
+       * applied to the rest of the line in case the callback aborts further
+       * processing.
+       */
+      unsigned _splitSimple( std::string_view line_r, WordConsumer && fnc_r )
+      {
+	// callback stats
+	unsigned fncCall = 0;
 
-      if ( fnc_r ) {
-	for ( const auto & w : words )
-	  fnc_r( std::string_view(w) );
+	// NOTE: line_r is not null-terminated!
+	const char *const eol = line_r.data() + line_r.size();	// the '\0'
+	const char * searchfrom = line_r.data();	// start of the next search (moves with each cycle!)
+
+	// Empty sep: split at /[BLANK,TAB]+/ and report no-empty words
+	auto isSep = []( char ch )->bool { return ch == ' '|| ch == '\t'; };
+
+	auto skipSep = [eol,&isSep]( const char *& ptr )->bool {
+	  while ( ptr < eol && isSep( *ptr ) )
+	    ++ptr;
+	  return ptr < eol;	// whether we ended up at a new wordstart
+	};
+
+	auto skipWord = [eol,&isSep]( const char *& ptr )->void {
+	  while ( ptr < eol && ! isSep( *ptr ) )
+	    ++ptr;
+	};
+
+	// For the 'last' CB argument: we must remember a word
+	// until we know whether another one is following
+	std::string_view word;
+
+	while ( skipSep( searchfrom ) ) {
+	  const char * wordstart = searchfrom;
+	  // Report a previous word found
+	  if ( ! word.empty() ) {
+	    if ( fnc_r ) {
+	      if ( ! fnc_r( word, fncCall, false/*more to come*/ ) ) {
+		// Stop searching for further matches. Final report will
+		// be the remaining line (right trimmed)
+		const char * wordend = eol;
+		while ( isSep( *(wordend-1) ) ) // noSep at wordstart stops loop
+		  --wordend;
+		word = std::string_view( wordstart, wordend-wordstart );
+		++fncCall;
+		break;
+	      }
+	    }
+	    ++fncCall;
+	  }
+	  // remember new word
+	  ++searchfrom;
+	  skipWord( searchfrom );
+	  word = std::string_view( wordstart, searchfrom-wordstart );
+	}
+
+	// finally report the last word
+	if ( ! word.empty() ) {
+	  if ( fnc_r ) {
+	    fnc_r( word, fncCall, true/*last*/ );
+	  }
+	  ++fncCall;
+	}
+
+	return fncCall;
       }
-      return words.size();
-    }
+    } // namespace detail
 
+    unsigned detail::_split( std::string_view line_r, std::string_view sep_r, Trim trim_r, WordConsumer && fnc_r )
+    {
+      if ( sep_r.empty() )
+	return _splitSimple( line_r, std::move( fnc_r ) );
+
+      // callback stats
+      bool fncStop = false;
+      unsigned fncCall = 0;
+
+      using size_type = std::string_view::size_type;
+      size_type wordstart = 0;	// start of the next string to be reported
+      size_type searchfrom = 0; // start of the next search for a separator
+
+      do {	// report lhs word of separator matches...
+	searchfrom = line_r.find( sep_r, searchfrom );
+	if ( fncStop || searchfrom == line_r.npos ) {
+	  break;
+	}
+
+	// Report lhs word of the match and advance...
+	if ( fnc_r ) {
+	  if ( ! fnc_r( trim( line_r.substr(wordstart,searchfrom-wordstart), trim_r ), fncCall, false/*more to come*/ ) )
+	    fncStop= true;	// stop searching for further matches
+	}
+	++fncCall;
+
+	// Next wordstart is behind the separator match.
+	searchfrom += sep_r.size();
+	wordstart = searchfrom;
+      } while( wordstart < line_r.size() );
+
+      // finally report rhs word of the last separator match (or no match)
+      if ( fnc_r ) {
+	if ( wordstart < line_r.size() )
+	  fnc_r( trim( line_r.substr(wordstart,line_r.size()-wordstart), trim_r ), fncCall, true/*last*/ );
+	else	// a final match at $ so a final empty word reported (no trim needed)
+	  fnc_r( std::string_view( line_r.data()+line_r.size(), 0 ), fncCall, true/*last*/ );
+      }
+      ++fncCall;
+      return fncCall;
+    }
 
     unsigned detail::_splitRx( const std::string & line_r, const regex & rx_r, WordConsumer && fnc_r )
     {
