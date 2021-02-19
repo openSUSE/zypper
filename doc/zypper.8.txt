@@ -1476,7 +1476,13 @@ Services only manage defined repositories, they do not refresh them. To refresh 
 
 Package Locks Management
 ~~~~~~~~~~~~~~~~~~~~~~~~
-Package locks serve the purpose of preventing changes to the set of installed packages on the system. The locks are stored in form of a _query_ in /etc/zypp/locks file (see also locks(5)). Packages matching this query are then forbidden to change their installed status; an installed package can't be removed or upgraded, not installed package can't be installed. When requesting to install, upgrade or remove such locked package, you will get a dependency problem dialog.
+Package locks serve the purpose of preventing changes to the set of installed packages on the system. Locks are stored as _queries_ in /etc/zypp/locks file (see also locks(5)). Packages matching a query are then forbidden to change their installed status; an installed package can't be removed or upgraded, not installed package can't be installed. When requesting to install, upgrade or remove such locked package, you will get a dependency problem dialog.
+
+A _lock-spec_ is formed by "_NAME_ [_OP EDITION_]", where _NAME_ may also be a glob pattern using *** and *?* wildcard characters. Non-package types may to have their kind-string prepended (e.g. 'patch:foo' or 'product:baa') or use the commands *--type* option.
+
+The basic form will lock all editions of the matching items. You can optionally restrict the lock to match a specific edition or edition range using *=*, *<*, *\<=*, *>*, *>=* or *!=* followed by the edition.
+
+NOTE: If you use blanks around the operator you need to quote the string or escape the blanks according to the rules of the shell you are using.
 
 *locks* (*ll*)::
 	List currently active package locks.
@@ -1489,8 +1495,8 @@ Package locks serve the purpose of preventing changes to the set of installed pa
 		 List the resolvables matched by each lock. This option requires loading the repositories.
 --
 
-*addlock* (*al*) [_options_] _package-name_...::
-	Add a package lock. Specify packages to lock by exact name or by a glob pattern using *** and *?* wildcard characters.
+*addlock* (*al*) [_options_] _lock-spec_...::
+	Add a package lock. Specify packages to lock as explained above.
 +
 --
 	*-r*, *--repo* _alias_|_name_|_#_|_URI_::
@@ -1500,8 +1506,8 @@ Package locks serve the purpose of preventing changes to the set of installed pa
 		Lock only packages of specified type (default: package). See section *Package Types* for list of available package types.
 --
 
-*removelock* (*rl*) [_options_] _lock-number_|_package-name_...::
-	Remove specified package lock. Specify the lock to remove by its number obtained with *zypper locks* or by the package name.
+*removelock* (*rl*) [_options_] _lock-number_|_lock-spec_...::
+	Remove a package lock. Specify the lock to remove by its number obtained with *zypper locks* or by the _lock-spec_.
 +
 --
 	*-r*, *--repo* _alias_|_name_|_#_|_URI_::
@@ -1866,7 +1872,7 @@ NOTE: The system-wide */etc/zypp/zypp.conf* is mentioned here just because some 
 	ZYpp configuration file affecting all libzypp based applications. See the comments in the file for description of configurable properties. Many locations of files and directories listed in this section are configurable via zypp.conf. The location for this file itself can be redefined only by setting *$ZYPP_CONF* in the environment.
 
 */etc/zypp/locks*::
-	File with package lock definitions, see _locks(5)_ manual page for details. The package lock commands (*addlock*, *removelock*, etc.) can be used to manipulate this file.
+	File with package lock definitions. The package lock commands (*locks*, *addlock*, *removelock*, etc.) should be used to manipulate this file.
 +
 This file is used by all ZYpp-based applications.
 

@@ -26,11 +26,15 @@ AddLocksCmd::AddLocksCmd(std::vector<std::string> &&commandAliases_r ) :
   ZypperBaseCommand (
     std::move( commandAliases_r ),
     // translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
-    _("addlock (al) [OPTIONS] <PACKAGENAME> ..."),
+    _("addlock (al) [OPTIONS] <LOCKSPEC>..."),
     // translators: command summary
     _("Add a package lock."),
     // translators: command description
-    _("Add a package lock. Specify packages to lock by exact name or by a glob pattern using '*' and '?' wildcard characters."),
+    {
+      _("Add a package lock."),
+      _("LOCKSPEC is formed by '[KIND:]NAME[ OP EDITION]', where NAME may also be a glob pattern using * and ? wildcard characters. Non-package types may to have their KIND: string prepended (e.g. 'patch:foo') or use the commands --type option."),
+      _("The basic form will lock all editions of the matching items. You can optionally restrict the lock to match a specific edition or edition range using =, <, <=, >, >= or != followed an EDITION.")
+    },
     DisableAll )
 { }
 
