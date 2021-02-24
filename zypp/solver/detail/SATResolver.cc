@@ -175,10 +175,10 @@ IMPL_PTR_TYPE(SATResolver);
 //---------------------------------------------------------------------------
 
 int vendorCheck( sat::detail::CPool *pool, Solvable *solvable1, Solvable *solvable2 )
-{
-  return VendorAttr::instance().equivalent( IdString(solvable1->vendor),
-                                            IdString(solvable2->vendor) ) ? 0 : 1;
-}
+{ return VendorAttr::instance().equivalent( IdString(solvable1->vendor), IdString(solvable2->vendor) ) ? 0 : 1; }
+
+int relaxedVendorCheck( sat::detail::CPool *pool, Solvable *solvable1, Solvable *solvable2 )
+{ return VendorAttr::instance().relaxedEquivalent( IdString(solvable1->vendor), IdString(solvable2->vendor) ) ? 0 : 1; }
 
 /** ResPool helper to compute the initial status of Patches etc.
  * An empty solver run (no jobs) just to compute the initial status
@@ -468,8 +468,6 @@ bool
 SATResolver::solving(const CapabilitySet & requires_caps,
 		     const CapabilitySet & conflict_caps)
 {
-    _satSolver = solver_create( _satPool );
-    ::pool_set_custom_vendorcheck( _satPool, &vendorCheck );
     if (_fixsystem) {
 	queue_push( &(_jobQueue), SOLVER_VERIFY|SOLVER_SOLVABLE_ALL);
 	queue_push( &(_jobQueue), 0 );
@@ -669,6 +667,23 @@ SATResolver::solverInit(const PoolItemList & weakItems)
 
     // remove old stuff
     solverEnd();
+    _satSolver = solver_create( _satPool );
+    {
+      // bsc#1182629: in dup allow an available -release package providing 'dup-vendor-relax(suse)'
+      // to let (suse/opensuse) vendor being treated as being equivalent.
+      bool toRelax = false;
+      if ( _distupgrade ) {
+	for ( sat::Solvable solv : sat::WhatProvides( Capability("dup-vendor-relax(suse)") ) ) {
+	  if ( ! solv.isSystem() ) {
+	    MIL << "Relaxed vendor check requested by " << solv << endl;
+	    toRelax = true;
+	    break;
+	  }
+	}
+      }
+      ::pool_set_custom_vendorcheck( _satPool, toRelax ? &relaxedVendorCheck : &vendorCheck );
+    }
+
     queue_init( &_jobQueue );
 
     // clear and rebuild: _items_to_install, _items_to_remove, _items_to_lock, _items_to_keep
@@ -861,8 +876,6 @@ void SATResolver::doUpdate()
     // set locks for the solver
     setLocks();
 
-    _satSolver = solver_create( _satPool );
-    ::pool_set_custom_vendorcheck( _satPool, &vendorCheck );
     if (_fixsystem) {
 	queue_push( &(_jobQueue), SOLVER_VERIFY|SOLVER_SOLVABLE_ALL);
 	queue_push( &(_jobQueue), 0 );
