@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Wed Feb 24 17:13:17 CET 2021 - ma@suse.de
+
+- doc: give more details about creating versioned package locks
+  (bsc#1181622)
+- man: Document synonymously used patch categories (bsc#1179847)
+- version 1.14.43
+
+-------------------------------------------------------------------
 Tue Jan 12 20:24:56 CET 2021 - ma@suse.de
 
 - Fix source-download commnds help (bsc#1180663)
