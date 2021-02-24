@@ -210,6 +210,56 @@ namespace zypp
     ///////////////////////////////////////////////////////////////////
     namespace
     {
+      /// \brief Try to provide /proc fs if not present.
+      /// bsc#1181328: Some systemd tools require /proc to be mounted
+      class AssertProcMounted
+      {
+	NON_COPYABLE(AssertProcMounted);
+	NON_MOVABLE(AssertProcMounted);
+      public:
+
+	AssertProcMounted( Pathname root_r )
+	{
+	  root_r /= "/proc";
+	  if ( ! PathInfo(root_r/"self").isDir() ) {
+	    MIL << "Try to make sure proc is mounted at" << _mountpoint << endl;
+	    if ( filesystem::assert_dir(root_r) == 0
+	      && execute({ "mount", "-t", "proc", "proc", root_r.asString() }) == 0 ) {
+	      _mountpoint = std::move(root_r);	// so we'll later unmount it
+	    }
+	    else {
+	      WAR << "Mounting proc at " << _mountpoint << " failed" << endl;
+	    }
+	  }
+	}
+
+	~AssertProcMounted( )
+	{
+	  if ( ! _mountpoint.empty() ) {
+	    // we mounted it so we unmount...
+	    MIL << "We mounted " << _mountpoint << " so we unmount it" << endl;
+	    execute({ "umount", "-l", _mountpoint.asString() });
+	  }
+	}
+
+      private:
+	int execute( ExternalProgram::Arguments && cmd_r ) const
+	{
+	  ExternalProgram prog( cmd_r, ExternalProgram::Stderr_To_Stdout );
+	  for( std::string line = prog.receiveLine(); ! line.empty(); line = prog.receiveLine() )
+	  { DBG << line; }
+	  return prog.close();
+	}
+
+      private:
+	Pathname _mountpoint;
+      };
+    } // namespace
+    ///////////////////////////////////////////////////////////////////
+
+    ///////////////////////////////////////////////////////////////////
+    namespace
+    {
       SolvIdentFile::Data getUserInstalledFromHistory( const Pathname & historyFile_r )
       {
 	SolvIdentFile::Data onSystemByUserList;
@@ -1490,6 +1540,9 @@ namespace zypp
       NotifyAttemptToModify attemptToModify( result_r );
 
       bool abort = false;
+
+      // bsc#1181328: Some systemd tools require /proc to be mounted
+      AssertProcMounted assertProcMounted( _root );
 
       RpmPostTransCollector postTransCollector( _root );
       std::vector<sat::Solvable> successfullyInstalledPackages;
