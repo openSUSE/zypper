@@ -17,10 +17,10 @@ msgstr ""
 "Project-Id-Version: zypper.de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-01-07 18:15+0100\n"
-"PO-Revision-Date: 2020-09-18 21:48+0000\n"
-"Last-Translator: Sarah Kriesch <ada.lovelace@gmx.de>\n"
-"Language-Team: German <https://l10n.opensuse.org/projects/zypper/master/de/"
-">\n"
+"PO-Revision-Date: 2021-03-07 18:02+0000\n"
+"Last-Translator: Gemineo <vistatec@gemineo.de>\n"
+"Language-Team: German <https://l10n.opensuse.org/projects/zypper/master/de/>"
+"\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2886,6 +2886,10 @@ msgid ""
 "The command is an alias for '%1%' and performs a case-insensitive search. "
 "For a case-sensitive search call the search command and add the '%2%' option."
 msgstr ""
+"Das Kommando ist ein Alias für '%1%' und führt eine Suche ohne "
+"Berücksichtigung der Groß-/Kleinschreibung durch. Für eine Suche unter "
+"Berücksichtigung der Groß-/Kleinschreibung rufen Sie das Suchkommando auf "
+"und fügen die Option '%2%' hinzu."
 
 #. "what-provides" is obsolete
 #. The "what-provides" now is included in "search" command, e.g.
@@ -4840,7 +4844,7 @@ msgstr "Die Deinstallation von Quellpaketen wird nicht unterstützt."
 #: src/commands/subcommand.cc:79
 #, boost-format
 msgid "No manual entry for %1%"
-msgstr ""
+msgstr "Kein manueller Eintrag für %1%"
 
 #: src/commands/subcommand.cc:92
 msgid "none"
@@ -5271,6 +5275,7 @@ msgstr "Herunterladen aller Quell-RPMs in dieses Verzeichnis."
 #: src/commands/utils/source-download.cc:502
 msgid "Whether to delete extraneous source rpms in the local directory."
 msgstr ""
+"Ob überflüssige Quell-rpms im lokalen Verzeichnis gelöscht werden sollen."
 
 #. translators: --status
 #: src/commands/utils/source-download.cc:506
