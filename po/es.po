@@ -18,10 +18,10 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-01-07 18:15+0100\n"
-"PO-Revision-Date: 2020-12-18 21:27+0000\n"
-"Last-Translator: Victor hck <correohck@gmail.com>\n"
-"Language-Team: Spanish <https://l10n.opensuse.org/projects/zypper/master/es/"
-">\n"
+"PO-Revision-Date: 2021-03-07 19:20+0000\n"
+"Last-Translator: Antonio Simón <antonio@trans-mission.com>\n"
+"Language-Team: Spanish <https://l10n.opensuse.org/projects/zypper/master/es/>"
+"\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2889,6 +2889,9 @@ msgid ""
 "The command is an alias for '%1%' and performs a case-insensitive search. "
 "For a case-sensitive search call the search command and add the '%2%' option."
 msgstr ""
+"El comando es un alias de \"%1%\" y realiza una búsqueda en la que no se "
+"distinguen mayúsculas de minúsculas. Para realizar una búsqueda que sí las "
+"distinga, llame al comando de búsqueda y añada la opción %2%."
 
 #. "what-provides" is obsolete
 #. The "what-provides" now is included in "search" command, e.g.
@@ -5248,6 +5251,7 @@ msgstr "Descarga todos los rpm de origen en este directorio."
 #: src/commands/utils/source-download.cc:502
 msgid "Whether to delete extraneous source rpms in the local directory."
 msgstr ""
+"Indica si se va a suprimir el rpms de origen extraño en el directorio local."
 
 #. translators: --status
 #: src/commands/utils/source-download.cc:506
