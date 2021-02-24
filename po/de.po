@@ -18,10 +18,10 @@ msgstr ""
 "Project-Id-Version: zypp.de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-01-12 19:27+0100\n"
-"PO-Revision-Date: 2019-12-05 20:54+0000\n"
-"Last-Translator: Sarah Kriesch <ada.lovelace@gmx.de>\n"
-"Language-Team: German <https://l10n.opensuse.org/projects/libzypp/master/de/"
-">\n"
+"PO-Revision-Date: 2021-03-07 10:05+0000\n"
+"Last-Translator: Gemineo <vistatec@gemineo.de>\n"
+"Language-Team: German <https://l10n.opensuse.org/projects/libzypp/master/de/>"
+"\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -4465,27 +4465,29 @@ msgid ""
 "the installed %1% does not belong to a distupgrade repository and must be "
 "replaced"
 msgstr ""
+"das installierte %1% gehört nicht zu einem distupgrade-Repository und muss "
+"ersetzt werden"
 
 #. just in case
 #: zypp/solver/detail/SATResolver.cc:1077
 #, boost-format
 msgid "the to be installed %1% does not belong to a distupgrade repository"
-msgstr ""
+msgstr "das zu installierende %1% gehört nicht zu einem distupgrade-Repository"
 
 #: zypp/solver/detail/SATResolver.cc:1081
 #, boost-format
 msgid "the installed %1% has inferior architecture"
-msgstr ""
+msgstr "das installierte %1% hat eine minderwertige Architektur"
 
 #: zypp/solver/detail/SATResolver.cc:1083
 #, boost-format
 msgid "the to be installed %1% has inferior architecture"
-msgstr ""
+msgstr "das zu installierende %1% hat eine minderwertige Architektur"
 
 #: zypp/solver/detail/SATResolver.cc:1086
 #, boost-format
 msgid "problem with the installed %1%"
-msgstr ""
+msgstr "Problem mit dem installierten %1%"
 
 #: zypp/solver/detail/SATResolver.cc:1089
 #: zypp/solver/detail/SATResolver.cc:1557
@@ -4502,17 +4504,17 @@ msgstr "Abhängigkeitsproblem"
 #: zypp/solver/detail/SATResolver.cc:1095
 #, boost-format
 msgid "nothing provides the requested '%1%'"
-msgstr ""
+msgstr "nichts stellt das angeforderte '%1%' bereit"
 
 #: zypp/solver/detail/SATResolver.cc:1096
 #: zypp/solver/detail/SATResolver.cc:1100
 msgid "Have you enabled all the required repositories?"
-msgstr ""
+msgstr "Haben Sie alle erforderlichen Repositorys aktiviert?"
 
 #: zypp/solver/detail/SATResolver.cc:1099
 #, boost-format
 msgid "the requested package %1% does not exist"
-msgstr ""
+msgstr "das angeforderte Paket %1% ist nicht vorhanden"
 
 #: zypp/solver/detail/SATResolver.cc:1103
 #: zypp/solver/detail/SATResolver.cc:1571
@@ -4523,44 +4525,51 @@ msgstr "nicht unterstützte Anforderung"
 #: zypp/solver/detail/SATResolver.cc:1106
 #, boost-format
 msgid "'%1%' is provided by the system and cannot be erased"
-msgstr ""
+msgstr "'%1%' wird vom System bereitgestellt und kann nicht gelöscht werden"
 
 #: zypp/solver/detail/SATResolver.cc:1109
 #, boost-format
 msgid "%1% is not installable"
-msgstr ""
+msgstr "%1% ist nicht installierbar"
 
 #: zypp/solver/detail/SATResolver.cc:1114
 #, boost-format
 msgid "nothing provides '%1%' needed by the installed %2%"
-msgstr ""
+msgstr "nichts stellt '%1%' bereit, das vom installierten %2% benötigt wird"
 
 #: zypp/solver/detail/SATResolver.cc:1116
 #, boost-format
 msgid "nothing provides '%1%' needed by the to be installed %2%"
 msgstr ""
+"nichts stellt '%1%' bereit, das vom zu installierenden %2% benötigt wird"
 
 #: zypp/solver/detail/SATResolver.cc:1119
 #, boost-format
 msgid "cannot install both %1% and %2%"
-msgstr ""
+msgstr "kann nicht %1% und %2% installieren"
 
 #: zypp/solver/detail/SATResolver.cc:1124
 #, boost-format
 msgid "the installed %1% conflicts with '%2%' provided by the installed %3%"
 msgstr ""
+"das installierte %1% steht im Konflikt mit '%2%', das vom installierten %3% "
+"bereitgestellt wird"
 
 #: zypp/solver/detail/SATResolver.cc:1126
 #, boost-format
 msgid ""
 "the installed %1% conflicts with '%2%' provided by the to be installed %3%"
 msgstr ""
+"das installierte %1% steht im Konflikt mit '%2%', das von dem zu "
+"installierenden %3% bereitgestellt wird"
 
 #: zypp/solver/detail/SATResolver.cc:1130
 #, boost-format
 msgid ""
 "the to be installed %1% conflicts with '%2%' provided by the installed %3%"
 msgstr ""
+"das zu installierende %1% steht im Konflikt mit '%2%', das vom installierten "
+"%3% bereitgestellt wird"
 
 #: zypp/solver/detail/SATResolver.cc:1132
 #, boost-format
@@ -4568,43 +4577,59 @@ msgid ""
 "the to be installed %1% conflicts with '%2%' provided by the to be installed "
 "%3%"
 msgstr ""
+"das zu installierende %1% steht im Konflikt mit '%2%', das vom zu "
+"installierenden %3% bereitgestellt wird"
 
 #: zypp/solver/detail/SATResolver.cc:1139
 #, boost-format
 msgid "the installed %1% obsoletes '%2%' provided by the installed %3%"
 msgstr ""
+"das installierte %1% ersetzt '%2%', das vom installierten %3% bereitgestellt "
+"wird"
 
 #: zypp/solver/detail/SATResolver.cc:1141
 #, boost-format
 msgid "the installed %1% obsoletes '%2%' provided by the to be installed %3%"
 msgstr ""
+"das installierte %1% ersetzt '%2%', das durch das zu installierende %3% "
+"bereitgestellt wird"
 
 #: zypp/solver/detail/SATResolver.cc:1145
 #, boost-format
 msgid "the to be installed %1% obsoletes '%2%' provided by the installed %3%"
 msgstr ""
+"das zu installierende %1% ersetzt '%2%', das vom installierten %3% "
+"bereitgestellt wird"
 
 #: zypp/solver/detail/SATResolver.cc:1147
 #, boost-format
 msgid ""
 "the to be installed %1% obsoletes '%2%' provided by the to be installed %3%"
 msgstr ""
+"das zu installierende %1% ersetzt '%2%', das durch das zu installierende %3% "
+"bereitgestellt wird"
 
 #: zypp/solver/detail/SATResolver.cc:1152
 #, boost-format
 msgid "the installed %1% conflicts with '%2%' provided by itself"
 msgstr ""
+"das installierte %1% steht im Konflikt mit dem von ihm selbst "
+"bereitgestellten '%2%'"
 
 #: zypp/solver/detail/SATResolver.cc:1154
 #, boost-format
 msgid "the to be installed %1% conflicts with '%2%' provided by itself"
 msgstr ""
+"das zu installierende %1% steht im Konflikt mit dem von ihm selbst "
+"bereitgestellten '%2%'"
 
 #: zypp/solver/detail/SATResolver.cc:1186
 #, boost-format
 msgid ""
 "the installed %1% requires '%2%', but this requirement cannot be provided"
 msgstr ""
+"das installierte %1% erfordert '%2%', aber diese Anforderung kann nicht "
+"bereitgestellt werden"
 
 #: zypp/solver/detail/SATResolver.cc:1188
 #, boost-format
@@ -4612,6 +4637,8 @@ msgid ""
 "the to be installed %1% requires '%2%', but this requirement cannot be "
 "provided"
 msgstr ""
+"das zu installierende %1% erfordert '%2%', aber diese Anforderung kann nicht "
+"bereitgestellt werden"
 
 #: zypp/solver/detail/SATResolver.cc:1190
 #: zypp/solver/detail/SATResolver.cc:1629
@@ -4638,24 +4665,24 @@ msgstr "Nicht installierbare Anbieter: "
 #: zypp/solver/detail/SATResolver.cc:1264
 #, boost-format
 msgid "remove lock to allow removal of %1%"
-msgstr ""
+msgstr "Sperre entfernen, um das Entfernen von %1% zuzulassen"
 
 #: zypp/solver/detail/SATResolver.cc:1269
 #: zypp/solver/detail/SATResolver.cc:1305
 #, boost-format
 msgid "do not install %1%"
-msgstr ""
+msgstr "%1% nicht installieren"
 
 #: zypp/solver/detail/SATResolver.cc:1284
 #: zypp/solver/detail/SATResolver.cc:1326
 #, boost-format
 msgid "keep %1%"
-msgstr ""
+msgstr "%1% beibehalten"
 
 #: zypp/solver/detail/SATResolver.cc:1289
 #, boost-format
 msgid "remove lock to allow installation of %1%"
-msgstr ""
+msgstr "Sperre entfernen, um Installation von %1% zuzulassen"
 
 #: zypp/solver/detail/SATResolver.cc:1340
 #: zypp/solver/detail/SATResolver.cc:1361
@@ -4679,36 +4706,39 @@ msgstr "Warnung vor einem beschädigten System ignorieren"
 #, boost-format
 msgid "do not ask to install a solvable providing %1%"
 msgstr ""
+"Installation eines auflösbaren Elements, das %1% bereitstellt, nicht "
+"anfordern"
 
 #: zypp/solver/detail/SATResolver.cc:1368
 #, boost-format
 msgid "do not ask to delete all solvables providing %1%"
 msgstr ""
+"Löschen aller auflösbaren Elemente, die %1% bereitstellen, nicht anfordern"
 
 #: zypp/solver/detail/SATResolver.cc:1381
 #, boost-format
 msgid "do not install most recent version of %1%"
-msgstr ""
+msgstr "neueste Version von %1% nicht installieren"
 
 #: zypp/solver/detail/SATResolver.cc:1402
 #, boost-format
 msgid "keep %1% despite the inferior architecture"
-msgstr ""
+msgstr "%1% trotz der minderwertigen Architektur beibehalten"
 
 #: zypp/solver/detail/SATResolver.cc:1407
 #, boost-format
 msgid "install %1% despite the inferior architecture"
-msgstr ""
+msgstr "%1% trotz der minderwertigen Architektur installieren"
 
 #: zypp/solver/detail/SATResolver.cc:1416
 #, boost-format
 msgid "keep obsolete %1%"
-msgstr ""
+msgstr "veraltetes %1% beibehalten"
 
 #: zypp/solver/detail/SATResolver.cc:1421
 #, boost-format
 msgid "install %1% from excluded repository"
-msgstr ""
+msgstr "%1% aus ausgeschlossenem Repository installieren"
 
 #. translator: %1% is a package name
 #: zypp/solver/detail/SATResolver.cc:1435
@@ -4737,12 +4767,12 @@ msgstr "%1% installieren, obwohl es geblacklistet ist"
 #: zypp/solver/detail/SATResolver.cc:1461
 #, boost-format
 msgid "downgrade of %1% to %2%"
-msgstr ""
+msgstr "Herabstufung von %1% auf %2%"
 
 #: zypp/solver/detail/SATResolver.cc:1468
 #, boost-format
 msgid "architecture change of %1% to %2%"
-msgstr ""
+msgstr "Architekturänderung von %1% in %2%"
 
 #: zypp/solver/detail/SATResolver.cc:1477
 #, boost-format
@@ -4750,16 +4780,18 @@ msgid ""
 "install %1% (with vendor change)\n"
 "  %2%  -->  %3%"
 msgstr ""
+"%1% installieren (mit Herstellerwechsel)\n"
+"  %2% --> %3%"
 
 #: zypp/solver/detail/SATResolver.cc:1483
 #, boost-format
 msgid "replacement of %1% with %2%"
-msgstr ""
+msgstr "Ersetzung von %1% durch %2%"
 
 #: zypp/solver/detail/SATResolver.cc:1494
 #, boost-format
 msgid "deinstallation of %1%"
-msgstr ""
+msgstr "Deinstallation von %1%"
 
 #: zypp/solver/detail/SATResolver.cc:1548
 #: zypp/solver/detail/SATResolver.cc:2081
@@ -5210,6 +5242,8 @@ msgid ""
 "Download (curl) error for '%s':\n"
 "Error code: %s\n"
 msgstr ""
+"Download (curl)-Fehler für '%s':\n"
+"Fehlercode: %s\n"
 
 #: zypp/zyppng/media/network/networkrequesterror.cc:138
 #, c-format, boost-format
@@ -5217,6 +5251,8 @@ msgid ""
 "Download (curl) error for '%s':\n"
 "Unable to retrieve HTTP response\n"
 msgstr ""
+"Download (curl)-Fehler für '%s':\n"
+"HTTP-Antwort kann nicht abgerufen werden\n"
 
 #~ msgid "Can't open lock file: %s"
 #~ msgstr "Sperrdatei kann nicht geöffnet werden: %s"
