@@ -238,6 +238,12 @@ protected:
   virtual void doReset () = 0;
 
   /**
+   * Reimplement for positionalArgs checks which can be done before systemSetup.
+   * Default implementation does nothing.
+   */
+  virtual int earlyPositionalArgsCheck( Zypper &zypper, const std::vector<std::string> &positionalArgs );
+
+  /**
    * Reimplement to define
    */
   virtual int execute ( Zypper &zypper, const std::vector<std::string> &positionalArgs ) = 0;
