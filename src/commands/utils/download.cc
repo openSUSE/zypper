@@ -186,14 +186,17 @@ std::vector<BaseCommandConditionPtr> DownloadCmd::conditions() const
   };
 }
 
+int DownloadCmd::earlyPositionalArgsCheck( Zypper &zypper, const std::vector<std::string> &positionalArgs_r )
+{
+  if ( positionalArgs_r.empty() ) {
+    report_required_arg_missing( zypper.out(), help() );
+    return ( ZYPPER_EXIT_ERR_INVALID_ARGS );
+  }
+  return ZYPPER_EXIT_OK;
+};
+
 int DownloadCmd::execute( Zypper &zypper , const std::vector<std::string> &positionalArgs_r )
 {
-    if ( positionalArgs_r.empty() )
-    {
-      report_required_arg_missing( zypper.out(), help() );
-      return ( ZYPPER_EXIT_ERR_INVALID_ARGS );
-    }
-
     typedef ui::SelectableTraits::AvailableItemSet AvailableItemSet;
     typedef std::map<IdString,AvailableItemSet> Collection;
     Collection collect;
