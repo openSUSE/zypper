@@ -234,6 +234,9 @@ void ZypperBaseCommand::setPositionalArguments(const std::vector<std::string> &p
   _positionalArguments = positionalArguments;
 }
 
+int ZypperBaseCommand::earlyPositionalArgsCheck( Zypper &zypper, const std::vector<std::string> &positionalArgs )
+{ return ZYPPER_EXIT_OK; }
+
 int ZypperBaseCommand::run( Zypper &zypper )
 {
   MIL << "run: " << command().front() << endl;
@@ -248,8 +251,10 @@ int ZypperBaseCommand::run( Zypper &zypper )
       }
     }
 
-    int code = systemSetup( zypper );
-    if ( code != ZYPPER_EXIT_OK )
+    if ( int code = earlyPositionalArgsCheck( zypper, _positionalArguments ); code != ZYPPER_EXIT_OK )
+      return code;
+
+    if ( int code = systemSetup( zypper ); code != ZYPPER_EXIT_OK )
       return code;
 
     return execute( zypper, _positionalArguments );
