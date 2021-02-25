@@ -22,7 +22,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper.fi\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-07 18:15+0100\n"
+"POT-Creation-Date: 2021-02-25 11:38+0100\n"
 "PO-Revision-Date: 2020-09-25 23:48+0000\n"
 "Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
 "Language-Team: Finnish <https://l10n.opensuse.org/projects/zypper/master/fi/"
@@ -33,698 +33,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Weblate 3.6.1\n"
-
-#: src/SolverRequester.h:52
-#, boost-format
-msgid "Suspicious category filter value '%1%'."
-msgstr "Epäilyttävä luokkasuodattimen arvo \"%1%\"."
-
-#: src/SolverRequester.h:60
-#, boost-format
-msgid "Suspicious severity filter value '%1%'."
-msgstr "Epäilyttävä vakavuussuodattimen arvo \"%1%\"."
-
-#: src/callbacks/keyring.h:32
-msgid ""
-"Signing data enables the recipient to verify that no modifications occurred "
-"after the data were signed. Accepting data with no, wrong or unknown "
-"signature can lead to a corrupted system and in extreme cases even to a "
-"system compromise."
-msgstr ""
-"Allekirjoittamalla datan osapuolet mahdollistavat varmennukset siten, että "
-"muutoksia ei tapahdu datan allekirjoituksen jälkeen. Hyväksyttäessä data "
-"ilman, väärällä, tai tuntemattomalla allekirjoituksella voi johtaa "
-"vialliseen järjestelmään ja äärimmäisissä tapauksissa järjestelmän "
-"vaarantumiseen."
-
-#. translator: %1% is a file name
-#: src/callbacks/keyring.h:40
-#, boost-format
-msgid ""
-"File '%1%' is the repositories master index file. It ensures the integrity "
-"of the whole repo."
-msgstr ""
-"Tiedosto '%1%' on tietovaraston pääindeksitiedosto. Se takaa koko "
-"tietovaraston eheyden."
-
-#: src/callbacks/keyring.h:46
-msgid ""
-"We can't verify that no one meddled with this file, so it might not be "
-"trustworthy anymore! You should not continue unless you know it's safe."
-msgstr ""
-"Emme voi varmentaa ettei tähän tiedostoon ole kajottu, joten se ei "
-"välttämättä ole enää luetettava. Sinun ei tulisi jatkaa jos et tiedä sen "
-"olevan turvallista."
-
-#: src/callbacks/keyring.h:51
-msgid ""
-"This file was modified after it has been signed. This may have been a "
-"malicious change, so it might not be trustworthy anymore! You should not "
-"continue unless you know it's safe."
-msgstr ""
-"Tätä tiedostoa on muokattu allekirjoituksen jälkeen. Tämä saattaa olla "
-"pahantahtoinen muutos, joten se ei enää ole välttämättä luetettava! Sinun ei "
-"tulisi jatkaa, ellet tiedä onko se turvallista."
-
-#: src/callbacks/keyring.h:79
-msgid "Repository:"
-msgstr "Asennuslähde:"
-
-#: src/callbacks/keyring.h:81
-msgid "Key Name:"
-msgstr "Avaimen nimi:"
-
-#: src/callbacks/keyring.h:82
-msgid "Key Fingerprint:"
-msgstr "Avaimen sormenjälki:"
-
-#: src/callbacks/keyring.h:83
-msgid "Key Created:"
-msgstr "Avain luotu:"
-
-#: src/callbacks/keyring.h:84
-msgid "Key Expires:"
-msgstr "Avain vanhentuu:"
-
-#: src/callbacks/keyring.h:86
-msgid "Subkey:"
-msgstr "Aliavain:"
-
-#: src/callbacks/keyring.h:87
-msgid "Rpm Name:"
-msgstr "RPM nimi:"
-
-#: src/callbacks/keyring.h:113
-#, boost-format
-msgid "The gpg key signing file '%1%' has expired."
-msgstr "gpg avaimen allekirjoitustiedosto '%1%' on vanhentunut."
-
-#: src/callbacks/keyring.h:119
-#, boost-format
-msgid "The gpg key signing file '%1%' will expire in %2% day."
-msgid_plural "The gpg key signing file '%1%' will expire in %2% days."
-msgstr[0] "gpg avaimen allekirjoitustiedosto '%1%' vanhenee %2% päivässä."
-msgstr[1] "gpg avaimen allekirjoitustiedosto '%1%' vanhenee %2% päivässä."
-
-#: src/callbacks/keyring.h:142
-#, c-format, boost-format
-msgid "Accepting an unsigned file '%s'."
-msgstr "Hyväksyttiin allekirjoittamaton tiedosto \"%s\"."
-
-#: src/callbacks/keyring.h:146
-#, c-format, boost-format
-msgid "Accepting an unsigned file '%s' from repository '%s'."
-msgstr ""
-"Hyväksyttiin allekirjoittamaton tiedosto \"%s\" asennuslähteestä \"%s\"."
-
-#. translator: %1% is a file name
-#: src/callbacks/keyring.h:156
-#, boost-format
-msgid "File '%1%' is unsigned."
-msgstr "Tiedosto \"%1%\" on allekirjoittamaton."
-
-#. translator: %1% is a file name, %2% a repositories name
-#: src/callbacks/keyring.h:159
-#, boost-format
-msgid "File '%1%' from repository '%2%' is unsigned."
-msgstr "Tiedosto \"%1%\" asennuslähteestä \"%2%\" on allekirjoittamaton."
-
-#. TranslatorExplanation: speaking of a file
-#: src/callbacks/keyring.h:176
-#, c-format, boost-format
-msgid "File '%s' is unsigned, continue?"
-msgstr "Tiedostoa \"%s\" ei ole allekirjoitettu, jatketaanko?"
-
-#. TranslatorExplanation: speaking of a file
-#: src/callbacks/keyring.h:180
-#, c-format, boost-format
-msgid "File '%s' from repository '%s' is unsigned, continue?"
-msgstr ""
-"Tiedostoa \"%s\" asennuslähteestä \"%s\" ei ole allekirjoitettu, jatketaanko?"
-
-#: src/callbacks/keyring.h:203
-#, c-format, boost-format
-msgid "Accepting file '%s' signed with an unknown key '%s'."
-msgstr ""
-"Hyväksyttiin tiedosto \"%s\", joka on allekirjoitettu tuntemattomalla "
-"avaimella \"%s\"."
-
-#: src/callbacks/keyring.h:207
-#, c-format, boost-format
-msgid ""
-"Accepting file '%s' from repository '%s' signed with an unknown key '%s'."
-msgstr ""
-"Hyväksyttiin tiedosto \"%s\" asennuslähteestä \"%s\", joka on "
-"allekirjoitettu tuntemattomalla avaimella \"%s\"."
-
-#. translator: %1% is a file name, %2% is a gpg key ID
-#: src/callbacks/keyring.h:216
-#, boost-format
-msgid "File '%1%' is signed with an unknown key '%2%'."
-msgstr "Tiedosto \"%1%\" on allekirjoitettu tuntemattomalla avaimella \"%2%\"."
-
-#. translator: %1% is a file name, %2% is a gpg key ID, %3% a repositories name
-#: src/callbacks/keyring.h:219
-#, boost-format
-msgid "File '%1%' from repository '%3%' is signed with an unknown key '%2%'."
-msgstr ""
-"Tiedosto \"%1%\" asennuslähteestä \"%3%\" on allekirjoitettu tuntemattomalla "
-"avaimella \"%2%\"."
-
-#. translators: the last %s is gpg key ID
-#: src/callbacks/keyring.h:236
-#, c-format, boost-format
-msgid "File '%s' is signed with an unknown key '%s'. Continue?"
-msgstr ""
-"\"%s\" on allekirjoitettu tuntemattomalla avaimella \"%s\". Jatketaanko?"
-
-#. translators: the last %s is gpg key ID
-#: src/callbacks/keyring.h:240
-#, c-format, boost-format
-msgid ""
-"File '%s' from repository '%s' is signed with an unknown key '%s'. Continue?"
-msgstr ""
-"Tiedosto \"%s\" asennuslähteestä \"%s\" on allekirjoitettu tuntemattomalla "
-"avaimella \"%s\". Jatketaanko?"
-
-#: src/callbacks/keyring.h:260
-msgid "Automatically importing the following key:"
-msgstr "Tuodaan automaattisesti seuraava avain:"
-
-#: src/callbacks/keyring.h:262
-msgid "Automatically trusting the following key:"
-msgstr "Luotettiin automaattisesti seuraavaan avaimeen:"
-
-#: src/callbacks/keyring.h:264
-msgid "New repository or package signing key received:"
-msgstr "Vastaanotettiin uusi asennuslähteen tai paketin avain:"
-
-#. translators: this message is shown after showing description of the key
-#: src/callbacks/keyring.h:287
-msgid "Do you want to reject the key, trust temporarily, or trust always?"
-msgstr "Haluatko evätä, luottaa väliaikaisesti vai luottaa aina avaimeen?"
-
-#. translators: this message is shown after showing description of the key
-#: src/callbacks/keyring.h:290
-msgid "Do you want to reject the key, or trust always?"
-msgstr "Haluatko hylätä avaimen vai luottaa siihen aina?"
-
-#. translators: r/t/a stands for Reject/TrustTemporarily/trustAlways(import)
-#. translate to whatever is appropriate for your language
-#. The anserws must be separated by slash characters '/' and must
-#. correspond to reject/trusttemporarily/trustalways in that order.
-#. The answers should be lower case letters.
-#: src/callbacks/keyring.h:308
-msgid "r/t/a/"
-msgstr "e/l/a"
-
-#. translators: the same as r/t/a, but without 'a'
-#: src/callbacks/keyring.h:311
-msgid "r/t"
-msgstr "e/l"
-
-#. translators: r/a stands for Reject/trustAlways(import)
-#. translate to whatever is appropriate for your language
-#. The anserws must be separated by slash characters '/' and must
-#. correspond to reject/trusttemporarily/trustalways in that order.
-#. The answers should be lower case letters.
-#: src/callbacks/keyring.h:318
-msgid "r/a/"
-msgstr "h/a/"
-
-#. translators: help text for the 'r' option in the 'r/t/a' prompt
-#: src/callbacks/keyring.h:324
-msgid "Don't trust the key."
-msgstr "Ei luoteta avaimeen."
-
-#. translators: help text for the 't' option in the 'r/t/a' prompt
-#: src/callbacks/keyring.h:328
-msgid "Trust the key temporarily."
-msgstr "Luota avaimeen väliaikaisesti."
-
-#. translators: help text for the 'a' option in the 'r/t/a' prompt
-#: src/callbacks/keyring.h:333
-msgid "Trust the key and import it into trusted keyring."
-msgstr "Luota avaimeen ja lisää se avainrenkaaseen."
-
-#: src/callbacks/keyring.h:371
-#, c-format, boost-format
-msgid "Ignoring failed signature verification for file '%s'!"
-msgstr ""
-"Jätettiin huomioimatta epäonnistunut koostetarkistus tiedostossa \"%s\"!"
-
-#: src/callbacks/keyring.h:374
-#, c-format, boost-format
-msgid ""
-"Ignoring failed signature verification for file '%s' from repository '%s'!"
-msgstr ""
-"Jätettiin huomioimatta epäonnistunut aitoustarkistus tiedostossa \"%s\" "
-"asennuslähteestä \"%s\"!"
-
-#: src/callbacks/keyring.h:380
-msgid "Double-check this is not caused by some malicious changes in the file!"
-msgstr "Tarkista, ettei tiedostossa ole pahatahtoisia muutoksia!"
-
-#. translator: %1% is a file name
-#: src/callbacks/keyring.h:390
-#, boost-format
-msgid "Signature verification failed for file '%1%'."
-msgstr "Aitoustarkistus epäonnistui tiedostossa \"%1%\"."
-
-#. translator: %1% is a file name, %2% a repositories name
-#: src/callbacks/keyring.h:393
-#, boost-format
-msgid "Signature verification failed for file '%1%' from repository '%2%'."
-msgstr ""
-"Allekirjoituksen varmistaminen epäonnistui tiedostossa \"%1%\" "
-"asennuslähteestä \"%2%\"."
-
-#: src/callbacks/keyring.h:437
-msgid ""
-"The rpm database seems to contain old V3 version gpg keys which are "
-"meanwhile obsolete and considered insecure:"
-msgstr ""
-"RPM-tietokanta vaikuttaa sisältävän vanhan V3-version GPG-avaimia, joita "
-"vanhentuneina on pidettävä turvattomina:"
-
-#: src/callbacks/keyring.h:444
-#, boost-format
-msgid "To see details about a key call '%1%'."
-msgstr "Katso avaimen tiedot komennolla ”%1%”."
-
-#: src/callbacks/keyring.h:448
-#, boost-format
-msgid ""
-"Unless you believe the key in question is still in use, you can remove it "
-"from the rpm database calling '%1%'."
-msgstr ""
-"Jollet usko avaimen yhä olevan käytössä, voit poistaa sen RPM-tietokannasta "
-"komennolla ”%1%”."
-
-#: src/callbacks/keyring.h:470
-#, c-format, boost-format
-msgid "No digest for file %s."
-msgstr "Ei koostetta tiedostolle %s."
-
-#: src/callbacks/keyring.h:478
-#, c-format, boost-format
-msgid "Unknown digest %s for file %s."
-msgstr "Tuntematon kooste %s tiedostolle %s."
-
-#: src/callbacks/keyring.h:495
-#, boost-format
-msgid ""
-"Digest verification failed for file '%1%'\n"
-"[%2%]\n"
-"\n"
-"  expected %3%\n"
-"  but got  %4%\n"
-msgstr ""
-"Koosteen todennus epäonnistui tiedostossa \"%1%\"\n"
-"[%2%]\n"
-"\n"
-" odotettiin %3%\n"
-" mutta saatiin %4%\n"
-
-#: src/callbacks/keyring.h:507
-msgid ""
-"Accepting packages with wrong checksums can lead to a corrupted system and "
-"in extreme cases even to a system compromise."
-msgstr ""
-"Tarkistussummaltaan virheellisten pakettien hyväksyminen voi johtaa "
-"järjestelmän vioittumiseen ja pahimmassa tapauksessa tietoturvauhkaan."
-
-#: src/callbacks/keyring.h:515
-#, boost-format
-msgid ""
-"However if you made certain that the file with checksum '%1%..' is secure, "
-"correct\n"
-"and should be used within this operation, enter the first 4 characters of "
-"the checksum\n"
-"to unblock using this file on your own risk. Empty input will discard the "
-"file.\n"
-msgstr ""
-"Jos kuitenkin vahvistat, että tiedosto, jonka tarkistussumma on \"%1%\", on "
-"luotettava,\n"
-"oikea ja sitä tulisi käyttää, anna tarkistussumman neljä ensimmäistä merkkiä "
-"poistaaksesi\n"
-"tiedoston eston omalla vastuullasi. Tiedosto hylätään, jos syöte on tyhjä.\n"
-
-#. translators: A prompt option
-#: src/callbacks/keyring.h:522
-msgid "discard"
-msgstr "hylkää"
-
-#. translators: A prompt option help text
-#: src/callbacks/keyring.h:524
-msgid "Unblock using this file on your own risk."
-msgstr "Poista tämän tiedoston esto omalla vastuullasi."
-
-#. translators: A prompt option help text
-#: src/callbacks/keyring.h:526
-msgid "Discard the file."
-msgstr "Hylkää tiedosto."
-
-#. translators: A prompt text
-#: src/callbacks/keyring.h:530
-msgid "Unblock or discard?"
-msgstr "Poistetaanko esto vai hylätäänkö?"
-
-#: src/callbacks/locks.h:27
-msgid ""
-"The following query locks the same objects as the one you want to remove:"
-msgstr "Seuraava kysely lukitsee joitakin kohteista, joita haluat poistaa:"
-
-#: src/callbacks/locks.h:30
-msgid "The following query locks some of the objects you want to unlock:"
-msgstr ""
-"Seuraava kysely lukitsee joitakin kohteista, joiden lukituksen haluat avata:"
-
-#: src/callbacks/locks.h:35 src/callbacks/locks.h:50
-msgid "Do you want to remove this lock?"
-msgstr "Haluatko poistaa tämän lukituksen?"
-
-#: src/callbacks/locks.h:45
-msgid "The following query does not lock anything:"
-msgstr "Seuraava haku ei lukitse mitään:"
-
-#: src/callbacks/repo.h:49
-msgid "Retrieving delta"
-msgstr "Ladataan muunnostiedostoa"
-
-#. translators: this text is a progress display label e.g. "Applying delta foo [42%]"
-#: src/callbacks/repo.h:74
-msgid "Applying delta"
-msgstr "Muunnetaan"
-
-#. TranslatorExplanation %s is package size like "5.6 M"
-#: src/callbacks/repo.h:103
-#, c-format, boost-format
-msgid "(%s unpacked)"
-msgstr "(%s purettuna)"
-
-#: src/callbacks/repo.h:112
-#, boost-format
-msgid "In cache %1%"
-msgstr "Välimuistissa %1%"
-
-#: src/callbacks/repo.h:128
-#, c-format, boost-format
-msgid "Retrieving %s %s-%s.%s"
-msgstr "Ladataan %s %s-%s.%s"
-
-#: src/callbacks/repo.h:217
-msgid "Signature verification failed"
-msgstr "Allekirjoituksen todennus epäonnistui"
-
-#: src/callbacks/repo.h:237
-msgid "Accepting package despite the error."
-msgstr "Hyväksytään paketti virheestä huolimatta."
-
-#. TranslatorExplanation speaking of a script - "Running: script file name (package name, script dir)"
-#: src/callbacks/rpm.h:184
-#, c-format, boost-format
-msgid "Running: %s  (%s, %s)"
-msgstr "Suoritetaan: %s  (%s, %s)"
-
-#: src/callbacks/rpm.h:267
-#, c-format, boost-format
-msgid "Removal of %s failed:"
-msgstr "%s poisto epäonnistui:"
-
-#. translators: This text is a progress display label e.g. "Removing packagename-x.x.x [42%]"
-#: src/callbacks/rpm.h:307
-#, c-format, boost-format
-msgid "Removing %s"
-msgstr "Poistetaan %s"
-
-#: src/callbacks/rpm.h:344
-#, c-format, boost-format
-msgid "Installation of %s failed:"
-msgstr "%s asennus epäonnistui:"
-
-#. TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
-#: src/callbacks/rpm.h:384
-#, c-format, boost-format
-msgid "Installing: %s"
-msgstr "Asennetaan: %s"
-
-#. translators: A progressbar label
-#: src/callbacks/rpm.h:403
-msgid "Checking for file conflicts:"
-msgstr "Tarkistetaan tiedostojen ristiriitoja:"
-
-#. TranslatorExplanation %1%(number of packages); detailed list follows
-#: src/callbacks/rpm.h:454
-#, boost-format
-msgid ""
-"%1% package had to be excluded from file conflicts check because it is not "
-"yet download."
-msgid_plural ""
-"%1% packages had to be excluded from file conflicts check because they are "
-"not yet downloaded."
-msgstr[0] ""
-"%1% -paketti oli jätettävä tiedostokonfliktien tarkistuksen ulkopuolelle, "
-"koska sitä ei ole vielä ladattu."
-msgstr[1] ""
-"%1% -pakettit oli jätettävä tiedostokonfliktien tarkistuksen ulkopuolelle, "
-"koska niitä ei ole vielä ladattu."
-
-#. TranslatorExplanation %1%(commandline option)
-#: src/callbacks/rpm.h:460
-#, boost-format
-msgid ""
-"Checking for file conflicts requires not installed packages to be downloaded "
-"in advance in order to access their file lists. See option '%1%' in the "
-"zypper manual page for details."
-msgstr ""
-"Tiedostojen ristiriitojen tarkistus vaatii asentamattomien pakettien "
-"lataamista etukäteen, jotta saadaan näiden pakettien tiedostolistaus. Katso "
-"lisää valinnasta %1% zypperin man-sivuilta."
-
-#. TranslatorExplanation %1%(number of conflicts); detailed list follows
-#: src/callbacks/rpm.h:470
-#, boost-format
-msgid "Detected %1% file conflict:"
-msgid_plural "Detected %1% file conflicts:"
-msgstr[0] "Havaittiin %1% tiedoston ristiriita:"
-msgstr[1] "Havaittiin %1% tiedostojen ristiriitoja:"
-
-#: src/callbacks/rpm.h:478
-msgid "Conflicting files will be replaced."
-msgstr "Ristiriitaiset tiedostot vaihdetaan."
-
-#. TranslatorExplanation Problem description before asking whether to "Continue? [yes/no] (no):"
-#: src/callbacks/rpm.h:484
-msgid ""
-"File conflicts happen when two packages attempt to install files with the "
-"same name but different contents. If you continue, conflicting files will be "
-"replaced losing the previous content."
-msgstr ""
-"Tiedostojen ristiriitoja tapahtui kun kaksi pakettia yrittävät asentaa "
-"tiedostoja joilla on sama nimi, mutta eri sisältö. Mikäli jatkat, "
-"ristiriitaiset tiedostot korvataan ja edellinen sisältö menetetään."
-
-#. translator: %s is an other command: "This is an alias for 'zypper info -t patch'."
-#: src/commands/commandhelpformatter.h:94
-#, c-format, boost-format
-msgid "This is an alias for '%s'."
-msgstr "Tämä on alias komennolle '%s'."
-
-#: src/commands/commandhelpformatter.h:107
-msgid "Examples:"
-msgstr "Esimerkkejä:"
-
-#: src/commands/commandhelpformatter.h:110
-msgid "Arguments:"
-msgstr "Parametrit:"
-
-#: src/commands/commandhelpformatter.h:123 src/utils/flags/zyppflags.cc:627
-msgid "Command options:"
-msgstr "Komentovalinnat:"
-
-#: src/commands/commandhelpformatter.h:126
-msgid "Solver options:"
-msgstr "Ratkaisinvalinnat:"
-
-#: src/commands/commandhelpformatter.h:129
-msgid "Expert options:"
-msgstr "Asiantuntijavalinnat:"
-
-#: src/commands/commandhelpformatter.h:132
-msgid "This command has no additional options."
-msgstr "Tälle komennolle ei ole lisävalitsimia."
-
-#: src/commands/commandhelpformatter.h:135
-msgid "Legacy options:"
-msgstr "Vanhentuneet valinnat:"
-
-#. translator: '-r             The same as -f.
-#: src/commands/commandhelpformatter.h:139
-#, boost-format
-msgid "The same as %1%."
-msgstr "Sama kuin %1%."
-
-#: src/commands/commandhelpformatter.h:187
-msgid "Usage:"
-msgstr "Käyttö:"
-
-#: src/commands/commandhelpformatter.h:189
-msgid "Global Options:"
-msgstr "Yleisvalinnat:"
-
-#: src/commands/commandhelpformatter.h:191
-msgid "Commands:"
-msgstr "Valinnat:"
-
-#. translators: --details
-#: src/commands/commonflags.h:23 src/commands/inrverify.cc:35
-msgid "Show the detailed installation summary."
-msgstr "Näyttää yksityiskohtaisen yhteenvedon asennuksesta."
-
-#: src/commands/commonflags.h:30
-#, boost-format
-msgid "Type of package (%1%)."
-msgstr "Tyyppi (%1%)."
-
-#. translators: --best-effort
-#: src/commands/commonflags.h:38
-msgid ""
-"Do a 'best effort' approach to update. Updates to a lower than the latest "
-"version are also acceptable."
-msgstr "Mahdollistaa pakettien päivittämisen myös vanhempaan versioon."
-
-#: src/commands/commonflags.h:45
-msgid "Consider only patches which affect the package management itself."
-msgstr "Ota huomioon vain itse paketinhallintaan vaikuttavat korjaukset."
-
-#: src/output/Out.h:26 src/repos.cc:125 src/repos.cc:153
-msgid "Yes"
-msgstr "Kyllä"
-
-#: src/output/Out.h:26 src/locales.cc:72 src/repos.cc:131 src/repos.cc:159
-msgid "No"
-msgstr "Ei"
-
-#. translator: usually followed by a ' ' and some explanatory text
-#: src/output/Out.h:38
-msgid "Note:"
-msgstr "Huomaa:"
-
-#. translator: usually followed by a ' ' and some explanatory text
-#: src/output/Out.h:40
-msgid "Warning:"
-msgstr "Varoitus:"
-
-#. translator: usually followed by a ' ' and some explanatory text
-#: src/output/Out.h:42
-msgid "Error:"
-msgstr "Virhe:"
-
-#: src/output/Out.h:44
-msgid "Continue?"
-msgstr "Jatketaanko?"
-
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:23
-msgid "ALIAS"
-msgstr "ALIAS"
-
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:25
-msgid "ALIAS|#|URI"
-msgstr "ALIAS|#|URI"
-
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:27
-msgid "CATEGORY"
-msgstr "LUOKKA"
-
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:29
-msgid "DIR"
-msgstr "hakemisto"
-
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:31
-msgid "FILE"
-msgstr "TIEDOSTO"
-
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:33
-msgid "FILE.repo"
-msgstr "TIEDOSTO.repo"
-
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:35
-msgid "FORMAT"
-msgstr "MUOTO"
-
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:37
-msgid "INTEGER"
-msgstr "luku"
-
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:39
-msgid "PATH"
-msgstr "SIJAINTI"
-
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:41
-msgid "SEVERITY"
-msgstr "VAKAVUUS"
-
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:43
-msgid "STRING"
-msgstr "MERKKIJONO"
-
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:45
-msgid "TAG"
-msgstr "TUNNISTE"
-
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:47
-msgid "TYPE"
-msgstr "TYYPPI"
-
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#. translators: property name; short; used like "Name: value"
-#: src/utils/flags/zyppflags.h:49 src/commands/repos/list.cc:42
-#: src/commands/repos/list.cc:268 src/commands/services/list.cc:116
-#: src/repos.cc:1254
-msgid "URI"
-msgstr "URI"
-
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:51
-msgid "YYYY-MM-DD"
-msgstr "VVVV-KK-PP"
-
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:53
-msgid "MODE"
-msgstr "TILA"
-
-#. TranslatorExplanation These are reasons for various failures.
-#: src/utils/prompt.h:185
-msgid "Not found"
-msgstr "Ei löytynyt"
-
-# error box title
-#: src/utils/prompt.h:185
-msgid "I/O error"
-msgstr "I/O-virhe"
-
-#: src/utils/prompt.h:185
-msgid "Invalid object"
-msgstr "Virheellinen kohde"
-
-#: src/utils/prompt.h:192
-msgid "Error"
-msgstr "Virhe"
 
 #: src/Command.cc:93
 msgid "Invalid command"
@@ -1303,6 +611,16 @@ msgstr "Tarkoititko %1%?"
 #, c-format, boost-format
 msgid "Ignoring option %s when updating the update stack first."
 msgstr "Sivuutetaan valinta %s päivitettäessä päivityspino ensin."
+
+#: src/SolverRequester.h:52
+#, boost-format
+msgid "Suspicious category filter value '%1%'."
+msgstr "Epäilyttävä luokkasuodattimen arvo \"%1%\"."
+
+#: src/SolverRequester.h:60
+#, boost-format
+msgid "Suspicious severity filter value '%1%'."
+msgstr "Epäilyttävä vakavuussuodattimen arvo \"%1%\"."
 
 #. translator: '%1%' is a products name
 #. '%2%' is a command to call (like 'zypper dup')
@@ -2057,6 +1375,370 @@ msgstr "Valinta %s ei vaikuta täällä. Jätetään huomioimatta."
 msgid "Non-option program arguments: "
 msgstr "Pakolliset ohjelman parametrit: "
 
+#: src/callbacks/keyring.h:32
+msgid ""
+"Signing data enables the recipient to verify that no modifications occurred "
+"after the data were signed. Accepting data with no, wrong or unknown "
+"signature can lead to a corrupted system and in extreme cases even to a "
+"system compromise."
+msgstr ""
+"Allekirjoittamalla datan osapuolet mahdollistavat varmennukset siten, että "
+"muutoksia ei tapahdu datan allekirjoituksen jälkeen. Hyväksyttäessä data "
+"ilman, väärällä, tai tuntemattomalla allekirjoituksella voi johtaa "
+"vialliseen järjestelmään ja äärimmäisissä tapauksissa järjestelmän "
+"vaarantumiseen."
+
+#. translator: %1% is a file name
+#: src/callbacks/keyring.h:40
+#, boost-format
+msgid ""
+"File '%1%' is the repositories master index file. It ensures the integrity "
+"of the whole repo."
+msgstr ""
+"Tiedosto '%1%' on tietovaraston pääindeksitiedosto. Se takaa koko "
+"tietovaraston eheyden."
+
+#: src/callbacks/keyring.h:46
+msgid ""
+"We can't verify that no one meddled with this file, so it might not be "
+"trustworthy anymore! You should not continue unless you know it's safe."
+msgstr ""
+"Emme voi varmentaa ettei tähän tiedostoon ole kajottu, joten se ei "
+"välttämättä ole enää luetettava. Sinun ei tulisi jatkaa jos et tiedä sen "
+"olevan turvallista."
+
+#: src/callbacks/keyring.h:51
+msgid ""
+"This file was modified after it has been signed. This may have been a "
+"malicious change, so it might not be trustworthy anymore! You should not "
+"continue unless you know it's safe."
+msgstr ""
+"Tätä tiedostoa on muokattu allekirjoituksen jälkeen. Tämä saattaa olla "
+"pahantahtoinen muutos, joten se ei enää ole välttämättä luetettava! Sinun ei "
+"tulisi jatkaa, ellet tiedä onko se turvallista."
+
+#: src/callbacks/keyring.h:79
+msgid "Repository:"
+msgstr "Asennuslähde:"
+
+#: src/callbacks/keyring.h:81
+msgid "Key Name:"
+msgstr "Avaimen nimi:"
+
+#: src/callbacks/keyring.h:82
+msgid "Key Fingerprint:"
+msgstr "Avaimen sormenjälki:"
+
+#: src/callbacks/keyring.h:83
+msgid "Key Created:"
+msgstr "Avain luotu:"
+
+#: src/callbacks/keyring.h:84
+msgid "Key Expires:"
+msgstr "Avain vanhentuu:"
+
+#: src/callbacks/keyring.h:86
+msgid "Subkey:"
+msgstr "Aliavain:"
+
+#: src/callbacks/keyring.h:87
+msgid "Rpm Name:"
+msgstr "RPM nimi:"
+
+#: src/callbacks/keyring.h:113
+#, boost-format
+msgid "The gpg key signing file '%1%' has expired."
+msgstr "gpg avaimen allekirjoitustiedosto '%1%' on vanhentunut."
+
+#: src/callbacks/keyring.h:119
+#, boost-format
+msgid "The gpg key signing file '%1%' will expire in %2% day."
+msgid_plural "The gpg key signing file '%1%' will expire in %2% days."
+msgstr[0] "gpg avaimen allekirjoitustiedosto '%1%' vanhenee %2% päivässä."
+msgstr[1] "gpg avaimen allekirjoitustiedosto '%1%' vanhenee %2% päivässä."
+
+#: src/callbacks/keyring.h:142
+#, c-format, boost-format
+msgid "Accepting an unsigned file '%s'."
+msgstr "Hyväksyttiin allekirjoittamaton tiedosto \"%s\"."
+
+#: src/callbacks/keyring.h:146
+#, c-format, boost-format
+msgid "Accepting an unsigned file '%s' from repository '%s'."
+msgstr ""
+"Hyväksyttiin allekirjoittamaton tiedosto \"%s\" asennuslähteestä \"%s\"."
+
+#. translator: %1% is a file name
+#: src/callbacks/keyring.h:156
+#, boost-format
+msgid "File '%1%' is unsigned."
+msgstr "Tiedosto \"%1%\" on allekirjoittamaton."
+
+#. translator: %1% is a file name, %2% a repositories name
+#: src/callbacks/keyring.h:159
+#, boost-format
+msgid "File '%1%' from repository '%2%' is unsigned."
+msgstr "Tiedosto \"%1%\" asennuslähteestä \"%2%\" on allekirjoittamaton."
+
+#. TranslatorExplanation: speaking of a file
+#: src/callbacks/keyring.h:176
+#, c-format, boost-format
+msgid "File '%s' is unsigned, continue?"
+msgstr "Tiedostoa \"%s\" ei ole allekirjoitettu, jatketaanko?"
+
+#. TranslatorExplanation: speaking of a file
+#: src/callbacks/keyring.h:180
+#, c-format, boost-format
+msgid "File '%s' from repository '%s' is unsigned, continue?"
+msgstr ""
+"Tiedostoa \"%s\" asennuslähteestä \"%s\" ei ole allekirjoitettu, jatketaanko?"
+
+#: src/callbacks/keyring.h:203
+#, c-format, boost-format
+msgid "Accepting file '%s' signed with an unknown key '%s'."
+msgstr ""
+"Hyväksyttiin tiedosto \"%s\", joka on allekirjoitettu tuntemattomalla "
+"avaimella \"%s\"."
+
+#: src/callbacks/keyring.h:207
+#, c-format, boost-format
+msgid ""
+"Accepting file '%s' from repository '%s' signed with an unknown key '%s'."
+msgstr ""
+"Hyväksyttiin tiedosto \"%s\" asennuslähteestä \"%s\", joka on "
+"allekirjoitettu tuntemattomalla avaimella \"%s\"."
+
+#. translator: %1% is a file name, %2% is a gpg key ID
+#: src/callbacks/keyring.h:216
+#, boost-format
+msgid "File '%1%' is signed with an unknown key '%2%'."
+msgstr "Tiedosto \"%1%\" on allekirjoitettu tuntemattomalla avaimella \"%2%\"."
+
+#. translator: %1% is a file name, %2% is a gpg key ID, %3% a repositories name
+#: src/callbacks/keyring.h:219
+#, boost-format
+msgid "File '%1%' from repository '%3%' is signed with an unknown key '%2%'."
+msgstr ""
+"Tiedosto \"%1%\" asennuslähteestä \"%3%\" on allekirjoitettu tuntemattomalla "
+"avaimella \"%2%\"."
+
+#. translators: the last %s is gpg key ID
+#: src/callbacks/keyring.h:236
+#, c-format, boost-format
+msgid "File '%s' is signed with an unknown key '%s'. Continue?"
+msgstr ""
+"\"%s\" on allekirjoitettu tuntemattomalla avaimella \"%s\". Jatketaanko?"
+
+#. translators: the last %s is gpg key ID
+#: src/callbacks/keyring.h:240
+#, c-format, boost-format
+msgid ""
+"File '%s' from repository '%s' is signed with an unknown key '%s'. Continue?"
+msgstr ""
+"Tiedosto \"%s\" asennuslähteestä \"%s\" on allekirjoitettu tuntemattomalla "
+"avaimella \"%s\". Jatketaanko?"
+
+#: src/callbacks/keyring.h:260
+msgid "Automatically importing the following key:"
+msgstr "Tuodaan automaattisesti seuraava avain:"
+
+#: src/callbacks/keyring.h:262
+msgid "Automatically trusting the following key:"
+msgstr "Luotettiin automaattisesti seuraavaan avaimeen:"
+
+#: src/callbacks/keyring.h:264
+msgid "New repository or package signing key received:"
+msgstr "Vastaanotettiin uusi asennuslähteen tai paketin avain:"
+
+#. translators: this message is shown after showing description of the key
+#: src/callbacks/keyring.h:287
+msgid "Do you want to reject the key, trust temporarily, or trust always?"
+msgstr "Haluatko evätä, luottaa väliaikaisesti vai luottaa aina avaimeen?"
+
+#. translators: this message is shown after showing description of the key
+#: src/callbacks/keyring.h:290
+msgid "Do you want to reject the key, or trust always?"
+msgstr "Haluatko hylätä avaimen vai luottaa siihen aina?"
+
+#. translators: r/t/a stands for Reject/TrustTemporarily/trustAlways(import)
+#. translate to whatever is appropriate for your language
+#. The anserws must be separated by slash characters '/' and must
+#. correspond to reject/trusttemporarily/trustalways in that order.
+#. The answers should be lower case letters.
+#: src/callbacks/keyring.h:308
+msgid "r/t/a/"
+msgstr "e/l/a"
+
+#. translators: the same as r/t/a, but without 'a'
+#: src/callbacks/keyring.h:311
+msgid "r/t"
+msgstr "e/l"
+
+#. translators: r/a stands for Reject/trustAlways(import)
+#. translate to whatever is appropriate for your language
+#. The anserws must be separated by slash characters '/' and must
+#. correspond to reject/trusttemporarily/trustalways in that order.
+#. The answers should be lower case letters.
+#: src/callbacks/keyring.h:318
+msgid "r/a/"
+msgstr "h/a/"
+
+#. translators: help text for the 'r' option in the 'r/t/a' prompt
+#: src/callbacks/keyring.h:324
+msgid "Don't trust the key."
+msgstr "Ei luoteta avaimeen."
+
+#. translators: help text for the 't' option in the 'r/t/a' prompt
+#: src/callbacks/keyring.h:328
+msgid "Trust the key temporarily."
+msgstr "Luota avaimeen väliaikaisesti."
+
+#. translators: help text for the 'a' option in the 'r/t/a' prompt
+#: src/callbacks/keyring.h:333
+msgid "Trust the key and import it into trusted keyring."
+msgstr "Luota avaimeen ja lisää se avainrenkaaseen."
+
+#: src/callbacks/keyring.h:371
+#, c-format, boost-format
+msgid "Ignoring failed signature verification for file '%s'!"
+msgstr ""
+"Jätettiin huomioimatta epäonnistunut koostetarkistus tiedostossa \"%s\"!"
+
+#: src/callbacks/keyring.h:374
+#, c-format, boost-format
+msgid ""
+"Ignoring failed signature verification for file '%s' from repository '%s'!"
+msgstr ""
+"Jätettiin huomioimatta epäonnistunut aitoustarkistus tiedostossa \"%s\" "
+"asennuslähteestä \"%s\"!"
+
+#: src/callbacks/keyring.h:380
+msgid "Double-check this is not caused by some malicious changes in the file!"
+msgstr "Tarkista, ettei tiedostossa ole pahatahtoisia muutoksia!"
+
+#. translator: %1% is a file name
+#: src/callbacks/keyring.h:390
+#, boost-format
+msgid "Signature verification failed for file '%1%'."
+msgstr "Aitoustarkistus epäonnistui tiedostossa \"%1%\"."
+
+#. translator: %1% is a file name, %2% a repositories name
+#: src/callbacks/keyring.h:393
+#, boost-format
+msgid "Signature verification failed for file '%1%' from repository '%2%'."
+msgstr ""
+"Allekirjoituksen varmistaminen epäonnistui tiedostossa \"%1%\" "
+"asennuslähteestä \"%2%\"."
+
+#: src/callbacks/keyring.h:437
+msgid ""
+"The rpm database seems to contain old V3 version gpg keys which are "
+"meanwhile obsolete and considered insecure:"
+msgstr ""
+"RPM-tietokanta vaikuttaa sisältävän vanhan V3-version GPG-avaimia, joita "
+"vanhentuneina on pidettävä turvattomina:"
+
+#: src/callbacks/keyring.h:444
+#, boost-format
+msgid "To see details about a key call '%1%'."
+msgstr "Katso avaimen tiedot komennolla ”%1%”."
+
+#: src/callbacks/keyring.h:448
+#, boost-format
+msgid ""
+"Unless you believe the key in question is still in use, you can remove it "
+"from the rpm database calling '%1%'."
+msgstr ""
+"Jollet usko avaimen yhä olevan käytössä, voit poistaa sen RPM-tietokannasta "
+"komennolla ”%1%”."
+
+#: src/callbacks/keyring.h:470
+#, c-format, boost-format
+msgid "No digest for file %s."
+msgstr "Ei koostetta tiedostolle %s."
+
+#: src/callbacks/keyring.h:478
+#, c-format, boost-format
+msgid "Unknown digest %s for file %s."
+msgstr "Tuntematon kooste %s tiedostolle %s."
+
+#: src/callbacks/keyring.h:495
+#, boost-format
+msgid ""
+"Digest verification failed for file '%1%'\n"
+"[%2%]\n"
+"\n"
+"  expected %3%\n"
+"  but got  %4%\n"
+msgstr ""
+"Koosteen todennus epäonnistui tiedostossa \"%1%\"\n"
+"[%2%]\n"
+"\n"
+" odotettiin %3%\n"
+" mutta saatiin %4%\n"
+
+#: src/callbacks/keyring.h:507
+msgid ""
+"Accepting packages with wrong checksums can lead to a corrupted system and "
+"in extreme cases even to a system compromise."
+msgstr ""
+"Tarkistussummaltaan virheellisten pakettien hyväksyminen voi johtaa "
+"järjestelmän vioittumiseen ja pahimmassa tapauksessa tietoturvauhkaan."
+
+#: src/callbacks/keyring.h:515
+#, boost-format
+msgid ""
+"However if you made certain that the file with checksum '%1%..' is secure, "
+"correct\n"
+"and should be used within this operation, enter the first 4 characters of "
+"the checksum\n"
+"to unblock using this file on your own risk. Empty input will discard the "
+"file.\n"
+msgstr ""
+"Jos kuitenkin vahvistat, että tiedosto, jonka tarkistussumma on \"%1%\", on "
+"luotettava,\n"
+"oikea ja sitä tulisi käyttää, anna tarkistussumman neljä ensimmäistä merkkiä "
+"poistaaksesi\n"
+"tiedoston eston omalla vastuullasi. Tiedosto hylätään, jos syöte on tyhjä.\n"
+
+#. translators: A prompt option
+#: src/callbacks/keyring.h:522
+msgid "discard"
+msgstr "hylkää"
+
+#. translators: A prompt option help text
+#: src/callbacks/keyring.h:524
+msgid "Unblock using this file on your own risk."
+msgstr "Poista tämän tiedoston esto omalla vastuullasi."
+
+#. translators: A prompt option help text
+#: src/callbacks/keyring.h:526
+msgid "Discard the file."
+msgstr "Hylkää tiedosto."
+
+#. translators: A prompt text
+#: src/callbacks/keyring.h:530
+msgid "Unblock or discard?"
+msgstr "Poistetaanko esto vai hylätäänkö?"
+
+#: src/callbacks/locks.h:27
+msgid ""
+"The following query locks the same objects as the one you want to remove:"
+msgstr "Seuraava kysely lukitsee joitakin kohteista, joita haluat poistaa:"
+
+#: src/callbacks/locks.h:30
+msgid "The following query locks some of the objects you want to unlock:"
+msgstr ""
+"Seuraava kysely lukitsee joitakin kohteista, joiden lukituksen haluat avata:"
+
+#: src/callbacks/locks.h:35 src/callbacks/locks.h:50
+msgid "Do you want to remove this lock?"
+msgstr "Haluatko poistaa tämän lukituksen?"
+
+#: src/callbacks/locks.h:45
+msgid "The following query does not lock anything:"
+msgstr "Seuraava haku ei lukitse mitään:"
+
 #. help text for the "Abort, retry, ignore?" prompt for media errors
 #: src/callbacks/media.cc:27
 msgid "Skip retrieval of the file and abort current operation."
@@ -2190,6 +1872,196 @@ msgstr "Käyttäjätunnus"
 #: src/callbacks/media.cc:328
 msgid "Password"
 msgstr "Salasana"
+
+#: src/callbacks/repo.h:49
+msgid "Retrieving delta"
+msgstr "Ladataan muunnostiedostoa"
+
+#. translators: this text is a progress display label e.g. "Applying delta foo [42%]"
+#: src/callbacks/repo.h:74
+msgid "Applying delta"
+msgstr "Muunnetaan"
+
+#. TranslatorExplanation %s is package size like "5.6 M"
+#: src/callbacks/repo.h:103
+#, c-format, boost-format
+msgid "(%s unpacked)"
+msgstr "(%s purettuna)"
+
+#: src/callbacks/repo.h:112
+#, boost-format
+msgid "In cache %1%"
+msgstr "Välimuistissa %1%"
+
+#: src/callbacks/repo.h:128
+#, c-format, boost-format
+msgid "Retrieving %s %s-%s.%s"
+msgstr "Ladataan %s %s-%s.%s"
+
+#: src/callbacks/repo.h:217
+msgid "Signature verification failed"
+msgstr "Allekirjoituksen todennus epäonnistui"
+
+#: src/callbacks/repo.h:237
+msgid "Accepting package despite the error."
+msgstr "Hyväksytään paketti virheestä huolimatta."
+
+#. TranslatorExplanation speaking of a script - "Running: script file name (package name, script dir)"
+#: src/callbacks/rpm.h:184
+#, c-format, boost-format
+msgid "Running: %s  (%s, %s)"
+msgstr "Suoritetaan: %s  (%s, %s)"
+
+#: src/callbacks/rpm.h:267
+#, c-format, boost-format
+msgid "Removal of %s failed:"
+msgstr "%s poisto epäonnistui:"
+
+#. translators: This text is a progress display label e.g. "Removing packagename-x.x.x [42%]"
+#: src/callbacks/rpm.h:307
+#, c-format, boost-format
+msgid "Removing %s"
+msgstr "Poistetaan %s"
+
+#: src/callbacks/rpm.h:344
+#, c-format, boost-format
+msgid "Installation of %s failed:"
+msgstr "%s asennus epäonnistui:"
+
+#. TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
+#: src/callbacks/rpm.h:384
+#, c-format, boost-format
+msgid "Installing: %s"
+msgstr "Asennetaan: %s"
+
+#. translators: A progressbar label
+#: src/callbacks/rpm.h:403
+msgid "Checking for file conflicts:"
+msgstr "Tarkistetaan tiedostojen ristiriitoja:"
+
+#. TranslatorExplanation %1%(number of packages); detailed list follows
+#: src/callbacks/rpm.h:454
+#, boost-format
+msgid ""
+"%1% package had to be excluded from file conflicts check because it is not "
+"yet download."
+msgid_plural ""
+"%1% packages had to be excluded from file conflicts check because they are "
+"not yet downloaded."
+msgstr[0] ""
+"%1% -paketti oli jätettävä tiedostokonfliktien tarkistuksen ulkopuolelle, "
+"koska sitä ei ole vielä ladattu."
+msgstr[1] ""
+"%1% -pakettit oli jätettävä tiedostokonfliktien tarkistuksen ulkopuolelle, "
+"koska niitä ei ole vielä ladattu."
+
+#. TranslatorExplanation %1%(commandline option)
+#: src/callbacks/rpm.h:460
+#, boost-format
+msgid ""
+"Checking for file conflicts requires not installed packages to be downloaded "
+"in advance in order to access their file lists. See option '%1%' in the "
+"zypper manual page for details."
+msgstr ""
+"Tiedostojen ristiriitojen tarkistus vaatii asentamattomien pakettien "
+"lataamista etukäteen, jotta saadaan näiden pakettien tiedostolistaus. Katso "
+"lisää valinnasta %1% zypperin man-sivuilta."
+
+#. TranslatorExplanation %1%(number of conflicts); detailed list follows
+#: src/callbacks/rpm.h:470
+#, boost-format
+msgid "Detected %1% file conflict:"
+msgid_plural "Detected %1% file conflicts:"
+msgstr[0] "Havaittiin %1% tiedoston ristiriita:"
+msgstr[1] "Havaittiin %1% tiedostojen ristiriitoja:"
+
+#: src/callbacks/rpm.h:478
+msgid "Conflicting files will be replaced."
+msgstr "Ristiriitaiset tiedostot vaihdetaan."
+
+#. TranslatorExplanation Problem description before asking whether to "Continue? [yes/no] (no):"
+#: src/callbacks/rpm.h:484
+msgid ""
+"File conflicts happen when two packages attempt to install files with the "
+"same name but different contents. If you continue, conflicting files will be "
+"replaced losing the previous content."
+msgstr ""
+"Tiedostojen ristiriitoja tapahtui kun kaksi pakettia yrittävät asentaa "
+"tiedostoja joilla on sama nimi, mutta eri sisältö. Mikäli jatkat, "
+"ristiriitaiset tiedostot korvataan ja edellinen sisältö menetetään."
+
+#. translator: %s is an other command: "This is an alias for 'zypper info -t patch'."
+#: src/commands/commandhelpformatter.h:94
+#, c-format, boost-format
+msgid "This is an alias for '%s'."
+msgstr "Tämä on alias komennolle '%s'."
+
+#: src/commands/commandhelpformatter.h:107
+msgid "Examples:"
+msgstr "Esimerkkejä:"
+
+#: src/commands/commandhelpformatter.h:110
+msgid "Arguments:"
+msgstr "Parametrit:"
+
+#: src/commands/commandhelpformatter.h:123 src/utils/flags/zyppflags.cc:627
+msgid "Command options:"
+msgstr "Komentovalinnat:"
+
+#: src/commands/commandhelpformatter.h:126
+msgid "Solver options:"
+msgstr "Ratkaisinvalinnat:"
+
+#: src/commands/commandhelpformatter.h:129
+msgid "Expert options:"
+msgstr "Asiantuntijavalinnat:"
+
+#: src/commands/commandhelpformatter.h:132
+msgid "This command has no additional options."
+msgstr "Tälle komennolle ei ole lisävalitsimia."
+
+#: src/commands/commandhelpformatter.h:135
+msgid "Legacy options:"
+msgstr "Vanhentuneet valinnat:"
+
+#. translator: '-r             The same as -f.
+#: src/commands/commandhelpformatter.h:139
+#, boost-format
+msgid "The same as %1%."
+msgstr "Sama kuin %1%."
+
+#: src/commands/commandhelpformatter.h:187
+msgid "Usage:"
+msgstr "Käyttö:"
+
+#: src/commands/commandhelpformatter.h:189
+msgid "Global Options:"
+msgstr "Yleisvalinnat:"
+
+#: src/commands/commandhelpformatter.h:191
+msgid "Commands:"
+msgstr "Valinnat:"
+
+#. translators: --details
+#: src/commands/commonflags.h:23 src/commands/inrverify.cc:35
+msgid "Show the detailed installation summary."
+msgstr "Näyttää yksityiskohtaisen yhteenvedon asennuksesta."
+
+#: src/commands/commonflags.h:30
+#, boost-format
+msgid "Type of package (%1%)."
+msgstr "Tyyppi (%1%)."
+
+#. translators: --best-effort
+#: src/commands/commonflags.h:38
+msgid ""
+"Do a 'best effort' approach to update. Updates to a lower than the latest "
+"version are also acceptable."
+msgstr "Mahdollistaa pakettien päivittämisen myös vanhempaan versioon."
+
+#: src/commands/commonflags.h:45
+msgid "Consider only patches which affect the package management itself."
+msgstr "Ota huomioon vain itse paketinhallintaan vaikuttavat korjaukset."
 
 #: src/commands/conditions.cc:19
 msgid "Root privileges are required to run this command."
@@ -2566,37 +2438,42 @@ msgstr ""
 msgid "Do not remove corresponding packages for given locale(s)."
 msgstr "Älä poista annettuja maa-asetuksia vastaavia paketteja."
 
-# =============================================================================
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
 #: src/commands/locks/add.cc:29
-msgid "addlock (al) [OPTIONS] <PACKAGENAME> ..."
-msgstr "addlock (al) [valinnat] <paketin nimi> ..."
+msgid "addlock (al) [OPTIONS] <LOCKSPEC>..."
+msgstr ""
 
 #. translators: command summary
-#: src/commands/locks/add.cc:31
+#: src/commands/locks/add.cc:31 src/commands/locks/add.cc:34
 msgid "Add a package lock."
 msgstr "Lukitsee paketin."
 
-#. translators: command description
-#: src/commands/locks/add.cc:33
+#: src/commands/locks/add.cc:35
 msgid ""
-"Add a package lock. Specify packages to lock by exact name or by a glob "
-"pattern using '*' and '?' wildcard characters."
+"LOCKSPEC is formed by '[KIND:]NAME[ OP EDITION]', where NAME may also be a "
+"glob pattern using * and ? wildcard characters. Non-package types may to "
+"have their KIND: string prepended (e.g. 'patch:foo') or use the commands --"
+"type option."
 msgstr ""
-"Lukitsee paketteja. Voit joko määrittää paketin tarkan nimen tai käyttää "
-"jokerimerkkejä: \"*\" ja \"?\"."
 
-#: src/commands/locks/add.cc:42
+#: src/commands/locks/add.cc:36
+msgid ""
+"The basic form will lock all editions of the matching items. You can "
+"optionally restrict the lock to match a specific edition or edition range "
+"using =, <, <=, >, >= or != followed an EDITION."
+msgstr ""
+
+#: src/commands/locks/add.cc:46
 msgid "Restrict the lock to the specified repository."
 msgstr "Rajoita lukitus vain tiettyyn asennuslähteeseen."
 
-#: src/commands/locks/add.cc:76
+#: src/commands/locks/add.cc:80
 msgid "Specified lock has been successfully added."
 msgid_plural "Specified locks have been successfully added."
 msgstr[0] "Pakettilukon määritys onnistui."
 msgstr[1] "Pakettilukkojen määritys onnistui."
 
-#: src/commands/locks/add.cc:83
+#: src/commands/locks/add.cc:87
 msgid "Problem adding the package lock:"
 msgstr "Virhe lukittaessa pakettia:"
 
@@ -3439,6 +3316,14 @@ msgstr "Puhdistaa sekä metatieto- että pakettivälimuistit."
 #: src/commands/services/list.cc:104
 msgid "Alias"
 msgstr "Alias"
+
+#. translators: property name; short; used like "Name: value"
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/commands/repos/list.cc:42 src/commands/repos/list.cc:268
+#: src/commands/services/list.cc:116 src/repos.cc:1254
+#: src/utils/flags/zyppflags.h:49
+msgid "URI"
+msgstr "URI"
 
 # kpowersave.cpp: tooltip
 #. 'enabled' flag
@@ -4952,32 +4837,32 @@ msgstr ""
 "kunkin vastaavan paketin paras versio."
 
 #. translators: Label text; is followed by ': cmdline argument'
-#: src/commands/utils/download.cc:235
+#: src/commands/utils/download.cc:237
 msgid "Argument resolves to no package"
 msgstr "Argumentti ei ratkaise mitään pakettia"
 
-#: src/commands/utils/download.cc:250 src/solve-commit.cc:935
+#: src/commands/utils/download.cc:252 src/solve-commit.cc:935
 msgid "Nothing to do."
 msgstr "Ei tehtävää."
 
-#: src/commands/utils/download.cc:257
+#: src/commands/utils/download.cc:259
 msgid "No prune to best version."
 msgstr "Älä karsi parhaaseen versioon."
 
-#: src/commands/utils/download.cc:263
+#: src/commands/utils/download.cc:265
 msgid "Prune to best version..."
 msgstr "Typistä parhaaseen versioon..."
 
-#: src/commands/utils/download.cc:269
+#: src/commands/utils/download.cc:271
 msgid "Not downloading anything..."
 msgstr "Mitään ei ladata..."
 
-#: src/commands/utils/download.cc:312
+#: src/commands/utils/download.cc:314
 #, c-format, boost-format
 msgid "Error downloading package '%s'."
 msgstr "Virhe ladattaessa pakettia '%s'."
 
-#: src/commands/utils/download.cc:326
+#: src/commands/utils/download.cc:328
 #, c-format, boost-format
 msgid "Not downloading package '%s'."
 msgstr "Pakettia '%s' ei ladata."
@@ -5460,6 +5345,10 @@ msgstr "Pyydetty"
 msgid "Fallback"
 msgstr "Vara"
 
+#: src/locales.cc:72 src/output/Out.h:26 src/repos.cc:131 src/repos.cc:159
+msgid "No"
+msgstr "Ei"
+
 #. translators: header of table column - the language code, e.g. en_US
 #: src/locales.cc:174
 msgid "Code"
@@ -5609,6 +5498,29 @@ msgstr "Lähdekoodipaketti %s-%s asennettiin onnistuneesti."
 #, c-format, boost-format
 msgid "Problem installing source package %s-%s:"
 msgstr "Virhe asennettaessa lähdekoodipakettia %s-%s:"
+
+#: src/output/Out.h:26 src/repos.cc:125 src/repos.cc:153
+msgid "Yes"
+msgstr "Kyllä"
+
+#. translator: usually followed by a ' ' and some explanatory text
+#: src/output/Out.h:40
+msgid "Note:"
+msgstr "Huomaa:"
+
+#. translator: usually followed by a ' ' and some explanatory text
+#: src/output/Out.h:42
+msgid "Warning:"
+msgstr "Varoitus:"
+
+#. translator: usually followed by a ' ' and some explanatory text
+#: src/output/Out.h:44
+msgid "Error:"
+msgstr "Virhe:"
+
+#: src/output/Out.h:46
+msgid "Continue?"
+msgstr "Jatketaanko?"
 
 #. Since this message will be emitted before we know if the current output is XML or Normal we need to send this message to stderr
 #. to not break scripts that use xml output (bsc#1172925)
@@ -6766,6 +6678,81 @@ msgstr "Rajojen ulkopuolella"
 msgid "Unknown error while assigning the value %1% to flag %2%."
 msgstr "Tuntematon virhe osoitettaessa arvoa %1% lipulle %2%."
 
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:23
+msgid "ALIAS"
+msgstr "ALIAS"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:25
+msgid "ALIAS|#|URI"
+msgstr "ALIAS|#|URI"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:27
+msgid "CATEGORY"
+msgstr "LUOKKA"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:29
+msgid "DIR"
+msgstr "hakemisto"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:31
+msgid "FILE"
+msgstr "TIEDOSTO"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:33
+msgid "FILE.repo"
+msgstr "TIEDOSTO.repo"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:35
+msgid "FORMAT"
+msgstr "MUOTO"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:37
+msgid "INTEGER"
+msgstr "luku"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:39
+msgid "PATH"
+msgstr "SIJAINTI"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:41
+msgid "SEVERITY"
+msgstr "VAKAVUUS"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:43
+msgid "STRING"
+msgstr "MERKKIJONO"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:45
+msgid "TAG"
+msgstr "TUNNISTE"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:47
+msgid "TYPE"
+msgstr "TYYPPI"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:51
+msgid "YYYY-MM-DD"
+msgstr "VVVV-KK-PP"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:53
+msgid "MODE"
+msgstr "TILA"
+
 #. For '-garbage' argument, with 'a', 'b', and 'e' as known options,
 #. getopt_long reports 'a', 'b', and 'e' as known options.
 #. The rest ends here and it is either the last one from previous argument
@@ -7116,6 +7103,35 @@ msgid ""
 msgstr ""
 "Ellei muu auta, valitse ensimmäinen valinta  antamalla \"#1\", toinen "
 "antamalla ”#2” jne…"
+
+#. TranslatorExplanation These are reasons for various failures.
+#: src/utils/prompt.h:185
+msgid "Not found"
+msgstr "Ei löytynyt"
+
+# error box title
+#: src/utils/prompt.h:185
+msgid "I/O error"
+msgstr "I/O-virhe"
+
+#: src/utils/prompt.h:185
+msgid "Invalid object"
+msgstr "Virheellinen kohde"
+
+#: src/utils/prompt.h:192
+msgid "Error"
+msgstr "Virhe"
+
+# =============================================================================
+#~ msgid "addlock (al) [OPTIONS] <PACKAGENAME> ..."
+#~ msgstr "addlock (al) [valinnat] <paketin nimi> ..."
+
+#~ msgid ""
+#~ "Add a package lock. Specify packages to lock by exact name or by a glob "
+#~ "pattern using '*' and '?' wildcard characters."
+#~ msgstr ""
+#~ "Lukitsee paketteja. Voit joko määrittää paketin tarkan nimen tai käyttää "
+#~ "jokerimerkkejä: \"*\" ja \"?\"."
 
 #~ msgid ""
 #~ "Download all source rpms to this directory. Default: /var/cache/zypper/"

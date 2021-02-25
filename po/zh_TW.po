@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-07 18:15+0100\n"
+"POT-Creation-Date: 2021-02-25 11:38+0100\n"
 "PO-Revision-Date: 2020-12-24 17:27+0000\n"
 "Last-Translator: slb <shenlebantongying@gmail.com>\n"
 "Language-Team: Chinese (Taiwan) <https://l10n.opensuse.org/projects/zypper/"
@@ -23,662 +23,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Weblate 3.6.1\n"
-
-#: src/SolverRequester.h:52
-#, boost-format
-msgid "Suspicious category filter value '%1%'."
-msgstr "類別過濾值 '%1%' 可疑。"
-
-#: src/SolverRequester.h:60
-#, boost-format
-msgid "Suspicious severity filter value '%1%'."
-msgstr "安全性過濾值 '%1%' 可疑。"
-
-#: src/callbacks/keyring.h:32
-msgid ""
-"Signing data enables the recipient to verify that no modifications occurred "
-"after the data were signed. Accepting data with no, wrong or unknown "
-"signature can lead to a corrupted system and in extreme cases even to a "
-"system compromise."
-msgstr ""
-"資料簽名可讓接收者能夠驗證資料被簽名後並無變動。接受無簽名或者簽名錯誤或未知"
-"的資料可能導致系統毀損，在極端情況下甚至會導致系統被入侵。"
-
-#. translator: %1% is a file name
-#: src/callbacks/keyring.h:40
-#, boost-format
-msgid ""
-"File '%1%' is the repositories master index file. It ensures the integrity "
-"of the whole repo."
-msgstr "檔案「%1%」是套件庫主索引檔案。它可確保整個套件庫的完整性。"
-
-#: src/callbacks/keyring.h:46
-msgid ""
-"We can't verify that no one meddled with this file, so it might not be "
-"trustworthy anymore! You should not continue unless you know it's safe."
-msgstr ""
-"我們無法確認此檔案是否曾受到他人的干預，因此它可能不再可信！除非您確定該檔案"
-"安全，否則不應繼續。"
-
-#: src/callbacks/keyring.h:51
-msgid ""
-"This file was modified after it has been signed. This may have been a "
-"malicious change, so it might not be trustworthy anymore! You should not "
-"continue unless you know it's safe."
-msgstr ""
-"此檔案簽章後已被修改。這可能是惡意變更，因此該檔案可能不再可信！除非您確定該"
-"檔案安全，否則不應繼續。"
-
-#: src/callbacks/keyring.h:79
-msgid "Repository:"
-msgstr "套件庫："
-
-#: src/callbacks/keyring.h:81
-msgid "Key Name:"
-msgstr "金鑰名稱："
-
-#: src/callbacks/keyring.h:82
-msgid "Key Fingerprint:"
-msgstr "金鑰指紋："
-
-#: src/callbacks/keyring.h:83
-msgid "Key Created:"
-msgstr "金鑰建立日期："
-
-#: src/callbacks/keyring.h:84
-msgid "Key Expires:"
-msgstr "金鑰過期日期："
-
-#: src/callbacks/keyring.h:86
-msgid "Subkey:"
-msgstr "子金鈅："
-
-#: src/callbacks/keyring.h:87
-msgid "Rpm Name:"
-msgstr "RPM 名稱："
-
-#: src/callbacks/keyring.h:113
-#, boost-format
-msgid "The gpg key signing file '%1%' has expired."
-msgstr "gpg 金鑰簽章的檔案 '%1%' 已過期。"
-
-#: src/callbacks/keyring.h:119
-#, boost-format
-msgid "The gpg key signing file '%1%' will expire in %2% day."
-msgid_plural "The gpg key signing file '%1%' will expire in %2% days."
-msgstr[0] "gpg 金鑰簽章的檔案 '%1%' 將在 %2% 天後過期。"
-
-#: src/callbacks/keyring.h:142
-#, c-format, boost-format
-msgid "Accepting an unsigned file '%s'."
-msgstr "正在接受一個未簽章的檔案 '%s'。"
-
-#: src/callbacks/keyring.h:146
-#, c-format, boost-format
-msgid "Accepting an unsigned file '%s' from repository '%s'."
-msgstr "正在接受一個未簽章的檔案 '%s' (來自套件庫 '%s')。"
-
-#. translator: %1% is a file name
-#: src/callbacks/keyring.h:156
-#, boost-format
-msgid "File '%1%' is unsigned."
-msgstr "檔案「%s」未簽章。"
-
-#. translator: %1% is a file name, %2% a repositories name
-#: src/callbacks/keyring.h:159
-#, boost-format
-msgid "File '%1%' from repository '%2%' is unsigned."
-msgstr "套件庫「%2%」中的檔案「%1%」未簽章。"
-
-#. TranslatorExplanation: speaking of a file
-#: src/callbacks/keyring.h:176
-#, c-format, boost-format
-msgid "File '%s' is unsigned, continue?"
-msgstr "檔案 '%s' 未簽章，要繼續嗎？"
-
-#. TranslatorExplanation: speaking of a file
-#: src/callbacks/keyring.h:180
-#, c-format, boost-format
-msgid "File '%s' from repository '%s' is unsigned, continue?"
-msgstr "檔案 ′%s′ (來自套件庫 ′%s′) 未簽章，要繼續嗎？"
-
-#: src/callbacks/keyring.h:203
-#, c-format, boost-format
-msgid "Accepting file '%s' signed with an unknown key '%s'."
-msgstr "正在接受檔案 '%s'，此檔案使用未知的金鑰 '%s' 簽章。"
-
-#: src/callbacks/keyring.h:207
-#, c-format, boost-format
-msgid ""
-"Accepting file '%s' from repository '%s' signed with an unknown key '%s'."
-msgstr "正在接受檔案 ′%s′ (來自套件庫 ′%s′)，此檔案使用未知的金鑰 '%s' 簽章。"
-
-#. translator: %1% is a file name, %2% is a gpg key ID
-#: src/callbacks/keyring.h:216
-#, boost-format
-msgid "File '%1%' is signed with an unknown key '%2%'."
-msgstr "檔案「%1%」是以未知金鑰「%2%」簽章。"
-
-#. translator: %1% is a file name, %2% is a gpg key ID, %3% a repositories name
-#: src/callbacks/keyring.h:219
-#, boost-format
-msgid "File '%1%' from repository '%3%' is signed with an unknown key '%2%'."
-msgstr "套件庫「%3%」中的檔案「%1%」是以未知金鑰「%2%」簽章。"
-
-#. translators: the last %s is gpg key ID
-#: src/callbacks/keyring.h:236
-#, c-format, boost-format
-msgid "File '%s' is signed with an unknown key '%s'. Continue?"
-msgstr "檔案 '%s' 是以不明金鑰 '%s' 簽章。要繼續嗎？"
-
-#. translators: the last %s is gpg key ID
-#: src/callbacks/keyring.h:240
-#, c-format, boost-format
-msgid ""
-"File '%s' from repository '%s' is signed with an unknown key '%s'. Continue?"
-msgstr "檔案 '%s' (來自套件庫 '%s') 是以不明金鑰 '%s' 簽章。要繼續嗎？"
-
-#: src/callbacks/keyring.h:260
-msgid "Automatically importing the following key:"
-msgstr "自動匯入下列金鑰："
-
-#: src/callbacks/keyring.h:262
-msgid "Automatically trusting the following key:"
-msgstr "自動信任下列金鑰："
-
-#: src/callbacks/keyring.h:264
-msgid "New repository or package signing key received:"
-msgstr "收到新的套件庫或套件簽署金鑰："
-
-#. translators: this message is shown after showing description of the key
-#: src/callbacks/keyring.h:287
-msgid "Do you want to reject the key, trust temporarily, or trust always?"
-msgstr "您想要拒絕此金鑰，暫時信任，或永遠信任？"
-
-#. translators: this message is shown after showing description of the key
-#: src/callbacks/keyring.h:290
-msgid "Do you want to reject the key, or trust always?"
-msgstr "您想要拒絕此金鑰，還是永遠信任？"
-
-#. translators: r/t/a stands for Reject/TrustTemporarily/trustAlways(import)
-#. translate to whatever is appropriate for your language
-#. The anserws must be separated by slash characters '/' and must
-#. correspond to reject/trusttemporarily/trustalways in that order.
-#. The answers should be lower case letters.
-#: src/callbacks/keyring.h:308
-msgid "r/t/a/"
-msgstr "r/t/a/"
-
-#. translators: the same as r/t/a, but without 'a'
-#: src/callbacks/keyring.h:311
-msgid "r/t"
-msgstr "r/t"
-
-#. translators: r/a stands for Reject/trustAlways(import)
-#. translate to whatever is appropriate for your language
-#. The anserws must be separated by slash characters '/' and must
-#. correspond to reject/trusttemporarily/trustalways in that order.
-#. The answers should be lower case letters.
-#: src/callbacks/keyring.h:318
-msgid "r/a/"
-msgstr "r/a/"
-
-#. translators: help text for the 'r' option in the 'r/t/a' prompt
-#: src/callbacks/keyring.h:324
-msgid "Don't trust the key."
-msgstr "不要信任此金鑰。"
-
-#. translators: help text for the 't' option in the 'r/t/a' prompt
-#: src/callbacks/keyring.h:328
-msgid "Trust the key temporarily."
-msgstr "暫時信任此金鑰。"
-
-#. translators: help text for the 'a' option in the 'r/t/a' prompt
-#: src/callbacks/keyring.h:333
-msgid "Trust the key and import it into trusted keyring."
-msgstr "信任此金鑰並匯入到信任的金鑰圈。"
-
-#: src/callbacks/keyring.h:371
-#, c-format, boost-format
-msgid "Ignoring failed signature verification for file '%s'!"
-msgstr "正在忽略檔案 '%s' 的失敗簽章驗證！"
-
-#: src/callbacks/keyring.h:374
-#, c-format, boost-format
-msgid ""
-"Ignoring failed signature verification for file '%s' from repository '%s'!"
-msgstr "正在忽略檔案 '%s' (來自套件庫 '%s') 的失敗簽章驗證！"
-
-#: src/callbacks/keyring.h:380
-msgid "Double-check this is not caused by some malicious changes in the file!"
-msgstr "請再次確認這並非是因為檔案遭到惡意修改所造成的！"
-
-#. translator: %1% is a file name
-#: src/callbacks/keyring.h:390
-#, boost-format
-msgid "Signature verification failed for file '%1%'."
-msgstr "檔案 '%1%' 的簽章驗證失敗。"
-
-#. translator: %1% is a file name, %2% a repositories name
-#: src/callbacks/keyring.h:393
-#, boost-format
-msgid "Signature verification failed for file '%1%' from repository '%2%'."
-msgstr "檔案 '%1%' (來自套件庫 '%2%') 的簽章驗證失敗。"
-
-#: src/callbacks/keyring.h:437
-msgid ""
-"The rpm database seems to contain old V3 version gpg keys which are "
-"meanwhile obsolete and considered insecure:"
-msgstr ""
-"該 RPM 資料庫看似包含了舊的 V3 版本 GPG 金鑰，這些金鑰已經廢棄，因此被認為是"
-"不安全的："
-
-#: src/callbacks/keyring.h:444
-#, boost-format
-msgid "To see details about a key call '%1%'."
-msgstr "檢視呼叫「%1%」的金鑰詳細資訊。"
-
-#: src/callbacks/keyring.h:448
-#, boost-format
-msgid ""
-"Unless you believe the key in question is still in use, you can remove it "
-"from the rpm database calling '%1%'."
-msgstr ""
-"除非您相信這些有問題的金鑰仍在使用當中，否則您可以從 RPM 資料庫中呼叫「%1%」"
-"移除它們。"
-
-#: src/callbacks/keyring.h:470
-#, c-format, boost-format
-msgid "No digest for file %s."
-msgstr "檔案 %s 無摘要。"
-
-#: src/callbacks/keyring.h:478
-#, c-format, boost-format
-msgid "Unknown digest %s for file %s."
-msgstr "不明摘要 %s (檔案 %s)。"
-
-#: src/callbacks/keyring.h:495
-#, boost-format
-msgid ""
-"Digest verification failed for file '%1%'\n"
-"[%2%]\n"
-"\n"
-"  expected %3%\n"
-"  but got  %4%\n"
-msgstr ""
-"檔案 '%1%' 訊息摘要驗證錯誤\n"
-"[%2%]\n"
-"\n"
-"  預期為 %3%\n"
-"  實際為 %4%\n"
-
-#: src/callbacks/keyring.h:507
-msgid ""
-"Accepting packages with wrong checksums can lead to a corrupted system and "
-"in extreme cases even to a system compromise."
-msgstr "接受帶有錯誤檢查總數的套件會導致系統損壞，甚至危及系統安全。"
-
-#: src/callbacks/keyring.h:515
-#, boost-format
-msgid ""
-"However if you made certain that the file with checksum '%1%..' is secure, "
-"correct\n"
-"and should be used within this operation, enter the first 4 characters of "
-"the checksum\n"
-"to unblock using this file on your own risk. Empty input will discard the "
-"file.\n"
-msgstr ""
-"然而，若您確定該檔案 (檢核碼 '%1%..') 是安全且正確的，在此操作中應該要使用"
-"它，\n"
-"請輸入檢核碼的前 4 個字元來取消阻擋該檔案，並請您自負風險。空白輸入將直接放棄"
-"該檔案。\n"
-
-#. translators: A prompt option
-#: src/callbacks/keyring.h:522
-msgid "discard"
-msgstr "放棄"
-
-#. translators: A prompt option help text
-#: src/callbacks/keyring.h:524
-msgid "Unblock using this file on your own risk."
-msgstr "取消阻擋該檔案，並自負風險。"
-
-#. translators: A prompt option help text
-#: src/callbacks/keyring.h:526
-msgid "Discard the file."
-msgstr "放棄該檔案。"
-
-#. translators: A prompt text
-#: src/callbacks/keyring.h:530
-msgid "Unblock or discard?"
-msgstr "取消阻擋或放棄？"
-
-#: src/callbacks/locks.h:27
-msgid ""
-"The following query locks the same objects as the one you want to remove:"
-msgstr "下列的查詢鎖定了您想要移除的物件："
-
-#: src/callbacks/locks.h:30
-msgid "The following query locks some of the objects you want to unlock:"
-msgstr "下列的查詢鎖定了一些您想要解鎖的物件："
-
-#: src/callbacks/locks.h:35 src/callbacks/locks.h:50
-msgid "Do you want to remove this lock?"
-msgstr "您想要移除此鎖定嗎？"
-
-#: src/callbacks/locks.h:45
-msgid "The following query does not lock anything:"
-msgstr "下列的查詢沒有鎖定任何東西："
-
-#: src/callbacks/repo.h:49
-msgid "Retrieving delta"
-msgstr "正在取出 delta"
-
-#. translators: this text is a progress display label e.g. "Applying delta foo [42%]"
-#: src/callbacks/repo.h:74
-msgid "Applying delta"
-msgstr "正在套用 delta"
-
-#. TranslatorExplanation %s is package size like "5.6 M"
-#: src/callbacks/repo.h:103
-#, c-format, boost-format
-msgid "(%s unpacked)"
-msgstr "(已解開 %s)"
-
-#: src/callbacks/repo.h:112
-#, boost-format
-msgid "In cache %1%"
-msgstr "在快取 %1% 中"
-
-#: src/callbacks/repo.h:128
-#, c-format, boost-format
-msgid "Retrieving %s %s-%s.%s"
-msgstr "正在取出 %s %s-%s.%s"
-
-#: src/callbacks/repo.h:217
-msgid "Signature verification failed"
-msgstr "簽章驗證失敗"
-
-#: src/callbacks/repo.h:237
-msgid "Accepting package despite the error."
-msgstr "即使遇到錯誤，仍然接受套件。"
-
-#. TranslatorExplanation speaking of a script - "Running: script file name (package name, script dir)"
-#: src/callbacks/rpm.h:184
-#, c-format, boost-format
-msgid "Running: %s  (%s, %s)"
-msgstr "正在執行： %s  (%s,%s)"
-
-#: src/callbacks/rpm.h:267
-#, c-format, boost-format
-msgid "Removal of %s failed:"
-msgstr "移除 %s 失敗："
-
-#. translators: This text is a progress display label e.g. "Removing packagename-x.x.x [42%]"
-#: src/callbacks/rpm.h:307
-#, c-format, boost-format
-msgid "Removing %s"
-msgstr "正在移除 %s"
-
-#: src/callbacks/rpm.h:344
-#, c-format, boost-format
-msgid "Installation of %s failed:"
-msgstr "安裝 %s 失敗："
-
-#. TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
-#: src/callbacks/rpm.h:384
-#, c-format, boost-format
-msgid "Installing: %s"
-msgstr "正在安裝：%s"
-
-#. translators: A progressbar label
-#: src/callbacks/rpm.h:403
-msgid "Checking for file conflicts:"
-msgstr "正在檢查檔案衝突："
-
-#. TranslatorExplanation %1%(number of packages); detailed list follows
-#: src/callbacks/rpm.h:454
-#, boost-format
-msgid ""
-"%1% package had to be excluded from file conflicts check because it is not "
-"yet download."
-msgid_plural ""
-"%1% packages had to be excluded from file conflicts check because they are "
-"not yet downloaded."
-msgstr[0] "因為 %1% 個套件尚未下載，因此從檔案衝突檢查中排除。"
-
-#. TranslatorExplanation %1%(commandline option)
-#: src/callbacks/rpm.h:460
-#, boost-format
-msgid ""
-"Checking for file conflicts requires not installed packages to be downloaded "
-"in advance in order to access their file lists. See option '%1%' in the "
-"zypper manual page for details."
-msgstr ""
-"檢查檔案衝突需要事先下載尚未安裝的套件，才能存取其檔案清單。詳情請見 zypper "
-"說明文件中關於選項 '%1%' 的說明。"
-
-#. TranslatorExplanation %1%(number of conflicts); detailed list follows
-#: src/callbacks/rpm.h:470
-#, boost-format
-msgid "Detected %1% file conflict:"
-msgid_plural "Detected %1% file conflicts:"
-msgstr[0] "偵測到 %1% 個檔案衝突："
-
-#: src/callbacks/rpm.h:478
-msgid "Conflicting files will be replaced."
-msgstr "衝突檔案將會被取代。"
-
-#. TranslatorExplanation Problem description before asking whether to "Continue? [yes/no] (no):"
-#: src/callbacks/rpm.h:484
-msgid ""
-"File conflicts happen when two packages attempt to install files with the "
-"same name but different contents. If you continue, conflicting files will be "
-"replaced losing the previous content."
-msgstr ""
-"當二個套件嘗試安裝檔名相同、內容卻不同的檔案時，檔案衝突就會發生。若您選擇繼"
-"續，衝突檔案將會被取代，先前的內容也會消失。"
-
-#. translator: %s is an other command: "This is an alias for 'zypper info -t patch'."
-#: src/commands/commandhelpformatter.h:94
-#, c-format, boost-format
-msgid "This is an alias for '%s'."
-msgstr "這是 '%s' 的別名。"
-
-#: src/commands/commandhelpformatter.h:107
-msgid "Examples:"
-msgstr "範例："
-
-#: src/commands/commandhelpformatter.h:110
-msgid "Arguments:"
-msgstr "引數："
-
-#: src/commands/commandhelpformatter.h:123 src/utils/flags/zyppflags.cc:627
-msgid "Command options:"
-msgstr "指令選項："
-
-#: src/commands/commandhelpformatter.h:126
-msgid "Solver options:"
-msgstr "解析程式選項："
-
-#: src/commands/commandhelpformatter.h:129
-msgid "Expert options:"
-msgstr "進階選項："
-
-#: src/commands/commandhelpformatter.h:132
-msgid "This command has no additional options."
-msgstr "本指令沒有其他選項。"
-
-#: src/commands/commandhelpformatter.h:135
-msgid "Legacy options:"
-msgstr "舊選項："
-
-#. translator: '-r             The same as -f.
-#: src/commands/commandhelpformatter.h:139
-#, boost-format
-msgid "The same as %1%."
-msgstr "與 %1% 相同。"
-
-#: src/commands/commandhelpformatter.h:187
-msgid "Usage:"
-msgstr "用法："
-
-#: src/commands/commandhelpformatter.h:189
-msgid "Global Options:"
-msgstr "全域選項:"
-
-#: src/commands/commandhelpformatter.h:191
-msgid "Commands:"
-msgstr "指令："
-
-#. translators: --details
-#: src/commands/commonflags.h:23 src/commands/inrverify.cc:35
-msgid "Show the detailed installation summary."
-msgstr "顯示詳細的安裝摘要。"
-
-#: src/commands/commonflags.h:30
-#, boost-format
-msgid "Type of package (%1%)."
-msgstr "套件 (%1%) 的類型。"
-
-#. translators: --best-effort
-#: src/commands/commonflags.h:38
-msgid ""
-"Do a 'best effort' approach to update. Updates to a lower than the latest "
-"version are also acceptable."
-msgstr "盡最大努力來趨近最新狀態， 更新到比最新版本還低些的也 可以接受。"
-
-#: src/commands/commonflags.h:45
-msgid "Consider only patches which affect the package management itself."
-msgstr "僅考慮影響套件管理本身的修補程式。"
-
-#: src/output/Out.h:26 src/repos.cc:125 src/repos.cc:153
-msgid "Yes"
-msgstr "是"
-
-#: src/output/Out.h:26 src/locales.cc:72 src/repos.cc:131 src/repos.cc:159
-msgid "No"
-msgstr "否"
-
-#. translator: usually followed by a ' ' and some explanatory text
-#: src/output/Out.h:38
-msgid "Note:"
-msgstr "注意："
-
-#. translator: usually followed by a ' ' and some explanatory text
-#: src/output/Out.h:40
-msgid "Warning:"
-msgstr "警告："
-
-#. translator: usually followed by a ' ' and some explanatory text
-#: src/output/Out.h:42
-msgid "Error:"
-msgstr "錯誤："
-
-#: src/output/Out.h:44
-msgid "Continue?"
-msgstr "要繼續嗎？"
-
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:23
-msgid "ALIAS"
-msgstr "別名"
-
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:25
-msgid "ALIAS|#|URI"
-msgstr "別名|編號|URI"
-
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:27
-msgid "CATEGORY"
-msgstr "類別"
-
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:29
-msgid "DIR"
-msgstr "目錄"
-
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:31
-msgid "FILE"
-msgstr "檔案"
-
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:33
-msgid "FILE.repo"
-msgstr "檔案.repo"
-
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:35
-msgid "FORMAT"
-msgstr "格式"
-
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:37
-msgid "INTEGER"
-msgstr "整數"
-
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:39
-msgid "PATH"
-msgstr "位置"
-
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:41
-msgid "SEVERITY"
-msgstr "嚴重度"
-
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:43
-msgid "STRING"
-msgstr "字串"
-
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:45
-msgid "TAG"
-msgstr "標籤"
-
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:47
-msgid "TYPE"
-msgstr "類型"
-
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#. translators: property name; short; used like "Name: value"
-#: src/utils/flags/zyppflags.h:49 src/commands/repos/list.cc:42
-#: src/commands/repos/list.cc:268 src/commands/services/list.cc:116
-#: src/repos.cc:1254
-msgid "URI"
-msgstr "位址"
-
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:51
-msgid "YYYY-MM-DD"
-msgstr "YYYY-MM-DD"
-
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:53
-msgid "MODE"
-msgstr "模式"
-
-#. TranslatorExplanation These are reasons for various failures.
-#: src/utils/prompt.h:185
-msgid "Not found"
-msgstr "找不到"
-
-# error box title
-#: src/utils/prompt.h:185
-msgid "I/O error"
-msgstr "I/O 錯誤"
-
-#: src/utils/prompt.h:185
-msgid "Invalid object"
-msgstr "無效的物件"
-
-#: src/utils/prompt.h:192
-msgid "Error"
-msgstr "錯誤"
 
 #: src/Command.cc:93
 msgid "Invalid command"
@@ -1228,6 +572,16 @@ msgstr "您是指 %1% 嗎？"
 #, c-format, boost-format
 msgid "Ignoring option %s when updating the update stack first."
 msgstr "先更新更新堆疊時忽略選項 %s。"
+
+#: src/SolverRequester.h:52
+#, boost-format
+msgid "Suspicious category filter value '%1%'."
+msgstr "類別過濾值 '%1%' 可疑。"
+
+#: src/SolverRequester.h:60
+#, boost-format
+msgid "Suspicious severity filter value '%1%'."
+msgstr "安全性過濾值 '%1%' 可疑。"
 
 #. translator: '%1%' is a products name
 #. '%2%' is a command to call (like 'zypper dup')
@@ -1878,6 +1232,342 @@ msgstr "%s 選項在此無效，將忽略。"
 msgid "Non-option program arguments: "
 msgstr "非選項程式引數︰ "
 
+#: src/callbacks/keyring.h:32
+msgid ""
+"Signing data enables the recipient to verify that no modifications occurred "
+"after the data were signed. Accepting data with no, wrong or unknown "
+"signature can lead to a corrupted system and in extreme cases even to a "
+"system compromise."
+msgstr ""
+"資料簽名可讓接收者能夠驗證資料被簽名後並無變動。接受無簽名或者簽名錯誤或未知"
+"的資料可能導致系統毀損，在極端情況下甚至會導致系統被入侵。"
+
+#. translator: %1% is a file name
+#: src/callbacks/keyring.h:40
+#, boost-format
+msgid ""
+"File '%1%' is the repositories master index file. It ensures the integrity "
+"of the whole repo."
+msgstr "檔案「%1%」是套件庫主索引檔案。它可確保整個套件庫的完整性。"
+
+#: src/callbacks/keyring.h:46
+msgid ""
+"We can't verify that no one meddled with this file, so it might not be "
+"trustworthy anymore! You should not continue unless you know it's safe."
+msgstr ""
+"我們無法確認此檔案是否曾受到他人的干預，因此它可能不再可信！除非您確定該檔案"
+"安全，否則不應繼續。"
+
+#: src/callbacks/keyring.h:51
+msgid ""
+"This file was modified after it has been signed. This may have been a "
+"malicious change, so it might not be trustworthy anymore! You should not "
+"continue unless you know it's safe."
+msgstr ""
+"此檔案簽章後已被修改。這可能是惡意變更，因此該檔案可能不再可信！除非您確定該"
+"檔案安全，否則不應繼續。"
+
+#: src/callbacks/keyring.h:79
+msgid "Repository:"
+msgstr "套件庫："
+
+#: src/callbacks/keyring.h:81
+msgid "Key Name:"
+msgstr "金鑰名稱："
+
+#: src/callbacks/keyring.h:82
+msgid "Key Fingerprint:"
+msgstr "金鑰指紋："
+
+#: src/callbacks/keyring.h:83
+msgid "Key Created:"
+msgstr "金鑰建立日期："
+
+#: src/callbacks/keyring.h:84
+msgid "Key Expires:"
+msgstr "金鑰過期日期："
+
+#: src/callbacks/keyring.h:86
+msgid "Subkey:"
+msgstr "子金鈅："
+
+#: src/callbacks/keyring.h:87
+msgid "Rpm Name:"
+msgstr "RPM 名稱："
+
+#: src/callbacks/keyring.h:113
+#, boost-format
+msgid "The gpg key signing file '%1%' has expired."
+msgstr "gpg 金鑰簽章的檔案 '%1%' 已過期。"
+
+#: src/callbacks/keyring.h:119
+#, boost-format
+msgid "The gpg key signing file '%1%' will expire in %2% day."
+msgid_plural "The gpg key signing file '%1%' will expire in %2% days."
+msgstr[0] "gpg 金鑰簽章的檔案 '%1%' 將在 %2% 天後過期。"
+
+#: src/callbacks/keyring.h:142
+#, c-format, boost-format
+msgid "Accepting an unsigned file '%s'."
+msgstr "正在接受一個未簽章的檔案 '%s'。"
+
+#: src/callbacks/keyring.h:146
+#, c-format, boost-format
+msgid "Accepting an unsigned file '%s' from repository '%s'."
+msgstr "正在接受一個未簽章的檔案 '%s' (來自套件庫 '%s')。"
+
+#. translator: %1% is a file name
+#: src/callbacks/keyring.h:156
+#, boost-format
+msgid "File '%1%' is unsigned."
+msgstr "檔案「%s」未簽章。"
+
+#. translator: %1% is a file name, %2% a repositories name
+#: src/callbacks/keyring.h:159
+#, boost-format
+msgid "File '%1%' from repository '%2%' is unsigned."
+msgstr "套件庫「%2%」中的檔案「%1%」未簽章。"
+
+#. TranslatorExplanation: speaking of a file
+#: src/callbacks/keyring.h:176
+#, c-format, boost-format
+msgid "File '%s' is unsigned, continue?"
+msgstr "檔案 '%s' 未簽章，要繼續嗎？"
+
+#. TranslatorExplanation: speaking of a file
+#: src/callbacks/keyring.h:180
+#, c-format, boost-format
+msgid "File '%s' from repository '%s' is unsigned, continue?"
+msgstr "檔案 ′%s′ (來自套件庫 ′%s′) 未簽章，要繼續嗎？"
+
+#: src/callbacks/keyring.h:203
+#, c-format, boost-format
+msgid "Accepting file '%s' signed with an unknown key '%s'."
+msgstr "正在接受檔案 '%s'，此檔案使用未知的金鑰 '%s' 簽章。"
+
+#: src/callbacks/keyring.h:207
+#, c-format, boost-format
+msgid ""
+"Accepting file '%s' from repository '%s' signed with an unknown key '%s'."
+msgstr "正在接受檔案 ′%s′ (來自套件庫 ′%s′)，此檔案使用未知的金鑰 '%s' 簽章。"
+
+#. translator: %1% is a file name, %2% is a gpg key ID
+#: src/callbacks/keyring.h:216
+#, boost-format
+msgid "File '%1%' is signed with an unknown key '%2%'."
+msgstr "檔案「%1%」是以未知金鑰「%2%」簽章。"
+
+#. translator: %1% is a file name, %2% is a gpg key ID, %3% a repositories name
+#: src/callbacks/keyring.h:219
+#, boost-format
+msgid "File '%1%' from repository '%3%' is signed with an unknown key '%2%'."
+msgstr "套件庫「%3%」中的檔案「%1%」是以未知金鑰「%2%」簽章。"
+
+#. translators: the last %s is gpg key ID
+#: src/callbacks/keyring.h:236
+#, c-format, boost-format
+msgid "File '%s' is signed with an unknown key '%s'. Continue?"
+msgstr "檔案 '%s' 是以不明金鑰 '%s' 簽章。要繼續嗎？"
+
+#. translators: the last %s is gpg key ID
+#: src/callbacks/keyring.h:240
+#, c-format, boost-format
+msgid ""
+"File '%s' from repository '%s' is signed with an unknown key '%s'. Continue?"
+msgstr "檔案 '%s' (來自套件庫 '%s') 是以不明金鑰 '%s' 簽章。要繼續嗎？"
+
+#: src/callbacks/keyring.h:260
+msgid "Automatically importing the following key:"
+msgstr "自動匯入下列金鑰："
+
+#: src/callbacks/keyring.h:262
+msgid "Automatically trusting the following key:"
+msgstr "自動信任下列金鑰："
+
+#: src/callbacks/keyring.h:264
+msgid "New repository or package signing key received:"
+msgstr "收到新的套件庫或套件簽署金鑰："
+
+#. translators: this message is shown after showing description of the key
+#: src/callbacks/keyring.h:287
+msgid "Do you want to reject the key, trust temporarily, or trust always?"
+msgstr "您想要拒絕此金鑰，暫時信任，或永遠信任？"
+
+#. translators: this message is shown after showing description of the key
+#: src/callbacks/keyring.h:290
+msgid "Do you want to reject the key, or trust always?"
+msgstr "您想要拒絕此金鑰，還是永遠信任？"
+
+#. translators: r/t/a stands for Reject/TrustTemporarily/trustAlways(import)
+#. translate to whatever is appropriate for your language
+#. The anserws must be separated by slash characters '/' and must
+#. correspond to reject/trusttemporarily/trustalways in that order.
+#. The answers should be lower case letters.
+#: src/callbacks/keyring.h:308
+msgid "r/t/a/"
+msgstr "r/t/a/"
+
+#. translators: the same as r/t/a, but without 'a'
+#: src/callbacks/keyring.h:311
+msgid "r/t"
+msgstr "r/t"
+
+#. translators: r/a stands for Reject/trustAlways(import)
+#. translate to whatever is appropriate for your language
+#. The anserws must be separated by slash characters '/' and must
+#. correspond to reject/trusttemporarily/trustalways in that order.
+#. The answers should be lower case letters.
+#: src/callbacks/keyring.h:318
+msgid "r/a/"
+msgstr "r/a/"
+
+#. translators: help text for the 'r' option in the 'r/t/a' prompt
+#: src/callbacks/keyring.h:324
+msgid "Don't trust the key."
+msgstr "不要信任此金鑰。"
+
+#. translators: help text for the 't' option in the 'r/t/a' prompt
+#: src/callbacks/keyring.h:328
+msgid "Trust the key temporarily."
+msgstr "暫時信任此金鑰。"
+
+#. translators: help text for the 'a' option in the 'r/t/a' prompt
+#: src/callbacks/keyring.h:333
+msgid "Trust the key and import it into trusted keyring."
+msgstr "信任此金鑰並匯入到信任的金鑰圈。"
+
+#: src/callbacks/keyring.h:371
+#, c-format, boost-format
+msgid "Ignoring failed signature verification for file '%s'!"
+msgstr "正在忽略檔案 '%s' 的失敗簽章驗證！"
+
+#: src/callbacks/keyring.h:374
+#, c-format, boost-format
+msgid ""
+"Ignoring failed signature verification for file '%s' from repository '%s'!"
+msgstr "正在忽略檔案 '%s' (來自套件庫 '%s') 的失敗簽章驗證！"
+
+#: src/callbacks/keyring.h:380
+msgid "Double-check this is not caused by some malicious changes in the file!"
+msgstr "請再次確認這並非是因為檔案遭到惡意修改所造成的！"
+
+#. translator: %1% is a file name
+#: src/callbacks/keyring.h:390
+#, boost-format
+msgid "Signature verification failed for file '%1%'."
+msgstr "檔案 '%1%' 的簽章驗證失敗。"
+
+#. translator: %1% is a file name, %2% a repositories name
+#: src/callbacks/keyring.h:393
+#, boost-format
+msgid "Signature verification failed for file '%1%' from repository '%2%'."
+msgstr "檔案 '%1%' (來自套件庫 '%2%') 的簽章驗證失敗。"
+
+#: src/callbacks/keyring.h:437
+msgid ""
+"The rpm database seems to contain old V3 version gpg keys which are "
+"meanwhile obsolete and considered insecure:"
+msgstr ""
+"該 RPM 資料庫看似包含了舊的 V3 版本 GPG 金鑰，這些金鑰已經廢棄，因此被認為是"
+"不安全的："
+
+#: src/callbacks/keyring.h:444
+#, boost-format
+msgid "To see details about a key call '%1%'."
+msgstr "檢視呼叫「%1%」的金鑰詳細資訊。"
+
+#: src/callbacks/keyring.h:448
+#, boost-format
+msgid ""
+"Unless you believe the key in question is still in use, you can remove it "
+"from the rpm database calling '%1%'."
+msgstr ""
+"除非您相信這些有問題的金鑰仍在使用當中，否則您可以從 RPM 資料庫中呼叫「%1%」"
+"移除它們。"
+
+#: src/callbacks/keyring.h:470
+#, c-format, boost-format
+msgid "No digest for file %s."
+msgstr "檔案 %s 無摘要。"
+
+#: src/callbacks/keyring.h:478
+#, c-format, boost-format
+msgid "Unknown digest %s for file %s."
+msgstr "不明摘要 %s (檔案 %s)。"
+
+#: src/callbacks/keyring.h:495
+#, boost-format
+msgid ""
+"Digest verification failed for file '%1%'\n"
+"[%2%]\n"
+"\n"
+"  expected %3%\n"
+"  but got  %4%\n"
+msgstr ""
+"檔案 '%1%' 訊息摘要驗證錯誤\n"
+"[%2%]\n"
+"\n"
+"  預期為 %3%\n"
+"  實際為 %4%\n"
+
+#: src/callbacks/keyring.h:507
+msgid ""
+"Accepting packages with wrong checksums can lead to a corrupted system and "
+"in extreme cases even to a system compromise."
+msgstr "接受帶有錯誤檢查總數的套件會導致系統損壞，甚至危及系統安全。"
+
+#: src/callbacks/keyring.h:515
+#, boost-format
+msgid ""
+"However if you made certain that the file with checksum '%1%..' is secure, "
+"correct\n"
+"and should be used within this operation, enter the first 4 characters of "
+"the checksum\n"
+"to unblock using this file on your own risk. Empty input will discard the "
+"file.\n"
+msgstr ""
+"然而，若您確定該檔案 (檢核碼 '%1%..') 是安全且正確的，在此操作中應該要使用"
+"它，\n"
+"請輸入檢核碼的前 4 個字元來取消阻擋該檔案，並請您自負風險。空白輸入將直接放棄"
+"該檔案。\n"
+
+#. translators: A prompt option
+#: src/callbacks/keyring.h:522
+msgid "discard"
+msgstr "放棄"
+
+#. translators: A prompt option help text
+#: src/callbacks/keyring.h:524
+msgid "Unblock using this file on your own risk."
+msgstr "取消阻擋該檔案，並自負風險。"
+
+#. translators: A prompt option help text
+#: src/callbacks/keyring.h:526
+msgid "Discard the file."
+msgstr "放棄該檔案。"
+
+#. translators: A prompt text
+#: src/callbacks/keyring.h:530
+msgid "Unblock or discard?"
+msgstr "取消阻擋或放棄？"
+
+#: src/callbacks/locks.h:27
+msgid ""
+"The following query locks the same objects as the one you want to remove:"
+msgstr "下列的查詢鎖定了您想要移除的物件："
+
+#: src/callbacks/locks.h:30
+msgid "The following query locks some of the objects you want to unlock:"
+msgstr "下列的查詢鎖定了一些您想要解鎖的物件："
+
+#: src/callbacks/locks.h:35 src/callbacks/locks.h:50
+msgid "Do you want to remove this lock?"
+msgstr "您想要移除此鎖定嗎？"
+
+#: src/callbacks/locks.h:45
+msgid "The following query does not lock anything:"
+msgstr "下列的查詢沒有鎖定任何東西："
+
 #. help text for the "Abort, retry, ignore?" prompt for media errors
 #: src/callbacks/media.cc:27
 msgid "Skip retrieval of the file and abort current operation."
@@ -2004,6 +1694,188 @@ msgstr "使用者名稱"
 #: src/callbacks/media.cc:328
 msgid "Password"
 msgstr "密碼"
+
+#: src/callbacks/repo.h:49
+msgid "Retrieving delta"
+msgstr "正在取出 delta"
+
+#. translators: this text is a progress display label e.g. "Applying delta foo [42%]"
+#: src/callbacks/repo.h:74
+msgid "Applying delta"
+msgstr "正在套用 delta"
+
+#. TranslatorExplanation %s is package size like "5.6 M"
+#: src/callbacks/repo.h:103
+#, c-format, boost-format
+msgid "(%s unpacked)"
+msgstr "(已解開 %s)"
+
+#: src/callbacks/repo.h:112
+#, boost-format
+msgid "In cache %1%"
+msgstr "在快取 %1% 中"
+
+#: src/callbacks/repo.h:128
+#, c-format, boost-format
+msgid "Retrieving %s %s-%s.%s"
+msgstr "正在取出 %s %s-%s.%s"
+
+#: src/callbacks/repo.h:217
+msgid "Signature verification failed"
+msgstr "簽章驗證失敗"
+
+#: src/callbacks/repo.h:237
+msgid "Accepting package despite the error."
+msgstr "即使遇到錯誤，仍然接受套件。"
+
+#. TranslatorExplanation speaking of a script - "Running: script file name (package name, script dir)"
+#: src/callbacks/rpm.h:184
+#, c-format, boost-format
+msgid "Running: %s  (%s, %s)"
+msgstr "正在執行： %s  (%s,%s)"
+
+#: src/callbacks/rpm.h:267
+#, c-format, boost-format
+msgid "Removal of %s failed:"
+msgstr "移除 %s 失敗："
+
+#. translators: This text is a progress display label e.g. "Removing packagename-x.x.x [42%]"
+#: src/callbacks/rpm.h:307
+#, c-format, boost-format
+msgid "Removing %s"
+msgstr "正在移除 %s"
+
+#: src/callbacks/rpm.h:344
+#, c-format, boost-format
+msgid "Installation of %s failed:"
+msgstr "安裝 %s 失敗："
+
+#. TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
+#: src/callbacks/rpm.h:384
+#, c-format, boost-format
+msgid "Installing: %s"
+msgstr "正在安裝：%s"
+
+#. translators: A progressbar label
+#: src/callbacks/rpm.h:403
+msgid "Checking for file conflicts:"
+msgstr "正在檢查檔案衝突："
+
+#. TranslatorExplanation %1%(number of packages); detailed list follows
+#: src/callbacks/rpm.h:454
+#, boost-format
+msgid ""
+"%1% package had to be excluded from file conflicts check because it is not "
+"yet download."
+msgid_plural ""
+"%1% packages had to be excluded from file conflicts check because they are "
+"not yet downloaded."
+msgstr[0] "因為 %1% 個套件尚未下載，因此從檔案衝突檢查中排除。"
+
+#. TranslatorExplanation %1%(commandline option)
+#: src/callbacks/rpm.h:460
+#, boost-format
+msgid ""
+"Checking for file conflicts requires not installed packages to be downloaded "
+"in advance in order to access their file lists. See option '%1%' in the "
+"zypper manual page for details."
+msgstr ""
+"檢查檔案衝突需要事先下載尚未安裝的套件，才能存取其檔案清單。詳情請見 zypper "
+"說明文件中關於選項 '%1%' 的說明。"
+
+#. TranslatorExplanation %1%(number of conflicts); detailed list follows
+#: src/callbacks/rpm.h:470
+#, boost-format
+msgid "Detected %1% file conflict:"
+msgid_plural "Detected %1% file conflicts:"
+msgstr[0] "偵測到 %1% 個檔案衝突："
+
+#: src/callbacks/rpm.h:478
+msgid "Conflicting files will be replaced."
+msgstr "衝突檔案將會被取代。"
+
+#. TranslatorExplanation Problem description before asking whether to "Continue? [yes/no] (no):"
+#: src/callbacks/rpm.h:484
+msgid ""
+"File conflicts happen when two packages attempt to install files with the "
+"same name but different contents. If you continue, conflicting files will be "
+"replaced losing the previous content."
+msgstr ""
+"當二個套件嘗試安裝檔名相同、內容卻不同的檔案時，檔案衝突就會發生。若您選擇繼"
+"續，衝突檔案將會被取代，先前的內容也會消失。"
+
+#. translator: %s is an other command: "This is an alias for 'zypper info -t patch'."
+#: src/commands/commandhelpformatter.h:94
+#, c-format, boost-format
+msgid "This is an alias for '%s'."
+msgstr "這是 '%s' 的別名。"
+
+#: src/commands/commandhelpformatter.h:107
+msgid "Examples:"
+msgstr "範例："
+
+#: src/commands/commandhelpformatter.h:110
+msgid "Arguments:"
+msgstr "引數："
+
+#: src/commands/commandhelpformatter.h:123 src/utils/flags/zyppflags.cc:627
+msgid "Command options:"
+msgstr "指令選項："
+
+#: src/commands/commandhelpformatter.h:126
+msgid "Solver options:"
+msgstr "解析程式選項："
+
+#: src/commands/commandhelpformatter.h:129
+msgid "Expert options:"
+msgstr "進階選項："
+
+#: src/commands/commandhelpformatter.h:132
+msgid "This command has no additional options."
+msgstr "本指令沒有其他選項。"
+
+#: src/commands/commandhelpformatter.h:135
+msgid "Legacy options:"
+msgstr "舊選項："
+
+#. translator: '-r             The same as -f.
+#: src/commands/commandhelpformatter.h:139
+#, boost-format
+msgid "The same as %1%."
+msgstr "與 %1% 相同。"
+
+#: src/commands/commandhelpformatter.h:187
+msgid "Usage:"
+msgstr "用法："
+
+#: src/commands/commandhelpformatter.h:189
+msgid "Global Options:"
+msgstr "全域選項:"
+
+#: src/commands/commandhelpformatter.h:191
+msgid "Commands:"
+msgstr "指令："
+
+#. translators: --details
+#: src/commands/commonflags.h:23 src/commands/inrverify.cc:35
+msgid "Show the detailed installation summary."
+msgstr "顯示詳細的安裝摘要。"
+
+#: src/commands/commonflags.h:30
+#, boost-format
+msgid "Type of package (%1%)."
+msgstr "套件 (%1%) 的類型。"
+
+#. translators: --best-effort
+#: src/commands/commonflags.h:38
+msgid ""
+"Do a 'best effort' approach to update. Updates to a lower than the latest "
+"version are also acceptable."
+msgstr "盡最大努力來趨近最新狀態， 更新到比最新版本還低些的也 可以接受。"
+
+#: src/commands/commonflags.h:45
+msgid "Consider only patches which affect the package management itself."
+msgstr "僅考慮影響套件管理本身的修補程式。"
 
 #: src/commands/conditions.cc:19
 msgid "Root privileges are required to run this command."
@@ -2362,36 +2234,41 @@ msgstr ""
 msgid "Do not remove corresponding packages for given locale(s)."
 msgstr "不要移除指定地區設定的相應套件。"
 
-# =============================================================================
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
 #: src/commands/locks/add.cc:29
-msgid "addlock (al) [OPTIONS] <PACKAGENAME> ..."
-msgstr "addlock (al) [選項] <套件名稱> ..."
+msgid "addlock (al) [OPTIONS] <LOCKSPEC>..."
+msgstr ""
 
 #. translators: command summary
-#: src/commands/locks/add.cc:31
+#: src/commands/locks/add.cc:31 src/commands/locks/add.cc:34
 msgid "Add a package lock."
 msgstr "加入一個套件鎖定。"
 
-#. translators: command description
-#: src/commands/locks/add.cc:33
+#: src/commands/locks/add.cc:35
 msgid ""
-"Add a package lock. Specify packages to lock by exact name or by a glob "
-"pattern using '*' and '?' wildcard characters."
+"LOCKSPEC is formed by '[KIND:]NAME[ OP EDITION]', where NAME may also be a "
+"glob pattern using * and ? wildcard characters. Non-package types may to "
+"have their KIND: string prepended (e.g. 'patch:foo') or use the commands --"
+"type option."
 msgstr ""
-"新增套件鎖定。 透過確切名稱或使用 '*' 和 '?' 萬用字元的全域樣式指定要鎖定的套"
-"件。"
 
-#: src/commands/locks/add.cc:42
+#: src/commands/locks/add.cc:36
+msgid ""
+"The basic form will lock all editions of the matching items. You can "
+"optionally restrict the lock to match a specific edition or edition range "
+"using =, <, <=, >, >= or != followed an EDITION."
+msgstr ""
+
+#: src/commands/locks/add.cc:46
 msgid "Restrict the lock to the specified repository."
 msgstr "限制僅鎖定指定的套件庫。"
 
-#: src/commands/locks/add.cc:76
+#: src/commands/locks/add.cc:80
 msgid "Specified lock has been successfully added."
 msgid_plural "Specified locks have been successfully added."
 msgstr[0] "指定的鎖定已成功新增。"
 
-#: src/commands/locks/add.cc:83
+#: src/commands/locks/add.cc:87
 msgid "Problem adding the package lock:"
 msgstr "加入套件鎖定發生問題："
 
@@ -3199,6 +3076,14 @@ msgstr "清除中繼資料和套件快取。"
 #: src/commands/services/list.cc:104
 msgid "Alias"
 msgstr "別名"
+
+#. translators: property name; short; used like "Name: value"
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/commands/repos/list.cc:42 src/commands/repos/list.cc:268
+#: src/commands/services/list.cc:116 src/repos.cc:1254
+#: src/utils/flags/zyppflags.h:49
+msgid "URI"
+msgstr "位址"
 
 #. 'enabled' flag
 #. translators: property name; short; used like "Name: value"
@@ -4630,32 +4515,32 @@ msgid ""
 msgstr "下載所有符合指令行參數的版本。 否則只有相符套件的最佳版本 會被下載。"
 
 #. translators: Label text; is followed by ': cmdline argument'
-#: src/commands/utils/download.cc:235
+#: src/commands/utils/download.cc:237
 msgid "Argument resolves to no package"
 msgstr "該參數解析不到套件"
 
-#: src/commands/utils/download.cc:250 src/solve-commit.cc:935
+#: src/commands/utils/download.cc:252 src/solve-commit.cc:935
 msgid "Nothing to do."
 msgstr "無執行動作。"
 
-#: src/commands/utils/download.cc:257
+#: src/commands/utils/download.cc:259
 msgid "No prune to best version."
 msgstr "不調整為最佳版本。"
 
-#: src/commands/utils/download.cc:263
+#: src/commands/utils/download.cc:265
 msgid "Prune to best version..."
 msgstr "調整為最佳版本..."
 
-#: src/commands/utils/download.cc:269
+#: src/commands/utils/download.cc:271
 msgid "Not downloading anything..."
 msgstr "未下載任何東西..."
 
-#: src/commands/utils/download.cc:312
+#: src/commands/utils/download.cc:314
 #, c-format, boost-format
 msgid "Error downloading package '%s'."
 msgstr "下載套件 '%s' 發生錯誤。"
 
-#: src/commands/utils/download.cc:326
+#: src/commands/utils/download.cc:328
 #, c-format, boost-format
 msgid "Not downloading package '%s'."
 msgstr "套件 '%s' 未下載。"
@@ -5128,6 +5013,10 @@ msgstr "已申請"
 msgid "Fallback"
 msgstr "錯誤回復"
 
+#: src/locales.cc:72 src/output/Out.h:26 src/repos.cc:131 src/repos.cc:159
+msgid "No"
+msgstr "否"
+
 #. translators: header of table column - the language code, e.g. en_US
 #: src/locales.cc:174
 msgid "Code"
@@ -5270,6 +5159,29 @@ msgstr "來源套件 %s-%s 已成功安裝。"
 #, c-format, boost-format
 msgid "Problem installing source package %s-%s:"
 msgstr "安裝來源套件 %s-%s 發生問題："
+
+#: src/output/Out.h:26 src/repos.cc:125 src/repos.cc:153
+msgid "Yes"
+msgstr "是"
+
+#. translator: usually followed by a ' ' and some explanatory text
+#: src/output/Out.h:40
+msgid "Note:"
+msgstr "注意："
+
+#. translator: usually followed by a ' ' and some explanatory text
+#: src/output/Out.h:42
+msgid "Warning:"
+msgstr "警告："
+
+#. translator: usually followed by a ' ' and some explanatory text
+#: src/output/Out.h:44
+msgid "Error:"
+msgstr "錯誤："
+
+#: src/output/Out.h:46
+msgid "Continue?"
+msgstr "要繼續嗎？"
 
 #. Since this message will be emitted before we know if the current output is XML or Normal we need to send this message to stderr
 #. to not break scripts that use xml output (bsc#1172925)
@@ -6375,6 +6287,81 @@ msgstr "超出範圍"
 msgid "Unknown error while assigning the value %1% to flag %2%."
 msgstr "對應 %1% 值至 %2% 標記時發生未知錯誤。"
 
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:23
+msgid "ALIAS"
+msgstr "別名"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:25
+msgid "ALIAS|#|URI"
+msgstr "別名|編號|URI"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:27
+msgid "CATEGORY"
+msgstr "類別"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:29
+msgid "DIR"
+msgstr "目錄"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:31
+msgid "FILE"
+msgstr "檔案"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:33
+msgid "FILE.repo"
+msgstr "檔案.repo"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:35
+msgid "FORMAT"
+msgstr "格式"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:37
+msgid "INTEGER"
+msgstr "整數"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:39
+msgid "PATH"
+msgstr "位置"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:41
+msgid "SEVERITY"
+msgstr "嚴重度"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:43
+msgid "STRING"
+msgstr "字串"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:45
+msgid "TAG"
+msgstr "標籤"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:47
+msgid "TYPE"
+msgstr "類型"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:51
+msgid "YYYY-MM-DD"
+msgstr "YYYY-MM-DD"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:53
+msgid "MODE"
+msgstr "模式"
+
 #. For '-garbage' argument, with 'a', 'b', and 'e' as known options,
 #. getopt_long reports 'a', 'b', and 'e' as known options.
 #. The rest ends here and it is either the last one from previous argument
@@ -6704,6 +6691,35 @@ msgid ""
 "one, ..."
 msgstr ""
 "如果沒有可用回答，輸入「#1」選取第一個選項，輸入「#2」選取第二個選項..."
+
+#. TranslatorExplanation These are reasons for various failures.
+#: src/utils/prompt.h:185
+msgid "Not found"
+msgstr "找不到"
+
+# error box title
+#: src/utils/prompt.h:185
+msgid "I/O error"
+msgstr "I/O 錯誤"
+
+#: src/utils/prompt.h:185
+msgid "Invalid object"
+msgstr "無效的物件"
+
+#: src/utils/prompt.h:192
+msgid "Error"
+msgstr "錯誤"
+
+# =============================================================================
+#~ msgid "addlock (al) [OPTIONS] <PACKAGENAME> ..."
+#~ msgstr "addlock (al) [選項] <套件名稱> ..."
+
+#~ msgid ""
+#~ "Add a package lock. Specify packages to lock by exact name or by a glob "
+#~ "pattern using '*' and '?' wildcard characters."
+#~ msgstr ""
+#~ "新增套件鎖定。 透過確切名稱或使用 '*' 和 '?' 萬用字元的全域樣式指定要鎖定"
+#~ "的套件。"
 
 #~ msgid ""
 #~ "Download all source rpms to this directory. Default: /var/cache/zypper/"
