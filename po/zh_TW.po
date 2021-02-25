@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-01-12 19:27+0100\n"
-"PO-Revision-Date: 2020-02-17 14:54+0000\n"
+"PO-Revision-Date: 2021-03-07 04:25+0000\n"
 "Last-Translator: Grace Yu <grace.yu@excel-gits.com>\n"
 "Language-Team: Chinese (Taiwan) <https://l10n.opensuse.org/projects/libzypp/"
 "master/zh_TW/>\n"
@@ -4202,7 +4202,7 @@ msgstr " SSL 憑證問題，驗證 '%s' 的 CA 憑證是否正確。"
 msgid ""
 "Create attach point: Can't find a writable directory to create an attach "
 "point"
-msgstr "建立掛載點：無法找到可寫入的目錄以建立掛載點"
+msgstr "建立裝載點：無法找到可寫入的目錄以建立裝載點"
 
 #: zypp/media/MediaUserAuth.cc:140
 #, c-format, boost-format
@@ -4427,28 +4427,28 @@ msgstr "一般忽略某些相依性"
 msgid ""
 "the installed %1% does not belong to a distupgrade repository and must be "
 "replaced"
-msgstr ""
+msgstr "安裝的 %1% 不屬於版本升級套件庫，必須將其取代"
 
 #. just in case
 #: zypp/solver/detail/SATResolver.cc:1077
 #, boost-format
 msgid "the to be installed %1% does not belong to a distupgrade repository"
-msgstr ""
+msgstr "要安裝的 %1% 不屬於版本升級套件庫"
 
 #: zypp/solver/detail/SATResolver.cc:1081
 #, boost-format
 msgid "the installed %1% has inferior architecture"
-msgstr ""
+msgstr "安裝的 %1% 的架構較低"
 
 #: zypp/solver/detail/SATResolver.cc:1083
 #, boost-format
 msgid "the to be installed %1% has inferior architecture"
-msgstr ""
+msgstr "要安裝的 %1% 的架構較低"
 
 #: zypp/solver/detail/SATResolver.cc:1086
 #, boost-format
 msgid "problem with the installed %1%"
-msgstr ""
+msgstr "安裝的 %1% 有問題"
 
 #: zypp/solver/detail/SATResolver.cc:1089
 #: zypp/solver/detail/SATResolver.cc:1557
@@ -4465,17 +4465,17 @@ msgstr "一些相依性問題"
 #: zypp/solver/detail/SATResolver.cc:1095
 #, boost-format
 msgid "nothing provides the requested '%1%'"
-msgstr ""
+msgstr "沒有套件庫能提供所申請的 \"%1%\""
 
 #: zypp/solver/detail/SATResolver.cc:1096
 #: zypp/solver/detail/SATResolver.cc:1100
 msgid "Have you enabled all the required repositories?"
-msgstr ""
+msgstr "您是否啟用了全部所需的套件庫？"
 
 #: zypp/solver/detail/SATResolver.cc:1099
 #, boost-format
 msgid "the requested package %1% does not exist"
-msgstr ""
+msgstr "申請的套件 %1% 不存在"
 
 #: zypp/solver/detail/SATResolver.cc:1103
 #: zypp/solver/detail/SATResolver.cc:1571
@@ -4486,95 +4486,95 @@ msgstr "不支援的要求"
 #: zypp/solver/detail/SATResolver.cc:1106
 #, boost-format
 msgid "'%1%' is provided by the system and cannot be erased"
-msgstr ""
+msgstr "\"%1%\" 由系統提供，無法去除"
 
 #: zypp/solver/detail/SATResolver.cc:1109
 #, boost-format
 msgid "%1% is not installable"
-msgstr ""
+msgstr "%1% 不可安裝"
 
 #: zypp/solver/detail/SATResolver.cc:1114
 #, boost-format
 msgid "nothing provides '%1%' needed by the installed %2%"
-msgstr ""
+msgstr "沒有套件庫能提供安裝的 %2% 所需的 \"%1%\""
 
 #: zypp/solver/detail/SATResolver.cc:1116
 #, boost-format
 msgid "nothing provides '%1%' needed by the to be installed %2%"
-msgstr ""
+msgstr "沒有套件庫能提供要安裝的 %2% 所需的 \"%1%\""
 
 #: zypp/solver/detail/SATResolver.cc:1119
 #, boost-format
 msgid "cannot install both %1% and %2%"
-msgstr ""
+msgstr "無法同時安裝 %1% 和 %2%"
 
 #: zypp/solver/detail/SATResolver.cc:1124
 #, boost-format
 msgid "the installed %1% conflicts with '%2%' provided by the installed %3%"
-msgstr ""
+msgstr "安裝的 %1% 與安裝的 %3% 所提供的 \"%2%\" 衝突"
 
 #: zypp/solver/detail/SATResolver.cc:1126
 #, boost-format
 msgid ""
 "the installed %1% conflicts with '%2%' provided by the to be installed %3%"
-msgstr ""
+msgstr "安裝的 %1% 與要安裝的 %3% 所提供的 \"%2%\" 衝突"
 
 #: zypp/solver/detail/SATResolver.cc:1130
 #, boost-format
 msgid ""
 "the to be installed %1% conflicts with '%2%' provided by the installed %3%"
-msgstr ""
+msgstr "要安裝的 %1% 與安裝的 %3% 所提供的 \"%2%\" 衝突"
 
 #: zypp/solver/detail/SATResolver.cc:1132
 #, boost-format
 msgid ""
 "the to be installed %1% conflicts with '%2%' provided by the to be installed "
 "%3%"
-msgstr ""
+msgstr "要安裝的 %1% 與要安裝的 %3% 所提供的 \"%2%\" 衝突"
 
 #: zypp/solver/detail/SATResolver.cc:1139
 #, boost-format
 msgid "the installed %1% obsoletes '%2%' provided by the installed %3%"
-msgstr ""
+msgstr "安裝的 %1% 會汰換安裝的 %3% 所提供的 \"%2%\""
 
 #: zypp/solver/detail/SATResolver.cc:1141
 #, boost-format
 msgid "the installed %1% obsoletes '%2%' provided by the to be installed %3%"
-msgstr ""
+msgstr "安裝的 %1% 會汰換要安裝的 %3% 所提供的 \"%2%\""
 
 #: zypp/solver/detail/SATResolver.cc:1145
 #, boost-format
 msgid "the to be installed %1% obsoletes '%2%' provided by the installed %3%"
-msgstr ""
+msgstr "要安裝的 %1% 會汰換安裝的 %3% 所提供的 \"%2%\""
 
 #: zypp/solver/detail/SATResolver.cc:1147
 #, boost-format
 msgid ""
 "the to be installed %1% obsoletes '%2%' provided by the to be installed %3%"
-msgstr ""
+msgstr "要安裝的 %1% 會汰換要安裝的 %3% 所提供的 \"%2%\""
 
 #: zypp/solver/detail/SATResolver.cc:1152
 #, boost-format
 msgid "the installed %1% conflicts with '%2%' provided by itself"
-msgstr ""
+msgstr "安裝的 %1% 與其自身所提供的 \"%2%\" 衝突"
 
 #: zypp/solver/detail/SATResolver.cc:1154
 #, boost-format
 msgid "the to be installed %1% conflicts with '%2%' provided by itself"
-msgstr ""
+msgstr "要安裝的 %1% 與其自身所提供的 \"%2%\" 衝突"
 
 #: zypp/solver/detail/SATResolver.cc:1186
 #, boost-format
 msgid ""
 "the installed %1% requires '%2%', but this requirement cannot be provided"
-msgstr ""
+msgstr "安裝的 %1% 需要 \"%2%\"，但無法符合此要求"
 
 #: zypp/solver/detail/SATResolver.cc:1188
 #, boost-format
 msgid ""
 "the to be installed %1% requires '%2%', but this requirement cannot be "
 "provided"
-msgstr ""
+msgstr "要安裝的 %1% 需要 \"%2%\"，但無法符合此要求"
 
 #: zypp/solver/detail/SATResolver.cc:1190
 #: zypp/solver/detail/SATResolver.cc:1629
@@ -4601,24 +4601,24 @@ msgstr "無法安裝的提供者： "
 #: zypp/solver/detail/SATResolver.cc:1264
 #, boost-format
 msgid "remove lock to allow removal of %1%"
-msgstr ""
+msgstr "移除鎖定以允許移除 %1%"
 
 #: zypp/solver/detail/SATResolver.cc:1269
 #: zypp/solver/detail/SATResolver.cc:1305
 #, boost-format
 msgid "do not install %1%"
-msgstr ""
+msgstr "不安裝 %1%"
 
 #: zypp/solver/detail/SATResolver.cc:1284
 #: zypp/solver/detail/SATResolver.cc:1326
 #, boost-format
 msgid "keep %1%"
-msgstr ""
+msgstr "保留 %1%"
 
 #: zypp/solver/detail/SATResolver.cc:1289
 #, boost-format
 msgid "remove lock to allow installation of %1%"
-msgstr ""
+msgstr "移除鎖定以允許安裝 %1%"
 
 #: zypp/solver/detail/SATResolver.cc:1340
 #: zypp/solver/detail/SATResolver.cc:1361
@@ -4641,37 +4641,37 @@ msgstr "忽略損毀系統的警告"
 #: zypp/solver/detail/SATResolver.cc:1346
 #, boost-format
 msgid "do not ask to install a solvable providing %1%"
-msgstr ""
+msgstr "不詢問即安裝提供 %1% 的解決方案"
 
 #: zypp/solver/detail/SATResolver.cc:1368
 #, boost-format
 msgid "do not ask to delete all solvables providing %1%"
-msgstr ""
+msgstr "不詢問即刪除提供 %1% 的所有解決方案"
 
 #: zypp/solver/detail/SATResolver.cc:1381
 #, boost-format
 msgid "do not install most recent version of %1%"
-msgstr ""
+msgstr "不安裝最新版本的 %1%"
 
 #: zypp/solver/detail/SATResolver.cc:1402
 #, boost-format
 msgid "keep %1% despite the inferior architecture"
-msgstr ""
+msgstr "即使架構較低，仍保留 %1%"
 
 #: zypp/solver/detail/SATResolver.cc:1407
 #, boost-format
 msgid "install %1% despite the inferior architecture"
-msgstr ""
+msgstr "即使架構較低，仍安裝 %1%"
 
 #: zypp/solver/detail/SATResolver.cc:1416
 #, boost-format
 msgid "keep obsolete %1%"
-msgstr ""
+msgstr "保留汰換的 %1%"
 
 #: zypp/solver/detail/SATResolver.cc:1421
 #, boost-format
 msgid "install %1% from excluded repository"
-msgstr ""
+msgstr "安裝來自已排除套件庫的 %1%"
 
 #. translator: %1% is a package name
 #: zypp/solver/detail/SATResolver.cc:1435
@@ -4700,12 +4700,12 @@ msgstr "儘管 %1% 已列入黑名單，仍予以安裝"
 #: zypp/solver/detail/SATResolver.cc:1461
 #, boost-format
 msgid "downgrade of %1% to %2%"
-msgstr ""
+msgstr "將 %1% 降級到 %2%"
 
 #: zypp/solver/detail/SATResolver.cc:1468
 #, boost-format
 msgid "architecture change of %1% to %2%"
-msgstr ""
+msgstr "架構從 %1% 變更為 %2%"
 
 #: zypp/solver/detail/SATResolver.cc:1477
 #, boost-format
@@ -4713,16 +4713,18 @@ msgid ""
 "install %1% (with vendor change)\n"
 "  %2%  -->  %3%"
 msgstr ""
+"安裝 %1% (並變更廠商)\n"
+"  %2%  -->  %3%"
 
 #: zypp/solver/detail/SATResolver.cc:1483
 #, boost-format
 msgid "replacement of %1% with %2%"
-msgstr ""
+msgstr "以 %2% 取代 %1%"
 
 #: zypp/solver/detail/SATResolver.cc:1494
 #, boost-format
 msgid "deinstallation of %1%"
-msgstr ""
+msgstr "解除安裝 %1%"
 
 #: zypp/solver/detail/SATResolver.cc:1548
 #: zypp/solver/detail/SATResolver.cc:2081
@@ -5162,6 +5164,8 @@ msgid ""
 "Download (curl) error for '%s':\n"
 "Error code: %s\n"
 msgstr ""
+"下載 (curl) \"%s\" 時發生錯誤：\n"
+"錯誤代碼：%s\n"
 
 #: zypp/zyppng/media/network/networkrequesterror.cc:138
 #, c-format, boost-format
@@ -5169,6 +5173,8 @@ msgid ""
 "Download (curl) error for '%s':\n"
 "Unable to retrieve HTTP response\n"
 msgstr ""
+"下載 (curl) \"%s\" 時發生錯誤：\n"
+"無法擷取 HTTP 回應\n"
 
 #~ msgid "Can't open lock file: %s"
 #~ msgstr "無法開啟鎖定檔案：%s"
