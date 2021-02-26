@@ -42,7 +42,7 @@ namespace zypp
       }
     }
 
-    bool SUSEMediaVerifier::isDesiredMedia( const media::MediaAccessRef & ref )
+    bool SUSEMediaVerifier::isDesiredMedia( const media::MediaAccessRef & ref ) const
     {
       if ( _media_vendor.empty() || _media_id.empty() )
 	return true;

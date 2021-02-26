@@ -51,8 +51,8 @@ namespace zypp
        * Reimplementation of virtual function, will be
        * called by the component verifying the media.
        */
-      virtual bool isDesiredMedia( const media::MediaAccessRef & ref );
-      
+      virtual bool isDesiredMedia( const media::MediaAccessRef & ref ) const;
+
     private:
       std::string _media_vendor;
       std::string _media_id;

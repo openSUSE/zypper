@@ -26,7 +26,7 @@ public:
     _media_id = id;
   }
 
-  virtual bool isDesiredMedia(const media::MediaAccessRef &ref)
+  bool isDesiredMedia(const media::MediaAccessRef &ref) const override
   {
     return ref->doesFileExist(Pathname("/x." + _media_id ));
   }
