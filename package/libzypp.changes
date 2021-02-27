@@ -11,7 +11,7 @@ Wed Feb 24 17:07:52 CET 2021 - ma@suse.de
 -------------------------------------------------------------------
 Wed Feb 17 09:06:49 CET 2021 - ma@suse.de
 
-- Patch: Identify well-known category names (bsc#117984)
+- Patch: Identify well-known category names (bsc#1179847)
   This allows to use the RH and SUSE patch categrory names
   synonymously:
   (recommendedi = bugfix) and (optional = feature = enhancement).
