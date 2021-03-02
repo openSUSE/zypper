@@ -1625,6 +1625,7 @@ void Summary::writeXmlResolvableList( std::ostream & out, const KindToResPairSet
       out << " name=\"" << res->name() << "\"";
       out << " edition=\"" << res->edition() << "\"";
       out << " arch=\"" << res->arch() << "\"";
+      out << " repository=\"" << res->repoInfo().alias() << "\"";
       if ( rold )
       {
         out << " edition-old=\"" << rold->edition() << "\"";
