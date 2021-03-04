@@ -922,8 +922,7 @@ namespace zypp
 
   Pathname ZConfig::pubkeyCachePath() const
   {
-    return ( _pimpl->cfg_cache_path.empty()
-             ? Pathname("/var/cache/zypp/pubkeys") : _pimpl->cfg_cache_path/"pubkeys" );
+    return repoCachePath()/"pubkeys";
   }
 
   void ZConfig::setRepoCachePath(const zypp::filesystem::Pathname &path_r)
