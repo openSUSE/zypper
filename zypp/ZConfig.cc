@@ -236,9 +236,12 @@ namespace zypp
 	typedef Tp value_type;
 
 	/** No default ctor, explicit initialisation! */
-	Option( const value_type & initial_r )
-	  : _val( initial_r )
+	Option( value_type initial_r )
+	  : _val( std::move(initial_r) )
 	{}
+
+	Option & operator=( value_type newval_r )
+	{ set( std::move(newval_r) ); return *this; }
 
 	/** Get the value.  */
 	const value_type & get() const
@@ -249,12 +252,8 @@ namespace zypp
         { return _val; }
 
 	/** Set a new value.  */
-	void set( const value_type & newval_r )
-	{ _val = newval_r; }
-
-        /** Non-const reference to set a new value. */
-        value_type & ref()
-        { return _val; }
+	void set( value_type newval_r )
+	{ _val = std::move(newval_r); }
 
 	private:
 	  value_type _val;
@@ -267,25 +266,29 @@ namespace zypp
 	typedef Tp         value_type;
 	typedef Option<Tp> option_type;
 
-        DefaultOption( const value_type & initial_r )
-          : Option<Tp>( initial_r ), _default( initial_r )
-        {}
+	explicit DefaultOption( value_type initial_r )
+	: Option<Tp>( initial_r )
+	, _default( std::move(initial_r) )
+	{}
+
+	DefaultOption & operator=( value_type newval_r )
+	{ this->set( std::move(newval_r) ); return *this; }
 
 	/** Reset value to the current default. */
 	void restoreToDefault()
 	{ this->set( _default.get() ); }
 
 	/** Reset value to a new default. */
-	void restoreToDefault( const value_type & newval_r )
-	{ setDefault( newval_r ); restoreToDefault(); }
+	void restoreToDefault( value_type newval_r )
+	{ setDefault( std::move(newval_r) ); restoreToDefault(); }
 
 	/** Get the current default value. */
 	const value_type & getDefault() const
 	{ return _default.get(); }
 
 	/** Set a new default value. */
-	void setDefault( const value_type & newval_r )
-	{ _default.set( newval_r ); }
+	void setDefault( value_type newval_r )
+	{ _default.set( std::move(newval_r) ); }
 
 	private:
 	  option_type _default;
