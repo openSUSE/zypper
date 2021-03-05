@@ -29,54 +29,58 @@ namespace zypp
 #ifndef ZYPP_NDEBUG
   namespace debug
   {
-    void osdlog( const std::string & msg_r, unsigned level_r )
+    // Fg::Black:   30  Bg: 40 Attr::Normal:  22;27
+    // Fg::Red:     31  ...    Attr::Bright:  1
+    // Fg::Green:   32         Attr::Reverse: 7
+    // Fg::Yellow:  33
+    // Fg::Blue:    34
+    // Fg::Magenta: 35
+    // Fg::Cyan:    36
+    // Fg::White:   37
+    // Fg::Default: 39
+    static constexpr std::string_view OO { "\033[0m" };
+    static constexpr std::string_view WH { "\033[37;40m" };
+    static constexpr std::string_view CY { "\033[36;40m" };
+    static constexpr std::string_view YE { "\033[33;1;40m" };
+    static constexpr std::string_view GR { "\033[32;40m" };
+    static constexpr std::string_view RE { "\033[31;1;40m" };
+    static constexpr std::string_view MA { "\033[35;40m" };
+
+    unsigned TraceLeave::_depth = 1;
+
+    std::string tracestr( char tag_r, unsigned depth_r, const char * file_r, const char * fnc_r, int line_r )
     {
-      // Fg::Black:   30  Bg: 40 Attr::Normal:  22;27
-      // Fg::Red:     31  ...    Attr::Bright:  1
-      // Fg::Green:   32         Attr::Reverse: 7
-      // Fg::Yellow:  33
-      // Fg::Blue:    34
-      // Fg::Magenta: 35
-      // Fg::Cyan:    36
-      // Fg::White:   37
-      // Fg::Default: 39
-      static const char * ansi[] = {
-	"\033[37;40m",		// 0 w
-	"\033[36;40m",		// 1 c
-	"\033[33;1;40m",	// 2 y
-	"\033[32;40m",		// 3 g
-	"\033[31;1;40m",	// 4 r
-	"\033[35;40m",		// 5 m
-      };
-      static const unsigned n = sizeof(ansi)/sizeof(const char *);
-      switch ( level_r )
-      {
-	case 'w': level_r = 0; break;
-	case 'c': level_r = 1; break;
-	case 'y': level_r = 2; break;
-	case 'g': level_r = 3; break;
-	case 'r': level_r = 4; break;
-	case 'm': level_r = 5; break;
-      }
-      std::cerr << ansi[level_r%n] << "OSD[" << msg_r << "]\033[0m" << std::endl;
+      static str::Format fmt { "*** %s %s(%s):%d" };
+      fmt % std::string(depth_r,tag_r) % file_r % fnc_r % line_r;
+      return fmt;
     }
 
-
-    unsigned TraceLeave::_depth = 0;
-
-    TraceLeave::TraceLeave( const char * file_r, const char *  fnc_r, int line_r )
+    TraceLeave::TraceLeave( const char * file_r, const char * fnc_r, int line_r )
     : _file( std::move(file_r) )
     , _fnc( std::move(fnc_r) )
     , _line( line_r )
     {
-      //std::string::size_type p( _file.find_last_of( '/' ) );
-      //if ( p != std::string::npos )
-      //_file.erase( 0, p+1 );
-      USR << ">>> " << std::string(_depth++,'>') << " " << _file << "(" << _fnc << "):" << _line << endl;
+      const std::string & m { tracestr( '>',_depth++, _file,_fnc,_line ) };
+      USR << m << endl;
+      Osd(1) << m << endl;
     }
 
     TraceLeave::~TraceLeave()
-    { USR << "<<< " << std::string(--_depth,'<') << " " << _file << "(" << _fnc << "):" << _line << endl; }
+    {
+      const std::string & m { tracestr( '<',--_depth, _file,_fnc,_line ) };
+      USR << m << endl;
+      Osd(1) << m << endl;
+    }
+
+    Osd::Osd( int i )
+    : _str { std::cerr }
+    { _str << (i?WH:YE); }
+
+    Osd::~Osd()
+    { _str << OO; }
+
+    Osd & Osd::operator<<( std::ostream& (*iomanip)( std::ostream& ) )
+    { _str << iomanip; return *this; }
 }
 #endif // ZYPP_NDEBUG
 
