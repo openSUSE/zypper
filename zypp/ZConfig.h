@@ -33,6 +33,8 @@
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
+  class RepoManager;
+
   ///////////////////////////////////////////////////////////////////
   //
   //	CLASS NAME : ZConfig
@@ -182,6 +184,7 @@ namespace zypp
         * \ingroup g_ZC_REPOCACHE
       */
       Pathname repoPackagesPath() const;
+
 
       /**
        * Set a new \a path as the default repo cache path
@@ -540,10 +543,22 @@ namespace zypp
       std::string multiversionKernels() const;
 
       //@}
+
     public:
       class Impl;
       /** Dtor */
       ~ZConfig();
+  private:
+      friend class RepoManager;
+      /** The builtin config file value. */
+      Pathname builtinRepoCachePath() const;
+      /** The builtin config file value. */
+      Pathname builtinRepoMetadataPath() const;
+      /** The builtin config file value. */
+      Pathname builtinRepoSolvfilesPath() const;
+      /** The builtin config file value. */
+      Pathname builtinRepoPackagesPath() const;
+
   private:
       friend class Impl;
       /** Default ctor. */

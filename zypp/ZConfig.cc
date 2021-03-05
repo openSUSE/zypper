@@ -312,6 +312,10 @@ namespace zypp
         : _parsedZyppConf         	( override_r )
         , cfg_arch                	( defaultSystemArchitecture() )
         , cfg_textLocale          	( defaultTextLocale() )
+        , cfg_cache_path		{ "/var/cache/zypp" }
+        , cfg_metadata_path		{ "" }	// empty - follows cfg_cache_path
+        , cfg_solvfiles_path		{ "" }	// empty - follows cfg_cache_path
+        , cfg_packages_path		{ "" }	// empty - follows cfg_cache_path
         , updateMessagesNotify		( "" )
         , repo_add_probe          	( false )
         , repo_refresh_delay      	( 10 )
@@ -387,19 +391,19 @@ namespace zypp
                 }
                 else if ( entry == "cachedir" )
                 {
-                  cfg_cache_path = Pathname(value);
+                  cfg_cache_path.restoreToDefault( value );
                 }
                 else if ( entry == "metadatadir" )
                 {
-                  cfg_metadata_path = Pathname(value);
+                  cfg_metadata_path.restoreToDefault( value );
                 }
                 else if ( entry == "solvfilesdir" )
                 {
-                  cfg_solvfiles_path = Pathname(value);
+                  cfg_solvfiles_path.restoreToDefault( value );
                 }
                 else if ( entry == "packagesdir" )
                 {
-                  cfg_packages_path = Pathname(value);
+                  cfg_packages_path.restoreToDefault( value );
                 }
                 else if ( entry == "configdir" )
                 {
@@ -633,10 +637,10 @@ namespace zypp
     Arch     cfg_arch;
     Locale   cfg_textLocale;
 
-    Pathname cfg_cache_path;
-    Pathname cfg_metadata_path;
-    Pathname cfg_solvfiles_path;
-    Pathname cfg_packages_path;
+    DefaultOption<Pathname> cfg_cache_path;	// Settings from the config file are also remembered
+    DefaultOption<Pathname> cfg_metadata_path;	// 'default'. Cleanup in RepoManager e.g needs to tell
+    DefaultOption<Pathname> cfg_solvfiles_path;	// whether settings in effect are config values or
+    DefaultOption<Pathname> cfg_packages_path;	// custom settings applied vie set...Path().
 
     Pathname cfg_config_path;
     Pathname cfg_known_repos_path;
@@ -916,8 +920,8 @@ namespace zypp
 
   Pathname ZConfig::repoCachePath() const
   {
-    return ( _pimpl->cfg_cache_path.empty()
-             ? Pathname("/var/cache/zypp") : _pimpl->cfg_cache_path );
+    return ( _pimpl->cfg_cache_path.get().empty()
+             ? Pathname("/var/cache/zypp") : _pimpl->cfg_cache_path.get() );
   }
 
   Pathname ZConfig::pubkeyCachePath() const
@@ -932,8 +936,8 @@ namespace zypp
 
   Pathname ZConfig::repoMetadataPath() const
   {
-    return ( _pimpl->cfg_metadata_path.empty()
-        ? (repoCachePath()/"raw") : _pimpl->cfg_metadata_path );
+    return ( _pimpl->cfg_metadata_path.get().empty()
+        ? (repoCachePath()/"raw") : _pimpl->cfg_metadata_path.get() );
   }
 
   void ZConfig::setRepoMetadataPath(const zypp::filesystem::Pathname &path_r)
@@ -943,8 +947,8 @@ namespace zypp
 
   Pathname ZConfig::repoSolvfilesPath() const
   {
-    return ( _pimpl->cfg_solvfiles_path.empty()
-        ? (repoCachePath()/"solv") : _pimpl->cfg_solvfiles_path );
+    return ( _pimpl->cfg_solvfiles_path.get().empty()
+        ? (repoCachePath()/"solv") : _pimpl->cfg_solvfiles_path.get() );
   }
 
   void ZConfig::setRepoSolvfilesPath(const zypp::filesystem::Pathname &path_r)
@@ -954,14 +958,26 @@ namespace zypp
 
   Pathname ZConfig::repoPackagesPath() const
   {
-    return ( _pimpl->cfg_packages_path.empty()
-        ? (repoCachePath()/"packages") : _pimpl->cfg_packages_path );
+    return ( _pimpl->cfg_packages_path.get().empty()
+        ? (repoCachePath()/"packages") : _pimpl->cfg_packages_path.get() );
   }
 
   void ZConfig::setRepoPackagesPath(const zypp::filesystem::Pathname &path_r)
   {
     _pimpl->cfg_packages_path = path_r;
   }
+
+  Pathname ZConfig::builtinRepoCachePath() const
+  { return _pimpl->cfg_cache_path.getDefault().empty() ? Pathname("/var/cache/zypp") : _pimpl->cfg_cache_path.getDefault(); }
+
+  Pathname ZConfig::builtinRepoMetadataPath() const
+  { return _pimpl->cfg_metadata_path.getDefault().empty() ? (builtinRepoCachePath()/"raw") : _pimpl->cfg_metadata_path.getDefault(); }
+
+  Pathname ZConfig::builtinRepoSolvfilesPath() const
+  { return _pimpl->cfg_solvfiles_path.getDefault().empty() ? (builtinRepoCachePath()/"solv") : _pimpl->cfg_solvfiles_path.getDefault(); }
+
+  Pathname ZConfig::builtinRepoPackagesPath() const
+  { return _pimpl->cfg_packages_path.getDefault().empty() ? (builtinRepoCachePath()/"packages") : _pimpl->cfg_packages_path.getDefault(); }
 
   ///////////////////////////////////////////////////////////////////
 
