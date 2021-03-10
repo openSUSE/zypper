@@ -185,35 +185,22 @@ namespace zypp
                 }
               }
 
-              std::ifstream str(mediafile.asString().c_str());
-              std::string vendor;
-              std::string mediaid;
-              std::string buffer;
-              if ( str )
-              {
-                getline(str, vendor);
-                getline(str, mediaid);
-                getline(str, buffer);
-
-                unsigned media_nr = str::strtonum<unsigned>(buffer);
-                MIL << "Repository '" << repo.alias() << "' has " << media_nr << " medias"<< endl;
-
-                for ( unsigned i=1; i <= media_nr; ++i )
-                {
-                  media::MediaVerifierRef verifier( new repo::SUSEMediaVerifier( vendor, mediaid, i ) );
-
+	      SUSEMediaVerifier lverifyer { mediafile };
+	      if ( lverifyer ) {
+		DBG << "Verifyer for repo '" << repo.alias() << "':" << lverifyer << endl;
+		for ( media::MediaNr i = 1; i <= lverifyer.totalMedia(); ++i ) {
+		  media::MediaVerifierRef verifier( new repo::SUSEMediaVerifier( lverifyer, i ) );
                   media->setVerifier( i, verifier);
                 }
                 _verifier[media] = repo;
-              }
-              else
-              {
-                ZYPP_THROW(RepoMetadataException(repo));
-              }
+	      }
+	      else {
+		WAR << "Invalid verifier for repo '" << repo.alias() << "' in '" << repo.metadataPath() << "': " << lverifyer << endl;
+	      }
             }
             else
             {
-              WAR << "No media verifier for repo '" << repo.alias() << "' media.1/media does not exist in '" << repo.metadataPath() << "'" << endl;
+              DBG << "No media verifier for repo '" << repo.alias() << "' media.1/media does not exist in '" << repo.metadataPath() << "'" << endl;
             }
           }
           else

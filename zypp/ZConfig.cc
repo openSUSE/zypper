@@ -236,9 +236,12 @@ namespace zypp
 	typedef Tp value_type;
 
 	/** No default ctor, explicit initialisation! */
-	Option( const value_type & initial_r )
-	  : _val( initial_r )
+	Option( value_type initial_r )
+	  : _val( std::move(initial_r) )
 	{}
+
+	Option & operator=( value_type newval_r )
+	{ set( std::move(newval_r) ); return *this; }
 
 	/** Get the value.  */
 	const value_type & get() const
@@ -249,12 +252,8 @@ namespace zypp
         { return _val; }
 
 	/** Set a new value.  */
-	void set( const value_type & newval_r )
-	{ _val = newval_r; }
-
-        /** Non-const reference to set a new value. */
-        value_type & ref()
-        { return _val; }
+	void set( value_type newval_r )
+	{ _val = std::move(newval_r); }
 
 	private:
 	  value_type _val;
@@ -267,25 +266,29 @@ namespace zypp
 	typedef Tp         value_type;
 	typedef Option<Tp> option_type;
 
-        DefaultOption( const value_type & initial_r )
-          : Option<Tp>( initial_r ), _default( initial_r )
-        {}
+	explicit DefaultOption( value_type initial_r )
+	: Option<Tp>( initial_r )
+	, _default( std::move(initial_r) )
+	{}
+
+	DefaultOption & operator=( value_type newval_r )
+	{ this->set( std::move(newval_r) ); return *this; }
 
 	/** Reset value to the current default. */
 	void restoreToDefault()
 	{ this->set( _default.get() ); }
 
 	/** Reset value to a new default. */
-	void restoreToDefault( const value_type & newval_r )
-	{ setDefault( newval_r ); restoreToDefault(); }
+	void restoreToDefault( value_type newval_r )
+	{ setDefault( std::move(newval_r) ); restoreToDefault(); }
 
 	/** Get the current default value. */
 	const value_type & getDefault() const
 	{ return _default.get(); }
 
 	/** Set a new default value. */
-	void setDefault( const value_type & newval_r )
-	{ _default.set( newval_r ); }
+	void setDefault( value_type newval_r )
+	{ _default.set( std::move(newval_r) ); }
 
 	private:
 	  option_type _default;
@@ -309,6 +312,10 @@ namespace zypp
         : _parsedZyppConf         	( override_r )
         , cfg_arch                	( defaultSystemArchitecture() )
         , cfg_textLocale          	( defaultTextLocale() )
+        , cfg_cache_path		{ "/var/cache/zypp" }
+        , cfg_metadata_path		{ "" }	// empty - follows cfg_cache_path
+        , cfg_solvfiles_path		{ "" }	// empty - follows cfg_cache_path
+        , cfg_packages_path		{ "" }	// empty - follows cfg_cache_path
         , updateMessagesNotify		( "" )
         , repo_add_probe          	( false )
         , repo_refresh_delay      	( 10 )
@@ -384,19 +391,19 @@ namespace zypp
                 }
                 else if ( entry == "cachedir" )
                 {
-                  cfg_cache_path = Pathname(value);
+                  cfg_cache_path.restoreToDefault( value );
                 }
                 else if ( entry == "metadatadir" )
                 {
-                  cfg_metadata_path = Pathname(value);
+                  cfg_metadata_path.restoreToDefault( value );
                 }
                 else if ( entry == "solvfilesdir" )
                 {
-                  cfg_solvfiles_path = Pathname(value);
+                  cfg_solvfiles_path.restoreToDefault( value );
                 }
                 else if ( entry == "packagesdir" )
                 {
-                  cfg_packages_path = Pathname(value);
+                  cfg_packages_path.restoreToDefault( value );
                 }
                 else if ( entry == "configdir" )
                 {
@@ -630,10 +637,10 @@ namespace zypp
     Arch     cfg_arch;
     Locale   cfg_textLocale;
 
-    Pathname cfg_cache_path;
-    Pathname cfg_metadata_path;
-    Pathname cfg_solvfiles_path;
-    Pathname cfg_packages_path;
+    DefaultOption<Pathname> cfg_cache_path;	// Settings from the config file are also remembered
+    DefaultOption<Pathname> cfg_metadata_path;	// 'default'. Cleanup in RepoManager e.g needs to tell
+    DefaultOption<Pathname> cfg_solvfiles_path;	// whether settings in effect are config values or
+    DefaultOption<Pathname> cfg_packages_path;	// custom settings applied vie set...Path().
 
     Pathname cfg_config_path;
     Pathname cfg_known_repos_path;
@@ -913,14 +920,13 @@ namespace zypp
 
   Pathname ZConfig::repoCachePath() const
   {
-    return ( _pimpl->cfg_cache_path.empty()
-             ? Pathname("/var/cache/zypp") : _pimpl->cfg_cache_path );
+    return ( _pimpl->cfg_cache_path.get().empty()
+             ? Pathname("/var/cache/zypp") : _pimpl->cfg_cache_path.get() );
   }
 
   Pathname ZConfig::pubkeyCachePath() const
   {
-    return ( _pimpl->cfg_cache_path.empty()
-             ? Pathname("/var/cache/zypp/pubkeys") : _pimpl->cfg_cache_path/"pubkeys" );
+    return repoCachePath()/"pubkeys";
   }
 
   void ZConfig::setRepoCachePath(const zypp::filesystem::Pathname &path_r)
@@ -930,8 +936,8 @@ namespace zypp
 
   Pathname ZConfig::repoMetadataPath() const
   {
-    return ( _pimpl->cfg_metadata_path.empty()
-        ? (repoCachePath()/"raw") : _pimpl->cfg_metadata_path );
+    return ( _pimpl->cfg_metadata_path.get().empty()
+        ? (repoCachePath()/"raw") : _pimpl->cfg_metadata_path.get() );
   }
 
   void ZConfig::setRepoMetadataPath(const zypp::filesystem::Pathname &path_r)
@@ -941,8 +947,8 @@ namespace zypp
 
   Pathname ZConfig::repoSolvfilesPath() const
   {
-    return ( _pimpl->cfg_solvfiles_path.empty()
-        ? (repoCachePath()/"solv") : _pimpl->cfg_solvfiles_path );
+    return ( _pimpl->cfg_solvfiles_path.get().empty()
+        ? (repoCachePath()/"solv") : _pimpl->cfg_solvfiles_path.get() );
   }
 
   void ZConfig::setRepoSolvfilesPath(const zypp::filesystem::Pathname &path_r)
@@ -952,14 +958,26 @@ namespace zypp
 
   Pathname ZConfig::repoPackagesPath() const
   {
-    return ( _pimpl->cfg_packages_path.empty()
-        ? (repoCachePath()/"packages") : _pimpl->cfg_packages_path );
+    return ( _pimpl->cfg_packages_path.get().empty()
+        ? (repoCachePath()/"packages") : _pimpl->cfg_packages_path.get() );
   }
 
   void ZConfig::setRepoPackagesPath(const zypp::filesystem::Pathname &path_r)
   {
     _pimpl->cfg_packages_path = path_r;
   }
+
+  Pathname ZConfig::builtinRepoCachePath() const
+  { return _pimpl->cfg_cache_path.getDefault().empty() ? Pathname("/var/cache/zypp") : _pimpl->cfg_cache_path.getDefault(); }
+
+  Pathname ZConfig::builtinRepoMetadataPath() const
+  { return _pimpl->cfg_metadata_path.getDefault().empty() ? (builtinRepoCachePath()/"raw") : _pimpl->cfg_metadata_path.getDefault(); }
+
+  Pathname ZConfig::builtinRepoSolvfilesPath() const
+  { return _pimpl->cfg_solvfiles_path.getDefault().empty() ? (builtinRepoCachePath()/"solv") : _pimpl->cfg_solvfiles_path.getDefault(); }
+
+  Pathname ZConfig::builtinRepoPackagesPath() const
+  { return _pimpl->cfg_packages_path.getDefault().empty() ? (builtinRepoCachePath()/"packages") : _pimpl->cfg_packages_path.getDefault(); }
 
   ///////////////////////////////////////////////////////////////////
 

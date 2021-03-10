@@ -142,6 +142,15 @@ class VendorAttr
     /** \overload using \ref PoolItem */
     bool equivalent( const PoolItem & lVendor, const PoolItem & rVendor ) const;
 
+    /** Like \ref equivalent but always unifies suse and openSUSE vendor */
+    bool relaxedEquivalent( const Vendor & lVendor, const Vendor & rVendor ) const;
+    /** \overload using \ref IdStrings */
+    bool relaxedEquivalent( IdString lVendor, IdString rVendor ) const;
+    /** \overload using \ref sat::Solvable */
+    bool relaxedEquivalent( sat::Solvable lVendor, sat::Solvable rVendor ) const;
+    /** \overload using \ref PoolItem */
+    bool relaxedEquivalent( const PoolItem & lVendor, const PoolItem & rVendor ) const;
+
   public:
     /** Call \a fnc_r for each equivalent vendor list (return \c false to break).
      * \return The number of calls to \a fnc_r.

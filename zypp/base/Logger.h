@@ -16,22 +16,19 @@
 #include <string>
 
 ///////////////////////////////////////////////////////////////////
-#ifdef ZYPP_NDEBUG
-#define OSDLOG( MSG )
-#define OSMLOG( L, MSG )
-#define TRACELEAVE
-#else
+#ifndef ZYPP_NDEBUG
 namespace zypp
 {
   namespace debug
-  {
-    void osdlog( const std::string & msg_r, unsigned level_r );	// LogControl.cc
+  { // impl in LogControl.cc
 
-    struct TraceLeave	// LogControl.cc
+    // Log code loacaton and block leave
+    // Indent if nested
+    struct TraceLeave
     {
       TraceLeave( const TraceLeave & ) =delete;
       TraceLeave & operator=( const TraceLeave & ) =delete;
-      TraceLeave( const char * file_r, const char *  fnc_r, int line_r );
+      TraceLeave( const char * file_r, const char * fnc_r, int line_r );
       ~TraceLeave();
     private:
       static unsigned _depth;
@@ -39,11 +36,26 @@ namespace zypp
       const char *    _fnc;
       int             _line;
     };
+#define TRACE ::zypp::debug::TraceLeave _TraceLeave( __FILE__, __FUNCTION__, __LINE__ )
+
+    // OnScreenDebug messages colored to stderr
+    struct Osd
+    {
+      Osd( int = 0 );
+      ~Osd();
+
+      template<class Tp>
+      Osd & operator<<( Tp && val )
+      { _str << std::forward<Tp>(val); return *this; }
+
+      Osd & operator<<( std::ostream& (*iomanip)( std::ostream& ) );
+
+    private:
+      std::ostream & _str;
+    };
+#define OSD ::zypp::debug::Osd()
   }
 }
-#define OSDLOG( MSG )    ::zypp::debug::osdlog( MSG, 0 )
-#define OSMLOG( L, MSG ) ::zypp::debug::osdlog( MSG, L )
-#define TRACELEAVE       ::zypp::debug::TraceLeave _TraceLeave( __FILE__, __FUNCTION__, __LINE__ )
 #endif // ZYPP_NDEBUG
 ///////////////////////////////////////////////////////////////////
 

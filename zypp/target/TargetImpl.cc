@@ -210,6 +210,56 @@ namespace zypp
     ///////////////////////////////////////////////////////////////////
     namespace
     {
+      /// \brief Try to provide /proc fs if not present.
+      /// bsc#1181328: Some systemd tools require /proc to be mounted
+      class AssertProcMounted
+      {
+	NON_COPYABLE(AssertProcMounted);
+	NON_MOVABLE(AssertProcMounted);
+      public:
+
+	AssertProcMounted( Pathname root_r )
+	{
+	  root_r /= "/proc";
+	  if ( ! PathInfo(root_r/"self").isDir() ) {
+	    MIL << "Try to make sure proc is mounted at" << _mountpoint << endl;
+	    if ( filesystem::assert_dir(root_r) == 0
+	      && execute({ "mount", "-t", "proc", "proc", root_r.asString() }) == 0 ) {
+	      _mountpoint = std::move(root_r);	// so we'll later unmount it
+	    }
+	    else {
+	      WAR << "Mounting proc at " << _mountpoint << " failed" << endl;
+	    }
+	  }
+	}
+
+	~AssertProcMounted( )
+	{
+	  if ( ! _mountpoint.empty() ) {
+	    // we mounted it so we unmount...
+	    MIL << "We mounted " << _mountpoint << " so we unmount it" << endl;
+	    execute({ "umount", "-l", _mountpoint.asString() });
+	  }
+	}
+
+      private:
+	int execute( ExternalProgram::Arguments && cmd_r ) const
+	{
+	  ExternalProgram prog( cmd_r, ExternalProgram::Stderr_To_Stdout );
+	  for( std::string line = prog.receiveLine(); ! line.empty(); line = prog.receiveLine() )
+	  { DBG << line; }
+	  return prog.close();
+	}
+
+      private:
+	Pathname _mountpoint;
+      };
+    } // namespace
+    ///////////////////////////////////////////////////////////////////
+
+    ///////////////////////////////////////////////////////////////////
+    namespace
+    {
       SolvIdentFile::Data getUserInstalledFromHistory( const Pathname & historyFile_r )
       {
 	SolvIdentFile::Data onSystemByUserList;
@@ -976,6 +1026,8 @@ namespace zypp
           cmd.push_back( "-r" );
           cmd.push_back( _root.asString() );
         }
+        cmd.push_back( "-D" );
+        cmd.push_back( rpm().dbPath().asString() );
         cmd.push_back( "-X" );	// autogenerate pattern/product/... from -package
         // bsc#1104415: no more application support // cmd.push_back( "-A" );	// autogenerate application pseudo packages
         cmd.push_back( "-p" );
@@ -1425,6 +1477,18 @@ namespace zypp
 	}
       }
 
+      {
+	// NOTE: Removing rpm in a transaction, rpm removes the /var/lib/rpm compat symlink.
+	// We re-create it, in case it was lost to prevent legacy tools from accidentally
+	// assuming no database is present.
+	if ( ! PathInfo(_root/"/var/lib/rpm",PathInfo::LSTAT).isExist()
+	  && PathInfo(_root/"/usr/lib/sysimage/rpm").isDir() ) {
+	  WAR << "(rpm removed in commit?) Inject missing /var/lib/rpm compat symlink to /usr/lib/sysimage/rpm" << endl;
+	  filesystem::assert_dir( _root/"/var/lib" );
+	  filesystem::symlink( "../../usr/lib/sysimage/rpm", _root/"/var/lib/rpm" );
+	}
+      }
+
       ///////////////////////////////////////////////////////////////////
       // Send result to commit plugins:
       ///////////////////////////////////////////////////////////////////
@@ -1476,6 +1540,9 @@ namespace zypp
       NotifyAttemptToModify attemptToModify( result_r );
 
       bool abort = false;
+
+      // bsc#1181328: Some systemd tools require /proc to be mounted
+      AssertProcMounted assertProcMounted( _root );
 
       RpmPostTransCollector postTransCollector( _root );
       std::vector<sat::Solvable> successfullyInstalledPackages;

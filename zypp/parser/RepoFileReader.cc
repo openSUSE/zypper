@@ -12,7 +12,7 @@
 #include <iostream>
 #include <zypp/base/LogTools.h>
 #include <zypp/base/String.h>
-#include <zypp/base/Regex.h>
+#include <zypp/base/StringV.h>
 #include <zypp/base/InputStream.h>
 #include <zypp/base/UserRequestException.h>
 
@@ -47,12 +47,22 @@ namespace zypp
 	  if ( key_r == "baseurl" )
 	  {
 	    _inMultiline = MultiLine::baseurl;
-	    _baseurls[section_r].push_back( Url(value_r) );
+	    storeUrl( _baseurls[section_r], value_r );
 	  }
 	  else if ( key_r == "gpgkey" )
 	  {
 	    _inMultiline = MultiLine::gpgkey;
-	    legacyStoreUrl( _gpgkeys[section_r], value_r );
+	    storeUrl( _gpgkeys[section_r], value_r );
+	  }
+	  else if ( key_r == "mirrorlist" )
+	  {
+	    _inMultiline = MultiLine::mirrorlist;
+	    storeUrl( _mirrorlist[section_r], value_r );
+	  }
+	  else if ( key_r == "metalink" )
+	  {
+	    _inMultiline = MultiLine::metalink;
+	    storeUrl( _metalink[section_r], value_r );
 	  }
 	  else
 	  {
@@ -66,11 +76,19 @@ namespace zypp
 	  switch ( _inMultiline )
 	  {
 	    case MultiLine::baseurl:
-	      _baseurls[section_r].push_back( Url(line_r) );
+	      storeUrl( _baseurls[section_r], line_r );
 	      break;
 
 	    case MultiLine::gpgkey:
-	      legacyStoreUrl( _gpgkeys[section_r], line_r );
+	      storeUrl( _gpgkeys[section_r], line_r );
+	      break;
+
+	    case MultiLine::mirrorlist:
+	      storeUrl( _mirrorlist[section_r], line_r );
+	      break;
+
+	    case MultiLine::metalink:
+	      storeUrl( _metalink[section_r], line_r );
 	      break;
 
 	    case MultiLine::none:
@@ -85,25 +103,29 @@ namespace zypp
 	std::list<Url> & gpgkeys( const std::string & section_r )
 	{ return _gpgkeys[section_r]; }
 
+	std::list<Url> & mirrorlist( const std::string & section_r )
+	{ return _mirrorlist[section_r]; }
+
+	std::list<Url> & metalink( const std::string & section_r )
+	{ return _metalink[section_r]; }
+
       private:
-	void legacyStoreUrl( std::list<Url> & store_r, const std::string & line_r )
+	void storeUrl( std::list<Url> & store_r, const std::string & line_r )
 	{
-	  // Legacy:
-	  // 	commit 4ef65a442038caf7a1e310bc719e329b34dbdb67
-	  // 	- split the gpgkey line and take the first one as url to avoid
-	  // 	  crash when creating an url from the line, as Fedora hat the
-	  // 	  *BRILLIANT* idea of using more than one url per line.
-	  std::vector<std::string> keys;
-	  str::split( line_r, std::back_inserter(keys) );
-	  for ( auto && str : keys )
-	    store_r.push_back( Url(std::move(str)) );
+	  // #285: Fedora/dnf allows WS separated urls (and an optional comma)
+	  strv::splitRx( line_r, "[,[:blank:]]*[[:blank:]][,[:blank:]]*", [&store_r]( std::string_view w ) {
+	    if ( ! w.empty() )
+	      store_r.push_back( Url(std::string(w)) );
+	  });
 	}
 
-	enum class MultiLine { none, baseurl, gpgkey };
+	enum class MultiLine { none, baseurl, gpgkey, mirrorlist, metalink };
 	MultiLine _inMultiline = MultiLine::none;
 
 	std::map<std::string,std::list<Url>> _baseurls;
 	std::map<std::string,std::list<Url>> _gpgkeys;
+	std::map<std::string,std::list<Url>> _mirrorlist;
+	std::map<std::string,std::list<Url>> _metalink;
       };
 
     } //namespace
@@ -140,10 +162,6 @@ namespace zypp
             ; // bsc#1177427 et.al.: type in a .repo file is legacy - ignore it and let RepoManager probe
           else if ( it->first == "autorefresh" )
             info.setAutorefresh( str::strToTrue( it->second ) );
-          else if ( it->first == "mirrorlist" && !it->second.empty())
-            info.setMirrorListUrl(Url(it->second));
-	  else if ( it->first == "metalink" && !it->second.empty())
-	    info.setMetalinkUrl(Url(it->second));
           else if ( it->first == "gpgcheck" )
             info.setGpgCheck( str::strToTriBool( it->second ) );
           else if ( it->first == "repo_gpgcheck" )
@@ -185,7 +203,15 @@ namespace zypp
 	  info.addBaseUrl( url );
 	}
 
-	info.setGpgKeyUrls( std::move(dict.gpgkeys( *its )) );
+	if ( ! dict.gpgkeys( *its ).empty() )
+	  info.setGpgKeyUrls( std::move(dict.gpgkeys( *its )) );
+
+	if ( ! dict.mirrorlist( *its ).empty() )
+	  info.setMirrorListUrls( std::move(dict.mirrorlist( *its )) );
+
+	if ( ! dict.metalink( *its ).empty() )
+	  info.setMetalinkUrls( std::move(dict.metalink( *its )) );
+
 
         info.setFilepath(is.path());
         MIL << info << endl;

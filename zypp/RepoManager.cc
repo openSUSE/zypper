@@ -890,10 +890,15 @@ namespace zypp
       // we'd need somemagic file to identify zypp cache directories. Without this
       // we may easily remove user data (zypper --pkg-cache-dir . download ...)
       repoEscAliases.sort();
-      RepoManagerOptions defaultCache( _options.rootDir );
-      cleanupNonRepoMetadtaFolders( _options.repoRawCachePath,		defaultCache.repoRawCachePath,		repoEscAliases );
-      cleanupNonRepoMetadtaFolders( _options.repoSolvCachePath,		defaultCache.repoSolvCachePath,		repoEscAliases );
-      cleanupNonRepoMetadtaFolders( _options.repoPackagesCachePath,	defaultCache.repoPackagesCachePath,	repoEscAliases );
+      cleanupNonRepoMetadtaFolders( _options.repoRawCachePath,
+				    Pathname::assertprefix( _options.rootDir, ZConfig::instance().builtinRepoMetadataPath() ),
+				    repoEscAliases );
+      cleanupNonRepoMetadtaFolders( _options.repoSolvCachePath,
+				    Pathname::assertprefix( _options.rootDir, ZConfig::instance().builtinRepoSolvfilesPath() ),
+				    repoEscAliases );
+      cleanupNonRepoMetadtaFolders( _options.repoPackagesCachePath,
+				    Pathname::assertprefix( _options.rootDir, ZConfig::instance().builtinRepoPackagesPath() ),
+				    repoEscAliases );
     }
     MIL << "end construct known repos" << endl;
   }

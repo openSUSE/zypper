@@ -12,6 +12,7 @@
 #include <iostream>
 #include <sstream>
 #include <fstream>
+#include <optional>
 #include <set>
 #include <zypp/base/Logger.h>
 #include <zypp/base/String.h>

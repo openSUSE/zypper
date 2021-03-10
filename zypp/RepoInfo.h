@@ -204,10 +204,13 @@ namespace zypp
        * \param url The base url for the list
        */
       void setMirrorListUrl( const Url &url );
-      /**
-       * Like \ref setMirrorListUrl but expect metalink format.
-       */
+      /** Like \ref setMirrorListUrl but take an \a url_set */
+      void setMirrorListUrls( url_set urls );
+
+      /** Like \ref setMirrorListUrl but expect metalink format. */
       void setMetalinkUrl( const Url &url );
+      /** Like \ref setMirrorListUrls but expect metalink format. */
+      void setMetalinkUrls( url_set urls );
 
       /**
        * Type of repository,

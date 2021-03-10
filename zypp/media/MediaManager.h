@@ -58,23 +58,20 @@ namespace zypp
       MediaVerifierBase()
       {}
 
-      virtual
-      ~MediaVerifierBase()
+      virtual ~MediaVerifierBase()
       {}
 
       /**
        * Returns a string with some info about the verifier.
        * By default, the type info name is returned.
        */
-      virtual std::string
-      info() const;
+      virtual std::string info() const;
 
       /*
       ** Check if the specified attached media contains
       ** the desired media (e.g. SLES10 CD1).
       */
-      virtual bool
-      isDesiredMedia(const MediaAccessRef &ref) = 0;
+      virtual bool isDesiredMedia(const MediaAccessRef &ref) const = 0;
     };
 
 
@@ -91,26 +88,20 @@ namespace zypp
       NoVerifier(): MediaVerifierBase()
       {}
 
-      virtual
-      ~NoVerifier()
+      ~NoVerifier() override
       {}
 
       /**
        * Returns the "zypp::media::NoVerifier" string.
        */
-      virtual std::string
-      info() const;
+      std::string info() const override;
 
       /*
       ** Don't check if the specified attached media contains
       ** the desired media number. Always return true.
       */
-      virtual bool
-      isDesiredMedia(const MediaAccessRef &ref)
-      {
-        (void)ref;
-        return true;
-      }
+      bool isDesiredMedia(const MediaAccessRef &) const override
+      { return true; }
     };
 
 

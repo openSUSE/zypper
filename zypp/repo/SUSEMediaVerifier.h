@@ -10,58 +10,77 @@
 #ifndef ZYPP_SUSE_MEDIAVERIFIER_H
 #define ZYPP_SUSE_MEDIAVERIFIER_H
 
+#include <iosfwd>
+
 #include <zypp/media/MediaManager.h>
 #include <zypp/media/MediaAccess.h>
+#include <zypp/base/PtrTypes.h>
 
 namespace zypp
 {
   namespace repo
   {
-
-    /**
-     * \short Implementation of the traditional SUSE media verifier
-     */
-    class SUSEMediaVerifier : public zypp::media::MediaVerifierBase
+    ///////////////////////////////////////////////////////////////////
+    ///
+    /// \short Implementation of the traditional SUSE media verifier
+    ///
+    class SUSEMediaVerifier : public media::MediaVerifierBase
     {
-      public:
-      /**
-       * \short create a verifier from attributes
-       *
-       * Creates a verifier for the media using
-       * the attributes
-       *
-       * \param vendor_r i.e. "SUSE Linux Products GmbH"
-       * \param id_r i.e. "20070718164719"
-       * \param media_nr media number
-       */
-      SUSEMediaVerifier(const std::string & vendor_r,
-                        const std::string & id_r,
-                        const media::MediaNr media_nr = 1);
-      
-      /**
-       * \short creates a verifier from a media file
+    public:
+      /** Ctor creating a verifier by parsing media file
        *
        * \param path_r Path to media.1/media kind file
        */
-      SUSEMediaVerifier( int media_nr, const Pathname &path_r );
-      
-      /**
-        * \short Check if it is the desider media
-        *
-        * Check if the specified attached media contains
-        * the desired media number (e.g. SLES10 CD1).
-        *
-        * Reimplementation of virtual function, will be
-        * called by the component verifying the media.
-        */
-      virtual bool isDesiredMedia(const media::MediaAccessRef &ref);
-      
-      private:
-        std::string _media_vendor;
-        std::string _media_id;
-        media::MediaNr _media_nr;
+      explicit SUSEMediaVerifier( const Pathname & path_r, media::MediaNr mediaNr_r = 1 );
+
+      /** Ctor cloning a verifier for a different \a mediaNr_r
+       *
+       * \param path_r Path to media.1/media kind file
+       */
+      SUSEMediaVerifier( const SUSEMediaVerifier & rhs, media::MediaNr mediaNr_r );
+
+         /** Dtor */
+      ~SUSEMediaVerifier() override;
+
+    public:
+      /** Validate object in a boolean context: valid */
+      explicit operator bool() const
+      { return valid(); }
+
+      /** Data considered to be valid if we have vendor and ident. */
+      bool valid() const;
+
+       /** Medias expected vendor string. */
+      const std::string & vendor() const;
+
+      /** Medias expected ident string. */
+      const std::string & ident() const;
+
+      /** The total number of media in this set (or 0 if not known). */
+      media::MediaNr totalMedia() const;
+
+      /** Media number expected by this verifier (starts with 1). */
+      media::MediaNr mediaNr() const;
+
+    public:
+      /** Check if \ref_r accesses the desired media.
+       *
+       * The check is optimistic. If we can't get reliable data from the server,
+       * we nevertheless assume the media is valid. File downloads will fail if
+       * this was not true.
+       */
+      bool isDesiredMedia( const media::MediaAccessRef & ref_r ) const override;
+
+    public:
+      class Impl;                 ///< Implementation class.
+      friend std::ostream & operator<<( std::ostream & str, const SUSEMediaVerifier & obj );
+    private:
+      RW_pointer<Impl> _pimpl; ///< Pointer to implementation.
     };
 
-  }
-}
+    /** \relates SUSEMediaVerifier Stream output  */
+    //std::ostream & operator<<( std::ostream & str, const SUSEMediaVerifier & obj );
+
+  } // namespace repo
+} // namespace zypp
 #endif

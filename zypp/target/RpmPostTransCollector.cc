@@ -127,7 +127,12 @@ namespace zypp
               npkgs++;
 
             MIL << "EXECUTE posttrans: " << script << " with argument: " << npkgs << endl;
-            ExternalProgram prog( (noRootScriptDir/script).asString() + " " +str::numstring( npkgs ), ExternalProgram::Stderr_To_Stdout, false, -1, true, _root );
+	    ExternalProgram::Arguments cmd {
+	      "/bin/sh",
+	      (noRootScriptDir/script).asString(),
+	      str::numstring( npkgs )
+	    };
+            ExternalProgram prog( cmd, ExternalProgram::Stderr_To_Stdout, false, -1, true, _root );
 
 	    str::Str collect;
 	    for( std::string line = prog.receiveLine(); ! line.empty(); line = prog.receiveLine() )

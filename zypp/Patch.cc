@@ -50,7 +50,12 @@ namespace zypp
   { return categoryEnum( category() ); }
 
   bool Patch::isCategory( const std::string & category_r ) const
-  { return( str::compareCI( category_r, category() ) == 0 ); }
+  {
+    // bsc#1179847: identify the wellknown categories
+    Category catenum = categoryEnum( category_r );
+    return ( catenum == CAT_OTHER && str::compareCI( category_r, category() ) == 0 )
+    || ( catenum == categoryEnum() );
+  }
 
   bool Patch::isCategory( Categories category_r ) const
   { return category_r.testFlag( categoryEnum() ); }

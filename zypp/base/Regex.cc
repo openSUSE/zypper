@@ -15,77 +15,76 @@
 #include <iostream>
 
 #include <zypp/base/Regex.h>
+#include <zypp/base/StringV.h>
 
 using namespace zypp;
 using namespace zypp::str;
 
 regex::regex()
-  : m_flags(match_extended)
-  , m_valid(false)
-{
+: m_flags( match_extended )
+{}
 
+regex::regex( const std::string & str, int flags )
+{ assign( str, flags ); }
+
+regex::~regex()
+{
+  if ( m_valid )
+    regfree( &m_preg );
 }
 
-void regex::assign(const std::string& str,int flags)
+void regex::assign( const std::string & str, int flags )
 {
-  m_valid = true;
+  if ( m_valid )
+    regfree( &m_preg );
+
+  m_valid = false;
   m_str = str;
   m_flags = flags;
-  int err;
-  char errbuff[100];
-  static const int normal = 1<<16; // deprecated legacy, use match_extended
-  if (!(flags & normal)) {
-    flags |= match_extended;
-    flags &= ~(normal);
+
+  static constexpr int normal = 1<<16; // deprecated legacy, use match_extended
+  if ( flags & normal ) flags &= ~normal;
+  if ( (flags & rxdefault) != rxdefault ) flags |= rxdefault; // always enforced (legacy)
+
+  if ( int err = regcomp( &m_preg, str.c_str(), flags ) ) {
+    char errbuff[100];
+    regerror( err, &m_preg, errbuff, sizeof(errbuff) );
+    ZYPP_THROW( regex_error(std::string(errbuff)) );
   }
+  m_valid = true;
+}
 
-  if ((err = regcomp(&m_preg, str.c_str(), flags))) {
-    m_valid = false;
-    regerror(err, &m_preg, errbuff, sizeof(errbuff));
-    ZYPP_THROW(regex_error(std::string(errbuff)));
+bool regex::matches( const char* s, smatch & matches, int flags ) const
+{
+  if ( m_valid ) {
+    const auto possibleMatchCount = m_preg.re_nsub + 1;
+    matches.pmatch.resize( possibleMatchCount );
+    memset( matches.pmatch.data(), -1, sizeof( regmatch_t ) * ( possibleMatchCount ) );
+
+    if ( s && !regexec( &m_preg, s, matches.pmatch.size(), matches.pmatch.data(), flags ) ) {
+      matches.match_str = s;
+      return true;	// good match
+    }
   }
+  // Here: no match
+  matches.pmatch.clear();
+  matches.match_str.clear();
+  return false;
 }
 
-regex::regex(const std::string& str, int flags)
+bool regex::matches( const char* s ) const
 {
-  assign(str, flags);
+  return m_valid && s && !regexec( &m_preg, s, 0, NULL, 0 );
 }
 
-regex::~regex() throw()
-{
-  if (m_valid)
-    regfree(&m_preg);
-}
+bool zypp::str::regex_match( const char* s, smatch& matches, const regex& regex )
+{ return regex.matches( s, matches ); }
 
-bool regex::matches( const char *s, smatch &matches, int flags ) const
-{
-  const auto possibleMatchCount = m_preg.re_nsub + 1;
-  matches.pmatch.resize( possibleMatchCount );
-  memset( matches.pmatch.data(), -1, sizeof( regmatch_t ) * ( possibleMatchCount ) );
-
-  bool r = s && m_valid && !regexec( &m_preg, s, matches.pmatch.size(), matches.pmatch.data(), flags );
-  if (r)
-    matches.match_str = s;
-  return r;
-}
-
-bool regex::matches( const char *s ) const
-{
-  return s && !regexec(&m_preg, s, 0, NULL, 0);
-}
-
-bool zypp::str::regex_match(const char * s, smatch& matches, const regex& regex)
-{
-  return regex.matches( s, matches );
-}
-
-bool zypp::str::regex_match(const char * s,  const regex& regex)
-{
-  return regex.matches( s );
-}
+bool zypp::str::regex_match( const char* s,  const regex& regex )
+{ return regex.matches( s ); }
 
 smatch::smatch()
-{ }
+{}
 
 std::string smatch::operator[](unsigned i) const
 {
@@ -121,33 +120,11 @@ unsigned smatch::size() const
 std::string zypp::str::regex_substitute( const std::string &s, const regex &regex, const std::string &replacement, bool global )
 {
   std::string result;
-  std::string::size_type off = 0;
-  int flags = regex::none;
-
-  while ( true ) {
-
-    smatch match;
-    if ( !regex.matches( s.data()+off, match, flags ) ) {
-      break;
-    }
-
-    if ( match.size() ) {
-      result += s.substr( off, match.begin(0) );
+  strv::splitRx( s, regex, [&result,&replacement,global]( std::string_view w, unsigned, bool last ) {
+    result += w;
+    if ( !last )
       result += replacement;
-      off = match.end(0) + off;
-    }
-
-    if ( !global )
-      break;
-
-    // once we passed the beginning of the string we should not match ^ anymore, except the last character was
-    // actually a newline
-    if ( off > 0 && off < s.size() && s[ off - 1 ] == '\n' )
-      flags = regex::none;
-    else
-      flags = regex::not_bol;
-  }
-
-  result += s.substr( off );
+    return global;
+  });
   return result;
 }

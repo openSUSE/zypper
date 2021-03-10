@@ -58,6 +58,23 @@ namespace zypp
     bool equivalent( IdString lVendor, IdString rVendor ) const
     { return lVendor == rVendor || vendorMatchId( lVendor ) == vendorMatchId( rVendor ); }
 
+    /** Return whether two vendor strings should be treated as equivalent or are (suse/opensuse).*/
+    bool relaxedEquivalent( IdString lVendor, IdString rVendor ) const
+    {
+      if ( equivalent( lVendor, rVendor ) )
+	return true;
+
+      static const IdString suse { "suse" };
+      static const IdString opensuse { "opensuse" };
+      unsigned sid = vendorMatchId( suse );
+      unsigned oid = vendorMatchId( opensuse );
+      if ( sid == oid )
+	return false; // (suse/opensuse) are equivalent, so these are not
+
+      auto isSuse = [sid,oid]( unsigned v )-> bool { return v==sid || v==oid; };
+      return isSuse( vendorMatchId(lVendor) ) && isSuse( vendorMatchId(rVendor) );
+    }
+
     unsigned foreachVendorList( std::function<bool(VendorList)> fnc_r ) const
     {
       std::map<unsigned,VendorList> lists;
@@ -319,6 +336,19 @@ namespace zypp
 
   bool VendorAttr::equivalent( const PoolItem & lVendor, const PoolItem & rVendor ) const
   { return _pimpl->equivalent( lVendor.satSolvable().vendor(), rVendor.satSolvable().vendor() ); }
+
+
+  bool VendorAttr::relaxedEquivalent( IdString lVendor, IdString rVendor ) const
+  { return _pimpl->relaxedEquivalent( lVendor, rVendor );}
+
+  bool VendorAttr::relaxedEquivalent( const Vendor & lVendor, const Vendor & rVendor ) const
+  { return _pimpl->relaxedEquivalent( IdString( lVendor ), IdString( rVendor ) ); }
+
+  bool VendorAttr::relaxedEquivalent( sat::Solvable lVendor, sat::Solvable rVendor ) const
+  { return _pimpl->relaxedEquivalent( lVendor.vendor(), rVendor.vendor() ); }
+
+  bool VendorAttr::relaxedEquivalent( const PoolItem & lVendor, const PoolItem & rVendor ) const
+  { return _pimpl->relaxedEquivalent( lVendor.satSolvable().vendor(), rVendor.satSolvable().vendor() ); }
 
   //////////////////////////////////////////////////////////////////
 

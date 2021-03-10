@@ -82,7 +82,7 @@ BuildRequires:  pkgconfig
 BuildRequires:  pkg-config
 %endif
 
-BuildRequires:  libsolv-devel >= 0.7.15
+BuildRequires:  libsolv-devel >= 0.7.17
 %if 0%{?suse_version} >= 1100
 BuildRequires:  libsolv-tools
 %requires_eq    libsolv-tools
@@ -99,6 +99,7 @@ BuildRequires:  nginx
 %endif
 
 Requires:       rpm
+BuildRequires:  rpm
 
 %if 0%{?suse_version}
 BuildRequires:  rpm-devel > 4.4

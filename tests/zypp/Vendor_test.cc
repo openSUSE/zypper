@@ -50,6 +50,13 @@ BOOST_AUTO_TEST_CASE(vendor_test1)
   BOOST_REQUIRE( !VendorAttr::instance().equivalent("opensuse as prefix", "SuSE as prefix") );
   BOOST_REQUIRE( !VendorAttr::instance().equivalent("opensuse",           "opensuse as prefix") );
   BOOST_REQUIRE( !VendorAttr::instance().equivalent("opensuse as prefix", "opensuse but different prefix") );
+
+  // bsc#1182629: relaxed equivalence just adds suse/opensuse
+  BOOST_REQUIRE( !VendorAttr::instance().relaxedEquivalent("SuSE as prefix","foreign") );
+  BOOST_REQUIRE( VendorAttr::instance().relaxedEquivalent("opensuse",           "SuSE as prefix") );
+  BOOST_REQUIRE( !VendorAttr::instance().relaxedEquivalent("opensuse as prefix", "SuSE as prefix") );
+  BOOST_REQUIRE( !VendorAttr::instance().relaxedEquivalent("opensuse",           "opensuse as prefix") );
+  BOOST_REQUIRE( !VendorAttr::instance().relaxedEquivalent("opensuse as prefix", "opensuse but different prefix") );
 }
 
 BOOST_AUTO_TEST_CASE(vendor_test2)
