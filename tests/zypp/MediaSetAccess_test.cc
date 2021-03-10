@@ -27,7 +27,7 @@ public:
     _media_id = id;
   }
 
-  bool isDesiredMedia(const media::MediaAHandler &ref) const override
+  bool isDesiredMedia(const media::MediaHandler &ref) const override
   {
     return ref.doesFileExist(Pathname("/x." + _media_id ));
   }
