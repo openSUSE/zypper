@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-25 11:38+0100\n"
-"PO-Revision-Date: 2021-01-08 02:38+0000\n"
+"PO-Revision-Date: 2021-03-15 12:57+0000\n"
 "Last-Translator: Yasuhiko Kamata <belphegor@belbel.or.jp>\n"
 "Language-Team: Japanese <https://l10n.opensuse.org/projects/zypper/master/ja/"
 ">\n"
@@ -2347,7 +2347,7 @@ msgstr "指定したロケールに対するパッケージを削除しません
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
 #: src/commands/locks/add.cc:29
 msgid "addlock (al) [OPTIONS] <LOCKSPEC>..."
-msgstr ""
+msgstr "addlock (al) [オプション] <ロック指定>..."
 
 #. translators: command summary
 #: src/commands/locks/add.cc:31 src/commands/locks/add.cc:34
@@ -2361,6 +2361,9 @@ msgid ""
 "have their KIND: string prepended (e.g. 'patch:foo') or use the commands --"
 "type option."
 msgstr ""
+"\"ロック指定\" は '[種類:]名前[ 演算子 エディション]' の形式で指定します。 \"種類\" には * や ? "
+"のワイルドカード文字を利用したグロブパターンを記述することもできます。また、パッケージ以外のものを指定したい場合は、 'patch:foo' "
+"(パッチを指定する場合) などのように指定するか、もしくは --type オプションをお使いください。"
 
 #: src/commands/locks/add.cc:36
 msgid ""
@@ -2368,6 +2371,8 @@ msgid ""
 "optionally restrict the lock to match a specific edition or edition range "
 "using =, <, <=, >, >= or != followed an EDITION."
 msgstr ""
+"名前のみを指定する基本形の場合、該当する全てのエディションを対象とすることになります。必要であれば、特定のエディションもしくはその範囲を指定するため、 ="
+", <, <=, >, >=, != のいずれかの演算子を使用し、その後ろにエディションを記述することもできます。"
 
 #: src/commands/locks/add.cc:46
 msgid "Restrict the lock to the specified repository."
