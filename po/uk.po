@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: zypper.uk\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-25 11:38+0100\n"
-"PO-Revision-Date: 2020-12-17 18:27+0000\n"
+"PO-Revision-Date: 2021-03-11 21:57+0000\n"
 "Last-Translator: Lesath <4lesath@gmail.com>\n"
 "Language-Team: Ukrainian <https://l10n.opensuse.org/projects/zypper/master/"
 "uk/>\n"
@@ -5093,7 +5093,7 @@ msgstr "Завантажити усі rpm з сирцями у цю директ
 #. translators: --delete/--no-delete
 #: src/commands/utils/source-download.cc:502
 msgid "Whether to delete extraneous source rpms in the local directory."
-msgstr ""
+msgstr "Чи слід видаляти сторонні сирцеві пакунки з локальної директорії."
 
 #. translators: --status
 #: src/commands/utils/source-download.cc:506
