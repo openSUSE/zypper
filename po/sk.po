@@ -6,10 +6,10 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-25 11:38+0100\n"
-"PO-Revision-Date: 2021-01-08 13:38+0000\n"
+"PO-Revision-Date: 2021-03-15 20:57+0000\n"
 "Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
-"Language-Team: Slovak <https://l10n.opensuse.org/projects/zypper/master/sk/"
-">\n"
+"Language-Team: Slovak <https://l10n.opensuse.org/projects/zypper/master/sk/>"
+"\n"
 "Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2504,7 +2504,7 @@ msgstr "Neodstrániť zodpovedajúce balíky pre danú lokalizáciu(e)."
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
 #: src/commands/locks/add.cc:29
 msgid "addlock (al) [OPTIONS] <LOCKSPEC>..."
-msgstr ""
+msgstr "addlock (al) [VOĽBY] <SPECZÁMOK>..."
 
 #. translators: command summary
 #: src/commands/locks/add.cc:31 src/commands/locks/add.cc:34
@@ -2518,6 +2518,9 @@ msgid ""
 "have their KIND: string prepended (e.g. 'patch:foo') or use the commands --"
 "type option."
 msgstr ""
+"SPECZÁMOK je tvorený '[DRUH:]NÁZOV[OP EDÍCIA]', kde NÁZOV môže byť aj glob "
+"vzor používajúci zástupné znaky * a ?. Nebalíkové typy môžu mať predradený "
+"ich reťazec DRUH: (napr. 'patch:foo') alebo použite voľbu príkazov --type."
 
 #: src/commands/locks/add.cc:36
 msgid ""
@@ -2525,6 +2528,9 @@ msgid ""
 "optionally restrict the lock to match a specific edition or edition range "
 "using =, <, <=, >, >= or != followed an EDITION."
 msgstr ""
+"Základná forma uzamkne všetky edície zodpovedajúcich položiek. Zámok môžete "
+"voliteľne obmedziť tak, aby sa zhodoval s konkrétnou edíciou alebo rozsahom "
+"edícií pomocou =, <, <=, >, >= or !=, za ktorým nasleduje EDÍCIA."
 
 #: src/commands/locks/add.cc:46
 msgid "Restrict the lock to the specified repository."
