@@ -9,10 +9,10 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-25 11:38+0100\n"
-"PO-Revision-Date: 2021-01-08 13:38+0000\n"
+"PO-Revision-Date: 2021-03-15 20:57+0000\n"
 "Last-Translator: David Medina <medipas@gmail.com>\n"
-"Language-Team: Catalan <https://l10n.opensuse.org/projects/zypper/master/ca/"
-">\n"
+"Language-Team: Catalan <https://l10n.opensuse.org/projects/zypper/master/ca/>"
+"\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2448,7 +2448,7 @@ msgstr ""
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
 #: src/commands/locks/add.cc:29
 msgid "addlock (al) [OPTIONS] <LOCKSPEC>..."
-msgstr ""
+msgstr "addlock (al) [OPCIONS] <LOCKSPEC>..."
 
 #. translators: command summary
 #: src/commands/locks/add.cc:31 src/commands/locks/add.cc:34
@@ -2462,6 +2462,10 @@ msgid ""
 "have their KIND: string prepended (e.g. 'patch:foo') or use the commands --"
 "type option."
 msgstr ""
+"El LOCKSPEC està format per [KIND:]NOM[ OP EDICIÓ], en què el NOM també pot "
+"ser un patró global, usant * i ? com a caràcters de comodí. Els tipus que no "
+"són de paquet poden tenir el seu tipus (KIND): cadena prefixada (p. e. \""
+"patch:foo\") o usar l'opció d'ordre --type."
 
 #: src/commands/locks/add.cc:36
 msgid ""
@@ -2469,6 +2473,10 @@ msgid ""
 "optionally restrict the lock to match a specific edition or edition range "
 "using =, <, <=, >, >= or != followed an EDITION."
 msgstr ""
+"El formulari bàsic bloquejarà totes les edicions dels elements coincidents. "
+"Opcionalment, podeu restringir el bloqueig perquè coincideixi amb una edició "
+"o un interval d’edició específics fent servir =, <, <=, >, >= o != seguit d’"
+"una EDICIÓ."
 
 #: src/commands/locks/add.cc:46
 msgid "Restrict the lock to the specified repository."
