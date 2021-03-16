@@ -25,7 +25,6 @@
 
 inline char * asYesNo( bool val_r ) { return val_r ? _("Yes") : _("No"); }
 #include "Table.h"
-#define OSD ColorStream( std::cout, ColorContext::OSDEBUG )
 
 using namespace zypp;
 
