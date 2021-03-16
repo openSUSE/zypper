@@ -518,7 +518,8 @@ bool SolverRequester::installPatch( const PackageSpec & patchspec, const PoolIte
 
   if ( selected.status().isBroken() ) // bnc #506860
   {
-    DBG << "Needed candidate patch " << patch
+    DBG << "Needed " << patch
+        << " [" << unsigned(patch->interactiveFlags()) << "]"
         << " affects_pkgmgmt: " << patch->restartSuggested()
         << (ignore_pkgmgmt ? " (ignored)" : "") << endl;
 
@@ -547,6 +548,7 @@ bool SolverRequester::installPatch( const PackageSpec & patchspec, const PoolIte
       // bnc #221476
       if ( _opts.skip_interactive && patch->interactiveWhenIgnoring( ignoreFlags ) )
       {
+        DBG << "candidate patch " << patch << " is too interactive [ignoring " << unsigned(ignoreFlags) << "]" << endl;
         addFeedback( Feedback::PATCH_INTERACTIVE_SKIPPED, patchspec, selected );
         return false;
       }
