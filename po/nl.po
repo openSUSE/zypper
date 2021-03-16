@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypper.nl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-25 11:38+0100\n"
-"PO-Revision-Date: 2021-01-08 02:38+0000\n"
+"PO-Revision-Date: 2021-03-16 12:57+0000\n"
 "Last-Translator: Freek de Kruijf <freek@opensuse.org>\n"
 "Language-Team: Dutch <https://l10n.opensuse.org/projects/zypper/master/nl/>\n"
 "Language: nl\n"
@@ -2494,7 +2494,7 @@ msgstr "Geen bijbehorende pakketten verwijderen voor gegeven regiocode(s)."
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
 #: src/commands/locks/add.cc:29
 msgid "addlock (al) [OPTIONS] <LOCKSPEC>..."
-msgstr ""
+msgstr "addlock (al) [OPTIES] <LOCKSPEC>..."
 
 #. translators: command summary
 #: src/commands/locks/add.cc:31 src/commands/locks/add.cc:34
@@ -2508,6 +2508,10 @@ msgid ""
 "have their KIND: string prepended (e.g. 'patch:foo') or use the commands --"
 "type option."
 msgstr ""
+"LOCKSPEC wordt gevormd door '[SOORT:]NAAM[ OP EDITIE]', waar NAAM ook een "
+"globaal patroon mag zijn met * en ? jokertekens. Niet-pakket typen kunnen "
+"hun SOORT: tekenreeks vooraf laten gaan (bijv. 'patch:foo') of de optie --"
+"type van het commando gebruiken."
 
 #: src/commands/locks/add.cc:36
 msgid ""
@@ -2515,6 +2519,10 @@ msgid ""
 "optionally restrict the lock to match a specific edition or edition range "
 "using =, <, <=, >, >= or != followed an EDITION."
 msgstr ""
+"De basisvorm zal alle edities van de overeenkomende items vergrendelen. U "
+"kunt optioneel de vergrendeling beperken tot een overeenkomst met een "
+"specieke editie of editiereeks met =, <, <=, >, >= of != gevolgd door een "
+"EDITIE."
 
 #: src/commands/locks/add.cc:46
 msgid "Restrict the lock to the specified repository."
