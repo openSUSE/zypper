@@ -934,27 +934,29 @@ void SATResolver::doUpdate()
     queue_free(&decisionq);
 
     /* solvables to be erased */
-    for (int i = _satSolver->pool->installed->start; i < _satSolver->pool->installed->start + _satSolver->pool->installed->nsolvables; i++)
-    {
-      if (solver_get_decisionlevel(_satSolver, i) > 0)
-	  continue;
+    if ( _satSolver->pool->installed ) {
+      for (int i = _satSolver->pool->installed->start; i < _satSolver->pool->installed->start + _satSolver->pool->installed->nsolvables; i++)
+      {
+	if (solver_get_decisionlevel(_satSolver, i) > 0)
+	    continue;
 
-      PoolItem poolItem( _pool.find( sat::Solvable(i) ) );
-      if (poolItem) {
-	  // Check if this is an update
-	  CheckIfUpdate info( (sat::Solvable(i)) );
-	  invokeOnEach( _pool.byIdentBegin( poolItem ),
-			_pool.byIdentEnd( poolItem ),
-			resfilter::ByUninstalled(),			// ByUninstalled
-			functor::functorRef<bool,PoolItem> (info) );
+	PoolItem poolItem( _pool.find( sat::Solvable(i) ) );
+	if (poolItem) {
+	    // Check if this is an update
+	    CheckIfUpdate info( (sat::Solvable(i)) );
+	    invokeOnEach( _pool.byIdentBegin( poolItem ),
+			  _pool.byIdentEnd( poolItem ),
+			  resfilter::ByUninstalled(),			// ByUninstalled
+			  functor::functorRef<bool,PoolItem> (info) );
 
-	  if (info.is_updated) {
-	      SATSolutionToPool (poolItem, ResStatus::toBeUninstalledDueToUpgrade , ResStatus::SOLVER);
-	  } else {
-	      SATSolutionToPool (poolItem, ResStatus::toBeUninstalled, ResStatus::SOLVER);
-	  }
-      } else {
-	  ERR << "id " << i << " not found in ZYPP pool." << endl;
+	    if (info.is_updated) {
+		SATSolutionToPool (poolItem, ResStatus::toBeUninstalledDueToUpgrade , ResStatus::SOLVER);
+	    } else {
+		SATSolutionToPool (poolItem, ResStatus::toBeUninstalled, ResStatus::SOLVER);
+	    }
+	} else {
+	    ERR << "id " << i << " not found in ZYPP pool." << endl;
+	}
       }
     }
 
