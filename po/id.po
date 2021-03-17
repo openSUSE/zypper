@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-25 11:38+0100\n"
-"PO-Revision-Date: 2020-09-12 14:48+0000\n"
+"PO-Revision-Date: 2021-03-17 15:57+0000\n"
 "Last-Translator: Kukuh Syafaat <syafaatkukuh@gmail.com>\n"
 "Language-Team: Indonesian <https://l10n.opensuse.org/projects/zypper/master/"
 "id/>\n"
@@ -1769,7 +1769,7 @@ msgid ""
 "Authentication required to access %s. You need to be root to be able to read "
 "the credentials from %s."
 msgstr ""
-"Otentikasi diperlukan untuk mengakses %s. Anda harus menjadi root untuk "
+"Autentikasi diperlukan untuk mengakses %s. Anda harus menjadi root untuk "
 "dapat membaca kredensial dari %s."
 
 #: src/callbacks/media.cc:313 src/callbacks/media.cc:320
@@ -2357,7 +2357,7 @@ msgstr "Jangan hapus paket yang sesuai dengan locale yang diberikan."
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
 #: src/commands/locks/add.cc:29
 msgid "addlock (al) [OPTIONS] <LOCKSPEC>..."
-msgstr ""
+msgstr "addlock (al) [OPTIONS] <LOCKSPEC>..."
 
 #. translators: command summary
 #: src/commands/locks/add.cc:31 src/commands/locks/add.cc:34
@@ -2371,6 +2371,10 @@ msgid ""
 "have their KIND: string prepended (e.g. 'patch:foo') or use the commands --"
 "type option."
 msgstr ""
+"LOCKSPEC dibentuk oleh '[KIND:]NAME[ OP EDITION]', di mana NAME mungkin juga "
+"merupakan pola glob menggunakan * dan ? karakter wildcard. Jenis non-paket "
+"mungkin memiliki KIND: string prepended (misalnya 'patch:foo') atau "
+"menggunakan opsi --type perintah."
 
 #: src/commands/locks/add.cc:36
 msgid ""
@@ -2378,6 +2382,9 @@ msgid ""
 "optionally restrict the lock to match a specific edition or edition range "
 "using =, <, <=, >, >= or != followed an EDITION."
 msgstr ""
+"Form dasar akan mengunci semua edisi butir yang cocok. Anda dapat secara "
+"opsional membatasi kunci untuk mencocokkan rentang edisi atau edisi tertentu "
+"menggunakan =, <, <=, >, >= atau != mengikuti EDITION."
 
 #: src/commands/locks/add.cc:46
 msgid "Restrict the lock to the specified repository."
@@ -4936,7 +4943,7 @@ msgstr "Unduh semua sumber rpm ke direktori ini."
 #. translators: --delete/--no-delete
 #: src/commands/utils/source-download.cc:502
 msgid "Whether to delete extraneous source rpms in the local directory."
-msgstr ""
+msgstr "Apakah menghapus rpm sumber asing di direktori lokal."
 
 #. translators: --status
 #: src/commands/utils/source-download.cc:506
