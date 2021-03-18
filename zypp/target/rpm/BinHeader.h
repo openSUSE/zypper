@@ -90,6 +90,8 @@ public:
   std::string string_val( tag tag_r ) const;
   std::string format ( const char * fmt) const;
 
+  Header get() const;
+
 public:
 
   std::list<std::string> stringList_val( tag tag_r ) const;

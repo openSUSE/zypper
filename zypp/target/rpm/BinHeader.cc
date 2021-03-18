@@ -382,6 +382,11 @@ std::string BinHeader::format(const char *fmt) const
   return std::string(form);
 }
 
+Header BinHeader::get() const
+{
+  return _h;
+}
+
 ///////////////////////////////////////////////////////////////////
 //
 //
