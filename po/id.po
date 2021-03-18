@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-01-12 19:27+0100\n"
-"PO-Revision-Date: 2020-09-20 05:48+0000\n"
+"PO-Revision-Date: 2021-03-18 14:56+0000\n"
 "Last-Translator: Kukuh Syafaat <syafaatkukuh@gmail.com>\n"
 "Language-Team: Indonesian <https://l10n.opensuse.org/projects/libzypp/master/"
 "id/>\n"
@@ -698,7 +698,7 @@ msgstr "Jamaika"
 #. :JAM:388:
 #: zypp/CountryCode.cc:269
 msgid "Jordan"
-msgstr "Jordania"
+msgstr "Yordania"
 
 # JP
 #. :JOR:400:
@@ -1016,7 +1016,7 @@ msgstr "Nigeria"
 #. :NGA:566:
 #: zypp/CountryCode.cc:321
 msgid "Nicaragua"
-msgstr "Nicaragua"
+msgstr "Nikaragua"
 
 # NL
 #. :NIC:558:
@@ -1443,7 +1443,7 @@ msgstr "Tahta Suci (Negara Kota Vatikan)"
 #. :VAT:336:
 #: zypp/CountryCode.cc:391
 msgid "Saint Vincent and the Grenadines"
-msgstr "Saint Vincent and the Grenadines"
+msgstr "Saint Vincent dan Grenadines"
 
 # VE
 #. :VCT:670:
@@ -1722,7 +1722,7 @@ msgstr "Amharic"
 #. language code: ang
 #: zypp/LanguageCode.cc:197
 msgid "English, Old (ca.450-1100)"
-msgstr "English, Kuno (sekitar 450-1100)"
+msgstr "Inggris, Kuno (sekitar 450-1100)"
 
 # LK
 #. language code: apa
@@ -1743,7 +1743,7 @@ msgstr "Aramaic"
 #. language code: arg an
 #: zypp/LanguageCode.cc:205
 msgid "Aragonese"
-msgstr "Aragonese"
+msgstr "Aragon"
 
 # AM
 #. language code: arm hye hy
@@ -1994,7 +1994,7 @@ msgstr "Caddo"
 #. language code: cai
 #: zypp/LanguageCode.cc:303
 msgid "Central American Indian (Other)"
-msgstr "Amerika Hindi Bagian Tengah (Lainnya)"
+msgstr "India Amerika Tengah (Lainnya)"
 
 #. language code: car
 #: zypp/LanguageCode.cc:305
@@ -2273,12 +2273,12 @@ msgstr "Elamite"
 #. language code: eng en
 #: zypp/LanguageCode.cc:417
 msgid "English"
-msgstr "Inggris (British)"
+msgstr "Inggris"
 
 #. language code: enm
 #: zypp/LanguageCode.cc:419
 msgid "English, Middle (1100-1500)"
-msgstr "Inggris, Antara (1100-1500)"
+msgstr "Inggris, Pertengahan (1100-1500)"
 
 #. language code: epo eo
 #: zypp/LanguageCode.cc:421
@@ -2353,7 +2353,7 @@ msgstr "Prancis"
 #. language code: frm
 #: zypp/LanguageCode.cc:449
 msgid "French, Middle (ca.1400-1600)"
-msgstr "Prancis, Antara (sekitar1400-1600)"
+msgstr "Prancis, Pertengahan (sekitar 1400-1600)"
 
 #. language code: fro
 #: zypp/LanguageCode.cc:451
@@ -2436,7 +2436,7 @@ msgstr "Irlandia"
 #. language code: glg gl
 #: zypp/LanguageCode.cc:483
 msgid "Galician"
-msgstr "Galician"
+msgstr "Galisia"
 
 #. language code: glv gv
 #: zypp/LanguageCode.cc:485
@@ -2451,7 +2451,7 @@ msgstr "Jerman, Menengah Tinggi (sekitar 1050-1500)"
 #. language code: goh
 #: zypp/LanguageCode.cc:489
 msgid "German, Old High (ca.750-1050)"
-msgstr "German, Kuno Tinggi (sekitar750-1050)"
+msgstr "Jerman, Kuno Tinggi (sekitar 750-1050)"
 
 # IN
 #. language code: gon
@@ -2696,12 +2696,12 @@ msgstr "Jepang"
 #. language code: jpr
 #: zypp/LanguageCode.cc:585
 msgid "Judeo-Persian"
-msgstr "Judeo-Persian"
+msgstr "Yudeo-Persia"
 
 #. language code: jrb
 #: zypp/LanguageCode.cc:587
 msgid "Judeo-Arabic"
-msgstr "Judeo-Arab"
+msgstr "Yudeo-Arab"
 
 #. language code: kaa
 #: zypp/LanguageCode.cc:589
@@ -3082,7 +3082,7 @@ msgstr "Mende"
 #. language code: mga
 #: zypp/LanguageCode.cc:733
 msgid "Irish, Middle (900-1200)"
-msgstr "Irish, Antara (900-1200)"
+msgstr "Irlandia, Pertengahan (900-1200)"
 
 #. language code: mic
 #: zypp/LanguageCode.cc:735
@@ -3363,7 +3363,7 @@ msgstr "Osage"
 #. language code: oss os
 #: zypp/LanguageCode.cc:839
 msgid "Ossetian"
-msgstr "Ossetian"
+msgstr "Ossetia"
 
 #. language code: ota
 #: zypp/LanguageCode.cc:841
@@ -3558,7 +3558,7 @@ msgstr "Bahasa Salishan"
 #. language code: sam
 #: zypp/LanguageCode.cc:915
 msgid "Samaritan Aramaic"
-msgstr "Samaritan Aramaic"
+msgstr "Samaritan Aram"
 
 #. language code: san sa
 #: zypp/LanguageCode.cc:917
@@ -3609,7 +3609,7 @@ msgstr "Semitic (Lainnya)"
 #. language code: sga
 #: zypp/LanguageCode.cc:939
 msgid "Irish, Old (to 900)"
-msgstr "Irish, Kuno (hingga 900)"
+msgstr "Irlandia, Kuno (hingga 900)"
 
 # LK
 #. language code: sgn
@@ -4181,7 +4181,7 @@ msgstr "kedaluwarsa: %1%"
 #. translators: an annotation to a gpg keys expiry date
 #: zypp/PublicKey.cc:82
 msgid "(does not expire)"
-msgstr "(Tidak berakhir)"
+msgstr "(tidak kedaluwarsa)"
 
 #. translators: an annotation to a gpg keys expiry date
 #: zypp/PublicKey.cc:91
@@ -4239,11 +4239,11 @@ msgstr "Tidak dapat membaca berkas repo '%1%': Izin ditolak"
 
 #: zypp/RepoManager.cc:353
 msgid "Repository alias cannot start with dot."
-msgstr "Alias repositori tidak dapat dijalankan dengan dot."
+msgstr "Alias repositori tidak dapat dimulai dengan titik."
 
 #: zypp/RepoManager.cc:364
 msgid "Service alias cannot start with dot."
-msgstr "Alias layanan tidak dapat dimulai dengan dot."
+msgstr "Alias layanan tidak dapat dimulai dengan titik."
 
 #. TranslatorExplanation '%s' is a filename
 #: zypp/RepoManager.cc:738 zypp/RepoManager.cc:1681 zypp/RepoManager.cc:1747
@@ -4881,28 +4881,28 @@ msgstr "umumnya mengabaikan beberapa dependensi"
 msgid ""
 "the installed %1% does not belong to a distupgrade repository and must be "
 "replaced"
-msgstr ""
+msgstr "%1% yang dipasang bukan milik repositori distupgrade dan harus diganti"
 
 #. just in case
 #: zypp/solver/detail/SATResolver.cc:1077
 #, boost-format
 msgid "the to be installed %1% does not belong to a distupgrade repository"
-msgstr ""
+msgstr "yang akan dipasang %1% bukan milik repositori distupgrade"
 
 #: zypp/solver/detail/SATResolver.cc:1081
 #, boost-format
 msgid "the installed %1% has inferior architecture"
-msgstr ""
+msgstr "%1% yang terpasang memiliki arsitektur yang lebih rendah"
 
 #: zypp/solver/detail/SATResolver.cc:1083
 #, boost-format
 msgid "the to be installed %1% has inferior architecture"
-msgstr ""
+msgstr "yang akan dipasang %1% memiliki arsitektur yang lebih rendah"
 
 #: zypp/solver/detail/SATResolver.cc:1086
 #, boost-format
 msgid "problem with the installed %1%"
-msgstr ""
+msgstr "masalah dengan %1% yang terpasang"
 
 #: zypp/solver/detail/SATResolver.cc:1089
 #: zypp/solver/detail/SATResolver.cc:1557
@@ -4919,17 +4919,17 @@ msgstr "beberapa dependensi bermasalah"
 #: zypp/solver/detail/SATResolver.cc:1095
 #, boost-format
 msgid "nothing provides the requested '%1%'"
-msgstr ""
+msgstr "tidak ada yang menyediakan '%1%' yang diminta"
 
 #: zypp/solver/detail/SATResolver.cc:1096
 #: zypp/solver/detail/SATResolver.cc:1100
 msgid "Have you enabled all the required repositories?"
-msgstr ""
+msgstr "Apakah Anda mengaktifkan semua repositori yang diperlukan?"
 
 #: zypp/solver/detail/SATResolver.cc:1099
 #, boost-format
 msgid "the requested package %1% does not exist"
-msgstr ""
+msgstr "paket yang diminta %1% tidak ada"
 
 #: zypp/solver/detail/SATResolver.cc:1103
 #: zypp/solver/detail/SATResolver.cc:1571
@@ -4940,44 +4940,48 @@ msgstr "permintaan tidak didukung"
 #: zypp/solver/detail/SATResolver.cc:1106
 #, boost-format
 msgid "'%1%' is provided by the system and cannot be erased"
-msgstr ""
+msgstr "'%1%' disediakan oleh sistem dan tidak dapat dihapus"
 
 #: zypp/solver/detail/SATResolver.cc:1109
 #, boost-format
 msgid "%1% is not installable"
-msgstr ""
+msgstr "%1% tidak dapat dipasang"
 
 #: zypp/solver/detail/SATResolver.cc:1114
 #, boost-format
 msgid "nothing provides '%1%' needed by the installed %2%"
-msgstr ""
+msgstr "tidak ada yang menyediakan '%1%' yang diperlukan oleh %2%"
 
 #: zypp/solver/detail/SATResolver.cc:1116
 #, boost-format
 msgid "nothing provides '%1%' needed by the to be installed %2%"
-msgstr ""
+msgstr "tidak ada yang menyediakan '%1%' yang diperlukan untuk dipasang %2%"
 
 #: zypp/solver/detail/SATResolver.cc:1119
 #, boost-format
 msgid "cannot install both %1% and %2%"
-msgstr ""
+msgstr "tidak dapat memasang %1% dan %2%"
 
 #: zypp/solver/detail/SATResolver.cc:1124
 #, boost-format
 msgid "the installed %1% conflicts with '%2%' provided by the installed %3%"
-msgstr ""
+msgstr "konflik %1% yang dipasang dengan '%2%' yang disediakan oleh %3%"
 
 #: zypp/solver/detail/SATResolver.cc:1126
 #, boost-format
 msgid ""
 "the installed %1% conflicts with '%2%' provided by the to be installed %3%"
 msgstr ""
+"%1% yang dipasang bertentangan dengan '%2%' yang disediakan oleh yang akan "
+"dipasang %3%"
 
 #: zypp/solver/detail/SATResolver.cc:1130
 #, boost-format
 msgid ""
 "the to be installed %1% conflicts with '%2%' provided by the installed %3%"
 msgstr ""
+"yang akan dipasang %1% konflik dengan '%2%' yang disediakan oleh %3% yang "
+"terpasang"
 
 #: zypp/solver/detail/SATResolver.cc:1132
 #, boost-format
@@ -4985,43 +4989,49 @@ msgid ""
 "the to be installed %1% conflicts with '%2%' provided by the to be installed "
 "%3%"
 msgstr ""
+"yang akan dipasang %1% konflik dengan '%2%' disediakan oleh yang akan "
+"dipasang %3%"
 
 #: zypp/solver/detail/SATResolver.cc:1139
 #, boost-format
 msgid "the installed %1% obsoletes '%2%' provided by the installed %3%"
-msgstr ""
+msgstr "%1% usang yang terpasang '%2%' disediakan oleh %3% yang terpasang"
 
 #: zypp/solver/detail/SATResolver.cc:1141
 #, boost-format
 msgid "the installed %1% obsoletes '%2%' provided by the to be installed %3%"
-msgstr ""
+msgstr "%1% usang yang terpasang '%2%' disediakan oleh yang akan dipasang %3%"
 
 #: zypp/solver/detail/SATResolver.cc:1145
 #, boost-format
 msgid "the to be installed %1% obsoletes '%2%' provided by the installed %3%"
-msgstr ""
+msgstr "yang akan dipasang %1% usang '%2%' disediakan oleh %3% yang terpasang"
 
 #: zypp/solver/detail/SATResolver.cc:1147
 #, boost-format
 msgid ""
 "the to be installed %1% obsoletes '%2%' provided by the to be installed %3%"
 msgstr ""
+"yang akan dipasang %1% usang '%2%' disediakan oleh yang akan dipasang %3%"
 
 #: zypp/solver/detail/SATResolver.cc:1152
 #, boost-format
 msgid "the installed %1% conflicts with '%2%' provided by itself"
 msgstr ""
+"konflik %1% yang dipasang dengan '%2%' yang disediakan dengan sendirinya"
 
 #: zypp/solver/detail/SATResolver.cc:1154
 #, boost-format
 msgid "the to be installed %1% conflicts with '%2%' provided by itself"
-msgstr ""
+msgstr "yang akan dipasang %1% konflik dengan '%2%' yang disediakan sendiri"
 
 #: zypp/solver/detail/SATResolver.cc:1186
 #, boost-format
 msgid ""
 "the installed %1% requires '%2%', but this requirement cannot be provided"
 msgstr ""
+"%1% yang dipasang membutuhkan '%2%', tetapi persyaratan ini tidak dapat "
+"disediakan"
 
 #: zypp/solver/detail/SATResolver.cc:1188
 #, boost-format
@@ -5029,6 +5039,8 @@ msgid ""
 "the to be installed %1% requires '%2%', but this requirement cannot be "
 "provided"
 msgstr ""
+"yang akan dipasang %1% membutuhkan '%2%', tetapi persyaratan ini tidak dapat "
+"disediakan"
 
 #: zypp/solver/detail/SATResolver.cc:1190
 #: zypp/solver/detail/SATResolver.cc:1629
@@ -5055,24 +5067,24 @@ msgstr "penyedia tidak dapat dihapus: "
 #: zypp/solver/detail/SATResolver.cc:1264
 #, boost-format
 msgid "remove lock to allow removal of %1%"
-msgstr ""
+msgstr "hapus kunci untuk memungkinkan penghapusan %1%"
 
 #: zypp/solver/detail/SATResolver.cc:1269
 #: zypp/solver/detail/SATResolver.cc:1305
 #, boost-format
 msgid "do not install %1%"
-msgstr ""
+msgstr "jangan pasang %1%"
 
 #: zypp/solver/detail/SATResolver.cc:1284
 #: zypp/solver/detail/SATResolver.cc:1326
 #, boost-format
 msgid "keep %1%"
-msgstr ""
+msgstr "pertahankan %1%"
 
 #: zypp/solver/detail/SATResolver.cc:1289
 #, boost-format
 msgid "remove lock to allow installation of %1%"
-msgstr ""
+msgstr "hapus kunci untuk memungkinkan pemasangan %1%"
 
 #: zypp/solver/detail/SATResolver.cc:1340
 #: zypp/solver/detail/SATResolver.cc:1361
@@ -5090,42 +5102,42 @@ msgstr "Permintaan ini akan merusak sistem anda!"
 #: zypp/solver/detail/SATResolver.cc:2136
 #: zypp/solver/detail/SATResolver.cc:2140
 msgid "ignore the warning of a broken system"
-msgstr "abaikan peringatan dari kerusakan sistem"
+msgstr "abaikan peringatan sistem yang rusak"
 
 #: zypp/solver/detail/SATResolver.cc:1346
 #, boost-format
 msgid "do not ask to install a solvable providing %1%"
-msgstr ""
+msgstr "jangan meminta untuk memasang solvable yang menyediakan %1%"
 
 #: zypp/solver/detail/SATResolver.cc:1368
 #, boost-format
 msgid "do not ask to delete all solvables providing %1%"
-msgstr ""
+msgstr "jangan meminta untuk menghapus semua solvables yang menyediakan %1%"
 
 #: zypp/solver/detail/SATResolver.cc:1381
 #, boost-format
 msgid "do not install most recent version of %1%"
-msgstr ""
+msgstr "jangan memasang versi terbaru %1%"
 
 #: zypp/solver/detail/SATResolver.cc:1402
 #, boost-format
 msgid "keep %1% despite the inferior architecture"
-msgstr ""
+msgstr "pertahankan %1% meskipun arsitekturnya lebih rendah"
 
 #: zypp/solver/detail/SATResolver.cc:1407
 #, boost-format
 msgid "install %1% despite the inferior architecture"
-msgstr ""
+msgstr "pasang %1% meskipun arsitekturnya lebih rendah"
 
 #: zypp/solver/detail/SATResolver.cc:1416
 #, boost-format
 msgid "keep obsolete %1%"
-msgstr ""
+msgstr "biarkan usang %1%"
 
 #: zypp/solver/detail/SATResolver.cc:1421
 #, boost-format
 msgid "install %1% from excluded repository"
-msgstr ""
+msgstr "pasang %1% dari repositori yang dikecualikan"
 
 #. translator: %1% is a package name
 #: zypp/solver/detail/SATResolver.cc:1435
@@ -5154,12 +5166,12 @@ msgstr "pasang %1% meskipun masuk daftar hitam"
 #: zypp/solver/detail/SATResolver.cc:1461
 #, boost-format
 msgid "downgrade of %1% to %2%"
-msgstr ""
+msgstr "turunkan %1% ke %2%"
 
 #: zypp/solver/detail/SATResolver.cc:1468
 #, boost-format
 msgid "architecture change of %1% to %2%"
-msgstr ""
+msgstr "perubahan arsitektur dari %1% menjadi %2%"
 
 #: zypp/solver/detail/SATResolver.cc:1477
 #, boost-format
@@ -5167,28 +5179,30 @@ msgid ""
 "install %1% (with vendor change)\n"
 "  %2%  -->  %3%"
 msgstr ""
+"pasang %1% (dengan perubahan vendor)\n"
+"  %2% --> %3%"
 
 #: zypp/solver/detail/SATResolver.cc:1483
 #, boost-format
 msgid "replacement of %1% with %2%"
-msgstr ""
+msgstr "penggantian %1% dengan %2%"
 
 #: zypp/solver/detail/SATResolver.cc:1494
 #, boost-format
 msgid "deinstallation of %1%"
-msgstr ""
+msgstr "pemasangan ulang %1%"
 
 #: zypp/solver/detail/SATResolver.cc:1548
 #: zypp/solver/detail/SATResolver.cc:2081
 #, c-format, boost-format
 msgid "%s does not belong to a distupgrade repository"
-msgstr "%s bukan termasuk pada golongan repository distupgrade"
+msgstr "%s bukan milik repositori distupgrade"
 
 #: zypp/solver/detail/SATResolver.cc:1551
 #: zypp/solver/detail/SATResolver.cc:2083
 #, c-format, boost-format
 msgid "%s has inferior architecture"
-msgstr "%s memiliki arsitektur rendah"
+msgstr "%s memiliki arsitektur yang lebih rendah"
 
 #: zypp/solver/detail/SATResolver.cc:1554
 #: zypp/solver/detail/SATResolver.cc:2085
@@ -5207,7 +5221,7 @@ msgstr "tidak ada ketersediaan yang meminta %s"
 #: zypp/solver/detail/SATResolver.cc:2092
 #: zypp/solver/detail/SATResolver.cc:2095
 msgid "Have you enabled all requested repositories?"
-msgstr "Apakah anda telah menghidupkan repositori yang diminta?"
+msgstr "Apakah Anda mengaktifkan semua repositori yang diminta?"
 
 #: zypp/solver/detail/SATResolver.cc:1567
 #: zypp/solver/detail/SATResolver.cc:2094
@@ -5219,7 +5233,7 @@ msgstr "paket %s tidak tersedia"
 #: zypp/solver/detail/SATResolver.cc:2099
 #, c-format, boost-format
 msgid "%s is provided by the system and cannot be erased"
-msgstr "%s didukung oleh sistem dan tidak dapat dihapus"
+msgstr "%s disediakan oleh sistem dan tidak dapat dihapus"
 
 #: zypp/solver/detail/SATResolver.cc:1577
 #: zypp/solver/detail/SATResolver.cc:2101
@@ -5244,13 +5258,13 @@ msgstr "tidak dapat memasang kedua %s dan %s"
 #: zypp/solver/detail/SATResolver.cc:2108
 #, c-format, boost-format
 msgid "%s conflicts with %s provided by %s"
-msgstr "%s konflik dengan %s yang didukung oleh %s"
+msgstr "%s konflik dengan %s disediakan oleh %s"
 
 #: zypp/solver/detail/SATResolver.cc:1590
 #: zypp/solver/detail/SATResolver.cc:2110
 #, c-format, boost-format
 msgid "%s obsoletes %s provided by %s"
-msgstr "%s sudah usah %s didukung oleh %s"
+msgstr "%s yang %s disediakan oleh %s"
 
 #: zypp/solver/detail/SATResolver.cc:1593
 #: zypp/solver/detail/SATResolver.cc:2112
@@ -5268,13 +5282,13 @@ msgstr "dapat dipecahkan %s konflik dengan %s didukung dengan sendirinya"
 #: zypp/solver/detail/SATResolver.cc:2116
 #, c-format, boost-format
 msgid "%s requires %s, but this requirement cannot be provided"
-msgstr "%s dibutuhkan %s, tetapi kebutuhan ini tidak dapat disediakan"
+msgstr "%s memerlukan %s, tetapi persyaratan ini tidak dapat disediakan"
 
 #: zypp/solver/detail/SATResolver.cc:1703
 #: zypp/solver/detail/SATResolver.cc:2125
 #, c-format, boost-format
 msgid "remove lock to allow removal of %s"
-msgstr "hapus kunci untuk mengizinkan menghapus %s"
+msgstr "hapus kunci untuk memungkinkan penghapusan %s"
 
 #: zypp/solver/detail/SATResolver.cc:1708
 #: zypp/solver/detail/SATResolver.cc:1744
@@ -5296,7 +5310,7 @@ msgstr "simpan %s"
 #: zypp/solver/detail/SATResolver.cc:2129
 #, c-format, boost-format
 msgid "remove lock to allow installation of %s"
-msgstr "hapus kunci untuk mengizinkan pemasangan dari %s"
+msgstr "hapus kunci untuk memungkinkan pemasangan %s"
 
 #: zypp/solver/detail/SATResolver.cc:1785
 #: zypp/solver/detail/SATResolver.cc:2137
@@ -5388,11 +5402,11 @@ msgstr "Menjalankan skrip %posttrans"
 
 #: zypp/target/TargetException.cc:27
 msgid "Installation has been aborted as directed."
-msgstr "Instalasi dibatalkan sesuai perintah."
+msgstr "Pemasangan dibatalkan sesuai perintah."
 
 #: zypp/target/TargetImpl.cc:347
 msgid " executed"
-msgstr " berhasil dieksekusi"
+msgstr " tereksekusi"
 
 #: zypp/target/TargetImpl.cc:369
 msgid " execution failed"
@@ -5404,11 +5418,11 @@ msgstr " eksekusi gagal"
 #: zypp/target/TargetImpl.cc:486
 #, c-format, boost-format
 msgid "%s already executed as %s)"
-msgstr "%s telah dieksekusi sebagai %s)"
+msgstr "%s sudah dieksekusi sebagai %s)"
 
 #: zypp/target/TargetImpl.cc:496
 msgid " execution skipped while aborting"
-msgstr " Eksekusi dilewati ketika diberhentikan"
+msgstr " eksekusi dilewati saat membatalkan"
 
 #: zypp/target/TargetImpl.cc:551 zypp/target/TargetImpl.cc:571
 #: zypp/target/TargetImpl.cc:599 zypp/target/TargetImpl.cc:636
@@ -5490,7 +5504,7 @@ msgstr ""
 #. TranslatorExplanation Text is followed by a ':'  and the actual output.
 #: zypp/target/rpm/RpmDb.cc:1739 zypp/target/rpm/RpmDb.cc:1895
 msgid "Additional rpm output"
-msgstr "Tambahan keluaran RPM"
+msgstr "Keluaran rpm tambahan"
 
 #: zypp/target/rpm/RpmDb.cc:2037
 #, c-format, boost-format
@@ -5596,7 +5610,7 @@ msgstr "Skema url membutuhkan nama path"
 
 #: zypp/url/UrlBase.cc:1195 zypp/url/UrlBase.cc:1209
 msgid "Relative path not allowed if authority exists"
-msgstr "Path relatif tidak dibolehkan bila otorita ada"
+msgstr "Path relatif tidak dibolehkan bila otoritas ada"
 
 #: zypp/url/UrlUtils.cc:111
 msgid "Encoded string contains a NUL byte"
