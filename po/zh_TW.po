@@ -13,8 +13,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-25 11:38+0100\n"
-"PO-Revision-Date: 2020-12-24 17:27+0000\n"
-"Last-Translator: slb <shenlebantongying@gmail.com>\n"
+"PO-Revision-Date: 2021-03-20 12:57+0000\n"
+"Last-Translator: Grace Yu <grace.yu@excel-gits.com>\n"
 "Language-Team: Chinese (Taiwan) <https://l10n.opensuse.org/projects/zypper/"
 "master/zh_TW/>\n"
 "Language: zh_TW\n"
@@ -2237,7 +2237,7 @@ msgstr "不要移除指定地區設定的相應套件。"
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
 #: src/commands/locks/add.cc:29
 msgid "addlock (al) [OPTIONS] <LOCKSPEC>..."
-msgstr ""
+msgstr "addlock (al) [OPTIONS] <LOCKSPEC>..."
 
 #. translators: command summary
 #: src/commands/locks/add.cc:31 src/commands/locks/add.cc:34
@@ -2251,6 +2251,8 @@ msgid ""
 "have their KIND: string prepended (e.g. 'patch:foo') or use the commands --"
 "type option."
 msgstr ""
+"LOCKSPEC 的格式為「[KIND:]NAME[ OP EDITION]」，其中 NAME 也可以是使用 * 和 ? 萬用字元的 glob 模式。"
+"非套件類型可以在前面預增 KIND: 字串 (例如「patch:foo」)，或使用指令 --type 選項。"
 
 #: src/commands/locks/add.cc:36
 msgid ""
@@ -2258,6 +2260,7 @@ msgid ""
 "optionally restrict the lock to match a specific edition or edition range "
 "using =, <, <=, >, >= or != followed an EDITION."
 msgstr ""
+"基本格式將鎖定匹配項目的所有版本。您可以選擇性地使用 =、<、<=、>、>= 或 != 後接 EDITION，將鎖定限制為比對特定的版本或版本範圍。"
 
 #: src/commands/locks/add.cc:46
 msgid "Restrict the lock to the specified repository."
@@ -4703,7 +4706,7 @@ msgstr "下載所有原始碼 rpm 到這個目錄。"
 #. translators: --delete/--no-delete
 #: src/commands/utils/source-download.cc:502
 msgid "Whether to delete extraneous source rpms in the local directory."
-msgstr ""
+msgstr "是否刪除本地目錄中無關的原始碼 RPM。"
 
 #. translators: --status
 #: src/commands/utils/source-download.cc:506
