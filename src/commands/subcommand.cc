@@ -61,11 +61,12 @@ namespace	// subcommand detetction
   using CommandSummaries = std::map<std::string,std::string>;
 
   /** Get command summaries for help. */
-  inline CommandSummaries getCommandsummaries( const DetectedCommands & commands_r )
+  inline CommandSummaries getCommandsummaries( const DetectedCommands & commands_r, bool withPath = false )
   {
     CommandSummaries ret;
     for ( auto & cmd : commands_r ) {
-      std::string sum { ExternalProgram( { "man", "-f", cmd._name }, ExternalProgram::Discard_Stderr ).receiveLine() };
+      std::string sum { str::rtrim( ExternalProgram( { "man", "-f", cmd._name }, ExternalProgram::Discard_Stderr ).receiveLine() ) };
+
       if ( ! sum.empty() ) {
 	// # man -f zypper
 	// zypper (8)           - Command-line interface to ZYpp system management library (libzypp)
@@ -79,12 +80,14 @@ namespace	// subcommand detetction
 	static str::Format fmt( "<"+ LOWLIGHTString(_("No manual entry for %1%")).str() + ">" );
 	sum = ( fmt % cmd._name ).str();
       }
-      ret[cmd._cmd] = sum;
+      ret[cmd._cmd] = std::move(sum);
+      if ( withPath )
+	ret[cmd._cmd] += "\n("+(cmd._path/cmd._name).asString()+")";
     }
     return ret;
   }
 
-  inline std::ostream & dumpDetectedCommandsOn( std::ostream & str, const DetectedCommands & commands_r )
+  inline std::ostream & dumpDetectedCommandsOn( std::ostream & str, const DetectedCommands & commands_r, bool withPath = false )
   {
     CommandHelpFormater fmt;
 
@@ -92,7 +95,7 @@ namespace	// subcommand detetction
       fmt.gDef( "<"+std::string(_("none"))+">" );
     }
     else {
-      for ( const auto & p : getCommandsummaries( std::move(commands_r) ) ) {
+      for ( const auto & p : getCommandsummaries( commands_r, withPath ) ) {
 	fmt.gDef( p.first, p.second );
       }
     }
@@ -470,7 +473,7 @@ std::ostream & SubcommandOptions::showHelpOn( std::ostream & out ) const
       // translators: headline of an enumeration
       out << _("Zypper subcommands available from elsewhere on your $PATH") << endl;
       out << endl;
-      dumpDetectedCommandsOn( out, pathCommands ) << endl;
+      dumpDetectedCommandsOn( out, pathCommands, /*withPath*/true ) << endl;
 
       // translators: helptext; %1% is a zypper command
       out << str::Format(_("Type '%1%' to get subcommand-specific help if available.") ) % "zypper help <subcommand>" << endl;
