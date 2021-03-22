@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-25 11:38+0100\n"
-"PO-Revision-Date: 2021-03-15 20:57+0000\n"
+"PO-Revision-Date: 2021-03-22 22:57+0000\n"
 "Last-Translator: David Medina <medipas@gmail.com>\n"
 "Language-Team: Catalan <https://l10n.opensuse.org/projects/zypper/master/ca/>"
 "\n"
@@ -5540,7 +5540,7 @@ msgstr "Atenció!"
 #. translator: usually followed by a ' ' and some explanatory text
 #: src/output/Out.h:42
 msgid "Warning:"
-msgstr "Avís:"
+msgstr "Avís!"
 
 #. translator: usually followed by a ' ' and some explanatory text
 #: src/output/Out.h:44
@@ -5555,7 +5555,7 @@ msgstr "Continuo?"
 #. to not break scripts that use xml output (bsc#1172925)
 #: src/output/OutNormal.cc:81 src/utils/flags/zyppflags.cc:392
 msgid "Warning: "
-msgstr "Avís: "
+msgstr "Avís! "
 
 #. Translator: download progress bar result: "............[error]"
 #: src/output/OutNormal.cc:222 src/output/OutNormal.cc:227
