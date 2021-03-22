@@ -18,10 +18,10 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-25 11:38+0100\n"
-"PO-Revision-Date: 2020-12-18 21:27+0000\n"
-"Last-Translator: Victor hck <correohck@gmail.com>\n"
-"Language-Team: Spanish <https://l10n.opensuse.org/projects/zypper/master/es/"
-">\n"
+"PO-Revision-Date: 2021-03-23 01:57+0000\n"
+"Last-Translator: Antonio Simón <antonio@trans-mission.com>\n"
+"Language-Team: Spanish <https://l10n.opensuse.org/projects/zypper/master/es/>"
+"\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2504,7 +2504,7 @@ msgstr ""
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
 #: src/commands/locks/add.cc:29
 msgid "addlock (al) [OPTIONS] <LOCKSPEC>..."
-msgstr ""
+msgstr "addlock (al) [OPCIONES] <ESPECBLOQUEO>..."
 
 #. translators: command summary
 #: src/commands/locks/add.cc:31 src/commands/locks/add.cc:34
@@ -2518,6 +2518,10 @@ msgid ""
 "have their KIND: string prepended (e.g. 'patch:foo') or use the commands --"
 "type option."
 msgstr ""
+"ESPECBLOQUEO está formado por \"[TIPO:]NOMBRE[ EDICIÓN OP]\", donde NOMBRE "
+"puede ser un patrón de glob que use los caracteres comodín * y ?. Los tipos "
+"que no sean paquetes pueden tener su propio TIPO: cadena añadida al "
+"principio (p. ej. \"patch:foo\") o use la opción --type de los comandos."
 
 #: src/commands/locks/add.cc:36
 msgid ""
@@ -2525,6 +2529,10 @@ msgid ""
 "optionally restrict the lock to match a specific edition or edition range "
 "using =, <, <=, >, >= or != followed an EDITION."
 msgstr ""
+"La forma básica bloqueará todas las ediciones de los elementos que "
+"coincidan. Opcionalmente, puede restringir el bloqueo para que coincida con "
+"una edición específica o un intervalo de ediciones con los caracteres =, <, "
+"<=, >, >= o != seguidos de una EDICIÓN."
 
 #: src/commands/locks/add.cc:46
 msgid "Restrict the lock to the specified repository."
@@ -2767,6 +2775,9 @@ msgid ""
 "The command is an alias for '%1%' and performs a case-insensitive search. "
 "For a case-sensitive search call the search command and add the '%2%' option."
 msgstr ""
+"El comando es un alias de \"%1%\" y realiza una búsqueda en la que no se "
+"distinguen mayúsculas y minúsculas. Para realizar una búsqueda que si las "
+"distinga, utilice el comando search y añada la opción \"%2%\"."
 
 #. "what-provides" is obsolete
 #. The "what-provides" now is included in "search" command, e.g.
@@ -5134,6 +5145,7 @@ msgstr "Descarga todos los rpm de origen en este directorio."
 #: src/commands/utils/source-download.cc:502
 msgid "Whether to delete extraneous source rpms in the local directory."
 msgstr ""
+"Indica si se debe suprimir el rpms de origen extraño en el directorio local."
 
 #. translators: --status
 #: src/commands/utils/source-download.cc:506
