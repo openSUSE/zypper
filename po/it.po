@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-25 11:38+0100\n"
-"PO-Revision-Date: 2021-03-23 17:57+0000\n"
+"PO-Revision-Date: 2021-03-24 12:57+0000\n"
 "Last-Translator: Davide Aiello <davide.aiello@novilingulists.com>\n"
 "Language-Team: Italian <https://l10n.opensuse.org/projects/zypper/master/it/>"
 "\n"
@@ -2500,7 +2500,6 @@ msgstr ""
 
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
 #: src/commands/locks/add.cc:29
-#, fuzzy
 msgid "addlock (al) [OPTIONS] <LOCKSPEC>..."
 msgstr "addlock (al) [OPTIONS] <LOCKSPEC>..."
 
@@ -2510,7 +2509,6 @@ msgid "Add a package lock."
 msgstr "Aggiunge il blocco a un pacchetto."
 
 #: src/commands/locks/add.cc:35
-#, fuzzy
 msgid ""
 "LOCKSPEC is formed by '[KIND:]NAME[ OP EDITION]', where NAME may also be a "
 "glob pattern using * and ? wildcard characters. Non-package types may to "
@@ -2523,7 +2521,6 @@ msgstr ""
 "'patch:foo') o utilizzare i comandi --type option."
 
 #: src/commands/locks/add.cc:36
-#, fuzzy
 msgid ""
 "The basic form will lock all editions of the matching items. You can "
 "optionally restrict the lock to match a specific edition or edition range "
@@ -5123,7 +5120,6 @@ msgstr "Effettua il download di tutti gli rpm sorgenti in questa directory."
 
 #. translators: --delete/--no-delete
 #: src/commands/utils/source-download.cc:502
-#, fuzzy
 msgid "Whether to delete extraneous source rpms in the local directory."
 msgstr ""
 "Consente di scegliere se eliminare gli rpm di origine estranei nella "
