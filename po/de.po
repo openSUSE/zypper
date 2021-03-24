@@ -17,10 +17,10 @@ msgstr ""
 "Project-Id-Version: zypper.de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-25 11:38+0100\n"
-"PO-Revision-Date: 2020-09-18 21:48+0000\n"
-"Last-Translator: Sarah Kriesch <ada.lovelace@gmx.de>\n"
-"Language-Team: German <https://l10n.opensuse.org/projects/zypper/master/de/"
-">\n"
+"PO-Revision-Date: 2021-03-24 16:57+0000\n"
+"Last-Translator: Gemineo <vistatec@gemineo.de>\n"
+"Language-Team: German <https://l10n.opensuse.org/projects/zypper/master/de/>"
+"\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2498,7 +2498,7 @@ msgstr "Die Pakete für die angegebenen Locale(s) nicht entfernen."
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
 #: src/commands/locks/add.cc:29
 msgid "addlock (al) [OPTIONS] <LOCKSPEC>..."
-msgstr ""
+msgstr "addlock (al) [OPTIONS] <LOCKSPEC>..."
 
 #. translators: command summary
 #: src/commands/locks/add.cc:31 src/commands/locks/add.cc:34
@@ -2512,6 +2512,10 @@ msgid ""
 "have their KIND: string prepended (e.g. 'patch:foo') or use the commands --"
 "type option."
 msgstr ""
+"LOCKSPEC wird durch '[KIND:]NAME[ OP EDITION]' gebildet, wobei NAME auch ein "
+"glob-Muster mit den Platzhalterzeichen * und ? sein kann. Bei Nicht-Paket-"
+"Typen kann die Zeichenkette KIND: vorangestellt werden (z. B. 'patch:foo') "
+"oder Sie verwenden die Option --type des Befehls."
 
 #: src/commands/locks/add.cc:36
 msgid ""
@@ -2519,6 +2523,10 @@ msgid ""
 "optionally restrict the lock to match a specific edition or edition range "
 "using =, <, <=, >, >= or != followed an EDITION."
 msgstr ""
+"In der Grundform werden alle Ausgaben der übereinstimmenden Artikel "
+"gesperrt. Optional können Sie die Sperre auf eine bestimmte Ausgabe oder "
+"einen Ausgabenbereich einschränken, indem Sie =, <, <=, >, >= oder != "
+"gefolgt von einer EDITION verwenden."
 
 #: src/commands/locks/add.cc:46
 msgid "Restrict the lock to the specified repository."
@@ -2760,6 +2768,10 @@ msgid ""
 "The command is an alias for '%1%' and performs a case-insensitive search. "
 "For a case-sensitive search call the search command and add the '%2%' option."
 msgstr ""
+"Der Befehl ist ein Alias für '%1%' und führt eine Suche ohne "
+"Berücksichtigung der Groß-/Kleinschreibung durch. Für eine Suche unter "
+"Berücksichtigung der Groß-/Kleinschreibung rufen Sie den Suchbefehl auf und "
+"fügen die Option '%2%' hinzu."
 
 #. "what-provides" is obsolete
 #. The "what-provides" now is included in "search" command, e.g.
@@ -4722,7 +4734,7 @@ msgstr "Die Deinstallation von Quellpaketen wird nicht unterstützt."
 #: src/commands/subcommand.cc:79
 #, boost-format
 msgid "No manual entry for %1%"
-msgstr ""
+msgstr "Kein Handbucheintrag für %1%"
 
 #: src/commands/subcommand.cc:92
 msgid "none"
@@ -5153,6 +5165,7 @@ msgstr "Herunterladen aller Quell-RPMs in dieses Verzeichnis."
 #: src/commands/utils/source-download.cc:502
 msgid "Whether to delete extraneous source rpms in the local directory."
 msgstr ""
+"Ob überflüssige Quell-rpms im lokalen Verzeichnis gelöscht werden sollen."
 
 #. translators: --status
 #: src/commands/utils/source-download.cc:506
