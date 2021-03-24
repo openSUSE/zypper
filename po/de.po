@@ -17,8 +17,8 @@ msgstr ""
 "Project-Id-Version: zypper.de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-25 11:38+0100\n"
-"PO-Revision-Date: 2021-03-24 16:57+0000\n"
-"Last-Translator: Gemineo <vistatec@gemineo.de>\n"
+"PO-Revision-Date: 2021-03-24 19:57+0000\n"
+"Last-Translator: Sarah Kriesch <ada.lovelace@gmx.de>\n"
 "Language-Team: German <https://l10n.opensuse.org/projects/zypper/master/de/>"
 "\n"
 "Language: de\n"
@@ -2498,7 +2498,7 @@ msgstr "Die Pakete für die angegebenen Locale(s) nicht entfernen."
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
 #: src/commands/locks/add.cc:29
 msgid "addlock (al) [OPTIONS] <LOCKSPEC>..."
-msgstr "addlock (al) [OPTIONS] <LOCKSPEC>..."
+msgstr "addlock (al) [OPTIONEN] <LOCKSPEC>..."
 
 #. translators: command summary
 #: src/commands/locks/add.cc:31 src/commands/locks/add.cc:34
