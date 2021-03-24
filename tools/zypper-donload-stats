@@ -1,0 +1,22 @@
+#!/bin/bash
+ZLOG="$1"
+[ "$ZLOG" == "-" -o -r "$ZLOG" ] || {
+  [ -z "$ZLOG" ] || echo "File '$ZLOG' does not exist or you have no read permission." >&2
+  cat <<EOF >&2
+Usage: $(basename $0) ZYPPER_LOG_FILE
+
+    With no FILE, or when FILE is -, read standard input.
+
+    Grep downloads from a zypper.log file. Show the request URLs and embed
+    the mirror stats in case of metalink downloads. Lines starting with #0..#N
+    show the number of parallel connections and the number of byte received.
+EOF
+  exit 1
+}
+
+cat "$ZLOG" | awk '
+  / main.cc\(.*=== [^A-Z]/ { $3=$4=$5=$6=""; print; next }
+  /MediaCurl.cc\(doGetFileCopyFile\).* URL: /  { $1=$2=$3=$4=$5=$6=""; print; next }
+  /MediaMultiCurl.cc\(run\).* #/               { $1=$2=$3=$4=$5=$6=""; print; next }
+  /MediaMultiCurl.cc\(doGetFileCopy\).* done:/ { $1=$2=$3=$4=$5=$6=""; print; print ""; next }
+'
