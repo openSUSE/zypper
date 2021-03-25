@@ -14,10 +14,10 @@ msgstr ""
 "Project-Id-Version: zypper.fr\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-25 11:38+0100\n"
-"PO-Revision-Date: 2020-09-30 12:49+0000\n"
-"Last-Translator: Antoine Belvire <antoine.belvire@opensuse.org>\n"
-"Language-Team: French <https://l10n.opensuse.org/projects/zypper/master/fr/"
-">\n"
+"PO-Revision-Date: 2021-03-25 13:57+0000\n"
+"Last-Translator: Sophie Leroy <sophie@stoquart.com>\n"
+"Language-Team: French <https://l10n.opensuse.org/projects/zypper/master/fr/>"
+"\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2514,7 +2514,7 @@ msgstr "Ne pas supprimer les paquets correspondant aux localisations données."
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
 #: src/commands/locks/add.cc:29
 msgid "addlock (al) [OPTIONS] <LOCKSPEC>..."
-msgstr ""
+msgstr "addlock (al) [OPTIONS] <LOCKSPEC>..."
 
 #. translators: command summary
 #: src/commands/locks/add.cc:31 src/commands/locks/add.cc:34
@@ -2528,6 +2528,10 @@ msgid ""
 "have their KIND: string prepended (e.g. 'patch:foo') or use the commands --"
 "type option."
 msgstr ""
+"LOCKSPEC est formé de '[KIND:]NAME[ OP EDITION]', où NAME (nom) peut "
+"également être un modèle Glob utilisant les caractères génériques * et ?. "
+"Les types non-paquet peuvent avoir leur nom précédé de leur chaîne KIND: (p. "
+"ex. 'patch:foo') ou utiliser l'option de commande --type."
 
 #: src/commands/locks/add.cc:36
 msgid ""
@@ -2535,6 +2539,10 @@ msgid ""
 "optionally restrict the lock to match a specific edition or edition range "
 "using =, <, <=, >, >= or != followed an EDITION."
 msgstr ""
+"La forme de base verrouille toutes les éditions des éléments correspondants. "
+"Vous pouvez éventuellement restreindre le verrouillage pour correspondre à "
+"une édition ou plage d'éditions spécifique à l'aide des caractères =, <, <=, "
+">, >= ou != suivis d'une ÉDITION."
 
 #: src/commands/locks/add.cc:46
 msgid "Restrict the lock to the specified repository."
@@ -5130,12 +5138,14 @@ msgstr ""
 #. translators: -d, --directory <DIR>
 #: src/commands/utils/source-download.cc:496
 msgid "Download all source rpms to this directory."
-msgstr ""
+msgstr "Téléchargez tous les RPM sources dans ce répertoire."
 
 #. translators: --delete/--no-delete
 #: src/commands/utils/source-download.cc:502
 msgid "Whether to delete extraneous source rpms in the local directory."
 msgstr ""
+"Indiquez si vous souhaitez supprimer les RPM sources non pertinents dans le "
+"répertoire local."
 
 #. translators: --status
 #: src/commands/utils/source-download.cc:506
