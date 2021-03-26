@@ -92,7 +92,7 @@ namespace zypp
 
       Pathname mediaFilePath( media::MediaNr mediaNr_r = 0 ) const
       {
-	static str::Format fmt { "/media.%d/media" };
+	str::Format fmt { "/media.%d/media" };
 	fmt % str::numstring( mediaNr_r ? mediaNr_r : _mediaNr );
 	return fmt.str();
       }
