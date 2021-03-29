@@ -18,8 +18,8 @@ msgstr ""
 "Project-Id-Version: zypp.de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-01-12 19:27+0100\n"
-"PO-Revision-Date: 2021-03-29 16:39+0000\n"
-"Last-Translator: Fabian Niepelt <fniepelt@takios.de>\n"
+"PO-Revision-Date: 2021-03-29 18:56+0000\n"
+"Last-Translator: Gemineo <vistatec@gemineo.de>\n"
 "Language-Team: German <https://l10n.opensuse.org/projects/libzypp/master/de/>"
 "\n"
 "Language: de\n"
@@ -1119,7 +1119,7 @@ msgstr "Tadschikistan"
 #. language code: tkl
 #: zypp/CountryCode.cc:374 zypp/LanguageCode.cc:1045
 msgid "Tokelau"
-msgstr "Tokelauanisch"
+msgstr "Tokelau"
 
 #. :TKL:772:
 #: zypp/CountryCode.cc:375
@@ -1155,7 +1155,7 @@ msgstr "Trinidad und Tobago"
 #. language code: tvl
 #: zypp/CountryCode.cc:381 zypp/LanguageCode.cc:1075
 msgid "Tuvalu"
-msgstr "Elliceanisch"
+msgstr "Tuvalu"
 
 #. :TUV:798:
 #: zypp/CountryCode.cc:382
@@ -5252,7 +5252,7 @@ msgid ""
 "Unable to retrieve HTTP response\n"
 msgstr ""
 "Download (curl) Fehler für '%s':\n"
-"HTTP Antwort kann nicht abgerufen werden\n"
+"HTTP-Antwort kann nicht abgerufen werden\n"
 
 #~ msgid "Can't open lock file: %s"
 #~ msgstr "Sperrdatei kann nicht geöffnet werden: %s"
