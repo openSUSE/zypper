@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-25 11:38+0100\n"
-"PO-Revision-Date: 2021-03-20 12:57+0000\n"
+"PO-Revision-Date: 2021-03-30 04:57+0000\n"
 "Last-Translator: Grace Yu <grace.yu@excel-gits.com>\n"
 "Language-Team: Chinese (China) <https://l10n.opensuse.org/projects/zypper/"
 "master/zh_CN/>\n"
@@ -2489,8 +2489,7 @@ msgstr "列出提供了指定功能的全部软件包。"
 msgid ""
 "The command is an alias for '%1%' and performs a case-insensitive search. "
 "For a case-sensitive search call the search command and add the '%2%' option."
-msgstr ""
-"此命令是 '%1%' 的缩写，可以进行不去分大小写的搜索，添加'%2%'以区分大小写。"
+msgstr "此命令是 \"%1%\" 的一个别称，会执行一次忽略大小写的搜索。若需要在搜索时区分大小写，请调用搜索命令并加上选项 \"%2%\" 。"
 
 #. "what-provides" is obsolete
 #. The "what-provides" now is included in "search" command, e.g.
@@ -4297,7 +4296,7 @@ msgstr "不支持卸载源代码软件包。"
 #: src/commands/subcommand.cc:79
 #, boost-format
 msgid "No manual entry for %1%"
-msgstr "%1% 没有man手册"
+msgstr "没有 \"%1%\" 的手册页入口"
 
 #: src/commands/subcommand.cc:92
 msgid "none"
