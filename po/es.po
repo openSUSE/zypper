@@ -19,7 +19,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-25 11:38+0100\n"
 "PO-Revision-Date: 2021-03-31 14:58+0000\n"
-"Last-Translator: Jorge Gallegos Carrasco <jcarrascochih@gmail.com>\n"
+"Last-Translator: Antonio Simón <antonio@trans-mission.com>\n"
 "Language-Team: Spanish <https://l10n.opensuse.org/projects/zypper/master/es/>"
 "\n"
 "Language: es\n"
@@ -5164,7 +5164,7 @@ msgstr "Escribe un archivo de manifiesto."
 #. translators: --status
 #: src/commands/utils/source-download.cc:516
 msgid "Disable writing a manifest file."
-msgstr "Deshabilita la escritura de un archivo de manifiesto."
+msgstr "Inhabilita la escritura de un archivo de manifiesto."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/utils/targetos.cc:20
