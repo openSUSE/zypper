@@ -19,7 +19,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-25 11:38+0100\n"
 "PO-Revision-Date: 2021-03-31 14:58+0000\n"
-"Last-Translator: Andrés Barrantes Silman <andresbs2000@protonmail.com>\n"
+"Last-Translator: Jorge Gallegos Carrasco <jcarrascochih@gmail.com>\n"
 "Language-Team: Spanish <https://l10n.opensuse.org/projects/zypper/master/es/>"
 "\n"
 "Language: es\n"
@@ -2815,7 +2815,7 @@ msgstr "Funciona solo con el repositorio especificado."
 #: src/commands/optionsets.cc:87
 #, c-format, boost-format
 msgid "Option '--%s' overrides a previously set download mode."
-msgstr "La opción '--%s' sustituye un modo de descarga definido previamente."
+msgstr "Opcion '--%s' anula un modo de descarga previamente establecido."
 
 #: src/commands/optionsets.cc:116
 #, c-format, boost-format
