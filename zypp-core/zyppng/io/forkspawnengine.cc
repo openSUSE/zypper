@@ -6,8 +6,6 @@
 #include <zypp-core/zyppng/base/private/linuxhelpers_p.h>
 #include <zypp-core/base/CleanerThread_p.h>
 
-#include <glib.h>
-
 #include <iostream>
 #include <signal.h>
 #include <errno.h>
@@ -215,6 +213,9 @@ void zyppng::ForkSpawnEngine::setUsePty( const bool set )
   _use_pty = set;
 }
 
+
+#if ZYPP_HAS_GLIBSPAWNENGINE
+
 struct GLibForkData {
   zyppng::GlibSpawnEngine *that = nullptr;
   pid_t pidParent = -1;
@@ -367,3 +368,4 @@ void zyppng::GlibSpawnEngine::glibSpawnCallback(void *data)
     }
   }
 }
+#endif

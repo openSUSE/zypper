@@ -2,6 +2,7 @@
 #define ZYPPNG_IO_PRIVATE_FORKSPAWNENGINE_H
 
 #include "abstractspawnengine_p.h"
+#include <glib.h>
 
 namespace zyppng {
 
@@ -31,6 +32,10 @@ namespace zyppng {
     bool _use_pty = false;
   };
 
+#if GLIB_CHECK_VERSION( 2, 58, 0)
+
+#define ZYPP_HAS_GLIBSPAWNENGINE 1
+
   /*!
     \internal
     Process forking engine thats using g_spawn from glib which can in most cases optimize
@@ -44,6 +49,10 @@ namespace zyppng {
   private:
     static void glibSpawnCallback ( void *data );
   };
+
+#else
+  #define ZYPP_HAS_GLIBSPAWNENGINE 0
+#endif
 
 }
 

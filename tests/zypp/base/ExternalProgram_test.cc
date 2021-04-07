@@ -71,6 +71,27 @@ BOOST_AUTO_TEST_CASE( SetEnv )
   proc.close();
 }
 
+// environment of the parent has to be in the child process as well
+// some code paths rely on that
+BOOST_AUTO_TEST_CASE( ParentEnv )
+{
+  const char *argv[] = {
+    "bash",
+    "-c",
+    "echo \"${PARENTENV}${ZYPPENV}\"",
+    nullptr
+  };
+
+  setenv( "PARENTENV", "Hello from", 0 );
+
+  ExternalProgram proc( argv, ExternalProgram::Environment{ std::make_pair("ZYPPENV", " env") }, ExternalProgram::Normal_Stderr );
+  std::string line = proc.receiveLine();
+  BOOST_REQUIRE_EQUAL( line, std::string("Hello from env\n") );
+  proc.close();
+
+  unsetenv( "PARENTENV" );
+}
+
 // weird feature to redirect stdout and stderr
 BOOST_AUTO_TEST_CASE( RedirectStdoutAndStderrWithChdir )
 {
