@@ -9,10 +9,10 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-25 11:38+0100\n"
-"PO-Revision-Date: 2020-01-13 20:00+0000\n"
-"Last-Translator: Ad Soyad <kalemlik100@yandex.com>\n"
-"Language-Team: Turkish <https://l10n.opensuse.org/projects/zypper/master/tr/"
-">\n"
+"PO-Revision-Date: 2021-04-07 15:58+0000\n"
+"Last-Translator: Suleyman Poyraz <zaryob.dev@gmail.com>\n"
+"Language-Team: Turkish <https://l10n.opensuse.org/projects/zypper/master/tr/>"
+"\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -22,7 +22,7 @@ msgstr ""
 
 #: src/Command.cc:93
 msgid "Invalid command"
-msgstr ""
+msgstr "Geçersiz komut"
 
 #: src/Command.cc:111
 msgid "Repository Management:"
@@ -46,11 +46,11 @@ msgstr "Sorgulama:"
 
 #: src/Command.cc:149
 msgid "Package Locks:"
-msgstr ""
+msgstr "Paket Kilitleri:"
 
 #: src/Command.cc:154
 msgid "Locale Management:"
-msgstr ""
+msgstr "Dil ve Yerelleştirme Yönetimi:"
 
 #: src/Command.cc:158
 msgid "Other Commands:"
@@ -66,18 +66,18 @@ msgid "Unknown command '%s'"
 msgstr "Bilinmeyen komut '%s'"
 
 #: src/Config.cc:53
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Invalid table style %d."
-msgstr "Geçersiz yol:"
+msgstr "Geçersiz yol: %d"
 
 #: src/Config.cc:54
 #, c-format, boost-format
 msgid " Use an integer number from %d to %d"
-msgstr ""
+msgstr " %d ile%d arasında bir tam sayı kullanın"
 
 #: src/Config.cc:248
 msgid "The path specified in the --root option must be absolute."
-msgstr ""
+msgstr "--root seçeneğinde belirtilen yol mutlak olmalıdır."
 
 #. translators: --help, -h
 #: src/Config.cc:326
@@ -87,12 +87,12 @@ msgstr "Yardım."
 #. translators: --version, -V
 #: src/Config.cc:335
 msgid "Output the version number."
-msgstr ""
+msgstr "Sürüm numarasını girin."
 
 #. translators: --promptids
 #: src/Config.cc:347
 msgid "Output a list of zypper's user prompts."
-msgstr ""
+msgstr "Zypper'ın kullanıcı istemlerinin bir listesini çıkarın."
 
 #. translators: --config, -c <FILE>
 #: src/Config.cc:360
@@ -102,16 +102,18 @@ msgstr "Varsayılan yerine belirtilen yapılandırma dosyasını kullan."
 #: src/Config.cc:367
 msgid "User data string must not contain nonprintable or newline characters!"
 msgstr ""
+"Kullanıcı veri dizesi yazdırılamayan veya satır sonu karakterleri "
+"içermemelidir!"
 
 #. translators: --userdata <STRING>
 #: src/Config.cc:373
 msgid "User defined transaction id used in history and plugins."
-msgstr ""
+msgstr "Geçmişte ve eklentilerde kullanılan kullanıcı tanımlı işlem kimliği."
 
 #. translators: --quiet, -q
 #: src/Config.cc:381
 msgid "Suppress normal output, print only error messages."
-msgstr ""
+msgstr "Normal çıktıyı gizleyin, yalnızca hata mesajlarını yazdırın."
 
 #. translators: --verbose, -v
 #: src/Config.cc:389
@@ -121,18 +123,18 @@ msgstr "Ayrıntı seviyesini arttır."
 #. translators: --color / --no-color
 #: src/Config.cc:410
 msgid "Whether to use colors in output if tty supports it."
-msgstr ""
+msgstr "tty destekliyorsa çıktının renklendirir."
 
 #. translators: --no-abbrev, -A
 #: src/Config.cc:415
 msgid "Do not abbreviate text in tables."
-msgstr ""
+msgstr "Tablolardaki metni kısaltmaz."
 
 #. translators: --table-style, -s, %1% denotes the supported range of the integer argument (e.g. "1-11")
 #: src/Config.cc:420
 #, boost-format
 msgid "Table style (%1%)."
-msgstr ""
+msgstr "Tablo biçimi (%1%)."
 
 #: src/Config.cc:424 src/commands/optionsets.cc:284
 msgid "Entering non-interactive mode."
@@ -148,17 +150,20 @@ msgid ""
 "Patches having the flag rebootSuggested set will not be treated as "
 "interactive."
 msgstr ""
+"rebootSuggested bayrağına sahip yamalar etkileşimli olarak "
+"değerlendirilmeyecektir."
 
 #. translators: --non-interactive-include-reboot-patches
 #: src/Config.cc:437
 msgid ""
 "Do not treat patches as interactive, which have the rebootSuggested-flag set."
 msgstr ""
+"Yamaları, rebootSuggested-flag ayarlandığı etkileşimli olarak ele almayın."
 
 #. translators: --xmlout, -x
 #: src/Config.cc:447
 msgid "Switch to XML output."
-msgstr ""
+msgstr "XML biçiminde çıktı al."
 
 #. translators: --ignore-unknown, -i
 #: src/Config.cc:452
@@ -170,11 +175,13 @@ msgstr "Bilinmeyen paketleri gözardı et."
 msgid ""
 "Terse output for machine consumption. Implies --no-abbrev and --no-color."
 msgstr ""
+"Betiklerle kullanılmak için `terse` çıktısı verir. --no-abbrev  ve --no-"
+"color anlamına gelir."
 
 #. translators: --reposd-dir, -D <DIR>
 #: src/Config.cc:487
 msgid "Use alternative repository definition file directory."
-msgstr ""
+msgstr "Alternatif depo tanım dosyası dizini kullanın."
 
 #. translators: --cache-dir, -C <DIR>
 #: src/Config.cc:502
@@ -184,12 +191,12 @@ msgstr "Tüm ön bellekler için alternatif dizin kullan."
 #. translators: --raw-cache-dir <DIR>
 #: src/Config.cc:515
 msgid "Use alternative raw meta-data cache directory."
-msgstr ""
+msgstr "Alternatif ham meta veri önbellek dizini kullanın."
 
 #. translators: --solv-cache-dir <DIR>
 #: src/Config.cc:529
 msgid "Use alternative solv file cache directory."
-msgstr ""
+msgstr "Alternatif ham solv dosyası önbellek dizini kullanın."
 
 #. translators: --pkg-cache-dir <DIR>
 #: src/Config.cc:543
@@ -206,7 +213,6 @@ msgstr "'no-gpg-checks' moduna giriliyor."
 
 #. translators: --no-gpg-checks
 #: src/Config.cc:556
-#, fuzzy
 msgid "Ignore GPG check failures and continue."
 msgstr "GPG kontrol hatalarını gözardı et ve devam et."
 
@@ -215,6 +221,8 @@ msgstr "GPG kontrol hatalarını gözardı et ve devam et."
 msgid ""
 "Turning on '%s'. New repository signing keys will be automatically imported!"
 msgstr ""
+"\"%s\" deposu açılıyor. Yeni depo imzalama anahtarları otomatik olarak içe "
+"aktarılacaktır!"
 
 #. translators: --gpg-auto-import-keys
 #: src/Config.cc:567
@@ -232,6 +240,9 @@ msgid ""
 "Additionally use disabled repositories providing a specific keyword. Try '--"
 "plus-content debug' to enable repos indicating to provide debug packages."
 msgstr ""
+"Ek olarak, belirli bir anahtar kelime sağlayan devre dışı bırakılmış "
+"depoları kullanın. Hata ayıklama paketleri sağladığını belirten depoları "
+"etkinleştirmek için '--plus-content debug' parametresini deneyin."
 
 #: src/Config.cc:581
 msgid "Repositories disabled, using the database of installed packages only."
@@ -294,12 +305,12 @@ msgstr "Farklı bir kök dizininde işlem yap."
 msgid ""
 "Operate on a different root directory, but share repositories with the host."
 msgstr ""
+"Farklı bir kök dizinde çalıştırın, ancak depoları ana bilgisayarla paylaşın."
 
 # clients/inst_sw_single.ycp:1225 clients/inst_sw_single.ycp:1283
 #: src/Config.cc:637
-#, fuzzy
 msgid "Ignoring installed resolvables."
-msgstr "Sadece kurulu desteler"
+msgstr "Yüklü çözümlenebilir paketler göz ardı ediliyor."
 
 #. translators: --disable-system-resolvables
 #: src/Config.cc:640
@@ -308,12 +319,12 @@ msgstr "Yüklü paketleri okuma."
 
 #: src/Config.cc:804
 msgid "No config file is in use. Can not save options."
-msgstr ""
+msgstr "Yapılandırma dosyası kullanımda değil. Seçenekler kaydedilemiyor."
 
 #: src/Config.cc:815
 #, boost-format
 msgid "Option '%1%' saved in '%2%'."
-msgstr ""
+msgstr "'%1%' seçeneği, '%2%' içine kaydedildi."
 
 #: src/Config.cc:822
 msgid "Failed to save option."
@@ -325,9 +336,9 @@ msgid "'%s' not found in package names. Trying '%s'."
 msgstr "'%s' paket adlarında bulunamadı. '%s' deneniyor."
 
 #: src/PackageArgs.cc:218
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "'%s' is not a package name or capability."
-msgstr "`%s' geçerli bir ağ maskesi değil."
+msgstr "'%s' geçerli bir paket adı veya özellik değil."
 
 #: src/RequestFeedback.cc:40
 #, c-format, boost-format
@@ -368,9 +379,9 @@ msgstr "'%s' kaynak paketi bulunamadı."
 # clients/nis_write.ycp:73
 #. just in case
 #: src/RequestFeedback.cc:56
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Object '%s' not found."
-msgstr "'{0}' kullanıcısı bulunamadı"
+msgstr "'%s' nesnesi bulunamadı."
 
 #: src/RequestFeedback.cc:61
 #, c-format, boost-format
@@ -409,9 +420,9 @@ msgstr "Belirtilen depoda '%s' nesnesi bulunamadı."
 # clients/inst_rootpart.ycp:401
 #. translators: meaning a package %s or provider of capability %s
 #: src/RequestFeedback.cc:76
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "No provider of '%s' found."
-msgstr "Bir yama bulunamadı."
+msgstr "\"%s\" sağlayıcısı bulunamadı."
 
 #. wildcards used
 #: src/RequestFeedback.cc:84
@@ -429,9 +440,9 @@ msgstr "'%s' paketi kurulu değil."
 # clients/inst_rootpart.ycp:401
 #. translators: meaning provider of capability %s
 #: src/RequestFeedback.cc:90
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "No provider of '%s' is installed."
-msgstr "Bir yama bulunamadı."
+msgstr "Hiçbir \"%s\" sağlayıcısı kurulmamış."
 
 #: src/RequestFeedback.cc:95
 #, c-format, boost-format
@@ -441,9 +452,9 @@ msgstr "'%s' yüklendi."
 # include/cups/ui.ycp:1979 include/cups/ui.ycp:2123
 #. translators: %s are package names
 #: src/RequestFeedback.cc:98
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "'%s' providing '%s' is already installed."
-msgstr "Kaldırıldı"
+msgstr "'%s' sağlayıcısı ('%s' sağlamaktadır) zaten kurulu."
 
 # include/cups/ui.ycp:1979 include/cups/ui.ycp:2123
 #: src/RequestFeedback.cc:105
@@ -464,6 +475,8 @@ msgid ""
 "There is an update candidate '%s' for '%s', but it does not match the "
 "specified version, architecture, or repository."
 msgstr ""
+"Bir güncelleme adayı \"%s\", \"%s\" için bulunmakta, ancak belirtilen sürüm, "
+"mimari veya havuzla eşleşmiyor."
 
 #: src/RequestFeedback.cc:123
 #, c-format, boost-format
@@ -471,6 +484,8 @@ msgid ""
 "There is an update candidate for '%s' from vendor '%s', while the current "
 "vendor is '%s'. Use '%s' to install this candidate."
 msgstr ""
+"'%s' sağlayıcısı için '%s'den bir güncelleme adayı var, mevcut sağlayıcı ise "
+"'%s'. Bu adayı kurmak için '%s' kullanın."
 
 #: src/RequestFeedback.cc:132
 #, c-format, boost-format
@@ -547,7 +562,7 @@ msgstr "'%s' yaması belirtilen kategoride değil."
 #: src/RequestFeedback.cc:206
 #, c-format, boost-format
 msgid "Patch '%s' has not the specified severity."
-msgstr ""
+msgstr "'%s' yaması belirtilen önem derecesine sahip değil."
 
 # clients/nis_write.ycp:73
 #: src/RequestFeedback.cc:213
@@ -594,7 +609,7 @@ msgstr "Bunu mu demek istediniz: %1%?"
 #: src/SolverRequester.cc:487
 #, c-format, boost-format
 msgid "Ignoring option %s when updating the update stack first."
-msgstr ""
+msgstr "Önce güncelleme yığını güncellenirken '%s' seçeneği yok sayılıyor."
 
 #: src/SolverRequester.h:52
 #, boost-format
@@ -604,7 +619,7 @@ msgstr "Şüpheli kategori filtre değeri  '%1%'."
 #: src/SolverRequester.h:60
 #, boost-format
 msgid "Suspicious severity filter value '%1%'."
-msgstr ""
+msgstr "Şüpheli önem filtre değeri '%1%'."
 
 #. translator: '%1%' is a products name
 #. '%2%' is a command to call (like 'zypper dup')
@@ -620,8 +635,8 @@ msgstr "'%1%' ürünü '%2%' komutu ile güncellenmeyi gerektiriyor!"
 #, boost-format
 msgid "... and %1% more item."
 msgid_plural "... and %1% more items."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "... ve %1% daha fazla öğe."
+msgstr[1] "... ve %1% daha fazla öğe."
 
 #: src/Summary.cc:569
 #, c-format, boost-format
@@ -771,271 +786,323 @@ msgstr[0] "Aşağıdaki uygulamanın sürümü düşürülecek:"
 msgstr[1] "Aşağıdaki %d uygulamanın sürümü düşürülecek:"
 
 #: src/Summary.cc:753
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following package is going to be reinstalled:"
 msgid_plural "The following %d packages are going to be reinstalled:"
-msgstr[0] "Aşağıdaki desteler kurulacak:"
+msgstr[0] "Aşağıdaki paket yeniden yüklenecek:"
+msgstr[1] "Aşağıdaki %d paket yeniden yüklenecek:"
 
 #: src/Summary.cc:758
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following patch is going to be reinstalled:"
 msgid_plural "The following %d patches are going to be reinstalled:"
-msgstr[0] "Aşağıdaki desteler kurulacak:"
+msgstr[0] "Aşağıdaki yama yeniden yüklenecek:"
+msgstr[1] "Aşağıdaki %d yama yeniden yüklenecek:"
 
 #: src/Summary.cc:763
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following pattern is going to be reinstalled:"
 msgid_plural "The following %d patterns are going to be reinstalled:"
-msgstr[0] "Aşağıdaki desteler kurulacak:"
+msgstr[0] "Aşağıdaki model yeniden yüklenecek:"
+msgstr[1] "Aşağıdaki %d model yeniden yüklenecek:"
 
 #: src/Summary.cc:768
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following product is going to be reinstalled:"
 msgid_plural "The following %d products are going to be reinstalled:"
-msgstr[0] "Aşağıdaki desteler kurulacak:"
+msgstr[0] "Aşağıdaki ürün yeniden yüklenecek:"
+msgstr[1] "Aşağıdaki %d ürün yeniden yüklenecek:"
 
 #: src/Summary.cc:781
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following application is going to be reinstalled:"
 msgid_plural "The following %d applications are going to be reinstalled:"
-msgstr[0] "Aşağıdaki desteler kurulacak:"
+msgstr[0] "Aşağıdaki uygulama yeniden yüklenecek:"
+msgstr[1] "Aşağıdaki %d uygulama yeniden yüklenecek:"
 
 #: src/Summary.cc:918
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following recommended package was automatically selected:"
 msgid_plural ""
 "The following %d recommended packages were automatically selected:"
-msgstr[0] "Aşağıdaki desteler kurulacak:"
+msgstr[0] "Aşağıdaki önerilen paket otomatik olarak seçildi:"
+msgstr[1] "Aşağıdaki önerilen paketler (%d tane) otomatik olarak seçildi:"
 
 #: src/Summary.cc:923
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following recommended patch was automatically selected:"
 msgid_plural ""
 "The following %d recommended patches were automatically selected:"
-msgstr[0] ""
-"Önerilen yama otomatik olarak seçildi. (Önerilen yamalar otomatik olarak "
-"seçildi.)"
+msgstr[0] "Önerilen yama otomatik olarak seçildi:"
+msgstr[1] "Önerilen %d yama otomatik olarak seçildi:"
 
 #: src/Summary.cc:928
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following recommended pattern was automatically selected:"
 msgid_plural ""
 "The following %d recommended patterns were automatically selected:"
-msgstr[0] "Aşağıdaki desteler kurulacak:"
+msgstr[0] "Aşağıdaki önerilen model otomatik olarak seçildi:"
+msgstr[1] "Aşağıdaki önerilen %d model otomatik olarak seçildi:"
 
 #: src/Summary.cc:933
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following recommended product was automatically selected:"
 msgid_plural ""
 "The following %d recommended products were automatically selected:"
-msgstr[0] "Aşağıdaki desteler kurulacak:"
+msgstr[0] "Aşağıdaki önerilen ürün otomatik olarak seçildi:"
+msgstr[1] "Aşağıdaki önerilen %d ürün otomatik olarak seçildi:"
 
 #: src/Summary.cc:938
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following recommended source package was automatically selected:"
 msgid_plural ""
 "The following %d recommended source packages were automatically selected:"
 msgstr[0] "Aşağıdaki önerilen kaynak paketi otomatik olarak seçildi:"
-msgstr[1] "Aşağıdaki %d önerilen kaynak paketi otomatik olarak seçildi:"
+msgstr[1] "Aşağıdaki önerilen %d kaynak paketi otomatik olarak seçildi:"
 
 #: src/Summary.cc:944
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following recommended application was automatically selected:"
 msgid_plural ""
 "The following %d recommended applications were automatically selected:"
-msgstr[0] "Aşağıdaki desteler kurulacak:"
+msgstr[0] "Aşağıdaki önerilen uygulama otomatik olarak seçildi:"
+msgstr[1] "Aşağıdaki önerilen %d uygulama otomatik olarak seçildi:"
 
 #: src/Summary.cc:991
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid ""
 "The following package is recommended, but will not be installed (only "
 "required packages will be installed):"
 msgid_plural ""
 "The following %d packages are recommended, but will not be installed (only "
 "required packages will be installed):"
-msgstr[0] "Aşağıdaki desteler kurulacak:"
+msgstr[0] ""
+"Aşağıdaki paket önerilir, ancak yüklenmeyecektir (yalnızca gerekli paketler "
+"yüklenecektir):"
+msgstr[1] ""
+"Aşağıdaki %d paket önerilir, ancak yüklenmeyecektir (yalnızca gerekli "
+"paketler yüklenecektir):"
 
 #: src/Summary.cc:1003
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid ""
 "The following package is recommended, but will not be installed because it's "
 "unwanted (was manually removed before):"
 msgid_plural ""
 "The following %d packages are recommended, but will not be installed because "
 "they are unwanted (were manually removed before):"
-msgstr[0] "Aşağıdaki desteler kurulacak:"
+msgstr[0] ""
+"Aşağıdaki paket önerilir, ancak istenmediği için yüklenmeyecektir (daha önce "
+"elle kaldırılmıştır):"
+msgstr[1] ""
+"Aşağıdaki %d paket önerilir, ancak istenmediği için yüklenmeyecektir (daha "
+"önce elle kaldırılmıştır):"
 
 #: src/Summary.cc:1013
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid ""
 "The following package is recommended, but will not be installed due to "
 "conflicts or dependency issues:"
 msgid_plural ""
 "The following %d packages are recommended, but will not be installed due to "
 "conflicts or dependency issues:"
-msgstr[0] "Aşağıdaki desteler kurulacak:"
+msgstr[0] ""
+"Aşağıdaki paket önerilir, ancak çakışmalar veya bağımlılık sorunları "
+"nedeniyle yüklenmeyecektir:"
+msgstr[1] ""
+"Aşağıdaki %d paket önerilir, ancak çakışmalar veya bağımlılık sorunları "
+"nedeniyle yüklenmeyecektir:"
 
 #: src/Summary.cc:1026
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following patch is recommended, but will not be installed:"
 msgid_plural ""
 "The following %d patches are recommended, but will not be installed:"
-msgstr[0] "Aşağıdaki desteler kurulacak:"
+msgstr[0] "Aşağıdaki yama önerilir, ancak yüklenmeyecektir:"
+msgstr[1] "Aşağıdaki yamalar (%d tane) önerilir, ancak yüklenmeyecektir:"
 
 #: src/Summary.cc:1030
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following pattern is recommended, but will not be installed:"
 msgid_plural ""
 "The following %d patterns are recommended, but will not be installed:"
-msgstr[0] "Aşağıdaki desteler kurulacak:"
+msgstr[0] "Aşağıdaki model önerilir, ancak yüklenmeyecektir:"
+msgstr[1] "Aşağıdaki %d model önerilir, ancak yüklenmeyecektir:"
 
 #: src/Summary.cc:1034
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following product is recommended, but will not be installed:"
 msgid_plural ""
 "The following %d products are recommended, but will not be installed:"
-msgstr[0] "Aşağıdaki desteler kurulacak:"
+msgstr[0] "Aşağıdaki ürün önerilir, ancak yüklenmeyecektir:"
+msgstr[1] "Aşağıdaki %d ürün önerilir, ancak yüklenmeyecektir:"
 
 #: src/Summary.cc:1039
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following application is recommended, but will not be installed:"
 msgid_plural ""
 "The following %d applications are recommended, but will not be installed:"
-msgstr[0] "Aşağıdaki desteler kurulacak:"
+msgstr[0] "Aşağıdaki uygulama önerilir, ancak yüklenmeyecektir:"
+msgstr[1] "Aşağıdaki %d uygulama önerilir, ancak yüklenmeyecektir:"
 
 #: src/Summary.cc:1072
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following package is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d packages are suggested, but will not be installed:"
-msgstr[0] "Aşağıdaki desteler kurulacak:"
+msgstr[0] "Aşağıdaki paket önerilir, ancak yüklenmeyecektir:"
+msgstr[1] "Aşağıdaki %d paket önerilir, ancak yüklenmeyecektir:"
 
 #: src/Summary.cc:1077
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following patch is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d patches are suggested, but will not be installed:"
-msgstr[0] "Aşağıdaki desteler kurulacak:"
+msgstr[0] "Aşağıdaki yama önerilir, ancak yüklenmeyecektir:"
+msgstr[1] "Aşağıdaki %d yama önerilir, ancak yüklenmeyecektir:"
 
 #: src/Summary.cc:1082
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following pattern is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d patterns are suggested, but will not be installed:"
-msgstr[0] "Aşağıdaki desteler kurulacak:"
+msgstr[0] "Aşağıdaki model önerilir, ancak yüklenmeyecektir:"
+msgstr[1] "Aşağıdaki %d model önerilir, ancak yüklenmeyecektir:"
 
 #: src/Summary.cc:1087
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following product is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d products are suggested, but will not be installed:"
-msgstr[0] "Aşağıdaki desteler kurulacak:"
+msgstr[0] "Aşağıdaki ürün önerilir, ancak yüklenmeyecektir:"
+msgstr[1] "Aşağıdaki %d ürün önerilir, ancak yüklenmeyecektir:"
 
 #: src/Summary.cc:1093
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following application is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d applications are suggested, but will not be installed:"
-msgstr[0] "Aşağıdaki desteler kurulacak:"
+msgstr[0] "Aşağıdaki uygulama önerilir, ancak yüklenmeyecektir:"
+msgstr[1] "Aşağıdaki %d uygulama önerilir, ancak yüklenmeyecektir:"
 
 #: src/Summary.cc:1118
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following package is going to change architecture:"
 msgid_plural "The following %d packages are going to change architecture:"
-msgstr[0] "Belirtilen paketler güncellenecek:"
+msgstr[0] "Aşağıdaki paket mimariyi değiştirecek:"
+msgstr[1] "Aşağıdaki %d paket mimariyi değiştirecek:"
 
 #: src/Summary.cc:1123
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following patch is going to change architecture:"
 msgid_plural "The following %d patches are going to change architecture:"
-msgstr[0] "Belirtilen paketler güncellenecek:"
+msgstr[0] "Aşağıdaki yama mimariyi değiştirecek:"
+msgstr[1] "Aşağıdaki %d yama mimariyi değiştirecek:"
 
 #: src/Summary.cc:1128
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following pattern is going to change architecture:"
 msgid_plural "The following %d patterns are going to change architecture:"
-msgstr[0] "Belirtilen paketler güncellenecek:"
+msgstr[0] "Aşağıdaki model mimariyi değiştirecek:"
+msgstr[1] "Aşağıdaki %d model mimariyi değiştirecek:"
 
 #: src/Summary.cc:1133
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following product is going to change architecture:"
 msgid_plural "The following %d products are going to change architecture:"
-msgstr[0] "Belirtilen paketler güncellenecek:"
+msgstr[0] "Aşağıdaki ürün mimariyi değiştirecek:"
+msgstr[1] "Aşağıdaki %d ürün mimariyi değiştirecek:"
 
 #: src/Summary.cc:1139
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following application is going to change architecture:"
 msgid_plural "The following %d applications are going to change architecture:"
-msgstr[0] "Belirtilen paketler güncellenecek:"
+msgstr[0] "Aşağıdaki uygulama mimariyi değiştirecek:"
+msgstr[1] "Aşağıdaki %d uygulama mimariyi değiştirecek:"
 
 #: src/Summary.cc:1164
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following package is going to change vendor:"
 msgid_plural "The following %d packages are going to change vendor:"
-msgstr[0] "Belirtilen paketler güncellenecek:"
+msgstr[0] "Aşağıdaki paket dağıtıcıyı değiştirecek:"
+msgstr[1] "Aşağıdaki %d paket dağıtıcıyı değiştirecek:"
 
 #: src/Summary.cc:1169
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following patch is going to change vendor:"
 msgid_plural "The following %d patches are going to change vendor:"
-msgstr[0] "Belirtilen paketler güncellenecek:"
+msgstr[0] "Aşağıdaki yama dağıtıcıyı değiştirecek:"
+msgstr[1] "Aşağıdaki %d yama dağıtıcıyı değiştirecek:"
 
 #: src/Summary.cc:1174
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following pattern is going to change vendor:"
 msgid_plural "The following %d patterns are going to change vendor:"
-msgstr[0] "Belirtilen paketler güncellenecek:"
+msgstr[0] "Aşağıdaki model dağıtıcıyı değiştirecek:"
+msgstr[1] "Aşağıdaki %d model dağıtıcıyı değiştirecek:"
 
 #: src/Summary.cc:1179
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following product is going to change vendor:"
 msgid_plural "The following %d products are going to change vendor:"
-msgstr[0] "Belirtilen paketler güncellenecek:"
+msgstr[0] "Aşağıdaki ürün dağıtıcıyı değiştirecek:"
+msgstr[1] "Aşağıdaki %d ürün dağıtıcıyı değiştirecek:"
 
 #: src/Summary.cc:1185
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following application is going to change vendor:"
 msgid_plural "The following %d applications are going to change vendor:"
-msgstr[0] "Belirtilen paketler güncellenecek:"
+msgstr[0] "Aşağıdaki uygulama dağıtıcıyı değiştirecek:"
+msgstr[1] "Aşağıdaki %d uygulama dağıtıcıyı değiştirecek:"
 
 #: src/Summary.cc:1208
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following package has no support information from its vendor:"
 msgid_plural ""
 "The following %d packages have no support information from their vendor:"
-msgstr[0] "Belirtilen paketler güncellenecek:"
+msgstr[0] ""
+"Aşağıdaki paket, dağıtıcısı ile alakalı hiçbir destek bilgisine sahip "
+"değildir:"
+msgstr[1] ""
+"Aşağıdaki %d paket, dağıtıcısı ile alakalı hiçbir destek bilgisine sahip "
+"değildir:"
 
 #: src/Summary.cc:1226
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following package is not supported by its vendor:"
 msgid_plural "The following %d packages are not supported by their vendor:"
-msgstr[0] "Belirtilen paketler güncellenecek:"
+msgstr[0] "Aşağıdaki paket, dağıtıcısı tarafından desteklenmemektedir:"
+msgstr[1] "Aşağıdaki %d paket, dağıtıcısı tarafından desteklenmemektedir:"
 
 #: src/Summary.cc:1244
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid ""
 "The following package needs additional customer contract to get support:"
 msgid_plural ""
 "The following %d packages need additional customer contract to get support:"
-msgstr[0] "Belirtilen paketler güncellenecek:"
+msgstr[0] "Aşağıdaki paket, destek almak için ek müşteri sözleşmesi gerektirir:"
+msgstr[1] "Aşağıdaki %d paket, destek almak için ek müşteri sözleşmesi gerektirir:"
 
 #: src/Summary.cc:1264
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following package update will NOT be installed:"
 msgid_plural "The following %d package updates will NOT be installed:"
-msgstr[0] "Aşağıdaki desteler kurulacak:"
+msgstr[0] "Aşağıdaki paket güncellemesi KURULMAYACAKTIR:"
+msgstr[1] "Aşağıdaki %d paket güncellemesi KURULMAYACAKTIR:"
 
 #: src/Summary.cc:1269
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following product update will NOT be installed:"
 msgid_plural "The following %d product updates will NOT be installed:"
-msgstr[0] "Aşağıdaki desteler kurulacak:"
+msgstr[0] "Aşağıdaki ürün güncellemesi KURULMAYACAKTIR:"
+msgstr[1] "Aşağıdaki %d ürün güncellemesi KURULMAYACAKTIR:"
 
 #: src/Summary.cc:1275
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following application update will NOT be installed:"
 msgid_plural "The following %d application updates will NOT be installed:"
-msgstr[0] "Aşağıdaki desteler kurulacak:"
+msgstr[0] "Aşağıdaki uygulama güncellemesi KURULMAYACAKTIR:"
+msgstr[1] "Aşağıdaki %d uygulama güncellemesi KURULMAYACAKTIR:"
 
 #: src/Summary.cc:1308
 #, c-format, boost-format
@@ -1073,8 +1140,8 @@ msgstr[1] "Aşağıdaki %d yama sistemin yeniden başlatılmasını gerektiriyor
 #, c-format, boost-format
 msgid "The following package requires a system reboot:"
 msgid_plural "The following %d packages require a system reboot:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Aşağıdaki paket, sistemin yeniden başlatılmasını gerektirir:"
+msgstr[1] "Aşağıdaki %d paket, sistemin yeniden başlatılmasını gerektirir:"
 
 #: src/Summary.cc:1374
 #, boost-format
@@ -1083,9 +1150,8 @@ msgstr "Toplam indirme boyutu: %1%. Önbellekli: %2%."
 
 # clients/online_update_load.ycp:380
 #: src/Summary.cc:1377
-#, fuzzy
 msgid "Download only."
-msgstr "İndirme işlemi başarısız oldu:"
+msgstr "Sadece indir."
 
 #. TrasnlatorExplanation %s will be substituted by a byte count e.g. 212 K
 #: src/Summary.cc:1383
@@ -1106,24 +1172,24 @@ msgstr "İşlemden sonra '%s' kurtarılacak."
 # clients/inst_sw_single.ycp:1461 clients/inst_sw_single.ycp:1485
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
 #: src/Summary.cc:1416
-#, fuzzy
 msgid "package to upgrade"
 msgid_plural "packages to upgrade"
-msgstr[0] "Paket"
+msgstr[0] "yükseltilecek paket"
+msgstr[1] "yükseltilecek paketler"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
 #: src/Summary.cc:1427
-#, fuzzy
 msgid "to downgrade"
 msgid_plural "to downgrade"
-msgstr[0] "Alt sürüm (Alt Sürümler)"
+msgstr[0] "sürümü düşürülecek"
+msgstr[1] "sürümü düşürülecek"
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
 #: src/Summary.cc:1430
-#, fuzzy
 msgid "package to downgrade"
 msgid_plural "packages to downgrade"
-msgstr[0] "Paket alt sürüme düşürüldü. (Paketler alt sürüme düşürüldü.)"
+msgstr[0] "paket sürümü düşürülecek"
+msgstr[1] "paketlerin sürümü düşürülecek"
 
 #. translators: this text will be preceded by a number e.g. "5 new"
 #: src/Summary.cc:1441
@@ -1136,87 +1202,87 @@ msgstr[1] "yeni"
 # clients/inst_sw_select.ycp:195
 #. translators: this text will be preceded by a number e.g. "5 new to install"
 #: src/Summary.cc:1444
-#, fuzzy
 msgid "new package to install"
 msgid_plural "new packages to install"
-msgstr[0] "Hiçbir paket bulunamadı."
+msgstr[0] "kurulacak yeni paket"
+msgstr[1] "kurulacak yeni paketler"
 
 # include/cups/ui.ycp:1979 include/cups/ui.ycp:2123
 #. translators: this text will be preceded by a number e.g. "5 to ..."
 #: src/Summary.cc:1455
-#, fuzzy
 msgid "to reinstall"
 msgid_plural "to reinstall"
-msgstr[0] "Kaldırıldı"
+msgstr[0] "yeniden kurulacak"
+msgstr[1] "yeniden kurulacak"
 
 #
 # clients/inst_sw_select.ycp:195
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
 #: src/Summary.cc:1458
-#, fuzzy
 msgid "package to reinstall"
 msgid_plural "packages to reinstall"
-msgstr[0] "Hiçbir paket bulunamadı."
+msgstr[0] "yeniden kurulacak paket"
+msgstr[1] "yeniden kurulacak paketler"
 
 # clients/hwinfo.ycp:55
 #. translators: this text will be preceded by a number e.g. "5 to ..."
 #: src/Summary.cc:1469
-#, fuzzy
 msgid "to remove"
 msgid_plural "to remove"
-msgstr[0] "Kaldır"
+msgstr[0] "kaldırılacak"
+msgstr[1] "kaldırılacak"
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
 #: src/Summary.cc:1472
-#, fuzzy
 msgid "package to remove"
 msgid_plural "packages to remove"
-msgstr[0] "Silinecek paket (Silinecek paketler)"
+msgstr[0] "kaldırılacak paket"
+msgstr[1] "kaldırılacak paketler"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
 #: src/Summary.cc:1483
-#, fuzzy
 msgid "to change vendor"
 msgid_plural " to change vendor"
-msgstr[0] "dasd"
+msgstr[0] "dağıtıcıyı değiştir"
+msgstr[1] "dağıtıcıyı değiştir"
 
 #. translators: this text will be preceded by a number e.g. "5 packages ..."
 #: src/Summary.cc:1486
-#, fuzzy
 msgid "package will change vendor"
 msgid_plural "packages will change vendor"
-msgstr[0] "Belirtilen paketler güncellenecek:"
+msgstr[0] "paket dağıtıcıyı değiştirecek"
+msgstr[1] "paketler dağıtıcıyı değiştirecek"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
 #: src/Summary.cc:1497
-#, fuzzy
 msgid "to change arch"
 msgid_plural "to change arch"
-msgstr[0] "asdasd"
+msgstr[0] "mimariyi değiştir"
+msgstr[1] "mimariyi değiştir"
 
 #. translators: this text will be preceded by a number e.g. "5 packages ..."
 #: src/Summary.cc:1500
-#, fuzzy
 msgid "package will change arch"
 msgid_plural "packages will change arch"
-msgstr[0] "asdad"
+msgstr[0] "paket mimariyi değiştir"
+msgstr[1] "paketler mimariyi değiştir"
 
 # clients/inst_sw_single.ycp:1461 clients/inst_sw_single.ycp:1485
 #. translators: this text will be preceded by a number e.g. "5 new"
 #: src/Summary.cc:1511
-#, fuzzy
 msgid "source package"
 msgid_plural "source packages"
-msgstr[0] "paket:"
+msgstr[0] "kaynak paket"
+msgstr[1] "kaynak paketler"
 
 #
 # clients/inst_sw_select.ycp:195
 #. translators: this text will be preceded by a number e.g. "5 new to install"
 #: src/Summary.cc:1514
-#, fuzzy
 msgid "source package to install"
 msgid_plural "source packages to install"
-msgstr[0] "Hiçbir paket bulunamadı."
+msgstr[0] "kaynak paket kurulacak"
+msgstr[1] "kaynak paketler kurulacak"
 
 #. patch command (auto)restricted to update stack patches
 #: src/Summary.cc:1588
@@ -1224,6 +1290,8 @@ msgid ""
 "Package manager restart required. (Run this command once again after the "
 "update stack got updated)"
 msgstr ""
+"Paket yöneticisinin yeniden başlatılması gerekiyor. (Güncelleme yığını "
+"güncellendikten sonra bu komutu bir kez daha çalıştırın)"
 
 #: src/Summary.cc:1591
 msgid "System reboot required."
@@ -1250,7 +1318,6 @@ msgstr ""
 "uygulamacığı ya da başka yazılım yönetim uygulaması çalıştığında olur."
 
 #: src/Zypper.cc:97
-#, fuzzy
 msgid ""
 "We can ask PackageKit to interrupt the current action as soon as possible, "
 "but it depends on PackageKit how fast it will respond to this request."
@@ -1261,9 +1328,8 @@ msgstr ""
 #
 # clients/inst_sw_select.ycp:195
 #: src/Zypper.cc:100
-#, fuzzy
 msgid "Ask PackageKit to quit?"
-msgstr "Hiçbir paket bulunamadı."
+msgstr "PackageKit'tin durdulmasını istiyor musunuz?"
 
 #: src/Zypper.cc:109
 msgid "PackageKit is still running (probably busy)."
@@ -1286,9 +1352,9 @@ msgstr "Komut özelindeki yardımlar için komut satırına '%s' yazın."
 
 # clients/inst_sw_single.ycp:1461
 #: src/Zypper.cc:310
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Verbosity: %d"
-msgstr "Sürüm: "
+msgstr "Ayrıntı: %d"
 
 #: src/Zypper.cc:319
 msgid "Enforced setting"
@@ -1299,6 +1365,9 @@ msgid ""
 "The /etc/products.d/baseproduct symlink is dangling or missing!\n"
 "The link must point to your core products .prod file in /etc/products.d.\n"
 msgstr ""
+"/etc/products.d/baseproduct sembolik bağlantısı kırık veya bulunmuyor!\n"
+"Bu sembolik bağlantı, /etc/products.d'deki temel ürünlerinizi gösteren .prod "
+"dosyanızı göstermelidir.\n"
 
 #. TranslatorExplanation The %s is "--plus-repo"
 #. TranslatorExplanation The %s is "--option-name"
@@ -1309,7 +1378,7 @@ msgstr "%s seçeneğinin burada etkisi yok, gözardı ediliyor."
 
 #: src/Zypper.cc:658
 msgid "Non-option program arguments: "
-msgstr ""
+msgstr "Seçenek olmayan program argümanları: "
 
 #: src/callbacks/keyring.h:32
 msgid ""
@@ -1326,15 +1395,15 @@ msgstr ""
 
 #. translator: %1% is a file name
 #: src/callbacks/keyring.h:40
-#, fuzzy, boost-format
+#, boost-format
 msgid ""
 "File '%1%' is the repositories master index file. It ensures the integrity "
 "of the whole repo."
 msgstr ""
-"%1% dosyası depoların ana dizin dosyasıdır. Bütün depoyu bir arada tutar."
+"%1% dosyası depoların ana dizin dosyasıdır. Deponun tamamının bütünlüğünü "
+"sağlar."
 
 #: src/callbacks/keyring.h:46
-#, fuzzy
 msgid ""
 "We can't verify that no one meddled with this file, so it might not be "
 "trustworthy anymore! You should not continue unless you know it's safe."
@@ -1427,14 +1496,14 @@ msgstr "'%s' dosyası imzalanmamış, devam edilsin mi?"
 
 #. TranslatorExplanation: speaking of a file
 #: src/callbacks/keyring.h:180
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "File '%s' from repository '%s' is unsigned, continue?"
-msgstr "'%s' deposundan imzalanmamış '%s' dosyası , devam edilsin mi?"
+msgstr "'%s' deposundan imzalanmamış '%s' dosyası mevcut , devam edilsin mi?"
 
 #: src/callbacks/keyring.h:203
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Accepting file '%s' signed with an unknown key '%s'."
-msgstr "Kabul edilen %s dosyası bilinmeyen %s anahtarı ile imzalı."
+msgstr "Kabul edilen '%s' dosyası bilinmeyen '%s' anahtarı ile imzalı."
 
 #: src/callbacks/keyring.h:207
 #, c-format, boost-format
@@ -1576,7 +1645,7 @@ msgstr ""
 #: src/callbacks/keyring.h:444
 #, boost-format
 msgid "To see details about a key call '%1%'."
-msgstr ""
+msgstr "Bir anahtar ile ilgili ayrıntıları görmek için '%1%'."
 
 #: src/callbacks/keyring.h:448
 #, boost-format
@@ -1584,6 +1653,8 @@ msgid ""
 "Unless you believe the key in question is still in use, you can remove it "
 "from the rpm database calling '%1%'."
 msgstr ""
+"Söz konusu anahtarın hala kullanımda olduğuna inanmıyorsanız, onu '%1%' ile "
+"arayarak rpm veritabanından kaldırabilirsiniz."
 
 #: src/callbacks/keyring.h:470
 #, c-format, boost-format
@@ -1591,9 +1662,9 @@ msgid "No digest for file %s."
 msgstr "%s dosyası için özümleme yok."
 
 #: src/callbacks/keyring.h:478
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Unknown digest %s for file %s."
-msgstr "Bilinmeyen"
+msgstr "Bilinmeyen derleme '%s', '%s' içindir."
 
 #: src/callbacks/keyring.h:495
 #, boost-format
@@ -1604,12 +1675,19 @@ msgid ""
 "  expected %3%\n"
 "  but got  %4%\n"
 msgstr ""
+"'%1%' dosyası için derleme doğrulama başarısız oldu.\n"
+"[%2%]\n"
+"\n"
+"   beklenen %3%\n"
+"   ama %4% alındı\n"
 
 #: src/callbacks/keyring.h:507
 msgid ""
 "Accepting packages with wrong checksums can lead to a corrupted system and "
 "in extreme cases even to a system compromise."
 msgstr ""
+"Yanlış sağlama toplamlarına sahip paketlerin kabul edilmesi, sistemin "
+"bozulmasına ve aşırı durumlarda bile bir sistem tehlikesine yol açabilir."
 
 #: src/callbacks/keyring.h:515
 #, boost-format
@@ -1621,26 +1699,32 @@ msgid ""
 "to unblock using this file on your own risk. Empty input will discard the "
 "file.\n"
 msgstr ""
+"Ancak, sağlama toplamı '%1% ..' olan dosyanın güvenli, doğru olduğundan ve "
+"bu\n"
+"işlemde kullanılması gerektiğinden emin olduysanız, bu dosyayı kullanarak "
+"engellemeyi \n"
+"kaldırmak için sağlama toplamının ilk 4 karakterini girin. Boş giriş, "
+"dosyayı atacaktır.\n"
 
 #. translators: A prompt option
 #: src/callbacks/keyring.h:522
 msgid "discard"
-msgstr ""
+msgstr "at"
 
 #. translators: A prompt option help text
 #: src/callbacks/keyring.h:524
 msgid "Unblock using this file on your own risk."
-msgstr ""
+msgstr "Bu dosyayı kullanarak engeli kaldırın."
 
 #. translators: A prompt option help text
 #: src/callbacks/keyring.h:526
 msgid "Discard the file."
-msgstr ""
+msgstr "Dosyayı atın."
 
 #. translators: A prompt text
 #: src/callbacks/keyring.h:530
 msgid "Unblock or discard?"
-msgstr ""
+msgstr "Engellemeyi kaldır veya at?"
 
 #: src/callbacks/locks.h:27
 msgid ""
@@ -1810,7 +1894,7 @@ msgstr "(%s açılmamış)"
 #: src/callbacks/repo.h:112
 #, boost-format
 msgid "In cache %1%"
-msgstr ""
+msgstr "Önbellekte %1%"
 
 # clients/online_update_load.ycp:380
 #: src/callbacks/repo.h:128
@@ -1869,7 +1953,11 @@ msgid_plural ""
 "%1% packages had to be excluded from file conflicts check because they are "
 "not yet downloaded."
 msgstr[0] ""
+"%1% paketi, henüz indirilmediği için dosya çakışmaları kontrolünden hariç "
+"tutulmak zorunda kaldı."
 msgstr[1] ""
+"%1% paketi, henüz indirilmediği için dosya çakışmaları kontrolünden hariç "
+"tutulmak zorunda kaldı."
 
 #. TranslatorExplanation %1%(commandline option)
 #: src/callbacks/rpm.h:460
@@ -1879,6 +1967,9 @@ msgid ""
 "in advance in order to access their file lists. See option '%1%' in the "
 "zypper manual page for details."
 msgstr ""
+"Dosya çakışmalarını kontrol etmek, dosya listelerine erişmek için önceden "
+"indirilmiş paketlerin yüklenmesini gerektirmez. Ayrıntılar için zypper "
+"kılavuz sayfasındaki '%1%' seçeneğine bakın."
 
 #. TranslatorExplanation %1%(number of conflicts); detailed list follows
 #: src/callbacks/rpm.h:470
@@ -1922,9 +2013,8 @@ msgid "Command options:"
 msgstr "Komut seçenekleri:"
 
 #: src/commands/commandhelpformatter.h:126
-#, fuzzy
 msgid "Solver options:"
-msgstr "Özellikleri ayarla"
+msgstr "Çözücü seçenekleri:"
 
 #: src/commands/commandhelpformatter.h:129
 msgid "Expert options:"
@@ -1972,10 +2062,12 @@ msgid ""
 "Do a 'best effort' approach to update. Updates to a lower than the latest "
 "version are also acceptable."
 msgstr ""
+"Güncellemek için \"en iyi çaba\" yaklaşımını uygulayın. En son sürüme göre "
+"daha düşük bir sürümde yapılan güncellemeler de kabul edilebilir."
 
 #: src/commands/commonflags.h:45
 msgid "Consider only patches which affect the package management itself."
-msgstr ""
+msgstr "Yalnızca paket yönetiminin kendisini etkileyen yamaları dikkate alın."
 
 #: src/commands/conditions.cc:19
 msgid "Root privileges are required to run this command."
@@ -1986,6 +2078,8 @@ msgid ""
 "This is a transactional-server, please use transactional-update to update or "
 "modify the system."
 msgstr ""
+"Bu bir işlem sunucusudur, lütfen sistemi güncellemek veya değiştirmek için "
+"işlem güncellemesini kullanın."
 
 #: src/commands/conditions.cc:49
 msgid ""
@@ -2009,7 +2103,7 @@ msgstr "Bir dağıtım yükseltmesi gerçekleştir."
 #. translators: --from <ALIAS|#|URI>
 #: src/commands/distupgrade.cc:37
 msgid "Restrict upgrade to specified repository."
-msgstr ""
+msgstr "Yükseltmeyi, belirtilen depo ile kısıtlayın."
 
 #: src/commands/distupgrade.cc:68
 #, c-format, boost-format
@@ -2050,7 +2144,7 @@ msgstr "verify (ve) [SEÇENEKLER]"
 #. translators: command summary: install-new-recommends, inr
 #: src/commands/inrverify.cc:81
 msgid "Install newly added packages recommended by installed packages."
-msgstr ""
+msgstr "Yüklenen paketler tarafından önerilen yeni eklenen paketleri kurun."
 
 #. translators: command summary: verify, ve
 #: src/commands/inrverify.cc:84
@@ -2066,6 +2160,10 @@ msgid ""
 "unconditionally on small or minimal systems, as it may easily add a large "
 "number of packages."
 msgstr ""
+"Halihazırda kurulu olanlar tarafından önerilen yeni eklenen paketleri kurun. "
+"Bu komut temelde kurulu tüm paketlerin önerilerini yeniden değerlendirir ve "
+"sistemi buna göre doldurur. Çok sayıda paketi kolayca ekleyebileceği için, "
+"bunu kayıtsız şartsız küçük veya minimal sistemlerde aramak istemezsiniz."
 
 #. translators: command description, %1% is a zypper command
 #: src/commands/inrverify.cc:98
@@ -2075,6 +2173,9 @@ msgid ""
 "supporting available hardware, languages or filesystems. Useful after having "
 "added e.g. new hardware or driver repos."
 msgstr ""
+"'%1%' olarak adlandırılan, komutu sadece mevcut donanım, dil veya dosya "
+"sistemlerini destekleyen paketleri aramakla sınırlar. Örneğin yeni donanım "
+"veya sürücü depoları, ekledikten sonra bunu kullanmak faydalıdır."
 
 #. translators: command description
 #: src/commands/inrverify.cc:101
@@ -2086,18 +2187,17 @@ msgstr ""
 "bağımlılık sorunlarını onarmak için paketleri yüklemeyi veya kaldırmayı öner."
 
 #: src/commands/installremove.cc:62
-#, fuzzy
 msgid "Select packages by plain name, not by capability."
-msgstr "Paketleri açık ada göre seç, kabiliyete göre değil."
+msgstr "Paketleri açık ada göre seç, sağladıklarına göre değil."
 
 #: src/commands/installremove.cc:63
 msgid "Select packages solely by capability."
-msgstr ""
+msgstr "Paketleri yalnızca sağladıklarına göre seçin."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/installremove.cc:82
 msgid "remove (rm) [OPTIONS] <CAPABILITY> ..."
-msgstr ""
+msgstr "remove (rm) [SEÇENEKLER] <SAĞLADIKLARI> ..."
 
 #. translators: command summary: remove, rm
 #: src/commands/installremove.cc:84
@@ -2110,13 +2210,15 @@ msgid ""
 "Remove packages with specified capabilities. A capability is NAME[.ARCH]"
 "[OP<VERSION>], where OP is one of <, <=, =, >=, >."
 msgstr ""
+"Belirtilen sağlamalara sahip paketleri kaldırın. Bir sağlama "
+"İSİM[.MİMARİ][OP<SÜRÜMÜ>] şeklindedir, burada OP operatörü <, <=, =,> =,> "
+"işaretlerinden biridir."
 
 # clients/lan_inetd_custom.ycp:758
 #: src/commands/installremove.cc:104 src/commands/installremove.cc:224
 #: src/utils/messages.cc:53
-#, fuzzy
 msgid "Too few arguments."
-msgstr "Çok fazla argüman."
+msgstr "Çok az argüman."
 
 #: src/commands/installremove.cc:105 src/commands/installremove.cc:225
 msgid "At least one package name is required."
@@ -2132,10 +2234,13 @@ msgid ""
 "Patches are not installed in sense of copied files, database records,\n"
 "or similar."
 msgstr ""
+"Bir yamanın kurulu durumu, yalnızca bağımlılıklarına göre belirlenir. \n"
+"Yamalar, kopyalanan dosyalar, veritabanı kayıtları veya benzerleri şeyler\n"
+"anlamında yüklenmez."
 
 #: src/commands/installremove.cc:126
 msgid "Uninstallation of a source package not defined and implemented."
-msgstr ""
+msgstr "Tanımlanmamış ve uygulanmamış bir kaynak paketin kaldırılması."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/installremove.cc:166
@@ -2154,6 +2259,9 @@ msgid ""
 "location. A capability is NAME[.ARCH][OP<VERSION>], where OP is one of <, "
 "<=, =, >=, >."
 msgstr ""
+"Belirtilen sağlamalara sahip paketleri veya belirtilen konuma sahip RPM "
+"dosyalarını yükleyin. Bir sağlama İSİM[.MİMARİ][OP<SÜRÜM>]  şeklindedir, "
+"burada OP operatörü <, <=, =,> =,> işaretlerinden birisidir."
 
 #. translators: --from <ALIAS|#|URI>
 #: src/commands/installremove.cc:185 src/commands/utils/download.cc:172
@@ -2166,10 +2274,14 @@ msgid ""
 "Allow to replace a newer item with an older one. Handy if you are doing a "
 "rollback. Unlike --force it will not enforce a reinstall."
 msgstr ""
+"Daha yeni bir öğeyi eskisiyle değiştirmeye izin verin. Geri alma işlemi "
+"yapıyorsanız kullanışlıdır. --force'un aksine, yeniden yüklemeyi zorlamaz."
 
 #: src/commands/installremove.cc:193
 msgid "Silently install unsigned rpm packages given as commandline parameters."
 msgstr ""
+"Komut satırı parametreleri olarak verilen imzasız rpm paketlerini sessizce "
+"kurun."
 
 #. translators: -f, --force
 #: src/commands/installremove.cc:198
@@ -2177,17 +2289,18 @@ msgid ""
 "Install even if the item is already installed (reinstall), downgraded or "
 "changes vendor or architecture."
 msgstr ""
+"Öğe önceden yüklenmiş (yeniden yükleme), düşürülmüş veya dağıtıcı veya "
+"mimariyi değiştirmiş olsa bile yükleyin."
 
 #. translators: rug related message, shown if
 #. 'zypper in --entire-catalog foorepo someargument' is specified
 #: src/commands/installremove.cc:236
 msgid "Ignoring arguments, marking the entire repository."
-msgstr ""
+msgstr "Argümanları yok sayar, tüm depoyu işaretler."
 
 #: src/commands/installremove.cc:249 src/commands/sourceinstall.cc:92
-#, fuzzy
 msgid "No valid arguments specified."
-msgstr "Geçerli bir URI belirtilmedi."
+msgstr "Geçerli bir argüman belirtilmedi."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/listpatches.cc:16
@@ -2197,7 +2310,7 @@ msgstr "list-patches (lp) [SEÇENEKLER]"
 #. translators: command summary: list-patches, lp
 #: src/commands/listpatches.cc:18
 msgid "List available patches."
-msgstr ""
+msgstr "Uygun yamaları listele."
 
 #. translators: command description
 #: src/commands/listpatches.cc:20
@@ -2207,7 +2320,7 @@ msgstr "Uygulanabilir tüm yamaları listele."
 #. translators: -a, --all
 #: src/commands/listpatches.cc:31
 msgid "List all patches, not only applicable ones."
-msgstr ""
+msgstr "Yalnızca geçerli olanları değil, tüm yamaları listeleyin."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/listupdates.cc:16
@@ -2230,23 +2343,25 @@ msgid ""
 "List all packages for which newer versions are available, regardless whether "
 "they are installable or not."
 msgstr ""
+"Yüklenebilir olup olmadıklarına bakılmaksızın, daha yeni sürümlerin mevcut "
+"olduğu tüm paketleri listeleyin."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/locale/addlocalecmd.cc:20
 msgid "addlocale (aloc) [OPTIONS] <LOCALE> ..."
-msgstr ""
+msgstr "addlocale (aloc) [SEÇENEKLER] <BÖLGE> ..."
 
 #: src/commands/locale/addlocalecmd.cc:21
 msgid "Add locale(s) to requested locales."
-msgstr ""
+msgstr "İstenen bölge ayarlarına bölgeler ekleyin."
 
 #: src/commands/locale/addlocalecmd.cc:22
 msgid "Add given locale(s) to the list of requested locales."
-msgstr ""
+msgstr "Verilen bölge ayarlarını istenen bölge ayarları listesine ekleyin."
 
 #: src/commands/locale/addlocalecmd.cc:33
 msgid "Do not install corresponding packages for given locale(s)."
-msgstr ""
+msgstr "Verilen bölge ayarlarına karşılık gelen paketleri kurmayın."
 
 #: src/commands/locale/addlocalecmd.cc:57
 #, c-format, boost-format
@@ -2254,66 +2369,72 @@ msgid ""
 "Specify locale which shall be supported by the language code. Get a list of "
 "all available locales by calling '%s'."
 msgstr ""
+"Dil kodu tarafından desteklenecek bölge ayarını belirtin. \"%s\"yi çağırarak "
+"mevcut tüm yerel ayarların bir listesini alın."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/locale/localescmd.cc:17
 msgid "locales (lloc) [OPTIONS] [LOCALE] ..."
-msgstr ""
+msgstr "locales (lloc) [SEÇENEKLER] [BÖLGE] ..."
 
 #: src/commands/locale/localescmd.cc:18
 msgid "List requested locales (languages codes)."
-msgstr ""
+msgstr "İstenen bölge ayarlarını listeleyin (dil kodları)."
 
 #: src/commands/locale/localescmd.cc:20
 msgid "List requested locales and corresponding packages."
-msgstr ""
+msgstr "İstenen bölge ayarlarını ve ilgili paketleri listeleyin."
 
 #: src/commands/locale/localescmd.cc:34
 msgid "Show corresponding packages."
-msgstr ""
+msgstr "İlgili paketleri göster."
 
 #: src/commands/locale/localescmd.cc:35
 msgid "List all available locales."
-msgstr ""
+msgstr "Mevcut tüm bölge ayarlarını listeleyin."
 
 #: src/commands/locale/localescmd.cc:48
 msgid "Ignoring positional arguments because --all argument was provided."
-msgstr ""
+msgstr "Konumsal argümanlar yok sayılıyor çünkü --all argümanı sağlandı."
 
 #: src/commands/locale/localescmd.cc:75
 msgid "The locale(s) for which the information shall be printed."
-msgstr ""
+msgstr "Hakkında bilgilerin basılacağı bölge(ler)."
 
 #: src/commands/locale/localescmd.cc:79
 msgid ""
 "Get all locales with lang code 'en' that have their own country code, "
 "excluding the fallback 'en':"
 msgstr ""
+"Yedek 'en' haricinde, kendi ülke koduna sahip 'en' dil koduna sahip tüm "
+"yerel ayarları alın:"
 
 #: src/commands/locale/localescmd.cc:86
 msgid "Get all locales with lang code 'en' with or without country code:"
 msgstr ""
+"Ülke kodu ile veya ülke kodu olmadan 'en' dil koduna sahip tüm bölge "
+"ayarlarını alın:"
 
 #: src/commands/locale/localescmd.cc:93
 msgid "Get the locale matching the argument exactly: "
-msgstr ""
+msgstr "Bağımsız değişkenle tam olarak eşleşen bölge ayarını alın: "
 
 #: src/commands/locale/localescmd.cc:100
 msgid "Get the list of packages which are available for 'de' and 'en':"
-msgstr ""
+msgstr "'de' ve 'en' için mevcut olan paketlerin listesini alın:"
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/locale/removelocalecmd.cc:18
 msgid "removelocale (rloc) [OPTIONS] <LOCALE> ..."
-msgstr ""
+msgstr "removelocale (rloc) [SEÇENEKLER] <BÖLGE> ..."
 
 #: src/commands/locale/removelocalecmd.cc:19
 msgid "Remove locale(s) from requested locales."
-msgstr ""
+msgstr "Bölge ayarlarıını istenen bölge ayarları listesinden kaldırın."
 
 #: src/commands/locale/removelocalecmd.cc:20
 msgid "Remove given locale(s) from the list of supported languages."
-msgstr ""
+msgstr "Verilen bölge ayarlarını desteklenen diller listesinden kaldırın."
 
 #: src/commands/locale/removelocalecmd.cc:35
 #, c-format, boost-format
@@ -2321,15 +2442,17 @@ msgid ""
 "Specify locales which shall be removed by the language code. Get the list of "
 "requested locales by calling '%s'."
 msgstr ""
+"Dil koduyla kaldırılacak bölge ayarlarını belirtin. '%s' ile arayarak "
+"istenen bölge ayarlarının listesini alın."
 
 #: src/commands/locale/removelocalecmd.cc:46
 msgid "Do not remove corresponding packages for given locale(s)."
-msgstr ""
+msgstr "Verilen bölge ayarlarına karşılık gelen paketleri kaldırmayın."
 
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
 #: src/commands/locks/add.cc:29
 msgid "addlock (al) [OPTIONS] <LOCKSPEC>..."
-msgstr ""
+msgstr "addlock (al) [SEÇENEKLER] <KİLİT ÖZELLİĞİ>..."
 
 #. translators: command summary
 #: src/commands/locks/add.cc:31 src/commands/locks/add.cc:34
@@ -2343,6 +2466,10 @@ msgid ""
 "have their KIND: string prepended (e.g. 'patch:foo') or use the commands --"
 "type option."
 msgstr ""
+"Kilit özelliği (LOCKSPEC), \"[TÜR:]İSİM[OP EDITION]\" tarafından oluşturulur;"
+" burada AD, * ve ? kullanan bir glob modeli de olabilir, joker karakterler "
+"de olabilir. Paket dışı türlerin başına KIND: dizesi eklenebilir (örneğin, "
+"'patch: foo') veya komutlar --type seçeneğini kullanabilir."
 
 #: src/commands/locks/add.cc:36
 msgid ""
@@ -2350,10 +2477,13 @@ msgid ""
 "optionally restrict the lock to match a specific edition or edition range "
 "using =, <, <=, >, >= or != followed an EDITION."
 msgstr ""
+"Temel form, eşleşen öğelerin tüm sürümlerini kilitleyecektir. İsteğe bağlı "
+"olarak kilidi belirli bir baskı veya baskı aralığıyla eşleşecek şekilde =, <"
+", <=,>,>= veya != ve ardından bir SÜRÜMÜ kullanarak kısıtlayabilirsiniz."
 
 #: src/commands/locks/add.cc:46
 msgid "Restrict the lock to the specified repository."
-msgstr ""
+msgstr "Kilidi belirtilen havuzla sınırlayın."
 
 #: src/commands/locks/add.cc:80
 msgid "Specified lock has been successfully added."
@@ -2437,7 +2567,7 @@ msgstr "(herhangi)"
 #. translators: property name; short; used like "Name: value"
 #: src/commands/locks/list.cc:195
 msgid "Keep installed"
-msgstr ""
+msgstr "Yüklü Tut"
 
 #. translators: property name; short; used like "Name: value"
 #: src/commands/locks/list.cc:203
@@ -2455,15 +2585,15 @@ msgstr "Mevcut paket kilitlerini listele."
 
 #: src/commands/locks/list.cc:285
 msgid "Show the number of resolvables matched by each lock."
-msgstr ""
+msgstr "Her kilitle eşleşen çözülebilirlerin sayısını gösterin."
 
 #: src/commands/locks/list.cc:286
 msgid "List the resolvables matched by each lock."
-msgstr ""
+msgstr "Her kilitle eşleşen çözülebilirleri listeleyin."
 
 #: src/commands/locks/list.cc:300
 msgid "Error reading the locks file:"
-msgstr ""
+msgstr "Kilit dosyası okunurken hata oluştu:"
 
 #: src/commands/locks/list.cc:307
 msgid "There are no package locks defined."
@@ -2490,27 +2620,26 @@ msgstr ""
 
 #: src/commands/locks/remove.cc:45
 msgid "Remove only locks with specified repository."
-msgstr ""
+msgstr "Yalnızca belirtilen depoya sahip kilitleri kaldırın."
 
 #: src/commands/locks/remove.cc:81
 msgid "Specified lock has been successfully removed."
 msgstr "Belirtilen kilit başarıyla kaldırıldı."
 
 #: src/commands/locks/remove.cc:94
-#, fuzzy
 msgid "No lock has been removed."
-msgstr "'{0}' kullanıcısı başarıyla silindi"
+msgstr "Hiçbir kilit kaldırılmadı."
 
 #: src/commands/locks/remove.cc:98
-#, fuzzy, c-format
+#, c-format
 msgid "%zu lock has been successfully removed."
 msgid_plural "%zu locks have been successfully removed."
-msgstr[0] "'{0}' kullanıcısı başarıyla silindi"
+msgstr[0] "%zu kilit başarıyla kaldırıldı."
+msgstr[1] "%zu kilit başarıyla kaldırıldı."
 
 #: src/commands/locks/remove.cc:105
-#, fuzzy
 msgid "Problem removing the package lock:"
-msgstr "Sadece yüklenmiş pakatleri göster "
+msgstr "Paket kilidini kaldırmada sorun:"
 
 #. translators: command summary: needs-rebooting
 #: src/commands/needs-rebooting.cc:22
@@ -2538,6 +2667,8 @@ msgstr "Çekirdek kütüphane ve hizmetleri güncellendi."
 msgid ""
 "Reboot is required to ensure that your system benefits from these updates."
 msgstr ""
+"Sisteminizin bu güncellemelerden yararlanmasını sağlamak için yeniden "
+"başlatma gereklidir."
 
 #: src/commands/needs-rebooting.cc:41
 msgid "No core libraries or services have been updated."
@@ -2577,11 +2708,11 @@ msgstr "what-provides (wp) <KABİLİYET>"
 #. translators: command summary: what-provides, wp
 #: src/commands/nullcommands.cc:39
 msgid "List packages providing specified capability."
-msgstr ""
+msgstr "Belirtilen yeteneği sağlayan paketleri listeleyin."
 
 #: src/commands/nullcommands.cc:42
 msgid "List all packages providing the specified capability."
-msgstr ""
+msgstr "Belirtilen sağlamaları sağlayan tüm paketleri listeleyin."
 
 #. translators: command description what-provides: %1% is a zypper command line, %2% a command line option
 #: src/commands/nullcommands.cc:44
@@ -2590,6 +2721,9 @@ msgid ""
 "The command is an alias for '%1%' and performs a case-insensitive search. "
 "For a case-sensitive search call the search command and add the '%2%' option."
 msgstr ""
+"Komut, '%1%' için bir takma addır ve büyük/küçük harfe duyarlı olmayan bir "
+"arama gerçekleştirir. Büyük/küçük harfe duyarlı bir arama için arama "
+"komutunu çağırın ve '%2%' seçeneğini ekleyin."
 
 #. "what-provides" is obsolete
 #. The "what-provides" now is included in "search" command, e.g.
@@ -2603,11 +2737,11 @@ msgstr "%s komutu %s ile değiştirildi."
 #: src/commands/nullcommands.cc:58
 #, c-format, boost-format
 msgid "See '%s' for all available options."
-msgstr ""
+msgstr "Mevcut tüm seçenekler için '%s' bölümüne bakın."
 
 #: src/commands/optionsets.cc:33
 msgid "Don't change anything, just report what would be done."
-msgstr ""
+msgstr "Hiçbir şeyi değiştirmeyin, sadece ne yapılacağını bildirin."
 
 #. translators: %1% is a commandline option (like "--download-only")
 #: src/commands/optionsets.cc:35
@@ -2616,27 +2750,29 @@ msgid ""
 "A meaningful file conflict check can only be performed if used together with "
 "'%1%'."
 msgstr ""
+"Anlamlı bir dosya çakışma kontrolü yalnızca '%1%' ile birlikte kullanılırsa "
+"gerçekleştirilebilir."
 
 #. translators: -r, --repo <ALIAS|#|URI>
 #: src/commands/optionsets.cc:67
 msgid "Work only with the specified repository."
-msgstr ""
+msgstr "Yalnızca belirtilen havuzla çalışın."
 
 #: src/commands/optionsets.cc:87
 #, c-format, boost-format
 msgid "Option '--%s' overrides a previously set download mode."
-msgstr ""
+msgstr "Seçenek '--%s', önceden ayarlanmış bir indirme modunu geçersiz kılar."
 
 #: src/commands/optionsets.cc:116
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Available download modes: %s"
-msgstr "Toplam indirilecek boyut: {0} "
+msgstr "Mevcut indirme modları: %s"
 
 #. translators: --download
 #: src/commands/optionsets.cc:178
 #, c-format, boost-format
 msgid "Set the download-install mode. Available modes: %s"
-msgstr ""
+msgstr "İndirme-yükleme moduna ayarlayın. Kullanılabilir modlar: %s"
 
 #. translators: -d, --download-only
 #: src/commands/optionsets.cc:182
@@ -2658,12 +2794,16 @@ msgid ""
 "Automatically say 'yes' to third party license confirmation prompt. See 'man "
 "zypper' for more details."
 msgstr ""
+"Üçüncü taraf lisans onay istemine otomatik olarak 'evet' deyin. Daha fazla "
+"ayrıntı için 'man zypper'a bakın."
 
 #: src/commands/optionsets.cc:244
 msgid ""
 "Automatically accept product licenses only. See 'man zypper' for more "
 "details."
 msgstr ""
+"Yalnızca ürün lisanslarını otomatik olarak kabul edin. Daha fazla ayrıntı "
+"için 'man zypper'a bakın."
 
 #. translators: --replacefiles
 #: src/commands/optionsets.cc:264
@@ -2672,6 +2812,9 @@ msgid ""
 "installed, packages. Default is to treat file conflicts as an error. --"
 "download-as-needed disables the fileconflict check."
 msgstr ""
+"Paketleri, önceden kurulmuş olan diğer paketlerdeki dosyaları değiştirseler "
+"bile kurun. Varsayılan, dosya çakışmalarını bir hata olarak ele almaktır. "
+"`--download-as-needed` dosya çakışması denetimini devre dışı bırakır."
 
 #. translators: -y, --no-confirm
 #: src/commands/optionsets.cc:291
@@ -2679,20 +2822,24 @@ msgid ""
 "Don't require user interaction. Alias for the --non-interactive global "
 "option."
 msgstr ""
+"Kullanıcı etkileşimi gerektirmez. Etkileşimli olmayan genel seçeneğin takma "
+"adı `--non-interactive`dir."
 
 #: src/commands/optionsets.cc:309
 msgid ""
 "Whether applicable optional patches should be treated as needed or be "
 "excluded."
 msgstr ""
+"Uygulanabilir isteğe bağlı yamaların gerektiği gibi muamele görüp görmemesi "
+"veya hariç tutulması."
 
 #: src/commands/optionsets.cc:312
 msgid "The default is to exclude optional patches."
-msgstr ""
+msgstr "Varsayılan, isteğe bağlı yamaları dışlamaktır."
 
 #: src/commands/optionsets.cc:313
 msgid "The default is to include optional patches."
-msgstr ""
+msgstr "Varsayılan, isteğe bağlı yamaları eklemektir."
 
 #. translators: --with-interactive
 #: src/commands/optionsets.cc:348
@@ -2701,7 +2848,6 @@ msgstr "Etkileşimli güncellemeleri atlama."
 
 #. translators: --skip-interactive
 #: src/commands/optionsets.cc:352
-#, fuzzy
 msgid "Skip interactive updates."
 msgstr "Etkileşimli güncellemeleri atla."
 
@@ -2737,6 +2883,9 @@ msgid ""
 "is ignored, if the patch command must update the update stack first. Can not "
 "be combined with --updatestack-only."
 msgstr ""
+"Ayrıca yamaların kapsamadığı tüm paketleri güncellemeye çalışın. Yama "
+"komutunun önce güncelleme yığınını güncellemesi gerekiyorsa, seçenek yok "
+"sayılır. Yalnızca --updatestack-only seçeneği ile beraber kullanılamaz."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/patchcheck.cc:17
@@ -2765,13 +2914,12 @@ msgstr "ps [SEÇENEKLER]"
 
 #. translators: command description
 #: src/commands/ps.cc:29
-#, fuzzy
 msgid ""
 "List running processes which might still use files and libraries deleted by "
 "recent upgrades."
 msgstr ""
-"Son yükseltme ile silinen dosya ve kütüphaneleri hala kullanan çalışan "
-"süreçleri listele."
+"Son yükseltmelerle silinen dosyaları ve kitaplıkları kullanmaya devam "
+"edebilecek işlemleri listeleyin."
 
 #. translators: -s, --short
 #: src/commands/ps.cc:46
@@ -2780,6 +2928,9 @@ msgid ""
 "processes which are associated with a system service. Given three times, "
 "list the associated system service names only."
 msgstr ""
+"Silinen dosyaları göstermeyen kısa bir tablo oluşturun. İki kez "
+"verildiğinde, yalnızca bir sistem hizmetiyle ilişkili işlemleri gösterin. Üç "
+"kez verildiğinde, yalnızca ilişkili sistem hizmet adlarını listeleyin."
 
 #. translators: --print <format>
 #: src/commands/ps.cc:49
@@ -2789,11 +2940,14 @@ msgid ""
 "followed by a newline. Any '%s' directive in <format> is replaced by the "
 "system service name."
 msgstr ""
+"İlişkili her sistem hizmeti için, standart çıktıya <biçim> yazdırın, "
+"ardından bir satır sonu yazın. <biçim> içindeki herhangi bir '%s' yönergesi, "
+"sistem hizmet adıyla değiştirilir."
 
 #. translators: -d, --debugFile <path>
 #: src/commands/ps.cc:52
 msgid "Write debug output to file <path>."
-msgstr ""
+msgstr "Hata ayıklama çıktısını <path> dosyasına yazın."
 
 #: src/commands/ps.cc:72 src/solve-commit.cc:494
 msgid "Check failed:"
@@ -2857,6 +3011,8 @@ msgstr "Bu süreçleri yeniden başlatmak isteyebilirsiniz."
 msgid ""
 "See '%s' for information about the meaning of values in the above table."
 msgstr ""
+"Yukarıdaki tablodaki değerlerin anlamı hakkında bilgi için '%s' bölümüne "
+"bakın."
 
 #: src/commands/ps.cc:208
 msgid ""
@@ -2864,6 +3020,8 @@ msgid ""
 "permission to examine with the system stat(2) function. The result might be "
 "incomplete."
 msgstr ""
+"Not: Kök olarak çalışmıyorsanız, sistem stat(2) işlevi ile inceleme izniniz "
+"olan dosyaları aramakla sınırlandırılırsınız. Sonuç eksik olabilir."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/query/info.cc:19
@@ -2896,12 +3054,12 @@ msgstr "Adla kısmen eşleşen paketlerin bilgisini yazdır."
 #. translators: --provides
 #: src/commands/query/info.cc:67
 msgid "Show provides."
-msgstr ""
+msgstr "Sağlamaları göster."
 
 #. translators: --requires
 #: src/commands/query/info.cc:71
 msgid "Show requires and prerequires."
-msgstr ""
+msgstr "Gereklilikleri ve önkoşulları gösterir."
 
 #. translators: --conflicts
 #: src/commands/query/info.cc:75
@@ -2911,22 +3069,22 @@ msgstr "Çakışmaları göster."
 #. translators: --obsoletes
 #: src/commands/query/info.cc:79
 msgid "Show obsoletes."
-msgstr ""
+msgstr "Kullanılmayanları göster."
 
 #. translators: --recommends
 #: src/commands/query/info.cc:83
 msgid "Show recommends."
-msgstr ""
+msgstr "Önerileri göster."
 
 #. translators: --supplements
 #: src/commands/query/info.cc:87
 msgid "Show supplements."
-msgstr ""
+msgstr "Takviyeleri gösterin."
 
 #. translators: --suggests
 #: src/commands/query/info.cc:91
 msgid "Show suggests."
-msgstr ""
+msgstr "Önerileri göster."
 
 #: src/commands/query/info.cc:105 src/utils/messages.cc:70
 msgid "Required argument missing."
@@ -3000,11 +3158,10 @@ msgstr "Belirtilen depodaki mevcut tüm paketleri listele."
 #. translators: --orphaned
 #: src/commands/query/packages.cc:36
 msgid "Show packages which are orphaned (without repository)."
-msgstr ""
+msgstr "Sahipsiz olan paketleri (havuz olmadan) gösterin."
 
 #. translators: --suggested
 #: src/commands/query/packages.cc:40
-#, fuzzy
 msgid "Show packages which are suggested."
 msgstr "Önerilen paketleri göster."
 
@@ -3050,7 +3207,6 @@ msgstr "patterns (pt) [SEÇENEKLER] [DEPO] ..."
 
 #. translators: command summary: patterns, pt
 #: src/commands/query/patterns.cc:20
-#, fuzzy
 msgid "List all available patterns."
 msgstr "Mevcut tüm örüntüleri listele."
 
@@ -3079,9 +3235,11 @@ msgstr "Belirtilen depodaki mevcut tüm ürünleri listele."
 msgid ""
 "XML output only: Literally forward the XML tags found in a product file."
 msgstr ""
+"Yalnızca XML çıkışı: Bir ürün dosyasında bulunan XML etiketlerini tam "
+"anlamıyla iletin."
 
 #: src/commands/query/products.cc:50
-#, fuzzy, boost-format
+#, boost-format
 msgid "Option %1% has no effect without the %2% global option."
 msgstr "%1% seçeneği %2% evrensel seçeneği olmadan bir etkiye sahip değil."
 
@@ -3102,19 +3260,20 @@ msgid ""
 "Add a repository to the system. The repository can be specified by its URI "
 "or can be read from specified .repo file (even remote)."
 msgstr ""
+"Sisteme bir depo ekleyin. Depo, kendi URI'si ile belirtilebilir veya "
+"belirtilen .repo dosyasından (uzak bile olsa) okunabilir."
 
 #: src/commands/repos/add.cc:40
 msgid "Just another means to specify a .repo file to read."
-msgstr ""
+msgstr "Okumak için bir .repo dosyası belirtmenin başka bir yolu."
 
 #: src/commands/repos/add.cc:41
-#, fuzzy
 msgid "Probe URI."
-msgstr "Problem: "
+msgstr "URI'yi araştırın."
 
 #: src/commands/repos/add.cc:42
 msgid "Don't probe URI, probe later during refresh."
-msgstr ""
+msgstr "URI'yi araştırmayın, daha sonra yenileme sırasında araştırın."
 
 #: src/commands/repos/add.cc:46
 msgid "The repository type is always autodetected. This option is ignored."
@@ -3130,6 +3289,8 @@ msgstr "%s, %s ile birlikte kullanılamıyor. %s ayarı kullanılıyor."
 msgid ""
 "If only one argument is used, it must be a URI pointing to a .repo file."
 msgstr ""
+"Yalnızca bir bağımsız değişken kullanılırsa, bir .repo dosyasına işaret eden "
+"bir URI olmalıdır."
 
 #: src/commands/repos/add.cc:130
 msgid "Specified type is not a valid repository type:"
@@ -3139,10 +3300,11 @@ msgstr "Belirtilen tür geçerli bir depo türü değil:"
 #, c-format, boost-format
 msgid "See '%s' or '%s' to get a list of known repository types."
 msgstr ""
+"Bilinen depo türlerinin bir listesini almak için \"%s\" veya \"%s\" ye bakın."
 
 #: src/commands/repos/clean.cc:16
 msgid "clean (cc) [ALIAS|#|URI] ..."
-msgstr ""
+msgstr "clean (cc) [ALIAS|#|URI] ..."
 
 #: src/commands/repos/clean.cc:17 src/commands/repos/clean.cc:18
 msgid "Clean local caches."
@@ -3156,17 +3318,17 @@ msgstr "Sadece belirtilen depoları temizle."
 #. translators: -m, --metadata
 #: src/commands/repos/clean.cc:42
 msgid "Clean metadata cache."
-msgstr ""
+msgstr "Meta veri önbelleğini temizleyin."
 
 #. translators: -M, --raw-metadata
 #: src/commands/repos/clean.cc:48
 msgid "Clean raw metadata cache."
-msgstr ""
+msgstr "Meta veri önbelleğini değiştirilebilir."
 
 #. translators: -a, --all
 #: src/commands/repos/clean.cc:53
 msgid "Clean both metadata and package caches."
-msgstr ""
+msgstr "Hem meta verileri hem de paket önbelleklerini temizleyin."
 
 #: src/commands/repos/list.cc:40 src/commands/repos/list.cc:212
 #: src/commands/services/list.cc:104
@@ -3209,9 +3371,8 @@ msgstr "Otomatik yenileme"
 
 # /usr/lib/YaST2/keyboard_raw.ycp:79
 #: src/commands/repos/list.cc:50 src/commands/repos/list.cc:51
-#, fuzzy
 msgid "On"
-msgstr "Umman"
+msgstr "Açık"
 
 #: src/commands/repos/list.cc:50 src/commands/repos/list.cc:51
 msgid "Off"
@@ -3224,16 +3385,15 @@ msgstr "Paketleri Tut"
 
 #: src/commands/repos/list.cc:53
 msgid "GPG Key URI"
-msgstr ""
+msgstr "GPG Anahtarı URI'si"
 
 #: src/commands/repos/list.cc:54
 msgid "Path Prefix"
 msgstr "Ön ek yolu."
 
 #: src/commands/repos/list.cc:55
-#, fuzzy
 msgid "Parent Service"
-msgstr "Sunucu"
+msgstr "Ebeveyn Hizmeti"
 
 #: src/commands/repos/list.cc:56
 msgid "Keywords"
@@ -3241,11 +3401,11 @@ msgstr "Anahtar sözcükler"
 
 #: src/commands/repos/list.cc:57
 msgid "Repo Info Path"
-msgstr ""
+msgstr "Repo Bilgi Yolu"
 
 #: src/commands/repos/list.cc:58
 msgid "MD Cache Path"
-msgstr ""
+msgstr "MD Önbellek Yolu"
 
 #: src/commands/repos/list.cc:74
 msgid "repos (lr) [OPTIONS] [REPO] ..."
@@ -3275,9 +3435,9 @@ msgid "Maybe you do not have write permissions?"
 msgstr "Belki de yazma iznine sahip misiniz?"
 
 #: src/commands/repos/list.cc:151
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Repositories have been successfully exported to %s."
-msgstr "'{0}' kullanıcısı başarıyla silindi"
+msgstr "Depolar başarıyla %s konumuna aktarıldı."
 
 #. translators: 'zypper repos' column - whether autorefresh is enabled
 #. for the repository
@@ -3288,7 +3448,7 @@ msgstr "Yenile"
 
 #: src/commands/repos/list.cc:332
 msgid "No repositories defined."
-msgstr ""
+msgstr "Kod deposu tanımlanmadı."
 
 #: src/commands/repos/list.cc:333
 msgid "Use the 'zypper addrepo' command to add one or more repositories."
@@ -3298,7 +3458,7 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/repos/modify.cc:24
 msgid "modifyrepo (mr) <OPTIONS> <ALIAS|#|URI>"
-msgstr ""
+msgstr "modifyrepo (mr) <SEÇENEKLER> <ALIAS|#|URI>"
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/repos/modify.cc:26
@@ -3318,6 +3478,8 @@ msgid ""
 "Modify properties of repositories specified by alias, number, or URI, or by "
 "the '%1%' aggregate options."
 msgstr ""
+"Takma ad, sayı veya URI ile veya '%1%' toplama seçenekleriyle belirtilen "
+"depoların özelliklerini değiştirin."
 
 # clients/rc_config_step1.ycp:253
 #: src/commands/repos/modify.cc:89
@@ -3327,7 +3489,7 @@ msgstr "%s deposu bulunamadı."
 
 #: src/commands/repos/refresh.cc:24
 msgid "refresh (ref) [ALIAS|#|URI] ..."
-msgstr ""
+msgstr "refresh (ref) [ALIAS|#|URI] ..."
 
 #. translators: command summary: refresh, ref
 #: src/commands/repos/refresh.cc:26
@@ -3340,6 +3502,8 @@ msgid ""
 "Refresh repositories specified by their alias, number or URI. If none are "
 "specified, all enabled repositories will be refreshed."
 msgstr ""
+"Takma adlarına, numaralarına veya URI'larına göre belirtilen depoları "
+"yenileyin. Hiçbiri belirtilmezse, tüm etkin havuzlar yenilenecektir."
 
 #. translators: -f, --force
 #: src/commands/repos/refresh.cc:49 src/commands/services/refresh.cc:113
@@ -3349,22 +3513,22 @@ msgstr "Tam bir yenilenmeye zorla."
 #. translators: -b, --force-build
 #: src/commands/repos/refresh.cc:54
 msgid "Force rebuild of the database."
-msgstr ""
+msgstr "Veritabanını yeniden oluşturmaya zorlayın."
 
 #. translators: -d, --force-download
 #: src/commands/repos/refresh.cc:59
 msgid "Force download of raw metadata."
-msgstr ""
+msgstr "Ham meta verileri indirmeye zorla."
 
 #. translators: -B, --build-only
 #: src/commands/repos/refresh.cc:64
 msgid "Only build the database, don't download metadata."
-msgstr ""
+msgstr "Yalnızca veritabanını oluşturun, meta verileri indirmeyin."
 
 #. translators: -D, --download-only
 #: src/commands/repos/refresh.cc:69
 msgid "Only download raw metadata, don't build the database."
-msgstr ""
+msgstr "Yalnızca ham meta verileri indirin, veritabanını oluşturmayın."
 
 #. translators: -r, --repo <ALIAS|#|URI>
 #: src/commands/repos/refresh.cc:74
@@ -3384,7 +3548,7 @@ msgstr "'%s' evrensel seçeneğinin burada etkisi yok."
 #: src/commands/repos/refresh.cc:103
 #, c-format, boost-format
 msgid "Arguments are not allowed if '%s' is used."
-msgstr ""
+msgstr "\"%s\" kullanılıyorsa bağımsız değişkenlere izin verilmez."
 
 #: src/commands/repos/refresh.cc:195 src/repos.cc:1023
 msgid "Specified repositories: "
@@ -3413,7 +3577,7 @@ msgstr "Üstteki hatadan dolayı '%s' deposu atlanıyor."
 #: src/commands/repos/refresh.cc:274
 msgid ""
 "Some of the repositories have not been refreshed because they were not known."
-msgstr ""
+msgstr "Bazı depolar bilinmedikleri için yenilenmedi."
 
 #: src/commands/repos/refresh.cc:281
 msgid "Specified repositories are not enabled or defined."
@@ -3448,7 +3612,7 @@ msgstr "Tüm depolar yenilendi."
 
 #: src/commands/repos/remove.cc:21
 msgid "removerepo (rr) [OPTIONS] <ALIAS|#|URI>"
-msgstr ""
+msgstr "removerepo (rr) [SEÇENEKLER] <ALIAS|#|URI>"
 
 #: src/commands/repos/remove.cc:22
 msgid "Remove specified repository."
@@ -3456,25 +3620,25 @@ msgstr "Belirtilen depoyu sil."
 
 #: src/commands/repos/remove.cc:23
 msgid "Remove repository specified by alias, number or URI."
-msgstr ""
+msgstr "Takma ad, numara veya URI ile belirtilen depoyu kaldırın."
 
 #. translators: --loose-auth
 #: src/commands/repos/remove.cc:44 src/commands/services/remove.cc:40
 msgid "Ignore user authentication data in the URI."
-msgstr ""
+msgstr "URI'deki kullanıcı kimlik doğrulama verilerini göz ardı edin."
 
 #. translators: --loose-query
 #: src/commands/repos/remove.cc:47 src/commands/services/remove.cc:43
 msgid "Ignore query string in the URI."
-msgstr ""
+msgstr "URI'deki sorgu dizesini yoksay."
 
 # clients/rc_config_step1.ycp:253
 #. translators: %s is the supplied command line argument which
 #. for which no repository counterpart was found
 #: src/commands/repos/remove.cc:96
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Repository '%s' not found by alias, number or URI."
-msgstr "Bir geri dönüşüm noktası bulunamadı."
+msgstr "Kod deposu '%s' takma ad, numara veya URI ile bulunamadı."
 
 #: src/commands/repos/rename.cc:33
 #, c-format, boost-format
@@ -3482,6 +3646,8 @@ msgid ""
 "Cannot change alias of '%s' repository. The repository belongs to service "
 "'%s' which is responsible for setting its alias."
 msgstr ""
+"'%s' deposunun takma adı değiştirilemez. Depo, takma adını belirlemekten "
+"sorumlu olan '%s' hizmetine aittir."
 
 # clients/rc_config_step1.ycp:253
 #: src/commands/repos/rename.cc:43
@@ -3515,11 +3681,11 @@ msgstr "Belirtilen depoyu yeniden adlandır."
 #. translators: command description
 #: src/commands/repos/rename.cc:67
 msgid "Assign new alias to the repository specified by alias, number or URI."
-msgstr ""
+msgstr "Takma ad, numara veya URI ile belirtilen depoya yeni takma ad atayın."
 
 #: src/commands/repos/rename.cc:92
 msgid "Too few arguments. At least URI and alias are required."
-msgstr ""
+msgstr "Çok az argüman. En azından URI ve takma ad gereklidir."
 
 # clients/rc_config_step1.ycp:253
 #: src/commands/repos/rename.cc:114
@@ -3540,18 +3706,16 @@ msgid "Set a descriptive name for the service."
 msgstr "Hizmet için bir tanımlayıcı ad belirle."
 
 #: src/commands/reposerviceoptionsets.cc:72
-#, fuzzy
 msgid "Set a descriptive name for the repository."
-msgstr "Koruma bulunamadı."
+msgstr "Depo için açıklayıcı bir ad belirleyin."
 
 #: src/commands/reposerviceoptionsets.cc:75
 msgid "Enable a disabled service."
 msgstr "Devre dışı bırakılmış bir hizmeti etkinleştir."
 
 #: src/commands/reposerviceoptionsets.cc:75
-#, fuzzy
 msgid "Enable a disabled repository."
-msgstr "Geçersiz hizmet türü '{0}'"
+msgstr "Devre dışı bırakılmış bir depoyu etkinleştirin."
 
 #: src/commands/reposerviceoptionsets.cc:78
 msgid "Disable the service (but don't remove it)."
@@ -3566,18 +3730,16 @@ msgid "Enable auto-refresh of the service."
 msgstr "Hizmetin otomatik yenilenmesini etkinleştir."
 
 #: src/commands/reposerviceoptionsets.cc:81
-#, fuzzy
 msgid "Enable auto-refresh of the repository."
-msgstr "Koruma bulunamadı."
+msgstr "Depoyu otomatik yenilemeyi etkinleştirin."
 
 #: src/commands/reposerviceoptionsets.cc:84
 msgid "Disable auto-refresh of the service."
 msgstr "Hizmetin otomatik yenilenmesini devre dışı bırak."
 
 #: src/commands/reposerviceoptionsets.cc:84
-#, fuzzy
 msgid "Disable auto-refresh of the repository."
-msgstr "Koruma bulunamadı."
+msgstr "Deponun otomatik yenilemesini devre dışı bırakın."
 
 #: src/commands/reposerviceoptionsets.cc:111
 msgid "Apply changes to all services."
@@ -3600,9 +3762,8 @@ msgid "Apply changes to all remote services."
 msgstr "Değişiklikleri tüm uzak hizmetlere uygula."
 
 #: src/commands/reposerviceoptionsets.cc:117
-#, fuzzy
 msgid "Apply changes to all remote repositories."
-msgstr "Değişikliği tüm uzak depolara uygula."
+msgstr "Tüm uzak depolara değişiklikleri uygulayın."
 
 #: src/commands/reposerviceoptionsets.cc:120
 msgid "Apply changes to services of specified type."
@@ -3613,17 +3774,16 @@ msgid "Apply changes to repositories of specified type."
 msgstr "Değişiklikleri belirtilen türdeki depolara uygula."
 
 #: src/commands/reposerviceoptionsets.cc:137
-#, fuzzy
 msgid "Set priority of the repository."
-msgstr "Depo değiştirilirken hata oluştu."
+msgstr "Deponun önceliğini ayarlayın."
 
 #: src/commands/reposerviceoptionsets.cc:138
 msgid "Enable RPM files caching."
-msgstr ""
+msgstr "RPM dosyalarını önbelleğe almayı etkinleştirin."
 
 #: src/commands/reposerviceoptionsets.cc:139
 msgid "Disable RPM files caching."
-msgstr ""
+msgstr "RPM dosyalarını önbelleğe almayı devre dışı bırakın."
 
 #: src/commands/reposerviceoptionsets.cc:140
 msgid "Enable GPG check for this repository."
@@ -3634,13 +3794,15 @@ msgid "Enable strict GPG check for this repository."
 msgstr "Bu depo için katı bir GPG kontrolünü etkinleştir."
 
 #: src/commands/reposerviceoptionsets.cc:142
-#, fuzzy, boost-format
+#, boost-format
 msgid "Short hand for '%1%'."
-msgstr "Koruma bulunamadı."
+msgstr "\"%1%\" için kısaltma."
 
 #: src/commands/reposerviceoptionsets.cc:143
 msgid "Enable GPG check but allow the repository metadata to be unsigned."
 msgstr ""
+"GPG kontrolünü etkinleştirin, ancak depo meta verilerinin imzasız olmasına "
+"izin verin."
 
 #: src/commands/reposerviceoptionsets.cc:144
 msgid ""
@@ -3664,7 +3826,7 @@ msgstr ""
 #. translators: -a, --alias
 #: src/commands/reposerviceoptionsets.cc:182
 msgid "Show also repository alias."
-msgstr ""
+msgstr "Depo takma adını da göster."
 
 #. translators: -n, --name
 #: src/commands/reposerviceoptionsets.cc:185
@@ -3674,12 +3836,12 @@ msgstr "Depo adını da göster."
 #. translators: -r, --refresh
 #: src/commands/reposerviceoptionsets.cc:188
 msgid "Show also the autorefresh flag."
-msgstr ""
+msgstr "Otomatik yenileme bayrağını da gösterin."
 
 #. translators: -u, --uri
 #: src/commands/reposerviceoptionsets.cc:198
 msgid "Show also base URI of repositories."
-msgstr ""
+msgstr "Depoların temel URI'sini de göster."
 
 #. translators: -p, --priority
 #: src/commands/reposerviceoptionsets.cc:202
@@ -3700,7 +3862,7 @@ msgstr "Hizmetlere ait olan depoları da göster."
 #: src/commands/reposerviceoptionsets.cc:218
 #: src/commands/reposerviceoptionsets.cc:241
 msgid "Show also alias of parent service."
-msgstr ""
+msgstr "Üst hizmetin takma adını da gösterin."
 
 #. translators: -E, --show-enabled-only
 #: src/commands/reposerviceoptionsets.cc:225
@@ -3729,6 +3891,8 @@ msgid ""
 "For an extended search including not yet activated remote resources please "
 "use '%1%'."
 msgstr ""
+"Henüz etkinleştirilmemiş uzak kaynakları içeren genişletilmiş bir arama için "
+"lütfen '%1%' kullanın."
 
 #. translator: %1% denotes a zypper command to execute. Like 'zypper search-packages'.
 #: src/commands/search/search-packages-hinthack.cc:85
@@ -3737,6 +3901,8 @@ msgid ""
 "The package providing this subcommand is currently not installed. You can "
 "install it by calling '%1%'."
 msgstr ""
+"Bu alt komutu sağlayan paket şu anda kurulu değil. '%1%' arayarak "
+"kurabilirsiniz."
 
 #: src/commands/search/search-packages-hinthack.cc:98
 #, boost-format
@@ -3744,20 +3910,22 @@ msgid ""
 "For an extended search including not yet activated remote resources you may "
 "run '%1%' at any time."
 msgstr ""
+"Henüz etkinleştirilmemiş uzak kaynakları içeren genişletilmiş bir arama için "
+"istediğiniz zaman '%1%' çalıştırabilirsiniz."
 
 #: src/commands/search/search-packages-hinthack.cc:99
 #, boost-format
 msgid "Do you want to run '%1%' now?"
-msgstr ""
+msgstr "'%1%' i şimdi çalıştırmak istiyor musunuz?"
 
 #: src/commands/search/search-packages-hinthack.cc:115
 #, boost-format
 msgid "Run '%1%' to search in not yet activated remote resources."
 msgstr ""
+"Henüz etkinleştirilmemiş uzak kaynaklarda arama yapmak için '%1%' çalıştırın."
 
 #. translators: command summary: search, se
 #: src/commands/search/search.cc:76
-#, fuzzy
 msgid "Search for packages matching a pattern."
 msgstr "Bir örüntüyle eşleşen paketleri ara."
 
@@ -3769,7 +3937,7 @@ msgstr "search (se) [SEÇENEKLER] [SORGUMETNİ] ..."
 #. translators: command description
 #: src/commands/search/search.cc:91
 msgid "Search for packages matching any of the given search strings."
-msgstr ""
+msgstr "Verilen arama dizelerinden herhangi biriyle eşleşen paketleri arayın."
 
 #. translators: command description
 #: src/commands/search/search.cc:93
@@ -3777,56 +3945,58 @@ msgid ""
 "* and ? wildcards can also be used within search strings. If a search string "
 "is enclosed in '/', it's interpreted as a regular expression."
 msgstr ""
+"* ve ? joker karakterler, arama dizeleri içinde de kullanılabilir. Bir arama "
+"dizesi \"/\" içine alınmışsa, normal bir ifade olarak yorumlanır."
 
 #. translators: --match-substrings
 #: src/commands/search/search.cc:105
 msgid "Search for a match to partial words (default)."
-msgstr ""
+msgstr "Kısmi kelimelerle eşleşme arayın (varsayılan)."
 
 #. translators: --match-words
 #: src/commands/search/search.cc:109
 msgid "Search for a match to whole words only."
-msgstr ""
+msgstr "Yalnızca tam kelimelerle bir eşleşme arayın."
 
 #. translators: -x, --match-exact
 #: src/commands/search/search.cc:113
 msgid "Searches for an exact match of the search strings."
-msgstr ""
+msgstr "Arama dizelerinin tam eşleşmesini arar."
 
 #. translators: --provides
 #: src/commands/search/search.cc:117
 msgid "Search for packages which provide the search strings."
-msgstr ""
+msgstr "Arama dizelerinin tam eşleşmesini arar."
 
 #. translators: --requires
 #: src/commands/search/search.cc:121
 msgid "Search for packages which require the search strings."
-msgstr ""
+msgstr "Arama dizelerini gerektiren paketleri arayın."
 
 #. translators: --recommends
 #: src/commands/search/search.cc:125
 msgid "Search for packages which recommend the search strings."
-msgstr ""
+msgstr "Arama dizeleri ile öneren paketleri arayın."
 
 #. translators: --supplements
 #: src/commands/search/search.cc:129
 msgid "Search for packages which supplement the search strings."
-msgstr ""
+msgstr "Arama dizelerini tamamlayan paketleri arayın."
 
 #. translators: --conflicts
 #: src/commands/search/search.cc:133
 msgid "Search packages conflicting with search strings."
-msgstr ""
+msgstr "Arama dizeleriyle çelişen arama paketleri."
 
 #. translators: --obsoletes
 #: src/commands/search/search.cc:137
 msgid "Search for packages which obsolete the search strings."
-msgstr ""
+msgstr "Arama dizelerini geçersiz kılan paketleri arayın."
 
 #. translators: --suggests
 #: src/commands/search/search.cc:141
 msgid "Search for packages which suggest the search strings."
-msgstr ""
+msgstr "Arama dizelerini öneren paketleri arayın."
 
 #. translators: --provides-pkg
 #: src/commands/search/search.cc:145
@@ -3834,6 +4004,8 @@ msgid ""
 "Search for all packages that provide any of the provides of the package(s) "
 "matched by the input parameters."
 msgstr ""
+"Giriş parametreleriyle eşleşen paket(ler)in herhangi birini sağlayan tüm "
+"paketleri arayın."
 
 #. translators: --requires-pkg
 #: src/commands/search/search.cc:149
@@ -3841,6 +4013,8 @@ msgid ""
 "Search for all packages that require any of the provides of the package(s) "
 "matched by the input parameters."
 msgstr ""
+"Giriş parametreleriyle eşleşen paket(ler)in herhangi birini gerektiren tüm "
+"paketleri arayın."
 
 #. translators: --recommends-pkg
 #: src/commands/search/search.cc:153
@@ -3848,6 +4022,8 @@ msgid ""
 "Search for all packages that recommend any of the provides of the package(s) "
 "matched by the input parameters."
 msgstr ""
+"Giriş parametreleriyle eşleşen paketlerden herhangi birini öneren tüm "
+"paket(ler)i arayın."
 
 #. translators: --supplements-pkg
 #: src/commands/search/search.cc:157
@@ -3855,6 +4031,8 @@ msgid ""
 "Search for all packages that supplement any of the provides of the "
 "package(s) matched by the input parameters."
 msgstr ""
+"Giriş parametreleriyle eşleşen paket(ler)in herhangi birini tamamlayan tüm "
+"paketleri arayın."
 
 #. translators: --conflicts-pkg
 #: src/commands/search/search.cc:161
@@ -3862,6 +4040,8 @@ msgid ""
 "Search for all packages that conflict with any of the package(s) matched by "
 "the input parameters."
 msgstr ""
+"Giriş parametreleriyle eşleşen paketlerden herhangi biriyle çakışan tüm "
+"paket(ler)i arayın."
 
 #. translators: --obsoletes-pkg
 #: src/commands/search/search.cc:165
@@ -3869,6 +4049,8 @@ msgid ""
 "Search for all packages that obsolete any of the package(s) matched by the "
 "input parameters."
 msgstr ""
+"Giriş parametreleriyle eşleşen paketlerden herhangi birini geçersiz kılan "
+"tüm paket(ler)i arayın."
 
 #. translators: --suggests-pkg
 #: src/commands/search/search.cc:169
@@ -3876,6 +4058,8 @@ msgid ""
 "Search for all packages that suggest any of the provides of the package(s) "
 "matched by the input parameters."
 msgstr ""
+"Giriş parametreleriyle eşleşen paket(ler)in herhangi birini öneren tüm "
+"paketleri arayın."
 
 #. translators: -t, --type <TYPE>
 #: src/commands/search/search.cc:173
@@ -3888,11 +4072,13 @@ msgid ""
 "Useful together with dependency options, otherwise searching in package name "
 "is default."
 msgstr ""
+"Bağımlılık seçenekleriyle birlikte kullanışlıdır, aksi takdirde paket adında "
+"arama varsayılandır."
 
 #. translators: -f, --file-list
 #: src/commands/search/search.cc:181
 msgid "Search for a match in the file list of packages."
-msgstr ""
+msgstr "Paketlerin dosya listesinde bir eşleşme arayın."
 
 #. translators: -d, --search-descriptions
 #: src/commands/search/search.cc:185
@@ -3907,7 +4093,7 @@ msgstr "Büyük ve küçük harfe duyarlı arama gerçekleştir."
 #. translators: -s, --details
 #: src/commands/search/search.cc:193
 msgid "Show each available version in each repository on a separate line."
-msgstr ""
+msgstr "Her depodaki mevcut her sürümü ayrı bir satırda gösterin."
 
 #. translators: -v, --verbose
 #: src/commands/search/search.cc:197
@@ -3915,6 +4101,8 @@ msgid ""
 "Like --details, with additional information where the search has matched "
 "(useful for search in dependencies)."
 msgstr ""
+"--details gibi, aramanın eşleştiği ek bilgilerle (bağımlılıklarda arama "
+"yapmak için kullanışlıdır)."
 
 #: src/commands/search/search.cc:290 src/repos.cc:781
 #, c-format, boost-format
@@ -3943,38 +4131,40 @@ msgstr ""
 #. translators: -g, --category <CATEGORY>
 #: src/commands/selectpatchoptionset.cc:24
 msgid "Select patches with the specified category."
-msgstr ""
+msgstr "Belirtilen kategoriye sahip yamaları seçin."
 
 #. translators: --severity <SEVERITY>
 #: src/commands/selectpatchoptionset.cc:28
 msgid "Select patches with the specified severity."
-msgstr ""
+msgstr "Belirtilen önem derecesine sahip yamaları seçin."
 
 #. translators: --date <YYYY-MM-DD>
 #: src/commands/selectpatchoptionset.cc:32
 msgid "Select patches issued up to, but not including, the specified date"
-msgstr ""
+msgstr "Belirtilen tarihe kadar ancak bu tarihe kadar çıkmayan yamaları seçin"
 
 #. translators: -b, --bugzilla
 #: src/commands/selectpatchoptionset.cc:36
 msgid "Select applicable patches for the specified Bugzilla issues."
-msgstr ""
+msgstr "Belirtilen Bugzilla sorunları için uygun yamaları seçin."
 
 #. translators: --cve
 #: src/commands/selectpatchoptionset.cc:41
 msgid "Select applicable patches for the specified CVE issues."
-msgstr ""
+msgstr "Belirtilen CVE sorunları için uygun yamaları seçin."
 
 #. any
 #. translators: --cve
 #: src/commands/selectpatchoptionset.cc:50
 msgid "Select issues matching the specified string."
-msgstr ""
+msgstr "Belirtilen dizeyle eşleşen sorunları seçin."
 
 #: src/commands/services/add.cc:55
 #, c-format, boost-format
 msgid "Service aliased '%s' already exists. Please use another alias."
 msgstr ""
+"\"%s\" takma adına sahip bir servis zaten mevcut. Lütfen başka bir takma ad "
+"kullanın."
 
 #: src/commands/services/add.cc:62
 #, c-format, boost-format
@@ -3997,7 +4187,7 @@ msgstr "Yeni bir hizmet ekle."
 
 #: src/commands/services/add.cc:104
 msgid "Add a repository index service to the system."
-msgstr ""
+msgstr "Sisteme bir depo dizin hizmeti ekleyin."
 
 #: src/commands/services/add.cc:118
 msgid "The type of service is always autodetected. This option is ignored."
@@ -4017,7 +4207,7 @@ msgstr "'%s' hizmeti yenileniyor."
 #: src/commands/services/common.cc:136 src/commands/services/common.cc:146
 #, c-format, boost-format
 msgid "Problem retrieving the repository index file for service '%s':"
-msgstr ""
+msgstr "'%s' hizmeti için depo dizin dosyası alınırken sorun:"
 
 #: src/commands/services/common.cc:138 src/commands/services/refresh.cc:226
 #: src/repos.cc:1732
@@ -4079,6 +4269,8 @@ msgid ""
 "Modify properties of services specified by alias, number, or URI, or by the "
 "'%1%' aggregate options."
 msgstr ""
+"Takma ad, sayı veya URI ile veya '%1%' toplama seçenekleriyle belirtilen "
+"hizmetlerin özelliklerini değiştirin."
 
 #: src/commands/services/modify.cc:41
 msgid "Advanced:"
@@ -4086,39 +4278,35 @@ msgstr "Gelişmiş:"
 
 #: src/commands/services/modify.cc:43
 msgid "Add a RIS service repository to enable."
-msgstr ""
+msgstr "Etkinleştirmek için bir RIS hizmet deposu ekleyin."
 
 #: src/commands/services/modify.cc:44
-#, fuzzy
 msgid "Add a RIS service repository to disable."
-msgstr "Başlangıç durumları"
+msgstr "Devre dışı bırakmak için bir RIS hizmet deposu ekleyin."
 
 #: src/commands/services/modify.cc:45
 msgid "Remove a RIS service repository to enable."
-msgstr ""
+msgstr "Etkinleştirmek için bir RIS hizmet havuzunu kaldırın."
 
 #: src/commands/services/modify.cc:46
-#, fuzzy
 msgid "Remove a RIS service repository to disable."
-msgstr "Başlangıç durumları"
+msgstr "Devre dışı bırakmak için bir RIS hizmet havuzunu kaldırın."
 
 #: src/commands/services/modify.cc:47
 msgid "Clear the list of RIS repositories to enable."
-msgstr ""
+msgstr "Etkinleştirmek için RIS depolarının listesini temizleyin."
 
 #: src/commands/services/modify.cc:48
-#, fuzzy
 msgid "Clear the list of RIS repositories to disable."
-msgstr "Başlangıç durumları"
+msgstr "Devre dışı bırakılacak RIS depolarının listesini temizleyin."
 
 #. translators: aggregate option is e.g. "--all". This message will be
 #. followed by ms command help text which will explain it
 #. translators: aggregate option is e.g. "--all". This message will be
 #. followed by mr command help text which will explain it
 #: src/commands/services/modify.cc:73 src/utils/messages.cc:62
-#, fuzzy
 msgid "Alias or an aggregate option is required."
-msgstr "İşaret verileni gerektiren paketleri göster"
+msgstr "Takma ad veya toplu seçenek gereklidir."
 
 # clients/nis_write.ycp:73
 #: src/commands/services/modify.cc:104
@@ -4181,13 +4369,16 @@ msgstr[1] ""
 "'%s' depoları '%s' hizmetinin etkinleştirilmiş depolarından kaldırıldı"
 
 #: src/commands/services/modify.cc:276
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid ""
 "Repository '%s' has been removed from disabled repositories of service '%s'"
 msgid_plural ""
 "Repositories '%s' have been removed from disabled repositories of service "
 "'%s'"
-msgstr[0] "Başlangıç durumları"
+msgstr[0] ""
+"'%s' deposu, '%s' hizmetinin devre dışı bırakılmış depolarından kaldırıldı"
+msgstr[1] ""
+"'%s' depoları, '%s' hizmetinin devre dışı bırakılmış depolarından kaldırıldı"
 
 #: src/commands/services/modify.cc:285
 #, c-format, boost-format
@@ -4205,9 +4396,9 @@ msgstr "%s hizmeti değiştirilmeden bırakılıyor."
 
 # clients/rc_config_step1.ycp:253
 #: src/commands/services/refresh.cc:86
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Service '%s' not found by its alias, number, or URI."
-msgstr "Bir geri dönüşüm noktası bulunamadı."
+msgstr "'%s' hizmeti diğer adı, numarası veya URI'sine göre bulunamadı."
 
 #: src/commands/services/refresh.cc:89
 #, c-format, boost-format
@@ -4224,7 +4415,7 @@ msgstr "Tüm hizmetleri yenile."
 
 #: src/commands/services/refresh.cc:97
 msgid "Refresh defined repository index services."
-msgstr ""
+msgstr "Tanımlanmış depo dizin hizmetlerini yenileyin."
 
 #: src/commands/services/refresh.cc:114
 msgid "Refresh also the service repositories."
@@ -4232,7 +4423,7 @@ msgstr "Tüm hizmet depolarını yenile."
 
 #: src/commands/services/refresh.cc:115
 msgid "Also restore service repositories enabled/disabled state."
-msgstr ""
+msgstr "Ayrıca hizmet havuzlarının etkin/devre dışı durumunu geri yükleyin."
 
 #: src/commands/services/refresh.cc:179
 #, c-format, boost-format
@@ -4252,7 +4443,7 @@ msgstr "Belirtilen hizmetler etkin ya da tanımlı değil."
 
 #: src/commands/services/refresh.cc:242
 msgid "There are no enabled services defined."
-msgstr ""
+msgstr "Tanımlanmış etkin hizmet yok."
 
 #: src/commands/services/refresh.cc:246
 msgid "Could not refresh the services because of errors."
@@ -4280,15 +4471,15 @@ msgstr "Belirtilen hizmeti kaldır."
 
 #: src/commands/services/remove.cc:22
 msgid "Remove specified repository index service from the system."
-msgstr ""
+msgstr "Belirtilen depo dizin hizmetini sistemden kaldırın."
 
 # clients/rc_config_step1.ycp:253
 #. translators: %s is the supplied command line argument which
 #. for which no service counterpart was found
 #: src/commands/services/remove.cc:76
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Service '%s' not found by alias, number or URI."
-msgstr "Bir geri dönüşüm noktası bulunamadı."
+msgstr "Diğer ad, numara veya URI ile '%s' hizmeti bulunamadı."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/shell.cc:20
@@ -4303,7 +4494,7 @@ msgstr "Çoklu komutları tek seferde kabul et."
 #. translators: command description
 #: src/commands/shell.cc:24
 msgid "Enter the zypper command shell."
-msgstr ""
+msgstr "zypper komut kabuğunu girin."
 
 #: src/commands/shell.cc:40
 msgid "You already are running zypper's shell."
@@ -4326,11 +4517,11 @@ msgstr "Bu komut sadece zypper shell. geçerli."
 #: src/commands/solveroptionset.cc:23
 #, boost-format
 msgid "Valid values: %1%"
-msgstr ""
+msgstr "Geçerli değerler: %1%"
 
 #: src/commands/solveroptionset.cc:35 src/commands/solveroptionset.cc:58
 msgid "Solver options"
-msgstr ""
+msgstr "Çözücü seçenekleri"
 
 #: src/commands/solveroptionset.cc:37
 msgid "Install also recommended packages in addition to the required ones."
@@ -4342,21 +4533,22 @@ msgstr "Önerilen paketleri yükleme, sadece gerekli olanları yükle."
 
 #: src/commands/solveroptionset.cc:60
 msgid "Create a solver test case for debugging."
-msgstr ""
+msgstr "Hata ayıklama için bir çözücü test durumu oluşturun."
 
 #: src/commands/solveroptionset.cc:61
 msgid ""
 "Force the solver to find a solution (even an aggressive one) rather than "
 "asking."
 msgstr ""
+"Çözücüyü sormak yerine bir çözüm (hatta agresif olanı bile) bulmaya zorlayın."
 
 #: src/commands/solveroptionset.cc:62
 msgid "Do not force the solver to find a solution, let it ask."
-msgstr ""
+msgstr "Çözücüyü bir çözüm bulmaya zorlamayın, sormasına izin verin."
 
 #: src/commands/solveroptionset.cc:63
 msgid "Set the solvers general attitude when resolving a job."
-msgstr ""
+msgstr "Bir işi çözerken çözücünün genel tutumunu belirleyin."
 
 #: src/commands/solveroptionset.cc:83
 msgid "Expert options"
@@ -4364,19 +4556,25 @@ msgstr "Uzman seçenekler"
 
 #: src/commands/solveroptionset.cc:86
 msgid "Whether to allow downgrading installed resolvables."
-msgstr ""
+msgstr "Yüklü çözümlenebilirlerin sürüm düşürmesine izin verilip verilmeyeceği."
 
 #: src/commands/solveroptionset.cc:88
 msgid "Whether to allow changing the names of installed resolvables."
 msgstr ""
+"Yüklü çözümlenebilirlerin adlarının değiştirilmesine izin verilip "
+"verilmeyeceği."
 
 #: src/commands/solveroptionset.cc:90
 msgid "Whether to allow changing the architecture of installed resolvables."
 msgstr ""
+"Kurulu çözümlenebilirlerin mimarisinin değiştirilmesine izin verilip "
+"verilmeyeceği."
 
 #: src/commands/solveroptionset.cc:92
 msgid "Whether to allow changing the vendor of installed resolvables."
 msgstr ""
+"Yüklü çözümlenebilirlerin dağıtıcısının değiştirilmesine izin verilip "
+"verilmeyeceği."
 
 #. translators: -u, --clean-deps
 #: src/commands/solveroptionset.cc:116
@@ -4386,7 +4584,7 @@ msgstr "Gerekli olmayan bağımlılıkları otomatik olarak kaldır."
 #. translators: -U, --no-clean-deps
 #: src/commands/solveroptionset.cc:120
 msgid "No automatic removal of unneeded dependencies."
-msgstr ""
+msgstr "Gereksiz bağımlılıkların otomatik olarak kaldırılması yok."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/sourceinstall.cc:21
@@ -4395,7 +4593,6 @@ msgstr "source-install (si) [SEÇENEKLER] <AD> ..."
 
 #. translators: command summary: source-install, si
 #: src/commands/sourceinstall.cc:23
-#, fuzzy
 msgid "Install source packages and their build dependencies."
 msgstr "Kaynak paketlerini ve bunların yapı bağımlılıklarını yükle."
 
@@ -4403,6 +4600,7 @@ msgstr "Kaynak paketlerini ve bunların yapı bağımlılıklarını yükle."
 #: src/commands/sourceinstall.cc:25
 msgid "Install specified source packages and their build dependencies."
 msgstr ""
+"Belirtilen kaynak paketleri ve bunların derleme bağımlılıklarını yükleyin."
 
 #: src/commands/sourceinstall.cc:26
 #, boost-format
@@ -4411,35 +4609,37 @@ msgid ""
 "value can be changed in your local rpm configuration. In case of doubt try "
 "executing '%2%'."
 msgstr ""
+"Rpm'nin kaynak paketlerini yüklediği varsayılan konum '%1%', ancak değer "
+"yerel rpm yapılandırmanızdan değiştirilebilir. Şüphe durumunda '%2%' "
+"yürütmeyi deneyin."
 
 #. translators: -d, --build-deps-only
 #: src/commands/sourceinstall.cc:48
 msgid "Install only build dependencies of specified packages."
-msgstr ""
+msgstr "Yalnızca belirtilen paketlerin bağımlılıklarını kurun."
 
 #. translators: -D, --no-build-deps
 #: src/commands/sourceinstall.cc:52
 msgid "Don't install build dependencies."
-msgstr ""
+msgstr "İnşaa bağımlılıkları yüklemeyin."
 
 #: src/commands/sourceinstall.cc:70
-#, fuzzy
 msgid "Source package name is a required argument."
-msgstr "İşaret verileni gerektiren paketleri göster"
+msgstr "Kaynak paket adı gerekli bir bağımsız değişkendir."
 
 #: src/commands/sourceinstall.cc:86
 msgid "Uninstalling source packages is not supported."
-msgstr ""
+msgstr "Kaynak paketlerin kaldırılması desteklenmez."
 
 #. translators: %1% is the name of the command which has no man page available.
 #: src/commands/subcommand.cc:79
 #, boost-format
 msgid "No manual entry for %1%"
-msgstr ""
+msgstr "%1% için manual girişi yok"
 
 #: src/commands/subcommand.cc:92
 msgid "none"
-msgstr ""
+msgstr "hiçbiri"
 
 #: src/commands/subcommand.cc:329
 #, boost-format
@@ -4451,14 +4651,14 @@ msgstr "%1% çalıştırılamıyor (%2%)"
 #: src/commands/subcommand.cc:338
 #, boost-format
 msgid "fork for %1% failed (%2%)"
-msgstr ""
+msgstr "%1% için çatallama başarısız oldu (%2%)"
 
 #. translators: %1% - command name or path
 #. translators: %2% - system error message
 #: src/commands/subcommand.cc:357
 #, boost-format
 msgid "waitpid for %1% failed (%2%)"
-msgstr ""
+msgstr "%1% için waitpid işlemi başarısız oldu (%2%)"
 
 #. translators: %1% - command name or path
 #. translators: %2% - returned PID (number)
@@ -4466,7 +4666,7 @@ msgstr ""
 #: src/commands/subcommand.cc:367
 #, boost-format
 msgid "waitpid for %1% returns unexpected pid %2% while waiting for %3%"
-msgstr ""
+msgstr "%1% için waitpid,%3% beklerken beklenmedik pid %2% döndürür"
 
 #. translators: %1% - command name or path
 #. translators: %2% - signal number
@@ -4478,21 +4678,21 @@ msgstr "%1%, %2% sinyali tarafından sonlandırıldı (%3%)"
 
 #: src/commands/subcommand.cc:382
 msgid "core dumped"
-msgstr ""
+msgstr "çekirdek döküldü"
 
 #. translators: %1% - command name or path
 #. translators: %2% - exit code (number)
 #: src/commands/subcommand.cc:392
 #, boost-format
 msgid "%1% exited with status %2%"
-msgstr ""
+msgstr "%1%, %2% durum dönütü ile çıkıldı"
 
 #. translators: %1% - command name or path
 #. translators: %2% - status (number)
 #: src/commands/subcommand.cc:407
 #, boost-format
 msgid "waitpid for %1% returns unexpected exit status %2%"
-msgstr ""
+msgstr "%1% için waitpid, %2% beklenmedik çıkış durumu döndürüyor"
 
 #: src/commands/subcommand.cc:440
 #, boost-format
@@ -4508,6 +4708,16 @@ msgid ""
 "will look in the rest of your $PATH for it. Thus, it's possible\n"
 "to write local zypper extensions that don't live in system space.\n"
 msgstr ""
+"Zypper alt komutları, içinde çalışan ve bağımsız yürütülebilir dosyalardır.\n"
+"zypper_execdir ('% 1%').\n"
+"\n"
+"Alt komutlar için zypper,\n"
+"alt komutlar için bir altyapı kullanır ve bunları komut satırı argümanlarını "
+"ileterek onları çalıştırır.\n"
+"\n"
+"zypper_execdir'de bir alt komut bulunmazsa, sarmalayıcı\n"
+"bunun için $PATH yolunuzun geri kalanına bakacak. Böylece mümkün\n"
+"sistem alanında yaşamayan yerel zypper uzantıları yazmak için.\n"
 
 #: src/commands/subcommand.cc:455
 #, boost-format
@@ -4522,29 +4732,29 @@ msgstr ""
 #: src/commands/subcommand.cc:466
 #, boost-format
 msgid "Available zypper subcommands in '%1%'"
-msgstr ""
+msgstr "'%1%' içinde mevcut zypper alt komutları"
 
 #. translators: headline of an enumeration
 #: src/commands/subcommand.cc:471
 msgid "Zypper subcommands available from elsewhere on your $PATH"
-msgstr ""
+msgstr "Zypper alt komutları $PATH yolunuzda başka bir yerden kullanılabilir"
 
 #. translators: helptext; %1% is a zypper command
 #: src/commands/subcommand.cc:476
 #, boost-format
 msgid "Type '%1%' to get subcommand-specific help if available."
-msgstr ""
+msgstr "Varsa, alt komuta özel yardım almak için '%1%' yazın."
 
 #. translators: %1% - command name
 #: src/commands/subcommand.cc:499
 #, boost-format
 msgid "Manual entry for %1% can't be shown"
-msgstr ""
+msgstr "%1% için manual girişi gösterilemiyor"
 
 #. translators: command summary: subcommand
 #: src/commands/subcommand.cc:512
 msgid "Lists available subcommands."
-msgstr ""
+msgstr "Mevcut alt komutları listeler."
 
 #. Currently no concept how to handle global options and ZYPPlock
 #: src/commands/subcommand.cc:616
@@ -4572,6 +4782,8 @@ msgstr "Yüklü paketleri daha yeni sürümlerle güncelle."
 msgid ""
 "Update all or specified installed packages with newer versions, if possible."
 msgstr ""
+"Mümkünse, tüm veya belirtilen kurulu paketleri daha yeni sürümlerle "
+"güncelleyin."
 
 #: src/commands/update.cc:69 src/commands/update.cc:76
 #: src/commands/update.cc:126
@@ -4584,7 +4796,7 @@ msgid "To update installed products use '%s'."
 msgstr "Yüklenmiş ürünleri güncelllemek için '%s' kullanın."
 
 #: src/commands/update.cc:77
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid ""
 "Zypper does not keep track of installed source packages. To install the "
 "latest source package and its build dependencies, use '%s'."
@@ -4596,11 +4808,13 @@ msgstr ""
 msgid ""
 "Cannot use multiple types when specific packages are given as arguments."
 msgstr ""
+"Belirli paketler bağımsız değişken olarak verildiğinde birden çok tür "
+"kullanılamaz."
 
 #: src/commands/utils/download.cc:131 src/commands/utils/source-download.cc:212
 #, c-format, boost-format
 msgid "Insufficient privileges to use download directory '%s'."
-msgstr ""
+msgstr "'%s' indirme dizinini kullanmak için yetersiz ayrıcalık."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/utils/download.cc:144
@@ -4610,7 +4824,7 @@ msgstr "download [SEÇENEKLER] <PAKETLER>..."
 #. translators: command summary: download
 #: src/commands/utils/download.cc:146
 msgid "Download rpms specified on the commandline to a local directory."
-msgstr ""
+msgstr "Komut satırında belirtilen RPM'leri yerel bir dizine indirin."
 
 #. translators: command description
 #: src/commands/utils/download.cc:150
@@ -4620,6 +4834,10 @@ msgid ""
 "packages; for non-root users $XDG_CACHE_HOME/zypp/packages), but this can be "
 "changed by using the global --pkg-cache-dir option."
 msgstr ""
+"Komut satırında belirtilen RPM'leri yerel bir dizine indirin. Varsayılan "
+"paketler libzypp paket önbelleğine indirilir (/var/cache/zypp/packages; root "
+"olmayan kullanıcılar için $XDG_CACHE_HOME/zypp/packages), ancak bu genel "
+"`--pkg-cache-dir` seçeneği kullanılarak değiştirilebilir. ."
 
 #. translators: command description
 #: src/commands/utils/download.cc:153
@@ -4628,6 +4846,9 @@ msgid ""
 "tried to download. Upon success the local path is is found in 'download-"
 "result/localpath@path'."
 msgstr ""
+"XML çıktısında, zypper'ın indirmeye çalıştığı her paket için bir <download-"
+"result> düğümü yazılır. Başarı durumunda, yerel yol 'download-result/"
+"localpath@path'. içinde bulunur."
 
 #. translators: --all-matches
 #: src/commands/utils/download.cc:168
@@ -4635,11 +4856,13 @@ msgid ""
 "Download all versions matching the commandline arguments. Otherwise only the "
 "best version of each matching package is downloaded."
 msgstr ""
+"Komut satırı argümanlarıyla eşleşen tüm sürümleri indirin. Aksi takdirde, "
+"her eşleşen paketin yalnızca en iyi sürümü indirilir."
 
 #. translators: Label text; is followed by ': cmdline argument'
 #: src/commands/utils/download.cc:237
 msgid "Argument resolves to no package"
-msgstr ""
+msgstr "Bağımsız değişken paket olmamasına çözüm buluyor"
 
 #: src/commands/utils/download.cc:252 src/solve-commit.cc:935
 msgid "Nothing to do."
@@ -4647,11 +4870,11 @@ msgstr "Gerçekleştirilecek bir işlem yok."
 
 #: src/commands/utils/download.cc:259
 msgid "No prune to best version."
-msgstr ""
+msgstr "En iyi versiyona budama yok."
 
 #: src/commands/utils/download.cc:265
 msgid "Prune to best version..."
-msgstr ""
+msgstr "En iyi sürüme budayın ..."
 
 #: src/commands/utils/download.cc:271
 msgid "Not downloading anything..."
@@ -4660,7 +4883,7 @@ msgstr "Hiçbir şey indirilmiyor..."
 #: src/commands/utils/download.cc:314
 #, c-format, boost-format
 msgid "Error downloading package '%s'."
-msgstr ""
+msgstr "'%s' paketi indirilirken hata oluştu."
 
 #: src/commands/utils/download.cc:328
 #, c-format, boost-format
@@ -4675,22 +4898,23 @@ msgstr "licenses"
 #. translators: command summary: licenses
 #: src/commands/utils/licenses.cc:21
 msgid "Print report about licenses and EULAs of installed packages."
-msgstr ""
+msgstr "Yüklü paketlerin lisansları ve EULA'ları hakkında rapor yazdırın."
 
 #. translators: command description
 #: src/commands/utils/licenses.cc:23
 msgid "Report licenses and EULAs of currently installed software packages."
 msgstr ""
+"Şu anda yüklü olan yazılım paketlerinin lisanslarını ve EULA'larını bildirin."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/utils/purge-kernels.cc:26
 msgid "purge-kernels [OPTIONS]"
-msgstr ""
+msgstr "purge-kernels [SEÇENEKLER]"
 
 #. translators: command summary: targetos, tos
 #: src/commands/utils/purge-kernels.cc:28
 msgid "Remove old kernels."
-msgstr ""
+msgstr "Eski çekirdekleri çıkarın."
 
 #. translators: command description
 #: src/commands/utils/purge-kernels.cc:30
@@ -4699,25 +4923,28 @@ msgid ""
 "zypp/zypp.conf:multiversion.kernels which can be given as <version>, latest(-"
 "N), running, oldest(+N)."
 msgstr ""
+"`<version>, latest (-N), running, oldest (+ N)` olarak verilebilen /etc/zypp/"
+"zypp.conf:multiversion.kernels'den saklanacak çekirdek listesine göre "
+"otomatik yüklenen çekirdekleri kaldırır."
 
 #: src/commands/utils/purge-kernels.cc:51
 msgid "Preparing to purge obsolete kernels..."
-msgstr ""
+msgstr "Eski çekirdekleri temizlemeye hazırlanıyor ..."
 
 #: src/commands/utils/purge-kernels.cc:52
 #, boost-format
 msgid "Configuration: %1%"
-msgstr ""
+msgstr "Yapılandırma: %1%"
 
 #: src/commands/utils/purge-kernels.cc:53
 #, boost-format
 msgid "Running kernel release: %1%"
-msgstr ""
+msgstr "Çekirdek sürümü çalıştırılıyor: %1%"
 
 #: src/commands/utils/purge-kernels.cc:54
 #, boost-format
 msgid "Running kernel arch: %1%"
-msgstr ""
+msgstr "Çekirdek arşivi çalıştırılıyor: %1%"
 
 #: src/commands/utils/source-download.cc:203
 #, c-format, boost-format
@@ -4727,12 +4954,12 @@ msgstr "'%s' indirme dizini oluşturulamıyor ya da bu dizine erişilemiyor."
 #: src/commands/utils/source-download.cc:216
 #, c-format, boost-format
 msgid "Using download directory at '%s'."
-msgstr ""
+msgstr "İndirme dizini '%s' konumunda kullanılıyor."
 
 #: src/commands/utils/source-download.cc:226
 #: src/commands/utils/source-download.cc:261
 msgid "Failed to read download directory"
-msgstr ""
+msgstr "İndirme dizini okunamadı"
 
 #: src/commands/utils/source-download.cc:231
 msgid "Scanning download directory"
@@ -4752,15 +4979,15 @@ msgstr "Gerekli kaynak paketler:"
 
 #: src/commands/utils/source-download.cc:296
 msgid "Required source packages available in download directory:"
-msgstr ""
+msgstr "İndirme dizininde bulunan gerekli kaynak paketleri:"
 
 #: src/commands/utils/source-download.cc:300
 msgid "Required source packages to be downloaded:"
-msgstr ""
+msgstr "İndirilmesi gereken kaynak paketler:"
 
 #: src/commands/utils/source-download.cc:304
 msgid "Superfluous source packages in download directory:"
-msgstr ""
+msgstr "İndirme dizinindeki gereksiz kaynak paketleri:"
 
 #. translators: table headers
 #. translators: property name; short; used like "Name: value"
@@ -4780,16 +5007,16 @@ msgstr ""
 
 #: src/commands/utils/source-download.cc:377
 msgid "Deleting superfluous source packages"
-msgstr ""
+msgstr "Gereksiz kaynak paketlerini silme"
 
 #: src/commands/utils/source-download.cc:388
 #, c-format, boost-format
 msgid "Failed to remove source package '%s'"
-msgstr ""
+msgstr "'%s' kaynak paketi kaldırılamadı"
 
 #: src/commands/utils/source-download.cc:399
 msgid "No superfluous source packages to delete."
-msgstr ""
+msgstr "Silinecek gereksiz kaynak paketleri yok."
 
 #: src/commands/utils/source-download.cc:409
 msgid "Downloading required source packages..."
@@ -4804,7 +5031,7 @@ msgstr "'%s' kaynak paketi herhangi bir depo tarafından sağlanmıyor."
 #: src/commands/utils/source-download.cc:461
 #, c-format, boost-format
 msgid "Error downloading source package '%s'."
-msgstr ""
+msgstr "'%s' kaynak paketi indirilirken hata oluştu."
 
 #: src/commands/utils/source-download.cc:472
 msgid "No source packages to download."
@@ -4815,7 +5042,7 @@ msgstr "İndirilecek kaynak paket yok."
 #: src/commands/utils/source-download.cc:482
 #: src/commands/utils/source-download.cc:484
 msgid "Download source rpms for all installed packages to a local directory."
-msgstr ""
+msgstr "Tüm kurulu paketler için kaynak RPM'leri yerel bir dizine indirin."
 
 #. translators: -d, --directory <DIR>
 #: src/commands/utils/source-download.cc:496
@@ -4825,7 +5052,7 @@ msgstr "Tüm kaynak rpmleri bu dizine indir."
 #. translators: --delete/--no-delete
 #: src/commands/utils/source-download.cc:502
 msgid "Whether to delete extraneous source rpms in the local directory."
-msgstr ""
+msgstr "Yerel dizindeki yabancı kaynak RPM'lerin silinip silinmeyeceği."
 
 #. translators: --status
 #: src/commands/utils/source-download.cc:506
@@ -4833,16 +5060,18 @@ msgid ""
 "Don't download any source rpms, but show which source rpms are missing or "
 "extraneous."
 msgstr ""
+"Herhangi bir kaynak RPM indirmeyin, ancak hangi kaynak RPM'lerin eksik veya "
+"gereksiz olduğunu gösterin."
 
 #. translators: --status
 #: src/commands/utils/source-download.cc:512
 msgid "Write a manifest file."
-msgstr ""
+msgstr "Bir manifest dosyası yazın."
 
 #. translators: --status
 #: src/commands/utils/source-download.cc:516
 msgid "Disable writing a manifest file."
-msgstr ""
+msgstr "Bir bildirim dosyası yazmayı pasifleştirin."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/utils/targetos.cc:20
@@ -4852,7 +5081,7 @@ msgstr "targetos (tos) [SEÇENEKLER]"
 #. translators: command summary: targetos, tos
 #: src/commands/utils/targetos.cc:22
 msgid "Print the target operating system ID string."
-msgstr ""
+msgstr "Hedef işletim sistemi kimlik dizesini yazdırın."
 
 #. translators: command description
 #: src/commands/utils/targetos.cc:24
@@ -4860,14 +5089,16 @@ msgid ""
 "Show various information about the target operating system. By default, an "
 "ID string is shown."
 msgstr ""
+"Hedef işletim sistemi hakkında çeşitli bilgileri gösterin. Varsayılan olarak "
+"bir kimlik dizesi gösterilir."
 
 #: src/commands/utils/targetos.cc:33
 msgid "Show the operating system label."
-msgstr ""
+msgstr "İşletim sistemi etiketini gösterin."
 
 #: src/commands/utils/targetos.cc:46
 msgid "XML output not implemented for this command."
-msgstr ""
+msgstr "Bu komut için XML çıktısı uygulanmadı."
 
 #: src/commands/utils/targetos.cc:59
 #, c-format, boost-format
@@ -4887,17 +5118,17 @@ msgstr "versioncmp (vcmp) <SÜRÜM1> <SÜRÜM2>"
 #. translators: command summary
 #: src/commands/utils/versioncmp.cc:21
 msgid "Compare two version strings."
-msgstr ""
+msgstr "İki sürüm dizesini karşılaştırın."
 
 #. translators: command description
 #: src/commands/utils/versioncmp.cc:23
 msgid "Compare the versions supplied as arguments."
-msgstr ""
+msgstr "Bağımsız değişken olarak sağlanan sürümleri karşılaştırın."
 
 #. translators: -m, --match
 #: src/commands/utils/versioncmp.cc:35
 msgid "Takes missing release number as any release."
-msgstr ""
+msgstr "Eksik sürüm numarasını herhangi bir sürüm olarak alır."
 
 # clients/online_update_details.ycp:88 clients/online_update_select.ycp:112
 #: src/commands/utils/versioncmp.cc:75
@@ -4933,9 +5164,8 @@ msgstr "Mimari"
 
 #. translators: property name; short; used like "Name: value"
 #: src/info.cc:64
-#, fuzzy
 msgid "Vendor"
-msgstr "Üretici"
+msgstr "Dağıtıcı"
 
 #. translators: property name; short; used like "Name: value"
 #. translators: package summary (header)
@@ -4957,21 +5187,21 @@ msgstr "otomatik olarak"
 #, boost-format
 msgid "There would be %1% match for '%2%'."
 msgid_plural "There would be %1% matches for '%2%'."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "'%2%' için %1% eşleşme bulunmakta."
+msgstr[1] "'%2%' için %1% eşleşme bulunmakta."
 
 # clients/nis_write.ycp:73
 #. TranslatorExplanation E.g. "package 'zypper' not found."
 #: src/info.cc:221
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "%s '%s' not found."
-msgstr "'{0}' kullanıcısı bulunamadı"
+msgstr "%s '%s' bulunamadı."
 
 #. TranslatorExplanation E.g. "Information for package zypper:"
 #: src/info.cc:245
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Information for %s %s:"
-msgstr "İşletim Sistemi Bilgisi"
+msgstr "%s %s Hakkında Bilgi:"
 
 #: src/info.cc:327
 msgid "Support Level"
@@ -5017,7 +5247,7 @@ msgstr "Kategori"
 #. translators: property name; short; used like "Name: value"
 #: src/info.cc:386 src/utils/misc.cc:326 src/utils/misc.cc:368
 msgid "Severity"
-msgstr ""
+msgstr "Ağırlık"
 
 # clients/inst_custom_part.ycp:2940
 #. translators: property name; short; used like "Name: value"
@@ -5037,9 +5267,8 @@ msgstr "Kullanıcıya Görünür"
 
 #. translators: property name; short; used like "Name: value"
 #: src/info.cc:439 src/info.cc:475
-#, fuzzy
 msgid "Contents"
-msgstr "Devam et"
+msgstr "İçerikler"
 
 #: src/info.cc:439
 msgid "(empty)"
@@ -5064,7 +5293,6 @@ msgstr "Bağımlılık"
 
 # clients/hwinfo.ycp:54
 #: src/info.cc:453 src/info.cc:467
-#, fuzzy
 msgid "Required"
 msgstr "Gerekenler"
 
@@ -5089,7 +5317,7 @@ msgstr "bilinmeyen"
 #: src/info.cc:544
 #, boost-format
 msgid "See %1%"
-msgstr ""
+msgstr "Ayrıca Bakınız %1%%"
 
 #. translators: property name; short; used like "Name: value"
 #: src/info.cc:550
@@ -5103,9 +5331,8 @@ msgstr "Temel mi?"
 
 #. translators: property name; short; used like "Name: value"
 #: src/info.cc:573 src/info.cc:600
-#, fuzzy
 msgid "Update Repositories"
-msgstr "Belirlenmiş depolar:"
+msgstr "Depoları Güncelleştir"
 
 #: src/info.cc:578
 msgid "Content Id"
@@ -5122,7 +5349,7 @@ msgstr "Herhangi bir etkin depo tarafından sağlanmadı"
 #. translators: property name; short; used like "Name: value"
 #: src/info.cc:605
 msgid "CPE Name"
-msgstr ""
+msgstr "CPE Adı"
 
 #: src/info.cc:610
 msgid "undefined"
@@ -5130,7 +5357,7 @@ msgstr "tanımsız"
 
 #: src/info.cc:612
 msgid "invalid CPE Name"
-msgstr ""
+msgstr "geçersiz CPE Adı"
 
 #. translators: property name; short; used like "Name: value"
 #: src/info.cc:615
@@ -5140,16 +5367,16 @@ msgstr "Kısa Ad"
 #. translators: property name; short; used like "Name: value"; is followed by a list of binary packages built from this source package
 #: src/info.cc:701
 msgid "Builds binary package"
-msgstr ""
+msgstr "İkili paket oluşturur"
 
 #. translators: header of table column - is the language requested? (Yes/No)
 #: src/locales.cc:68 src/locales.cc:178
 msgid "Requested"
-msgstr ""
+msgstr "İstenen"
 
 #: src/locales.cc:70
 msgid "Fallback"
-msgstr ""
+msgstr "Geri Düşüm"
 
 #: src/locales.cc:72 src/output/Out.h:26 src/repos.cc:131 src/repos.cc:159
 msgid "No"
@@ -5158,37 +5385,37 @@ msgstr "Hayır"
 #. translators: header of table column - the language code, e.g. en_US
 #: src/locales.cc:174
 msgid "Code"
-msgstr ""
+msgstr "Kod"
 
 #. translators: header of table column - the language, e.g. English (United States)
 #: src/locales.cc:176
 msgid "Language"
-msgstr ""
+msgstr "Dil"
 
 #: src/locales.cc:240
 #, c-format, boost-format
 msgid "Packages for %s (locale '%s', requested: %s):"
-msgstr ""
+msgstr "%s için paketler (yerel ayar '%s', istenen:%s):"
 
 #: src/locales.cc:253
 #, c-format, boost-format
 msgid "Added locale: %s"
-msgstr ""
+msgstr "Yerel ayar eklendi: %s"
 
 #: src/locales.cc:258
 #, c-format, boost-format
 msgid " %s is already requested."
-msgstr ""
+msgstr " %s zaten talep edildi."
 
 #: src/locales.cc:276
 #, c-format, boost-format
 msgid "Removed locale: %s"
-msgstr ""
+msgstr "Yerel ayar kaldırıldı: %s"
 
 #: src/locales.cc:281
 #, c-format, boost-format
 msgid "%s was not requested."
-msgstr ""
+msgstr "%s talep edilmedi."
 
 #. translators: this will show up if you press ctrl+c twice
 #: src/main.cc:33
@@ -5216,6 +5443,8 @@ msgid ""
 "In order to install '%s'%s, you must agree to terms of the following license "
 "agreement:"
 msgstr ""
+"'%s'%s yüklemek için aşağıdaki lisans sözleşmesinin şartlarını kabul "
+"etmelisiniz:"
 
 #. lincense prompt
 #: src/misc.cc:187
@@ -5241,6 +5470,7 @@ msgstr ""
 #, c-format, boost-format
 msgid "Aborting installation due to user disagreement with %s %s license."
 msgstr ""
+"%s %s lisansıyla kullanıcı anlaşmazlığı nedeniyle yükleme iptal ediliyor."
 
 #: src/misc.cc:248
 msgid "License"
@@ -5262,28 +5492,28 @@ msgstr "Yüklü paketler: %d"
 #: src/misc.cc:281
 #, c-format, boost-format
 msgid "Installed packages with counterparts in repositories: %d"
-msgstr ""
+msgstr "Depolarda benzerleri olan yüklü paketler: %d"
 
 #: src/misc.cc:282
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Installed packages with EULAs: %d"
-msgstr "Paketi YaST ile yükle"
+msgstr "EULA'larla yüklü paketler: %d"
 
 #: src/misc.cc:350
 #, c-format, boost-format
 msgid "Package '%s' has source package '%s'."
-msgstr ""
+msgstr "'%s' paketi '%s' kaynak paketine sahip."
 
 #: src/misc.cc:359
 #, c-format, boost-format
 msgid "Source package '%s' for package '%s' not found."
-msgstr ""
+msgstr "'%s' paketi için '%s' kaynak paketi bulunamadı."
 
 # clients/inst_sw_single.ycp:1225 clients/inst_sw_single.ycp:1283
 #: src/misc.cc:433
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Installing source package %s-%s"
-msgstr "Paketleri kur"
+msgstr "%s-%s kaynak paketi yükleniyor"
 
 #: src/misc.cc:442
 #, c-format, boost-format
@@ -5291,14 +5521,14 @@ msgid "Source package %s-%s successfully retrieved."
 msgstr "%s-%s kaynak paketi başarıyla alındı."
 
 #: src/misc.cc:448
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Source package %s-%s successfully installed."
-msgstr "Deste koruması eklendi."
+msgstr "%s-%s kaynak paketi başarıyla yüklendi."
 
 #: src/misc.cc:454
 #, c-format, boost-format
 msgid "Problem installing source package %s-%s:"
-msgstr ""
+msgstr "%s-%s kaynak paketini yükleme sorunu:"
 
 #: src/output/Out.h:26 src/repos.cc:125 src/repos.cc:153
 msgid "Yes"
@@ -5370,7 +5600,7 @@ msgstr "Bu seçenek için yardım mevcut değil"
 #. translators: used as 'XYZ changed to SOMETHING [volatile]' to tag specific property changes.
 #: src/repos.cc:51
 msgid "volatile"
-msgstr ""
+msgstr "geçici"
 
 #. translators: 'Volatile' refers to changes we previously tagged as 'XYZ changed to SOMETHING [volatile]'
 #: src/repos.cc:57
@@ -5379,6 +5609,8 @@ msgid ""
 "Repo '%1%' is managed by service '%2%'. Volatile changes are reset by the "
 "next service refresh!"
 msgstr ""
+"Depo '%1%', '%2%' servisi tarafından yönetiliyor. Geçici değişiklikler, bir "
+"sonraki servis yenilemesiyle sıfırlanır!"
 
 #: src/repos.cc:73
 msgid "default priority"
@@ -5436,7 +5668,7 @@ msgstr "'%s' deposunun güncelleme kontrolü ertelendi."
 
 #: src/repos.cc:282
 msgid "Forcing raw metadata refresh"
-msgstr ""
+msgstr "Ham meta verileri yenilemeye zorlama"
 
 #: src/repos.cc:288
 #, c-format, boost-format
@@ -5464,9 +5696,9 @@ msgid "Please see the above error message for a hint."
 msgstr "Lütfen ipucu için yukarıdaki hata mesajına bakınız."
 
 #: src/repos.cc:357
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "No URIs defined for '%s'."
-msgstr "Koruma bulunamadı."
+msgstr "\"%s\" için tanımlanmış URI yok."
 
 #. TranslatorExplanation the first %s is a .repo file path
 #: src/repos.cc:362
@@ -5475,6 +5707,8 @@ msgid ""
 "Please add one or more base URI (baseurl=URI) entries to %s for repository "
 "'%s'."
 msgstr ""
+"Lütfen '%s' kod deposu için %s'ye bir veya daha fazla temel URI (baseurl=URI)"
+" girişi ekleyin."
 
 #: src/repos.cc:376
 msgid "No alias defined for this repository."
@@ -5491,11 +5725,13 @@ msgid ""
 "Please check if the URIs defined for this repository are pointing to a valid "
 "repository."
 msgstr ""
+"Lütfen bu arşiv için tanımlanan URI'lerin geçerli bir arşive işaret edip "
+"etmediğini kontrol edin."
 
 #: src/repos.cc:401
 #, c-format, boost-format
 msgid "Error retrieving metadata for '%s':"
-msgstr ""
+msgstr "\"%s\" için meta veriler alınırken hata oluştu:"
 
 #: src/repos.cc:414
 msgid "Forcing building of repository cache"
@@ -5514,23 +5750,26 @@ msgid ""
 "report by following instructions at http://en.opensuse.org/Zypper/"
 "Troubleshooting"
 msgstr ""
+"Bu, bilgi deposundaki geçersiz meta verilerden veya meta veri "
+"ayrıştırıcısındaki bir hatadan kaynaklanıyor olabilir. İkinci durumda veya "
+"şüpheniz varsa, lütfen http://en.opensuse.org/Zypper/Troubleshooting "
+"adresindeki talimatları izleyerek bir hata raporu gönderin"
 
 # clients/rc_config_step1.ycp:253
 #: src/repos.cc:450
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Repository metadata for '%s' not found in local cache."
-msgstr "Bir geri dönüşüm noktası bulunamadı."
+msgstr "'%s' için depo meta verileri yerel önbellekte bulunamadı."
 
 #: src/repos.cc:458
-#, fuzzy
 msgid "Error building the cache:"
-msgstr "%1 yüklemesinde bir hata oluştu"
+msgstr "Önbellek oluşturulurken hata oluştu:"
 
 # clients/rc_config_step1.ycp:253
 #: src/repos.cc:677
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Repository '%s' not found by its alias, number, or URI."
-msgstr "Bir geri dönüşüm noktası bulunamadı."
+msgstr "Kod deposu '%s' takma adı, numarası veya URI'sine göre bulunamadı."
 
 #: src/repos.cc:679
 #, c-format, boost-format
@@ -5538,9 +5777,9 @@ msgid "Use '%s' to get the list of defined repositories."
 msgstr "Tanımlı depoların listesi almak için '%s' komutunu kullanın."
 
 #: src/repos.cc:699
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Ignoring disabled repository '%s'"
-msgstr "Geçersiz hizmet türü '{0}'"
+msgstr "Devre dışı bırakılan kod deposu '%s' yok sayılıyor"
 
 #: src/repos.cc:787
 #, c-format, boost-format
@@ -5575,11 +5814,13 @@ msgid ""
 "The metadata cache needs to be built for the '%s' repository. You can run "
 "'zypper refresh' as root to do this."
 msgstr ""
+"Meta veri önbelleğinin '%s' deposu için oluşturulması gerekiyor. Bunu yapmak "
+"için kök olarak 'zypper refresh' çalıştırabilirsiniz."
 
 #: src/repos.cc:925
 #, c-format, boost-format
 msgid "Repository '%s' stays disabled."
-msgstr ""
+msgstr "Depo '%s' devre dışı kalır."
 
 #: src/repos.cc:981
 msgid "Initializing Target"
@@ -5598,12 +5839,12 @@ msgstr "'%s' için meta veri önbelleği siliniyor."
 #: src/repos.cc:1079
 #, c-format, boost-format
 msgid "Cleaning raw metadata cache for '%s'."
-msgstr ""
+msgstr "\"%s\" için ham meta veri önbelleği temizleniyor."
 
 #: src/repos.cc:1085
 #, c-format, boost-format
 msgid "Keeping raw metadata cache for %s '%s'."
-msgstr ""
+msgstr "%s '%s' için ham meta veri önbelleği tutuluyor."
 
 #. translators: meaning the cached rpm files
 #: src/repos.cc:1092
@@ -5646,15 +5887,17 @@ msgstr ""
 "Değiitirilebilir ve salt okunur media(CD/DVD), otomatik yenileme devre dışı."
 
 #: src/repos.cc:1194
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Invalid repository alias: '%s'"
-msgstr "Geçersiz hizmet türü '{0}'"
+msgstr "Geçersiz kod deposu takma adı: \"%s\""
 
 #: src/repos.cc:1211
 msgid ""
 "Could not determine the type of the repository. Please check if the defined "
 "URIs (see below) point to a valid repository:"
 msgstr ""
+"Deponun türü belirlenemedi. Lütfen tanımlanan URI'lerin (aşağıya bakın) "
+"geçerli bir depoya işaret edip etmediğini kontrol edin:"
 
 #: src/repos.cc:1217
 msgid "Can't find a valid repository at given location:"
@@ -5680,6 +5923,8 @@ msgid ""
 "GPG checking is disabled in configuration of repository '%1%'. Integrity and "
 "origin of packages cannot be verified."
 msgstr ""
+"'%1%' veri havuzunun yapılandırmasında GPG denetimi devre dışı bırakıldı. "
+"Paketlerin bütünlüğü ve menşei doğrulanamıyor."
 
 #: src/repos.cc:1248
 #, c-format, boost-format
@@ -5704,11 +5949,11 @@ msgstr ""
 #: src/repos.cc:1288
 #, c-format, boost-format
 msgid "Reading data from '%s' media is delayed until next refresh."
-msgstr ""
+msgstr "'%s' medyasından veri okumak, bir sonraki yenilemeye kadar ertelenir."
 
 #: src/repos.cc:1357
 msgid "Problem accessing the file at the specified URI"
-msgstr ""
+msgstr "Dosyaya belirtilen URI'de erişim sorunu"
 
 #: src/repos.cc:1358
 msgid "Please check if the URI is valid and accessible."
@@ -5725,19 +5970,18 @@ msgstr "Repo dosyası mı?"
 
 #: src/repos.cc:1374
 msgid "Problem encountered while trying to read the file at the specified URI"
-msgstr ""
+msgstr "Dosyayı belirtilen URI'de okumaya çalışırken karşılaşılan sorun"
 
 # clients/rc_config_step1.ycp:253
 #: src/repos.cc:1387
-#, fuzzy
 msgid "Repository with no alias defined found in the file, skipping."
-msgstr "Bir geri dönüşüm noktası bulunamadı."
+msgstr "Dosyada tanımlı takma adı olmayan depo atlanıyor."
 
 # clients/rc_config_step1.ycp:253
 #: src/repos.cc:1393
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Repository '%s' has no URI defined, skipping."
-msgstr "Bir geri dönüşüm noktası bulunamadı."
+msgstr "'%s' kod deposunda tanımlanmış URI yok, atlanıyor."
 
 #: src/repos.cc:1441
 #, c-format, boost-format
@@ -5772,12 +6016,12 @@ msgstr "Otomatik yenileme '%s' deposu için devre dışı bırakıldı."
 #: src/repos.cc:1640
 #, c-format, boost-format
 msgid "RPM files caching has been enabled for repository '%s'."
-msgstr ""
+msgstr "RPM dosyalarını önbelleğe alma, '%s' deposu için etkinleştirildi."
 
 #: src/repos.cc:1642
 #, c-format, boost-format
 msgid "RPM files caching has been disabled for repository '%s'."
-msgstr ""
+msgstr "RPM dosyalarını önbelleğe alma '%s' deposu için devre dışı bırakıldı."
 
 #: src/repos.cc:1649
 #, c-format, boost-format
@@ -5802,12 +6046,12 @@ msgstr "'%s' deposunun adı '%s' olarak ayarlandı."
 #: src/repos.cc:1674
 #, c-format, boost-format
 msgid "Nothing to change for repository '%s'."
-msgstr ""
+msgstr "'%s' deposu için değiştirilecek bir şey yok."
 
 #: src/repos.cc:1681
 #, c-format, boost-format
 msgid "Leaving repository %s unchanged."
-msgstr ""
+msgstr "%s deposu değiştirilmeden bırakılıyor."
 
 #: src/repos.cc:1768
 msgid "Loading repository data..."
@@ -5818,6 +6062,8 @@ msgid ""
 "No repositories defined. Operating only with the installed resolvables. "
 "Nothing can be installed."
 msgstr ""
+"Kod deposu tanımlanmadı. Yalnızca kurulu çözümlerle çalışır. Hiçbir şey "
+"yüklenemez."
 
 #: src/repos.cc:1790
 #, c-format, boost-format
@@ -5827,7 +6073,7 @@ msgstr "'%s' depo verisi alınıyor."
 #: src/repos.cc:1796
 #, c-format, boost-format
 msgid "Repository '%s' not cached. Caching..."
-msgstr ""
+msgstr "Depo '%s' önbelleğe alınmadı. Önbelleğe almak..."
 
 #: src/repos.cc:1802 src/repos.cc:1836
 #, c-format, boost-format
@@ -5843,7 +6089,7 @@ msgstr "'%s' deposu yenilenemedi. Eski ön bellek kullanılıyor."
 #: src/repos.cc:1810 src/repos.cc:1839
 #, c-format, boost-format
 msgid "Resolvables from '%s' not loaded because of error."
-msgstr ""
+msgstr "Hata nedeniyle '%s'den çözülebilirler yüklenmedi."
 
 #: src/repos.cc:1827
 #, c-format, boost-format
@@ -5851,6 +6097,8 @@ msgid ""
 "Repository '%s' appears to be outdated. Consider using a different mirror or "
 "server."
 msgstr ""
+"Depo '%s' güncelliğini yitirmiş görünüyor. Farklı bir ayna veya sunucu "
+"kullanmayı düşünün."
 
 #. translators: the first %s is 'zypper refresh' and the second 'zypper clean -m'
 #: src/repos.cc:1838
@@ -5864,7 +6112,7 @@ msgstr "Yüklenmiş paketler okunuyor..."
 
 #: src/repos.cc:1858
 msgid "Problem occurred while reading the installed packages:"
-msgstr ""
+msgstr "Yüklü paketleri okurken bir sorun oluştu:"
 
 #: src/repos.cc:1875
 #, c-format, boost-format
@@ -5879,11 +6127,11 @@ msgstr "RPM dosyasıyla ilgili sorun '%s' olarak belirtildi, atlanıyor."
 #: src/repos.cc:1906
 #, c-format, boost-format
 msgid "Problem reading the RPM header of %s. Is it an RPM file?"
-msgstr ""
+msgstr "%s için RPM üstbilgisini okuma sorunu. RPM dosyası mı?"
 
 #: src/repos.cc:1926
 msgid "Plain RPM files cache"
-msgstr ""
+msgstr "Düz RPM dosyaları önbelleği"
 
 #: src/search.cc:99
 msgid "System Packages"
@@ -5891,34 +6139,29 @@ msgstr "Sistem paketleri"
 
 # clients/inst_rootpart.ycp:401
 #: src/search.cc:261
-#, fuzzy
 msgid "No needed patches found."
-msgstr "Bir yama bulunamadı."
+msgstr "Gerekli bir yama bulunamadı."
 
 # clients/inst_rootpart.ycp:401
 #: src/search.cc:340
-#, fuzzy
 msgid "No patterns found."
-msgstr "Bir yama bulunamadı."
+msgstr "Bir model bulunamadı."
 
 # clients/inst_rootpart.ycp:401
 #: src/search.cc:428
-#, fuzzy
 msgid "No packages found."
-msgstr "Bir yama bulunamadı."
+msgstr "Hiçbir paket bulunamadı."
 
 #. translators: used in products. Internal Name is the unix name of the
 #. product whereas simply Name is the official full name of the product.
 #: src/search.cc:482
-#, fuzzy
 msgid "Internal Name"
-msgstr "Kullanıcı yönetimi"
+msgstr "İç İsim"
 
 # clients/inst_rootpart.ycp:401
 #: src/search.cc:520
-#, fuzzy
 msgid "No products found."
-msgstr "Bir yama bulunamadı."
+msgstr "Hiçbir ürün bulunamadı."
 
 #. translators: meaning 'dependency problem' found during solving
 #: src/solve-commit.cc:42
@@ -5927,7 +6170,7 @@ msgstr "Sorun: "
 
 #: src/solve-commit.cc:48
 msgid "Detailed information: "
-msgstr ""
+msgstr "Detaylı bilgi: "
 
 #. TranslatorExplanation %d is the solution number
 #: src/solve-commit.cc:61
@@ -5939,15 +6182,19 @@ msgstr " Çözüm %d: "
 msgid "Choose the above solution using '1' or skip, retry or cancel"
 msgid_plural "Choose from above solutions by number or skip, retry or cancel"
 msgstr[0] ""
+"'1' kullanarak yukarıdaki çözümü seçin veya atlayın, yeniden deneyin veya "
+"iptal edin"
 msgstr[1] ""
+"Yukarıdaki çözümlerden numaraya göre seçin veya atlayın, yeniden deneyin "
+"veya iptal edin"
 
 #. translators: translate 'c' to whatever you translated the 'c' in
 #. "c" and "s/r/c" strings
 #: src/solve-commit.cc:87
 msgid "Choose the above solution using '1' or cancel using 'c'"
 msgid_plural "Choose from above solutions by number or cancel"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Yukarıdaki çözümü '1' kullanarak seçin veya 'c' ile iptal edin"
+msgstr[1] "Numaraya göre yukarıdaki çözümlerden seçin veya iptal edin"
 
 #. translators: answers for dependency problem solution input prompt:
 #. "Choose from above solutions by number or skip, retry or cancel"
@@ -5957,7 +6204,7 @@ msgstr[1] ""
 #. The answers should be lower case letters.
 #: src/solve-commit.cc:111
 msgid "s/r/c/d"
-msgstr ""
+msgstr "a/y/i/d"
 
 #. translators: answers for dependency problem solution input prompt:
 #. "Choose from above solutions by number or cancel"
@@ -5968,28 +6215,28 @@ msgstr ""
 #. please report a bug against zypper at bugzilla.suse.com, we'll try to solve it.
 #: src/solve-commit.cc:127
 msgid "c/d"
-msgstr ""
+msgstr "i/d"
 
 #: src/solve-commit.cc:133
 #, boost-format
 msgid "Choose solution %1%"
-msgstr ""
+msgstr "%1% çözümü seçin"
 
 #: src/solve-commit.cc:135
 msgid "Skip problem and continue."
-msgstr ""
+msgstr "Problemi atla ve devam et."
 
 #: src/solve-commit.cc:138
 msgid "Retry solving immediately."
-msgstr ""
+msgstr "Çözmeyi hemen tekrar deneyin."
 
 #: src/solve-commit.cc:140
 msgid "Choose no solution and cancel."
-msgstr ""
+msgstr "Çözüm seçmeyin ve iptal edin."
 
 #: src/solve-commit.cc:141
 msgid "Toggle show detailed conflict information."
-msgstr ""
+msgstr "Geçiş, ayrıntılı çakışma bilgilerini göster."
 
 #: src/solve-commit.cc:174
 #, c-format, boost-format
@@ -6020,9 +6267,8 @@ msgstr "Bağımlılıklar çözümleniyor..."
 
 # /usr/lib/YaST2/timezone_raw.ycp:21
 #: src/solve-commit.cc:284
-#, fuzzy
 msgid "Force resolution:"
-msgstr "Bilgisayarı kapatmaya zorla"
+msgstr "Zorlama çözünürlüğü:"
 
 # clients/inst_sw_single.ycp:742
 #: src/solve-commit.cc:383
@@ -6036,16 +6282,16 @@ msgstr "Güncelleştirme hesaplanıyor."
 
 #: src/solve-commit.cc:447
 msgid "Generating solver test case..."
-msgstr ""
+msgstr "Çözücü test senaryosu oluşturuluyor..."
 
 #: src/solve-commit.cc:449
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Solver test case generated successfully at %s."
-msgstr "Koruma başarıyla oluşturuldu."
+msgstr "Çözücü test durumu %s'de başarıyla oluşturuldu."
 
 #: src/solve-commit.cc:452
 msgid "Error creating the solver test case."
-msgstr ""
+msgstr "Çözücü test senaryosu oluşturulurken hata meydana geldi."
 
 #: src/solve-commit.cc:480
 #, c-format, boost-format
@@ -6053,9 +6299,11 @@ msgid ""
 "Check for running processes using deleted libraries is disabled in zypper."
 "conf. Run '%s' to check manually."
 msgstr ""
+"Silinen kitaplıkları kullanan çalışan işlemleri denetleme, zypper.conf "
+"içinde devre dışı bırakılmıştır. Manuel olarak kontrol etmek için '%s' "
+"çalıştırın."
 
 #: src/solve-commit.cc:496
-#, fuzzy
 msgid "Skip check:"
 msgstr "Kontrolü atla:"
 
@@ -6066,6 +6314,10 @@ msgid ""
 "updated by recent upgrades. They should be restarted to benefit from the "
 "latest updates. Run '%1%' to list these programs."
 msgstr ""
+"Son yükseltmelerle silinen veya güncellenen dosyaları ve kitaplıkları "
+"kullanmaya devam eden programlar var. En son güncellemelerden yararlanmak "
+"için yeniden başlatılmaları gerekir. Bu programları listelemek için '%1%' "
+"komutunu çalıştırın."
 
 #: src/solve-commit.cc:517
 msgid "Update notifications were received from the following packages:"
@@ -6138,37 +6390,40 @@ msgid ""
 "Restart solver in no-force-resolution mode in order to show dependency "
 "problems."
 msgstr ""
+"Bağımlılık sorunlarını göstermek için çözücüyü zorlamasız çözüm modunda "
+"yeniden başlatın."
 
 #. translators: help text for 'v' option in the 'Continue?' prompt
 #: src/solve-commit.cc:680
 msgid "Toggle display of package versions."
-msgstr ""
+msgstr "Paket sürümlerinin görüntüsünü değiştirin."
 
 #. translators: help text for 'a' option in the 'Continue?' prompt
 #: src/solve-commit.cc:682
 msgid "Toggle display of package architectures."
-msgstr ""
+msgstr "Paket mimarilerinin görüntüsünü değiştirin."
 
 #. translators: help text for 'r' option in the 'Continue?' prompt
 #: src/solve-commit.cc:684
 msgid ""
 "Toggle display of repositories from which the packages will be installed."
-msgstr ""
+msgstr "Paketlerin yükleneceği depoların görüntüsünü değiştirin."
 
 #. translators: help text for 'm' option in the 'Continue?' prompt
 #: src/solve-commit.cc:686
 msgid "Toggle display of package vendor names."
-msgstr ""
+msgstr "Paket dağıtıcı adlarının görünümünü değiştirin."
 
 #. translators: help text for 'd' option in the 'Continue?' prompt
 #: src/solve-commit.cc:688
 msgid "Toggle between showing all details and as few details as possible."
 msgstr ""
+"Tüm ayrıntıları ve olabildiğince az detayı gösterme arasında geçiş yapın."
 
 #. translators: help text for 'g' option in the 'Continue?' prompt
 #: src/solve-commit.cc:690
 msgid "View the summary in pager."
-msgstr ""
+msgstr "Özeti sayfalayıcıda görüntüleyin."
 
 #: src/solve-commit.cc:798
 msgid "committing"
@@ -6176,7 +6431,7 @@ msgstr "Teslim etme"
 
 #: src/solve-commit.cc:800
 msgid "(dry run)"
-msgstr ""
+msgstr "(tatbikat)"
 
 #: src/solve-commit.cc:824 src/solve-commit.cc:857
 msgid "Problem retrieving the package file from the repository:"
@@ -6199,9 +6454,15 @@ msgid ""
 "- use another installation medium (if e.g. damaged)\n"
 "- use another repository"
 msgstr ""
+"Paket bütünlüğü denetimi başarısız oldu. Bu bilgi havuzu veya ortamla ilgili "
+"bir sorun olabilir. Aşağıdakilerden birini deneyin:\n"
+"\n"
+"- sadece önceki komutu yeniden deneyin\n"
+"- 'zypper refresh' kullanarak depoları yenileyin\n"
+"- başka bir kurulum ortamı kullanın (örn. hasarlıysa)\n"
+"- başka bir depo kullan"
 
 #: src/solve-commit.cc:879
-#, fuzzy
 msgid "Problem occurred during or after installation or removal of packages:"
 msgstr ""
 "Paketlerin kurulumu ya da kaldırılması sırasında ya da sonrasında sorun "
@@ -6243,8 +6504,8 @@ msgstr "Yüklü paketlerin tamamının bağımlılıkları sağlanmış."
 #, boost-format
 msgid "Considering %1% out of %2% applicable patches:"
 msgid_plural "Considering %1% out of %2% applicable patches:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%2% uygulanabilir yamanın %1% 'i dikkate alındığında:"
+msgstr[1] "%2% uygulanabilir yamanın %1% 'i dikkate alındığında:"
 
 #. translator: stats table header
 #: src/update.cc:340
@@ -6266,10 +6527,11 @@ msgstr[1] "%d yama kilitli"
 # clients/inst_rootpart.ycp:401
 #. translator: stats summary
 #: src/update.cc:358
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "%d patch optional"
 msgid_plural "%d patches optional"
-msgstr[0] "Bir yama bulunamadı."
+msgstr[0] "%d yama isteğe bağlı"
+msgstr[1] "%d yama isteğe bağlı"
 
 #. translator: Hint displayed right adjusted; %1% is a CLI option
 #. "42 patches optional                  (use --with-optional to include optional patches)"
@@ -6281,10 +6543,11 @@ msgstr "isteğe bağlı yamaları dahil etmek için '%1%' seçeneğini kullanın
 # clients/inst_rootpart.ycp:401
 #. translator: stats summary
 #: src/update.cc:371
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "%d patch needed"
 msgid_plural "%d patches needed"
-msgstr[0] "Bir yama bulunamadı."
+msgstr[0] "%d yama gerekli"
+msgstr[1] "%d yama gerekli"
 
 #. translator: stats summary
 #: src/update.cc:374
@@ -6297,7 +6560,7 @@ msgstr[1] "%d güvenlik yaması"
 #. translator: Table column header.
 #: src/update.cc:408
 msgid "Updatestack"
-msgstr ""
+msgstr "Yığını Güncelle"
 
 # clients/online_update_details.ycp:88 clients/online_update_select.ycp:112
 #. translator: Table column header.
@@ -6331,9 +6594,8 @@ msgstr "Güncelleme bulunamadı."
 
 #. translator: Table headline
 #: src/update.cc:607
-#, fuzzy
 msgid "The following updates are also available:"
-msgstr "Aşağıdaki desteler kurulacak:"
+msgstr "Aşağıdaki güncellemeler de mevcuttur:"
 
 # clients/inst_sw_single.ycp:1461 clients/inst_sw_single.ycp:1485
 #: src/update.cc:700
@@ -6361,45 +6623,43 @@ msgstr "Mevcut Sürüm"
 
 # clients/inst_rootpart.ycp:401
 #: src/update.cc:972
-#, fuzzy
 msgid "No matching issues found."
-msgstr "Bir yama bulunamadı."
+msgstr "Eşleşen sorun bulunamadı."
 
 #: src/update.cc:978
-#, fuzzy
 msgid "The following matches in issue numbers have been found:"
-msgstr "Belirtilen paketler indirilecek:"
+msgstr "Sayı numaralarında aşağıdaki eşleşmeler bulundu:"
 
 #: src/update.cc:988
 msgid "Matches in patch descriptions of the following patches have been found:"
-msgstr ""
+msgstr "Aşağıdaki yamaların yama açıklamalarındaki eşleşmeler bulundu:"
 
 #: src/update.cc:1050
 #, c-format, boost-format
 msgid "Fix for bugzilla issue number %s was not found or is not needed."
 msgstr ""
+"%s numaralı bugzilla sorunu için düzeltme bulunamadı veya gerekli değil."
 
 #: src/update.cc:1052
 #, c-format, boost-format
 msgid "Fix for CVE issue number %s was not found or is not needed."
-msgstr ""
+msgstr "%s numaralı CVE sorunu için düzeltme bulunamadı veya gerekli değil."
 
 #. translators: keep '%s issue' together, it's something like 'CVE issue' or 'Bugzilla issue'
 #: src/update.cc:1055
 #, c-format, boost-format
 msgid "Fix for %s issue number %s was not found or is not needed."
-msgstr ""
+msgstr "%s sorun numarası için düzeltme %s bulunamadı veya gerekli değil."
 
 # clients/online_update_start.ycp:171
 #: src/utils/Augeas.cc:102
-#, fuzzy
 msgid "Cannot initialize configuration file parser."
-msgstr "İşlem başarısız oldu:"
+msgstr "Yapılandırma dosyası ayrıştırıcısı başlatılamıyor."
 
 #: src/utils/Augeas.cc:508
 #, boost-format
 msgid "Malformed option name '%1%'."
-msgstr ""
+msgstr "Hatalı biçimlendirilmiş seçenek adı '%1%'."
 
 #: src/utils/Augeas.cc:520
 msgid "Could not save the config file."
@@ -6408,7 +6668,7 @@ msgstr "Yapılandırma dosyası kaydedilemedi."
 #: src/utils/Augeas.cc:562
 #, boost-format
 msgid "Config file '%1%' exists but is not a file."
-msgstr ""
+msgstr "Yapılandırma dosyası '%1%' var ama bir dosya değil."
 
 #: src/utils/Augeas.cc:578
 msgid "Could not load the config files."
@@ -6441,9 +6701,9 @@ msgid "The flag %1% is not compatible with argument %2% (%3%)."
 msgstr "%1% bayrağı %2% argümanıyla uyumlu değil (%3%)."
 
 #: src/utils/flags/exceptions.cc:34
-#, fuzzy, boost-format
+#, boost-format
 msgid "The flag %1% requires a argument."
-msgstr "İşaret verileni gerektiren paketleri göster"
+msgstr "%1% bayrağı bir bağımsız değişken gerektiriyor."
 
 #: src/utils/flags/exceptions.cc:40
 #, boost-format
@@ -6470,10 +6730,12 @@ msgid ""
 "Ignoring %s without argument because similar option with an argument has "
 "been specified."
 msgstr ""
+"Bağımsız değişkenli benzer bir seçenek belirtildiğinden %s bağımsız değişken "
+"olmadan yoksayılıyor."
 
 #: src/utils/flags/flagtypes.cc:235
 msgid "Out of range"
-msgstr ""
+msgstr "Menzil dışı"
 
 #: src/utils/flags/flagtypes.cc:237
 #, boost-format
@@ -6483,12 +6745,12 @@ msgstr "%1% değeri %2% bayrağına atanırken bilinmeyen hata."
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:23
 msgid "ALIAS"
-msgstr ""
+msgstr "ALIAS"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:25
 msgid "ALIAS|#|URI"
-msgstr ""
+msgstr "ALIAS|#|URI"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:27
@@ -6498,7 +6760,7 @@ msgstr "KATEGORİ"
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:29
 msgid "DIR"
-msgstr ""
+msgstr "DIR"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:31
@@ -6513,27 +6775,27 @@ msgstr "DOSYA.repo"
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:35
 msgid "FORMAT"
-msgstr ""
+msgstr "FORMAT"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:37
 msgid "INTEGER"
-msgstr ""
+msgstr "TAMSAYI"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:39
 msgid "PATH"
-msgstr ""
+msgstr "PATH"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:41
 msgid "SEVERITY"
-msgstr ""
+msgstr "SEVERTY"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:43
 msgid "STRING"
-msgstr ""
+msgstr "STRING"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:45
@@ -6543,7 +6805,7 @@ msgstr "ETİKET"
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:47
 msgid "TYPE"
-msgstr ""
+msgstr "TYPE"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:51
@@ -6553,7 +6815,7 @@ msgstr "YYYY-AA-GG"
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:53
 msgid "MODE"
-msgstr ""
+msgstr "MOD"
 
 #. For '-garbage' argument, with 'a', 'b', and 'e' as known options,
 #. getopt_long reports 'a', 'b', and 'e' as known options.
@@ -6567,7 +6829,7 @@ msgstr "Bilinmeyen seçenek "
 
 #: src/utils/getopt.cc:98
 msgid "Missing argument for "
-msgstr ""
+msgstr "Eksik argüman "
 
 #: src/utils/messages.cc:19
 msgid "Please file a bug report about this."
@@ -6604,7 +6866,7 @@ msgstr ""
 "edilir."
 
 #: src/utils/messages.cc:111
-#, fuzzy, boost-format
+#, boost-format
 msgid ""
 "Legacy commandline option %1% detected. Please use global option %2% instead."
 msgstr ""
@@ -6615,11 +6877,12 @@ msgstr ""
 #, boost-format
 msgid "Legacy commandline option %1% detected. Please use %2% instead."
 msgstr ""
+"Eski komut satırı seçeneği %1% algılandı. Lütfen bunun yerine %2% kullanın."
 
 #: src/utils/messages.cc:118
 #, boost-format
 msgid "Legacy commandline option %1% detected. This option is ignored."
-msgstr ""
+msgstr "Eski komut satırı seçeneği %1% algılandı. Bu seçenek göz ardı edilir."
 
 #: src/utils/messages.cc:123
 #, boost-format
@@ -6627,6 +6890,8 @@ msgid ""
 "Abbreviated commandline options will not be supported in future versions. "
 "Please use %2% instead of %1% ."
 msgstr ""
+"Kısaltılmış komut satırı seçenekleri gelecekteki sürümlerde "
+"desteklenmeyecektir. Lütfen %1% yerine %2% kullanın."
 
 #. translators: %s is "help" or "zypper help" depending on whether
 #. zypper shell is running or not
@@ -6646,6 +6911,8 @@ msgid ""
 "In case '%1%' is not a typo it's probably not a built-in command, but "
 "provided as a subcommand or plug-in (see '%2%')."
 msgstr ""
+"'%1%' yazım hatası değilse, muhtemelen yerleşik bir komut değildir, ancak "
+"bir alt komut veya eklenti olarak sağlanır (bkz. '%2%')."
 
 #. translators: %1% and %2% are plug-in packages which might provide it.
 #. translators: The word 'subcommand' also refers to a zypper command and should not be translated.
@@ -6655,6 +6922,8 @@ msgid ""
 "In this case a specific package providing the subcommand needs to be "
 "installed first. Those packages are often named '%1%' or '%2%'."
 msgstr ""
+"Bu durumda, önce alt komutu sağlayan belirli bir paketin kurulması gerekir. "
+"Bu paketler genellikle '%1%' veya '%2%' olarak adlandırılır."
 
 # clients/inst_sw_single.ycp:1461 clients/inst_sw_single.ycp:1485
 #: src/utils/misc.cc:93
@@ -6685,10 +6954,10 @@ msgstr[1] "yamalar"
 
 # clients/inst_sw_single.ycp:1461 clients/inst_sw_single.ycp:1485
 #: src/utils/misc.cc:101
-#, fuzzy
 msgid "srcpackage"
 msgid_plural "srcpackages"
-msgstr[0] "paket:"
+msgstr[0] "srcpackage"
+msgstr[1] "srcpackages"
 
 #: src/utils/misc.cc:103
 msgid "application"
@@ -6699,10 +6968,10 @@ msgstr[1] "uygulamalar"
 # clients/rc_config_step1.ycp:253
 #. default
 #: src/utils/misc.cc:105
-#, fuzzy
 msgid "resolvable"
 msgid_plural "resolvables"
-msgstr[0] "Hiçbir kullanıcı bulunamadı"
+msgstr[0] "resolvable"
+msgstr[1] "resolvables"
 
 #. Patch status: i18n + color
 #. translator: patch status
@@ -6735,17 +7004,17 @@ msgstr "gerekli değil"
 #. translator: patch status
 #: src/utils/misc.cc:119
 msgid "undetermined"
-msgstr ""
+msgstr "kararsız"
 
 #. pi_r is no patch!
 #. translator: patch status
 #: src/utils/misc.cc:120
 msgid "retracted"
-msgstr ""
+msgstr "geri çekilmiş"
 
 #: src/utils/misc.cc:329 src/utils/misc.cc:371
 msgid "Since"
-msgstr ""
+msgstr "O zamandan beri"
 
 #. << _("Repository")
 #: src/utils/misc.cc:364
@@ -6773,11 +7042,11 @@ msgstr "Verilen URI geçersiz"
 #. translators: don't translate '<platform>'
 #: src/utils/misc.cc:546
 msgid "Unable to guess a value for <platform>."
-msgstr ""
+msgstr "<platform> için bir değer tahmin edilemiyor."
 
 #: src/utils/misc.cc:547
 msgid "Please use obs://<project>/<platform>"
-msgstr ""
+msgstr "Lütfen obs://<proje>/<platform> kullanın"
 
 #: src/utils/misc.cc:548 src/utils/misc.cc:585
 #, c-format, boost-format
@@ -6786,24 +7055,23 @@ msgstr "Örnek: %s"
 
 #: src/utils/misc.cc:584
 msgid "Invalid OBS URI."
-msgstr ""
+msgstr "Geçersiz OBS URI'si."
 
 #: src/utils/misc.cc:584
 msgid "Correct form is obs://<project>/[platform]"
-msgstr ""
+msgstr "Doğru biçim obs://<proje>/[platform]"
 
 #: src/utils/misc.cc:634
 msgid "Problem copying the specified RPM file to the cache directory."
-msgstr ""
+msgstr "Belirtilen RPM dosyasını önbellek dizinine kopyalamada sorun."
 
 #: src/utils/misc.cc:635
 msgid "Perhaps you are running out of disk space."
 msgstr "Muhtemelen diskinizde boş alan yok."
 
 #: src/utils/misc.cc:643
-#, fuzzy
 msgid "Problem retrieving the specified RPM file"
-msgstr "Sadece yüklenmiş pakatleri göster "
+msgstr "Belirtilen RPM dosyasını alma sorunu"
 
 #: src/utils/misc.cc:644
 msgid "Please check whether the file is accessible."
@@ -6812,7 +7080,7 @@ msgstr "Dosyanın erişilebilir olup olmadığını kontrol edin."
 #: src/utils/pager.cc:32
 #, c-format, boost-format
 msgid "Press '%c' to exit the pager."
-msgstr ""
+msgstr "Çağrı cihazından çıkmak için '%c' tuşuna basın."
 
 #: src/utils/pager.cc:42
 msgid "Use arrows or pgUp/pgDown keys to scroll the text by lines or pages."
@@ -6869,15 +7137,15 @@ msgstr "Tekrar deneniyor..."
 
 #: src/utils/prompt.cc:324
 msgid "always"
-msgstr ""
+msgstr "her zaman"
 
 #: src/utils/prompt.cc:324
 msgid "never"
-msgstr ""
+msgstr "hiçbir şey"
 
 #: src/utils/prompt.cc:370
 msgid "Cannot read input: bad stream or EOF."
-msgstr ""
+msgstr "Giriş okunamıyor: bozuk akış veya EOF."
 
 #: src/utils/prompt.cc:371
 #, c-format, boost-format
@@ -6890,26 +7158,30 @@ msgstr ""
 "sorulara varsayılan yanıtları vermesi için '%s' evrensel seçeneğini kullanın."
 
 #: src/utils/prompt.cc:410
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Invalid answer '%s'."
-msgstr "Geçersiz hizmet türü '{0}'"
+msgstr "Geçersiz cevap '%s'."
 
 #: src/utils/prompt.cc:413
 #, c-format, boost-format
 msgid "Ambiguous answer '%s'."
-msgstr ""
+msgstr "Belirsiz yanıt '%s'."
 
 #. translators: the %s are: 'y', 'yes' (translated), 'n', and 'no' (translated).
 #: src/utils/prompt.cc:421
 #, c-format, boost-format
 msgid "Enter '%s' for '%s' or '%s' for '%s' if nothing else works for you."
 msgstr ""
+"Sizin için başka hiçbir şey işe yaramazsa \"%s\" için \"%s\" veya \"%s\" "
+"için \"%s\" girin."
 
 #: src/utils/prompt.cc:426
 msgid ""
 "If nothing else works enter '#1' to select the 1st option, '#2' for the 2nd "
 "one, ..."
 msgstr ""
+"Başka hiçbir şey işe yaramazsa, 1. seçeneği belirlemek için '#1', 2. seçenek "
+"için '#2' girin, ..."
 
 # clients/rc_config_step1.ycp:253
 #. TranslatorExplanation These are reasons for various failures.
@@ -6924,9 +7196,8 @@ msgstr "G/Ç hatası"
 
 # clients/support_question.ycp:27
 #: src/utils/prompt.h:185
-#, fuzzy
 msgid "Invalid object"
-msgstr "Hatalı ilişki"
+msgstr "Hatalı nesne"
 
 # include/ui/common_messages.ycp:95
 #: src/utils/prompt.h:192
