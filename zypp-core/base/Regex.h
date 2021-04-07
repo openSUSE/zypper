@@ -126,7 +126,12 @@ namespace zypp
       { return m_str; }
 
       bool matches( const char * s, str::smatch & matches, int flags = none ) const;
+      bool matches( const std::string & s_r, str::smatch & matches_r, int flags_r = none ) const
+      { return matches( s_r.c_str(), matches_r, flags_r ); }
+
       bool matches( const char * s ) const;
+      bool matches( const std::string & s_r ) const
+      { return matches( s_r.c_str() ); }
 
     public:
       /** Expert backdoor. Returns pointer to the compiled regex for direct use in regexec() */
