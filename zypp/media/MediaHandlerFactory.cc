@@ -78,7 +78,7 @@ namespace zypp::media {
 	  return v && v == val;
 	};
 
-	if ( getenvIs( "ZYPPNG_MEDIANETWORK", "1" ) ) {
+	if ( getenvIs( "ZYPP_MEDIANETWORK", "1" ) ) {
 	  WAR << "network backend manually enabled." << std::endl;
 	  which = network;
 	}

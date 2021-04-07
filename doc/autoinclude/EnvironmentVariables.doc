@@ -37,6 +37,7 @@
 \subsection zypp-envars-mediabackend Selecting the mediabackend to use.
 
 \li \c ZYPP_MULTICURL=0 Turn off multicurl (metalink and zsync) and fall back to plain libcurl.
+\li \c ZYPP_MEDIANETWORK=1 Turn on the new multithreaded backend (experimental)
 
 \subsection zypp-envars-plugin Variables related to plugins
 
