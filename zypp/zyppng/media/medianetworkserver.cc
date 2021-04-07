@@ -22,11 +22,13 @@
 #include <zypp-proto/envelope.pb.h>
 #include <zypp-proto/messages.pb.h>
 
-#undef ZYPP_BASE_LOGGER_LOGGROUP
-#define ZYPP_BASE_LOGGER_LOGGROUP "zypp::MediaNetworkServer"
 #include <zypp/zyppng/media/network/private/mediadebug_p.h>
 
 #include <algorithm>
+#include <csignal>
+
+#undef ZYPP_BASE_LOGGER_LOGGROUP
+#define ZYPP_BASE_LOGGER_LOGGROUP "zypp::MediaNetworkServer"
 
 namespace zyppng {
 
