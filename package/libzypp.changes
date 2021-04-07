@@ -15,7 +15,7 @@ Wed Feb 17 09:06:49 CET 2021 - ma@suse.de
   This allows to use the RH and SUSE patch categrory names
   synonymously:
   (recommendedi = bugfix) and (optional = feature = enhancement).
-- Add missing includes for GCC 11 compatibility.
+- Add missing includes for GCC 11 compatibility. (bsc#1181874)
 - Fix %posttrans script execution (fixes #265)
   The scripts are execuable. No need to call them through 'sh -c'.
 - Commit: Fix rpmdb compat symlink in case rpm got removed.
