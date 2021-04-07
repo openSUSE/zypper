@@ -251,7 +251,7 @@ BOOST_AUTO_TEST_CASE ( err )
     BOOST_REQUIRE_EQUAL ( sock->lastError() ,  zyppng::Socket::ConnectionRefused );
   }
 
-  {
+  if ( ::geteuid() != 0 ) {
     auto sock = zyppng::Socket::create( AF_UNIX, SOCK_STREAM, 0 );
 
     const auto res = sock->bind( std::make_shared<zyppng::UnixSockAddr>( "/root/socketicannotcreate", false ) );
