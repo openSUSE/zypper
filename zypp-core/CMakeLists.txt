@@ -190,6 +190,13 @@ SET( zyppng_io_HEADERS
   zyppng/io/SockAddr
 )
 
+SET( zyppng_rpc_HEADERS
+  zyppng/rpc/rpc.h
+)
+
+SET( zyppng_rpc_SRCS
+  zyppng/rpc/rpc.cc
+)
 
 SET( zyppng_thread_SRCS
   zyppng/thread/asyncqueue.cc
@@ -218,6 +225,7 @@ SET ( zypp_HEADERS
   ${zyppng_core_HEADERS}
   ${zyppng_io_HEADERS}
   ${zyppng_io_private_HEADERS}
+  ${zyppng_rpc_HEADERS}
   ${zyppng_thread_HEADERS}
   ${zyppng_thread_private_HEADERS}
 )
@@ -230,6 +238,7 @@ SET ( zypp_SRCS
   ${zypp_parser_xml_SRCS}
   ${zyppng_base_SRCS}
   ${zyppng_io_SRCS}
+  ${zyppng_rpc_SRCS}
   ${zyppng_thread_SRCS}
 )
 

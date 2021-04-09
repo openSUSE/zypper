@@ -22,6 +22,7 @@
 #include <zypp/zyppng/media/network/private/mediadebug_p.h>
 #include <zypp-core/zyppng/base/EventDispatcher>
 #include <zypp-core/zyppng/base/AbstractEventSource>
+#include <zypp-core/zyppng/rpc/rpc.h>
 
 #include <zypp/media/CurlHelper.h>
 #include <zypp/media/MediaUserAuth.h>
@@ -40,7 +41,7 @@
 
 namespace zyppng {
 
-  using HeaderSizeType = uint32_t;
+  using HeaderSizeType = zyppng::rpc::HeaderSizeType;
 
   struct MediaNetwork::ProgressData
   {

@@ -15,6 +15,7 @@
 #include <zypp-core/zyppng/base/EventLoop>
 #include <zypp-core/zyppng/base/EventDispatcher>
 #include <zypp-core/zyppng/base/SocketNotifier>
+#include <zypp-core/zyppng/rpc/rpc.h>
 
 #include <zypp/media/TransferSettings.h>
 #include <zypp/PathInfo.h>
@@ -32,7 +33,7 @@
 
 namespace zyppng {
 
-  using HeaderSizeType = uint32_t;
+  using HeaderSizeType = zyppng::rpc::HeaderSizeType;
 
   MediaNetworkServer::MediaNetworkServer( )
     : _downloadManager( std::make_shared<Downloader>( MirrorControl::create() ) )
