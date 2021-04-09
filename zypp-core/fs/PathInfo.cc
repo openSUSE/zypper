@@ -18,17 +18,16 @@
 #include <fstream>
 #include <iomanip>
 
-#include <zypp/base/LogTools.h>
-#include <zypp/base/String.h>
-#include <zypp/base/IOStream.h>
-#include <zypp/base/StrMatcher.h>
-#include <zypp/base/Errno.h>
+#include <zypp-core/fs/PathInfo.h>
+#include <zypp-core/base/LogTools.h>
+#include <zypp-core/base/String.h>
+#include <zypp-core/base/IOStream.h>
+#include <zypp-core/base/Errno.h>
 
-#include <zypp/AutoDispose.h>
-#include <zypp/ExternalProgram.h>
-#include <zypp/PathInfo.h>
-#include <zypp/Digest.h>
-#include <zypp/TmpPath.h>
+#include <zypp-core/AutoDispose.h>
+#include <zypp-core/ExternalProgram.h>
+#include <zypp-core/Digest.h>
+#include <zypp-core/fs/TmpPath.h>
 
 using std::endl;
 using std::string;
@@ -542,12 +541,6 @@ namespace zypp
     // dirForEach
     ///////////////////////////////////////////////////////////////////////
 
-    const StrMatcher & matchNoDots()
-    {
-      static StrMatcher noDots( "[^.]*", Match::GLOB );
-      return noDots;
-    }
-
     int dirForEach( const Pathname & dir_r, function<bool(const Pathname &, const char *const)> fnc_r )
     {
       if ( ! fnc_r )
@@ -574,21 +567,6 @@ namespace zypp
 	}
       }
       return ret;
-    }
-
-    int dirForEach( const Pathname & dir_r, const StrMatcher & matcher_r, function<bool( const Pathname &, const char *const)> fnc_r )
-    {
-      if ( ! fnc_r )
-	return 0;
-
-      bool nodots = ( &matcher_r == &matchNoDots() );
-      return dirForEach( dir_r,
-			 [&]( const Pathname & dir_r, const char *const name_r )->bool
-			 {
-			   if ( ( nodots && name_r[0] == '.' ) || ! matcher_r( name_r ) )
-			     return true;
-			   return fnc_r( dir_r, name_r );
-			 } );
     }
 
     ///////////////////////////////////////////////////////////////////

@@ -6,15 +6,15 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file	zypp/base/ReferenceCounted.h
+/** \file	zypp-core/base/ReferenceCounted.h
  *
 */
-#ifndef ZYPP_BASE_REFERENCECOUNTED_H
-#define ZYPP_BASE_REFERENCECOUNTED_H
+#ifndef ZYPP_CORE_BASE_REFERENCECOUNTED_H
+#define ZYPP_CORE_BASE_REFERENCECOUNTED_H
 
 #include <iosfwd>
 
-#include <zypp/base/PtrTypes.h>
+#include <zypp-core/base/PtrTypes.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -140,4 +140,4 @@ void intrusive_ptr_release( const NAME * ptr_r )               \
 { zypp::base::ReferenceCounted::release( ptr_r ); }
 
 ///////////////////////////////////////////////////////////////////
-#endif // ZYPP_BASE_REFERENCECOUNTED_H
+#endif // ZYPP_CORE_BASE_REFERENCECOUNTED_H

@@ -6,18 +6,18 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file	zypp/CheckSum.h
+/** \file	zypp-core/CheckSum.h
  *
 */
-#ifndef ZYPP_CHECKSUM_H
-#define ZYPP_CHECKSUM_H
+#ifndef ZYPP_CORE_CHECKSUM_H
+#define ZYPP_CORE_CHECKSUM_H
 
 #include <iosfwd>
 #include <string>
 #include <sstream>
 
-#include <zypp/base/Exception.h>
-#include <zypp/Pathname.h>
+#include <zypp-core/base/Exception.h>
+#include <zypp-core/Pathname.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

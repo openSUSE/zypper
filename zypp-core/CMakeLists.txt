@@ -6,9 +6,12 @@ SET( zypp_toplevel_headers
   AutoDispose.h
   ByteArray.h
   ByteCount.h
+  CheckSum.h
   Date.h
+  Digest.h
   ExternalProgram.h
   Globals.h
+  ManagedFile.h
   Pathname.h
   TriBool.h
   Url.h
@@ -16,7 +19,9 @@ SET( zypp_toplevel_headers
 
 SET( zypp_toplevel_SRCS
   ByteCount.cc
+  CheckSum.cc
   Date.cc
+  Digest.cc
   ExternalProgram.cc
   Pathname.cc
   Url.cc
@@ -43,6 +48,7 @@ SET( zypp_base_HEADERS
   base/NonCopyable.h
   base/ProfilingFormater.h
   base/PtrTypes.h
+  base/ReferenceCounted.h
   base/Regex.h
   base/String.h
   base/StringV.h
@@ -59,6 +65,7 @@ SET( zypp_base_SRCS
   base/IOTools.cc
   base/LogControl.cc
   base/ProfilingFormater.cc
+  base/ReferenceCounted.cc
   base/Regex.cc
   base/String.cc
   base/StringV.cc
@@ -67,6 +74,20 @@ SET( zypp_base_SRCS
 )
 
 INSTALL(  FILES ${zypp_base_HEADERS} DESTINATION "${INCLUDE_INSTALL_DIR}/zypp-core/base" )
+
+
+SET( zypp_fs_SRCS
+  fs/PathInfo.cc
+  fs/TmpPath.cc
+)
+
+SET( zypp_fs_HEADERS
+  fs/PathInfo.h
+  fs/TmpPath.h
+)
+
+INSTALL(  FILES ${zypp_fs_HEADERS} DESTINATION "${INCLUDE_INSTALL_DIR}/zypp-core/fs" )
+
 
 SET( zypp_url_SRCS
   url/UrlUtils.cc
@@ -189,6 +210,7 @@ SET( zyppng_thread_private_HEADERS
 SET ( zypp_HEADERS
   ${zypp_toplevel_headers}
   ${zypp_base_HEADERS}
+  ${zypp_fs_HEADERS}
   ${zypp_url_HEADERS}
   ${zypp_parser_xml_HEADERS}
   ${zyppng_base_HEADERS}
@@ -203,6 +225,7 @@ SET ( zypp_HEADERS
 SET ( zypp_SRCS
   ${zypp_toplevel_SRCS}
   ${zypp_base_SRCS}
+  ${zypp_fs_SRCS}
   ${zypp_url_SRCS}
   ${zypp_parser_xml_SRCS}
   ${zyppng_base_SRCS}
@@ -213,4 +236,8 @@ SET ( zypp_SRCS
 ADD_LIBRARY( zypp-core STATIC ${zypp_SRCS} ${zypp_HEADERS} )
 #we include generated headers, so we need to wait for zypp-protobuf to be ready
 add_dependencies( zypp-core zypp-protobuf )
+
+
+TARGET_LINK_LIBRARIES( zypp-core ${OPENSSL_LIBRARIES} )
+TARGET_LINK_LIBRARIES( zypp-core ${CRYPTO_LIBRARIES} )
 

@@ -6,34 +6,23 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file zypp/Digest.h
+/** \file zypp-core/Digest.h
  *
  * \todo replace by Blocxx
  *
 */
 
-#ifndef ZYPP_MEDIA_DIGEST_H
-#define ZYPP_MEDIA_DIGEST_H
+#ifndef ZYPP_CORE_DIGEST_H
+#define ZYPP_CORE_DIGEST_H
 
 #include <string>
 #include <iosfwd>
 #include <vector>
 
-#include <zypp/Callback.h>
-#include <zypp/Pathname.h>
-#include <zypp/ByteArray.h>
+#include <zypp-core/Pathname.h>
+#include <zypp-core/ByteArray.h>
 
 namespace zypp {
-
-
-  struct DigestReport : public callback::ReportBase
-  {
-    virtual bool askUserToAcceptNoDigest( const zypp::Pathname &file );
-    virtual bool askUserToAccepUnknownDigest( const Pathname &file, const std::string &name );
-    virtual bool askUserToAcceptWrongDigest( const Pathname &file, const std::string &requested, const std::string &found );
-  };
-
-
 
     /** \brief Compute Message Digests (MD5, SHA1 etc)
      *

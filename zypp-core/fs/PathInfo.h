@@ -9,8 +9,8 @@
 /** \file zypp/PathInfo.h
  *
 */
-#ifndef ZYPP_PATHINFO_H
-#define ZYPP_PATHINFO_H
+#ifndef ZYPP_CORE_FS_PATHINFO_H
+#define ZYPP_CORE_FS_PATHINFO_H
 
 extern "C"
 {
@@ -27,15 +27,13 @@ extern "C"
 #include <set>
 #include <map>
 
-#include <zypp/Pathname.h>
-#include <zypp/CheckSum.h>
-#include <zypp/ByteCount.h>
+#include <zypp-core/Pathname.h>
+#include <zypp-core/ByteCount.h>
+#include <zypp-core/CheckSum.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
-
-  class StrMatcher;
 
   ///////////////////////////////////////////////////////////////////
   /** Types and functions for filesystem operations.
@@ -454,12 +452,6 @@ namespace zypp
     int copy_dir_content( const Pathname & srcpath, const Pathname & destpath);
 
     /**
-     * Convenience returning <tt>StrMatcher( "[^.]*", Match::GLOB )</tt>
-     * \see \ref dirForEach
-     */
-    const StrMatcher & matchNoDots();
-
-    /**
      * Invoke callback function \a fnc_r for each entry in directory \a dir_r.
      *
      * If \a fnc_r is a \c NULL function \c 0 is returned immediately without even
@@ -472,31 +464,6 @@ namespace zypp
      * @return 0 on success, -1 if aborted by callback, errno > 0 on ::readdir failure.
      */
     int dirForEach( const Pathname & dir_r, function<bool(const Pathname &, const char *const)> fnc_r );
-
-    /**
-     * \overload taking a \ref StrMatcher to filter the entries for which \a fnc_r is invoked.
-     *
-     * For convenience a \ref StrMatcher \ref matchNoDots is provided in this namespace.</tt>
-     *
-     * \code
-     *   bool cbfnc( const Pathname & dir_r, const char *const str_r )
-     *   {
-     *     D BG <*< " - " << dir_r/str_r << endl;
-     *     return true;
-     *   }
-     *   // Print no-dot files in "/tmp" via callback
-     *   filesystem::dirForEach( "/tmp", filesystem::matchNoDots(), cbfnc );
-     *
-     *   // same via lambda
-     *   filesystem::dirForEach( "/tmp", filesystem::matchNoDots(),
-     *                           [](const Pathname & dir_r, const std::string & str_r)->bool
-     *                           {
-     *                             DBG << " - " << dir_r/str_r << endl;
-     *                             return true;
-     *                           });
-     * \endcode
-     */
-    int dirForEach( const Pathname & dir_r, const StrMatcher & matcher_r, function<bool(const Pathname &, const char *const)> fnc_r );
 
     /**
      * Return content of directory via retlist. If dots is false

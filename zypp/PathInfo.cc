@@ -6,52 +6,46 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file	zypp-core/base/ReferenceCounted.cc
+/** \file zypp/PathInfo.cc
  *
 */
-#include <iostream>
 
-#include <zypp-core/base/Logger.h>
-#include <zypp-core/base/Exception.h>
-#include <zypp-core/base/ReferenceCounted.h>
+#include <zypp/PathInfo.h>
+#include <zypp/base/StrMatcher.h>
+
+using std::endl;
+using std::string;
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////
-  namespace base
-  { /////////////////////////////////////////////////////////////////
+  namespace filesystem
+  {
 
-    ReferenceCounted::ReferenceCounted()
-    : _counter( 0 )
-    {}
-
-    ReferenceCounted::ReferenceCounted( const ReferenceCounted & /*rhs*/ )
-    : _counter( 0 )
-    {}
-
-    ReferenceCounted::~ReferenceCounted()
+    const StrMatcher & matchNoDots()
     {
-      if ( _counter )
-        {
-          INT << "~ReferenceCounted: nonzero reference count" << std::endl;
-        }
+      static StrMatcher noDots( "[^.]*", Match::GLOB );
+      return noDots;
     }
 
-    void ReferenceCounted::unrefException() const
+    int dirForEach( const Pathname & dir_r, const StrMatcher & matcher_r, function<bool( const Pathname &, const char *const)> fnc_r )
     {
-      INT << "ReferenceCounted::unref: zero reference count" << std::endl;
-      throw std::out_of_range( "ReferenceCounted::unref: zero reference count" );
-    }
+      if ( ! fnc_r )
+	return 0;
 
-    std::ostream & ReferenceCounted::dumpOn( std::ostream & str ) const
-    {
-      return str << "ReferenceCounted(@" << (const void *)this
-                 << "<=" << _counter << ")";
+      bool nodots = ( &matcher_r == &matchNoDots() );
+      return dirForEach( dir_r,
+			 [&]( const Pathname & dir_r, const char *const name_r )->bool
+			 {
+			   if ( ( nodots && name_r[0] == '.' ) || ! matcher_r( name_r ) )
+			     return true;
+			   return fnc_r( dir_r, name_r );
+			 } );
     }
 
     /////////////////////////////////////////////////////////////////
-  } // namespace base
+  } // namespace filesystem
   ///////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
