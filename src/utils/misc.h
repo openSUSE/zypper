@@ -190,7 +190,7 @@ Url make_url( const std::string & url_s );
  * Creates Url out of obs://project/platform URI with given base URL and default
  * platform (used in case the platform is not specified in the URI).
  */
-Url make_obs_url( const std::string & obsuri, const Url & base_url, const std::string & default_platform );
+Url make_obs_url( const std::string & obsuri, const Url & base_url, const std::string & default_platform, bool guessRepoFilename = false );
 
 /**
  * Returns <code>true</code> if the string \a s contains a substring starting
