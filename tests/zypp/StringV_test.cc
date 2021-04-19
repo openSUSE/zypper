@@ -1,6 +1,7 @@
 #include <boost/test/unit_test.hpp>
 #include <iostream>
 #include <sstream>
+#include <optional>
 #include <zypp/base/StringV.h>
 
 using std::cout;
