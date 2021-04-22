@@ -135,8 +135,8 @@ int main( int argc, char * argv[] )
         return 1;
       }
 
-      argv++;
-      argc--;
+      ++argv;
+      --argc;
       debugInputFile = argv[0];
 
     } else if ( strcmp( argv[0], "--zypper" ) == 0 ) {
@@ -147,8 +147,8 @@ int main( int argc, char * argv[] )
       return 1;
     }
 
-    argv++;
-    argc--;
+    ++argv;
+    --argc;
   }
 
   zypp::CheckAccessDeleted checker(false); // wait for explicit call to check()
