@@ -1,4 +1,16 @@
 -------------------------------------------------------------------
+Thu Apr 22 15:52:19 CEST 2021 - ma@suse.de
+
+- Add missing includes for GCC 11 (bsc#1181874)
+- Fix unsafe usage of static in media verifier.
+- Solver: Avoid segfault if no system is loaded (bsc#1183628)
+- MediaVerifier: Relax media set verification in case of a single
+  not-volatile medium (bsc#1180851)
+- Do no cleanup in custom cache dirs (bsc#1182936)
+- ZConfig: let pubkeyCachePath follow repoCachePath.
+- version 17.25.9 (22)
+
+-------------------------------------------------------------------
 Wed Feb 24 17:07:52 CET 2021 - ma@suse.de
 
 - Try to provide a mounted /proc in --root installs (bsc#1181328)
