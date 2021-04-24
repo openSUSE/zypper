@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-25 11:38+0100\n"
-"PO-Revision-Date: 2021-04-13 19:57+0000\n"
+"PO-Revision-Date: 2021-04-24 18:57+0000\n"
 "Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
 "Language-Team: Slovak <https://l10n.opensuse.org/projects/zypper/master/sk/>"
 "\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Weblate 3.6.1\n"
+"X-Generator: Weblate 4.6\n"
 
 #: src/Command.cc:93
 msgid "Invalid command"
@@ -492,7 +492,7 @@ msgid ""
 "Package '%s' is not available in your repositories. Cannot reinstall, "
 "upgrade, or downgrade."
 msgstr ""
-"Balík '%s' nie je dostupný vo vašich repozitároch. Nie je ho  možné "
+"Balík '%s' nie je dostupný vo vašich repozitároch. Nie je ho možné "
 "preinštalovať, zvýšiť alebo znížiť verziu."
 
 #: src/RequestFeedback.cc:158
@@ -1253,7 +1253,7 @@ msgid "package to downgrade"
 msgid_plural "packages to downgrade"
 msgstr[0] "balík pre zníženie verzie"
 msgstr[1] "balíky pre zníženie verzie"
-msgstr[2] "balíkov pre zníženie  verzie"
+msgstr[2] "balíkov pre zníženie verzie"
 
 #. translators: this text will be preceded by a number e.g. "5 new"
 #: src/Summary.cc:1441
@@ -2288,7 +2288,8 @@ msgid ""
 "or similar."
 msgstr ""
 "Či je oprava nainštalovaná sa určuje výhradne na základe jej závislostí.\n"
-"Opravy sa neinštalujú kopírovaním súborov, zápisom do databázy a podobne."
+"Opravy sa neinštalujú kopírovaním súborov, zápisom do databázy\n"
+"a podobne."
 
 #: src/commands/installremove.cc:126
 msgid "Uninstallation of a source package not defined and implemented."
@@ -3953,7 +3954,7 @@ msgid ""
 "run '%1%' at any time."
 msgstr ""
 "Rozšírené vyhľadávanie vrátane ešte neaktivovaných vzdialených zdrojov "
-"môžete kedykoľvek spustiť  '%1%'."
+"môžete kedykoľvek spustiť '%1%'."
 
 #: src/commands/search/search-packages-hinthack.cc:99
 #, boost-format
@@ -4114,8 +4115,8 @@ msgid ""
 "Useful together with dependency options, otherwise searching in package name "
 "is default."
 msgstr ""
-"Užitočné spolu s voľbami závislosti, inak  je predvolené vyhľadávanie v "
-"názve balíčka."
+"Užitočné spolu s voľbami závislosti, inak je predvolené vyhľadávanie v názve "
+"balíčka."
 
 #. translators: -f, --file-list
 #: src/commands/search/search.cc:181
@@ -5219,9 +5220,9 @@ msgstr "automaticky"
 #, boost-format
 msgid "There would be %1% match for '%2%'."
 msgid_plural "There would be %1% matches for '%2%'."
-msgstr[0] "Mala by existovať  %1% zhoda pre '%2%'."
-msgstr[1] "Mali by existovať  %1% zhody pre '%2%'."
-msgstr[2] "Malo by existovať  %1% zhôd pre '%2%'."
+msgstr[0] "Mala by existovať %1% zhoda pre '%2%'."
+msgstr[1] "Mali by existovať %1% zhody pre '%2%'."
+msgstr[2] "Malo by existovať %1% zhôd pre '%2%'."
 
 #. TranslatorExplanation E.g. "package 'zypper' not found."
 #: src/info.cc:221
@@ -6860,20 +6861,20 @@ msgstr ""
 msgid ""
 "Legacy commandline option %1% detected. Please use global option %2% instead."
 msgstr ""
-"Staršia voľba  %1% príkazového riadka bola zistená. Namiesto toho použiť "
+"Staršia voľba %1% príkazového riadka bola zistená. Namiesto toho použiť "
 "globálnu voľbu %2%."
 
 #: src/utils/messages.cc:112
 #, boost-format
 msgid "Legacy commandline option %1% detected. Please use %2% instead."
 msgstr ""
-"Staršia voľba  %1% príkazového riadka bola zistená. Namiesto toho použiť %2%."
+"Staršia voľba %1% príkazového riadka bola zistená. Namiesto toho použiť %2%."
 
 #: src/utils/messages.cc:118
 #, boost-format
 msgid "Legacy commandline option %1% detected. This option is ignored."
 msgstr ""
-"Bola zistená zastaraná voľba  %1% príkazového riadka. Táto voľba je "
+"Bola zistená zastaraná voľba %1% príkazového riadka. Táto voľba je "
 "ignorovaná."
 
 #: src/utils/messages.cc:123
@@ -7143,8 +7144,8 @@ msgid ""
 "If you run zypper without a terminal, use '%s' global\n"
 "option to make zypper use default answers to prompts."
 msgstr ""
-"Ak spúšťate zypper bez terminálu, použite globálnu voľbu '%s', aby zypper "
-"použil prednastavené odpovede na výzvy."
+"Ak spúšťate zypper bez terminálu, použite globálnu voľbu '%s',\n"
+"aby zypper použil prednastavené odpovede na výzvy."
 
 #: src/utils/prompt.cc:410
 #, c-format, boost-format
