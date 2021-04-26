@@ -532,7 +532,7 @@ namespace zypp
 
   std::string CheckAccessDeleted::ProcInfo::service() const
   {
-    static const str::regex rx( "[0-9]+:name=systemd:/system.slice/(.*/)?(.*).service$" );
+    static const str::regex rx( "(0::|[0-9]+:name=systemd:)/system.slice/(.*/)?(.*).service$" );
     str::smatch what;
     std::string ret;
     iostr::simpleParseFile( InputStream( Pathname("/proc")/pid/"cgroup" ),
@@ -540,7 +540,7 @@ namespace zypp
 			    {
 			      if ( str::regex_match( line_r, what, rx ) )
 			      {
-				ret = what[2];
+				ret = what[3];
 				return false;	// stop after match
 			      }
 			      return true;
