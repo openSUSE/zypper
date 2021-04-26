@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-25 11:38+0100\n"
-"PO-Revision-Date: 2021-03-15 12:57+0000\n"
+"PO-Revision-Date: 2021-04-27 00:57+0000\n"
 "Last-Translator: Yasuhiko Kamata <belphegor@belbel.or.jp>\n"
 "Language-Team: Japanese <https://l10n.opensuse.org/projects/zypper/master/ja/"
 ">\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 3.6.1\n"
+"X-Generator: Weblate 4.6\n"
 
 #: src/Command.cc:93
 msgid "Invalid command"
@@ -4733,9 +4733,8 @@ msgid ""
 "tried to download. Upon success the local path is is found in 'download-"
 "result/localpath@path'."
 msgstr ""
-"XML 出力では、それぞれダウンロードしようとしたパッケージに対して、  "
-"<download-result> ノードが追加されます。ダウンロードが成功すると、 ローカルパ"
-"スは 'download-result/localpath@path' に出力されます。"
+"XML 出力では、それぞれダウンロードしようとしたパッケージに対して、 <download-result> "
+"ノードが追加されます。ダウンロードが成功すると、 ローカルパスは 'download-result/localpath@path' に出力されます。"
 
 #. translators: --all-matches
 #: src/commands/utils/download.cc:168
@@ -5632,10 +5631,8 @@ msgid ""
 "report by following instructions at http://en.opensuse.org/Zypper/"
 "Troubleshooting"
 msgstr ""
-"この問題はリポジトリ内に無効なメタデータが含まれているか、メタデータ解析プロ"
-"グラムにバグがある場合に\n"
-"発生することがあります。後者をお疑いの場合は、https://ja.opensuse.org/SDB:"
-"Zypperのトラブルシューティングにある手順でバグ報告をお願いいたします。"
+"この問題はリポジトリ内に無効なメタデータが含まれているか、メタデータ解析プログラムにバグがある場合に発生することがあります。後者をお疑いの場合は、http"
+"s://ja.opensuse.org/SDB:Zypperのトラブルシューティングにある手順でバグ報告をお願いいたします。"
 
 #: src/repos.cc:450
 #, c-format, boost-format
