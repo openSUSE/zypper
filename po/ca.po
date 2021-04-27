@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-25 11:38+0100\n"
-"PO-Revision-Date: 2021-03-22 22:57+0000\n"
+"PO-Revision-Date: 2021-04-27 17:57+0000\n"
 "Last-Translator: David Medina <medipas@gmail.com>\n"
 "Language-Team: Catalan <https://l10n.opensuse.org/projects/zypper/master/ca/>"
 "\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 3.6.1\n"
+"X-Generator: Weblate 4.6\n"
 
 #: src/Command.cc:93
 msgid "Invalid command"
@@ -542,8 +542,8 @@ msgstr ""
 #, c-format, boost-format
 msgid "Patch '%s' is locked. Use '%s' to install it, or unlock it using '%s'."
 msgstr ""
-"El pedaç %s està blocat. Useu \"%s\" per instal·lar-lo, o desbloqueu-lo amb  "
-"\"%s\"."
+"El pedaç %s està blocat. Useu \"%s\" per instal·lar-lo o desbloqueu-lo amb \""
+"%s\"."
 
 #: src/RequestFeedback.cc:199
 #, c-format, boost-format
@@ -862,11 +862,9 @@ msgstr[1] ""
 msgid "The following recommended application was automatically selected:"
 msgid_plural ""
 "The following %d recommended applications were automatically selected:"
-msgstr[0] ""
-"La següent aplicació recomanada ha estat seleccionada automàticament:"
+msgstr[0] "La següent aplicació recomanada s'ha seleccionat automàticament:"
 msgstr[1] ""
-"Les següents %d  aplicacions recomanades han estat seleccionades "
-"automàticament:"
+"Les següents %d aplicacions recomanades s'han seleccionat automàticament:"
 
 #: src/Summary.cc:991
 #, c-format, boost-format
@@ -1837,7 +1835,7 @@ msgid ""
 "Please insert medium [%s] #%d and type 'y' to continue or 'n' to cancel the "
 "operation."
 msgstr ""
-"Si us plau, inseriu el mitjà  [%s] #%d i premeu s per continuar i n per "
+"Si us plau, inseriu el mitjà [%s] #%d i premeu s per continuar i n per "
 "cancel·lar l'operació."
 
 #. translators: a/r/i/u are replies to the "Abort, retry, ignore?" prompt
@@ -3452,8 +3450,7 @@ msgstr "No hi ha repositoris definits."
 
 #: src/commands/repos/list.cc:333
 msgid "Use the 'zypper addrepo' command to add one or more repositories."
-msgstr ""
-"Feu servir l'ordre  \"zypper addrepo\" per afegir un o més repositoris."
+msgstr "Useu l'ordre \"zypper addrepo\" per afegir-hi un o més repositoris."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/repos/modify.cc:24
@@ -3946,8 +3943,8 @@ msgid ""
 "* and ? wildcards can also be used within search strings. If a search string "
 "is enclosed in '/', it's interpreted as a regular expression."
 msgstr ""
-"* i ? es poden usar com a comodins  dins cada cadena de cerca. Si la línia "
-"de cerca s'emmarca amb '/', s'interpretarà com a expressió regular."
+"* i ? es poden usar com a comodins dins cada cadena de cerca. Si la línia de "
+"cerca s'emmarca amb /, s'interpretarà com a expressió regular."
 
 #. translators: --match-substrings
 #: src/commands/search/search.cc:105
@@ -4073,7 +4070,7 @@ msgid ""
 "Useful together with dependency options, otherwise searching in package name "
 "is default."
 msgstr ""
-"Útil juntament amb les opcions de dependència, d'altra banda es cerca  per "
+"Útil juntament amb les opcions de dependència, d'altra banda se cerca per "
 "defecte pel nom del paquet."
 
 #. translators: -f, --file-list
@@ -5203,7 +5200,7 @@ msgstr "No s'ha trobat %s \"%s\"."
 #: src/info.cc:245
 #, c-format, boost-format
 msgid "Information for %s %s:"
-msgstr "Informació per a  %s %s:"
+msgstr "Informació per a %s %s:"
 
 # SR
 #: src/info.cc:327
@@ -5702,8 +5699,8 @@ msgid ""
 "Please add one or more base URI (baseurl=URI) entries to %s for repository "
 "'%s'."
 msgstr ""
-"Si us plau, afegiu una o més entrades de base URI (baseurl=URI)  per a la "
-"ruta %s del repositori '%s'."
+"Si us plau, afegiu una o més entrades d'URI de base (baseurl=URI) a %s per "
+"al repositori %s."
 
 #: src/repos.cc:376
 msgid "No alias defined for this repository."
