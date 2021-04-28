@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Wed Apr 28 15:34:01 CEST 2021 - ma@suse.de
+
+- Properly handle permission denied when providing optional files
+  (bsc#1185239)
+- Fix sevice detection with cgroupv2 (bsc#1184997)
+- version 17.25.10 (22)
+
+-------------------------------------------------------------------
 Thu Apr 22 15:52:19 CEST 2021 - ma@suse.de
 
 - Add missing includes for GCC 11 (bsc#1181874)
