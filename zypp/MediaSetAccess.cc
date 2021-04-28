@@ -184,6 +184,8 @@ IMPL_PTR_TYPE(MediaSetAccess);
     }
     catch ( const media::MediaFileNotFoundException & excpt_r )
     { ZYPP_CAUGHT( excpt_r ); }
+    catch ( const media::MediaForbiddenException & excpt_r )
+    { ZYPP_CAUGHT( excpt_r ); }
     catch ( const media::MediaNotAFileException & excpt_r )
     { ZYPP_CAUGHT( excpt_r ); }
    return Pathname();
