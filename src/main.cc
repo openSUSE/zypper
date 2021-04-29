@@ -95,9 +95,10 @@ int main( int argc, char **argv )
 {
   struct Bye {
     ~Bye() {
-      MIL << "===== Exiting main() =====" << endl;
+      MIL << "===== Exiting main("<<exitcode<<") =====" << endl;
     }
-  } say_goodbye __attribute__ ((__unused__));
+    int exitcode = -1;
+  } say_goodbye;
 
   // bsc#1183589: Protect against strict/relaxed user umask via sudo
   bool sudo = false;	// will be mentioned in the log
@@ -163,7 +164,8 @@ int main( int argc, char **argv )
   }
 
   Zypper & zypper( Zypper::instance() );
-  int exitcode = zypper.main( argc, argv );
+  int & exitcode { say_goodbye.exitcode };
+  exitcode = zypper.main( argc, argv );
   if ( !exitcode )
     exitcode = zypper.exitInfoCode();	// propagate refresh errors even if main action succeeded
   return exitcode;
