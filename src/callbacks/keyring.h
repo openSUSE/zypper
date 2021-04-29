@@ -65,6 +65,7 @@ namespace zypp
 	  }
 	  dumpAsXmlOn( *parent, key.name(), "key-name" );
 	  dumpAsXmlOn( *parent, key.fingerprint(), "key-fingerprint" );
+	  dumpAsXmlOn( *parent, key.algoName(), "key-algorithm" );
 	  dumpAsXmlOn( *parent, key.created(), "key-created" );
 	  dumpAsXmlOn( *parent, key.expires(), "key-expires" );
 	  dumpAsXmlOn( *parent, key.rpmName(), "rpm-name" );
@@ -80,6 +81,7 @@ namespace zypp
       }
       t << ( TableRow() << "" << _("Key Name:") << key.name() )
 	<< ( TableRow() << "" << _("Key Fingerprint:") << str::gapify( key.fingerprint(), 8 ) )
+	<< ( TableRow() << "" << _("Key Algorithm:") << key.algoName() )
 	<< ( TableRow() << "" << _("Key Created:") << key.created() )
 	<< ( TableRow() << "" << _("Key Expires:") << key.expiresAsString() );
       for ( const PublicSubkeyData & sub : key.subkeys() )
