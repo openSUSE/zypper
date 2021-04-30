@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-04-30 14:04+0200\n"
-"PO-Revision-Date: 2021-01-13 01:38+0000\n"
+"PO-Revision-Date: 2021-05-01 01:58+0000\n"
 "Last-Translator: Yasuhiko Kamata <belphegor@belbel.or.jp>\n"
 "Language-Team: Japanese <https://l10n.opensuse.org/projects/libzypp/master/"
 "ja/>\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 3.6.1\n"
+"X-Generator: Weblate 4.6\n"
 
 #. dubious: Throw on malformed known types, otherwise log a warning.
 #: zypp/CheckSum.cc:136
@@ -4282,7 +4282,7 @@ msgstr "リポジトリにURLが設定されていません。"
 #: zypp/repo/SUSEMediaVerifier.cc:103
 #, boost-format
 msgid "Expected medium %1%/%2% identified by file '%3%' with content:"
-msgstr ""
+msgstr "必要なメディア %1%/%2% は '%3%' と記されているメディアで、下記のような内容が含まれています:"
 
 #. [lhs][rhs] 0 = installed; 1 = to be installed
 #. TranslatorExplanation %1%(filename) %2%(package1) %3%(package2)
