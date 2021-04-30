@@ -2691,14 +2691,14 @@ msgstr "Problem beim Entfernen der Paketsperre:"
 
 #. translators: command summary: needs-rebooting
 #: src/commands/needs-rebooting.cc:22
-msgid "Check if the needs-reboot flag was set."
+msgid "Check if the reboot-needed flag was set."
 msgstr "Überprüfen Sie, ob der Flag needs-reboot gesetzt wurde."
 
 #: src/commands/needs-rebooting.cc:23
 msgid ""
-"Checks if the needs-reboot flag was set by a previous update or install of a "
+"Checks if the reboot-needed flag was set by a previous update or install of a "
 "core library or service.\n"
-"Exit code ZYPPER_EXIT_INF_REBOOT_NEEDED indicates that a reboot is needed, "
+"Exit code ZYPPER_EXIT_INF_REBOOT_NEEDED indicates that a reboot is suggested, "
 "otherwise the exit code is set to ZYPPER_EXIT_OK."
 msgstr ""
 "Prüft, ob der Flag 'needs-reboot' bei einer vorherigen Aktualisierung bzw. "
@@ -2707,18 +2707,18 @@ msgstr ""
 "erforderlich ist, andernfalls wird der Exitcode ZYPPER_EXIT_OK verwendet."
 
 #: src/commands/needs-rebooting.cc:35
-msgid "Core libraries or services have been updated."
+msgid "Since the last system boot core libraries or services have been updated."
 msgstr "Core-Bibliotheken oder Dienste wurden aktualisiert."
 
 #: src/commands/needs-rebooting.cc:36
 msgid ""
-"Reboot is required to ensure that your system benefits from these updates."
+"Reboot is suggested to ensure that your system benefits from these updates."
 msgstr ""
 "Ein Neustart wird benötigt, um sicher zu stellen, dass ihr System von diesen "
 "Updates profitiert."
 
 #: src/commands/needs-rebooting.cc:41
-msgid "No core libraries or services have been updated."
+msgid "No core libraries or services have been updated since the last system boot."
 msgstr "Keine Core-Bibliotheken oder Dienste wurden aktualisiert."
 
 #: src/commands/needs-rebooting.cc:42

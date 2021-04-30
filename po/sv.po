@@ -2593,14 +2593,14 @@ msgstr "Det gick inte att ta bort paketlåset:"
 
 #. translators: command summary: needs-rebooting
 #: src/commands/needs-rebooting.cc:22
-msgid "Check if the needs-reboot flag was set."
+msgid "Check if the reboot-needed flag was set."
 msgstr "Kontrollera om flaggan needs-reboot är inställd."
 
 #: src/commands/needs-rebooting.cc:23
 msgid ""
-"Checks if the needs-reboot flag was set by a previous update or install of a "
+"Checks if the reboot-needed flag was set by a previous update or install of a "
 "core library or service.\n"
-"Exit code ZYPPER_EXIT_INF_REBOOT_NEEDED indicates that a reboot is needed, "
+"Exit code ZYPPER_EXIT_INF_REBOOT_NEEDED indicates that a reboot is suggested, "
 "otherwise the exit code is set to ZYPPER_EXIT_OK."
 msgstr ""
 "Kontrollerar om flaggan needs-reboot har ställts in av en tidigare "
@@ -2609,17 +2609,17 @@ msgstr ""
 "omstart, annars är avslutningskoden inställd på ZYPPER_EXIT_OK."
 
 #: src/commands/needs-rebooting.cc:35
-msgid "Core libraries or services have been updated."
+msgid "Since the last system boot core libraries or services have been updated."
 msgstr "Källbibliotek eller tjänster har uppdaterats."
 
 #: src/commands/needs-rebooting.cc:36
 msgid ""
-"Reboot is required to ensure that your system benefits from these updates."
+"Reboot is suggested to ensure that your system benefits from these updates."
 msgstr ""
 "Omstart krävs för att se till att dessa uppdateringar tillämpas av systemet."
 
 #: src/commands/needs-rebooting.cc:41
-msgid "No core libraries or services have been updated."
+msgid "No core libraries or services have been updated since the last system boot."
 msgstr "Inga källbibliotek eller tjänster har uppdaterats."
 
 #: src/commands/needs-rebooting.cc:42

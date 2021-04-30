@@ -2688,14 +2688,14 @@ msgstr "Probleem bij het verwijderen van de pakketblokkering:"
 
 #. translators: command summary: needs-rebooting
 #: src/commands/needs-rebooting.cc:22
-msgid "Check if the needs-reboot flag was set."
+msgid "Check if the reboot-needed flag was set."
 msgstr "Controleren of de vlag opnieuw-opstarten was ingesteld."
 
 #: src/commands/needs-rebooting.cc:23
 msgid ""
-"Checks if the needs-reboot flag was set by a previous update or install of a "
+"Checks if the reboot-needed flag was set by a previous update or install of a "
 "core library or service.\n"
-"Exit code ZYPPER_EXIT_INF_REBOOT_NEEDED indicates that a reboot is needed, "
+"Exit code ZYPPER_EXIT_INF_REBOOT_NEEDED indicates that a reboot is suggested, "
 "otherwise the exit code is set to ZYPPER_EXIT_OK."
 msgstr ""
 "Controleert of de vlag opnieuw-opstarten was ingesteld bij een vorige keer "
@@ -2704,18 +2704,18 @@ msgstr ""
 "nodig is, anders is de uitgangscode ingesteld op ZYPPER_EXIT_OK."
 
 #: src/commands/needs-rebooting.cc:35
-msgid "Core libraries or services have been updated."
+msgid "Since the last system boot core libraries or services have been updated."
 msgstr "Kernbibliotheken or -services zijn bijgewerkt."
 
 #: src/commands/needs-rebooting.cc:36
 msgid ""
-"Reboot is required to ensure that your system benefits from these updates."
+"Reboot is suggested to ensure that your system benefits from these updates."
 msgstr ""
 "Opnieuw opstarten is vereist om te verzekeren dat uw systeem voordeel heeft "
 "bij dit bijwerken."
 
 #: src/commands/needs-rebooting.cc:41
-msgid "No core libraries or services have been updated."
+msgid "No core libraries or services have been updated since the last system boot."
 msgstr "Er zijn geen kernbibliotheken of -services bijgewerkt."
 
 #: src/commands/needs-rebooting.cc:42
