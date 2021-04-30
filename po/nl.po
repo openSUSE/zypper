@@ -16,16 +16,16 @@ msgstr ""
 "Project-Id-Version: zypp.nl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-04-30 14:04+0200\n"
-"PO-Revision-Date: 2021-01-13 13:38+0000\n"
+"PO-Revision-Date: 2021-05-01 01:58+0000\n"
 "Last-Translator: Freek de Kruijf <freek@opensuse.org>\n"
-"Language-Team: Dutch <https://l10n.opensuse.org/projects/libzypp/master/nl/"
-">\n"
+"Language-Team: Dutch <https://l10n.opensuse.org/projects/libzypp/master/nl/>"
+"\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 3.6.1\n"
+"X-Generator: Weblate 4.6\n"
 
 #. dubious: Throw on malformed known types, otherwise log a warning.
 #: zypp/CheckSum.cc:136
@@ -1220,7 +1220,7 @@ msgstr "Britse Maagdeneilanden"
 #. :VGB:092:
 #: zypp/CountryCode.cc:394
 msgid "Virgin Islands, U.S."
-msgstr "Amerikaanse Maagdeneilanden"
+msgstr "Maagdeneilanden, V.S."
 
 #. :VIR:850:
 #: zypp/CountryCode.cc:395
@@ -3814,7 +3814,7 @@ msgstr "Kan opslagruimtebestand '%1%' niet lezen: Toegang geweigerd"
 
 #: zypp/RepoManager.cc:353
 msgid "Repository alias cannot start with dot."
-msgstr "De alias van van een opslagruimte mag niet met een punt (.) beginnen."
+msgstr "De alias van een opslagruimte mag niet met een punt (.) beginnen."
 
 #: zypp/RepoManager.cc:364
 msgid "Service alias cannot start with dot."
@@ -3833,7 +3833,7 @@ msgstr "Kan bestand '%s' niet openen voor schrijven."
 #: zypp/RepoManager.cc:874
 #, boost-format
 msgid "Unknown service '%1%': Removing orphaned service repository '%2%'"
-msgstr "Onbekende service '%1%': Verweesde opslagruimte  '%2%' verwijderen"
+msgstr "Onbekende service '%1%': Verweesde opslagruimte '%2%' verwijderen"
 
 #. we will throw this later if no URL checks out fine
 #: zypp/RepoManager.cc:1119
@@ -4296,7 +4296,7 @@ msgstr "Geen URL in opslagruimte."
 #: zypp/repo/SUSEMediaVerifier.cc:103
 #, boost-format
 msgid "Expected medium %1%/%2% identified by file '%3%' with content:"
-msgstr ""
+msgstr "Verwacht medium %1%/%2% geïdentificeerd door bestand '%3%' met inhoud:"
 
 #. [lhs][rhs] 0 = installed; 1 = to be installed
 #. TranslatorExplanation %1%(filename) %2%(package1) %3%(package2)
@@ -4560,7 +4560,7 @@ msgstr ""
 msgid ""
 "the installed %1% conflicts with '%2%' provided by the to be installed %3%"
 msgstr ""
-"het geïnstalleerde %1% in in conflict met '%2%' geleverd door het te "
+"het geïnstalleerde %1% is in conflict met '%2%' geleverd door het te "
 "installeren %3%"
 
 #: zypp/solver/detail/SATResolver.cc:1145
@@ -4687,7 +4687,7 @@ msgstr "vergrendeling verwijderen om installatie van %1% toe te staan"
 #: zypp/solver/detail/SATResolver.cc:2150
 #: zypp/solver/detail/SATResolver.cc:2154
 msgid "This request will break your system!"
-msgstr "Dit verzoek zal het systeem laten crashen."
+msgstr "Dit verzoek zal het systeem laten crashen!"
 
 #: zypp/solver/detail/SATResolver.cc:1356
 #: zypp/solver/detail/SATResolver.cc:1377
