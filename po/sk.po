@@ -6,16 +6,16 @@ msgstr ""
 "Project-Id-Version: libzypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-04-30 14:04+0200\n"
-"PO-Revision-Date: 2021-01-22 18:23+0000\n"
+"PO-Revision-Date: 2021-04-30 19:57+0000\n"
 "Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
-"Language-Team: Slovak <https://l10n.opensuse.org/projects/libzypp/master/sk/"
-">\n"
+"Language-Team: Slovak <https://l10n.opensuse.org/projects/libzypp/master/sk/>"
+"\n"
 "Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Weblate 3.6.1\n"
+"X-Generator: Weblate 4.6\n"
 
 #. dubious: Throw on malformed known types, otherwise log a warning.
 #: zypp/CheckSum.cc:136
@@ -4281,7 +4281,7 @@ msgstr "Pre tento repozitár nie je definovaná žiadna URL adresa."
 #: zypp/repo/SUSEMediaVerifier.cc:103
 #, boost-format
 msgid "Expected medium %1%/%2% identified by file '%3%' with content:"
-msgstr ""
+msgstr "Očakávané médium% 1%/%2% identifikované podľa súboru '%3%' s obsahom:"
 
 #. [lhs][rhs] 0 = installed; 1 = to be installed
 #. TranslatorExplanation %1%(filename) %2%(package1) %3%(package2)
