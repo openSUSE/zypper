@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-12 19:27+0100\n"
+"POT-Creation-Date: 2021-04-30 14:04+0200\n"
 "PO-Revision-Date: 2021-03-07 01:13+0000\n"
 "Last-Translator: Grace Yu <grace.yu@excel-gits.com>\n"
 "Language-Team: Chinese (China) <https://l10n.opensuse.org/projects/libzypp/"
@@ -3765,20 +3765,20 @@ msgstr[0] "（%d 天后过期）"
 
 #. translator: %1% is a gpg key ID like 3DBDC284
 #. %2% is a cache directories path
-#: zypp/RepoInfo.cc:542
+#: zypp/RepoInfo.cc:548
 #, boost-format
 msgid "Looking for gpg key ID %1% in cache %2%."
 msgstr "正在缓存 %2% 中查找 GPG 密钥 ID %1%。"
 
 #. translator: %1% is a gpg key ID like 3DBDC284
 #. %2% is a repositories name
-#: zypp/RepoInfo.cc:570
+#: zypp/RepoInfo.cc:576
 #, boost-format
 msgid "Looking for gpg key ID %1% in repository %2%."
 msgstr "正在软件源 %2% 中查找 GPG 密钥 ID %1%。"
 
 #. translator: %1% is a repositories name
-#: zypp/RepoInfo.cc:594
+#: zypp/RepoInfo.cc:600
 #, boost-format
 msgid "Repository %1% does not define additional 'gpgkey=' URLs."
 msgstr "软件源 %1% 并未定义额外的 'gpgkey=' URL。"
@@ -3789,7 +3789,7 @@ msgid "Cannot read repo directory '%1%': Permission denied"
 msgstr "无法读取源文件夹 '%1%'：权限被拒"
 
 #. TranslatorExplanation '%s' is a pathname
-#: zypp/RepoManager.cc:320 zypp/RepoManager.cc:783 zypp/RepoManager.cc:1563
+#: zypp/RepoManager.cc:320 zypp/RepoManager.cc:783 zypp/RepoManager.cc:1568
 #: zypp/repo/PluginServices.cc:49
 #, c-format, boost-format
 msgid "Failed to read directory '%s'"
@@ -3809,8 +3809,8 @@ msgid "Service alias cannot start with dot."
 msgstr "服务别名不能以点开头。"
 
 #. TranslatorExplanation '%s' is a filename
-#: zypp/RepoManager.cc:738 zypp/RepoManager.cc:1681 zypp/RepoManager.cc:1747
-#: zypp/RepoManager.cc:1825 zypp/RepoManager.cc:1890 zypp/RepoManager.cc:2021
+#: zypp/RepoManager.cc:738 zypp/RepoManager.cc:1686 zypp/RepoManager.cc:1752
+#: zypp/RepoManager.cc:1830 zypp/RepoManager.cc:1895 zypp/RepoManager.cc:2026
 #, c-format, boost-format
 msgid "Can't open file '%s' for writing."
 msgstr "无法打开 '%s' 文件进行写入。"
@@ -3824,36 +3824,36 @@ msgid "Unknown service '%1%': Removing orphaned service repository '%2%'"
 msgstr "未知服务 '%1%'：正在移除孤立的服务软件源 '%2%'"
 
 #. we will throw this later if no URL checks out fine
-#: zypp/RepoManager.cc:1114
+#: zypp/RepoManager.cc:1119
 msgid "Valid metadata not found at specified URL"
 msgid_plural "Valid metadata not found at specified URLs"
 msgstr[0] "在指定 URL 未找到有效元数据"
 
-#: zypp/RepoManager.cc:1166 zypp/RepoManager.cc:1279 zypp/RepoManager.cc:1335
+#: zypp/RepoManager.cc:1171 zypp/RepoManager.cc:1284 zypp/RepoManager.cc:1340
 #, c-format, boost-format
 msgid "Can't create %s"
 msgstr "无法创建 %s"
 
-#: zypp/RepoManager.cc:1174
+#: zypp/RepoManager.cc:1179
 msgid "Can't create metadata cache directory."
 msgstr "无法创建元数据缓存文件夹。"
 
-#: zypp/RepoManager.cc:1321
+#: zypp/RepoManager.cc:1326
 #, c-format, boost-format
 msgid "Building repository '%s' cache"
 msgstr "正在构建软件源 '%s' 的缓存"
 
-#: zypp/RepoManager.cc:1341
+#: zypp/RepoManager.cc:1346
 #, c-format, boost-format
 msgid "Can't create cache at %s - no writing permissions."
 msgstr "无法在 %s 创建缓存 - 无写入权限。"
 
-#: zypp/RepoManager.cc:1406
+#: zypp/RepoManager.cc:1411
 #, c-format, boost-format
 msgid "Failed to cache repo (%d)."
 msgstr "缓存软件源 (%d) 失败。"
 
-#: zypp/RepoManager.cc:1417
+#: zypp/RepoManager.cc:1422
 msgid "Unhandled repository type"
 msgstr "未处理的软件源类型"
 
@@ -3863,44 +3863,44 @@ msgstr "未处理的软件源类型"
 #. on ftp file-not-found(bnc #335906). Instead we'll check another types
 #. before throwing.
 #. TranslatorExplanation '%s' is an URL
-#: zypp/RepoManager.cc:1454 zypp/RepoManager.cc:2516
+#: zypp/RepoManager.cc:1459 zypp/RepoManager.cc:2521
 #, c-format, boost-format
 msgid "Error trying to read from '%s'"
 msgstr "试图读取 '%s' 出错"
 
 #. TranslatorExplanation '%s' is an URL
-#: zypp/RepoManager.cc:1507 zypp/RepoManager.cc:2524
+#: zypp/RepoManager.cc:1512 zypp/RepoManager.cc:2529
 #, c-format, boost-format
 msgid "Unknown error reading from '%s'"
 msgstr "读取 '%s' 遇到未知错误"
 
-#: zypp/RepoManager.cc:1645
+#: zypp/RepoManager.cc:1650
 #, c-format, boost-format
 msgid "Adding repository '%s'"
 msgstr "正在添加软件源 '%s'"
 
 #. TranslatorExplanation '%s' is an URL
-#: zypp/RepoManager.cc:1733
+#: zypp/RepoManager.cc:1738
 #, c-format, boost-format
 msgid "Invalid repo file name at '%s'"
 msgstr "'%s' 处的源文件名无效"
 
-#: zypp/RepoManager.cc:1774
+#: zypp/RepoManager.cc:1779
 #, c-format, boost-format
 msgid "Removing repository '%s'"
 msgstr "正在移除软件源 '%s'"
 
-#: zypp/RepoManager.cc:1793 zypp/RepoManager.cc:1871
+#: zypp/RepoManager.cc:1798 zypp/RepoManager.cc:1876
 msgid "Can't figure out where the repo is stored."
 msgstr "不确定软件源的存储位置。"
 
 #. TranslatorExplanation '%s' is a filename
-#: zypp/RepoManager.cc:1807 zypp/RepoManager.cc:2009
+#: zypp/RepoManager.cc:1812 zypp/RepoManager.cc:2014
 #, c-format, boost-format
 msgid "Can't delete '%s'"
 msgstr "无法删除 '%s'"
 
-#: zypp/RepoManager.cc:1997 zypp/RepoManager.cc:2447
+#: zypp/RepoManager.cc:2002 zypp/RepoManager.cc:2452
 msgid "Can't figure out where the service is stored."
 msgstr "不确定服务的储存位置。"
 
@@ -4254,14 +4254,20 @@ msgstr "Applydeltarpm 已失败。"
 msgid "Service plugin does not support changing an attribute."
 msgstr "服务插件不支持修改属性。"
 
-#: zypp/repo/RepoProvideFile.cc:261
+#: zypp/repo/RepoProvideFile.cc:248
 #, c-format, boost-format
 msgid "Can't provide file '%s' from repository '%s'"
 msgstr "无法提供文件 '%s'，软件源 '%s' 中找不到该文件"
 
-#: zypp/repo/RepoProvideFile.cc:267
+#: zypp/repo/RepoProvideFile.cc:254
 msgid "No url in repository."
 msgstr "软件源中没有 url。"
+
+#. Translator: %1% the expected medium number; %2% the total number of media in the set; %3% the ident file on the medium.
+#: zypp/repo/SUSEMediaVerifier.cc:103
+#, boost-format
+msgid "Expected medium %1%/%2% identified by file '%3%' with content:"
+msgstr ""
 
 #. [lhs][rhs] 0 = installed; 1 = to be installed
 #. TranslatorExplanation %1%(filename) %2%(package1) %3%(package2)
@@ -4431,7 +4437,7 @@ msgstr "通过忽略一些依赖关系来断开 %s"
 msgid "generally ignore of some dependencies"
 msgstr "通常忽略一些依赖关系"
 
-#: zypp/solver/detail/SATResolver.cc:1075
+#: zypp/solver/detail/SATResolver.cc:1090
 #, boost-format
 msgid ""
 "the installed %1% does not belong to a distupgrade repository and must be "
@@ -4439,161 +4445,161 @@ msgid ""
 msgstr "安装的 %1% 不属于发行版升级源，必须替换"
 
 #. just in case
-#: zypp/solver/detail/SATResolver.cc:1077
+#: zypp/solver/detail/SATResolver.cc:1092
 #, boost-format
 msgid "the to be installed %1% does not belong to a distupgrade repository"
 msgstr "要安装的 %1% 不属于发行版升级源"
 
-#: zypp/solver/detail/SATResolver.cc:1081
+#: zypp/solver/detail/SATResolver.cc:1096
 #, boost-format
 msgid "the installed %1% has inferior architecture"
 msgstr "安装的 %1% 的架构较低"
 
-#: zypp/solver/detail/SATResolver.cc:1083
+#: zypp/solver/detail/SATResolver.cc:1098
 #, boost-format
 msgid "the to be installed %1% has inferior architecture"
 msgstr "要安装的 %1% 的架构较低"
 
-#: zypp/solver/detail/SATResolver.cc:1086
+#: zypp/solver/detail/SATResolver.cc:1101
 #, boost-format
 msgid "problem with the installed %1%"
 msgstr "安装的 %1% 有问题"
 
-#: zypp/solver/detail/SATResolver.cc:1089
-#: zypp/solver/detail/SATResolver.cc:1557
-#: zypp/solver/detail/SATResolver.cc:2087
+#: zypp/solver/detail/SATResolver.cc:1104
+#: zypp/solver/detail/SATResolver.cc:1572
+#: zypp/solver/detail/SATResolver.cc:2102
 msgid "conflicting requests"
 msgstr "冲突的请求"
 
-#: zypp/solver/detail/SATResolver.cc:1092
-#: zypp/solver/detail/SATResolver.cc:1560
-#: zypp/solver/detail/SATResolver.cc:2089
+#: zypp/solver/detail/SATResolver.cc:1107
+#: zypp/solver/detail/SATResolver.cc:1575
+#: zypp/solver/detail/SATResolver.cc:2104
 msgid "some dependency problem"
 msgstr "一些依赖性问题"
 
-#: zypp/solver/detail/SATResolver.cc:1095
+#: zypp/solver/detail/SATResolver.cc:1110
 #, boost-format
 msgid "nothing provides the requested '%1%'"
 msgstr "没有软件源能提供所请求的 \"%1%\""
 
-#: zypp/solver/detail/SATResolver.cc:1096
-#: zypp/solver/detail/SATResolver.cc:1100
+#: zypp/solver/detail/SATResolver.cc:1111
+#: zypp/solver/detail/SATResolver.cc:1115
 msgid "Have you enabled all the required repositories?"
 msgstr "您是否启用了全部所需的软件源？"
 
-#: zypp/solver/detail/SATResolver.cc:1099
+#: zypp/solver/detail/SATResolver.cc:1114
 #, boost-format
 msgid "the requested package %1% does not exist"
 msgstr "请求的软件包 %1% 不存在"
 
-#: zypp/solver/detail/SATResolver.cc:1103
-#: zypp/solver/detail/SATResolver.cc:1571
-#: zypp/solver/detail/SATResolver.cc:2097
+#: zypp/solver/detail/SATResolver.cc:1118
+#: zypp/solver/detail/SATResolver.cc:1586
+#: zypp/solver/detail/SATResolver.cc:2112
 msgid "unsupported request"
 msgstr "不支持的请求"
 
-#: zypp/solver/detail/SATResolver.cc:1106
+#: zypp/solver/detail/SATResolver.cc:1121
 #, boost-format
 msgid "'%1%' is provided by the system and cannot be erased"
 msgstr "\"%1%\" 由系统提供，无法擦除"
 
-#: zypp/solver/detail/SATResolver.cc:1109
+#: zypp/solver/detail/SATResolver.cc:1124
 #, boost-format
 msgid "%1% is not installable"
 msgstr "%1% 不可安装"
 
-#: zypp/solver/detail/SATResolver.cc:1114
+#: zypp/solver/detail/SATResolver.cc:1129
 #, boost-format
 msgid "nothing provides '%1%' needed by the installed %2%"
 msgstr "没有软件源能提供安装的 %2% 所需的 \"%1%\""
 
-#: zypp/solver/detail/SATResolver.cc:1116
+#: zypp/solver/detail/SATResolver.cc:1131
 #, boost-format
 msgid "nothing provides '%1%' needed by the to be installed %2%"
 msgstr "没有软件源能提供要安装的 %2% 所需的 \"%1%\""
 
-#: zypp/solver/detail/SATResolver.cc:1119
+#: zypp/solver/detail/SATResolver.cc:1134
 #, boost-format
 msgid "cannot install both %1% and %2%"
 msgstr "无法同时安装 %1% 和 %2%"
 
-#: zypp/solver/detail/SATResolver.cc:1124
+#: zypp/solver/detail/SATResolver.cc:1139
 #, boost-format
 msgid "the installed %1% conflicts with '%2%' provided by the installed %3%"
 msgstr "安装的 %1% 与安装的 %3% 所提供的 \"%2%\" 冲突"
 
-#: zypp/solver/detail/SATResolver.cc:1126
+#: zypp/solver/detail/SATResolver.cc:1141
 #, boost-format
 msgid ""
 "the installed %1% conflicts with '%2%' provided by the to be installed %3%"
 msgstr "安装的 %1% 与要安装的 %3% 所提供的 \"%2%\" 冲突"
 
-#: zypp/solver/detail/SATResolver.cc:1130
+#: zypp/solver/detail/SATResolver.cc:1145
 #, boost-format
 msgid ""
 "the to be installed %1% conflicts with '%2%' provided by the installed %3%"
 msgstr "要安装的 %1% 与安装的 %3% 所提供的 \"%2%\" 冲突"
 
-#: zypp/solver/detail/SATResolver.cc:1132
+#: zypp/solver/detail/SATResolver.cc:1147
 #, boost-format
 msgid ""
 "the to be installed %1% conflicts with '%2%' provided by the to be installed "
 "%3%"
 msgstr "要安装的 %1% 与要安装的 %3% 所提供的 \"%2%\" 冲突"
 
-#: zypp/solver/detail/SATResolver.cc:1139
+#: zypp/solver/detail/SATResolver.cc:1154
 #, boost-format
 msgid "the installed %1% obsoletes '%2%' provided by the installed %3%"
 msgstr "安装的 %1% 会淘汰安装的 %3% 所提供的 \"%2%\""
 
-#: zypp/solver/detail/SATResolver.cc:1141
+#: zypp/solver/detail/SATResolver.cc:1156
 #, boost-format
 msgid "the installed %1% obsoletes '%2%' provided by the to be installed %3%"
 msgstr "安装的 %1% 会淘汰要安装的 %3% 所提供的 \"%2%\""
 
-#: zypp/solver/detail/SATResolver.cc:1145
+#: zypp/solver/detail/SATResolver.cc:1160
 #, boost-format
 msgid "the to be installed %1% obsoletes '%2%' provided by the installed %3%"
 msgstr "要安装的 %1% 会淘汰安装的 %3% 所提供的 \"%2%\""
 
-#: zypp/solver/detail/SATResolver.cc:1147
+#: zypp/solver/detail/SATResolver.cc:1162
 #, boost-format
 msgid ""
 "the to be installed %1% obsoletes '%2%' provided by the to be installed %3%"
 msgstr "要安装的 %1% 会淘汰要安装的 %3% 所提供的 \"%2%\""
 
-#: zypp/solver/detail/SATResolver.cc:1152
+#: zypp/solver/detail/SATResolver.cc:1167
 #, boost-format
 msgid "the installed %1% conflicts with '%2%' provided by itself"
 msgstr "安装的 %1% 与其自身所提供的 \"%2%\" 冲突"
 
-#: zypp/solver/detail/SATResolver.cc:1154
+#: zypp/solver/detail/SATResolver.cc:1169
 #, boost-format
 msgid "the to be installed %1% conflicts with '%2%' provided by itself"
 msgstr "要安装的 %1% 与其自身所提供的 \"%2%\" 冲突"
 
-#: zypp/solver/detail/SATResolver.cc:1186
+#: zypp/solver/detail/SATResolver.cc:1201
 #, boost-format
 msgid ""
 "the installed %1% requires '%2%', but this requirement cannot be provided"
 msgstr "安装的 %1% 需要 \"%2%\"，但无法满足此要求"
 
-#: zypp/solver/detail/SATResolver.cc:1188
+#: zypp/solver/detail/SATResolver.cc:1203
 #, boost-format
 msgid ""
 "the to be installed %1% requires '%2%', but this requirement cannot be "
 "provided"
 msgstr "要安装的 %1% 需要 \"%2%\"，但无法满足此要求"
 
-#: zypp/solver/detail/SATResolver.cc:1190
-#: zypp/solver/detail/SATResolver.cc:1629
-#: zypp/solver/detail/SATResolver.cc:2118
+#: zypp/solver/detail/SATResolver.cc:1205
+#: zypp/solver/detail/SATResolver.cc:1644
+#: zypp/solver/detail/SATResolver.cc:2133
 msgid "deleted providers: "
 msgstr "已删除提供者： "
 
-#: zypp/solver/detail/SATResolver.cc:1200
-#: zypp/solver/detail/SATResolver.cc:1639
-#: zypp/solver/detail/SATResolver.cc:2119
+#: zypp/solver/detail/SATResolver.cc:1215
+#: zypp/solver/detail/SATResolver.cc:1654
+#: zypp/solver/detail/SATResolver.cc:2134
 msgid ""
 "\n"
 "not installable providers: "
@@ -4601,122 +4607,122 @@ msgstr ""
 "\n"
 "无法安装的提供者： "
 
-#: zypp/solver/detail/SATResolver.cc:1202
-#: zypp/solver/detail/SATResolver.cc:1641
-#: zypp/solver/detail/SATResolver.cc:2120
+#: zypp/solver/detail/SATResolver.cc:1217
+#: zypp/solver/detail/SATResolver.cc:1656
+#: zypp/solver/detail/SATResolver.cc:2135
 msgid "not installable providers: "
 msgstr "无法安装的提供者： "
 
-#: zypp/solver/detail/SATResolver.cc:1264
+#: zypp/solver/detail/SATResolver.cc:1279
 #, boost-format
 msgid "remove lock to allow removal of %1%"
 msgstr "移除锁定以允许移除 %1%"
 
-#: zypp/solver/detail/SATResolver.cc:1269
-#: zypp/solver/detail/SATResolver.cc:1305
+#: zypp/solver/detail/SATResolver.cc:1284
+#: zypp/solver/detail/SATResolver.cc:1320
 #, boost-format
 msgid "do not install %1%"
 msgstr "不安装 %1%"
 
-#: zypp/solver/detail/SATResolver.cc:1284
-#: zypp/solver/detail/SATResolver.cc:1326
+#: zypp/solver/detail/SATResolver.cc:1299
+#: zypp/solver/detail/SATResolver.cc:1341
 #, boost-format
 msgid "keep %1%"
 msgstr "保留 %1%"
 
-#: zypp/solver/detail/SATResolver.cc:1289
+#: zypp/solver/detail/SATResolver.cc:1304
 #, boost-format
 msgid "remove lock to allow installation of %1%"
 msgstr "移除锁定以允许安装 %1%"
 
-#: zypp/solver/detail/SATResolver.cc:1340
-#: zypp/solver/detail/SATResolver.cc:1361
-#: zypp/solver/detail/SATResolver.cc:1779
-#: zypp/solver/detail/SATResolver.cc:1800
-#: zypp/solver/detail/SATResolver.cc:2135
-#: zypp/solver/detail/SATResolver.cc:2139
+#: zypp/solver/detail/SATResolver.cc:1355
+#: zypp/solver/detail/SATResolver.cc:1376
+#: zypp/solver/detail/SATResolver.cc:1794
+#: zypp/solver/detail/SATResolver.cc:1815
+#: zypp/solver/detail/SATResolver.cc:2150
+#: zypp/solver/detail/SATResolver.cc:2154
 msgid "This request will break your system!"
 msgstr "此请求将破坏您的系统！"
 
-#: zypp/solver/detail/SATResolver.cc:1341
-#: zypp/solver/detail/SATResolver.cc:1362
-#: zypp/solver/detail/SATResolver.cc:1780
-#: zypp/solver/detail/SATResolver.cc:1801
-#: zypp/solver/detail/SATResolver.cc:2136
-#: zypp/solver/detail/SATResolver.cc:2140
+#: zypp/solver/detail/SATResolver.cc:1356
+#: zypp/solver/detail/SATResolver.cc:1377
+#: zypp/solver/detail/SATResolver.cc:1795
+#: zypp/solver/detail/SATResolver.cc:1816
+#: zypp/solver/detail/SATResolver.cc:2151
+#: zypp/solver/detail/SATResolver.cc:2155
 msgid "ignore the warning of a broken system"
 msgstr "忽略损坏系统的警告"
 
-#: zypp/solver/detail/SATResolver.cc:1346
+#: zypp/solver/detail/SATResolver.cc:1361
 #, boost-format
 msgid "do not ask to install a solvable providing %1%"
 msgstr "不询问就安装提供 %1% 的一个解析项"
 
-#: zypp/solver/detail/SATResolver.cc:1368
+#: zypp/solver/detail/SATResolver.cc:1383
 #, boost-format
 msgid "do not ask to delete all solvables providing %1%"
 msgstr "不询问就删除提供 %1% 的所有解析项"
 
-#: zypp/solver/detail/SATResolver.cc:1381
+#: zypp/solver/detail/SATResolver.cc:1396
 #, boost-format
 msgid "do not install most recent version of %1%"
 msgstr "不安装最新版本的 %1%"
 
-#: zypp/solver/detail/SATResolver.cc:1402
+#: zypp/solver/detail/SATResolver.cc:1417
 #, boost-format
 msgid "keep %1% despite the inferior architecture"
 msgstr "即使架构较低，仍保留 %1%"
 
-#: zypp/solver/detail/SATResolver.cc:1407
+#: zypp/solver/detail/SATResolver.cc:1422
 #, boost-format
 msgid "install %1% despite the inferior architecture"
 msgstr "即使架构较低，仍安装 %1%"
 
-#: zypp/solver/detail/SATResolver.cc:1416
+#: zypp/solver/detail/SATResolver.cc:1431
 #, boost-format
 msgid "keep obsolete %1%"
 msgstr "保留淘汰的 %1%"
 
-#: zypp/solver/detail/SATResolver.cc:1421
+#: zypp/solver/detail/SATResolver.cc:1436
 #, boost-format
 msgid "install %1% from excluded repository"
 msgstr "安装来自排除的软件源的 %1%"
 
 #. translator: %1% is a package name
-#: zypp/solver/detail/SATResolver.cc:1435
-#: zypp/solver/detail/SATResolver.cc:1874
-#: zypp/solver/detail/SATResolver.cc:2154
+#: zypp/solver/detail/SATResolver.cc:1450
+#: zypp/solver/detail/SATResolver.cc:1889
+#: zypp/solver/detail/SATResolver.cc:2169
 #, boost-format
 msgid "install %1% although it has been retracted"
 msgstr "尽管 %1% 已收回，仍予以安装"
 
 #. translator: %1% is a package name
-#: zypp/solver/detail/SATResolver.cc:1438
-#: zypp/solver/detail/SATResolver.cc:1877
-#: zypp/solver/detail/SATResolver.cc:2155
+#: zypp/solver/detail/SATResolver.cc:1453
+#: zypp/solver/detail/SATResolver.cc:1892
+#: zypp/solver/detail/SATResolver.cc:2170
 #, boost-format
 msgid "allow to install the PTF %1%"
 msgstr "允许安装 PTF %1%"
 
 #. translator: %1% is a package name
-#: zypp/solver/detail/SATResolver.cc:1441
-#: zypp/solver/detail/SATResolver.cc:1880
-#: zypp/solver/detail/SATResolver.cc:2156
+#: zypp/solver/detail/SATResolver.cc:1456
+#: zypp/solver/detail/SATResolver.cc:1895
+#: zypp/solver/detail/SATResolver.cc:2171
 #, boost-format
 msgid "install %1% although it is blacklisted"
 msgstr "尽管 %1% 已列入黑名单，仍予以安装"
 
-#: zypp/solver/detail/SATResolver.cc:1461
+#: zypp/solver/detail/SATResolver.cc:1476
 #, boost-format
 msgid "downgrade of %1% to %2%"
 msgstr "将 %1% 降级到 %2%"
 
-#: zypp/solver/detail/SATResolver.cc:1468
+#: zypp/solver/detail/SATResolver.cc:1483
 #, boost-format
 msgid "architecture change of %1% to %2%"
 msgstr "架构从 %1% 变为 %2%"
 
-#: zypp/solver/detail/SATResolver.cc:1477
+#: zypp/solver/detail/SATResolver.cc:1492
 #, boost-format
 msgid ""
 "install %1% (with vendor change)\n"
@@ -4725,192 +4731,192 @@ msgstr ""
 "安装 %1%（并更改厂商）\n"
 "  %2%  -->  %3%"
 
-#: zypp/solver/detail/SATResolver.cc:1483
+#: zypp/solver/detail/SATResolver.cc:1498
 #, boost-format
 msgid "replacement of %1% with %2%"
 msgstr "将 %1% 用 %2% 取代"
 
-#: zypp/solver/detail/SATResolver.cc:1494
+#: zypp/solver/detail/SATResolver.cc:1509
 #, boost-format
 msgid "deinstallation of %1%"
 msgstr "卸载 %1%"
 
-#: zypp/solver/detail/SATResolver.cc:1548
-#: zypp/solver/detail/SATResolver.cc:2081
+#: zypp/solver/detail/SATResolver.cc:1563
+#: zypp/solver/detail/SATResolver.cc:2096
 #, c-format, boost-format
 msgid "%s does not belong to a distupgrade repository"
 msgstr "%s 不属于发行版升级源"
 
-#: zypp/solver/detail/SATResolver.cc:1551
-#: zypp/solver/detail/SATResolver.cc:2083
+#: zypp/solver/detail/SATResolver.cc:1566
+#: zypp/solver/detail/SATResolver.cc:2098
 #, c-format, boost-format
 msgid "%s has inferior architecture"
 msgstr "%s 架构不对应"
 
-#: zypp/solver/detail/SATResolver.cc:1554
-#: zypp/solver/detail/SATResolver.cc:2085
+#: zypp/solver/detail/SATResolver.cc:1569
+#: zypp/solver/detail/SATResolver.cc:2100
 #, c-format, boost-format
 msgid "problem with installed package %s"
 msgstr "已安装的 %s 软件包有问题"
 
-#: zypp/solver/detail/SATResolver.cc:1563
-#: zypp/solver/detail/SATResolver.cc:2091
+#: zypp/solver/detail/SATResolver.cc:1578
+#: zypp/solver/detail/SATResolver.cc:2106
 #, c-format, boost-format
 msgid "nothing provides requested %s"
 msgstr "没有什么能提供所需的 %s"
 
-#: zypp/solver/detail/SATResolver.cc:1564
-#: zypp/solver/detail/SATResolver.cc:1568
-#: zypp/solver/detail/SATResolver.cc:2092
-#: zypp/solver/detail/SATResolver.cc:2095
+#: zypp/solver/detail/SATResolver.cc:1579
+#: zypp/solver/detail/SATResolver.cc:1583
+#: zypp/solver/detail/SATResolver.cc:2107
+#: zypp/solver/detail/SATResolver.cc:2110
 msgid "Have you enabled all requested repositories?"
 msgstr "您启用了全部请求的软件源了吗？"
 
-#: zypp/solver/detail/SATResolver.cc:1567
-#: zypp/solver/detail/SATResolver.cc:2094
+#: zypp/solver/detail/SATResolver.cc:1582
+#: zypp/solver/detail/SATResolver.cc:2109
 #, c-format, boost-format
 msgid "package %s does not exist"
 msgstr "软件包 %s 不存在"
 
-#: zypp/solver/detail/SATResolver.cc:1574
-#: zypp/solver/detail/SATResolver.cc:2099
+#: zypp/solver/detail/SATResolver.cc:1589
+#: zypp/solver/detail/SATResolver.cc:2114
 #, c-format, boost-format
 msgid "%s is provided by the system and cannot be erased"
 msgstr "%s 由系统提供，无法擦除"
 
-#: zypp/solver/detail/SATResolver.cc:1577
-#: zypp/solver/detail/SATResolver.cc:2101
+#: zypp/solver/detail/SATResolver.cc:1592
+#: zypp/solver/detail/SATResolver.cc:2116
 #, c-format, boost-format
 msgid "%s is not installable"
 msgstr "%s 不可安装"
 
 #. for setting weak dependencies
-#: zypp/solver/detail/SATResolver.cc:1581
-#: zypp/solver/detail/SATResolver.cc:2104
+#: zypp/solver/detail/SATResolver.cc:1596
+#: zypp/solver/detail/SATResolver.cc:2119
 #, c-format, boost-format
 msgid "nothing provides %s needed by %s"
 msgstr "没有什么能提供 %s，而它为 %s 所需"
 
-#: zypp/solver/detail/SATResolver.cc:1584
-#: zypp/solver/detail/SATResolver.cc:2106
+#: zypp/solver/detail/SATResolver.cc:1599
+#: zypp/solver/detail/SATResolver.cc:2121
 #, c-format, boost-format
 msgid "cannot install both %s and %s"
 msgstr "无法同时安装 %s 和 %s"
 
-#: zypp/solver/detail/SATResolver.cc:1587
-#: zypp/solver/detail/SATResolver.cc:2108
+#: zypp/solver/detail/SATResolver.cc:1602
+#: zypp/solver/detail/SATResolver.cc:2123
 #, c-format, boost-format
 msgid "%s conflicts with %s provided by %s"
 msgstr "%s 与 %s 冲突，后者由 %s 提供"
 
-#: zypp/solver/detail/SATResolver.cc:1590
-#: zypp/solver/detail/SATResolver.cc:2110
+#: zypp/solver/detail/SATResolver.cc:1605
+#: zypp/solver/detail/SATResolver.cc:2125
 #, c-format, boost-format
 msgid "%s obsoletes %s provided by %s"
 msgstr "%s 淘汰了 %s，后者由 %s 提供"
 
-#: zypp/solver/detail/SATResolver.cc:1593
-#: zypp/solver/detail/SATResolver.cc:2112
+#: zypp/solver/detail/SATResolver.cc:1608
+#: zypp/solver/detail/SATResolver.cc:2127
 #, c-format, boost-format
 msgid "installed %s obsoletes %s provided by %s"
 msgstr "已安装的 %s 淘汰了 %s，后者由 %s 提供"
 
-#: zypp/solver/detail/SATResolver.cc:1596
-#: zypp/solver/detail/SATResolver.cc:2114
+#: zypp/solver/detail/SATResolver.cc:1611
+#: zypp/solver/detail/SATResolver.cc:2129
 #, c-format, boost-format
 msgid "solvable %s conflicts with %s provided by itself"
 msgstr "可解析项 %s 与自身提供的 %s 冲突"
 
-#: zypp/solver/detail/SATResolver.cc:1627
-#: zypp/solver/detail/SATResolver.cc:2116
+#: zypp/solver/detail/SATResolver.cc:1642
+#: zypp/solver/detail/SATResolver.cc:2131
 #, c-format, boost-format
 msgid "%s requires %s, but this requirement cannot be provided"
 msgstr "%s 需要 %s，但无法满足此需求"
 
-#: zypp/solver/detail/SATResolver.cc:1703
-#: zypp/solver/detail/SATResolver.cc:2125
+#: zypp/solver/detail/SATResolver.cc:1718
+#: zypp/solver/detail/SATResolver.cc:2140
 #, c-format, boost-format
 msgid "remove lock to allow removal of %s"
 msgstr "移除锁定以允许移除 %s"
 
-#: zypp/solver/detail/SATResolver.cc:1708
-#: zypp/solver/detail/SATResolver.cc:1744
-#: zypp/solver/detail/SATResolver.cc:2126
-#: zypp/solver/detail/SATResolver.cc:2131
+#: zypp/solver/detail/SATResolver.cc:1723
+#: zypp/solver/detail/SATResolver.cc:1759
+#: zypp/solver/detail/SATResolver.cc:2141
+#: zypp/solver/detail/SATResolver.cc:2146
 #, c-format, boost-format
 msgid "do not install %s"
 msgstr "不安装 %s"
 
-#: zypp/solver/detail/SATResolver.cc:1723
-#: zypp/solver/detail/SATResolver.cc:1765
-#: zypp/solver/detail/SATResolver.cc:2128
-#: zypp/solver/detail/SATResolver.cc:2133
+#: zypp/solver/detail/SATResolver.cc:1738
+#: zypp/solver/detail/SATResolver.cc:1780
+#: zypp/solver/detail/SATResolver.cc:2143
+#: zypp/solver/detail/SATResolver.cc:2148
 #, c-format, boost-format
 msgid "keep %s"
 msgstr "保留 %s"
 
-#: zypp/solver/detail/SATResolver.cc:1728
-#: zypp/solver/detail/SATResolver.cc:2129
+#: zypp/solver/detail/SATResolver.cc:1743
+#: zypp/solver/detail/SATResolver.cc:2144
 #, c-format, boost-format
 msgid "remove lock to allow installation of %s"
 msgstr "移除锁定以允许安装 %s"
 
-#: zypp/solver/detail/SATResolver.cc:1785
-#: zypp/solver/detail/SATResolver.cc:2137
+#: zypp/solver/detail/SATResolver.cc:1800
+#: zypp/solver/detail/SATResolver.cc:2152
 #, c-format, boost-format
 msgid "do not ask to install a solvable providing %s"
 msgstr "不询问就安装一个提供 %s 的解析项"
 
-#: zypp/solver/detail/SATResolver.cc:1807
-#: zypp/solver/detail/SATResolver.cc:2141
+#: zypp/solver/detail/SATResolver.cc:1822
+#: zypp/solver/detail/SATResolver.cc:2156
 #, c-format, boost-format
 msgid "do not ask to delete all solvables providing %s"
 msgstr "不询问就删除全部提供 %s 的解析项"
 
-#: zypp/solver/detail/SATResolver.cc:1820
-#: zypp/solver/detail/SATResolver.cc:2143
+#: zypp/solver/detail/SATResolver.cc:1835
+#: zypp/solver/detail/SATResolver.cc:2158
 #, c-format, boost-format
 msgid "do not install most recent version of %s"
 msgstr "不安装最新版本的 %s"
 
-#: zypp/solver/detail/SATResolver.cc:1841
-#: zypp/solver/detail/SATResolver.cc:2146
+#: zypp/solver/detail/SATResolver.cc:1856
+#: zypp/solver/detail/SATResolver.cc:2161
 #, c-format, boost-format
 msgid "keep %s despite the inferior architecture"
 msgstr "保留 %s，即使架构不对应"
 
-#: zypp/solver/detail/SATResolver.cc:1846
-#: zypp/solver/detail/SATResolver.cc:2147
+#: zypp/solver/detail/SATResolver.cc:1861
+#: zypp/solver/detail/SATResolver.cc:2162
 #, c-format, boost-format
 msgid "install %s despite the inferior architecture"
 msgstr "尽管架构不对应仍安装 %s"
 
-#: zypp/solver/detail/SATResolver.cc:1855
-#: zypp/solver/detail/SATResolver.cc:2150
+#: zypp/solver/detail/SATResolver.cc:1870
+#: zypp/solver/detail/SATResolver.cc:2165
 #, c-format, boost-format
 msgid "keep obsolete %s"
 msgstr "保留已淘汰的 %s"
 
-#: zypp/solver/detail/SATResolver.cc:1860
-#: zypp/solver/detail/SATResolver.cc:2151
+#: zypp/solver/detail/SATResolver.cc:1875
+#: zypp/solver/detail/SATResolver.cc:2166
 #, c-format, boost-format
 msgid "install %s from excluded repository"
 msgstr "从排除的软件源安装 %s"
 
-#: zypp/solver/detail/SATResolver.cc:1900
-#: zypp/solver/detail/SATResolver.cc:2159
+#: zypp/solver/detail/SATResolver.cc:1915
+#: zypp/solver/detail/SATResolver.cc:2174
 #, c-format, boost-format
 msgid "downgrade of %s to %s"
 msgstr "降级 %s 到 %s"
 
-#: zypp/solver/detail/SATResolver.cc:1907
-#: zypp/solver/detail/SATResolver.cc:2160
+#: zypp/solver/detail/SATResolver.cc:1922
+#: zypp/solver/detail/SATResolver.cc:2175
 #, c-format, boost-format
 msgid "architecture change of %s to %s"
 msgstr "架构从 %s 变更到 %s"
 
-#: zypp/solver/detail/SATResolver.cc:1916
-#: zypp/solver/detail/SATResolver.cc:2161
+#: zypp/solver/detail/SATResolver.cc:1931
+#: zypp/solver/detail/SATResolver.cc:2176
 #, c-format, boost-format
 msgid ""
 "install %s (with vendor change)\n"
@@ -4919,14 +4925,14 @@ msgstr ""
 "安装 %s（包括厂商变更）\n"
 "  %s --> %s"
 
-#: zypp/solver/detail/SATResolver.cc:1925
-#: zypp/solver/detail/SATResolver.cc:2162
+#: zypp/solver/detail/SATResolver.cc:1940
+#: zypp/solver/detail/SATResolver.cc:2177
 #, c-format, boost-format
 msgid "replacement of %s with %s"
 msgstr "将 %s 用 %s 取代"
 
-#: zypp/solver/detail/SATResolver.cc:1936
-#: zypp/solver/detail/SATResolver.cc:2164
+#: zypp/solver/detail/SATResolver.cc:1951
+#: zypp/solver/detail/SATResolver.cc:2179
 #, c-format, boost-format
 msgid "deinstallation of %s"
 msgstr "卸载 %s"
@@ -4938,7 +4944,7 @@ msgid "Executing %%posttrans script '%1%'"
 msgstr "正在执行 %%posttrans 脚本“%1%”"
 
 #. show a final message
-#: zypp/target/RpmPostTransCollector.cc:168
+#: zypp/target/RpmPostTransCollector.cc:173
 #, c-format, boost-format
 msgid "Executing %posttrans scripts"
 msgstr "正在执行 %p osttrans 脚本"
@@ -4947,40 +4953,40 @@ msgstr "正在执行 %p osttrans 脚本"
 msgid "Installation has been aborted as directed."
 msgstr "安装已按指示中止。"
 
-#: zypp/target/TargetImpl.cc:347
+#: zypp/target/TargetImpl.cc:397
 msgid " executed"
 msgstr " 已执行"
 
-#: zypp/target/TargetImpl.cc:369
+#: zypp/target/TargetImpl.cc:419
 msgid " execution failed"
 msgstr " 执行失败"
 
 #. translators: We may find the same script content in files with different names.
 #. Only the first occurence is executed, subsequent ones are skipped. It's a one-line
 #. message for a log file. Preferably start translation with "%s"
-#: zypp/target/TargetImpl.cc:486
+#: zypp/target/TargetImpl.cc:536
 #, c-format, boost-format
 msgid "%s already executed as %s)"
 msgstr "%s 早已作为 %s 执行了）"
 
-#: zypp/target/TargetImpl.cc:496
+#: zypp/target/TargetImpl.cc:546
 msgid " execution skipped while aborting"
 msgstr " 中止时跳过执行"
 
-#: zypp/target/TargetImpl.cc:551 zypp/target/TargetImpl.cc:571
-#: zypp/target/TargetImpl.cc:599 zypp/target/TargetImpl.cc:636
-#: zypp/target/TargetImpl.cc:644
+#: zypp/target/TargetImpl.cc:601 zypp/target/TargetImpl.cc:621
+#: zypp/target/TargetImpl.cc:649 zypp/target/TargetImpl.cc:686
+#: zypp/target/TargetImpl.cc:694
 msgid "Error sending update message notification."
 msgstr "发送更新消息通知出错。"
 
-#: zypp/target/TargetImpl.cc:695
+#: zypp/target/TargetImpl.cc:745
 msgid "New update message"
 msgstr "新更新消息"
 
 #. TranslatorExplanation after semicolon is error message
 #. TranslatorExplanation the colon is followed by an error message
-#: zypp/target/rpm/RpmDb.cc:465 zypp/target/rpm/RpmDb.cc:1726
-#: zypp/target/rpm/RpmDb.cc:1882
+#: zypp/target/rpm/RpmDb.cc:465 zypp/target/rpm/RpmDb.cc:1728
+#: zypp/target/rpm/RpmDb.cc:1884
 msgid "RPM failed: "
 msgstr "RPM 失败： "
 
@@ -5002,19 +5008,19 @@ msgstr "未签署包！"
 
 #. Translator: %s = name of an rpm package. A list of diffs follows
 #. this message.
-#: zypp/target/rpm/RpmDb.cc:1524
+#: zypp/target/rpm/RpmDb.cc:1526
 #, c-format, boost-format
 msgid "Changed configuration files for %s:"
 msgstr "%s 配置文件有变化："
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:1707
+#: zypp/target/rpm/RpmDb.cc:1709
 #, c-format, boost-format
 msgid "rpm saved %s as %s, but it was impossible to determine the difference"
 msgstr "rpm 已将 %s 另存为 %s，但是无法确定两者的差异"
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:1709
+#: zypp/target/rpm/RpmDb.cc:1711
 #, c-format, boost-format
 msgid ""
 "rpm saved %s as %s.\n"
@@ -5024,13 +5030,13 @@ msgstr ""
 "以下是前 25 行差异：\n"
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:1712
+#: zypp/target/rpm/RpmDb.cc:1714
 #, c-format, boost-format
 msgid "rpm created %s as %s, but it was impossible to determine the difference"
 msgstr "rpm 已将 %s 创建为 %s，但是无法确定两者的差异"
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:1714
+#: zypp/target/rpm/RpmDb.cc:1716
 #, c-format, boost-format
 msgid ""
 "rpm created %s as %s.\n"
@@ -5041,113 +5047,113 @@ msgstr ""
 
 #. report additional rpm output in finish
 #. TranslatorExplanation Text is followed by a ':'  and the actual output.
-#: zypp/target/rpm/RpmDb.cc:1739 zypp/target/rpm/RpmDb.cc:1895
+#: zypp/target/rpm/RpmDb.cc:1741 zypp/target/rpm/RpmDb.cc:1897
 msgid "Additional rpm output"
 msgstr "额外的 RPM 输出"
 
-#: zypp/target/rpm/RpmDb.cc:2037
+#: zypp/target/rpm/RpmDb.cc:2039
 #, c-format, boost-format
 msgid "created backup %s"
 msgstr "已创建备份 %s"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2058
+#: zypp/target/rpm/RpmDb.cc:2060
 msgid "Signature is OK"
 msgstr "签名正确"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2060
+#: zypp/target/rpm/RpmDb.cc:2062
 msgid "Unknown type of signature"
 msgstr "未知签名类型"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2062
+#: zypp/target/rpm/RpmDb.cc:2064
 msgid "Signature does not verify"
 msgstr "无法校验签名"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2064
+#: zypp/target/rpm/RpmDb.cc:2066
 msgid "Signature is OK, but key is not trusted"
 msgstr "签名正确，但密钥是非受信的"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2066
+#: zypp/target/rpm/RpmDb.cc:2068
 msgid "Signatures public key is not available"
 msgstr "签名公钥不可用"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2068
+#: zypp/target/rpm/RpmDb.cc:2070
 msgid "File does not exist or signature can't be checked"
 msgstr "文件不存在或无法检查其签名"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2070
+#: zypp/target/rpm/RpmDb.cc:2072
 msgid "File is unsigned"
 msgstr "未签署文件"
 
-#: zypp/url/UrlBase.cc:219
+#: zypp/url/UrlBase.cc:220
 #, c-format, boost-format
 msgid "Url scheme does not allow a %s"
 msgstr "URL 方案不允许使用 %s"
 
-#: zypp/url/UrlBase.cc:238
+#: zypp/url/UrlBase.cc:239
 #, c-format, boost-format
 msgid "Invalid %s component '%s'"
 msgstr "无效的 %s 组件 '%s'"
 
-#: zypp/url/UrlBase.cc:245
+#: zypp/url/UrlBase.cc:246
 #, c-format, boost-format
 msgid "Invalid %s component"
 msgstr "无效的 %s 组件"
 
-#: zypp/url/UrlBase.cc:862 zypp/url/UrlBase.cc:1307
+#: zypp/url/UrlBase.cc:863 zypp/url/UrlBase.cc:1308
 msgid "Query string parsing not supported for this URL"
 msgstr "不支持解析此 URL 的查询字符串"
 
-#: zypp/url/UrlBase.cc:900
+#: zypp/url/UrlBase.cc:901
 msgid "Url scheme is a required component"
 msgstr "URL 方案是一个必需组件"
 
-#: zypp/url/UrlBase.cc:906
+#: zypp/url/UrlBase.cc:907
 #, c-format, boost-format
 msgid "Invalid Url scheme '%s'"
 msgstr "无效的 URL 方案 '%s'"
 
-#: zypp/url/UrlBase.cc:1025
+#: zypp/url/UrlBase.cc:1026
 msgid "Url scheme does not allow a username"
 msgstr "URL 方案不允许使用用户名"
 
-#: zypp/url/UrlBase.cc:1059
+#: zypp/url/UrlBase.cc:1060
 msgid "Url scheme does not allow a password"
 msgstr "URL 方案不允许使用密码"
 
-#: zypp/url/UrlBase.cc:1088
+#: zypp/url/UrlBase.cc:1089
 msgid "Url scheme requires a host component"
 msgstr "URL 方案要求有主机组件"
 
-#: zypp/url/UrlBase.cc:1098
+#: zypp/url/UrlBase.cc:1099
 msgid "Url scheme does not allow a host component"
 msgstr "URL 方案不允许使用主机组件"
 
-#: zypp/url/UrlBase.cc:1125
+#: zypp/url/UrlBase.cc:1126
 #, c-format, boost-format
 msgid "Invalid host component '%s'"
 msgstr "无效的主机组件 '%s'"
 
-#: zypp/url/UrlBase.cc:1146
+#: zypp/url/UrlBase.cc:1147
 msgid "Url scheme does not allow a port"
 msgstr "URL 方案不允许使用端口"
 
-#: zypp/url/UrlBase.cc:1157
+#: zypp/url/UrlBase.cc:1158
 #, c-format, boost-format
 msgid "Invalid port component '%s'"
 msgstr "无效的端口组件 '%s'"
 
-#: zypp/url/UrlBase.cc:1174
+#: zypp/url/UrlBase.cc:1175
 msgid "Url scheme requires path name"
 msgstr "URL 方案要求有路径名"
 
-#: zypp/url/UrlBase.cc:1195 zypp/url/UrlBase.cc:1209
+#: zypp/url/UrlBase.cc:1196 zypp/url/UrlBase.cc:1210
 msgid "Relative path not allowed if authority exists"
 msgstr "若存在认证则不允许相对路径"
 
