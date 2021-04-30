@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-25 11:38+0100\n"
+"POT-Creation-Date: 2021-04-30 18:12+0200\n"
 "PO-Revision-Date: 2021-03-20 12:57+0000\n"
 "Last-Translator: Grace Yu <grace.yu@excel-gits.com>\n"
 "Language-Team: Chinese (Taiwan) <https://l10n.opensuse.org/projects/zypper/"
@@ -586,218 +586,218 @@ msgstr "安全性過濾值 '%1%' 可疑。"
 #. translator: '%1%' is a products name
 #. '%2%' is a command to call (like 'zypper dup')
 #. Both may contain whitespace and should be enclosed by quotes!
-#: src/Summary.cc:400
+#: src/Summary.cc:416
 #, boost-format
 msgid "Product '%1%' requires to be updated by calling '%2%'!"
 msgstr "需要透過呼叫「%2%」來更新產品「%1%」！"
 
 #. translators: Appended when clipping a long enumeration:
 #. "ConsoleKit-devel ConsoleKit-doc ... and 20828 more items."
-#: src/Summary.cc:475 src/Summary.cc:551
+#: src/Summary.cc:491 src/Summary.cc:567
 #, boost-format
 msgid "... and %1% more item."
 msgid_plural "... and %1% more items."
 msgstr[0] "... 以及 %1% 個項目。"
 
-#: src/Summary.cc:569
+#: src/Summary.cc:585
 #, c-format, boost-format
 msgid "The following NEW package is going to be installed:"
 msgid_plural "The following %d NEW packages are going to be installed:"
 msgstr[0] "將會安裝下列 %d 個新的套件："
 
-#: src/Summary.cc:574
+#: src/Summary.cc:590
 #, c-format, boost-format
 msgid "The following NEW patch is going to be installed:"
 msgid_plural "The following %d NEW patches are going to be installed:"
 msgstr[0] "將會安裝下列 %d 個新的修補程式："
 
-#: src/Summary.cc:579
+#: src/Summary.cc:595
 #, c-format, boost-format
 msgid "The following NEW pattern is going to be installed:"
 msgid_plural "The following %d NEW patterns are going to be installed:"
 msgstr[0] "將會安裝下列 %d 個新的樣式："
 
-#: src/Summary.cc:584
+#: src/Summary.cc:600
 #, c-format, boost-format
 msgid "The following NEW product is going to be installed:"
 msgid_plural "The following %d NEW products are going to be installed:"
 msgstr[0] "將會安裝下列 %d 個新的產品："
 
-#: src/Summary.cc:589
+#: src/Summary.cc:605
 #, c-format, boost-format
 msgid "The following source package is going to be installed:"
 msgid_plural "The following %d source packages are going to be installed:"
 msgstr[0] "將會安裝下列 %d 個原始碼套件："
 
-#: src/Summary.cc:595
+#: src/Summary.cc:611
 #, c-format, boost-format
 msgid "The following application is going to be installed:"
 msgid_plural "The following %d applications are going to be installed:"
 msgstr[0] "將會安裝下列 %d 個應用："
 
-#: src/Summary.cc:620
+#: src/Summary.cc:636
 #, c-format, boost-format
 msgid "The following package is going to be REMOVED:"
 msgid_plural "The following %d packages are going to be REMOVED:"
 msgstr[0] "下列 %d 個套件將會被移除："
 
-#: src/Summary.cc:625
+#: src/Summary.cc:641
 #, c-format, boost-format
 msgid "The following patch is going to be REMOVED:"
 msgid_plural "The following %d patches are going to be REMOVED:"
 msgstr[0] "下列 %d 個修補程式將會被移除："
 
-#: src/Summary.cc:630
+#: src/Summary.cc:646
 #, c-format, boost-format
 msgid "The following pattern is going to be REMOVED:"
 msgid_plural "The following %d patterns are going to be REMOVED:"
 msgstr[0] "下列 %d 個樣式將會被移除："
 
-#: src/Summary.cc:635
+#: src/Summary.cc:651
 #, c-format, boost-format
 msgid "The following product is going to be REMOVED:"
 msgid_plural "The following %d products are going to be REMOVED:"
 msgstr[0] "下列 %d 個產品將會被移除："
 
-#: src/Summary.cc:641
+#: src/Summary.cc:657
 #, c-format, boost-format
 msgid "The following application is going to be REMOVED:"
 msgid_plural "The following %d applications are going to be REMOVED:"
 msgstr[0] "下列 %d 個應用將會被移除："
 
-#: src/Summary.cc:664
+#: src/Summary.cc:680
 #, c-format, boost-format
 msgid "The following package is going to be upgraded:"
 msgid_plural "The following %d packages are going to be upgraded:"
 msgstr[0] "下列 %d 個套件將會升級："
 
-#: src/Summary.cc:669
+#: src/Summary.cc:685
 #, c-format, boost-format
 msgid "The following patch is going to be upgraded:"
 msgid_plural "The following %d patches are going to be upgraded:"
 msgstr[0] "下列 %d 個修補程式將會升級："
 
-#: src/Summary.cc:674
+#: src/Summary.cc:690
 #, c-format, boost-format
 msgid "The following pattern is going to be upgraded:"
 msgid_plural "The following %d patterns are going to be upgraded:"
 msgstr[0] "下列 %d 個樣式將會升級："
 
-#: src/Summary.cc:680
+#: src/Summary.cc:696
 #, c-format, boost-format
 msgid "The following product is going to be upgraded:"
 msgid_plural "The following %d products are going to be upgraded:"
 msgstr[0] "下列 %d 個產品將會升級："
 
-#: src/Summary.cc:688
+#: src/Summary.cc:704
 #, c-format, boost-format
 msgid "The following application is going to be upgraded:"
 msgid_plural "The following %d applications are going to be upgraded:"
 msgstr[0] "下列 %d 個應用將會升級："
 
-#: src/Summary.cc:710
+#: src/Summary.cc:726
 #, c-format, boost-format
 msgid "The following package is going to be downgraded:"
 msgid_plural "The following %d packages are going to be downgraded:"
 msgstr[0] "下列 %d 個套件將會降級："
 
-#: src/Summary.cc:715
+#: src/Summary.cc:731
 #, c-format, boost-format
 msgid "The following patch is going to be downgraded:"
 msgid_plural "The following %d patches are going to be downgraded:"
 msgstr[0] "下列 %d 個修補程式將會降級："
 
-#: src/Summary.cc:720
+#: src/Summary.cc:736
 #, c-format, boost-format
 msgid "The following pattern is going to be downgraded:"
 msgid_plural "The following %d patterns are going to be downgraded:"
 msgstr[0] "下列 %d 個樣式將會降級："
 
-#: src/Summary.cc:725
+#: src/Summary.cc:741
 #, c-format, boost-format
 msgid "The following product is going to be downgraded:"
 msgid_plural "The following %d products are going to be downgraded:"
 msgstr[0] "下列 %d 個產品將會降級："
 
-#: src/Summary.cc:731
+#: src/Summary.cc:747
 #, c-format, boost-format
 msgid "The following application is going to be downgraded:"
 msgid_plural "The following %d applications are going to be downgraded:"
 msgstr[0] "下列 %d 個應用將會降級："
 
-#: src/Summary.cc:753
+#: src/Summary.cc:769
 #, c-format, boost-format
 msgid "The following package is going to be reinstalled:"
 msgid_plural "The following %d packages are going to be reinstalled:"
 msgstr[0] "下列 %d 個套件將會重新安裝："
 
-#: src/Summary.cc:758
+#: src/Summary.cc:774
 #, c-format, boost-format
 msgid "The following patch is going to be reinstalled:"
 msgid_plural "The following %d patches are going to be reinstalled:"
 msgstr[0] "下列 %d 個修補程式將會重新安裝："
 
-#: src/Summary.cc:763
+#: src/Summary.cc:779
 #, c-format, boost-format
 msgid "The following pattern is going to be reinstalled:"
 msgid_plural "The following %d patterns are going to be reinstalled:"
 msgstr[0] "下列 %d 個樣式將會重新安裝："
 
-#: src/Summary.cc:768
+#: src/Summary.cc:784
 #, c-format, boost-format
 msgid "The following product is going to be reinstalled:"
 msgid_plural "The following %d products are going to be reinstalled:"
 msgstr[0] "下列 %d 個產品將會重新安裝："
 
-#: src/Summary.cc:781
+#: src/Summary.cc:797
 #, c-format, boost-format
 msgid "The following application is going to be reinstalled:"
 msgid_plural "The following %d applications are going to be reinstalled:"
 msgstr[0] "下列 %d 個應用將會重新安裝："
 
-#: src/Summary.cc:918
+#: src/Summary.cc:934
 #, c-format, boost-format
 msgid "The following recommended package was automatically selected:"
 msgid_plural ""
 "The following %d recommended packages were automatically selected:"
 msgstr[0] "下列 %d 個推薦的套件已自動被選取："
 
-#: src/Summary.cc:923
+#: src/Summary.cc:939
 #, c-format, boost-format
 msgid "The following recommended patch was automatically selected:"
 msgid_plural ""
 "The following %d recommended patches were automatically selected:"
 msgstr[0] "下列 %d 個推薦的修補程式已自動被選取："
 
-#: src/Summary.cc:928
+#: src/Summary.cc:944
 #, c-format, boost-format
 msgid "The following recommended pattern was automatically selected:"
 msgid_plural ""
 "The following %d recommended patterns were automatically selected:"
 msgstr[0] "下列 %d 個推薦的樣式已自動被選取："
 
-#: src/Summary.cc:933
+#: src/Summary.cc:949
 #, c-format, boost-format
 msgid "The following recommended product was automatically selected:"
 msgid_plural ""
 "The following %d recommended products were automatically selected:"
 msgstr[0] "下列 %d 個推薦的產品已自動被選取："
 
-#: src/Summary.cc:938
+#: src/Summary.cc:954
 #, c-format, boost-format
 msgid "The following recommended source package was automatically selected:"
 msgid_plural ""
 "The following %d recommended source packages were automatically selected:"
 msgstr[0] "下列 %d 個推薦的原始碼套件已自動被選取："
 
-#: src/Summary.cc:944
+#: src/Summary.cc:960
 #, c-format, boost-format
 msgid "The following recommended application was automatically selected:"
 msgid_plural ""
 "The following %d recommended applications were automatically selected:"
 msgstr[0] "下列 %d 個推薦的應用已自動被選取："
 
-#: src/Summary.cc:991
+#: src/Summary.cc:1007
 #, c-format, boost-format
 msgid ""
 "The following package is recommended, but will not be installed (only "
@@ -807,7 +807,7 @@ msgid_plural ""
 "required packages will be installed):"
 msgstr[0] "下列 %d 個套件是推薦的，但將不會被安裝(僅有需要的套件會被安裝)："
 
-#: src/Summary.cc:1003
+#: src/Summary.cc:1019
 #, c-format, boost-format
 msgid ""
 "The following package is recommended, but will not be installed because it's "
@@ -819,7 +819,7 @@ msgstr[0] ""
 "下列 %d 個套件是推薦的，但將不會被安裝，因為它們是您不想要的 (之前已被手動移"
 "除)："
 
-#: src/Summary.cc:1013
+#: src/Summary.cc:1029
 #, c-format, boost-format
 msgid ""
 "The following package is recommended, but will not be installed due to "
@@ -829,143 +829,143 @@ msgid_plural ""
 "conflicts or dependency issues:"
 msgstr[0] "下列 %d 個套件是推薦的，但將不會被安裝，因為有衝突或相依性的問題："
 
-#: src/Summary.cc:1026
+#: src/Summary.cc:1042
 #, c-format, boost-format
 msgid "The following patch is recommended, but will not be installed:"
 msgid_plural ""
 "The following %d patches are recommended, but will not be installed:"
 msgstr[0] "下列 %d 個修補程式是推薦的，但將不會被安裝："
 
-#: src/Summary.cc:1030
+#: src/Summary.cc:1046
 #, c-format, boost-format
 msgid "The following pattern is recommended, but will not be installed:"
 msgid_plural ""
 "The following %d patterns are recommended, but will not be installed:"
 msgstr[0] "下列 %d 個樣式是推薦的，但將不會被安裝："
 
-#: src/Summary.cc:1034
+#: src/Summary.cc:1050
 #, c-format, boost-format
 msgid "The following product is recommended, but will not be installed:"
 msgid_plural ""
 "The following %d products are recommended, but will not be installed:"
 msgstr[0] "下列 %d 個產品是推薦的，但將不會被安裝："
 
-#: src/Summary.cc:1039
+#: src/Summary.cc:1055
 #, c-format, boost-format
 msgid "The following application is recommended, but will not be installed:"
 msgid_plural ""
 "The following %d applications are recommended, but will not be installed:"
 msgstr[0] "下列 %d 個應用是推薦的，但將不會被安裝："
 
-#: src/Summary.cc:1072
+#: src/Summary.cc:1088
 #, c-format, boost-format
 msgid "The following package is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d packages are suggested, but will not be installed:"
 msgstr[0] "下列 %d 個套件是建議的，但將不會被安裝："
 
-#: src/Summary.cc:1077
+#: src/Summary.cc:1093
 #, c-format, boost-format
 msgid "The following patch is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d patches are suggested, but will not be installed:"
 msgstr[0] "下列 %d 個修補程式是建議的，但將不會被安裝："
 
-#: src/Summary.cc:1082
+#: src/Summary.cc:1098
 #, c-format, boost-format
 msgid "The following pattern is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d patterns are suggested, but will not be installed:"
 msgstr[0] "下列 %d 個樣式是建議的，但將不會被安裝："
 
-#: src/Summary.cc:1087
+#: src/Summary.cc:1103
 #, c-format, boost-format
 msgid "The following product is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d products are suggested, but will not be installed:"
 msgstr[0] "下列 %d 個產品是建議的，但將不會被安裝："
 
-#: src/Summary.cc:1093
+#: src/Summary.cc:1109
 #, c-format, boost-format
 msgid "The following application is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d applications are suggested, but will not be installed:"
 msgstr[0] "下列 %d 個應用是建議的，但將不會被安裝："
 
-#: src/Summary.cc:1118
+#: src/Summary.cc:1134
 #, c-format, boost-format
 msgid "The following package is going to change architecture:"
 msgid_plural "The following %d packages are going to change architecture:"
 msgstr[0] "下列 %d 個套件將會變更架構："
 
-#: src/Summary.cc:1123
+#: src/Summary.cc:1139
 #, c-format, boost-format
 msgid "The following patch is going to change architecture:"
 msgid_plural "The following %d patches are going to change architecture:"
 msgstr[0] "下列 %d 個修補程式將會變更架構："
 
-#: src/Summary.cc:1128
+#: src/Summary.cc:1144
 #, c-format, boost-format
 msgid "The following pattern is going to change architecture:"
 msgid_plural "The following %d patterns are going to change architecture:"
 msgstr[0] "下列 %d 個樣式將會變更架構："
 
-#: src/Summary.cc:1133
+#: src/Summary.cc:1149
 #, c-format, boost-format
 msgid "The following product is going to change architecture:"
 msgid_plural "The following %d products are going to change architecture:"
 msgstr[0] "下列 %d 個產品將會變更架構："
 
-#: src/Summary.cc:1139
+#: src/Summary.cc:1155
 #, c-format, boost-format
 msgid "The following application is going to change architecture:"
 msgid_plural "The following %d applications are going to change architecture:"
 msgstr[0] "下列 %d 個應用將會變更架構："
 
-#: src/Summary.cc:1164
+#: src/Summary.cc:1180
 #, c-format, boost-format
 msgid "The following package is going to change vendor:"
 msgid_plural "The following %d packages are going to change vendor:"
 msgstr[0] "下列 %d 個套件將會變更供應商："
 
-#: src/Summary.cc:1169
+#: src/Summary.cc:1185
 #, c-format, boost-format
 msgid "The following patch is going to change vendor:"
 msgid_plural "The following %d patches are going to change vendor:"
 msgstr[0] "下列 %d 個修補程式將會變更供應商："
 
-#: src/Summary.cc:1174
+#: src/Summary.cc:1190
 #, c-format, boost-format
 msgid "The following pattern is going to change vendor:"
 msgid_plural "The following %d patterns are going to change vendor:"
 msgstr[0] "下列 %d 個樣式將會變更供應商："
 
-#: src/Summary.cc:1179
+#: src/Summary.cc:1195
 #, c-format, boost-format
 msgid "The following product is going to change vendor:"
 msgid_plural "The following %d products are going to change vendor:"
 msgstr[0] "下列 %d 個產品將會變更供應商："
 
-#: src/Summary.cc:1185
+#: src/Summary.cc:1201
 #, c-format, boost-format
 msgid "The following application is going to change vendor:"
 msgid_plural "The following %d applications are going to change vendor:"
 msgstr[0] "下列 %d 個應用將會變更供應商："
 
-#: src/Summary.cc:1208
+#: src/Summary.cc:1224
 #, c-format, boost-format
 msgid "The following package has no support information from its vendor:"
 msgid_plural ""
 "The following %d packages have no support information from their vendor:"
 msgstr[0] "下列 %d 個套件沒有其供應商的支援資訊："
 
-#: src/Summary.cc:1226
+#: src/Summary.cc:1242
 #, c-format, boost-format
 msgid "The following package is not supported by its vendor:"
 msgid_plural "The following %d packages are not supported by their vendor:"
 msgstr[0] "下列 %d 個套件不被它們的供應商支援："
 
-#: src/Summary.cc:1244
+#: src/Summary.cc:1260
 #, c-format, boost-format
 msgid ""
 "The following package needs additional customer contract to get support:"
@@ -973,25 +973,25 @@ msgid_plural ""
 "The following %d packages need additional customer contract to get support:"
 msgstr[0] "下列 %d 個套件需要額外的客製化合約以取得支援："
 
-#: src/Summary.cc:1264
+#: src/Summary.cc:1280
 #, c-format, boost-format
 msgid "The following package update will NOT be installed:"
 msgid_plural "The following %d package updates will NOT be installed:"
 msgstr[0] "下列 %d 個套件更新將 不會 被安裝："
 
-#: src/Summary.cc:1269
+#: src/Summary.cc:1285
 #, c-format, boost-format
 msgid "The following product update will NOT be installed:"
 msgid_plural "The following %d product updates will NOT be installed:"
 msgstr[0] "下列 %d 個產品更新將 不會 被安裝："
 
-#: src/Summary.cc:1275
+#: src/Summary.cc:1291
 #, c-format, boost-format
 msgid "The following application update will NOT be installed:"
 msgid_plural "The following %d application updates will NOT be installed:"
 msgstr[0] "下列 %d 個應用更新將 不會 被安裝："
 
-#: src/Summary.cc:1308
+#: src/Summary.cc:1324
 #, c-format, boost-format
 msgid "The following item is locked and will not be changed by any action:"
 msgid_plural ""
@@ -1000,156 +1000,156 @@ msgstr[0] "下列 %d 個項目已被鎖定，將不會被更動："
 
 #. always as plain name list
 #. translators: used as 'tag:' (i.e. followed by ':')
-#: src/Summary.cc:1321
+#: src/Summary.cc:1337
 msgid "Available"
 msgstr "可用"
 
 #. translators: used as 'tag:' (i.e. followed by ':')
 #. translators: property name; short; used like "Name: value"
-#: src/Summary.cc:1327 src/info.cc:332 src/info.cc:423 src/info.cc:554
+#: src/Summary.cc:1343 src/info.cc:332 src/info.cc:423 src/info.cc:554
 msgid "Installed"
 msgstr "已安裝"
 
-#: src/Summary.cc:1332
+#: src/Summary.cc:1348
 #, boost-format
 msgid "Run '%1%' to see the complete list of locked items."
 msgstr "執行 '%1%' 查看完整的鎖定項目清單。"
 
-#: src/Summary.cc:1341
+#: src/Summary.cc:1357
 #, c-format, boost-format
 msgid "The following patch requires a system reboot:"
 msgid_plural "The following %d patches require a system reboot:"
 msgstr[0] "下列 %d 個修補程式將會需要系統重新啟動："
 
-#: src/Summary.cc:1345
+#: src/Summary.cc:1361
 #, c-format, boost-format
 msgid "The following package requires a system reboot:"
 msgid_plural "The following %d packages require a system reboot:"
 msgstr[0] "以下 %d 個套件需要將系統重新開機："
 
-#: src/Summary.cc:1374
+#: src/Summary.cc:1390
 #, boost-format
 msgid "Overall download size: %1%. Already cached: %2%."
 msgstr "全部下載大小：%1%。已快取：%2%。"
 
-#: src/Summary.cc:1377
+#: src/Summary.cc:1393
 msgid "Download only."
 msgstr "僅下載。"
 
 #. TrasnlatorExplanation %s will be substituted by a byte count e.g. 212 K
-#: src/Summary.cc:1383
+#: src/Summary.cc:1399
 #, c-format, boost-format
 msgid "After the operation, additional %s will be used."
 msgstr "完成操作後，將使用額外的 %s。"
 
-#: src/Summary.cc:1385
+#: src/Summary.cc:1401
 msgid "No additional space will be used or freed after the operation."
 msgstr "完成操作後，不會有額外的空間被使用或釋出。"
 
 #. TrasnlatorExplanation %s will be substituted by a byte count e.g. 212 K
-#: src/Summary.cc:1392
+#: src/Summary.cc:1408
 #, c-format, boost-format
 msgid "After the operation, %s will be freed."
 msgstr "完成操作後，將釋出 %s。"
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
-#: src/Summary.cc:1416
+#: src/Summary.cc:1432
 msgid "package to upgrade"
 msgid_plural "packages to upgrade"
 msgstr[0] "個待升級套件"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
-#: src/Summary.cc:1427
+#: src/Summary.cc:1443
 msgid "to downgrade"
 msgid_plural "to downgrade"
 msgstr[0] "將降級"
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
-#: src/Summary.cc:1430
+#: src/Summary.cc:1446
 msgid "package to downgrade"
 msgid_plural "packages to downgrade"
 msgstr[0] "要降級的套件"
 
 #. translators: this text will be preceded by a number e.g. "5 new"
-#: src/Summary.cc:1441
+#: src/Summary.cc:1457
 msgid "new"
 msgid_plural "new"
 msgstr[0] "個新套件"
 
 #. translators: this text will be preceded by a number e.g. "5 new to install"
-#: src/Summary.cc:1444
+#: src/Summary.cc:1460
 msgid "new package to install"
 msgid_plural "new packages to install"
 msgstr[0] "要安裝的新套件"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
-#: src/Summary.cc:1455
+#: src/Summary.cc:1471
 msgid "to reinstall"
 msgid_plural "to reinstall"
 msgstr[0] "將重新安裝"
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
-#: src/Summary.cc:1458
+#: src/Summary.cc:1474
 msgid "package to reinstall"
 msgid_plural "packages to reinstall"
 msgstr[0] "要重新安裝的套件"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
-#: src/Summary.cc:1469
+#: src/Summary.cc:1485
 msgid "to remove"
 msgid_plural "to remove"
 msgstr[0] "將移除"
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
-#: src/Summary.cc:1472
+#: src/Summary.cc:1488
 msgid "package to remove"
 msgid_plural "packages to remove"
 msgstr[0] "要移除的套件"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
-#: src/Summary.cc:1483
+#: src/Summary.cc:1499
 msgid "to change vendor"
 msgid_plural " to change vendor"
 msgstr[0] "將變更供應商"
 
 #. translators: this text will be preceded by a number e.g. "5 packages ..."
-#: src/Summary.cc:1486
+#: src/Summary.cc:1502
 msgid "package will change vendor"
 msgid_plural "packages will change vendor"
 msgstr[0] "套件將會變更供應商"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
-#: src/Summary.cc:1497
+#: src/Summary.cc:1513
 msgid "to change arch"
 msgid_plural "to change arch"
 msgstr[0] "將變更架構"
 
 #. translators: this text will be preceded by a number e.g. "5 packages ..."
-#: src/Summary.cc:1500
+#: src/Summary.cc:1516
 msgid "package will change arch"
 msgid_plural "packages will change arch"
 msgstr[0] "套件將變更架構"
 
 #. translators: this text will be preceded by a number e.g. "5 new"
-#: src/Summary.cc:1511
+#: src/Summary.cc:1527
 msgid "source package"
 msgid_plural "source packages"
 msgstr[0] "原始碼套件"
 
 #. translators: this text will be preceded by a number e.g. "5 new to install"
-#: src/Summary.cc:1514
+#: src/Summary.cc:1530
 msgid "source package to install"
 msgid_plural "source packages to install"
 msgstr[0] "要安裝的原始碼套件"
 
 #. patch command (auto)restricted to update stack patches
-#: src/Summary.cc:1588
+#: src/Summary.cc:1604
 msgid ""
 "Package manager restart required. (Run this command once again after the "
 "update stack got updated)"
 msgstr "需要重新啟動套件管理員 (更新堆疊得到更新後，請再次執行此指令)。"
 
-#: src/Summary.cc:1591
+#: src/Summary.cc:1607
 msgid "System reboot required."
 msgstr "系統需要重新啟動。"
 
@@ -1161,7 +1161,7 @@ msgstr "系統需要重新啟動。"
 #. Consider to cancel:
 #. Product 'opennSUSE Tumbleweed' requires to be updated by calling 'zypper dup'!
 #. Continue? [y/n/...? shows all options] (y):
-#: src/Summary.cc:1608
+#: src/Summary.cc:1624
 msgid "Consider to cancel:"
 msgstr "考慮取消："
 
@@ -1193,7 +1193,7 @@ msgstr "PackageKit 仍在執行中 (可能正忙)。"
 msgid "Try again?"
 msgstr "再次嘗試嗎？"
 
-#: src/Zypper.cc:248 src/Zypper.cc:715 src/commands/basecommand.cc:282
+#: src/Zypper.cc:248 src/Zypper.cc:715 src/commands/basecommand.cc:287
 msgid "Unexpected exception."
 msgstr "非預期的例外。"
 
@@ -2251,8 +2251,9 @@ msgid ""
 "have their KIND: string prepended (e.g. 'patch:foo') or use the commands --"
 "type option."
 msgstr ""
-"LOCKSPEC 的格式為「[KIND:]NAME[ OP EDITION]」，其中 NAME 也可以是使用 * 和 ? 萬用字元的 glob 模式。"
-"非套件類型可以在前面預增 KIND: 字串 (例如「patch:foo」)，或使用指令 --type 選項。"
+"LOCKSPEC 的格式為「[KIND:]NAME[ OP EDITION]」，其中 NAME 也可以是使用 * 和 ? "
+"萬用字元的 glob 模式。非套件類型可以在前面預增 KIND: 字串 (例如「patch:"
+"foo」)，或使用指令 --type 選項。"
 
 #: src/commands/locks/add.cc:36
 msgid ""
@@ -2260,7 +2261,8 @@ msgid ""
 "optionally restrict the lock to match a specific edition or edition range "
 "using =, <, <=, >, >= or != followed an EDITION."
 msgstr ""
-"基本格式將鎖定匹配項目的所有版本。您可以選擇性地使用 =、<、<=、>、>= 或 != 後接 EDITION，將鎖定限制為比對特定的版本或版本範圍。"
+"基本格式將鎖定匹配項目的所有版本。您可以選擇性地使用 =、<、<=、>、>= 或 != 後"
+"接 EDITION，將鎖定限制為比對特定的版本或版本範圍。"
 
 #: src/commands/locks/add.cc:46
 msgid "Restrict the lock to the specified repository."
@@ -2423,31 +2425,39 @@ msgstr "移除套件鎖定發生問題："
 msgid "Check if the reboot-needed flag was set."
 msgstr "檢查是否設定「需要重新開機」旗標。"
 
-#: src/commands/needs-rebooting.cc:23
+#: src/commands/needs-rebooting.cc:24
 msgid ""
-"Checks if the reboot-needed flag was set by a previous update or install of a "
-"core library or service.\n"
-"Exit code ZYPPER_EXIT_INF_REBOOT_NEEDED indicates that a reboot is suggested, "
-"otherwise the exit code is set to ZYPPER_EXIT_OK."
+"Checks if the reboot-needed flag was set by a previous update or install of "
+"a core library or service.\n"
+"Exit code ZYPPER_EXIT_INF_REBOOT_NEEDED indicates that a reboot is "
+"suggested, otherwise the exit code is set to ZYPPER_EXIT_OK."
 msgstr ""
 "檢查是否「需要重新開啟」旗標被上次更新或核心函式庫或服務安裝所設定。\n"
 "ZYPPER_EXIT_INT_REBOOT_NEEDED 退出代碼代表需要重開機，\n"
 "反之回傳 ZYPPER_EXIT_OK。"
 
-#: src/commands/needs-rebooting.cc:35
-msgid "Since the last system boot core libraries or services have been updated."
+#: src/commands/needs-rebooting.cc:26
+msgid ""
+"This is the recommended way for scripts to test whether a system reboot is "
+"suggested."
+msgstr ""
+
+#: src/commands/needs-rebooting.cc:38
+msgid ""
+"Since the last system boot core libraries or services have been updated."
 msgstr "已更新核心函式庫或服務。"
 
-#: src/commands/needs-rebooting.cc:36
+#: src/commands/needs-rebooting.cc:39
 msgid ""
 "Reboot is suggested to ensure that your system benefits from these updates."
 msgstr "這些更新需要重開機才會生效。"
 
-#: src/commands/needs-rebooting.cc:41
-msgid "No core libraries or services have been updated since the last system boot."
+#: src/commands/needs-rebooting.cc:44
+msgid ""
+"No core libraries or services have been updated since the last system boot."
 msgstr "沒有更新任何核心函式庫或服務。"
 
-#: src/commands/needs-rebooting.cc:42
+#: src/commands/needs-rebooting.cc:45
 msgid "Reboot is probably not necessary."
 msgstr "可能不需要重開機。"
 
@@ -2705,12 +2715,12 @@ msgstr ""
 msgid "Write debug output to file <path>."
 msgstr "寫入偵錯輸出到檔案 <path>。"
 
-#: src/commands/ps.cc:72 src/solve-commit.cc:494
+#: src/commands/ps.cc:72 src/solve-commit.cc:524
 msgid "Check failed:"
 msgstr "檢查失敗的："
 
 #. Here: Table output
-#: src/commands/ps.cc:127 src/solve-commit.cc:483
+#: src/commands/ps.cc:127 src/solve-commit.cc:513
 msgid "Checking for running processes using deleted libraries..."
 msgstr "正在檢查使用已刪除套件庫的執行中程序..."
 
@@ -4518,32 +4528,32 @@ msgid ""
 msgstr "下載所有符合指令行參數的版本。 否則只有相符套件的最佳版本 會被下載。"
 
 #. translators: Label text; is followed by ': cmdline argument'
-#: src/commands/utils/download.cc:237
+#: src/commands/utils/download.cc:238
 msgid "Argument resolves to no package"
 msgstr "該參數解析不到套件"
 
-#: src/commands/utils/download.cc:252 src/solve-commit.cc:935
+#: src/commands/utils/download.cc:253 src/solve-commit.cc:968
 msgid "Nothing to do."
 msgstr "無執行動作。"
 
-#: src/commands/utils/download.cc:259
+#: src/commands/utils/download.cc:260
 msgid "No prune to best version."
 msgstr "不調整為最佳版本。"
 
-#: src/commands/utils/download.cc:265
+#: src/commands/utils/download.cc:266
 msgid "Prune to best version..."
 msgstr "調整為最佳版本..."
 
-#: src/commands/utils/download.cc:271
+#: src/commands/utils/download.cc:272
 msgid "Not downloading anything..."
 msgstr "未下載任何東西..."
 
-#: src/commands/utils/download.cc:314
+#: src/commands/utils/download.cc:315
 #, c-format, boost-format
 msgid "Error downloading package '%s'."
 msgstr "下載套件 '%s' 發生錯誤。"
 
-#: src/commands/utils/download.cc:328
+#: src/commands/utils/download.cc:329
 #, c-format, boost-format
 msgid "Not downloading package '%s'."
 msgstr "套件 '%s' 未下載。"
@@ -5056,12 +5066,12 @@ msgid "%s was not requested."
 msgstr "未申請 %s。"
 
 #. translators: this will show up if you press ctrl+c twice
-#: src/main.cc:33
+#: src/main.cc:45
 msgid "OK OK! Exiting immediately..."
 msgstr "好啦好啦！馬上就退出..."
 
 #. translators: this will show up if you press ctrl+c twice
-#: src/main.cc:40
+#: src/main.cc:52
 msgid "Trying to exit gracefully..."
 msgstr "正在嘗試正常地退出..."
 
@@ -5168,21 +5178,21 @@ msgid "Yes"
 msgstr "是"
 
 #. translator: usually followed by a ' ' and some explanatory text
-#: src/output/Out.h:40
+#: src/output/Out.h:37
 msgid "Note:"
 msgstr "注意："
 
 #. translator: usually followed by a ' ' and some explanatory text
-#: src/output/Out.h:42
+#: src/output/Out.h:39
 msgid "Warning:"
 msgstr "警告："
 
 #. translator: usually followed by a ' ' and some explanatory text
-#: src/output/Out.h:44
+#: src/output/Out.h:41
 msgid "Error:"
 msgstr "錯誤："
 
-#: src/output/Out.h:46
+#: src/output/Out.h:43
 msgid "Continue?"
 msgstr "要繼續嗎？"
 
@@ -5314,8 +5324,8 @@ msgstr "停用套件庫 '%s' 發生錯誤。"
 msgid "Problem retrieving files from '%s'."
 msgstr "從 '%s' 取出檔案出現問題。"
 
-#: src/repos.cc:345 src/repos.cc:1859 src/solve-commit.cc:825
-#: src/solve-commit.cc:856 src/solve-commit.cc:880
+#: src/repos.cc:345 src/repos.cc:1859 src/solve-commit.cc:858
+#: src/solve-commit.cc:889 src/solve-commit.cc:913
 msgid "Please see the above error message for a hint."
 msgstr "請檢視上面的錯誤訊息以獲得提示。"
 
@@ -5761,21 +5771,21 @@ msgid "No products found."
 msgstr "沒有發現產品。"
 
 #. translators: meaning 'dependency problem' found during solving
-#: src/solve-commit.cc:42
+#: src/solve-commit.cc:72
 msgid "Problem: "
 msgstr "問題： "
 
-#: src/solve-commit.cc:48
+#: src/solve-commit.cc:78
 msgid "Detailed information: "
 msgstr "詳細資訊： "
 
 #. TranslatorExplanation %d is the solution number
-#: src/solve-commit.cc:61
+#: src/solve-commit.cc:91
 #, c-format, boost-format
 msgid " Solution %d: "
 msgstr " 解決方案 %d︰ "
 
-#: src/solve-commit.cc:80
+#: src/solve-commit.cc:110
 msgid "Choose the above solution using '1' or skip, retry or cancel"
 msgid_plural "Choose from above solutions by number or skip, retry or cancel"
 msgstr[0] ""
@@ -5783,7 +5793,7 @@ msgstr[0] ""
 
 #. translators: translate 'c' to whatever you translated the 'c' in
 #. "c" and "s/r/c" strings
-#: src/solve-commit.cc:87
+#: src/solve-commit.cc:117
 msgid "Choose the above solution using '1' or cancel using 'c'"
 msgid_plural "Choose from above solutions by number or cancel"
 msgstr[0] "使用'數字'選擇上列的解決方法，或取消(使用'c')"
@@ -5794,7 +5804,7 @@ msgstr[0] "使用'數字'選擇上列的解決方法，或取消(使用'c')"
 #. The anserws must be separated by slash characters '/' and must
 #. correspond to skip/retry/cancel/detailed information in that order.
 #. The answers should be lower case letters.
-#: src/solve-commit.cc:111
+#: src/solve-commit.cc:141
 msgid "s/r/c/d"
 msgstr "s (跳過)/r (重試)/c (取消)/d (詳細資訊)"
 
@@ -5805,83 +5815,83 @@ msgstr "s (跳過)/r (重試)/c (取消)/d (詳細資訊)"
 #. See the "s/r/c/d" comment for other details.
 #. One letter string  for translation can be tricky, so in case of problems,
 #. please report a bug against zypper at bugzilla.suse.com, we'll try to solve it.
-#: src/solve-commit.cc:127
+#: src/solve-commit.cc:157
 msgid "c/d"
 msgstr "c (取消)/d (詳細資訊)"
 
-#: src/solve-commit.cc:133
+#: src/solve-commit.cc:163
 #, boost-format
 msgid "Choose solution %1%"
 msgstr "請選擇解決方案 %1%"
 
-#: src/solve-commit.cc:135
+#: src/solve-commit.cc:165
 msgid "Skip problem and continue."
 msgstr "跳過問題並繼續。"
 
-#: src/solve-commit.cc:138
+#: src/solve-commit.cc:168
 msgid "Retry solving immediately."
 msgstr "立即重新嘗試解決。"
 
-#: src/solve-commit.cc:140
+#: src/solve-commit.cc:170
 msgid "Choose no solution and cancel."
 msgstr "不選擇解決方案並取消。"
 
-#: src/solve-commit.cc:141
+#: src/solve-commit.cc:171
 msgid "Toggle show detailed conflict information."
 msgstr "切換顯示詳細衝突資訊。"
 
-#: src/solve-commit.cc:174
+#: src/solve-commit.cc:204
 #, c-format, boost-format
 msgid "Applying solution %s"
 msgstr "套用解決方案 %s"
 
-#: src/solve-commit.cc:190
+#: src/solve-commit.cc:220
 #, c-format, boost-format
 msgid "%d Problem:"
 msgid_plural "%d Problems:"
 msgstr[0] "%d 問題："
 
 #. should not happen! If solve() failed at least one problem must be set!
-#: src/solve-commit.cc:194
+#: src/solve-commit.cc:224
 msgid "Specified capability not found"
 msgstr "找不到指定的功能"
 
-#: src/solve-commit.cc:204
+#: src/solve-commit.cc:234
 #, c-format, boost-format
 msgid "Problem: %s"
 msgstr "問題：%s"
 
-#: src/solve-commit.cc:223
+#: src/solve-commit.cc:253
 msgid "Resolving dependencies..."
 msgstr "正在解析相依性..."
 
-#: src/solve-commit.cc:284
+#: src/solve-commit.cc:314
 msgid "Force resolution:"
 msgstr "強迫解決方法："
 
-#: src/solve-commit.cc:383
+#: src/solve-commit.cc:413
 msgid "Verifying dependencies..."
 msgstr "正在檢查相依性..."
 
 #. Here: compute the full upgrade
-#: src/solve-commit.cc:433
+#: src/solve-commit.cc:463
 msgid "Computing upgrade..."
 msgstr "正在計算升級..."
 
-#: src/solve-commit.cc:447
+#: src/solve-commit.cc:477
 msgid "Generating solver test case..."
 msgstr "正在產生解決測試方案..."
 
-#: src/solve-commit.cc:449
+#: src/solve-commit.cc:479
 #, c-format, boost-format
 msgid "Solver test case generated successfully at %s."
 msgstr "產生解決測試方案成功於 %s。"
 
-#: src/solve-commit.cc:452
+#: src/solve-commit.cc:482
 msgid "Error creating the solver test case."
 msgstr "建立解決測試方案時發生錯誤。"
 
-#: src/solve-commit.cc:480
+#: src/solve-commit.cc:510
 #, c-format, boost-format
 msgid ""
 "Check for running processes using deleted libraries is disabled in zypper."
@@ -5890,11 +5900,11 @@ msgstr ""
 "檢查使用已刪除函式庫之執行中程序的功能在 zypper.conf 中已被關閉。請手動執行 "
 "'%s' 來做檢查。"
 
-#: src/solve-commit.cc:496
+#: src/solve-commit.cc:526
 msgid "Skip check:"
 msgstr "跳過檢查︰"
 
-#: src/solve-commit.cc:503
+#: src/solve-commit.cc:533
 #, boost-format
 msgid ""
 "There are running programs which still use files and libraries deleted or "
@@ -5904,38 +5914,38 @@ msgstr ""
 "有些執行中的程式仍在使用已被近期升級刪除或更新的檔案和文件庫。應重新啟動它們"
 "以使其獲得最新更新。執行「%1%」列出這些程式。"
 
-#: src/solve-commit.cc:517
+#: src/solve-commit.cc:547
 msgid "Update notifications were received from the following packages:"
 msgstr "從下列套件收到了更新提醒："
 
-#: src/solve-commit.cc:526
+#: src/solve-commit.cc:556
 #, c-format, boost-format
 msgid "Message from package %s:"
 msgstr "從套件 %s 收到的訊息："
 
-#: src/solve-commit.cc:534
+#: src/solve-commit.cc:564
 msgid "y/n"
 msgstr "y/n"
 
-#: src/solve-commit.cc:535
+#: src/solve-commit.cc:565
 msgid "View the notifications now?"
 msgstr "現在檢視提醒嗎？"
 
-#: src/solve-commit.cc:580
+#: src/solve-commit.cc:610
 msgid "Computing distribution upgrade..."
 msgstr "正在計算版本升級..."
 
-#: src/solve-commit.cc:585
+#: src/solve-commit.cc:615
 msgid "Resolving package dependencies..."
 msgstr "正在解決套件相依性..."
 
-#: src/solve-commit.cc:640
+#: src/solve-commit.cc:670
 msgid ""
 "Some of the dependencies of installed packages are broken. In order to fix "
 "these dependencies, the following actions need to be taken:"
 msgstr "有些已安裝的套件相依性已被破壞。為了修正此相依性，將採取下列行動："
 
-#: src/solve-commit.cc:647
+#: src/solve-commit.cc:677
 msgid "Root privileges are required to fix broken package dependencies."
 msgstr "需要有 Root 權限才能修正套件的相依性。"
 
@@ -5949,78 +5959,78 @@ msgstr "需要有 Root 權限才能修正套件的相依性。"
 #. The answers should be lower case letters, but in general, any UTF-8
 #. string will do.
 #. ! \todo add c for changelog and x for explain (show the dep tree)
-#: src/solve-commit.cc:669
+#: src/solve-commit.cc:699
 msgid "y/n/p/v/a/r/m/d/g"
 msgstr "y/n/p/v/a/r/m/d/g"
 
 #. translators: help text for 'y' option in the 'Continue?' prompt
-#: src/solve-commit.cc:674
+#: src/solve-commit.cc:704
 msgid ""
 "Yes, accept the summary and proceed with installation/removal of packages."
 msgstr "是的，接受此摘要並進行套件的安裝/移除。"
 
 #. translators: help text for 'n' option in the 'Continue?' prompt
-#: src/solve-commit.cc:676
+#: src/solve-commit.cc:706
 msgid "No, cancel the operation."
 msgstr "不，請取消此操作。"
 
 #. translators: help text for 'p' option in the 'Continue?' prompt
-#: src/solve-commit.cc:678
+#: src/solve-commit.cc:708
 msgid ""
 "Restart solver in no-force-resolution mode in order to show dependency "
 "problems."
 msgstr "重新以不強迫解決模式啟動解析者，以顯示相依性問題。"
 
 #. translators: help text for 'v' option in the 'Continue?' prompt
-#: src/solve-commit.cc:680
+#: src/solve-commit.cc:710
 msgid "Toggle display of package versions."
 msgstr "切換顯示套件版本。"
 
 #. translators: help text for 'a' option in the 'Continue?' prompt
-#: src/solve-commit.cc:682
+#: src/solve-commit.cc:712
 msgid "Toggle display of package architectures."
 msgstr "切換顯示套件架構。"
 
 #. translators: help text for 'r' option in the 'Continue?' prompt
-#: src/solve-commit.cc:684
+#: src/solve-commit.cc:714
 msgid ""
 "Toggle display of repositories from which the packages will be installed."
 msgstr "切換顯示套件將從哪個套件庫安裝。"
 
 #. translators: help text for 'm' option in the 'Continue?' prompt
-#: src/solve-commit.cc:686
+#: src/solve-commit.cc:716
 msgid "Toggle display of package vendor names."
 msgstr "切換顯示套件供應商名稱。"
 
 #. translators: help text for 'd' option in the 'Continue?' prompt
-#: src/solve-commit.cc:688
+#: src/solve-commit.cc:718
 msgid "Toggle between showing all details and as few details as possible."
 msgstr "在顯示所有細節和顯示最少細節間切換。"
 
 #. translators: help text for 'g' option in the 'Continue?' prompt
-#: src/solve-commit.cc:690
+#: src/solve-commit.cc:720
 msgid "View the summary in pager."
 msgstr "在呼叫器中檢視摘要。"
 
-#: src/solve-commit.cc:798
+#: src/solve-commit.cc:828
 msgid "committing"
 msgstr "提交"
 
-#: src/solve-commit.cc:800
+#: src/solve-commit.cc:830
 msgid "(dry run)"
 msgstr "(測試)"
 
-#: src/solve-commit.cc:824 src/solve-commit.cc:857
+#: src/solve-commit.cc:857 src/solve-commit.cc:890
 msgid "Problem retrieving the package file from the repository:"
 msgstr "從套件庫取出套件檔案出現問題："
 
 #. translators: the first %s is 'zypper refresh' and the second is repo alias
-#: src/solve-commit.cc:854
+#: src/solve-commit.cc:887
 #, c-format, boost-format
 msgid "Repository '%s' is out of date. Running '%s' might help."
 msgstr "套件庫 '%s' 已過期。執行 '%s' 可能會有幫助。"
 
-#: src/solve-commit.cc:865
+#: src/solve-commit.cc:898
 msgid ""
 "The package integrity check failed. This may be a problem with the "
 "repository or media. Try one of the following:\n"
@@ -6037,26 +6047,26 @@ msgstr ""
 " – 使用另一個安裝媒體 (例如媒體損壞時)\n"
 " – 使用另一個套件庫"
 
-#: src/solve-commit.cc:879
+#: src/solve-commit.cc:912
 msgid "Problem occurred during or after installation or removal of packages:"
 msgstr "安裝或移除套件時 (或之後) 發生問題："
 
-#: src/solve-commit.cc:887
+#: src/solve-commit.cc:920
 msgid "Installation has completed with error."
 msgstr "安裝已完成，然而有錯誤發生。"
 
-#: src/solve-commit.cc:889
+#: src/solve-commit.cc:922
 #, boost-format
 msgid "You may run '%1%' to repair any dependency problems."
 msgstr "您可以執行 '%1%' 來修復任何相依性問題。"
 
-#: src/solve-commit.cc:903
+#: src/solve-commit.cc:936
 msgid ""
 "One of the installed patches requires a reboot of your machine. Reboot as "
 "soon as possible."
 msgstr "其中一個安裝的修補程式需要重新啟動您的機器。 請盡快重新啟動電腦。"
 
-#: src/solve-commit.cc:911
+#: src/solve-commit.cc:944
 msgid ""
 "One of the installed patches affects the package manager itself. Run this "
 "command once more to install any other needed patches."
@@ -6064,7 +6074,7 @@ msgstr ""
 "其中一個安裝的修補程式會影響套件管理員本身，請再次執行此命令以安裝其他所需的"
 "修補程式。"
 
-#: src/solve-commit.cc:933
+#: src/solve-commit.cc:966
 msgid "Dependencies of all installed packages are satisfied."
 msgstr "所有已安裝的套件均滿足相依性。"
 
@@ -6561,40 +6571,40 @@ msgstr "指定的位址無效"
 
 #. Guess failed:
 #. translators: don't translate '<platform>'
-#: src/utils/misc.cc:546
+#: src/utils/misc.cc:548
 msgid "Unable to guess a value for <platform>."
 msgstr "無法猜測 <platform> 的值。"
 
-#: src/utils/misc.cc:547
+#: src/utils/misc.cc:549
 msgid "Please use obs://<project>/<platform>"
 msgstr "請使用 obs://<project>/<platform>"
 
-#: src/utils/misc.cc:548 src/utils/misc.cc:585
+#: src/utils/misc.cc:550 src/utils/misc.cc:591
 #, c-format, boost-format
 msgid "Example: %s"
 msgstr "範例：%s"
 
-#: src/utils/misc.cc:584
+#: src/utils/misc.cc:590
 msgid "Invalid OBS URI."
 msgstr "無效的 OBS 位址。"
 
-#: src/utils/misc.cc:584
+#: src/utils/misc.cc:590
 msgid "Correct form is obs://<project>/[platform]"
 msgstr "正確的格式是 obs://<專案>/[平台]"
 
-#: src/utils/misc.cc:634
+#: src/utils/misc.cc:640
 msgid "Problem copying the specified RPM file to the cache directory."
 msgstr "複製指定的 RPM 檔到快取目錄時出現問題。"
 
-#: src/utils/misc.cc:635
+#: src/utils/misc.cc:641
 msgid "Perhaps you are running out of disk space."
 msgstr "可能您的磁碟空間已用罄。"
 
-#: src/utils/misc.cc:643
+#: src/utils/misc.cc:649
 msgid "Problem retrieving the specified RPM file"
 msgstr "取回指定的 RPM 檔案時出現問題"
 
-#: src/utils/misc.cc:644
+#: src/utils/misc.cc:650
 msgid "Please check whether the file is accessible."
 msgstr "請檢查此檔案是否可存取。"
 

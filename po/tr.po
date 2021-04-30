@@ -8,11 +8,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-25 11:38+0100\n"
+"POT-Creation-Date: 2021-04-30 18:12+0200\n"
 "PO-Revision-Date: 2021-04-07 15:58+0000\n"
 "Last-Translator: Suleyman Poyraz <zaryob.dev@gmail.com>\n"
-"Language-Team: Turkish <https://l10n.opensuse.org/projects/zypper/master/tr/>"
-"\n"
+"Language-Team: Turkish <https://l10n.opensuse.org/projects/zypper/master/tr/"
+">\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -66,7 +66,7 @@ msgid "Unknown command '%s'"
 msgstr "Bilinmeyen komut '%s'"
 
 #: src/Config.cc:53
-#, boost-format, c-format
+#, c-format, boost-format
 msgid "Invalid table style %d."
 msgstr "Geçersiz yol: %d"
 
@@ -336,7 +336,7 @@ msgid "'%s' not found in package names. Trying '%s'."
 msgstr "'%s' paket adlarında bulunamadı. '%s' deneniyor."
 
 #: src/PackageArgs.cc:218
-#, boost-format, c-format
+#, c-format, boost-format
 msgid "'%s' is not a package name or capability."
 msgstr "'%s' geçerli bir paket adı veya özellik değil."
 
@@ -379,7 +379,7 @@ msgstr "'%s' kaynak paketi bulunamadı."
 # clients/nis_write.ycp:73
 #. just in case
 #: src/RequestFeedback.cc:56
-#, boost-format, c-format
+#, c-format, boost-format
 msgid "Object '%s' not found."
 msgstr "'%s' nesnesi bulunamadı."
 
@@ -420,7 +420,7 @@ msgstr "Belirtilen depoda '%s' nesnesi bulunamadı."
 # clients/inst_rootpart.ycp:401
 #. translators: meaning a package %s or provider of capability %s
 #: src/RequestFeedback.cc:76
-#, boost-format, c-format
+#, c-format, boost-format
 msgid "No provider of '%s' found."
 msgstr "\"%s\" sağlayıcısı bulunamadı."
 
@@ -440,7 +440,7 @@ msgstr "'%s' paketi kurulu değil."
 # clients/inst_rootpart.ycp:401
 #. translators: meaning provider of capability %s
 #: src/RequestFeedback.cc:90
-#, boost-format, c-format
+#, c-format, boost-format
 msgid "No provider of '%s' is installed."
 msgstr "Hiçbir \"%s\" sağlayıcısı kurulmamış."
 
@@ -452,7 +452,7 @@ msgstr "'%s' yüklendi."
 # include/cups/ui.ycp:1979 include/cups/ui.ycp:2123
 #. translators: %s are package names
 #: src/RequestFeedback.cc:98
-#, boost-format, c-format
+#, c-format, boost-format
 msgid "'%s' providing '%s' is already installed."
 msgstr "'%s' sağlayıcısı ('%s' sağlamaktadır) zaten kurulu."
 
@@ -624,252 +624,252 @@ msgstr "Şüpheli önem filtre değeri '%1%'."
 #. translator: '%1%' is a products name
 #. '%2%' is a command to call (like 'zypper dup')
 #. Both may contain whitespace and should be enclosed by quotes!
-#: src/Summary.cc:400
+#: src/Summary.cc:416
 #, boost-format
 msgid "Product '%1%' requires to be updated by calling '%2%'!"
 msgstr "'%1%' ürünü '%2%' komutu ile güncellenmeyi gerektiriyor!"
 
 #. translators: Appended when clipping a long enumeration:
 #. "ConsoleKit-devel ConsoleKit-doc ... and 20828 more items."
-#: src/Summary.cc:475 src/Summary.cc:551
+#: src/Summary.cc:491 src/Summary.cc:567
 #, boost-format
 msgid "... and %1% more item."
 msgid_plural "... and %1% more items."
 msgstr[0] "... ve %1% daha fazla öğe."
 msgstr[1] "... ve %1% daha fazla öğe."
 
-#: src/Summary.cc:569
+#: src/Summary.cc:585
 #, c-format, boost-format
 msgid "The following NEW package is going to be installed:"
 msgid_plural "The following %d NEW packages are going to be installed:"
 msgstr[0] "Aşağıdaki yeni paket kurulacak:"
 msgstr[1] "Aşağıdaki %d yeni paket kurulacak:"
 
-#: src/Summary.cc:574
+#: src/Summary.cc:590
 #, c-format, boost-format
 msgid "The following NEW patch is going to be installed:"
 msgid_plural "The following %d NEW patches are going to be installed:"
 msgstr[0] "Aşağıdaki yeni yama kurulacak:"
 msgstr[1] "Aşağıdaki %d yeni yama kurulacak:"
 
-#: src/Summary.cc:579
+#: src/Summary.cc:595
 #, c-format, boost-format
 msgid "The following NEW pattern is going to be installed:"
 msgid_plural "The following %d NEW patterns are going to be installed:"
 msgstr[0] "Aşağıdaki yeni örüntü yüklenecek:"
 msgstr[1] "Aşağıdaki %d yeni örüntü yüklenecek:"
 
-#: src/Summary.cc:584
+#: src/Summary.cc:600
 #, c-format, boost-format
 msgid "The following NEW product is going to be installed:"
 msgid_plural "The following %d NEW products are going to be installed:"
 msgstr[0] "Aşağıdaki yeni ürün yüklenecek:"
 msgstr[1] "Aşağıdaki %d yeni ürün yüklenecek:"
 
-#: src/Summary.cc:589
+#: src/Summary.cc:605
 #, c-format, boost-format
 msgid "The following source package is going to be installed:"
 msgid_plural "The following %d source packages are going to be installed:"
 msgstr[0] "Aşağıdaki kaynak paketi kurulacak:"
 msgstr[1] "Aşağıdaki %d kaynak paketi kurulacak:"
 
-#: src/Summary.cc:595
+#: src/Summary.cc:611
 #, c-format, boost-format
 msgid "The following application is going to be installed:"
 msgid_plural "The following %d applications are going to be installed:"
 msgstr[0] "Aşağıdaki uygulama kurulacak:"
 msgstr[1] "Aşağıdaki %d uygulama kurulacak:"
 
-#: src/Summary.cc:620
+#: src/Summary.cc:636
 #, c-format, boost-format
 msgid "The following package is going to be REMOVED:"
 msgid_plural "The following %d packages are going to be REMOVED:"
 msgstr[0] "Aşağıdaki paket KALDIRILACAK:"
 msgstr[1] "Aşağıdaki %d paket KALDIRILACAK:"
 
-#: src/Summary.cc:625
+#: src/Summary.cc:641
 #, c-format, boost-format
 msgid "The following patch is going to be REMOVED:"
 msgid_plural "The following %d patches are going to be REMOVED:"
 msgstr[0] "Aşağıdaki yama KALDIRILACAK:"
 msgstr[1] "Aşağıdaki %d yama KALDIRILACAK:"
 
-#: src/Summary.cc:630
+#: src/Summary.cc:646
 #, c-format, boost-format
 msgid "The following pattern is going to be REMOVED:"
 msgid_plural "The following %d patterns are going to be REMOVED:"
 msgstr[0] "Aşağıdaki örüntü KALDIRILACAK:"
 msgstr[1] "Aşağıdaki %d örüntü KALDIRILACAK:"
 
-#: src/Summary.cc:635
+#: src/Summary.cc:651
 #, c-format, boost-format
 msgid "The following product is going to be REMOVED:"
 msgid_plural "The following %d products are going to be REMOVED:"
 msgstr[0] "Aşağıdaki ürün KALDIRILACAK:"
 msgstr[1] "Aşağıdaki %d ürün KALDIRILACAK:"
 
-#: src/Summary.cc:641
+#: src/Summary.cc:657
 #, c-format, boost-format
 msgid "The following application is going to be REMOVED:"
 msgid_plural "The following %d applications are going to be REMOVED:"
 msgstr[0] "Aşağıdaki uygulama KALDIRILACAK:"
 msgstr[1] "Aşağıdaki %d uygulama KALDIRILACAK:"
 
-#: src/Summary.cc:664
+#: src/Summary.cc:680
 #, c-format, boost-format
 msgid "The following package is going to be upgraded:"
 msgid_plural "The following %d packages are going to be upgraded:"
 msgstr[0] "Aşağıdaki paket yükseltilecek:"
 msgstr[1] "Aşağıdaki %d paket yükseltilecek:"
 
-#: src/Summary.cc:669
+#: src/Summary.cc:685
 #, c-format, boost-format
 msgid "The following patch is going to be upgraded:"
 msgid_plural "The following %d patches are going to be upgraded:"
 msgstr[0] "Aşağıdaki yama yükseltilecek:"
 msgstr[1] "Aşağıdaki %d yama yükseltilecek:"
 
-#: src/Summary.cc:674
+#: src/Summary.cc:690
 #, c-format, boost-format
 msgid "The following pattern is going to be upgraded:"
 msgid_plural "The following %d patterns are going to be upgraded:"
 msgstr[0] "Aşağıdaki örüntü yükseltilecek:"
 msgstr[1] "Aşağıdaki %d örüntü yükseltilecek:"
 
-#: src/Summary.cc:680
+#: src/Summary.cc:696
 #, c-format, boost-format
 msgid "The following product is going to be upgraded:"
 msgid_plural "The following %d products are going to be upgraded:"
 msgstr[0] "Aşağıdaki ürün yükseltilecek:"
 msgstr[1] "Aşağıdaki %d ürün yükseltilecek:"
 
-#: src/Summary.cc:688
+#: src/Summary.cc:704
 #, c-format, boost-format
 msgid "The following application is going to be upgraded:"
 msgid_plural "The following %d applications are going to be upgraded:"
 msgstr[0] "Aşağıdaki uygulama yükseltilecek:"
 msgstr[1] "Aşağıdaki %d uygulama yükseltilecek:"
 
-#: src/Summary.cc:710
+#: src/Summary.cc:726
 #, c-format, boost-format
 msgid "The following package is going to be downgraded:"
 msgid_plural "The following %d packages are going to be downgraded:"
 msgstr[0] "Aşağıdaki paketin sürümü düşürülecek:"
 msgstr[1] "Aşağıdaki %d paketin sürümü düşürülecek:"
 
-#: src/Summary.cc:715
+#: src/Summary.cc:731
 #, c-format, boost-format
 msgid "The following patch is going to be downgraded:"
 msgid_plural "The following %d patches are going to be downgraded:"
 msgstr[0] "Aşağıdaki yamanın sürümü düşürülecek:"
 msgstr[1] "Aşağıdaki %d yamanın sürümü düşürülecek:"
 
-#: src/Summary.cc:720
+#: src/Summary.cc:736
 #, c-format, boost-format
 msgid "The following pattern is going to be downgraded:"
 msgid_plural "The following %d patterns are going to be downgraded:"
 msgstr[0] "Aşağıdaki örüntünün sürümü düşürülecek:"
 msgstr[1] "Aşağıdaki %d örüntünün sürümü düşürülecek:"
 
-#: src/Summary.cc:725
+#: src/Summary.cc:741
 #, c-format, boost-format
 msgid "The following product is going to be downgraded:"
 msgid_plural "The following %d products are going to be downgraded:"
 msgstr[0] "Aşağıdaki ürünün sürümü düşürülecek:"
 msgstr[1] "Aşağıdaki %d ürünün sürümü düşürülecek:"
 
-#: src/Summary.cc:731
+#: src/Summary.cc:747
 #, c-format, boost-format
 msgid "The following application is going to be downgraded:"
 msgid_plural "The following %d applications are going to be downgraded:"
 msgstr[0] "Aşağıdaki uygulamanın sürümü düşürülecek:"
 msgstr[1] "Aşağıdaki %d uygulamanın sürümü düşürülecek:"
 
-#: src/Summary.cc:753
-#, boost-format, c-format
+#: src/Summary.cc:769
+#, c-format, boost-format
 msgid "The following package is going to be reinstalled:"
 msgid_plural "The following %d packages are going to be reinstalled:"
 msgstr[0] "Aşağıdaki paket yeniden yüklenecek:"
 msgstr[1] "Aşağıdaki %d paket yeniden yüklenecek:"
 
-#: src/Summary.cc:758
-#, boost-format, c-format
+#: src/Summary.cc:774
+#, c-format, boost-format
 msgid "The following patch is going to be reinstalled:"
 msgid_plural "The following %d patches are going to be reinstalled:"
 msgstr[0] "Aşağıdaki yama yeniden yüklenecek:"
 msgstr[1] "Aşağıdaki %d yama yeniden yüklenecek:"
 
-#: src/Summary.cc:763
-#, boost-format, c-format
+#: src/Summary.cc:779
+#, c-format, boost-format
 msgid "The following pattern is going to be reinstalled:"
 msgid_plural "The following %d patterns are going to be reinstalled:"
 msgstr[0] "Aşağıdaki model yeniden yüklenecek:"
 msgstr[1] "Aşağıdaki %d model yeniden yüklenecek:"
 
-#: src/Summary.cc:768
-#, boost-format, c-format
+#: src/Summary.cc:784
+#, c-format, boost-format
 msgid "The following product is going to be reinstalled:"
 msgid_plural "The following %d products are going to be reinstalled:"
 msgstr[0] "Aşağıdaki ürün yeniden yüklenecek:"
 msgstr[1] "Aşağıdaki %d ürün yeniden yüklenecek:"
 
-#: src/Summary.cc:781
-#, boost-format, c-format
+#: src/Summary.cc:797
+#, c-format, boost-format
 msgid "The following application is going to be reinstalled:"
 msgid_plural "The following %d applications are going to be reinstalled:"
 msgstr[0] "Aşağıdaki uygulama yeniden yüklenecek:"
 msgstr[1] "Aşağıdaki %d uygulama yeniden yüklenecek:"
 
-#: src/Summary.cc:918
-#, boost-format, c-format
+#: src/Summary.cc:934
+#, c-format, boost-format
 msgid "The following recommended package was automatically selected:"
 msgid_plural ""
 "The following %d recommended packages were automatically selected:"
 msgstr[0] "Aşağıdaki önerilen paket otomatik olarak seçildi:"
 msgstr[1] "Aşağıdaki önerilen paketler (%d tane) otomatik olarak seçildi:"
 
-#: src/Summary.cc:923
-#, boost-format, c-format
+#: src/Summary.cc:939
+#, c-format, boost-format
 msgid "The following recommended patch was automatically selected:"
 msgid_plural ""
 "The following %d recommended patches were automatically selected:"
 msgstr[0] "Önerilen yama otomatik olarak seçildi:"
 msgstr[1] "Önerilen %d yama otomatik olarak seçildi:"
 
-#: src/Summary.cc:928
-#, boost-format, c-format
+#: src/Summary.cc:944
+#, c-format, boost-format
 msgid "The following recommended pattern was automatically selected:"
 msgid_plural ""
 "The following %d recommended patterns were automatically selected:"
 msgstr[0] "Aşağıdaki önerilen model otomatik olarak seçildi:"
 msgstr[1] "Aşağıdaki önerilen %d model otomatik olarak seçildi:"
 
-#: src/Summary.cc:933
-#, boost-format, c-format
+#: src/Summary.cc:949
+#, c-format, boost-format
 msgid "The following recommended product was automatically selected:"
 msgid_plural ""
 "The following %d recommended products were automatically selected:"
 msgstr[0] "Aşağıdaki önerilen ürün otomatik olarak seçildi:"
 msgstr[1] "Aşağıdaki önerilen %d ürün otomatik olarak seçildi:"
 
-#: src/Summary.cc:938
-#, boost-format, c-format
+#: src/Summary.cc:954
+#, c-format, boost-format
 msgid "The following recommended source package was automatically selected:"
 msgid_plural ""
 "The following %d recommended source packages were automatically selected:"
 msgstr[0] "Aşağıdaki önerilen kaynak paketi otomatik olarak seçildi:"
 msgstr[1] "Aşağıdaki önerilen %d kaynak paketi otomatik olarak seçildi:"
 
-#: src/Summary.cc:944
-#, boost-format, c-format
+#: src/Summary.cc:960
+#, c-format, boost-format
 msgid "The following recommended application was automatically selected:"
 msgid_plural ""
 "The following %d recommended applications were automatically selected:"
 msgstr[0] "Aşağıdaki önerilen uygulama otomatik olarak seçildi:"
 msgstr[1] "Aşağıdaki önerilen %d uygulama otomatik olarak seçildi:"
 
-#: src/Summary.cc:991
-#, boost-format, c-format
+#: src/Summary.cc:1007
+#, c-format, boost-format
 msgid ""
 "The following package is recommended, but will not be installed (only "
 "required packages will be installed):"
@@ -883,8 +883,8 @@ msgstr[1] ""
 "Aşağıdaki %d paket önerilir, ancak yüklenmeyecektir (yalnızca gerekli "
 "paketler yüklenecektir):"
 
-#: src/Summary.cc:1003
-#, boost-format, c-format
+#: src/Summary.cc:1019
+#, c-format, boost-format
 msgid ""
 "The following package is recommended, but will not be installed because it's "
 "unwanted (was manually removed before):"
@@ -898,8 +898,8 @@ msgstr[1] ""
 "Aşağıdaki %d paket önerilir, ancak istenmediği için yüklenmeyecektir (daha "
 "önce elle kaldırılmıştır):"
 
-#: src/Summary.cc:1013
-#, boost-format, c-format
+#: src/Summary.cc:1029
+#, c-format, boost-format
 msgid ""
 "The following package is recommended, but will not be installed due to "
 "conflicts or dependency issues:"
@@ -913,150 +913,150 @@ msgstr[1] ""
 "Aşağıdaki %d paket önerilir, ancak çakışmalar veya bağımlılık sorunları "
 "nedeniyle yüklenmeyecektir:"
 
-#: src/Summary.cc:1026
-#, boost-format, c-format
+#: src/Summary.cc:1042
+#, c-format, boost-format
 msgid "The following patch is recommended, but will not be installed:"
 msgid_plural ""
 "The following %d patches are recommended, but will not be installed:"
 msgstr[0] "Aşağıdaki yama önerilir, ancak yüklenmeyecektir:"
 msgstr[1] "Aşağıdaki yamalar (%d tane) önerilir, ancak yüklenmeyecektir:"
 
-#: src/Summary.cc:1030
-#, boost-format, c-format
+#: src/Summary.cc:1046
+#, c-format, boost-format
 msgid "The following pattern is recommended, but will not be installed:"
 msgid_plural ""
 "The following %d patterns are recommended, but will not be installed:"
 msgstr[0] "Aşağıdaki model önerilir, ancak yüklenmeyecektir:"
 msgstr[1] "Aşağıdaki %d model önerilir, ancak yüklenmeyecektir:"
 
-#: src/Summary.cc:1034
-#, boost-format, c-format
+#: src/Summary.cc:1050
+#, c-format, boost-format
 msgid "The following product is recommended, but will not be installed:"
 msgid_plural ""
 "The following %d products are recommended, but will not be installed:"
 msgstr[0] "Aşağıdaki ürün önerilir, ancak yüklenmeyecektir:"
 msgstr[1] "Aşağıdaki %d ürün önerilir, ancak yüklenmeyecektir:"
 
-#: src/Summary.cc:1039
-#, boost-format, c-format
+#: src/Summary.cc:1055
+#, c-format, boost-format
 msgid "The following application is recommended, but will not be installed:"
 msgid_plural ""
 "The following %d applications are recommended, but will not be installed:"
 msgstr[0] "Aşağıdaki uygulama önerilir, ancak yüklenmeyecektir:"
 msgstr[1] "Aşağıdaki %d uygulama önerilir, ancak yüklenmeyecektir:"
 
-#: src/Summary.cc:1072
-#, boost-format, c-format
+#: src/Summary.cc:1088
+#, c-format, boost-format
 msgid "The following package is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d packages are suggested, but will not be installed:"
 msgstr[0] "Aşağıdaki paket önerilir, ancak yüklenmeyecektir:"
 msgstr[1] "Aşağıdaki %d paket önerilir, ancak yüklenmeyecektir:"
 
-#: src/Summary.cc:1077
-#, boost-format, c-format
+#: src/Summary.cc:1093
+#, c-format, boost-format
 msgid "The following patch is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d patches are suggested, but will not be installed:"
 msgstr[0] "Aşağıdaki yama önerilir, ancak yüklenmeyecektir:"
 msgstr[1] "Aşağıdaki %d yama önerilir, ancak yüklenmeyecektir:"
 
-#: src/Summary.cc:1082
-#, boost-format, c-format
+#: src/Summary.cc:1098
+#, c-format, boost-format
 msgid "The following pattern is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d patterns are suggested, but will not be installed:"
 msgstr[0] "Aşağıdaki model önerilir, ancak yüklenmeyecektir:"
 msgstr[1] "Aşağıdaki %d model önerilir, ancak yüklenmeyecektir:"
 
-#: src/Summary.cc:1087
-#, boost-format, c-format
+#: src/Summary.cc:1103
+#, c-format, boost-format
 msgid "The following product is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d products are suggested, but will not be installed:"
 msgstr[0] "Aşağıdaki ürün önerilir, ancak yüklenmeyecektir:"
 msgstr[1] "Aşağıdaki %d ürün önerilir, ancak yüklenmeyecektir:"
 
-#: src/Summary.cc:1093
-#, boost-format, c-format
+#: src/Summary.cc:1109
+#, c-format, boost-format
 msgid "The following application is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d applications are suggested, but will not be installed:"
 msgstr[0] "Aşağıdaki uygulama önerilir, ancak yüklenmeyecektir:"
 msgstr[1] "Aşağıdaki %d uygulama önerilir, ancak yüklenmeyecektir:"
 
-#: src/Summary.cc:1118
-#, boost-format, c-format
+#: src/Summary.cc:1134
+#, c-format, boost-format
 msgid "The following package is going to change architecture:"
 msgid_plural "The following %d packages are going to change architecture:"
 msgstr[0] "Aşağıdaki paket mimariyi değiştirecek:"
 msgstr[1] "Aşağıdaki %d paket mimariyi değiştirecek:"
 
-#: src/Summary.cc:1123
-#, boost-format, c-format
+#: src/Summary.cc:1139
+#, c-format, boost-format
 msgid "The following patch is going to change architecture:"
 msgid_plural "The following %d patches are going to change architecture:"
 msgstr[0] "Aşağıdaki yama mimariyi değiştirecek:"
 msgstr[1] "Aşağıdaki %d yama mimariyi değiştirecek:"
 
-#: src/Summary.cc:1128
-#, boost-format, c-format
+#: src/Summary.cc:1144
+#, c-format, boost-format
 msgid "The following pattern is going to change architecture:"
 msgid_plural "The following %d patterns are going to change architecture:"
 msgstr[0] "Aşağıdaki model mimariyi değiştirecek:"
 msgstr[1] "Aşağıdaki %d model mimariyi değiştirecek:"
 
-#: src/Summary.cc:1133
-#, boost-format, c-format
+#: src/Summary.cc:1149
+#, c-format, boost-format
 msgid "The following product is going to change architecture:"
 msgid_plural "The following %d products are going to change architecture:"
 msgstr[0] "Aşağıdaki ürün mimariyi değiştirecek:"
 msgstr[1] "Aşağıdaki %d ürün mimariyi değiştirecek:"
 
-#: src/Summary.cc:1139
-#, boost-format, c-format
+#: src/Summary.cc:1155
+#, c-format, boost-format
 msgid "The following application is going to change architecture:"
 msgid_plural "The following %d applications are going to change architecture:"
 msgstr[0] "Aşağıdaki uygulama mimariyi değiştirecek:"
 msgstr[1] "Aşağıdaki %d uygulama mimariyi değiştirecek:"
 
-#: src/Summary.cc:1164
-#, boost-format, c-format
+#: src/Summary.cc:1180
+#, c-format, boost-format
 msgid "The following package is going to change vendor:"
 msgid_plural "The following %d packages are going to change vendor:"
 msgstr[0] "Aşağıdaki paket dağıtıcıyı değiştirecek:"
 msgstr[1] "Aşağıdaki %d paket dağıtıcıyı değiştirecek:"
 
-#: src/Summary.cc:1169
-#, boost-format, c-format
+#: src/Summary.cc:1185
+#, c-format, boost-format
 msgid "The following patch is going to change vendor:"
 msgid_plural "The following %d patches are going to change vendor:"
 msgstr[0] "Aşağıdaki yama dağıtıcıyı değiştirecek:"
 msgstr[1] "Aşağıdaki %d yama dağıtıcıyı değiştirecek:"
 
-#: src/Summary.cc:1174
-#, boost-format, c-format
+#: src/Summary.cc:1190
+#, c-format, boost-format
 msgid "The following pattern is going to change vendor:"
 msgid_plural "The following %d patterns are going to change vendor:"
 msgstr[0] "Aşağıdaki model dağıtıcıyı değiştirecek:"
 msgstr[1] "Aşağıdaki %d model dağıtıcıyı değiştirecek:"
 
-#: src/Summary.cc:1179
-#, boost-format, c-format
+#: src/Summary.cc:1195
+#, c-format, boost-format
 msgid "The following product is going to change vendor:"
 msgid_plural "The following %d products are going to change vendor:"
 msgstr[0] "Aşağıdaki ürün dağıtıcıyı değiştirecek:"
 msgstr[1] "Aşağıdaki %d ürün dağıtıcıyı değiştirecek:"
 
-#: src/Summary.cc:1185
-#, boost-format, c-format
+#: src/Summary.cc:1201
+#, c-format, boost-format
 msgid "The following application is going to change vendor:"
 msgid_plural "The following %d applications are going to change vendor:"
 msgstr[0] "Aşağıdaki uygulama dağıtıcıyı değiştirecek:"
 msgstr[1] "Aşağıdaki %d uygulama dağıtıcıyı değiştirecek:"
 
-#: src/Summary.cc:1208
-#, boost-format, c-format
+#: src/Summary.cc:1224
+#, c-format, boost-format
 msgid "The following package has no support information from its vendor:"
 msgid_plural ""
 "The following %d packages have no support information from their vendor:"
@@ -1067,44 +1067,46 @@ msgstr[1] ""
 "Aşağıdaki %d paket, dağıtıcısı ile alakalı hiçbir destek bilgisine sahip "
 "değildir:"
 
-#: src/Summary.cc:1226
-#, boost-format, c-format
+#: src/Summary.cc:1242
+#, c-format, boost-format
 msgid "The following package is not supported by its vendor:"
 msgid_plural "The following %d packages are not supported by their vendor:"
 msgstr[0] "Aşağıdaki paket, dağıtıcısı tarafından desteklenmemektedir:"
 msgstr[1] "Aşağıdaki %d paket, dağıtıcısı tarafından desteklenmemektedir:"
 
-#: src/Summary.cc:1244
-#, boost-format, c-format
+#: src/Summary.cc:1260
+#, c-format, boost-format
 msgid ""
 "The following package needs additional customer contract to get support:"
 msgid_plural ""
 "The following %d packages need additional customer contract to get support:"
-msgstr[0] "Aşağıdaki paket, destek almak için ek müşteri sözleşmesi gerektirir:"
-msgstr[1] "Aşağıdaki %d paket, destek almak için ek müşteri sözleşmesi gerektirir:"
+msgstr[0] ""
+"Aşağıdaki paket, destek almak için ek müşteri sözleşmesi gerektirir:"
+msgstr[1] ""
+"Aşağıdaki %d paket, destek almak için ek müşteri sözleşmesi gerektirir:"
 
-#: src/Summary.cc:1264
-#, boost-format, c-format
+#: src/Summary.cc:1280
+#, c-format, boost-format
 msgid "The following package update will NOT be installed:"
 msgid_plural "The following %d package updates will NOT be installed:"
 msgstr[0] "Aşağıdaki paket güncellemesi KURULMAYACAKTIR:"
 msgstr[1] "Aşağıdaki %d paket güncellemesi KURULMAYACAKTIR:"
 
-#: src/Summary.cc:1269
-#, boost-format, c-format
+#: src/Summary.cc:1285
+#, c-format, boost-format
 msgid "The following product update will NOT be installed:"
 msgid_plural "The following %d product updates will NOT be installed:"
 msgstr[0] "Aşağıdaki ürün güncellemesi KURULMAYACAKTIR:"
 msgstr[1] "Aşağıdaki %d ürün güncellemesi KURULMAYACAKTIR:"
 
-#: src/Summary.cc:1275
-#, boost-format, c-format
+#: src/Summary.cc:1291
+#, c-format, boost-format
 msgid "The following application update will NOT be installed:"
 msgid_plural "The following %d application updates will NOT be installed:"
 msgstr[0] "Aşağıdaki uygulama güncellemesi KURULMAYACAKTIR:"
 msgstr[1] "Aşağıdaki %d uygulama güncellemesi KURULMAYACAKTIR:"
 
-#: src/Summary.cc:1308
+#: src/Summary.cc:1324
 #, c-format, boost-format
 msgid "The following item is locked and will not be changed by any action:"
 msgid_plural ""
@@ -1114,85 +1116,85 @@ msgstr[1] "Aşağıdaki %d öge kilitli ve herhangi bir eylemle değiştirilmeye
 
 #. always as plain name list
 #. translators: used as 'tag:' (i.e. followed by ':')
-#: src/Summary.cc:1321
+#: src/Summary.cc:1337
 msgid "Available"
 msgstr "Mevcut"
 
 #. translators: used as 'tag:' (i.e. followed by ':')
 #. translators: property name; short; used like "Name: value"
-#: src/Summary.cc:1327 src/info.cc:332 src/info.cc:423 src/info.cc:554
+#: src/Summary.cc:1343 src/info.cc:332 src/info.cc:423 src/info.cc:554
 msgid "Installed"
 msgstr "Kuruldu"
 
-#: src/Summary.cc:1332
+#: src/Summary.cc:1348
 #, boost-format
 msgid "Run '%1%' to see the complete list of locked items."
 msgstr "Kilitli ögelerin tam listesini görmek için '%1%' komutunu çalıştırın."
 
-#: src/Summary.cc:1341
+#: src/Summary.cc:1357
 #, c-format, boost-format
 msgid "The following patch requires a system reboot:"
 msgid_plural "The following %d patches require a system reboot:"
 msgstr[0] "Aşağıdaki yama sistemin yeniden başlatılmasını gerektiriyor:"
 msgstr[1] "Aşağıdaki %d yama sistemin yeniden başlatılmasını gerektiriyor:"
 
-#: src/Summary.cc:1345
+#: src/Summary.cc:1361
 #, c-format, boost-format
 msgid "The following package requires a system reboot:"
 msgid_plural "The following %d packages require a system reboot:"
 msgstr[0] "Aşağıdaki paket, sistemin yeniden başlatılmasını gerektirir:"
 msgstr[1] "Aşağıdaki %d paket, sistemin yeniden başlatılmasını gerektirir:"
 
-#: src/Summary.cc:1374
+#: src/Summary.cc:1390
 #, boost-format
 msgid "Overall download size: %1%. Already cached: %2%."
 msgstr "Toplam indirme boyutu: %1%. Önbellekli: %2%."
 
 # clients/online_update_load.ycp:380
-#: src/Summary.cc:1377
+#: src/Summary.cc:1393
 msgid "Download only."
 msgstr "Sadece indir."
 
 #. TrasnlatorExplanation %s will be substituted by a byte count e.g. 212 K
-#: src/Summary.cc:1383
+#: src/Summary.cc:1399
 #, c-format, boost-format
 msgid "After the operation, additional %s will be used."
 msgstr "İşlemden sonra ek olarak '%s' kullanılacak."
 
-#: src/Summary.cc:1385
+#: src/Summary.cc:1401
 msgid "No additional space will be used or freed after the operation."
 msgstr "İşlemden sonra kullanılacak ek alan oluşmayacak yada kurtarılmayacak."
 
 #. TrasnlatorExplanation %s will be substituted by a byte count e.g. 212 K
-#: src/Summary.cc:1392
+#: src/Summary.cc:1408
 #, c-format, boost-format
 msgid "After the operation, %s will be freed."
 msgstr "İşlemden sonra '%s' kurtarılacak."
 
 # clients/inst_sw_single.ycp:1461 clients/inst_sw_single.ycp:1485
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
-#: src/Summary.cc:1416
+#: src/Summary.cc:1432
 msgid "package to upgrade"
 msgid_plural "packages to upgrade"
 msgstr[0] "yükseltilecek paket"
 msgstr[1] "yükseltilecek paketler"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
-#: src/Summary.cc:1427
+#: src/Summary.cc:1443
 msgid "to downgrade"
 msgid_plural "to downgrade"
 msgstr[0] "sürümü düşürülecek"
 msgstr[1] "sürümü düşürülecek"
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
-#: src/Summary.cc:1430
+#: src/Summary.cc:1446
 msgid "package to downgrade"
 msgid_plural "packages to downgrade"
 msgstr[0] "paket sürümü düşürülecek"
 msgstr[1] "paketlerin sürümü düşürülecek"
 
 #. translators: this text will be preceded by a number e.g. "5 new"
-#: src/Summary.cc:1441
+#: src/Summary.cc:1457
 msgid "new"
 msgid_plural "new"
 msgstr[0] "yeni"
@@ -1201,7 +1203,7 @@ msgstr[1] "yeni"
 #
 # clients/inst_sw_select.ycp:195
 #. translators: this text will be preceded by a number e.g. "5 new to install"
-#: src/Summary.cc:1444
+#: src/Summary.cc:1460
 msgid "new package to install"
 msgid_plural "new packages to install"
 msgstr[0] "kurulacak yeni paket"
@@ -1209,7 +1211,7 @@ msgstr[1] "kurulacak yeni paketler"
 
 # include/cups/ui.ycp:1979 include/cups/ui.ycp:2123
 #. translators: this text will be preceded by a number e.g. "5 to ..."
-#: src/Summary.cc:1455
+#: src/Summary.cc:1471
 msgid "to reinstall"
 msgid_plural "to reinstall"
 msgstr[0] "yeniden kurulacak"
@@ -1218,7 +1220,7 @@ msgstr[1] "yeniden kurulacak"
 #
 # clients/inst_sw_select.ycp:195
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
-#: src/Summary.cc:1458
+#: src/Summary.cc:1474
 msgid "package to reinstall"
 msgid_plural "packages to reinstall"
 msgstr[0] "yeniden kurulacak paket"
@@ -1226,42 +1228,42 @@ msgstr[1] "yeniden kurulacak paketler"
 
 # clients/hwinfo.ycp:55
 #. translators: this text will be preceded by a number e.g. "5 to ..."
-#: src/Summary.cc:1469
+#: src/Summary.cc:1485
 msgid "to remove"
 msgid_plural "to remove"
 msgstr[0] "kaldırılacak"
 msgstr[1] "kaldırılacak"
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
-#: src/Summary.cc:1472
+#: src/Summary.cc:1488
 msgid "package to remove"
 msgid_plural "packages to remove"
 msgstr[0] "kaldırılacak paket"
 msgstr[1] "kaldırılacak paketler"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
-#: src/Summary.cc:1483
+#: src/Summary.cc:1499
 msgid "to change vendor"
 msgid_plural " to change vendor"
 msgstr[0] "dağıtıcıyı değiştir"
 msgstr[1] "dağıtıcıyı değiştir"
 
 #. translators: this text will be preceded by a number e.g. "5 packages ..."
-#: src/Summary.cc:1486
+#: src/Summary.cc:1502
 msgid "package will change vendor"
 msgid_plural "packages will change vendor"
 msgstr[0] "paket dağıtıcıyı değiştirecek"
 msgstr[1] "paketler dağıtıcıyı değiştirecek"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
-#: src/Summary.cc:1497
+#: src/Summary.cc:1513
 msgid "to change arch"
 msgid_plural "to change arch"
 msgstr[0] "mimariyi değiştir"
 msgstr[1] "mimariyi değiştir"
 
 #. translators: this text will be preceded by a number e.g. "5 packages ..."
-#: src/Summary.cc:1500
+#: src/Summary.cc:1516
 msgid "package will change arch"
 msgid_plural "packages will change arch"
 msgstr[0] "paket mimariyi değiştir"
@@ -1269,7 +1271,7 @@ msgstr[1] "paketler mimariyi değiştir"
 
 # clients/inst_sw_single.ycp:1461 clients/inst_sw_single.ycp:1485
 #. translators: this text will be preceded by a number e.g. "5 new"
-#: src/Summary.cc:1511
+#: src/Summary.cc:1527
 msgid "source package"
 msgid_plural "source packages"
 msgstr[0] "kaynak paket"
@@ -1278,14 +1280,14 @@ msgstr[1] "kaynak paketler"
 #
 # clients/inst_sw_select.ycp:195
 #. translators: this text will be preceded by a number e.g. "5 new to install"
-#: src/Summary.cc:1514
+#: src/Summary.cc:1530
 msgid "source package to install"
 msgid_plural "source packages to install"
 msgstr[0] "kaynak paket kurulacak"
 msgstr[1] "kaynak paketler kurulacak"
 
 #. patch command (auto)restricted to update stack patches
-#: src/Summary.cc:1588
+#: src/Summary.cc:1604
 msgid ""
 "Package manager restart required. (Run this command once again after the "
 "update stack got updated)"
@@ -1293,7 +1295,7 @@ msgstr ""
 "Paket yöneticisinin yeniden başlatılması gerekiyor. (Güncelleme yığını "
 "güncellendikten sonra bu komutu bir kez daha çalıştırın)"
 
-#: src/Summary.cc:1591
+#: src/Summary.cc:1607
 msgid "System reboot required."
 msgstr "Sistemin yeniden başlatılması gerekiyor."
 
@@ -1305,7 +1307,7 @@ msgstr "Sistemin yeniden başlatılması gerekiyor."
 #. Consider to cancel:
 #. Product 'opennSUSE Tumbleweed' requires to be updated by calling 'zypper dup'!
 #. Continue? [y/n/...? shows all options] (y):
-#: src/Summary.cc:1608
+#: src/Summary.cc:1624
 msgid "Consider to cancel:"
 msgstr "İptal etmeyi göz önünde bulundurun:"
 
@@ -1339,7 +1341,7 @@ msgstr "PackageKit hala çalışıyor (muhtemelen meşgul)."
 msgid "Try again?"
 msgstr "Yeniden denemek istiyormusunuz?"
 
-#: src/Zypper.cc:248 src/Zypper.cc:715 src/commands/basecommand.cc:282
+#: src/Zypper.cc:248 src/Zypper.cc:715 src/commands/basecommand.cc:287
 msgid "Unexpected exception."
 msgstr "Beklenmedik istisna."
 
@@ -1352,7 +1354,7 @@ msgstr "Komut özelindeki yardımlar için komut satırına '%s' yazın."
 
 # clients/inst_sw_single.ycp:1461
 #: src/Zypper.cc:310
-#, boost-format, c-format
+#, c-format, boost-format
 msgid "Verbosity: %d"
 msgstr "Ayrıntı: %d"
 
@@ -1496,12 +1498,12 @@ msgstr "'%s' dosyası imzalanmamış, devam edilsin mi?"
 
 #. TranslatorExplanation: speaking of a file
 #: src/callbacks/keyring.h:180
-#, boost-format, c-format
+#, c-format, boost-format
 msgid "File '%s' from repository '%s' is unsigned, continue?"
 msgstr "'%s' deposundan imzalanmamış '%s' dosyası mevcut , devam edilsin mi?"
 
 #: src/callbacks/keyring.h:203
-#, boost-format, c-format
+#, c-format, boost-format
 msgid "Accepting file '%s' signed with an unknown key '%s'."
 msgstr "Kabul edilen '%s' dosyası bilinmeyen '%s' anahtarı ile imzalı."
 
@@ -1662,7 +1664,7 @@ msgid "No digest for file %s."
 msgstr "%s dosyası için özümleme yok."
 
 #: src/callbacks/keyring.h:478
-#, boost-format, c-format
+#, c-format, boost-format
 msgid "Unknown digest %s for file %s."
 msgstr "Bilinmeyen derleme '%s', '%s' içindir."
 
@@ -2210,9 +2212,9 @@ msgid ""
 "Remove packages with specified capabilities. A capability is NAME[.ARCH]"
 "[OP<VERSION>], where OP is one of <, <=, =, >=, >."
 msgstr ""
-"Belirtilen sağlamalara sahip paketleri kaldırın. Bir sağlama "
-"İSİM[.MİMARİ][OP<SÜRÜMÜ>] şeklindedir, burada OP operatörü <, <=, =,> =,> "
-"işaretlerinden biridir."
+"Belirtilen sağlamalara sahip paketleri kaldırın. Bir sağlama İSİM[.MİMARİ]"
+"[OP<SÜRÜMÜ>] şeklindedir, burada OP operatörü <, <=, =,> =,> işaretlerinden "
+"biridir."
 
 # clients/lan_inetd_custom.ycp:758
 #: src/commands/installremove.cc:104 src/commands/installremove.cc:224
@@ -2466,10 +2468,10 @@ msgid ""
 "have their KIND: string prepended (e.g. 'patch:foo') or use the commands --"
 "type option."
 msgstr ""
-"Kilit özelliği (LOCKSPEC), \"[TÜR:]İSİM[OP EDITION]\" tarafından oluşturulur;"
-" burada AD, * ve ? kullanan bir glob modeli de olabilir, joker karakterler "
-"de olabilir. Paket dışı türlerin başına KIND: dizesi eklenebilir (örneğin, "
-"'patch: foo') veya komutlar --type seçeneğini kullanabilir."
+"Kilit özelliği (LOCKSPEC), \"[TÜR:]İSİM[OP EDITION]\" tarafından "
+"oluşturulur; burada AD, * ve ? kullanan bir glob modeli de olabilir, joker "
+"karakterler de olabilir. Paket dışı türlerin başına KIND: dizesi eklenebilir "
+"(örneğin, 'patch: foo') veya komutlar --type seçeneğini kullanabilir."
 
 #: src/commands/locks/add.cc:36
 msgid ""
@@ -2478,8 +2480,8 @@ msgid ""
 "using =, <, <=, >, >= or != followed an EDITION."
 msgstr ""
 "Temel form, eşleşen öğelerin tüm sürümlerini kilitleyecektir. İsteğe bağlı "
-"olarak kilidi belirli bir baskı veya baskı aralığıyla eşleşecek şekilde =, <"
-", <=,>,>= veya != ve ardından bir SÜRÜMÜ kullanarak kısıtlayabilirsiniz."
+"olarak kilidi belirli bir baskı veya baskı aralığıyla eşleşecek şekilde =, "
+"<, <=,>,>= veya != ve ardından bir SÜRÜMÜ kullanarak kısıtlayabilirsiniz."
 
 #: src/commands/locks/add.cc:46
 msgid "Restrict the lock to the specified repository."
@@ -2646,12 +2648,12 @@ msgstr "Paket kilidini kaldırmada sorun:"
 msgid "Check if the reboot-needed flag was set."
 msgstr "needs-reboot bayrağının ayarlanıp ayarlanmadığını kontrol et."
 
-#: src/commands/needs-rebooting.cc:23
+#: src/commands/needs-rebooting.cc:24
 msgid ""
-"Checks if the reboot-needed flag was set by a previous update or install of a "
-"core library or service.\n"
-"Exit code ZYPPER_EXIT_INF_REBOOT_NEEDED indicates that a reboot is suggested, "
-"otherwise the exit code is set to ZYPPER_EXIT_OK."
+"Checks if the reboot-needed flag was set by a previous update or install of "
+"a core library or service.\n"
+"Exit code ZYPPER_EXIT_INF_REBOOT_NEEDED indicates that a reboot is "
+"suggested, otherwise the exit code is set to ZYPPER_EXIT_OK."
 msgstr ""
 "needs-reboot bayrağının bir önceki güncelleme ile ya da bir çekirdek "
 "kütüphanesi ya da hizmetinin yüklenmesi tarafından ayarlanıp ayarlanmadığını "
@@ -2659,22 +2661,30 @@ msgstr ""
 "ZYPPER_EXIT_INF_REBOOT_NEEDED çıkış kodu bir yeniden başlatmanın gerekli "
 "olduğunu belirtir, aksi taktirde çıkış kodu ZYPPER_EXIT_OK olarak ayarlanır."
 
-#: src/commands/needs-rebooting.cc:35
-msgid "Since the last system boot core libraries or services have been updated."
+#: src/commands/needs-rebooting.cc:26
+msgid ""
+"This is the recommended way for scripts to test whether a system reboot is "
+"suggested."
+msgstr ""
+
+#: src/commands/needs-rebooting.cc:38
+msgid ""
+"Since the last system boot core libraries or services have been updated."
 msgstr "Çekirdek kütüphane ve hizmetleri güncellendi."
 
-#: src/commands/needs-rebooting.cc:36
+#: src/commands/needs-rebooting.cc:39
 msgid ""
 "Reboot is suggested to ensure that your system benefits from these updates."
 msgstr ""
 "Sisteminizin bu güncellemelerden yararlanmasını sağlamak için yeniden "
 "başlatma gereklidir."
 
-#: src/commands/needs-rebooting.cc:41
-msgid "No core libraries or services have been updated since the last system boot."
+#: src/commands/needs-rebooting.cc:44
+msgid ""
+"No core libraries or services have been updated since the last system boot."
 msgstr "Çekirdek kütüphaneler ya da hizmetler güncellenmedi."
 
-#: src/commands/needs-rebooting.cc:42
+#: src/commands/needs-rebooting.cc:45
 msgid "Reboot is probably not necessary."
 msgstr "Yeniden başlatma muhtemelen gerekli değil."
 
@@ -2764,7 +2774,7 @@ msgid "Option '--%s' overrides a previously set download mode."
 msgstr "Seçenek '--%s', önceden ayarlanmış bir indirme modunu geçersiz kılar."
 
 #: src/commands/optionsets.cc:116
-#, boost-format, c-format
+#, c-format, boost-format
 msgid "Available download modes: %s"
 msgstr "Mevcut indirme modları: %s"
 
@@ -2813,8 +2823,8 @@ msgid ""
 "download-as-needed disables the fileconflict check."
 msgstr ""
 "Paketleri, önceden kurulmuş olan diğer paketlerdeki dosyaları değiştirseler "
-"bile kurun. Varsayılan, dosya çakışmalarını bir hata olarak ele almaktır. "
-"`--download-as-needed` dosya çakışması denetimini devre dışı bırakır."
+"bile kurun. Varsayılan, dosya çakışmalarını bir hata olarak ele almaktır. `--"
+"download-as-needed` dosya çakışması denetimini devre dışı bırakır."
 
 #. translators: -y, --no-confirm
 #: src/commands/optionsets.cc:291
@@ -2949,12 +2959,12 @@ msgstr ""
 msgid "Write debug output to file <path>."
 msgstr "Hata ayıklama çıktısını <path> dosyasına yazın."
 
-#: src/commands/ps.cc:72 src/solve-commit.cc:494
+#: src/commands/ps.cc:72 src/solve-commit.cc:524
 msgid "Check failed:"
 msgstr "Kontrol başarısız oldu:"
 
 #. Here: Table output
-#: src/commands/ps.cc:127 src/solve-commit.cc:483
+#: src/commands/ps.cc:127 src/solve-commit.cc:513
 msgid "Checking for running processes using deleted libraries..."
 msgstr "Silinen kütüphaneleri kullanan çalışan süreçler kontrol ediliyor..."
 
@@ -3435,7 +3445,7 @@ msgid "Maybe you do not have write permissions?"
 msgstr "Belki de yazma iznine sahip misiniz?"
 
 #: src/commands/repos/list.cc:151
-#, boost-format, c-format
+#, c-format, boost-format
 msgid "Repositories have been successfully exported to %s."
 msgstr "Depolar başarıyla %s konumuna aktarıldı."
 
@@ -3636,7 +3646,7 @@ msgstr "URI'deki sorgu dizesini yoksay."
 #. translators: %s is the supplied command line argument which
 #. for which no repository counterpart was found
 #: src/commands/repos/remove.cc:96
-#, boost-format, c-format
+#, c-format, boost-format
 msgid "Repository '%s' not found by alias, number or URI."
 msgstr "Kod deposu '%s' takma ad, numara veya URI ile bulunamadı."
 
@@ -4369,7 +4379,7 @@ msgstr[1] ""
 "'%s' depoları '%s' hizmetinin etkinleştirilmiş depolarından kaldırıldı"
 
 #: src/commands/services/modify.cc:276
-#, boost-format, c-format
+#, c-format, boost-format
 msgid ""
 "Repository '%s' has been removed from disabled repositories of service '%s'"
 msgid_plural ""
@@ -4396,7 +4406,7 @@ msgstr "%s hizmeti değiştirilmeden bırakılıyor."
 
 # clients/rc_config_step1.ycp:253
 #: src/commands/services/refresh.cc:86
-#, boost-format, c-format
+#, c-format, boost-format
 msgid "Service '%s' not found by its alias, number, or URI."
 msgstr "'%s' hizmeti diğer adı, numarası veya URI'sine göre bulunamadı."
 
@@ -4477,7 +4487,7 @@ msgstr "Belirtilen depo dizin hizmetini sistemden kaldırın."
 #. translators: %s is the supplied command line argument which
 #. for which no service counterpart was found
 #: src/commands/services/remove.cc:76
-#, boost-format, c-format
+#, c-format, boost-format
 msgid "Service '%s' not found by alias, number or URI."
 msgstr "Diğer ad, numara veya URI ile '%s' hizmeti bulunamadı."
 
@@ -4556,7 +4566,8 @@ msgstr "Uzman seçenekler"
 
 #: src/commands/solveroptionset.cc:86
 msgid "Whether to allow downgrading installed resolvables."
-msgstr "Yüklü çözümlenebilirlerin sürüm düşürmesine izin verilip verilmeyeceği."
+msgstr ""
+"Yüklü çözümlenebilirlerin sürüm düşürmesine izin verilip verilmeyeceği."
 
 #: src/commands/solveroptionset.cc:88
 msgid "Whether to allow changing the names of installed resolvables."
@@ -4796,7 +4807,7 @@ msgid "To update installed products use '%s'."
 msgstr "Yüklenmiş ürünleri güncelllemek için '%s' kullanın."
 
 #: src/commands/update.cc:77
-#, boost-format, c-format
+#, c-format, boost-format
 msgid ""
 "Zypper does not keep track of installed source packages. To install the "
 "latest source package and its build dependencies, use '%s'."
@@ -4836,8 +4847,8 @@ msgid ""
 msgstr ""
 "Komut satırında belirtilen RPM'leri yerel bir dizine indirin. Varsayılan "
 "paketler libzypp paket önbelleğine indirilir (/var/cache/zypp/packages; root "
-"olmayan kullanıcılar için $XDG_CACHE_HOME/zypp/packages), ancak bu genel "
-"`--pkg-cache-dir` seçeneği kullanılarak değiştirilebilir. ."
+"olmayan kullanıcılar için $XDG_CACHE_HOME/zypp/packages), ancak bu genel `--"
+"pkg-cache-dir` seçeneği kullanılarak değiştirilebilir. ."
 
 #. translators: command description
 #: src/commands/utils/download.cc:153
@@ -4860,32 +4871,32 @@ msgstr ""
 "her eşleşen paketin yalnızca en iyi sürümü indirilir."
 
 #. translators: Label text; is followed by ': cmdline argument'
-#: src/commands/utils/download.cc:237
+#: src/commands/utils/download.cc:238
 msgid "Argument resolves to no package"
 msgstr "Bağımsız değişken paket olmamasına çözüm buluyor"
 
-#: src/commands/utils/download.cc:252 src/solve-commit.cc:935
+#: src/commands/utils/download.cc:253 src/solve-commit.cc:968
 msgid "Nothing to do."
 msgstr "Gerçekleştirilecek bir işlem yok."
 
-#: src/commands/utils/download.cc:259
+#: src/commands/utils/download.cc:260
 msgid "No prune to best version."
 msgstr "En iyi versiyona budama yok."
 
-#: src/commands/utils/download.cc:265
+#: src/commands/utils/download.cc:266
 msgid "Prune to best version..."
 msgstr "En iyi sürüme budayın ..."
 
-#: src/commands/utils/download.cc:271
+#: src/commands/utils/download.cc:272
 msgid "Not downloading anything..."
 msgstr "Hiçbir şey indirilmiyor..."
 
-#: src/commands/utils/download.cc:314
+#: src/commands/utils/download.cc:315
 #, c-format, boost-format
 msgid "Error downloading package '%s'."
 msgstr "'%s' paketi indirilirken hata oluştu."
 
-#: src/commands/utils/download.cc:328
+#: src/commands/utils/download.cc:329
 #, c-format, boost-format
 msgid "Not downloading package '%s'."
 msgstr "'%s' paketi indirilmiyor."
@@ -5193,13 +5204,13 @@ msgstr[1] "'%2%' için %1% eşleşme bulunmakta."
 # clients/nis_write.ycp:73
 #. TranslatorExplanation E.g. "package 'zypper' not found."
 #: src/info.cc:221
-#, boost-format, c-format
+#, c-format, boost-format
 msgid "%s '%s' not found."
 msgstr "%s '%s' bulunamadı."
 
 #. TranslatorExplanation E.g. "Information for package zypper:"
 #: src/info.cc:245
-#, boost-format, c-format
+#, c-format, boost-format
 msgid "Information for %s %s:"
 msgstr "%s %s Hakkında Bilgi:"
 
@@ -5418,12 +5429,12 @@ msgid "%s was not requested."
 msgstr "%s talep edilmedi."
 
 #. translators: this will show up if you press ctrl+c twice
-#: src/main.cc:33
+#: src/main.cc:45
 msgid "OK OK! Exiting immediately..."
 msgstr "OK OK! Hemen çıkılıyor."
 
 #. translators: this will show up if you press ctrl+c twice
-#: src/main.cc:40
+#: src/main.cc:52
 msgid "Trying to exit gracefully..."
 msgstr "Düzgün bir şekilde çıkmaya çalışılıyor..."
 
@@ -5495,7 +5506,7 @@ msgid "Installed packages with counterparts in repositories: %d"
 msgstr "Depolarda benzerleri olan yüklü paketler: %d"
 
 #: src/misc.cc:282
-#, boost-format, c-format
+#, c-format, boost-format
 msgid "Installed packages with EULAs: %d"
 msgstr "EULA'larla yüklü paketler: %d"
 
@@ -5511,7 +5522,7 @@ msgstr "'%s' paketi için '%s' kaynak paketi bulunamadı."
 
 # clients/inst_sw_single.ycp:1225 clients/inst_sw_single.ycp:1283
 #: src/misc.cc:433
-#, boost-format, c-format
+#, c-format, boost-format
 msgid "Installing source package %s-%s"
 msgstr "%s-%s kaynak paketi yükleniyor"
 
@@ -5521,7 +5532,7 @@ msgid "Source package %s-%s successfully retrieved."
 msgstr "%s-%s kaynak paketi başarıyla alındı."
 
 #: src/misc.cc:448
-#, boost-format, c-format
+#, c-format, boost-format
 msgid "Source package %s-%s successfully installed."
 msgstr "%s-%s kaynak paketi başarıyla yüklendi."
 
@@ -5535,22 +5546,22 @@ msgid "Yes"
 msgstr "Evet"
 
 #. translator: usually followed by a ' ' and some explanatory text
-#: src/output/Out.h:40
+#: src/output/Out.h:37
 msgid "Note:"
 msgstr "Not:"
 
 #. translator: usually followed by a ' ' and some explanatory text
-#: src/output/Out.h:42
+#: src/output/Out.h:39
 msgid "Warning:"
 msgstr "Uyarı:"
 
 # include/ui/common_messages.ycp:95
 #. translator: usually followed by a ' ' and some explanatory text
-#: src/output/Out.h:44
+#: src/output/Out.h:41
 msgid "Error:"
 msgstr "Hata:"
 
-#: src/output/Out.h:46
+#: src/output/Out.h:43
 msgid "Continue?"
 msgstr "Devam edilsin mi?"
 
@@ -5690,13 +5701,13 @@ msgstr "'%s' deposu devre dışı bırakılırken hata oluştu."
 msgid "Problem retrieving files from '%s'."
 msgstr "'%s' den dosyalar alınırken problem ortaya çıktı. "
 
-#: src/repos.cc:345 src/repos.cc:1859 src/solve-commit.cc:825
-#: src/solve-commit.cc:856 src/solve-commit.cc:880
+#: src/repos.cc:345 src/repos.cc:1859 src/solve-commit.cc:858
+#: src/solve-commit.cc:889 src/solve-commit.cc:913
 msgid "Please see the above error message for a hint."
 msgstr "Lütfen ipucu için yukarıdaki hata mesajına bakınız."
 
 #: src/repos.cc:357
-#, boost-format, c-format
+#, c-format, boost-format
 msgid "No URIs defined for '%s'."
 msgstr "\"%s\" için tanımlanmış URI yok."
 
@@ -5707,8 +5718,8 @@ msgid ""
 "Please add one or more base URI (baseurl=URI) entries to %s for repository "
 "'%s'."
 msgstr ""
-"Lütfen '%s' kod deposu için %s'ye bir veya daha fazla temel URI (baseurl=URI)"
-" girişi ekleyin."
+"Lütfen '%s' kod deposu için %s'ye bir veya daha fazla temel URI "
+"(baseurl=URI) girişi ekleyin."
 
 #: src/repos.cc:376
 msgid "No alias defined for this repository."
@@ -5757,7 +5768,7 @@ msgstr ""
 
 # clients/rc_config_step1.ycp:253
 #: src/repos.cc:450
-#, boost-format, c-format
+#, c-format, boost-format
 msgid "Repository metadata for '%s' not found in local cache."
 msgstr "'%s' için depo meta verileri yerel önbellekte bulunamadı."
 
@@ -5767,7 +5778,7 @@ msgstr "Önbellek oluşturulurken hata oluştu:"
 
 # clients/rc_config_step1.ycp:253
 #: src/repos.cc:677
-#, boost-format, c-format
+#, c-format, boost-format
 msgid "Repository '%s' not found by its alias, number, or URI."
 msgstr "Kod deposu '%s' takma adı, numarası veya URI'sine göre bulunamadı."
 
@@ -5777,7 +5788,7 @@ msgid "Use '%s' to get the list of defined repositories."
 msgstr "Tanımlı depoların listesi almak için '%s' komutunu kullanın."
 
 #: src/repos.cc:699
-#, boost-format, c-format
+#, c-format, boost-format
 msgid "Ignoring disabled repository '%s'"
 msgstr "Devre dışı bırakılan kod deposu '%s' yok sayılıyor"
 
@@ -5887,7 +5898,7 @@ msgstr ""
 "Değiitirilebilir ve salt okunur media(CD/DVD), otomatik yenileme devre dışı."
 
 #: src/repos.cc:1194
-#, boost-format, c-format
+#, c-format, boost-format
 msgid "Invalid repository alias: '%s'"
 msgstr "Geçersiz kod deposu takma adı: \"%s\""
 
@@ -5979,7 +5990,7 @@ msgstr "Dosyada tanımlı takma adı olmayan depo atlanıyor."
 
 # clients/rc_config_step1.ycp:253
 #: src/repos.cc:1393
-#, boost-format, c-format
+#, c-format, boost-format
 msgid "Repository '%s' has no URI defined, skipping."
 msgstr "'%s' kod deposunda tanımlanmış URI yok, atlanıyor."
 
@@ -6164,21 +6175,21 @@ msgid "No products found."
 msgstr "Hiçbir ürün bulunamadı."
 
 #. translators: meaning 'dependency problem' found during solving
-#: src/solve-commit.cc:42
+#: src/solve-commit.cc:72
 msgid "Problem: "
 msgstr "Sorun: "
 
-#: src/solve-commit.cc:48
+#: src/solve-commit.cc:78
 msgid "Detailed information: "
 msgstr "Detaylı bilgi: "
 
 #. TranslatorExplanation %d is the solution number
-#: src/solve-commit.cc:61
+#: src/solve-commit.cc:91
 #, c-format, boost-format
 msgid " Solution %d: "
 msgstr " Çözüm %d: "
 
-#: src/solve-commit.cc:80
+#: src/solve-commit.cc:110
 msgid "Choose the above solution using '1' or skip, retry or cancel"
 msgid_plural "Choose from above solutions by number or skip, retry or cancel"
 msgstr[0] ""
@@ -6190,7 +6201,7 @@ msgstr[1] ""
 
 #. translators: translate 'c' to whatever you translated the 'c' in
 #. "c" and "s/r/c" strings
-#: src/solve-commit.cc:87
+#: src/solve-commit.cc:117
 msgid "Choose the above solution using '1' or cancel using 'c'"
 msgid_plural "Choose from above solutions by number or cancel"
 msgstr[0] "Yukarıdaki çözümü '1' kullanarak seçin veya 'c' ile iptal edin"
@@ -6202,7 +6213,7 @@ msgstr[1] "Numaraya göre yukarıdaki çözümlerden seçin veya iptal edin"
 #. The anserws must be separated by slash characters '/' and must
 #. correspond to skip/retry/cancel/detailed information in that order.
 #. The answers should be lower case letters.
-#: src/solve-commit.cc:111
+#: src/solve-commit.cc:141
 msgid "s/r/c/d"
 msgstr "a/y/i/d"
 
@@ -6213,37 +6224,37 @@ msgstr "a/y/i/d"
 #. See the "s/r/c/d" comment for other details.
 #. One letter string  for translation can be tricky, so in case of problems,
 #. please report a bug against zypper at bugzilla.suse.com, we'll try to solve it.
-#: src/solve-commit.cc:127
+#: src/solve-commit.cc:157
 msgid "c/d"
 msgstr "i/d"
 
-#: src/solve-commit.cc:133
+#: src/solve-commit.cc:163
 #, boost-format
 msgid "Choose solution %1%"
 msgstr "%1% çözümü seçin"
 
-#: src/solve-commit.cc:135
+#: src/solve-commit.cc:165
 msgid "Skip problem and continue."
 msgstr "Problemi atla ve devam et."
 
-#: src/solve-commit.cc:138
+#: src/solve-commit.cc:168
 msgid "Retry solving immediately."
 msgstr "Çözmeyi hemen tekrar deneyin."
 
-#: src/solve-commit.cc:140
+#: src/solve-commit.cc:170
 msgid "Choose no solution and cancel."
 msgstr "Çözüm seçmeyin ve iptal edin."
 
-#: src/solve-commit.cc:141
+#: src/solve-commit.cc:171
 msgid "Toggle show detailed conflict information."
 msgstr "Geçiş, ayrıntılı çakışma bilgilerini göster."
 
-#: src/solve-commit.cc:174
+#: src/solve-commit.cc:204
 #, c-format, boost-format
 msgid "Applying solution %s"
 msgstr "Çöxüm uygulanıyor '%s'"
 
-#: src/solve-commit.cc:190
+#: src/solve-commit.cc:220
 #, c-format, boost-format
 msgid "%d Problem:"
 msgid_plural "%d Problems:"
@@ -6251,49 +6262,49 @@ msgstr[0] "%d Sorun:"
 msgstr[1] "%d Sorun:"
 
 #. should not happen! If solve() failed at least one problem must be set!
-#: src/solve-commit.cc:194
+#: src/solve-commit.cc:224
 msgid "Specified capability not found"
 msgstr "Belirtilen kabiliyet bulunamadı"
 
-#: src/solve-commit.cc:204
+#: src/solve-commit.cc:234
 #, c-format, boost-format
 msgid "Problem: %s"
 msgstr "Sorun: %s"
 
 # clients/inst_sw_single.ycp:742
-#: src/solve-commit.cc:223
+#: src/solve-commit.cc:253
 msgid "Resolving dependencies..."
 msgstr "Bağımlılıklar çözümleniyor..."
 
 # /usr/lib/YaST2/timezone_raw.ycp:21
-#: src/solve-commit.cc:284
+#: src/solve-commit.cc:314
 msgid "Force resolution:"
 msgstr "Zorlama çözünürlüğü:"
 
 # clients/inst_sw_single.ycp:742
-#: src/solve-commit.cc:383
+#: src/solve-commit.cc:413
 msgid "Verifying dependencies..."
 msgstr "Bağımlılıklar doğrulanıyor..."
 
 #. Here: compute the full upgrade
-#: src/solve-commit.cc:433
+#: src/solve-commit.cc:463
 msgid "Computing upgrade..."
 msgstr "Güncelleştirme hesaplanıyor."
 
-#: src/solve-commit.cc:447
+#: src/solve-commit.cc:477
 msgid "Generating solver test case..."
 msgstr "Çözücü test senaryosu oluşturuluyor..."
 
-#: src/solve-commit.cc:449
-#, boost-format, c-format
+#: src/solve-commit.cc:479
+#, c-format, boost-format
 msgid "Solver test case generated successfully at %s."
 msgstr "Çözücü test durumu %s'de başarıyla oluşturuldu."
 
-#: src/solve-commit.cc:452
+#: src/solve-commit.cc:482
 msgid "Error creating the solver test case."
 msgstr "Çözücü test senaryosu oluşturulurken hata meydana geldi."
 
-#: src/solve-commit.cc:480
+#: src/solve-commit.cc:510
 #, c-format, boost-format
 msgid ""
 "Check for running processes using deleted libraries is disabled in zypper."
@@ -6303,11 +6314,11 @@ msgstr ""
 "içinde devre dışı bırakılmıştır. Manuel olarak kontrol etmek için '%s' "
 "çalıştırın."
 
-#: src/solve-commit.cc:496
+#: src/solve-commit.cc:526
 msgid "Skip check:"
 msgstr "Kontrolü atla:"
 
-#: src/solve-commit.cc:503
+#: src/solve-commit.cc:533
 #, boost-format
 msgid ""
 "There are running programs which still use files and libraries deleted or "
@@ -6319,33 +6330,33 @@ msgstr ""
 "için yeniden başlatılmaları gerekir. Bu programları listelemek için '%1%' "
 "komutunu çalıştırın."
 
-#: src/solve-commit.cc:517
+#: src/solve-commit.cc:547
 msgid "Update notifications were received from the following packages:"
 msgstr "Güncelleme bildirimleri aşağıdaki paketlerden alındı:"
 
-#: src/solve-commit.cc:526
+#: src/solve-commit.cc:556
 #, c-format, boost-format
 msgid "Message from package %s:"
 msgstr "%s paketinden ileti:"
 
-#: src/solve-commit.cc:534
+#: src/solve-commit.cc:564
 msgid "y/n"
 msgstr "y/n"
 
-#: src/solve-commit.cc:535
+#: src/solve-commit.cc:565
 msgid "View the notifications now?"
 msgstr "Şimdi uyarılara bakmak istiyor musunuz?"
 
-#: src/solve-commit.cc:580
+#: src/solve-commit.cc:610
 msgid "Computing distribution upgrade..."
 msgstr "Dağıtım güncelleştirmeleri hesaplanıyor."
 
 # clients/inst_sw_single.ycp:742
-#: src/solve-commit.cc:585
+#: src/solve-commit.cc:615
 msgid "Resolving package dependencies..."
 msgstr "Paket bağımlılıkları çözümleniyor..."
 
-#: src/solve-commit.cc:640
+#: src/solve-commit.cc:670
 msgid ""
 "Some of the dependencies of installed packages are broken. In order to fix "
 "these dependencies, the following actions need to be taken:"
@@ -6353,7 +6364,7 @@ msgstr ""
 "Yüklü paketlerin bazı bağımlılıkları bozuk. Bu bağımlılıkları düzeltmek için "
 "aşağıdaki işlemlerin gerçekleşmesi gerekiyor:"
 
-#: src/solve-commit.cc:647
+#: src/solve-commit.cc:677
 msgid "Root privileges are required to fix broken package dependencies."
 msgstr ""
 "Bozuk paket bağımlılıklarının düzeltilmesi için yönetici ayrıcalıkları "
@@ -6369,23 +6380,23 @@ msgstr ""
 #. The answers should be lower case letters, but in general, any UTF-8
 #. string will do.
 #. ! \todo add c for changelog and x for explain (show the dep tree)
-#: src/solve-commit.cc:669
+#: src/solve-commit.cc:699
 msgid "y/n/p/v/a/r/m/d/g"
 msgstr "y/n/p/v/a/r/m/d/g"
 
 #. translators: help text for 'y' option in the 'Continue?' prompt
-#: src/solve-commit.cc:674
+#: src/solve-commit.cc:704
 msgid ""
 "Yes, accept the summary and proceed with installation/removal of packages."
 msgstr "Evet, özeti kabul et ve paketlerin kurulumuna/kaldırılmasa devam et."
 
 #. translators: help text for 'n' option in the 'Continue?' prompt
-#: src/solve-commit.cc:676
+#: src/solve-commit.cc:706
 msgid "No, cancel the operation."
 msgstr "Hayır, işlem iptal edildi."
 
 #. translators: help text for 'p' option in the 'Continue?' prompt
-#: src/solve-commit.cc:678
+#: src/solve-commit.cc:708
 msgid ""
 "Restart solver in no-force-resolution mode in order to show dependency "
 "problems."
@@ -6394,57 +6405,57 @@ msgstr ""
 "yeniden başlatın."
 
 #. translators: help text for 'v' option in the 'Continue?' prompt
-#: src/solve-commit.cc:680
+#: src/solve-commit.cc:710
 msgid "Toggle display of package versions."
 msgstr "Paket sürümlerinin görüntüsünü değiştirin."
 
 #. translators: help text for 'a' option in the 'Continue?' prompt
-#: src/solve-commit.cc:682
+#: src/solve-commit.cc:712
 msgid "Toggle display of package architectures."
 msgstr "Paket mimarilerinin görüntüsünü değiştirin."
 
 #. translators: help text for 'r' option in the 'Continue?' prompt
-#: src/solve-commit.cc:684
+#: src/solve-commit.cc:714
 msgid ""
 "Toggle display of repositories from which the packages will be installed."
 msgstr "Paketlerin yükleneceği depoların görüntüsünü değiştirin."
 
 #. translators: help text for 'm' option in the 'Continue?' prompt
-#: src/solve-commit.cc:686
+#: src/solve-commit.cc:716
 msgid "Toggle display of package vendor names."
 msgstr "Paket dağıtıcı adlarının görünümünü değiştirin."
 
 #. translators: help text for 'd' option in the 'Continue?' prompt
-#: src/solve-commit.cc:688
+#: src/solve-commit.cc:718
 msgid "Toggle between showing all details and as few details as possible."
 msgstr ""
 "Tüm ayrıntıları ve olabildiğince az detayı gösterme arasında geçiş yapın."
 
 #. translators: help text for 'g' option in the 'Continue?' prompt
-#: src/solve-commit.cc:690
+#: src/solve-commit.cc:720
 msgid "View the summary in pager."
 msgstr "Özeti sayfalayıcıda görüntüleyin."
 
-#: src/solve-commit.cc:798
+#: src/solve-commit.cc:828
 msgid "committing"
 msgstr "Teslim etme"
 
-#: src/solve-commit.cc:800
+#: src/solve-commit.cc:830
 msgid "(dry run)"
 msgstr "(tatbikat)"
 
-#: src/solve-commit.cc:824 src/solve-commit.cc:857
+#: src/solve-commit.cc:857 src/solve-commit.cc:890
 msgid "Problem retrieving the package file from the repository:"
 msgstr "Paket dosyası depodan alınırken sorun oluştu:"
 
 # clients/rc_config_step1.ycp:253
 #. translators: the first %s is 'zypper refresh' and the second is repo alias
-#: src/solve-commit.cc:854
+#: src/solve-commit.cc:887
 #, c-format, boost-format
 msgid "Repository '%s' is out of date. Running '%s' might help."
 msgstr "'%s' deposu güncel değil. '%s' komutunu çalıştırmak faydalı olabilir."
 
-#: src/solve-commit.cc:865
+#: src/solve-commit.cc:898
 msgid ""
 "The package integrity check failed. This may be a problem with the "
 "repository or media. Try one of the following:\n"
@@ -6462,24 +6473,24 @@ msgstr ""
 "- başka bir kurulum ortamı kullanın (örn. hasarlıysa)\n"
 "- başka bir depo kullan"
 
-#: src/solve-commit.cc:879
+#: src/solve-commit.cc:912
 msgid "Problem occurred during or after installation or removal of packages:"
 msgstr ""
 "Paketlerin kurulumu ya da kaldırılması sırasında ya da sonrasında sorun "
 "oluştu:"
 
-#: src/solve-commit.cc:887
+#: src/solve-commit.cc:920
 msgid "Installation has completed with error."
 msgstr "Kurulum hatayla tamamlandı."
 
-#: src/solve-commit.cc:889
+#: src/solve-commit.cc:922
 #, boost-format
 msgid "You may run '%1%' to repair any dependency problems."
 msgstr ""
 "Herhangi bir bağımlılık sorununu çözmek için '%1%' komutunu "
 "çalıştırabilirsiniz."
 
-#: src/solve-commit.cc:903
+#: src/solve-commit.cc:936
 msgid ""
 "One of the installed patches requires a reboot of your machine. Reboot as "
 "soon as possible."
@@ -6487,7 +6498,7 @@ msgstr ""
 "Yüklü yamalardan birisi makinenizin yeniden başlatılmasını gerektiriyor. "
 "Mümkün olduğunca kısa sürede yeniden başlatın."
 
-#: src/solve-commit.cc:911
+#: src/solve-commit.cc:944
 msgid ""
 "One of the installed patches affects the package manager itself. Run this "
 "command once more to install any other needed patches."
@@ -6495,7 +6506,7 @@ msgstr ""
 "Yüklü yamalardan biri paket yöneticisinin kendisini etkiliyor. Diğer gerekli "
 "yamaları yüklemek için bu komutu bir kez daha çalıştırın."
 
-#: src/solve-commit.cc:933
+#: src/solve-commit.cc:966
 msgid "Dependencies of all installed packages are satisfied."
 msgstr "Yüklü paketlerin tamamının bağımlılıkları sağlanmış."
 
@@ -6527,7 +6538,7 @@ msgstr[1] "%d yama kilitli"
 # clients/inst_rootpart.ycp:401
 #. translator: stats summary
 #: src/update.cc:358
-#, boost-format, c-format
+#, c-format, boost-format
 msgid "%d patch optional"
 msgid_plural "%d patches optional"
 msgstr[0] "%d yama isteğe bağlı"
@@ -6543,7 +6554,7 @@ msgstr "isteğe bağlı yamaları dahil etmek için '%1%' seçeneğini kullanın
 # clients/inst_rootpart.ycp:401
 #. translator: stats summary
 #: src/update.cc:371
-#, boost-format, c-format
+#, c-format, boost-format
 msgid "%d patch needed"
 msgid_plural "%d patches needed"
 msgstr[0] "%d yama gerekli"
@@ -7040,40 +7051,40 @@ msgstr "Verilen URI geçersiz"
 
 #. Guess failed:
 #. translators: don't translate '<platform>'
-#: src/utils/misc.cc:546
+#: src/utils/misc.cc:548
 msgid "Unable to guess a value for <platform>."
 msgstr "<platform> için bir değer tahmin edilemiyor."
 
-#: src/utils/misc.cc:547
+#: src/utils/misc.cc:549
 msgid "Please use obs://<project>/<platform>"
 msgstr "Lütfen obs://<proje>/<platform> kullanın"
 
-#: src/utils/misc.cc:548 src/utils/misc.cc:585
+#: src/utils/misc.cc:550 src/utils/misc.cc:591
 #, c-format, boost-format
 msgid "Example: %s"
 msgstr "Örnek: %s"
 
-#: src/utils/misc.cc:584
+#: src/utils/misc.cc:590
 msgid "Invalid OBS URI."
 msgstr "Geçersiz OBS URI'si."
 
-#: src/utils/misc.cc:584
+#: src/utils/misc.cc:590
 msgid "Correct form is obs://<project>/[platform]"
 msgstr "Doğru biçim obs://<proje>/[platform]"
 
-#: src/utils/misc.cc:634
+#: src/utils/misc.cc:640
 msgid "Problem copying the specified RPM file to the cache directory."
 msgstr "Belirtilen RPM dosyasını önbellek dizinine kopyalamada sorun."
 
-#: src/utils/misc.cc:635
+#: src/utils/misc.cc:641
 msgid "Perhaps you are running out of disk space."
 msgstr "Muhtemelen diskinizde boş alan yok."
 
-#: src/utils/misc.cc:643
+#: src/utils/misc.cc:649
 msgid "Problem retrieving the specified RPM file"
 msgstr "Belirtilen RPM dosyasını alma sorunu"
 
-#: src/utils/misc.cc:644
+#: src/utils/misc.cc:650
 msgid "Please check whether the file is accessible."
 msgstr "Dosyanın erişilebilir olup olmadığını kontrol edin."
 
@@ -7158,7 +7169,7 @@ msgstr ""
 "sorulara varsayılan yanıtları vermesi için '%s' evrensel seçeneğini kullanın."
 
 #: src/utils/prompt.cc:410
-#, boost-format, c-format
+#, c-format, boost-format
 msgid "Invalid answer '%s'."
 msgstr "Geçersiz cevap '%s'."
 
