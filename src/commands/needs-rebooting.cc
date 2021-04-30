@@ -19,9 +19,12 @@ NeedsRebootingCmd::NeedsRebootingCmd(std::vector<std::string> &&commandAliases_r
     std::move( commandAliases_r ),
     "needs-rebooting",
     // translators: command summary: needs-rebooting
-    _("Check if the needs-reboot flag was set."),
-    _("Checks if the needs-reboot flag was set by a previous update or install of a core library or service.\n"
-      "Exit code ZYPPER_EXIT_INF_REBOOT_NEEDED indicates that a reboot is needed, otherwise the exit code is set to ZYPPER_EXIT_OK."),
+    _("Check if the reboot-needed flag was set."),
+    {
+      _("Checks if the reboot-needed flag was set by a previous update or install of a core library or service.\n"
+      "Exit code ZYPPER_EXIT_INF_REBOOT_NEEDED indicates that a reboot is suggested, otherwise the exit code is set to ZYPPER_EXIT_OK."),
+      _("This is the recommended way for scripts to test whether a system reboot is suggested.")
+    },
     DisableAll
 )
 {}
@@ -32,13 +35,13 @@ int NeedsRebootingCmd::checkRebootNeeded( Zypper &zypper , TriBool printMessage_
 
   if ( filesystem::PathInfo( rebootNeededFlag ).isExist() ) {
     if ( ! sameTriboolState( printMessage_r, false ) ) {
-      zypper.out().info( _("Core libraries or services have been updated.") );
-      zypper.out().info( _("Reboot is required to ensure that your system benefits from these updates.") );
+      zypper.out().info( _("Since the last system boot core libraries or services have been updated.") );
+      zypper.out().info( _("Reboot is suggested to ensure that your system benefits from these updates.") );
     }
     return ZYPPER_EXIT_INF_REBOOT_NEEDED;
   }
   if ( sameTriboolState( printMessage_r, true ) ) {
-    zypper.out().info( _("No core libraries or services have been updated.") );
+    zypper.out().info( _("No core libraries or services have been updated since the last system boot.") );
     zypper.out().info( _("Reboot is probably not necessary.") );
   }
   return ZYPPER_EXIT_OK;
