@@ -1692,7 +1692,9 @@ Parsable XML-output produced by *zypper --xmlout* will include a *<download-resu
 *needs-rebooting* ::
 	Checks if the reboot-needed flag was set by a previous update or install of a core library or service.
 +
-The reboot-needed flag is set if a package that provides *installhint(reboot-needed)* is updated or installed. Additionally there is a predefined list (/etc/zypp/needreboot) of well-known packages which cause the reboot-needed flag being set unconditionally. Exit code ZYPPER_EXIT_INF_REBOOT_NEEDED indicates that a reboot is needed, otherwise the exit code is set to ZYPPER_EXIT_OK.
+The reboot-needed flag is set if a package that provides *installhint(reboot-needed)* is updated or installed. Additionally there is a predefined list (/etc/zypp/needreboot) of well-known packages which cause the reboot-needed flag being set unconditionally. The exit code *ZYPPER_EXIT_INF_REBOOT_NEEDED* indicates that a reboot is suggested, otherwise the exit code is set to *ZYPPER_EXIT_OK*.
++
+It is recommended for scripts to use this command to test whether a system reboot is suggested. Use *--quiet* to suppress the normal output.
 
 Subcommands
 ~~~~~~~~~~~
@@ -1954,7 +1956,10 @@ There are several exit codes defined for zypper built-in commands for use e.g. w
 *101* - *ZYPPER_EXIT_INF_SEC_UPDATE_NEEDED*::
 	Returned by the patch-check command if there are security patches available for installation.
 *102* - *ZYPPER_EXIT_INF_REBOOT_NEEDED*::
-	Returned after a successful installation of a patch which requires reboot of computer.
+	Returned by the *needs-rebooting* command, if a system reboot is suggested.
++
+'Legacy:' Returned after the successful installation of a patch which requires reboot of computer. This legacy behavior is kept, but it's drawback is that it covers patches only, no packages. The new *needs-rebooting* command is the recommended way to test whether a system reboot is suggested.
+
 *103* - *ZYPPER_EXIT_INF_RESTART_NEEDED*::
 	Returned after a successful installation of a patch which requires restart of the package manager itself. This means that one of patches to be installed affects the package manager itself and the command used (e.g. *zypper update*) needs to be executed once again to install any remaining patches.
 *104* - *ZYPPER_EXIT_INF_CAP_NOT_FOUND*::
