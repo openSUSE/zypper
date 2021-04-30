@@ -52,6 +52,7 @@ public:
     SHOW_LOCKS              = 0x1000,
 
     UPDATESTACK_ONLY        = 0x2000,  //< required for zypper patch
+    PATCH_REBOOT_RULES      = 0x4000,  // for zypper patch bsc#1183268
 
     SHOW_ALL                = 0xffff
   };
@@ -67,6 +68,7 @@ public:
   void setViewOption( const ViewOptions option )	{ _viewop = (ViewOptions) (_viewop | option); }
   void unsetViewOption( const ViewOptions option )	{ _viewop = (ViewOptions) (_viewop & ~option); }
   void toggleViewOption( const ViewOptions option )	{ _viewop & option ? unsetViewOption(option) : setViewOption(option); }
+  bool hasViewOption( const ViewOptions option ) const  { return _viewop & option; }
   void setForceNoColor( bool value = true )		{ _force_no_color = value; }
   void setDownloadOnly( bool value = true )		{ _download_only = value; }
 

@@ -145,6 +145,22 @@ void Summary::readPool( const ResPool & pool )
     }
   }
 
+  if ( hasViewOption( PATCH_REBOOT_RULES ) ) {
+    // bsc#1183268: Patch reboot-needed flag overrules included packages.
+    // Work around the unfortunate case, where a maintenance patch's metadata
+    // does not request a reboot, while some included package does.
+    // The 'patch --skip-interactive' command operates based on the maintenance
+    // metadata and skips patches that require a reboot. In this case we suppress
+    // the reboot needed hint of included packages in order not to confuse the user.
+    // The decision is debatable, but as long as maintenance provides a reboot-needed
+    // flag for Patches, we will not overrule it by computing it from the included packages.
+    if ( not _need_reboot_patch && _need_reboot_nonpatch ) {
+      MIL << "PATCH_REBOOT_RULES overrules " << _rebootNeeded[ResKind::package].size() << " packages." << endl;
+      _rebootNeeded[ResKind::package].clear();
+      _need_reboot_nonpatch = false;
+    }
+  }
+
   for ( const auto & spkg : Zypper::instance().runtimeData().srcpkgs_to_install )
   { to_be_installed[ResKind::srcpackage].insert(spkg); }
 

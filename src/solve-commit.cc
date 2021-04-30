@@ -31,6 +31,36 @@
 using namespace zypp;
 extern ZYpp::Ptr God;
 
+///////////////////////////////////////////////////////////////////
+/// bsc#1183268: Patch reboot-needed flag overrules included packages.
+///
+/// Prevent creation of /run/reboot-needed by packages if patches
+/// overruled them (i.e. claim no reboot needed).
+///////////////////////////////////////////////////////////////////
+class PatchRebootRulesWatchdog
+{
+  PatchRebootRulesWatchdog( const PatchRebootRulesWatchdog & ) = delete;
+  PatchRebootRulesWatchdog & operator=( const PatchRebootRulesWatchdog & ) = delete;
+public:
+  PatchRebootRulesWatchdog( bool on_r )
+  {
+    PathInfo watch { Pathname(Zypper::instance().config().root_dir)/"/run/reboot-needed" };
+    MIL << "Initial reboot-needed: " << watch << endl;
+    if ( on_r && not watch.isExist() )
+      _watch = watch.path(); // take care it stays absent after commit
+  }
+  ~PatchRebootRulesWatchdog()
+  {
+    if ( not _watch.empty() ) {
+      MIL << "PATCH_REBOOT_RULES overrules reboot-needed" << endl;
+      filesystem::unlink( _watch );
+    }
+  }
+private:
+  Pathname _watch;
+};
+
+
 //! @return true to retry solving now,
 //!         false to cancel,
 //!         indeterminate to continue
@@ -800,6 +830,9 @@ void solve_and_commit (Zypper & zypper , Summary::ViewOptions summaryOptions_r, 
 	      s << " " << _("(dry run)");
 	    zypper.out().info( s.str(), Out::HIGH );
 	  }
+
+	  // bsc#1183268: Patch reboot-needed flag overrules included packages.
+	  PatchRebootRulesWatchdog guard { summary.hasViewOption( Summary::PATCH_REBOOT_RULES ) && not summary.needMachineReboot() };
 
           ZYppCommitResult result = God->commit( get_commit_policy( zypper, dlMode_r ) );
           gData.show_media_progress_hack = false;
