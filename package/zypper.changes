@@ -1,4 +1,22 @@
 -------------------------------------------------------------------
+Fri Apr 30 18:30:14 CEST 2021 - ma@suse.de
+
+- Rephrase needs-rebooting help and messages.
+  Try to point out that the need to reboot was not necessarily
+  triggered by the current transaction.
+- man page: Recommend the needs-rebooting command to test whether
+  a system reboot is suggested.
+- patch: Let a patch's reboot-needed flag overrule included packages
+  (bsc#1183268)
+- Quickfix setting "openSUSE_Tumbleweed" as default platform for
+  "MicroOS" (bsc#1153687)
+  This fixes the guessed platform for "obs://<project>/" URLs.
+- Protect against strict/relaxed user umask via sudo (bsc#1183589)
+- zypper-log: protect against thread name indicators in a log.
+- xml summary: add solvables repository alias (bsc#1182372)
+- version 1.14.44
+
+-------------------------------------------------------------------
 Wed Feb 24 17:13:17 CET 2021 - ma@suse.de
 
 - doc: give more details about creating versioned package locks
