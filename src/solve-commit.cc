@@ -7,6 +7,7 @@
 
 #include <iostream>
 #include <sstream>
+#include <optional>
 
 #include <zypp/ZYppFactory.h>
 #include <zypp/base/Logger.h>
@@ -24,6 +25,7 @@
 #include "utils/prompt.h"	// Continue? and solver problem prompt
 #include "utils/pager.h"	// to view the summary
 #include "global-settings.h"
+#include "CommitSummary.h"
 
 #include "solve-commit.h"
 #include "commands/needs-rebooting.h"
@@ -484,21 +486,56 @@ static void make_solver_test_case( Zypper & zypper )
   }
 }
 
-ZYppCommitPolicy get_commit_policy( Zypper & zypper, DownloadMode dlMode_r )
+SolveAndCommitPolicy::SolveAndCommitPolicy( )
 {
-  ZYppCommitPolicy policy;
+  // set up the various commit flags which are scattered all over the place
+  _zyppCommitPolicy
+    .dryRun( DryRunSettings::instance().isEnabled() )
+    .replaceFiles( FileConflictPolicy::instance()._replaceFiles )
+    .allowDowngrade( false );
 
-  if ( DryRunSettings::instance().isEnabled() )
-    policy.dryRun(true);
-
-  if ( dlMode_r != DownloadDefault )
-    policy.downloadMode( dlMode_r );
-
-  policy.syncPoolAfterCommit( policy.dryRun() ? false : zypper.runningShell() );
-
-  MIL << "Using commit policy: " << policy << endl;
-  return policy;
+  _zyppCommitPolicy.downloadMode( DownloadDefault );
+  _zyppCommitPolicy.syncPoolAfterCommit( _zyppCommitPolicy.dryRun() ? false : Zypper::instance().runningShell() );
 }
+
+bool SolveAndCommitPolicy::forceCommit() const
+{ return _forceCommit; }
+
+SolveAndCommitPolicy &SolveAndCommitPolicy::forceCommit(bool enable)
+{ _forceCommit = enable; return *this; }
+
+const Summary::ViewOptions &SolveAndCommitPolicy::summaryOptions() const
+{ return _summaryOptions; }
+
+SolveAndCommitPolicy &SolveAndCommitPolicy::summaryOptions( Summary::ViewOptions options )
+{ _summaryOptions = options; return *this; }
+
+ZYppCommitPolicy &SolveAndCommitPolicy::zyppCommitPolicy()
+{ return _zyppCommitPolicy; }
+
+const ZYppCommitPolicy &SolveAndCommitPolicy::zyppCommitPolicy() const
+{ return _zyppCommitPolicy; }
+
+SolveAndCommitPolicy &SolveAndCommitPolicy::zyppCommitPolicy( ZYppCommitPolicy policy )
+{ _zyppCommitPolicy = policy; return *this; }
+
+SolveAndCommitPolicy & SolveAndCommitPolicy::downloadMode( DownloadMode dlMode )
+{
+  // set up the DownloadMode and emit a info if we auto override it due to singletrans
+  // the libzypp code will do the same but only emit a warning to the logs, lets be a bit more verbose
+  if ( dlMode != _zyppCommitPolicy.downloadMode() ) {
+
+    if ( dlMode == DownloadAsNeeded && _zyppCommitPolicy.singleTransModeEnabled() ) {
+      Zypper::instance().out().warning( _("DownloadAsNeeded can not be used with ZYPP_SINGLE_RPMTRANS=1, falling back to DownloadInAdvance") );
+      dlMode = DownloadInAdvance;
+    }
+    _zyppCommitPolicy.downloadMode( dlMode );
+  }
+  return *this;
+}
+
+DownloadMode SolveAndCommitPolicy::downloadMode() const
+{ return _zyppCommitPolicy.downloadMode(); }
 
 /** fate #300763
  * This is called after each commit to notify user about running processes that
@@ -587,10 +624,10 @@ static void show_update_messages( Zypper & zypper, const UpdateNotifications & m
  *  ZYPPER_EXIT_INF_RESTART_NEEDED - if one of patches to be installed needs package manager restart
  */
 
-void solve_and_commit (Zypper & zypper , Summary::ViewOptions summaryOptions_r, DownloadMode dlMode_r , SolveAndCommitPolicy commitPolicy_r )
+void solve_and_commit ( Zypper &zypper, SolveAndCommitPolicy policy )
 {
   bool need_another_solver_run = true;
-  bool dryRunEtc = DryRunSettings::instance().isEnabled() || ( dlMode_r == DownloadOnly );
+  bool dryRunEtc = policy.zyppCommitPolicy().dryRun() || ( policy.zyppCommitPolicy().downloadMode() == DownloadOnly );
   do
   {
     // CALL SOLVER
@@ -639,7 +676,7 @@ void solve_and_commit (Zypper & zypper , Summary::ViewOptions summaryOptions_r, 
 
     // SHOW SUMMARY
 
-    Summary summary( God->pool(), summaryOptions_r );
+    Summary summary( God->pool(), policy.summaryOptions() );
 
     if ( zypper.out().verbosity() == Out::HIGH )
       summary.setViewOption( Summary::SHOW_VERSION );
@@ -652,7 +689,7 @@ void solve_and_commit (Zypper & zypper , Summary::ViewOptions summaryOptions_r, 
     else
       summary.unsetViewOption( Summary::SHOW_UNSUPPORTED );
 
-    if ( dlMode_r == DownloadOnly )
+    if ( policy.zyppCommitPolicy().downloadMode() == DownloadOnly )
       summary.setDownloadOnly( true );
 
     // show the summary
@@ -808,6 +845,7 @@ void solve_and_commit (Zypper & zypper , Summary::ViewOptions summaryOptions_r, 
           return;
 	}
 
+        std::optional<ZYppCommitResult> result;
         try
         {
           RuntimeData & gData = Zypper::instance().runtimeData();
@@ -826,7 +864,7 @@ void solve_and_commit (Zypper & zypper , Summary::ViewOptions summaryOptions_r, 
 	  {
 	    std::ostringstream s;
 	    s << _("committing");
-	    if ( DryRunSettings::instance().isEnabled() )
+	    if ( policy.zyppCommitPolicy().dryRun() )
 	      s << " " << _("(dry run)");
 	    zypper.out().info( s.str(), Out::HIGH );
 	  }
@@ -834,22 +872,24 @@ void solve_and_commit (Zypper & zypper , Summary::ViewOptions summaryOptions_r, 
 	  // bsc#1183268: Patch reboot-needed flag overrules included packages.
 	  PatchRebootRulesWatchdog guard { summary.hasViewOption( Summary::PATCH_REBOOT_RULES ) && not summary.needMachineReboot() };
 
-          ZYppCommitResult result = God->commit( get_commit_policy( zypper, dlMode_r ) );
-          gData.show_media_progress_hack = false;
+          MIL << "Using commit policy: " << policy.zyppCommitPolicy() << endl;
+          result = God->commit( policy.zyppCommitPolicy() );
+          
+	  gData.show_media_progress_hack = false;
 	  gData.entered_commit = false;
 
-	  if ( !result.allDone() && !( dryRunEtc && result.noError() ) )
-	  { zypper.setExitCode( result.attemptToModify() ? ZYPPER_EXIT_ERR_COMMIT : ZYPPER_EXIT_ERR_ZYPP ); }	// error message comes later....
+          if ( !result->allDone() && !( dryRunEtc && result->noError() ) )
+          { zypper.setExitCode( result->attemptToModify() ? ZYPPER_EXIT_ERR_COMMIT : ZYPPER_EXIT_ERR_ZYPP ); }	// error message comes later....
 
           MIL << endl << "DONE" << endl;
 	  if ( zypper.out().verbosity() >= Out::HIGH )
 	  {
 	    std::ostringstream s;
-	    s << result;
+	    s << *result;
 	    zypper.out().info( s.str(), Out::HIGH );
 	  }
 
-          show_update_messages( zypper, result.updateMessages() );
+          show_update_messages( zypper, result->updateMessages() );
         }
         catch ( const media::MediaException & e )
         {
@@ -917,9 +957,24 @@ void solve_and_commit (Zypper & zypper , Summary::ViewOptions summaryOptions_r, 
 
         if ( zypper.exitCode() != ZYPPER_EXIT_OK )
 	{
-	  zypper.out().error(_("Installation has completed with error.") );
-	  if ( zypper.exitCode() == ZYPPER_EXIT_ERR_COMMIT )
-	    zypper.out().error( str::Format(_("You may run '%1%' to repair any dependency problems.")) % "zypper verify" );
+          if ( result && result->singleTransactionMode() ) {
+
+            CommitSummary cSummary( *result );
+            if ( zypper.out().verbosity() == Out::HIGH )
+              cSummary.setViewOption( CommitSummary::ViewOptions( CommitSummary::SHOW_VERSION | CommitSummary::SHOW_REPO ) );
+            else if ( zypper.out().verbosity() == Out::DEBUG )
+              cSummary.setViewOption( CommitSummary::SHOW_ALL );
+
+            // show the summary
+            if ( zypper.out().type() == Out::TYPE_XML )
+              cSummary.dumpAsXmlTo( cout );
+            else
+              cSummary.dumpTo( cout );
+
+          } else {
+            CommitSummary::showBasicErrorMessage( zypper );
+          }
+
 	}
 	else
 	{
@@ -927,7 +982,7 @@ void solve_and_commit (Zypper & zypper , Summary::ViewOptions summaryOptions_r, 
 	  //! \todo This won't be necessary once we get a new solver flag
 	  //! for installing source packages without their build deps
 	  if ( !zypper.runtimeData().srcpkgs_to_install.empty() )
-	    install_src_pkgs( zypper, dlMode_r );
+	    install_src_pkgs( zypper, policy.zyppCommitPolicy().downloadMode() );
 
 	  // set return value to 'reboot needed'
 	  if ( summary.needMachineReboot() )
@@ -959,7 +1014,7 @@ void solve_and_commit (Zypper & zypper , Summary::ViewOptions summaryOptions_r, 
     else
     {
       //used to make sure locales and metadata is written even if there is no packages to be installed/removed
-      if ( commitPolicy_r == ForceCommit )
+      if ( policy.forceCommit() )
         God->commit( ZYppCommitPolicy() );
 
       if ( zypper.command() == ZypperCommand::VERIFY )

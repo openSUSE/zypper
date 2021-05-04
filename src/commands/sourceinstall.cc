@@ -101,6 +101,6 @@ int SourceInstallCmd::execute( Zypper &zypper, const std::vector<std::string> &p
     }
   }
 
-  solve_and_commit( zypper, Summary::DEFAULT, _dlOpts.mode() );
+  solve_and_commit( zypper, SolveAndCommitPolicy( ).downloadMode( _dlOpts.mode() ) );
   return zypper.exitCode();
 }

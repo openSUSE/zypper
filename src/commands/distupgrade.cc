@@ -76,6 +76,6 @@ int DistUpgradeCmd::execute( Zypper &zypper, const std::vector<std::string> &pos
     viewOpts = ( Summary::ViewOptions ) ( viewOpts | Summary::ViewOptions::DETAILS );
   }
 
-  solve_and_commit( zypper, viewOpts, _downloadModeOpts.mode() );
+  solve_and_commit( zypper, SolveAndCommitPolicy( ).summaryOptions( viewOpts ).downloadMode( _downloadModeOpts.mode() ) );
   return zypper.exitCode();
 }
