@@ -238,10 +238,6 @@ export CFLAGS="%{optflags}"
 export CXXFLAGS="%{optflags}"
 unset EXTRA_CMAKE_OPTIONS
 
-%if 0%{?sle_version} == 150300
-export CXXFLAGS="$CXXFLAGS -DZYPPNEWSPPSWENPPYZ"
-%endif
-
 cmake -DCMAKE_INSTALL_PREFIX=%{_prefix} \
       -DENABLE_BUILD_DOCS=TRUE \
       -DENABLE_BUILD_TRANS=TRUE \
