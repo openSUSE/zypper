@@ -159,6 +159,6 @@ int UpdateCmd::execute( Zypper &zypper, const std::vector<std::string> &position
     viewOpts = static_cast<Summary::ViewOptions> ( viewOpts | Summary::SHOW_NOT_UPDATED );
   }
 
-  solve_and_commit( zypper, viewOpts, _downloadModeOpts.mode() );
+  solve_and_commit( zypper, SolveAndCommitPolicy( ).summaryOptions( viewOpts ).downloadMode( _downloadModeOpts.mode() ) );
   return zypper.exitCode();
 }

@@ -61,7 +61,7 @@ int PurgeKernelsCmd::execute( Zypper &zypper , const std::vector<std::string> & 
     opts = static_cast<Summary::ViewOptions>( opts | Summary::DETAILS );
 
   zypper.runtimeData().force_resolution = true;
-  solve_and_commit( zypper, opts, DownloadMode::DownloadDefault );
+  solve_and_commit( zypper, SolveAndCommitPolicy( ).summaryOptions( opts ) );
   return ZYPPER_EXIT_OK;
 }
 

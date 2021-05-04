@@ -130,6 +130,6 @@ int PatchCmd::execute( Zypper &zypper, const std::vector<std::string> &positiona
     viewOpts = static_cast<Summary::ViewOptions> ( viewOpts | Summary::ViewOptions::PATCH_REBOOT_RULES );
   }
 
-  solve_and_commit( zypper, viewOpts, _downloadModeOpts.mode() );
+  solve_and_commit( zypper, SolveAndCommitPolicy( ).summaryOptions( viewOpts ).downloadMode( _downloadModeOpts.mode() ) );
   return zypper.exitCode();
 }

@@ -56,7 +56,7 @@ int InrVerifyCmd::execute( Zypper &zypper, const std::vector<std::string> &posit
     viewOpts = ( Summary::ViewOptions ) ( viewOpts | Summary::ViewOptions::DETAILS );
   }
 
-  solve_and_commit( zypper, viewOpts, _downloadOpts.mode() );
+  solve_and_commit( zypper, SolveAndCommitPolicy( ).summaryOptions( viewOpts ).downloadMode( _downloadOpts.mode() ) );
   return zypper.exitCode();
 }
 

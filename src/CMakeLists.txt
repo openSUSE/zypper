@@ -28,6 +28,7 @@ SET (zypper_HEADERS
   PackageArgs.h
   SolverRequester.h
   Summary.h
+  CommitSummary.h
   global-settings.h
   issue.h
   callbacks/keyring.h
@@ -117,6 +118,7 @@ SET( zypper_SRCS
   RequestFeedback.cc
   SolverRequester.cc
   Summary.cc
+  CommitSummary.cc
   global-settings.cc
   issue.cc
   callbacks/media.cc

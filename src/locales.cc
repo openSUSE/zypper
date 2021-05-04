@@ -261,7 +261,12 @@ void addLocales( Zypper &zypper, const std::vector<std::string> &localeArgs_r, b
   }
 
   if ( packages ) {
-    solve_and_commit( zypper, Summary::DEFAULT, DownloadMode::DownloadDefault, ForceCommit );
+    solve_and_commit(
+      zypper,
+      SolveAndCommitPolicy()
+        .summaryOptions( Summary::DEFAULT )
+        .forceCommit( true )
+    );
   } else {
     God->commit( ZYppCommitPolicy() );
   }
@@ -284,7 +289,12 @@ void removeLocales( Zypper &zypper, const std::vector<std::string> &localeArgs_r
   }
 
   if ( packages ) {
-    solve_and_commit( zypper, Summary::DEFAULT, DownloadMode::DownloadDefault, ForceCommit );
+    solve_and_commit(
+      zypper,
+      SolveAndCommitPolicy()
+        .summaryOptions( Summary::DEFAULT )
+        .forceCommit( true )
+      );
   } else {
     God->commit( ZYppCommitPolicy() );
   }
