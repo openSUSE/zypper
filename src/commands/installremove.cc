@@ -154,7 +154,7 @@ int RemoveCmd::execute(Zypper &zypper, const std::vector<std::string> &positiona
     opts = static_cast<Summary::ViewOptions>( opts | Summary::DETAILS );
 
   //do solve
-  solve_and_commit( zypper, opts, DownloadMode::DownloadDefault );
+  solve_and_commit( zypper, SolveAndCommitPolicy( ).summaryOptions( opts ) );
   return zypper.exitCode();
 
 }
@@ -285,7 +285,10 @@ int InstallCmd::execute( Zypper &zypper, const std::vector<std::string> &positio
     opts = static_cast<Summary::ViewOptions>( opts | Summary::DETAILS );
 
   //do solve
-  solve_and_commit( zypper, opts, _downloadMode.mode() );
+  auto policy = SolveAndCommitPolicy( ).summaryOptions( opts ).downloadMode( _downloadMode.mode() );
+  policy.zyppCommitPolicy().allowDowngrade( _oldPackage );
+  solve_and_commit( zypper, policy );
+
   return zypper.exitCode();
 }
 

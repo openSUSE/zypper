@@ -26,14 +26,34 @@
 bool resolve(Zypper & zypper);
 
 
-/**
- * Defines the \ref solve_and_commit commit policy.
- * Usually \ref solve_and_commit only executes a commit if packages need to
- * be installed or removed. With \a ForceCommit a commit is always executed.
- */
-enum SolveAndCommitPolicy {
-  CommitAsNeeded,  //<< Execute commit only if required
-  ForceCommit      //<< Always execute commit, even if no packages need to be changed
+struct SolveAndCommitPolicy {
+
+  SolveAndCommitPolicy();
+
+  /*!
+  * Usually \ref solve_and_commit only executes a commit if packages need to
+  * be installed or removed. With \a ForceCommit a commit is always executed.
+  */
+  bool forceCommit () const;
+  SolveAndCommitPolicy &forceCommit ( bool enable );
+
+  /*!
+   * Changes the amount of information included by the summary
+   */
+  const Summary::ViewOptions &summaryOptions () const;
+  SolveAndCommitPolicy &summaryOptions ( Summary::ViewOptions options );
+
+  ZYppCommitPolicy &zyppCommitPolicy ();
+  const ZYppCommitPolicy &zyppCommitPolicy () const;
+  SolveAndCommitPolicy &zyppCommitPolicy ( ZYppCommitPolicy policy );
+
+  SolveAndCommitPolicy &downloadMode(DownloadMode dlMode);
+  DownloadMode downloadMode() const;
+
+private:
+  bool _forceCommit    = false;
+  Summary::ViewOptions _summaryOptions = Summary::DEFAULT;
+  ZYppCommitPolicy _zyppCommitPolicy;
 };
 
 /**
@@ -45,7 +65,7 @@ enum SolveAndCommitPolicy {
  *         or ZYPPER_EXIT_OK or ZYPPER_EXIT_ERR_ZYPP on zypp error.
  *
  */
-void solve_and_commit(Zypper & zypper , Summary::ViewOptions summaryOptions_r , DownloadMode dlMode_r, SolveAndCommitPolicy commitPolicy_r = CommitAsNeeded );
+void solve_and_commit( Zypper &zypper, SolveAndCommitPolicy policy );
 
 
 #endif /*SOLVE_COMMIT_H_*/

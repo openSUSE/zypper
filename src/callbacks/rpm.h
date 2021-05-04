@@ -30,7 +30,7 @@
 namespace
 {
   /** Print additional rpm outout and scan for %script errors. */
-  void processAdditionalRpmOutput( const std::string & output_r )
+  void processAdditionalRpmOutput( const std::string & output_r, const bool trainlingNewline = false )
   {
     if ( ! output_r.empty() )
     {
@@ -40,18 +40,23 @@ namespace
       ColorStream msg( info << "", ColorContext::HIGHLIGHT );
       for ( iostr::EachLine in( input ); in; in.next() )
       {
-	const std::string & line( *in );
+        if ( in.lineNo() > 1 )
+          msg << endl;
 
+	const std::string & line( *in );
 	static str::regex  rx("^(warning|error): %.* scriptlet failed, ");
 	static str::smatch what;
 	if ( str::regex_match( line, what, rx ) )
 	{
-	  msg << ( (line[0] == 'w' ? ColorContext::MSG_WARNING : ColorContext::MSG_ERROR) << *in ) << endl;
+	  msg << ( (line[0] == 'w' ? ColorContext::MSG_WARNING : ColorContext::MSG_ERROR) << line );
 	  Zypper::instance().setExitInfoCode( ZYPPER_EXIT_INF_RPM_SCRIPT_FAILED );
 	}
 	else
-	  msg << *in << endl;
+	  msg << line;
       }
+
+      if ( trainlingNewline )
+        msg << endl;
     }
   }
 
@@ -290,7 +295,7 @@ struct RemoveResolvableReportReceiver : public callback::ReceiveReport<target::r
     else
     {
       // bnc #369450: print additional rpm output
-      processAdditionalRpmOutput( reason );
+      processAdditionalRpmOutput( reason, true );
     }
   }
 
@@ -367,7 +372,7 @@ struct InstallResolvableReportReceiver : public callback::ReceiveReport<target::
     else
     {
       // bnc #369450: print additional rpm output
-      processAdditionalRpmOutput( reason );
+      processAdditionalRpmOutput( reason, true );
     }
   }
 
@@ -506,6 +511,363 @@ private:
 
 
 ///////////////////////////////////////////////////////////////////
+ // progress for removing a resolvable during a single transaction
+struct RemoveResolvableSAReportReceiver : public callback::ReceiveReport<target::rpm::RemoveResolvableReportSA>
+{
+  void start(
+          Resolvable::constPtr resolvable,
+          const UserData & /*userdata*/ ) override
+  {
+    ++Zypper::instance().runtimeData().rpm_pkg_current;
+    showProgress( resolvable );
+  }
+
+  void progress(
+          int value,
+          Resolvable::constPtr resolvable,
+          const UserData & /*userdata*/  ) override
+  {
+    if ( _progress )
+      (*_progress)->set( value );
+  }
+
+  void finish( Resolvable::constPtr /*resolvable*/, Error error, const UserData & /*userdata*/ ) override
+  {
+    // finsh progress; indicate error
+    if ( _progress )
+    {
+      (*_progress).error( error != NO_ERROR );
+      _progress.reset();
+    }
+
+    if (error != NO_ERROR)
+      // set proper exit code, don't write to output, the error should have been reported in problem()
+      Zypper::instance().setExitCode(ZYPPER_EXIT_ERR_ZYPP);
+    else
+    {
+      // bnc #369450: print additional rpm output
+      // processAdditionalRpmOutput( reason );
+    }
+  }
+
+  void report( const UserData & userData_r ) override
+  {
+    if ( userData_r.type() == target::rpm::RemoveResolvableReportSA::contentRpmout
+          &&  userData_r.haskey("line") ) {
+            std::string line;
+            if ( userData_r.get("line", line) ) {
+              processAdditionalRpmOutput( line );
+            }
+    }
+  }
+
+  void reportend() override
+  { _progress.reset(); }
+
+private:
+  void showProgress( Resolvable::constPtr resolvable_r )
+  {
+    Zypper & zypper = Zypper::instance();
+    _progress.reset( new Out::ProgressBar( zypper.out(),
+					   "remove-resolvable",
+					   // translators: This text is a progress display label e.g. "Removing packagename-x.x.x [42%]"
+					   str::Format(_("Removing %s") ) % resolvable_r->asString(),
+					   zypper.runtimeData().rpm_pkg_current,
+					   zypper.runtimeData().rpm_pkgs_total ) );
+    (*_progress)->range( 100 );	// progress reports percent
+  }
+
+private:
+  scoped_ptr<Out::ProgressBar>	_progress;
+};
+
+///////////////////////////////////////////////////////////////////
+// progress for installing a resolvable during a single transaction
+struct InstallResolvableSAReportReceiver : public callback::ReceiveReport<target::rpm::InstallResolvableReportSA>
+{
+  void start( Resolvable::constPtr resolvable, const UserData & /*userdata*/ ) override
+  {
+    ++Zypper::instance().runtimeData().rpm_pkg_current;
+    showProgress( resolvable );
+  }
+
+  void progress( int value, Resolvable::constPtr resolvable, const UserData & /*userdata*/ ) override
+  {
+    if ( _progress )
+      (*_progress)->set( value );
+  }
+
+  void finish( Resolvable::constPtr /*resolvable*/, Error error, const UserData & /*userdata*/ ) override
+  {
+    // finsh progress; indicate error
+    if ( _progress )
+    {
+      (*_progress).error( error != NO_ERROR );
+      _progress.reset();
+    }
+
+    if ( error != NO_ERROR )
+      // don't write to output, the error should have been reported in problem() (bnc #381203)
+      Zypper::instance().setExitCode(ZYPPER_EXIT_ERR_ZYPP);
+    else
+    {
+      // bnc #369450: print additional rpm output
+      // processAdditionalRpmOutput( reason );
+    }
+  }
+
+  void report( const UserData & userData_r ) override
+  {
+    if ( userData_r.type() == target::rpm::InstallResolvableReportSA::contentRpmout
+          &&  userData_r.haskey("line") ) {
+      std::string line;
+      if ( userData_r.get("line", line) ) {
+        processAdditionalRpmOutput( line );
+      }
+    }
+  }
+
+  void reportend() override
+  { _progress.reset(); }
+
+private:
+  void showProgress( Resolvable::constPtr resolvable_r )
+  {
+    Zypper & zypper = Zypper::instance();
+    _progress.reset( new Out::ProgressBar( zypper.out(),
+					   "install-resolvable",
+					   // TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
+					   str::Format(_("Installing: %s") ) % resolvable_r->asString(),
+					   zypper.runtimeData().rpm_pkg_current,
+					   zypper.runtimeData().rpm_pkgs_total ) );
+    (*_progress)->range( 100 );
+  }
+
+private:
+  scoped_ptr<Out::ProgressBar>	_progress;
+};
+
+///////////////////////////////////////////////////////////////////
+// progress for executing a commit script during a transaction
+struct CommitScriptReportSAReportReceiver : public callback::ReceiveReport<target::rpm::CommitScriptReportSA>
+{
+  void start(
+          const std::string &  scriptType,
+          const std::string &  packageName,
+          Resolvable::constPtr resolvable,
+          const UserData & /*userdata*/ ) override
+  {
+    showProgress( scriptType, packageName, resolvable );
+  }
+
+  void progress( int value, Resolvable::constPtr resolvable, const UserData & /*userdata*/ ) override
+  {
+    if ( _progress )
+      (*_progress)->set( value );
+  }
+
+  void finish( Resolvable::constPtr /*resolvable*/, Error error, const UserData & /*userdata*/ ) override
+  {
+    // finsh progress; indicate error
+    if ( _progress )
+    {
+      (*_progress).error( error != NO_ERROR );
+      _progress.reset();
+    }
+
+    if ( error != NO_ERROR )
+      // don't write to output, the error should have been reported in problem() (bnc #381203)
+      Zypper::instance().setExitCode(ZYPPER_EXIT_ERR_ZYPP);
+    else
+    {
+      // bnc #369450: print additional rpm output
+      // processAdditionalRpmOutput( reason );
+    }
+  }
+
+  void report( const UserData & userData_r ) override
+  {
+    if ( userData_r.type() == target::rpm::CommitScriptReportSA::contentRpmout
+          &&  userData_r.haskey("line") ) {
+      std::string line;
+      if ( userData_r.get("line", line) ) {
+        processAdditionalRpmOutput( line );
+      }
+    }
+  }
+
+  void reportend() override
+  { _progress.reset(); }
+
+private:
+  void showProgress( const std::string &scriptType, const std::string &packageName, Resolvable::constPtr resolvable_r )
+  {
+    Zypper & zypper = Zypper::instance();
+
+    if ( resolvable_r ) {
+      _progress.reset( new Out::ProgressBar( zypper.out(),
+					   "execute-resolvable-script",
+					   // TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
+					   str::Format(_("Executing %s script for: %s") ) % scriptType % resolvable_r->asString(),
+					   zypper.runtimeData().rpm_pkg_current,
+					   zypper.runtimeData().rpm_pkgs_total ) );
+    } else if ( packageName.size() ) {
+      _progress.reset( new Out::ProgressBar( zypper.out(),
+					   "execute-resolvable-script",
+					   // TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
+					   str::Format(_("Executing %s script for: %s") ) % scriptType % packageName,
+					   zypper.runtimeData().rpm_pkg_current,
+					   zypper.runtimeData().rpm_pkgs_total ) );
+    } else  {
+      _progress.reset( new Out::ProgressBar( zypper.out(),
+					   "execute-script",
+					   // TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
+					   str::Format( _("Executing %s script") ) % scriptType, zypper.runtimeData().rpm_pkg_current, zypper.runtimeData().rpm_pkgs_total ) );
+    }
+    (*_progress)->range( 100 );
+  }
+
+private:
+  scoped_ptr<Out::ProgressBar>	_progress;
+};
+
+///////////////////////////////////////////////////////////////////
+// progress for generic tasks during a transaction ( used for verifying and preparing )
+struct TransactionReportSAReceiver : public callback::ReceiveReport<target::rpm::TransactionReportSA>
+{
+  void start(
+          const std::string &name,
+          const UserData & /*userdata*/ ) override
+  {
+    showProgress( name );
+  }
+
+  void progress( int value, const UserData & /*userdata*/ ) override
+  {
+    if ( _progress )
+      (*_progress)->set( value );
+  }
+
+  void finish( Error error, const UserData & /*userdata*/ ) override
+  {
+    // finsh progress; indicate error
+    if ( _progress )
+    {
+      (*_progress).error( error != NO_ERROR );
+      _progress.reset();
+    }
+
+    if ( error != NO_ERROR )
+      // don't write to output, the error should have been reported in problem() (bnc #381203)
+      Zypper::instance().setExitCode(ZYPPER_EXIT_ERR_ZYPP);
+    else
+    {
+      // bnc #369450: print additional rpm output
+      // processAdditionalRpmOutput( reason );
+    }
+  }
+
+  void report( const UserData & userData_r ) override
+  {
+    if ( userData_r.type() == target::rpm::TransactionReportSA::contentRpmout
+          &&  userData_r.haskey("line") ) {
+      std::string line;
+      if ( userData_r.get("line", line) ) {
+        processAdditionalRpmOutput( line );
+      }
+    }
+  }
+
+
+  void reportend() override
+  { _progress.reset(); }
+
+private:
+  void showProgress( const std::string &name )
+  {
+    Zypper & zypper = Zypper::instance();
+    _progress.reset( new Out::ProgressBar( zypper.out(),
+        "transaction-prepare", name ) );
+    (*_progress)->range( 100 );
+  }
+
+private:
+  scoped_ptr<Out::ProgressBar>	_progress;
+};
+
+
+///////////////////////////////////////////////////////////////////
+// progress for generic tasks during a transaction ( used for verifying and preparing )
+struct CleanupPackageReportSAReceiver : public callback::ReceiveReport<target::rpm::CleanupPackageReportSA>
+{
+  void start(
+    const std::string &nvra,
+    const UserData & /*userdata*/ ) override
+  {
+    showProgress( nvra );
+  }
+
+  void progress( int value, const UserData & /*userdata*/ ) override
+  {
+    if ( _progress )
+      (*_progress)->set( value );
+  }
+
+  void finish( Error error, const UserData & /*userdata*/ ) override
+  {
+    // finsh progress; indicate error
+    if ( _progress )
+    {
+      (*_progress).error( error != NO_ERROR );
+      _progress.reset();
+    }
+
+    if ( error != NO_ERROR )
+      // don't write to output, the error should have been reported in problem() (bnc #381203)
+      Zypper::instance().setExitCode(ZYPPER_EXIT_ERR_ZYPP);
+    else
+    {
+      // bnc #369450: print additional rpm output
+      // processAdditionalRpmOutput( reason );
+    }
+  }
+
+  void report( const UserData & userData_r ) override
+  {
+    if ( userData_r.type() == target::rpm::CleanupPackageReportSA::contentRpmout
+         &&  userData_r.haskey("line") ) {
+      std::string line;
+      if ( userData_r.get("line", line) ) {
+        processAdditionalRpmOutput( line );
+      }
+    }
+  }
+
+
+  void reportend() override
+  { _progress.reset(); }
+
+private:
+  void showProgress( const std::string &name )
+  {
+    Zypper & zypper = Zypper::instance();
+    _progress.reset( new Out::ProgressBar( zypper.out(),
+      "cleanup-task",
+      // TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
+      str::Format(_("Cleaning up: %s") ) % name,
+             zypper.runtimeData().rpm_pkg_current,
+					   zypper.runtimeData().rpm_pkgs_total ) );
+    (*_progress)->range( 100 );
+  }
+
+private:
+  scoped_ptr<Out::ProgressBar>	_progress;
+};
+
+
+
+
+///////////////////////////////////////////////////////////////////
 }; // namespace ZyppRecipients
 ///////////////////////////////////////////////////////////////////
 
@@ -518,6 +880,12 @@ class RpmCallbacks {
     ZmartRecipients::InstallResolvableReportReceiver _removeReceiver;
     ZmartRecipients::FindFileConflictstReportReceiver _fileConflictsReceiver;
 
+    ZmartRecipients::RemoveResolvableSAReportReceiver _installSaReceiver;
+    ZmartRecipients::InstallResolvableSAReportReceiver _removeSaReceiver;
+    ZmartRecipients::CommitScriptReportSAReportReceiver _scriptSaReceiver;
+    ZmartRecipients::TransactionReportSAReceiver _transReceiver;
+    ZmartRecipients::CleanupPackageReportSAReceiver _cleanupReceiver;
+
   public:
     RpmCallbacks()
     {
@@ -526,6 +894,12 @@ class RpmCallbacks {
       _installReceiver.connect();
       _removeReceiver.connect();
       _fileConflictsReceiver.connect();
+
+      _installSaReceiver.connect();
+      _removeSaReceiver.connect();
+      _scriptSaReceiver.connect();
+      _transReceiver.connect();
+      _cleanupReceiver.connect();
     }
 
     ~RpmCallbacks()
@@ -535,6 +909,12 @@ class RpmCallbacks {
       _installReceiver.disconnect();
       _removeReceiver.disconnect();
       _fileConflictsReceiver.disconnect();
+
+      _installSaReceiver.disconnect();
+      _removeSaReceiver.disconnect();
+      _scriptSaReceiver.disconnect();
+      _transReceiver.disconnect();
+      _cleanupReceiver.disconnect();
     }
 };
 
