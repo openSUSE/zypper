@@ -132,6 +132,7 @@ namespace  {
         "running",
         {
           { "kernel-default-1-2.x86_64", false },
+          { "kernel-default-extra-1-2.x86_64", false },
           { "kernel-default-devel-1-2.x86_64", false },
           { "kernel-default-devel-debuginfo-1-2.x86_64", false },
           { "kernel-devel-1-2.noarch", false },
@@ -152,6 +153,7 @@ namespace  {
         "running",
         {
           { "kernel-default-1-2.x86_64", false },
+          { "kernel-default-extra-1-2.x86_64", false },
           { "kernel-default-devel-1-2.x86_64", false },
           { "kernel-default-devel-debuginfo-1-2.x86_64", false },
           { "kernel-devel-1-2.noarch", false },

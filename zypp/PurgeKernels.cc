@@ -188,11 +188,35 @@ namespace zypp {
         return false;
       }
 
-      str::smatch what;
-      if ( !str::regex_match( p.name(), what, validRemovals) ) {
-        MIL << "Package " << p << " should not be removed, skipping " << pi << std::endl;
-        pi.statusReset();
-        return false;
+      /*
+       * bsc#1185325 We can not solely rely on name matching to figure out
+       * which packages are kmod's, in SLES from Leap 15.3 forward we have the
+       * kernel-flavour-extra packages ( and others similarly named ) that are basically
+       * a collection of kmod's. So checking the name for .*-kmp(-.*)? is not enough.
+       * We first check if the package provides kmod(*) or ksym(*) and only fall back to name
+       * checking if that is not the case.
+       * Just to be safe I'll leave the regex in the fallback case as well, but it should be completely
+       * redundant now.
+       */
+      bool mostLikelyKmod = false;
+      StrMatcher matchMod( "kmod(*)", Match::GLOB );
+      StrMatcher matchSym( "ksym(*)", Match::GLOB );
+      for ( const auto &prov : p.provides() ) {
+        if ( matchMod.doMatch( prov.detail().name().c_str()) || matchSym.doMatch( prov.detail().name().c_str() ) ) {
+          mostLikelyKmod = true;
+          break;
+        }
+      }
+
+      if ( mostLikelyKmod  ) {
+        MIL << "Package " << p << " is most likely a kmod " << std::endl;
+      } else {
+        str::smatch what;
+        if ( !str::regex_match( p.name(), what, validRemovals) ) {
+          MIL << "Package " << p << " should not be removed, skipping " << pi << std::endl;
+          pi.statusReset();
+          return false;
+        }
       }
     }
 

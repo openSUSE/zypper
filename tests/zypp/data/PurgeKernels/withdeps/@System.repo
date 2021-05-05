@@ -92,6 +92,23 @@ kernel-default = 1-2
 +Rec:
 kernel-firmware
 -Rec:
+
+=Vnd: openSUSE
+=Pkg: kernel-default-extra 1 2 x86_64
+=Sum: The Standard Kernel - Unsupported kernel modules
++Req:
+kernel-default = 1-2
+-Req:
++Prv:
+multiversion(kernel)
+kernel-extra = 1-2
+config(kernel-default-extra) = 1-2
+kernel-default-extra = 1-2
+kmod(a)
+kmod(b) 
+ksym(c)
+-Prv:
+
 =Vnd: openSUSE
 =Pkg: kernel-livepatch-default 1 2 x86_64
 +Req:

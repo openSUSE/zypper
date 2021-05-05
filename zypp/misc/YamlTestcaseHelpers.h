@@ -59,7 +59,14 @@ namespace yamltest::detail {
             }
             MIL << "Loaded " << cnt << " Elements from file" << std::endl;
           } catch ( YAML::Exception &e ) {
-            if ( err ) *err = e.what();
+            if ( err ) {
+              auto errStr = zypp::str::Str();
+              errStr << e.what();
+              if ( !e.mark.is_null() ) {
+                errStr << " Line: " << e.mark.line << " Col: " << e.mark.column << " pos: " << e.mark.pos;
+              }
+              *err = errStr;
+            }
             return false;
           } catch ( ... )  {
             if ( err ) *err = zypp::str::Str() << "Unknown error when parsing the file for " << key;
