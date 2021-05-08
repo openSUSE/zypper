@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-04-30 18:12+0200\n"
-"PO-Revision-Date: 2021-05-01 01:58+0000\n"
+"PO-Revision-Date: 2021-05-09 03:58+0000\n"
 "Last-Translator: Yasuhiko Kamata <belphegor@belbel.or.jp>\n"
 "Language-Team: Japanese <https://l10n.opensuse.org/projects/zypper/master/ja/"
 ">\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 4.6\n"
+"X-Generator: Weblate 4.6.1\n"
 
 #: src/Command.cc:93
 msgid "Invalid command"
@@ -120,7 +120,7 @@ msgstr "エラーメッセージを除く通常出力を抑止します。"
 #. translators: --verbose, -v
 #: src/Config.cc:389
 msgid "Increase verbosity."
-msgstr "より詳細な出力を行ないます。"
+msgstr "より詳細な出力を行います。"
 
 #. translators: --color / --no-color
 #: src/Config.cc:410
@@ -130,7 +130,7 @@ msgstr "tty 側で対応している場合、色を使用するかどうかを�
 #. translators: --no-abbrev, -A
 #: src/Config.cc:415
 msgid "Do not abbreviate text in tables."
-msgstr "表内でのテキストの省略を行なわないようにします。"
+msgstr "表内でのテキストの省略を行わないようにします。"
 
 #. translators: --table-style, -s, %1% denotes the supported range of the integer argument (e.g. "1-11")
 #: src/Config.cc:420
@@ -140,13 +140,12 @@ msgstr "表形式を指定します (%1%) 。"
 
 #: src/Config.cc:424 src/commands/optionsets.cc:284
 msgid "Entering non-interactive mode."
-msgstr "対話処理を行なわない設定にします。"
+msgstr "対話処理を行わない設定にします。"
 
 #. translators: --non-interactive, -n
 #: src/Config.cc:428
 msgid "Do not ask anything, use default answers automatically."
-msgstr ""
-"質問や確認を行なわず、全ての質問に既定の回答を行なったものとして扱います。"
+msgstr "質問や確認を行わず、全ての質問に既定の回答をしたものとして扱います。"
 
 #: src/Config.cc:433
 msgid ""
@@ -263,7 +262,7 @@ msgstr "自動更新が無効になっています。"
 #. translators: --no-refresh
 #: src/Config.cc:593
 msgid "Do not refresh the repositories."
-msgstr "リポジトリの更新を行なわないようにします。"
+msgstr "リポジトリの更新を行わないようにします。"
 
 #: src/Config.cc:597
 msgid "CD/DVD repositories disabled."
@@ -499,9 +498,7 @@ msgstr ""
 msgid ""
 "Package '%s' is not available in your repositories. Cannot reinstall, "
 "upgrade, or downgrade."
-msgstr ""
-"パッケージ '%s' はお使いのリポジトリ内には見つかりません。再インストールや"
-"アップグレード、ダウングレードを行なうことができません。"
+msgstr "パッケージ '%s' はお使いのリポジトリ内には見つかりません。再インストールやアップグレード、ダウングレードを行うことができません。"
 
 #: src/RequestFeedback.cc:158
 #, c-format, boost-format
@@ -540,9 +537,7 @@ msgstr ""
 #: src/RequestFeedback.cc:192
 #, c-format, boost-format
 msgid "Patch '%s' is locked. Use '%s' to install it, or unlock it using '%s'."
-msgstr ""
-"パッチ '%s' はロックされています。インストールを行なうには '%s' を、ロックを"
-"解除するには '%s' を使用してください。"
+msgstr "パッチ '%s' はロックされています。インストールするには '%s' を、ロックを解除するには '%s' を使用してください。"
 
 #: src/RequestFeedback.cc:199
 #, c-format, boost-format
@@ -833,9 +828,7 @@ msgid ""
 msgid_plural ""
 "The following %d packages are recommended, but will not be installed (only "
 "required packages will be installed):"
-msgstr[0] ""
-"以下 %d 個のパッケージが推奨されていますが、インストールを行ないません (必要"
-"なパッケージのみをインストールします):"
+msgstr[0] "以下 %d 個のパッケージが推奨されていますが、インストールを行いません (必要なパッケージのみをインストールします):"
 
 #: src/Summary.cc:1019
 #, c-format, boost-format
@@ -845,9 +838,7 @@ msgid ""
 msgid_plural ""
 "The following %d packages are recommended, but will not be installed because "
 "they are unwanted (were manually removed before):"
-msgstr[0] ""
-"以下 %d 個のパッケージが推奨されていますが、不要であるためインストールを行な"
-"いません (以前に手動で削除されています):"
+msgstr[0] "以下 %d 個のパッケージが推奨されていますが、不要であるためインストールを行いません (以前に手動で削除されています):"
 
 #: src/Summary.cc:1029
 #, c-format, boost-format
@@ -857,77 +848,70 @@ msgid ""
 msgid_plural ""
 "The following %d packages are recommended, but will not be installed due to "
 "conflicts or dependency issues:"
-msgstr[0] ""
-"以下 %d 個のパッケージが推奨されていますが、矛盾または依存関係の問題があるた"
-"め、インストールを行ないません:"
+msgstr[0] "以下 %d 個のパッケージが推奨されていますが、矛盾または依存関係の問題があるため、インストールを行いません:"
 
 #: src/Summary.cc:1042
 #, c-format, boost-format
 msgid "The following patch is recommended, but will not be installed:"
 msgid_plural ""
 "The following %d patches are recommended, but will not be installed:"
-msgstr[0] "以下 %d 個のパッチが推奨されていますが、インストールを行ないません:"
+msgstr[0] "以下 %d 個のパッチが推奨されていますが、インストールを行いません:"
 
 #: src/Summary.cc:1046
 #, c-format, boost-format
 msgid "The following pattern is recommended, but will not be installed:"
 msgid_plural ""
 "The following %d patterns are recommended, but will not be installed:"
-msgstr[0] ""
-"以下 %d 個のパターンが推奨されていますが、インストールを行ないません:"
+msgstr[0] "以下 %d 個のパターンが推奨されていますが、インストールを行いません:"
 
 #: src/Summary.cc:1050
 #, c-format, boost-format
 msgid "The following product is recommended, but will not be installed:"
 msgid_plural ""
 "The following %d products are recommended, but will not be installed:"
-msgstr[0] "以下 %d 個の製品が推奨されていますが、インストールを行ないません:"
+msgstr[0] "以下 %d 個の製品が推奨されていますが、インストールを行いません:"
 
 #: src/Summary.cc:1055
 #, c-format, boost-format
 msgid "The following application is recommended, but will not be installed:"
 msgid_plural ""
 "The following %d applications are recommended, but will not be installed:"
-msgstr[0] ""
-"以下 %d 個のアプリケーションが推奨されていますが、インストールを行ないません:"
+msgstr[0] "以下 %d 個のアプリケーションが推奨されていますが、インストールを行いません:"
 
 #: src/Summary.cc:1088
 #, c-format, boost-format
 msgid "The following package is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d packages are suggested, but will not be installed:"
-msgstr[0] ""
-"以下 %d 個のパッケージが提案されていますが、インストールを行ないません:"
+msgstr[0] "以下 %d 個のパッケージが提案されていますが、インストールを行いません:"
 
 #: src/Summary.cc:1093
 #, c-format, boost-format
 msgid "The following patch is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d patches are suggested, but will not be installed:"
-msgstr[0] "以下 %d 個のパッチが提案されていますが、インストールを行ないません:"
+msgstr[0] "以下 %d 個のパッチが提案されていますが、インストールを行いません:"
 
 #: src/Summary.cc:1098
 #, c-format, boost-format
 msgid "The following pattern is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d patterns are suggested, but will not be installed:"
-msgstr[0] ""
-"以下 %d 個のパターンが提案されていますが、インストールを行ないません:"
+msgstr[0] "以下 %d 個のパターンが提案されていますが、インストールを行いません:"
 
 #: src/Summary.cc:1103
 #, c-format, boost-format
 msgid "The following product is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d products are suggested, but will not be installed:"
-msgstr[0] "以下 %d 個の製品が提案されていますが、インストールを行ないません:"
+msgstr[0] "以下 %d 個の製品が提案されていますが、インストールを行いません:"
 
 #: src/Summary.cc:1109
 #, c-format, boost-format
 msgid "The following application is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d applications are suggested, but will not be installed:"
-msgstr[0] ""
-"以下 %d 個のアプリケーションが提案されていますが、インストールを行ないません:"
+msgstr[0] "以下 %d 個のアプリケーションが提案されていますが、インストールを行いません:"
 
 #: src/Summary.cc:1134
 #, c-format, boost-format
@@ -1035,7 +1019,7 @@ msgstr[0] "以下 %d 個のアプリケーション更新はインストール�
 msgid "The following item is locked and will not be changed by any action:"
 msgid_plural ""
 "The following %d items are locked and will not be changed by any action:"
-msgstr[0] "以下 %d 個の項目はロックされているため、何も行ないません:"
+msgstr[0] "以下 %d 個の項目はロックされているため、何も行いません:"
 
 #. always as plain name list
 #. translators: used as 'tag:' (i.e. followed by ':')
@@ -1844,9 +1828,7 @@ msgid ""
 msgid_plural ""
 "%1% packages had to be excluded from file conflicts check because they are "
 "not yet downloaded."
-msgstr[0] ""
-"%1% 個のパッケージはダウンロードを行なっていないため、ファイルの競合チェック"
-"からは除外されています。"
+msgstr[0] "%1% 個のパッケージはダウンロードを行っていないため、ファイルの競合チェックからは除外されています。"
 
 #. TranslatorExplanation %1%(commandline option)
 #: src/callbacks/rpm.h:460
@@ -2561,7 +2543,7 @@ msgstr "これはスクリプトからシステムの再起動が必要かどう
 #: src/commands/needs-rebooting.cc:38
 msgid ""
 "Since the last system boot core libraries or services have been updated."
-msgstr "中枢ライブラリもしくはサービスの更新を行ないました。"
+msgstr "中枢ライブラリもしくはサービスの更新を行いました。"
 
 #: src/commands/needs-rebooting.cc:39
 msgid ""
@@ -2571,7 +2553,7 @@ msgstr "これらの更新を反映させるため、システムの再起動が
 #: src/commands/needs-rebooting.cc:44
 msgid ""
 "No core libraries or services have been updated since the last system boot."
-msgstr "中枢ライブラリもしくはサービスの更新は行なわれていません。"
+msgstr "中枢ライブラリもしくはサービスの更新は行われていません。"
 
 #: src/commands/needs-rebooting.cc:45
 msgid "Reboot is probably not necessary."
@@ -2641,7 +2623,7 @@ msgstr "利用可能なすべてのオプションについては、'%s' を参�
 
 #: src/commands/optionsets.cc:33
 msgid "Don't change anything, just report what would be done."
-msgstr "何も変更しません。何が行なわれるのかだけを表示します。"
+msgstr "何も変更しません。何が行われるのかだけを表示します。"
 
 #. translators: %1% is a commandline option (like "--download-only")
 #: src/commands/optionsets.cc:35
@@ -3617,11 +3599,11 @@ msgstr "無効に設定してあるリポジトリを有効にします。"
 
 #: src/commands/reposerviceoptionsets.cc:78
 msgid "Disable the service (but don't remove it)."
-msgstr "サービスを無効に設定する (削除は行なわない) 。"
+msgstr "サービスを無効に設定する (削除は行わない) 。"
 
 #: src/commands/reposerviceoptionsets.cc:78
 msgid "Disable the repository (but don't remove it)."
-msgstr "リポジトリを無効に設定する (削除は行なわない) 。"
+msgstr "リポジトリを無効に設定する (削除は行わない) 。"
 
 #: src/commands/reposerviceoptionsets.cc:81
 msgid "Enable auto-refresh of the service."
@@ -3689,7 +3671,7 @@ msgstr "このリポジトリに対して、 GPG チェックを有効にしま�
 
 #: src/commands/reposerviceoptionsets.cc:141
 msgid "Enable strict GPG check for this repository."
-msgstr "このリポジトリに対して厳密な GPG チェックを行なう。"
+msgstr "このリポジトリに対して厳密な GPG チェックを行う。"
 
 #: src/commands/reposerviceoptionsets.cc:142
 #, boost-format
@@ -3807,9 +3789,7 @@ msgstr ""
 msgid ""
 "For an extended search including not yet activated remote resources you may "
 "run '%1%' at any time."
-msgstr ""
-"現時点では有効化していないリモートのリソースを含めた拡張検索を行なうには、 "
-"'%1%' を実行する必要があります。"
+msgstr "現時点では有効化していないリモートのリソースを含めた拡張検索を行うには、 '%1%' を実行する必要があります。"
 
 #: src/commands/search/search-packages-hinthack.cc:99
 #, boost-format
@@ -4501,9 +4481,8 @@ msgid ""
 "value can be changed in your local rpm configuration. In case of doubt try "
 "executing '%2%'."
 msgstr ""
-"rpm がソースパッケージをインストールする際の既定のインストール先は '%1%' です"
-"が、 rpm 側で設定を行なうことで、インストール先を変更することができます。具体"
-"的には '%2%' を実行してください。"
+"rpm がソースパッケージをインストールする際の既定のインストール先は '%1%' ですが、 rpm "
+"側で設定を行うことで、インストール先を変更することができます。具体的には '%2%' を実行してください。"
 
 #. translators: -d, --build-deps-only
 #: src/commands/sourceinstall.cc:48
@@ -4608,7 +4587,7 @@ msgstr ""
 "\n"
 "zypper 本体は、サブコマンドに対するラッパーとして動作するように\n"
 "なっていて、サブコマンドの配置場所とその実行、およびコマンドライン\n"
-"パラメータの受け渡しまでを行ないます。\n"
+"パラメータの受け渡しまでを行います。\n"
 "\n"
 "サブコマンドが zypper_execdir 内に見つからない場合、ラッパーはお使いの\n"
 " $PATH 環境変数を参照します。そのため、システム以外の場所に zypper\n"
@@ -5030,7 +5009,7 @@ msgstr "2つのバージョン文字列を比較します。"
 #. translators: command description
 #: src/commands/utils/versioncmp.cc:23
 msgid "Compare the versions supplied as arguments."
-msgstr "パラメータで指定したバージョンの比較を行ないます。"
+msgstr "パラメータで指定したバージョンの比較を行います。"
 
 #. translators: -m, --match
 #: src/commands/utils/versioncmp.cc:35
@@ -5359,9 +5338,7 @@ msgstr ""
 msgid ""
 "Please restart the operation in interactive mode and confirm your agreement "
 "with required licenses, or use the %s option."
-msgstr ""
-"対話モードで起動しなおして必要なライセンス (使用許諾) 契約の確認を行なうか、"
-"コマンドラインオプションに %s を指定してください。"
+msgstr "対話モードで起動しなおして必要なライセンス (使用許諾) 契約の確認を行うか、コマンドラインオプションに %s を指定してください。"
 
 #. translators: e.g. "... with flash package license."
 #: src/misc.cc:209
@@ -5506,8 +5483,8 @@ msgid ""
 "Repo '%1%' is managed by service '%2%'. Volatile changes are reset by the "
 "next service refresh!"
 msgstr ""
-"リポジトリ '%1%' はサービス '%2%' で管理されています。ここで変更を行なって"
-"も、次回のサービス更新の際にリセットされてしまうことにご注意ください！"
+"リポジトリ '%1%' はサービス '%2%' "
+"で管理されています。ここで変更を行っても、次回のサービス更新の際にリセットされてしまうことにご注意ください！"
 
 #: src/repos.cc:73
 msgid "default priority"
@@ -5849,7 +5826,7 @@ msgstr "インストールメディアが有効で読み取り可能かどうか
 #: src/repos.cc:1288
 #, c-format, boost-format
 msgid "Reading data from '%s' media is delayed until next refresh."
-msgstr "メディア '%s' からのデータ読み込みは、次回の更新まで行ないません。"
+msgstr "メディア '%s' からのデータ読み込みは、次回の更新まで行いません。"
 
 #: src/repos.cc:1357
 msgid "Problem accessing the file at the specified URI"
@@ -5960,9 +5937,7 @@ msgstr "リポジトリのデータを読み込んでいます..."
 msgid ""
 "No repositories defined. Operating only with the installed resolvables. "
 "Nothing can be installed."
-msgstr ""
-"リポジトリが定義されていません。操作はインストール済みの解決方法についてのみ"
-"行なわれます。何もインストールできません。"
+msgstr "リポジトリが定義されていません。操作はインストール済みの解決方法についてのみ行われます。何もインストールできません。"
 
 #: src/repos.cc:1790
 #, c-format, boost-format
@@ -6015,7 +5990,7 @@ msgstr "インストール済みのパッケージを読み込む際にエラー
 #: src/repos.cc:1875
 #, c-format, boost-format
 msgid "'%s' looks like an RPM file. Will try to download it."
-msgstr "'%s' は RPM ファイルのようです。ダウンロードを行ないます。"
+msgstr "'%s' は RPM ファイルのようです。ダウンロードを行います。"
 
 #: src/repos.cc:1884
 #, c-format, boost-format
@@ -6987,11 +6962,11 @@ msgstr "再試行しています..."
 
 #: src/utils/prompt.cc:324
 msgid "always"
-msgstr "常に行なう"
+msgstr "常に行う"
 
 #: src/utils/prompt.cc:324
 msgid "never"
-msgstr "決して行なわない"
+msgstr "決して行わない"
 
 #: src/utils/prompt.cc:370
 msgid "Cannot read input: bad stream or EOF."
