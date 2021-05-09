@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-04-30 14:04+0200\n"
-"PO-Revision-Date: 2021-05-01 01:58+0000\n"
+"PO-Revision-Date: 2021-05-09 02:57+0000\n"
 "Last-Translator: Yasuhiko Kamata <belphegor@belbel.or.jp>\n"
 "Language-Team: Japanese <https://l10n.opensuse.org/projects/libzypp/master/"
 "ja/>\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 4.6\n"
+"X-Generator: Weblate 4.6.1\n"
 
 #. dubious: Throw on malformed known types, otherwise log a warning.
 #: zypp/CheckSum.cc:136
@@ -4689,12 +4689,12 @@ msgstr "システムが破壊される警告を無視する"
 #: zypp/solver/detail/SATResolver.cc:1361
 #, boost-format
 msgid "do not ask to install a solvable providing %1%"
-msgstr "%1% を提供する解決方法のインストールについて確認を行ないません"
+msgstr "%1% を提供する解決方法のインストールについて確認を行いません"
 
 #: zypp/solver/detail/SATResolver.cc:1383
 #, boost-format
 msgid "do not ask to delete all solvables providing %1%"
-msgstr "%1% を提供する全ての解決方法の削除について確認を行ないません"
+msgstr "%1% を提供する全ての解決方法の削除について確認を行いません"
 
 #: zypp/solver/detail/SATResolver.cc:1396
 #, boost-format
