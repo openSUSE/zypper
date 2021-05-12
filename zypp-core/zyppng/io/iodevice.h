@@ -36,12 +36,17 @@ namespace zyppng {
     };
     ZYPP_DECLARE_FLAGS( OpenMode, OpenModeFlag );
 
+    using Ptr = std::shared_ptr<IODevice>;
+    using WeakPtr = std::weak_ptr<IODevice>;
+
     IODevice();
 
     virtual bool open ( const OpenMode mode );
     virtual void close ();
 
 
+    bool canRead () const;
+    bool canWrite () const;
     bool isOpen () const;
     bool canReadLine () const;
 
@@ -54,10 +59,14 @@ namespace zyppng {
     off_t write ( const ByteArray &data );
     off_t write ( const char *data, size_t len );
 
-    SignalProxy<void( size_t)> sigBytesAvailable ();
+    /*!
+     * Signal is emitted when there is data available to read
+     */
+    SignalProxy<void ()> sigReadyRead ();
 
   protected:
     IODevice( IODevicePrivate &d );
+    virtual size_t rawBytesAvailable () const = 0;
     virtual off_t writeData ( const char *data, off_t count ) = 0;
     virtual off_t readData  ( char *buffer, off_t bufsize ) = 0;
   };

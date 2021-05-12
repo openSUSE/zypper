@@ -27,6 +27,7 @@ namespace zyppng {
     IODevicePrivate ( IODevice &p );
     IOBuffer _readBuf;
     IODevice::OpenMode _mode = IODevice::Closed;
+    Signal< void()> _readyRead;
   };
 
 }

@@ -200,16 +200,12 @@ namespace zyppng {
     SignalProxy<void ()> sigConnected ();
 
     /*!
-     * Signal is emitted always when the socket was closed.
+     * Signal is emitted always when the socket was closed. In the signal handler it is still possible
+     * to read all pending data in the read buffer, which will be discarded right after emitting the signal.
      * \note when the socket should be deleted in a slot connected to this signal make sure
      *       to delay the delete using the EventDispatcher.
      */
     SignalProxy<void ()> sigDisconnected ();
-
-    /*!
-     * Signal is emitted when there is data available to read
-     */
-    SignalProxy<void ()> sigReadyRead ();
 
     /*!
      * Signal is emitted every time bytes have been written to the underlying socket.
@@ -236,6 +232,7 @@ namespace zyppng {
 
     // IODevice interface
   protected:
+    size_t rawBytesAvailable() const override;
     off_t writeData(const char *data, off_t count) override;
     off_t readData(char *buffer, off_t bufsize) override;
   };

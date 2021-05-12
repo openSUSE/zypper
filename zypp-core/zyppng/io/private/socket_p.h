@@ -52,9 +52,6 @@ namespace zyppng {
     bool readRawBytesToBuffer ();
     bool writePendingData ();
 
-    static int bytesAvailableOnSocket ( int socket );
-
-
     int _domain;
     int _type;
     int _protocol;
@@ -70,7 +67,6 @@ namespace zyppng {
     //signals
     Signal< void(Socket::SocketError)> _sigError;
     Signal< void (std::size_t)> _sigBytesWritten;
-    Signal< void()> _readyRead;
     Signal< void()> _incomingConnection;
     Signal< void()> _connected;
     Signal< void()> _disconnected;

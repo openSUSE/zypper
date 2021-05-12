@@ -173,6 +173,7 @@ SET( zyppng_io_private_HEADERS
 )
 
 SET( zyppng_io_SRCS
+  zyppng/io/asyncdatasource.cpp
   zyppng/io/iobuffer.cc
   zyppng/io/iodevice.cc
   zyppng/io/socket.cc
@@ -182,6 +183,8 @@ SET( zyppng_io_SRCS
 )
 
 SET( zyppng_io_HEADERS
+  zyppng/io/AsyncDataSource
+  zyppng/io/asyncdatasource.h
   zyppng/io/IODevice
   zyppng/io/iodevice.h
   zyppng/io/Socket

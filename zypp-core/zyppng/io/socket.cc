@@ -90,6 +90,9 @@ namespace zyppng {
         auto &s = _state.emplace<SocketPrivate::ConnectedState>();
         s._socketNotifier = SocketNotifier::create( _socket, SocketNotifier::Read | SocketNotifier::Error, true );
         s._socketNotifier->connect( &SocketNotifier::sigActivated, *this, &SocketPrivate::onSocketActivatedSlot );
+
+        z_func()->IODevice::open( IODevice::ReadOnly | IODevice::WriteOnly );
+
         _connected.emit();
         break;
       }
@@ -121,8 +124,8 @@ namespace zyppng {
           ::close( _socket );
         _socket = -1;
         _targetAddr.reset();
-        z_func()->IODevice::close();
         _disconnected.emit();
+        z_func()->IODevice::close();
         break;
       }
     }
@@ -188,24 +191,12 @@ namespace zyppng {
     return true;
   }
 
-  /*!
-   * Returns the number of bytes available to read on a CONNECTED socket
-   */
-  int SocketPrivate::bytesAvailableOnSocket(int socket)
-  {
-    int value;
-    if ( ioctl( socket, FIONREAD, &value) >= 0 )
-      return value;
-
-    return 0;
-  }
-
   int zyppng::SocketPrivate::rawBytesAvailable() const
   {
     if ( state() != Socket::ConnectedState )
       return 0;
 
-    return bytesAvailableOnSocket( _socket );
+    return zyppng::bytesAvailableOnFD( _socket );
   }
 
   bool SocketPrivate::readRawBytesToBuffer()
@@ -410,6 +401,11 @@ namespace zyppng {
   Socket::Socket( int domain, int type, int protocol )
     : IODevice( *( new SocketPrivate( domain, type, protocol, *this )))
   { }
+
+  size_t Socket::rawBytesAvailable() const
+  {
+    return d_func()->rawBytesAvailable();
+  }
 
   Socket::~Socket()
   {
@@ -685,6 +681,7 @@ namespace zyppng {
           written = 0;
           break;
         }
+        case EPIPE:
         case ECONNRESET: {
           d->setError( Socket::ConnectionClosedByRemote, strerr_cxx( errno ) );
           return -1;
@@ -785,7 +782,7 @@ namespace zyppng {
     if ( d->state() != SocketState::ConnectedState )
       return -1;
 
-    const auto read = ::read( d->_socket, buffer, bufsize );
+    const auto read = eintrSafeCall( ::read, d->_socket, buffer, bufsize );
 
     // special case for remote close
     if ( read == 0 ) {
@@ -811,9 +808,8 @@ namespace zyppng {
   }
 
   size_t Socket::bytesAvailable() const
-  {
-    Z_D();
-    return IODevice::bytesAvailable() + d->rawBytesAvailable();
+  {;
+    return IODevice::bytesAvailable();
   }
 
   size_t Socket::bytesPending() const
@@ -831,11 +827,6 @@ namespace zyppng {
   Socket::SocketState Socket::state() const
   {
     return d_func()->state();
-  }
-
-  SignalProxy<void ()> Socket::sigReadyRead()
-  {
-    return d_func()->_readyRead;
   }
 
   SignalProxy<void ()> Socket::sigIncomingConnection()
