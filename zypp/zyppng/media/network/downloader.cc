@@ -1538,7 +1538,8 @@ namespace zyppng {
 
   Download::~Download()
   {
-    cancel();
+    if ( state() != InitialState && state() != Finished )
+      cancel();
   }
 
   Download::State Download::state() const
