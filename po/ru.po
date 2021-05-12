@@ -10,17 +10,17 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-04-30 18:12+0200\n"
-"PO-Revision-Date: 2021-01-04 17:38+0000\n"
+"PO-Revision-Date: 2021-05-12 23:58+0000\n"
 "Last-Translator: Alex Minton <alex239@gmail.com>\n"
-"Language-Team: Russian <https://l10n.opensuse.org/projects/zypper/master/ru/"
-">\n"
+"Language-Team: Russian <https://l10n.opensuse.org/projects/zypper/master/ru/>"
+"\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 3.6.1\n"
+"X-Generator: Weblate 4.6.2\n"
 
 #: src/Command.cc:93
 msgid "Invalid command"
@@ -904,7 +904,9 @@ msgid ""
 msgid_plural ""
 "The following %d packages are recommended, but will not be installed (only "
 "required packages will be installed):"
-msgstr[0] "требуемые пакеты):"
+msgstr[0] ""
+"%d пакет рекомендован, но не будет установлен (будут установлены только "
+"требуемые пакеты):"
 msgstr[1] ""
 "%d пакета рекомендованы, но не будут установлены (будут установлены только "
 "требуемые пакеты):"
@@ -937,7 +939,9 @@ msgid ""
 msgid_plural ""
 "The following %d packages are recommended, but will not be installed due to "
 "conflicts or dependency issues:"
-msgstr[0] "с зависимостями:"
+msgstr[0] ""
+"%d пакет рекомендован, но не будет установлен из-за конфликтов либо проблем "
+"с зависимостями:"
 msgstr[1] ""
 "%d пакета рекомендованы, но не будут установлены из-за конфликтов либо "
 "проблем с зависимостями:"
@@ -1130,7 +1134,7 @@ msgid ""
 msgid_plural ""
 "The following %d packages need additional customer contract to get support:"
 msgstr[0] ""
-"Для получения поддержки для следующего пакета необходимо заключить "
+"Для получения поддержки для следующего %d пакета необходимо заключить "
 "дополнительное соглашение:"
 msgstr[1] ""
 "Для получения поддержки для следующих %d пакетов необходимо заключить "
@@ -2525,7 +2529,7 @@ msgstr "Не удалять соответствующие пакеты для �
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
 #: src/commands/locks/add.cc:29
 msgid "addlock (al) [OPTIONS] <LOCKSPEC>..."
-msgstr ""
+msgstr "addlock (al) [ПАРАМЕТРЫ] <БЛОКИРОВКА>..."
 
 #. translators: command summary
 #: src/commands/locks/add.cc:31 src/commands/locks/add.cc:34
@@ -2539,6 +2543,10 @@ msgid ""
 "have their KIND: string prepended (e.g. 'patch:foo') or use the commands --"
 "type option."
 msgstr ""
+"БЛОКИРОВКА формируется из '[ТИП:]ИМЯ[ ОПЕРАТОР ВАРИАНТ]', где ИМЯ также "
+"может быть шаблоном с использованием символов * и ?. Для непакетных типов "
+"строку ТИП можно указывать спереди (например, 'patch:foo') или использовать "
+"параметр команды --type."
 
 #: src/commands/locks/add.cc:36
 msgid ""
@@ -2546,6 +2554,9 @@ msgid ""
 "optionally restrict the lock to match a specific edition or edition range "
 "using =, <, <=, >, >= or != followed an EDITION."
 msgstr ""
+"В базовой форме блокируются все варианты совпадающих элементов. Вы можете "
+"ограничить блокировку конкретным вариантом или диапазоном вариантов, "
+"используя операторы =, <, <=, >, >= или != перед строкой ВАРИАНТ."
 
 #: src/commands/locks/add.cc:46
 msgid "Restrict the lock to the specified repository."
@@ -2737,6 +2748,8 @@ msgid ""
 "This is the recommended way for scripts to test whether a system reboot is "
 "suggested."
 msgstr ""
+"Это рекомендуемый способ для проверки в скрипте, предлагается ли "
+"перезагрузка."
 
 #: src/commands/needs-rebooting.cc:38
 msgid ""
@@ -4436,9 +4449,9 @@ msgid_plural ""
 msgstr[0] ""
 "\"%s\" репозиторий был добавлен к отключенным репозиториям сервиса \"%s\""
 msgstr[1] ""
-"\"%s\" репозитория  были добавлены к отключенным репозиториям сервиса \"%s\""
+"\"%s\" репозитория были добавлены к отключенным репозиториям сервиса \"%s\""
 msgstr[2] ""
-"\"%s\"репозиториев  были добавлены к отключенным репозиториям сервиса \"%s\""
+"\"%s\"репозиториев были добавлены к отключенным репозиториям сервиса \"%s\""
 
 #: src/commands/services/modify.cc:269
 #, c-format, boost-format
@@ -4704,8 +4717,7 @@ msgstr ""
 #. translators: -d, --build-deps-only
 #: src/commands/sourceinstall.cc:48
 msgid "Install only build dependencies of specified packages."
-msgstr ""
-"Установить только зависимости, требуемые для  сборки указанных пакетов."
+msgstr "Установить только зависимости, требуемые для сборки указанных пакетов."
 
 #. translators: -D, --no-build-deps
 #: src/commands/sourceinstall.cc:52
@@ -4820,7 +4832,7 @@ msgid ""
 "executing subcommands in '%1%' is currently not supported.\n"
 msgstr ""
 "Использование глобальных параметров zypper с подкомандами, как и\n"
-"выполнение подкоманд в  \"%1%\", в настоящее время не поддерживается.\n"
+"выполнение подкоманд в \"%1%\", в настоящее время не поддерживается.\n"
 
 #. translators: headline of an enumeration; %1% is a directory name
 #: src/commands/subcommand.cc:466
@@ -5151,7 +5163,7 @@ msgstr "Загрузить все пакеты rpm с исходным кодо�
 #. translators: --delete/--no-delete
 #: src/commands/utils/source-download.cc:502
 msgid "Whether to delete extraneous source rpms in the local directory."
-msgstr ""
+msgstr "Удалять ли дополнительные rpm с исходным кодом из локального каталога."
 
 #. translators: --status
 #: src/commands/utils/source-download.cc:506
