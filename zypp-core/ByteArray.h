@@ -11,6 +11,8 @@
 
 #include <vector>
 #include <cstring>
+#include <string>
+#include <string_view>
 
 namespace zypp {
   class ByteArray : public std::vector<char>
@@ -18,6 +20,19 @@ namespace zypp {
   public:
     using vector<char>::vector;
     explicit ByteArray ( const char *data, const int len = -1 ) : ByteArray( data, data + (len == -1 ? strlen(data) : len) ) { }
+    std::string asString () const {
+      if ( size() == 0 )
+        return std::string();
+      return std::string( data(), size() );
+    }
+
+#ifdef __cpp_lib_string_view
+    std::string_view asStringView () const {
+      if ( size() == 0 )
+        return std::string_view();
+      return std::string_view( data(), size() );
+    }
+#endif
   };
 
   class UByteArray : public std::vector<unsigned char>
