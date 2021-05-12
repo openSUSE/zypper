@@ -98,6 +98,9 @@ namespace zypp
       C_Str( const char * c_str_r )      : _val( c_str_r ),       _sze( std::string::npos ) {}
       C_Str( const std::string & str_r ) : _val( str_r.c_str() ), _sze( str_r.size() ) {}
       C_Str( const boost::string_ref & str_r ) : _val( str_r.data() ), _sze( str_r.size() ) {}
+#ifdef __cpp_lib_string_view
+      C_Str( const std::string_view & str_r ) : _val( str_r.data() ), _sze( str_r.size() ) {}
+#endif
 
     public:
       bool      isNull()       const { return !_val; }
@@ -367,7 +370,7 @@ namespace zypp
       { --pos; ret[pos] = ((val_r & bit)?'1':'0'); bit = bit<<1; }
       return ret;
     }
-    
+
     ///////////////////////////////////////////////////////////////////
     /** Parsing numbers from string.
     */

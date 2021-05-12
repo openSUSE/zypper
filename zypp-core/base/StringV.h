@@ -275,6 +275,9 @@ namespace zypp
     inline unsigned split( std::string_view line_r, Callable && fnc_r = Callable() )
     { return detail::_split( line_r, std::string_view(), Trim::notrim, detail::wordConsumer( std::forward<Callable>(fnc_r) ) ); }
 
+    inline std::string_view asStringView( const char * t )
+    { return t == nullptr ? std::string_view() : t; }
+
   } // namespace strv
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////

@@ -18,15 +18,18 @@
 #include <zypp-core/AutoDispose.h>
 #include <zypp-core/base/IOTools.h>
 #include <zypp-core/base/LogTools.h>
+#include <zypp-core/zyppng/base/private/linuxhelpers_p.h>
 
 namespace zypp::io {
 
   BlockingMode setFILEBlocking (FILE * file, bool mode )
   {
     if ( !file ) return BlockingMode::FailedToSetMode;
+    return setFDBlocking( ::fileno( file ), mode );
+  }
 
-    int fd = ::fileno( file );
-
+  BlockingMode setFDBlocking(int fd, bool mode)
+  {
     if ( fd == -1 )
     { ERR << strerror( errno ) << std::endl; return BlockingMode::FailedToSetMode; }
 
@@ -47,6 +50,36 @@ namespace zypp::io {
     { ERR << strerror(errno) << std::endl; return BlockingMode::FailedToSetMode; }
 
     return oldMode;
+  }
+
+  bool writeAll(int fd, void *buf, size_t size)
+  {
+    char *tmpBuf = ( char *) buf;
+
+    size_t written = 0;
+    while ( written < size ) {
+      const auto res = zyppng::eintrSafeCall( ::write, fd, tmpBuf+written, size-written );
+      if ( res < 0 ) // error
+        return false;
+      written += res;
+    }
+    return true;
+  }
+
+  ReadAllResult readAll (int fd, void *buf, size_t size )
+  {
+    char *tmpBuf = (char *)buf;
+    size_t read = 0;
+    while ( read != size ) {
+      const auto r = zyppng::eintrSafeCall( ::read, fd, tmpBuf+read, size - read );
+      if ( r == 0 )
+				return ReadAllResult::Eof;
+			if ( r < 0 )
+        return ReadAllResult::Error;
+
+      read += r;
+    }
+    return ReadAllResult::Ok;
   }
 
   std::pair<ReceiveUpToResult, std::string> receiveUpto(FILE *file, char c, timeout_type timeout, bool failOnUnblockError )
@@ -130,4 +163,5 @@ namespace zypp::io {
 
   TimeoutException::~TimeoutException() noexcept
   { }
+
 }

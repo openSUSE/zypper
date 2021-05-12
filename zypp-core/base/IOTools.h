@@ -30,7 +30,22 @@ namespace zypp::io {
    * The return value is one of the \ref zypp::io::BlockingMode values
    */
   BlockingMode setFILEBlocking ( FILE *file, bool mode = true );
+  BlockingMode setFDBlocking ( int fd, bool mode = true );
 
+  /*!
+    Blocks until all data in buf was written to the fd or a error occured
+   */
+  bool writeAll ( int fd, void *buf, size_t size );
+
+  /*!
+    Blocks until the number of bytes passed via \a size was received
+   */
+	enum class ReadAllResult {
+		Error,
+		Eof,
+		Ok
+	};
+  ReadAllResult readAll ( int fd, void *buf, size_t size );
 
   class TimeoutException : public Exception
   {
@@ -68,7 +83,7 @@ namespace zypp::io {
    * the file descriptor did not work. The default is to fail if it's not possible to unblock the file.
    */
   std::pair<ReceiveUpToResult, std::string> receiveUpto( FILE * file, char c, timeout_type timeout, bool failOnUnblockError = true );
-
 }
 
 #endif
+
