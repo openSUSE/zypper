@@ -11,6 +11,9 @@ namespace zyppng {
   public:
     ~AbstractDirectSpawnEngine();
     virtual bool isRunning ( bool wait = false ) override;
+
+  protected:
+    void mapExtraFds( int controlFd = -1 );
   };
 
   /*!

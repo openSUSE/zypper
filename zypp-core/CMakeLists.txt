@@ -176,6 +176,7 @@ SET( zyppng_io_SRCS
   zyppng/io/asyncdatasource.cpp
   zyppng/io/iobuffer.cc
   zyppng/io/iodevice.cc
+  zyppng/io/process.cpp
   zyppng/io/socket.cc
   zyppng/io/sockaddr.cpp
   zyppng/io/abstractspawnengine.cc
@@ -187,6 +188,8 @@ SET( zyppng_io_HEADERS
   zyppng/io/asyncdatasource.h
   zyppng/io/IODevice
   zyppng/io/iodevice.h
+  zyppng/io/Process
+  zyppng/io/process.h
   zyppng/io/Socket
   zyppng/io/socket.h
   zyppng/io/sockaddr.h

@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include <map>
+#include <memory>
 
 #include <zypp/Pathname.h>
 
@@ -13,6 +14,7 @@ namespace zyppng {
    * This implements the basic skeleton of ExternalProgram and Process.
    * Taking care of forking the process and setting up stdout and stderr so both
    * implementations can use the same code
+   * 
    */
   class AbstractSpawnEngine
   {
@@ -25,6 +27,8 @@ namespace zyppng {
 
     AbstractSpawnEngine();
     virtual ~AbstractSpawnEngine();
+
+    static std::unique_ptr<zyppng::AbstractSpawnEngine> createDefaultEngine ();
 
     int exitStatus () const;
     void setExitStatus ( const int state );
@@ -42,9 +46,15 @@ namespace zyppng {
     Environment environment() const;
     void setEnvironment( const Environment &environment );
 
-    pid_t pid   ();
+    /**
+     * @returns the pid of the forked process, without checking if the process is
+     *          still running.  
+     */
+    pid_t pid   ( );
 
-    /** Kickstart the process */
+    /** 
+     * Kickstart the process, if this returns true it is guaranteed that exec() was successful 
+     */
     virtual bool start ( const char *const *argv, int stdin_fd, int stdout_fd, int stderr_fd )  = 0;
 
     virtual bool isRunning ( bool wait = false ) = 0;
@@ -58,7 +68,9 @@ namespace zyppng {
     zypp::Pathname workingDirectory() const;
     void setWorkingDirectory(const zypp::Pathname &workingDirectory);
 
-  protected:
+    const std::vector<int> &fdsToMap () const;
+    void addFd ( int fd );
+
     int checkStatus(int status);
 
   protected:
@@ -82,6 +94,9 @@ namespace zyppng {
     zypp::Pathname _chroot;
     /** Working directory */
     zypp::Pathname _workingDirectory;
+    /** Additional file descriptors we want to map to the new process */
+    std::vector<int> _mapFds;
+
   };
 
 } // namespace zyppng

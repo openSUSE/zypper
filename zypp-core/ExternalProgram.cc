@@ -41,48 +41,6 @@ using std::endl;
 
 namespace zypp {
 
-#if ZYPP_HAS_GLIBSPAWNENGINE
-    namespace  {
-
-      enum class SpawnEngine {
-        GSPAWN,
-        PFORK
-      };
-
-      SpawnEngine initEngineFromEnv () {
-        const std::string fBackend ( zypp::str::asString( ::getenv("ZYPP_FORK_BACKEND") ) );
-        if ( fBackend.empty() || fBackend == "auto" || fBackend == "pfork" ) {
-          DBG << "Starting processes via posix fork" << std::endl;
-          return SpawnEngine::PFORK;
-        } else if ( fBackend == "gspawn" ) {
-          DBG << "Starting processes via glib spawn" << std::endl;
-          return SpawnEngine::GSPAWN;
-        }
-
-        DBG << "Falling back to starting process via posix fork" << std::endl;
-        return SpawnEngine::PFORK;
-      }
-
-      std::unique_ptr<zyppng::AbstractSpawnEngine> engineFromEnv () {
-        static const SpawnEngine eng = initEngineFromEnv();
-        switch ( eng ) {
-          case SpawnEngine::GSPAWN:
-            return std::make_unique<zyppng::GlibSpawnEngine>();
-          case SpawnEngine::PFORK:
-          default:
-            return std::make_unique<zyppng::ForkSpawnEngine>();
-        }
-      }
-    }
-#else
-
-  std::unique_ptr<zyppng::AbstractSpawnEngine> engineFromEnv () {
-      return std::make_unique<zyppng::ForkSpawnEngine>();
-  }
-
-#endif
-
-
     ExternalProgram::ExternalProgram()
     {}
 
@@ -212,7 +170,7 @@ namespace zypp {
         _backend = std::make_unique<zyppng::ForkSpawnEngine>();
         static_cast<zyppng::ForkSpawnEngine&>(*_backend).setUsePty( true );
       } else {
-        _backend = engineFromEnv();
+        _backend = zyppng::AbstractSpawnEngine::createDefaultEngine();
       }
 
       // retrieve options at beginning of arglist
@@ -476,7 +434,7 @@ namespace zypp {
 
     pid_t ExternalProgram::getpid()
     {
-      if ( !_backend )
+      if ( !running() )
         return -1;
       return _backend->pid();
     }

@@ -1,10 +1,55 @@
 #include "private/abstractspawnengine_p.h"
 #include <zypp-core/base/LogControl.h>
 #include <zypp-core/base/Gettext.h>
+#include <zypp-core/base/String.h>
 #include <sys/types.h>
 #include <sys/wait.h>
 
+#include "private/forkspawnengine_p.h"
+
 namespace zyppng {
+
+
+#if ZYPP_HAS_GLIBSPAWNENGINE
+  namespace  {
+
+    enum class SpawnEngine {
+      GSPAWN,
+      PFORK
+    };
+
+    SpawnEngine initEngineFromEnv () {
+      const std::string fBackend ( zypp::str::asString( ::getenv("ZYPP_FORK_BACKEND") ) );
+      if ( fBackend.empty() || fBackend == "auto" || fBackend == "pfork" ) {
+        DBG << "Starting processes via posix fork" << std::endl;
+        return SpawnEngine::PFORK;
+      } else if ( fBackend == "gspawn" ) {
+        DBG << "Starting processes via glib spawn" << std::endl;
+        return SpawnEngine::GSPAWN;
+      }
+
+      DBG << "Falling back to starting process via posix fork" << std::endl;
+      return SpawnEngine::PFORK;
+    }
+
+    std::unique_ptr<zyppng::AbstractSpawnEngine> engineFromEnv () {
+      static const SpawnEngine eng = initEngineFromEnv();
+      switch ( eng ) {
+        case SpawnEngine::GSPAWN:
+          return std::make_unique<zyppng::GlibSpawnEngine>();
+        case SpawnEngine::PFORK:
+        default:
+          return std::make_unique<zyppng::ForkSpawnEngine>();
+      }
+    }
+  }
+#else
+
+  std::unique_ptr<zyppng::AbstractSpawnEngine> engineFromEnv () {
+    return std::make_unique<zyppng::ForkSpawnEngine>();
+  }
+
+#endif
 
   AbstractSpawnEngine::AbstractSpawnEngine()
   {
@@ -12,6 +57,11 @@ namespace zyppng {
 
   AbstractSpawnEngine::~AbstractSpawnEngine()
   { }
+
+  std::unique_ptr<AbstractSpawnEngine> AbstractSpawnEngine::createDefaultEngine()
+  {
+    return engineFromEnv();
+  }
 
   bool AbstractSpawnEngine::switchPgid() const
   {
@@ -31,6 +81,16 @@ namespace zyppng {
   void AbstractSpawnEngine::setWorkingDirectory(const zypp::Pathname &workingDirectory)
   {
     _workingDirectory = workingDirectory;
+  }
+
+  const std::vector<int> &AbstractSpawnEngine::fdsToMap() const
+  {
+    return _mapFds;
+  }
+
+  void AbstractSpawnEngine::addFd(int fd)
+  {
+    _mapFds.push_back( fd );
   }
 
   bool AbstractSpawnEngine::dieWithParent() const
@@ -98,10 +158,8 @@ namespace zyppng {
     _environment = environment;
   }
 
-  pid_t AbstractSpawnEngine::pid()
+  pid_t AbstractSpawnEngine::pid( )
   {
-    if ( !isRunning() )
-      return -1;
     return _pid;
   }
 

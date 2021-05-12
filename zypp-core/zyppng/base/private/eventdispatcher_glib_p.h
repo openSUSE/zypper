@@ -59,6 +59,13 @@ struct GLibTimerSource
 
 struct GlibWaitPIDData
 {
+  GlibWaitPIDData( GPid pid );
+  GlibWaitPIDData( GlibWaitPIDData &&other );
+  ~GlibWaitPIDData();
+
+  GlibWaitPIDData & operator= ( GlibWaitPIDData &&other );
+
+  guint tag = 0;
   GSource *source = nullptr;
   EventDispatcher::WaitPidCallback callback;
 };

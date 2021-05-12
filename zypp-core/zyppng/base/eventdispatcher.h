@@ -132,9 +132,16 @@ public:
 
   /*!
    * Tracks a child process until its execution did end.
-   * Callback is called when the child exits
+   * Callback is called when the child exits, the callback arguments are pid and status
    */
   void trackChildProcess ( int pid, std::function<void(int, int)> callback  );
+
+  /*!
+   * Removes a child process from the internal sources, the process will not be reaped
+   * anymore if it is still running!
+   * \returns true if the pid was removed
+   */
+  bool untrackChildProcess ( int pid );
 
 protected:
 

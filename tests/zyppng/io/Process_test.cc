@@ -2,6 +2,11 @@
 #include "TestTools.h"
 #include <zypp/ExternalProgram.h>
 #include <zypp/TmpPath.h>
+#include <zypp-core/zyppng/base/EventLoop>
+#include <zypp-core/zyppng/io/Process>
+#include <zypp-core/zyppng/io/IODevice>
+#include <zypp-core/zyppng/io/AsyncDataSource>
+#include <zypp-core/zyppng/base/private/linuxhelpers_p.h>
 
 #include <chrono>
 #include <thread>
@@ -9,7 +14,7 @@
 #include <sys/wait.h>
 
 #define BOOST_TEST_MODULE ExternalProgram
-#define DATADIR (Pathname(TESTS_SRC_DIR) + "/zypp/base/data/ExternalProgram")
+#define DATADIR (Pathname(TESTS_SRC_DIR) + "/zyppng/data/process")
 
 using zypp::ExternalProgram;
 
@@ -21,22 +26,171 @@ BOOST_AUTO_TEST_CASE( Basic )
     "echo \"Hello\";sleep 1;echo \"I'm the second line\";exit 123;",
     nullptr
   };
-  ExternalProgram proc( argv, ExternalProgram::Normal_Stderr );
-  BOOST_CHECK( proc.running() );
 
-  const auto pid = proc.getpid();
+  auto ev = zyppng::EventLoop::create();
+  auto proc = zyppng::Process::create();
+
+  bool gotStarted = false;
+  proc->connectFunc( &zyppng::Process::sigStarted, [&](){
+    gotStarted = true;
+  });
+
+  int  exitCode = -1;
+  bool gotFinished = false;
+  proc->connectFunc( &zyppng::Process::sigFinished, [&]( int status ){
+    gotFinished = true;
+    exitCode = status;
+    ev->quit();
+  });
+
+  bool gotFailedToStart = false;
+  proc->connectFunc( &zyppng::Process::sigFailedToStart, [&]( ){
+    gotFailedToStart = true;
+    ev->quit();
+  });
+
+  BOOST_REQUIRE( proc->start( argv ) );
+  BOOST_REQUIRE( proc->isRunning() );
+
+  const auto pid = proc->pid();
   BOOST_REQUIRE ( pid != -1 );
-  std::string line = proc.receiveLine();
-  BOOST_REQUIRE_EQUAL( line, std::string("Hello\n") );
-  line = proc.receiveLine();
-  BOOST_REQUIRE_EQUAL( line, std::string("I'm the second line\n") );
-  int exitCode = proc.close();
-  BOOST_REQUIRE( !proc.running() );
-  BOOST_REQUIRE_EQUAL( proc.getpid(), -1 );
+
+  ev->run();
+
+  BOOST_REQUIRE( gotStarted );
+  BOOST_REQUIRE( gotFinished );
   BOOST_REQUIRE_EQUAL( exitCode, 123 );
+  BOOST_REQUIRE( !gotFailedToStart );
+
+  BOOST_REQUIRE( proc->stdoutDevice()->bytesAvailable() );
+
+  auto data = proc->stdoutDevice()->readLine();
+  BOOST_REQUIRE_EQUAL( data.asStringView(), std::string_view("Hello\n") );
+
+  data = proc->stdoutDevice()->readLine();
+  BOOST_REQUIRE_EQUAL( data.asStringView(), std::string_view("I'm the second line\n") );
+
+  BOOST_REQUIRE( !proc->isRunning() );
+  BOOST_REQUIRE_EQUAL( proc->exitStatus(), 123 );
+
   BOOST_REQUIRE_LT   ( ::getpgid( pid ) , 0 );
 }
 
+BOOST_AUTO_TEST_CASE( InvalidExec )
+{
+  const char *argv[] = {
+    "./NoSuchFileHere",
+    nullptr
+  };
+
+  auto ev = zyppng::EventLoop::create();
+  auto proc = zyppng::Process::create();
+
+  bool gotStarted = false;
+  proc->connectFunc( &zyppng::Process::sigStarted, [&](){
+    gotStarted = true;
+  });
+
+  int  exitCode = -1;
+  bool gotFinished = false;
+  proc->connectFunc( &zyppng::Process::sigFinished, [&]( int status ){
+    gotFinished = true;
+    exitCode = status;
+  });
+
+  bool gotFailedToStart = false;
+  proc->connectFunc( &zyppng::Process::sigFailedToStart, [&]( ){
+    gotFailedToStart = true;
+  });
+
+  BOOST_REQUIRE( !proc->start( argv ) );
+  BOOST_REQUIRE( !proc->isRunning() );
+
+  BOOST_REQUIRE( !gotStarted );
+  BOOST_REQUIRE( !gotFinished );
+  BOOST_REQUIRE( gotFailedToStart );
+  BOOST_REQUIRE_EQUAL( proc->exitStatus(), 129 );
+}
+
+/*
+ * This tests a special feature where we move arbitrary fds into the new process for special use
+ */
+BOOST_AUTO_TEST_CASE( mapExtraFD )
+{
+  auto pipeA = zyppng::Pipe::create( );
+  auto pipeB = zyppng::Pipe::create( );
+
+  BOOST_REQUIRE( pipeA );
+  BOOST_REQUIRE( pipeB );
+
+  auto ev = zyppng::EventLoop::create();
+  auto proc = zyppng::Process::create();
+
+  // we have one pipe we want to write to, so the process can receive data
+  proc->addFd( pipeA->readFd  );
+  // and another one the process uses to talk to us
+  proc->addFd( pipeB->writeFd );
+
+  auto dataSource = zyppng::AsyncDataSource::create();
+  BOOST_REQUIRE( dataSource->open( pipeB->readFd, pipeA->writeFd ) );
+  BOOST_REQUIRE( dataSource->canRead() );
+  BOOST_REQUIRE( dataSource->canWrite( ) );
+
+  proc->connectFunc( &zyppng::Process::sigStarted, [&](){
+
+    // once the process has been started close the ends of the pipes we gave to the process
+    pipeA->unrefRead();
+    pipeB->unrefWrite();
+
+    // write some data
+    BOOST_REQUIRE( dataSource->write( zypp::ByteArray("Hello") ) );
+    BOOST_REQUIRE( dataSource->write( zypp::ByteArray(" my friend\n" ) ) );
+    BOOST_REQUIRE( dataSource->write( zypp::ByteArray("How are you today\n" ) ) );
+    BOOST_REQUIRE( dataSource->write( zypp::ByteArray("q\n" ) ) );
+
+  });
+
+  ByteArray bytesRead;
+  const auto &readAllData = [&](){
+    const auto &data = dataSource->readAll();
+    bytesRead.insert( bytesRead.end(), data.begin(), data.end() );
+  };
+
+  dataSource->sigReadyRead().connect( [&](){
+    readAllData();
+  });
+
+  int  exitCode = -1;
+  bool gotFinished = false;
+  proc->connectFunc( &zyppng::Process::sigFinished, [&]( int status ){
+    gotFinished = true;
+    exitCode = status;
+    ev->quit();
+  });
+
+  const auto executable = DATADIR/"echo.sh";
+  const char *argv[] = {
+    executable.c_str(),
+    nullptr
+  };
+
+  BOOST_REQUIRE( proc->start( argv ) );
+  BOOST_REQUIRE( proc->isRunning() );
+
+  ev->run();
+
+  BOOST_REQUIRE_EQUAL ( exitCode, 0 );
+  BOOST_REQUIRE       ( gotFinished );
+
+  if ( dataSource->bytesAvailable() )
+    readAllData();
+
+  BOOST_REQUIRE_EQUAL( zypp::ByteArray("Hello my friend\nHow are you today\n"), bytesRead );
+
+
+}
+
+#if 0
 BOOST_AUTO_TEST_CASE( StderrToStdout )
 {
   const char *argv[] = {
@@ -210,3 +364,4 @@ BOOST_AUTO_TEST_CASE( CloseFDs )
   const auto exitCode = proc.close();
   BOOST_REQUIRE_EQUAL( exitCode, 0 );
 }
+#endif

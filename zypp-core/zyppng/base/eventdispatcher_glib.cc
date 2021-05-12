@@ -241,6 +241,35 @@ static gboolean  eventLoopIdleFunc ( gpointer user_data )
   return G_SOURCE_REMOVE;
 }
 
+GlibWaitPIDData::GlibWaitPIDData( GPid pid  )
+{
+  source = g_child_watch_source_new( pid );
+}
+
+GlibWaitPIDData::GlibWaitPIDData(GlibWaitPIDData &&other)
+  : tag( other.tag )
+  , source( other.source )
+  , callback( std::move( other.callback ) )
+{
+  other.source = nullptr;
+}
+
+GlibWaitPIDData::~GlibWaitPIDData()
+{
+  if ( source ) {
+    g_source_destroy( source );
+    g_source_unref( source );
+  }
+}
+
+GlibWaitPIDData &GlibWaitPIDData::operator=(GlibWaitPIDData &&other)
+{
+  tag = other.tag;
+  source = other.source;
+  callback = std::move( other.callback );
+  other.source = nullptr;
+  return *this;
+}
 
 EventDispatcherPrivate::EventDispatcherPrivate (GMainContext *ctx , EventDispatcher &p) : BasePrivate(p)
 {
@@ -317,7 +346,7 @@ void EventDispatcherPrivate::waitPidCallback( GPid pid, gint status, gpointer us
   EventDispatcherPrivate *that = reinterpret_cast<EventDispatcherPrivate *>( user_data );
 
   try {
-    auto data = std::move( that->_waitPIDs[pid] );
+    auto data = std::move( that->_waitPIDs.at(pid) );
     that->_waitPIDs.erase( pid );
 
     if ( data.callback )
@@ -500,16 +529,23 @@ bool EventDispatcher::waitForFdEvent( const int fd, int events , int &revents , 
 void EventDispatcher::trackChildProcess( int pid, std::function<void (int, int)> callback )
 {
   Z_D();
-   GlibWaitPIDData data;
-   data.source = g_child_watch_source_new( pid );
-   data.callback = std::move(callback);
+  GlibWaitPIDData data ( pid );
+  data.callback = std::move(callback);
 
-   g_source_set_callback ( data.source, (GSourceFunc) &EventDispatcherPrivate::waitPidCallback , d_ptr.get(), nullptr );
+  g_source_set_callback ( data.source, (GSourceFunc) &EventDispatcherPrivate::waitPidCallback , d_ptr.get(), nullptr );
+  data.tag = g_source_attach ( data.source, d->_ctx );
+  d->_waitPIDs.insert( std::make_pair( pid, std::move(data) ) );
+}
 
-   g_source_attach ( data.source, d->_ctx );
-   g_source_unref ( data.source );
-
-   d->_waitPIDs.insert( std::make_pair( pid, std::move(data) ) );
+bool EventDispatcher::untrackChildProcess(int pid)
+{
+  Z_D();
+  try {
+    d->_waitPIDs.erase( pid );
+  }  catch ( const std::out_of_range &e ) {
+    return false;
+  }
+  return true;
 }
 
 bool EventDispatcher::run_once()

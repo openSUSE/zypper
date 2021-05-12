@@ -3,9 +3,12 @@
 #include <sstream>
 #include <zypp/base/LogControl.h>
 #include <zypp/base/Gettext.h>
+#include <zypp/base/IOTools.h>
+#include <zypp-core/zyppng/base/EventDispatcher>
 #include <zypp-core/zyppng/base/private/linuxhelpers_p.h>
 #include <zypp-core/base/CleanerThread_p.h>
 
+#include <cstdint>
 #include <iostream>
 #include <signal.h>
 #include <errno.h>
@@ -48,10 +51,59 @@ bool zyppng::AbstractDirectSpawnEngine::isRunning( bool wait )
   return false;
 }
 
+void zyppng::AbstractDirectSpawnEngine::mapExtraFds ( int controlFd )
+{
+  // we might have gotten other FDs to reuse, lets map them to STDERR_FILENO++
+  // BUT we need to make sure the fds are not already in the range we need to map them to
+  // so we first go over a list and collect those that are safe or move those that are not
+  int lastFdToKeep = STDERR_FILENO + _mapFds.size();
+  int nextBackupFd = lastFdToKeep + 1; //this we will use to count the fds upwards
+  std::vector<int> safeFds;
+  for ( auto fd : _mapFds ) {
+    // if the fds are bigger than the last one we will map to its safe
+    if ( fd > lastFdToKeep ) {
+      safeFds.push_back( fd );
+    } else {
+      // we need to map the fd after the set of those we want to keep, but also make sure
+      // that we do not close one of those we have already moved or might move
+      while (true) {
+
+        int backupTo = nextBackupFd;
+        nextBackupFd++;
+        const bool isSafe1 = std::find( _mapFds.begin(), _mapFds.end(), backupTo ) == _mapFds.end();
+        const bool isSafe2 = std::find( safeFds.begin(), safeFds.end(), backupTo ) == safeFds.end();
+        if ( isSafe1 && isSafe2 && ( controlFd == -1 || backupTo != controlFd) ) {
+          dup2( fd, backupTo );
+          safeFds.push_back( backupTo );
+          break;
+        }
+      }
+    }
+  }
+
+  // now we have a list of safe fds we need to map to the fd we want them to end up
+  int nextFd = STDERR_FILENO;
+  for ( auto fd : safeFds ) {
+    nextFd++;
+    dup2( fd, nextFd );
+  }
+
+  // close all filedescriptors above the last we want to keep
+  for ( int i = ::getdtablesize() - 1; i > lastFdToKeep; --i ) {
+    // controlFD has O_CLOEXEC set so it will be cleaned up :)
+    if ( controlFd != -1 && controlFd == i )
+      continue;
+    ::close( i );
+  }
+}
+
 bool zyppng::ForkSpawnEngine::start( const char * const *argv, int stdin_fd, int stdout_fd, int stderr_fd )
 {
   _pid = -1;
   _exitStatus = 0;
+  _execError.clear();
+  _executedCommand.clear();
+  _args.clear();
 
   const char * chdirTo = nullptr;
 
@@ -96,12 +148,53 @@ bool zyppng::ForkSpawnEngine::start( const char * const *argv, int stdin_fd, int
   }
   DBG << "Executing" << ( _useDefaultLocale?"[C] ":" ") << _executedCommand << std::endl;
 
+  // we use a control pipe to figure out if the exec actually worked,
+  // this is the approach:
+  // - create a pipe before forking
+  // - block on the read end of the pipe in the parent process
+  // - in the child process we write a error tag + errno into the pipe if we encounter any error and exit
+  // - If child setup works out, the pipe is auto closed by exec() and the parent process knows from just receiving EOF
+  //   that starting the child was successful, otherwise the blocking read in the parent will return with actual data read from the fd
+  //   which will contain the error description
+
+  enum class ChildErrType : int8_t {
+    NO_ERR,
+    CHROOT_FAILED,
+    CHDIR_FAILED,
+    EXEC_FAILED
+  };
+
+  struct ChildErr {
+    int childErrno = 0;
+    ChildErrType type = ChildErrType::NO_ERR;
+  };
+
+  auto controlPipe = Pipe::create( O_CLOEXEC );
+  if ( !controlPipe ) {
+    _execError = _("Unable to create control pipe.");
+    _exitStatus = 128;
+    return false;
+  }
 
   pid_t ppid_before_fork = ::getpid();
 
   // Create module process
   if ( ( _pid = fork() ) == 0 )
   {
+
+    // child process
+    controlPipe->unrefRead();
+
+    const auto &writeErrAndExit = [&]( int errCode, ChildErrType type ){
+      ChildErr buf {
+        errno,
+        type
+      };
+
+      zypp::io::writeAll( controlPipe->writeFd, &buf, sizeof(ChildErr) );
+      _exit ( errCode );
+    };
+
     //////////////////////////////////////////////////////////////////////
     // Don't write to the logfile after fork!
     //////////////////////////////////////////////////////////////////////
@@ -146,7 +239,7 @@ bool zyppng::ForkSpawnEngine::start( const char * const *argv, int stdin_fd, int
         {
             _execError = zypp::str::form( _("Can't chroot to '%s' (%s)."), _chroot.c_str(), strerror(errno) );
             std::cerr << _execError << std::endl; // After fork log on stderr too
-            _exit (128);			  // No sense in returning! I am forked away!!
+            writeErrAndExit( 128, ChildErrType::CHROOT_FAILED ); // No sense in returning! I am forked away!!
         }
         if ( ! chdirTo )
           chdirTo = "/";
@@ -158,13 +251,11 @@ bool zyppng::ForkSpawnEngine::start( const char * const *argv, int stdin_fd, int
                                    : zypp::str::form( _("Can't chdir to '%s' inside chroot '%s' (%s)."), chdirTo, _chroot.c_str(), strerror(errno) );
 
       std::cerr << _execError << std::endl;// After fork log on stderr too
-      _exit (128);			// No sense in returning! I am forked away!!
+      writeErrAndExit( 128, ChildErrType::CHDIR_FAILED ); // No sense in returning! I am forked away!!
     }
 
-    // close all filedesctiptors above stderr
-    for ( int i = ::getdtablesize() - 1; i > 2; --i ) {
-      ::close( i );
-    }
+    // map the extra fds the user might have set
+    mapExtraFds( controlPipe->writeFd );
 
     if ( _dieWithParent ) {
       // process dies with us
@@ -178,6 +269,7 @@ bool zyppng::ForkSpawnEngine::start( const char * const *argv, int stdin_fd, int
       // before the prctl() call
       pid_t ppidNow = getppid();
       if (ppidNow != ppid_before_fork) {
+        // no sense to write to control pipe, parent is gone
         std::cerr << "PPID changed from "<<ppid_before_fork<<" to "<< ppidNow << std::endl;// After fork log on stderr too
         _exit(128);
       }
@@ -187,7 +279,7 @@ bool zyppng::ForkSpawnEngine::start( const char * const *argv, int stdin_fd, int
     // don't want to get here
     _execError = zypp::str::form( _("Can't exec '%s' (%s)."), _args[0].c_str(), strerror(errno) );
     std::cerr << _execError << std::endl;// After fork log on stderr too
-    _exit (129);			// No sense in returning! I am forked away!!
+    writeErrAndExit( 129, ChildErrType::EXEC_FAILED ); // No sense in returning! I am forked away!!
     //////////////////////////////////////////////////////////////////////
   }
   else if ( _pid == -1 )	 // Fork failed, close everything.
@@ -198,7 +290,41 @@ bool zyppng::ForkSpawnEngine::start( const char * const *argv, int stdin_fd, int
     return false;
   }
   else {
-    DBG << "pid " << _pid << " launched" << std::endl;
+
+    // parent process, fork worked lets wait for the exec to happen
+    controlPipe->unrefWrite();
+
+    ChildErr buf;
+    const auto res = zypp::io::readAll( controlPipe->readFd, &buf, sizeof(ChildErr) );
+    if ( res == zypp::io::ReadAllResult::Eof ) {
+      // success!!!!
+      DBG << "pid " << _pid << " launched" << std::endl;
+      return true;
+    } else if ( res == zypp::io::ReadAllResult::Ok ) {
+      switch( buf.type ) {
+        case ChildErrType::CHDIR_FAILED:
+          _execError = zypp::str::form( _("Can't exec '%s', chdir failed (%s)."), _args[0].c_str(), strerror(buf.childErrno) );
+          break;
+        case ChildErrType::CHROOT_FAILED:
+          _execError = zypp::str::form( _("Can't exec '%s', chroot failed (%s)."), _args[0].c_str(), strerror(buf.childErrno) );
+          break;
+        case ChildErrType::EXEC_FAILED:
+          _execError = zypp::str::form( _("Can't exec '%s', exec failed (%s)."), _args[0].c_str(), strerror(buf.childErrno) );
+          break;
+        // all other cases need to be some sort of error, because we only get data if the exec fails
+        default:
+          _execError = zypp::str::form( _("Can't exec '%s', unexpected error."), _args[0].c_str() );
+          break;
+      }
+
+      // reap child and collect exit code
+      isRunning( true );
+      return false;
+    } else {
+      //reading from the fd failed, this should actually never happen
+      ERR << "Reading from the control pipe failed. " << errno << ". This is not supposed to happen ever." << std::endl;
+      return isRunning();
+    }
   }
   return true;
 }
@@ -225,6 +351,9 @@ bool zyppng::GlibSpawnEngine::start( const char * const *argv, int stdin_fd, int
 {
   _pid = -1;
   _exitStatus = 0;
+  _execError.clear();
+  _executedCommand.clear();
+  _args.clear();
 
   if ( !argv || !argv[0] ) {
     _execError = _("Invalid spawn arguments given.");
@@ -271,8 +400,12 @@ bool zyppng::GlibSpawnEngine::start( const char * const *argv, int stdin_fd, int
   // build the env var ptrs
   std::vector<std::string> envStrs;
   std::vector<gchar *> envPtrs;
+
+  for ( char **envPtr = environ; *envPtr != nullptr; envPtr++ )
+    envPtrs.push_back( *envPtr );
+
   envStrs.reserve( _environment.size() );
-  envPtrs.reserve( _environment.size() + ( _useDefaultLocale ? 2 : 1 ) );
+  envPtrs.reserve( envPtrs.size() + _environment.size() + ( _useDefaultLocale ? 2 : 1 ) );
   for ( const auto &env : _environment ) {
     envStrs.push_back( env.first + "=" + env.second );
     envPtrs.push_back( envStrs.back().data() );
@@ -287,7 +420,11 @@ bool zyppng::GlibSpawnEngine::start( const char * const *argv, int stdin_fd, int
   data.that = this;
   data.pidParent = ::getpid();
 
-  bool needCallback = !_chroot.empty() || _dieWithParent || _switchPgid;
+  bool needCallback = !_chroot.empty() || _dieWithParent || _switchPgid || _mapFds.size();
+
+  auto spawnFlags = GSpawnFlags( G_SPAWN_DO_NOT_REAP_CHILD | G_SPAWN_SEARCH_PATH_FROM_ENVP );
+  if ( _mapFds.size() )
+    spawnFlags = GSpawnFlags( spawnFlags | G_SPAWN_LEAVE_DESCRIPTORS_OPEN );
 
   GPid childPid = -1;
   g_autoptr(GError) error = NULL;
@@ -295,7 +432,7 @@ bool zyppng::GlibSpawnEngine::start( const char * const *argv, int stdin_fd, int
         chdirTo,
         (gchar **)argv,
         envPtrs.data(),
-        GSpawnFlags(G_SPAWN_DO_NOT_REAP_CHILD | G_SPAWN_SEARCH_PATH_FROM_ENVP),
+        spawnFlags,
         needCallback ? &GlibSpawnEngine::glibSpawnCallback : nullptr,
         needCallback ? &data : nullptr,
         &childPid,
@@ -367,5 +504,8 @@ void zyppng::GlibSpawnEngine::glibSpawnCallback(void *data)
       _exit(128);
     }
   }
+
+  // map the extra fds the user might have set
+  d->that->mapExtraFds();
 }
 #endif
