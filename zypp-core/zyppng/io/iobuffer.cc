@@ -7,7 +7,7 @@ namespace zyppng {
     DefChunkSize = 4096
   };
 
-  IOBuffer::IOBuffer(unsigned chunkSize) : _defaultChunkSize ( chunkSize = 0 ? DefChunkSize : chunkSize )
+  IOBuffer::IOBuffer(unsigned chunkSize) : _defaultChunkSize ( chunkSize == 0 ? DefChunkSize : chunkSize )
   { }
 
   char *IOBuffer::reserve( size_t bytes )
