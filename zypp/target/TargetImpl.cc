@@ -57,7 +57,27 @@
 #include <zypp/sat/SolvableSpec.h>
 #include <zypp/sat/Transaction.h>
 
+#include <zypp-core/base/String.h>
+#include <zypp-core/base/StringV.h>
+#include <zypp-core/zyppng/base/EventLoop>
+#include <zypp-core/zyppng/io/AsyncDataSource>
+#include <zypp-core/zyppng/io/Process>
+#include <zypp-core/base/IOTools.h>
+#include <zypp-core/zyppng/rpc/rpc.h>
+#include <zypp-core/zyppng/base/private/linuxhelpers_p.h>
+#include <zypp-core/zyppng/base/EventDispatcher>
+#include <zypp-proto/commit.pb.h>
+#include <zypp-proto/envelope.pb.h>
+#include <google/protobuf/io/zero_copy_stream_impl.h>
+
+#include <zypp/target/rpm/RpmException.h>
+
 #include <zypp/PluginExecutor.h>
+
+// include the error codes from zypp-rpm
+#include "tools/zypp-rpm/errorcodes.h"
+
+#include <optional>
 
 using std::endl;
 
@@ -1254,8 +1274,12 @@ namespace zypp
       if ( policy_r.downloadMode() == DownloadDefault ) {
         if ( root() == "/" )
           policy_r.downloadMode(DownloadInHeaps);
-        else
-          policy_r.downloadMode(DownloadAsNeeded);
+        else {
+          if ( policy_r.singleTransModeEnabled() )
+            policy_r.downloadMode(DownloadInAdvance);
+          else
+            policy_r.downloadMode(DownloadAsNeeded);
+        }
       }
       // DownloadOnly implies dry-run.
       else if ( policy_r.downloadMode() == DownloadOnly )
@@ -1380,15 +1404,18 @@ namespace zypp
       ///////////////////////////////////////////////////////////////////
       // Remove/install packages.
       ///////////////////////////////////////////////////////////////////
+
+      bool singleTransMode = policy_r.singleTransModeEnabled();
+
       DBG << "commit log file is set to: " << HistoryLog::fname() << endl;
-      if ( ! policy_r.dryRun() || policy_r.downloadMode() == DownloadOnly )
+      if ( ! policy_r.dryRun() || policy_r.downloadMode() == DownloadOnly || singleTransMode )
       {
 	// Prepare the package cache. Pass all items requiring download.
         CommitPackageCache packageCache;
 	packageCache.setCommitList( steps.begin(), steps.end() );
 
         bool miss = false;
-        if ( policy_r.downloadMode() != DownloadAsNeeded )
+        if ( policy_r.downloadMode() != DownloadAsNeeded || singleTransMode )
         {
           // Preload the cache. Until now this means pre-loading all packages.
           // Once DownloadInHeaps is fully implemented, this will change and
@@ -1454,21 +1481,26 @@ namespace zypp
         }
         else
 	{
-	  if ( ! policy_r.dryRun() )
-	  {
-	    // if cache is preloaded, check for file conflicts
-	    commitFindFileConflicts( policy_r, result );
-	    commit( policy_r, packageCache, result );
-	  }
-	  else
-	  {
-	    DBG << "dryRun/downloadOnly: Not installing/deleting anything." << endl;
-	    if ( explicitDryRun ) {
-	      // if cache is preloaded, check for file conflicts
-	      commitFindFileConflicts( policy_r, result );
-	    }
-	  }
-	}
+          // single trans mode does a test install via rpm
+          if ( policy_r.singleTransModeEnabled() ) {
+            commitInSingleTransaction( policy_r, packageCache, result );
+          } else {
+            if ( ! policy_r.dryRun() )
+            {
+              // if cache is preloaded, check for file conflicts
+              commitFindFileConflicts( policy_r, result );
+              commit( policy_r, packageCache, result );
+            }
+            else
+            {
+              DBG << "dryRun/downloadOnly: Not installing/deleting anything." << endl;
+              if ( explicitDryRun ) {
+                // if cache is preloaded, check for file conflicts
+                commitFindFileConflicts( policy_r, result );
+              }
+            }
+          }
+        }
       }
       else
       {
@@ -1814,6 +1846,872 @@ namespace zypp
       if ( abort )
       {
 	HistoryLog().comment( "Commit was aborted." );
+        ZYPP_THROW( TargetAbortedException( ) );
+      }
+    }
+
+    const callback::UserData::ContentType rpm::InstallResolvableReportSA::contentRpmout( "zypp-rpm","installpkgsa" );
+    const callback::UserData::ContentType rpm::RemoveResolvableReportSA::contentRpmout( "zypp-rpm","removepkgsa" );
+    const callback::UserData::ContentType rpm::CommitScriptReportSA::contentRpmout( "zypp-rpm","scriptsa" );
+    const callback::UserData::ContentType rpm::TransactionReportSA::contentRpmout( "zypp-rpm","transactionsa" );
+    const callback::UserData::ContentType rpm::CleanupPackageReportSA::contentRpmout( "zypp-rpm","cleanupkgsa" );
+
+    void TargetImpl::commitInSingleTransaction(const ZYppCommitPolicy &policy_r, CommitPackageCache &packageCache_r, ZYppCommitResult &result_r)
+    {
+      namespace zpt = zypp::proto::target;
+      // steps: this is our todo-list
+      ZYppCommitResult::TransactionStepList & steps( result_r.rTransactionStepList() );
+      MIL << "TargetImpl::commit(<list>" << policy_r << ")" << steps.size() << endl;
+
+      HistoryLog().stampCommand();
+
+      // Send notification once upon calling rpm
+      NotifyAttemptToModify attemptToModify( result_r );
+
+      // let zypper know we executed in one big transaction so in case of failures it can show extended error informations
+      result_r.setSingleTransactionMode( true );
+
+      // bsc#1181328: Some systemd tools require /proc to be mounted
+      AssertProcMounted assertProcMounted( _root );
+
+      rpm::RpmInstFlags flags( policy_r.rpmInstFlags() );
+
+      zpt::Commit commit;
+      commit.set_flags( flags );
+      commit.set_ignorearch( !ZConfig::instance().systemArchitecture().compatibleWith( ZConfig::instance().defaultSystemArchitecture() ) );
+      commit.set_arch( ZConfig::instance().systemArchitecture().asString() );
+      commit.set_dbpath( rpm().dbPath().asString() );
+      commit.set_root( rpm().root().asString() );
+
+      bool abort = false;
+      std::vector<ManagedFile> locFiles;
+
+      // fill the transaction
+      for( int stepId = 0; (ZYppCommitResult::TransactionStepList::size_type)stepId < steps.size() && !abort ; stepId++ ) {
+        auto &step = steps[stepId];
+        PoolItem citem( step );
+        if ( step.stepType() == sat::Transaction::TRANSACTION_IGNORE ) {
+          if ( citem->isKind<Package>() )
+          {
+            // for packages this means being obsoleted (by rpm)
+            // thius no additional action is needed.
+            step.stepStage( sat::Transaction::STEP_DONE );
+            continue;
+          }
+        }
+
+        if ( citem->isKind<Package>() ) {
+          Package::constPtr p = citem->asKind<Package>();
+          if ( citem.status().isToBeInstalled() )
+          {
+            try {
+              locFiles.push_back( packageCache_r.get( citem ) );
+
+              zpt::TransactionStep tStep;
+              tStep.set_stepid( stepId );
+              tStep.mutable_install()->set_pathname( locFiles.back()->asString() );
+              tStep.mutable_install()->set_multiversion( p->multiversionInstall() );
+
+              commit.mutable_steps()->Add( std::move(tStep) );
+            }
+            catch ( const AbortRequestException &e )
+            {
+              WAR << "commit aborted by the user" << endl;
+              abort = true;
+              step.stepStage( sat::Transaction::STEP_ERROR );
+              break;
+            }
+            catch ( const SkipRequestException &e )
+            {
+              ZYPP_CAUGHT( e );
+              WAR << "Skipping package " << p << " in commit" << endl;
+              step.stepStage( sat::Transaction::STEP_ERROR );
+              continue;
+            }
+            catch ( const Exception &e )
+            {
+              // bnc #395704: missing catch causes abort.
+              // TODO see if packageCache fails to handle errors correctly.
+              ZYPP_CAUGHT( e );
+              INT << "Unexpected Error: Skipping package " << p << " in commit" << endl;
+              step.stepStage( sat::Transaction::STEP_ERROR );
+              continue;
+            }
+          } else {
+
+            zpt::TransactionStep tStep;
+            tStep.set_stepid( stepId );
+            tStep.mutable_remove()->set_name( p->name() );
+            tStep.mutable_remove()->set_version( p->edition().version() );
+            tStep.mutable_remove()->set_release( p->edition().release() );
+            tStep.mutable_remove()->set_arch( p->arch().asString() );
+
+            commit.mutable_steps()->Add( std::move(tStep) );
+
+          }
+        } else if ( citem->isKind<SrcPackage>() && citem.status().isToBeInstalled() ) {
+          // SrcPackage is install-only
+          SrcPackage::constPtr p = citem->asKind<SrcPackage>();
+
+          try {
+            // provide on local disk
+            locFiles.push_back( provideSrcPackage( p ) );
+
+            zpt::TransactionStep tStep;
+            tStep.set_stepid( stepId );
+            tStep.mutable_install()->set_pathname( locFiles.back()->asString() );
+            tStep.mutable_install()->set_multiversion( false );
+            commit.mutable_steps()->Add( std::move(tStep) );
+
+          }  catch ( const Exception &e ) {
+            ZYPP_CAUGHT( e );
+            INT << "Unexpected Error: Skipping package " << p << " in commit" << endl;
+            step.stepStage( sat::Transaction::STEP_ERROR );
+            continue;
+          }
+        }
+      }
+
+      std::vector<sat::Solvable> successfullyInstalledPackages;
+
+      if ( commit.steps_size() ) {
+
+        // create the event loop early
+        auto loop = zyppng::EventLoop::create();
+
+        attemptToModify();
+
+
+        // transaction related variables:
+        //
+        // the index of the step in the transaction list that we currenty execute.
+        // this can be -1
+        int currentStepId = -1;
+
+        // sync flag, every time zypp-rpm finishes executing a step it writes a tag into
+        // the script fd, once we receive it we set this flag to true and ignore all output
+        // that is written to the pipe ( aside from buffering it ) until we finalize the current report
+        // and start a new one
+        bool gotEndOfScript = false;
+
+        // the possible reports we emit during the transaction
+        std::unique_ptr<callback::SendReport <rpm::TransactionReportSA>>        transactionreport;
+        std::unique_ptr<callback::SendReport <rpm::InstallResolvableReportSA>>  installreport;
+        std::unique_ptr<callback::SendReport <rpm::RemoveResolvableReportSA>>   uninstallreport;
+        std::unique_ptr<callback::SendReport <rpm::CommitScriptReportSA>>       scriptreport;
+        std::unique_ptr<callback::SendReport <rpm::CleanupPackageReportSA>>     cleanupreport;
+
+        // this will be set if we receive a transaction error description
+        std::optional<zpt::TransactionError> transactionError;
+
+        // infos about the currently executed script, empty if no script is currently executed
+        std::string currentScriptType;
+        std::string currentScriptPackage;
+
+        // buffer to collect rpm output per report, this will be written to the log once the
+        // report ends
+        std::string rpmmsg;
+
+        // maximum number of lines that we are buffering in rpmmsg
+        constexpr auto MAXRPMMESSAGELINES = 10000;
+
+        // current number of lines in the rpmmsg line buffer. This is capped to MAXRPMMESSAGELINES
+        unsigned    lineno = 0;
+
+        // the sources to communicate with zypp-rpm, we will associate pipes with them further down below
+        auto msgSource = zyppng::AsyncDataSource::create();
+        auto scriptSource = zyppng::AsyncDataSource::create();
+
+
+        // helper function that sends RPM output to the currently active report, writing a warning to the log
+        // if there is none
+        const auto &sendRpmLineToReport = [&]( std::string line ){
+
+          const auto &sendLogRep = [&]( auto &report, const auto &cType ){
+            callback::UserData cmdout(cType);
+            if ( currentStepId >= 0 )
+              cmdout.set( "solvable", steps.at(currentStepId).satSolvable() );
+            cmdout.set( "line", line );
+            report->report(cmdout);
+          };
+
+          if ( installreport ) {
+            sendLogRep( (*installreport), rpm::InstallResolvableReportSA::contentRpmout );
+          } else if ( uninstallreport ) {
+            sendLogRep( (*uninstallreport), rpm::RemoveResolvableReportSA::contentRpmout );
+          } else if ( scriptreport ) {
+            sendLogRep( (*scriptreport), rpm::CommitScriptReportSA::contentRpmout );
+          } else if ( transactionreport ) {
+            sendLogRep( (*transactionreport), rpm::TransactionReportSA::contentRpmout );
+          } else if ( cleanupreport ) {
+            sendLogRep( (*cleanupreport), rpm::CleanupPackageReportSA::contentRpmout );
+          } else {
+            WAR << "Got rpm output without active report " << line << std::endl;
+          }
+
+          // remember rpm output
+          if ( lineno >= MAXRPMMESSAGELINES ) {
+            if ( line.find( " scriptlet failed, " ) == std::string::npos )	// always log %script errors
+              return;
+          }
+          rpmmsg += line;
+          if ( line.back() != '\n' )
+            line += '\n';
+        };
+
+
+        // callback and helper function to process data that is received on the script FD
+        const auto &processDataFromScriptFd = [&](){
+
+          while ( scriptSource->canReadLine() ) {
+
+            if ( gotEndOfScript )
+              return;
+
+            std::string l = scriptSource->readLine().asString();
+            if( str::endsWith( l, endOfScriptTag ) ) {
+              DBG << "Received end of script tag" << std::endl;
+              gotEndOfScript = true;
+              l = l.substr( 0, l.size() - endOfScriptTag.size() );
+              if ( l.size() == 0 )
+                return;
+            }
+
+            sendRpmLineToReport( l );
+          }
+        };
+        scriptSource->sigReadyRead().connect( processDataFromScriptFd );
+
+        // helper function that just waits until the end of script tag was received on the scriptSource
+        const auto &waitForScriptEnd = [&]() {
+
+          // nothing to wait for
+          if ( gotEndOfScript )
+            return;
+
+          // we process all available data
+          processDataFromScriptFd();
+
+          // end of script is always sent by zypp-rpm, we need to wait for it to keep order
+          while ( scriptSource->canRead() && !gotEndOfScript ) {
+            // readyRead will trigger processDataFromScriptFd so no need to call it again
+            // we still got nothing, lets wait for more
+            scriptSource->waitForReadyRead( 100 );
+          }
+        };
+
+        const auto &aboutToStartNewReport = [&](){
+
+          if ( transactionreport || installreport || uninstallreport || scriptreport || cleanupreport ) {
+            ERR << "There is still a running report, this is a bug" << std::endl;
+            assert(false);
+          }
+
+          DBG << "Starting new report, setting gotEndOfScript to false" << std::endl;
+          gotEndOfScript = false;
+        };
+
+        const auto &writeRpmMsgToHistory = [&](){
+          if ( rpmmsg.size() == 0 )
+            return;
+
+          if ( lineno >= MAXRPMMESSAGELINES )
+            rpmmsg += "[truncated]\n";
+
+          std::ostringstream sstr;
+          sstr << "rpm output:" << endl << rpmmsg << endl;
+          HistoryLog().comment(sstr.str());
+        };
+
+        // helper function that closes the current report and cleans up the ressources
+        const auto &finalizeCurrentReport = [&]() {
+          sat::Transaction::Step *step = nullptr;
+          Resolvable::constPtr resObj;
+          if ( currentStepId >= 0 ) {
+            step = &steps.at(currentStepId);
+            resObj = makeResObject( step->satSolvable() );
+          }
+
+          if ( installreport ) {
+            waitForScriptEnd();
+            if ( step->stepStage() == sat::Transaction::STEP_ERROR ) {
+
+              HistoryLog().comment(
+                str::form("%s install failed", step->ident().c_str()),
+                true /*timestamp*/);
+
+              writeRpmMsgToHistory();
+
+              ( *installreport)->finish( resObj, rpm::InstallResolvableReportSA::INVALID );
+            } else {
+              ( *installreport)->progress( 100, resObj );
+              ( *installreport)->finish( resObj, rpm::InstallResolvableReportSA::NO_ERROR );
+
+              successfullyInstalledPackages.push_back( step->satSolvable() );
+
+              PoolItem citem( *step );
+              if ( !( flags & rpm::RPMINST_TEST ) ) {
+                // @TODO are we really doing this just for install?
+                if ( citem.isNeedreboot() ) {
+                  auto rebootNeededFile = root() / "/run/reboot-needed";
+                  if ( filesystem::assert_file( rebootNeededFile ) == EEXIST)
+                    filesystem::touch( rebootNeededFile );
+                }
+                citem.status().resetTransact( ResStatus::USER );
+                HistoryLog().install(citem);
+              }
+
+              HistoryLog().comment(
+                str::form("%s installed ok", step->ident().c_str()),
+                true /*timestamp*/);
+
+              writeRpmMsgToHistory();
+            }
+          }
+          if ( uninstallreport ) {
+            waitForScriptEnd();
+            if ( step->stepStage() == sat::Transaction::STEP_ERROR ) {
+
+              HistoryLog().comment(
+                str::form("%s uninstall failed", step->ident().c_str()),
+                true /*timestamp*/);
+
+              writeRpmMsgToHistory();
+
+              ( *uninstallreport)->finish( resObj, rpm::RemoveResolvableReportSA::INVALID );
+            } else {
+              ( *uninstallreport)->progress( 100, resObj );
+              ( *uninstallreport)->finish( resObj, rpm::RemoveResolvableReportSA::NO_ERROR );
+
+              PoolItem citem( *step );
+              HistoryLog().remove(citem);
+
+              HistoryLog().comment(
+                str::form("%s removed ok", step->ident().c_str()),
+                true /*timestamp*/);
+
+              writeRpmMsgToHistory();
+            }
+          }
+          if ( scriptreport ) {
+            waitForScriptEnd();
+            ( *scriptreport)->progress( 100, resObj );
+            ( *scriptreport)->finish( resObj, rpm::CommitScriptReportSA::NO_ERROR );
+          }
+          if ( transactionreport ) {
+            waitForScriptEnd();
+            ( *transactionreport)->progress( 100 );
+            ( *transactionreport)->finish( rpm::TransactionReportSA::NO_ERROR );
+          }
+          if ( cleanupreport ) {
+            waitForScriptEnd();
+            ( *cleanupreport)->progress( 100 );
+            ( *cleanupreport)->finish( rpm::CleanupPackageReportSA::NO_ERROR );
+          }
+          DBG << "Report finalized" << std::endl;
+          currentStepId = -1;
+          lineno = 0;
+          rpmmsg.clear();
+          currentScriptType.clear();
+          currentScriptPackage.clear();
+          installreport.reset();
+          uninstallreport.reset();
+          scriptreport.reset();
+          transactionreport.reset();
+          cleanupreport.reset();
+        };
+
+        // This sets up the process and pushes the required transactions steps to it
+        // careful when changing code here, zypp-rpm relies on the exact order data is transferred:
+        //
+        // 1) Size of the commit message , sizeof(zyppng::rpc::HeaderSizeType)
+        // 2) The Commit Proto message, directly serialized to the FD, without Envelope
+        // 3) 2 writeable FDs that are set up by the parent Process when forking. The first FD is to be used for message sending, the second one for script output
+
+        constexpr std::string_view zyppRpmBinary(ZYPP_RPM_BINARY);
+
+        const char *argv[] = {
+          //"gdbserver",
+          //"localhost:10001",
+          zyppRpmBinary.data(),
+          nullptr
+        };
+        auto prog = zyppng::Process::create();
+
+        // we set up a pipe to communicate with the process, its too dangerous to use stdout since librpm
+        // might print to it.
+        auto messagePipe = zyppng::Pipe::create();
+        if ( !messagePipe )
+          ZYPP_THROW( target::rpm::RpmSubprocessException( "Failed to create message pipe" ) );
+
+        // open a pipe that we are going to use to receive script output, this is a librpm feature, there is no other
+        // way than a FD to redirect that output
+        auto scriptPipe = zyppng::Pipe::create();
+        if ( !scriptPipe )
+          ZYPP_THROW( target::rpm::RpmSubprocessException( "Failed to create scriptfd" ) );
+
+        prog->addFd( messagePipe->writeFd );
+        prog->addFd( scriptPipe->writeFd );
+
+        // set up the AsyncDataSource to read script output
+        if ( !scriptSource->open( scriptPipe->readFd ) )
+          ZYPP_THROW( target::rpm::RpmSubprocessException( "Failed to open scriptFD to subprocess" ) );
+
+        prog->sigStarted().connect( [&](){
+
+          // close the ends of the pipes we do not care about
+          messagePipe->unrefWrite();
+          scriptPipe->unrefWrite();
+
+          // read the stdout and forward it to our log
+          prog->stdoutDevice()->connectFunc( &zyppng::IODevice::sigReadyRead, [&](){
+            while( prog->stdoutDevice()->canReadLine() ) {
+              MIL << "zypp-rpm stdout: " << prog->stdoutDevice()->readLine().asStringView() << std::endl;
+            }
+          });
+
+          // read the stderr and forward it to our log
+          prog->stderrDevice()->connectFunc( &zyppng::IODevice::sigReadyRead, [&](){
+            while( prog->stderrDevice()->canReadLine() ) {
+              MIL << "zypp-rpm stderr: " << prog->stderrDevice()->readLine().asStringView() << std::endl;
+            }
+          });
+
+          {
+            // write the commit message in blocking mode
+            const auto outFd = prog->stdinFd();
+            OnScopeExit unblock([&](){
+              io::setFDBlocking( outFd, false );
+            });
+            io::setFDBlocking( outFd );
+
+            // first we push the commit information to the process, starting with the byte size
+            zyppng::rpc::HeaderSizeType msgSize = commit.ByteSizeLong();
+            const auto written = zyppng::eintrSafeCall( ::write, outFd, &msgSize, sizeof(zyppng::rpc::HeaderSizeType) );
+            if ( written != sizeof(zyppng::rpc::HeaderSizeType) ) {
+              prog->stop( SIGKILL );
+              ZYPP_THROW( target::rpm::RpmSubprocessException( "Failed to write commit size to subprocess" ) );
+            }
+
+            google::protobuf::io::FileOutputStream fo ( outFd );
+            if ( !commit.SerializeToZeroCopyStream( &fo ) ) {
+              prog->stop( SIGKILL );
+              ZYPP_THROW( target::rpm::RpmSubprocessException( "Failed to write commit to subprocess" ) );
+            }
+            fo.Flush();
+          }
+
+        });
+
+        // this is the source for control messages from zypp-rpm , we will get structured data information
+        // in form of protobuf messages
+        if ( !msgSource->open( messagePipe->readFd ) )
+          ZYPP_THROW( target::rpm::RpmSubprocessException( "Failed to open read stream to subprocess" ) );
+
+        size_t pendingMessageSize = 0;
+        const auto &processMessages = [&] ( ) {
+
+          // lambda function that parses the passed message type and checks if the stepId is a valid offset
+          // in the steps list.
+          const auto &parseMsgWithStepId = [&steps]( const auto &m, auto &p ){
+            if ( !p.ParseFromString( m.value() ) ) {
+              ERR << "Failed to parse " << m.messagetypename() << " message from zypp-rpm." << std::endl;
+              return false;
+            }
+
+            auto id = p.stepid();
+            if ( id < 0 || id >= steps.size() ) {
+              ERR << "Received invalid stepId: " << id << " in " << m.messagetypename() << " message from zypp-rpm, ignoring." << std::endl;
+              return false;
+            }
+            return true;
+          };
+
+          while ( msgSource->bytesAvailable() ) {
+
+            if ( pendingMessageSize == 0 ) {
+              if ( msgSource->bytesAvailable() >= sizeof( zyppng::rpc::HeaderSizeType ) ) {
+                msgSource->read( reinterpret_cast<char *>( &pendingMessageSize ),  sizeof( zyppng::rpc::HeaderSizeType ) );
+              }
+            }
+
+            if ( msgSource->bytesAvailable() < pendingMessageSize ) {
+              return;
+            }
+
+            auto bytes = msgSource->read( pendingMessageSize );
+            pendingMessageSize = 0;
+
+            zypp::proto::Envelope m;
+            if (! m.ParseFromArray( bytes.data(), bytes.size() ) ) {
+              // if we get a misformed message we can not simply kill zypp-rpm since it might be executing the transaction, all we can do is
+              // continue ( this should normally not happen , but code needs to handle it ).
+              ERR << "Received misformed message from zypp-rpm, ignoring" << std::endl;
+              return;
+            }
+
+            // due to librpm behaviour we need to make sense of the order of messages we receive
+            // because we first get a PackageFinished BEFORE getting a PackageError, same applies to
+            // Script related messages. What we do is remember the current step we are in and only close
+            // the step when we get the start of the next one
+            const auto &mName = m.messagetypename();
+            if (  mName == "zypp.proto.target.RpmLog" )  {
+
+              zpt::RpmLog p;
+              if ( !p.ParseFromString( m.value() ) ) {
+                ERR << "Failed to parse " << m.messagetypename() << " message from zypp-rpm." << std::endl;
+                continue;
+              }
+
+              sendRpmLineToReport( p.line() );
+
+
+            } else if (  mName == "zypp.proto.target.PackageBegin" )  {
+              finalizeCurrentReport();
+
+              zpt::PackageBegin p;
+              if ( !parseMsgWithStepId( m, p ) )
+                continue;
+
+              aboutToStartNewReport();
+
+              auto & step = steps.at( p.stepid() );
+              currentStepId = p.stepid();
+              if ( step.stepType() == sat::Transaction::TRANSACTION_ERASE ) {
+                uninstallreport = std::make_unique< callback::SendReport <rpm::RemoveResolvableReportSA> > ();
+                ( *uninstallreport )->start( makeResObject( step.satSolvable() ) );
+              } else {
+                installreport = std::make_unique< callback::SendReport <rpm::InstallResolvableReportSA> > ();
+                ( *installreport )->start( makeResObject( step.satSolvable() ) );
+              }
+
+            } else if (  mName == "zypp.proto.target.PackageFinished" )  {
+              zpt::PackageFinished p;
+              if ( !parseMsgWithStepId( m, p ) )
+                continue;
+
+              if ( p.stepid() < 0 || p.stepid() > steps.size() )
+                continue;
+
+              // here we only set the step stage to done, we however need to wait for the next start in order to send
+              // the finished report since there might be a error pending to be reported
+              steps[ p.stepid() ].stepStage( sat::Transaction::STEP_DONE );
+
+            } else if (  mName == "zypp.proto.target.PackageProgress" )  {
+              zpt::PackageProgress p;
+              if ( !parseMsgWithStepId( m, p ) )
+                continue;
+
+              if ( uninstallreport )
+                (*uninstallreport)->progress( p.amount(), makeResObject( steps.at( p.stepid() ) ));
+              else if ( installreport )
+                (*installreport)->progress( p.amount(), makeResObject( steps.at( p.stepid() ) ));
+              else
+                ERR << "Received a " << mName << " message but there is no corresponding report running." << std::endl;
+
+            } else if (  mName == "zypp.proto.target.PackageError" )  {
+              zpt::PackageError p;
+              if ( !parseMsgWithStepId( m, p ) )
+                continue;
+
+              if ( p.stepid() >= 0 && p.stepid() < steps.size() )
+                steps[ p.stepid() ].stepStage( sat::Transaction::STEP_ERROR );
+
+              finalizeCurrentReport();
+
+            } else if (  mName == "zypp.proto.target.ScriptBegin" )  {
+              finalizeCurrentReport();
+
+              zpt::ScriptBegin p;
+              if ( !p.ParseFromString( m.value() ) ) {
+                ERR << "Failed to parse " << m.messagetypename() << " message from zypp-rpm." << std::endl;
+                continue;
+              }
+
+              aboutToStartNewReport();
+
+              Resolvable::constPtr resPtr;
+              const auto stepId = p.stepid();
+              if ( stepId >= 0 && stepId < steps.size() ) {
+                resPtr = makeResObject( steps.at(stepId).satSolvable() );
+              }
+
+              currentStepId = p.stepid();
+              scriptreport = std::make_unique< callback::SendReport <rpm::CommitScriptReportSA> > ();
+              currentScriptType = p.scripttype();
+              currentScriptPackage = p.scriptpackage();
+              (*scriptreport)->start( p.scripttype(), p.scriptpackage(), resPtr );
+
+            } else if (  mName == "zypp.proto.target.ScriptFinished" )  {
+
+              // we just read the message, we do not act on it because a ScriptError is reported after ScriptFinished
+              MIL << "Received" << mName << " from zypp-rpm" << std::endl;
+
+            } else if (  mName == "zypp.proto.target.ScriptError" )  {
+
+              zpt::ScriptError p;
+              if ( !p.ParseFromString( m.value() ) ) {
+                ERR << "Failed to parse " << m.messagetypename() << " message from zypp-rpm." << std::endl;
+                continue;
+              }
+
+              Resolvable::constPtr resPtr;
+              const auto stepId = p.stepid();
+              if ( stepId >= 0 && stepId < steps.size() ) {
+                resPtr = makeResObject( steps.at(stepId).satSolvable() );
+
+                if ( p.fatal() ) {
+                  steps.at( stepId ).stepStage( sat::Transaction::STEP_ERROR );
+                }
+
+              }
+
+              HistoryLog().comment(
+                str::form("Failed to execute %s script for %s ", currentScriptType.c_str(), currentScriptPackage.size() ? currentScriptPackage.c_str() : "unknown" ),
+                true /*timestamp*/);
+
+              writeRpmMsgToHistory();
+
+              if ( !scriptreport ) {
+                ERR << "Received a ScriptError message, but there is no running report. " << std::endl;
+                continue;
+              }
+
+              // before killing the report we need to wait for the script end tag
+              waitForScriptEnd();
+              (*scriptreport)->finish( makeResObject( steps[stepId].satSolvable() ), p.fatal() ? rpm::CommitScriptReportSA::CRITICAL : rpm::CommitScriptReportSA::WARN );
+
+              // manually reset the current report since we already sent the finish(), rest will be reset by the new start
+              scriptreport.reset();
+              currentStepId = -1;
+
+            } else if (  mName == "zypp.proto.target.CleanupBegin" ) {
+              finalizeCurrentReport();
+
+              zpt::CleanupBegin beg;
+              if ( !beg.ParseFromString( m.value() ) ) {
+                ERR << "Failed to parse " << m.messagetypename() << " message from zypp-rpm." << std::endl;
+                continue;
+              }
+
+              aboutToStartNewReport();
+              cleanupreport = std::make_unique< callback::SendReport <rpm::CleanupPackageReportSA> > ();
+              (*cleanupreport)->start( beg.nvra() );
+            } else if (  mName == "zypp.proto.target.CleanupFinished" )  {
+
+              finalizeCurrentReport();
+
+            } else if (  mName == "zypp.proto.target.CleanupProgress" )  {
+              zpt::CleanupProgress prog;
+              if ( !prog.ParseFromString( m.value() ) ) {
+                ERR << "Failed to parse " << m.messagetypename() << " message from zypp-rpm." << std::endl;
+                continue;
+              }
+
+              if ( !cleanupreport ) {
+                ERR << "Received a CleanupProgress message, but there is no running report. " << std::endl;
+                continue;
+              }
+
+              (*cleanupreport)->progress( prog.amount() );
+
+            } else if (  mName == "zypp.proto.target.TransBegin" ) {
+              finalizeCurrentReport();
+
+              zpt::TransBegin beg;
+              if ( !beg.ParseFromString( m.value() ) ) {
+                ERR << "Failed to parse " << m.messagetypename() << " message from zypp-rpm." << std::endl;
+                continue;
+              }
+
+              aboutToStartNewReport();
+              transactionreport = std::make_unique< callback::SendReport <rpm::TransactionReportSA> > ();
+              (*transactionreport)->start( beg.name() );
+            } else if (  mName == "zypp.proto.target.TransFinished" )  {
+
+              finalizeCurrentReport();
+
+            } else if (  mName == "zypp.proto.target.TransProgress" )  {
+              zpt::TransProgress prog;
+              if ( !prog.ParseFromString( m.value() ) ) {
+                ERR << "Failed to parse " << m.messagetypename() << " message from zypp-rpm." << std::endl;
+                continue;
+              }
+
+              if ( !transactionreport ) {
+                ERR << "Received a TransactionProgress message, but there is no running report. " << std::endl;
+                continue;
+              }
+
+              (*transactionreport)->progress( prog.amount() );
+            } else if ( mName == "zypp.proto.target.TransactionError" ) {
+
+              zpt::TransactionError error;
+              if ( !error.ParseFromString( m.value() ) ) {
+                ERR << "Failed to parse " << m.messagetypename() << " message from zypp-rpm." << std::endl;
+                continue;
+              }
+
+              // this value is checked later
+              transactionError = std::move(error);
+
+            } else {
+              ERR << "Received unexpected message from zypp-rpm: "<< m.messagetypename() << ", ignoring" << std::endl;
+              return;
+            }
+
+          }
+        };
+        msgSource->connectFunc( &zyppng::AsyncDataSource::sigReadyRead, processMessages );
+
+        // track the childs lifetime
+        int zyppRpmExitCode = -1;
+        prog->connectFunc( &zyppng::Process::sigFinished, [&]( int code ){
+          zyppRpmExitCode = code;
+          loop->quit();
+        });
+
+        if ( !prog->start( argv ) ) {
+          HistoryLog().comment( "Commit was aborted, failed to run zypp-rpm" );
+          ZYPP_THROW( target::rpm::RpmSubprocessException( prog->execError() ) );
+        }
+
+        loop->run();
+
+        // make sure to read ALL available messages
+        processMessages();
+
+        // we will not receive a new start message , so we need to manually finalize the last report
+        finalizeCurrentReport();
+
+        // make sure to read all data from the log source
+        bool readMsgs = false;
+        while( prog->stderrDevice()->canReadLine() ) {
+          readMsgs = true;
+          MIL << "zypp-rpm: " << prog->stderrDevice()->readLine().asStringView();
+        }
+        while( prog->stdoutDevice()->canReadLine() ) {
+          readMsgs = true;
+          MIL << "zypp-rpm: " << prog->stdoutDevice()->readLine().asStringView();
+        }
+
+        while ( scriptSource->canReadLine() ) {
+          readMsgs = true;
+          MIL << "rpm-script-fd: " << scriptSource->readLine().asStringView();
+        }
+        if ( scriptSource->bytesAvailable() > 0 ) {
+          readMsgs = true;
+          MIL << "rpm-script-fd: " << scriptSource->readAll().asStringView();
+        }
+        if ( readMsgs )
+          MIL << std::endl;
+
+        switch ( zyppRpmExitCode ) {
+          // we need to look at the summary, handle finishedwitherrors like no error here
+          case zypprpm::NoError:
+          case zypprpm::RpmFinishedWithError:
+            break;
+          case zypprpm::RpmFinishedWithTransactionError: {
+            // here zypp-rpm sent us a error description
+            if ( transactionError ) {
+
+              std::ostringstream sstr;
+              sstr << _("Executing the transaction failed because of the following problems:") << "\n";
+              for ( const auto & err : transactionError->problems() ) {
+                sstr << "    " << err.message() << "\n";
+              }
+              sstr << std::endl;
+              ZYPP_THROW( rpm::RpmTransactionFailedException( sstr.str() ) );
+
+            } else {
+              ZYPP_THROW( rpm::RpmTransactionFailedException("RPM failed with a unexpected error, check the logs for more informations.") );
+            }
+            break;
+          }
+          case zypprpm::FailedToOpenDb:
+            ZYPP_THROW( rpm::RpmDbOpenException( rpm().root(), rpm().dbPath() ) );
+            break;
+          case zypprpm::WrongHeaderSize:
+          case zypprpm::WrongMessageFormat:
+            ZYPP_THROW( rpm::RpmSubprocessException("Failed to communicate with zypp-rpm, this is most likely a bug. Consider to fall back to legacy transaction strategy.") );
+            break;
+          case zypprpm::RpmInitFailed:
+            ZYPP_THROW( rpm::RpmInitException( rpm().root(), rpm().dbPath() ) );
+            break;
+          case zypprpm::FailedToReadPackage:
+            ZYPP_THROW( rpm::RpmSubprocessException("zypp-rpm was unable to read a package, check the logs for more informations.") );
+            break;
+          case zypprpm::FailedToAddStepToTransaction:
+            ZYPP_THROW( rpm::RpmSubprocessException("zypp-rpm failed to build the transaction, check the logs for more informations.") );
+            break;
+        }
+
+        for( int stepId = 0; (ZYppCommitResult::TransactionStepList::size_type)stepId < steps.size() && !abort ; stepId++ ) {
+          auto &step = steps[stepId];
+          PoolItem citem( step );
+
+          if ( step.stepStage() == sat::Transaction::STEP_TODO ) {
+            // other resolvables (non-Package) that are not handled by zypp-rpm
+            if ( !citem->isKind<Package>() && !policy_r.dryRun() ) {
+              // Status is changed as the buddy package buddy
+              // gets installed/deleted. Handle non-buddies only.
+              if ( ! citem.buddy() && citem->isKind<Product>() ) {
+                Product::constPtr p = citem->asKind<Product>();
+
+                if ( citem.status().isToBeInstalled() ) {
+                  ERR << "Can't install orphan product without release-package! " << citem << endl;
+                } else {
+                  // Deleting the corresponding product entry is all we con do.
+                  // So the product will no longer be visible as installed.
+                  std::string referenceFilename( p->referenceFilename() );
+
+                  if ( referenceFilename.empty() ) {
+                    ERR << "Can't remove orphan product without 'referenceFilename'! " << citem << endl;
+                  } else {
+                    Pathname referencePath { Pathname("/etc/products.d") / referenceFilename };	// no root prefix for rpmdb lookup!
+
+                    if ( ! rpm().hasFile( referencePath.asString() ) ) {
+                      // If it's not owned by a package, we can delete it.
+                      referencePath = Pathname::assertprefix( _root, referencePath );	// now add a root prefix
+                      if ( filesystem::unlink( referencePath ) != 0 )
+                        ERR << "Delete orphan product failed: " << referencePath << endl;
+                    } else {
+                      WAR << "Won't remove orphan product: '/etc/products.d/" << referenceFilename << "' is owned by a package." << endl;
+                    }
+                  }
+                }
+                citem.status().resetTransact( ResStatus::USER );
+                step.stepStage( sat::Transaction::STEP_DONE );
+              }
+            }
+          }
+        }
+      }
+
+      // Check presence of update scripts/messages. If aborting,
+      // at least log omitted scripts.
+      if ( ! successfullyInstalledPackages.empty() )
+      {
+        if ( ! RunUpdateScripts( _root, ZConfig::instance().update_scriptsPath(),
+               successfullyInstalledPackages, abort ) )
+        {
+          WAR << "Commit aborted by the user" << endl;
+          abort = true;
+        }
+        // send messages after scripts in case some script generates output,
+        // that should be kept in t %ghost message file.
+        RunUpdateMessages( _root, ZConfig::instance().update_messagesPath(),
+          successfullyInstalledPackages,
+          result_r );
+      }
+
+      // jsc#SLE-5116: Log patch status changes to history
+      // NOTE: Should be the last action as it may need to reload
+      // the Target in case of an incomplete transaction.
+      logPatchStatusChanges( result_r.transaction(), *this );
+
+      if ( abort ) {
+        HistoryLog().comment( "Commit was aborted." );
         ZYPP_THROW( TargetAbortedException( ) );
       }
     }

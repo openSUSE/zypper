@@ -84,11 +84,19 @@ namespace zypp
 
       bool rpmExcludeDocs() const;
 
+      /** Allow to replace a newer package with an older one (rollback to a older version). */
+      ZYppCommitPolicy & allowDowngrade( bool yesNo_r );
+      bool allowDowngrade() const;
+
+      /** If enabled it allows installation of packages even if they replace files from other, already installed, packages. */
+      ZYppCommitPolicy & replaceFiles( bool yesNo_r );
+      bool replaceFiles() const;
 
       /** Kepp pool in sync with the Target databases after commit (default: true) */
       ZYppCommitPolicy & syncPoolAfterCommit( bool yesNo_r );
-
       bool syncPoolAfterCommit() const;
+
+      bool singleTransModeEnabled () const;
 
     public:
       /** Implementation  */

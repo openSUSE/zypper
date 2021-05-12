@@ -239,6 +239,21 @@ protected:
 private:
 };
 
+class RpmTransactionFailedException : public RpmException
+{
+public:
+  RpmTransactionFailedException(const std::string & errmsg_r)
+    : RpmException()
+    , _errmsg(errmsg_r)
+  {}
+  virtual ~RpmTransactionFailedException() throw()
+    {};
+protected:
+  virtual std::ostream & dumpOn( std::ostream & str ) const;
+private:
+  std::string _errmsg;
+};
+
 
 
 /////////////////////////////////////////////////////////////////

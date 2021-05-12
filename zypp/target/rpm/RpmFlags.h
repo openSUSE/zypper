@@ -36,18 +36,20 @@ namespace zypp
        */
       enum RpmInstFlag
       {
-        RPMINST_NONE       = 0x0000,
-        RPMINST_EXCLUDEDOCS= 0x0001,
-        RPMINST_NOSCRIPTS  = 0x0002,
-        RPMINST_FORCE      = 0x0004,
-        RPMINST_NODEPS     = 0x0008,
-        RPMINST_IGNORESIZE = 0x0010,
-        RPMINST_JUSTDB     = 0x0020,
-        RPMINST_NODIGEST   = 0x0040,
-        RPMINST_NOSIGNATURE= 0x0080,
-        RPMINST_NOUPGRADE  = 0x0100,
-        RPMINST_TEST	   = 0x0200,
-	RPMINST_NOPOSTTRANS= 0x0400
+        RPMINST_NONE          = 0x0000,
+        RPMINST_EXCLUDEDOCS   = 0x0001,
+        RPMINST_NOSCRIPTS     = 0x0002,
+        RPMINST_FORCE         = 0x0004,
+        RPMINST_NODEPS        = 0x0008,
+        RPMINST_IGNORESIZE    = 0x0010,
+        RPMINST_JUSTDB        = 0x0020,
+        RPMINST_NODIGEST      = 0x0040,
+        RPMINST_NOSIGNATURE   = 0x0080,
+        RPMINST_NOUPGRADE     = 0x0100,
+        RPMINST_TEST          = 0x0200,
+	RPMINST_NOPOSTTRANS   = 0x0400,
+        RPMINST_ALLOWDOWNGRADE= 0x0800,
+        RPMINST_REPLACEFILES  = 0x1000
       };
 
       /** \relates RpmInstFlag Type-safe way of storing OR-combinations. */

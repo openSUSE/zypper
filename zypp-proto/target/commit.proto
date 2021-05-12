@@ -1,0 +1,107 @@
+syntax = "proto3";
+option optimize_for = LITE_RUNTIME;
+
+package zypp.proto.target;
+
+// Commit Setup information
+message InstallStep {
+  string pathname = 1;
+  bool   multiversion = 2;
+}
+
+message RemoveStep {
+  string name = 1;
+  string version = 2;
+  string release = 3;
+  string arch    = 4;
+}
+
+message TransactionStep {
+  uint32 stepId = 1;
+  oneof stepdata {
+    InstallStep install = 2;
+    RemoveStep  remove = 3;
+  }
+}
+
+message Commit {
+  uint32 flags = 1;
+  string arch = 2;
+  string root = 3;
+  string dbPath = 4;
+  bool   ignoreArch = 5;
+  repeated TransactionStep steps = 6;
+}
+
+// message written to zypper when the transaction has failed
+message TransactionProblemDesc {
+  string message = 1;
+}
+message TransactionError {
+  repeated TransactionProblemDesc problems = 1;
+}
+
+// message written to the rpm log including the level
+message RpmLog {
+  uint32 level = 1;
+  string line = 2;
+}
+
+// Per package information which directly correspond to a TransactionStep !!!!
+message PackageBegin {
+  uint32 stepId = 1;
+}
+
+message PackageFinished {
+  uint32 stepId = 1;
+}
+
+message PackageError {
+  uint32 stepId = 1;
+}
+
+message PackageProgress {
+  uint32 stepId = 1;
+  uint32 amount = 2;
+}
+
+// Progress for cleaning up old versions of packages
+// which have NO corresponding TransactionStep
+message CleanupBegin {
+  string nvra = 1;
+}
+
+message CleanupFinished {
+  string nvra = 1;
+}
+
+message CleanupProgress {
+  string nvra = 1;
+  uint32 amount = 2;
+}
+
+// per script info, for each of those the stepId can be -1 or point
+// to a valid step in the transaction set.
+message ScriptBegin {
+  uint32 stepId = 1;
+  string scriptType = 2;
+  string scriptPackage = 3;
+}
+
+message ScriptFinished {
+  uint32 stepId = 1;
+}
+
+message ScriptError {
+  uint32 stepId = 1;
+  bool   fatal = 2;
+}
+
+// Generic Transactionstep report, we use it for preparing and verifying progress
+message TransBegin {
+  string name = 1;
+}
+message TransFinished {}
+message TransProgress {
+  uint32 amount = 1;
+}

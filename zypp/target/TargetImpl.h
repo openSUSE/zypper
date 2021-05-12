@@ -211,6 +211,12 @@ namespace zypp
 		   CommitPackageCache & packageCache_r,
 		   ZYppCommitResult & result_r );
 
+      /** Commit ordered changes (internal helper) */
+      void commitInSingleTransaction( const ZYppCommitPolicy & policy_r,
+        CommitPackageCache & packageCache_r,
+        ZYppCommitResult & result_r );
+
+
       /** Commit helper checking for file conflicts after download. */
       void commitFindFileConflicts( const ZYppCommitPolicy & policy_r, ZYppCommitResult & result_r );
     protected:

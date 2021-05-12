@@ -75,6 +75,11 @@ std::ostream & RpmNullDatabaseException::dumpOn( std::ostream & str) const
   return str << "NULL rpmV4 database passed as argument!";
 }
 
+std::ostream &RpmTransactionFailedException::dumpOn(std::ostream &str) const
+{
+  return str << _errmsg;
+}
+
 /////////////////////////////////////////////////////////////////
 } // namespace rpm
 } // namespace target

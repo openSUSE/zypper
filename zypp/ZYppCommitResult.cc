@@ -34,6 +34,7 @@ namespace zypp
     public:
       Pathname			_root;
       FalseBool			_attemptToModify;
+      FalseBool                 _singleTransactionMode;
       sat::Transaction          _transaction;
       TransactionStepList       _transactionStepList;
       UpdateNotifications	_updateMessages;
@@ -73,6 +74,12 @@ namespace zypp
 
   void ZYppCommitResult::attemptToModify( bool yesno_r )
   { _pimpl->_attemptToModify = yesno_r; }
+
+  bool ZYppCommitResult::singleTransactionMode() const
+  { return _pimpl->_singleTransactionMode; }
+
+  void ZYppCommitResult::setSingleTransactionMode( bool yesno_r )
+  { _pimpl->_singleTransactionMode = yesno_r; }
 
   const sat::Transaction & ZYppCommitResult::transaction() const
   { return _pimpl->_transaction; }

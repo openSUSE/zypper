@@ -18,7 +18,6 @@
 #include <zypp/base/NonCopyable.h>
 #include <zypp/base/PtrTypes.h>
 #include <zypp/PathInfo.h>
-#include <zypp/Package.h>
 #include <zypp/target/rpm/RpmHeader.h>
 #include <zypp/target/rpm/RpmException.h>
 

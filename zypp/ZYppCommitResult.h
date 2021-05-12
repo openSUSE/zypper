@@ -87,6 +87,14 @@ namespace zypp
       /** Set \ref attemptToModify */
       void attemptToModify( bool yesno_r );
 
+      /**
+       * \c True if the commit was executed in one big rpm transaction, this can be used to figure out
+       *    when its required to show more information about which packages failed during the transaction
+       *    because otherwise those informations might get lost in the backlog.
+       */
+      bool singleTransactionMode() const;
+      void setSingleTransactionMode( bool yesno_r );
+
       /** The full transaction list.
        * The complete list including transaction steps that do not require
        * any action (like obsoletes or non-package actions). Depending on

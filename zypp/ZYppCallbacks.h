@@ -668,6 +668,174 @@ namespace zypp
 	{}
       };
 #endif
+
+      // Generic transaction reports, this is used for verifying and preparing tasks, the name param
+      // for the start function defines which report we are looking at
+      struct TransactionReportSA : public callback::ReportBase
+      {
+        enum Error {
+          NO_ERROR, // everything went perfectly fine
+          FINISHED_WITH_ERRORS, // the transaction was finished, but some errors happened
+          FAILED // the transaction failed completely
+        };
+
+        virtual void start(
+          const std::string &/*name*/,
+          const UserData & = UserData() /*userdata*/
+          ) {}
+
+        virtual void progress(
+          int /*value*/,
+          const UserData & = UserData() /*userdata*/
+          ) { }
+
+        virtual void finish(
+          Error /*error*/,
+          const UserData & = UserData() /*userdata*/
+          ) {}
+
+      /** "zypp-rpm/transactionsa": Additional rpm output (sent immediately).
+       * Data:
+       * line     : std::reference_wrapper<const std::string>
+       */
+        static const UserData::ContentType contentRpmout;
+      };
+
+
+      // progress for installing a resolvable in single transaction mode
+      struct InstallResolvableReportSA : public callback::ReportBase
+      {
+        enum Error {
+          NO_ERROR,
+          NOT_FOUND, 	// the requested Url was not found
+          IO,		// IO error
+          INVALID	// th resolvable is invalid
+        };
+
+        virtual void start(
+          Resolvable::constPtr /*resolvable*/,
+          const UserData & = UserData() /*userdata*/
+          ) {}
+
+        virtual void progress(
+          int /*value*/,
+          Resolvable::constPtr /*resolvable*/,
+          const UserData & = UserData() /*userdata*/
+          ) { return; }
+
+        virtual void finish(
+          Resolvable::constPtr /*resolvable*/
+          , Error /*error*/,
+          const UserData & = UserData() /*userdata*/
+          ) {}
+
+        /** "zypp-rpm/installpkgsa": Additional rpm output (sent immediately).
+         * Data:
+         * solvable : satSolvable processed
+         * line     : std::reference_wrapper<const std::string>
+         */
+        static const UserData::ContentType contentRpmout;
+      };
+
+      // progress for removing a resolvable in single transaction mode
+      struct RemoveResolvableReportSA : public callback::ReportBase
+      {
+        enum Error {
+          NO_ERROR,
+          NOT_FOUND, 	// the requested Url was not found
+          IO,		// IO error
+          INVALID       // th resolvable is invalid
+        };
+
+        virtual void start(
+          Resolvable::constPtr /*resolvable*/,
+          const UserData & = UserData() /*userdata*/
+          ) {}
+
+        virtual void progress(
+          int /*value*/,
+          Resolvable::constPtr /*resolvable*/,
+          const UserData & = UserData() /*userdata*/
+          ) { return; }
+
+        virtual void finish(
+          Resolvable::constPtr /*resolvable*/
+          , Error /*error*/
+          , const UserData & = UserData() /*userdata*/
+          ) {}
+
+        /** "zypp-rpm/removepkgsa": Additional rpm output (sent immediately).
+         * For data \see \ref InstallResolvableReportSA::contentRpmout
+         */
+        static const UserData::ContentType contentRpmout;
+      };
+
+      // progress for cleaning up the old version of a package after it was upgraded to a new version
+      struct CleanupPackageReportSA : public callback::ReportBase
+      {
+        enum Error {
+          NO_ERROR
+        };
+
+        virtual void start(
+          const std::string & /*nvra*/,
+          const UserData & = UserData() /*userdata*/
+          ) {}
+
+        virtual void progress(
+          int /*value*/,
+          const UserData & = UserData() /*userdata*/
+          ) { return; }
+
+        virtual void finish(
+          Error /*error*/,
+          const UserData & = UserData() /*userdata*/
+          ) {}
+
+        /** "zypp-rpm/cleanupkgsa": Additional rpm output (sent immediately).
+         * For data \see \ref InstallResolvableReportSA::contentRpmout
+         */
+        static const UserData::ContentType contentRpmout;
+      };
+
+
+      // progress for script thats executed during a commit transaction
+      // the resolvable can be null, for things like posttrans scripts
+      struct CommitScriptReportSA : public callback::ReportBase
+      {
+        enum Error {
+          NO_ERROR,
+          WARN,
+          CRITICAL // the script failure prevented solvable installation
+        };
+
+        virtual void start(
+          const std::string &  /*scriptType*/,
+          const std::string &  /*packageName ( can be empty )*/,
+          Resolvable::constPtr /*resolvable  ( can be null )*/,
+          const UserData & = UserData() /*userdata*/
+          ) {}
+
+        virtual void progress(
+          int /*value*/,
+          Resolvable::constPtr /*resolvable*/,
+          const UserData & = UserData() /*userdata*/
+          ) { return; }
+
+        virtual void finish(
+          Resolvable::constPtr /*resolvable*/
+          , Error /*error*/,
+          const UserData & = UserData() /*userdata*/
+          ) {}
+
+        /** "zypp-rpm/scriptsa": Additional rpm output (sent immediately).
+         * Data:
+         * solvable : satSolvable processed ( can be empty )
+         * line     : std::reference_wrapper<const std::string>
+         */
+        static const UserData::ContentType contentRpmout;
+      };
+
       /////////////////////////////////////////////////////////////////
     } // namespace rpm
     ///////////////////////////////////////////////////////////////////

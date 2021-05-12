@@ -18,6 +18,8 @@ OPTION (DISABLE_MEDIABACKEND_TESTS "Disable Tests depending on Nginx and libfcgi
 OPTION (DISABLE_LIBPROXY "Build without libproxy support even if package is installed?" OFF)
 OPTION (DISABLE_AUTODOCS "Do not require doxygen being installed (required to build autodocs)?" OFF)
 OPTION (EXPORT_NG_API "Export experimental libzypp API" OFF)
+# This option will reroute all tool binaries to the libzypp build dir instead of taking those installed in the default directories.
+OPTION (ENABLE_DEVEL_BUILD "Developer build, use zypp tools directly from build dir rather than the default locations" OFF)
 #--------------------------------------------------------------------------------
 SET (have_system x)
 
@@ -28,6 +30,16 @@ IF (DEBIAN)
   SET (ENABLE_BUILD_TESTS ON)
   SET (have_system ${have_system}x)
 ENDIF (DEBIAN)
+
+IF ( ENABLE_DEVEL_BUILD )
+	MESSAGE( WARNING "Zypp devel build enabled, do not do this in production" )
+	SET( ZYPP_RPM_BINARY "${CMAKE_BINARY_DIR}/tools/zypp-rpm/zypp-rpm")
+
+	message ( "Using zypp-rpm from path: ${ZYPP_RPM_BINARY}" )
+ELSE()
+	SET( ZYPP_RPM_BINARY "${LIBEXEC_INSTALL_DIR}/zypp-rpm")
+ENDIF( ENABLE_DEVEL_BUILD )
+add_definitions( -DZYPP_RPM_BINARY="${ZYPP_RPM_BINARY}")
 
 IF (${have_system} STREQUAL x)
   MESSAGE (STATUS "Building for SUSE")
@@ -137,18 +149,16 @@ ELSE ( NOT RPM_FOUND)
   # fix includes not relative to rpm
   INCLUDE_DIRECTORIES(${RPM_INCLUDE_DIR}/rpm)
 
-  # rpmtsSetVfyFlags were introduced in rpm-4.15
-  UNSET( RPMTSSETVFYFLAGS_FOUND CACHE )
-  SET( CMAKE_REQUIRED_LIBRARIES "-lrpm" )
-  CHECK_SYMBOL_EXISTS( rpmtsSetVfyFlags rpm/rpmts.h RPMTSSETVFYFLAGS_FOUND )
-  IF ( NOT RPMTSSETVFYFLAGS_FOUND )
-    ADD_DEFINITIONS( -DHAVE_NO_RPMTSSETVFYFLAGS )
-  ENDIF ()
+  # rpm verify function and callback states were introduced in rpm-4.15
+  if( RPM_LIB_VER VERSION_GREATER_EQUAL "4.15.0"  AND  RPM_LIB_VER VERSION_LESS "5.0.0")
+    ADD_DEFINITIONS( -DHAVE_RPM_VERIFY_TRANSACTION_STEP )
+  endif()
 
-  if ( RPM_SUSPECT_VERSION STREQUAL "5.x" )
+  if( RPM_LIB_VER VERSION_GREATER_EQUAL "5.0.0" )
   	MESSAGE( STATUS "rpm found: enable rpm-4 compat interface." )
   	ADD_DEFINITIONS(-D_RPM_5)
-  endif ( RPM_SUSPECT_VERSION STREQUAL "5.x" )
+  endif ()
+
 ENDIF( NOT RPM_FOUND)
 
 FIND_PACKAGE(Boost REQUIRED COMPONENTS program_options unit_test_framework thread)
@@ -196,7 +206,6 @@ IF ( NOT YAML-CPP_FOUND)
 ELSE ( NOT YAML-CPP_FOUND)
   INCLUDE_DIRECTORIES(${YAML_CPP_INCLUDE_DIR})
 ENDIF( NOT YAML-CPP_FOUND)
-
 
 
 #Allow to override the libsolv install location

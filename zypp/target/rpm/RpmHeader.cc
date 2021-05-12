@@ -11,6 +11,8 @@
 */
 #include "librpm.h"
 
+#include <zypp/AutoDispose.h>
+
 ////////////////////////////////////////////////////////////////////
 // unameToUid and gnameToGid are shamelessly stolen from rpm-4.4.
 // (rpmio/ugid.c) Those functions were dropped in RPM_4_7
@@ -208,11 +210,26 @@ RpmHeader::~RpmHeader()
 RpmHeader::constPtr RpmHeader::readPackage( const Pathname & path_r,
                                             VERIFICATION verification_r )
 {
+
+  librpmDb::globalInit();
+  zypp::AutoDispose<rpmts> ts ( ::rpmtsCreate(), ::rpmtsFree );
+  unsigned vsflag = RPMVSF_DEFAULT;
+  if ( verification_r & NODIGEST )
+    vsflag |= _RPMVSF_NODIGESTS;
+  if ( verification_r & NOSIGNATURE )
+    vsflag |= _RPMVSF_NOSIGNATURES;
+  ::rpmtsSetVSFlags( ts, rpmVSFlags(vsflag) );
+
+  return readPackage( ts, path_r ).first;
+}
+
+std::pair<RpmHeader::Ptr, int> RpmHeader::readPackage( rpmts ts_r, const zypp::filesystem::Pathname &path_r )
+{
   PathInfo file( path_r );
   if ( ! file.isFile() )
   {
     ERR << "Not a file: " << file << endl;
-    return (RpmHeader*)0;
+    return std::make_pair( RpmHeader::Ptr(), -1 );
   }
 
   FD_t fd = ::Fopen( file.asString().c_str(), "r.ufdio" );
@@ -221,36 +238,24 @@ RpmHeader::constPtr RpmHeader::readPackage( const Pathname & path_r,
     ERR << "Can't open file for reading: " << file << " (" << ::Fstrerror(fd) << ")" << endl;
     if ( fd )
       ::Fclose( fd );
-    return (RpmHeader*)0;
+    return std::make_pair( RpmHeader::Ptr(), -1 );
   }
 
-  librpmDb::globalInit();
-  rpmts ts = ::rpmtsCreate();
-  unsigned vsflag = RPMVSF_DEFAULT;
-  if ( verification_r & NODIGEST )
-    vsflag |= _RPMVSF_NODIGESTS;
-  if ( verification_r & NOSIGNATURE )
-    vsflag |= _RPMVSF_NOSIGNATURES;
-  ::rpmtsSetVSFlags( ts, rpmVSFlags(vsflag) );
-
   Header nh = 0;
-  int res = ::rpmReadPackageFile( ts, fd, path_r.asString().c_str(), &nh );
-
-  ts = rpmtsFree(ts);
-
+  int res = ::rpmReadPackageFile( ts_r, fd, path_r.asString().c_str(), &nh );
   ::Fclose( fd );
 
   if ( ! nh )
   {
     WAR << "Error reading header from " << path_r << " error(" << res << ")" << endl;
-    return (RpmHeader*)0;
+    return std::make_pair( RpmHeader::Ptr(), res );
   }
 
-  RpmHeader::constPtr h( new RpmHeader( nh ) );
+  RpmHeader::Ptr h( new RpmHeader( nh ) );
   headerFree( nh ); // clear the reference set in ReadPackageFile
 
   MIL << h << " from " << path_r << endl;
-  return h;
+  return std::make_pair( h, res );
 }
 
 ///////////////////////////////////////////////////////////////////

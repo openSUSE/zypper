@@ -29,6 +29,7 @@ extern "C"
 #include <vector>
 #include <algorithm>
 
+#include <zypp-core/base/StringV.h>
 #include <zypp/base/Logger.h>
 #include <zypp/base/String.h>
 #include <zypp/base/Gettext.h>
@@ -1109,42 +1110,30 @@ namespace
 {
   struct RpmlogCapture : public std::string
   {
-    RpmlogCapture()
-    { rpmlog()._cap = this; }
+    RpmlogCapture() : _cap(this)
+    {
+      rpmlogSetCallback( rpmLogCB, this );
+      _oldMask = rpmlogSetMask( RPMLOG_UPTO( RPMLOG_PRI(RPMLOG_INFO) ) );
+    }
 
     ~RpmlogCapture()
-    { rpmlog()._cap = nullptr; }
+    {
+      rpmlogSetCallback( nullptr, nullptr );
+      rpmlogSetMask( _oldMask );
+    }
+
+    static int rpmLogCB( rpmlogRec rec_r, rpmlogCallbackData data_r )
+    { return reinterpret_cast<RpmlogCapture*>(data_r)->rpmLog( rec_r ); }
+
+    int rpmLog( rpmlogRec rec_r )
+    {
+      if ( _cap ) (*_cap) += rpmlogRecMessage( rec_r );
+      return 0;
+    }
 
   private:
-    struct Rpmlog
-    {
-      Rpmlog()
-      : _cap( nullptr )
-      {
-	rpmlogSetCallback( rpmLogCB, this );
-	rpmSetVerbosity( RPMLOG_INFO );
-	_f = ::fopen( "/dev/null","w");
-	rpmlogSetFile( _f );
-      }
-
-      ~Rpmlog()
-      { if ( _f ) ::fclose( _f ); }
-
-      static int rpmLogCB( rpmlogRec rec_r, rpmlogCallbackData data_r )
-      { return reinterpret_cast<Rpmlog*>(data_r)->rpmLog( rec_r ); }
-
-      int rpmLog( rpmlogRec rec_r )
-      {
-	if ( _cap ) (*_cap) += rpmlogRecMessage( rec_r );
-	return RPMLOG_DEFAULT;
-      }
-
-      FILE * _f;
-      std::string * _cap;
-    };
-
-    static Rpmlog & rpmlog()
-    { static Rpmlog _rpmlog; return _rpmlog; }
+    std::string * _cap;
+    int _oldMask = 0;
   };
 
   RpmDb::CheckPackageResult doCheckPackageSig( const Pathname & path_r,			// rpm file to check
@@ -1173,7 +1162,7 @@ namespace
 
     rpmQVKArguments_s qva;
     memset( &qva, 0, sizeof(rpmQVKArguments_s) );
-#ifdef HAVE_NO_RPMTSSETVFYFLAGS
+#ifndef HAVE_RPM_VERIFY_TRANSACTION_STEP
     // Legacy: In rpm >= 4.15 qva_flags symbols don't exist
     // and qva_flags is not used in signature checking at all.
     qva.qva_flags = (VERIFY_DIGEST|VERIFY_SIGNATURE);
@@ -1330,7 +1319,6 @@ RpmDb::queryChangedFiles(FileList & fileList, const std::string& packageName)
 
   return ok;
 }
-
 
 
 /****************************************************************/
@@ -1604,7 +1592,6 @@ void RpmDb::doInstallPackage( const Pathname & filename, RpmInstFlags flags, cal
   HistoryLog historylog;
 
   MIL << "RpmDb::installPackage(" << filename << "," << flags << ")" << endl;
-
 
   // backup
   if ( _packagebackups )

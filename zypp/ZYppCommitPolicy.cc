@@ -12,14 +12,32 @@
 
 #include <iostream>
 
-#include <zypp/base/String.h>
+#include <zypp-core/base/String.h>
+#include <zypp-core/base/StringV.h>
 
 #include <zypp/ZConfig.h>
 #include <zypp/ZYppCommitPolicy.h>
+#include <zypp-core/base/LogControl.h>
+#include <zypp-core/TriBool.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
+
+
+  bool singleTransInEnv ()
+  {
+    static TriBool singleTrans = indeterminate;
+    if ( indeterminate(singleTrans) ) {
+      const char *val = ::getenv("ZYPP_SINGLE_RPMTRANS");
+      if ( val && std::string_view( val ) == "1"  )
+        singleTrans = true;
+      else
+        singleTrans = false;
+    }
+    // for some reason some compilers do not accept the implicit conversion to bool here.
+    return bool( singleTrans );
+  }
 
   ///////////////////////////////////////////////////////////////////
   //
@@ -32,18 +50,18 @@ namespace zypp
     public:
       Impl()
       : _restrictToMedia	( 0 )
-      , _dryRun			( false )
       , _downloadMode		( ZConfig::instance().commit_downloadMode() )
       , _rpmInstFlags		( ZConfig::instance().rpmInstallFlags() )
       , _syncPoolAfterCommit	( true )
+      , _singleTransMode        ( singleTransInEnv() )
       {}
 
     public:
       unsigned			_restrictToMedia;
-      bool			_dryRun;
       DownloadMode		_downloadMode;
       target::rpm::RpmInstFlags	_rpmInstFlags;
       bool			_syncPoolAfterCommit;
+      bool                      _singleTransMode; //< run everything in one big rpm transaction
 
     private:
       friend Impl * rwcowClone<Impl>( const Impl * rhs );
@@ -70,18 +88,28 @@ namespace zypp
 
 
   ZYppCommitPolicy & ZYppCommitPolicy::dryRun( bool yesNo_r )
-  { _pimpl->_dryRun = yesNo_r; return *this; }
+  {  _pimpl->_rpmInstFlags.setFlag( target::rpm::RPMINST_TEST, yesNo_r ); return *this; }
 
   bool ZYppCommitPolicy::dryRun() const
-  { return _pimpl->_dryRun; }
-
+  { return _pimpl->_rpmInstFlags.testFlag( target::rpm::RPMINST_TEST );}
 
   ZYppCommitPolicy & ZYppCommitPolicy::downloadMode( DownloadMode val_r )
-  { _pimpl->_downloadMode = val_r; return *this; }
+  {
+    if ( singleTransModeEnabled() && val_r == DownloadAsNeeded ) {
+      DBG << val_r << " is not compatible with singleTransMode, falling back to " << DownloadInAdvance << std::endl;
+      _pimpl->_downloadMode = DownloadInAdvance;
+    }
+    _pimpl->_downloadMode = val_r; return *this;
+  }
 
   DownloadMode ZYppCommitPolicy::downloadMode() const
-  { return _pimpl->_downloadMode; }
-
+  {
+    if ( singleTransModeEnabled() && _pimpl->_downloadMode == DownloadAsNeeded ) {
+      DBG << _pimpl->_downloadMode << " is not compatible with singleTransMode, falling back to " << DownloadInAdvance << std::endl;
+      return DownloadInAdvance;
+    }
+    return _pimpl->_downloadMode;
+  }
 
   ZYppCommitPolicy &  ZYppCommitPolicy::rpmInstFlags( target::rpm::RpmInstFlags newFlags_r )
   { _pimpl->_rpmInstFlags = newFlags_r; return *this; }
@@ -101,6 +129,17 @@ namespace zypp
   bool ZYppCommitPolicy::rpmExcludeDocs() const
   { return _pimpl->_rpmInstFlags.testFlag( target::rpm::RPMINST_EXCLUDEDOCS ); }
 
+  ZYppCommitPolicy &ZYppCommitPolicy::allowDowngrade(bool yesNo_r)
+  { _pimpl->_rpmInstFlags.setFlag( target::rpm::RPMINST_ALLOWDOWNGRADE, yesNo_r ); return *this; }
+
+  bool ZYppCommitPolicy::allowDowngrade() const
+  { return _pimpl->_rpmInstFlags.testFlag( target::rpm::RPMINST_ALLOWDOWNGRADE ); }
+
+  ZYppCommitPolicy &ZYppCommitPolicy::replaceFiles( bool yesNo_r )
+  { _pimpl->_rpmInstFlags.setFlag( target::rpm::RPMINST_REPLACEFILES, yesNo_r ); return *this; }
+
+  bool ZYppCommitPolicy::replaceFiles( ) const
+  { return _pimpl->_rpmInstFlags.testFlag( target::rpm::RPMINST_REPLACEFILES ); }
 
   ZYppCommitPolicy & ZYppCommitPolicy::syncPoolAfterCommit( bool yesNo_r )
   { _pimpl->_syncPoolAfterCommit = yesNo_r; return *this; }
@@ -108,6 +147,8 @@ namespace zypp
   bool ZYppCommitPolicy::syncPoolAfterCommit() const
   { return _pimpl->_syncPoolAfterCommit; }
 
+  bool ZYppCommitPolicy::singleTransModeEnabled() const
+  { return _pimpl->_singleTransMode; }
 
   std::ostream & operator<<( std::ostream & str, const ZYppCommitPolicy & obj )
   {

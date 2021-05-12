@@ -14,6 +14,7 @@
 
 #include <iosfwd>
 #include <list>
+#include <utility>
 
 #include <zypp/target/rpm/BinHeader.h>
 
@@ -201,6 +202,12 @@ public:
    **/
   static RpmHeader::constPtr readPackage( const Pathname & path,
                                           VERIFICATION verification = VERIFY );
+
+  /**
+   * Get an accessible packages data from disk using a existing transaction.
+   * Returns a std::pair container the header and resultcode from reading it
+   **/
+  static std::pair<RpmHeader::Ptr, int> readPackage( rpmts ts_r, const Pathname & path_r );
 };
 
 ///////////////////////////////////////////////////////////////////

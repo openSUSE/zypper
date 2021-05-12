@@ -20,6 +20,7 @@
 \subsection zypp-envars-commit Variables related to commit
 
 \li \c ZYPP_IS_RUNNING=1 Set during commit so packages pre/post/trigger scripts can detect whether rpm was called from within libzypp.
+\li \c ZYPP_SINGLE_RPMTRANS=1 Enable alternative and !!!experimental!!! commit strategy where all rpm operations are executed in a single rpm transaction, which results in much faster commits.
 
 \subsection zypp-envars-logging Variables related to logging
 

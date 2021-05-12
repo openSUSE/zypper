@@ -5,7 +5,7 @@ using target::rpm::RpmDb;
 
 #define DATADIR (Pathname(TESTS_SRC_DIR) / "/zypp/data/RpmPkgSigCheck")
 
-#ifndef HAVE_NO_RPMTSSETVFYFLAGS
+#ifdef HAVE_RPM_VERIFY_TRANSACTION_STEP
 #define HAVE_RPMTSSETVFYFLAGS
 #endif
 
