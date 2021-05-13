@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-04-30 18:12+0200\n"
-"PO-Revision-Date: 2019-05-14 15:33+0000\n"
+"PO-Revision-Date: 2021-05-13 23:59+0000\n"
 "Last-Translator: Mindaugas Baranauskas <opensuse.lietuviu.kalba@gmail.com>\n"
 "Language-Team: Lithuanian <https://l10n.opensuse.org/projects/zypper/master/"
 "lt/>\n"
@@ -17,11 +17,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=n==1 ? 0 : n%10>=2 && (n%100<10 || n"
 "%100>=20) ? 1 : n%10==0 || (n%100>10 && n%100<20) ? 2 : 3;\n"
-"X-Generator: Weblate 3.3\n"
+"X-Generator: Weblate 4.6.2\n"
 
 #: src/Command.cc:93
 msgid "Invalid command"
-msgstr ""
+msgstr "Netinkama komanda"
 
 #: src/Command.cc:111
 msgid "Repository Management:"
@@ -49,11 +49,11 @@ msgstr "Paketų rakinimas:"
 
 #: src/Command.cc:154
 msgid "Locale Management:"
-msgstr ""
+msgstr "Lokalės tvarkymas:"
 
 #: src/Command.cc:158
 msgid "Other Commands:"
-msgstr ""
+msgstr "Kitos komandos:"
 
 #: src/Command.cc:167
 msgid "Subcommands:"
@@ -206,7 +206,7 @@ msgstr "Naudoti alternatyvų paketų podėlio katalogą."
 
 #: src/Config.cc:548
 msgid "Repository Options"
-msgstr ""
+msgstr "Saugyklų parinktys"
 
 #: src/Config.cc:552
 msgid "Entering 'no-gpg-checks' mode."
@@ -215,7 +215,7 @@ msgstr "Įeinama į „gpg-netikrinimo“ veikseną."
 #. translators: --no-gpg-checks
 #: src/Config.cc:556
 msgid "Ignore GPG check failures and continue."
-msgstr ""
+msgstr "Nepaisyti GPG patikros klaidų ir tęsti."
 
 #: src/Config.cc:561
 #, c-format, boost-format
@@ -228,12 +228,12 @@ msgstr ""
 #. translators: --gpg-auto-import-keys
 #: src/Config.cc:567
 msgid "Automatically trust and import new repository signing keys."
-msgstr ""
+msgstr "Automatiškai pasitikėti ir importuoti naujus saugyklų raktus."
 
 #. translators: --plus-repo, -p <URI>
 #: src/Config.cc:571
 msgid "Use an additional repository."
-msgstr ""
+msgstr "Naudoti papildomą saugyklą."
 
 #. translators: --plus-content <TAG>
 #: src/Config.cc:575
@@ -249,7 +249,7 @@ msgstr "Saugyklos uždraustos, naudojama tik įdiegtų paketų duomenų bazė."
 #. translators: --disable-repositories
 #: src/Config.cc:585
 msgid "Do not read meta-data from repositories."
-msgstr ""
+msgstr "Neskaityti meta duomenų iš saugyklų."
 
 #: src/Config.cc:589
 msgid "Autorefresh disabled."
@@ -258,7 +258,7 @@ msgstr "Savaiminis atnaujinimas uždraustas."
 #. translators: --no-refresh
 #: src/Config.cc:593
 msgid "Do not refresh the repositories."
-msgstr ""
+msgstr "Neatnaujinti saugyklų."
 
 #: src/Config.cc:597
 msgid "CD/DVD repositories disabled."
@@ -267,7 +267,7 @@ msgstr "CD/DVD saugyklos uždraustos."
 #. translators: --no-cd
 #: src/Config.cc:601
 msgid "Ignore CD/DVD repositories."
-msgstr ""
+msgstr "Nepaisyti CD/DVD saugyklų."
 
 #: src/Config.cc:605
 msgid "Remote repositories disabled."
@@ -276,7 +276,7 @@ msgstr "Nuotolinės saugyklos uždraustos."
 #. translators: --no-remote
 #: src/Config.cc:609
 msgid "Ignore remote repositories."
-msgstr ""
+msgstr "Nepaisyti nuotolinių saugyklų."
 
 #. translators: --releasever
 #: src/Config.cc:616
@@ -1585,9 +1585,9 @@ msgstr "Priimama nepasirašyta rinkmena „%s“ iš saugyklos „%s“."
 
 #. translator: %1% is a file name
 #: src/callbacks/keyring.h:156
-#, fuzzy, boost-format
+#, boost-format
 msgid "File '%1%' is unsigned."
-msgstr "Rinkmena „%s“ nepasirašyta, tęsti?"
+msgstr "Rinkmena „%s“ nepasirašyta."
 
 #. translator: %1% is a file name, %2% a repositories name
 #: src/callbacks/keyring.h:159
@@ -2103,7 +2103,7 @@ msgstr ""
 
 #: src/commands/commandhelpformatter.h:110
 msgid "Arguments:"
-msgstr ""
+msgstr "Argumentai:"
 
 #: src/commands/commandhelpformatter.h:123 src/utils/flags/zyppflags.cc:627
 msgid "Command options:"
@@ -2122,15 +2122,14 @@ msgid "This command has no additional options."
 msgstr "Ši komanda neturi papildomų parinkčių."
 
 #: src/commands/commandhelpformatter.h:135
-#, fuzzy
 msgid "Legacy options:"
-msgstr "Sprendiklio parinktys:"
+msgstr "Senos parinktys:"
 
 #. translator: '-r             The same as -f.
 #: src/commands/commandhelpformatter.h:139
 #, boost-format
 msgid "The same as %1%."
-msgstr ""
+msgstr "Atitinka %1%"
 
 #: src/commands/commandhelpformatter.h:187
 msgid "Usage:"
@@ -2844,7 +2843,7 @@ msgstr "tik parsiųsti paketus, nediegti."
 #. translators: -i, --installed-only
 #: src/commands/optionsets.cc:202
 msgid "Show only installed packages."
-msgstr ""
+msgstr "Rodyti tik įdiegtus paketus"
 
 #. translators: -u, --not-installed-only
 #: src/commands/optionsets.cc:206
@@ -3930,7 +3929,7 @@ msgstr ""
 #: src/commands/search/search-packages-hinthack.cc:99
 #, boost-format
 msgid "Do you want to run '%1%' now?"
-msgstr ""
+msgstr "Ar norėtume dabar paleisti „%1%“?"
 
 #: src/commands/search/search-packages-hinthack.cc:115
 #, boost-format
@@ -4510,7 +4509,7 @@ msgstr ""
 
 #: src/commands/solveroptionset.cc:35 src/commands/solveroptionset.cc:58
 msgid "Solver options"
-msgstr ""
+msgstr "Sprendiklio parinktys"
 
 #: src/commands/solveroptionset.cc:37
 msgid "Install also recommended packages in addition to the required ones."
@@ -4542,7 +4541,7 @@ msgstr ""
 
 #: src/commands/solveroptionset.cc:83
 msgid "Expert options"
-msgstr ""
+msgstr "Parinktys patyrusiems"
 
 #: src/commands/solveroptionset.cc:86
 msgid "Whether to allow downgrading installed resolvables."
@@ -4872,7 +4871,7 @@ msgstr ""
 #. translators: command summary: targetos, tos
 #: src/commands/utils/purge-kernels.cc:28
 msgid "Remove old kernels."
-msgstr ""
+msgstr "Pašalinti senus branduolius."
 
 #. translators: command description
 #: src/commands/utils/purge-kernels.cc:30
@@ -4889,7 +4888,7 @@ msgstr ""
 #: src/commands/utils/purge-kernels.cc:52
 #, boost-format
 msgid "Configuration: %1%"
-msgstr ""
+msgstr "Konfigūravimas: %1%"
 
 #: src/commands/utils/purge-kernels.cc:53
 #, boost-format
@@ -5482,19 +5481,17 @@ msgstr "Taip"
 #. translator: usually followed by a ' ' and some explanatory text
 #: src/output/Out.h:37
 msgid "Note:"
-msgstr ""
+msgstr "Pastaba:"
 
 #. translator: usually followed by a ' ' and some explanatory text
 #: src/output/Out.h:39
-#, fuzzy
 msgid "Warning:"
-msgstr "Įspėjimas: "
+msgstr "Įspėjimas:"
 
 #. translator: usually followed by a ' ' and some explanatory text
 #: src/output/Out.h:41
-#, fuzzy
 msgid "Error:"
-msgstr "Klaida"
+msgstr "Klaida:"
 
 #: src/output/Out.h:43
 msgid "Continue?"
@@ -5530,9 +5527,8 @@ msgstr "paleidžiama"
 
 #. Translator: download progress bar result: "........[not found]"
 #: src/output/OutNormal.cc:330 src/output/OutNormal.cc:339
-#, fuzzy
 msgid "not found"
-msgstr "Nerasta"
+msgstr "nerasta"
 
 #: src/output/OutNormal.cc:417
 msgid "No help available for this prompt."
@@ -6160,11 +6156,11 @@ msgstr ""
 #: src/solve-commit.cc:163
 #, boost-format
 msgid "Choose solution %1%"
-msgstr ""
+msgstr "Pasirinkti %1% sprendimą"
 
 #: src/solve-commit.cc:165
 msgid "Skip problem and continue."
-msgstr ""
+msgstr "Praleisti problemą ir tęsti"
 
 #: src/solve-commit.cc:168
 msgid "Retry solving immediately."
@@ -6172,7 +6168,7 @@ msgstr ""
 
 #: src/solve-commit.cc:170
 msgid "Choose no solution and cancel."
-msgstr ""
+msgstr "Nesirinkti sprendimo ir atšaukti."
 
 #: src/solve-commit.cc:171
 msgid "Toggle show detailed conflict information."
