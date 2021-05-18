@@ -12,6 +12,8 @@
 #ifndef zypp_source_yum_RepomdFileReader_H
 #define zypp_source_yum_RepomdFileReader_H
 
+#include <set>
+
 #include <zypp/base/PtrTypes.h>
 #include <zypp/base/NonCopyable.h>
 #include <zypp/base/Function.h>
@@ -48,9 +50,18 @@ namespace zypp
     * \see RepomdFileReader::ProcessResource
     */
     RepomdFileReader( const Pathname & repomd_file, const ProcessResource & callback );
+    /** \overload Quick parsing keywords and keyhints. */
+    RepomdFileReader( const Pathname & repomd_file );
 
     /** DTOR */
     ~RepomdFileReader();
+
+  public:
+    /** repo keywords parsed on the fly */
+    const std::set<std::string> & keywords() const;
+
+    /** gpg key hits shipped in keywords (bsc#1184326) */
+    std::vector<std::pair<std::string,std::string>> keyhints() const;
 
   private:
     class Impl;

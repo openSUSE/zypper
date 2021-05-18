@@ -13,9 +13,11 @@
 
 #include <zypp/base/String.h>
 #include <zypp/base/Logger.h>
+#include <zypp/base/Regex.h>
 
 #include <zypp/Pathname.h>
 #include <zypp/Date.h>
+#include <zypp/Url.h>
 #include <zypp/CheckSum.h>
 #include <zypp/parser/xml/Reader.h>
 
@@ -56,6 +58,11 @@ namespace zypp
      */
     bool consumeNode( Reader & reader_r );
 
+
+    /** repo keywords parsed on the fly */
+    const std::set<std::string> & keywords() const
+    { return _keywords; }
+
   private:
     /** Retrieve a checksum node. */
     CheckSum getChecksum( Reader & reader_r )
@@ -75,6 +82,8 @@ namespace zypp
 
     /** Location of metadata file. */
     OnMediaLocation _location;
+
+    std::set<std::string> _keywords;	///< repo keywords parsed on the fly
   };
   ///////////////////////////////////////////////////////////////////////
 
@@ -149,7 +158,14 @@ namespace zypp
         return true;
       }
 
-      //! \todo xpath: /repomd/open-checksum (?)
+      // xpath: /tags/content
+      if ( reader_r->name() == "content" )
+      {
+	const auto & tag = reader_r.nodeText();
+	if ( tag.c_str() && *tag.c_str() )
+	  _keywords.insert( tag.asString() );	// remember keyword
+        return true;
+      }
     }
 
     else if ( reader_r->nodeType() == XML_READER_TYPE_END_ELEMENT )
@@ -180,9 +196,49 @@ namespace zypp
   : _pimpl( new Impl(repomd_file, callback) )
   {}
 
+  RepomdFileReader::RepomdFileReader( const Pathname & repomd_file )
+  : _pimpl( new Impl(repomd_file, ProcessResource()) )
+  {}
+
   RepomdFileReader::~RepomdFileReader()
   {}
 
+  const std::set<std::string> & RepomdFileReader::keywords() const
+  { return _pimpl->keywords(); }
+
+  std::vector<std::pair<std::string,std::string>> RepomdFileReader::keyhints() const
+  {
+    std::vector<std::pair<std::string,std::string>> ret;
+    for ( const std::string & tag : keywords() ) {
+      // Get keyhints on the fly:
+      // gpg-pubkey-39db7c82-5847eb1f.asc?fpr=22C07BA534178CD02EFE22AAB88B2FD43DBDC284
+      // Fingerprint is explicitely mentioned or id/fpr can be derived from the filename
+      if ( tag.compare( 0,10,"gpg-pubkey" ) != 0 )
+	continue;
+
+      static const str::regex rx( "^(gpg-pubkey([^?]*))(\\?fpr=([[:xdigit:]]{8,}))?$" );
+      str::smatch what;
+      if ( str::regex_match( tag.c_str(), what, rx ) ) {
+	std::string keyfile { what[1] };
+	std::string keyident;
+	if ( what.size(4) != std::string::npos ) {	// with fpr=
+	  keyident = what[4];
+	}
+	else {
+	  static const str::regex rx( /*gpg-pubkey*/"^-([[:xdigit:]]{8,})" );
+	  if ( str::regex_match( what[2], what, rx ) ) {
+	    keyident = what[1];
+	  }
+	  else {
+	    DBG << "Tag " << tag << " does not contain a keyident. ignore it." << endl;
+	    continue;
+	  }
+	}
+	ret.push_back( std::make_pair( std::move(keyfile), std::move(keyident) ) );
+      }
+    }
+    return ret;
+  }
 
     } // ns yum
   } // ns parser

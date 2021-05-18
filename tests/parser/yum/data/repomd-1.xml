@@ -1,5 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <repomd xmlns="http://linux.duke.edu/metadata/repo">
+  <revision>1620840613</revision>
+  <tags>
+    <content>pool</content>
+    <content>gpg-pubkey-39db7c82-5847eb1f.asc?fpr=FEAB502539D846DB2C0961CA70AF9E8139DB7C82</content>
+    <content>gpg-pubkey-307e3d54-5aaa90a5.asc?fpr=4E98E67519D98DC7362A</content>
+    <content>gpg-pubkey-65176565-59787af5.asc?fpr=637B32FF</content>
+    <content>gpg-pubkey-3dbdc284-is OK</content>
+    <content>gpg-pubkey-feab502539d846db2c0961ca70af9e8139db7c82-is OK as well</content>
+    <content>gpg-pubkey-536X4dd4-X is not a hexdigit</content>
+    <repo>obsproduct://build.opensuse.org/openSUSE:Leap:15.3/Leap/15.3/x86_64</repo>
+    <distro cpeid="cpe:/o:opensuse:leap:15.3">openSUSE Leap 15.3</distro>
+  </tags>
   <data type="patches">
     <location href="repodata/patches.xml"/>
     <checksum type="sha">63d86413540fbb2647e5b5de556d4e4b53f032d9</checksum>
