@@ -19,7 +19,7 @@
 #include <zypp/base/Function.h>
 #include <zypp/PathInfo.h>
 #include <zypp/CheckSum.h>
-#include <zypp/KeyContext.h>
+#include <zypp/KeyRingContexts.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -90,79 +90,39 @@ namespace zypp
    /**
     * \short Checks for the validity of a signature
     */
-   class SignatureFileChecker
+   class SignatureFileChecker: public keyring::VerifyFileContext
    {
-     public:
-       typedef SignatureCheckException ExceptionType;
+   public:
+     typedef SignatureCheckException ExceptionType;
 
-     public:
-      /**
-      * Constructor.
-      * \param signature Signature that validates the file
+   public:
+     /** Default Ctor for unsigned files.
+      *
+      * Use it when you don't have a signature and you want
+      * to check whether the user accepts an unsigned file.
       */
-      SignatureFileChecker( const Pathname &signature );
+     SignatureFileChecker();
 
-      /**
-      * Default Constructor.
-      * \short Signature for unsigned files
-      * Use it when you dont have a signature but you want
-      * to check the user to accept an unsigned file.
+     /** Ctor taking the detached signature. */
+     SignatureFileChecker( Pathname signature_r );
+
+     /** Add a public key to the list of known keys. */
+     void addPublicKey( const PublicKey & publickey_r );
+     /** \overload Convenience taking the public keys pathname. */
+     void addPublicKey( const Pathname & publickey_r );
+
+     /** Call \ref KeyRing::verifyFileSignatureWorkflow to verify the file.
+      *
+      * Keep in mind the the workflow may return \c true (\refr fileAccepted) due to user interaction
+      * or global defaults even if a signature was not actually sucessfully verified. Whether a
+      * signature was actually sucessfully verified can be determined by checking \ref fileValidated
+      * which is invokes IFF a signature for this file actually validated.
+      *
+      * \param file_r File to validate.
+      *
+      * \throws SignatureCheckException if validation fails
       */
-      SignatureFileChecker();
-
-      /**
-       * Set context for this checker.
-       *
-       * Use this method if you're not adding the key (with context) via
-       * one of the addPublicKey methods. The addPublicKey method overwrites
-       * the context.
-       */
-      void setKeyContext(const KeyContext & keycontext);
-
-      /** Return the current context */
-      const KeyContext & keyContext() const
-      { return _context; }
-
-      /** Return whether the last file passed to \ref operator() was accepted.
-       * If this is \ref false \ref operator() was not invoked or threw a
-       * \ref SignatureCheckException.
-       */
-      bool fileAccepted() const
-      { return _fileAccepted; }
-
-      /** Return whether the last file passed to \ref operator() was actually sucessfully verified.
-       * If this is \c false but \ref fileAccepted, the file was accepted due to user interaction or
-       * global settings, but the signature was not verified.
-       */
-      bool fileValidated() const
-      { return _fileValidated; }
-
-      /**
-       * add a public key to the list of known keys
-       */
-      void addPublicKey( const PublicKey & publickey, const KeyContext & keycontext = KeyContext());
-      /** \overload Convenience taking the public keys pathname. */
-      void addPublicKey( const Pathname & publickey, const KeyContext & keycontext = KeyContext());
-
-      /**
-       * Calls \ref KeyRing::verifyFileSignatureWorkflow to verify the file.
-       *
-       * Keep in mind the the workflow may return \c true (file accepted) due to user interaction
-       * or global defaults even if a signature was not actually sucessfully verified. Whether a
-       * signature was actually sucessfully verified can be determined by checking \ref fileValidated
-       * which is invokes IFF a signature for this file actually validated.
-       *
-       * \param file File to validate.fileValidated
-       *
-       * \throws SignatureCheckException if validation fails
-       */
-      void operator()( const Pathname &file ) const;
-
-     protected:
-      Pathname _signature;
-      KeyContext _context;
-      mutable DefaultIntegral<bool,false> _fileAccepted;
-      mutable DefaultIntegral<bool,false> _fileValidated;
+     void operator()( const Pathname & file_r ) const;
    };
 
    /**

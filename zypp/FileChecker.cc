@@ -109,39 +109,31 @@ namespace zypp
   { _checkers.push_back(checker); }
 
 
-  SignatureFileChecker::SignatureFileChecker( const Pathname & signature )
-       : _signature(signature)
-  {}
-
   SignatureFileChecker::SignatureFileChecker()
   {}
 
-  void SignatureFileChecker::setKeyContext(const KeyContext & keycontext)
-  { _context = keycontext; }
+  SignatureFileChecker::SignatureFileChecker( Pathname signature_r )
+  { signature( std::move(signature_r) ); }
 
-  void SignatureFileChecker::addPublicKey( const Pathname & publickey, const KeyContext & keycontext )
-  { addPublicKey( PublicKey(publickey), keycontext ); }
+  void SignatureFileChecker::addPublicKey( const Pathname & publickey_r )
+  { addPublicKey( PublicKey(publickey_r) ); }
 
-  void SignatureFileChecker::addPublicKey( const PublicKey & publickey, const KeyContext & keycontext )
+  void SignatureFileChecker::addPublicKey( const PublicKey & publickey_r )
+  { getZYpp()->keyRing()->importKey( publickey_r, false ); }
+
+  void SignatureFileChecker::operator()( const Pathname & file_r ) const
   {
-    getZYpp()->keyRing()->importKey(publickey, false);
-    _context = keycontext;
+    const Pathname & sig { signature() };
+    if ( not ( sig.empty() || PathInfo(sig).isExist() ) )
+      ZYPP_THROW( ExceptionType("Signature " + sig.asString() + " not found.") );
+
+    MIL << "Checking " << file_r << " file validity using digital signature.." << endl;
+    // const_cast because the workflow is allowed to store result values here
+    SignatureFileChecker & self { const_cast<SignatureFileChecker&>(*this) };
+    self.file( file_r );
+    if ( not getZYpp()->keyRing()->verifyFileSignatureWorkflow( self ) )
+      ZYPP_THROW( ExceptionType( "Signature verification failed for "  + file_r.basename() ) );
   }
-
-  void SignatureFileChecker::operator()(const Pathname &file ) const
-  {
-    if ( (! PathInfo(_signature).isExist()) && (!_signature.empty()) )
-    {
-      ZYPP_THROW( ExceptionType("Signature " + _signature.asString() + " not found.") );
-    }
-
-    MIL << "checking " << file << " file validity using digital signature.." << endl;
-    _fileValidated = false;
-    _fileAccepted = getZYpp()->keyRing()->verifyFileSignatureWorkflow( file, file.basename(), _signature, _fileValidated, _context );
-
-    if ( !_fileAccepted )
-      ZYPP_THROW( ExceptionType( "Signature verification failed for "  + file.basename() ) );
- }
 
   /******************************************************************
   **

@@ -8,6 +8,9 @@ namespace zypp {
   struct KeyContext
   {
   public:
+    KeyContext(){}
+    KeyContext( const RepoInfo & repoinfo ) : _repoInfo( repoinfo ) {}
+
     /** Is the context unknown? */
     bool empty() const { return _repoInfo.alias().empty(); }
     
