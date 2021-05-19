@@ -24,7 +24,7 @@
 #include <zypp/base/PtrTypes.h>
 #include <zypp/Locale.h>
 #include <zypp/PublicKey.h>
-#include <zypp/KeyContext.h>
+#include <zypp/KeyRingContexts.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -315,6 +315,10 @@ namespace zypp
     bool verifyFileSignatureWorkflow( const Pathname &file, const std::string &filedesc, const Pathname &signature, bool & sigValid_r, const KeyContext &keycontext = KeyContext());
     /** \overload legacy version without 'bool & sigValid_r' */
     bool verifyFileSignatureWorkflow( const Pathname &file, const std::string filedesc, const Pathname &signature, const KeyContext &keycontext = KeyContext());
+    /** \overload using a \ref keyring::VerifyFileContext to pass and return data.
+     * The preferred API. Returns keyring::VerifyFileContext::fileAccepted.
+     */
+    bool verifyFileSignatureWorkflow( keyring::VerifyFileContext & context_r );
 
     /**
      * Verifies a file against a signature, with no user interaction

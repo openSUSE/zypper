@@ -217,7 +217,13 @@ namespace zypp
     PublicKey exportTrustedPublicKey( const PublicKeyData & keyData )
     { return exportKey( keyData, trustedKeyRing() ); }
 
-    bool verifyFileSignatureWorkflow( const Pathname & file, const std::string & filedesc, const Pathname & signature, bool & sigValid_r, const KeyContext & keycontext = KeyContext());
+    bool verifyFileSignatureWorkflow( keyring::VerifyFileContext & context_r )
+    {
+      // Assert result and return value are in sync
+      context_r.fileAccepted( _verifyFileSignatureWorkflow( context_r ) );
+      return context_r.fileAccepted();
+    }
+    bool _verifyFileSignatureWorkflow( keyring::VerifyFileContext & context_r );
 
     bool verifyFileSignature( const Pathname & file, const Pathname & signature )
     { return verifyFile( file, signature, generalKeyRing() ); }
@@ -402,9 +408,13 @@ namespace zypp
     return tmpFile;
   }
 
-  bool KeyRing::Impl::verifyFileSignatureWorkflow( const Pathname & file, const std::string & filedesc, const Pathname & signature, bool & sigValid_r, const KeyContext & context )
+  bool KeyRing::Impl::_verifyFileSignatureWorkflow( keyring::VerifyFileContext & context_r )
   {
-    sigValid_r = false;	// set true if signature is actually successfully validated!
+    context_r.resetResults();
+    const Pathname & file        { context_r.file() };
+    const Pathname & signature   { context_r.signature() };
+    const std::string & filedesc { context_r.shortFile() };
+    const KeyContext & context   { context_r.keyContext() };
 
     callback::SendReport<KeyRingReport> report;
     MIL << "Going to verify signature for " << filedesc << " ( " << file << " ) with " << signature << endl;
@@ -418,8 +428,8 @@ namespace zypp
     }
 
     // get the id of the signature (it might be a subkey id!)
-    std::string id = readSignatureKeyId( signature );
-
+    context_r.signatureId( readSignatureKeyId( signature ) );
+    const std::string & id = context_r.signatureId();
     PublicKeyData foundKey;
     Pathname whichKeyring;
 
@@ -501,10 +511,12 @@ namespace zypp
 
     if ( foundKey ) {
       // it exists, is trusted, does it validate?
+      context_r.signatureIdTrusted( whichKeyring == trustedKeyRing() );
       report->infoVerify( filedesc, foundKey, context );
       if ( verifyFile( file, signature, whichKeyring ) )
       {
-        return (sigValid_r=true);	// signature is actually successfully validated!
+	context_r.fileValidated( true );
+        return context_r.fileValidated();	// signature is actually successfully validated!
       }
       else
       {
@@ -673,10 +685,27 @@ namespace zypp
   { return _pimpl->trustedPublicKeyExists( id_r ); }
 
   bool KeyRing::verifyFileSignatureWorkflow( const Pathname & file, const std::string & filedesc, const Pathname & signature, bool & sigValid_r, const KeyContext & keycontext )
-  { return _pimpl->verifyFileSignatureWorkflow( file, filedesc, signature, sigValid_r, keycontext ); }
+  {
+    sigValid_r = false;	// just in case....
+    keyring::VerifyFileContext context( file, signature );
+    context.shortFile( filedesc );
+    context.keyContext( keycontext );
+    verifyFileSignatureWorkflow( context );
+    sigValid_r = context.fileValidated();
+    return context.fileAccepted();
+  }
 
   bool KeyRing::verifyFileSignatureWorkflow( const Pathname & file, const std::string filedesc, const Pathname & signature, const KeyContext & keycontext )
-  { bool unused; return _pimpl->verifyFileSignatureWorkflow( file, filedesc, signature, unused, keycontext ); }
+  {
+    keyring::VerifyFileContext context( file, signature );
+    context.shortFile( filedesc );
+    context.keyContext( keycontext );
+    verifyFileSignatureWorkflow( context );
+    return context.fileAccepted();
+  }
+
+  bool KeyRing::verifyFileSignatureWorkflow( keyring::VerifyFileContext & context_r )
+  { return _pimpl->verifyFileSignatureWorkflow( context_r ); }
 
   bool KeyRing::verifyFileSignature( const Pathname & file, const Pathname & signature )
   { return _pimpl->verifyFileSignature( file, signature ); }

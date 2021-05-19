@@ -41,6 +41,7 @@ SET( zypp_SRCS
   InstanceId.cc
   KeyManager.cc
   KeyRing.cc
+  KeyRingContexts.cc
   Locks.cc
   MediaSetAccess.cc
   OnMediaLocation.cc
@@ -137,6 +138,7 @@ SET( zypp_HEADERS
   KeyContext.h
   KeyManager.h
   KeyRing.h
+  KeyRingContexts.h
   KVMap.h
   LanguageCode.h
   Locale.h
