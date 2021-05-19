@@ -102,7 +102,7 @@ namespace zypp
       return ret;
     }
 
-    std::string keyAlgoName( const gpgme_subkey_t & key_r )
+    inline std::string keyAlgoName( const gpgme_subkey_t & key_r )
     {
       std::string ret;
       if ( const char * n = ::gpgme_pubkey_algo_name( key_r->pubkey_algo ) )
@@ -110,6 +110,13 @@ namespace zypp
       else
 	ret = "?";
       return ret;
+    }
+
+    inline bool shorterIsSuffixCI( const std::string & lhs, const std::string & rhs )
+    {
+      if ( lhs.size() >= rhs.size() )
+	return str::endsWithCI( lhs, rhs );
+      return str::endsWithCI( rhs, lhs );
     }
   } //namespace
   ///////////////////////////////////////////////////////////////////
@@ -219,14 +226,12 @@ namespace zypp
     Impl * clone() const;
   };
 
-  bool PublicKeyData::Impl::hasSubkeyId(const std::string &id_r) const
+  bool PublicKeyData::Impl::hasSubkeyId( const std::string &id_r) const
   {
     bool ret = false;
-    for ( const PublicSubkeyData & sub : _subkeys )
-    {
-      if ( sub.id() == id_r )
-      {
-        ret = true;
+    for ( const PublicSubkeyData & sub : _subkeys ) {
+      if ( shorterIsSuffixCI( sub.id(), id_r ) ) {
+	ret = true;
         break;
       }
     }
@@ -346,6 +351,9 @@ namespace zypp
 
   std::string PublicKeyData::asString() const
   {
+    if ( not *this )
+      return "[NO_KEY]";
+
     str::Str str;
     str << "[" << _pimpl->_id << "-" << gpgPubkeyRelease();
     for ( auto && sub : _pimpl->_subkeys )
@@ -361,9 +369,13 @@ namespace zypp
 
   bool PublicKeyData::providesKey( const std::string & id_r ) const
   {
-    if ( id_r.size() == 8 )	// as a convenience allow to test the 8byte short ID rpm uses as gpg-pubkey version
-      return str::endsWithCI( _pimpl->_id, id_r );
-    return( id_r == _pimpl->_id || _pimpl->hasSubkeyId( id_r ) );
+    if ( not isSafeKeyId( id_r ) )
+      return( id_r.size() == 8 && str::endsWithCI( _pimpl->_id, id_r ) );
+
+    if ( str::endsWithCI( _pimpl->_fingerprint, id_r ) )
+      return true;
+
+    return _pimpl->hasSubkeyId( id_r );
   }
 
   PublicKeyData::AsciiArt PublicKeyData::asciiArt() const
@@ -520,6 +532,9 @@ namespace zypp
   PublicKey::~PublicKey()
   {}
 
+  PublicKey PublicKey::noThrow( const Pathname & keyFile_r )
+  try { return PublicKey( keyFile_r ); } catch(...) { return PublicKey(); }
+
   const PublicKeyData & PublicKey::keyData() const
   { return _pimpl->keyData(); }
 
@@ -528,6 +543,17 @@ namespace zypp
 
   const std::list<PublicKeyData> & PublicKey::hiddenKeys() const
   { return _pimpl->hiddenKeys(); }
+
+  bool PublicKey::fileProvidesKey( const std::string & id_r ) const
+  {
+    if ( providesKey( id_r ) )
+      return true;
+    for ( const auto & keydata : hiddenKeys() ) {
+      if ( keydata.providesKey( id_r ) )
+	return true;
+    }
+    return false;
+  }
 
   std::string PublicKey::id() const
   { return keyData().id(); }
@@ -572,7 +598,7 @@ namespace zypp
   { return rhs.keyData() == keyData(); }
 
   bool PublicKey::operator==( const std::string & sid ) const
-  { return sid == id(); }
+  { return ( isSafeKeyId( sid ) || sid.size() == 8 ) && str::endsWithCI( fingerprint(), sid ); }
 
   std::ostream & dumpOn( std::ostream & str, const PublicKey & obj )
   { return dumpOn( str, obj.keyData() ); }

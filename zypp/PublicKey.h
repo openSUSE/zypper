@@ -220,8 +220,16 @@ namespace zypp
     /** Iterate any subkeys. */
     Iterable<SubkeyIterator> subkeys() const;
 
-    /** Whether \a id_r is the \ref id of the primary key or of a subkey. */
+    /** Whether \a id_r is the \ref id or \ref fingerprint of the primary key or of a subkey.
+     * As a convenience also allows to test the 8byte short ID e.g. rpm uses as version.
+     */
     bool providesKey( const std::string & id_r ) const;
+
+    /** Whether this is a long id (64bit/16byte) or even better a fingerprint.
+     * A short Id (32bit/8byte) is not considered to be a safe identifier for a key.
+     */
+    static bool isSafeKeyId( const std::string & id_r )
+    { return id_r.size() >= 16; }
 
   public:
     /** Random art fingerprint visualization type (\ref base::DrunkenBishop). */
@@ -302,6 +310,9 @@ namespace zypp
 
     ~PublicKey();
 
+    /** Static ctor returning an empty PublicKey rather than throwing. */
+    static PublicKey noThrow( const Pathname & keyFile_r );
+
   public:
     /** The public keys data (\see \ref PublicKeyData).*/
     const PublicKeyData & keyData() const;
@@ -337,6 +348,9 @@ namespace zypp
     bool providesKey( const std::string & id_r ) const	///!< \see \ref PublicKeyData
     { return keyData().providesKey( id_r ); }
 
+    static bool isSafeKeyId( const std::string & id_r )	///!< \see \ref PublicKeyData
+    { return PublicKeyData::isSafeKeyId(id_r); }
+
   public:
     typedef PublicKeyData::AsciiArt AsciiArt;	///!< \see \ref PublicKeyData
 
@@ -344,15 +358,24 @@ namespace zypp
     { return keyData().asciiArt(); }
 
   public:
-    /** File containig the ASCII armored key. */
+    /** File containing the ASCII armored key. */
     Pathname path() const;
 
-    /** Additional keys data in case the ASCII armored blob containes multiple keys. */
+    /** Additional keys data in case the ASCII armored blob contains multiple keys. */
     const std::list<PublicKeyData> & hiddenKeys() const;
+
+    /** Extends \ref providesKey to look at the hidden keys too.
+     * Those 'hidden' keys become visible when the file is imported into a keyring.
+     */
+    bool fileProvidesKey( const std::string & id_r ) const;
 
   public:
     bool operator==( const PublicKey & rhs ) const;
+    bool operator!=( const PublicKey & rhs ) const
+    { return not operator==( rhs ); }
     bool operator==( const std::string & sid ) const;
+    bool operator!=( const std::string & sid ) const
+    { return not operator==( sid ); }
 
   private:
     friend class KeyRing;
