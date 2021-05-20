@@ -273,6 +273,11 @@ namespace zypp
     std::list<PublicKeyData> trustedPublicKeyData();
 
     /**
+     * Get a public key's data in the keyring (key data only)
+     */
+    PublicKeyData publicKeyData( const std::string &id );
+
+    /**
      * Get a trusted public key's data in the keyring (key data only)
      */
     PublicKeyData trustedPublicKeyData( const std::string &id );
