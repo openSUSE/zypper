@@ -41,19 +41,24 @@ namespace zypp
     // OnScreenDebug messages colored to stderr
     struct Osd
     {
-      Osd( int = 0 );
+      Osd( std::ostream &, int = 0 );
       ~Osd();
 
       template<class Tp>
       Osd & operator<<( Tp && val )
-      { _str << std::forward<Tp>(val); return *this; }
+      {
+	_strout << std::forward<Tp>(val);
+	_strlog << std::forward<Tp>(val);
+	return *this;
+      }
 
       Osd & operator<<( std::ostream& (*iomanip)( std::ostream& ) );
 
     private:
-      std::ostream & _str;
+      std::ostream & _strout;
+      std::ostream & _strlog;
     };
-#define OSD ::zypp::debug::Osd()
+#define OSD ::zypp::debug::Osd(L_USR("OSD"))
   }
 }
 #endif // ZYPP_NDEBUG

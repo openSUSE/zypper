@@ -62,25 +62,30 @@ namespace zypp
     {
       const std::string & m { tracestr( '>',_depth++, _file,_fnc,_line ) };
       USR << m << endl;
-      Osd(1) << m << endl;
+      Osd(L_USR("TRACE"),1) << m << endl;
     }
 
     TraceLeave::~TraceLeave()
     {
       const std::string & m { tracestr( '<',--_depth, _file,_fnc,_line ) };
       USR << m << endl;
-      Osd(1) << m << endl;
+      Osd(L_USR("TRACE"),1) << m << endl;
     }
 
-    Osd::Osd( int i )
-    : _str { std::cerr }
-    { _str << (i?WH:YE); }
+    Osd::Osd( std::ostream & str, int i )
+    : _strout { std::cerr }
+    , _strlog { str }
+    { _strout << (i?WH:YE); }
 
     Osd::~Osd()
-    { _str << OO; }
+    { _strout << OO; }
 
     Osd & Osd::operator<<( std::ostream& (*iomanip)( std::ostream& ) )
-    { _str << iomanip; return *this; }
+    {
+      _strout << iomanip;
+      _strlog << iomanip;
+      return *this;
+    }
 }
 #endif // ZYPP_NDEBUG
 
