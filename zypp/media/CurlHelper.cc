@@ -61,7 +61,7 @@ int log_curl(CURL *curl, curl_infotype info,
 
 size_t log_redirects_curl( char *ptr, size_t size, size_t nmemb, void *userdata)
 {
-  // INT << "got header: " << string(ptr, ptr + size*nmemb) << endl;
+  //INT << "got header: " << std::string(ptr, ptr + size*nmemb) << endl;
 
   char * lstart = ptr, * lend = ptr;
   size_t pos = 0;
@@ -72,15 +72,7 @@ size_t log_redirects_curl( char *ptr, size_t size, size_t nmemb, void *userdata)
     for (lstart = lend; *lend != '\n' && pos < max; ++lend, ++pos);
 
     // look for "Location"
-    if ( lstart[0] == 'L'
-         && lstart[1] == 'o'
-         && lstart[2] == 'c'
-         && lstart[3] == 'a'
-         && lstart[4] == 't'
-         && lstart[5] == 'i'
-         && lstart[6] == 'o'
-         && lstart[7] == 'n'
-         && lstart[8] == ':' )
+    if ( strncasecmp( lstart, "Location:", 9 ) == 0 )
     {
       std::string line { lstart, *(lend-1)=='\r' ? lend-1 : lend };
       DBG << "redirecting to " << line << std::endl;
