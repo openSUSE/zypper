@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: zypper.fr\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-04-30 18:12+0200\n"
-"PO-Revision-Date: 2021-05-16 22:59+0000\n"
+"PO-Revision-Date: 2021-05-23 10:59+0000\n"
 "Last-Translator: Lucie Charrier <c.chalu@free.fr>\n"
 "Language-Team: French <https://l10n.opensuse.org/projects/zypper/master/fr/>"
 "\n"
@@ -2329,7 +2329,7 @@ msgid ""
 "rollback. Unlike --force it will not enforce a reinstall."
 msgstr ""
 "Permettre de remplacer un élément par un autre plus ancien. Pratique si vous "
-"voulez revenir en arrière. Contrairement à --force,  il ne forcera pas la "
+"voulez revenir en arrière. Contrairement à --force, il ne forcera pas la "
 "réinstallation."
 
 #: src/commands/installremove.cc:193
@@ -4809,9 +4809,10 @@ msgid ""
 "Using zypper global-options together with subcommands, as well as\n"
 "executing subcommands in '%1%' is currently not supported.\n"
 msgstr ""
-"L'usage combiné des options globales de zypper et des sous-commandes\n"
-"ainsi que l'exécution des sous-commandes dans '%1%', ne sont actuellement\n"
-"pas supportés.\n"
+"L'usage combiné des options globales de zypper et des sous-commandes, ainsi "
+"que \n"
+"l'exécution des sous-commandes dans '%1%', ne sont actuellement pas "
+"supportés.\n"
 
 #. translators: headline of an enumeration; %1% is a directory name
 #: src/commands/subcommand.cc:466
@@ -5879,7 +5880,7 @@ msgstr "Dépôt désactivé '%s' ignoré"
 #: src/repos.cc:787
 #, c-format, boost-format
 msgid "Global option '%s' can be used to temporarily enable repositories."
-msgstr "L'option globale  '%s' permet d'activer temporairement des dépôts."
+msgstr "L'option globale '%s' permet d'activer temporairement des dépôts."
 
 #: src/repos.cc:803 src/repos.cc:809
 #, c-format, boost-format
@@ -6228,7 +6229,7 @@ msgstr "Problème avec le fichier RPM spécifié '%s'. Il va être ignoré."
 #, c-format, boost-format
 msgid "Problem reading the RPM header of %s. Is it an RPM file?"
 msgstr ""
-"Problème lors de la lecture de l'en-tête RPM de  %s. Est-ce bien un fichier "
+"Problème lors de la lecture de l'en-tête RPM de %s. Est-ce bien un fichier "
 "RPM ?"
 
 #: src/repos.cc:1926
