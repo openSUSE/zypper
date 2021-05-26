@@ -129,6 +129,21 @@ namespace zypp
      /** \relates reportNonImportedKeys generic reports UserData::type */
      constexpr static const char *KEYS_NOT_IMPORTED_REPORT = "KeyRingReport/KeysNotImported";
 
+
+     /**
+      * Notify that a repository auto imported a new package signing key.
+      *
+      * To auto import new package signing keys, the repositories metadata must be
+      * signed by an already trusted key.
+      *
+      * The UserData object will have the following fields:
+      * UserData::type		\ref REPORT_AUTO_IMPORT_KEY
+      * "PublicKeyData"		The imported PublicKeyData
+      * "KeyContext"		The KeyContext
+      */
+     void reportAutoImportKey( const PublicKeyData &key_r, const KeyContext &keycontext_r );
+     /** \relates reportAutoImportKey generic reports UserData::type */
+     constexpr static const char *REPORT_AUTO_IMPORT_KEY = "KeyRingReport/reportAutoImportKey";
   };
 
   struct KeyRingSignals : public callback::ReportBase

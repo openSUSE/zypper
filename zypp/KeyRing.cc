@@ -98,6 +98,14 @@ namespace zypp
     report(data);
   }
 
+  void KeyRingReport::reportAutoImportKey( const PublicKeyData &key_r, const KeyContext &keycontext_r )
+  {
+    UserData data { REPORT_AUTO_IMPORT_KEY };
+    data.set( "PublicKeyData", key_r );
+    data.set( "KeyContext", keycontext_r );
+    report( data );
+  }
+
   namespace
   {
     ///////////////////////////////////////////////////////////////////
@@ -371,7 +379,7 @@ namespace zypp
 	break;
       }
     }
-    MIL << (ret ? "Found" : "No") << " key [" << id << "] in keyring " << keyring << endl;
+    DBG << (ret ? "Found" : "No") << " key [" << id << "] in keyring " << keyring << endl;
     return ret;
   }
 
@@ -414,7 +422,7 @@ namespace zypp
     const Pathname & file        { context_r.file() };
     const Pathname & signature   { context_r.signature() };
     const std::string & filedesc { context_r.shortFile() };
-    const KeyContext & context   { context_r.keyContext() };
+    const KeyContext & keyContext   { context_r.keyContext() };
 
     callback::SendReport<KeyRingReport> report;
     MIL << "Going to verify signature for " << filedesc << " ( " << file << " ) with " << signature << endl;
@@ -422,7 +430,7 @@ namespace zypp
     // if signature does not exists, ask user if he wants to accept unsigned file.
     if( signature.empty() || (!PathInfo( signature ).isExist()) )
     {
-      bool res = report->askUserToAcceptUnsignedFile( filedesc, context );
+      bool res = report->askUserToAcceptUnsignedFile( filedesc, keyContext );
       MIL << "askUserToAcceptUnsignedFile: " << res << endl;
       return res;
     }
@@ -432,6 +440,29 @@ namespace zypp
     const std::string & id = context_r.signatureId();
     PublicKeyData foundKey;
     Pathname whichKeyring;
+
+    std::list<PublicKeyData> buddies;	// Could be imported IFF the file is validated by a trusted key
+    for ( const auto & sid : context_r.buddyKeys() ) {
+      if ( not PublicKeyData::isSafeKeyId( sid ) ) {
+	WAR << "buddy " << sid << ": key id is too short to safely identify a gpg key. Skipping it." << endl;
+	continue;
+      }
+      if ( trustedPublicKeyExists( sid ) ) {
+	MIL << "buddy " << sid << ": already in trusted key ring. Not needed." << endl;
+	continue;
+      }
+      auto pk = publicKeyExists( sid );
+      if ( not pk ) {
+	WAR << "buddy " << sid << ": not available in the public key ring. Skipping it." << endl;
+	continue;
+      }
+      if ( pk.providesKey(id) ) {
+	MIL << "buddy " << sid << ": is the signing key. Handled separately." << endl;
+	continue;
+      }
+      MIL << "buddy " << sid << ": candidate for auto import. Remeber it." << endl;
+      buddies.push_back( pk );
+    }
 
     if ( !id.empty() ) {
 
@@ -475,7 +506,7 @@ namespace zypp
           MIL << "Key [" << id << "] " << key.name() << " is not trusted" << endl;
 
           // ok the key is not trusted, ask the user to trust it or not
-          KeyRingReport::KeyTrust reply = report->askUserToAcceptKey( key, context );
+          KeyRingReport::KeyTrust reply = report->askUserToAcceptKey( key, keyContext );
           if ( reply == KeyRingReport::KEY_TRUST_TEMPORARILY ||
               reply == KeyRingReport::KEY_TRUST_AND_IMPORT )
           {
@@ -498,10 +529,10 @@ namespace zypp
             return false;
           }
         }
-        else if ( ! context.empty() )
+        else if ( ! keyContext.empty() )
         {
           // try to find the key in the repository info
-          if ( provideAndImportKeyFromRepositoryWorkflow( id, context.repoInfo() ) ) {
+          if ( provideAndImportKeyFromRepositoryWorkflow( id, keyContext.repoInfo() ) ) {
             whichKeyring = trustedKeyRing();
             foundKey = PublicKeyData( publicKeyExists( id, trustedKeyRing() ) );
           }
@@ -512,22 +543,30 @@ namespace zypp
     if ( foundKey ) {
       // it exists, is trusted, does it validate?
       context_r.signatureIdTrusted( whichKeyring == trustedKeyRing() );
-      report->infoVerify( filedesc, foundKey, context );
+      report->infoVerify( filedesc, foundKey, keyContext );
       if ( verifyFile( file, signature, whichKeyring ) )
       {
 	context_r.fileValidated( true );
+	if ( context_r.signatureIdTrusted() && not buddies.empty() ) {
+	  // Check for buddy keys to be imported...
+	  MIL << "Validated with trusted key: importing buddy list..." << endl;
+	  for ( const auto & kd : buddies ) {
+	    importKey( exportKey( kd, generalKeyRing() ), true );
+	    report->reportAutoImportKey( kd, keyContext );
+	  }
+	}
         return context_r.fileValidated();	// signature is actually successfully validated!
       }
       else
       {
-	bool res = report->askUserToAcceptVerificationFailed( filedesc, exportKey( foundKey, whichKeyring ), context );
+	bool res = report->askUserToAcceptVerificationFailed( filedesc, exportKey( foundKey, whichKeyring ), keyContext );
 	MIL << "askUserToAcceptVerificationFailed: " << res << endl;
         return res;
       }
     } else {
       // signed with an unknown key...
       MIL << "File [" << file << "] ( " << filedesc << " ) signed with unknown key [" << id << "]" << endl;
-      bool res = report->askUserToAcceptUnknownKey( filedesc, id, context );
+      bool res = report->askUserToAcceptUnknownKey( filedesc, id, keyContext );
       MIL << "askUserToAcceptUnknownKey: " << res << endl;
       return res;
     }
