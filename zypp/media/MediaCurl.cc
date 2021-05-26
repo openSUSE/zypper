@@ -346,7 +346,10 @@ void MediaCurl::setupEasy()
   {
 #if CURLVERSION_AT_LEAST(7,19,4)
     // restrict following of redirections from https to https only
-    SET_OPTION( CURLOPT_REDIR_PROTOCOLS, CURLPROTO_HTTPS );
+    if ( _url.getHost() == "download.opensuse.org" )
+      SET_OPTION( CURLOPT_REDIR_PROTOCOLS, CURLPROTO_HTTP | CURLPROTO_HTTPS );
+    else
+      SET_OPTION( CURLOPT_REDIR_PROTOCOLS, CURLPROTO_HTTPS );
 #endif
 
     if( _settings.verifyPeerEnabled() ||

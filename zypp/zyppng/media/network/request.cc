@@ -166,7 +166,10 @@ namespace zyppng {
       {
 #if CURLVERSION_AT_LEAST(7,19,4)
         // restrict following of redirections from https to https only
-        setCurlOption( CURLOPT_REDIR_PROTOCOLS, CURLPROTO_HTTPS );
+	if ( _url.getHost() == "download.opensuse.org" )
+	  setCurlOption( CURLOPT_REDIR_PROTOCOLS, CURLPROTO_HTTP | CURLPROTO_HTTPS );
+	else
+	  setCurlOption( CURLOPT_REDIR_PROTOCOLS, CURLPROTO_HTTPS );
 #endif
 
 #if CURLVERSION_AT_LEAST(7,60,0)	// SLE15+
