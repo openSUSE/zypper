@@ -8,64 +8,66 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-04-30 18:12+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2021-05-27 13:59+0000\n"
+"Last-Translator: Oshan Wisumperuma <warunaoshan@gmail.com>\n"
+"Language-Team: Sinhala <https://l10n.opensuse.org/projects/zypper/master/si/>"
+"\n"
 "Language: si\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 4.6.2\n"
 
 #: src/Command.cc:93
 msgid "Invalid command"
-msgstr ""
+msgstr "අවලංගු විධානයක්"
 
 #: src/Command.cc:111
 msgid "Repository Management:"
-msgstr ""
+msgstr "නිධිය මෙහෙයුම්:"
 
 #: src/Command.cc:119
 msgid "Service Management:"
-msgstr ""
+msgstr "සේවා මෙහෙයුම්:"
 
 #: src/Command.cc:125
 msgid "Software Management:"
-msgstr ""
+msgstr "මෘදුකාංග මෙහෙයුම්:"
 
 #: src/Command.cc:131
 msgid "Update Management:"
-msgstr ""
+msgstr "යාවත්කාලීන කිරීම් මෙහෙයුම්:"
 
 #: src/Command.cc:138
 msgid "Querying:"
-msgstr ""
+msgstr "විමසුම:"
 
 #: src/Command.cc:149
 msgid "Package Locks:"
-msgstr ""
+msgstr "සංචිත අගුල්:"
 
 #: src/Command.cc:154
 msgid "Locale Management:"
-msgstr ""
+msgstr "පෙදෙසිය මෙහෙයුම්:"
 
 #: src/Command.cc:158
 msgid "Other Commands:"
-msgstr ""
+msgstr "අනෙක් විධාන:"
 
 #: src/Command.cc:167
 msgid "Subcommands:"
-msgstr ""
+msgstr "උපවිධාන:"
 
 #: src/Command.cc:288
 #, c-format, boost-format
 msgid "Unknown command '%s'"
-msgstr ""
+msgstr "අඥාත විධාන '%s'"
 
 #: src/Config.cc:53
 #, c-format, boost-format
 msgid "Invalid table style %d."
-msgstr ""
+msgstr "අවලංගු වගු සැකසුම් %d."
 
 #: src/Config.cc:54
 #, c-format, boost-format
