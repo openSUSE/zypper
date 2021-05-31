@@ -21,7 +21,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-04-30 18:12+0200\n"
-"PO-Revision-Date: 2021-01-13 19:38+0000\n"
+"PO-Revision-Date: 2021-05-31 22:59+0000\n"
 "Last-Translator: Aleš Kastner <alkas@volny.cz>\n"
 "Language-Team: Czech <https://l10n.opensuse.org/projects/zypper/master/cs/>\n"
 "Language: cs\n"
@@ -29,7 +29,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Weblate 3.6.1\n"
+"X-Generator: Weblate 4.6.2\n"
 
 #: src/Command.cc:93
 msgid "Invalid command"
@@ -2506,7 +2506,7 @@ msgstr "Neodstraňovat příslušné balíčky pro danou(-é) lokalizaci(-e)."
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
 #: src/commands/locks/add.cc:29
 msgid "addlock (al) [OPTIONS] <LOCKSPEC>..."
-msgstr ""
+msgstr "addlock (al) [VOLBY] <SPECZÁMEK>..."
 
 #. translators: command summary
 #: src/commands/locks/add.cc:31 src/commands/locks/add.cc:34
@@ -2520,6 +2520,10 @@ msgid ""
 "have their KIND: string prepended (e.g. 'patch:foo') or use the commands --"
 "type option."
 msgstr ""
+"SPECZÁMEK je tvořen názvem '[DRUH:] NÁZEV [OP EDICE]', kde NÁZEV může být "
+"také vzor GLOB používající zástupné znaky * a ?. Typy ne-balíček mohou mít "
+"svůj řetězec DRUH: předřazený (např. 'patch: foo') nebo v příkazech použijte "
+"volbu --type."
 
 #: src/commands/locks/add.cc:36
 msgid ""
@@ -2527,6 +2531,9 @@ msgid ""
 "optionally restrict the lock to match a specific edition or edition range "
 "using =, <, <=, >, >= or != followed an EDITION."
 msgstr ""
+"Základní formulář zamkne všechna vydání odpovídajících položek. Můžete "
+"volitelně omezit zámek tak, aby odpovídal konkrétní edici nebo rozsahu edic "
+"pomocí relací =, <, <=, >, >= nebo != následovaných slovem EDITION."
 
 #: src/commands/locks/add.cc:46
 msgid "Restrict the lock to the specified repository."
@@ -2713,6 +2720,8 @@ msgid ""
 "This is the recommended way for scripts to test whether a system reboot is "
 "suggested."
 msgstr ""
+"To je doporučený způsob, jak ve skriptech testovat, zda je navržen restart "
+"systému."
 
 #: src/commands/needs-rebooting.cc:38
 msgid ""
