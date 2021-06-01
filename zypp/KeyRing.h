@@ -354,6 +354,10 @@ namespace zypp
     /** Dtor */
     ~KeyRing();
 
+  public:
+    /** The general keyring may be populated with known keys stored on the system. */
+    void allowPreload( bool yesno_r );
+
   private:
     /** Pointer to implementation */
     RW_pointer<Impl> _pimpl;

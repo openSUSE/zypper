@@ -20,6 +20,7 @@ static TestSetup test( TestSetup::initLater );
 struct TestInit {
   TestInit() {
     test = TestSetup( Arch_x86_64, TSO_REPO_DEFAULT_GPG );
+    getZYpp()->keyRing()->allowPreload( false );
   }
   ~TestInit() { test.reset(); }
 };

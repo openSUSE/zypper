@@ -71,6 +71,7 @@ namespace zypp
       ZConfig::instance().about( MIL );
       MIL << "Initializing keyring..." << std::endl;
       _keyring = new KeyRing(tmpPath());
+      _keyring->allowPreload( true );
     }
 
     ///////////////////////////////////////////////////////////////////

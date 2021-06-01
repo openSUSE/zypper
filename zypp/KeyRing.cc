@@ -283,6 +283,9 @@ namespace zypp
 
     bool provideAndImportKeyFromRepositoryWorkflow (const std::string &id_r , const RepoInfo &info_r );
 
+    void allowPreload( bool yesno_r )
+    { _allowPreload = yesno_r; }
+
   private:
     /** Impl helper providing on demand a KeyManagerCtx to manip a cached keyring. */
     CachedPublicKeyData::Manip keyRingManip( const Pathname & keyring )
@@ -319,7 +322,7 @@ namespace zypp
     filesystem::TmpDir _trusted_tmp_dir;
     filesystem::TmpDir _general_tmp_dir;
     Pathname _base_dir;
-    bool _preloaded = false;	//< General keyring may be preloaded with keys cached on the system,
+    bool _allowPreload = false;	//< General keyring may be preloaded with keys cached on the system.
 
   private:
     /** Functor returning the keyrings data (cached).
@@ -415,8 +418,8 @@ namespace zypp
 
   PublicKeyData KeyRing::Impl::publicKeyExists( const std::string & id, const Pathname & keyring )
   {
-    if ( not _preloaded && keyring == generalKeyRing() ) {
-      _preloaded = true;
+    if ( _allowPreload && keyring == generalKeyRing() ) {
+      _allowPreload = false;
       preloadCachedKeys();
     }
 
@@ -795,6 +798,9 @@ namespace zypp
 
   KeyRing::~KeyRing()
   {}
+
+  void KeyRing::allowPreload( bool yesno_r )
+  { _pimpl->allowPreload( yesno_r ); }
 
 
   void KeyRing::importKey( const PublicKey & key, bool trusted )
