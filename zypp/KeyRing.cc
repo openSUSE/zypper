@@ -11,6 +11,7 @@
 */
 #include <iostream>
 #include <fstream>
+#include <optional>
 #include <sys/file.h>
 #include <cstdio>
 #include <unistd.h>
@@ -123,6 +124,40 @@ namespace zypp
       void setDirty( const Pathname & keyring_r )
       { _cacheMap[keyring_r].setDirty(); }
 
+      ///////////////////////////////////////////////////////////////////
+      /// \brief Helper providing on demand a KeyManagerCtx to manip the cached keyring.
+      ///
+      /// The 1st call to \ref keyManagerCtx creates the \ref KeyManagerCtx. Returning
+      /// the context tags the cached data as dirty. Should be used to import/delete keys
+      /// in a cache keyring.
+      struct Manip {
+	NON_COPYABLE_BUT_MOVE( Manip );
+	Manip( CachedPublicKeyData & cache_r, Pathname keyring_r )
+	: _cache { cache_r }
+	, _keyring { std::move(keyring_r) }
+	{}
+
+	KeyManagerCtx & keyManagerCtx() {
+	  if ( not _context ) {
+	    _context = KeyManagerCtx::createForOpenPGP( _keyring );
+	  }
+	  // frankly: don't remember why an explicit setDirty was introduced and
+	  // why WatchFile was not enough. Maybe some corner case when the keyrings
+	  // are created?
+	  _cache.setDirty( _keyring );
+	  return _context.value();
+	}
+
+      private:
+	CachedPublicKeyData & _cache;
+	Pathname _keyring;
+	std::optional<KeyManagerCtx> _context;
+      };
+      ///////////////////////////////////////////////////////////////////
+
+      /** Helper providing on demand a KeyManagerCtx to manip the cached keyring. */
+      Manip manip( Pathname keyring_r ) { return Manip( *this, std::move(keyring_r) ); }
+
     private:
       struct Cache
       {
@@ -153,6 +188,7 @@ namespace zypp
 	std::list<PublicKeyData> _data;
 
       private:
+
 	scoped_ptr<WatchFile> _keyringK;
 	scoped_ptr<WatchFile> _keyringP;
       };
@@ -179,6 +215,8 @@ namespace zypp
       mutable CacheMap _cacheMap;
     };
     ///////////////////////////////////////////////////////////////////
+
+
   }
 
   ///////////////////////////////////////////////////////////////////
@@ -246,6 +284,10 @@ namespace zypp
     bool provideAndImportKeyFromRepositoryWorkflow (const std::string &id_r , const RepoInfo &info_r );
 
   private:
+    /** Impl helper providing on demand a KeyManagerCtx to manip a cached keyring. */
+    CachedPublicKeyData::Manip keyRingManip( const Pathname & keyring )
+    { return cachedPublicKeyData.manip( keyring ); }
+
     bool verifyFile( const Pathname & file, const Pathname & signature, const Pathname & keyring );
     void importKey( const Pathname & keyfile, const Pathname & keyring );
 
@@ -265,6 +307,8 @@ namespace zypp
 
     /** Get \ref PublicKeyData for ID (\c false if ID is not found). */
     PublicKeyData publicKeyExists( const std::string & id, const Pathname & keyring );
+    /** Load key files cached on the system into the generalKeyRing. */
+    void preloadCachedKeys();
 
     const Pathname generalKeyRing() const
     { return _general_tmp_dir.path(); }
@@ -275,6 +319,7 @@ namespace zypp
     filesystem::TmpDir _trusted_tmp_dir;
     filesystem::TmpDir _general_tmp_dir;
     Pathname _base_dir;
+    bool _preloaded = false;	//< General keyring may be preloaded with keys cached on the system,
 
   private:
     /** Functor returning the keyrings data (cached).
@@ -370,6 +415,11 @@ namespace zypp
 
   PublicKeyData KeyRing::Impl::publicKeyExists( const std::string & id, const Pathname & keyring )
   {
+    if ( not _preloaded && keyring == generalKeyRing() ) {
+      _preloaded = true;
+      preloadCachedKeys();
+    }
+
     PublicKeyData ret;
     for ( const PublicKeyData & key : publicKeyData( keyring ) )
     {
@@ -381,6 +431,60 @@ namespace zypp
     }
     DBG << (ret ? "Found" : "No") << " key [" << id << "] in keyring " << keyring << endl;
     return ret;
+  }
+
+  void KeyRing::Impl::preloadCachedKeys()
+  {
+    MIL << "preloadCachedKeys into general keyring..." << endl;
+    CachedPublicKeyData::Manip manip { keyRingManip( generalKeyRing() ) }; // Provides the context if we want to manip a cached keyring.
+
+    // For now just load the 'gpg-pubkey-*.{asc,key}' files into the general keyring,
+    // if their id (derived from the filename) is not in the trusted ring.
+    // TODO: Head for a persistent general keyring.
+    std::set<Pathname> cachedirs;
+    ZConfig & conf { ZConfig::instance() };
+    cachedirs.insert( conf.pubkeyCachePath() );
+    cachedirs.insert( "/usr/lib/rpm/gnupg/keys" );
+    if ( Pathname r = conf.systemRoot(); r != "/" && not r.empty() ) {
+      cachedirs.insert( r / conf.pubkeyCachePath() );
+      cachedirs.insert( r / "/usr/lib/rpm/gnupg/keys" );
+    }
+    if ( Pathname r = conf.repoManagerRoot(); r != "/" && not r.empty() ) {
+      cachedirs.insert( r / conf.pubkeyCachePath() );
+      cachedirs.insert( r / "/usr/lib/rpm/gnupg/keys" );
+    }
+
+    std::map<std::string,Pathname> keyCandidates;	// Collect one file path per keyid
+    const str::regex rx { "^gpg-pubkey-([[:xdigit:]]{8,})(-[[:xdigit:]]{8,})?\\.(asc|key)$" };
+    for ( const auto & cache : cachedirs ) {
+      dirForEach( cache,
+		  [&rx,&keyCandidates]( const Pathname & dir_r, const char *const file_r )->bool {
+		    str::smatch what;
+		    if ( str::regex_match( file_r, what, rx ) ) {
+		      Pathname & remember { keyCandidates[what[1]] };
+		      if ( remember.empty() ) {
+			remember = dir_r / file_r;
+		      }
+		    }
+		    return true;
+		  }
+		);
+    }
+
+    for ( const auto & p : keyCandidates ) {
+      // Avoid checking the general keyring while it is flagged dirty.
+      // Checking the trusted ring is ok, and most keys will be there anyway.
+      const std::string & id { p.first };
+      const Pathname & path { p.second };
+      if ( isKeyTrusted(id) )
+	continue;
+      if ( manip.keyManagerCtx().importKey( path ) ) {
+	DBG << "preload key file " << path << endl;
+      }
+      else {
+	WAR << "Skipping: Can't preload key file " << path << endl;
+      }
+    }
   }
 
   PublicKey KeyRing::Impl::exportKey( const PublicKeyData & keyData, const Pathname & keyring )
@@ -644,15 +748,15 @@ namespace zypp
 				   % keyfile.asString()
 				   % keyring.asString() ));
 
-    cachedPublicKeyData.setDirty( keyring );
-    if ( ! KeyManagerCtx::createForOpenPGP( keyring ).importKey( keyfile ) )
+    CachedPublicKeyData::Manip manip { keyRingManip( keyring ) }; // Provides the context if we want to manip a cached keyring.
+    if ( ! manip.keyManagerCtx().importKey( keyfile ) )
       ZYPP_THROW(KeyRingException(_("Failed to import key.")));
   }
 
   void KeyRing::Impl::deleteKey( const std::string & id, const Pathname & keyring )
   {
-    cachedPublicKeyData.setDirty( keyring );
-    if ( ! KeyManagerCtx::createForOpenPGP( keyring ).deleteKey( id ) )
+    CachedPublicKeyData::Manip manip { keyRingManip( keyring ) }; // Provides the context if we want to manip a cached keyring.
+    if ( ! manip.keyManagerCtx().deleteKey( id ) )
       ZYPP_THROW(KeyRingException(_("Failed to delete key.")));
   }
 
