@@ -1,4 +1,30 @@
 -------------------------------------------------------------------
+Tue Jun  1 19:10:35 CEST 2021 - ma@suse.de
+
+- Work around download.o.o broken https redirects.
+- Allow trusted repos to add additional signing keys (bsc#1184326)
+  Repositories signed with a trusted gpg key may import additional
+  package signing keys. This is needed if different keys were used
+  to sign the the packages shipped by the repository.
+- MediaCurl: Fix logging of redirects.
+- Use 15.3 resolver problem and solution texts on all distros.
+- $ZYPP_LOCK_TIMEOUT: Let negative values wait forever for the
+  zypp lock (bsc#1184399)
+  Helps boot time services like 'zypper purge-kernels' to wait for
+  the zypp lock until other services using zypper have completed.
+- Fix purge-kernels is broken in Leap 15.3 (bsc#1185325)
+  Leap 15.3 introduces a new kernel package called
+  kernel-flavour-extra, which contain kmp's. Currently kmp's are
+  detected by name ".*-kmp(-.*)?" but this does not work which
+  those new packages. This patch fixes the problem by checking
+  packages for kmod(*) and ksym(*) provides and only falls back to
+  name checking if the package in question does not provide one of
+  those.
+- Introduce zypp-runpurge, a tool to run purge-kernels on
+  testcases.
+- version 17.26.0 (22)
+
+-------------------------------------------------------------------
 Wed Apr 28 15:34:01 CEST 2021 - ma@suse.de
 
 - Properly handle permission denied when providing optional files
