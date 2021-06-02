@@ -9,16 +9,16 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-06-02 15:57+0200\n"
-"PO-Revision-Date: 2021-05-01 01:58+0000\n"
+"PO-Revision-Date: 2021-06-02 19:59+0000\n"
 "Last-Translator: David Medina <medipas@gmail.com>\n"
-"Language-Team: Catalan <https://l10n.opensuse.org/projects/zypper/master/ca/"
-">\n"
+"Language-Team: Catalan <https://l10n.opensuse.org/projects/zypper/master/ca/>"
+"\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.6\n"
+"X-Generator: Weblate 4.6.2\n"
 
 #: src/Command.cc:93
 msgid "Invalid command"
@@ -1375,6 +1375,11 @@ msgid ""
 "repository provider or check his web site. Many provider maintain a web page "
 "showing the fingerprints of the GPG keys they are using."
 msgstr ""
+"Una clau pública GPG s’identifica clarament per l'empremta digital. No "
+"confieu en el nom de les claus. Si no teniu la seguretat que la clau "
+"presentada sigui autèntica, pregunteu-ho al proveïdor del repositori o "
+"consulteu-ne el lloc web. Molts proveïdors mantenen una pàgina web que "
+"mostra les empremtes digitals de les claus GPG que usen."
 
 #: src/callbacks/keyring.h:37
 msgid ""
@@ -1430,7 +1435,7 @@ msgstr "Nom de la clau:"
 
 #: src/callbacks/keyring.h:89
 msgid "Key Algorithm:"
-msgstr ""
+msgstr "Algorisme de la clau:"
 
 #: src/callbacks/keyring.h:90
 msgid "Key Created:"
@@ -1655,8 +1660,8 @@ msgstr ""
 #, boost-format
 msgid "Received %1% new package signing key from repository %2%:"
 msgid_plural "Received %1% new package signing keys from repository %2%:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "S'ha rebut %1% clau de signatura de paquets nova del repositori %2%:"
+msgstr[1] "S'han rebut %1% claus de signatura de paquets noves del repositori %2%:"
 
 #: src/callbacks/keyring.h:494
 msgid ""
@@ -1664,16 +1669,21 @@ msgid ""
 "repository. In order to validate those packages upon download and "
 "installation the new keys will be imported into the rpm database."
 msgstr ""
+"Aquestes claus addicionals solen usar-se per signar paquets enviats pel "
+"repositori. Per tal de validar aquests paquets a la descàrrega i la instal·"
+"lació, les claus noves s'importaran a la base de dades d'rpm."
 
 #: src/callbacks/keyring.h:496
 msgid "New:"
-msgstr ""
+msgstr "Nova:"
 
 #: src/callbacks/keyring.h:502
 msgid ""
 "The repository metadata introducing the new keys have been signed and "
 "validated by the trusted key:"
 msgstr ""
+"Les metadades del repositori que introdueixen les claus noves han estat "
+"signades i validades per la clau de confiança següent:"
 
 #: src/callbacks/keyring.h:525
 #, c-format, boost-format
