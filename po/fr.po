@@ -14,10 +14,10 @@ msgstr ""
 "Project-Id-Version: zypper.fr\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-06-02 15:57+0200\n"
-"PO-Revision-Date: 2021-05-23 10:59+0000\n"
+"PO-Revision-Date: 2021-06-03 00:58+0000\n"
 "Last-Translator: Lucie Charrier <c.chalu@free.fr>\n"
-"Language-Team: French <https://l10n.opensuse.org/projects/zypper/master/fr/"
-">\n"
+"Language-Team: French <https://l10n.opensuse.org/projects/zypper/master/fr/>"
+"\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1419,6 +1419,11 @@ msgid ""
 "repository provider or check his web site. Many provider maintain a web page "
 "showing the fingerprints of the GPG keys they are using."
 msgstr ""
+"Une clé publique GPG est clairement identifiée par son empreinte digitale. "
+"Ne vous fiez pas au nom de la clé. Si vous n'êtes pas sûr de l'authenticité "
+"de la clé présentée, demandez au fournisseur du dépôt ou consultez son site "
+"web. De nombreux fournisseurs maintiennent une page web montrant les "
+"empreintes des clés GPG qu'ils utilisent."
 
 #: src/callbacks/keyring.h:37
 msgid ""
@@ -1477,7 +1482,7 @@ msgstr "Nom de la clé :"
 
 #: src/callbacks/keyring.h:89
 msgid "Key Algorithm:"
-msgstr ""
+msgstr "Algorithme de clé :"
 
 #: src/callbacks/keyring.h:90
 msgid "Key Created:"
@@ -1703,7 +1708,11 @@ msgstr ""
 msgid "Received %1% new package signing key from repository %2%:"
 msgid_plural "Received %1% new package signing keys from repository %2%:"
 msgstr[0] ""
+"Réception de %1% nouvelle clé de signature de paquets provenant du dépôt %2% "
+":"
 msgstr[1] ""
+"Réception de %1% nouvelles clés de signature de paquets provenant du dépôt "
+"%2% :"
 
 #: src/callbacks/keyring.h:494
 msgid ""
@@ -1711,16 +1720,22 @@ msgid ""
 "repository. In order to validate those packages upon download and "
 "installation the new keys will be imported into the rpm database."
 msgstr ""
+"Ces clés supplémentaires sont généralement utilisées pour signer les paquets "
+"fournis par le dépôt. Afin de valider ces paquets lors du téléchargement et "
+"de l'installation, les nouvelles clés seront importées dans la base de "
+"données rpm."
 
 #: src/callbacks/keyring.h:496
 msgid "New:"
-msgstr ""
+msgstr "Nouveau :"
 
 #: src/callbacks/keyring.h:502
 msgid ""
 "The repository metadata introducing the new keys have been signed and "
 "validated by the trusted key:"
 msgstr ""
+"Les métadonnées du dépôt introduisant les nouvelles clés ont été signées et "
+"validées par la clé de confiance :"
 
 #: src/callbacks/keyring.h:525
 #, c-format, boost-format
