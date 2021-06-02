@@ -99,11 +99,14 @@ namespace zypp
     report(data);
   }
 
-  void KeyRingReport::reportAutoImportKey( const PublicKeyData &key_r, const KeyContext &keycontext_r )
+  void KeyRingReport::reportAutoImportKey( const std::list<PublicKeyData> & keyDataList_r,
+					   const PublicKeyData & keySigning_r,
+					   const KeyContext &keyContext_r )
   {
     UserData data { REPORT_AUTO_IMPORT_KEY };
-    data.set( "PublicKeyData", key_r );
-    data.set( "KeyContext", keycontext_r );
+    data.set( "KeyDataList", keyDataList_r );
+    data.set( "KeySigning",  keySigning_r );
+    data.set( "KeyContext",  keyContext_r );
     report( data );
   }
 
@@ -657,9 +660,9 @@ namespace zypp
 	if ( context_r.signatureIdTrusted() && not buddies.empty() ) {
 	  // Check for buddy keys to be imported...
 	  MIL << "Validated with trusted key: importing buddy list..." << endl;
+	  report->reportAutoImportKey( buddies, foundKey, keyContext );
 	  for ( const auto & kd : buddies ) {
 	    importKey( exportKey( kd, generalKeyRing() ), true );
-	    report->reportAutoImportKey( kd, keyContext );
 	  }
 	}
         return context_r.fileValidated();	// signature is actually successfully validated!

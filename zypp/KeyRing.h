@@ -131,17 +131,20 @@ namespace zypp
 
 
      /**
-      * Notify that a repository auto imported a new package signing key.
+      * Notify that a repository auto imported new package signing keys.
       *
       * To auto import new package signing keys, the repositories metadata must be
       * signed by an already trusted key.
       *
       * The UserData object will have the following fields:
       * UserData::type		\ref REPORT_AUTO_IMPORT_KEY
-      * "PublicKeyData"		The imported PublicKeyData
+      * "KeyDataList"		List of KeyData to import
+      * "KeySigning"		KeyData of signing key
       * "KeyContext"		The KeyContext
       */
-     void reportAutoImportKey( const PublicKeyData &key_r, const KeyContext &keycontext_r );
+     void reportAutoImportKey( const std::list<PublicKeyData> & keyDataList_r,
+			       const PublicKeyData & keySigning_r,
+			       const KeyContext &keyContext_r );
      /** \relates reportAutoImportKey generic reports UserData::type */
      constexpr static const char *REPORT_AUTO_IMPORT_KEY = "KeyRingReport/reportAutoImportKey";
   };
