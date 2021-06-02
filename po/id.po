@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-30 18:12+0200\n"
+"POT-Creation-Date: 2021-06-02 15:57+0200\n"
 "PO-Revision-Date: 2021-03-17 15:57+0000\n"
 "Last-Translator: Kukuh Syafaat <syafaatkukuh@gmail.com>\n"
 "Language-Team: Indonesian <https://l10n.opensuse.org/projects/zypper/master/"
@@ -1284,6 +1284,14 @@ msgstr "Argumen program non-opsi: "
 
 #: src/callbacks/keyring.h:32
 msgid ""
+"A GPG pubkey is clearly identified by it's fingerprint. Do not rely the keys "
+"name. If you are not sure whether the presented key is authentic, ask the "
+"repository provider or check his web site. Many provider maintain a web page "
+"showing the fingerprints of the GPG keys they are using."
+msgstr ""
+
+#: src/callbacks/keyring.h:37
+msgid ""
 "Signing data enables the recipient to verify that no modifications occurred "
 "after the data were signed. Accepting data with no, wrong or unknown "
 "signature can lead to a corrupted system and in extreme cases even to a "
@@ -1295,7 +1303,7 @@ msgstr ""
 "dan dalam kasus yang ekstrim bahkan pada sistem yang kompromistis."
 
 #. translator: %1% is a file name
-#: src/callbacks/keyring.h:40
+#: src/callbacks/keyring.h:45
 #, boost-format
 msgid ""
 "File '%1%' is the repositories master index file. It ensures the integrity "
@@ -1304,7 +1312,7 @@ msgstr ""
 "Berkas '%1%' adalah berkas indeks master repositori. Ini memastikan "
 "integritas dari seluruh repo."
 
-#: src/callbacks/keyring.h:46
+#: src/callbacks/keyring.h:51
 msgid ""
 "We can't verify that no one meddled with this file, so it might not be "
 "trustworthy anymore! You should not continue unless you know it's safe."
@@ -1313,7 +1321,7 @@ msgstr ""
 "berkas ini, jadi mungkin tidak dapat dipercaya lagi! Anda tidak boleh "
 "melanjutkan kecuali Anda tahu itu aman."
 
-#: src/callbacks/keyring.h:51
+#: src/callbacks/keyring.h:56
 msgid ""
 "This file was modified after it has been signed. This may have been a "
 "malicious change, so it might not be trustworthy anymore! You should not "
@@ -1323,88 +1331,92 @@ msgstr ""
 "perubahan berbahaya, jadi mungkin tidak dapat dipercaya lagi! Anda tidak "
 "boleh melanjutkan kecuali Anda tahu itu aman."
 
-#: src/callbacks/keyring.h:79
+#: src/callbacks/keyring.h:85
 msgid "Repository:"
 msgstr "Repositori:"
 
-#: src/callbacks/keyring.h:81
-msgid "Key Name:"
-msgstr "Nama Kunci:"
-
-#: src/callbacks/keyring.h:82
+#: src/callbacks/keyring.h:87
 msgid "Key Fingerprint:"
 msgstr "Sidik Jari Kunci:"
 
-#: src/callbacks/keyring.h:83
+#: src/callbacks/keyring.h:88
+msgid "Key Name:"
+msgstr "Nama Kunci:"
+
+#: src/callbacks/keyring.h:89
+msgid "Key Algorithm:"
+msgstr ""
+
+#: src/callbacks/keyring.h:90
 msgid "Key Created:"
 msgstr "Kunci Dibuat:"
 
-#: src/callbacks/keyring.h:84
+#: src/callbacks/keyring.h:91
 msgid "Key Expires:"
 msgstr "Kunci Kedaluwarsa:"
 
-#: src/callbacks/keyring.h:86
+#: src/callbacks/keyring.h:93
 msgid "Subkey:"
 msgstr "Sub Kunci:"
 
-#: src/callbacks/keyring.h:87
+#: src/callbacks/keyring.h:94
 msgid "Rpm Name:"
 msgstr "Nama Rpm:"
 
-#: src/callbacks/keyring.h:113
+#: src/callbacks/keyring.h:120
 #, boost-format
 msgid "The gpg key signing file '%1%' has expired."
 msgstr "Berkas penandatanganan kunci gpg '%1%' telah kedaluwarsa."
 
-#: src/callbacks/keyring.h:119
+#: src/callbacks/keyring.h:126
 #, boost-format
 msgid "The gpg key signing file '%1%' will expire in %2% day."
 msgid_plural "The gpg key signing file '%1%' will expire in %2% days."
 msgstr[0] ""
 "Berkas penandatanganan kunci gpg '%1%' akan kedaluwarsa dalam %2% hari."
 
-#: src/callbacks/keyring.h:142
+#: src/callbacks/keyring.h:149
 #, c-format, boost-format
 msgid "Accepting an unsigned file '%s'."
 msgstr "Menerima berkas '%s' yang tidak ditandatangani."
 
-#: src/callbacks/keyring.h:146
+#: src/callbacks/keyring.h:153
 #, c-format, boost-format
 msgid "Accepting an unsigned file '%s' from repository '%s'."
 msgstr "Menerima berkas '%s' yang tidak ditandatangani dari repositori '%s'."
 
 #. translator: %1% is a file name
-#: src/callbacks/keyring.h:156
+#: src/callbacks/keyring.h:163
 #, boost-format
 msgid "File '%1%' is unsigned."
 msgstr "Berkas '%1%' tidak ditandatangani."
 
 #. translator: %1% is a file name, %2% a repositories name
-#: src/callbacks/keyring.h:159
+#: src/callbacks/keyring.h:166
 #, boost-format
 msgid "File '%1%' from repository '%2%' is unsigned."
 msgstr "Berkas '%1%' dari repositori '%2%' tidak ditandatangani."
 
 #. TranslatorExplanation: speaking of a file
-#: src/callbacks/keyring.h:176
+#: src/callbacks/keyring.h:183
 #, c-format, boost-format
 msgid "File '%s' is unsigned, continue?"
 msgstr "Berkas '%s' tidak ditandatangani, lanjutkan?"
 
 #. TranslatorExplanation: speaking of a file
-#: src/callbacks/keyring.h:180
+#: src/callbacks/keyring.h:187
 #, c-format, boost-format
 msgid "File '%s' from repository '%s' is unsigned, continue?"
 msgstr "Berkas '%s' dari repositori '%s' tidak ditandatangani, lanjutkan?"
 
-#: src/callbacks/keyring.h:203
+#: src/callbacks/keyring.h:210
 #, c-format, boost-format
 msgid "Accepting file '%s' signed with an unknown key '%s'."
 msgstr ""
 "Menerima berkas '%s' yang ditandatangani dengan kunci '%s' yang tidak "
 "dikenal."
 
-#: src/callbacks/keyring.h:207
+#: src/callbacks/keyring.h:214
 #, c-format, boost-format
 msgid ""
 "Accepting file '%s' from repository '%s' signed with an unknown key '%s'."
@@ -1413,13 +1425,13 @@ msgstr ""
 "'%s' yang tidak dikenal."
 
 #. translator: %1% is a file name, %2% is a gpg key ID
-#: src/callbacks/keyring.h:216
+#: src/callbacks/keyring.h:223
 #, boost-format
 msgid "File '%1%' is signed with an unknown key '%2%'."
 msgstr "Berkas '%1%' ditandatangani dengan kunci '%2%' yang tidak dikenal."
 
 #. translator: %1% is a file name, %2% is a gpg key ID, %3% a repositories name
-#: src/callbacks/keyring.h:219
+#: src/callbacks/keyring.h:226
 #, boost-format
 msgid "File '%1%' from repository '%3%' is signed with an unknown key '%2%'."
 msgstr ""
@@ -1427,14 +1439,14 @@ msgstr ""
 "tidak dikenal."
 
 #. translators: the last %s is gpg key ID
-#: src/callbacks/keyring.h:236
+#: src/callbacks/keyring.h:243
 #, c-format, boost-format
 msgid "File '%s' is signed with an unknown key '%s'. Continue?"
 msgstr ""
 "Berkas '%s' ditandatangani dengan kunci '%s' yang tidak dikenal. Lanjutkan?"
 
 #. translators: the last %s is gpg key ID
-#: src/callbacks/keyring.h:240
+#: src/callbacks/keyring.h:247
 #, c-format, boost-format
 msgid ""
 "File '%s' from repository '%s' is signed with an unknown key '%s'. Continue?"
@@ -1442,27 +1454,27 @@ msgstr ""
 "Berkas '%s' dari repositori '%s' ditandatangani dengan kunci '%s' yang tidak "
 "dikenal. Lanjutkan?"
 
-#: src/callbacks/keyring.h:260
+#: src/callbacks/keyring.h:267
 msgid "Automatically importing the following key:"
 msgstr "Mengimpor kunci berikut secara otomatis:"
 
-#: src/callbacks/keyring.h:262
+#: src/callbacks/keyring.h:269
 msgid "Automatically trusting the following key:"
 msgstr "Mempercayai kunci berikut secara otomatis:"
 
-#: src/callbacks/keyring.h:264
+#: src/callbacks/keyring.h:271
 msgid "New repository or package signing key received:"
 msgstr "Kunci penandatanganan repositori dan paket baru diterima:"
 
 #. translators: this message is shown after showing description of the key
-#: src/callbacks/keyring.h:287
+#: src/callbacks/keyring.h:305
 msgid "Do you want to reject the key, trust temporarily, or trust always?"
 msgstr ""
 "Apakah Anda ingin menolak, mempercayai sementara, atau selalu mempercayai "
 "kunci?"
 
 #. translators: this message is shown after showing description of the key
-#: src/callbacks/keyring.h:290
+#: src/callbacks/keyring.h:308
 msgid "Do you want to reject the key, or trust always?"
 msgstr "Apakah Anda ingin menolak, atau selalu mempercayai kunci?"
 
@@ -1471,12 +1483,12 @@ msgstr "Apakah Anda ingin menolak, atau selalu mempercayai kunci?"
 #. The anserws must be separated by slash characters '/' and must
 #. correspond to reject/trusttemporarily/trustalways in that order.
 #. The answers should be lower case letters.
-#: src/callbacks/keyring.h:308
+#: src/callbacks/keyring.h:326
 msgid "r/t/a/"
 msgstr "r/t/a/"
 
 #. translators: the same as r/t/a, but without 'a'
-#: src/callbacks/keyring.h:311
+#: src/callbacks/keyring.h:329
 msgid "r/t"
 msgstr "r/t"
 
@@ -1485,31 +1497,31 @@ msgstr "r/t"
 #. The anserws must be separated by slash characters '/' and must
 #. correspond to reject/trusttemporarily/trustalways in that order.
 #. The answers should be lower case letters.
-#: src/callbacks/keyring.h:318
+#: src/callbacks/keyring.h:336
 msgid "r/a/"
 msgstr "r/a/"
 
 #. translators: help text for the 'r' option in the 'r/t/a' prompt
-#: src/callbacks/keyring.h:324
+#: src/callbacks/keyring.h:342
 msgid "Don't trust the key."
 msgstr "Jangan mempercayai kunci itu."
 
 #. translators: help text for the 't' option in the 'r/t/a' prompt
-#: src/callbacks/keyring.h:328
+#: src/callbacks/keyring.h:346
 msgid "Trust the key temporarily."
 msgstr "Percayai kunci sementara."
 
 #. translators: help text for the 'a' option in the 'r/t/a' prompt
-#: src/callbacks/keyring.h:333
+#: src/callbacks/keyring.h:351
 msgid "Trust the key and import it into trusted keyring."
 msgstr "Percayai kunci dan impor ke ring kunci terpercaya."
 
-#: src/callbacks/keyring.h:371
+#: src/callbacks/keyring.h:389
 #, c-format, boost-format
 msgid "Ignoring failed signature verification for file '%s'!"
 msgstr "Mengabaikan verifikasi tanda tangan yang gagal untuk berkas '%s'!"
 
-#: src/callbacks/keyring.h:374
+#: src/callbacks/keyring.h:392
 #, c-format, boost-format
 msgid ""
 "Ignoring failed signature verification for file '%s' from repository '%s'!"
@@ -1517,26 +1529,26 @@ msgstr ""
 "Mengabaikan verifikasi tanda tangan yang gagal untuk berkas '%s' dari "
 "repositori '%s'!"
 
-#: src/callbacks/keyring.h:380
+#: src/callbacks/keyring.h:398
 msgid "Double-check this is not caused by some malicious changes in the file!"
 msgstr ""
 "Periksa ulang bahwa ini bukan disebabkan oleh beberapa perubahan berbahaya "
 "dalam berkas!"
 
 #. translator: %1% is a file name
-#: src/callbacks/keyring.h:390
+#: src/callbacks/keyring.h:408
 #, boost-format
 msgid "Signature verification failed for file '%1%'."
 msgstr "Verifikasi tanda tangan gagal untuk berkas '%1%'."
 
 #. translator: %1% is a file name, %2% a repositories name
-#: src/callbacks/keyring.h:393
+#: src/callbacks/keyring.h:411
 #, boost-format
 msgid "Signature verification failed for file '%1%' from repository '%2%'."
 msgstr ""
 "Verifikasi tanda tangan gagal untuk berkas '%1%' dari repositori '%2%'."
 
-#: src/callbacks/keyring.h:437
+#: src/callbacks/keyring.h:460
 msgid ""
 "The rpm database seems to contain old V3 version gpg keys which are "
 "meanwhile obsolete and considered insecure:"
@@ -1544,12 +1556,12 @@ msgstr ""
 "Basis data rpm tampaknya mengandung kunci gpg versi V3 lama yang sementara "
 "itu usang dan dianggap tidak aman:"
 
-#: src/callbacks/keyring.h:444
+#: src/callbacks/keyring.h:467
 #, boost-format
 msgid "To see details about a key call '%1%'."
 msgstr "Untuk melihat detail tentang panggilan kunci '%1%'."
 
-#: src/callbacks/keyring.h:448
+#: src/callbacks/keyring.h:471
 #, boost-format
 msgid ""
 "Unless you believe the key in question is still in use, you can remove it "
@@ -1558,17 +1570,41 @@ msgstr ""
 "Kecuali Anda yakin bahwa kunci tersebut masih digunakan, Anda dapat "
 "menghapusnya dari basis data rpm yang memanggil '%1%'."
 
-#: src/callbacks/keyring.h:470
+#. translator: %1% is the number of keys, %2% the name of a repository
+#: src/callbacks/keyring.h:490
+#, boost-format
+msgid "Received %1% new package signing key from repository %2%:"
+msgid_plural "Received %1% new package signing keys from repository %2%:"
+msgstr[0] ""
+
+#: src/callbacks/keyring.h:494
+msgid ""
+"Those additional keys are usually used to sign packages shipped by the "
+"repository. In order to validate those packages upon download and "
+"installation the new keys will be imported into the rpm database."
+msgstr ""
+
+#: src/callbacks/keyring.h:496
+msgid "New:"
+msgstr ""
+
+#: src/callbacks/keyring.h:502
+msgid ""
+"The repository metadata introducing the new keys have been signed and "
+"validated by the trusted key:"
+msgstr ""
+
+#: src/callbacks/keyring.h:525
 #, c-format, boost-format
 msgid "No digest for file %s."
 msgstr "Tidak ada intisari untuk berkas %s."
 
-#: src/callbacks/keyring.h:478
+#: src/callbacks/keyring.h:533
 #, c-format, boost-format
 msgid "Unknown digest %s for file %s."
 msgstr "Intisari %s tidak dikenal untuk berkas %s."
 
-#: src/callbacks/keyring.h:495
+#: src/callbacks/keyring.h:550
 #, boost-format
 msgid ""
 "Digest verification failed for file '%1%'\n"
@@ -1583,7 +1619,7 @@ msgstr ""
 "  diharapkan %3%\n"
 "  tetapi didapat  %4%\n"
 
-#: src/callbacks/keyring.h:507
+#: src/callbacks/keyring.h:562
 msgid ""
 "Accepting packages with wrong checksums can lead to a corrupted system and "
 "in extreme cases even to a system compromise."
@@ -1591,7 +1627,7 @@ msgstr ""
 "Menerima paket dengan checksum yang salah dapat menyebabkan sistem rusak dan "
 "dalam kasus ekstrim bahkan dapat membahayakan sistem."
 
-#: src/callbacks/keyring.h:515
+#: src/callbacks/keyring.h:570
 #, boost-format
 msgid ""
 "However if you made certain that the file with checksum '%1%..' is secure, "
@@ -1609,23 +1645,23 @@ msgstr ""
 "mengabaikan berkas ini.\n"
 
 #. translators: A prompt option
-#: src/callbacks/keyring.h:522
+#: src/callbacks/keyring.h:577
 msgid "discard"
 msgstr "abaikan"
 
 #. translators: A prompt option help text
-#: src/callbacks/keyring.h:524
+#: src/callbacks/keyring.h:579
 msgid "Unblock using this file on your own risk."
 msgstr ""
 "Buka blokir penggunaan berkas ini dengan resiko ditanggung Anda sendiri."
 
 #. translators: A prompt option help text
-#: src/callbacks/keyring.h:526
+#: src/callbacks/keyring.h:581
 msgid "Discard the file."
 msgstr "Abaikan berkas."
 
 #. translators: A prompt text
-#: src/callbacks/keyring.h:530
+#: src/callbacks/keyring.h:585
 msgid "Unblock or discard?"
 msgstr "Buka blokir atau abaikan?"
 

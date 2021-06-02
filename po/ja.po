@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-30 18:12+0200\n"
+"POT-Creation-Date: 2021-06-02 15:57+0200\n"
 "PO-Revision-Date: 2021-05-09 03:58+0000\n"
 "Last-Translator: Yasuhiko Kamata <belphegor@belbel.or.jp>\n"
 "Language-Team: Japanese <https://l10n.opensuse.org/projects/zypper/master/ja/"
@@ -498,7 +498,9 @@ msgstr ""
 msgid ""
 "Package '%s' is not available in your repositories. Cannot reinstall, "
 "upgrade, or downgrade."
-msgstr "パッケージ '%s' はお使いのリポジトリ内には見つかりません。再インストールやアップグレード、ダウングレードを行うことができません。"
+msgstr ""
+"パッケージ '%s' はお使いのリポジトリ内には見つかりません。再インストールや"
+"アップグレード、ダウングレードを行うことができません。"
 
 #: src/RequestFeedback.cc:158
 #, c-format, boost-format
@@ -537,7 +539,9 @@ msgstr ""
 #: src/RequestFeedback.cc:192
 #, c-format, boost-format
 msgid "Patch '%s' is locked. Use '%s' to install it, or unlock it using '%s'."
-msgstr "パッチ '%s' はロックされています。インストールするには '%s' を、ロックを解除するには '%s' を使用してください。"
+msgstr ""
+"パッチ '%s' はロックされています。インストールするには '%s' を、ロックを解除"
+"するには '%s' を使用してください。"
 
 #: src/RequestFeedback.cc:199
 #, c-format, boost-format
@@ -828,7 +832,9 @@ msgid ""
 msgid_plural ""
 "The following %d packages are recommended, but will not be installed (only "
 "required packages will be installed):"
-msgstr[0] "以下 %d 個のパッケージが推奨されていますが、インストールを行いません (必要なパッケージのみをインストールします):"
+msgstr[0] ""
+"以下 %d 個のパッケージが推奨されていますが、インストールを行いません (必要な"
+"パッケージのみをインストールします):"
 
 #: src/Summary.cc:1019
 #, c-format, boost-format
@@ -838,7 +844,9 @@ msgid ""
 msgid_plural ""
 "The following %d packages are recommended, but will not be installed because "
 "they are unwanted (were manually removed before):"
-msgstr[0] "以下 %d 個のパッケージが推奨されていますが、不要であるためインストールを行いません (以前に手動で削除されています):"
+msgstr[0] ""
+"以下 %d 個のパッケージが推奨されていますが、不要であるためインストールを行い"
+"ません (以前に手動で削除されています):"
 
 #: src/Summary.cc:1029
 #, c-format, boost-format
@@ -848,7 +856,9 @@ msgid ""
 msgid_plural ""
 "The following %d packages are recommended, but will not be installed due to "
 "conflicts or dependency issues:"
-msgstr[0] "以下 %d 個のパッケージが推奨されていますが、矛盾または依存関係の問題があるため、インストールを行いません:"
+msgstr[0] ""
+"以下 %d 個のパッケージが推奨されていますが、矛盾または依存関係の問題があるた"
+"め、インストールを行いません:"
 
 #: src/Summary.cc:1042
 #, c-format, boost-format
@@ -876,14 +886,16 @@ msgstr[0] "以下 %d 個の製品が推奨されていますが、インスト�
 msgid "The following application is recommended, but will not be installed:"
 msgid_plural ""
 "The following %d applications are recommended, but will not be installed:"
-msgstr[0] "以下 %d 個のアプリケーションが推奨されていますが、インストールを行いません:"
+msgstr[0] ""
+"以下 %d 個のアプリケーションが推奨されていますが、インストールを行いません:"
 
 #: src/Summary.cc:1088
 #, c-format, boost-format
 msgid "The following package is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d packages are suggested, but will not be installed:"
-msgstr[0] "以下 %d 個のパッケージが提案されていますが、インストールを行いません:"
+msgstr[0] ""
+"以下 %d 個のパッケージが提案されていますが、インストールを行いません:"
 
 #: src/Summary.cc:1093
 #, c-format, boost-format
@@ -911,7 +923,8 @@ msgstr[0] "以下 %d 個の製品が提案されていますが、インスト�
 msgid "The following application is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d applications are suggested, but will not be installed:"
-msgstr[0] "以下 %d 個のアプリケーションが提案されていますが、インストールを行いません:"
+msgstr[0] ""
+"以下 %d 個のアプリケーションが提案されていますが、インストールを行いません:"
 
 #: src/Summary.cc:1134
 #, c-format, boost-format
@@ -1262,6 +1275,14 @@ msgstr "オプション以外のプログラム引数: "
 
 #: src/callbacks/keyring.h:32
 msgid ""
+"A GPG pubkey is clearly identified by it's fingerprint. Do not rely the keys "
+"name. If you are not sure whether the presented key is authentic, ask the "
+"repository provider or check his web site. Many provider maintain a web page "
+"showing the fingerprints of the GPG keys they are using."
+msgstr ""
+
+#: src/callbacks/keyring.h:37
+msgid ""
 "Signing data enables the recipient to verify that no modifications occurred "
 "after the data were signed. Accepting data with no, wrong or unknown "
 "signature can lead to a corrupted system and in extreme cases even to a "
@@ -1273,7 +1294,7 @@ msgstr ""
 "テムに不正侵入を許してしまう結果にもなりかねません。"
 
 #. translator: %1% is a file name
-#: src/callbacks/keyring.h:40
+#: src/callbacks/keyring.h:45
 #, boost-format
 msgid ""
 "File '%1%' is the repositories master index file. It ensures the integrity "
@@ -1282,7 +1303,7 @@ msgstr ""
 "ファイル '%1%' はリポジトリのマスターインデックスファイルです。リポジトリ全体"
 "の整合性を確認するために用意されています。"
 
-#: src/callbacks/keyring.h:46
+#: src/callbacks/keyring.h:51
 msgid ""
 "We can't verify that no one meddled with this file, so it might not be "
 "trustworthy anymore! You should not continue unless you know it's safe."
@@ -1291,7 +1312,7 @@ msgstr ""
 "を伴う場合があります。確実に安全であることを確信できない限り、続行すべきでは"
 "ありません。"
 
-#: src/callbacks/keyring.h:51
+#: src/callbacks/keyring.h:56
 msgid ""
 "This file was modified after it has been signed. This may have been a "
 "malicious change, so it might not be trustworthy anymore! You should not "
@@ -1301,86 +1322,90 @@ msgstr ""
 "りますので、これ以降の処理は危険を伴う場合があります。確実に安全であることを"
 "確信できない限り、続行すべきではありません。"
 
-#: src/callbacks/keyring.h:79
+#: src/callbacks/keyring.h:85
 msgid "Repository:"
 msgstr "リポジトリ:"
 
-#: src/callbacks/keyring.h:81
-msgid "Key Name:"
-msgstr "鍵の名前:"
-
-#: src/callbacks/keyring.h:82
+#: src/callbacks/keyring.h:87
 msgid "Key Fingerprint:"
 msgstr "鍵の指紋:"
 
-#: src/callbacks/keyring.h:83
+#: src/callbacks/keyring.h:88
+msgid "Key Name:"
+msgstr "鍵の名前:"
+
+#: src/callbacks/keyring.h:89
+msgid "Key Algorithm:"
+msgstr ""
+
+#: src/callbacks/keyring.h:90
 msgid "Key Created:"
 msgstr "鍵の作成日時:"
 
-#: src/callbacks/keyring.h:84
+#: src/callbacks/keyring.h:91
 msgid "Key Expires:"
 msgstr "鍵の有効期限:"
 
-#: src/callbacks/keyring.h:86
+#: src/callbacks/keyring.h:93
 msgid "Subkey:"
 msgstr "副鍵:"
 
-#: src/callbacks/keyring.h:87
+#: src/callbacks/keyring.h:94
 msgid "Rpm Name:"
 msgstr "RPM の名前:"
 
-#: src/callbacks/keyring.h:113
+#: src/callbacks/keyring.h:120
 #, boost-format
 msgid "The gpg key signing file '%1%' has expired."
 msgstr "GPG 鍵署名ファイル '%1%' の有効期限が切れています。"
 
-#: src/callbacks/keyring.h:119
+#: src/callbacks/keyring.h:126
 #, boost-format
 msgid "The gpg key signing file '%1%' will expire in %2% day."
 msgid_plural "The gpg key signing file '%1%' will expire in %2% days."
 msgstr[0] "GPG 鍵署名ファイル '%1%' の有効期限は、あと %2% 日で切れます。"
 
-#: src/callbacks/keyring.h:142
+#: src/callbacks/keyring.h:149
 #, c-format, boost-format
 msgid "Accepting an unsigned file '%s'."
 msgstr "署名のないファイル '%s' を受け入れています。"
 
-#: src/callbacks/keyring.h:146
+#: src/callbacks/keyring.h:153
 #, c-format, boost-format
 msgid "Accepting an unsigned file '%s' from repository '%s'."
 msgstr "署名のないファイル「%s」(リポジトリ「%s」)を受け入れています。"
 
 #. translator: %1% is a file name
-#: src/callbacks/keyring.h:156
+#: src/callbacks/keyring.h:163
 #, boost-format
 msgid "File '%1%' is unsigned."
 msgstr "ファイル '%1%' には署名がありません。"
 
 #. translator: %1% is a file name, %2% a repositories name
-#: src/callbacks/keyring.h:159
+#: src/callbacks/keyring.h:166
 #, boost-format
 msgid "File '%1%' from repository '%2%' is unsigned."
 msgstr "リポジトリ '%2%' からのファイル '%1%' には署名がありません。"
 
 #. TranslatorExplanation: speaking of a file
-#: src/callbacks/keyring.h:176
+#: src/callbacks/keyring.h:183
 #, c-format, boost-format
 msgid "File '%s' is unsigned, continue?"
 msgstr "ファイル '%s' には署名がありません。続行しますか?"
 
 #. TranslatorExplanation: speaking of a file
-#: src/callbacks/keyring.h:180
+#: src/callbacks/keyring.h:187
 #, c-format, boost-format
 msgid "File '%s' from repository '%s' is unsigned, continue?"
 msgstr "ファイル「%s」(リポジトリ「%s」)には署名がありません。続行しますか?"
 
-#: src/callbacks/keyring.h:203
+#: src/callbacks/keyring.h:210
 #, c-format, boost-format
 msgid "Accepting file '%s' signed with an unknown key '%s'."
 msgstr ""
 "受け入れようとしているファイル '%s' は不明な鍵 '%s' で署名されています。"
 
-#: src/callbacks/keyring.h:207
+#: src/callbacks/keyring.h:214
 #, c-format, boost-format
 msgid ""
 "Accepting file '%s' from repository '%s' signed with an unknown key '%s'."
@@ -1389,26 +1414,26 @@ msgstr ""
 "されています。"
 
 #. translator: %1% is a file name, %2% is a gpg key ID
-#: src/callbacks/keyring.h:216
+#: src/callbacks/keyring.h:223
 #, boost-format
 msgid "File '%1%' is signed with an unknown key '%2%'."
 msgstr "ファイル '%1%' は不明な鍵 '%2%' で署名されています。"
 
 #. translator: %1% is a file name, %2% is a gpg key ID, %3% a repositories name
-#: src/callbacks/keyring.h:219
+#: src/callbacks/keyring.h:226
 #, boost-format
 msgid "File '%1%' from repository '%3%' is signed with an unknown key '%2%'."
 msgstr ""
 "リポジトリ '%3%' からのファイル '%1%' は不明な鍵 '%2%' で署名されています。"
 
 #. translators: the last %s is gpg key ID
-#: src/callbacks/keyring.h:236
+#: src/callbacks/keyring.h:243
 #, c-format, boost-format
 msgid "File '%s' is signed with an unknown key '%s'. Continue?"
 msgstr "ファイル '%s' は不明なキー '%s' で署名されています。続行しますか？"
 
 #. translators: the last %s is gpg key ID
-#: src/callbacks/keyring.h:240
+#: src/callbacks/keyring.h:247
 #, c-format, boost-format
 msgid ""
 "File '%s' from repository '%s' is signed with an unknown key '%s'. Continue?"
@@ -1416,27 +1441,27 @@ msgstr ""
 "ファイル '%s' (リポジトリ '%s') は不明な鍵 '%s' で署名されています。続行しま"
 "すか?"
 
-#: src/callbacks/keyring.h:260
+#: src/callbacks/keyring.h:267
 msgid "Automatically importing the following key:"
 msgstr "以下の鍵を自動的にインポートします:"
 
-#: src/callbacks/keyring.h:262
+#: src/callbacks/keyring.h:269
 msgid "Automatically trusting the following key:"
 msgstr "以下の鍵を自動的に信頼します:"
 
-#: src/callbacks/keyring.h:264
+#: src/callbacks/keyring.h:271
 msgid "New repository or package signing key received:"
 msgstr "新しいリポジトリまたはパッケージの署名鍵を受信しました:"
 
 #. translators: this message is shown after showing description of the key
-#: src/callbacks/keyring.h:287
+#: src/callbacks/keyring.h:305
 msgid "Do you want to reject the key, trust temporarily, or trust always?"
 msgstr ""
 "鍵を拒否しますか(R)? 一時的に信頼しますか(T)?それとも今後ずっと信頼しますか"
 "(A)?"
 
 #. translators: this message is shown after showing description of the key
-#: src/callbacks/keyring.h:290
+#: src/callbacks/keyring.h:308
 msgid "Do you want to reject the key, or trust always?"
 msgstr "鍵を拒否しますか(R)? 今後ずっと信頼しますか(A)?"
 
@@ -1445,12 +1470,12 @@ msgstr "鍵を拒否しますか(R)? 今後ずっと信頼しますか(A)?"
 #. The anserws must be separated by slash characters '/' and must
 #. correspond to reject/trusttemporarily/trustalways in that order.
 #. The answers should be lower case letters.
-#: src/callbacks/keyring.h:308
+#: src/callbacks/keyring.h:326
 msgid "r/t/a/"
 msgstr "r/t/a"
 
 #. translators: the same as r/t/a, but without 'a'
-#: src/callbacks/keyring.h:311
+#: src/callbacks/keyring.h:329
 msgid "r/t"
 msgstr "r/t"
 
@@ -1459,31 +1484,31 @@ msgstr "r/t"
 #. The anserws must be separated by slash characters '/' and must
 #. correspond to reject/trusttemporarily/trustalways in that order.
 #. The answers should be lower case letters.
-#: src/callbacks/keyring.h:318
+#: src/callbacks/keyring.h:336
 msgid "r/a/"
 msgstr "r/a/"
 
 #. translators: help text for the 'r' option in the 'r/t/a' prompt
-#: src/callbacks/keyring.h:324
+#: src/callbacks/keyring.h:342
 msgid "Don't trust the key."
 msgstr "鍵を信頼しない。"
 
 #. translators: help text for the 't' option in the 'r/t/a' prompt
-#: src/callbacks/keyring.h:328
+#: src/callbacks/keyring.h:346
 msgid "Trust the key temporarily."
 msgstr "一時的に鍵を信頼します。"
 
 #. translators: help text for the 'a' option in the 'r/t/a' prompt
-#: src/callbacks/keyring.h:333
+#: src/callbacks/keyring.h:351
 msgid "Trust the key and import it into trusted keyring."
 msgstr "鍵を信頼して信頼済み鍵リングにインポートします。"
 
-#: src/callbacks/keyring.h:371
+#: src/callbacks/keyring.h:389
 #, c-format, boost-format
 msgid "Ignoring failed signature verification for file '%s'!"
 msgstr "ファイル '%s' に対する署名検証が失敗しましたが、無視しています！"
 
-#: src/callbacks/keyring.h:374
+#: src/callbacks/keyring.h:392
 #, c-format, boost-format
 msgid ""
 "Ignoring failed signature verification for file '%s' from repository '%s'!"
@@ -1491,24 +1516,24 @@ msgstr ""
 "ファイル '%s' (リポジトリ '%s') に対する署名検証が失敗しましたが、無視してい"
 "ます!"
 
-#: src/callbacks/keyring.h:380
+#: src/callbacks/keyring.h:398
 msgid "Double-check this is not caused by some malicious changes in the file!"
 msgstr ""
 "ファイルに対して悪意のある変更が行われていないか、もう一度ご確認ください！"
 
 #. translator: %1% is a file name
-#: src/callbacks/keyring.h:390
+#: src/callbacks/keyring.h:408
 #, boost-format
 msgid "Signature verification failed for file '%1%'."
 msgstr "ファイル '%1%' に対する署名検証が失敗しました。"
 
 #. translator: %1% is a file name, %2% a repositories name
-#: src/callbacks/keyring.h:393
+#: src/callbacks/keyring.h:411
 #, boost-format
 msgid "Signature verification failed for file '%1%' from repository '%2%'."
 msgstr "ファイル '%1%' (リポジトリ '%2%') に対する署名検証が失敗しました。"
 
-#: src/callbacks/keyring.h:437
+#: src/callbacks/keyring.h:460
 msgid ""
 "The rpm database seems to contain old V3 version gpg keys which are "
 "meanwhile obsolete and considered insecure:"
@@ -1516,12 +1541,12 @@ msgstr ""
 "RPM データベース内に、古い V3 形式の GPG 鍵が存在しているものと思われます。こ"
 "の形式は既に古く、機密が保持できないものと考えられています:"
 
-#: src/callbacks/keyring.h:444
+#: src/callbacks/keyring.h:467
 #, boost-format
 msgid "To see details about a key call '%1%'."
 msgstr "鍵についての詳細を表示するには、 '%1%' を実行してください。"
 
-#: src/callbacks/keyring.h:448
+#: src/callbacks/keyring.h:471
 #, boost-format
 msgid ""
 "Unless you believe the key in question is still in use, you can remove it "
@@ -1530,17 +1555,41 @@ msgstr ""
 "本件の鍵を現在もなお使用している場合を除き、 '%1%' で RPM データベースから鍵"
 "を削除しておくことをお勧めします。"
 
-#: src/callbacks/keyring.h:470
+#. translator: %1% is the number of keys, %2% the name of a repository
+#: src/callbacks/keyring.h:490
+#, boost-format
+msgid "Received %1% new package signing key from repository %2%:"
+msgid_plural "Received %1% new package signing keys from repository %2%:"
+msgstr[0] ""
+
+#: src/callbacks/keyring.h:494
+msgid ""
+"Those additional keys are usually used to sign packages shipped by the "
+"repository. In order to validate those packages upon download and "
+"installation the new keys will be imported into the rpm database."
+msgstr ""
+
+#: src/callbacks/keyring.h:496
+msgid "New:"
+msgstr ""
+
+#: src/callbacks/keyring.h:502
+msgid ""
+"The repository metadata introducing the new keys have been signed and "
+"validated by the trusted key:"
+msgstr ""
+
+#: src/callbacks/keyring.h:525
 #, c-format, boost-format
 msgid "No digest for file %s."
 msgstr "ファイル%sに対するダイジェストがありません。"
 
-#: src/callbacks/keyring.h:478
+#: src/callbacks/keyring.h:533
 #, c-format, boost-format
 msgid "Unknown digest %s for file %s."
 msgstr "不明なダイジェスト %s です (ファイル %s)。"
 
-#: src/callbacks/keyring.h:495
+#: src/callbacks/keyring.h:550
 #, boost-format
 msgid ""
 "Digest verification failed for file '%1%'\n"
@@ -1555,7 +1604,7 @@ msgstr ""
 "  期待されていた値:%3%\n"
 "  登録されていた値:%4%\n"
 
-#: src/callbacks/keyring.h:507
+#: src/callbacks/keyring.h:562
 msgid ""
 "Accepting packages with wrong checksums can lead to a corrupted system and "
 "in extreme cases even to a system compromise."
@@ -1563,7 +1612,7 @@ msgstr ""
 "チェックサムが正しくないパッケージを受け入れてしまうと、システムを壊す可能性"
 "があるほか、不正なソフトウエアを動作させることにもなります。"
 
-#: src/callbacks/keyring.h:515
+#: src/callbacks/keyring.h:570
 #, boost-format
 msgid ""
 "However if you made certain that the file with checksum '%1%..' is secure, "
@@ -1579,22 +1628,22 @@ msgstr ""
 "保護を解除してください。何も入力しないと、対象のファイルは廃棄されます。\n"
 
 #. translators: A prompt option
-#: src/callbacks/keyring.h:522
+#: src/callbacks/keyring.h:577
 msgid "discard"
 msgstr "破棄"
 
 #. translators: A prompt option help text
-#: src/callbacks/keyring.h:524
+#: src/callbacks/keyring.h:579
 msgid "Unblock using this file on your own risk."
 msgstr "自己責任でファイルの保護を解除します。"
 
 #. translators: A prompt option help text
-#: src/callbacks/keyring.h:526
+#: src/callbacks/keyring.h:581
 msgid "Discard the file."
 msgstr "ファイルを破棄します。"
 
 #. translators: A prompt text
-#: src/callbacks/keyring.h:530
+#: src/callbacks/keyring.h:585
 msgid "Unblock or discard?"
 msgstr "保護を解除しますか？それとも破棄しますか？"
 
@@ -1828,7 +1877,9 @@ msgid ""
 msgid_plural ""
 "%1% packages had to be excluded from file conflicts check because they are "
 "not yet downloaded."
-msgstr[0] "%1% 個のパッケージはダウンロードを行っていないため、ファイルの競合チェックからは除外されています。"
+msgstr[0] ""
+"%1% 個のパッケージはダウンロードを行っていないため、ファイルの競合チェックか"
+"らは除外されています。"
 
 #. TranslatorExplanation %1%(commandline option)
 #: src/callbacks/rpm.h:460
@@ -2538,7 +2589,9 @@ msgstr ""
 msgid ""
 "This is the recommended way for scripts to test whether a system reboot is "
 "suggested."
-msgstr "これはスクリプトからシステムの再起動が必要かどうかを判断するための推奨方式です。"
+msgstr ""
+"これはスクリプトからシステムの再起動が必要かどうかを判断するための推奨方式で"
+"す。"
 
 #: src/commands/needs-rebooting.cc:38
 msgid ""
@@ -3789,7 +3842,9 @@ msgstr ""
 msgid ""
 "For an extended search including not yet activated remote resources you may "
 "run '%1%' at any time."
-msgstr "現時点では有効化していないリモートのリソースを含めた拡張検索を行うには、 '%1%' を実行する必要があります。"
+msgstr ""
+"現時点では有効化していないリモートのリソースを含めた拡張検索を行うには、 "
+"'%1%' を実行する必要があります。"
 
 #: src/commands/search/search-packages-hinthack.cc:99
 #, boost-format
@@ -4481,8 +4536,9 @@ msgid ""
 "value can be changed in your local rpm configuration. In case of doubt try "
 "executing '%2%'."
 msgstr ""
-"rpm がソースパッケージをインストールする際の既定のインストール先は '%1%' ですが、 rpm "
-"側で設定を行うことで、インストール先を変更することができます。具体的には '%2%' を実行してください。"
+"rpm がソースパッケージをインストールする際の既定のインストール先は '%1%' です"
+"が、 rpm 側で設定を行うことで、インストール先を変更することができます。具体的"
+"には '%2%' を実行してください。"
 
 #. translators: -d, --build-deps-only
 #: src/commands/sourceinstall.cc:48
@@ -5338,7 +5394,9 @@ msgstr ""
 msgid ""
 "Please restart the operation in interactive mode and confirm your agreement "
 "with required licenses, or use the %s option."
-msgstr "対話モードで起動しなおして必要なライセンス (使用許諾) 契約の確認を行うか、コマンドラインオプションに %s を指定してください。"
+msgstr ""
+"対話モードで起動しなおして必要なライセンス (使用許諾) 契約の確認を行うか、コ"
+"マンドラインオプションに %s を指定してください。"
 
 #. translators: e.g. "... with flash package license."
 #: src/misc.cc:209
@@ -5483,8 +5541,8 @@ msgid ""
 "Repo '%1%' is managed by service '%2%'. Volatile changes are reset by the "
 "next service refresh!"
 msgstr ""
-"リポジトリ '%1%' はサービス '%2%' "
-"で管理されています。ここで変更を行っても、次回のサービス更新の際にリセットされてしまうことにご注意ください！"
+"リポジトリ '%1%' はサービス '%2%' で管理されています。ここで変更を行っても、"
+"次回のサービス更新の際にリセットされてしまうことにご注意ください！"
 
 #: src/repos.cc:73
 msgid "default priority"
@@ -5937,7 +5995,9 @@ msgstr "リポジトリのデータを読み込んでいます..."
 msgid ""
 "No repositories defined. Operating only with the installed resolvables. "
 "Nothing can be installed."
-msgstr "リポジトリが定義されていません。操作はインストール済みの解決方法についてのみ行われます。何もインストールできません。"
+msgstr ""
+"リポジトリが定義されていません。操作はインストール済みの解決方法についてのみ"
+"行われます。何もインストールできません。"
 
 #: src/repos.cc:1790
 #, c-format, boost-format

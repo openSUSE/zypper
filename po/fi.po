@@ -22,7 +22,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper.fi\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-30 18:12+0200\n"
+"POT-Creation-Date: 2021-06-02 15:57+0200\n"
 "PO-Revision-Date: 2021-03-15 09:57+0000\n"
 "Last-Translator: Tommi Nieminen <software@legisign.org>\n"
 "Language-Team: Finnish <https://l10n.opensuse.org/projects/zypper/master/fi/"
@@ -1377,6 +1377,14 @@ msgstr "Pakolliset ohjelman parametrit: "
 
 #: src/callbacks/keyring.h:32
 msgid ""
+"A GPG pubkey is clearly identified by it's fingerprint. Do not rely the keys "
+"name. If you are not sure whether the presented key is authentic, ask the "
+"repository provider or check his web site. Many provider maintain a web page "
+"showing the fingerprints of the GPG keys they are using."
+msgstr ""
+
+#: src/callbacks/keyring.h:37
+msgid ""
 "Signing data enables the recipient to verify that no modifications occurred "
 "after the data were signed. Accepting data with no, wrong or unknown "
 "signature can lead to a corrupted system and in extreme cases even to a "
@@ -1389,7 +1397,7 @@ msgstr ""
 "vaarantumiseen."
 
 #. translator: %1% is a file name
-#: src/callbacks/keyring.h:40
+#: src/callbacks/keyring.h:45
 #, boost-format
 msgid ""
 "File '%1%' is the repositories master index file. It ensures the integrity "
@@ -1398,7 +1406,7 @@ msgstr ""
 "Tiedosto '%1%' on tietovaraston pääindeksitiedosto. Se takaa koko "
 "tietovaraston eheyden."
 
-#: src/callbacks/keyring.h:46
+#: src/callbacks/keyring.h:51
 msgid ""
 "We can't verify that no one meddled with this file, so it might not be "
 "trustworthy anymore! You should not continue unless you know it's safe."
@@ -1407,7 +1415,7 @@ msgstr ""
 "välttämättä ole enää luetettava. Sinun ei tulisi jatkaa jos et tiedä sen "
 "olevan turvallista."
 
-#: src/callbacks/keyring.h:51
+#: src/callbacks/keyring.h:56
 msgid ""
 "This file was modified after it has been signed. This may have been a "
 "malicious change, so it might not be trustworthy anymore! You should not "
@@ -1417,90 +1425,94 @@ msgstr ""
 "pahantahtoinen muutos, joten se ei enää ole välttämättä luetettava! Sinun ei "
 "tulisi jatkaa, ellet tiedä onko se turvallista."
 
-#: src/callbacks/keyring.h:79
+#: src/callbacks/keyring.h:85
 msgid "Repository:"
 msgstr "Asennuslähde:"
 
-#: src/callbacks/keyring.h:81
-msgid "Key Name:"
-msgstr "Avaimen nimi:"
-
-#: src/callbacks/keyring.h:82
+#: src/callbacks/keyring.h:87
 msgid "Key Fingerprint:"
 msgstr "Avaimen sormenjälki:"
 
-#: src/callbacks/keyring.h:83
+#: src/callbacks/keyring.h:88
+msgid "Key Name:"
+msgstr "Avaimen nimi:"
+
+#: src/callbacks/keyring.h:89
+msgid "Key Algorithm:"
+msgstr ""
+
+#: src/callbacks/keyring.h:90
 msgid "Key Created:"
 msgstr "Avain luotu:"
 
-#: src/callbacks/keyring.h:84
+#: src/callbacks/keyring.h:91
 msgid "Key Expires:"
 msgstr "Avain vanhentuu:"
 
-#: src/callbacks/keyring.h:86
+#: src/callbacks/keyring.h:93
 msgid "Subkey:"
 msgstr "Aliavain:"
 
-#: src/callbacks/keyring.h:87
+#: src/callbacks/keyring.h:94
 msgid "Rpm Name:"
 msgstr "RPM nimi:"
 
-#: src/callbacks/keyring.h:113
+#: src/callbacks/keyring.h:120
 #, boost-format
 msgid "The gpg key signing file '%1%' has expired."
 msgstr "gpg avaimen allekirjoitustiedosto '%1%' on vanhentunut."
 
-#: src/callbacks/keyring.h:119
+#: src/callbacks/keyring.h:126
 #, boost-format
 msgid "The gpg key signing file '%1%' will expire in %2% day."
 msgid_plural "The gpg key signing file '%1%' will expire in %2% days."
 msgstr[0] "gpg avaimen allekirjoitustiedosto '%1%' vanhenee %2% päivässä."
 msgstr[1] "gpg avaimen allekirjoitustiedosto '%1%' vanhenee %2% päivässä."
 
-#: src/callbacks/keyring.h:142
+#: src/callbacks/keyring.h:149
 #, c-format, boost-format
 msgid "Accepting an unsigned file '%s'."
 msgstr "Hyväksyttiin allekirjoittamaton tiedosto \"%s\"."
 
-#: src/callbacks/keyring.h:146
+#: src/callbacks/keyring.h:153
 #, c-format, boost-format
 msgid "Accepting an unsigned file '%s' from repository '%s'."
 msgstr ""
 "Hyväksyttiin allekirjoittamaton tiedosto \"%s\" asennuslähteestä \"%s\"."
 
 #. translator: %1% is a file name
-#: src/callbacks/keyring.h:156
+#: src/callbacks/keyring.h:163
 #, boost-format
 msgid "File '%1%' is unsigned."
 msgstr "Tiedosto \"%1%\" on allekirjoittamaton."
 
 #. translator: %1% is a file name, %2% a repositories name
-#: src/callbacks/keyring.h:159
+#: src/callbacks/keyring.h:166
 #, boost-format
 msgid "File '%1%' from repository '%2%' is unsigned."
 msgstr "Tiedosto \"%1%\" asennuslähteestä \"%2%\" on allekirjoittamaton."
 
 #. TranslatorExplanation: speaking of a file
-#: src/callbacks/keyring.h:176
+#: src/callbacks/keyring.h:183
 #, c-format, boost-format
 msgid "File '%s' is unsigned, continue?"
 msgstr "Tiedostoa \"%s\" ei ole allekirjoitettu, jatketaanko?"
 
 #. TranslatorExplanation: speaking of a file
-#: src/callbacks/keyring.h:180
+#: src/callbacks/keyring.h:187
 #, c-format, boost-format
 msgid "File '%s' from repository '%s' is unsigned, continue?"
 msgstr ""
 "Tiedostoa \"%s\" asennuslähteestä \"%s\" ei ole allekirjoitettu, jatketaanko?"
 
-#: src/callbacks/keyring.h:203
+#: src/callbacks/keyring.h:210
 #, c-format, boost-format
 msgid "Accepting file '%s' signed with an unknown key '%s'."
 msgstr ""
 "Hyväksyttiin tiedosto \"%s\", joka on allekirjoitettu tuntemattomalla "
 "avaimella \"%s\"."
 
-#: src/callbacks/keyring.h:207
+#: src/callbacks/keyring.h:214
 #, c-format, boost-format
 msgid ""
 "Accepting file '%s' from repository '%s' signed with an unknown key '%s'."
@@ -1509,13 +1521,13 @@ msgstr ""
 "allekirjoitettu tuntemattomalla avaimella \"%s\"."
 
 #. translator: %1% is a file name, %2% is a gpg key ID
-#: src/callbacks/keyring.h:216
+#: src/callbacks/keyring.h:223
 #, boost-format
 msgid "File '%1%' is signed with an unknown key '%2%'."
 msgstr "Tiedosto \"%1%\" on allekirjoitettu tuntemattomalla avaimella \"%2%\"."
 
 #. translator: %1% is a file name, %2% is a gpg key ID, %3% a repositories name
-#: src/callbacks/keyring.h:219
+#: src/callbacks/keyring.h:226
 #, boost-format
 msgid "File '%1%' from repository '%3%' is signed with an unknown key '%2%'."
 msgstr ""
@@ -1523,14 +1535,14 @@ msgstr ""
 "avaimella \"%2%\"."
 
 #. translators: the last %s is gpg key ID
-#: src/callbacks/keyring.h:236
+#: src/callbacks/keyring.h:243
 #, c-format, boost-format
 msgid "File '%s' is signed with an unknown key '%s'. Continue?"
 msgstr ""
 "\"%s\" on allekirjoitettu tuntemattomalla avaimella \"%s\". Jatketaanko?"
 
 #. translators: the last %s is gpg key ID
-#: src/callbacks/keyring.h:240
+#: src/callbacks/keyring.h:247
 #, c-format, boost-format
 msgid ""
 "File '%s' from repository '%s' is signed with an unknown key '%s'. Continue?"
@@ -1538,25 +1550,25 @@ msgstr ""
 "Tiedosto \"%s\" asennuslähteestä \"%s\" on allekirjoitettu tuntemattomalla "
 "avaimella \"%s\". Jatketaanko?"
 
-#: src/callbacks/keyring.h:260
+#: src/callbacks/keyring.h:267
 msgid "Automatically importing the following key:"
 msgstr "Tuodaan automaattisesti seuraava avain:"
 
-#: src/callbacks/keyring.h:262
+#: src/callbacks/keyring.h:269
 msgid "Automatically trusting the following key:"
 msgstr "Luotettiin automaattisesti seuraavaan avaimeen:"
 
-#: src/callbacks/keyring.h:264
+#: src/callbacks/keyring.h:271
 msgid "New repository or package signing key received:"
 msgstr "Vastaanotettiin uusi asennuslähteen tai paketin avain:"
 
 #. translators: this message is shown after showing description of the key
-#: src/callbacks/keyring.h:287
+#: src/callbacks/keyring.h:305
 msgid "Do you want to reject the key, trust temporarily, or trust always?"
 msgstr "Haluatko evätä, luottaa väliaikaisesti vai luottaa aina avaimeen?"
 
 #. translators: this message is shown after showing description of the key
-#: src/callbacks/keyring.h:290
+#: src/callbacks/keyring.h:308
 msgid "Do you want to reject the key, or trust always?"
 msgstr "Haluatko hylätä avaimen vai luottaa siihen aina?"
 
@@ -1565,12 +1577,12 @@ msgstr "Haluatko hylätä avaimen vai luottaa siihen aina?"
 #. The anserws must be separated by slash characters '/' and must
 #. correspond to reject/trusttemporarily/trustalways in that order.
 #. The answers should be lower case letters.
-#: src/callbacks/keyring.h:308
+#: src/callbacks/keyring.h:326
 msgid "r/t/a/"
 msgstr "e/l/a"
 
 #. translators: the same as r/t/a, but without 'a'
-#: src/callbacks/keyring.h:311
+#: src/callbacks/keyring.h:329
 msgid "r/t"
 msgstr "e/l"
 
@@ -1579,32 +1591,32 @@ msgstr "e/l"
 #. The anserws must be separated by slash characters '/' and must
 #. correspond to reject/trusttemporarily/trustalways in that order.
 #. The answers should be lower case letters.
-#: src/callbacks/keyring.h:318
+#: src/callbacks/keyring.h:336
 msgid "r/a/"
 msgstr "h/a/"
 
 #. translators: help text for the 'r' option in the 'r/t/a' prompt
-#: src/callbacks/keyring.h:324
+#: src/callbacks/keyring.h:342
 msgid "Don't trust the key."
 msgstr "Ei luoteta avaimeen."
 
 #. translators: help text for the 't' option in the 'r/t/a' prompt
-#: src/callbacks/keyring.h:328
+#: src/callbacks/keyring.h:346
 msgid "Trust the key temporarily."
 msgstr "Luota avaimeen väliaikaisesti."
 
 #. translators: help text for the 'a' option in the 'r/t/a' prompt
-#: src/callbacks/keyring.h:333
+#: src/callbacks/keyring.h:351
 msgid "Trust the key and import it into trusted keyring."
 msgstr "Luota avaimeen ja lisää se avainrenkaaseen."
 
-#: src/callbacks/keyring.h:371
+#: src/callbacks/keyring.h:389
 #, c-format, boost-format
 msgid "Ignoring failed signature verification for file '%s'!"
 msgstr ""
 "Jätettiin huomioimatta epäonnistunut koostetarkistus tiedostossa \"%s\"!"
 
-#: src/callbacks/keyring.h:374
+#: src/callbacks/keyring.h:392
 #, c-format, boost-format
 msgid ""
 "Ignoring failed signature verification for file '%s' from repository '%s'!"
@@ -1612,25 +1624,25 @@ msgstr ""
 "Jätettiin huomioimatta epäonnistunut aitoustarkistus tiedostossa \"%s\" "
 "asennuslähteestä \"%s\"!"
 
-#: src/callbacks/keyring.h:380
+#: src/callbacks/keyring.h:398
 msgid "Double-check this is not caused by some malicious changes in the file!"
 msgstr "Tarkista, ettei tiedostossa ole pahatahtoisia muutoksia!"
 
 #. translator: %1% is a file name
-#: src/callbacks/keyring.h:390
+#: src/callbacks/keyring.h:408
 #, boost-format
 msgid "Signature verification failed for file '%1%'."
 msgstr "Aitoustarkistus epäonnistui tiedostossa \"%1%\"."
 
 #. translator: %1% is a file name, %2% a repositories name
-#: src/callbacks/keyring.h:393
+#: src/callbacks/keyring.h:411
 #, boost-format
 msgid "Signature verification failed for file '%1%' from repository '%2%'."
 msgstr ""
 "Allekirjoituksen varmistaminen epäonnistui tiedostossa \"%1%\" "
 "asennuslähteestä \"%2%\"."
 
-#: src/callbacks/keyring.h:437
+#: src/callbacks/keyring.h:460
 msgid ""
 "The rpm database seems to contain old V3 version gpg keys which are "
 "meanwhile obsolete and considered insecure:"
@@ -1638,12 +1650,12 @@ msgstr ""
 "RPM-tietokanta vaikuttaa sisältävän vanhan V3-version GPG-avaimia, joita "
 "vanhentuneina on pidettävä turvattomina:"
 
-#: src/callbacks/keyring.h:444
+#: src/callbacks/keyring.h:467
 #, boost-format
 msgid "To see details about a key call '%1%'."
 msgstr "Katso avaimen tiedot komennolla ”%1%”."
 
-#: src/callbacks/keyring.h:448
+#: src/callbacks/keyring.h:471
 #, boost-format
 msgid ""
 "Unless you believe the key in question is still in use, you can remove it "
@@ -1652,17 +1664,42 @@ msgstr ""
 "Jollet usko avaimen yhä olevan käytössä, voit poistaa sen RPM-tietokannasta "
 "komennolla ”%1%”."
 
-#: src/callbacks/keyring.h:470
+#. translator: %1% is the number of keys, %2% the name of a repository
+#: src/callbacks/keyring.h:490
+#, boost-format
+msgid "Received %1% new package signing key from repository %2%:"
+msgid_plural "Received %1% new package signing keys from repository %2%:"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/callbacks/keyring.h:494
+msgid ""
+"Those additional keys are usually used to sign packages shipped by the "
+"repository. In order to validate those packages upon download and "
+"installation the new keys will be imported into the rpm database."
+msgstr ""
+
+#: src/callbacks/keyring.h:496
+msgid "New:"
+msgstr ""
+
+#: src/callbacks/keyring.h:502
+msgid ""
+"The repository metadata introducing the new keys have been signed and "
+"validated by the trusted key:"
+msgstr ""
+
+#: src/callbacks/keyring.h:525
 #, c-format, boost-format
 msgid "No digest for file %s."
 msgstr "Ei koostetta tiedostolle %s."
 
-#: src/callbacks/keyring.h:478
+#: src/callbacks/keyring.h:533
 #, c-format, boost-format
 msgid "Unknown digest %s for file %s."
 msgstr "Tuntematon kooste %s tiedostolle %s."
 
-#: src/callbacks/keyring.h:495
+#: src/callbacks/keyring.h:550
 #, boost-format
 msgid ""
 "Digest verification failed for file '%1%'\n"
@@ -1677,7 +1714,7 @@ msgstr ""
 " odotettiin %3%\n"
 " mutta saatiin %4%\n"
 
-#: src/callbacks/keyring.h:507
+#: src/callbacks/keyring.h:562
 msgid ""
 "Accepting packages with wrong checksums can lead to a corrupted system and "
 "in extreme cases even to a system compromise."
@@ -1685,7 +1722,7 @@ msgstr ""
 "Tarkistussummaltaan virheellisten pakettien hyväksyminen voi johtaa "
 "järjestelmän vioittumiseen ja pahimmassa tapauksessa tietoturvauhkaan."
 
-#: src/callbacks/keyring.h:515
+#: src/callbacks/keyring.h:570
 #, boost-format
 msgid ""
 "However if you made certain that the file with checksum '%1%..' is secure, "
@@ -1702,22 +1739,22 @@ msgstr ""
 "tiedoston eston omalla vastuullasi. Tiedosto hylätään, jos syöte on tyhjä.\n"
 
 #. translators: A prompt option
-#: src/callbacks/keyring.h:522
+#: src/callbacks/keyring.h:577
 msgid "discard"
 msgstr "hylkää"
 
 #. translators: A prompt option help text
-#: src/callbacks/keyring.h:524
+#: src/callbacks/keyring.h:579
 msgid "Unblock using this file on your own risk."
 msgstr "Poista tämän tiedoston esto omalla vastuullasi."
 
 #. translators: A prompt option help text
-#: src/callbacks/keyring.h:526
+#: src/callbacks/keyring.h:581
 msgid "Discard the file."
 msgstr "Hylkää tiedosto."
 
 #. translators: A prompt text
-#: src/callbacks/keyring.h:530
+#: src/callbacks/keyring.h:585
 msgid "Unblock or discard?"
 msgstr "Poistetaanko esto vai hylätäänkö?"
 

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper.ko\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-30 18:12+0200\n"
+"POT-Creation-Date: 2021-06-02 15:57+0200\n"
 "PO-Revision-Date: 2019-04-04 18:36+0000\n"
 "Last-Translator: Hwajin Kim <hwajin.kim@e4net.net>\n"
 "Language-Team: Korean <https://l10n.opensuse.org/projects/zypper/master/ko/"
@@ -1250,6 +1250,14 @@ msgstr "비옵션 프로그램 인수: "
 
 #: src/callbacks/keyring.h:32
 msgid ""
+"A GPG pubkey is clearly identified by it's fingerprint. Do not rely the keys "
+"name. If you are not sure whether the presented key is authentic, ask the "
+"repository provider or check his web site. Many provider maintain a web page "
+"showing the fingerprints of the GPG keys they are using."
+msgstr ""
+
+#: src/callbacks/keyring.h:37
+msgid ""
 "Signing data enables the recipient to verify that no modifications occurred "
 "after the data were signed. Accepting data with no, wrong or unknown "
 "signature can lead to a corrupted system and in extreme cases even to a "
@@ -1260,7 +1268,7 @@ msgstr ""
 "템이 손상되고 극단적인 경우 시스템이 손상될 수 있습니다."
 
 #. translator: %1% is a file name
-#: src/callbacks/keyring.h:40
+#: src/callbacks/keyring.h:45
 #, boost-format
 msgid ""
 "File '%1%' is the repositories master index file. It ensures the integrity "
@@ -1269,7 +1277,7 @@ msgstr ""
 "'%1%' 파일은 리포지토리 마스터 인덱스 파일입니다. 전체 repo의 무결성을 보장합"
 "니다."
 
-#: src/callbacks/keyring.h:46
+#: src/callbacks/keyring.h:51
 msgid ""
 "We can't verify that no one meddled with this file, so it might not be "
 "trustworthy anymore! You should not continue unless you know it's safe."
@@ -1277,7 +1285,7 @@ msgstr ""
 "아무도이 파일에 간섭하지 않았음을 확인할 수 없으므로 더 이상 신뢰할 수 없습니"
 "다! 안전하다고 판단되지 않는 경우 계속해서는 안됩니다."
 
-#: src/callbacks/keyring.h:51
+#: src/callbacks/keyring.h:56
 msgid ""
 "This file was modified after it has been signed. This may have been a "
 "malicious change, so it might not be trustworthy anymore! You should not "
@@ -1286,85 +1294,89 @@ msgstr ""
 "이 파일은 서명된 후에 수정되었습니다. 이것은 악의적인 변경일 수 있으므로 더 "
 "이상 신뢰할 수 없습니다! 안전하다고 판단되지 않는 경우 계속해서는 안됩니다."
 
-#: src/callbacks/keyring.h:79
+#: src/callbacks/keyring.h:85
 msgid "Repository:"
 msgstr "리포지토리:"
 
-#: src/callbacks/keyring.h:81
-msgid "Key Name:"
-msgstr "키 이름:"
-
-#: src/callbacks/keyring.h:82
+#: src/callbacks/keyring.h:87
 msgid "Key Fingerprint:"
 msgstr "키 지문:"
 
-#: src/callbacks/keyring.h:83
+#: src/callbacks/keyring.h:88
+msgid "Key Name:"
+msgstr "키 이름:"
+
+#: src/callbacks/keyring.h:89
+msgid "Key Algorithm:"
+msgstr ""
+
+#: src/callbacks/keyring.h:90
 msgid "Key Created:"
 msgstr "키 생성:"
 
-#: src/callbacks/keyring.h:84
+#: src/callbacks/keyring.h:91
 msgid "Key Expires:"
 msgstr "키 만료:"
 
-#: src/callbacks/keyring.h:86
+#: src/callbacks/keyring.h:93
 msgid "Subkey:"
 msgstr "하위 키:"
 
-#: src/callbacks/keyring.h:87
+#: src/callbacks/keyring.h:94
 msgid "Rpm Name:"
 msgstr "RPM 이름:"
 
-#: src/callbacks/keyring.h:113
+#: src/callbacks/keyring.h:120
 #, boost-format
 msgid "The gpg key signing file '%1%' has expired."
 msgstr "GPG 키 서명 파일 '%1%'이(가) 만료되었습니다."
 
-#: src/callbacks/keyring.h:119
+#: src/callbacks/keyring.h:126
 #, boost-format
 msgid "The gpg key signing file '%1%' will expire in %2% day."
 msgid_plural "The gpg key signing file '%1%' will expire in %2% days."
 msgstr[0] "GPG 키 서명 파일 '%1%'이(가) %2%일 후에 만료됩니다."
 
-#: src/callbacks/keyring.h:142
+#: src/callbacks/keyring.h:149
 #, c-format, boost-format
 msgid "Accepting an unsigned file '%s'."
 msgstr "서명되지 않은 '%s' 파일을 승인 중입니다."
 
-#: src/callbacks/keyring.h:146
+#: src/callbacks/keyring.h:153
 #, c-format, boost-format
 msgid "Accepting an unsigned file '%s' from repository '%s'."
 msgstr "서명되지 않은 '%s' 파일을 '%s' 리포지토리에서 승인 중입니다."
 
 #. translator: %1% is a file name
-#: src/callbacks/keyring.h:156
+#: src/callbacks/keyring.h:163
 #, boost-format
 msgid "File '%1%' is unsigned."
 msgstr "'%1%' 파일이 서명되지 않았습니다."
 
 #. translator: %1% is a file name, %2% a repositories name
-#: src/callbacks/keyring.h:159
+#: src/callbacks/keyring.h:166
 #, boost-format
 msgid "File '%1%' from repository '%2%' is unsigned."
 msgstr "'%1%' 파일이 '%2%' 리포지토리에서 서명되지 않았습니다."
 
 #. TranslatorExplanation: speaking of a file
-#: src/callbacks/keyring.h:176
+#: src/callbacks/keyring.h:183
 #, c-format, boost-format
 msgid "File '%s' is unsigned, continue?"
 msgstr "'%s' 파일이 서명되지 않았습니다. 계속하시겠습니까?"
 
 #. TranslatorExplanation: speaking of a file
-#: src/callbacks/keyring.h:180
+#: src/callbacks/keyring.h:187
 #, c-format, boost-format
 msgid "File '%s' from repository '%s' is unsigned, continue?"
 msgstr "'%s' 파일이 '%s' 리포지토리에서 서명되지 않았습니다. 계속하시겠습니까?"
 
-#: src/callbacks/keyring.h:203
+#: src/callbacks/keyring.h:210
 #, c-format, boost-format
 msgid "Accepting file '%s' signed with an unknown key '%s'."
 msgstr "알 수 없는 키 '%s'(으)로 서명된 '%s' 파일을 승인 중입니다."
 
-#: src/callbacks/keyring.h:207
+#: src/callbacks/keyring.h:214
 #, c-format, boost-format
 msgid ""
 "Accepting file '%s' from repository '%s' signed with an unknown key '%s'."
@@ -1373,26 +1385,26 @@ msgstr ""
 "다."
 
 #. translator: %1% is a file name, %2% is a gpg key ID
-#: src/callbacks/keyring.h:216
+#: src/callbacks/keyring.h:223
 #, boost-format
 msgid "File '%1%' is signed with an unknown key '%2%'."
 msgstr "'%1%' 파일이 알 수 없는 키 '%2%'(으)로 서명되었습니다."
 
 #. translator: %1% is a file name, %2% is a gpg key ID, %3% a repositories name
-#: src/callbacks/keyring.h:219
+#: src/callbacks/keyring.h:226
 #, boost-format
 msgid "File '%1%' from repository '%3%' is signed with an unknown key '%2%'."
 msgstr ""
 "리포지토리 '%3%'의 '%1%' 파일이 알 수 없는 키 '%2%'(으)로 서명되었습니다."
 
 #. translators: the last %s is gpg key ID
-#: src/callbacks/keyring.h:236
+#: src/callbacks/keyring.h:243
 #, c-format, boost-format
 msgid "File '%s' is signed with an unknown key '%s'. Continue?"
 msgstr "'%s' 파일이 알 수 없는 키 '%s'(으)로 서명되었습니다. 계속하시겠습니까?"
 
 #. translators: the last %s is gpg key ID
-#: src/callbacks/keyring.h:240
+#: src/callbacks/keyring.h:247
 #, c-format, boost-format
 msgid ""
 "File '%s' from repository '%s' is signed with an unknown key '%s'. Continue?"
@@ -1400,27 +1412,27 @@ msgstr ""
 "리포지토리 '%s'의 '%s' 파일이 알 수 없는 키 '%s'(으)로 서명되었습니다. 계속하"
 "시겠습니까?"
 
-#: src/callbacks/keyring.h:260
+#: src/callbacks/keyring.h:267
 msgid "Automatically importing the following key:"
 msgstr "다음 키를 자동으로 임포트하는 중:"
 
-#: src/callbacks/keyring.h:262
+#: src/callbacks/keyring.h:269
 msgid "Automatically trusting the following key:"
 msgstr "다음 키를 자동으로 신뢰:"
 
-#: src/callbacks/keyring.h:264
+#: src/callbacks/keyring.h:271
 msgid "New repository or package signing key received:"
 msgstr "새 리포지토리 또는 패키지 서명 키 수신:"
 
 #. translators: this message is shown after showing description of the key
-#: src/callbacks/keyring.h:287
+#: src/callbacks/keyring.h:305
 msgid "Do you want to reject the key, trust temporarily, or trust always?"
 msgstr ""
 "키를 거부(r)하시겠습니까, 아니면 임시로 신뢰(t)하거나 항상 신뢰(a)하시겠습니"
 "까?"
 
 #. translators: this message is shown after showing description of the key
-#: src/callbacks/keyring.h:290
+#: src/callbacks/keyring.h:308
 msgid "Do you want to reject the key, or trust always?"
 msgstr "키를 거부(r)하시겠습니까, 아니면 항상 신뢰(a)하시겠습니까?"
 
@@ -1429,12 +1441,12 @@ msgstr "키를 거부(r)하시겠습니까, 아니면 항상 신뢰(a)하시겠�
 #. The anserws must be separated by slash characters '/' and must
 #. correspond to reject/trusttemporarily/trustalways in that order.
 #. The answers should be lower case letters.
-#: src/callbacks/keyring.h:308
+#: src/callbacks/keyring.h:326
 msgid "r/t/a/"
 msgstr "r/t/a/"
 
 #. translators: the same as r/t/a, but without 'a'
-#: src/callbacks/keyring.h:311
+#: src/callbacks/keyring.h:329
 msgid "r/t"
 msgstr "r/t"
 
@@ -1443,53 +1455,53 @@ msgstr "r/t"
 #. The anserws must be separated by slash characters '/' and must
 #. correspond to reject/trusttemporarily/trustalways in that order.
 #. The answers should be lower case letters.
-#: src/callbacks/keyring.h:318
+#: src/callbacks/keyring.h:336
 msgid "r/a/"
 msgstr "r/a/"
 
 #. translators: help text for the 'r' option in the 'r/t/a' prompt
-#: src/callbacks/keyring.h:324
+#: src/callbacks/keyring.h:342
 msgid "Don't trust the key."
 msgstr "키를 신뢰하지 않습니다."
 
 #. translators: help text for the 't' option in the 'r/t/a' prompt
-#: src/callbacks/keyring.h:328
+#: src/callbacks/keyring.h:346
 msgid "Trust the key temporarily."
 msgstr "임시로 키를 신뢰합니다."
 
 #. translators: help text for the 'a' option in the 'r/t/a' prompt
-#: src/callbacks/keyring.h:333
+#: src/callbacks/keyring.h:351
 msgid "Trust the key and import it into trusted keyring."
 msgstr "키를 신뢰하고 신뢰된 키링으로 임포트합니다."
 
-#: src/callbacks/keyring.h:371
+#: src/callbacks/keyring.h:389
 #, c-format, boost-format
 msgid "Ignoring failed signature verification for file '%s'!"
 msgstr "'%s' 파일에 대한 서명 확인 실패를 무시합니다!"
 
-#: src/callbacks/keyring.h:374
+#: src/callbacks/keyring.h:392
 #, c-format, boost-format
 msgid ""
 "Ignoring failed signature verification for file '%s' from repository '%s'!"
 msgstr "리포지토리 '%s'의 '%s' 파일에 대한 서명 확인 실패를 무시합니다!"
 
-#: src/callbacks/keyring.h:380
+#: src/callbacks/keyring.h:398
 msgid "Double-check this is not caused by some malicious changes in the file!"
 msgstr "파일에 악의적인 변경 사항이 없는지 다시 한 번 확인하십시오!"
 
 #. translator: %1% is a file name
-#: src/callbacks/keyring.h:390
+#: src/callbacks/keyring.h:408
 #, boost-format
 msgid "Signature verification failed for file '%1%'."
 msgstr "'%1%' 파일에 대한 서명 확인에 실패했습니다."
 
 #. translator: %1% is a file name, %2% a repositories name
-#: src/callbacks/keyring.h:393
+#: src/callbacks/keyring.h:411
 #, boost-format
 msgid "Signature verification failed for file '%1%' from repository '%2%'."
 msgstr "리포지토리 '%1%'의 '%2%' 파일에 대한 서명 확인에 실패했습니다."
 
-#: src/callbacks/keyring.h:437
+#: src/callbacks/keyring.h:460
 msgid ""
 "The rpm database seems to contain old V3 version gpg keys which are "
 "meanwhile obsolete and considered insecure:"
@@ -1497,12 +1509,12 @@ msgstr ""
 "rpm 데이터베이스에 오래되고 안전하지 않은 것으로 간주되는 이전 V3 버전 gpg 키"
 "가 있는 것 같습니다."
 
-#: src/callbacks/keyring.h:444
+#: src/callbacks/keyring.h:467
 #, boost-format
 msgid "To see details about a key call '%1%'."
 msgstr "키에 대한 세부 정보를 보려면 '%1%'을(를) 호출합니다."
 
-#: src/callbacks/keyring.h:448
+#: src/callbacks/keyring.h:471
 #, boost-format
 msgid ""
 "Unless you believe the key in question is still in use, you can remove it "
@@ -1511,17 +1523,41 @@ msgstr ""
 "문제의 키가 여전히 사용되는 것이 아니면 '%1%'을(를) 호출하여 rpm 데이터베이스"
 "에서 해당 키를 제거할 수 있습니다."
 
-#: src/callbacks/keyring.h:470
+#. translator: %1% is the number of keys, %2% the name of a repository
+#: src/callbacks/keyring.h:490
+#, boost-format
+msgid "Received %1% new package signing key from repository %2%:"
+msgid_plural "Received %1% new package signing keys from repository %2%:"
+msgstr[0] ""
+
+#: src/callbacks/keyring.h:494
+msgid ""
+"Those additional keys are usually used to sign packages shipped by the "
+"repository. In order to validate those packages upon download and "
+"installation the new keys will be imported into the rpm database."
+msgstr ""
+
+#: src/callbacks/keyring.h:496
+msgid "New:"
+msgstr ""
+
+#: src/callbacks/keyring.h:502
+msgid ""
+"The repository metadata introducing the new keys have been signed and "
+"validated by the trusted key:"
+msgstr ""
+
+#: src/callbacks/keyring.h:525
 #, c-format, boost-format
 msgid "No digest for file %s."
 msgstr "%s 파일에 대한 요약이 없습니다."
 
-#: src/callbacks/keyring.h:478
+#: src/callbacks/keyring.h:533
 #, c-format, boost-format
 msgid "Unknown digest %s for file %s."
 msgstr "%s 파일에 대한 요약 %s을(를) 알 수 없습니다."
 
-#: src/callbacks/keyring.h:495
+#: src/callbacks/keyring.h:550
 #, boost-format
 msgid ""
 "Digest verification failed for file '%1%'\n"
@@ -1536,7 +1572,7 @@ msgstr ""
 "  예상 결과: %3%\n"
 "  실제 결과: %4%\n"
 
-#: src/callbacks/keyring.h:507
+#: src/callbacks/keyring.h:562
 msgid ""
 "Accepting packages with wrong checksums can lead to a corrupted system and "
 "in extreme cases even to a system compromise."
@@ -1544,7 +1580,7 @@ msgstr ""
 "잘못된 체크섬을 포함한 패키지를 승인하면 시스템이 손상될 수 있으며, 심각한 경"
 "우 보안 위험이 발생할 수도 있습니다."
 
-#: src/callbacks/keyring.h:515
+#: src/callbacks/keyring.h:570
 #, boost-format
 msgid ""
 "However if you made certain that the file with checksum '%1%..' is secure, "
@@ -1561,22 +1597,22 @@ msgstr ""
 "다.\n"
 
 #. translators: A prompt option
-#: src/callbacks/keyring.h:522
+#: src/callbacks/keyring.h:577
 msgid "discard"
 msgstr "폐기"
 
 #. translators: A prompt option help text
-#: src/callbacks/keyring.h:524
+#: src/callbacks/keyring.h:579
 msgid "Unblock using this file on your own risk."
 msgstr "사용자의 위험 부담하에 이 파일의 사용 차단을 해제합니다."
 
 #. translators: A prompt option help text
-#: src/callbacks/keyring.h:526
+#: src/callbacks/keyring.h:581
 msgid "Discard the file."
 msgstr "파일을 폐기합니다."
 
 #. translators: A prompt text
-#: src/callbacks/keyring.h:530
+#: src/callbacks/keyring.h:585
 msgid "Unblock or discard?"
 msgstr "차단을 해제하시겠습니까? 아니면 폐기하시겠습니까?"
 
