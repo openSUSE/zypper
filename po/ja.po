@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-06-02 15:57+0200\n"
-"PO-Revision-Date: 2021-05-09 03:58+0000\n"
+"PO-Revision-Date: 2021-06-03 00:58+0000\n"
 "Last-Translator: Yasuhiko Kamata <belphegor@belbel.or.jp>\n"
 "Language-Team: Japanese <https://l10n.opensuse.org/projects/zypper/master/ja/"
 ">\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 4.6.1\n"
+"X-Generator: Weblate 4.6.2\n"
 
 #: src/Command.cc:93
 msgid "Invalid command"
@@ -1280,6 +1280,8 @@ msgid ""
 "repository provider or check his web site. Many provider maintain a web page "
 "showing the fingerprints of the GPG keys they are using."
 msgstr ""
+"GPG の公開鍵を確認するにあたっては、名前ではなく指紋を必ず確認してください。また、提示された鍵に確証が持てない場合は、リポジトリの提供者もしくは "
+"Web サイトをご確認ください。多くの場合、 Web ページ内に使用している GPG 鍵の指紋を示しています。"
 
 #: src/callbacks/keyring.h:37
 msgid ""
@@ -1336,7 +1338,7 @@ msgstr "鍵の名前:"
 
 #: src/callbacks/keyring.h:89
 msgid "Key Algorithm:"
-msgstr ""
+msgstr "鍵アルゴリズム:"
 
 #: src/callbacks/keyring.h:90
 msgid "Key Created:"
@@ -1560,7 +1562,7 @@ msgstr ""
 #, boost-format
 msgid "Received %1% new package signing key from repository %2%:"
 msgid_plural "Received %1% new package signing keys from repository %2%:"
-msgstr[0] ""
+msgstr[0] "リポジトリ %2% から %1% 個の新しいパッケージ署名鍵を受信しました:"
 
 #: src/callbacks/keyring.h:494
 msgid ""
@@ -1568,16 +1570,18 @@ msgid ""
 "repository. In order to validate those packages upon download and "
 "installation the new keys will be imported into the rpm database."
 msgstr ""
+"これらの追加鍵は通常、リポジトリから提供されるパッケージに対する署名で使用されます。ダウンロードやインストールの際、パッケージの検証を行うため、"
+"これらの新しい鍵を RPM データベース内に取り込みます。"
 
 #: src/callbacks/keyring.h:496
 msgid "New:"
-msgstr ""
+msgstr "新規:"
 
 #: src/callbacks/keyring.h:502
 msgid ""
 "The repository metadata introducing the new keys have been signed and "
 "validated by the trusted key:"
-msgstr ""
+msgstr "新しい鍵を指し示しているリポジトリのメタデータが、下記の信頼済み鍵で署名されていることを確認しました:"
 
 #: src/callbacks/keyring.h:525
 #, c-format, boost-format
