@@ -79,8 +79,8 @@ namespace zypp
       {
 	t << ( TableRow() << "" << _("Repository:") << context.repoInfo().asUserString() );
       }
-      t << ( TableRow() << "" << _("Key Name:") << key.name() )
-	<< ( TableRow() << "" << _("Key Fingerprint:") << str::gapify( key.fingerprint(), 8 ) )
+      t << ( TableRow() << "" << _("Key Fingerprint:") << str::gapify( key.fingerprint(), 4 ) )
+	<< ( TableRow() << "" << _("Key Name:") << key.name() )
 	<< ( TableRow() << "" << _("Key Algorithm:") << key.algoName() )
 	<< ( TableRow() << "" << _("Key Created:") << key.created() )
 	<< ( TableRow() << "" << _("Key Expires:") << key.expiresAsString() );
@@ -255,8 +255,8 @@ namespace zypp
                 const PublicKey &key_r, const KeyContext & context_r, bool canTrustTemporarily_r )
       {
         Zypper & zypper = Zypper::instance();
-        std::ostringstream s;
 
+        std::ostringstream s;
 	s << std::endl;
 	if (_gopts.gpg_auto_import_keys)
 	  s << _("Automatically importing the following key:") << std::endl;
@@ -283,7 +283,13 @@ namespace zypp
         }
 
         // ask the user
-        s << std::endl;
+        // FIXME: The embedded key table will reset the prompt color and
+        // the actual question after the table is rendered normal. That's
+        // why we print the 1st part here in PROMPT color and just pass the
+        // question to propmpt().
+        zypper.out().info( ColorString( s.str(), ColorContext::PROMPT ).str() );
+        s.str( std::string() );	// clear the string
+
         if ( canTrustTemporarily_r ) {
           // translators: this message is shown after showing description of the key
           s << _("Do you want to reject the key, trust temporarily, or trust always?");
@@ -410,21 +416,26 @@ namespace zypp
 
       virtual void report ( const UserData & data )
       {
-        if ( data.type() == zypp::ContentType( KeyRingReport::ACCEPT_PACKAGE_KEY_REQUEST ) ) {
-          if ( !data.hasvalue("PublicKey") || !data.hasvalue(("KeyContext")) ) {
-            WAR << "Missing arguments in report call for content type: " << data.type() << endl;
-            return;
-          }
-          const PublicKey &key  = data.get<PublicKey>("PublicKey");
-          const KeyContext &ctx = data.get<KeyContext>("KeyContext");
-          KeyRingReport::KeyTrust res = askUserToAcceptKey(key,ctx, false);
-          data.set("TrustKey", res == KeyRingReport::KEY_TRUST_AND_IMPORT);
-          return;
-        }
+        if ( data.type() == zypp::ContentType( KeyRingReport::ACCEPT_PACKAGE_KEY_REQUEST ) )
+	  return askUserToAcceptPackageKey( data );
         else if ( data.type() == zypp::ContentType( KeyRingReport::KEYS_NOT_IMPORTED_REPORT ) )
 	  return reportKeysNotImportedReport( data );
-
+	else if ( data.type() == zypp::ContentType( KeyRingReport::REPORT_AUTO_IMPORT_KEY ) )
+	  return reportAutoImportKey( data );
         WAR << "Unhandled report() call" << endl;
+      }
+
+      void askUserToAcceptPackageKey( const UserData & data )
+      {
+	if ( !data.hasvalue("PublicKey") || !data.hasvalue(("KeyContext")) ) {
+	  WAR << "Missing arguments in report call for content type: " << data.type() << endl;
+	  return;
+	}
+	const PublicKey &key  = data.get<PublicKey>("PublicKey");
+	const KeyContext &ctx = data.get<KeyContext>("KeyContext");
+	KeyRingReport::KeyTrust res = askUserToAcceptKey(key,ctx, false);
+	data.set("TrustKey", res == KeyRingReport::KEY_TRUST_AND_IMPORT);
+	return;
       }
 
       void reportKeysNotImportedReport( const UserData & data )
@@ -449,6 +460,38 @@ namespace zypp
 	Zypper::instance().out().par( 4,
 				      str::Format(_("Unless you believe the key in question is still in use, you can remove it from the rpm database calling '%1%'.") )
 				      % "rpm -e GPG-PUBKEY-VERSION" );
+
+	zypper.out().gap();
+      }
+
+      void reportAutoImportKey( const UserData & data_r )
+      {
+	if ( not ( data_r.hasvalue("KeyDataList") && data_r.hasvalue("KeySigning") && data_r.hasvalue("KeyContext") ) ) {
+	  WAR << "Missing arguments in report call for content type: " << data_r.type() << endl;
+	  return;
+	}
+	const std::list<PublicKeyData> & keyDataList { data_r.get<std::list<PublicKeyData>>("KeyDataList") };
+	const PublicKeyData &            keySigning  { data_r.get<PublicKeyData>("KeySigning") };
+	const KeyContext &               context     { data_r.get<KeyContext>("KeyContext") };
+
+	Zypper & zypper { Zypper::instance() };
+
+	// translator: %1% is the number of keys, %2% the name of a repository
+	zypper.out().notePar( str::Format( PL_( "Received %1% new package signing key from repository %2%:",
+						"Received %1% new package signing keys from repository %2%:",
+					 keyDataList.size() )) % keyDataList.size() % context.repoInfo().asUserString() );
+
+	zypper.out().par( 2,_("Those additional keys are usually used to sign packages shipped by the repository. In order to validate those packages upon download and installation the new keys will be imported into the rpm database.") );
+
+	auto newTag { HIGHLIGHTString(_("New:") ) };
+	for ( const auto & kd : keyDataList ) {
+	  zypper.out().gap();
+	  dumpKeyInfo( std::cout << "  " << newTag << endl, kd );
+	}
+
+	zypper.out().par( 2,HIGHLIGHTString(_("The repository metadata introducing the new keys have been signed and validated by the trusted key:")) );
+	zypper.out().gap();
+	dumpKeyInfo( std::cout, keySigning, context );
 
 	zypper.out().gap();
       }
