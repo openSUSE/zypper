@@ -21,7 +21,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-06-02 15:57+0200\n"
-"PO-Revision-Date: 2021-05-31 22:59+0000\n"
+"PO-Revision-Date: 2021-06-02 19:59+0000\n"
 "Last-Translator: Aleš Kastner <alkas@volny.cz>\n"
 "Language-Team: Czech <https://l10n.opensuse.org/projects/zypper/master/cs/>\n"
 "Language: cs\n"
@@ -189,7 +189,7 @@ msgstr "Ignorovat neznámé balíčky."
 msgid ""
 "Terse output for machine consumption. Implies --no-abbrev and --no-color."
 msgstr ""
-"--terse, -t - výstup pro spotřebu stroje. Zároveň nastaví  --no-abbrev a -no-"
+"--terse, -t - výstup pro spotřebu stroje. Zároveň nastaví --no-abbrev a --no-"
 "color."
 
 #. translators: --reposd-dir, -D <DIR>
@@ -542,7 +542,7 @@ msgid ""
 "Patch '%1%' is optional. Use '%2%' to install it, or '%3%' to include all "
 "optional patches."
 msgstr ""
-"Oprava  '%1%' je nepovinná. Použijte '%2%' k její instalaci nebo '%3%' k "
+"Oprava '%1%' je nepovinná. Použijte '%2%' k její instalaci nebo '%3%' k "
 "zahrnutí všech nepovinných oprav."
 
 #: src/RequestFeedback.cc:192
@@ -1454,6 +1454,11 @@ msgid ""
 "repository provider or check his web site. Many provider maintain a web page "
 "showing the fingerprints of the GPG keys they are using."
 msgstr ""
+"Veřejný klíč GPG je jasně identifikován svým otiskem prstu (fingerprint). "
+"Nespoléhejte na název klíče. Nevíte-li jistě, zda je předložený klíč "
+"autentický, zeptejte se poskytovatele úložiště nebo zkontrolujte jeho webové "
+"stránky. Mnoho poskytovatelů udržuje webovou stránku zobrazující otisky "
+"prstů klíčů GPG, které používají."
 
 #: src/callbacks/keyring.h:37
 msgid ""
@@ -1509,7 +1514,7 @@ msgstr "Název klíče:"
 
 #: src/callbacks/keyring.h:89
 msgid "Key Algorithm:"
-msgstr ""
+msgstr "Algoritmus klíče:"
 
 #: src/callbacks/keyring.h:90
 msgid "Key Created:"
@@ -1727,9 +1732,9 @@ msgstr ""
 #, boost-format
 msgid "Received %1% new package signing key from repository %2%:"
 msgid_plural "Received %1% new package signing keys from repository %2%:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Získán %1% nový balíček podepisujícího klíče z úložiště %2%:"
+msgstr[1] "Získány %1% nové balíčky podepisujících klíčů z úložiště %2%:"
+msgstr[2] "Získáno %1% nových balíčků podepisujících klíčů z úložiště %2%:"
 
 #: src/callbacks/keyring.h:494
 msgid ""
@@ -1737,16 +1742,21 @@ msgid ""
 "repository. In order to validate those packages upon download and "
 "installation the new keys will be imported into the rpm database."
 msgstr ""
+"Tyto další klíče se obvykle používají k podpisu balíčků dodávaných "
+"úložištěm. Za účelem ověření těchto balíčků po stažení a instalaci budou "
+"nové klíče importovány do databáze rpm."
 
 #: src/callbacks/keyring.h:496
 msgid "New:"
-msgstr ""
+msgstr "Nový:"
 
 #: src/callbacks/keyring.h:502
 msgid ""
 "The repository metadata introducing the new keys have been signed and "
 "validated by the trusted key:"
 msgstr ""
+"Metadata úložiště, uvádějící nové klíče, byla podepsána a ověřena "
+"důvěryhodným klíčem:"
 
 #: src/callbacks/keyring.h:525
 #, c-format, boost-format
