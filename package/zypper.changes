@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Wed Jun  2 16:00:25 CEST 2021 - ma@suse.de
+
+- Add hints to 'trust GPG key' prompt.
+- Add report when receiving new package signing keys from a
+  trusted repo (bsc#1184326)
+- Added translation using Weblate (Kabyle)
+- version 1.14.45
+
+-------------------------------------------------------------------
 Fri Apr 30 18:30:14 CEST 2021 - ma@suse.de
 
 - Rephrase needs-rebooting help and messages.
