@@ -27,6 +27,11 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
   namespace
   {
+    inline void hintFingerprint()
+    {
+      Zypper::instance().out().notePar( 4, _("A GPG pubkey is clearly identified by it's fingerprint. Do not rely the keys name. If you are not sure whether the presented key is authentic, ask the repository provider or check his web site. Many provider maintain a web page showing the fingerprints of the GPG keys they are using.") );
+    }
+
     inline void hintUnsignedData()
     {
       Zypper::instance().out().notePar( 4, _("Signing data enables the recipient to verify that no modifications occurred after the data were signed. Accepting data with no, wrong or unknown signature can lead to a corrupted system and in extreme cases even to a system compromise.") );
@@ -273,12 +278,14 @@ namespace zypp
         {
           MIL << "Automatically importing key " << key_r << std::endl;
           zypper.out().info(s.str());
+          hintFingerprint();
           return KeyRingReport::KEY_TRUST_AND_IMPORT;
         }
         else if (_gopts.no_gpg_checks && canTrustTemporarily_r )
         {
           MIL << "Automatically trusting key " << key_r << std::endl;
           zypper.out().info(s.str());
+          hintFingerprint();
           return KeyRingReport::KEY_TRUST_TEMPORARILY;
         }
 
@@ -288,6 +295,9 @@ namespace zypp
         // why we print the 1st part here in PROMPT color and just pass the
         // question to propmpt().
         zypper.out().info( ColorString( s.str(), ColorContext::PROMPT ).str() );
+        hintUnsignedData();
+        hintFingerprint();
+        zypper.out().gap();
         s.str( std::string() );	// clear the string
 
         if ( canTrustTemporarily_r ) {
