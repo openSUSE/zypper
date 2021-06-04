@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-06-02 15:57+0200\n"
-"PO-Revision-Date: 2021-05-17 14:59+0000\n"
+"PO-Revision-Date: 2021-06-04 21:58+0000\n"
 "Last-Translator: Luiz Fernando Ranghetti <elchevive68@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) <https://l10n.opensuse.org/projects/"
 "zypper/master/pt_BR/>\n"
@@ -1389,6 +1389,11 @@ msgid ""
 "repository provider or check his web site. Many provider maintain a web page "
 "showing the fingerprints of the GPG keys they are using."
 msgstr ""
+"Uma chave pública GPG é claramente identificada por sua impressão digital. "
+"Não confie no nome da chave. Se você não tem certeza de que a presente chave "
+"é autêntica, pergunte ao fornecedor do repositório ou verifique em seu site. "
+"Muitos fornecedores mantém uma página que mostra as impressões digitais das "
+"chaves GPG que eles estão usando."
 
 #: src/callbacks/keyring.h:37
 msgid ""
@@ -1398,7 +1403,7 @@ msgid ""
 "system compromise."
 msgstr ""
 "Assinar os dados permite ao destinatário verificar que nenhuma modificação "
-"ocorreu após os dados serem assinados. Aceitar dados sem assinatura, "
+"ocorreu após os dados serem assinados. Aceitar dados sem assinatura, com "
 "assinatura errada ou desconhecida pode levar à um sistema corrompido e em "
 "casos extremos à comprometer todo o sistema."
 
@@ -1444,7 +1449,7 @@ msgstr "Nome da chave:"
 
 #: src/callbacks/keyring.h:89
 msgid "Key Algorithm:"
-msgstr ""
+msgstr "Algoritmo da chave:"
 
 #: src/callbacks/keyring.h:90
 msgid "Key Created:"
@@ -1670,8 +1675,8 @@ msgstr ""
 #, boost-format
 msgid "Received %1% new package signing key from repository %2%:"
 msgid_plural "Received %1% new package signing keys from repository %2%:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Recebido %1% novo pacote de chave de assinatura do repositório %2%:"
+msgstr[1] "Recebidos %1% novos pacotes de chaves de assinatura do repositório %2%:"
 
 #: src/callbacks/keyring.h:494
 msgid ""
@@ -1679,16 +1684,21 @@ msgid ""
 "repository. In order to validate those packages upon download and "
 "installation the new keys will be imported into the rpm database."
 msgstr ""
+"Estas chaves adicionais são geralmente utilizadas para assinar pacotes "
+"presentes no repositório. Para validar estes pacotes antes de baixar e "
+"instalar, as novas chaves serão importadas para o banco de dados RPM."
 
 #: src/callbacks/keyring.h:496
 msgid "New:"
-msgstr ""
+msgstr "Nova:"
 
 #: src/callbacks/keyring.h:502
 msgid ""
 "The repository metadata introducing the new keys have been signed and "
 "validated by the trusted key:"
 msgstr ""
+"Os metadados do repositório que apresentam as novas chaves foram assinados e "
+"validados pela chave confiável:"
 
 #: src/callbacks/keyring.h:525
 #, c-format, boost-format
@@ -6488,8 +6498,7 @@ msgid ""
 "- use another repository"
 msgstr ""
 "Falha ao verificar a integridade do pacote. Este pode ser um problema com o "
-"repositório ou a mídia.\n"
-"Tente um dos seguintes procedimentos:\n"
+"repositório ou a mídia. Tente um dos seguintes procedimentos:\n"
 " \n"
 " - apenas repita o comando anterior\n"
 " - atualize os repositórios usando 'zypper refresh'\n"
