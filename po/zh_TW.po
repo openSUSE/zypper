@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-06-02 15:57+0200\n"
-"PO-Revision-Date: 2021-05-13 08:59+0000\n"
+"PO-Revision-Date: 2021-06-05 10:00+0000\n"
 "Last-Translator: Ramax Lo <ramaxlo@gmail.com>\n"
 "Language-Team: Chinese (Taiwan) <https://l10n.opensuse.org/projects/zypper/"
 "master/zh_TW/>\n"
@@ -1239,6 +1239,8 @@ msgid ""
 "repository provider or check his web site. Many provider maintain a web page "
 "showing the fingerprints of the GPG keys they are using."
 msgstr ""
+"透過指紋已清楚地識別一個 GPG 公開金鑰。請不要信任金鑰名稱。若您不確定該金鑰是否可信，請詢問套件庫提供者或是查看其網站。"
+"許多提供者會維護一個網頁以顯示他們所使用的 GPG 金鑰指紋。"
 
 #: src/callbacks/keyring.h:37
 msgid ""
@@ -1289,7 +1291,7 @@ msgstr "金鑰名稱："
 
 #: src/callbacks/keyring.h:89
 msgid "Key Algorithm:"
-msgstr ""
+msgstr "金鑰演算法："
 
 #: src/callbacks/keyring.h:90
 msgid "Key Created:"
@@ -1502,24 +1504,24 @@ msgstr ""
 #, boost-format
 msgid "Received %1% new package signing key from repository %2%:"
 msgid_plural "Received %1% new package signing keys from repository %2%:"
-msgstr[0] ""
+msgstr[0] "接收來自套件庫 %2% 的 %1% 個新套件簽章金鑰："
 
 #: src/callbacks/keyring.h:494
 msgid ""
 "Those additional keys are usually used to sign packages shipped by the "
 "repository. In order to validate those packages upon download and "
 "installation the new keys will be imported into the rpm database."
-msgstr ""
+msgstr "這些額外的金鑰通常被使用於簽署由套件庫分發的套件。為了在下載及安裝時驗證這些套件，這些新的金鑰將會被匯入到 rpm 資料庫。"
 
 #: src/callbacks/keyring.h:496
 msgid "New:"
-msgstr ""
+msgstr "新的："
 
 #: src/callbacks/keyring.h:502
 msgid ""
 "The repository metadata introducing the new keys have been signed and "
 "validated by the trusted key:"
-msgstr ""
+msgstr "套件庫中繼資料導入了已通過信任金鑰所簽署與驗證的新金鑰："
 
 #: src/callbacks/keyring.h:525
 #, c-format, boost-format
