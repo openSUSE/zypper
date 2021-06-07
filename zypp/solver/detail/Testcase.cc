@@ -71,6 +71,12 @@ namespace zypp
 
       bool Testcase::createTestcase(Resolver & resolver, bool dumpPool, bool runSolver)
       {
+	// libzypp/issues/317: make sure a satsolver instance is actually present
+	if ( not resolver.get() ) {
+	  WAR << "Can't createTestcase if the satsolver is not yet initialized." << endl;
+	  return false;
+	}
+
 	MIL << "createTestcase at " << dumpPath << (dumpPool?" dumpPool":"") << (runSolver?" runSolver":"") << endl;
         PathInfo path (dumpPath);
 

@@ -295,7 +295,7 @@ void Resolver::solverInit()
     // Solving with libsolv
     static bool poolDumped = false;
     MIL << "-------------- Calling SAT Solver -------------------" << endl;
-    if ( getenv("ZYPP_FULLLOG") ) {
+    if ( getenv("ZYPP_FULLLOG") and get() ) { // libzypp/issues/317: get() to make sure a satsolver instance is actually present
 	Testcase testcase("/var/log/YaST2/autoTestcase");
 	if (!poolDumped) {
 	    testcase.createTestcase (*this, true, false); // dump pool
