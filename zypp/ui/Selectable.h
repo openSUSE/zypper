@@ -125,7 +125,7 @@ namespace zypp
       /** The 'best' or 'most interesting' among all available objects.
        * One that is, or is likely to be, chosen for installation, unless
        * it violated any solver policy (see \ref updateCandidateObj).
-       * \note Might return a retracted item if explicitly set by \ref setCandidate
+       * \note Might return a blacklisted item if explicitly set by \ref setCandidate
        * or nothing else available.
        */
       PoolItem candidateObj() const;
@@ -134,7 +134,7 @@ namespace zypp
        * In contrary to \ref candidateObj, this may return no item even if
        * there are available objects. This simply means the \ref Repository
        * does not provide this object.
-       * \note Avoids to return retracted items.
+       * \note Avoids to return blacklisted items.
        */
       PoolItem candidateObjFrom( Repository repo_r ) const;
 
@@ -143,7 +143,7 @@ namespace zypp
        * there are available objects. This simply means the best object is
        * already installed, and all available objects violate at least one
        * update policy.
-       * \note Avoids to return retracted items.
+       * \note Avoids to return blacklisted items.
        */
       PoolItem updateCandidateObj() const;
 
@@ -151,7 +151,7 @@ namespace zypp
        * It's doubtful whether solely looking at the version makes a good
        * candidate, but apps ask for it. Beware that different vendors may
        * use different (uncomparable) version schemata.
-       * \note Avoids to return retracted items.
+       * \note Avoids to return blacklisted items.
        */
       PoolItem highestAvailableVersionObj() const;
 
@@ -326,11 +326,24 @@ namespace zypp
       bool hasCandidateObjOnly() const
       { return ( installedEmpty() ) && candidateObj(); }
 
-      /** True if this Selectable contains a retracted item. */
+
+       /** True if this Selectable contains available blacklisted items (retracted,ptf,...). */
+      bool hasBlacklisted() const;
+
+      /** True if this Selectable contains an installed blacklisted item (retracted,ptf,...). */
+      bool hasBlacklistedInstalled() const;
+
+      /** True if this Selectable contains available retracted items. */
       bool hasRetracted() const;
 
       /** True if this Selectable contains an installed retracted item. */
       bool hasRetractedInstalled() const;
+
+      /** True if this Selectable contains available ptf items. */
+      bool hasPtf() const;
+
+      /** True if this Selectable contains an installed ptf item. */
+      bool hasPtfInstalled() const;
       //@}
 
       /**

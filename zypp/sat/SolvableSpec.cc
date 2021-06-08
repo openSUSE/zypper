@@ -14,6 +14,7 @@
 #include <zypp/base/IOStream.h>
 
 #include <zypp/sat/SolvableSpec.h>
+#include <zypp/sat/SolvableSet.h>
 #include <zypp/sat/WhatProvides.h>
 
 using std::endl;
@@ -43,6 +44,17 @@ namespace zypp
 	  setDirty();
       }
 
+      bool addIdenticalInstalledToo() const
+      { return _addIdenticalInstalledToo; }
+
+      void addIdenticalInstalledToo( bool yesno_r )
+      {
+	if ( yesno_r != _addIdenticalInstalledToo ) {
+	  _addIdenticalInstalledToo = yesno_r;
+	  if ( not _provides.empty() )
+	    setDirty();
+	}
+      }
 
       void parse( const C_Str & spec_r )
       {
@@ -60,19 +72,38 @@ namespace zypp
       { return needed() && !_cache; }
 
       void setDirty() const
-      { _cache.reset(); }
+      { _cache.reset(); _cacheIdenticalInstalled.clear(); }
 
       const WhatProvides & cache() const
       {
 	if ( !_cache )
 	{
 	  _cache.reset( new WhatProvides( _provides ) );
+	  if ( _addIdenticalInstalledToo ) {
+	    for ( const auto & solv : *_cache ) {
+	      if ( solv.isSystem() )
+		continue;
+	      auto pi { ui::Selectable::get(solv)->identicalInstalledObj( PoolItem(solv) ) };
+	      if ( pi )
+		_cacheIdenticalInstalled.insert( pi );
+	    }
+	  }
 	}
 	return *_cache;
       }
 
       bool contains( const sat::Solvable & solv_r ) const
-      { return( _idents.count( solv_r.ident() ) || ( needed() && cache().contains( solv_r ) ) ); }
+      {
+	if ( _idents.count( solv_r.ident() ) )
+	  return true;
+	if ( needed() ) {
+	  if ( cache().contains( solv_r ) )
+	    return true;
+	  if ( _addIdenticalInstalledToo && _cacheIdenticalInstalled.contains( solv_r ) )
+	    return true;
+	}
+	return false;
+      }
 
 
       const IdStringSet & idents() const
@@ -84,7 +115,8 @@ namespace zypp
     private:
       IdStringSet  _idents;
       CapabilitySet _provides;
-
+      bool _addIdenticalInstalledToo = false;
+      mutable SolvableSet _cacheIdenticalInstalled;	// follows _cache
       mutable shared_ptr<WhatProvides> _cache;
 
     private:
@@ -123,6 +155,11 @@ namespace zypp
     void SolvableSpec::addProvides( Capability provides_r )
     { _pimpl->addProvides( provides_r ); }
 
+    bool SolvableSpec::addIdenticalInstalledToo() const
+    { return _pimpl->addIdenticalInstalledToo(); }
+    void SolvableSpec::addIdenticalInstalledToo( bool yesno_r )
+    { _pimpl->addIdenticalInstalledToo( yesno_r ); }
+
     void SolvableSpec::parse( const C_Str & spec_r )
     { _pimpl->parse( spec_r ); }
 
@@ -151,6 +188,9 @@ namespace zypp
 
     void SolvableSpec::setDirty() const
     { _pimpl->setDirty(); }
+
+    bool SolvableSpec::empty() const
+    { return _pimpl->idents().empty() && _pimpl->provides().empty(); }
 
     bool SolvableSpec::containsIdent( const IdString & ident_r ) const
     { return _pimpl->idents().count( ident_r ); }

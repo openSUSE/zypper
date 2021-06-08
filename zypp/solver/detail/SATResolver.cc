@@ -707,7 +707,9 @@ SATResolver::solverInit(const PoolItemList & weakItems)
       queue_push( &(_jobQueue), SOLVER_BLACKLIST|SOLVER_SOLVABLE_PROVIDES );
       queue_push( &(_jobQueue), sat::Solvable::retractedToken.id() );
       queue_push( &(_jobQueue), SOLVER_BLACKLIST|SOLVER_SOLVABLE_PROVIDES );
-      queue_push( &(_jobQueue), sat::Solvable::ptfToken.id() );
+      queue_push( &(_jobQueue), sat::Solvable::ptfMasterToken.id() );
+      queue_push( &(_jobQueue), SOLVER_BLACKLIST|SOLVER_SOLVABLE_PROVIDES );
+      queue_push( &(_jobQueue), sat::Solvable::ptfPackageToken.id() );
     }
 
     // Ad rules for changed requestedLocales

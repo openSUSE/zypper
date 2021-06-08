@@ -3,6 +3,7 @@
 INCLUDE_DIRECTORIES( ${LIBZYPP_SOURCE_DIR}/tests/zypp )
 
 ADD_TESTS(
+  Blacklisted
   IdString
   LookupAttr
   Pool

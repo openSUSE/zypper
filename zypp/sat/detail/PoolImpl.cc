@@ -217,6 +217,13 @@ namespace zypp
         // set namespace callback
         _pool->nscallback = &nsCallback;
         _pool->nscallbackdata = (void*)this;
+
+	// CAVEAT: We'd like to do it here, but in side the Pool ctor we can not
+	// yet use IdString types. We do in setDirty, when the 1st
+	// _retractedSpec.addProvides( Capability( Solvable::retractedToken.id() ) );
+	// _ptfMasterSpec.addProvides( Capability( Solvable::ptfMasterToken.id() ) );
+	// _ptfPackageSpec.addProvides( Capability( Solvable::ptfPackageToken.id() ) );
+	_retractedSpec.addIdenticalInstalledToo( true ); // retracted indicator is not part of the package!
       }
 
       ///////////////////////////////////////////////////////////////////
@@ -233,6 +240,13 @@ namespace zypp
 
       void PoolImpl::setDirty( const char * a1, const char * a2, const char * a3 )
       {
+	if ( _retractedSpec.empty() ) {
+	  // lazy init IdString types we can not use inside the ctor
+	  _retractedSpec.addProvides( Capability( Solvable::retractedToken.id() ) );
+	  _ptfMasterSpec.addProvides( Capability( Solvable::ptfMasterToken.id() ) );
+	  _ptfPackageSpec.addProvides( Capability( Solvable::ptfPackageToken.id() ) );
+	}
+
         if ( a1 )
         {
           if      ( a3 ) MIL << a1 << " " << a2 << " " << a3 << endl;
@@ -243,6 +257,10 @@ namespace zypp
         _availableLocalesPtr.reset(); // available locales may change
         _multiversionListPtr.reset(); // re-evaluate ZConfig::multiversionSpec.
 	_needrebootSpec.setDirty();   // re-evaluate needrebootSpec
+
+	_retractedSpec.setDirty();    // re-evaluate blacklisted spec
+	_ptfMasterSpec.setDirty();    //  --"--
+	_ptfPackageSpec.setDirty();   //  --"--
 
         depSetDirty();	// invaldate dependency/namespace related indices
       }

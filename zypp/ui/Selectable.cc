@@ -172,11 +172,24 @@ namespace zypp
 
     ////////////////////////////////////////////////////////////////////////
 
+    bool Selectable::hasBlacklisted() const
+    { return _pimpl->hasBlacklisted(); }
+
+    bool Selectable::hasBlacklistedInstalled() const
+    { return _pimpl->hasBlacklistedInstalled(); }
+
     bool Selectable::hasRetracted() const
     { return _pimpl->hasRetracted(); }
 
     bool Selectable::hasRetractedInstalled() const
     { return _pimpl->hasRetractedInstalled(); }
+
+    bool Selectable::hasPtf() const
+    { return _pimpl->hasPtf(); }
+
+    bool Selectable::hasPtfInstalled() const
+    { return _pimpl->hasPtfInstalled(); }
+
 
     bool Selectable::isUnmaintained() const
     { return _pimpl->isUnmaintained(); }

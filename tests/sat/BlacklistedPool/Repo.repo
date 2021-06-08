@@ -1,0 +1,34 @@
+=Ver: 3.0
+# Retracted-patch-package() is not part of the installed package.
+# It's injected into available pkgs by libsolv
+
+=Pkg: package 1 1 x86_64
++Prv:
+package = 1-1
+-Prv:
+
+=Pkg: package 2 1 x86_64
++Prv:
+retracted-patch-package()
+package = 2-1
+-Prv:
+
+=Pkg: package 3 1 x86_64
++Prv:
+ptf()
+package = 3-1
+-Prv:
+
+=Pkg: package 4 1 x86_64
++Prv:
+ptf-package()
+package = 4-1
+-Prv:
+
+=Pkg: package 5 1 x86_64
++Prv:
+retracted-patch-package()
+ptf()
+ptf-package()
+package = 5-1
+-Prv:

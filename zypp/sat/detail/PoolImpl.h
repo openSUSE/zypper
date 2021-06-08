@@ -331,6 +331,17 @@ namespace zypp
           //@}
 
 	public:
+	  /** \name Blacklisted Solvables. */
+          //@{
+          bool isRetracted( const Solvable & solv_r ) const
+          { return _retractedSpec.contains( solv_r ); }
+          bool isPtfMaster( const Solvable & solv_r ) const
+          { return _ptfMasterSpec.contains( solv_r ); }
+          bool isPtfPackage( const Solvable & solv_r ) const
+          { return _ptfPackageSpec.contains( solv_r ); }
+          //@}
+
+	public:
 	  /** accessor for etc/sysconfig/storage reading file on demand */
 	  const std::set<std::string> & requiredFilesystems() const;
 
@@ -361,6 +372,11 @@ namespace zypp
 
 	  /** Solvables which should trigger the reboot-needed hint if installed/updated. */
 	  sat::SolvableSpec _needrebootSpec;
+
+	  /** Blacklisted specs: */
+	  sat::SolvableSpec _retractedSpec;
+	  sat::SolvableSpec _ptfMasterSpec;
+	  sat::SolvableSpec _ptfPackageSpec;
 
 	  /** filesystems mentioned in /etc/sysconfig/storage */
 	  mutable scoped_ptr<std::set<std::string> > _requiredFilesystemsPtr;

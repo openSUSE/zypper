@@ -57,6 +57,13 @@ namespace zypp
       /** A all \ref sat::Solvable matching this \a provides_r. */
       void addProvides( Capability provides_r );
 
+      /** Extend the provides set to include idential installed items as well.
+       * Hack for retracted packages, where the indicator provides is  injected
+       * into the available items, but is not present in the installed items.
+       */
+      bool addIdenticalInstalledToo() const;
+      void addIdenticalInstalledToo( bool yesno_r );
+
     public:
       /** Parse and add spec from a string (`IDENT` or provides:CAPABILITY`). */
       void parse( const C_Str & spec_r );
@@ -95,6 +102,9 @@ namespace zypp
       void setDirty() const;
 
     public:
+      /** Whether neither idents nor provides are set. */
+      bool empty() const;
+
       /** Whether \a ident_r has been added to the specs (mainly for parser tests). */
       bool containsIdent( const IdString & ident_r ) const;
 

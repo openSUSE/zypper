@@ -34,7 +34,7 @@ namespace zypp
     struct SelectableTraits
     {
       /** Oder on AvailableItemSet.
-       * \li not retracted
+       * \li not blacklisted
        * \li repository priority
        * \li best Arch (arch/noarch changes are ok)
        * \li best Edition
@@ -50,8 +50,8 @@ namespace zypp
         //
         bool operator()( const PoolItem & lhs, const PoolItem & rhs ) const
         {
-	  if ( lhs.isRetracted() != rhs.isRetracted() )
-	    return rhs.isRetracted();
+	  if ( lhs.isBlacklisted() != rhs.isBlacklisted() )
+	    return rhs.isBlacklisted();
 
           int lprio = lhs->satSolvable().repository().satInternalPriority();
           int rprio = rhs->satSolvable().repository().satInternalPriority();
