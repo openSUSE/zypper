@@ -33,6 +33,8 @@ namespace zyppng {
 
   };
 
+  ZYPP_IMPL_PRIVATE(Process)
+
   Process::Process() : Base( *( new ProcessPrivate(*this) ) )
   {
 

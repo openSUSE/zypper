@@ -912,6 +912,8 @@ namespace zyppng {
     return bytesWrittenSoFar;
   }
 
+  ZYPP_IMPL_PRIVATE(NetworkRequest)
+
   NetworkRequest::NetworkRequest(zyppng::Url url, zypp::filesystem::Pathname targetFile, zyppng::NetworkRequest::FileMode fMode)
     : Base ( *new NetworkRequestPrivate( std::move(url), std::move(targetFile), std::move(fMode), *this ) )
   {

@@ -93,7 +93,7 @@ class NetworkRequestErrorPrivate;
     NetworkRequestError( NetworkRequestErrorPrivate &d );
 
   private:
-    ZYPP_FWD_DECLARE_PRIVATE(NetworkRequestError)
+    ZYPP_DECLARE_PRIVATE(NetworkRequestError)
     zypp::RWCOW_pointer<NetworkRequestErrorPrivate> d_ptr;
   };
 }

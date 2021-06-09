@@ -5,6 +5,8 @@ namespace zyppng {
   IODevicePrivate::IODevicePrivate(IODevice &p) : BasePrivate(p)
   { }
 
+  ZYPP_IMPL_PRIVATE(IODevice)
+
   IODevice::IODevice() : Base( *( new IODevicePrivate(*this)) )
   { }
 

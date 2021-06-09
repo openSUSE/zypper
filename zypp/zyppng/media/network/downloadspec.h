@@ -38,7 +38,7 @@ namespace zyppng {
    */
   class DownloadSpec
   {
-    ZYPP_FWD_DECLARE_PRIVATE( DownloadSpec )
+    ZYPP_DECLARE_PRIVATE( DownloadSpec )
 
   public:
 

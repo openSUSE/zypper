@@ -137,6 +137,8 @@ namespace zyppng {
       _sigReadFdClosed.emit( reason );
   }
 
+  ZYPP_IMPL_PRIVATE(AsyncDataSource)
+
   AsyncDataSource::AsyncDataSource() : IODevice( *( new AsyncDataSourcePrivate(*this) ) )
   { }
 

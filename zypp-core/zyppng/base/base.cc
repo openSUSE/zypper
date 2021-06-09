@@ -8,6 +8,8 @@ namespace zyppng {
   void BasePrivate::init()
   { }
 
+  ZYPP_IMPL_PRIVATE(Base)
+
   Base::Base ( BasePrivate &dd )
     : d_ptr ( &dd )
   {

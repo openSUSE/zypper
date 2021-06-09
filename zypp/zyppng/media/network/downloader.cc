@@ -348,7 +348,8 @@ namespace zyppng {
     gotFinished();
   }
 
-  DlMetaLinkInfoState::DlMetaLinkInfoState(DownloadPrivate &parent) : BasicDownloaderStateBase( parent )
+  DlMetaLinkInfoState::DlMetaLinkInfoState(DownloadPrivate &parent)
+    : BasicDownloaderStateBase( parent )
   {
     MIL_MEDIA << "Downloading metalink on " << parent._spec.url() << std::endl;
   }
@@ -966,7 +967,8 @@ namespace zyppng {
   }
 
   DlMetalinkState::DlMetalinkState(zypp::media::MediaBlockList &&blockList, std::vector<Url> &&mirrors, DownloadPrivate &parent)
-  : RangeDownloaderBaseState( std::move(mirrors), parent ), _blockList( std::move(blockList) )
+    : RangeDownloaderBaseState( std::move(mirrors), parent )
+    , _blockList( std::move(blockList) )
   {
     MIL_MEDIA << "About to enter DlMetalinkState for url " << parent._spec.url() << std::endl;
   }
@@ -1087,8 +1089,8 @@ namespace zyppng {
   }
 
 #if ENABLE_ZCHUNK_COMPRESSION
-  DLZckHeadState::DLZckHeadState(std::vector<Url> &&mirrors, DownloadPrivate &parent) :
-    BasicDownloaderStateBase( parent )
+  DLZckHeadState::DLZckHeadState(std::vector<Url> &&mirrors, DownloadPrivate &parent)
+    : BasicDownloaderStateBase( parent )
   {
     _mirrors = std::move(mirrors);
     MIL_MEDIA << "About to enter DlZckHeadState for url " << parent._spec.url() << std::endl;
@@ -1135,7 +1137,7 @@ namespace zyppng {
   }
 
   DLZckState::DLZckState(std::vector<Url> &&mirrors, DownloadPrivate &parent)
-  : RangeDownloaderBaseState( std::move(mirrors), parent )
+    : RangeDownloaderBaseState( std::move(mirrors), parent )
   {
     MIL_MEDIA << "About to enter DLZckState for url " << parent._spec.url() << std::endl;
   }
@@ -1314,7 +1316,9 @@ namespace zyppng {
   }
 #endif
 
-  FinishedState::FinishedState(NetworkRequestError &&error, DownloadPrivate &parent) : SimpleState( parent ),_error( std::move(error) )
+  FinishedState::FinishedState(NetworkRequestError &&error, DownloadPrivate &parent)
+    : SimpleState( parent )
+    , _error( std::move(error) )
   {
     MIL_MEDIA << "About to enter FinishedState for url " << parent._spec.url() << std::endl;
   }
@@ -1406,8 +1410,8 @@ namespace zyppng {
     _sigFinishedConn.disconnect();
   }
 
-  DownloadPrivate::DownloadPrivate(Downloader &parent, std::shared_ptr<NetworkRequestDispatcher> requestDispatcher, std::shared_ptr<MirrorControl> mirrors, DownloadSpec &&spec, Download &p) :
-    DownloadPrivateBase( parent, std::move(requestDispatcher), std::move(mirrors), std::move(spec), p)
+  DownloadPrivate::DownloadPrivate(Downloader &parent, std::shared_ptr<NetworkRequestDispatcher> requestDispatcher, std::shared_ptr<MirrorControl> mirrors, DownloadSpec &&spec, Download &p)
+    : DownloadPrivateBase( parent, std::move(requestDispatcher), std::move(mirrors), std::move(spec), p )
   { }
 
   void DownloadPrivate::init()
@@ -1535,6 +1539,8 @@ namespace zyppng {
   Download::Download(zyppng::Downloader &parent, std::shared_ptr<zyppng::NetworkRequestDispatcher> requestDispatcher, std::shared_ptr<zyppng::MirrorControl> mirrors, zyppng::DownloadSpec &&spec)
     : Base( *new DownloadPrivate( parent, std::move(requestDispatcher), std::move(mirrors), std::move(spec), *this )  )
   { }
+
+  ZYPP_IMPL_PRIVATE(Download)
 
   Download::~Download()
   {
@@ -1687,6 +1693,8 @@ namespace zyppng {
     if ( _runningDownloads.empty() )
       _queueEmpty.emit( *z_func() );
   }
+
+  ZYPP_IMPL_PRIVATE(Downloader)
 
   Downloader::Downloader( )
     : Base ( *new DownloaderPrivate( {}, *this ) )

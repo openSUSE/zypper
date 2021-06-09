@@ -398,6 +398,8 @@ namespace zyppng {
     return std::visit([]( const auto &s ) constexpr { return s.type(); }, _state );
   }
 
+  ZYPP_IMPL_PRIVATE(Socket)
+
   Socket::Socket( int domain, int type, int protocol )
     : IODevice( *( new SocketPrivate( domain, type, protocol, *this )))
   { }

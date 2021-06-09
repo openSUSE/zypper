@@ -19,6 +19,9 @@ public:
 
 };
 
+
+ZYPP_IMPL_PRIVATE( SocketNotifier )
+
 SocketNotifier::SocketNotifier (int socket, int evTypes )
   : AbstractEventSource ( * new SocketNotifierPrivate( *this ) )
 {

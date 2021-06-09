@@ -295,6 +295,8 @@ void NetworkRequestDispatcherPrivate::dequeuePending()
   }
 }
 
+ZYPP_IMPL_PRIVATE(NetworkRequestDispatcher)
+
 NetworkRequestDispatcher::NetworkRequestDispatcher( )
   : Base( * new NetworkRequestDispatcherPrivate ( *this ) )
 {

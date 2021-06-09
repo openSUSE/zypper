@@ -6,6 +6,8 @@ namespace zyppng {
   EventLoopPrivate::EventLoopPrivate( EventLoop &p ) : BasePrivate( p )
   { }
 
+  ZYPP_IMPL_PRIVATE(EventLoop)
+
   EventLoop::EventLoop()
     : Base ( * new EventLoopPrivate(*this) )
   {

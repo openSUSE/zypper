@@ -120,7 +120,7 @@ namespace zyppng {
   {
     MIL_MEDIA << "Closing connection " << std::endl;
     while( _requests.size() ) {
-      auto &req = _requests.front();
+      auto req = _requests.front();
       // make sure we do not receive signals while shutting down
       // this would break due to weak_from_this
       req->clearConnections();
@@ -233,7 +233,8 @@ namespace zyppng {
 
         for ( auto &req : _requests ) {
           if ( req->request.requestid() == cancel.requestid() ) {
-            req->dl->cancel();
+            auto lock = req;
+            lock->dl->cancel();
             break;
           }
         }

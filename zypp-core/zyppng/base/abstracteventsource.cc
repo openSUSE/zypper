@@ -15,6 +15,8 @@ AbstractEventSourcePrivate::AbstractEventSourcePrivate( AbstractEventSource &p )
   _ev = ev;
 }
 
+ZYPP_IMPL_PRIVATE(AbstractEventSource)
+
 AbstractEventSource::AbstractEventSource()
   : Base ( * new AbstractEventSourcePrivate( *this ) )
 { }

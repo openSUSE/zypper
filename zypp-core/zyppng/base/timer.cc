@@ -32,6 +32,8 @@ public:
 
 };
 
+ZYPP_IMPL_PRIVATE(Timer)
+
 TimerPrivate::TimerPrivate(Timer &p) : BasePrivate(p)
 {
   auto ev = EventDispatcher::instance();

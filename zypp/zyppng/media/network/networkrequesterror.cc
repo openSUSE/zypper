@@ -203,7 +203,6 @@ NetworkRequestError NetworkRequestErrorPrivate::fromCurlMError( int nativeCode )
   return NetworkRequestError( *new NetworkRequestErrorPrivate(NetworkRequestError::InternalError, std::move(err), std::move(extraInfo)) );
 }
 
-
 NetworkRequestError::NetworkRequestError(zyppng::NetworkRequestErrorPrivate &d )
   : d_ptr( &d )
 { }

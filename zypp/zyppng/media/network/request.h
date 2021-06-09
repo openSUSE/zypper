@@ -10,6 +10,7 @@
 #include <zypp-core/zyppng/base/signals.h>
 #include <zypp/base/Flags.h>
 #include <zypp/ByteCount.h>
+#include <optional>
 #include <vector>
 #include <chrono>
 #include <any>

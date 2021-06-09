@@ -449,7 +449,9 @@ namespace zyppng {
         using WrappedSType = typename detail::make_statewithtransition< std::decay_t<NewState>, Transitions...>::Type;
         std::visit( [this, &nS]( auto &currState ) {
           using T = std::decay_t<decltype (currState)>;
-          if constexpr ( std::is_same_v< T, _InitialState > ) {
+          if constexpr ( std::is_same_v< T, WrappedSType > ) {
+            return;
+          } else if constexpr ( std::is_same_v< T, _InitialState > ) {
             enterState ( WrappedSType( std::move(nS) ) );
           } else {
             enterState ( currState, WrappedSType( std::move(nS) ) );
@@ -497,18 +499,16 @@ namespace zyppng {
         // handle final state things
         if constexpr ( NewState::isFinal ) {
           _isInFinalState = true;
-
-          // let the outside world know whats going on
-          _sigStateChanged.emit( NewState::stateId  );
-
-          _sigFinished.emit();
-        } else {
-          // if we enter a non final state we only emit one signal
-          _sigStateChanged.emit( NewState::stateId  );
         }
+
+        // let the outside world know whats going on
+        _sigStateChanged.emit( NewState::stateId  );
 
         // call enter on the state as the last thing to do, it might emit a transition event right away
         std::get< std::decay_t<NewState> >( _state ).enter();
+
+        if ( _isInFinalState )
+          _sigFinished.emit();
       }
 
       template <typename State, typename Transition>

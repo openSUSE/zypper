@@ -361,6 +361,8 @@ void EventDispatcherPrivate::waitPidCallback( GPid pid, gint status, gpointer us
   }
 }
 
+ZYPP_IMPL_PRIVATE(EventDispatcher)
+
 EventDispatcher::EventDispatcher(void *ctx)
   : Base ( * new EventDispatcherPrivate( reinterpret_cast<GMainContext*>(ctx), *this ) )
 {

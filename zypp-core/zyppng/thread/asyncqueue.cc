@@ -48,6 +48,8 @@ namespace zyppng {
     close (fds[1]);
   }
 
+  ZYPP_IMPL_PRIVATE(AsyncQueueWatch)
+
   AsyncQueueWatch::AsyncQueueWatch(std::shared_ptr<zyppng::AsyncQueueBase> &&queue )
     : AsyncQueueWatch( *( new AsyncQueueWatchPrivate( std::move(queue), *this ) ) )
   {  }
