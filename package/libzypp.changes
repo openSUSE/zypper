@@ -1,4 +1,22 @@
 -------------------------------------------------------------------
+Thu Jun 10 17:34:14 CEST 2021 - ma@suse.de
+
+- Enhance XML output of repo GPG options (fixes openSUSE/zypper#390)
+  In addition to the effective values, add optional attributes
+  showing the raw values actually present in the .repo file.
+  (raw_gpgcheck, raw_repo_gpgcheck, raw_pkg_gpgcheck)
+- Link all executables with -pie (bsc#1186447)
+- Ship an empty /etc/zypp/needreboot per default (fixes #311, jsc#PM-2645)
+  If packages want to trigger the reboot-needed hiint upon installation
+  they may provide 'installhint(reboot-needed)'.
+  Builtin packages triggering the hint without the provides are
+  only kernel and kernel-firmware related.
+- Add Solvable::isBlacklisted as superset of retracted and ptf
+  packages (bsc#1186503)
+- Fix segv if ZYPP_FULLOG is set (fixes #317)
+- version 17.27.0 (22)
+
+-------------------------------------------------------------------
 Tue Jun  1 19:10:35 CEST 2021 - ma@suse.de
 
 - Work around download.o.o broken https redirects.
