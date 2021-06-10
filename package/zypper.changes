@@ -1,4 +1,15 @@
 -------------------------------------------------------------------
+Thu Jun 10 17:40:44 CEST 2021 - ma@suse.de
+
+- Link all executables with -pie (bsc#1186447)
+- Tag PTF packages in the status column (bsc#1186503)
+  Like retracted packages, a program temporary fix must be
+  explicitly selected and will otherwise not be considered in
+  dependency resolution.
+- BuildRequires:  libzypp-devel >= 17.26.1.
+- version 1.14.46
+
+-------------------------------------------------------------------
 Wed Jun  2 16:00:25 CEST 2021 - ma@suse.de
 
 - Add hints to 'trust GPG key' prompt.
