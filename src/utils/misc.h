@@ -63,6 +63,7 @@ bool iType( const ui::Selectable::constPtr & sel_r );
  *   !  - broken/needed Patch
  *
  *  Adds additional suffices for additional information:
+ *   P  - The item is part of a PTF
  *   R  - The item has been retracted
  *   l  - The item is locked
  *   +  - Only for the "i" status, the item is user installed
@@ -84,6 +85,7 @@ inline const char * computeStatusIndicator( const PoolItem & pi_r, bool * iType_
  *      - not installed at all
  *
  *  Adds additional suffices for additional information:
+ *   P  - The item is part of a PTF
  *   R  - The item has been retracted
  *   l  - The item is locked
  *   +  - Only for the "i/v" status, the item is user installed

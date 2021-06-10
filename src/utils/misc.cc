@@ -813,11 +813,11 @@ bool iType( const ui::Selectable::constPtr & sel_r )
 
 const char * computeStatusIndicator( const PoolItem & pi_r, ui::Selectable::constPtr sel_r, bool * iType_r )
 {
-  static const char * _[] = { " ",  " R", " l" };	// not installed / not relevant
-  static const char * i[] = { "i",  "iR", "il" };	// installed     / satisfied
-  static const char * I[] = { "i+", "iR", "il" };	// user installed
-  static const char * v[] = { "v",  "vR", "vl" };	// different version installed
-  static const char * b[] = { "!",  "!R", "!l" };	//               / broken
+  static const char * _[] = { " ",  " l", " P", " R" };	// not installed / not relevant
+  static const char * i[] = { "i",  "il", "iP", "iR" };	// installed     / satisfied
+  static const char * I[] = { "i+", "il", "iP", "iR" };	// user installed
+  static const char * v[] = { "v",  "vl", "vP", "vR" };	// different version installed
+  static const char * b[] = { "!",  "!l", "!P", "!R" };	//               / broken
 
   const char ** stem = _;
   const ResStatus & status { pi_r.status() };
@@ -848,17 +848,21 @@ const char * computeStatusIndicator( const PoolItem & pi_r, ui::Selectable::cons
   }
   // and now the details
   if ( iType_r ) *iType_r = ( *(stem[0]) == 'i' );
-  return stem[pi_r.isRetracted() ? 1 : status.isLocked() ? 2 : 0];
+  if ( pi_r.isBlacklisted() )
+    return stem[pi_r.isPtf() ? 2 : 3];
+  if ( status.isLocked() )
+    return stem[1];
+  return stem[0];
 }
 
 const char * computeStatusIndicator( const ui::Selectable & sel_r, bool tagForeign_r, bool * iType_r )
 {
-  static const char * _[] = { " ",  " R", " l" };	// not installed / not relevant
-  static const char * i[] = { "i",  "iR", "il" };	// installed     / satisfied
-  static const char * I[] = { "i+", "iR", "il" };	// user installed
-  static const char * v[] = { "v",  "vR", "vl" };	// foreign installed
-  static const char * V[] = { "v+", "vR", "vl" };	// foreign user installed
-  static const char * b[] = { "!",  "!R", "!l" };	//               / broken
+  static const char * _[] = { " ",  " l", " P", " R" };	// not installed / not relevant
+  static const char * i[] = { "i",  "il", "iP", "iR" };	// installed     / satisfied
+  static const char * I[] = { "i+", "il", "iP", "iR" };	// user installed
+  static const char * v[] = { "v",  "vl", "vP", "vR" };	// foreign installed
+  static const char * V[] = { "v+", "vl", "vP", "vR" };	// foreign user installed
+  static const char * b[] = { "!",  "!l", "!P", "!R" };	//               / broken
 
   const char ** stem = _;
 
@@ -882,5 +886,9 @@ const char * computeStatusIndicator( const ui::Selectable & sel_r, bool tagForei
   // else _
   // and now the details
   if ( iType_r ) *iType_r = ( *(stem[0]) == 'i' );
-  return stem[sel_r.hasRetractedInstalled() ? 1 : sel_r.locked() ? 2 : 0];
+  if ( sel_r.hasBlacklistedInstalled() )
+    return stem[sel_r.hasPtfInstalled() ? 2 : 3];
+  if ( sel_r.locked() )
+    return stem[1];
+  return stem[0];
 }
