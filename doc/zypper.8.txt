@@ -776,6 +776,7 @@ _empty_::::	neither of the above cases
 *!*::::	a patch in *needed* state
 {nop} ::::	 {nop}
 .*l*::::	is shown in the 2nd column if the item is locked (see section *Package Locks Management*)
+.*P*::::	is shown in the 2nd column if the item is part of a PTF (A program temporary fix which must be explicitly selected and will otherwise not be considered in dependency resolution).
 .*R*::::	is shown in the 2nd column if the item has been retracted (see *patch* in section *Package Types*)
 
 {nop}::
