@@ -1001,6 +1001,13 @@ namespace zypp
       << " gpgcheck=\"" << gpgCheck() << "\""
       << " repo_gpgcheck=\"" << repoGpgCheck() << "\""
       << " pkg_gpgcheck=\"" << pkgGpgCheck() << "\"";
+    if ( ! indeterminate(_pimpl->rawGpgCheck()) )
+      str << " raw_gpgcheck=\"" << (_pimpl->rawGpgCheck() ? "1" : "0") << "\"";
+    if ( ! indeterminate(_pimpl->rawRepoGpgCheck()) )
+      str << " raw_repo_gpgcheck=\"" << (_pimpl->rawRepoGpgCheck() ? "1" : "0") << "\"";
+    if ( ! indeterminate(_pimpl->rawPkgGpgCheck()) )
+      str << " raw_pkg_gpgcheck=\"" << (_pimpl->rawPkgGpgCheck() ? "1" : "0") << "\"";
+    if (!(tmpstr = gpgKeyUrl().asString()).empty())
     if (!(tmpstr = gpgKeyUrl().asString()).empty())
       str << " gpgkey=\"" << escape(tmpstr) << "\"";
     if (!(tmpstr = mirrorListUrl().asString()).empty())
