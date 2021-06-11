@@ -66,6 +66,27 @@ namespace zyppng {
       connection _sigFinishedConn;
     };
 
+    // subclass for all states that need to handle async mirror requests
+    struct MirrorHandlingStateBase  : public zyppng::BasicState< DownloadPrivate, false >
+    {
+
+      MirrorHandlingStateBase ( DownloadPrivate &parent );
+      virtual ~MirrorHandlingStateBase();
+      enum PrepareResult {
+        Failed,
+        Ok,
+        Delayed
+      };
+      PrepareResult prepareNextMirror ();
+      NetworkRequestError setupMirror( const MirrorControl::MirrorPick &pick, Url &url, TransferSettings &set );
+
+      virtual void mirrorReceived ( MirrorControl::MirrorPick mirror ) = 0;
+      virtual void failedToPrepare (){};
+
+      connection _sigMirrorsReadyConn;
+      std::vector<Url> _fileMirrors; // all mirrors of the currently requested file
+    };
+
     struct InitialState;         //< initial state before we start downloading
     struct DetectMetalinkState;  //< First attempt to get the zchunk header, but we might receive metalink data instead
     struct DlMetaLinkInfoState;  //< We got Metalink, lets get the full metalink file or we got no zchunk in the first place
@@ -157,9 +178,9 @@ namespace zyppng {
       Signal< void () > _sigFinished;
     };
 
-    struct BasicDownloaderStateBase : public zyppng::BasicState< DownloadPrivate, false > {
+    struct BasicDownloaderStateBase : public MirrorHandlingStateBase {
 
-      BasicDownloaderStateBase ( DownloadPrivate &parent ) : BasicState( parent ){}
+      BasicDownloaderStateBase ( DownloadPrivate &parent ) : MirrorHandlingStateBase( parent ){}
 
       void enter ();
       void exit ();
@@ -178,15 +199,21 @@ namespace zyppng {
       }
 
       std::shared_ptr<Request> _request;
-      std::vector<Url> _mirrors;
       std::optional<std::string> _chksumtype; //< The file checksum type if available
       std::optional<UByteArray>  _chksumVec;  //< The file checksum if available
 
+      // MirrorHandlingStateBase interface
+      void mirrorReceived(MirrorControl::MirrorPick mirror) override;
+      void failedToPrepare() override;
+
     protected:
+      void startWithMirror ( MirrorControl::MirrorHandle mirror, const zypp::Url &url, const TransferSettings &set );
+      void startWithoutMirror (  );
       virtual void handleRequestProgress (NetworkRequest &req, off_t dltotal, off_t dlnow );
       NetworkRequestError _error;
       Signal< void () > _sigFinished;
       Signal< void () > _sigFailed;
+
     };
 
     /*!
@@ -276,11 +303,12 @@ namespace zyppng {
      * Base type for all block downloader, here we handle all the nasty details of downloading
      * a file in blocks
      */
-    struct RangeDownloaderBaseState : public BasicState< DownloadPrivate, false  > {
+    struct RangeDownloaderBaseState : public MirrorHandlingStateBase {
 
       RangeDownloaderBaseState ( std::vector<Url> &&mirrors, DownloadPrivate &parent ) :
-        BasicState(parent),
-        _mirrors( std::move(mirrors) ){}
+        MirrorHandlingStateBase(parent) {
+        _fileMirrors = std::move(mirrors);
+      }
 
       void ensureDownloadsRunning ();
       void reschedule ();
@@ -298,9 +326,13 @@ namespace zyppng {
       void onRequestProgress ( NetworkRequest &, off_t, off_t, off_t, off_t );
       void onRequestFinished ( NetworkRequest &req , const NetworkRequestError &err );
 
+      // MirrorHandlingStateBase interface
+      void mirrorReceived(MirrorControl::MirrorPick mirror) override;
+      void failedToPrepare() override;
+
     protected:
-      std::vector<Url> _mirrors;
       NetworkRequestError _error;
+      bool _inEnsureDownloadsRunning = false; //< Flag to prevent multiple entry to ensureDownloadsRunning
 
       size_t             _fileSize = 0; //< The expected filesize, this is used to make sure we do not write after the end offset of the expected file size
       std::list<Block>   _ranges;
@@ -322,8 +354,6 @@ private:
       void handleRequestError( std::shared_ptr<Request> req, const zyppng::NetworkRequestError &err );
       bool addBlockRanges( std::shared_ptr<Request> req, std::vector<Block> &&blocks ) const;
       void addNewRequest     (std::shared_ptr<Request> req, const bool connectSignals = true );
-
-      std::shared_ptr<Request>    initMultiRequest ( NetworkRequestError &err, bool useFailed = false );
 
       std::vector<Block> getNextBlocks ( const std::string &urlScheme );
       std::vector<Block> getNextFailedBlocks( const std::string &urlScheme );
@@ -471,7 +501,6 @@ private:
 
   protected:
     NetworkRequestError safeFillSettingsFromURL ( const Url &url, TransferSettings &set );
-    MirrorControl::MirrorHandle findNextMirror(std::vector<Url> &_mirrors, Url &url, TransferSettings &set, NetworkRequestError &err );
   };
 
   using InitialState = DownloadPrivateBase::InitialState;

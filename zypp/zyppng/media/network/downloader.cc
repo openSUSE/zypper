@@ -6,6 +6,7 @@
 #include <zypp/zyppng/media/network/request.h>
 #include <zypp-core/zyppng/base/Timer>
 #include <zypp-core/zyppng/base/EventDispatcher>
+#include <zypp-core/AutoDispose.h>
 #include <zypp/Pathname.h>
 #include <zypp/media/TransferSettings.h>
 #include <zypp/media/MetaLinkParser.h>
@@ -235,16 +236,38 @@ namespace zyppng {
     NetworkRequestError dummyErr;
     MirrorControl::MirrorHandle mirror;
 
-    if ( _mirrors.size() )
-      mirror = sm.findNextMirror( _mirrors, url, set, dummyErr );
-
-    if ( !mirror ) {
-      url = spec.url();
-      set = spec.settings();
-      auto err = sm.safeFillSettingsFromURL( url, set );
-      if ( err.isError() )
-        return failed( std::move(err) );
+    if ( _fileMirrors.size() ) {
+      const auto res = prepareNextMirror();
+      // for Delayed or OK we can just continue here
+      if ( res != MirrorHandlingStateBase::Failed )
+        return;
     }
+    failedToPrepare();
+  }
+
+  void DownloadPrivateBase::BasicDownloaderStateBase::mirrorReceived( MirrorControl::MirrorPick mirror )
+  {
+    auto &sm = stateMachine();
+    auto url = sm._spec.url();
+    auto set = sm._spec.settings();
+
+    auto err = setupMirror( mirror, url, set );
+    if ( err.isError() ) {
+      WAR_MEDIA << "Setting up mirror " << mirror.second->mirrorUrl << " failed with error: " << err.toString() << "(" << err.nativeErrorString() << "), falling back to original URL." << std::endl;
+      failedToPrepare();
+    }
+    startWithMirror( mirror.second, url, set );
+  }
+
+  void DownloadPrivateBase::BasicDownloaderStateBase::failedToPrepare()
+  {
+    startWithoutMirror();
+  }
+
+  void DownloadPrivateBase::BasicDownloaderStateBase::startWithMirror( MirrorControl::MirrorHandle mirror, const zypp::Url &url, const TransferSettings &set )
+  {
+    auto &sm = stateMachine();
+    const auto &spec = sm._spec;
 
     _request = std::make_shared<Request>( ::internal::clearQueryString(url), spec.targetPath() ) ;
     _request->_myMirror = mirror;
@@ -269,6 +292,19 @@ namespace zyppng {
 
     _request->connectSignals( *this );
     sm._requestDispatcher->enqueue( _request );
+  }
+
+  void DownloadPrivateBase::BasicDownloaderStateBase::startWithoutMirror()
+  {
+    auto &sm = stateMachine();
+    const auto &spec = sm._spec;
+
+    auto url = spec.url();
+    auto set = spec.settings();
+    auto err = sm.safeFillSettingsFromURL( url, set );
+    if ( err.isError() )
+      return failed( std::move(err) );
+    startWithMirror( nullptr, url, set );
   }
 
   void DownloadPrivateBase::BasicDownloaderStateBase::exit()
@@ -491,9 +527,9 @@ namespace zyppng {
 
     //remove the metalink file
     zypp::filesystem::unlink( targetPath );
-    _mirrorControlReadyConn = sm._mirrorControl->connect( &MirrorControl::sigAllMirrorsReady, *this, &PrepareMultiState::onMirrorsReady );
+    _mirrorControlReadyConn = sm._mirrorControl->connect( &MirrorControl::sigNewMirrorsReady, *this, &PrepareMultiState::onMirrorsReady );
 
-    // this will emit a mirrorsReady signal once all connection tests have been done
+    // this will emit a mirrorsReady signal once some connection tests have been done
     sm._mirrorControl->registerMirrors( mirrs );
   }
 
@@ -542,14 +578,13 @@ namespace zyppng {
     }
 
     _sigFinished.emit();
-    DBG_MEDIA<< "Got control back" << std::endl;
   }
 
   std::shared_ptr<DownloadPrivateBase::DlNormalFileState> DownloadPrivateBase::PrepareMultiState::fallbackToNormalTransition()
   {
     MIL_MEDIA << "No blocklist and no filesize, falling back to normal download for URL " << stateMachine()._spec.url() << std::endl;
     auto ptr = std::make_shared<DlNormalFileState>( stateMachine() );
-    ptr->_mirrors = std::move(_mirrors);
+    ptr->_fileMirrors = std::move(_mirrors);
 
     if ( _blockList.haveFileChecksum() ) {
       ptr->_chksumtype = _blockList.fileChecksumType();
@@ -663,9 +698,9 @@ namespace zyppng {
     }
 
     //feed the working URL back into the mirrors in case there are still running requests that might fail
-    _mirrors.push_back( reqLocked->_originalUrl );
+    _fileMirrors.push_back( reqLocked->_originalUrl );
 
-    // make sure downloads are running, at this p
+    // make sure downloads are running, at this point
     ensureDownloadsRunning();
   }
 
@@ -695,15 +730,9 @@ namespace zyppng {
           return b;
         });
 
-        //try to init a new multi request, if we have leftover mirrors we get a valid one
-        auto newReq = initMultiRequest( dummyErr, true );
-        if ( newReq ) {
-          addNewRequest( newReq );
-          return;
-        }
-        // we got no mirror this time, but since we still have running requests there is hope this will be finished later
-        if ( _runningRequests.size() && _failedRanges.size() )
-          return;
+        // try to fill the open spot right away
+        ensureDownloadsRunning();
+        return;
 
       } catch ( const zypp::Exception &ex ) {
         //we just log the exception and fall back to a normal download
@@ -731,40 +760,37 @@ namespace zyppng {
 
   void DownloadPrivateBase::RangeDownloaderBaseState::ensureDownloadsRunning()
   {
+    if ( _inEnsureDownloadsRunning )
+      return;
+
+    zypp::OnScopeExit clearFlag( [this]() {
+      _inEnsureDownloadsRunning = false;
+    });
+
+    _inEnsureDownloadsRunning = true;
+
     //check if there is still work to do
-    if ( _ranges.size() && _runningRequests.size() < 10 ) {
+    while ( _ranges.size() || _failedRanges.size() ) {
 
-      NetworkRequestError lastErr = _error;
+      // download was already finished
+      if ( _error.isError() )
+        return;
 
-      //we try to allocate as many requests as possible but stop if we cannot find a valid mirror for one
-      while( _runningRequests.size() < 10 ) {
-        auto req = initMultiRequest( lastErr );
-        if (!req ) {
-          break;
-        }
-        addNewRequest( req );
-      }
+      if ( _runningRequests.size() >= 10 )
+        break;
 
-      while ( lastErr.type() == NetworkRequestError::NoError && _failedRanges.size() ) {
-
-        if ( _runningRequests.size() >= 10 )
-          break;
-
-        auto req = initMultiRequest( lastErr, true );
-        if ( !req ) {
-          break;
-        }
-
-        addNewRequest( req );
-      }
-
-      if ( _runningRequests.empty() && lastErr.type()!= NetworkRequestError::NoError )  {
-        //we found no mirrors -> fail
-        setFailed( std::move( lastErr) );
+      // prepareNextMirror will automatically call mirrorReceived() once there is a mirror ready
+      const auto &res = prepareNextMirror();
+      // if mirrors are delayed we stop here, once the mirrors are ready we get called again
+      if ( res == MirrorHandlingStateBase::Delayed )
+        return;
+      else if ( res == MirrorHandlingStateBase::Failed ) {
+        failedToPrepare();
         return;
       }
     }
 
+    // check if we are done at this point
     if ( _runningRequests.empty() ) {
 
       if ( _failedRanges.size() || _ranges.size() ) {
@@ -774,6 +800,70 @@ namespace zyppng {
 
       // seems we were successfull , transition to finished state
       setFinished();
+    }
+  }
+
+  void DownloadPrivateBase::RangeDownloaderBaseState::mirrorReceived( MirrorControl::MirrorPick mirror )
+  {
+
+    auto &parent = stateMachine();
+    Url myUrl;
+    TransferSettings settings;
+
+    auto err = setupMirror( mirror, myUrl, settings );
+    if ( err.isError() ) {
+      WAR << "Failure to setup mirror " << myUrl << " with error " << err.toString() << "("<< err.nativeErrorString() << "), dropping it from the list of mirrors." << std::endl;
+      // if a mirror fails , we remove it from our list
+      _fileMirrors.erase( mirror.first );
+
+      // make sure this is retried
+      ensureDownloadsRunning();
+      return;
+    }
+
+    auto blocks = getNextBlocks( myUrl.getScheme() );
+    if ( !blocks.size() )
+      blocks = getNextFailedBlocks( myUrl.getScheme() );
+
+    if ( !blocks.size() ) {
+      // we have no blocks? should not happen but ensureDownloadsRunning will know what to do
+      ensureDownloadsRunning();
+      return;
+    }
+
+    const auto &spec = parent._spec;
+
+    std::shared_ptr<Request> req = std::make_shared<Request>( ::internal::clearQueryString( myUrl ), spec.targetPath(), NetworkRequest::WriteShared );
+    req->_myMirror = mirror.second;
+    req->_originalUrl = myUrl;
+    req->setPriority( parent._defaultSubRequestPriority );
+    req->transferSettings() = settings;
+
+    // if we download chunks we do not want to wait for too long on mirrors that have slow activity
+    // note: this sets the activity timeout, not the download timeout
+    req->transferSettings().setTimeout( 2 );
+
+    DBG_MEDIA << "Creating Request to download blocks:"<<std::endl;
+    if ( !addBlockRanges( req, std::move(blocks) ) ) {
+      setFailed( NetworkRequestErrorPrivate::customError( NetworkRequestError::InternalError, "Failed to add blocks to request." ) );
+      return;
+    }
+
+    // we just use a mirror once per file, remove it from the list
+    _fileMirrors.erase( mirror.first );
+
+    addNewRequest( req );
+
+    // trigger next downloads
+    ensureDownloadsRunning();
+  }
+
+  void DownloadPrivateBase::RangeDownloaderBaseState::failedToPrepare()
+  {
+    // it was impossible to find a new mirror, check if we still have running requests we can wait for, if not
+    // we can only fail at this point
+    if ( !_runningRequests.size() ) {
+      setFailed( NetworkRequestErrorPrivate::customError( NetworkRequestError::InternalError, "No valid mirror found" ) );
     }
   }
 
@@ -800,52 +890,6 @@ namespace zyppng {
 
     if ( req->_myMirror )
       req->_myMirror->startTransfer();
-  }
-
-  std::shared_ptr<DownloadPrivateBase::Request> DownloadPrivateBase::RangeDownloaderBaseState::initMultiRequest( NetworkRequestError &err, bool useFailed )
-  {
-    auto &parent = stateMachine();
-    Url myUrl;
-    TransferSettings settings;
-
-    MirrorControl::MirrorHandle mirr;
-    if (  _mirrors.size() ) {
-      if ( !( mirr = parent.findNextMirror( _mirrors, myUrl, settings, err ) ) )
-        return nullptr;
-    } else {
-      MIL << "We did run out of mirrors, aborting block download." << std::endl;
-      return nullptr;
-    }
-
-    auto blocks = useFailed ?  getNextFailedBlocks( myUrl.getScheme() ) : getNextBlocks( myUrl.getScheme() );
-    if ( !blocks.size() ) {
-
-      // we do not use the mirror, give it back to the list
-      if ( mirr )
-        _mirrors.push_back( myUrl );
-
-      err = NetworkRequestErrorPrivate::customError( NetworkRequestError::InternalError, "Did not find blocks to download." );
-      return nullptr;
-    }
-
-    const auto &spec = parent._spec;
-
-    std::shared_ptr<Request> req = std::make_shared<Request>( ::internal::clearQueryString( myUrl ), spec.targetPath(), NetworkRequest::WriteShared );
-    req->_myMirror = mirr;
-    req->_originalUrl = myUrl;
-    req->setPriority( parent._defaultSubRequestPriority );
-    req->transferSettings() = settings;
-
-    // if we download chunks we do not want to wait for too long on mirrors that are slow to answer
-    req->transferSettings().setTimeout( 2 );
-
-    DBG_MEDIA << "Creating Request to download blocks:"<<std::endl;
-    if ( !addBlockRanges( req, std::move(blocks) ) ) {
-      err = NetworkRequestErrorPrivate::customError( NetworkRequestError::InternalError, "Failed to add blocks to request." );
-      return nullptr;
-    }
-
-    return req;
   }
 
   /**
@@ -875,6 +919,7 @@ namespace zyppng {
   void zyppng::DownloadPrivateBase::RangeDownloaderBaseState::setFailed(NetworkRequestError &&err)
   {
     _error = std::move( err );
+    cancelAll( _error );
     zypp::filesystem::unlink( stateMachine()._spec.targetPath() );
     _sigFailed.emit();
   }
@@ -1092,7 +1137,7 @@ namespace zyppng {
   DLZckHeadState::DLZckHeadState(std::vector<Url> &&mirrors, DownloadPrivate &parent)
     : BasicDownloaderStateBase( parent )
   {
-    _mirrors = std::move(mirrors);
+    _fileMirrors = std::move(mirrors);
     MIL_MEDIA << "About to enter DlZckHeadState for url " << parent._spec.url() << std::endl;
   }
 
@@ -1133,7 +1178,7 @@ namespace zyppng {
   std::shared_ptr<DownloadPrivateBase::DLZckState> DLZckHeadState::transitionToDlZckState()
   {
     MIL_MEDIA << "Downloaded the header of size: " << _request->downloadedByteCount() << std::endl;
-    return std::make_shared<DLZckState>( std::move(_mirrors), stateMachine() );
+    return std::make_shared<DLZckState>( std::move(_fileMirrors), stateMachine() );
   }
 
   DLZckState::DLZckState(std::vector<Url> &&mirrors, DownloadPrivate &parent)
@@ -1410,6 +1455,61 @@ namespace zyppng {
     _sigFinishedConn.disconnect();
   }
 
+
+  DownloadPrivateBase::MirrorHandlingStateBase::MirrorHandlingStateBase( DownloadPrivate &parent )
+    : BasicState(parent)
+  { }
+
+  DownloadPrivateBase::MirrorHandlingStateBase::~MirrorHandlingStateBase()
+  {
+    _sigMirrorsReadyConn.disconnect();
+  }
+
+  DownloadPrivateBase::MirrorHandlingStateBase::PrepareResult DownloadPrivateBase::MirrorHandlingStateBase::prepareNextMirror()
+  {
+    auto &sm = stateMachine();
+    auto res = sm._mirrorControl->pickBestMirror( _fileMirrors );
+    if ( res.code == MirrorControl::PickResult::Again ) {
+      if ( !_sigMirrorsReadyConn )
+        _sigMirrorsReadyConn = sm._mirrorControl->connectFunc( &MirrorControl::sigNewMirrorsReady, [this](){
+          _sigMirrorsReadyConn.disconnect();
+          prepareNextMirror();
+        });
+      return Delayed;
+    } else if ( res.code == MirrorControl::PickResult::Unknown ) {
+      failedToPrepare();
+      return Failed;
+    }
+    mirrorReceived( res.result );
+    return Ok;
+  }
+
+  NetworkRequestError DownloadPrivateBase::MirrorHandlingStateBase::setupMirror( const MirrorControl::MirrorPick &pick, Url &url, TransferSettings &set )
+  {
+    auto &sm = stateMachine();
+    Url myUrl;
+    TransferSettings settings;
+
+    myUrl = *pick.first;
+
+    settings = sm._spec.settings();
+    //if this is a different host than the initial request, we reset username/password
+    if ( myUrl.getHost() != sm._spec.url().getHost() ) {
+      settings.setUsername( std::string() );
+      settings.setPassword( std::string() );
+      settings.setAuthType( std::string() );
+    }
+
+    NetworkRequestError err = sm.safeFillSettingsFromURL( myUrl, settings );
+    if ( err.type() != NetworkRequestError::NoError )
+      return err;
+
+    url = myUrl;
+    set = settings;
+    return err;
+  }
+
+
   DownloadPrivate::DownloadPrivate(Downloader &parent, std::shared_ptr<NetworkRequestDispatcher> requestDispatcher, std::shared_ptr<MirrorControl> mirrors, DownloadSpec &&spec, Download &p)
     : DownloadPrivateBase( parent, std::move(requestDispatcher), std::move(mirrors), std::move(spec), p )
   { }
@@ -1492,48 +1592,6 @@ namespace zyppng {
       res = NetworkRequestErrorPrivate::customError( NetworkRequestError::InternalError, e.asString(), buildExtraInfo() );
     }
     return res;
-  }
-
-  MirrorControl::MirrorHandle DownloadPrivateBase::findNextMirror( std::vector<Url> &_mirrors, Url &url, TransferSettings &set, NetworkRequestError &err)
-  {
-    Url myUrl;
-    TransferSettings settings;
-    MirrorControl::MirrorHandle mirror;
-
-    while ( !mirror ) {
-
-      const auto nextBest = _mirrorControl->pickBestMirror( _mirrors );
-      if ( !nextBest.second )
-        break;
-
-      myUrl = *nextBest.first;
-
-      settings = _spec.settings();
-      //if this is a different host than the initial request, we reset username/password
-      if ( myUrl.getHost() != _spec.url().getHost() ) {
-        settings.setUsername( std::string() );
-        settings.setPassword( std::string() );
-        settings.setAuthType( std::string() );
-      }
-
-      err = safeFillSettingsFromURL( myUrl, settings );
-      if ( err.type() != NetworkRequestError::NoError ) {
-        continue;
-      }
-
-      _mirrors.erase( nextBest.first );
-      mirror = nextBest.second;
-      break;
-    }
-
-    if ( !mirror ) {
-      err = NetworkRequestErrorPrivate::customError( NetworkRequestError::InternalError, "No valid mirror found" );
-      return nullptr;
-    }
-
-    url = myUrl;
-    set = settings;
-    return mirror;
   }
 
   Download::Download(zyppng::Downloader &parent, std::shared_ptr<zyppng::NetworkRequestDispatcher> requestDispatcher, std::shared_ptr<zyppng::MirrorControl> mirrors, zyppng::DownloadSpec &&spec)
