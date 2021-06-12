@@ -454,6 +454,9 @@ namespace zypp
 
     /** Kinds to search */
     Kinds _kinds;
+
+    /** comments */
+    std::string _comment;
     //@}
 
   public:
@@ -867,6 +870,9 @@ namespace zypp
   void PoolQuery::addKind(const ResKind & kind)
   { _pimpl->_kinds.insert(kind); }
 
+  void PoolQuery::setComment(const std::string & comment)
+  { _pimpl->_comment = comment; }
+
   void PoolQuery::addString(const std::string & value)
   { _pimpl->_strings.insert(value); }
 
@@ -998,6 +1004,9 @@ namespace zypp
   PoolQuery::repos() const
   { return _pimpl->_repos; }
 
+  const std::string &
+  PoolQuery::comment() const
+  { return _pimpl->_comment; }
 
   bool PoolQuery::caseSensitive() const
   { return !_pimpl->_flags.test( Match::NOCASE ); }
@@ -1077,6 +1086,7 @@ namespace zypp
     // PoolQuery's own attributes
     static const PoolQueryAttr repoAttr;
     static const PoolQueryAttr kindAttr;
+    static const PoolQueryAttr commentAttr;
     static const PoolQueryAttr stringAttr;
     static const PoolQueryAttr stringTypeAttr;
     static const PoolQueryAttr requireAllAttr;	// LEAGACY: attribute was defined but never implemented.
@@ -1090,6 +1100,7 @@ namespace zypp
 
   const PoolQueryAttr PoolQueryAttr::repoAttr( "repo" );
   const PoolQueryAttr PoolQueryAttr::kindAttr( "type" );
+  const PoolQueryAttr PoolQueryAttr::commentAttr( "comment" );
   const PoolQueryAttr PoolQueryAttr::stringAttr( "query_string" );
   const PoolQueryAttr PoolQueryAttr::stringTypeAttr("match_type");
   const PoolQueryAttr PoolQueryAttr::requireAllAttr("require_all");	// LEAGACY: attribute was defined but never implemented.
@@ -1175,6 +1186,10 @@ namespace zypp
       else if ( attribute==PoolQueryAttr::kindAttr || attribute=="kind" )
       {
         addKind( ResKind(attrValue) );
+      }
+      else if ( attribute==PoolQueryAttr::commentAttr )
+      {
+        setComment( attrValue );
       }
       else if ( attribute==PoolQueryAttr::stringAttr
         || attribute=="global_string")
@@ -1460,6 +1475,9 @@ namespace zypp
     {
       str << "complex: "<< it->serialize() << delim;
     }
+
+    str << PoolQueryAttr::commentAttr.asString() << ": "
+        << comment() << delim ;
 
     //separating delim - protection
     str << delim;

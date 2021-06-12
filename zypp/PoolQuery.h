@@ -159,6 +159,8 @@ namespace zypp
      * only the specified repo will be returned (multiple repos will be ORed).
      */
     void addRepo(const std::string &repoalias);
+    void setComment(const std::string & comment);
+
 
     /** Installed status filter setters. */
     //@{
@@ -391,6 +393,8 @@ namespace zypp
     const Kinds & kinds() const;
 
     const StrContainer & repos() const;
+
+    const std::string & comment() const;
 
     const Edition edition() const;
     const Rel editionRel() const;
