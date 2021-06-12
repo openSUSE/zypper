@@ -28,6 +28,7 @@ protected:
 private:
   std::set<zypp::ResKind> _kinds;
   std::vector<std::string> _repos;
+  std::string _comment;
 };
 
 

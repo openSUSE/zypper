@@ -59,7 +59,7 @@ namespace locks
   }
   ///////////////////////////////////////////////////////////////////
 
-  PoolQuery arg2query( Zypper & zypper, const std::string & arg_r, const std::set<ResKind> & kinds_r, const std::vector<std::string> & repos_r )
+  PoolQuery arg2query( Zypper & zypper, const std::string & arg_r, const std::set<ResKind> & kinds_r, const std::vector<std::string> & repos_r, const std::string & comment_r )
   {
     // Try to stay with the syntax the serialized query (AKA lock) generates.
     //     type: package
@@ -79,6 +79,7 @@ namespace locks
       else //TODO some error handling
 	WAR << "unknown repository" << *it << endl;
     }
+    q.setComment(comment_r);
 
     if ( kinds_r.empty() || ResKind::explicitBuiltin( arg_r ) ) // derive it from the name
     {

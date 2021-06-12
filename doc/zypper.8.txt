@@ -1505,6 +1505,9 @@ NOTE: If you use blanks around the operator you need to quote the string or esca
 
 	*-t*, *--type* _type_::
 		Lock only packages of specified type (default: package). See section *Package Types* for list of available package types.
+
+	*-m*, *--comment* _comment_::
+		Add a comment for package lock.
 --
 
 *removelock* (*rl*) [_options_] _lock-number_|_lock-spec_...::

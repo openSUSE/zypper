@@ -82,7 +82,7 @@ int RemoveLocksCmd::execute(Zypper &zypper, const std::vector<std::string> &posi
       }
       else //package name
       {
-        locks.removeLock( locks::arg2query( zypper, *args_it, _kinds, _repos ) );
+        locks.removeLock( locks::arg2query( zypper, *args_it, _kinds, _repos, "" ) );
       }
     }
 
