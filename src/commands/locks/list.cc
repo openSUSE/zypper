@@ -135,7 +135,7 @@ namespace out
       th << "#" << N_("Name");
       if ( _withMatches )
 	th << N_("Matches");
-      th << N_("Type") << N_("Repository");
+      th << N_("Type") << N_("Repository") << N_("Comment");
       return th;
     }
 
@@ -174,6 +174,9 @@ namespace out
       strings.clear();
       copy( q_r.repos().begin(), q_r.repos().end(), inserter(strings, strings.end()) );
       tr << get_string_for_table( strings );
+
+      // Comment
+      tr << q_r.comment();
 
       // opt Solvables as detail
       if ( _withSolvables && !q_r.empty() )

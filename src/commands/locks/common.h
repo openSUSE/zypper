@@ -19,7 +19,7 @@ namespace locks
 {
   /** Add/remove locks need to translate their cli args into PoolQueries in a common manner.
    */
-  zypp::PoolQuery arg2query( Zypper & zypper, const std::string & arg_r, const std::set<zypp::ResKind> & kinds_r, const std::vector<std::string> & repos_r );
+  zypp::PoolQuery arg2query( Zypper & zypper, const std::string & arg_r, const std::set<zypp::ResKind> & kinds_r, const std::vector<std::string> & repos_r, const std::string & comment_r );
 
 } // namespace locks
 ///////////////////////////////////////////////////////////////////

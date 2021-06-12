@@ -44,7 +44,8 @@ ZyppFlags::CommandGroup AddLocksCmd::cmdOptions() const
   return {{
     CommonFlags::resKindSetFlag( that->_kinds ),
     { "repo", 'r', ZyppFlags::RequiredArgument | ZyppFlags::Repeatable, ZyppFlags::StringVectorType ( &that->_repos, "ALIAS|#|URI" ),  _("Restrict the lock to the specified repository.")},
-    { "catalog", 'c', ZyppFlags::RequiredArgument | ZyppFlags::Repeatable | ZyppFlags::Hidden, ZyppFlags::StringVectorType ( &that->_repos, "ALIAS|#|URI"),  "Alias for --repo" }
+    { "catalog", 'c', ZyppFlags::RequiredArgument | ZyppFlags::Repeatable | ZyppFlags::Hidden, ZyppFlags::StringVectorType ( &that->_repos, "ALIAS|#|URI"),  "Alias for --repo" },
+    { "comment", 'm', ZyppFlags::RequiredArgument, ZyppFlags::StringType ( &that->_comment, "comments string" ),  _("Reason for specific lock.")},
   }};
 }
 
@@ -71,7 +72,7 @@ int AddLocksCmd::execute(Zypper &zypper, const std::vector<std::string> &positio
     Locks::size_type start = locks.size();
     for_(it,positionalArgs_r.begin(),positionalArgs_r.end())
     {
-      locks.addLock( locks::arg2query( zypper, *it, _kinds, _repos ) );
+      locks.addLock( locks::arg2query( zypper, *it, _kinds, _repos, _comment ) );
     }
     locks.save(Pathname::assertprefix
         (zypper.config().root_dir, ZConfig::instance().locksFile()));
