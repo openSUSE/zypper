@@ -1,3 +1,16 @@
+/*---------------------------------------------------------------------\
+|                          ____ _   __ __ ___                          |
+|                         |__  / \ / / . \ . \                         |
+|                           / / \ V /|  _/  _/                         |
+|                          / /__ | | | | | |                           |
+|                         /_____||_| |_| |_|                           |
+|                                                                      |
+----------------------------------------------------------------------/
+*
+* This file contains private API, this might break at any time between releases.
+* You have been warned!
+*
+*/
 #ifndef ZYPP_NG_MEDIA_HTTP_PRIVATE_MIRRORCONTROL_P_H
 #define ZYPP_NG_MEDIA_HTTP_PRIVATE_MIRRORCONTROL_P_H
 

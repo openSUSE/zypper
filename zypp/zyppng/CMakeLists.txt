@@ -31,6 +31,32 @@ SET( zyppng_media_private_HEADERS
   media/network/private/networkrequestdispatcher_p.h
   media/network/private/networkrequesterror_p.h
   media/network/private/request_p.h
+  media/network/private/downloaderstates/base_p.h
+  media/network/private/downloaderstates/basicdownloader_p.h
+  media/network/private/downloaderstates/detectmeta_p.h
+  media/network/private/downloaderstates/final_p.h
+  media/network/private/downloaderstates/initial_p.h
+  media/network/private/downloaderstates/metalinkinfo_p.h
+  media/network/private/downloaderstates/metalink_p.h
+  media/network/private/downloaderstates/mirrorhandling_p.h
+  media/network/private/downloaderstates/normal_p.h
+  media/network/private/downloaderstates/preparemulti_p.h
+  media/network/private/downloaderstates/rangedownloader_p.h
+  media/network/private/downloaderstates/zck_p.h
+)
+
+SET( zyppng_media_private_SOURCES
+  media/network/private/downloaderstates/basicdownloader_p.cc
+  media/network/private/downloaderstates/detectmeta_p.cc
+  media/network/private/downloaderstates/final_p.cc
+  media/network/private/downloaderstates/initial_p.cc
+  media/network/private/downloaderstates/metalinkinfo_p.cc
+  media/network/private/downloaderstates/metalink_p.cc
+  media/network/private/downloaderstates/mirrorhandling_p.cc
+  media/network/private/downloaderstates/normal_p.cc
+  media/network/private/downloaderstates/preparemulti_p.cc
+  media/network/private/downloaderstates/rangedownloader_p.cc
+  media/network/private/downloaderstates/zck_p.cc
 )
 
 SET( zyppng_appcode_HEADERS
@@ -51,6 +77,7 @@ SET ( zyppng_HEADERS
 SET ( zyppng_SRCS
   ${zyppng_appcode_SRCS}
   ${zyppng_media_SRCS}
+  ${zyppng_media_private_SOURCES}
 )
 
 ADD_LIBRARY( zyppng-objlib OBJECT ${zyppng_SRCS} ${zyppng_HEADERS} )
