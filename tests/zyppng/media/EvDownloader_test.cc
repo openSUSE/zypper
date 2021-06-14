@@ -142,6 +142,7 @@ struct print_log_value< MirrorSet > {
 std::vector< MirrorSet > generateMirr ()
 {
   std::vector< MirrorSet > res;
+
   //all mirrors good:
   res.push_back( MirrorSet() );
   res.back().name = "All good mirrors";
@@ -188,6 +189,18 @@ std::vector< MirrorSet > generateMirr ()
   res.back().expectedStates = { zyppng::Download::InitialState, zyppng::Download::DlMetaLinkInfo, zyppng::Download::PrepareMulti, zyppng::Download::DlMetalink, zyppng::Download::DlSimple, zyppng::Download::Finished};
   for ( int i = 100 ; i >= 10; i -= 10 )
     res.back().mirrors.push_back( std::make_pair( i, "/doesnotexist.txt") );
+
+  //only broken mirrors:
+  res.push_back( MirrorSet() );
+  res.back().name = "All broken mirrors by params";
+  res.back().filename = "test.txt";
+  res.back().dlTotal = 2148018;
+  res.back().expectSuccess = true;
+  res.back().expectedHandlerDownloads  = 2; //has to fall back to url handler download
+  res.back().expectedFileDownloads  = 0; // Setting up the mirrors will fail before even starting a download, so we should only see requests to the handler directly
+  res.back().expectedStates = { zyppng::Download::InitialState, zyppng::Download::DlMetaLinkInfo, zyppng::Download::PrepareMulti, zyppng::Download::DlMetalink, zyppng::Download::DlSimple, zyppng::Download::Finished};
+  for ( int i = 100 ; i >= 10; i -= 10 )
+    res.back().mirrors.push_back( std::make_pair( i, "/test.txt?auth=foobar") );
 
   //some broken mirrors:
   res.push_back( MirrorSet() );
@@ -271,7 +284,7 @@ std::vector< MirrorSet > generateMirr ()
 //create one URL line for a metalink template file
 std::string makeUrl ( int pref, const zyppng::Url &url )
 {
-  return ( zypp::str::Format( "<url preference=\"%1%\" location=\"de\" type=\"%2%\">%3%</url>" ) % pref % url.getScheme() % url );
+  return ( zypp::str::Format( "<url preference=\"%1%\" location=\"de\" type=\"%2%\">%3%</url>" ) % pref % url.getScheme() % url.asCompleteString() );
 };
 
 
@@ -344,8 +357,10 @@ BOOST_DATA_TEST_CASE( test1, bdata::make( generateMirr() ) * bdata::make( withSS
 
   zypp::Pathname testRoot = zypp::Pathname(TESTS_SRC_DIR)/"zyppng/data/downloader";
 
-  //each URL in the metalink file has a preference , a schema and of course the URL, we need to adapt those to our test setup
-  //so we generate the file on the fly from a template in the test data
+  // std::cout << "Starting with test " << elem.name << std::endl;
+
+  // each URL in the metalink file has a preference , a schema and of course the URL, we need to adapt those to our test setup
+  // so we generate the file on the fly from a template in the test data
   std::string metaTempl = TestTools::readFile ( testRoot/( zypp::str::Format("%1%.meta") % elem.filename ).str() );
   BOOST_REQUIRE( !metaTempl.empty() );
 
@@ -365,8 +380,8 @@ BOOST_DATA_TEST_CASE( test1, bdata::make( generateMirr() ) * bdata::make( withSS
   std::string urls;
   if ( elem.mirrors.size() ) {
     for ( const auto &mirr : elem.mirrors ) {
-      zyppng::Url mirrUrl (web.url());
-      mirrUrl.setPathName( mirr.second );
+      zyppng::Url mirrUrl ( web.url().asCompleteString() + mirr.second );
+      // mirrUrl.setPathName( mirr.second );
       urls += makeUrl( mirr.first, mirrUrl ) + "\n";
     }
   }
