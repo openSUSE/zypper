@@ -15,7 +15,13 @@
 
 namespace zyppng {
 
-  DlNormalFileState::DlNormalFileState(DownloadPrivate &parent) : BasicDownloaderStateBase( parent )
+  DlNormalFileState::DlNormalFileState( DownloadPrivate &parent ) : BasicDownloaderStateBase( parent )
+  {
+    MIL_MEDIA << "About to enter DlNormalFileState for url " << parent._spec.url() << std::endl;
+  }
+
+
+  DlNormalFileState::DlNormalFileState( std::shared_ptr<Request> &&oldReq, DownloadPrivate &parent ) : BasicDownloaderStateBase( std::move(oldReq), parent )
   {
     MIL_MEDIA << "About to enter DlNormalFileState for url " << parent._spec.url() << std::endl;
   }

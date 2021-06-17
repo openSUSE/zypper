@@ -12,6 +12,7 @@
 #include <zypp/media/CurlHelper.h>
 
 #include "detectmeta_p.h"
+#include "metalinkinfo_p.h"
 
 namespace zyppng {
 
@@ -42,8 +43,10 @@ namespace zyppng {
 
   void DetectMetalinkState::exit()
   {
-    _request->disconnectSignals();
-    _request.reset();
+    if ( _request ) {
+      _request->disconnectSignals();
+      _request.reset();
+    }
   }
 
   void DetectMetalinkState::onRequestStarted( NetworkRequest & )
@@ -72,6 +75,14 @@ namespace zyppng {
     _sigFinished.emit();
   }
 
+  std::shared_ptr<DlMetaLinkInfoState> DetectMetalinkState::toDlMetaLinkInfoState()
+  {
+    _request->disconnectSignals();
+    auto nState = std::make_shared<DlMetaLinkInfoState>( std::move( _request ), stateMachine() );
+    _request = nullptr;
+    return nState;
+  }
+
   bool DetectMetalinkState::toSimpleDownloadGuard() const
   {
 #if ENABLE_ZCHUNK_COMPRESSION
@@ -90,7 +101,15 @@ namespace zyppng {
   std::shared_ptr<DLZckHeadState> DetectMetalinkState::toDLZckHeadState()
   {
     // we have no mirrors, the range downloader would need to fall back to using the base URL
-    return std::make_shared<DLZckHeadState>( std::vector<Url> { stateMachine()._spec.url() }, stateMachine() );
+    if ( _error.isError() || !_request )
+      return std::make_shared<DLZckHeadState>( std::vector<Url> { stateMachine()._spec.url() }, stateMachine() );
+    else {
+      // reuse our request
+      _request->disconnectSignals();
+      auto nstate = std::make_shared<DLZckHeadState>( std::vector<Url> { stateMachine()._spec.url() }, std::move(_request), stateMachine() );
+      _request = nullptr;
+      return nstate;
+    }
   }
 #endif
 

@@ -89,6 +89,7 @@ namespace zyppng {
   private:
     MirrorControl();
     std::string makeKey ( const zypp::Url &url ) const;
+    sigc::connection _queueEmptyConn;
     NetworkRequestDispatcher::Ptr _dispatcher; //Mirror Control using its own NetworkRequestDispatcher, to avoid waiting for other downloads
     std::unordered_map<std::string, MirrorHandle> _handles;
 

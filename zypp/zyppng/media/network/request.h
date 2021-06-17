@@ -65,7 +65,8 @@ namespace zyppng {
     };
 
     enum OptionBits {
-      HeadRequest = 0x01, //< only request the header part of the file
+      Default        = 0x00, //< no special options, just do a normal download
+      HeadRequest    = 0x01, //< only request the header part of the file
       ConnectionTest = 0x02  //< only connect to collect connection speed information
     };
     ZYPP_DECLARE_FLAGS(Options, OptionBits);
@@ -127,7 +128,7 @@ namespace zyppng {
     Priority priority ( ) const;
 
     /*!
-     * Change request options, currently only the \sa OptionBits::HeadRequest option is supported
+     * Change request options.
      *
      * \note changing this makes only sense before the request was started
      */
@@ -197,11 +198,27 @@ namespace zyppng {
     const zypp::Pathname & targetFilePath () const;
 
     /**
+     * Changes the target file path of the download
+     * \note calling this on a currently running request has no impact
+     */
+    void setTargetFilePath ( const zypp::Pathname &path );
+
+    /**
+     * Returns the currently configured file open mode
+     */
+    FileMode fileOpenMode () const;
+
+    /**
+     * Sets the file open mode to \a mode.
+     * \note calling this on a currently running request has no impact
+     */
+    void setFileOpenMode ( FileMode mode );
+
+    /**
      * Returns the content type as reported from the server
      * \note can only return a valid value if the download has started already
      */
     std::string contentType () const;
-
 
     /**
      * Returns the number of bytes that are reported from the backend as the full download size, those can

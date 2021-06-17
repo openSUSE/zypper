@@ -19,6 +19,7 @@
 
 namespace zyppng {
 
+  struct DlMetaLinkInfoState;
 #if ENABLE_ZCHUNK_COMPRESSION
   struct DLZckHeadState;
 #endif
@@ -58,6 +59,7 @@ namespace zyppng {
     bool toMetalinkGuard () const {
       return _gotMetalink;
     }
+    std::shared_ptr<DlMetaLinkInfoState> toDlMetaLinkInfoState();
 
     bool toSimpleDownloadGuard () const;
 

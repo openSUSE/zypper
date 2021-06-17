@@ -53,14 +53,14 @@ namespace zyppng {
 #endif
     Transition< InitialState, &InitialState::sigTransitionToDlNormalFileState,   DlNormalFileState >,
 
-    Transition< DetectMetalinkState, &DetectMetalinkState::sigFinished,   DlMetaLinkInfoState, &DetectMetalinkState::toMetalinkGuard >,
+    Transition< DetectMetalinkState, &DetectMetalinkState::sigFinished,   DlMetaLinkInfoState, &DetectMetalinkState::toMetalinkGuard, &DetectMetalinkState::toDlMetaLinkInfoState >,
 #if ENABLE_ZCHUNK_COMPRESSION
     Transition< DetectMetalinkState, &DetectMetalinkState::sigFinished,   DLZckHeadState,      &DetectMetalinkState::toZckHeadDownloadGuard, &DetectMetalinkState::toDLZckHeadState  >,
 #endif
     Transition< DetectMetalinkState, &DetectMetalinkState::sigFinished,   DlNormalFileState,   &DetectMetalinkState::toSimpleDownloadGuard >,
 
     Transition< DlMetaLinkInfoState, &DlMetaLinkInfoState::sigFinished,    FinishedState, DefaultStateCondition, &DlMetaLinkInfoState::transitionToFinished >,
-    Transition< DlMetaLinkInfoState, &DlMetaLinkInfoState::sigGotMetalink, PrepareMultiState>,
+    Transition< DlMetaLinkInfoState, &DlMetaLinkInfoState::sigGotMetalink, PrepareMultiState, DefaultStateCondition, &DlMetaLinkInfoState::transitionToPrepareMulti >,
     Transition< DlMetaLinkInfoState, &DlMetaLinkInfoState::sigFailed,      FinishedState, DefaultStateCondition, &DlMetaLinkInfoState::transitionToFinished >,
 
     Transition< PrepareMultiState, &PrepareMultiState::sigFinished,   DlMetalinkState,  &PrepareMultiState::toMetalinkDownloadGuard , &PrepareMultiState::transitionToMetalinkDl >,

@@ -21,6 +21,7 @@
 namespace zyppng {
 
   struct FinishedState;
+  struct PrepareMultiState;
 
   /*!
      * State to download the actual metalink file, we can however not be 100% sure that we actually
@@ -29,7 +30,9 @@ namespace zyppng {
      */
   struct DlMetaLinkInfoState : public BasicDownloaderStateBase {
     static constexpr auto stateId = Download::DlMetaLinkInfo;
+
     DlMetaLinkInfoState( DownloadPrivate &parent );
+    DlMetaLinkInfoState( std::shared_ptr<Request> &&prevRequest,  DownloadPrivate &parent );
 
     SignalProxy< void () > sigFinished() {
       return _sigFinished;
@@ -42,8 +45,9 @@ namespace zyppng {
     }
 
     std::shared_ptr<FinishedState> transitionToFinished ();
+    std::shared_ptr<PrepareMultiState> transitionToPrepareMulti ();
 
-    bool initializeRequest( std::shared_ptr<Request> r ) override;
+    bool initializeRequest( std::shared_ptr<Request> &r ) override;
     virtual void gotFinished () override;
 
   protected:

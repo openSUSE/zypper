@@ -39,14 +39,22 @@ namespace zyppng {
     return ( magic == std::string_view( lead.data(), lead.size()) );
   }
 
-  DLZckHeadState::DLZckHeadState(std::vector<Url> &&mirrors, DownloadPrivate &parent)
+  DLZckHeadState::DLZckHeadState( std::vector<Url> &&mirrors, std::shared_ptr<Request> &&oldReq, DownloadPrivate &parent )
+    : BasicDownloaderStateBase( std::move(oldReq), parent )
+  {
+    _fileMirrors = std::move(mirrors);
+    MIL_MEDIA << "About to enter DlZckHeadState for url " << parent._spec.url() << std::endl;
+  }
+
+  DLZckHeadState::DLZckHeadState( std::vector<Url> &&mirrors, DownloadPrivate &parent )
     : BasicDownloaderStateBase( parent )
   {
     _fileMirrors = std::move(mirrors);
     MIL_MEDIA << "About to enter DlZckHeadState for url " << parent._spec.url() << std::endl;
   }
 
-  bool DLZckHeadState::initializeRequest(std::shared_ptr<Request> r)
+
+  bool DLZckHeadState::initializeRequest(std::shared_ptr<Request> &r )
   {
     BasicDownloaderStateBase::initializeRequest( r );
 

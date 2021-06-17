@@ -218,8 +218,9 @@ namespace zyppng {
       blocks = getNextFailedBlocks( myUrl.getScheme() );
 
     if ( !blocks.size() ) {
-      // we have no blocks? should not happen but ensureDownloadsRunning will know what to do
-      ensureDownloadsRunning();
+      // we have not blocks, in theory that should never happen but for safety we error out here, its better than
+      // getting stuck
+      setFailed( NetworkRequestErrorPrivate::customError( NetworkRequestError::InternalError, "Mirror requested after all blocks were downloaded." ) );
       return;
     }
 

@@ -29,11 +29,12 @@ namespace zyppng {
     using Request = DownloadPrivateBase::Request;
 
     BasicDownloaderStateBase ( DownloadPrivate &parent ) : MirrorHandlingStateBase( parent ){}
+    BasicDownloaderStateBase ( std::shared_ptr<Request> &&req, DownloadPrivate &parent );
 
     void enter ();
     void exit ();
 
-    virtual bool initializeRequest ( std::shared_ptr<Request> r );
+    virtual bool initializeRequest ( std::shared_ptr<Request> &r );
     virtual void gotFinished ();
     virtual void failed(NetworkRequestError &&err);
     void failed (std::string &&str );
@@ -57,6 +58,7 @@ namespace zyppng {
   protected:
     void startWithMirror ( MirrorControl::MirrorHandle mirror, const zypp::Url &url, const TransferSettings &set );
     void startWithoutMirror (  );
+    void startRequest ();
     virtual void handleRequestProgress (NetworkRequest &req, off_t dltotal, off_t dlnow );
     NetworkRequestError _error;
     Signal< void () > _sigFinished;

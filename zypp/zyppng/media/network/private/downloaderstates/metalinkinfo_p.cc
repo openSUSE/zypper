@@ -57,13 +57,27 @@ namespace zyppng {
     MIL_MEDIA << "Downloading metalink on " << parent._spec.url() << std::endl;
   }
 
+  DlMetaLinkInfoState::DlMetaLinkInfoState(std::shared_ptr<Request> &&prevRequest, DownloadPrivate &parent)
+    : BasicDownloaderStateBase( std::move(prevRequest), parent )
+  {
+    MIL_MEDIA << "Downloading metalink on " << parent._spec.url() << std::endl;
+  }
+
   std::shared_ptr<FinishedState> DlMetaLinkInfoState::transitionToFinished()
   {
     MIL_MEDIA << "Downloading on " << stateMachine()._spec.url() << " transition to final state. " << std::endl;
     return std::make_shared<FinishedState>( std::move(_error), stateMachine() );
   }
 
-  bool DlMetaLinkInfoState::initializeRequest( std::shared_ptr<Request> r )
+  std::shared_ptr<PrepareMultiState> DlMetaLinkInfoState::transitionToPrepareMulti()
+  {
+    _request->disconnectSignals();
+    auto nState = std::make_shared<PrepareMultiState>( std::move( _request ), stateMachine() );
+    _request = nullptr;
+    return nState;
+  }
+
+  bool DlMetaLinkInfoState::initializeRequest(std::shared_ptr<Request> &r )
   {
     r->transferSettings().addHeader("Accept: */*, application/metalink+xml, application/metalink4+xml");
     return BasicDownloaderStateBase::initializeRequest(r);

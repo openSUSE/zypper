@@ -1075,6 +1075,27 @@ namespace zyppng {
     return d_func()->_targetFile;
   }
 
+  void NetworkRequest::setTargetFilePath( const zypp::filesystem::Pathname &path )
+  {
+    Z_D();
+    if ( state() == NetworkRequest::Running )
+      return;
+    d->_targetFile = path;
+  }
+
+  NetworkRequest::FileMode NetworkRequest::fileOpenMode() const
+  {
+    return d_func()->_fMode;
+  }
+
+  void NetworkRequest::setFileOpenMode( FileMode mode )
+  {
+    Z_D();
+    if ( state() == NetworkRequest::Running )
+      return;
+    d->_fMode = std::move( mode );
+  }
+
   std::string NetworkRequest::contentType() const
   {
     char *ptr = NULL;

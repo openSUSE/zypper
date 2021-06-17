@@ -74,7 +74,7 @@ namespace zyppng {
     });
 
     _dispatcher = std::make_shared<NetworkRequestDispatcher>();
-    _dispatcher->connectFunc( &NetworkRequestDispatcher::sigQueueFinished, [ this ]( NetworkRequestDispatcher& ) {
+    _queueEmptyConn = _dispatcher->connectFunc( &NetworkRequestDispatcher::sigQueueFinished, [ this ]( NetworkRequestDispatcher& ) {
       //tell the world the queue is empty
 
       std::vector< std::unordered_map<std::string, MirrorHandle>::const_iterator > allOfEm;
@@ -103,7 +103,21 @@ namespace zyppng {
   }
 
   MirrorControl::~MirrorControl()
-  { }
+  {
+    // do not send signals to us while we are destructing
+    _queueEmptyConn.disconnect();
+
+    if ( _dispatcher->count() > 0 ) {
+      MIL << "Destroying MirrorControl while measurements are still running, aborting" << std::endl;
+      for ( auto &mirr : _handles )  {
+        if ( mirr.second->_request ) {
+          mirr.second->_finishedConn.disconnect();
+          _dispatcher->cancel( *mirr.second->_request );
+        }
+      }
+    }
+
+  }
 
   void MirrorControl::registerMirrors( const std::vector<zypp::media::MetalinkMirror> &urls )
   {

@@ -16,17 +16,25 @@
 
 namespace zyppng {
 
+  BasicDownloaderStateBase::BasicDownloaderStateBase(std::shared_ptr<Request> &&req, DownloadPrivate &parent)
+    : MirrorHandlingStateBase( parent )
+    , _request( std::move(req) )
+  { }
+
   void BasicDownloaderStateBase::enter()
   {
-    _request.reset();
-
-    auto &sm = stateMachine();
-    const auto &spec = sm._spec;
-    auto url = spec.url();
-
-    TransferSettings set = spec.settings();
-    NetworkRequestError dummyErr;
-    MirrorControl::MirrorHandle mirror;
+    if ( _request ) {
+      const auto &spec =  stateMachine()._spec;
+      MIL_MEDIA << "Reusing request from previous state" << std::endl;
+      _request->setOptions( Request::Default );
+      _request->setPriority( Request::Normal );
+      _request->resetRequestRanges();
+      _request->setTargetFilePath( spec.targetPath() );
+      _request->setFileOpenMode( Request::WriteExclusive );
+      _request->transferSettings() = spec.settings();
+      startRequest();
+      return;
+    }
 
     if ( _fileMirrors.size() ) {
       const auto res = prepareNextMirror();
@@ -35,6 +43,14 @@ namespace zyppng {
         return;
     }
     failedToPrepare();
+  }
+
+  void BasicDownloaderStateBase::exit()
+  {
+    if ( _request ) {
+      _request->disconnectSignals();
+      _request.reset();
+    }
   }
 
   void BasicDownloaderStateBase::mirrorReceived( MirrorControl::MirrorPick mirror )
@@ -64,26 +80,9 @@ namespace zyppng {
     _request = std::make_shared<Request>( ::internal::clearQueryString(url), spec.targetPath() ) ;
     _request->_myMirror = mirror;
     _request->_originalUrl = url;
-
-    if ( _chksumtype  && _chksumVec ) {
-      std::shared_ptr<zypp::Digest> fileDigest = std::make_shared<zypp::Digest>();
-      if ( fileDigest->create( *_chksumtype ) )
-        // to run the checksum for the full file we need to request one big range with open end
-        _request->addRequestRange( 0, 0, fileDigest, *_chksumVec );
-    }
     _request->transferSettings() = set;
 
-    if ( !initializeRequest( _request ) ) {
-      return failed( "Failed to initialize request" );
-    }
-
-    if ( stateMachine().previousState() && *stateMachine().previousState() != Download::InitialState ) {
-      //make sure this request will run asap
-      _request->setPriority( sm._defaultSubRequestPriority );
-    }
-
-    _request->connectSignals( *this );
-    sm._requestDispatcher->enqueue( _request );
+    startRequest();
   }
 
   void BasicDownloaderStateBase::startWithoutMirror()
@@ -99,13 +98,34 @@ namespace zyppng {
     startWithMirror( nullptr, url, set );
   }
 
-  void BasicDownloaderStateBase::exit()
+  void BasicDownloaderStateBase::startRequest()
   {
-    _request->disconnectSignals();
-    _request.reset();
+    auto &sm = stateMachine();
+
+    if ( !_request )
+      return failed("Request was not intialized before starting it.");
+
+    if ( _chksumtype  && _chksumVec ) {
+      std::shared_ptr<zypp::Digest> fileDigest = std::make_shared<zypp::Digest>();
+      if ( fileDigest->create( *_chksumtype ) )
+        // to run the checksum for the full file we need to request one big range with open end
+        _request->addRequestRange( 0, 0, fileDigest, *_chksumVec );
+    }
+
+    if ( !initializeRequest( _request ) ) {
+      return failed( "Failed to initialize request" );
+    }
+
+    if ( stateMachine().previousState() && *stateMachine().previousState() != Download::InitialState ) {
+      //make sure this request will run asap
+      _request->setPriority( sm._defaultSubRequestPriority );
+    }
+
+    _request->connectSignals( *this );
+    sm._requestDispatcher->enqueue( _request );
   }
 
-  bool BasicDownloaderStateBase::initializeRequest( std::shared_ptr<Request> )
+  bool BasicDownloaderStateBase::initializeRequest( std::shared_ptr<Request> & )
   {
     return true;
   }

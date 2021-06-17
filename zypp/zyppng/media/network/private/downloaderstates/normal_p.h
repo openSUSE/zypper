@@ -28,7 +28,9 @@ namespace zyppng {
      */
   struct DlNormalFileState : public BasicDownloaderStateBase {
     static constexpr auto stateId = Download::DlSimple;
+
     DlNormalFileState( DownloadPrivate &parent );
+    DlNormalFileState( std::shared_ptr<Request> &&oldReq, DownloadPrivate &parent );
 
     std::shared_ptr<FinishedState> transitionToFinished ();
 

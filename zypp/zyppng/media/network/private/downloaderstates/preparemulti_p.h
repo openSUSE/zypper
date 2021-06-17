@@ -36,10 +36,12 @@ namespace zyppng {
    */
   struct PrepareMultiState : public zyppng::SimpleState< DownloadPrivate, Download::PrepareMulti, false > {
 
-    PrepareMultiState ( DownloadPrivate &parent );
+    using Request = DownloadPrivateBase::Request;
+
+    PrepareMultiState ( std::shared_ptr<Request> oldReq, DownloadPrivate &parent );
 
     void enter ();
-    void exit () {}
+    void exit ();
 
     const NetworkRequestError &error () const {
       return _error;
@@ -75,6 +77,7 @@ namespace zyppng {
 #if ENABLE_ZCHUNK_COMPRESSION
     bool _haveZckData = false; //< do we have zck data ready
 #endif
+    std::shared_ptr<Request> _oldRequest; //< exising request of previous states, that the next states might reuse
     NetworkRequestError _error;
     Signal< void () > _sigFinished;
     Signal< void () > _sigFallback;

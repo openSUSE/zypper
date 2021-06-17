@@ -20,7 +20,7 @@
 
 namespace zyppng {
 
-  PrepareMultiState::PrepareMultiState(DownloadPrivate &parent) : SimpleState( parent )
+  PrepareMultiState::PrepareMultiState( std::shared_ptr<Request> oldReq, DownloadPrivate &parent ) : SimpleState( parent )
   {
     MIL_MEDIA << "About to enter PrepareMultiState" << std::endl;
   }
@@ -103,6 +103,13 @@ namespace zyppng {
     sm._mirrorControl->registerMirrors( mirrs );
   }
 
+  void PrepareMultiState::exit()
+  {
+    // if we did not pass on the existing request to the next state we destroy it here
+    if ( _oldRequest )
+      _oldRequest.reset();
+  }
+
   void PrepareMultiState::onMirrorsReady()
   {
     auto &sm = stateMachine();
@@ -153,9 +160,14 @@ namespace zyppng {
   std::shared_ptr<DlNormalFileState> PrepareMultiState::fallbackToNormalTransition()
   {
     MIL_MEDIA << "No blocklist and no filesize, falling back to normal download for URL " << stateMachine()._spec.url() << std::endl;
-    auto ptr = std::make_shared<DlNormalFileState>( stateMachine() );
-    ptr->_fileMirrors = std::move(_mirrors);
+    std::shared_ptr<DlNormalFileState> ptr;
+    if ( _oldRequest ) {
+      ptr = std::make_shared<DlNormalFileState>( std::move(_oldRequest), stateMachine() );
+    } else {
+      ptr = std::make_shared<DlNormalFileState>( stateMachine() );
+    }
 
+    ptr->_fileMirrors = std::move(_mirrors);
     if ( _blockList.haveFileChecksum() ) {
       ptr->_chksumtype = _blockList.fileChecksumType();
       ptr->_chksumVec  = _blockList.getFileChecksum();
@@ -177,6 +189,8 @@ namespace zyppng {
 #if ENABLE_ZCHUNK_COMPRESSION
   std::shared_ptr<DLZckHeadState> PrepareMultiState::transitionToZckHeadDl()
   {
+    if ( _oldRequest )
+      return std::make_shared<DLZckHeadState>( std::move(_mirrors), std::move(_oldRequest), stateMachine() );
     return std::make_shared<DLZckHeadState>( std::move(_mirrors), stateMachine() );
   }
 
