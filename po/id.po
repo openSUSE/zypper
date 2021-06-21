@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-06-02 15:57+0200\n"
-"PO-Revision-Date: 2021-03-17 15:57+0000\n"
+"PO-Revision-Date: 2021-06-21 12:58+0000\n"
 "Last-Translator: Kukuh Syafaat <syafaatkukuh@gmail.com>\n"
 "Language-Team: Indonesian <https://l10n.opensuse.org/projects/zypper/master/"
 "id/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 3.6.1\n"
+"X-Generator: Weblate 4.6.2\n"
 
 #: src/Command.cc:93
 msgid "Invalid command"
@@ -1289,6 +1289,11 @@ msgid ""
 "repository provider or check his web site. Many provider maintain a web page "
 "showing the fingerprints of the GPG keys they are using."
 msgstr ""
+"Sebuah pubkey GPG diidentifikasi dengan jelas oleh sidik jarinya. Jangan "
+"mengandalkan nama kunci. Jika Anda tidak yakin apakah kunci yang disajikan "
+"asli, tanyakan pada penyedia repositori atau periksa situs webnya. Banyak "
+"penyedia memelihara halaman web yang menunjukkan sidik jari dari kunci GPG "
+"yang mereka gunakan."
 
 #: src/callbacks/keyring.h:37
 msgid ""
@@ -1345,7 +1350,7 @@ msgstr "Nama Kunci:"
 
 #: src/callbacks/keyring.h:89
 msgid "Key Algorithm:"
-msgstr ""
+msgstr "Algoritma Kunci:"
 
 #: src/callbacks/keyring.h:90
 msgid "Key Created:"
@@ -1575,7 +1580,7 @@ msgstr ""
 #, boost-format
 msgid "Received %1% new package signing key from repository %2%:"
 msgid_plural "Received %1% new package signing keys from repository %2%:"
-msgstr[0] ""
+msgstr[0] "Menerima %1% kunci penandatanganan paket baru dari repositori %2%:"
 
 #: src/callbacks/keyring.h:494
 msgid ""
@@ -1583,16 +1588,21 @@ msgid ""
 "repository. In order to validate those packages upon download and "
 "installation the new keys will be imported into the rpm database."
 msgstr ""
+"Kunci tambahan tersebut biasanya digunakan untuk menandatangani paket yang "
+"dikirimkan oleh repositori. Untuk memvalidasi paket-paket tersebut saat "
+"mengunduh dan memasang, kunci baru akan diimpor ke basis data rpm."
 
 #: src/callbacks/keyring.h:496
 msgid "New:"
-msgstr ""
+msgstr "Baru:"
 
 #: src/callbacks/keyring.h:502
 msgid ""
 "The repository metadata introducing the new keys have been signed and "
 "validated by the trusted key:"
 msgstr ""
+"Metadata repositori yang memperkenalkan kunci baru telah ditandatangani dan "
+"divalidasi oleh kunci tepercaya:"
 
 #: src/callbacks/keyring.h:525
 #, c-format, boost-format
@@ -2601,6 +2611,8 @@ msgid ""
 "This is the recommended way for scripts to test whether a system reboot is "
 "suggested."
 msgstr ""
+"Ini adalah cara yang disarankan untuk skrip untuk menguji apakah mulai ulang "
+"sistem disarankan."
 
 #: src/commands/needs-rebooting.cc:38
 msgid ""
