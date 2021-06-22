@@ -13,6 +13,7 @@
 
 #include <zypp/Pathname.h>
 #include <zypp/target/rpm/RpmHeader.h>
+#include <yaml-cpp/yaml.h>
 
 using namespace zypp;
 
@@ -45,6 +46,44 @@ void InstallRemoveBase::handleFeedback(Zypper &zypper, const SolverRequester &sr
   zypper.setExitCode( ZYPPER_EXIT_OK );
 }
 
+int InstallRemoveBase::handlePackageFile( Zypper &zypper, std::vector<std::string> &positionalArgs )
+{
+  const auto &makeError = [ this, &zypper ]( int code, const std::string &msg, const std::string &hint = "" )->int {
+    zypper.out().error( msg, hint);
+    zypper.out().info( help() );
+    return code;
+  };
+
+  if ( !_packageFile.empty() ) {
+    const auto &info = PathInfo( _packageFile );
+    if ( !info.isFile() )
+      return makeError( ZYPPER_EXIT_ERR_INVALID_ARGS , _("Packagefile does not point to a valid file") );
+
+    if ( !info.isRUsr() )
+      return makeError( ZYPPER_EXIT_ERR_INVALID_ARGS , _("Packagefile is not readable by user") );
+
+    try {
+      YAML::Node control = YAML::LoadFile( _packageFile.asString() );
+
+      if ( control.Type() != YAML::NodeType::Sequence ) {
+        return makeError( ZYPPER_EXIT_ERR_SYNTAX, "Invalid Packagefile, root node must be a YAML Sequence" );
+      }
+
+      for ( const auto &arg : control ) {
+        if ( !arg.IsScalar() ) {
+          return makeError( ZYPPER_EXIT_ERR_SYNTAX, "Invalid Packagefile, root node sequence can only contain scalars" );
+        }
+        positionalArgs.push_back( arg.as<std::string>() );
+      }
+    } catch ( YAML::Exception &e ) {
+      return makeError( ZYPPER_EXIT_ERR_SYNTAX, "Invalid Packagefile", e.what() );
+    } catch ( ... )  {
+      return makeError( ZYPPER_EXIT_ERR_SYNTAX, "Unknown error when parsing the Packagefile" );
+    }
+  }
+  return ZYPPER_EXIT_OK;
+}
+
 
 std::vector<BaseCommandConditionPtr> InstallRemoveBase::conditions() const
 {
@@ -61,7 +100,8 @@ ZyppFlags::CommandGroup InstallRemoveBase::cmdOptions() const
     CommonFlags::resKindSetFlag( that->_kinds ),
     { "name", 'n', ZyppFlags::NoArgument, ZyppFlags::BoolType( &that->_selectByName, ZyppFlags::StoreTrue, _selectByName ), _("Select packages by plain name, not by capability.") },
     { "capability", 'C', ZyppFlags::NoArgument, ZyppFlags::BoolType( &that->_selectByCap, ZyppFlags::StoreTrue, _selectByCap ), _("Select packages solely by capability.") },
-    CommonFlags::detailsFlag( that->_details )
+    CommonFlags::detailsFlag( that->_details ),
+    { "packagefile", 'p', ZyppFlags::RequiredArgument , ZyppFlags::PathNameType( that->_packageFile, {}, "FILEPATH" ), "File containing a yaml list of values to be treated as positional arguments." },
     },{
       { "capability", "name" }
     }};
@@ -96,8 +136,14 @@ void RemoveCmd::doReset()
   InstallRemoveBase::doReset();
 }
 
-int RemoveCmd::execute(Zypper &zypper, const std::vector<std::string> &positionalArgs)
+int RemoveCmd::execute( Zypper &zypper, const std::vector<std::string> &positionalArgs_r )
 {
+  std::vector<std::string> positionalArgs = positionalArgs_r;
+
+  const auto c = handlePackageFile( zypper, positionalArgs );
+  if ( c != ZYPPER_EXIT_OK )
+    return c;
+
   if ( positionalArgs.size() < 1 )
   {
     zypper.out().error(
@@ -196,7 +242,7 @@ ZyppFlags::CommandGroup InstallCmd::cmdOptions() const
     { "force", 'f', ZyppFlags::NoArgument, ZyppFlags::BoolType( &that->_force, ZyppFlags::StoreTrue, _force ),
       // translators: -f, --force
       _("Install even if the item is already installed (reinstall), downgraded or changes vendor or architecture.")
-    }
+    },
   });
   opts.conflictingOptions.insert(opts.conflictingOptions.end(),
   {
@@ -218,6 +264,11 @@ void InstallCmd::doReset()
 int InstallCmd::execute( Zypper &zypper, const std::vector<std::string> &positionalArgs_r )
 {
   std::vector<std::string> positionalArgs = positionalArgs_r;
+
+  const auto c = handlePackageFile( zypper, positionalArgs );
+  if ( c != ZYPPER_EXIT_OK )
+    return c;
+
   if ( positionalArgs.size() < 1 && _entireCatalog.empty() )
   {
     zypper.out().error(

@@ -233,7 +233,7 @@ SET( zypper_utils_SRCS
 )
 
 ADD_LIBRARY( zypper_lib STATIC ${zypper_SRCS} ${zypper_out_SRCS} ${zypper_utils_SRCS} )
-TARGET_LINK_LIBRARIES( zypper_lib ${ZYPP_LIBRARY} ${READLINE_LIBRARY} -laugeas ${AUGEAS_LIBRARY} -lxml2 )
+TARGET_LINK_LIBRARIES( zypper_lib ${ZYPP_LIBRARY} ${READLINE_LIBRARY} -laugeas ${AUGEAS_LIBRARY} ${YAML_CPP_LIBRARIES} -lxml2 )
 
 ADD_EXECUTABLE( zypper main.cc )
 TARGET_LINK_LIBRARIES( zypper zypper_lib ${ZYPP_LIBRARY} ${READLINE_LIBRARY} -laugeas ${AUGEAS_LIBRARY} -lrt )
