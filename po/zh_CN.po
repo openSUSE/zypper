@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-06-02 15:57+0200\n"
-"PO-Revision-Date: 2021-05-05 09:20+0000\n"
-"Last-Translator: Jinxi Wu <Xeonpoint@foxmail.com>\n"
+"PO-Revision-Date: 2021-06-22 17:58+0000\n"
+"Last-Translator: Dingzhong Chen <wsxy162@gmail.com>\n"
 "Language-Team: Chinese (China) <https://l10n.opensuse.org/projects/zypper/"
 "master/zh_CN/>\n"
 "Language: zh_CN\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 4.6\n"
+"X-Generator: Weblate 4.6.2\n"
 
 #: src/Command.cc:93
 msgid "Invalid command"
@@ -135,7 +135,7 @@ msgstr "在表格中不要缩写文本。"
 #: src/Config.cc:420
 #, boost-format
 msgid "Table style (%1%)."
-msgstr "表格样式 (%1%)."
+msgstr "表格样式 (%1%)。"
 
 #: src/Config.cc:424 src/commands/optionsets.cc:284
 msgid "Entering non-interactive mode."
@@ -1559,8 +1559,8 @@ msgid ""
 "to unblock using this file on your own risk. Empty input will discard the "
 "file.\n"
 msgstr ""
-"然而若您确信校验码为 '%1%..' 的文件安全且正确，应用于此操作中，可输入该校验码"
-"的前 4 个字符来使用该文件但风险自负。不输入将丢弃该文件。\n"
+"然而若您确信校验码为 '%1%..' 的文件应用于此操作中安全且正确，可输入\n"
+"该校验码的前 4 个字符来使用该文件但风险自负。不输入将丢弃该文件。\n"
 
 #. translators: A prompt option
 #: src/callbacks/keyring.h:577
@@ -2269,7 +2269,7 @@ msgstr "不移除给定区域的相关软件包。"
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
 #: src/commands/locks/add.cc:29
 msgid "addlock (al) [OPTIONS] <LOCKSPEC>..."
-msgstr "addlock (al) [OPTIONS] <LOCKSPEC>..."
+msgstr "addlock (al) [选项] <锁定编号>..."
 
 #. translators: command summary
 #: src/commands/locks/add.cc:31 src/commands/locks/add.cc:34
