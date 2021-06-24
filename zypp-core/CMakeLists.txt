@@ -116,6 +116,11 @@ SET( zypp_parser_xml_HEADERS
 
 INSTALL(  FILES ${zypp_parser_xml_HEADERS} DESTINATION "${INCLUDE_INSTALL_DIR}/zypp-core/parser/xml" )
 
+SET( zyppng_async_HEADERS
+  zyppng/async/AsyncOp
+  zyppng/async/asyncop.h
+)
+
 SET( zyppng_base_SRCS
   zyppng/base/abstracteventsource.cc
   zyppng/base/base.cc
@@ -200,6 +205,34 @@ SET( zyppng_io_HEADERS
   zyppng/io/SockAddr
 )
 
+SET( zyppng_meta_HEADERS
+  zyppng/meta/Functional
+  zyppng/meta/functional.h
+  zyppng/meta/FunctionTraits
+  zyppng/meta/function_traits.h
+  zyppng/meta/TypeTraits
+  zyppng/meta/type_traits.h
+)
+
+SET( zyppng_pipelines_HEADERS
+  zyppng/pipelines/AsyncResult
+  zyppng/pipelines/asyncresult.h
+  zyppng/pipelines/Await
+  zyppng/pipelines/await.h
+  zyppng/pipelines/Expected
+  zyppng/pipelines/expected.h
+  zyppng/pipelines/Lift
+  zyppng/pipelines/lift.h
+  zyppng/pipelines/MTry
+  zyppng/pipelines/mtry.h
+  zyppng/pipelines/Redo
+  zyppng/pipelines/redo.h
+  zyppng/pipelines/Transform
+  zyppng/pipelines/transform.h
+  zyppng/pipelines/Wait
+  zyppng/pipelines/wait.h
+)
+
 SET( zyppng_rpc_HEADERS
   zyppng/rpc/rpc.h
   zyppng/rpc/zerocopystreams.h
@@ -228,6 +261,7 @@ SET( zyppng_thread_private_HEADERS
 
 SET ( zypp_HEADERS
   ${zypp_toplevel_headers}
+  ${zyppng_async_HEADERS}
   ${zypp_base_HEADERS}
   ${zypp_fs_HEADERS}
   ${zypp_url_HEADERS}
@@ -237,6 +271,8 @@ SET ( zypp_HEADERS
   ${zyppng_core_HEADERS}
   ${zyppng_io_HEADERS}
   ${zyppng_io_private_HEADERS}
+  ${zyppng_meta_HEADERS}
+  ${zyppng_pipelines_HEADERS}
   ${zyppng_rpc_HEADERS}
   ${zyppng_thread_HEADERS}
   ${zyppng_thread_private_HEADERS}
