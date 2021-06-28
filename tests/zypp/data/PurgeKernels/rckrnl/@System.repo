@@ -1,0 +1,34 @@
+=Ver: 3.0
+=Pkg: glibc 1 1 x86_64
++Prv:
+glibc = 1-1
+-Prv:
+=Vnd: openSUSE
+=Pkg: kernel-default 5.13.rc7 16.1 x86_64
++Prv:
+multiversion(kernel)
+kernel-default-5.13.rc7-16.1
+kernel = 5.13.rc7-16.1
+kernel-uname-r = 5.13.0-rc7-16-default
+kernel-default = 5.13.rc7-16.1
+-Prv:
+=Vnd: openSUSE
+=Pkg: kernel-default 5.13~rc7 17.1 x86_64
++Prv:
+multiversion(kernel)
+kernel-default-5.13~rc7-17.1
+kernel = 5.13~rc7-17.1
+kernel-uname-r = 5.13.0-rc7-17-default
+kernel-default = 5.13~rc7-17.1
+-Prv:
+=Vnd: openSUSE
+=Pkg: kernel-default 5.13~rc7 18.1 x86_64
++Prv:
+multiversion(kernel)
+kernel-default-5.13~rc7-18.1
+kernel = 5.13~rc7-18.1
+kernel-uname-r = 5.13.0-rc7-18-default
+kernel-default = 5.13~rc7-18.1
+-Prv:
+=Vnd: openSUSE
+

@@ -328,6 +328,17 @@ namespace  {
           { "kernel-rt-devel-debuginfo-1-3.x86_64" },
         }
       },
+      // rc kernels have a special naming hack because upstream uses characters that are forbidden in rpm versions
+      TestSample {
+        TESTS_SRC_DIR"/zypp/data/PurgeKernels/rckrnl",
+        "5.13.0-rc7-17-default",
+        Arch("x86_64"),
+        "running",
+        {
+          { "kernel-default-5.13.rc7-16.1.x86_64" },
+          { "kernel-default-5.13~rc7-18.1.x86_64" }
+        }
+      },
     };
   }
 }

@@ -68,7 +68,10 @@ namespace zypp {
 
         _detectedRunning = true;
 
-        MIL << "Detected running kernel: " << _runningKernelEdition << " " << _runningKernelFlavour << " " << _kernelArch << std::endl;
+        MIL << "Detected running kernel: Flavour: " << _runningKernelFlavour << " Arch: " << _kernelArch << "\n";
+        for ( const auto &edVar : _runningKernelEditionVariants )
+          MIL << "Edition variant: " << edVar << "\n";
+        MIL << std::endl;
 
       } else {
         MIL << "Failed to detect running kernel: " << errno << std::endl;
@@ -88,17 +91,27 @@ namespace zypp {
 
       version = str::regex_substitute( version, str::regex( "-[^-]*$", str::regex::match_extended | str::regex::newline ), "", true );
 
-      // from purge-kernels script, was copied from kernel-source/rpm/mkspec
-      version = str::regex_substitute( version, str::regex( "\\.0-rc", str::regex::match_extended ), ".rc", true );
-      version = str::regex_substitute( version, str::regex( "-rc\\d+", str::regex::match_extended ), "", true );
-      version = str::regex_substitute( version, str::regex( "-", str::regex::match_extended ), ".", true );
 
-      _runningKernelEdition = Edition( version, release );
+      auto makeRcVariant = [ &release ]( std::string myVersion, const std::string &replace ){
+        // from purge-kernels script, was copied from kernel-source/rpm/mkspec
+        myVersion = str::regex_substitute( myVersion, str::regex( "\\.0-rc", str::regex::match_extended ), replace, true );
+        myVersion = str::regex_substitute( myVersion, str::regex( "-rc\\d+", str::regex::match_extended ), "", true );
+        myVersion = str::regex_substitute( myVersion, str::regex( "-", str::regex::match_extended ), ".", true );
+        return Edition( myVersion, release );
+      };
+
+      _runningKernelEditionVariants.clear();
+      _runningKernelEditionVariants.insert( makeRcVariant( version, "~rc") );
+      _runningKernelEditionVariants.insert( makeRcVariant( version, ".rc") );
+
       _runningKernelFlavour = flavour;
 
       MIL << "Parsed info from uname: " << std::endl;
       MIL << "Kernel Flavour: " << _runningKernelFlavour << std::endl;
-      MIL << "Kernel Edition: " << _runningKernelEdition << std::endl;
+      MIL << "Kernel Edition Variants: \n";
+      for ( const auto &var : _runningKernelEditionVariants )
+        MIL << "    " << var << "\n";
+      MIL << std::endl;
     }
 
     bool removePackageAndCheck( const sat::Solvable slv, const std::set<sat::Solvable> &keepList , const std::set<sat::Solvable> &removeList ) const;
@@ -110,7 +123,12 @@ namespace zypp {
     std::set<size_t>  _keepOldestOffsets;
     std::set<Edition> _keepSpecificEditions;
     std::string       _uname_r;
-    Edition           _runningKernelEdition;
+    /*!
+     *  A kernel uname can expand into multiple variants especially with rc kernels,
+     *  older rc releases replaced the upstream tag -rc with .rc, however newer code
+     *  replaces it with ~rc. We need to check against all variants to match the correct one.
+     */
+    std::set<Edition> _runningKernelEditionVariants;
     Flavour           _runningKernelFlavour;
     Arch              _kernelArch;
     std::string       _keepSpec = ZConfig::instance().multiversionKernels();
@@ -356,9 +374,10 @@ namespace zypp {
       removeList.erase( pck );
     };
 
-    const auto versionPredicate = []( const auto &edition ){
-      return [ &edition ]( const auto &elem ) {
-        return versionMatch( edition, elem.first );
+    const auto versionPredicate = []( const auto &editionVariants ){
+      return [ &editionVariants ]( const auto &elem ) {
+        const auto &f = std::bind( versionMatch, std::placeholders::_1, elem.first );
+        return std::any_of( editionVariants.begin(), editionVariants.end(), f );
       };
     };
 
@@ -380,14 +399,21 @@ namespace zypp {
              && ( ( archMap.first == _kernelArch && groupInfo.second.groupFlavour == _runningKernelFlavour )
                   || groupInfo.second.groupType == GroupInfo::Sources ) ) {
 
-          MIL << "Matching packages against running kernel "<< _runningKernelEdition << "-" << _runningKernelFlavour << "-" <<_kernelArch << std::endl;
+          MIL << "Matching packages against running kernel "<< _runningKernelFlavour << "-" <<_kernelArch << "\nVariants:\n";
+          for ( const auto &var : _runningKernelEditionVariants )
+            MIL << var << "\n";
+          MIL << std::endl;
 
-          auto it = std::find_if( map.begin(), map.end(), versionPredicate( _runningKernelEdition ) );
+          const auto &editionPredicate = versionPredicate( _runningKernelEditionVariants );
+          auto it = std::find_if( map.begin(), map.end(), editionPredicate );
           if ( it == map.end() ) {
 
             // If we look at Sources we cannot match the flavour but we still want to keep on checking the rest of the keep spec
             if ( groupInfo.second.groupType != GroupInfo::Sources  ) {
-              MIL << "Running kernel "<< _runningKernelEdition << "-" << _runningKernelFlavour << "-" <<_kernelArch << " not installed."<<std::endl;
+              MIL << "Running kernel " << _runningKernelFlavour << "-" <<_kernelArch << "\n";
+              for ( const auto &var : _runningKernelEditionVariants )
+                MIL << " Possible Variant:" << var << "\n";
+              MIL << "Not installed! \n";
               MIL << "NOT removing any packages for flavor "<<_runningKernelFlavour<<"-"<<_kernelArch<<" ."<<std::endl;
 
               for ( const auto &kernelMap : map ) {
@@ -401,7 +427,7 @@ namespace zypp {
             // there could be multiple matches here because of rebuild counter, lets try to find the last one
             MIL << "Found possible running candidate edition: " << it->first << std::endl;
             auto nit = it;
-            for ( nit++ ; nit != map.end() && versionMatch( _runningKernelEdition, nit->first ) ; nit++ ) {
+            for ( nit++ ; nit != map.end() && editionPredicate( *nit ) ; nit++ ) {
               MIL << "Found possible more recent running candidate edition: " << nit->first << std::endl;
               it = nit;
             }
