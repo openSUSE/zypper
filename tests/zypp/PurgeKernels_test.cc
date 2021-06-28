@@ -1,19 +1,33 @@
 #include "TestSetup.h"
 #include <zypp/PurgeKernels.h>
+#include <set>
 
 #include <boost/test/data/test_case.hpp>
 
 using namespace zypp;
 using namespace boost::unit_test;
 
+namespace  {
+  // Defines a expected removal of a package and carries the flag if it actually was removed
+  struct ExpectedRemoval {
+    ExpectedRemoval( std::string &&name ) : packageNVRA(std::move(name)) {}
+    std::string packageNVRA;
+    mutable bool wasRemoved = false;
+  };
+
+  bool operator< ( const ExpectedRemoval &a, const ExpectedRemoval &b ) {
+    return a.packageNVRA < b.packageNVRA;
+  }
+}
+
 namespace boost { namespace test_tools { namespace tt_detail {
 template<>
-struct print_log_value< std::map<std::string, bool> > {
+struct print_log_value< std::set<ExpectedRemoval> > {
 void operator()( std::ostream& ostr,
-    std::map<std::string, bool> const& set)
+    std::set<ExpectedRemoval> const& set)
 {
   ostr << "{" << std::endl;
-  for( const auto &elem : set ) ostr << "'" << elem.first << "'," << std::endl;
+  for( const auto &elem : set ) ostr << "'" << elem.packageNVRA << "'," << std::endl;
   ostr << "}" << std::endl;
 }
 };
@@ -29,7 +43,7 @@ namespace  {
     std::string, // uname_r
     zypp::Arch,  // arch
     std::string, // keepSpec
-    std::map<std::string, bool> // expectedRems
+    std::set<ExpectedRemoval> // expectedRems
     >;
 
   std::vector<TestSample>  maketestdata() {
@@ -40,23 +54,23 @@ namespace  {
         Arch("x86_64"),
         "oldest,running,latest",
         {
-          { "kernel-default-1-2.x86_64", false },
-          { "kernel-default-devel-1-2.x86_64", false },
-          { "kernel-default-devel-debuginfo-1-2.x86_64", false },
-          { "kernel-devel-1-2.noarch", false },
-          { "kernel-livepatch-default-1-2.x86_64", false },
-          { "kernel-syms-1-2.x86_64", false },
-          { "kernel-default-1-4.x86_64", false },
-          { "kernel-default-devel-1-4.x86_64", false },
-          { "kernel-default-devel-debuginfo-1-4.x86_64", false },
-          { "kernel-devel-1-4.noarch", false },
-          { "kernel-syms-1-4.x86_64", false },
+          { "kernel-default-1-2.x86_64" },
+          { "kernel-default-devel-1-2.x86_64" },
+          { "kernel-default-devel-debuginfo-1-2.x86_64" },
+          { "kernel-devel-1-2.noarch" },
+          { "kernel-livepatch-default-1-2.x86_64" },
+          { "kernel-syms-1-2.x86_64" },
+          { "kernel-default-1-4.x86_64" },
+          { "kernel-default-devel-1-4.x86_64" },
+          { "kernel-default-devel-debuginfo-1-4.x86_64" },
+          { "kernel-devel-1-4.noarch" },
+          { "kernel-syms-1-4.x86_64" },
           // left over devel packages that need to go away too
-          { "kernel-devel-1-1.2.noarch", false },
-          { "kernel-source-1-1.2.noarch", false },
-          { "kernel-default-devel-1-3.x86_64", false },
-          { "kernel-default-devel-debuginfo-1-3.x86_64", false },
-          { "kernel-devel-1-3.noarch", false },
+          { "kernel-devel-1-1.2.noarch" },
+          { "kernel-source-1-1.2.noarch" },
+          { "kernel-default-devel-1-3.x86_64" },
+          { "kernel-default-devel-debuginfo-1-3.x86_64" },
+          { "kernel-devel-1-3.noarch" },
         }
       },
       //test that keeps only the running kernel
@@ -66,37 +80,37 @@ namespace  {
         Arch("x86_64"),
         "running",
         {
-          { "kernel-default-1-1.x86_64", false },
-          { "kernel-default-devel-1-1.x86_64", false },
-          { "kernel-default-devel-debuginfo-1-1.x86_64", false },
-          { "kernel-livepatch-default-1-1.x86_64", false },
-          { "kernel-devel-1-1.noarch", false },
-          { "kernel-syms-1-1.x86_64", false },
-          { "kernel-source-1-1.noarch", false },
-          { "kernel-default-1-2.x86_64", false },
-          { "kernel-default-devel-1-2.x86_64", false },
-          { "kernel-default-devel-debuginfo-1-2.x86_64", false },
-          { "kernel-devel-1-2.noarch", false },
-          { "kernel-livepatch-default-1-2.x86_64", false },
-          { "kernel-syms-1-2.x86_64", false },
-          { "kernel-default-1-4.x86_64", false },
-          { "kernel-default-devel-1-4.x86_64", false },
-          { "kernel-default-devel-debuginfo-1-4.x86_64", false },
-          { "kernel-devel-1-4.noarch", false },
-          { "kernel-syms-1-4.x86_64", false },
-          { "kernel-default-1-5.x86_64", false },
-          { "kernel-default-devel-1-5.x86_64", false },
-          { "kernel-default-devel-debuginfo-1-5.x86_64", false },
-          { "kernel-devel-1-5.noarch", false },
-          { "kernel-syms-1-5.x86_64", false },
-          { "dummy-kmp-default-1-0.x86_64", false },
+          { "kernel-default-1-1.x86_64" },
+          { "kernel-default-devel-1-1.x86_64" },
+          { "kernel-default-devel-debuginfo-1-1.x86_64" },
+          { "kernel-livepatch-default-1-1.x86_64" },
+          { "kernel-devel-1-1.noarch" },
+          { "kernel-syms-1-1.x86_64" },
+          { "kernel-source-1-1.noarch" },
+          { "kernel-default-1-2.x86_64" },
+          { "kernel-default-devel-1-2.x86_64" },
+          { "kernel-default-devel-debuginfo-1-2.x86_64" },
+          { "kernel-devel-1-2.noarch" },
+          { "kernel-livepatch-default-1-2.x86_64" },
+          { "kernel-syms-1-2.x86_64" },
+          { "kernel-default-1-4.x86_64" },
+          { "kernel-default-devel-1-4.x86_64" },
+          { "kernel-default-devel-debuginfo-1-4.x86_64" },
+          { "kernel-devel-1-4.noarch" },
+          { "kernel-syms-1-4.x86_64" },
+          { "kernel-default-1-5.x86_64" },
+          { "kernel-default-devel-1-5.x86_64" },
+          { "kernel-default-devel-debuginfo-1-5.x86_64" },
+          { "kernel-devel-1-5.noarch" },
+          { "kernel-syms-1-5.x86_64" },
+          { "dummy-kmp-default-1-0.x86_64" },
           // left over devel packages that need to go away too
-          { "kernel-devel-1-1.2.noarch", false },
-          { "kernel-source-1-1.2.noarch", false },
-          { "kernel-default-devel-1-3.x86_64", false },
-          { "kernel-devel-1-3.noarch", false },
-          { "kernel-default-devel-1-3.x86_64", false },
-          { "kernel-default-devel-debuginfo-1-3.x86_64", false },
+          { "kernel-devel-1-1.2.noarch" },
+          { "kernel-source-1-1.2.noarch" },
+          { "kernel-default-devel-1-3.x86_64" },
+          { "kernel-devel-1-3.noarch" },
+          { "kernel-default-devel-1-3.x86_64" },
+          { "kernel-default-devel-debuginfo-1-3.x86_64" },
         }
       },
       TestSample {
@@ -105,23 +119,23 @@ namespace  {
         Arch("x86_64"),
         "oldest+1,running,latest-1",
         {
-          { "kernel-default-1-1.x86_64", false },
-          { "kernel-livepatch-default-1-1.x86_64", false },
-          { "kernel-default-devel-1-1.x86_64", false },
-          { "kernel-default-devel-debuginfo-1-1.x86_64", false },
-          { "kernel-devel-1-1.noarch", false },
-          { "kernel-syms-1-1.x86_64", false },
-          { "kernel-source-1-1.noarch", false },
-          { "kernel-default-1-5.x86_64", false },
-          { "kernel-default-devel-1-5.x86_64", false },
-          { "kernel-default-devel-debuginfo-1-5.x86_64", false },
-          { "kernel-devel-1-5.noarch", false },
-          { "kernel-syms-1-5.x86_64", false },
-          { "dummy-kmp-default-1-0.x86_64", false },
+          { "kernel-default-1-1.x86_64" },
+          { "kernel-livepatch-default-1-1.x86_64" },
+          { "kernel-default-devel-1-1.x86_64" },
+          { "kernel-default-devel-debuginfo-1-1.x86_64" },
+          { "kernel-devel-1-1.noarch" },
+          { "kernel-syms-1-1.x86_64" },
+          { "kernel-source-1-1.noarch" },
+          { "kernel-default-1-5.x86_64" },
+          { "kernel-default-devel-1-5.x86_64" },
+          { "kernel-default-devel-debuginfo-1-5.x86_64" },
+          { "kernel-devel-1-5.noarch" },
+          { "kernel-syms-1-5.x86_64" },
+          { "dummy-kmp-default-1-0.x86_64" },
           // left over devel packages that need to go away too
-          { "kernel-default-devel-1-3.x86_64", false },
-          { "kernel-default-devel-debuginfo-1-3.x86_64", false },
-          { "kernel-devel-1-3.noarch", false },
+          { "kernel-default-devel-1-3.x86_64" },
+          { "kernel-default-devel-debuginfo-1-3.x86_64" },
+          { "kernel-devel-1-3.noarch" },
         }
       },
       TestSample {
@@ -131,18 +145,18 @@ namespace  {
         Arch("x86_64"),
         "running",
         {
-          { "kernel-default-1-2.x86_64", false },
-          { "kernel-default-extra-1-2.x86_64", false },
-          { "kernel-default-devel-1-2.x86_64", false },
-          { "kernel-default-devel-debuginfo-1-2.x86_64", false },
-          { "kernel-devel-1-2.noarch", false },
-          { "kernel-livepatch-default-1-2.x86_64", false },
-          { "kernel-syms-1-2.x86_64", false },
+          { "kernel-default-1-2.x86_64" },
+          { "kernel-default-extra-1-2.x86_64" },
+          { "kernel-default-devel-1-2.x86_64" },
+          { "kernel-default-devel-debuginfo-1-2.x86_64" },
+          { "kernel-devel-1-2.noarch" },
+          { "kernel-livepatch-default-1-2.x86_64" },
+          { "kernel-syms-1-2.x86_64" },
           // the following packages are not held back because they do not fit keep spec and no deps are keeping them
-          { "kernel-default-devel-1-1.x86_64", false },
-          { "kernel-default-devel-debuginfo-1-1.x86_64", false },
-          { "kernel-devel-1-1.noarch", false},
-          { "kernel-syms-1-1.x86_64", false},
+          { "kernel-default-devel-1-1.x86_64" },
+          { "kernel-default-devel-debuginfo-1-1.x86_64" },
+          { "kernel-devel-1-1.noarch" },
+          { "kernel-syms-1-1.x86_64" },
         }
       },
       TestSample {
@@ -152,17 +166,17 @@ namespace  {
         Arch("x86_64"),
         "running",
         {
-          { "kernel-default-1-2.x86_64", false },
-          { "kernel-default-extra-1-2.x86_64", false },
-          { "kernel-default-devel-1-2.x86_64", false },
-          { "kernel-default-devel-debuginfo-1-2.x86_64", false },
-          { "kernel-devel-1-2.noarch", false },
-          { "kernel-livepatch-default-1-2.x86_64", false },
-          { "kernel-syms-1-2.x86_64", false },
-          { "kernel-default-devel-1-5.x86_64", false },
-          { "kernel-default-devel-debuginfo-1-5.x86_64", false },
-          { "kernel-devel-1-5.noarch", false },
-          { "kernel-syms-1-5.x86_64", false },
+          { "kernel-default-1-2.x86_64" },
+          { "kernel-default-extra-1-2.x86_64" },
+          { "kernel-default-devel-1-2.x86_64" },
+          { "kernel-default-devel-debuginfo-1-2.x86_64" },
+          { "kernel-devel-1-2.noarch" },
+          { "kernel-livepatch-default-1-2.x86_64" },
+          { "kernel-syms-1-2.x86_64" },
+          { "kernel-default-devel-1-5.x86_64" },
+          { "kernel-default-devel-debuginfo-1-5.x86_64" },
+          { "kernel-devel-1-5.noarch" },
+          { "kernel-syms-1-5.x86_64" },
         }
       },
       TestSample {
@@ -173,10 +187,10 @@ namespace  {
         Arch("x86_64"),
         "running,1-2",
         {
-          { "kernel-default-devel-1-5.x86_64", false },
-          { "kernel-default-devel-debuginfo-1-5.x86_64", false },
-          { "kernel-devel-1-5.noarch", false },
-          { "kernel-syms-1-5.x86_64", false },
+          { "kernel-default-devel-1-5.x86_64" },
+          { "kernel-default-devel-debuginfo-1-5.x86_64" },
+          { "kernel-devel-1-5.noarch" },
+          { "kernel-syms-1-5.x86_64" },
         }
       },
       TestSample {
@@ -187,41 +201,41 @@ namespace  {
         Arch("x86_64"),
         "latest,running",
         {
-          { "kernel-default-1-1.aarch64", false },
-          { "kernel-default-1-1.i686", false },
+          { "kernel-default-1-1.aarch64" },
+          { "kernel-default-1-1.i686" },
 
-          //{ "kernel-syms-1-1.x86_64", false },
-          //{ "kernel-default-devel-1-1.x86_64", false },
-          //{ "kernel-default-devel-debuginfo-1-1.x86_64", false },
+          //{ "kernel-syms-1-1.x86_64" },
+          //{ "kernel-default-devel-1-1.x86_64" },
+          //{ "kernel-default-devel-debuginfo-1-1.x86_64" },
 
-          { "kernel-default-1-2.aarch64", false },
-          { "kernel-default-1-2.i686", false },
-          { "kernel-default-1-2.x86_64", false },
+          { "kernel-default-1-2.aarch64" },
+          { "kernel-default-1-2.i686" },
+          { "kernel-default-1-2.x86_64" },
 
-          { "kernel-default-devel-1-1.aarch64", false },
-          { "kernel-default-devel-1-1.i686", false },
-          { "kernel-default-devel-1-2.aarch64", false },
-          { "kernel-default-devel-1-2.i686", false },
-          { "kernel-default-devel-1-2.x86_64", false },
+          { "kernel-default-devel-1-1.aarch64" },
+          { "kernel-default-devel-1-1.i686" },
+          { "kernel-default-devel-1-2.aarch64" },
+          { "kernel-default-devel-1-2.i686" },
+          { "kernel-default-devel-1-2.x86_64" },
 
-          { "kernel-default-devel-debuginfo-1-1.aarch64", false },
-          { "kernel-default-devel-debuginfo-1-1.i686", false },
-          { "kernel-default-devel-debuginfo-1-2.aarch64", false },
-          { "kernel-default-devel-debuginfo-1-2.i686", false },
-          { "kernel-default-devel-debuginfo-1-2.x86_64", false },
+          { "kernel-default-devel-debuginfo-1-1.aarch64" },
+          { "kernel-default-devel-debuginfo-1-1.i686" },
+          { "kernel-default-devel-debuginfo-1-2.aarch64" },
+          { "kernel-default-devel-debuginfo-1-2.i686" },
+          { "kernel-default-devel-debuginfo-1-2.x86_64" },
 
-          { "kernel-devel-1-2.noarch", false },
+          { "kernel-devel-1-2.noarch" },
 
-          { "kernel-livepatch-default-1-2.aarch64", false },
-          { "kernel-livepatch-default-1-2.i686", false },
-          { "kernel-livepatch-default-1-2.x86_64", false },
+          { "kernel-livepatch-default-1-2.aarch64" },
+          { "kernel-livepatch-default-1-2.i686" },
+          { "kernel-livepatch-default-1-2.x86_64" },
 
-          { "kernel-syms-1-1.aarch64", false },
-          { "kernel-syms-1-1.i686", false },
+          { "kernel-syms-1-1.aarch64" },
+          { "kernel-syms-1-1.i686" },
 
-          { "kernel-syms-1-2.aarch64", false },
-          { "kernel-syms-1-2.i686", false },
-          { "kernel-syms-1-2.x86_64", false },
+          { "kernel-syms-1-2.aarch64" },
+          { "kernel-syms-1-2.i686" },
+          { "kernel-syms-1-2.x86_64" },
         }
       },
       TestSample {
@@ -230,7 +244,7 @@ namespace  {
         Arch("x86_64"),
         "running",
         {
-          { "kernel-source-1-1.noarch", false },
+          { "kernel-source-1-1.noarch" },
         }
       },
       TestSample {
@@ -239,19 +253,19 @@ namespace  {
         Arch("x86_64"),
         "latest,latest-1,running",
         {
-          { "kernel-default-5.7.8-1.1.g8f507a0.x86_64", false },
-          { "kernel-default-5.7.9-1.1.ga010166.x86_64", false },
-          { "kernel-default-5.7.10-1.1.g6a1b5cf.x86_64", false },
-          { "kernel-default-5.7.10-3.1.gd1148b9.x86_64", false },
-          { "kernel-default-5.7.11-1.1.g5015994.x86_64", false },
-          { "kernel-default-5.7.12-1.1.g9c98feb.x86_64", false },
-          { "kernel-default-5.8.0-1.1.gd3bf2d6.x86_64", false },
-          { "kernel-default-5.8.0-2.1.g9bc0044.x86_64", false },
-          { "kernel-default-5.8.0-3.1.gd4e7682.x86_64", false },
-          { "kernel-default-5.8.1-1.1.ge6658c9.x86_64", false },
+          { "kernel-default-5.7.8-1.1.g8f507a0.x86_64" },
+          { "kernel-default-5.7.9-1.1.ga010166.x86_64" },
+          { "kernel-default-5.7.10-1.1.g6a1b5cf.x86_64" },
+          { "kernel-default-5.7.10-3.1.gd1148b9.x86_64" },
+          { "kernel-default-5.7.11-1.1.g5015994.x86_64" },
+          { "kernel-default-5.7.12-1.1.g9c98feb.x86_64" },
+          { "kernel-default-5.8.0-1.1.gd3bf2d6.x86_64" },
+          { "kernel-default-5.8.0-2.1.g9bc0044.x86_64" },
+          { "kernel-default-5.8.0-3.1.gd4e7682.x86_64" },
+          { "kernel-default-5.8.1-1.1.ge6658c9.x86_64" },
           // those are running, latest and latest-1 , they should stay
-          //{ "kernel-default-5.8.1-2.1.g553537d.x86_64", false },
-          //{ "kernel-default-5.8.1-3.1.g846658e.x86_64", false },
+          //{ "kernel-default-5.8.1-2.1.g553537d.x86_64" },
+          //{ "kernel-default-5.8.1-3.1.g846658e.x86_64" },
           }
       },
       TestSample {
@@ -260,10 +274,10 @@ namespace  {
         Arch("x86_64"),
         "running",
         {
-          { "kernel-default-base-5.7.8-1.1.1.1.x86_64", false },
-          { "kernel-default-base-5.7.8-2.1.1.1.x86_64", false },
-          //{ "kernel-default-base-5.7.8-3.1.1.1.x86_64", false },
-          { "kernel-default-base-5.8.8-2.1.1.1.x86_64", false },
+          { "kernel-default-base-5.7.8-1.1.1.1.x86_64" },
+          { "kernel-default-base-5.7.8-2.1.1.1.x86_64" },
+          //{ "kernel-default-base-5.7.8-3.1.1.1.x86_64" },
+          { "kernel-default-base-5.8.8-2.1.1.1.x86_64" },
           }
       },
       TestSample {
@@ -272,10 +286,10 @@ namespace  {
         Arch("x86_64"),
         "running, 5.7.8-2.1.1",
         {
-          { "kernel-default-base-5.7.8-1.1.1.1.x86_64", false },
-          { "kernel-default-base-5.8.8-2.1.1.1.x86_64", false },
-          //{ "kernel-default-base-5.7.8-2.1.1.1.x86_64", false },
-          //{ "kernel-default-base-5.7.8-3.1.1.1.x86_64", false },
+          { "kernel-default-base-5.7.8-1.1.1.1.x86_64" },
+          { "kernel-default-base-5.8.8-2.1.1.1.x86_64" },
+          //{ "kernel-default-base-5.7.8-2.1.1.1.x86_64" },
+          //{ "kernel-default-base-5.7.8-3.1.1.1.x86_64" },
           }
       },
       TestSample {
@@ -284,34 +298,34 @@ namespace  {
         Arch("x86_64"),
         "running",
         {
-          { "kernel-rt-1-1.x86_64", false },
-          { "kernel-rt-devel-1-1.x86_64", false },
-          { "kernel-rt-devel-debuginfo-1-1.x86_64", false },
-          { "kernel-devel-rt-1-1.noarch", false },
-          { "kernel-syms-rt-1-1.x86_64", false },
-          { "kernel-source-rt-1-1.noarch", false },
-          { "kernel-rt-1-2.x86_64", false },
-          { "kernel-rt-devel-1-2.x86_64", false },
-          { "kernel-rt-devel-debuginfo-1-2.x86_64", false },
-          { "kernel-devel-rt-1-2.noarch", false },
-          { "kernel-syms-rt-1-2.x86_64", false },
-          { "kernel-rt-1-4.x86_64", false },
-          { "kernel-rt-devel-1-4.x86_64", false },
-          { "kernel-rt-devel-debuginfo-1-4.x86_64", false },
-          { "kernel-devel-rt-1-4.noarch", false },
-          { "kernel-syms-rt-1-4.x86_64", false },
-          { "kernel-rt-1-5.x86_64", false },
-          { "kernel-rt-devel-1-5.x86_64", false },
-          { "kernel-rt-devel-debuginfo-1-5.x86_64", false },
-          { "kernel-devel-rt-1-5.noarch", false },
-          { "kernel-syms-rt-1-5.x86_64", false },
+          { "kernel-rt-1-1.x86_64" },
+          { "kernel-rt-devel-1-1.x86_64" },
+          { "kernel-rt-devel-debuginfo-1-1.x86_64" },
+          { "kernel-devel-rt-1-1.noarch" },
+          { "kernel-syms-rt-1-1.x86_64" },
+          { "kernel-source-rt-1-1.noarch" },
+          { "kernel-rt-1-2.x86_64" },
+          { "kernel-rt-devel-1-2.x86_64" },
+          { "kernel-rt-devel-debuginfo-1-2.x86_64" },
+          { "kernel-devel-rt-1-2.noarch" },
+          { "kernel-syms-rt-1-2.x86_64" },
+          { "kernel-rt-1-4.x86_64" },
+          { "kernel-rt-devel-1-4.x86_64" },
+          { "kernel-rt-devel-debuginfo-1-4.x86_64" },
+          { "kernel-devel-rt-1-4.noarch" },
+          { "kernel-syms-rt-1-4.x86_64" },
+          { "kernel-rt-1-5.x86_64" },
+          { "kernel-rt-devel-1-5.x86_64" },
+          { "kernel-rt-devel-debuginfo-1-5.x86_64" },
+          { "kernel-devel-rt-1-5.noarch" },
+          { "kernel-syms-rt-1-5.x86_64" },
           // left over devel packages that need to go away too
-          { "kernel-devel-rt-1-1.2.noarch", false },
-          { "kernel-source-rt-1-1.2.noarch", false },
-          { "kernel-rt-devel-1-3.x86_64", false },
-          { "kernel-devel-rt-1-3.noarch", false },
-          { "kernel-rt-devel-1-3.x86_64", false },
-          { "kernel-rt-devel-debuginfo-1-3.x86_64", false },
+          { "kernel-devel-rt-1-1.2.noarch" },
+          { "kernel-source-rt-1-1.2.noarch" },
+          { "kernel-rt-devel-1-3.x86_64" },
+          { "kernel-devel-rt-1-3.noarch" },
+          { "kernel-rt-devel-1-3.x86_64" },
+          { "kernel-rt-devel-debuginfo-1-3.x86_64" },
         }
       },
     };
@@ -341,15 +355,15 @@ BOOST_DATA_TEST_CASE(purge_kernels, bdata::make( maketestdata() ), repoPath, una
   for ( auto it = pool.byStatusBegin( toBeUninstalledFilter ); it != pool.byStatusEnd( toBeUninstalledFilter );  it++  ) {
     removeCount++;
 
-    auto pck = expectedRemovals.find( makeNVRA(*it) );
+    std::set<ExpectedRemoval>::iterator pck = expectedRemovals.find( makeNVRA(*it) );
     BOOST_REQUIRE_MESSAGE(  pck != expectedRemovals.end(), std::string("Unexpected package removed: ") + makeNVRA(*it) + (it->status().isByUser() ? " (by user)" : " (autoremoved)") );
 
-    pck->second = true;
+    (*pck).wasRemoved = true;
   }
 
   for ( const auto &rem : expectedRemovals ) {
-    if (!rem.second)
-      std::cout << std::string( "Expected package removal did not happen for: ") + rem.first  << std::endl;
+    if (!rem.wasRemoved)
+      std::cout << std::string( "Expected package removal did not happen for: ") + rem.packageNVRA  << std::endl;
     //BOOST_REQUIRE_MESSAGE( rem.second, std::string( "Expected package removal did not happen for: ") + rem.first );
   }
 
