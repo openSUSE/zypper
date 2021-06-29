@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-06-02 15:57+0200\n"
-"PO-Revision-Date: 2021-06-22 17:58+0000\n"
+"PO-Revision-Date: 2021-07-05 10:32+0000\n"
 "Last-Translator: Dingzhong Chen <wsxy162@gmail.com>\n"
 "Language-Team: Chinese (China) <https://l10n.opensuse.org/projects/zypper/"
 "master/zh_CN/>\n"
@@ -1286,7 +1286,7 @@ msgstr "密钥名称："
 
 #: src/callbacks/keyring.h:89
 msgid "Key Algorithm:"
-msgstr ""
+msgstr "密钥算法："
 
 #: src/callbacks/keyring.h:90
 msgid "Key Created:"
@@ -1498,7 +1498,7 @@ msgstr ""
 #, boost-format
 msgid "Received %1% new package signing key from repository %2%:"
 msgid_plural "Received %1% new package signing keys from repository %2%:"
-msgstr[0] ""
+msgstr[0] "收到来自 %2% 仓库的 %1% 个软件包签名密钥："
 
 #: src/callbacks/keyring.h:494
 msgid ""
@@ -1509,7 +1509,7 @@ msgstr ""
 
 #: src/callbacks/keyring.h:496
 msgid "New:"
-msgstr ""
+msgstr "新密钥："
 
 #: src/callbacks/keyring.h:502
 msgid ""
