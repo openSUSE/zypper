@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-02 15:57+0200\n"
+"POT-Creation-Date: 2021-06-30 14:58+0200\n"
 "PO-Revision-Date: 2021-04-07 15:58+0000\n"
 "Last-Translator: Suleyman Poyraz <zaryob.dev@gmail.com>\n"
 "Language-Team: Turkish <https://l10n.opensuse.org/projects/zypper/master/tr/"
@@ -2924,7 +2924,13 @@ msgstr "Gerekli yamaları yükle."
 msgid "Install all available needed patches."
 msgstr "Tüm mevcut gerekli yamaları yükle."
 
-#: src/commands/patch.cc:48
+#: src/commands/patch.cc:30
+msgid ""
+"When updating the affected/vulnerable packages described by a patch, zypper "
+"always aims for the latest available version."
+msgstr ""
+
+#: src/commands/patch.cc:50
 msgid ""
 "Additionally try to update all packages not covered by patches. The option "
 "is ignored, if the patch command must update the update stack first. Can not "

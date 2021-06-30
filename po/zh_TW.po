@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-02 15:57+0200\n"
+"POT-Creation-Date: 2021-06-30 14:58+0200\n"
 "PO-Revision-Date: 2021-06-05 10:00+0000\n"
 "Last-Translator: Ramax Lo <ramaxlo@gmail.com>\n"
 "Language-Team: Chinese (Taiwan) <https://l10n.opensuse.org/projects/zypper/"
@@ -1239,8 +1239,9 @@ msgid ""
 "repository provider or check his web site. Many provider maintain a web page "
 "showing the fingerprints of the GPG keys they are using."
 msgstr ""
-"透過指紋已清楚地識別一個 GPG 公開金鑰。請不要信任金鑰名稱。若您不確定該金鑰是否可信，請詢問套件庫提供者或是查看其網站。"
-"許多提供者會維護一個網頁以顯示他們所使用的 GPG 金鑰指紋。"
+"透過指紋已清楚地識別一個 GPG 公開金鑰。請不要信任金鑰名稱。若您不確定該金鑰是"
+"否可信，請詢問套件庫提供者或是查看其網站。許多提供者會維護一個網頁以顯示他們"
+"所使用的 GPG 金鑰指紋。"
 
 #: src/callbacks/keyring.h:37
 msgid ""
@@ -1511,7 +1512,9 @@ msgid ""
 "Those additional keys are usually used to sign packages shipped by the "
 "repository. In order to validate those packages upon download and "
 "installation the new keys will be imported into the rpm database."
-msgstr "這些額外的金鑰通常被使用於簽署由套件庫分發的套件。為了在下載及安裝時驗證這些套件，這些新的金鑰將會被匯入到 rpm 資料庫。"
+msgstr ""
+"這些額外的金鑰通常被使用於簽署由套件庫分發的套件。為了在下載及安裝時驗證這些"
+"套件，這些新的金鑰將會被匯入到 rpm 資料庫。"
 
 #: src/callbacks/keyring.h:496
 msgid "New:"
@@ -2687,7 +2690,13 @@ msgstr "安裝所需的修補程式。"
 msgid "Install all available needed patches."
 msgstr "安裝所有可用且需要的修補程式。"
 
-#: src/commands/patch.cc:48
+#: src/commands/patch.cc:30
+msgid ""
+"When updating the affected/vulnerable packages described by a patch, zypper "
+"always aims for the latest available version."
+msgstr ""
+
+#: src/commands/patch.cc:50
 msgid ""
 "Additionally try to update all packages not covered by patches. The option "
 "is ignored, if the patch command must update the update stack first. Can not "

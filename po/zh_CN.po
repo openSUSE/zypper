@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-02 15:57+0200\n"
+"POT-Creation-Date: 2021-06-30 14:58+0200\n"
 "PO-Revision-Date: 2021-06-22 17:58+0000\n"
 "Last-Translator: Dingzhong Chen <wsxy162@gmail.com>\n"
 "Language-Team: Chinese (China) <https://l10n.opensuse.org/projects/zypper/"
@@ -2680,7 +2680,13 @@ msgstr "安装所需补丁。"
 msgid "Install all available needed patches."
 msgstr "安装全部可用且需要的补丁。"
 
-#: src/commands/patch.cc:48
+#: src/commands/patch.cc:30
+msgid ""
+"When updating the affected/vulnerable packages described by a patch, zypper "
+"always aims for the latest available version."
+msgstr ""
+
+#: src/commands/patch.cc:50
 msgid ""
 "Additionally try to update all packages not covered by patches. The option "
 "is ignored, if the patch command must update the update stack first. Can not "

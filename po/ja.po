@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-02 15:57+0200\n"
+"POT-Creation-Date: 2021-06-30 14:58+0200\n"
 "PO-Revision-Date: 2021-06-03 00:58+0000\n"
 "Last-Translator: Yasuhiko Kamata <belphegor@belbel.or.jp>\n"
 "Language-Team: Japanese <https://l10n.opensuse.org/projects/zypper/master/ja/"
@@ -1280,8 +1280,10 @@ msgid ""
 "repository provider or check his web site. Many provider maintain a web page "
 "showing the fingerprints of the GPG keys they are using."
 msgstr ""
-"GPG の公開鍵を確認するにあたっては、名前ではなく指紋を必ず確認してください。また、提示された鍵に確証が持てない場合は、リポジトリの提供者もしくは "
-"Web サイトをご確認ください。多くの場合、 Web ページ内に使用している GPG 鍵の指紋を示しています。"
+"GPG の公開鍵を確認するにあたっては、名前ではなく指紋を必ず確認してください。"
+"また、提示された鍵に確証が持てない場合は、リポジトリの提供者もしくは Web サイ"
+"トをご確認ください。多くの場合、 Web ページ内に使用している GPG 鍵の指紋を示"
+"しています。"
 
 #: src/callbacks/keyring.h:37
 msgid ""
@@ -1570,8 +1572,9 @@ msgid ""
 "repository. In order to validate those packages upon download and "
 "installation the new keys will be imported into the rpm database."
 msgstr ""
-"これらの追加鍵は通常、リポジトリから提供されるパッケージに対する署名で使用されます。ダウンロードやインストールの際、パッケージの検証を行うため、"
-"これらの新しい鍵を RPM データベース内に取り込みます。"
+"これらの追加鍵は通常、リポジトリから提供されるパッケージに対する署名で使用さ"
+"れます。ダウンロードやインストールの際、パッケージの検証を行うため、これらの"
+"新しい鍵を RPM データベース内に取り込みます。"
 
 #: src/callbacks/keyring.h:496
 msgid "New:"
@@ -1581,7 +1584,9 @@ msgstr "新規:"
 msgid ""
 "The repository metadata introducing the new keys have been signed and "
 "validated by the trusted key:"
-msgstr "新しい鍵を指し示しているリポジトリのメタデータが、下記の信頼済み鍵で署名されていることを確認しました:"
+msgstr ""
+"新しい鍵を指し示しているリポジトリのメタデータが、下記の信頼済み鍵で署名され"
+"ていることを確認しました:"
 
 #: src/callbacks/keyring.h:525
 #, c-format, boost-format
@@ -2814,7 +2819,13 @@ msgstr "必要なパッチをインストールします。"
 msgid "Install all available needed patches."
 msgstr "利用可能な全てのパッチをインストールします。"
 
-#: src/commands/patch.cc:48
+#: src/commands/patch.cc:30
+msgid ""
+"When updating the affected/vulnerable packages described by a patch, zypper "
+"always aims for the latest available version."
+msgstr ""
+
+#: src/commands/patch.cc:50
 msgid ""
 "Additionally try to update all packages not covered by patches. The option "
 "is ignored, if the patch command must update the update stack first. Can not "
