@@ -25,7 +25,9 @@ PatchCmd::PatchCmd( std::vector<std::string> &&commandAliases_r ) :
     // translators: command summary: patch
     _("Install needed patches."),
     // translators: command description
-    _("Install all available needed patches."),
+    std::string(_("Install all available needed patches."))
+    + "\n\n"
+    + _("When updating the affected/vulnerable packages described by a patch, zypper always aims for the latest available version."),
     ResetRepoManager
   )
 { }

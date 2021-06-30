@@ -631,6 +631,8 @@ See also the *EXIT CODES* section for details on exit status of *0*, *100*, and 
 *patch* [_options_]::
 	Install all available needed patches.
 +
+When updating the affected/vulnerable packages described by a patch, zypper always aims for the latest available version. See section *Package Types* for more details about how patches operate.
++
 If there are patches that affect the package management itself, those will be installed first and you will be asked to run the *patch* command again.
 +
 This command is similar to *zypper update -t patch*.
@@ -649,19 +651,19 @@ The option is ignored, if the patch command must update the update stack first, 
 		Whether applicable optional patches should be treated as needed or be excluded. The default is to exclude optional patches.
 
 	*-b*, *--bugzilla* _#_[,_..._]::
-		Install patch fixing a Bugzilla issue specified by number. Use *list-patches --bugzilla* command to get a list of applicable patches for specific issues.
+		Select applicable patches for a Bugzilla issue specified by number. Use *list-patches --bugzilla* command to get a list of applicable patches for specific issues.
 
 	*--cve* _#_[,_..._]::
-		Install patch fixing a MITRE's CVE issue specified by number. Use *list-patches --cve* command to get a list of applicable patches for specific issues.
+		Select applicable patches for a MITRE's CVE issue specified by number. Use *list-patches --cve* command to get a list of applicable patches for specific issues.
 
 	*--date* _YYYY-MM-DD_[,_..._]::
-		Install only patches issued up to, but not including, the specified date.
+		Select only patches patches issued up to, but not including, the specified date.
 
 	*-g*, *--category* _category_[,_..._]::
-		Install only patches with this category. Use *list-patches --category* command to get a list of available patches with a specific category. See section *Package Types* for a list of commonly used _category_ values.
+		Select only patches with this category. Use *list-patches --category* command to get a list of available patches with a specific category. See section *Package Types* for a list of commonly used _category_ values.
 
 	*--severity* _severity_[,_..._]::
-		Install only patches with this severity. Use *list-patches --severity* command to get a list of available patches with a specific severity. See section *Package Types* for a list of commonly used _severity_ values.
+		Select only patches with this severity. Use *list-patches --severity* command to get a list of available patches with a specific severity. See section *Package Types* for a list of commonly used _severity_ values.
 
 	*-r*, *--repo* _alias_|_name_|_#_|_URI_::
 		Work only with the repository specified by the alias, name, number, or URI. This option can be used multiple times.
