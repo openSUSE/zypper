@@ -26,6 +26,7 @@ extern "C"
 #include <zypp/base/NonCopyable.h>
 #include <zypp/base/PtrTypes.h>
 #include <zypp/target/rpm/librpm.h>
+#include <zypp-core/ByteArray.h>
 
 namespace zypp
 {
@@ -86,6 +87,8 @@ public:
   unsigned string_list( tag tag_r, stringList & lst_r ) const;
 
   int int_val( tag tag_r ) const;
+
+  ByteArray blob_val ( tag tag_r ) const;
 
   std::string string_val( tag tag_r ) const;
   std::string format ( const char * fmt) const;

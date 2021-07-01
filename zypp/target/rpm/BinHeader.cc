@@ -342,6 +342,28 @@ int BinHeader::int_val( tag tag_r ) const
   return 0;
 }
 
+ByteArray BinHeader::blob_val( tag tag_r ) const
+{
+  if ( !empty() )
+  {
+    HeaderEntryGetter headerget( _h, tag_r );
+
+    if ( headerget.val() )
+    {
+      switch ( headerget.type() )
+      {
+        case RPM_NULL_TYPE:
+          return {};
+        case RPM_BIN_TYPE:
+          return ByteArray( reinterpret_cast<char *>( headerget.val() ), headerget.cnt() );
+        default:
+          INT << "RPM_TAG MISSMATCH: RPM_BIN_TYPE " << tag_r << " got type " << headerget.type() << endl;
+      }
+    }
+  }
+  return {};
+}
+
 ///////////////////////////////////////////////////////////////////
 //
 //
