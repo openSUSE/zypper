@@ -256,6 +256,7 @@ cmake -DCMAKE_INSTALL_PREFIX=%{_prefix} \
       -DLIB=%{_lib} \
       -DCMAKE_BUILD_TYPE=Release \
       -DCMAKE_SKIP_RPATH=1 \
+      -DCMAKE_INSTALL_LIBEXECDIR=%{_libexecdir} \
       %{?with_zchunk:-DENABLE_ZCHUNK_COMPRESSION=1} \
       %{?with_zstd:-DENABLE_ZSTD_COMPRESSION=1} \
       %{?with_sigc_block_workaround:-DENABLE_SIGC_BLOCK_WORKAROUND=1} \
@@ -394,11 +395,15 @@ fi
 %config(noreplace) %{_sysconfdir}/zypp/systemCheck
 %config(noreplace) %{_sysconfdir}/logrotate.d/zypp-history.lr
 %dir               %{_var}/lib/zypp
+%if "%{_libexecdir}" != "%{_prefix}/lib"
+%dir               %{_libexecdir}/zypp
+%endif
 %dir %attr(750,root,root) %{_var}/log/zypp
 %dir               %{_var}/cache/zypp
 %{_prefix}/lib/zypp
 %{_datadir}/zypp
 %{_bindir}/*
+%{_libexecdir}/zypp/zypp-rpm
 %{_libdir}/libzypp*so.*
 %doc %{_mandir}/man1/*.1.*
 %doc %{_mandir}/man5/*.5.*

@@ -34,11 +34,11 @@ ENDIF (DEBIAN)
 IF ( ENABLE_DEVEL_BUILD )
 	MESSAGE( WARNING "Zypp devel build enabled, do not do this in production" )
 	SET( ZYPP_RPM_BINARY "${CMAKE_BINARY_DIR}/tools/zypp-rpm/zypp-rpm")
-
-	message ( "Using zypp-rpm from path: ${ZYPP_RPM_BINARY}" )
 ELSE()
-	SET( ZYPP_RPM_BINARY "${LIBEXEC_INSTALL_DIR}/zypp-rpm")
+	SET( ZYPP_RPM_BINARY "${ZYPP_LIBEXEC_INSTALL_DIR}/zypp-rpm")
 ENDIF( ENABLE_DEVEL_BUILD )
+
+message ( "Using zypp-rpm from path: ${ZYPP_RPM_BINARY}" )
 add_definitions( -DZYPP_RPM_BINARY="${ZYPP_RPM_BINARY}")
 
 IF (${have_system} STREQUAL x)
