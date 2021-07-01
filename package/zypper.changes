@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Thu Jul  1 17:35:19 CEST 2021 - ma@suse.de
+
+- Quick fix obs:// platform guessing for Leap (bsc#1187425)
+- man: point out more clearly that patches update affected
+  packages to the latest version (bsc#1187466)
+- version 1.14.47
+
+-------------------------------------------------------------------
 Thu Jun 10 17:40:44 CEST 2021 - ma@suse.de
 
 - Link all executables with -pie (bsc#1186447)
