@@ -566,6 +566,11 @@ Url make_obs_url( const std::string & obsuri )
 	  // bsc#1153687 Hotfix
 	  platform = "openSUSE_Tumbleweed";
 	}
+	else if ( platform == "Leap" && pdata.vendor() == "openSUSE" )
+	{
+	  // bsc#1187425 Hotfix
+	  platform = "openSUSE_Leap_$releasever";
+	}
 	else
 	  platform += "_$releasever";
 
