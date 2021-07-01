@@ -22,6 +22,8 @@
 #include <zypp/CheckSum.h>
 #include <zypp/media/TransferSettings.h>
 
+#include <optional>
+
 namespace zypp::proto {
   class DownloadSpec;
 }

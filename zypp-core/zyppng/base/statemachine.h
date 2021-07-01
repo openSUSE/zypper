@@ -21,6 +21,7 @@
 #include <tuple>
 #include <functional>
 #include <memory>
+#include <optional>
 
 namespace zyppng {
 
