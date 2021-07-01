@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Jul  1 15:06:27 CEST 2021 - ma@suse.de
+
+- man: point out more clearly that patches update affected
+  packages to the latest available version (bsc#1187466)
+- version 1.13.59
+
+-------------------------------------------------------------------
 Wed Nov 25 17:01:20 CET 2020 - ma@suse.de
 
 - Fix typo in list-patches help (bsc#1178925)
