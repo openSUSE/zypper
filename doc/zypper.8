@@ -1095,6 +1095,10 @@ Check for patches only in the repository specified by the alias, name, number, o
 .RS 4
 Install all available needed patches\&.
 
+When updating the affected/vulnerable packages described by a patch, zypper always aims for the latest available version. See section
+\fBPackage Types\fR
+for more details about how patches operate.\&
+
 If there are patches that affect the package management itself, those will be installed first and you will be asked to run the
 \fBpatch\fR
 command again\&.
@@ -1125,26 +1129,26 @@ Whether applicable optional patches should be treated as needed or be excluded\&
 .PP
 \fB\-b\fR, \fB\-\-bugzilla\fR \fI#\fR[,\fI\&...\fR]
 .RS 4
-Install patch fixing a Bugzilla issue specified by number\&. Use
+Select applicable patches for a Bugzilla issue specified by number\&. Use
 \fBlist\-patches \-\-bugzilla\fR
 command to get a list of applicable patches for specific issues\&.
 .RE
 .PP
 \fB\-\-cve\fR \fI#\fR[,\fI\&...\fR]
 .RS 4
-Install patch fixing a MITRE\(cqs CVE issue specified by number\&. Use
+Select applicable patches for a MITRE's CVE issue specified by number\&. Use
 \fBlist\-patches \-\-cve\fR
 command to get a list of applicable patches for specific issues\&.
 .RE
 .PP
 \fB\-\-date\fR \fIYYYY\-MM\-DD\fR[,\fI\&...\fR]
 .RS 4
-Install only patches issued up to, but not including, the specified date\&.
+Select only patches patches issued up to, but not including, the specified date\&.
 .RE
 .PP
 \fB\-g\fR, \fB\-\-category\fR \fIcategory\fR[,\fI\&...\fR]
 .RS 4
-Install only patches with this category\&. Use
+Select only patches with this category\&. Use
 \fBlist\-patches \-\-category\fR
 command to get a list of available patches with a specific category\&. See section
 \fBPackage Types\fR
@@ -1155,7 +1159,7 @@ values\&.
 .PP
 \fB\-\-severity\fR \fIseverity\fR[,\fI\&...\fR]
 .RS 4
-Install only patches with this severity\&. Use
+Select only patches with this severity\&. Use
 \fBlist\-patches \-\-severity\fR
 command to get a list of available patches with a specific severity\&. See section
 \fBPackage Types\fR
