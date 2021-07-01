@@ -50,6 +50,7 @@ extern "C"
 #include <zypp/target/rpm/RpmException.h>
 #include <zypp/TmpPath.h>
 #include <zypp/KeyRing.h>
+#include <zypp/KeyManager.h>
 #include <zypp/ZYppFactory.h>
 #include <zypp/ZConfig.h>
 #include <zypp/base/IOTools.h>
@@ -1183,14 +1184,14 @@ namespace
     //     V3 RSA/SHA256 Signature, key ID 3dbdc284: OK
     //     MD5 digest: OK (fd5259fe677a406951dcb2e9d08c4dcc)
     //
-    // TODO: try to get SIG info from the header rather than parsing the output
     std::vector<std::string> lines;
     str::split( vresult, std::back_inserter(lines), "\n" );
     unsigned count[7] = { 0, 0, 0, 0, 0, 0, 0 };
 
     for ( unsigned i = 1; i < lines.size(); ++i )
     {
-      std::string & line( lines[i] );
+      std::string &line( lines[i] );
+
       RpmDb::CheckPackageResult lineres = RpmDb::CHK_ERROR;
       if ( line.find( ": OK" ) != std::string::npos )
       {
@@ -1239,6 +1240,59 @@ namespace
 
     if ( ret != RpmDb::CHK_OK )
     {
+
+      bool didReadHeader = false;
+      std::unordered_map< std::string, std::string> fprs;
+
+      // we replace the data only if the key IDs are actually only 8 bytes
+      str::regex rxexpr( "key ID ([a-fA-F0-9]{8}):" );
+      for ( auto &detail : detail_r ) {
+        auto &line = detail.second;
+        str::smatch what;
+        if ( str::regex_match( line, what, rxexpr ) ) {
+
+          if ( !didReadHeader ) {
+            didReadHeader = true;
+
+            // Get signature info from the package header, RPM always prints only the 8 byte ID
+            auto header = RpmHeader::readPackage( path_r, RpmHeader::NOVERIFY );
+            if ( header ) {
+              auto keyMgr = zypp::KeyManagerCtx::createForOpenPGP();
+              const auto &addFprs = [&]( auto tag ){
+                const auto &list1 = keyMgr.readSignatureFingerprints( header->blob_val( tag ) );
+                for ( const auto &id : list1 ) {
+                  if ( id.size() <= 8 )
+                    continue;
+
+                  const auto &lowerId = str::toLower( id );
+                  fprs.insert( std::make_pair( lowerId.substr( lowerId.size() - 8 ), lowerId ) );
+                }
+              };
+
+              addFprs( RPMTAG_SIGGPG );
+              addFprs( RPMTAG_SIGPGP );
+              addFprs( RPMTAG_RSAHEADER );
+              addFprs( RPMTAG_DSAHEADER );
+
+            } else {
+              ERR << "Failed to read package signatures." << std::endl;
+            }
+          }
+
+          // if we have no keys we can substiture we can leave the loop right away
+          if ( !fprs.size() )
+            break;
+
+          {
+            // replace the short key ID with the long ones parsed from the header
+            const auto &keyId = str::toLower( what[1] );
+            if ( const auto &i = fprs.find( keyId ); i != fprs.end() ) {
+              str::replaceAll( line, keyId, i->second );
+            }
+          }
+        }
+      }
+
       WAR << path_r << " (" << requireGPGSig_r << " -> " << ret << ")" << endl;
       WAR << vresult;
     }
