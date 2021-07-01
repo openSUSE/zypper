@@ -115,6 +115,10 @@ namespace zypp
     std::list<std::string> readSignaturesFprs( const Pathname & signature_r )
     { return readSignaturesFprsOptVerify( signature_r ); }
 
+    /** Return all fingerprints found in \a signature_r. */
+    std::list<std::string> readSignaturesFprs( const ByteArray & signature_r )
+    { return readSignaturesFprsOptVerify( signature_r ); }
+
     /** Tries to verify the \a file_r using \a signature_r. */
     bool verifySignaturesFprs( const Pathname & file_r, const Pathname & signature_r )
     {
@@ -122,6 +126,9 @@ namespace zypp
       readSignaturesFprsOptVerify( signature_r, file_r, &verify );
       return verify;
     }
+
+    template< typename Callback >
+    bool importKey(GpgmeDataPtr &data, Callback &&calcDataSize );
 
     gpgme_ctx_t _ctx { nullptr };
     bool _volatile { false };	///< readKeyFromFile workaround bsc#1140670
@@ -133,6 +140,8 @@ namespace zypp
      * whether all signatures are good.
      */
     std::list<std::string> readSignaturesFprsOptVerify( const Pathname & signature_r, const Pathname & file_r = "/dev/null", bool * verify_r = nullptr );
+    std::list<std::string> readSignaturesFprsOptVerify( const ByteArray& keyData_r, const Pathname & file_r = "/dev/null", bool * verify_r = nullptr );
+    std::list<std::string> readSignaturesFprsOptVerify( GpgmeDataPtr &sigData, const Pathname & file_r = "/dev/null", bool * verify_r = nullptr );
   };
 
 std::list<std::string> KeyManagerCtx::Impl::readSignaturesFprsOptVerify( const Pathname & signature_r, const Pathname & file_r, bool * verify_r )
@@ -141,20 +150,8 @@ std::list<std::string> KeyManagerCtx::Impl::readSignaturesFprsOptVerify( const P
   if ( verify_r )
     *verify_r = false;
 
-
   if (!PathInfo( signature_r ).isExist())
     return std::list<std::string>();
-
-  FILEPtr dataFile(fopen(file_r.c_str(), "rb"), fclose);
-  if (!dataFile)
-    return std::list<std::string>();
-
-  GpgmeDataPtr fileData(nullptr, gpgme_data_release);
-  GpgmeErr err = gpgme_data_new_from_stream (&fileData.get(), dataFile.get());
-  if (err) {
-    ERR << err << endl;
-    return std::list<std::string>();
-  }
 
   FILEPtr sigFile(fopen(signature_r.c_str(), "rb"), fclose);
   if (!sigFile) {
@@ -163,7 +160,43 @@ std::list<std::string> KeyManagerCtx::Impl::readSignaturesFprsOptVerify( const P
   }
 
   GpgmeDataPtr sigData(nullptr, gpgme_data_release);
-  err = gpgme_data_new_from_stream (&sigData.get(), sigFile.get());
+  GpgmeErr err = gpgme_data_new_from_stream (&sigData.get(), sigFile.get());
+  if (err) {
+    ERR << err << endl;
+    return std::list<std::string>();
+  }
+
+  return readSignaturesFprsOptVerify( sigData, file_r, verify_r );
+}
+
+std::list<std::string> KeyManagerCtx::Impl::readSignaturesFprsOptVerify( const ByteArray &keyData_r, const filesystem::Pathname &file_r, bool *verify_r )
+{
+  //lets be pessimistic
+  if ( verify_r )
+    *verify_r = false;
+
+  GpgmeDataPtr sigData(nullptr, gpgme_data_release);
+  GpgmeErr err = gpgme_data_new_from_mem(&sigData.get(), keyData_r.data(), keyData_r.size(), 1 );
+  if (err) {
+    ERR << err << endl;
+    return std::list<std::string>();
+  }
+
+  return readSignaturesFprsOptVerify( sigData, file_r, verify_r );
+}
+
+std::list<std::string> KeyManagerCtx::Impl::readSignaturesFprsOptVerify(GpgmeDataPtr &sigData, const filesystem::Pathname &file_r, bool *verify_r)
+{
+  //lets be pessimistic
+  if ( verify_r )
+    *verify_r = false;
+
+  FILEPtr dataFile(fopen(file_r.c_str(), "rb"), fclose);
+  if (!dataFile)
+    return std::list<std::string>();
+
+  GpgmeDataPtr fileData(nullptr, gpgme_data_release);
+  GpgmeErr err = gpgme_data_new_from_stream (&fileData.get(), dataFile.get());
   if (err) {
     ERR << err << endl;
     return std::list<std::string>();
@@ -194,7 +227,7 @@ std::list<std::string> KeyManagerCtx::Impl::readSignaturesFprsOptVerify( const P
       // [https://github.com/gpg/gpgme/commit/478d1650bbef84958ccce439fac982ef57b16cd0]
       std::string id( sig->fpr );
       if ( id.size() > 16 )
-	id = id.substr( id.size()-16 );
+        id = id.substr( id.size()-16 );
 
       DBG << "Found signature with ID: " << id  << " in " << file_r << std::endl;
       signatures.push_back( std::move(id) );
@@ -209,13 +242,13 @@ std::list<std::string> KeyManagerCtx::Impl::readSignaturesFprsOptVerify( const P
       // We will however keep the behaviour of failing if we find a bad signatures even if others are good.
       if ( status != GPG_ERR_KEY_EXPIRED && status != GPG_ERR_NO_PUBKEY )
       {
-	WAR << "Failed signature check: " << file_r << " " << GpgmeErr(sig->status) << endl;
-	if ( !foundBadSignature )
-	  foundBadSignature = true;
+        WAR << "Failed signature check: " << file_r << " " << GpgmeErr(sig->status) << endl;
+        if ( !foundBadSignature )
+          foundBadSignature = true;
       }
       else
       {
-	WAR << "Legacy: Ignore expired or unknown key: " << file_r << " " << GpgmeErr(sig->status) << endl;
+        WAR << "Legacy: Ignore expired or unknown key: " << file_r << " " << GpgmeErr(sig->status) << endl;
         // for now treat expired keys as good signature
         if ( status == GPG_ERR_KEY_EXPIRED )
           foundGoodSignature = true;
@@ -229,7 +262,6 @@ std::list<std::string> KeyManagerCtx::Impl::readSignaturesFprsOptVerify( const P
     *verify_r = (!foundBadSignature) && foundGoodSignature;
   return signatures;
 }
-
 
 KeyManagerCtx::KeyManagerCtx()
 : _pimpl( new Impl )
@@ -465,7 +497,28 @@ bool KeyManagerCtx::importKey(const Pathname &keyfile)
     return false;
   }
 
-  err = gpgme_op_import(_pimpl->_ctx, data.get());
+  return _pimpl->importKey( data, [&](){ return PathInfo(keyfile).size(); } );
+}
+
+bool KeyManagerCtx::importKey( const ByteArray &keydata )
+{
+  GpgmeDataPtr data(nullptr, gpgme_data_release);
+  GpgmeErr err;
+
+  err = gpgme_data_new_from_mem( &data.get(), keydata.data(), keydata.size(), 1);
+  if (err) {
+    ERR << "Error importing key: "<< err << endl;
+    return false;
+  }
+
+  return _pimpl->importKey( data, [&](){ return keydata.size(); } );
+}
+
+template<typename Callback>
+bool KeyManagerCtx::Impl::importKey(GpgmeDataPtr &data, Callback &&calcDataSize)
+{
+  GpgmeErr err;
+  err = gpgme_op_import( _ctx, data.get() );
   if (err) {
     ERR << "Error importing key: "<< err << endl;
     return false;
@@ -473,9 +526,9 @@ bool KeyManagerCtx::importKey(const Pathname &keyfile)
 
   // Work around bsc#1127220 [libgpgme] no error upon incomplete import due to signal received.
   // We need this error, otherwise RpmDb will report the missing keys as 'probably v3'.
-  if ( gpgme_import_result_t res = gpgme_op_import_result(_pimpl->_ctx) )
+  if ( gpgme_import_result_t res = gpgme_op_import_result(_ctx) )
   {
-    if ( ! res->considered && PathInfo(keyfile).size() )
+    if ( ! res->considered && std::forward<Callback>(calcDataSize)() )
     {
       DBG << *res << endl;
       ERR << "Error importing key: No keys considered (bsc#1127220, [libgpgme] signal received?)" << endl;
@@ -516,6 +569,9 @@ bool KeyManagerCtx::deleteKey(const std::string &id)
 
 std::list<std::string> KeyManagerCtx::readSignatureFingerprints(const Pathname &signature)
 { return _pimpl->readSignaturesFprs(signature); }
+
+std::list<std::string> KeyManagerCtx::readSignatureFingerprints(const ByteArray &keyData)
+{ return _pimpl->readSignaturesFprs(keyData); }
 
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////

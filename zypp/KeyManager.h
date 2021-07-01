@@ -15,6 +15,7 @@
 #include <zypp/base/PtrTypes.h>
 #include <zypp/Pathname.h>
 #include <zypp/PublicKey.h>
+#include <zypp-core/ByteArray.h>
 
 #include <memory>
 
@@ -70,11 +71,17 @@ class KeyManagerCtx
         /** Tries to import a key from \a keyfile, returns true on success */
         bool importKey(const Pathname & keyfile);
 
+        /** Tries to import a key from \a buffer, returns true on success */
+        bool importKey(const ByteArray & keydata);
+
         /** Tries to delete a key specified by \a id, returns true on success */
         bool deleteKey (const std::string & id);
 
         /** Reads all fingerprints from the \a signature file , returns a list of all found fingerprints */
         std::list<std::string> readSignatureFingerprints(const Pathname & signature);
+
+        /** Reads all fingerprints from the \a buffer, returns a list of all found fingerprints */
+        std::list<std::string> readSignatureFingerprints( const ByteArray & keyData );
 
     private:
       KeyManagerCtx();
