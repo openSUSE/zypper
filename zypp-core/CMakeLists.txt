@@ -252,7 +252,9 @@ ADD_LIBRARY( zypp-core STATIC ${zypp_SRCS} ${zypp_HEADERS} )
 #we include generated headers, so we need to wait for zypp-protobuf to be ready
 add_dependencies( zypp-core zypp-protobuf )
 
-
-TARGET_LINK_LIBRARIES( zypp-core ${OPENSSL_LIBRARIES} )
-TARGET_LINK_LIBRARIES( zypp-core ${CRYPTO_LIBRARIES} )
+target_link_libraries( zypp-core ${LIBGLIB_LIBRARIES} )
+target_link_libraries( zypp-core ${OPENSSL_LIBRARIES} )
+target_link_libraries( zypp-core ${CRYPTO_LIBRARIES} )
+target_link_libraries( zypp-core pthread )
+target_link_libraries( zypp-core ${SIGCPP_LIBRARIES} )
 
