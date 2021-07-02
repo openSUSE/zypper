@@ -106,7 +106,7 @@ bool pushTransactionErrorMessage ( rpmps ps )
     zypp::proto::target::TransactionProblemDesc desc;
     desc.set_message( zypp::str::asString( msg.value() ) );
 
-    err.mutable_problems()->Add( std::move(desc) );
+    *err.mutable_problems()->Add() = std::move(desc);
   }
 
   return pushMessage( err );

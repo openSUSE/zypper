@@ -1912,7 +1912,7 @@ namespace zypp
               tStep.mutable_install()->set_pathname( locFiles.back()->asString() );
               tStep.mutable_install()->set_multiversion( p->multiversionInstall() );
 
-              commit.mutable_steps()->Add( std::move(tStep) );
+              *commit.mutable_steps()->Add( ) = std::move(tStep);
             }
             catch ( const AbortRequestException &e )
             {
@@ -1946,7 +1946,7 @@ namespace zypp
             tStep.mutable_remove()->set_release( p->edition().release() );
             tStep.mutable_remove()->set_arch( p->arch().asString() );
 
-            commit.mutable_steps()->Add( std::move(tStep) );
+            *commit.mutable_steps()->Add() = std::move(tStep);
 
           }
         } else if ( citem->isKind<SrcPackage>() && citem.status().isToBeInstalled() ) {
@@ -1961,7 +1961,7 @@ namespace zypp
             tStep.set_stepid( stepId );
             tStep.mutable_install()->set_pathname( locFiles.back()->asString() );
             tStep.mutable_install()->set_multiversion( false );
-            commit.mutable_steps()->Add( std::move(tStep) );
+            *commit.mutable_steps()->Add() = std::move(tStep);
 
           }  catch ( const Exception &e ) {
             ZYPP_CAUGHT( e );
