@@ -44,6 +44,7 @@ zypp::ZyppFlags::CommandGroup ModifyRepoCmd::cmdOptions() const
 {
   auto that = const_cast<ModifyRepoCmd *>(this);
   return {{
+      {"baseurl", 'u', ZyppFlags::RequiredArgument, ZyppFlags::StringType( &that->_baseUrl, {}, ARG_URI ), _("Set a base URL for the repository.")},
       //some legacy options
       {"legacy-refresh", 'r', ZyppFlags::NoArgument | ZyppFlags::Hidden, ZyppFlags::TriBoolType( that->_commonProps._enableAutoRefresh, ZyppFlags::StoreTrue ), "" },
       {"legacy-no-refresh", 'R', ZyppFlags::NoArgument | ZyppFlags::Hidden, ZyppFlags::TriBoolType( that->_commonProps._enableAutoRefresh, ZyppFlags::StoreFalse), "" }
@@ -51,9 +52,11 @@ zypp::ZyppFlags::CommandGroup ModifyRepoCmd::cmdOptions() const
 }
 
 void ModifyRepoCmd::doReset()
-{ }
+{
+  _baseUrl = std::string();
+}
 
-int ModifyRepoCmd::execute(Zypper &zypper, const std::vector<std::string> &positionalArgs_r )
+int ModifyRepoCmd::execute( Zypper &zypper, const std::vector<std::string> &positionalArgs_r )
 {
   bool aggregate = _selections._all || _selections._local || _selections._remote || _selections._mediumTypes.size();
 
@@ -71,6 +74,15 @@ int ModifyRepoCmd::execute(Zypper &zypper, const std::vector<std::string> &posit
     return ( ZYPPER_EXIT_ERR_INVALID_ARGS );
   }
 
+  if ( aggregate && !_baseUrl.empty() )
+  {
+    // translators: aggregate option is e.g. "--all". This message will be
+    // followed by mr command help text which will explain it
+    zypper.out().error(_("It is not possible to use --baseurl with aggregate options."));
+    zypper.out().info( help() );
+    return ZYPPER_EXIT_ERR_INVALID_ARGS;
+  }
+
   if ( aggregate )
   {
     modify_repos_by_option( zypper, _selections, _commonProps, _repoProps );
@@ -82,7 +94,7 @@ int ModifyRepoCmd::execute(Zypper &zypper, const std::vector<std::string> &posit
       RepoInfo r;
       if ( match_repo(zypper,*arg,&r) )
       {
-        modify_repo( zypper, r.alias(), _commonProps, _repoProps );
+        modify_repo( zypper, r.alias(), _baseUrl, _commonProps, _repoProps );
       }
       else
       {
@@ -93,7 +105,7 @@ int ModifyRepoCmd::execute(Zypper &zypper, const std::vector<std::string> &posit
     }
   }
 
-  return ZYPPER_EXIT_OK;
+  return zypper.exitCode();
 }
 
 
