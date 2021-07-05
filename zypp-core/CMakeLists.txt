@@ -198,10 +198,12 @@ SET( zyppng_io_HEADERS
 
 SET( zyppng_rpc_HEADERS
   zyppng/rpc/rpc.h
+  zyppng/rpc/zerocopystreams.h
 )
 
 SET( zyppng_rpc_SRCS
   zyppng/rpc/rpc.cc
+  zyppng/rpc/zerocopystreams.cc
 )
 
 SET( zyppng_thread_SRCS
@@ -257,4 +259,3 @@ target_link_libraries( zypp-core ${OPENSSL_LIBRARIES} )
 target_link_libraries( zypp-core ${CRYPTO_LIBRARIES} )
 target_link_libraries( zypp-core pthread )
 target_link_libraries( zypp-core ${SIGCPP_LIBRARIES} )
-

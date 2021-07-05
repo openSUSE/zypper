@@ -13,7 +13,7 @@
 #include <zypp/target/rpm/librpm.h>
 #include <zypp/target/rpm/RpmFlags.h>
 
-#include <google/protobuf/io/zero_copy_stream_impl.h>
+#include <zypp-core/zyppng/rpc/zerocopystreams.h>
 
 extern "C"
 {
@@ -200,7 +200,7 @@ int main( int, char ** )
   // we read it directly from the FD
   zypp::proto::target::Commit msg;
   {
-    google::protobuf::io::FileInputStream in( STDIN_FILENO );
+    zyppng::FileInputStream in( STDIN_FILENO );
     if ( !msg.ParseFromBoundedZeroCopyStream( &in, msgSize ) ) {
       std::cerr << "Wrong commit message format, aborting" << std::endl;
       return WrongMessageFormat;

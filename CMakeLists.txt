@@ -199,6 +199,10 @@ ENDIF( NOT ZLIB_FOUND)
 
 FIND_PACKAGE(Protobuf REQUIRED)
 SET( Protobuf_IMPORT_DIRS ${CMAKE_CURRENT_SOURCE_DIR} )
+if ( "${Protobuf_VERSION}" VERSION_LESS "3.8.0")
+  message("Protobuf ${Protobuf_VERSION} has no ZeroCopyStreams, using internal version.")
+  add_definitions( -DPROTOBUFLITE_HAS_NO_ZEROCOPYSTREAM )
+endif()
 
 FIND_PACKAGE(YAML-CPP REQUIRED)
 IF ( NOT YAML-CPP_FOUND)

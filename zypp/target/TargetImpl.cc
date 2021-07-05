@@ -68,7 +68,7 @@
 #include <zypp-core/zyppng/base/EventDispatcher>
 #include <zypp-proto/commit.pb.h>
 #include <zypp-proto/envelope.pb.h>
-#include <google/protobuf/io/zero_copy_stream_impl.h>
+#include <zypp-core/zyppng/rpc/zerocopystreams.h>
 
 #include <zypp/target/rpm/RpmException.h>
 
@@ -2293,7 +2293,7 @@ namespace zypp
               ZYPP_THROW( target::rpm::RpmSubprocessException( "Failed to write commit size to subprocess" ) );
             }
 
-            google::protobuf::io::FileOutputStream fo ( outFd );
+            zyppng::FileOutputStream fo ( outFd );
             if ( !commit.SerializeToZeroCopyStream( &fo ) ) {
               prog->stop( SIGKILL );
               ZYPP_THROW( target::rpm::RpmSubprocessException( "Failed to write commit to subprocess" ) );
