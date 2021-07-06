@@ -1,0 +1,6 @@
+workflow:
+  steps:
+    - branch_package:
+        source_project: zypp:ci:zypper
+        source_package: zypper
+
