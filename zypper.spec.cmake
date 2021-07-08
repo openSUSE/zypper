@@ -16,7 +16,7 @@
 #
 
 
-Name:           @PACKAGE@
+Name:           zypper
 BuildRequires:  augeas-devel >= 1.10.0
 %if 0%{?suse_version} > 1325
 BuildRequires:  libboost_headers-devel
