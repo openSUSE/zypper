@@ -346,6 +346,9 @@ public:
    */
   void remove( const PackageArgs & args );
 
+  void apply( const PackageArgs &args_r, const std::function<bool (PoolItem)> cb_r );
+  void apply( const PackageSpec &pkg_r, const std::function<bool (PoolItem)> cb_r );
+
   /**
    * Variant of remove(const PackageArgs&) to avoid implicit conversion
    * from vector<string> to PackageArgs.

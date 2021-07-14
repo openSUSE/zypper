@@ -40,6 +40,7 @@
 #include "commands/locale/localescmd.h"
 #include "commands/locale/addlocalecmd.h"
 #include "commands/locale/removelocalecmd.h"
+#include "commands/mark.h"
 
 using namespace zypp;
 
@@ -127,6 +128,7 @@ namespace
       makeCmd<InrVerifyCmd> ( ZypperCommand::VERIFY_e , std::string(), { "verify", "ve" }, InrVerifyCmd::Mode::Verify ),
       makeCmd<SourceInstallCmd> ( ZypperCommand::SRC_INSTALL_e , std::string(), { "source-install", "si" } ),
       makeCmd<InrVerifyCmd> ( ZypperCommand::INSTALL_NEW_RECOMMENDS_e , std::string(), { "install-new-recommends", "inr" }, InrVerifyCmd::Mode::InstallRecommends ),
+      makeCmd<MarkCmd> ( ZypperCommand::MARK_e , std::string(), { "mark" } ),
 
       makeCmd<UpdateCmd> ( ZypperCommand::UPDATE_e , _("Update Management:"), { "update", "up"  } ),
       makeCmd<ListUpdatesCmd> ( ZypperCommand::LIST_UPDATES_e , std::string(), { "list-updates", "lu" } ),
@@ -261,6 +263,8 @@ DEF_ZYPPER_COMMAND( ADD_LOCALE );
 DEF_ZYPPER_COMMAND( REMOVE_LOCALE );
 
 DEF_ZYPPER_COMMAND( NEEDS_REBOOTING );
+
+DEF_ZYPPER_COMMAND( MARK );
 
 #undef DEF_ZYPPER_COMMAND
 ///////////////////////////////////////////////////////////////////

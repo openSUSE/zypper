@@ -43,6 +43,7 @@ struct ZypperCommand
   static const ZypperCommand SRC_INSTALL;
   static const ZypperCommand VERIFY;
   static const ZypperCommand INSTALL_NEW_RECOMMENDS;
+  static const ZypperCommand MARK;
 
   static const ZypperCommand UPDATE;
   static const ZypperCommand LIST_UPDATES;
@@ -119,6 +120,7 @@ struct ZypperCommand
     SRC_INSTALL_e,
     VERIFY_e,
     INSTALL_NEW_RECOMMENDS_e,
+    MARK_e,
 
     UPDATE_e,
     LIST_UPDATES_e,
