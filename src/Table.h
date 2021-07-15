@@ -258,7 +258,9 @@ public:
         } else
           return ( noL && ! noR ? -1 : ! noL && noR ?  1 : 0);
       }
-      return ( a_r._columns[curr_column_r] < b_r._columns[curr_column_r] ? -1 : a_r._columns[curr_column_r] > b_r._columns[curr_column_r] ?  1 : 0 );
+      std::string lower_a_r = str::toLower(a_r._columns[curr_column_r]);
+      std::string lower_b_r = str::toLower(b_r._columns[curr_column_r]);
+      return ( lower_a_r < lower_b_r ? -1 : lower_a_r > lower_b_r ?  1 : 0 );
     }
   };
 
