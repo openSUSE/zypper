@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-06-30 14:58+0200\n"
-"PO-Revision-Date: 2017-02-23 21:17+0000\n"
-"Last-Translator: Shyukri Shyukriev <shshyukriev@suse.com>\n"
+"PO-Revision-Date: 2021-07-16 22:10+0000\n"
+"Last-Translator: Yavor Uzunov <yav@aaa.a.bg>\n"
 "Language-Team: Bulgarian <https://l10n.opensuse.org/projects/zypper/master/"
 "bg/>\n"
 "Language: bg\n"
@@ -18,11 +18,11 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 2.6\n"
+"X-Generator: Weblate 4.7.1\n"
 
 #: src/Command.cc:93
 msgid "Invalid command"
-msgstr ""
+msgstr "Невалидна команда"
 
 #: src/Command.cc:111
 msgid "Repository Management:"
@@ -54,7 +54,7 @@ msgstr ""
 
 #: src/Command.cc:158
 msgid "Other Commands:"
-msgstr ""
+msgstr "Други Команди:"
 
 #: src/Command.cc:167
 msgid "Subcommands:"
@@ -82,7 +82,7 @@ msgstr ""
 #. translators: --help, -h
 #: src/Config.cc:326
 msgid "Help."
-msgstr ""
+msgstr "Помощ."
 
 #. translators: --version, -V
 #: src/Config.cc:335
