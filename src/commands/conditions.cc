@@ -7,17 +7,33 @@
 #include "conditions.h"
 #include "global-settings.h"
 #include "Zypper.h"
+#include "utils/misc.h"
 
 #include <sys/vfs.h>
 #include <sys/statvfs.h>
 #include <linux/magic.h>
 
+extern ZYpp::Ptr God;
+
 int NeedsRootCondition::check(std::string &err)
 {
-  if ( geteuid() != 0 && !Zypper::instance().config().changedRoot )
+  Zypper &zypp = Zypper::instance();
+  if ( geteuid() != 0 )
   {
-    err = _("Root privileges are required to run this command.");
-    return ZYPPER_EXIT_ERR_PRIVILEGES;
+    if ( ! zypp.config().changedRoot )
+    {
+      err = _("Root privileges are required to run this command.");
+      return ZYPPER_EXIT_ERR_PRIVILEGES;
+    }
+    else
+    {
+      Pathname homeDir( zypp.config().root_dir / God->homePath() );
+      if ( ! userMayUseDir( homeDir ) )
+      {
+        err = ( str::Format(_("Insufficient privileges to use directory '%s'.")) % homeDir );
+        return ( ZYPPER_EXIT_ERR_PRIVILEGES );
+      }
+    }
   }
   return ZYPPER_EXIT_OK;
 }

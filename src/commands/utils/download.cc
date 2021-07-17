@@ -19,6 +19,7 @@
 #include "commands/conditions.h"
 #include "utils/flags/flagtypes.h"
 #include "utils/messages.h"
+#include "utils/misc.h"
 #include "Zypper.h"
 #include "PackageArgs.h"
 #include "Table.h"
@@ -83,26 +84,6 @@ namespace
 	xmlout::Node( *guard, "localfile", xmlout::Node::optionalContent,
 		      { "path", xml::escape( localfile_r.asString() ) } );
     }
-  }
-
-  /** Whether user may create \a dir_r or has rw-access to it. */
-  inline bool userMayUseDir( const Pathname & dir_r )
-  {
-    bool mayuse = true;
-    if ( dir_r.empty()  )
-      mayuse = false;
-    else
-    {
-      PathInfo pi( dir_r );
-      if ( pi.isExist() )
-      {
-	if ( ! ( pi.isDir() && pi.userMayRWX() ) )
-	  mayuse = false;
-      }
-      else
-	mayuse = userMayUseDir( dir_r.dirname() );
-    }
-    return mayuse;
   }
 
   class EnsureWriteableCacheCondition : public BaseCommandCondition
