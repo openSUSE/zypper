@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-06-30 14:58+0200\n"
-"PO-Revision-Date: 2021-07-05 10:32+0000\n"
+"PO-Revision-Date: 2021-07-18 19:11+0000\n"
 "Last-Translator: Dingzhong Chen <wsxy162@gmail.com>\n"
 "Language-Team: Chinese (China) <https://l10n.opensuse.org/projects/zypper/"
 "master/zh_CN/>\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 4.6.2\n"
+"X-Generator: Weblate 4.7.1\n"
 
 #: src/Command.cc:93
 msgid "Invalid command"
@@ -1236,6 +1236,8 @@ msgid ""
 "repository provider or check his web site. Many provider maintain a web page "
 "showing the fingerprints of the GPG keys they are using."
 msgstr ""
+"GPG 公钥可通过它的指纹清楚地识别。不要依赖密钥名称。如果您不确定当前的密钥是否可信，清询问仓库提供者或者查看它的网站。"
+"很多提供者都会维护一个网页用来显示他们正在使用的 GPG 密钥的指纹。"
 
 #: src/callbacks/keyring.h:37
 msgid ""
@@ -1505,7 +1507,7 @@ msgid ""
 "Those additional keys are usually used to sign packages shipped by the "
 "repository. In order to validate those packages upon download and "
 "installation the new keys will be imported into the rpm database."
-msgstr ""
+msgstr "这些额外密钥通常用于签名仓库分发的软件包。为了在下载和安装时验证这些软件包，这些新的密钥会被导入到 rpm 数据库。"
 
 #: src/callbacks/keyring.h:496
 msgid "New:"
@@ -1515,7 +1517,7 @@ msgstr "新密钥："
 msgid ""
 "The repository metadata introducing the new keys have been signed and "
 "validated by the trusted key:"
-msgstr ""
+msgstr "要引入新密钥的仓库元数据已经被信任的密钥签名和验证过："
 
 #: src/callbacks/keyring.h:525
 #, c-format, boost-format
@@ -1704,7 +1706,7 @@ msgstr "弹出介质。"
 msgid ""
 "Please insert medium [%s] #%d and type 'y' to continue or 'n' to cancel the "
 "operation."
-msgstr "请插入介质 [%s] #%d 并输入 'y'  继续或者输入 'n' 取消操作。"
+msgstr "请插入介质 [%s] #%d 并输入 'y' 继续或者输入 'n' 取消操作。"
 
 #. translators: a/r/i/u are replies to the "Abort, retry, ignore?" prompt
 #. Translate the a/r/i part exactly as you did the a/r/i string.
@@ -2104,9 +2106,7 @@ msgstr "从指定软件源选择软件包。"
 msgid ""
 "Allow to replace a newer item with an older one. Handy if you are doing a "
 "rollback. Unlike --force it will not enforce a reinstall."
-msgstr ""
-"允许使用旧软件包替换新软件包。 若您正在做回滚那么该选项超有用。不像 --force  "
-"那样，它不强行重装。"
+msgstr "允许使用旧软件包替换新软件包。 若您正在做回滚那么该选项超有用。不像 --force 那样，它不强行重装。"
 
 #: src/commands/installremove.cc:193
 msgid "Silently install unsigned rpm packages given as commandline parameters."
@@ -2684,7 +2684,7 @@ msgstr "安装全部可用且需要的补丁。"
 msgid ""
 "When updating the affected/vulnerable packages described by a patch, zypper "
 "always aims for the latest available version."
-msgstr ""
+msgstr "当更新补丁所描述的受影响/带漏洞软件包时，zypper 始终采用最新的可用版本。"
 
 #: src/commands/patch.cc:50
 msgid ""
@@ -4425,11 +4425,12 @@ msgid ""
 msgstr ""
 "Zypper 子命令是驻留在 zypper_execdir ('%1%') 中的独立可执行文件。\n"
 "\n"
-"针对子命令，zypper 提供了一个知道子命令所在位置的封装程序，并通过向子命令传递"
-"命令行参数来运行这些子命令。\n"
+"针对子命令，zypper 提供了一个知道子命令所在位置的封装程序，\n"
+"并通过向子命令传递命令行参数来运行这些子命令。\n"
 "\n"
-"若未在 zypper_execdir 中找到子命令，该封装将在您 $PATH 中的其它位置查找该子命"
-"令。因此，编写一些不存放在系统空间仅供局部使用的 zypper 扩展是可以做到的。\n"
+"若未在 zypper_execdir 中找到子命令，该封装将在您 $PATH 中的\n"
+"其它位置查找该子命令。因此，编写一些不存放在系统空间仅供局部\n"
+"使用的 zypper 扩展是可以做到的。\n"
 
 #: src/commands/subcommand.cc:455
 #, boost-format
@@ -4437,8 +4438,8 @@ msgid ""
 "Using zypper global-options together with subcommands, as well as\n"
 "executing subcommands in '%1%' is currently not supported.\n"
 msgstr ""
-"当前不支持将 zypper 全局选项与子命令一起使用，也不支持执行 '%1%' 中的子命"
-"令。\n"
+"当前不支持将 zypper 全局选项与子命令一起使用，\n"
+"也不支持执行 '%1%' 中的子命令。\n"
 
 #. translators: headline of an enumeration; %1% is a directory name
 #: src/commands/subcommand.cc:466
@@ -6716,7 +6717,8 @@ msgid ""
 "If you run zypper without a terminal, use '%s' global\n"
 "option to make zypper use default answers to prompts."
 msgstr ""
-"若您未使用终端运行 zypper，请用 '%s' 全局选项以使 zypper 对提示使用默认回答。"
+"若您未使用终端运行 zypper，请用 '%s' 全局选项\n"
+"以使 zypper 对提示使用默认回答。"
 
 #: src/utils/prompt.cc:410
 #, c-format, boost-format
