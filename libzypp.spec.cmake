@@ -66,7 +66,7 @@ Recommends:     logrotate
 Recommends:     lsof
 %endif
 BuildRequires:  cmake >= 3.1
-BuildRequires:  openssl-devel
+BuildRequires:  pkgconfig(openssl)
 BuildRequires:  pkgconfig(libudev)
 %if 0%{?suse_version} >= 1330
 BuildRequires:  libboost_headers-devel
@@ -204,7 +204,7 @@ Requires:       glibc-devel
 Requires:       libstdc++-devel
 Requires:       libxml2-devel
 Requires:       libzypp = %{version}
-Requires:       openssl-devel
+Requires:       pkgconfig(openssl)
 Requires:       popt-devel
 Requires:       rpm-devel > 4.4
 Requires:       zlib-devel
