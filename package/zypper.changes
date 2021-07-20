@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Jul 20 18:46:39 CEST 2021 - ma@suse.de
+
+- Add support for PTFs (jsc#SLE-17974)
+- version 1.13.60
+
+-------------------------------------------------------------------
 Thu Jul  1 15:06:27 CEST 2021 - ma@suse.de
 
 - man: point out more clearly that patches update affected
