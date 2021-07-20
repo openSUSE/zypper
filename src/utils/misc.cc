@@ -765,3 +765,92 @@ void packagekit_suggest_quit()
   ExternalProgram pkcall( argv );
   pkcall.close();
 }
+
+
+bool iType( const ui::Selectable::constPtr & sel_r )
+{
+  return sel_r->hasInstalledObj() ||
+  ( traits::isPseudoInstalled( sel_r->kind() ) && sel_r->theObj().status().validate() == ResStatus::SATISFIED );
+}
+
+const char * computeStatusIndicator( const PoolItem & pi_r, ui::Selectable::constPtr sel_r, bool * iType_r )
+{
+  static const char * _[] = { " ",  " l", " P", " R" };	// not installed / not relevant
+  static const char * i[] = { "i",  "il", "iP", "iR" };	// installed     / satisfied
+  static const char * I[] = { "i+", "il", "iP", "iR" };	// user installed
+  static const char * v[] = { "v",  "vl", "vP", "vR" };	// different version installed
+  static const char * b[] = { "!",  "!l", "!P", "!R" };	//               / broken
+
+  const char ** stem = _;
+  const ResStatus & status { pi_r.status() };
+
+  if ( traits::isPseudoInstalled( pi_r->kind() ) )
+  {
+    switch ( status.validate() )
+    {
+      case ResStatus::BROKEN:		stem = b; break;
+      case ResStatus::SATISFIED:	stem = i; break;
+      case ResStatus::UNDETERMINED:	// [[fallthrough]]
+      case ResStatus::NONRELEVANT:	break;
+    }
+  }
+  else if ( status.isInstalled() )
+    stem = pi_r.identIsAutoInstalled() ? i : I;
+  else
+  {
+    if ( ! sel_r ) sel_r = ui::Selectable::get(pi_r);
+    if ( sel_r-> hasInstalledObj() )
+    {
+      if ( sel_r->identicalInstalled( pi_r ) )
+	stem = pi_r.identIsAutoInstalled() ? i : I;
+      else
+	stem = v;
+    }
+    // else _
+  }
+  // and now the details
+  if ( iType_r ) *iType_r = ( *(stem[0]) == 'i' );
+  if ( pi_r.isBlacklisted() )
+    return stem[pi_r.isPtf() ? 2 : 3];
+  if ( status.isLocked() )
+    return stem[1];
+  return stem[0];
+}
+
+const char * computeStatusIndicator( const ui::Selectable & sel_r, bool tagForeign_r, bool * iType_r )
+{
+  static const char * _[] = { " ",  " l", " P", " R" };	// not installed / not relevant
+  static const char * i[] = { "i",  "il", "iP", "iR" };	// installed     / satisfied
+  static const char * I[] = { "i+", "il", "iP", "iR" };	// user installed
+  static const char * v[] = { "v",  "vl", "vP", "vR" };	// foreign installed
+  static const char * V[] = { "v+", "vl", "vP", "vR" };	// foreign user installed
+  static const char * b[] = { "!",  "!l", "!P", "!R" };	//               / broken
+
+  const char ** stem = _;
+
+  if ( traits::isPseudoInstalled( sel_r.kind() ) )
+  {
+    switch ( sel_r.theObj().status().validate() )
+    {
+      case ResStatus::BROKEN:		stem = b; break;
+      case ResStatus::SATISFIED:	stem = i; break;
+      case ResStatus::UNDETERMINED:	// [[fallthrough]]
+      case ResStatus::NONRELEVANT:	break;
+    }
+  }
+  else if ( sel_r.hasInstalledObj() )
+  {
+    if ( tagForeign_r && ( ! sel_r.identicalAvailable( sel_r.installedObj() ) ) )
+      stem = sel_r.identIsAutoInstalled() ? v : V;
+    else
+      stem = sel_r.identIsAutoInstalled() ? i : I;
+  }
+  // else _
+  // and now the details
+  if ( iType_r ) *iType_r = ( *(stem[0]) == 'i' );
+  if ( sel_r.hasBlacklistedInstalled() )
+    return stem[sel_r.hasPtfInstalled() ? 2 : 3];
+  if ( sel_r.locked() )
+    return stem[1];
+  return stem[0];
+}

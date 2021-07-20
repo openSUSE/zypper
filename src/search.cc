@@ -62,51 +62,21 @@ bool FillSearchTableSolvable::addPicklistItem( const ui::Selectable::constPtr & 
   if ( pi->isKind<Pattern>() && ! pi->asKind<Pattern>()->userVisible() )
     return false;
 
-  TableRow row;
-  // compute status indicator:
-  //   i  - exactly this version installed
-  //   v  - installed, but in different version
-  //      - not installed at all
-  bool isLocked = pi.status().isLocked();
-  if ( pi->isSystem() )
-  {
-    // picklist: ==> not available
-    if ( _inst_notinst == false )
-      return false;	// show only not installed
-    row << lockStatusTag( "i", isLocked, pi.identIsAutoInstalled() );
-  }
+  // On the fly filter unwanted according to _inst_notinst
+  const char *statusIndicator = nullptr;
+  if ( indeterminate(_inst_notinst)  )
+    statusIndicator = computeStatusIndicator( pi, sel );
   else
   {
-    // picklist: ==> available, maybe identical installed too
-
-    // only check for sel->installedEmpty() if NOT pseudo installed
-    if ( !traits::isPseudoInstalled( pi->kind() ) && sel->installedEmpty() )
-    {
-      if ( _inst_notinst == true )
-	return false;	// show only installed
-      row << lockStatusTag( "", isLocked );
-    }
-    else
-    {
-      bool identicalInstalledToo = ( traits::isPseudoInstalled( pi->kind() )
-				   ? ( pi.isSatisfied() )
-				   : ( sel->identicalInstalled( pi ) ) );
-      if ( identicalInstalledToo )
-      {
-	if ( _inst_notinst == false )
-	  return false;	// show only not installed
-	row << lockStatusTag( "i", isLocked, pi.identIsAutoInstalled() );
-      }
-      else
-      {
-	if ( _inst_notinst == true )
-	  return false;	// show only installed
-	row << lockStatusTag( "v", isLocked );
-      }
-    }
+    bool iType;
+    statusIndicator = computeStatusIndicator( pi, sel, &iType );
+    if ( (bool)_inst_notinst != iType )
+      return false;
   }
 
+  TableRow row;
   row
+    << statusIndicator
     << pi->name()
     << kind_to_string_localized( pi->kind(), 1 )
     << pi->edition().asString()
@@ -223,64 +193,27 @@ bool FillSearchTableSelectable::operator()( const ui::Selectable::constPtr & s )
       return true;
   }
 
-  TableRow row;
 
-  // whether to show the solvable as 'installed'
-  bool installed = false;
+  // NOTE _tagForeign: This is a legacy issue:
+  // - 'zypper search' always shows installed items as 'i'
+  // - 'zypper search --repo X' shows 'foreign' installed items (the installed
+  //    version is not provided by one of the enabled repos) as 'v'.
+  bool _tagForeign = !_repos.empty();
 
-  if ( traits::isPseudoInstalled( s->kind() ) )
-    installed = s->theObj().isSatisfied();
-  // check for installed counterpart in one of specified repos (bnc #467106)
-  else if (!_repos.empty())
-  {
-    for_( ait, s->availableBegin(), s->availableEnd() )
-      for_( iit, s->installedBegin(), s->installedEnd() )
-        if ( identical( *ait, *iit ) && _repos.find( ait->repoInfo().alias() ) != _repos.end() )
-        {
-          installed = true;
-          break;
-        }
-  }
-  // if no --repo is specified, we don't care where does the installed package
-  // come from
-  else
-    installed = !s->installedEmpty();
-
-  bool isLocked = s->locked();
-  if ( s->kind() != ResKind::srcpackage )
-  {
-    if ( installed )
-    {
-      // not-installed only
-      if ( inst_notinst == false )
-        return true;
-      row << lockStatusTag( "i", isLocked, s->identIsAutoInstalled() );
-    }
-    // this happens if the solvable has installed objects, but no counterpart
-    // of them in specified repos
-    else if ( s->hasInstalledObj() )
-    {
-      // not-installed only
-      if ( inst_notinst == true )
-        return true;
-      row << lockStatusTag( "v", isLocked );
-    }
-    else
-    {
-      // installed only
-      if ( inst_notinst == true )
-        return true;
-      row << lockStatusTag( "", isLocked );
-    }
-  }
+  // On the fly filter unwanted according to inst_notinst
+  const char *statusIndicator = nullptr;
+  if ( indeterminate(inst_notinst)  )
+    statusIndicator = computeStatusIndicator( *s, _tagForeign );
   else
   {
-    // installed only
-    if ( inst_notinst == true )
+    bool iType;
+    statusIndicator = computeStatusIndicator( *s, _tagForeign, &iType );
+    if ( (bool)inst_notinst != iType )
       return true;
-    row << lockStatusTag( "", isLocked );
   }
 
+  TableRow row;
+  row << statusIndicator,
   row << s->name();
   row << s->theObj()->summary();
   row << kind_to_string_localized( s->kind(), 1 );
@@ -475,16 +408,8 @@ void list_packages( Zypper & zypper )
 	continue;
 
       TableRow row;
-      bool isLocked = pi.status().isLocked();
-      if ( s->hasInstalledObj() )
-      {
-	row << ( pi.status().isInstalled() || s->identicalInstalled( pi ) ? lockStatusTag( "i", isLocked, pi.identIsAutoInstalled() ) : lockStatusTag( "v", isLocked ) );
-      }
-      else
-      {
-	row << lockStatusTag( "", isLocked );
-      }
-      row << piRepoName
+      row << computeStatusIndicator( pi, s )
+          << piRepoName
           << pi->name()
           << pi->edition().asString()
           << pi->arch().asString();

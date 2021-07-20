@@ -17,6 +17,7 @@
 
 #include <zypp/ResKind.h>
 #include <zypp/RepoInfo.h>
+#include <zypp/ui/Selectable.h>
 #include <zypp/ZYppCommitPolicy.h>
 
 class Zypper;
@@ -53,6 +54,62 @@ inline const char * lockStatusTag( const char * tag_r, bool islocked_r, bool isa
 
   return tag_r;
 }
+
+/** Whether the item is considered to be (i)nstalled
+ *
+ * ( installed or ( pseudoInstalled && satisfied ) )
+ *
+ * Sometimes used to pre-filter items on ui::Selectable level to
+ * avoid unnecessary processing of the picklist items.
+ */
+bool iType( const ui::Selectable::constPtr & sel_r );
+
+/*!
+ * Computes the status indicator for a given \ref PoolItem
+ *   i  - exactly this version installed (or satisfied Patch)
+ *   v  - installed, but in a different version
+ *      - not installed at all
+ *   !  - broken/needed Patch
+ *
+ *  Adds additional suffices for additional information:
+ *   P  - The item is part of a PTF
+ *   R  - The item has been retracted
+ *   l  - The item is locked
+ *   +  - Only for the "i" status, the item is user installed
+ *
+ *  - If you happen to have the corresponding Selectable::Ptr at hand,
+ *    pass it down. Otherwise we'll look it up.
+ *  - May on the fly return whether the item is treated as (i)nstalled.
+ *    ( installed or ( pseudoInstalled && satisfied ) ).
+ */
+const char * computeStatusIndicator( const PoolItem & pi_r, ui::Selectable::constPtr sel_r = nullptr, bool * iType_r = nullptr );
+/** \overload */
+inline const char * computeStatusIndicator( const PoolItem & pi_r, bool * iType_r )
+{ return computeStatusIndicator( pi_r, nullptr, iType_r ); }
+
+/*!
+ * Computes the status indicator for a given \ref ui::Selectable
+ *   i  - There is an installed item
+ *   v  - IFF tagForeign_r==true: There is an installed item, but it's not from a known repo.
+ *      - not installed at all
+ *
+ *  Adds additional suffices for additional information:
+ *   P  - The item is part of a PTF
+ *   R  - The item has been retracted
+ *   l  - The item is locked
+ *   +  - Only for the "i/v" status, the item is user installed
+ *
+ *  - May on the fly return whether the item is treated as (i)nstalled.
+ *    ( installed or ( pseudoInstalled && satisfied ) ).
+ */
+const char * computeStatusIndicator( const ui::Selectable & sel_r, bool tagForeign_r = false, bool * iType_r = nullptr );
+/** \overload */
+inline const char * computeStatusIndicator( const ui::Selectable & sel_r, bool * iType_r )
+{ return computeStatusIndicator( sel_r, false, iType_r ); }
+/** \overload */
+inline const char * computeStatusIndicator( const ui::Selectable & sel_r, const Edition &installedMustHaveEd )
+{ return computeStatusIndicator( sel_r ); }
+
 
 /** Whether running on SLE.
  * If so, report e.g. unsupported packages per default.
