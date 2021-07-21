@@ -125,6 +125,9 @@ private:
 
   void collectInstalledRecommends( const ResObject::constPtr & obj );
 
+  bool showNeedRestartHint() const;
+  bool showNeedRebootHInt() const;
+
 private:
   ViewOptions _viewop;
   mutable unsigned _wrap_width;
