@@ -1535,6 +1535,11 @@ void Summary::writePackageCounts( std::ostream & out )
 }
 
 // --------------------------------------------------------------------------
+bool Summary::showNeedRestartHint() const
+{ return( _need_restart && Zypper::instance().runtimeData().plain_patch_command && !(_viewop & UPDATESTACK_ONLY) ); }
+
+bool Summary::showNeedRebootHInt() const
+{ return( _need_reboot_patch || _need_reboot_nonpatch ); }
 
 void Summary::dumpTo( std::ostream & out )
 {
@@ -1598,12 +1603,12 @@ void Summary::dumpTo( std::ostream & out )
   writeRebootNeeded( out );
   writePackageCounts( out );
   writeDownloadAndInstalledSizeSummary( out );
-  if ( _need_restart && zypper.runtimeData().plain_patch_command && !(_viewop & UPDATESTACK_ONLY) )
+  if ( showNeedRestartHint() )
   {
     // patch command (auto)restricted to update stack patches
     Zypper::instance().out().notePar( 4, _("Package manager restart required. (Run this command once again after the update stack got updated)") );
   }
-  if ( _need_reboot_patch || _need_reboot_nonpatch )
+  if ( showNeedRebootHInt() )
   {   Zypper::instance().out().notePar( 4, _("System reboot required.") ); }
 
   if ( !_ctc.empty() )
@@ -1676,6 +1681,8 @@ void Summary::dumpAsXmlTo( std::ostream & out )
   out << " download-size=\"" << ((ByteCount::SizeType)_todownload) << "\"";
   out << " space-usage-diff=\"" << ((ByteCount::SizeType)_inst_size_change) << "\"";
   out << " packages-to-change=\"" << pkgchanged << "\"";	// bsc#1102429: CaaSP requires it to detect 'nothing to do'
+  out << " need-restart=\"" << showNeedRestartHint() << "\"";	// bsc#1188435: show need reboot/restart hints
+  out << " need-reboot=\"" << showNeedRebootHInt() << "\"";	// -"-
   out << ">" << endl;
 
   if ( !_toupgrade.empty() )

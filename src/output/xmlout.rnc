@@ -172,6 +172,9 @@ install-summary-element =
   element install-summary {
     attribute download-size { xsd:integer },    # download size in bytes
     attribute space-usage-diff { xsd:integer }, # used space before vs. after install difference in bytes
+    attribute packages-to-change { xsd:integer }, # number of packages changing (0 = 'nothing to do')
+    attribute need-restart { xsd:boolean },     # package manager restart required
+    attribute need-reboot { xsd:boolean },      # system reboot required
     (
       element to-install { solvable-element+ } |
       element to-remove { solvable-element+ } |
