@@ -1667,15 +1667,22 @@ void Summary::writeXmlResolvableList( std::ostream & out, const KindToResPairSet
 
 void Summary::dumpAsXmlTo( std::ostream & out )
 {
+  Zypper & zypper( Zypper::instance() );
+
   unsigned pkgchanged = _inst_pkg_total;
   const auto & iter = _toremove.find( ResKind::package );
   if ( iter != _toremove.end() )
     pkgchanged += iter->second.size();
 
+  bool need_restart = ( _need_restart && zypper.runtimeData().plain_patch_command && !(_viewop & UPDATESTACK_ONLY) );
+  bool need_reboot = ( _need_reboot_patch || _need_reboot_nonpatch );
+
   out << "<install-summary";
   out << " download-size=\"" << ((ByteCount::SizeType)_todownload) << "\"";
   out << " space-usage-diff=\"" << ((ByteCount::SizeType)_inst_size_change) << "\"";
   out << " packages-to-change=\"" << pkgchanged << "\"";	// bsc#1102429: CaaSP requires it to detect 'nothing to do'
+  out << " need-restart=\"" << need_restart << "\"";	// bsc#1188435: show need reboot/restart hints
+  out << " need-reboot=\"" << need_reboot << "\"";	// -"-
   out << ">" << endl;
 
   if ( !_toupgrade.empty() )
