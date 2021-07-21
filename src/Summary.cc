@@ -1583,8 +1583,6 @@ void Summary::dumpTo( std::ostream & out )
     writeLocked( out );
   if ( _viewop & SHOW_NOT_UPDATED )
     writeNotUpdated( out );
-  writeNewlyInstalled( out );
-  writeRemoved( out );
   writeUpgraded( out );
   writeDowngraded( out );
   writeReinstalled( out );
@@ -1594,6 +1592,8 @@ void Summary::dumpTo( std::ostream & out )
     writeSuggested( out );
   writeChangedArch( out );
   writeChangedVendor(out);
+  writeNewlyInstalled( out );
+  writeRemoved( out );
   if ( _viewop & SHOW_UNSUPPORTED )
   {
     writeSupportUnknown( out );
