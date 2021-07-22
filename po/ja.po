@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-07-21 09:46+0200\n"
-"PO-Revision-Date: 2021-07-19 10:10+0000\n"
+"PO-Revision-Date: 2021-07-22 13:11+0000\n"
 "Last-Translator: Yasuhiko Kamata <belphegor@belbel.or.jp>\n"
 "Language-Team: Japanese <https://l10n.opensuse.org/projects/zypper/master/ja/"
 ">\n"
@@ -2555,7 +2555,7 @@ msgstr "指定したリポジトリからのもののみをロックします。
 
 #: src/commands/locks/add.cc:48
 msgid "Reason for specific lock."
-msgstr ""
+msgstr "ロック理由を指定します。"
 
 #: src/commands/locks/add.cc:81
 msgid "Specified lock has been successfully added."
@@ -2626,7 +2626,7 @@ msgstr "リポジトリ"
 
 #: src/commands/locks/list.cc:138
 msgid "Comment"
-msgstr ""
+msgstr "コメント"
 
 #. translators: locks table value
 #: src/commands/locks/list.cc:156 src/commands/locks/list.cc:235
