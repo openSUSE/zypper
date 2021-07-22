@@ -708,8 +708,7 @@ SATResolver::solverInit(const PoolItemList & weakItems)
       queue_push( &(_jobQueue), sat::Solvable::retractedToken.id() );
       queue_push( &(_jobQueue), SOLVER_BLACKLIST|SOLVER_SOLVABLE_PROVIDES );
       queue_push( &(_jobQueue), sat::Solvable::ptfMasterToken.id() );
-      queue_push( &(_jobQueue), SOLVER_BLACKLIST|SOLVER_SOLVABLE_PROVIDES );
-      queue_push( &(_jobQueue), sat::Solvable::ptfPackageToken.id() );
+      // bsc#1186503: ptfPackageToken should not be blacklisted
     }
 
     // Ad rules for changed requestedLocales
