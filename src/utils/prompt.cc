@@ -164,13 +164,20 @@ std::vector<int> PromptOptions::getReplyMatches( const std::string & reply_r ) c
     // no match falls through....
   }
 
-  std::string lreply { str::toLower( reply_r ) };
+  const std::string & lreply { str::toLower( reply_r ) };
   for ( unsigned i = 0; i < _options.size(); ++i )
   {
     if ( isDisabled(i) )
       continue;
 
-    if ( str::hasPrefix( str::toLower( _options[i] ), lreply ) )
+    const std::string & lopt { str::toLower( _options[i] ) };
+
+    if ( lopt == lreply ) {	// prefer an exact match ("1/11")
+      ret.clear();
+      ret.push_back( i );
+      break;
+    }
+    else if ( str::hasPrefix( lopt, lreply ) )
       ret.push_back( i );
   }
 
