@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-07-21 09:46+0200\n"
-"PO-Revision-Date: 2021-07-16 14:11+0000\n"
+"PO-Revision-Date: 2021-07-22 13:11+0000\n"
 "Last-Translator: Rodrigo Macedo <rmsolucoeseminformatic4@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) <https://l10n.opensuse.org/projects/"
 "zypper/master/pt_BR/>\n"
@@ -2677,7 +2677,7 @@ msgstr "Restringir o bloqueio ao repositório especificado."
 
 #: src/commands/locks/add.cc:48
 msgid "Reason for specific lock."
-msgstr ""
+msgstr "Motivo do bloqueio específico."
 
 #: src/commands/locks/add.cc:81
 msgid "Specified lock has been successfully added."
@@ -2750,7 +2750,7 @@ msgstr "Repositório"
 
 #: src/commands/locks/list.cc:138
 msgid "Comment"
-msgstr ""
+msgstr "Comentário"
 
 #. translators: locks table value
 #: src/commands/locks/list.cc:156 src/commands/locks/list.cc:235
