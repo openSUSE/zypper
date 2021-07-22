@@ -1488,7 +1488,17 @@ SATResolver::problems ()
 				{
                                     IdString s_vendor( s.vendor() );
                                     IdString sd_vendor( sd.vendor() );
-				    std::string description = str::Format(_("install %1% (with vendor change)\n  %2%  -->  %3%") ) % sd.asString() % ( s_vendor ? s_vendor.c_str() : " (no vendor) " ) % ( sd_vendor ? sd_vendor.c_str() : " (no vendor) " );
+				    std::string description;
+				    if ( s == sd )
+				      description = str::Format(_("install %1% (with vendor change)\n  %2%  -->  %3%") )
+				      % sd.asString()
+				      % ( s_vendor ? s_vendor.c_str() : " (no vendor) " )
+				      % ( sd_vendor ? sd_vendor.c_str() : " (no vendor) " );
+				    else
+				      description = str::Format(_("install %1% from vendor %2%\n  replacing %3% from vendor %4%") )
+				      % sd.asString()  % ( sd_vendor ? sd_vendor.c_str() : " (no vendor) " )
+				      % s.asString() % ( s_vendor ? s_vendor.c_str() : " (no vendor) " );
+
 				    MIL << description << endl;
 				    problemSolution->addDescription (description);
 				    gotone = 1;
