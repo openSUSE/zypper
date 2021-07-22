@@ -5,17 +5,752 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-30 14:58+0200\n"
+"POT-Creation-Date: 2021-07-21 09:46+0200\n"
 "PO-Revision-Date: 2021-07-13 19:10+0000\n"
 "Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
-"Language-Team: Slovak <https://l10n.opensuse.org/projects/zypper/master/sk/>"
-"\n"
+"Language-Team: Slovak <https://l10n.opensuse.org/projects/zypper/master/sk/"
+">\n"
 "Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 "X-Generator: Weblate 4.6.2\n"
+
+#: src/SolverRequester.h:52
+#, boost-format
+msgid "Suspicious category filter value '%1%'."
+msgstr "Podozrivá hodnota filtra kategórie '%1%'."
+
+#: src/SolverRequester.h:60
+#, boost-format
+msgid "Suspicious severity filter value '%1%'."
+msgstr "Podozrivá hodnota filtra závažnosti '%1%'."
+
+#: src/callbacks/keyring.h:32
+msgid ""
+"A GPG pubkey is clearly identified by it's fingerprint. Do not rely the keys "
+"name. If you are not sure whether the presented key is authentic, ask the "
+"repository provider or check his web site. Many provider maintain a web page "
+"showing the fingerprints of the GPG keys they are using."
+msgstr ""
+"Verejný kľúč GPG je jasne identifikovaný svojím odtlačkom. Nespoliehajte sa "
+"na názov kľúča. Ak si nie ste istí, či je predložený kľúč autentický, "
+"opýtajte sa poskytovateľa repozitára alebo skontrolujte jeho webové stránky. "
+"Mnoho poskytovateľov udržiava webovú stránku zobrazujúcu odtlačky GPG "
+"kľúčov, ktoré používajú."
+
+#: src/callbacks/keyring.h:37
+msgid ""
+"Signing data enables the recipient to verify that no modifications occurred "
+"after the data were signed. Accepting data with no, wrong or unknown "
+"signature can lead to a corrupted system and in extreme cases even to a "
+"system compromise."
+msgstr ""
+"Podpisovanie dát umožňuje príjemcovi overiť, že po podpísaní dát nedošlo k "
+"žiadnym zmenám. Prijatie balíkov so žiadnym, zlým alebo neznámym podpisom "
+"môže viesť k poškodeniu systému a v extrémnych prípadoch dokonca ohroziť "
+"bezpečnosť systému."
+
+#. translator: %1% is a file name
+#: src/callbacks/keyring.h:45
+#, boost-format
+msgid ""
+"File '%1%' is the repositories master index file. It ensures the integrity "
+"of the whole repo."
+msgstr ""
+"Súbor '%1%' je hlavný indexový súbor repozitárov. Zabezpečuje integritu "
+"celej zostavy repozitárov."
+
+#: src/callbacks/keyring.h:51
+msgid ""
+"We can't verify that no one meddled with this file, so it might not be "
+"trustworthy anymore! You should not continue unless you know it's safe."
+msgstr ""
+"Nemôžeme overiť, že nikto nezasahoval do tohto súboru, takže už nemôže byť "
+"dôveryhodný! Nemali by ste pokračovať, pokiaľ neviete, že je to bezpečné."
+
+#: src/callbacks/keyring.h:56
+msgid ""
+"This file was modified after it has been signed. This may have been a "
+"malicious change, so it might not be trustworthy anymore! You should not "
+"continue unless you know it's safe."
+msgstr ""
+"Tento súbor bol upravený po jeho podpísaní. Mohla to byť zámernou škodlivá "
+"zmena, takže už nemôže byť dôveryhodný! Nemali by ste pokračovať, pokiaľ "
+"neviete, že je to bezpečné."
+
+#: src/callbacks/keyring.h:85
+msgid "Repository:"
+msgstr "Repozitár:"
+
+#: src/callbacks/keyring.h:87
+msgid "Key Fingerprint:"
+msgstr "Odtlačok kľúča:"
+
+#: src/callbacks/keyring.h:88
+msgid "Key Name:"
+msgstr "Názov kľúča:"
+
+#: src/callbacks/keyring.h:89
+msgid "Key Algorithm:"
+msgstr "Algoritmus kľúča:"
+
+#: src/callbacks/keyring.h:90
+msgid "Key Created:"
+msgstr "Vytvorený kľúč:"
+
+#: src/callbacks/keyring.h:91
+msgid "Key Expires:"
+msgstr "Kľúč vyprší:"
+
+#: src/callbacks/keyring.h:93
+msgid "Subkey:"
+msgstr "Podkľúč:"
+
+#: src/callbacks/keyring.h:94
+msgid "Rpm Name:"
+msgstr "Názov rpm:"
+
+#: src/callbacks/keyring.h:120
+#, boost-format
+msgid "The gpg key signing file '%1%' has expired."
+msgstr "Podpisový súbor gpg kľúča '%1%' vypršal."
+
+#: src/callbacks/keyring.h:126
+#, boost-format
+msgid "The gpg key signing file '%1%' will expire in %2% day."
+msgid_plural "The gpg key signing file '%1%' will expire in %2% days."
+msgstr[0] "Podpisový súbor gpg kľúča '%1%' vyprší za %2% deň."
+msgstr[1] "Podpisový súbor gpg kľúča '%1%' vyprší za %2% dni."
+msgstr[2] "Podpisový súbor gpg kľúča '%1%' vyprší za %2% dní."
+
+#: src/callbacks/keyring.h:149
+#, c-format, boost-format
+msgid "Accepting an unsigned file '%s'."
+msgstr "Prijímam nepodpísaný súbor '%s'."
+
+#: src/callbacks/keyring.h:153
+#, c-format, boost-format
+msgid "Accepting an unsigned file '%s' from repository '%s'."
+msgstr "Prijímam nepodpísaný súbor '%s' z repozitára '%s'."
+
+#. translator: %1% is a file name
+#: src/callbacks/keyring.h:163
+#, boost-format
+msgid "File '%1%' is unsigned."
+msgstr "Súbor '%1%' nie je podpísaný."
+
+#. translator: %1% is a file name, %2% a repositories name
+#: src/callbacks/keyring.h:166
+#, boost-format
+msgid "File '%1%' from repository '%2%' is unsigned."
+msgstr "Súbor '%1%' z repozitára '%2%' nie je podpísaný."
+
+#. TranslatorExplanation: speaking of a file
+#: src/callbacks/keyring.h:183
+#, c-format, boost-format
+msgid "File '%s' is unsigned, continue?"
+msgstr "Súbor '%s' nie je podpísaný. Pokračovať?"
+
+#. TranslatorExplanation: speaking of a file
+#: src/callbacks/keyring.h:187
+#, c-format, boost-format
+msgid "File '%s' from repository '%s' is unsigned, continue?"
+msgstr "Súbor '%s' z repozitára '%s' nie je podpísaný. Pokračovať?"
+
+#: src/callbacks/keyring.h:210
+#, c-format, boost-format
+msgid "Accepting file '%s' signed with an unknown key '%s'."
+msgstr "Prijímam súbor '%s' podpísaný neznámym kľúčom '%s'."
+
+#: src/callbacks/keyring.h:214
+#, c-format, boost-format
+msgid ""
+"Accepting file '%s' from repository '%s' signed with an unknown key '%s'."
+msgstr "Prijatie súboru '%s' z repozitára '%s' podpísaný neznámym kľúčom '%s'."
+
+#. translator: %1% is a file name, %2% is a gpg key ID
+#: src/callbacks/keyring.h:223
+#, boost-format
+msgid "File '%1%' is signed with an unknown key '%2%'."
+msgstr "Súbor '%1%' je podpísaný neznámym kľúčom '%2%'."
+
+#. translator: %1% is a file name, %2% is a gpg key ID, %3% a repositories name
+#: src/callbacks/keyring.h:226
+#, boost-format
+msgid "File '%1%' from repository '%3%' is signed with an unknown key '%2%'."
+msgstr "Súbor '%1%' z repozitára '%3%' je podpísaný neznámym kľúčom '%2%'."
+
+#. translators: the last %s is gpg key ID
+#: src/callbacks/keyring.h:243
+#, c-format, boost-format
+msgid "File '%s' is signed with an unknown key '%s'. Continue?"
+msgstr "Súbor '%s' je podpísaný neznámym kľúčom '%s'. Pokračovať?"
+
+#. translators: the last %s is gpg key ID
+#: src/callbacks/keyring.h:247
+#, c-format, boost-format
+msgid ""
+"File '%s' from repository '%s' is signed with an unknown key '%s'. Continue?"
+msgstr ""
+"Súbor '%s' z repozitára '%s' je podpísaný neznámym kľúčom '%s'. Pokračovať?"
+
+#: src/callbacks/keyring.h:267
+msgid "Automatically importing the following key:"
+msgstr "Automaticky importujem nasledujúci kľúč:"
+
+#: src/callbacks/keyring.h:269
+msgid "Automatically trusting the following key:"
+msgstr "Automaticky dôverujem nasledujúcemu kľúču:"
+
+#: src/callbacks/keyring.h:271
+msgid "New repository or package signing key received:"
+msgstr "Nový kľúč pre podpis repozitára a balíkov:"
+
+#. translators: this message is shown after showing description of the key
+#: src/callbacks/keyring.h:305
+msgid "Do you want to reject the key, trust temporarily, or trust always?"
+msgstr "Prajete si tento kľúč odmietnuť, prijať dočasne alebo prijať natrvalo?"
+
+#. translators: this message is shown after showing description of the key
+#: src/callbacks/keyring.h:308
+msgid "Do you want to reject the key, or trust always?"
+msgstr "Prajete si kľúč odmietnuť alebo vždy dôverovať?"
+
+#. translators: r/t/a stands for Reject/TrustTemporarily/trustAlways(import)
+#. translate to whatever is appropriate for your language
+#. The anserws must be separated by slash characters '/' and must
+#. correspond to reject/trusttemporarily/trustalways in that order.
+#. The answers should be lower case letters.
+#: src/callbacks/keyring.h:326
+msgid "r/t/a/"
+msgstr "o/d/t"
+
+#. translators: the same as r/t/a, but without 'a'
+#: src/callbacks/keyring.h:329
+msgid "r/t"
+msgstr "o/d"
+
+#. translators: r/a stands for Reject/trustAlways(import)
+#. translate to whatever is appropriate for your language
+#. The anserws must be separated by slash characters '/' and must
+#. correspond to reject/trusttemporarily/trustalways in that order.
+#. The answers should be lower case letters.
+#: src/callbacks/keyring.h:336
+msgid "r/a/"
+msgstr "o/d/"
+
+#. translators: help text for the 'r' option in the 'r/t/a' prompt
+#: src/callbacks/keyring.h:342
+msgid "Don't trust the key."
+msgstr "Odmietnuť nedôveryhodný kľúč."
+
+#. translators: help text for the 't' option in the 'r/t/a' prompt
+#: src/callbacks/keyring.h:346
+msgid "Trust the key temporarily."
+msgstr "Dôverovať kľúču dočasne."
+
+#. translators: help text for the 'a' option in the 'r/t/a' prompt
+#: src/callbacks/keyring.h:351
+msgid "Trust the key and import it into trusted keyring."
+msgstr "Dôverovať kľúču a importovať ho do dôveryhodného zväzku."
+
+#: src/callbacks/keyring.h:389
+#, c-format, boost-format
+msgid "Ignoring failed signature verification for file '%s'!"
+msgstr "Ignorujem zlyhanie overenia podpisu pre súbor '%s'!"
+
+#: src/callbacks/keyring.h:392
+#, c-format, boost-format
+msgid ""
+"Ignoring failed signature verification for file '%s' from repository '%s'!"
+msgstr ""
+"Ignorovanie zlyhania overenia podpisu pre súbor '%s' z repozitára '%s'!"
+
+#: src/callbacks/keyring.h:398
+msgid "Double-check this is not caused by some malicious changes in the file!"
+msgstr ""
+"Dôkladne overte, či to nie je spôsobené nejakou zámernou škodlivou zmenou v "
+"súbore!"
+
+#. translator: %1% is a file name
+#: src/callbacks/keyring.h:408
+#, boost-format
+msgid "Signature verification failed for file '%1%'."
+msgstr "Overenie podpisu súboru '%1%' zlyhalo."
+
+#. translator: %1% is a file name, %2% a repositories name
+#: src/callbacks/keyring.h:411
+#, boost-format
+msgid "Signature verification failed for file '%1%' from repository '%2%'."
+msgstr "Overenie podpisu súboru '%1%' z repozitára '%2%' zlyhalo."
+
+#: src/callbacks/keyring.h:460
+msgid ""
+"The rpm database seems to contain old V3 version gpg keys which are "
+"meanwhile obsolete and considered insecure:"
+msgstr ""
+"Zdá sa, že databáza rpm obsahuje gpg kľúče starej verzie V3, ktoré sú "
+"medzitým zastarané a nie sú považované za bezpečné:"
+
+#: src/callbacks/keyring.h:467
+#, boost-format
+msgid "To see details about a key call '%1%'."
+msgstr "Ak chcete vidieť podrobnosti o kľúči, volajte '%1%'."
+
+#: src/callbacks/keyring.h:471
+#, boost-format
+msgid ""
+"Unless you believe the key in question is still in use, you can remove it "
+"from the rpm database calling '%1%'."
+msgstr ""
+"Pokiaľ si nemyslíte, že kľúč sa ešte stále používa, môžete ho odstrániť z "
+"databázy rpm volaním '%1%'."
+
+#. translator: %1% is the number of keys, %2% the name of a repository
+#: src/callbacks/keyring.h:490
+#, boost-format
+msgid "Received %1% new package signing key from repository %2%:"
+msgid_plural "Received %1% new package signing keys from repository %2%:"
+msgstr[0] "Bol prijatý %1% nový podpisový kľúč balíkov z repozitára %2%:"
+msgstr[1] "Boli prijaté %1% nové podpisové kľúče balíkov z repozitára %2%:"
+msgstr[2] ""
+"Bolo prijatých %1% nových podpisových kľúčov balíkov z repozitára %2%:"
+
+#: src/callbacks/keyring.h:494
+msgid ""
+"Those additional keys are usually used to sign packages shipped by the "
+"repository. In order to validate those packages upon download and "
+"installation the new keys will be imported into the rpm database."
+msgstr ""
+"Tieto dodatočné kľúče sa zvyčajne používajú na podpisovanie balíkov "
+"doručených úložiskom. Za účelom overenia týchto balíkov po stiahnutí a "
+"inštalácii sa nové kľúče naimportujú do databázy rpm."
+
+#: src/callbacks/keyring.h:496
+msgid "New:"
+msgstr "Nový:"
+
+#: src/callbacks/keyring.h:502
+msgid ""
+"The repository metadata introducing the new keys have been signed and "
+"validated by the trusted key:"
+msgstr ""
+"Metadáta úložiska zavádzajúce nové kľúče boli podpísané a overené "
+"dôveryhodným kľúčom:"
+
+#: src/callbacks/keyring.h:525
+#, c-format, boost-format
+msgid "No digest for file %s."
+msgstr "Žiadny prehľad pre súbor %s."
+
+#: src/callbacks/keyring.h:533
+#, c-format, boost-format
+msgid "Unknown digest %s for file %s."
+msgstr "Neznámy prehľad %s pre súbor %s."
+
+#: src/callbacks/keyring.h:550
+#, boost-format
+msgid ""
+"Digest verification failed for file '%1%'\n"
+"[%2%]\n"
+"\n"
+"  expected %3%\n"
+"  but got  %4%\n"
+msgstr ""
+"Zlyhalo overenie prehľadu pre súbor '%1%'\n"
+"[%2%]\n"
+"\n"
+"  očakávané %3%\n"
+"  ale získané  %4%\n"
+
+#: src/callbacks/keyring.h:562
+msgid ""
+"Accepting packages with wrong checksums can lead to a corrupted system and "
+"in extreme cases even to a system compromise."
+msgstr ""
+"Prijatie balíkov so zlými kontrolnými súčtami môže viesť k poškodeniu "
+"systému a v extrémnych prípadoch dokonca ohroziť bezpečnosť systému."
+
+#: src/callbacks/keyring.h:570
+#, boost-format
+msgid ""
+"However if you made certain that the file with checksum '%1%..' is secure, "
+"correct\n"
+"and should be used within this operation, enter the first 4 characters of "
+"the checksum\n"
+"to unblock using this file on your own risk. Empty input will discard the "
+"file.\n"
+msgstr ""
+"Avšak, ak ste si istí, že súbor s kontrolným súčtom '%1%..' je bezpečný, "
+"správny\n"
+"a mal by byť použitý v rámci tejto operácie, zadajte prvé 4 znaky "
+"kontrolného súčtu\n"
+"pre odblokovanie použitia tohto súboru na vlastné riziko. Prázdny vstup "
+"vyradí súbor.\n"
+
+#. translators: A prompt option
+#: src/callbacks/keyring.h:577
+msgid "discard"
+msgstr "vyradiť"
+
+#. translators: A prompt option help text
+#: src/callbacks/keyring.h:579
+msgid "Unblock using this file on your own risk."
+msgstr "Odblokovať použitie tohto súboru na vlastné riziko."
+
+#. translators: A prompt option help text
+#: src/callbacks/keyring.h:581
+msgid "Discard the file."
+msgstr "Vyradiť súbor."
+
+#. translators: A prompt text
+#: src/callbacks/keyring.h:585
+msgid "Unblock or discard?"
+msgstr "Odblokovať alebo vyradiť?"
+
+#: src/callbacks/locks.h:27
+msgid ""
+"The following query locks the same objects as the one you want to remove:"
+msgstr ""
+"Nasledujúci dotaz zamyká tie isté objekty ako ten, ktorý chcete odstrániť:"
+
+#: src/callbacks/locks.h:30
+msgid "The following query locks some of the objects you want to unlock:"
+msgstr "Nasledujúci dotaz zamyká niektoré z objektov, ktoré chcete odomknúť:"
+
+#: src/callbacks/locks.h:35 src/callbacks/locks.h:50
+msgid "Do you want to remove this lock?"
+msgstr "Chcete tento zámok odstrániť?"
+
+#: src/callbacks/locks.h:45
+msgid "The following query does not lock anything:"
+msgstr "Nasledujúci dotaz nič nezamyká:"
+
+#: src/callbacks/repo.h:49
+msgid "Retrieving delta"
+msgstr "Sťahujem delta balík"
+
+#. translators: this text is a progress display label e.g. "Applying delta foo [42%]"
+#: src/callbacks/repo.h:74
+msgid "Applying delta"
+msgstr "Aplikovanie delta balíka"
+
+#. TranslatorExplanation %s is package size like "5.6 M"
+#: src/callbacks/repo.h:103
+#, c-format, boost-format
+msgid "(%s unpacked)"
+msgstr "(%s po rozbalení)"
+
+#: src/callbacks/repo.h:112
+#, boost-format
+msgid "In cache %1%"
+msgstr "Vo vyrovnávacej pamäti %1%"
+
+#: src/callbacks/repo.h:128
+#, c-format, boost-format
+msgid "Retrieving %s %s-%s.%s"
+msgstr "Sťahujem %s %s-%s.%s"
+
+#: src/callbacks/repo.h:217
+msgid "Signature verification failed"
+msgstr "Overenie podpisu zlyhalo"
+
+#: src/callbacks/repo.h:237
+msgid "Accepting package despite the error."
+msgstr "Prijatie balíka napriek chybe."
+
+#. TranslatorExplanation speaking of a script - "Running: script file name (package name, script dir)"
+#: src/callbacks/rpm.h:184
+#, c-format, boost-format
+msgid "Running: %s  (%s, %s)"
+msgstr "Spúšťam: %s  (%s, %s)"
+
+#: src/callbacks/rpm.h:267
+#, c-format, boost-format
+msgid "Removal of %s failed:"
+msgstr "Zlyhalo odstránenie %s:"
+
+#. translators: This text is a progress display label e.g. "Removing packagename-x.x.x [42%]"
+#: src/callbacks/rpm.h:307
+#, c-format, boost-format
+msgid "Removing %s"
+msgstr "Odstraňovanie %s"
+
+#: src/callbacks/rpm.h:344
+#, c-format, boost-format
+msgid "Installation of %s failed:"
+msgstr "Inštalácia %s zlyhala:"
+
+#. TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
+#: src/callbacks/rpm.h:384
+#, c-format, boost-format
+msgid "Installing: %s"
+msgstr "Inštalovanie: %s"
+
+#. translators: A progressbar label
+#: src/callbacks/rpm.h:403
+msgid "Checking for file conflicts:"
+msgstr "Kontrola konfliktov súborov:"
+
+#. TranslatorExplanation %1%(number of packages); detailed list follows
+#: src/callbacks/rpm.h:454
+#, boost-format
+msgid ""
+"%1% package had to be excluded from file conflicts check because it is not "
+"yet download."
+msgid_plural ""
+"%1% packages had to be excluded from file conflicts check because they are "
+"not yet downloaded."
+msgstr[0] ""
+"%1% balík musel byť vylúčený z kontroly konfliktov súborov, pretože ešte "
+"nebol stiahnutý."
+msgstr[1] ""
+"%1% balíky museli byť vylúčené z kontroly konfliktov súborov, pretože ešte "
+"neboli stiahnuté."
+msgstr[2] ""
+"%1% balíkov muselo byť vylúčených z kontroly konfliktov súborov, pretože "
+"ešte neboli stiahnuté."
+
+#. TranslatorExplanation %1%(commandline option)
+#: src/callbacks/rpm.h:460
+#, boost-format
+msgid ""
+"Checking for file conflicts requires not installed packages to be downloaded "
+"in advance in order to access their file lists. See option '%1%' in the "
+"zypper manual page for details."
+msgstr ""
+"Kontrola konfliktov súborov vyžaduje, aby sa balíky, ktoré nie sú "
+"nainštalované, stiahli v predstihu kvôli prístupu k ich zoznamom súborov. "
+"ďalšie Pre ďalšie podrobnosti pozrieť voľbu '%1%' v manuálovej stránke "
+"zypper."
+
+#. TranslatorExplanation %1%(number of conflicts); detailed list follows
+#: src/callbacks/rpm.h:470
+#, boost-format
+msgid "Detected %1% file conflict:"
+msgid_plural "Detected %1% file conflicts:"
+msgstr[0] "Zistený %1% konflikt súborov:"
+msgstr[1] "Zistené %1% konflikty súborov:"
+msgstr[2] "Zistených %1% konfliktov súborov:"
+
+#: src/callbacks/rpm.h:478
+msgid "Conflicting files will be replaced."
+msgstr "Konfliktné súbory budú nahradené."
+
+#. TranslatorExplanation Problem description before asking whether to "Continue? [yes/no] (no):"
+#: src/callbacks/rpm.h:484
+msgid ""
+"File conflicts happen when two packages attempt to install files with the "
+"same name but different contents. If you continue, conflicting files will be "
+"replaced losing the previous content."
+msgstr ""
+"Konflikty súborov nastanú, keď sa dva balíčky pokúšajú nainštalovať súbory s "
+"rovnakým názvom, ale rozdielnym obsahom. Ak budete pokračovať, budú "
+"konfliktné súbory nahradené stratou predchádzajúceho obsahu."
+
+#. translator: %s is an other command: "This is an alias for 'zypper info -t patch'."
+#: src/commands/commandhelpformatter.h:94
+#, c-format, boost-format
+msgid "This is an alias for '%s'."
+msgstr "Toto je alias pre '%s'."
+
+#: src/commands/commandhelpformatter.h:107
+msgid "Examples:"
+msgstr "Príklady:"
+
+#: src/commands/commandhelpformatter.h:110
+msgid "Arguments:"
+msgstr "Argumenty:"
+
+#: src/commands/commandhelpformatter.h:123 src/utils/flags/zyppflags.cc:627
+msgid "Command options:"
+msgstr "Voľby príkazu:"
+
+#: src/commands/commandhelpformatter.h:126
+msgid "Solver options:"
+msgstr "Voľby riešiteľa:"
+
+#: src/commands/commandhelpformatter.h:129
+msgid "Expert options:"
+msgstr "Pokročilé možnosti:"
+
+#: src/commands/commandhelpformatter.h:132
+msgid "This command has no additional options."
+msgstr "Tento príkaz nemá žiadne ďalšie voľby."
+
+#: src/commands/commandhelpformatter.h:135
+msgid "Legacy options:"
+msgstr "Staršie voľby:"
+
+#. translator: '-r             The same as -f.
+#: src/commands/commandhelpformatter.h:139
+#, boost-format
+msgid "The same as %1%."
+msgstr "Rovnaké ako %1%."
+
+#: src/commands/commandhelpformatter.h:187
+msgid "Usage:"
+msgstr "Použitie:"
+
+#: src/commands/commandhelpformatter.h:189
+msgid "Global Options:"
+msgstr "Globálne voľby:"
+
+#: src/commands/commandhelpformatter.h:191
+msgid "Commands:"
+msgstr "Príkazy:"
+
+#. translators: --details
+#: src/commands/commonflags.h:23 src/commands/inrverify.cc:35
+msgid "Show the detailed installation summary."
+msgstr "Zobraziť podrobný súhrn inštalácie."
+
+#: src/commands/commonflags.h:30
+#, boost-format
+msgid "Type of package (%1%)."
+msgstr "Typ balíka (%1%)."
+
+#. translators: --best-effort
+#: src/commands/commonflags.h:38
+msgid ""
+"Do a 'best effort' approach to update. Updates to a lower than the latest "
+"version are also acceptable."
+msgstr ""
+"Urobiť aktualizáciu najlepším možným spôsobom. Aktualizácia na nižšiu "
+"verziu, aj keď existuje vyššia je tiež prijateľná."
+
+#: src/commands/commonflags.h:45
+msgid "Consider only patches which affect the package management itself."
+msgstr "Uvažovať iba opravy, ktoré ovplyvňujú samotnú správu balíčkov."
+
+#: src/output/Out.h:26 src/repos.cc:125 src/repos.cc:153
+msgid "Yes"
+msgstr "Áno"
+
+#: src/output/Out.h:26 src/locales.cc:72 src/repos.cc:131 src/repos.cc:159
+msgid "No"
+msgstr "Nie"
+
+#. translator: usually followed by a ' ' and some explanatory text
+#: src/output/Out.h:37
+msgid "Note:"
+msgstr "Poznámka:"
+
+#. translator: usually followed by a ' ' and some explanatory text
+#: src/output/Out.h:39
+msgid "Warning:"
+msgstr "Varovanie:"
+
+#. translator: usually followed by a ' ' and some explanatory text
+#: src/output/Out.h:41
+msgid "Error:"
+msgstr "Chyba:"
+
+#: src/output/Out.h:43
+msgid "Continue?"
+msgstr "Pokračovať?"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:23
+msgid "ALIAS"
+msgstr "ALIAS"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:25
+msgid "ALIAS|#|URI"
+msgstr "ALIAS|#|URI"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:27
+msgid "CATEGORY"
+msgstr "KATEGÓRIA"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:29
+msgid "DIR"
+msgstr "ADRESÁR"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:31
+msgid "FILE"
+msgstr "SÚBOR"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:33
+msgid "FILE.repo"
+msgstr "SÚBOR.repo"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:35
+msgid "FORMAT"
+msgstr "FORMAT"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:37
+msgid "INTEGER"
+msgstr "celé_číslo"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:39
+msgid "PATH"
+msgstr "CESTA"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:41
+msgid "SEVERITY"
+msgstr "ZÁVAŽNOSŤ"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:43
+msgid "STRING"
+msgstr "REŤAZEC"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:45
+msgid "TAG"
+msgstr "TAG"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:47
+msgid "TYPE"
+msgstr "typ"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#. translators: property name; short; used like "Name: value"
+#: src/utils/flags/zyppflags.h:49 src/commands/repos/list.cc:42
+#: src/commands/repos/list.cc:268 src/commands/services/list.cc:116
+#: src/repos.cc:1254
+msgid "URI"
+msgstr "URI"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:51
+msgid "YYYY-MM-DD"
+msgstr "RRRR-MM-DD"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:53
+msgid "MODE"
+msgstr "REŽIM"
+
+#. TranslatorExplanation These are reasons for various failures.
+#: src/utils/prompt.h:185
+msgid "Not found"
+msgstr "Nenájdený"
+
+#: src/utils/prompt.h:185
+msgid "I/O error"
+msgstr "Chyba V/V"
+
+#: src/utils/prompt.h:185
+msgid "Invalid object"
+msgstr "Neplatný objekt"
+
+#: src/utils/prompt.h:192
+msgid "Error"
+msgstr "Chyba"
 
 #: src/Command.cc:93
 msgid "Invalid command"
@@ -591,16 +1326,6 @@ msgstr "Mali ste na mysli %1%?"
 #, c-format, boost-format
 msgid "Ignoring option %s when updating the update stack first."
 msgstr "Ignorovanie voľby %s, ak sa najskôr aktualizuje zásobník aktualizácií."
-
-#: src/SolverRequester.h:52
-#, boost-format
-msgid "Suspicious category filter value '%1%'."
-msgstr "Podozrivá hodnota filtra kategórie '%1%'."
-
-#: src/SolverRequester.h:60
-#, boost-format
-msgid "Suspicious severity filter value '%1%'."
-msgstr "Podozrivá hodnota filtra závažnosti '%1%'."
 
 #. translator: '%1%' is a products name
 #. '%2%' is a command to call (like 'zypper dup')
@@ -1444,407 +2169,6 @@ msgstr "Voľba %s tu nemá žiadny vplyv, bude ignorovaná."
 msgid "Non-option program arguments: "
 msgstr "Argumenty programu (okrem volieb): "
 
-#: src/callbacks/keyring.h:32
-msgid ""
-"A GPG pubkey is clearly identified by it's fingerprint. Do not rely the keys "
-"name. If you are not sure whether the presented key is authentic, ask the "
-"repository provider or check his web site. Many provider maintain a web page "
-"showing the fingerprints of the GPG keys they are using."
-msgstr ""
-"Verejný kľúč GPG je jasne identifikovaný svojím odtlačkom. Nespoliehajte sa "
-"na názov kľúča. Ak si nie ste istí, či je predložený kľúč autentický, "
-"opýtajte sa poskytovateľa repozitára alebo skontrolujte jeho webové stránky. "
-"Mnoho poskytovateľov udržiava webovú stránku zobrazujúcu odtlačky GPG "
-"kľúčov, ktoré používajú."
-
-#: src/callbacks/keyring.h:37
-msgid ""
-"Signing data enables the recipient to verify that no modifications occurred "
-"after the data were signed. Accepting data with no, wrong or unknown "
-"signature can lead to a corrupted system and in extreme cases even to a "
-"system compromise."
-msgstr ""
-"Podpisovanie dát umožňuje príjemcovi overiť, že po podpísaní dát nedošlo k "
-"žiadnym zmenám. Prijatie balíkov so žiadnym, zlým alebo neznámym podpisom "
-"môže viesť k poškodeniu systému a v extrémnych prípadoch dokonca ohroziť "
-"bezpečnosť systému."
-
-#. translator: %1% is a file name
-#: src/callbacks/keyring.h:45
-#, boost-format
-msgid ""
-"File '%1%' is the repositories master index file. It ensures the integrity "
-"of the whole repo."
-msgstr ""
-"Súbor '%1%' je hlavný indexový súbor repozitárov. Zabezpečuje integritu "
-"celej zostavy repozitárov."
-
-#: src/callbacks/keyring.h:51
-msgid ""
-"We can't verify that no one meddled with this file, so it might not be "
-"trustworthy anymore! You should not continue unless you know it's safe."
-msgstr ""
-"Nemôžeme overiť, že nikto nezasahoval do tohto súboru, takže už nemôže byť "
-"dôveryhodný! Nemali by ste pokračovať, pokiaľ neviete, že je to bezpečné."
-
-#: src/callbacks/keyring.h:56
-msgid ""
-"This file was modified after it has been signed. This may have been a "
-"malicious change, so it might not be trustworthy anymore! You should not "
-"continue unless you know it's safe."
-msgstr ""
-"Tento súbor bol upravený po jeho podpísaní. Mohla to byť zámernou škodlivá "
-"zmena, takže už nemôže byť dôveryhodný! Nemali by ste pokračovať, pokiaľ "
-"neviete, že je to bezpečné."
-
-#: src/callbacks/keyring.h:85
-msgid "Repository:"
-msgstr "Repozitár:"
-
-#: src/callbacks/keyring.h:87
-msgid "Key Fingerprint:"
-msgstr "Odtlačok kľúča:"
-
-#: src/callbacks/keyring.h:88
-msgid "Key Name:"
-msgstr "Názov kľúča:"
-
-#: src/callbacks/keyring.h:89
-msgid "Key Algorithm:"
-msgstr "Algoritmus kľúča:"
-
-#: src/callbacks/keyring.h:90
-msgid "Key Created:"
-msgstr "Vytvorený kľúč:"
-
-#: src/callbacks/keyring.h:91
-msgid "Key Expires:"
-msgstr "Kľúč vyprší:"
-
-#: src/callbacks/keyring.h:93
-msgid "Subkey:"
-msgstr "Podkľúč:"
-
-#: src/callbacks/keyring.h:94
-msgid "Rpm Name:"
-msgstr "Názov rpm:"
-
-#: src/callbacks/keyring.h:120
-#, boost-format
-msgid "The gpg key signing file '%1%' has expired."
-msgstr "Podpisový súbor gpg kľúča '%1%' vypršal."
-
-#: src/callbacks/keyring.h:126
-#, boost-format
-msgid "The gpg key signing file '%1%' will expire in %2% day."
-msgid_plural "The gpg key signing file '%1%' will expire in %2% days."
-msgstr[0] "Podpisový súbor gpg kľúča '%1%' vyprší za %2% deň."
-msgstr[1] "Podpisový súbor gpg kľúča '%1%' vyprší za %2% dni."
-msgstr[2] "Podpisový súbor gpg kľúča '%1%' vyprší za %2% dní."
-
-#: src/callbacks/keyring.h:149
-#, c-format, boost-format
-msgid "Accepting an unsigned file '%s'."
-msgstr "Prijímam nepodpísaný súbor '%s'."
-
-#: src/callbacks/keyring.h:153
-#, c-format, boost-format
-msgid "Accepting an unsigned file '%s' from repository '%s'."
-msgstr "Prijímam nepodpísaný súbor '%s' z repozitára '%s'."
-
-#. translator: %1% is a file name
-#: src/callbacks/keyring.h:163
-#, boost-format
-msgid "File '%1%' is unsigned."
-msgstr "Súbor '%1%' nie je podpísaný."
-
-#. translator: %1% is a file name, %2% a repositories name
-#: src/callbacks/keyring.h:166
-#, boost-format
-msgid "File '%1%' from repository '%2%' is unsigned."
-msgstr "Súbor '%1%' z repozitára '%2%' nie je podpísaný."
-
-#. TranslatorExplanation: speaking of a file
-#: src/callbacks/keyring.h:183
-#, c-format, boost-format
-msgid "File '%s' is unsigned, continue?"
-msgstr "Súbor '%s' nie je podpísaný. Pokračovať?"
-
-#. TranslatorExplanation: speaking of a file
-#: src/callbacks/keyring.h:187
-#, c-format, boost-format
-msgid "File '%s' from repository '%s' is unsigned, continue?"
-msgstr "Súbor '%s' z repozitára '%s' nie je podpísaný. Pokračovať?"
-
-#: src/callbacks/keyring.h:210
-#, c-format, boost-format
-msgid "Accepting file '%s' signed with an unknown key '%s'."
-msgstr "Prijímam súbor '%s' podpísaný neznámym kľúčom '%s'."
-
-#: src/callbacks/keyring.h:214
-#, c-format, boost-format
-msgid ""
-"Accepting file '%s' from repository '%s' signed with an unknown key '%s'."
-msgstr "Prijatie súboru '%s' z repozitára '%s' podpísaný neznámym kľúčom '%s'."
-
-#. translator: %1% is a file name, %2% is a gpg key ID
-#: src/callbacks/keyring.h:223
-#, boost-format
-msgid "File '%1%' is signed with an unknown key '%2%'."
-msgstr "Súbor '%1%' je podpísaný neznámym kľúčom '%2%'."
-
-#. translator: %1% is a file name, %2% is a gpg key ID, %3% a repositories name
-#: src/callbacks/keyring.h:226
-#, boost-format
-msgid "File '%1%' from repository '%3%' is signed with an unknown key '%2%'."
-msgstr "Súbor '%1%' z repozitára '%3%' je podpísaný neznámym kľúčom '%2%'."
-
-#. translators: the last %s is gpg key ID
-#: src/callbacks/keyring.h:243
-#, c-format, boost-format
-msgid "File '%s' is signed with an unknown key '%s'. Continue?"
-msgstr "Súbor '%s' je podpísaný neznámym kľúčom '%s'. Pokračovať?"
-
-#. translators: the last %s is gpg key ID
-#: src/callbacks/keyring.h:247
-#, c-format, boost-format
-msgid ""
-"File '%s' from repository '%s' is signed with an unknown key '%s'. Continue?"
-msgstr ""
-"Súbor '%s' z repozitára '%s' je podpísaný neznámym kľúčom '%s'. Pokračovať?"
-
-#: src/callbacks/keyring.h:267
-msgid "Automatically importing the following key:"
-msgstr "Automaticky importujem nasledujúci kľúč:"
-
-#: src/callbacks/keyring.h:269
-msgid "Automatically trusting the following key:"
-msgstr "Automaticky dôverujem nasledujúcemu kľúču:"
-
-#: src/callbacks/keyring.h:271
-msgid "New repository or package signing key received:"
-msgstr "Nový kľúč pre podpis repozitára a balíkov:"
-
-#. translators: this message is shown after showing description of the key
-#: src/callbacks/keyring.h:305
-msgid "Do you want to reject the key, trust temporarily, or trust always?"
-msgstr "Prajete si tento kľúč odmietnuť, prijať dočasne alebo prijať natrvalo?"
-
-#. translators: this message is shown after showing description of the key
-#: src/callbacks/keyring.h:308
-msgid "Do you want to reject the key, or trust always?"
-msgstr "Prajete si kľúč odmietnuť alebo vždy dôverovať?"
-
-#. translators: r/t/a stands for Reject/TrustTemporarily/trustAlways(import)
-#. translate to whatever is appropriate for your language
-#. The anserws must be separated by slash characters '/' and must
-#. correspond to reject/trusttemporarily/trustalways in that order.
-#. The answers should be lower case letters.
-#: src/callbacks/keyring.h:326
-msgid "r/t/a/"
-msgstr "o/d/t"
-
-#. translators: the same as r/t/a, but without 'a'
-#: src/callbacks/keyring.h:329
-msgid "r/t"
-msgstr "o/d"
-
-#. translators: r/a stands for Reject/trustAlways(import)
-#. translate to whatever is appropriate for your language
-#. The anserws must be separated by slash characters '/' and must
-#. correspond to reject/trusttemporarily/trustalways in that order.
-#. The answers should be lower case letters.
-#: src/callbacks/keyring.h:336
-msgid "r/a/"
-msgstr "o/d/"
-
-#. translators: help text for the 'r' option in the 'r/t/a' prompt
-#: src/callbacks/keyring.h:342
-msgid "Don't trust the key."
-msgstr "Odmietnuť nedôveryhodný kľúč."
-
-#. translators: help text for the 't' option in the 'r/t/a' prompt
-#: src/callbacks/keyring.h:346
-msgid "Trust the key temporarily."
-msgstr "Dôverovať kľúču dočasne."
-
-#. translators: help text for the 'a' option in the 'r/t/a' prompt
-#: src/callbacks/keyring.h:351
-msgid "Trust the key and import it into trusted keyring."
-msgstr "Dôverovať kľúču a importovať ho do dôveryhodného zväzku."
-
-#: src/callbacks/keyring.h:389
-#, c-format, boost-format
-msgid "Ignoring failed signature verification for file '%s'!"
-msgstr "Ignorujem zlyhanie overenia podpisu pre súbor '%s'!"
-
-#: src/callbacks/keyring.h:392
-#, c-format, boost-format
-msgid ""
-"Ignoring failed signature verification for file '%s' from repository '%s'!"
-msgstr ""
-"Ignorovanie zlyhania overenia podpisu pre súbor '%s' z repozitára '%s'!"
-
-#: src/callbacks/keyring.h:398
-msgid "Double-check this is not caused by some malicious changes in the file!"
-msgstr ""
-"Dôkladne overte, či to nie je spôsobené nejakou zámernou škodlivou zmenou v "
-"súbore!"
-
-#. translator: %1% is a file name
-#: src/callbacks/keyring.h:408
-#, boost-format
-msgid "Signature verification failed for file '%1%'."
-msgstr "Overenie podpisu súboru '%1%' zlyhalo."
-
-#. translator: %1% is a file name, %2% a repositories name
-#: src/callbacks/keyring.h:411
-#, boost-format
-msgid "Signature verification failed for file '%1%' from repository '%2%'."
-msgstr "Overenie podpisu súboru '%1%' z repozitára '%2%' zlyhalo."
-
-#: src/callbacks/keyring.h:460
-msgid ""
-"The rpm database seems to contain old V3 version gpg keys which are "
-"meanwhile obsolete and considered insecure:"
-msgstr ""
-"Zdá sa, že databáza rpm obsahuje gpg kľúče starej verzie V3, ktoré sú "
-"medzitým zastarané a nie sú považované za bezpečné:"
-
-#: src/callbacks/keyring.h:467
-#, boost-format
-msgid "To see details about a key call '%1%'."
-msgstr "Ak chcete vidieť podrobnosti o kľúči, volajte '%1%'."
-
-#: src/callbacks/keyring.h:471
-#, boost-format
-msgid ""
-"Unless you believe the key in question is still in use, you can remove it "
-"from the rpm database calling '%1%'."
-msgstr ""
-"Pokiaľ si nemyslíte, že kľúč sa ešte stále používa, môžete ho odstrániť z "
-"databázy rpm volaním '%1%'."
-
-#. translator: %1% is the number of keys, %2% the name of a repository
-#: src/callbacks/keyring.h:490
-#, boost-format
-msgid "Received %1% new package signing key from repository %2%:"
-msgid_plural "Received %1% new package signing keys from repository %2%:"
-msgstr[0] "Bol prijatý %1% nový podpisový kľúč balíkov z repozitára %2%:"
-msgstr[1] "Boli prijaté %1% nové podpisové kľúče balíkov z repozitára %2%:"
-msgstr[2] ""
-"Bolo prijatých %1% nových podpisových kľúčov balíkov z repozitára %2%:"
-
-#: src/callbacks/keyring.h:494
-msgid ""
-"Those additional keys are usually used to sign packages shipped by the "
-"repository. In order to validate those packages upon download and "
-"installation the new keys will be imported into the rpm database."
-msgstr ""
-"Tieto dodatočné kľúče sa zvyčajne používajú na podpisovanie balíkov "
-"doručených úložiskom. Za účelom overenia týchto balíkov po stiahnutí a "
-"inštalácii sa nové kľúče naimportujú do databázy rpm."
-
-#: src/callbacks/keyring.h:496
-msgid "New:"
-msgstr "Nový:"
-
-#: src/callbacks/keyring.h:502
-msgid ""
-"The repository metadata introducing the new keys have been signed and "
-"validated by the trusted key:"
-msgstr ""
-"Metadáta úložiska zavádzajúce nové kľúče boli podpísané a overené "
-"dôveryhodným kľúčom:"
-
-#: src/callbacks/keyring.h:525
-#, c-format, boost-format
-msgid "No digest for file %s."
-msgstr "Žiadny prehľad pre súbor %s."
-
-#: src/callbacks/keyring.h:533
-#, c-format, boost-format
-msgid "Unknown digest %s for file %s."
-msgstr "Neznámy prehľad %s pre súbor %s."
-
-#: src/callbacks/keyring.h:550
-#, boost-format
-msgid ""
-"Digest verification failed for file '%1%'\n"
-"[%2%]\n"
-"\n"
-"  expected %3%\n"
-"  but got  %4%\n"
-msgstr ""
-"Zlyhalo overenie prehľadu pre súbor '%1%'\n"
-"[%2%]\n"
-"\n"
-"  očakávané %3%\n"
-"  ale získané  %4%\n"
-
-#: src/callbacks/keyring.h:562
-msgid ""
-"Accepting packages with wrong checksums can lead to a corrupted system and "
-"in extreme cases even to a system compromise."
-msgstr ""
-"Prijatie balíkov so zlými kontrolnými súčtami môže viesť k poškodeniu "
-"systému a v extrémnych prípadoch dokonca ohroziť bezpečnosť systému."
-
-#: src/callbacks/keyring.h:570
-#, boost-format
-msgid ""
-"However if you made certain that the file with checksum '%1%..' is secure, "
-"correct\n"
-"and should be used within this operation, enter the first 4 characters of "
-"the checksum\n"
-"to unblock using this file on your own risk. Empty input will discard the "
-"file.\n"
-msgstr ""
-"Avšak, ak ste si istí, že súbor s kontrolným súčtom '%1%..' je bezpečný, "
-"správny\n"
-"a mal by byť použitý v rámci tejto operácie, zadajte prvé 4 znaky "
-"kontrolného súčtu\n"
-"pre odblokovanie použitia tohto súboru na vlastné riziko. Prázdny vstup "
-"vyradí súbor.\n"
-
-#. translators: A prompt option
-#: src/callbacks/keyring.h:577
-msgid "discard"
-msgstr "vyradiť"
-
-#. translators: A prompt option help text
-#: src/callbacks/keyring.h:579
-msgid "Unblock using this file on your own risk."
-msgstr "Odblokovať použitie tohto súboru na vlastné riziko."
-
-#. translators: A prompt option help text
-#: src/callbacks/keyring.h:581
-msgid "Discard the file."
-msgstr "Vyradiť súbor."
-
-#. translators: A prompt text
-#: src/callbacks/keyring.h:585
-msgid "Unblock or discard?"
-msgstr "Odblokovať alebo vyradiť?"
-
-#: src/callbacks/locks.h:27
-msgid ""
-"The following query locks the same objects as the one you want to remove:"
-msgstr ""
-"Nasledujúci dotaz zamyká tie isté objekty ako ten, ktorý chcete odstrániť:"
-
-#: src/callbacks/locks.h:30
-msgid "The following query locks some of the objects you want to unlock:"
-msgstr "Nasledujúci dotaz zamyká niektoré z objektov, ktoré chcete odomknúť:"
-
-#: src/callbacks/locks.h:35 src/callbacks/locks.h:50
-msgid "Do you want to remove this lock?"
-msgstr "Chcete tento zámok odstrániť?"
-
-#: src/callbacks/locks.h:45
-msgid "The following query does not lock anything:"
-msgstr "Nasledujúci dotaz nič nezamyká:"
-
 #. help text for the "Abort, retry, ignore?" prompt for media errors
 #: src/callbacks/media.cc:27
 msgid "Skip retrieval of the file and abort current operation."
@@ -1975,203 +2299,6 @@ msgstr "Meno používateľa"
 #: src/callbacks/media.cc:328
 msgid "Password"
 msgstr "Heslo"
-
-#: src/callbacks/repo.h:49
-msgid "Retrieving delta"
-msgstr "Sťahujem delta balík"
-
-#. translators: this text is a progress display label e.g. "Applying delta foo [42%]"
-#: src/callbacks/repo.h:74
-msgid "Applying delta"
-msgstr "Aplikovanie delta balíka"
-
-#. TranslatorExplanation %s is package size like "5.6 M"
-#: src/callbacks/repo.h:103
-#, c-format, boost-format
-msgid "(%s unpacked)"
-msgstr "(%s po rozbalení)"
-
-#: src/callbacks/repo.h:112
-#, boost-format
-msgid "In cache %1%"
-msgstr "Vo vyrovnávacej pamäti %1%"
-
-#: src/callbacks/repo.h:128
-#, c-format, boost-format
-msgid "Retrieving %s %s-%s.%s"
-msgstr "Sťahujem %s %s-%s.%s"
-
-#: src/callbacks/repo.h:217
-msgid "Signature verification failed"
-msgstr "Overenie podpisu zlyhalo"
-
-#: src/callbacks/repo.h:237
-msgid "Accepting package despite the error."
-msgstr "Prijatie balíka napriek chybe."
-
-#. TranslatorExplanation speaking of a script - "Running: script file name (package name, script dir)"
-#: src/callbacks/rpm.h:184
-#, c-format, boost-format
-msgid "Running: %s  (%s, %s)"
-msgstr "Spúšťam: %s  (%s, %s)"
-
-#: src/callbacks/rpm.h:267
-#, c-format, boost-format
-msgid "Removal of %s failed:"
-msgstr "Zlyhalo odstránenie %s:"
-
-#. translators: This text is a progress display label e.g. "Removing packagename-x.x.x [42%]"
-#: src/callbacks/rpm.h:307
-#, c-format, boost-format
-msgid "Removing %s"
-msgstr "Odstraňovanie %s"
-
-#: src/callbacks/rpm.h:344
-#, c-format, boost-format
-msgid "Installation of %s failed:"
-msgstr "Inštalácia %s zlyhala:"
-
-#. TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
-#: src/callbacks/rpm.h:384
-#, c-format, boost-format
-msgid "Installing: %s"
-msgstr "Inštalovanie: %s"
-
-#. translators: A progressbar label
-#: src/callbacks/rpm.h:403
-msgid "Checking for file conflicts:"
-msgstr "Kontrola konfliktov súborov:"
-
-#. TranslatorExplanation %1%(number of packages); detailed list follows
-#: src/callbacks/rpm.h:454
-#, boost-format
-msgid ""
-"%1% package had to be excluded from file conflicts check because it is not "
-"yet download."
-msgid_plural ""
-"%1% packages had to be excluded from file conflicts check because they are "
-"not yet downloaded."
-msgstr[0] ""
-"%1% balík musel byť vylúčený z kontroly konfliktov súborov, pretože ešte "
-"nebol stiahnutý."
-msgstr[1] ""
-"%1% balíky museli byť vylúčené z kontroly konfliktov súborov, pretože ešte "
-"neboli stiahnuté."
-msgstr[2] ""
-"%1% balíkov muselo byť vylúčených z kontroly konfliktov súborov, pretože "
-"ešte neboli stiahnuté."
-
-#. TranslatorExplanation %1%(commandline option)
-#: src/callbacks/rpm.h:460
-#, boost-format
-msgid ""
-"Checking for file conflicts requires not installed packages to be downloaded "
-"in advance in order to access their file lists. See option '%1%' in the "
-"zypper manual page for details."
-msgstr ""
-"Kontrola konfliktov súborov vyžaduje, aby sa balíky, ktoré nie sú "
-"nainštalované, stiahli v predstihu kvôli prístupu k ich zoznamom súborov. "
-"ďalšie Pre ďalšie podrobnosti pozrieť voľbu '%1%' v manuálovej stránke "
-"zypper."
-
-#. TranslatorExplanation %1%(number of conflicts); detailed list follows
-#: src/callbacks/rpm.h:470
-#, boost-format
-msgid "Detected %1% file conflict:"
-msgid_plural "Detected %1% file conflicts:"
-msgstr[0] "Zistený %1% konflikt súborov:"
-msgstr[1] "Zistené %1% konflikty súborov:"
-msgstr[2] "Zistených %1% konfliktov súborov:"
-
-#: src/callbacks/rpm.h:478
-msgid "Conflicting files will be replaced."
-msgstr "Konfliktné súbory budú nahradené."
-
-#. TranslatorExplanation Problem description before asking whether to "Continue? [yes/no] (no):"
-#: src/callbacks/rpm.h:484
-msgid ""
-"File conflicts happen when two packages attempt to install files with the "
-"same name but different contents. If you continue, conflicting files will be "
-"replaced losing the previous content."
-msgstr ""
-"Konflikty súborov nastanú, keď sa dva balíčky pokúšajú nainštalovať súbory s "
-"rovnakým názvom, ale rozdielnym obsahom. Ak budete pokračovať, budú "
-"konfliktné súbory nahradené stratou predchádzajúceho obsahu."
-
-#. translator: %s is an other command: "This is an alias for 'zypper info -t patch'."
-#: src/commands/commandhelpformatter.h:94
-#, c-format, boost-format
-msgid "This is an alias for '%s'."
-msgstr "Toto je alias pre '%s'."
-
-#: src/commands/commandhelpformatter.h:107
-msgid "Examples:"
-msgstr "Príklady:"
-
-#: src/commands/commandhelpformatter.h:110
-msgid "Arguments:"
-msgstr "Argumenty:"
-
-#: src/commands/commandhelpformatter.h:123 src/utils/flags/zyppflags.cc:627
-msgid "Command options:"
-msgstr "Voľby príkazu:"
-
-#: src/commands/commandhelpformatter.h:126
-msgid "Solver options:"
-msgstr "Voľby riešiteľa:"
-
-#: src/commands/commandhelpformatter.h:129
-msgid "Expert options:"
-msgstr "Pokročilé možnosti:"
-
-#: src/commands/commandhelpformatter.h:132
-msgid "This command has no additional options."
-msgstr "Tento príkaz nemá žiadne ďalšie voľby."
-
-#: src/commands/commandhelpformatter.h:135
-msgid "Legacy options:"
-msgstr "Staršie voľby:"
-
-#. translator: '-r             The same as -f.
-#: src/commands/commandhelpformatter.h:139
-#, boost-format
-msgid "The same as %1%."
-msgstr "Rovnaké ako %1%."
-
-#: src/commands/commandhelpformatter.h:187
-msgid "Usage:"
-msgstr "Použitie:"
-
-#: src/commands/commandhelpformatter.h:189
-msgid "Global Options:"
-msgstr "Globálne voľby:"
-
-#: src/commands/commandhelpformatter.h:191
-msgid "Commands:"
-msgstr "Príkazy:"
-
-#. translators: --details
-#: src/commands/commonflags.h:23 src/commands/inrverify.cc:35
-msgid "Show the detailed installation summary."
-msgstr "Zobraziť podrobný súhrn inštalácie."
-
-#: src/commands/commonflags.h:30
-#, boost-format
-msgid "Type of package (%1%)."
-msgstr "Typ balíka (%1%)."
-
-#. translators: --best-effort
-#: src/commands/commonflags.h:38
-msgid ""
-"Do a 'best effort' approach to update. Updates to a lower than the latest "
-"version are also acceptable."
-msgstr ""
-"Urobiť aktualizáciu najlepším možným spôsobom. Aktualizácia na nižšiu "
-"verziu, aj keď existuje vyššia je tiež prijateľná."
-
-#: src/commands/commonflags.h:45
-msgid "Consider only patches which affect the package management itself."
-msgstr "Uvažovať iba opravy, ktoré ovplyvňujú samotnú správu balíčkov."
 
 #: src/commands/conditions.cc:19
 msgid "Root privileges are required to run this command."
@@ -2586,14 +2713,18 @@ msgstr ""
 msgid "Restrict the lock to the specified repository."
 msgstr "Obmedziť zámok na zadaný repozitár."
 
-#: src/commands/locks/add.cc:80
+#: src/commands/locks/add.cc:48
+msgid "Reason for specific lock."
+msgstr ""
+
+#: src/commands/locks/add.cc:81
 msgid "Specified lock has been successfully added."
 msgid_plural "Specified locks have been successfully added."
 msgstr[0] "Zadaný zámok bol úspešne pridaný."
 msgstr[1] "Zadané zámky boli úspešne pridané."
 msgstr[2] "Zadané zámky boli úspešne pridané."
 
-#: src/commands/locks/add.cc:87
+#: src/commands/locks/add.cc:88
 msgid "Problem adding the package lock:"
 msgstr "Chyba pri pridávaní zámku balíkov:"
 
@@ -2657,48 +2788,52 @@ msgstr "Typ"
 msgid "Repository"
 msgstr "Repozitár"
 
+#: src/commands/locks/list.cc:138
+msgid "Comment"
+msgstr ""
+
 #. translators: locks table value
-#: src/commands/locks/list.cc:156 src/commands/locks/list.cc:232
+#: src/commands/locks/list.cc:156 src/commands/locks/list.cc:235
 msgid "(multiple)"
 msgstr "(viacero)"
 
 #. translators: locks table value
-#: src/commands/locks/list.cc:159 src/commands/locks/list.cc:230
+#: src/commands/locks/list.cc:159 src/commands/locks/list.cc:233
 msgid "(any)"
 msgstr "(akýkoľvek)"
 
 #. translators: property name; short; used like "Name: value"
-#: src/commands/locks/list.cc:195
+#: src/commands/locks/list.cc:198
 msgid "Keep installed"
 msgstr "Ponechať nainštalované"
 
 #. translators: property name; short; used like "Name: value"
-#: src/commands/locks/list.cc:203
+#: src/commands/locks/list.cc:206
 msgid "Do not install"
 msgstr "Neinštalovať"
 
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
-#: src/commands/locks/list.cc:256
+#: src/commands/locks/list.cc:259
 msgid "locks (ll) [OPTIONS]"
 msgstr "locks (ll) [voľby]"
 
-#: src/commands/locks/list.cc:257
+#: src/commands/locks/list.cc:260
 msgid "List current package locks."
 msgstr "Zoznam aktuálnych zámkov balíka."
 
-#: src/commands/locks/list.cc:285
+#: src/commands/locks/list.cc:288
 msgid "Show the number of resolvables matched by each lock."
 msgstr "Ukázať počet riešení vyhovujúcich podľa každého zámku."
 
-#: src/commands/locks/list.cc:286
+#: src/commands/locks/list.cc:289
 msgid "List the resolvables matched by each lock."
 msgstr "Zoznam riešení vyhovujúcich podľa každého zámku."
 
-#: src/commands/locks/list.cc:300
+#: src/commands/locks/list.cc:303
 msgid "Error reading the locks file:"
 msgstr "Chyba pri čítaní súboru so zámkami:"
 
-#: src/commands/locks/list.cc:307
+#: src/commands/locks/list.cc:310
 msgid "There are no package locks defined."
 msgstr "Nie sú definované žiadne zámky balíkov."
 
@@ -3448,14 +3583,6 @@ msgstr "Vyčistiť vyrovnávacie pamäte pre metadáta aj balíky."
 #: src/commands/services/list.cc:104
 msgid "Alias"
 msgstr "Alias"
-
-#. translators: property name; short; used like "Name: value"
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/commands/repos/list.cc:42 src/commands/repos/list.cc:268
-#: src/commands/services/list.cc:116 src/repos.cc:1254
-#: src/utils/flags/zyppflags.h:49
-msgid "URI"
-msgstr "URI"
 
 #. 'enabled' flag
 #. translators: property name; short; used like "Name: value"
@@ -5470,10 +5597,6 @@ msgstr "Požadovaný"
 msgid "Fallback"
 msgstr "Núdzové riešenie"
 
-#: src/locales.cc:72 src/output/Out.h:26 src/repos.cc:131 src/repos.cc:159
-msgid "No"
-msgstr "Nie"
-
 #. translators: header of table column - the language code, e.g. en_US
 #: src/locales.cc:174
 msgid "Code"
@@ -5618,29 +5741,6 @@ msgstr "Zdrojový balík %s-%s bol úspešne nainštalovaný."
 #, c-format, boost-format
 msgid "Problem installing source package %s-%s:"
 msgstr "Problém pri inštalovaní zdrojového balíka %s-%s:"
-
-#: src/output/Out.h:26 src/repos.cc:125 src/repos.cc:153
-msgid "Yes"
-msgstr "Áno"
-
-#. translator: usually followed by a ' ' and some explanatory text
-#: src/output/Out.h:37
-msgid "Note:"
-msgstr "Poznámka:"
-
-#. translator: usually followed by a ' ' and some explanatory text
-#: src/output/Out.h:39
-msgid "Warning:"
-msgstr "Varovanie:"
-
-#. translator: usually followed by a ' ' and some explanatory text
-#: src/output/Out.h:41
-msgid "Error:"
-msgstr "Chyba:"
-
-#: src/output/Out.h:43
-msgid "Continue?"
-msgstr "Pokračovať?"
 
 #. Since this message will be emitted before we know if the current output is XML or Normal we need to send this message to stderr
 #. to not break scripts that use xml output (bsc#1172925)
@@ -6802,81 +6902,6 @@ msgstr "Mimo rozsah"
 msgid "Unknown error while assigning the value %1% to flag %2%."
 msgstr "Neznáma chyba pri priradení hodnoty %1% príznaku %2%."
 
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:23
-msgid "ALIAS"
-msgstr "ALIAS"
-
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:25
-msgid "ALIAS|#|URI"
-msgstr "ALIAS|#|URI"
-
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:27
-msgid "CATEGORY"
-msgstr "KATEGÓRIA"
-
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:29
-msgid "DIR"
-msgstr "ADRESÁR"
-
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:31
-msgid "FILE"
-msgstr "SÚBOR"
-
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:33
-msgid "FILE.repo"
-msgstr "SÚBOR.repo"
-
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:35
-msgid "FORMAT"
-msgstr "FORMAT"
-
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:37
-msgid "INTEGER"
-msgstr "celé_číslo"
-
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:39
-msgid "PATH"
-msgstr "CESTA"
-
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:41
-msgid "SEVERITY"
-msgstr "ZÁVAŽNOSŤ"
-
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:43
-msgid "STRING"
-msgstr "REŤAZEC"
-
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:45
-msgid "TAG"
-msgstr "TAG"
-
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:47
-msgid "TYPE"
-msgstr "typ"
-
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:51
-msgid "YYYY-MM-DD"
-msgstr "RRRR-MM-DD"
-
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:53
-msgid "MODE"
-msgstr "REŽIM"
-
 #. For '-garbage' argument, with 'a', 'b', and 'e' as known options,
 #. getopt_long reports 'a', 'b', and 'e' as known options.
 #. The rest ends here and it is either the last one from previous argument
@@ -7105,34 +7130,34 @@ msgstr "Nemožno odhadnúť hodnotu pre <platform>."
 msgid "Please use obs://<project>/<platform>"
 msgstr "Prosím, použite obs://<project>/<platform>"
 
-#: src/utils/misc.cc:550 src/utils/misc.cc:591
+#: src/utils/misc.cc:550 src/utils/misc.cc:596
 #, c-format, boost-format
 msgid "Example: %s"
 msgstr "Príklad: %s"
 
-#: src/utils/misc.cc:590
+#: src/utils/misc.cc:595
 msgid "Invalid OBS URI."
 msgstr "Neplatná adresa URI OBS."
 
-#: src/utils/misc.cc:590
+#: src/utils/misc.cc:595
 msgid "Correct form is obs://<project>/[platform]"
 msgstr "Správny tvar je obs://<projekt>/[platforma]"
 
-#: src/utils/misc.cc:640
+#: src/utils/misc.cc:645
 msgid "Problem copying the specified RPM file to the cache directory."
 msgstr ""
 "Nastal problém pri kopírovaní zadaného RPM súboru do adresára vyrovnávacej "
 "pamäte."
 
-#: src/utils/misc.cc:641
+#: src/utils/misc.cc:646
 msgid "Perhaps you are running out of disk space."
 msgstr "Možno nemáte dostatok miesta na disku."
 
-#: src/utils/misc.cc:649
+#: src/utils/misc.cc:654
 msgid "Problem retrieving the specified RPM file"
 msgstr "Problém pri sťahovaní zadaného RPM súboru"
 
-#: src/utils/misc.cc:650
+#: src/utils/misc.cc:655
 msgid "Please check whether the file is accessible."
 msgstr "Prosím overte, či je súbor dostupný."
 
@@ -7237,23 +7262,6 @@ msgid ""
 msgstr ""
 "Ak nič iné nefunguje, zadajte '#1' pre výber 1. voľby, '#2' pre výber 2. "
 "voľby, ..."
-
-#. TranslatorExplanation These are reasons for various failures.
-#: src/utils/prompt.h:185
-msgid "Not found"
-msgstr "Nenájdený"
-
-#: src/utils/prompt.h:185
-msgid "I/O error"
-msgstr "Chyba V/V"
-
-#: src/utils/prompt.h:185
-msgid "Invalid object"
-msgstr "Neplatný objekt"
-
-#: src/utils/prompt.h:192
-msgid "Error"
-msgstr "Chyba"
 
 # =============================================================================
 #~ msgid "addlock (al) [OPTIONS] <PACKAGENAME> ..."

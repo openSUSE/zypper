@@ -8,17 +8,754 @@ msgid ""
 msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-30 14:58+0200\n"
+"POT-Creation-Date: 2021-07-21 09:46+0200\n"
 "PO-Revision-Date: 2021-07-12 11:10+0000\n"
 "Last-Translator: David Medina <medipas@gmail.com>\n"
-"Language-Team: Catalan <https://l10n.opensuse.org/projects/zypper/master/ca/>"
-"\n"
+"Language-Team: Catalan <https://l10n.opensuse.org/projects/zypper/master/ca/"
+">\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Weblate 4.6.2\n"
+
+#: src/SolverRequester.h:52
+#, boost-format
+msgid "Suspicious category filter value '%1%'."
+msgstr "Valor de filtre de categoria sospitós: \"%1%\"."
+
+#: src/SolverRequester.h:60
+#, boost-format
+msgid "Suspicious severity filter value '%1%'."
+msgstr "Valor de filtre de severitat sospitós: \"%1%\"."
+
+#: src/callbacks/keyring.h:32
+msgid ""
+"A GPG pubkey is clearly identified by it's fingerprint. Do not rely the keys "
+"name. If you are not sure whether the presented key is authentic, ask the "
+"repository provider or check his web site. Many provider maintain a web page "
+"showing the fingerprints of the GPG keys they are using."
+msgstr ""
+"Una clau pública GPG s’identifica clarament per l'empremta digital. No "
+"confieu en el nom de les claus. Si no teniu la seguretat que la clau "
+"presentada sigui autèntica, pregunteu-ho al proveïdor del repositori o "
+"consulteu-ne el lloc web. Molts proveïdors mantenen una pàgina web que "
+"mostra les empremtes digitals de les claus GPG que usen."
+
+#: src/callbacks/keyring.h:37
+msgid ""
+"Signing data enables the recipient to verify that no modifications occurred "
+"after the data were signed. Accepting data with no, wrong or unknown "
+"signature can lead to a corrupted system and in extreme cases even to a "
+"system compromise."
+msgstr ""
+"Signar dades permet al receptor verificar que no hi ha hagut modificacions "
+"després de la signatura de les dades. Acceptar dades sense signatura, amb "
+"signatura incorrecta o desconeguda pot portar a un sistema corrupte i, en "
+"casos extrems, fins i tot a un sistema compromès."
+
+#. translator: %1% is a file name
+#: src/callbacks/keyring.h:45
+#, boost-format
+msgid ""
+"File '%1%' is the repositories master index file. It ensures the integrity "
+"of the whole repo."
+msgstr ""
+"El fitxer \"%1%\" és al fitxer d'índex mestre de repositoris. Assegura la "
+"integritat de tot el repositori."
+
+#: src/callbacks/keyring.h:51
+msgid ""
+"We can't verify that no one meddled with this file, so it might not be "
+"trustworthy anymore! You should not continue unless you know it's safe."
+msgstr ""
+"No podem verificar que ningú hagi potinejat el fitxer; per tant, pot ja no "
+"ser de confiança! No hauríeu de continuar si no és que sabeu que és segur."
+
+#: src/callbacks/keyring.h:56
+msgid ""
+"This file was modified after it has been signed. This may have been a "
+"malicious change, so it might not be trustworthy anymore! You should not "
+"continue unless you know it's safe."
+msgstr ""
+"Aquest fitxer s'ha modificat després de ser signat. Això pot haver estat un "
+"canvi maliciós; per tant, pot ja no ser de confiança! No hauríeu de "
+"continuar si no és que sabeu que és segur."
+
+#: src/callbacks/keyring.h:85
+msgid "Repository:"
+msgstr "Repositori:"
+
+#: src/callbacks/keyring.h:87
+msgid "Key Fingerprint:"
+msgstr "Empremta de la clau:"
+
+#: src/callbacks/keyring.h:88
+msgid "Key Name:"
+msgstr "Nom de la clau:"
+
+#: src/callbacks/keyring.h:89
+msgid "Key Algorithm:"
+msgstr "Algorisme de la clau:"
+
+#: src/callbacks/keyring.h:90
+msgid "Key Created:"
+msgstr "Creació de la clau:"
+
+#: src/callbacks/keyring.h:91
+msgid "Key Expires:"
+msgstr "Caducitat de la clau:"
+
+#: src/callbacks/keyring.h:93
+msgid "Subkey:"
+msgstr "Subclau:"
+
+#: src/callbacks/keyring.h:94
+msgid "Rpm Name:"
+msgstr "Nom Rpm:"
+
+#: src/callbacks/keyring.h:120
+#, boost-format
+msgid "The gpg key signing file '%1%' has expired."
+msgstr "El fitxer %1% està signat amb una clau gpg caducada."
+
+#: src/callbacks/keyring.h:126
+#, boost-format
+msgid "The gpg key signing file '%1%' will expire in %2% day."
+msgid_plural "The gpg key signing file '%1%' will expire in %2% days."
+msgstr[0] "La signatura gpg del fitxer %1% caducarà d'aquí a %2% dia."
+msgstr[1] "La signatura gpg del fitxer %1% caducarà d'aquí a %2% dies."
+
+#: src/callbacks/keyring.h:149
+#, c-format, boost-format
+msgid "Accepting an unsigned file '%s'."
+msgstr "S'accepta el fitxer %s no signat."
+
+#: src/callbacks/keyring.h:153
+#, c-format, boost-format
+msgid "Accepting an unsigned file '%s' from repository '%s'."
+msgstr "S'accepta el fitxer no signat %s del repositori %s."
+
+#. translator: %1% is a file name
+#: src/callbacks/keyring.h:163
+#, boost-format
+msgid "File '%1%' is unsigned."
+msgstr "El fitxer \"%1%\" no està signat."
+
+#. translator: %1% is a file name, %2% a repositories name
+#: src/callbacks/keyring.h:166
+#, boost-format
+msgid "File '%1%' from repository '%2%' is unsigned."
+msgstr "El fitxer \"%1%\" del repositori \"%2%\" no està signat."
+
+#. TranslatorExplanation: speaking of a file
+#: src/callbacks/keyring.h:183
+#, c-format, boost-format
+msgid "File '%s' is unsigned, continue?"
+msgstr "El fitxer %s està sense signar, voleu continuar?"
+
+#. TranslatorExplanation: speaking of a file
+#: src/callbacks/keyring.h:187
+#, c-format, boost-format
+msgid "File '%s' from repository '%s' is unsigned, continue?"
+msgstr "El fitxer %s del repositori %s està sense signar, voleu continuar?"
+
+#: src/callbacks/keyring.h:210
+#, c-format, boost-format
+msgid "Accepting file '%s' signed with an unknown key '%s'."
+msgstr "S'accepta el fitxer %s signat amb una clau desconeguda: \"%s\"."
+
+#: src/callbacks/keyring.h:214
+#, c-format, boost-format
+msgid ""
+"Accepting file '%s' from repository '%s' signed with an unknown key '%s'."
+msgstr ""
+"S'accepta el fitxer %s del repositori %s signat amb una clau desconeguda: "
+"\"%s\"."
+
+#. translator: %1% is a file name, %2% is a gpg key ID
+#: src/callbacks/keyring.h:223
+#, boost-format
+msgid "File '%1%' is signed with an unknown key '%2%'."
+msgstr "El fitxer \"%1%\" està signat amb una clau desconeguda: \"%2%\"."
+
+#. translator: %1% is a file name, %2% is a gpg key ID, %3% a repositories name
+#: src/callbacks/keyring.h:226
+#, boost-format
+msgid "File '%1%' from repository '%3%' is signed with an unknown key '%2%'."
+msgstr ""
+"El fitxer \"%1%\" del repositori \"%3%\" està signat amb una clau "
+"desconeguda: \"%2%\"."
+
+#. translators: the last %s is gpg key ID
+#: src/callbacks/keyring.h:243
+#, c-format, boost-format
+msgid "File '%s' is signed with an unknown key '%s'. Continue?"
+msgstr "El fitxer %s està signat amb una clau desconeguda: \"%s\". Continuo?"
+
+#. translators: the last %s is gpg key ID
+#: src/callbacks/keyring.h:247
+#, c-format, boost-format
+msgid ""
+"File '%s' from repository '%s' is signed with an unknown key '%s'. Continue?"
+msgstr ""
+"El fitxer %s del repositori %s està signat amb una clau desconeguda: \"%s\". "
+"Continuo?"
+
+#: src/callbacks/keyring.h:267
+msgid "Automatically importing the following key:"
+msgstr "S'importa automàticament la clau següent:"
+
+#: src/callbacks/keyring.h:269
+msgid "Automatically trusting the following key:"
+msgstr "Es confia automàticament en el certificat següent:"
+
+#: src/callbacks/keyring.h:271
+msgid "New repository or package signing key received:"
+msgstr "Nova clau de signatura de repositori o paquet rebuda:"
+
+#. translators: this message is shown after showing description of the key
+#: src/callbacks/keyring.h:305
+msgid "Do you want to reject the key, trust temporarily, or trust always?"
+msgstr ""
+"Voleu _rebutjar la signatura, confiar-hi _temporalment o confiar-hi _sempre?"
+
+#. translators: this message is shown after showing description of the key
+#: src/callbacks/keyring.h:308
+msgid "Do you want to reject the key, or trust always?"
+msgstr "Voleu rebutjar la clau o confiar-hi sempre?"
+
+#. translators: r/t/a stands for Reject/TrustTemporarily/trustAlways(import)
+#. translate to whatever is appropriate for your language
+#. The anserws must be separated by slash characters '/' and must
+#. correspond to reject/trusttemporarily/trustalways in that order.
+#. The answers should be lower case letters.
+#: src/callbacks/keyring.h:326
+msgid "r/t/a/"
+msgstr "r/t/s/"
+
+#. translators: the same as r/t/a, but without 'a'
+#: src/callbacks/keyring.h:329
+msgid "r/t"
+msgstr "r/t"
+
+#. translators: r/a stands for Reject/trustAlways(import)
+#. translate to whatever is appropriate for your language
+#. The anserws must be separated by slash characters '/' and must
+#. correspond to reject/trusttemporarily/trustalways in that order.
+#. The answers should be lower case letters.
+#: src/callbacks/keyring.h:336
+msgid "r/a/"
+msgstr "r/c/"
+
+#. translators: help text for the 'r' option in the 'r/t/a' prompt
+#: src/callbacks/keyring.h:342
+msgid "Don't trust the key."
+msgstr "No confiïs en la clau."
+
+#. translators: help text for the 't' option in the 'r/t/a' prompt
+#: src/callbacks/keyring.h:346
+msgid "Trust the key temporarily."
+msgstr "Confia en la clau temporalment."
+
+#. translators: help text for the 'a' option in the 'r/t/a' prompt
+#: src/callbacks/keyring.h:351
+msgid "Trust the key and import it into trusted keyring."
+msgstr "Confia en la clau i importa-la a l'anell de claus de confiança."
+
+#: src/callbacks/keyring.h:389
+#, c-format, boost-format
+msgid "Ignoring failed signature verification for file '%s'!"
+msgstr "S'ignora la verificació fallida de la signatura per al fitxer %s!"
+
+#: src/callbacks/keyring.h:392
+#, c-format, boost-format
+msgid ""
+"Ignoring failed signature verification for file '%s' from repository '%s'!"
+msgstr ""
+"S'ignora la verificació fallida de la signatura per al fitxer %s del "
+"repositori %s!"
+
+#: src/callbacks/keyring.h:398
+msgid "Double-check this is not caused by some malicious changes in the file!"
+msgstr ""
+"Aquesta doble comprovació no està causada per cap canvi maliciós del fitxer!"
+
+#. translator: %1% is a file name
+#: src/callbacks/keyring.h:408
+#, boost-format
+msgid "Signature verification failed for file '%1%'."
+msgstr "Ha fallat la verificació de la signatura del fitxer %1%."
+
+#. translator: %1% is a file name, %2% a repositories name
+#: src/callbacks/keyring.h:411
+#, boost-format
+msgid "Signature verification failed for file '%1%' from repository '%2%'."
+msgstr ""
+"Ha fallat la verificació de la signatura del fitxer %1% del repositori %2%."
+
+#: src/callbacks/keyring.h:460
+msgid ""
+"The rpm database seems to contain old V3 version gpg keys which are "
+"meanwhile obsolete and considered insecure:"
+msgstr ""
+"Sembla que la base de dades d'rpm conté claus gpg de l'antiga versió V3, que "
+"són obsoletes i que es consideren no segures:"
+
+#: src/callbacks/keyring.h:467
+#, boost-format
+msgid "To see details about a key call '%1%'."
+msgstr "Per veure detalls sobre una clau: \"%1%\"."
+
+#: src/callbacks/keyring.h:471
+#, boost-format
+msgid ""
+"Unless you believe the key in question is still in use, you can remove it "
+"from the rpm database calling '%1%'."
+msgstr ""
+"Si no és que cregueu que la clau en qüestió encara s'usi, podeu suprimir-la "
+"de la base de dades d'rpm amb \"%1%\"."
+
+#. translator: %1% is the number of keys, %2% the name of a repository
+#: src/callbacks/keyring.h:490
+#, boost-format
+msgid "Received %1% new package signing key from repository %2%:"
+msgid_plural "Received %1% new package signing keys from repository %2%:"
+msgstr[0] ""
+"S'ha rebut %1% clau de signatura de paquets nova del repositori %2%:"
+msgstr[1] ""
+"S'han rebut %1% claus de signatura de paquets noves del repositori %2%:"
+
+#: src/callbacks/keyring.h:494
+msgid ""
+"Those additional keys are usually used to sign packages shipped by the "
+"repository. In order to validate those packages upon download and "
+"installation the new keys will be imported into the rpm database."
+msgstr ""
+"Aquestes claus addicionals solen usar-se per signar paquets enviats pel "
+"repositori. Per tal de validar aquests paquets a la descàrrega i la "
+"instal·lació, les claus noves s'importaran a la base de dades d'rpm."
+
+#: src/callbacks/keyring.h:496
+msgid "New:"
+msgstr "Nova:"
+
+#: src/callbacks/keyring.h:502
+msgid ""
+"The repository metadata introducing the new keys have been signed and "
+"validated by the trusted key:"
+msgstr ""
+"Les metadades del repositori que introdueixen les claus noves han estat "
+"signades i validades per la clau de confiança següent:"
+
+#: src/callbacks/keyring.h:525
+#, c-format, boost-format
+msgid "No digest for file %s."
+msgstr "No hi ha resum per al fitxer %s."
+
+#: src/callbacks/keyring.h:533
+#, c-format, boost-format
+msgid "Unknown digest %s for file %s."
+msgstr "El resum %s és desconegut per al fitxer %s."
+
+#: src/callbacks/keyring.h:550
+#, boost-format
+msgid ""
+"Digest verification failed for file '%1%'\n"
+"[%2%]\n"
+"\n"
+"  expected %3%\n"
+"  but got  %4%\n"
+msgstr ""
+"Ha fallat el resum de verificació per al fitxer %1%\n"
+"[%2%]\n"
+"\n"
+"  s'esperava %3%\n"
+"  però s'ha obtingut %4%\n"
+
+#: src/callbacks/keyring.h:562
+msgid ""
+"Accepting packages with wrong checksums can lead to a corrupted system and "
+"in extreme cases even to a system compromise."
+msgstr ""
+"Acceptar paquets amb sumes de verificació errònies pot conduir a un sistema "
+"corromput i, en casos extrems, a un sistema compromès."
+
+#: src/callbacks/keyring.h:570
+#, boost-format
+msgid ""
+"However if you made certain that the file with checksum '%1%..' is secure, "
+"correct\n"
+"and should be used within this operation, enter the first 4 characters of "
+"the checksum\n"
+"to unblock using this file on your own risk. Empty input will discard the "
+"file.\n"
+msgstr ""
+"Tot i això, si teniu clar que el fitxer amb la suma \"%1%..\" és segur, "
+"correcte\n"
+"i que s'hauria d'usar en aquesta operació, escriviu els primers 4 caràcters "
+"de la suma per\n"
+"desblocar-lo segons la vostra responsabilitat. Si ho deixeu en blanc es "
+"descartarà el fitxer.\n"
+
+#. translators: A prompt option
+#: src/callbacks/keyring.h:577
+msgid "discard"
+msgstr "descarta"
+
+#. translators: A prompt option help text
+#: src/callbacks/keyring.h:579
+msgid "Unblock using this file on your own risk."
+msgstr "Desbloqueu l'ús d'aquest fitxer segons la vostra responsabilitat."
+
+#. translators: A prompt option help text
+#: src/callbacks/keyring.h:581
+msgid "Discard the file."
+msgstr "Descarta el fitxer."
+
+#. translators: A prompt text
+#: src/callbacks/keyring.h:585
+msgid "Unblock or discard?"
+msgstr "El desbloco o el descarto?"
+
+#: src/callbacks/locks.h:27
+msgid ""
+"The following query locks the same objects as the one you want to remove:"
+msgstr ""
+"La consulta següent bloca els mateixos objectes que el que voleu suprimir:"
+
+#: src/callbacks/locks.h:30
+msgid "The following query locks some of the objects you want to unlock:"
+msgstr "La consulta següent bloca alguns dels objectes que voleu desblocar:"
+
+# power-off message
+#: src/callbacks/locks.h:35 src/callbacks/locks.h:50
+msgid "Do you want to remove this lock?"
+msgstr "Voleu suprimir aquest bloqueig?"
+
+#: src/callbacks/locks.h:45
+msgid "The following query does not lock anything:"
+msgstr "La consulta següent no bloca res:"
+
+#: src/callbacks/repo.h:49
+msgid "Retrieving delta"
+msgstr "Obtenint delta"
+
+#. translators: this text is a progress display label e.g. "Applying delta foo [42%]"
+#: src/callbacks/repo.h:74
+msgid "Applying delta"
+msgstr "Aplicant delta"
+
+#. TranslatorExplanation %s is package size like "5.6 M"
+#: src/callbacks/repo.h:103
+#, c-format, boost-format
+msgid "(%s unpacked)"
+msgstr "(%s desempaquetat)"
+
+#: src/callbacks/repo.h:112
+#, boost-format
+msgid "In cache %1%"
+msgstr "A la memòria cau: %1%"
+
+#: src/callbacks/repo.h:128
+#, c-format, boost-format
+msgid "Retrieving %s %s-%s.%s"
+msgstr "Obtenint %s %s-%s.%s"
+
+#: src/callbacks/repo.h:217
+msgid "Signature verification failed"
+msgstr "Ha fallat la verificació de la signatura."
+
+#: src/callbacks/repo.h:237
+msgid "Accepting package despite the error."
+msgstr "S'accepta el paquet malgrat l'error."
+
+#. TranslatorExplanation speaking of a script - "Running: script file name (package name, script dir)"
+#: src/callbacks/rpm.h:184
+#, c-format, boost-format
+msgid "Running: %s  (%s, %s)"
+msgstr "Executant %s  (%s, %s)"
+
+#: src/callbacks/rpm.h:267
+#, c-format, boost-format
+msgid "Removal of %s failed:"
+msgstr "La supressió de %s ha fallat:"
+
+#. translators: This text is a progress display label e.g. "Removing packagename-x.x.x [42%]"
+#: src/callbacks/rpm.h:307
+#, c-format, boost-format
+msgid "Removing %s"
+msgstr "Suprimint %s"
+
+#: src/callbacks/rpm.h:344
+#, c-format, boost-format
+msgid "Installation of %s failed:"
+msgstr "La instal·lació de %s ha fallat:"
+
+#. TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
+#: src/callbacks/rpm.h:384
+#, c-format, boost-format
+msgid "Installing: %s"
+msgstr "Instal·lant %s"
+
+#. translators: A progressbar label
+#: src/callbacks/rpm.h:403
+msgid "Checking for file conflicts:"
+msgstr "Comprovant els conflictes entre fitxers:"
+
+#. TranslatorExplanation %1%(number of packages); detailed list follows
+#: src/callbacks/rpm.h:454
+#, boost-format
+msgid ""
+"%1% package had to be excluded from file conflicts check because it is not "
+"yet download."
+msgid_plural ""
+"%1% packages had to be excluded from file conflicts check because they are "
+"not yet downloaded."
+msgstr[0] ""
+"S'ha hagut d'excloure %1% paquet de la comprovació de conflictes perquè "
+"encara no s'ha descarregat."
+msgstr[1] ""
+"S'han hagut d'excloure %1% paquets de la comprovació de conflictes perquè "
+"encara no s'ha descarregat."
+
+#. TranslatorExplanation %1%(commandline option)
+#: src/callbacks/rpm.h:460
+#, boost-format
+msgid ""
+"Checking for file conflicts requires not installed packages to be downloaded "
+"in advance in order to access their file lists. See option '%1%' in the "
+"zypper manual page for details."
+msgstr ""
+"Comprovar els conflictes entre fitxers requereix que els paquets no "
+"instal·lats es baixin abans per tal d'accedir a la seva llista de fitxers. "
+"Vegeu l'opció \"%1%\" al manual del zypper per a més detalls."
+
+#. TranslatorExplanation %1%(number of conflicts); detailed list follows
+#: src/callbacks/rpm.h:470
+#, boost-format
+msgid "Detected %1% file conflict:"
+msgid_plural "Detected %1% file conflicts:"
+msgstr[0] "S'ha detectat %1% conflicte de fitxer:"
+msgstr[1] "S'han detectat %1% conflictes de fitxer:"
+
+#: src/callbacks/rpm.h:478
+msgid "Conflicting files will be replaced."
+msgstr "Els fitxers conflictius es reemplaçaran."
+
+#. TranslatorExplanation Problem description before asking whether to "Continue? [yes/no] (no):"
+#: src/callbacks/rpm.h:484
+msgid ""
+"File conflicts happen when two packages attempt to install files with the "
+"same name but different contents. If you continue, conflicting files will be "
+"replaced losing the previous content."
+msgstr ""
+"Els conflictes entre fitxers succeeixen quan dos paquets intenten instal·lar "
+"fitxers amb el mateix nom però amb contingut diferent. Si continueu, els "
+"fitxers conflictius es reemplaçaran i es perdrà el contingut previ."
+
+#. translator: %s is an other command: "This is an alias for 'zypper info -t patch'."
+#: src/commands/commandhelpformatter.h:94
+#, c-format, boost-format
+msgid "This is an alias for '%s'."
+msgstr "És un àlies per a '%s'."
+
+#: src/commands/commandhelpformatter.h:107
+msgid "Examples:"
+msgstr "Exemples:"
+
+#: src/commands/commandhelpformatter.h:110
+msgid "Arguments:"
+msgstr "Arguments:"
+
+#: src/commands/commandhelpformatter.h:123 src/utils/flags/zyppflags.cc:627
+msgid "Command options:"
+msgstr "Opcions de l'ordre:"
+
+#: src/commands/commandhelpformatter.h:126
+msgid "Solver options:"
+msgstr "Opcions del resolutor:"
+
+#: src/commands/commandhelpformatter.h:129
+msgid "Expert options:"
+msgstr "Opcions avançades:"
+
+#: src/commands/commandhelpformatter.h:132
+msgid "This command has no additional options."
+msgstr "Aquesta ordre no té opcions addicionals."
+
+#: src/commands/commandhelpformatter.h:135
+msgid "Legacy options:"
+msgstr "Opcions de llegat:"
+
+#. translator: '-r             The same as -f.
+#: src/commands/commandhelpformatter.h:139
+#, boost-format
+msgid "The same as %1%."
+msgstr "El mateix que amb %1%."
+
+#: src/commands/commandhelpformatter.h:187
+msgid "Usage:"
+msgstr "Ús:"
+
+#: src/commands/commandhelpformatter.h:189
+msgid "Global Options:"
+msgstr "Opcions globals:"
+
+#: src/commands/commandhelpformatter.h:191
+msgid "Commands:"
+msgstr "Ordres:"
+
+#. translators: --details
+#: src/commands/commonflags.h:23 src/commands/inrverify.cc:35
+msgid "Show the detailed installation summary."
+msgstr "Mostra el resum detallat de la instal·lació."
+
+#: src/commands/commonflags.h:30
+#, boost-format
+msgid "Type of package (%1%)."
+msgstr "Tipus de paquet (%1%)."
+
+#. translators: --best-effort
+#: src/commands/commonflags.h:38
+msgid ""
+"Do a 'best effort' approach to update. Updates to a lower than the latest "
+"version are also acceptable."
+msgstr ""
+"Fes 'el millor possible' per actualitzar. Les actualitzacions per a versions "
+"més baixes que l'última també s'accepten."
+
+#: src/commands/commonflags.h:45
+msgid "Consider only patches which affect the package management itself."
+msgstr "Considera només els pedaços que afectin el gestor de paquets mateix."
+
+#: src/output/Out.h:26 src/repos.cc:125 src/repos.cc:153
+msgid "Yes"
+msgstr "Sí"
+
+#: src/output/Out.h:26 src/locales.cc:72 src/repos.cc:131 src/repos.cc:159
+msgid "No"
+msgstr "No"
+
+#. translator: usually followed by a ' ' and some explanatory text
+#: src/output/Out.h:37
+msgid "Note:"
+msgstr "Atenció!"
+
+#. translator: usually followed by a ' ' and some explanatory text
+#: src/output/Out.h:39
+msgid "Warning:"
+msgstr "Avís!"
+
+#. translator: usually followed by a ' ' and some explanatory text
+#: src/output/Out.h:41
+msgid "Error:"
+msgstr "Error:"
+
+#: src/output/Out.h:43
+msgid "Continue?"
+msgstr "Continuo?"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:23
+msgid "ALIAS"
+msgstr "àlies"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:25
+msgid "ALIAS|#|URI"
+msgstr "ALIES|#|URI"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:27
+msgid "CATEGORY"
+msgstr "CATEGORIA"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:29
+msgid "DIR"
+msgstr "DIR"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:31
+msgid "FILE"
+msgstr "FITXER"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:33
+msgid "FILE.repo"
+msgstr "FITXER.repo"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:35
+msgid "FORMAT"
+msgstr "FORMAT"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:37
+msgid "INTEGER"
+msgstr "enter"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:39
+msgid "PATH"
+msgstr "CAMÍ"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:41
+msgid "SEVERITY"
+msgstr "SEVERITAT"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:43
+msgid "STRING"
+msgstr "CADENA"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:45
+msgid "TAG"
+msgstr "ETIQUETA"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:47
+msgid "TYPE"
+msgstr "tipus"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#. translators: property name; short; used like "Name: value"
+#: src/utils/flags/zyppflags.h:49 src/commands/repos/list.cc:42
+#: src/commands/repos/list.cc:268 src/commands/services/list.cc:116
+#: src/repos.cc:1254
+msgid "URI"
+msgstr "URI (adreça del recurs)"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:51
+msgid "YYYY-MM-DD"
+msgstr "AAAA-MM-DD"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:53
+msgid "MODE"
+msgstr "MODE"
+
+#. TranslatorExplanation These are reasons for various failures.
+#: src/utils/prompt.h:185
+msgid "Not found"
+msgstr "No s'ha trobat"
+
+#: src/utils/prompt.h:185
+msgid "I/O error"
+msgstr "Error I/O"
+
+#: src/utils/prompt.h:185
+msgid "Invalid object"
+msgstr "Objecte no vàlid"
+
+#: src/utils/prompt.h:192
+msgid "Error"
+msgstr "Error"
 
 #: src/Command.cc:93
 msgid "Invalid command"
@@ -600,16 +1337,6 @@ msgstr "Volíeu dir %1%?"
 #, c-format, boost-format
 msgid "Ignoring option %s when updating the update stack first."
 msgstr "S'ignora l'opció %s quan primer s'actualitza la pila d'actualització."
-
-#: src/SolverRequester.h:52
-#, boost-format
-msgid "Suspicious category filter value '%1%'."
-msgstr "Valor de filtre de categoria sospitós: \"%1%\"."
-
-#: src/SolverRequester.h:60
-#, boost-format
-msgid "Suspicious severity filter value '%1%'."
-msgstr "Valor de filtre de severitat sospitós: \"%1%\"."
 
 #. translator: '%1%' is a products name
 #. '%2%' is a command to call (like 'zypper dup')
@@ -1368,414 +2095,6 @@ msgstr "L'opció %s no té cap efecte aquí, ignorant-la."
 msgid "Non-option program arguments: "
 msgstr "Arguments del programa sense opcions: "
 
-#: src/callbacks/keyring.h:32
-msgid ""
-"A GPG pubkey is clearly identified by it's fingerprint. Do not rely the keys "
-"name. If you are not sure whether the presented key is authentic, ask the "
-"repository provider or check his web site. Many provider maintain a web page "
-"showing the fingerprints of the GPG keys they are using."
-msgstr ""
-"Una clau pública GPG s’identifica clarament per l'empremta digital. No "
-"confieu en el nom de les claus. Si no teniu la seguretat que la clau "
-"presentada sigui autèntica, pregunteu-ho al proveïdor del repositori o "
-"consulteu-ne el lloc web. Molts proveïdors mantenen una pàgina web que "
-"mostra les empremtes digitals de les claus GPG que usen."
-
-#: src/callbacks/keyring.h:37
-msgid ""
-"Signing data enables the recipient to verify that no modifications occurred "
-"after the data were signed. Accepting data with no, wrong or unknown "
-"signature can lead to a corrupted system and in extreme cases even to a "
-"system compromise."
-msgstr ""
-"Signar dades permet al receptor verificar que no hi ha hagut modificacions "
-"després de la signatura de les dades. Acceptar dades sense signatura, amb "
-"signatura incorrecta o desconeguda pot portar a un sistema corrupte i, en "
-"casos extrems, fins i tot a un sistema compromès."
-
-#. translator: %1% is a file name
-#: src/callbacks/keyring.h:45
-#, boost-format
-msgid ""
-"File '%1%' is the repositories master index file. It ensures the integrity "
-"of the whole repo."
-msgstr ""
-"El fitxer \"%1%\" és al fitxer d'índex mestre de repositoris. Assegura la "
-"integritat de tot el repositori."
-
-#: src/callbacks/keyring.h:51
-msgid ""
-"We can't verify that no one meddled with this file, so it might not be "
-"trustworthy anymore! You should not continue unless you know it's safe."
-msgstr ""
-"No podem verificar que ningú hagi potinejat el fitxer; per tant, pot ja no "
-"ser de confiança! No hauríeu de continuar si no és que sabeu que és segur."
-
-#: src/callbacks/keyring.h:56
-msgid ""
-"This file was modified after it has been signed. This may have been a "
-"malicious change, so it might not be trustworthy anymore! You should not "
-"continue unless you know it's safe."
-msgstr ""
-"Aquest fitxer s'ha modificat després de ser signat. Això pot haver estat un "
-"canvi maliciós; per tant, pot ja no ser de confiança! No hauríeu de "
-"continuar si no és que sabeu que és segur."
-
-#: src/callbacks/keyring.h:85
-msgid "Repository:"
-msgstr "Repositori:"
-
-#: src/callbacks/keyring.h:87
-msgid "Key Fingerprint:"
-msgstr "Empremta de la clau:"
-
-#: src/callbacks/keyring.h:88
-msgid "Key Name:"
-msgstr "Nom de la clau:"
-
-#: src/callbacks/keyring.h:89
-msgid "Key Algorithm:"
-msgstr "Algorisme de la clau:"
-
-#: src/callbacks/keyring.h:90
-msgid "Key Created:"
-msgstr "Creació de la clau:"
-
-#: src/callbacks/keyring.h:91
-msgid "Key Expires:"
-msgstr "Caducitat de la clau:"
-
-#: src/callbacks/keyring.h:93
-msgid "Subkey:"
-msgstr "Subclau:"
-
-#: src/callbacks/keyring.h:94
-msgid "Rpm Name:"
-msgstr "Nom Rpm:"
-
-#: src/callbacks/keyring.h:120
-#, boost-format
-msgid "The gpg key signing file '%1%' has expired."
-msgstr "El fitxer %1% està signat amb una clau gpg caducada."
-
-#: src/callbacks/keyring.h:126
-#, boost-format
-msgid "The gpg key signing file '%1%' will expire in %2% day."
-msgid_plural "The gpg key signing file '%1%' will expire in %2% days."
-msgstr[0] "La signatura gpg del fitxer %1% caducarà d'aquí a %2% dia."
-msgstr[1] "La signatura gpg del fitxer %1% caducarà d'aquí a %2% dies."
-
-#: src/callbacks/keyring.h:149
-#, c-format, boost-format
-msgid "Accepting an unsigned file '%s'."
-msgstr "S'accepta el fitxer %s no signat."
-
-#: src/callbacks/keyring.h:153
-#, c-format, boost-format
-msgid "Accepting an unsigned file '%s' from repository '%s'."
-msgstr "S'accepta el fitxer no signat %s del repositori %s."
-
-#. translator: %1% is a file name
-#: src/callbacks/keyring.h:163
-#, boost-format
-msgid "File '%1%' is unsigned."
-msgstr "El fitxer \"%1%\" no està signat."
-
-#. translator: %1% is a file name, %2% a repositories name
-#: src/callbacks/keyring.h:166
-#, boost-format
-msgid "File '%1%' from repository '%2%' is unsigned."
-msgstr "El fitxer \"%1%\" del repositori \"%2%\" no està signat."
-
-#. TranslatorExplanation: speaking of a file
-#: src/callbacks/keyring.h:183
-#, c-format, boost-format
-msgid "File '%s' is unsigned, continue?"
-msgstr "El fitxer %s està sense signar, voleu continuar?"
-
-#. TranslatorExplanation: speaking of a file
-#: src/callbacks/keyring.h:187
-#, c-format, boost-format
-msgid "File '%s' from repository '%s' is unsigned, continue?"
-msgstr "El fitxer %s del repositori %s està sense signar, voleu continuar?"
-
-#: src/callbacks/keyring.h:210
-#, c-format, boost-format
-msgid "Accepting file '%s' signed with an unknown key '%s'."
-msgstr "S'accepta el fitxer %s signat amb una clau desconeguda: \"%s\"."
-
-#: src/callbacks/keyring.h:214
-#, c-format, boost-format
-msgid ""
-"Accepting file '%s' from repository '%s' signed with an unknown key '%s'."
-msgstr ""
-"S'accepta el fitxer %s del repositori %s signat amb una clau desconeguda: "
-"\"%s\"."
-
-#. translator: %1% is a file name, %2% is a gpg key ID
-#: src/callbacks/keyring.h:223
-#, boost-format
-msgid "File '%1%' is signed with an unknown key '%2%'."
-msgstr "El fitxer \"%1%\" està signat amb una clau desconeguda: \"%2%\"."
-
-#. translator: %1% is a file name, %2% is a gpg key ID, %3% a repositories name
-#: src/callbacks/keyring.h:226
-#, boost-format
-msgid "File '%1%' from repository '%3%' is signed with an unknown key '%2%'."
-msgstr ""
-"El fitxer \"%1%\" del repositori \"%3%\" està signat amb una clau "
-"desconeguda: \"%2%\"."
-
-#. translators: the last %s is gpg key ID
-#: src/callbacks/keyring.h:243
-#, c-format, boost-format
-msgid "File '%s' is signed with an unknown key '%s'. Continue?"
-msgstr "El fitxer %s està signat amb una clau desconeguda: \"%s\". Continuo?"
-
-#. translators: the last %s is gpg key ID
-#: src/callbacks/keyring.h:247
-#, c-format, boost-format
-msgid ""
-"File '%s' from repository '%s' is signed with an unknown key '%s'. Continue?"
-msgstr ""
-"El fitxer %s del repositori %s està signat amb una clau desconeguda: \"%s\". "
-"Continuo?"
-
-#: src/callbacks/keyring.h:267
-msgid "Automatically importing the following key:"
-msgstr "S'importa automàticament la clau següent:"
-
-#: src/callbacks/keyring.h:269
-msgid "Automatically trusting the following key:"
-msgstr "Es confia automàticament en el certificat següent:"
-
-#: src/callbacks/keyring.h:271
-msgid "New repository or package signing key received:"
-msgstr "Nova clau de signatura de repositori o paquet rebuda:"
-
-#. translators: this message is shown after showing description of the key
-#: src/callbacks/keyring.h:305
-msgid "Do you want to reject the key, trust temporarily, or trust always?"
-msgstr ""
-"Voleu _rebutjar la signatura, confiar-hi _temporalment o confiar-hi _sempre?"
-
-#. translators: this message is shown after showing description of the key
-#: src/callbacks/keyring.h:308
-msgid "Do you want to reject the key, or trust always?"
-msgstr "Voleu rebutjar la clau o confiar-hi sempre?"
-
-#. translators: r/t/a stands for Reject/TrustTemporarily/trustAlways(import)
-#. translate to whatever is appropriate for your language
-#. The anserws must be separated by slash characters '/' and must
-#. correspond to reject/trusttemporarily/trustalways in that order.
-#. The answers should be lower case letters.
-#: src/callbacks/keyring.h:326
-msgid "r/t/a/"
-msgstr "r/t/s/"
-
-#. translators: the same as r/t/a, but without 'a'
-#: src/callbacks/keyring.h:329
-msgid "r/t"
-msgstr "r/t"
-
-#. translators: r/a stands for Reject/trustAlways(import)
-#. translate to whatever is appropriate for your language
-#. The anserws must be separated by slash characters '/' and must
-#. correspond to reject/trusttemporarily/trustalways in that order.
-#. The answers should be lower case letters.
-#: src/callbacks/keyring.h:336
-msgid "r/a/"
-msgstr "r/c/"
-
-#. translators: help text for the 'r' option in the 'r/t/a' prompt
-#: src/callbacks/keyring.h:342
-msgid "Don't trust the key."
-msgstr "No confiïs en la clau."
-
-#. translators: help text for the 't' option in the 'r/t/a' prompt
-#: src/callbacks/keyring.h:346
-msgid "Trust the key temporarily."
-msgstr "Confia en la clau temporalment."
-
-#. translators: help text for the 'a' option in the 'r/t/a' prompt
-#: src/callbacks/keyring.h:351
-msgid "Trust the key and import it into trusted keyring."
-msgstr "Confia en la clau i importa-la a l'anell de claus de confiança."
-
-#: src/callbacks/keyring.h:389
-#, c-format, boost-format
-msgid "Ignoring failed signature verification for file '%s'!"
-msgstr "S'ignora la verificació fallida de la signatura per al fitxer %s!"
-
-#: src/callbacks/keyring.h:392
-#, c-format, boost-format
-msgid ""
-"Ignoring failed signature verification for file '%s' from repository '%s'!"
-msgstr ""
-"S'ignora la verificació fallida de la signatura per al fitxer %s del "
-"repositori %s!"
-
-#: src/callbacks/keyring.h:398
-msgid "Double-check this is not caused by some malicious changes in the file!"
-msgstr ""
-"Aquesta doble comprovació no està causada per cap canvi maliciós del fitxer!"
-
-#. translator: %1% is a file name
-#: src/callbacks/keyring.h:408
-#, boost-format
-msgid "Signature verification failed for file '%1%'."
-msgstr "Ha fallat la verificació de la signatura del fitxer %1%."
-
-#. translator: %1% is a file name, %2% a repositories name
-#: src/callbacks/keyring.h:411
-#, boost-format
-msgid "Signature verification failed for file '%1%' from repository '%2%'."
-msgstr ""
-"Ha fallat la verificació de la signatura del fitxer %1% del repositori %2%."
-
-#: src/callbacks/keyring.h:460
-msgid ""
-"The rpm database seems to contain old V3 version gpg keys which are "
-"meanwhile obsolete and considered insecure:"
-msgstr ""
-"Sembla que la base de dades d'rpm conté claus gpg de l'antiga versió V3, que "
-"són obsoletes i que es consideren no segures:"
-
-#: src/callbacks/keyring.h:467
-#, boost-format
-msgid "To see details about a key call '%1%'."
-msgstr "Per veure detalls sobre una clau: \"%1%\"."
-
-#: src/callbacks/keyring.h:471
-#, boost-format
-msgid ""
-"Unless you believe the key in question is still in use, you can remove it "
-"from the rpm database calling '%1%'."
-msgstr ""
-"Si no és que cregueu que la clau en qüestió encara s'usi, podeu suprimir-la "
-"de la base de dades d'rpm amb \"%1%\"."
-
-#. translator: %1% is the number of keys, %2% the name of a repository
-#: src/callbacks/keyring.h:490
-#, boost-format
-msgid "Received %1% new package signing key from repository %2%:"
-msgid_plural "Received %1% new package signing keys from repository %2%:"
-msgstr[0] ""
-"S'ha rebut %1% clau de signatura de paquets nova del repositori %2%:"
-msgstr[1] ""
-"S'han rebut %1% claus de signatura de paquets noves del repositori %2%:"
-
-#: src/callbacks/keyring.h:494
-msgid ""
-"Those additional keys are usually used to sign packages shipped by the "
-"repository. In order to validate those packages upon download and "
-"installation the new keys will be imported into the rpm database."
-msgstr ""
-"Aquestes claus addicionals solen usar-se per signar paquets enviats pel "
-"repositori. Per tal de validar aquests paquets a la descàrrega i la "
-"instal·lació, les claus noves s'importaran a la base de dades d'rpm."
-
-#: src/callbacks/keyring.h:496
-msgid "New:"
-msgstr "Nova:"
-
-#: src/callbacks/keyring.h:502
-msgid ""
-"The repository metadata introducing the new keys have been signed and "
-"validated by the trusted key:"
-msgstr ""
-"Les metadades del repositori que introdueixen les claus noves han estat "
-"signades i validades per la clau de confiança següent:"
-
-#: src/callbacks/keyring.h:525
-#, c-format, boost-format
-msgid "No digest for file %s."
-msgstr "No hi ha resum per al fitxer %s."
-
-#: src/callbacks/keyring.h:533
-#, c-format, boost-format
-msgid "Unknown digest %s for file %s."
-msgstr "El resum %s és desconegut per al fitxer %s."
-
-#: src/callbacks/keyring.h:550
-#, boost-format
-msgid ""
-"Digest verification failed for file '%1%'\n"
-"[%2%]\n"
-"\n"
-"  expected %3%\n"
-"  but got  %4%\n"
-msgstr ""
-"Ha fallat el resum de verificació per al fitxer %1%\n"
-"[%2%]\n"
-"\n"
-"  s'esperava %3%\n"
-"  però s'ha obtingut %4%\n"
-
-#: src/callbacks/keyring.h:562
-msgid ""
-"Accepting packages with wrong checksums can lead to a corrupted system and "
-"in extreme cases even to a system compromise."
-msgstr ""
-"Acceptar paquets amb sumes de verificació errònies pot conduir a un sistema "
-"corromput i, en casos extrems, a un sistema compromès."
-
-#: src/callbacks/keyring.h:570
-#, boost-format
-msgid ""
-"However if you made certain that the file with checksum '%1%..' is secure, "
-"correct\n"
-"and should be used within this operation, enter the first 4 characters of "
-"the checksum\n"
-"to unblock using this file on your own risk. Empty input will discard the "
-"file.\n"
-msgstr ""
-"Tot i això, si teniu clar que el fitxer amb la suma \"%1%..\" és segur, "
-"correcte\n"
-"i que s'hauria d'usar en aquesta operació, escriviu els primers 4 caràcters "
-"de la suma per\n"
-"desblocar-lo segons la vostra responsabilitat. Si ho deixeu en blanc es "
-"descartarà el fitxer.\n"
-
-#. translators: A prompt option
-#: src/callbacks/keyring.h:577
-msgid "discard"
-msgstr "descarta"
-
-#. translators: A prompt option help text
-#: src/callbacks/keyring.h:579
-msgid "Unblock using this file on your own risk."
-msgstr "Desbloqueu l'ús d'aquest fitxer segons la vostra responsabilitat."
-
-#. translators: A prompt option help text
-#: src/callbacks/keyring.h:581
-msgid "Discard the file."
-msgstr "Descarta el fitxer."
-
-#. translators: A prompt text
-#: src/callbacks/keyring.h:585
-msgid "Unblock or discard?"
-msgstr "El desbloco o el descarto?"
-
-#: src/callbacks/locks.h:27
-msgid ""
-"The following query locks the same objects as the one you want to remove:"
-msgstr ""
-"La consulta següent bloca els mateixos objectes que el que voleu suprimir:"
-
-#: src/callbacks/locks.h:30
-msgid "The following query locks some of the objects you want to unlock:"
-msgstr "La consulta següent bloca alguns dels objectes que voleu desblocar:"
-
-# power-off message
-#: src/callbacks/locks.h:35 src/callbacks/locks.h:50
-msgid "Do you want to remove this lock?"
-msgstr "Voleu suprimir aquest bloqueig?"
-
-#: src/callbacks/locks.h:45
-msgid "The following query does not lock anything:"
-msgstr "La consulta següent no bloca res:"
-
 #. help text for the "Abort, retry, ignore?" prompt for media errors
 #: src/callbacks/media.cc:27
 msgid "Skip retrieval of the file and abort current operation."
@@ -1911,198 +2230,6 @@ msgstr "Nom d'usuari"
 #: src/callbacks/media.cc:328
 msgid "Password"
 msgstr "Contrasenya"
-
-#: src/callbacks/repo.h:49
-msgid "Retrieving delta"
-msgstr "Obtenint delta"
-
-#. translators: this text is a progress display label e.g. "Applying delta foo [42%]"
-#: src/callbacks/repo.h:74
-msgid "Applying delta"
-msgstr "Aplicant delta"
-
-#. TranslatorExplanation %s is package size like "5.6 M"
-#: src/callbacks/repo.h:103
-#, c-format, boost-format
-msgid "(%s unpacked)"
-msgstr "(%s desempaquetat)"
-
-#: src/callbacks/repo.h:112
-#, boost-format
-msgid "In cache %1%"
-msgstr "A la memòria cau: %1%"
-
-#: src/callbacks/repo.h:128
-#, c-format, boost-format
-msgid "Retrieving %s %s-%s.%s"
-msgstr "Obtenint %s %s-%s.%s"
-
-#: src/callbacks/repo.h:217
-msgid "Signature verification failed"
-msgstr "Ha fallat la verificació de la signatura."
-
-#: src/callbacks/repo.h:237
-msgid "Accepting package despite the error."
-msgstr "S'accepta el paquet malgrat l'error."
-
-#. TranslatorExplanation speaking of a script - "Running: script file name (package name, script dir)"
-#: src/callbacks/rpm.h:184
-#, c-format, boost-format
-msgid "Running: %s  (%s, %s)"
-msgstr "Executant %s  (%s, %s)"
-
-#: src/callbacks/rpm.h:267
-#, c-format, boost-format
-msgid "Removal of %s failed:"
-msgstr "La supressió de %s ha fallat:"
-
-#. translators: This text is a progress display label e.g. "Removing packagename-x.x.x [42%]"
-#: src/callbacks/rpm.h:307
-#, c-format, boost-format
-msgid "Removing %s"
-msgstr "Suprimint %s"
-
-#: src/callbacks/rpm.h:344
-#, c-format, boost-format
-msgid "Installation of %s failed:"
-msgstr "La instal·lació de %s ha fallat:"
-
-#. TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
-#: src/callbacks/rpm.h:384
-#, c-format, boost-format
-msgid "Installing: %s"
-msgstr "Instal·lant %s"
-
-#. translators: A progressbar label
-#: src/callbacks/rpm.h:403
-msgid "Checking for file conflicts:"
-msgstr "Comprovant els conflictes entre fitxers:"
-
-#. TranslatorExplanation %1%(number of packages); detailed list follows
-#: src/callbacks/rpm.h:454
-#, boost-format
-msgid ""
-"%1% package had to be excluded from file conflicts check because it is not "
-"yet download."
-msgid_plural ""
-"%1% packages had to be excluded from file conflicts check because they are "
-"not yet downloaded."
-msgstr[0] ""
-"S'ha hagut d'excloure %1% paquet de la comprovació de conflictes perquè "
-"encara no s'ha descarregat."
-msgstr[1] ""
-"S'han hagut d'excloure %1% paquets de la comprovació de conflictes perquè "
-"encara no s'ha descarregat."
-
-#. TranslatorExplanation %1%(commandline option)
-#: src/callbacks/rpm.h:460
-#, boost-format
-msgid ""
-"Checking for file conflicts requires not installed packages to be downloaded "
-"in advance in order to access their file lists. See option '%1%' in the "
-"zypper manual page for details."
-msgstr ""
-"Comprovar els conflictes entre fitxers requereix que els paquets no "
-"instal·lats es baixin abans per tal d'accedir a la seva llista de fitxers. "
-"Vegeu l'opció \"%1%\" al manual del zypper per a més detalls."
-
-#. TranslatorExplanation %1%(number of conflicts); detailed list follows
-#: src/callbacks/rpm.h:470
-#, boost-format
-msgid "Detected %1% file conflict:"
-msgid_plural "Detected %1% file conflicts:"
-msgstr[0] "S'ha detectat %1% conflicte de fitxer:"
-msgstr[1] "S'han detectat %1% conflictes de fitxer:"
-
-#: src/callbacks/rpm.h:478
-msgid "Conflicting files will be replaced."
-msgstr "Els fitxers conflictius es reemplaçaran."
-
-#. TranslatorExplanation Problem description before asking whether to "Continue? [yes/no] (no):"
-#: src/callbacks/rpm.h:484
-msgid ""
-"File conflicts happen when two packages attempt to install files with the "
-"same name but different contents. If you continue, conflicting files will be "
-"replaced losing the previous content."
-msgstr ""
-"Els conflictes entre fitxers succeeixen quan dos paquets intenten instal·lar "
-"fitxers amb el mateix nom però amb contingut diferent. Si continueu, els "
-"fitxers conflictius es reemplaçaran i es perdrà el contingut previ."
-
-#. translator: %s is an other command: "This is an alias for 'zypper info -t patch'."
-#: src/commands/commandhelpformatter.h:94
-#, c-format, boost-format
-msgid "This is an alias for '%s'."
-msgstr "És un àlies per a '%s'."
-
-#: src/commands/commandhelpformatter.h:107
-msgid "Examples:"
-msgstr "Exemples:"
-
-#: src/commands/commandhelpformatter.h:110
-msgid "Arguments:"
-msgstr "Arguments:"
-
-#: src/commands/commandhelpformatter.h:123 src/utils/flags/zyppflags.cc:627
-msgid "Command options:"
-msgstr "Opcions de l'ordre:"
-
-#: src/commands/commandhelpformatter.h:126
-msgid "Solver options:"
-msgstr "Opcions del resolutor:"
-
-#: src/commands/commandhelpformatter.h:129
-msgid "Expert options:"
-msgstr "Opcions avançades:"
-
-#: src/commands/commandhelpformatter.h:132
-msgid "This command has no additional options."
-msgstr "Aquesta ordre no té opcions addicionals."
-
-#: src/commands/commandhelpformatter.h:135
-msgid "Legacy options:"
-msgstr "Opcions de llegat:"
-
-#. translator: '-r             The same as -f.
-#: src/commands/commandhelpformatter.h:139
-#, boost-format
-msgid "The same as %1%."
-msgstr "El mateix que amb %1%."
-
-#: src/commands/commandhelpformatter.h:187
-msgid "Usage:"
-msgstr "Ús:"
-
-#: src/commands/commandhelpformatter.h:189
-msgid "Global Options:"
-msgstr "Opcions globals:"
-
-#: src/commands/commandhelpformatter.h:191
-msgid "Commands:"
-msgstr "Ordres:"
-
-#. translators: --details
-#: src/commands/commonflags.h:23 src/commands/inrverify.cc:35
-msgid "Show the detailed installation summary."
-msgstr "Mostra el resum detallat de la instal·lació."
-
-#: src/commands/commonflags.h:30
-#, boost-format
-msgid "Type of package (%1%)."
-msgstr "Tipus de paquet (%1%)."
-
-#. translators: --best-effort
-#: src/commands/commonflags.h:38
-msgid ""
-"Do a 'best effort' approach to update. Updates to a lower than the latest "
-"version are also acceptable."
-msgstr ""
-"Fes 'el millor possible' per actualitzar. Les actualitzacions per a versions "
-"més baixes que l'última també s'accepten."
-
-#: src/commands/commonflags.h:45
-msgid "Consider only patches which affect the package management itself."
-msgstr "Considera només els pedaços que afectin el gestor de paquets mateix."
 
 #: src/commands/conditions.cc:19
 msgid "Root privileges are required to run this command."
@@ -2529,13 +2656,17 @@ msgstr ""
 msgid "Restrict the lock to the specified repository."
 msgstr "Restringeix el bloqueig al repositori especificat."
 
-#: src/commands/locks/add.cc:80
+#: src/commands/locks/add.cc:48
+msgid "Reason for specific lock."
+msgstr ""
+
+#: src/commands/locks/add.cc:81
 msgid "Specified lock has been successfully added."
 msgid_plural "Specified locks have been successfully added."
 msgstr[0] "El bloqueig especificat s'ha afegit correctament."
 msgstr[1] "Els bloquejos especificats s'han afegit correctament."
 
-#: src/commands/locks/add.cc:87
+#: src/commands/locks/add.cc:88
 msgid "Problem adding the package lock:"
 msgstr "Problema afegint el bloqueig de paquet:"
 
@@ -2598,48 +2729,52 @@ msgstr "Tipus"
 msgid "Repository"
 msgstr "Repositori"
 
+#: src/commands/locks/list.cc:138
+msgid "Comment"
+msgstr ""
+
 #. translators: locks table value
-#: src/commands/locks/list.cc:156 src/commands/locks/list.cc:232
+#: src/commands/locks/list.cc:156 src/commands/locks/list.cc:235
 msgid "(multiple)"
 msgstr "(múltiple)"
 
 #. translators: locks table value
-#: src/commands/locks/list.cc:159 src/commands/locks/list.cc:230
+#: src/commands/locks/list.cc:159 src/commands/locks/list.cc:233
 msgid "(any)"
 msgstr "(qualsevol)"
 
 #. translators: property name; short; used like "Name: value"
-#: src/commands/locks/list.cc:195
+#: src/commands/locks/list.cc:198
 msgid "Keep installed"
 msgstr "Mantingues instal·lat"
 
 #. translators: property name; short; used like "Name: value"
-#: src/commands/locks/list.cc:203
+#: src/commands/locks/list.cc:206
 msgid "Do not install"
 msgstr "No l'instal·lis"
 
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
-#: src/commands/locks/list.cc:256
+#: src/commands/locks/list.cc:259
 msgid "locks (ll) [OPTIONS]"
 msgstr "locks (ll) [opcions]"
 
-#: src/commands/locks/list.cc:257
+#: src/commands/locks/list.cc:260
 msgid "List current package locks."
 msgstr "Llista els bloquejos de paquets actuals."
 
-#: src/commands/locks/list.cc:285
+#: src/commands/locks/list.cc:288
 msgid "Show the number of resolvables matched by each lock."
 msgstr "Mostra el nombre de resolubles coincidents amb cada bloqueig."
 
-#: src/commands/locks/list.cc:286
+#: src/commands/locks/list.cc:289
 msgid "List the resolvables matched by each lock."
 msgstr "Llista els resolubles coincidents amb cada bloqueig."
 
-#: src/commands/locks/list.cc:300
+#: src/commands/locks/list.cc:303
 msgid "Error reading the locks file:"
 msgstr "Error en llegir el fitxer de bloquejos:"
 
-#: src/commands/locks/list.cc:307
+#: src/commands/locks/list.cc:310
 msgid "There are no package locks defined."
 msgstr "No hi ha bloquejos de paquet definits."
 
@@ -3402,14 +3537,6 @@ msgstr "Neteja les dues coses: metadades i memòria cau dels paquets."
 #: src/commands/services/list.cc:104
 msgid "Alias"
 msgstr "Àlies"
-
-#. translators: property name; short; used like "Name: value"
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/commands/repos/list.cc:42 src/commands/repos/list.cc:268
-#: src/commands/services/list.cc:116 src/repos.cc:1254
-#: src/utils/flags/zyppflags.h:49
-msgid "URI"
-msgstr "URI (adreça del recurs)"
 
 #. 'enabled' flag
 #. translators: property name; short; used like "Name: value"
@@ -5438,10 +5565,6 @@ msgstr "Sol·licitada"
 msgid "Fallback"
 msgstr "Alternativa"
 
-#: src/locales.cc:72 src/output/Out.h:26 src/repos.cc:131 src/repos.cc:159
-msgid "No"
-msgstr "No"
-
 #. translators: header of table column - the language code, e.g. en_US
 #: src/locales.cc:174
 msgid "Code"
@@ -5591,29 +5714,6 @@ msgstr "El paquet de codi font %s-%s s'ha instal·lat correctament."
 #, c-format, boost-format
 msgid "Problem installing source package %s-%s:"
 msgstr "Problema instal·lant el paquet de codi font %s-%s:"
-
-#: src/output/Out.h:26 src/repos.cc:125 src/repos.cc:153
-msgid "Yes"
-msgstr "Sí"
-
-#. translator: usually followed by a ' ' and some explanatory text
-#: src/output/Out.h:37
-msgid "Note:"
-msgstr "Atenció!"
-
-#. translator: usually followed by a ' ' and some explanatory text
-#: src/output/Out.h:39
-msgid "Warning:"
-msgstr "Avís!"
-
-#. translator: usually followed by a ' ' and some explanatory text
-#: src/output/Out.h:41
-msgid "Error:"
-msgstr "Error:"
-
-#: src/output/Out.h:43
-msgid "Continue?"
-msgstr "Continuo?"
 
 #. Since this message will be emitted before we know if the current output is XML or Normal we need to send this message to stderr
 #. to not break scripts that use xml output (bsc#1172925)
@@ -6787,81 +6887,6 @@ msgstr "Fora de l'abast"
 msgid "Unknown error while assigning the value %1% to flag %2%."
 msgstr "Error desconegut mentre s'assignava el valor %1% a la bandera %2%."
 
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:23
-msgid "ALIAS"
-msgstr "àlies"
-
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:25
-msgid "ALIAS|#|URI"
-msgstr "ALIES|#|URI"
-
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:27
-msgid "CATEGORY"
-msgstr "CATEGORIA"
-
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:29
-msgid "DIR"
-msgstr "DIR"
-
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:31
-msgid "FILE"
-msgstr "FITXER"
-
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:33
-msgid "FILE.repo"
-msgstr "FITXER.repo"
-
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:35
-msgid "FORMAT"
-msgstr "FORMAT"
-
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:37
-msgid "INTEGER"
-msgstr "enter"
-
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:39
-msgid "PATH"
-msgstr "CAMÍ"
-
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:41
-msgid "SEVERITY"
-msgstr "SEVERITAT"
-
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:43
-msgid "STRING"
-msgstr "CADENA"
-
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:45
-msgid "TAG"
-msgstr "ETIQUETA"
-
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:47
-msgid "TYPE"
-msgstr "tipus"
-
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:51
-msgid "YYYY-MM-DD"
-msgstr "AAAA-MM-DD"
-
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:53
-msgid "MODE"
-msgstr "MODE"
-
 #. For '-garbage' argument, with 'a', 'b', and 'e' as known options,
 #. getopt_long reports 'a', 'b', and 'e' as known options.
 #. The rest ends here and it is either the last one from previous argument
@@ -7085,33 +7110,33 @@ msgstr "No es pot estimar un valor per a <platform>."
 msgid "Please use obs://<project>/<platform>"
 msgstr "Si us plau, useu obs://<project>/<platform>"
 
-#: src/utils/misc.cc:550 src/utils/misc.cc:591
+#: src/utils/misc.cc:550 src/utils/misc.cc:596
 #, c-format, boost-format
 msgid "Example: %s"
 msgstr "Exemple: %s"
 
-#: src/utils/misc.cc:590
+#: src/utils/misc.cc:595
 msgid "Invalid OBS URI."
 msgstr "OBS URI no vàlid."
 
-#: src/utils/misc.cc:590
+#: src/utils/misc.cc:595
 msgid "Correct form is obs://<project>/[platform]"
 msgstr "La forma correcta és obs://<project>/[platform]"
 
-#: src/utils/misc.cc:640
+#: src/utils/misc.cc:645
 msgid "Problem copying the specified RPM file to the cache directory."
 msgstr ""
 "Problema copiant el fitxer RPM especificat a la memòria cau del directori."
 
-#: src/utils/misc.cc:641
+#: src/utils/misc.cc:646
 msgid "Perhaps you are running out of disk space."
 msgstr "Potser s'està esgotant l'espai del disc."
 
-#: src/utils/misc.cc:649
+#: src/utils/misc.cc:654
 msgid "Problem retrieving the specified RPM file"
 msgstr "Problema obtenint el fitxer RPM especificat"
 
-#: src/utils/misc.cc:650
+#: src/utils/misc.cc:655
 msgid "Please check whether the file is accessible."
 msgstr "Si us plau, comproveu si el fitxer és accessible."
 
@@ -7218,23 +7243,6 @@ msgid ""
 msgstr ""
 "Si no funciona res més, introduïu \"#1\" per seleccionar la 1a opció, \"#2\" "
 "per a la 2a..."
-
-#. TranslatorExplanation These are reasons for various failures.
-#: src/utils/prompt.h:185
-msgid "Not found"
-msgstr "No s'ha trobat"
-
-#: src/utils/prompt.h:185
-msgid "I/O error"
-msgstr "Error I/O"
-
-#: src/utils/prompt.h:185
-msgid "Invalid object"
-msgstr "Objecte no vàlid"
-
-#: src/utils/prompt.h:192
-msgid "Error"
-msgstr "Error"
 
 # =============================================================================
 #~ msgid "addlock (al) [OPTIONS] <PACKAGENAME> ..."

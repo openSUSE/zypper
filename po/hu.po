@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper.hu\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-30 14:58+0200\n"
+"POT-Creation-Date: 2021-07-21 09:46+0200\n"
 "PO-Revision-Date: 2019-03-21 12:49+0000\n"
 "Last-Translator: Robert Taisz <robert.taisz@emerald.hu>\n"
 "Language-Team: Hungarian <https://l10n.opensuse.org/projects/zypper/master/"
@@ -26,6 +26,738 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Weblate 3.3\n"
+
+#: src/SolverRequester.h:52
+#, boost-format
+msgid "Suspicious category filter value '%1%'."
+msgstr "Gyanús kategóriaszűrő-érték: '%1%'."
+
+#: src/SolverRequester.h:60
+#, boost-format
+msgid "Suspicious severity filter value '%1%'."
+msgstr "Gyanús súlyossági szűrőérték: '%1%'."
+
+#: src/callbacks/keyring.h:32
+msgid ""
+"A GPG pubkey is clearly identified by it's fingerprint. Do not rely the keys "
+"name. If you are not sure whether the presented key is authentic, ask the "
+"repository provider or check his web site. Many provider maintain a web page "
+"showing the fingerprints of the GPG keys they are using."
+msgstr ""
+
+#: src/callbacks/keyring.h:37
+msgid ""
+"Signing data enables the recipient to verify that no modifications occurred "
+"after the data were signed. Accepting data with no, wrong or unknown "
+"signature can lead to a corrupted system and in extreme cases even to a "
+"system compromise."
+msgstr ""
+"Az adatok aláírása lehetővé teszi, hogy a címzett ellenőrizze, hogy az "
+"adatok nem lettek-e módosítva az aláírásuk után. Az aláírás nélküli, a "
+"helytelen aláírással vagy az ismeretlen aláírással rendelkező adatok "
+"elfogadása azt eredményezheti, hogy a rendszer megsérül, és végletes esetben "
+"akár illetéktelenek számára is hozzáférhetővé válhat."
+
+#. translator: %1% is a file name
+#: src/callbacks/keyring.h:45
+#, boost-format
+msgid ""
+"File '%1%' is the repositories master index file. It ensures the integrity "
+"of the whole repo."
+msgstr ""
+"A(z) '%1%' fájl a telepítési forrás elsődleges indexfájlja. A teljes "
+"telepítési forrás integritását biztosítja."
+
+#: src/callbacks/keyring.h:51
+msgid ""
+"We can't verify that no one meddled with this file, so it might not be "
+"trustworthy anymore! You should not continue unless you know it's safe."
+msgstr ""
+"Nem tudjuk ellenőrizni, hogy érintetlen-e a fájl, vagyis előfordulhat, hogy "
+"már nem megbízható. Ne folytassa a műveletet, ha nincs meggyőződve arról, "
+"hogy ezt biztonságosan megteheti."
+
+#: src/callbacks/keyring.h:56
+msgid ""
+"This file was modified after it has been signed. This may have been a "
+"malicious change, so it might not be trustworthy anymore! You should not "
+"continue unless you know it's safe."
+msgstr ""
+"Ez a fájl megváltozott az aláírása után. Ez lehet rosszindulatú módosítás, "
+"ezért előfordulhat, hogy a fájl már nem megbízható. Ne folytassa a "
+"műveletet, ha nincs meggyőződve arról, hogy ezt biztonságosan megteheti."
+
+#: src/callbacks/keyring.h:85
+msgid "Repository:"
+msgstr "Telepítési forrás:"
+
+#: src/callbacks/keyring.h:87
+msgid "Key Fingerprint:"
+msgstr "Kulcs ujjlenyomata:"
+
+#: src/callbacks/keyring.h:88
+msgid "Key Name:"
+msgstr "Kulcs neve:"
+
+#: src/callbacks/keyring.h:89
+msgid "Key Algorithm:"
+msgstr ""
+
+#: src/callbacks/keyring.h:90
+msgid "Key Created:"
+msgstr "Kulcs létrehozása:"
+
+#: src/callbacks/keyring.h:91
+msgid "Key Expires:"
+msgstr "Kulcs lejárata:"
+
+#: src/callbacks/keyring.h:93
+msgid "Subkey:"
+msgstr "Alkulcs:"
+
+#: src/callbacks/keyring.h:94
+msgid "Rpm Name:"
+msgstr "Rpm-fájl neve:"
+
+#: src/callbacks/keyring.h:120
+#, boost-format
+msgid "The gpg key signing file '%1%' has expired."
+msgstr "A gpg kulcs '%1%' aláíró fájljának érvényessége lejárt."
+
+#: src/callbacks/keyring.h:126
+#, boost-format
+msgid "The gpg key signing file '%1%' will expire in %2% day."
+msgid_plural "The gpg key signing file '%1%' will expire in %2% days."
+msgstr[0] "A(z) '%1%' gpg kulcsaláíró fájl érvényessége %2% nap múlva lejár."
+msgstr[1] "A(z) '%1%' gpg kulcsaláíró fájl érvényessége %2% nap múlva lejár."
+
+#: src/callbacks/keyring.h:149
+#, c-format, boost-format
+msgid "Accepting an unsigned file '%s'."
+msgstr "A(z) %s aláírás nélküli fájl elfogadása."
+
+#: src/callbacks/keyring.h:153
+#, c-format, boost-format
+msgid "Accepting an unsigned file '%s' from repository '%s'."
+msgstr ""
+"A(z) %s aláírás nélküli fájl elfogadása a(z) '%s' telepítési forrásból."
+
+#. translator: %1% is a file name
+#: src/callbacks/keyring.h:163
+#, boost-format
+msgid "File '%1%' is unsigned."
+msgstr "A(z) %s fájl nincs aláírva."
+
+#. translator: %1% is a file name, %2% a repositories name
+#: src/callbacks/keyring.h:166
+#, boost-format
+msgid "File '%1%' from repository '%2%' is unsigned."
+msgstr "A(z) '%2' telepítési forrásból származó  '%1%' fájl nincs aláírva."
+
+#. TranslatorExplanation: speaking of a file
+#: src/callbacks/keyring.h:183
+#, c-format, boost-format
+msgid "File '%s' is unsigned, continue?"
+msgstr "A(z) %s fájl nincs aláírva, folytatja?"
+
+#. TranslatorExplanation: speaking of a file
+#: src/callbacks/keyring.h:187
+#, c-format, boost-format
+msgid "File '%s' from repository '%s' is unsigned, continue?"
+msgstr "A(z) %s fájl a(z) '%s' telepítési forrásból nincs aláírva, folytatja?"
+
+#: src/callbacks/keyring.h:210
+#, c-format, boost-format
+msgid "Accepting file '%s' signed with an unknown key '%s'."
+msgstr "Ismeretlen azonosítójú kulccsal (%s) aláírt %s fájl elfogadása."
+
+#: src/callbacks/keyring.h:214
+#, c-format, boost-format
+msgid ""
+"Accepting file '%s' from repository '%s' signed with an unknown key '%s'."
+msgstr ""
+"Ismeretlen azonosítójú kulccsal (%s) aláírt %s fájl elfogadása a(z) %s "
+"telepítési forrásból."
+
+#. translator: %1% is a file name, %2% is a gpg key ID
+#: src/callbacks/keyring.h:223
+#, boost-format
+msgid "File '%1%' is signed with an unknown key '%2%'."
+msgstr "A(z) '%1%' fájl ismeretlen azonosítójú kulccsal ('%2%') van aláírva."
+
+#. translator: %1% is a file name, %2% is a gpg key ID, %3% a repositories name
+#: src/callbacks/keyring.h:226
+#, boost-format
+msgid "File '%1%' from repository '%3%' is signed with an unknown key '%2%'."
+msgstr ""
+"A(z) '%3%' telepítési forrásból származó '%1%' fájl ismeretlen azonosítójú "
+"kulccsal ('%2%') van aláírva."
+
+#. translators: the last %s is gpg key ID
+#: src/callbacks/keyring.h:243
+#, c-format, boost-format
+msgid "File '%s' is signed with an unknown key '%s'. Continue?"
+msgstr ""
+"A(z) %s fájl ismeretlen azonosítójú kulccsal (%s) lett aláírva. Folytatja?"
+
+#. translators: the last %s is gpg key ID
+#: src/callbacks/keyring.h:247
+#, c-format, boost-format
+msgid ""
+"File '%s' from repository '%s' is signed with an unknown key '%s'. Continue?"
+msgstr ""
+"A(z) %s fájl a(z) %s telepítési forrásból ismeretlen azonosítójú kulccsal "
+"(%s) lett aláírva. Folytatja?"
+
+#: src/callbacks/keyring.h:267
+msgid "Automatically importing the following key:"
+msgstr "A következő kulcs automatikus importálása:"
+
+#: src/callbacks/keyring.h:269
+msgid "Automatically trusting the following key:"
+msgstr "A következő kulcs automatikus elfogadása:"
+
+#: src/callbacks/keyring.h:271
+msgid "New repository or package signing key received:"
+msgstr "Új telepítési forrás- vagy csomagaláíró kulcs érkezett:"
+
+#. translators: this message is shown after showing description of the key
+#: src/callbacks/keyring.h:305
+msgid "Do you want to reject the key, trust temporarily, or trust always?"
+msgstr ""
+"Elutasítja a kulcsot, megbízik benne ideiglenesen, vagy elfogadja véglegesen?"
+
+#. translators: this message is shown after showing description of the key
+#: src/callbacks/keyring.h:308
+msgid "Do you want to reject the key, or trust always?"
+msgstr "Elutasítja a kulcsot, vagy elfogadja véglegesen?"
+
+#. translators: r/t/a stands for Reject/TrustTemporarily/trustAlways(import)
+#. translate to whatever is appropriate for your language
+#. The anserws must be separated by slash characters '/' and must
+#. correspond to reject/trusttemporarily/trustalways in that order.
+#. The answers should be lower case letters.
+#: src/callbacks/keyring.h:326
+msgid "r/t/a/"
+msgstr "e/i/v"
+
+#. translators: the same as r/t/a, but without 'a'
+#: src/callbacks/keyring.h:329
+msgid "r/t"
+msgstr "e/i"
+
+#. translators: r/a stands for Reject/trustAlways(import)
+#. translate to whatever is appropriate for your language
+#. The anserws must be separated by slash characters '/' and must
+#. correspond to reject/trusttemporarily/trustalways in that order.
+#. The answers should be lower case letters.
+#: src/callbacks/keyring.h:336
+msgid "r/a/"
+msgstr "e/v"
+
+#. translators: help text for the 'r' option in the 'r/t/a' prompt
+#: src/callbacks/keyring.h:342
+msgid "Don't trust the key."
+msgstr "Ne bízzon meg a kulcsban."
+
+#. translators: help text for the 't' option in the 'r/t/a' prompt
+#: src/callbacks/keyring.h:346
+msgid "Trust the key temporarily."
+msgstr "Bízzon meg ideiglenesen a kulcsban."
+
+#. translators: help text for the 'a' option in the 'r/t/a' prompt
+#: src/callbacks/keyring.h:351
+msgid "Trust the key and import it into trusted keyring."
+msgstr "Bízzon meg a kulcsban és importálja a megbízható kulcstartóba."
+
+#: src/callbacks/keyring.h:389
+#, c-format, boost-format
+msgid "Ignoring failed signature verification for file '%s'!"
+msgstr "%s fájl sikertelen aláírás-ellenőrzésének figyelmen kívül hagyása!"
+
+#: src/callbacks/keyring.h:392
+#, c-format, boost-format
+msgid ""
+"Ignoring failed signature verification for file '%s' from repository '%s'!"
+msgstr ""
+"%s fájl (telepítési forrás: %s) sikertelen aláírás-ellenőrzésének figyelmen "
+"kívül hagyása!"
+
+#: src/callbacks/keyring.h:398
+msgid "Double-check this is not caused by some malicious changes in the file!"
+msgstr ""
+"Győződjön meg arról, hogy ezt nem a fájl ártó szándékú módosítása okozza!"
+
+#. translator: %1% is a file name
+#: src/callbacks/keyring.h:408
+#, boost-format
+msgid "Signature verification failed for file '%1%'."
+msgstr "Az aláírás ellenőrzése meghiúsult a fájlhoz: %1%."
+
+#. translator: %1% is a file name, %2% a repositories name
+#: src/callbacks/keyring.h:411
+#, boost-format
+msgid "Signature verification failed for file '%1%' from repository '%2%'."
+msgstr ""
+"Az aláírás ellenőrzése meghiúsult a fájlhoz: %1% a telepítési forrásból: %2%."
+
+#: src/callbacks/keyring.h:460
+msgid ""
+"The rpm database seems to contain old V3 version gpg keys which are "
+"meanwhile obsolete and considered insecure:"
+msgstr ""
+"Az rpm adatbázis régi, V3 verziójú gpg-kulcsokat tartalmaz, amelyek "
+"időközben elavultak, és nem számítanak biztonságosnak:"
+
+#: src/callbacks/keyring.h:467
+#, boost-format
+msgid "To see details about a key call '%1%'."
+msgstr ""
+"A kulcsokkal kapcsolatos részletek a(z) '%1%' hívásával tekinthetők meg."
+
+#: src/callbacks/keyring.h:471
+#, boost-format
+msgid ""
+"Unless you believe the key in question is still in use, you can remove it "
+"from the rpm database calling '%1%'."
+msgstr ""
+"Ha tudja, hogy az adott kulcs már nincs használatban, eltávolíthatja az rpm "
+"adatbázisból a(z) '%1%' hívásával."
+
+#. translator: %1% is the number of keys, %2% the name of a repository
+#: src/callbacks/keyring.h:490
+#, boost-format
+msgid "Received %1% new package signing key from repository %2%:"
+msgid_plural "Received %1% new package signing keys from repository %2%:"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/callbacks/keyring.h:494
+msgid ""
+"Those additional keys are usually used to sign packages shipped by the "
+"repository. In order to validate those packages upon download and "
+"installation the new keys will be imported into the rpm database."
+msgstr ""
+
+#: src/callbacks/keyring.h:496
+msgid "New:"
+msgstr ""
+
+#: src/callbacks/keyring.h:502
+msgid ""
+"The repository metadata introducing the new keys have been signed and "
+"validated by the trusted key:"
+msgstr ""
+
+#: src/callbacks/keyring.h:525
+#, c-format, boost-format
+msgid "No digest for file %s."
+msgstr "Nincs kivonat a(z) %s fájlhoz."
+
+#: src/callbacks/keyring.h:533
+#, c-format, boost-format
+msgid "Unknown digest %s for file %s."
+msgstr "Ismeretlen %s kivonat a(z) %s fájlhoz."
+
+#: src/callbacks/keyring.h:550
+#, boost-format
+msgid ""
+"Digest verification failed for file '%1%'\n"
+"[%2%]\n"
+"\n"
+"  expected %3%\n"
+"  but got  %4%\n"
+msgstr ""
+"A kivonat ellenőrzése sikertelen a(z) '%1%' fájl esetében\n"
+"[%2%]\n"
+"\n"
+"  várt érték: %3%\n"
+"  kapott érték:  %4%\n"
+
+#: src/callbacks/keyring.h:562
+msgid ""
+"Accepting packages with wrong checksums can lead to a corrupted system and "
+"in extreme cases even to a system compromise."
+msgstr ""
+"A hibás ellenőrző összegű csomagok elfogadása azt eredményezheti, hogy a "
+"rendszer megsérül, végletes esetben akár illetéktelenek számára is "
+"hozzáférhetővé válhat."
+
+#: src/callbacks/keyring.h:570
+#, boost-format
+msgid ""
+"However if you made certain that the file with checksum '%1%..' is secure, "
+"correct\n"
+"and should be used within this operation, enter the first 4 characters of "
+"the checksum\n"
+"to unblock using this file on your own risk. Empty input will discard the "
+"file.\n"
+msgstr ""
+"Ha viszont meggyőződött róla, hogy a(z) '%1%..' ellenőrző összegű fájl "
+"biztonságos,\n"
+"helyes, és használandó ebben a műveletben, saját kockázatára engedélyezheti "
+"a fájl\n"
+"használatát az ellenőrző összeg első négy karakterének megadásával. Ha nem "
+"ad meg semmit, azzal eldobja a fájlt.\n"
+
+#. translators: A prompt option
+#: src/callbacks/keyring.h:577
+msgid "discard"
+msgstr "eldobás"
+
+#. translators: A prompt option help text
+#: src/callbacks/keyring.h:579
+msgid "Unblock using this file on your own risk."
+msgstr "A fájl zárolásának feloldása a saját kockázatára."
+
+#. translators: A prompt option help text
+#: src/callbacks/keyring.h:581
+msgid "Discard the file."
+msgstr "A fájl eldobása."
+
+#. translators: A prompt text
+#: src/callbacks/keyring.h:585
+msgid "Unblock or discard?"
+msgstr "Feloldja a zárolását vagy eldobja?"
+
+#: src/callbacks/locks.h:27
+msgid ""
+"The following query locks the same objects as the one you want to remove:"
+msgstr ""
+"A következő lekérdezés zárolja azokat az objektumokat amelyeket az "
+"eltávolítani kívánt csomag:"
+
+#: src/callbacks/locks.h:30
+msgid "The following query locks some of the objects you want to unlock:"
+msgstr ""
+"A következő lekérdezés zárolja a feloldani kívánt objektumok némelyikét:"
+
+#: src/callbacks/locks.h:35 src/callbacks/locks.h:50
+msgid "Do you want to remove this lock?"
+msgstr "Eltávolítja ezt a zárolást?"
+
+#: src/callbacks/locks.h:45
+msgid "The following query does not lock anything:"
+msgstr "A következő lekérdezés nem zárol semmit:"
+
+#: src/callbacks/repo.h:49
+msgid "Retrieving delta"
+msgstr "Különbség lekérdezése"
+
+#. translators: this text is a progress display label e.g. "Applying delta foo [42%]"
+#: src/callbacks/repo.h:74
+msgid "Applying delta"
+msgstr "Különbség hozzáadása"
+
+#. TranslatorExplanation %s is package size like "5.6 M"
+#: src/callbacks/repo.h:103
+#, c-format, boost-format
+msgid "(%s unpacked)"
+msgstr "(%s kicsomagolva)"
+
+#: src/callbacks/repo.h:112
+#, boost-format
+msgid "In cache %1%"
+msgstr "A gyorsítótárban: %1%"
+
+#: src/callbacks/repo.h:128
+#, c-format, boost-format
+msgid "Retrieving %s %s-%s.%s"
+msgstr "%s %s-%s.%s letöltése"
+
+#: src/callbacks/repo.h:217
+msgid "Signature verification failed"
+msgstr "Az aláírás-ellenőrzés sikertelen"
+
+#: src/callbacks/repo.h:237
+msgid "Accepting package despite the error."
+msgstr "A csomag elfogadása a hiba ellenére."
+
+#. TranslatorExplanation speaking of a script - "Running: script file name (package name, script dir)"
+#: src/callbacks/rpm.h:184
+#, c-format, boost-format
+msgid "Running: %s  (%s, %s)"
+msgstr "Futtatás: %s  (%s, %s)"
+
+#: src/callbacks/rpm.h:267
+#, c-format, boost-format
+msgid "Removal of %s failed:"
+msgstr "%s eltávolítása meghiúsult:"
+
+#. translators: This text is a progress display label e.g. "Removing packagename-x.x.x [42%]"
+#: src/callbacks/rpm.h:307
+#, c-format, boost-format
+msgid "Removing %s"
+msgstr "Eltávolítás: %s"
+
+#: src/callbacks/rpm.h:344
+#, c-format, boost-format
+msgid "Installation of %s failed:"
+msgstr "A(z) %s telepítése meghiúsult:"
+
+# modules/inst_target_part.ycp:676
+#. TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
+#: src/callbacks/rpm.h:384
+#, c-format, boost-format
+msgid "Installing: %s"
+msgstr "%s telepítése"
+
+#. translators: A progressbar label
+#: src/callbacks/rpm.h:403
+msgid "Checking for file conflicts:"
+msgstr "Fájlütközések keresése:"
+
+#. TranslatorExplanation %1%(number of packages); detailed list follows
+#: src/callbacks/rpm.h:454
+#, boost-format
+msgid ""
+"%1% package had to be excluded from file conflicts check because it is not "
+"yet download."
+msgid_plural ""
+"%1% packages had to be excluded from file conflicts check because they are "
+"not yet downloaded."
+msgstr[0] ""
+msgstr[1] ""
+
+#. TranslatorExplanation %1%(commandline option)
+#: src/callbacks/rpm.h:460
+#, boost-format
+msgid ""
+"Checking for file conflicts requires not installed packages to be downloaded "
+"in advance in order to access their file lists. See option '%1%' in the "
+"zypper manual page for details."
+msgstr ""
+"A fájlütközések ellenőrzéséhez a még nem telepített csomagokat előre le kell "
+"tölteni, hogy hozzá lehessen férni a fájljaik jegyzékéhez. Részleteket a "
+"zypper kézikönyvében a(z) '%1%' leírása tartalmaz."
+
+#. TranslatorExplanation %1%(number of conflicts); detailed list follows
+#: src/callbacks/rpm.h:470
+#, boost-format
+msgid "Detected %1% file conflict:"
+msgid_plural "Detected %1% file conflicts:"
+msgstr[0] "%1% fájlütközés észlelhető:"
+msgstr[1] "%1% fájlütközés észlelhető:"
+
+#: src/callbacks/rpm.h:478
+msgid "Conflicting files will be replaced."
+msgstr "Az ütközést okozó fájlokat a rendszer lecseréli."
+
+#. TranslatorExplanation Problem description before asking whether to "Continue? [yes/no] (no):"
+#: src/callbacks/rpm.h:484
+msgid ""
+"File conflicts happen when two packages attempt to install files with the "
+"same name but different contents. If you continue, conflicting files will be "
+"replaced losing the previous content."
+msgstr ""
+"A fájlok ütközése olyankor fordul elő, amikor két csomag azonos nevű, de "
+"eltérő tartalmú fájlokat próbál telepíteni. Ha folytatja a műveletet, az "
+"ütközést okozó fájlokat a rendszer lecseréli, a korábbi tartalom elveszik."
+
+#. translator: %s is an other command: "This is an alias for 'zypper info -t patch'."
+#: src/commands/commandhelpformatter.h:94
+#, c-format, boost-format
+msgid "This is an alias for '%s'."
+msgstr "Ez egy álnév a(z) '%s' parancshoz."
+
+#: src/commands/commandhelpformatter.h:107
+msgid "Examples:"
+msgstr "Példák:"
+
+#: src/commands/commandhelpformatter.h:110
+msgid "Arguments:"
+msgstr "Argumentumok:"
+
+#: src/commands/commandhelpformatter.h:123 src/utils/flags/zyppflags.cc:627
+msgid "Command options:"
+msgstr "Parancs beállításai:"
+
+#: src/commands/commandhelpformatter.h:126
+msgid "Solver options:"
+msgstr "Feloldó beállításai:"
+
+#: src/commands/commandhelpformatter.h:129
+msgid "Expert options:"
+msgstr "Szakértői beállítások:"
+
+#: src/commands/commandhelpformatter.h:132
+msgid "This command has no additional options."
+msgstr "Ennek a parancsnak nincsenek további beállításai."
+
+#: src/commands/commandhelpformatter.h:135
+msgid "Legacy options:"
+msgstr "Örökölt beállítások:"
+
+#. translator: '-r             The same as -f.
+#: src/commands/commandhelpformatter.h:139
+#, boost-format
+msgid "The same as %1%."
+msgstr "Ugyanaz, mint a(z) %1%."
+
+#: src/commands/commandhelpformatter.h:187
+msgid "Usage:"
+msgstr "Használat:"
+
+#: src/commands/commandhelpformatter.h:189
+msgid "Global Options:"
+msgstr "Általános beállítások:"
+
+#: src/commands/commandhelpformatter.h:191
+msgid "Commands:"
+msgstr "Parancsok:"
+
+#. translators: --details
+#: src/commands/commonflags.h:23 src/commands/inrverify.cc:35
+msgid "Show the detailed installation summary."
+msgstr "A részletes telepítési összefoglaló megjelenítése."
+
+#: src/commands/commonflags.h:30
+#, boost-format
+msgid "Type of package (%1%)."
+msgstr "A feloldható típusa (%1%)."
+
+#. translators: --best-effort
+#: src/commands/commonflags.h:38
+msgid ""
+"Do a 'best effort' approach to update. Updates to a lower than the latest "
+"version are also acceptable."
+msgstr ""
+"A 'best effort' felhasználása a frissítéshez, amely elfogadja a legfrissebb "
+"verziónál régebbiek telepítését is."
+
+#: src/commands/commonflags.h:45
+msgid "Consider only patches which affect the package management itself."
+msgstr ""
+"Csak olyan javításokat célszerű választania, amelyek magára a "
+"csomagkezelésre vonatkoznak."
+
+#: src/output/Out.h:26 src/repos.cc:125 src/repos.cc:153
+msgid "Yes"
+msgstr "Igen"
+
+#: src/output/Out.h:26 src/locales.cc:72 src/repos.cc:131 src/repos.cc:159
+msgid "No"
+msgstr "Nem"
+
+#. translator: usually followed by a ' ' and some explanatory text
+#: src/output/Out.h:37
+msgid "Note:"
+msgstr "Megjegyzés:"
+
+#. translator: usually followed by a ' ' and some explanatory text
+#: src/output/Out.h:39
+msgid "Warning:"
+msgstr "Figyelmeztetés:"
+
+#. translator: usually followed by a ' ' and some explanatory text
+#: src/output/Out.h:41
+msgid "Error:"
+msgstr "Hiba:"
+
+#: src/output/Out.h:43
+msgid "Continue?"
+msgstr "Folytatja?"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:23
+msgid "ALIAS"
+msgstr "álnév"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:25
+msgid "ALIAS|#|URI"
+msgstr "álnév|#|URI"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:27
+msgid "CATEGORY"
+msgstr "kategória"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:29
+msgid "DIR"
+msgstr "KÖNYVTÁR"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:31
+msgid "FILE"
+msgstr "FÁJL"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:33
+msgid "FILE.repo"
+msgstr ".repo_fájl"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:35
+msgid "FORMAT"
+msgstr "FORMÁTUM"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:37
+msgid "INTEGER"
+msgstr "egész szám"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:39
+msgid "PATH"
+msgstr "ELÉRÉSI ÚT"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:41
+msgid "SEVERITY"
+msgstr "súlyosság"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:43
+msgid "STRING"
+msgstr "KARAKTERLÁNC"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:45
+msgid "TAG"
+msgstr "CÍMKE"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:47
+msgid "TYPE"
+msgstr "típus"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#. translators: property name; short; used like "Name: value"
+#: src/utils/flags/zyppflags.h:49 src/commands/repos/list.cc:42
+#: src/commands/repos/list.cc:268 src/commands/services/list.cc:116
+#: src/repos.cc:1254
+msgid "URI"
+msgstr "URI"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:51
+msgid "YYYY-MM-DD"
+msgstr "ÉÉÉÉ-HH-NN"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:53
+msgid "MODE"
+msgstr "ÜZEMMÓD"
+
+#. TranslatorExplanation These are reasons for various failures.
+#: src/utils/prompt.h:185
+msgid "Not found"
+msgstr "Nem található"
+
+# error box title
+#: src/utils/prompt.h:185
+msgid "I/O error"
+msgstr "I/O hiba"
+
+#: src/utils/prompt.h:185
+msgid "Invalid object"
+msgstr "Érvénytelen objektum"
+
+#: src/utils/prompt.h:192
+msgid "Error"
+msgstr "Hiba"
 
 #: src/Command.cc:93
 msgid "Invalid command"
@@ -615,16 +1347,6 @@ msgstr "Ezt akarta írni: %1%?"
 msgid "Ignoring option %s when updating the update stack first."
 msgstr ""
 "A(z) %s kapcsoló figyelmen kívül hagyása a frissítőcsomag első frissítésekor."
-
-#: src/SolverRequester.h:52
-#, boost-format
-msgid "Suspicious category filter value '%1%'."
-msgstr "Gyanús kategóriaszűrő-érték: '%1%'."
-
-#: src/SolverRequester.h:60
-#, boost-format
-msgid "Suspicious severity filter value '%1%'."
-msgstr "Gyanús súlyossági szűrőérték: '%1%'."
 
 #. translator: '%1%' is a products name
 #. '%2%' is a command to call (like 'zypper dup')
@@ -1376,409 +2098,6 @@ msgstr "Az %s kapcsolónak itt nincs szerepe, ezért figyelmen kívül marad."
 msgid "Non-option program arguments: "
 msgstr "Nem kapcsoló jellegű paraméterek: "
 
-#: src/callbacks/keyring.h:32
-msgid ""
-"A GPG pubkey is clearly identified by it's fingerprint. Do not rely the keys "
-"name. If you are not sure whether the presented key is authentic, ask the "
-"repository provider or check his web site. Many provider maintain a web page "
-"showing the fingerprints of the GPG keys they are using."
-msgstr ""
-
-#: src/callbacks/keyring.h:37
-msgid ""
-"Signing data enables the recipient to verify that no modifications occurred "
-"after the data were signed. Accepting data with no, wrong or unknown "
-"signature can lead to a corrupted system and in extreme cases even to a "
-"system compromise."
-msgstr ""
-"Az adatok aláírása lehetővé teszi, hogy a címzett ellenőrizze, hogy az "
-"adatok nem lettek-e módosítva az aláírásuk után. Az aláírás nélküli, a "
-"helytelen aláírással vagy az ismeretlen aláírással rendelkező adatok "
-"elfogadása azt eredményezheti, hogy a rendszer megsérül, és végletes esetben "
-"akár illetéktelenek számára is hozzáférhetővé válhat."
-
-#. translator: %1% is a file name
-#: src/callbacks/keyring.h:45
-#, boost-format
-msgid ""
-"File '%1%' is the repositories master index file. It ensures the integrity "
-"of the whole repo."
-msgstr ""
-"A(z) '%1%' fájl a telepítési forrás elsődleges indexfájlja. A teljes "
-"telepítési forrás integritását biztosítja."
-
-#: src/callbacks/keyring.h:51
-msgid ""
-"We can't verify that no one meddled with this file, so it might not be "
-"trustworthy anymore! You should not continue unless you know it's safe."
-msgstr ""
-"Nem tudjuk ellenőrizni, hogy érintetlen-e a fájl, vagyis előfordulhat, hogy "
-"már nem megbízható. Ne folytassa a műveletet, ha nincs meggyőződve arról, "
-"hogy ezt biztonságosan megteheti."
-
-#: src/callbacks/keyring.h:56
-msgid ""
-"This file was modified after it has been signed. This may have been a "
-"malicious change, so it might not be trustworthy anymore! You should not "
-"continue unless you know it's safe."
-msgstr ""
-"Ez a fájl megváltozott az aláírása után. Ez lehet rosszindulatú módosítás, "
-"ezért előfordulhat, hogy a fájl már nem megbízható. Ne folytassa a "
-"műveletet, ha nincs meggyőződve arról, hogy ezt biztonságosan megteheti."
-
-#: src/callbacks/keyring.h:85
-msgid "Repository:"
-msgstr "Telepítési forrás:"
-
-#: src/callbacks/keyring.h:87
-msgid "Key Fingerprint:"
-msgstr "Kulcs ujjlenyomata:"
-
-#: src/callbacks/keyring.h:88
-msgid "Key Name:"
-msgstr "Kulcs neve:"
-
-#: src/callbacks/keyring.h:89
-msgid "Key Algorithm:"
-msgstr ""
-
-#: src/callbacks/keyring.h:90
-msgid "Key Created:"
-msgstr "Kulcs létrehozása:"
-
-#: src/callbacks/keyring.h:91
-msgid "Key Expires:"
-msgstr "Kulcs lejárata:"
-
-#: src/callbacks/keyring.h:93
-msgid "Subkey:"
-msgstr "Alkulcs:"
-
-#: src/callbacks/keyring.h:94
-msgid "Rpm Name:"
-msgstr "Rpm-fájl neve:"
-
-#: src/callbacks/keyring.h:120
-#, boost-format
-msgid "The gpg key signing file '%1%' has expired."
-msgstr "A gpg kulcs '%1%' aláíró fájljának érvényessége lejárt."
-
-#: src/callbacks/keyring.h:126
-#, boost-format
-msgid "The gpg key signing file '%1%' will expire in %2% day."
-msgid_plural "The gpg key signing file '%1%' will expire in %2% days."
-msgstr[0] "A(z) '%1%' gpg kulcsaláíró fájl érvényessége %2% nap múlva lejár."
-msgstr[1] "A(z) '%1%' gpg kulcsaláíró fájl érvényessége %2% nap múlva lejár."
-
-#: src/callbacks/keyring.h:149
-#, c-format, boost-format
-msgid "Accepting an unsigned file '%s'."
-msgstr "A(z) %s aláírás nélküli fájl elfogadása."
-
-#: src/callbacks/keyring.h:153
-#, c-format, boost-format
-msgid "Accepting an unsigned file '%s' from repository '%s'."
-msgstr ""
-"A(z) %s aláírás nélküli fájl elfogadása a(z) '%s' telepítési forrásból."
-
-#. translator: %1% is a file name
-#: src/callbacks/keyring.h:163
-#, boost-format
-msgid "File '%1%' is unsigned."
-msgstr "A(z) %s fájl nincs aláírva."
-
-#. translator: %1% is a file name, %2% a repositories name
-#: src/callbacks/keyring.h:166
-#, boost-format
-msgid "File '%1%' from repository '%2%' is unsigned."
-msgstr "A(z) '%2' telepítési forrásból származó  '%1%' fájl nincs aláírva."
-
-#. TranslatorExplanation: speaking of a file
-#: src/callbacks/keyring.h:183
-#, c-format, boost-format
-msgid "File '%s' is unsigned, continue?"
-msgstr "A(z) %s fájl nincs aláírva, folytatja?"
-
-#. TranslatorExplanation: speaking of a file
-#: src/callbacks/keyring.h:187
-#, c-format, boost-format
-msgid "File '%s' from repository '%s' is unsigned, continue?"
-msgstr "A(z) %s fájl a(z) '%s' telepítési forrásból nincs aláírva, folytatja?"
-
-#: src/callbacks/keyring.h:210
-#, c-format, boost-format
-msgid "Accepting file '%s' signed with an unknown key '%s'."
-msgstr "Ismeretlen azonosítójú kulccsal (%s) aláírt %s fájl elfogadása."
-
-#: src/callbacks/keyring.h:214
-#, c-format, boost-format
-msgid ""
-"Accepting file '%s' from repository '%s' signed with an unknown key '%s'."
-msgstr ""
-"Ismeretlen azonosítójú kulccsal (%s) aláírt %s fájl elfogadása a(z) %s "
-"telepítési forrásból."
-
-#. translator: %1% is a file name, %2% is a gpg key ID
-#: src/callbacks/keyring.h:223
-#, boost-format
-msgid "File '%1%' is signed with an unknown key '%2%'."
-msgstr "A(z) '%1%' fájl ismeretlen azonosítójú kulccsal ('%2%') van aláírva."
-
-#. translator: %1% is a file name, %2% is a gpg key ID, %3% a repositories name
-#: src/callbacks/keyring.h:226
-#, boost-format
-msgid "File '%1%' from repository '%3%' is signed with an unknown key '%2%'."
-msgstr ""
-"A(z) '%3%' telepítési forrásból származó '%1%' fájl ismeretlen azonosítójú "
-"kulccsal ('%2%') van aláírva."
-
-#. translators: the last %s is gpg key ID
-#: src/callbacks/keyring.h:243
-#, c-format, boost-format
-msgid "File '%s' is signed with an unknown key '%s'. Continue?"
-msgstr ""
-"A(z) %s fájl ismeretlen azonosítójú kulccsal (%s) lett aláírva. Folytatja?"
-
-#. translators: the last %s is gpg key ID
-#: src/callbacks/keyring.h:247
-#, c-format, boost-format
-msgid ""
-"File '%s' from repository '%s' is signed with an unknown key '%s'. Continue?"
-msgstr ""
-"A(z) %s fájl a(z) %s telepítési forrásból ismeretlen azonosítójú kulccsal "
-"(%s) lett aláírva. Folytatja?"
-
-#: src/callbacks/keyring.h:267
-msgid "Automatically importing the following key:"
-msgstr "A következő kulcs automatikus importálása:"
-
-#: src/callbacks/keyring.h:269
-msgid "Automatically trusting the following key:"
-msgstr "A következő kulcs automatikus elfogadása:"
-
-#: src/callbacks/keyring.h:271
-msgid "New repository or package signing key received:"
-msgstr "Új telepítési forrás- vagy csomagaláíró kulcs érkezett:"
-
-#. translators: this message is shown after showing description of the key
-#: src/callbacks/keyring.h:305
-msgid "Do you want to reject the key, trust temporarily, or trust always?"
-msgstr ""
-"Elutasítja a kulcsot, megbízik benne ideiglenesen, vagy elfogadja véglegesen?"
-
-#. translators: this message is shown after showing description of the key
-#: src/callbacks/keyring.h:308
-msgid "Do you want to reject the key, or trust always?"
-msgstr "Elutasítja a kulcsot, vagy elfogadja véglegesen?"
-
-#. translators: r/t/a stands for Reject/TrustTemporarily/trustAlways(import)
-#. translate to whatever is appropriate for your language
-#. The anserws must be separated by slash characters '/' and must
-#. correspond to reject/trusttemporarily/trustalways in that order.
-#. The answers should be lower case letters.
-#: src/callbacks/keyring.h:326
-msgid "r/t/a/"
-msgstr "e/i/v"
-
-#. translators: the same as r/t/a, but without 'a'
-#: src/callbacks/keyring.h:329
-msgid "r/t"
-msgstr "e/i"
-
-#. translators: r/a stands for Reject/trustAlways(import)
-#. translate to whatever is appropriate for your language
-#. The anserws must be separated by slash characters '/' and must
-#. correspond to reject/trusttemporarily/trustalways in that order.
-#. The answers should be lower case letters.
-#: src/callbacks/keyring.h:336
-msgid "r/a/"
-msgstr "e/v"
-
-#. translators: help text for the 'r' option in the 'r/t/a' prompt
-#: src/callbacks/keyring.h:342
-msgid "Don't trust the key."
-msgstr "Ne bízzon meg a kulcsban."
-
-#. translators: help text for the 't' option in the 'r/t/a' prompt
-#: src/callbacks/keyring.h:346
-msgid "Trust the key temporarily."
-msgstr "Bízzon meg ideiglenesen a kulcsban."
-
-#. translators: help text for the 'a' option in the 'r/t/a' prompt
-#: src/callbacks/keyring.h:351
-msgid "Trust the key and import it into trusted keyring."
-msgstr "Bízzon meg a kulcsban és importálja a megbízható kulcstartóba."
-
-#: src/callbacks/keyring.h:389
-#, c-format, boost-format
-msgid "Ignoring failed signature verification for file '%s'!"
-msgstr "%s fájl sikertelen aláírás-ellenőrzésének figyelmen kívül hagyása!"
-
-#: src/callbacks/keyring.h:392
-#, c-format, boost-format
-msgid ""
-"Ignoring failed signature verification for file '%s' from repository '%s'!"
-msgstr ""
-"%s fájl (telepítési forrás: %s) sikertelen aláírás-ellenőrzésének figyelmen "
-"kívül hagyása!"
-
-#: src/callbacks/keyring.h:398
-msgid "Double-check this is not caused by some malicious changes in the file!"
-msgstr ""
-"Győződjön meg arról, hogy ezt nem a fájl ártó szándékú módosítása okozza!"
-
-#. translator: %1% is a file name
-#: src/callbacks/keyring.h:408
-#, boost-format
-msgid "Signature verification failed for file '%1%'."
-msgstr "Az aláírás ellenőrzése meghiúsult a fájlhoz: %1%."
-
-#. translator: %1% is a file name, %2% a repositories name
-#: src/callbacks/keyring.h:411
-#, boost-format
-msgid "Signature verification failed for file '%1%' from repository '%2%'."
-msgstr ""
-"Az aláírás ellenőrzése meghiúsult a fájlhoz: %1% a telepítési forrásból: %2%."
-
-#: src/callbacks/keyring.h:460
-msgid ""
-"The rpm database seems to contain old V3 version gpg keys which are "
-"meanwhile obsolete and considered insecure:"
-msgstr ""
-"Az rpm adatbázis régi, V3 verziójú gpg-kulcsokat tartalmaz, amelyek "
-"időközben elavultak, és nem számítanak biztonságosnak:"
-
-#: src/callbacks/keyring.h:467
-#, boost-format
-msgid "To see details about a key call '%1%'."
-msgstr ""
-"A kulcsokkal kapcsolatos részletek a(z) '%1%' hívásával tekinthetők meg."
-
-#: src/callbacks/keyring.h:471
-#, boost-format
-msgid ""
-"Unless you believe the key in question is still in use, you can remove it "
-"from the rpm database calling '%1%'."
-msgstr ""
-"Ha tudja, hogy az adott kulcs már nincs használatban, eltávolíthatja az rpm "
-"adatbázisból a(z) '%1%' hívásával."
-
-#. translator: %1% is the number of keys, %2% the name of a repository
-#: src/callbacks/keyring.h:490
-#, boost-format
-msgid "Received %1% new package signing key from repository %2%:"
-msgid_plural "Received %1% new package signing keys from repository %2%:"
-msgstr[0] ""
-msgstr[1] ""
-
-#: src/callbacks/keyring.h:494
-msgid ""
-"Those additional keys are usually used to sign packages shipped by the "
-"repository. In order to validate those packages upon download and "
-"installation the new keys will be imported into the rpm database."
-msgstr ""
-
-#: src/callbacks/keyring.h:496
-msgid "New:"
-msgstr ""
-
-#: src/callbacks/keyring.h:502
-msgid ""
-"The repository metadata introducing the new keys have been signed and "
-"validated by the trusted key:"
-msgstr ""
-
-#: src/callbacks/keyring.h:525
-#, c-format, boost-format
-msgid "No digest for file %s."
-msgstr "Nincs kivonat a(z) %s fájlhoz."
-
-#: src/callbacks/keyring.h:533
-#, c-format, boost-format
-msgid "Unknown digest %s for file %s."
-msgstr "Ismeretlen %s kivonat a(z) %s fájlhoz."
-
-#: src/callbacks/keyring.h:550
-#, boost-format
-msgid ""
-"Digest verification failed for file '%1%'\n"
-"[%2%]\n"
-"\n"
-"  expected %3%\n"
-"  but got  %4%\n"
-msgstr ""
-"A kivonat ellenőrzése sikertelen a(z) '%1%' fájl esetében\n"
-"[%2%]\n"
-"\n"
-"  várt érték: %3%\n"
-"  kapott érték:  %4%\n"
-
-#: src/callbacks/keyring.h:562
-msgid ""
-"Accepting packages with wrong checksums can lead to a corrupted system and "
-"in extreme cases even to a system compromise."
-msgstr ""
-"A hibás ellenőrző összegű csomagok elfogadása azt eredményezheti, hogy a "
-"rendszer megsérül, végletes esetben akár illetéktelenek számára is "
-"hozzáférhetővé válhat."
-
-#: src/callbacks/keyring.h:570
-#, boost-format
-msgid ""
-"However if you made certain that the file with checksum '%1%..' is secure, "
-"correct\n"
-"and should be used within this operation, enter the first 4 characters of "
-"the checksum\n"
-"to unblock using this file on your own risk. Empty input will discard the "
-"file.\n"
-msgstr ""
-"Ha viszont meggyőződött róla, hogy a(z) '%1%..' ellenőrző összegű fájl "
-"biztonságos,\n"
-"helyes, és használandó ebben a műveletben, saját kockázatára engedélyezheti "
-"a fájl\n"
-"használatát az ellenőrző összeg első négy karakterének megadásával. Ha nem "
-"ad meg semmit, azzal eldobja a fájlt.\n"
-
-#. translators: A prompt option
-#: src/callbacks/keyring.h:577
-msgid "discard"
-msgstr "eldobás"
-
-#. translators: A prompt option help text
-#: src/callbacks/keyring.h:579
-msgid "Unblock using this file on your own risk."
-msgstr "A fájl zárolásának feloldása a saját kockázatára."
-
-#. translators: A prompt option help text
-#: src/callbacks/keyring.h:581
-msgid "Discard the file."
-msgstr "A fájl eldobása."
-
-#. translators: A prompt text
-#: src/callbacks/keyring.h:585
-msgid "Unblock or discard?"
-msgstr "Feloldja a zárolását vagy eldobja?"
-
-#: src/callbacks/locks.h:27
-msgid ""
-"The following query locks the same objects as the one you want to remove:"
-msgstr ""
-"A következő lekérdezés zárolja azokat az objektumokat amelyeket az "
-"eltávolítani kívánt csomag:"
-
-#: src/callbacks/locks.h:30
-msgid "The following query locks some of the objects you want to unlock:"
-msgstr ""
-"A következő lekérdezés zárolja a feloldani kívánt objektumok némelyikét:"
-
-#: src/callbacks/locks.h:35 src/callbacks/locks.h:50
-msgid "Do you want to remove this lock?"
-msgstr "Eltávolítja ezt a zárolást?"
-
-#: src/callbacks/locks.h:45
-msgid "The following query does not lock anything:"
-msgstr "A következő lekérdezés nem zárol semmit:"
-
 #. help text for the "Abort, retry, ignore?" prompt for media errors
 #: src/callbacks/media.cc:27
 msgid "Skip retrieval of the file and abort current operation."
@@ -1915,197 +2234,6 @@ msgstr "Felhasználói név"
 #: src/callbacks/media.cc:328
 msgid "Password"
 msgstr "Jelszó"
-
-#: src/callbacks/repo.h:49
-msgid "Retrieving delta"
-msgstr "Különbség lekérdezése"
-
-#. translators: this text is a progress display label e.g. "Applying delta foo [42%]"
-#: src/callbacks/repo.h:74
-msgid "Applying delta"
-msgstr "Különbség hozzáadása"
-
-#. TranslatorExplanation %s is package size like "5.6 M"
-#: src/callbacks/repo.h:103
-#, c-format, boost-format
-msgid "(%s unpacked)"
-msgstr "(%s kicsomagolva)"
-
-#: src/callbacks/repo.h:112
-#, boost-format
-msgid "In cache %1%"
-msgstr "A gyorsítótárban: %1%"
-
-#: src/callbacks/repo.h:128
-#, c-format, boost-format
-msgid "Retrieving %s %s-%s.%s"
-msgstr "%s %s-%s.%s letöltése"
-
-#: src/callbacks/repo.h:217
-msgid "Signature verification failed"
-msgstr "Az aláírás-ellenőrzés sikertelen"
-
-#: src/callbacks/repo.h:237
-msgid "Accepting package despite the error."
-msgstr "A csomag elfogadása a hiba ellenére."
-
-#. TranslatorExplanation speaking of a script - "Running: script file name (package name, script dir)"
-#: src/callbacks/rpm.h:184
-#, c-format, boost-format
-msgid "Running: %s  (%s, %s)"
-msgstr "Futtatás: %s  (%s, %s)"
-
-#: src/callbacks/rpm.h:267
-#, c-format, boost-format
-msgid "Removal of %s failed:"
-msgstr "%s eltávolítása meghiúsult:"
-
-#. translators: This text is a progress display label e.g. "Removing packagename-x.x.x [42%]"
-#: src/callbacks/rpm.h:307
-#, c-format, boost-format
-msgid "Removing %s"
-msgstr "Eltávolítás: %s"
-
-#: src/callbacks/rpm.h:344
-#, c-format, boost-format
-msgid "Installation of %s failed:"
-msgstr "A(z) %s telepítése meghiúsult:"
-
-# modules/inst_target_part.ycp:676
-#. TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
-#: src/callbacks/rpm.h:384
-#, c-format, boost-format
-msgid "Installing: %s"
-msgstr "%s telepítése"
-
-#. translators: A progressbar label
-#: src/callbacks/rpm.h:403
-msgid "Checking for file conflicts:"
-msgstr "Fájlütközések keresése:"
-
-#. TranslatorExplanation %1%(number of packages); detailed list follows
-#: src/callbacks/rpm.h:454
-#, boost-format
-msgid ""
-"%1% package had to be excluded from file conflicts check because it is not "
-"yet download."
-msgid_plural ""
-"%1% packages had to be excluded from file conflicts check because they are "
-"not yet downloaded."
-msgstr[0] ""
-msgstr[1] ""
-
-#. TranslatorExplanation %1%(commandline option)
-#: src/callbacks/rpm.h:460
-#, boost-format
-msgid ""
-"Checking for file conflicts requires not installed packages to be downloaded "
-"in advance in order to access their file lists. See option '%1%' in the "
-"zypper manual page for details."
-msgstr ""
-"A fájlütközések ellenőrzéséhez a még nem telepített csomagokat előre le kell "
-"tölteni, hogy hozzá lehessen férni a fájljaik jegyzékéhez. Részleteket a "
-"zypper kézikönyvében a(z) '%1%' leírása tartalmaz."
-
-#. TranslatorExplanation %1%(number of conflicts); detailed list follows
-#: src/callbacks/rpm.h:470
-#, boost-format
-msgid "Detected %1% file conflict:"
-msgid_plural "Detected %1% file conflicts:"
-msgstr[0] "%1% fájlütközés észlelhető:"
-msgstr[1] "%1% fájlütközés észlelhető:"
-
-#: src/callbacks/rpm.h:478
-msgid "Conflicting files will be replaced."
-msgstr "Az ütközést okozó fájlokat a rendszer lecseréli."
-
-#. TranslatorExplanation Problem description before asking whether to "Continue? [yes/no] (no):"
-#: src/callbacks/rpm.h:484
-msgid ""
-"File conflicts happen when two packages attempt to install files with the "
-"same name but different contents. If you continue, conflicting files will be "
-"replaced losing the previous content."
-msgstr ""
-"A fájlok ütközése olyankor fordul elő, amikor két csomag azonos nevű, de "
-"eltérő tartalmú fájlokat próbál telepíteni. Ha folytatja a műveletet, az "
-"ütközést okozó fájlokat a rendszer lecseréli, a korábbi tartalom elveszik."
-
-#. translator: %s is an other command: "This is an alias for 'zypper info -t patch'."
-#: src/commands/commandhelpformatter.h:94
-#, c-format, boost-format
-msgid "This is an alias for '%s'."
-msgstr "Ez egy álnév a(z) '%s' parancshoz."
-
-#: src/commands/commandhelpformatter.h:107
-msgid "Examples:"
-msgstr "Példák:"
-
-#: src/commands/commandhelpformatter.h:110
-msgid "Arguments:"
-msgstr "Argumentumok:"
-
-#: src/commands/commandhelpformatter.h:123 src/utils/flags/zyppflags.cc:627
-msgid "Command options:"
-msgstr "Parancs beállításai:"
-
-#: src/commands/commandhelpformatter.h:126
-msgid "Solver options:"
-msgstr "Feloldó beállításai:"
-
-#: src/commands/commandhelpformatter.h:129
-msgid "Expert options:"
-msgstr "Szakértői beállítások:"
-
-#: src/commands/commandhelpformatter.h:132
-msgid "This command has no additional options."
-msgstr "Ennek a parancsnak nincsenek további beállításai."
-
-#: src/commands/commandhelpformatter.h:135
-msgid "Legacy options:"
-msgstr "Örökölt beállítások:"
-
-#. translator: '-r             The same as -f.
-#: src/commands/commandhelpformatter.h:139
-#, boost-format
-msgid "The same as %1%."
-msgstr "Ugyanaz, mint a(z) %1%."
-
-#: src/commands/commandhelpformatter.h:187
-msgid "Usage:"
-msgstr "Használat:"
-
-#: src/commands/commandhelpformatter.h:189
-msgid "Global Options:"
-msgstr "Általános beállítások:"
-
-#: src/commands/commandhelpformatter.h:191
-msgid "Commands:"
-msgstr "Parancsok:"
-
-#. translators: --details
-#: src/commands/commonflags.h:23 src/commands/inrverify.cc:35
-msgid "Show the detailed installation summary."
-msgstr "A részletes telepítési összefoglaló megjelenítése."
-
-#: src/commands/commonflags.h:30
-#, boost-format
-msgid "Type of package (%1%)."
-msgstr "A feloldható típusa (%1%)."
-
-#. translators: --best-effort
-#: src/commands/commonflags.h:38
-msgid ""
-"Do a 'best effort' approach to update. Updates to a lower than the latest "
-"version are also acceptable."
-msgstr ""
-"A 'best effort' felhasználása a frissítéshez, amely elfogadja a legfrissebb "
-"verziónál régebbiek telepítését is."
-
-#: src/commands/commonflags.h:45
-msgid "Consider only patches which affect the package management itself."
-msgstr ""
-"Csak olyan javításokat célszerű választania, amelyek magára a "
-"csomagkezelésre vonatkoznak."
 
 #: src/commands/conditions.cc:19
 msgid "Root privileges are required to run this command."
@@ -2530,13 +2658,17 @@ msgstr ""
 msgid "Restrict the lock to the specified repository."
 msgstr "Csak a megadott telepítési forrásra korlátozza a zárolást."
 
-#: src/commands/locks/add.cc:80
+#: src/commands/locks/add.cc:48
+msgid "Reason for specific lock."
+msgstr ""
+
+#: src/commands/locks/add.cc:81
 msgid "Specified lock has been successfully added."
 msgid_plural "Specified locks have been successfully added."
 msgstr[0] "A megadott zárolás hozzáadása sikeres."
 msgstr[1] "A megadott zárolások hozzáadása sikeres."
 
-#: src/commands/locks/add.cc:87
+#: src/commands/locks/add.cc:88
 msgid "Problem adding the package lock:"
 msgstr "Hiba történt a csomag zárolása közben:"
 
@@ -2599,48 +2731,52 @@ msgstr "Típus"
 msgid "Repository"
 msgstr "Telepítési forrás"
 
+#: src/commands/locks/list.cc:138
+msgid "Comment"
+msgstr ""
+
 #. translators: locks table value
-#: src/commands/locks/list.cc:156 src/commands/locks/list.cc:232
+#: src/commands/locks/list.cc:156 src/commands/locks/list.cc:235
 msgid "(multiple)"
 msgstr "(több)"
 
 #. translators: locks table value
-#: src/commands/locks/list.cc:159 src/commands/locks/list.cc:230
+#: src/commands/locks/list.cc:159 src/commands/locks/list.cc:233
 msgid "(any)"
 msgstr "(bármely)"
 
 #. translators: property name; short; used like "Name: value"
-#: src/commands/locks/list.cc:195
+#: src/commands/locks/list.cc:198
 msgid "Keep installed"
 msgstr "Telepített megtartása"
 
 #. translators: property name; short; used like "Name: value"
-#: src/commands/locks/list.cc:203
+#: src/commands/locks/list.cc:206
 msgid "Do not install"
 msgstr "Ne települjön"
 
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
-#: src/commands/locks/list.cc:256
+#: src/commands/locks/list.cc:259
 msgid "locks (ll) [OPTIONS]"
 msgstr "locks (ll) [beállítások]"
 
-#: src/commands/locks/list.cc:257
+#: src/commands/locks/list.cc:260
 msgid "List current package locks."
 msgstr "Az aktuális csomagzárolások felsorolása."
 
-#: src/commands/locks/list.cc:285
+#: src/commands/locks/list.cc:288
 msgid "Show the number of resolvables matched by each lock."
 msgstr "Az egyes zárolásoknak megfelelő feloldhatók számának megjelenítése."
 
-#: src/commands/locks/list.cc:286
+#: src/commands/locks/list.cc:289
 msgid "List the resolvables matched by each lock."
 msgstr "Az egyes zárolásoknak megfelelő feloldhatók felsorolása."
 
-#: src/commands/locks/list.cc:300
+#: src/commands/locks/list.cc:303
 msgid "Error reading the locks file:"
 msgstr "Hiba a zárolási fájl megnyitása közben:"
 
-#: src/commands/locks/list.cc:307
+#: src/commands/locks/list.cc:310
 msgid "There are no package locks defined."
 msgstr "Nincs csomagzárolás megadva."
 
@@ -3395,14 +3531,6 @@ msgstr "metaadat és a csomag-gyorsítótár törlése."
 #: src/commands/services/list.cc:104
 msgid "Alias"
 msgstr "Álnév"
-
-#. translators: property name; short; used like "Name: value"
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/commands/repos/list.cc:42 src/commands/repos/list.cc:268
-#: src/commands/services/list.cc:116 src/repos.cc:1254
-#: src/utils/flags/zyppflags.h:49
-msgid "URI"
-msgstr "URI"
 
 #. 'enabled' flag
 #. translators: property name; short; used like "Name: value"
@@ -5445,10 +5573,6 @@ msgstr "Kért"
 msgid "Fallback"
 msgstr "Tartalék"
 
-#: src/locales.cc:72 src/output/Out.h:26 src/repos.cc:131 src/repos.cc:159
-msgid "No"
-msgstr "Nem"
-
 #. translators: header of table column - the language code, e.g. en_US
 #: src/locales.cc:174
 msgid "Code"
@@ -5598,29 +5722,6 @@ msgstr "A(z) %s-%s forráscsomag telepítése sikeresen befejeződött."
 #, c-format, boost-format
 msgid "Problem installing source package %s-%s:"
 msgstr "Hiba történt a(z) %s-%s forráscsomag telepítése közben:"
-
-#: src/output/Out.h:26 src/repos.cc:125 src/repos.cc:153
-msgid "Yes"
-msgstr "Igen"
-
-#. translator: usually followed by a ' ' and some explanatory text
-#: src/output/Out.h:37
-msgid "Note:"
-msgstr "Megjegyzés:"
-
-#. translator: usually followed by a ' ' and some explanatory text
-#: src/output/Out.h:39
-msgid "Warning:"
-msgstr "Figyelmeztetés:"
-
-#. translator: usually followed by a ' ' and some explanatory text
-#: src/output/Out.h:41
-msgid "Error:"
-msgstr "Hiba:"
-
-#: src/output/Out.h:43
-msgid "Continue?"
-msgstr "Folytatja?"
 
 #. Since this message will be emitted before we know if the current output is XML or Normal we need to send this message to stderr
 #. to not break scripts that use xml output (bsc#1172925)
@@ -6815,81 +6916,6 @@ msgstr ""
 "Ismeretlen hiba történt a(z) %1% értéknek a(z) %2% jelzőhöz való "
 "hozzárendelése közben."
 
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:23
-msgid "ALIAS"
-msgstr "álnév"
-
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:25
-msgid "ALIAS|#|URI"
-msgstr "álnév|#|URI"
-
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:27
-msgid "CATEGORY"
-msgstr "kategória"
-
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:29
-msgid "DIR"
-msgstr "KÖNYVTÁR"
-
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:31
-msgid "FILE"
-msgstr "FÁJL"
-
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:33
-msgid "FILE.repo"
-msgstr ".repo_fájl"
-
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:35
-msgid "FORMAT"
-msgstr "FORMÁTUM"
-
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:37
-msgid "INTEGER"
-msgstr "egész szám"
-
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:39
-msgid "PATH"
-msgstr "ELÉRÉSI ÚT"
-
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:41
-msgid "SEVERITY"
-msgstr "súlyosság"
-
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:43
-msgid "STRING"
-msgstr "KARAKTERLÁNC"
-
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:45
-msgid "TAG"
-msgstr "CÍMKE"
-
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:47
-msgid "TYPE"
-msgstr "típus"
-
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:51
-msgid "YYYY-MM-DD"
-msgstr "ÉÉÉÉ-HH-NN"
-
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:53
-msgid "MODE"
-msgstr "ÜZEMMÓD"
-
 #. For '-garbage' argument, with 'a', 'b', and 'e' as known options,
 #. getopt_long reports 'a', 'b', and 'e' as known options.
 #. The rest ends here and it is either the last one from previous argument
@@ -7111,33 +7137,33 @@ msgstr "Nem sikerült kitalálni a <platform> értékét."
 msgid "Please use obs://<project>/<platform>"
 msgstr "Használja így: obs://<projekt>/<platform>"
 
-#: src/utils/misc.cc:550 src/utils/misc.cc:591
+#: src/utils/misc.cc:550 src/utils/misc.cc:596
 #, c-format, boost-format
 msgid "Example: %s"
 msgstr "Példa: %s"
 
-#: src/utils/misc.cc:590
+#: src/utils/misc.cc:595
 msgid "Invalid OBS URI."
 msgstr "Érvénytelen OBS URI."
 
-#: src/utils/misc.cc:590
+#: src/utils/misc.cc:595
 msgid "Correct form is obs://<project>/[platform]"
 msgstr "Megfelelő formátum: obs://<project>/[platform]"
 
-#: src/utils/misc.cc:640
+#: src/utils/misc.cc:645
 msgid "Problem copying the specified RPM file to the cache directory."
 msgstr ""
 "Hiba történt a megadott RPM-fájl gyorsítótár könyvtárába történő másolásakor."
 
-#: src/utils/misc.cc:641
+#: src/utils/misc.cc:646
 msgid "Perhaps you are running out of disk space."
 msgstr "Lehetséges, hogy elfogyott a szabad lemezterület."
 
-#: src/utils/misc.cc:649
+#: src/utils/misc.cc:654
 msgid "Problem retrieving the specified RPM file"
 msgstr "Hiba történt a megadott RPM-fájl letöltésekor"
 
-#: src/utils/misc.cc:650
+#: src/utils/misc.cc:655
 msgid "Please check whether the file is accessible."
 msgstr "Ellenőrizze, hogy a megadott fájl valóban elérhető."
 
@@ -7246,24 +7272,6 @@ msgid ""
 msgstr ""
 "Ha semmi más nem működik, a '#1' beírásával választhatja ki az 1. "
 "lehetőséget, a '#2' beírásával a 2. lehetőséget..."
-
-#. TranslatorExplanation These are reasons for various failures.
-#: src/utils/prompt.h:185
-msgid "Not found"
-msgstr "Nem található"
-
-# error box title
-#: src/utils/prompt.h:185
-msgid "I/O error"
-msgstr "I/O hiba"
-
-#: src/utils/prompt.h:185
-msgid "Invalid object"
-msgstr "Érvénytelen objektum"
-
-#: src/utils/prompt.h:192
-msgid "Error"
-msgstr "Hiba"
 
 # =============================================================================
 #~ msgid "addlock (al) [OPTIONS] <PACKAGENAME> ..."

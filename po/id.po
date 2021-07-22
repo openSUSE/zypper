@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-30 14:58+0200\n"
+"POT-Creation-Date: 2021-07-21 09:46+0200\n"
 "PO-Revision-Date: 2021-06-21 12:58+0000\n"
 "Last-Translator: Kukuh Syafaat <syafaatkukuh@gmail.com>\n"
 "Language-Team: Indonesian <https://l10n.opensuse.org/projects/zypper/master/"
@@ -18,6 +18,743 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Weblate 4.6.2\n"
+
+#: src/SolverRequester.h:52
+#, boost-format
+msgid "Suspicious category filter value '%1%'."
+msgstr "Nilai penyaring kategori '%1%' mencurigakan."
+
+#: src/SolverRequester.h:60
+#, boost-format
+msgid "Suspicious severity filter value '%1%'."
+msgstr "Nilai penyaring tingkat keparahan '%1%' mencurigakan."
+
+#: src/callbacks/keyring.h:32
+msgid ""
+"A GPG pubkey is clearly identified by it's fingerprint. Do not rely the keys "
+"name. If you are not sure whether the presented key is authentic, ask the "
+"repository provider or check his web site. Many provider maintain a web page "
+"showing the fingerprints of the GPG keys they are using."
+msgstr ""
+"Sebuah pubkey GPG diidentifikasi dengan jelas oleh sidik jarinya. Jangan "
+"mengandalkan nama kunci. Jika Anda tidak yakin apakah kunci yang disajikan "
+"asli, tanyakan pada penyedia repositori atau periksa situs webnya. Banyak "
+"penyedia memelihara halaman web yang menunjukkan sidik jari dari kunci GPG "
+"yang mereka gunakan."
+
+#: src/callbacks/keyring.h:37
+msgid ""
+"Signing data enables the recipient to verify that no modifications occurred "
+"after the data were signed. Accepting data with no, wrong or unknown "
+"signature can lead to a corrupted system and in extreme cases even to a "
+"system compromise."
+msgstr ""
+"Penandatanganan data memungkinkan penerima untuk memverifikasi bahwa tidak "
+"ada modifikasi yang terjadi setelah data ditandatangani. Menerima data tanpa "
+"tanda tangan yang salah atau tidak dikenal dapat menyebabkan sistem rusak "
+"dan dalam kasus yang ekstrim bahkan pada sistem yang kompromistis."
+
+#. translator: %1% is a file name
+#: src/callbacks/keyring.h:45
+#, boost-format
+msgid ""
+"File '%1%' is the repositories master index file. It ensures the integrity "
+"of the whole repo."
+msgstr ""
+"Berkas '%1%' adalah berkas indeks master repositori. Ini memastikan "
+"integritas dari seluruh repo."
+
+#: src/callbacks/keyring.h:51
+msgid ""
+"We can't verify that no one meddled with this file, so it might not be "
+"trustworthy anymore! You should not continue unless you know it's safe."
+msgstr ""
+"Kami tidak dapat memverifikasi bahwa tidak ada orang yang mengotak-atik "
+"berkas ini, jadi mungkin tidak dapat dipercaya lagi! Anda tidak boleh "
+"melanjutkan kecuali Anda tahu itu aman."
+
+#: src/callbacks/keyring.h:56
+msgid ""
+"This file was modified after it has been signed. This may have been a "
+"malicious change, so it might not be trustworthy anymore! You should not "
+"continue unless you know it's safe."
+msgstr ""
+"Berkas ini telah diubah setelah ditandatangani. Ini mungkin merupakan "
+"perubahan berbahaya, jadi mungkin tidak dapat dipercaya lagi! Anda tidak "
+"boleh melanjutkan kecuali Anda tahu itu aman."
+
+#: src/callbacks/keyring.h:85
+msgid "Repository:"
+msgstr "Repositori:"
+
+#: src/callbacks/keyring.h:87
+msgid "Key Fingerprint:"
+msgstr "Sidik Jari Kunci:"
+
+#: src/callbacks/keyring.h:88
+msgid "Key Name:"
+msgstr "Nama Kunci:"
+
+#: src/callbacks/keyring.h:89
+msgid "Key Algorithm:"
+msgstr "Algoritma Kunci:"
+
+#: src/callbacks/keyring.h:90
+msgid "Key Created:"
+msgstr "Kunci Dibuat:"
+
+#: src/callbacks/keyring.h:91
+msgid "Key Expires:"
+msgstr "Kunci Kedaluwarsa:"
+
+#: src/callbacks/keyring.h:93
+msgid "Subkey:"
+msgstr "Sub Kunci:"
+
+#: src/callbacks/keyring.h:94
+msgid "Rpm Name:"
+msgstr "Nama Rpm:"
+
+#: src/callbacks/keyring.h:120
+#, boost-format
+msgid "The gpg key signing file '%1%' has expired."
+msgstr "Berkas penandatanganan kunci gpg '%1%' telah kedaluwarsa."
+
+#: src/callbacks/keyring.h:126
+#, boost-format
+msgid "The gpg key signing file '%1%' will expire in %2% day."
+msgid_plural "The gpg key signing file '%1%' will expire in %2% days."
+msgstr[0] ""
+"Berkas penandatanganan kunci gpg '%1%' akan kedaluwarsa dalam %2% hari."
+
+#: src/callbacks/keyring.h:149
+#, c-format, boost-format
+msgid "Accepting an unsigned file '%s'."
+msgstr "Menerima berkas '%s' yang tidak ditandatangani."
+
+#: src/callbacks/keyring.h:153
+#, c-format, boost-format
+msgid "Accepting an unsigned file '%s' from repository '%s'."
+msgstr "Menerima berkas '%s' yang tidak ditandatangani dari repositori '%s'."
+
+#. translator: %1% is a file name
+#: src/callbacks/keyring.h:163
+#, boost-format
+msgid "File '%1%' is unsigned."
+msgstr "Berkas '%1%' tidak ditandatangani."
+
+#. translator: %1% is a file name, %2% a repositories name
+#: src/callbacks/keyring.h:166
+#, boost-format
+msgid "File '%1%' from repository '%2%' is unsigned."
+msgstr "Berkas '%1%' dari repositori '%2%' tidak ditandatangani."
+
+#. TranslatorExplanation: speaking of a file
+#: src/callbacks/keyring.h:183
+#, c-format, boost-format
+msgid "File '%s' is unsigned, continue?"
+msgstr "Berkas '%s' tidak ditandatangani, lanjutkan?"
+
+#. TranslatorExplanation: speaking of a file
+#: src/callbacks/keyring.h:187
+#, c-format, boost-format
+msgid "File '%s' from repository '%s' is unsigned, continue?"
+msgstr "Berkas '%s' dari repositori '%s' tidak ditandatangani, lanjutkan?"
+
+#: src/callbacks/keyring.h:210
+#, c-format, boost-format
+msgid "Accepting file '%s' signed with an unknown key '%s'."
+msgstr ""
+"Menerima berkas '%s' yang ditandatangani dengan kunci '%s' yang tidak "
+"dikenal."
+
+#: src/callbacks/keyring.h:214
+#, c-format, boost-format
+msgid ""
+"Accepting file '%s' from repository '%s' signed with an unknown key '%s'."
+msgstr ""
+"Menerima berkas '%s' dari repositori '%s' yang ditandatangani dengan kunci "
+"'%s' yang tidak dikenal."
+
+#. translator: %1% is a file name, %2% is a gpg key ID
+#: src/callbacks/keyring.h:223
+#, boost-format
+msgid "File '%1%' is signed with an unknown key '%2%'."
+msgstr "Berkas '%1%' ditandatangani dengan kunci '%2%' yang tidak dikenal."
+
+#. translator: %1% is a file name, %2% is a gpg key ID, %3% a repositories name
+#: src/callbacks/keyring.h:226
+#, boost-format
+msgid "File '%1%' from repository '%3%' is signed with an unknown key '%2%'."
+msgstr ""
+"Berkas '%1%' dari repositori '%3%' ditandatangani dengan kunci '%2%' yang "
+"tidak dikenal."
+
+#. translators: the last %s is gpg key ID
+#: src/callbacks/keyring.h:243
+#, c-format, boost-format
+msgid "File '%s' is signed with an unknown key '%s'. Continue?"
+msgstr ""
+"Berkas '%s' ditandatangani dengan kunci '%s' yang tidak dikenal. Lanjutkan?"
+
+#. translators: the last %s is gpg key ID
+#: src/callbacks/keyring.h:247
+#, c-format, boost-format
+msgid ""
+"File '%s' from repository '%s' is signed with an unknown key '%s'. Continue?"
+msgstr ""
+"Berkas '%s' dari repositori '%s' ditandatangani dengan kunci '%s' yang tidak "
+"dikenal. Lanjutkan?"
+
+#: src/callbacks/keyring.h:267
+msgid "Automatically importing the following key:"
+msgstr "Mengimpor kunci berikut secara otomatis:"
+
+#: src/callbacks/keyring.h:269
+msgid "Automatically trusting the following key:"
+msgstr "Mempercayai kunci berikut secara otomatis:"
+
+#: src/callbacks/keyring.h:271
+msgid "New repository or package signing key received:"
+msgstr "Kunci penandatanganan repositori dan paket baru diterima:"
+
+#. translators: this message is shown after showing description of the key
+#: src/callbacks/keyring.h:305
+msgid "Do you want to reject the key, trust temporarily, or trust always?"
+msgstr ""
+"Apakah Anda ingin menolak, mempercayai sementara, atau selalu mempercayai "
+"kunci?"
+
+#. translators: this message is shown after showing description of the key
+#: src/callbacks/keyring.h:308
+msgid "Do you want to reject the key, or trust always?"
+msgstr "Apakah Anda ingin menolak, atau selalu mempercayai kunci?"
+
+#. translators: r/t/a stands for Reject/TrustTemporarily/trustAlways(import)
+#. translate to whatever is appropriate for your language
+#. The anserws must be separated by slash characters '/' and must
+#. correspond to reject/trusttemporarily/trustalways in that order.
+#. The answers should be lower case letters.
+#: src/callbacks/keyring.h:326
+msgid "r/t/a/"
+msgstr "r/t/a/"
+
+#. translators: the same as r/t/a, but without 'a'
+#: src/callbacks/keyring.h:329
+msgid "r/t"
+msgstr "r/t"
+
+#. translators: r/a stands for Reject/trustAlways(import)
+#. translate to whatever is appropriate for your language
+#. The anserws must be separated by slash characters '/' and must
+#. correspond to reject/trusttemporarily/trustalways in that order.
+#. The answers should be lower case letters.
+#: src/callbacks/keyring.h:336
+msgid "r/a/"
+msgstr "r/a/"
+
+#. translators: help text for the 'r' option in the 'r/t/a' prompt
+#: src/callbacks/keyring.h:342
+msgid "Don't trust the key."
+msgstr "Jangan mempercayai kunci itu."
+
+#. translators: help text for the 't' option in the 'r/t/a' prompt
+#: src/callbacks/keyring.h:346
+msgid "Trust the key temporarily."
+msgstr "Percayai kunci sementara."
+
+#. translators: help text for the 'a' option in the 'r/t/a' prompt
+#: src/callbacks/keyring.h:351
+msgid "Trust the key and import it into trusted keyring."
+msgstr "Percayai kunci dan impor ke ring kunci terpercaya."
+
+#: src/callbacks/keyring.h:389
+#, c-format, boost-format
+msgid "Ignoring failed signature verification for file '%s'!"
+msgstr "Mengabaikan verifikasi tanda tangan yang gagal untuk berkas '%s'!"
+
+#: src/callbacks/keyring.h:392
+#, c-format, boost-format
+msgid ""
+"Ignoring failed signature verification for file '%s' from repository '%s'!"
+msgstr ""
+"Mengabaikan verifikasi tanda tangan yang gagal untuk berkas '%s' dari "
+"repositori '%s'!"
+
+#: src/callbacks/keyring.h:398
+msgid "Double-check this is not caused by some malicious changes in the file!"
+msgstr ""
+"Periksa ulang bahwa ini bukan disebabkan oleh beberapa perubahan berbahaya "
+"dalam berkas!"
+
+#. translator: %1% is a file name
+#: src/callbacks/keyring.h:408
+#, boost-format
+msgid "Signature verification failed for file '%1%'."
+msgstr "Verifikasi tanda tangan gagal untuk berkas '%1%'."
+
+#. translator: %1% is a file name, %2% a repositories name
+#: src/callbacks/keyring.h:411
+#, boost-format
+msgid "Signature verification failed for file '%1%' from repository '%2%'."
+msgstr ""
+"Verifikasi tanda tangan gagal untuk berkas '%1%' dari repositori '%2%'."
+
+#: src/callbacks/keyring.h:460
+msgid ""
+"The rpm database seems to contain old V3 version gpg keys which are "
+"meanwhile obsolete and considered insecure:"
+msgstr ""
+"Basis data rpm tampaknya mengandung kunci gpg versi V3 lama yang sementara "
+"itu usang dan dianggap tidak aman:"
+
+#: src/callbacks/keyring.h:467
+#, boost-format
+msgid "To see details about a key call '%1%'."
+msgstr "Untuk melihat detail tentang panggilan kunci '%1%'."
+
+#: src/callbacks/keyring.h:471
+#, boost-format
+msgid ""
+"Unless you believe the key in question is still in use, you can remove it "
+"from the rpm database calling '%1%'."
+msgstr ""
+"Kecuali Anda yakin bahwa kunci tersebut masih digunakan, Anda dapat "
+"menghapusnya dari basis data rpm yang memanggil '%1%'."
+
+#. translator: %1% is the number of keys, %2% the name of a repository
+#: src/callbacks/keyring.h:490
+#, boost-format
+msgid "Received %1% new package signing key from repository %2%:"
+msgid_plural "Received %1% new package signing keys from repository %2%:"
+msgstr[0] "Menerima %1% kunci penandatanganan paket baru dari repositori %2%:"
+
+#: src/callbacks/keyring.h:494
+msgid ""
+"Those additional keys are usually used to sign packages shipped by the "
+"repository. In order to validate those packages upon download and "
+"installation the new keys will be imported into the rpm database."
+msgstr ""
+"Kunci tambahan tersebut biasanya digunakan untuk menandatangani paket yang "
+"dikirimkan oleh repositori. Untuk memvalidasi paket-paket tersebut saat "
+"mengunduh dan memasang, kunci baru akan diimpor ke basis data rpm."
+
+#: src/callbacks/keyring.h:496
+msgid "New:"
+msgstr "Baru:"
+
+#: src/callbacks/keyring.h:502
+msgid ""
+"The repository metadata introducing the new keys have been signed and "
+"validated by the trusted key:"
+msgstr ""
+"Metadata repositori yang memperkenalkan kunci baru telah ditandatangani dan "
+"divalidasi oleh kunci tepercaya:"
+
+#: src/callbacks/keyring.h:525
+#, c-format, boost-format
+msgid "No digest for file %s."
+msgstr "Tidak ada intisari untuk berkas %s."
+
+#: src/callbacks/keyring.h:533
+#, c-format, boost-format
+msgid "Unknown digest %s for file %s."
+msgstr "Intisari %s tidak dikenal untuk berkas %s."
+
+#: src/callbacks/keyring.h:550
+#, boost-format
+msgid ""
+"Digest verification failed for file '%1%'\n"
+"[%2%]\n"
+"\n"
+"  expected %3%\n"
+"  but got  %4%\n"
+msgstr ""
+"Verifikasi intisari gagal untuk berkas '%1%'\n"
+"[%2%]\n"
+"\n"
+"  diharapkan %3%\n"
+"  tetapi didapat  %4%\n"
+
+#: src/callbacks/keyring.h:562
+msgid ""
+"Accepting packages with wrong checksums can lead to a corrupted system and "
+"in extreme cases even to a system compromise."
+msgstr ""
+"Menerima paket dengan checksum yang salah dapat menyebabkan sistem rusak dan "
+"dalam kasus ekstrim bahkan dapat membahayakan sistem."
+
+#: src/callbacks/keyring.h:570
+#, boost-format
+msgid ""
+"However if you made certain that the file with checksum '%1%..' is secure, "
+"correct\n"
+"and should be used within this operation, enter the first 4 characters of "
+"the checksum\n"
+"to unblock using this file on your own risk. Empty input will discard the "
+"file.\n"
+msgstr ""
+"Namun apabila Anda yakin bahwa berkas dengan checksum '%1%..' aman, perbaiki "
+"dan boleh\n"
+"digunakan dalam operasi ini, masukkan 4 karakter pertama dari checksum untuk "
+"membuka blokir\n"
+"penggunaan berkas ini dengan resiko Anda sendiri. Tidak memasukkan akan "
+"mengabaikan berkas ini.\n"
+
+#. translators: A prompt option
+#: src/callbacks/keyring.h:577
+msgid "discard"
+msgstr "abaikan"
+
+#. translators: A prompt option help text
+#: src/callbacks/keyring.h:579
+msgid "Unblock using this file on your own risk."
+msgstr ""
+"Buka blokir penggunaan berkas ini dengan resiko ditanggung Anda sendiri."
+
+#. translators: A prompt option help text
+#: src/callbacks/keyring.h:581
+msgid "Discard the file."
+msgstr "Abaikan berkas."
+
+#. translators: A prompt text
+#: src/callbacks/keyring.h:585
+msgid "Unblock or discard?"
+msgstr "Buka blokir atau abaikan?"
+
+#: src/callbacks/locks.h:27
+msgid ""
+"The following query locks the same objects as the one you want to remove:"
+msgstr "Kueri berikut mengunci obyek yang sama dengan yang ingin Anda hapus:"
+
+#: src/callbacks/locks.h:30
+msgid "The following query locks some of the objects you want to unlock:"
+msgstr ""
+"Kueri berikut mengunci obyek yang sama dengan yang ingin Anda buka kuncinya:"
+
+#: src/callbacks/locks.h:35 src/callbacks/locks.h:50
+msgid "Do you want to remove this lock?"
+msgstr "Apakah Anda ingin menghapus penguncian ini?"
+
+#: src/callbacks/locks.h:45
+msgid "The following query does not lock anything:"
+msgstr "Kueri berikut tidak mengunci apapun:"
+
+#: src/callbacks/repo.h:49
+msgid "Retrieving delta"
+msgstr "Menerima delta"
+
+#. translators: this text is a progress display label e.g. "Applying delta foo [42%]"
+#: src/callbacks/repo.h:74
+msgid "Applying delta"
+msgstr "Menerapkan delta"
+
+#. TranslatorExplanation %s is package size like "5.6 M"
+#: src/callbacks/repo.h:103
+#, c-format, boost-format
+msgid "(%s unpacked)"
+msgstr "(%s dibongkar)"
+
+#: src/callbacks/repo.h:112
+#, boost-format
+msgid "In cache %1%"
+msgstr "Didalam cache %1%"
+
+#: src/callbacks/repo.h:128
+#, c-format, boost-format
+msgid "Retrieving %s %s-%s.%s"
+msgstr "Menerima %s %s-%s.%s"
+
+#: src/callbacks/repo.h:217
+msgid "Signature verification failed"
+msgstr "Verifikasi tanda tangan gagal"
+
+#: src/callbacks/repo.h:237
+msgid "Accepting package despite the error."
+msgstr "Menerima paket meskipun ada kesalahan."
+
+#. TranslatorExplanation speaking of a script - "Running: script file name (package name, script dir)"
+#: src/callbacks/rpm.h:184
+#, c-format, boost-format
+msgid "Running: %s  (%s, %s)"
+msgstr "Menjalankan: %s  (%s, %s)"
+
+#: src/callbacks/rpm.h:267
+#, c-format, boost-format
+msgid "Removal of %s failed:"
+msgstr "Menghapus %s gagal:"
+
+#. translators: This text is a progress display label e.g. "Removing packagename-x.x.x [42%]"
+#: src/callbacks/rpm.h:307
+#, c-format, boost-format
+msgid "Removing %s"
+msgstr "Menghapus %s"
+
+#: src/callbacks/rpm.h:344
+#, c-format, boost-format
+msgid "Installation of %s failed:"
+msgstr "Pemasangan %s gagal:"
+
+#. TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
+#: src/callbacks/rpm.h:384
+#, c-format, boost-format
+msgid "Installing: %s"
+msgstr "Memasang: %s"
+
+#. translators: A progressbar label
+#: src/callbacks/rpm.h:403
+msgid "Checking for file conflicts:"
+msgstr "Memeriksa berkas konflik:"
+
+#. TranslatorExplanation %1%(number of packages); detailed list follows
+#: src/callbacks/rpm.h:454
+#, boost-format
+msgid ""
+"%1% package had to be excluded from file conflicts check because it is not "
+"yet download."
+msgid_plural ""
+"%1% packages had to be excluded from file conflicts check because they are "
+"not yet downloaded."
+msgstr[0] ""
+"%1% paket harus dikeluarkan dari pemeriksaan konflik berkas karena belum "
+"diunduh."
+
+#. TranslatorExplanation %1%(commandline option)
+#: src/callbacks/rpm.h:460
+#, boost-format
+msgid ""
+"Checking for file conflicts requires not installed packages to be downloaded "
+"in advance in order to access their file lists. See option '%1%' in the "
+"zypper manual page for details."
+msgstr ""
+"Memeriksa berkas konflik memerlukan paket yang belum terpasang untuk diunduh "
+"terlebih dahulu guna mengakses daftar berkas mereka. Lihat opsi '%1%' di "
+"halaman panduan zypper untuk informasi lebih lengkap."
+
+#. TranslatorExplanation %1%(number of conflicts); detailed list follows
+#: src/callbacks/rpm.h:470
+#, boost-format
+msgid "Detected %1% file conflict:"
+msgid_plural "Detected %1% file conflicts:"
+msgstr[0] "Terdeteksi %1% konflik pada berkas:"
+
+#: src/callbacks/rpm.h:478
+msgid "Conflicting files will be replaced."
+msgstr "Berkas-berkas yang konflik akan diganti."
+
+#. TranslatorExplanation Problem description before asking whether to "Continue? [yes/no] (no):"
+#: src/callbacks/rpm.h:484
+msgid ""
+"File conflicts happen when two packages attempt to install files with the "
+"same name but different contents. If you continue, conflicting files will be "
+"replaced losing the previous content."
+msgstr ""
+"Berkas konflik terjadi ketika dua paket mencoba memasang berkas dengan nama "
+"yang sama namun memiliki konten yang berbeda. Jika Anda melanjutkan, berkas-"
+"berkas konflik yang diganti akan kehilangan konten sebelumnya."
+
+#. translator: %s is an other command: "This is an alias for 'zypper info -t patch'."
+#: src/commands/commandhelpformatter.h:94
+#, c-format, boost-format
+msgid "This is an alias for '%s'."
+msgstr "Ini adalah alias untuk '%s'."
+
+#: src/commands/commandhelpformatter.h:107
+msgid "Examples:"
+msgstr "Contoh:"
+
+#: src/commands/commandhelpformatter.h:110
+msgid "Arguments:"
+msgstr "Argumen:"
+
+#: src/commands/commandhelpformatter.h:123 src/utils/flags/zyppflags.cc:627
+msgid "Command options:"
+msgstr "Opsi perintah:"
+
+#: src/commands/commandhelpformatter.h:126
+msgid "Solver options:"
+msgstr "Opsi pemecah:"
+
+#: src/commands/commandhelpformatter.h:129
+msgid "Expert options:"
+msgstr "Opsi mahir:"
+
+#: src/commands/commandhelpformatter.h:132
+msgid "This command has no additional options."
+msgstr "Perintah ini tidak memiliki opsi tambahan."
+
+#: src/commands/commandhelpformatter.h:135
+msgid "Legacy options:"
+msgstr "Opsi warisan:"
+
+#. translator: '-r             The same as -f.
+#: src/commands/commandhelpformatter.h:139
+#, boost-format
+msgid "The same as %1%."
+msgstr "Sama seperti %1%."
+
+#: src/commands/commandhelpformatter.h:187
+msgid "Usage:"
+msgstr "Penggunaan:"
+
+#: src/commands/commandhelpformatter.h:189
+msgid "Global Options:"
+msgstr "Opsi global:"
+
+#: src/commands/commandhelpformatter.h:191
+msgid "Commands:"
+msgstr "Perintah:"
+
+#. translators: --details
+#: src/commands/commonflags.h:23 src/commands/inrverify.cc:35
+msgid "Show the detailed installation summary."
+msgstr "Tampilkan ringkasan pemasangan terperinci."
+
+#: src/commands/commonflags.h:30
+#, boost-format
+msgid "Type of package (%1%)."
+msgstr "Select packages by plain name, not by capability.Tipe paket (%1%)."
+
+#. translators: --best-effort
+#: src/commands/commonflags.h:38
+msgid ""
+"Do a 'best effort' approach to update. Updates to a lower than the latest "
+"version are also acceptable."
+msgstr ""
+"Lakukan pendekatan 'langkah terbaik' untuk pemutakhiran. Pemutakhiran ke "
+"versi yang rendah dari yang terbaru juga dapat diterima."
+
+#: src/commands/commonflags.h:45
+msgid "Consider only patches which affect the package management itself."
+msgstr ""
+"Pertimbangkan hanya tambalan yang memengaruhi manajemen paket itu sendiri."
+
+#: src/output/Out.h:26 src/repos.cc:125 src/repos.cc:153
+msgid "Yes"
+msgstr "Ya"
+
+#: src/output/Out.h:26 src/locales.cc:72 src/repos.cc:131 src/repos.cc:159
+msgid "No"
+msgstr "Tidak"
+
+#. translator: usually followed by a ' ' and some explanatory text
+#: src/output/Out.h:37
+msgid "Note:"
+msgstr "Catatan:"
+
+#. translator: usually followed by a ' ' and some explanatory text
+#: src/output/Out.h:39
+msgid "Warning:"
+msgstr "Peringatan:"
+
+#. translator: usually followed by a ' ' and some explanatory text
+#: src/output/Out.h:41
+msgid "Error:"
+msgstr "Galat:"
+
+#: src/output/Out.h:43
+msgid "Continue?"
+msgstr "Lanjutkan?"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:23
+msgid "ALIAS"
+msgstr "ALIAS"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:25
+msgid "ALIAS|#|URI"
+msgstr "ALIAS|#|URI"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:27
+msgid "CATEGORY"
+msgstr "KATEGORI"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:29
+msgid "DIR"
+msgstr "DIR"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:31
+msgid "FILE"
+msgstr "BERKAS"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:33
+msgid "FILE.repo"
+msgstr "BERKAS.repo"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:35
+msgid "FORMAT"
+msgstr "FORMAT"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:37
+msgid "INTEGER"
+msgstr "BILANGAN-BULAT"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:39
+msgid "PATH"
+msgstr "PATH"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:41
+msgid "SEVERITY"
+msgstr "TINGKAT-KEPARAHAN"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:43
+msgid "STRING"
+msgstr "STRING"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:45
+msgid "TAG"
+msgstr "TANDA"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:47
+msgid "TYPE"
+msgstr "TIPE"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#. translators: property name; short; used like "Name: value"
+#: src/utils/flags/zyppflags.h:49 src/commands/repos/list.cc:42
+#: src/commands/repos/list.cc:268 src/commands/services/list.cc:116
+#: src/repos.cc:1254
+msgid "URI"
+msgstr "URI"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:51
+msgid "YYYY-MM-DD"
+msgstr "YYYY-MM-DD"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:53
+msgid "MODE"
+msgstr "MODE"
+
+#. TranslatorExplanation These are reasons for various failures.
+#: src/utils/prompt.h:185
+msgid "Not found"
+msgstr "Tidak ditemukan"
+
+#: src/utils/prompt.h:185
+msgid "I/O error"
+msgstr "Galat I/O"
+
+#: src/utils/prompt.h:185
+msgid "Invalid object"
+msgstr "Obyek tidak benar"
+
+#: src/utils/prompt.h:192
+msgid "Error"
+msgstr "Galat"
 
 #: src/Command.cc:93
 msgid "Invalid command"
@@ -599,16 +1336,6 @@ msgstr "Apakah maksud Anda %1%?"
 #, c-format, boost-format
 msgid "Ignoring option %s when updating the update stack first."
 msgstr "Abaikan opsi %s saat memutakhirkan pemutakhiran stack terlebih dahulu."
-
-#: src/SolverRequester.h:52
-#, boost-format
-msgid "Suspicious category filter value '%1%'."
-msgstr "Nilai penyaring kategori '%1%' mencurigakan."
-
-#: src/SolverRequester.h:60
-#, boost-format
-msgid "Suspicious severity filter value '%1%'."
-msgstr "Nilai penyaring tingkat keparahan '%1%' mencurigakan."
 
 #. translator: '%1%' is a products name
 #. '%2%' is a command to call (like 'zypper dup')
@@ -1282,417 +2009,6 @@ msgstr "Opsi %s tidak berfungsi di sini. Abaikan."
 msgid "Non-option program arguments: "
 msgstr "Argumen program non-opsi: "
 
-#: src/callbacks/keyring.h:32
-msgid ""
-"A GPG pubkey is clearly identified by it's fingerprint. Do not rely the keys "
-"name. If you are not sure whether the presented key is authentic, ask the "
-"repository provider or check his web site. Many provider maintain a web page "
-"showing the fingerprints of the GPG keys they are using."
-msgstr ""
-"Sebuah pubkey GPG diidentifikasi dengan jelas oleh sidik jarinya. Jangan "
-"mengandalkan nama kunci. Jika Anda tidak yakin apakah kunci yang disajikan "
-"asli, tanyakan pada penyedia repositori atau periksa situs webnya. Banyak "
-"penyedia memelihara halaman web yang menunjukkan sidik jari dari kunci GPG "
-"yang mereka gunakan."
-
-#: src/callbacks/keyring.h:37
-msgid ""
-"Signing data enables the recipient to verify that no modifications occurred "
-"after the data were signed. Accepting data with no, wrong or unknown "
-"signature can lead to a corrupted system and in extreme cases even to a "
-"system compromise."
-msgstr ""
-"Penandatanganan data memungkinkan penerima untuk memverifikasi bahwa tidak "
-"ada modifikasi yang terjadi setelah data ditandatangani. Menerima data tanpa "
-"tanda tangan yang salah atau tidak dikenal dapat menyebabkan sistem rusak "
-"dan dalam kasus yang ekstrim bahkan pada sistem yang kompromistis."
-
-#. translator: %1% is a file name
-#: src/callbacks/keyring.h:45
-#, boost-format
-msgid ""
-"File '%1%' is the repositories master index file. It ensures the integrity "
-"of the whole repo."
-msgstr ""
-"Berkas '%1%' adalah berkas indeks master repositori. Ini memastikan "
-"integritas dari seluruh repo."
-
-#: src/callbacks/keyring.h:51
-msgid ""
-"We can't verify that no one meddled with this file, so it might not be "
-"trustworthy anymore! You should not continue unless you know it's safe."
-msgstr ""
-"Kami tidak dapat memverifikasi bahwa tidak ada orang yang mengotak-atik "
-"berkas ini, jadi mungkin tidak dapat dipercaya lagi! Anda tidak boleh "
-"melanjutkan kecuali Anda tahu itu aman."
-
-#: src/callbacks/keyring.h:56
-msgid ""
-"This file was modified after it has been signed. This may have been a "
-"malicious change, so it might not be trustworthy anymore! You should not "
-"continue unless you know it's safe."
-msgstr ""
-"Berkas ini telah diubah setelah ditandatangani. Ini mungkin merupakan "
-"perubahan berbahaya, jadi mungkin tidak dapat dipercaya lagi! Anda tidak "
-"boleh melanjutkan kecuali Anda tahu itu aman."
-
-#: src/callbacks/keyring.h:85
-msgid "Repository:"
-msgstr "Repositori:"
-
-#: src/callbacks/keyring.h:87
-msgid "Key Fingerprint:"
-msgstr "Sidik Jari Kunci:"
-
-#: src/callbacks/keyring.h:88
-msgid "Key Name:"
-msgstr "Nama Kunci:"
-
-#: src/callbacks/keyring.h:89
-msgid "Key Algorithm:"
-msgstr "Algoritma Kunci:"
-
-#: src/callbacks/keyring.h:90
-msgid "Key Created:"
-msgstr "Kunci Dibuat:"
-
-#: src/callbacks/keyring.h:91
-msgid "Key Expires:"
-msgstr "Kunci Kedaluwarsa:"
-
-#: src/callbacks/keyring.h:93
-msgid "Subkey:"
-msgstr "Sub Kunci:"
-
-#: src/callbacks/keyring.h:94
-msgid "Rpm Name:"
-msgstr "Nama Rpm:"
-
-#: src/callbacks/keyring.h:120
-#, boost-format
-msgid "The gpg key signing file '%1%' has expired."
-msgstr "Berkas penandatanganan kunci gpg '%1%' telah kedaluwarsa."
-
-#: src/callbacks/keyring.h:126
-#, boost-format
-msgid "The gpg key signing file '%1%' will expire in %2% day."
-msgid_plural "The gpg key signing file '%1%' will expire in %2% days."
-msgstr[0] ""
-"Berkas penandatanganan kunci gpg '%1%' akan kedaluwarsa dalam %2% hari."
-
-#: src/callbacks/keyring.h:149
-#, c-format, boost-format
-msgid "Accepting an unsigned file '%s'."
-msgstr "Menerima berkas '%s' yang tidak ditandatangani."
-
-#: src/callbacks/keyring.h:153
-#, c-format, boost-format
-msgid "Accepting an unsigned file '%s' from repository '%s'."
-msgstr "Menerima berkas '%s' yang tidak ditandatangani dari repositori '%s'."
-
-#. translator: %1% is a file name
-#: src/callbacks/keyring.h:163
-#, boost-format
-msgid "File '%1%' is unsigned."
-msgstr "Berkas '%1%' tidak ditandatangani."
-
-#. translator: %1% is a file name, %2% a repositories name
-#: src/callbacks/keyring.h:166
-#, boost-format
-msgid "File '%1%' from repository '%2%' is unsigned."
-msgstr "Berkas '%1%' dari repositori '%2%' tidak ditandatangani."
-
-#. TranslatorExplanation: speaking of a file
-#: src/callbacks/keyring.h:183
-#, c-format, boost-format
-msgid "File '%s' is unsigned, continue?"
-msgstr "Berkas '%s' tidak ditandatangani, lanjutkan?"
-
-#. TranslatorExplanation: speaking of a file
-#: src/callbacks/keyring.h:187
-#, c-format, boost-format
-msgid "File '%s' from repository '%s' is unsigned, continue?"
-msgstr "Berkas '%s' dari repositori '%s' tidak ditandatangani, lanjutkan?"
-
-#: src/callbacks/keyring.h:210
-#, c-format, boost-format
-msgid "Accepting file '%s' signed with an unknown key '%s'."
-msgstr ""
-"Menerima berkas '%s' yang ditandatangani dengan kunci '%s' yang tidak "
-"dikenal."
-
-#: src/callbacks/keyring.h:214
-#, c-format, boost-format
-msgid ""
-"Accepting file '%s' from repository '%s' signed with an unknown key '%s'."
-msgstr ""
-"Menerima berkas '%s' dari repositori '%s' yang ditandatangani dengan kunci "
-"'%s' yang tidak dikenal."
-
-#. translator: %1% is a file name, %2% is a gpg key ID
-#: src/callbacks/keyring.h:223
-#, boost-format
-msgid "File '%1%' is signed with an unknown key '%2%'."
-msgstr "Berkas '%1%' ditandatangani dengan kunci '%2%' yang tidak dikenal."
-
-#. translator: %1% is a file name, %2% is a gpg key ID, %3% a repositories name
-#: src/callbacks/keyring.h:226
-#, boost-format
-msgid "File '%1%' from repository '%3%' is signed with an unknown key '%2%'."
-msgstr ""
-"Berkas '%1%' dari repositori '%3%' ditandatangani dengan kunci '%2%' yang "
-"tidak dikenal."
-
-#. translators: the last %s is gpg key ID
-#: src/callbacks/keyring.h:243
-#, c-format, boost-format
-msgid "File '%s' is signed with an unknown key '%s'. Continue?"
-msgstr ""
-"Berkas '%s' ditandatangani dengan kunci '%s' yang tidak dikenal. Lanjutkan?"
-
-#. translators: the last %s is gpg key ID
-#: src/callbacks/keyring.h:247
-#, c-format, boost-format
-msgid ""
-"File '%s' from repository '%s' is signed with an unknown key '%s'. Continue?"
-msgstr ""
-"Berkas '%s' dari repositori '%s' ditandatangani dengan kunci '%s' yang tidak "
-"dikenal. Lanjutkan?"
-
-#: src/callbacks/keyring.h:267
-msgid "Automatically importing the following key:"
-msgstr "Mengimpor kunci berikut secara otomatis:"
-
-#: src/callbacks/keyring.h:269
-msgid "Automatically trusting the following key:"
-msgstr "Mempercayai kunci berikut secara otomatis:"
-
-#: src/callbacks/keyring.h:271
-msgid "New repository or package signing key received:"
-msgstr "Kunci penandatanganan repositori dan paket baru diterima:"
-
-#. translators: this message is shown after showing description of the key
-#: src/callbacks/keyring.h:305
-msgid "Do you want to reject the key, trust temporarily, or trust always?"
-msgstr ""
-"Apakah Anda ingin menolak, mempercayai sementara, atau selalu mempercayai "
-"kunci?"
-
-#. translators: this message is shown after showing description of the key
-#: src/callbacks/keyring.h:308
-msgid "Do you want to reject the key, or trust always?"
-msgstr "Apakah Anda ingin menolak, atau selalu mempercayai kunci?"
-
-#. translators: r/t/a stands for Reject/TrustTemporarily/trustAlways(import)
-#. translate to whatever is appropriate for your language
-#. The anserws must be separated by slash characters '/' and must
-#. correspond to reject/trusttemporarily/trustalways in that order.
-#. The answers should be lower case letters.
-#: src/callbacks/keyring.h:326
-msgid "r/t/a/"
-msgstr "r/t/a/"
-
-#. translators: the same as r/t/a, but without 'a'
-#: src/callbacks/keyring.h:329
-msgid "r/t"
-msgstr "r/t"
-
-#. translators: r/a stands for Reject/trustAlways(import)
-#. translate to whatever is appropriate for your language
-#. The anserws must be separated by slash characters '/' and must
-#. correspond to reject/trusttemporarily/trustalways in that order.
-#. The answers should be lower case letters.
-#: src/callbacks/keyring.h:336
-msgid "r/a/"
-msgstr "r/a/"
-
-#. translators: help text for the 'r' option in the 'r/t/a' prompt
-#: src/callbacks/keyring.h:342
-msgid "Don't trust the key."
-msgstr "Jangan mempercayai kunci itu."
-
-#. translators: help text for the 't' option in the 'r/t/a' prompt
-#: src/callbacks/keyring.h:346
-msgid "Trust the key temporarily."
-msgstr "Percayai kunci sementara."
-
-#. translators: help text for the 'a' option in the 'r/t/a' prompt
-#: src/callbacks/keyring.h:351
-msgid "Trust the key and import it into trusted keyring."
-msgstr "Percayai kunci dan impor ke ring kunci terpercaya."
-
-#: src/callbacks/keyring.h:389
-#, c-format, boost-format
-msgid "Ignoring failed signature verification for file '%s'!"
-msgstr "Mengabaikan verifikasi tanda tangan yang gagal untuk berkas '%s'!"
-
-#: src/callbacks/keyring.h:392
-#, c-format, boost-format
-msgid ""
-"Ignoring failed signature verification for file '%s' from repository '%s'!"
-msgstr ""
-"Mengabaikan verifikasi tanda tangan yang gagal untuk berkas '%s' dari "
-"repositori '%s'!"
-
-#: src/callbacks/keyring.h:398
-msgid "Double-check this is not caused by some malicious changes in the file!"
-msgstr ""
-"Periksa ulang bahwa ini bukan disebabkan oleh beberapa perubahan berbahaya "
-"dalam berkas!"
-
-#. translator: %1% is a file name
-#: src/callbacks/keyring.h:408
-#, boost-format
-msgid "Signature verification failed for file '%1%'."
-msgstr "Verifikasi tanda tangan gagal untuk berkas '%1%'."
-
-#. translator: %1% is a file name, %2% a repositories name
-#: src/callbacks/keyring.h:411
-#, boost-format
-msgid "Signature verification failed for file '%1%' from repository '%2%'."
-msgstr ""
-"Verifikasi tanda tangan gagal untuk berkas '%1%' dari repositori '%2%'."
-
-#: src/callbacks/keyring.h:460
-msgid ""
-"The rpm database seems to contain old V3 version gpg keys which are "
-"meanwhile obsolete and considered insecure:"
-msgstr ""
-"Basis data rpm tampaknya mengandung kunci gpg versi V3 lama yang sementara "
-"itu usang dan dianggap tidak aman:"
-
-#: src/callbacks/keyring.h:467
-#, boost-format
-msgid "To see details about a key call '%1%'."
-msgstr "Untuk melihat detail tentang panggilan kunci '%1%'."
-
-#: src/callbacks/keyring.h:471
-#, boost-format
-msgid ""
-"Unless you believe the key in question is still in use, you can remove it "
-"from the rpm database calling '%1%'."
-msgstr ""
-"Kecuali Anda yakin bahwa kunci tersebut masih digunakan, Anda dapat "
-"menghapusnya dari basis data rpm yang memanggil '%1%'."
-
-#. translator: %1% is the number of keys, %2% the name of a repository
-#: src/callbacks/keyring.h:490
-#, boost-format
-msgid "Received %1% new package signing key from repository %2%:"
-msgid_plural "Received %1% new package signing keys from repository %2%:"
-msgstr[0] "Menerima %1% kunci penandatanganan paket baru dari repositori %2%:"
-
-#: src/callbacks/keyring.h:494
-msgid ""
-"Those additional keys are usually used to sign packages shipped by the "
-"repository. In order to validate those packages upon download and "
-"installation the new keys will be imported into the rpm database."
-msgstr ""
-"Kunci tambahan tersebut biasanya digunakan untuk menandatangani paket yang "
-"dikirimkan oleh repositori. Untuk memvalidasi paket-paket tersebut saat "
-"mengunduh dan memasang, kunci baru akan diimpor ke basis data rpm."
-
-#: src/callbacks/keyring.h:496
-msgid "New:"
-msgstr "Baru:"
-
-#: src/callbacks/keyring.h:502
-msgid ""
-"The repository metadata introducing the new keys have been signed and "
-"validated by the trusted key:"
-msgstr ""
-"Metadata repositori yang memperkenalkan kunci baru telah ditandatangani dan "
-"divalidasi oleh kunci tepercaya:"
-
-#: src/callbacks/keyring.h:525
-#, c-format, boost-format
-msgid "No digest for file %s."
-msgstr "Tidak ada intisari untuk berkas %s."
-
-#: src/callbacks/keyring.h:533
-#, c-format, boost-format
-msgid "Unknown digest %s for file %s."
-msgstr "Intisari %s tidak dikenal untuk berkas %s."
-
-#: src/callbacks/keyring.h:550
-#, boost-format
-msgid ""
-"Digest verification failed for file '%1%'\n"
-"[%2%]\n"
-"\n"
-"  expected %3%\n"
-"  but got  %4%\n"
-msgstr ""
-"Verifikasi intisari gagal untuk berkas '%1%'\n"
-"[%2%]\n"
-"\n"
-"  diharapkan %3%\n"
-"  tetapi didapat  %4%\n"
-
-#: src/callbacks/keyring.h:562
-msgid ""
-"Accepting packages with wrong checksums can lead to a corrupted system and "
-"in extreme cases even to a system compromise."
-msgstr ""
-"Menerima paket dengan checksum yang salah dapat menyebabkan sistem rusak dan "
-"dalam kasus ekstrim bahkan dapat membahayakan sistem."
-
-#: src/callbacks/keyring.h:570
-#, boost-format
-msgid ""
-"However if you made certain that the file with checksum '%1%..' is secure, "
-"correct\n"
-"and should be used within this operation, enter the first 4 characters of "
-"the checksum\n"
-"to unblock using this file on your own risk. Empty input will discard the "
-"file.\n"
-msgstr ""
-"Namun apabila Anda yakin bahwa berkas dengan checksum '%1%..' aman, perbaiki "
-"dan boleh\n"
-"digunakan dalam operasi ini, masukkan 4 karakter pertama dari checksum untuk "
-"membuka blokir\n"
-"penggunaan berkas ini dengan resiko Anda sendiri. Tidak memasukkan akan "
-"mengabaikan berkas ini.\n"
-
-#. translators: A prompt option
-#: src/callbacks/keyring.h:577
-msgid "discard"
-msgstr "abaikan"
-
-#. translators: A prompt option help text
-#: src/callbacks/keyring.h:579
-msgid "Unblock using this file on your own risk."
-msgstr ""
-"Buka blokir penggunaan berkas ini dengan resiko ditanggung Anda sendiri."
-
-#. translators: A prompt option help text
-#: src/callbacks/keyring.h:581
-msgid "Discard the file."
-msgstr "Abaikan berkas."
-
-#. translators: A prompt text
-#: src/callbacks/keyring.h:585
-msgid "Unblock or discard?"
-msgstr "Buka blokir atau abaikan?"
-
-#: src/callbacks/locks.h:27
-msgid ""
-"The following query locks the same objects as the one you want to remove:"
-msgstr "Kueri berikut mengunci obyek yang sama dengan yang ingin Anda hapus:"
-
-#: src/callbacks/locks.h:30
-msgid "The following query locks some of the objects you want to unlock:"
-msgstr ""
-"Kueri berikut mengunci obyek yang sama dengan yang ingin Anda buka kuncinya:"
-
-#: src/callbacks/locks.h:35 src/callbacks/locks.h:50
-msgid "Do you want to remove this lock?"
-msgstr "Apakah Anda ingin menghapus penguncian ini?"
-
-#: src/callbacks/locks.h:45
-msgid "The following query does not lock anything:"
-msgstr "Kueri berikut tidak mengunci apapun:"
-
 #. help text for the "Abort, retry, ignore?" prompt for media errors
 #: src/callbacks/media.cc:27
 msgid "Skip retrieval of the file and abort current operation."
@@ -1827,195 +2143,6 @@ msgstr "Nama Pengguna"
 #: src/callbacks/media.cc:328
 msgid "Password"
 msgstr "Kata Sandi"
-
-#: src/callbacks/repo.h:49
-msgid "Retrieving delta"
-msgstr "Menerima delta"
-
-#. translators: this text is a progress display label e.g. "Applying delta foo [42%]"
-#: src/callbacks/repo.h:74
-msgid "Applying delta"
-msgstr "Menerapkan delta"
-
-#. TranslatorExplanation %s is package size like "5.6 M"
-#: src/callbacks/repo.h:103
-#, c-format, boost-format
-msgid "(%s unpacked)"
-msgstr "(%s dibongkar)"
-
-#: src/callbacks/repo.h:112
-#, boost-format
-msgid "In cache %1%"
-msgstr "Didalam cache %1%"
-
-#: src/callbacks/repo.h:128
-#, c-format, boost-format
-msgid "Retrieving %s %s-%s.%s"
-msgstr "Menerima %s %s-%s.%s"
-
-#: src/callbacks/repo.h:217
-msgid "Signature verification failed"
-msgstr "Verifikasi tanda tangan gagal"
-
-#: src/callbacks/repo.h:237
-msgid "Accepting package despite the error."
-msgstr "Menerima paket meskipun ada kesalahan."
-
-#. TranslatorExplanation speaking of a script - "Running: script file name (package name, script dir)"
-#: src/callbacks/rpm.h:184
-#, c-format, boost-format
-msgid "Running: %s  (%s, %s)"
-msgstr "Menjalankan: %s  (%s, %s)"
-
-#: src/callbacks/rpm.h:267
-#, c-format, boost-format
-msgid "Removal of %s failed:"
-msgstr "Menghapus %s gagal:"
-
-#. translators: This text is a progress display label e.g. "Removing packagename-x.x.x [42%]"
-#: src/callbacks/rpm.h:307
-#, c-format, boost-format
-msgid "Removing %s"
-msgstr "Menghapus %s"
-
-#: src/callbacks/rpm.h:344
-#, c-format, boost-format
-msgid "Installation of %s failed:"
-msgstr "Pemasangan %s gagal:"
-
-#. TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
-#: src/callbacks/rpm.h:384
-#, c-format, boost-format
-msgid "Installing: %s"
-msgstr "Memasang: %s"
-
-#. translators: A progressbar label
-#: src/callbacks/rpm.h:403
-msgid "Checking for file conflicts:"
-msgstr "Memeriksa berkas konflik:"
-
-#. TranslatorExplanation %1%(number of packages); detailed list follows
-#: src/callbacks/rpm.h:454
-#, boost-format
-msgid ""
-"%1% package had to be excluded from file conflicts check because it is not "
-"yet download."
-msgid_plural ""
-"%1% packages had to be excluded from file conflicts check because they are "
-"not yet downloaded."
-msgstr[0] ""
-"%1% paket harus dikeluarkan dari pemeriksaan konflik berkas karena belum "
-"diunduh."
-
-#. TranslatorExplanation %1%(commandline option)
-#: src/callbacks/rpm.h:460
-#, boost-format
-msgid ""
-"Checking for file conflicts requires not installed packages to be downloaded "
-"in advance in order to access their file lists. See option '%1%' in the "
-"zypper manual page for details."
-msgstr ""
-"Memeriksa berkas konflik memerlukan paket yang belum terpasang untuk diunduh "
-"terlebih dahulu guna mengakses daftar berkas mereka. Lihat opsi '%1%' di "
-"halaman panduan zypper untuk informasi lebih lengkap."
-
-#. TranslatorExplanation %1%(number of conflicts); detailed list follows
-#: src/callbacks/rpm.h:470
-#, boost-format
-msgid "Detected %1% file conflict:"
-msgid_plural "Detected %1% file conflicts:"
-msgstr[0] "Terdeteksi %1% konflik pada berkas:"
-
-#: src/callbacks/rpm.h:478
-msgid "Conflicting files will be replaced."
-msgstr "Berkas-berkas yang konflik akan diganti."
-
-#. TranslatorExplanation Problem description before asking whether to "Continue? [yes/no] (no):"
-#: src/callbacks/rpm.h:484
-msgid ""
-"File conflicts happen when two packages attempt to install files with the "
-"same name but different contents. If you continue, conflicting files will be "
-"replaced losing the previous content."
-msgstr ""
-"Berkas konflik terjadi ketika dua paket mencoba memasang berkas dengan nama "
-"yang sama namun memiliki konten yang berbeda. Jika Anda melanjutkan, berkas-"
-"berkas konflik yang diganti akan kehilangan konten sebelumnya."
-
-#. translator: %s is an other command: "This is an alias for 'zypper info -t patch'."
-#: src/commands/commandhelpformatter.h:94
-#, c-format, boost-format
-msgid "This is an alias for '%s'."
-msgstr "Ini adalah alias untuk '%s'."
-
-#: src/commands/commandhelpformatter.h:107
-msgid "Examples:"
-msgstr "Contoh:"
-
-#: src/commands/commandhelpformatter.h:110
-msgid "Arguments:"
-msgstr "Argumen:"
-
-#: src/commands/commandhelpformatter.h:123 src/utils/flags/zyppflags.cc:627
-msgid "Command options:"
-msgstr "Opsi perintah:"
-
-#: src/commands/commandhelpformatter.h:126
-msgid "Solver options:"
-msgstr "Opsi pemecah:"
-
-#: src/commands/commandhelpformatter.h:129
-msgid "Expert options:"
-msgstr "Opsi mahir:"
-
-#: src/commands/commandhelpformatter.h:132
-msgid "This command has no additional options."
-msgstr "Perintah ini tidak memiliki opsi tambahan."
-
-#: src/commands/commandhelpformatter.h:135
-msgid "Legacy options:"
-msgstr "Opsi warisan:"
-
-#. translator: '-r             The same as -f.
-#: src/commands/commandhelpformatter.h:139
-#, boost-format
-msgid "The same as %1%."
-msgstr "Sama seperti %1%."
-
-#: src/commands/commandhelpformatter.h:187
-msgid "Usage:"
-msgstr "Penggunaan:"
-
-#: src/commands/commandhelpformatter.h:189
-msgid "Global Options:"
-msgstr "Opsi global:"
-
-#: src/commands/commandhelpformatter.h:191
-msgid "Commands:"
-msgstr "Perintah:"
-
-#. translators: --details
-#: src/commands/commonflags.h:23 src/commands/inrverify.cc:35
-msgid "Show the detailed installation summary."
-msgstr "Tampilkan ringkasan pemasangan terperinci."
-
-#: src/commands/commonflags.h:30
-#, boost-format
-msgid "Type of package (%1%)."
-msgstr "Select packages by plain name, not by capability.Tipe paket (%1%)."
-
-#. translators: --best-effort
-#: src/commands/commonflags.h:38
-msgid ""
-"Do a 'best effort' approach to update. Updates to a lower than the latest "
-"version are also acceptable."
-msgstr ""
-"Lakukan pendekatan 'langkah terbaik' untuk pemutakhiran. Pemutakhiran ke "
-"versi yang rendah dari yang terbaru juga dapat diterima."
-
-#: src/commands/commonflags.h:45
-msgid "Consider only patches which affect the package management itself."
-msgstr ""
-"Pertimbangkan hanya tambalan yang memengaruhi manajemen paket itu sendiri."
 
 #: src/commands/conditions.cc:19
 msgid "Root privileges are required to run this command."
@@ -2436,12 +2563,16 @@ msgstr ""
 msgid "Restrict the lock to the specified repository."
 msgstr "Batasi kunci ke repositori yang ditentukan."
 
-#: src/commands/locks/add.cc:80
+#: src/commands/locks/add.cc:48
+msgid "Reason for specific lock."
+msgstr ""
+
+#: src/commands/locks/add.cc:81
 msgid "Specified lock has been successfully added."
 msgid_plural "Specified locks have been successfully added."
 msgstr[0] "Kunci yang ditentukan telah berhasil ditambahkan."
 
-#: src/commands/locks/add.cc:87
+#: src/commands/locks/add.cc:88
 msgid "Problem adding the package lock:"
 msgstr "Ada masalah saat menambahkan kunci paket:"
 
@@ -2503,48 +2634,52 @@ msgstr "Tipe"
 msgid "Repository"
 msgstr "Repositori"
 
+#: src/commands/locks/list.cc:138
+msgid "Comment"
+msgstr ""
+
 #. translators: locks table value
-#: src/commands/locks/list.cc:156 src/commands/locks/list.cc:232
+#: src/commands/locks/list.cc:156 src/commands/locks/list.cc:235
 msgid "(multiple)"
 msgstr "(berganda)"
 
 #. translators: locks table value
-#: src/commands/locks/list.cc:159 src/commands/locks/list.cc:230
+#: src/commands/locks/list.cc:159 src/commands/locks/list.cc:233
 msgid "(any)"
 msgstr "(apapun)"
 
 #. translators: property name; short; used like "Name: value"
-#: src/commands/locks/list.cc:195
+#: src/commands/locks/list.cc:198
 msgid "Keep installed"
 msgstr "Tetap terpasang"
 
 #. translators: property name; short; used like "Name: value"
-#: src/commands/locks/list.cc:203
+#: src/commands/locks/list.cc:206
 msgid "Do not install"
 msgstr "Jangan pasang"
 
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
-#: src/commands/locks/list.cc:256
+#: src/commands/locks/list.cc:259
 msgid "locks (ll) [OPTIONS]"
 msgstr "kunci (ll) [OPSI]"
 
-#: src/commands/locks/list.cc:257
+#: src/commands/locks/list.cc:260
 msgid "List current package locks."
 msgstr "Daftar kunci paket saat ini."
 
-#: src/commands/locks/list.cc:285
+#: src/commands/locks/list.cc:288
 msgid "Show the number of resolvables matched by each lock."
 msgstr "Tampilkan nomor perbaikan yang cocok dengan setiap kunci."
 
-#: src/commands/locks/list.cc:286
+#: src/commands/locks/list.cc:289
 msgid "List the resolvables matched by each lock."
 msgstr "Daftar perbaikan yang cocok dengan setiap kunci."
 
-#: src/commands/locks/list.cc:300
+#: src/commands/locks/list.cc:303
 msgid "Error reading the locks file:"
 msgstr "Galat saat membaca berkas kunci:"
 
-#: src/commands/locks/list.cc:307
+#: src/commands/locks/list.cc:310
 msgid "There are no package locks defined."
 msgstr "Tidak ada kunci paket yang ditentukan."
 
@@ -3297,14 +3432,6 @@ msgstr "Bersihkan keduanya, metadata dan cache paket."
 #: src/commands/services/list.cc:104
 msgid "Alias"
 msgstr "Alias"
-
-#. translators: property name; short; used like "Name: value"
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/commands/repos/list.cc:42 src/commands/repos/list.cc:268
-#: src/commands/services/list.cc:116 src/repos.cc:1254
-#: src/utils/flags/zyppflags.h:49
-msgid "URI"
-msgstr "URI"
 
 #. 'enabled' flag
 #. translators: property name; short; used like "Name: value"
@@ -5319,10 +5446,6 @@ msgstr "Diminta"
 msgid "Fallback"
 msgstr "Cadangan"
 
-#: src/locales.cc:72 src/output/Out.h:26 src/repos.cc:131 src/repos.cc:159
-msgid "No"
-msgstr "Tidak"
-
 #. translators: header of table column - the language code, e.g. en_US
 #: src/locales.cc:174
 msgid "Code"
@@ -5469,29 +5592,6 @@ msgstr "Paket sumber %s-%s berhasil dipasang."
 #, c-format, boost-format
 msgid "Problem installing source package %s-%s:"
 msgstr "Masalah memasang paket sumber %s-%s:"
-
-#: src/output/Out.h:26 src/repos.cc:125 src/repos.cc:153
-msgid "Yes"
-msgstr "Ya"
-
-#. translator: usually followed by a ' ' and some explanatory text
-#: src/output/Out.h:37
-msgid "Note:"
-msgstr "Catatan:"
-
-#. translator: usually followed by a ' ' and some explanatory text
-#: src/output/Out.h:39
-msgid "Warning:"
-msgstr "Peringatan:"
-
-#. translator: usually followed by a ' ' and some explanatory text
-#: src/output/Out.h:41
-msgid "Error:"
-msgstr "Galat:"
-
-#: src/output/Out.h:43
-msgid "Continue?"
-msgstr "Lanjutkan?"
 
 #. Since this message will be emitted before we know if the current output is XML or Normal we need to send this message to stderr
 #. to not break scripts that use xml output (bsc#1172925)
@@ -6639,81 +6739,6 @@ msgstr "Diluar jangkauan"
 msgid "Unknown error while assigning the value %1% to flag %2%."
 msgstr "Galat tidak dikenal saat menetapkan nilai %1% ke tanda %2%."
 
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:23
-msgid "ALIAS"
-msgstr "ALIAS"
-
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:25
-msgid "ALIAS|#|URI"
-msgstr "ALIAS|#|URI"
-
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:27
-msgid "CATEGORY"
-msgstr "KATEGORI"
-
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:29
-msgid "DIR"
-msgstr "DIR"
-
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:31
-msgid "FILE"
-msgstr "BERKAS"
-
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:33
-msgid "FILE.repo"
-msgstr "BERKAS.repo"
-
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:35
-msgid "FORMAT"
-msgstr "FORMAT"
-
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:37
-msgid "INTEGER"
-msgstr "BILANGAN-BULAT"
-
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:39
-msgid "PATH"
-msgstr "PATH"
-
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:41
-msgid "SEVERITY"
-msgstr "TINGKAT-KEPARAHAN"
-
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:43
-msgid "STRING"
-msgstr "STRING"
-
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:45
-msgid "TAG"
-msgstr "TANDA"
-
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:47
-msgid "TYPE"
-msgstr "TIPE"
-
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:51
-msgid "YYYY-MM-DD"
-msgstr "YYYY-MM-DD"
-
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:53
-msgid "MODE"
-msgstr "MODE"
-
 #. For '-garbage' argument, with 'a', 'b', and 'e' as known options,
 #. getopt_long reports 'a', 'b', and 'e' as known options.
 #. The rest ends here and it is either the last one from previous argument
@@ -6922,32 +6947,32 @@ msgstr "Tidak dapat menebak nilai untuk <platform>."
 msgid "Please use obs://<project>/<platform>"
 msgstr "Silakan gunakan obs://<project>/<platform>"
 
-#: src/utils/misc.cc:550 src/utils/misc.cc:591
+#: src/utils/misc.cc:550 src/utils/misc.cc:596
 #, c-format, boost-format
 msgid "Example: %s"
 msgstr "Contoh: %s"
 
-#: src/utils/misc.cc:590
+#: src/utils/misc.cc:595
 msgid "Invalid OBS URI."
 msgstr "URI OBS tidak valid."
 
-#: src/utils/misc.cc:590
+#: src/utils/misc.cc:595
 msgid "Correct form is obs://<project>/[platform]"
 msgstr "Bentuk yang benar adalah obs://<project>/[platform]"
 
-#: src/utils/misc.cc:640
+#: src/utils/misc.cc:645
 msgid "Problem copying the specified RPM file to the cache directory."
 msgstr "Masalah menyalin berkas RPM yang ditentukan ke direktori cache."
 
-#: src/utils/misc.cc:641
+#: src/utils/misc.cc:646
 msgid "Perhaps you are running out of disk space."
 msgstr "Mungkin Anda kehabisan ruang diska."
 
-#: src/utils/misc.cc:649
+#: src/utils/misc.cc:654
 msgid "Problem retrieving the specified RPM file"
 msgstr "Masalah saat mengambil berkas RPM yang ditentukan"
 
-#: src/utils/misc.cc:650
+#: src/utils/misc.cc:655
 msgid "Please check whether the file is accessible."
 msgstr "Silakan periksa apakah berkas dapat diakses."
 
@@ -7054,23 +7079,6 @@ msgid ""
 msgstr ""
 "Jika tidak ada lagi yang berhasil, masukkan '#1' untuk memilih opsi 1, '#2' "
 "untuk yang ke-2, ..."
-
-#. TranslatorExplanation These are reasons for various failures.
-#: src/utils/prompt.h:185
-msgid "Not found"
-msgstr "Tidak ditemukan"
-
-#: src/utils/prompt.h:185
-msgid "I/O error"
-msgstr "Galat I/O"
-
-#: src/utils/prompt.h:185
-msgid "Invalid object"
-msgstr "Obyek tidak benar"
-
-#: src/utils/prompt.h:192
-msgid "Error"
-msgstr "Galat"
 
 # =============================================================================
 #~ msgid "addlock (al) [OPTIONS] <PACKAGENAME> ..."
