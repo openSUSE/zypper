@@ -21,7 +21,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-07-21 09:46+0200\n"
-"PO-Revision-Date: 2021-06-02 19:59+0000\n"
+"PO-Revision-Date: 2021-07-26 20:11+0000\n"
 "Last-Translator: Aleš Kastner <alkas@volny.cz>\n"
 "Language-Team: Czech <https://l10n.opensuse.org/projects/zypper/master/cs/>\n"
 "Language: cs\n"
@@ -29,7 +29,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Weblate 4.6.2\n"
+"X-Generator: Weblate 4.7.1\n"
 
 #: src/SolverRequester.h:52
 #, boost-format
@@ -2155,9 +2155,9 @@ msgid ""
 "The /etc/products.d/baseproduct symlink is dangling or missing!\n"
 "The link must point to your core products .prod file in /etc/products.d.\n"
 msgstr ""
-"Symlink /etc/products.d/baseproduct je neplatný nebo chybí!\n"
-"Tento symlink musí odkazovat na vaše hlavní produkty, .prod soubor\n"
-"v /etc/products.d.\n"
+"Symbolický odkaz /etc/products.d/baseproduct je neplatný nebo chybí! Tento\n"
+"odkaz musí směřovat na soubor vašich hlavních produktů .prod v /etc/products."
+"d.\n"
 
 #. TranslatorExplanation The %s is "--plus-repo"
 #. TranslatorExplanation The %s is "--option-name"
@@ -2717,7 +2717,7 @@ msgstr "Omezí uzamčení na zadaný repozitář."
 
 #: src/commands/locks/add.cc:48
 msgid "Reason for specific lock."
-msgstr ""
+msgstr "Důvod konkrétního uzamčení."
 
 #: src/commands/locks/add.cc:81
 msgid "Specified lock has been successfully added."
@@ -2792,7 +2792,7 @@ msgstr "Úložiště"
 
 #: src/commands/locks/list.cc:138
 msgid "Comment"
-msgstr ""
+msgstr "Poznámka"
 
 #. translators: locks table value
 #: src/commands/locks/list.cc:156 src/commands/locks/list.cc:235
@@ -3129,6 +3129,8 @@ msgid ""
 "When updating the affected/vulnerable packages described by a patch, zypper "
 "always aims for the latest available version."
 msgstr ""
+"Při aktualizaci ovlivněných/zranitelných balíčků, popsaných záplatou, se "
+"zypper vždy zaměřuje na nejnovější dostupnou verzi."
 
 #: src/commands/patch.cc:50
 msgid ""
@@ -4935,14 +4937,13 @@ msgstr ""
 "Podpříkazy programu zypper jsou samostatné spustitelné soubory\n"
 "v adresáři zypper_execdir (%1%).\n"
 "\n"
-"Pro podpříkazy disponuje program zypper obálkou,\n"
-"která zná umístění podpříkazů a spouští je prostřednictvím argumentů\n"
+"Pro podpříkazy disponuje program zypper obálkou, která zná\n"
+"umístění podpříkazů a spouští je tak že jim předává argumenty\n"
 "příkazového řádku.\n"
 "\n"
 "Pokud podpříkaz není nalezen v adresáři zypper_execdir, bude jej\n"
-"obálka hledat v ostatních adresářích v proměnné $PATH.\n"
-"Lze proto vytvářet\n"
-"místní rozšíření programu, která nejsou uložena v systémovém prostoru.\n"
+"obálka hledat v ostatních adresářích v proměnné $PATH. Tak lze vytvářet\n"
+"místní rozšíření zypperu, která nejsou uložena v systémovém prostoru.\n"
 
 #: src/commands/subcommand.cc:455
 #, boost-format
