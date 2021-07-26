@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-07-26 11:04+0200\n"
-"PO-Revision-Date: 2021-06-07 11:00+0000\n"
+"PO-Revision-Date: 2021-07-27 01:10+0000\n"
 "Last-Translator: Yasuhiko Kamata <belphegor@belbel.or.jp>\n"
 "Language-Team: Japanese <https://l10n.opensuse.org/projects/libzypp/master/"
 "ja/>\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 4.6.2\n"
+"X-Generator: Weblate 4.7.1\n"
 
 #: zypp/CountryCode.cc:50
 msgid "Unknown country: "
@@ -4663,6 +4663,8 @@ msgid ""
 "install %1% from vendor %2%\n"
 "  replacing %3% from vendor %4%"
 msgstr ""
+"ベンダ %4% からの %3% を\n"
+"  ベンダ %2% からの %1% に置き換えてインストールします"
 
 #: zypp/solver/detail/SATResolver.cc:1507
 #, boost-format
@@ -4722,7 +4724,7 @@ msgstr "新しい更新メッセージ"
 
 #: zypp/target/TargetImpl.cc:2619
 msgid "Executing the transaction failed because of the following problems:"
-msgstr ""
+msgstr "下記の問題が発生したことによって処理が失敗しました:"
 
 #. TranslatorExplanation after semicolon is error message
 #. TranslatorExplanation the colon is followed by an error message
@@ -4992,11 +4994,11 @@ msgstr "コマンドは不明なエラーで終了しました。"
 #: zypp-core/zyppng/io/forkspawnengine.cc:111
 #: zypp-core/zyppng/io/forkspawnengine.cc:359
 msgid "Invalid spawn arguments given."
-msgstr ""
+msgstr "正しくない実行パラメータが指定されました。"
 
 #: zypp-core/zyppng/io/forkspawnengine.cc:174
 msgid "Unable to create control pipe."
-msgstr ""
+msgstr "制御パイプを作成できませんでした。"
 
 #: zypp-core/zyppng/io/forkspawnengine.cc:240
 #, c-format, boost-format
@@ -5029,22 +5031,22 @@ msgstr "fork (%s)することができません。"
 #: zypp-core/zyppng/io/forkspawnengine.cc:306
 #, c-format, boost-format
 msgid "Can't exec '%s', chdir failed (%s)."
-msgstr ""
+msgstr "'%s' を実行できません。 chdir が失敗しました (%s) 。"
 
 #: zypp-core/zyppng/io/forkspawnengine.cc:309
 #, c-format, boost-format
 msgid "Can't exec '%s', chroot failed (%s)."
-msgstr ""
+msgstr "'%s' を実行できません。 chroot が失敗しました (%s) 。"
 
 #: zypp-core/zyppng/io/forkspawnengine.cc:312
 #, c-format, boost-format
 msgid "Can't exec '%s', exec failed (%s)."
-msgstr ""
+msgstr "'%s' を実行できません。 exec が失敗しました (%s) 。"
 
 #: zypp-core/zyppng/io/forkspawnengine.cc:316
 #, c-format, boost-format
 msgid "Can't exec '%s', unexpected error."
-msgstr ""
+msgstr "'%s' を実行できません。予期しないエラーです。"
 
 #~ msgid "%s does not belong to a distupgrade repository"
 #~ msgstr "%s はdistupgradeのリポジトリに属していません"
