@@ -1,4 +1,37 @@
 -------------------------------------------------------------------
+Mon Jul 26 11:48:28 CEST 2021 - ma@suse.de
+
+- Rephrase vendor conflict message in case 2 packages are
+  involved (bsc#1187760)
+  This covers the case where not the packages itself would change
+  its vendor, but replaces a package from a different vendor.
+- Fix solver jobs for PTFs (bsc#1186503)
+- spec: switch to pkgconfig(openssl)
+- Show key fpr from signature when signature check fails
+  (bsc#1187224)
+  Rpm by default only shows the short key ID when checking the
+  signature of a package fails. This patch reads the signatures
+  from the RPM headers and replaces she short IDs with the key
+  fingerprints fetched from the signatures.
+- Implement alternative single transaction commit strategy.
+  This patch adds a experimental commit strategy that runs all
+  operations in a single rpm transaction, speeding up the execution
+  a lot.
+- Use ZYPP_MEDIANETWORK=1 to enable the experimental new media
+  backend.
+- Implement zchunk download, refactor Downloader backend.
+- Fix purge-kernels fails with kernels from Kernel:HEAD
+  (bsc#1187738)
+  There recently was a change in the kernel package naming scheme
+  in regards to rc kernels. Since kernel upstream uses characters
+  in the version that are not allowed in rpm versions a "-rc" was
+  previously replaced with ".rc" which broke sorting by version, to
+  fix this issue it was replaced with "~rc", which unfortunately
+  broke the purge-kernels logic. This patch makes sure purge-kernel
+  does apply the same conversion.
+- version 17.28.0 (22)
+
+-------------------------------------------------------------------
 Thu Jun 10 17:34:14 CEST 2021 - ma@suse.de
 
 - Enhance XML output of repo GPG options (fixes openSUSE/zypper#390)
