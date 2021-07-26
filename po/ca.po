@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-07-26 11:04+0200\n"
-"PO-Revision-Date: 2021-05-01 01:58+0000\n"
+"PO-Revision-Date: 2021-07-26 20:11+0000\n"
 "Last-Translator: David Medina <medipas@gmail.com>\n"
 "Language-Team: Catalan <https://l10n.opensuse.org/projects/libzypp/master/ca/"
 ">\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.6\n"
+"X-Generator: Weblate 4.7.1\n"
 
 #: zypp/CountryCode.cc:50
 msgid "Unknown country: "
@@ -5054,6 +5054,8 @@ msgid ""
 "install %1% from vendor %2%\n"
 "  replacing %3% from vendor %4%"
 msgstr ""
+"instal·la %1% del proveïdor %2%\n"
+"  i reemplaça %3% del proveïdor %4%"
 
 #: zypp/solver/detail/SATResolver.cc:1507
 #, boost-format
@@ -5114,7 +5116,7 @@ msgstr "Nou missatge d'actualització"
 
 #: zypp/target/TargetImpl.cc:2619
 msgid "Executing the transaction failed because of the following problems:"
-msgstr ""
+msgstr "No s'ha pogut executar la transacció a causa dels problemes següents:"
 
 #. TranslatorExplanation after semicolon is error message
 #. TranslatorExplanation the colon is followed by an error message
@@ -5388,11 +5390,11 @@ msgstr "L'ordre s'ha executat sense que hi hagués cap error conegut."
 #: zypp-core/zyppng/io/forkspawnengine.cc:111
 #: zypp-core/zyppng/io/forkspawnengine.cc:359
 msgid "Invalid spawn arguments given."
-msgstr ""
+msgstr "S'han donat arguments de generació no vàlids."
 
 #: zypp-core/zyppng/io/forkspawnengine.cc:174
 msgid "Unable to create control pipe."
-msgstr ""
+msgstr "No es pot crear la canonada de control."
 
 #: zypp-core/zyppng/io/forkspawnengine.cc:240
 #, c-format, boost-format
@@ -5424,22 +5426,22 @@ msgstr "No es pot bifurcar (%s)."
 #: zypp-core/zyppng/io/forkspawnengine.cc:306
 #, c-format, boost-format
 msgid "Can't exec '%s', chdir failed (%s)."
-msgstr ""
+msgstr "No es pot executar %s, ha fallat l'ordre chdir (%s)."
 
 #: zypp-core/zyppng/io/forkspawnengine.cc:309
 #, c-format, boost-format
 msgid "Can't exec '%s', chroot failed (%s)."
-msgstr ""
+msgstr "No es pot executar %s, ha fallat l'ordre chroot (%s)."
 
 #: zypp-core/zyppng/io/forkspawnengine.cc:312
 #, c-format, boost-format
 msgid "Can't exec '%s', exec failed (%s)."
-msgstr ""
+msgstr "No es pot executar %s, ha fallat l'ordre exec (%s)."
 
 #: zypp-core/zyppng/io/forkspawnengine.cc:316
 #, c-format, boost-format
 msgid "Can't exec '%s', unexpected error."
-msgstr ""
+msgstr "No es pot executar %s, error inesperat."
 
 #~ msgid "%s does not belong to a distupgrade repository"
 #~ msgstr "%s no pertany a un repositori d'actualització de la distribució"
