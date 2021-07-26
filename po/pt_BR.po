@@ -14,8 +14,8 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-07-26 11:04+0200\n"
-"PO-Revision-Date: 2021-05-03 16:57+0000\n"
-"Last-Translator: Luiz Fernando Ranghetti <elchevive68@gmail.com>\n"
+"PO-Revision-Date: 2021-07-26 20:11+0000\n"
+"Last-Translator: Rodrigo Macedo <rmsolucoeseminformatic4@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) <https://l10n.opensuse.org/projects/"
 "libzypp/master/pt_BR/>\n"
 "Language: pt_BR\n"
@@ -23,7 +23,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 4.6\n"
+"X-Generator: Weblate 4.7.1\n"
 "X-Poedit-Language: Portuguese\n"
 "X-Poedit-Country: BRAZIL\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -1213,7 +1213,7 @@ msgstr "Ilhas Virgens Britânicas"
 #. :VGB:092:
 #: zypp/CountryCode.cc:394
 msgid "Virgin Islands, U.S."
-msgstr "Ilhas Virgens Americanas"
+msgstr "Ilhas Virgens, EUA."
 
 #. :VIR:850:
 #: zypp/CountryCode.cc:395
@@ -4665,6 +4665,8 @@ msgid ""
 "install %1% from vendor %2%\n"
 "  replacing %3% from vendor %4%"
 msgstr ""
+"instale% 1% do fornecedor% 2%\n"
+"   substituindo% 3% do fornecedor% 4%"
 
 #: zypp/solver/detail/SATResolver.cc:1507
 #, boost-format
@@ -4724,7 +4726,7 @@ msgstr "Nova mensagem de atualização"
 
 #: zypp/target/TargetImpl.cc:2619
 msgid "Executing the transaction failed because of the following problems:"
-msgstr ""
+msgstr "A execução da transação falhou devido aos seguintes problemas:"
 
 #. TranslatorExplanation after semicolon is error message
 #. TranslatorExplanation the colon is followed by an error message
@@ -4993,11 +4995,11 @@ msgstr "O comando encerrou com erro desconhecido."
 #: zypp-core/zyppng/io/forkspawnengine.cc:111
 #: zypp-core/zyppng/io/forkspawnengine.cc:359
 msgid "Invalid spawn arguments given."
-msgstr ""
+msgstr "Argumentos de geração inválidos fornecidos."
 
 #: zypp-core/zyppng/io/forkspawnengine.cc:174
 msgid "Unable to create control pipe."
-msgstr ""
+msgstr "Incapaz de criar o tubo de controle."
 
 #: zypp-core/zyppng/io/forkspawnengine.cc:240
 #, c-format, boost-format
@@ -5029,22 +5031,22 @@ msgstr "Não foi possível dividir (%s)."
 #: zypp-core/zyppng/io/forkspawnengine.cc:306
 #, c-format, boost-format
 msgid "Can't exec '%s', chdir failed (%s)."
-msgstr ""
+msgstr "Impossível executar '%s', chdir falhou (%s)."
 
 #: zypp-core/zyppng/io/forkspawnengine.cc:309
 #, c-format, boost-format
 msgid "Can't exec '%s', chroot failed (%s)."
-msgstr ""
+msgstr "Impossível executar '%s', chroot falhou (%s)."
 
 #: zypp-core/zyppng/io/forkspawnengine.cc:312
 #, c-format, boost-format
 msgid "Can't exec '%s', exec failed (%s)."
-msgstr ""
+msgstr "Impossível executar '%s', exec falhou (%s)."
 
 #: zypp-core/zyppng/io/forkspawnengine.cc:316
 #, c-format, boost-format
 msgid "Can't exec '%s', unexpected error."
-msgstr ""
+msgstr "Impossível executar '%s', erro inesperado."
 
 #~ msgid "%s does not belong to a distupgrade repository"
 #~ msgstr "%s não pertence a um repositório de atualização da distribuição"
