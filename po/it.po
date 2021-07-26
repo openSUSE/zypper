@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-07-26 11:04+0200\n"
-"PO-Revision-Date: 2021-06-11 16:59+0000\n"
+"PO-Revision-Date: 2021-07-26 20:11+0000\n"
 "Last-Translator: Paolo Za <zapaolo@email.it>\n"
 "Language-Team: Italian <https://l10n.opensuse.org/projects/libzypp/master/it/"
 ">\n"
@@ -24,7 +24,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.6.2\n"
+"X-Generator: Weblate 4.7.1\n"
 "X-Poedit-Bookmarks: 370,-1,-1,-1,-1,-1,-1,-1,-1,-1\n"
 
 #: zypp/CountryCode.cc:50
@@ -4654,6 +4654,8 @@ msgid ""
 "install %1% from vendor %2%\n"
 "  replacing %3% from vendor %4%"
 msgstr ""
+"installa %1 dal fornitore %2\n"
+"  sostituzione di %3% del fornitore %4%"
 
 #: zypp/solver/detail/SATResolver.cc:1507
 #, boost-format
@@ -4715,6 +4717,7 @@ msgstr "Nuovo messaggio di aggiornamento"
 #: zypp/target/TargetImpl.cc:2619
 msgid "Executing the transaction failed because of the following problems:"
 msgstr ""
+"L'esecuzione della transazione non è riuscita a causa dei seguenti problemi:"
 
 #. TranslatorExplanation after semicolon is error message
 #. TranslatorExplanation the colon is followed by an error message
@@ -5026,12 +5029,12 @@ msgstr "Impossibile eseguire il comando fork (%s)."
 #: zypp-core/zyppng/io/forkspawnengine.cc:306
 #, c-format, boost-format
 msgid "Can't exec '%s', chdir failed (%s)."
-msgstr ""
+msgstr "Impossibile eseguire '%s', chdir non riuscito (%s)."
 
 #: zypp-core/zyppng/io/forkspawnengine.cc:309
 #, c-format, boost-format
 msgid "Can't exec '%s', chroot failed (%s)."
-msgstr ""
+msgstr "Impossibile eseguire '%s', chroot non riuscito (%s)."
 
 #: zypp-core/zyppng/io/forkspawnengine.cc:312
 #, c-format, boost-format
@@ -5041,7 +5044,7 @@ msgstr ""
 #: zypp-core/zyppng/io/forkspawnengine.cc:316
 #, c-format, boost-format
 msgid "Can't exec '%s', unexpected error."
-msgstr ""
+msgstr "Impossibile eseguire '%s', errore inaspettato."
 
 #~ msgid "%s does not belong to a distupgrade repository"
 #~ msgstr ""
