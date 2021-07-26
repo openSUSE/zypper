@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-30 14:04+0200\n"
+"POT-Creation-Date: 2021-07-26 11:04+0200\n"
 "PO-Revision-Date: 2021-06-07 11:00+0000\n"
 "Last-Translator: Yasuhiko Kamata <belphegor@belbel.or.jp>\n"
 "Language-Team: Japanese <https://l10n.opensuse.org/projects/libzypp/master/"
@@ -21,13 +21,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Weblate 4.6.2\n"
-
-#. dubious: Throw on malformed known types, otherwise log a warning.
-#: zypp/CheckSum.cc:136
-#, c-format, boost-format
-msgid "Dubious type '%s' for %u byte checksum '%s'"
-msgstr ""
-"%2$u バイトのチェックサム '%3$s' は '%1$s' と思われますが、疑わしいタイプです"
 
 #: zypp/CountryCode.cc:50
 msgid "Unknown country: "
@@ -1297,72 +1290,21 @@ msgstr "拡張"
 msgid "Supplements"
 msgstr "補足"
 
-#: zypp/ExternalProgram.cc:269
-#, c-format, boost-format
-msgid "Can't open pty (%s)."
-msgstr "擬似端末(%s)を開くことができません。"
-
-#: zypp/ExternalProgram.cc:280
-#, c-format, boost-format
-msgid "Can't open pipe (%s)."
-msgstr "パイプ(%s)を開くことができません。"
-
-#: zypp/ExternalProgram.cc:365
-#, c-format, boost-format
-msgid "Can't chroot to '%s' (%s)."
-msgstr "'%s' (%s)にchrootすることができません。"
-
-#: zypp/ExternalProgram.cc:375
-#, c-format, boost-format
-msgid "Can't chdir to '%s' inside chroot '%s' (%s)."
-msgstr ""
-"chroot '%s' (%s)の実行中にディレクトリを '%s' に変更することはできません。"
-
-#: zypp/ExternalProgram.cc:376
-#, c-format, boost-format
-msgid "Can't chdir to '%s' (%s)."
-msgstr "ディレクトリを '%s' (%s)に変更できません。"
-
-#. don't want to get here
-#: zypp/ExternalProgram.cc:405
-#, c-format, boost-format
-msgid "Can't exec '%s' (%s)."
-msgstr "'%s' (%s)を実行することができません。"
-
-#: zypp/ExternalProgram.cc:413
-#, c-format, boost-format
-msgid "Can't fork (%s)."
-msgstr "fork (%s)することができません。"
-
-#: zypp/ExternalProgram.cc:543
-#, c-format, boost-format
-msgid "Command exited with status %d."
-msgstr "コマンドは状態 %d で終了しました。"
-
-#: zypp/ExternalProgram.cc:563
-#, c-format, boost-format
-msgid "Command was killed by signal %d (%s)."
-msgstr "コマンドはシグナル %d (%s)で終了しました。"
-
-#: zypp/ExternalProgram.cc:568
-msgid "Command exited with unknown error."
-msgstr "コマンドは不明なエラーで終了しました。"
-
 #. TranslatorExplanation first %s is key name, second is keyring name
-#: zypp/KeyRing.cc:590
+#: zypp/KeyRing.cc:753
 #, c-format, boost-format
 msgid "Tried to import not existent key %s into keyring %s"
 msgstr "存在しない鍵 %s をキーリング %s にインポートしようとしました"
 
-#: zypp/KeyRing.cc:596
+#: zypp/KeyRing.cc:759
 msgid "Failed to import key."
 msgstr "鍵のインポートに失敗しました。"
 
-#: zypp/KeyRing.cc:603
+#: zypp/KeyRing.cc:766
 msgid "Failed to delete key."
 msgstr "キーの削除に失敗しました。"
 
-#: zypp/KeyRing.cc:609
+#: zypp/KeyRing.cc:772
 #, c-format, boost-format
 msgid "Signature file %s not found"
 msgstr "署名ファイル %s が見つかりません"
@@ -3766,54 +3708,54 @@ msgstr[0] "(あと %d 日で期限切れ)"
 
 #. translator: %1% is a gpg key ID like 3DBDC284
 #. %2% is a cache directories path
-#: zypp/RepoInfo.cc:548
+#: zypp/RepoInfo.cc:547
 #, boost-format
 msgid "Looking for gpg key ID %1% in cache %2%."
 msgstr "キャッシュ %2% 内で gpg 鍵 ID %1% を検索しています。"
 
 #. translator: %1% is a gpg key ID like 3DBDC284
 #. %2% is a repositories name
-#: zypp/RepoInfo.cc:576
+#: zypp/RepoInfo.cc:575
 #, boost-format
 msgid "Looking for gpg key ID %1% in repository %2%."
 msgstr "リポジトリ %2% 内で gpg 鍵 ID %1% を検索しています。"
 
 #. translator: %1% is a repositories name
-#: zypp/RepoInfo.cc:600
+#: zypp/RepoInfo.cc:599
 #, boost-format
 msgid "Repository %1% does not define additional 'gpgkey=' URLs."
 msgstr "リポジトリ %1% は 'gpgkey=' で追加の URL を指定していません。"
 
-#: zypp/RepoManager.cc:312
+#: zypp/RepoManager.cc:313
 #, boost-format
 msgid "Cannot read repo directory '%1%': Permission denied"
 msgstr ""
 "リポジトリのディレクトリ '%1%' を読み込むことができません: 許可がありません"
 
 #. TranslatorExplanation '%s' is a pathname
-#: zypp/RepoManager.cc:320 zypp/RepoManager.cc:783 zypp/RepoManager.cc:1568
+#: zypp/RepoManager.cc:321 zypp/RepoManager.cc:784 zypp/RepoManager.cc:1569
 #: zypp/repo/PluginServices.cc:49
 #, c-format, boost-format
 msgid "Failed to read directory '%s'"
 msgstr "ディレクトリ '%s' の読み込みに失敗しました"
 
-#: zypp/RepoManager.cc:330
+#: zypp/RepoManager.cc:331
 #, boost-format
 msgid "Cannot read repo file '%1%': Permission denied"
 msgstr ""
 "リポジトリのファイル '%1%' を読み込むことができません: 許可がありません"
 
-#: zypp/RepoManager.cc:353
+#: zypp/RepoManager.cc:354
 msgid "Repository alias cannot start with dot."
 msgstr "リポジトリの別名をドットから始めることはできません。"
 
-#: zypp/RepoManager.cc:364
+#: zypp/RepoManager.cc:365
 msgid "Service alias cannot start with dot."
 msgstr "サービスの別名をドットから始めることはできません。"
 
 #. TranslatorExplanation '%s' is a filename
-#: zypp/RepoManager.cc:738 zypp/RepoManager.cc:1686 zypp/RepoManager.cc:1752
-#: zypp/RepoManager.cc:1830 zypp/RepoManager.cc:1895 zypp/RepoManager.cc:2026
+#: zypp/RepoManager.cc:739 zypp/RepoManager.cc:1687 zypp/RepoManager.cc:1753
+#: zypp/RepoManager.cc:1831 zypp/RepoManager.cc:1896 zypp/RepoManager.cc:2027
 #, c-format, boost-format
 msgid "Can't open file '%s' for writing."
 msgstr "ファイル '%s' を書き込み用に開くことができません。"
@@ -3821,43 +3763,43 @@ msgstr "ファイル '%s' を書き込み用に開くことができません。
 #. translators: Cleanup a repository previously owned by a meanwhile unknown (deleted) service.
 #. %1% = service name
 #. %2% = repository name
-#: zypp/RepoManager.cc:874
+#: zypp/RepoManager.cc:875
 #, boost-format
 msgid "Unknown service '%1%': Removing orphaned service repository '%2%'"
 msgstr ""
 "不明なサービス '%1%' です: 孤立したサービスリポジトリ '%2%' を削除しています"
 
 #. we will throw this later if no URL checks out fine
-#: zypp/RepoManager.cc:1119
+#: zypp/RepoManager.cc:1120
 msgid "Valid metadata not found at specified URL"
 msgid_plural "Valid metadata not found at specified URLs"
 msgstr[0] "指定した URL には正しいメタデータがありません"
 
-#: zypp/RepoManager.cc:1171 zypp/RepoManager.cc:1284 zypp/RepoManager.cc:1340
+#: zypp/RepoManager.cc:1172 zypp/RepoManager.cc:1285 zypp/RepoManager.cc:1341
 #, c-format, boost-format
 msgid "Can't create %s"
 msgstr "%s を作成できません"
 
-#: zypp/RepoManager.cc:1179
+#: zypp/RepoManager.cc:1180
 msgid "Can't create metadata cache directory."
 msgstr "メタデータのキャッシュディレクトリを作成できません。"
 
-#: zypp/RepoManager.cc:1326
+#: zypp/RepoManager.cc:1327
 #, c-format, boost-format
 msgid "Building repository '%s' cache"
 msgstr "リポジトリ '%s' のキャッシュを構築しています"
 
-#: zypp/RepoManager.cc:1346
+#: zypp/RepoManager.cc:1347
 #, c-format, boost-format
 msgid "Can't create cache at %s - no writing permissions."
 msgstr "%s にキャッシュを作成できません - 書き込み許可がありません。"
 
-#: zypp/RepoManager.cc:1411
+#: zypp/RepoManager.cc:1412
 #, c-format, boost-format
 msgid "Failed to cache repo (%d)."
 msgstr "リポジトリ (%d) のキャッシュに失敗しました。"
 
-#: zypp/RepoManager.cc:1422
+#: zypp/RepoManager.cc:1423
 msgid "Unhandled repository type"
 msgstr "未処理のリポジトリタイプ"
 
@@ -3867,67 +3809,46 @@ msgstr "未処理のリポジトリタイプ"
 #. on ftp file-not-found(bnc #335906). Instead we'll check another types
 #. before throwing.
 #. TranslatorExplanation '%s' is an URL
-#: zypp/RepoManager.cc:1459 zypp/RepoManager.cc:2521
+#: zypp/RepoManager.cc:1460 zypp/RepoManager.cc:2522
 #, c-format, boost-format
 msgid "Error trying to read from '%s'"
 msgstr "'%s' から読み取り時にエラーが発生しました"
 
 #. TranslatorExplanation '%s' is an URL
-#: zypp/RepoManager.cc:1512 zypp/RepoManager.cc:2529
+#: zypp/RepoManager.cc:1513 zypp/RepoManager.cc:2530
 #, c-format, boost-format
 msgid "Unknown error reading from '%s'"
 msgstr "'%s' からの読み取り時に不明なエラーが発生しました"
 
-#: zypp/RepoManager.cc:1650
+#: zypp/RepoManager.cc:1651
 #, c-format, boost-format
 msgid "Adding repository '%s'"
 msgstr "リポジトリ '%s' を追加しています"
 
 #. TranslatorExplanation '%s' is an URL
-#: zypp/RepoManager.cc:1738
+#: zypp/RepoManager.cc:1739
 #, c-format, boost-format
 msgid "Invalid repo file name at '%s'"
 msgstr "'%s' にあるリポジトリのファイル名が正しくありません"
 
-#: zypp/RepoManager.cc:1779
+#: zypp/RepoManager.cc:1780
 #, c-format, boost-format
 msgid "Removing repository '%s'"
 msgstr "リポジトリ '%s' を削除しています"
 
-#: zypp/RepoManager.cc:1798 zypp/RepoManager.cc:1876
+#: zypp/RepoManager.cc:1799 zypp/RepoManager.cc:1877
 msgid "Can't figure out where the repo is stored."
 msgstr "リポジトリがどこに保存されたのかがわかりません。"
 
 #. TranslatorExplanation '%s' is a filename
-#: zypp/RepoManager.cc:1812 zypp/RepoManager.cc:2014
+#: zypp/RepoManager.cc:1813 zypp/RepoManager.cc:2015
 #, c-format, boost-format
 msgid "Can't delete '%s'"
 msgstr "'%s' を削除することができません"
 
-#: zypp/RepoManager.cc:2002 zypp/RepoManager.cc:2452
+#: zypp/RepoManager.cc:2003 zypp/RepoManager.cc:2453
 msgid "Can't figure out where the service is stored."
 msgstr "サービスの保管場所がわかりません。"
-
-#: zypp/Url.cc:114
-msgid "Invalid LDAP URL query string"
-msgstr "無効なLDAP URLのクエリ文字列"
-
-#: zypp/Url.cc:153
-#, c-format, boost-format
-msgid "Invalid LDAP URL query parameter '%s'"
-msgstr "無効なLDAP URLクエリパラメータ '%s'"
-
-#: zypp/Url.cc:301
-msgid "Unable to clone Url object"
-msgstr "URLオブジェクトを複製できません"
-
-#: zypp/Url.cc:314
-msgid "Invalid empty Url object reference"
-msgstr "無効な空のURLオブジェクト参照"
-
-#: zypp/Url.cc:327 zypp/Url.cc:341
-msgid "Unable to parse Url components"
-msgstr "URLコンポーネントを解析できません"
 
 #: zypp/VendorSupportOptions.cc:14
 msgid "unknown"
@@ -4002,7 +3923,7 @@ msgstr "サポートを得るには、追加の顧客契約が必要です。"
 msgid "Unknown support option. Description not available"
 msgstr "不明なサポートオプションです。説明は利用できません"
 
-#: zypp/ZYppFactory.cc:398
+#: zypp/ZYppFactory.cc:403
 #, c-format, boost-format
 msgid ""
 "System management is locked by the application with pid %d (%s).\n"
@@ -4010,11 +3931,6 @@ msgid ""
 msgstr ""
 "システム管理はpid %d (%s)のアプリケーションによってロックされています。\n"
 "再試行する前にこのアプリケーションを終了してください。"
-
-#. TranslatorExplanation followed by the list of error messages that lead to this exception
-#: zypp/base/Exception.cc:134
-msgid "History:"
-msgstr "履歴:"
 
 #: zypp/base/StrMatcher.cc:152
 #, c-format, boost-format
@@ -4037,13 +3953,14 @@ msgid "Invalid regular expression '%s'"
 msgstr "正規表現 '%s' が正しくありません"
 
 #. !\todo add comma to the message for the next release
-#: zypp/media/MediaCIFS.cc:427 zypp/media/MediaCurl.cc:1382
+#: zypp/media/MediaCIFS.cc:427 zypp/media/MediaCurl.cc:1261
+#: zypp/zyppng/media/medianetwork.cc:581
 #, c-format, boost-format
 msgid "Authentication required for '%s'"
 msgstr "'%s' にアクセスするにはユーザ認証が必要です"
 
-#: zypp/media/MediaCurl.cc:755
-#: zypp/zyppng/media/network/networkrequesterror.cc:116
+#: zypp/media/MediaCurl.cc:634
+#: zypp/zyppng/media/network/networkrequesterror.cc:127
 msgid ""
 "Visit the SUSE Customer Center to check whether your registration is valid "
 "and has not expired."
@@ -4051,8 +3968,8 @@ msgstr ""
 "SUSE カスタマーセンターを開いて、お使いの登録が有効であること、および期限切れ"
 "になっていないことをご確認ください。"
 
-#: zypp/media/MediaCurl.cc:757
-#: zypp/zyppng/media/network/networkrequesterror.cc:118
+#: zypp/media/MediaCurl.cc:636
+#: zypp/zyppng/media/network/networkrequesterror.cc:129
 msgid ""
 "Visit the Novell Customer Center to check whether your registration is valid "
 "and has not expired."
@@ -4081,7 +3998,7 @@ msgid "Medium not opened when trying to perform action '%s'."
 msgstr "アクション '%s' を実行しようとした際にメディアが開きませんでした。"
 
 #: zypp/media/MediaException.cc:58
-#: zypp/zyppng/media/network/networkrequesterror.cc:127
+#: zypp/zyppng/media/network/networkrequesterror.cc:138
 #, c-format, boost-format
 msgid "File '%s' not found on medium '%s'"
 msgstr "ファイル「%s」がメディア「%s」に見つかりません"
@@ -4187,7 +4104,7 @@ msgid "Permission to access '%s' denied."
 msgstr "'%s' へのアクセスが拒否されました。"
 
 #: zypp/media/MediaException.cc:189
-#: zypp/zyppng/media/network/networkrequesterror.cc:111
+#: zypp/zyppng/media/network/networkrequesterror.cc:122
 #, c-format, boost-format
 msgid "Timeout exceeded when accessing '%s'."
 msgstr "'%s' にアクセスする際にタイムアウトになりました。"
@@ -4200,7 +4117,7 @@ msgstr ""
 "%s, 実際のサイズ=%s) 。"
 
 #: zypp/media/MediaException.cc:205
-#: zypp/zyppng/media/network/networkrequesterror.cc:107
+#: zypp/zyppng/media/network/networkrequesterror.cc:118
 #, c-format, boost-format
 msgid "Location '%s' is temporarily unaccessible."
 msgstr "場所「%s」は一時的にアクセスできなくなっています。"
@@ -4220,7 +4137,7 @@ msgstr ""
 "接続点の作成: 接続点を作成するための書き込み可能なディレクトリが見つかりませ"
 "ん"
 
-#: zypp/media/MediaUserAuth.cc:140
+#: zypp/media/MediaUserAuth.cc:150
 #, c-format, boost-format
 msgid "Unsupported HTTP authentication method '%s'"
 msgstr "未対応のHTTP認証方式 '%s'"
@@ -4279,10 +4196,12 @@ msgid "No url in repository."
 msgstr "リポジトリにURLが設定されていません。"
 
 #. Translator: %1% the expected medium number; %2% the total number of media in the set; %3% the ident file on the medium.
-#: zypp/repo/SUSEMediaVerifier.cc:103
+#: zypp/repo/SUSEMediaVerifier.cc:104
 #, boost-format
 msgid "Expected medium %1%/%2% identified by file '%3%' with content:"
-msgstr "必要なメディア %1%/%2% は '%3%' と記されているメディアで、下記のような内容が含まれています:"
+msgstr ""
+"必要なメディア %1%/%2% は '%3%' と記されているメディアで、下記のような内容が"
+"含まれています:"
 
 #. [lhs][rhs] 0 = installed; 1 = to be installed
 #. TranslatorExplanation %1%(filename) %2%(package1) %3%(package2)
@@ -4444,7 +4363,7 @@ msgstr "いくつかの依存関係を無視することによって %s を壊�
 msgid "generally ignore of some dependencies"
 msgstr "いくつかの依存関係をおおよそ無視する"
 
-#: zypp/solver/detail/SATResolver.cc:1090
+#: zypp/solver/detail/SATResolver.cc:1089
 #, boost-format
 msgid ""
 "the installed %1% does not belong to a distupgrade repository and must be "
@@ -4454,96 +4373,90 @@ msgstr ""
 "ればならないものです"
 
 #. just in case
-#: zypp/solver/detail/SATResolver.cc:1092
+#: zypp/solver/detail/SATResolver.cc:1091
 #, boost-format
 msgid "the to be installed %1% does not belong to a distupgrade repository"
 msgstr "これからインストールする %1% は distupgrade リポジトリに属していません"
 
-#: zypp/solver/detail/SATResolver.cc:1096
+#: zypp/solver/detail/SATResolver.cc:1095
 #, boost-format
 msgid "the installed %1% has inferior architecture"
 msgstr "インストール済みの %1% は下位のアーキテクチャに属しています"
 
-#: zypp/solver/detail/SATResolver.cc:1098
+#: zypp/solver/detail/SATResolver.cc:1097
 #, boost-format
 msgid "the to be installed %1% has inferior architecture"
 msgstr "これからインストールする %1% は下位のアーキテクチャに属しています"
 
-#: zypp/solver/detail/SATResolver.cc:1101
+#: zypp/solver/detail/SATResolver.cc:1100
 #, boost-format
 msgid "problem with the installed %1%"
 msgstr "インストール済みの %1% に問題があります"
 
-#: zypp/solver/detail/SATResolver.cc:1104
-#: zypp/solver/detail/SATResolver.cc:1572
-#: zypp/solver/detail/SATResolver.cc:2102
+#: zypp/solver/detail/SATResolver.cc:1103
 msgid "conflicting requests"
 msgstr "要求が矛盾しています"
 
-#: zypp/solver/detail/SATResolver.cc:1107
-#: zypp/solver/detail/SATResolver.cc:1575
-#: zypp/solver/detail/SATResolver.cc:2104
+#: zypp/solver/detail/SATResolver.cc:1106
 msgid "some dependency problem"
 msgstr "何らかの依存関係の問題"
 
-#: zypp/solver/detail/SATResolver.cc:1110
+#: zypp/solver/detail/SATResolver.cc:1109
 #, boost-format
 msgid "nothing provides the requested '%1%'"
 msgstr "要求された '%1%' を提供するものがありません"
 
-#: zypp/solver/detail/SATResolver.cc:1111
-#: zypp/solver/detail/SATResolver.cc:1115
+#: zypp/solver/detail/SATResolver.cc:1110
+#: zypp/solver/detail/SATResolver.cc:1114
 msgid "Have you enabled all the required repositories?"
 msgstr "必要なリポジトリを全て有効化しているかどうかご確認ください。"
 
-#: zypp/solver/detail/SATResolver.cc:1114
+#: zypp/solver/detail/SATResolver.cc:1113
 #, boost-format
 msgid "the requested package %1% does not exist"
 msgstr "要求されたパッケージ %1% は存在していません"
 
-#: zypp/solver/detail/SATResolver.cc:1118
-#: zypp/solver/detail/SATResolver.cc:1586
-#: zypp/solver/detail/SATResolver.cc:2112
+#: zypp/solver/detail/SATResolver.cc:1117
 msgid "unsupported request"
 msgstr "サポートされていない要求"
 
-#: zypp/solver/detail/SATResolver.cc:1121
+#: zypp/solver/detail/SATResolver.cc:1120
 #, boost-format
 msgid "'%1%' is provided by the system and cannot be erased"
 msgstr "'%1%' はシステム側で提供されているものであり、消去できません"
 
-#: zypp/solver/detail/SATResolver.cc:1124
+#: zypp/solver/detail/SATResolver.cc:1123
 #, boost-format
 msgid "%1% is not installable"
 msgstr "%1% はインストールできません"
 
-#: zypp/solver/detail/SATResolver.cc:1129
+#: zypp/solver/detail/SATResolver.cc:1128
 #, boost-format
 msgid "nothing provides '%1%' needed by the installed %2%"
 msgstr ""
 "インストール済みの %2% によって必要とされている '%1%' を提供するものがありま"
 "せん"
 
-#: zypp/solver/detail/SATResolver.cc:1131
+#: zypp/solver/detail/SATResolver.cc:1130
 #, boost-format
 msgid "nothing provides '%1%' needed by the to be installed %2%"
 msgstr ""
 "これからインストールする %2% によって必要とされている '%1%' を提供するものが"
 "ありません"
 
-#: zypp/solver/detail/SATResolver.cc:1134
+#: zypp/solver/detail/SATResolver.cc:1133
 #, boost-format
 msgid "cannot install both %1% and %2%"
 msgstr "%1% と %2% を同時にインストールすることはできません"
 
-#: zypp/solver/detail/SATResolver.cc:1139
+#: zypp/solver/detail/SATResolver.cc:1138
 #, boost-format
 msgid "the installed %1% conflicts with '%2%' provided by the installed %3%"
 msgstr ""
 "インストール済みの %1% は、インストール済みの %3% によって提供される '%2%' と"
 "矛盾します"
 
-#: zypp/solver/detail/SATResolver.cc:1141
+#: zypp/solver/detail/SATResolver.cc:1140
 #, boost-format
 msgid ""
 "the installed %1% conflicts with '%2%' provided by the to be installed %3%"
@@ -4551,7 +4464,7 @@ msgstr ""
 "インストール済みの %1% は、これからインストールする %3% によって提供される "
 "'%2%' と矛盾します"
 
-#: zypp/solver/detail/SATResolver.cc:1145
+#: zypp/solver/detail/SATResolver.cc:1144
 #, boost-format
 msgid ""
 "the to be installed %1% conflicts with '%2%' provided by the installed %3%"
@@ -4559,7 +4472,7 @@ msgstr ""
 "これからインストールする %1% は、インストール済みの %3% によって提供される "
 "'%2%' と矛盾します"
 
-#: zypp/solver/detail/SATResolver.cc:1147
+#: zypp/solver/detail/SATResolver.cc:1146
 #, boost-format
 msgid ""
 "the to be installed %1% conflicts with '%2%' provided by the to be installed "
@@ -4568,28 +4481,28 @@ msgstr ""
 "これからインストールする %1% は、これからインストールする %3% によって提供さ"
 "れる '%2%' と矛盾します"
 
-#: zypp/solver/detail/SATResolver.cc:1154
+#: zypp/solver/detail/SATResolver.cc:1153
 #, boost-format
 msgid "the installed %1% obsoletes '%2%' provided by the installed %3%"
 msgstr ""
 "インストール済みの %1% は、インストール済みの %3% によって提供される '%2%' を"
 "廃止します"
 
-#: zypp/solver/detail/SATResolver.cc:1156
+#: zypp/solver/detail/SATResolver.cc:1155
 #, boost-format
 msgid "the installed %1% obsoletes '%2%' provided by the to be installed %3%"
 msgstr ""
 "インストール済みの %1% は、インストール済みの %3% によって提供される '%2%' を"
 "廃止します"
 
-#: zypp/solver/detail/SATResolver.cc:1160
+#: zypp/solver/detail/SATResolver.cc:1159
 #, boost-format
 msgid "the to be installed %1% obsoletes '%2%' provided by the installed %3%"
 msgstr ""
 "これからインストールする %1% は、インストール済みの %3% によって提供される "
 "'%2%' を廃止します"
 
-#: zypp/solver/detail/SATResolver.cc:1162
+#: zypp/solver/detail/SATResolver.cc:1161
 #, boost-format
 msgid ""
 "the to be installed %1% obsoletes '%2%' provided by the to be installed %3%"
@@ -4597,17 +4510,17 @@ msgstr ""
 "これからインストールする %1% は、これからインストールする %2% によって提供さ"
 "れる '%2%' を廃止します"
 
-#: zypp/solver/detail/SATResolver.cc:1167
+#: zypp/solver/detail/SATResolver.cc:1166
 #, boost-format
 msgid "the installed %1% conflicts with '%2%' provided by itself"
 msgstr "インストール済みの %1% は、それ自身が提供する '%2%' と矛盾します"
 
-#: zypp/solver/detail/SATResolver.cc:1169
+#: zypp/solver/detail/SATResolver.cc:1168
 #, boost-format
 msgid "the to be installed %1% conflicts with '%2%' provided by itself"
 msgstr "これからインストールする %1% は、それ自身が提供する '%2%' と矛盾します"
 
-#: zypp/solver/detail/SATResolver.cc:1201
+#: zypp/solver/detail/SATResolver.cc:1200
 #, boost-format
 msgid ""
 "the installed %1% requires '%2%', but this requirement cannot be provided"
@@ -4615,7 +4528,7 @@ msgstr ""
 "インストール済みの %1% は '%2%' を必要としていますが、この要件を満たすものが"
 "ありません"
 
-#: zypp/solver/detail/SATResolver.cc:1203
+#: zypp/solver/detail/SATResolver.cc:1202
 #, boost-format
 msgid ""
 "the to be installed %1% requires '%2%', but this requirement cannot be "
@@ -4624,15 +4537,11 @@ msgstr ""
 "これからインストールする %1% は '%2%' を必要としていますが、この要件を満たす"
 "ものがありません"
 
-#: zypp/solver/detail/SATResolver.cc:1205
-#: zypp/solver/detail/SATResolver.cc:1644
-#: zypp/solver/detail/SATResolver.cc:2133
+#: zypp/solver/detail/SATResolver.cc:1204
 msgid "deleted providers: "
 msgstr "削除したプロバイダ: "
 
-#: zypp/solver/detail/SATResolver.cc:1215
-#: zypp/solver/detail/SATResolver.cc:1654
-#: zypp/solver/detail/SATResolver.cc:2134
+#: zypp/solver/detail/SATResolver.cc:1214
 msgid ""
 "\n"
 "not installable providers: "
@@ -4640,122 +4549,106 @@ msgstr ""
 "\n"
 "インストール不可能なプロバイダ: "
 
-#: zypp/solver/detail/SATResolver.cc:1217
-#: zypp/solver/detail/SATResolver.cc:1656
-#: zypp/solver/detail/SATResolver.cc:2135
+#: zypp/solver/detail/SATResolver.cc:1216
 msgid "not installable providers: "
 msgstr "インストール不可能なプロバイダ: "
 
-#: zypp/solver/detail/SATResolver.cc:1279
+#: zypp/solver/detail/SATResolver.cc:1278
 #, boost-format
 msgid "remove lock to allow removal of %1%"
 msgstr "%1% を削除できるようにするには、ロックを解除してください"
 
-#: zypp/solver/detail/SATResolver.cc:1284
-#: zypp/solver/detail/SATResolver.cc:1320
+#: zypp/solver/detail/SATResolver.cc:1283
+#: zypp/solver/detail/SATResolver.cc:1319
 #, boost-format
 msgid "do not install %1%"
 msgstr "%1% をインストールしません"
 
-#: zypp/solver/detail/SATResolver.cc:1299
-#: zypp/solver/detail/SATResolver.cc:1341
+#: zypp/solver/detail/SATResolver.cc:1298
+#: zypp/solver/detail/SATResolver.cc:1340
 #, boost-format
 msgid "keep %1%"
 msgstr "%1% を維持します"
 
-#: zypp/solver/detail/SATResolver.cc:1304
+#: zypp/solver/detail/SATResolver.cc:1303
 #, boost-format
 msgid "remove lock to allow installation of %1%"
 msgstr "%1% をインストールできるようにするには、ロックを解除してください"
 
-#: zypp/solver/detail/SATResolver.cc:1355
-#: zypp/solver/detail/SATResolver.cc:1376
-#: zypp/solver/detail/SATResolver.cc:1794
-#: zypp/solver/detail/SATResolver.cc:1815
-#: zypp/solver/detail/SATResolver.cc:2150
-#: zypp/solver/detail/SATResolver.cc:2154
+#: zypp/solver/detail/SATResolver.cc:1354
+#: zypp/solver/detail/SATResolver.cc:1375
 msgid "This request will break your system!"
 msgstr "この要求はシステムを壊してしまいます！"
 
-#: zypp/solver/detail/SATResolver.cc:1356
-#: zypp/solver/detail/SATResolver.cc:1377
-#: zypp/solver/detail/SATResolver.cc:1795
-#: zypp/solver/detail/SATResolver.cc:1816
-#: zypp/solver/detail/SATResolver.cc:2151
-#: zypp/solver/detail/SATResolver.cc:2155
+#: zypp/solver/detail/SATResolver.cc:1355
+#: zypp/solver/detail/SATResolver.cc:1376
 msgid "ignore the warning of a broken system"
 msgstr "システムが破壊される警告を無視する"
 
-#: zypp/solver/detail/SATResolver.cc:1361
+#: zypp/solver/detail/SATResolver.cc:1360
 #, boost-format
 msgid "do not ask to install a solvable providing %1%"
 msgstr "%1% を提供する解決方法のインストールについて確認を行いません"
 
-#: zypp/solver/detail/SATResolver.cc:1383
+#: zypp/solver/detail/SATResolver.cc:1382
 #, boost-format
 msgid "do not ask to delete all solvables providing %1%"
 msgstr "%1% を提供する全ての解決方法の削除について確認を行いません"
 
-#: zypp/solver/detail/SATResolver.cc:1396
+#: zypp/solver/detail/SATResolver.cc:1395
 #, boost-format
 msgid "do not install most recent version of %1%"
 msgstr "%1% の最新バージョンをインストールしません"
 
-#: zypp/solver/detail/SATResolver.cc:1417
+#: zypp/solver/detail/SATResolver.cc:1416
 #, boost-format
 msgid "keep %1% despite the inferior architecture"
 msgstr "下位のアーキテクチャですが、 %1% を維持します"
 
-#: zypp/solver/detail/SATResolver.cc:1422
+#: zypp/solver/detail/SATResolver.cc:1421
 #, boost-format
 msgid "install %1% despite the inferior architecture"
 msgstr "下位のアーキテクチャですが、 %1% を維持します"
 
-#: zypp/solver/detail/SATResolver.cc:1431
+#: zypp/solver/detail/SATResolver.cc:1430
 #, boost-format
 msgid "keep obsolete %1%"
 msgstr "古い %1% を維持します"
 
-#: zypp/solver/detail/SATResolver.cc:1436
+#: zypp/solver/detail/SATResolver.cc:1435
 #, boost-format
 msgid "install %1% from excluded repository"
 msgstr "除外されたリポジトリから %1% をインストールします"
 
 #. translator: %1% is a package name
-#: zypp/solver/detail/SATResolver.cc:1450
-#: zypp/solver/detail/SATResolver.cc:1889
-#: zypp/solver/detail/SATResolver.cc:2169
+#: zypp/solver/detail/SATResolver.cc:1449
 #, boost-format
 msgid "install %1% although it has been retracted"
 msgstr "撤回済みの %1% をインストールする"
 
 #. translator: %1% is a package name
-#: zypp/solver/detail/SATResolver.cc:1453
-#: zypp/solver/detail/SATResolver.cc:1892
-#: zypp/solver/detail/SATResolver.cc:2170
+#: zypp/solver/detail/SATResolver.cc:1452
 #, boost-format
 msgid "allow to install the PTF %1%"
 msgstr "PTF %1% のインストールを許可する"
 
 #. translator: %1% is a package name
-#: zypp/solver/detail/SATResolver.cc:1456
-#: zypp/solver/detail/SATResolver.cc:1895
-#: zypp/solver/detail/SATResolver.cc:2171
+#: zypp/solver/detail/SATResolver.cc:1455
 #, boost-format
 msgid "install %1% although it is blacklisted"
 msgstr "ブラックリスト設定されている %1% をインストールする"
 
-#: zypp/solver/detail/SATResolver.cc:1476
+#: zypp/solver/detail/SATResolver.cc:1475
 #, boost-format
 msgid "downgrade of %1% to %2%"
 msgstr "%1% を %2% にダウングレードします"
 
-#: zypp/solver/detail/SATResolver.cc:1483
+#: zypp/solver/detail/SATResolver.cc:1482
 #, boost-format
 msgid "architecture change of %1% to %2%"
 msgstr "%1% のアーキテクチャを %2% に変更します"
 
-#: zypp/solver/detail/SATResolver.cc:1492
+#: zypp/solver/detail/SATResolver.cc:1493
 #, boost-format
 msgid ""
 "install %1% (with vendor change)\n"
@@ -4766,211 +4659,20 @@ msgstr ""
 
 #: zypp/solver/detail/SATResolver.cc:1498
 #, boost-format
+msgid ""
+"install %1% from vendor %2%\n"
+"  replacing %3% from vendor %4%"
+msgstr ""
+
+#: zypp/solver/detail/SATResolver.cc:1507
+#, boost-format
 msgid "replacement of %1% with %2%"
 msgstr "%1% を %2% で置き換えます"
 
-#: zypp/solver/detail/SATResolver.cc:1509
+#: zypp/solver/detail/SATResolver.cc:1518
 #, boost-format
 msgid "deinstallation of %1%"
 msgstr "%1% をアンインストールします"
-
-#: zypp/solver/detail/SATResolver.cc:1563
-#: zypp/solver/detail/SATResolver.cc:2096
-#, c-format, boost-format
-msgid "%s does not belong to a distupgrade repository"
-msgstr "%s はdistupgradeのリポジトリに属していません"
-
-#: zypp/solver/detail/SATResolver.cc:1566
-#: zypp/solver/detail/SATResolver.cc:2098
-#, c-format, boost-format
-msgid "%s has inferior architecture"
-msgstr "%s は下位のアーキテクチャです"
-
-#: zypp/solver/detail/SATResolver.cc:1569
-#: zypp/solver/detail/SATResolver.cc:2100
-#, c-format, boost-format
-msgid "problem with installed package %s"
-msgstr "インストール済みのパッケージ %s に問題が発生しました"
-
-#: zypp/solver/detail/SATResolver.cc:1578
-#: zypp/solver/detail/SATResolver.cc:2106
-#, c-format, boost-format
-msgid "nothing provides requested %s"
-msgstr "要求した %s はどこからも提供されていません"
-
-#: zypp/solver/detail/SATResolver.cc:1579
-#: zypp/solver/detail/SATResolver.cc:1583
-#: zypp/solver/detail/SATResolver.cc:2107
-#: zypp/solver/detail/SATResolver.cc:2110
-msgid "Have you enabled all requested repositories?"
-msgstr "すべての必要なリポジトリを有効化しましたか？"
-
-#: zypp/solver/detail/SATResolver.cc:1582
-#: zypp/solver/detail/SATResolver.cc:2109
-#, c-format, boost-format
-msgid "package %s does not exist"
-msgstr "パッケージ %s は存在しません"
-
-#: zypp/solver/detail/SATResolver.cc:1589
-#: zypp/solver/detail/SATResolver.cc:2114
-#, c-format, boost-format
-msgid "%s is provided by the system and cannot be erased"
-msgstr "%s はシステムが提供するもので、削除できません"
-
-#: zypp/solver/detail/SATResolver.cc:1592
-#: zypp/solver/detail/SATResolver.cc:2116
-#, c-format, boost-format
-msgid "%s is not installable"
-msgstr "%s はインストールできません"
-
-#. for setting weak dependencies
-#: zypp/solver/detail/SATResolver.cc:1596
-#: zypp/solver/detail/SATResolver.cc:2119
-#, c-format, boost-format
-msgid "nothing provides %s needed by %s"
-msgstr "%s (%s で必要)はどこからも提供されていません"
-
-#: zypp/solver/detail/SATResolver.cc:1599
-#: zypp/solver/detail/SATResolver.cc:2121
-#, c-format, boost-format
-msgid "cannot install both %s and %s"
-msgstr "%s と %s の両方をインストールすることはできません"
-
-#: zypp/solver/detail/SATResolver.cc:1602
-#: zypp/solver/detail/SATResolver.cc:2123
-#, c-format, boost-format
-msgid "%s conflicts with %s provided by %s"
-msgstr "%s は %s (%s から提供されている)と競合します"
-
-#: zypp/solver/detail/SATResolver.cc:1605
-#: zypp/solver/detail/SATResolver.cc:2125
-#, c-format, boost-format
-msgid "%s obsoletes %s provided by %s"
-msgstr "%s は %s (%s から提供されている)を古いものとして廃棄します"
-
-#: zypp/solver/detail/SATResolver.cc:1608
-#: zypp/solver/detail/SATResolver.cc:2127
-#, c-format, boost-format
-msgid "installed %s obsoletes %s provided by %s"
-msgstr ""
-"インストール済みの %s は、%s (%s から提供されている)を古いものとして廃棄しま"
-"す"
-
-#: zypp/solver/detail/SATResolver.cc:1611
-#: zypp/solver/detail/SATResolver.cc:2129
-#, c-format, boost-format
-msgid "solvable %s conflicts with %s provided by itself"
-msgstr "解決方法 %s は自分自身で提供している %s と競合しています"
-
-#: zypp/solver/detail/SATResolver.cc:1642
-#: zypp/solver/detail/SATResolver.cc:2131
-#, c-format, boost-format
-msgid "%s requires %s, but this requirement cannot be provided"
-msgstr "%s は %s を必要としていますが、この要求を解決する方法がありません"
-
-#: zypp/solver/detail/SATResolver.cc:1718
-#: zypp/solver/detail/SATResolver.cc:2140
-#, c-format, boost-format
-msgid "remove lock to allow removal of %s"
-msgstr "%s の削除を許可するためにロックを削除する"
-
-#: zypp/solver/detail/SATResolver.cc:1723
-#: zypp/solver/detail/SATResolver.cc:1759
-#: zypp/solver/detail/SATResolver.cc:2141
-#: zypp/solver/detail/SATResolver.cc:2146
-#, c-format, boost-format
-msgid "do not install %s"
-msgstr "%s をインストールしない"
-
-#: zypp/solver/detail/SATResolver.cc:1738
-#: zypp/solver/detail/SATResolver.cc:1780
-#: zypp/solver/detail/SATResolver.cc:2143
-#: zypp/solver/detail/SATResolver.cc:2148
-#, c-format, boost-format
-msgid "keep %s"
-msgstr "%s を維持"
-
-#: zypp/solver/detail/SATResolver.cc:1743
-#: zypp/solver/detail/SATResolver.cc:2144
-#, c-format, boost-format
-msgid "remove lock to allow installation of %s"
-msgstr "%s のインストールを許可するためにロックを削除する"
-
-#: zypp/solver/detail/SATResolver.cc:1800
-#: zypp/solver/detail/SATResolver.cc:2152
-#, c-format, boost-format
-msgid "do not ask to install a solvable providing %s"
-msgstr "%s を提供する解決方法のインストールについて問い合わせない"
-
-#: zypp/solver/detail/SATResolver.cc:1822
-#: zypp/solver/detail/SATResolver.cc:2156
-#, c-format, boost-format
-msgid "do not ask to delete all solvables providing %s"
-msgstr "%s を提供するすべての解決方法の削除について問い合わせない"
-
-#: zypp/solver/detail/SATResolver.cc:1835
-#: zypp/solver/detail/SATResolver.cc:2158
-#, c-format, boost-format
-msgid "do not install most recent version of %s"
-msgstr "%s の最新バージョンをインストールしない"
-
-#: zypp/solver/detail/SATResolver.cc:1856
-#: zypp/solver/detail/SATResolver.cc:2161
-#, c-format, boost-format
-msgid "keep %s despite the inferior architecture"
-msgstr "下位のアーキテクチャである %s を維持する"
-
-#: zypp/solver/detail/SATResolver.cc:1861
-#: zypp/solver/detail/SATResolver.cc:2162
-#, c-format, boost-format
-msgid "install %s despite the inferior architecture"
-msgstr "下位のアーキテクチャである %s をインストールする"
-
-#: zypp/solver/detail/SATResolver.cc:1870
-#: zypp/solver/detail/SATResolver.cc:2165
-#, c-format, boost-format
-msgid "keep obsolete %s"
-msgstr "古い %s を維持する"
-
-#: zypp/solver/detail/SATResolver.cc:1875
-#: zypp/solver/detail/SATResolver.cc:2166
-#, c-format, boost-format
-msgid "install %s from excluded repository"
-msgstr "除外されたリポジトリから %s をインストールする"
-
-#: zypp/solver/detail/SATResolver.cc:1915
-#: zypp/solver/detail/SATResolver.cc:2174
-#, c-format, boost-format
-msgid "downgrade of %s to %s"
-msgstr "%s を %s にダウングレードする"
-
-#: zypp/solver/detail/SATResolver.cc:1922
-#: zypp/solver/detail/SATResolver.cc:2175
-#, c-format, boost-format
-msgid "architecture change of %s to %s"
-msgstr "アーキテクチャを %s から %s に変更する"
-
-#: zypp/solver/detail/SATResolver.cc:1931
-#: zypp/solver/detail/SATResolver.cc:2176
-#, c-format, boost-format
-msgid ""
-"install %s (with vendor change)\n"
-"  %s  -->  %s"
-msgstr ""
-"%s をインストールする(ベンダを変更する)\n"
-"  %s  -->  %s"
-
-#: zypp/solver/detail/SATResolver.cc:1940
-#: zypp/solver/detail/SATResolver.cc:2177
-#, c-format, boost-format
-msgid "replacement of %s with %s"
-msgstr "%s を %s で置き換える"
-
-#: zypp/solver/detail/SATResolver.cc:1951
-#: zypp/solver/detail/SATResolver.cc:2179
-#, c-format, boost-format
-msgid "deinstallation of %s"
-msgstr "%s をアンインストールする"
 
 #. strip tmp file suffix
 #: zypp/target/RpmPostTransCollector.cc:105
@@ -4988,74 +4690,78 @@ msgstr "%postrans スクリプトを実行しています"
 msgid "Installation has been aborted as directed."
 msgstr "指示通りにインストールが中止されました。"
 
-#: zypp/target/TargetImpl.cc:397
+#: zypp/target/TargetImpl.cc:417
 msgid " executed"
 msgstr " 実行済み"
 
-#: zypp/target/TargetImpl.cc:419
+#: zypp/target/TargetImpl.cc:439
 msgid " execution failed"
 msgstr " 実行失敗"
 
 #. translators: We may find the same script content in files with different names.
 #. Only the first occurence is executed, subsequent ones are skipped. It's a one-line
 #. message for a log file. Preferably start translation with "%s"
-#: zypp/target/TargetImpl.cc:536
+#: zypp/target/TargetImpl.cc:556
 #, c-format, boost-format
 msgid "%s already executed as %s)"
 msgstr "%s は %s として実行済みです)"
 
-#: zypp/target/TargetImpl.cc:546
+#: zypp/target/TargetImpl.cc:566
 msgid " execution skipped while aborting"
 msgstr " 中止しているため実行をスキップ"
 
-#: zypp/target/TargetImpl.cc:601 zypp/target/TargetImpl.cc:621
-#: zypp/target/TargetImpl.cc:649 zypp/target/TargetImpl.cc:686
-#: zypp/target/TargetImpl.cc:694
+#: zypp/target/TargetImpl.cc:621 zypp/target/TargetImpl.cc:641
+#: zypp/target/TargetImpl.cc:669 zypp/target/TargetImpl.cc:706
+#: zypp/target/TargetImpl.cc:714
 msgid "Error sending update message notification."
 msgstr "更新メッセージ通知の送信時にエラーが発生しました。"
 
-#: zypp/target/TargetImpl.cc:745
+#: zypp/target/TargetImpl.cc:765
 msgid "New update message"
 msgstr "新しい更新メッセージ"
 
+#: zypp/target/TargetImpl.cc:2619
+msgid "Executing the transaction failed because of the following problems:"
+msgstr ""
+
 #. TranslatorExplanation after semicolon is error message
 #. TranslatorExplanation the colon is followed by an error message
-#: zypp/target/rpm/RpmDb.cc:465 zypp/target/rpm/RpmDb.cc:1728
-#: zypp/target/rpm/RpmDb.cc:1884
+#: zypp/target/rpm/RpmDb.cc:467 zypp/target/rpm/RpmDb.cc:1769
+#: zypp/target/rpm/RpmDb.cc:1925
 msgid "RPM failed: "
 msgstr "RPMの失敗: "
 
 #. Translator: %1% is a gpg public key
-#: zypp/target/rpm/RpmDb.cc:790
+#: zypp/target/rpm/RpmDb.cc:792
 #, boost-format
 msgid "Failed to import public key %1%"
 msgstr "公開鍵をファイル %1% からインポートすることができませんでした"
 
 #. Translator: %1% is a gpg public key
-#: zypp/target/rpm/RpmDb.cc:857
+#: zypp/target/rpm/RpmDb.cc:859
 #, boost-format
 msgid "Failed to remove public key %1%"
 msgstr "公開鍵 %1% を削除することができませんでした"
 
-#: zypp/target/rpm/RpmDb.cc:1245
+#: zypp/target/rpm/RpmDb.cc:1235
 msgid "Package is not signed!"
 msgstr "パッケージに署名がありません！"
 
 #. Translator: %s = name of an rpm package. A list of diffs follows
 #. this message.
-#: zypp/target/rpm/RpmDb.cc:1526
+#: zypp/target/rpm/RpmDb.cc:1568
 #, c-format, boost-format
 msgid "Changed configuration files for %s:"
 msgstr "%s 向けに変更された設定ファイル:"
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:1709
+#: zypp/target/rpm/RpmDb.cc:1750
 #, c-format, boost-format
 msgid "rpm saved %s as %s, but it was impossible to determine the difference"
 msgstr "rpmは %s を %s として保存しましたが、差異を判別できませんでした"
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:1711
+#: zypp/target/rpm/RpmDb.cc:1752
 #, c-format, boost-format
 msgid ""
 "rpm saved %s as %s.\n"
@@ -5065,13 +4771,13 @@ msgstr ""
 "以下は差異のある最初の25行です。\n"
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:1714
+#: zypp/target/rpm/RpmDb.cc:1755
 #, c-format, boost-format
 msgid "rpm created %s as %s, but it was impossible to determine the difference"
 msgstr "rpmは %s を %s として作成しましたが、差異を判別できませんでした"
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:1716
+#: zypp/target/rpm/RpmDb.cc:1757
 #, c-format, boost-format
 msgid ""
 "rpm created %s as %s.\n"
@@ -5082,133 +4788,51 @@ msgstr ""
 
 #. report additional rpm output in finish
 #. TranslatorExplanation Text is followed by a ':'  and the actual output.
-#: zypp/target/rpm/RpmDb.cc:1741 zypp/target/rpm/RpmDb.cc:1897
+#: zypp/target/rpm/RpmDb.cc:1782 zypp/target/rpm/RpmDb.cc:1938
 msgid "Additional rpm output"
 msgstr "追加のrpm出力"
 
-#: zypp/target/rpm/RpmDb.cc:2039
+#: zypp/target/rpm/RpmDb.cc:2080
 #, c-format, boost-format
 msgid "created backup %s"
 msgstr "バックアップ %s が作成されました"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2060
+#: zypp/target/rpm/RpmDb.cc:2101
 msgid "Signature is OK"
 msgstr "署名に問題はありません"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2062
+#: zypp/target/rpm/RpmDb.cc:2103
 msgid "Unknown type of signature"
 msgstr "不明な種類の署名です"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2064
+#: zypp/target/rpm/RpmDb.cc:2105
 msgid "Signature does not verify"
 msgstr "署名は正しくありません"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2066
+#: zypp/target/rpm/RpmDb.cc:2107
 msgid "Signature is OK, but key is not trusted"
 msgstr "署名に問題はありませんが、鍵を信頼していません"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2068
+#: zypp/target/rpm/RpmDb.cc:2109
 msgid "Signatures public key is not available"
 msgstr "署名の公開鍵がありません"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2070
+#: zypp/target/rpm/RpmDb.cc:2111
 msgid "File does not exist or signature can't be checked"
 msgstr "ファイルが存在しないか、署名を確認できません"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2072
+#: zypp/target/rpm/RpmDb.cc:2113
 msgid "File is unsigned"
 msgstr "ファイルに署名がありません"
 
-#: zypp/url/UrlBase.cc:220
-#, c-format, boost-format
-msgid "Url scheme does not allow a %s"
-msgstr "URLスキームでは %s を許可していません"
-
-#: zypp/url/UrlBase.cc:239
-#, c-format, boost-format
-msgid "Invalid %s component '%s'"
-msgstr "無効な %s コンポーネント '%s'"
-
-#: zypp/url/UrlBase.cc:246
-#, c-format, boost-format
-msgid "Invalid %s component"
-msgstr "無効な %s コンポーネント"
-
-#: zypp/url/UrlBase.cc:863 zypp/url/UrlBase.cc:1308
-msgid "Query string parsing not supported for this URL"
-msgstr "このURLに対して、クエリ文字列解析はサポートされていません"
-
-#: zypp/url/UrlBase.cc:901
-msgid "Url scheme is a required component"
-msgstr "URLスキームは必須のコンポーネントです"
-
-#: zypp/url/UrlBase.cc:907
-#, c-format, boost-format
-msgid "Invalid Url scheme '%s'"
-msgstr "無効なURLスキーム '%s'"
-
-#: zypp/url/UrlBase.cc:1026
-msgid "Url scheme does not allow a username"
-msgstr "URLスキームではユーザ名を指定することは許されていません"
-
-#: zypp/url/UrlBase.cc:1060
-msgid "Url scheme does not allow a password"
-msgstr "URLスキームではパスワードを指定することは許されていません"
-
-#: zypp/url/UrlBase.cc:1089
-msgid "Url scheme requires a host component"
-msgstr "URLスキームにはホスト部分が必要です"
-
-#: zypp/url/UrlBase.cc:1099
-msgid "Url scheme does not allow a host component"
-msgstr "URLスキームではホスト部分を指定することは許されていません"
-
-#: zypp/url/UrlBase.cc:1126
-#, c-format, boost-format
-msgid "Invalid host component '%s'"
-msgstr "無効なホスト部分 '%s'"
-
-#: zypp/url/UrlBase.cc:1147
-msgid "Url scheme does not allow a port"
-msgstr "URLスキームではポートの指定は許されていません"
-
-#: zypp/url/UrlBase.cc:1158
-#, c-format, boost-format
-msgid "Invalid port component '%s'"
-msgstr "無効なポート部分 '%s'"
-
-#: zypp/url/UrlBase.cc:1175
-msgid "Url scheme requires path name"
-msgstr "URLスキームにはパス名が必要です"
-
-#: zypp/url/UrlBase.cc:1196 zypp/url/UrlBase.cc:1210
-msgid "Relative path not allowed if authority exists"
-msgstr "権限部分が存在する場合相対パスは許可されません"
-
-#: zypp/url/UrlUtils.cc:111
-msgid "Encoded string contains a NUL byte"
-msgstr "エンコードされた文字列にNULLバイトがあります"
-
-#: zypp/url/UrlUtils.cc:173
-msgid "Invalid parameter array split separator character"
-msgstr "無効なパラメータ配列区切り文字"
-
-#: zypp/url/UrlUtils.cc:213
-msgid "Invalid parameter map split separator character"
-msgstr "無効なパラメータマップ区切り文字"
-
-#: zypp/url/UrlUtils.cc:283
-msgid "Invalid parameter array join separator character"
-msgstr "無効なパラメータ配列結合文字"
-
-#: zypp/zyppng/media/network/networkrequesterror.cc:132
+#: zypp/zyppng/media/network/networkrequesterror.cc:143
 #, c-format, boost-format
 msgid ""
 "Download (curl) error for '%s':\n"
@@ -5217,7 +4841,7 @@ msgstr ""
 "'%s' のダウンロード (curl) でエラーが発生しました:\n"
 "エラーコード: %s\n"
 
-#: zypp/zyppng/media/network/networkrequesterror.cc:138
+#: zypp/zyppng/media/network/networkrequesterror.cc:149
 #, c-format, boost-format
 msgid ""
 "Download (curl) error for '%s':\n"
@@ -5225,6 +4849,301 @@ msgid ""
 msgstr ""
 "'%s' のダウンロード (curl) でエラーが発生しました:\n"
 "HTTP レスポンスの取得ができませんでした\n"
+
+#. dubious: Throw on malformed known types, otherwise log a warning.
+#: zypp-core/CheckSum.cc:136
+#, c-format, boost-format
+msgid "Dubious type '%s' for %u byte checksum '%s'"
+msgstr ""
+"%2$u バイトのチェックサム '%3$s' は '%1$s' と思われますが、疑わしいタイプです"
+
+#: zypp-core/ExternalProgram.cc:245
+#, c-format, boost-format
+msgid "Can't open pty (%s)."
+msgstr "擬似端末(%s)を開くことができません。"
+
+#: zypp-core/ExternalProgram.cc:264 zypp-core/ExternalProgram.cc:281
+#, c-format, boost-format
+msgid "Can't open pipe (%s)."
+msgstr "パイプ(%s)を開くことができません。"
+
+#: zypp-core/Url.cc:114
+msgid "Invalid LDAP URL query string"
+msgstr "無効なLDAP URLのクエリ文字列"
+
+#: zypp-core/Url.cc:153
+#, c-format, boost-format
+msgid "Invalid LDAP URL query parameter '%s'"
+msgstr "無効なLDAP URLクエリパラメータ '%s'"
+
+#: zypp-core/Url.cc:301
+msgid "Unable to clone Url object"
+msgstr "URLオブジェクトを複製できません"
+
+#: zypp-core/Url.cc:314
+msgid "Invalid empty Url object reference"
+msgstr "無効な空のURLオブジェクト参照"
+
+#: zypp-core/Url.cc:327 zypp-core/Url.cc:341
+msgid "Unable to parse Url components"
+msgstr "URLコンポーネントを解析できません"
+
+#. TranslatorExplanation followed by the list of error messages that lead to this exception
+#: zypp-core/base/Exception.cc:134
+msgid "History:"
+msgstr "履歴:"
+
+#: zypp-core/url/UrlBase.cc:220
+#, c-format, boost-format
+msgid "Url scheme does not allow a %s"
+msgstr "URLスキームでは %s を許可していません"
+
+#: zypp-core/url/UrlBase.cc:239
+#, c-format, boost-format
+msgid "Invalid %s component '%s'"
+msgstr "無効な %s コンポーネント '%s'"
+
+#: zypp-core/url/UrlBase.cc:246
+#, c-format, boost-format
+msgid "Invalid %s component"
+msgstr "無効な %s コンポーネント"
+
+#: zypp-core/url/UrlBase.cc:863 zypp-core/url/UrlBase.cc:1308
+msgid "Query string parsing not supported for this URL"
+msgstr "このURLに対して、クエリ文字列解析はサポートされていません"
+
+#: zypp-core/url/UrlBase.cc:901
+msgid "Url scheme is a required component"
+msgstr "URLスキームは必須のコンポーネントです"
+
+#: zypp-core/url/UrlBase.cc:907
+#, c-format, boost-format
+msgid "Invalid Url scheme '%s'"
+msgstr "無効なURLスキーム '%s'"
+
+#: zypp-core/url/UrlBase.cc:1026
+msgid "Url scheme does not allow a username"
+msgstr "URLスキームではユーザ名を指定することは許されていません"
+
+#: zypp-core/url/UrlBase.cc:1060
+msgid "Url scheme does not allow a password"
+msgstr "URLスキームではパスワードを指定することは許されていません"
+
+#: zypp-core/url/UrlBase.cc:1089
+msgid "Url scheme requires a host component"
+msgstr "URLスキームにはホスト部分が必要です"
+
+#: zypp-core/url/UrlBase.cc:1099
+msgid "Url scheme does not allow a host component"
+msgstr "URLスキームではホスト部分を指定することは許されていません"
+
+#: zypp-core/url/UrlBase.cc:1126
+#, c-format, boost-format
+msgid "Invalid host component '%s'"
+msgstr "無効なホスト部分 '%s'"
+
+#: zypp-core/url/UrlBase.cc:1147
+msgid "Url scheme does not allow a port"
+msgstr "URLスキームではポートの指定は許されていません"
+
+#: zypp-core/url/UrlBase.cc:1158
+#, c-format, boost-format
+msgid "Invalid port component '%s'"
+msgstr "無効なポート部分 '%s'"
+
+#: zypp-core/url/UrlBase.cc:1175
+msgid "Url scheme requires path name"
+msgstr "URLスキームにはパス名が必要です"
+
+#: zypp-core/url/UrlBase.cc:1196 zypp-core/url/UrlBase.cc:1210
+msgid "Relative path not allowed if authority exists"
+msgstr "権限部分が存在する場合相対パスは許可されません"
+
+#: zypp-core/url/UrlUtils.cc:111
+msgid "Encoded string contains a NUL byte"
+msgstr "エンコードされた文字列にNULLバイトがあります"
+
+#: zypp-core/url/UrlUtils.cc:173
+msgid "Invalid parameter array split separator character"
+msgstr "無効なパラメータ配列区切り文字"
+
+#: zypp-core/url/UrlUtils.cc:213
+msgid "Invalid parameter map split separator character"
+msgstr "無効なパラメータマップ区切り文字"
+
+#: zypp-core/url/UrlUtils.cc:283
+msgid "Invalid parameter array join separator character"
+msgstr "無効なパラメータ配列結合文字"
+
+#: zypp-core/zyppng/io/abstractspawnengine.cc:174
+#, c-format, boost-format
+msgid "Command exited with status %d."
+msgstr "コマンドは状態 %d で終了しました。"
+
+#: zypp-core/zyppng/io/abstractspawnengine.cc:194
+#, c-format, boost-format
+msgid "Command was killed by signal %d (%s)."
+msgstr "コマンドはシグナル %d (%s)で終了しました。"
+
+#: zypp-core/zyppng/io/abstractspawnengine.cc:199
+msgid "Command exited with unknown error."
+msgstr "コマンドは不明なエラーで終了しました。"
+
+#: zypp-core/zyppng/io/forkspawnengine.cc:111
+#: zypp-core/zyppng/io/forkspawnengine.cc:359
+msgid "Invalid spawn arguments given."
+msgstr ""
+
+#: zypp-core/zyppng/io/forkspawnengine.cc:174
+msgid "Unable to create control pipe."
+msgstr ""
+
+#: zypp-core/zyppng/io/forkspawnengine.cc:240
+#, c-format, boost-format
+msgid "Can't chroot to '%s' (%s)."
+msgstr "'%s' (%s)にchrootすることができません。"
+
+#: zypp-core/zyppng/io/forkspawnengine.cc:250
+#, c-format, boost-format
+msgid "Can't chdir to '%s' (%s)."
+msgstr "ディレクトリを '%s' (%s)に変更できません。"
+
+#: zypp-core/zyppng/io/forkspawnengine.cc:251
+#, c-format, boost-format
+msgid "Can't chdir to '%s' inside chroot '%s' (%s)."
+msgstr ""
+"chroot '%s' (%s)の実行中にディレクトリを '%s' に変更することはできません。"
+
+#. don't want to get here
+#: zypp-core/zyppng/io/forkspawnengine.cc:280
+#, c-format, boost-format
+msgid "Can't exec '%s' (%s)."
+msgstr "'%s' (%s)を実行することができません。"
+
+#: zypp-core/zyppng/io/forkspawnengine.cc:287
+#: zypp-core/zyppng/io/forkspawnengine.cc:448
+#, c-format, boost-format
+msgid "Can't fork (%s)."
+msgstr "fork (%s)することができません。"
+
+#: zypp-core/zyppng/io/forkspawnengine.cc:306
+#, c-format, boost-format
+msgid "Can't exec '%s', chdir failed (%s)."
+msgstr ""
+
+#: zypp-core/zyppng/io/forkspawnengine.cc:309
+#, c-format, boost-format
+msgid "Can't exec '%s', chroot failed (%s)."
+msgstr ""
+
+#: zypp-core/zyppng/io/forkspawnengine.cc:312
+#, c-format, boost-format
+msgid "Can't exec '%s', exec failed (%s)."
+msgstr ""
+
+#: zypp-core/zyppng/io/forkspawnengine.cc:316
+#, c-format, boost-format
+msgid "Can't exec '%s', unexpected error."
+msgstr ""
+
+#~ msgid "%s does not belong to a distupgrade repository"
+#~ msgstr "%s はdistupgradeのリポジトリに属していません"
+
+#~ msgid "%s has inferior architecture"
+#~ msgstr "%s は下位のアーキテクチャです"
+
+#~ msgid "problem with installed package %s"
+#~ msgstr "インストール済みのパッケージ %s に問題が発生しました"
+
+#~ msgid "nothing provides requested %s"
+#~ msgstr "要求した %s はどこからも提供されていません"
+
+#~ msgid "Have you enabled all requested repositories?"
+#~ msgstr "すべての必要なリポジトリを有効化しましたか？"
+
+#~ msgid "package %s does not exist"
+#~ msgstr "パッケージ %s は存在しません"
+
+#~ msgid "%s is provided by the system and cannot be erased"
+#~ msgstr "%s はシステムが提供するもので、削除できません"
+
+#~ msgid "%s is not installable"
+#~ msgstr "%s はインストールできません"
+
+#~ msgid "nothing provides %s needed by %s"
+#~ msgstr "%s (%s で必要)はどこからも提供されていません"
+
+#~ msgid "cannot install both %s and %s"
+#~ msgstr "%s と %s の両方をインストールすることはできません"
+
+#~ msgid "%s conflicts with %s provided by %s"
+#~ msgstr "%s は %s (%s から提供されている)と競合します"
+
+#~ msgid "%s obsoletes %s provided by %s"
+#~ msgstr "%s は %s (%s から提供されている)を古いものとして廃棄します"
+
+#~ msgid "installed %s obsoletes %s provided by %s"
+#~ msgstr ""
+#~ "インストール済みの %s は、%s (%s から提供されている)を古いものとして廃棄し"
+#~ "ます"
+
+#~ msgid "solvable %s conflicts with %s provided by itself"
+#~ msgstr "解決方法 %s は自分自身で提供している %s と競合しています"
+
+#~ msgid "%s requires %s, but this requirement cannot be provided"
+#~ msgstr "%s は %s を必要としていますが、この要求を解決する方法がありません"
+
+#~ msgid "remove lock to allow removal of %s"
+#~ msgstr "%s の削除を許可するためにロックを削除する"
+
+#~ msgid "do not install %s"
+#~ msgstr "%s をインストールしない"
+
+#~ msgid "keep %s"
+#~ msgstr "%s を維持"
+
+#~ msgid "remove lock to allow installation of %s"
+#~ msgstr "%s のインストールを許可するためにロックを削除する"
+
+#~ msgid "do not ask to install a solvable providing %s"
+#~ msgstr "%s を提供する解決方法のインストールについて問い合わせない"
+
+#~ msgid "do not ask to delete all solvables providing %s"
+#~ msgstr "%s を提供するすべての解決方法の削除について問い合わせない"
+
+#~ msgid "do not install most recent version of %s"
+#~ msgstr "%s の最新バージョンをインストールしない"
+
+#~ msgid "keep %s despite the inferior architecture"
+#~ msgstr "下位のアーキテクチャである %s を維持する"
+
+#~ msgid "install %s despite the inferior architecture"
+#~ msgstr "下位のアーキテクチャである %s をインストールする"
+
+#~ msgid "keep obsolete %s"
+#~ msgstr "古い %s を維持する"
+
+#~ msgid "install %s from excluded repository"
+#~ msgstr "除外されたリポジトリから %s をインストールする"
+
+#~ msgid "downgrade of %s to %s"
+#~ msgstr "%s を %s にダウングレードする"
+
+#~ msgid "architecture change of %s to %s"
+#~ msgstr "アーキテクチャを %s から %s に変更する"
+
+#~ msgid ""
+#~ "install %s (with vendor change)\n"
+#~ "  %s  -->  %s"
+#~ msgstr ""
+#~ "%s をインストールする(ベンダを変更する)\n"
+#~ "  %s  -->  %s"
+
+#~ msgid "replacement of %s with %s"
+#~ msgstr "%s を %s で置き換える"
+
+#~ msgid "deinstallation of %s"
+#~ msgstr "%s をアンインストールする"
 
 #~ msgid "Can't open lock file: %s"
 #~ msgstr "ロックファイルを開けません:%s"
