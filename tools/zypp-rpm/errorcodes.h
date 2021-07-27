@@ -15,6 +15,7 @@ namespace zypprpm {
     FailedToAddStepToTransaction,
     RpmFinishedWithTransactionError, // we got explicit error problems from rpm
     RpmFinishedWithError,            // the transaction started but could not be finished)
+    RpmOrderFailed,                  // running rpmtsorder failed
     OtherError = 255
   };
 }

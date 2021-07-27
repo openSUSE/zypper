@@ -424,6 +424,15 @@ int main( int, char ** )
   if ( msg.flags() & RpmInstFlag::RPMINST_IGNORESIZE )
     tsProbFilterFlags |= RPMPROB_FILTER_DISKSPACE | RPMPROB_FILTER_DISKNODES;
 
+  const auto orderRes = rpmtsOrder( ts );
+  if ( orderRes ) {
+    std::cerr << zypp::str::Format( "Failed with error %1% while ordering transaction." )% orderRes << std::endl;
+    return RpmOrderFailed;
+  }
+
+  // clean up memory that is only used for dependency checks and ordering
+  rpmtsClean(ts);
+
   // transaction steps are set up lets execute it
   // the way how libRPM works is that it will try to install all packages even if some of them fail
   // we need to go over the rpm problem set to mark those steps that have failed, we get no other hint on wether

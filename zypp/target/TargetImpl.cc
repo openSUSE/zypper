@@ -1874,7 +1874,20 @@ namespace zypp
       // bsc#1181328: Some systemd tools require /proc to be mounted
       AssertProcMounted assertProcMounted( _root );
 
-      rpm::RpmInstFlags flags( policy_r.rpmInstFlags() );
+      rpm::RpmInstFlags flags( policy_r.rpmInstFlags() & rpm::RPMINST_JUSTDB );
+      // Why force and nodeps?
+      //
+      // Because zypp builds the transaction and the resolver asserts that
+      // everything is fine.
+      // We use rpm just to unpack and register the package in the database.
+      // We do this step by step, so rpm is not aware of the bigger context.
+      // So we turn off rpms internal checks, because we do it inside zypp.
+      flags |= rpm::RPMINST_NODEPS;
+      flags |= rpm::RPMINST_FORCE;
+
+      if (policy_r.dryRun())         flags |= rpm::RPMINST_TEST;
+      if (policy_r.rpmExcludeDocs()) flags |= rpm::RPMINST_EXCLUDEDOCS;
+      if (policy_r.rpmNoSignature()) flags |= rpm::RPMINST_NOSIGNATURE;
 
       zpt::Commit commit;
       commit.set_flags( flags );
@@ -2025,7 +2038,7 @@ namespace zypp
 
         // helper function that sends RPM output to the currently active report, writing a warning to the log
         // if there is none
-        const auto &sendRpmLineToReport = [&]( std::string line ){
+        const auto &sendRpmLineToReport = [&]( const std::string &line ){
 
           const auto &sendLogRep = [&]( auto &report, const auto &cType ){
             callback::UserData cmdout(cType);
@@ -2056,7 +2069,7 @@ namespace zypp
           }
           rpmmsg += line;
           if ( line.back() != '\n' )
-            line += '\n';
+            rpmmsg += '\n';
         };
 
 
@@ -2479,7 +2492,7 @@ namespace zypp
 
               // before killing the report we need to wait for the script end tag
               waitForScriptEnd();
-              (*scriptreport)->finish( makeResObject( steps[stepId].satSolvable() ), p.fatal() ? rpm::CommitScriptReportSA::CRITICAL : rpm::CommitScriptReportSA::WARN );
+              (*scriptreport)->finish( resPtr, p.fatal() ? rpm::CommitScriptReportSA::CRITICAL : rpm::CommitScriptReportSA::WARN );
 
               // manually reset the current report since we already sent the finish(), rest will be reset by the new start
               scriptreport.reset();
@@ -2643,6 +2656,9 @@ namespace zypp
             break;
           case zypprpm::FailedToAddStepToTransaction:
             ZYPP_THROW( rpm::RpmSubprocessException("zypp-rpm failed to build the transaction, check the logs for more informations.") );
+            break;
+          case zypprpm::RpmOrderFailed:
+            ZYPP_THROW( rpm::RpmSubprocessException("zypp-rpm failed to order the transaction, check the logs for more informations.") );
             break;
         }
 
