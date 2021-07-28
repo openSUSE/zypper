@@ -12,16 +12,16 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-07-28 11:38+0200\n"
-"PO-Revision-Date: 2021-03-24 12:57+0000\n"
-"Last-Translator: Davide Aiello <davide.aiello@novilingulists.com>\n"
-"Language-Team: Italian <https://l10n.opensuse.org/projects/zypper/master/it/"
-">\n"
+"PO-Revision-Date: 2021-07-28 23:11+0000\n"
+"Last-Translator: Paolo Za <zapaolo@email.it>\n"
+"Language-Team: Italian <https://l10n.opensuse.org/projects/zypper/master/it/>"
+"\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 3.6.1\n"
+"X-Generator: Weblate 4.7.1\n"
 
 #: src/Command.cc:93
 msgid "Invalid command"
@@ -81,29 +81,29 @@ msgstr "Per risolvere problemi di dipendenza è possibile eseguire '%1%'."
 #, c-format, boost-format
 msgid "The following package failed to install:"
 msgid_plural "The following %d packages failed to install:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Non è stato possibile installare il seguente pacchetto:"
+msgstr[1] "Non è stato possibile installare i seguenti %d pacchetti:"
 
 #: src/CommitSummary.cc:140
 #, c-format, boost-format
 msgid "The following package installation was skipped:"
 msgid_plural "The following %d package installations were skipped:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "La seguente installazione del pacchetto è stata saltata:"
+msgstr[1] "Le seguenti installazioni dei %d pacchetti sono state saltate:"
 
 #: src/CommitSummary.cc:155
 #, c-format, boost-format
 msgid "The following package failed to uninstall:"
 msgid_plural "The following %d packages failed to uninstall:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Non è stato possibile disinstallare il seguente pacchetto:"
+msgstr[1] "Non è stato possibile disinstallare i seguenti %d pacchetti:"
 
 #: src/CommitSummary.cc:170
 #, c-format, boost-format
 msgid "The following package removal was skipped:"
 msgid_plural "The following %d package removal were skipped:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "La seguente rimozione del pacchetto è stata saltata:"
+msgstr[1] "La seguente rimozione dei %d pacchetti è stata saltata:"
 
 #. translators: Appended when clipping a long enumeration:
 #. "ConsoleKit-devel ConsoleKit-doc ... and 20828 more items."
@@ -165,7 +165,7 @@ msgstr ""
 #. translators: --quiet, -q
 #: src/Config.cc:381
 msgid "Suppress normal output, print only error messages."
-msgstr "Sopprime l'output ordinario, stampa solo i messaggi  di errore."
+msgstr "Sopprime l'output ordinario, stampa solo i messaggi di errore."
 
 #. translators: --verbose, -v
 #: src/Config.cc:389
@@ -1448,6 +1448,12 @@ msgid ""
 "repository provider or check his web site. Many provider maintain a web page "
 "showing the fingerprints of the GPG keys they are using."
 msgstr ""
+"Una chiave pubblica GPG è identificata chiaramente dalla sua impronta "
+"digitale, non bisogna fare affidamento sul suo nome. Se non si è sicuri se "
+"la chiave presentata è autentica, chiedere al fornitore del repository, "
+"oppure controllare il suo sito web. Molti fornitori mantengono una pagina "
+"Web che mostra le impronte digitali delle chiavi pubbliche GPG che stanno "
+"utilizzando."
 
 #: src/callbacks/keyring.h:37
 msgid ""
@@ -1457,9 +1463,9 @@ msgid ""
 "system compromise."
 msgstr ""
 "La firma dei dati consente al ricevente di verificare che non siano occorse "
-"modifiche successivamente al momento della firma. L'accettazione di dati "
-"senza firma oppure con firma errata o sconosciuta può comportare la "
-"corruzione del sistema e in casi estremi può anche comprometterlo."
+"modifiche dopo l'apposizione della firma. L'accettazione di dati senza "
+"firma, oppure con firma errata o sconosciuta, può comportare la corruzione "
+"del sistema, e in casi estremi può anche comprometterlo."
 
 #. translator: %1% is a file name
 #: src/callbacks/keyring.h:45
@@ -1504,7 +1510,7 @@ msgstr "Nome della chiave:"
 
 #: src/callbacks/keyring.h:89
 msgid "Key Algorithm:"
-msgstr ""
+msgstr "Algoritmo della chiave:"
 
 #: src/callbacks/keyring.h:90
 msgid "Key Created:"
@@ -1731,8 +1737,8 @@ msgstr ""
 #, boost-format
 msgid "Received %1% new package signing key from repository %2%:"
 msgid_plural "Received %1% new package signing keys from repository %2%:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Ricevuta %1% nuova chiave per firmare il pacchetto dal repository %2%:"
+msgstr[1] "Ricevute %1% nuove chiavi per firmare il pacchetto dal repository %2%:"
 
 #: src/callbacks/keyring.h:494
 msgid ""
@@ -1740,16 +1746,21 @@ msgid ""
 "repository. In order to validate those packages upon download and "
 "installation the new keys will be imported into the rpm database."
 msgstr ""
+"Queste chiavi aggiuntive vengono di solito usate per firmare i pacchetti "
+"forniti dal repository. Per convalidare tali pacchetti allo scaricamento e "
+"all'installazione, le nuove chiavi verranno importate nel database RPM."
 
 #: src/callbacks/keyring.h:496
 msgid "New:"
-msgstr ""
+msgstr "Nuova:"
 
 #: src/callbacks/keyring.h:502
 msgid ""
 "The repository metadata introducing the new keys have been signed and "
 "validated by the trusted key:"
 msgstr ""
+"I metadati del repository che introducono le nuove chiavi sono stati firmati "
+"e convalidati dalla chiave fidata:"
 
 #: src/callbacks/keyring.h:525
 #, c-format, boost-format
@@ -2103,19 +2114,19 @@ msgstr ""
 #: src/callbacks/rpm.h:711 src/callbacks/rpm.h:718
 #, c-format, boost-format
 msgid "Executing %s script for: %s"
-msgstr ""
+msgstr "Esecuzione del %s dello script per: %s"
 
 #. TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
 #: src/callbacks/rpm.h:725
 #, c-format, boost-format
 msgid "Executing %s script"
-msgstr ""
+msgstr "Esecuzione del %s dello script"
 
 #. TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
 #: src/callbacks/rpm.h:857
 #, c-format, boost-format
 msgid "Cleaning up: %s"
-msgstr ""
+msgstr "Pulizia: %s"
 
 #. translator: %s is an other command: "This is an alias for 'zypper info -t patch'."
 #: src/commands/commandhelpformatter.h:94
@@ -2630,7 +2641,7 @@ msgstr "Limita il blocco al repository specificato."
 
 #: src/commands/locks/add.cc:48
 msgid "Reason for specific lock."
-msgstr ""
+msgstr "Motivo per il blocco specifico."
 
 #: src/commands/locks/add.cc:81
 msgid "Specified lock has been successfully added."
@@ -2704,7 +2715,7 @@ msgstr "Repository"
 
 #: src/commands/locks/list.cc:138
 msgid "Comment"
-msgstr ""
+msgstr "Commento"
 
 #. translators: locks table value
 #: src/commands/locks/list.cc:156 src/commands/locks/list.cc:235
@@ -2818,6 +2829,8 @@ msgid ""
 "This is the recommended way for scripts to test whether a system reboot is "
 "suggested."
 msgstr ""
+"Questo è la modalità consigliata per gli script per verificare se è "
+"suggerito un riavvio del sistema."
 
 #: src/commands/needs-rebooting.cc:38
 msgid ""
@@ -3046,6 +3059,8 @@ msgid ""
 "When updating the affected/vulnerable packages described by a patch, zypper "
 "always aims for the latest available version."
 msgstr ""
+"Quando si aggiornano dei pacchetti affetti o vulnerabili descritti dalla "
+"patch, zypper mira sempre all'ultima versione."
 
 #: src/commands/patch.cc:50
 msgid ""
@@ -3404,7 +3419,7 @@ msgstr "Elenca tutti i prodotti disponibili."
 #. translators: command description
 #: src/commands/query/products.cc:22
 msgid "List all products available in specified repositories."
-msgstr "Elenca tutti i prodotti  disponibili nei repository specificati."
+msgstr "Elenca tutti i prodotti disponibili nei repository specificati."
 
 #. translators: --xmlfwd <TAG>
 #: src/commands/query/products.cc:36
@@ -4765,7 +4780,7 @@ msgstr "source-install (si) [opzioni] <nome> ..."
 #. translators: command summary: source-install, si
 #: src/commands/sourceinstall.cc:23
 msgid "Install source packages and their build dependencies."
-msgstr "Installa i pacchetti sorgente e le  loro dipendenze di compilazione."
+msgstr "Installa i pacchetti sorgente e le loro dipendenze di compilazione."
 
 #. translators: command description
 #: src/commands/sourceinstall.cc:25
@@ -5015,7 +5030,7 @@ msgstr ""
 "Effettua il download degli rpm specificati nella riga di comando in una "
 "directory locale. Per default il download dei pacchetti viene effettuato "
 "nella cache dei pacchetti di libzypp (/var/cache/zypp/packages; per gli "
-"utenti non root, $XDG_CACHE_HOME/zypp/packages),  ma questo può essere "
+"utenti non root, $XDG_CACHE_HOME/zypp/packages), ma questo può essere "
 "modificato usando l'opzione globale --pkg-cache-dir."
 
 #. translators: command description
@@ -5105,7 +5120,7 @@ msgid ""
 msgstr ""
 "Rimuove automaticamente i kernel installati in base all'elenco di kernel da "
 "evitare in /etc/zypp/zypp.conf:multiversion.kernels che può essere fornito "
-"come  <versione>, più recente (-N), in esecuzione, meno recente (+N)."
+"come <versione>, più recente (-N), in esecuzione, meno recente (+N)."
 
 #: src/commands/utils/purge-kernels.cc:51
 msgid "Preparing to purge obsolete kernels..."
@@ -5946,7 +5961,7 @@ msgstr "Errore durante la creazione della cache:"
 #: src/repos.cc:677
 #, c-format, boost-format
 msgid "Repository '%s' not found by its alias, number, or URI."
-msgstr "Impossibile trovare il repository  '%s' tramite alias, numero o URI."
+msgstr "Impossibile trovare il repository '%s' tramite alias, numero o URI."
 
 #: src/repos.cc:679
 #, c-format, boost-format
@@ -7165,7 +7180,7 @@ msgstr[1] "applicazioni"
 msgid "resolvable"
 msgid_plural "resolvables"
 msgstr[0] "risolvibile"
-msgstr[1] "risolvibile"
+msgstr[1] "risolvibili"
 
 #. Patch status: i18n + color
 #. translator: patch status
