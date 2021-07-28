@@ -1,4 +1,21 @@
 -------------------------------------------------------------------
+Wed Jul 28 11:40:54 CEST 2021 - ma@suse.de
+
+- Support new reports for singletrans rpm commit.
+- BuildRequires:  libzypp-devel >= 17.27.1.
+  For lock/query comments.
+- Prompt: choose exact match if prompt options are not prefix
+  free (bsc#1188156)
+- Install summary: Show new and removed packages closer to the
+  prompt (fixes #403)
+  These packages are usually more interesting than the updated
+  ones. In case of doubt less scrolling is needed to see them.
+- Add need reboot/restart hint to XML install summary
+  (bsc#1188435)
+- Add comment option for lock command (fixes #388).
+- version 1.14.48
+
+-------------------------------------------------------------------
 Thu Jul  1 17:35:19 CEST 2021 - ma@suse.de
 
 - Quick fix obs:// platform guessing for Leap (bsc#1187425)
