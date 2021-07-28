@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-07-28 11:38+0200\n"
-"PO-Revision-Date: 2021-07-22 13:11+0000\n"
+"PO-Revision-Date: 2021-07-28 14:11+0000\n"
 "Last-Translator: Yasuhiko Kamata <belphegor@belbel.or.jp>\n"
 "Language-Team: Japanese <https://l10n.opensuse.org/projects/zypper/master/ja/"
 ">\n"
@@ -80,25 +80,25 @@ msgstr "'%1%' を実行することで、依存関係の問題を修復するこ
 #, c-format, boost-format
 msgid "The following package failed to install:"
 msgid_plural "The following %d packages failed to install:"
-msgstr[0] ""
+msgstr[0] "以下 %d 個のパッケージのインストールに失敗しました:"
 
 #: src/CommitSummary.cc:140
 #, c-format, boost-format
 msgid "The following package installation was skipped:"
 msgid_plural "The following %d package installations were skipped:"
-msgstr[0] ""
+msgstr[0] "以下 %d 個のパッケージのインストールを飛ばしました:"
 
 #: src/CommitSummary.cc:155
 #, c-format, boost-format
 msgid "The following package failed to uninstall:"
 msgid_plural "The following %d packages failed to uninstall:"
-msgstr[0] ""
+msgstr[0] "以下 %d 個のパッケージのアンインストールに失敗しました:"
 
 #: src/CommitSummary.cc:170
 #, c-format, boost-format
 msgid "The following package removal was skipped:"
 msgid_plural "The following %d package removal were skipped:"
-msgstr[0] ""
+msgstr[0] "以下 %d 個のパッケージの削除を飛ばしました:"
 
 #. translators: Appended when clipping a long enumeration:
 #. "ConsoleKit-devel ConsoleKit-doc ... and 20828 more items."
@@ -1961,19 +1961,19 @@ msgstr ""
 #: src/callbacks/rpm.h:711 src/callbacks/rpm.h:718
 #, c-format, boost-format
 msgid "Executing %s script for: %s"
-msgstr ""
+msgstr "以下に対する %s スクリプトを実行しています: %s"
 
 #. TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
 #: src/callbacks/rpm.h:725
 #, c-format, boost-format
 msgid "Executing %s script"
-msgstr ""
+msgstr "%s スクリプトを実行しています"
 
 #. TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
 #: src/callbacks/rpm.h:857
 #, c-format, boost-format
 msgid "Cleaning up: %s"
-msgstr ""
+msgstr "クリーンアップしています: %s"
 
 #. translator: %s is an other command: "This is an alias for 'zypper info -t patch'."
 #: src/commands/commandhelpformatter.h:94
@@ -2209,7 +2209,7 @@ msgstr "少なくとも 1 つのパッケージ名を指定する必要があり
 
 #: src/commands/installremove.cc:116
 msgid "Cannot uninstall patches."
-msgstr "パッチをアンインストールできません。"
+msgstr "パッチはアンインストールできません。"
 
 #: src/commands/installremove.cc:117
 msgid ""
@@ -6299,6 +6299,8 @@ msgid ""
 "DownloadAsNeeded can not be used with ZYPP_SINGLE_RPMTRANS=1, falling back "
 "to DownloadInAdvance"
 msgstr ""
+"ZYPP_SINGLE_RPMTRANS=1 を指定している場合は DownloadAsNeeded を指定できません。 "
+"DownloadInAdvance が指定されたものとして処理します"
 
 #: src/solve-commit.cc:547
 #, c-format, boost-format
