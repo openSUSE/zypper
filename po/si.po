@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-21 09:46+0200\n"
+"POT-Creation-Date: 2021-07-28 11:38+0200\n"
 "PO-Revision-Date: 2021-05-27 13:59+0000\n"
 "Last-Translator: Oshan Wisumperuma <warunaoshan@gmail.com>\n"
 "Language-Team: Sinhala <https://l10n.opensuse.org/projects/zypper/master/si/"
@@ -18,678 +18,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
 "X-Generator: Weblate 4.6.2\n"
-
-#: src/SolverRequester.h:52
-#, boost-format
-msgid "Suspicious category filter value '%1%'."
-msgstr ""
-
-#: src/SolverRequester.h:60
-#, boost-format
-msgid "Suspicious severity filter value '%1%'."
-msgstr ""
-
-#: src/callbacks/keyring.h:32
-msgid ""
-"A GPG pubkey is clearly identified by it's fingerprint. Do not rely the keys "
-"name. If you are not sure whether the presented key is authentic, ask the "
-"repository provider or check his web site. Many provider maintain a web page "
-"showing the fingerprints of the GPG keys they are using."
-msgstr ""
-
-#: src/callbacks/keyring.h:37
-msgid ""
-"Signing data enables the recipient to verify that no modifications occurred "
-"after the data were signed. Accepting data with no, wrong or unknown "
-"signature can lead to a corrupted system and in extreme cases even to a "
-"system compromise."
-msgstr ""
-
-#. translator: %1% is a file name
-#: src/callbacks/keyring.h:45
-#, boost-format
-msgid ""
-"File '%1%' is the repositories master index file. It ensures the integrity "
-"of the whole repo."
-msgstr ""
-
-#: src/callbacks/keyring.h:51
-msgid ""
-"We can't verify that no one meddled with this file, so it might not be "
-"trustworthy anymore! You should not continue unless you know it's safe."
-msgstr ""
-
-#: src/callbacks/keyring.h:56
-msgid ""
-"This file was modified after it has been signed. This may have been a "
-"malicious change, so it might not be trustworthy anymore! You should not "
-"continue unless you know it's safe."
-msgstr ""
-
-#: src/callbacks/keyring.h:85
-msgid "Repository:"
-msgstr ""
-
-#: src/callbacks/keyring.h:87
-msgid "Key Fingerprint:"
-msgstr ""
-
-#: src/callbacks/keyring.h:88
-msgid "Key Name:"
-msgstr ""
-
-#: src/callbacks/keyring.h:89
-msgid "Key Algorithm:"
-msgstr ""
-
-#: src/callbacks/keyring.h:90
-msgid "Key Created:"
-msgstr ""
-
-#: src/callbacks/keyring.h:91
-msgid "Key Expires:"
-msgstr ""
-
-#: src/callbacks/keyring.h:93
-msgid "Subkey:"
-msgstr ""
-
-#: src/callbacks/keyring.h:94
-msgid "Rpm Name:"
-msgstr ""
-
-#: src/callbacks/keyring.h:120
-#, boost-format
-msgid "The gpg key signing file '%1%' has expired."
-msgstr ""
-
-#: src/callbacks/keyring.h:126
-#, boost-format
-msgid "The gpg key signing file '%1%' will expire in %2% day."
-msgid_plural "The gpg key signing file '%1%' will expire in %2% days."
-msgstr[0] ""
-msgstr[1] ""
-
-#: src/callbacks/keyring.h:149
-#, c-format, boost-format
-msgid "Accepting an unsigned file '%s'."
-msgstr ""
-
-#: src/callbacks/keyring.h:153
-#, c-format, boost-format
-msgid "Accepting an unsigned file '%s' from repository '%s'."
-msgstr ""
-
-#. translator: %1% is a file name
-#: src/callbacks/keyring.h:163
-#, boost-format
-msgid "File '%1%' is unsigned."
-msgstr ""
-
-#. translator: %1% is a file name, %2% a repositories name
-#: src/callbacks/keyring.h:166
-#, boost-format
-msgid "File '%1%' from repository '%2%' is unsigned."
-msgstr ""
-
-#. TranslatorExplanation: speaking of a file
-#: src/callbacks/keyring.h:183
-#, c-format, boost-format
-msgid "File '%s' is unsigned, continue?"
-msgstr ""
-
-#. TranslatorExplanation: speaking of a file
-#: src/callbacks/keyring.h:187
-#, c-format, boost-format
-msgid "File '%s' from repository '%s' is unsigned, continue?"
-msgstr ""
-
-#: src/callbacks/keyring.h:210
-#, c-format, boost-format
-msgid "Accepting file '%s' signed with an unknown key '%s'."
-msgstr ""
-
-#: src/callbacks/keyring.h:214
-#, c-format, boost-format
-msgid ""
-"Accepting file '%s' from repository '%s' signed with an unknown key '%s'."
-msgstr ""
-
-#. translator: %1% is a file name, %2% is a gpg key ID
-#: src/callbacks/keyring.h:223
-#, boost-format
-msgid "File '%1%' is signed with an unknown key '%2%'."
-msgstr ""
-
-#. translator: %1% is a file name, %2% is a gpg key ID, %3% a repositories name
-#: src/callbacks/keyring.h:226
-#, boost-format
-msgid "File '%1%' from repository '%3%' is signed with an unknown key '%2%'."
-msgstr ""
-
-#. translators: the last %s is gpg key ID
-#: src/callbacks/keyring.h:243
-#, c-format, boost-format
-msgid "File '%s' is signed with an unknown key '%s'. Continue?"
-msgstr ""
-
-#. translators: the last %s is gpg key ID
-#: src/callbacks/keyring.h:247
-#, c-format, boost-format
-msgid ""
-"File '%s' from repository '%s' is signed with an unknown key '%s'. Continue?"
-msgstr ""
-
-#: src/callbacks/keyring.h:267
-msgid "Automatically importing the following key:"
-msgstr ""
-
-#: src/callbacks/keyring.h:269
-msgid "Automatically trusting the following key:"
-msgstr ""
-
-#: src/callbacks/keyring.h:271
-msgid "New repository or package signing key received:"
-msgstr ""
-
-#. translators: this message is shown after showing description of the key
-#: src/callbacks/keyring.h:305
-msgid "Do you want to reject the key, trust temporarily, or trust always?"
-msgstr ""
-
-#. translators: this message is shown after showing description of the key
-#: src/callbacks/keyring.h:308
-msgid "Do you want to reject the key, or trust always?"
-msgstr ""
-
-#. translators: r/t/a stands for Reject/TrustTemporarily/trustAlways(import)
-#. translate to whatever is appropriate for your language
-#. The anserws must be separated by slash characters '/' and must
-#. correspond to reject/trusttemporarily/trustalways in that order.
-#. The answers should be lower case letters.
-#: src/callbacks/keyring.h:326
-msgid "r/t/a/"
-msgstr ""
-
-#. translators: the same as r/t/a, but without 'a'
-#: src/callbacks/keyring.h:329
-msgid "r/t"
-msgstr ""
-
-#. translators: r/a stands for Reject/trustAlways(import)
-#. translate to whatever is appropriate for your language
-#. The anserws must be separated by slash characters '/' and must
-#. correspond to reject/trusttemporarily/trustalways in that order.
-#. The answers should be lower case letters.
-#: src/callbacks/keyring.h:336
-msgid "r/a/"
-msgstr ""
-
-#. translators: help text for the 'r' option in the 'r/t/a' prompt
-#: src/callbacks/keyring.h:342
-msgid "Don't trust the key."
-msgstr ""
-
-#. translators: help text for the 't' option in the 'r/t/a' prompt
-#: src/callbacks/keyring.h:346
-msgid "Trust the key temporarily."
-msgstr ""
-
-#. translators: help text for the 'a' option in the 'r/t/a' prompt
-#: src/callbacks/keyring.h:351
-msgid "Trust the key and import it into trusted keyring."
-msgstr ""
-
-#: src/callbacks/keyring.h:389
-#, c-format, boost-format
-msgid "Ignoring failed signature verification for file '%s'!"
-msgstr ""
-
-#: src/callbacks/keyring.h:392
-#, c-format, boost-format
-msgid ""
-"Ignoring failed signature verification for file '%s' from repository '%s'!"
-msgstr ""
-
-#: src/callbacks/keyring.h:398
-msgid "Double-check this is not caused by some malicious changes in the file!"
-msgstr ""
-
-#. translator: %1% is a file name
-#: src/callbacks/keyring.h:408
-#, boost-format
-msgid "Signature verification failed for file '%1%'."
-msgstr ""
-
-#. translator: %1% is a file name, %2% a repositories name
-#: src/callbacks/keyring.h:411
-#, boost-format
-msgid "Signature verification failed for file '%1%' from repository '%2%'."
-msgstr ""
-
-#: src/callbacks/keyring.h:460
-msgid ""
-"The rpm database seems to contain old V3 version gpg keys which are "
-"meanwhile obsolete and considered insecure:"
-msgstr ""
-
-#: src/callbacks/keyring.h:467
-#, boost-format
-msgid "To see details about a key call '%1%'."
-msgstr ""
-
-#: src/callbacks/keyring.h:471
-#, boost-format
-msgid ""
-"Unless you believe the key in question is still in use, you can remove it "
-"from the rpm database calling '%1%'."
-msgstr ""
-
-#. translator: %1% is the number of keys, %2% the name of a repository
-#: src/callbacks/keyring.h:490
-#, boost-format
-msgid "Received %1% new package signing key from repository %2%:"
-msgid_plural "Received %1% new package signing keys from repository %2%:"
-msgstr[0] ""
-msgstr[1] ""
-
-#: src/callbacks/keyring.h:494
-msgid ""
-"Those additional keys are usually used to sign packages shipped by the "
-"repository. In order to validate those packages upon download and "
-"installation the new keys will be imported into the rpm database."
-msgstr ""
-
-#: src/callbacks/keyring.h:496
-msgid "New:"
-msgstr ""
-
-#: src/callbacks/keyring.h:502
-msgid ""
-"The repository metadata introducing the new keys have been signed and "
-"validated by the trusted key:"
-msgstr ""
-
-#: src/callbacks/keyring.h:525
-#, c-format, boost-format
-msgid "No digest for file %s."
-msgstr ""
-
-#: src/callbacks/keyring.h:533
-#, c-format, boost-format
-msgid "Unknown digest %s for file %s."
-msgstr ""
-
-#: src/callbacks/keyring.h:550
-#, boost-format
-msgid ""
-"Digest verification failed for file '%1%'\n"
-"[%2%]\n"
-"\n"
-"  expected %3%\n"
-"  but got  %4%\n"
-msgstr ""
-
-#: src/callbacks/keyring.h:562
-msgid ""
-"Accepting packages with wrong checksums can lead to a corrupted system and "
-"in extreme cases even to a system compromise."
-msgstr ""
-
-#: src/callbacks/keyring.h:570
-#, boost-format
-msgid ""
-"However if you made certain that the file with checksum '%1%..' is secure, "
-"correct\n"
-"and should be used within this operation, enter the first 4 characters of "
-"the checksum\n"
-"to unblock using this file on your own risk. Empty input will discard the "
-"file.\n"
-msgstr ""
-
-#. translators: A prompt option
-#: src/callbacks/keyring.h:577
-msgid "discard"
-msgstr ""
-
-#. translators: A prompt option help text
-#: src/callbacks/keyring.h:579
-msgid "Unblock using this file on your own risk."
-msgstr ""
-
-#. translators: A prompt option help text
-#: src/callbacks/keyring.h:581
-msgid "Discard the file."
-msgstr ""
-
-#. translators: A prompt text
-#: src/callbacks/keyring.h:585
-msgid "Unblock or discard?"
-msgstr ""
-
-#: src/callbacks/locks.h:27
-msgid ""
-"The following query locks the same objects as the one you want to remove:"
-msgstr ""
-
-#: src/callbacks/locks.h:30
-msgid "The following query locks some of the objects you want to unlock:"
-msgstr ""
-
-#: src/callbacks/locks.h:35 src/callbacks/locks.h:50
-msgid "Do you want to remove this lock?"
-msgstr ""
-
-#: src/callbacks/locks.h:45
-msgid "The following query does not lock anything:"
-msgstr ""
-
-#: src/callbacks/repo.h:49
-msgid "Retrieving delta"
-msgstr ""
-
-#. translators: this text is a progress display label e.g. "Applying delta foo [42%]"
-#: src/callbacks/repo.h:74
-msgid "Applying delta"
-msgstr ""
-
-#. TranslatorExplanation %s is package size like "5.6 M"
-#: src/callbacks/repo.h:103
-#, c-format, boost-format
-msgid "(%s unpacked)"
-msgstr ""
-
-#: src/callbacks/repo.h:112
-#, boost-format
-msgid "In cache %1%"
-msgstr ""
-
-#: src/callbacks/repo.h:128
-#, c-format, boost-format
-msgid "Retrieving %s %s-%s.%s"
-msgstr ""
-
-#: src/callbacks/repo.h:217
-msgid "Signature verification failed"
-msgstr ""
-
-#: src/callbacks/repo.h:237
-msgid "Accepting package despite the error."
-msgstr ""
-
-#. TranslatorExplanation speaking of a script - "Running: script file name (package name, script dir)"
-#: src/callbacks/rpm.h:184
-#, c-format, boost-format
-msgid "Running: %s  (%s, %s)"
-msgstr ""
-
-#: src/callbacks/rpm.h:267
-#, c-format, boost-format
-msgid "Removal of %s failed:"
-msgstr ""
-
-#. translators: This text is a progress display label e.g. "Removing packagename-x.x.x [42%]"
-#: src/callbacks/rpm.h:307
-#, c-format, boost-format
-msgid "Removing %s"
-msgstr ""
-
-#: src/callbacks/rpm.h:344
-#, c-format, boost-format
-msgid "Installation of %s failed:"
-msgstr ""
-
-#. TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
-#: src/callbacks/rpm.h:384
-#, c-format, boost-format
-msgid "Installing: %s"
-msgstr ""
-
-#. translators: A progressbar label
-#: src/callbacks/rpm.h:403
-msgid "Checking for file conflicts:"
-msgstr ""
-
-#. TranslatorExplanation %1%(number of packages); detailed list follows
-#: src/callbacks/rpm.h:454
-#, boost-format
-msgid ""
-"%1% package had to be excluded from file conflicts check because it is not "
-"yet download."
-msgid_plural ""
-"%1% packages had to be excluded from file conflicts check because they are "
-"not yet downloaded."
-msgstr[0] ""
-msgstr[1] ""
-
-#. TranslatorExplanation %1%(commandline option)
-#: src/callbacks/rpm.h:460
-#, boost-format
-msgid ""
-"Checking for file conflicts requires not installed packages to be downloaded "
-"in advance in order to access their file lists. See option '%1%' in the "
-"zypper manual page for details."
-msgstr ""
-
-#. TranslatorExplanation %1%(number of conflicts); detailed list follows
-#: src/callbacks/rpm.h:470
-#, boost-format
-msgid "Detected %1% file conflict:"
-msgid_plural "Detected %1% file conflicts:"
-msgstr[0] ""
-msgstr[1] ""
-
-#: src/callbacks/rpm.h:478
-msgid "Conflicting files will be replaced."
-msgstr ""
-
-#. TranslatorExplanation Problem description before asking whether to "Continue? [yes/no] (no):"
-#: src/callbacks/rpm.h:484
-msgid ""
-"File conflicts happen when two packages attempt to install files with the "
-"same name but different contents. If you continue, conflicting files will be "
-"replaced losing the previous content."
-msgstr ""
-
-#. translator: %s is an other command: "This is an alias for 'zypper info -t patch'."
-#: src/commands/commandhelpformatter.h:94
-#, c-format, boost-format
-msgid "This is an alias for '%s'."
-msgstr ""
-
-#: src/commands/commandhelpformatter.h:107
-msgid "Examples:"
-msgstr ""
-
-#: src/commands/commandhelpformatter.h:110
-msgid "Arguments:"
-msgstr ""
-
-#: src/commands/commandhelpformatter.h:123 src/utils/flags/zyppflags.cc:627
-msgid "Command options:"
-msgstr ""
-
-#: src/commands/commandhelpformatter.h:126
-msgid "Solver options:"
-msgstr ""
-
-#: src/commands/commandhelpformatter.h:129
-msgid "Expert options:"
-msgstr ""
-
-#: src/commands/commandhelpformatter.h:132
-msgid "This command has no additional options."
-msgstr ""
-
-#: src/commands/commandhelpformatter.h:135
-msgid "Legacy options:"
-msgstr ""
-
-#. translator: '-r             The same as -f.
-#: src/commands/commandhelpformatter.h:139
-#, boost-format
-msgid "The same as %1%."
-msgstr ""
-
-#: src/commands/commandhelpformatter.h:187
-msgid "Usage:"
-msgstr ""
-
-#: src/commands/commandhelpformatter.h:189
-msgid "Global Options:"
-msgstr ""
-
-#: src/commands/commandhelpformatter.h:191
-msgid "Commands:"
-msgstr ""
-
-#. translators: --details
-#: src/commands/commonflags.h:23 src/commands/inrverify.cc:35
-msgid "Show the detailed installation summary."
-msgstr ""
-
-#: src/commands/commonflags.h:30
-#, boost-format
-msgid "Type of package (%1%)."
-msgstr ""
-
-#. translators: --best-effort
-#: src/commands/commonflags.h:38
-msgid ""
-"Do a 'best effort' approach to update. Updates to a lower than the latest "
-"version are also acceptable."
-msgstr ""
-
-#: src/commands/commonflags.h:45
-msgid "Consider only patches which affect the package management itself."
-msgstr ""
-
-#: src/output/Out.h:26 src/repos.cc:125 src/repos.cc:153
-msgid "Yes"
-msgstr ""
-
-#: src/output/Out.h:26 src/locales.cc:72 src/repos.cc:131 src/repos.cc:159
-msgid "No"
-msgstr ""
-
-#. translator: usually followed by a ' ' and some explanatory text
-#: src/output/Out.h:37
-msgid "Note:"
-msgstr ""
-
-#. translator: usually followed by a ' ' and some explanatory text
-#: src/output/Out.h:39
-msgid "Warning:"
-msgstr ""
-
-#. translator: usually followed by a ' ' and some explanatory text
-#: src/output/Out.h:41
-msgid "Error:"
-msgstr ""
-
-#: src/output/Out.h:43
-msgid "Continue?"
-msgstr ""
-
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:23
-msgid "ALIAS"
-msgstr ""
-
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:25
-msgid "ALIAS|#|URI"
-msgstr ""
-
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:27
-msgid "CATEGORY"
-msgstr ""
-
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:29
-msgid "DIR"
-msgstr ""
-
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:31
-msgid "FILE"
-msgstr ""
-
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:33
-msgid "FILE.repo"
-msgstr ""
-
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:35
-msgid "FORMAT"
-msgstr ""
-
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:37
-msgid "INTEGER"
-msgstr ""
-
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:39
-msgid "PATH"
-msgstr ""
-
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:41
-msgid "SEVERITY"
-msgstr ""
-
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:43
-msgid "STRING"
-msgstr ""
-
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:45
-msgid "TAG"
-msgstr ""
-
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:47
-msgid "TYPE"
-msgstr ""
-
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#. translators: property name; short; used like "Name: value"
-#: src/utils/flags/zyppflags.h:49 src/commands/repos/list.cc:42
-#: src/commands/repos/list.cc:268 src/commands/services/list.cc:116
-#: src/repos.cc:1254
-msgid "URI"
-msgstr ""
-
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:51
-msgid "YYYY-MM-DD"
-msgstr ""
-
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:53
-msgid "MODE"
-msgstr ""
-
-#. TranslatorExplanation These are reasons for various failures.
-#: src/utils/prompt.h:185
-msgid "Not found"
-msgstr ""
-
-#: src/utils/prompt.h:185
-msgid "I/O error"
-msgstr ""
-
-#: src/utils/prompt.h:185
-msgid "Invalid object"
-msgstr ""
-
-#: src/utils/prompt.h:192
-msgid "Error"
-msgstr ""
 
 #: src/Command.cc:93
 msgid "Invalid command"
@@ -735,6 +63,53 @@ msgstr "උපවිධාන:"
 #, c-format, boost-format
 msgid "Unknown command '%s'"
 msgstr "අඥාත විධාන '%s'"
+
+#: src/CommitSummary.cc:90
+msgid "Installation has completed with error."
+msgstr ""
+
+#: src/CommitSummary.cc:92
+#, boost-format
+msgid "You may run '%1%' to repair any dependency problems."
+msgstr ""
+
+#: src/CommitSummary.cc:125
+#, c-format, boost-format
+msgid "The following package failed to install:"
+msgid_plural "The following %d packages failed to install:"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/CommitSummary.cc:140
+#, c-format, boost-format
+msgid "The following package installation was skipped:"
+msgid_plural "The following %d package installations were skipped:"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/CommitSummary.cc:155
+#, c-format, boost-format
+msgid "The following package failed to uninstall:"
+msgid_plural "The following %d packages failed to uninstall:"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/CommitSummary.cc:170
+#, c-format, boost-format
+msgid "The following package removal was skipped:"
+msgid_plural "The following %d package removal were skipped:"
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: Appended when clipping a long enumeration:
+#. "ConsoleKit-devel ConsoleKit-doc ... and 20828 more items."
+#: src/CommitSummary.cc:231 src/CommitSummary.cc:277 src/Summary.cc:491
+#: src/Summary.cc:567
+#, boost-format
+msgid "... and %1% more item."
+msgid_plural "... and %1% more items."
+msgstr[0] ""
+msgstr[1] ""
 
 #: src/Config.cc:53
 #, c-format, boost-format
@@ -1232,6 +607,16 @@ msgstr ""
 msgid "Ignoring option %s when updating the update stack first."
 msgstr ""
 
+#: src/SolverRequester.h:52
+#, boost-format
+msgid "Suspicious category filter value '%1%'."
+msgstr ""
+
+#: src/SolverRequester.h:60
+#, boost-format
+msgid "Suspicious severity filter value '%1%'."
+msgstr ""
+
 #. translator: '%1%' is a products name
 #. '%2%' is a command to call (like 'zypper dup')
 #. Both may contain whitespace and should be enclosed by quotes!
@@ -1239,15 +624,6 @@ msgstr ""
 #, boost-format
 msgid "Product '%1%' requires to be updated by calling '%2%'!"
 msgstr ""
-
-#. translators: Appended when clipping a long enumeration:
-#. "ConsoleKit-devel ConsoleKit-doc ... and 20828 more items."
-#: src/Summary.cc:491 src/Summary.cc:567
-#, boost-format
-msgid "... and %1% more item."
-msgid_plural "... and %1% more items."
-msgstr[0] ""
-msgstr[1] ""
 
 #: src/Summary.cc:585
 #, c-format, boost-format
@@ -1869,13 +1245,13 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. patch command (auto)restricted to update stack patches
-#: src/Summary.cc:1604
+#: src/Summary.cc:1609
 msgid ""
 "Package manager restart required. (Run this command once again after the "
 "update stack got updated)"
 msgstr ""
 
-#: src/Summary.cc:1607
+#: src/Summary.cc:1612
 msgid "System reboot required."
 msgstr ""
 
@@ -1887,7 +1263,7 @@ msgstr ""
 #. Consider to cancel:
 #. Product 'opennSUSE Tumbleweed' requires to be updated by calling 'zypper dup'!
 #. Continue? [y/n/...? shows all options] (y):
-#: src/Summary.cc:1624
+#: src/Summary.cc:1629
 msgid "Consider to cancel:"
 msgstr ""
 
@@ -1952,6 +1328,361 @@ msgstr ""
 msgid "Non-option program arguments: "
 msgstr ""
 
+#: src/callbacks/keyring.h:32
+msgid ""
+"A GPG pubkey is clearly identified by it's fingerprint. Do not rely the keys "
+"name. If you are not sure whether the presented key is authentic, ask the "
+"repository provider or check his web site. Many provider maintain a web page "
+"showing the fingerprints of the GPG keys they are using."
+msgstr ""
+
+#: src/callbacks/keyring.h:37
+msgid ""
+"Signing data enables the recipient to verify that no modifications occurred "
+"after the data were signed. Accepting data with no, wrong or unknown "
+"signature can lead to a corrupted system and in extreme cases even to a "
+"system compromise."
+msgstr ""
+
+#. translator: %1% is a file name
+#: src/callbacks/keyring.h:45
+#, boost-format
+msgid ""
+"File '%1%' is the repositories master index file. It ensures the integrity "
+"of the whole repo."
+msgstr ""
+
+#: src/callbacks/keyring.h:51
+msgid ""
+"We can't verify that no one meddled with this file, so it might not be "
+"trustworthy anymore! You should not continue unless you know it's safe."
+msgstr ""
+
+#: src/callbacks/keyring.h:56
+msgid ""
+"This file was modified after it has been signed. This may have been a "
+"malicious change, so it might not be trustworthy anymore! You should not "
+"continue unless you know it's safe."
+msgstr ""
+
+#: src/callbacks/keyring.h:85
+msgid "Repository:"
+msgstr ""
+
+#: src/callbacks/keyring.h:87
+msgid "Key Fingerprint:"
+msgstr ""
+
+#: src/callbacks/keyring.h:88
+msgid "Key Name:"
+msgstr ""
+
+#: src/callbacks/keyring.h:89
+msgid "Key Algorithm:"
+msgstr ""
+
+#: src/callbacks/keyring.h:90
+msgid "Key Created:"
+msgstr ""
+
+#: src/callbacks/keyring.h:91
+msgid "Key Expires:"
+msgstr ""
+
+#: src/callbacks/keyring.h:93
+msgid "Subkey:"
+msgstr ""
+
+#: src/callbacks/keyring.h:94
+msgid "Rpm Name:"
+msgstr ""
+
+#: src/callbacks/keyring.h:120
+#, boost-format
+msgid "The gpg key signing file '%1%' has expired."
+msgstr ""
+
+#: src/callbacks/keyring.h:126
+#, boost-format
+msgid "The gpg key signing file '%1%' will expire in %2% day."
+msgid_plural "The gpg key signing file '%1%' will expire in %2% days."
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/callbacks/keyring.h:149
+#, c-format, boost-format
+msgid "Accepting an unsigned file '%s'."
+msgstr ""
+
+#: src/callbacks/keyring.h:153
+#, c-format, boost-format
+msgid "Accepting an unsigned file '%s' from repository '%s'."
+msgstr ""
+
+#. translator: %1% is a file name
+#: src/callbacks/keyring.h:163
+#, boost-format
+msgid "File '%1%' is unsigned."
+msgstr ""
+
+#. translator: %1% is a file name, %2% a repositories name
+#: src/callbacks/keyring.h:166
+#, boost-format
+msgid "File '%1%' from repository '%2%' is unsigned."
+msgstr ""
+
+#. TranslatorExplanation: speaking of a file
+#: src/callbacks/keyring.h:183
+#, c-format, boost-format
+msgid "File '%s' is unsigned, continue?"
+msgstr ""
+
+#. TranslatorExplanation: speaking of a file
+#: src/callbacks/keyring.h:187
+#, c-format, boost-format
+msgid "File '%s' from repository '%s' is unsigned, continue?"
+msgstr ""
+
+#: src/callbacks/keyring.h:210
+#, c-format, boost-format
+msgid "Accepting file '%s' signed with an unknown key '%s'."
+msgstr ""
+
+#: src/callbacks/keyring.h:214
+#, c-format, boost-format
+msgid ""
+"Accepting file '%s' from repository '%s' signed with an unknown key '%s'."
+msgstr ""
+
+#. translator: %1% is a file name, %2% is a gpg key ID
+#: src/callbacks/keyring.h:223
+#, boost-format
+msgid "File '%1%' is signed with an unknown key '%2%'."
+msgstr ""
+
+#. translator: %1% is a file name, %2% is a gpg key ID, %3% a repositories name
+#: src/callbacks/keyring.h:226
+#, boost-format
+msgid "File '%1%' from repository '%3%' is signed with an unknown key '%2%'."
+msgstr ""
+
+#. translators: the last %s is gpg key ID
+#: src/callbacks/keyring.h:243
+#, c-format, boost-format
+msgid "File '%s' is signed with an unknown key '%s'. Continue?"
+msgstr ""
+
+#. translators: the last %s is gpg key ID
+#: src/callbacks/keyring.h:247
+#, c-format, boost-format
+msgid ""
+"File '%s' from repository '%s' is signed with an unknown key '%s'. Continue?"
+msgstr ""
+
+#: src/callbacks/keyring.h:267
+msgid "Automatically importing the following key:"
+msgstr ""
+
+#: src/callbacks/keyring.h:269
+msgid "Automatically trusting the following key:"
+msgstr ""
+
+#: src/callbacks/keyring.h:271
+msgid "New repository or package signing key received:"
+msgstr ""
+
+#. translators: this message is shown after showing description of the key
+#: src/callbacks/keyring.h:305
+msgid "Do you want to reject the key, trust temporarily, or trust always?"
+msgstr ""
+
+#. translators: this message is shown after showing description of the key
+#: src/callbacks/keyring.h:308
+msgid "Do you want to reject the key, or trust always?"
+msgstr ""
+
+#. translators: r/t/a stands for Reject/TrustTemporarily/trustAlways(import)
+#. translate to whatever is appropriate for your language
+#. The anserws must be separated by slash characters '/' and must
+#. correspond to reject/trusttemporarily/trustalways in that order.
+#. The answers should be lower case letters.
+#: src/callbacks/keyring.h:326
+msgid "r/t/a/"
+msgstr ""
+
+#. translators: the same as r/t/a, but without 'a'
+#: src/callbacks/keyring.h:329
+msgid "r/t"
+msgstr ""
+
+#. translators: r/a stands for Reject/trustAlways(import)
+#. translate to whatever is appropriate for your language
+#. The anserws must be separated by slash characters '/' and must
+#. correspond to reject/trusttemporarily/trustalways in that order.
+#. The answers should be lower case letters.
+#: src/callbacks/keyring.h:336
+msgid "r/a/"
+msgstr ""
+
+#. translators: help text for the 'r' option in the 'r/t/a' prompt
+#: src/callbacks/keyring.h:342
+msgid "Don't trust the key."
+msgstr ""
+
+#. translators: help text for the 't' option in the 'r/t/a' prompt
+#: src/callbacks/keyring.h:346
+msgid "Trust the key temporarily."
+msgstr ""
+
+#. translators: help text for the 'a' option in the 'r/t/a' prompt
+#: src/callbacks/keyring.h:351
+msgid "Trust the key and import it into trusted keyring."
+msgstr ""
+
+#: src/callbacks/keyring.h:389
+#, c-format, boost-format
+msgid "Ignoring failed signature verification for file '%s'!"
+msgstr ""
+
+#: src/callbacks/keyring.h:392
+#, c-format, boost-format
+msgid ""
+"Ignoring failed signature verification for file '%s' from repository '%s'!"
+msgstr ""
+
+#: src/callbacks/keyring.h:398
+msgid "Double-check this is not caused by some malicious changes in the file!"
+msgstr ""
+
+#. translator: %1% is a file name
+#: src/callbacks/keyring.h:408
+#, boost-format
+msgid "Signature verification failed for file '%1%'."
+msgstr ""
+
+#. translator: %1% is a file name, %2% a repositories name
+#: src/callbacks/keyring.h:411
+#, boost-format
+msgid "Signature verification failed for file '%1%' from repository '%2%'."
+msgstr ""
+
+#: src/callbacks/keyring.h:460
+msgid ""
+"The rpm database seems to contain old V3 version gpg keys which are "
+"meanwhile obsolete and considered insecure:"
+msgstr ""
+
+#: src/callbacks/keyring.h:467
+#, boost-format
+msgid "To see details about a key call '%1%'."
+msgstr ""
+
+#: src/callbacks/keyring.h:471
+#, boost-format
+msgid ""
+"Unless you believe the key in question is still in use, you can remove it "
+"from the rpm database calling '%1%'."
+msgstr ""
+
+#. translator: %1% is the number of keys, %2% the name of a repository
+#: src/callbacks/keyring.h:490
+#, boost-format
+msgid "Received %1% new package signing key from repository %2%:"
+msgid_plural "Received %1% new package signing keys from repository %2%:"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/callbacks/keyring.h:494
+msgid ""
+"Those additional keys are usually used to sign packages shipped by the "
+"repository. In order to validate those packages upon download and "
+"installation the new keys will be imported into the rpm database."
+msgstr ""
+
+#: src/callbacks/keyring.h:496
+msgid "New:"
+msgstr ""
+
+#: src/callbacks/keyring.h:502
+msgid ""
+"The repository metadata introducing the new keys have been signed and "
+"validated by the trusted key:"
+msgstr ""
+
+#: src/callbacks/keyring.h:525
+#, c-format, boost-format
+msgid "No digest for file %s."
+msgstr ""
+
+#: src/callbacks/keyring.h:533
+#, c-format, boost-format
+msgid "Unknown digest %s for file %s."
+msgstr ""
+
+#: src/callbacks/keyring.h:550
+#, boost-format
+msgid ""
+"Digest verification failed for file '%1%'\n"
+"[%2%]\n"
+"\n"
+"  expected %3%\n"
+"  but got  %4%\n"
+msgstr ""
+
+#: src/callbacks/keyring.h:562
+msgid ""
+"Accepting packages with wrong checksums can lead to a corrupted system and "
+"in extreme cases even to a system compromise."
+msgstr ""
+
+#: src/callbacks/keyring.h:570
+#, boost-format
+msgid ""
+"However if you made certain that the file with checksum '%1%..' is secure, "
+"correct\n"
+"and should be used within this operation, enter the first 4 characters of "
+"the checksum\n"
+"to unblock using this file on your own risk. Empty input will discard the "
+"file.\n"
+msgstr ""
+
+#. translators: A prompt option
+#: src/callbacks/keyring.h:577
+msgid "discard"
+msgstr ""
+
+#. translators: A prompt option help text
+#: src/callbacks/keyring.h:579
+msgid "Unblock using this file on your own risk."
+msgstr ""
+
+#. translators: A prompt option help text
+#: src/callbacks/keyring.h:581
+msgid "Discard the file."
+msgstr ""
+
+#. translators: A prompt text
+#: src/callbacks/keyring.h:585
+msgid "Unblock or discard?"
+msgstr ""
+
+#: src/callbacks/locks.h:27
+msgid ""
+"The following query locks the same objects as the one you want to remove:"
+msgstr ""
+
+#: src/callbacks/locks.h:30
+msgid "The following query locks some of the objects you want to unlock:"
+msgstr ""
+
+#: src/callbacks/locks.h:35 src/callbacks/locks.h:50
+msgid "Do you want to remove this lock?"
+msgstr ""
+
+#: src/callbacks/locks.h:45
+msgid "The following query does not lock anything:"
+msgstr ""
+
 #. help text for the "Abort, retry, ignore?" prompt for media errors
 #: src/callbacks/media.cc:27
 msgid "Skip retrieval of the file and abort current operation."
@@ -1995,7 +1726,7 @@ msgstr ""
 
 #. translators: this is a prompt text
 #: src/callbacks/media.cc:81 src/callbacks/media.cc:173
-#: src/callbacks/media.cc:253 src/utils/prompt.cc:219 src/utils/prompt.cc:306
+#: src/callbacks/media.cc:253 src/utils/prompt.cc:226 src/utils/prompt.cc:313
 msgid "Abort, retry, ignore?"
 msgstr ""
 
@@ -2077,6 +1808,204 @@ msgstr ""
 #. password
 #: src/callbacks/media.cc:328
 msgid "Password"
+msgstr ""
+
+#: src/callbacks/repo.h:49
+msgid "Retrieving delta"
+msgstr ""
+
+#. translators: this text is a progress display label e.g. "Applying delta foo [42%]"
+#: src/callbacks/repo.h:74
+msgid "Applying delta"
+msgstr ""
+
+#. TranslatorExplanation %s is package size like "5.6 M"
+#: src/callbacks/repo.h:103
+#, c-format, boost-format
+msgid "(%s unpacked)"
+msgstr ""
+
+#: src/callbacks/repo.h:112
+#, boost-format
+msgid "In cache %1%"
+msgstr ""
+
+#: src/callbacks/repo.h:128
+#, c-format, boost-format
+msgid "Retrieving %s %s-%s.%s"
+msgstr ""
+
+#: src/callbacks/repo.h:217
+msgid "Signature verification failed"
+msgstr ""
+
+#: src/callbacks/repo.h:237
+msgid "Accepting package despite the error."
+msgstr ""
+
+#. TranslatorExplanation speaking of a script - "Running: script file name (package name, script dir)"
+#: src/callbacks/rpm.h:189
+#, c-format, boost-format
+msgid "Running: %s  (%s, %s)"
+msgstr ""
+
+#: src/callbacks/rpm.h:272
+#, c-format, boost-format
+msgid "Removal of %s failed:"
+msgstr ""
+
+#. translators: This text is a progress display label e.g. "Removing packagename-x.x.x [42%]"
+#: src/callbacks/rpm.h:312 src/callbacks/rpm.h:574
+#, c-format, boost-format
+msgid "Removing %s"
+msgstr ""
+
+#: src/callbacks/rpm.h:349
+#, c-format, boost-format
+msgid "Installation of %s failed:"
+msgstr ""
+
+#. TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
+#: src/callbacks/rpm.h:389 src/callbacks/rpm.h:640
+#, c-format, boost-format
+msgid "Installing: %s"
+msgstr ""
+
+#. translators: A progressbar label
+#: src/callbacks/rpm.h:408
+msgid "Checking for file conflicts:"
+msgstr ""
+
+#. TranslatorExplanation %1%(number of packages); detailed list follows
+#: src/callbacks/rpm.h:459
+#, boost-format
+msgid ""
+"%1% package had to be excluded from file conflicts check because it is not "
+"yet download."
+msgid_plural ""
+"%1% packages had to be excluded from file conflicts check because they are "
+"not yet downloaded."
+msgstr[0] ""
+msgstr[1] ""
+
+#. TranslatorExplanation %1%(commandline option)
+#: src/callbacks/rpm.h:465
+#, boost-format
+msgid ""
+"Checking for file conflicts requires not installed packages to be downloaded "
+"in advance in order to access their file lists. See option '%1%' in the "
+"zypper manual page for details."
+msgstr ""
+
+#. TranslatorExplanation %1%(number of conflicts); detailed list follows
+#: src/callbacks/rpm.h:475
+#, boost-format
+msgid "Detected %1% file conflict:"
+msgid_plural "Detected %1% file conflicts:"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/callbacks/rpm.h:483
+msgid "Conflicting files will be replaced."
+msgstr ""
+
+#. TranslatorExplanation Problem description before asking whether to "Continue? [yes/no] (no):"
+#: src/callbacks/rpm.h:489
+msgid ""
+"File conflicts happen when two packages attempt to install files with the "
+"same name but different contents. If you continue, conflicting files will be "
+"replaced losing the previous content."
+msgstr ""
+
+#. TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
+#: src/callbacks/rpm.h:711 src/callbacks/rpm.h:718
+#, c-format, boost-format
+msgid "Executing %s script for: %s"
+msgstr ""
+
+#. TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
+#: src/callbacks/rpm.h:725
+#, c-format, boost-format
+msgid "Executing %s script"
+msgstr ""
+
+#. TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
+#: src/callbacks/rpm.h:857
+#, c-format, boost-format
+msgid "Cleaning up: %s"
+msgstr ""
+
+#. translator: %s is an other command: "This is an alias for 'zypper info -t patch'."
+#: src/commands/commandhelpformatter.h:94
+#, c-format, boost-format
+msgid "This is an alias for '%s'."
+msgstr ""
+
+#: src/commands/commandhelpformatter.h:107
+msgid "Examples:"
+msgstr ""
+
+#: src/commands/commandhelpformatter.h:110
+msgid "Arguments:"
+msgstr ""
+
+#: src/commands/commandhelpformatter.h:123 src/utils/flags/zyppflags.cc:627
+msgid "Command options:"
+msgstr ""
+
+#: src/commands/commandhelpformatter.h:126
+msgid "Solver options:"
+msgstr ""
+
+#: src/commands/commandhelpformatter.h:129
+msgid "Expert options:"
+msgstr ""
+
+#: src/commands/commandhelpformatter.h:132
+msgid "This command has no additional options."
+msgstr ""
+
+#: src/commands/commandhelpformatter.h:135
+msgid "Legacy options:"
+msgstr ""
+
+#. translator: '-r             The same as -f.
+#: src/commands/commandhelpformatter.h:139
+#, boost-format
+msgid "The same as %1%."
+msgstr ""
+
+#: src/commands/commandhelpformatter.h:187
+msgid "Usage:"
+msgstr ""
+
+#: src/commands/commandhelpformatter.h:189
+msgid "Global Options:"
+msgstr ""
+
+#: src/commands/commandhelpformatter.h:191
+msgid "Commands:"
+msgstr ""
+
+#. translators: --details
+#: src/commands/commonflags.h:23 src/commands/inrverify.cc:35
+msgid "Show the detailed installation summary."
+msgstr ""
+
+#: src/commands/commonflags.h:30
+#, boost-format
+msgid "Type of package (%1%)."
+msgstr ""
+
+#. translators: --best-effort
+#: src/commands/commonflags.h:38
+msgid ""
+"Do a 'best effort' approach to update. Updates to a lower than the latest "
+"version are also acceptable."
+msgstr ""
+
+#: src/commands/commonflags.h:45
+msgid "Consider only patches which affect the package management itself."
 msgstr ""
 
 #: src/commands/conditions.cc:19
@@ -2887,12 +2816,12 @@ msgstr ""
 msgid "Write debug output to file <path>."
 msgstr ""
 
-#: src/commands/ps.cc:72 src/solve-commit.cc:524
+#: src/commands/ps.cc:72 src/solve-commit.cc:561
 msgid "Check failed:"
 msgstr ""
 
 #. Here: Table output
-#: src/commands/ps.cc:127 src/solve-commit.cc:513
+#: src/commands/ps.cc:127 src/solve-commit.cc:550
 msgid "Checking for running processes using deleted libraries..."
 msgstr ""
 
@@ -3254,6 +3183,14 @@ msgstr ""
 #: src/commands/repos/list.cc:40 src/commands/repos/list.cc:212
 #: src/commands/services/list.cc:104
 msgid "Alias"
+msgstr ""
+
+#. translators: property name; short; used like "Name: value"
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/commands/repos/list.cc:42 src/commands/repos/list.cc:268
+#: src/commands/services/list.cc:116 src/repos.cc:1254
+#: src/utils/flags/zyppflags.h:49
+msgid "URI"
 msgstr ""
 
 #. 'enabled' flag
@@ -4668,7 +4605,7 @@ msgstr ""
 msgid "Argument resolves to no package"
 msgstr ""
 
-#: src/commands/utils/download.cc:253 src/solve-commit.cc:968
+#: src/commands/utils/download.cc:253 src/solve-commit.cc:1023
 msgid "Nothing to do."
 msgstr ""
 
@@ -5161,6 +5098,10 @@ msgstr ""
 msgid "Fallback"
 msgstr ""
 
+#: src/locales.cc:72 src/output/Out.h:26 src/repos.cc:131 src/repos.cc:159
+msgid "No"
+msgstr ""
+
 #. translators: header of table column - the language code, e.g. en_US
 #: src/locales.cc:174
 msgid "Code"
@@ -5186,12 +5127,12 @@ msgstr ""
 msgid " %s is already requested."
 msgstr ""
 
-#: src/locales.cc:276
+#: src/locales.cc:281
 #, c-format, boost-format
 msgid "Removed locale: %s"
 msgstr ""
 
-#: src/locales.cc:281
+#: src/locales.cc:286
 #, c-format, boost-format
 msgid "%s was not requested."
 msgstr ""
@@ -5301,6 +5242,29 @@ msgstr ""
 #: src/misc.cc:454
 #, c-format, boost-format
 msgid "Problem installing source package %s-%s:"
+msgstr ""
+
+#: src/output/Out.h:26 src/repos.cc:125 src/repos.cc:153
+msgid "Yes"
+msgstr ""
+
+#. translator: usually followed by a ' ' and some explanatory text
+#: src/output/Out.h:37
+msgid "Note:"
+msgstr ""
+
+#. translator: usually followed by a ' ' and some explanatory text
+#: src/output/Out.h:39
+msgid "Warning:"
+msgstr ""
+
+#. translator: usually followed by a ' ' and some explanatory text
+#: src/output/Out.h:41
+msgid "Error:"
+msgstr ""
+
+#: src/output/Out.h:43
+msgid "Continue?"
 msgstr ""
 
 #. Since this message will be emitted before we know if the current output is XML or Normal we need to send this message to stderr
@@ -5431,8 +5395,8 @@ msgstr ""
 msgid "Problem retrieving files from '%s'."
 msgstr ""
 
-#: src/repos.cc:345 src/repos.cc:1859 src/solve-commit.cc:858
-#: src/solve-commit.cc:889 src/solve-commit.cc:913
+#: src/repos.cc:345 src/repos.cc:1859 src/solve-commit.cc:898
+#: src/solve-commit.cc:929 src/solve-commit.cc:953
 msgid "Please see the above error message for a hint."
 msgstr ""
 
@@ -5869,21 +5833,21 @@ msgid "No products found."
 msgstr ""
 
 #. translators: meaning 'dependency problem' found during solving
-#: src/solve-commit.cc:72
+#: src/solve-commit.cc:74
 msgid "Problem: "
 msgstr ""
 
-#: src/solve-commit.cc:78
+#: src/solve-commit.cc:80
 msgid "Detailed information: "
 msgstr ""
 
 #. TranslatorExplanation %d is the solution number
-#: src/solve-commit.cc:91
+#: src/solve-commit.cc:93
 #, c-format, boost-format
 msgid " Solution %d: "
 msgstr ""
 
-#: src/solve-commit.cc:110
+#: src/solve-commit.cc:112
 msgid "Choose the above solution using '1' or skip, retry or cancel"
 msgid_plural "Choose from above solutions by number or skip, retry or cancel"
 msgstr[0] ""
@@ -5891,7 +5855,7 @@ msgstr[1] ""
 
 #. translators: translate 'c' to whatever you translated the 'c' in
 #. "c" and "s/r/c" strings
-#: src/solve-commit.cc:117
+#: src/solve-commit.cc:119
 msgid "Choose the above solution using '1' or cancel using 'c'"
 msgid_plural "Choose from above solutions by number or cancel"
 msgstr[0] ""
@@ -5903,7 +5867,7 @@ msgstr[1] ""
 #. The anserws must be separated by slash characters '/' and must
 #. correspond to skip/retry/cancel/detailed information in that order.
 #. The answers should be lower case letters.
-#: src/solve-commit.cc:141
+#: src/solve-commit.cc:143
 msgid "s/r/c/d"
 msgstr ""
 
@@ -5914,37 +5878,37 @@ msgstr ""
 #. See the "s/r/c/d" comment for other details.
 #. One letter string  for translation can be tricky, so in case of problems,
 #. please report a bug against zypper at bugzilla.suse.com, we'll try to solve it.
-#: src/solve-commit.cc:157
+#: src/solve-commit.cc:159
 msgid "c/d"
 msgstr ""
 
-#: src/solve-commit.cc:163
+#: src/solve-commit.cc:165
 #, boost-format
 msgid "Choose solution %1%"
 msgstr ""
 
-#: src/solve-commit.cc:165
+#: src/solve-commit.cc:167
 msgid "Skip problem and continue."
 msgstr ""
 
-#: src/solve-commit.cc:168
+#: src/solve-commit.cc:170
 msgid "Retry solving immediately."
 msgstr ""
 
-#: src/solve-commit.cc:170
+#: src/solve-commit.cc:172
 msgid "Choose no solution and cancel."
 msgstr ""
 
-#: src/solve-commit.cc:171
+#: src/solve-commit.cc:173
 msgid "Toggle show detailed conflict information."
 msgstr ""
 
-#: src/solve-commit.cc:204
+#: src/solve-commit.cc:206
 #, c-format, boost-format
 msgid "Applying solution %s"
 msgstr ""
 
-#: src/solve-commit.cc:220
+#: src/solve-commit.cc:222
 #, c-format, boost-format
 msgid "%d Problem:"
 msgid_plural "%d Problems:"
@@ -5952,57 +5916,63 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. should not happen! If solve() failed at least one problem must be set!
-#: src/solve-commit.cc:224
+#: src/solve-commit.cc:226
 msgid "Specified capability not found"
 msgstr ""
 
-#: src/solve-commit.cc:234
+#: src/solve-commit.cc:236
 #, c-format, boost-format
 msgid "Problem: %s"
 msgstr ""
 
-#: src/solve-commit.cc:253
+#: src/solve-commit.cc:255
 msgid "Resolving dependencies..."
 msgstr ""
 
-#: src/solve-commit.cc:314
+#: src/solve-commit.cc:316
 msgid "Force resolution:"
 msgstr ""
 
-#: src/solve-commit.cc:413
+#: src/solve-commit.cc:415
 msgid "Verifying dependencies..."
 msgstr ""
 
 #. Here: compute the full upgrade
-#: src/solve-commit.cc:463
+#: src/solve-commit.cc:465
 msgid "Computing upgrade..."
 msgstr ""
 
-#: src/solve-commit.cc:477
+#: src/solve-commit.cc:479
 msgid "Generating solver test case..."
 msgstr ""
 
-#: src/solve-commit.cc:479
+#: src/solve-commit.cc:481
 #, c-format, boost-format
 msgid "Solver test case generated successfully at %s."
 msgstr ""
 
-#: src/solve-commit.cc:482
+#: src/solve-commit.cc:484
 msgid "Error creating the solver test case."
 msgstr ""
 
-#: src/solve-commit.cc:510
+#: src/solve-commit.cc:529
+msgid ""
+"DownloadAsNeeded can not be used with ZYPP_SINGLE_RPMTRANS=1, falling back "
+"to DownloadInAdvance"
+msgstr ""
+
+#: src/solve-commit.cc:547
 #, c-format, boost-format
 msgid ""
 "Check for running processes using deleted libraries is disabled in zypper."
 "conf. Run '%s' to check manually."
 msgstr ""
 
-#: src/solve-commit.cc:526
+#: src/solve-commit.cc:563
 msgid "Skip check:"
 msgstr ""
 
-#: src/solve-commit.cc:533
+#: src/solve-commit.cc:570
 #, boost-format
 msgid ""
 "There are running programs which still use files and libraries deleted or "
@@ -6010,38 +5980,38 @@ msgid ""
 "latest updates. Run '%1%' to list these programs."
 msgstr ""
 
-#: src/solve-commit.cc:547
+#: src/solve-commit.cc:584
 msgid "Update notifications were received from the following packages:"
 msgstr ""
 
-#: src/solve-commit.cc:556
+#: src/solve-commit.cc:593
 #, c-format, boost-format
 msgid "Message from package %s:"
 msgstr ""
 
-#: src/solve-commit.cc:564
+#: src/solve-commit.cc:601
 msgid "y/n"
 msgstr ""
 
-#: src/solve-commit.cc:565
+#: src/solve-commit.cc:602
 msgid "View the notifications now?"
 msgstr ""
 
-#: src/solve-commit.cc:610
+#: src/solve-commit.cc:647
 msgid "Computing distribution upgrade..."
 msgstr ""
 
-#: src/solve-commit.cc:615
+#: src/solve-commit.cc:652
 msgid "Resolving package dependencies..."
 msgstr ""
 
-#: src/solve-commit.cc:670
+#: src/solve-commit.cc:707
 msgid ""
 "Some of the dependencies of installed packages are broken. In order to fix "
 "these dependencies, the following actions need to be taken:"
 msgstr ""
 
-#: src/solve-commit.cc:677
+#: src/solve-commit.cc:714
 msgid "Root privileges are required to fix broken package dependencies."
 msgstr ""
 
@@ -6055,78 +6025,78 @@ msgstr ""
 #. The answers should be lower case letters, but in general, any UTF-8
 #. string will do.
 #. ! \todo add c for changelog and x for explain (show the dep tree)
-#: src/solve-commit.cc:699
+#: src/solve-commit.cc:736
 msgid "y/n/p/v/a/r/m/d/g"
 msgstr ""
 
 #. translators: help text for 'y' option in the 'Continue?' prompt
-#: src/solve-commit.cc:704
+#: src/solve-commit.cc:741
 msgid ""
 "Yes, accept the summary and proceed with installation/removal of packages."
 msgstr ""
 
 #. translators: help text for 'n' option in the 'Continue?' prompt
-#: src/solve-commit.cc:706
+#: src/solve-commit.cc:743
 msgid "No, cancel the operation."
 msgstr ""
 
 #. translators: help text for 'p' option in the 'Continue?' prompt
-#: src/solve-commit.cc:708
+#: src/solve-commit.cc:745
 msgid ""
 "Restart solver in no-force-resolution mode in order to show dependency "
 "problems."
 msgstr ""
 
 #. translators: help text for 'v' option in the 'Continue?' prompt
-#: src/solve-commit.cc:710
+#: src/solve-commit.cc:747
 msgid "Toggle display of package versions."
 msgstr ""
 
 #. translators: help text for 'a' option in the 'Continue?' prompt
-#: src/solve-commit.cc:712
+#: src/solve-commit.cc:749
 msgid "Toggle display of package architectures."
 msgstr ""
 
 #. translators: help text for 'r' option in the 'Continue?' prompt
-#: src/solve-commit.cc:714
+#: src/solve-commit.cc:751
 msgid ""
 "Toggle display of repositories from which the packages will be installed."
 msgstr ""
 
 #. translators: help text for 'm' option in the 'Continue?' prompt
-#: src/solve-commit.cc:716
+#: src/solve-commit.cc:753
 msgid "Toggle display of package vendor names."
 msgstr ""
 
 #. translators: help text for 'd' option in the 'Continue?' prompt
-#: src/solve-commit.cc:718
+#: src/solve-commit.cc:755
 msgid "Toggle between showing all details and as few details as possible."
 msgstr ""
 
 #. translators: help text for 'g' option in the 'Continue?' prompt
-#: src/solve-commit.cc:720
+#: src/solve-commit.cc:757
 msgid "View the summary in pager."
 msgstr ""
 
-#: src/solve-commit.cc:828
+#: src/solve-commit.cc:866
 msgid "committing"
 msgstr ""
 
-#: src/solve-commit.cc:830
+#: src/solve-commit.cc:868
 msgid "(dry run)"
 msgstr ""
 
-#: src/solve-commit.cc:857 src/solve-commit.cc:890
+#: src/solve-commit.cc:897 src/solve-commit.cc:930
 msgid "Problem retrieving the package file from the repository:"
 msgstr ""
 
 #. translators: the first %s is 'zypper refresh' and the second is repo alias
-#: src/solve-commit.cc:887
+#: src/solve-commit.cc:927
 #, c-format, boost-format
 msgid "Repository '%s' is out of date. Running '%s' might help."
 msgstr ""
 
-#: src/solve-commit.cc:898
+#: src/solve-commit.cc:938
 msgid ""
 "The package integrity check failed. This may be a problem with the "
 "repository or media. Try one of the following:\n"
@@ -6137,32 +6107,23 @@ msgid ""
 "- use another repository"
 msgstr ""
 
-#: src/solve-commit.cc:912
+#: src/solve-commit.cc:952
 msgid "Problem occurred during or after installation or removal of packages:"
 msgstr ""
 
-#: src/solve-commit.cc:920
-msgid "Installation has completed with error."
-msgstr ""
-
-#: src/solve-commit.cc:922
-#, boost-format
-msgid "You may run '%1%' to repair any dependency problems."
-msgstr ""
-
-#: src/solve-commit.cc:936
+#: src/solve-commit.cc:991
 msgid ""
 "One of the installed patches requires a reboot of your machine. Reboot as "
 "soon as possible."
 msgstr ""
 
-#: src/solve-commit.cc:944
+#: src/solve-commit.cc:999
 msgid ""
 "One of the installed patches affects the package manager itself. Run this "
 "command once more to install any other needed patches."
 msgstr ""
 
-#: src/solve-commit.cc:966
+#: src/solve-commit.cc:1021
 msgid "Dependencies of all installed packages are satisfied."
 msgstr ""
 
@@ -6392,6 +6353,81 @@ msgstr ""
 #: src/utils/flags/flagtypes.cc:237
 #, boost-format
 msgid "Unknown error while assigning the value %1% to flag %2%."
+msgstr ""
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:23
+msgid "ALIAS"
+msgstr ""
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:25
+msgid "ALIAS|#|URI"
+msgstr ""
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:27
+msgid "CATEGORY"
+msgstr ""
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:29
+msgid "DIR"
+msgstr ""
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:31
+msgid "FILE"
+msgstr ""
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:33
+msgid "FILE.repo"
+msgstr ""
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:35
+msgid "FORMAT"
+msgstr ""
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:37
+msgid "INTEGER"
+msgstr ""
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:39
+msgid "PATH"
+msgstr ""
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:41
+msgid "SEVERITY"
+msgstr ""
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:43
+msgid "STRING"
+msgstr ""
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:45
+msgid "TAG"
+msgstr ""
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:47
+msgid "TYPE"
+msgstr ""
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:51
+msgid "YYYY-MM-DD"
+msgstr ""
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:53
+msgid "MODE"
 msgstr ""
 
 #. For '-garbage' argument, with 'a', 'b', and 'e' as known options,
@@ -6646,17 +6682,17 @@ msgstr ""
 msgid "shows all options"
 msgstr ""
 
-#: src/utils/prompt.cc:194 src/utils/prompt.cc:315 src/utils/prompt.cc:324
-#: src/utils/prompt.cc:422
+#: src/utils/prompt.cc:201 src/utils/prompt.cc:322 src/utils/prompt.cc:331
+#: src/utils/prompt.cc:429
 msgid "yes"
 msgstr ""
 
-#: src/utils/prompt.cc:194 src/utils/prompt.cc:315 src/utils/prompt.cc:324
-#: src/utils/prompt.cc:422
+#: src/utils/prompt.cc:201 src/utils/prompt.cc:322 src/utils/prompt.cc:331
+#: src/utils/prompt.cc:429
 msgid "no"
 msgstr ""
 
-#: src/utils/prompt.cc:212 src/utils/prompt.cc:260
+#: src/utils/prompt.cc:219 src/utils/prompt.cc:267
 #, c-format, boost-format
 msgid "Retrying in %u seconds..."
 msgstr ""
@@ -6667,58 +6703,75 @@ msgstr ""
 #. the answers must be separated by slash characters '/' and must
 #. correspond to abort/retry/ignore in that order.
 #. The answers should be lower case letters.
-#: src/utils/prompt.cc:218 src/utils/prompt.cc:305
+#: src/utils/prompt.cc:225 src/utils/prompt.cc:312
 msgid "a/r/i"
 msgstr ""
 
-#: src/utils/prompt.cc:270
+#: src/utils/prompt.cc:277
 #, c-format, boost-format
 msgid "Autoselecting '%s' after %u second."
 msgid_plural "Autoselecting '%s' after %u seconds."
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/utils/prompt.cc:287
+#: src/utils/prompt.cc:294
 msgid "Trying again..."
 msgstr ""
 
-#: src/utils/prompt.cc:324
+#: src/utils/prompt.cc:331
 msgid "always"
 msgstr ""
 
-#: src/utils/prompt.cc:324
+#: src/utils/prompt.cc:331
 msgid "never"
 msgstr ""
 
-#: src/utils/prompt.cc:370
+#: src/utils/prompt.cc:377
 msgid "Cannot read input: bad stream or EOF."
 msgstr ""
 
-#: src/utils/prompt.cc:371
+#: src/utils/prompt.cc:378
 #, c-format, boost-format
 msgid ""
 "If you run zypper without a terminal, use '%s' global\n"
 "option to make zypper use default answers to prompts."
 msgstr ""
 
-#: src/utils/prompt.cc:410
+#: src/utils/prompt.cc:417
 #, c-format, boost-format
 msgid "Invalid answer '%s'."
 msgstr ""
 
-#: src/utils/prompt.cc:413
+#: src/utils/prompt.cc:420
 #, c-format, boost-format
 msgid "Ambiguous answer '%s'."
 msgstr ""
 
 #. translators: the %s are: 'y', 'yes' (translated), 'n', and 'no' (translated).
-#: src/utils/prompt.cc:421
+#: src/utils/prompt.cc:428
 #, c-format, boost-format
 msgid "Enter '%s' for '%s' or '%s' for '%s' if nothing else works for you."
 msgstr ""
 
-#: src/utils/prompt.cc:426
+#: src/utils/prompt.cc:433
 msgid ""
 "If nothing else works enter '#1' to select the 1st option, '#2' for the 2nd "
 "one, ..."
+msgstr ""
+
+#. TranslatorExplanation These are reasons for various failures.
+#: src/utils/prompt.h:185
+msgid "Not found"
+msgstr ""
+
+#: src/utils/prompt.h:185
+msgid "I/O error"
+msgstr ""
+
+#: src/utils/prompt.h:185
+msgid "Invalid object"
+msgstr ""
+
+#: src/utils/prompt.h:192
+msgid "Error"
 msgstr ""

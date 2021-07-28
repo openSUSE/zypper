@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-21 09:46+0200\n"
+"POT-Creation-Date: 2021-07-28 11:38+0200\n"
 "PO-Revision-Date: 2021-04-07 15:58+0000\n"
 "Last-Translator: Suleyman Poyraz <zaryob.dev@gmail.com>\n"
 "Language-Team: Turkish <https://l10n.opensuse.org/projects/zypper/master/tr/"
@@ -19,741 +19,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Weblate 3.6.1\n"
-
-#: src/SolverRequester.h:52
-#, boost-format
-msgid "Suspicious category filter value '%1%'."
-msgstr "Şüpheli kategori filtre değeri  '%1%'."
-
-#: src/SolverRequester.h:60
-#, boost-format
-msgid "Suspicious severity filter value '%1%'."
-msgstr "Şüpheli önem filtre değeri '%1%'."
-
-#: src/callbacks/keyring.h:32
-msgid ""
-"A GPG pubkey is clearly identified by it's fingerprint. Do not rely the keys "
-"name. If you are not sure whether the presented key is authentic, ask the "
-"repository provider or check his web site. Many provider maintain a web page "
-"showing the fingerprints of the GPG keys they are using."
-msgstr ""
-
-#: src/callbacks/keyring.h:37
-msgid ""
-"Signing data enables the recipient to verify that no modifications occurred "
-"after the data were signed. Accepting data with no, wrong or unknown "
-"signature can lead to a corrupted system and in extreme cases even to a "
-"system compromise."
-msgstr ""
-"Verileri imzalamak alıcının veriler imzalandıktan sonra veriler üzerinde "
-"herhangi bir değişiklik yapılmadığını doğrulamasını sağlar. İmzalanmamış, "
-"yanlış imzalanmış veya bilinmeyen kaynak tarafından imzalanmış veriler "
-"sistemin bozulmasına; hatta bazı uç durumlarda sistemin kötü niyetli "
-"kişilerce ele geçirilmesine neden olabilir."
-
-#. translator: %1% is a file name
-#: src/callbacks/keyring.h:45
-#, boost-format
-msgid ""
-"File '%1%' is the repositories master index file. It ensures the integrity "
-"of the whole repo."
-msgstr ""
-"%1% dosyası depoların ana dizin dosyasıdır. Deponun tamamının bütünlüğünü "
-"sağlar."
-
-#: src/callbacks/keyring.h:51
-msgid ""
-"We can't verify that no one meddled with this file, so it might not be "
-"trustworthy anymore! You should not continue unless you know it's safe."
-msgstr ""
-"Bu dosyanın daha önce elden geçirilip geçirilmediğini doğrulayamıyoruz, bu "
-"yüzden artık güvenilir olup olmadığından emin değiliz. Eğer dosyanın güvenli "
-"olduğundan kesinlikle emin değilseniz, devam etmeyin."
-
-#: src/callbacks/keyring.h:56
-msgid ""
-"This file was modified after it has been signed. This may have been a "
-"malicious change, so it might not be trustworthy anymore! You should not "
-"continue unless you know it's safe."
-msgstr ""
-"Bu dosya, imzalandıktan sonra değiştirildi. Bu kötü amaçlı bir değişiklik "
-"olabilir, bu yüzden artık güvenilir olmayabilir! Güvenli olduğundan emin "
-"değilseniz devam etmemelisiniz."
-
-#: src/callbacks/keyring.h:85
-msgid "Repository:"
-msgstr "Depo:"
-
-#: src/callbacks/keyring.h:87
-msgid "Key Fingerprint:"
-msgstr "Anahtar Parmak İzi:"
-
-#: src/callbacks/keyring.h:88
-msgid "Key Name:"
-msgstr "Anahtar Adı:"
-
-#: src/callbacks/keyring.h:89
-msgid "Key Algorithm:"
-msgstr ""
-
-#: src/callbacks/keyring.h:90
-msgid "Key Created:"
-msgstr "Anahtar Oluşturma Tarihi:"
-
-#: src/callbacks/keyring.h:91
-msgid "Key Expires:"
-msgstr "Anahtar Son Geçerlilik Tarihi:"
-
-#: src/callbacks/keyring.h:93
-msgid "Subkey:"
-msgstr "Alt Anahtar:"
-
-#: src/callbacks/keyring.h:94
-msgid "Rpm Name:"
-msgstr "Rpm Adı:"
-
-#: src/callbacks/keyring.h:120
-#, boost-format
-msgid "The gpg key signing file '%1%' has expired."
-msgstr "'%1%' dosyasını imzalayan gpg anahtarının geçerlilik süresi sona erdi."
-
-#: src/callbacks/keyring.h:126
-#, boost-format
-msgid "The gpg key signing file '%1%' will expire in %2% day."
-msgid_plural "The gpg key signing file '%1%' will expire in %2% days."
-msgstr[0] ""
-"'%1%' dosyasını imzalayan gpg anahtarının geçerlilik süresi %2% gün içinde "
-"sona erecek."
-msgstr[1] ""
-"'%1%' dosyasını imzalayan gpg anahtarının geçerlilik süresi %2% gün içinde "
-"sona erecek."
-
-#: src/callbacks/keyring.h:149
-#, c-format, boost-format
-msgid "Accepting an unsigned file '%s'."
-msgstr "İmzalanmamış bir '%s' dosyası kabul ediliyor."
-
-#: src/callbacks/keyring.h:153
-#, c-format, boost-format
-msgid "Accepting an unsigned file '%s' from repository '%s'."
-msgstr "İmzalanmamış bir '%s' dosyası '%s' deposundan kabul ediliyor."
-
-#. translator: %1% is a file name
-#: src/callbacks/keyring.h:163
-#, boost-format
-msgid "File '%1%' is unsigned."
-msgstr "'%1%' dosyası imzalanmamış."
-
-#. translator: %1% is a file name, %2% a repositories name
-#: src/callbacks/keyring.h:166
-#, boost-format
-msgid "File '%1%' from repository '%2%' is unsigned."
-msgstr "'%2%' deposundaki '%1%' dosyası imzalanmamış."
-
-#. TranslatorExplanation: speaking of a file
-#: src/callbacks/keyring.h:183
-#, c-format, boost-format
-msgid "File '%s' is unsigned, continue?"
-msgstr "'%s' dosyası imzalanmamış, devam edilsin mi?"
-
-#. TranslatorExplanation: speaking of a file
-#: src/callbacks/keyring.h:187
-#, c-format, boost-format
-msgid "File '%s' from repository '%s' is unsigned, continue?"
-msgstr "'%s' deposundan imzalanmamış '%s' dosyası mevcut , devam edilsin mi?"
-
-#: src/callbacks/keyring.h:210
-#, c-format, boost-format
-msgid "Accepting file '%s' signed with an unknown key '%s'."
-msgstr "Kabul edilen '%s' dosyası bilinmeyen '%s' anahtarı ile imzalı."
-
-#: src/callbacks/keyring.h:214
-#, c-format, boost-format
-msgid ""
-"Accepting file '%s' from repository '%s' signed with an unknown key '%s'."
-msgstr ""
-"%s deposundan kabul edilen %s dosyası bilinmeyen %s anahtarı ile imzalı."
-
-#. translator: %1% is a file name, %2% is a gpg key ID
-#: src/callbacks/keyring.h:223
-#, boost-format
-msgid "File '%1%' is signed with an unknown key '%2%'."
-msgstr "'%1%' dosyası bilinmeyen '%2%' anahtarı ile imzalanmış."
-
-#. translator: %1% is a file name, %2% is a gpg key ID, %3% a repositories name
-#: src/callbacks/keyring.h:226
-#, boost-format
-msgid "File '%1%' from repository '%3%' is signed with an unknown key '%2%'."
-msgstr ""
-"'%3%' deposundaki '%1%' dosyası bilinmeyen bir '%2%' anahtarıyla imzalanmış."
-
-#. translators: the last %s is gpg key ID
-#: src/callbacks/keyring.h:243
-#, c-format, boost-format
-msgid "File '%s' is signed with an unknown key '%s'. Continue?"
-msgstr "%s dosyası bilinmeyen %s anahtarı ile imzalanmış , devam edilsin mi?"
-
-#. translators: the last %s is gpg key ID
-#: src/callbacks/keyring.h:247
-#, c-format, boost-format
-msgid ""
-"File '%s' from repository '%s' is signed with an unknown key '%s'. Continue?"
-msgstr ""
-"%s deposundan %s dosyası bilinmeyen %s anahtarı ile imzalanmış , devam "
-"edilsin mi?"
-
-#: src/callbacks/keyring.h:267
-msgid "Automatically importing the following key:"
-msgstr "Aşağıdaki anahtar otomatik olarak içe aktarılıyor:"
-
-#: src/callbacks/keyring.h:269
-msgid "Automatically trusting the following key:"
-msgstr "Aşağıdaki anahtara otomatik olarak güveniliyor:"
-
-#: src/callbacks/keyring.h:271
-msgid "New repository or package signing key received:"
-msgstr "Depo ya da pakete ait yeni bir imza anahtarı alındı:"
-
-#. translators: this message is shown after showing description of the key
-#: src/callbacks/keyring.h:305
-msgid "Do you want to reject the key, trust temporarily, or trust always?"
-msgstr ""
-"Bu anahtarı reddetmek, anahtara geçici olarak güvenmek ya da anahtara daima "
-"güvenmek seçeneklerinden hangisini istiyorsunuz?"
-
-#. translators: this message is shown after showing description of the key
-#: src/callbacks/keyring.h:308
-msgid "Do you want to reject the key, or trust always?"
-msgstr ""
-"Bu anahtarı reddetmeyi mi yoksa anahtara daima güvenmeyi mi istiyorsunuz?"
-
-#. translators: r/t/a stands for Reject/TrustTemporarily/trustAlways(import)
-#. translate to whatever is appropriate for your language
-#. The anserws must be separated by slash characters '/' and must
-#. correspond to reject/trusttemporarily/trustalways in that order.
-#. The answers should be lower case letters.
-#: src/callbacks/keyring.h:326
-msgid "r/t/a/"
-msgstr "r/g/d/"
-
-#. translators: the same as r/t/a, but without 'a'
-#: src/callbacks/keyring.h:329
-msgid "r/t"
-msgstr "r/g"
-
-#. translators: r/a stands for Reject/trustAlways(import)
-#. translate to whatever is appropriate for your language
-#. The anserws must be separated by slash characters '/' and must
-#. correspond to reject/trusttemporarily/trustalways in that order.
-#. The answers should be lower case letters.
-#: src/callbacks/keyring.h:336
-msgid "r/a/"
-msgstr "r/d/"
-
-#. translators: help text for the 'r' option in the 'r/t/a' prompt
-#: src/callbacks/keyring.h:342
-msgid "Don't trust the key."
-msgstr "Anahtara güvenme."
-
-#. translators: help text for the 't' option in the 'r/t/a' prompt
-#: src/callbacks/keyring.h:346
-msgid "Trust the key temporarily."
-msgstr "Anahtara geçici olarak güven."
-
-#. translators: help text for the 'a' option in the 'r/t/a' prompt
-#: src/callbacks/keyring.h:351
-msgid "Trust the key and import it into trusted keyring."
-msgstr "Anahtara güven ve onu güvenilir anahtarlığa aktar."
-
-#: src/callbacks/keyring.h:389
-#, c-format, boost-format
-msgid "Ignoring failed signature verification for file '%s'!"
-msgstr "'%s' dosyası için imza doğrulama başarısızlığı yok sayılıyor!"
-
-#: src/callbacks/keyring.h:392
-#, c-format, boost-format
-msgid ""
-"Ignoring failed signature verification for file '%s' from repository '%s'!"
-msgstr ""
-"'%s' deposunda bulunan  '%s'! dosyası için imza doğrulama başarısızlığı yok "
-"sayılıyor."
-
-#: src/callbacks/keyring.h:398
-msgid "Double-check this is not caused by some malicious changes in the file!"
-msgstr ""
-"Bunun dosyadaki bazı kötü amaçlı değişikliklerden kaynaklanmadığını iki kez "
-"kontrol edin!"
-
-#. translator: %1% is a file name
-#: src/callbacks/keyring.h:408
-#, boost-format
-msgid "Signature verification failed for file '%1%'."
-msgstr "'%1%' dosyası için imza doğrulaması başarısız oldu."
-
-#. translator: %1% is a file name, %2% a repositories name
-#: src/callbacks/keyring.h:411
-#, boost-format
-msgid "Signature verification failed for file '%1%' from repository '%2%'."
-msgstr "'%2%' deposundaki '%1%' dosyası için imza doğrulaması başarısız oldu."
-
-#: src/callbacks/keyring.h:460
-msgid ""
-"The rpm database seems to contain old V3 version gpg keys which are "
-"meanwhile obsolete and considered insecure:"
-msgstr ""
-"Rpm veritabanı geçersiz olan ve güvensiz olduğu düşünülen eski V3 sürüm gpg "
-"anahtarlarını içeriyor gibi görünüyor:"
-
-#: src/callbacks/keyring.h:467
-#, boost-format
-msgid "To see details about a key call '%1%'."
-msgstr "Bir anahtar ile ilgili ayrıntıları görmek için '%1%'."
-
-#: src/callbacks/keyring.h:471
-#, boost-format
-msgid ""
-"Unless you believe the key in question is still in use, you can remove it "
-"from the rpm database calling '%1%'."
-msgstr ""
-"Söz konusu anahtarın hala kullanımda olduğuna inanmıyorsanız, onu '%1%' ile "
-"arayarak rpm veritabanından kaldırabilirsiniz."
-
-#. translator: %1% is the number of keys, %2% the name of a repository
-#: src/callbacks/keyring.h:490
-#, boost-format
-msgid "Received %1% new package signing key from repository %2%:"
-msgid_plural "Received %1% new package signing keys from repository %2%:"
-msgstr[0] ""
-msgstr[1] ""
-
-#: src/callbacks/keyring.h:494
-msgid ""
-"Those additional keys are usually used to sign packages shipped by the "
-"repository. In order to validate those packages upon download and "
-"installation the new keys will be imported into the rpm database."
-msgstr ""
-
-#: src/callbacks/keyring.h:496
-msgid "New:"
-msgstr ""
-
-#: src/callbacks/keyring.h:502
-msgid ""
-"The repository metadata introducing the new keys have been signed and "
-"validated by the trusted key:"
-msgstr ""
-
-#: src/callbacks/keyring.h:525
-#, c-format, boost-format
-msgid "No digest for file %s."
-msgstr "%s dosyası için özümleme yok."
-
-#: src/callbacks/keyring.h:533
-#, c-format, boost-format
-msgid "Unknown digest %s for file %s."
-msgstr "Bilinmeyen derleme '%s', '%s' içindir."
-
-#: src/callbacks/keyring.h:550
-#, boost-format
-msgid ""
-"Digest verification failed for file '%1%'\n"
-"[%2%]\n"
-"\n"
-"  expected %3%\n"
-"  but got  %4%\n"
-msgstr ""
-"'%1%' dosyası için derleme doğrulama başarısız oldu.\n"
-"[%2%]\n"
-"\n"
-"   beklenen %3%\n"
-"   ama %4% alındı\n"
-
-#: src/callbacks/keyring.h:562
-msgid ""
-"Accepting packages with wrong checksums can lead to a corrupted system and "
-"in extreme cases even to a system compromise."
-msgstr ""
-"Yanlış sağlama toplamlarına sahip paketlerin kabul edilmesi, sistemin "
-"bozulmasına ve aşırı durumlarda bile bir sistem tehlikesine yol açabilir."
-
-#: src/callbacks/keyring.h:570
-#, boost-format
-msgid ""
-"However if you made certain that the file with checksum '%1%..' is secure, "
-"correct\n"
-"and should be used within this operation, enter the first 4 characters of "
-"the checksum\n"
-"to unblock using this file on your own risk. Empty input will discard the "
-"file.\n"
-msgstr ""
-"Ancak, sağlama toplamı '%1% ..' olan dosyanın güvenli, doğru olduğundan ve "
-"bu\n"
-"işlemde kullanılması gerektiğinden emin olduysanız, bu dosyayı kullanarak "
-"engellemeyi \n"
-"kaldırmak için sağlama toplamının ilk 4 karakterini girin. Boş giriş, "
-"dosyayı atacaktır.\n"
-
-#. translators: A prompt option
-#: src/callbacks/keyring.h:577
-msgid "discard"
-msgstr "at"
-
-#. translators: A prompt option help text
-#: src/callbacks/keyring.h:579
-msgid "Unblock using this file on your own risk."
-msgstr "Bu dosyayı kullanarak engeli kaldırın."
-
-#. translators: A prompt option help text
-#: src/callbacks/keyring.h:581
-msgid "Discard the file."
-msgstr "Dosyayı atın."
-
-#. translators: A prompt text
-#: src/callbacks/keyring.h:585
-msgid "Unblock or discard?"
-msgstr "Engellemeyi kaldır veya at?"
-
-#: src/callbacks/locks.h:27
-msgid ""
-"The following query locks the same objects as the one you want to remove:"
-msgstr "Aşağıdaki sorgu silmek istediğiniz nesnelerden aynılarını kitler"
-
-#: src/callbacks/locks.h:30
-msgid "The following query locks some of the objects you want to unlock:"
-msgstr "Aşağıdaki sorgu istediğiniz açık olan nesnelerin kitlenmesini sağlar"
-
-#: src/callbacks/locks.h:35 src/callbacks/locks.h:50
-msgid "Do you want to remove this lock?"
-msgstr "Bu kilidi silmek istiyor musunuz?"
-
-#: src/callbacks/locks.h:45
-msgid "The following query does not lock anything:"
-msgstr "Aşağıdaki sorgu hiç bir şeyi kilitlemez."
-
-#: src/callbacks/repo.h:49
-msgid "Retrieving delta"
-msgstr "Delta alınıyor."
-
-#. translators: this text is a progress display label e.g. "Applying delta foo [42%]"
-#: src/callbacks/repo.h:74
-msgid "Applying delta"
-msgstr "Delta uygulanıyor."
-
-#. TranslatorExplanation %s is package size like "5.6 M"
-#: src/callbacks/repo.h:103
-#, c-format, boost-format
-msgid "(%s unpacked)"
-msgstr "(%s açılmamış)"
-
-#: src/callbacks/repo.h:112
-#, boost-format
-msgid "In cache %1%"
-msgstr "Önbellekte %1%"
-
-# clients/online_update_load.ycp:380
-#: src/callbacks/repo.h:128
-#, c-format, boost-format
-msgid "Retrieving %s %s-%s.%s"
-msgstr "%s %s-%s.%s alınıyor"
-
-#: src/callbacks/repo.h:217
-msgid "Signature verification failed"
-msgstr "İmza doğrulaması başarısız oldu"
-
-#: src/callbacks/repo.h:237
-msgid "Accepting package despite the error."
-msgstr "Paket hataya rağmen kabul ediliyor."
-
-#. TranslatorExplanation speaking of a script - "Running: script file name (package name, script dir)"
-#: src/callbacks/rpm.h:184
-#, c-format, boost-format
-msgid "Running: %s  (%s, %s)"
-msgstr "%s Çalışıyor(%s,%s)"
-
-#: src/callbacks/rpm.h:267
-#, c-format, boost-format
-msgid "Removal of %s failed:"
-msgstr "%s kaldırma başarısz:"
-
-#. translators: This text is a progress display label e.g. "Removing packagename-x.x.x [42%]"
-#: src/callbacks/rpm.h:307
-#, c-format, boost-format
-msgid "Removing %s"
-msgstr "%s kaldırılıyor"
-
-#: src/callbacks/rpm.h:344
-#, c-format, boost-format
-msgid "Installation of %s failed:"
-msgstr "%s kurulumu başarısız oldu:"
-
-#. TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
-#: src/callbacks/rpm.h:384
-#, c-format, boost-format
-msgid "Installing: %s"
-msgstr "Yükleniyor: %s"
-
-#. translators: A progressbar label
-#: src/callbacks/rpm.h:403
-msgid "Checking for file conflicts:"
-msgstr "Dosya çakışmaları için kontrol ediliyor:"
-
-#. TranslatorExplanation %1%(number of packages); detailed list follows
-#: src/callbacks/rpm.h:454
-#, boost-format
-msgid ""
-"%1% package had to be excluded from file conflicts check because it is not "
-"yet download."
-msgid_plural ""
-"%1% packages had to be excluded from file conflicts check because they are "
-"not yet downloaded."
-msgstr[0] ""
-"%1% paketi, henüz indirilmediği için dosya çakışmaları kontrolünden hariç "
-"tutulmak zorunda kaldı."
-msgstr[1] ""
-"%1% paketi, henüz indirilmediği için dosya çakışmaları kontrolünden hariç "
-"tutulmak zorunda kaldı."
-
-#. TranslatorExplanation %1%(commandline option)
-#: src/callbacks/rpm.h:460
-#, boost-format
-msgid ""
-"Checking for file conflicts requires not installed packages to be downloaded "
-"in advance in order to access their file lists. See option '%1%' in the "
-"zypper manual page for details."
-msgstr ""
-"Dosya çakışmalarını kontrol etmek, dosya listelerine erişmek için önceden "
-"indirilmiş paketlerin yüklenmesini gerektirmez. Ayrıntılar için zypper "
-"kılavuz sayfasındaki '%1%' seçeneğine bakın."
-
-#. TranslatorExplanation %1%(number of conflicts); detailed list follows
-#: src/callbacks/rpm.h:470
-#, boost-format
-msgid "Detected %1% file conflict:"
-msgid_plural "Detected %1% file conflicts:"
-msgstr[0] "%1% dosya çakışması tespit edildi:"
-msgstr[1] "%1% dosya çakışması tespit edildi:"
-
-#: src/callbacks/rpm.h:478
-msgid "Conflicting files will be replaced."
-msgstr "Çakışan dosyalar değiştirilecek."
-
-#. TranslatorExplanation Problem description before asking whether to "Continue? [yes/no] (no):"
-#: src/callbacks/rpm.h:484
-msgid ""
-"File conflicts happen when two packages attempt to install files with the "
-"same name but different contents. If you continue, conflicting files will be "
-"replaced losing the previous content."
-msgstr ""
-"Dosya çakışmaları, iki paket aynı isme ancak farklı içeriklere sahip "
-"dosyaları yüklemeye çalıştığında gerçekleşir. Devam ederseniz çakışan "
-"dosyalar önceki içerikler kaybedilerek değiştirilecek."
-
-#. translator: %s is an other command: "This is an alias for 'zypper info -t patch'."
-#: src/commands/commandhelpformatter.h:94
-#, c-format, boost-format
-msgid "This is an alias for '%s'."
-msgstr "Bu, '%s' komutunun takma adıdır."
-
-#: src/commands/commandhelpformatter.h:107
-msgid "Examples:"
-msgstr "Örnekler:"
-
-#: src/commands/commandhelpformatter.h:110
-msgid "Arguments:"
-msgstr "Argümanlar:"
-
-#: src/commands/commandhelpformatter.h:123 src/utils/flags/zyppflags.cc:627
-msgid "Command options:"
-msgstr "Komut seçenekleri:"
-
-#: src/commands/commandhelpformatter.h:126
-msgid "Solver options:"
-msgstr "Çözücü seçenekleri:"
-
-#: src/commands/commandhelpformatter.h:129
-msgid "Expert options:"
-msgstr "Uzman seçenekler:"
-
-#: src/commands/commandhelpformatter.h:132
-msgid "This command has no additional options."
-msgstr "Bu komutun ek seçenekleri yok."
-
-#: src/commands/commandhelpformatter.h:135
-msgid "Legacy options:"
-msgstr "Eski seçenekler:"
-
-#. translator: '-r             The same as -f.
-#: src/commands/commandhelpformatter.h:139
-#, boost-format
-msgid "The same as %1%."
-msgstr "%1% ile aynı."
-
-#: src/commands/commandhelpformatter.h:187
-msgid "Usage:"
-msgstr "Kullanım:"
-
-#: src/commands/commandhelpformatter.h:189
-msgid "Global Options:"
-msgstr "Evrensel Seçenekler:"
-
-#: src/commands/commandhelpformatter.h:191
-msgid "Commands:"
-msgstr "Komutlar:"
-
-#. translators: --details
-#: src/commands/commonflags.h:23 src/commands/inrverify.cc:35
-msgid "Show the detailed installation summary."
-msgstr "Ayrıntılı kurulum özetini göster."
-
-#: src/commands/commonflags.h:30
-#, boost-format
-msgid "Type of package (%1%)."
-msgstr "Paketin türü (%1%)."
-
-#. translators: --best-effort
-#: src/commands/commonflags.h:38
-msgid ""
-"Do a 'best effort' approach to update. Updates to a lower than the latest "
-"version are also acceptable."
-msgstr ""
-"Güncellemek için \"en iyi çaba\" yaklaşımını uygulayın. En son sürüme göre "
-"daha düşük bir sürümde yapılan güncellemeler de kabul edilebilir."
-
-#: src/commands/commonflags.h:45
-msgid "Consider only patches which affect the package management itself."
-msgstr "Yalnızca paket yönetiminin kendisini etkileyen yamaları dikkate alın."
-
-#: src/output/Out.h:26 src/repos.cc:125 src/repos.cc:153
-msgid "Yes"
-msgstr "Evet"
-
-#: src/output/Out.h:26 src/locales.cc:72 src/repos.cc:131 src/repos.cc:159
-msgid "No"
-msgstr "Hayır"
-
-#. translator: usually followed by a ' ' and some explanatory text
-#: src/output/Out.h:37
-msgid "Note:"
-msgstr "Not:"
-
-#. translator: usually followed by a ' ' and some explanatory text
-#: src/output/Out.h:39
-msgid "Warning:"
-msgstr "Uyarı:"
-
-# include/ui/common_messages.ycp:95
-#. translator: usually followed by a ' ' and some explanatory text
-#: src/output/Out.h:41
-msgid "Error:"
-msgstr "Hata:"
-
-#: src/output/Out.h:43
-msgid "Continue?"
-msgstr "Devam edilsin mi?"
-
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:23
-msgid "ALIAS"
-msgstr "ALIAS"
-
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:25
-msgid "ALIAS|#|URI"
-msgstr "ALIAS|#|URI"
-
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:27
-msgid "CATEGORY"
-msgstr "KATEGORİ"
-
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:29
-msgid "DIR"
-msgstr "DIR"
-
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:31
-msgid "FILE"
-msgstr "DOSYA"
-
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:33
-msgid "FILE.repo"
-msgstr "DOSYA.repo"
-
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:35
-msgid "FORMAT"
-msgstr "FORMAT"
-
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:37
-msgid "INTEGER"
-msgstr "TAMSAYI"
-
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:39
-msgid "PATH"
-msgstr "PATH"
-
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:41
-msgid "SEVERITY"
-msgstr "SEVERTY"
-
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:43
-msgid "STRING"
-msgstr "STRING"
-
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:45
-msgid "TAG"
-msgstr "ETİKET"
-
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:47
-msgid "TYPE"
-msgstr "TYPE"
-
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#. translators: property name; short; used like "Name: value"
-#: src/utils/flags/zyppflags.h:49 src/commands/repos/list.cc:42
-#: src/commands/repos/list.cc:268 src/commands/services/list.cc:116
-#: src/repos.cc:1254
-msgid "URI"
-msgstr "URI"
-
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:51
-msgid "YYYY-MM-DD"
-msgstr "YYYY-AA-GG"
-
-#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/utils/flags/zyppflags.h:53
-msgid "MODE"
-msgstr "MOD"
-
-# clients/rc_config_step1.ycp:253
-#. TranslatorExplanation These are reasons for various failures.
-#: src/utils/prompt.h:185
-msgid "Not found"
-msgstr "Bulunamadı"
-
-# include/ui/common_messages.ycp:95
-#: src/utils/prompt.h:185
-msgid "I/O error"
-msgstr "G/Ç hatası"
-
-# clients/support_question.ycp:27
-#: src/utils/prompt.h:185
-msgid "Invalid object"
-msgstr "Hatalı nesne"
-
-# include/ui/common_messages.ycp:95
-#: src/utils/prompt.h:192
-msgid "Error"
-msgstr "Hata"
 
 #: src/Command.cc:93
 msgid "Invalid command"
@@ -799,6 +64,55 @@ msgstr "Alt Komutlar:"
 #, c-format, boost-format
 msgid "Unknown command '%s'"
 msgstr "Bilinmeyen komut '%s'"
+
+#: src/CommitSummary.cc:90
+msgid "Installation has completed with error."
+msgstr "Kurulum hatayla tamamlandı."
+
+#: src/CommitSummary.cc:92
+#, boost-format
+msgid "You may run '%1%' to repair any dependency problems."
+msgstr ""
+"Herhangi bir bağımlılık sorununu çözmek için '%1%' komutunu "
+"çalıştırabilirsiniz."
+
+#: src/CommitSummary.cc:125
+#, c-format, boost-format
+msgid "The following package failed to install:"
+msgid_plural "The following %d packages failed to install:"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/CommitSummary.cc:140
+#, c-format, boost-format
+msgid "The following package installation was skipped:"
+msgid_plural "The following %d package installations were skipped:"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/CommitSummary.cc:155
+#, c-format, boost-format
+msgid "The following package failed to uninstall:"
+msgid_plural "The following %d packages failed to uninstall:"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/CommitSummary.cc:170
+#, c-format, boost-format
+msgid "The following package removal was skipped:"
+msgid_plural "The following %d package removal were skipped:"
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: Appended when clipping a long enumeration:
+#. "ConsoleKit-devel ConsoleKit-doc ... and 20828 more items."
+#: src/CommitSummary.cc:231 src/CommitSummary.cc:277 src/Summary.cc:491
+#: src/Summary.cc:567
+#, boost-format
+msgid "... and %1% more item."
+msgid_plural "... and %1% more items."
+msgstr[0] "... ve %1% daha fazla öğe."
+msgstr[1] "... ve %1% daha fazla öğe."
 
 #: src/Config.cc:53
 #, c-format, boost-format
@@ -1346,6 +660,16 @@ msgstr "Bunu mu demek istediniz: %1%?"
 msgid "Ignoring option %s when updating the update stack first."
 msgstr "Önce güncelleme yığını güncellenirken '%s' seçeneği yok sayılıyor."
 
+#: src/SolverRequester.h:52
+#, boost-format
+msgid "Suspicious category filter value '%1%'."
+msgstr "Şüpheli kategori filtre değeri  '%1%'."
+
+#: src/SolverRequester.h:60
+#, boost-format
+msgid "Suspicious severity filter value '%1%'."
+msgstr "Şüpheli önem filtre değeri '%1%'."
+
 #. translator: '%1%' is a products name
 #. '%2%' is a command to call (like 'zypper dup')
 #. Both may contain whitespace and should be enclosed by quotes!
@@ -1353,15 +677,6 @@ msgstr "Önce güncelleme yığını güncellenirken '%s' seçeneği yok sayıl�
 #, boost-format
 msgid "Product '%1%' requires to be updated by calling '%2%'!"
 msgstr "'%1%' ürünü '%2%' komutu ile güncellenmeyi gerektiriyor!"
-
-#. translators: Appended when clipping a long enumeration:
-#. "ConsoleKit-devel ConsoleKit-doc ... and 20828 more items."
-#: src/Summary.cc:491 src/Summary.cc:567
-#, boost-format
-msgid "... and %1% more item."
-msgid_plural "... and %1% more items."
-msgstr[0] "... ve %1% daha fazla öğe."
-msgstr[1] "... ve %1% daha fazla öğe."
 
 #: src/Summary.cc:585
 #, c-format, boost-format
@@ -2012,7 +1327,7 @@ msgstr[0] "kaynak paket kurulacak"
 msgstr[1] "kaynak paketler kurulacak"
 
 #. patch command (auto)restricted to update stack patches
-#: src/Summary.cc:1604
+#: src/Summary.cc:1609
 msgid ""
 "Package manager restart required. (Run this command once again after the "
 "update stack got updated)"
@@ -2020,7 +1335,7 @@ msgstr ""
 "Paket yöneticisinin yeniden başlatılması gerekiyor. (Güncelleme yığını "
 "güncellendikten sonra bu komutu bir kez daha çalıştırın)"
 
-#: src/Summary.cc:1607
+#: src/Summary.cc:1612
 msgid "System reboot required."
 msgstr "Sistemin yeniden başlatılması gerekiyor."
 
@@ -2032,7 +1347,7 @@ msgstr "Sistemin yeniden başlatılması gerekiyor."
 #. Consider to cancel:
 #. Product 'opennSUSE Tumbleweed' requires to be updated by calling 'zypper dup'!
 #. Continue? [y/n/...? shows all options] (y):
-#: src/Summary.cc:1624
+#: src/Summary.cc:1629
 msgid "Consider to cancel:"
 msgstr "İptal etmeyi göz önünde bulundurun:"
 
@@ -2107,6 +1422,406 @@ msgstr "%s seçeneğinin burada etkisi yok, gözardı ediliyor."
 msgid "Non-option program arguments: "
 msgstr "Seçenek olmayan program argümanları: "
 
+#: src/callbacks/keyring.h:32
+msgid ""
+"A GPG pubkey is clearly identified by it's fingerprint. Do not rely the keys "
+"name. If you are not sure whether the presented key is authentic, ask the "
+"repository provider or check his web site. Many provider maintain a web page "
+"showing the fingerprints of the GPG keys they are using."
+msgstr ""
+
+#: src/callbacks/keyring.h:37
+msgid ""
+"Signing data enables the recipient to verify that no modifications occurred "
+"after the data were signed. Accepting data with no, wrong or unknown "
+"signature can lead to a corrupted system and in extreme cases even to a "
+"system compromise."
+msgstr ""
+"Verileri imzalamak alıcının veriler imzalandıktan sonra veriler üzerinde "
+"herhangi bir değişiklik yapılmadığını doğrulamasını sağlar. İmzalanmamış, "
+"yanlış imzalanmış veya bilinmeyen kaynak tarafından imzalanmış veriler "
+"sistemin bozulmasına; hatta bazı uç durumlarda sistemin kötü niyetli "
+"kişilerce ele geçirilmesine neden olabilir."
+
+#. translator: %1% is a file name
+#: src/callbacks/keyring.h:45
+#, boost-format
+msgid ""
+"File '%1%' is the repositories master index file. It ensures the integrity "
+"of the whole repo."
+msgstr ""
+"%1% dosyası depoların ana dizin dosyasıdır. Deponun tamamının bütünlüğünü "
+"sağlar."
+
+#: src/callbacks/keyring.h:51
+msgid ""
+"We can't verify that no one meddled with this file, so it might not be "
+"trustworthy anymore! You should not continue unless you know it's safe."
+msgstr ""
+"Bu dosyanın daha önce elden geçirilip geçirilmediğini doğrulayamıyoruz, bu "
+"yüzden artık güvenilir olup olmadığından emin değiliz. Eğer dosyanın güvenli "
+"olduğundan kesinlikle emin değilseniz, devam etmeyin."
+
+#: src/callbacks/keyring.h:56
+msgid ""
+"This file was modified after it has been signed. This may have been a "
+"malicious change, so it might not be trustworthy anymore! You should not "
+"continue unless you know it's safe."
+msgstr ""
+"Bu dosya, imzalandıktan sonra değiştirildi. Bu kötü amaçlı bir değişiklik "
+"olabilir, bu yüzden artık güvenilir olmayabilir! Güvenli olduğundan emin "
+"değilseniz devam etmemelisiniz."
+
+#: src/callbacks/keyring.h:85
+msgid "Repository:"
+msgstr "Depo:"
+
+#: src/callbacks/keyring.h:87
+msgid "Key Fingerprint:"
+msgstr "Anahtar Parmak İzi:"
+
+#: src/callbacks/keyring.h:88
+msgid "Key Name:"
+msgstr "Anahtar Adı:"
+
+#: src/callbacks/keyring.h:89
+msgid "Key Algorithm:"
+msgstr ""
+
+#: src/callbacks/keyring.h:90
+msgid "Key Created:"
+msgstr "Anahtar Oluşturma Tarihi:"
+
+#: src/callbacks/keyring.h:91
+msgid "Key Expires:"
+msgstr "Anahtar Son Geçerlilik Tarihi:"
+
+#: src/callbacks/keyring.h:93
+msgid "Subkey:"
+msgstr "Alt Anahtar:"
+
+#: src/callbacks/keyring.h:94
+msgid "Rpm Name:"
+msgstr "Rpm Adı:"
+
+#: src/callbacks/keyring.h:120
+#, boost-format
+msgid "The gpg key signing file '%1%' has expired."
+msgstr "'%1%' dosyasını imzalayan gpg anahtarının geçerlilik süresi sona erdi."
+
+#: src/callbacks/keyring.h:126
+#, boost-format
+msgid "The gpg key signing file '%1%' will expire in %2% day."
+msgid_plural "The gpg key signing file '%1%' will expire in %2% days."
+msgstr[0] ""
+"'%1%' dosyasını imzalayan gpg anahtarının geçerlilik süresi %2% gün içinde "
+"sona erecek."
+msgstr[1] ""
+"'%1%' dosyasını imzalayan gpg anahtarının geçerlilik süresi %2% gün içinde "
+"sona erecek."
+
+#: src/callbacks/keyring.h:149
+#, c-format, boost-format
+msgid "Accepting an unsigned file '%s'."
+msgstr "İmzalanmamış bir '%s' dosyası kabul ediliyor."
+
+#: src/callbacks/keyring.h:153
+#, c-format, boost-format
+msgid "Accepting an unsigned file '%s' from repository '%s'."
+msgstr "İmzalanmamış bir '%s' dosyası '%s' deposundan kabul ediliyor."
+
+#. translator: %1% is a file name
+#: src/callbacks/keyring.h:163
+#, boost-format
+msgid "File '%1%' is unsigned."
+msgstr "'%1%' dosyası imzalanmamış."
+
+#. translator: %1% is a file name, %2% a repositories name
+#: src/callbacks/keyring.h:166
+#, boost-format
+msgid "File '%1%' from repository '%2%' is unsigned."
+msgstr "'%2%' deposundaki '%1%' dosyası imzalanmamış."
+
+#. TranslatorExplanation: speaking of a file
+#: src/callbacks/keyring.h:183
+#, c-format, boost-format
+msgid "File '%s' is unsigned, continue?"
+msgstr "'%s' dosyası imzalanmamış, devam edilsin mi?"
+
+#. TranslatorExplanation: speaking of a file
+#: src/callbacks/keyring.h:187
+#, c-format, boost-format
+msgid "File '%s' from repository '%s' is unsigned, continue?"
+msgstr "'%s' deposundan imzalanmamış '%s' dosyası mevcut , devam edilsin mi?"
+
+#: src/callbacks/keyring.h:210
+#, c-format, boost-format
+msgid "Accepting file '%s' signed with an unknown key '%s'."
+msgstr "Kabul edilen '%s' dosyası bilinmeyen '%s' anahtarı ile imzalı."
+
+#: src/callbacks/keyring.h:214
+#, c-format, boost-format
+msgid ""
+"Accepting file '%s' from repository '%s' signed with an unknown key '%s'."
+msgstr ""
+"%s deposundan kabul edilen %s dosyası bilinmeyen %s anahtarı ile imzalı."
+
+#. translator: %1% is a file name, %2% is a gpg key ID
+#: src/callbacks/keyring.h:223
+#, boost-format
+msgid "File '%1%' is signed with an unknown key '%2%'."
+msgstr "'%1%' dosyası bilinmeyen '%2%' anahtarı ile imzalanmış."
+
+#. translator: %1% is a file name, %2% is a gpg key ID, %3% a repositories name
+#: src/callbacks/keyring.h:226
+#, boost-format
+msgid "File '%1%' from repository '%3%' is signed with an unknown key '%2%'."
+msgstr ""
+"'%3%' deposundaki '%1%' dosyası bilinmeyen bir '%2%' anahtarıyla imzalanmış."
+
+#. translators: the last %s is gpg key ID
+#: src/callbacks/keyring.h:243
+#, c-format, boost-format
+msgid "File '%s' is signed with an unknown key '%s'. Continue?"
+msgstr "%s dosyası bilinmeyen %s anahtarı ile imzalanmış , devam edilsin mi?"
+
+#. translators: the last %s is gpg key ID
+#: src/callbacks/keyring.h:247
+#, c-format, boost-format
+msgid ""
+"File '%s' from repository '%s' is signed with an unknown key '%s'. Continue?"
+msgstr ""
+"%s deposundan %s dosyası bilinmeyen %s anahtarı ile imzalanmış , devam "
+"edilsin mi?"
+
+#: src/callbacks/keyring.h:267
+msgid "Automatically importing the following key:"
+msgstr "Aşağıdaki anahtar otomatik olarak içe aktarılıyor:"
+
+#: src/callbacks/keyring.h:269
+msgid "Automatically trusting the following key:"
+msgstr "Aşağıdaki anahtara otomatik olarak güveniliyor:"
+
+#: src/callbacks/keyring.h:271
+msgid "New repository or package signing key received:"
+msgstr "Depo ya da pakete ait yeni bir imza anahtarı alındı:"
+
+#. translators: this message is shown after showing description of the key
+#: src/callbacks/keyring.h:305
+msgid "Do you want to reject the key, trust temporarily, or trust always?"
+msgstr ""
+"Bu anahtarı reddetmek, anahtara geçici olarak güvenmek ya da anahtara daima "
+"güvenmek seçeneklerinden hangisini istiyorsunuz?"
+
+#. translators: this message is shown after showing description of the key
+#: src/callbacks/keyring.h:308
+msgid "Do you want to reject the key, or trust always?"
+msgstr ""
+"Bu anahtarı reddetmeyi mi yoksa anahtara daima güvenmeyi mi istiyorsunuz?"
+
+#. translators: r/t/a stands for Reject/TrustTemporarily/trustAlways(import)
+#. translate to whatever is appropriate for your language
+#. The anserws must be separated by slash characters '/' and must
+#. correspond to reject/trusttemporarily/trustalways in that order.
+#. The answers should be lower case letters.
+#: src/callbacks/keyring.h:326
+msgid "r/t/a/"
+msgstr "r/g/d/"
+
+#. translators: the same as r/t/a, but without 'a'
+#: src/callbacks/keyring.h:329
+msgid "r/t"
+msgstr "r/g"
+
+#. translators: r/a stands for Reject/trustAlways(import)
+#. translate to whatever is appropriate for your language
+#. The anserws must be separated by slash characters '/' and must
+#. correspond to reject/trusttemporarily/trustalways in that order.
+#. The answers should be lower case letters.
+#: src/callbacks/keyring.h:336
+msgid "r/a/"
+msgstr "r/d/"
+
+#. translators: help text for the 'r' option in the 'r/t/a' prompt
+#: src/callbacks/keyring.h:342
+msgid "Don't trust the key."
+msgstr "Anahtara güvenme."
+
+#. translators: help text for the 't' option in the 'r/t/a' prompt
+#: src/callbacks/keyring.h:346
+msgid "Trust the key temporarily."
+msgstr "Anahtara geçici olarak güven."
+
+#. translators: help text for the 'a' option in the 'r/t/a' prompt
+#: src/callbacks/keyring.h:351
+msgid "Trust the key and import it into trusted keyring."
+msgstr "Anahtara güven ve onu güvenilir anahtarlığa aktar."
+
+#: src/callbacks/keyring.h:389
+#, c-format, boost-format
+msgid "Ignoring failed signature verification for file '%s'!"
+msgstr "'%s' dosyası için imza doğrulama başarısızlığı yok sayılıyor!"
+
+#: src/callbacks/keyring.h:392
+#, c-format, boost-format
+msgid ""
+"Ignoring failed signature verification for file '%s' from repository '%s'!"
+msgstr ""
+"'%s' deposunda bulunan  '%s'! dosyası için imza doğrulama başarısızlığı yok "
+"sayılıyor."
+
+#: src/callbacks/keyring.h:398
+msgid "Double-check this is not caused by some malicious changes in the file!"
+msgstr ""
+"Bunun dosyadaki bazı kötü amaçlı değişikliklerden kaynaklanmadığını iki kez "
+"kontrol edin!"
+
+#. translator: %1% is a file name
+#: src/callbacks/keyring.h:408
+#, boost-format
+msgid "Signature verification failed for file '%1%'."
+msgstr "'%1%' dosyası için imza doğrulaması başarısız oldu."
+
+#. translator: %1% is a file name, %2% a repositories name
+#: src/callbacks/keyring.h:411
+#, boost-format
+msgid "Signature verification failed for file '%1%' from repository '%2%'."
+msgstr "'%2%' deposundaki '%1%' dosyası için imza doğrulaması başarısız oldu."
+
+#: src/callbacks/keyring.h:460
+msgid ""
+"The rpm database seems to contain old V3 version gpg keys which are "
+"meanwhile obsolete and considered insecure:"
+msgstr ""
+"Rpm veritabanı geçersiz olan ve güvensiz olduğu düşünülen eski V3 sürüm gpg "
+"anahtarlarını içeriyor gibi görünüyor:"
+
+#: src/callbacks/keyring.h:467
+#, boost-format
+msgid "To see details about a key call '%1%'."
+msgstr "Bir anahtar ile ilgili ayrıntıları görmek için '%1%'."
+
+#: src/callbacks/keyring.h:471
+#, boost-format
+msgid ""
+"Unless you believe the key in question is still in use, you can remove it "
+"from the rpm database calling '%1%'."
+msgstr ""
+"Söz konusu anahtarın hala kullanımda olduğuna inanmıyorsanız, onu '%1%' ile "
+"arayarak rpm veritabanından kaldırabilirsiniz."
+
+#. translator: %1% is the number of keys, %2% the name of a repository
+#: src/callbacks/keyring.h:490
+#, boost-format
+msgid "Received %1% new package signing key from repository %2%:"
+msgid_plural "Received %1% new package signing keys from repository %2%:"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/callbacks/keyring.h:494
+msgid ""
+"Those additional keys are usually used to sign packages shipped by the "
+"repository. In order to validate those packages upon download and "
+"installation the new keys will be imported into the rpm database."
+msgstr ""
+
+#: src/callbacks/keyring.h:496
+msgid "New:"
+msgstr ""
+
+#: src/callbacks/keyring.h:502
+msgid ""
+"The repository metadata introducing the new keys have been signed and "
+"validated by the trusted key:"
+msgstr ""
+
+#: src/callbacks/keyring.h:525
+#, c-format, boost-format
+msgid "No digest for file %s."
+msgstr "%s dosyası için özümleme yok."
+
+#: src/callbacks/keyring.h:533
+#, c-format, boost-format
+msgid "Unknown digest %s for file %s."
+msgstr "Bilinmeyen derleme '%s', '%s' içindir."
+
+#: src/callbacks/keyring.h:550
+#, boost-format
+msgid ""
+"Digest verification failed for file '%1%'\n"
+"[%2%]\n"
+"\n"
+"  expected %3%\n"
+"  but got  %4%\n"
+msgstr ""
+"'%1%' dosyası için derleme doğrulama başarısız oldu.\n"
+"[%2%]\n"
+"\n"
+"   beklenen %3%\n"
+"   ama %4% alındı\n"
+
+#: src/callbacks/keyring.h:562
+msgid ""
+"Accepting packages with wrong checksums can lead to a corrupted system and "
+"in extreme cases even to a system compromise."
+msgstr ""
+"Yanlış sağlama toplamlarına sahip paketlerin kabul edilmesi, sistemin "
+"bozulmasına ve aşırı durumlarda bile bir sistem tehlikesine yol açabilir."
+
+#: src/callbacks/keyring.h:570
+#, boost-format
+msgid ""
+"However if you made certain that the file with checksum '%1%..' is secure, "
+"correct\n"
+"and should be used within this operation, enter the first 4 characters of "
+"the checksum\n"
+"to unblock using this file on your own risk. Empty input will discard the "
+"file.\n"
+msgstr ""
+"Ancak, sağlama toplamı '%1% ..' olan dosyanın güvenli, doğru olduğundan ve "
+"bu\n"
+"işlemde kullanılması gerektiğinden emin olduysanız, bu dosyayı kullanarak "
+"engellemeyi \n"
+"kaldırmak için sağlama toplamının ilk 4 karakterini girin. Boş giriş, "
+"dosyayı atacaktır.\n"
+
+#. translators: A prompt option
+#: src/callbacks/keyring.h:577
+msgid "discard"
+msgstr "at"
+
+#. translators: A prompt option help text
+#: src/callbacks/keyring.h:579
+msgid "Unblock using this file on your own risk."
+msgstr "Bu dosyayı kullanarak engeli kaldırın."
+
+#. translators: A prompt option help text
+#: src/callbacks/keyring.h:581
+msgid "Discard the file."
+msgstr "Dosyayı atın."
+
+#. translators: A prompt text
+#: src/callbacks/keyring.h:585
+msgid "Unblock or discard?"
+msgstr "Engellemeyi kaldır veya at?"
+
+#: src/callbacks/locks.h:27
+msgid ""
+"The following query locks the same objects as the one you want to remove:"
+msgstr "Aşağıdaki sorgu silmek istediğiniz nesnelerden aynılarını kitler"
+
+#: src/callbacks/locks.h:30
+msgid "The following query locks some of the objects you want to unlock:"
+msgstr "Aşağıdaki sorgu istediğiniz açık olan nesnelerin kitlenmesini sağlar"
+
+#: src/callbacks/locks.h:35 src/callbacks/locks.h:50
+msgid "Do you want to remove this lock?"
+msgstr "Bu kilidi silmek istiyor musunuz?"
+
+#: src/callbacks/locks.h:45
+msgid "The following query does not lock anything:"
+msgstr "Aşağıdaki sorgu hiç bir şeyi kilitlemez."
+
 #. help text for the "Abort, retry, ignore?" prompt for media errors
 #: src/callbacks/media.cc:27
 msgid "Skip retrieval of the file and abort current operation."
@@ -2150,7 +1865,7 @@ msgstr "(Nodeps ile)"
 
 #. translators: this is a prompt text
 #: src/callbacks/media.cc:81 src/callbacks/media.cc:173
-#: src/callbacks/media.cc:253 src/utils/prompt.cc:219 src/utils/prompt.cc:306
+#: src/callbacks/media.cc:253 src/utils/prompt.cc:226 src/utils/prompt.cc:313
 msgid "Abort, retry, ignore?"
 msgstr "Durdurma,Yeniden denemek, Yok saymak?"
 
@@ -2239,6 +1954,217 @@ msgstr "Kullanıcı Adı"
 #: src/callbacks/media.cc:328
 msgid "Password"
 msgstr "Şifre"
+
+#: src/callbacks/repo.h:49
+msgid "Retrieving delta"
+msgstr "Delta alınıyor."
+
+#. translators: this text is a progress display label e.g. "Applying delta foo [42%]"
+#: src/callbacks/repo.h:74
+msgid "Applying delta"
+msgstr "Delta uygulanıyor."
+
+#. TranslatorExplanation %s is package size like "5.6 M"
+#: src/callbacks/repo.h:103
+#, c-format, boost-format
+msgid "(%s unpacked)"
+msgstr "(%s açılmamış)"
+
+#: src/callbacks/repo.h:112
+#, boost-format
+msgid "In cache %1%"
+msgstr "Önbellekte %1%"
+
+# clients/online_update_load.ycp:380
+#: src/callbacks/repo.h:128
+#, c-format, boost-format
+msgid "Retrieving %s %s-%s.%s"
+msgstr "%s %s-%s.%s alınıyor"
+
+#: src/callbacks/repo.h:217
+msgid "Signature verification failed"
+msgstr "İmza doğrulaması başarısız oldu"
+
+#: src/callbacks/repo.h:237
+msgid "Accepting package despite the error."
+msgstr "Paket hataya rağmen kabul ediliyor."
+
+#. TranslatorExplanation speaking of a script - "Running: script file name (package name, script dir)"
+#: src/callbacks/rpm.h:189
+#, c-format, boost-format
+msgid "Running: %s  (%s, %s)"
+msgstr "%s Çalışıyor(%s,%s)"
+
+#: src/callbacks/rpm.h:272
+#, c-format, boost-format
+msgid "Removal of %s failed:"
+msgstr "%s kaldırma başarısz:"
+
+#. translators: This text is a progress display label e.g. "Removing packagename-x.x.x [42%]"
+#: src/callbacks/rpm.h:312 src/callbacks/rpm.h:574
+#, c-format, boost-format
+msgid "Removing %s"
+msgstr "%s kaldırılıyor"
+
+#: src/callbacks/rpm.h:349
+#, c-format, boost-format
+msgid "Installation of %s failed:"
+msgstr "%s kurulumu başarısız oldu:"
+
+#. TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
+#: src/callbacks/rpm.h:389 src/callbacks/rpm.h:640
+#, c-format, boost-format
+msgid "Installing: %s"
+msgstr "Yükleniyor: %s"
+
+#. translators: A progressbar label
+#: src/callbacks/rpm.h:408
+msgid "Checking for file conflicts:"
+msgstr "Dosya çakışmaları için kontrol ediliyor:"
+
+#. TranslatorExplanation %1%(number of packages); detailed list follows
+#: src/callbacks/rpm.h:459
+#, boost-format
+msgid ""
+"%1% package had to be excluded from file conflicts check because it is not "
+"yet download."
+msgid_plural ""
+"%1% packages had to be excluded from file conflicts check because they are "
+"not yet downloaded."
+msgstr[0] ""
+"%1% paketi, henüz indirilmediği için dosya çakışmaları kontrolünden hariç "
+"tutulmak zorunda kaldı."
+msgstr[1] ""
+"%1% paketi, henüz indirilmediği için dosya çakışmaları kontrolünden hariç "
+"tutulmak zorunda kaldı."
+
+#. TranslatorExplanation %1%(commandline option)
+#: src/callbacks/rpm.h:465
+#, boost-format
+msgid ""
+"Checking for file conflicts requires not installed packages to be downloaded "
+"in advance in order to access their file lists. See option '%1%' in the "
+"zypper manual page for details."
+msgstr ""
+"Dosya çakışmalarını kontrol etmek, dosya listelerine erişmek için önceden "
+"indirilmiş paketlerin yüklenmesini gerektirmez. Ayrıntılar için zypper "
+"kılavuz sayfasındaki '%1%' seçeneğine bakın."
+
+#. TranslatorExplanation %1%(number of conflicts); detailed list follows
+#: src/callbacks/rpm.h:475
+#, boost-format
+msgid "Detected %1% file conflict:"
+msgid_plural "Detected %1% file conflicts:"
+msgstr[0] "%1% dosya çakışması tespit edildi:"
+msgstr[1] "%1% dosya çakışması tespit edildi:"
+
+#: src/callbacks/rpm.h:483
+msgid "Conflicting files will be replaced."
+msgstr "Çakışan dosyalar değiştirilecek."
+
+#. TranslatorExplanation Problem description before asking whether to "Continue? [yes/no] (no):"
+#: src/callbacks/rpm.h:489
+msgid ""
+"File conflicts happen when two packages attempt to install files with the "
+"same name but different contents. If you continue, conflicting files will be "
+"replaced losing the previous content."
+msgstr ""
+"Dosya çakışmaları, iki paket aynı isme ancak farklı içeriklere sahip "
+"dosyaları yüklemeye çalıştığında gerçekleşir. Devam ederseniz çakışan "
+"dosyalar önceki içerikler kaybedilerek değiştirilecek."
+
+#. TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
+#: src/callbacks/rpm.h:711 src/callbacks/rpm.h:718
+#, c-format, boost-format
+msgid "Executing %s script for: %s"
+msgstr ""
+
+#. TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
+#: src/callbacks/rpm.h:725
+#, c-format, boost-format
+msgid "Executing %s script"
+msgstr ""
+
+#. TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
+#: src/callbacks/rpm.h:857
+#, c-format, boost-format
+msgid "Cleaning up: %s"
+msgstr ""
+
+#. translator: %s is an other command: "This is an alias for 'zypper info -t patch'."
+#: src/commands/commandhelpformatter.h:94
+#, c-format, boost-format
+msgid "This is an alias for '%s'."
+msgstr "Bu, '%s' komutunun takma adıdır."
+
+#: src/commands/commandhelpformatter.h:107
+msgid "Examples:"
+msgstr "Örnekler:"
+
+#: src/commands/commandhelpformatter.h:110
+msgid "Arguments:"
+msgstr "Argümanlar:"
+
+#: src/commands/commandhelpformatter.h:123 src/utils/flags/zyppflags.cc:627
+msgid "Command options:"
+msgstr "Komut seçenekleri:"
+
+#: src/commands/commandhelpformatter.h:126
+msgid "Solver options:"
+msgstr "Çözücü seçenekleri:"
+
+#: src/commands/commandhelpformatter.h:129
+msgid "Expert options:"
+msgstr "Uzman seçenekler:"
+
+#: src/commands/commandhelpformatter.h:132
+msgid "This command has no additional options."
+msgstr "Bu komutun ek seçenekleri yok."
+
+#: src/commands/commandhelpformatter.h:135
+msgid "Legacy options:"
+msgstr "Eski seçenekler:"
+
+#. translator: '-r             The same as -f.
+#: src/commands/commandhelpformatter.h:139
+#, boost-format
+msgid "The same as %1%."
+msgstr "%1% ile aynı."
+
+#: src/commands/commandhelpformatter.h:187
+msgid "Usage:"
+msgstr "Kullanım:"
+
+#: src/commands/commandhelpformatter.h:189
+msgid "Global Options:"
+msgstr "Evrensel Seçenekler:"
+
+#: src/commands/commandhelpformatter.h:191
+msgid "Commands:"
+msgstr "Komutlar:"
+
+#. translators: --details
+#: src/commands/commonflags.h:23 src/commands/inrverify.cc:35
+msgid "Show the detailed installation summary."
+msgstr "Ayrıntılı kurulum özetini göster."
+
+#: src/commands/commonflags.h:30
+#, boost-format
+msgid "Type of package (%1%)."
+msgstr "Paketin türü (%1%)."
+
+#. translators: --best-effort
+#: src/commands/commonflags.h:38
+msgid ""
+"Do a 'best effort' approach to update. Updates to a lower than the latest "
+"version are also acceptable."
+msgstr ""
+"Güncellemek için \"en iyi çaba\" yaklaşımını uygulayın. En son sürüme göre "
+"daha düşük bir sürümde yapılan güncellemeler de kabul edilebilir."
+
+#: src/commands/commonflags.h:45
+msgid "Consider only patches which affect the package management itself."
+msgstr "Yalnızca paket yönetiminin kendisini etkileyen yamaları dikkate alın."
 
 #: src/commands/conditions.cc:19
 msgid "Root privileges are required to run this command."
@@ -3142,12 +3068,12 @@ msgstr ""
 msgid "Write debug output to file <path>."
 msgstr "Hata ayıklama çıktısını <path> dosyasına yazın."
 
-#: src/commands/ps.cc:72 src/solve-commit.cc:524
+#: src/commands/ps.cc:72 src/solve-commit.cc:561
 msgid "Check failed:"
 msgstr "Kontrol başarısız oldu:"
 
 #. Here: Table output
-#: src/commands/ps.cc:127 src/solve-commit.cc:513
+#: src/commands/ps.cc:127 src/solve-commit.cc:550
 msgid "Checking for running processes using deleted libraries..."
 msgstr "Silinen kütüphaneleri kullanan çalışan süreçler kontrol ediliyor..."
 
@@ -3527,6 +3453,14 @@ msgstr "Hem meta verileri hem de paket önbelleklerini temizleyin."
 #: src/commands/services/list.cc:104
 msgid "Alias"
 msgstr "Takma ad"
+
+#. translators: property name; short; used like "Name: value"
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/commands/repos/list.cc:42 src/commands/repos/list.cc:268
+#: src/commands/services/list.cc:116 src/repos.cc:1254
+#: src/utils/flags/zyppflags.h:49
+msgid "URI"
+msgstr "URI"
 
 #. 'enabled' flag
 #. translators: property name; short; used like "Name: value"
@@ -5050,7 +4984,7 @@ msgstr ""
 msgid "Argument resolves to no package"
 msgstr "Bağımsız değişken paket olmamasına çözüm buluyor"
 
-#: src/commands/utils/download.cc:253 src/solve-commit.cc:968
+#: src/commands/utils/download.cc:253 src/solve-commit.cc:1023
 msgid "Nothing to do."
 msgstr "Gerçekleştirilecek bir işlem yok."
 
@@ -5564,6 +5498,10 @@ msgstr "İstenen"
 msgid "Fallback"
 msgstr "Geri Düşüm"
 
+#: src/locales.cc:72 src/output/Out.h:26 src/repos.cc:131 src/repos.cc:159
+msgid "No"
+msgstr "Hayır"
+
 #. translators: header of table column - the language code, e.g. en_US
 #: src/locales.cc:174
 msgid "Code"
@@ -5589,12 +5527,12 @@ msgstr "Yerel ayar eklendi: %s"
 msgid " %s is already requested."
 msgstr " %s zaten talep edildi."
 
-#: src/locales.cc:276
+#: src/locales.cc:281
 #, c-format, boost-format
 msgid "Removed locale: %s"
 msgstr "Yerel ayar kaldırıldı: %s"
 
-#: src/locales.cc:281
+#: src/locales.cc:286
 #, c-format, boost-format
 msgid "%s was not requested."
 msgstr "%s talep edilmedi."
@@ -5711,6 +5649,30 @@ msgstr "%s-%s kaynak paketi başarıyla yüklendi."
 #, c-format, boost-format
 msgid "Problem installing source package %s-%s:"
 msgstr "%s-%s kaynak paketini yükleme sorunu:"
+
+#: src/output/Out.h:26 src/repos.cc:125 src/repos.cc:153
+msgid "Yes"
+msgstr "Evet"
+
+#. translator: usually followed by a ' ' and some explanatory text
+#: src/output/Out.h:37
+msgid "Note:"
+msgstr "Not:"
+
+#. translator: usually followed by a ' ' and some explanatory text
+#: src/output/Out.h:39
+msgid "Warning:"
+msgstr "Uyarı:"
+
+# include/ui/common_messages.ycp:95
+#. translator: usually followed by a ' ' and some explanatory text
+#: src/output/Out.h:41
+msgid "Error:"
+msgstr "Hata:"
+
+#: src/output/Out.h:43
+msgid "Continue?"
+msgstr "Devam edilsin mi?"
 
 #. Since this message will be emitted before we know if the current output is XML or Normal we need to send this message to stderr
 #. to not break scripts that use xml output (bsc#1172925)
@@ -5848,8 +5810,8 @@ msgstr "'%s' deposu devre dışı bırakılırken hata oluştu."
 msgid "Problem retrieving files from '%s'."
 msgstr "'%s' den dosyalar alınırken problem ortaya çıktı. "
 
-#: src/repos.cc:345 src/repos.cc:1859 src/solve-commit.cc:858
-#: src/solve-commit.cc:889 src/solve-commit.cc:913
+#: src/repos.cc:345 src/repos.cc:1859 src/solve-commit.cc:898
+#: src/solve-commit.cc:929 src/solve-commit.cc:953
 msgid "Please see the above error message for a hint."
 msgstr "Lütfen ipucu için yukarıdaki hata mesajına bakınız."
 
@@ -6322,21 +6284,21 @@ msgid "No products found."
 msgstr "Hiçbir ürün bulunamadı."
 
 #. translators: meaning 'dependency problem' found during solving
-#: src/solve-commit.cc:72
+#: src/solve-commit.cc:74
 msgid "Problem: "
 msgstr "Sorun: "
 
-#: src/solve-commit.cc:78
+#: src/solve-commit.cc:80
 msgid "Detailed information: "
 msgstr "Detaylı bilgi: "
 
 #. TranslatorExplanation %d is the solution number
-#: src/solve-commit.cc:91
+#: src/solve-commit.cc:93
 #, c-format, boost-format
 msgid " Solution %d: "
 msgstr " Çözüm %d: "
 
-#: src/solve-commit.cc:110
+#: src/solve-commit.cc:112
 msgid "Choose the above solution using '1' or skip, retry or cancel"
 msgid_plural "Choose from above solutions by number or skip, retry or cancel"
 msgstr[0] ""
@@ -6348,7 +6310,7 @@ msgstr[1] ""
 
 #. translators: translate 'c' to whatever you translated the 'c' in
 #. "c" and "s/r/c" strings
-#: src/solve-commit.cc:117
+#: src/solve-commit.cc:119
 msgid "Choose the above solution using '1' or cancel using 'c'"
 msgid_plural "Choose from above solutions by number or cancel"
 msgstr[0] "Yukarıdaki çözümü '1' kullanarak seçin veya 'c' ile iptal edin"
@@ -6360,7 +6322,7 @@ msgstr[1] "Numaraya göre yukarıdaki çözümlerden seçin veya iptal edin"
 #. The anserws must be separated by slash characters '/' and must
 #. correspond to skip/retry/cancel/detailed information in that order.
 #. The answers should be lower case letters.
-#: src/solve-commit.cc:141
+#: src/solve-commit.cc:143
 msgid "s/r/c/d"
 msgstr "a/y/i/d"
 
@@ -6371,37 +6333,37 @@ msgstr "a/y/i/d"
 #. See the "s/r/c/d" comment for other details.
 #. One letter string  for translation can be tricky, so in case of problems,
 #. please report a bug against zypper at bugzilla.suse.com, we'll try to solve it.
-#: src/solve-commit.cc:157
+#: src/solve-commit.cc:159
 msgid "c/d"
 msgstr "i/d"
 
-#: src/solve-commit.cc:163
+#: src/solve-commit.cc:165
 #, boost-format
 msgid "Choose solution %1%"
 msgstr "%1% çözümü seçin"
 
-#: src/solve-commit.cc:165
+#: src/solve-commit.cc:167
 msgid "Skip problem and continue."
 msgstr "Problemi atla ve devam et."
 
-#: src/solve-commit.cc:168
+#: src/solve-commit.cc:170
 msgid "Retry solving immediately."
 msgstr "Çözmeyi hemen tekrar deneyin."
 
-#: src/solve-commit.cc:170
+#: src/solve-commit.cc:172
 msgid "Choose no solution and cancel."
 msgstr "Çözüm seçmeyin ve iptal edin."
 
-#: src/solve-commit.cc:171
+#: src/solve-commit.cc:173
 msgid "Toggle show detailed conflict information."
 msgstr "Geçiş, ayrıntılı çakışma bilgilerini göster."
 
-#: src/solve-commit.cc:204
+#: src/solve-commit.cc:206
 #, c-format, boost-format
 msgid "Applying solution %s"
 msgstr "Çöxüm uygulanıyor '%s'"
 
-#: src/solve-commit.cc:220
+#: src/solve-commit.cc:222
 #, c-format, boost-format
 msgid "%d Problem:"
 msgid_plural "%d Problems:"
@@ -6409,49 +6371,55 @@ msgstr[0] "%d Sorun:"
 msgstr[1] "%d Sorun:"
 
 #. should not happen! If solve() failed at least one problem must be set!
-#: src/solve-commit.cc:224
+#: src/solve-commit.cc:226
 msgid "Specified capability not found"
 msgstr "Belirtilen kabiliyet bulunamadı"
 
-#: src/solve-commit.cc:234
+#: src/solve-commit.cc:236
 #, c-format, boost-format
 msgid "Problem: %s"
 msgstr "Sorun: %s"
 
 # clients/inst_sw_single.ycp:742
-#: src/solve-commit.cc:253
+#: src/solve-commit.cc:255
 msgid "Resolving dependencies..."
 msgstr "Bağımlılıklar çözümleniyor..."
 
 # /usr/lib/YaST2/timezone_raw.ycp:21
-#: src/solve-commit.cc:314
+#: src/solve-commit.cc:316
 msgid "Force resolution:"
 msgstr "Zorlama çözünürlüğü:"
 
 # clients/inst_sw_single.ycp:742
-#: src/solve-commit.cc:413
+#: src/solve-commit.cc:415
 msgid "Verifying dependencies..."
 msgstr "Bağımlılıklar doğrulanıyor..."
 
 #. Here: compute the full upgrade
-#: src/solve-commit.cc:463
+#: src/solve-commit.cc:465
 msgid "Computing upgrade..."
 msgstr "Güncelleştirme hesaplanıyor."
 
-#: src/solve-commit.cc:477
+#: src/solve-commit.cc:479
 msgid "Generating solver test case..."
 msgstr "Çözücü test senaryosu oluşturuluyor..."
 
-#: src/solve-commit.cc:479
+#: src/solve-commit.cc:481
 #, c-format, boost-format
 msgid "Solver test case generated successfully at %s."
 msgstr "Çözücü test durumu %s'de başarıyla oluşturuldu."
 
-#: src/solve-commit.cc:482
+#: src/solve-commit.cc:484
 msgid "Error creating the solver test case."
 msgstr "Çözücü test senaryosu oluşturulurken hata meydana geldi."
 
-#: src/solve-commit.cc:510
+#: src/solve-commit.cc:529
+msgid ""
+"DownloadAsNeeded can not be used with ZYPP_SINGLE_RPMTRANS=1, falling back "
+"to DownloadInAdvance"
+msgstr ""
+
+#: src/solve-commit.cc:547
 #, c-format, boost-format
 msgid ""
 "Check for running processes using deleted libraries is disabled in zypper."
@@ -6461,11 +6429,11 @@ msgstr ""
 "içinde devre dışı bırakılmıştır. Manuel olarak kontrol etmek için '%s' "
 "çalıştırın."
 
-#: src/solve-commit.cc:526
+#: src/solve-commit.cc:563
 msgid "Skip check:"
 msgstr "Kontrolü atla:"
 
-#: src/solve-commit.cc:533
+#: src/solve-commit.cc:570
 #, boost-format
 msgid ""
 "There are running programs which still use files and libraries deleted or "
@@ -6477,33 +6445,33 @@ msgstr ""
 "için yeniden başlatılmaları gerekir. Bu programları listelemek için '%1%' "
 "komutunu çalıştırın."
 
-#: src/solve-commit.cc:547
+#: src/solve-commit.cc:584
 msgid "Update notifications were received from the following packages:"
 msgstr "Güncelleme bildirimleri aşağıdaki paketlerden alındı:"
 
-#: src/solve-commit.cc:556
+#: src/solve-commit.cc:593
 #, c-format, boost-format
 msgid "Message from package %s:"
 msgstr "%s paketinden ileti:"
 
-#: src/solve-commit.cc:564
+#: src/solve-commit.cc:601
 msgid "y/n"
 msgstr "y/n"
 
-#: src/solve-commit.cc:565
+#: src/solve-commit.cc:602
 msgid "View the notifications now?"
 msgstr "Şimdi uyarılara bakmak istiyor musunuz?"
 
-#: src/solve-commit.cc:610
+#: src/solve-commit.cc:647
 msgid "Computing distribution upgrade..."
 msgstr "Dağıtım güncelleştirmeleri hesaplanıyor."
 
 # clients/inst_sw_single.ycp:742
-#: src/solve-commit.cc:615
+#: src/solve-commit.cc:652
 msgid "Resolving package dependencies..."
 msgstr "Paket bağımlılıkları çözümleniyor..."
 
-#: src/solve-commit.cc:670
+#: src/solve-commit.cc:707
 msgid ""
 "Some of the dependencies of installed packages are broken. In order to fix "
 "these dependencies, the following actions need to be taken:"
@@ -6511,7 +6479,7 @@ msgstr ""
 "Yüklü paketlerin bazı bağımlılıkları bozuk. Bu bağımlılıkları düzeltmek için "
 "aşağıdaki işlemlerin gerçekleşmesi gerekiyor:"
 
-#: src/solve-commit.cc:677
+#: src/solve-commit.cc:714
 msgid "Root privileges are required to fix broken package dependencies."
 msgstr ""
 "Bozuk paket bağımlılıklarının düzeltilmesi için yönetici ayrıcalıkları "
@@ -6527,23 +6495,23 @@ msgstr ""
 #. The answers should be lower case letters, but in general, any UTF-8
 #. string will do.
 #. ! \todo add c for changelog and x for explain (show the dep tree)
-#: src/solve-commit.cc:699
+#: src/solve-commit.cc:736
 msgid "y/n/p/v/a/r/m/d/g"
 msgstr "y/n/p/v/a/r/m/d/g"
 
 #. translators: help text for 'y' option in the 'Continue?' prompt
-#: src/solve-commit.cc:704
+#: src/solve-commit.cc:741
 msgid ""
 "Yes, accept the summary and proceed with installation/removal of packages."
 msgstr "Evet, özeti kabul et ve paketlerin kurulumuna/kaldırılmasa devam et."
 
 #. translators: help text for 'n' option in the 'Continue?' prompt
-#: src/solve-commit.cc:706
+#: src/solve-commit.cc:743
 msgid "No, cancel the operation."
 msgstr "Hayır, işlem iptal edildi."
 
 #. translators: help text for 'p' option in the 'Continue?' prompt
-#: src/solve-commit.cc:708
+#: src/solve-commit.cc:745
 msgid ""
 "Restart solver in no-force-resolution mode in order to show dependency "
 "problems."
@@ -6552,57 +6520,57 @@ msgstr ""
 "yeniden başlatın."
 
 #. translators: help text for 'v' option in the 'Continue?' prompt
-#: src/solve-commit.cc:710
+#: src/solve-commit.cc:747
 msgid "Toggle display of package versions."
 msgstr "Paket sürümlerinin görüntüsünü değiştirin."
 
 #. translators: help text for 'a' option in the 'Continue?' prompt
-#: src/solve-commit.cc:712
+#: src/solve-commit.cc:749
 msgid "Toggle display of package architectures."
 msgstr "Paket mimarilerinin görüntüsünü değiştirin."
 
 #. translators: help text for 'r' option in the 'Continue?' prompt
-#: src/solve-commit.cc:714
+#: src/solve-commit.cc:751
 msgid ""
 "Toggle display of repositories from which the packages will be installed."
 msgstr "Paketlerin yükleneceği depoların görüntüsünü değiştirin."
 
 #. translators: help text for 'm' option in the 'Continue?' prompt
-#: src/solve-commit.cc:716
+#: src/solve-commit.cc:753
 msgid "Toggle display of package vendor names."
 msgstr "Paket dağıtıcı adlarının görünümünü değiştirin."
 
 #. translators: help text for 'd' option in the 'Continue?' prompt
-#: src/solve-commit.cc:718
+#: src/solve-commit.cc:755
 msgid "Toggle between showing all details and as few details as possible."
 msgstr ""
 "Tüm ayrıntıları ve olabildiğince az detayı gösterme arasında geçiş yapın."
 
 #. translators: help text for 'g' option in the 'Continue?' prompt
-#: src/solve-commit.cc:720
+#: src/solve-commit.cc:757
 msgid "View the summary in pager."
 msgstr "Özeti sayfalayıcıda görüntüleyin."
 
-#: src/solve-commit.cc:828
+#: src/solve-commit.cc:866
 msgid "committing"
 msgstr "Teslim etme"
 
-#: src/solve-commit.cc:830
+#: src/solve-commit.cc:868
 msgid "(dry run)"
 msgstr "(tatbikat)"
 
-#: src/solve-commit.cc:857 src/solve-commit.cc:890
+#: src/solve-commit.cc:897 src/solve-commit.cc:930
 msgid "Problem retrieving the package file from the repository:"
 msgstr "Paket dosyası depodan alınırken sorun oluştu:"
 
 # clients/rc_config_step1.ycp:253
 #. translators: the first %s is 'zypper refresh' and the second is repo alias
-#: src/solve-commit.cc:887
+#: src/solve-commit.cc:927
 #, c-format, boost-format
 msgid "Repository '%s' is out of date. Running '%s' might help."
 msgstr "'%s' deposu güncel değil. '%s' komutunu çalıştırmak faydalı olabilir."
 
-#: src/solve-commit.cc:898
+#: src/solve-commit.cc:938
 msgid ""
 "The package integrity check failed. This may be a problem with the "
 "repository or media. Try one of the following:\n"
@@ -6620,24 +6588,13 @@ msgstr ""
 "- başka bir kurulum ortamı kullanın (örn. hasarlıysa)\n"
 "- başka bir depo kullan"
 
-#: src/solve-commit.cc:912
+#: src/solve-commit.cc:952
 msgid "Problem occurred during or after installation or removal of packages:"
 msgstr ""
 "Paketlerin kurulumu ya da kaldırılması sırasında ya da sonrasında sorun "
 "oluştu:"
 
-#: src/solve-commit.cc:920
-msgid "Installation has completed with error."
-msgstr "Kurulum hatayla tamamlandı."
-
-#: src/solve-commit.cc:922
-#, boost-format
-msgid "You may run '%1%' to repair any dependency problems."
-msgstr ""
-"Herhangi bir bağımlılık sorununu çözmek için '%1%' komutunu "
-"çalıştırabilirsiniz."
-
-#: src/solve-commit.cc:936
+#: src/solve-commit.cc:991
 msgid ""
 "One of the installed patches requires a reboot of your machine. Reboot as "
 "soon as possible."
@@ -6645,7 +6602,7 @@ msgstr ""
 "Yüklü yamalardan birisi makinenizin yeniden başlatılmasını gerektiriyor. "
 "Mümkün olduğunca kısa sürede yeniden başlatın."
 
-#: src/solve-commit.cc:944
+#: src/solve-commit.cc:999
 msgid ""
 "One of the installed patches affects the package manager itself. Run this "
 "command once more to install any other needed patches."
@@ -6653,7 +6610,7 @@ msgstr ""
 "Yüklü yamalardan biri paket yöneticisinin kendisini etkiliyor. Diğer gerekli "
 "yamaları yüklemek için bu komutu bir kez daha çalıştırın."
 
-#: src/solve-commit.cc:966
+#: src/solve-commit.cc:1021
 msgid "Dependencies of all installed packages are satisfied."
 msgstr "Yüklü paketlerin tamamının bağımlılıkları sağlanmış."
 
@@ -6899,6 +6856,81 @@ msgstr "Menzil dışı"
 #, boost-format
 msgid "Unknown error while assigning the value %1% to flag %2%."
 msgstr "%1% değeri %2% bayrağına atanırken bilinmeyen hata."
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:23
+msgid "ALIAS"
+msgstr "ALIAS"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:25
+msgid "ALIAS|#|URI"
+msgstr "ALIAS|#|URI"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:27
+msgid "CATEGORY"
+msgstr "KATEGORİ"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:29
+msgid "DIR"
+msgstr "DIR"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:31
+msgid "FILE"
+msgstr "DOSYA"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:33
+msgid "FILE.repo"
+msgstr "DOSYA.repo"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:35
+msgid "FORMAT"
+msgstr "FORMAT"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:37
+msgid "INTEGER"
+msgstr "TAMSAYI"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:39
+msgid "PATH"
+msgstr "PATH"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:41
+msgid "SEVERITY"
+msgstr "SEVERTY"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:43
+msgid "STRING"
+msgstr "STRING"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:45
+msgid "TAG"
+msgstr "ETİKET"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:47
+msgid "TYPE"
+msgstr "TYPE"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:51
+msgid "YYYY-MM-DD"
+msgstr "YYYY-AA-GG"
+
+#. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#: src/utils/flags/zyppflags.h:53
+msgid "MODE"
+msgstr "MOD"
 
 #. For '-garbage' argument, with 'a', 'b', and 'e' as known options,
 #. getopt_long reports 'a', 'b', and 'e' as known options.
@@ -7182,17 +7214,17 @@ msgstr ""
 msgid "shows all options"
 msgstr "tüm seçenekleri göster"
 
-#: src/utils/prompt.cc:194 src/utils/prompt.cc:315 src/utils/prompt.cc:324
-#: src/utils/prompt.cc:422
+#: src/utils/prompt.cc:201 src/utils/prompt.cc:322 src/utils/prompt.cc:331
+#: src/utils/prompt.cc:429
 msgid "yes"
 msgstr "evet"
 
-#: src/utils/prompt.cc:194 src/utils/prompt.cc:315 src/utils/prompt.cc:324
-#: src/utils/prompt.cc:422
+#: src/utils/prompt.cc:201 src/utils/prompt.cc:322 src/utils/prompt.cc:331
+#: src/utils/prompt.cc:429
 msgid "no"
 msgstr "hayır"
 
-#: src/utils/prompt.cc:212 src/utils/prompt.cc:260
+#: src/utils/prompt.cc:219 src/utils/prompt.cc:267
 #, c-format, boost-format
 msgid "Retrying in %u seconds..."
 msgstr "%u saniye içinde tekrar deneniyor..."
@@ -7203,34 +7235,34 @@ msgstr "%u saniye içinde tekrar deneniyor..."
 #. the answers must be separated by slash characters '/' and must
 #. correspond to abort/retry/ignore in that order.
 #. The answers should be lower case letters.
-#: src/utils/prompt.cc:218 src/utils/prompt.cc:305
+#: src/utils/prompt.cc:225 src/utils/prompt.cc:312
 msgid "a/r/i"
 msgstr "v/t/g"
 
-#: src/utils/prompt.cc:270
+#: src/utils/prompt.cc:277
 #, c-format, boost-format
 msgid "Autoselecting '%s' after %u second."
 msgid_plural "Autoselecting '%s' after %u seconds."
 msgstr[0] "'%s' %u saniye sonra otomatik olarak seçiliyor."
 msgstr[1] "'%s' %u saniye sonra otomatik olarak seçiliyor."
 
-#: src/utils/prompt.cc:287
+#: src/utils/prompt.cc:294
 msgid "Trying again..."
 msgstr "Tekrar deneniyor..."
 
-#: src/utils/prompt.cc:324
+#: src/utils/prompt.cc:331
 msgid "always"
 msgstr "her zaman"
 
-#: src/utils/prompt.cc:324
+#: src/utils/prompt.cc:331
 msgid "never"
 msgstr "hiçbir şey"
 
-#: src/utils/prompt.cc:370
+#: src/utils/prompt.cc:377
 msgid "Cannot read input: bad stream or EOF."
 msgstr "Giriş okunamıyor: bozuk akış veya EOF."
 
-#: src/utils/prompt.cc:371
+#: src/utils/prompt.cc:378
 #, c-format, boost-format
 msgid ""
 "If you run zypper without a terminal, use '%s' global\n"
@@ -7240,31 +7272,52 @@ msgstr ""
 "sorulan\n"
 "sorulara varsayılan yanıtları vermesi için '%s' evrensel seçeneğini kullanın."
 
-#: src/utils/prompt.cc:410
+#: src/utils/prompt.cc:417
 #, c-format, boost-format
 msgid "Invalid answer '%s'."
 msgstr "Geçersiz cevap '%s'."
 
-#: src/utils/prompt.cc:413
+#: src/utils/prompt.cc:420
 #, c-format, boost-format
 msgid "Ambiguous answer '%s'."
 msgstr "Belirsiz yanıt '%s'."
 
 #. translators: the %s are: 'y', 'yes' (translated), 'n', and 'no' (translated).
-#: src/utils/prompt.cc:421
+#: src/utils/prompt.cc:428
 #, c-format, boost-format
 msgid "Enter '%s' for '%s' or '%s' for '%s' if nothing else works for you."
 msgstr ""
 "Sizin için başka hiçbir şey işe yaramazsa \"%s\" için \"%s\" veya \"%s\" "
 "için \"%s\" girin."
 
-#: src/utils/prompt.cc:426
+#: src/utils/prompt.cc:433
 msgid ""
 "If nothing else works enter '#1' to select the 1st option, '#2' for the 2nd "
 "one, ..."
 msgstr ""
 "Başka hiçbir şey işe yaramazsa, 1. seçeneği belirlemek için '#1', 2. seçenek "
 "için '#2' girin, ..."
+
+# clients/rc_config_step1.ycp:253
+#. TranslatorExplanation These are reasons for various failures.
+#: src/utils/prompt.h:185
+msgid "Not found"
+msgstr "Bulunamadı"
+
+# include/ui/common_messages.ycp:95
+#: src/utils/prompt.h:185
+msgid "I/O error"
+msgstr "G/Ç hatası"
+
+# clients/support_question.ycp:27
+#: src/utils/prompt.h:185
+msgid "Invalid object"
+msgstr "Hatalı nesne"
+
+# include/ui/common_messages.ycp:95
+#: src/utils/prompt.h:192
+msgid "Error"
+msgstr "Hata"
 
 # =============================================================================
 #~ msgid "addlock (al) [OPTIONS] <PACKAGENAME> ..."
