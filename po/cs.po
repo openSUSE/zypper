@@ -21,7 +21,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-07-28 11:38+0200\n"
-"PO-Revision-Date: 2021-07-26 20:11+0000\n"
+"PO-Revision-Date: 2021-07-29 12:11+0000\n"
 "Last-Translator: Aleš Kastner <alkas@volny.cz>\n"
 "Language-Team: Czech <https://l10n.opensuse.org/projects/zypper/master/cs/>\n"
 "Language: cs\n"
@@ -89,33 +89,33 @@ msgstr "Můžete spustit '%1%' pro opravu jakýchkoliv problémů se závislostm
 #, c-format, boost-format
 msgid "The following package failed to install:"
 msgid_plural "The following %d packages failed to install:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Nepodařilo se instalovat tento balíček:"
+msgstr[1] "Nepodařilo se instalovat tyto %d balíčky:"
+msgstr[2] "Nepodařilo se instalovat těchto %d balíčků:"
 
 #: src/CommitSummary.cc:140
 #, c-format, boost-format
 msgid "The following package installation was skipped:"
 msgid_plural "The following %d package installations were skipped:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Byla přeskočena instalace tohoto balíčku:"
+msgstr[1] "Byla přeskočena instalace těchto %d balíčků:"
+msgstr[2] "Byla přeskočena instalace těchto %d balíčků:"
 
 #: src/CommitSummary.cc:155
 #, c-format, boost-format
 msgid "The following package failed to uninstall:"
 msgid_plural "The following %d packages failed to uninstall:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Nepodařilo se odinstalovat tento balíček:"
+msgstr[1] "Nepodařilo se odinstalovat tyto %d balíčky:"
+msgstr[2] "Nepodařilo se odinstalovat těchto %d balíčků:"
 
 #: src/CommitSummary.cc:170
 #, c-format, boost-format
 msgid "The following package removal was skipped:"
 msgid_plural "The following %d package removal were skipped:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Bylo přeskočeno odstranění tohoto balíčku:"
+msgstr[1] "Bylo přeskočeno odstranění těchto %d balíčků:"
+msgstr[2] "Bylo přeskočeno odstranění těchto %d balíčků:"
 
 #. translators: Appended when clipping a long enumeration:
 #. "ConsoleKit-devel ConsoleKit-doc ... and 20828 more items."
@@ -1288,9 +1288,9 @@ msgstr[2] "balíčky k aktualizaci"
 #: src/Summary.cc:1443
 msgid "to downgrade"
 msgid_plural "to downgrade"
-msgstr[0] "k downgradování"
-msgstr[1] "k downgradování"
-msgstr[2] "k downgradování"
+msgstr[0] "k downgradu"
+msgstr[1] "k downgradu"
+msgstr[2] "k downgradu"
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
 #: src/Summary.cc:1446
@@ -2147,19 +2147,19 @@ msgstr ""
 #: src/callbacks/rpm.h:711 src/callbacks/rpm.h:718
 #, c-format, boost-format
 msgid "Executing %s script for: %s"
-msgstr ""
+msgstr "Provádím skript %s pro: %s"
 
 #. TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
 #: src/callbacks/rpm.h:725
 #, c-format, boost-format
 msgid "Executing %s script"
-msgstr ""
+msgstr "Provádím skript %s"
 
 #. TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
 #: src/callbacks/rpm.h:857
 #, c-format, boost-format
 msgid "Cleaning up: %s"
-msgstr ""
+msgstr "Čistím: %s"
 
 #. translator: %s is an other command: "This is an alias for 'zypper info -t patch'."
 #: src/commands/commandhelpformatter.h:94
@@ -6437,6 +6437,8 @@ msgid ""
 "DownloadAsNeeded can not be used with ZYPP_SINGLE_RPMTRANS=1, falling back "
 "to DownloadInAdvance"
 msgstr ""
+"DownloadAsNeeded (d. dle potřeby) nelze použít u ZYPP_SINGLE_RPMTRANS=1, "
+"vracím se k DownloadInAdvance (d. předem)"
 
 #: src/solve-commit.cc:547
 #, c-format, boost-format
