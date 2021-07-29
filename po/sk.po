@@ -6,10 +6,10 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-07-28 11:38+0200\n"
-"PO-Revision-Date: 2021-07-23 18:12+0000\n"
+"PO-Revision-Date: 2021-07-29 20:11+0000\n"
 "Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
-"Language-Team: Slovak <https://l10n.opensuse.org/projects/zypper/master/sk/"
-">\n"
+"Language-Team: Slovak <https://l10n.opensuse.org/projects/zypper/master/sk/>"
+"\n"
 "Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -75,33 +75,33 @@ msgstr "Môžete spustiť '%1%' pre opravu akýchkoľvek problémov so závislos
 #, c-format, boost-format
 msgid "The following package failed to install:"
 msgid_plural "The following %d packages failed to install:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Nasledujúci balík sa nepodarilo nainštalovať:"
+msgstr[1] "Nasledujúce %d balíky sa nepodarilo nainštalovať:"
+msgstr[2] "Nasledujúcich %d balíkov sa nepodarilo nainštalovať:"
 
 #: src/CommitSummary.cc:140
 #, c-format, boost-format
 msgid "The following package installation was skipped:"
 msgid_plural "The following %d package installations were skipped:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Inštalácia nasledujúceho balíka bola preskočená:"
+msgstr[1] "Inštalácie nasledujúcich %d balíkov boli preskočené:"
+msgstr[2] "Inštalácie nasledujúcich %d balíkov boli preskočené:"
 
 #: src/CommitSummary.cc:155
 #, c-format, boost-format
 msgid "The following package failed to uninstall:"
 msgid_plural "The following %d packages failed to uninstall:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Nasledujúci balík sa nepodarilo odinštalovať:"
+msgstr[1] "Nasledujúce %d balíky sa nepodarilo odinštalovať:"
+msgstr[2] "Nasledujúcich %d balíkov sa nepodarilo odinštalovať:"
 
 #: src/CommitSummary.cc:170
 #, c-format, boost-format
 msgid "The following package removal was skipped:"
 msgid_plural "The following %d package removal were skipped:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Odstránenie nasledujúceho balíka bolo preskočené:"
+msgstr[1] "Odstránenie nasledujúcich %d balíkov bolo preskočené:"
+msgstr[2] "Odstránenie nasledujúcich %d balíkov bolo preskočené:"
 
 #. translators: Appended when clipping a long enumeration:
 #. "ConsoleKit-devel ConsoleKit-doc ... and 20828 more items."
@@ -2144,19 +2144,19 @@ msgstr ""
 #: src/callbacks/rpm.h:711 src/callbacks/rpm.h:718
 #, c-format, boost-format
 msgid "Executing %s script for: %s"
-msgstr ""
+msgstr "Vykonanie skriptu %s pre: %s"
 
 #. TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
 #: src/callbacks/rpm.h:725
 #, c-format, boost-format
 msgid "Executing %s script"
-msgstr ""
+msgstr "Vykonanie skriptu %s"
 
 #. TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
 #: src/callbacks/rpm.h:857
 #, c-format, boost-format
 msgid "Cleaning up: %s"
-msgstr ""
+msgstr "Čistenie: %s"
 
 #. translator: %s is an other command: "This is an alias for 'zypper info -t patch'."
 #: src/commands/commandhelpformatter.h:94
@@ -6440,6 +6440,8 @@ msgid ""
 "DownloadAsNeeded can not be used with ZYPP_SINGLE_RPMTRANS=1, falling back "
 "to DownloadInAdvance"
 msgstr ""
+"DownloadAsNeeded nemožno použiť s ZYPP_SINGLE_RPMTRANS=1, vrátenie sa späť "
+"na DownloadInAdvance"
 
 #: src/solve-commit.cc:547
 #, c-format, boost-format
