@@ -108,9 +108,11 @@ namespace zyppng {
   MediaNetworkConn::MediaNetworkConn( MediaNetworkServer &server, std::shared_ptr<Socket> &&socket ) : _server(server), _connection ( std::move( socket ) )
   {
     MIL_MEDIA << "Initializing Connection object " << std::endl;
-    _connection->Base::connect( &Socket::sigReadyRead, *this, &MediaNetworkConn::onReadyRead );
-    _connection->Base::connect( &Socket::sigDisconnected, *this, &MediaNetworkConn::onDisconnected );
-    _connection->Base::connect( &Socket::sigError, *this, &MediaNetworkConn::onError );
+    _socketSigConns.insert( _socketSigConns.end(), {
+      _connection->Base::connect( &Socket::sigReadyRead, *this, &MediaNetworkConn::onReadyRead ),
+      _connection->Base::connect( &Socket::sigDisconnected, *this, &MediaNetworkConn::onDisconnected ),
+      _connection->Base::connect( &Socket::sigError, *this, &MediaNetworkConn::onError )
+    } );
 
     //make sure we read possibly available data
     onReadyRead();
@@ -130,6 +132,10 @@ namespace zyppng {
       trackedDlFinished( *req );
     }
     MIL_MEDIA << "Closing connection done!" << std::endl;
+
+    // clean up our socket connections, otherwise we receive signals we do not want to handle anymore
+    std::for_each( _socketSigConns.begin(), _socketSigConns.end(), []( auto &conn){ conn.disconnect(); } );
+    _socketSigConns.clear();
   }
 
   SignalProxy<void ()> MediaNetworkConn::sigDisconnected()
