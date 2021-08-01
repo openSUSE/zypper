@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-07-28 11:38+0200\n"
-"PO-Revision-Date: 2021-07-22 13:11+0000\n"
+"PO-Revision-Date: 2021-08-02 01:11+0000\n"
 "Last-Translator: Rodrigo Macedo <rmsolucoeseminformatic4@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) <https://l10n.opensuse.org/projects/"
 "zypper/master/pt_BR/>\n"
@@ -84,29 +84,29 @@ msgstr ""
 #, c-format, boost-format
 msgid "The following package failed to install:"
 msgid_plural "The following %d packages failed to install:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "O seguinte pacote falhou ao instalar:"
+msgstr[1] "Os seguintes %d pacotes não foram instalados:"
 
 #: src/CommitSummary.cc:140
 #, c-format, boost-format
 msgid "The following package installation was skipped:"
 msgid_plural "The following %d package installations were skipped:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "A seguinte instalação do pacote foi ignorada:"
+msgstr[1] "As seguintes %d instalações de pacotes foram ignoradas:"
 
 #: src/CommitSummary.cc:155
 #, c-format, boost-format
 msgid "The following package failed to uninstall:"
 msgid_plural "The following %d packages failed to uninstall:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "O seguinte pacote falhou ao desinstalar:"
+msgstr[1] "Os seguintes %d pacotes não foram desinstalados:"
 
 #: src/CommitSummary.cc:170
 #, c-format, boost-format
 msgid "The following package removal was skipped:"
 msgid_plural "The following %d package removal were skipped:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "A seguinte remoção de pacote foi ignorada:"
+msgstr[1] "A seguinte %d remoção do pacote foi ignorada:"
 
 #. translators: Appended when clipping a long enumeration:
 #. "ConsoleKit-devel ConsoleKit-doc ... and 20828 more items."
@@ -2087,19 +2087,19 @@ msgstr ""
 #: src/callbacks/rpm.h:711 src/callbacks/rpm.h:718
 #, c-format, boost-format
 msgid "Executing %s script for: %s"
-msgstr ""
+msgstr "Executando script %s para: %s"
 
 #. TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
 #: src/callbacks/rpm.h:725
 #, c-format, boost-format
 msgid "Executing %s script"
-msgstr ""
+msgstr "Executando %s script"
 
 #. TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
 #: src/callbacks/rpm.h:857
 #, c-format, boost-format
 msgid "Cleaning up: %s"
-msgstr ""
+msgstr "Limpando: %s"
 
 #. translator: %s is an other command: "This is an alias for 'zypper info -t patch'."
 #: src/commands/commandhelpformatter.h:94
@@ -6416,6 +6416,8 @@ msgid ""
 "DownloadAsNeeded can not be used with ZYPP_SINGLE_RPMTRANS=1, falling back "
 "to DownloadInAdvance"
 msgstr ""
+"DownloadAsNeeded não pode ser usado com ZYPP_SINGLE_RPMTRANS=1, voltando "
+"para DownloadInAdvance"
 
 #: src/solve-commit.cc:547
 #, c-format, boost-format
