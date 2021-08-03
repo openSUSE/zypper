@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-07-28 11:38+0200\n"
-"PO-Revision-Date: 2021-07-29 20:11+0000\n"
+"PO-Revision-Date: 2021-08-03 19:11+0000\n"
 "Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
 "Language-Team: Slovak <https://l10n.opensuse.org/projects/zypper/master/sk/>"
 "\n"
@@ -7135,7 +7135,7 @@ msgstr "neurčené"
 #. translator: patch status
 #: src/utils/misc.cc:120
 msgid "retracted"
-msgstr "odvolané"
+msgstr "stiahnuté späť"
 
 #: src/utils/misc.cc:329 src/utils/misc.cc:371
 msgid "Since"
