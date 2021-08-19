@@ -3548,7 +3548,7 @@ msgstr "Automatische Aktualisierung"
 
 #: src/commands/repos/list.cc:50 src/commands/repos/list.cc:51
 msgid "On"
-msgstr "Am"
+msgstr "An"
 
 #: src/commands/repos/list.cc:50 src/commands/repos/list.cc:51
 msgid "Off"
