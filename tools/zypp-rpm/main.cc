@@ -402,8 +402,9 @@ int main( int, char ** )
     }
   }
 
-  int tsProbFilterFlags = RPMPROB_FILTER_NONE;
-
+  // those two cases are already handled by libzypp at the time a package set arrives here,
+  // we can safely filter those problems.
+  int tsProbFilterFlags = RPMPROB_FILTER_REPLACEPKG | RPMPROB_FILTER_OLDPACKAGE;
 
   if ( msg.ignorearch() )
     tsProbFilterFlags |= RPMPROB_FILTER_IGNOREARCH;

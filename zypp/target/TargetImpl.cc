@@ -1874,20 +1874,11 @@ namespace zypp
       // bsc#1181328: Some systemd tools require /proc to be mounted
       AssertProcMounted assertProcMounted( _root );
 
-      rpm::RpmInstFlags flags( policy_r.rpmInstFlags() & rpm::RPMINST_JUSTDB );
-      // Why force and nodeps?
+      // Why nodeps?
       //
       // Because zypp builds the transaction and the resolver asserts that
-      // everything is fine.
-      // We use rpm just to unpack and register the package in the database.
-      // We do this step by step, so rpm is not aware of the bigger context.
-      // So we turn off rpms internal checks, because we do it inside zypp.
-      flags |= rpm::RPMINST_NODEPS;
-      flags |= rpm::RPMINST_FORCE;
-
-      if (policy_r.dryRun())         flags |= rpm::RPMINST_TEST;
-      if (policy_r.rpmExcludeDocs()) flags |= rpm::RPMINST_EXCLUDEDOCS;
-      if (policy_r.rpmNoSignature()) flags |= rpm::RPMINST_NOSIGNATURE;
+      // everything is fine, or the user decided to ignore problems.
+      rpm::RpmInstFlags flags( policy_r.rpmInstFlags() | rpm::RPMINST_NODEPS  );
 
       zpt::Commit commit;
       commit.set_flags( flags );
