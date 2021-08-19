@@ -5380,7 +5380,7 @@ msgstr "Descrizione"
 
 #: src/info.cc:99
 msgid "automatically"
-msgstr "autometicamente"
+msgstr "automaticamente"
 
 #: src/info.cc:171
 #, boost-format
