@@ -507,18 +507,18 @@ namespace zypp
       struct LogControlImpl;
 
       /*
-       * Horrible ugly hack to prevent the use of LogControlImpl when libzypp is shutting down.
+       * Ugly hack to prevent the use of LogControlImpl when libzypp is shutting down.
        * Due to the c++ std thread_local static instances are cleaned up before the first global static
        * destructor is called. So all classes that use logging after that point in time would crash the
        * application because its accessing a variable that has already been destroyed.
-       *
-       * This does not check if the current thread requesting a instance actually has one, it just keeps count
-       * of how many instances are still available. Usually only the main thread should run into the condition
-       * of getting a nullptr back.
        */
-      static std::atomic_int & logControlImplReg() {
-        static std::atomic_int instCount;
-        return instCount;
+      int &logControlValidFlag() {
+        // We are using a POD flag that does not have a destructor,
+        // to flag if the thread_local destructors were already executed.
+        // Since TLS data is stored in a segment that is available until the thread ceases to exist it should still be readable
+        // after thread_local c++ destructors were already executed. Or so I hope.
+        static thread_local int logControlValid = 0;
+        return logControlValid;
       }
 
       ///////////////////////////////////////////////////////////////////
@@ -669,7 +669,7 @@ namespace zypp
         , _excessive( getenv("ZYPP_FULLLOG") )
         , _lineFormater( new LogControl::LineFormater )
         {
-          logControlImplReg().fetch_add(1);
+          logControlValidFlag() = 1;
           std::call_once( flagReadEnvAutomatically, &LogControlImpl::readEnvVars, this);
         }
 
@@ -677,7 +677,7 @@ namespace zypp
 
         ~LogControlImpl()
         {
-          logControlImplReg().fetch_sub(1);
+          logControlValidFlag() = 0;
         }
 
         /** The LogControlImpl singleton
@@ -694,7 +694,7 @@ namespace zypp
       inline LogControlImpl *LogControlImpl::instance()
       {
         thread_local static LogControlImpl _instance;
-        if ( logControlImplReg().load() > 0 )
+        if ( logControlValidFlag() > 0 )
           return &_instance;
         return nullptr;
       }
