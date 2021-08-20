@@ -18,7 +18,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-07-28 11:38+0200\n"
-"PO-Revision-Date: 2021-08-20 22:48+0000\n"
+"PO-Revision-Date: 2021-08-21 01:11+0000\n"
 "Last-Translator: Javier Llorente <javier@opensuse.org>\n"
 "Language-Team: Spanish <https://l10n.opensuse.org/projects/zypper/master/es/>"
 "\n"
@@ -2097,19 +2097,19 @@ msgstr ""
 #: src/callbacks/rpm.h:711 src/callbacks/rpm.h:718
 #, c-format, boost-format
 msgid "Executing %s script for: %s"
-msgstr ""
+msgstr "Ejecutando script %s para: %s"
 
 #. TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
 #: src/callbacks/rpm.h:725
 #, c-format, boost-format
 msgid "Executing %s script"
-msgstr ""
+msgstr "Ejecutando script %s"
 
 #. TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
 #: src/callbacks/rpm.h:857
 #, c-format, boost-format
 msgid "Cleaning up: %s"
-msgstr ""
+msgstr "Limpiando: %s"
 
 #. translator: %s is an other command: "This is an alias for 'zypper info -t patch'."
 #: src/commands/commandhelpformatter.h:94
@@ -7238,7 +7238,7 @@ msgstr "Ejemplo: %s"
 
 #: src/utils/misc.cc:595
 msgid "Invalid OBS URI."
-msgstr "URI OBS no válido."
+msgstr "URI de OBS no válido."
 
 #: src/utils/misc.cc:595
 msgid "Correct form is obs://<project>/[platform]"
