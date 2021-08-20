@@ -18,16 +18,16 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-07-28 11:38+0200\n"
-"PO-Revision-Date: 2021-05-03 22:57+0000\n"
+"PO-Revision-Date: 2021-08-20 22:48+0000\n"
 "Last-Translator: Javier Llorente <javier@opensuse.org>\n"
-"Language-Team: Spanish <https://l10n.opensuse.org/projects/zypper/master/es/"
-">\n"
+"Language-Team: Spanish <https://l10n.opensuse.org/projects/zypper/master/es/>"
+"\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.6\n"
+"X-Generator: Weblate 4.7.1\n"
 
 #: src/Command.cc:93
 msgid "Invalid command"
@@ -7028,7 +7028,7 @@ msgstr "Falta un argumento para "
 
 #: src/utils/messages.cc:19
 msgid "Please file a bug report about this."
-msgstr "Realice un informe de errores acerca de este problema."
+msgstr "Por favor, envíe un informe de fallos sobre este problema."
 
 #. TranslatorExplanation remember not to translate the URL
 #. unless you translate the actual page :)
