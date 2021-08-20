@@ -53,8 +53,13 @@ namespace
     if ( lhs.result != rhs.result )
       return false;
     // protect against reordered details:
-    if ( lhs.detail.size() != rhs.detail.size() )
-      return false;
+
+    // there seems to be a backporting of how rpm prints the signature check result
+    // breaking our tests here, instead of checking for exact equality we just require
+    // that all elements in the lhs are existant in the rhs instance.
+    //if ( lhs.detail.size() != rhs.detail.size() )
+    //  return false;
+
     for ( const auto & l : lhs.detail )
     {
       if ( std::find( rhs.detail.begin(), rhs.detail.end(), l ) == rhs.detail.end() )
