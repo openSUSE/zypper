@@ -18,7 +18,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-07-28 11:38+0200\n"
-"PO-Revision-Date: 2021-08-21 01:11+0000\n"
+"PO-Revision-Date: 2021-08-22 15:11+0000\n"
 "Last-Translator: Javier Llorente <javier@opensuse.org>\n"
 "Language-Team: Spanish <https://l10n.opensuse.org/projects/zypper/master/es/>"
 "\n"
@@ -87,29 +87,29 @@ msgstr "Puede ejecutar '%1%' para reparar cualquier problema de dependencias."
 #, c-format, boost-format
 msgid "The following package failed to install:"
 msgid_plural "The following %d packages failed to install:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Ha fallado la instalación del siguiente paquete:"
+msgstr[1] "Ha fallado la instalación de los %d siguientes paquetes:"
 
 #: src/CommitSummary.cc:140
 #, c-format, boost-format
 msgid "The following package installation was skipped:"
 msgid_plural "The following %d package installations were skipped:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Se ha omitido la instalación del siguiente paquete:"
+msgstr[1] "Se ha omitido la instalación de los %d siguientes paquetes:"
 
 #: src/CommitSummary.cc:155
 #, c-format, boost-format
 msgid "The following package failed to uninstall:"
 msgid_plural "The following %d packages failed to uninstall:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Ha fallado la desinstalación del siguiente paquete:"
+msgstr[1] "Ha fallado la desinstalación de los %d siguientes paquetes:"
 
 #: src/CommitSummary.cc:170
 #, c-format, boost-format
 msgid "The following package removal was skipped:"
 msgid_plural "The following %d package removal were skipped:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Se ha omitido la eliminación del siguiente paquete:"
+msgstr[1] "Se ha omitido la eliminación de los %d siguientes paquetes:"
 
 #. translators: Appended when clipping a long enumeration:
 #. "ConsoleKit-devel ConsoleKit-doc ... and 20828 more items."
@@ -1741,7 +1741,7 @@ msgstr ""
 
 #: src/callbacks/keyring.h:496
 msgid "New:"
-msgstr ""
+msgstr "Nuevo:"
 
 #: src/callbacks/keyring.h:502
 msgid ""
@@ -2706,7 +2706,7 @@ msgstr "Repositorio"
 
 #: src/commands/locks/list.cc:138
 msgid "Comment"
-msgstr ""
+msgstr "Comentario"
 
 #. translators: locks table value
 #: src/commands/locks/list.cc:156 src/commands/locks/list.cc:235
