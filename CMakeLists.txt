@@ -8,7 +8,6 @@ INCLUDE(ZyppCommon)
 OPTION (ENABLE_BUILD_DOCS "Build documentation by default?" OFF)
 OPTION (ENABLE_BUILD_TRANS "Build translation files by default?" OFF)
 OPTION (ENABLE_BUILD_TESTS "Build and run test suite by default?" OFF)
-OPTION (ENABLE_USE_THREADS "Enable using threads (NOT being used by threads!)?" OFF)
 OPTION (ENABLE_ZSTD_COMPRESSION "Build with zstd compression support?" OFF)
 OPTION (ENABLE_ZCHUNK_COMPRESSION "Build with zchunk compression support?" OFF)
 # Helps with bug https://bugzilla.gnome.org/show_bug.cgi?id=784550 , Segfault during signal emission when slots are cleared
@@ -75,8 +74,14 @@ include(CheckCXXCompilerFlag)
 CHECK_C_COMPILER_FLAG("-Werror=format-security" CC_FORMAT_SECURITY)
 CHECK_CXX_COMPILER_FLAG("-Werror=format-security" CXX_FORMAT_SECURITY)
 
-SET( CMAKE_C_FLAGS     "${CMAKE_C_FLAGS} -fno-strict-aliasing -fPIC -g -Wall -Wp,-D_GLIBCXX_ASSERTIONS" )
-SET( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-strict-aliasing -fPIC -g -Wall -Wp,-D_GLIBCXX_ASSERTIONS" )
+SET( CMAKE_THREAD_PREFER_PTHREAD TRUE )
+FIND_PACKAGE( Threads REQUIRED )
+IF ( NOT CMAKE_USE_PTHREADS_INIT )
+  MESSAGE( FATAL_ERROR "No pthreads found" )
+ENDIF ( NOT CMAKE_USE_PTHREADS_INIT )
+
+SET( CMAKE_C_FLAGS     "${CMAKE_C_FLAGS} -pthread -fno-strict-aliasing -fPIC -g -Wall -Wp,-D_GLIBCXX_ASSERTIONS" )
+SET( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread -fno-strict-aliasing -fPIC -g -Wall -Wp,-D_GLIBCXX_ASSERTIONS" )
 
 SET( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fvisibility-inlines-hidden -Woverloaded-virtual -Wnon-virtual-dtor" )
 
@@ -129,16 +134,6 @@ MACRO(ADD_TESTS)
 ENDMACRO(ADD_TESTS)
 
 ####################################################################
-
-IF ( ENABLE_USE_THREADS )
-  SET( CMAKE_THREAD_PREFER_PTHREAD TRUE )
-  FIND_PACKAGE( Threads REQUIRED )
-  IF ( CMAKE_USE_PTHREADS_INIT )
-    MESSAGE( STATUS "May use threads." )
-    SET( CMAKE_C_FLAGS     "${CMAKE_C_FLAGS} -pthread -DZYPP_USE_THREADS" )
-    SET( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread -DZYPP_USE_THREADS" )
-  ENDIF ( CMAKE_USE_PTHREADS_INIT )
-ENDIF ( ENABLE_USE_THREADS )
 
 INCLUDE(CheckSymbolExists)
 FIND_PACKAGE(Rpm REQUIRED)
