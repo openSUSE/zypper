@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Aug 23 08:39:15 CEST 2021 - ma@suse.de
+
+- Fix crashes in logging code when shutting down (bsc#1189031)
+- version 17.28.1 (22)
+
+-------------------------------------------------------------------
 Mon Jul 26 11:48:28 CEST 2021 - ma@suse.de
 
 - Rephrase vendor conflict message in case 2 packages are
