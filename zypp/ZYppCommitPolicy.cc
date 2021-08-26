@@ -27,16 +27,11 @@ namespace zypp
 
   bool singleTransInEnv ()
   {
-    static TriBool singleTrans = indeterminate;
-    if ( indeterminate(singleTrans) ) {
+    static bool singleTrans = ([]()->bool{
       const char *val = ::getenv("ZYPP_SINGLE_RPMTRANS");
-      if ( val && std::string_view( val ) == "1"  )
-        singleTrans = true;
-      else
-        singleTrans = false;
-    }
-    // for some reason some compilers do not accept the implicit conversion to bool here.
-    return bool( singleTrans );
+      return ( val && std::string_view( val ) == "1"  );
+    })();
+    return singleTrans;
   }
 
   ///////////////////////////////////////////////////////////////////
