@@ -244,8 +244,15 @@ Developer documentation for libzypp.
 %build
 mkdir build
 cd build
+%if 0%{?suse_version} > 1500
+# Bug 1189788 - UsrMerge: filesystem package breaks system when upgraded in a single rpm transaction
+# While the bug is not fixed, we don't allow ZYPP_SINGLE_RPMTRANS=1 on a not UsrMerged system
+export CFLAGS="%{optflags} -DNO_SINGLETRANS_USERMERGE"
+export CXXFLAGS="%{optflags} -DNO_SINGLETRANS_USERMERGE"
+%else
 export CFLAGS="%{optflags}"
 export CXXFLAGS="%{optflags}"
+%endif
 unset EXTRA_CMAKE_OPTIONS
 
 cmake -DCMAKE_INSTALL_PREFIX=%{_prefix} \

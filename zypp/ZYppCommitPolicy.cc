@@ -20,6 +20,10 @@
 #include <zypp-core/base/LogControl.h>
 #include <zypp-core/TriBool.h>
 
+#ifdef NO_SINGLETRANS_USERMERGE
+#include <zypp/PathInfo.h>
+#include <zypp/ZYppCallbacks.h>
+#endif
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
@@ -29,7 +33,25 @@ namespace zypp
   {
     static bool singleTrans = ([]()->bool{
       const char *val = ::getenv("ZYPP_SINGLE_RPMTRANS");
+#ifdef NO_SINGLETRANS_USERMERGE
+      // Bug 1189788 - UsrMerge: filesystem package breaks system when upgraded in a single rpm transaction
+      // While the bug is not fixed, we don't allow ZYPP_SINGLE_RPMTRANS=1 on a not UsrMerged system.
+      // I.e. if /lib is a directory and not a symlink.
+      bool ret = ( val && std::string_view( val ) == "1"  );
+      if ( ret && PathInfo( "/lib", PathInfo::LSTAT ).isDir() ) {
+	WAR << "Ignore $ZYPP_SINGLE_RPMTRANS=1: Bug 1189788 - UsrMerge: filesystem package breaks system when upgraded in a single rpm transaction" << std::endl;
+	JobReport::info(
+	"[boo#1189788] Tumbleweeds filesystem package seems to be unable to perform the\n"
+	"              UsrMerge reliably in a single transaction. The requested\n"
+	"              $ZYPP_SINGLE_RPMTRANS=1 will therefore be IGNORED because\n"
+	"              the UsrMerge did not yet happen on this system."
+	, JobReport::UserData( "cmdout", "[boo#1189788]" ) );
+	return false;
+      }
+      return ret;
+#else
       return ( val && std::string_view( val ) == "1"  );
+#endif
     })();
     return singleTrans;
   }
