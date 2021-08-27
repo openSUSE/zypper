@@ -19,6 +19,7 @@
 
 #include <zypp/base/Logger.h>
 #include <zypp/base/String.h>
+#include <zypp/base/DtorReset.h>
 
 using namespace boost;
 
@@ -156,7 +157,17 @@ void NetworkRequestDispatcherPrivate::onSocketActivated( const SocketNotifier &l
 void NetworkRequestDispatcherPrivate::handleMultiSocketAction(curl_socket_t nativeSocket, int evBitmask)
 {
   int running = 0;
-  CURLMcode rc = curl_multi_socket_action( _multi, nativeSocket, evBitmask, &running );
+  
+  // when inside a curl callback we can not call another multi curl API, 
+  // for now just lock the thing, but we should consider rewriting this 
+  // to post events instead of doing direct calls simply to decouple from 
+  // that limitation
+  CURLMcode rc = CURLM_OK;
+  {
+    zypp::DtorReset lockSet( _locked );
+    _locked = true;
+    rc = curl_multi_socket_action( _multi, nativeSocket, evBitmask, &running );
+  }
   if (rc != 0) {
     //we can not recover from a error like that, cancel all and stop
     NetworkRequestError err = NetworkRequestErrorPrivate::fromCurlMError( rc );
@@ -166,6 +177,11 @@ void NetworkRequestDispatcherPrivate::handleMultiSocketAction(curl_socket_t nati
     _sigError.emit( *z_func() );
     return;
   }
+  
+  // make sure we dequeue pending requests ( in case a call to dequeue was blocked during the API call )
+  zypp::OnScopeExit scopeFinally([this](){
+    this->dequeuePending();
+  });
 
   int msgs_left = 0;
   CURLMsg *msg = nullptr;
@@ -202,6 +218,7 @@ void NetworkRequestDispatcherPrivate::handleMultiSocketAction(curl_socket_t nati
 void NetworkRequestDispatcherPrivate::cancelAll( NetworkRequestError result )
 {
   //prevent dequeuePending from filling up the runningDownloads again
+  zypp::DtorReset lockReset( _locked );
   _locked = true;
 
   while ( _runningDownloads.size() ) {
@@ -212,8 +229,6 @@ void NetworkRequestDispatcherPrivate::cancelAll( NetworkRequestError result )
     std::shared_ptr<NetworkRequest> &req = _pendingDownloads.back();
     setFinished(*req, result );
   }
-
-  _locked = false;
 }
 
 void NetworkRequestDispatcherPrivate::setFinished( NetworkRequest &req, NetworkRequestError result )

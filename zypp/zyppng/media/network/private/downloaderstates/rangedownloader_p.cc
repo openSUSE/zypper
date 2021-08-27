@@ -26,6 +26,10 @@ namespace zyppng {
     for( const auto &req : _runningRequests ) {
       dlnowMulti += req->downloadedByteCount();
     }
+
+    if ( !assertExpectedFilesize( dlnowMulti ) )
+      return;
+
     stateMachine()._sigProgress.emit( *stateMachine().z_func(), _fileSize, dlnowMulti );
   }
 
@@ -53,6 +57,9 @@ namespace zyppng {
     }
 
     _downloadedMultiByteCount += req.downloadedByteCount();
+    if ( !assertExpectedFilesize( _downloadedMultiByteCount ) ) {
+      return;
+    }
 
     MIL_MEDIA << "Request finished "<<std::endl;
     const auto &rngs = reqLocked->requestedRanges();
@@ -283,6 +290,16 @@ namespace zyppng {
 
     if ( req->_myMirror )
       req->_myMirror->startTransfer();
+  }
+ 
+  bool RangeDownloaderBaseState::assertExpectedFilesize( off_t currentFilesize )
+  {
+    const off_t expFSize = stateMachine()._spec.expectedFileSize();
+    if ( expFSize  > 0 && expFSize < currentFilesize ) {
+      setFailed( NetworkRequestErrorPrivate::customError( NetworkRequestError::ExceededMaxLen ) );
+      return false;
+    }
+    return true;
   }
 
   /**

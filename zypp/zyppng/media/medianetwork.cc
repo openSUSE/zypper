@@ -539,6 +539,9 @@ namespace zyppng {
         case NetworkRequestError::NotFound:
           ZYPP_THROW( zypp::media::MediaFileNotFoundException( reqUrl, filename ) );
           break;
+        case NetworkRequestError::ExceededMaxLen:
+          ZYPP_THROW( zypp::media::MediaFileSizeExceededException( reqUrl, 0 ) );
+          break;
         default:
           break;
       }
