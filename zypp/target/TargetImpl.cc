@@ -85,6 +85,7 @@ using std::endl;
 extern "C"
 {
 #include <solv/repo_rpmdb.h>
+#include <solv/chksum.h>
 }
 namespace zypp
 {
