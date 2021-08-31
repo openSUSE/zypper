@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Tue Aug 31 10:49:51 CEST 2021 - ma@suse.de
+
+- Workaround Bug 1189788: Don't allow ZYPP_SINGLE_RPMTRANS=1 on a
+  not UsrMerged Tumbleweed system.
+- version 17.28.2 (22)
+
+-------------------------------------------------------------------
 Mon Aug 23 08:39:15 CEST 2021 - ma@suse.de
 
 - Fix crashes in logging code when shutting down (bsc#1189031)
