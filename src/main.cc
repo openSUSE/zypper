@@ -105,16 +105,10 @@ int main( int argc, char **argv )
     std::string sudouser { env::SUDO_USER() };
     if ( ! sudouser.empty() ) {
       sudo = true;
-      PathInfo su { "/usr/bin/su" };
-      if ( su.isFile() && su.userMayRX() ) {
-	std::string umaskstr { ExternalProgram( { su.asString(), "-c", "umask", "-l", "root" }, ExternalProgram::Discard_Stderr ).receiveLine() };
-	if ( zypp::str::regex("^0[0-7]{3}$").matches( umaskstr.c_str() ) ) {
-	  mode_t mask = str::strtonum<mode_t>( umaskstr );
-	  mode_t omask = ::umask( mask );
-	  if ( mask != omask )
-	    std::cerr << "zypper: adjusting umask " << str::octstring(omask,3) << " of sudo-user " << sudouser << " to " << str::octstring(mask,3) << " for user root." << endl;
-	}
-      }
+      mode_t mask = 0022;
+      mode_t omask = ::umask( mask );
+      if ( mask != omask )
+	std::cerr << "zypper: adjusting umask " << str::octstring(omask,3) << " of sudo-user " << sudouser << " to " << str::octstring(mask,3) << " for user root." << endl;
     }
   }
 
