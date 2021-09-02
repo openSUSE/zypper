@@ -19,19 +19,21 @@
 #include <zypp/ZYppCommitPolicy.h>
 #include <zypp-core/base/LogControl.h>
 #include <zypp-core/TriBool.h>
+#include <zypp/PathInfo.h>
 
 #ifdef NO_SINGLETRANS_USERMERGE
-#include <zypp/PathInfo.h>
 #include <zypp/ZYppCallbacks.h>
 #endif
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
+  inline bool ImZYPPER()
+  { return filesystem::readlink( "/proc/self/exe" ).basename() == "zypper"; }
 
   bool singleTransInEnv ()
   {
-    static bool singleTrans = ([]()->bool{
+    static bool singleTrans = ImZYPPER() && ([]()->bool{
       const char *val = ::getenv("ZYPP_SINGLE_RPMTRANS");
 #ifdef NO_SINGLETRANS_USERMERGE
       // Bug 1189788 - UsrMerge: filesystem package breaks system when upgraded in a single rpm transaction
