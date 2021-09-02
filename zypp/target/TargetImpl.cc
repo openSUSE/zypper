@@ -1879,7 +1879,13 @@ namespace zypp
       //
       // Because zypp builds the transaction and the resolver asserts that
       // everything is fine, or the user decided to ignore problems.
-      rpm::RpmInstFlags flags( policy_r.rpmInstFlags() | rpm::RPMINST_NODEPS  );
+      rpm::RpmInstFlags flags( policy_r.rpmInstFlags()
+                               | rpm::RPMINST_NODEPS
+                               // skip signature checks, we did that already
+                               | rpm::RPMINST_NODIGEST
+                               | rpm::RPMINST_NOSIGNATURE
+                               // ignore untrusted keys since we already checked those earlier
+                               | rpm::RPMINST_ALLOWUNTRUSTED );
 
       zpt::Commit commit;
       commit.set_flags( flags );

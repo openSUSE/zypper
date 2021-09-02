@@ -224,21 +224,22 @@ int main( int, char ** )
   int tsFlags           = RPMTRANS_FLAG_NONE;
   int tsVerifyFlags     = RPMVSF_DEFAULT;
 
-  if ( msg.flags() & RpmInstFlag::RPMINST_NODIGEST)
+  const auto &rpmInstFlags = msg.flags();
+  if ( rpmInstFlags & RpmInstFlag::RPMINST_NODIGEST)
     tsVerifyFlags |= _RPMVSF_NODIGESTS;
-  if ( msg.flags()  & RpmInstFlag::RPMINST_NOSIGNATURE)
+  if ( rpmInstFlags  & RpmInstFlag::RPMINST_NOSIGNATURE)
     tsVerifyFlags |= _RPMVSF_NOSIGNATURES;
-  if ( msg.flags()  & RpmInstFlag::RPMINST_EXCLUDEDOCS)
+  if ( rpmInstFlags  & RpmInstFlag::RPMINST_EXCLUDEDOCS)
     tsFlags |= RPMTRANS_FLAG_NODOCS;
-  if ( msg.flags()  & RpmInstFlag::RPMINST_NOSCRIPTS)
+  if ( rpmInstFlags  & RpmInstFlag::RPMINST_NOSCRIPTS)
     tsFlags |= RPMTRANS_FLAG_NOSCRIPTS;
-  if ( msg.flags()  & RpmInstFlag::RPMINST_JUSTDB)
+  if ( rpmInstFlags  & RpmInstFlag::RPMINST_JUSTDB)
     tsFlags |= RPMTRANS_FLAG_JUSTDB;
-  if ( msg.flags()  & RpmInstFlag::RPMINST_TEST)
+  if ( rpmInstFlags  & RpmInstFlag::RPMINST_TEST)
     tsFlags |= RPMTRANS_FLAG_TEST;
-  if ( msg.flags()  & RpmInstFlag::RPMINST_NOPOSTTRANS)
+  if ( rpmInstFlags  & RpmInstFlag::RPMINST_NOPOSTTRANS)
     tsFlags |= RPMTRANS_FLAG_NOPOSTTRANS;
-  if ( msg.flags() & RpmInstFlag::RPMINST_NOSCRIPTS )
+  if ( rpmInstFlags & RpmInstFlag::RPMINST_NOSCRIPTS )
     tsFlags |= RPMTRANS_FLAG_NOSCRIPTS;
 
   // setup transaction settings
@@ -270,6 +271,8 @@ int main( int, char ** )
   // the transaction data we will get in the callback
   TransactionData data { msg };
 
+  // do we care about knowing the public key?
+  const bool allowUntrusted = ( rpmInstFlags & RpmInstFlag::RPMINST_ALLOWUNTRUSTED );
 
   for ( int i = 0; i < msg.steps_size(); i++ ) {
     const auto &step = msg.steps(i);
@@ -278,18 +281,25 @@ int main( int, char ** )
 
       const auto &file = step.install().pathname();
       auto rpmHeader = readPackage( ts, step.install().pathname() );
+
       switch(rpmHeader.second) {
         case RPMRC_OK:
           break;
         case RPMRC_NOTTRUSTED:
           std::cerr << zypp::str::Format( "Failed to verify key for %s" ) % file << std::endl;
-          return FailedToReadPackage;
+          if ( !allowUntrusted )
+            return FailedToReadPackage;
+          break;
         case RPMRC_NOKEY:
           std::cerr << zypp::str::Format( "Public key unavailable for %s" ) % file << std::endl;
-          return FailedToReadPackage;
+          if ( !allowUntrusted )
+            return FailedToReadPackage;
+          break;
         case RPMRC_NOTFOUND:
           std::cerr << zypp::str::Format( "Signature not found for %s" ) % file << std::endl;
-          return FailedToReadPackage;
+          if ( !allowUntrusted )
+            return FailedToReadPackage;
+          break;
         case RPMRC_FAIL:
           std::cerr << zypp::str::Format( "Signature does not verify for %s" ) % file << std::endl;
           return FailedToReadPackage;
