@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Fri Sep  3 14:38:00 CEST 2021 - ma@suse.de
+
+- Avoid calling 'su' to detect a too restrictive sudo user umask
+  (bsc#1186602)
+- Fix typo in German translation (fixes #395)
+- BuildRequires:  libzypp-devel >= 17.28.3.
+- version 1.14.49
+
+-------------------------------------------------------------------
 Wed Jul 28 11:40:54 CEST 2021 - ma@suse.de
 
 - Support new reports for singletrans rpm commit.
