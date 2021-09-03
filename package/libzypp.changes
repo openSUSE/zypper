@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Fri Sep  3 14:34:19 CEST 2021 - ma@suse.de
+
+- CMake/spec: Add option to force SINGLE_RPMTRANS as default for
+  zypper (fixes #340)
+- Make sure singleTrans is zypper-only for now.
+- Do not double check signatures and keys (bsc#1190059)
+- version 17.28.3 (22)
+
+-------------------------------------------------------------------
 Tue Aug 31 10:49:51 CEST 2021 - ma@suse.de
 
 - Workaround Bug 1189788: Don't allow ZYPP_SINGLE_RPMTRANS=1 on a
