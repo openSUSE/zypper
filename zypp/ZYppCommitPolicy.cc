@@ -20,10 +20,8 @@
 #include <zypp-core/base/LogControl.h>
 #include <zypp-core/TriBool.h>
 #include <zypp/PathInfo.h>
-
-#ifdef NO_SINGLETRANS_USERMERGE
 #include <zypp/ZYppCallbacks.h>
-#endif
+
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
@@ -38,11 +36,11 @@ namespace zypp
 #else // SINGLE_RPMTRANS_AS_DEFAULT_FOR_ZYPPER
     static bool singleTrans = ImZYPPER() && ([]()->bool{
       const char *val = ::getenv("ZYPP_SINGLE_RPMTRANS");
+      bool ret = ( val && std::string_view( val ) == "1"  );
 #ifdef NO_SINGLETRANS_USERMERGE
       // Bug 1189788 - UsrMerge: filesystem package breaks system when upgraded in a single rpm transaction
       // While the bug is not fixed, we don't allow ZYPP_SINGLE_RPMTRANS=1 on a not UsrMerged system.
       // I.e. if /lib is a directory and not a symlink.
-      bool ret = ( val && std::string_view( val ) == "1"  );
       if ( ret && PathInfo( "/lib", PathInfo::LSTAT ).isDir() ) {
 	WAR << "Ignore $ZYPP_SINGLE_RPMTRANS=1: Bug 1189788 - UsrMerge: filesystem package breaks system when upgraded in a single rpm transaction" << std::endl;
 	JobReport::info(
@@ -53,10 +51,17 @@ namespace zypp
 	, JobReport::UserData( "cmdout", "[boo#1189788]" ) );
 	return false;
       }
-      return ret;
-#else
-      return ( val && std::string_view( val ) == "1"  );
 #endif
+      if ( ret ) {
+	JobReport::info(
+	  "[TechPreview] $ZYPP_SINGLE_RPMTRANS=1 : New rpm install backend is enabled\n"
+	  "              If you find any bugs or issues please let us know:\n"
+	  "              https://bugzilla.opensuse.org/\n"
+	  "              Component: libzypp (or zypper)\n"
+	  "              And please attach the /var/log/zypper.log to the bug report."
+	, JobReport::UserData( "cmdout" ) );
+      }
+      return ret;
 #endif // SINGLE_RPMTRANS_AS_DEFAULT_FOR_ZYPPER
     })();
     return singleTrans;
