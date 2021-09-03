@@ -33,6 +33,9 @@ namespace zypp
 
   bool singleTransInEnv ()
   {
+#ifdef SINGLE_RPMTRANS_AS_DEFAULT_FOR_ZYPPER
+    static bool singleTrans = ImZYPPER();
+#else // SINGLE_RPMTRANS_AS_DEFAULT_FOR_ZYPPER
     static bool singleTrans = ImZYPPER() && ([]()->bool{
       const char *val = ::getenv("ZYPP_SINGLE_RPMTRANS");
 #ifdef NO_SINGLETRANS_USERMERGE
@@ -54,6 +57,7 @@ namespace zypp
 #else
       return ( val && std::string_view( val ) == "1"  );
 #endif
+#endif // SINGLE_RPMTRANS_AS_DEFAULT_FOR_ZYPPER
     })();
     return singleTrans;
   }

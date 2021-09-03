@@ -19,6 +19,8 @@ OPTION (DISABLE_AUTODOCS "Do not require doxygen being installed (required to bu
 OPTION (EXPORT_NG_API "Export experimental libzypp API" OFF)
 # This option will reroute all tool binaries to the libzypp build dir instead of taking those installed in the default directories.
 OPTION (ENABLE_DEVEL_BUILD "Developer build, use zypp tools directly from build dir rather than the default locations" OFF)
+# Distros using just zypper may want to enable this as default earlier
+OPTION (ENABLE_PREVIEW_SINGLE_RPMTRANS_AS_DEFAULT_FOR_ZYPPER "[preview] Force zypper into using a single rpm transaction to install" OFF)
 #--------------------------------------------------------------------------------
 SET (have_system x)
 
@@ -330,6 +332,11 @@ INSTALL( FILES ${LIBZYPP_SOURCE_DIR}/systemCheck DESTINATION ${SYSCONFDIR}/zypp 
 
 # logrotate config file
 INSTALL( FILES ${LIBZYPP_SOURCE_DIR}/zypp-history.lr DESTINATION ${SYSCONFDIR}/logrotate.d )
+
+IF ( ENABLE_PREVIEW_SINGLE_RPMTRANS_AS_DEFAULT_FOR_ZYPPER )
+  MESSAGE( STATUS "[preview] Force zypper into using a single rpm transaction to install" )
+  ADD_DEFINITIONS( -DSINGLE_RPMTRANS_AS_DEFAULT_FOR_ZYPPER )
+ENDIF ( ENABLE_PREVIEW_SINGLE_RPMTRANS_AS_DEFAULT_FOR_ZYPPER )
 
 
 ####################################################################
