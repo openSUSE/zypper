@@ -602,6 +602,16 @@ namespace zypp
                 {
                   credentials_global_file_path = Pathname(value);
                 }
+                else if ( entry == "techpreview.ZYPP_SINGLE_RPMTRANS" )
+		{
+		  DBG << "techpreview.ZYPP_SINGLE_RPMTRANS=" << value << endl;
+		  ::setenv( "ZYPP_SINGLE_RPMTRANS", value.c_str(), 1 );
+		}
+                else if ( entry == "techpreview.ZYPP_MEDIANETWORK" )
+		{
+		  DBG << "techpreview.ZYPP_MEDIANETWORK=" << value << endl;
+		  ::setenv( "ZYPP_MEDIANETWORK", value.c_str(), 1 );
+		}
               }
             }
           }
