@@ -56,11 +56,15 @@ namespace zyppng {
       static constexpr bool isFinal = State::isFinal;
 
       void enter( ) {
-        return _ptr->enter( );
+        // keep the pointer around, for we might transition to the next state immediately
+        auto keepAlive = _ptr;
+        return keepAlive->enter( );
       }
 
       void exit( ) {
-        return _ptr->exit( );
+        // keep the pointer around, for we might transition to the next state immediately
+        auto keepAlive = _ptr;
+        return keepAlive->exit( );
       }
 
       std::shared_ptr<State> wrappedState () {
@@ -381,6 +385,7 @@ namespace zyppng {
         if ( _state.index() == 0 || _isInFinalState ) {
           _previousState.reset();
           _isInFinalState = false;
+          _emittedFinalSig = false;
           enterState( FState( static_cast<Derived &>(*this) ) );
         }
       }
@@ -500,6 +505,7 @@ namespace zyppng {
         // handle final state things
         if constexpr ( NewState::isFinal ) {
           _isInFinalState = true;
+          _emittedFinalSig = false;
         }
 
         // let the outside world know whats going on
@@ -508,8 +514,12 @@ namespace zyppng {
         // call enter on the state as the last thing to do, it might emit a transition event right away
         std::get< std::decay_t<NewState> >( _state ).enter();
 
-        if ( _isInFinalState )
+        // emit the final signal, but only if it was not already emitted by a subsequent transition
+        if ( _isInFinalState && !_emittedFinalSig ) {
+          _emittedFinalSig = true;
           _sigFinished.emit();
+        }
+          
       }
 
       template <typename State, typename Transition>
@@ -544,6 +554,7 @@ namespace zyppng {
 
     private:
       bool _isInFinalState = false;
+      bool _emittedFinalSig = false; //< Flag to make sure the finished signals is only emitted once
       Signal <void ( StateId )> _sigStateChanged;
       Signal <void ()> _sigFinished;
       StateSet _state = _InitialState();
