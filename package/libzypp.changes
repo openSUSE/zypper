@@ -1,4 +1,17 @@
 -------------------------------------------------------------------
+Fri Sep 17 10:41:56 CEST 2021 - ma@suse.de
+
+- Make sure to keep states alives while transitioning
+  (bsc#1190199)
+- May set techpreview variables for testing in /etc/zypp/zypp.conf.
+  If environment variables are unhandy one may enable the desired
+  techpreview in zypp.conf as well:
+    [main]
+    techpreview.ZYPP_SINGLE_RPMTRANS=1
+    techpreview.ZYPP_MEDIANETWORK=1
+- version 17.28.4 (22)
+
+-------------------------------------------------------------------
 Fri Sep  3 14:34:19 CEST 2021 - ma@suse.de
 
 - CMake/spec: Add option to force SINGLE_RPMTRANS as default for
