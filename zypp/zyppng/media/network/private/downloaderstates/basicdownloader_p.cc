@@ -112,6 +112,9 @@ namespace zyppng {
         _request->addRequestRange( 0, 0, fileDigest, *_chksumVec );
     }
 
+    if ( sm._spec.checkExistsOnly() )
+      _request->setOptions( _request->options() | Request::HeadRequest );
+
     if ( !initializeRequest( _request ) ) {
       return failed( "Failed to initialize request" );
     }
@@ -143,6 +146,8 @@ namespace zyppng {
   void BasicDownloaderStateBase::failed( NetworkRequestError &&err )
   {
     _error = std::move( err );
+    zypp::filesystem::unlink( stateMachine()._spec.targetPath() );
+
     _sigFailed.emit();
   }
 
