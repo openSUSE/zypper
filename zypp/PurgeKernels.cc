@@ -157,7 +157,7 @@ namespace zypp {
     MIL << "Request to remove package: " << pi << std::endl;
 
     //list of packages that are allowed to be removed automatically.
-    const str::regex validRemovals("(kernel-syms(-.*)?|kgraft-patch(-.*)?|kernel-livepatch(-.*)?|.*-kmp(-.*)?)");
+    const str::regex validRemovals("(kernel-syms(-.*)?|kgraft-patch(-.*)?|kernel-(.*)-livepatch(-.*)?|kernel-livepatch(-.*)?|.*-kmp(-.*)?)");
 
     if ( pi.status().isLocked() ) {
       MIL << "Package " << pi << " is locked by the user, not removing." << std::endl;
