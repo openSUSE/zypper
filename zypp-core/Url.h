@@ -275,6 +275,11 @@ namespace zypp
     /** \overload nonstatic version */
     bool schemeIsDownloading() const { return schemeIsDownloading( getScheme() ); }
 
+    /** plugin */
+    static bool schemeIsPlugin( const std::string & scheme_r );
+    /** \overload nonstatic version */
+    bool schemeIsPlugin() const { return schemeIsPlugin( getScheme() ); }
+
     /**
      * \brief Verifies the Url.
      *

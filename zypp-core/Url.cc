@@ -477,6 +477,11 @@ namespace zypp
     static const char * val[] = { "http", "https", "ftp", "sftp", "tftp" };
     return isInList( arrayBegin(val), arrayEnd(val), scheme_r );
   }
+
+  bool Url::schemeIsPlugin( const std::string & scheme_r )
+  {
+    return scheme_r == "plugin";
+  }
   ///////////////////////////////////////////////////////////////////
 
   // -----------------------------------------------------------------
