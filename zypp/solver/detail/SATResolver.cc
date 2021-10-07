@@ -1489,7 +1489,7 @@ SATResolver::problems ()
                                     IdString s_vendor( s.vendor() );
                                     IdString sd_vendor( sd.vendor() );
 				    std::string description;
-				    if ( s == sd )
+				    if ( s == sd ) // FIXME? Actually .ident() must be eq. But the more verbose 'else' isn't bad either.
 				      description = str::Format(_("install %1% (with vendor change)\n  %2%  -->  %3%") )
 				      % sd.asString()
 				      % ( s_vendor ? s_vendor.c_str() : " (no vendor) " )
