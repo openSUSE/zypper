@@ -1895,10 +1895,15 @@ namespace zypp
       commit.set_root( rpm().root().asString() );
 
       bool abort = false;
-      std::vector<ManagedFile> locFiles;
+      zypp::AutoDispose<std::unordered_map<int, ManagedFile>> locCache([]( std::unordered_map<int, ManagedFile> &data ){
+        for ( auto &[key, value] : data ) {
+          value.resetDispose();
+        }
+        data.clear();
+      });
 
       // fill the transaction
-      for( int stepId = 0; (ZYppCommitResult::TransactionStepList::size_type)stepId < steps.size() && !abort ; stepId++ ) {
+      for ( int stepId = 0; (ZYppCommitResult::TransactionStepList::size_type)stepId < steps.size() && !abort ; ++stepId ) {
         auto &step = steps[stepId];
         PoolItem citem( step );
         if ( step.stepType() == sat::Transaction::TRANSACTION_IGNORE ) {
@@ -1916,11 +1921,11 @@ namespace zypp
           if ( citem.status().isToBeInstalled() )
           {
             try {
-              locFiles.push_back( packageCache_r.get( citem ) );
+              locCache.value()[stepId] = packageCache_r.get( citem );
 
               zpt::TransactionStep tStep;
               tStep.set_stepid( stepId );
-              tStep.mutable_install()->set_pathname( locFiles.back()->asString() );
+              tStep.mutable_install()->set_pathname( locCache.value()[stepId]->asString() );
               tStep.mutable_install()->set_multiversion( p->multiversionInstall() );
 
               *commit.mutable_steps()->Add( ) = std::move(tStep);
@@ -1966,11 +1971,11 @@ namespace zypp
 
           try {
             // provide on local disk
-            locFiles.push_back( provideSrcPackage( p ) );
+            locCache.value()[stepId] = provideSrcPackage( p );
 
             zpt::TransactionStep tStep;
             tStep.set_stepid( stepId );
-            tStep.mutable_install()->set_pathname( locFiles.back()->asString() );
+            tStep.mutable_install()->set_pathname( locCache.value()[stepId]->asString() );
             tStep.mutable_install()->set_multiversion( false );
             *commit.mutable_steps()->Add() = std::move(tStep);
 
@@ -2158,6 +2163,8 @@ namespace zypp
               ( *installreport)->progress( 100, resObj );
               ( *installreport)->finish( resObj, rpm::InstallResolvableReportSA::NO_ERROR );
 
+              if ( currentStepId >= 0 )
+                locCache.value().erase( currentStepId );
               successfullyInstalledPackages.push_back( step->satSolvable() );
 
               PoolItem citem( *step );
@@ -2660,7 +2667,7 @@ namespace zypp
             break;
         }
 
-        for( int stepId = 0; (ZYppCommitResult::TransactionStepList::size_type)stepId < steps.size() && !abort ; stepId++ ) {
+        for ( int stepId = 0; (ZYppCommitResult::TransactionStepList::size_type)stepId < steps.size() && !abort; ++stepId ) {
           auto &step = steps[stepId];
           PoolItem citem( step );
 
