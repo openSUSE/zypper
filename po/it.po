@@ -4654,7 +4654,7 @@ msgid ""
 "install %1% from vendor %2%\n"
 "  replacing %3% from vendor %4%"
 msgstr ""
-"installa %1 dal fornitore %2\n"
+"installa %1% dal fornitore %2%\n"
 "  sostituzione di %3% del fornitore %4%"
 
 #: zypp/solver/detail/SATResolver.cc:1507

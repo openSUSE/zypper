@@ -4651,7 +4651,7 @@ msgstr "%1% aus ausgeschlossenem Repository installieren"
 #: zypp/solver/detail/SATResolver.cc:1449
 #, boost-format
 msgid "install %1% although it has been retracted"
-msgstr "%1 installieren, obwohl es widerrufen wurde"
+msgstr "%1% installieren, obwohl es widerrufen wurde"
 
 #. translator: %1% is a package name
 #: zypp/solver/detail/SATResolver.cc:1452
