@@ -4,6 +4,8 @@
 #include <zypp/base/LogControl.h>
 #include <zypp/base/Gettext.h>
 #include <zypp/base/IOTools.h>
+#include <zypp-core/fs/PathInfo.h>
+#include <zypp-core/zyppng/core/String>
 #include <zypp-core/zyppng/base/EventDispatcher>
 #include <zypp-core/zyppng/base/private/linuxhelpers_p.h>
 #include <zypp-core/base/CleanerThread_p.h>
@@ -88,12 +90,37 @@ void zyppng::AbstractDirectSpawnEngine::mapExtraFds ( int controlFd )
     dup2( fd, nextFd );
   }
 
-  // close all filedescriptors above the last we want to keep
-  for ( int i = ::getdtablesize() - 1; i > lastFdToKeep; --i ) {
+  const auto &canCloseFd = [&]( int fd ){
     // controlFD has O_CLOEXEC set so it will be cleaned up :)
-    if ( controlFd != -1 && controlFd == i )
-      continue;
-    ::close( i );
+    if ( controlFd != -1 && controlFd == fd )
+      return false;
+    // make sure we don't close fd's still need
+    if ( fd <= lastFdToKeep )
+      return false;
+    return true;
+  };
+
+  const auto maxFds = ( ::getdtablesize() - 1 );
+  //If the rlimits are too high we need to use a different approach 
+  // in detecting how many fds we need to close, or otherwise we are too slow (bsc#1191324)
+  if ( maxFds >= 1024 && zypp::PathInfo( "/proc/self/fd" ).isExist() ) {    
+    zypp::filesystem::dirForEachExt( "/proc/self/fd", [&]( const zypp::Pathname &p, const zypp::filesystem::DirEntry &entry ){
+      if ( entry.type != zypp::filesystem::FT_LINK)
+        return true;
+
+      const auto &fdVal = zyppng::str::safe_strtonum<int>( entry.name );
+      if ( !fdVal || !canCloseFd(*fdVal) )
+        return true;
+
+      ::close( *fdVal );
+      return true;
+    });
+  } else {
+    // close all filedescriptors above the last we want to keep
+    for ( int i = maxFds; i > lastFdToKeep; --i ) {
+      if ( !canCloseFd(i) ) continue;
+      ::close( i );
+    }
   }
 }
 
@@ -237,7 +264,7 @@ bool zyppng::ForkSpawnEngine::start( const char * const *argv, int stdin_fd, int
     {
         if( ::chroot(_chroot.c_str()) == -1)
         {
-            _execError = zypp::str::form( _("Can't chroot to '%s' (%s)."), _chroot.c_str(), strerror(errno) );
+            _execError = zypp::str::form( _("Can't chroot to '%s' (%s)."), _chroot.c_str(), strerror(errno).c_str() );
             std::cerr << _execError << std::endl; // After fork log on stderr too
             writeErrAndExit( 128, ChildErrType::CHROOT_FAILED ); // No sense in returning! I am forked away!!
         }
@@ -247,8 +274,8 @@ bool zyppng::ForkSpawnEngine::start( const char * const *argv, int stdin_fd, int
 
     if ( chdirTo && chdir( chdirTo ) == -1 )
     {
-      _execError = _chroot.empty() ? zypp::str::form( _("Can't chdir to '%s' (%s)."), chdirTo, strerror(errno) )
-                                   : zypp::str::form( _("Can't chdir to '%s' inside chroot '%s' (%s)."), chdirTo, _chroot.c_str(), strerror(errno) );
+      _execError = _chroot.empty() ? zypp::str::form( _("Can't chdir to '%s' (%s)."), chdirTo, strerror(errno).c_str() )
+                                   : zypp::str::form( _("Can't chdir to '%s' inside chroot '%s' (%s)."), chdirTo, _chroot.c_str(), strerror(errno).c_str() );
 
       std::cerr << _execError << std::endl;// After fork log on stderr too
       writeErrAndExit( 128, ChildErrType::CHDIR_FAILED ); // No sense in returning! I am forked away!!
@@ -277,14 +304,14 @@ bool zyppng::ForkSpawnEngine::start( const char * const *argv, int stdin_fd, int
 
     execvp( argv[0], const_cast<char *const *>( argv ) );
     // don't want to get here
-    _execError = zypp::str::form( _("Can't exec '%s' (%s)."), _args[0].c_str(), strerror(errno) );
+    _execError = zypp::str::form( _("Can't exec '%s' (%s)."), _args[0].c_str(), strerror(errno).c_str() );
     std::cerr << _execError << std::endl;// After fork log on stderr too
     writeErrAndExit( 129, ChildErrType::EXEC_FAILED ); // No sense in returning! I am forked away!!
     //////////////////////////////////////////////////////////////////////
   }
   else if ( _pid == -1 )	 // Fork failed, close everything.
   {
-    _execError = zypp::str::form( _("Can't fork (%s)."), strerror(errno) );
+    _execError = zypp::str::form( _("Can't fork (%s)."), strerror(errno).c_str() );
     _exitStatus = 127;
     ERR << _execError << std::endl;
     return false;
@@ -445,7 +472,7 @@ bool zyppng::GlibSpawnEngine::start( const char * const *argv, int stdin_fd, int
   if ( !error ) {
     _pid = childPid;
   } else {
-    _execError = zypp::str::form( _("Can't fork (%s)."), strerror(errno) );
+    _execError = zypp::str::form( _("Can't fork (%s)."), strerror(errno).c_str() );
     _exitStatus = 127;
     ERR << _execError << std::endl;
     return false;
@@ -466,7 +493,7 @@ void zyppng::GlibSpawnEngine::glibSpawnCallback(void *data)
 
   if ( doChroot ) {
     if ( ::chroot( d->that->_chroot.c_str() ) == -1 ) {
-      execError = zypp::str::form( "Can't chroot to '%s' (%s).", d->that->_chroot.c_str(), strerror(errno) );
+      execError = zypp::str::form( "Can't chroot to '%s' (%s).", d->that->_chroot.c_str(), strerror(errno).c_str() );
       std::cerr << execError << std::endl;// After fork log on stderr too
       _exit (128); // No sense in returning! I am forked away!!
     }
@@ -480,8 +507,8 @@ void zyppng::GlibSpawnEngine::glibSpawnCallback(void *data)
 
     if ( !chdir.empty() && ::chdir( chdir.data() ) == -1 )
     {
-      execError = doChroot ? zypp::str::form( "Can't chdir to '%s' inside chroot '%s' (%s).", chdir.data(), d->that->_chroot.c_str(), strerror(errno) )
-                           : zypp::str::form( "Can't chdir to '%s' (%s).", chdir.data(), strerror(errno) );
+      execError = doChroot ? zypp::str::form( "Can't chdir to '%s' inside chroot '%s' (%s).", chdir.data(), d->that->_chroot.c_str(), strerror(errno).c_str() )
+                           : zypp::str::form( "Can't chdir to '%s' (%s).", chdir.data(), strerror(errno).c_str() );
       std::cerr << execError << std::endl; // After fork log on stderr too
       _exit (128);			     // No sense in returning! I am forked away!!
     }

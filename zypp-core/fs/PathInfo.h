@@ -31,6 +31,8 @@ extern "C"
 #include <zypp-core/ByteCount.h>
 #include <zypp-core/CheckSum.h>
 
+struct dirent;
+
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
@@ -504,6 +506,8 @@ namespace zypp
       , type( type_r )
       {}
 
+      DirEntry( struct dirent* entry );
+
       bool operator==( const DirEntry &rhs ) const;
     };
 
@@ -527,6 +531,11 @@ namespace zypp
      **/
     int readdir( DirContent & retlist, const Pathname & path,
                  bool dots = true, PathInfo::Mode statmode = PathInfo::STAT );
+
+    /**
+     * Simiar to \sa dirForEach, except that the callback takes a \sa DirEntry as second argument
+     */
+    int dirForEachExt( const Pathname & dir_r, const function<bool(const Pathname &, const DirEntry &)> &fnc_r );
 
     /**
      * Check if the specified directory is empty.

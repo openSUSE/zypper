@@ -538,35 +538,64 @@ namespace zypp
     }
 
     ///////////////////////////////////////////////////////////////////////
-    // dirForEach
+    // dirForEachImpl
     ///////////////////////////////////////////////////////////////////////
+    template <class... T>
+    constexpr bool always_false = false;
 
-    int dirForEach( const Pathname & dir_r, function<bool(const Pathname &, const char *const)> fnc_r )
+    template <typename F>
+    int dirForEachImpl ( const Pathname & dir_r, F &&fnc_r )
     {
-      if ( ! fnc_r )
-	return 0;
-
       AutoDispose<DIR *> dir( ::opendir( dir_r.c_str() ),
 			      []( DIR * dir_r ) { if ( dir_r ) ::closedir( dir_r ); } );
 
       MIL << "readdir " << dir_r << ' ';
       if ( ! dir )
-	return logResult( errno );
+	      return logResult( errno );
       MIL << endl; // close line before callbacks are invoked.
 
       int ret = 0;
       for ( struct dirent * entry = ::readdir( dir ); entry; entry = ::readdir( dir ) )
       {
         if ( entry->d_name[0] == '.' && ( entry->d_name[1] == '\0' || ( entry->d_name[1] == '.' && entry->d_name[2] == '\0' ) ) )
-	  continue; // omitt . and ..
+	        continue; // omitt . and ..
 
-	if ( ! fnc_r( dir_r, entry->d_name ) )
-	{
-	  ret = -1;
-	  break;
-	}
+        // some static checks to make sure the correct func is selected
+        static_assert( !std::is_invocable_v< function<bool(const Pathname &, const char *const)>, const Pathname &, const DirEntry &> , "Invoke detection broken" );
+        static_assert( !std::is_invocable_v< function<bool(const Pathname &, const DirEntry& )>, const Pathname &, const char *> , "Invoke detection broken" );
+
+        if constexpr ( std::is_invocable_v<F, const Pathname &, const char *const> ) {
+          if ( ! std::forward<F>(fnc_r)( dir_r, entry->d_name ) ) {
+            ret = -1;
+            break;
+          }
+        } else if constexpr ( std::is_invocable_v<F, const Pathname &, const DirEntry&> ) {
+          if ( ! std::forward<F>(fnc_r)( dir_r, DirEntry( entry ) ) ) {
+            ret = -1;
+            break;
+          }
+        } else {
+          static_assert( always_false<F>, "Callback not supported" );
+        }
       }
       return ret;
+    } 
+
+    int dirForEach( const Pathname & dir_r, function<bool(const Pathname &, const char *const)> fnc_r )
+    {
+      if ( ! fnc_r )
+	      return 0;
+
+      return dirForEachImpl( dir_r, fnc_r );
+    }
+
+
+    int dirForEachExt( const Pathname & dir_r, const function<bool(const Pathname &, const DirEntry &)> &fnc_r )
+    {
+      if ( ! fnc_r )
+	      return 0;
+
+      return dirForEachImpl( dir_r, fnc_r );
     }
 
     ///////////////////////////////////////////////////////////////////
@@ -596,6 +625,37 @@ namespace zypp
 			     retlist_r.push_back( dir_r/name_r );
 			   return true;
 			 } );
+    }
+
+    DirEntry::DirEntry( struct dirent* entry )
+      : name( str::asString( entry->d_name ) )
+    {
+      switch( entry->d_type ) {
+        case DT_BLK:
+          this->type = FileType::FT_BLOCKDEV;
+          break;
+        case DT_CHR:
+          this->type =  FileType::FT_CHARDEV;
+          break;
+        case DT_DIR:
+          this->type =  FileType::FT_DIR;
+          break;
+        case DT_FIFO:
+          this->type =  FileType::FT_FIFO;
+          break;
+        case DT_LNK:
+          this->type =  FileType::FT_LINK;
+          break;
+        case DT_REG:
+          this->type =  FileType::FT_FILE;
+          break;
+        case DT_SOCK:
+          this->type =  FileType::FT_SOCKET;
+          break;
+        case DT_UNKNOWN:
+          this->type =  FileType::FT_NOT_AVAIL; 
+          break;
+      }
     }
 
     bool DirEntry::operator==( const DirEntry &rhs ) const

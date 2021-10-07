@@ -9,23 +9,35 @@
 #ifndef ZYPP_NG_CORE_STRING_H_INCLUDED
 #define ZYPP_NG_CORE_STRING_H_INCLUDED
 
+#include <optional>
 #include <zypp-core/base/String.h>
 #include <boost/utility/string_view.hpp>
 
 namespace zyppng {
-using namespace zypp::str;
 
 namespace str {
+
+  using zypp::str::Trim;
+
+  template <typename T>
+  std::optional<T> safe_strtonum ( const std::string_view &val)
+  {
+    errno = 0;
+    const int entryVal = zypp::str::strtonum<T>( val.data() );
+    if ( errno == ERANGE )
+      return {};
+    return entryVal;
+  }
 
   template< typename StrType, typename T = std::remove_reference_t<StrType> >
   T trim( StrType&& s, const Trim trim_r )
   {
     T ret( std::forward<StrType>(s) );
 
-    if ( ret.empty() || trim_r == NO_TRIM )
+    if ( ret.empty() || trim_r == Trim::NO_TRIM )
       return ret;
 
-    if ( trim_r & L_TRIM )
+    if ( trim_r & Trim::L_TRIM )
     {
       typename T::size_type p = ret.find_first_not_of( " \t\r\n" );
       if ( p == T::npos )
@@ -36,7 +48,7 @@ namespace str {
       ret.remove_prefix( p );
     }
 
-    if ( trim_r & R_TRIM )
+    if ( trim_r & Trim::R_TRIM )
     {
       typename T::size_type p = ret.find_last_not_of( " \t\r\n" );
       if ( p == T::npos )
@@ -51,7 +63,7 @@ namespace str {
   }
 
   template<class TOutputIterator>
-  void split( const boost::string_view & line_r, TOutputIterator result_r, const boost::string_view & sepchars_r = " \t", const Trim trim_r = NO_TRIM )
+  void split( const boost::string_view & line_r, TOutputIterator result_r, const boost::string_view & sepchars_r = " \t", const Trim trim_r = Trim::NO_TRIM )
   {
     //skip initial sepchars
     std::string_view::size_type tokenEnd = 0, tokenBegin = line_r.find_first_not_of( sepchars_r );
@@ -76,7 +88,8 @@ namespace str {
   }
 }
 
-
+  // use strerror from zypp::str in zyppng
+  using zypp::str::strerror;
 
 }
 
