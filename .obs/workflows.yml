@@ -1,5 +1,20 @@
-workflow:
+ci_workflow:
   steps:
     - branch_package:
         source_project: zypp:ci:libzypp
         source_package: libzypp
+        target_project: home:zypp-team
+  filters:
+    event: pull_request
+
+master_workflow:
+  steps:
+    - branch_package:
+        source_project: zypp:ci:libzypp
+        source_package: libzypp
+        target_project: home:zypp-team
+  filters:
+    event: push
+    branches:
+      only:
+        - master
