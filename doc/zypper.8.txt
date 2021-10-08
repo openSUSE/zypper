@@ -1839,7 +1839,7 @@ Target Options: :: {nop}
 
 SUBCOMMANDS
 -----------
-Zypper subcommands are inspired by *git*(1). Subcommands are standalone executables that live in the zypper_execdir (*/usr/lib/zypper/commands*). For subcommands zypper provides a wrapper that knows where the subcommands live, and runs them by passing command options and arguments to them.  If a subcommand is not found in the zypper_execdir, the wrapper will look in the rest of your *$PATH* for it. Thus, it’s possible to write local zypper extensions that don’t live in system space.
+Zypper subcommands are inspired by *git*(1). Subcommands are standalone executables that live in the zypper_execdir (*/usr/lib/zypper/commands*). For subcommands zypper provides a wrapper that knows where the subcommands live, and runs them by passing command options and arguments to them. If a subcommand is not found in the zypper_execdir, the wrapper will look in the rest of your *$PATH* for it. Thus, it’s possible to write local zypper extensions that don’t live in system space. This can be disabled by setting "subcommand.seachSubcommandInPath" to "no" in the zypper.conf.
 
 This is how to add your own subcommand *zypper* _mytask_:
 

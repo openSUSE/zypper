@@ -180,7 +180,9 @@ namespace
     SEARCH_RUNSEARCHPACKAGES,
 
     OBS_BASE_URL,
-    OBS_PLATFORM
+    OBS_PLATFORM,
+
+    SUBCOMMAND_SEACHSUBCOMMANDINPATH,
   };
 
   const std::vector<std::pair<std::string,ConfigOption>> & optionPairs()
@@ -215,7 +217,9 @@ namespace
       { "search/runSearchPackages",		ConfigOption::SEARCH_RUNSEARCHPACKAGES		},
 
       { "obs/baseUrl",				ConfigOption::OBS_BASE_URL			},
-      { "obs/platform",				ConfigOption::OBS_PLATFORM			}
+      { "obs/platform",				ConfigOption::OBS_PLATFORM			},
+
+      { "subcommand/seachSubcommandInPath",	ConfigOption::SUBCOMMAND_SEACHSUBCOMMANDINPATH	},
     };
     return _data;
   }
@@ -779,6 +783,9 @@ void Config::read( const std::string & file )
     if (!s.empty())
       obs_platform = s;
 
+    s = augeas.getOption( asString( ConfigOption::SUBCOMMAND_SEACHSUBCOMMANDINPATH ) );
+    if ( not s.empty() )
+      seach_subcommand_in_path = str::strToBool( s, seach_subcommand_in_path );
 
     // finally remember the default config file for saving back values
     _cfgSaveFile = augeas.getSaveFile();
