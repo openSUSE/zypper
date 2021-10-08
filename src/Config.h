@@ -83,6 +83,9 @@ struct Config
   /** zypper.conf: obs.platform */
   std::string obs_platform;
 
+  /** Whether subcommands found in $PATH should be considered */
+  bool seach_subcommand_in_path = true;
+
   //====================================== CLI config options ========================================
   //  std::list<Url> additional_sources;
   Out::Verbosity verbosity;

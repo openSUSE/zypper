@@ -47,6 +47,14 @@ namespace env
 namespace	// subcommand detetction
 {///////////////////////////////////////////////////////////////////
 
+  inline std::vector<Pathname> pathDirsIf( bool yesno_r )
+  {
+    std::vector<Pathname> ret;
+    if ( yesno_r )
+      str::split( env::PATH(), std::back_inserter(ret), ":" );
+    return ret;
+  }
+
   /** Strictly compare \ref SubcommandOptions::Detected according to _cmd. */
   struct DetectedCommandsCompare
   {
@@ -168,7 +176,7 @@ namespace	// subcommand detetction
   }
 
   /* Just the command names for the short help. */
-  inline void collectAllSubcommandNames( std::set<std::string> & allCommands_r )
+  inline void collectAllSubcommandNames( std::set<std::string> & allCommands_r, const std::vector<Pathname> pathDirs_r )
   {
     auto collectSubcommandsIn = [&allCommands_r]( const Pathname & dir_r ) {
       detectSubcommandsIn( dir_r,
@@ -180,17 +188,13 @@ namespace	// subcommand detetction
 
     collectSubcommandsIn( SubcommandOptions::_execdir );
 
-    std::set<Pathname> dirs;
-    str::split( env::PATH(), std::inserter(dirs,dirs.end()), ":" );
-    for ( const auto & dir : dirs )
-    {
+    for ( const auto & dir : pathDirs_r )
       collectSubcommandsIn( dir );
-    }
   }
 
   /* The command details for the long help. */
   inline void collectAllSubcommands( DetectedCommands & execdirCommands_r,
-				     DetectedCommands & pathCommands_r )
+				     DetectedCommands & pathCommands_r, const std::vector<Pathname> pathDirs_r )
   {
     // Commands in _execdir shadow commands in the path.
     auto collectSubcommandsIn = []( const Pathname & dir_r, DetectedCommands & commands_r, DetectedCommands * shaddow_r = nullptr ) {
@@ -204,12 +208,8 @@ namespace	// subcommand detetction
 
     collectSubcommandsIn( SubcommandOptions::_execdir, execdirCommands_r );
 
-    std::set<Pathname> dirs;
-    str::split( env::PATH(), std::inserter(dirs,dirs.end()), ":" );
-    for ( const auto & dir : dirs )
-    {
+    for ( const auto & dir : pathDirs_r )
       collectSubcommandsIn( dir, pathCommands_r, &execdirCommands_r );
-    }
   }
 
 } // namespace
@@ -463,17 +463,23 @@ std::ostream & SubcommandOptions::showHelpOn( std::ostream & out ) const
 
       DetectedCommands execdirCommands;
       DetectedCommands pathCommands;
-      collectAllSubcommands( execdirCommands, pathCommands );
+      collectAllSubcommands( execdirCommands, pathCommands, pathDirsIf( _zypper.config().seach_subcommand_in_path ) );
 
       // translators: headline of an enumeration; %1% is a directory name
-      out << str::Format(_("Available zypper subcommands in '%1%'") ) % _execdir << endl;
+      out << str::Format(_("Available zypper subcommands in '%1%'") ) % _execdir << ":" << endl;
       out << endl;
       dumpDetectedCommandsOn( out, execdirCommands ) << endl;
 
-      // translators: headline of an enumeration
-      out << _("Zypper subcommands available from elsewhere on your $PATH") << endl;
-      out << endl;
-      dumpDetectedCommandsOn( out, pathCommands, /*withPath*/true ) << endl;
+      if ( _zypper.config().seach_subcommand_in_path ) {
+	// translators: headline of an enumeration
+	out << _("Zypper subcommands available from elsewhere on your $PATH") << ":" << endl;
+	out << endl;
+	dumpDetectedCommandsOn( out, pathCommands, /*withPath*/true ) << endl;
+      }
+      else {
+	out << _("Using zypper subcommands available from elsewhere on your $PATH is disabled in zypper.conf.") << endl;
+	out << endl;
+      }
 
       // translators: helptext; %1% is a zypper command
       out << str::Format(_("Type '%1%' to get subcommand-specific help if available.") ) % "zypper help <subcommand>" << endl;
@@ -481,7 +487,7 @@ std::ostream & SubcommandOptions::showHelpOn( std::ostream & out ) const
     else
     {
       std::set<std::string> allCommands;
-      collectAllSubcommandNames( allCommands );
+      collectAllSubcommandNames( allCommands, pathDirsIf( _zypper.config().seach_subcommand_in_path ) );
       if ( ! allCommands.empty() )
 	dumpRange( out, allCommands.begin(),allCommands.end(), "", "", ", ", "", "" );
     }
@@ -512,7 +518,10 @@ SubCmd::SubCmd(std::vector<std::string> &&commandAliases_r , boost::shared_ptr<S
     std::move( commandAliases_r ),
     "subcommand",
     // translators: command summary: subcommand
-    _("Lists available subcommands."),
+    Zypper::instance().config().seach_subcommand_in_path
+    ? _("Lists available subcommands.")
+    : _("Lists available subcommands. Using zypper subcommands found on your $PATH is disabled in zypper.conf.")
+    ,
     "", //no help text, its created on demand
     DisableAll
     ),
@@ -545,22 +554,20 @@ bool SubCmd::isSubcommand(const std::string &strval_r )
   if ( testAndRememberSubcommand( SubcommandOptions::_execdir, execname, strval_r ) )
     return true;
 
-  // Search in $PATH...
-  std::vector<Pathname> dirs;
-  str::split( env::PATH(), std::back_inserter(dirs), ":" );
-  for ( const auto & dir : dirs )
-  {
-    if ( testAndRememberSubcommand( dir, execname, strval_r ) )
-      return true;
+  if ( Zypper::instance().config().seach_subcommand_in_path ) {
+    // Search in $PATH...
+    for ( const auto & dir : pathDirsIf( true ) ) {
+      if ( testAndRememberSubcommand( dir, execname, strval_r ) )
+	return true;
+    }
   }
-
   return false;
 }
 
 CommandSummaries SubCmd::getSubcommandSummaries()
 {
   DetectedCommands detetctedCommands;
-  collectAllSubcommands( detetctedCommands, detetctedCommands ); // all in one is ok
+  collectAllSubcommands( detetctedCommands, detetctedCommands, pathDirsIf( Zypper::instance().config().seach_subcommand_in_path ) ); // all in one is ok
   return getCommandsummaries( detetctedCommands );
 }
 
