@@ -10,17 +10,17 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-07-28 11:38+0200\n"
-"PO-Revision-Date: 2021-05-12 23:58+0000\n"
-"Last-Translator: Alex Minton <alex239@gmail.com>\n"
-"Language-Team: Russian <https://l10n.opensuse.org/projects/zypper/master/ru/"
-">\n"
+"PO-Revision-Date: 2021-10-10 15:11+0000\n"
+"Last-Translator: Andrey Karepin <egdfree@opensuse.org>\n"
+"Language-Team: Russian <https://l10n.opensuse.org/projects/zypper/master/ru/>"
+"\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 4.6.2\n"
+"X-Generator: Weblate 4.7.1\n"
 
 #: src/Command.cc:93
 msgid "Invalid command"
@@ -80,9 +80,9 @@ msgstr "Для исправления проблем с зависимостям
 #, c-format, boost-format
 msgid "The following package failed to install:"
 msgid_plural "The following %d packages failed to install:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Не удалось установить пакет:"
+msgstr[1] "Следующие %d пакетов установить не удалось:"
+msgstr[2] "Следующие %d пакетов установить не удалось:"
 
 #: src/CommitSummary.cc:140
 #, c-format, boost-format
@@ -1248,7 +1248,7 @@ msgstr[2] "%d исправлений требуют перезагрузки:"
 #, c-format, boost-format
 msgid "The following package requires a system reboot:"
 msgid_plural "The following %d packages require a system reboot:"
-msgstr[0] "Для следующего %d пакета требуется перезагрузка системы:"
+msgstr[0] "Следующему пакету требуется перезагрузка системы:"
 msgstr[1] "Для следующих %d пакетов требуется перезагрузка системы:"
 msgstr[2] "Для следующих %d пакетов требуется перезагрузка системы:"
 
