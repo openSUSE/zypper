@@ -18,6 +18,7 @@
 #include <zypp-core/base/NonCopyable.h>
 #include <zypp-core/base/PtrTypes.h>
 #include <zypp-core/base/Function.h>
+#include <zypp-core/Pathname.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -97,10 +98,11 @@ namespace zypp
       typedef typename boost::call_traits<Tp>::const_reference  const_reference;
       typedef Tp                                                value_type;
       typedef typename boost::call_traits<Tp>::value_type       result_type;
+      using dispose_param_type = std::conditional_t< std::is_pointer_v<Tp> || std::is_integral_v<Tp>, Tp const, reference >;
 
     public:
       /** Dispose function signatue. */
-      typedef function<void ( param_type )> Dispose;
+      using Dispose = function<void ( dispose_param_type )>;
 
     public:
       /** Default Ctor using default constructed value and no dispose function. */
