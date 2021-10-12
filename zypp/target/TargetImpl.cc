@@ -2285,14 +2285,14 @@ namespace zypp
           // read the stdout and forward it to our log
           prog->stdoutDevice()->connectFunc( &zyppng::IODevice::sigReadyRead, [&](){
             while( prog->stdoutDevice()->canReadLine() ) {
-              MIL << "zypp-rpm stdout: " << prog->stdoutDevice()->readLine().asStringView() << std::endl;
+              L_DBG("zypp-rpm") << "zypp-rpm stdout: " << prog->stdoutDevice()->readLine().asStringView(); // no endl! - readLine does not trim
             }
           });
 
           // read the stderr and forward it to our log
           prog->stderrDevice()->connectFunc( &zyppng::IODevice::sigReadyRead, [&](){
             while( prog->stderrDevice()->canReadLine() ) {
-              MIL << "zypp-rpm stderr: " << prog->stderrDevice()->readLine().asStringView() << std::endl;
+              L_ERR("zypp-rpm") << "zypp-rpm stderr: " << prog->stderrDevice()->readLine().asStringView(); // no endl! - readLine does not trim
             }
           });
 

@@ -29,6 +29,9 @@ extern "C"
 #include <signal.h>
 #include <unistd.h>
 
+// Messages to the zypp log sent on stdout/stderr
+#define ZDBG std::cout
+#define ZERR std::cerr
 
 // this is the order we expect the FDs we need to communicate to be set up
 // by the parent. This is not pretty but it works and is less effort than
@@ -118,14 +121,14 @@ std::pair<RpmHeader, int> readPackage( rpmts ts_r, const zypp::filesystem::Pathn
 {
   zypp::PathInfo file( path_r );
   if ( ! file.isFile() ) {
-    std::cerr << "Not a file: " << path_r << std::endl;
+    ZERR << "Not a file: " << path_r << std::endl;
     return std::make_pair( RpmHeader(), -1 );
   }
 
   FD_t fd = ::Fopen( path_r.c_str(), "r.ufdio" );
   if ( fd == 0  || ::Ferror(fd) )
   {
-    std::cerr << "Can't open file for reading: " << path_r << " (" << ::Fstrerror(fd) << ")" << std::endl;
+    ZERR << "Can't open file for reading: " << path_r << " (" << ::Fstrerror(fd) << ")" << std::endl;
     if ( fd )
       ::Fclose( fd );
     return std::make_pair( RpmHeader(), -1 );
@@ -137,7 +140,7 @@ std::pair<RpmHeader, int> readPackage( rpmts ts_r, const zypp::filesystem::Pathn
 
   if ( ! nh )
   {
-    std::cerr << "Error reading header from " << path_r << " error(" << res << ")" << std::endl;
+    ZERR << "Error reading header from " << path_r << " error(" << res << ")" << std::endl;
     return std::make_pair( RpmHeader(), res );
   }
 
@@ -161,27 +164,27 @@ int main( int, char ** )
 
   // check if our env is set up correctly
   if ( ::isatty(STDIN_FILENO) || ::isatty(STDOUT_FILENO) || ::isatty(STDERR_FILENO) ) {
-    std::cerr << "Running zypp-rpm directly from the console is not supported. This is just a internal helper tool for libzypp." << std::endl;
+    ZERR << "Running zypp-rpm directly from the console is not supported. This is just a internal helper tool for libzypp." << std::endl;
     return OtherError;
   }
 
   // make sure the expected FDs are around too
   struct stat sb;
   if ( fstat( static_cast<int>(ExpectedFds::MessageFd), &sb) == -1 ) {
-    std::cerr << "Expected message fd is not valid, aborting" << std::endl;
+    ZERR << "Expected message fd is not valid, aborting" << std::endl;
     return OtherError;
   }
   if ( (sb.st_mode & S_IFMT) != S_IFIFO ){
-    std::cerr << "Expected message fd is not a pipe, aborting" << std::endl;
+    ZERR << "Expected message fd is not a pipe, aborting" << std::endl;
     return OtherError;
   }
 
   if ( fstat( static_cast<int>(ExpectedFds::ScriptFd), &sb) == -1 ) {
-    std::cerr << "Expected script fd is not valid, aborting" << std::endl;
+    ZERR << "Expected script fd is not valid, aborting" << std::endl;
     return OtherError;
   }
   if ( (sb.st_mode & S_IFMT) != S_IFIFO ){
-    std::cerr << "Expected script fd is not a pipe, aborting" << std::endl;
+    ZERR << "Expected script fd is not a pipe, aborting" << std::endl;
     return OtherError;
   }
 
@@ -192,7 +195,7 @@ int main( int, char ** )
   // lets read our todo from stdin
   zyppng::rpc::HeaderSizeType msgSize = 0;
   if ( !recvBytes( STDIN_FILENO, reinterpret_cast<char *>(&msgSize), sizeof(zyppng::rpc::HeaderSizeType) ) ) {
-    std::cerr << "Wrong Header size, aborting" << std::endl;
+    ZERR << "Wrong Header size, aborting" << std::endl;
     return WrongHeaderSize;
   }
 
@@ -202,7 +205,7 @@ int main( int, char ** )
   {
     zyppng::FileInputStream in( STDIN_FILENO );
     if ( !msg.ParseFromBoundedZeroCopyStream( &in, msgSize ) ) {
-      std::cerr << "Wrong commit message format, aborting" << std::endl;
+      ZERR << "Wrong commit message format, aborting" << std::endl;
       return WrongMessageFormat;
     }
 
@@ -212,7 +215,7 @@ int main( int, char ** )
   // first we initialize the rpmdb
   int rc = ::rpmReadConfigFiles( NULL, NULL );
   if ( rc ) {
-    std::cerr << "rpmReadConfigFiles returned " << rc << std::endl;
+    ZERR << "rpmReadConfigFiles returned " << rc << std::endl;
     return RpmInitFailed;
   }
 
@@ -263,7 +266,7 @@ int main( int, char ** )
   if ( rpmtsGetRdb(ts) == NULL ) {
     int res = ::rpmtsOpenDB( ts, O_RDWR );
     if ( res ) {
-      std::cerr << "rpmdbOpen error(" << res << "): " << std::endl;
+      ZERR << "rpmdbOpen error(" << res << "): " << std::endl;
       return FailedToOpenDb;
     }
   }
@@ -286,36 +289,36 @@ int main( int, char ** )
         case RPMRC_OK:
           break;
         case RPMRC_NOTTRUSTED:
-          std::cerr << zypp::str::Format( "Failed to verify key for %s" ) % file << std::endl;
+          ZERR << zypp::str::Format( "Failed to verify key for %s" ) % file << std::endl;
           if ( !allowUntrusted )
             return FailedToReadPackage;
           break;
         case RPMRC_NOKEY:
-          std::cerr << zypp::str::Format( "Public key unavailable for %s" ) % file << std::endl;
+          ZERR << zypp::str::Format( "Public key unavailable for %s" ) % file << std::endl;
           if ( !allowUntrusted )
             return FailedToReadPackage;
           break;
         case RPMRC_NOTFOUND:
-          std::cerr << zypp::str::Format( "Signature not found for %s" ) % file << std::endl;
+          ZERR << zypp::str::Format( "Signature not found for %s" ) % file << std::endl;
           if ( !allowUntrusted )
             return FailedToReadPackage;
           break;
         case RPMRC_FAIL:
-          std::cerr << zypp::str::Format( "Signature does not verify for %s" ) % file << std::endl;
+          ZERR << zypp::str::Format( "Signature does not verify for %s" ) % file << std::endl;
           return FailedToReadPackage;
         default:
-          std::cerr << zypp::str::Format( "Failed to open(generic error): %1%" ) % file << std::endl;
+          ZERR << zypp::str::Format( "Failed to open(generic error): %1%" ) % file << std::endl;
           return FailedToReadPackage;
       }
 
       if ( !rpmHeader.first ) {
-        std::cerr << zypp::str::Format( "Failed to read rpm header from: %1%" )% file << std::endl;
+        ZERR << zypp::str::Format( "Failed to read rpm header from: %1%" )% file << std::endl;
         return FailedToReadPackage;
       }
 
       const auto res = ::rpmtsAddInstallElement( ts, rpmHeader.first.get(), &step, !step.install().multiversion(), nullptr  );
       if ( res ) {
-        std::cerr << zypp::str::Format( "Failed to add %1% to the transaction." )% file << std::endl;
+        ZERR << zypp::str::Format( "Failed to add %1% to the transaction." )% file << std::endl;
         return FailedToAddStepToTransaction;
       }
 
@@ -339,7 +342,7 @@ int main( int, char ** )
 
           const auto res = ::rpmtsAddEraseElement( ts, hdr.get(), 0  );
           if ( res ) {
-            std::cerr << zypp::str::Format( "Failed to add removal of %1% to the transaction." ) % name << std::endl;
+            ZERR << zypp::str::Format( "Failed to add removal of %1% to the transaction." ) % name << std::endl;
             return FailedToAddStepToTransaction;
           }
 
@@ -349,11 +352,11 @@ int main( int, char ** )
       }
 
       if ( !found ) {
-        std::cerr << "Unable to remove " << name << " it was not found!" << std::endl;
+        ZERR << "Unable to remove " << name << " it was not found!" << std::endl;
       }
 
     } else {
-      std::cerr << "Ignoring step that is neither a remove, nor a install." << std::endl;
+      ZERR << "Ignoring step that is neither a remove, nor a install." << std::endl;
     }
 
   }
@@ -372,10 +375,10 @@ int main( int, char ** )
   );
 
   if ( data.rpmFd.value() ) {
-    std::cerr << "Assigning script FD" << std::endl;
+    //ZDBG << "Assigning script FD" << std::endl;
     ::rpmtsSetScriptFd( ts,  data.rpmFd );
   } else {
-    std::cerr << "Failed to assign script FD" << std::endl;
+    ZERR << "Failed to assign script FD" << std::endl;
   }
 
 
@@ -407,7 +410,7 @@ int main( int, char ** )
       const auto &rpmMsg = sstr.str();
 
       // TranslatorExplanation the colon is followed by an error message
-      std::cerr << std::string("RPM failed: ") + rpmMsg << std::endl;
+      ZERR << std::string("RPM failed: ") + rpmMsg << std::endl;
       return RpmFinishedWithTransactionError;
     }
   }
@@ -437,7 +440,7 @@ int main( int, char ** )
 
   const auto orderRes = rpmtsOrder( ts );
   if ( orderRes ) {
-    std::cerr << zypp::str::Format( "Failed with error %1% while ordering transaction." )% orderRes << std::endl;
+    ZERR << zypp::str::Format( "Failed with error %1% while ordering transaction." )% orderRes << std::endl;
     return RpmOrderFailed;
   }
 
@@ -476,11 +479,11 @@ int main( int, char ** )
     sstr << "rpm output:" << std::endl << errMsg << std::endl;
     //HistoryLog().comment(sstr.str());
 
-    std::cerr << "RPM transaction failed: " + errMsg << std::endl;
+    ZERR << "RPM transaction failed: " + errMsg << std::endl;
     return err;
   }
 
-  std::cerr << "Success !!!!" << std::endl;
+  //ZDBG << "Success !!!!" << std::endl;
 
   return NoError;
 }
@@ -537,7 +540,7 @@ void *rpmLibCallback( const void *h, const rpmCallbackType what, const rpm_loff_
   }
 
   const auto &sendEndOfScriptTag = [&](){
-    std::cerr << "Send end of script" << std::endl;
+    //ZDBG << "Send end of script" << std::endl;
     ::sendBytes( static_cast<int>( ExpectedFds::ScriptFd ), endOfScriptTag.data(), endOfScriptTag.size() );
   };
 
@@ -547,10 +550,10 @@ void *rpmLibCallback( const void *h, const rpmCallbackType what, const rpm_loff_
       if ( !iStep || !iStep->has_install() || iStep->install().pathname().empty() )
         return NULL;
       if ( fd != NULL )
-        std::cerr << "ERR opening a file before closing the old one?  Really ? " << std::endl;
+        ZERR << "ERR opening a file before closing the old one?  Really ? " << std::endl;
       fd = Fopen( iStep->install().pathname().data(), "r.ufdio" );
       if (fd == NULL || Ferror(fd)) {
-        std::cerr << "Error when opening file " << iStep->install().pathname().data() << std::endl;
+        ZERR << "Error when opening file " << iStep->install().pathname().data() << std::endl;
         if (fd != NULL) {
           Fclose(fd);
           fd = NULL;
@@ -586,7 +589,7 @@ void *rpmLibCallback( const void *h, const rpmCallbackType what, const rpm_loff_
       if ( !iStep ) {
 
         if ( header.empty() ) {
-          std::cerr << "No header and no transaction step for a uninstall start, not sending anything" << std::endl;
+          ZERR << "No header and no transaction step for a uninstall start, not sending anything" << std::endl;
           return rc;
         }
 
@@ -598,7 +601,7 @@ void *rpmLibCallback( const void *h, const rpmCallbackType what, const rpm_loff_
       } else {
 
         if ( !iStep->has_remove() ) {
-          std::cerr << "Could not find package in removables " << header << " in transaction elements" << std::endl;
+          ZERR << "Could not find package in removables " << header << " in transaction elements" << std::endl;
           return rc;
         }
 
@@ -612,7 +615,7 @@ void *rpmLibCallback( const void *h, const rpmCallbackType what, const rpm_loff_
     case RPMCALLBACK_INST_STOP: {
 
       if ( !iStep ) {
-        std::cerr << "Could not find package " << header << " in transaction elements for " << what << std::endl;
+        ZERR << "Could not find package " << header << " in transaction elements for " << what << std::endl;
         return rc;
       }
 
@@ -629,7 +632,7 @@ void *rpmLibCallback( const void *h, const rpmCallbackType what, const rpm_loff_
 
       if ( !iStep ) {
         if ( header.empty() ) {
-          std::cerr << "No header and no transaction step for a uninstall stop, not sending anything" << std::endl;
+          ZERR << "No header and no transaction step for a uninstall stop, not sending anything" << std::endl;
           return rc;
         }
 
@@ -654,7 +657,7 @@ void *rpmLibCallback( const void *h, const rpmCallbackType what, const rpm_loff_
     case RPMCALLBACK_UNPACK_ERROR: {
 
       if ( !iStep ) {
-        std::cerr << "Could not find package " << header << " in transaction elements for " << what << std::endl;
+        ZERR << "Could not find package " << header << " in transaction elements for " << what << std::endl;
         return rc;
       }
 
@@ -688,7 +691,7 @@ void *rpmLibCallback( const void *h, const rpmCallbackType what, const rpm_loff_
                                         : 100.0);
       if ( !iStep  ) {
         if ( header.empty() ) {
-          std::cerr << "No header and no transaction step for a uninstall progress, not sending anything" << std::endl;
+          ZERR << "No header and no transaction step for a uninstall progress, not sending anything" << std::endl;
           return rc;
         }
 
@@ -745,7 +748,7 @@ void *rpmLibCallback( const void *h, const rpmCallbackType what, const rpm_loff_
       break;
     }
     case RPMCALLBACK_CPIO_ERROR:
-      std::cerr << "CPIO Error when installing package" << std::endl;
+      ZERR << "CPIO Error when installing package" << std::endl;
       break;
     case RPMCALLBACK_SCRIPT_START: {
       zypp::proto::target::ScriptBegin script;
@@ -800,7 +803,7 @@ int rpmLogCallback ( rpmlogRec rec, rpmlogCallbackData )
   zypp::proto::target::RpmLog log;
   log.set_level( rpmlogRecPriority(rec)  );
   log.set_line( zypp::str::asString( ::rpmlogRecMessage(rec) ) );
-  std::cerr << "Pushing log message: " << log.line() << std::endl;
+  ZERR << "Pushing log message: " << log.line() << std::endl;
   pushMessage( log );
 
   return logRc;
