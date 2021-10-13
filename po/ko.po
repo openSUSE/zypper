@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper.ko\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-28 11:38+0200\n"
+"POT-Creation-Date: 2021-10-13 15:45+0200\n"
 "PO-Revision-Date: 2019-04-04 18:36+0000\n"
 "Last-Translator: Hwajin Kim <hwajin.kim@e4net.net>\n"
 "Language-Team: Korean <https://l10n.opensuse.org/projects/zypper/master/ko/"
@@ -115,144 +115,144 @@ msgstr "잘못된 테이블 스타일 %d입니다."
 msgid " Use an integer number from %d to %d"
 msgstr " %d부터 %d까지의 정수 사용"
 
-#: src/Config.cc:248
+#: src/Config.cc:252
 msgid "The path specified in the --root option must be absolute."
 msgstr "--root 옵션에서 지정한 경로는 절대 경로여야 합니다."
 
 #. translators: --help, -h
-#: src/Config.cc:326
+#: src/Config.cc:330
 msgid "Help."
 msgstr "도움말."
 
 #. translators: --version, -V
-#: src/Config.cc:335
+#: src/Config.cc:339
 msgid "Output the version number."
 msgstr "버전 번호를 출력합니다."
 
 #. translators: --promptids
-#: src/Config.cc:347
+#: src/Config.cc:351
 msgid "Output a list of zypper's user prompts."
 msgstr "zypper 사용자 프롬프트 목록을 출력합니다."
 
 #. translators: --config, -c <FILE>
-#: src/Config.cc:360
+#: src/Config.cc:364
 msgid "Use specified config file instead of the default."
 msgstr "기본 파일 대신 지정된 구성 파일을 사용합니다."
 
-#: src/Config.cc:367
+#: src/Config.cc:371
 msgid "User data string must not contain nonprintable or newline characters!"
 msgstr ""
 "사용자 데이터 스트링에 인쇄할 수 없는 문자나 줄바꿈 문자를 포함하면 안 됩니"
 "다!"
 
 #. translators: --userdata <STRING>
-#: src/Config.cc:373
+#: src/Config.cc:377
 msgid "User defined transaction id used in history and plugins."
 msgstr "이력과 플러그인에서 사용되는 사용자 정의 트랜잭션 ID."
 
 #. translators: --quiet, -q
-#: src/Config.cc:381
+#: src/Config.cc:385
 msgid "Suppress normal output, print only error messages."
 msgstr "일반 출력을 생략하고 오류 메시지만 출력합니다."
 
 #. translators: --verbose, -v
-#: src/Config.cc:389
+#: src/Config.cc:393
 msgid "Increase verbosity."
 msgstr "표시 수준을 높입니다."
 
 #. translators: --color / --no-color
-#: src/Config.cc:410
+#: src/Config.cc:414
 msgid "Whether to use colors in output if tty supports it."
 msgstr "tty가 지원할 경우 컬러 출력 여부를 지정합니다."
 
 #. translators: --no-abbrev, -A
-#: src/Config.cc:415
+#: src/Config.cc:419
 msgid "Do not abbreviate text in tables."
 msgstr "테이블에서 텍스트를 약어로 표시하지 않습니다."
 
 #. translators: --table-style, -s, %1% denotes the supported range of the integer argument (e.g. "1-11")
-#: src/Config.cc:420
+#: src/Config.cc:424
 #, fuzzy, boost-format
 msgid "Table style (%1%)."
 msgstr "테이블 스타일(정수)."
 
-#: src/Config.cc:424 src/commands/optionsets.cc:284
+#: src/Config.cc:428 src/commands/optionsets.cc:284
 msgid "Entering non-interactive mode."
 msgstr "비대화형 모드로 들어가는 중입니다."
 
 #. translators: --non-interactive, -n
-#: src/Config.cc:428
+#: src/Config.cc:432
 msgid "Do not ask anything, use default answers automatically."
 msgstr "아무것도 묻지 않고 자동으로 기본 답변을 사용합니다."
 
-#: src/Config.cc:433
+#: src/Config.cc:437
 msgid ""
 "Patches having the flag rebootSuggested set will not be treated as "
 "interactive."
 msgstr "rebootSuggested 플래그를 설정한 패치는 대화식으로 처리되지 않습니다."
 
 #. translators: --non-interactive-include-reboot-patches
-#: src/Config.cc:437
+#: src/Config.cc:441
 msgid ""
 "Do not treat patches as interactive, which have the rebootSuggested-flag set."
 msgstr "rebootSuggested-flag가 설정된 패치를 대화형으로 취급하지 않습니다."
 
 #. translators: --xmlout, -x
-#: src/Config.cc:447
+#: src/Config.cc:451
 msgid "Switch to XML output."
 msgstr "XML 출력으로 전환합니다."
 
 #. translators: --ignore-unknown, -i
-#: src/Config.cc:452
+#: src/Config.cc:456
 msgid "Ignore unknown packages."
 msgstr "알 수 없는 패키지를 무시합니다."
 
 #. translators: --terse, -t
-#: src/Config.cc:463
+#: src/Config.cc:467
 msgid ""
 "Terse output for machine consumption. Implies --no-abbrev and --no-color."
 msgstr ""
 "시스템 사용에 대한 간단한 출력입니다. --no-abbrev 및 --no-color를 의미합니다."
 
 #. translators: --reposd-dir, -D <DIR>
-#: src/Config.cc:487
+#: src/Config.cc:491
 msgid "Use alternative repository definition file directory."
 msgstr "대체 리포지토리 정의 파일 디렉토리를 사용합니다."
 
 #. translators: --cache-dir, -C <DIR>
-#: src/Config.cc:502
+#: src/Config.cc:506
 msgid "Use alternative directory for all caches."
 msgstr "모든 캐시에 대한 대체 디렉토리를 사용합니다."
 
 #. translators: --raw-cache-dir <DIR>
-#: src/Config.cc:515
+#: src/Config.cc:519
 msgid "Use alternative raw meta-data cache directory."
 msgstr "대체 원시 메타 데이터 캐시 디렉토리를 사용합니다."
 
 #. translators: --solv-cache-dir <DIR>
-#: src/Config.cc:529
+#: src/Config.cc:533
 msgid "Use alternative solv file cache directory."
 msgstr "대체 solv 파일 캐시 디렉토리를 사용합니다."
 
 #. translators: --pkg-cache-dir <DIR>
-#: src/Config.cc:543
+#: src/Config.cc:547
 msgid "Use alternative package cache directory."
 msgstr "대체 패키지 캐시 디렉토리를 사용합니다."
 
-#: src/Config.cc:548
+#: src/Config.cc:552
 msgid "Repository Options"
 msgstr "리포지토리 옵션"
 
-#: src/Config.cc:552
+#: src/Config.cc:556
 msgid "Entering 'no-gpg-checks' mode."
 msgstr "'no-gpg-checks' 모드로 들어가는 중입니다."
 
 #. translators: --no-gpg-checks
-#: src/Config.cc:556
+#: src/Config.cc:560
 msgid "Ignore GPG check failures and continue."
 msgstr "GPG 확인 오류를 무시하고 계속합니다."
 
-#: src/Config.cc:561
+#: src/Config.cc:565
 #, c-format, boost-format
 msgid ""
 "Turning on '%s'. New repository signing keys will be automatically imported!"
@@ -260,17 +260,17 @@ msgstr ""
 "'%s'을(를) 설정 중입니다. 새 리포지토리 서명 키가 자동으로 임포트됩니다."
 
 #. translators: --gpg-auto-import-keys
-#: src/Config.cc:567
+#: src/Config.cc:571
 msgid "Automatically trust and import new repository signing keys."
 msgstr "새로운 리포지토리 서명 키를 자동으로 신뢰하고 임포트합니다."
 
 #. translators: --plus-repo, -p <URI>
-#: src/Config.cc:571
+#: src/Config.cc:575
 msgid "Use an additional repository."
 msgstr "추가 리포지토리를 사용합니다."
 
 #. translators: --plus-content <TAG>
-#: src/Config.cc:575
+#: src/Config.cc:579
 msgid ""
 "Additionally use disabled repositories providing a specific keyword. Try '--"
 "plus-content debug' to enable repos indicating to provide debug packages."
@@ -279,84 +279,84 @@ msgstr ""
 "plus-content debug'를 사용하여 디버그 패키지 제공을 나타내는 리포지토리를 활"
 "성화합니다."
 
-#: src/Config.cc:581
+#: src/Config.cc:585
 msgid "Repositories disabled, using the database of installed packages only."
 msgstr ""
 "리포지토리가 비활성화되었습니다. 설치된 패키지의 데이터베이스만 사용합니다."
 
 #. translators: --disable-repositories
-#: src/Config.cc:585
+#: src/Config.cc:589
 msgid "Do not read meta-data from repositories."
 msgstr "리포지토리의 메타 데이터를 읽지 않습니다."
 
-#: src/Config.cc:589
+#: src/Config.cc:593
 msgid "Autorefresh disabled."
 msgstr "자동 새로 고침이 비활성화되었습니다."
 
 #. translators: --no-refresh
-#: src/Config.cc:593
+#: src/Config.cc:597
 msgid "Do not refresh the repositories."
 msgstr "리포지토리를 새로 고침하지 않습니다."
 
-#: src/Config.cc:597
+#: src/Config.cc:601
 msgid "CD/DVD repositories disabled."
 msgstr "CD/DVD 리포지토리가 비활성화되었습니다."
 
 #. translators: --no-cd
-#: src/Config.cc:601
+#: src/Config.cc:605
 msgid "Ignore CD/DVD repositories."
 msgstr "CD/DVD 리포지토리를 무시합니다."
 
-#: src/Config.cc:605
+#: src/Config.cc:609
 msgid "Remote repositories disabled."
 msgstr "원격 리포지토리가 비활성화되었습니다."
 
 #. translators: --no-remote
-#: src/Config.cc:609
+#: src/Config.cc:613
 msgid "Ignore remote repositories."
 msgstr "원격 리포지토리를 무시합니다."
 
 #. translators: --releasever
-#: src/Config.cc:616
+#: src/Config.cc:620
 msgid ""
 "Set the value of $releasever in all .repo files (default: distribution "
 "version)"
 msgstr "$releasever 값을 모든 .repo 파일에서 설정합니다(기본: 배포 버전)"
 
-#: src/Config.cc:620
+#: src/Config.cc:624
 msgid "Target Options"
 msgstr "대상 옵션"
 
 #. translators: --root, -R <DIR>
-#: src/Config.cc:625
+#: src/Config.cc:629
 msgid "Operate on a different root directory."
 msgstr "다른 루트 디렉토리에서 작동합니다."
 
 #. translators: --installroot <DIR>
-#: src/Config.cc:631
+#: src/Config.cc:635
 msgid ""
 "Operate on a different root directory, but share repositories with the host."
 msgstr "다른 루트 디렉토리에서 작동하지만 호스트와 리포지토리를 공유합니다."
 
-#: src/Config.cc:637
+#: src/Config.cc:641
 msgid "Ignoring installed resolvables."
 msgstr "설치된 resolvable을 무시하는 중입니다."
 
 #. translators: --disable-system-resolvables
-#: src/Config.cc:640
+#: src/Config.cc:644
 msgid "Do not read installed packages."
 msgstr "설치된 패키지를 읽지 않습니다."
 
-#: src/Config.cc:804
+#: src/Config.cc:811
 msgid "No config file is in use. Can not save options."
 msgstr "사용 중인 구성 파일이 없습니다. 옵션을 저장할 수 없습니다."
 
-#: src/Config.cc:815
+#: src/Config.cc:822
 #, boost-format
 msgid "Option '%1%' saved in '%2%'."
 msgstr "'%1%' 옵션이 '%2%'에 저장되었습니다."
 
-#: src/Config.cc:822
+#: src/Config.cc:829
 msgid "Failed to save option."
 msgstr "옵션을 저장하지 못했습니다."
 
@@ -4501,30 +4501,30 @@ msgid "Uninstalling source packages is not supported."
 msgstr "소프 패키지 제거는 지원되지 않습니다."
 
 #. translators: %1% is the name of the command which has no man page available.
-#: src/commands/subcommand.cc:79
+#: src/commands/subcommand.cc:88
 #, boost-format
 msgid "No manual entry for %1%"
 msgstr ""
 
-#: src/commands/subcommand.cc:92
+#: src/commands/subcommand.cc:103
 msgid "none"
 msgstr "없음"
 
-#: src/commands/subcommand.cc:329
+#: src/commands/subcommand.cc:332
 #, boost-format
 msgid "cannot exec %1% (%2%)"
 msgstr "%1%(%2%) 실행 불가"
 
 #. translators: %1% - command name or path
 #. translators: %2% - system error message
-#: src/commands/subcommand.cc:338
+#: src/commands/subcommand.cc:341
 #, boost-format
 msgid "fork for %1% failed (%2%)"
 msgstr "%1%에 대한 포크 실패(%2%)"
 
 #. translators: %1% - command name or path
 #. translators: %2% - system error message
-#: src/commands/subcommand.cc:357
+#: src/commands/subcommand.cc:360
 #, boost-format
 msgid "waitpid for %1% failed (%2%)"
 msgstr "%1%에 대한 waitpid 실패(%2%)"
@@ -4532,7 +4532,7 @@ msgstr "%1%에 대한 waitpid 실패(%2%)"
 #. translators: %1% - command name or path
 #. translators: %2% - returned PID (number)
 #. translators: %3% - expected PID (number)
-#: src/commands/subcommand.cc:367
+#: src/commands/subcommand.cc:370
 #, boost-format
 msgid "waitpid for %1% returns unexpected pid %2% while waiting for %3%"
 msgstr "%3% 대기 중 %1%에 대한 waitpid에서 예기치 못한 pid %2%이(가) 반환됨"
@@ -4540,30 +4540,30 @@ msgstr "%3% 대기 중 %1%에 대한 waitpid에서 예기치 못한 pid %2%이(�
 #. translators: %1% - command name or path
 #. translators: %2% - signal number
 #. translators: %3% - signal name
-#: src/commands/subcommand.cc:378
+#: src/commands/subcommand.cc:381
 #, boost-format
 msgid "%1% was killed by signal %2% (%3%)"
 msgstr "%1%이(가) %2%(%3%) 신호로 강제 종료됨"
 
-#: src/commands/subcommand.cc:382
+#: src/commands/subcommand.cc:385
 msgid "core dumped"
 msgstr "코어 덤프됨"
 
 #. translators: %1% - command name or path
 #. translators: %2% - exit code (number)
-#: src/commands/subcommand.cc:392
+#: src/commands/subcommand.cc:395
 #, boost-format
 msgid "%1% exited with status %2%"
 msgstr "%1%이(가) %2% 상태로 종료됨"
 
 #. translators: %1% - command name or path
 #. translators: %2% - status (number)
-#: src/commands/subcommand.cc:407
+#: src/commands/subcommand.cc:410
 #, boost-format
 msgid "waitpid for %1% returns unexpected exit status %2%"
 msgstr "%1%에 대한 waitpid에서 예기치 않은 종료 상태 %2% 반환"
 
-#: src/commands/subcommand.cc:440
+#: src/commands/subcommand.cc:443
 #, boost-format
 msgid ""
 "Zypper subcommands are standalone executables that live in the\n"
@@ -4589,7 +4589,7 @@ msgstr ""
 "$PATH의 나머지 위치를 찾아봅니다. 따라서 \n"
 "시스템 영역에 상주하지 않는 로컬 zypper 확장명을 쓰는 것도 가능합니다.\n"
 
-#: src/commands/subcommand.cc:455
+#: src/commands/subcommand.cc:458
 #, boost-format
 msgid ""
 "Using zypper global-options together with subcommands, as well as\n"
@@ -4599,40 +4599,51 @@ msgstr ""
 "'%1%'의 실행 하위 명령과 함께 사용하는 것은 현재 지원되지 않습니다.\n"
 
 #. translators: headline of an enumeration; %1% is a directory name
-#: src/commands/subcommand.cc:466
+#: src/commands/subcommand.cc:469
 #, boost-format
 msgid "Available zypper subcommands in '%1%'"
 msgstr "'%1%'의 사용 가능한 zypper 하위 명령"
 
 #. translators: headline of an enumeration
-#: src/commands/subcommand.cc:471
+#: src/commands/subcommand.cc:475
 msgid "Zypper subcommands available from elsewhere on your $PATH"
 msgstr "Zypper 하위 명령은 $PATH의 다른 곳에서도 이용 가능"
 
+#: src/commands/subcommand.cc:480
+msgid ""
+"Using zypper subcommands available from elsewhere on your $PATH is disabled "
+"in zypper.conf."
+msgstr ""
+
 #. translators: helptext; %1% is a zypper command
-#: src/commands/subcommand.cc:476
+#: src/commands/subcommand.cc:485
 #, boost-format
 msgid "Type '%1%' to get subcommand-specific help if available."
 msgstr "하위 명령별 도움말을 보려면 '%1%'을(를) 입력합니다."
 
 #. translators: %1% - command name
-#: src/commands/subcommand.cc:499
+#: src/commands/subcommand.cc:508
 #, boost-format
 msgid "Manual entry for %1% can't be shown"
 msgstr "%1%에 대한 수동 엔트리는 표시할 수 없음"
 
-#. translators: command summary: subcommand
-#: src/commands/subcommand.cc:512
+#: src/commands/subcommand.cc:522
 msgid "Lists available subcommands."
 msgstr "사용 가능한 하위 명령을 나열합니다."
 
+#: src/commands/subcommand.cc:523
+msgid ""
+"Lists available subcommands. Using zypper subcommands found on your $PATH is "
+"disabled in zypper.conf."
+msgstr ""
+
 #. Currently no concept how to handle global options and ZYPPlock
-#: src/commands/subcommand.cc:616
+#: src/commands/subcommand.cc:626
 msgid "Zypper shell does not support execution of subcommands."
 msgstr "Zypper 셸은 하위 명령의 실행을 지원하지 않습니다."
 
 #. translators: %1%  - is the name of a subcommand
-#: src/commands/subcommand.cc:630
+#: src/commands/subcommand.cc:640
 #, boost-format
 msgid "Subcommand %1% does not support zypper global options."
 msgstr "하위 명령 %1%은(는) zypper 전역 옵션을 지원하지 않습니다."

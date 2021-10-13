@@ -8,11 +8,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-28 11:38+0200\n"
+"POT-Creation-Date: 2021-10-13 15:45+0200\n"
 "PO-Revision-Date: 2021-07-28 18:11+0000\n"
 "Last-Translator: David Medina <medipas@gmail.com>\n"
-"Language-Team: Catalan <https://l10n.opensuse.org/projects/zypper/master/ca/>"
-"\n"
+"Language-Team: Catalan <https://l10n.opensuse.org/projects/zypper/master/ca/"
+">\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -123,78 +123,78 @@ msgstr "Estil de taula no vàlid %d."
 msgid " Use an integer number from %d to %d"
 msgstr " Useu un nombre enter entre %d i %d."
 
-#: src/Config.cc:248
+#: src/Config.cc:252
 msgid "The path specified in the --root option must be absolute."
 msgstr "La ruta especificatda a l'opció --root ha de ser absoluta."
 
 #. translators: --help, -h
-#: src/Config.cc:326
+#: src/Config.cc:330
 msgid "Help."
 msgstr "Ajuda."
 
 #. translators: --version, -V
-#: src/Config.cc:335
+#: src/Config.cc:339
 msgid "Output the version number."
 msgstr "Mostra el número de versió."
 
 #. translators: --promptids
-#: src/Config.cc:347
+#: src/Config.cc:351
 msgid "Output a list of zypper's user prompts."
 msgstr "Mostra una llista dels indicadors d'usuari del zypper."
 
 #. translators: --config, -c <FILE>
-#: src/Config.cc:360
+#: src/Config.cc:364
 msgid "Use specified config file instead of the default."
 msgstr "Usa un fitxer config especificat en comptes del predeterminat."
 
-#: src/Config.cc:367
+#: src/Config.cc:371
 msgid "User data string must not contain nonprintable or newline characters!"
 msgstr ""
 "La línia de dades de l'usuari no ha de contenir caràcters no imprimibles o "
 "de nova línia!"
 
 #. translators: --userdata <STRING>
-#: src/Config.cc:373
+#: src/Config.cc:377
 msgid "User defined transaction id used in history and plugins."
 msgstr ""
 "Id de transacció definida per l'usuari usada a l'històric i als connectors."
 
 #. translators: --quiet, -q
-#: src/Config.cc:381
+#: src/Config.cc:385
 msgid "Suppress normal output, print only error messages."
 msgstr "Suprimeix la sortida normal, mostra només missatges d'error."
 
 #. translators: --verbose, -v
-#: src/Config.cc:389
+#: src/Config.cc:393
 msgid "Increase verbosity."
 msgstr "Augmenta la verbositat."
 
 #. translators: --color / --no-color
-#: src/Config.cc:410
+#: src/Config.cc:414
 msgid "Whether to use colors in output if tty supports it."
 msgstr "Si usar colors o no si tty en té suport."
 
 #. translators: --no-abbrev, -A
-#: src/Config.cc:415
+#: src/Config.cc:419
 msgid "Do not abbreviate text in tables."
 msgstr "No abreugis text a les taules."
 
 #. translators: --table-style, -s, %1% denotes the supported range of the integer argument (e.g. "1-11")
-#: src/Config.cc:420
+#: src/Config.cc:424
 #, boost-format
 msgid "Table style (%1%)."
 msgstr "Estil de taula (%1%)."
 
-#: src/Config.cc:424 src/commands/optionsets.cc:284
+#: src/Config.cc:428 src/commands/optionsets.cc:284
 msgid "Entering non-interactive mode."
 msgstr "Entrant en mode no interactiu."
 
 #. translators: --non-interactive, -n
-#: src/Config.cc:428
+#: src/Config.cc:432
 msgid "Do not ask anything, use default answers automatically."
 msgstr "No preguntis res, usa les respostes predeterminades automàticament."
 
-#: src/Config.cc:433
+#: src/Config.cc:437
 msgid ""
 "Patches having the flag rebootSuggested set will not be treated as "
 "interactive."
@@ -203,7 +203,7 @@ msgstr ""
 "tractaran com a interactius."
 
 #. translators: --non-interactive-include-reboot-patches
-#: src/Config.cc:437
+#: src/Config.cc:441
 msgid ""
 "Do not treat patches as interactive, which have the rebootSuggested-flag set."
 msgstr ""
@@ -211,61 +211,61 @@ msgstr ""
 "reinici suggerit establerta."
 
 #. translators: --xmlout, -x
-#: src/Config.cc:447
+#: src/Config.cc:451
 msgid "Switch to XML output."
 msgstr "Commuta a una sortida XML."
 
 #. translators: --ignore-unknown, -i
-#: src/Config.cc:452
+#: src/Config.cc:456
 msgid "Ignore unknown packages."
 msgstr "Ignora els paquets desconeguts."
 
 #. translators: --terse, -t
-#: src/Config.cc:463
+#: src/Config.cc:467
 msgid ""
 "Terse output for machine consumption. Implies --no-abbrev and --no-color."
 msgstr ""
 "Sortida breu per al consum de la màquina. Implica --no-abbrev i --no-color."
 
 #. translators: --reposd-dir, -D <DIR>
-#: src/Config.cc:487
+#: src/Config.cc:491
 msgid "Use alternative repository definition file directory."
 msgstr "Usa el directori de fitxers de definició de repositoris alternatiu."
 
 #. translators: --cache-dir, -C <DIR>
-#: src/Config.cc:502
+#: src/Config.cc:506
 msgid "Use alternative directory for all caches."
 msgstr "Usa el directori alternatiu per a totes les memòries cau."
 
 #. translators: --raw-cache-dir <DIR>
-#: src/Config.cc:515
+#: src/Config.cc:519
 msgid "Use alternative raw meta-data cache directory."
 msgstr "Usa el directori de cau de metadades en cru alternatiu."
 
 #. translators: --solv-cache-dir <DIR>
-#: src/Config.cc:529
+#: src/Config.cc:533
 msgid "Use alternative solv file cache directory."
 msgstr "Usa el directori de cau de fitxers solv alternatiu."
 
 #. translators: --pkg-cache-dir <DIR>
-#: src/Config.cc:543
+#: src/Config.cc:547
 msgid "Use alternative package cache directory."
 msgstr "Usa el directori de cau de paquets alternatiu."
 
-#: src/Config.cc:548
+#: src/Config.cc:552
 msgid "Repository Options"
 msgstr "Options de repositori"
 
-#: src/Config.cc:552
+#: src/Config.cc:556
 msgid "Entering 'no-gpg-checks' mode."
 msgstr "Entrant en mode \"no-gpg-checks\"."
 
 #. translators: --no-gpg-checks
-#: src/Config.cc:556
+#: src/Config.cc:560
 msgid "Ignore GPG check failures and continue."
 msgstr "Ignora els errors de comprovació GPG i continua."
 
-#: src/Config.cc:561
+#: src/Config.cc:565
 #, c-format, boost-format
 msgid ""
 "Turning on '%s'. New repository signing keys will be automatically imported!"
@@ -273,19 +273,19 @@ msgstr ""
 "Engegant \"%s\". Les noves claus del repositori s'importaran automàticament!"
 
 #. translators: --gpg-auto-import-keys
-#: src/Config.cc:567
+#: src/Config.cc:571
 msgid "Automatically trust and import new repository signing keys."
 msgstr ""
 "Confia automàticament en el repositori i importa'n les claus de signatura "
 "noves."
 
 #. translators: --plus-repo, -p <URI>
-#: src/Config.cc:571
+#: src/Config.cc:575
 msgid "Use an additional repository."
 msgstr "Usa un repositori addicional."
 
 #. translators: --plus-content <TAG>
-#: src/Config.cc:575
+#: src/Config.cc:579
 msgid ""
 "Additionally use disabled repositories providing a specific keyword. Try '--"
 "plus-content debug' to enable repos indicating to provide debug packages."
@@ -294,46 +294,46 @@ msgstr ""
 "'--plus-content debug' per habilitar repositoris que indiquen proporcionar "
 "paquests de depuració."
 
-#: src/Config.cc:581
+#: src/Config.cc:585
 msgid "Repositories disabled, using the database of installed packages only."
 msgstr ""
 "Repositoris inhabilitats, fent servir només la base de dades de paquets "
 "instal·lats."
 
 #. translators: --disable-repositories
-#: src/Config.cc:585
+#: src/Config.cc:589
 msgid "Do not read meta-data from repositories."
 msgstr "No llegeixis metadades dels repositoris."
 
-#: src/Config.cc:589
+#: src/Config.cc:593
 msgid "Autorefresh disabled."
 msgstr "Refresc automàtic desactivat."
 
 #. translators: --no-refresh
-#: src/Config.cc:593
+#: src/Config.cc:597
 msgid "Do not refresh the repositories."
 msgstr "No refresquis els repositoris."
 
-#: src/Config.cc:597
+#: src/Config.cc:601
 msgid "CD/DVD repositories disabled."
 msgstr "Repositoris del CD/DVD inhabilitats."
 
 #. translators: --no-cd
-#: src/Config.cc:601
+#: src/Config.cc:605
 msgid "Ignore CD/DVD repositories."
 msgstr "Ignora els repositoris de CD/DVD."
 
-#: src/Config.cc:605
+#: src/Config.cc:609
 msgid "Remote repositories disabled."
 msgstr "Repositoris remots inhabilitats."
 
 #. translators: --no-remote
-#: src/Config.cc:609
+#: src/Config.cc:613
 msgid "Ignore remote repositories."
 msgstr "Ignora els repositoris remots."
 
 #. translators: --releasever
-#: src/Config.cc:616
+#: src/Config.cc:620
 msgid ""
 "Set the value of $releasever in all .repo files (default: distribution "
 "version)"
@@ -341,43 +341,43 @@ msgstr ""
 "Estableix el valor de $releasever en tots els fitxers .repo (per defecte: "
 "versió de la distribució)"
 
-#: src/Config.cc:620
+#: src/Config.cc:624
 msgid "Target Options"
 msgstr "Opcions de la destinació"
 
 #. translators: --root, -R <DIR>
-#: src/Config.cc:625
+#: src/Config.cc:629
 msgid "Operate on a different root directory."
 msgstr "Operar en un directori diferent."
 
 #. translators: --installroot <DIR>
-#: src/Config.cc:631
+#: src/Config.cc:635
 msgid ""
 "Operate on a different root directory, but share repositories with the host."
 msgstr ""
 "S'opera en un directori d'arrel diferent, però es comparteixen repositoris "
 "amb l'amfitrió."
 
-#: src/Config.cc:637
+#: src/Config.cc:641
 msgid "Ignoring installed resolvables."
 msgstr "Ignorant els resolubles instal·lats."
 
 #. translators: --disable-system-resolvables
-#: src/Config.cc:640
+#: src/Config.cc:644
 msgid "Do not read installed packages."
 msgstr "No llegeixis els paquets instal·lats."
 
-#: src/Config.cc:804
+#: src/Config.cc:811
 msgid "No config file is in use. Can not save options."
 msgstr ""
 "No hi ha cap fitxer de configuració en ús. No es poden desar les opcions."
 
-#: src/Config.cc:815
+#: src/Config.cc:822
 #, boost-format
 msgid "Option '%1%' saved in '%2%'."
 msgstr "Opció \"%1%\" desada a \"%2%\"."
 
-#: src/Config.cc:822
+#: src/Config.cc:829
 msgid "Failed to save option."
 msgstr "Ha fallat desar l'opció."
 
@@ -4757,30 +4757,30 @@ msgid "Uninstalling source packages is not supported."
 msgstr "No s'admet la desinstal·lació de paquets font."
 
 #. translators: %1% is the name of the command which has no man page available.
-#: src/commands/subcommand.cc:79
+#: src/commands/subcommand.cc:88
 #, boost-format
 msgid "No manual entry for %1%"
 msgstr "No hi ha entrada del manual per a %1%."
 
-#: src/commands/subcommand.cc:92
+#: src/commands/subcommand.cc:103
 msgid "none"
 msgstr "cap"
 
-#: src/commands/subcommand.cc:329
+#: src/commands/subcommand.cc:332
 #, boost-format
 msgid "cannot exec %1% (%2%)"
 msgstr "no es pot executar %1% (%2%)"
 
 #. translators: %1% - command name or path
 #. translators: %2% - system error message
-#: src/commands/subcommand.cc:338
+#: src/commands/subcommand.cc:341
 #, boost-format
 msgid "fork for %1% failed (%2%)"
 msgstr "Ha fallat fork per a %1% (%2%)"
 
 #. translators: %1% - command name or path
 #. translators: %2% - system error message
-#: src/commands/subcommand.cc:357
+#: src/commands/subcommand.cc:360
 #, boost-format
 msgid "waitpid for %1% failed (%2%)"
 msgstr "Ha fallat el pid d'espera per a %1% (%2%)"
@@ -4788,7 +4788,7 @@ msgstr "Ha fallat el pid d'espera per a %1% (%2%)"
 #. translators: %1% - command name or path
 #. translators: %2% - returned PID (number)
 #. translators: %3% - expected PID (number)
-#: src/commands/subcommand.cc:367
+#: src/commands/subcommand.cc:370
 #, boost-format
 msgid "waitpid for %1% returns unexpected pid %2% while waiting for %3%"
 msgstr ""
@@ -4797,30 +4797,30 @@ msgstr ""
 #. translators: %1% - command name or path
 #. translators: %2% - signal number
 #. translators: %3% - signal name
-#: src/commands/subcommand.cc:378
+#: src/commands/subcommand.cc:381
 #, boost-format
 msgid "%1% was killed by signal %2% (%3%)"
 msgstr "%1% ha estat matat pel senyal %2% (%3%)"
 
-#: src/commands/subcommand.cc:382
+#: src/commands/subcommand.cc:385
 msgid "core dumped"
 msgstr "core abocat"
 
 #. translators: %1% - command name or path
 #. translators: %2% - exit code (number)
-#: src/commands/subcommand.cc:392
+#: src/commands/subcommand.cc:395
 #, boost-format
 msgid "%1% exited with status %2%"
 msgstr "%1% ha sortit amb l'estat %2%"
 
 #. translators: %1% - command name or path
 #. translators: %2% - status (number)
-#: src/commands/subcommand.cc:407
+#: src/commands/subcommand.cc:410
 #, boost-format
 msgid "waitpid for %1% returns unexpected exit status %2%"
 msgstr "El pid d'espera per a %1% retorna un estat de sortida inesperat %2%"
 
-#: src/commands/subcommand.cc:440
+#: src/commands/subcommand.cc:443
 #, boost-format
 msgid ""
 "Zypper subcommands are standalone executables that live in the\n"
@@ -4846,7 +4846,7 @@ msgstr ""
 "escriure les extensions locals del zypper que no viuen a l'espai del "
 "sistema.\n"
 
-#: src/commands/subcommand.cc:455
+#: src/commands/subcommand.cc:458
 #, boost-format
 msgid ""
 "Using zypper global-options together with subcommands, as well as\n"
@@ -4856,19 +4856,25 @@ msgstr ""
 "executar subordres a %1%, ara no té suport.\n"
 
 #. translators: headline of an enumeration; %1% is a directory name
-#: src/commands/subcommand.cc:466
+#: src/commands/subcommand.cc:469
 #, boost-format
 msgid "Available zypper subcommands in '%1%'"
 msgstr "Subordres del zypper disponibles a %1%"
 
 #. translators: headline of an enumeration
-#: src/commands/subcommand.cc:471
+#: src/commands/subcommand.cc:475
 msgid "Zypper subcommands available from elsewhere on your $PATH"
 msgstr ""
 "Sobordres del zypper disponibles des de qualsevol altre lloc al vostre $PATH"
 
+#: src/commands/subcommand.cc:480
+msgid ""
+"Using zypper subcommands available from elsewhere on your $PATH is disabled "
+"in zypper.conf."
+msgstr ""
+
 #. translators: helptext; %1% is a zypper command
-#: src/commands/subcommand.cc:476
+#: src/commands/subcommand.cc:485
 #, boost-format
 msgid "Type '%1%' to get subcommand-specific help if available."
 msgstr ""
@@ -4876,23 +4882,28 @@ msgstr ""
 "disponible."
 
 #. translators: %1% - command name
-#: src/commands/subcommand.cc:499
+#: src/commands/subcommand.cc:508
 #, boost-format
 msgid "Manual entry for %1% can't be shown"
 msgstr "No es pot mostrar l'entrada manual per a %1%"
 
-#. translators: command summary: subcommand
-#: src/commands/subcommand.cc:512
+#: src/commands/subcommand.cc:522
 msgid "Lists available subcommands."
 msgstr "Llista les subordres disponibles."
 
+#: src/commands/subcommand.cc:523
+msgid ""
+"Lists available subcommands. Using zypper subcommands found on your $PATH is "
+"disabled in zypper.conf."
+msgstr ""
+
 #. Currently no concept how to handle global options and ZYPPlock
-#: src/commands/subcommand.cc:616
+#: src/commands/subcommand.cc:626
 msgid "Zypper shell does not support execution of subcommands."
 msgstr "L'intèrpret d'ordres Zypper no té suport per executar subordres."
 
 #. translators: %1%  - is the name of a subcommand
-#: src/commands/subcommand.cc:630
+#: src/commands/subcommand.cc:640
 #, boost-format
 msgid "Subcommand %1% does not support zypper global options."
 msgstr "La subordre %1% no té suport per a opcions globals del zypper."

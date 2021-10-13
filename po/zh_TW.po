@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-28 11:38+0200\n"
+"POT-Creation-Date: 2021-10-13 15:45+0200\n"
 "PO-Revision-Date: 2021-06-05 10:00+0000\n"
 "Last-Translator: Ramax Lo <ramaxlo@gmail.com>\n"
 "Language-Team: Chinese (Taiwan) <https://l10n.opensuse.org/projects/zypper/"
@@ -121,158 +121,158 @@ msgstr "無效的表格樣式 %d。"
 msgid " Use an integer number from %d to %d"
 msgstr " 使用介於 %d 到 %d 之間的整數"
 
-#: src/Config.cc:248
+#: src/Config.cc:252
 msgid "The path specified in the --root option must be absolute."
 msgstr "使用 --root 選項時需指定絕對路徑。"
 
 #. translators: --help, -h
-#: src/Config.cc:326
+#: src/Config.cc:330
 msgid "Help."
 msgstr "顯示說明訊息。"
 
 #. translators: --version, -V
-#: src/Config.cc:335
+#: src/Config.cc:339
 msgid "Output the version number."
 msgstr "顯示版本號。"
 
 #. translators: --promptids
-#: src/Config.cc:347
+#: src/Config.cc:351
 msgid "Output a list of zypper's user prompts."
 msgstr "顯示 zypper 使用者提示清單。"
 
 #. translators: --config, -c <FILE>
-#: src/Config.cc:360
+#: src/Config.cc:364
 msgid "Use specified config file instead of the default."
 msgstr "使用指定的設定檔，而非預設的設定檔。"
 
-#: src/Config.cc:367
+#: src/Config.cc:371
 msgid "User data string must not contain nonprintable or newline characters!"
 msgstr "使用者資料字串不能包含不可列印或換行字元！"
 
 #. translators: --userdata <STRING>
-#: src/Config.cc:373
+#: src/Config.cc:377
 msgid "User defined transaction id used in history and plugins."
 msgstr "在歷史記錄及外掛程式中使用定義的事務 ID。"
 
 #. translators: --quiet, -q
-#: src/Config.cc:381
+#: src/Config.cc:385
 msgid "Suppress normal output, print only error messages."
 msgstr "隱藏正常訊息輸出，僅顯示錯誤訊息。"
 
 #. translators: --verbose, -v
-#: src/Config.cc:389
+#: src/Config.cc:393
 msgid "Increase verbosity."
 msgstr "顯示更詳細的訊息。"
 
 #. translators: --color / --no-color
-#: src/Config.cc:410
+#: src/Config.cc:414
 msgid "Whether to use colors in output if tty supports it."
 msgstr "若 tty 支援，設定是否顯示顏色在訊息中。"
 
 #. translators: --no-abbrev, -A
-#: src/Config.cc:415
+#: src/Config.cc:419
 msgid "Do not abbreviate text in tables."
 msgstr "在表格中不要使用縮寫文字。"
 
 #. translators: --table-style, -s, %1% denotes the supported range of the integer argument (e.g. "1-11")
-#: src/Config.cc:420
+#: src/Config.cc:424
 #, boost-format
 msgid "Table style (%1%)."
 msgstr "表格樣式 (%1%)。"
 
-#: src/Config.cc:424 src/commands/optionsets.cc:284
+#: src/Config.cc:428 src/commands/optionsets.cc:284
 msgid "Entering non-interactive mode."
 msgstr "進入非互動模式。"
 
 #. translators: --non-interactive, -n
-#: src/Config.cc:428
+#: src/Config.cc:432
 msgid "Do not ask anything, use default answers automatically."
 msgstr "不要提示選擇，自動使用預設的答案。"
 
-#: src/Config.cc:433
+#: src/Config.cc:437
 msgid ""
 "Patches having the flag rebootSuggested set will not be treated as "
 "interactive."
 msgstr "對於有建議重開機旗標的修補程式將不會被視為可互動的。"
 
 #. translators: --non-interactive-include-reboot-patches
-#: src/Config.cc:437
+#: src/Config.cc:441
 msgid ""
 "Do not treat patches as interactive, which have the rebootSuggested-flag set."
 msgstr "對於旗標設定為 rebootSuggested 的修補程式，也 不要提示選擇。"
 
 #. translators: --xmlout, -x
-#: src/Config.cc:447
+#: src/Config.cc:451
 msgid "Switch to XML output."
 msgstr "切換為 XML 輸出。"
 
 #. translators: --ignore-unknown, -i
-#: src/Config.cc:452
+#: src/Config.cc:456
 msgid "Ignore unknown packages."
 msgstr "忽略未知的套件。"
 
 #. translators: --terse, -t
-#: src/Config.cc:463
+#: src/Config.cc:467
 msgid ""
 "Terse output for machine consumption. Implies --no-abbrev and --no-color."
 msgstr "供機器使用的摘要輸出。表示 --no-abbrev 和 --no-color。"
 
 #. translators: --reposd-dir, -D <DIR>
-#: src/Config.cc:487
+#: src/Config.cc:491
 msgid "Use alternative repository definition file directory."
 msgstr "使用不同的套件庫定義檔 目錄。"
 
 #. translators: --cache-dir, -C <DIR>
-#: src/Config.cc:502
+#: src/Config.cc:506
 msgid "Use alternative directory for all caches."
 msgstr "對所有快取均使用不同的目錄。"
 
 #. translators: --raw-cache-dir <DIR>
-#: src/Config.cc:515
+#: src/Config.cc:519
 msgid "Use alternative raw meta-data cache directory."
 msgstr "使用不同的原始中繼資料快取的目錄。"
 
 #. translators: --solv-cache-dir <DIR>
-#: src/Config.cc:529
+#: src/Config.cc:533
 msgid "Use alternative solv file cache directory."
 msgstr "使用不同的解決方案檔案快取目錄。"
 
 #. translators: --pkg-cache-dir <DIR>
-#: src/Config.cc:543
+#: src/Config.cc:547
 msgid "Use alternative package cache directory."
 msgstr "使用不同的套件快取目錄。"
 
-#: src/Config.cc:548
+#: src/Config.cc:552
 msgid "Repository Options"
 msgstr "套件庫選項"
 
-#: src/Config.cc:552
+#: src/Config.cc:556
 msgid "Entering 'no-gpg-checks' mode."
 msgstr "正在進入忽略 GPG 檢查模式。"
 
 #. translators: --no-gpg-checks
-#: src/Config.cc:556
+#: src/Config.cc:560
 msgid "Ignore GPG check failures and continue."
 msgstr "忽略 GPG 檢查錯誤並繼續。"
 
-#: src/Config.cc:561
+#: src/Config.cc:565
 #, c-format, boost-format
 msgid ""
 "Turning on '%s'. New repository signing keys will be automatically imported!"
 msgstr "正在開啟 '%s'。新套件庫簽名金鑰將自動被匯入！"
 
 #. translators: --gpg-auto-import-keys
-#: src/Config.cc:567
+#: src/Config.cc:571
 msgid "Automatically trust and import new repository signing keys."
 msgstr "自動信任並匯入新的套件庫簽章金鑰。"
 
 #. translators: --plus-repo, -p <URI>
-#: src/Config.cc:571
+#: src/Config.cc:575
 msgid "Use an additional repository."
 msgstr "使用額外的套件庫。"
 
 #. translators: --plus-content <TAG>
-#: src/Config.cc:575
+#: src/Config.cc:579
 msgid ""
 "Additionally use disabled repositories providing a specific keyword. Try '--"
 "plus-content debug' to enable repos indicating to provide debug packages."
@@ -280,83 +280,83 @@ msgstr ""
 "另外使用提供特定關鍵字的被停用套件庫。 嘗試 '--plus-content debug' 來啟用有提"
 "供除錯套件的套件庫。"
 
-#: src/Config.cc:581
+#: src/Config.cc:585
 msgid "Repositories disabled, using the database of installed packages only."
 msgstr "套件庫已停用，僅使用已安裝套件的資料庫。"
 
 #. translators: --disable-repositories
-#: src/Config.cc:585
+#: src/Config.cc:589
 msgid "Do not read meta-data from repositories."
 msgstr "不要從套件庫讀取中繼資料。"
 
-#: src/Config.cc:589
+#: src/Config.cc:593
 msgid "Autorefresh disabled."
 msgstr "停用自動重新整理。"
 
 #. translators: --no-refresh
-#: src/Config.cc:593
+#: src/Config.cc:597
 msgid "Do not refresh the repositories."
 msgstr "不要重新整理套件庫。"
 
-#: src/Config.cc:597
+#: src/Config.cc:601
 msgid "CD/DVD repositories disabled."
 msgstr "CD/DVD 套件庫停用。"
 
 #. translators: --no-cd
-#: src/Config.cc:601
+#: src/Config.cc:605
 msgid "Ignore CD/DVD repositories."
 msgstr "忽略 CD/DVD 套件庫。"
 
-#: src/Config.cc:605
+#: src/Config.cc:609
 msgid "Remote repositories disabled."
 msgstr "遠端套件庫停用。"
 
 #. translators: --no-remote
-#: src/Config.cc:609
+#: src/Config.cc:613
 msgid "Ignore remote repositories."
 msgstr "忽略遠端套件庫。"
 
 #. translators: --releasever
-#: src/Config.cc:616
+#: src/Config.cc:620
 msgid ""
 "Set the value of $releasever in all .repo files (default: distribution "
 "version)"
 msgstr "在所有 .repo 檔案中設定 $releasever 的值 (預設︰發行版的版本)"
 
-#: src/Config.cc:620
+#: src/Config.cc:624
 msgid "Target Options"
 msgstr "目標選項"
 
 #. translators: --root, -R <DIR>
-#: src/Config.cc:625
+#: src/Config.cc:629
 msgid "Operate on a different root directory."
 msgstr "在不同的根目錄操作。"
 
 #. translators: --installroot <DIR>
-#: src/Config.cc:631
+#: src/Config.cc:635
 msgid ""
 "Operate on a different root directory, but share repositories with the host."
 msgstr "在不同的根目錄上操作，但與主機共用套件庫。"
 
-#: src/Config.cc:637
+#: src/Config.cc:641
 msgid "Ignoring installed resolvables."
 msgstr "忽略已安裝的解決方案。"
 
 #. translators: --disable-system-resolvables
-#: src/Config.cc:640
+#: src/Config.cc:644
 msgid "Do not read installed packages."
 msgstr "不要讀取已安裝的套件。"
 
-#: src/Config.cc:804
+#: src/Config.cc:811
 msgid "No config file is in use. Can not save options."
 msgstr "沒有使用中的組態檔案。無法儲存選項。"
 
-#: src/Config.cc:815
+#: src/Config.cc:822
 #, boost-format
 msgid "Option '%1%' saved in '%2%'."
 msgstr "選項「%1%」已儲存到「%2%」中。"
 
-#: src/Config.cc:822
+#: src/Config.cc:829
 msgid "Failed to save option."
 msgstr "無法儲存選項。"
 
@@ -4416,30 +4416,30 @@ msgid "Uninstalling source packages is not supported."
 msgstr "不支援解除安裝來源套件。"
 
 #. translators: %1% is the name of the command which has no man page available.
-#: src/commands/subcommand.cc:79
+#: src/commands/subcommand.cc:88
 #, boost-format
 msgid "No manual entry for %1%"
 msgstr "沒有 %1% 的說明文件"
 
-#: src/commands/subcommand.cc:92
+#: src/commands/subcommand.cc:103
 msgid "none"
 msgstr "無"
 
-#: src/commands/subcommand.cc:329
+#: src/commands/subcommand.cc:332
 #, boost-format
 msgid "cannot exec %1% (%2%)"
 msgstr "無法執行 %1% (%2%)"
 
 #. translators: %1% - command name or path
 #. translators: %2% - system error message
-#: src/commands/subcommand.cc:338
+#: src/commands/subcommand.cc:341
 #, boost-format
 msgid "fork for %1% failed (%2%)"
 msgstr "%1% 衍生失敗 (%2%)"
 
 #. translators: %1% - command name or path
 #. translators: %2% - system error message
-#: src/commands/subcommand.cc:357
+#: src/commands/subcommand.cc:360
 #, boost-format
 msgid "waitpid for %1% failed (%2%)"
 msgstr "%1% waitpid 失敗 (%2%)"
@@ -4447,7 +4447,7 @@ msgstr "%1% waitpid 失敗 (%2%)"
 #. translators: %1% - command name or path
 #. translators: %2% - returned PID (number)
 #. translators: %3% - expected PID (number)
-#: src/commands/subcommand.cc:367
+#: src/commands/subcommand.cc:370
 #, boost-format
 msgid "waitpid for %1% returns unexpected pid %2% while waiting for %3%"
 msgstr "%1% waitpid 回傳非預期的 pid %2% (預期為 %3%)"
@@ -4455,30 +4455,30 @@ msgstr "%1% waitpid 回傳非預期的 pid %2% (預期為 %3%)"
 #. translators: %1% - command name or path
 #. translators: %2% - signal number
 #. translators: %3% - signal name
-#: src/commands/subcommand.cc:378
+#: src/commands/subcommand.cc:381
 #, boost-format
 msgid "%1% was killed by signal %2% (%3%)"
 msgstr "%1% 被信號 %2% 強制結束 (%3%)"
 
-#: src/commands/subcommand.cc:382
+#: src/commands/subcommand.cc:385
 msgid "core dumped"
 msgstr "已執行磁心傾印"
 
 #. translators: %1% - command name or path
 #. translators: %2% - exit code (number)
-#: src/commands/subcommand.cc:392
+#: src/commands/subcommand.cc:395
 #, boost-format
 msgid "%1% exited with status %2%"
 msgstr "%1% 結束 (回傳值 %2%)"
 
 #. translators: %1% - command name or path
 #. translators: %2% - status (number)
-#: src/commands/subcommand.cc:407
+#: src/commands/subcommand.cc:410
 #, boost-format
 msgid "waitpid for %1% returns unexpected exit status %2%"
 msgstr "%1% waitpid 回傳非預期的結束狀態值 %2%"
 
-#: src/commands/subcommand.cc:440
+#: src/commands/subcommand.cc:443
 #, boost-format
 msgid ""
 "Zypper subcommands are standalone executables that live in the\n"
@@ -4501,7 +4501,7 @@ msgstr ""
 "下尋找。是故寫一個不存放在系統空間，僅供局部使用的 zypper 擴充是\n"
 "可以做到的。\n"
 
-#: src/commands/subcommand.cc:455
+#: src/commands/subcommand.cc:458
 #, boost-format
 msgid ""
 "Using zypper global-options together with subcommands, as well as\n"
@@ -4511,40 +4511,51 @@ msgstr ""
 "執行「%1%」中的個別指令。\n"
 
 #. translators: headline of an enumeration; %1% is a directory name
-#: src/commands/subcommand.cc:466
+#: src/commands/subcommand.cc:469
 #, boost-format
 msgid "Available zypper subcommands in '%1%'"
 msgstr "'%1%' 中可用的 zypper 個別指令"
 
 #. translators: headline of an enumeration
-#: src/commands/subcommand.cc:471
+#: src/commands/subcommand.cc:475
 msgid "Zypper subcommands available from elsewhere on your $PATH"
 msgstr "您的 $PATH 中可用的 zypper 個別指令"
 
+#: src/commands/subcommand.cc:480
+msgid ""
+"Using zypper subcommands available from elsewhere on your $PATH is disabled "
+"in zypper.conf."
+msgstr ""
+
 #. translators: helptext; %1% is a zypper command
-#: src/commands/subcommand.cc:476
+#: src/commands/subcommand.cc:485
 #, boost-format
 msgid "Type '%1%' to get subcommand-specific help if available."
 msgstr "輸入 '%1%' 可獲取個別指令的說明 (若有)。"
 
 #. translators: %1% - command name
-#: src/commands/subcommand.cc:499
+#: src/commands/subcommand.cc:508
 #, boost-format
 msgid "Manual entry for %1% can't be shown"
 msgstr "%1% 的手動輸入無法顯示"
 
-#. translators: command summary: subcommand
-#: src/commands/subcommand.cc:512
+#: src/commands/subcommand.cc:522
 msgid "Lists available subcommands."
 msgstr "列出可用的個別指令。"
 
+#: src/commands/subcommand.cc:523
+msgid ""
+"Lists available subcommands. Using zypper subcommands found on your $PATH is "
+"disabled in zypper.conf."
+msgstr ""
+
 #. Currently no concept how to handle global options and ZYPPlock
-#: src/commands/subcommand.cc:616
+#: src/commands/subcommand.cc:626
 msgid "Zypper shell does not support execution of subcommands."
 msgstr "zypper shell 不支援執行個別指令。"
 
 #. translators: %1%  - is the name of a subcommand
-#: src/commands/subcommand.cc:630
+#: src/commands/subcommand.cc:640
 #, boost-format
 msgid "Subcommand %1% does not support zypper global options."
 msgstr "個別指令 %1% 不支援 zypper 全域選項。"

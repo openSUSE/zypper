@@ -13,11 +13,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper.fr\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-28 11:38+0200\n"
+"POT-Creation-Date: 2021-10-13 15:45+0200\n"
 "PO-Revision-Date: 2021-09-14 19:11+0000\n"
 "Last-Translator: Lucie Charrier <c.chalu@free.fr>\n"
-"Language-Team: French <https://l10n.opensuse.org/projects/zypper/master/fr/>"
-"\n"
+"Language-Team: French <https://l10n.opensuse.org/projects/zypper/master/fr/"
+">\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -129,85 +129,85 @@ msgstr "Style de table %d non valide."
 msgid " Use an integer number from %d to %d"
 msgstr " Utilisez un nombre entier compris entre %d et %d"
 
-#: src/Config.cc:248
+#: src/Config.cc:252
 msgid "The path specified in the --root option must be absolute."
 msgstr "Le chemin spécifié par l'option --root doit être absolu."
 
 #. translators: --help, -h
-#: src/Config.cc:326
+#: src/Config.cc:330
 msgid "Help."
 msgstr "Aide."
 
 #. translators: --version, -V
-#: src/Config.cc:335
+#: src/Config.cc:339
 msgid "Output the version number."
 msgstr "Affiche le numéro de version."
 
 #. translators: --promptids
-#: src/Config.cc:347
+#: src/Config.cc:351
 msgid "Output a list of zypper's user prompts."
 msgstr ""
 "Affiche une liste des différentes invites que zypper peut adresser à "
 "l'utilisateur."
 
 #. translators: --config, -c <FILE>
-#: src/Config.cc:360
+#: src/Config.cc:364
 msgid "Use specified config file instead of the default."
 msgstr "celui par défaut."
 
-#: src/Config.cc:367
+#: src/Config.cc:371
 msgid "User data string must not contain nonprintable or newline characters!"
 msgstr ""
 "La chaine de données de l'utilisateur ne doit pas contenir des caractères "
 "non imprimables ou de retour à la ligne !"
 
 #. translators: --userdata <STRING>
-#: src/Config.cc:373
+#: src/Config.cc:377
 msgid "User defined transaction id used in history and plugins."
 msgstr ""
 "Identifiant de transaction défini par l'utilisateur et utilisé dans "
 "l'historique et par les plug-ins."
 
 #. translators: --quiet, -q
-#: src/Config.cc:381
+#: src/Config.cc:385
 msgid "Suppress normal output, print only error messages."
 msgstr ""
 "Permet de supprimer la sortie normale pour imprimer uniquement les messages "
 "d'erreur."
 
 #. translators: --verbose, -v
-#: src/Config.cc:389
+#: src/Config.cc:393
 msgid "Increase verbosity."
 msgstr "Augmente la verbosité."
 
 #. translators: --color / --no-color
-#: src/Config.cc:410
+#: src/Config.cc:414
 msgid "Whether to use colors in output if tty supports it."
 msgstr ""
 "Définit s'il faut utiliser ou non des couleurs pour la sortie si tty le "
 "supporte."
 
 #. translators: --no-abbrev, -A
-#: src/Config.cc:415
+#: src/Config.cc:419
 msgid "Do not abbreviate text in tables."
 msgstr "Indique de ne pas abréger le texte dans les tableaux."
 
 #. translators: --table-style, -s, %1% denotes the supported range of the integer argument (e.g. "1-11")
-#: src/Config.cc:420
+#: src/Config.cc:424
 #, boost-format
 msgid "Table style (%1%)."
 msgstr "Style de tableau (%1%)."
 
-#: src/Config.cc:424 src/commands/optionsets.cc:284
+#: src/Config.cc:428 src/commands/optionsets.cc:284
 msgid "Entering non-interactive mode."
 msgstr "Activation d'un mode non interactif."
 
 #. translators: --non-interactive, -n
-#: src/Config.cc:428
+#: src/Config.cc:432
 msgid "Do not ask anything, use default answers automatically."
 msgstr "Ne rien demander, utiliser les réponses par défaut automatiquement."
 
-#: src/Config.cc:433
+#: src/Config.cc:437
 msgid ""
 "Patches having the flag rebootSuggested set will not be treated as "
 "interactive."
@@ -216,7 +216,7 @@ msgstr ""
 "traités en tant qu'éléments interactifs."
 
 #. translators: --non-interactive-include-reboot-patches
-#: src/Config.cc:437
+#: src/Config.cc:441
 msgid ""
 "Do not treat patches as interactive, which have the rebootSuggested-flag set."
 msgstr ""
@@ -224,17 +224,17 @@ msgstr ""
 "drapeau rebootSuggested activé."
 
 #. translators: --xmlout, -x
-#: src/Config.cc:447
+#: src/Config.cc:451
 msgid "Switch to XML output."
 msgstr "Permet de basculer vers une sortie XML."
 
 #. translators: --ignore-unknown, -i
-#: src/Config.cc:452
+#: src/Config.cc:456
 msgid "Ignore unknown packages."
 msgstr "Ignorer les paquets inconnus."
 
 #. translators: --terse, -t
-#: src/Config.cc:463
+#: src/Config.cc:467
 msgid ""
 "Terse output for machine consumption. Implies --no-abbrev and --no-color."
 msgstr ""
@@ -242,44 +242,44 @@ msgstr ""
 "--no-color."
 
 #. translators: --reposd-dir, -D <DIR>
-#: src/Config.cc:487
+#: src/Config.cc:491
 msgid "Use alternative repository definition file directory."
 msgstr "Utilise un répertoire différent de fichiers de définition de dépôt."
 
 #. translators: --cache-dir, -C <DIR>
-#: src/Config.cc:502
+#: src/Config.cc:506
 msgid "Use alternative directory for all caches."
 msgstr "Utilise un répertoire différent pour tous les caches."
 
 #. translators: --raw-cache-dir <DIR>
-#: src/Config.cc:515
+#: src/Config.cc:519
 msgid "Use alternative raw meta-data cache directory."
 msgstr "Utilise un répertoire de cache différent pour les métadonnées brutes."
 
 #. translators: --solv-cache-dir <DIR>
-#: src/Config.cc:529
+#: src/Config.cc:533
 msgid "Use alternative solv file cache directory."
 msgstr "Utilise un répertoire de cache différent pour les fichiers solv."
 
 #. translators: --pkg-cache-dir <DIR>
-#: src/Config.cc:543
+#: src/Config.cc:547
 msgid "Use alternative package cache directory."
 msgstr "Utilise un répertoire de cache différent pour les paquets."
 
-#: src/Config.cc:548
+#: src/Config.cc:552
 msgid "Repository Options"
 msgstr "Options concernant les dépôts "
 
-#: src/Config.cc:552
+#: src/Config.cc:556
 msgid "Entering 'no-gpg-checks' mode."
 msgstr "Activation du mode 'no-gpg-checks'."
 
 #. translators: --no-gpg-checks
-#: src/Config.cc:556
+#: src/Config.cc:560
 msgid "Ignore GPG check failures and continue."
 msgstr "Ignorer les échecs de vérification de GPG et continuer."
 
-#: src/Config.cc:561
+#: src/Config.cc:565
 #, c-format, boost-format
 msgid ""
 "Turning on '%s'. New repository signing keys will be automatically imported!"
@@ -288,19 +288,19 @@ msgstr ""
 "importées automatiquement."
 
 #. translators: --gpg-auto-import-keys
-#: src/Config.cc:567
+#: src/Config.cc:571
 msgid "Automatically trust and import new repository signing keys."
 msgstr ""
 "Automatiquement faire confiance et importer les clés de signature du nouveau "
 "dépôt."
 
 #. translators: --plus-repo, -p <URI>
-#: src/Config.cc:571
+#: src/Config.cc:575
 msgid "Use an additional repository."
 msgstr "Utiliser un dépôt additionnel."
 
 #. translators: --plus-content <TAG>
-#: src/Config.cc:575
+#: src/Config.cc:579
 msgid ""
 "Additionally use disabled repositories providing a specific keyword. Try '--"
 "plus-content debug' to enable repos indicating to provide debug packages."
@@ -309,46 +309,46 @@ msgstr ""
 "'--plus-content debug' pour activer les dépôts en indiquant de fournir des "
 "paquets de débogage."
 
-#: src/Config.cc:581
+#: src/Config.cc:585
 msgid "Repositories disabled, using the database of installed packages only."
 msgstr ""
 "Dépôts désactivés, utilisation de la base de donnée des paquets installés "
 "uniquement."
 
 #. translators: --disable-repositories
-#: src/Config.cc:585
+#: src/Config.cc:589
 msgid "Do not read meta-data from repositories."
 msgstr "Ne pas lire les métadonnées depuis les dépôts."
 
-#: src/Config.cc:589
+#: src/Config.cc:593
 msgid "Autorefresh disabled."
 msgstr "Rafraichissement automatique désactivé."
 
 #. translators: --no-refresh
-#: src/Config.cc:593
+#: src/Config.cc:597
 msgid "Do not refresh the repositories."
 msgstr "Ne pas rafraichir les dépôts."
 
-#: src/Config.cc:597
+#: src/Config.cc:601
 msgid "CD/DVD repositories disabled."
 msgstr "Dépôts CD/DVD désactivés."
 
 #. translators: --no-cd
-#: src/Config.cc:601
+#: src/Config.cc:605
 msgid "Ignore CD/DVD repositories."
 msgstr "Ignorer les dépôts CD/DVD."
 
-#: src/Config.cc:605
+#: src/Config.cc:609
 msgid "Remote repositories disabled."
 msgstr "Dépôts distants désactivés."
 
 #. translators: --no-remote
-#: src/Config.cc:609
+#: src/Config.cc:613
 msgid "Ignore remote repositories."
 msgstr "Ignorer les dépôts distants."
 
 #. translators: --releasever
-#: src/Config.cc:616
+#: src/Config.cc:620
 msgid ""
 "Set the value of $releasever in all .repo files (default: distribution "
 "version)"
@@ -356,44 +356,44 @@ msgstr ""
 "Fixer la valeur de la variable $releasever dans tous les fichiers .repo (par "
 "défaut : la version de la distribution)"
 
-#: src/Config.cc:620
+#: src/Config.cc:624
 msgid "Target Options"
 msgstr "Options de la cible"
 
 #. translators: --root, -R <DIR>
-#: src/Config.cc:625
+#: src/Config.cc:629
 msgid "Operate on a different root directory."
 msgstr "Fonctionner sur un répertoire racine différent."
 
 #. translators: --installroot <DIR>
-#: src/Config.cc:631
+#: src/Config.cc:635
 msgid ""
 "Operate on a different root directory, but share repositories with the host."
 msgstr ""
 "Opérer sur un répertoire racine différent, mais partager les dépôts avec "
 "l'hôte."
 
-#: src/Config.cc:637
+#: src/Config.cc:641
 msgid "Ignoring installed resolvables."
 msgstr "Les éléments résolvables installés sont ignorés."
 
 #. translators: --disable-system-resolvables
-#: src/Config.cc:640
+#: src/Config.cc:644
 msgid "Do not read installed packages."
 msgstr "Ne pas lire les paquets installés."
 
-#: src/Config.cc:804
+#: src/Config.cc:811
 msgid "No config file is in use. Can not save options."
 msgstr ""
 "Aucun fichier de configuration utilisé. Impossible de sauvegarder des "
 "options."
 
-#: src/Config.cc:815
+#: src/Config.cc:822
 #, boost-format
 msgid "Option '%1%' saved in '%2%'."
 msgstr "Option « %1 » sauvegardée dans « %2 »."
 
-#: src/Config.cc:822
+#: src/Config.cc:829
 msgid "Failed to save option."
 msgstr "Échec de la sauvegarde de l'option."
 
@@ -4841,30 +4841,30 @@ msgid "Uninstalling source packages is not supported."
 msgstr "La suppression des paquets source n'est pas prise en charge."
 
 #. translators: %1% is the name of the command which has no man page available.
-#: src/commands/subcommand.cc:79
+#: src/commands/subcommand.cc:88
 #, boost-format
 msgid "No manual entry for %1%"
 msgstr "Aucune page de manuel pour %1%"
 
-#: src/commands/subcommand.cc:92
+#: src/commands/subcommand.cc:103
 msgid "none"
 msgstr "aucun"
 
-#: src/commands/subcommand.cc:329
+#: src/commands/subcommand.cc:332
 #, boost-format
 msgid "cannot exec %1% (%2%)"
 msgstr "impossible d'exécuter %1% (%2%)"
 
 #. translators: %1% - command name or path
 #. translators: %2% - system error message
-#: src/commands/subcommand.cc:338
+#: src/commands/subcommand.cc:341
 #, boost-format
 msgid "fork for %1% failed (%2%)"
 msgstr "échec du fork pour %1% (%2%)"
 
 #. translators: %1% - command name or path
 #. translators: %2% - system error message
-#: src/commands/subcommand.cc:357
+#: src/commands/subcommand.cc:360
 #, boost-format
 msgid "waitpid for %1% failed (%2%)"
 msgstr "échec du waitpid pour %1% (%2%)"
@@ -4872,7 +4872,7 @@ msgstr "échec du waitpid pour %1% (%2%)"
 #. translators: %1% - command name or path
 #. translators: %2% - returned PID (number)
 #. translators: %3% - expected PID (number)
-#: src/commands/subcommand.cc:367
+#: src/commands/subcommand.cc:370
 #, boost-format
 msgid "waitpid for %1% returns unexpected pid %2% while waiting for %3%"
 msgstr ""
@@ -4881,30 +4881,30 @@ msgstr ""
 #. translators: %1% - command name or path
 #. translators: %2% - signal number
 #. translators: %3% - signal name
-#: src/commands/subcommand.cc:378
+#: src/commands/subcommand.cc:381
 #, boost-format
 msgid "%1% was killed by signal %2% (%3%)"
 msgstr "%1% a été tué par le signal %2% (%3%)"
 
-#: src/commands/subcommand.cc:382
+#: src/commands/subcommand.cc:385
 msgid "core dumped"
 msgstr "mémoire vidée"
 
 #. translators: %1% - command name or path
 #. translators: %2% - exit code (number)
-#: src/commands/subcommand.cc:392
+#: src/commands/subcommand.cc:395
 #, boost-format
 msgid "%1% exited with status %2%"
 msgstr "%1% s'est terminé avec le statut %2%"
 
 #. translators: %1% - command name or path
 #. translators: %2% - status (number)
-#: src/commands/subcommand.cc:407
+#: src/commands/subcommand.cc:410
 #, boost-format
 msgid "waitpid for %1% returns unexpected exit status %2%"
 msgstr "waitpid pour %1% a retourné le statut de sortie inattendu %2%"
 
-#: src/commands/subcommand.cc:440
+#: src/commands/subcommand.cc:443
 #, boost-format
 msgid ""
 "Zypper subcommands are standalone executables that live in the\n"
@@ -4929,7 +4929,7 @@ msgstr ""
 "possible d'écrire des extensions locales pour zypper, en dehors\n"
 "de l'espace système.\n"
 
-#: src/commands/subcommand.cc:455
+#: src/commands/subcommand.cc:458
 #, boost-format
 msgid ""
 "Using zypper global-options together with subcommands, as well as\n"
@@ -4941,20 +4941,26 @@ msgstr ""
 "supportés.\n"
 
 #. translators: headline of an enumeration; %1% is a directory name
-#: src/commands/subcommand.cc:466
+#: src/commands/subcommand.cc:469
 #, boost-format
 msgid "Available zypper subcommands in '%1%'"
 msgstr "Sous-commandes zypper disponibles dans '%1%'"
 
 #. translators: headline of an enumeration
-#: src/commands/subcommand.cc:471
+#: src/commands/subcommand.cc:475
 msgid "Zypper subcommands available from elsewhere on your $PATH"
 msgstr ""
 "Sous-commandes Zypper disponibles depuis un autre emplacement de votre "
 "chemin $PATH"
 
+#: src/commands/subcommand.cc:480
+msgid ""
+"Using zypper subcommands available from elsewhere on your $PATH is disabled "
+"in zypper.conf."
+msgstr ""
+
 #. translators: helptext; %1% is a zypper command
-#: src/commands/subcommand.cc:476
+#: src/commands/subcommand.cc:485
 #, boost-format
 msgid "Type '%1%' to get subcommand-specific help if available."
 msgstr ""
@@ -4962,23 +4968,28 @@ msgstr ""
 "commande."
 
 #. translators: %1% - command name
-#: src/commands/subcommand.cc:499
+#: src/commands/subcommand.cc:508
 #, boost-format
 msgid "Manual entry for %1% can't be shown"
 msgstr "L'entrée du manuel pour %1% ne peut être affichée"
 
-#. translators: command summary: subcommand
-#: src/commands/subcommand.cc:512
+#: src/commands/subcommand.cc:522
 msgid "Lists available subcommands."
 msgstr "Liste les sous-commandes disponibles."
 
+#: src/commands/subcommand.cc:523
+msgid ""
+"Lists available subcommands. Using zypper subcommands found on your $PATH is "
+"disabled in zypper.conf."
+msgstr ""
+
 #. Currently no concept how to handle global options and ZYPPlock
-#: src/commands/subcommand.cc:616
+#: src/commands/subcommand.cc:626
 msgid "Zypper shell does not support execution of subcommands."
 msgstr "Le shell de zypper ne supporte pas l'exécution des sous-commandes."
 
 #. translators: %1%  - is the name of a subcommand
-#: src/commands/subcommand.cc:630
+#: src/commands/subcommand.cc:640
 #, boost-format
 msgid "Subcommand %1% does not support zypper global options."
 msgstr ""

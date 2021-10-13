@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-28 11:38+0200\n"
+"POT-Creation-Date: 2021-10-13 15:45+0200\n"
 "PO-Revision-Date: 2021-07-28 14:11+0000\n"
 "Last-Translator: Yasuhiko Kamata <belphegor@belbel.or.jp>\n"
 "Language-Team: Japanese <https://l10n.opensuse.org/projects/zypper/master/ja/"
@@ -119,84 +119,84 @@ msgstr "無効な表形式 %d です。"
 msgid " Use an integer number from %d to %d"
 msgstr " %d から %d までの範囲の整数を指定してください"
 
-#: src/Config.cc:248
+#: src/Config.cc:252
 msgid "The path specified in the --root option must be absolute."
 msgstr "--root オプションで指定するパスは絶対パスでなければなりません。"
 
 #. translators: --help, -h
-#: src/Config.cc:326
+#: src/Config.cc:330
 msgid "Help."
 msgstr "ヘルプを表示します。"
 
 #. translators: --version, -V
-#: src/Config.cc:335
+#: src/Config.cc:339
 msgid "Output the version number."
 msgstr "バージョン情報を表示します。"
 
 #. translators: --promptids
-#: src/Config.cc:347
+#: src/Config.cc:351
 msgid "Output a list of zypper's user prompts."
 msgstr "zypper のユーザプロンプト一覧を出力します。"
 
 #. translators: --config, -c <FILE>
-#: src/Config.cc:360
+#: src/Config.cc:364
 msgid "Use specified config file instead of the default."
 msgstr "既定の設定ファイルの代わりに指定した設定ファイルを使用します。"
 
-#: src/Config.cc:367
+#: src/Config.cc:371
 msgid "User data string must not contain nonprintable or newline characters!"
 msgstr ""
 "ユーザデータ文字列には、表示不可能な文字や改行を含めることができません！"
 
 #. translators: --userdata <STRING>
-#: src/Config.cc:373
+#: src/Config.cc:377
 msgid "User defined transaction id used in history and plugins."
 msgstr ""
 "履歴やプラグインで使用されるユーザ定義のトランザクション ID を指定します。"
 
 #. translators: --quiet, -q
-#: src/Config.cc:381
+#: src/Config.cc:385
 msgid "Suppress normal output, print only error messages."
 msgstr "エラーメッセージを除く通常出力を抑止します。"
 
 #. translators: --verbose, -v
-#: src/Config.cc:389
+#: src/Config.cc:393
 msgid "Increase verbosity."
 msgstr "より詳細な出力を行います。"
 
 #. translators: --color / --no-color
-#: src/Config.cc:410
+#: src/Config.cc:414
 msgid "Whether to use colors in output if tty supports it."
 msgstr "tty 側で対応している場合、色を使用するかどうかを指定します。"
 
 #. translators: --no-abbrev, -A
-#: src/Config.cc:415
+#: src/Config.cc:419
 msgid "Do not abbreviate text in tables."
 msgstr "表内でのテキストの省略を行わないようにします。"
 
 #. translators: --table-style, -s, %1% denotes the supported range of the integer argument (e.g. "1-11")
-#: src/Config.cc:420
+#: src/Config.cc:424
 #, boost-format
 msgid "Table style (%1%)."
 msgstr "表形式を指定します (%1%) 。"
 
-#: src/Config.cc:424 src/commands/optionsets.cc:284
+#: src/Config.cc:428 src/commands/optionsets.cc:284
 msgid "Entering non-interactive mode."
 msgstr "対話処理を行わない設定にします。"
 
 #. translators: --non-interactive, -n
-#: src/Config.cc:428
+#: src/Config.cc:432
 msgid "Do not ask anything, use default answers automatically."
 msgstr "質問や確認を行わず、全ての質問に既定の回答をしたものとして扱います。"
 
-#: src/Config.cc:433
+#: src/Config.cc:437
 msgid ""
 "Patches having the flag rebootSuggested set will not be treated as "
 "interactive."
 msgstr "rebootSuggested フラグの設定されたパッチを、対話型として扱いません。"
 
 #. translators: --non-interactive-include-reboot-patches
-#: src/Config.cc:437
+#: src/Config.cc:441
 msgid ""
 "Do not treat patches as interactive, which have the rebootSuggested-flag set."
 msgstr ""
@@ -204,17 +204,17 @@ msgstr ""
 "を対話的なパッチとして扱わないようにします。"
 
 #. translators: --xmlout, -x
-#: src/Config.cc:447
+#: src/Config.cc:451
 msgid "Switch to XML output."
 msgstr "XML 形式での出力に切り替えます。"
 
 #. translators: --ignore-unknown, -i
-#: src/Config.cc:452
+#: src/Config.cc:456
 msgid "Ignore unknown packages."
 msgstr "不明なパッケージを無視します。"
 
 #. translators: --terse, -t
-#: src/Config.cc:463
+#: src/Config.cc:467
 msgid ""
 "Terse output for machine consumption. Implies --no-abbrev and --no-color."
 msgstr ""
@@ -222,44 +222,44 @@ msgstr ""
 "の機能を含みます。"
 
 #. translators: --reposd-dir, -D <DIR>
-#: src/Config.cc:487
+#: src/Config.cc:491
 msgid "Use alternative repository definition file directory."
 msgstr "代替リポジトリ定義ファイルディレクトリを使用します。"
 
 #. translators: --cache-dir, -C <DIR>
-#: src/Config.cc:502
+#: src/Config.cc:506
 msgid "Use alternative directory for all caches."
 msgstr "すべてのキャッシュに代替ディレクトリを指定します。"
 
 #. translators: --raw-cache-dir <DIR>
-#: src/Config.cc:515
+#: src/Config.cc:519
 msgid "Use alternative raw meta-data cache directory."
 msgstr "代替の未加工メタデータキャッシュディレクトリを指定します。"
 
 #. translators: --solv-cache-dir <DIR>
-#: src/Config.cc:529
+#: src/Config.cc:533
 msgid "Use alternative solv file cache directory."
 msgstr "代替の解決ファイルキャッシュディレクトリを指定します。"
 
 #. translators: --pkg-cache-dir <DIR>
-#: src/Config.cc:543
+#: src/Config.cc:547
 msgid "Use alternative package cache directory."
 msgstr "代替のパッケージキャッシュディレクトリを指定します。"
 
-#: src/Config.cc:548
+#: src/Config.cc:552
 msgid "Repository Options"
 msgstr "リポジトリオプション"
 
-#: src/Config.cc:552
+#: src/Config.cc:556
 msgid "Entering 'no-gpg-checks' mode."
 msgstr "「no-gpg-checks」モードに移行します。"
 
 #. translators: --no-gpg-checks
-#: src/Config.cc:556
+#: src/Config.cc:560
 msgid "Ignore GPG check failures and continue."
 msgstr "GPG による確認の失敗を無視して続行します。"
 
-#: src/Config.cc:561
+#: src/Config.cc:565
 #, c-format, boost-format
 msgid ""
 "Turning on '%s'. New repository signing keys will be automatically imported!"
@@ -267,17 +267,17 @@ msgstr ""
 "'%s' を有効にしています。新しいリポジトリ署名鍵は自動的にインポートされます！"
 
 #. translators: --gpg-auto-import-keys
-#: src/Config.cc:567
+#: src/Config.cc:571
 msgid "Automatically trust and import new repository signing keys."
 msgstr "新しいリポジトリの署名鍵を自動的に信用し、インポートします。"
 
 #. translators: --plus-repo, -p <URI>
-#: src/Config.cc:571
+#: src/Config.cc:575
 msgid "Use an additional repository."
 msgstr "追加のリポジトリを使用します。"
 
 #. translators: --plus-content <TAG>
-#: src/Config.cc:575
+#: src/Config.cc:579
 msgid ""
 "Additionally use disabled repositories providing a specific keyword. Try '--"
 "plus-content debug' to enable repos indicating to provide debug packages."
@@ -286,46 +286,46 @@ msgstr ""
 "plus-content debug' のように指定すると、デバッグ用のリポジトリを有効化するこ"
 "とができます。"
 
-#: src/Config.cc:581
+#: src/Config.cc:585
 msgid "Repositories disabled, using the database of installed packages only."
 msgstr ""
 "リポジトリは無効化されています。インストール済みのパッケージデータベースのみ"
 "を使用します。"
 
 #. translators: --disable-repositories
-#: src/Config.cc:585
+#: src/Config.cc:589
 msgid "Do not read meta-data from repositories."
 msgstr "リポジトリからメタデータを読み込まないようにします。"
 
-#: src/Config.cc:589
+#: src/Config.cc:593
 msgid "Autorefresh disabled."
 msgstr "自動更新が無効になっています。"
 
 #. translators: --no-refresh
-#: src/Config.cc:593
+#: src/Config.cc:597
 msgid "Do not refresh the repositories."
 msgstr "リポジトリの更新を行わないようにします。"
 
-#: src/Config.cc:597
+#: src/Config.cc:601
 msgid "CD/DVD repositories disabled."
 msgstr "CD/DVDリポジトリが無効になっています。"
 
 #. translators: --no-cd
-#: src/Config.cc:601
+#: src/Config.cc:605
 msgid "Ignore CD/DVD repositories."
 msgstr "CD/DVD のリポジトリを無視します。"
 
-#: src/Config.cc:605
+#: src/Config.cc:609
 msgid "Remote repositories disabled."
 msgstr "リモートリポジトリが無効になっています。"
 
 #. translators: --no-remote
-#: src/Config.cc:609
+#: src/Config.cc:613
 msgid "Ignore remote repositories."
 msgstr "リモートのリポジトリを無視します。"
 
 #. translators: --releasever
-#: src/Config.cc:616
+#: src/Config.cc:620
 msgid ""
 "Set the value of $releasever in all .repo files (default: distribution "
 "version)"
@@ -333,42 +333,42 @@ msgstr ""
 "すべての .repo ファイル内での $releasever の値を指定します (既定値: ディスト"
 "リビューションのバージョン)"
 
-#: src/Config.cc:620
+#: src/Config.cc:624
 msgid "Target Options"
 msgstr "ターゲットオプション"
 
 #. translators: --root, -R <DIR>
-#: src/Config.cc:625
+#: src/Config.cc:629
 msgid "Operate on a different root directory."
 msgstr "指定したルートディレクトリ内で処理を実施します。"
 
 #. translators: --installroot <DIR>
-#: src/Config.cc:631
+#: src/Config.cc:635
 msgid ""
 "Operate on a different root directory, but share repositories with the host."
 msgstr ""
 "このホストと同じリポジトリを使用したまま、指定したルートディレクトリ内で処理"
 "を実施します。"
 
-#: src/Config.cc:637
+#: src/Config.cc:641
 msgid "Ignoring installed resolvables."
 msgstr "インストールされている解決方法を無視しています。"
 
 #. translators: --disable-system-resolvables
-#: src/Config.cc:640
+#: src/Config.cc:644
 msgid "Do not read installed packages."
 msgstr "インストールされたパッケージを読み込みません。"
 
-#: src/Config.cc:804
+#: src/Config.cc:811
 msgid "No config file is in use. Can not save options."
 msgstr "使用している設定ファイルはありません。オプションを保存できません。"
 
-#: src/Config.cc:815
+#: src/Config.cc:822
 #, boost-format
 msgid "Option '%1%' saved in '%2%'."
 msgstr "オプション '%1%' を '%2%' に保存しました。"
 
-#: src/Config.cc:822
+#: src/Config.cc:829
 msgid "Failed to save option."
 msgstr "オプションの保存に失敗しました。"
 
@@ -4637,30 +4637,30 @@ msgid "Uninstalling source packages is not supported."
 msgstr "ソースパッケージの削除の機能は用意されていません。"
 
 #. translators: %1% is the name of the command which has no man page available.
-#: src/commands/subcommand.cc:79
+#: src/commands/subcommand.cc:88
 #, boost-format
 msgid "No manual entry for %1%"
 msgstr "%1% に対するマニュアルページはありません"
 
-#: src/commands/subcommand.cc:92
+#: src/commands/subcommand.cc:103
 msgid "none"
 msgstr "なし"
 
-#: src/commands/subcommand.cc:329
+#: src/commands/subcommand.cc:332
 #, boost-format
 msgid "cannot exec %1% (%2%)"
 msgstr "%1% を実行できません (%2%)"
 
 #. translators: %1% - command name or path
 #. translators: %2% - system error message
-#: src/commands/subcommand.cc:338
+#: src/commands/subcommand.cc:341
 #, boost-format
 msgid "fork for %1% failed (%2%)"
 msgstr "%1% に対する fork が失敗しました (%2%)"
 
 #. translators: %1% - command name or path
 #. translators: %2% - system error message
-#: src/commands/subcommand.cc:357
+#: src/commands/subcommand.cc:360
 #, boost-format
 msgid "waitpid for %1% failed (%2%)"
 msgstr "%1% に対する waitpid が失敗しました (%2%)"
@@ -4668,7 +4668,7 @@ msgstr "%1% に対する waitpid が失敗しました (%2%)"
 #. translators: %1% - command name or path
 #. translators: %2% - returned PID (number)
 #. translators: %3% - expected PID (number)
-#: src/commands/subcommand.cc:367
+#: src/commands/subcommand.cc:370
 #, boost-format
 msgid "waitpid for %1% returns unexpected pid %2% while waiting for %3%"
 msgstr ""
@@ -4677,30 +4677,30 @@ msgstr ""
 #. translators: %1% - command name or path
 #. translators: %2% - signal number
 #. translators: %3% - signal name
-#: src/commands/subcommand.cc:378
+#: src/commands/subcommand.cc:381
 #, boost-format
 msgid "%1% was killed by signal %2% (%3%)"
 msgstr "%1% はシグナル %2% で kill されました (%3%)"
 
-#: src/commands/subcommand.cc:382
+#: src/commands/subcommand.cc:385
 msgid "core dumped"
 msgstr "コアダンプしました"
 
 #. translators: %1% - command name or path
 #. translators: %2% - exit code (number)
-#: src/commands/subcommand.cc:392
+#: src/commands/subcommand.cc:395
 #, boost-format
 msgid "%1% exited with status %2%"
 msgstr "%1% は状態 %2% で終了しました"
 
 #. translators: %1% - command name or path
 #. translators: %2% - status (number)
-#: src/commands/subcommand.cc:407
+#: src/commands/subcommand.cc:410
 #, boost-format
 msgid "waitpid for %1% returns unexpected exit status %2%"
 msgstr "%1% に対する waitpid が予期しない終了状態 %2% を返しました"
 
-#: src/commands/subcommand.cc:440
+#: src/commands/subcommand.cc:443
 #, boost-format
 msgid ""
 "Zypper subcommands are standalone executables that live in the\n"
@@ -4725,7 +4725,7 @@ msgstr ""
 " $PATH 環境変数を参照します。そのため、システム以外の場所に zypper\n"
 "の独自拡張を配置し、利用することができるようになっています。\n"
 
-#: src/commands/subcommand.cc:455
+#: src/commands/subcommand.cc:458
 #, boost-format
 msgid ""
 "Using zypper global-options together with subcommands, as well as\n"
@@ -4735,18 +4735,24 @@ msgstr ""
 "場合、 '%1%' 内でのサブコマンドの実行は現時点ではサポートしていません。\n"
 
 #. translators: headline of an enumeration; %1% is a directory name
-#: src/commands/subcommand.cc:466
+#: src/commands/subcommand.cc:469
 #, boost-format
 msgid "Available zypper subcommands in '%1%'"
 msgstr "'%1%' 内で利用可能な zypper のサブコマンド"
 
 #. translators: headline of an enumeration
-#: src/commands/subcommand.cc:471
+#: src/commands/subcommand.cc:475
 msgid "Zypper subcommands available from elsewhere on your $PATH"
 msgstr "お使いの $PATH 内の他の場所で利用可能な zypper サブコマンド"
 
+#: src/commands/subcommand.cc:480
+msgid ""
+"Using zypper subcommands available from elsewhere on your $PATH is disabled "
+"in zypper.conf."
+msgstr ""
+
 #. translators: helptext; %1% is a zypper command
-#: src/commands/subcommand.cc:476
+#: src/commands/subcommand.cc:485
 #, boost-format
 msgid "Type '%1%' to get subcommand-specific help if available."
 msgstr ""
@@ -4754,23 +4760,28 @@ msgstr ""
 "さい。"
 
 #. translators: %1% - command name
-#: src/commands/subcommand.cc:499
+#: src/commands/subcommand.cc:508
 #, boost-format
 msgid "Manual entry for %1% can't be shown"
 msgstr "%1% に対するマニュアル項目が表示できません"
 
-#. translators: command summary: subcommand
-#: src/commands/subcommand.cc:512
+#: src/commands/subcommand.cc:522
 msgid "Lists available subcommands."
 msgstr "利用可能なサブコマンドを一覧表示します。"
 
+#: src/commands/subcommand.cc:523
+msgid ""
+"Lists available subcommands. Using zypper subcommands found on your $PATH is "
+"disabled in zypper.conf."
+msgstr ""
+
 #. Currently no concept how to handle global options and ZYPPlock
-#: src/commands/subcommand.cc:616
+#: src/commands/subcommand.cc:626
 msgid "Zypper shell does not support execution of subcommands."
 msgstr "zypper shell はサブコマンドの実行には対応していません。"
 
 #. translators: %1%  - is the name of a subcommand
-#: src/commands/subcommand.cc:630
+#: src/commands/subcommand.cc:640
 #, boost-format
 msgid "Subcommand %1% does not support zypper global options."
 msgstr "サブコマンド %1% は zypper のグローバルオプションに対応していません。"
@@ -6299,8 +6310,8 @@ msgid ""
 "DownloadAsNeeded can not be used with ZYPP_SINGLE_RPMTRANS=1, falling back "
 "to DownloadInAdvance"
 msgstr ""
-"ZYPP_SINGLE_RPMTRANS=1 を指定している場合は DownloadAsNeeded を指定できません。 "
-"DownloadInAdvance が指定されたものとして処理します"
+"ZYPP_SINGLE_RPMTRANS=1 を指定している場合は DownloadAsNeeded を指定できませ"
+"ん。 DownloadInAdvance が指定されたものとして処理します"
 
 #: src/solve-commit.cc:547
 #, c-format, boost-format
