@@ -162,9 +162,9 @@ public:
   int _maxworkers;
 };
 
-#define BLKSIZE		131072
-#define MAXURLS		10
-
+constexpr auto MIN_REQ_MIRRS = 4;
+constexpr auto BLKSIZE       = 131072;
+constexpr auto MAXURLS       = 10;
 
 //////////////////////////////////////////////////////////////////////
 
@@ -1424,6 +1424,14 @@ void MediaMultiCurl::doGetFileCopy( const OnMediaLocation &srcFile , const Pathn
           }
 
 	  std::vector<Url> urls = mlp.getUrls();
+    /*
+     * bsc#1191609 In certain locations we do not receive a suitable number of metalink mirrors, and might even
+     * download chunks serially from one and the same server. In those cases we need to fall back to a normal download.
+     */
+    if ( urls.size() < MIN_REQ_MIRRS ) {
+      ZYPP_THROW( MediaException("Multicurl enabled but not enough mirrors provided") );
+    }
+
 	  XXX << bl << endl;
 	  file = fopen((*destNew).c_str(), "w+e");
 	  if (!file)
