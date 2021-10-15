@@ -49,17 +49,17 @@ namespace zypp
     {
       switch ( str_r[3] )
       {
-	// NOTE: it needs to be assertd that the separating ':' is present
-	// if a known kind is retuirned. Dependent code relies on this!
-	#define OUTS(K,S) if ( !::strncmp( str_r, ResKind::K.c_str(), S ) && str_r[S] == ':' ) return ResKind::K
-	//             ----v
-	case 'c': OUTS( patch, 5 );       break;
-	case 'd': OUTS( product, 7 );     break;
-	case 'k': OUTS( package, 7 );     break;
-	case 'l': OUTS( application, 11 );break;
-	case 'p': OUTS( srcpackage, 10 ); break;
-	case 't': OUTS( pattern, 7 );     break;
-	#undef OUTS
+        // NOTE: it needs to be assertd that the separating ':' is present
+        // if a known kind is retuirned. Dependent code relies on this!
+        #define OUTS(K,S) if ( !::strncmp( str_r, ResKind::K.c_str(), S ) && str_r[S] == ':' ) return ResKind::K
+        //             ----v
+        case 'c': OUTS( patch, 5 );       break;
+        case 'd': OUTS( product, 7 );     break;
+        case 'k': OUTS( package, 7 );     break;
+        case 'l': OUTS( application, 11 );break;
+        case 'p': OUTS( srcpackage, 10 ); break;
+        case 't': OUTS( pattern, 7 );     break;
+        #undef OUTS
       }
     }
     return nokind;

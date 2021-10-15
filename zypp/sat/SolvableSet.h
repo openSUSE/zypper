@@ -63,10 +63,10 @@ namespace zypp
         size_type size() const
         { return _pimpl->size(); }
 
-	/** */
-	template<class TSolv>
-	bool contains( const TSolv & solv_r ) const
-	{ return( get().count( asSolvable()( solv_r ) ) ); }
+        /** */
+        template<class TSolv>
+        bool contains( const TSolv & solv_r ) const
+        { return( get().count( asSolvable()( solv_r ) ) ); }
 
         /** Iterator pointing to the first \ref Solvable. */
         const_iterator begin() const
@@ -77,21 +77,21 @@ namespace zypp
         { return _pimpl->end(); }
 
       public:
-	/** Clear the container */
-	void clear()
-	{ get().clear(); }
+        /** Clear the container */
+        void clear()
+        { get().clear(); }
 
-	/** Insert a Solvable.
-	 * \return \c true if it was actually inserted, or \c false if already present.
-	 */
-	template<class TSolv>
-	bool insert( const TSolv & solv_r )
-	{ return get().insert( asSolvable()( solv_r ) ).second; }
+        /** Insert a Solvable.
+         * \return \c true if it was actually inserted, or \c false if already present.
+         */
+        template<class TSolv>
+        bool insert( const TSolv & solv_r )
+        { return get().insert( asSolvable()( solv_r ) ).second; }
 
-	/** Insert a range of Solvables. */
-	template<class TIterator>
-	void insert( TIterator begin_r, TIterator end_r )
-	{ for_( it, begin_r, end_r ) insert( *it ); }
+        /** Insert a range of Solvables. */
+        template<class TIterator>
+        void insert( TIterator begin_r, TIterator end_r )
+        { for_( it, begin_r, end_r ) insert( *it ); }
 
       public:
         /** The set. */

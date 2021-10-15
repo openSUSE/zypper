@@ -208,11 +208,11 @@ namespace yamltest::detail {
       else if ( key == ("vendors") )
       {
         bool success = readListInlineOrFromFile( [&target]( const YAML::Node & dataNode, std::string * err ) {
-	  std::vector<std::string> vlist;
-	  for ( const auto & node : dataNode )
-	    vlist.push_back( node.as<std::string>() );
-	  if ( ! vlist.empty() )
-	    target.vendorLists.push_back( std::move(vlist) );
+          std::vector<std::string> vlist;
+          for ( const auto & node : dataNode )
+            vlist.push_back( node.as<std::string>() );
+          if ( ! vlist.empty() )
+            target.vendorLists.push_back( std::move(vlist) );
           return true;
         }, err );
         if ( !success ) return false;

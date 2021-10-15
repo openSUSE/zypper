@@ -36,7 +36,7 @@ namespace zypp
        * Required to execute plugin services chrooted.
        */
       ServiceRepos( const Pathname & root_r,
-		    const ServiceInfo & service,
+                    const ServiceInfo & service,
                     const ProcessRepo & callback,
                     const ProgressData::ReceiverFnc &progress = ProgressData::ReceiverFnc() );
       ~ServiceRepos();

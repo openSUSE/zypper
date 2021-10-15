@@ -127,9 +127,9 @@ namespace zypp
       _action = HistoryActionID( trimmed );
       if ( _action != action_r )
       {
-	ZYPP_THROW( ParseException( str::form( "Bad action id. Got %s, expected %s.",
-					       _action.asString().c_str(),
-					       action_r.asString().c_str() ) ) );
+        ZYPP_THROW( ParseException( str::form( "Bad action id. Got %s, expected %s.",
+                                               _action.asString().c_str(),
+                                               action_r.asString().c_str() ) ) );
       }
       _field.swap( fields_r );
       // now adjust action field:
@@ -139,20 +139,20 @@ namespace zypp
     void _checkFields( const FieldVector & fields_r, size_type expect_r )
     {
       if ( expect_r < 2 )	// at least 2 fields (date and action) are required
-	expect_r = 2;
+        expect_r = 2;
       if ( fields_r.size() < expect_r )
       {
-	ZYPP_THROW( ParseException( str::form( "Bad number of fields. Got %zd, expected at least %zd.",
-					       fields_r.size(),
-					       expect_r ) ) );
+        ZYPP_THROW( ParseException( str::form( "Bad number of fields. Got %zd, expected at least %zd.",
+                                               fields_r.size(),
+                                               expect_r ) ) );
       }
       try
       {
-	_date = Date( fields_r[DATE_INDEX], HISTORY_LOG_DATE_FORMAT );
+        _date = Date( fields_r[DATE_INDEX], HISTORY_LOG_DATE_FORMAT );
       }
       catch ( const std::exception & excpt )
       {
-	ZYPP_THROW( ParseException( excpt.what() ) );	// invalid date format
+        ZYPP_THROW( ParseException( excpt.what() ) );	// invalid date format
       }
       // _action handled later
     }
@@ -188,18 +188,18 @@ namespace zypp
       switch ( HistoryActionID( str::trim( fields_r[ACTION_INDEX] ) ).toEnum() )
       {
 #define OUTS(E,T) case HistoryActionID::E: return Ptr( new T( fields_r ) ); break;
-	OUTS( INSTALL_e,		HistoryLogDataInstall );
-	OUTS( REMOVE_e,			HistoryLogDataRemove );
-	OUTS( REPO_ADD_e,		HistoryLogDataRepoAdd );
-	OUTS( REPO_REMOVE_e,		HistoryLogDataRepoRemove );
-	OUTS( REPO_CHANGE_ALIAS_e,	HistoryLogDataRepoAliasChange );
-	OUTS( REPO_CHANGE_URL_e,	HistoryLogDataRepoUrlChange );
-	OUTS( STAMP_COMMAND_e,		HistoryLogDataStampCommand );
+        OUTS( INSTALL_e,		HistoryLogDataInstall );
+        OUTS( REMOVE_e,			HistoryLogDataRemove );
+        OUTS( REPO_ADD_e,		HistoryLogDataRepoAdd );
+        OUTS( REPO_REMOVE_e,		HistoryLogDataRepoRemove );
+        OUTS( REPO_CHANGE_ALIAS_e,	HistoryLogDataRepoAliasChange );
+        OUTS( REPO_CHANGE_URL_e,	HistoryLogDataRepoUrlChange );
+        OUTS( STAMP_COMMAND_e,		HistoryLogDataStampCommand );
         OUTS( PATCH_STATE_CHANGE_e,     HistoryLogPatchStateChange );
 #undef OUTS
-	// intentionally no default:
-	case HistoryActionID::NONE_e:
-	  break;
+        // intentionally no default:
+        case HistoryActionID::NONE_e:
+          break;
       }
     }
     // unknown action or invalid fields? Ctor will accept or throw.

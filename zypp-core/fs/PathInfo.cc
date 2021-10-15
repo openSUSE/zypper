@@ -286,14 +286,14 @@ namespace zypp
       /**  Helper function to log return values. */
       inline int doLogResult( const int res, const char * rclass = 0 /*errno*/ )
       {
-	if ( res )
-	{
-	  if ( rclass )
-	    WAR << " FAILED: " << rclass << " " << res << endl;
-	  else
-	    WAR << " FAILED: " << str::strerror( res ) << endl;
-	}
-	return res;
+        if ( res )
+        {
+          if ( rclass )
+            WAR << " FAILED: " << rclass << " " << res << endl;
+          else
+            WAR << " FAILED: " << str::strerror( res ) << endl;
+        }
+        return res;
       }
     } // namespace
 
@@ -424,11 +424,11 @@ namespace zypp
 
       p.lstat();	// get dir symlinks
       if ( !p.isDir() ) {
-	MIL << "unlink symlink ";
-	if ( ::unlink( path.asString().c_str() ) == -1 ) {
-	  return logResult( errno );
-	}
-	return logResult( 0 );
+        MIL << "unlink symlink ";
+        if ( ::unlink( path.asString().c_str() ) == -1 ) {
+          return logResult( errno );
+        }
+        return logResult( 0 );
       }
 
       return logResult( recursive_rmdir_1( path ) );
@@ -547,18 +547,18 @@ namespace zypp
     int dirForEachImpl ( const Pathname & dir_r, F &&fnc_r )
     {
       AutoDispose<DIR *> dir( ::opendir( dir_r.c_str() ),
-			      []( DIR * dir_r ) { if ( dir_r ) ::closedir( dir_r ); } );
+                              []( DIR * dir_r ) { if ( dir_r ) ::closedir( dir_r ); } );
 
       MIL << "readdir " << dir_r << ' ';
       if ( ! dir )
-	      return logResult( errno );
+              return logResult( errno );
       MIL << endl; // close line before callbacks are invoked.
 
       int ret = 0;
       for ( struct dirent * entry = ::readdir( dir ); entry; entry = ::readdir( dir ) )
       {
         if ( entry->d_name[0] == '.' && ( entry->d_name[1] == '\0' || ( entry->d_name[1] == '.' && entry->d_name[2] == '\0' ) ) )
-	        continue; // omitt . and ..
+                continue; // omitt . and ..
 
         // some static checks to make sure the correct func is selected
         static_assert( !std::is_invocable_v< function<bool(const Pathname &, const char *const)>, const Pathname &, const DirEntry &> , "Invoke detection broken" );
@@ -579,12 +579,12 @@ namespace zypp
         }
       }
       return ret;
-    } 
+    }
 
     int dirForEach( const Pathname & dir_r, function<bool(const Pathname &, const char *const)> fnc_r )
     {
       if ( ! fnc_r )
-	      return 0;
+              return 0;
 
       return dirForEachImpl( dir_r, fnc_r );
     }
@@ -593,7 +593,7 @@ namespace zypp
     int dirForEachExt( const Pathname & dir_r, const function<bool(const Pathname &, const DirEntry &)> &fnc_r )
     {
       if ( ! fnc_r )
-	      return 0;
+              return 0;
 
       return dirForEachImpl( dir_r, fnc_r );
     }
@@ -606,12 +606,12 @@ namespace zypp
     {
       retlist_r.clear();
       return dirForEach( path_r,
-			 [&]( const Pathname & dir_r, const char *const name_r )->bool
-			 {
-			   if ( dots_r || name_r[0] != '.' )
-			     retlist_r.push_back( name_r );
-			   return true;
-			 } );
+                         [&]( const Pathname & dir_r, const char *const name_r )->bool
+                         {
+                           if ( dots_r || name_r[0] != '.' )
+                             retlist_r.push_back( name_r );
+                           return true;
+                         } );
     }
 
 
@@ -619,12 +619,12 @@ namespace zypp
     {
       retlist_r.clear();
       return dirForEach( path_r,
-			 [&]( const Pathname & dir_r, const char *const name_r )->bool
-			 {
-			   if ( dots_r || name_r[0] != '.' )
-			     retlist_r.push_back( dir_r/name_r );
-			   return true;
-			 } );
+                         [&]( const Pathname & dir_r, const char *const name_r )->bool
+                         {
+                           if ( dots_r || name_r[0] != '.' )
+                             retlist_r.push_back( dir_r/name_r );
+                           return true;
+                         } );
     }
 
     DirEntry::DirEntry( struct dirent* entry )
@@ -653,7 +653,7 @@ namespace zypp
           this->type =  FileType::FT_SOCKET;
           break;
         case DT_UNKNOWN:
-          this->type =  FileType::FT_NOT_AVAIL; 
+          this->type =  FileType::FT_NOT_AVAIL;
           break;
       }
     }
@@ -670,12 +670,12 @@ namespace zypp
     {
       retlist_r.clear();
       return dirForEach( path_r,
-			 [&]( const Pathname & dir_r, const char *const name_r )->bool
-			 {
-			   if ( dots_r || name_r[0] != '.' )
-			     retlist_r.push_back( DirEntry( name_r, PathInfo( dir_r/name_r, statmode_r ).fileType() ) );
-			   return true;
-			 } );
+                         [&]( const Pathname & dir_r, const char *const name_r )->bool
+                         {
+                           if ( dots_r || name_r[0] != '.' )
+                             retlist_r.push_back( DirEntry( name_r, PathInfo( dir_r/name_r, statmode_r ).fileType() ) );
+                           return true;
+                         } );
     }
 
     std::ostream & operator<<( std::ostream & str, const DirContent & obj )
@@ -688,8 +688,8 @@ namespace zypp
     int is_empty_dir( const Pathname & path_r )
     {
       return dirForEach( path_r,
-			 [&]( const Pathname & dir_r, const char *const name_r )->bool
-			 { return false; } );
+                         [&]( const Pathname & dir_r, const char *const name_r )->bool
+                         { return false; } );
     }
 
     ///////////////////////////////////////////////////////////////////
@@ -887,17 +887,17 @@ namespace zypp
       PathInfo pi( oldpath, PathInfo::LSTAT );
       if ( pi.isLink() )
       {
-	// dont hardlink symlinks!
-	MIL << " => copy" << endl;
-	return copy( oldpath, newpath );
+        // dont hardlink symlinks!
+        MIL << " => copy" << endl;
+        return copy( oldpath, newpath );
       }
 
       pi.lstat( newpath );
       if ( pi.isExist() )
       {
-	int res = unlink( newpath );
-	if ( res != 0 )
-	  return logResult( res );
+        int res = unlink( newpath );
+        if ( res != 0 )
+          return logResult( res );
       }
 
       // Here: no symlink, no newpath
@@ -905,9 +905,9 @@ namespace zypp
       {
         switch ( errno )
         {
-	  case EPERM: // /proc/sys/fs/protected_hardlink in proc(5)
+          case EPERM: // /proc/sys/fs/protected_hardlink in proc(5)
           case EXDEV: // oldpath  and  newpath are not on the same mounted file system
-	    MIL << " => copy" << endl;
+            MIL << " => copy" << endl;
             return copy( oldpath, newpath );
             break;
         }
@@ -1209,14 +1209,14 @@ namespace zypp
       PathInfo pi( path );
       if ( pi.isExist() )
       {
-	if ( ! pi.isFile() )
-	  return logResult( EEXIST );
+        if ( ! pi.isFile() )
+          return logResult( EEXIST );
 
-	mode = applyUmaskTo( mode );
-	if ( pi.st_mode() != mode )
-	  return chmod( path, mode );
+        mode = applyUmaskTo( mode );
+        if ( pi.st_mode() != mode )
+          return chmod( path, mode );
 
-	return logResult( 0 );
+        return logResult( 0 );
       }
 
       int fd = ::creat( path.c_str(), mode );

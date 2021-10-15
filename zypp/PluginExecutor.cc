@@ -37,7 +37,7 @@ namespace zypp
     ~Impl()
     {
       if ( ! empty() )
-	send( PluginFrame( "PLUGINEND" ) );
+        send( PluginFrame( "PLUGINEND" ) );
       // ~PluginScript will disconnect all remaining plugins!
     }
 
@@ -53,29 +53,29 @@ namespace zypp
       DBG << "+++++++++++++++ load " << pi << endl;
       if ( pi.isDir() )
       {
-	std::list<Pathname> entries;
-	if ( filesystem::readdir( entries, pi.path(), false ) != 0 )
-	{
-	  WAR << "Plugin dir is not readable: " << pi << endl;
-	  return;
-	}
-	for_( it, entries.begin(), entries.end() )
-	{
-	  PathInfo pii( *it );
-	  if ( pii.isFile() && pii.userMayRX() )
-	    doLoad( pii );
-	}
+        std::list<Pathname> entries;
+        if ( filesystem::readdir( entries, pi.path(), false ) != 0 )
+        {
+          WAR << "Plugin dir is not readable: " << pi << endl;
+          return;
+        }
+        for_( it, entries.begin(), entries.end() )
+        {
+          PathInfo pii( *it );
+          if ( pii.isFile() && pii.userMayRX() )
+            doLoad( pii );
+        }
       }
       else if ( pi.isFile() )
       {
-	if ( pi.userMayRX() )
-	  doLoad( pi );
-	else
-	  WAR << "Plugin file is not executable: " << pi << endl;
+        if ( pi.userMayRX() )
+          doLoad( pi );
+        else
+          WAR << "Plugin file is not executable: " << pi << endl;
       }
       else
       {
-	WAR << "Plugin path is neither dir nor file: " << pi << endl;
+        WAR << "Plugin path is neither dir nor file: " << pi << endl;
       }
       DBG << "--------------- load " << pi << endl;
     }
@@ -85,11 +85,11 @@ namespace zypp
       DBG << "+++++++++++++++ send " << frame_r << endl;
       for ( auto it = _scripts.begin(); it != _scripts.end(); )
       {
-	doSend( *it, frame_r );
-	if ( it->isOpen() )
-	  ++it;
-	else
-	  it = _scripts.erase( it );
+        doSend( *it, frame_r );
+        if ( it->isOpen() )
+          ++it;
+        else
+          it = _scripts.erase( it );
       }
       DBG << "--------------- send " << frame_r << endl;
     }
@@ -103,20 +103,20 @@ namespace zypp
     {
       MIL << "Load plugin: " << pi_r << endl;
       try {
-	PluginScript plugin( pi_r.path() );
-	plugin.open();
+        PluginScript plugin( pi_r.path() );
+        plugin.open();
 
-	PluginFrame frame( "PLUGINBEGIN" );
-	if ( ZConfig::instance().hasUserData() )
-	  frame.setHeader( "userdata", ZConfig::instance().userData() );
+        PluginFrame frame( "PLUGINBEGIN" );
+        if ( ZConfig::instance().hasUserData() )
+          frame.setHeader( "userdata", ZConfig::instance().userData() );
 
-	doSend( plugin, frame );	// closes on error
-	if ( plugin.isOpen() )
-	  _scripts.push_back( plugin );
+        doSend( plugin, frame );	// closes on error
+        if ( plugin.isOpen() )
+          _scripts.push_back( plugin );
       }
       catch( const zypp::Exception & e )
       {
-	WAR << "Failed to load plugin " << pi_r << endl;
+        WAR << "Failed to load plugin " << pi_r << endl;
       }
     }
 
@@ -125,21 +125,21 @@ namespace zypp
       PluginFrame ret;
 
       try {
-	script_r.send( frame_r );
-	ret = script_r.receive();
+        script_r.send( frame_r );
+        ret = script_r.receive();
       }
       catch( const zypp::Exception & e )
       {
-	ZYPP_CAUGHT(e);
-	WAR << e.asUserHistory() << endl;
+        ZYPP_CAUGHT(e);
+        WAR << e.asUserHistory() << endl;
       }
 
       // Allow using "/bin/cat" as reflector-script for testing
       if ( ! ( ret.isAckCommand() || ret.isEnomethodCommand() || ( script_r.script() == "/bin/cat" && frame_r.command() != "ERROR" ) ) )
       {
-	WAR << "Bad plugin response from " << script_r << ": " << ret << endl;
-	WAR << "(Expected " << PluginFrame::ackCommand() << " or " << PluginFrame::enomethodCommand() << ")" << endl;
-	script_r.close();
+        WAR << "Bad plugin response from " << script_r << ": " << ret << endl;
+        WAR << "(Expected " << PluginFrame::ackCommand() << " or " << PluginFrame::enomethodCommand() << ")" << endl;
+        script_r.close();
       }
 
       return ret;

@@ -27,21 +27,21 @@ namespace zypp
     inline Dep::for_use_in_switch parse( const std::string & strval_r )
     {
       const std::map<std::string,Dep::for_use_in_switch> _table = {
-	{ "provides",		Dep::PROVIDES_e		},
-	{ "prerequires",	Dep::PREREQUIRES_e	},
-	{ "requires",		Dep::REQUIRES_e		},
-	{ "conflicts",		Dep::CONFLICTS_e	},
-	{ "obsoletes",		Dep::OBSOLETES_e	},
-	{ "recommends",		Dep::RECOMMENDS_e	},
-	{ "suggests",		Dep::SUGGESTS_e		},
-	{ "enhances",		Dep::ENHANCES_e		},
-	{ "supplements",	Dep::SUPPLEMENTS_e	}
+        { "provides",		Dep::PROVIDES_e		},
+        { "prerequires",	Dep::PREREQUIRES_e	},
+        { "requires",		Dep::REQUIRES_e		},
+        { "conflicts",		Dep::CONFLICTS_e	},
+        { "obsoletes",		Dep::OBSOLETES_e	},
+        { "recommends",		Dep::RECOMMENDS_e	},
+        { "suggests",		Dep::SUGGESTS_e		},
+        { "enhances",		Dep::ENHANCES_e		},
+        { "supplements",	Dep::SUPPLEMENTS_e	}
       };
 
       auto it = _table.find( str::toLower( strval_r ) );
       if ( it == _table.end() )
       {
-	ZYPP_THROW( Exception("Dep parse: illegal string value '"+strval_r+"'") );
+        ZYPP_THROW( Exception("Dep parse: illegal string value '"+strval_r+"'") );
       }
       return it->second;
     }

@@ -58,22 +58,22 @@ namespace zypp
     Queue::const_iterator Queue::find( value_type val_r ) const
     {
       for_( it, begin(), end() )
-	if ( *it == val_r )
-	  return it;
+        if ( *it == val_r )
+          return it;
       return end();
     }
 
     Queue::value_type Queue::first() const
     {
       if ( _pimpl->count )
-	return *_pimpl->elements;
+        return *_pimpl->elements;
       return 0;
     }
 
     Queue::value_type Queue::last() const
     {
       if ( _pimpl->count )
-	return _pimpl->elements[_pimpl->count-1];
+        return _pimpl->elements[_pimpl->count-1];
       return 0;
     }
 
@@ -97,7 +97,7 @@ namespace zypp
     void Queue::remove( value_type val_r )
     {
       for ( const_iterator it( find( val_r ) ); it != end(); it = find( val_r ) )
-	::queue_delete( _pimpl.get(), it - begin() );
+        ::queue_delete( _pimpl.get(), it - begin() );
     }
 
     void Queue::push( value_type val_r )
@@ -126,9 +126,9 @@ namespace zypp
       str << "Queue {";
       if ( ! obj.empty() )
       {
-	str << endl;
-	for_( it, obj.begin(), obj.end() )
-	  str << "  " << Solvable(*it) << endl;
+        str << endl;
+        for_( it, obj.begin(), obj.end() )
+          str << "  " << Solvable(*it) << endl;
       }
       return str << "}";
     }

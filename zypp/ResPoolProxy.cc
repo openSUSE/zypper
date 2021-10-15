@@ -230,8 +230,8 @@ namespace zypp
   {
     detail::DumpFilter f;
     return dumpRange( str << obj << " toModify: ",
-		      make_filter_begin( f, obj ),
-		      make_filter_end( f, obj ) );
+                      make_filter_begin( f, obj ),
+                      make_filter_end( f, obj ) );
   }
 
   ///////////////////////////////////////////////////////////////////

@@ -47,9 +47,9 @@ namespace zypp
       template<class Tp>
       Osd & operator<<( Tp && val )
       {
-	_strout << std::forward<Tp>(val);
-	_strlog << std::forward<Tp>(val);
-	return *this;
+        _strout << std::forward<Tp>(val);
+        _strlog << std::forward<Tp>(val);
+        return *this;
       }
 
       Osd & operator<<( std::ostream& (*iomanip)( std::ostream& ) );

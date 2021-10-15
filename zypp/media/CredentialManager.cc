@@ -49,9 +49,9 @@ namespace zypp
   bool AuthDataComparator::operator()( const AuthData_Ptr & lhs, const AuthData_Ptr & rhs ) const
   {
     static const url::ViewOption vopt = url::ViewOption::DEFAULTS
-				      - url::ViewOption::WITH_USERNAME
-				      - url::ViewOption::WITH_PASSWORD
-				      - url::ViewOption::WITH_QUERY_STR;
+                                      - url::ViewOption::WITH_USERNAME
+                                      - url::ViewOption::WITH_PASSWORD
+                                      - url::ViewOption::WITH_QUERY_STR;
     // std::less semantic!
     int cmp = lhs->url().asString(vopt).compare( rhs->url().asString(vopt) );
     if ( ! cmp )

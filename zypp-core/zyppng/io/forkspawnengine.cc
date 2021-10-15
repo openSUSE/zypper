@@ -101,9 +101,9 @@ void zyppng::AbstractDirectSpawnEngine::mapExtraFds ( int controlFd )
   };
 
   const auto maxFds = ( ::getdtablesize() - 1 );
-  //If the rlimits are too high we need to use a different approach 
+  //If the rlimits are too high we need to use a different approach
   // in detecting how many fds we need to close, or otherwise we are too slow (bsc#1191324)
-  if ( maxFds >= 1024 && zypp::PathInfo( "/proc/self/fd" ).isExist() ) {    
+  if ( maxFds >= 1024 && zypp::PathInfo( "/proc/self/fd" ).isExist() ) {
     zypp::filesystem::dirForEachExt( "/proc/self/fd", [&]( const zypp::Pathname &p, const zypp::filesystem::DirEntry &entry ){
       if ( entry.type != zypp::filesystem::FT_LINK)
         return true;

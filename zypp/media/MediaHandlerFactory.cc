@@ -62,56 +62,56 @@ namespace zypp::media {
       WhichHandler which = choose;
       // Leagcy: choose handler in UUrl query
       if ( const std::string & queryparam = url.getQueryParam("mediahandler"); ! queryparam.empty() ) {
-	if ( queryparam == "network" )
-	  which = network;
-	else if ( queryparam == "multicurl" )
-	  which = multicurl;
-	else if ( queryparam == "curl" )
-	  which = curl;
-	else
-	  WAR << "Unknown mediahandler='" << queryparam << "' in URL; Choosing the default" << std::endl;
+        if ( queryparam == "network" )
+          which = network;
+        else if ( queryparam == "multicurl" )
+          which = multicurl;
+        else if ( queryparam == "curl" )
+          which = curl;
+        else
+          WAR << "Unknown mediahandler='" << queryparam << "' in URL; Choosing the default" << std::endl;
       }
       // Otherwise choose handler through ENV
       if ( which == choose ) {
-	auto getenvIs = []( std::string_view var, std::string_view val )->bool {
-	  const char * v = ::getenv( var.data() );
-	  return v && v == val;
-	};
+        auto getenvIs = []( std::string_view var, std::string_view val )->bool {
+          const char * v = ::getenv( var.data() );
+          return v && v == val;
+        };
 
-	if ( getenvIs( "ZYPP_MEDIANETWORK", "1" ) ) {
-	  WAR << "network backend manually enabled." << std::endl;
-	  which = network;
-	}
-	else if ( getenvIs( "ZYPP_MULTICURL", "0" ) ) {
-	  WAR << "multicurl manually disabled." << std::endl;
-	  which = curl;
-	}
-	else
-	  which = multicurl;
+        if ( getenvIs( "ZYPP_MEDIANETWORK", "1" ) ) {
+          WAR << "network backend manually enabled." << std::endl;
+          which = network;
+        }
+        else if ( getenvIs( "ZYPP_MULTICURL", "0" ) ) {
+          WAR << "multicurl manually disabled." << std::endl;
+          which = curl;
+        }
+        else
+          which = multicurl;
       }
       // Finally use the default
       std::unique_ptr<MediaNetworkCommonHandler> handler;
       switch ( which ) {
-	case network:
-	  handler = std::make_unique<zyppng::MediaNetwork>( url, preferred_attach_point );
-	  break;
+        case network:
+          handler = std::make_unique<zyppng::MediaNetwork>( url, preferred_attach_point );
+          break;
 
-	default:
-	case multicurl:
-	  handler = std::make_unique<MediaMultiCurl>( url, preferred_attach_point );
-	  break;
+        default:
+        case multicurl:
+          handler = std::make_unique<MediaMultiCurl>( url, preferred_attach_point );
+          break;
 
-	case curl:
-	  handler = std::make_unique<MediaCurl>( url, preferred_attach_point );
-	  break;
+        case curl:
+          handler = std::make_unique<MediaCurl>( url, preferred_attach_point );
+          break;
       }
       // Set up the handler
       for ( const auto & el : custom_headers ) {
-	std::string header { el.first };
-	header += ": ";
-	header += el.second;
-	MIL << "Added custom header -> " << header << std::endl;
-	handler->settings().addHeader( std::move(header) );
+        std::string header { el.first };
+        header += ": ";
+        header += el.second;
+        MIL << "Added custom header -> " << header << std::endl;
+        handler->settings().addHeader( std::move(header) );
       }
       _handler = std::move(handler);
 

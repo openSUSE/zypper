@@ -68,9 +68,9 @@ namespace zypp
         RepoStatus status( MediaSetAccess & media_r ) override;
 
       private:
-	class Impl;
-	friend class Impl;
-	Pathname _deltaDir;
+        class Impl;
+        friend class Impl;
+        Pathname _deltaDir;
       };
 
     } // ns yum

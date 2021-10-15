@@ -92,7 +92,7 @@ namespace zypp
       };
     enum ValidateValue
       {
-	UNDETERMINED = bit::RangeValue<ValidateField,0>::value,
+        UNDETERMINED = bit::RangeValue<ValidateField,0>::value,
         BROKEN       = bit::RangeValue<ValidateField,1>::value,
         SATISFIED    = bit::RangeValue<ValidateField,2>::value,
         NONRELEVANT  = bit::RangeValue<ValidateField,3>::value
@@ -124,7 +124,7 @@ namespace zypp
     enum RemoveDetailValue
       {
         EXPLICIT_REMOVE = bit::RangeValue<TransactDetailField,0>::value,
-	SOFT_REMOVE     = bit::RangeValue<TransactDetailField,1>::value,
+        SOFT_REMOVE     = bit::RangeValue<TransactDetailField,1>::value,
         DUE_TO_OBSOLETE = bit::RangeValue<TransactDetailField,2>::value,
         DUE_TO_UPGRADE  = bit::RangeValue<TransactDetailField,3>::value
       };
@@ -139,9 +139,9 @@ namespace zypp
       {
         NO_WEAK 		= bit::RangeValue<WeakField,0>::value,
         SUGGESTED   		= bit::RangeValue<WeakField,1<<0>::value,
-	RECOMMENDED 		= bit::RangeValue<WeakField,1<<1>::value,
-	ORPHANED		= bit::RangeValue<WeakField,1<<2>::value,
-	UNNEEDED		= bit::RangeValue<WeakField,1<<3>::value
+        RECOMMENDED 		= bit::RangeValue<WeakField,1<<1>::value,
+        ORPHANED		= bit::RangeValue<WeakField,1<<2>::value,
+        UNNEEDED		= bit::RangeValue<WeakField,1<<3>::value
       };
 
     enum UserLockQuery // internal
@@ -304,12 +304,12 @@ namespace zypp
 
     bool setTransactByValue(TransactByValue causer)
     {
-	if ( isLessThan<TransactByField>( causer ) ) {
-	    fieldValueAssign<TransactByField>( causer );
-	    return true;
-	} else {
-	    return false;
-	}
+        if ( isLessThan<TransactByField>( causer ) ) {
+            fieldValueAssign<TransactByField>( causer );
+            return true;
+        } else {
+            return false;
+        }
     }
 
     bool isToBeUninstalledDueToObsolete () const
@@ -374,10 +374,10 @@ namespace zypp
 
     bool maySetTransactValue( TransactValue newVal_r, TransactByValue causer_r )
     {
-	bit::BitField<FieldType> savBitfield = _bitfield;
-	bool ret = setTransactValue( newVal_r, causer_r );
-	_bitfield = savBitfield;
-	return ret;
+        bit::BitField<FieldType> savBitfield = _bitfield;
+        bool ret = setTransactValue( newVal_r, causer_r );
+        _bitfield = savBitfield;
+        return ret;
     }
 
     /** Apply a lock (prevent transaction).
@@ -412,17 +412,17 @@ namespace zypp
           return false;
         fieldValueAssign<TransactField>( KEEP_STATE );
         fieldValueAssign<TransactByField>( SOLVER ); // reset to lowest causer
-	                                             // in order to distinguish from keep_state_by_user
+                                                     // in order to distinguish from keep_state_by_user
       }
       return true;
     }
 
     bool maySetLock( bool to_r, TransactByValue causer_r )
     {
-	bit::BitField<FieldType> savBitfield = _bitfield;
-	bool ret = setLock( to_r, causer_r );
-	_bitfield = savBitfield;
-	return ret;
+        bit::BitField<FieldType> savBitfield = _bitfield;
+        bool ret = setLock( to_r, causer_r );
+        _bitfield = savBitfield;
+        return ret;
     }
 
     /** Toggle between TRANSACT and KEEP_STATE.
@@ -439,12 +439,12 @@ namespace zypp
           if ( transacts() && isLessThan<TransactByField>( causer_r ) )
               fieldValueAssign<TransactByField>( causer_r );
 
-	  fieldValueAssign<TransactDetailField>( NO_DETAIL ); // Details has to be set again
+          fieldValueAssign<TransactDetailField>( NO_DETAIL ); // Details has to be set again
           return true;
         }
       // Here: transact status is to be changed:
       if (    ! fieldValueIs<TransactField>( KEEP_STATE )
-	      && isGreaterThan<TransactByField>( causer_r ) ) {
+              && isGreaterThan<TransactByField>( causer_r ) ) {
         return false;
       }
 
@@ -463,10 +463,10 @@ namespace zypp
 
     bool maySetTransact( bool val_r, TransactByValue causer )
     {
-	bit::BitField<FieldType> savBitfield = _bitfield;
-	bool ret = setTransact (val_r, causer);
-	_bitfield = savBitfield;
-	return ret;
+        bit::BitField<FieldType> savBitfield = _bitfield;
+        bool ret = setTransact (val_r, causer);
+        _bitfield = savBitfield;
+        return ret;
     }
 
     /** */
@@ -519,10 +519,10 @@ namespace zypp
     bool maySetSoftTransact( bool val_r, TransactByValue causer,
                              TransactByValue causerLimit_r )
     {
-	bit::BitField<FieldType> savBitfield = _bitfield;
-	bool ret = setSoftTransact( val_r, causer, causerLimit_r );
-	_bitfield = savBitfield;
-	return ret;
+        bit::BitField<FieldType> savBitfield = _bitfield;
+        bool ret = setSoftTransact( val_r, causer, causerLimit_r );
+        _bitfield = savBitfield;
+        return ret;
     }
 
     bool maySetSoftTransact( bool val_r, TransactByValue causer )
@@ -536,10 +536,10 @@ namespace zypp
 
     bool maySetToBeInstalled (TransactByValue causer)
     {
-	bit::BitField<FieldType> savBitfield = _bitfield;
-	bool ret = setToBeInstalled (causer);
-	_bitfield = savBitfield;
-	return ret;
+        bit::BitField<FieldType> savBitfield = _bitfield;
+        bool ret = setToBeInstalled (causer);
+        _bitfield = savBitfield;
+        return ret;
     }
 
     bool setToBeUninstalled (TransactByValue causer)
@@ -550,10 +550,10 @@ namespace zypp
 
     bool maySetToBeUninstalled (TransactByValue causer)
     {
-	bit::BitField<FieldType> savBitfield = _bitfield;
-	bool ret = setToBeUninstalled (causer);
-	_bitfield = savBitfield;
-	return ret;
+        bit::BitField<FieldType> savBitfield = _bitfield;
+        bool ret = setToBeUninstalled (causer);
+        _bitfield = savBitfield;
+        return ret;
     }
 
     //------------------------------------------------------------------------
@@ -576,8 +576,8 @@ namespace zypp
     bool setToBeInstalledSoft ( )
     {
       if (isInstalled()
-	  || !setSoftTransact (true, SOLVER))
-	  return false;
+          || !setSoftTransact (true, SOLVER))
+          return false;
 
       fieldValueAssign<TransactDetailField>(SOFT_INSTALL);
       return true;
@@ -586,8 +586,8 @@ namespace zypp
     bool setToBeUninstalledSoft ( )
     {
       if (!isInstalled()
-	  || !setSoftTransact (true, SOLVER))
-	  return false;
+          || !setSoftTransact (true, SOLVER))
+          return false;
 
       fieldValueAssign<TransactDetailField>(SOFT_REMOVE);
       return true;
@@ -595,10 +595,10 @@ namespace zypp
 
     bool maySetToBeUninstalledSoft ()
     {
-	bit::BitField<FieldType> savBitfield = _bitfield;
-	bool ret = setToBeUninstalledSoft ();
-	_bitfield = savBitfield;
-	return ret;
+        bit::BitField<FieldType> savBitfield = _bitfield;
+        bool ret = setToBeUninstalledSoft ();
+        _bitfield = savBitfield;
+        return ret;
     }
 
     bool isSoftInstall () {
@@ -611,12 +611,12 @@ namespace zypp
 
     bool setSoftInstall (bool flag) {
         fieldValueAssign<TransactDetailField>(flag?SOFT_INSTALL:0);
-	return true;
+        return true;
     }
 
     bool setSoftUninstall (bool flag) {
         fieldValueAssign<TransactDetailField>(flag?SOFT_REMOVE:0);
-	return true;
+        return true;
     }
 
     bool setUndetermined ()

@@ -73,8 +73,8 @@ namespace zypp::io {
     while ( read != size ) {
       const auto r = zyppng::eintrSafeCall( ::read, fd, tmpBuf+read, size - read );
       if ( r == 0 )
-				return ReadAllResult::Eof;
-			if ( r < 0 )
+                                return ReadAllResult::Eof;
+                        if ( r < 0 )
         return ReadAllResult::Error;
 
       read += r;

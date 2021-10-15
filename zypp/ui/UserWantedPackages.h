@@ -22,22 +22,22 @@ namespace zypp
 {
     namespace ui
     {
-	/**
-	 * This returns a set of package names the user explicitly wanted to
-	 * transact ( to install, to update, or to delete) for any of the
-	 * following reasons:
-	 *
-	 * - The user wanted to transact the pkg directly
-	 *
-	 * - Pkg is part of a pattern   the user wanted to transact
-	 * - Pkg is part of a language  the user wanted to transact
+        /**
+         * This returns a set of package names the user explicitly wanted to
+         * transact ( to install, to update, or to delete) for any of the
+         * following reasons:
+         *
+         * - The user wanted to transact the pkg directly
+         *
+         * - Pkg is part of a pattern   the user wanted to transact
+         * - Pkg is part of a language  the user wanted to transact
          *   (? No more transacting Languages)
-	 * - Pkg is part of a patch     the user wanted to transact
-	 *
-	 * - Pkg is part of a pattern that is required by a pattern the
-	 *   user wanted to transact
-	 **/
-	std::set<std::string> userWantedPackageNames();
+         * - Pkg is part of a patch     the user wanted to transact
+         *
+         * - Pkg is part of a pattern that is required by a pattern the
+         *   user wanted to transact
+         **/
+        std::set<std::string> userWantedPackageNames();
 
     } // namespace ui
 } // namespace zypp

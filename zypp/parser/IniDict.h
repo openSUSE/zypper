@@ -36,7 +36,7 @@ namespace zypp
     /**
      * Parses a INI file and offers its structure as a
      * dictionary.
-     * 
+     *
      */
     class IniDict : public IniParser
     {
@@ -46,12 +46,12 @@ namespace zypp
       typedef std::map<std::string, EntrySet> SectionSet;
       typedef MapKVIteratorTraits<SectionSet>::Key_const_iterator section_const_iterator;
       typedef EntrySet::const_iterator entry_const_iterator;
-      
+
       /**
        * \name Section Iterators
        * Iterate trough ini file sections
        * \code
-       * for ( IniDict::section_const_iterator it = dict.sectionsBegin(); 
+       * for ( IniDict::section_const_iterator it = dict.sectionsBegin();
        *       it != dict.sectionsEnd();
        *       ++it )
        * {
@@ -64,12 +64,12 @@ namespace zypp
       section_const_iterator sectionsEnd() const;
       Iterable<section_const_iterator> sections() const;
       //@}
-      
+
       /**
        * \name Entries Iterators
        * Iterate trough ini file entries in a section
        * \code
-       * for ( IniDict::entry_const_iterator it = dict.entriesBegin("updates"); 
+       * for ( IniDict::entry_const_iterator it = dict.entriesBegin("updates");
        *       it != dict.entriesEnd("updates");
        *       ++it )
        * {
@@ -77,13 +77,13 @@ namespace zypp
        * }
        * \endcode
        */
-       
+
       //@{
       entry_const_iterator entriesBegin(const std::string &section) const;
       entry_const_iterator entriesEnd(const std::string &section) const;
       Iterable<entry_const_iterator> entries(const std::string &section) const;
       //@{
-      
+
       /**
        * Creates a dictionary from a InputStream
        * containing a ini structured file
@@ -95,7 +95,7 @@ namespace zypp
        * Creates a mepty dictionary
        */
       IniDict();
-      
+
       /** Dtor */
       ~IniDict();
 
@@ -115,7 +115,7 @@ namespace zypp
       void insertEntry( const std::string &section,
                         const std::string &key,
                         const std::string &value );
-      
+
       /**
        * \short add an entry
        * \param section

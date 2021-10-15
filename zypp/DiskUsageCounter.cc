@@ -55,8 +55,8 @@ namespace zypp
         for_( it, result.begin(), result.end() )
         {
           duchanges[idx].path = it->dir.c_str();
-	  if ( it->growonly )
-	    duchanges[idx].flags |= DUCHANGES_ONLYADD;
+          if ( it->growonly )
+            duchanges[idx].flags |= DUCHANGES_ONLYADD;
           ++idx;
         }
       }
@@ -71,9 +71,9 @@ namespace zypp
         unsigned idx = 0;
         for_( it, result.begin(), result.end() )
         {
-	  // Limit estimated waste (half block per file) as it does not apply to
-	  // btrfs, which reports up to 64K blocksize (bsc#974275,bsc#965322)
-	  static const ByteCount blockAdjust( 2, ByteCount::K ); // (files * blocksize) / 2 / 1K; result value in K!
+          // Limit estimated waste (half block per file) as it does not apply to
+          // btrfs, which reports up to 64K blocksize (bsc#974275,bsc#965322)
+          static const ByteCount blockAdjust( 2, ByteCount::K ); // (files * blocksize) / 2 / 1K; result value in K!
 
           it->pkg_size = it->used_size          // current usage
                        + duchanges[idx].kbytes  // package data size
@@ -136,195 +136,195 @@ namespace zypp
       std::ifstream procmounts( "/proc/mounts" );
 
       if ( !procmounts ) {
-	WAR << "Unable to read /proc/mounts" << std::endl;
+        WAR << "Unable to read /proc/mounts" << std::endl;
       } else {
 
-	std::string prfx;
-	if ( rootdir != "/" )
-	  prfx = rootdir; // rootdir not /
+        std::string prfx;
+        if ( rootdir != "/" )
+          prfx = rootdir; // rootdir not /
 
-	while ( procmounts ) {
-	  std::string l = str::getline( procmounts );
-	  if ( !(procmounts.fail() || procmounts.bad()) ) {
-	    // data to consume
+        while ( procmounts ) {
+          std::string l = str::getline( procmounts );
+          if ( !(procmounts.fail() || procmounts.bad()) ) {
+            // data to consume
 
-	    // rootfs 		/ 		rootfs 		rw 0 0
-	    // /dev/root 	/ 		reiserfs	rw 0 0
-	    // proc 		/proc 		proc		rw 0 0
-	    // devpts 		/dev/pts 	devpts		rw 0 0
-	    // /dev/hda5 	/boot 		ext2		rw 0 0
-	    // shmfs 		/dev/shm 	shm		rw 0 0
-	    // usbdevfs 	/proc/bus/usb 	usbdevfs	rw 0 0
+            // rootfs 		/ 		rootfs 		rw 0 0
+            // /dev/root 	/ 		reiserfs	rw 0 0
+            // proc 		/proc 		proc		rw 0 0
+            // devpts 		/dev/pts 	devpts		rw 0 0
+            // /dev/hda5 	/boot 		ext2		rw 0 0
+            // shmfs 		/dev/shm 	shm		rw 0 0
+            // usbdevfs 	/proc/bus/usb 	usbdevfs	rw 0 0
 
-	    std::vector<std::string> words;
-	    str::split( l, std::back_inserter(words) );
+            std::vector<std::string> words;
+            str::split( l, std::back_inserter(words) );
 
-	    if ( words.size() < 3 ) {
-	      WAR << "Suspicious entry in /proc/mounts: " << l << std::endl;
-	      continue;
-	    }
+            if ( words.size() < 3 ) {
+              WAR << "Suspicious entry in /proc/mounts: " << l << std::endl;
+              continue;
+            }
 
-	    //
-	    // Filter devices without '/' (proc,shmfs,..)
-	    //
-	    if ( words[0].find( '/' ) == std::string::npos ) {
-	      DBG << "Discard mount point : " << l << std::endl;
-	      continue;
-	    }
+            //
+            // Filter devices without '/' (proc,shmfs,..)
+            //
+            if ( words[0].find( '/' ) == std::string::npos ) {
+              DBG << "Discard mount point : " << l << std::endl;
+              continue;
+            }
 
-	    // remove /proc entry
-	    if (words[0] == "/proc")
-	    {
-	      DBG << "Discard /proc filesystem: " << l << std::endl;
-	      continue;
-	    }
+            // remove /proc entry
+            if (words[0] == "/proc")
+            {
+              DBG << "Discard /proc filesystem: " << l << std::endl;
+              continue;
+            }
 
-	    //
-	    // Filter mountpoints not at or below _rootdir
-	    //
-	    std::string mp = words[1];
-	    if ( prfx.size() ) {
-	      if ( mp.compare( 0, prfx.size(), prfx ) != 0 ) {
-		// mountpoint not below rootdir
-		DBG << "Unwanted mount point : " << l << std::endl;
-		continue;
-	      }
-	      // strip prfx
-	      mp.erase( 0, prfx.size() );
-	      if ( mp.empty() ) {
-		mp = "/";
-	      } else if ( mp[0] != '/' ) {
-		// mountpoint not below rootdir
-		DBG << "Unwanted mount point : " << l << std::endl;
-		continue;
-	      }
-	    }
+            //
+            // Filter mountpoints not at or below _rootdir
+            //
+            std::string mp = words[1];
+            if ( prfx.size() ) {
+              if ( mp.compare( 0, prfx.size(), prfx ) != 0 ) {
+                // mountpoint not below rootdir
+                DBG << "Unwanted mount point : " << l << std::endl;
+                continue;
+              }
+              // strip prfx
+              mp.erase( 0, prfx.size() );
+              if ( mp.empty() ) {
+                mp = "/";
+              } else if ( mp[0] != '/' ) {
+                // mountpoint not below rootdir
+                DBG << "Unwanted mount point : " << l << std::endl;
+                continue;
+              }
+            }
 
-	    //
-	    // Filter cdrom
-	    //
-	    if ( words[2] == "iso9660" ) {
-	      DBG << "Discard cdrom : " << l << std::endl;
-	      continue;
-	    }
+            //
+            // Filter cdrom
+            //
+            if ( words[2] == "iso9660" ) {
+              DBG << "Discard cdrom : " << l << std::endl;
+              continue;
+            }
 
-	    if ( words[2] == "vfat" || words[2] == "fat" || words[2] == "ntfs" || words[2] == "ntfs-3g")
-	    {
-	      MIL << words[1] << " contains ignored fs (" << words[2] << ')' << std::endl;
-	      continue;
-	    }
+            if ( words[2] == "vfat" || words[2] == "fat" || words[2] == "ntfs" || words[2] == "ntfs-3g")
+            {
+              MIL << words[1] << " contains ignored fs (" << words[2] << ')' << std::endl;
+              continue;
+            }
 
-	    //
-	    // Filter some common unwanted mountpoints
-	    //
-	    const char * mpunwanted[] = {
-	      "/mnt", "/media", "/mounts", "/floppy", "/cdrom",
-	      "/suse", "/tmp", "/var/tmp", "/var/adm/mount", "/var/adm/YaST",
-	      /*last*/0/*entry*/
-	    };
+            //
+            // Filter some common unwanted mountpoints
+            //
+            const char * mpunwanted[] = {
+              "/mnt", "/media", "/mounts", "/floppy", "/cdrom",
+              "/suse", "/tmp", "/var/tmp", "/var/adm/mount", "/var/adm/YaST",
+              /*last*/0/*entry*/
+            };
 
-	    const char ** nomp = mpunwanted;
-	    for ( ; *nomp; ++nomp ) {
-	      std::string pre( *nomp );
-	      if ( mp.compare( 0, pre.size(), pre ) == 0 // mp has prefix pre
-		   && ( mp.size() == pre.size() || mp[pre.size()] == '/' ) ) {
-		break;
-	      }
-	    }
-	    if ( *nomp ) {
-	      DBG << "Filter mount point : " << l << std::endl;
-	      continue;
-	    }
+            const char ** nomp = mpunwanted;
+            for ( ; *nomp; ++nomp ) {
+              std::string pre( *nomp );
+              if ( mp.compare( 0, pre.size(), pre ) == 0 // mp has prefix pre
+                   && ( mp.size() == pre.size() || mp[pre.size()] == '/' ) ) {
+                break;
+              }
+            }
+            if ( *nomp ) {
+              DBG << "Filter mount point : " << l << std::endl;
+              continue;
+            }
 
-	    //
-	    // Check whether mounted readonly
-	    //
-	    MountPoint::HintFlags hints;
+            //
+            // Check whether mounted readonly
+            //
+            MountPoint::HintFlags hints;
 
-	    std::vector<std::string> flags;
-	    str::split( words[3], std::back_inserter(flags), "," );
+            std::vector<std::string> flags;
+            str::split( words[3], std::back_inserter(flags), "," );
 
-	    for ( unsigned i = 0; i < flags.size(); ++i ) {
-	      if ( flags[i] == "ro" ) {
-		hints |= MountPoint::Hint_readonly;
-		break;
-	      }
-	    }
+            for ( unsigned i = 0; i < flags.size(); ++i ) {
+              if ( flags[i] == "ro" ) {
+                hints |= MountPoint::Hint_readonly;
+                break;
+              }
+            }
             if ( hints.testFlag( MountPoint::Hint_readonly ) ) {
-	      DBG << "Filter ro mount point : " << l << std::endl;
-	      continue;
-	    }
+              DBG << "Filter ro mount point : " << l << std::endl;
+              continue;
+            }
 
-	    //
-	    // check for snapshotting btrfs
-	    //
-	    bool btrfshack = false;
-	    if ( words[2] == "btrfs" )
-	    {
-	      btrfshack = true;
-	      if ( geteuid() != 0 )
-	      {
-		DBG << "Assume snapshots on " << words[1] << ": non-root user can't check" << std::endl;
-		hints |= MountPoint::Hint_growonly;
-	      }
-	      else
-	      {
-		// For now just check whether there is
-		// at least one snapshot on the volume:
-		ExternalProgram prog({"btrfs","subvolume","list","-s",words[1]});
-		std::string line( prog.receiveLine() );
-		if ( ! line.empty() )
-		{
-		  DBG << "Found a snapshot on " << words[1] << ": " << line; // has trailing std::endl
-		  hints |= MountPoint::Hint_growonly;
-		}
-		prog.kill();
-	      }
-	    }
+            //
+            // check for snapshotting btrfs
+            //
+            bool btrfshack = false;
+            if ( words[2] == "btrfs" )
+            {
+              btrfshack = true;
+              if ( geteuid() != 0 )
+              {
+                DBG << "Assume snapshots on " << words[1] << ": non-root user can't check" << std::endl;
+                hints |= MountPoint::Hint_growonly;
+              }
+              else
+              {
+                // For now just check whether there is
+                // at least one snapshot on the volume:
+                ExternalProgram prog({"btrfs","subvolume","list","-s",words[1]});
+                std::string line( prog.receiveLine() );
+                if ( ! line.empty() )
+                {
+                  DBG << "Found a snapshot on " << words[1] << ": " << line; // has trailing std::endl
+                  hints |= MountPoint::Hint_growonly;
+                }
+                prog.kill();
+              }
+            }
 
-	    //
-	    // statvfs (full path!) and get the data
-	    //
-	    struct statvfs sb;
-	    if ( statvfs( words[1].c_str(), &sb ) != 0 ) {
-	      WAR << "Unable to statvfs(" << words[1] << "); errno " << errno << std::endl;
-	      ret.insert( DiskUsageCounter::MountPoint( mp, words[2], 0LL, 0LL, 0LL, 0LL, hints ) );
-	    }
-	    else
-	    {
-	      //
-	      // Filter zero sized devices (bnc#769819)
-	      //
-	      if ( sb.f_blocks == 0 || sb.f_bsize == 0 )
-	      {
-		DBG << "Filter zero-sized mount point : " << l << std::endl;
-		continue;
-	      }
-	      if ( btrfshack )
-	      {
-		// HACK:
-		// Collect just the top/1st mountpoint of each btrfs volume
-		// (by device). This filters away nested subvolumes
-		// which otherwise break per package disk usage computation.
-		// FIX: Computation must learn to handle multiple mount points
-		// contributing to the same file system.
-		MountPoint & bmp( btrfsfilter[words[0]] );
-		if ( bmp.fstype.empty() )	// 1st occurance
-		{
-		  bmp = DiskUsageCounter::MountPoint( mp, words[2], sb.f_bsize,
-						      ((long long)sb.f_blocks)*sb.f_bsize/1024,
-						      ((long long)(sb.f_blocks - sb.f_bfree))*sb.f_bsize/1024, 0LL, hints );
-		}
-		else if ( bmp.dir > mp )
-		  bmp.dir = mp;
-		continue;
-	      }
-	      ret.insert( DiskUsageCounter::MountPoint( mp, words[2], sb.f_bsize,
-		((long long)sb.f_blocks)*sb.f_bsize/1024,
-		((long long)(sb.f_blocks - sb.f_bfree))*sb.f_bsize/1024, 0LL, hints ) );
-	    }
-	  }
-	}
+            //
+            // statvfs (full path!) and get the data
+            //
+            struct statvfs sb;
+            if ( statvfs( words[1].c_str(), &sb ) != 0 ) {
+              WAR << "Unable to statvfs(" << words[1] << "); errno " << errno << std::endl;
+              ret.insert( DiskUsageCounter::MountPoint( mp, words[2], 0LL, 0LL, 0LL, 0LL, hints ) );
+            }
+            else
+            {
+              //
+              // Filter zero sized devices (bnc#769819)
+              //
+              if ( sb.f_blocks == 0 || sb.f_bsize == 0 )
+              {
+                DBG << "Filter zero-sized mount point : " << l << std::endl;
+                continue;
+              }
+              if ( btrfshack )
+              {
+                // HACK:
+                // Collect just the top/1st mountpoint of each btrfs volume
+                // (by device). This filters away nested subvolumes
+                // which otherwise break per package disk usage computation.
+                // FIX: Computation must learn to handle multiple mount points
+                // contributing to the same file system.
+                MountPoint & bmp( btrfsfilter[words[0]] );
+                if ( bmp.fstype.empty() )	// 1st occurance
+                {
+                  bmp = DiskUsageCounter::MountPoint( mp, words[2], sb.f_bsize,
+                                                      ((long long)sb.f_blocks)*sb.f_bsize/1024,
+                                                      ((long long)(sb.f_blocks - sb.f_bfree))*sb.f_bsize/1024, 0LL, hints );
+                }
+                else if ( bmp.dir > mp )
+                  bmp.dir = mp;
+                continue;
+              }
+              ret.insert( DiskUsageCounter::MountPoint( mp, words[2], sb.f_bsize,
+                ((long long)sb.f_blocks)*sb.f_bsize/1024,
+                ((long long)(sb.f_blocks - sb.f_bfree))*sb.f_bsize/1024, 0LL, hints ) );
+            }
+          }
+        }
     }
 
     // collect filtered btrfs volumes

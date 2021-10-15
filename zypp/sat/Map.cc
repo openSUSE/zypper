@@ -73,7 +73,7 @@ namespace zypp
     void Map::assignAll( bool val_r )
     {
       if ( _pimpl->size )
-	::memset( _pimpl->map, (val_r?-1:0), _pimpl->size );
+        ::memset( _pimpl->map, (val_r?-1:0), _pimpl->size );
     }
 
 #define M_RANGE_CKECK(IDX,LOC) if ( ((IDX) >> 3) >= size_type(_pimpl->size) ) throw std::out_of_range( "zypp::sat::Map::" LOC )
@@ -108,13 +108,13 @@ namespace zypp
     std::string Map::asString( const char on_r, const char off_r ) const
     {
       if ( empty() )
-	return std::string();
+        return std::string();
 
       std::string ret( size(), off_r );
       for_( idx, size_type(0), size() )
       {
-	if ( test( idx ) )
-	  ret[idx] = on_r;
+        if ( test( idx ) )
+          ret[idx] = on_r;
       }
       return ret;
     }

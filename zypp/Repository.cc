@@ -52,8 +52,8 @@ namespace zypp
 
     bool Repository::isSystemRepo() const
     {
-	NO_REPOSITORY_RETURN( false );
-	return myPool().isSystemRepo( _repo );
+        NO_REPOSITORY_RETURN( false );
+        return myPool().isSystemRepo( _repo );
     }
 
     std::string Repository::alias() const
@@ -101,8 +101,8 @@ namespace zypp
       NO_REPOSITORY_RETURN( false );
       sat::LookupRepoAttr q( sat::SolvAttr::repositoryRepoid, *this );
       for_( it, q.begin(), q.end() )
-	if ( it.asString() == id_r )
-	  return true;
+        if ( it.asString() == id_r )
+          return true;
       return false;
     }
 
@@ -136,8 +136,8 @@ namespace zypp
     bool Repository::hasKeyword( const std::string & val_r ) const
     {
       for ( const auto & val : keywords() )
-	if ( val == val_r )
-	  return true;
+        if ( val == val_r )
+          return true;
       return false;
     }
 
@@ -161,32 +161,32 @@ namespace zypp
     {
       NO_REPOSITORY_RETURN( false );
       if ( ! cpeid_r )
-	return false;	// filter queries/products without CpeId, as an empty CpeId matches ANYthing.
+        return false;	// filter queries/products without CpeId, as an empty CpeId matches ANYthing.
 
       // check in repository metadata
       for_( it, updatesProductBegin(), updatesProductEnd() )
       {
-	if ( compare( cpeid_r, it.cpeId(), SetRelation::subset ) )
-	  return true;
+        if ( compare( cpeid_r, it.cpeId(), SetRelation::subset ) )
+          return true;
       }
 
       // check whether known products refer to this as update repo
       sat::LookupRepoAttr myIds( sat::SolvAttr::repositoryRepoid, *this );	// usually just one, but...
       if ( ! myIds.empty() )
       {
-	const ResPool & pool( ResPool::instance() );
-	for_( it, pool.byKindBegin<Product>(), pool.byKindEnd<Product>() )
-	{
-	  Product::constPtr prod( (*it)->asKind<Product>() );
-	  if ( compare( cpeid_r, prod->cpeId(), SetRelation::superset ) )
-	  {
-	    for_( myId, myIds.begin(), myIds.end() )
-	    {
-	      if ( prod->hasUpdateContentIdentifier( myId.asString() ) )
-		return true;
-	    }
-	  }
-	}
+        const ResPool & pool( ResPool::instance() );
+        for_( it, pool.byKindBegin<Product>(), pool.byKindEnd<Product>() )
+        {
+          Product::constPtr prod( (*it)->asKind<Product>() );
+          if ( compare( cpeid_r, prod->cpeId(), SetRelation::superset ) )
+          {
+            for_( myId, myIds.begin(), myIds.end() )
+            {
+              if ( prod->hasUpdateContentIdentifier( myId.asString() ) )
+                return true;
+            }
+          }
+        }
       }
       return false;
     }
@@ -197,21 +197,21 @@ namespace zypp
 
       // check in repository metadata
       if ( updatesProductBegin() != updatesProductEnd() )
-	return true;
+        return true;
 
       // check whether known products refer to this as update repo
       sat::LookupRepoAttr myIds( sat::SolvAttr::repositoryRepoid, *this );	// usually just one, but...
       if ( ! myIds.empty() )
       {
-	const ResPool & pool( ResPool::instance() );
-	for_( it, pool.byKindBegin<Product>(), pool.byKindEnd<Product>() )
-	{
-	  for_( myId, myIds.begin(), myIds.end() )
-	  {
-	    if ( (*it)->asKind<Product>()->hasUpdateContentIdentifier( myId.asString() ) )
-	      return true;
-	  }
-	}
+        const ResPool & pool( ResPool::instance() );
+        for_( it, pool.byKindBegin<Product>(), pool.byKindEnd<Product>() )
+        {
+          for_( myId, myIds.begin(), myIds.end() )
+          {
+            if ( (*it)->asKind<Product>()->hasUpdateContentIdentifier( myId.asString() ) )
+              return true;
+          }
+        }
       }
       return false;
     }
@@ -278,28 +278,28 @@ namespace zypp
 
     void Repository::setInfo( const RepoInfo & info_r )
     {
-	NO_REPOSITORY_THROW( Exception( "Can't set RepoInfo for norepo." ) );
-	if ( info_r.alias() != alias() )
-	{
-	    ZYPP_THROW( Exception( str::form( "RepoInfo alias (%s) does not match repository alias (%s)",
-					      info_r.alias().c_str(), alias().c_str() ) ) );
-	}
-	myPool().setRepoInfo( _repo, info_r );
+        NO_REPOSITORY_THROW( Exception( "Can't set RepoInfo for norepo." ) );
+        if ( info_r.alias() != alias() )
+        {
+            ZYPP_THROW( Exception( str::form( "RepoInfo alias (%s) does not match repository alias (%s)",
+                                              info_r.alias().c_str(), alias().c_str() ) ) );
+        }
+        myPool().setRepoInfo( _repo, info_r );
         MIL << *this << endl;
     }
 
     void Repository::clearInfo()
     {
-	NO_REPOSITORY_RETURN();
-	myPool().setRepoInfo( _repo, RepoInfo() );
+        NO_REPOSITORY_RETURN();
+        myPool().setRepoInfo( _repo, RepoInfo() );
     }
 
     void Repository::eraseFromPool()
     {
-	NO_REPOSITORY_RETURN();
+        NO_REPOSITORY_RETURN();
         MIL << *this << " removed from pool" << endl;
-	myPool()._deleteRepo( _repo );
-	_id = sat::detail::noRepoId;
+        myPool()._deleteRepo( _repo );
+        _id = sat::detail::noRepoId;
     }
 
     Repository Repository::nextInPool() const
@@ -382,8 +382,8 @@ namespace zypp
 
     sat::detail::SolvableIdType Repository::addSolvables( unsigned count_r )
     {
-	NO_REPOSITORY_THROW( Exception( "Can't add solvables to norepo.") );
-	return myPool()._addSolvables( _repo, count_r );
+        NO_REPOSITORY_THROW( Exception( "Can't add solvables to norepo.") );
+        return myPool()._addSolvables( _repo, count_r );
     }
 
     /******************************************************************
@@ -393,21 +393,21 @@ namespace zypp
      */
     std::ostream & operator<<( std::ostream & str, const Repository & obj )
     {
-	if ( ! obj )
-	    return str << "noRepository";
+        if ( ! obj )
+            return str << "noRepository";
 
-	return str << "sat::repo(" << obj.alias() << ")"
-		   << "{"
+        return str << "sat::repo(" << obj.alias() << ")"
+                   << "{"
                    << "prio " << obj.get()->priority << '.' << obj.get()->subpriority
-		   << ", size " << obj.solvablesSize()
-		   << "}";
+                   << ", size " << obj.solvablesSize()
+                   << "}";
     }
 
     std::ostream & dumpAsXmlOn( std::ostream & str, const Repository & obj )
     {
       return xmlout::node( str, "repository", {
-	{ "name", obj.name() },
-	{ "alias", obj.alias() }
+        { "name", obj.name() },
+        { "alias", obj.alias() }
       } );
     }
 
@@ -416,13 +416,13 @@ namespace zypp
     {
       void RepositoryIterator::increment()
       {
-	if ( base() )
-	{
-	  sat::detail::CPool * satpool = sat::Pool::instance().get();
-	  do {
-	    ++base_reference();
-	  } while ( base() < satpool->repos+satpool->nrepos && !*base() );
-	}
+        if ( base() )
+        {
+          sat::detail::CPool * satpool = sat::Pool::instance().get();
+          do {
+            ++base_reference();
+          } while ( base() < satpool->repos+satpool->nrepos && !*base() );
+        }
       }
     } // namespace detail
     //////////////////////////////////////////////////////////////////

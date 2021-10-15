@@ -74,21 +74,21 @@ ZsyncParser::parse(std::string filename)
     {
       is.getline(buf, sizeof(buf));
       if (!*buf)
-	break;
+        break;
       if (!strncmp(buf, "Length: ", 8))
         filesize = (off_t)strtoull(buf + 8, 0, 10);
       else if (!strncmp(buf, "Hash-Lengths: ", 14))
         (void)sscanf(buf + 14, "%d,%d,%d", &sql, &rsl, &csl);
       else if (!strncmp(buf, "Blocksize: ", 11))
         blksize = atoi(buf + 11);
-      else if (!strncmp(buf, "URL: http://", 12) || !strncmp(buf, "URL: https://", 13) || !strncmp(buf, "URL: ftp://", 11) || !strncmp(buf, "URL: tftp://", 12) ) 
-	urls.push_back(buf + 5);
+      else if (!strncmp(buf, "URL: http://", 12) || !strncmp(buf, "URL: https://", 13) || !strncmp(buf, "URL: ftp://", 11) || !strncmp(buf, "URL: tftp://", 12) )
+        urls.push_back(buf + 5);
       else if (!strncmp(buf, "SHA-1: ", 7))
-	{
-	  unsigned char sha1[20];
-	  if (hexstr2bytes(sha1, buf + 7, 20) == 20)
-	    bl.setFileChecksum("SHA1", 20, sha1);
-	}
+        {
+          unsigned char sha1[20];
+          if (hexstr2bytes(sha1, buf + 7, 20) == 20)
+            bl.setFileChecksum("SHA1", 20, sha1);
+        }
     }
   if (filesize == off_t(-1))
     ZYPP_THROW(Exception("Parse Error"));
@@ -99,28 +99,28 @@ ZsyncParser::parse(std::string filename)
   if (filesize)
     {
       if (csl < 3 || csl > 16 || rsl < 1 || rsl > 4 || sql < 1 || sql > 2)
-	ZYPP_THROW(Exception("Parse Error: illegal hash lengths"));
+        ZYPP_THROW(Exception("Parse Error: illegal hash lengths"));
       size_t nblks = (filesize + blksize - 1) / blksize;
       size_t i;
       off_t off = 0;
       size_t size = blksize;
       for (i = 0; i < nblks; i++)
-	{
-	  if (i == nblks - 1)
-	    {
-	      size = filesize % blksize;
-	      if (!size)
-		size = blksize;
-	    }
-	  size_t blkno = bl.addBlock(off, size);
-	  unsigned char rp[16];
-	  rp[0] = rp[1] = rp[2] = rp[3] = 0;
-	  is.read((char *)rp + 4 - rsl, rsl);
-	  bl.setRsum(blkno, rsl, rp[0] << 24 | rp[1] << 16 | rp[2] << 8 | rp[3], blksize);
-	  is.read((char *)rp, csl);
-	  bl.setChecksum(blkno, "MD4", csl, rp, blksize);
-	  off += size;
-	}
+        {
+          if (i == nblks - 1)
+            {
+              size = filesize % blksize;
+              if (!size)
+                size = blksize;
+            }
+          size_t blkno = bl.addBlock(off, size);
+          unsigned char rp[16];
+          rp[0] = rp[1] = rp[2] = rp[3] = 0;
+          is.read((char *)rp + 4 - rsl, rsl);
+          bl.setRsum(blkno, rsl, rp[0] << 24 | rp[1] << 16 | rp[2] << 8 | rp[3], blksize);
+          is.read((char *)rp, csl);
+          bl.setChecksum(blkno, "MD4", csl, rp, blksize);
+          off += size;
+        }
     }
   is.close();
 }

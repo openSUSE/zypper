@@ -240,80 +240,80 @@ startElement(void *userData, const xmlChar *name, const xmlChar **atts)
     case STATE_URL:
     case STATE_M4URL:
       {
-	const char *priority       = find_attr("priority", atts);
-	const char *preference     = find_attr("preference", atts);
+        const char *priority       = find_attr("priority", atts);
+        const char *preference     = find_attr("preference", atts);
         const char *maxconnections = find_attr("maxconnections", atts);
-	int prio;
+        int prio;
         auto &mirr = pd->urls.emplace_back();
         if (priority)
-	  prio = str::strtonum<int>(priority);
-	else if (preference)
+          prio = str::strtonum<int>(priority);
+        else if (preference)
           prio = 101 - str::strtonum<int>(preference);
-	else
-	  prio = 999999;
+        else
+          prio = 999999;
         mirr.priority = prio;
 
         if ( maxconnections )
           mirr.maxConnections = str::strtonum<int>( maxconnections );
 
-	break;
+        break;
       }
     case STATE_PIECES:
     case STATE_M4PIECES:
       {
-	const char *type = find_attr("type", atts);
-	const char *length = find_attr("length", atts);
-	size_t blksize;
+        const char *type = find_attr("type", atts);
+        const char *length = find_attr("length", atts);
+        size_t blksize;
 
-	if (!type || !length)
-	  {
+        if (!type || !length)
+          {
             pd->popState();
-	    break;
-	  }
-	blksize = str::strtonum<unsigned long>(length);
-	if (!blksize || (pd->blksize && pd->blksize != blksize))
-	  {
-	    pd->popState();
-	    break;
-	  }
-	pd->blksize = blksize;
+            break;
+          }
+        blksize = str::strtonum<unsigned long>(length);
+        if (!blksize || (pd->blksize && pd->blksize != blksize))
+          {
+            pd->popState();
+            break;
+          }
+        pd->blksize = blksize;
         pd->piece.clear();
-	if (!strcmp(type, "sha1") || !strcmp(type, "sha-1"))
-	  pd->piecel = 20;
-	else if (!strcmp(type, "zsync"))
-	  pd->piecel = 4;
-	else
-	  {
-	    pd->popState();
-	    break;
-	  }
-	break;
+        if (!strcmp(type, "sha1") || !strcmp(type, "sha-1"))
+          pd->piecel = 20;
+        else if (!strcmp(type, "zsync"))
+          pd->piecel = 4;
+        else
+          {
+            pd->popState();
+            break;
+          }
+        break;
       }
     case STATE_HASH:
     case STATE_M4HASH:
       {
-	const char *type = find_attr("type", atts);
-	if (!type)
-	  type = "?";
-	if ((!strcmp(type, "sha1") || !strcmp(type, "sha-1")) && pd->chksuml < 20)
-	  pd->chksuml = 20;
-	else if (!strcmp(type, "sha256") || !strcmp(type, "sha-256"))
-	  pd->chksuml = 32;
-	else
-	  {
-	    pd->popState();
-	    pd->docontent = 0;
-	  }
-	break;
+        const char *type = find_attr("type", atts);
+        if (!type)
+          type = "?";
+        if ((!strcmp(type, "sha1") || !strcmp(type, "sha-1")) && pd->chksuml < 20)
+          pd->chksuml = 20;
+        else if (!strcmp(type, "sha256") || !strcmp(type, "sha-256"))
+          pd->chksuml = 32;
+        else
+          {
+            pd->popState();
+            pd->docontent = 0;
+          }
+        break;
       }
     case STATE_PHASH:
     case STATE_M4PHASH:
       {
-	const char *piece = find_attr("piece", atts);
+        const char *piece = find_attr("piece", atts);
         if ( pd->state == STATE_PHASH && (!piece || str::strtonum<uint>(piece) != pd->piece.size()) )
-	  {
-	    pd->popState();
-	  }
+          {
+            pd->popState();
+          }
         break;
       }
     default:
@@ -347,15 +347,15 @@ endElement(void *userData, const xmlChar *)
       pd->chksum.clear();
       pd->chksum = hexstr2bytes( pd->content );
       if ( pd->content.length() != size_t(pd->chksuml) * 2 || !pd->chksum.size() )
-	{
-	  pd->chksum.clear();
+        {
+          pd->chksum.clear();
           pd->chksuml = 0;
-	}
+        }
       break;
     case STATE_PHASH:
     case STATE_M4PHASH: {
       if ( pd->content.length() != size_t(pd->piecel) * 2 )
-	break;
+        break;
       UByteArray pieceHash = hexstr2bytes( pd->content );
       if ( !pieceHash.size() )
         pieceHash.resize( pd->piecel, 0 );
@@ -365,7 +365,7 @@ endElement(void *userData, const xmlChar *)
     case STATE_PIECES:
     case STATE_M4PIECES:
       if (pd->piecel == 4)
-	pd->zsync = pd->piece;
+        pd->zsync = pd->piece;
       else
         pd->sha1 = pd->piece;
 
@@ -482,25 +482,25 @@ MediaBlockList MetaLinkParser::getBlockList() const
       off_t off = 0;
       size_t size = pd->blksize;
       for ( size_t i = 0; i < nb; i++ )
-	{
-	  if (i == nb - 1)
-	    {
-	      size = pd->size % pd->blksize;
-	      if (!size)
-		size = pd->blksize;
-	    }
+        {
+          if (i == nb - 1)
+            {
+              size = pd->size % pd->blksize;
+              if (!size)
+                size = pd->blksize;
+            }
           size_t blkno = bl.addBlock(off, size);
           if ( i < pd->sha1.size())
-	    {
-	      bl.setChecksum(blkno, "SHA1", 20, pd->sha1[i].data());
+            {
+              bl.setChecksum(blkno, "SHA1", 20, pd->sha1[i].data());
               if ( i < pd->zsync.size())
-		{
-		  unsigned char *p = pd->zsync[i].data();
-		  bl.setRsum(blkno, 4, p[0] | p[1] << 8 | p[2] << 16 | p[3] << 24, pd->blksize);
-		}
-	    }
-	  off += pd->blksize;
-	}
+                {
+                  unsigned char *p = pd->zsync[i].data();
+                  bl.setRsum(blkno, 4, p[0] | p[1] << 8 | p[2] << 16 | p[3] << 24, pd->blksize);
+                }
+            }
+          off += pd->blksize;
+        }
     }
   return bl;
 }

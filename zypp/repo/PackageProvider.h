@@ -71,7 +71,7 @@ namespace zypp
        */
       PackageProvider( RepoMediaAccess & access, const PoolItem & pi_r,
                        const DeltaCandidates & deltas,
-		       const PackageProviderPolicy & policy_r = PackageProviderPolicy() );
+                       const PackageProviderPolicy & policy_r = PackageProviderPolicy() );
 
       /** Legacy Ctor taking a \c Package::constPtr to provide. */
       PackageProvider( RepoMediaAccess & access,

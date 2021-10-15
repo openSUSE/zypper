@@ -29,7 +29,7 @@ namespace zypp
     {
       friend std::ostream & operator<<( std::ostream & str, const PluginServices& obj );
     public:
-      
+
      /**
       * Callback definition.
       * First parameter is a \ref ServiceInfo object with the resource.
@@ -38,14 +38,14 @@ namespace zypp
       * to be thrown and the processing to be cancelled.
       */
       typedef function< bool( const ServiceInfo & )> ProcessService;
-      
+
       /** Implementation  */
       class Impl;
 
     public:
       PluginServices(const Pathname &path,
                     const ProcessService & callback);
-     
+
       /**
        * Dtor
        */

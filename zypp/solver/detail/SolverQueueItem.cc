@@ -64,9 +64,9 @@ std::ostream&
 operator<<( std::ostream & os, const SolverQueueItemList & itemlist )
 {
     for (SolverQueueItemList::const_iterator iter = itemlist.begin(); iter != itemlist.end(); ++iter) {
-	if (iter != itemlist.begin())
-	    os << "," << endl << "\t";
-	os << **iter;
+        if (iter != itemlist.begin())
+            os << "," << endl << "\t";
+        os << **iter;
     }
     return os;
 }

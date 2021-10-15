@@ -57,8 +57,8 @@ namespace zypp
     fieldValueAssign<ValidateField>(v);
     fieldValueAssign<TransactField>(t);
     if (t == TRANSACT) {
-	if (s == INSTALLED) fieldValueAssign<TransactDetailField>(r);
-	else fieldValueAssign<TransactDetailField>(i);
+        if (s == INSTALLED) fieldValueAssign<TransactDetailField>(r);
+        else fieldValueAssign<TransactDetailField>(i);
     }
   }
 
@@ -104,8 +104,8 @@ namespace zypp
     str << (obj.isInstalled() ? "I" : "U");
 
     str << (obj.isBroken() ? "B" :
-	( obj.isSatisfied() ? "S" :
-	( obj.isNonRelevant() ? "N" : "_") ) );
+        ( obj.isSatisfied() ? "S" :
+        ( obj.isNonRelevant() ? "N" : "_") ) );
 
     str << (obj.transacts () ? "T"
                              : (obj.isLocked() ? "L" : "_") );
@@ -116,8 +116,8 @@ namespace zypp
     else if (obj.isByUser()) str << "u";
 
     str << (obj.isToBeUninstalledDueToObsolete() ? "O" :
-	( obj.isToBeUninstalledDueToUpgrade() ? "U" :
-	( obj.isToBeInstalledSoft() ? "S" : "_" ) ) );
+        ( obj.isToBeUninstalledDueToUpgrade() ? "U" :
+        ( obj.isToBeInstalledSoft() ? "S" : "_" ) ) );
 
     str << (obj.isRecommended() ? "r" : "" );
     str << (obj.isSuggested() ? "s" : "" );

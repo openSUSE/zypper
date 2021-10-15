@@ -64,8 +64,8 @@ namespace zypp
       /** Swap */
       friend void swap( Pathname & lhs, Pathname & rhs )
       {
-	using std::swap;
-	swap( lhs._name, rhs._name );
+        using std::swap;
+        swap( lhs._name, rhs._name );
       }
 
       /** Move Ctor */

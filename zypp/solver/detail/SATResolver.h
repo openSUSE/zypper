@@ -117,7 +117,7 @@ class SATResolver : public base::ReferenceCounted, private base::NonCopyable, pr
     void solverInit(const PoolItemList & weakItems);
     // common solver run with the _jobQueue; Save results back to pool
     bool solving(const CapabilitySet & requires_caps = CapabilitySet(),
-		 const CapabilitySet & conflict_caps = CapabilitySet());
+                 const CapabilitySet & conflict_caps = CapabilitySet());
     // cleanup solver
     void solverEnd();
     // set locks for the solver
@@ -150,14 +150,14 @@ class SATResolver : public base::ReferenceCounted, private base::NonCopyable, pr
 
     // solver run with pool selected items
     bool resolvePool(const CapabilitySet & requires_caps,
-		     const CapabilitySet & conflict_caps,
-		     const PoolItemList & weakItems,
-		     const std::set<Repository> & upgradeRepos
-		     );
+                     const CapabilitySet & conflict_caps,
+                     const PoolItemList & weakItems,
+                     const std::set<Repository> & upgradeRepos
+                     );
     // solver run with the given request queue
     bool resolveQueue(const SolverQueueItemList &requestQueue,
-		      const PoolItemList & weakItems
-		      );
+                      const PoolItemList & weakItems
+                      );
     // searching for new packages
     void doUpdate();
 

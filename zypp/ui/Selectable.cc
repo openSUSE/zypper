@@ -163,9 +163,9 @@ namespace zypp
       picklist_size_type idx = picklist_size_type(0);
       for ( const auto & pi : picklist() )
       {
-	if ( pi == solv_r )
-	  return idx;
-	++idx;
+        if ( pi == solv_r )
+          return idx;
+        ++idx;
       }
       return picklistNoPos;
     }

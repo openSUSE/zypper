@@ -27,7 +27,7 @@ namespace zypp
   namespace media
   { /////////////////////////////////////////////////////////////////
 
-    /** 
+    /**
      *
      */
     class UrlResolverPlugin

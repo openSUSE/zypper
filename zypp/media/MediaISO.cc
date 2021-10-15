@@ -83,9 +83,9 @@ namespace zypp
       {
         ZYPP_CAUGHT(e);
         ERR << "Unable to parse iso filename source media url" << std::endl;
-	MediaBadUrlException ne(_url);
-	ne.remember(e);
-	ZYPP_THROW(ne);
+        MediaBadUrlException ne(_url);
+        ne.remember(e);
+        ZYPP_THROW(ne);
       }
       if( !src.isValid())
       {
@@ -169,12 +169,12 @@ namespace zypp
           ZYPP_CAUGHT(e2);
         }
 
-	MediaMountException e3(
+        MediaMountException e3(
           "Unable to find iso filename on source media",
           _url.asString(), attachPoint().asString()
         );
-	e3.remember(e1);
-	ZYPP_THROW(e3);
+        e3.remember(e1);
+        ZYPP_THROW(e3);
       }
 
       // if the provided file is a symlink, expand it (#274651)
@@ -205,7 +205,7 @@ namespace zypp
 
       if( !isUseableAttachPoint( attachPoint() ) )
       {
-	setAttachPoint( createAttachPoint(), true );
+        setAttachPoint( createAttachPoint(), true );
       }
       std::string mountpoint( attachPoint().asString() );
       std::string mountopts("ro,loop");

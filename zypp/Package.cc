@@ -44,17 +44,17 @@ namespace zyppintern
     {
       Url url( repo_r.url() );
       if ( ! schemeIsLocalDir( url ) )
-	return Pathname();	// same name but no checksum to verify
+        return Pathname();	// same name but no checksum to verify
 
       // for local repos compare with the checksum in repo
       if ( CheckSum( CheckSum::md5Type(), std::ifstream( (url.getPathName() / repo_r.path() / loc_r.filename()).c_str() ) )
-	!= CheckSum( CheckSum::md5Type(), std::ifstream( pi.c_str() ) ) )
-	return Pathname();	// same name but wrong checksum
+        != CheckSum( CheckSum::md5Type(), std::ifstream( pi.c_str() ) ) )
+        return Pathname();	// same name but wrong checksum
     }
     else
     {
       if ( loc_r.checksum() != CheckSum( loc_r.checksum().type(), std::ifstream( pi.c_str() ) ) )
-	return Pathname();	// same name but wrong checksum
+        return Pathname();	// same name but wrong checksum
     }
 
     return pi.path();		// the right one
@@ -98,27 +98,27 @@ namespace zypp
     for ( const auto & solv : sat::WhatProvides( (Capability(ident().id())) ) )
     {
       if ( solv.edition() == edition()
-	&& solv.ident() == ident()
-	&& identical( solv ) )
+        && solv.ident() == ident()
+        && identical( solv ) )
       {
-	for ( PackageKeyword kw : Keywords( sat::SolvAttr::keywords, solv ) )
-	{
-	  switch ( ret )
-	  {
-	    case VendorSupportUnknown:
-	      if ( kw == support_unsupported )	{ ret = VendorSupportUnsupported; break; }
-	    case VendorSupportUnsupported:
-	      if ( kw == support_acc )	{ ret = VendorSupportACC; break; }
-	    case VendorSupportACC:
-	      if ( kw == support_l1 )	{ ret = VendorSupportLevel1; break; }
-	    case VendorSupportLevel1:
-	      if ( kw == support_l2 )	{ ret = VendorSupportLevel2; break; }
-	    case VendorSupportLevel2:
-	      if ( kw == support_l3 )	{ return VendorSupportLevel3; break; }
-	    case VendorSupportLevel3:
-	      /* make gcc happy */ break;
-	  }
-	}
+        for ( PackageKeyword kw : Keywords( sat::SolvAttr::keywords, solv ) )
+        {
+          switch ( ret )
+          {
+            case VendorSupportUnknown:
+              if ( kw == support_unsupported )	{ ret = VendorSupportUnsupported; break; }
+            case VendorSupportUnsupported:
+              if ( kw == support_acc )	{ ret = VendorSupportACC; break; }
+            case VendorSupportACC:
+              if ( kw == support_l1 )	{ ret = VendorSupportLevel1; break; }
+            case VendorSupportLevel1:
+              if ( kw == support_l2 )	{ ret = VendorSupportLevel2; break; }
+            case VendorSupportLevel2:
+              if ( kw == support_l3 )	{ return VendorSupportLevel3; break; }
+            case VendorSupportLevel3:
+              /* make gcc happy */ break;
+          }
+        }
       }
     }
     return ret;
@@ -131,12 +131,12 @@ namespace zypp
       case VendorSupportUnknown:
       case VendorSupportUnsupported:
       case VendorSupportACC:
-	return true;
+        return true;
 
       case VendorSupportLevel1:
       case VendorSupportLevel2:
       case VendorSupportLevel3:
-	break;	// intentionally no default:
+        break;	// intentionally no default:
     }
     return false;
   }

@@ -70,11 +70,11 @@ BOOST_AUTO_TEST_CASE(locks_save_load)
   {
     BOOST_CHECK(isLocked(*it));
   }
-#if 1 
+#if 1
   filesystem::TmpFile testfile;
   //Pathname testfile(TESTS_SRC_DIR);
     //  testfile += "/zypp/data/Locks/testlocks";
-  Locks::instance().removeLock(q); 
+  Locks::instance().removeLock(q);
   Locks::instance().save(testfile);
   Locks::instance().readAndApply(testfile);
   //now unlocked

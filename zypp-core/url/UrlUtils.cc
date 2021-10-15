@@ -164,7 +164,7 @@ namespace zypp
     void
     split(ParamVec          &pvec,
           const std::string &pstr,
-	        const std::string &psep)
+                const std::string &psep)
     {
       size_t beg, pos, len;
       if( psep.empty())

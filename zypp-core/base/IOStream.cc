@@ -73,13 +73,13 @@ namespace zypp
     {
       if ( ! _valid )
       {
-	return false;
+        return false;
       }
 
       if ( ! _str ) // usg: saw EOF in previous read
       {
-	_line.clear();
-	return(_valid = false);
+        _line.clear();
+        return(_valid = false);
       }
 
       _lineStart = _str.tellg();
@@ -87,8 +87,8 @@ namespace zypp
       ++_lineNo;
       if ( _str.fail() || _str.bad() )
       {
-	_line.clear();
-	return(_valid = false);
+        _line.clear();
+        return(_valid = false);
       }
       return(_valid = true);
     }
@@ -102,17 +102,17 @@ namespace zypp
       int lineno = 0;
       while ( str_r )
       {
-	std::string line( getline( str_r ) );
-	if ( ! (str_r.fail() || str_r.bad()) )
-	{
-	  // line contains valid data to be consumed.
-	  ++lineno;
-	  if ( consume_r && ! consume_r( lineno, line ) )
-	  {
-	    lineno = -lineno;
-	    break;
-	  }
-	}
+        std::string line( getline( str_r ) );
+        if ( ! (str_r.fail() || str_r.bad()) )
+        {
+          // line contains valid data to be consumed.
+          ++lineno;
+          if ( consume_r && ! consume_r( lineno, line ) )
+          {
+            lineno = -lineno;
+            break;
+          }
+        }
       }
       return lineno;
     }
@@ -124,30 +124,30 @@ namespace zypp
     int simpleParseFile( std::istream & str_r, ParseFlags flags_r, function<bool(int, std::string)> consume_r )
     {
       return forEachLine( str_r,
-			  [&]( int num_r, std::string line_r )->bool
-			  {
-			    if ( ! consume_r )
-			      return true;
+                          [&]( int num_r, std::string line_r )->bool
+                          {
+                            if ( ! consume_r )
+                              return true;
 
-			    if ( flags_r )
-			    {
-			      if ( flags_r & PF_TRIM )
-				line_r = str::trim( line_r, str::Trim( unsigned(flags_r & PF_TRIM) ) );
+                            if ( flags_r )
+                            {
+                              if ( flags_r & PF_TRIM )
+                                line_r = str::trim( line_r, str::Trim( unsigned(flags_r & PF_TRIM) ) );
 
-			      if ( flags_r & ~PF_TRIM )
-			      {
-				const char* firstNW = line_r.c_str();
-				while ( *firstNW == ' ' || *firstNW == '\t' )
-				  ++firstNW;
-				switch ( *firstNW )
-				{
-				  case '\0':	if ( flags_r & PF_SKIP_EMPTY )		return true; break;
-				  case '#':	if ( flags_r & PF_SKIP_SHARP_COMMENT )	return true; break;
-				}
-			      }
-			    }
-			    return consume_r( num_r, line_r );
-			  } );
+                              if ( flags_r & ~PF_TRIM )
+                              {
+                                const char* firstNW = line_r.c_str();
+                                while ( *firstNW == ' ' || *firstNW == '\t' )
+                                  ++firstNW;
+                                switch ( *firstNW )
+                                {
+                                  case '\0':	if ( flags_r & PF_SKIP_EMPTY )		return true; break;
+                                  case '#':	if ( flags_r & PF_SKIP_SHARP_COMMENT )	return true; break;
+                                }
+                              }
+                            }
+                            return consume_r( num_r, line_r );
+                          } );
     }
 
     /////////////////////////////////////////////////////////////////

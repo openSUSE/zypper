@@ -39,19 +39,19 @@ namespace zypp
       ///////////////////////////////////////////////////////////////////
       struct QueryInstalledEditionHelper
       {
-	bool operator()( const std::string & name_r, const Edition & ed_r, const Arch & arch_r ) const
-	{
-	  rpm::librpmDb::db_const_iterator it;
-	  for ( it.findByName( name_r ); *it; ++it )
-	  {
-	    if ( arch_r == it->tag_arch()
-	      && ( ed_r == Edition::noedition || ed_r == it->tag_edition() ) )
-	    {
-	      return true;
-	    }
-	  }
-	  return false;
-	}
+        bool operator()( const std::string & name_r, const Edition & ed_r, const Arch & arch_r ) const
+        {
+          rpm::librpmDb::db_const_iterator it;
+          for ( it.findByName( name_r ); *it; ++it )
+          {
+            if ( arch_r == it->tag_arch()
+              && ( ed_r == Edition::noedition || ed_r == it->tag_edition() ) )
+            {
+              return true;
+            }
+          }
+          return false;
+        }
       };
     } // namespace
     ///////////////////////////////////////////////////////////////////
@@ -85,19 +85,19 @@ namespace zypp
       ManagedFile ret;
       if ( fromCache_r )
       {
-	repo::PackageProvider pkgProvider( _impl->_access, pi_r, _impl->_packageProviderPolicy );
-	ret = pkgProvider.providePackageFromCache();
+        repo::PackageProvider pkgProvider( _impl->_access, pi_r, _impl->_packageProviderPolicy );
+        ret = pkgProvider.providePackageFromCache();
       }
       else if ( pi_r.isKind<Package>() )	// may make use of deltas
       {
-	repo::DeltaCandidates deltas( _impl->_repos, pi_r.name() );
-	repo::PackageProvider pkgProvider( _impl->_access, pi_r, deltas, _impl->_packageProviderPolicy );
-	return pkgProvider.providePackage();
+        repo::DeltaCandidates deltas( _impl->_repos, pi_r.name() );
+        repo::PackageProvider pkgProvider( _impl->_access, pi_r, deltas, _impl->_packageProviderPolicy );
+        return pkgProvider.providePackage();
       }
       else	// SrcPackage or throws
       {
-	repo::PackageProvider pkgProvider( _impl->_access, pi_r, _impl->_packageProviderPolicy );
-	return pkgProvider.providePackage();
+        repo::PackageProvider pkgProvider( _impl->_access, pi_r, _impl->_packageProviderPolicy );
+        return pkgProvider.providePackage();
       }
       return ret;
     }

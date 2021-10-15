@@ -65,7 +65,7 @@ namespace  {
     AutoDispose<int> sockfd { socket( AF_INET, SOCK_STREAM, 0 ) };
     if ( sockfd < 0 ) {
         std::cerr << "ERROR opening socket" << endl;
-	return ret;
+        return ret;
     }
     sockfd.setDispose( ::close );
 
@@ -208,7 +208,7 @@ public:
         bool canContinue = ( zypp::filesystem::symlink( Pathname(TESTS_SRC_DIR)/"data"/"nginxconf"/"nginx.conf",  confFile ) == 0 );
         if ( canContinue ) canContinue = writeConfFile( confPath / "srvroot.conf", str::Format("root    %1%;") % _docroot );
         if ( canContinue ) canContinue = writeConfFile( confPath / "fcgisock.conf", str::Format("fastcgi_pass unix:%1%;") % socketPath().c_str() );
-	if ( canContinue ) canContinue = writeConfFile( confPath / "user.conf", getuid() != 0 ? "" : "user root;" );
+        if ( canContinue ) canContinue = writeConfFile( confPath / "user.conf", getuid() != 0 ? "" : "user root;" );
         if ( canContinue ) {
           if ( _ssl )
             canContinue = writeConfFile( confPath / "port.conf", str::Format("listen    %1% ssl;") % _port );
@@ -256,21 +256,21 @@ public:
           std::cerr << line << endl;
         };
 
-	// Wait max 10 sec for the socket becoming available
-	bool isup { checkLocalPort( port() ) };
-	if ( !isup )
-	{
-	  unsigned i = 0;
-	  do {
-	    std::this_thread::sleep_for( std::chrono::milliseconds(1000) );
-	    isup = checkLocalPort( port() );
-	  } while ( !isup && ++i < 10 );
+        // Wait max 10 sec for the socket becoming available
+        bool isup { checkLocalPort( port() ) };
+        if ( !isup )
+        {
+          unsigned i = 0;
+          do {
+            std::this_thread::sleep_for( std::chrono::milliseconds(1000) );
+            isup = checkLocalPort( port() );
+          } while ( !isup && ++i < 10 );
 
-	  if ( !isup && prog.running() ) {
-	    prog.kill( SIGTERM );
+          if ( !isup && prog.running() ) {
+            prog.kill( SIGTERM );
             prog.close();
-	  }
-	}
+          }
+        }
 
         if ( !prog.running() ) {
           _stop = true;
@@ -281,7 +281,7 @@ public:
 
         FCGX_Request request;
         FCGX_InitRequest(&request, sockFD,0);
-	AutoDispose<FCGX_Request*> guard( &request, boost::bind( &FCGX_Free, _1, 0 ) );
+        AutoDispose<FCGX_Request*> guard( &request, boost::bind( &FCGX_Free, _1, 0 ) );
 
         struct pollfd fds[] { {
             _wakeupPipe[0],

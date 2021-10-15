@@ -100,16 +100,16 @@ namespace zypp
       /** Whether \a key_r is in \ref data and value is not empty. */
       bool hasvalue( const std::string & key_r ) const
       {
-	bool ret = false;
-	if ( _dataP )
-	{
-	  const_iterator it = _dataP->find( key_r );
-	  if ( it != _dataP->end() && ! it->second.empty() )
-	  {
-	    ret = true;
-	  }
-	}
-	return ret;
+        bool ret = false;
+        if ( _dataP )
+        {
+          const_iterator it = _dataP->find( key_r );
+          if ( it != _dataP->end() && ! it->second.empty() )
+          {
+            ret = true;
+          }
+        }
+        return ret;
       }
 
       /** Set the value for key (nonconst version always returns true).
@@ -120,14 +120,14 @@ namespace zypp
       /** \overload const version */
       bool set( const std::string & key_r, AnyType val_r ) const
       {
-	bool ret = false;
-	AnyType & val( dataRef()[key_r] );
-	if ( val.empty() )
-	{
-	  val = std::move(val_r);
-	  ret = true;
-	}
-	return ret;
+        bool ret = false;
+        AnyType & val( dataRef()[key_r] );
+        if ( val.empty() )
+        {
+          val = std::move(val_r);
+          ret = true;
+        }
+        return ret;
       }
 
       /** Set an empty value for \a key_r (if possible). */
@@ -144,16 +144,16 @@ namespace zypp
       /** \ref get helper returning the keys AnyType value or an empty value if key does not exist. */
       const AnyType & getvalue( const std::string & key_r ) const
       {
-	if ( _dataP )
-	{
-	  const_iterator it = _dataP->find( key_r );
-	  if ( it != _dataP->end() )
-	  {
-	    return it->second;
-	  }
-	}
-	static const AnyType none;
-	return none;
+        if ( _dataP )
+        {
+          const_iterator it = _dataP->find( key_r );
+          if ( it != _dataP->end() )
+          {
+            return it->second;
+          }
+        }
+        static const AnyType none;
+        return none;
       }
 
       /** Pass back a <tt>const Tp &</tt> reference to \a key_r value.
@@ -199,21 +199,21 @@ namespace zypp
       template <class Tp>
       bool get( const std::string & key_r, Tp & ret_r ) const
       {
-	bool ret = false;
-	if ( _dataP )
-	{
-	  const_iterator it = _dataP->find( key_r );
-	  if ( it != _dataP->end() )
-	  {
-	    auto ptr = boost::any_cast<const Tp>(&it->second);
-	    if ( ptr )
-	    {
-	      ret_r = *ptr;
-	      ret = true;
-	    }
-	  }
-	}
-	return ret;
+        bool ret = false;
+        if ( _dataP )
+        {
+          const_iterator it = _dataP->find( key_r );
+          if ( it != _dataP->end() )
+          {
+            auto ptr = boost::any_cast<const Tp>(&it->second);
+            if ( ptr )
+            {
+              ret_r = *ptr;
+              ret = true;
+            }
+          }
+        }
+        return ret;
       }
 
     private:

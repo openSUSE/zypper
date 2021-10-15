@@ -116,7 +116,7 @@ class VendorAttr
     {
       VendorList tmp;
       for ( const auto & el : container_r )
-	tmp.push_back( std::string(el) );
+        tmp.push_back( std::string(el) );
       _addVendorList( std::move(tmp) );
     }
     /** \overload from std::initializer_list */
@@ -125,7 +125,7 @@ class VendorAttr
     {
       VendorList tmp;
       for ( const auto & el : container_r )
-	tmp.push_back( std::string(el) );
+        tmp.push_back( std::string(el) );
       _addVendorList( std::move(tmp) );
     }
 

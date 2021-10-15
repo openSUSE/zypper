@@ -28,8 +28,8 @@ namespace zypp
     {
       static const Capability autopattern( "autopattern()" );
       for ( const auto & cap : provides_r )
-	if ( cap.matches( autopattern ) == CapMatch::yes )
-	  return cap;
+        if ( cap.matches( autopattern ) == CapMatch::yes )
+          return cap;
       return Capability();
     }
 
@@ -186,7 +186,7 @@ namespace zypp
     // is visible IFF ident is available in the pool.
     IdString ident( lookupStrAttribute( sat::SolvAttr::isvisible ) );
     return( ident.empty() ? lookupBoolAttribute( sat::SolvAttr::isvisible )
-			  : ! ResPool::instance().byIdent( ident ).empty() );
+                          : ! ResPool::instance().byIdent( ident ).empty() );
   }
 
   std::string Pattern::category( const Locale & lang_r ) const
@@ -211,8 +211,8 @@ namespace zypp
     {
       Capability pkgCap( arch(), autocap.detail().ed().asString(), Rel::EQ, edition() );
       for ( const auto & solv: sat::WhatProvides( pkgCap ) )
-	if ( solv.repository() == repository() )
-	  return solv;
+        if ( solv.repository() == repository() )
+          return solv;
     }
     return sat::Solvable();
   }
@@ -231,7 +231,7 @@ namespace zypp
       Capabilities c( solv_r[dep_r] );
       if ( ! c.empty() )
       {
-	caps_r.insert( c.begin(),c.end() );
+        caps_r.insert( c.begin(),c.end() );
       }
     }
   } //namespace
@@ -272,7 +272,7 @@ namespace zypp
       addCaps( caps, depKeeper, Dep::REQUIRES );
       addCaps( caps, depKeeper, Dep::RECOMMENDS );
       if ( includeSuggests_r )
-	addCaps( caps, depKeeper, Dep::SUGGESTS );
+        addCaps( caps, depKeeper, Dep::SUGGESTS );
     }
     // get items providing the above
     sat::WhatProvides prv( caps );
@@ -307,9 +307,9 @@ namespace zypp
       sat::WhatProvides prv( caps );
       for ( ui::Selectable::Ptr sel : prv.selectable() )
       {
-	const PoolItem & pi( sel->theObj() );
-	if ( pi.isKind<Package>() )
-	  set_r.insert( pi );
+        const PoolItem & pi( sel->theObj() );
+        if ( pi.isKind<Package>() )
+          set_r.insert( pi );
       }
     }
 
@@ -348,30 +348,30 @@ namespace zypp
 
       while ( ! reqTodo.empty() )
       {
-	// pop one patterns-package from todo
-	depKeeper = ( *reqTodo.begin() );
-	reqTodo.erase( reqTodo.begin() );
-	allDone.insert( depKeeper );
+        // pop one patterns-package from todo
+        depKeeper = ( *reqTodo.begin() );
+        reqTodo.erase( reqTodo.begin() );
+        allDone.insert( depKeeper );
 
-	// collects stats
-	ContentsSet result;
-	dependsSet( depKeeper, result );
+        // collects stats
+        ContentsSet result;
+        dependsSet( depKeeper, result );
 
-	// evaluate result....
-	for ( sat::Solvable solv : result.req )	// remember unprocessed required patterns-packages...
-	{
-	  if ( collect_r.req.insert( solv ) && recursively_r && isPatternsPackage( solv ) )
-	    reqTodo.insert( solv );
-	}
-	for ( sat::Solvable solv : result.rec )	// remember unprocessed recommended patterns-packages...
-	{
-	  if ( collect_r.rec.insert( solv ) && recursively_r && isPatternsPackage( solv ) )
-	    recTodo.insert( solv );
-	}
-	for ( sat::Solvable solv : result.sug )	// NOTE: We don't expand suggested patterns!
-	{
-	  collect_r.sug.insert( solv );
-	}
+        // evaluate result....
+        for ( sat::Solvable solv : result.req )	// remember unprocessed required patterns-packages...
+        {
+          if ( collect_r.req.insert( solv ) && recursively_r && isPatternsPackage( solv ) )
+            reqTodo.insert( solv );
+        }
+        for ( sat::Solvable solv : result.rec )	// remember unprocessed recommended patterns-packages...
+        {
+          if ( collect_r.rec.insert( solv ) && recursively_r && isPatternsPackage( solv ) )
+            recTodo.insert( solv );
+        }
+        for ( sat::Solvable solv : result.sug )	// NOTE: We don't expand suggested patterns!
+        {
+          collect_r.sug.insert( solv );
+        }
       }
     }
     // step 2: All requirements are expanded, now check remaining recommends....
@@ -381,7 +381,7 @@ namespace zypp
       depKeeper = ( *recTodo.begin() );
       recTodo.erase( recTodo.begin() );
       if ( ! allDone.insert( depKeeper ).second )
-	continue;	// allready expanded (in requires)
+        continue;	// allready expanded (in requires)
 
       // collects stats
       ContentsSet result;
@@ -390,19 +390,19 @@ namespace zypp
       // evaluate result....
       for ( sat::Solvable solv : result.req )	// remember unprocessed required patterns-packages...
       {
-	// NOTE: Requirements of recommended patterns count as 'recommended'
-	if ( collect_r.rec.insert( solv ) && recursively_r && isPatternsPackage( solv ) )
-	  recTodo.insert( solv );
+        // NOTE: Requirements of recommended patterns count as 'recommended'
+        if ( collect_r.rec.insert( solv ) && recursively_r && isPatternsPackage( solv ) )
+          recTodo.insert( solv );
       }
       for ( sat::Solvable solv : result.rec )	// remember unprocessed recommended patterns-packages...
       {
-	if ( collect_r.rec.insert( solv ) && recursively_r && isPatternsPackage( solv ) )
-	  recTodo.insert( solv );
+        if ( collect_r.rec.insert( solv ) && recursively_r && isPatternsPackage( solv ) )
+          recTodo.insert( solv );
       }
-	for ( sat::Solvable solv : result.sug )	// NOTE: We don't expand suggested patterns!
-	{
-	  collect_r.sug.insert( solv );
-	}
+        for ( sat::Solvable solv : result.sug )	// NOTE: We don't expand suggested patterns!
+        {
+          collect_r.sug.insert( solv );
+        }
     }
   }
 

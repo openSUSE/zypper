@@ -131,7 +131,7 @@ namespace zypp
 
       static int compare( const IdString & lhs,    const Derived & rhs )     { return compare( lhs, rhs.idStr() ); }
       static int compare( const IdString & lhs,    const IdString & rhs )    { return lhs == rhs ? 0 : Derived::_doCompare( (lhs ? lhs.c_str() : (const char *)0 ),
-															    (rhs ? rhs.c_str() : (const char *)0 ) ); }
+                                                                                                                            (rhs ? rhs.c_str() : (const char *)0 ) ); }
       static int compare( const IdString & lhs,    const std::string & rhs ) { return compare( lhs, rhs.c_str() ); }
       static int compare( const IdString & lhs,    const char * rhs )        { return Derived::_doCompare( (lhs ? lhs.c_str() : (const char *)0 ), rhs ); }
 
@@ -155,8 +155,8 @@ namespace zypp
     private:
       static int _doCompare( const char * lhs,  const char * rhs )
       {
-	if ( ! lhs ) return rhs ? -1 : 0;
-	return rhs ? ::strcmp( lhs, rhs ) : 1;
+        if ( ! lhs ) return rhs ? -1 : 0;
+        return rhs ? ::strcmp( lhs, rhs ) : 1;
       }
   };
   ///////////////////////////////////////////////////////////////////

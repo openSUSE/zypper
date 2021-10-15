@@ -69,13 +69,13 @@ namespace zypp
     {
       if ( ! pi_r.status().isLocked() )
       {
-	if ( ccand.status().isLocked() || ui::SelectableTraits::AVOrder()( pi_r, ccand ) )
-	  ccand = pi_r;
+        if ( ccand.status().isLocked() || ui::SelectableTraits::AVOrder()( pi_r, ccand ) )
+          ccand = pi_r;
       }
       else if ( ccand.status().isLocked() )
       {
-	if ( ui::SelectableTraits::AVOrder()( pi_r, ccand ) )
-	  ccand = pi_r;
+        if ( ui::SelectableTraits::AVOrder()( pi_r, ccand ) )
+          ccand = pi_r;
       }
     }
     else if ( ui::SelectableTraits::AVOrder()( pi_r, ccand ) )

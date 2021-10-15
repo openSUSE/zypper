@@ -38,17 +38,17 @@ namespace zypp
     /** WFN attributes (use like 'enum class \ref Attribute') */
     struct EAttributeDef {
       enum Enum {
-	part,		//< attribute (2.2)
-	vendor,		//< attribute (2.2)
-	product,	//< attribute (2.2)
-	version,	//< attribute (2.2)
-	update,		//< attribute (2.2)
-	edition,	//< attribute (2.2)
-	language,	//< attribute (2.2)
-	sw_edition,	//< extended attribute (2.3)
-	target_sw,	//< extended attribute (2.3)
-	target_hw,	//< extended attribute (2.3)
-	other		//< extended attribute (2.3)
+        part,		//< attribute (2.2)
+        vendor,		//< attribute (2.2)
+        product,	//< attribute (2.2)
+        version,	//< attribute (2.2)
+        update,		//< attribute (2.2)
+        edition,	//< attribute (2.2)
+        language,	//< attribute (2.2)
+        sw_edition,	//< extended attribute (2.3)
+        target_sw,	//< extended attribute (2.3)
+        target_hw,	//< extended attribute (2.3)
+        other		//< extended attribute (2.3)
       };
       static constexpr unsigned numAttributes = other+1;	///< number of attributes
       static const std::string & asString( Enum val_r );	///< string representantion
@@ -206,10 +206,10 @@ namespace zypp
     /** Classification of \ref Value types mostly for \ref match (use like 'enum class \ref Type') */
     struct ETypeDef {
       enum Enum {
-	ANY,
-	NA,
-	wildcardfree,
-	wildcarded,
+        ANY,
+        NA,
+        wildcardfree,
+        wildcarded,
       };
     };
     typedef base::EnumClass<ETypeDef> Type;	///< 'enum class Type'

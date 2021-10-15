@@ -67,52 +67,52 @@ namespace zypp
       //	CAT_YAST
       case 'y':
       case 'Y':
-	if ( str::compareCI( category_r, "yast" ) == 0 )
-	  return CAT_YAST;
-	break;
+        if ( str::compareCI( category_r, "yast" ) == 0 )
+          return CAT_YAST;
+        break;
 
       //	CAT_SECURITY
       case 's':
       case 'S':
-	if ( str::compareCI( category_r, "security" ) == 0 )
-	  return CAT_SECURITY;
-	break;
+        if ( str::compareCI( category_r, "security" ) == 0 )
+          return CAT_SECURITY;
+        break;
 
       //	CAT_RECOMMENDED
       case 'r':
       case 'R':
-	if ( str::compareCI( category_r, "recommended" ) == 0 )
-	  return CAT_RECOMMENDED;
-	break;
+        if ( str::compareCI( category_r, "recommended" ) == 0 )
+          return CAT_RECOMMENDED;
+        break;
       case 'b':
       case 'B':
-	if ( str::compareCI( category_r, "bugfix" ) == 0 )	// rhn
-	  return CAT_RECOMMENDED;
-	break;
+        if ( str::compareCI( category_r, "bugfix" ) == 0 )	// rhn
+          return CAT_RECOMMENDED;
+        break;
 
       //	CAT_OPTIONAL
       case 'o':
       case 'O':
-	if ( str::compareCI( category_r, "optional" ) == 0 )
-	  return CAT_OPTIONAL;
-	break;
+        if ( str::compareCI( category_r, "optional" ) == 0 )
+          return CAT_OPTIONAL;
+        break;
       case 'f':
       case 'F':
-	if ( str::compareCI( category_r, "feature" ) == 0 )
-	  return CAT_OPTIONAL;
-	break;
+        if ( str::compareCI( category_r, "feature" ) == 0 )
+          return CAT_OPTIONAL;
+        break;
       case 'e':
       case 'E':
-	if ( str::compareCI( category_r, "enhancement" ) == 0 )	// rhn
-	  return CAT_OPTIONAL;
-	break;
+        if ( str::compareCI( category_r, "enhancement" ) == 0 )	// rhn
+          return CAT_OPTIONAL;
+        break;
 
       //	CAT_DOCUMENT
       case 'd':
       case 'D':
-	if ( str::compareCI( category_r, "document" ) == 0 )
-	  return CAT_DOCUMENT;
-	break;
+        if ( str::compareCI( category_r, "document" ) == 0 )
+          return CAT_DOCUMENT;
+        break;
     }
     // default:
     INT << "Unrecognized Patch::Category string '" << category_r << "'" << endl;
@@ -154,37 +154,37 @@ namespace zypp
     {
       case 'l':
       case 'L':
-	if ( str::compareCI( severity_r, "low" ) == 0 )
-	  return SEV_LOW;
-	break;
+        if ( str::compareCI( severity_r, "low" ) == 0 )
+          return SEV_LOW;
+        break;
 
       case 'm':
       case 'M':
-	if ( str::compareCI( severity_r, "moderate" ) == 0 )
-	  return SEV_MODERATE;
-	break;
+        if ( str::compareCI( severity_r, "moderate" ) == 0 )
+          return SEV_MODERATE;
+        break;
 
       case 'i':
       case 'I':
-	if ( str::compareCI( severity_r, "important" ) == 0 )
-	  return SEV_IMPORTANT;
-	break;
+        if ( str::compareCI( severity_r, "important" ) == 0 )
+          return SEV_IMPORTANT;
+        break;
 
       case 'c':
       case 'C':
-	if ( str::compareCI( severity_r, "critical" ) == 0 )
-	  return SEV_CRITICAL;
-	break;
+        if ( str::compareCI( severity_r, "critical" ) == 0 )
+          return SEV_CRITICAL;
+        break;
 
       case 'u':
       case 'U':
-	if ( str::compareCI( severity_r, "unspecified" ) == 0 )
-	  return SEV_NONE;
-	break;
+        if ( str::compareCI( severity_r, "unspecified" ) == 0 )
+          return SEV_NONE;
+        break;
 
       case '\0':
-	return SEV_NONE;
-	break;
+        return SEV_NONE;
+        break;
     }
     // default:
     INT << "Unrecognized Patch::Severity string '" << severity_r << "'" << endl;

@@ -4,7 +4,7 @@
 
 namespace zypp
 {
-    
+
 std::string
 asUserString( VendorSupportOption opt )
 {
@@ -15,7 +15,7 @@ asUserString( VendorSupportOption opt )
         break;
     case VendorSupportUnsupported:
         return _("unsupported");
-        break;        
+        break;
     case VendorSupportLevel1:
         return _("Level 1");
         break;
@@ -30,7 +30,7 @@ asUserString( VendorSupportOption opt )
     }
     return _("invalid");
 }
-    
+
 std::string asUserStringDescription( VendorSupportOption opt )
 {
     switch (opt)
@@ -40,7 +40,7 @@ std::string asUserStringDescription( VendorSupportOption opt )
         break;
     case VendorSupportUnsupported:
         return _("The vendor does not provide support.");
-        break;        
+        break;
     case VendorSupportLevel1:
         return _("Problem determination, which means technical support designed to provide compatibility information, installation assistance, usage support, on-going maintenance and basic troubleshooting. Level 1 Support is not intended to correct product defect errors.");
         break;
@@ -55,7 +55,7 @@ std::string asUserStringDescription( VendorSupportOption opt )
     }
     return _("Unknown support option. Description not available");
 }
-    
+
 }
 
 

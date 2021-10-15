@@ -22,8 +22,8 @@ using boost::unit_test::test_case;
 using namespace zypp;
 
 void testUrlAuthority( const Url & url_r,
-		       const std::string & host_r, const std::string & port_r = std::string(),
-		       const std::string & user_r = std::string(), const std::string & pass_r = std::string() )
+                       const std::string & host_r, const std::string & port_r = std::string(),
+                       const std::string & user_r = std::string(), const std::string & pass_r = std::string() )
 {
   BOOST_CHECK_EQUAL( url_r.getUsername(),	user_r );
   BOOST_CHECK_EQUAL( url_r.getPassword(),	pass_r );

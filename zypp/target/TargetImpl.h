@@ -208,8 +208,8 @@ namespace zypp
     private:
       /** Commit ordered changes (internal helper) */
       void commit( const ZYppCommitPolicy & policy_r,
-		   CommitPackageCache & packageCache_r,
-		   ZYppCommitResult & result_r );
+                   CommitPackageCache & packageCache_r,
+                   ZYppCommitResult & result_r );
 
       /** Commit ordered changes (internal helper) */
       void commitInSingleTransaction( const ZYppCommitPolicy & policy_r,

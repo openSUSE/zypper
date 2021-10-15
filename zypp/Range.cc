@@ -36,42 +36,42 @@ namespace zypp
 
       if ( lhs == Rel::NE )
       {
-	  if ( cmp < 0 )
-	  {
-	      // lhs < rhs
-	      return( rhs == Rel::GE 
-		      || rhs == Rel::EQ );
-	  } else if ( cmp > 0)
-	  {
-	      // lhs > rhs
-	      return( rhs == Rel::LT
-		      || rhs == Rel::EQ );	      
-	  } else 
-	  {
-	      //lhs == rhs
-	      return ( rhs == Rel::GT
-		       || rhs == Rel::LT );
-	  }
+          if ( cmp < 0 )
+          {
+              // lhs < rhs
+              return( rhs == Rel::GE
+                      || rhs == Rel::EQ );
+          } else if ( cmp > 0)
+          {
+              // lhs > rhs
+              return( rhs == Rel::LT
+                      || rhs == Rel::EQ );
+          } else
+          {
+              //lhs == rhs
+              return ( rhs == Rel::GT
+                       || rhs == Rel::LT );
+          }
       }
-      
+
       if ( rhs == Rel::NE )
       {
-	  if ( cmp < 0 )
-	  {
-	      // lhs < rhs
-	      return(  lhs == Rel::LE
-		       || lhs == Rel::EQ );
-	  } else if ( cmp > 0)
-	  {
-	      // lhs > rhs
-	      return(  lhs == Rel::GT
-		       || lhs == Rel::EQ );	      
-	  } else
-	  {
-	      //lhs == rhs
-	      return ( lhs == Rel::GT
-		       || lhs == Rel::LT );
-	  }
+          if ( cmp < 0 )
+          {
+              // lhs < rhs
+              return(  lhs == Rel::LE
+                       || lhs == Rel::EQ );
+          } else if ( cmp > 0)
+          {
+              // lhs > rhs
+              return(  lhs == Rel::GT
+                       || lhs == Rel::EQ );
+          } else
+          {
+              //lhs == rhs
+              return ( lhs == Rel::GT
+                       || lhs == Rel::LT );
+          }
       }
 
       if ( cmp < 0 )

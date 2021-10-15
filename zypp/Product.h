@@ -127,8 +127,8 @@ namespace zypp
     bool hasUpdateContentIdentifier( TIterator begin, TIterator end ) const
     {
       for_( it, begin, end )
-	if ( hasUpdateContentIdentifier( *it ) )
-	  return true;
+        if ( hasUpdateContentIdentifier( *it ) )
+          return true;
       return false;
     }
 

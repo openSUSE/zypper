@@ -112,10 +112,10 @@ namespace zypp
         constexpr bool testFlag( Enum flag_r ) const	{ return testFlag( integral(flag_r) ); }
 
       private:
-	constexpr bool testFlag( Integral flag ) const	{ return flag ? ( _val & flag ) == flag : !_val; }
+        constexpr bool testFlag( Integral flag ) const	{ return flag ? ( _val & flag ) == flag : !_val; }
 
-	constexpr static Integral integral( Flags obj )	{ return obj._val; }
-	constexpr static Integral integral( Enum obj )	{ return static_cast<Integral>(obj); }
+        constexpr static Integral integral( Flags obj )	{ return obj._val; }
+        constexpr static Integral integral( Enum obj )	{ return static_cast<Integral>(obj); }
 
         Integral _val;
     };
@@ -135,7 +135,7 @@ namespace zypp
      */
     template<typename Enum>
     std::string stringify( const Flags<Enum> & flag_r, const std::initializer_list<std::pair<Flags<Enum>,std::string> > & flaglist_r = {},
-			   std::string intro_r = "[", std::string sep_r = "|", std::string extro_r = "]" )
+                           std::string intro_r = "[", std::string sep_r = "|", std::string extro_r = "]" )
     {
       std::string ret( std::move(intro_r) );
       std::string sep;
@@ -143,20 +143,20 @@ namespace zypp
       Flags<Enum> mask;
       for ( const auto & pair : flaglist_r )
       {
-	if ( flag_r.testFlag( pair.first ) )
-	{
-	  mask |= pair.first;
-	  ret += sep;
-	  ret += pair.second;
-	  if ( sep.empty() && !sep_r.empty() )
-	  { sep = std::move(sep_r); }
-	}
+        if ( flag_r.testFlag( pair.first ) )
+        {
+          mask |= pair.first;
+          ret += sep;
+          ret += pair.second;
+          if ( sep.empty() && !sep_r.empty() )
+          { sep = std::move(sep_r); }
+        }
       }
       mask = flag_r & ~mask;
       if ( mask )
       {
-	ret += sep;
-	ret += str::hexstring( mask, 0 );
+        ret += sep;
+        ret += str::hexstring( mask, 0 );
       }
       ret += std::move(extro_r);
       return ret;

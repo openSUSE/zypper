@@ -76,14 +76,14 @@ namespace zypp {
         { return path(); }
 
         /**
-	 * Whether path is valid and deleted when the last reference drops.
-	 */
+         * Whether path is valid and deleted when the last reference drops.
+         */
         bool autoCleanup() const;
 
         /**
-	 * Turn \ref autoCleanup on/off if path is valid.
-	 */
-	void autoCleanup( bool yesno_r );
+         * Turn \ref autoCleanup on/off if path is valid.
+         */
+        void autoCleanup( bool yesno_r );
 
       public:
         /**

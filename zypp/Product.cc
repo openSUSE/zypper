@@ -77,17 +77,17 @@ namespace zypp
     {
       if ( it->repository() == repository() && it->arch() == arch() )
       {
-	bool fitsBuildtime = ( it->buildtime() == buildtime() );
-	if ( found )
-	{
-	  bool lowerEdition = ( it->edition() <= found.edition() );
-	  if ( (  foundBuildTime && ( !fitsBuildtime || lowerEdition ) )
-	    || ( !foundBuildTime && ( !fitsBuildtime && lowerEdition ) ) )
-	    continue;
-	}
-	found = *it;
-	if ( fitsBuildtime )
-	  foundBuildTime = true;
+        bool fitsBuildtime = ( it->buildtime() == buildtime() );
+        if ( found )
+        {
+          bool lowerEdition = ( it->edition() <= found.edition() );
+          if ( (  foundBuildTime && ( !fitsBuildtime || lowerEdition ) )
+            || ( !foundBuildTime && ( !fitsBuildtime && lowerEdition ) ) )
+            continue;
+        }
+        found = *it;
+        if ( fitsBuildtime )
+          foundBuildTime = true;
       }
     }
 
@@ -99,13 +99,13 @@ namespace zypp
       std::string refFile( referenceFilename() );	// the basename only!
       if ( ! refFile.empty() )
       {
-	StrMatcher matcher( "/etc/products.d/"+refFile, Match::STRING | Match::FILES );
-	q.setStrMatcher( matcher );
-	if ( ! q.empty() )
-	  found = q.begin().inSolvable();
+        StrMatcher matcher( "/etc/products.d/"+refFile, Match::STRING | Match::FILES );
+        q.setStrMatcher( matcher );
+        if ( ! q.empty() )
+          found = q.begin().inSolvable();
       }
       else
-	INT << "Product referenceFilename unexpectedly empty!" << endl;
+        INT << "Product referenceFilename unexpectedly empty!" << endl;
     }
 
     if ( ! found )
@@ -221,7 +221,7 @@ namespace zypp
     {
       ret.reserve( 2 );
       for_( it, q.begin(), q.end() )
-	ret.push_back( it.asString() );
+        ret.push_back( it.asString() );
     }
     return ret;
   }
@@ -232,7 +232,7 @@ namespace zypp
     for_( it, q.begin(), q.end() )
     {
       if ( it.asString() == cident_r )
-	return true;
+        return true;
     }
     return false;
   }
@@ -248,7 +248,7 @@ namespace zypp
 
   std::string Product::registerFlavor() const
   { return lookupStrAttribute( sat::SolvAttr::productRegisterFlavor ); }
-  
+
   /////////////////////////////////////////////////////////////////
 
   Product::UrlList Product::urls( const std::string & key_r ) const

@@ -42,19 +42,19 @@ namespace zypp
       const size_t taskCount = (tasks.size() / threadCount) + 1;
       for ( size_t start = 0; start < tasks.size(); start += taskCount )
       {
-	group.create_thread( [&tasks, start, taskCount]()
-	{
-	  const size_t end = std::min( tasks.size(), start + taskCount );
-	  for ( size_t i = start; i < end; ++i )
-	    tasks[i]();
-	});
+        group.create_thread( [&tasks, start, taskCount]()
+        {
+          const size_t end = std::min( tasks.size(), start + taskCount );
+          for ( size_t i = start; i < end; ++i )
+            tasks[i]();
+        });
       }
       group.join_all();
     }
     else
     {
       for_( f, tasks.begin(), tasks.end() )
-	(*f)();
+        (*f)();
     }
   }
 }

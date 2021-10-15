@@ -112,29 +112,29 @@ namespace zypp
       /** Dtor wrting end tag */
       ~Node()
       {
-	if ( isComment() )
-	  _out << "-->";
-	else
-	{
-	  if ( _hasContent )
-	    _out << "</" << _name << ">";
-	  else
-	    _out << "/>";
-	}
+        if ( isComment() )
+          _out << "-->";
+        else
+        {
+          if ( _hasContent )
+            _out << "</" << _name << ">";
+          else
+            _out << "/>";
+        }
       }
 
       /** Exception type thrown if attributes are added to a closed start node. */
       struct HasContentException{};
 
        /** Add additional attributes (requires OptionalContentType)
-	* \throw HasContentException If start node is already closed
-	*/
+        * \throw HasContentException If start node is already closed
+        */
       Node & addAttr( const std::initializer_list<Attr> & attrs_r = {} )
       {
-	if ( _hasContent )
-	  throw HasContentException();
-	printAttr( attrs_r );
-	return *this;
+        if ( _hasContent )
+          throw HasContentException();
+        printAttr( attrs_r );
+        return *this;
       }
 
       /** \overload for one */
@@ -145,38 +145,38 @@ namespace zypp
       /** Return the output stream */
       std::ostream & operator*()
       {
-	if ( ! _hasContent )
-	{
-	  _hasContent = true;
-	  if ( isComment() )
-	    _out << "|";
-	  else
-	    _out << ">";
-	}
-	return _out;
+        if ( ! _hasContent )
+        {
+          _hasContent = true;
+          if ( isComment() )
+            _out << "|";
+          else
+            _out << ">";
+        }
+        return _out;
       }
 
     private:
       void printStart( const std::initializer_list<Attr> & attrs_r )
       {
-	if ( _name.empty() || _name[0] == '!' )
-	{
-	  _out << "<!--" << _name;
-	  _name.clear();	// a comment
-	}
-	else
-	  _out << "<" << _name;
+        if ( _name.empty() || _name[0] == '!' )
+        {
+          _out << "<!--" << _name;
+          _name.clear();	// a comment
+        }
+        else
+          _out << "<" << _name;
 
-	printAttr( attrs_r );
+        printAttr( attrs_r );
 
-	if ( !isComment() && _hasContent )
-	  _out << ">";
+        if ( !isComment() && _hasContent )
+          _out << ">";
       }
 
       void printAttr( const std::initializer_list<Attr> & attrs_r )
       {
-	for ( const auto & pair : attrs_r )
-	  _out << " " << pair.first << "=\"" << xml::escape( pair.second ) << "\"";
+        for ( const auto & pair : attrs_r )
+          _out << " " << pair.first << "=\"" << xml::escape( pair.second ) << "\"";
       }
 
       bool isComment() const

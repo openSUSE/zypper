@@ -105,13 +105,13 @@ namespace zypp
     {
       if ( _pimpl->_description.empty() )	// first entry
       {
-	_pimpl->_description = std::move(description);
-	return;
+        _pimpl->_description = std::move(description);
+        return;
       }
       else					// second entry: form headline in _description
       {
-	_pimpl->_description.swap( _pimpl->_details );
-	_pimpl->_description = _("Following actions will be done:");
+        _pimpl->_description.swap( _pimpl->_details );
+        _pimpl->_description = _("Following actions will be done:");
       }
     }
     if ( front )

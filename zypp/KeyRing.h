@@ -143,8 +143,8 @@ namespace zypp
       * "KeyContext"		The KeyContext
       */
      void reportAutoImportKey( const std::list<PublicKeyData> & keyDataList_r,
-			       const PublicKeyData & keySigning_r,
-			       const KeyContext &keyContext_r );
+                               const PublicKeyData & keySigning_r,
+                               const KeyContext &keyContext_r );
      /** \relates reportAutoImportKey generic reports UserData::type */
      constexpr static const char *REPORT_AUTO_IMPORT_KEY = "KeyRingReport/reportAutoImportKey";
   };

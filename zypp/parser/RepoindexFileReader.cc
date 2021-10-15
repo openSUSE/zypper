@@ -46,50 +46,50 @@ namespace zypp
       class VarReplacer : private base::NonCopyable
       {
       public:
-	/** */
-	void setVar( const std::string & key_r, const std::string & val_r )
-	{
-	  //MIL << "*** Inject " << key_r << " = " << val_r;
-	  _vars[key_r] = replace( val_r );
-	  //MIL << " (" << _vars[key_r] << ")" << endl;
-	}
+        /** */
+        void setVar( const std::string & key_r, const std::string & val_r )
+        {
+          //MIL << "*** Inject " << key_r << " = " << val_r;
+          _vars[key_r] = replace( val_r );
+          //MIL << " (" << _vars[key_r] << ")" << endl;
+        }
 
-	std::string replace( const std::string & val_r ) const
-	{
-	  std::string::size_type vbeg = val_r.find( "%{", 0 );
-	  if ( vbeg == std::string::npos )
-	    return val_r;
+        std::string replace( const std::string & val_r ) const
+        {
+          std::string::size_type vbeg = val_r.find( "%{", 0 );
+          if ( vbeg == std::string::npos )
+            return val_r;
 
-	  str::Str ret;
-	  std::string::size_type cbeg = 0;
-	  for( ; vbeg != std::string::npos; vbeg = val_r.find( "%{", vbeg ) )
-	  {
-	    std::string::size_type nbeg = vbeg+2;
-	    std::string::size_type nend = val_r.find( "}", nbeg );
-	    if ( nend == std::string::npos )
-	    {
-	      WAR << "Incomplete variable in '" << val_r << "'" << endl;
-	      break;
-	    }
-	    const auto & iter = _vars.find( val_r.substr( nbeg, nend-nbeg ) );
-	    if ( iter != _vars.end() )
-	    {
-	      if ( cbeg < vbeg )
-		ret << val_r.substr( cbeg, vbeg-cbeg );
-	      ret << iter->second;
-	      cbeg = nend+1;
-	    }
-	    else
-	      WAR << "Undefined variable %{" << val_r.substr( nbeg, nend-nbeg ) << "} in '" << val_r << "'" << endl;
-	    vbeg = nend+1;
-	  }
-	  if ( cbeg < val_r.size() )
-	    ret << val_r.substr( cbeg );
+          str::Str ret;
+          std::string::size_type cbeg = 0;
+          for( ; vbeg != std::string::npos; vbeg = val_r.find( "%{", vbeg ) )
+          {
+            std::string::size_type nbeg = vbeg+2;
+            std::string::size_type nend = val_r.find( "}", nbeg );
+            if ( nend == std::string::npos )
+            {
+              WAR << "Incomplete variable in '" << val_r << "'" << endl;
+              break;
+            }
+            const auto & iter = _vars.find( val_r.substr( nbeg, nend-nbeg ) );
+            if ( iter != _vars.end() )
+            {
+              if ( cbeg < vbeg )
+                ret << val_r.substr( cbeg, vbeg-cbeg );
+              ret << iter->second;
+              cbeg = nend+1;
+            }
+            else
+              WAR << "Undefined variable %{" << val_r.substr( nbeg, nend-nbeg ) << "} in '" << val_r << "'" << endl;
+            vbeg = nend+1;
+          }
+          if ( cbeg < val_r.size() )
+            ret << val_r.substr( cbeg );
 
-	  return ret;
-	}
+          return ret;
+        }
       private:
-	std::unordered_map<std::string,std::string> _vars;
+        std::unordered_map<std::string,std::string> _vars;
       };
     } // namespace
     ///////////////////////////////////////////////////////////////////
@@ -121,8 +121,8 @@ namespace zypp
       const XmlString & s( reader_r->getAttribute( key_r ) );
       if ( s.get() )
       {
-	value_r = _replacer.replace( s.asString() );
-	return !value_r.empty();
+        value_r = _replacer.replace( s.asString() );
+        return !value_r.empty();
       }
       value_r.clear();
       return false;
@@ -164,15 +164,15 @@ namespace zypp
       // xpath: /repoindex
       if ( reader_r->name() == "repoindex" )
       {
-	while ( reader_r.nextNodeAttribute() )
-	{
-	  const std::string & name( reader_r->localName().asString() );
-	  const std::string & value( reader_r->value().asString() );
-	  _replacer.setVar( name, value );
-	  // xpath: /repoindex@ttl
-	  if ( name == "ttl" )
-	    _ttl = str::strtonum<Date::Duration>(value);
-	}
+        while ( reader_r.nextNodeAttribute() )
+        {
+          const std::string & name( reader_r->localName().asString() );
+          const std::string & value( reader_r->value().asString() );
+          _replacer.setVar( name, value );
+          // xpath: /repoindex@ttl
+          if ( name == "ttl" )
+            _ttl = str::strtonum<Date::Duration>(value);
+        }
         return true;
       }
 
@@ -182,46 +182,46 @@ namespace zypp
         RepoInfo info;
         // Set some defaults that are not contained in the repo information
         info.setAutorefresh( true );
-	info.setEnabled(false);
+        info.setEnabled(false);
 
-	std::string attrValue;
+        std::string attrValue;
 
-	// required alias
-	// mandatory, so we can allow it in var replacement without reset
-	if ( getAttrValue( "alias", reader_r, attrValue ) )
-	{
-	  info.setAlias( attrValue );
-	  _replacer.setVar( "alias", attrValue );
-	}
-	else
-	  throw ParseException(str::form(_("Required attribute '%s' is missing."), "alias"));
+        // required alias
+        // mandatory, so we can allow it in var replacement without reset
+        if ( getAttrValue( "alias", reader_r, attrValue ) )
+        {
+          info.setAlias( attrValue );
+          _replacer.setVar( "alias", attrValue );
+        }
+        else
+          throw ParseException(str::form(_("Required attribute '%s' is missing."), "alias"));
 
         // required url
-	// SLES HACK: or path, but beware of the hardcoded '/repo' prefix!
-	{
-	  std::string urlstr;
-	  std::string pathstr;
-	  getAttrValue( "url", reader_r, urlstr );
-	  getAttrValue( "path", reader_r, pathstr );
-	  if ( urlstr.empty() )
-	  {
-	    if ( pathstr.empty() )
-	      throw ParseException(str::form(_("One or both of '%s' or '%s' attributes is required."), "url", "path"));
-	    else
-	      info.setPath( Pathname("/repo") / pathstr );
-	  }
-	  else
-	  {
-	    if ( pathstr.empty() )
-	      info.setBaseUrl( Url(urlstr) );
-	    else
-	    {
-	      Url url( urlstr );
-	      url.setPathName( Pathname(url.getPathName()) / "repo" / pathstr );
-	      info.setBaseUrl( url );
-	    }
-	  }
-	}
+        // SLES HACK: or path, but beware of the hardcoded '/repo' prefix!
+        {
+          std::string urlstr;
+          std::string pathstr;
+          getAttrValue( "url", reader_r, urlstr );
+          getAttrValue( "path", reader_r, pathstr );
+          if ( urlstr.empty() )
+          {
+            if ( pathstr.empty() )
+              throw ParseException(str::form(_("One or both of '%s' or '%s' attributes is required."), "url", "path"));
+            else
+              info.setPath( Pathname("/repo") / pathstr );
+          }
+          else
+          {
+            if ( pathstr.empty() )
+              info.setBaseUrl( Url(urlstr) );
+            else
+            {
+              Url url( urlstr );
+              url.setPathName( Pathname(url.getPathName()) / "repo" / pathstr );
+              info.setBaseUrl( url );
+            }
+          }
+        }
 
         // optional name
         if ( getAttrValue( "name", reader_r, attrValue ) )
@@ -241,8 +241,8 @@ namespace zypp
           info.setEnabled( str::strToBool( attrValue, info.enabled() ) );
 
         // optional autorefresh
-	if ( getAttrValue( "autorefresh", reader_r, attrValue ) )
-	  info.setAutorefresh( str::strToBool( attrValue, info.autorefresh() ) );
+        if ( getAttrValue( "autorefresh", reader_r, attrValue ) )
+          info.setAutorefresh( str::strToBool( attrValue, info.autorefresh() ) );
 
         DBG << info << endl;
 

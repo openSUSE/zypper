@@ -137,9 +137,9 @@ namespace zypp
     if ( lhs != rhs )
     {
       if ( lhs && rhs )
-	ret = compareByN( *lhs, *rhs );
+        ret = compareByN( *lhs, *rhs );
       else
-	ret = lhs ? 1 : -1;
+        ret = lhs ? 1 : -1;
     }
     return ret;
   }
@@ -151,9 +151,9 @@ namespace zypp
     if ( lhs != rhs )
     {
       if ( lhs && rhs )
-	ret = compareByNVR( *lhs, *rhs );
+        ret = compareByNVR( *lhs, *rhs );
       else
-	ret = lhs ? 1 : -1;
+        ret = lhs ? 1 : -1;
     }
     return ret;
   }
@@ -165,9 +165,9 @@ namespace zypp
     if ( lhs != rhs )
     {
       if ( lhs && rhs )
-	ret = compareByNVRA( *lhs, *rhs );
+        ret = compareByNVRA( *lhs, *rhs );
       else
-	ret = lhs ? 1 : -1;
+        ret = lhs ? 1 : -1;
     }
     return ret;
   }

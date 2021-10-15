@@ -62,13 +62,13 @@ namespace zypp
        */
       bool setInitial( set_type new_r )
       {
-	setInitial();
-	bool changed = ( new_r != _current );
-	if ( changed )
-	{
-	  _current = std::move(new_r);
-	}
-	return changed;
+        setInitial();
+        bool changed = ( new_r != _current );
+        if ( changed )
+        {
+          _current = std::move(new_r);
+        }
+        return changed;
       }
 
 
@@ -77,21 +77,21 @@ namespace zypp
        */
       bool set( set_type new_r )
       {
-	bool changed = ( new_r != _current );
-	if ( changed )
-	{
-	  // build the initial (cur-add+rem) set in _current
-	  setDifference( _current, _added, _removed );
-	  _current.swap( _removed );
-	  _added.clear();
-	  _removed.clear();
+        bool changed = ( new_r != _current );
+        if ( changed )
+        {
+          // build the initial (cur-add+rem) set in _current
+          setDifference( _current, _added, _removed );
+          _current.swap( _removed );
+          _added.clear();
+          _removed.clear();
 
-	  const set_type & initial( _current );
-	  setDifference( initial, new_r, _removed );
-	  setDifference( new_r, initial, _added );
-	  _current.swap( new_r );
-	}
-	return changed;
+          const set_type & initial( _current );
+          setDifference( initial, new_r, _removed );
+          setDifference( new_r, initial, _added );
+          _current.swap( new_r );
+        }
+        return changed;
       }
 
       /** Add an element to the set and track changes.
@@ -99,13 +99,13 @@ namespace zypp
        */
       bool add( const value_type & val_r )
       {
-	bool done = _current.insert( val_r ).second;
-	if ( done )
-	{
-	  if ( ! _removed.erase( val_r ) )
-	    _added.insert( val_r );
-	}
-	return done;
+        bool done = _current.insert( val_r ).second;
+        if ( done )
+        {
+          if ( ! _removed.erase( val_r ) )
+            _added.insert( val_r );
+        }
+        return done;
       }
 
       /** Remove an element from the set and track changes.
@@ -113,13 +113,13 @@ namespace zypp
        */
       bool remove( const value_type & val_r )
       {
-	bool done = _current.erase( val_r );
-	if ( done )
-	{
-	  if ( ! _added.erase( val_r ) )
-	    _removed.insert( val_r );
-	}
-	return done;
+        bool done = _current.erase( val_r );
+        if ( done )
+        {
+          if ( ! _added.erase( val_r ) )
+            _removed.insert( val_r );
+        }
+        return done;
       }
       //@}
 
@@ -165,18 +165,18 @@ namespace zypp
       template <class TORDERED_SET, typename enable_if = typename TORDERED_SET::key_compare>
       static void setDifference( const TORDERED_SET & lhs, const TORDERED_SET & rhs, TORDERED_SET & result_r )
       {
-	// std::set_difference requires ordered sets!
-	std::set_difference( lhs.begin(), lhs.end(), rhs.begin(), rhs.end(),
-			     std::inserter( result_r, result_r.end() ),
-			     typename TORDERED_SET::key_compare() );
+        // std::set_difference requires ordered sets!
+        std::set_difference( lhs.begin(), lhs.end(), rhs.begin(), rhs.end(),
+                             std::inserter( result_r, result_r.end() ),
+                             typename TORDERED_SET::key_compare() );
       }
 
       template <class TUNORDERED_SET, typename enable_if = typename TUNORDERED_SET::hasher, typename = void>
       static void setDifference( const TUNORDERED_SET & lhs, const TUNORDERED_SET & rhs, TUNORDERED_SET & result_r )
       {
-	// std::set_difference requires ordered sets!
-	for ( const auto & l : lhs )
-	{ if ( rhs.find( l ) == rhs.end() ) result_r.insert( l ); }
+        // std::set_difference requires ordered sets!
+        for ( const auto & l : lhs )
+        { if ( rhs.find( l ) == rhs.end() ) result_r.insert( l ); }
       }
 
     private:

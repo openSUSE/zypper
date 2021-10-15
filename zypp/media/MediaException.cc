@@ -32,9 +32,9 @@ namespace zypp
     {
       str << form(_("Failed to mount %s on %s"), _source.c_str(), _target.c_str() );
       if( !_cmdout.empty())
-	str << ": " << _error << " (" << _cmdout << ")";
+        str << ": " << _error << " (" << _cmdout << ")";
       else
-	str << ": " << _error;
+        str << ": " << _error;
       return str;
     }
 
@@ -98,11 +98,11 @@ namespace zypp
     {
       if( _msg.empty())
       {
-	return str << _("Malformed URI") << ": " << _url;
+        return str << _("Malformed URI") << ": " << _url;
       }
       else
       {
-	return str << _msg << ": " << _url;
+        return str << _msg << ": " << _url;
       }
     }
 
@@ -161,9 +161,9 @@ namespace zypp
     std::ostream & MediaNotEjectedException::dumpOn( std::ostream & str ) const
     {
       if( _name.empty() )
-	return str << _("Cannot eject any media");
+        return str << _("Cannot eject any media");
       else
-	return str << form(_("Cannot eject media '%s'"), _name.c_str());
+        return str << form(_("Cannot eject media '%s'"), _name.c_str());
     }
 
     std::ostream & MediaUnauthorizedException::dumpOn( std::ostream & str ) const

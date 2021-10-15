@@ -363,14 +363,14 @@ namespace zypp
       }
       else
       {
-	if ( mode_r )
-	{
+        if ( mode_r )
+        {
           // not filesystem::assert_file as filesystem:: functions log,
-	  // and this FileWriter is not yet in place.
-	  int fd = ::open( file_r.c_str(), O_CREAT|O_EXCL, mode_r );
-	  if ( fd != -1 )
-	    ::close( fd );
-	}
+          // and this FileWriter is not yet in place.
+          int fd = ::open( file_r.c_str(), O_CREAT|O_EXCL, mode_r );
+          if ( fd != -1 )
+            ::close( fd );
+        }
         // set unbuffered write
         std::ofstream * fstr = 0;
         _outs.reset( (fstr = new std::ofstream( file_r.asString().c_str(), std::ios_base::app )) );
@@ -441,8 +441,8 @@ namespace zypp
         /** */
         virtual int writeout( const char* s, std::streamsize n )
         {
-	  //logger::putStream( _group, _level, _file, _func, _line, _buffer );
-	  //return n;
+          //logger::putStream( _group, _level, _file, _func, _line, _buffer );
+          //return n;
           if ( s && n )
             {
               const char * c = s;
@@ -537,35 +537,35 @@ namespace zypp
       struct LogControlImpl
       {
       public:
-	bool isExcessive() const
-	{ return _excessive; }
+        bool isExcessive() const
+        { return _excessive; }
 
         void excessive( bool onOff_r )
         { _excessive = onOff_r; }
 
 
         /** Hint for Formater whether to hide the thread name. */
-	bool hideThreadName() const
-	{
-	  if ( indeterminate(_hideThreadName) )
-	    _hideThreadName = ( zyppng::ThreadData::current().name() == ZYPP_MAIN_THREAD_NAME );
-	  return bool(_hideThreadName);
-	}
-	/** \overload Setter */
+        bool hideThreadName() const
+        {
+          if ( indeterminate(_hideThreadName) )
+            _hideThreadName = ( zyppng::ThreadData::current().name() == ZYPP_MAIN_THREAD_NAME );
+          return bool(_hideThreadName);
+        }
+        /** \overload Setter */
         void hideThreadName( bool onOff_r )
         { _hideThreadName = onOff_r; }
         /** \overload Static getter */
-	static bool instanceHideThreadName()
-	{
-	  auto impl = LogControlImpl::instance();
-	  return impl ? impl->hideThreadName() : false;
-	}
-	/** \overload Static setter */
+        static bool instanceHideThreadName()
+        {
+          auto impl = LogControlImpl::instance();
+          return impl ? impl->hideThreadName() : false;
+        }
+        /** \overload Static setter */
         static void instanceHideThreadName( bool onOff_r )
         {
-	  auto impl = LogControlImpl::instance();
-	  if ( impl ) impl->hideThreadName( onOff_r );
-	}
+          auto impl = LogControlImpl::instance();
+          if ( impl ) impl->hideThreadName( onOff_r );
+        }
 
 
         /** NULL _lineWriter indicates no loggin. */
@@ -598,7 +598,7 @@ namespace zypp
         LogClient    _logClient;
         std::ostream _no_stream;
         bool         _excessive;
-	mutable TriBool _hideThreadName = indeterminate;	///< Hint for Formater whether to hide the thread name.
+        mutable TriBool _hideThreadName = indeterminate;	///< Hint for Formater whether to hide the thread name.
 
         shared_ptr<LogControl::LineFormater> _lineFormater;
 
@@ -620,11 +620,11 @@ namespace zypp
               _streamtable[group_r][level_r].reset( new Loglinestream( group_r, level_r ) );
             }
           std::ostream & ret( _streamtable[group_r][level_r]->getStream( file_r, func_r, line_r ) );
-	  if ( !ret )
-	  {
-	    ret.clear();
-	    ret << "---<RESET LOGSTREAM FROM FAILED STATE]" << endl;
-	  }
+          if ( !ret )
+          {
+            ret.clear();
+            ret << "---<RESET LOGSTREAM FROM FAILED STATE]" << endl;
+          }
           return ret;
         }
 
@@ -777,22 +777,22 @@ namespace zypp
       std::string now( Date::now().form( "%Y-%m-%d %H:%M:%S" ) );
       std::string ret;
       if ( LogControlImpl::instanceHideThreadName() )
-	ret = str::form( "%s <%d> %s(%d) [%s] %s(%s):%d %s",
-			 now.c_str(), level_r,
-			 ( gethostname( hostname, 1024 ) ? nohostname : hostname ),
-			 getpid(),
-			 group_r.c_str(),
-			 file_r, func_r, line_r,
-			 message_r.c_str() );
+        ret = str::form( "%s <%d> %s(%d) [%s] %s(%s):%d %s",
+                         now.c_str(), level_r,
+                         ( gethostname( hostname, 1024 ) ? nohostname : hostname ),
+                         getpid(),
+                         group_r.c_str(),
+                         file_r, func_r, line_r,
+                         message_r.c_str() );
       else
-	ret = str::form( "%s <%d> %s(%d) [%s] %s(%s):%d {T:%s} %s",
-			 now.c_str(), level_r,
-			 ( gethostname( hostname, 1024 ) ? nohostname : hostname ),
-			 getpid(),
-			 group_r.c_str(),
-			 file_r, func_r, line_r,
-			 zyppng::ThreadData::current().name().c_str(),
-			 message_r.c_str() );
+        ret = str::form( "%s <%d> %s(%d) [%s] %s(%s):%d {T:%s} %s",
+                         now.c_str(), level_r,
+                         ( gethostname( hostname, 1024 ) ? nohostname : hostname ),
+                         getpid(),
+                         group_r.c_str(),
+                         file_r, func_r, line_r,
+                         zyppng::ThreadData::current().name().c_str(),
+                         message_r.c_str() );
       return ret;
     }
 

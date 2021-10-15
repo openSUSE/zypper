@@ -200,8 +200,8 @@ Pathname librpmDb::suggestedDbPath( const Pathname & root_r )
     // If a known dbpath exsists, we continue to use it
     for ( auto p : { "/var/lib/rpm", "/usr/lib/sysimage/rpm" } ) {
       if ( PathInfo( root_r/p, PathInfo::LSTAT/*!no symlink*/ ).isDir() ) {
-	MIL << "Suggest existing database at " << stringPath( root_r, p ) << endl;
-	return p;
+        MIL << "Suggest existing database at " << stringPath( root_r, p ) << endl;
+        return p;
       }
     }
   }

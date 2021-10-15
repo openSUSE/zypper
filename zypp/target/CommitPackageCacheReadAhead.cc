@@ -102,33 +102,33 @@ namespace zypp
       // _lastInteractive media. (just the PoolItem data)
       for_( it, commitList().begin(), commitList().end() )
       {
-	PoolItem pi( *it );
-	if ( ! sawCitem )
-	{
-	  if ( pi == citem_r )
-	    sawCitem = true;
-	  continue;
-	}
-	if ( IMediaKey( pi ) == _lastInteractive
-	  && pi.status().isToBeInstalled()
-	  && isKind<Package>(pi.resolvable()) )
-	{
-	  if ( ! pi->asKind<Package>()->isCached() )
-	  {
-	    ManagedFile fromSource( sourceProvidePackage( pi ) );
-	    if ( fromSource->empty() )
-	    {
-	      ERR << "Copy to cache failed on " << fromSource << endl;
-	      ZYPP_THROW( Exception("Copy to cache failed.") );
-	    }
-	    fromSource.resetDispose(); // keep the package file in the cache
-	    ++addToCache;
-	  }
-	}
+        PoolItem pi( *it );
+        if ( ! sawCitem )
+        {
+          if ( pi == citem_r )
+            sawCitem = true;
+          continue;
+        }
+        if ( IMediaKey( pi ) == _lastInteractive
+          && pi.status().isToBeInstalled()
+          && isKind<Package>(pi.resolvable()) )
+        {
+          if ( ! pi->asKind<Package>()->isCached() )
+          {
+            ManagedFile fromSource( sourceProvidePackage( pi ) );
+            if ( fromSource->empty() )
+            {
+              ERR << "Copy to cache failed on " << fromSource << endl;
+              ZYPP_THROW( Exception("Copy to cache failed.") );
+            }
+            fromSource.resetDispose(); // keep the package file in the cache
+            ++addToCache;
+          }
+        }
       }
 
       if ( addToCache )
-	MIL << "Cached " << _lastInteractive << ": " << addToCache << " items." << endl;
+        MIL << "Cached " << _lastInteractive << ": " << addToCache << " items." << endl;
     }
 
     ///////////////////////////////////////////////////////////////////
@@ -141,10 +141,10 @@ namespace zypp
       ManagedFile ret;
       if ( preloaded() )
       {
-	// Check whether it's cached.
-	ManagedFile ret( sourceProvideCachedPackage( citem_r ) );
-	if ( ! ret->empty() )
-	  return ret;
+        // Check whether it's cached.
+        ManagedFile ret( sourceProvideCachedPackage( citem_r ) );
+        if ( ! ret->empty() )
+          return ret;
       }
       // else: we head for sourceProvidePackage(), even if the package
       // was cached. The actual difference is that sourceProvidePackage
@@ -156,21 +156,21 @@ namespace zypp
       // switching back and forth...
       if ( onInteractiveMedia( citem_r ) )
       {
-	ret = sourceProvideCachedPackage( citem_r );
-	if ( ! ret->empty() )
-	  return ret;
+        ret = sourceProvideCachedPackage( citem_r );
+        if ( ! ret->empty() )
+          return ret;
 
-	IMediaKey current( citem_r );
-	if ( current != _lastInteractive )
-	{
-	  if ( _lastInteractive != IMediaKey() )
-	  {
-	    cacheLastInteractive( citem_r );
-	  }
+        IMediaKey current( citem_r );
+        if ( current != _lastInteractive )
+        {
+          if ( _lastInteractive != IMediaKey() )
+          {
+            cacheLastInteractive( citem_r );
+          }
 
-	  DBG << "Interactive change [" << ++_dbgChanges << "] from " << _lastInteractive << " to " << current << endl;
-	  _lastInteractive = current;
-	}
+          DBG << "Interactive change [" << ++_dbgChanges << "] from " << _lastInteractive << " to " << current << endl;
+          _lastInteractive = current;
+        }
       }
 
       // Provide and return the file from media.

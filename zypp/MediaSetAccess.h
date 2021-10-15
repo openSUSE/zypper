@@ -261,17 +261,17 @@ namespace zypp
       ///////////////////////////////////////////////////////////////////
       struct ReleaseFileGuard
       {
-	NON_COPYABLE( ReleaseFileGuard );
-	NON_MOVABLE( ReleaseFileGuard );
-	ReleaseFileGuard( MediaSetAccess & media_r, const OnMediaLocation & loc_r )
-	: _media( media_r )
-	, _loc( loc_r )
-	{}
-	~ReleaseFileGuard()
-	{ _media.releaseFile( _loc ); }
+        NON_COPYABLE( ReleaseFileGuard );
+        NON_MOVABLE( ReleaseFileGuard );
+        ReleaseFileGuard( MediaSetAccess & media_r, const OnMediaLocation & loc_r )
+        : _media( media_r )
+        , _loc( loc_r )
+        {}
+        ~ReleaseFileGuard()
+        { _media.releaseFile( _loc ); }
       private:
-	MediaSetAccess & _media;
-	const OnMediaLocation & _loc;
+        MediaSetAccess & _media;
+        const OnMediaLocation & _loc;
       };
 
       /**

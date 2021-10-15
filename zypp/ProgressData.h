@@ -143,27 +143,27 @@ namespace zypp
 
       class Data
       {
-	public:
-	  Data( value_type min_r, value_type max_r, value_type val_r )
-	  : _state( INIT ), _min( min_r ), _max( max_r ), _val( val_r )
-	  , _last_val( 0 ), _last_send( 0 )
-	  {}
+        public:
+          Data( value_type min_r, value_type max_r, value_type val_r )
+          : _state( INIT ), _min( min_r ), _max( max_r ), _val( val_r )
+          , _last_val( 0 ), _last_send( 0 )
+          {}
 
-	public:
-	  State       _state;
-	  std::string _name;
-	  value_type  _min;
-	  value_type  _max;
-	  value_type  _val;
+        public:
+          State       _state;
+          std::string _name;
+          value_type  _min;
+          value_type  _max;
+          value_type  _val;
 
-	  ReceiverFnc _receiver;
-	  value_type  _last_val;
-	  Date        _last_send;
+          ReceiverFnc _receiver;
+          value_type  _last_val;
+          Date        _last_send;
 
-	private:
-	  /** clone for RWCOW_pointer */
-	  friend Data * rwcowClone<Data>( const Data * rhs );
-	  Data * clone() const { return new Data( *this ); }
+        private:
+          /** clone for RWCOW_pointer */
+          friend Data * rwcowClone<Data>( const Data * rhs );
+          Data * clone() const { return new Data( *this ); }
       };
 
     public:
@@ -189,11 +189,11 @@ namespace zypp
 
       ~ProgressData()
       {
-	if ( _d->_state == RUN )
-	{
-	  _d->_state = END;
-	  report();
-	}
+        if ( _d->_state == RUN )
+        {
+          _d->_state = END;
+          report();
+        }
       }
 
     public:
@@ -245,16 +245,16 @@ namespace zypp
       /** Set new counter \c value. */
       bool set( value_type val_r )
       {
-	_d->_val = val_r;
-	return report();
+        _d->_val = val_r;
+        return report();
       }
 
       /** Set range and counter from an other \ref ProgressData. */
       bool set( const ProgressData & rhs )
       {
-	min( rhs.min() );
-	max( rhs.max() );
-	return set( rhs.val() );
+        min( rhs.min() );
+        max( rhs.max() );
+        return set( rhs.val() );
       }
 
       /** Increment counter \c value (default by 1). */

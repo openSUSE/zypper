@@ -28,8 +28,8 @@ BOOST_AUTO_TEST_CASE(digest)
   std::stringstream str2(data);
   std::stringstream str3(data);
 
-  BOOST_CHECK_EQUAL( Digest::digest( "sha1", str1 ), "142df4277c326f3549520478c188cab6e3b5d042" ); 
-  BOOST_CHECK_EQUAL( Digest::digest( "md5", str2 ), "f139a810b84d82d1f29fc53c5e59beae" ); 
+  BOOST_CHECK_EQUAL( Digest::digest( "sha1", str1 ), "142df4277c326f3549520478c188cab6e3b5d042" );
+  BOOST_CHECK_EQUAL( Digest::digest( "md5", str2 ), "f139a810b84d82d1f29fc53c5e59beae" );
   // FIXME i think it should throw
-  BOOST_CHECK_EQUAL( Digest::digest( "lalala", str3) , "" ); 
+  BOOST_CHECK_EQUAL( Digest::digest( "lalala", str3) , "" );
 }

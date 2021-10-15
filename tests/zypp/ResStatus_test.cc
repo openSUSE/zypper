@@ -150,7 +150,7 @@ void testTable( Transition transition, Evaluate evaluate )
 //
 
 #define DOCHECK( FROMSTATE, TOSTATE, C_DONE, C_STATE, C_CAUSER ) \
-	if ( ResStatus::FROMSTATE == fromState && TOSTATE == toState ) { C_DONE; CHECK_STATE( C_STATE ); C_CAUSER; }
+        if ( ResStatus::FROMSTATE == fromState && TOSTATE == toState ) { C_DONE; CHECK_STATE( C_STATE ); C_CAUSER; }
 
 void evaluateSetTransact( ResStatus::TransactValue fromState, ResStatus::TransactByValue fromBy,
                           bool                     toState,   ResStatus::TransactByValue toBy,
@@ -169,8 +169,8 @@ void evaluateSetTransact( ResStatus::TransactValue fromState, ResStatus::Transac
 }
 
 void evaluateSetSoftTransact( ResStatus::TransactValue fromState, ResStatus::TransactByValue fromBy,
-			      bool                     toState,   ResStatus::TransactByValue toBy,
-			      bool                     done,      ResStatus                  result )
+                              bool                     toState,   ResStatus::TransactByValue toBy,
+                              bool                     done,      ResStatus                  result )
 {
   ResStatus from;
   initStatus( fromState, fromBy, from );

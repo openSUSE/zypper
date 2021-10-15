@@ -42,7 +42,7 @@ namespace zypp
 //	CLASS NAME : SolverQueueItemLock
 
 class SolverQueueItemLock : public SolverQueueItem {
-    
+
   private:
 
     PoolItem _item;  	// the item to-be-locked
@@ -52,7 +52,7 @@ class SolverQueueItemLock : public SolverQueueItem {
 
     SolverQueueItemLock (const ResPool & pool, const PoolItem & item, bool soft = false);
     virtual ~SolverQueueItemLock();
-    
+
     // ---------------------------------- I/O
 
     virtual std::ostream & dumpOn( std::ostream & str ) const;
@@ -62,10 +62,10 @@ class SolverQueueItemLock : public SolverQueueItem {
 
     // ---------------------------------- accessors
 
-    bool isSoft (void) const { return _soft; }    
+    bool isSoft (void) const { return _soft; }
 
     // ---------------------------------- methods
-    
+
     virtual bool addRule (sat::detail::CQueue & q);
     virtual SolverQueueItem_Ptr copy (void) const;
     virtual int cmp (SolverQueueItem_constPtr item) const;

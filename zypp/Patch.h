@@ -74,12 +74,12 @@ namespace zypp
        * \ref asSring( const Patch::SeverityFlag & ).
        */
       enum SeverityFlag {
-	SEV_OTHER	= 1,	//!< unknown value specified
-	SEV_NONE	= 1<<1,	//!< no value specified
-	SEV_LOW		= 1<<2,	//!< Low
-	SEV_MODERATE	= 1<<3,	//!< Moderate
-	SEV_IMPORTANT	= 1<<4,	//!< Important
-	SEV_CRITICAL	= 1<<5	//!< Critical
+        SEV_OTHER	= 1,	//!< unknown value specified
+        SEV_NONE	= 1<<1,	//!< no value specified
+        SEV_LOW		= 1<<2,	//!< Low
+        SEV_MODERATE	= 1<<3,	//!< Moderate
+        SEV_IMPORTANT	= 1<<4,	//!< Important
+        SEV_CRITICAL	= 1<<5	//!< Critical
       };
       ZYPP_DECLARE_FLAGS(SeverityFlags, SeverityFlag);
 
@@ -114,9 +114,9 @@ namespace zypp
       template <class TContainer, typename = typename TContainer::value_type>
       bool isCategory( const TContainer & categories_r ) const
       {
-	for ( const std::string & el : categories_r )
-	{ if ( isCategory( el ) ) return true; }
-	return false;
+        for ( const std::string & el : categories_r )
+        { if ( isCategory( el ) ) return true; }
+        return false;
       }
 
       /** Patch category as enum of wellknown categories.
@@ -150,9 +150,9 @@ namespace zypp
       template <class TContainer, typename = typename TContainer::value_type>
       bool isSeverity( const TContainer & severities_r ) const
       {
-	for ( const std::string & el : severities_r )
-	{ if ( isSeverity( el ) ) return true; }
-	return false;
+        for ( const std::string & el : severities_r )
+        { if ( isSeverity( el ) ) return true; }
+        return false;
       }
 
       /** Severity string mapped to an enum.

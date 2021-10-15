@@ -159,7 +159,7 @@ namespace zypp
 
         /** TransformIterator returning an \ref iterator vaue of type \c TResult. */
         template<class TResult, class TAttr = TResult>
-	class TransformIterator;
+        class TransformIterator;
         //@}
 
       public:
@@ -331,7 +331,7 @@ namespace zypp
           detail::CDataiterator * get()        const  { return _dip; }
           const std::string & getstr()   const  { return _mstring; }
 
-	private:
+        private:
           detail::CDataiterator * _dip;
           std::string _mstring;
       };
@@ -512,7 +512,7 @@ namespace zypp
          * via \ref c_str and \ref asString.
          */
         IdString idStr() const;
-	/** \overload Directly returning the \c Id */
+        /** \overload Directly returning the \c Id */
         detail::IdType id() const
         { return idStr().id(); }
 

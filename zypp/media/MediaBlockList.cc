@@ -91,7 +91,7 @@ MediaBlockList::setChecksum(size_t blkno, std::string cstype, int csl, unsigned 
   if (!chksumlen)
     {
       if (blkno)
-	return;
+        return;
       chksumlen = csl;
       chksumtype = cstype;
       chksumpad = cspad;
@@ -110,7 +110,7 @@ MediaBlockList::setRsum(size_t blkno, int rsl, unsigned int rs, size_t rspad)
   if (!rsumlen)
     {
       if (blkno)
-	return;
+        return;
       rsumlen = rsl;
       rsumpad = rspad;
     }
@@ -309,27 +309,27 @@ MediaBlockList::reuseBlocks(FILE *wfp, std::string filename)
     {
       size_t blksize = blocks[0].size;
       if (nblks == 1 && rsumpad && rsumpad > blksize)
-	blksize = rsumpad;
+        blksize = rsumpad;
       // create hash of checksums
       unsigned int hm = rsums.size() * 2;
       while (hm & (hm - 1))
-	hm &= hm - 1;
+        hm &= hm - 1;
       hm = hm * 2 - 1;
       if (hm < 16383)
-	hm = 16383;
+        hm = 16383;
       unsigned int *ht = new unsigned int[hm + 1];
       memset(ht, 0, (hm + 1) * sizeof(unsigned int));
       for (unsigned int i = 0; i < rsums.size(); i++)
-	{
-	  if (blocks[i].size != blksize && (i != nblks - 1 || rsumpad != blksize))
-	    continue;
-	  unsigned int r = rsums[i];
-	  unsigned int h = r & hm;
-	  unsigned int hh = 7;
-	  while (ht[h])
-	    h = (h + hh++) & hm;
-	  ht[h] = i + 1;
-	}
+        {
+          if (blocks[i].size != blksize && (i != nblks - 1 || rsumpad != blksize))
+            continue;
+          unsigned int r = rsums[i];
+          unsigned int h = r & hm;
+          unsigned int hh = 7;
+          while (ht[h])
+            h = (h + hh++) & hm;
+          ht[h] = i + 1;
+        }
 
       unsigned char *buf = new unsigned char[blksize];
       unsigned char *buf2 = new unsigned char[blksize];
@@ -337,8 +337,8 @@ MediaBlockList::reuseBlocks(FILE *wfp, std::string filename)
       unsigned char *pushbackp = 0;
       int bshift = 0;
       if ((blksize & (blksize - 1)) == 0)
-	for (bshift = 0; size_t(1 << bshift) != blksize; bshift++)
-	  ;
+        for (bshift = 0; size_t(1 << bshift) != blksize; bshift++)
+          ;
       unsigned short a, b;
       a = b = 0;
       memset(buf, 0, blksize);
@@ -346,104 +346,104 @@ MediaBlockList::reuseBlocks(FILE *wfp, std::string filename)
       bool init = 1;
       int sql = nblks > 1 && chksumlen < 16 ? 2 : 1;
       while (!eof)
-	{
-	  for (size_t i = 0; i < blksize; i++)
-	    {
-	      int c;
-	      if (eof)
-		c = 0;
-	      else
-		{
-		   if (pushback)
-		    {
-		      c = *pushbackp++;
-		      pushback--;
-		    }
-		  else
-		    c = getc(fp);
-		  if (c == EOF)
-		    {
-		      eof = true;
-		      c = 0;
-		      if (!i || sql == 2)
-			break;
-		    }
-		}
-	      int oc = buf[i];
-	      buf[i] = c;
-	      a += c - oc;
-	      if (bshift)
-		b += a - (oc << bshift);
-	      else
-		b += a - oc * blksize;
-	      if (init)
-		{
-		  if (size_t(i) != blksize - 1)
-		    continue;
-		  init = 0;
-		}
-	      unsigned int r;
-	      if (rsumlen == 1)
-		r = ((unsigned int)b & 255);
-	      else if (rsumlen == 2)
-		r = ((unsigned int)b & 65535);
-	      else if (rsumlen == 3)
-		r = ((unsigned int)a & 255) << 16 | ((unsigned int)b & 65535);
-	      else
-		r = ((unsigned int)a & 65535) << 16 | ((unsigned int)b & 65535);
-	      unsigned int h = r & hm;
-	      unsigned int hh = 7;
-	      for (; ht[h]; h = (h + hh++) & hm)
-		{
-		  size_t blkno = ht[h] - 1;
-		  if (rsums[blkno] != r)
-		    continue;
-		  if (found[blkno])
-		    continue;
-		  if (sql == 2)
-		    {
-		      if (eof || blkno + 1 >= nblks)
-			continue;
-		      pushback = fetchnext(fp, buf2, blksize, pushback, pushbackp);
-		      pushbackp = buf2;
-		      if (!pushback)
-			continue;
-		      if (!checkRsum(blkno + 1, buf2, blksize))
-			continue;
-		    }
-		  if (!checkChecksumRotated(blkno, buf, blksize, i + 1))
-		    continue;
-		  if (sql == 2 && !checkChecksum(blkno + 1, buf2, blksize))
-		    continue;
-		  writeBlock(blkno, wfp, buf, blksize, i + 1, found);
-		  if (sql == 2)
-		    {
-		      writeBlock(blkno + 1, wfp, buf2, blksize, 0, found);
-		      pushback = 0;
-		      blkno++;
-		    }
-		  while (!eof)
-		    {
-		      blkno++;
-		      pushback = fetchnext(fp, buf2, blksize, pushback, pushbackp);
-		      pushbackp = buf2;
-		      if (!pushback)
-			break;
-		      if (!checkRsum(blkno, buf2, blksize))
-			break;
-		      if (!checkChecksum(blkno, buf2, blksize))
-			break;
-		      writeBlock(blkno, wfp, buf2, blksize, 0, found);
-		      pushback = 0;
-		    }
-		  init = false;
-		  memset(buf, 0, blksize);
-	 	  a = b = 0;
-		  i = size_t(-1);	// start with 0 on next iteration
-		  break;
-		}
-	    }
-	}
+        {
+          for (size_t i = 0; i < blksize; i++)
+            {
+              int c;
+              if (eof)
+                c = 0;
+              else
+                {
+                   if (pushback)
+                    {
+                      c = *pushbackp++;
+                      pushback--;
+                    }
+                  else
+                    c = getc(fp);
+                  if (c == EOF)
+                    {
+                      eof = true;
+                      c = 0;
+                      if (!i || sql == 2)
+                        break;
+                    }
+                }
+              int oc = buf[i];
+              buf[i] = c;
+              a += c - oc;
+              if (bshift)
+                b += a - (oc << bshift);
+              else
+                b += a - oc * blksize;
+              if (init)
+                {
+                  if (size_t(i) != blksize - 1)
+                    continue;
+                  init = 0;
+                }
+              unsigned int r;
+              if (rsumlen == 1)
+                r = ((unsigned int)b & 255);
+              else if (rsumlen == 2)
+                r = ((unsigned int)b & 65535);
+              else if (rsumlen == 3)
+                r = ((unsigned int)a & 255) << 16 | ((unsigned int)b & 65535);
+              else
+                r = ((unsigned int)a & 65535) << 16 | ((unsigned int)b & 65535);
+              unsigned int h = r & hm;
+              unsigned int hh = 7;
+              for (; ht[h]; h = (h + hh++) & hm)
+                {
+                  size_t blkno = ht[h] - 1;
+                  if (rsums[blkno] != r)
+                    continue;
+                  if (found[blkno])
+                    continue;
+                  if (sql == 2)
+                    {
+                      if (eof || blkno + 1 >= nblks)
+                        continue;
+                      pushback = fetchnext(fp, buf2, blksize, pushback, pushbackp);
+                      pushbackp = buf2;
+                      if (!pushback)
+                        continue;
+                      if (!checkRsum(blkno + 1, buf2, blksize))
+                        continue;
+                    }
+                  if (!checkChecksumRotated(blkno, buf, blksize, i + 1))
+                    continue;
+                  if (sql == 2 && !checkChecksum(blkno + 1, buf2, blksize))
+                    continue;
+                  writeBlock(blkno, wfp, buf, blksize, i + 1, found);
+                  if (sql == 2)
+                    {
+                      writeBlock(blkno + 1, wfp, buf2, blksize, 0, found);
+                      pushback = 0;
+                      blkno++;
+                    }
+                  while (!eof)
+                    {
+                      blkno++;
+                      pushback = fetchnext(fp, buf2, blksize, pushback, pushbackp);
+                      pushbackp = buf2;
+                      if (!pushback)
+                        break;
+                      if (!checkRsum(blkno, buf2, blksize))
+                        break;
+                      if (!checkChecksum(blkno, buf2, blksize))
+                        break;
+                      writeBlock(blkno, wfp, buf2, blksize, 0, found);
+                      pushback = 0;
+                    }
+                  init = false;
+                  memset(buf, 0, blksize);
+                  a = b = 0;
+                  i = size_t(-1);	// start with 0 on next iteration
+                  break;
+                }
+            }
+        }
       delete[] buf2;
       delete[] buf;
       delete[] ht;
@@ -455,31 +455,31 @@ MediaBlockList::reuseBlocks(FILE *wfp, std::string filename)
       off_t off = 0;
       unsigned char *buf = new unsigned char[bufl];
       for (size_t blkno = 0; blkno < blocks.size(); ++blkno)
-	{
-	  if (off > blocks[blkno].off)
-	    continue;
-	  size_t blksize = blocks[blkno].size;
-	  if (blksize > bufl)
-	    {
-	      delete[] buf;
-	      bufl = blksize;
+        {
+          if (off > blocks[blkno].off)
+            continue;
+          size_t blksize = blocks[blkno].size;
+          if (blksize > bufl)
+            {
+              delete[] buf;
+              bufl = blksize;
               buf = new unsigned char[bufl];
-	    }
-	  size_t skip = blocks[blkno].off - off;
-	  while (skip)
-	    {
-	      size_t l = skip > bufl ? bufl : skip;
-	      if (fread(buf, l, 1, fp) != 1)
-		break;
-	      skip -= l;
-	      off += l;
-	    }
-	  if (fread(buf, blksize, 1, fp) != 1)
-	    break;
-	  if (checkChecksum(blkno, buf, blksize))
-	    writeBlock(blkno, wfp, buf, blksize, 0, found);
-	  off += blksize;
-	}
+            }
+          size_t skip = blocks[blkno].off - off;
+          while (skip)
+            {
+              size_t l = skip > bufl ? bufl : skip;
+              if (fread(buf, l, 1, fp) != 1)
+                break;
+              skip -= l;
+              off += l;
+            }
+          if (fread(buf, blksize, 1, fp) != 1)
+            break;
+          if (checkChecksum(blkno, buf, blksize))
+            writeBlock(blkno, wfp, buf, blksize, 0, found);
+          off += blksize;
+        }
     }
   if (!found[nblks])
     return;
@@ -491,17 +491,17 @@ MediaBlockList::reuseBlocks(FILE *wfp, std::string filename)
   for (size_t blkno = 0; blkno < blocks.size(); ++blkno)
     {
       if (!found[blkno])
-	{
-	  // still need it
-	  nblocks.push_back(blocks[blkno]);
-	  if (chksumlen && (blkno + 1) * chksumlen <= chksums.size())
-	    {
-	      nchksums.resize(nblocks.size() * chksumlen);
-	      memcpy(&nchksums[(nblocks.size() - 1) * chksumlen], &chksums[blkno * chksumlen], chksumlen);
-	    }
-	  if (rsumlen && (blkno + 1) <= rsums.size())
-	    nrsums.push_back(rsums[blkno]);
-	}
+        {
+          // still need it
+          nblocks.push_back(blocks[blkno]);
+          if (chksumlen && (blkno + 1) * chksumlen <= chksums.size())
+            {
+              nchksums.resize(nblocks.size() * chksumlen);
+              memcpy(&nchksums[(nblocks.size() - 1) * chksumlen], &chksums[blkno * chksumlen], chksumlen);
+            }
+          if (rsumlen && (blkno + 1) <= rsums.size())
+            nrsums.push_back(rsums[blkno]);
+        }
     }
   blocks = nblocks;
   chksums = nchksums;
@@ -533,16 +533,16 @@ MediaBlockList::asString() const
       long long size=blocks[i].size;
       s += zypp::str::form("  (%8lld, %8lld)", off, size);
       if (chksumlen && chksums.size() >= (i + 1) * chksumlen)
-	{
-	  s += "  " + chksumtype + ":";
-	  for (j = 0; j < size_t(chksumlen); j++)
-	    s += zypp::str::form("%02hhx", chksums[i * chksumlen + j]);
-	}
+        {
+          s += "  " + chksumtype + ":";
+          for (j = 0; j < size_t(chksumlen); j++)
+            s += zypp::str::form("%02hhx", chksums[i * chksumlen + j]);
+        }
       if (rsumlen && rsums.size() > i)
-	{
-	  s += "  RSUM:";
-	  s += zypp::str::form("%0*x", 2 * rsumlen, rsums[i]);
-	}
+        {
+          s += "  RSUM:";
+          s += zypp::str::form("%0*x", 2 * rsumlen, rsums[i]);
+        }
       s += "\n";
     }
   s += "]";

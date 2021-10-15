@@ -48,19 +48,19 @@ namespace zypp
       class RepoIndex : public base::ReferenceCounted, private base::NonCopyable
       {
         friend class ContentFileReader;
-	public:
-	  typedef std::map<std::string, CheckSum> FileChecksumMap;
+        public:
+          typedef std::map<std::string, CheckSum> FileChecksumMap;
 
-	  Pathname descrdir;
-	  Pathname datadir;
+          Pathname descrdir;
+          Pathname datadir;
 
-	  FileChecksumMap metaFileChecksums;
+          FileChecksumMap metaFileChecksums;
           FileChecksumMap mediaFileChecksums;
-	  FileChecksumMap signingKeys;
+          FileChecksumMap signingKeys;
 
-	protected:
-	  /** Overload to realize std::ostream & operator\<\<. */
-	  virtual std::ostream & dumpOn( std::ostream & str ) const;
+        protected:
+          /** Overload to realize std::ostream & operator\<\<. */
+          virtual std::ostream & dumpOn( std::ostream & str ) const;
       };
       //////////////////////////////////////////////////////////////////
 

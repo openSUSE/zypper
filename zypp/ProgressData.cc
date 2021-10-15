@@ -40,27 +40,27 @@ namespace zypp
       value_type newVal = _d->_val * 100 / ( _d->_max - _d->_min );
 
       if ( newVal - _d->_last_val > 10
-	   || now - _d->_last_send > 1
-	   || ( _d->_last_val == 0 && newVal > 0 )
-	   || ( newVal == 100 && _d->_last_val != 100 )
-	   || ( newVal != 100 && _d->_last_val == 100 )
-	   || _d->_state != RUN /*INIT||END*/ )
+           || now - _d->_last_send > 1
+           || ( _d->_last_val == 0 && newVal > 0 )
+           || ( newVal == 100 && _d->_last_val != 100 )
+           || ( newVal != 100 && _d->_last_val == 100 )
+           || _d->_state != RUN /*INIT||END*/ )
       {
-	_d->_last_val  = newVal;
-	_d->_last_send = now;
+        _d->_last_val  = newVal;
+        _d->_last_send = now;
       }
       else
-	return true;	// skip report, continue per default
+        return true;	// skip report, continue per default
     }
     else
     {
       if ( now - _d->_last_send > 1 || _d->_state != RUN /*INIT||END*/ )
       {
-	_d->_last_val  = _d->_val;
-	_d->_last_send = now;
+        _d->_last_val  = _d->_val;
+        _d->_last_send = now;
       }
       else
-	return true;	// skip report, continue per default
+        return true;	// skip report, continue per default
     }
 
     // now send report
@@ -74,13 +74,13 @@ namespace zypp
     {
       if ( ! _d->_receiver( *this ) )
       {
-	if ( _d->_state != END )
-	{
-	  WAR << "User request to ABORT pending action. "
-	  << str::form( "{#%u|%s}(%lld%s)", numericId(), name().c_str(),
-			_d->_last_val, ( hasRange() ? "%" : "!" ) ) << endl;
-	}
-	return false;	// aborted by user
+        if ( _d->_state != END )
+        {
+          WAR << "User request to ABORT pending action. "
+          << str::form( "{#%u|%s}(%lld%s)", numericId(), name().c_str(),
+                        _d->_last_val, ( hasRange() ? "%" : "!" ) ) << endl;
+        }
+        return false;	// aborted by user
       }
     }
     else if ( _d->_state == END )
@@ -101,12 +101,12 @@ namespace zypp
     if ( obj.hasRange() )
     {
       return str << str::form( "{%u|%s}[%lld,%lld](%lld)%lld%%)",
-			       obj.numericId(), obj.name().c_str(),
-			       obj.min(), obj.max(), obj.val(), obj.reportValue() );
+                               obj.numericId(), obj.name().c_str(),
+                               obj.min(), obj.max(), obj.val(), obj.reportValue() );
     }
     return str << str::form( "{%u|%s}[-,-](%lld)",
-			     obj.numericId(), obj.name().c_str(),
-			     obj.val() );
+                             obj.numericId(), obj.name().c_str(),
+                             obj.val() );
   }
 
   /******************************************************************

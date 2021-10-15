@@ -54,12 +54,12 @@ namespace zypp
       repo::RepoType ret = repo::RepoType::NONE;
       if ( PathInfo(path_r).isDir() )
       {
-	if ( PathInfo(path_r/"/repodata/repomd.xml").isFile() )
-	{ ret = repo::RepoType::RPMMD; }
-	else if ( PathInfo(path_r/"/content").isFile() )
-	{ ret = repo::RepoType::YAST2; }
-	else if ( PathInfo(path_r/"/cookie").isFile() )
-	{ ret = repo::RepoType::RPMPLAINDIR; }
+        if ( PathInfo(path_r/"/repodata/repomd.xml").isFile() )
+        { ret = repo::RepoType::RPMMD; }
+        else if ( PathInfo(path_r/"/content").isFile() )
+        { ret = repo::RepoType::YAST2; }
+        else if ( PathInfo(path_r/"/cookie").isFile() )
+        { ret = repo::RepoType::RPMPLAINDIR; }
       }
       DBG << "Probed cached type " << ret << " at " << path_r << endl;
       return ret;
@@ -103,7 +103,7 @@ namespace zypp
     repo::RepoType type() const
     {
       if ( _type == repo::RepoType::NONE )
-	setProbedType( probeCache( metadataPath() / path ) );
+        setProbedType( probeCache( metadataPath() / path ) );
       return _type;
     }
 
@@ -114,22 +114,22 @@ namespace zypp
       Pathname ret;
       if ( !metadataPath().empty() )
       {
-	std::string licenseStem( "license" );
-	if ( !name_r.empty() )
-	{
-	  licenseStem += "-";
-	  licenseStem += name_r;
-	}
+        std::string licenseStem( "license" );
+        if ( !name_r.empty() )
+        {
+          licenseStem += "-";
+          licenseStem += name_r;
+        }
 
-	filesystem::Glob g;
-	// TODO: REPOMD: this assumes we know the name of the tarball. In fact
-	// we'd need to get the file from repomd.xml (<data type="license[-name_r]">)
-	g.add( metadataPath() / path / ("repodata/*"+licenseStem+".tar.gz") );
-	if ( g.empty() )
-	  g.add( metadataPath() / path / (licenseStem+".tar.gz") );
+        filesystem::Glob g;
+        // TODO: REPOMD: this assumes we know the name of the tarball. In fact
+        // we'd need to get the file from repomd.xml (<data type="license[-name_r]">)
+        g.add( metadataPath() / path / ("repodata/*"+licenseStem+".tar.gz") );
+        if ( g.empty() )
+          g.add( metadataPath() / path / (licenseStem+".tar.gz") );
 
-	if ( !g.empty() )
-	  ret = *g.begin();
+        if ( !g.empty() )
+          ret = *g.begin();
       }
       return ret;
     }
@@ -141,8 +141,8 @@ namespace zypp
       {
         emptybaseurls = true;
         DBG << "MetadataPath: " << metadataPath() << endl;
-	repo::RepoMirrorList rmurls( mlurl, metadataPath(), _mirrorListForceMetalink );
-	_baseUrls.raw().insert( _baseUrls.raw().end(), rmurls.getUrls().begin(), rmurls.getUrls().end() );
+        repo::RepoMirrorList rmurls( mlurl, metadataPath(), _mirrorListForceMetalink );
+        _baseUrls.raw().insert( _baseUrls.raw().end(), rmurls.getUrls().begin(), rmurls.getUrls().end() );
       }
       return _baseUrls;
     }
@@ -171,43 +171,43 @@ namespace zypp
     {
       if ( !_keywords.first && ! metadataPath().empty() )
       {
-	// HACK directly check master index file until RepoManager offers
-	// some content probing and zypper uses it.
-	/////////////////////////////////////////////////////////////////
-	MIL << "Empty keywords...." << metadataPath() << endl;
-	Pathname master;
-	if ( PathInfo( (master=metadataPath()/"/repodata/repomd.xml") ).isFile() )
-	{
-	  //MIL << "GO repomd.." << endl;
-	  xml::Reader reader( master );
-	  while ( reader.seekToNode( 2, "content" ) )
-	  {
-	    _keywords.second.insert( reader.nodeText().asString() );
-	    reader.seekToEndNode( 2, "content" );
-	  }
-	  _keywords.first = true;	// valid content in _keywords even if empty
-	}
-	else if ( PathInfo( (master=metadataPath()/"/content") ).isFile() )
-	{
-	  //MIL << "GO content.." << endl;
-	  iostr::forEachLine( InputStream( master ),
+        // HACK directly check master index file until RepoManager offers
+        // some content probing and zypper uses it.
+        /////////////////////////////////////////////////////////////////
+        MIL << "Empty keywords...." << metadataPath() << endl;
+        Pathname master;
+        if ( PathInfo( (master=metadataPath()/"/repodata/repomd.xml") ).isFile() )
+        {
+          //MIL << "GO repomd.." << endl;
+          xml::Reader reader( master );
+          while ( reader.seekToNode( 2, "content" ) )
+          {
+            _keywords.second.insert( reader.nodeText().asString() );
+            reader.seekToEndNode( 2, "content" );
+          }
+          _keywords.first = true;	// valid content in _keywords even if empty
+        }
+        else if ( PathInfo( (master=metadataPath()/"/content") ).isFile() )
+        {
+          //MIL << "GO content.." << endl;
+          iostr::forEachLine( InputStream( master ),
                             [this]( int num_r, std::string line_r )->bool
                             {
                               if ( str::startsWith( line_r, "REPOKEYWORDS" ) )
-			      {
-				std::vector<std::string> words;
-				if ( str::split( line_r, std::back_inserter(words) ) > 1
-				  && words[0].length() == 12 /*"REPOKEYWORDS"*/ )
-				{
-				  this->_keywords.second.insert( ++words.begin(), words.end() );
-				}
-				return true; // mult. occurrances are ok.
-			      }
-			      return( ! str::startsWith( line_r, "META " ) );	// no need to parse into META section.
-			    } );
-	  _keywords.first = true;	// valid content in _keywords even if empty
-	}
-	/////////////////////////////////////////////////////////////////
+                              {
+                                std::vector<std::string> words;
+                                if ( str::split( line_r, std::back_inserter(words) ) > 1
+                                  && words[0].length() == 12 /*"REPOKEYWORDS"*/ )
+                                {
+                                  this->_keywords.second.insert( ++words.begin(), words.end() );
+                                }
+                                return true; // mult. occurrances are ok.
+                              }
+                              return( ! str::startsWith( line_r, "META " ) );	// no need to parse into META section.
+                            } );
+          _keywords.first = true;	// valid content in _keywords even if empty
+        }
+        /////////////////////////////////////////////////////////////////
       }
       return _keywords.first;
     }
@@ -222,13 +222,13 @@ namespace zypp
     TriBool internalValidRepoSignature() const
     {
       if ( ! indeterminate(_validRepoSignature) )
-	return _validRepoSignature;
+        return _validRepoSignature;
       // check metadata:
       if ( ! metadataPath().empty() )
       {
-	// A missing ".repo_gpgcheck" might be plaindir(no Downloader) or not yet refreshed signed repo!
-	TriBool linkval = triBoolFromPath( metadataPath() / ".repo_gpgcheck" );
-	return linkval;
+        // A missing ".repo_gpgcheck" might be plaindir(no Downloader) or not yet refreshed signed repo!
+        TriBool linkval = triBoolFromPath( metadataPath() / ".repo_gpgcheck" );
+        return linkval;
       }
       return indeterminate;
     }
@@ -237,16 +237,16 @@ namespace zypp
     {
       if ( PathInfo(metadataPath()).isDir() )
       {
-	Pathname gpgcheckFile( metadataPath() / ".repo_gpgcheck" );
-	if ( PathInfo(gpgcheckFile).isExist() )
-	{
-	  TriBool linkval( indeterminate );
-	  if ( triBoolFromPath( gpgcheckFile, linkval ) && linkval == value_r )
-	    return;	// existing symlink fits value_r
-	  else
-	    filesystem::unlink( gpgcheckFile );	// will write a new one
-	}
-	filesystem::symlink( asString(value_r), gpgcheckFile );
+        Pathname gpgcheckFile( metadataPath() / ".repo_gpgcheck" );
+        if ( PathInfo(gpgcheckFile).isExist() )
+        {
+          TriBool linkval( indeterminate );
+          if ( triBoolFromPath( gpgcheckFile, linkval ) && linkval == value_r )
+            return;	// existing symlink fits value_r
+          else
+            filesystem::unlink( gpgcheckFile );	// will write a new one
+        }
+        filesystem::symlink( asString(value_r), gpgcheckFile );
       }
       _validRepoSignature = value_r;
     }
@@ -277,13 +277,13 @@ namespace zypp
 
       bool known = true;
       if ( linkval == truePath )
-	ret_r = true;
+        ret_r = true;
       else if ( linkval == falsePath )
-	ret_r = false;
+        ret_r = false;
       else if ( linkval == indeterminatePath )
-	ret_r = indeterminate;
+        ret_r = indeterminate;
       else
-	known = false;
+        known = false;
       return known;
     }
 
@@ -336,14 +336,14 @@ namespace zypp
     Pathname metadataPath() const
     {
       if ( usesAutoMethadataPaths() )
-	return _metadataPath.dirname() / "%RAW%";
+        return _metadataPath.dirname() / "%RAW%";
       return _metadataPath;
     }
 
     Pathname packagesPath() const
     {
       if ( _packagesPath.empty() && usesAutoMethadataPaths() )
-	return _metadataPath.dirname() / "%PKG%";
+        return _metadataPath.dirname() / "%PKG%";
       return _packagesPath;
     }
 
@@ -478,28 +478,28 @@ namespace zypp
     switch ( mode_r )
     {
       case GpgCheck::On:
-	changed = changeGpgCheckTo( ogpg, true,          indeterminate, indeterminate );
-	break;
+        changed = changeGpgCheckTo( ogpg, true,          indeterminate, indeterminate );
+        break;
       case GpgCheck::Strict:
-	changed = changeGpgCheckTo( ogpg, true,          true,          true          );
-	break;
+        changed = changeGpgCheckTo( ogpg, true,          true,          true          );
+        break;
       case GpgCheck::AllowUnsigned:
-	changed = changeGpgCheckTo( ogpg, true,          false,         false         );
-	break;
+        changed = changeGpgCheckTo( ogpg, true,          false,         false         );
+        break;
       case GpgCheck::AllowUnsignedRepo:
-	changed = changeGpgCheckTo( ogpg, true,          false,         indeterminate );
-	break;
+        changed = changeGpgCheckTo( ogpg, true,          false,         indeterminate );
+        break;
       case GpgCheck::AllowUnsignedPackage:
-	changed = changeGpgCheckTo( ogpg, true,          indeterminate, false         );
-	break;
+        changed = changeGpgCheckTo( ogpg, true,          indeterminate, false         );
+        break;
       case GpgCheck::Default:
-	changed = changeGpgCheckTo( ogpg, indeterminate, indeterminate, indeterminate );
-	break;
+        changed = changeGpgCheckTo( ogpg, indeterminate, indeterminate, indeterminate );
+        break;
       case GpgCheck::Off:
-	changed = changeGpgCheckTo( ogpg, false,         indeterminate, indeterminate );
-	break;
+        changed = changeGpgCheckTo( ogpg, false,         indeterminate, indeterminate );
+        break;
       case GpgCheck::indeterminate:	// no change
-	break;
+        break;
     }
 
     if ( changed )
@@ -570,33 +570,33 @@ namespace zypp
     // all keys specified in gpgkey= entries
     if ( !tempKeyRing.isKeyTrusted(keyID_r) ) {
       if ( ! gpgKeyUrlsEmpty() ) {
-	// translator: %1% is a gpg key ID like 3DBDC284
-	//             %2% is a repositories name
-	JobReport::info( str::Format(_("Looking for gpg key ID %1% in repository %2%.") ) % keyIDStr % asUserString() );
-	for ( const Url &url : gpgKeyUrls() ) {
-	  try {
-	    JobReport::info( "  gpgkey=" + url.asString() );
-	    ManagedFile f = MediaSetAccess::provideOptionalFileFromUrl( url );
-	    if ( f->empty() )
-	      continue;
+        // translator: %1% is a gpg key ID like 3DBDC284
+        //             %2% is a repositories name
+        JobReport::info( str::Format(_("Looking for gpg key ID %1% in repository %2%.") ) % keyIDStr % asUserString() );
+        for ( const Url &url : gpgKeyUrls() ) {
+          try {
+            JobReport::info( "  gpgkey=" + url.asString() );
+            ManagedFile f = MediaSetAccess::provideOptionalFileFromUrl( url );
+            if ( f->empty() )
+              continue;
 
-	    PublicKey key(f);
-	    if ( !key.isValid() )
-	      continue;
+            PublicKey key(f);
+            if ( !key.isValid() )
+              continue;
 
-	    // import all keys into our temporary keyring
-	    tempKeyRing.multiKeyImport(f, true);
+            // import all keys into our temporary keyring
+            tempKeyRing.multiKeyImport(f, true);
 
-	  } catch ( const std::exception & e ) {
-	    //ignore and continue to next url
-	    ZYPP_CAUGHT(e);
-	    MIL << "Key import from url:'"<<url<<"' failed." << endl;
-	  }
-	}
+          } catch ( const std::exception & e ) {
+            //ignore and continue to next url
+            ZYPP_CAUGHT(e);
+            MIL << "Key import from url:'"<<url<<"' failed." << endl;
+          }
+        }
       }
       else {
-	// translator: %1% is a repositories name
-	JobReport::info( str::Format(_("Repository %1% does not define additional 'gpgkey=' URLs.") ) % asUserString() );
+        // translator: %1% is a repositories name
+        JobReport::info( str::Format(_("Repository %1% does not define additional 'gpgkey=' URLs.") ) % asUserString() );
       }
     }
 
@@ -635,7 +635,7 @@ namespace zypp
   {
     for ( const auto & url : _pimpl->baseUrls().raw() )	// Raw unique!
       if ( url == url_r )
-	return;
+        return;
     _pimpl->baseUrls().raw().push_back( url_r );
   }
 
@@ -823,7 +823,7 @@ namespace zypp
     // now extract the license file.
     static const std::string licenseFileFallback( "license.txt" );
     std::string licenseFile( !getLang ? licenseFileFallback
-				      : str::form( "license.%s.txt", getLang.c_str() ) );
+                                      : str::form( "license.%s.txt", getLang.c_str() ) );
 
     ExternalProgram::Arguments cmd;
     cmd.push_back( "tar" );
@@ -895,7 +895,7 @@ namespace zypp
     // print if non empty value
     auto strif( [&] ( const std::string & tag_r, const std::string & value_r ) {
       if ( ! value_r.empty() )
-	str << tag_r << value_r << std::endl;
+        str << tag_r << value_r << std::endl;
     });
 
     strif( (_pimpl->_mirrorListForceMetalink ? "- metalink    : " : "- mirrorlist  : "), rawMirrorListUrl().asString() );
@@ -907,9 +907,9 @@ namespace zypp
 #define OUTS(T,B) ( indeterminate(T) ? (std::string("D(")+(B?"Y":"N")+")") : ((bool)T?"Y":"N") )
     str << "- gpgcheck    : " << OUTS(_pimpl->rawGpgCheck(),gpgCheck())
                               << " repo" << OUTS(_pimpl->rawRepoGpgCheck(),repoGpgCheck()) << (repoGpgCheckIsMandatory() ? "* ": " " )
-			      << "sig" << asString( validRepoSignature(), "?", "Y", "N" )
-			      << " pkg" << OUTS(_pimpl->rawPkgGpgCheck(),pkgGpgCheck()) << (pkgGpgCheckIsMandatory() ? "* ": " " )
-			      << std::endl;
+                              << "sig" << asString( validRepoSignature(), "?", "Y", "N" )
+                              << " pkg" << OUTS(_pimpl->rawPkgGpgCheck(),pkgGpgCheck()) << (pkgGpgCheckIsMandatory() ? "* ": " " )
+                              << std::endl;
 #undef OUTS
 
     for ( const auto & url : _pimpl->gpgKeyUrls().raw() )
@@ -940,7 +940,7 @@ namespace zypp
       for ( const auto & url : _pimpl->baseUrls().raw() )
       {
         str << indent << hotfix1050625::asString( url ) << endl;
-	if ( indent.empty() ) indent = "        ";	// "baseurl="
+        if ( indent.empty() ) indent = "        ";	// "baseurl="
       }
     }
 
@@ -969,9 +969,9 @@ namespace zypp
       std::string indent( "gpgkey=");
       for ( const auto & url : _pimpl->gpgKeyUrls().raw() )
       {
-	str << indent << url << endl;
-	if ( indent[0] != ' ' )
-	  indent = "       ";
+        str << indent << url << endl;
+        if ( indent[0] != ' ' )
+          indent = "       ";
       }
     }
 
@@ -1016,7 +1016,7 @@ namespace zypp
     if ( _pimpl->baseurl2dump() )
     {
       for_( it, baseUrlsBegin(), baseUrlsEnd() )	// !transform iterator replaces variables
-	str << "<url>" << escape((*it).asString()) << "</url>" << endl;
+        str << "<url>" << escape((*it).asString()) << "</url>" << endl;
     }
 
     str << "</repo>" << endl;

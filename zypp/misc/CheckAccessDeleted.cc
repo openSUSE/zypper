@@ -175,13 +175,13 @@ namespace zypp
       // RpmDb access is blocked while the Target is not initialized.
       // Launching the Target just for this query would be an overkill.
       struct TmpUnblock {
-	TmpUnblock()
-	: _wasBlocked( librpmDb::isBlocked() )
-	{ if ( _wasBlocked ) librpmDb::unblockAccess(); }
-	~TmpUnblock()
-	{ if ( _wasBlocked ) librpmDb::blockAccess(); }
+        TmpUnblock()
+        : _wasBlocked( librpmDb::isBlocked() )
+        { if ( _wasBlocked ) librpmDb::unblockAccess(); }
+        ~TmpUnblock()
+        { if ( _wasBlocked ) librpmDb::blockAccess(); }
       private:
-	bool _wasBlocked;
+        bool _wasBlocked;
       } tmpUnblock;
 
       librpmDb::db_const_iterator it;
@@ -350,7 +350,7 @@ namespace zypp
         , "/dev/"
         , "/tmp/"
         , "/proc/"
-	, "/memfd:"
+        , "/memfd:"
       };
       for_( it, arrayBegin( black ), arrayEnd( black ) )
       {
@@ -536,15 +536,15 @@ namespace zypp
     str::smatch what;
     std::string ret;
     iostr::simpleParseFile( InputStream( Pathname("/proc")/pid/"cgroup" ),
-			    [&]( int num_r, std::string line_r )->bool
-			    {
-			      if ( str::regex_match( line_r, what, rx ) )
-			      {
-				ret = what[3];
-				return false;	// stop after match
-			      }
-			      return true;
-			    } );
+                            [&]( int num_r, std::string line_r )->bool
+                            {
+                              if ( str::regex_match( line_r, what, rx ) )
+                              {
+                                ret = what[3];
+                                return false;	// stop after match
+                              }
+                              return true;
+                            } );
     return ret;
   }
 

@@ -291,7 +291,7 @@ namespace zyppng {
     if ( req->_myMirror )
       req->_myMirror->startTransfer();
   }
- 
+
   bool RangeDownloaderBaseState::assertExpectedFilesize( off_t currentFilesize )
   {
     const off_t expFSize = stateMachine()._spec.expectedFileSize();

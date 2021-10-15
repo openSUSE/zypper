@@ -365,9 +365,9 @@ namespace zypp
       cacheLocation = cacheDir / resource_r.filename();
       if ( PathInfo(cacheLocation).isExist() && is_checksum( cacheLocation, resource_r.checksum() ) )
       {
-	MIL << "file " << resource_r.filename() << " found in cache " << cacheDir << endl;
-	swap( ret, cacheLocation );
-	return ret;
+        MIL << "file " << resource_r.filename() << " found in cache " << cacheDir << endl;
+        swap( ret, cacheLocation );
+        return ret;
       }
     }
 
@@ -410,24 +410,24 @@ namespace zypp
   {
       auto fnc_addIfInContent( [&]( const std::string & index_r ) -> bool
       {
-	if ( find( content.begin(), content.end(), filesystem::DirEntry(index_r,filesystem::FT_FILE) ) == content.end() )
-	  return false;
-	// add the index of this directory
-	OnMediaLocation indexloc( resource );
-	indexloc.changeFilename( resource.filename() + index_r );
-	addIndex( indexloc );
-	// we need to read it now
-	downloadAndReadIndexList( media, dest_dir );
-	return true;
+        if ( find( content.begin(), content.end(), filesystem::DirEntry(index_r,filesystem::FT_FILE) ) == content.end() )
+          return false;
+        // add the index of this directory
+        OnMediaLocation indexloc( resource );
+        indexloc.changeFilename( resource.filename() + index_r );
+        addIndex( indexloc );
+        // we need to read it now
+        downloadAndReadIndexList( media, dest_dir );
+        return true;
       } );
 
       if ( _options & AutoAddChecksumsIndexes )
       {
-	fnc_addIfInContent( "CHECKSUMS" ) || fnc_addIfInContent( "SHA1SUMS" );
+        fnc_addIfInContent( "CHECKSUMS" ) || fnc_addIfInContent( "SHA1SUMS" );
       }
       if ( _options & AutoAddContentFileIndexes )
       {
-	fnc_addIfInContent( "content" );
+        fnc_addIfInContent( "content" );
       }
   }
 
@@ -463,13 +463,13 @@ namespace zypp
       MIL << "Adding directory " << resource.filename() << endl;
       filesystem::DirContent content;
       try {
-	getDirectoryContent(media, resource, content);
+        getDirectoryContent(media, resource, content);
       }
       catch ( media::MediaFileNotFoundException & exception )
       {
-	ZYPP_CAUGHT( exception );
-	WAR << "Skiping subtree hidden at " << resource.filename() << endl;
-	return;
+        ZYPP_CAUGHT( exception );
+        WAR << "Skiping subtree hidden at " << resource.filename() << endl;
+        return;
       }
 
       // this method test for the option flags so indexes are added
@@ -530,9 +530,9 @@ namespace zypp
       Pathname tmpFile = locateInCache( resource, destDir_r );
       if ( tmpFile.empty() )
       {
-	MIL << "Not found in cache, retrieving..." << endl;
-	tmpFile = media_r.provideFile( resource, resource.optional() ? MediaSetAccess::PROVIDE_NON_INTERACTIVE : MediaSetAccess::PROVIDE_DEFAULT );
-	releaseFileGuard.reset( new MediaSetAccess::ReleaseFileGuard( media_r, resource ) ); // release it when we leave the block
+        MIL << "Not found in cache, retrieving..." << endl;
+        tmpFile = media_r.provideFile( resource, resource.optional() ? MediaSetAccess::PROVIDE_NON_INTERACTIVE : MediaSetAccess::PROVIDE_DEFAULT );
+        releaseFileGuard.reset( new MediaSetAccess::ReleaseFileGuard( media_r, resource ) ); // release it when we leave the block
       }
 
       // The final destination: locateInCache also checks destFullPath!
@@ -540,35 +540,35 @@ namespace zypp
       // care it gets deleted, in case the validation fails.
       ManagedFile destFullPath( destDir_r / resource.filename() );
       if ( tmpFile == destFullPath )
-	destFullPath.setDispose( filesystem::unlink );
+        destFullPath.setDispose( filesystem::unlink );
 
       // validate the file (throws if not valid)
       validate( tmpFile, jobp_r->checkers );
 
       // move it to the final destination
       if ( tmpFile == destFullPath )
-	destFullPath.resetDispose();	// keep it!
+        destFullPath.resetDispose();	// keep it!
       else
       {
-	if ( assert_dir( destFullPath->dirname() ) != 0 )
-	  ZYPP_THROW( Exception( "Can't create " + destFullPath->dirname().asString() ) );
+        if ( assert_dir( destFullPath->dirname() ) != 0 )
+          ZYPP_THROW( Exception( "Can't create " + destFullPath->dirname().asString() ) );
 
-	if ( filesystem::hardlinkCopy( tmpFile, destFullPath ) != 0 )
-	  ZYPP_THROW( Exception( "Can't hardlink/copy " + tmpFile.asString() + " to " + destDir_r.asString() ) );
+        if ( filesystem::hardlinkCopy( tmpFile, destFullPath ) != 0 )
+          ZYPP_THROW( Exception( "Can't hardlink/copy " + tmpFile.asString() + " to " + destDir_r.asString() ) );
       }
     }
     catch ( Exception & excpt )
     {
       if ( resource.optional() )
       {
-	ZYPP_CAUGHT( excpt );
-	WAR << "optional resource " << resource << " could not be transferred." << endl;
-	return;
+        ZYPP_CAUGHT( excpt );
+        WAR << "optional resource " << resource << " could not be transferred." << endl;
+        return;
       }
       else
       {
-	excpt.remember( "Can't provide " + resource.filename().asString() );
-	ZYPP_RETHROW( excpt );
+        excpt.remember( "Can't provide " + resource.filename().asString() );
+        ZYPP_RETHROW( excpt );
       }
     }
   }
@@ -617,24 +617,24 @@ namespace zypp
       std::ifstream in( index.c_str() );
       if ( ! in.fail() )
       {
-	  std::string buffer;
+          std::string buffer;
           while ( getline( in, buffer ) )
           {
 
-	      if ( buffer[0] == '#' )
-		continue;	// simple comment
+              if ( buffer[0] == '#' )
+                continue;	// simple comment
 
-	      CheckSum checksum( str::stripFirstWord( buffer, /*ltrim before strip*/true ) );
-	      if ( checksum.empty() )
-		continue;	// empty line | unknown cheksum format
+              CheckSum checksum( str::stripFirstWord( buffer, /*ltrim before strip*/true ) );
+              if ( checksum.empty() )
+                continue;	// empty line | unknown cheksum format
 
-	      if ( buffer.empty() )
-	      {
-		WAR << "Missing filename in CHECKSUMS file: " << index.asString() << " (" << checksum << ")" << endl;
-		continue;
-	      }
+              if ( buffer.empty() )
+              {
+                WAR << "Missing filename in CHECKSUMS file: " << index.asString() << " (" << checksum << ")" << endl;
+                continue;
+              }
 
-	      _checksums[(basedir/buffer).asString()] = checksum;
+              _checksums[(basedir/buffer).asString()] = checksum;
           }
       }
       else

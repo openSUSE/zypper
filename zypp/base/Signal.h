@@ -51,25 +51,25 @@ namespace zypp
       /** Temporary block signal. */
       void block( int signum_r )
       {
-	::sigset_t mask;
-	::sigemptyset( & mask );
-	::sigaddset( & mask, signum_r );
-	::sigprocmask( SIG_BLOCK, &mask, NULL );
+        ::sigset_t mask;
+        ::sigemptyset( & mask );
+        ::sigaddset( & mask, signum_r );
+        ::sigprocmask( SIG_BLOCK, &mask, NULL );
       }
       /** Temporary unblock signal. */
       void unblock( int signum_r )
       {
-	::sigset_t mask;
-	::sigemptyset( & mask );
-	::sigaddset( & mask, signum_r );
-	::sigprocmask( SIG_UNBLOCK, &mask, NULL );
+        ::sigset_t mask;
+        ::sigemptyset( & mask );
+        ::sigaddset( & mask, signum_r );
+        ::sigprocmask( SIG_UNBLOCK, &mask, NULL );
       }
       /** Whether signal delivery is pending. */
       bool pending( int signum_r )
       {
-	::sigset_t mask;
-	::sigpending( &mask );
-	return ::sigismember( &mask, signum_r );
+        ::sigset_t mask;
+        ::sigpending( &mask );
+        return ::sigismember( &mask, signum_r );
       }
       /** Wait for signals not blocked in original sigprocmask. */
       void suspend()

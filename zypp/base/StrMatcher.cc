@@ -183,16 +183,16 @@ namespace zypp
     {
       if ( !_matcher )
       {
-	if ( _flags.mode() == Match::OTHER )
-	  ZYPP_THROW( MatchUnknownModeException( _flags, _search ) );
+        if ( _flags.mode() == Match::OTHER )
+          ZYPP_THROW( MatchUnknownModeException( _flags, _search ) );
 
-	_matcher.reset( new sat::detail::CDatamatcher );
-	int res = ::datamatcher_init( _matcher.get(), _search.c_str(), _flags.get() );
-	if ( res )
-	{
-	  _matcher.reset();
-	  ZYPP_THROW( MatchInvalidRegexException( _search, res ) );
-	}
+        _matcher.reset( new sat::detail::CDatamatcher );
+        int res = ::datamatcher_init( _matcher.get(), _search.c_str(), _flags.get() );
+        if ( res )
+        {
+          _matcher.reset();
+          ZYPP_THROW( MatchInvalidRegexException( _search, res ) );
+        }
       }
     }
 
@@ -206,7 +206,7 @@ namespace zypp
       compile(); // nop if already compiled.
 
       if ( ! string_r )
-	return false; // NULL never matches
+        return false; // NULL never matches
       return ::datamatcher_match( _matcher.get(), string_r );
     }
 
@@ -231,7 +231,7 @@ namespace zypp
     void invalidate()
     {
       if ( _matcher )
-	::datamatcher_free( _matcher.get() );
+        ::datamatcher_free( _matcher.get() );
       _matcher.reset();
     }
 

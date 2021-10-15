@@ -99,12 +99,12 @@ namespace zypp {
     //	DESCRIPTION :
     //
     MediaCIFS::MediaCIFS( const Url &      url_r,
-			const Pathname & attach_point_hint_r )
+                        const Pathname & attach_point_hint_r )
         : MediaHandler( url_r, attach_point_hint_r,
-    		    stripShare( url_r.getPathName() ), // urlpath WITHOUT share name at attachpoint
-    		    false )       // does_download
+                    stripShare( url_r.getPathName() ), // urlpath WITHOUT share name at attachpoint
+                    false )       // does_download
     {
-	MIL << "MediaCIFS::MediaCIFS(" << url_r << ", " << attach_point_hint_r << ")" << endl;
+        MIL << "MediaCIFS::MediaCIFS(" << url_r << ", " << attach_point_hint_r << ")" << endl;
     }
 
     ///////////////////////////////////////////////////////////////////
@@ -129,9 +129,9 @@ namespace zypp {
     void MediaCIFS::attachTo(bool next)
     {
       if(_url.getHost().empty())
-    	ZYPP_THROW(MediaBadUrlEmptyHostException(_url));
+        ZYPP_THROW(MediaBadUrlEmptyHostException(_url));
       if(next)
-	ZYPP_THROW(MediaNotSupportedException(_url));
+        ZYPP_THROW(MediaNotSupportedException(_url));
 
       std::string path = "//";
       path += _url.getHost() + "/" + getShare( _url.getPathName() );
@@ -140,24 +140,24 @@ namespace zypp {
       AttachedMedia  ret( findAttachedMedia( media));
 
       if( ret.mediaSource &&
-	  ret.attachPoint &&
-	  !ret.attachPoint->empty())
+          ret.attachPoint &&
+          !ret.attachPoint->empty())
       {
-	DBG << "Using a shared media "
-	    << ret.mediaSource->name
-	    << " attached on "
-	    << ret.attachPoint->path
-	    << endl;
+        DBG << "Using a shared media "
+            << ret.mediaSource->name
+            << " attached on "
+            << ret.attachPoint->path
+            << endl;
 
-	removeAttachPoint();
-	setAttachPoint(ret.attachPoint);
-	setMediaSource(ret.mediaSource);
-	return;
+        removeAttachPoint();
+        setAttachPoint(ret.attachPoint);
+        setMediaSource(ret.mediaSource);
+        return;
       }
 
       if( !isUseableAttachPoint( attachPoint() ) )
       {
-	setAttachPoint( createAttachPoint(), true );
+        setAttachPoint( createAttachPoint(), true );
       }
       std::string mountpoint( attachPoint().asString() );
 
@@ -376,7 +376,7 @@ namespace zypp {
     //	DESCRIPTION : Asserted that media is attached and retlist is empty.
     //
     void MediaCIFS::getDirInfo( std::list<std::string> & retlist,
-			       const Pathname & dirname, bool dots ) const
+                               const Pathname & dirname, bool dots ) const
     {
       MediaHandler::getDirInfo( retlist, dirname, dots );
     }
@@ -390,7 +390,7 @@ namespace zypp {
     //	DESCRIPTION : Asserted that media is attached and retlist is empty.
     //
     void MediaCIFS::getDirInfo( filesystem::DirContent & retlist,
-			       const Pathname & dirname, bool dots ) const
+                               const Pathname & dirname, bool dots ) const
     {
       MediaHandler::getDirInfo( retlist, dirname, dots );
     }

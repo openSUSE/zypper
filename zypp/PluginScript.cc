@@ -46,18 +46,18 @@ namespace zypp
       PluginDebugBuffer( const std::string & buffer_r ) : _buffer( buffer_r ) {}
       ~PluginDebugBuffer()
       {
-	if ( PLUGIN_DEBUG )
-	{
-	  if ( _buffer.empty() )
-	  {
-	    L_DBG("PLUGIN") << "< (empty)" << endl;
-	  }
-	  else
-	  {
-	    std::istringstream datas( _buffer );
-	    iostr::copyIndent( datas, L_DBG("PLUGIN"), "< "  ) << endl;
-	  }
-	}
+        if ( PLUGIN_DEBUG )
+        {
+          if ( _buffer.empty() )
+          {
+            L_DBG("PLUGIN") << "< (empty)" << endl;
+          }
+          else
+          {
+            std::istringstream datas( _buffer );
+            iostr::copyIndent( datas, L_DBG("PLUGIN"), "< "  ) << endl;
+          }
+        }
       }
       const std::string & _buffer;
     };
@@ -70,9 +70,9 @@ namespace zypp
       PluginDumpStderr( ExternalProgramWithStderr & prog_r ) : _prog( prog_r ) {}
       ~PluginDumpStderr()
       {
-	std::string line;
-	while ( _prog.stderrGetline( line ) )
-	  L_WAR("PLUGIN") << "! " << line << endl;
+        std::string line;
+        while ( _prog.stderrGetline( line ) )
+          L_WAR("PLUGIN") << "! " << line << endl;
       }
       ExternalProgramWithStderr & _prog;
     };
@@ -80,24 +80,24 @@ namespace zypp
     inline void setBlocking( FILE * file_r, bool yesno_r = true )
     {
       if ( ! file_r )
-	ZYPP_THROW( PluginScriptException( "setNonBlocking" ) );
+        ZYPP_THROW( PluginScriptException( "setNonBlocking" ) );
 
       int fd = ::fileno( file_r );
       if ( fd == -1 )
-	ZYPP_THROW( PluginScriptException( "setNonBlocking" ) );
+        ZYPP_THROW( PluginScriptException( "setNonBlocking" ) );
 
       int flags = ::fcntl( fd, F_GETFL );
       if ( flags == -1 )
-	ZYPP_THROW( PluginScriptException( "setNonBlocking" ) );
+        ZYPP_THROW( PluginScriptException( "setNonBlocking" ) );
 
       if ( ! yesno_r )
-	flags |= O_NONBLOCK;
+        flags |= O_NONBLOCK;
       else if ( flags & O_NONBLOCK )
-	flags ^= O_NONBLOCK;
+        flags ^= O_NONBLOCK;
 
       flags = ::fcntl( fd, F_SETFL, flags );
       if ( flags == -1 )
-	ZYPP_THROW( PluginScriptException( "setNonBlocking" ) );
+        ZYPP_THROW( PluginScriptException( "setNonBlocking" ) );
     }
 
     inline void setNonBlocking( FILE * file_r, bool yesno_r = true )
@@ -182,9 +182,9 @@ namespace zypp
   }
 
   long PluginScript::Impl::_defaultSendTimeout =    ( PLUGIN_SEND_TIMEOUT > 0    ? PLUGIN_SEND_TIMEOUT
-										 : ( PLUGIN_TIMEOUT > 0 ? PLUGIN_TIMEOUT : 30 ) );
+                                                                                 : ( PLUGIN_TIMEOUT > 0 ? PLUGIN_TIMEOUT : 30 ) );
   long PluginScript::Impl::_defaultReceiveTimeout = ( PLUGIN_RECEIVE_TIMEOUT > 0 ? PLUGIN_RECEIVE_TIMEOUT
-										 : ( PLUGIN_TIMEOUT > 0 ? PLUGIN_TIMEOUT : 30 ) );
+                                                                                 : ( PLUGIN_TIMEOUT > 0 ? PLUGIN_TIMEOUT : 30 ) );
 
   ///////////////////////////////////////////////////////////////////
 
@@ -198,7 +198,7 @@ namespace zypp
     {
       PathInfo pi( script_r );
       if ( ! ( pi.isFile() && pi.isX() ) )
-	ZYPP_THROW( PluginScriptException( "Script is not executable", str::Str() << pi ) );
+        ZYPP_THROW( PluginScriptException( "Script is not executable", str::Str() << pi ) );
     }
 
     // go and launch script
@@ -229,24 +229,24 @@ namespace zypp
       DBG << "Close:" << *this << endl;
       bool doKill = true;
       try {
-	// do not kill script if _DISCONNECT is ACKed.
-	send( PluginFrame( "_DISCONNECT" ) );
-	PluginFrame ret( receive() );
-	if ( ret.isAckCommand() )
-	{
-	  doKill = false;
-	  str::strtonum( ret.getHeaderNT( "exit" ), _lastReturn.get() );
-	  _lastExecError = ret.body();
-	}
+        // do not kill script if _DISCONNECT is ACKed.
+        send( PluginFrame( "_DISCONNECT" ) );
+        PluginFrame ret( receive() );
+        if ( ret.isAckCommand() )
+        {
+          doKill = false;
+          str::strtonum( ret.getHeaderNT( "exit" ), _lastReturn.get() );
+          _lastExecError = ret.body();
+        }
       }
       catch (...)
       { /* NOP */ }
 
       if ( doKill )
       {
-	_cmd->kill();
-	_lastReturn = _cmd->close();
-	_lastExecError = _cmd->execError();
+        _cmd->kill();
+        _lastReturn = _cmd->close();
+        _lastExecError = _cmd->execError();
       }
       DBG << *this << " -> [" << _lastReturn << "] " << _lastExecError << endl;
       _cmd.reset();
@@ -293,57 +293,57 @@ namespace zypp
       const char * buffer = data.c_str();
       ssize_t buffsize = data.size();
       do {
-	fd_set wfds;
-	FD_ZERO( &wfds );
-	FD_SET( fd, &wfds );
+        fd_set wfds;
+        FD_ZERO( &wfds );
+        FD_SET( fd, &wfds );
 
-	struct timeval tv;
-	tv.tv_sec = _sendTimeout;
-	tv.tv_usec = 0;
+        struct timeval tv;
+        tv.tv_sec = _sendTimeout;
+        tv.tv_usec = 0;
 
-	int retval = select( fd+1, NULL, &wfds, NULL, &tv );
-	if ( retval > 0 )	// FD_ISSET( fd, &wfds ) will be true.
-	{
-	  //DBG << "Ready to write..." << endl;
-	  ssize_t ret = ::write( fd, buffer, buffsize );
-	  if ( ret == buffsize )
-	  {
-	    //DBG << "::write(" << buffsize << ") -> " << ret << endl;
-	    ::fflush( filep );
-	    break; 		// -> done
-	  }
-	  else if ( ret > 0 )
-	  {
-	    //WAR << "::write(" << buffsize << ") -> " << ret << " INCOMPLETE..." << endl;
-	    ::fflush( filep );
-	    buffsize -= ret;
-	    buffer += ret;	// -> continue
-	  }
-	  else // ( retval == -1 )
-	  {
-	    if ( errno != EINTR )
-	    {
-	      ERR << "write(): " << Errno() << endl;
-	      if ( errno == EPIPE )
-		ZYPP_THROW( PluginScriptDiedUnexpectedly( "Send: script died unexpectedly", str::Str() << Errno() ) );
-	      else
-		ZYPP_THROW( PluginScriptException( "Send: send error", str::Str() << Errno() ) );
-	    }
-	  }
-	}
-	else if ( retval == 0 )
-	{
-	  WAR << "Not ready to write within timeout." << endl;
-	  ZYPP_THROW( PluginScriptSendTimeout( "Not ready to write within timeout." ) );
-	}
-	else // ( retval == -1 )
-	{
-	  if ( errno != EINTR )
-	  {
-	    ERR << "select(): " << Errno() << endl;
-	    ZYPP_THROW( PluginScriptException( "Error waiting on file descriptor", str::Str() << Errno() ) );
-	  }
-	}
+        int retval = select( fd+1, NULL, &wfds, NULL, &tv );
+        if ( retval > 0 )	// FD_ISSET( fd, &wfds ) will be true.
+        {
+          //DBG << "Ready to write..." << endl;
+          ssize_t ret = ::write( fd, buffer, buffsize );
+          if ( ret == buffsize )
+          {
+            //DBG << "::write(" << buffsize << ") -> " << ret << endl;
+            ::fflush( filep );
+            break; 		// -> done
+          }
+          else if ( ret > 0 )
+          {
+            //WAR << "::write(" << buffsize << ") -> " << ret << " INCOMPLETE..." << endl;
+            ::fflush( filep );
+            buffsize -= ret;
+            buffer += ret;	// -> continue
+          }
+          else // ( retval == -1 )
+          {
+            if ( errno != EINTR )
+            {
+              ERR << "write(): " << Errno() << endl;
+              if ( errno == EPIPE )
+                ZYPP_THROW( PluginScriptDiedUnexpectedly( "Send: script died unexpectedly", str::Str() << Errno() ) );
+              else
+                ZYPP_THROW( PluginScriptException( "Send: send error", str::Str() << Errno() ) );
+            }
+          }
+        }
+        else if ( retval == 0 )
+        {
+          WAR << "Not ready to write within timeout." << endl;
+          ZYPP_THROW( PluginScriptSendTimeout( "Not ready to write within timeout." ) );
+        }
+        else // ( retval == -1 )
+        {
+          if ( errno != EINTR )
+          {
+            ERR << "select(): " << Errno() << endl;
+            ZYPP_THROW( PluginScriptException( "Error waiting on file descriptor", str::Str() << Errno() ) );
+          }
+        }
       } while( true );
     }
   }
@@ -368,56 +368,56 @@ namespace zypp
       PluginDebugBuffer _debug( data ); // dump receive buffer if PLUGIN_DEBUG
       PluginDumpStderr _dump( *_cmd ); // dump scripts stderr before leaving
       do {
-	int ch = fgetc( filep );
-	if ( ch != EOF )
-	{
-	  data.push_back( ch );
-	  if ( ch == '\0' )
-	    break;
-	}
-	else if ( ::feof( filep ) )
-	{
-	  WAR << "Unexpected EOF" << endl;
-	  ZYPP_THROW( PluginScriptDiedUnexpectedly( "Receive: script died unexpectedly", str::Str() << Errno() ) );
-	}
-	else if ( errno != EINTR )
-	{
-	  if ( errno == EWOULDBLOCK )
-	  {
-	    // wait a while for fd to become ready for reading...
-	    fd_set rfds;
-	    FD_ZERO( &rfds );
-	    FD_SET( fd, &rfds );
+        int ch = fgetc( filep );
+        if ( ch != EOF )
+        {
+          data.push_back( ch );
+          if ( ch == '\0' )
+            break;
+        }
+        else if ( ::feof( filep ) )
+        {
+          WAR << "Unexpected EOF" << endl;
+          ZYPP_THROW( PluginScriptDiedUnexpectedly( "Receive: script died unexpectedly", str::Str() << Errno() ) );
+        }
+        else if ( errno != EINTR )
+        {
+          if ( errno == EWOULDBLOCK )
+          {
+            // wait a while for fd to become ready for reading...
+            fd_set rfds;
+            FD_ZERO( &rfds );
+            FD_SET( fd, &rfds );
 
-	    struct timeval tv;
-	    tv.tv_sec = _receiveTimeout;
-	    tv.tv_usec = 0;
+            struct timeval tv;
+            tv.tv_sec = _receiveTimeout;
+            tv.tv_usec = 0;
 
-	    int retval = select( fd+1, &rfds, NULL, NULL, &tv );
-	    if ( retval > 0 )	// FD_ISSET( fd, &rfds ) will be true.
-	    {
-	      ::clearerr( filep );
-	    }
-	    else if ( retval == 0 )
-	    {
-	      WAR << "Not ready to read within timeout." << endl;
-	      ZYPP_THROW( PluginScriptReceiveTimeout( "Not ready to read within timeout." ) );
-	    }
-	    else // ( retval == -1 )
-	    {
-	      if ( errno != EINTR )
-	      {
-		ERR << "select(): " << Errno() << endl;
-		ZYPP_THROW( PluginScriptException( "Error waiting on file descriptor", str::Str() << Errno() ) );
-	      }
-	    }
-	  }
-	  else
-	  {
-	    ERR << "read(): " << Errno() << endl;
-	    ZYPP_THROW( PluginScriptException( "Receive: receive error", str::Str() << Errno() ) );
-	  }
-	}
+            int retval = select( fd+1, &rfds, NULL, NULL, &tv );
+            if ( retval > 0 )	// FD_ISSET( fd, &rfds ) will be true.
+            {
+              ::clearerr( filep );
+            }
+            else if ( retval == 0 )
+            {
+              WAR << "Not ready to read within timeout." << endl;
+              ZYPP_THROW( PluginScriptReceiveTimeout( "Not ready to read within timeout." ) );
+            }
+            else // ( retval == -1 )
+            {
+              if ( errno != EINTR )
+              {
+                ERR << "select(): " << Errno() << endl;
+                ZYPP_THROW( PluginScriptException( "Error waiting on file descriptor", str::Str() << Errno() ) );
+              }
+            }
+          }
+          else
+          {
+            ERR << "read(): " << Errno() << endl;
+            ZYPP_THROW( PluginScriptException( "Receive: receive error", str::Str() << Errno() ) );
+          }
+        }
       } while ( true );
     }
     // DBG << " <-read " << data.size() << endl;

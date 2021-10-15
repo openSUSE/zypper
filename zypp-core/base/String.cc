@@ -232,24 +232,24 @@ namespace zypp
 
       if ( trim_r & L_TRIM )
       {
-	std::string::size_type p = ret.find_first_not_of( " \t\n" );
-	if ( p == std::string::npos )
-	{
-	  ret.clear();
-	  return ret;
-	}
-	ret.erase( 0, p );
+        std::string::size_type p = ret.find_first_not_of( " \t\n" );
+        if ( p == std::string::npos )
+        {
+          ret.clear();
+          return ret;
+        }
+        ret.erase( 0, p );
       }
 
       if ( trim_r & R_TRIM )
       {
-	std::string::size_type p = ret.find_last_not_of( " \t\n" );
-	if ( p == std::string::npos )
-	{
-	  ret.clear();
-	  return ret;
-	}
-	ret = ret.erase( p+1 );
+        std::string::size_type p = ret.find_last_not_of( " \t\n" );
+        if ( p == std::string::npos )
+        {
+          ret.clear();
+          return ret;
+        }
+        ret = ret.erase( p+1 );
       }
 
       return ret;
@@ -331,15 +331,15 @@ namespace zypp
     {
       if ( ! from_r.empty() )
       {
-	std::string::size_type pos = 0;
-	while ( (pos = str_r.find( from_r, pos )) != std::string::npos )
-	{
-	  str_r.replace( pos, from_r.size(), to_r );
-	  pos += to_r.size();
+        std::string::size_type pos = 0;
+        while ( (pos = str_r.find( from_r, pos )) != std::string::npos )
+        {
+          str_r.replace( pos, from_r.size(), to_r );
+          pos += to_r.size();
 
-	  if ( pos >= str_r.length() )
-	    break;
-	}
+          if ( pos >= str_r.length() )
+            break;
+        }
       }
       return str_r;
     }
@@ -354,16 +354,16 @@ namespace zypp
     {
       if ( ! from_r.empty() )
       {
-	std::string::size_type pos = 0;
-	while ( (pos = str_r.find( from_r, pos )) != std::string::npos )
-	{
-	  std::string to( to_r() );
-	  str_r.replace( pos, from_r.size(), to );
-	  pos += to.size();
+        std::string::size_type pos = 0;
+        while ( (pos = str_r.find( from_r, pos )) != std::string::npos )
+        {
+          std::string to( to_r() );
+          str_r.replace( pos, from_r.size(), to );
+          pos += to.size();
 
-	  if ( pos >= str_r.length() )
-	    break;
-	}
+          if ( pos >= str_r.length() )
+            break;
+        }
       }
       return str_r;
     }
@@ -394,18 +394,18 @@ namespace zypp
     std::string bEscape( std::string str_r, const C_Str & special_r )
     {
       if ( str_r.empty() )
-	return str_r;
+        return str_r;
 
       if ( str_r.find_first_of( special_r ) == std::string::npos
-	&& ( ::strchr( special_r.c_str(), '\\' ) ||  !::strchr( str_r.c_str(), '\\' ) ) )
-	return str_r;
+        && ( ::strchr( special_r.c_str(), '\\' ) ||  !::strchr( str_r.c_str(), '\\' ) ) )
+        return str_r;
 
       Str buf;
       for_( s, str_r.c_str(), s+str_r.size() )
       {
-	if ( *s == '\\' || ::strchr( special_r.c_str(), *s ) )
-	  buf << '\\';
-	buf << *s;
+        if ( *s == '\\' || ::strchr( special_r.c_str(), *s ) )
+          buf << '\\';
+        buf << *s;
       }
       return buf;
     }
@@ -420,56 +420,56 @@ namespace zypp
     std::string rxEscapeGlob( std::string str_r )
     {
       if ( str_r.empty() )
-	return str_r;
+        return str_r;
 
       if ( str_r.find_first_of( RXSPECIALCHARS ) == std::string::npos )
-	return str_r;
+        return str_r;
 
       Str buf;
       for_( s, str_r.c_str(), s+str_r.size() )
       {
-	if ( *s == '\\' )	// + next char literally
-	{
-	  buf << '\\';
-	  if ( *(s+1) ) { ++s; buf << *s; }
-	}
-	else if ( *s == '?' )	// translate
-	{
-	  buf << '.';
-	}
-	else if ( *s == '*' )	// translate
-	{
-	  buf << ".*";
-	}
-	else if ( *s == '[' )	// character class if closing ] is found, else literally
-	{
-	  const char * e = s+1;
-	  if ( *e == '^' || *e == '!' )	// negated cclass
-	    ++e;
-	  if ( *e == ']' )		// ] in cclass
-	    ++e;
-	  while ( *e && *e != ']' )	// ...to ] or \0
-	    ++e;
-	  if ( *e ) // on closing ']'
-	  {
-	    ++s;  buf << '[' << (*s == '!' ? '^' : *s );
-	    while ( ++s != e )
-	      buf << *s;
-	    buf << ']';
-	  }
-	  else
-	  {
-	    buf << "\\[";
-	  }
-	}
-	else if ( ::strchr( RXSPECIALCHARS, *s ) )	// escape
-	{
-	  buf << '\\' << *s;
-	}
-	else
-	{
-	  buf << *s;
-	}
+        if ( *s == '\\' )	// + next char literally
+        {
+          buf << '\\';
+          if ( *(s+1) ) { ++s; buf << *s; }
+        }
+        else if ( *s == '?' )	// translate
+        {
+          buf << '.';
+        }
+        else if ( *s == '*' )	// translate
+        {
+          buf << ".*";
+        }
+        else if ( *s == '[' )	// character class if closing ] is found, else literally
+        {
+          const char * e = s+1;
+          if ( *e == '^' || *e == '!' )	// negated cclass
+            ++e;
+          if ( *e == ']' )		// ] in cclass
+            ++e;
+          while ( *e && *e != ']' )	// ...to ] or \0
+            ++e;
+          if ( *e ) // on closing ']'
+          {
+            ++s;  buf << '[' << (*s == '!' ? '^' : *s );
+            while ( ++s != e )
+              buf << *s;
+            buf << ']';
+          }
+          else
+          {
+            buf << "\\[";
+          }
+        }
+        else if ( ::strchr( RXSPECIALCHARS, *s ) )	// escape
+        {
+          buf << '\\' << *s;
+        }
+        else
+        {
+          buf << *s;
+        }
       }
       return buf;
     }
@@ -489,27 +489,27 @@ namespace zypp
     {
       std::ostringstream datas;
       do {
-	char ch;
-	if ( str.get( ch ) )
-	{
-	  if ( ch != delim_r )
-	  {
-	    datas.put( ch );
-	  }
-	  else
-	  {
-	    if ( returnDelim_r )
-	      datas.put( ch );
-	    break;	// --> delimiter found
-	  }
-	}
-	else
-	{
-	  // clear fail bit if we read data before reaching EOF
-	  if ( str.eof() && datas.tellp() )
-	    str.clear( std::ios::eofbit );
-	  break;	// --> no consumable data.
-	}
+        char ch;
+        if ( str.get( ch ) )
+        {
+          if ( ch != delim_r )
+          {
+            datas.put( ch );
+          }
+          else
+          {
+            if ( returnDelim_r )
+              datas.put( ch );
+            break;	// --> delimiter found
+          }
+        }
+        else
+        {
+          // clear fail bit if we read data before reaching EOF
+          if ( str.eof() && datas.tellp() )
+            str.clear( std::ios::eofbit );
+          break;	// --> no consumable data.
+        }
       } while ( true );
       return datas.str();
     }

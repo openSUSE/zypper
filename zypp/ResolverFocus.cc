@@ -43,28 +43,28 @@ namespace zypp
 #define OUTS(V) if ( ::strcasecmp( val_r.c_str(), #V ) == 0 ) { ret_r = ResolverFocus::V; return true; }
       case 'D':
       case 'd':
-	OUTS( Default );
-	break;
+        OUTS( Default );
+        break;
 
       case 'J':
       case 'j':
-	OUTS( Job );
-	break;
+        OUTS( Job );
+        break;
 
       case 'I':
       case 'i':
-	OUTS( Installed );
-	break;
+        OUTS( Installed );
+        break;
 
       case 'U':
       case 'u':
-	OUTS( Update );
-	break;
+        OUTS( Update );
+        break;
 
       case '\0':
-	ret_r = ResolverFocus::Default;
-	return true;
-	break;
+        ret_r = ResolverFocus::Default;
+        return true;
+        break;
 #undef OUTS
     }
     // Oops!

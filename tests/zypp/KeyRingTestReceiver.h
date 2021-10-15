@@ -31,43 +31,43 @@ struct KeyRingTestReceiver : public zypp::callback::ReceiveReport<zypp::KeyRingR
     _asked_user_to_accept_ver_failed = false;
     _asked_user_to_accept_unsigned_file = false;
   }
-  
+
   ~KeyRingTestReceiver()
   {
     disconnect();
   }
-  
+
   void answerAcceptVerFailed( bool answer )
   { _answer_ver_failed = answer; }
-  
+
   bool askedAcceptVerFailed() const
   { return _asked_user_to_accept_ver_failed; }
-  
+
   void answerAcceptUnknownKey( bool answer )
   { _answer_accept_unknown_key = answer; }
-  
+
   bool askedAcceptUnknownKey() const
   { return _asked_user_to_accept_unknown_key; }
-  
+
   void answerAcceptKey( KeyRingReport::KeyTrust answer )
   { _answer_accept_key = answer; }
-  
+
   bool askedAcceptKey() const
   { return _asked_user_to_accept_key; }
 
   void answerAcceptUnsignedFile( bool answer )
   { _answer_accept_unsigned_file = answer; }
-  
+
   bool askedAcceptUnsignedFile() const
   { return _asked_user_to_accept_unsigned_file; }
-    
+
   virtual bool askUserToAcceptUnsignedFile( const std::string &file, const zypp::KeyContext &keycontext )
   {
     MIL << std::endl;
     _asked_user_to_accept_unsigned_file = true;
     return _answer_accept_unsigned_file;
   }
-  
+
   virtual bool askUserToAcceptUnknownKey( const std::string &file, const std::string &id, const zypp::KeyContext &keycontext )
   {
     MIL << std::endl;
@@ -88,13 +88,13 @@ struct KeyRingTestReceiver : public zypp::callback::ReceiveReport<zypp::KeyRingR
     _asked_user_to_accept_ver_failed = true;
     return _answer_ver_failed;
   }
-  
+
   // how to answer
   bool _answer_accept_unknown_key;
   KeyRingReport::KeyTrust _answer_accept_key;
   bool _answer_ver_failed;
   bool _answer_accept_unsigned_file;
-  
+
   // we use this variables to check that the
   // callbacks were called
   bool _asked_user_to_accept_unknown_key;
@@ -134,9 +134,9 @@ struct KeyRingTestSignalReceiver : zypp::callback::ReceiveReport<zypp::KeyRingSi
   virtual void trustedKeyRemoved( const zypp::PublicKey &key  )
   {
   }
-  
+
   bool _trusted_key_added_called;
-  
+
 };
 
 #endif

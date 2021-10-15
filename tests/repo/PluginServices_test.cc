@@ -26,7 +26,7 @@ class ServiceCollector
 {
 public:
   typedef std::set<ServiceInfo> ServiceSet;
-    
+
   ServiceCollector( ServiceSet & services_r )
     : _services( services_r )
   {}
@@ -45,7 +45,7 @@ private:
 BOOST_AUTO_TEST_CASE(plugin_services)
 {
   ServiceCollector::ServiceSet services;
-    
+
   PluginServices local("/space/tmp/services", ServiceCollector(services));
 }
 

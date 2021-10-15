@@ -42,28 +42,28 @@ namespace zypp
       ScopedSet( std::string var_r, const char * val_r )
       : _var { std::move(var_r) }
       {
-	if ( !_var.empty() )
-	{
-	  if ( const char * orig = ::getenv( _var.c_str() ) )
-	    _val.reset( new std::string( orig ) );
-	  setval( val_r );
-	}
+        if ( !_var.empty() )
+        {
+          if ( const char * orig = ::getenv( _var.c_str() ) )
+            _val.reset( new std::string( orig ) );
+          setval( val_r );
+        }
       }
 
       /** Restore the original setting. */
       ~ScopedSet()
       {
-	if ( !_var.empty() )
-	  setval( _val ? _val->c_str() : nullptr );
+        if ( !_var.empty() )
+          setval( _val ? _val->c_str() : nullptr );
       }
 
     private:
       void setval( const char * val_r )
       {
-	if ( val_r )
-	  ::setenv( _var.c_str(), val_r, 1 );
-	else
-	  ::unsetenv( _var.c_str() );
+        if ( val_r )
+          ::setenv( _var.c_str(), val_r, 1 );
+        else
+          ::unsetenv( _var.c_str() );
       }
 
     private:

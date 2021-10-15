@@ -33,26 +33,26 @@ namespace zypp
       /** The singleton */
       static CodeMaps & instance()
       {
-	static CodeMaps _instance;
-	return _instance;
+        static CodeMaps _instance;
+        return _instance;
       }
 
       /** Lookup (translated) name for \a index_r.*/
       std::string name( IdString index_r )
       {
-	Link link( getIndex( index_r ) );
+        Link link( getIndex( index_r ) );
 
-	std::string ret;
-	if ( link->second )
-	{ ret = _(link->second); }
-	else
-	{
-	  ret = _("Unknown country: ");
-	  ret += "'";
-	  ret += index_r.c_str();
-	  ret += "'";
-	}
-	return ret;
+        std::string ret;
+        if ( link->second )
+        { ret = _(link->second); }
+        else
+        {
+          ret = _("Unknown country: ");
+          ret += "'";
+          ret += index_r.c_str();
+          ret += "'";
+        }
+        return ret;
       }
 
     private:
@@ -69,39 +69,39 @@ namespace zypp
       /** Return \ref Link for \a index_r, creating it if necessary. */
       Link getIndex( IdString index_r )
       {
-	auto it = _indexMap.find( index_r );
-	return( it != _indexMap.end()
-	      ? it->second
-	      : newIndex( index_r, index_r.asString() ) );
+        auto it = _indexMap.find( index_r );
+        return( it != _indexMap.end()
+              ? it->second
+              : newIndex( index_r, index_r.asString() ) );
       }
 
       /** Return the CodeMap Index for \a code_r. */
       Link newIndex( IdString index_r, const std::string & code_r )
       {
-	Link link = _codeMap.find( code_r );
-	if ( link != _codeMap.end() )
-	  return (_indexMap[index_r] = link);
+        Link link = _codeMap.find( code_r );
+        if ( link != _codeMap.end() )
+          return (_indexMap[index_r] = link);
 
-	// not found: Remember a new code
-	CodeMap::value_type nval( code_r, nullptr );
+        // not found: Remember a new code
+        CodeMap::value_type nval( code_r, nullptr );
 
-	if ( code_r.size() != 2 )
-	  WAR << "Malformed CountryCode '" << code_r << "' (expect 2-letter)" << endl;
+        if ( code_r.size() != 2 )
+          WAR << "Malformed CountryCode '" << code_r << "' (expect 2-letter)" << endl;
 
-	std::string ucode( str::toUpper( code_r ) );
-	if ( ucode != code_r )
-	{
-	  WAR << "Malformed CountryCode '" << code_r << "' (not upper case)" << endl;
-	  // but maybe we're lucky with the lower case code
-	  // and find a language name.
-	  link = _codeMap.find( ucode );
-	  if ( link != _codeMap.end() )
-	  {
-	    nval.second = link->second;
-	  }
-	}
-	MIL << "Remember CountryCode '" << code_r << "': '" << (nval.second?nval.second:"Unknown country") << "'" << endl;
-	return (_indexMap[index_r] = _codeMap.insert( nval ).first);
+        std::string ucode( str::toUpper( code_r ) );
+        if ( ucode != code_r )
+        {
+          WAR << "Malformed CountryCode '" << code_r << "' (not upper case)" << endl;
+          // but maybe we're lucky with the lower case code
+          // and find a language name.
+          link = _codeMap.find( ucode );
+          if ( link != _codeMap.end() )
+          {
+            nval.second = link->second;
+          }
+        }
+        MIL << "Remember CountryCode '" << code_r << "': '" << (nval.second?nval.second:"Unknown country") << "'" << endl;
+        return (_indexMap[index_r] = _codeMap.insert( nval ).first);
       }
 
     private:
@@ -150,8 +150,8 @@ namespace zypp
 
       struct Init
       {
-	  const char *iso3166;
-	  const char *name;
+          const char *iso3166;
+          const char *name;
       };
 
       const Init init[] = {
@@ -402,11 +402,11 @@ namespace zypp
           {"ZM", N_( "Zambia" ) }, 				// :ZMB:894:
           {"ZW", N_( "Zimbabwe" ) }, 				// :ZWE:716:
 
-	  { NULL, NULL }
+          { NULL, NULL }
       };
 
       for (const Init * i = init; i->iso3166 != NULL; ++i)
-	  _codeMap[i->iso3166] = i->name;
+          _codeMap[i->iso3166] = i->name;
     }
 
     /////////////////////////////////////////////////////////////////

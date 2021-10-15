@@ -52,9 +52,9 @@ namespace zypp {
 //	DESCRIPTION :
 //
 MediaHandler::MediaHandler ( const Url &      url_r,
-			     const Pathname & attach_point_r,
-			     const Pathname & urlpath_below_attachpoint_r,
-			     const bool       does_download_r )
+                             const Pathname & attach_point_r,
+                             const Pathname & urlpath_below_attachpoint_r,
+                             const bool       does_download_r )
     : _mediaSource()
     , _attachPoint( new AttachPoint())
     , _attachPointHint()
@@ -80,9 +80,9 @@ MediaHandler::MediaHandler ( const Url &      url_r,
     // schemes other than "file" and "dir", if it is absolute.
     //
     if ( !adir.isDir()
-	 || (_url.getScheme() != "file"
-	     && _url.getScheme() != "dir"
-	     && !real_attach_point.absolute()) )
+         || (_url.getScheme() != "file"
+             && _url.getScheme() != "dir"
+             && !real_attach_point.absolute()) )
     {
       ERR << "Provided attach point is not a absolute directory: "
           << adir << endl;
@@ -139,7 +139,7 @@ MediaHandler::getRealPath(const std::string &path)
       memset(buff, '\0', sizeof(buff));
       if( ::realpath(path.c_str(), buff) != NULL)
       {
-	real = buff;
+        real = buff;
       }
     }
 #else
@@ -192,7 +192,7 @@ MediaHandler::removeAttachPoint()
       MIL << "Deleted default attach point " << path << endl;
     } else {
       ERR << "Failed to Delete default attach point " << path
-	<< " errno(" << res << ")" << endl;
+        << " errno(" << res << ")" << endl;
     }
   }
   else
@@ -298,7 +298,7 @@ MediaHandler::attachPointHint() const
 AttachedMedia
 MediaHandler::findAttachedMedia(const MediaSourceRef &media) const
 {
-	return MediaManager().findAttachedMedia(media);
+        return MediaManager().findAttachedMedia(media);
 }
 
 ///////////////////////////////////////////////////////////////////
@@ -402,14 +402,14 @@ MediaHandler::createAttachPoint(const Pathname &attach_root) const
     for ( const std::string & entry : entries )
     {
       if ( ! str::hasPrefix( entry, "AP_0x" ) )
-	continue;
+        continue;
       PathInfo sdir( attach_root + entry );
       if ( sdir.isDir()
-	&& sdir.dev() == adir.dev()
-	&& ( Date::now()-sdir.mtime() > Date::month ) )
+        && sdir.dev() == adir.dev()
+        && ( Date::now()-sdir.mtime() > Date::month ) )
       {
-	DBG << "Remove orphaned attach point " << sdir << std::endl;
-	filesystem::recursive_rmdir( sdir.path() );
+        DBG << "Remove orphaned attach point " << sdir << std::endl;
+        filesystem::recursive_rmdir( sdir.path() );
       }
     }
   }
@@ -530,8 +530,8 @@ MediaHandler::checkAttached(bool matchMountFs) const
       MountEntries entries( MediaManager::getMountEntries());
       for_( e, entries.begin(), entries.end() )
       {
-	if ( ref.attachPoint->path != Pathname(e->dir) )
-	  continue;	// at least the mount points must match
+        if ( ref.attachPoint->path != Pathname(e->dir) )
+          continue;	// at least the mount points must match
 
         bool        is_device = false;
         PathInfo    dev_info;
@@ -542,7 +542,7 @@ MediaHandler::checkAttached(bool matchMountFs) const
         }
 
         if( is_device &&  (ref.mediaSource->maj_nr &&
-	                   ref.mediaSource->bdir.empty()))
+                           ref.mediaSource->bdir.empty()))
         {
           std::string mtype(matchMountFs ? e->type : ref.mediaSource->type);
           MediaSource media(mtype, e->src, dev_info.devMajor(), dev_info.devMinor());
@@ -559,95 +559,95 @@ MediaHandler::checkAttached(bool matchMountFs) const
         }
         else
         if(!is_device && (!ref.mediaSource->maj_nr ||
-	                  !ref.mediaSource->bdir.empty()))
+                          !ref.mediaSource->bdir.empty()))
         {
-	  if( ref.mediaSource->bdir.empty())
-	  {
-	    // bnc#710269: Type nfs may appear as nfs4 in in the mount table
-	    // and maybe vice versa. Similar cifs/smb. Need to unify these types:
-	    if ( matchMountFs && e->type != ref.mediaSource->type )
-	    {
-	      if ( str::hasPrefix( e->type, "nfs" ) && str::hasPrefix( ref.mediaSource->type, "nfs" ) )
-		matchMountFs = false;
-	      else if ( ( e->type == "cifs" || e->type == "smb" ) && ( ref.mediaSource->type == "cifs" || ref.mediaSource->type == "smb" ) )
-		matchMountFs = false;
-	      else
-		continue;	// different types cannot match
-	    }
-	    // Here: Types are ok or not to check.
-	    // Check the name except for nfs (bnc#804544; symlink resolution in mount path)
-	    //
-	    //   [fibonacci]$ ls -l /Local/ma/c12.1
-	    //   lrwxrwxrwx  /Local/ma/c12.1 -> zypp-SuSE-Code-12_1-Branch/
-	    //
-	    //   [localhost]$ mount -t nfs4 fibonacci:/Local/ma/c12.1 /mnt
-	    //   [localhost]$ mount
-	    //   fibonacci:/Local/ma/zypp-SuSE-Code-12_1-Branch on /mnt
+          if( ref.mediaSource->bdir.empty())
+          {
+            // bnc#710269: Type nfs may appear as nfs4 in in the mount table
+            // and maybe vice versa. Similar cifs/smb. Need to unify these types:
+            if ( matchMountFs && e->type != ref.mediaSource->type )
+            {
+              if ( str::hasPrefix( e->type, "nfs" ) && str::hasPrefix( ref.mediaSource->type, "nfs" ) )
+                matchMountFs = false;
+              else if ( ( e->type == "cifs" || e->type == "smb" ) && ( ref.mediaSource->type == "cifs" || ref.mediaSource->type == "smb" ) )
+                matchMountFs = false;
+              else
+                continue;	// different types cannot match
+            }
+            // Here: Types are ok or not to check.
+            // Check the name except for nfs (bnc#804544; symlink resolution in mount path)
+            //
+            //   [fibonacci]$ ls -l /Local/ma/c12.1
+            //   lrwxrwxrwx  /Local/ma/c12.1 -> zypp-SuSE-Code-12_1-Branch/
+            //
+            //   [localhost]$ mount -t nfs4 fibonacci:/Local/ma/c12.1 /mnt
+            //   [localhost]$ mount
+            //   fibonacci:/Local/ma/zypp-SuSE-Code-12_1-Branch on /mnt
 
-	    // std::string mtype(matchMountFs ? e->type : ref.mediaSource->type);
-	    // MediaSource media(mtype, e->src);
+            // std::string mtype(matchMountFs ? e->type : ref.mediaSource->type);
+            // MediaSource media(mtype, e->src);
 
-	    if( ref.mediaSource->name == e->src || str::hasPrefix( ref.mediaSource->type, "nfs" ) )
-	    {
-	      DBG << "Found media name "
-	      << ref.mediaSource->asString()
-	      << " in the mount table as " << e->src << std::endl;
-	      _isAttached = true;
-	      break;
-	    }
-	  }
-	  else
-	  {
-	    if ( ref.mediaSource->bdir == e->src )
-	    {
-	      DBG << "Found bound media "
-	          << ref.mediaSource->asString()
-		  << " in the mount table as " << e->src << std::endl;
-	      _isAttached = true;
-	      break;
-	    }
-	  }
+            if( ref.mediaSource->name == e->src || str::hasPrefix( ref.mediaSource->type, "nfs" ) )
+            {
+              DBG << "Found media name "
+              << ref.mediaSource->asString()
+              << " in the mount table as " << e->src << std::endl;
+              _isAttached = true;
+              break;
+            }
+          }
+          else
+          {
+            if ( ref.mediaSource->bdir == e->src )
+            {
+              DBG << "Found bound media "
+                  << ref.mediaSource->asString()
+                  << " in the mount table as " << e->src << std::endl;
+              _isAttached = true;
+              break;
+            }
+          }
           // differs
         }
         else // mixed cases:
-	{
-	  // Type ISO: Since 11.1 mtab might contain the name of
-	  // the loop device instead of the iso file:
-	  if ( ref.mediaSource->type == "iso"
-	    && str::hasPrefix( Pathname(e->src).asString(), "/dev/loop" )
-	    && ref.attachPoint->path == Pathname(e->dir) )
-	  {
-	    DBG << "Found bound media "
-	    << ref.mediaSource->asString()
-	    << " in the mount table as " << e->src << std::endl;
-	    _isAttached = true;
-	    break;
-	  }
-	}
+        {
+          // Type ISO: Since 11.1 mtab might contain the name of
+          // the loop device instead of the iso file:
+          if ( ref.mediaSource->type == "iso"
+            && str::hasPrefix( Pathname(e->src).asString(), "/dev/loop" )
+            && ref.attachPoint->path == Pathname(e->dir) )
+          {
+            DBG << "Found bound media "
+            << ref.mediaSource->asString()
+            << " in the mount table as " << e->src << std::endl;
+            _isAttached = true;
+            break;
+          }
+        }
       }
 
       if( !_isAttached)
       {
         MIL << "Looking for " << ref << endl;
-	if( entries.empty() )
-	{
-	  ERR << "Unable to find any entry in the /etc/mtab file" << std::endl;
-	}
-	else
-	{
+        if( entries.empty() )
+        {
+          ERR << "Unable to find any entry in the /etc/mtab file" << std::endl;
+        }
+        else
+        {
           dumpRange( DBG << "MountEntries: ", entries.begin(), entries.end() ) << endl;
-	}
-	if( old_mtime > 0 )
-	{
+        }
+        if( old_mtime > 0 )
+        {
           ERR << "Attached media not in mount table any more - forcing reset!"
               << std::endl;
 
-	  _mediaSource.reset();
-	}
-	else
-	{
+          _mediaSource.reset();
+        }
+        else
+        {
           WAR << "Attached media not in mount table ..." << std::endl;
-	}
+        }
 
         // reset the mtime and force a new check to make sure,
         // that we've found the media at least once in the mtab.
@@ -845,15 +845,15 @@ void MediaHandler::forceRelaseAllMedia(const MediaSourceRef &ref,
         DBG << "Forcing release of media device "
             << ref->asString()
             << " in the mount table as "
-	    << e->src << std::endl;
-	try {
-	  Mount mount;
-	  mount.umount(e->dir);
-	}
-	catch (const Exception &e)
-	{
-	  ZYPP_CAUGHT(e);
-	}
+            << e->src << std::endl;
+        try {
+          Mount mount;
+          mount.umount(e->dir);
+        }
+        catch (const Exception &e)
+        {
+          ZYPP_CAUGHT(e);
+        }
       }
     }
     else
@@ -863,18 +863,18 @@ void MediaHandler::forceRelaseAllMedia(const MediaSourceRef &ref,
       MediaSource media(mtype, e->src);
       if( ref->equals( media))
       {
-	DBG << "Forcing release of media name "
-	    << ref->asString()
-	    << " in the mount table as "
-	    << e->src << std::endl;
-	try {
-	  Mount mount;
-	  mount.umount(e->dir);
-	}
-	catch (const Exception &e)
-	{
-	  ZYPP_CAUGHT(e);
-	}
+        DBG << "Forcing release of media name "
+            << ref->asString()
+            << " in the mount table as "
+            << e->src << std::endl;
+        try {
+          Mount mount;
+          mount.umount(e->dir);
+        }
+        catch (const Exception &e)
+        {
+          ZYPP_CAUGHT(e);
+        }
       }
     }
   }
@@ -889,8 +889,8 @@ MediaHandler::checkAttachPoint(const Pathname &apoint) const
 // STATIC
 bool
 MediaHandler::checkAttachPoint(const Pathname &apoint,
-			       bool            emptydir,
-	                       bool            writeable)
+                               bool            emptydir,
+                               bool            writeable)
 {
   if( apoint.empty() || !apoint.absolute())
   {
@@ -932,7 +932,7 @@ MediaHandler::checkAttachPoint(const Pathname &apoint,
         (atest=::mkdtemp(atemp)) == NULL)
     {
       if( atemp != NULL)
-	::free(atemp);
+        ::free(atemp);
 
       ERR << "Attach point '" << ainfo.path()
           << "' is not a writeable directory" << std::endl;
@@ -975,7 +975,7 @@ MediaHandler::dependsOnParent(MediaAccessId parentId, bool exactIdMatch)
       AttachedMedia am2 = mm.getAttachedMedia(parentId);
       if( am1.mediaSource && am2.mediaSource)
       {
-	return am1.mediaSource->equals( *(am2.mediaSource));
+        return am1.mediaSource->equals( *(am2.mediaSource));
       }
     }
   }
@@ -1148,7 +1148,7 @@ bool MediaHandler::doesFileExist( const Pathname & filename ) const
 //	METHOD TYPE : PMError
 //
 void MediaHandler::getDirectoryYast( std::list<std::string> & retlist,
-					const Pathname & dirname, bool dots ) const
+                                        const Pathname & dirname, bool dots ) const
 {
   retlist.clear();
 
@@ -1339,11 +1339,11 @@ void MediaHandler::getDirInfo( filesystem::DirContent & retlist,
     int res = readdir( retlist, info.path(), dots );
     if ( res )
     {
-	MediaSystemException nexcpt(url(), "readdir failed");
+        MediaSystemException nexcpt(url(), "readdir failed");
 #if NONREMOTE_DIRECTORY_YAST
-	nexcpt.remember(excpt_r);
+        nexcpt.remember(excpt_r);
 #endif
-	ZYPP_THROW(nexcpt);
+        ZYPP_THROW(nexcpt);
     }
 #if NONREMOTE_DIRECTORY_YAST
   }

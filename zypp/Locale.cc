@@ -28,7 +28,7 @@ namespace zypp
     {
        boost::string_ref::size_type sep = trashStart( code_r );
        if ( sep != boost::string_ref::npos )
-	 code_r = IdString( code_r.c_str(), sep );
+         code_r = IdString( code_r.c_str(), sep );
        return code_r;
     }
 
@@ -46,18 +46,18 @@ namespace zypp
       IdString ret;
       if ( language_r )
       {
-	if ( country_r )
-	  ret = IdString( std::string(language_r) + "_" + country_r.c_str() );
-	else
-	  ret = IdString(language_r);
+        if ( country_r )
+          ret = IdString( std::string(language_r) + "_" + country_r.c_str() );
+        else
+          ret = IdString(language_r);
       }
       else
       {
-	if ( country_r )
-	  ret = IdString( "_" + std::string(country_r) );
-	else if ( ! ( IdString(language_r) || IdString(country_r) ) )
-	  ret = IdString::Null;
-	// else IdString::Empty
+        if ( country_r )
+          ret = IdString( "_" + std::string(country_r) );
+        else if ( ! ( IdString(language_r) || IdString(country_r) ) )
+          ret = IdString::Null;
+        // else IdString::Empty
       }
       return ret;
     }
@@ -81,9 +81,9 @@ namespace zypp
       std::string ret( lc._l.name() );
       if ( lc._c )
       {
-	ret += " (";
-	ret += lc._c.name();
-	ret += ")";
+        ret += " (";
+        ret += lc._c.name();
+        ret += ")";
       }
       return ret;
     }
@@ -93,14 +93,14 @@ namespace zypp
       static const IdString special( "pt_BR" );
       Locale ret;
       if ( index_r == special )	// "pt_BR"->"en" - by now the only fallback exception
-	ret = Locale::enCode;
+        ret = Locale::enCode;
       else
       {
-	const LC & lc( getIndex( index_r ) );
-	if ( lc._c )
-	  ret = lc._l;
-	else if ( lc._l && lc._l != LanguageCode::enCode )
-	  ret = Locale::enCode;
+        const LC & lc( getIndex( index_r ) );
+        if ( lc._c )
+          ret = lc._l;
+        else if ( lc._l && lc._l != LanguageCode::enCode )
+          ret = Locale::enCode;
       }
       return ret;
     }
@@ -110,7 +110,7 @@ namespace zypp
     {
       boost::string_ref::size_type sep = trashStart( code_r );
       if ( sep != boost::string_ref::npos )
-	code_r = code_r.substr( 0, sep );
+        code_r = code_r.substr( 0, sep );
       return IdString( code_r );
     }
 
@@ -142,22 +142,22 @@ namespace zypp
       auto it = _codeMap.find( index_r );
       if ( it == _codeMap.end() )
       {
-	CodeMap::value_type newval( index_r, LC() );
+        CodeMap::value_type newval( index_r, LC() );
 
-	boost::string_ref str( index_r.c_str() );
-	boost::string_ref::size_type sep = str.find( '_' );
-	if ( sep == boost::string_ref::npos )
-	  newval.second._l = LanguageCode( index_r );
-	else
-	{
-	  // bsc#1064999: dup! Creating a new IdString may invalidate the IdString.c_str() stored in str.
-	  std::string dup( str );
-	  str = dup;
-	  newval.second._l = LanguageCode( IdString(str.substr( 0, sep )) );
-	  newval.second._c = CountryCode( IdString(str.substr( sep+1 )) );
-	}
+        boost::string_ref str( index_r.c_str() );
+        boost::string_ref::size_type sep = str.find( '_' );
+        if ( sep == boost::string_ref::npos )
+          newval.second._l = LanguageCode( index_r );
+        else
+        {
+          // bsc#1064999: dup! Creating a new IdString may invalidate the IdString.c_str() stored in str.
+          std::string dup( str );
+          str = dup;
+          newval.second._l = LanguageCode( IdString(str.substr( 0, sep )) );
+          newval.second._c = CountryCode( IdString(str.substr( sep+1 )) );
+        }
 
-	it = _codeMap.insert( std::move(newval) ).first;
+        it = _codeMap.insert( std::move(newval) ).first;
       }
       return it->second;
     }
@@ -215,7 +215,7 @@ namespace zypp
     if ( ! avLocales_r.empty() )
     {
       if ( ! requested_r )
-	requested_r = ZConfig::instance().textLocale();
+        requested_r = ZConfig::instance().textLocale();
       for ( ; requested_r; requested_r = requested_r.fallback() )
       {
         if ( avLocales_r.count( requested_r ) )

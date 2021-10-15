@@ -72,7 +72,7 @@ namespace zypp
     void load();
 
     void reload();
-    
+
     /**
      * unload target resolvables from the
      * pool

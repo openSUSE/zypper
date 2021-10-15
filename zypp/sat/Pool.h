@@ -47,7 +47,7 @@ namespace zypp
     {
       public:
         typedef detail::SolvableIterator SolvableIterator;
-	typedef zypp::detail::RepositoryIterator     RepositoryIterator;
+        typedef zypp::detail::RepositoryIterator     RepositoryIterator;
         typedef detail::size_type        size_type;
 
       public:
@@ -72,11 +72,11 @@ namespace zypp
         /** Update housekeeping data if necessary (e.g. whatprovides). */
         void prepare() const;
 
-	/** Get rootdir (for file conflicts check) */
-	Pathname rootDir() const;
+        /** Get rootdir (for file conflicts check) */
+        Pathname rootDir() const;
 
-	/** Set rootdir (for file conflicts check) */
-	void rootDir( const Pathname & root_r );
+        /** Set rootdir (for file conflicts check) */
+        void rootDir( const Pathname & root_r );
 
       public:
         /** Whether \ref Pool contains repos. */
@@ -91,9 +91,9 @@ namespace zypp
         /** Iterator behind the last \ref Repository. */
         RepositoryIterator reposEnd() const;
 
-	/** Iterate the repositories. */
-	Iterable<RepositoryIterator> repos() const
-	{ return makeIterable( reposBegin(), reposEnd() ); }
+        /** Iterate the repositories. */
+        Iterable<RepositoryIterator> repos() const
+        { return makeIterable( reposBegin(), reposEnd() ); }
 
         /** Return a \ref Repository named \c alias_r.
          * It a such a \ref Repository does not already exist
@@ -113,11 +113,11 @@ namespace zypp
         { reposFind( alias_r ).eraseFromPool(); }
 
         /** Remove all repos from the pool.
-	 * This also shrinks a pool which may have become large
-	 * after having added and removed repos lots of times.
-	 */
+         * This also shrinks a pool which may have become large
+         * after having added and removed repos lots of times.
+         */
         void reposEraseAll()
-	{ while ( ! reposEmpty() ) reposErase( reposBegin()->alias() ); }
+        { while ( ! reposEmpty() ) reposErase( reposBegin()->alias() ); }
 
       public:
         /** Reserved system repository alias \c @System. */
@@ -171,9 +171,9 @@ namespace zypp
         /** Iterator behind the last \ref Solvable. */
         SolvableIterator solvablesEnd() const;
 
-	/** Iterate the solvables. */
-	Iterable<SolvableIterator> solvables() const
-	{ return makeIterable( solvablesBegin(), solvablesEnd() ); }
+        /** Iterate the solvables. */
+        Iterable<SolvableIterator> solvables() const
+        { return makeIterable( solvablesBegin(), solvablesEnd() ); }
 
       public:
         /** \name Iterate all Solvables matching a \c TFilter. */
@@ -199,10 +199,10 @@ namespace zypp
       public:
         /** \name Requested locales. */
         //@{
-	/** Set the default language for retrieving translated texts.
-	 * Updated when calling \ref ZConfig::setTextLocale.
-	 */
-	void setTextLocale( const Locale & locale_r );
+        /** Set the default language for retrieving translated texts.
+         * Updated when calling \ref ZConfig::setTextLocale.
+         */
+        void setTextLocale( const Locale & locale_r );
 
         /** Set the requested locales.
          * Languages to be supported by the system, e.g. language specific
@@ -229,14 +229,14 @@ namespace zypp
         bool isRequestedLocale( const Locale & locale_r ) const;
 
 
-	/** Start tracking changes based on this \a locales_r. */
-	void initRequestedLocales( const LocaleSet & locales_r );
+        /** Start tracking changes based on this \a locales_r. */
+        void initRequestedLocales( const LocaleSet & locales_r );
 
-	/** Added since last initRequestedLocales. */
-	const LocaleSet & getAddedRequestedLocales() const;
+        /** Added since last initRequestedLocales. */
+        const LocaleSet & getAddedRequestedLocales() const;
 
-	/** Removed since last initRequestedLocales.*/
-	const LocaleSet & getRemovedRequestedLocales() const;
+        /** Removed since last initRequestedLocales.*/
+        const LocaleSet & getRemovedRequestedLocales() const;
 
 
         /** Get the set of available locales.
@@ -250,25 +250,25 @@ namespace zypp
         //@}
 
       public:
-	/** \name Multiversion install.
-	 * Whether the pool contains packages which are multiversion installable.
-	 * \see \ref Solvable::multiversionInstall
-	 * \see \ref ZConfig::multiversionSpec
-	 */
-	//@{
-	typedef SolvableSet MultiversionList;
-	const MultiversionList & multiversion() const;
-	/** \deprecated Legacy, use multiversion().empty() instead. */
-	ZYPP_DEPRECATED bool multiversionEmpty() const { return multiversion().empty(); }
-	//@}
+        /** \name Multiversion install.
+         * Whether the pool contains packages which are multiversion installable.
+         * \see \ref Solvable::multiversionInstall
+         * \see \ref ZConfig::multiversionSpec
+         */
+        //@{
+        typedef SolvableSet MultiversionList;
+        const MultiversionList & multiversion() const;
+        /** \deprecated Legacy, use multiversion().empty() instead. */
+        ZYPP_DEPRECATED bool multiversionEmpty() const { return multiversion().empty(); }
+        //@}
 
       public:
         /** \name Autoinstalled */
         //@{
         /** Get ident list of all autoinstalled solvables. */
-	Queue autoInstalled() const;
-	/** Set ident list of all autoinstalled solvables. */
-	void setAutoInstalled( const Queue & autoInstalled_r );
+        Queue autoInstalled() const;
+        /** Set ident list of all autoinstalled solvables. */
+        void setAutoInstalled( const Queue & autoInstalled_r );
         //@}
 
       public:

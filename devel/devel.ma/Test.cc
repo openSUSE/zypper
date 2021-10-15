@@ -38,7 +38,7 @@ bool solve()
   }
   MIL << "resolve " << rres << endl;
   vdumpPoolStats( USR << "Transacting:"<< endl,
-		  make_filter_begin<resfilter::ByTransact>(ResPool::instance()),
+                  make_filter_begin<resfilter::ByTransact>(ResPool::instance()),
                   make_filter_end<resfilter::ByTransact>(ResPool::instance()) ) << endl;
 
   return true;

@@ -58,8 +58,8 @@ namespace zypp
       const RepoInfo & repoInfo() const { return _repoinfo; }
 
       protected:
-	/** Common workflow downloading a (signed) master index file */
-	void defaultDownloadMasterIndex( MediaSetAccess & media_r, const Pathname & destdir_r, const Pathname & masterIndex_r );
+        /** Common workflow downloading a (signed) master index file */
+        void defaultDownloadMasterIndex( MediaSetAccess & media_r, const Pathname & destdir_r, const Pathname & masterIndex_r );
 
       private:
         RepoInfo _repoinfo;

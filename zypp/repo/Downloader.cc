@@ -45,7 +45,7 @@ namespace repo
     void operator()( const Pathname & file_r ) const
     {
       if ( _preCheckCB )
-	_preCheckCB( file_r );
+        _preCheckCB( file_r );
       SignatureFileChecker::operator()( file_r );
     }
 
@@ -67,39 +67,39 @@ namespace repo
       const std::string & keyid { p.second };
 
       if ( keyRing->trustedPublicKeyData( keyid ) ) {
-	DBG << "Keyhint is already trusted: " << keyid << " (" << file << ")" << endl;
-	continue;	// already a trusted key
+        DBG << "Keyhint is already trusted: " << keyid << " (" << file << ")" << endl;
+        continue;	// already a trusted key
       }
 
       DBG << "Keyhint search key " << keyid << " (" << file << ")" << endl;
       PublicKeyData keyData = keyRing->publicKeyData( keyid );
       if ( not keyData ) {
-	// try to get it from cache or download it...
+        // try to get it from cache or download it...
 
-	// TODO: Enhance the key caching in general...
-	const ZConfig & conf = ZConfig::instance();
-	Pathname cacheFile = conf.repoManagerRoot() / conf.pubkeyCachePath() / file;
+        // TODO: Enhance the key caching in general...
+        const ZConfig & conf = ZConfig::instance();
+        Pathname cacheFile = conf.repoManagerRoot() / conf.pubkeyCachePath() / file;
 
-	PublicKey key { PublicKey::noThrow( cacheFile ) };
-	if ( not key.fileProvidesKey( keyid ) ) {
+        PublicKey key { PublicKey::noThrow( cacheFile ) };
+        if ( not key.fileProvidesKey( keyid ) ) {
 
-	  key = PublicKey::noThrow( media_r.provideOptionalFile( file ) );
-	  if ( not key.fileProvidesKey( keyid ) ) {
+          key = PublicKey::noThrow( media_r.provideOptionalFile( file ) );
+          if ( not key.fileProvidesKey( keyid ) ) {
 
-	    WAR << "Keyhint " << file << " does not contain a key with id " << keyid << ". Skipping it." << endl;
-	    continue;
-	  }
-	  // Try to cache it...
-	  filesystem::hardlinkCopy( key.path(), cacheFile );
-	}
+            WAR << "Keyhint " << file << " does not contain a key with id " << keyid << ". Skipping it." << endl;
+            continue;
+          }
+          // Try to cache it...
+          filesystem::hardlinkCopy( key.path(), cacheFile );
+        }
 
-	keyRing->importKey( key, false );		// store in general keyring (not trusted!)
-	keyData = keyRing->publicKeyData( keyid );	// fetch back from keyring in case it was a hidden key
+        keyRing->importKey( key, false );		// store in general keyring (not trusted!)
+        keyData = keyRing->publicKeyData( keyid );	// fetch back from keyring in case it was a hidden key
       }
 
       if ( not PublicKey::isSafeKeyId( keyid ) ) {
-	WAR << "Keyhint " << keyid << " for " << keyData << " is not strong enough for auto import. Just caching it." << endl;
-	continue;
+        WAR << "Keyhint " << keyid << " for " << keyData << " is not strong enough for auto import. Just caching it." << endl;
+        continue;
       }
 
       DBG << "Keyhint remember buddy " << keyData << endl;
@@ -162,11 +162,11 @@ void Downloader::defaultDownloadMasterIndex( MediaSetAccess & media_r, const Pat
     {
       // only add the signature if it exists
       if ( isSigned )
-	sigchecker.signature( destdir_r / sigpath );
+        sigchecker.signature( destdir_r / sigpath );
 
       // only add the key if it exists
       if ( PathInfo(destdir_r / keypath).isExist() )
-	sigchecker.addPublicKey( destdir_r / keypath );
+        sigchecker.addPublicKey( destdir_r / keypath );
 
       // set the checker context even if the key is not known
       // (unsigned repo, key file missing; bnc #495977)
@@ -174,18 +174,18 @@ void Downloader::defaultDownloadMasterIndex( MediaSetAccess & media_r, const Pat
 
       // bsc#1184326: Check and handle extra gpg keys delivered with trusted signed master index.
       if ( masterIndex_r.basename() == "repomd.xml" ) {
-	sigchecker.preCheckCB( [&]( const Pathname & file_r )->void {
-	  // Take care no exception escapes! Main job is the signature verification.
-	  try {
-	    checkExtraKeysInRepomd( media_r, destdir_r, file_r, sigchecker );
-	  }
-	  catch ( const Exception & exp )
-	  { ZYPP_CAUGHT(exp); }
-	  catch ( const std::exception & exp )
-	  { ZYPP_CAUGHT(exp); }
-	  catch (...)
-	  { INT << "Oops!" << endl; }
-	});
+        sigchecker.preCheckCB( [&]( const Pathname & file_r )->void {
+          // Take care no exception escapes! Main job is the signature verification.
+          try {
+            checkExtraKeysInRepomd( media_r, destdir_r, file_r, sigchecker );
+          }
+          catch ( const Exception & exp )
+          { ZYPP_CAUGHT(exp); }
+          catch ( const std::exception & exp )
+          { ZYPP_CAUGHT(exp); }
+          catch (...)
+          { INT << "Oops!" << endl; }
+        });
       }
       checker = FileChecker( ref(sigchecker) );	// ref() to the local sigchecker is important as we want back fileValidated!
     }

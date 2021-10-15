@@ -45,9 +45,9 @@ namespace zypp
       char * tmp = ::cuserid(buf);
       if (tmp)
       {
-	result = string(tmp);
-	if (!::gethostname(buf, 255))
-	  result += "@" + string(buf);
+        result = string(tmp);
+        if (!::gethostname(buf, 255))
+          result += "@" + string(buf);
       }
       return result;
     }
@@ -57,13 +57,13 @@ namespace zypp
       static std::string _val;
       if ( _val.empty() )
       {
-	pid_t mypid = getpid();
-	zypp::Pathname p( "/proc/"+zypp::str::numstring(mypid)+"/exe" );
-	zypp::Pathname myname( zypp::filesystem::readlink( p ) );
+        pid_t mypid = getpid();
+        zypp::Pathname p( "/proc/"+zypp::str::numstring(mypid)+"/exe" );
+        zypp::Pathname myname( zypp::filesystem::readlink( p ) );
 
-	_val += zypp::str::numstring(mypid);
-	_val += ":";
-	_val += myname.basename();
+        _val += zypp::str::numstring(mypid);
+        _val += ":";
+        _val += myname.basename();
       }
       return _val;
     }
@@ -73,28 +73,28 @@ namespace zypp
       static std::string _val;
       if ( _val.empty() )
       {
-	pid_t mypid = getpid();
-	{
-	  std::ifstream cmdlineStr( Pathname("/proc/"+zypp::str::numstring(mypid)+"/cmdline").c_str() );
-	  char ch;
- 	  const char * sep = "'";
-	  while ( cmdlineStr && cmdlineStr.get( ch ) )
-	  {
-	    if ( sep )
-	    {
-	      _val += sep;
-	      sep = nullptr;
-	    }
-	    switch ( ch )
-	    {
-	      case '\0':	_val += '\''; sep = " '"; break;
-	      case '\n':	_val += ' '; break;
-	      case '\\':	_val += '\\'; _val += '\\'; break;
-	      case '|':		_val += '\\'; _val += '|'; break;
-	      default:		_val += ch; break;
-	    }
-	  }
-	}
+        pid_t mypid = getpid();
+        {
+          std::ifstream cmdlineStr( Pathname("/proc/"+zypp::str::numstring(mypid)+"/cmdline").c_str() );
+          char ch;
+          const char * sep = "'";
+          while ( cmdlineStr && cmdlineStr.get( ch ) )
+          {
+            if ( sep )
+            {
+              _val += sep;
+              sep = nullptr;
+            }
+            switch ( ch )
+            {
+              case '\0':	_val += '\''; sep = " '"; break;
+              case '\n':	_val += ' '; break;
+              case '\\':	_val += '\\'; _val += '\\'; break;
+              case '|':		_val += '\\'; _val += '|'; break;
+              default:		_val += ch; break;
+            }
+          }
+        }
       }
       return _val;
     }
@@ -118,7 +118,7 @@ namespace zypp
       if( !_log && _fnameLastFail != _fname )
       {
         ERR << "Could not open logfile '" << _fname << "'" << endl;
-	_fnameLastFail = _fname;
+        _fnameLastFail = _fname;
       }
     }
 

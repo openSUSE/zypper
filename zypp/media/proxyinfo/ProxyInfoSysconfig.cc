@@ -28,31 +28,31 @@ namespace zypp {
     : ProxyInfo::Impl()
     {
       std::map<std::string,std::string> data = sysconfig::read(
-	path.relative()
-	  ? "/etc/sysconfig" + path
-	  : path);
+        path.relative()
+          ? "/etc/sysconfig" + path
+          : path);
       std::map<std::string,std::string>::const_iterator it = data.find("PROXY_ENABLED");
       if (it != data.end())
-	_enabled = it->second != "no";
+        _enabled = it->second != "no";
       it = data.find("HTTP_PROXY");
       if (it != data.end())
-	_proxies["http"] = it->second;
+        _proxies["http"] = it->second;
       it = data.find("HTTPS_PROXY");
       if (it != data.end())
-	_proxies["https"] = it->second;
+        _proxies["https"] = it->second;
       it = data.find("FTP_PROXY");
       if (it != data.end())
-	_proxies["ftp"] = it->second;
+        _proxies["ftp"] = it->second;
       it = data.find("NO_PROXY");
       if (it != data.end())
-	str::split(it->second, std::back_inserter(_no_proxy), ", \t");
+        str::split(it->second, std::back_inserter(_no_proxy), ", \t");
     }
 
     std::string ProxyInfoSysconfig::proxy(const Url & url_r) const
     {
       std::map<std::string,std::string>::const_iterator it = _proxies.find(url_r.getScheme());
       if (it != _proxies.end())
-	return it->second;
+        return it->second;
       return "";
     }
 

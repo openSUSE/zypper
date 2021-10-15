@@ -45,26 +45,26 @@ namespace zypp
         if ( ! _ident )
           return;
 
-	ResKind explicitKind = ResKind::explicitBuiltin( _ident.c_str() );
-	// NOTE: kind package and srcpackage do not have namespaced ident!
-	if ( ! explicitKind  )
-	{
+        ResKind explicitKind = ResKind::explicitBuiltin( _ident.c_str() );
+        // NOTE: kind package and srcpackage do not have namespaced ident!
+        if ( ! explicitKind  )
+        {
           _name = _ident;
-	  // No kind defaults to package
-	  if ( !_kind )
-	    _kind = ResKind::package;
-	  else if ( ! ( _kind == ResKind::package || _kind == ResKind::srcpackage ) )
-	    _ident = IdString( str::form( "%s:%s", _kind.c_str(), _ident.c_str() ) );
-	}
-	else
-	{
-	  // strip kind spec from name
-	  _name = IdString( ::strchr( _ident.c_str(), ':' )+1 );
-	  _kind = explicitKind;
-	  if ( _kind == ResKind::package || _kind == ResKind::srcpackage )
-	    _ident = _name;
-	}
-	return;
+          // No kind defaults to package
+          if ( !_kind )
+            _kind = ResKind::package;
+          else if ( ! ( _kind == ResKind::package || _kind == ResKind::srcpackage ) )
+            _ident = IdString( str::form( "%s:%s", _kind.c_str(), _ident.c_str() ) );
+        }
+        else
+        {
+          // strip kind spec from name
+          _name = IdString( ::strchr( _ident.c_str(), ':' )+1 );
+          _kind = explicitKind;
+          if ( _kind == ResKind::package || _kind == ResKind::srcpackage )
+            _ident = _name;
+        }
+        return;
       }
     } // namespace
     ///////////////////////////////////////////////////////////////////
@@ -144,13 +144,13 @@ namespace zypp
       }
       else
       {
-	for ( Locale l( lang_r ); l; l = l.fallback() )
-	{
-	  if ( (s = ::solvable_lookup_str_lang( _solvable, attr.id(), l.c_str(), 0 )) )
-	    return s;
-	}
-	// here: no matching locale, so use default
-	s = ::solvable_lookup_str_lang( _solvable, attr.id(), 0, 0 );
+        for ( Locale l( lang_r ); l; l = l.fallback() )
+        {
+          if ( (s = ::solvable_lookup_str_lang( _solvable, attr.id(), l.c_str(), 0 )) )
+            return s;
+        }
+        // here: no matching locale, so use default
+        s = ::solvable_lookup_str_lang( _solvable, attr.id(), 0, 0 );
       }
       return s ? s : std::string();
    }
@@ -230,7 +230,7 @@ namespace zypp
       if ( ! file )
         return OnMediaLocation();
       if ( ! medianr )
-	medianr = 1;
+        medianr = 1;
 
       OnMediaLocation ret;
 
@@ -288,12 +288,12 @@ namespace zypp
       const char * ident = IdString( _solvable->name ).c_str();
       ResKind knownKind( ResKind::explicitBuiltin( ident ) );
       if ( knownKind )
-	return knownKind;
+        return knownKind;
 
       // ...or no ':' in package names (hopefully)...
       const char * sep = ::strchr( ident, ':' );
       if ( ! sep )
-	return ResKind::package;
+        return ResKind::package;
 
       // ...or something unknown.
       return ResKind( std::string( ident, sep-ident ) );
@@ -405,9 +405,9 @@ namespace zypp
     {
       NO_SOLVABLE_RETURN( false );
       if ( isKind<Package>() )
-	return myPool().isRetracted( *this );
+        return myPool().isRetracted( *this );
       if ( isKind<Patch>() )
-	return lookupStrAttribute( SolvAttr::updateStatus ) == "retracted";
+        return lookupStrAttribute( SolvAttr::updateStatus ) == "retracted";
       return false;
     }
 
@@ -476,7 +476,7 @@ namespace zypp
     {
       inline Capabilities _getCapabilities( detail::IdType * idarraydata_r, ::Offset offs_r )
       {
-	return offs_r ? Capabilities( idarraydata_r + offs_r ) : Capabilities();
+        return offs_r ? Capabilities( idarraydata_r + offs_r ) : Capabilities();
       }
     } // namespace
     ///////////////////////////////////////////////////////////////////
@@ -696,7 +696,7 @@ namespace zypp
       if ( ! file )
         medianr = 0U;
       else if ( ! medianr )
-	medianr = 1U;
+        medianr = 1U;
       return medianr;
     }
 
@@ -748,13 +748,13 @@ namespace zypp
       std::string ret = lookupStrAttribute( SolvAttr::eula, lang_r );
       if ( ret.empty() && isKind<Product>() )
       {
-	const RepoInfo & ri( repoInfo() );
-	std::string riname( name() );	// "license-"+name with fallback "license"
-	if ( ! ri.hasLicense( riname ) )
-	  riname.clear();
+        const RepoInfo & ri( repoInfo() );
+        std::string riname( name() );	// "license-"+name with fallback "license"
+        if ( ! ri.hasLicense( riname ) )
+          riname.clear();
 
-	if ( ri.needToAcceptLicense( riname ) || ! ui::Selectable::get( *this )->hasInstalledObj() )
-	  ret = ri.getLicense( riname, lang_r ); // bnc#908976: suppress informal license upon update
+        if ( ri.needToAcceptLicense( riname ) || ! ui::Selectable::get( *this )->hasInstalledObj() )
+          ret = ri.getLicense( riname, lang_r ); // bnc#908976: suppress informal license upon update
       }
       return ret;
     }
@@ -764,12 +764,12 @@ namespace zypp
       NO_SOLVABLE_RETURN( false );
       if ( isKind<Product>() )
       {
-	const RepoInfo & ri( repoInfo() );
-	std::string riname( name() );	// "license-"+name with fallback "license"
-	if ( ! ri.hasLicense( riname ) )
-	  riname.clear();
+        const RepoInfo & ri( repoInfo() );
+        std::string riname( name() );	// "license-"+name with fallback "license"
+        if ( ! ri.hasLicense( riname ) )
+          riname.clear();
 
-	return ri.needToAcceptLicense( riname );
+        return ri.needToAcceptLicense( riname );
       }
       return true;
     }

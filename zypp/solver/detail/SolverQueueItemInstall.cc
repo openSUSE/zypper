@@ -76,14 +76,14 @@ bool SolverQueueItemInstall::addRule (sat::detail::CQueue & q)
 {
     ::Id id = IdString(_name).id();
     if (_soft) {
-	queue_push( &(q), SOLVER_INSTALL | SOLVER_SOLVABLE_NAME | SOLVER_WEAK  );
+        queue_push( &(q), SOLVER_INSTALL | SOLVER_SOLVABLE_NAME | SOLVER_WEAK  );
     } else {
-	queue_push( &(q), SOLVER_INSTALL | SOLVER_SOLVABLE_NAME );
+        queue_push( &(q), SOLVER_INSTALL | SOLVER_SOLVABLE_NAME );
     }
     queue_push( &(q), id);
 
     MIL << "Install " << _name << (_soft ? "(soft)" : "")
-	<< " with SAT-PoolID: " << id << endl;
+        << " with SAT-PoolID: " << id << endl;
     return true;
 }
 
@@ -105,7 +105,7 @@ SolverQueueItemInstall::cmp (SolverQueueItem_constPtr item) const
         return cmp;
     SolverQueueItemInstall_constPtr ins = dynamic_pointer_cast<const SolverQueueItemInstall>(item);
     if (_name != ins->_name) {
-	return _name.compare(ins->_name);
+        return _name.compare(ins->_name);
     }
     return 0;
 }

@@ -378,7 +378,7 @@ namespace zypp
     }
 
     // ---------------------------------------------------------------
-	  bool
+          bool
     MediaManager::downloads(MediaAccessId accessId) const
     {
       ManagedMedia &ref( m_impl->findMM(accessId));

@@ -87,7 +87,7 @@ namespace zypp
 
       /** re start the timer without reset-ing it. */
       void restart();
-      
+
       /** Print elapsed time for a running timer.
        * Timer keeps on running.
       */

@@ -49,10 +49,10 @@ namespace zypp
       class ProblemSolutionIgnore : public ProblemSolution
       {
       public:
-	typedef std::list<PoolItem> PoolItemList;
+        typedef std::list<PoolItem> PoolItemList;
 
-	ProblemSolutionIgnore( PoolItem item );
-	ProblemSolutionIgnore( PoolItemList itemList );
+        ProblemSolutionIgnore( PoolItem item );
+        ProblemSolutionIgnore( PoolItemList itemList );
       };
 
     } // namespace detail

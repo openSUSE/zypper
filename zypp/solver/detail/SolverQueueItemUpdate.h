@@ -42,7 +42,7 @@ namespace zypp
 //	CLASS NAME : SolverQueueItemUpdate
 
 class SolverQueueItemUpdate : public SolverQueueItem {
-    
+
   private:
 
     PoolItem _item;  	// the item to-be-updated
@@ -52,7 +52,7 @@ class SolverQueueItemUpdate : public SolverQueueItem {
 
     SolverQueueItemUpdate (const ResPool & pool, const PoolItem & item, bool soft = false);
     virtual ~SolverQueueItemUpdate();
-    
+
     // ---------------------------------- I/O
 
     virtual std::ostream & dumpOn( std::ostream & str ) const;
@@ -62,10 +62,10 @@ class SolverQueueItemUpdate : public SolverQueueItem {
 
     // ---------------------------------- accessors
 
-    bool isSoft (void) const { return _soft; }    
+    bool isSoft (void) const { return _soft; }
 
     // ---------------------------------- methods
-    
+
     virtual bool addRule (sat::detail::CQueue & q);
     virtual SolverQueueItem_Ptr copy (void) const;
     virtual int cmp (SolverQueueItem_constPtr item) const;

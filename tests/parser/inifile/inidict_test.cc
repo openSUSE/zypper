@@ -31,7 +31,7 @@ BOOST_AUTO_TEST_CASE(ini_read)
   for ( IniDict::section_const_iterator it = dict.sectionsBegin(); it != dict.sectionsEnd(); ++it )
   {
     MIL << (*it) << endl;
-    
+
     for ( IniDict::entry_const_iterator it2 = dict.entriesBegin(*it); it2 != dict.entriesEnd(*it); ++it2 )
     {
       MIL << "  - " << (*it2).first << " | " << (*it2).second << endl;

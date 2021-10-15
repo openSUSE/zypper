@@ -32,29 +32,29 @@ namespace zypp
 class KeyManagerCtx
 {
     public:
-	/** Creates a new KeyManagerCtx for PGP using a volatile temp. homedir/keyring.
-	 *
-	 * Mainly used with methods, which need a context but do not need a keyring
-	 * (like \ref readKeyFromFile or \ref readSignatureFingerprints).
-	 *
-	 * \note The underlying keyring is intentionally NOT the users keyring.
-	 * Think of it as a volatile keyring whose content may get cleared anytime.
-	 *
-	 * \throws KeyRingException if context can not be created or set up
-	 */
-	static KeyManagerCtx createForOpenPGP();
+        /** Creates a new KeyManagerCtx for PGP using a volatile temp. homedir/keyring.
+         *
+         * Mainly used with methods, which need a context but do not need a keyring
+         * (like \ref readKeyFromFile or \ref readSignatureFingerprints).
+         *
+         * \note The underlying keyring is intentionally NOT the users keyring.
+         * Think of it as a volatile keyring whose content may get cleared anytime.
+         *
+         * \throws KeyRingException if context can not be created or set up
+         */
+        static KeyManagerCtx createForOpenPGP();
 
-	/** Creates a new KeyManagerCtx for PGP using a custom homedir/keyring.
-	 *
-	 * \note If you explicitly pass an empty \c Pathname, no homedir/keyring
-	 * will be set and GPGME will use it's defaults.
-	 *
-	 * \throws KeyRingException if context can not be created or set up
-	 */
-	static KeyManagerCtx createForOpenPGP( const Pathname & keyring_r );
+        /** Creates a new KeyManagerCtx for PGP using a custom homedir/keyring.
+         *
+         * \note If you explicitly pass an empty \c Pathname, no homedir/keyring
+         * will be set and GPGME will use it's defaults.
+         *
+         * \throws KeyRingException if context can not be created or set up
+         */
+        static KeyManagerCtx createForOpenPGP( const Pathname & keyring_r );
 
-	/** Return the homedir/keyring. */
-	Pathname homedir() const;
+        /** Return the homedir/keyring. */
+        Pathname homedir() const;
 
         /**  Returns a list of all public keys found in the current keyring */
         std::list<PublicKeyData> listKeys();

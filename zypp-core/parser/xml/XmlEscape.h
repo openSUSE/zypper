@@ -27,14 +27,14 @@ namespace zypp
     {
       struct EscapedString
       {
-	EscapedString( const std::string & in_r ) : _in( in_r ) {}
-	std::ostream & dumpOn( std::ostream & str ) const;
-	std::string asString() const
-	{ std::ostringstream str; dumpOn( str ); return str.str(); }
-	operator std::string() const
-	{ return asString(); }
+        EscapedString( const std::string & in_r ) : _in( in_r ) {}
+        std::ostream & dumpOn( std::ostream & str ) const;
+        std::string asString() const
+        { std::ostringstream str; dumpOn( str ); return str.str(); }
+        operator std::string() const
+        { return asString(); }
       private:
-	const std::string & _in;
+        const std::string & _in;
       };
 
       /** \relates EscapedString Stream output */

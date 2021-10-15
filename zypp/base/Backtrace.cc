@@ -38,64 +38,64 @@ namespace zypp
       static const size_t first = 0;
       for ( size_t i = first; i < size; ++i )
       {
-	char * mangled_name = 0;
-	char * offset_begin = 0;
-	char * offset_end = 0;
+        char * mangled_name = 0;
+        char * offset_begin = 0;
+        char * offset_end = 0;
 
-	// find parentheses and +address offset surrounding mangled name
-	for ( char * p = messages[i]; *p; ++p )
-	{
-	  if ( *p == '(' )
-	  {
-	    mangled_name = p;
-	  }
-	  else if ( *p == '+' )
-	  {
-	    offset_begin = p;
-	  }
-	  else if ( *p == ')' )
-	  {
-	    offset_end = p;
-	    break;
-	  }
-	}
+        // find parentheses and +address offset surrounding mangled name
+        for ( char * p = messages[i]; *p; ++p )
+        {
+          if ( *p == '(' )
+          {
+            mangled_name = p;
+          }
+          else if ( *p == '+' )
+          {
+            offset_begin = p;
+          }
+          else if ( *p == ')' )
+          {
+            offset_end = p;
+            break;
+          }
+        }
 
-	int btLevel = i-handlerStack; // negative level in sigsegvHandler
-	if ( i > first )
-	{
-	  stream_r << endl;
-	  if ( btLevel == 0 )
-	    stream_r << "vvvvvvvvvv----------------------------------------" << endl;
-	}
-	stream_r << "[" << (btLevel<0 ?"hd":"bt") << "]: (" << btLevel << ") ";
+        int btLevel = i-handlerStack; // negative level in sigsegvHandler
+        if ( i > first )
+        {
+          stream_r << endl;
+          if ( btLevel == 0 )
+            stream_r << "vvvvvvvvvv----------------------------------------" << endl;
+        }
+        stream_r << "[" << (btLevel<0 ?"hd":"bt") << "]: (" << btLevel << ") ";
 
-	// if the line could be processed, attempt to demangle the symbol
-	if ( mangled_name && offset_begin && offset_end && mangled_name < offset_begin )
-	{
-	  *mangled_name++ = '\0';
-	  *offset_begin++ = '\0';
-	  *offset_end++ = '\0';
+        // if the line could be processed, attempt to demangle the symbol
+        if ( mangled_name && offset_begin && offset_end && mangled_name < offset_begin )
+        {
+          *mangled_name++ = '\0';
+          *offset_begin++ = '\0';
+          *offset_end++ = '\0';
 
-	  int status;
-	  char * real_name = ::abi::__cxa_demangle( mangled_name, 0, 0, &status );
+          int status;
+          char * real_name = ::abi::__cxa_demangle( mangled_name, 0, 0, &status );
 
-	  // if demangling is successful, output the demangled function name
-	  if ( status == 0 )
-	  {
-	    stream_r << messages[i] << " : " << real_name << "+" << offset_begin << offset_end;
-	  }
-	  // otherwise, output the mangled function name
-	  else
-	  {
-	    stream_r << messages[i] << " : " << mangled_name << "+" << offset_begin << offset_end;
-	  }
-	  ::free( real_name );
-	}
-	else
-	{
-	  // otherwise, print the whole line
-	  stream_r << messages[i];
-	}
+          // if demangling is successful, output the demangled function name
+          if ( status == 0 )
+          {
+            stream_r << messages[i] << " : " << real_name << "+" << offset_begin << offset_end;
+          }
+          // otherwise, output the mangled function name
+          else
+          {
+            stream_r << messages[i] << " : " << mangled_name << "+" << offset_begin << offset_end;
+          }
+          ::free( real_name );
+        }
+        else
+        {
+          // otherwise, print the whole line
+          stream_r << messages[i];
+        }
       }
       ::free( messages );
     }

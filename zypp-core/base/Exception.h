@@ -227,14 +227,14 @@ namespace zypp
     void addToHistory( const TContainer & msgc_r )
     {
       for ( const std::string & el : msgc_r )
-	addHistory( el );
+        addHistory( el );
     }
     /** \ref addHistory from string container types (oldest first) moving */
     template<class TContainer>
     void moveToHistory( TContainer && msgc_r )
     {
       for ( std::string & el : msgc_r )
-	addHistory( std::move(el) );
+        addHistory( std::move(el) );
     }
 
     /** Iterator pointing to the most recent message. */

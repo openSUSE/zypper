@@ -47,248 +47,248 @@ namespace zypp
      *
      */
     struct Transaction::Impl : protected detail::PoolMember
-			     , private base::NonCopyable
+                             , private base::NonCopyable
     {
       friend std::ostream & operator<<( std::ostream & str, const Impl & obj );
 
       public:
-	typedef std::unordered_set<detail::IdType> set_type;
-	typedef std::unordered_map<detail::IdType,detail::IdType> map_type;
+        typedef std::unordered_set<detail::IdType> set_type;
+        typedef std::unordered_map<detail::IdType,detail::IdType> map_type;
 
-	struct PostMortem
-	{
-	  PostMortem()
-	  {}
-	  PostMortem( const sat::Solvable & solv_r )
-	    : _ident( solv_r.ident() )
-	    , _edition( solv_r.edition() )
-	    , _arch( solv_r.arch() )
-	  {}
+        struct PostMortem
+        {
+          PostMortem()
+          {}
+          PostMortem( const sat::Solvable & solv_r )
+            : _ident( solv_r.ident() )
+            , _edition( solv_r.edition() )
+            , _arch( solv_r.arch() )
+          {}
 
-	  IdString _ident;
-	  Edition  _edition;
-	  Arch     _arch;
-	};
-	typedef std::unordered_map<detail::IdType,PostMortem> pmmap_type;
-
-      public:
-	Impl()
-	  : _trans( ::transaction_create( nullptr ) )
-	{ memset( _trans, 0, sizeof(*_trans) ); }
-
-	Impl( LoadFromPoolType )
-	  : _watcher( myPool().serial() )
-	  , _trans( nullptr )
-	{
-	  Queue decisionq;
-	  for ( const PoolItem & pi : ResPool::instance() )
-	  {
-	    if ( ! pi.status().transacts() )
-	      continue;
-	    decisionq.push( pi.isSystem() ? -pi.id() : pi.id() );
-	  }
-	  Queue noobsq;
-	  for ( const Solvable & solv : myPool().multiversionList() )
-	  {
-	    noobsq.push( SOLVER_NOOBSOLETES | SOLVER_SOLVABLE );
-	    noobsq.push( solv.id() );
-	  }
-	  Map noobsmap;
-	  ::solver_calculate_noobsmap( myPool().getPool(), noobsq, noobsmap );
-	  _trans = ::transaction_create_decisionq( myPool().getPool(), decisionq, noobsmap );
-
-	  // NOTE: package/product buddies share the same ResStatus
-	  // so we also link the buddies stepStages. This assumes
-	  // only one buddy is acting during commit (package is installed,
-	  // but no extra operation for the product).
-	  for_( it, _trans->steps.elements, _trans->steps.elements + _trans->steps.count )
-	  {
-	    sat::Solvable solv( *it );
-	    // buddy list:
-	    if ( ! solv.isKind<Package>() )
-	    {
-	      PoolItem pi( solv );
-	      if ( pi.buddy() )
-	      {
-		_linkMap[*it] = pi.buddy().id();
-	      }
-	    }
-	    if ( solv.isSystem() )
-	    {
-	      // to delete list:
-	      if ( stepType( solv ) == TRANSACTION_ERASE )
-	      {
-		_systemErase.insert( *it );
-	      }
-	      // post mortem data
-	      _pmMap[*it] = solv;
-	    }
-	  }
-	}
-
-	~Impl()
-	{ ::transaction_free( _trans ); }
+          IdString _ident;
+          Edition  _edition;
+          Arch     _arch;
+        };
+        typedef std::unordered_map<detail::IdType,PostMortem> pmmap_type;
 
       public:
-	bool valid() const
-	{ return _watcher.isClean( myPool().serial() ); }
+        Impl()
+          : _trans( ::transaction_create( nullptr ) )
+        { memset( _trans, 0, sizeof(*_trans) ); }
 
-	bool order()
-	{
-	  if ( ! valid() )
-	    return false;
-	  if ( empty() )
-	    return true;
+        Impl( LoadFromPoolType )
+          : _watcher( myPool().serial() )
+          , _trans( nullptr )
+        {
+          Queue decisionq;
+          for ( const PoolItem & pi : ResPool::instance() )
+          {
+            if ( ! pi.status().transacts() )
+              continue;
+            decisionq.push( pi.isSystem() ? -pi.id() : pi.id() );
+          }
+          Queue noobsq;
+          for ( const Solvable & solv : myPool().multiversionList() )
+          {
+            noobsq.push( SOLVER_NOOBSOLETES | SOLVER_SOLVABLE );
+            noobsq.push( solv.id() );
+          }
+          Map noobsmap;
+          ::solver_calculate_noobsmap( myPool().getPool(), noobsq, noobsmap );
+          _trans = ::transaction_create_decisionq( myPool().getPool(), decisionq, noobsmap );
+
+          // NOTE: package/product buddies share the same ResStatus
+          // so we also link the buddies stepStages. This assumes
+          // only one buddy is acting during commit (package is installed,
+          // but no extra operation for the product).
+          for_( it, _trans->steps.elements, _trans->steps.elements + _trans->steps.count )
+          {
+            sat::Solvable solv( *it );
+            // buddy list:
+            if ( ! solv.isKind<Package>() )
+            {
+              PoolItem pi( solv );
+              if ( pi.buddy() )
+              {
+                _linkMap[*it] = pi.buddy().id();
+              }
+            }
+            if ( solv.isSystem() )
+            {
+              // to delete list:
+              if ( stepType( solv ) == TRANSACTION_ERASE )
+              {
+                _systemErase.insert( *it );
+              }
+              // post mortem data
+              _pmMap[*it] = solv;
+            }
+          }
+        }
+
+        ~Impl()
+        { ::transaction_free( _trans ); }
+
+      public:
+        bool valid() const
+        { return _watcher.isClean( myPool().serial() ); }
+
+        bool order()
+        {
+          if ( ! valid() )
+            return false;
+          if ( empty() )
+            return true;
 #if 0
-	  // This is hwo we could implement out own order method.
-	  // As ::transaction already groups by MediaNr, we don't
-	  // need it for ORDER_BY_MEDIANR.
-	  ::transaction_order( _trans, SOLVER_TRANSACTION_KEEP_ORDERDATA );
-	  detail::IdType chosen = 0;
-	  Queue choices;
+          // This is hwo we could implement out own order method.
+          // As ::transaction already groups by MediaNr, we don't
+          // need it for ORDER_BY_MEDIANR.
+          ::transaction_order( _trans, SOLVER_TRANSACTION_KEEP_ORDERDATA );
+          detail::IdType chosen = 0;
+          Queue choices;
 
-	  while ( true )
-	  {
-	    int ret = transaction_order_add_choices( _trans, chosen, choices );
-	    MIL << ret << ": " << chosen << ": " << choices << endl;
-	    chosen = choices.pop_front(); // pick one out of choices
-	    if ( ! chosen )
-	      break;
-	  }
-	  return true;
+          while ( true )
+          {
+            int ret = transaction_order_add_choices( _trans, chosen, choices );
+            MIL << ret << ": " << chosen << ": " << choices << endl;
+            chosen = choices.pop_front(); // pick one out of choices
+            if ( ! chosen )
+              break;
+          }
+          return true;
 #endif
-	  if ( !_ordered )
-	  {
-	    ::transaction_order( _trans, 0 );
-	    _ordered = true;
-	  }
-	  return true;
-	}
+          if ( !_ordered )
+          {
+            ::transaction_order( _trans, 0 );
+            _ordered = true;
+          }
+          return true;
+        }
 
-	bool empty() const
-	{ return( _trans->steps.count == 0 ); }
+        bool empty() const
+        { return( _trans->steps.count == 0 ); }
 
-	size_t size() const
-	{ return _trans->steps.count; }
+        size_t size() const
+        { return _trans->steps.count; }
 
-	const_iterator begin( const RW_pointer<Transaction::Impl> & self_r ) const
-	{ return const_iterator( self_r, _trans->steps.elements ); }
-	iterator begin( const RW_pointer<Transaction::Impl> & self_r )
-	{ return iterator( self_r, _trans->steps.elements ); }
+        const_iterator begin( const RW_pointer<Transaction::Impl> & self_r ) const
+        { return const_iterator( self_r, _trans->steps.elements ); }
+        iterator begin( const RW_pointer<Transaction::Impl> & self_r )
+        { return iterator( self_r, _trans->steps.elements ); }
 
-	const_iterator end( const RW_pointer<Transaction::Impl> & self_r ) const
-	{ return const_iterator( self_r, _trans->steps.elements + _trans->steps.count ); }
-	iterator end( const RW_pointer<Transaction::Impl> & self_r )
-	{ return iterator( self_r, _trans->steps.elements + _trans->steps.count ); }
+        const_iterator end( const RW_pointer<Transaction::Impl> & self_r ) const
+        { return const_iterator( self_r, _trans->steps.elements + _trans->steps.count ); }
+        iterator end( const RW_pointer<Transaction::Impl> & self_r )
+        { return iterator( self_r, _trans->steps.elements + _trans->steps.count ); }
 
-	const_iterator find(const RW_pointer<Transaction::Impl> & self_r, const sat::Solvable & solv_r ) const
-	{ detail::IdType * it( _find( solv_r ) ); return it ? const_iterator( self_r, it ) : end( self_r ); }
-	iterator find(const RW_pointer<Transaction::Impl> & self_r, const sat::Solvable & solv_r )
-	{ detail::IdType * it( _find( solv_r ) ); return it ? iterator( self_r, it ) : end( self_r ); }
-
-      public:
-	int installedResult( Queue & result_r ) const
-	{ return ::transaction_installedresult( _trans, result_r ); }
-
-	StringQueue autoInstalled() const
-	{ return _autoInstalled; }
-
-	void autoInstalled( const StringQueue & queue_r )
-	{ _autoInstalled = queue_r; }
+        const_iterator find(const RW_pointer<Transaction::Impl> & self_r, const sat::Solvable & solv_r ) const
+        { detail::IdType * it( _find( solv_r ) ); return it ? const_iterator( self_r, it ) : end( self_r ); }
+        iterator find(const RW_pointer<Transaction::Impl> & self_r, const sat::Solvable & solv_r )
+        { detail::IdType * it( _find( solv_r ) ); return it ? iterator( self_r, it ) : end( self_r ); }
 
       public:
-	StepType stepType( Solvable solv_r ) const
-	{
-	  if ( ! solv_r )
-	  {
-	    // post mortem @System solvable
-	    return isIn( _systemErase, solv_r.id() ) ? TRANSACTION_ERASE : TRANSACTION_IGNORE;
-	  }
+        int installedResult( Queue & result_r ) const
+        { return ::transaction_installedresult( _trans, result_r ); }
 
-	  switch( ::transaction_type( _trans, solv_r.id(), SOLVER_TRANSACTION_RPM_ONLY ) )
-	  {
-	    case SOLVER_TRANSACTION_ERASE: return TRANSACTION_ERASE; break;
-	    case SOLVER_TRANSACTION_INSTALL: return TRANSACTION_INSTALL; break;
-	    case SOLVER_TRANSACTION_MULTIINSTALL: return TRANSACTION_MULTIINSTALL; break;
-	  }
-	  return TRANSACTION_IGNORE;
-	}
+        StringQueue autoInstalled() const
+        { return _autoInstalled; }
 
-	StepStage stepStage( Solvable solv_r ) const
-	{ return stepStage( resolve( solv_r ) ); }
+        void autoInstalled( const StringQueue & queue_r )
+        { _autoInstalled = queue_r; }
 
-	void stepStage( Solvable solv_r, StepStage newval_r )
-	{ stepStage( resolve( solv_r ), newval_r ); }
+      public:
+        StepType stepType( Solvable solv_r ) const
+        {
+          if ( ! solv_r )
+          {
+            // post mortem @System solvable
+            return isIn( _systemErase, solv_r.id() ) ? TRANSACTION_ERASE : TRANSACTION_IGNORE;
+          }
 
-	const PostMortem & pmdata( Solvable solv_r ) const
-	{
-	  static PostMortem _none;
-	  pmmap_type::const_iterator it( _pmMap.find( solv_r.id() ) );
-	  return( it == _pmMap.end() ? _none : it->second );
-	}
+          switch( ::transaction_type( _trans, solv_r.id(), SOLVER_TRANSACTION_RPM_ONLY ) )
+          {
+            case SOLVER_TRANSACTION_ERASE: return TRANSACTION_ERASE; break;
+            case SOLVER_TRANSACTION_INSTALL: return TRANSACTION_INSTALL; break;
+            case SOLVER_TRANSACTION_MULTIINSTALL: return TRANSACTION_MULTIINSTALL; break;
+          }
+          return TRANSACTION_IGNORE;
+        }
 
-      private:
-	detail::IdType resolve( const Solvable & solv_r ) const
-	{
-	  map_type::const_iterator res( _linkMap.find( solv_r.id() ) );
-	  return( res == _linkMap.end() ? solv_r.id() : res->second );
-	}
+        StepStage stepStage( Solvable solv_r ) const
+        { return stepStage( resolve( solv_r ) ); }
 
-	bool isIn( const set_type & set_r, detail::IdType sid_r ) const
-	{ return( set_r.find( sid_r ) != set_r.end() ); }
+        void stepStage( Solvable solv_r, StepStage newval_r )
+        { stepStage( resolve( solv_r ), newval_r ); }
 
-	StepStage stepStage( detail::IdType sid_r ) const
-	{
-	  if ( isIn( _doneSet, sid_r ) )
-	    return STEP_DONE;
-	  if ( isIn( _errSet, sid_r ) )
-	    return STEP_ERROR;
-	  return STEP_TODO;
-	}
-
-	void stepStage( detail::IdType sid_r, StepStage newval_r )
-	{
-	  StepStage stage( stepStage( sid_r ) );
-	  if ( stage != newval_r )
-	  {
-	    // reset old stage
-	    if ( stage != STEP_TODO )
-	    {
-	      (stage == STEP_DONE ? _doneSet : _errSet).erase( sid_r );
-	    }
-	    if ( newval_r != STEP_TODO )
-	    {
-	      (newval_r == STEP_DONE ? _doneSet : _errSet).insert( sid_r );
-	    }
-	  }
-	}
+        const PostMortem & pmdata( Solvable solv_r ) const
+        {
+          static PostMortem _none;
+          pmmap_type::const_iterator it( _pmMap.find( solv_r.id() ) );
+          return( it == _pmMap.end() ? _none : it->second );
+        }
 
       private:
-	detail::IdType * _find( const sat::Solvable & solv_r ) const
-	{
-	  if ( solv_r && _trans->steps.elements )
-	  {
-	    for_( it, _trans->steps.elements, _trans->steps.elements + _trans->steps.count )
-	    {
-	      if ( *it == detail::IdType(solv_r.id()) )
-		return it;
-	    }
-	  }
-	  return 0;
-	}
+        detail::IdType resolve( const Solvable & solv_r ) const
+        {
+          map_type::const_iterator res( _linkMap.find( solv_r.id() ) );
+          return( res == _linkMap.end() ? solv_r.id() : res->second );
+        }
+
+        bool isIn( const set_type & set_r, detail::IdType sid_r ) const
+        { return( set_r.find( sid_r ) != set_r.end() ); }
+
+        StepStage stepStage( detail::IdType sid_r ) const
+        {
+          if ( isIn( _doneSet, sid_r ) )
+            return STEP_DONE;
+          if ( isIn( _errSet, sid_r ) )
+            return STEP_ERROR;
+          return STEP_TODO;
+        }
+
+        void stepStage( detail::IdType sid_r, StepStage newval_r )
+        {
+          StepStage stage( stepStage( sid_r ) );
+          if ( stage != newval_r )
+          {
+            // reset old stage
+            if ( stage != STEP_TODO )
+            {
+              (stage == STEP_DONE ? _doneSet : _errSet).erase( sid_r );
+            }
+            if ( newval_r != STEP_TODO )
+            {
+              (newval_r == STEP_DONE ? _doneSet : _errSet).insert( sid_r );
+            }
+          }
+        }
+
+      private:
+        detail::IdType * _find( const sat::Solvable & solv_r ) const
+        {
+          if ( solv_r && _trans->steps.elements )
+          {
+            for_( it, _trans->steps.elements, _trans->steps.elements + _trans->steps.count )
+            {
+              if ( *it == detail::IdType(solv_r.id()) )
+                return it;
+            }
+          }
+          return 0;
+        }
 
      private:
-	SerialNumberWatcher _watcher;
-	mutable ::Transaction * _trans;
-	DefaultIntegral<bool,false> _ordered;
-	//
-	set_type	_doneSet;
-	set_type	_errSet;
-	map_type	_linkMap;	// buddy map to adopt buddies StepResult
-	set_type	_systemErase;	// @System packages to be eased (otherse are TRANSACTION_IGNORE)
-	pmmap_type	_pmMap;		// Post mortem data of deleted @System solvables
+        SerialNumberWatcher _watcher;
+        mutable ::Transaction * _trans;
+        DefaultIntegral<bool,false> _ordered;
+        //
+        set_type	_doneSet;
+        set_type	_errSet;
+        map_type	_linkMap;	// buddy map to adopt buddies StepResult
+        set_type	_systemErase;	// @System packages to be eased (otherse are TRANSACTION_IGNORE)
+        pmmap_type	_pmMap;		// Post mortem data of deleted @System solvables
 
-	StringQueue	_autoInstalled;	// ident strings of all packages that would be auto-installed after the transaction is run.
+        StringQueue	_autoInstalled;	// ident strings of all packages that would be auto-installed after the transaction is run.
 
       public:
         /** Offer default Impl. */
@@ -368,7 +368,7 @@ namespace zypp
     {
       for_( it, obj.begin(), obj.end() )
       {
-	str << *it << endl;
+        str << *it << endl;
       }
       return str;
     }
@@ -407,9 +407,9 @@ namespace zypp
     {
       str << obj.stepType() << obj.stepStage() << " ";
       if ( obj.satSolvable() )
-	str << PoolItem( obj.satSolvable() );
+        str << PoolItem( obj.satSolvable() );
       else
-	str << '[' << obj.ident() << '-' << obj.edition() << '.' << obj.arch() << ']';
+        str << '[' << obj.ident() << '-' << obj.edition() << '.' << obj.arch() << ']';
       return str;
     }
 
@@ -417,12 +417,12 @@ namespace zypp
     {
       switch ( obj )
       {
-	#define OUTS(E,S) case Transaction::E: return str << #S; break
-	OUTS( TRANSACTION_IGNORE,	[ ] );
-	OUTS( TRANSACTION_ERASE,	[-] );
-	OUTS( TRANSACTION_INSTALL,	[+] );
-	OUTS( TRANSACTION_MULTIINSTALL,	[M] );
-	#undef OUTS
+        #define OUTS(E,S) case Transaction::E: return str << #S; break
+        OUTS( TRANSACTION_IGNORE,	[ ] );
+        OUTS( TRANSACTION_ERASE,	[-] );
+        OUTS( TRANSACTION_INSTALL,	[+] );
+        OUTS( TRANSACTION_MULTIINSTALL,	[M] );
+        #undef OUTS
       }
       return str << "[?]";
     }
@@ -431,11 +431,11 @@ namespace zypp
     {
       switch ( obj )
       {
-	#define OUTS(E,S) case Transaction::E: return str << #S; break
-	OUTS( STEP_TODO,	[__] );
-	OUTS( STEP_DONE,	[OK] );
-	OUTS( STEP_ERROR,	[**] );
-	#undef OUTS
+        #define OUTS(E,S) case Transaction::E: return str << #S; break
+        OUTS( STEP_TODO,	[__] );
+        OUTS( STEP_DONE,	[OK] );
+        OUTS( STEP_ERROR,	[**] );
+        #undef OUTS
       }
       return str << "[??]";
     }

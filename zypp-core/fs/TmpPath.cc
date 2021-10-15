@@ -86,7 +86,7 @@ namespace zypp {
         { return( _flags & Autodelete ); }
 
         void autoCleanup( bool yesno_r )
-	{ _flags = yesno_r ? CtorDefault : NoOp; }
+        { _flags = yesno_r ? CtorDefault : NoOp; }
 
       private:
         Pathname _path;

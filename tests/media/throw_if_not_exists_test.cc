@@ -24,14 +24,14 @@ BOOST_AUTO_TEST_CASE(http_test)
   //MediaVerifierRef verifier( new MyMediaVerifier() );
   MediaManager     mm;
   media::MediaId   id;
-  
+
   Url url("http://www.google.com");
-  
+
   id = mm.open( url, "");
   //mm.addVerifier( id, verifier);
   mm.attach(id);
   BOOST_CHECK_THROW( mm.provideFile(id, Pathname("/file-not-exists")), Exception );
-  mm.release(id); 
+  mm.release(id);
 }
 
 // vim: set ts=2 sts=2 sw=2 ai et:

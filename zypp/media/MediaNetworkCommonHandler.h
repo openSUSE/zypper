@@ -31,9 +31,9 @@ namespace zypp
     {
     public:
       MediaNetworkCommonHandler( const Url &      url_r,
-				 const Pathname & attach_point_r,
-				 const Pathname & urlpath_below_attachpoint_r,
-				 const bool       does_download_r )
+                                 const Pathname & attach_point_r,
+                                 const Pathname & urlpath_below_attachpoint_r,
+                                 const bool       does_download_r )
       : MediaHandler( url_r, attach_point_r, urlpath_below_attachpoint_r, does_download_r )
       {}
 

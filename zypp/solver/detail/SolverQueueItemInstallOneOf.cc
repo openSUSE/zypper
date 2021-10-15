@@ -50,9 +50,9 @@ SolverQueueItemInstallOneOf::dumpOn( std::ostream & os ) const
 {
     os << "[" << (_soft?"Soft":"") << "InstallOneOf: ";
     for (PoolItemList::const_iterator iter = _oneOfList.begin();
-	 iter != _oneOfList.end();
-	 iter++)
-	os << *iter;
+         iter != _oneOfList.end();
+         iter++)
+        os << *iter;
     os << "]";
 
     return os;
@@ -61,7 +61,7 @@ SolverQueueItemInstallOneOf::dumpOn( std::ostream & os ) const
 //---------------------------------------------------------------------------
 
 SolverQueueItemInstallOneOf::SolverQueueItemInstallOneOf (const ResPool & pool, const PoolItemList & itemList,
-							  bool soft)
+                                                          bool soft)
     : SolverQueueItem (QUEUE_ITEM_TYPE_INSTALL_ONE_OF, pool)
     , _oneOfList (itemList)
     , _soft (soft)
@@ -82,21 +82,21 @@ bool SolverQueueItemInstallOneOf::addRule (sat::detail::CQueue & q)
     Queue qs;
 
     if (_soft) {
-	queue_push( &(q), SOLVER_INSTALL | SOLVER_SOLVABLE_ONE_OF | SOLVER_WEAK);
+        queue_push( &(q), SOLVER_INSTALL | SOLVER_SOLVABLE_ONE_OF | SOLVER_WEAK);
     } else {
-	queue_push( &(q), SOLVER_INSTALL | SOLVER_SOLVABLE_ONE_OF );
+        queue_push( &(q), SOLVER_INSTALL | SOLVER_SOLVABLE_ONE_OF );
     }
 
     queue_init(&qs);
     for (PoolItemList::const_iterator iter = _oneOfList.begin(); iter != _oneOfList.end(); iter++) {
-	Id id = (*iter)->satSolvable().id();
-	if (id == ID_NULL) {
-	    ERR << *iter << " not found" << endl;
-	    ret = false;
-	} else {
-	    MIL << "    candidate:" << *iter << " with the SAT-Pool ID: " << id << endl;
-	    queue_push( &(qs), id );
-	}
+        Id id = (*iter)->satSolvable().id();
+        if (id == ID_NULL) {
+            ERR << *iter << " not found" << endl;
+            ret = false;
+        } else {
+            MIL << "    candidate:" << *iter << " with the SAT-Pool ID: " << id << endl;
+            queue_push( &(qs), id );
+        }
     }
     sat::Pool satPool( sat::Pool::instance() );
     queue_push( &(q), pool_queuetowhatprovides(satPool.get(), &qs));

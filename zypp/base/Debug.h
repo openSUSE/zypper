@@ -126,7 +126,7 @@ namespace zypp
 
         TraceCAD( TraceCAD && rhs )
         { ++_totalTraceCAD();
-	  traceCAD( MOVECTOR, *this, rhs ); }
+          traceCAD( MOVECTOR, *this, rhs ); }
 
         TraceCAD & operator=( const TraceCAD & rhs )
         { traceCAD( ASSIGN, *this, rhs ); return *this; }

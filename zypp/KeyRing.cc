@@ -100,8 +100,8 @@ namespace zypp
   }
 
   void KeyRingReport::reportAutoImportKey( const std::list<PublicKeyData> & keyDataList_r,
-					   const PublicKeyData & keySigning_r,
-					   const KeyContext &keyContext_r )
+                                           const PublicKeyData & keySigning_r,
+                                           const KeyContext &keyContext_r )
   {
     UserData data { REPORT_AUTO_IMPORT_KEY };
     data.set( "KeyDataList", keyDataList_r );
@@ -134,27 +134,27 @@ namespace zypp
       /// the context tags the cached data as dirty. Should be used to import/delete keys
       /// in a cache keyring.
       struct Manip {
-	NON_COPYABLE_BUT_MOVE( Manip );
-	Manip( CachedPublicKeyData & cache_r, Pathname keyring_r )
-	: _cache { cache_r }
-	, _keyring { std::move(keyring_r) }
-	{}
+        NON_COPYABLE_BUT_MOVE( Manip );
+        Manip( CachedPublicKeyData & cache_r, Pathname keyring_r )
+        : _cache { cache_r }
+        , _keyring { std::move(keyring_r) }
+        {}
 
-	KeyManagerCtx & keyManagerCtx() {
-	  if ( not _context ) {
-	    _context = KeyManagerCtx::createForOpenPGP( _keyring );
-	  }
-	  // frankly: don't remember why an explicit setDirty was introduced and
-	  // why WatchFile was not enough. Maybe some corner case when the keyrings
-	  // are created?
-	  _cache.setDirty( _keyring );
-	  return _context.value();
-	}
+        KeyManagerCtx & keyManagerCtx() {
+          if ( not _context ) {
+            _context = KeyManagerCtx::createForOpenPGP( _keyring );
+          }
+          // frankly: don't remember why an explicit setDirty was introduced and
+          // why WatchFile was not enough. Maybe some corner case when the keyrings
+          // are created?
+          _cache.setDirty( _keyring );
+          return _context.value();
+        }
 
       private:
-	CachedPublicKeyData & _cache;
-	Pathname _keyring;
-	std::optional<KeyManagerCtx> _context;
+        CachedPublicKeyData & _cache;
+        Pathname _keyring;
+        std::optional<KeyManagerCtx> _context;
       };
       ///////////////////////////////////////////////////////////////////
 
@@ -164,53 +164,53 @@ namespace zypp
     private:
       struct Cache
       {
-	Cache() {}
+        Cache() {}
 
-	void setDirty()
-	{
-	  _keyringK.reset();
-	  _keyringP.reset();
-	}
+        void setDirty()
+        {
+          _keyringK.reset();
+          _keyringP.reset();
+        }
 
-	void assertCache( const Pathname & keyring_r )
-	{
-	  // .kbx since gpg2-2.1
-	  if ( !_keyringK )
-	    _keyringK.reset( new WatchFile( keyring_r/"pubring.kbx", WatchFile::NO_INIT ) );
-	  if ( !_keyringP )
-	    _keyringP.reset( new WatchFile( keyring_r/"pubring.gpg", WatchFile::NO_INIT ) );
-	}
+        void assertCache( const Pathname & keyring_r )
+        {
+          // .kbx since gpg2-2.1
+          if ( !_keyringK )
+            _keyringK.reset( new WatchFile( keyring_r/"pubring.kbx", WatchFile::NO_INIT ) );
+          if ( !_keyringP )
+            _keyringP.reset( new WatchFile( keyring_r/"pubring.gpg", WatchFile::NO_INIT ) );
+        }
 
-	bool hasChanged() const
-	{
-	  bool k = _keyringK->hasChanged();	// be sure both files are checked
-	  bool p = _keyringP->hasChanged();
-	  return k || p;
-	}
+        bool hasChanged() const
+        {
+          bool k = _keyringK->hasChanged();	// be sure both files are checked
+          bool p = _keyringP->hasChanged();
+          return k || p;
+        }
 
-	std::list<PublicKeyData> _data;
+        std::list<PublicKeyData> _data;
 
       private:
 
-	scoped_ptr<WatchFile> _keyringK;
-	scoped_ptr<WatchFile> _keyringP;
+        scoped_ptr<WatchFile> _keyringK;
+        scoped_ptr<WatchFile> _keyringP;
       };
 
       typedef std::map<Pathname,Cache> CacheMap;
 
       const std::list<PublicKeyData> & getData( const Pathname & keyring_r ) const
       {
-	Cache & cache( _cacheMap[keyring_r] );
-	// init new cache entry
-	cache.assertCache( keyring_r );
-	return getData( keyring_r, cache );
+        Cache & cache( _cacheMap[keyring_r] );
+        // init new cache entry
+        cache.assertCache( keyring_r );
+        return getData( keyring_r, cache );
       }
 
       const std::list<PublicKeyData> & getData( const Pathname & keyring_r, Cache & cache_r ) const
       {
         if ( cache_r.hasChanged() ) {
-	  cache_r._data = KeyManagerCtx::createForOpenPGP( keyring_r ).listKeys();
-	  MIL << "Found keys: " << cache_r._data  << endl;
+          cache_r._data = KeyManagerCtx::createForOpenPGP( keyring_r ).listKeys();
+          MIL << "Found keys: " << cache_r._data  << endl;
         }
         return cache_r._data;
       }
@@ -344,16 +344,16 @@ namespace zypp
     {
       void operator()( const PublicKey & key_r )
       {
-	try {
-	  _rpmdbEmitSignal->trustedKeyAdded( key_r );
-	  _emitSignal->trustedKeyAdded( key_r );
-	}
-	catch ( const Exception & excp )
-	{
-	  ERR << "Could not import key into rpmdb: " << excp << endl;
-	  // TODO: JobReport as hotfix for bsc#1057188; should bubble up and go through some callback
-	  JobReport::error( excp.asUserHistory() );
-	}
+        try {
+          _rpmdbEmitSignal->trustedKeyAdded( key_r );
+          _emitSignal->trustedKeyAdded( key_r );
+        }
+        catch ( const Exception & excp )
+        {
+          ERR << "Could not import key into rpmdb: " << excp << endl;
+          // TODO: JobReport as hotfix for bsc#1057188; should bubble up and go through some callback
+          JobReport::error( excp.asUserHistory() );
+        }
       }
 
     private:
@@ -373,14 +373,14 @@ namespace zypp
       ImportKeyCBHelper emitSignal;
       if ( key.hiddenKeys().empty() )
       {
-	emitSignal( key );
+        emitSignal( key );
       }
       else
       {
-	// multiple keys: Export individual keys ascii armored to import in rpmdb
-	emitSignal( exportKey( key, trustedKeyRing() ) );
-	for ( const PublicKeyData & hkey : key.hiddenKeys() )
-	  emitSignal( exportKey( hkey, trustedKeyRing() ) );
+        // multiple keys: Export individual keys ascii armored to import in rpmdb
+        emitSignal( exportKey( key, trustedKeyRing() ) );
+        for ( const PublicKeyData & hkey : key.hiddenKeys() )
+          emitSignal( exportKey( hkey, trustedKeyRing() ) );
       }
     }
   }
@@ -431,8 +431,8 @@ namespace zypp
     {
       if ( key.providesKey( id ) )
       {
-	ret = key;
-	break;
+        ret = key;
+        break;
       }
     }
     DBG << (ret ? "Found" : "No") << " key [" << id << "] in keyring " << keyring << endl;
@@ -464,17 +464,17 @@ namespace zypp
     const str::regex rx { "^gpg-pubkey-([[:xdigit:]]{8,})(-[[:xdigit:]]{8,})?\\.(asc|key)$" };
     for ( const auto & cache : cachedirs ) {
       dirForEach( cache,
-		  [&rx,&keyCandidates]( const Pathname & dir_r, const char *const file_r )->bool {
-		    str::smatch what;
-		    if ( str::regex_match( file_r, what, rx ) ) {
-		      Pathname & remember { keyCandidates[what[1]] };
-		      if ( remember.empty() ) {
-			remember = dir_r / file_r;
-		      }
-		    }
-		    return true;
-		  }
-		);
+                  [&rx,&keyCandidates]( const Pathname & dir_r, const char *const file_r )->bool {
+                    str::smatch what;
+                    if ( str::regex_match( file_r, what, rx ) ) {
+                      Pathname & remember { keyCandidates[what[1]] };
+                      if ( remember.empty() ) {
+                        remember = dir_r / file_r;
+                      }
+                    }
+                    return true;
+                  }
+                );
     }
 
     for ( const auto & p : keyCandidates ) {
@@ -483,12 +483,12 @@ namespace zypp
       const std::string & id { p.first };
       const Pathname & path { p.second };
       if ( isKeyTrusted(id) )
-	continue;
+        continue;
       if ( manip.keyManagerCtx().importKey( path ) ) {
-	DBG << "preload key file " << path << endl;
+        DBG << "preload key file " << path << endl;
       }
       else {
-	WAR << "Skipping: Can't preload key file " << path << endl;
+        WAR << "Skipping: Can't preload key file " << path << endl;
       }
     }
   }
@@ -554,21 +554,21 @@ namespace zypp
     std::list<PublicKeyData> buddies;	// Could be imported IFF the file is validated by a trusted key
     for ( const auto & sid : context_r.buddyKeys() ) {
       if ( not PublicKeyData::isSafeKeyId( sid ) ) {
-	WAR << "buddy " << sid << ": key id is too short to safely identify a gpg key. Skipping it." << endl;
-	continue;
+        WAR << "buddy " << sid << ": key id is too short to safely identify a gpg key. Skipping it." << endl;
+        continue;
       }
       if ( trustedPublicKeyExists( sid ) ) {
-	MIL << "buddy " << sid << ": already in trusted key ring. Not needed." << endl;
-	continue;
+        MIL << "buddy " << sid << ": already in trusted key ring. Not needed." << endl;
+        continue;
       }
       auto pk = publicKeyExists( sid );
       if ( not pk ) {
-	WAR << "buddy " << sid << ": not available in the public key ring. Skipping it." << endl;
-	continue;
+        WAR << "buddy " << sid << ": not available in the public key ring. Skipping it." << endl;
+        continue;
       }
       if ( pk.providesKey(id) ) {
-	MIL << "buddy " << sid << ": is the signing key. Handled separately." << endl;
-	continue;
+        MIL << "buddy " << sid << ": is the signing key. Handled separately." << endl;
+        continue;
       }
       MIL << "buddy " << sid << ": candidate for auto import. Remeber it." << endl;
       buddies.push_back( pk );
@@ -589,19 +589,19 @@ namespace zypp
         {
           // bnc #393160: Comment #30: Compare at least the fingerprint
           // in case an attacker created a key the the same id.
-	  //
-	  // FIXME: bsc#1008325: For keys using subkeys, we'd actually need
-	  // to compare the subkey sets, to tell whether a key was updated.
-	  // because created() remains unchanged if the primary key is not touched.
-	  // For now we wait until a new subkey signs the data and treat it as a
-	  //  new key (else part below).
+          //
+          // FIXME: bsc#1008325: For keys using subkeys, we'd actually need
+          // to compare the subkey sets, to tell whether a key was updated.
+          // because created() remains unchanged if the primary key is not touched.
+          // For now we wait until a new subkey signs the data and treat it as a
+          //  new key (else part below).
           if ( trustedKeyData.fingerprint() == generalKeyData.fingerprint()
-	     && trustedKeyData.created() < generalKeyData.created() )
+             && trustedKeyData.created() < generalKeyData.created() )
           {
             MIL << "Key was updated. Saving new version into trusted keyring: " << generalKeyData << endl;
             importKey( exportKey( generalKeyData, generalKeyRing() ), true );
-	    trustedKeyData = publicKeyExists( id, trustedKeyRing() ); // re-read: invalidated by import?
-	  }
+            trustedKeyData = publicKeyExists( id, trustedKeyRing() ); // re-read: invalidated by import?
+          }
         }
 
         foundKey = trustedKeyData;
@@ -656,21 +656,21 @@ namespace zypp
       report->infoVerify( filedesc, foundKey, keyContext );
       if ( verifyFile( file, signature, whichKeyring ) )
       {
-	context_r.fileValidated( true );
-	if ( context_r.signatureIdTrusted() && not buddies.empty() ) {
-	  // Check for buddy keys to be imported...
-	  MIL << "Validated with trusted key: importing buddy list..." << endl;
-	  report->reportAutoImportKey( buddies, foundKey, keyContext );
-	  for ( const auto & kd : buddies ) {
-	    importKey( exportKey( kd, generalKeyRing() ), true );
-	  }
-	}
+        context_r.fileValidated( true );
+        if ( context_r.signatureIdTrusted() && not buddies.empty() ) {
+          // Check for buddy keys to be imported...
+          MIL << "Validated with trusted key: importing buddy list..." << endl;
+          report->reportAutoImportKey( buddies, foundKey, keyContext );
+          for ( const auto & kd : buddies ) {
+            importKey( exportKey( kd, generalKeyRing() ), true );
+          }
+        }
         return context_r.fileValidated();	// signature is actually successfully validated!
       }
       else
       {
-	bool res = report->askUserToAcceptVerificationFailed( filedesc, exportKey( foundKey, whichKeyring ), keyContext );
-	MIL << "askUserToAcceptVerificationFailed: " << res << endl;
+        bool res = report->askUserToAcceptVerificationFailed( filedesc, exportKey( foundKey, whichKeyring ), keyContext );
+        MIL << "askUserToAcceptVerificationFailed: " << res << endl;
         return res;
       }
     } else {
@@ -751,8 +751,8 @@ namespace zypp
     if ( ! PathInfo( keyfile ).isExist() )
       // TranslatorExplanation first %s is key name, second is keyring name
       ZYPP_THROW(KeyRingException( str::Format(_("Tried to import not existent key %s into keyring %s"))
-				   % keyfile.asString()
-				   % keyring.asString() ));
+                                   % keyfile.asString()
+                                   % keyring.asString() ));
 
     CachedPublicKeyData::Manip manip { keyRingManip( keyring ) }; // Provides the context if we want to manip a cached keyring.
     if ( ! manip.keyManagerCtx().importKey( keyfile ) )

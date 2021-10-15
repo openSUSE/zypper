@@ -48,7 +48,7 @@ std::ostream &
 SolverQueueItemLock::dumpOn( std::ostream & os ) const
 {
     os << "[" << (_soft?"Soft":"") << "Lock: " <<
-	_item << "]";
+        _item << "]";
 
     return os;
 }
@@ -56,7 +56,7 @@ SolverQueueItemLock::dumpOn( std::ostream & os ) const
 //---------------------------------------------------------------------------
 
 SolverQueueItemLock::SolverQueueItemLock (const ResPool & pool,
-					      const PoolItem & item, bool soft)
+                                              const PoolItem & item, bool soft)
     : SolverQueueItem (QUEUE_ITEM_TYPE_LOCK, pool)
     , _item (item)
     , _soft (soft)
@@ -74,22 +74,22 @@ bool SolverQueueItemLock::addRule (sat::detail::CQueue & q)
 {
     ::Id id = _item.satSolvable().id();
     if (id == ID_NULL) {
-	ERR << "Lock : " << _item << " not found" << endl;
-	return false;
+        ERR << "Lock : " << _item << " not found" << endl;
+        return false;
     }
     MIL << "Lock " << _item << " with the SAT-Pool ID: " << id << endl;
     if (_item.status().isInstalled()) {
-	if (_soft) {
-	    queue_push( &(q), SOLVER_INSTALL | SOLVER_SOLVABLE | SOLVER_WEAK );
-	} else {
-	    queue_push( &(q), SOLVER_INSTALL | SOLVER_SOLVABLE );
-	}
+        if (_soft) {
+            queue_push( &(q), SOLVER_INSTALL | SOLVER_SOLVABLE | SOLVER_WEAK );
+        } else {
+            queue_push( &(q), SOLVER_INSTALL | SOLVER_SOLVABLE );
+        }
     } else {
-	if (_soft) {
-	    queue_push( &(q), SOLVER_ERASE | SOLVER_SOLVABLE | SOLVER_WEAK );
-	} else {
-	    queue_push( &(q), SOLVER_ERASE | SOLVER_SOLVABLE );
-	}
+        if (_soft) {
+            queue_push( &(q), SOLVER_ERASE | SOLVER_SOLVABLE | SOLVER_WEAK );
+        } else {
+            queue_push( &(q), SOLVER_ERASE | SOLVER_SOLVABLE );
+        }
     }
     queue_push( &(q), id );
     return true;

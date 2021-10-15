@@ -31,53 +31,53 @@ namespace zypp
       struct ItemCapKind
       {
       public:
-	ItemCapKind() : _pimpl( new Impl ) {}
+        ItemCapKind() : _pimpl( new Impl ) {}
 
-	ItemCapKind( PoolItem i, Capability c, Dep k, bool initial ) : _pimpl( new Impl( i, c, k, initial ) ) {}
+        ItemCapKind( PoolItem i, Capability c, Dep k, bool initial ) : _pimpl( new Impl( i, c, k, initial ) ) {}
 
-	/** Capability which has triggerd this selection */
-	Capability cap() const
-	{ return _pimpl->_cap; }
+        /** Capability which has triggerd this selection */
+        Capability cap() const
+        { return _pimpl->_cap; }
 
-	/** Kind of that capability */
-	Dep capKind() const
-	{ return _pimpl->_capKind; }
+        /** Kind of that capability */
+        Dep capKind() const
+        { return _pimpl->_capKind; }
 
-	/** Item which has triggered this selection */
-	PoolItem item() const
-	{ return _pimpl->_item; }
+        /** Item which has triggered this selection */
+        PoolItem item() const
+        { return _pimpl->_item; }
 
-	/** This item has triggered the installation (Not already fullfilled requierement only). */
-	bool initialInstallation() const
-	{ return _pimpl->_initialInstallation; }
+        /** This item has triggered the installation (Not already fullfilled requierement only). */
+        bool initialInstallation() const
+        { return _pimpl->_initialInstallation; }
 
       private:
-	struct Impl
-	{
-	  Impl()
-	  : _capKind( Dep::PROVIDES )
-	  , _initialInstallation( false )
-	  {}
+        struct Impl
+        {
+          Impl()
+          : _capKind( Dep::PROVIDES )
+          , _initialInstallation( false )
+          {}
 
-	  Impl( PoolItem i, Capability c, Dep k, bool initial )
-	  : _cap( c )
-	  , _capKind( k )
-	  , _item( i )
-	  , _initialInstallation( initial )
-	  {}
+          Impl( PoolItem i, Capability c, Dep k, bool initial )
+          : _cap( c )
+          , _capKind( k )
+          , _item( i )
+          , _initialInstallation( initial )
+          {}
 
-	  Capability	_cap;
-	  Dep		_capKind;
-	  PoolItem	_item;
-	  bool		_initialInstallation;
+          Capability	_cap;
+          Dep		_capKind;
+          PoolItem	_item;
+          bool		_initialInstallation;
 
-	private:
-	  friend Impl * rwcowClone<Impl>( const Impl * rhs );
-	  /** clone for RWCOW_pointer */
-	  Impl * clone() const
-	  { return new Impl( *this ); }
-	};
-	RWCOW_pointer<Impl> _pimpl;
+        private:
+          friend Impl * rwcowClone<Impl>( const Impl * rhs );
+          /** clone for RWCOW_pointer */
+          Impl * clone() const
+          { return new Impl( *this ); }
+        };
+        RWCOW_pointer<Impl> _pimpl;
       };
 
       typedef std::multimap<PoolItem,ItemCapKind> ItemCapKindMap;

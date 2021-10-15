@@ -39,27 +39,27 @@ namespace iobind
     {
       std::string unescape(const std::string &istr) const
       {
-	size_t i;
-	std::string str = istr;
-	i = str.find_first_of("&");
-	while (i != std::string::npos)
-	{
-	  if (str[i] == '&')
-	  {
-	    if (!str.compare(i + 1, 3, "lt;"))
-	      str.replace(i, 4, 1, '<');
-	    else if (!str.compare(i + 1, 3, "gt;"))
-	      str.replace(i, 4, 1, '>');
-	    else if (!str.compare(i + 1, 4, "amp;"))
-	      str.replace(i, 5, 1, '&');
-	    else if (!str.compare(i + 1, 5, "apos;"))
-	      str.replace(i, 6, 1, '\'');
-	    else if (!str.compare(i + 1, 5, "quot;"))
-	      str.replace(i, 6, 1, '"');
-	  }
-	  i = str.find_first_of("&", i + 1);
-	}
-	return str;
+        size_t i;
+        std::string str = istr;
+        i = str.find_first_of("&");
+        while (i != std::string::npos)
+        {
+          if (str[i] == '&')
+          {
+            if (!str.compare(i + 1, 3, "lt;"))
+              str.replace(i, 4, 1, '<');
+            else if (!str.compare(i + 1, 3, "gt;"))
+              str.replace(i, 4, 1, '>');
+            else if (!str.compare(i + 1, 4, "amp;"))
+              str.replace(i, 5, 1, '&');
+            else if (!str.compare(i + 1, 5, "apos;"))
+              str.replace(i, 6, 1, '\'');
+            else if (!str.compare(i + 1, 5, "quot;"))
+              str.replace(i, 6, 1, '"');
+          }
+          i = str.find_first_of("&", i + 1);
+        }
+        return str;
       }
     };
   } // namespace parser
@@ -78,33 +78,33 @@ namespace zypp
     {
       std::ostream & EscapedString::dumpOn( std::ostream & str ) const
       {
-	typedef unsigned char uchar;
-	for ( char ch : _in )
-	{
-	  switch ( ch )
-	  {
-	    case '<':	str << "&lt;";		break;
-	    case '>':	str << "&gt;";		break;
-	    case '&':	str << "&amp;";		break;
-	    case '"':	str << "&quot;";	break;
-	    case '\'':	str << "&apos;";	break;
+        typedef unsigned char uchar;
+        for ( char ch : _in )
+        {
+          switch ( ch )
+          {
+            case '<':	str << "&lt;";		break;
+            case '>':	str << "&gt;";		break;
+            case '&':	str << "&amp;";		break;
+            case '"':	str << "&quot;";	break;
+            case '\'':	str << "&apos;";	break;
 
-	    // control chars we allow:
-	    case '\n':
-	    case '\r':
-	    case '\t':
-	      str << ch;
-	      break;
+            // control chars we allow:
+            case '\n':
+            case '\r':
+            case '\t':
+              str << ch;
+              break;
 
-	    default:
-	      if ( uchar(ch) < 32u )
-		str << '?'; // filter problematic control chars (XML1.0)
-	      else
-		str << ch;
-	      break;
-	  }
-	}
-	return str;
+            default:
+              if ( uchar(ch) < 32u )
+                str << '?'; // filter problematic control chars (XML1.0)
+              else
+                str << ch;
+              break;
+          }
+        }
+        return str;
       }
 
     } // detail

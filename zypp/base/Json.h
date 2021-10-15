@@ -38,96 +38,96 @@ namespace zypp
     {
       inline std::string strEncode( std::string val_r )
       {
-	typedef unsigned char uchar;
+        typedef unsigned char uchar;
 
-	std::string::size_type add = 2;	// enclosing "s
-	for_( r, val_r.begin(), val_r.end() )
-	{
-	  if ( uchar(*r) < 32u )
-	  {
-	    switch ( *r )
-	    {
-	      case '\b':
-	      case '\f':
-	      case '\n':
-	      case '\r':
-	      case '\t':
-		add += 1;	// "\c"
-		break;
-	      default:
-		add += 5;	// "\uXXXX"
-		break;
-	    }
-	  }
-	  else
-	  {
-	    switch ( *r )
-	    {
-	      case '"':
-	      case '/':
-	      case '\\':
-		add += 1;	// \-escape
-		break;
-	    }
-	  }
-	}
+        std::string::size_type add = 2;	// enclosing "s
+        for_( r, val_r.begin(), val_r.end() )
+        {
+          if ( uchar(*r) < 32u )
+          {
+            switch ( *r )
+            {
+              case '\b':
+              case '\f':
+              case '\n':
+              case '\r':
+              case '\t':
+                add += 1;	// "\c"
+                break;
+              default:
+                add += 5;	// "\uXXXX"
+                break;
+            }
+          }
+          else
+          {
+            switch ( *r )
+            {
+              case '"':
+              case '/':
+              case '\\':
+                add += 1;	// \-escape
+                break;
+            }
+          }
+        }
 
-	val_r.resize( val_r.size() + add, '@' );
-	auto w( val_r.rbegin() );
-	auto r( w + add );
+        val_r.resize( val_r.size() + add, '@' );
+        auto w( val_r.rbegin() );
+        auto r( w + add );
 
-	*w++ = '"';
-	for ( ; r != val_r.rend(); ++r )
-	{
-	  if ( uchar(*r) < 32u )
-	  {
-	    static const char * digit = "0123456789abcdef";
-	    switch ( *r )
-	    {
-	      case '\b':	// "\c"
-		*w++ = 'b';
-		*w++ = '\\';
-		break;
-	      case '\f':	// "\c"
-		*w++ = 'f';
-		*w++ = '\\';
-		break;
-	      case '\n':	// "\c"
-		*w++ = 'n';
-		*w++ = '\\';
-		break;
-	      case '\r':	// "\c"
-		*w++ = 'r';
-		*w++ = '\\';
-		break;
-	      case '\t':	// "\c"
-		*w++ = 't';
-		*w++ = '\\';
-		break;
-	      default:		// "\uXXXX"
-		*w++ = digit[uchar(*r) % 15];
-		*w++ = digit[uchar(*r) / 16];
-		*w++ = '0';
-		*w++ = '0';
-		*w++ = 'u';
-		*w++ = '\\';
-		break;
-	    }
-	  }
-	  else
-	  {
-	    switch ( (*w++ = *r) )
-	    {
-	      case '"':
-	      case '/':
-	      case '\\':	// \-escape
-		*w++ = '\\';
-		break;
-	    }
-	  }
-	}
-	*w++ = '"';
-	return val_r;
+        *w++ = '"';
+        for ( ; r != val_r.rend(); ++r )
+        {
+          if ( uchar(*r) < 32u )
+          {
+            static const char * digit = "0123456789abcdef";
+            switch ( *r )
+            {
+              case '\b':	// "\c"
+                *w++ = 'b';
+                *w++ = '\\';
+                break;
+              case '\f':	// "\c"
+                *w++ = 'f';
+                *w++ = '\\';
+                break;
+              case '\n':	// "\c"
+                *w++ = 'n';
+                *w++ = '\\';
+                break;
+              case '\r':	// "\c"
+                *w++ = 'r';
+                *w++ = '\\';
+                break;
+              case '\t':	// "\c"
+                *w++ = 't';
+                *w++ = '\\';
+                break;
+              default:		// "\uXXXX"
+                *w++ = digit[uchar(*r) % 15];
+                *w++ = digit[uchar(*r) / 16];
+                *w++ = '0';
+                *w++ = '0';
+                *w++ = 'u';
+                *w++ = '\\';
+                break;
+            }
+          }
+          else
+          {
+            switch ( (*w++ = *r) )
+            {
+              case '"':
+              case '/':
+              case '\\':	// \-escape
+                *w++ = '\\';
+                break;
+            }
+          }
+        }
+        *w++ = '"';
+        return val_r;
       }
     } // namespace detail
     ///////////////////////////////////////////////////////////////////
@@ -264,7 +264,7 @@ namespace zypp
 
       /** Construct from container initializer list { v1, v2,... } */
       Array( const std::initializer_list<Value> & contents_r )
-	: Array( contents_r.begin(), contents_r.end() )
+        : Array( contents_r.begin(), contents_r.end() )
       {}
 
       /** Push JSON Value to Array */
@@ -286,12 +286,12 @@ namespace zypp
       /** Stream output */
       std::ostream & dumpOn( std::ostream & str ) const
       {
-	if ( _data.empty() )
-	  return str << "[]";
-	str << '[' << *_data.begin();
-	for_( val, ++_data.begin(), _data.end() )
-	  str << ", " << *val;
-	return str << ']';
+        if ( _data.empty() )
+          return str << "[]";
+        str << '[' << *_data.begin();
+        for_( val, ++_data.begin(), _data.end() )
+          str << ", " << *val;
+        return str << ']';
       }
 
     private:
@@ -329,7 +329,7 @@ namespace zypp
 
       /** Construct from map-initializer list { {k1,v1}, {k2,v2},... } */
       Object( const std::initializer_list<std::pair<String, Value>> & contents_r )
-	: Object( contents_r.begin(), contents_r.end() )
+        : Object( contents_r.begin(), contents_r.end() )
       {}
 
       /** Add key/value pair */
@@ -351,13 +351,13 @@ namespace zypp
       /** Stream output */
       std::ostream & dumpOn( std::ostream & str ) const
       {
-	using std::endl;
-	if ( _data.empty() )
-	  return str << "{}";
-	dumpOn( str << '{' << endl, _data.begin() );
-	for_ ( val, ++_data.begin(), _data.end() )
-	  dumpOn( str << ',' << endl, val );
-	return str << endl << '}';
+        using std::endl;
+        if ( _data.empty() )
+          return str << "{}";
+        dumpOn( str << '{' << endl, _data.begin() );
+        for_ ( val, ++_data.begin(), _data.end() )
+          dumpOn( str << ',' << endl, val );
+        return str << endl << '}';
       }
 
     private:

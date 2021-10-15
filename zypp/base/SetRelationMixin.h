@@ -214,22 +214,22 @@ namespace zypp
   { return src.compare( DERIVED_TYPE(trg) ); }	\
   inline SetCompare compare( OTHER_TYPE src, const base::SetRelationMixin<DERIVED_TYPE> & trg )	\
   { return DERIVED_TYPE(src).compare( trg ); }	\
-	\
+        \
   inline bool compare( const base::SetRelationMixin<DERIVED_TYPE> & src, OTHER_TYPE trg, SetCompare cmp )	\
   { return src.compare( DERIVED_TYPE(trg), cmp ); }	\
   inline bool compare( OTHER_TYPE src, const base::SetRelationMixin<DERIVED_TYPE> & trg, SetCompare cmp )	\
   { return DERIVED_TYPE(src).compare( trg, cmp ); }	\
-	\
+        \
   inline bool compare( const base::SetRelationMixin<DERIVED_TYPE> & src, OTHER_TYPE trg, SetRelation rel )	\
   { return src.compare( DERIVED_TYPE(trg), rel ); }	\
   inline bool compare( OTHER_TYPE src, const base::SetRelationMixin<DERIVED_TYPE> & trg, SetRelation rel )	\
   { return DERIVED_TYPE(src).compare( trg, rel ); }	\
-	\
+        \
   inline bool operator==( const base::SetRelationMixin<DERIVED_TYPE> & src, OTHER_TYPE trg )	\
   { return src.compare( DERIVED_TYPE(trg), SetRelation::equal ); }	\
   inline bool operator==( OTHER_TYPE src, const base::SetRelationMixin<DERIVED_TYPE> & trg )	\
   { return DERIVED_TYPE(src).compare( trg, SetRelation::equal ); }	\
-	\
+        \
   inline bool operator!=( const base::SetRelationMixin<DERIVED_TYPE> & src, OTHER_TYPE trg )	\
   { return !( src == trg ); }	\
   inline bool operator!=( OTHER_TYPE src, const base::SetRelationMixin<DERIVED_TYPE> & trg )	\

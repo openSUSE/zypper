@@ -23,15 +23,15 @@ namespace zypp
   {
     DownloadDefault, //!< libzypp will decide what to do.
     DownloadOnly,	//!< Just download all packages to the local cache.
-			//!< Do not install. Implies a dry-run.
+                        //!< Do not install. Implies a dry-run.
     DownloadInAdvance,	//!< First download all packages to the local cache.
-			//!< Then start to install.
+                        //!< Then start to install.
     DownloadInHeaps,	//!< Similar to DownloadInAdvance, but try to split
-			//!< the transaction into heaps, where at the end of
-			//!< each heap a consistent system state is reached.
+                        //!< the transaction into heaps, where at the end of
+                        //!< each heap a consistent system state is reached.
     DownloadAsNeeded	//!< Alternating download and install. Packages are
-			//!< cached just to avid CD/DVD hopping. This is the
-			//!< traditional behaviour.
+                        //!< cached just to avid CD/DVD hopping. This is the
+                        //!< traditional behaviour.
   };
 
   /** \relates DownloadMode Parse from string.

@@ -38,37 +38,37 @@ int unameToUid(const char * thisUname, uid_t * uid)
     size_t thisUnameLen;
 
     if (!thisUname) {
-	lastUnameLen = 0;
-	return -1;
+        lastUnameLen = 0;
+        return -1;
     } else if (strcmp(thisUname, "root") == 0) {
 /*@-boundswrite@*/
-	*uid = 0;
+        *uid = 0;
 /*@=boundswrite@*/
-	return 0;
+        return 0;
     }
 
     thisUnameLen = strlen(thisUname);
     if (lastUname == NULL || thisUnameLen != lastUnameLen ||
-	strcmp(thisUname, lastUname) != 0)
+        strcmp(thisUname, lastUname) != 0)
     {
-	if (lastUnameAlloced < thisUnameLen + 1) {
-	    lastUnameAlloced = thisUnameLen + 10;
-	    lastUname = (char *)realloc(lastUname, lastUnameAlloced);	/* XXX memory leak */
-	}
+        if (lastUnameAlloced < thisUnameLen + 1) {
+            lastUnameAlloced = thisUnameLen + 10;
+            lastUname = (char *)realloc(lastUname, lastUnameAlloced);	/* XXX memory leak */
+        }
 /*@-boundswrite@*/
-	strcpy(lastUname, thisUname);
+        strcpy(lastUname, thisUname);
 /*@=boundswrite@*/
 
-	pwent = getpwnam(thisUname);
-	if (pwent == NULL) {
-	    /*@-internalglobs@*/ /* FIX: shrug */
-	    endpwent();
-	    /*@=internalglobs@*/
-	    pwent = getpwnam(thisUname);
-	    if (pwent == NULL) return -1;
-	}
+        pwent = getpwnam(thisUname);
+        if (pwent == NULL) {
+            /*@-internalglobs@*/ /* FIX: shrug */
+            endpwent();
+            /*@=internalglobs@*/
+            pwent = getpwnam(thisUname);
+            if (pwent == NULL) return -1;
+        }
 
-	lastUid = pwent->pw_uid;
+        lastUid = pwent->pw_uid;
     }
 
 /*@-boundswrite@*/
@@ -88,51 +88,51 @@ int gnameToGid(const char * thisGname, gid_t * gid)
     struct group * grent;
 
     if (thisGname == NULL) {
-	lastGnameLen = 0;
-	return -1;
+        lastGnameLen = 0;
+        return -1;
     } else if (strcmp(thisGname, "root") == 0) {
 /*@-boundswrite@*/
-	*gid = 0;
+        *gid = 0;
 /*@=boundswrite@*/
-	return 0;
+        return 0;
     }
 
     thisGnameLen = strlen(thisGname);
     if (lastGname == NULL || thisGnameLen != lastGnameLen ||
-	strcmp(thisGname, lastGname) != 0)
+        strcmp(thisGname, lastGname) != 0)
     {
-	if (lastGnameAlloced < thisGnameLen + 1) {
-	    lastGnameAlloced = thisGnameLen + 10;
-	    lastGname = (char *)realloc(lastGname, lastGnameAlloced);	/* XXX memory leak */
-	}
+        if (lastGnameAlloced < thisGnameLen + 1) {
+            lastGnameAlloced = thisGnameLen + 10;
+            lastGname = (char *)realloc(lastGname, lastGnameAlloced);	/* XXX memory leak */
+        }
 /*@-boundswrite@*/
-	strcpy(lastGname, thisGname);
+        strcpy(lastGname, thisGname);
 /*@=boundswrite@*/
 
-	grent = getgrnam(thisGname);
-	if (grent == NULL) {
-	    /*@-internalglobs@*/ /* FIX: shrug */
-	    endgrent();
-	    /*@=internalglobs@*/
-	    grent = getgrnam(thisGname);
-	    if (grent == NULL) {
-		/* XXX The filesystem package needs group/lock w/o getgrnam. */
-		if (strcmp(thisGname, "lock") == 0) {
+        grent = getgrnam(thisGname);
+        if (grent == NULL) {
+            /*@-internalglobs@*/ /* FIX: shrug */
+            endgrent();
+            /*@=internalglobs@*/
+            grent = getgrnam(thisGname);
+            if (grent == NULL) {
+                /* XXX The filesystem package needs group/lock w/o getgrnam. */
+                if (strcmp(thisGname, "lock") == 0) {
 /*@-boundswrite@*/
-		    *gid = lastGid = 54;
+                    *gid = lastGid = 54;
 /*@=boundswrite@*/
-		    return 0;
-		} else
-		if (strcmp(thisGname, "mail") == 0) {
+                    return 0;
+                } else
+                if (strcmp(thisGname, "mail") == 0) {
 /*@-boundswrite@*/
-		    *gid = lastGid = 12;
+                    *gid = lastGid = 12;
 /*@=boundswrite@*/
-		    return 0;
-		} else
-		return -1;
-	    }
-	}
-	lastGid = grent->gr_gid;
+                    return 0;
+                } else
+                return -1;
+            }
+        }
+        lastGid = grent->gr_gid;
     }
 
 /*@-boundswrite@*/

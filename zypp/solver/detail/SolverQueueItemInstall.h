@@ -42,7 +42,7 @@ namespace zypp
 //	CLASS NAME : SolverQueueItemInstall
 
 class SolverQueueItemInstall : public SolverQueueItem {
-    
+
   private:
 
     std::string _name;
@@ -52,7 +52,7 @@ class SolverQueueItemInstall : public SolverQueueItem {
 
     SolverQueueItemInstall (const ResPool & pool, std::string name, bool soft = false);
     virtual ~SolverQueueItemInstall();
-    
+
     // ---------------------------------- I/O
 
     virtual std::ostream & dumpOn( std::ostream & str ) const;
@@ -62,7 +62,7 @@ class SolverQueueItemInstall : public SolverQueueItem {
 
     // ---------------------------------- accessors
 
-    bool isSoft (void) const { return _soft; }    
+    bool isSoft (void) const { return _soft; }
 
     // ---------------------------------- methods
 

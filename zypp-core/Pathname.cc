@@ -38,18 +38,18 @@ namespace zypp
 
       // Collect up to "/.."
       enum Pending {
-	P_none	= 0,	// ""
-	P_slash	= 1,	// "/"
-	P_dot1	= 2,	// "/."
-	P_dot2	= 3	// "/.."
+        P_none	= 0,	// ""
+        P_slash	= 1,	// "/"
+        P_dot1	= 2,	// "/."
+        P_dot2	= 3	// "/.."
       } pending = P_none;
 
       // Assert relative path starting with "./"
       // We rely on this below!
       if ( name_r[0] != '/' )
       {
-	_name += '.';
-	pending = P_slash;
+        _name += '.';
+        pending = P_slash;
       }
 
       // Lambda handling the "/.." case:
@@ -59,63 +59,63 @@ namespace zypp
       // [*/..]  + "/.."  ==> [*/../..]
       // [*/foo] + "/.."  ==> [*]
       auto goParent_f =  [&](){
-	if ( _name.empty() )
-	  /*NOOP*/;
-	else if ( _name.size() == 1 ) // content is '.'
-	  _name += "/..";
-	else
-	{
-	  std::string::size_type pos = _name.rfind( "/" );
-	  if ( pos == _name.size() - 3 && _name[pos+1] == '.' && _name[pos+2] == '.' )
-	    _name += "/..";
-	  else
-	    _name.erase( pos );
-	}
+        if ( _name.empty() )
+          /*NOOP*/;
+        else if ( _name.size() == 1 ) // content is '.'
+          _name += "/..";
+        else
+        {
+          std::string::size_type pos = _name.rfind( "/" );
+          if ( pos == _name.size() - 3 && _name[pos+1] == '.' && _name[pos+2] == '.' )
+            _name += "/..";
+          else
+            _name.erase( pos );
+        }
       };
 
       for ( char ch : name_r )
       {
-	switch ( ch )
-	{
-	  case '/':
-	    switch ( pending )
-	    {
-	      case P_none:	pending = P_slash; break;
-	      case P_slash:	break;
-	      case P_dot1:	pending = P_slash; break;
-	      case P_dot2:	goParent_f(); pending = P_slash; break;
-	    }
-	    break;
+        switch ( ch )
+        {
+          case '/':
+            switch ( pending )
+            {
+              case P_none:	pending = P_slash; break;
+              case P_slash:	break;
+              case P_dot1:	pending = P_slash; break;
+              case P_dot2:	goParent_f(); pending = P_slash; break;
+            }
+            break;
 
-	  case '.':
-	    switch ( pending )
-	    {
-	      case P_none:	_name += '.'; break;
-	      case P_slash:	pending = P_dot1; break;
-	      case P_dot1:	pending = P_dot2; break;
-	      case P_dot2:	_name += "/..."; pending = P_none; break;
-	    }
-	    break;
+          case '.':
+            switch ( pending )
+            {
+              case P_none:	_name += '.'; break;
+              case P_slash:	pending = P_dot1; break;
+              case P_dot1:	pending = P_dot2; break;
+              case P_dot2:	_name += "/..."; pending = P_none; break;
+            }
+            break;
 
-	  default:
-	    switch ( pending )
-	    {
-	      case P_none:	break;
-	      case P_slash:	_name += '/';	 pending = P_none; break;
-	      case P_dot1:	_name += "/.";	 pending = P_none; break;
-	      case P_dot2:	_name += "/.."; pending = P_none; break;
-	    }
-	    _name += ch;
-	    break;
-	}
+          default:
+            switch ( pending )
+            {
+              case P_none:	break;
+              case P_slash:	_name += '/';	 pending = P_none; break;
+              case P_dot1:	_name += "/.";	 pending = P_none; break;
+              case P_dot2:	_name += "/.."; pending = P_none; break;
+            }
+            _name += ch;
+            break;
+        }
       }
 
       switch ( pending )
       {
-	case P_none:	break;
-	case P_slash:	if ( _name.empty() ) _name = "/"; break;
-	case P_dot1:	if ( _name.empty() ) _name = "/"; break;
-	case P_dot2:	goParent_f(); if ( _name.empty() ) _name = "/"; break;
+        case P_none:	break;
+        case P_slash:	if ( _name.empty() ) _name = "/"; break;
+        case P_dot1:	if ( _name.empty() ) _name = "/"; break;
+        case P_dot2:	goParent_f(); if ( _name.empty() ) _name = "/"; break;
       }
       return;
     }
@@ -212,17 +212,17 @@ namespace zypp
       std::string::size_type pos = base.rfind( '.' );
       switch ( pos )
       {
-	case 0:
-	  if ( base.size() == 1 )			// .
-	    return string();
-	  break;
-	case 1:
-	  if ( base.size() == 2 && base[0] == '.' )	// ..
-	    return string();
-	  break;
-	case std::string::npos:
-	  return string();
-	  break;
+        case 0:
+          if ( base.size() == 1 )			// .
+            return string();
+          break;
+        case 1:
+          if ( base.size() == 2 && base[0] == '.' )	// ..
+            return string();
+          break;
+        case std::string::npos:
+          return string();
+          break;
       }
       return base.substr( pos );
     }
@@ -244,12 +244,12 @@ namespace zypp
     Pathname Pathname::stripprefix( const Pathname & root_r, const Pathname & path_r )
     {
       if ( root_r.emptyOrRoot() )
-	return path_r;
+        return path_r;
       if ( root_r == path_r )
-	return "/";
+        return "/";
       std::string rest( str::stripPrefix( path_r.asString(), root_r.asString() ) );
       if ( rest[0] == '/' )	// needs to be a dir prefix!
-	return rest;
+        return rest;
       return path_r;
     }
 
@@ -267,7 +267,7 @@ namespace zypp
 
       string ret_ti( name_r._name );
       if( add_tv._name[0] != '/' )
-	ret_ti += '/';
+        ret_ti += '/';
       return ret_ti + add_tv._name;
     }
 

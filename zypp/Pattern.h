@@ -100,9 +100,9 @@ namespace zypp
     public:
       struct ContentsSet
       {
-	Contents req;	///< required content set
-	Contents rec;	///< recommended content set
-	Contents sug;	///< suggested content set
+        Contents req;	///< required content set
+        Contents rec;	///< recommended content set
+        Contents sug;	///< suggested content set
       };
       /** Dependency based content set (does not evaluate includes/extends relation).
        * If \a recursively_r, required and recommended

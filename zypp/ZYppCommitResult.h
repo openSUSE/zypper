@@ -172,13 +172,13 @@ namespace zypp
        * \see \ref Transaction, \ref transaction()
        */
       //@{
-	/** Whether all steps were performed successfully (none skipped or error) */
-	bool allDone() const
-	{ return transaction().actionEmpty( ~sat::Transaction::STEP_DONE ); }
+        /** Whether all steps were performed successfully (none skipped or error) */
+        bool allDone() const
+        { return transaction().actionEmpty( ~sat::Transaction::STEP_DONE ); }
 
-	/** Whether an error ocurred (skipped streps are ok). */
-	bool noError() const
-	{ return transaction().actionEmpty( sat::Transaction::STEP_ERROR ); }
+        /** Whether an error ocurred (skipped streps are ok). */
+        bool noError() const
+        { return transaction().actionEmpty( sat::Transaction::STEP_ERROR ); }
       //@}
 
     public:

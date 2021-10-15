@@ -71,13 +71,13 @@ namespace zypp
 
       bool Testcase::createTestcase(Resolver & resolver, bool dumpPool, bool runSolver)
       {
-	// libzypp/issues/317: make sure a satsolver instance is actually present
-	if ( not resolver.get() ) {
-	  WAR << "Can't createTestcase if the satsolver is not yet initialized." << endl;
-	  return false;
-	}
+        // libzypp/issues/317: make sure a satsolver instance is actually present
+        if ( not resolver.get() ) {
+          WAR << "Can't createTestcase if the satsolver is not yet initialized." << endl;
+          return false;
+        }
 
-	MIL << "createTestcase at " << dumpPath << (dumpPool?" dumpPool":"") << (runSolver?" runSolver":"") << endl;
+        MIL << "createTestcase at " << dumpPath << (dumpPool?" dumpPool":"") << (runSolver?" runSolver":"") << endl;
         PathInfo path (dumpPath);
 
         if ( !path.isExist() ) {
@@ -213,16 +213,16 @@ namespace zypp
 
         // Vendor settings
         yOut << YAML::Key << "vendors" << YAML::Value << YAML::BeginSeq ;
-	VendorAttr::instance().foreachVendorList( [&]( VendorAttr::VendorList vlist )->bool {
-	  if ( ! vlist.empty() ) {
-	    yOut << YAML::Value << YAML::BeginSeq;
-	    for( const auto & v : vlist )
-	      yOut << YAML::Value << v ;
-	    yOut << YAML::EndSeq;
-	  }
-	  return true;
-	} );
-	yOut << YAML::EndSeq; // vendors
+        VendorAttr::instance().foreachVendorList( [&]( VendorAttr::VendorList vlist )->bool {
+          if ( ! vlist.empty() ) {
+            yOut << YAML::Value << YAML::BeginSeq;
+            for( const auto & v : vlist )
+              yOut << YAML::Value << v ;
+            yOut << YAML::EndSeq;
+          }
+          return true;
+        } );
+        yOut << YAML::EndSeq; // vendors
 
         // helper lambda to write a list of elements into a external file instead of the main file
         const auto &writeListOrFile = [&]( const std::string &name, const auto &list, const auto &callback ) {
@@ -385,7 +385,7 @@ namespace zypp
         std::ofstream fout( dumpPath+"/zypp-control.yaml" );
         fout << yOut.c_str();
 
-	MIL << "createTestcase done at " << dumpPath << endl;
+        MIL << "createTestcase done at " << dumpPath << endl;
         return true;
       }
       ///////////////////////////////////////////////////////////////////

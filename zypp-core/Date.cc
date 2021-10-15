@@ -33,48 +33,48 @@ namespace zypp
     {
       LocaleGuard()
       {
-	const char * tmp = ::setlocale( LC_TIME, NULL );
-	_mylocale = tmp ? tmp : "";
+        const char * tmp = ::setlocale( LC_TIME, NULL );
+        _mylocale = tmp ? tmp : "";
 
-	if ( _mylocale.find( "UTF-8" ) == std::string::npos
-	  && _mylocale.find( "utf-8" ) == std::string::npos
-	  && _mylocale != "POSIX"
-	  && _mylocale != "C"
-	  && _mylocale != "" )
-	{
-	  // language[_territory][.codeset][@modifier]
-	  // add/exchange codeset with UTF-8
-	  std::string needLocale = ".UTF-8";
-	  std::string::size_type loc = _mylocale.find_first_of( ".@" );
-	  if ( loc != std::string::npos )
-	  {
-	    // prepend language[_territory]
-	    needLocale = _mylocale.substr( 0, loc ) + needLocale;
-	    loc = _mylocale.find_last_of( "@" );
-	    if ( loc != std::string::npos )
-	    {
-	      // append [@modifier]
-	      needLocale += _mylocale.substr( loc );
-	    }
-	  }
-	  else
-	  {
-	    // append ".UTF-8"
-	    needLocale = _mylocale + needLocale;
-	  }
-	  ::setlocale( LC_TIME, needLocale.c_str() );
-	}
-	else
-	{
-	  // no need to change the locale
-	  _mylocale.clear();
-	}
+        if ( _mylocale.find( "UTF-8" ) == std::string::npos
+          && _mylocale.find( "utf-8" ) == std::string::npos
+          && _mylocale != "POSIX"
+          && _mylocale != "C"
+          && _mylocale != "" )
+        {
+          // language[_territory][.codeset][@modifier]
+          // add/exchange codeset with UTF-8
+          std::string needLocale = ".UTF-8";
+          std::string::size_type loc = _mylocale.find_first_of( ".@" );
+          if ( loc != std::string::npos )
+          {
+            // prepend language[_territory]
+            needLocale = _mylocale.substr( 0, loc ) + needLocale;
+            loc = _mylocale.find_last_of( "@" );
+            if ( loc != std::string::npos )
+            {
+              // append [@modifier]
+              needLocale += _mylocale.substr( loc );
+            }
+          }
+          else
+          {
+            // append ".UTF-8"
+            needLocale = _mylocale + needLocale;
+          }
+          ::setlocale( LC_TIME, needLocale.c_str() );
+        }
+        else
+        {
+          // no need to change the locale
+          _mylocale.clear();
+        }
       }
 
       ~LocaleGuard()
       {
-	if ( ! _mylocale.empty() )
-	  ::setlocale( LC_TIME, _mylocale.c_str() );
+        if ( ! _mylocale.empty() )
+          ::setlocale( LC_TIME, _mylocale.c_str() );
       }
     private:
       std::string _mylocale;
@@ -91,13 +91,13 @@ namespace zypp
     inline const char * _dateFormat( Date::DateFormat dateFormat_r )
     {
       static const char * fmt[] = {
-	"",		///< ""
-	"%Y-%m-%d",	///< 2014-02-07
-	"%Y-%m",	///< 2014-02
-	"%Y",		///< 2014
-	"%G-W%V",	///< 2014-W06
-	"%G-W%V-%u",	///< 2014-W06-5 (1 is Monday)
-	"%Y-%j",	///< 2014-038
+        "",		///< ""
+        "%Y-%m-%d",	///< 2014-02-07
+        "%Y-%m",	///< 2014-02
+        "%Y",		///< 2014
+        "%G-W%V",	///< 2014-W06
+        "%G-W%V-%u",	///< 2014-W06-5 (1 is Monday)
+        "%Y-%j",	///< 2014-038
       };
       return fmt[dateFormat_r.asIntegral()];
     }
@@ -105,10 +105,10 @@ namespace zypp
     inline const char * _timeFormat( Date::TimeFormat timeFormat_r )
     {
       static const char * fmt[] = {
-	"",		///< ""
-	"%H:%M:%S",	///< 07:06:41
-	"%H:%M",	///< 07:06
-	"%H",		///< 07
+        "",		///< ""
+        "%H:%M:%S",	///< 07:06:41
+        "%H:%M",	///< 07:06
+        "%H",		///< 07
       };
       return fmt[timeFormat_r.asIntegral()];
     }
@@ -116,9 +116,9 @@ namespace zypp
     inline const char * _timeZoneFormat( Date::TimeZoneFormat timeZoneFormat_r )
     {
       static const char * fmt[] = {
-	"",		///< ""
-	" %Z",		///< UTC, CET, ...
-	"%z",		///< +0000
+        "",		///< ""
+        " %Z",		///< UTC, CET, ...
+        "%z",		///< +0000
       };
       return fmt[timeZoneFormat_r.asIntegral()];
     }
@@ -126,21 +126,21 @@ namespace zypp
     inline std::string doForm( const std::string & format_r, Date::TimeBase base_r, const Date::ValueType & date_r )
     {
       if ( ! date_r )
-	return "0";
+        return "0";
 
       LocaleGuard guard;
       static char buf[512];
       if ( ! strftime( buf, 512, format_r.c_str(), (base_r == Date::TB_UTC ? gmtime : localtime)( &date_r ) ) )
-	*buf = '\0';
+        *buf = '\0';
       else
       {
-	// strip a trailing '00' in a timeZoneFormat
-	unsigned l = ::strlen( buf );
-	if ( l >= 5
-	  && ( buf[l-1] == '0' )
-	  && ( buf[l-2] == '0' )
-	  && ( buf[l-5] == '+' || buf[l-5] == '-') )
-	  buf[l-2] = '\0';
+        // strip a trailing '00' in a timeZoneFormat
+        unsigned l = ::strlen( buf );
+        if ( l >= 5
+          && ( buf[l-1] == '0' )
+          && ( buf[l-2] == '0' )
+          && ( buf[l-5] == '+' || buf[l-5] == '-') )
+          buf[l-2] = '\0';
       }
       return buf;
     }
@@ -193,10 +193,10 @@ namespace zypp
     if ( timeFormat_r != TimeFormat::none )
     {
       if ( dateFormat_r != DateFormat::none )
-	str << ' ';
+        str << ' ';
       str << _timeFormat( timeFormat_r );
       if ( timeZoneFormat_r != TimeZoneFormat::none )
-	str << _timeZoneFormat( timeZoneFormat_r );
+        str << _timeZoneFormat( timeZoneFormat_r );
     }
     return doForm( str, base_r, _date );
   }
@@ -209,22 +209,22 @@ namespace zypp
     if ( timeFormat_r != TimeFormat::none )
     {
       if ( dateFormat_r != DateFormat::none )
-	str << 'T';
+        str << 'T';
       str << _timeFormat( timeFormat_r );
       switch ( timeZoneFormat_r.asEnum() )
       {
-	case TimeZoneFormat::none:
-	  break;
-	case TimeZoneFormat::name:
-	  if ( base_r == TB_UTC )
-	  {
-	    str << 'Z';
-	    break;
-	  }
-	  // else: FALLTHROUGH and print offset!
-	case TimeZoneFormat::offset:
-	  str << _timeZoneFormat( TimeZoneFormat::offset );
-	  break;
+        case TimeZoneFormat::none:
+          break;
+        case TimeZoneFormat::name:
+          if ( base_r == TB_UTC )
+          {
+            str << 'Z';
+            break;
+          }
+          // else: FALLTHROUGH and print offset!
+        case TimeZoneFormat::offset:
+          str << _timeZoneFormat( TimeZoneFormat::offset );
+          break;
       }
     }
     return doForm( str, base_r, _date );

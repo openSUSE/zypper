@@ -65,7 +65,7 @@ public:
   bool     locksDirty;
 
   bool mergeList(callback::SendReport<SavingLocksReport>& report);
-  
+
   Impl()
   : locksDirty( false )
   , _APIdirty( false )
@@ -125,7 +125,7 @@ struct ApplyLock
 };
 
 /**
- * iterator that takes lock, lock all solvables from query 
+ * iterator that takes lock, lock all solvables from query
  * and send query to output iterator
  */
 template <class OutputIterator>
@@ -140,7 +140,7 @@ struct LockingOutputIterator
     ApplyLock a;a(query);
     *out++ = query;
   }
-  
+
   private:
   OutputIterator& out;
 };
@@ -166,13 +166,13 @@ void Locks::read( const Pathname& file )
   PathInfo pinfo(file);
   if ( pinfo.isExist() )
     readPoolQueriesFromFile( file, std::insert_iterator<LockSet>(_pimpl->MANIPlocks(), _pimpl->MANIPlocks().end()) );
-  else 
+  else
     MIL << "file does not exist(or cannot be stat), no lock added." << endl;
 }
 
 
 void Locks::apply() const
-{ 
+{
   DBG << "apply locks" << endl;
   for_each(_pimpl->locks().begin(), _pimpl->locks().end(), ApplyLock());
 }
@@ -227,7 +227,7 @@ void Locks::removeLock( const PoolQuery& query )
     PoolItem item(*it);
     item.status().setLock(false,ResStatus::USER);
   }
-  
+
   if ( _pimpl->toAdd.erase( query ) )
   {
     DBG << "query removed from added" << endl;
@@ -333,7 +333,7 @@ void Locks::removeEmpty()
     MIL << "cleaning aborted" << endl;
     report->finish(CleanEmptyLocksReport::ABORTED);
   }
-  else 
+  else
   {
     report->finish(CleanEmptyLocksReport::NO_ERROR);
 

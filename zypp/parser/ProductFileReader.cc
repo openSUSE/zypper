@@ -149,7 +149,7 @@ namespace zypp
             ("arch",          MANDTAORY,  xml::parseDefAssign( _pdata._arch ) )
             ("shortsummary",  OPTIONAL,   xml::parseDefAssign( _pdata._shortName ) )
             ("summary",       MULTIPLE_OPTIONAL, xml::parseDefAssign( _ttext )( "lang", _tlocale )
-					  >>bind( &ProductNode::doneLocalizedDefault, this, _1, boost::ref(_pdata._summary) ))
+                                          >>bind( &ProductNode::doneLocalizedDefault, this, _1, boost::ref(_pdata._summary) ))
             ("productline",   OPTIONAL,   xml::parseDefAssign( _pdata._productline ) )
             ("register",      OPTIONAL)
             ("updaterepokey", OPTIONAL,   xml::parseDefAssign( _pdata._updaterepokey ) )
@@ -191,9 +191,9 @@ namespace zypp
       /** collect localized data */
       void doneLocalizedDefault( const xml::Node & _node, std::string & store_r )
       {
-	// take 1st or default
-	if ( store_r.empty() || _tlocale.empty() )
-	  store_r = _ttext;
+        // take 1st or default
+        if ( store_r.empty() || _tlocale.empty() )
+          store_r = _ttext;
       }
 
       /** finaly */
@@ -208,8 +208,8 @@ namespace zypp
         std::string             _version;
         std::string             _release;
 
-	std::string             _ttext;
-	std::string             _tlocale;
+        std::string             _ttext;
+        std::string             _tlocale;
 
         ProductFileData::Upgrade::Impl _upgrade;
     };

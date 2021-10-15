@@ -32,21 +32,21 @@ namespace zypp {
       : _set( false )
       , _var( var_r )
       {
-	const char * val = getenv( _var.c_str() );
-	if ( val )
-	{
-	  _set = true;
-	  _val = val;
-	  ::unsetenv( _var.c_str() );
-	}
+        const char * val = getenv( _var.c_str() );
+        if ( val )
+        {
+          _set = true;
+          _val = val;
+          ::unsetenv( _var.c_str() );
+        }
       }
 
       ~TmpUnsetEnv()
       {
-	if ( _set )
-	{
-	  setenv( _var.c_str(), _val.c_str(), 1 );
-	}
+        if ( _set )
+        {
+          setenv( _var.c_str(), _val.c_str(), 1 );
+        }
       }
 
       bool _set;
@@ -63,17 +63,17 @@ namespace zypp {
       static WatchFile sysconfigProxy( "/etc/sysconfig/proxy", WatchFile::NO_INIT );
       if ( sysconfigProxy.hasChanged() )
       {
-	MIL << "Build Libproxy Factory from /etc/sysconfig/proxy" << endl;
-	if ( proxyFactory )
-	  ::px_proxy_factory_free( proxyFactory );
+        MIL << "Build Libproxy Factory from /etc/sysconfig/proxy" << endl;
+        if ( proxyFactory )
+          ::px_proxy_factory_free( proxyFactory );
 
-	TmpUnsetEnv envguard[] __attribute__ ((__unused__)) = { "KDE_FULL_SESSION", "GNOME_DESKTOP_SESSION_ID", "DESKTOP_SESSION" };
-	proxyFactory = ::px_proxy_factory_new();
+        TmpUnsetEnv envguard[] __attribute__ ((__unused__)) = { "KDE_FULL_SESSION", "GNOME_DESKTOP_SESSION_ID", "DESKTOP_SESSION" };
+        proxyFactory = ::px_proxy_factory_new();
       }
       else if ( ! proxyFactory )
       {
-	MIL << "Build Libproxy Factory" << endl;
-	proxyFactory = ::px_proxy_factory_new();
+        MIL << "Build Libproxy Factory" << endl;
+        proxyFactory = ::px_proxy_factory_new();
       }
 
       return proxyFactory;
@@ -92,34 +92,34 @@ namespace zypp {
     std::string ProxyInfoLibproxy::proxy(const Url & url_r) const
     {
       if (!_enabled)
-	return "";
+        return "";
 
       const url::ViewOption vopt =
-	      url::ViewOption::WITH_SCHEME
-	      + url::ViewOption::WITH_HOST
-	      + url::ViewOption::WITH_PORT
-	      + url::ViewOption::WITH_PATH_NAME;
+              url::ViewOption::WITH_SCHEME
+              + url::ViewOption::WITH_HOST
+              + url::ViewOption::WITH_PORT
+              + url::ViewOption::WITH_PATH_NAME;
 
       char **proxies = px_proxy_factory_get_proxies(_factory,
-						    (char *)url_r.asString(vopt).c_str());
+                                                    (char *)url_r.asString(vopt).c_str());
       if (!proxies)
-	      return "";
+              return "";
 
       /* cURL can only handle HTTP proxies, not SOCKS. And can only handle
-	 one. So look through the list and find an appropriate one. */
+         one. So look through the list and find an appropriate one. */
       char *result = NULL;
 
       for (int i = 0; proxies[i]; i++) {
-	      if (!result &&
-		  !strncmp(proxies[i], "http://", 7))
-		      result = proxies[i];
-	      else
-		      free(proxies[i]);
+              if (!result &&
+                  !strncmp(proxies[i], "http://", 7))
+                      result = proxies[i];
+              else
+                      free(proxies[i]);
       }
       free(proxies);
 
       if (!result)
-	      return "";
+              return "";
 
       std::string sresult = result;
       free(result);

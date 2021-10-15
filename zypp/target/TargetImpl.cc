@@ -96,16 +96,16 @@ namespace zypp
       std::string ret;
       AutoDispose<void*> state { ::rpm_state_create( sat::Pool::instance().get(), root_r.c_str() ), ::rpm_state_free };
       AutoDispose<Chksum*> chk { ::solv_chksum_create( REPOKEY_TYPE_SHA1 ), []( Chksum *chk ) -> void {
-	::solv_chksum_free( chk, nullptr );
+        ::solv_chksum_free( chk, nullptr );
       } };
       if ( ::rpm_hash_database_state( state, chk ) == 0 )
       {
-	int md5l;
-	const unsigned char * md5 = ::solv_chksum_get( chk, &md5l );
-	ret = ::pool_bin2hex( sat::Pool::instance().get(), md5, md5l );
+        int md5l;
+        const unsigned char * md5 = ::solv_chksum_get( chk, &md5l );
+        ret = ::pool_bin2hex( sat::Pool::instance().get(), md5, md5l );
       }
       else
-	WAR << "rpm_hash_database_state failed" << endl;
+        WAR << "rpm_hash_database_state failed" << endl;
       return ret;
     }
 
@@ -144,9 +144,9 @@ namespace zypp
       json::Array ret;
 
       for ( const Transaction::Step & step : steps_r )
-	// ignore implicit deletes due to obsoletes and non-package actions
-	if ( step.stepType() != Transaction::TRANSACTION_IGNORE )
-	  ret.add( step );
+        // ignore implicit deletes due to obsoletes and non-package actions
+        if ( step.stepType() != Transaction::TRANSACTION_IGNORE )
+          ret.add( step );
 
       return ret.asJSON();
     }
@@ -177,47 +177,47 @@ namespace zypp
 
       switch ( step_r.stepType() )
       {
-	case Transaction::TRANSACTION_IGNORE:	/*empty*/ break;
-	case Transaction::TRANSACTION_ERASE:	ret.add( strType, strTypeDel ); break;
-	case Transaction::TRANSACTION_INSTALL:	ret.add( strType, strTypeIns ); break;
-	case Transaction::TRANSACTION_MULTIINSTALL: ret.add( strType, strTypeMul ); break;
+        case Transaction::TRANSACTION_IGNORE:	/*empty*/ break;
+        case Transaction::TRANSACTION_ERASE:	ret.add( strType, strTypeDel ); break;
+        case Transaction::TRANSACTION_INSTALL:	ret.add( strType, strTypeIns ); break;
+        case Transaction::TRANSACTION_MULTIINSTALL: ret.add( strType, strTypeMul ); break;
       }
 
       switch ( step_r.stepStage() )
       {
-	case Transaction::STEP_TODO:		/*empty*/ break;
-	case Transaction::STEP_DONE:		ret.add( strStage, strStageDone ); break;
-	case Transaction::STEP_ERROR:		ret.add( strStage, strStageFailed ); break;
+        case Transaction::STEP_TODO:		/*empty*/ break;
+        case Transaction::STEP_DONE:		ret.add( strStage, strStageDone ); break;
+        case Transaction::STEP_ERROR:		ret.add( strStage, strStageFailed ); break;
       }
 
       {
-	IdString ident;
-	Edition ed;
-	Arch arch;
-	if ( sat::Solvable solv = step_r.satSolvable() )
-	{
-	  ident	= solv.ident();
-	  ed	= solv.edition();
-	  arch	= solv.arch();
-	}
-	else
-	{
-	  // deleted package; post mortem data stored in Transaction::Step
-	  ident	= step_r.ident();
-	  ed	= step_r.edition();
-	  arch	= step_r.arch();
-	}
+        IdString ident;
+        Edition ed;
+        Arch arch;
+        if ( sat::Solvable solv = step_r.satSolvable() )
+        {
+          ident	= solv.ident();
+          ed	= solv.edition();
+          arch	= solv.arch();
+        }
+        else
+        {
+          // deleted package; post mortem data stored in Transaction::Step
+          ident	= step_r.ident();
+          ed	= step_r.edition();
+          arch	= step_r.arch();
+        }
 
-	json::Object s {
-	  { strSolvableN, ident.asString() },
-	  { strSolvableV, ed.version() },
-	  { strSolvableR, ed.release() },
-	  { strSolvableA, arch.asString() }
-	};
-	if ( Edition::epoch_t epoch = ed.epoch() )
-	  s.add( strSolvableE, epoch );
+        json::Object s {
+          { strSolvableN, ident.asString() },
+          { strSolvableV, ed.version() },
+          { strSolvableR, ed.release() },
+          { strSolvableA, arch.asString() }
+        };
+        if ( Edition::epoch_t epoch = ed.epoch() )
+          s.add( strSolvableE, epoch );
 
-	ret.add( strSolvable, s );
+        ret.add( strSolvable, s );
       }
 
       return ret.asJSON();
@@ -235,45 +235,45 @@ namespace zypp
       /// bsc#1181328: Some systemd tools require /proc to be mounted
       class AssertProcMounted
       {
-	NON_COPYABLE(AssertProcMounted);
-	NON_MOVABLE(AssertProcMounted);
+        NON_COPYABLE(AssertProcMounted);
+        NON_MOVABLE(AssertProcMounted);
       public:
 
-	AssertProcMounted( Pathname root_r )
-	{
-	  root_r /= "/proc";
-	  if ( ! PathInfo(root_r/"self").isDir() ) {
-	    MIL << "Try to make sure proc is mounted at" << _mountpoint << endl;
-	    if ( filesystem::assert_dir(root_r) == 0
-	      && execute({ "mount", "-t", "proc", "proc", root_r.asString() }) == 0 ) {
-	      _mountpoint = std::move(root_r);	// so we'll later unmount it
-	    }
-	    else {
-	      WAR << "Mounting proc at " << _mountpoint << " failed" << endl;
-	    }
-	  }
-	}
+        AssertProcMounted( Pathname root_r )
+        {
+          root_r /= "/proc";
+          if ( ! PathInfo(root_r/"self").isDir() ) {
+            MIL << "Try to make sure proc is mounted at" << _mountpoint << endl;
+            if ( filesystem::assert_dir(root_r) == 0
+              && execute({ "mount", "-t", "proc", "proc", root_r.asString() }) == 0 ) {
+              _mountpoint = std::move(root_r);	// so we'll later unmount it
+            }
+            else {
+              WAR << "Mounting proc at " << _mountpoint << " failed" << endl;
+            }
+          }
+        }
 
-	~AssertProcMounted( )
-	{
-	  if ( ! _mountpoint.empty() ) {
-	    // we mounted it so we unmount...
-	    MIL << "We mounted " << _mountpoint << " so we unmount it" << endl;
-	    execute({ "umount", "-l", _mountpoint.asString() });
-	  }
-	}
-
-      private:
-	int execute( ExternalProgram::Arguments && cmd_r ) const
-	{
-	  ExternalProgram prog( cmd_r, ExternalProgram::Stderr_To_Stdout );
-	  for( std::string line = prog.receiveLine(); ! line.empty(); line = prog.receiveLine() )
-	  { DBG << line; }
-	  return prog.close();
-	}
+        ~AssertProcMounted( )
+        {
+          if ( ! _mountpoint.empty() ) {
+            // we mounted it so we unmount...
+            MIL << "We mounted " << _mountpoint << " so we unmount it" << endl;
+            execute({ "umount", "-l", _mountpoint.asString() });
+          }
+        }
 
       private:
-	Pathname _mountpoint;
+        int execute( ExternalProgram::Arguments && cmd_r ) const
+        {
+          ExternalProgram prog( cmd_r, ExternalProgram::Stderr_To_Stdout );
+          for( std::string line = prog.receiveLine(); ! line.empty(); line = prog.receiveLine() )
+          { DBG << line; }
+          return prog.close();
+        }
+
+      private:
+        Pathname _mountpoint;
       };
     } // namespace
     ///////////////////////////////////////////////////////////////////
@@ -283,58 +283,58 @@ namespace zypp
     {
       SolvIdentFile::Data getUserInstalledFromHistory( const Pathname & historyFile_r )
       {
-	SolvIdentFile::Data onSystemByUserList;
-	// go and parse it: 'who' must constain an '@', then it was installed by user request.
-	// 2009-09-29 07:25:19|install|lirc-remotes|0.8.5-3.2|x86_64|root@opensuse|InstallationImage|a204211eb0...
-	std::ifstream infile( historyFile_r.c_str() );
-	for( iostr::EachLine in( infile ); in; in.next() )
-	{
-	  const char * ch( (*in).c_str() );
-	  // start with year
-	  if ( *ch < '1' || '9' < *ch )
-	    continue;
-	  const char * sep1 = ::strchr( ch, '|' );	// | after date
-	  if ( !sep1 )
-	    continue;
-	  ++sep1;
-	  // if logs an install or delete
-	  bool installs = true;
-	  if ( ::strncmp( sep1, "install|", 8 ) )
-	  {
-	    if ( ::strncmp( sep1, "remove |", 8 ) )
-	      continue; // no install and no remove
-	      else
-		installs = false; // remove
-	  }
-	  sep1 += 8;					// | after what
-	  // get the package name
-	  const char * sep2 = ::strchr( sep1, '|' );	// | after name
-	  if ( !sep2 || sep1 == sep2 )
-	    continue;
-	  (*in)[sep2-ch] = '\0';
-	  IdString pkg( sep1 );
-	  // we're done, if a delete
-	  if ( !installs )
-	  {
-	    onSystemByUserList.erase( pkg );
-	    continue;
-	  }
-	  // now guess whether user installed or not (3rd next field contains 'user@host')
-	  if ( (sep1 = ::strchr( sep2+1, '|' ))		// | after version
-	    && (sep1 = ::strchr( sep1+1, '|' ))		// | after arch
-	    && (sep2 = ::strchr( sep1+1, '|' )) )	// | after who
-	  {
-	    (*in)[sep2-ch] = '\0';
-	    if ( ::strchr( sep1+1, '@' ) )
-	    {
-	      // by user
-	      onSystemByUserList.insert( pkg );
-	      continue;
-	    }
-	  }
-	}
-	MIL << "onSystemByUserList found: " << onSystemByUserList.size() << endl;
-	return onSystemByUserList;
+        SolvIdentFile::Data onSystemByUserList;
+        // go and parse it: 'who' must constain an '@', then it was installed by user request.
+        // 2009-09-29 07:25:19|install|lirc-remotes|0.8.5-3.2|x86_64|root@opensuse|InstallationImage|a204211eb0...
+        std::ifstream infile( historyFile_r.c_str() );
+        for( iostr::EachLine in( infile ); in; in.next() )
+        {
+          const char * ch( (*in).c_str() );
+          // start with year
+          if ( *ch < '1' || '9' < *ch )
+            continue;
+          const char * sep1 = ::strchr( ch, '|' );	// | after date
+          if ( !sep1 )
+            continue;
+          ++sep1;
+          // if logs an install or delete
+          bool installs = true;
+          if ( ::strncmp( sep1, "install|", 8 ) )
+          {
+            if ( ::strncmp( sep1, "remove |", 8 ) )
+              continue; // no install and no remove
+              else
+                installs = false; // remove
+          }
+          sep1 += 8;					// | after what
+          // get the package name
+          const char * sep2 = ::strchr( sep1, '|' );	// | after name
+          if ( !sep2 || sep1 == sep2 )
+            continue;
+          (*in)[sep2-ch] = '\0';
+          IdString pkg( sep1 );
+          // we're done, if a delete
+          if ( !installs )
+          {
+            onSystemByUserList.erase( pkg );
+            continue;
+          }
+          // now guess whether user installed or not (3rd next field contains 'user@host')
+          if ( (sep1 = ::strchr( sep2+1, '|' ))		// | after version
+            && (sep1 = ::strchr( sep1+1, '|' ))		// | after arch
+            && (sep2 = ::strchr( sep1+1, '|' )) )	// | after who
+          {
+            (*in)[sep2-ch] = '\0';
+            if ( ::strchr( sep1+1, '@' ) )
+            {
+              // by user
+              onSystemByUserList.insert( pkg );
+              continue;
+            }
+          }
+        }
+        MIL << "onSystemByUserList found: " << onSystemByUserList.size() << endl;
+        return onSystemByUserList;
       }
     } // namespace
     ///////////////////////////////////////////////////////////////////
@@ -344,9 +344,9 @@ namespace zypp
     {
       inline PluginFrame transactionPluginFrame( const std::string & command_r, ZYppCommitResult::TransactionStepList & steps_r )
       {
-	return PluginFrame( command_r, json::Object {
-	  { "TransactionStepList", steps_r }
-	}.asJSON() );
+        return PluginFrame( command_r, json::Object {
+          { "TransactionStepList", steps_r }
+        }.asJSON() );
       }
     } // namespace
     ///////////////////////////////////////////////////////////////////
@@ -511,7 +511,7 @@ namespace zypp
         // - "name-version-release"
         // - "name-version-release-*"
         bool abort = false;
-	std::map<std::string, Pathname> unify; // scripts <md5,path>
+        std::map<std::string, Pathname> unify; // scripts <md5,path>
         for_( it, checkPackages_r.begin(), checkPackages_r.end() )
         {
           std::string prefix( str::form( "%s-%s", it->name().c_str(), it->edition().c_str() ) );
@@ -527,38 +527,38 @@ namespace zypp
             Pathname localPath( scriptsPath_r/(*sit) );	// without root prefix
             std::string unifytag;			// must not stay empty
 
-	    if ( script.isFile() )
-	    {
-	      // Assert it's set executable, unify by md5sum.
-	      filesystem::addmod( script.path(), 0500 );
-	      unifytag = filesystem::md5sum( script.path() );
-	    }
-	    else if ( ! script.isExist() )
-	    {
-	      // Might be a dangling symlink, might be ok if we are in
-	      // instsys (absolute symlink within the system below /mnt).
-	      // readlink will tell....
-	      unifytag = filesystem::readlink( script.path() ).asString();
-	    }
+            if ( script.isFile() )
+            {
+              // Assert it's set executable, unify by md5sum.
+              filesystem::addmod( script.path(), 0500 );
+              unifytag = filesystem::md5sum( script.path() );
+            }
+            else if ( ! script.isExist() )
+            {
+              // Might be a dangling symlink, might be ok if we are in
+              // instsys (absolute symlink within the system below /mnt).
+              // readlink will tell....
+              unifytag = filesystem::readlink( script.path() ).asString();
+            }
 
-	    if ( unifytag.empty() )
-	      continue;
+            if ( unifytag.empty() )
+              continue;
 
-	    // Unify scripts
-	    if ( unify[unifytag].empty() )
-	    {
-	      unify[unifytag] = localPath;
-	    }
-	    else
-	    {
-	      // translators: We may find the same script content in files with different names.
-	      // Only the first occurence is executed, subsequent ones are skipped. It's a one-line
-	      // message for a log file. Preferably start translation with "%s"
-	      std::string msg( str::form(_("%s already executed as %s)"), localPath.asString().c_str(), unify[unifytag].c_str() ) );
+            // Unify scripts
+            if ( unify[unifytag].empty() )
+            {
+              unify[unifytag] = localPath;
+            }
+            else
+            {
+              // translators: We may find the same script content in files with different names.
+              // Only the first occurence is executed, subsequent ones are skipped. It's a one-line
+              // message for a log file. Preferably start translation with "%s"
+              std::string msg( str::form(_("%s already executed as %s)"), localPath.asString().c_str(), unify[unifytag].c_str() ) );
               MIL << "Skip update script: " << msg << endl;
               HistoryLog().comment( msg, /*timestamp*/true );
-	      continue;
-	    }
+              continue;
+            }
 
             if ( abort || aborting_r )
             {
@@ -676,7 +676,7 @@ namespace zypp
         else if ( format == DIGEST || format == BULK )
         {
           filesystem::TmpFile tmpfile;
-	  std::ofstream out( tmpfile.path().c_str() );
+          std::ofstream out( tmpfile.path().c_str() );
           for_( it, notifications_r.begin(), notifications_r.end() )
           {
             if ( format == DIGEST )
@@ -774,24 +774,24 @@ namespace zypp
        */
       void logPatchStatusChanges( const sat::Transaction & transaction_r, TargetImpl & target_r )
       {
-	ResPool::ChangedPseudoInstalled changedPseudoInstalled { ResPool::instance().changedPseudoInstalled() };
-	if ( changedPseudoInstalled.empty() )
-	  return;
+        ResPool::ChangedPseudoInstalled changedPseudoInstalled { ResPool::instance().changedPseudoInstalled() };
+        if ( changedPseudoInstalled.empty() )
+          return;
 
-	if ( ! transaction_r.actionEmpty( ~sat::Transaction::STEP_DONE ) )
-	{
-	  // Need to recompute the patch list if commit is incomplete!
-	  // We remember the initially established status, then reload the
-	  // Target to get the current patch status. Then compare.
-	  WAR << "Need to recompute the patch status changes as commit is incomplete!" << endl;
-	  ResPool::EstablishedStates establishedStates{ ResPool::instance().establishedStates() };
-	  target_r.load();
-	  changedPseudoInstalled = establishedStates.changedPseudoInstalled();
-	}
+        if ( ! transaction_r.actionEmpty( ~sat::Transaction::STEP_DONE ) )
+        {
+          // Need to recompute the patch list if commit is incomplete!
+          // We remember the initially established status, then reload the
+          // Target to get the current patch status. Then compare.
+          WAR << "Need to recompute the patch status changes as commit is incomplete!" << endl;
+          ResPool::EstablishedStates establishedStates{ ResPool::instance().establishedStates() };
+          target_r.load();
+          changedPseudoInstalled = establishedStates.changedPseudoInstalled();
+        }
 
-	HistoryLog historylog;
-	for ( const auto & el : changedPseudoInstalled )
-	  historylog.patchStateChange( el.first, el.second );
+        HistoryLog historylog;
+        for ( const auto & el : changedPseudoInstalled )
+          historylog.patchStateChange( el.first, el.second );
       }
 
       /////////////////////////////////////////////////////////////////
@@ -845,7 +845,7 @@ namespace zypp
      */
     void updateFileContent( const Pathname &filename,
                             boost::function<bool ()> condition,
-			    boost::function<std::string ()> value )
+                            boost::function<std::string ()> value )
     {
         std::string val = value();
         // if the value is empty, then just dont
@@ -887,7 +887,7 @@ namespace zypp
     {
       // bsc#1024741: Omit creating a new uid for chrooted systems (if it already has one, fine)
       if ( root() != "/" )
-	return;
+        return;
 
       // Create the anonymous unique id, used for download statistics
       Pathname idpath( home() / "AnonymousUniqueId");
@@ -927,7 +927,7 @@ namespace zypp
         updateFileContent( flavorpath,
                            // only if flavor is not empty
                            functor::Constant<bool>( ! flavor.empty() ),
-			   functor::Constant<std::string>(flavor) );
+                           functor::Constant<std::string>(flavor) );
       }
       catch ( const Exception &e )
       {
@@ -987,9 +987,9 @@ namespace zypp
           RepoStatus status = RepoStatus::fromCookieFile(rpmsolvcookie);
           // now compare it with the rpm database
           if ( status == rpmstatus )
-	    build_rpm_solv = false;
-	  MIL << "Read cookie: " << rpmsolvcookie << " says: "
-	  << (build_rpm_solv ? "outdated" : "uptodate") << endl;
+            build_rpm_solv = false;
+          MIL << "Read cookie: " << rpmsolvcookie << " says: "
+          << (build_rpm_solv ? "outdated" : "uptodate") << endl;
         }
       }
 
@@ -1061,7 +1061,7 @@ namespace zypp
         cmd.push_back( tmpsolv.path().asString() );
 
         ExternalProgram prog( cmd, ExternalProgram::Stderr_To_Stdout );
-	std::string errdetail;
+        std::string errdetail;
 
         for ( std::string output( prog.receiveLine() ); output.length(); output = prog.receiveLine() ) {
           WAR << "  " << output;
@@ -1090,22 +1090,22 @@ namespace zypp
 
         // We keep it.
         guard.resetDispose();
-	sat::updateSolvFileIndex( rpmsolv );	// content digest for zypper bash completion
+        sat::updateSolvFileIndex( rpmsolv );	// content digest for zypper bash completion
 
-	// system-hook: Finally send notification to plugins
-	if ( root() == "/" )
-	{
-	  PluginExecutor plugins;
-	  plugins.load( ZConfig::instance().pluginsPath()/"system" );
-	  if ( plugins )
-	    plugins.send( PluginFrame( "PACKAGESETCHANGED" ) );
-	}
+        // system-hook: Finally send notification to plugins
+        if ( root() == "/" )
+        {
+          PluginExecutor plugins;
+          plugins.load( ZConfig::instance().pluginsPath()/"system" );
+          if ( plugins )
+            plugins.send( PluginFrame( "PACKAGESETCHANGED" ) );
+        }
       }
       else
       {
-	// On the fly add missing solv.idx files for bash completion.
-	if ( ! PathInfo(base/"solv.idx").isExist() )
-	  sat::updateSolvFileIndex( rpmsolv );
+        // On the fly add missing solv.idx files for bash completion.
+        if ( ! PathInfo(base/"solv.idx").isExist() )
+          sat::updateSolvFileIndex( rpmsolv );
       }
       return build_rpm_solv;
     }
@@ -1182,60 +1182,60 @@ namespace zypp
         }
       }
       {
-	if ( ! PathInfo( _autoInstalledFile.file() ).isExist() )
-	{
-	  // Initialize from history, if it does not exist
-	  Pathname historyFile( Pathname::assertprefix( _root, ZConfig::instance().historyLogFile() ) );
-	  if ( PathInfo( historyFile ).isExist() )
-	  {
-	    SolvIdentFile::Data onSystemByUser( getUserInstalledFromHistory( historyFile ) );
-	    SolvIdentFile::Data onSystemByAuto;
-	    for_( it, system.solvablesBegin(), system.solvablesEnd() )
-	    {
-	      IdString ident( (*it).ident() );
-	      if ( onSystemByUser.find( ident ) == onSystemByUser.end() )
-		onSystemByAuto.insert( ident );
-	    }
-	    _autoInstalledFile.setData( onSystemByAuto );
-	  }
-	  // on the fly removed any obsolete SoftLocks file
-	  filesystem::unlink( home() / "SoftLocks" );
-	}
-	// read from AutoInstalled file
-	sat::StringQueue q;
-	for ( const auto & idstr : _autoInstalledFile.data() )
-	  q.push( idstr.id() );
-	satpool.setAutoInstalled( q );
+        if ( ! PathInfo( _autoInstalledFile.file() ).isExist() )
+        {
+          // Initialize from history, if it does not exist
+          Pathname historyFile( Pathname::assertprefix( _root, ZConfig::instance().historyLogFile() ) );
+          if ( PathInfo( historyFile ).isExist() )
+          {
+            SolvIdentFile::Data onSystemByUser( getUserInstalledFromHistory( historyFile ) );
+            SolvIdentFile::Data onSystemByAuto;
+            for_( it, system.solvablesBegin(), system.solvablesEnd() )
+            {
+              IdString ident( (*it).ident() );
+              if ( onSystemByUser.find( ident ) == onSystemByUser.end() )
+                onSystemByAuto.insert( ident );
+            }
+            _autoInstalledFile.setData( onSystemByAuto );
+          }
+          // on the fly removed any obsolete SoftLocks file
+          filesystem::unlink( home() / "SoftLocks" );
+        }
+        // read from AutoInstalled file
+        sat::StringQueue q;
+        for ( const auto & idstr : _autoInstalledFile.data() )
+          q.push( idstr.id() );
+        satpool.setAutoInstalled( q );
       }
 
       // Load the needreboot package specs
       {
-	sat::SolvableSpec needrebootSpec;
-	needrebootSpec.addProvides( Capability("installhint(reboot-needed)") );
-	needrebootSpec.addProvides( Capability("kernel") );
-	needrebootSpec.addIdent( IdString("kernel-firmware") );
+        sat::SolvableSpec needrebootSpec;
+        needrebootSpec.addProvides( Capability("installhint(reboot-needed)") );
+        needrebootSpec.addProvides( Capability("kernel") );
+        needrebootSpec.addIdent( IdString("kernel-firmware") );
 
-	Pathname needrebootFile { Pathname::assertprefix( root(), ZConfig::instance().needrebootFile() ) };
-	if ( PathInfo( needrebootFile ).isFile() )
-	  needrebootSpec.parseFrom( needrebootFile );
+        Pathname needrebootFile { Pathname::assertprefix( root(), ZConfig::instance().needrebootFile() ) };
+        if ( PathInfo( needrebootFile ).isFile() )
+          needrebootSpec.parseFrom( needrebootFile );
 
-	Pathname needrebootDir { Pathname::assertprefix( root(), ZConfig::instance().needrebootPath() ) };
+        Pathname needrebootDir { Pathname::assertprefix( root(), ZConfig::instance().needrebootPath() ) };
         if ( PathInfo( needrebootDir ).isDir() )
-	{
-	  static const StrMatcher isRpmConfigBackup( "\\.rpm(new|save|orig)$", Match::REGEX );
+        {
+          static const StrMatcher isRpmConfigBackup( "\\.rpm(new|save|orig)$", Match::REGEX );
 
-	  filesystem::dirForEach( needrebootDir, filesystem::matchNoDots(),
-				  [&]( const Pathname & dir_r, const char *const str_r )->bool
-				  {
-				    if ( ! isRpmConfigBackup( str_r ) )
-				    {
-				      Pathname needrebootFile { needrebootDir / str_r };
-				      if ( PathInfo( needrebootFile ).isFile() )
-					needrebootSpec.parseFrom( needrebootFile );
-				    }
-				    return true;
-				  });
-	}
+          filesystem::dirForEach( needrebootDir, filesystem::matchNoDots(),
+                                  [&]( const Pathname & dir_r, const char *const str_r )->bool
+                                  {
+                                    if ( ! isRpmConfigBackup( str_r ) )
+                                    {
+                                      Pathname needrebootFile { needrebootDir / str_r };
+                                      if ( PathInfo( needrebootFile ).isFile() )
+                                        needrebootSpec.parseFrom( needrebootFile );
+                                    }
+                                    return true;
+                                  });
+        }
         satpool.setNeedrebootSpec( std::move(needrebootSpec) );
       }
 
@@ -1299,19 +1299,19 @@ namespace zypp
       ZYppCommitResult::TransactionStepList & steps( result.rTransactionStepList() );
       if ( policy_r.restrictToMedia() )
       {
-	// Collect until the 1st package from an unwanted media occurs.
+        // Collect until the 1st package from an unwanted media occurs.
         // Further collection could violate install order.
-	MIL << "Restrict to media number " << policy_r.restrictToMedia() << endl;
-	for_( it, result.transaction().begin(), result.transaction().end() )
-	{
-	  if ( makeResObject( *it )->mediaNr() > 1 )
-	    break;
-	  steps.push_back( *it );
-	}
+        MIL << "Restrict to media number " << policy_r.restrictToMedia() << endl;
+        for_( it, result.transaction().begin(), result.transaction().end() )
+        {
+          if ( makeResObject( *it )->mediaNr() > 1 )
+            break;
+          steps.push_back( *it );
+        }
       }
       else
       {
-	result.rTransactionStepList().insert( steps.end(), result.transaction().begin(), result.transaction().end() );
+        result.rTransactionStepList().insert( steps.end(), result.transaction().begin(), result.transaction().end() );
       }
       MIL << "Todo: " << result << endl;
 
@@ -1321,10 +1321,10 @@ namespace zypp
       PluginExecutor commitPlugins;
       if ( root() == "/" && ! policy_r.dryRun() )
       {
-	commitPlugins.load( ZConfig::instance().pluginsPath()/"commit" );
+        commitPlugins.load( ZConfig::instance().pluginsPath()/"commit" );
       }
       if ( commitPlugins )
-	commitPlugins.send( transactionPluginFrame( "COMMITBEGIN", steps ) );
+        commitPlugins.send( transactionPluginFrame( "COMMITBEGIN", steps ) );
 
       ///////////////////////////////////////////////////////////////////
       // Write out a testcase if we're in dist upgrade mode.
@@ -1349,12 +1349,12 @@ namespace zypp
         filesystem::assert_dir( home() );
         // requested locales
         _requestedLocalesFile.setLocales( pool_r.getRequestedLocales() );
-	// autoinstalled
+        // autoinstalled
         {
-	  SolvIdentFile::Data newdata;
-	  for ( sat::Queue::value_type id : result.rTransaction().autoInstalled() )
-	    newdata.insert( IdString(id) );
-	  _autoInstalledFile.setData( newdata );
+          SolvIdentFile::Data newdata;
+          for ( sat::Queue::value_type id : result.rTransaction().autoInstalled() )
+            newdata.insert( IdString(id) );
+          _autoInstalledFile.setData( newdata );
         }
         // hard locks
         if ( ZConfig::instance().apply_locks_file() )
@@ -1377,23 +1377,23 @@ namespace zypp
       {
         for_( it, steps.begin(), steps.end() )
         {
-	  if ( ! it->satSolvable().isKind<Patch>() )
-	    continue;
+          if ( ! it->satSolvable().isKind<Patch>() )
+            continue;
 
-	  PoolItem pi( *it );
+          PoolItem pi( *it );
           if ( ! pi.status().isToBeInstalled() )
             continue;
 
           Patch::constPtr patch( asKind<Patch>(pi.resolvable()) );
-	  if ( ! patch ||patch->message().empty()  )
-	    continue;
+          if ( ! patch ||patch->message().empty()  )
+            continue;
 
-	  MIL << "Show message for " << patch << endl;
-	  callback::SendReport<target::PatchMessageReport> report;
-	  if ( ! report->show( patch ) )
-	  {
-	    WAR << "commit aborted by the user" << endl;
-	    ZYPP_THROW( TargetAbortedException( ) );
+          MIL << "Show message for " << patch << endl;
+          callback::SendReport<target::PatchMessageReport> report;
+          if ( ! report->show( patch ) )
+          {
+            WAR << "commit aborted by the user" << endl;
+            ZYPP_THROW( TargetAbortedException( ) );
           }
         }
       }
@@ -1411,9 +1411,9 @@ namespace zypp
       DBG << "commit log file is set to: " << HistoryLog::fname() << endl;
       if ( ! policy_r.dryRun() || policy_r.downloadMode() == DownloadOnly || singleTransMode )
       {
-	// Prepare the package cache. Pass all items requiring download.
+        // Prepare the package cache. Pass all items requiring download.
         CommitPackageCache packageCache;
-	packageCache.setCommitList( steps.begin(), steps.end() );
+        packageCache.setCommitList( steps.begin(), steps.end() );
 
         bool miss = false;
         if ( policy_r.downloadMode() != DownloadAsNeeded || singleTransMode )
@@ -1423,31 +1423,31 @@ namespace zypp
           // we may actually have more than one heap.
           for_( it, steps.begin(), steps.end() )
           {
-	    switch ( it->stepType() )
-	    {
-	      case sat::Transaction::TRANSACTION_INSTALL:
-	      case sat::Transaction::TRANSACTION_MULTIINSTALL:
-		// proceed: only install actionas may require download.
-		break;
+            switch ( it->stepType() )
+            {
+              case sat::Transaction::TRANSACTION_INSTALL:
+              case sat::Transaction::TRANSACTION_MULTIINSTALL:
+                // proceed: only install actionas may require download.
+                break;
 
-	      default:
-		// next: no download for or non-packages and delete actions.
-		continue;
-		break;
-	    }
+              default:
+                // next: no download for or non-packages and delete actions.
+                continue;
+                break;
+            }
 
-	    PoolItem pi( *it );
+            PoolItem pi( *it );
             if ( pi->isKind<Package>() || pi->isKind<SrcPackage>() )
             {
               ManagedFile localfile;
               try
               {
-		localfile = packageCache.get( pi );
+                localfile = packageCache.get( pi );
                 localfile.resetDispose(); // keep the package file in the cache
               }
               catch ( const AbortRequestException & exp )
               {
-		it->stepStage( sat::Transaction::STEP_ERROR );
+                it->stepStage( sat::Transaction::STEP_ERROR );
                 miss = true;
                 WAR << "commit cache preload aborted by the user" << endl;
                 ZYPP_THROW( TargetAbortedException( ) );
@@ -1456,7 +1456,7 @@ namespace zypp
               catch ( const SkipRequestException & exp )
               {
                 ZYPP_CAUGHT( exp );
-		it->stepStage( sat::Transaction::STEP_ERROR );
+                it->stepStage( sat::Transaction::STEP_ERROR );
                 miss = true;
                 WAR << "Skipping cache preload package " << pi->asKind<Package>() << " in commit" << endl;
                 continue;
@@ -1466,7 +1466,7 @@ namespace zypp
                 // bnc #395704: missing catch causes abort.
                 // TODO see if packageCache fails to handle errors correctly.
                 ZYPP_CAUGHT( exp );
-		it->stepStage( sat::Transaction::STEP_ERROR );
+                it->stepStage( sat::Transaction::STEP_ERROR );
                 miss = true;
                 INT << "Unexpected Error: Skipping cache preload package " << pi->asKind<Package>() << " in commit" << endl;
                 continue;
@@ -1481,7 +1481,7 @@ namespace zypp
           ERR << "Some packages could not be provided. Aborting commit."<< endl;
         }
         else
-	{
+        {
           // single trans mode does a test install via rpm
           if ( policy_r.singleTransModeEnabled() ) {
             commitInSingleTransaction( policy_r, packageCache, result );
@@ -1506,29 +1506,29 @@ namespace zypp
       else
       {
         DBG << "dryRun: Not downloading/installing/deleting anything." << endl;
-	if ( explicitDryRun ) {
-	  // if cache is preloaded, check for file conflicts
-	  commitFindFileConflicts( policy_r, result );
-	}
+        if ( explicitDryRun ) {
+          // if cache is preloaded, check for file conflicts
+          commitFindFileConflicts( policy_r, result );
+        }
       }
 
       {
-	// NOTE: Removing rpm in a transaction, rpm removes the /var/lib/rpm compat symlink.
-	// We re-create it, in case it was lost to prevent legacy tools from accidentally
-	// assuming no database is present.
-	if ( ! PathInfo(_root/"/var/lib/rpm",PathInfo::LSTAT).isExist()
-	  && PathInfo(_root/"/usr/lib/sysimage/rpm").isDir() ) {
-	  WAR << "(rpm removed in commit?) Inject missing /var/lib/rpm compat symlink to /usr/lib/sysimage/rpm" << endl;
-	  filesystem::assert_dir( _root/"/var/lib" );
-	  filesystem::symlink( "../../usr/lib/sysimage/rpm", _root/"/var/lib/rpm" );
-	}
+        // NOTE: Removing rpm in a transaction, rpm removes the /var/lib/rpm compat symlink.
+        // We re-create it, in case it was lost to prevent legacy tools from accidentally
+        // assuming no database is present.
+        if ( ! PathInfo(_root/"/var/lib/rpm",PathInfo::LSTAT).isExist()
+          && PathInfo(_root/"/usr/lib/sysimage/rpm").isDir() ) {
+          WAR << "(rpm removed in commit?) Inject missing /var/lib/rpm compat symlink to /usr/lib/sysimage/rpm" << endl;
+          filesystem::assert_dir( _root/"/var/lib" );
+          filesystem::symlink( "../../usr/lib/sysimage/rpm", _root/"/var/lib/rpm" );
+        }
       }
 
       ///////////////////////////////////////////////////////////////////
       // Send result to commit plugins:
       ///////////////////////////////////////////////////////////////////
       if ( commitPlugins )
-	commitPlugins.send( transactionPluginFrame( "COMMITEND", steps ) );
+        commitPlugins.send( transactionPluginFrame( "COMMITEND", steps ) );
 
       ///////////////////////////////////////////////////////////////////
       // Try to rebuild solv file while rpm database is still in cache
@@ -1551,19 +1551,19 @@ namespace zypp
     {
       struct NotifyAttemptToModify
       {
-	NotifyAttemptToModify( ZYppCommitResult & result_r ) : _result( result_r ) {}
+        NotifyAttemptToModify( ZYppCommitResult & result_r ) : _result( result_r ) {}
 
-	void operator()()
-	{ if ( _guard ) { _result.attemptToModify( true ); _guard = false; } }
+        void operator()()
+        { if ( _guard ) { _result.attemptToModify( true ); _guard = false; } }
 
-	TrueBool           _guard;
-	ZYppCommitResult & _result;
+        TrueBool           _guard;
+        ZYppCommitResult & _result;
       };
     } // namespace
 
     void TargetImpl::commit( const ZYppCommitPolicy & policy_r,
-			     CommitPackageCache & packageCache_r,
-			     ZYppCommitResult & result_r )
+                             CommitPackageCache & packageCache_r,
+                             ZYppCommitResult & result_r )
     {
       // steps: this is our todo-list
       ZYppCommitResult::TransactionStepList & steps( result_r.rTransactionStepList() );
@@ -1585,17 +1585,17 @@ namespace zypp
 
       for_( step, steps.begin(), steps.end() )
       {
-	PoolItem citem( *step );
-	if ( step->stepType() == sat::Transaction::TRANSACTION_IGNORE )
-	{
-	  if ( citem->isKind<Package>() )
-	  {
-	    // for packages this means being obsoleted (by rpm)
-	    // thius no additional action is needed.
-	    step->stepStage( sat::Transaction::STEP_DONE );
-	    continue;
-	  }
-	}
+        PoolItem citem( *step );
+        if ( step->stepType() == sat::Transaction::TRANSACTION_IGNORE )
+        {
+          if ( citem->isKind<Package>() )
+          {
+            // for packages this means being obsoleted (by rpm)
+            // thius no additional action is needed.
+            step->stepStage( sat::Transaction::STEP_DONE );
+            continue;
+          }
+        }
 
         if ( citem->isKind<Package>() )
         {
@@ -1605,20 +1605,20 @@ namespace zypp
             ManagedFile localfile;
             try
             {
-	      localfile = packageCache_r.get( citem );
+              localfile = packageCache_r.get( citem );
             }
             catch ( const AbortRequestException &e )
             {
               WAR << "commit aborted by the user" << endl;
               abort = true;
-	      step->stepStage( sat::Transaction::STEP_ERROR );
-	      break;
+              step->stepStage( sat::Transaction::STEP_ERROR );
+              break;
             }
             catch ( const SkipRequestException &e )
             {
               ZYPP_CAUGHT( e );
               WAR << "Skipping package " << p << " in commit" << endl;
-	      step->stepStage( sat::Transaction::STEP_ERROR );
+              step->stepStage( sat::Transaction::STEP_ERROR );
               continue;
             }
             catch ( const Exception &e )
@@ -1627,7 +1627,7 @@ namespace zypp
               // TODO see if packageCache fails to handle errors correctly.
               ZYPP_CAUGHT( e );
               INT << "Unexpected Error: Skipping package " << p << " in commit" << endl;
-	      step->stepStage( sat::Transaction::STEP_ERROR );
+              step->stepStage( sat::Transaction::STEP_ERROR );
               continue;
             }
 
@@ -1652,13 +1652,13 @@ namespace zypp
             if (policy_r.rpmExcludeDocs()) flags |= rpm::RPMINST_EXCLUDEDOCS;
             if (policy_r.rpmNoSignature()) flags |= rpm::RPMINST_NOSIGNATURE;
 
-	    attemptToModify();
+            attemptToModify();
             try
             {
               progress.tryLevel( target::rpm::InstallResolvableReport::RPM_NODEPS_FORCE );
-	      if ( postTransCollector.collectScriptFromPackage( localfile ) )
-		flags |= rpm::RPMINST_NOPOSTTRANS;
-	      rpm().installPackage( localfile, flags );
+              if ( postTransCollector.collectScriptFromPackage( localfile ) )
+                flags |= rpm::RPMINST_NOPOSTTRANS;
+              rpm().installPackage( localfile, flags );
               HistoryLog().install(citem);
 
               if ( progress.aborted() )
@@ -1666,7 +1666,7 @@ namespace zypp
                 WAR << "commit aborted by the user" << endl;
                 localfile.resetDispose(); // keep the package file in the cache
                 abort = true;
-		step->stepStage( sat::Transaction::STEP_ERROR );
+                step->stepStage( sat::Transaction::STEP_ERROR );
                 break;
               }
               else
@@ -1678,7 +1678,7 @@ namespace zypp
                 }
 
                 success = true;
-		step->stepStage( sat::Transaction::STEP_DONE );
+                step->stepStage( sat::Transaction::STEP_DONE );
               }
             }
             catch ( Exception & excpt_r )
@@ -1689,7 +1689,7 @@ namespace zypp
               if ( policy_r.dryRun() )
               {
                 WAR << "dry run failed" << endl;
-		step->stepStage( sat::Transaction::STEP_ERROR );
+                step->stepStage( sat::Transaction::STEP_ERROR );
                 break;
               }
               // else
@@ -1710,7 +1710,7 @@ namespace zypp
             {
               citem.status().resetTransact( ResStatus::USER );
               successfullyInstalledPackages.push_back( citem.satSolvable() );
-	      step->stepStage( sat::Transaction::STEP_DONE );
+              step->stepStage( sat::Transaction::STEP_DONE );
             }
           }
           else
@@ -1723,23 +1723,23 @@ namespace zypp
             flags |= rpm::RPMINST_NODEPS;
             if (policy_r.dryRun()) flags |= rpm::RPMINST_TEST;
 
-	    attemptToModify();
+            attemptToModify();
             try
             {
-	      rpm().removePackage( p, flags );
+              rpm().removePackage( p, flags );
               HistoryLog().remove(citem);
 
               if ( progress.aborted() )
               {
                 WAR << "commit aborted by the user" << endl;
                 abort = true;
-		step->stepStage( sat::Transaction::STEP_ERROR );
+                step->stepStage( sat::Transaction::STEP_ERROR );
                 break;
               }
               else
               {
                 success = true;
-		step->stepStage( sat::Transaction::STEP_DONE );
+                step->stepStage( sat::Transaction::STEP_DONE );
               }
             }
             catch (Exception & excpt_r)
@@ -1749,17 +1749,17 @@ namespace zypp
               {
                 WAR << "commit aborted by the user" << endl;
                 abort = true;
-		step->stepStage( sat::Transaction::STEP_ERROR );
+                step->stepStage( sat::Transaction::STEP_ERROR );
                 break;
               }
               // else
               WAR << "removal of " << p << " failed";
-	      step->stepStage( sat::Transaction::STEP_ERROR );
+              step->stepStage( sat::Transaction::STEP_ERROR );
             }
             if ( success && !policy_r.dryRun() )
             {
               citem.status().resetTransact( ResStatus::USER );
-	      step->stepStage( sat::Transaction::STEP_DONE );
+              step->stepStage( sat::Transaction::STEP_DONE );
             }
           }
         }
@@ -1787,18 +1787,18 @@ namespace zypp
                 }
                 else
                 {
-		  Pathname referencePath { Pathname("/etc/products.d") / referenceFilename };	// no root prefix for rpmdb lookup!
-		  if ( ! rpm().hasFile( referencePath.asString() ) )
-		  {
-		    // If it's not owned by a package, we can delete it.
-		    referencePath = Pathname::assertprefix( _root, referencePath );	// now add a root prefix
-		    if ( filesystem::unlink( referencePath ) != 0 )
-		      ERR << "Delete orphan product failed: " << referencePath << endl;
-		  }
-		  else
-		  {
-		    WAR << "Won't remove orphan product: '/etc/products.d/" << referenceFilename << "' is owned by a package." << endl;
-		  }
+                  Pathname referencePath { Pathname("/etc/products.d") / referenceFilename };	// no root prefix for rpmdb lookup!
+                  if ( ! rpm().hasFile( referencePath.asString() ) )
+                  {
+                    // If it's not owned by a package, we can delete it.
+                    referencePath = Pathname::assertprefix( _root, referencePath );	// now add a root prefix
+                    if ( filesystem::unlink( referencePath ) != 0 )
+                      ERR << "Delete orphan product failed: " << referencePath << endl;
+                  }
+                  else
+                  {
+                    WAR << "Won't remove orphan product: '/etc/products.d/" << referenceFilename << "' is owned by a package." << endl;
+                  }
                 }
               }
             }
@@ -1810,7 +1810,7 @@ namespace zypp
             }
 
             citem.status().resetTransact( ResStatus::USER );
-	    step->stepStage( sat::Transaction::STEP_DONE );
+            step->stepStage( sat::Transaction::STEP_DONE );
           }
 
         }  // other resolvables
@@ -1820,7 +1820,7 @@ namespace zypp
       // process all remembered posttrans scripts. If aborting,
       // at least log omitted scripts.
       if ( abort || (abort = !postTransCollector.executeScripts()) )
-	postTransCollector.discardScripts();
+        postTransCollector.discardScripts();
 
       // Check presence of update scripts/messages. If aborting,
       // at least log omitted scripts.
@@ -1835,8 +1835,8 @@ namespace zypp
         // send messages after scripts in case some script generates output,
         // that should be kept in t %ghost message file.
         RunUpdateMessages( _root, ZConfig::instance().update_messagesPath(),
-			   successfullyInstalledPackages,
-			   result_r );
+                           successfullyInstalledPackages,
+                           result_r );
       }
 
       // jsc#SLE-5116: Log patch status changes to history
@@ -1846,7 +1846,7 @@ namespace zypp
 
       if ( abort )
       {
-	HistoryLog().comment( "Commit was aborted." );
+        HistoryLog().comment( "Commit was aborted." );
         ZYPP_THROW( TargetAbortedException( ) );
       }
     }
@@ -2754,7 +2754,7 @@ namespace zypp
     {
       parser::ProductFileData baseproductdata( const Pathname & root_r )
       {
-	parser::ProductFileData ret;
+        parser::ProductFileData ret;
         PathInfo baseproduct( Pathname::assertprefix( root_r, "/etc/products.d/baseproduct" ) );
 
         if ( baseproduct.isFile() )
@@ -2768,10 +2768,10 @@ namespace zypp
             ZYPP_CAUGHT( excpt );
           }
         }
-	else if ( PathInfo( Pathname::assertprefix( root_r, "/etc/products.d" ) ).isDir() )
-	{
-	  ERR << "baseproduct symlink is dangling or missing: " << baseproduct << endl;
-	}
+        else if ( PathInfo( Pathname::assertprefix( root_r, "/etc/products.d" ) ).isDir() )
+        {
+          ERR << "baseproduct symlink is dangling or missing: " << baseproduct << endl;
+        }
         return ret;
       }
 
@@ -2819,7 +2819,7 @@ namespace zypp
       const Pathname needroot( staticGuessRoot(root_r) );
       const Target_constPtr target( getZYpp()->getTarget() );
       if ( target && target->root() == needroot )
-	return target->requestedLocales();
+        return target->requestedLocales();
       return RequestedLocalesFile( home(needroot) / "RequestedLocales" ).locales();
     }
 
@@ -2828,7 +2828,7 @@ namespace zypp
       MIL << "updateAutoInstalled if changed..." << endl;
       SolvIdentFile::Data newdata;
       for ( auto id : sat::Pool::instance().autoInstalled() )
-	newdata.insert( IdString(id) );	// explicit ctor!
+        newdata.insert( IdString(id) );	// explicit ctor!
       _autoInstalledFile.setData( std::move(newdata) );
     }
 
@@ -2924,14 +2924,14 @@ namespace zypp
     {
       std::string guessAnonymousUniqueId( const Pathname & root_r )
       {
-	// bsc#1024741: Omit creating a new uid for chrooted systems (if it already has one, fine)
-	std::string ret( firstNonEmptyLineIn( root_r / "/var/lib/zypp/AnonymousUniqueId" ) );
-	if ( ret.empty() && root_r != "/" )
-	{
-	  // if it has nonoe, use the outer systems one
-	  ret = firstNonEmptyLineIn( "/var/lib/zypp/AnonymousUniqueId" );
-	}
-	return ret;
+        // bsc#1024741: Omit creating a new uid for chrooted systems (if it already has one, fine)
+        std::string ret( firstNonEmptyLineIn( root_r / "/var/lib/zypp/AnonymousUniqueId" ) );
+        if ( ret.empty() && root_r != "/" )
+        {
+          // if it has nonoe, use the outer systems one
+          ret = firstNonEmptyLineIn( "/var/lib/zypp/AnonymousUniqueId" );
+        }
+        return ret;
       }
     }
 

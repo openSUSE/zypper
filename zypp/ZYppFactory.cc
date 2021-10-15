@@ -108,19 +108,19 @@ namespace zypp
 
     ~ZYppGlobalLock()
     {
-	if ( _cleanLock )
-	try {
-	  // Exception safe access to the lockfile.
-	  ScopedGuard closeOnReturn( accessLockFile() );
-	  {
-	    scoped_lock<file_lock> flock( _zyppLockFileLock );	// aquire write lock
-	    // Truncate the file rather than deleting it. Other processes may
-	    // still use it to synchronsize.
-	    ftruncate( fileno(_zyppLockFile), 0 );
-	  }
-	  MIL << "Cleaned lock file. (" << getpid() << ")" << std::endl;
-	}
-	catch(...) {} // let no exception escape.
+        if ( _cleanLock )
+        try {
+          // Exception safe access to the lockfile.
+          ScopedGuard closeOnReturn( accessLockFile() );
+          {
+            scoped_lock<file_lock> flock( _zyppLockFileLock );	// aquire write lock
+            // Truncate the file rather than deleting it. Other processes may
+            // still use it to synchronsize.
+            ftruncate( fileno(_zyppLockFile), 0 );
+          }
+          MIL << "Cleaned lock file. (" << getpid() << ")" << std::endl;
+        }
+        catch(...) {} // let no exception escape.
     }
 
     pid_t lockerPid() const
@@ -155,19 +155,19 @@ namespace zypp
     {
       _openLockFile();
       return ScopedGuard( static_cast<void*>(0),
-			  bind( mem_fun_ref( &ZYppGlobalLock::_closeLockFile ), ref(*this) ) );
+                          bind( mem_fun_ref( &ZYppGlobalLock::_closeLockFile ), ref(*this) ) );
     }
 
     /** Use \ref accessLockFile. */
     void _openLockFile()
     {
       if ( _zyppLockFile != NULL )
-	return;	// is open
+        return;	// is open
 
       // open pid file rw so we are sure it exist when creating the flock
       _zyppLockFile = fopen( _zyppLockFilePath.c_str(), "a+" );
       if ( _zyppLockFile == NULL )
-	ZYPP_THROW( Exception( "Cant open " + _zyppLockFilePath.asString() ) );
+        ZYPP_THROW( Exception( "Cant open " + _zyppLockFilePath.asString() ) );
       _zyppLockFileLock = _zyppLockFilePath.c_str();
       MIL << "Open lockfile " << _zyppLockFilePath << endl;
     }
@@ -176,7 +176,7 @@ namespace zypp
     void _closeLockFile()
     {
       if ( _zyppLockFile == NULL )
-	return;	// is closed
+        return;	// is closed
 
       clearerr( _zyppLockFile );
       fflush( _zyppLockFile );
@@ -200,8 +200,8 @@ namespace zypp
 
       if ( ! status.isDir() )
       {
-	DBG << "No such process." << endl;
-	return false;
+        DBG << "No such process." << endl;
+        return false;
       }
 
       static char buffer[513];
@@ -209,9 +209,9 @@ namespace zypp
       // man proc(5): /proc/[pid]/cmdline is empty if zombie.
       if ( std::ifstream( (procdir/"cmdline").c_str() ).read( buffer, 512 ).gcount() > 0 )
       {
-	_lockerName = buffer;
-	DBG << "Is running: " <<  _lockerName << endl;
-	return true;
+        _lockerName = buffer;
+        DBG << "Is running: " <<  _lockerName << endl;
+        return true;
       }
 
       DBG << "In zombie state." << endl;
@@ -247,40 +247,40 @@ namespace zypp
     bool zyppLocked()
     {
       if ( geteuid() != 0 )
-	return false;	// no lock as non-root
+        return false;	// no lock as non-root
 
       // Exception safe access to the lockfile.
       ScopedGuard closeOnReturn( accessLockFile() );
       {
-	scoped_lock<file_lock> flock( _zyppLockFileLock );	// aquire write lock
+        scoped_lock<file_lock> flock( _zyppLockFileLock );	// aquire write lock
 
-	_lockerPid = readLockFile();
-	if ( _lockerPid == 0 )
-	{
-	  // no or empty lock file
-	  writeLockFile();
-	  return false;
-	}
-	else if ( _lockerPid == getpid() )
-	{
-	  // keep my own lock
-	  return false;
-	}
-	else
-	{
-	  // a foreign pid in lock
-	  if ( isProcessRunning( _lockerPid ) )
-	  {
-	    WAR << _lockerPid << " is running and has a ZYpp lock. Sorry." << std::endl;
-	    return true;
-	  }
-	  else
-	  {
-	    MIL << _lockerPid << " is dead. Taking the lock file." << std::endl;
-	    writeLockFile();
-	    return false;
-	  }
-	}
+        _lockerPid = readLockFile();
+        if ( _lockerPid == 0 )
+        {
+          // no or empty lock file
+          writeLockFile();
+          return false;
+        }
+        else if ( _lockerPid == getpid() )
+        {
+          // keep my own lock
+          return false;
+        }
+        else
+        {
+          // a foreign pid in lock
+          if ( isProcessRunning( _lockerPid ) )
+          {
+            WAR << _lockerPid << " is running and has a ZYpp lock. Sorry." << std::endl;
+            return true;
+          }
+          else
+          {
+            MIL << _lockerPid << " is dead. Taking the lock file." << std::endl;
+            writeLockFile();
+            return false;
+          }
+        }
       }
       INT << "Oops! We should not be here!" << std::endl;
       return true;
@@ -297,7 +297,7 @@ namespace zypp
     ZYppGlobalLock & globalLock()
     {
       if ( !_theGlobalLock )
-	_theGlobalLock.reset( new ZYppGlobalLock );
+        _theGlobalLock.reset( new ZYppGlobalLock );
       return *_theGlobalLock;
     }
   } //namespace
@@ -361,57 +361,57 @@ namespace zypp
     {
       if ( geteuid() != 0 )
       {
-	MIL << "Running as user. Skip creating " << globalLock().zyppLockFilePath() << std::endl;
+        MIL << "Running as user. Skip creating " << globalLock().zyppLockFilePath() << std::endl;
       }
       else if ( zypp_readonly_hack::active )
       {
-	MIL << "ZYPP_READONLY active." << endl;
+        MIL << "ZYPP_READONLY active." << endl;
       }
       else if ( globalLock().zyppLocked() )
       {
-	bool failed = true;
-	const long LOCK_TIMEOUT = str::strtonum<long>( getenv( "ZYPP_LOCK_TIMEOUT" ) );
-	if ( LOCK_TIMEOUT > 0 )
-	{
-	  MIL << "Waiting whether pid " << globalLock().lockerPid() << " ends within $LOCK_TIMEOUT=" << LOCK_TIMEOUT << " sec." << endl;
-	  unsigned delay = 1;
+        bool failed = true;
+        const long LOCK_TIMEOUT = str::strtonum<long>( getenv( "ZYPP_LOCK_TIMEOUT" ) );
+        if ( LOCK_TIMEOUT > 0 )
+        {
+          MIL << "Waiting whether pid " << globalLock().lockerPid() << " ends within $LOCK_TIMEOUT=" << LOCK_TIMEOUT << " sec." << endl;
+          unsigned delay = 1;
           Pathname procdir( Pathname("/proc")/str::numstring(globalLock().lockerPid()) );
-	  for ( long i = 0; i < LOCK_TIMEOUT; i += delay )
-	  {
-	    if ( PathInfo( procdir ).isDir() )	// wait for /proc/pid to disapear
-	      sleep( delay );
-	    else
-	    {
-	      MIL << "Retry after " << i << " sec." << endl;
-	      failed = globalLock().zyppLocked();
-	      if ( failed )
-	      {
-		// another proc locked faster. maybe it ends fast as well....
-		MIL << "Waiting whether pid " << globalLock().lockerPid() << " ends within " << (LOCK_TIMEOUT-i) << " sec." << endl;
+          for ( long i = 0; i < LOCK_TIMEOUT; i += delay )
+          {
+            if ( PathInfo( procdir ).isDir() )	// wait for /proc/pid to disapear
+              sleep( delay );
+            else
+            {
+              MIL << "Retry after " << i << " sec." << endl;
+              failed = globalLock().zyppLocked();
+              if ( failed )
+              {
+                // another proc locked faster. maybe it ends fast as well....
+                MIL << "Waiting whether pid " << globalLock().lockerPid() << " ends within " << (LOCK_TIMEOUT-i) << " sec." << endl;
                 procdir = Pathname( Pathname("/proc")/str::numstring(globalLock().lockerPid()) );
-	      }
-	      else
-	      {
-		MIL << "Finally got the lock!" << endl;
-		break;	// gotcha
-	      }
-	    }
-	  }
-	}
-	if ( failed )
-	{
-	  std::string t = str::form(_("System management is locked by the application with pid %d (%s).\n"
-				      "Close this application before trying again."),
-				      globalLock().lockerPid(),
-				      globalLock().lockerName().c_str()
-				    );
-	  ZYPP_THROW(ZYppFactoryException(t, globalLock().lockerPid(), globalLock().lockerName() ));
-	}
+              }
+              else
+              {
+                MIL << "Finally got the lock!" << endl;
+                break;	// gotcha
+              }
+            }
+          }
+        }
+        if ( failed )
+        {
+          std::string t = str::form(_("System management is locked by the application with pid %d (%s).\n"
+                                      "Close this application before trying again."),
+                                      globalLock().lockerPid(),
+                                      globalLock().lockerName().c_str()
+                                    );
+          ZYPP_THROW(ZYppFactoryException(t, globalLock().lockerPid(), globalLock().lockerName() ));
+        }
       }
       // Here we go...
       static ZYpp::Impl_Ptr _theImplInstance;	// for now created once
       if ( !_theImplInstance )
-	_theImplInstance.reset( new ZYpp::Impl );
+        _theImplInstance.reset( new ZYpp::Impl );
       _instance.reset( new ZYpp( _theImplInstance ) );
       _theZYppInstance = _instance;
     }

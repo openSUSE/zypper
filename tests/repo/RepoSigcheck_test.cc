@@ -117,109 +117,109 @@ BOOST_AUTO_TEST_CASE(init)
       zcfg.setRepoGpgCheck( g_RepoGpgCheck );
       for ( TriBool g_PkgGpgCheck : tribools )
       {
-	zcfg.setPkgGpgCheck( g_PkgGpgCheck );
+        zcfg.setPkgGpgCheck( g_PkgGpgCheck );
 
-	// .repo values
-	for ( TriBool r_GpgCheck : tribools )
-	{
-	  repo.setGpgCheck( r_GpgCheck );
-	  for ( TriBool r_RepoGpgCheck : tribools )
-	  {
-	    repo.setRepoGpgCheck( r_RepoGpgCheck );
-	    for ( TriBool r_PkgGpgCheck : tribools )
-	    {
-	      repo.setPkgGpgCheck( r_PkgGpgCheck );
+        // .repo values
+        for ( TriBool r_GpgCheck : tribools )
+        {
+          repo.setGpgCheck( r_GpgCheck );
+          for ( TriBool r_RepoGpgCheck : tribools )
+          {
+            repo.setRepoGpgCheck( r_RepoGpgCheck );
+            for ( TriBool r_PkgGpgCheck : tribools )
+            {
+              repo.setPkgGpgCheck( r_PkgGpgCheck );
 
-	      // check the repo methods returning what to do:
-	      bool	cfgGpgCheck	= indeterminate(r_GpgCheck)                                  ? g_GpgCheck     : bool(r_GpgCheck);
-	      TriBool	cfgRepoGpgCheck	= indeterminate(r_GpgCheck) && indeterminate(r_RepoGpgCheck) ? g_RepoGpgCheck : r_RepoGpgCheck;
-	      TriBool	cfgPkgGpgCheck	= indeterminate(r_GpgCheck) && indeterminate(r_PkgGpgCheck)  ? g_PkgGpgCheck  : r_PkgGpgCheck;
+              // check the repo methods returning what to do:
+              bool	cfgGpgCheck	= indeterminate(r_GpgCheck)                                  ? g_GpgCheck     : bool(r_GpgCheck);
+              TriBool	cfgRepoGpgCheck	= indeterminate(r_GpgCheck) && indeterminate(r_RepoGpgCheck) ? g_RepoGpgCheck : r_RepoGpgCheck;
+              TriBool	cfgPkgGpgCheck	= indeterminate(r_GpgCheck) && indeterminate(r_PkgGpgCheck)  ? g_PkgGpgCheck  : r_PkgGpgCheck;
 #if ( TC_VERBOSE )
-	      COUT << chr(cfgGpgCheck) << "\t" << chr(cfgRepoGpgCheck) << "\t" << chr(cfgPkgGpgCheck)
-		   << "\t(" << chr(r_GpgCheck)     << "," << chr(g_GpgCheck)     << ")"
-		   << "\t(" << chr(r_RepoGpgCheck) << "," << chr(g_RepoGpgCheck) << ")"
-		   << "\t(" << chr(r_PkgGpgCheck)  << "," << chr(g_PkgGpgCheck)  << ")"
-	           << flush;
+              COUT << chr(cfgGpgCheck) << "\t" << chr(cfgRepoGpgCheck) << "\t" << chr(cfgPkgGpgCheck)
+                   << "\t(" << chr(r_GpgCheck)     << "," << chr(g_GpgCheck)     << ")"
+                   << "\t(" << chr(r_RepoGpgCheck) << "," << chr(g_RepoGpgCheck) << ")"
+                   << "\t(" << chr(r_PkgGpgCheck)  << "," << chr(g_PkgGpgCheck)  << ")"
+                   << flush;
 #endif
 
-	      // default gpgCeck follows config
-	      BOOST_CHECK_EQUAL( repo.gpgCheck(), cfgGpgCheck );
+              // default gpgCeck follows config
+              BOOST_CHECK_EQUAL( repo.gpgCheck(), cfgGpgCheck );
 
 
-	      // repoGpgCheck follows gpgCeck
-	      // explicitly defined it alters mandatory check
-	      bool willCheckRepo  = repo.repoGpgCheck();
-	      bool mandatoryCheck = repo.repoGpgCheckIsMandatory();
+              // repoGpgCheck follows gpgCeck
+              // explicitly defined it alters mandatory check
+              bool willCheckRepo  = repo.repoGpgCheck();
+              bool mandatoryCheck = repo.repoGpgCheckIsMandatory();
 #if ( TC_VERBOSE )
-	      COUT << "\t" << ( willCheckRepo ? ( mandatoryCheck ? "!" : "+" ) : "-" ) << flush;
+              COUT << "\t" << ( willCheckRepo ? ( mandatoryCheck ? "!" : "+" ) : "-" ) << flush;
 #endif
-	      if ( mandatoryCheck )	// be a subset of willCheckRepo!
-		BOOST_CHECK_EQUAL( willCheckRepo, mandatoryCheck );
+              if ( mandatoryCheck )	// be a subset of willCheckRepo!
+                BOOST_CHECK_EQUAL( willCheckRepo, mandatoryCheck );
 
-	      if ( cfgGpgCheck )
-	      {
-		BOOST_CHECK_EQUAL( willCheckRepo,  true );
-		BOOST_CHECK_EQUAL( mandatoryCheck, !bool(!cfgRepoGpgCheck) );	// TriBool: !false = true or indeterminate
-	      }
-	      else
-	      {
-		BOOST_CHECK_EQUAL( willCheckRepo,  bool(cfgRepoGpgCheck) );
-		BOOST_CHECK_EQUAL( mandatoryCheck, bool(cfgRepoGpgCheck) );
-	      }
+              if ( cfgGpgCheck )
+              {
+                BOOST_CHECK_EQUAL( willCheckRepo,  true );
+                BOOST_CHECK_EQUAL( mandatoryCheck, !bool(!cfgRepoGpgCheck) );	// TriBool: !false = true or indeterminate
+              }
+              else
+              {
+                BOOST_CHECK_EQUAL( willCheckRepo,  bool(cfgRepoGpgCheck) );
+                BOOST_CHECK_EQUAL( mandatoryCheck, bool(cfgRepoGpgCheck) );
+              }
 
 
-	      // pkgGpgCheck may depend on the repoGpgCheck result
-	      for ( TriBool r_validSignature : tribools )	// indeterminate <==> unsigned repo
-	      {
-		repo.setValidRepoSignature( r_validSignature );
+              // pkgGpgCheck may depend on the repoGpgCheck result
+              for ( TriBool r_validSignature : tribools )	// indeterminate <==> unsigned repo
+              {
+                repo.setValidRepoSignature( r_validSignature );
 
-		if ( r_validSignature && !willCheckRepo )
-		  // RepoInfo must invalidate any valid (old) signature as soon as the repo check
-		  // is turned off. This prevents showing 'valid sig' for not yet refreshed repos.
-		  // Instead show 'won't be checked' immediately.
-		  BOOST_CHECK( bool(!repo.validRepoSignature()) );
-		else
-		  BOOST_CHECK( sameTriboolState( repo.validRepoSignature(), r_validSignature ) );
+                if ( r_validSignature && !willCheckRepo )
+                  // RepoInfo must invalidate any valid (old) signature as soon as the repo check
+                  // is turned off. This prevents showing 'valid sig' for not yet refreshed repos.
+                  // Instead show 'won't be checked' immediately.
+                  BOOST_CHECK( bool(!repo.validRepoSignature()) );
+                else
+                  BOOST_CHECK( sameTriboolState( repo.validRepoSignature(), r_validSignature ) );
 
-		bool willCheckPkg   = repo.pkgGpgCheck();
-		bool mandatoryCheck = repo.pkgGpgCheckIsMandatory();
+                bool willCheckPkg   = repo.pkgGpgCheck();
+                bool mandatoryCheck = repo.pkgGpgCheckIsMandatory();
 #if ( TC_VERBOSE )
-		COUT << "\t" << chr(r_validSignature) << ( willCheckPkg ? ( mandatoryCheck ? "!" : "+" ) : "-" ) << flush;
+                COUT << "\t" << chr(r_validSignature) << ( willCheckPkg ? ( mandatoryCheck ? "!" : "+" ) : "-" ) << flush;
 #endif
-		if ( mandatoryCheck )	// be a subset of willCheckPkg!
-		  BOOST_CHECK_EQUAL( willCheckPkg, mandatoryCheck );
+                if ( mandatoryCheck )	// be a subset of willCheckPkg!
+                  BOOST_CHECK_EQUAL( willCheckPkg, mandatoryCheck );
 
-		if ( cfgPkgGpgCheck )
-		{
-		  BOOST_CHECK_EQUAL( willCheckPkg,   true );
-		  BOOST_CHECK_EQUAL( mandatoryCheck, true );
-		}
-		else if ( cfgGpgCheck )
-		{
-		  if ( r_validSignature )
-		  {
-		    BOOST_CHECK_EQUAL( willCheckPkg,   false );
-		    BOOST_CHECK_EQUAL( mandatoryCheck, false );
-		  }
-		  else // TriBool: !true = false or indeterminate/unsigned
-		  {
-		    BOOST_CHECK_EQUAL( willCheckPkg,   true );
-		    BOOST_CHECK_EQUAL( mandatoryCheck, !bool(!cfgPkgGpgCheck) ); // TriBool: !false = true or indeterminate/unsigned
-		  }
-		}
-		else
-		{
-		  BOOST_CHECK_EQUAL( willCheckPkg,   false );
-		  BOOST_CHECK_EQUAL( mandatoryCheck, false );
-		}
-	      }
+                if ( cfgPkgGpgCheck )
+                {
+                  BOOST_CHECK_EQUAL( willCheckPkg,   true );
+                  BOOST_CHECK_EQUAL( mandatoryCheck, true );
+                }
+                else if ( cfgGpgCheck )
+                {
+                  if ( r_validSignature )
+                  {
+                    BOOST_CHECK_EQUAL( willCheckPkg,   false );
+                    BOOST_CHECK_EQUAL( mandatoryCheck, false );
+                  }
+                  else // TriBool: !true = false or indeterminate/unsigned
+                  {
+                    BOOST_CHECK_EQUAL( willCheckPkg,   true );
+                    BOOST_CHECK_EQUAL( mandatoryCheck, !bool(!cfgPkgGpgCheck) ); // TriBool: !false = true or indeterminate/unsigned
+                  }
+                }
+                else
+                {
+                  BOOST_CHECK_EQUAL( willCheckPkg,   false );
+                  BOOST_CHECK_EQUAL( mandatoryCheck, false );
+                }
+              }
 #if ( TC_VERBOSE )
-	      COUT << endl;
+              COUT << endl;
 #endif
 
-	    }
-	  }
-	}
+            }
+          }
+        }
       }
     }
   }
@@ -284,9 +284,9 @@ struct KeyRingGuard
 };
 
 void testLoadRepo( bool succeed_r, 				// whether loadRepos should succeed or fail with RepoException
-		   const std::string & repo_r,			// name of the test repo to load
-		   KeyRing::DefaultAccept accept_r,		// Callback response bits to set (mimics user input)
-		   KeyRingReceiver::CallbackList cblist_r )	// Callback sequence list expected
+                   const std::string & repo_r,			// name of the test repo to load
+                   KeyRing::DefaultAccept accept_r,		// Callback response bits to set (mimics user input)
+                   KeyRingReceiver::CallbackList cblist_r )	// Callback sequence list expected
 {
   KeyRingGuard _guard( accept_r );
   krCallback._cblist = std::move(cblist_r);
@@ -313,23 +313,23 @@ BOOST_AUTO_TEST_CASE(unsigned_repo)
 
   std::string repo( "unsigned_repo" );
   testLoadRepo( true, repo, KeyRing::ACCEPT_NOTHING,
-		{ } );
+                { } );
 
   zcfg->setRepoGpgCheck( indeterminate );	// the default
 
   testLoadRepo( false, repo, KeyRing::ACCEPT_NOTHING,
-		{ "reportbegin", "askUserToAcceptUnsignedFile", "reportend" } );
+                { "reportbegin", "askUserToAcceptUnsignedFile", "reportend" } );
   testLoadRepo( true, repo, KeyRing::ACCEPT_UNSIGNED_FILE,
-		{ "reportbegin", "askUserToAcceptUnsignedFile", "reportend" } );
+                { "reportbegin", "askUserToAcceptUnsignedFile", "reportend" } );
 }
 
 BOOST_AUTO_TEST_CASE(unknownkey_repo)
 {
   std::string repo( "unknownkey_repo" );
   testLoadRepo( false, repo, KeyRing::ACCEPT_NOTHING,
-		{ "reportbegin", "askUserToAcceptUnknownKey", "reportend" } );
+                { "reportbegin", "askUserToAcceptUnknownKey", "reportend" } );
   testLoadRepo( true, repo, KeyRing::ACCEPT_UNKNOWNKEY,
-		{ "reportbegin", "askUserToAcceptUnknownKey", "reportend" } );
+                { "reportbegin", "askUserToAcceptUnknownKey", "reportend" } );
 }
 
 
@@ -341,26 +341,26 @@ BOOST_AUTO_TEST_CASE(wrongsig_repo)
   // 1st testcase with a key, so on the fly check askUserToAcceptKey
   // being called unless the key is imported in the trusted ring
   testLoadRepo( false, repo, KeyRing::ACCEPT_NOTHING,
-		{ "reportbegin", "askUserToAcceptKey", "reportend" } );
+                { "reportbegin", "askUserToAcceptKey", "reportend" } );
   testLoadRepo( false, repo, KeyRing::TRUST_KEY_TEMPORARILY,
-		{ "reportbegin", "askUserToAcceptKey", "infoVerify", "askUserToAcceptVerificationFailed", "reportend" } );
+                { "reportbegin", "askUserToAcceptKey", "infoVerify", "askUserToAcceptVerificationFailed", "reportend" } );
   testLoadRepo( false, repo, KeyRing::ACCEPT_NOTHING,
-		{ "reportbegin", "askUserToAcceptKey", "reportend" } );
+                { "reportbegin", "askUserToAcceptKey", "reportend" } );
   testLoadRepo( false, repo, KeyRing::TRUST_AND_IMPORT_KEY,
-		{ "reportbegin", "askUserToAcceptKey", "infoVerify", "askUserToAcceptVerificationFailed", "reportend" } );
+                { "reportbegin", "askUserToAcceptKey", "infoVerify", "askUserToAcceptVerificationFailed", "reportend" } );
 
   // Now the key is in the trusted ring (no more askUserToAcceptKey)
   testLoadRepo( false, repo, KeyRing::ACCEPT_NOTHING,
-		{ "reportbegin", "infoVerify", "askUserToAcceptVerificationFailed", "reportend" } );
+                { "reportbegin", "infoVerify", "askUserToAcceptVerificationFailed", "reportend" } );
   testLoadRepo( true, repo, KeyRing::KeyRing::ACCEPT_VERIFICATION_FAILED,
-		{ "reportbegin", "infoVerify", "askUserToAcceptVerificationFailed", "reportend" } );
+                { "reportbegin", "infoVerify", "askUserToAcceptVerificationFailed", "reportend" } );
 }
 
 BOOST_AUTO_TEST_CASE(signed_repo)
 {
   std::string repo( "signed_repo" );
   testLoadRepo( true, repo, KeyRing::KeyRing::ACCEPT_NOTHING,	// relies on wrongsig_repo having accepted the key! (already in trusted ring)
-		{ "reportbegin", "infoVerify", "reportend" } );
+                { "reportbegin", "infoVerify", "reportend" } );
 }
 
 

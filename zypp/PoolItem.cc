@@ -72,32 +72,32 @@ namespace zypp
     public:
       bool isUndetermined() const
       {
-	  return status().isUndetermined();
+          return status().isUndetermined();
       }
 
       bool isRelevant() const
       {
-	  return !status().isNonRelevant();
+          return !status().isNonRelevant();
       }
 
       bool isSatisfied() const
       {
-	  return status().isSatisfied();
+          return status().isSatisfied();
       }
 
       bool isBroken() const
       {
-	  return status().isBroken();
+          return status().isBroken();
       }
 
       bool isNeeded() const
       {
-	return status().isToBeInstalled() || ( isBroken() && ! status().isLocked() );
+        return status().isToBeInstalled() || ( isBroken() && ! status().isLocked() );
       }
 
       bool isUnwanted() const
       {
-	return isBroken() && status().isLocked();
+        return isBroken() && status().isLocked();
       }
 
     private:
@@ -147,9 +147,9 @@ namespace zypp
   {
     str << obj.status();
     if (obj.resolvable())
-	str << *obj.resolvable();
+        str << *obj.resolvable();
     else
-	str << "(NULL)";
+        str << "(NULL)";
     return str;
   }
 
@@ -160,8 +160,8 @@ namespace zypp
     {
       if ( myBuddy._pimpl->_buddy )
       {
-	ERR <<  *this << " would be buddy2 in " << myBuddy << endl;
-	return;
+        ERR <<  *this << " would be buddy2 in " << myBuddy << endl;
+        return;
       }
       myBuddy._pimpl->_buddy = -resolvable()->satSolvable().id();
       _buddy = myBuddy.satSolvable().id();

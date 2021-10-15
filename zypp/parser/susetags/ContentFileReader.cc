@@ -42,49 +42,49 @@ namespace zypp
       /** ContentFileReader implementation. */
       struct ContentFileReader::Impl
       {
-	public:
-	  Impl()
-	  {}
+        public:
+          Impl()
+          {}
 
-	  RepoIndex & repoindex()
-	  {
-	    if ( !_repoindex )
-	      _repoindex = new RepoIndex;
-	    return *_repoindex;
-	  }
+          RepoIndex & repoindex()
+          {
+            if ( !_repoindex )
+              _repoindex = new RepoIndex;
+            return *_repoindex;
+          }
 
-	  bool hasRepoIndex() const
-	  { return _repoindex != nullptr; }
+          bool hasRepoIndex() const
+          { return _repoindex != nullptr; }
 
-	  RepoIndex_Ptr handoutRepoIndex()
-	  {
-	    RepoIndex_Ptr ret;
-	    ret.swap( _repoindex );
-	    _repoindex = nullptr;
-	    return ret;
-	  }
+          RepoIndex_Ptr handoutRepoIndex()
+          {
+            RepoIndex_Ptr ret;
+            ret.swap( _repoindex );
+            _repoindex = nullptr;
+            return ret;
+          }
 
-	public:
-	  bool setFileCheckSum( std::map<std::string, CheckSum> & map_r, const std::string & value ) const
-	  {
-	    bool error = false;
-	    std::vector<std::string> words;
-	    if ( str::split( value, std::back_inserter( words ) ) == 3 )
-	    {
-	      map_r[words[2]] = CheckSum( words[0], words[1] );
-	    }
-	    else
-	    {
-	      error = true;
-	    }
-	    return error;
-	  }
+        public:
+          bool setFileCheckSum( std::map<std::string, CheckSum> & map_r, const std::string & value ) const
+          {
+            bool error = false;
+            std::vector<std::string> words;
+            if ( str::split( value, std::back_inserter( words ) ) == 3 )
+            {
+              map_r[words[2]] = CheckSum( words[0], words[1] );
+            }
+            else
+            {
+              error = true;
+            }
+            return error;
+          }
 
-	public:
-	  std::string _inputname;
+        public:
+          std::string _inputname;
 
-	private:
-	  RepoIndex_Ptr      _repoindex;
+        private:
+          RepoIndex_Ptr      _repoindex;
       };
       ///////////////////////////////////////////////////////////////////
 
@@ -117,7 +117,7 @@ namespace zypp
       //
       void ContentFileReader::beginParse()
       {
-	_pimpl.reset( new Impl() );
+        _pimpl.reset( new Impl() );
         // actually mandatory, but in case they were forgotten...
         _pimpl->repoindex().descrdir = "suse/setup/descr";
         _pimpl->repoindex().datadir = "suse";
@@ -130,15 +130,15 @@ namespace zypp
       //
       void ContentFileReader::endParse()
       {
-	// consume oldData
-	if ( _pimpl->hasRepoIndex() )
-	{
-	  if ( _repoIndexConsumer )
-	    _repoIndexConsumer( _pimpl->handoutRepoIndex() );
-	}
+        // consume oldData
+        if ( _pimpl->hasRepoIndex() )
+        {
+          if ( _repoIndexConsumer )
+            _repoIndexConsumer( _pimpl->handoutRepoIndex() );
+        }
 
-	MIL << "[Content]" << endl;
-	_pimpl.reset();
+        MIL << "[Content]" << endl;
+        _pimpl.reset();
       }
 
       ///////////////////////////////////////////////////////////////////
@@ -148,7 +148,7 @@ namespace zypp
       //
       void ContentFileReader::userRequestedAbort( unsigned lineNo_r )
       {
-	ZYPP_THROW( AbortRequestException( errPrefix( lineNo_r ) ) );
+        ZYPP_THROW( AbortRequestException( errPrefix( lineNo_r ) ) );
       }
 
       ///////////////////////////////////////////////////////////////////
@@ -157,14 +157,14 @@ namespace zypp
       //	METHOD TYPE : std::string
       //
       std::string ContentFileReader::errPrefix( unsigned lineNo_r,
-	                                        const std::string & msg_r,
-						const std::string & line_r ) const
+                                                const std::string & msg_r,
+                                                const std::string & line_r ) const
       {
-	return str::form( "%s:%u:%s | %s",
-			  _pimpl->_inputname.c_str(),
-			  lineNo_r,
-			  line_r.c_str(),
-			  msg_r.c_str() );
+        return str::form( "%s:%u:%s | %s",
+                          _pimpl->_inputname.c_str(),
+                          lineNo_r,
+                          line_r.c_str(),
+                          msg_r.c_str() );
       }
 
       ///////////////////////////////////////////////////////////////////
@@ -173,94 +173,94 @@ namespace zypp
       //	METHOD TYPE : void
       //
       void ContentFileReader::parse( const InputStream & input_r,
-				     const ProgressData::ReceiverFnc & fnc_r )
+                                     const ProgressData::ReceiverFnc & fnc_r )
       {
-	MIL << "Start parsing content repoindex" << input_r << endl;
-	if ( ! input_r.stream() )
-	{
-	  std::ostringstream s;
-	  s << "Can't read bad stream: " << input_r;
-	  ZYPP_THROW( ParseException( s.str() ) );
-	}
-	beginParse();
-	_pimpl->_inputname = input_r.name();
+        MIL << "Start parsing content repoindex" << input_r << endl;
+        if ( ! input_r.stream() )
+        {
+          std::ostringstream s;
+          s << "Can't read bad stream: " << input_r;
+          ZYPP_THROW( ParseException( s.str() ) );
+        }
+        beginParse();
+        _pimpl->_inputname = input_r.name();
 
-	ProgressData ticks( makeProgressData( input_r ) );
-	ticks.sendTo( fnc_r );
-	if ( ! ticks.toMin() )
-	  userRequestedAbort( 0 );
+        ProgressData ticks( makeProgressData( input_r ) );
+        ticks.sendTo( fnc_r );
+        if ( ! ticks.toMin() )
+          userRequestedAbort( 0 );
 
-	iostr::EachLine line( input_r );
-	for( ; line; line.next() )
-	{
-	  // strip 1st word from line to separate tag and value.
-	  std::string value( *line );
-	  std::string key( str::stripFirstWord( value, /*ltrim_first*/true ) );
+        iostr::EachLine line( input_r );
+        for( ; line; line.next() )
+        {
+          // strip 1st word from line to separate tag and value.
+          std::string value( *line );
+          std::string key( str::stripFirstWord( value, /*ltrim_first*/true ) );
 
-	  if ( key.empty() || *key.c_str() == '#' ) // empty or comment line
-	  {
-	    continue;
-	  }
+          if ( key.empty() || *key.c_str() == '#' ) // empty or comment line
+          {
+            continue;
+          }
 
-	  // strip modifier if exists
-	  std::string modifier;
-	  std::string::size_type pos = key.rfind( '.' );
-	  if ( pos != std::string::npos )
-	  {
-	    modifier = key.substr( pos+1 );
-	    key.erase( pos );
-	  }
+          // strip modifier if exists
+          std::string modifier;
+          std::string::size_type pos = key.rfind( '.' );
+          if ( pos != std::string::npos )
+          {
+            modifier = key.substr( pos+1 );
+            key.erase( pos );
+          }
 
-	  //
-	  // ReppoIndex related data:
-	  //
-	  else if ( key == "DESCRDIR" )
-	  {
-	    _pimpl->repoindex().descrdir = value;
-	  }
-	  else if ( key == "DATADIR" )
-	  {
-	    _pimpl->repoindex().datadir = value;
-	  }
-	  else if ( key == "KEY" )
-	  {
-	    if ( _pimpl->setFileCheckSum( _pimpl->repoindex().signingKeys, value ) )
-	    {
-	      ZYPP_THROW( ParseException( errPrefix( line.lineNo(), "Expected [KEY algorithm checksum filename]", *line ) ) );
-	    }
-	  }
-	  else if ( key == "META" )
-	  {
-	    if ( _pimpl->setFileCheckSum( _pimpl->repoindex().metaFileChecksums, value ) )
-	    {
-	      ZYPP_THROW( ParseException( errPrefix( line.lineNo(), "Expected [algorithm checksum filename]", *line ) ) );
-	    }
-	  }
+          //
+          // ReppoIndex related data:
+          //
+          else if ( key == "DESCRDIR" )
+          {
+            _pimpl->repoindex().descrdir = value;
+          }
+          else if ( key == "DATADIR" )
+          {
+            _pimpl->repoindex().datadir = value;
+          }
+          else if ( key == "KEY" )
+          {
+            if ( _pimpl->setFileCheckSum( _pimpl->repoindex().signingKeys, value ) )
+            {
+              ZYPP_THROW( ParseException( errPrefix( line.lineNo(), "Expected [KEY algorithm checksum filename]", *line ) ) );
+            }
+          }
+          else if ( key == "META" )
+          {
+            if ( _pimpl->setFileCheckSum( _pimpl->repoindex().metaFileChecksums, value ) )
+            {
+              ZYPP_THROW( ParseException( errPrefix( line.lineNo(), "Expected [algorithm checksum filename]", *line ) ) );
+            }
+          }
           else if ( key == "HASH" )
-	  {
-	    if ( _pimpl->setFileCheckSum( _pimpl->repoindex().mediaFileChecksums, value ) )
-	    {
-	      ZYPP_THROW( ParseException( errPrefix( line.lineNo(), "Expected [algorithm checksum filename]", *line ) ) );
-	    }
-	  }
+          {
+            if ( _pimpl->setFileCheckSum( _pimpl->repoindex().mediaFileChecksums, value ) )
+            {
+              ZYPP_THROW( ParseException( errPrefix( line.lineNo(), "Expected [algorithm checksum filename]", *line ) ) );
+            }
+          }
           else
-	  {
+          {
             DBG << errPrefix( line.lineNo(), "ignored", *line ) << endl;
           }
 
 
-	  if ( ! ticks.set( input_r.stream().tellg() ) )
-	    userRequestedAbort( line.lineNo() );
-	}
+          if ( ! ticks.set( input_r.stream().tellg() ) )
+            userRequestedAbort( line.lineNo() );
+        }
 
-	//
-	// post processing
-	//
-	if ( ! ticks.toMax() )
-	  userRequestedAbort( line.lineNo() );
+        //
+        // post processing
+        //
+        if ( ! ticks.toMax() )
+          userRequestedAbort( line.lineNo() );
 
-	endParse();
-	MIL << "Done parsing " << input_r << endl;
+        endParse();
+        MIL << "Done parsing " << input_r << endl;
       }
 
       /////////////////////////////////////////////////////////////////

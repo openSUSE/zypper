@@ -71,12 +71,12 @@ void Mount::mount( const std::string & source,
                    const Environment & environment )
 {
     const char *const argv[] = {
-	"/bin/mount",
-	"-t", filesystem.c_str(),
-	"-o", options.c_str(),
-	source.c_str(),
-	target.c_str(),
-	NULL
+        "/bin/mount",
+        "-t", filesystem.c_str(),
+        "-o", options.c_str(),
+        source.c_str(),
+        target.c_str(),
+        NULL
      };
 
     std::string err;
@@ -94,58 +94,58 @@ void Mount::mount( const std::string & source,
     // parse error messages
     while ( output.length() > 0)
     {
-	std::string::size_type 	ret;
+        std::string::size_type 	ret;
 
-	// extract \n
-	ret = output.find_first_of ( "\n" );
-	if ( ret != std::string::npos )
-	{
-	    value.assign ( output, 0, ret );
-	}
-	else
-	{
-	    value = output;
-	}
+        // extract \n
+        ret = output.find_first_of ( "\n" );
+        if ( ret != std::string::npos )
+        {
+            value.assign ( output, 0, ret );
+        }
+        else
+        {
+            value = output;
+        }
 
-	DBG << "stdout: " << value << endl;
+        DBG << "stdout: " << value << endl;
 
-	if  ( value.find ( "is already mounted on" ) != std::string::npos )
-	{
-	    err = "Media already mounted";
-	}
-	else if  ( value.find ( "ermission denied" ) != std::string::npos )
-	{
-	    err = "Permission denied";
-	}
-	else if  ( value.find ( "wrong fs type" ) != std::string::npos )
-	{
-	    err = "Invalid filesystem on media";
-	}
-	else if  ( value.find ( "No medium found" ) != std::string::npos )
-	{
-	    err = "No medium found";
-	}
-	else if  ( value.find ( "Not a directory" ) != std::string::npos )
-	{
-	    if( filesystem == "nfs" || filesystem == "nfs4" )
-	    {
-		err = "Nfs path is not a directory";
-	    }
-	    else
-	    {
-	       err = "Unable to find directory on the media";
-	    }
-	}
+        if  ( value.find ( "is already mounted on" ) != std::string::npos )
+        {
+            err = "Media already mounted";
+        }
+        else if  ( value.find ( "ermission denied" ) != std::string::npos )
+        {
+            err = "Permission denied";
+        }
+        else if  ( value.find ( "wrong fs type" ) != std::string::npos )
+        {
+            err = "Invalid filesystem on media";
+        }
+        else if  ( value.find ( "No medium found" ) != std::string::npos )
+        {
+            err = "No medium found";
+        }
+        else if  ( value.find ( "Not a directory" ) != std::string::npos )
+        {
+            if( filesystem == "nfs" || filesystem == "nfs4" )
+            {
+                err = "Nfs path is not a directory";
+            }
+            else
+            {
+               err = "Unable to find directory on the media";
+            }
+        }
 
-	output = process->receiveLine();
+        output = process->receiveLine();
     }
 
     int status = Status();
 
     if ( status == 0 )
     {
-	// return codes overwites parsed error message
-	err = "";
+        // return codes overwites parsed error message
+        err = "";
     }
     else if ( status != 0 && err == "" )
     {
@@ -163,9 +163,9 @@ void Mount::mount( const std::string & source,
 void Mount::umount( const std::string & path )
 {
     const char *const argv[] = {
-	"/bin/umount",
-	path.c_str(),
-	NULL
+        "/bin/umount",
+        path.c_str(),
+        NULL
      };
 
     std::string err;
@@ -183,44 +183,44 @@ void Mount::umount( const std::string & path )
     // parse error messages
     while ( output.length() > 0)
     {
-	std::string::size_type 	ret;
+        std::string::size_type 	ret;
 
-	// extract \n
-	ret = output.find_first_of ( "\n" );
-	if ( ret != std::string::npos )
-	{
-	    value.assign ( output, 0, ret );
-	}
-	else
-	{
-	    value = output;
-	}
+        // extract \n
+        ret = output.find_first_of ( "\n" );
+        if ( ret != std::string::npos )
+        {
+            value.assign ( output, 0, ret );
+        }
+        else
+        {
+            value = output;
+        }
 
-	DBG << "stdout: " << value << endl;
+        DBG << "stdout: " << value << endl;
 
-	// if  ( value.find ( "not mounted" ) != std::string::npos )
-	// {
-	//    err = Error::E_already_mounted;
-	// }
+        // if  ( value.find ( "not mounted" ) != std::string::npos )
+        // {
+        //    err = Error::E_already_mounted;
+        // }
 
-	if  ( value.find ( "device is busy" ) != std::string::npos )
-	{
-	    err = "Device is busy";
-	}
+        if  ( value.find ( "device is busy" ) != std::string::npos )
+        {
+            err = "Device is busy";
+        }
 
-	output = process->receiveLine();
+        output = process->receiveLine();
     }
 
     int status = Status();
 
     if ( status == 0 )
     {
-	// return codes overwites parsed error message
-	err = "";
+        // return codes overwites parsed error message
+        err = "";
     }
     else if ( status != 0 && err == "" )
     {
-	err = "Unmounting media failed";
+        err = "Unmounting media failed";
     }
 
     if ( err != "") {
@@ -232,7 +232,7 @@ void Mount::umount( const std::string & path )
 }
 
 void Mount::run( const char *const *argv, const Environment& environment,
-		 ExternalProgram::Stderr_Disposition disp )
+                 ExternalProgram::Stderr_Disposition disp )
 {
   exit_code = -1;
 
@@ -325,16 +325,16 @@ Mount::getEntries(const std::string &mtab)
             ent.mnt_freq,   ent.mnt_passno
           );
 
-	  // Attempt quick fix for bnc#710269:
-	  // MountEntry is "//dist/install/ on /var/adm/mount/AP_0x00000001 type cifs (ro,relatime,unc=\dist\install,username=,domain=suse.de"
-	  // but looking for "Looking for media(cifs<//dist/install>)attached(*/var/adm/mount/AP_0x00000001)"
-	  // Kick the trailing '/' in "//dist/install/"
-	  // TODO: Check and fix comparison in MediaHandler::checkAttached instead.
-	  if ( entry.src.size() > 1	// not for "/"
-	       && entry.src[entry.src.size()-1] == '/' )
-	  {
-	    entry.src.erase( entry.src.size()-1 );
-	  }
+          // Attempt quick fix for bnc#710269:
+          // MountEntry is "//dist/install/ on /var/adm/mount/AP_0x00000001 type cifs (ro,relatime,unc=\dist\install,username=,domain=suse.de"
+          // but looking for "Looking for media(cifs<//dist/install>)attached(*/var/adm/mount/AP_0x00000001)"
+          // Kick the trailing '/' in "//dist/install/"
+          // TODO: Check and fix comparison in MediaHandler::checkAttached instead.
+          if ( entry.src.size() > 1	// not for "/"
+               && entry.src[entry.src.size()-1] == '/' )
+          {
+            entry.src.erase( entry.src.size()-1 );
+          }
           entries.push_back(entry);
 
           memset(buf,  0, sizeof(buf));
@@ -346,13 +346,13 @@ Mount::getEntries(const std::string &mtab)
       if( entries.empty())
       {
         WAR << "Unable to read any entry from the mount table '" << *t << "'"
-	    << std::endl;
+            << std::endl;
       }
       else
       {
-	// OK, have a non-empty mount table.
+        // OK, have a non-empty mount table.
         t = mtabs.end();
-	break;
+        break;
       }
     }
     else
@@ -361,7 +361,7 @@ Mount::getEntries(const std::string &mtab)
       verbose = true;
       WAR << "Failed to read the mount table '" << *t << "': "
           << ::strerror(err)
-	  << std::endl;
+          << std::endl;
       errno = err;
     }
   }

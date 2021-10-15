@@ -36,11 +36,11 @@ namespace zypp
     Url UrlResolverPlugin::resolveUrl(const Url & o_url, HeaderList &headers)
     {
         if (o_url.getScheme() != "plugin")
-            return o_url;        
-        
+            return o_url;
+
         Url url(o_url);
         std::string name = url.getPathName();
-        Pathname plugin_path = (ZConfig::instance().pluginsPath()/"urlresolver")/name;    
+        Pathname plugin_path = (ZConfig::instance().pluginsPath()/"urlresolver")/name;
         if (PathInfo(plugin_path).isExist()) {
             PluginScript scr;
             scr.open(plugin_path);
@@ -53,7 +53,7 @@ namespace zypp
                  param_it != params.end();
                  ++param_it)
                 f.setHeader(param_it->first, param_it->second);
-            
+
             scr.send(f);
 
             PluginFrame r(scr.receive());
@@ -61,7 +61,7 @@ namespace zypp
                 // now set
                 url = Url(r.body());
                 PluginFrame::HeaderListIterator it;
-                
+
                 for (it = r.headerBegin();
                      it != r.headerEnd();
                      ++it) {
@@ -69,15 +69,15 @@ namespace zypp
                     // curl resets headers that are empty, so we use a workaround
                     if (values.second.empty()) {
                         values.second = "\r\nX-libcurl-Empty-Header-Workaround: *";
-                    }                    
-                    headers.insert(values);                    
+                    }
+                    headers.insert(values);
                 }
             }
             else if (r.command() == "ERROR") {
                 ZYPP_THROW(MediaException(r.body()));
-            }            
+            }
         }
-        return url;        
+        return url;
     }
 
     /** \relates UrlResolverPlugin::Impl Stream output */

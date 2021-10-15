@@ -22,9 +22,9 @@ BOOST_AUTO_TEST_CASE(curl_params_reset)
 {
   MediaManager     mm;
   media::MediaId   id;
-  
+
   Url url("http://ftp.kernel.org/pub/");
-  
+
   id = mm.open( url, "");
   mm.attach(id);
 
@@ -39,7 +39,7 @@ BOOST_AUTO_TEST_CASE(curl_params_reset)
   BOOST_REQUIRE( PathInfo(dest).size() != 0 );
   mm.doesFileExist(id, src);
   BOOST_REQUIRE( PathInfo(dest).size() != 0 );
-  mm.release(id);   
+  mm.release(id);
 }
 
 BOOST_AUTO_TEST_CASE(http_test)
@@ -47,9 +47,9 @@ BOOST_AUTO_TEST_CASE(http_test)
   //MediaVerifierRef verifier( new MyMediaVerifier() );
   MediaManager     mm;
   media::MediaId   id;
-  
+
   Url url("http://ftp.kernel.org/pub/");
-  
+
 //   iso_url = "iso:/";
 //   iso_url.setQueryParam("iso", "SUSE-10.1-Beta5/SUSE-Linux-10.1-beta5-i386-CD1.iso");
 //   iso_url.setQueryParam("url", src_url.asString());
@@ -59,7 +59,7 @@ BOOST_AUTO_TEST_CASE(http_test)
   mm.attach(id);
   BOOST_REQUIRE( mm.doesFileExist(id, Pathname("/README")) );
   BOOST_REQUIRE( ! mm.doesFileExist(id, Pathname("/fakefile")) );
-  mm.release(id); 
+  mm.release(id);
 }
 
 BOOST_AUTO_TEST_CASE(ftp_test)
@@ -67,9 +67,9 @@ BOOST_AUTO_TEST_CASE(ftp_test)
   //MediaVerifierRef verifier( new MyMediaVerifier() );
   MediaManager     mm;
   media::MediaId   id;
-  
+
   Url url("ftp://ftp.kernel.org/pub/");
-  
+
 //   iso_url = "iso:/";
 //   iso_url.setQueryParam("iso", "SUSE-10.1-Beta5/SUSE-Linux-10.1-beta5-i386-CD1.iso");
 //   iso_url.setQueryParam("url", src_url.asString());
@@ -79,7 +79,7 @@ BOOST_AUTO_TEST_CASE(ftp_test)
   mm.attach(id);
   BOOST_REQUIRE( mm.doesFileExist(id, Pathname("/README")) );
   BOOST_REQUIRE( ! mm.doesFileExist(id, Pathname("/fakefile")) );
-  mm.release(id); 
+  mm.release(id);
 }
 
 BOOST_AUTO_TEST_CASE(isotest)
@@ -89,13 +89,13 @@ BOOST_AUTO_TEST_CASE(isotest)
      BOOST_WARN( "ISO test requires root permissions! (mount)");
      return;
    }
-  
+
   MediaManager     mm;
   media::MediaId   id;
-  
+
   //Url url("nfs://dist.suse.de/dist/install/openSUSE-10.2-GM/");
   Url url("dir:/mounts/dist/install/openSUSE-10.2-GM/");
-  
+
   Url iso_url("iso:/");
   iso_url.setQueryParam("iso", "openSUSE-10.2-RC5-PromoDVD-i386.iso");
   iso_url.setQueryParam("url", url.asString());
@@ -104,7 +104,7 @@ BOOST_AUTO_TEST_CASE(isotest)
   mm.attach(id);
   BOOST_REQUIRE( mm.doesFileExist(id, Pathname("/README")) );
   BOOST_REQUIRE( ! mm.doesFileExist(id, Pathname("/fakefile")) );
-  mm.release(id); 
+  mm.release(id);
 }
 
 BOOST_AUTO_TEST_CASE(nfs_tst)
@@ -114,17 +114,17 @@ BOOST_AUTO_TEST_CASE(nfs_tst)
      BOOST_WARN( "NFS test requires root permissions! (mount)");
      return;
    }
-  
+
   MediaManager     mm;
   media::MediaId   id;
   Url url("nfs://dist.suse.de/dist/install");
-  
+
   id = mm.open( url, "");
   mm.attach(id);
   BOOST_REQUIRE( mm.doesFileExist(id, Pathname("/SLP/openSUSE-10.2-RM/i386/DVD1/README")) );
   BOOST_REQUIRE( ! mm.doesFileExist(id, Pathname("/fakefile")) );
   mm.release(id);
-  
+
 }
 
 // vim: set ts=2 sts=2 sw=2 ai et:

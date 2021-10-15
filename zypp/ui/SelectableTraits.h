@@ -50,8 +50,8 @@ namespace zypp
         //
         bool operator()( const PoolItem & lhs, const PoolItem & rhs ) const
         {
-	  if ( lhs.isBlacklisted() != rhs.isBlacklisted() )
-	    return rhs.isBlacklisted();
+          if ( lhs.isBlacklisted() != rhs.isBlacklisted() )
+            return rhs.isBlacklisted();
 
           int lprio = lhs->satSolvable().repository().satInternalPriority();
           int rprio = rhs->satSolvable().repository().satInternalPriority();
@@ -70,9 +70,9 @@ namespace zypp
           if ( res )
             return res > 0;
 
-	  lprio = lhs->buildtime();
-	  rprio = rhs->buildtime();
-	  if ( lprio != rprio )
+          lprio = lhs->buildtime();
+          rprio = rhs->buildtime();
+          if ( lprio != rprio )
             return( lprio > rprio );
 
           lprio = lhs->satSolvable().repository().satInternalSubPriority();

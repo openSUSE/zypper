@@ -63,7 +63,7 @@ namespace argparse
     , _hasarg { hasarg_r }
     {
       if ( hasarg_r == Arg::optional )
-	throw OptionException( "Not yet implemented: Option::Arg::optional" );
+        throw OptionException( "Not yet implemented: Option::Arg::optional" );
     }
 
     const std::string & descr() const
@@ -99,26 +99,26 @@ namespace argparse
 
       Injector & operator()( const std::string & names_r, std::string descr_r, Option::Arg hasarg_r = Option::Arg::none )
       {
-	smatch result;
-	if ( regex_match( names_r, result, regex("([[:alnum:]][-_[:alnum:]]+)(,([[:alnum:]]))?") ) )
-	{
-	  auto opt = std::make_shared<const Option>( std::move(descr_r), hasarg_r );
-	  add( result[1], opt );
-	  if ( ! result[3].empty() )
-	    add( result[3], opt );
-	}
-	else
-	  throw OptionException( "Illegal option names: ", names_r );
+        smatch result;
+        if ( regex_match( names_r, result, regex("([[:alnum:]][-_[:alnum:]]+)(,([[:alnum:]]))?") ) )
+        {
+          auto opt = std::make_shared<const Option>( std::move(descr_r), hasarg_r );
+          add( result[1], opt );
+          if ( ! result[3].empty() )
+            add( result[3], opt );
+        }
+        else
+          throw OptionException( "Illegal option names: ", names_r );
 
-	return *this;
+        return *this;
       }
 
     private:
       void add( std::string name_r, std::shared_ptr<const Option> opt_r )
       {
-	if ( _optmap.count( name_r ) )
-	  throw OptionException( "Duplicate option name: ", name_r );
-	_optmap[name_r] = opt_r;
+        if ( _optmap.count( name_r ) )
+          throw OptionException( "Duplicate option name: ", name_r );
+        _optmap[name_r] = opt_r;
       }
 
     private:
@@ -137,28 +137,28 @@ namespace argparse
       str_r << "OPTIONS:";
       if ( ! _optmap.empty() )
       {
-	std::unordered_map<std::shared_ptr<const Option>, std::string> unify;
-	for ( const auto & p : _optmap )
-	{
-	  std::string & t { unify[p.second] };
-	  if ( t.empty() )
-	    t = (p.first.length()>1?"--":"-")+p.first;
-	  else if ( p.first.length() > 1 )
-	    t = "--"+p.first+", "+t;
-	  else
-	    t = t+", -"+p.first;
-	}
+        std::unordered_map<std::shared_ptr<const Option>, std::string> unify;
+        for ( const auto & p : _optmap )
+        {
+          std::string & t { unify[p.second] };
+          if ( t.empty() )
+            t = (p.first.length()>1?"--":"-")+p.first;
+          else if ( p.first.length() > 1 )
+            t = "--"+p.first+", "+t;
+          else
+            t = t+", -"+p.first;
+        }
 
-	boost::format fmt( "\n    %1% %|30t|%2%" );
-	for ( const auto & p : unify )
-	{
-	  fmt % p.second % p.first->descr();
-	  str_r << fmt.str();
-	}
+        boost::format fmt( "\n    %1% %|30t|%2%" );
+        for ( const auto & p : unify )
+        {
+          fmt % p.second % p.first->descr();
+          str_r << fmt.str();
+        }
       }
       else
       {
-	str_r << "    This command accepts no options.";
+        str_r << "    This command accepts no options.";
       }
       return str_r;
     }
@@ -187,7 +187,7 @@ namespace argparse
     const std::string & arg() const
     {
       if ( ! _arg )
-	throw std::domain_error( "No arg value" );
+        throw std::domain_error( "No arg value" );
 
       return *_arg;
     }
@@ -213,7 +213,7 @@ namespace argparse
     {
       auto iter = _optmap.find( optname_r );
       if ( iter == _optmap.end() )
-	return 0;
+        return 0;
 
       auto resiter = _options.find( iter->second );
       return( resiter == _options.end() ? 0 : 1 );
@@ -233,32 +233,32 @@ namespace argparse
       bool collectpositional = false;
       for ( --argc,++argv; argc; --argc,++argv )
       {
-	if ( (*argv)[0] == '-' && !collectpositional )
-	{
-	  if ( (*argv)[1] == '-' )
-	  {
-	    if ( (*argv)[2] == '\0' )
-	    {
-	      // -- rest are positional...
-	      collectpositional = true;
-	    }
-	    else
-	    {
-	      // --longopt
-	      parseoptl( (*argv)+2, argc, argv );
-	    }
-	  }
-	  else
-	  {
-	    // -s(hortopt)
-	    parseopts( (*argv)+1, argc, argv );
-	  }
-	}
-	else
-	{
-	  // positional
-	  _positionals.push_back( *argv );
-	}
+        if ( (*argv)[0] == '-' && !collectpositional )
+        {
+          if ( (*argv)[1] == '-' )
+          {
+            if ( (*argv)[2] == '\0' )
+            {
+              // -- rest are positional...
+              collectpositional = true;
+            }
+            else
+            {
+              // --longopt
+              parseoptl( (*argv)+2, argc, argv );
+            }
+          }
+          else
+          {
+            // -s(hortopt)
+            parseopts( (*argv)+1, argc, argv );
+          }
+        }
+        else
+        {
+          // positional
+          _positionals.push_back( *argv );
+        }
       }
     }
 
@@ -269,7 +269,7 @@ namespace argparse
     void parseoptl( const std::string & name_r, int & argc, char **& argv )
     {
       if ( name_r.length() < 2 )
-	throw OptionException( "Illegal long opt: --", name_r );
+        throw OptionException( "Illegal long opt: --", name_r );
 
       parseopt( name_r, argc, argv );
     }
@@ -277,7 +277,7 @@ namespace argparse
     void parseopts( const std::string & name_r, int & argc, char **& argv )
     {
      if ( name_r.length() != 1 )
-	throw OptionException( "Illegal short opt: -", name_r );
+        throw OptionException( "Illegal short opt: -", name_r );
 
      parseopt( name_r, argc, argv );
     }
@@ -288,21 +288,21 @@ namespace argparse
 
       auto iter = _options.find( opt );
       if ( iter != _options.end() )
-	throw OptionException( "Multiple occurrences of option: ", dashed( name_r ) );
+        throw OptionException( "Multiple occurrences of option: ", dashed( name_r ) );
 
       if ( opt->hasarg() != Option::Arg::none )
       {
-	if ( opt->hasarg() == Option::Arg::optional )
-	  throw OptionException( "Not yet implemented: Option::Arg::optional" ); // i.e. '--opt=arg'
+        if ( opt->hasarg() == Option::Arg::optional )
+          throw OptionException( "Not yet implemented: Option::Arg::optional" ); // i.e. '--opt=arg'
 
-	if ( argc < 2 )
-	  throw OptionException( "Missing argument for option: ", dashed( name_r ) );
+        if ( argc < 2 )
+          throw OptionException( "Missing argument for option: ", dashed( name_r ) );
 
-	--argc,++argv;
-	moveToResult( opt, OptionValue( opt, *argv ) );
+        --argc,++argv;
+        moveToResult( opt, OptionValue( opt, *argv ) );
       }
       else
-	moveToResult( opt, OptionValue( opt ) );
+        moveToResult( opt, OptionValue( opt ) );
     }
 
     void moveToResult( std::shared_ptr<const Option> opt_r, OptionValue && value_r )
@@ -312,7 +312,7 @@ namespace argparse
     {
       auto iter = _optmap.find( name_r );
       if ( iter == _optmap.end() )
-	throw OptionException( "Unknown option: ", dashed( name_r ) );
+        throw OptionException( "Unknown option: ", dashed( name_r ) );
       return iter->second;
     }
 
@@ -320,7 +320,7 @@ namespace argparse
     {
       auto iter = _options.find( requireOptByName( name_r ) );
       if ( iter == _options.end() )
-	throw OptionException( "Option not present: ", dashed( name_r ) );
+        throw OptionException( "Option not present: ", dashed( name_r ) );
       return iter->second;
     }
 

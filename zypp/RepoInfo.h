@@ -85,7 +85,7 @@ namespace zypp
        */
       static unsigned defaultPriority();
       /**
-       * The least priority (<tt>unsigned(-1)</tt>). 
+       * The least priority (<tt>unsigned(-1)</tt>).
        */
       static unsigned noPriority();
       /**
@@ -366,14 +366,14 @@ namespace zypp
 
       /** Some predefined settings */
       enum class GpgCheck {
-	indeterminate,		//< not specified
-	On,			//< 1** --gpgcheck
-	Strict,			//< 111 --gpgcheck-strict
-	AllowUnsigned,		//< 100 --gpgcheck-allow-unsigned
-	AllowUnsignedRepo,	//< 10* --gpgcheck-allow-unsigned-repo
-	AllowUnsignedPackage,	//< 1*0 --gpgcheck-allow-unsigned-package
-	Default,		//< *** --default-gpgcheck
-	Off,			//< 0** --no-gpgcheck
+        indeterminate,		//< not specified
+        On,			//< 1** --gpgcheck
+        Strict,			//< 111 --gpgcheck-strict
+        AllowUnsigned,		//< 100 --gpgcheck-allow-unsigned
+        AllowUnsignedRepo,	//< 10* --gpgcheck-allow-unsigned-repo
+        AllowUnsignedPackage,	//< 1*0 --gpgcheck-allow-unsigned-package
+        Default,		//< *** --default-gpgcheck
+        Off,			//< 0** --no-gpgcheck
       };
 
       /** Adjust *GpgCheck settings according to \a mode_r.

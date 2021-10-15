@@ -64,7 +64,7 @@ namespace zypp {
     ExternalProgram::ExternalProgram( const Arguments & argv,
                                       Stderr_Disposition stderr_disp,
                                       bool use_pty,
-				      int stderr_fd,
+                                      int stderr_fd,
                                       bool default_locale,
                                       const Pathname & root )
     {
@@ -72,8 +72,8 @@ namespace zypp {
       unsigned c = 0;
       for_( i, argv.begin(), argv.end() )
       {
-	argvp[c] = i->c_str();
-	++c;
+        argvp[c] = i->c_str();
+        ++c;
       }
       argvp[c] = 0;
 
@@ -84,16 +84,16 @@ namespace zypp {
                                       const Environment & environment,
                                       Stderr_Disposition stderr_disp,
                                       bool use_pty,
-				      int stderr_fd,
+                                      int stderr_fd,
                                       bool default_locale,
-				      const Pathname & root )
+                                      const Pathname & root )
     {
       const char * argvp[argv.size() + 1];
       unsigned c = 0;
       for_( i, argv.begin(), argv.end() )
       {
-	argvp[c] = i->c_str();
-	++c;
+        argvp[c] = i->c_str();
+        ++c;
       }
       argvp[c] = 0;
 
@@ -111,24 +111,24 @@ namespace zypp {
     }
 
     ExternalProgram::ExternalProgram( const char *const * argv,
-				      const Environment & environment,
-				      Stderr_Disposition stderr_disp,
-				      bool use_pty,
-				      int stderr_fd,
-				      bool default_locale,
-				      const Pathname & root )
+                                      const Environment & environment,
+                                      Stderr_Disposition stderr_disp,
+                                      bool use_pty,
+                                      int stderr_fd,
+                                      bool default_locale,
+                                      const Pathname & root )
     {
       start_program( argv, environment, stderr_disp, stderr_fd, default_locale, root.c_str(), false, false, use_pty );
     }
 
 
     ExternalProgram::ExternalProgram( const char *binpath,
-				      const char *const *argv_1,
-				      bool use_pty )
+                                      const char *const *argv_1,
+                                      bool use_pty )
     {
       int i = 0;
       while (argv_1[i++])
-    	;
+        ;
       const char *argv[i + 1];
       argv[0] = binpath;
       memcpy( &argv[1], argv_1, (i - 1) * sizeof (char *) );
@@ -136,13 +136,13 @@ namespace zypp {
     }
 
     ExternalProgram::ExternalProgram( const char *binpath,
-				      const char *const *argv_1,
-				      const Environment & environment,
-				      bool use_pty )
+                                      const char *const *argv_1,
+                                      const Environment & environment,
+                                      bool use_pty )
     {
       int i = 0;
       while (argv_1[i++])
-    	;
+        ;
       const char *argv[i + 1];
       argv[0] = binpath;
       memcpy( &argv[1], argv_1, (i - 1) * sizeof (char *) );
@@ -155,11 +155,11 @@ namespace zypp {
 
 
     void ExternalProgram::start_program( const char *const *argv,
-					 const Environment & environment,
-					 Stderr_Disposition stderr_disp,
-					 int stderr_fd,
-					 bool default_locale,
-					 const char * root , bool switch_pgid, bool die_with_parent , bool usePty )
+                                         const Environment & environment,
+                                         Stderr_Disposition stderr_disp,
+                                         int stderr_fd,
+                                         bool default_locale,
+                                         const char * root , bool switch_pgid, bool die_with_parent , bool usePty )
     {
       if ( _backend )
         return;
@@ -180,46 +180,46 @@ namespace zypp {
 
       if ( root )
       {
-	if ( root[0] == '\0' )
-	{
-	  root = nullptr;	// ignore empty root
-	}
-	else if ( root[0] == '/' && root[1] == '\0' )
-	{
-	  // If root is '/' do not chroot, but chdir to '/'
-	  // unless arglist defines another dir.
-	  chdirTo = "/";
-	  root = nullptr;
-	}
+        if ( root[0] == '\0' )
+        {
+          root = nullptr;	// ignore empty root
+        }
+        else if ( root[0] == '/' && root[1] == '\0' )
+        {
+          // If root is '/' do not chroot, but chdir to '/'
+          // unless arglist defines another dir.
+          chdirTo = "/";
+          root = nullptr;
+        }
       }
 
       for ( bool strip = false; argv[0] != nullptr; ++argv )
       {
-	strip = false;
-	switch ( argv[0][0] )
-	{
-	  case '<':
-	    strip = true;
-	    redirectStdin = argv[0]+1;
-	    if ( *redirectStdin == '\0' )
-	      redirectStdin = "/dev/null";
-	    break;
+        strip = false;
+        switch ( argv[0][0] )
+        {
+          case '<':
+            strip = true;
+            redirectStdin = argv[0]+1;
+            if ( *redirectStdin == '\0' )
+              redirectStdin = "/dev/null";
+            break;
 
-	  case '>':
-	    strip = true;
-	    redirectStdout = argv[0]+1;
-	    if ( *redirectStdout == '\0' )
-	      redirectStdout = "/dev/null";
-	    break;
+          case '>':
+            strip = true;
+            redirectStdout = argv[0]+1;
+            if ( *redirectStdout == '\0' )
+              redirectStdout = "/dev/null";
+            break;
 
-	  case '#':
-	    strip = true;
-	    if ( argv[0][1] == '/' )	// #/[path]
-	      chdirTo = argv[0]+1;
-	    break;
-	}
-	if ( ! strip )
-	  break;
+          case '#':
+            strip = true;
+            if ( argv[0][1] == '/' )	// #/[path]
+              chdirTo = argv[0]+1;
+            break;
+        }
+        if ( ! strip )
+          break;
       }
 
       // those are the FDs that the new process will receive
@@ -238,15 +238,15 @@ namespace zypp {
 
         int master_tty,	slave_tty;		// fds for pair of ttys
 
-    	// Create pair of ttys
+        // Create pair of ttys
         DBG << "Using ttys for communication with " << argv[0] << endl;
-    	if (openpty (&master_tty, &slave_tty, 0, 0, 0) != 0)
-    	{
+        if (openpty (&master_tty, &slave_tty, 0, 0, 0) != 0)
+        {
           _backend->setExecError( str::form( _("Can't open pty (%s)."), strerror(errno) ) );
           _backend->setExitStatus( 126 );
           ERR << _backend->execError() << endl;
           return;
-    	}
+        }
 
         stdinFd  = slave_tty;
         stdoutFd = slave_tty;
@@ -324,11 +324,11 @@ namespace zypp {
         outputfile = fdopen( childStdinParentFd, "w" );
         childStdinParentFd.resetDispose();
 
-    	if (!inputfile || !outputfile)
-    	{
-    	    ERR << "Cannot create streams to external program " << argv[0] << endl;
+        if (!inputfile || !outputfile)
+        {
+            ERR << "Cannot create streams to external program " << argv[0] << endl;
             ExternalProgram::close();
-    	}
+        }
       } else {
         // Fork failed, exit code and status was set by backend
         return;
@@ -345,60 +345,60 @@ namespace zypp {
 
       if ( _backend->isRunning() )
       {
-	if ( inputFile() )
-	{
-	  // Discard any output instead of closing the pipe,
-	  // but watch out for the command exiting while some
-	  // subprocess keeps the filedescriptor open.
-	  setBlocking( false );
-	  FILE * inputfile = inputFile();
-	  int    inputfileFd = ::fileno( inputfile );
-	  long   delay = 0;
-	  do
-	  {
-	    /* Watch inputFile to see when it has input. */
-	    fd_set rfds;
-	    FD_ZERO( &rfds );
-	    FD_SET( inputfileFd, &rfds );
+        if ( inputFile() )
+        {
+          // Discard any output instead of closing the pipe,
+          // but watch out for the command exiting while some
+          // subprocess keeps the filedescriptor open.
+          setBlocking( false );
+          FILE * inputfile = inputFile();
+          int    inputfileFd = ::fileno( inputfile );
+          long   delay = 0;
+          do
+          {
+            /* Watch inputFile to see when it has input. */
+            fd_set rfds;
+            FD_ZERO( &rfds );
+            FD_SET( inputfileFd, &rfds );
 
-	    /* Wait up to 1 seconds. */
-	    struct timeval tv;
-	    tv.tv_sec  = (delay < 0 ? 1 : 0);
-	    tv.tv_usec = (delay < 0 ? 0 : delay*100000);
-	    if ( delay >= 0 && ++delay > 9 )
-	      delay = -1;
-	    int retval = select( inputfileFd+1, &rfds, NULL, NULL, &tv );
+            /* Wait up to 1 seconds. */
+            struct timeval tv;
+            tv.tv_sec  = (delay < 0 ? 1 : 0);
+            tv.tv_usec = (delay < 0 ? 0 : delay*100000);
+            if ( delay >= 0 && ++delay > 9 )
+              delay = -1;
+            int retval = select( inputfileFd+1, &rfds, NULL, NULL, &tv );
 
-	    if ( retval == -1 )
-	    {
+            if ( retval == -1 )
+            {
               if ( errno != EINTR ) {
                 ERR << "select error: " << strerror(errno) << endl;
-		break;
+                break;
               }
-	    }
-	    else if ( retval )
-	    {
-	      // Data is available now.
-	      static size_t linebuffer_size = 0;      // static because getline allocs
-	      static char * linebuffer = 0;           // and reallocs if buffer is too small
-	      getline( &linebuffer, &linebuffer_size, inputfile );
-	      // ::feof check is important as select returns
-	      // positive if the file was closed.
-	      if ( ::feof( inputfile ) )
-		break;
-	      clearerr( inputfile );
-	    }
-	    else
-	    {
-	      // No data within time.
-	      if ( ! _backend->isRunning() )
-		break;
-	    }
-	  } while ( true );
-	}
+            }
+            else if ( retval )
+            {
+              // Data is available now.
+              static size_t linebuffer_size = 0;      // static because getline allocs
+              static char * linebuffer = 0;           // and reallocs if buffer is too small
+              getline( &linebuffer, &linebuffer_size, inputfile );
+              // ::feof check is important as select returns
+              // positive if the file was closed.
+              if ( ::feof( inputfile ) )
+                break;
+              clearerr( inputfile );
+            }
+            else
+            {
+              // No data within time.
+              if ( ! _backend->isRunning() )
+                break;
+            }
+          } while ( true );
+        }
 
-	// wait for the process to end)
-	_backend->isRunning( true );
+        // wait for the process to end)
+        _backend->isRunning( true );
       }
 
       ExternalDataSource::close();
@@ -410,8 +410,8 @@ namespace zypp {
     {
       if ( _backend && _backend->isRunning() )
       {
-    	::kill( _backend->pid(), SIGKILL);
-    	close();
+        ::kill( _backend->pid(), SIGKILL);
+        close();
       }
       return true;
     }
@@ -481,62 +481,62 @@ namespace zypp {
     {
       EarlyPipe::EarlyPipe()
       {
-	_fds[R] = _fds[W] = -1;
+        _fds[R] = _fds[W] = -1;
 #ifdef HAVE_PIPE2
-	::pipe2( _fds, O_NONBLOCK );
+        ::pipe2( _fds, O_NONBLOCK );
 #else
         ::pipe( _fds );
         ::fcntl(_fds[R], F_SETFD, O_NONBLOCK );
         ::fcntl(_fds[W], F_SETFD, O_NONBLOCK );
 #endif
-	_stderr = ::fdopen( _fds[R], "r" );
+        _stderr = ::fdopen( _fds[R], "r" );
       }
 
       EarlyPipe::~EarlyPipe()
       {
-	closeW();
-	if ( _stderr )
-	  ::fclose( _stderr );
+        closeW();
+        if ( _stderr )
+          ::fclose( _stderr );
       }
     } // namespace externalprogram
 
     bool ExternalProgramWithStderr::stderrGetUpTo( std::string & retval_r, const char delim_r, bool returnDelim_r )
     {
       if ( ! _stderr )
-	return false;
+        return false;
       if ( delim_r && ! _buffer.empty() )
       {
-	// check for delim already in buffer
-	std::string::size_type pos( _buffer.find( delim_r ) );
-	if ( pos != std::string::npos )
-	{
-	  retval_r = _buffer.substr( 0, returnDelim_r ? pos+1 : pos );
-	  _buffer.erase( 0, pos+1 );
-	  return true;
-	}
+        // check for delim already in buffer
+        std::string::size_type pos( _buffer.find( delim_r ) );
+        if ( pos != std::string::npos )
+        {
+          retval_r = _buffer.substr( 0, returnDelim_r ? pos+1 : pos );
+          _buffer.erase( 0, pos+1 );
+          return true;
+        }
       }
       ::clearerr( _stderr );
       do {
-	int ch = fgetc( _stderr );
-	if ( ch != EOF )
-	{
-	  if ( ch != delim_r || ! delim_r )
-	    _buffer.push_back( ch );
-	  else
-	  {
-	    if ( returnDelim_r )
-	      _buffer.push_back( delim_r );
-	    break;
-	  }
-	}
-	else if ( ::feof( _stderr ) )
-	{
-	  if ( _buffer.empty() )
-	    return false;
-	  break;
-	}
-	else if ( errno != EINTR )
-	  return false;
+        int ch = fgetc( _stderr );
+        if ( ch != EOF )
+        {
+          if ( ch != delim_r || ! delim_r )
+            _buffer.push_back( ch );
+          else
+          {
+            if ( returnDelim_r )
+              _buffer.push_back( delim_r );
+            break;
+          }
+        }
+        else if ( ::feof( _stderr ) )
+        {
+          if ( _buffer.empty() )
+            return false;
+          break;
+        }
+        else if ( errno != EINTR )
+          return false;
       } while ( true );
       // HERE: we left after readig at least one char (\n)
       retval_r.swap( _buffer );

@@ -126,13 +126,13 @@ namespace zypp
 
       if ( ! _pseudoItems.empty() )
       {
-	for ( sat::Queue::size_type i = 0; i < _pseudoItems.size(); ++i )
-	{
-	  PoolItem pi { sat::Solvable(_pseudoItems[i]) };
-	  ResStatus::ValidateValue vorig { validateValue( i ) };
-	  if ( pi.status().validate() != vorig )
-	    ret[pi] = vorig;
-	}
+        for ( sat::Queue::size_type i = 0; i < _pseudoItems.size(); ++i )
+        {
+          PoolItem pi { sat::Solvable(_pseudoItems[i]) };
+          ResStatus::ValidateValue vorig { validateValue( i ) };
+          if ( pi.status().validate() != vorig )
+            ret[pi] = vorig;
+        }
       }
       return ret;
     }
@@ -143,9 +143,9 @@ namespace zypp
       ResStatus::ValidateValue ret { ResStatus::UNDETERMINED };
       switch ( _pseudoFlags[i] )
       {
-	case  0: ret = ResStatus::BROKEN      /*2*/; break;
-	case  1: ret = ResStatus::SATISFIED   /*4*/; break;
-	case -1: ret = ResStatus::NONRELEVANT /*6*/; break;
+        case  0: ret = ResStatus::BROKEN      /*2*/; break;
+        case  1: ret = ResStatus::SATISFIED   /*4*/; break;
+        case -1: ret = ResStatus::NONRELEVANT /*6*/; break;
       }
       return ret;
     }
@@ -173,13 +173,13 @@ namespace zypp
         typedef PoolTraits::ItemContainerT		ContainerT;
         typedef PoolTraits::size_type			size_type;
         typedef PoolTraits::const_iterator		const_iterator;
-	typedef PoolTraits::Id2ItemT			Id2ItemT;
+        typedef PoolTraits::Id2ItemT			Id2ItemT;
 
         typedef PoolTraits::repository_iterator		repository_iterator;
 
         typedef sat::detail::SolvableIdType		SolvableIdType;
 
-	typedef ResPool::EstablishedStates::Impl	EstablishedStatesImpl;
+        typedef ResPool::EstablishedStates::Impl	EstablishedStatesImpl;
 
       public:
         /** Default ctor */
@@ -252,10 +252,10 @@ namespace zypp
         }
 
         /** True factory for \ref ResPool::EstablishedStates.
-	 * Internally we maintain the ResPool::EstablishedStates::Impl
-	 * reference shared_ptr. Updated whenever the pool content changes.
-	 * On demand hand it out as ResPool::EstablishedStates Impl.
-	 */
+         * Internally we maintain the ResPool::EstablishedStates::Impl
+         * reference shared_ptr. Updated whenever the pool content changes.
+         * On demand hand it out as ResPool::EstablishedStates Impl.
+         */
         ResPool::EstablishedStates establishedStates() const
         { store(); return ResPool::EstablishedStates( _establishedStates ); }
 
@@ -367,10 +367,10 @@ namespace zypp
           {
             sat::Pool pool( satpool() );
             bool addedItems = false;
-	    bool reusedIDs = _watcherIDs.remember( pool.serialIDs() );
+            bool reusedIDs = _watcherIDs.remember( pool.serialIDs() );
             std::list<PoolItem> addedProducts;
 
-	    _store.resize( pool.capacity() );
+            _store.resize( pool.capacity() );
 
             if ( pool.capacity() )
             {
@@ -414,20 +414,20 @@ namespace zypp
               reapplyHardLocks();
             }
 
-	    // Compute the initial status of Patches etc.
+            // Compute the initial status of Patches etc.
             if ( !_establishedStates )
-	      _establishedStates.reset( new EstablishedStatesImpl );
+              _establishedStates.reset( new EstablishedStatesImpl );
           }
           return _store;
         }
 
-	const Id2ItemT & id2item () const
-	{
-	  checkSerial();
-	  if ( _id2itemDirty )
-	  {
-	    store();
-	    _id2item = Id2ItemT( size() );
+        const Id2ItemT & id2item () const
+        {
+          checkSerial();
+          if ( _id2itemDirty )
+          {
+            store();
+            _id2item = Id2ItemT( size() );
             for_( it, begin(), end() )
             {
               const sat::Solvable &s = (*it)->satSolvable();
@@ -437,10 +437,10 @@ namespace zypp
               _id2item.insert( std::make_pair( id, *it ) );
             }
             //INT << _id2item << endl;
-	    _id2itemDirty = false;
+            _id2itemDirty = false;
           }
-	  return _id2item;
-	}
+          return _id2item;
+        }
 
         ///////////////////////////////////////////////////////////////////
         //
@@ -456,25 +456,25 @@ namespace zypp
         void invalidate() const
         {
           _storeDirty = true;
-	  _id2itemDirty = true;
-	  _id2item.clear();
+          _id2itemDirty = true;
+          _id2item.clear();
           _poolProxy.reset();
-	  _establishedStates.reset();
+          _establishedStates.reset();
         }
 
       private:
         /** Watch sat pools serial number. */
         SerialNumberWatcher                   _watcher;
-	/** Watch sat pools Serial number of IDs - changes whenever resusePoolIDs==true - ResPool must also invalidate it's PoolItems! */
+        /** Watch sat pools Serial number of IDs - changes whenever resusePoolIDs==true - ResPool must also invalidate it's PoolItems! */
         SerialNumberWatcher                   _watcherIDs;
         mutable ContainerT                    _store;
         mutable DefaultIntegral<bool,true>    _storeDirty;
-	mutable Id2ItemT		      _id2item;
+        mutable Id2ItemT		      _id2item;
         mutable DefaultIntegral<bool,true>    _id2itemDirty;
 
       private:
         mutable shared_ptr<ResPoolProxy>      _poolProxy;
-	mutable shared_ptr<EstablishedStatesImpl> _establishedStates;
+        mutable shared_ptr<EstablishedStatesImpl> _establishedStates;
 
       private:
         /** Set of queries that define hardlocks. */

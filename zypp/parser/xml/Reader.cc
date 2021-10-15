@@ -52,14 +52,14 @@ namespace zypp
       std::list<std::string> structuredErrors;
       void structuredErrorFunc( void * userData, xmlErrorPtr error )
       {
-	if ( error )
-	{
-	  // error->message is NL terminated
-	  std::string err( str::form( "%s[%d] %s", Pathname::basename(error->file).c_str(), error->line,
-				      str::stripSuffix( error->message, "\n" ).c_str() ) );
-	  structuredErrors.push_back( err );
-	  WAR << err << endl;
-	}
+        if ( error )
+        {
+          // error->message is NL terminated
+          std::string err( str::form( "%s[%d] %s", Pathname::basename(error->file).c_str(), error->line,
+                                      str::stripSuffix( error->message, "\n" ).c_str() ) );
+          structuredErrors.push_back( err );
+          WAR << err << endl;
+        }
 #if 0
         if ( error )
         {
@@ -86,12 +86,12 @@ namespace zypp
 
       struct ParseException : public Exception
       {
-	ParseException()
-	: Exception( "Parse error: " + ( structuredErrors.empty() ? std::string("unknown error"): structuredErrors.back() ) )
-	{
-	  for_( it, structuredErrors.begin(), --structuredErrors.end() )
-	    addHistory( *it );
-	}
+        ParseException()
+        : Exception( "Parse error: " + ( structuredErrors.empty() ? std::string("unknown error"): structuredErrors.back() ) )
+        {
+          for_( it, structuredErrors.begin(), --structuredErrors.end() )
+            addHistory( *it );
+        }
       };
 
       /////////////////////////////////////////////////////////////////

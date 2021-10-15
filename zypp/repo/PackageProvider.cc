@@ -109,7 +109,7 @@ namespace zypp
     public:
       /** Ctor taking the Package to provide. */
       PackageProviderImpl( RepoMediaAccess & access_r, const TPackagePtr & package_r,
-			   const PackageProviderPolicy & policy_r )
+                           const PackageProviderPolicy & policy_r )
       : _policy( policy_r )
       , _package( package_r )
       , _access( access_r )
@@ -128,10 +128,10 @@ namespace zypp
       /** Provide the package if it is cached. */
       virtual ManagedFile providePackageFromCache() const
       {
-	ManagedFile ret( doProvidePackageFromCache() );
-	if ( ! ( ret->empty() ||  _package->repoInfo().keepPackages() ) )
-	  ret.setDispose( filesystem::unlink );
-	return ret;
+        ManagedFile ret( doProvidePackageFromCache() );
+        if ( ! ( ret->empty() ||  _package->repoInfo().keepPackages() ) )
+          ret.setDispose( filesystem::unlink );
+        return ret;
       }
 
       /** Whether the package is cached. */
@@ -168,13 +168,13 @@ namespace zypp
        */
       virtual ManagedFile doProvidePackage() const
       {
-	ManagedFile ret;
-	OnMediaLocation loc = _package->location();
+        ManagedFile ret;
+        OnMediaLocation loc = _package->location();
 
-	ProvideFilePolicy policy;
-	policy.progressCB( bind( &Base::progressPackageDownload, this, _1 ) );
-	policy.fileChecker( bind( &Base::rpmSigFileChecker, this, _1 ) );
-	return _access.provideFile( _package->repoInfo(), loc, policy );
+        ProvideFilePolicy policy;
+        policy.progressCB( bind( &Base::progressPackageDownload, this, _1 ) );
+        policy.fileChecker( bind( &Base::rpmSigFileChecker, this, _1 ) );
+        return _access.provideFile( _package->repoInfo(), loc, policy );
       }
 
     protected:
@@ -203,18 +203,18 @@ namespace zypp
       //@{
       void rpmSigFileChecker( const Pathname & file_r ) const
       {
-	RepoInfo info = _package->repoInfo();
-	if ( info.pkgGpgCheck() )
-	{
-	  UserData userData( "pkgGpgCheck" );
-	  ResObject::constPtr roptr( _package );	// gcc6 needs it more explcit. Has problem deducing
-	  userData.set( "ResObject", roptr );		// a type for '_package->asKind<ResObject>()'...
-	  /*legacy:*/userData.set( "Package", roptr->asKind<Package>() );
-	  userData.set( "Localpath", file_r );
+        RepoInfo info = _package->repoInfo();
+        if ( info.pkgGpgCheck() )
+        {
+          UserData userData( "pkgGpgCheck" );
+          ResObject::constPtr roptr( _package );	// gcc6 needs it more explcit. Has problem deducing
+          userData.set( "ResObject", roptr );		// a type for '_package->asKind<ResObject>()'...
+          /*legacy:*/userData.set( "Package", roptr->asKind<Package>() );
+          userData.set( "Localpath", file_r );
 
-	  RpmDb::CheckPackageResult res = RpmDb::CHK_NOKEY;
-	  while ( res == RpmDb::CHK_NOKEY ) {
-	    res = packageSigCheck( file_r, info.pkgGpgCheckIsMandatory(), userData );
+          RpmDb::CheckPackageResult res = RpmDb::CHK_NOKEY;
+          while ( res == RpmDb::CHK_NOKEY ) {
+            res = packageSigCheck( file_r, info.pkgGpgCheckIsMandatory(), userData );
 
             // publish the checkresult, even if it is OK. Apps may want to report something...
             report()->pkgGpgCheck( userData );
@@ -246,37 +246,37 @@ namespace zypp
             }
           }
 
-	  if ( res != RpmDb::CHK_OK )
-	  {
-	    if ( userData.hasvalue( "Action" ) )	// pkgGpgCheck report provided an user error action
-	    {
-	      resolveSignatureErrorAction( userData.get( "Action", repo::DownloadResolvableReport::ABORT ) );
-	    }
-	    else if ( userData.haskey( "Action" ) )	// pkgGpgCheck requests the default problem report (wo. details)
-	    {
-	      defaultReportSignatureError( res );
-	    }
-	    else					// no advice from user => usedefaults
-	    {
-	      switch ( res )
-	      {
-		case RpmDb::CHK_OK:		// Signature is OK
-		  break;
+          if ( res != RpmDb::CHK_OK )
+          {
+            if ( userData.hasvalue( "Action" ) )	// pkgGpgCheck report provided an user error action
+            {
+              resolveSignatureErrorAction( userData.get( "Action", repo::DownloadResolvableReport::ABORT ) );
+            }
+            else if ( userData.haskey( "Action" ) )	// pkgGpgCheck requests the default problem report (wo. details)
+            {
+              defaultReportSignatureError( res );
+            }
+            else					// no advice from user => usedefaults
+            {
+              switch ( res )
+              {
+                case RpmDb::CHK_OK:		// Signature is OK
+                  break;
 
-		case RpmDb::CHK_NOKEY:		// Public key is unavailable
-		case RpmDb::CHK_NOTFOUND:	// Signature is unknown type
-		case RpmDb::CHK_FAIL:		// Signature does not verify
-		case RpmDb::CHK_NOTTRUSTED:	// Signature is OK, but key is not trusted
-		case RpmDb::CHK_ERROR:		// File does not exist or can't be opened
-		case RpmDb::CHK_NOSIG:		// File is unsigned
-		default:
-		  // report problem (w. details), throw if to abort, else retry/ignore
-		  defaultReportSignatureError( res, str::Str() << userData.get<RpmDb::CheckPackageDetail>( "CheckPackageDetail" ) );
-		  break;
-	      }
-	    }
-	  }
-	}
+                case RpmDb::CHK_NOKEY:		// Public key is unavailable
+                case RpmDb::CHK_NOTFOUND:	// Signature is unknown type
+                case RpmDb::CHK_FAIL:		// Signature does not verify
+                case RpmDb::CHK_NOTTRUSTED:	// Signature is OK, but key is not trusted
+                case RpmDb::CHK_ERROR:		// File does not exist or can't be opened
+                case RpmDb::CHK_NOSIG:		// File is unsigned
+                default:
+                  // report problem (w. details), throw if to abort, else retry/ignore
+                  defaultReportSignatureError( res, str::Str() << userData.get<RpmDb::CheckPackageDetail>( "CheckPackageDetail" ) );
+                  break;
+              }
+            }
+          }
+        }
       }
 
       typedef target::rpm::RpmDb RpmDb;
@@ -284,26 +284,26 @@ namespace zypp
       /** Actual rpm package signature check. */
       RpmDb::CheckPackageResult packageSigCheck( const Pathname & path_r, bool isMandatory_r, UserData & userData ) const
       {
-	if ( !_target )
-	  _target = getZYpp()->getTarget();
+        if ( !_target )
+          _target = getZYpp()->getTarget();
 
-	RpmDb::CheckPackageResult ret = RpmDb::CHK_ERROR;
-	RpmDb::CheckPackageDetail detail;
-	if ( _target )
-	{
-	  ret = _target->rpmDb().checkPackageSignature( path_r, detail );
-	  if ( ret == RpmDb::CHK_NOSIG && !isMandatory_r )
-	  {
-	    WAR << "Relax CHK_NOSIG: Config says unsigned packages are OK" << endl;
-	    ret = RpmDb::CHK_OK;
-	  }
-	}
-	else
-	  detail.push_back( RpmDb::CheckPackageDetail::value_type( ret, "OOps. Target is not initialized!" ) );
+        RpmDb::CheckPackageResult ret = RpmDb::CHK_ERROR;
+        RpmDb::CheckPackageDetail detail;
+        if ( _target )
+        {
+          ret = _target->rpmDb().checkPackageSignature( path_r, detail );
+          if ( ret == RpmDb::CHK_NOSIG && !isMandatory_r )
+          {
+            WAR << "Relax CHK_NOSIG: Config says unsigned packages are OK" << endl;
+            ret = RpmDb::CHK_OK;
+          }
+        }
+        else
+          detail.push_back( RpmDb::CheckPackageDetail::value_type( ret, "OOps. Target is not initialized!" ) );
 
-	userData.set( "CheckPackageResult", ret );
-	userData.set( "CheckPackageDetail", std::move(detail) );
-	return ret;
+        userData.set( "CheckPackageResult", ret );
+        userData.set( "CheckPackageDetail", std::move(detail) );
+        return ret;
       }
 
       /** React on signature verification error user action.
@@ -311,27 +311,27 @@ namespace zypp
        */
       void resolveSignatureErrorAction( repo::DownloadResolvableReport::Action action_r ) const
       {
-	switch ( action_r )
-	{
-	  case repo::DownloadResolvableReport::IGNORE:
-	    WAR << _package->asUserString() << ": " << "User requested to accept insecure file" << endl;
-	    break;
-	  default:
-	  case repo::DownloadResolvableReport::RETRY:
-	  case repo::DownloadResolvableReport::ABORT:
-	    ZYPP_THROW(RpmSigCheckException(action_r,"Signature verification failed"));
-	    break;
-	}
+        switch ( action_r )
+        {
+          case repo::DownloadResolvableReport::IGNORE:
+            WAR << _package->asUserString() << ": " << "User requested to accept insecure file" << endl;
+            break;
+          default:
+          case repo::DownloadResolvableReport::RETRY:
+          case repo::DownloadResolvableReport::ABORT:
+            ZYPP_THROW(RpmSigCheckException(action_r,"Signature verification failed"));
+            break;
+        }
       }
 
       /** Default signature verification error handling. */
       void defaultReportSignatureError( RpmDb::CheckPackageResult ret, const std::string & detail_r = std::string() ) const
       {
-	str::Str msg;
-	msg << _package->asUserString() << ": " << _("Signature verification failed") << " " << ret;
-	if ( ! detail_r.empty() )
-	  msg << "\n" << detail_r;
-	resolveSignatureErrorAction( report()->problem( _package, repo::DownloadResolvableReport::INVALID, msg.str() ) );
+        str::Str msg;
+        msg << _package->asUserString() << ": " << _("Signature verification failed") << " " << ret;
+        if ( ! detail_r.empty() )
+          msg << "\n" << detail_r;
+        resolveSignatureErrorAction( report()->problem( _package, repo::DownloadResolvableReport::INVALID, msg.str() ) );
       }
       //@}
 
@@ -345,13 +345,13 @@ namespace zypp
 
       ScopedGuard newReport() const
       {
-	_report.reset( new Report );
-	// Use a custom deleter calling _report.reset() when guard goes out of
-	// scope (cast required as reset is overloaded). We want report to end
-	// when leaving providePackage and not wait for *this going out of scope.
-	return shared_ptr<void>( static_cast<void*>(0),
-				 bind( mem_fun_ref( static_cast<void (shared_ptr<Report>::*)()>(&shared_ptr<Report>::reset) ),
-				       ref(_report) ) );
+        _report.reset( new Report );
+        // Use a custom deleter calling _report.reset() when guard goes out of
+        // scope (cast required as reset is overloaded). We want report to end
+        // when leaving providePackage and not wait for *this going out of scope.
+        return shared_ptr<void>( static_cast<void*>(0),
+                                 bind( mem_fun_ref( static_cast<void (shared_ptr<Report>::*)()>(&shared_ptr<Report>::reset) ),
+                                       ref(_report) ) );
       }
 
       mutable bool               _retry;
@@ -369,9 +369,9 @@ namespace zypp
       ManagedFile ret( providePackageFromCache() );
       if ( ! ret->empty() )
       {
-	MIL << "provided Package from cache " << _package << " at " << ret << endl;
-	report()->infoInCache( _package, ret );
-	return ret; // <-- cache hit
+        MIL << "provided Package from cache " << _package << " at " << ret << endl;
+        report()->infoInCache( _package, ret );
+        return ret; // <-- cache hit
       }
 
       // HERE: cache misss, check toplevel cache or do download:
@@ -379,30 +379,30 @@ namespace zypp
 
       // Check toplevel cache
       {
-	RepoManagerOptions topCache;
-	if ( info.packagesPath().dirname() != topCache.repoPackagesCachePath )	// not using toplevel cache
-	{
-	  const OnMediaLocation & loc( _package->location() );
-	  if ( ! loc.checksum().empty() )	// no cache hit without checksum
-	  {
-	    PathInfo pi( topCache.repoPackagesCachePath / info.packagesPath().basename() / info.path() / loc.filename() );
-	    if ( pi.isExist() && loc.checksum() == CheckSum( loc.checksum().type(), std::ifstream( pi.c_str() ) ) )
-	    {
-	      report()->start( _package, pi.path().asFileUrl() );
-	      const Pathname & dest( info.packagesPath() / info.path() / loc.filename() );
-	      if ( filesystem::assert_dir( dest.dirname() ) == 0 && filesystem::hardlinkCopy( pi.path(), dest ) == 0 )
-	      {
-		ret = ManagedFile( dest );
-		if ( ! info.keepPackages() )
-		  ret.setDispose( filesystem::unlink );
+        RepoManagerOptions topCache;
+        if ( info.packagesPath().dirname() != topCache.repoPackagesCachePath )	// not using toplevel cache
+        {
+          const OnMediaLocation & loc( _package->location() );
+          if ( ! loc.checksum().empty() )	// no cache hit without checksum
+          {
+            PathInfo pi( topCache.repoPackagesCachePath / info.packagesPath().basename() / info.path() / loc.filename() );
+            if ( pi.isExist() && loc.checksum() == CheckSum( loc.checksum().type(), std::ifstream( pi.c_str() ) ) )
+            {
+              report()->start( _package, pi.path().asFileUrl() );
+              const Pathname & dest( info.packagesPath() / info.path() / loc.filename() );
+              if ( filesystem::assert_dir( dest.dirname() ) == 0 && filesystem::hardlinkCopy( pi.path(), dest ) == 0 )
+              {
+                ret = ManagedFile( dest );
+                if ( ! info.keepPackages() )
+                  ret.setDispose( filesystem::unlink );
 
-		MIL << "provided Package from toplevel cache " << _package << " at " << ret << endl;
-		report()->finish( _package, repo::DownloadResolvableReport::NO_ERROR, std::string() );
-		return ret; // <-- toplevel cache hit
-	      }
-	    }
-	  }
-	}
+                MIL << "provided Package from toplevel cache " << _package << " at " << ret << endl;
+                report()->finish( _package, repo::DownloadResolvableReport::NO_ERROR, std::string() );
+                return ret; // <-- toplevel cache hit
+              }
+            }
+          }
+        }
       }
 
       // FIXME we only support the first url for now.
@@ -414,11 +414,11 @@ namespace zypp
       try {
       do {
         _retry = false;
-	if ( ! ret->empty() )
-	{
-	  ret.setDispose( filesystem::unlink );
-	  ret.reset();
-	}
+        if ( ! ret->empty() )
+        {
+          ret.setDispose( filesystem::unlink );
+          ret.reset();
+        }
         report()->start( _package, url );
         try
           {
@@ -427,58 +427,58 @@ namespace zypp
         catch ( const UserRequestException & excpt )
           {
             ERR << "Failed to provide Package " << _package << endl;
-	    if ( ! _retry )
-	      ZYPP_RETHROW( excpt );
+            if ( ! _retry )
+              ZYPP_RETHROW( excpt );
           }
-	catch ( const RpmSigCheckException & excpt )
-	  {
-	    ERR << "Failed to provide Package " << _package << endl;
-	    if ( ! _retry )
-	    {
-	      // Signature verification error was already reported by the
-	      // rpmSigFileChecker. Just handle the users action decision:
-	      switch ( excpt.action() )
-	      {
-		case repo::DownloadResolvableReport::RETRY:
-		  _retry = true;
-		  break;
-		case repo::DownloadResolvableReport::IGNORE:
-		  ZYPP_THROW(SkipRequestException("User requested skip of corrupted file"));
-		  break;
-		default:
-		case repo::DownloadResolvableReport::ABORT:
-		  ZYPP_THROW(AbortRequestException("User requested to abort"));
-		  break;
-	      }
-	    }
-	  }
+        catch ( const RpmSigCheckException & excpt )
+          {
+            ERR << "Failed to provide Package " << _package << endl;
+            if ( ! _retry )
+            {
+              // Signature verification error was already reported by the
+              // rpmSigFileChecker. Just handle the users action decision:
+              switch ( excpt.action() )
+              {
+                case repo::DownloadResolvableReport::RETRY:
+                  _retry = true;
+                  break;
+                case repo::DownloadResolvableReport::IGNORE:
+                  ZYPP_THROW(SkipRequestException("User requested skip of corrupted file"));
+                  break;
+                default:
+                case repo::DownloadResolvableReport::ABORT:
+                  ZYPP_THROW(AbortRequestException("User requested to abort"));
+                  break;
+              }
+            }
+          }
         catch ( const FileCheckException & excpt )
           {
-	    ERR << "Failed to provide Package " << _package << endl;
-	    if ( ! _retry )
-	    {
-	      const std::string & package_str = _package->asUserString();
-	      // TranslatorExplanation %s = package being checked for integrity
-	      switch ( report()->problem( _package, repo::DownloadResolvableReport::INVALID, str::form(_("Package %s seems to be corrupted during transfer. Do you want to retry retrieval?"), package_str.c_str() ) ) )
-	      {
-		case repo::DownloadResolvableReport::RETRY:
-		  _retry = true;
-		  break;
-		case repo::DownloadResolvableReport::IGNORE:
-		  ZYPP_THROW(SkipRequestException("User requested skip of corrupted file"));
-		  break;
-		default:
-		case repo::DownloadResolvableReport::ABORT:
-		  ZYPP_THROW(AbortRequestException("User requested to abort"));
-		  break;
-	      }
-	    }
-	  }
+            ERR << "Failed to provide Package " << _package << endl;
+            if ( ! _retry )
+            {
+              const std::string & package_str = _package->asUserString();
+              // TranslatorExplanation %s = package being checked for integrity
+              switch ( report()->problem( _package, repo::DownloadResolvableReport::INVALID, str::form(_("Package %s seems to be corrupted during transfer. Do you want to retry retrieval?"), package_str.c_str() ) ) )
+              {
+                case repo::DownloadResolvableReport::RETRY:
+                  _retry = true;
+                  break;
+                case repo::DownloadResolvableReport::IGNORE:
+                  ZYPP_THROW(SkipRequestException("User requested skip of corrupted file"));
+                  break;
+                default:
+                case repo::DownloadResolvableReport::ABORT:
+                  ZYPP_THROW(AbortRequestException("User requested to abort"));
+                  break;
+              }
+            }
+          }
         catch ( const Exception & excpt )
           {
             ERR << "Failed to provide Package " << _package << endl;
             if ( ! _retry )
-	    {
+            {
                 // Aything else gets reported
                 const std::string & package_str = _package->asUserString();
 
@@ -503,10 +503,10 @@ namespace zypp
           }
       } while ( _retry );
       } catch(...){
-	// bsc#1045735: Be sure no invalid files stay in the cache!
-	if ( ! ret->empty() )
-	  ret.setDispose( filesystem::unlink );
-	throw;
+        // bsc#1045735: Be sure no invalid files stay in the cache!
+        if ( ! ret->empty() )
+          ret.setDispose( filesystem::unlink );
+        throw;
       }
 
       report()->finish( _package, repo::DownloadResolvableReport::NO_ERROR, std::string() );
@@ -523,9 +523,9 @@ namespace zypp
     {
     public:
       RpmPackageProvider( RepoMediaAccess & access_r,
-			  const Package::constPtr & package_r,
-			  const DeltaCandidates & deltas_r,
-			  const PackageProviderPolicy & policy_r )
+                          const Package::constPtr & package_r,
+                          const DeltaCandidates & deltas_r,
+                          const PackageProviderPolicy & policy_r )
       : PackageProviderImpl<Package>( access_r, package_r, policy_r )
       , _deltas( deltas_r )
       {}
@@ -557,21 +557,21 @@ namespace zypp
       // check whether to process patch/delta rpms
       // FIXME we only check the first url for now.
       if ( ZConfig::instance().download_use_deltarpm()
-	&& ( _package->repoInfo().url().schemeIsDownloading() || ZConfig::instance().download_use_deltarpm_always() ) )
+        && ( _package->repoInfo().url().schemeIsDownloading() || ZConfig::instance().download_use_deltarpm_always() ) )
       {
-	std::list<DeltaRpm> deltaRpms;
-	_deltas.deltaRpms( _package ).swap( deltaRpms );
+        std::list<DeltaRpm> deltaRpms;
+        _deltas.deltaRpms( _package ).swap( deltaRpms );
 
-	if ( ! deltaRpms.empty() && queryInstalled() && applydeltarpm::haveApplydeltarpm() )
-	{
-	  for_( it, deltaRpms.begin(), deltaRpms.end())
-	  {
-	    DBG << "tryDelta " << *it << endl;
-	    ManagedFile ret( tryDelta( *it ) );
-	    if ( ! ret->empty() )
-	      return ret;
-	  }
-	}
+        if ( ! deltaRpms.empty() && queryInstalled() && applydeltarpm::haveApplydeltarpm() )
+        {
+          for_( it, deltaRpms.begin(), deltaRpms.end())
+          {
+            DBG << "tryDelta " << *it << endl;
+            ManagedFile ret( tryDelta( *it ) );
+            if ( ! ret->empty() )
+              return ret;
+          }
+        }
       }
 
       // no patch/delta -> provide full package
@@ -629,7 +629,7 @@ namespace zypp
       // full rpm. It won't be different. So let the exceptions escape...
       rpmSigFileChecker( builddest );
       if ( filesystem::hardlinkCopy( builddest, cachedest ) != 0 )
-	ZYPP_THROW( Exception( str::Str() << "Can't hardlink/copy " << builddest << " to " << cachedest ) );
+        ZYPP_THROW( Exception( str::Str() << "Can't hardlink/copy " << builddest << " to " << cachedest ) );
 
       return ManagedFile( cachedest, filesystem::unlink );
     }
@@ -640,52 +640,52 @@ namespace zypp
     namespace factory
     {
       inline PackageProvider::Impl * make( RepoMediaAccess & access_r, const PoolItem & pi_r,
-					   const DeltaCandidates & deltas_r,
-					   const PackageProviderPolicy & policy_r )
+                                           const DeltaCandidates & deltas_r,
+                                           const PackageProviderPolicy & policy_r )
       {
-	if ( pi_r.isKind<Package>() )
-	  return new RpmPackageProvider( access_r, pi_r->asKind<Package>(), deltas_r, policy_r );
-	else if ( pi_r.isKind<SrcPackage>() )
-	  return new PackageProviderImpl<SrcPackage>( access_r, pi_r->asKind<SrcPackage>(), policy_r );
-	else
-	  ZYPP_THROW( Exception( str::Str() << "Don't know how to cache non-package " << pi_r.asUserString() ) );
+        if ( pi_r.isKind<Package>() )
+          return new RpmPackageProvider( access_r, pi_r->asKind<Package>(), deltas_r, policy_r );
+        else if ( pi_r.isKind<SrcPackage>() )
+          return new PackageProviderImpl<SrcPackage>( access_r, pi_r->asKind<SrcPackage>(), policy_r );
+        else
+          ZYPP_THROW( Exception( str::Str() << "Don't know how to cache non-package " << pi_r.asUserString() ) );
       }
 
       inline PackageProvider::Impl * make( RepoMediaAccess & access_r, const PoolItem & pi_r,
-						  const PackageProviderPolicy & policy_r )
+                                                  const PackageProviderPolicy & policy_r )
       {
-	if ( pi_r.isKind<Package>() )
-	  return new PackageProviderImpl<Package>( access_r, pi_r->asKind<Package>(), policy_r );
-	else if ( pi_r.isKind<SrcPackage>() )
-	  return new PackageProviderImpl<SrcPackage>( access_r, pi_r->asKind<SrcPackage>(), policy_r );
-	else
-	  ZYPP_THROW( Exception( str::Str() << "Don't know how to cache non-package " << pi_r.asUserString() ) );
+        if ( pi_r.isKind<Package>() )
+          return new PackageProviderImpl<Package>( access_r, pi_r->asKind<Package>(), policy_r );
+        else if ( pi_r.isKind<SrcPackage>() )
+          return new PackageProviderImpl<SrcPackage>( access_r, pi_r->asKind<SrcPackage>(), policy_r );
+        else
+          ZYPP_THROW( Exception( str::Str() << "Don't know how to cache non-package " << pi_r.asUserString() ) );
       }
 
       inline PackageProvider::Impl * make( RepoMediaAccess & access_r, const Package::constPtr & package_r,
-					   const DeltaCandidates & deltas_r,
-					   const PackageProviderPolicy & policy_r )
+                                           const DeltaCandidates & deltas_r,
+                                           const PackageProviderPolicy & policy_r )
       { return new RpmPackageProvider( access_r, package_r, deltas_r, policy_r ); }
 
     } // namespace factory
     ///////////////////////////////////////////////////////////////////
 
     PackageProvider::PackageProvider( RepoMediaAccess & access_r, const PoolItem & pi_r,
-				      const DeltaCandidates & deltas_r, const PackageProviderPolicy & policy_r )
+                                      const DeltaCandidates & deltas_r, const PackageProviderPolicy & policy_r )
 
     : _pimpl( factory::make( access_r, pi_r, deltas_r, policy_r ) )
     {}
 
     PackageProvider::PackageProvider( RepoMediaAccess & access_r, const PoolItem & pi_r,
-				      const PackageProviderPolicy & policy_r )
+                                      const PackageProviderPolicy & policy_r )
     : _pimpl( factory::make( access_r, pi_r, policy_r ) )
     {}
 
     /* legacy */
     PackageProvider::PackageProvider( RepoMediaAccess & access_r,
-				      const Package::constPtr & package_r,
-				      const DeltaCandidates & deltas_r,
-				      const PackageProviderPolicy & policy_r )
+                                      const Package::constPtr & package_r,
+                                      const DeltaCandidates & deltas_r,
+                                      const PackageProviderPolicy & policy_r )
     : _pimpl( factory::make( access_r, package_r, deltas_r, policy_r ) )
     {}
 

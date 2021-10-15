@@ -89,7 +89,7 @@ namespace zypp
     public:
       /* Rendering options */
       enum OptionBits {
-	USE_COLOR	= (1<<0),	///< use colors
+        USE_COLOR	= (1<<0),	///< use colors
       };
       ZYPP_DECLARE_FLAGS(Options,OptionBits);
 

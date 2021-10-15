@@ -57,9 +57,9 @@ int main( int argc, char * argv[] )
   opt::options_description options( "Options" );
   options.add_options()
       ( "key-file",	opt::value<std::vector<std::string> >(),
-			"ASCII ascii armored public key file")
+                        "ASCII ascii armored public key file")
       ( "root",		opt::value<std::string>()->default_value( "/" ),
-			"Use the rmp database from system rooted at ARG")
+                        "Use the rmp database from system rooted at ARG")
       ( "help,?",	"Produce this help message")
       ;
 
@@ -96,11 +96,11 @@ int main( int argc, char * argv[] )
     for_each_( it, rpmpubkeys )
     {
       if ( last == it->gpgPubkeyVersion() )
-	cout << *it << endl;
+        cout << *it << endl;
       else
       {
-	dumpPubkeyOn( cout, *it );
-	last = it->gpgPubkeyVersion();
+        dumpPubkeyOn( cout, *it );
+        last = it->gpgPubkeyVersion();
       }
     }
     return 0;
@@ -121,17 +121,17 @@ int main( int argc, char * argv[] )
     {
       if ( rpmpub->gpgPubkeyVersion() == pubkeyV )
       {
-	int cmp = rpmpub->gpgPubkeyRelease().compare( pubkeyR );
-	if ( cmp < 0 )
-	  cout << "<<< ";
-	else if ( cmp > 0 )
-	  cout << ">>> ";
-	else
-	{
-	  ++count;
-	  cout << "*** ";
-	}
-	cout << "gpg-pubkey-" << rpmpub->gpgPubkeyVersion() << "-" << rpmpub->gpgPubkeyRelease() << " " << rpmpub->daysToLive() << endl;
+        int cmp = rpmpub->gpgPubkeyRelease().compare( pubkeyR );
+        if ( cmp < 0 )
+          cout << "<<< ";
+        else if ( cmp > 0 )
+          cout << ">>> ";
+        else
+        {
+          ++count;
+          cout << "*** ";
+        }
+        cout << "gpg-pubkey-" << rpmpub->gpgPubkeyVersion() << "-" << rpmpub->gpgPubkeyRelease() << " " << rpmpub->daysToLive() << endl;
       }
     }
     if ( ! count )

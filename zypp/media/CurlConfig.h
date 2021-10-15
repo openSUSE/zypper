@@ -18,7 +18,7 @@ namespace zypp
   public:
     /**
      * Parse a curlrc file and store the result in the \a config structure.
-     * 
+     *
      * \param config   a CurlConfig structure
      * \param filename path to the curlrc file. If empty, ~/.curlrc is used.
      * \return         0 on success, 1 if problem occurs.
@@ -28,7 +28,7 @@ namespace zypp
     /**
      * Stores the \a value of the \a option in the \a config structure or
      * logs an unknown option.
-     * 
+     *
      * \return         0 on success, 1 if problem occurs.
      */
     static int setParameter(CurlConfig & config,

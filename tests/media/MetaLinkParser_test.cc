@@ -12,8 +12,8 @@ BOOST_AUTO_TEST_CASE(parse_metalink)
   Pathname meta3file = TESTS_SRC_DIR "/media/data/openSUSE-11.3-NET-i586.iso.metalink";
   Pathname meta4file = TESTS_SRC_DIR "/media/data/openSUSE-11.3-NET-i586.iso.meta4";
 
-	MetaLinkParser mlp3;
-	MetaLinkParser mlp4;
+        MetaLinkParser mlp3;
+        MetaLinkParser mlp4;
 
   mlp3.parse(meta3file);
   MediaBlockList bl3 = mlp3.getBlockList();

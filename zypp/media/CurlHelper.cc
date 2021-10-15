@@ -21,14 +21,14 @@ namespace zypp
     {
       inline int getZYPP_MEDIA_CURL_IPRESOLVE()
       {
-	int ret = 0;
-	if ( const char * envp = getenv( "ZYPP_MEDIA_CURL_IPRESOLVE" ) )
-	{
-	  WAR << "env set: $ZYPP_MEDIA_CURL_IPRESOLVE='" << envp << "'" << std::endl;
-	  if (      strcmp( envp, "4" ) == 0 )	ret = 4;
-	  else if ( strcmp( envp, "6" ) == 0 )	ret = 6;
-	}
-	  return ret;
+        int ret = 0;
+        if ( const char * envp = getenv( "ZYPP_MEDIA_CURL_IPRESOLVE" ) )
+        {
+          WAR << "env set: $ZYPP_MEDIA_CURL_IPRESOLVE='" << envp << "'" << std::endl;
+          if (      strcmp( envp, "4" ) == 0 )	ret = 4;
+          else if ( strcmp( envp, "6" ) == 0 )	ret = 6;
+        }
+          return ret;
       }
     } //namespace
 
@@ -77,7 +77,7 @@ int log_curl(CURL *curl, curl_infotype info,
     if ( str::startsWith( line, "Authorization:" ) ) {
       std::string::size_type pos { line.find( " ", 15 ) }; // Authorization: <type> <credentials>
       if ( pos == std::string::npos )
-	pos = 15;
+        pos = 15;
       DBG << pfx << " " << line.substr( 0, pos ) << " <credentials removed>" << std::endl;
     }
     else

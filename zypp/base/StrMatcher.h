@@ -109,18 +109,18 @@ namespace zypp
     void set( const Match & rhs )
     {
       if ( rhs.modeval() )
-	_val = rhs._val | flagval(); // also set the rhs mode
-	else
-	  _val |= rhs._val; // just set the flags
+        _val = rhs._val | flagval(); // also set the rhs mode
+        else
+          _val |= rhs._val; // just set the flags
     }
 
     /** Unset all of the \a rhs bits (unsets mode if the same as \a rhs). */
     void unset( const Match & rhs )
     {
       if ( modeval() == rhs.modeval() )
-	_val = flagval() & ~rhs.flagval(); // also unset mode
-	else
-	  _val &= ~rhs.flagval(); // just unset falgs
+        _val = flagval() & ~rhs.flagval(); // also unset mode
+        else
+          _val &= ~rhs.flagval(); // just unset falgs
     }
 
     /** Depending on the value of \a onoff, set or unset flags. */

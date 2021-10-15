@@ -519,7 +519,7 @@ namespace zyppng {
           _emittedFinalSig = true;
           _sigFinished.emit();
         }
-          
+
       }
 
       template <typename State, typename Transition>

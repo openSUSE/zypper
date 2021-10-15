@@ -74,9 +74,9 @@ namespace zypp
 
       if ( architecture == Arch_i686 )
       {
-	// some CPUs report i686 but dont implement cx8 and cmov
-	// check for both flags in /proc/cpuinfo and downgrade
-	// to i586 if either is missing (cf bug #18885)
+        // some CPUs report i686 but dont implement cx8 and cmov
+        // check for both flags in /proc/cpuinfo and downgrade
+        // to i586 if either is missing (cf bug #18885)
         std::ifstream cpuinfo( "/proc/cpuinfo" );
         if ( cpuinfo )
         {
@@ -101,8 +101,8 @@ namespace zypp
       }
       else if ( architecture == Arch_sparc || architecture == Arch_sparc64 )
       {
-	// Check for sun4[vum] to get the real arch. (bug #566291)
-	std::ifstream cpuinfo( "/proc/cpuinfo" );
+        // Check for sun4[vum] to get the real arch. (bug #566291)
+        std::ifstream cpuinfo( "/proc/cpuinfo" );
         if ( cpuinfo )
         {
           for( iostr::EachLine in( cpuinfo ); in; in.next() )
@@ -135,33 +135,33 @@ namespace zypp
       }
       else if ( architecture == Arch_armv7l || architecture == Arch_armv6l )
       {
-	std::ifstream platform( "/etc/rpm/platform" );
-	if (platform)
-	{
-	  for( iostr::EachLine in( platform ); in; in.next() )
-	  {
-	    if ( str::hasPrefix( *in, "armv7hl-" ) )
-	    {
-	      architecture = Arch_armv7hl;
-	      WAR << "/etc/rpm/platform contains armv7hl-: architecture upgraded to '" << architecture << "'" << endl;
-	      break;
-	    }
-	    if ( str::hasPrefix( *in, "armv6hl-" ) )
-	    {
-	      architecture = Arch_armv6hl;
-	      WAR << "/etc/rpm/platform contains armv6hl-: architecture upgraded to '" << architecture << "'" << endl;
-	      break;
-	    }
-	  }
-	}
+        std::ifstream platform( "/etc/rpm/platform" );
+        if (platform)
+        {
+          for( iostr::EachLine in( platform ); in; in.next() )
+          {
+            if ( str::hasPrefix( *in, "armv7hl-" ) )
+            {
+              architecture = Arch_armv7hl;
+              WAR << "/etc/rpm/platform contains armv7hl-: architecture upgraded to '" << architecture << "'" << endl;
+              break;
+            }
+            if ( str::hasPrefix( *in, "armv6hl-" ) )
+            {
+              architecture = Arch_armv6hl;
+              WAR << "/etc/rpm/platform contains armv6hl-: architecture upgraded to '" << architecture << "'" << endl;
+              break;
+            }
+          }
+        }
       }
 #if __GLIBC_PREREQ (2,16)
       else if ( architecture == Arch_ppc64 )
       {
-	const char * platform = (const char *)getauxval( AT_PLATFORM );
-	int powerlvl;
-	if ( platform && sscanf( platform, "power%d", &powerlvl ) == 1 && powerlvl > 6 )
-	  architecture = Arch_ppc64p7;
+        const char * platform = (const char *)getauxval( AT_PLATFORM );
+        int powerlvl;
+        if ( platform && sscanf( platform, "power%d", &powerlvl ) == 1 && powerlvl > 6 )
+          architecture = Arch_ppc64p7;
       }
 #endif
       return architecture;
@@ -233,65 +233,65 @@ namespace zypp
   template<class Tp>
       struct Option
       {
-	typedef Tp value_type;
+        typedef Tp value_type;
 
-	/** No default ctor, explicit initialisation! */
-	Option( value_type initial_r )
-	  : _val( std::move(initial_r) )
-	{}
+        /** No default ctor, explicit initialisation! */
+        Option( value_type initial_r )
+          : _val( std::move(initial_r) )
+        {}
 
-	Option & operator=( value_type newval_r )
-	{ set( std::move(newval_r) ); return *this; }
+        Option & operator=( value_type newval_r )
+        { set( std::move(newval_r) ); return *this; }
 
-	/** Get the value.  */
-	const value_type & get() const
-	{ return _val; }
+        /** Get the value.  */
+        const value_type & get() const
+        { return _val; }
 
         /** Autoconversion to value_type.  */
         operator const value_type &() const
         { return _val; }
 
-	/** Set a new value.  */
-	void set( value_type newval_r )
-	{ _val = std::move(newval_r); }
+        /** Set a new value.  */
+        void set( value_type newval_r )
+        { _val = std::move(newval_r); }
 
-	private:
-	  value_type _val;
+        private:
+          value_type _val;
       };
 
   /** Mutable option with initial value also remembering a config value. */
   template<class Tp>
       struct DefaultOption : public Option<Tp>
       {
-	typedef Tp         value_type;
-	typedef Option<Tp> option_type;
+        typedef Tp         value_type;
+        typedef Option<Tp> option_type;
 
-	explicit DefaultOption( value_type initial_r )
-	: Option<Tp>( initial_r )
-	, _default( std::move(initial_r) )
-	{}
+        explicit DefaultOption( value_type initial_r )
+        : Option<Tp>( initial_r )
+        , _default( std::move(initial_r) )
+        {}
 
-	DefaultOption & operator=( value_type newval_r )
-	{ this->set( std::move(newval_r) ); return *this; }
+        DefaultOption & operator=( value_type newval_r )
+        { this->set( std::move(newval_r) ); return *this; }
 
-	/** Reset value to the current default. */
-	void restoreToDefault()
-	{ this->set( _default.get() ); }
+        /** Reset value to the current default. */
+        void restoreToDefault()
+        { this->set( _default.get() ); }
 
-	/** Reset value to a new default. */
-	void restoreToDefault( value_type newval_r )
-	{ setDefault( std::move(newval_r) ); restoreToDefault(); }
+        /** Reset value to a new default. */
+        void restoreToDefault( value_type newval_r )
+        { setDefault( std::move(newval_r) ); restoreToDefault(); }
 
-	/** Get the current default value. */
-	const value_type & getDefault() const
-	{ return _default.get(); }
+        /** Get the current default value. */
+        const value_type & getDefault() const
+        { return _default.get(); }
 
-	/** Set a new default value. */
-	void setDefault( value_type newval_r )
-	{ _default.set( std::move(newval_r) ); }
+        /** Set a new default value. */
+        void setDefault( value_type newval_r )
+        { _default.set( std::move(newval_r) ); }
 
-	private:
-	  option_type _default;
+        private:
+          option_type _default;
       };
 
   ///////////////////////////////////////////////////////////////////
@@ -323,23 +323,23 @@ namespace zypp
         , download_use_deltarpm   	( true )
         , download_use_deltarpm_always  ( false )
         , download_media_prefer_download( true )
-	, download_mediaMountdir	( "/var/adm/mount" )
+        , download_mediaMountdir	( "/var/adm/mount" )
         , download_max_concurrent_connections( 5 )
         , download_min_download_speed	( 0 )
         , download_max_download_speed	( 0 )
         , download_max_silent_tries	( 5 )
         , download_transfer_timeout	( 180 )
         , commit_downloadMode		( DownloadDefault )
-	, gpgCheck			( true )
-	, repoGpgCheck			( indeterminate )
-	, pkgGpgCheck			( indeterminate )
-	, solver_focus			( ResolverFocus::Default )
+        , gpgCheck			( true )
+        , repoGpgCheck			( indeterminate )
+        , pkgGpgCheck			( indeterminate )
+        , solver_focus			( ResolverFocus::Default )
         , solver_onlyRequires		( false )
         , solver_allowVendorChange	( false )
-	, solver_dupAllowDowngrade	( true )
-	, solver_dupAllowNameChange	( true )
-	, solver_dupAllowArchChange	( true )
-	, solver_dupAllowVendorChange	( true )
+        , solver_dupAllowDowngrade	( true )
+        , solver_dupAllowNameChange	( true )
+        , solver_dupAllowArchChange	( true )
+        , solver_dupAllowVendorChange	( true )
         , solver_cleandepsOnRemove	( false )
         , solver_upgradeTestcasesToKeep	( 2 )
         , solverUpgradeRemoveDroppedPackages( true )
@@ -430,16 +430,16 @@ namespace zypp
                   str::strtonum(value, repo_refresh_delay);
                 }
                 else if ( entry == "repo.refresh.locales" )
-		{
-		  std::vector<std::string> tmp;
-		  str::split( value, back_inserter( tmp ), ", \t" );
+                {
+                  std::vector<std::string> tmp;
+                  str::split( value, back_inserter( tmp ), ", \t" );
 
-		  boost::function<Locale(const std::string &)> transform(
-		    [](const std::string & str_r)->Locale{ return Locale(str_r); }
-		  );
-		  repoRefreshLocales.insert( make_transform_iterator( tmp.begin(), transform ),
-					     make_transform_iterator( tmp.end(), transform ) );
-		}
+                  boost::function<Locale(const std::string &)> transform(
+                    [](const std::string & str_r)->Locale{ return Locale(str_r); }
+                  );
+                  repoRefreshLocales.insert( make_transform_iterator( tmp.begin(), transform ),
+                                             make_transform_iterator( tmp.end(), transform ) );
+                }
                 else if ( entry == "download.use_deltarpm" )
                 {
                   download_use_deltarpm = str::strToBool( value, download_use_deltarpm );
@@ -448,14 +448,14 @@ namespace zypp
                 {
                   download_use_deltarpm_always = str::strToBool( value, download_use_deltarpm_always );
                 }
-		else if ( entry == "download.media_preference" )
+                else if ( entry == "download.media_preference" )
                 {
-		  download_media_prefer_download.restoreToDefault( str::compareCI( value, "volatile" ) != 0 );
+                  download_media_prefer_download.restoreToDefault( str::compareCI( value, "volatile" ) != 0 );
                 }
 
-		else if ( entry == "download.media_mountdir" )
+                else if ( entry == "download.media_mountdir" )
                 {
-		  download_mediaMountdir.restoreToDefault( Pathname(value) );
+                  download_mediaMountdir.restoreToDefault( Pathname(value) );
                 }
 
                 else if ( entry == "download.max_concurrent_connections" )
@@ -477,25 +477,25 @@ namespace zypp
                 else if ( entry == "download.transfer_timeout" )
                 {
                   str::strtonum(value, download_transfer_timeout);
-		  if ( download_transfer_timeout < 0 )		download_transfer_timeout = 0;
-		  else if ( download_transfer_timeout > 3600 )	download_transfer_timeout = 3600;
+                  if ( download_transfer_timeout < 0 )		download_transfer_timeout = 0;
+                  else if ( download_transfer_timeout > 3600 )	download_transfer_timeout = 3600;
                 }
                 else if ( entry == "commit.downloadMode" )
                 {
                   commit_downloadMode.set( deserializeDownloadMode( value ) );
                 }
                 else if ( entry == "gpgcheck" )
-		{
-		  gpgCheck.restoreToDefault( str::strToBool( value, gpgCheck ) );
-		}
-		else if ( entry == "repo_gpgcheck" )
-		{
-		  repoGpgCheck.restoreToDefault( str::strToTriBool( value ) );
-		}
-		else if ( entry == "pkg_gpgcheck" )
-		{
-		  pkgGpgCheck.restoreToDefault( str::strToTriBool( value ) );
-		}
+                {
+                  gpgCheck.restoreToDefault( str::strToBool( value, gpgCheck ) );
+                }
+                else if ( entry == "repo_gpgcheck" )
+                {
+                  repoGpgCheck.restoreToDefault( str::strToTriBool( value ) );
+                }
+                else if ( entry == "pkg_gpgcheck" )
+                {
+                  pkgGpgCheck.restoreToDefault( str::strToTriBool( value ) );
+                }
                 else if ( entry == "vendordir" )
                 {
                   cfg_vendor_path = Pathname(value);
@@ -510,7 +510,7 @@ namespace zypp
                 }
                 else if ( entry == "solver.focus" )
                 {
-		  fromString( value, solver_focus );
+                  fromString( value, solver_focus );
                 }
                 else if ( entry == "solver.onlyRequires" )
                 {
@@ -521,21 +521,21 @@ namespace zypp
                   solver_allowVendorChange.set( str::strToBool( value, solver_allowVendorChange ) );
                 }
                 else if ( entry == "solver.dupAllowDowngrade" )
-		{
-		  solver_dupAllowDowngrade.set( str::strToBool( value, solver_dupAllowDowngrade ) );
-		}
-		else if ( entry == "solver.dupAllowNameChange" )
-		{
-		  solver_dupAllowNameChange.set( str::strToBool( value, solver_dupAllowNameChange ) );
-		}
-		else if ( entry == "solver.dupAllowArchChange" )
-		{
-		  solver_dupAllowArchChange.set( str::strToBool( value, solver_dupAllowArchChange ) );
-		}
-		else if ( entry == "solver.dupAllowVendorChange" )
-		{
-		  solver_dupAllowVendorChange.set( str::strToBool( value, solver_dupAllowVendorChange ) );
-		}
+                {
+                  solver_dupAllowDowngrade.set( str::strToBool( value, solver_dupAllowDowngrade ) );
+                }
+                else if ( entry == "solver.dupAllowNameChange" )
+                {
+                  solver_dupAllowNameChange.set( str::strToBool( value, solver_dupAllowNameChange ) );
+                }
+                else if ( entry == "solver.dupAllowArchChange" )
+                {
+                  solver_dupAllowArchChange.set( str::strToBool( value, solver_dupAllowArchChange ) );
+                }
+                else if ( entry == "solver.dupAllowVendorChange" )
+                {
+                  solver_dupAllowVendorChange.set( str::strToBool( value, solver_dupAllowVendorChange ) );
+                }
                 else if ( entry == "solver.cleandepsOnRemove" )
                 {
                   solver_cleandepsOnRemove.set( str::strToBool( value, solver_cleandepsOnRemove ) );
@@ -558,7 +558,7 @@ namespace zypp
                 }
                 else if ( entry == "multiversion" )
                 {
-		  MultiversionSpec & defSpec( _multiversionMap.getDefaultSpec() );
+                  MultiversionSpec & defSpec( _multiversionMap.getDefaultSpec() );
                   str::splitEscaped( value, std::inserter( defSpec, defSpec.end() ), ", \t" );
                 }
                 else if ( entry == "locksfile.path" )
@@ -603,15 +603,15 @@ namespace zypp
                   credentials_global_file_path = Pathname(value);
                 }
                 else if ( entry == "techpreview.ZYPP_SINGLE_RPMTRANS" )
-		{
-		  DBG << "techpreview.ZYPP_SINGLE_RPMTRANS=" << value << endl;
-		  ::setenv( "ZYPP_SINGLE_RPMTRANS", value.c_str(), 1 );
-		}
+                {
+                  DBG << "techpreview.ZYPP_SINGLE_RPMTRANS=" << value << endl;
+                  ::setenv( "ZYPP_SINGLE_RPMTRANS", value.c_str(), 1 );
+                }
                 else if ( entry == "techpreview.ZYPP_MEDIANETWORK" )
-		{
-		  DBG << "techpreview.ZYPP_MEDIANETWORK=" << value << endl;
-		  ::setenv( "ZYPP_MEDIANETWORK", value.c_str(), 1 );
-		}
+                {
+                  DBG << "techpreview.ZYPP_MEDIANETWORK=" << value << endl;
+                  ::setenv( "ZYPP_MEDIANETWORK", value.c_str(), 1 );
+                }
               }
             }
           }
@@ -731,26 +731,26 @@ namespace zypp
 
       MultiversionSpec & getSpec( Pathname root_r, const Impl & zConfImpl_r )	// from system at root
       {
-	// _specMap[]     - the plain zypp.conf value
-	// _specMap[/]    - combine [] and multiversion.d scan
-	// _specMap[root] - scan root/zypp.conf and root/multiversion.d
+        // _specMap[]     - the plain zypp.conf value
+        // _specMap[/]    - combine [] and multiversion.d scan
+        // _specMap[root] - scan root/zypp.conf and root/multiversion.d
 
-	if ( root_r.empty() )
-	  root_r = "/";
-	bool cacheHit = _specMap.count( root_r );
-	MultiversionSpec & ret( _specMap[root_r] );	// creates new entry on the fly
+        if ( root_r.empty() )
+          root_r = "/";
+        bool cacheHit = _specMap.count( root_r );
+        MultiversionSpec & ret( _specMap[root_r] );	// creates new entry on the fly
 
-	if ( ! cacheHit )
-	{
-	  if ( root_r == "/" )
-	    ret.swap( _specMap[Pathname()] );		// original zypp.conf
-	  else
-	    scanConfAt( root_r, ret, zConfImpl_r );	// scan zypp.conf at root_r
-	  scanDirAt( root_r, ret, zConfImpl_r );	// add multiversion.d at root_r
-	  using zypp::operator<<;
-	  MIL << "MultiversionSpec '" << root_r << "' = " << ret << endl;
-	}
-	return ret;
+        if ( ! cacheHit )
+        {
+          if ( root_r == "/" )
+            ret.swap( _specMap[Pathname()] );		// original zypp.conf
+          else
+            scanConfAt( root_r, ret, zConfImpl_r );	// scan zypp.conf at root_r
+          scanDirAt( root_r, ret, zConfImpl_r );	// add multiversion.d at root_r
+          using zypp::operator<<;
+          MIL << "MultiversionSpec '" << root_r << "' = " << ret << endl;
+        }
+        return ret;
       }
 
       MultiversionSpec & getDefaultSpec()	// Spec from zypp.conf parsing; called before any getSpec
@@ -759,42 +759,42 @@ namespace zypp
     private:
       void scanConfAt( const Pathname root_r, MultiversionSpec & spec_r, const Impl & zConfImpl_r )
       {
-	static const str::regex rx( "^multiversion *= *(.*)" );
-	str::smatch what;
-	iostr::simpleParseFile( InputStream( Pathname::assertprefix( root_r, _autodetectZyppConfPath() ) ),
-				[&]( int num_r, std::string line_r )->bool
-				{
-				  if ( line_r[0] == 'm' && str::regex_match( line_r, what, rx ) )
-				  {
-				    str::splitEscaped( what[1], std::inserter( spec_r, spec_r.end() ), ", \t" );
-				    return false;	// stop after match
-				  }
-				  return true;
-				} );
+        static const str::regex rx( "^multiversion *= *(.*)" );
+        str::smatch what;
+        iostr::simpleParseFile( InputStream( Pathname::assertprefix( root_r, _autodetectZyppConfPath() ) ),
+                                [&]( int num_r, std::string line_r )->bool
+                                {
+                                  if ( line_r[0] == 'm' && str::regex_match( line_r, what, rx ) )
+                                  {
+                                    str::splitEscaped( what[1], std::inserter( spec_r, spec_r.end() ), ", \t" );
+                                    return false;	// stop after match
+                                  }
+                                  return true;
+                                } );
       }
 
       void scanDirAt( const Pathname root_r, MultiversionSpec & spec_r, const Impl & zConfImpl_r )
       {
-	// NOTE:  Actually we'd need to scan and use the root_r! zypp.conf values.
-	Pathname multiversionDir( zConfImpl_r.cfg_multiversion_path );
-	if ( multiversionDir.empty() )
-	  multiversionDir = ( zConfImpl_r.cfg_config_path.empty()
-			    ? Pathname("/etc/zypp")
-			    : zConfImpl_r.cfg_config_path ) / "multiversion.d";
+        // NOTE:  Actually we'd need to scan and use the root_r! zypp.conf values.
+        Pathname multiversionDir( zConfImpl_r.cfg_multiversion_path );
+        if ( multiversionDir.empty() )
+          multiversionDir = ( zConfImpl_r.cfg_config_path.empty()
+                            ? Pathname("/etc/zypp")
+                            : zConfImpl_r.cfg_config_path ) / "multiversion.d";
 
-	filesystem::dirForEach( Pathname::assertprefix( root_r, multiversionDir ),
-				[&spec_r]( const Pathname & dir_r, const char *const & name_r )->bool
-				{
-				  MIL << "Parsing " << dir_r/name_r << endl;
-				  iostr::simpleParseFile( InputStream( dir_r/name_r ),
-							  [&spec_r]( int num_r, std::string line_r )->bool
-							  {
-							    DBG << "  found " << line_r << endl;
-							    spec_r.insert( std::move(line_r) );
-							    return true;
-							  } );
-				  return true;
-				} );
+        filesystem::dirForEach( Pathname::assertprefix( root_r, multiversionDir ),
+                                [&spec_r]( const Pathname & dir_r, const char *const & name_r )->bool
+                                {
+                                  MIL << "Parsing " << dir_r/name_r << endl;
+                                  iostr::simpleParseFile( InputStream( dir_r/name_r ),
+                                                          [&spec_r]( int num_r, std::string line_r )->bool
+                                                          {
+                                                            DBG << "  found " << line_r << endl;
+                                                            spec_r.insert( std::move(line_r) );
+                                                            return true;
+                                                          } );
+                                  return true;
+                                } );
       }
 
     private:
@@ -917,8 +917,8 @@ namespace zypp
     {
       if ( *ch < ' ' && *ch != '\t' )
       {
-	ERR << "New user data string rejectded: char " << (int)*ch << " at position " <<  (ch - str_r.begin()) << endl;
-	return false;
+        ERR << "New user data string rejectded: char " << (int)*ch << " at position " <<  (ch - str_r.begin()) << endl;
+        return false;
       }
     }
     MIL << "Set user data string to '" << str_r << "'" << endl;

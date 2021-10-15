@@ -101,31 +101,31 @@ namespace zypp
 
       const Pathname & sysconfigStoragePath()
       {
-	static const Pathname _val( "/etc/sysconfig/storage" );
-	return _val;
+        static const Pathname _val( "/etc/sysconfig/storage" );
+        return _val;
       }
 
       /////////////////////////////////////////////////////////////////
 
       static void logSat( CPool *, void *data, int type, const char *logString )
       {
-	//                            "1234567890123456789012345678901234567890
-	if ( 0 == strncmp( logString, "job: user installed", 19 ) )
-	  return;
-	if ( 0 == strncmp( logString, "job: multiversion", 17 ) )
-	  return;
-	if ( 0 == strncmp( logString, "  - no rule created", 19 ) )
-	  return;
-	if ( 0 == strncmp( logString, "    next rules: 0 0", 19 ) )
-	  return;
+        //                            "1234567890123456789012345678901234567890
+        if ( 0 == strncmp( logString, "job: user installed", 19 ) )
+          return;
+        if ( 0 == strncmp( logString, "job: multiversion", 17 ) )
+          return;
+        if ( 0 == strncmp( logString, "  - no rule created", 19 ) )
+          return;
+        if ( 0 == strncmp( logString, "    next rules: 0 0", 19 ) )
+          return;
 
-	if ( type & (SOLV_FATAL|SOLV_ERROR) ) {
-	  L_ERR("libsolv") << logString;
-	} else if ( type & SOLV_DEBUG_STATS ) {
-	  L_DBG("libsolv") << logString;
-	} else {
-	  L_MIL("libsolv") << logString;
-	}
+        if ( type & (SOLV_FATAL|SOLV_ERROR) ) {
+          L_ERR("libsolv") << logString;
+        } else if ( type & SOLV_DEBUG_STATS ) {
+          L_DBG("libsolv") << logString;
+        } else {
+          L_MIL("libsolv") << logString;
+        }
       }
 
       detail::IdType PoolImpl::nsCallback( CPool *, void * data, detail::IdType lhs, detail::IdType rhs )
@@ -142,8 +142,8 @@ namespace zypp
         {
           case NAMESPACE_LANGUAGE:
           {
-	    const TrackedLocaleIds & localeIds( reinterpret_cast<PoolImpl*>(data)->trackedLocaleIds() );
-	    return localeIds.contains( IdString(rhs) ) ? RET_systemProperty : RET_unsupported;
+            const TrackedLocaleIds & localeIds( reinterpret_cast<PoolImpl*>(data)->trackedLocaleIds() );
+            return localeIds.contains( IdString(rhs) ) ? RET_systemProperty : RET_unsupported;
           }
           break;
 
@@ -159,7 +159,7 @@ namespace zypp
 
           case NAMESPACE_FILESYSTEM:
           {
-	    const std::set<std::string> & requiredFilesystems( reinterpret_cast<PoolImpl*>(data)->requiredFilesystems() );
+            const std::set<std::string> & requiredFilesystems( reinterpret_cast<PoolImpl*>(data)->requiredFilesystems() );
             return requiredFilesystems.find( IdString(rhs).asString() ) != requiredFilesystems.end() ? RET_systemProperty : RET_unsupported;
           }
           break;
@@ -198,19 +198,19 @@ namespace zypp
         ::pool_setdisttype(_pool, DISTTYPE_RPM );
 
         // initialialize logging
-	if ( env::LIBSOLV_DEBUGMASK() )
-	{
-	  ::pool_setdebugmask(_pool, env::LIBSOLV_DEBUGMASK() );
-	}
-	else
-	{
-	  if ( getenv("ZYPP_LIBSOLV_FULLLOG") || getenv("ZYPP_LIBSAT_FULLLOG") )
-	    ::pool_setdebuglevel( _pool, 3 );
-	  else if ( getenv("ZYPP_FULLLOG") )
-	    ::pool_setdebuglevel( _pool, 2 );
-	  else
-	    ::pool_setdebugmask(_pool, SOLV_DEBUG_JOB|SOLV_DEBUG_STATS );
-	}
+        if ( env::LIBSOLV_DEBUGMASK() )
+        {
+          ::pool_setdebugmask(_pool, env::LIBSOLV_DEBUGMASK() );
+        }
+        else
+        {
+          if ( getenv("ZYPP_LIBSOLV_FULLLOG") || getenv("ZYPP_LIBSAT_FULLLOG") )
+            ::pool_setdebuglevel( _pool, 3 );
+          else if ( getenv("ZYPP_FULLLOG") )
+            ::pool_setdebuglevel( _pool, 2 );
+          else
+            ::pool_setdebugmask(_pool, SOLV_DEBUG_JOB|SOLV_DEBUG_STATS );
+        }
 
         ::pool_setdebugcallback( _pool, logSat, NULL );
 
@@ -218,12 +218,12 @@ namespace zypp
         _pool->nscallback = &nsCallback;
         _pool->nscallbackdata = (void*)this;
 
-	// CAVEAT: We'd like to do it here, but in side the Pool ctor we can not
-	// yet use IdString types. We do in setDirty, when the 1st
-	// _retractedSpec.addProvides( Capability( Solvable::retractedToken.id() ) );
-	// _ptfMasterSpec.addProvides( Capability( Solvable::ptfMasterToken.id() ) );
-	// _ptfPackageSpec.addProvides( Capability( Solvable::ptfPackageToken.id() ) );
-	_retractedSpec.addIdenticalInstalledToo( true ); // retracted indicator is not part of the package!
+        // CAVEAT: We'd like to do it here, but in side the Pool ctor we can not
+        // yet use IdString types. We do in setDirty, when the 1st
+        // _retractedSpec.addProvides( Capability( Solvable::retractedToken.id() ) );
+        // _ptfMasterSpec.addProvides( Capability( Solvable::ptfMasterToken.id() ) );
+        // _ptfPackageSpec.addProvides( Capability( Solvable::ptfPackageToken.id() ) );
+        _retractedSpec.addIdenticalInstalledToo( true ); // retracted indicator is not part of the package!
       }
 
       ///////////////////////////////////////////////////////////////////
@@ -240,12 +240,12 @@ namespace zypp
 
       void PoolImpl::setDirty( const char * a1, const char * a2, const char * a3 )
       {
-	if ( _retractedSpec.empty() ) {
-	  // lazy init IdString types we can not use inside the ctor
-	  _retractedSpec.addProvides( Capability( Solvable::retractedToken.id() ) );
-	  _ptfMasterSpec.addProvides( Capability( Solvable::ptfMasterToken.id() ) );
-	  _ptfPackageSpec.addProvides( Capability( Solvable::ptfPackageToken.id() ) );
-	}
+        if ( _retractedSpec.empty() ) {
+          // lazy init IdString types we can not use inside the ctor
+          _retractedSpec.addProvides( Capability( Solvable::retractedToken.id() ) );
+          _ptfMasterSpec.addProvides( Capability( Solvable::ptfMasterToken.id() ) );
+          _ptfPackageSpec.addProvides( Capability( Solvable::ptfPackageToken.id() ) );
+        }
 
         if ( a1 )
         {
@@ -256,11 +256,11 @@ namespace zypp
         _serial.setDirty();           // pool content change
         _availableLocalesPtr.reset(); // available locales may change
         _multiversionListPtr.reset(); // re-evaluate ZConfig::multiversionSpec.
-	_needrebootSpec.setDirty();   // re-evaluate needrebootSpec
+        _needrebootSpec.setDirty();   // re-evaluate needrebootSpec
 
-	_retractedSpec.setDirty();    // re-evaluate blacklisted spec
-	_ptfMasterSpec.setDirty();    //  --"--
-	_ptfPackageSpec.setDirty();   //  --"--
+        _retractedSpec.setDirty();    // re-evaluate blacklisted spec
+        _ptfMasterSpec.setDirty();    //  --"--
+        _ptfPackageSpec.setDirty();   //  --"--
 
         depSetDirty();	// invaldate dependency/namespace related indices
       }
@@ -290,14 +290,14 @@ namespace zypp
 
       void PoolImpl::prepare() const
       {
-	// additional /etc/sysconfig/storage check:
-	static WatchFile sysconfigFile( sysconfigStoragePath(), WatchFile::NO_INIT );
-	if ( sysconfigFile.hasChanged() )
-	{
-	  _requiredFilesystemsPtr.reset(); // recreated on demand
-	  const_cast<PoolImpl*>(this)->depSetDirty( "/etc/sysconfig/storage change" );
-	}
-	if ( _watcher.remember( _serial ) )
+        // additional /etc/sysconfig/storage check:
+        static WatchFile sysconfigFile( sysconfigStoragePath(), WatchFile::NO_INIT );
+        if ( sysconfigFile.hasChanged() )
+        {
+          _requiredFilesystemsPtr.reset(); // recreated on demand
+          const_cast<PoolImpl*>(this)->depSetDirty( "/etc/sysconfig/storage change" );
+        }
+        if ( _watcher.remember( _serial ) )
         {
           // After repo/solvable add/remove:
           // set pool architecture
@@ -312,8 +312,8 @@ namespace zypp
         }
         if ( ! _pool->languages )
         {
-	  // initial seting
-	  const_cast<PoolImpl*>(this)->setTextLocale( ZConfig::instance().textLocale() );
+          // initial seting
+          const_cast<PoolImpl*>(this)->setTextLocale( ZConfig::instance().textLocale() );
         }
       }
 
@@ -331,17 +331,17 @@ namespace zypp
       void PoolImpl::_deleteRepo( CRepo * repo_r )
       {
         setDirty(__FUNCTION__, repo_r->name );
-	if ( isSystemRepo( repo_r ) )
-	  _autoinstalled.clear();
+        if ( isSystemRepo( repo_r ) )
+          _autoinstalled.clear();
         eraseRepoInfo( repo_r );
         ::repo_free( repo_r, /*resusePoolIDs*/false );
-	// If the last repo is removed clear the pool to actually reuse all IDs.
-	// NOTE: the explicit ::repo_free above asserts all solvables are memset(0)!
-	if ( !_pool->urepos )
-	{
-	  _serialIDs.setDirty();	// Indicate resusePoolIDs - ResPool must also invalidate it's PoolItems
-	  ::pool_freeallrepos( _pool, /*resusePoolIDs*/true );
-	}
+        // If the last repo is removed clear the pool to actually reuse all IDs.
+        // NOTE: the explicit ::repo_free above asserts all solvables are memset(0)!
+        if ( !_pool->urepos )
+        {
+          _serialIDs.setDirty();	// Indicate resusePoolIDs - ResPool must also invalidate it's PoolItems
+          ::pool_freeallrepos( _pool, /*resusePoolIDs*/true );
+        }
       }
 
       int PoolImpl::_addSolv( CRepo * repo_r, FILE * file_r )
@@ -436,8 +436,8 @@ namespace zypp
             dirty = true;
           }
 
- 	  // subpriority is used to e.g. prefer http over dvd iff
-	  // both have same priority.
+          // subpriority is used to e.g. prefer http over dvd iff
+          // both have same priority.
           int mediaPriority( media::MediaPriority( info_r.url() ) );
           if ( repo->subpriority != mediaPriority )
           {
@@ -455,65 +455,65 @@ namespace zypp
 
       void PoolImpl::setTextLocale( const Locale & locale_r )
       {
-	if ( ! locale_r )
-	{
-	  // We need one, so "en" is the last resort
-	  const char *needone[] { "en" };
-	  ::pool_set_languages( _pool, needone, 1 );
-	  return;
-	}
+        if ( ! locale_r )
+        {
+          // We need one, so "en" is the last resort
+          const char *needone[] { "en" };
+          ::pool_set_languages( _pool, needone, 1 );
+          return;
+        }
 
-	std::vector<std::string> fallbacklist;
-	for ( Locale l( locale_r ); l; l = l.fallback() )
-	{
-	  fallbacklist.push_back( l.code() );
-	}
-	dumpRangeLine( MIL << "pool_set_languages: ", fallbacklist.begin(), fallbacklist.end() ) << endl;
+        std::vector<std::string> fallbacklist;
+        for ( Locale l( locale_r ); l; l = l.fallback() )
+        {
+          fallbacklist.push_back( l.code() );
+        }
+        dumpRangeLine( MIL << "pool_set_languages: ", fallbacklist.begin(), fallbacklist.end() ) << endl;
 
-	std::vector<const char *> fallbacklist_cstr;
-	for_( it, fallbacklist.begin(), fallbacklist.end() )
-	{
-	  fallbacklist_cstr.push_back( it->c_str() );
-	}
-	::pool_set_languages( _pool, &fallbacklist_cstr.front(), fallbacklist_cstr.size() );
+        std::vector<const char *> fallbacklist_cstr;
+        for_( it, fallbacklist.begin(), fallbacklist.end() )
+        {
+          fallbacklist_cstr.push_back( it->c_str() );
+        }
+        ::pool_set_languages( _pool, &fallbacklist_cstr.front(), fallbacklist_cstr.size() );
       }
 
       void PoolImpl::initRequestedLocales( const LocaleSet & locales_r )
       {
-	if ( _requestedLocalesTracker.setInitial( locales_r ) )
-	{
-	  localeSetDirty( "initRequestedLocales" );
-	  MIL << "Init RequestedLocales: " << _requestedLocalesTracker << " =" << locales_r << endl;
-	}
+        if ( _requestedLocalesTracker.setInitial( locales_r ) )
+        {
+          localeSetDirty( "initRequestedLocales" );
+          MIL << "Init RequestedLocales: " << _requestedLocalesTracker << " =" << locales_r << endl;
+        }
       }
 
       void PoolImpl::setRequestedLocales( const LocaleSet & locales_r )
       {
-	if ( _requestedLocalesTracker.set( locales_r ) )
-	{
-	  localeSetDirty( "setRequestedLocales" );
-	  MIL << "New RequestedLocales: " << _requestedLocalesTracker << " =" << locales_r << endl;
-	}
+        if ( _requestedLocalesTracker.set( locales_r ) )
+        {
+          localeSetDirty( "setRequestedLocales" );
+          MIL << "New RequestedLocales: " << _requestedLocalesTracker << " =" << locales_r << endl;
+        }
       }
 
       bool PoolImpl::addRequestedLocale( const Locale & locale_r )
       {
-	bool done = _requestedLocalesTracker.add( locale_r );
+        bool done = _requestedLocalesTracker.add( locale_r );
         if ( done )
         {
           localeSetDirty( "addRequestedLocale", locale_r.code().c_str() );
-	  MIL << "New RequestedLocales: " << _requestedLocalesTracker << " +" << locale_r << endl;
+          MIL << "New RequestedLocales: " << _requestedLocalesTracker << " +" << locale_r << endl;
         }
         return done;
       }
 
       bool PoolImpl::eraseRequestedLocale( const Locale & locale_r )
       {
-	bool done = _requestedLocalesTracker.remove( locale_r );
+        bool done = _requestedLocalesTracker.remove( locale_r );
         if ( done )
         {
           localeSetDirty( "addRequestedLocale", locale_r.code().c_str() );
-	  MIL << "New RequestedLocales: " << _requestedLocalesTracker << " -" << locale_r << endl;
+          MIL << "New RequestedLocales: " << _requestedLocalesTracker << " -" << locale_r << endl;
         }
         return done;
       }
@@ -521,42 +521,42 @@ namespace zypp
 
       const PoolImpl::TrackedLocaleIds & PoolImpl::trackedLocaleIds() const
       {
-	if ( ! _trackedLocaleIdsPtr )
-	{
-	  _trackedLocaleIdsPtr.reset( new TrackedLocaleIds );
+        if ( ! _trackedLocaleIdsPtr )
+        {
+          _trackedLocaleIdsPtr.reset( new TrackedLocaleIds );
 
-	  const base::SetTracker<LocaleSet> &	localesTracker( _requestedLocalesTracker );
-	  TrackedLocaleIds &			localeIds( *_trackedLocaleIdsPtr );
+          const base::SetTracker<LocaleSet> &	localesTracker( _requestedLocalesTracker );
+          TrackedLocaleIds &			localeIds( *_trackedLocaleIdsPtr );
 
-	  // Add current locales+fallback except for added ones
-	  for ( Locale lang: localesTracker.current() )
-	  {
-	    if ( localesTracker.wasAdded( lang ) )
-	      continue;
-	    for ( ; lang; lang = lang.fallback() )
-	    { localeIds.current().insert( IdString(lang) ); }
-	  }
+          // Add current locales+fallback except for added ones
+          for ( Locale lang: localesTracker.current() )
+          {
+            if ( localesTracker.wasAdded( lang ) )
+              continue;
+            for ( ; lang; lang = lang.fallback() )
+            { localeIds.current().insert( IdString(lang) ); }
+          }
 
-	  // Add added locales+fallback except they are already in current
-	  for ( Locale lang: localesTracker.added() )
-	  {
-	    for ( ; lang && localeIds.current().insert( IdString(lang) ).second; lang = lang.fallback() )
-	    { localeIds.added().insert( IdString(lang) ); }
-	  }
+          // Add added locales+fallback except they are already in current
+          for ( Locale lang: localesTracker.added() )
+          {
+            for ( ; lang && localeIds.current().insert( IdString(lang) ).second; lang = lang.fallback() )
+            { localeIds.added().insert( IdString(lang) ); }
+          }
 
-	  // Add removed locales+fallback except they are still in current
-	  for ( Locale lang: localesTracker.removed() )
-	  {
-	    for ( ; lang && ! localeIds.current().count( IdString(lang) ); lang = lang.fallback() )
-	    { localeIds.removed().insert( IdString(lang) ); }
-	  }
+          // Add removed locales+fallback except they are still in current
+          for ( Locale lang: localesTracker.removed() )
+          {
+            for ( ; lang && ! localeIds.current().count( IdString(lang) ); lang = lang.fallback() )
+            { localeIds.removed().insert( IdString(lang) ); }
+          }
 
-	  // bsc#1155678: We try to differ between an empty RequestedLocales
-	  // and one containing 'en' (explicit or as fallback). An empty RequestedLocales
-	  // should not even drag in recommended 'en' packages. So we no longer enforce
-	  // 'en' being in the set.
-	}
-	return *_trackedLocaleIdsPtr;
+          // bsc#1155678: We try to differ between an empty RequestedLocales
+          // and one containing 'en' (explicit or as fallback). An empty RequestedLocales
+          // should not even drag in recommended 'en' packages. So we no longer enforce
+          // 'en' being in the set.
+        }
+        return *_trackedLocaleIdsPtr;
       }
 
 
@@ -594,16 +594,16 @@ namespace zypp
       {
         if ( !_availableLocalesPtr )
         {
-	  _availableLocalesPtr.reset( new LocaleSet );
-	  LocaleSet & localeSet( *_availableLocalesPtr );
+          _availableLocalesPtr.reset( new LocaleSet );
+          LocaleSet & localeSet( *_availableLocalesPtr );
 
-	  for ( const Solvable & pi : Pool::instance().solvables() )
-	  {
-	    for ( const Capability & cap : pi.supplements() )
-	    {
-	      _getLocaleDeps( cap, localeSet );
+          for ( const Solvable & pi : Pool::instance().solvables() )
+          {
+            for ( const Capability & cap : pi.supplements() )
+            {
+              _getLocaleDeps( cap, localeSet );
             }
-	  }
+          }
         }
         return *_availableLocalesPtr;
       }
@@ -614,22 +614,22 @@ namespace zypp
       {
         _multiversionListPtr.reset( new MultiversionList );
         MultiversionList & multiversionList( *_multiversionListPtr );
-	
-	MultiversionList::size_type size = 0;
+
+        MultiversionList::size_type size = 0;
         for ( const std::string & spec : ZConfig::instance().multiversionSpec() )
-	{
-	  static const std::string prefix( "provides:" );
-	  bool provides = str::hasPrefix( spec, prefix );
+        {
+          static const std::string prefix( "provides:" );
+          bool provides = str::hasPrefix( spec, prefix );
 
-	  for ( Solvable solv : WhatProvides( Capability( provides ? spec.c_str() + prefix.size() : spec.c_str() ) ) )
-	  {
-	    if ( provides || solv.ident() == spec )
-	      multiversionList.insert( solv );
-	  }
+          for ( Solvable solv : WhatProvides( Capability( provides ? spec.c_str() + prefix.size() : spec.c_str() ) ) )
+          {
+            if ( provides || solv.ident() == spec )
+              multiversionList.insert( solv );
+          }
 
-	  MultiversionList::size_type nsize = multiversionList.size();
-	  MIL << "Multiversion install " << spec << ": " << (nsize-size) << " matches" << endl;
-	  size = nsize;
+          MultiversionList::size_type nsize = multiversionList.size();
+          MIL << "Multiversion install " << spec << ": " << (nsize-size) << " matches" << endl;
+          size = nsize;
         }
       }
 
@@ -638,9 +638,9 @@ namespace zypp
 
       const PoolImpl::MultiversionList & PoolImpl::multiversionList() const
       {
-	if ( ! _multiversionListPtr )
-	  multiversionListInit();
-	return *_multiversionListPtr;
+        if ( ! _multiversionListPtr )
+          multiversionListInit();
+        return *_multiversionListPtr;
       }
 
       bool PoolImpl::isMultiversion( const Solvable & solv_r ) const
@@ -650,14 +650,14 @@ namespace zypp
 
       const std::set<std::string> & PoolImpl::requiredFilesystems() const
       {
-	if ( ! _requiredFilesystemsPtr )
-	{
-	  _requiredFilesystemsPtr.reset( new std::set<std::string> );
-	  std::set<std::string> & requiredFilesystems( *_requiredFilesystemsPtr );
-	  str::split( base::sysconfig::read( sysconfigStoragePath() )["USED_FS_LIST"],
-		      std::inserter( requiredFilesystems, requiredFilesystems.end() ) );
-	}
-	return *_requiredFilesystemsPtr;
+        if ( ! _requiredFilesystemsPtr )
+        {
+          _requiredFilesystemsPtr.reset( new std::set<std::string> );
+          std::set<std::string> & requiredFilesystems( *_requiredFilesystemsPtr );
+          str::split( base::sysconfig::read( sysconfigStoragePath() )["USED_FS_LIST"],
+                      std::inserter( requiredFilesystems, requiredFilesystems.end() ) );
+        }
+        return *_requiredFilesystemsPtr;
       }
 
       /////////////////////////////////////////////////////////////////

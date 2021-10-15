@@ -40,12 +40,12 @@ namespace zypp {
     //	DESCRIPTION :
     //
     MediaNFS::MediaNFS( const Url &      url_r,
-			const Pathname & attach_point_hint_r )
+                        const Pathname & attach_point_hint_r )
       : MediaHandler( url_r, attach_point_hint_r,
-		      "/", // urlpath at attachpoint
-		      false ) // does_download
+                      "/", // urlpath at attachpoint
+                      false ) // does_download
     {
-	MIL << "MediaNFS::MediaNFS(" << url_r << ", " << attach_point_hint_r << ")" << endl;
+        MIL << "MediaNFS::MediaNFS(" << url_r << ", " << attach_point_hint_r << ")" << endl;
     }
 
     ///////////////////////////////////////////////////////////////////
@@ -59,9 +59,9 @@ namespace zypp {
     void MediaNFS::attachTo(bool next)
     {
       if(_url.getHost().empty())
-    	ZYPP_THROW(MediaBadUrlEmptyHostException(_url));
+        ZYPP_THROW(MediaBadUrlEmptyHostException(_url));
       if(next)
-	ZYPP_THROW(MediaNotSupportedException(_url));
+        ZYPP_THROW(MediaNotSupportedException(_url));
 
       std::string path = _url.getHost();
       path += ':';
@@ -71,24 +71,24 @@ namespace zypp {
       AttachedMedia  ret( findAttachedMedia( media));
 
       if( ret.mediaSource &&
-	  ret.attachPoint &&
-	  !ret.attachPoint->empty())
+          ret.attachPoint &&
+          !ret.attachPoint->empty())
       {
-	DBG << "Using a shared media "
-	    << ret.mediaSource->name
-	    << " attached on "
-	    << ret.attachPoint->path
-	    << endl;
+        DBG << "Using a shared media "
+            << ret.mediaSource->name
+            << " attached on "
+            << ret.attachPoint->path
+            << endl;
 
-	removeAttachPoint();
-	setAttachPoint(ret.attachPoint);
-	setMediaSource(ret.mediaSource);
-	return;
+        removeAttachPoint();
+        setAttachPoint(ret.attachPoint);
+        setMediaSource(ret.mediaSource);
+        return;
       }
 
       if( !isUseableAttachPoint( attachPoint() ) )
       {
-	setAttachPoint( createAttachPoint(), true );
+        setAttachPoint( createAttachPoint(), true );
       }
       std::string mountpoint( attachPoint().asString() );
 
@@ -101,7 +101,7 @@ namespace zypp {
       std::string options = _url.getQueryParam("mountoptions");
       if(options.empty())
       {
-    	options="ro";
+        options="ro";
       }
 
       std::vector<std::string> optionList;
@@ -114,7 +114,7 @@ namespace zypp {
         if ( *it == "lock" || *it == "nolock" ) contains_lock = true;
         else if ( *it == "soft") contains_soft = true;
         else if ( *it == "hard") contains_hard = true;
-	else if ( it->find("timeo") != std::string::npos ) contains_timeo = true;
+        else if ( it->find("timeo") != std::string::npos ) contains_timeo = true;
       }
 
       if ( !(contains_lock && contains_soft) ) {
@@ -132,7 +132,7 @@ namespace zypp {
         if ( !(contains_soft || contains_hard) ) {
           optionList.push_back( "soft" );
           if ( !contains_timeo ) {
-	    std::ostringstream s;
+            std::ostringstream s;
             s << "timeo=" << NFS_MOUNT_TIMEOUT;
             optionList.push_back( s.str() );
           }
@@ -167,7 +167,7 @@ namespace zypp {
         }
         ZYPP_THROW(MediaMountException(
           "Unable to verify that the media was mounted",
-	  path, mountpoint
+          path, mountpoint
         ));
       }
     }
@@ -232,7 +232,7 @@ namespace zypp {
     //	DESCRIPTION : Asserted that media is attached and retlist is empty.
     //
     void MediaNFS::getDirInfo( std::list<std::string> & retlist,
-    			      const Pathname & dirname, bool dots ) const
+                              const Pathname & dirname, bool dots ) const
     {
       MediaHandler::getDirInfo( retlist, dirname, dots );
     }
@@ -246,7 +246,7 @@ namespace zypp {
     //	DESCRIPTION : Asserted that media is attached and retlist is empty.
     //
     void MediaNFS::getDirInfo( filesystem::DirContent & retlist,
-    			   const Pathname & dirname, bool dots ) const
+                           const Pathname & dirname, bool dots ) const
     {
       MediaHandler::getDirInfo( retlist, dirname, dots );
     }

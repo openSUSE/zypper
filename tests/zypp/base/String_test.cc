@@ -34,18 +34,18 @@ BOOST_AUTO_TEST_CASE(glob2rx)
     {
       s[0] = x[1] = *ch;
       if ( *ch == '?' )
-	BOOST_CHECK_EQUAL( str::rxEscapeGlob( s ), "." );
+        BOOST_CHECK_EQUAL( str::rxEscapeGlob( s ), "." );
       else if ( *ch == '*' )
-	BOOST_CHECK_EQUAL( str::rxEscapeGlob( s ), ".*" );
+        BOOST_CHECK_EQUAL( str::rxEscapeGlob( s ), ".*" );
       else if ( *ch == '[' )
-	BOOST_CHECK_EQUAL( str::rxEscapeGlob( s ), "\\[" );	// no closing ] so it is literal
-	else if ( *ch == '\\' )
-	  BOOST_CHECK_EQUAL( str::rxEscapeGlob( s ), "\\" );	// actually an input error as "\" is not a valid GLOB
-	  else
-	  {
-	    s[0] = x[1] = *ch;
-	    BOOST_CHECK_EQUAL( str::rxEscapeGlob( s ), x );
-	  }
+        BOOST_CHECK_EQUAL( str::rxEscapeGlob( s ), "\\[" );	// no closing ] so it is literal
+        else if ( *ch == '\\' )
+          BOOST_CHECK_EQUAL( str::rxEscapeGlob( s ), "\\" );	// actually an input error as "\" is not a valid GLOB
+          else
+          {
+            s[0] = x[1] = *ch;
+            BOOST_CHECK_EQUAL( str::rxEscapeGlob( s ), x );
+          }
     }
     std::string a( str::rxEscapeStr( RXspecial ) );	// all rx/glob special chars are literally (\-escaped)
     BOOST_CHECK_EQUAL( str::rxEscapeGlob( a ), a );	// nothing more to escape.
@@ -387,13 +387,13 @@ BOOST_AUTO_TEST_CASE(hexencode_hexdecode)
 
       if ( *d1 <= 'F' &&  *d2 <= 'F' )
       {
-	BOOST_CHECK_EQUAL( u, l );		// no matter if upper or lower case hexdigit
-	BOOST_CHECK_EQUAL( u.size(), 1 );	// size 1 == decoded
+        BOOST_CHECK_EQUAL( u, l );		// no matter if upper or lower case hexdigit
+        BOOST_CHECK_EQUAL( u.size(), 1 );	// size 1 == decoded
       }
       else
       {
-	BOOST_CHECK_EQUAL( u, eu );		// no hexdigits remain unchanged
-	BOOST_CHECK_EQUAL( l, el );
+        BOOST_CHECK_EQUAL( u, eu );		// no hexdigits remain unchanged
+        BOOST_CHECK_EQUAL( l, el );
      }
     }
 }

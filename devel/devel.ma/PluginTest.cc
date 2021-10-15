@@ -120,20 +120,20 @@ try {
     Pathname script( ZConfig::instance().pluginsPath()/"system/spacewalkx" );
     if ( PathInfo( script ).isX() )
       try {
-	PluginScript spacewalk( script );
-	spacewalk.open();
+        PluginScript spacewalk( script );
+        spacewalk.open();
 
-	PluginFrame notify( "PACKAGESETCHANGED" );
-	spacewalk.send( notify );
+        PluginFrame notify( "PACKAGESETCHANGED" );
+        spacewalk.send( notify );
 
-	PluginFrame ret( spacewalk.receive() );
-	MIL << ret << endl;
-	if ( ret.command() == "ERROR" )
-	  ret.writeTo( WAR ) << endl;
+        PluginFrame ret( spacewalk.receive() );
+        MIL << ret << endl;
+        if ( ret.command() == "ERROR" )
+          ret.writeTo( WAR ) << endl;
       }
       catch ( const Exception & excpt )
       {
-	WAR << excpt.asUserHistory() << endl;
+        WAR << excpt.asUserHistory() << endl;
       }
   }
 
@@ -146,20 +146,20 @@ try {
     for ( unsigned i = 1; true; ++i )
     {
       try {
-	MIL << "Receiving " << i << endl;
-	PluginFrame ret( receive() );
+        MIL << "Receiving " << i << endl;
+        PluginFrame ret( receive() );
       }
       catch ( const PluginScriptTimeout & excpt )
       {
-	ERR << excpt << endl;
-	scr.send( f );
+        ERR << excpt << endl;
+        scr.send( f );
       }
       catch ( const PluginScriptDiedUnexpectedly & excpt )
       {
-	ERR << excpt << endl;
-	ERR << scr << endl;
-	scr.close();
-	break;
+        ERR << excpt << endl;
+        ERR << scr << endl;
+        scr.close();
+        break;
       }
     }
   }
@@ -171,20 +171,20 @@ try {
     for ( unsigned i = 1; true; ++i )
     {
       try {
-	MIL << "Sending " << i << endl;
-	send( f );
+        MIL << "Sending " << i << endl;
+        send( f );
       }
       catch ( const PluginScriptTimeout & excpt )
       {
-	ERR << excpt << endl;
-	::kill( scr.getPid(), SIGKILL);
+        ERR << excpt << endl;
+        ::kill( scr.getPid(), SIGKILL);
       }
       catch ( const PluginScriptDiedUnexpectedly & excpt )
       {
-	ERR << excpt << endl;
-	ERR << scr << endl;
-	scr.close();
-	break;
+        ERR << excpt << endl;
+        ERR << scr << endl;
+        scr.close();
+        break;
       }
     }
   }

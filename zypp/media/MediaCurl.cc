@@ -66,8 +66,8 @@ Pathname MediaCurl::_cookieFile = "/var/lib/YaST2/cookies";
 MediaCurl::MediaCurl( const Url &      url_r,
                       const Pathname & attach_point_hint_r )
     : MediaNetworkCommonHandler( url_r, attach_point_hint_r,
-				 "/", // urlpath at attachpoint
-				 true ), // does_download
+                                 "/", // urlpath at attachpoint
+                                 true ), // does_download
       _curl( NULL ),
       _customHeaders(0L)
 {
@@ -295,7 +295,7 @@ void MediaCurl::setupEasy()
     if( auth != CURLAUTH_NONE)
     {
       DBG << "Enabling HTTP authentication methods: " << use_auth
-	  << " (CURLOPT_HTTPAUTH=" << auth << ")" << std::endl;
+          << " (CURLOPT_HTTPAUTH=" << auth << ")" << std::endl;
       SET_OPTION(CURLOPT_HTTPAUTH, auth);
     }
   }
@@ -319,11 +319,11 @@ void MediaCurl::setupEasy()
       CurlConfig curlconf;
       CurlConfig::parseConfig(curlconf); // parse ~/.curlrc
       if ( curlconf.proxyuserpwd.empty() )
-	DBG << "Proxy: ~/.curlrc does not contain the proxy-user option" << endl;
+        DBG << "Proxy: ~/.curlrc does not contain the proxy-user option" << endl;
       else
       {
-	proxyuserpwd = curlconf.proxyuserpwd;
-	DBG << "Proxy: using proxy-user from ~/.curlrc" << endl;
+        proxyuserpwd = curlconf.proxyuserpwd;
+        DBG << "Proxy: using proxy-user from ~/.curlrc" << endl;
       }
     }
     else
@@ -520,9 +520,9 @@ void MediaCurl::getFileCopy( const OnMediaLocation & srcFile , const Pathname & 
     {
       media::DownloadProgressReport::Error reason = media::DownloadProgressReport::ERROR;
       if( typeid(excpt_r) == typeid( media::MediaFileNotFoundException )  ||
-	  typeid(excpt_r) == typeid( media::MediaNotAFileException ) )
+          typeid(excpt_r) == typeid( media::MediaNotAFileException ) )
       {
-	reason = media::DownloadProgressReport::NOT_FOUND;
+        reason = media::DownloadProgressReport::NOT_FOUND;
       }
       report->finish(fileurl, reason, excpt_r.asUserHistory());
       ZYPP_RETHROW(excpt_r);
@@ -583,14 +583,14 @@ void MediaCurl::evaluateCurlCode(const Pathname &filename,
       switch ( code )
       {
       case CURLE_UNSUPPORTED_PROTOCOL:
-	  err = " Unsupported protocol";
-	  if ( !_lastRedirect.empty() )
-	  {
-	    err += " or redirect (";
-	    err += _lastRedirect;
-	    err += ")";
-	  }
-	  break;
+          err = " Unsupported protocol";
+          if ( !_lastRedirect.empty() )
+          {
+            err += " or redirect (";
+            err += _lastRedirect;
+            err += ")";
+          }
+          break;
       case CURLE_URL_MALFORMAT:
       case CURLE_URL_MALFORMAT_USER:
           err = " Bad URL";
@@ -630,9 +630,9 @@ void MediaCurl::evaluateCurlCode(const Pathname &filename,
           case 403:
           {
             std::string msg403;
-	    if ( url.getHost().find(".suse.com") != std::string::npos )
-	      msg403 = _("Visit the SUSE Customer Center to check whether your registration is valid and has not expired.");
-	    else if (url.asString().find("novell.com") != std::string::npos)
+            if ( url.getHost().find(".suse.com") != std::string::npos )
+              msg403 = _("Visit the SUSE Customer Center to check whether your registration is valid and has not expired.");
+            else if (url.asString().find("novell.com") != std::string::npos)
               msg403 = _("Visit the Novell Customer Center to check whether your registration is valid and has not expired.");
             ZYPP_THROW(MediaForbiddenException(url, msg403));
           }
@@ -676,8 +676,8 @@ void MediaCurl::evaluateCurlCode(const Pathname &filename,
         break;
       case CURLE_PARTIAL_FILE:
       case CURLE_OPERATION_TIMEDOUT:
-	timeout_reached	= true; // fall though to TimeoutException
-	// fall though...
+        timeout_reached	= true; // fall though to TimeoutException
+        // fall though...
       case CURLE_ABORTED_BY_CALLBACK:
          if( timeout_reached )
         {
@@ -867,8 +867,8 @@ bool MediaCurl::detectDirIndex() const
   bool      not_a_file = false;
   char     *ptr = NULL;
   CURLcode  ret = curl_easy_getinfo( _curl,
-				     CURLINFO_EFFECTIVE_URL,
-				     &ptr);
+                                     CURLINFO_EFFECTIVE_URL,
+                                     &ptr);
   if ( ret == CURLE_OK && ptr != NULL)
   {
     try
@@ -877,11 +877,11 @@ bool MediaCurl::detectDirIndex() const
       std::string path( eurl.getPathName());
       if( !path.empty() && path != "/" && *path.rbegin() == '/')
       {
-	DBG << "Effective url ("
-	    << eurl
-	    << ") seems to provide the index of a directory"
-	    << endl;
-	not_a_file = true;
+        DBG << "Effective url ("
+            << eurl
+            << ") seems to provide the index of a directory"
+            << endl;
+        not_a_file = true;
       }
     }
     catch( ... )
@@ -908,23 +908,23 @@ void MediaCurl::doGetFileCopy( const OnMediaLocation &srcFile , const Pathname &
       AutoFREE<char> buf { ::strdup( (*destNew).c_str() ) };
       if( ! buf )
       {
-	ERR << "out of memory for temp file name" << endl;
-	ZYPP_THROW(MediaSystemException(getFileUrl(srcFile.filename()), "out of memory for temp file name"));
+        ERR << "out of memory for temp file name" << endl;
+        ZYPP_THROW(MediaSystemException(getFileUrl(srcFile.filename()), "out of memory for temp file name"));
       }
 
       AutoFD tmp_fd { ::mkostemp( buf, O_CLOEXEC ) };
       if( tmp_fd == -1 )
       {
-	ERR << "mkstemp failed for file '" << destNew << "'" << endl;
-	ZYPP_THROW(MediaWriteException(destNew));
+        ERR << "mkstemp failed for file '" << destNew << "'" << endl;
+        ZYPP_THROW(MediaWriteException(destNew));
       }
       destNew = ManagedFile( (*buf), filesystem::unlink );
 
       file = ::fdopen( tmp_fd, "we" );
       if ( ! file )
       {
-	ERR << "fopen failed for file '" << destNew << "'" << endl;
-	ZYPP_THROW(MediaWriteException(destNew));
+        ERR << "fopen failed for file '" << destNew << "'" << endl;
+        ZYPP_THROW(MediaWriteException(destNew));
       }
       tmp_fd.resetDispose();	// don't close it here! ::fdopen moved ownership to file
     }
@@ -1062,14 +1062,14 @@ void MediaCurl::doGetFileCopyFile( const OnMediaLocation & srcFile, const Pathna
       long httpReturnCode = 33;
       if ( curl_easy_getinfo( _curl, CURLINFO_RESPONSE_CODE, &httpReturnCode ) == CURLE_OK && httpReturnCode == 200 )
       {
-	long conditionUnmet = 33;
-	if ( curl_easy_getinfo( _curl, CURLINFO_CONDITION_UNMET, &conditionUnmet ) == CURLE_OK && conditionUnmet )
-	{
-	  WAR << "TIMECONDITION unmet - retry without." << endl;
-	  curl_easy_setopt(_curl, CURLOPT_TIMECONDITION, CURL_TIMECOND_NONE);
-	  curl_easy_setopt(_curl, CURLOPT_TIMEVALUE, 0L);
-	  ret = curl_easy_perform( _curl );
-	}
+        long conditionUnmet = 33;
+        if ( curl_easy_getinfo( _curl, CURLINFO_CONDITION_UNMET, &conditionUnmet ) == CURLE_OK && conditionUnmet )
+        {
+          WAR << "TIMECONDITION unmet - retry without." << endl;
+          curl_easy_setopt(_curl, CURLOPT_TIMECONDITION, CURL_TIMECOND_NONE);
+          curl_easy_setopt(_curl, CURLOPT_TIMEVALUE, 0L);
+          ret = curl_easy_perform( _curl );
+        }
       }
     }
 #endif
@@ -1103,7 +1103,7 @@ void MediaCurl::doGetFileCopyFile( const OnMediaLocation & srcFile, const Pathna
 #if DETECT_DIR_INDEX
     if (!ret && detectDirIndex())
       {
-	ZYPP_THROW(MediaNotAFileException(_url, filename));
+        ZYPP_THROW(MediaNotAFileException(_url, filename));
       }
 #endif // DETECT_DIR_INDEX
 }

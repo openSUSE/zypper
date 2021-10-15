@@ -89,7 +89,7 @@ namespace zypp
     int compare( const CompatEntry & rhs ) const
     {
       if ( _idBit.value() != rhs. _idBit.value() )
-	return( _idBit.value() < rhs. _idBit.value() ? -1 : 1 );
+        return( _idBit.value() < rhs. _idBit.value() ? -1 : 1 );
       return _archStr.compare( rhs._archStr ); // Id 1: non builtin
     }
 
@@ -300,7 +300,7 @@ namespace zypp
         // Define the CompatibleWith relation:
         //
         // NOTE: Order of definition is significant! (Arch::compare)
-	//       - define compatible (less) architectures first!
+        //       - define compatible (less) architectures first!
         //
         defCompatibleWith( a_i386(),		a_noarch() );
         defCompatibleWith( a_i486(),		a_noarch(),a_i386() );
@@ -333,10 +333,10 @@ namespace zypp
         defCompatibleWith( a_sparc(),		a_noarch() );
         defCompatibleWith( a_sparcv8(),		a_noarch(),a_sparc() );
         defCompatibleWith( a_sparcv9(),		a_noarch(),a_sparc(),a_sparcv8() );
-	defCompatibleWith( a_sparcv9v(),	a_noarch(),a_sparc(),a_sparcv8(),a_sparcv9() );
-	//
+        defCompatibleWith( a_sparcv9v(),	a_noarch(),a_sparc(),a_sparcv8(),a_sparcv9() );
+        //
         defCompatibleWith( a_sparc64(),		a_noarch(),a_sparc(),a_sparcv8(),a_sparcv9() );
-	defCompatibleWith( a_sparc64v(),	a_noarch(),a_sparc(),a_sparcv8(),a_sparcv9(),a_sparcv9v(),a_sparc64() );
+        defCompatibleWith( a_sparc64v(),	a_noarch(),a_sparc(),a_sparcv8(),a_sparcv9(),a_sparcv9v(),a_sparc64() );
         //
         defCompatibleWith( a_armv3l(),		a_noarch() );
         defCompatibleWith( a_armv4l(),		a_noarch(),a_armv3l() );
@@ -351,10 +351,10 @@ namespace zypp
         defCompatibleWith( a_armv6hl(),		a_noarch() );
         defCompatibleWith( a_armv7hl(),		a_noarch(),a_armv6hl() );
         defCompatibleWith( a_armv7hnl(),	a_noarch(),a_armv7hl(),a_armv6hl() );
-	/*legacy: rpm uses v7hnl */
-	defCompatibleWith( a_armv7nhl(),	a_noarch(),a_armv7hnl(),a_armv7hl(),a_armv6hl() );
+        /*legacy: rpm uses v7hnl */
+        defCompatibleWith( a_armv7nhl(),	a_noarch(),a_armv7hnl(),a_armv7hl(),a_armv6hl() );
 
-	/*?*/defCompatibleWith( a_armv7thl(),	a_noarch(),a_armv7hl() );
+        /*?*/defCompatibleWith( a_armv7thl(),	a_noarch(),a_armv7hl() );
         /*?*/defCompatibleWith( a_armv7tnhl(),	a_noarch(),a_armv7hl(),a_armv7nhl(),a_armv7thl() );
 
         defCompatibleWith( a_aarch64(),		a_noarch() );
@@ -368,10 +368,10 @@ namespace zypp
 
         defCompatibleWith( a_m68k(),		a_noarch() );
 
-	defCompatibleWith( a_mips(),		a_noarch() );
-	defCompatibleWith( a_mipsel(),		a_noarch() );
-	defCompatibleWith( a_mips64(),		a_noarch() );
-	defCompatibleWith( a_mips64el(),	a_noarch() );
+        defCompatibleWith( a_mips(),		a_noarch() );
+        defCompatibleWith( a_mipsel(),		a_noarch() );
+        defCompatibleWith( a_mips64(),		a_noarch() );
+        defCompatibleWith( a_mips64el(),	a_noarch() );
         //
         ///////////////////////////////////////////////////////////////////
         // dumpOn( USR ) << endl;

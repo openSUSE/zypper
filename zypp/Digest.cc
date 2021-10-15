@@ -45,14 +45,14 @@ namespace zypp {
 
       if(argc > 1 && std::string(argv[argpos]) == "--openssl")
       {
-    	openssl = true;
-    	++argpos;
+        openssl = true;
+        ++argpos;
       }
 
       if(argc - argpos < 2)
       {
-    	cerr << "Usage: " << argv[0] << " <DIGESTNAME> <FILE>" << endl;
-    	return 1;
+        cerr << "Usage: " << argv[0] << " <DIGESTNAME> <FILE>" << endl;
+        return 1;
       }
 
       const char* digestname = argv[argpos++];
@@ -63,9 +63,9 @@ namespace zypp {
       std::string digest = Digest::digest(digestname, file);
 
       if(openssl)
-    	cout << digestname << "(" << fn << ")= " << digest << endl;
+        cout << digestname << "(" << fn << ")= " << digest << endl;
       else
-    	cout << digest << "  " << fn << endl;
+        cout << digest << "  " << fn << endl;
 
       return 0;
     }

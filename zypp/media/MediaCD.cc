@@ -64,69 +64,69 @@ namespace zypp
       //////////////////////////////////////////////////////////////////
       DeviceList systemDetectDevices( bool supportingDVD_r )
       {
-	DeviceList detected;
+        DeviceList detected;
 
 #ifdef HAVE_UDEV
-	// http://www.kernel.org/pub/linux/utils/kernel/hotplug/libudev/index.html
-	zypp::AutoDispose<struct udev *> udev( ::udev_new(), ::udev_unref );
-	if ( ! udev )
-	{
-	  ERR << "Can't create udev context." << endl;
-	  return DeviceList();
-	}
+        // http://www.kernel.org/pub/linux/utils/kernel/hotplug/libudev/index.html
+        zypp::AutoDispose<struct udev *> udev( ::udev_new(), ::udev_unref );
+        if ( ! udev )
+        {
+          ERR << "Can't create udev context." << endl;
+          return DeviceList();
+        }
 
-	zypp::AutoDispose<struct udev_enumerate *> enumerate( ::udev_enumerate_new(udev), ::udev_enumerate_unref );
-	if ( ! enumerate )
-	{
-	  ERR << "Can't create udev list entry." << endl;
-	  return DeviceList();
-	}
+        zypp::AutoDispose<struct udev_enumerate *> enumerate( ::udev_enumerate_new(udev), ::udev_enumerate_unref );
+        if ( ! enumerate )
+        {
+          ERR << "Can't create udev list entry." << endl;
+          return DeviceList();
+        }
 
-	::udev_enumerate_add_match_subsystem( enumerate, "block" );
-	::udev_enumerate_add_match_property( enumerate, "ID_CDROM", "1" );
-	::udev_enumerate_scan_devices( enumerate );
+        ::udev_enumerate_add_match_subsystem( enumerate, "block" );
+        ::udev_enumerate_add_match_property( enumerate, "ID_CDROM", "1" );
+        ::udev_enumerate_scan_devices( enumerate );
 
-	struct udev_list_entry * entry = 0;
-	udev_list_entry_foreach( entry, ::udev_enumerate_get_list_entry( enumerate ) )
-	{
-	  zypp::AutoDispose<struct udev_device *> device( ::udev_device_new_from_syspath( ::udev_enumerate_get_udev( enumerate ),
-											  ::udev_list_entry_get_name( entry ) ),
-							  ::udev_device_unref );
-	  if ( ! device )
-	  {
-	    ERR << "Can't create udev device." << endl;
-	    continue;
-	  }
+        struct udev_list_entry * entry = 0;
+        udev_list_entry_foreach( entry, ::udev_enumerate_get_list_entry( enumerate ) )
+        {
+          zypp::AutoDispose<struct udev_device *> device( ::udev_device_new_from_syspath( ::udev_enumerate_get_udev( enumerate ),
+                                                                                          ::udev_list_entry_get_name( entry ) ),
+                                                          ::udev_device_unref );
+          if ( ! device )
+          {
+            ERR << "Can't create udev device." << endl;
+            continue;
+          }
 
-	  if ( supportingDVD_r && ! ::udev_device_get_property_value( device, "ID_CDROM_DVD" ) )
-	  {
-	    continue;	// looking for dvd only
-	  }
+          if ( supportingDVD_r && ! ::udev_device_get_property_value( device, "ID_CDROM_DVD" ) )
+          {
+            continue;	// looking for dvd only
+          }
 
-	  const char * devnodePtr( ::udev_device_get_devnode( device ) );
-	  if ( ! devnodePtr )
-	  {
-	    ERR << "Got NULL devicenode." << endl;
-	    continue;
-	  }
+          const char * devnodePtr( ::udev_device_get_devnode( device ) );
+          if ( ! devnodePtr )
+          {
+            ERR << "Got NULL devicenode." << endl;
+            continue;
+          }
 
-	  // In case we need it someday:
-	  //const char * mountpath = ::udev_device_get_property_value( device, "FSTAB_DIR" );
+          // In case we need it someday:
+          //const char * mountpath = ::udev_device_get_property_value( device, "FSTAB_DIR" );
 
-	  PathInfo devnode( devnodePtr );
-	  if ( devnode.isBlk() )
-	  {
-	    MediaSource media( "cdrom", devnode.path().asString(), devnode.devMajor(), devnode.devMinor() );
-	    DBG << "Found (udev): " << media << std::endl;
-	    detected.push_back( media );
-	  }
-	}
-	if ( detected.empty() )
-	{
-	  WAR << "Did not find any CD/DVD device." << endl;
-	}
+          PathInfo devnode( devnodePtr );
+          if ( devnode.isBlk() )
+          {
+            MediaSource media( "cdrom", devnode.path().asString(), devnode.devMajor(), devnode.devMinor() );
+            DBG << "Found (udev): " << media << std::endl;
+            detected.push_back( media );
+          }
+        }
+        if ( detected.empty() )
+        {
+          WAR << "Did not find any CD/DVD device." << endl;
+        }
 #endif
-	return detected;
+        return detected;
       }
 
     } // namespace
@@ -153,12 +153,12 @@ namespace zypp
       str::split( devices, std::back_inserter(words), "," );
       for ( const std::string & device : words )
       {
-	if ( device.empty() )
-	  continue;
+        if ( device.empty() )
+          continue;
 
-	MediaSource media( "cdrom", device, 0, 0 );
-	_devices.push_back( media );
-	DBG << "use device (delayed verify)" << device << endl;
+        MediaSource media( "cdrom", device, 0, 0 );
+        _devices.push_back( media );
+        DBG << "use device (delayed verify)" << device << endl;
       }
     }
     else
@@ -268,16 +268,16 @@ namespace zypp
       PathInfo cdrinfo( "/dev/cdrom" );
       if ( dvdinfo.isBlk() )
       {
-	MediaSource media( "cdrom", dvdinfo.path().asString(), dvdinfo.devMajor(), dvdinfo.devMinor() );
-	DBG << "Found (GUESS): " << media << std::endl;
-	detected.push_back( media );
+        MediaSource media( "cdrom", dvdinfo.path().asString(), dvdinfo.devMajor(), dvdinfo.devMinor() );
+        DBG << "Found (GUESS): " << media << std::endl;
+        detected.push_back( media );
       }
       if ( cdrinfo.isBlk()
-	&& ! ( cdrinfo.devMajor() == dvdinfo.devMajor() && cdrinfo.devMinor() == dvdinfo.devMinor() ) )
+        && ! ( cdrinfo.devMajor() == dvdinfo.devMajor() && cdrinfo.devMinor() == dvdinfo.devMinor() ) )
       {
-	MediaSource media( "cdrom", cdrinfo.path().asString(), cdrinfo.devMajor(), cdrinfo.devMinor() );
-	DBG << "Found (GUESS): " << media << std::endl;
-	detected.push_back( media );
+        MediaSource media( "cdrom", cdrinfo.path().asString(), cdrinfo.devMajor(), cdrinfo.devMinor() );
+        DBG << "Found (GUESS): " << media << std::endl;
+        detected.push_back( media );
       }
     }
 
@@ -297,27 +297,27 @@ namespace zypp
       PathInfo dinfo( device );
       if ( dinfo.isBlk() )
       {
-	MediaSource media( "cdrom", device, dinfo.devMajor(), dinfo.devMinor() );
-	if ( detected.empty() )
-	{
-	  _devices.push_front( media );	// better try this than nothing
-	}
-	else
-	{
-	  for( const auto & d : detected )
-	  {
-	    // /dev/cdrom or /dev/dvd to the front
-	    if ( media.equals( d ) )
-	      _devices.push_front( d );
-	    else
-	      _devices.push_back( d );
-	  }
-	}
+        MediaSource media( "cdrom", device, dinfo.devMajor(), dinfo.devMinor() );
+        if ( detected.empty() )
+        {
+          _devices.push_front( media );	// better try this than nothing
+        }
+        else
+        {
+          for( const auto & d : detected )
+          {
+            // /dev/cdrom or /dev/dvd to the front
+            if ( media.equals( d ) )
+              _devices.push_front( d );
+            else
+              _devices.push_back( d );
+          }
+        }
       }
       else
       {
-	// no /dev/cdrom or /dev/dvd link
-	_devices = detected;
+        // no /dev/cdrom or /dev/dvd link
+        _devices = detected;
       }
     }
 
@@ -381,8 +381,8 @@ namespace zypp
       PathInfo dinfo( temp.name );
       if ( ! dinfo.isBlk() )
       {
-	WAR <<  "skipping non block device: " << dinfo << endl;
-	continue;
+        WAR <<  "skipping non block device: " << dinfo << endl;
+        continue;
       }
       DBG << "trying device " << dinfo << endl;
 
@@ -459,11 +459,11 @@ namespace zypp
       {
         try
         {
-	  if( !isUseableAttachPoint( attachPoint() ) )
-	  {
-	    setAttachPoint( createAttachPoint(), true );
-	    mountpoint = attachPoint().asString();
-	  }
+          if( !isUseableAttachPoint( attachPoint() ) )
+          {
+            setAttachPoint( createAttachPoint(), true );
+            mountpoint = attachPoint().asString();
+          }
 
           mount.mount(it->name, mountpoint, *fsit, options);
 
@@ -474,7 +474,7 @@ namespace zypp
           int limit = 2;
           while( !(mountsucceeded=isAttached()) && --limit)
           {
-	    WAR << "Wait for /proc/mounts update and retry...." << endl;
+            WAR << "Wait for /proc/mounts update and retry...." << endl;
             sleep(1);
           }
 
@@ -599,16 +599,16 @@ namespace zypp
         if ( media->name != ejectDev_r )
           continue;
 
-	// bnc#755815: _devices contains either devices passed as url option
-	// 	or autodetected ones. Accept both as long as they are block
-	// 	devices.
-	PathInfo dinfo( media->name );
-	if( ! dinfo.isBlk() )
-	{
-	  WAR <<  "skipping non block device: " << dinfo << endl;
-	  continue;
-	}
-	DBG << "trying device " << dinfo << endl;
+        // bnc#755815: _devices contains either devices passed as url option
+        // 	or autodetected ones. Accept both as long as they are block
+        // 	devices.
+        PathInfo dinfo( media->name );
+        if( ! dinfo.isBlk() )
+        {
+          WAR <<  "skipping non block device: " << dinfo << endl;
+          continue;
+        }
+        DBG << "trying device " << dinfo << endl;
 
         // FIXME: we have also to check if it is mounted in the system
         AttachedMedia ret( findAttachedMedia( media));

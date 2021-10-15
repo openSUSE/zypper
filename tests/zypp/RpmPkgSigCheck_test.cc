@@ -40,7 +40,7 @@ namespace
     {}
 
     CheckResult( RpmDb::CheckPackageResult && result_r,
-		 std::vector<std::pair<RpmDb::CheckPackageResult,std::string>> && detail_r )
+                 std::vector<std::pair<RpmDb::CheckPackageResult,std::string>> && detail_r )
     : result { std::move(result_r) }
     { static_cast<std::vector<std::pair<RpmDb::CheckPackageResult,std::string>>&>(detail) = std::move(detail_r); }
 
@@ -63,7 +63,7 @@ namespace
     for ( const auto & l : lhs.detail )
     {
       if ( std::find( rhs.detail.begin(), rhs.detail.end(), l ) == rhs.detail.end() )
-	return false;
+        return false;
     }
     return true;
   }

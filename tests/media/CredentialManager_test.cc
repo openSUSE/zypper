@@ -14,8 +14,8 @@ using namespace zypp;
 using namespace zypp::media;
 
 inline void testGetCreds( CredentialManager & cm_r, const std::string & url_r,
-		      const std::string & user_r = "",
-		      const std::string & pass_r = "" )
+                      const std::string & user_r = "",
+                      const std::string & pass_r = "" )
 {
   Url url( url_r );
   AuthData_Ptr cred = cm_r.getCred( url );
@@ -86,7 +86,7 @@ BOOST_AUTO_TEST_CASE(save_creds)
   cm1.saveInGlobal(cr2);
   CredentialFileReader( opts.globalCredFilePath, bind( &CredCollector::collect, &collector, _1 ) );
   BOOST_CHECK_EQUAL(collector.creds.size(), 2 );
-  
+
   collector.creds.clear();
   // save the same creds again
   cm1.saveInGlobal(cr2);

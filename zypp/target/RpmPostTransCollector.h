@@ -41,18 +41,18 @@ namespace zypp
         ~RpmPostTransCollector();
 
       public:
-	/** Extract and remember a packages %posttrans script for later execution.
-	 * \return whether a script was collected.
-	 */
-	bool collectScriptFromPackage( ManagedFile rpmPackage_r );
+        /** Extract and remember a packages %posttrans script for later execution.
+         * \return whether a script was collected.
+         */
+        bool collectScriptFromPackage( ManagedFile rpmPackage_r );
 
-	/** Execute the remembered scripts.
-	 * \return false if execution was aborted by a user callback
-	 */
-	bool executeScripts();
+        /** Execute the remembered scripts.
+         * \return false if execution was aborted by a user callback
+         */
+        bool executeScripts();
 
-	/** Discard all remembered scrips. */
-	void discardScripts();
+        /** Discard all remembered scrips. */
+        void discardScripts();
 
       public:
         class Impl;              ///< Implementation class.

@@ -165,9 +165,9 @@ namespace zypp
   std::ostream & operator<<( std::ostream & str, const ServiceInfo::RepoState & obj )
   {
     return str
-	<< "enabled=" << obj.enabled << " "
-	<< "autorefresh=" << obj.autorefresh << " "
-	<< "priority=" << obj.priority;
+        << "enabled=" << obj.enabled << " "
+        << "autorefresh=" << obj.autorefresh << " "
+        << "priority=" << obj.priority;
   }
 
   std::ostream & ServiceInfo::dumpAsIniOn( std::ostream & str ) const
@@ -187,16 +187,16 @@ namespace zypp
       unsigned cnt = 0U;
       for ( const auto & el : repoStates() )
       {
-	std::string tag( "repo_" );
-	tag += str::numstring( ++cnt );
-	const RepoState & state( el.second );
+        std::string tag( "repo_" );
+        tag += str::numstring( ++cnt );
+        const RepoState & state( el.second );
 
-	str << tag << "=" << el.first << endl
-	    << tag << "_enabled=" << state.enabled << endl
-	    << tag << "_autorefresh=" << state.autorefresh << endl;
-	if ( state.priority != RepoInfo::defaultPriority() )
-	  str
-	    << tag << "_priority=" << state.priority << endl;
+        str << tag << "=" << el.first << endl
+            << tag << "_enabled=" << state.enabled << endl
+            << tag << "_autorefresh=" << state.autorefresh << endl;
+        if ( state.priority != RepoInfo::defaultPriority() )
+          str
+            << tag << "_priority=" << state.priority << endl;
       }
     }
 

@@ -121,8 +121,8 @@ BOOST_AUTO_TEST_CASE(locale)
   {
     for ( const Locale & l : { Locale(), Locale( "" ), Locale( "@UTF-8" ), Locale( ".UTF-8" )
                              , Locale( LanguageCode(), CountryCode(nullptr) )
-			     , Locale( LanguageCode(nullptr), CountryCode() )
-			     , Locale( LanguageCode(), CountryCode() ) } )
+                             , Locale( LanguageCode(nullptr), CountryCode() )
+                             , Locale( LanguageCode(), CountryCode() ) } )
     {
       BOOST_CHECK_EQUAL( l.id(),		IdString::Empty.id() );
       BOOST_CHECK_EQUAL( l.language().id(),	IdString::Empty.id() );

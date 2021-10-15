@@ -45,8 +45,8 @@ namespace zypp
 
         typedef sat::ArrayAttr<std::string,std::string> Keywords;
 
-	typedef std::string ContentRevision;
-	typedef std::string ContentIdentifier;
+        typedef std::string ContentRevision;
+        typedef std::string ContentIdentifier;
 
     public:
         /** Default ctor creates \ref noRepository.*/
@@ -86,34 +86,34 @@ namespace zypp
         /** Label to display for this repo. */
         std::string name() const;
 
-	/** Alias or name, according to \ref ZConfig::repoLabelIsAlias */
-	std::string label() const;
+        /** Alias or name, according to \ref ZConfig::repoLabelIsAlias */
+        std::string label() const;
 
-	/** User string: \ref label (alias or name) */
-	std::string asUserString() const
-	{ return label(); }
+        /** User string: \ref label (alias or name) */
+        std::string asUserString() const
+        { return label(); }
 
     public:
-	/** Timestamp or arbitrary user supplied string.
-	 * \c /repomd/revision/text() in \c repomd.xml.
-	 */
-	ContentRevision contentRevision() const;
+        /** Timestamp or arbitrary user supplied string.
+         * \c /repomd/revision/text() in \c repomd.xml.
+         */
+        ContentRevision contentRevision() const;
 
-	/** Unique string identifying a repositories content.
-	 * \c /repomd/tags/repo/text() in \c repomd.xml.
-	 * \code
-	 * <repomd ....>
-	 *  <tags>
-	 *   <repo>obsrepository://build.suse.de/SUSE:Factory:Head:Internal/standard</repo>
-	 * \endcode
-	 * Semantically the value is just a plain string, even
-	 * if OBS often uses the location of the project as
-	 * unique identifyer.
-	 */
-	ContentIdentifier contentIdentifier() const;
+        /** Unique string identifying a repositories content.
+         * \c /repomd/tags/repo/text() in \c repomd.xml.
+         * \code
+         * <repomd ....>
+         *  <tags>
+         *   <repo>obsrepository://build.suse.de/SUSE:Factory:Head:Internal/standard</repo>
+         * \endcode
+         * Semantically the value is just a plain string, even
+         * if OBS often uses the location of the project as
+         * unique identifyer.
+         */
+        ContentIdentifier contentIdentifier() const;
 
-	/** Whether \a id_r matches this repos content identifier. */
-	bool hasContentIdentifier( const ContentIdentifier & id_r ) const;
+        /** Whether \a id_r matches this repos content identifier. */
+        bool hasContentIdentifier( const ContentIdentifier & id_r ) const;
 
         /**
          * Timestamp when this repository was generated
@@ -156,8 +156,8 @@ namespace zypp
          */
         Keywords keywords() const;
 
-	/** Whether \a val_r is present in keywords. */
-	bool hasKeyword( const std::string & val_r ) const;
+        /** Whether \a val_r is present in keywords. */
+        bool hasKeyword( const std::string & val_r ) const;
 
         /**
          * The suggested expiration date of this repository
@@ -170,19 +170,19 @@ namespace zypp
         bool maybeOutdated() const;
 
         /** Hint whether the Repo may provide updates for a product.
-	 *
+         *
          * Either the repository claims to update a product via a repository updates
          * tag in it's metadata or a known product lists the repositories ContentIdentifier
-	 * as required update repo.
+         * as required update repo.
          */
         bool isUpdateRepo() const;
 
         /** Hint whether the Repo may provide updates for a product identified by it's \ref CpeId
-	 *
+         *
          * Either the repository claims to update a product via a repository updates
          * tag in it's metadata or a known product lists the repositories ContentIdentifier
-	 * as required update repo.
-	 */
+         * as required update repo.
+         */
         bool providesUpdatesFor( const CpeId & cpeid_r ) const;
 
         /** Whether \ref Repository contains solvables. */
@@ -197,8 +197,8 @@ namespace zypp
         /** Iterator behind the last \ref Solvable. */
         SolvableIterator solvablesEnd() const;
 
-	/** Iterate the repositories Solvables. */
-	Iterable<SolvableIterator> solvables() const;
+        /** Iterate the repositories Solvables. */
+        Iterable<SolvableIterator> solvables() const;
 
     public:
 
@@ -253,10 +253,10 @@ namespace zypp
          * \throws Exception if this is \ref noRepository
          * \throws Exception if the \ref RepoInfo::alias
          *         does not match the \ref Repository::name.
-	 */
+         */
         void setInfo( const RepoInfo & info_r );
 
-	/** Remove any \ref RepoInfo set for this repository. */
+        /** Remove any \ref RepoInfo set for this repository. */
         void clearInfo();
 
     public:
@@ -306,7 +306,7 @@ namespace zypp
         sat::Solvable::IdType addSolvables( unsigned count_r );
         /** \overload Add only one new \ref Solvable. */
         sat::Solvable::IdType addSolvable()
-	    { return addSolvables( 1 ); }
+            { return addSolvables( 1 ); }
         //@}
 
     public:
@@ -437,8 +437,8 @@ namespace zypp
      */
     struct Repository::EraseFromPool
     {
-	void operator()( Repository repository_r ) const
-	    { repository_r.eraseFromPool(); }
+        void operator()( Repository repository_r ) const
+            { repository_r.eraseFromPool(); }
     };
     ///////////////////////////////////////////////////////////////////
 
@@ -451,12 +451,12 @@ namespace zypp
       //
       /** */
       class RepositoryIterator : public boost::iterator_adaptor<
-	    RepositoryIterator                            // Derived
-			   , sat::detail::CRepo **        // Base
+            RepositoryIterator                            // Derived
+                           , sat::detail::CRepo **        // Base
                            , Repository                   // Value
-			   , boost::forward_traversal_tag // CategoryOrTraversal
-			   , Repository                   // Reference
-			     >
+                           , boost::forward_traversal_tag // CategoryOrTraversal
+                           , Repository                   // Reference
+                             >
       {
         public:
           RepositoryIterator()

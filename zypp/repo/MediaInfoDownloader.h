@@ -21,7 +21,7 @@ namespace zypp
 {
   namespace repo
   {
-   
+
     /**
      * \short Downloads the media info (/media.1) to a local directory
      * \param dest_dir Destination directory

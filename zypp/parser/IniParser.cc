@@ -70,7 +70,7 @@ void IniParser::endParse()
 void IniParser::garbageLine( const std::string &section, const std::string &line )
 {
   std::string msg = str::form("%s: Section [%s]: Line %d contains garbage (no '=' or '%s' in key)",
-			      _inputname.c_str(), section.c_str(), _line_nr, keyGarbage().c_str());
+                              _inputname.c_str(), section.c_str(), _line_nr, keyGarbage().c_str());
   ZYPP_THROW(ParseException(msg));
 }
 
@@ -102,14 +102,14 @@ void IniParser::parse( const InputStream & input_r, const ProgressData::Receiver
       std::string::size_type pos = trimmed.rfind(']');
       if ( pos != std::string::npos )
       {
-	std::string section = trimmed.substr(1, pos-1);
-	consume(section);
-	section.swap(_current_section);
+        std::string section = trimmed.substr(1, pos-1);
+        consume(section);
+        section.swap(_current_section);
       }
       else
       {
-	_line_nr = line.lineNo();
-	garbageLine( _current_section, trimmed );
+        _line_nr = line.lineNo();
+        garbageLine( _current_section, trimmed );
       }
       continue;
     }

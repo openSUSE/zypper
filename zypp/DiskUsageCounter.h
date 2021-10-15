@@ -56,21 +56,21 @@ namespace zypp
       /** HinFlags for ctor */
       enum Hint
       {
-	NoHint		= 0,
-	Hint_readonly	= (1<<0),	///< readonly partitions
-	Hint_growonly	= (1<<1),	///< growonly partitions (e.g. snapshotting btrfs)
+        NoHint		= 0,
+        Hint_readonly	= (1<<0),	///< readonly partitions
+        Hint_growonly	= (1<<1),	///< growonly partitions (e.g. snapshotting btrfs)
       };
       ZYPP_DECLARE_FLAGS(HintFlags,Hint);
 
       /** Ctor initialize directory, fstype and sizes */
       MountPoint( const std::string & d = "/",
-		  const std::string & f = std::string(),
-		  long long bs = 0LL, long long total = 0LL, long long used = 0LL, long long pkg = 0LL,
-		  HintFlags hints = NoHint )
-	: dir(d), fstype(f)
-	, block_size(bs), total_size(total), used_size(used), pkg_size(pkg)
-	, readonly(hints.testFlag(Hint_readonly))
-	, growonly(hints.testFlag(Hint_growonly))
+                  const std::string & f = std::string(),
+                  long long bs = 0LL, long long total = 0LL, long long used = 0LL, long long pkg = 0LL,
+                  HintFlags hints = NoHint )
+        : dir(d), fstype(f)
+        , block_size(bs), total_size(total), used_size(used), pkg_size(pkg)
+        , readonly(hints.testFlag(Hint_readonly))
+        , growonly(hints.testFlag(Hint_growonly))
       {}
        /** \overload <tt>const char *</tt> to allow e.g. initiailzer lists
        * \code
@@ -78,42 +78,42 @@ namespace zypp
        * \endcode
        */
       MountPoint( const char * d,
-		  const std::string & f = std::string(),
-		  long long bs = 0LL, long long total = 0LL, long long used = 0LL, long long pkg = 0LL,
-		  HintFlags hints = NoHint )
-	: MountPoint( std::string(d?d:""), f, bs, total, used, pkg, hints )
+                  const std::string & f = std::string(),
+                  long long bs = 0LL, long long total = 0LL, long long used = 0LL, long long pkg = 0LL,
+                  HintFlags hints = NoHint )
+        : MountPoint( std::string(d?d:""), f, bs, total, used, pkg, hints )
       {}
 
 
       /** Ctor initialize directory and sizes */
       MountPoint( const std::string & d,
-		  long long bs, long long total = 0LL, long long used = 0LL, long long pkg = 0LL,
-		  HintFlags hints = NoHint )
-	: MountPoint( d, std::string(), bs, total, used, pkg, hints )
+                  long long bs, long long total = 0LL, long long used = 0LL, long long pkg = 0LL,
+                  HintFlags hints = NoHint )
+        : MountPoint( d, std::string(), bs, total, used, pkg, hints )
       {}
       /** \overload <tt>const char *</tt> */
       MountPoint( const char * d,
-		  long long bs, long long total = 0LL, long long used = 0LL, long long pkg = 0LL,
-		  HintFlags hints = NoHint )
-	: MountPoint( std::string(d?d:""), bs, total, used, pkg, hints )
+                  long long bs, long long total = 0LL, long long used = 0LL, long long pkg = 0LL,
+                  HintFlags hints = NoHint )
+        : MountPoint( std::string(d?d:""), bs, total, used, pkg, hints )
       {}
 
 
       /** Ctor just name and hints, all sizes 0 */
       MountPoint( const std::string & d, HintFlags hints )
-	: MountPoint( d, std::string(), 0LL, 0LL, 0LL, 0LL, hints )
+        : MountPoint( d, std::string(), 0LL, 0LL, 0LL, 0LL, hints )
       {}
       /** \overload <tt>const char *</tt> */
       MountPoint( const char * d, HintFlags hints )
-	: MountPoint( std::string(d?d:""), hints )
+        : MountPoint( std::string(d?d:""), hints )
       {}
       /** \overload to prevent propagation Hint -> long long */
       MountPoint( const std::string & d, Hint hint )
-	: MountPoint( d, HintFlags(hint) )
+        : MountPoint( d, HintFlags(hint) )
       {}
       /** \overload to prevent propagation Hint -> long long */
       MountPoint( const char * d, Hint hint )
-	: MountPoint( std::string(d?d:""), HintFlags(hint) )
+        : MountPoint( std::string(d?d:""), HintFlags(hint) )
       {}
 
       /** Sort by directory name */
@@ -200,7 +200,7 @@ namespace zypp
     {
       Bitmap bitmap( Bitmap::poolSize );
       for_( it, begin_r, end_r )
-	bitmap.set( sat::asSolvable()( *it ).id() );
+        bitmap.set( sat::asSolvable()( *it ).id() );
       return disk_usage( bitmap );
     }
 

@@ -30,7 +30,7 @@ BOOST_AUTO_TEST_CASE(keyring_test)
   Pathname file2( Pathname(DATADIR) + "hello2.txt" );
   Pathname pubkey( Pathname(DATADIR) + "hello.txt.key" );
   Pathname signature( Pathname(DATADIR) + "hello.txt.asc" );
-  
+
   /**
    * 1st scenario, the signature does
    * match
@@ -38,13 +38,13 @@ BOOST_AUTO_TEST_CASE(keyring_test)
   {
     KeyRingTestReceiver keyring_callbacks;
     KeyRingTestSignalReceiver receiver;
-    
+
     keyring_callbacks.answerAcceptKey(KeyRingReport::KEY_TRUST_TEMPORARILY);
     SignatureFileChecker sigchecker( signature );
     sigchecker.addPublicKey(pubkey);
-    sigchecker(file); 
+    sigchecker(file);
   }
-  
+
   /**
    * second scenario, the signature does not
    * match, an exception has to be thrown
@@ -52,15 +52,15 @@ BOOST_AUTO_TEST_CASE(keyring_test)
   {
     KeyRingTestReceiver keyring_callbacks;
     KeyRingTestSignalReceiver receiver;
-    
+
     keyring_callbacks.answerAcceptKey(KeyRingReport::KEY_TRUST_TEMPORARILY);
     SignatureFileChecker sigchecker( signature );
     sigchecker.addPublicKey(pubkey);
-    
+
     BOOST_CHECK_THROW( sigchecker(file2), zypp::Exception );
 
   }
-  
+
 }
 
 BOOST_AUTO_TEST_CASE(checksum_test)
@@ -69,7 +69,7 @@ BOOST_AUTO_TEST_CASE(checksum_test)
   Pathname file2( Pathname(DATADIR) + "hello2.txt" );
   Pathname pubkey( Pathname(DATADIR) + "hello.txt.key" );
   Pathname signature( Pathname(DATADIR) + "hello.txt.asc" );
-  
+
   /**
    * 1st scenario, checksum matches
    */
@@ -77,7 +77,7 @@ BOOST_AUTO_TEST_CASE(checksum_test)
     ChecksumFileChecker checker( CheckSum("sha1", "f2105202a0f017ab818b670d04982a89f55f090b") );
     checker(file);
   }
-  
+
   /**
    * 1st scenario, checksum does not matches
    */

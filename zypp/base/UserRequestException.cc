@@ -55,7 +55,7 @@ namespace zypp
       case SKIP:        str << "SKIP";        break;
       case RETRY:       str << "RETRY";       break;
       case ABORT:       str << "ABORT";       break;
-	// no default !
+        // no default !
     }
     return str << " request: " << msg();
   }

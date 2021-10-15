@@ -40,11 +40,11 @@ namespace zypp::io {
   /*!
     Blocks until the number of bytes passed via \a size was received
    */
-	enum class ReadAllResult {
-		Error,
-		Eof,
-		Ok
-	};
+        enum class ReadAllResult {
+                Error,
+                Eof,
+                Ok
+        };
   ReadAllResult readAll ( int fd, void *buf, size_t size );
 
   class TimeoutException : public Exception

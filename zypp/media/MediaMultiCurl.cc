@@ -200,12 +200,12 @@ multifetchworker::writefunction(void *ptr, size_t size)
       char *effurl;
       (void)curl_easy_getinfo(_curl, CURLINFO_EFFECTIVE_URL, &effurl);
       if (effurl && !strncasecmp(effurl, "http", 4))
-	{
-	  long statuscode = 0;
-	  (void)curl_easy_getinfo(_curl, CURLINFO_RESPONSE_CODE, &statuscode);
-	  if (statuscode != 206)
-	    return size ? 0 : 1;
-	}
+        {
+          long statuscode = 0;
+          (void)curl_easy_getinfo(_curl, CURLINFO_RESPONSE_CODE, &statuscode);
+          if (statuscode != 206)
+            return size ? 0 : 1;
+        }
     }
 
   _blkreceived += len;
@@ -234,7 +234,7 @@ multifetchworker::writefunction(void *ptr, size_t size)
       _off += cnt;
       _size -= cnt;
       if (cnt == len)
-	return size;
+        return size;
     }
   return cnt;
 }
@@ -254,7 +254,7 @@ multifetchworker::headerfunction(char *p, size_t size)
     {
       std::string line(p + 9, l - 9);
       if (line[l - 10] == '\r')
-	line.erase(l - 10, 1);
+        line.erase(l - 10, 1);
       XXX << "#" << _workerno << ": redirecting to" << line << endl;
       return size;
     }
@@ -279,7 +279,7 @@ multifetchworker::headerfunction(char *p, size_t size)
       WAR << "#" << _workerno << ": setting request filesize to " << filesize << endl;
       _request->_filesize = filesize;
       if (_request->_totalsize == 0 && !_request->_blklist)
-	_request->_totalsize = filesize;
+        _request->_totalsize = filesize;
     }
   if (_request->_filesize != (off_t)filesize)
     {
@@ -359,19 +359,19 @@ multifetchworker::multifetchworker(int no, multifetchrequest &request, const Url
       _settings.setPassword(_request->_context->_settings.password());
       _settings.setAuthType(_request->_context->_settings.authType());
       if ( _settings.userPassword().size() )
-	{
-	  curl_easy_setopt(_curl, CURLOPT_USERPWD, _settings.userPassword().c_str());
-	  std::string use_auth = _settings.authType();
-	  if (use_auth.empty())
-	    use_auth = "digest,basic";        // our default
-	  long auth = CurlAuthData::auth_type_str2long(use_auth);
-	  if( auth != CURLAUTH_NONE)
-	  {
-	    XXX << "#" << _workerno << ": Enabling HTTP authentication methods: " << use_auth
-		<< " (CURLOPT_HTTPAUTH=" << auth << ")" << std::endl;
-	    curl_easy_setopt(_curl, CURLOPT_HTTPAUTH, auth);
-	  }
-	}
+        {
+          curl_easy_setopt(_curl, CURLOPT_USERPWD, _settings.userPassword().c_str());
+          std::string use_auth = _settings.authType();
+          if (use_auth.empty())
+            use_auth = "digest,basic";        // our default
+          long auth = CurlAuthData::auth_type_str2long(use_auth);
+          if( auth != CURLAUTH_NONE)
+          {
+            XXX << "#" << _workerno << ": Enabling HTTP authentication methods: " << use_auth
+                << " (CURLOPT_HTTPAUTH=" << auth << ")" << std::endl;
+            curl_easy_setopt(_curl, CURLOPT_HTTPAUTH, auth);
+          }
+        }
     }
   checkdns();
 }
@@ -383,17 +383,17 @@ multifetchworker::~multifetchworker()
       if (_state == WORKER_FETCH || _state == WORKER_DISCARD)
         curl_multi_remove_handle(_request->_multi, _curl);
       if (_state == WORKER_DONE || _state == WORKER_SLEEP)
-	{
+        {
 #if CURLVERSION_AT_LEAST(7,15,5)
-	  curl_easy_setopt(_curl, CURLOPT_MAX_RECV_SPEED_LARGE, (curl_off_t)0);
+          curl_easy_setopt(_curl, CURLOPT_MAX_RECV_SPEED_LARGE, (curl_off_t)0);
 #endif
-	  curl_easy_setopt(_curl, CURLOPT_PRIVATE, (void *)0);
-	  curl_easy_setopt(_curl, CURLOPT_WRITEFUNCTION, (void *)0);
-	  curl_easy_setopt(_curl, CURLOPT_WRITEDATA, (void *)0);
-	  curl_easy_setopt(_curl, CURLOPT_HEADERFUNCTION, (void *)0);
-	  curl_easy_setopt(_curl, CURLOPT_HEADERDATA, (void *)0);
+          curl_easy_setopt(_curl, CURLOPT_PRIVATE, (void *)0);
+          curl_easy_setopt(_curl, CURLOPT_WRITEFUNCTION, (void *)0);
+          curl_easy_setopt(_curl, CURLOPT_WRITEDATA, (void *)0);
+          curl_easy_setopt(_curl, CURLOPT_HEADERFUNCTION, (void *)0);
+          curl_easy_setopt(_curl, CURLOPT_HEADERDATA, (void *)0);
           _request->_context->toEasyPool(_url.getHost(), _curl);
-	}
+        }
       else
         curl_easy_cleanup(_curl);
       _curl = 0;
@@ -404,7 +404,7 @@ multifetchworker::~multifetchworker()
       int status;
       while (waitpid(_pid, &status, 0) == -1)
         if (errno != EINTR)
-	  break;
+          break;
       _pid = 0;
     }
   if (_dnspipe != -1)
@@ -453,7 +453,7 @@ multifetchworker::checkdns()
     {
       std::transform(schemeproxy.begin(), schemeproxy.end(), schemeproxy.begin(), ::toupper);
       if (env_isset(schemeproxy))
-	return;
+        return;
     }
 
   XXX << "checking DNS lookup of " << host << endl;
@@ -483,14 +483,14 @@ multifetchworker::checkdns()
       aihints.ai_family = PF_UNSPEC;
       int tstsock = socket(PF_INET6, SOCK_DGRAM | SOCK_CLOEXEC, 0);
       if (tstsock == -1)
-	aihints.ai_family = PF_INET;
+        aihints.ai_family = PF_INET;
       else
-	close(tstsock);
+        close(tstsock);
       aihints.ai_socktype = SOCK_STREAM;
       aihints.ai_flags = AI_CANONNAME;
       unsigned int connecttimeout = _request->_connect_timeout;
       if (connecttimeout)
-	alarm(connecttimeout);
+        alarm(connecttimeout);
       signal(SIGALRM, SIG_DFL);
       if (getaddrinfo(host.c_str(), NULL, &aihints, &ai))
         _exit(1);
@@ -573,7 +573,7 @@ multifetchworker::recheckChecksum()
     {
       size_t cnt = l > sizeof(buf) ? sizeof(buf) : l;
       if (fread(buf, cnt, 1, _request->_fp) != 1)
-	return false;
+        return false;
       _dig.update(buf, cnt);
       l -= cnt;
     }
@@ -596,36 +596,36 @@ multifetchworker::stealjob()
     {
       multifetchworker *worker = *workeriter;
       if (worker == this)
-	continue;
+        continue;
       if (worker->_pass == -1)
-	continue;	// do not steal!
+        continue;	// do not steal!
       if (worker->_state == WORKER_DISCARD || worker->_state == WORKER_DONE || worker->_state == WORKER_SLEEP || !worker->_blksize)
-	continue;	// do not steal finished jobs
+        continue;	// do not steal finished jobs
       if (!worker->_avgspeed && worker->_blkreceived)
-	{
-	  if (!now)
-	    now = currentTime();
-	  if (now > worker->_blkstarttime)
-	    worker->_avgspeed = worker->_blkreceived / (now - worker->_blkstarttime);
-	}
+        {
+          if (!now)
+            now = currentTime();
+          if (now > worker->_blkstarttime)
+            worker->_avgspeed = worker->_blkreceived / (now - worker->_blkstarttime);
+        }
       if (!best || best->_pass > worker->_pass)
-	{
+        {
           best = worker;
-	  continue;
-	}
+          continue;
+        }
       if (best->_pass < worker->_pass)
-	continue;
+        continue;
       // if it is the same block, we want to know the best worker, otherwise the worst
       if (worker->_blkstart == best->_blkstart)
-	{
-	  if ((worker->_blksize - worker->_blkreceived) * best->_avgspeed < (best->_blksize - best->_blkreceived) * worker->_avgspeed)
-	    best = worker;
-	}
+        {
+          if ((worker->_blksize - worker->_blkreceived) * best->_avgspeed < (best->_blksize - best->_blkreceived) * worker->_avgspeed)
+            best = worker;
+        }
       else
-	{
-	  if ((worker->_blksize - worker->_blkreceived) * best->_avgspeed > (best->_blksize - best->_blkreceived) * worker->_avgspeed)
-	    best = worker;
-	}
+        {
+          if ((worker->_blksize - worker->_blkreceived) * best->_avgspeed > (best->_blksize - best->_blkreceived) * worker->_avgspeed)
+            best = worker;
+        }
     }
   if (!best)
     {
@@ -638,30 +638,30 @@ multifetchworker::stealjob()
   if (_state != WORKER_SLEEP)
     {
       if (!_avgspeed && _blkreceived)
-	{
-	  if (!now)
-	    now = currentTime();
-	  if (now > _blkstarttime)
-	    _avgspeed = _blkreceived / (now - _blkstarttime);
-	}
+        {
+          if (!now)
+            now = currentTime();
+          if (now > _blkstarttime)
+            _avgspeed = _blkreceived / (now - _blkstarttime);
+        }
 
       // lets see if we should sleep a bit
       XXX << "me #" << _workerno << ": " << _avgspeed << ", size " << best->_blksize << endl;
       XXX << "best #" << best->_workerno << ": " << best->_avgspeed << ", size " << (best->_blksize - best->_blkreceived) << endl;
       if (_avgspeed && best->_avgspeed && best->_blksize - best->_blkreceived > 0 &&
           (best->_blksize - best->_blkreceived) * _avgspeed < best->_blksize * best->_avgspeed)
-	{
-	  if (!now)
-	    now = currentTime();
-	  double sl = (best->_blksize - best->_blkreceived) / best->_avgspeed * 2;
-	  if (sl > 1)
-	    sl = 1;
-	  XXX << "#" << _workerno << ": going to sleep for " << sl * 1000 << " ms" << endl;
-	  _sleepuntil = now + sl;
-	  _state = WORKER_SLEEP;
-	  _request->_sleepworkers++;
-	  return;
-	}
+        {
+          if (!now)
+            now = currentTime();
+          double sl = (best->_blksize - best->_blkreceived) / best->_avgspeed * 2;
+          if (sl > 1)
+            sl = 1;
+          XXX << "#" << _workerno << ": going to sleep for " << sl * 1000 << " ms" << endl;
+          _sleepuntil = now + sl;
+          _state = WORKER_SLEEP;
+          _request->_sleepworkers++;
+          return;
+        }
     }
 
   _competing = true;
@@ -682,13 +682,13 @@ multifetchworker::disableCompetition()
     {
       multifetchworker *worker = *workeriter;
       if (worker == this)
-	continue;
+        continue;
       if (worker->_blkstart == _blkstart)
-	{
-	  if (worker->_state == WORKER_FETCH)
-	    worker->_state = WORKER_DISCARD;
-	  worker->_pass = -1;	/* do not steal this one, we already have it */
-	}
+        {
+          if (worker->_state == WORKER_FETCH)
+            worker->_state = WORKER_DISCARD;
+          worker->_pass = -1;	/* do not steal this one, we already have it */
+        }
     }
 }
 
@@ -708,33 +708,33 @@ multifetchworker::nextjob()
     {
       _blksize = BLKSIZE;
       if (_request->_filesize != off_t(-1))
-	{
-	  if (_request->_blkoff >= _request->_filesize)
-	    {
-	      stealjob();
-	      return;
-	    }
-	  _blksize = _request->_filesize - _request->_blkoff;
-	  if (_blksize > BLKSIZE)
-	    _blksize = BLKSIZE;
-	}
+        {
+          if (_request->_blkoff >= _request->_filesize)
+            {
+              stealjob();
+              return;
+            }
+          _blksize = _request->_filesize - _request->_blkoff;
+          if (_blksize > BLKSIZE)
+            _blksize = BLKSIZE;
+        }
     }
   else
     {
       MediaBlock blk = blklist->getBlock(_request->_blkno);
       while (_request->_blkoff >= (off_t)(blk.off + blk.size))
-	{
-	  if (++_request->_blkno == blklist->numBlocks())
-	    {
-	      stealjob();
-	      return;
-	    }
-	  blk = blklist->getBlock(_request->_blkno);
-	  _request->_blkoff = blk.off;
-	}
+        {
+          if (++_request->_blkno == blklist->numBlocks())
+            {
+              stealjob();
+              return;
+            }
+          blk = blklist->getBlock(_request->_blkno);
+          _request->_blkoff = blk.off;
+        }
       _blksize = blk.off + blk.size - _request->_blkoff;
       if (_blksize > BLKSIZE && !blklist->haveChecksum(_request->_blkno))
-	_blksize = BLKSIZE;
+        _blksize = BLKSIZE;
     }
   _blkno = _request->_blkno;
   _blkstart = _request->_blkoff;
@@ -816,10 +816,10 @@ multifetchrequest::multifetchrequest(const MediaMultiCurl *context, const Pathna
   if (blklist)
     {
       for (size_t blkno = 0; blkno < blklist->numBlocks(); blkno++)
-	{
-	  MediaBlock blk = blklist->getBlock(blkno);
-	  _totalsize += blk.size;
-	}
+        {
+          MediaBlock blk = blklist->getBlock(blkno);
+          _totalsize += blk.size;
+        }
     }
   else if (filesize != off_t(-1))
     _totalsize = filesize;
@@ -847,41 +847,41 @@ multifetchrequest::run(std::vector<Url> &urllist)
       int maxfd, nqueue;
 
       if (_finished)
-	{
-	  XXX << "finished!" << endl;
-	  break;
-	}
+        {
+          XXX << "finished!" << endl;
+          break;
+        }
 
       if ((int)_activeworkers < _maxworkers && urliter != urllist.end() && _workers.size() < MAXURLS)
-	{
-	  // spawn another worker!
-	  multifetchworker *worker = new multifetchworker(workerno++, *this, *urliter);
-	  _workers.push_back(worker);
-	  if (worker->_state != WORKER_BROKEN)
-	    {
-	      _activeworkers++;
-	      if (worker->_state != WORKER_LOOKUP)
-		{
-		  worker->nextjob();
-		}
-	      else
-	        _lookupworkers++;
-	    }
-	  ++urliter;
-	  continue;
-	}
+        {
+          // spawn another worker!
+          multifetchworker *worker = new multifetchworker(workerno++, *this, *urliter);
+          _workers.push_back(worker);
+          if (worker->_state != WORKER_BROKEN)
+            {
+              _activeworkers++;
+              if (worker->_state != WORKER_LOOKUP)
+                {
+                  worker->nextjob();
+                }
+              else
+                _lookupworkers++;
+            }
+          ++urliter;
+          continue;
+        }
       if (!_activeworkers)
-	{
-	  WAR << "No more active workers!" << endl;
-	  // show the first worker error we find
-	  for (std::list<multifetchworker *>::iterator workeriter = _workers.begin(); workeriter != _workers.end(); ++workeriter)
-	    {
-	      if ((*workeriter)->_state != WORKER_BROKEN)
-		continue;
-	      ZYPP_THROW(MediaCurlException(_baseurl, "Server error", (*workeriter)->_curlError));
-	    }
-	  break;
-	}
+        {
+          WAR << "No more active workers!" << endl;
+          // show the first worker error we find
+          for (std::list<multifetchworker *>::iterator workeriter = _workers.begin(); workeriter != _workers.end(); ++workeriter)
+            {
+              if ((*workeriter)->_state != WORKER_BROKEN)
+                continue;
+              ZYPP_THROW(MediaCurlException(_baseurl, "Server error", (*workeriter)->_curlError));
+            }
+          break;
+        }
 
       FD_ZERO(&rset);
       FD_ZERO(&wset);
@@ -891,7 +891,7 @@ multifetchrequest::run(std::vector<Url> &urllist)
 
       if (_lookupworkers)
         for (std::list<multifetchworker *>::iterator workeriter = _workers.begin(); workeriter != _workers.end(); ++workeriter)
-	  (*workeriter)->adddnsfd(rset, maxfd);
+          (*workeriter)->adddnsfd(rset, maxfd);
 
       timeval tv;
       // if we added a new job we have to call multi_perform once
@@ -899,248 +899,248 @@ multifetchrequest::run(std::vector<Url> &urllist)
       tv.tv_sec = 0;
       tv.tv_usec = _havenewjob ? 0 : 200000;
       if (_sleepworkers && !_havenewjob)
-	{
-	  if (_minsleepuntil == 0)
-	    {
-	      for (std::list<multifetchworker *>::iterator workeriter = _workers.begin(); workeriter != _workers.end(); ++workeriter)
-	        {
-		  multifetchworker *worker = *workeriter;
-		  if (worker->_state != WORKER_SLEEP)
-		    continue;
-		  if (!_minsleepuntil || _minsleepuntil > worker->_sleepuntil)
-		    _minsleepuntil = worker->_sleepuntil;
-		}
-	    }
-	  double sl = _minsleepuntil - currentTime();
-	  if (sl < 0)
-	    {
-	      sl = 0;
-	      _minsleepuntil = 0;
-	    }
-	  if (sl < .2)
-	    tv.tv_usec = sl * 1000000;
-	}
+        {
+          if (_minsleepuntil == 0)
+            {
+              for (std::list<multifetchworker *>::iterator workeriter = _workers.begin(); workeriter != _workers.end(); ++workeriter)
+                {
+                  multifetchworker *worker = *workeriter;
+                  if (worker->_state != WORKER_SLEEP)
+                    continue;
+                  if (!_minsleepuntil || _minsleepuntil > worker->_sleepuntil)
+                    _minsleepuntil = worker->_sleepuntil;
+                }
+            }
+          double sl = _minsleepuntil - currentTime();
+          if (sl < 0)
+            {
+              sl = 0;
+              _minsleepuntil = 0;
+            }
+          if (sl < .2)
+            tv.tv_usec = sl * 1000000;
+        }
       int r = select(maxfd + 1, &rset, &wset, &xset, &tv);
       if (r == -1 && errno != EINTR)
-	ZYPP_THROW(MediaCurlException(_baseurl, "select() failed", "unknown error"));
+        ZYPP_THROW(MediaCurlException(_baseurl, "select() failed", "unknown error"));
       if (r != 0 && _lookupworkers)
-	for (std::list<multifetchworker *>::iterator workeriter = _workers.begin(); workeriter != _workers.end(); ++workeriter)
-	  {
-	    multifetchworker *worker = *workeriter;
-	    if (worker->_state != WORKER_LOOKUP)
-	      continue;
-	    (*workeriter)->dnsevent(rset);
-	    if (worker->_state != WORKER_LOOKUP)
-	      _lookupworkers--;
-	  }
+        for (std::list<multifetchworker *>::iterator workeriter = _workers.begin(); workeriter != _workers.end(); ++workeriter)
+          {
+            multifetchworker *worker = *workeriter;
+            if (worker->_state != WORKER_LOOKUP)
+              continue;
+            (*workeriter)->dnsevent(rset);
+            if (worker->_state != WORKER_LOOKUP)
+              _lookupworkers--;
+          }
       _havenewjob = false;
 
       // run curl
       for (;;)
         {
           CURLMcode mcode;
-	  int tasks;
+          int tasks;
           mcode = curl_multi_perform(_multi, &tasks);
           if (mcode == CURLM_CALL_MULTI_PERFORM)
             continue;
-	  if (mcode != CURLM_OK)
-	    ZYPP_THROW(MediaCurlException(_baseurl, "curl_multi_perform", "unknown error"));
-	  break;
+          if (mcode != CURLM_OK)
+            ZYPP_THROW(MediaCurlException(_baseurl, "curl_multi_perform", "unknown error"));
+          break;
         }
 
       double now = currentTime();
 
       // update periodavg
       if (now > _lastperiodstart + .5)
-	{
-	  if (!_periodavg)
-	    _periodavg = (_fetchedsize - _lastperiodfetched) / (now - _lastperiodstart);
-	  else
-	    _periodavg = (_periodavg + (_fetchedsize - _lastperiodfetched) / (now - _lastperiodstart)) / 2;
-	  _lastperiodfetched = _fetchedsize;
-	  _lastperiodstart = now;
-	}
+        {
+          if (!_periodavg)
+            _periodavg = (_fetchedsize - _lastperiodfetched) / (now - _lastperiodstart);
+          else
+            _periodavg = (_periodavg + (_fetchedsize - _lastperiodfetched) / (now - _lastperiodstart)) / 2;
+          _lastperiodfetched = _fetchedsize;
+          _lastperiodstart = now;
+        }
 
       // wake up sleepers
       if (_sleepworkers)
-	{
-	  for (std::list<multifetchworker *>::iterator workeriter = _workers.begin(); workeriter != _workers.end(); ++workeriter)
-	    {
-	      multifetchworker *worker = *workeriter;
-	      if (worker->_state != WORKER_SLEEP)
-	        continue;
-	      if (worker->_sleepuntil > now)
-		continue;
-	      if (_minsleepuntil == worker->_sleepuntil)
-		_minsleepuntil = 0;
-	      XXX << "#" << worker->_workerno << ": sleep done, wake up" << endl;
-	      _sleepworkers--;
-	      // nextjob chnages the state
-	      worker->nextjob();
-	    }
-	}
+        {
+          for (std::list<multifetchworker *>::iterator workeriter = _workers.begin(); workeriter != _workers.end(); ++workeriter)
+            {
+              multifetchworker *worker = *workeriter;
+              if (worker->_state != WORKER_SLEEP)
+                continue;
+              if (worker->_sleepuntil > now)
+                continue;
+              if (_minsleepuntil == worker->_sleepuntil)
+                _minsleepuntil = 0;
+              XXX << "#" << worker->_workerno << ": sleep done, wake up" << endl;
+              _sleepworkers--;
+              // nextjob chnages the state
+              worker->nextjob();
+            }
+        }
 
       // collect all curl results, reschedule new jobs
       CURLMsg *msg;
       while ((msg = curl_multi_info_read(_multi, &nqueue)) != 0)
-	{
-	  if (msg->msg != CURLMSG_DONE)
-	    continue;
-	  CURL *easy = msg->easy_handle;
-	  CURLcode cc = msg->data.result;
-	  multifetchworker *worker;
-	  if (curl_easy_getinfo(easy, CURLINFO_PRIVATE, &worker) != CURLE_OK)
-	    ZYPP_THROW(MediaCurlException(_baseurl, "curl_easy_getinfo", "unknown error"));
-	  if (worker->_blkreceived && now > worker->_blkstarttime)
-	    {
-	      if (worker->_avgspeed)
-		worker->_avgspeed = (worker->_avgspeed + worker->_blkreceived / (now - worker->_blkstarttime)) / 2;
-	      else
-		worker->_avgspeed = worker->_blkreceived / (now - worker->_blkstarttime);
-	    }
-	  XXX << "#" << worker->_workerno << ": BLK " << worker->_blkno << " done code " << cc << " speed " << worker->_avgspeed << endl;
-	  curl_multi_remove_handle(_multi, easy);
-	  if (cc == CURLE_HTTP_RETURNED_ERROR)
-	    {
-	      long statuscode = 0;
-	      (void)curl_easy_getinfo(easy, CURLINFO_RESPONSE_CODE, &statuscode);
-	      XXX << "HTTP status " << statuscode << endl;
-	      if (statuscode == 416 && !_blklist)	/* Range error */
-		{
-		  if (_filesize == off_t(-1))
-		    {
-		      if (!worker->_noendrange)
-			{
-			  XXX << "#" << worker->_workerno << ": retrying with no end range" << endl;
-			  worker->_noendrange = true;
-			  worker->run();
-			  continue;
-			}
-		      worker->_noendrange = false;
-		      worker->stealjob();
-		      continue;
-		    }
-		  if (worker->_blkstart >= _filesize)
-		    {
-		      worker->nextjob();
-		      continue;
-		    }
-		}
-	    }
-	  if (cc == 0)
-	    {
-	      if (!worker->checkChecksum())
-		{
-		  WAR << "#" << worker->_workerno << ": checksum error, disable worker" << endl;
-		  worker->_state = WORKER_BROKEN;
-		  strncpy(worker->_curlError, "checksum error", CURL_ERROR_SIZE);
-		  _activeworkers--;
-		  continue;
-		}
-	      if (worker->_state == WORKER_FETCH)
-		{
-		  if (worker->_competing)
-		    {
-		      worker->disableCompetition();
-		      // multiple workers wrote into this block. We already know that our
-		      // data was correct, but maybe some other worker overwrote our data
-		      // with something broken. Thus we have to re-check the block.
-		      if (!worker->recheckChecksum())
-			{
-			  XXX << "#" << worker->_workerno << ": recheck checksum error, refetch block" << endl;
-			  // re-fetch! No need to worry about the bad workers,
-			  // they will now be set to DISCARD. At the end of their block
-			  // they will notice that they wrote bad data and go into BROKEN.
-			  worker->run();
-			  continue;
-			}
-		    }
-		  _fetchedgoodsize += worker->_blksize;
-		}
+        {
+          if (msg->msg != CURLMSG_DONE)
+            continue;
+          CURL *easy = msg->easy_handle;
+          CURLcode cc = msg->data.result;
+          multifetchworker *worker;
+          if (curl_easy_getinfo(easy, CURLINFO_PRIVATE, &worker) != CURLE_OK)
+            ZYPP_THROW(MediaCurlException(_baseurl, "curl_easy_getinfo", "unknown error"));
+          if (worker->_blkreceived && now > worker->_blkstarttime)
+            {
+              if (worker->_avgspeed)
+                worker->_avgspeed = (worker->_avgspeed + worker->_blkreceived / (now - worker->_blkstarttime)) / 2;
+              else
+                worker->_avgspeed = worker->_blkreceived / (now - worker->_blkstarttime);
+            }
+          XXX << "#" << worker->_workerno << ": BLK " << worker->_blkno << " done code " << cc << " speed " << worker->_avgspeed << endl;
+          curl_multi_remove_handle(_multi, easy);
+          if (cc == CURLE_HTTP_RETURNED_ERROR)
+            {
+              long statuscode = 0;
+              (void)curl_easy_getinfo(easy, CURLINFO_RESPONSE_CODE, &statuscode);
+              XXX << "HTTP status " << statuscode << endl;
+              if (statuscode == 416 && !_blklist)	/* Range error */
+                {
+                  if (_filesize == off_t(-1))
+                    {
+                      if (!worker->_noendrange)
+                        {
+                          XXX << "#" << worker->_workerno << ": retrying with no end range" << endl;
+                          worker->_noendrange = true;
+                          worker->run();
+                          continue;
+                        }
+                      worker->_noendrange = false;
+                      worker->stealjob();
+                      continue;
+                    }
+                  if (worker->_blkstart >= _filesize)
+                    {
+                      worker->nextjob();
+                      continue;
+                    }
+                }
+            }
+          if (cc == 0)
+            {
+              if (!worker->checkChecksum())
+                {
+                  WAR << "#" << worker->_workerno << ": checksum error, disable worker" << endl;
+                  worker->_state = WORKER_BROKEN;
+                  strncpy(worker->_curlError, "checksum error", CURL_ERROR_SIZE);
+                  _activeworkers--;
+                  continue;
+                }
+              if (worker->_state == WORKER_FETCH)
+                {
+                  if (worker->_competing)
+                    {
+                      worker->disableCompetition();
+                      // multiple workers wrote into this block. We already know that our
+                      // data was correct, but maybe some other worker overwrote our data
+                      // with something broken. Thus we have to re-check the block.
+                      if (!worker->recheckChecksum())
+                        {
+                          XXX << "#" << worker->_workerno << ": recheck checksum error, refetch block" << endl;
+                          // re-fetch! No need to worry about the bad workers,
+                          // they will now be set to DISCARD. At the end of their block
+                          // they will notice that they wrote bad data and go into BROKEN.
+                          worker->run();
+                          continue;
+                        }
+                    }
+                  _fetchedgoodsize += worker->_blksize;
+                }
 
-	      // make bad workers sleep a little
-	      double maxavg = 0;
-	      int maxworkerno = 0;
-	      int numbetter = 0;
-	      for (std::list<multifetchworker *>::iterator workeriter = _workers.begin(); workeriter != _workers.end(); ++workeriter)
-		{
-		  multifetchworker *oworker = *workeriter;
-		  if (oworker->_state == WORKER_BROKEN)
-		    continue;
-		  if (oworker->_avgspeed > maxavg)
-		    {
-		      maxavg = oworker->_avgspeed;
-		      maxworkerno = oworker->_workerno;
-		    }
-		  if (oworker->_avgspeed > worker->_avgspeed)
-		    numbetter++;
-		}
-	      if (maxavg && !_stealing)
-		{
-		  double ratio = worker->_avgspeed / maxavg;
-		  ratio = 1 - ratio;
-		  if (numbetter < 3)	// don't sleep that much if we're in the top two
-		    ratio = ratio * ratio;
-		  if (ratio > .01)
-		    {
-		      XXX << "#" << worker->_workerno << ": too slow ("<< ratio << ", " << worker->_avgspeed << ", #" << maxworkerno << ": " << maxavg << "), going to sleep for " << ratio * 1000 << " ms" << endl;
-		      worker->_sleepuntil = now + ratio;
-		      worker->_state = WORKER_SLEEP;
-		      _sleepworkers++;
-		      continue;
-		    }
-		}
+              // make bad workers sleep a little
+              double maxavg = 0;
+              int maxworkerno = 0;
+              int numbetter = 0;
+              for (std::list<multifetchworker *>::iterator workeriter = _workers.begin(); workeriter != _workers.end(); ++workeriter)
+                {
+                  multifetchworker *oworker = *workeriter;
+                  if (oworker->_state == WORKER_BROKEN)
+                    continue;
+                  if (oworker->_avgspeed > maxavg)
+                    {
+                      maxavg = oworker->_avgspeed;
+                      maxworkerno = oworker->_workerno;
+                    }
+                  if (oworker->_avgspeed > worker->_avgspeed)
+                    numbetter++;
+                }
+              if (maxavg && !_stealing)
+                {
+                  double ratio = worker->_avgspeed / maxavg;
+                  ratio = 1 - ratio;
+                  if (numbetter < 3)	// don't sleep that much if we're in the top two
+                    ratio = ratio * ratio;
+                  if (ratio > .01)
+                    {
+                      XXX << "#" << worker->_workerno << ": too slow ("<< ratio << ", " << worker->_avgspeed << ", #" << maxworkerno << ": " << maxavg << "), going to sleep for " << ratio * 1000 << " ms" << endl;
+                      worker->_sleepuntil = now + ratio;
+                      worker->_state = WORKER_SLEEP;
+                      _sleepworkers++;
+                      continue;
+                    }
+                }
 
-	      // do rate control (if requested)
-	      // should use periodavg, but that's not what libcurl does
-	      if (_maxspeed && now > _starttime)
-		{
-		  double avg = _fetchedsize / (now - _starttime);
-		  avg = worker->_maxspeed * _maxspeed / avg;
-		  if (avg < _maxspeed / _maxworkers)
-		    avg = _maxspeed / _maxworkers;
-		  if (avg > _maxspeed)
-		    avg = _maxspeed;
-		  if (avg < 1024)
-		    avg = 1024;
-		  worker->_maxspeed = avg;
+              // do rate control (if requested)
+              // should use periodavg, but that's not what libcurl does
+              if (_maxspeed && now > _starttime)
+                {
+                  double avg = _fetchedsize / (now - _starttime);
+                  avg = worker->_maxspeed * _maxspeed / avg;
+                  if (avg < _maxspeed / _maxworkers)
+                    avg = _maxspeed / _maxworkers;
+                  if (avg > _maxspeed)
+                    avg = _maxspeed;
+                  if (avg < 1024)
+                    avg = 1024;
+                  worker->_maxspeed = avg;
 #if CURLVERSION_AT_LEAST(7,15,5)
-		  curl_easy_setopt(worker->_curl, CURLOPT_MAX_RECV_SPEED_LARGE, (curl_off_t)(avg));
+                  curl_easy_setopt(worker->_curl, CURLOPT_MAX_RECV_SPEED_LARGE, (curl_off_t)(avg));
 #endif
-		}
+                }
 
-	      worker->nextjob();
-	    }
-	  else
-	    {
-	      worker->_state = WORKER_BROKEN;
-	      _activeworkers--;
-	      if (!_activeworkers && !(urliter != urllist.end() && _workers.size() < MAXURLS))
-		{
-		  // end of workers reached! goodbye!
-		  worker->evaluateCurlCode(Pathname(), cc, false);
-		}
-	    }
+              worker->nextjob();
+            }
+          else
+            {
+              worker->_state = WORKER_BROKEN;
+              _activeworkers--;
+              if (!_activeworkers && !(urliter != urllist.end() && _workers.size() < MAXURLS))
+                {
+                  // end of workers reached! goodbye!
+                  worker->evaluateCurlCode(Pathname(), cc, false);
+                }
+            }
 
-	  if ( _filesize > 0 && _fetchedgoodsize > _filesize ) {
-	    ZYPP_THROW(MediaFileSizeExceededException(_baseurl, _filesize));
-	  }
-	}
+          if ( _filesize > 0 && _fetchedgoodsize > _filesize ) {
+            ZYPP_THROW(MediaFileSizeExceededException(_baseurl, _filesize));
+          }
+        }
 
       // send report
       if (_report)
-	{
-	  int percent = _totalsize ? (100 * (_fetchedgoodsize + _fetchedsize)) / (_totalsize + _fetchedsize) : 0;
+        {
+          int percent = _totalsize ? (100 * (_fetchedgoodsize + _fetchedsize)) / (_totalsize + _fetchedsize) : 0;
 
-	  double avg = 0;
-	  if (now > _starttime)
-	    avg = _fetchedsize / (now - _starttime);
-	  if (!(*(_report))->progress(percent, _baseurl, avg, _lastperiodstart == _starttime ? avg : _periodavg))
-	    ZYPP_THROW(MediaCurlException(_baseurl, "User abort", "cancelled"));
-	}
+          double avg = 0;
+          if (now > _starttime)
+            avg = _fetchedsize / (now - _starttime);
+          if (!(*(_report))->progress(percent, _baseurl, avg, _lastperiodstart == _starttime ? avg : _periodavg))
+            ZYPP_THROW(MediaCurlException(_baseurl, "User abort", "cancelled"));
+        }
 
       if (_timeout && now - _lastprogress > _timeout)
-	break;
+        break;
     }
 
   if (!_finished)
@@ -1184,10 +1184,10 @@ MediaMultiCurl::~MediaMultiCurl()
     {
       CURL *easy = it->second;
       if (easy)
-	{
-	  curl_easy_cleanup(easy);
-	  it->second = NULL;
-	}
+        {
+          curl_easy_cleanup(easy);
+          it->second = NULL;
+        }
     }
 }
 
@@ -1221,11 +1221,11 @@ static bool looks_like_metalink_fd(int fd)
   if (!strncasecmp(p, "<?xml", 5))
     {
       while (*p && *p != '>')
-	p++;
+        p++;
       if (*p == '>')
-	p++;
+        p++;
       while (*p == ' ' || *p == '\t' || *p == '\r' || *p == '\n')
-	p++;
+        p++;
     }
   bool ret = !strncasecmp(p, "<metalink", 9) ? true : false;
   return ret;
@@ -1267,12 +1267,12 @@ int MediaMultiCurl::progressCallback( void *clientp, double dltotal, double dlno
 
   char *ptr = NULL;
   bool ismetalink = false;
-  if (curl_easy_getinfo(_curl, CURLINFO_CONTENT_TYPE, &ptr) == CURLE_OK && ptr) 
-    {    
+  if (curl_easy_getinfo(_curl, CURLINFO_CONTENT_TYPE, &ptr) == CURLE_OK && ptr)
+    {
       std::string ct = std::string(ptr);
       if (ct.find("application/metalink+xml") == 0 || ct.find("application/metalink4+xml") == 0)
         ismetalink = true;
-    }    
+    }
   if (!ismetalink && dlnow < 256)
     {
       // can't tell yet, ...
@@ -1373,7 +1373,7 @@ void MediaMultiCurl::doGetFileCopy( const OnMediaLocation &srcFile , const Pathn
   {
     DBG << "HTTP response: " + str::numstring(httpReturnCode) << endl;
     if ( httpReturnCode == 304
-	 || ( httpReturnCode == 213 && _url.getScheme() == "ftp" ) ) // not modified
+         || ( httpReturnCode == 213 && _url.getScheme() == "ftp" ) ) // not modified
     {
       DBG << "not modified: " << PathInfo(dest) << endl;
       return;
@@ -1391,7 +1391,7 @@ void MediaMultiCurl::doGetFileCopy( const OnMediaLocation &srcFile , const Pathn
     {
       std::string ct = std::string(ptr);
       if (ct.find("application/metalink+xml") == 0 || ct.find("application/metalink4+xml") == 0)
-	ismetalink = true;
+        ismetalink = true;
     }
 
   if (!ismetalink)
@@ -1400,7 +1400,7 @@ void MediaMultiCurl::doGetFileCopy( const OnMediaLocation &srcFile , const Pathn
       // out if we received a metalink (bnc#649925)
       fflush(file);
       if (looks_like_metalink(destNew))
-	ismetalink = true;
+        ismetalink = true;
     }
 
   if (ismetalink)
@@ -1409,10 +1409,10 @@ void MediaMultiCurl::doGetFileCopy( const OnMediaLocation &srcFile , const Pathn
       Pathname failedFile = ZConfig::instance().repoCachePath() / "MultiCurl.failed";
       file = nullptr;	// explicitly close destNew before the parser reads it.
       try
-	{
-	  MetaLinkParser mlp;
-	  mlp.parse(destNew);
-	  MediaBlockList bl = mlp.getBlockList();
+        {
+          MetaLinkParser mlp;
+          mlp.parse(destNew);
+          MediaBlockList bl = mlp.getBlockList();
 
           /*
            * gihub issue libzipp:#277 Multicurl backend breaks with MirrorCache and Metalink with unknown filesize.
@@ -1423,7 +1423,7 @@ void MediaMultiCurl::doGetFileCopy( const OnMediaLocation &srcFile , const Pathn
             ZYPP_THROW( MediaException("Multicurl requires filesize but none was provided.") );
           }
 
-	  std::vector<Url> urls = mlp.getUrls();
+          std::vector<Url> urls = mlp.getUrls();
     /*
      * bsc#1191609 In certain locations we do not receive a suitable number of metalink mirrors, and might even
      * download chunks serially from one and the same server. In those cases we need to fall back to a normal download.
@@ -1432,61 +1432,61 @@ void MediaMultiCurl::doGetFileCopy( const OnMediaLocation &srcFile , const Pathn
       ZYPP_THROW( MediaException("Multicurl enabled but not enough mirrors provided") );
     }
 
-	  XXX << bl << endl;
-	  file = fopen((*destNew).c_str(), "w+e");
-	  if (!file)
-	    ZYPP_THROW(MediaWriteException(destNew));
-	  if (PathInfo(target).isExist())
-	    {
-	      XXX << "reusing blocks from file " << target << endl;
-	      bl.reuseBlocks(file, target.asString());
-	      XXX << bl << endl;
-	    }
-	  if (bl.haveChecksum(1) && PathInfo(failedFile).isExist())
-	    {
-	      XXX << "reusing blocks from file " << failedFile << endl;
-	      bl.reuseBlocks(file, failedFile.asString());
-	      XXX << bl << endl;
-	      filesystem::unlink(failedFile);
-	    }
-	  Pathname df = srcFile.deltafile();
-	  if (!df.empty())
-	    {
-	      XXX << "reusing blocks from file " << df << endl;
-	      bl.reuseBlocks(file, df.asString());
-	      XXX << bl << endl;
-	    }
-	  try
-	    {
-	      multifetch(srcFile.filename(), file, &urls, &report, &bl, srcFile.downloadSize());
-	    }
-	  catch (MediaCurlException &ex)
-	    {
-	      userabort = ex.errstr() == "User abort";
-	      ZYPP_RETHROW(ex);
-	    }
-	}
+          XXX << bl << endl;
+          file = fopen((*destNew).c_str(), "w+e");
+          if (!file)
+            ZYPP_THROW(MediaWriteException(destNew));
+          if (PathInfo(target).isExist())
+            {
+              XXX << "reusing blocks from file " << target << endl;
+              bl.reuseBlocks(file, target.asString());
+              XXX << bl << endl;
+            }
+          if (bl.haveChecksum(1) && PathInfo(failedFile).isExist())
+            {
+              XXX << "reusing blocks from file " << failedFile << endl;
+              bl.reuseBlocks(file, failedFile.asString());
+              XXX << bl << endl;
+              filesystem::unlink(failedFile);
+            }
+          Pathname df = srcFile.deltafile();
+          if (!df.empty())
+            {
+              XXX << "reusing blocks from file " << df << endl;
+              bl.reuseBlocks(file, df.asString());
+              XXX << bl << endl;
+            }
+          try
+            {
+              multifetch(srcFile.filename(), file, &urls, &report, &bl, srcFile.downloadSize());
+            }
+          catch (MediaCurlException &ex)
+            {
+              userabort = ex.errstr() == "User abort";
+              ZYPP_RETHROW(ex);
+            }
+        }
       catch (MediaFileSizeExceededException &ex) {
         ZYPP_RETHROW(ex);
       }
       catch (Exception &ex)
-	{
-	  // something went wrong. fall back to normal download
-	  file = nullptr;	// explicitly close destNew before moving it
-	  if (PathInfo(destNew).size() >= 63336)
-	    {
-	      ::unlink(failedFile.asString().c_str());
-	      filesystem::hardlinkCopy(destNew, failedFile);
-	    }
-	  if (userabort)
-	    {
-	      ZYPP_RETHROW(ex);
-	    }
-	  file = fopen((*destNew).c_str(), "w+e");
-	  if (!file)
-	    ZYPP_THROW(MediaWriteException(destNew));
-	  MediaCurl::doGetFileCopyFile(srcFile, dest, file, report, options | OPTION_NO_REPORT_START);
-	}
+        {
+          // something went wrong. fall back to normal download
+          file = nullptr;	// explicitly close destNew before moving it
+          if (PathInfo(destNew).size() >= 63336)
+            {
+              ::unlink(failedFile.asString().c_str());
+              filesystem::hardlinkCopy(destNew, failedFile);
+            }
+          if (userabort)
+            {
+              ZYPP_RETHROW(ex);
+            }
+          file = fopen((*destNew).c_str(), "w+e");
+          if (!file)
+            ZYPP_THROW(MediaWriteException(destNew));
+          MediaCurl::doGetFileCopyFile(srcFile, dest, file, report, options | OPTION_NO_REPORT_START);
+        }
     }
 
   if (::fchmod( ::fileno(file), filesystem::applyUmaskTo( 0644 )))
@@ -1530,7 +1530,7 @@ void MediaMultiCurl::multifetch(const Pathname & filename, FILE *fp, std::vector
     {
       _multi = curl_multi_init();
       if (!_multi)
-	ZYPP_THROW(MediaCurlInitException(baseurl));
+        ZYPP_THROW(MediaCurlInitException(baseurl));
     }
 
   multifetchrequest req(this, filename, baseurl, _multi, fp, report, blklist, filesize);
@@ -1546,17 +1546,17 @@ void MediaMultiCurl::multifetch(const Pathname & filename, FILE *fp, std::vector
   for (std::vector<Url>::iterator urliter = urllist->begin(); urliter != urllist->end(); ++urliter)
     {
       try
-	{
-	  std::string scheme = urliter->getScheme();
-	  if (scheme == "http" || scheme == "https" || scheme == "ftp" || scheme == "tftp")
-	    {
-	      checkProtocol(*urliter);
+        {
+          std::string scheme = urliter->getScheme();
+          if (scheme == "http" || scheme == "https" || scheme == "ftp" || scheme == "tftp")
+            {
+              checkProtocol(*urliter);
               myurllist.push_back(internal::propagateQueryParams(*urliter, _url));
-	    }
-	}
+            }
+        }
       catch (...)
-	{
-	}
+        {
+        }
     }
   if (!myurllist.size())
     myurllist.push_back(baseurl);

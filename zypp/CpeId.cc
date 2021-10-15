@@ -44,11 +44,11 @@ namespace zypp
     inline int heDecodeCh( char ch )
     {
       if ( '0' <= ch && ch <= '9' )
-	return( ch - '0' );
+        return( ch - '0' );
       if ( 'A' <= ch && ch <= 'F' )
-	return( ch - 'A' + 10 );
+        return( ch - 'A' + 10 );
       if ( 'a' <= ch && ch <= 'f' )
-	return( ch - 'a' + 10 );
+        return( ch - 'a' + 10 );
       return -1;
     }
 
@@ -102,7 +102,7 @@ namespace zypp
       ret << "cpe:2.3";
       for ( auto ai : WFN_ATTRIBUTES )
       {
-	ret << ':' << _wfn[ai].asFs();
+        ret << ':' << _wfn[ai].asFs();
       }
       return ret;
     }
@@ -115,37 +115,37 @@ namespace zypp
       unsigned colon = 0;	// to remember trailing colons
       for ( auto ai : WFN_ATTRIBUTES )
       {
-	val = _wfn[ai].asUri();
+        val = _wfn[ai].asUri();
 
-	if ( ai == Attribute::edition )
-	{
-	  if ( ! ( _wfn[Attribute::sw_edition].isANY()
-	        && _wfn[Attribute::target_sw].isANY()
-	        && _wfn[Attribute::target_hw].isANY()
-	        && _wfn[Attribute::other].isANY() ) )
-	  {
-	    // packing is needed
-	    val = str::Str()
-		  << '~' << val//Attribute::edition
-	          << '~' << _wfn[Attribute::sw_edition].asUri()
-	          << '~' << _wfn[Attribute::target_sw].asUri()
-	          << '~' << _wfn[Attribute::target_hw].asUri()
-		  << '~' << _wfn[Attribute::other].asUri();
-	  }
-	}
+        if ( ai == Attribute::edition )
+        {
+          if ( ! ( _wfn[Attribute::sw_edition].isANY()
+                && _wfn[Attribute::target_sw].isANY()
+                && _wfn[Attribute::target_hw].isANY()
+                && _wfn[Attribute::other].isANY() ) )
+          {
+            // packing is needed
+            val = str::Str()
+                  << '~' << val//Attribute::edition
+                  << '~' << _wfn[Attribute::sw_edition].asUri()
+                  << '~' << _wfn[Attribute::target_sw].asUri()
+                  << '~' << _wfn[Attribute::target_hw].asUri()
+                  << '~' << _wfn[Attribute::other].asUri();
+          }
+        }
 
-	if ( ! val.empty() )
-	{
-	  if ( colon )
-	    ret << std::string( colon, ':' );
-	  ret << val;
-	  colon = 1;
-	}
-	else
-	  ++colon;
+        if ( ! val.empty() )
+        {
+          if ( colon )
+            ret << std::string( colon, ':' );
+          ret << val;
+          colon = 1;
+        }
+        else
+          ++colon;
 
-	if ( ai == Attribute::language )
-	  break;	// remaining attrs packaed in edition
+        if ( ai == Attribute::language )
+          break;	// remaining attrs packaed in edition
       }
       return ret;
     }
@@ -156,16 +156,16 @@ namespace zypp
       ret << "wfn:[";
       for ( auto ai : WFN_ATTRIBUTES )
       {
-	const Value & val( _wfn[ai] );
-	if ( ! val.isANY() )
-	{
-	  if ( ai ) ret << ',';
-	  ret << Attribute::asString( ai ) << '=';
-	  if ( val.isString() )
-	    ret << '"' << val << '"';
-	  else
-	    ret << "NA";	// as ANY is omitted, it must be NA
-	}
+        const Value & val( _wfn[ai] );
+        if ( ! val.isANY() )
+        {
+          if ( ai ) ret << ',';
+          ret << Attribute::asString( ai ) << '=';
+          if ( val.isString() )
+            ret << '"' << val << '"';
+          else
+            ret << "NA";	// as ANY is omitted, it must be NA
+        }
       }
       return ret << "]";
     }
@@ -176,35 +176,35 @@ namespace zypp
       SetCompare ret = SetCompare::equal;
       for ( auto ai : WFN_ATTRIBUTES )
       {
-	switch ( _wfn[ai].compare( trg._wfn[ai] ).asEnum() )
-	{
-	  case SetCompare::uncomparable:
-	    ret = SetCompare::uncomparable;
-	    break;
+        switch ( _wfn[ai].compare( trg._wfn[ai] ).asEnum() )
+        {
+          case SetCompare::uncomparable:
+            ret = SetCompare::uncomparable;
+            break;
 
-	  case SetCompare::equal:
-	    break;
+          case SetCompare::equal:
+            break;
 
-	  case SetCompare::properSubset:
-	    if ( ret == SetCompare::equal )
-	      ret = SetCompare::properSubset;
-	    else if ( ret != SetCompare::properSubset )
-	      ret = SetCompare::uncomparable;
-	    break;
+          case SetCompare::properSubset:
+            if ( ret == SetCompare::equal )
+              ret = SetCompare::properSubset;
+            else if ( ret != SetCompare::properSubset )
+              ret = SetCompare::uncomparable;
+            break;
 
-	  case SetCompare::properSuperset:
-	    if ( ret == SetCompare::equal )
-	      ret = SetCompare::properSuperset;
-	    else if ( ret != SetCompare::properSuperset )
-	      ret = SetCompare::uncomparable;
-	    break;
+          case SetCompare::properSuperset:
+            if ( ret == SetCompare::equal )
+              ret = SetCompare::properSuperset;
+            else if ( ret != SetCompare::properSuperset )
+              ret = SetCompare::uncomparable;
+            break;
 
-	  case SetCompare::disjoint:
-	    ret = SetCompare::disjoint;
-	    break;
-	}
-	if ( ret == SetCompare::uncomparable || ret == SetCompare::disjoint )
-	  break;
+          case SetCompare::disjoint:
+            ret = SetCompare::disjoint;
+            break;
+        }
+        if ( ret == SetCompare::uncomparable || ret == SetCompare::disjoint )
+          break;
       }
       return ret;
     }
@@ -217,51 +217,51 @@ namespace zypp
     {
       if ( val_r.isString() )
       {
-	switch ( attr_r.asEnum() )
-	{
-	  case Attribute::part:
-	    {
-	      const std::string & wfn( val_r.asWfn() );
-	      switch ( wfn[0] )
-	      {
-		case 'h':
-		case 'o':
-		case 'a':
-		  if ( wfn[1] == '\0' )
-		    break;
-		  // else: fallthrough
-		default:
-		  throw std::invalid_argument( str::Str() << "CpeId:Wfn:part: '" << wfn << "' illegal value; expected: 'h' | 'o' | 'a'"   );
-		  break;
-	      }
-	    }
-	    break;
+        switch ( attr_r.asEnum() )
+        {
+          case Attribute::part:
+            {
+              const std::string & wfn( val_r.asWfn() );
+              switch ( wfn[0] )
+              {
+                case 'h':
+                case 'o':
+                case 'a':
+                  if ( wfn[1] == '\0' )
+                    break;
+                  // else: fallthrough
+                default:
+                  throw std::invalid_argument( str::Str() << "CpeId:Wfn:part: '" << wfn << "' illegal value; expected: 'h' | 'o' | 'a'"   );
+                  break;
+              }
+            }
+            break;
 
-	  case Attribute::language:
-	    {
-	      const std::string & wfn( val_r.asWfn() );
-	      std::string::size_type len = 0;
-	      // (2*3ALPHA) ["-" (2ALPHA / 3DIGIT)]
-	      if ( chIsAlpha( wfn[0] ) && chIsAlpha( wfn[1] ) )
-	      {
-		len = chIsAlpha( wfn[2] ) ? 3 : 2;
-		if ( wfn[len] == '-' )
-		{
-		  if ( chIsAlpha( wfn[len+1] ) && chIsAlpha( wfn[len+2] ) )
-		    len += 3;
-		  else if ( chIsNum( wfn[len+1] ) && chIsNum( wfn[len+2] ) && chIsNum( wfn[len+3] ) )
-		    len += 4;
-		}
-	      }
-	      if ( wfn.size() != len )
-		throw std::invalid_argument( str::Str() << "CpeId:Wfn:language: '" << wfn << "' illegal value; expected RFC5646 conform: language ['-' region]" );
-	    }
-	    break;
+          case Attribute::language:
+            {
+              const std::string & wfn( val_r.asWfn() );
+              std::string::size_type len = 0;
+              // (2*3ALPHA) ["-" (2ALPHA / 3DIGIT)]
+              if ( chIsAlpha( wfn[0] ) && chIsAlpha( wfn[1] ) )
+              {
+                len = chIsAlpha( wfn[2] ) ? 3 : 2;
+                if ( wfn[len] == '-' )
+                {
+                  if ( chIsAlpha( wfn[len+1] ) && chIsAlpha( wfn[len+2] ) )
+                    len += 3;
+                  else if ( chIsNum( wfn[len+1] ) && chIsNum( wfn[len+2] ) && chIsNum( wfn[len+3] ) )
+                    len += 4;
+                }
+              }
+              if ( wfn.size() != len )
+                throw std::invalid_argument( str::Str() << "CpeId:Wfn:language: '" << wfn << "' illegal value; expected RFC5646 conform: language ['-' region]" );
+            }
+            break;
 
-	  default:
-	    // no contraints
-	    break;
-	}
+          default:
+            // no contraints
+            break;
+        }
       }
       wfn_r[attr_r.asIntegral()] = val_r;
     }
@@ -296,17 +296,17 @@ namespace zypp
     {
       if ( cpe_r[4] == '/' )
       {
-	ret = unbindUri( cpe_r );
+        ret = unbindUri( cpe_r );
       }
       else if ( cpe_r[4] == '2'
-	     && cpe_r[5] == '.'
-	     && cpe_r[6] == '3'
-	     && cpe_r[7] == ':' )
+             && cpe_r[5] == '.'
+             && cpe_r[6] == '3'
+             && cpe_r[7] == ':' )
       {
-	ret = unbindFs( cpe_r );
+        ret = unbindFs( cpe_r );
       }
       else
-	throw std::invalid_argument( "CpeId: bad magic; expected: 'cpe:2.3:' | 'cpe:/'" );
+        throw std::invalid_argument( "CpeId: bad magic; expected: 'cpe:2.3:' | 'cpe:/'" );
     }
     else if ( cpe_r[0] != '\0' )
       throw std::invalid_argument( "CpeId: bad magic; expected: 'cpe:2.3:' | 'cpe:/'" );
@@ -328,19 +328,19 @@ namespace zypp
     {
       if ( ai == Attribute::edition && field[ai][0] == '~' )
       {
-	// unpacking is needed
-	static constexpr unsigned numPacks = 6u;	// dummy_before_~ + edition + 4 extended attributes
-	std::vector<std::string> pack;
-	pack.reserve( numPacks );
-	if ( str::splitFields( field[ai], std::back_inserter(pack), "~" ) > numPacks )
-	  throw std::invalid_argument( str::Str() << "CpeId:Uri:edition: too many packs (" << pack.size() << "); expected " << numPacks );
-	pack.resize( numPacks );	// fillup with ANY(""), should be noOP
+        // unpacking is needed
+        static constexpr unsigned numPacks = 6u;	// dummy_before_~ + edition + 4 extended attributes
+        std::vector<std::string> pack;
+        pack.reserve( numPacks );
+        if ( str::splitFields( field[ai], std::back_inserter(pack), "~" ) > numPacks )
+          throw std::invalid_argument( str::Str() << "CpeId:Uri:edition: too many packs (" << pack.size() << "); expected " << numPacks );
+        pack.resize( numPacks );	// fillup with ANY(""), should be noOP
 
-	pack[1].swap( field[Attribute::edition] );
-	pack[2].swap( field[Attribute::sw_edition] );
-	pack[3].swap( field[Attribute::target_sw] );
-	pack[4].swap( field[Attribute::target_hw] );
-	pack[5].swap( field[Attribute::other] );
+        pack[1].swap( field[Attribute::edition] );
+        pack[2].swap( field[Attribute::sw_edition] );
+        pack[3].swap( field[Attribute::target_sw] );
+        pack[4].swap( field[Attribute::target_hw] );
+        pack[5].swap( field[Attribute::other] );
       }
       assignAttr( ret, ai, Value( field[ai], Value::uriFormat ) );
     }
@@ -452,56 +452,56 @@ namespace zypp
     if ( value_r.empty() )	// NA
     {
       if ( ! CpeId::Value::NA._value )	// initialized by this ctor!
-	_value.reset( new std::string );
+        _value.reset( new std::string );
       else
-	_value = CpeId::Value::NA._value;
+        _value = CpeId::Value::NA._value;
     }
     else if ( value_r != "*" )	// ANY is default constructed
     {
       bool starting = true;	// false after the 1st non-?
       for_( chp, value_r.begin(), value_r.end() )
       {
-	switch ( *chp )
-	{
-	  case '\\':	// quoted
-	    ++chp;
-	    if ( ! chIsValidRange( *chp )  )
-	    {
-	      if ( *chp )
-		throw std::invalid_argument( str::Str() << "CpeId:Wfn: illegal quoted character '\\" << reinterpret_cast<void*>(*chp) << "'" );
-	      else
-		throw std::invalid_argument( "CpeId:Wfn: Backslash escapes nothing" );
-	    }
-	    else if ( chIsWfnUnescaped( *chp ) )
-	      throw std::invalid_argument( str::Str() << "CpeId:Wfn: unnecessarily quoted character '\\" << *chp << "'" );
-	    else if ( starting && *chp == '-' && chp+1 == value_r.end() )
-	      throw std::invalid_argument( str::Str() << "CpeId:Wfn: '\\-' is illegal value" );
-	    break;
+        switch ( *chp )
+        {
+          case '\\':	// quoted
+            ++chp;
+            if ( ! chIsValidRange( *chp )  )
+            {
+              if ( *chp )
+                throw std::invalid_argument( str::Str() << "CpeId:Wfn: illegal quoted character '\\" << reinterpret_cast<void*>(*chp) << "'" );
+              else
+                throw std::invalid_argument( "CpeId:Wfn: Backslash escapes nothing" );
+            }
+            else if ( chIsWfnUnescaped( *chp ) )
+              throw std::invalid_argument( str::Str() << "CpeId:Wfn: unnecessarily quoted character '\\" << *chp << "'" );
+            else if ( starting && *chp == '-' && chp+1 == value_r.end() )
+              throw std::invalid_argument( str::Str() << "CpeId:Wfn: '\\-' is illegal value" );
+            break;
 
-	  case '?':	// sequence at beginning or end of string
-	    while ( *(chp+1) == '?' )
-	      ++chp;
-	    if ( ! ( starting || chp+1 == value_r.end() ) )
-	      throw std::invalid_argument( "CpeId:Wfn: embedded ?" );
-	    break;
+          case '?':	// sequence at beginning or end of string
+            while ( *(chp+1) == '?' )
+              ++chp;
+            if ( ! ( starting || chp+1 == value_r.end() ) )
+              throw std::invalid_argument( "CpeId:Wfn: embedded ?" );
+            break;
 
-	  case '*':	// single at beginning or end of string
-	    if ( ! ( starting || chp+1 == value_r.end() ) )
-	      throw std::invalid_argument( "CpeId:Wfn: embedded *" );
-	    break;
+          case '*':	// single at beginning or end of string
+            if ( ! ( starting || chp+1 == value_r.end() ) )
+              throw std::invalid_argument( "CpeId:Wfn: embedded *" );
+            break;
 
-	  default:	// everything else unquoted
-	    if ( ! chIsWfnUnescaped( *chp ) )
-	    {
-	      if ( chIsValidRange( *chp ) )
-		throw std::invalid_argument( str::Str() << "CpeId:Wfn: missing quote before '" << *chp << "'" );
-	      else
-		throw std::invalid_argument( str::Str() << "CpeId:Wfn: illegal character '" << reinterpret_cast<void*>(*chp) << "'" );
-	    }
-	    break;
-	}
-	if ( starting )
-	  starting = false;
+          default:	// everything else unquoted
+            if ( ! chIsWfnUnescaped( *chp ) )
+            {
+              if ( chIsValidRange( *chp ) )
+                throw std::invalid_argument( str::Str() << "CpeId:Wfn: missing quote before '" << *chp << "'" );
+              else
+                throw std::invalid_argument( str::Str() << "CpeId:Wfn: illegal character '" << reinterpret_cast<void*>(*chp) << "'" );
+            }
+            break;
+        }
+        if ( starting )
+          starting = false;
       }
       _value.reset( new std::string( value_r ) );
     }
@@ -513,61 +513,61 @@ namespace zypp
     {
       if ( encoded_r == "-" )	// NA
       {
-	_value = CpeId::Value::NA._value;
+        _value = CpeId::Value::NA._value;
       }
       else
       {
-	str::Str result;
-	bool starting = true;	// false after the 1st non-?
-	for_( chp, encoded_r.begin(), encoded_r.end() )
-	{
-	  switch ( *chp )
-	  {
-	    case '\\':	// may stay quoted
-	      ++chp;
-	      if ( chIsWfnUnescaped( *chp ) )
-		result << *chp;
-	      else if ( chIsValidRange( *chp ) )
-		result << '\\' << *chp;
-	      else if ( *chp )
-		throw std::invalid_argument( str::Str() << "CpeId:Fs: illegal quoted character '\\" << *chp << "'" );
-	      else
-		throw std::invalid_argument( "CpeId:Fs: Backslash escapes nothing" );
-	      break;
+        str::Str result;
+        bool starting = true;	// false after the 1st non-?
+        for_( chp, encoded_r.begin(), encoded_r.end() )
+        {
+          switch ( *chp )
+          {
+            case '\\':	// may stay quoted
+              ++chp;
+              if ( chIsWfnUnescaped( *chp ) )
+                result << *chp;
+              else if ( chIsValidRange( *chp ) )
+                result << '\\' << *chp;
+              else if ( *chp )
+                throw std::invalid_argument( str::Str() << "CpeId:Fs: illegal quoted character '\\" << *chp << "'" );
+              else
+                throw std::invalid_argument( "CpeId:Fs: Backslash escapes nothing" );
+              break;
 
-	    case '?':	// sequence at beginning or end of string
-	      result << '?';
-	      while ( *(chp+1) == '?' )
-	      {
-		++chp;
-		result << '?';
-	      }
-	      if ( ! ( starting || chp+1 == encoded_r.end() ) )
-		throw std::invalid_argument( "CpeId:Fs: embedded ?" );
-	      break;
+            case '?':	// sequence at beginning or end of string
+              result << '?';
+              while ( *(chp+1) == '?' )
+              {
+                ++chp;
+                result << '?';
+              }
+              if ( ! ( starting || chp+1 == encoded_r.end() ) )
+                throw std::invalid_argument( "CpeId:Fs: embedded ?" );
+              break;
 
-	    case '*':	// single at beginning or end of string
-	      if ( starting || chp+1 == encoded_r.end() )
-		result << '*';
-	      else
-		throw std::invalid_argument( "CpeId:Fs: embedded *" );
-	      break;
+            case '*':	// single at beginning or end of string
+              if ( starting || chp+1 == encoded_r.end() )
+                result << '*';
+              else
+                throw std::invalid_argument( "CpeId:Fs: embedded *" );
+              break;
 
-	    default:
-	      if ( chIsWfnUnescaped( *chp ) )
-		result << *chp;
-	      else if ( chIsValidRange( *chp ) )
-		result << '\\' << *chp;
-	      else
-		throw std::invalid_argument( str::Str() << "CpeId:Fs: illegal character '" << reinterpret_cast<void*>(*chp) << "'" );
-	      break;
-	  }
-	  if ( starting )
-	    starting = false;
-	}
-	if ( starting )
-	  throw std::invalid_argument( "CpeId:Fs: '' value is illegal" );
-	_value.reset( new std::string( result ) );
+            default:
+              if ( chIsWfnUnescaped( *chp ) )
+                result << *chp;
+              else if ( chIsValidRange( *chp ) )
+                result << '\\' << *chp;
+              else
+                throw std::invalid_argument( str::Str() << "CpeId:Fs: illegal character '" << reinterpret_cast<void*>(*chp) << "'" );
+              break;
+          }
+          if ( starting )
+            starting = false;
+        }
+        if ( starting )
+          throw std::invalid_argument( "CpeId:Fs: '' value is illegal" );
+        _value.reset( new std::string( result ) );
       }
     }
   }
@@ -578,73 +578,73 @@ namespace zypp
     {
       if ( encoded_r == "-" )	// NA
       {
-	_value = CpeId::Value::NA._value;
+        _value = CpeId::Value::NA._value;
       }
       else
       {
-	str::Str result;
-	bool starting = true;	// false after the 1st non-? (%01)
-	for_( chp, encoded_r.begin(), encoded_r.end() )
-	{
-	  char ch = *chp;
+        str::Str result;
+        bool starting = true;	// false after the 1st non-? (%01)
+        for_( chp, encoded_r.begin(), encoded_r.end() )
+        {
+          char ch = *chp;
 
-	  if ( ch == '%' )	// legal '%xx' sequence first
-	  {
-	    int d1 = heDecodeCh( *(chp+1) );
-	    if ( d1 != -1 )
-	    {
-	      int d2 = heDecodeCh( *(chp+2) );
-	      if ( d2 != -1 )
-	      {
-		chp += 2;	// skip sequence
-		if ( d1 == 0 )
-		{
-		  if ( d2 == 1 )	// %01 - ? valid sequence at begin or end
-		  {
-		    result << '?';
-		    while ( *(chp+1) == '%' && *(chp+2) == '0' && *(chp+3) == '1' )
-		    {
-		      chp += 3;
-		      result << '?';
-		    }
-		    if ( starting || chp+1 == encoded_r.end() )
-		    {
-		      starting = false;
-		      continue;	// -> continue;
-		    }
-		    else
-		      throw std::invalid_argument( "CpeId:Uri: embedded %01" );
-		  }
-		  else if ( d2 == 2 )	// %02 - * valid at begin or end
-		  {
-		    if ( starting || chp+1 == encoded_r.end() )
-		    {
-		      result << '*';
-		      starting = false;
-		      continue;	// -> continue;
-		    }
-		    else
-		      throw std::invalid_argument( "CpeId:Uri: embedded %02" );
-		  }
-		}
-		ch = (d1<<4)|d2;
-		if ( ! chIsValidRange( ch ) )
-		  throw std::invalid_argument( str::Str() << "CpeId:Uri: illegal % encoded character '" << reinterpret_cast<void*>(ch) << "'" );
-	      }
-	    }
-	  }
-	  else if ( ! chIsValidRange( ch ) )
-	    throw std::invalid_argument( str::Str() << "CpeId:Uri: illegal character '" << reinterpret_cast<void*>(ch) << "'" );
+          if ( ch == '%' )	// legal '%xx' sequence first
+          {
+            int d1 = heDecodeCh( *(chp+1) );
+            if ( d1 != -1 )
+            {
+              int d2 = heDecodeCh( *(chp+2) );
+              if ( d2 != -1 )
+              {
+                chp += 2;	// skip sequence
+                if ( d1 == 0 )
+                {
+                  if ( d2 == 1 )	// %01 - ? valid sequence at begin or end
+                  {
+                    result << '?';
+                    while ( *(chp+1) == '%' && *(chp+2) == '0' && *(chp+3) == '1' )
+                    {
+                      chp += 3;
+                      result << '?';
+                    }
+                    if ( starting || chp+1 == encoded_r.end() )
+                    {
+                      starting = false;
+                      continue;	// -> continue;
+                    }
+                    else
+                      throw std::invalid_argument( "CpeId:Uri: embedded %01" );
+                  }
+                  else if ( d2 == 2 )	// %02 - * valid at begin or end
+                  {
+                    if ( starting || chp+1 == encoded_r.end() )
+                    {
+                      result << '*';
+                      starting = false;
+                      continue;	// -> continue;
+                    }
+                    else
+                      throw std::invalid_argument( "CpeId:Uri: embedded %02" );
+                  }
+                }
+                ch = (d1<<4)|d2;
+                if ( ! chIsValidRange( ch ) )
+                  throw std::invalid_argument( str::Str() << "CpeId:Uri: illegal % encoded character '" << reinterpret_cast<void*>(ch) << "'" );
+              }
+            }
+          }
+          else if ( ! chIsValidRange( ch ) )
+            throw std::invalid_argument( str::Str() << "CpeId:Uri: illegal character '" << reinterpret_cast<void*>(ch) << "'" );
 
-	  if ( chIsWfnUnescaped( ch ) )
-	    result << ch;
-	  else
-	    result << '\\' << ch;
+          if ( chIsWfnUnescaped( ch ) )
+            result << ch;
+          else
+            result << '\\' << ch;
 
-	  if ( starting )
-	    starting = false;
-	}
-	_value.reset( new std::string( result ) );
+          if ( starting )
+            starting = false;
+        }
+        _value.reset( new std::string( result ) );
       }
     }
   }
@@ -680,28 +680,28 @@ namespace zypp
       str::Str result;
       for_( chp, _value->begin(), _value->end() )
       {
-	if ( *chp != '\\' )
-	  result << *chp;
-	else
-	{
-	  ++chp;
-	  switch ( *chp )
-	  {
-	    case '-':
-	    case '.':
-	    case '_':
-	      result << *chp;	// without escaping
-	      break;
+        if ( *chp != '\\' )
+          result << *chp;
+        else
+        {
+          ++chp;
+          switch ( *chp )
+          {
+            case '-':
+            case '.':
+            case '_':
+              result << *chp;	// without escaping
+              break;
 
-	    case '\0':
-	      throw std::invalid_argument( "CpeId:Wfn: Backslash escapes nothing" );
-	      break;
+            case '\0':
+              throw std::invalid_argument( "CpeId:Wfn: Backslash escapes nothing" );
+              break;
 
-	    default:
-	      result << '\\' << *chp;
-	      break;
-	  }
-	}
+            default:
+              result << '\\' << *chp;
+              break;
+          }
+        }
       }
       ret = result;
     }
@@ -715,57 +715,57 @@ namespace zypp
     {
       if ( isNA() )
       {
-	static const std::string dash( "-" );
-	ret = dash;
+        static const std::string dash( "-" );
+        ret = dash;
       }
       else
       {
-	str::Str result;
-	for_( chp, _value->begin(), _value->end() )
-	{
-	  if ( chIsWfnUnescaped( *chp ) )
-	  {
-	    result << *chp;
-	  }
-	  else
-	  {
-	    static const char *const hdig = "0123456789abcdef";
-	    switch ( *chp )
-	    {
-	      case '\\':
-		++chp;
-		switch ( *chp )
-		{
-		  case '-':
-		  case '.':
-		    result << *chp;	// without encodeing
-		    break;
+        str::Str result;
+        for_( chp, _value->begin(), _value->end() )
+        {
+          if ( chIsWfnUnescaped( *chp ) )
+          {
+            result << *chp;
+          }
+          else
+          {
+            static const char *const hdig = "0123456789abcdef";
+            switch ( *chp )
+            {
+              case '\\':
+                ++chp;
+                switch ( *chp )
+                {
+                  case '-':
+                  case '.':
+                    result << *chp;	// without encodeing
+                    break;
 
-		  case '\0':
-		    throw std::invalid_argument( "CpeId:Wfn: Backslash escapes nothing" );
-		    break;
+                  case '\0':
+                    throw std::invalid_argument( "CpeId:Wfn: Backslash escapes nothing" );
+                    break;
 
-		  default:
-		    result << '%' << hdig[(unsigned char)(*chp)/16] << hdig[(unsigned char)(*chp)%16];
-		    break;
-		}
-		break;
+                  default:
+                    result << '%' << hdig[(unsigned char)(*chp)/16] << hdig[(unsigned char)(*chp)%16];
+                    break;
+                }
+                break;
 
-	      case '?':
-		result << "%01";
-		break;
+              case '?':
+                result << "%01";
+                break;
 
-	      case '*':
-		result << "%02";
-		break;
+              case '*':
+                result << "%02";
+                break;
 
-	      default:
-		throw std::invalid_argument( str::Str() << "CpeId:Wfn: illegal char '" << *chp << "' in WFN" );
-		break;
-	    }
-	  }
-	}
-	ret = result;
+              default:
+                throw std::invalid_argument( str::Str() << "CpeId:Wfn: illegal char '" << *chp << "' in WFN" );
+                break;
+            }
+          }
+        }
+        ret = result;
       }
     }
     return ret;
@@ -786,10 +786,10 @@ namespace zypp
       unsigned backslashes = 0;
       for_( it, rbegin_r, rend_r )
       {
-	if ( *it == '\\' )
-	  ++backslashes;
-	else
-	  break;
+        if ( *it == '\\' )
+          ++backslashes;
+        else
+          break;
       }
       return !(backslashes & 1U);
     }
@@ -800,12 +800,12 @@ namespace zypp
       unsigned chars = 0;
       for_( it, begin_r, end_r )
       {
-	++chars;
-	if ( str_r[it] == '\\' )
-	{
-	  if ( ++it == end_r )
-	    break;
-	}
+        ++chars;
+        if ( str_r[it] == '\\' )
+        {
+          if ( ++it == end_r )
+            break;
+        }
       }
       return chars;
     }
@@ -847,63 +847,63 @@ namespace zypp
       std::string::size_type prefx = 0;
       switch ( *src.begin() )	// wellformed implies not empty
       {
-	case '*':
-	  if ( src.size() == 1 )
-	    return true;	// "*" matches always: superset
-	  // else
-	  prefx = std::string::npos;
-	  src.erase( 0, 1 );
-	  break;
-	case '?':
-	  ++prefx;
-	  for_( it, ++src.begin(), src.end() )
-	  { if ( *it == '?' ) ++prefx; else break; }
-	  if ( src.size() == prefx )
-	    return( trg.size() <= prefx );	// "??..?": superset if at most #prefx chars
-	  // else
-	  src.erase( 0, prefx );
-	  break;
-	default:
-	  break;
+        case '*':
+          if ( src.size() == 1 )
+            return true;	// "*" matches always: superset
+          // else
+          prefx = std::string::npos;
+          src.erase( 0, 1 );
+          break;
+        case '?':
+          ++prefx;
+          for_( it, ++src.begin(), src.end() )
+          { if ( *it == '?' ) ++prefx; else break; }
+          if ( src.size() == prefx )
+            return( trg.size() <= prefx );	// "??..?": superset if at most #prefx chars
+          // else
+          src.erase( 0, prefx );
+          break;
+        default:
+          break;
       }
       // unescaped wildcard suffix
       std::string::size_type suffx = 0;
       if ( ! src.empty() )
       {
-	switch ( *src.rbegin() )
-	{
-	  case '*':
-	    if ( evenNumberOfBackslashes( ++src.rbegin(), src.rend() ) )
-	    {
-	      suffx = std::string::npos;
-	      src.erase( src.size()-1 );
-	    }
-	    break;
-	  case '?':
-	    ++suffx;
-	    for_( it, ++src.rbegin(), src.rend() )
-	    { if ( *it == '?' ) ++suffx; else break; }
-	    if ( ! evenNumberOfBackslashes( src.rbegin()+suffx, src.rend() ) )
-	      --suffx;	// last '?' was escaped.
-	    src.erase( src.size()-suffx );
-	    break;
-	  default:
-	    break;
-	}
+        switch ( *src.rbegin() )
+        {
+          case '*':
+            if ( evenNumberOfBackslashes( ++src.rbegin(), src.rend() ) )
+            {
+              suffx = std::string::npos;
+              src.erase( src.size()-1 );
+            }
+            break;
+          case '?':
+            ++suffx;
+            for_( it, ++src.rbegin(), src.rend() )
+            { if ( *it == '?' ) ++suffx; else break; }
+            if ( ! evenNumberOfBackslashes( src.rbegin()+suffx, src.rend() ) )
+              --suffx;	// last '?' was escaped.
+            src.erase( src.size()-suffx );
+            break;
+          default:
+            break;
+        }
       }
       // now match; find src in trg an check surrounding wildcards
       src = str::toLower( src );
       trg = str::toLower( trg );
       for ( std::string::size_type match = trg.find( src, 0 );
-	    match != std::string::npos;
+            match != std::string::npos;
             match = trg.find( src, match+1 ) )
       {
-	if ( prefx != std::string::npos && trueCharsIn( trg, 0, match ) > prefx )
-	  break;	// not "*", and already more chars than "?"s before match: disjoint
-	std::string::size_type frontSize = match + src.size();
-	if ( suffx != std::string::npos && trueCharsIn( trg, frontSize, trg.size() ) > suffx )
-	  continue;	// not "*", and still more chars than "?"s after match: check next match
-	return true;	// match: superset
+        if ( prefx != std::string::npos && trueCharsIn( trg, 0, match ) > prefx )
+          break;	// not "*", and already more chars than "?"s before match: disjoint
+        std::string::size_type frontSize = match + src.size();
+        if ( suffx != std::string::npos && trueCharsIn( trg, frontSize, trg.size() ) > suffx )
+          continue;	// not "*", and still more chars than "?"s after match: check next match
+        return true;	// match: superset
       }
       return false;	// disjoint
     }
@@ -914,7 +914,7 @@ namespace zypp
   {
     const std::string & value( *_value );
     return ( isWildchar( *value.begin() )
-	|| ( isWildchar( *value.rbegin() ) && evenNumberOfBackslashes( ++value.rbegin(), value.rend() ) ) );
+        || ( isWildchar( *value.rbegin() ) && evenNumberOfBackslashes( ++value.rbegin(), value.rend() ) ) );
   }
 
   ///////////////////////////////////////////////////////////////////
@@ -965,13 +965,13 @@ namespace zypp
     {
       if ( srcType == Type::wildcardfree )	// trgType == Type::wildcardfree
       {
-	// simple string compare
-	ret = matchWildcardfreeString( *_value, *trg._value ) ? SetCompare::equal : SetCompare::disjoint;
+        // simple string compare
+        ret = matchWildcardfreeString( *_value, *trg._value ) ? SetCompare::equal : SetCompare::disjoint;
       }
       else if ( srcType == Type::wildcarded )	// trgType == Type::wildcardfree
       {
-	// Needs wildcard compare
-	ret = matchWildcardedString( *_value, *trg._value ) ? SetCompare::properSuperset : SetCompare::disjoint;
+        // Needs wildcard compare
+        ret = matchWildcardedString( *_value, *trg._value ) ? SetCompare::properSuperset : SetCompare::disjoint;
      }
     }
     return ret;
@@ -1020,29 +1020,29 @@ namespace zypp
       // NeedsCloserLook:
       if ( isWildcarded() )
       {
-	if ( trg.isWildcarded() )
-	{
-	  // simple string compare just to detect 'equal'
-	  ret = matchWildcardfreeString( *_value, *trg._value ) ? SetCompare::equal : SetCompare::uncomparable;
-	}
-	else
-	{
-	  // Needs wildcard compare (src,trg)
-	  if ( matchWildcardedString( *_value, *trg._value ) ) ret = SetCompare::properSuperset; // else: SetCompare::disjoint;
-	}
+        if ( trg.isWildcarded() )
+        {
+          // simple string compare just to detect 'equal'
+          ret = matchWildcardfreeString( *_value, *trg._value ) ? SetCompare::equal : SetCompare::uncomparable;
+        }
+        else
+        {
+          // Needs wildcard compare (src,trg)
+          if ( matchWildcardedString( *_value, *trg._value ) ) ret = SetCompare::properSuperset; // else: SetCompare::disjoint;
+        }
       }
       else
       {
-	if ( trg.isWildcarded() )
-	{
-	  // Needs wildcard compare (trg,src)
-	  if ( matchWildcardedString( *trg._value, *_value ) ) ret = SetCompare::properSubset; // else: SetCompare::disjoint;
-	}
-	else
-	{
-	  // simple string compare
-	  if ( matchWildcardfreeString( *_value, *trg._value ) ) ret = SetCompare::equal; // else: SetCompare::disjoint;
-	}
+        if ( trg.isWildcarded() )
+        {
+          // Needs wildcard compare (trg,src)
+          if ( matchWildcardedString( *trg._value, *_value ) ) ret = SetCompare::properSubset; // else: SetCompare::disjoint;
+        }
+        else
+        {
+          // simple string compare
+          if ( matchWildcardfreeString( *_value, *trg._value ) ) ret = SetCompare::equal; // else: SetCompare::disjoint;
+        }
       }
     }
     return ret;

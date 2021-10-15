@@ -72,10 +72,10 @@ namespace zypp {
        * of stderr
        */
       enum Stderr_Disposition {
-    	Normal_Stderr,
-    	Discard_Stderr,
-    	Stderr_To_Stdout,
-    	Stderr_To_FileDesc
+        Normal_Stderr,
+        Discard_Stderr,
+        Stderr_To_Stdout,
+        Stderr_To_FileDesc
       };
 
       /**
@@ -92,9 +92,9 @@ namespace zypp {
        * @param root directory to chroot into; or just 'cd' if '/'l;  nothing if empty
        */
       ExternalProgram (std::string commandline,
-    		     Stderr_Disposition stderr_disp = Normal_Stderr,
-    		     bool use_pty = false, int stderr_fd = -1, bool default_locale = false,
-    		     const Pathname& root = "");
+                     Stderr_Disposition stderr_disp = Normal_Stderr,
+                     bool use_pty = false, int stderr_fd = -1, bool default_locale = false,
+                     const Pathname& root = "");
 
       /**
        * Start an external program by giving the arguments as an arry of char *pointers.
@@ -121,31 +121,31 @@ namespace zypp {
       ExternalProgram();
 
       ExternalProgram (const Arguments &argv,
-    		     Stderr_Disposition stderr_disp = Normal_Stderr,
-    		     bool use_pty = false, int stderr_fd = -1, bool default_locale = false,
-    		     const Pathname& root = "");
+                     Stderr_Disposition stderr_disp = Normal_Stderr,
+                     bool use_pty = false, int stderr_fd = -1, bool default_locale = false,
+                     const Pathname& root = "");
 
       ExternalProgram (const Arguments &argv, const Environment & environment,
-    		     Stderr_Disposition stderr_disp = Normal_Stderr,
-    		     bool use_pty = false, int stderr_fd = -1, bool default_locale = false,
-    		     const Pathname& root = "");
+                     Stderr_Disposition stderr_disp = Normal_Stderr,
+                     bool use_pty = false, int stderr_fd = -1, bool default_locale = false,
+                     const Pathname& root = "");
 
       ExternalProgram (const char *const *argv,
-    		     Stderr_Disposition stderr_disp = Normal_Stderr,
-    		     bool use_pty = false, int stderr_fd = -1, bool default_locale = false,
-    		     const Pathname& root = "");
+                     Stderr_Disposition stderr_disp = Normal_Stderr,
+                     bool use_pty = false, int stderr_fd = -1, bool default_locale = false,
+                     const Pathname& root = "");
 
       ExternalProgram (const char *const *argv, const Environment & environment,
-    		     Stderr_Disposition stderr_disp = Normal_Stderr,
-    		     bool use_pty = false, int stderr_fd = -1, bool default_locale = false,
-    		     const Pathname& root = "");
+                     Stderr_Disposition stderr_disp = Normal_Stderr,
+                     bool use_pty = false, int stderr_fd = -1, bool default_locale = false,
+                     const Pathname& root = "");
 
       ExternalProgram (const char *binpath, const char *const *argv_1,
-    		     bool use_pty = false);
+                     bool use_pty = false);
 
 
       ExternalProgram (const char *binpath, const char *const *argv_1, const Environment & environment,
-    		     bool use_pty = false);
+                     bool use_pty = false);
 
 
       ~ExternalProgram();
@@ -220,9 +220,9 @@ namespace zypp {
     protected:
 
       void start_program (const char *const *argv, const Environment & environment,
-    			Stderr_Disposition stderr_disp = Normal_Stderr,
-    			int stderr_fd = -1, bool default_locale = false,
-    			const char* root = NULL, bool switch_pgid = false, bool die_with_parent = false, bool usePty = false );
+                        Stderr_Disposition stderr_disp = Normal_Stderr,
+                        int stderr_fd = -1, bool default_locale = false,
+                        const char* root = NULL, bool switch_pgid = false, bool die_with_parent = false, bool usePty = false );
 
     };
 
@@ -242,8 +242,8 @@ namespace zypp {
       void closeW()		{ if ( _fds[W] != -1 ) { ::close( _fds[W] ); _fds[W] = -1; } }
       FILE * fStdErr()		{ return _stderr; }
       protected:
-	FILE * _stderr;
-	int _fds[2];
+        FILE * _stderr;
+        int _fds[2];
     };
   } // namespace externalprogram
 

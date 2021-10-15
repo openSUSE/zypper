@@ -60,12 +60,12 @@ namespace zypp
       outs << "# " << file_r.basename() << " generated " << Date::now() << endl;
       if ( true )
       {
-	std::set<IdString> sorted( data_r.begin(), data_r.end() );
-	dumpRange( outs, sorted.begin(), sorted.end(), "#", "\n", "\n", "\n", "#\n" );
+        std::set<IdString> sorted( data_r.begin(), data_r.end() );
+        dumpRange( outs, sorted.begin(), sorted.end(), "#", "\n", "\n", "\n", "#\n" );
       }
       else
       {
-	dumpRange( outs, data_r.begin(), data_r.end(), "#", "\n", "\n", "\n", "#\n" );
+        dumpRange( outs, data_r.begin(), data_r.end(), "#", "\n", "\n", "\n", "#\n" );
       }
       outs.close();
 

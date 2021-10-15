@@ -22,9 +22,9 @@ namespace boost
     std::ostream & operator<<( std::ostream & str, const connection & obj )
     {
       return str << "Connection: "
-	  << ( obj.connected() ? '*' : '_' )
-	  << ( obj.blocked()   ? 'B' : '_' )
-	  ;
+          << ( obj.connected() ? '*' : '_' )
+          << ( obj.blocked()   ? 'B' : '_' )
+          ;
     }
   }
 }

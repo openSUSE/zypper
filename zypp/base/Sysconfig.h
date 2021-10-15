@@ -53,7 +53,7 @@ namespace zypp {
        * \endcode
        */
       bool write( const Pathname & path_r, const std::string & key_r, const std::string & val_r,
-		  const std::string & newcomment_r = std::string() );
+                  const std::string & newcomment_r = std::string() );
 
       /** Convenience to add or change a string-value in sysconfig file \a path_r.
        *
@@ -63,7 +63,7 @@ namespace zypp {
        * \see \ref write
        */
       bool writeStringVal( const Pathname & path_r, const std::string & key_r, const std::string & val_r,
-			   const std::string & newcomment_r = std::string() );
+                           const std::string & newcomment_r = std::string() );
 
     } // namespace sysconfig
   } // namespace base

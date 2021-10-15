@@ -16,7 +16,7 @@ using namespace zypp;
 
 
 void signature_test()
-{  
+{
 }
 
 test_suite*

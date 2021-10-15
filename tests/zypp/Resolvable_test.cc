@@ -32,7 +32,7 @@ BOOST_AUTO_TEST_CASE(resolvable_test)
             //BOOST_CHECK( ! asKind<Pattern>(pitem->resolvable())->contents().empty() );
             MIL << asKind<Pattern>(pitem->resolvable()) << endl;
             pattern_count++;
-        }        
+        }
     }
     BOOST_CHECK(pattern_count > 0);
 }

@@ -289,7 +289,7 @@ namespace zypp
     {
       bool operator()( const PoolItem & p ) const
       {
-	return p.status().isInstalled();
+        return p.status().isInstalled();
       }
     };
 
@@ -298,7 +298,7 @@ namespace zypp
     {
       bool operator()( const PoolItem & p ) const
       {
-	return p.status().isUninstalled();
+        return p.status().isUninstalled();
       }
     };
 
@@ -307,7 +307,7 @@ namespace zypp
     {
       bool operator()( const PoolItem & p ) const
       {
-	return p.status().transacts();
+        return p.status().transacts();
       }
     };
 
@@ -316,7 +316,7 @@ namespace zypp
     {
       bool operator()( const PoolItem & p ) const
       {
-	return p.status().isLocked();
+        return p.status().isLocked();
       }
     };
 
@@ -325,7 +325,7 @@ namespace zypp
     {
       bool operator()( const PoolItem & p ) const
       {
-	return p.status().isKept();
+        return p.status().isKept();
       }
     };
 
@@ -334,7 +334,7 @@ namespace zypp
     {
       bool operator()( const PoolItem & p ) const
       {
-	return p.status().isRecommended();
+        return p.status().isRecommended();
       }
     };
 
@@ -343,7 +343,7 @@ namespace zypp
     {
       bool operator()( const PoolItem & p ) const
       {
-	return p.status().isSuggested();
+        return p.status().isSuggested();
       }
     };
 

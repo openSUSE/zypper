@@ -43,8 +43,8 @@ namespace zypp
       /** Offer default Impl. */
       static shared_ptr<Impl> nullimpl()
       {
-	static shared_ptr<Impl> _nullimpl( new Impl );
-	return _nullimpl;
+        static shared_ptr<Impl> _nullimpl( new Impl );
+        return _nullimpl;
       }
 
     private:
@@ -108,7 +108,7 @@ namespace zypp
     {
       std::string userpwd = username();
       if ( password().size() ) {
-	userpwd += ":" + password();
+        userpwd += ":" + password();
       }
       return userpwd;
     }
@@ -150,7 +150,7 @@ namespace zypp
     {
       std::string userpwd = proxyUsername();
       if ( proxyPassword().size() ) {
-	userpwd += ":" + proxyPassword();
+        userpwd += ":" + proxyPassword();
       }
       return userpwd;
     }

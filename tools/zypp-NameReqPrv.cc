@@ -69,13 +69,13 @@ struct PQSort
       bool l = lhs.isSystem();
       bool r = rhs.isSystem();
       if ( l != r )
-	return r;
+        return r;
     }
     {
       IdString l { lhs.ident() };
       IdString r { rhs.ident() };
       if ( l != r )
-	return l < r;
+        return l < r;
     }
     return avo( PoolItem(lhs), PoolItem(rhs) );
     return lhs.id() > rhs.id();
@@ -104,10 +104,10 @@ struct Table
     for_( match, it_r.matchesBegin(), it_r.matchesEnd() ) {
       std::string ent { match->inSolvAttr().asString().substr( 9, 3 )+": " +match->asString() };
       if ( match->inSolvAttr() == sat::SolvAttr::requires
-	&& match->inSolvable().prerequires().contains( Capability(match->id()) ) ) {
-	static const char * pre = "   " COL_C "[PRE]" COL_OFF;
-	ent[3] = '+';
-	ent += pre;
+        && match->inSolvable().prerequires().contains( Capability(match->id()) ) ) {
+        static const char * pre = "   " COL_C "[PRE]" COL_OFF;
+        ent[3] = '+';
+        ent += pre;
       }
       details.insert( std::move(ent) );
     }
@@ -139,10 +139,10 @@ struct Table
       const char * tagCol = slv.isSystem() ? COL_M : ui::Selectable::get(slv)->identicalInstalled(PoolItem(slv)) ? COL_C : "";
 
       str << str::form( "%s"    fmtSID S fmtNAME S "%s"    fmtREPO S fmtTIME S fmtVEND COL_OFF "\n",
-			tagCol, argSID,  argNAME,  tagCol, argREPO,  argTIME,  argVEND );
+                        tagCol, argSID,  argNAME,  tagCol, argREPO,  argTIME,  argVEND );
 
       for ( const auto & d : el.second )
-	str << dind << d << endl;
+        str << dind << d << endl;
     }
     return str;
   }
@@ -223,21 +223,21 @@ void dTree( const std::string & cmd_r, const std::string & spec_r )
     {
       for ( const auto & cap : el.provides() )
       {
-	// get attrs matching cap
-	for ( const auto & attr : attrs )
-	{
-	  PoolQuery q;
-	  q.addDependency( attr, cap );
-	  if ( q.empty() )
-	    continue;
-	  for_( it, q.begin(), q.end() ) {
-	    for_( match, it.matchesBegin(), it.matchesEnd() ) {
-	      result[attr][*it].insert( match->inSolvAttr().asString().substr( 9, 3 )+": " +match->asString()
-	      + " (" + cap.asString() + ")"
-	      );
-	    }
-	  }
-	}
+        // get attrs matching cap
+        for ( const auto & attr : attrs )
+        {
+          PoolQuery q;
+          q.addDependency( attr, cap );
+          if ( q.empty() )
+            continue;
+          for_( it, q.begin(), q.end() ) {
+            for_( match, it.matchesBegin(), it.matchesEnd() ) {
+              result[attr][*it].insert( match->inSolvAttr().asString().substr( 9, 3 )+": " +match->asString()
+              + " (" + cap.asString() + ")"
+              );
+            }
+          }
+        }
       }
     }
     message << endl << t;
@@ -254,7 +254,7 @@ void dTree( const std::string & cmd_r, const std::string & spec_r )
     {
       auto & details { t.row( el.first ) };
       for ( const auto & cap : el.second )
-	details.insert( cap );
+        details.insert( cap );
     }
     message << endl << t << endl;
   }
@@ -387,49 +387,49 @@ int main( int argc, char * argv[] )
     {
       for ( const char * arg = (*argv)+1; *arg != '\0'; ++arg )	// -pr for -p -r
       {
-	switch ( *arg )
-	{
-	  case 'a': names =		true, 	requires = provides =	true;	break;
-	  case 'A': names =		true, 	requires = provides =	false;	break;
-	  case 'D':
-	    if ( argc > 1 )
-	    {
-	      --argc,++argv;
-	      dDump( *argv );
-	    }
-	    else
-	      return errexit("-D <pkgspec> requires an argument.");
-	    break;
-	  case 'T':
-	    if ( argc > 1 )
-	    {
-	      std::string cmd { *argv };
-	      --argc,++argv;
-	      dTree( cmd, *argv );
-	    }
-	    else
-	      return errexit("-T <pkgspec> requires an argument.");
-	    break;
-	  case 'i': ignorecase =	true;	break;
-	  case 'I': ignorecase =	false;	break;
-	  case 'x': matechexact =	true;	break;
-	  case 'n': names =		true;	break;
-	  case 'N': names =		false;	break;
-	  case 'r': requires =		true;	break;
-	  case 'R': requires =		false;	break;
-	  case 'p': provides =		true;	break;
-	  case 'P': provides =		false;	break;
-	  case 'c': conflicts =		true;	break;
-	  case 'C': conflicts =		false;	break;
-	  case 'o': obsoletes =		true;	break;
-	  case 'O': obsoletes =		false;	break;
-	  case 'm': recommends =	true;	break;
-	  case 'M': recommends =	false;	break;
-	  case 's': supplements =	true;	break;
-	  case 'S': supplements =	false;	break;
-	  case 'e': enhacements =	true;	break;
-	  case 'E': enhacements =	false;	break;
-	}
+        switch ( *arg )
+        {
+          case 'a': names =		true, 	requires = provides =	true;	break;
+          case 'A': names =		true, 	requires = provides =	false;	break;
+          case 'D':
+            if ( argc > 1 )
+            {
+              --argc,++argv;
+              dDump( *argv );
+            }
+            else
+              return errexit("-D <pkgspec> requires an argument.");
+            break;
+          case 'T':
+            if ( argc > 1 )
+            {
+              std::string cmd { *argv };
+              --argc,++argv;
+              dTree( cmd, *argv );
+            }
+            else
+              return errexit("-T <pkgspec> requires an argument.");
+            break;
+          case 'i': ignorecase =	true;	break;
+          case 'I': ignorecase =	false;	break;
+          case 'x': matechexact =	true;	break;
+          case 'n': names =		true;	break;
+          case 'N': names =		false;	break;
+          case 'r': requires =		true;	break;
+          case 'R': requires =		false;	break;
+          case 'p': provides =		true;	break;
+          case 'P': provides =		false;	break;
+          case 'c': conflicts =		true;	break;
+          case 'C': conflicts =		false;	break;
+          case 'o': obsoletes =		true;	break;
+          case 'O': obsoletes =		false;	break;
+          case 'm': recommends =	true;	break;
+          case 'M': recommends =	false;	break;
+          case 's': supplements =	true;	break;
+          case 'S': supplements =	false;	break;
+          case 'e': enhacements =	true;	break;
+          case 'E': enhacements =	false;	break;
+        }
       }
       continue;
     }
@@ -456,56 +456,56 @@ int main( int argc, char * argv[] )
       sat::Solvable::SplitIdent ident( qstr );
       if ( ident.kind() != ResKind::package )
       {
-	q.addKind( ident.kind() );
-	q.addString( ident.name().asString() );
+        q.addKind( ident.kind() );
+        q.addString( ident.name().asString() );
       }
       else
-	q.addString( qstr );
+        q.addString( qstr );
 
       if ( matechexact )
-	q.setMatchGlob();
+        q.setMatchGlob();
       else
-	q.setMatchRegex();
+        q.setMatchRegex();
       q.setCaseSensitive( ! ignorecase );
 
       if ( names )
-	q.addAttribute( sat::SolvAttr::name );
+        q.addAttribute( sat::SolvAttr::name );
       if ( provides )
       {
-	q.addDependency( sat::SolvAttr::provides );
-	q.addDependency( sat::SolvAttr::provides, Capability(qstr) );
+        q.addDependency( sat::SolvAttr::provides );
+        q.addDependency( sat::SolvAttr::provides, Capability(qstr) );
       }
       if ( requires )
       {
-	q.addDependency( sat::SolvAttr::requires );
-	q.addDependency( sat::SolvAttr::requires, Capability(qstr) );
+        q.addDependency( sat::SolvAttr::requires );
+        q.addDependency( sat::SolvAttr::requires, Capability(qstr) );
       }
       if ( conflicts )
       {
-	q.addDependency( sat::SolvAttr::conflicts );
-	q.addDependency( sat::SolvAttr::conflicts, Capability(qstr) );
+        q.addDependency( sat::SolvAttr::conflicts );
+        q.addDependency( sat::SolvAttr::conflicts, Capability(qstr) );
       }
       if ( obsoletes )
       {
-	q.addDependency( sat::SolvAttr::obsoletes );
-	q.addDependency( sat::SolvAttr::obsoletes, Capability(qstr) );
+        q.addDependency( sat::SolvAttr::obsoletes );
+        q.addDependency( sat::SolvAttr::obsoletes, Capability(qstr) );
       }
       if ( recommends )
       {
-	q.addDependency( sat::SolvAttr::recommends );
-	q.addDependency( sat::SolvAttr::recommends, Capability(qstr) );
+        q.addDependency( sat::SolvAttr::recommends );
+        q.addDependency( sat::SolvAttr::recommends, Capability(qstr) );
       }
       if ( supplements )
       {
-	q.addDependency( sat::SolvAttr::supplements );
-	q.addDependency( sat::SolvAttr::supplements, Capability(qstr) );
+        q.addDependency( sat::SolvAttr::supplements );
+        q.addDependency( sat::SolvAttr::supplements, Capability(qstr) );
       }
       if ( enhacements )
       {
-	q.addDependency( sat::SolvAttr::enhances );
-	q.addDependency( sat::SolvAttr::enhances, Capability(qstr) );
-	q.addDependency( sat::SolvAttr::suggests );
-	q.addDependency( sat::SolvAttr::suggests, Capability(qstr) );
+        q.addDependency( sat::SolvAttr::enhances );
+        q.addDependency( sat::SolvAttr::enhances, Capability(qstr) );
+        q.addDependency( sat::SolvAttr::suggests );
+        q.addDependency( sat::SolvAttr::suggests, Capability(qstr) );
       }
     }
 
@@ -517,7 +517,7 @@ int main( int argc, char * argv[] )
     for_( it, q.begin(), q.end() )
     {
       if ( it->isKind( ResKind::srcpackage ) && !withSrcPackages )
-	continue;
+        continue;
       t.row( it );
     }
     message << t << "}" << endl;

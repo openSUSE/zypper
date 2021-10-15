@@ -62,9 +62,9 @@ namespace zypp
        * Use \ref ZYPP_THROW to throw exceptions.
       */
       MediaMountException( const std::string & error_r,
-			   const std::string & source_r,
-			   const std::string & target_r,
-			   const std::string & cmdout_r="")
+                           const std::string & source_r,
+                           const std::string & target_r,
+                           const std::string & cmdout_r="")
       : MediaException()
       , _error(error_r)
       , _source(source_r)
@@ -99,7 +99,7 @@ namespace zypp
        * Use \ref ZYPP_THROW to throw exceptions.
       */
       MediaUnmountException( const std::string & error_r,
-			     const std::string & path_r )
+                             const std::string & path_r )
       : MediaException()
       , _error(error_r)
       , _path(path_r)
@@ -146,7 +146,7 @@ namespace zypp
     {
     public:
       MediaFileNotFoundException(const Url & url_r,
-				 const Pathname & filename_r)
+                                 const Pathname & filename_r)
       : MediaException()
       , _url(url_r.asString())
       , _filename(filename_r.asString())
@@ -219,7 +219,7 @@ namespace zypp
     {
     public:
       MediaSystemException(const Url & url_r,
-			   const std::string & message_r)
+                           const std::string & message_r)
       : MediaException()
       , _url(url_r.asString())
       , _message(message_r)
@@ -236,7 +236,7 @@ namespace zypp
     {
     public:
       MediaNotAFileException(const Url & url_r,
-			     const Pathname & path_r)
+                             const Pathname & path_r)
       : MediaException()
       , _url(url_r.asString())
       , _path(path_r.asString())
@@ -253,7 +253,7 @@ namespace zypp
     {
     public:
       MediaNotADirException(const Url & url_r,
-			    const Pathname & path_r)
+                            const Pathname & path_r)
       : MediaException()
       , _url(url_r.asString())
       , _path(path_r.asString())
@@ -343,8 +343,8 @@ namespace zypp
     {
     public:
       MediaCurlException(const Url & url_r,
-			 const std::string & err_r,
-			 const std::string & msg_r)
+                         const std::string & err_r,
+                         const std::string & msg_r)
       : MediaException()
       , _url(url_r.asString())
       , _err(err_r)

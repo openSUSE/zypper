@@ -43,7 +43,7 @@ namespace zypp
 
    /**
     * CTOR. Creates also \ref xml::Reader and starts reading.
-    * 
+    *
     * \param repomd_file is the repomd.xml file you want to read
     * \param callback is a function.
     *

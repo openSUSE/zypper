@@ -41,8 +41,8 @@ namespace zypp
       std::string::size_type pos = type_r.find( "/" );
       if ( pos != std::string::npos )
       {
-	testAndSet( _subtype, type_r.substr( pos+1 ) );
-	type_r.erase( pos );
+        testAndSet( _subtype, type_r.substr( pos+1 ) );
+        type_r.erase( pos );
       }
       testAndSet( _type, std::move(type_r) );
     }
@@ -100,7 +100,7 @@ namespace zypp
     void testAndSet( std::string & var_r, std::string val_r )
     {
       if ( val_r.find_first_of( "/ \t\r\n" ) != std::string::npos )
-	throw std::invalid_argument( "ContentType: illegal char in '" + val_r + "'" );
+        throw std::invalid_argument( "ContentType: illegal char in '" + val_r + "'" );
       var_r = std::move(val_r);
     }
   private:

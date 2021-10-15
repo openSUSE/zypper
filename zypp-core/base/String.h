@@ -480,9 +480,9 @@ namespace zypp
     {
       if ( gap_r &&  inp_r.size() > gap_r )
       {
-	inp_r.reserve( inp_r.size() + (inp_r.size()-1)/gap_r );
-	for ( std::string::size_type pos = gap_r; pos < inp_r.size(); pos += gap_r+1 )
-	  inp_r.insert( pos, 1, gapchar );
+        inp_r.reserve( inp_r.size() + (inp_r.size()-1)/gap_r );
+        for ( std::string::size_type pos = gap_r; pos < inp_r.size(); pos += gap_r+1 )
+          inp_r.insert( pos, 1, gapchar );
       }
       return inp_r;
     }
@@ -617,86 +617,86 @@ namespace zypp
         }
 
         // after the leading sepchars
-	enum class Quote { None, Slash, Single, Double, DoubleSlash };
-	std::vector<char> buf;
-	Quote quoting = Quote::None;
+        enum class Quote { None, Slash, Single, Double, DoubleSlash };
+        std::vector<char> buf;
+        Quote quoting = Quote::None;
         for ( beg = cur; *beg; beg = cur, ++result_r, ++ret )
-	{
-	  // read next value until unquoted sepchar
-	  buf.clear();
-	  quoting = Quote::None;
-	  do {
-	    switch ( quoting )
-	    {
-	      case Quote::None:
-		switch ( *cur )
-		{
-		  case '\\':	quoting = Quote::Slash;		break;
-		  case '\'':	quoting = Quote::Single;	break;
-		  case '"':	quoting = Quote::Double;	break;
-		  default:	buf.push_back( *cur );		break;
-		}
-		break;
+        {
+          // read next value until unquoted sepchar
+          buf.clear();
+          quoting = Quote::None;
+          do {
+            switch ( quoting )
+            {
+              case Quote::None:
+                switch ( *cur )
+                {
+                  case '\\':	quoting = Quote::Slash;		break;
+                  case '\'':	quoting = Quote::Single;	break;
+                  case '"':	quoting = Quote::Double;	break;
+                  default:	buf.push_back( *cur );		break;
+                }
+                break;
 
-	      case Quote::Slash:
-		buf.push_back( *cur );
-		quoting = Quote::None;
-		break;
+              case Quote::Slash:
+                buf.push_back( *cur );
+                quoting = Quote::None;
+                break;
 
-	      case Quote::Single:
-		switch ( *cur )
-		{
-		  case '\'':	quoting = Quote::None;		break;
-		  default:	buf.push_back( *cur );		break;
-		}
-		break;
+              case Quote::Single:
+                switch ( *cur )
+                {
+                  case '\'':	quoting = Quote::None;		break;
+                  default:	buf.push_back( *cur );		break;
+                }
+                break;
 
-	      case Quote::Double:
-		switch ( *cur )
-		{
-		  case '\"':	quoting = Quote::None;		break;
-		  case '\\':	quoting = Quote::DoubleSlash;	break;
-		  default:	buf.push_back( *cur );		break;
-		}
-		break;
+              case Quote::Double:
+                switch ( *cur )
+                {
+                  case '\"':	quoting = Quote::None;		break;
+                  case '\\':	quoting = Quote::DoubleSlash;	break;
+                  default:	buf.push_back( *cur );		break;
+                }
+                break;
 
-	      case Quote::DoubleSlash:
-		switch ( *cur )
-		{
-		  case '\"':	/*fallthrough*/
-		  case '\\':	buf.push_back( *cur );		break;
-		  default:
-		    buf.push_back( '\\' );
-		    buf.push_back( *cur );
-		    break;
-		}
-		quoting = Quote::Double;
-		break;
-	    }
-	    ++cur;
-	  } while ( *cur && ( quoting != Quote::None || !::strchr( sepchars_r, *cur ) ) );
-	  *result_r = std::string( buf.begin(), buf.end() );
+              case Quote::DoubleSlash:
+                switch ( *cur )
+                {
+                  case '\"':	/*fallthrough*/
+                  case '\\':	buf.push_back( *cur );		break;
+                  default:
+                    buf.push_back( '\\' );
+                    buf.push_back( *cur );
+                    break;
+                }
+                quoting = Quote::Double;
+                break;
+            }
+            ++cur;
+          } while ( *cur && ( quoting != Quote::None || !::strchr( sepchars_r, *cur ) ) );
+          *result_r = std::string( buf.begin(), buf.end() );
 
 
-	  // skip sepchars
-	  if ( *cur && ::strchr( sepchars_r, *cur ) )
-	    ++cur;
-	  while ( *cur && ::strchr( sepchars_r, *cur ) )
-	  {
-	    ++cur;
-	    if (withEmpty)
-	    {
-	      *result_r = "";
-	      ++ret;
-	    }
-	  }
-	  // the last was a separator => one more field
-	  if ( !*cur && withEmpty && ::strchr( sepchars_r, *(cur-1) ) )
-	  {
-	    *result_r = "";
-	    ++ret;
-	  }
-	}
+          // skip sepchars
+          if ( *cur && ::strchr( sepchars_r, *cur ) )
+            ++cur;
+          while ( *cur && ::strchr( sepchars_r, *cur ) )
+          {
+            ++cur;
+            if (withEmpty)
+            {
+              *result_r = "";
+              ++ret;
+            }
+          }
+          // the last was a separator => one more field
+          if ( !*cur && withEmpty && ::strchr( sepchars_r, *(cur-1) ) )
+          {
+            *result_r = "";
+            ++ret;
+          }
+        }
         return ret;
       }
 
@@ -731,11 +731,11 @@ namespace zypp
           {
             // skip non sepchars
             while( *cur && !::strchr( sepchars_r, *cur ) )
-	    {
-	      if ( *cur == '\\' && *(cur+1) )
-		++cur;
+            {
+              if ( *cur == '\\' && *(cur+1) )
+                ++cur;
               ++cur;
-	    }
+            }
             // build string
             *result_r = std::string( beg, cur-beg );
             ++ret;
@@ -844,35 +844,35 @@ namespace zypp
        */
       inline std::ostream & printIndented( std::ostream & str, const std::string & text_r, const std::string & indent_r = "  ", unsigned maxWitdh_r = 0 )
       {
-	if ( maxWitdh_r )
-	{
-	  if ( indent_r.size() >= maxWitdh_r )
-	    maxWitdh_r = 0;	// nonsense: indent larger than line witdh
-	  else
-	    maxWitdh_r -= indent_r.size();
-	}
-	unsigned width = 0;
-	for ( const char * e = text_r.c_str(), * s = e; *e; s = ++e )
-	{
-	  for ( ; *e && *e != '\n'; ++e ) ;/*searching*/
-	  width = e-s;
-	  if ( maxWitdh_r && width > maxWitdh_r )
-	  {
-	    // must break line
-	    width = maxWitdh_r;
-	    for ( e = s+width; e > s && *e != ' '; --e ) ;/*searching*/
-	    if ( e > s )
-	      width = e-s;	// on a ' ', replaced by '\n'
-	    else
-	      e = s+width-1;	// cut line;
-	  }
-	  str << indent_r;
-	  str.write( s, width );
-	  str << "\n";
-	  if ( !*e )	// on '\0'
-	    break;
-	}
-	return str;
+        if ( maxWitdh_r )
+        {
+          if ( indent_r.size() >= maxWitdh_r )
+            maxWitdh_r = 0;	// nonsense: indent larger than line witdh
+          else
+            maxWitdh_r -= indent_r.size();
+        }
+        unsigned width = 0;
+        for ( const char * e = text_r.c_str(), * s = e; *e; s = ++e )
+        {
+          for ( ; *e && *e != '\n'; ++e ) ;/*searching*/
+          width = e-s;
+          if ( maxWitdh_r && width > maxWitdh_r )
+          {
+            // must break line
+            width = maxWitdh_r;
+            for ( e = s+width; e > s && *e != ' '; --e ) ;/*searching*/
+            if ( e > s )
+              width = e-s;	// on a ' ', replaced by '\n'
+            else
+              e = s+width-1;	// cut line;
+          }
+          str << indent_r;
+          str.write( s, width );
+          str << "\n";
+          if ( !*e )	// on '\0'
+            break;
+        }
+        return str;
       }
       /** \overload Indent by number of chars [' '] optionally wrap. */
       inline std::ostream & printIndented( std::ostream & str, const std::string & text_r, unsigned indent_r, char indentch_r = ' ', unsigned maxWitdh_r = 0 )
@@ -886,25 +886,25 @@ namespace zypp
        */
       inline std::ostream & autoPrefix( std::ostream & str, const std::string & text_r, function<std::string(const char*, const char*)> fnc_r )
       {
-	for ( const char * e = text_r.c_str(); *e; ++e )
-	{
-	  const char * s = e;
-	  for ( ; *e && *e != '\n'; ++e ) /*searching*/;
-	  str << fnc_r( s, e );
-	  str.write( s, e-s );
-	  str << "\n";
-	  if ( !*e )	// on '\0'
-	    break;
-	}
-	return str;
+        for ( const char * e = text_r.c_str(); *e; ++e )
+        {
+          const char * s = e;
+          for ( ; *e && *e != '\n'; ++e ) /*searching*/;
+          str << fnc_r( s, e );
+          str.write( s, e-s );
+          str << "\n";
+          if ( !*e )	// on '\0'
+            break;
+        }
+        return str;
       }
       /** \overload Prefix lines by string generated by function [std::string()] */
       inline std::ostream & autoPrefix0( std::ostream & str, const std::string & text_r, function<std::string()> fnc_r )
       {
-	auto wrap = [&fnc_r]( const char*, const char* )-> std::string {
-	  return fnc_r();
-	};
-	return autoPrefix( str, text_r, wrap );
+        auto wrap = [&fnc_r]( const char*, const char* )-> std::string {
+          return fnc_r();
+        };
+        return autoPrefix( str, text_r, wrap );
       }
     //@}
     ///////////////////////////////////////////////////////////////////

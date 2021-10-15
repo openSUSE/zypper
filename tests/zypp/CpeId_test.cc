@@ -131,7 +131,7 @@ BOOST_AUTO_TEST_CASE(cpeid_value_string_wildcarded)
     BOOST_CHECK( c != wildcardfree );
 #if WFN_STRICT_SPEC
     BOOST_CHECK( c != wildcarded );	// !!! According to the CPE Name Matching Specification Version 2.3
-					// unquoted wildcard characters yield an undefined result (not ==).
+                                        // unquoted wildcard characters yield an undefined result (not ==).
 #else
     BOOST_CHECK( c == wildcarded );
 #endif
@@ -253,13 +253,13 @@ BOOST_AUTO_TEST_CASE(cpeid_value_valid)
       BOOST_CHECK_EQUAL( f.asString(), u.asString() );
       if ( ch == '.' )
       {
-	BOOST_CHECK_EQUAL( f.asFs(), chstr );
-	BOOST_CHECK_EQUAL( f.asUri(), chstr );
+        BOOST_CHECK_EQUAL( f.asFs(), chstr );
+        BOOST_CHECK_EQUAL( f.asUri(), chstr );
       }
       else
       {
-	BOOST_CHECK_EQUAL( f.asFs(), qchstr );
-	BOOST_CHECK_EQUAL( f.asUri(), pchstr );
+        BOOST_CHECK_EQUAL( f.asFs(), qchstr );
+        BOOST_CHECK_EQUAL( f.asUri(), pchstr );
       }
 
       BOOST_CHECK( Value( qchstr ).isString() );
@@ -399,20 +399,20 @@ BOOST_AUTO_TEST_CASE(cpeid_strconv)
 {
   // colon embedded in product value
   testStrconv ( "cpe:2.3:a:opensuse:lib\\:zypp:14.16.0:beta:*:*:*:*:*:-",
-		"cpe:/a:opensuse:lib%3azypp:14.16.0:beta:~~~~~-",
-		"wfn:[part=\"a\",vendor=\"opensuse\",product=\"lib\\:zypp\",version=\"14\\.16\\.0\",update=\"beta\",other=NA]" );
+                "cpe:/a:opensuse:lib%3azypp:14.16.0:beta:~~~~~-",
+                "wfn:[part=\"a\",vendor=\"opensuse\",product=\"lib\\:zypp\",version=\"14\\.16\\.0\",update=\"beta\",other=NA]" );
 
   testStrconv ( "cpe:2.3:a:hp:insight_diagnostics:7.4.0.1570:-:*:*:online:win2003:x64:*",
-		"cpe:/a:hp:insight_diagnostics:7.4.0.1570:-:~~online~win2003~x64~",
-		"wfn:[part=\"a\",vendor=\"hp\",product=\"insight_diagnostics\",version=\"7\\.4\\.0\\.1570\",update=NA,sw_edition=\"online\",target_sw=\"win2003\",target_hw=\"x64\"]" );
+                "cpe:/a:hp:insight_diagnostics:7.4.0.1570:-:~~online~win2003~x64~",
+                "wfn:[part=\"a\",vendor=\"hp\",product=\"insight_diagnostics\",version=\"7\\.4\\.0\\.1570\",update=NA,sw_edition=\"online\",target_sw=\"win2003\",target_hw=\"x64\"]" );
 
   testStrconv ( "cpe:2.3:a:hp:openview_network_manager:7.51:*:*:*:*:linux:*:*",
-		"cpe:/a:hp:openview_network_manager:7.51::~~~linux~~",
-		"wfn:[part=\"a\",vendor=\"hp\",product=\"openview_network_manager\",version=\"7\\.51\",target_sw=\"linux\"]" );
+                "cpe:/a:hp:openview_network_manager:7.51::~~~linux~~",
+                "wfn:[part=\"a\",vendor=\"hp\",product=\"openview_network_manager\",version=\"7\\.51\",target_sw=\"linux\"]" );
 
   testStrconv ( "cpe:2.3:a:foo\\\\bar:big\\$money_manager_2010:*:*:*:*:special:ipod_touch:80gb:*",
-		"cpe:/a:foo%5cbar:big%24money_manager_2010:::~~special~ipod_touch~80gb~",
-		"wfn:[part=\"a\",vendor=\"foo\\\\bar\",product=\"big\\$money_manager_2010\",sw_edition=\"special\",target_sw=\"ipod_touch\",target_hw=\"80gb\"]" );
+                "cpe:/a:foo%5cbar:big%24money_manager_2010:::~~special~ipod_touch~80gb~",
+                "wfn:[part=\"a\",vendor=\"foo\\\\bar\",product=\"big\\$money_manager_2010\",sw_edition=\"special\",target_sw=\"ipod_touch\",target_hw=\"80gb\"]" );
 
   BOOST_CHECK_THROW( (CpeId( "cpe:/x:" )), std::invalid_argument );	// illegal part 'x'
   BOOST_CHECK_THROW( CpeId( "cpe:/a:foo%5cbar:big%24money_2010%07:::~~special~ipod_touch~80gb~" ), std::invalid_argument );	// illegal %07

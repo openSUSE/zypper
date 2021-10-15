@@ -35,7 +35,7 @@ void downloadMediaInfo( const Pathname &dest_dir,
   fetcher.reset();
 }
 
-}// ns repo 
+}// ns repo
 } // ns zypp
 
 

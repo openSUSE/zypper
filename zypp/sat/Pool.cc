@@ -77,9 +77,9 @@ namespace zypp
     {
       if ( myPool()->urepos )
       { // repos[0] == NULL
-	for_( it, myPool()->repos+1, myPool()->repos+myPool()->nrepos )
-	  if ( *it )
-	    return RepositoryIterator( it );
+        for_( it, myPool()->repos+1, myPool()->repos+myPool()->nrepos )
+          if ( *it )
+            return RepositoryIterator( it );
       }
       return reposEnd();
     }
@@ -276,7 +276,7 @@ namespace zypp
       return str << "sat::pool(" << obj.serial() << ")["
           << obj.capacity() << "]{"
           << obj.reposSize() << "repos|"
-	  << obj.solvablesSize() << "solv}";
+          << obj.solvablesSize() << "solv}";
     }
 
     /////////////////////////////////////////////////////////////////
@@ -288,25 +288,25 @@ namespace zypp
       AutoDispose<FILE*> solv( ::fopen( solvfile_r.c_str(), "re" ), ::fclose );
       if ( solv == NULL )
       {
-	solv.resetDispose();
-	ERR << "Can't open solv-file: " << solv << endl;
-	return;
+        solv.resetDispose();
+        ERR << "Can't open solv-file: " << solv << endl;
+        return;
       }
 
       std::string solvidxfile( solvfile_r.extend(".idx").asString() );
       if ( ::unlink( solvidxfile.c_str() ) == -1 && errno != ENOENT )
       {
-	ERR << "Can't unlink solv-idx: " << Errno() << endl;
-	return;
+        ERR << "Can't unlink solv-idx: " << Errno() << endl;
+        return;
       }
       {
-	int fd = ::open( solvidxfile.c_str(), O_CREAT|O_EXCL|O_WRONLY|O_TRUNC, 0644 );
-	if ( fd == -1 )
-	{
-	  ERR << "Can't create solv-idx: " << Errno() << endl;
-	  return;
-	}
-	::close( fd );
+        int fd = ::open( solvidxfile.c_str(), O_CREAT|O_EXCL|O_WRONLY|O_TRUNC, 0644 );
+        if ( fd == -1 )
+        {
+          ERR << "Can't create solv-idx: " << Errno() << endl;
+          return;
+        }
+        ::close( fd );
       }
       std::ofstream idx( solvidxfile.c_str() );
 
@@ -315,24 +315,24 @@ namespace zypp
       detail::CRepo * _repo = ::repo_create( _pool, "" );
       if ( ::repo_add_solv( _repo, solv, 0 ) == 0 )
       {
-	int _id = 0;
-	detail::CSolvable * _solv = nullptr;
-	FOR_REPO_SOLVABLES( _repo, _id, _solv )
-	{
-	  if ( _solv )
-	  {
+        int _id = 0;
+        detail::CSolvable * _solv = nullptr;
+        FOR_REPO_SOLVABLES( _repo, _id, _solv )
+        {
+          if ( _solv )
+          {
 #define SEP '\t'
 #define	idstr(V) pool_id2str( _pool, _solv->V )
-	    if ( _solv->arch == ARCH_SRC || _solv->arch == ARCH_NOSRC )
-	      idx << "srcpackage:" << idstr(name) << SEP << idstr(evr) << SEP << "noarch" << endl;
-	    else
-	      idx << idstr(name) << SEP << idstr(evr) << SEP << idstr(arch) << endl;
-	  }
-	}
+            if ( _solv->arch == ARCH_SRC || _solv->arch == ARCH_NOSRC )
+              idx << "srcpackage:" << idstr(name) << SEP << idstr(evr) << SEP << "noarch" << endl;
+            else
+              idx << idstr(name) << SEP << idstr(evr) << SEP << idstr(arch) << endl;
+          }
+        }
       }
       else
       {
-	ERR << "Can't read solv-file: " << ::pool_errstr( _pool ) << endl;
+        ERR << "Can't read solv-file: " << ::pool_errstr( _pool ) << endl;
       }
       ::repo_free( _repo, 0 );
       ::pool_free( _pool );

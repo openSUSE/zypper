@@ -44,7 +44,7 @@ bool dumpNode( xml::Reader & reader_r )
       MIL << *reader_r << endl;
       for ( int i = 0; i < reader_r->attributeCount(); ++i )
       {
-	MIL << " attr no " << i << " '" << reader_r->getAttributeNo( i ) << "'" << endl;
+        MIL << " attr no " << i << " '" << reader_r->getAttributeNo( i ) << "'" << endl;
       }
       break;
 
@@ -74,7 +74,7 @@ bool consume( xml::Reader & reader_r )
       MIL << *reader_r << endl;
       for ( int i = 0; i < reader_r->attributeCount(); ++i )
       {
-	MIL << " attr no " << i << " '" << reader_r->getAttributeNo( i ) << "'" << endl;
+        MIL << " attr no " << i << " '" << reader_r->getAttributeNo( i ) << "'" << endl;
       }
       break;
 
@@ -121,17 +121,17 @@ int main( int argc, char * argv[] )
       input = *argv;
 
       try {
-	Measure m( input.basename() );
+        Measure m( input.basename() );
 // 	zypp::base::LogControl::TmpLineWriter shutUp;
-	xml::Reader reader( input );
-	if ( verbose )
-	  reader.foreachNodeOrAttribute( consumer );
-	else
-	  reader.foreachNode( consumer );
+        xml::Reader reader( input );
+        if ( verbose )
+          reader.foreachNodeOrAttribute( consumer );
+        else
+          reader.foreachNode( consumer );
       }
       catch ( const Exception & exp )
       {
-	INT << exp << endl << exp.historyAsString();
+        INT << exp << endl << exp.historyAsString();
       }
     }
   }

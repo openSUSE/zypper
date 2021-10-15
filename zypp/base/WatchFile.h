@@ -54,12 +54,12 @@ namespace zypp
     public:
       /** */
       WatchFile( const Pathname & path_r = Pathname(),
-		 Initial mode            = INIT )
+                 Initial mode            = INIT )
       : _path( path_r )
       {
-	PathInfo pi( mode == INIT ? path_r : Pathname() );
-	_size  = pi.size();
-	_mtime = pi.mtime();
+        PathInfo pi( mode == INIT ? path_r : Pathname() );
+        _size  = pi.size();
+        _mtime = pi.mtime();
       }
 
       const Pathname & path() const
@@ -73,20 +73,20 @@ namespace zypp
 
       bool isDirty() const
       {
-	PathInfo pi( _path );
-	return( _size != pi.size() || _mtime != pi.mtime() );
+        PathInfo pi( _path );
+        return( _size != pi.size() || _mtime != pi.mtime() );
       }
 
       bool hasChanged()
       {
-	PathInfo pi( _path );
-	if ( _size != pi.size() || _mtime != pi.mtime() )
-	{
-	  _size = pi.size();
-	  _mtime = pi.mtime();
-	  return true;
-	}
-	return false;
+        PathInfo pi( _path );
+        if ( _size != pi.size() || _mtime != pi.mtime() )
+        {
+          _size = pi.size();
+          _mtime = pi.mtime();
+          return true;
+        }
+        return false;
       }
 
     private:

@@ -367,7 +367,7 @@ BOOST_AUTO_TEST_CASE(enqueuedir_http)
 
       fetcher.reset();
   }
-  
+
   web.stop();
 }
 

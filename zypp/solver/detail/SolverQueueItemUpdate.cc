@@ -48,7 +48,7 @@ std::ostream &
 SolverQueueItemUpdate::dumpOn( std::ostream & os ) const
 {
     os << "[" << (_soft?"Soft":"") << "Update: " <<
-	_item << "]";
+        _item << "]";
 
     return os;
 }
@@ -56,7 +56,7 @@ SolverQueueItemUpdate::dumpOn( std::ostream & os ) const
 //---------------------------------------------------------------------------
 
 SolverQueueItemUpdate::SolverQueueItemUpdate (const ResPool & pool,
-					      const PoolItem & item, bool soft)
+                                              const PoolItem & item, bool soft)
     : SolverQueueItem (QUEUE_ITEM_TYPE_UPDATE, pool)
     , _item (item)
     , _soft (soft)
@@ -74,8 +74,8 @@ bool SolverQueueItemUpdate::addRule (sat::detail::CQueue & q)
 {
     ::Id id = _item.satSolvable().id();
     if (id == ID_NULL) {
-	ERR << "Update explicit: " << _item << " not found" << endl;
-	return false;
+        ERR << "Update explicit: " << _item << " not found" << endl;
+        return false;
     }
     MIL << "Update explicit " << _item << " with the SAT-Pool ID: " << id << endl;
     queue_push( &(q), SOLVER_UPDATE | SOLVER_SOLVABLE );

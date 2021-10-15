@@ -161,8 +161,8 @@ namespace zypp
 
       virtual Action problem(
         Resolvable::constPtr /*resolvable_ptr*/
-	, Error /*error*/
-	, const std::string &/*description*/
+        , Error /*error*/
+        , const std::string &/*description*/
       ) { return ABORT; }
 
 
@@ -384,14 +384,14 @@ namespace zypp
 
         virtual Action problem(
           const Url &/*file*/
-  	  , Error /*error*/
-  	  , const std::string &/*description*/
+          , Error /*error*/
+          , const std::string &/*description*/
         ) { return ABORT; }
 
         virtual void finish(
           const Url &/*file*/
           , Error /*error*/
-	  , const std::string &/*reason*/
+          , const std::string &/*reason*/
         ) {}
     };
 
@@ -518,14 +518,14 @@ namespace zypp
         enum Action {
           ABORT,  // abort and return error
           RETRY,	// retry
-	  IGNORE	// ignore the failure
+          IGNORE	// ignore the failure
         };
 
         enum Error {
-	  NO_ERROR,
+          NO_ERROR,
           NOT_FOUND, 	// the requested Url was not found
-	  IO,		// IO error
-	  INVALID		// th resolvable is invalid
+          IO,		// IO error
+          INVALID		// th resolvable is invalid
         };
 
         // the level of RPM pushing
@@ -537,7 +537,7 @@ namespace zypp
         };
 
         virtual void start(
-	  Resolvable::constPtr /*resolvable*/
+          Resolvable::constPtr /*resolvable*/
         ) {}
 
         virtual bool progress(int /*value*/, Resolvable::constPtr /*resolvable*/)
@@ -545,25 +545,25 @@ namespace zypp
 
         virtual Action problem(
           Resolvable::constPtr /*resolvable*/
-  	  , Error /*error*/
-   	  , const std::string &/*description*/
-	  , RpmLevel /*level*/
+          , Error /*error*/
+          , const std::string &/*description*/
+          , RpmLevel /*level*/
         ) { return ABORT; }
 
         virtual void finish(
           Resolvable::constPtr /*resolvable*/
           , Error /*error*/
-	  , const std::string &/*reason*/
-	  , RpmLevel /*level*/
+          , const std::string &/*reason*/
+          , RpmLevel /*level*/
         ) {}
 
         /** "rpmout/installpkg": Additional rpm output (sent immediately).
-	 * Data:
-	 * solvable : satSolvable processed
-	 * line     : std::reference_wrapper<const std::string>
-	 * lineno   : unsigned
-	 */
-	static const UserData::ContentType contentRpmout;
+         * Data:
+         * solvable : satSolvable processed
+         * line     : std::reference_wrapper<const std::string>
+         * lineno   : unsigned
+         */
+        static const UserData::ContentType contentRpmout;
       };
 
       // progress for removing a resolvable
@@ -572,18 +572,18 @@ namespace zypp
         enum Action {
           ABORT,  // abort and return error
           RETRY,	// retry
-	  IGNORE	// ignore the failure
+          IGNORE	// ignore the failure
         };
 
         enum Error {
-	  NO_ERROR,
+          NO_ERROR,
           NOT_FOUND, 	// the requested Url was not found
-	  IO,		// IO error
-	  INVALID		// th resolvable is invalid
+          IO,		// IO error
+          INVALID		// th resolvable is invalid
         };
 
         virtual void start(
-	  Resolvable::constPtr /*resolvable*/
+          Resolvable::constPtr /*resolvable*/
         ) {}
 
         virtual bool progress(int /*value*/, Resolvable::constPtr /*resolvable*/)
@@ -591,19 +591,19 @@ namespace zypp
 
         virtual Action problem(
           Resolvable::constPtr /*resolvable*/
-  	  , Error /*error*/
-  	  , const std::string &/*description*/
+          , Error /*error*/
+          , const std::string &/*description*/
         ) { return ABORT; }
 
         virtual void finish(
           Resolvable::constPtr /*resolvable*/
           , Error /*error*/
-	  , const std::string &/*reason*/
+          , const std::string &/*reason*/
         ) {}
 
         /** "rpmout/removepkg": Additional rpm output (sent immediately).
-	 * For data \see \ref InstallResolvableReport::contentRpmout
-	 */
+         * For data \see \ref InstallResolvableReport::contentRpmout
+         */
         static const UserData::ContentType contentRpmout;
       };
 
@@ -613,12 +613,12 @@ namespace zypp
         enum Action {
           ABORT,  // abort and return error
           RETRY,	// retry
-	  IGNORE	// ignore the failure
+          IGNORE	// ignore the failure
         };
 
         enum Error {
-	  NO_ERROR,
-	  FAILED		// failed to rebuild
+          NO_ERROR,
+          FAILED		// failed to rebuild
         };
 
         virtual void start(Pathname /*path*/) {}
@@ -627,15 +627,15 @@ namespace zypp
         { return true; }
 
         virtual Action problem(
-	  Pathname /*path*/
-  	 , Error /*error*/
-  	 , const std::string &/*description*/
+          Pathname /*path*/
+         , Error /*error*/
+         , const std::string &/*description*/
         ) { return ABORT; }
 
         virtual void finish(
-	  Pathname /*path*/
+          Pathname /*path*/
           , Error /*error*/
-	  , const std::string &/*reason*/
+          , const std::string &/*reason*/
         ) {}
       };
 
@@ -647,25 +647,25 @@ namespace zypp
         enum Action {
           ABORT,  // abort and return error
           RETRY,  // retry
-	  IGNORE  // ignore the failure
+          IGNORE  // ignore the failure
         };
 
         enum Error {
-	  NO_ERROR,
-	  FAILED // conversion failed
+          NO_ERROR,
+          FAILED // conversion failed
         };
 
         virtual void start( Pathname /*path*/ )
-	{}
+        {}
 
         virtual bool progress( int/*value*/, Pathname/*path*/ )
         { return true; }
 
         virtual Action problem( Pathname/*path*/, Error/*error*/, const std::string &/*description*/ )
-	{ return ABORT; }
+        { return ABORT; }
 
         virtual void finish( Pathname/*path*/, Error/*error*/, const std::string &/*reason*/ )
-	{}
+        {}
       };
 #endif
 
@@ -946,7 +946,7 @@ namespace zypp
      * When user unlock something which is locked by non-identical query
      */
     virtual Action conflict(
-	 const PoolQuery&, /**< problematic query*/
+         const PoolQuery&, /**< problematic query*/
        ConflictState
      ) { return DELETE; }
 

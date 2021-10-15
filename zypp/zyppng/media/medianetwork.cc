@@ -401,8 +401,8 @@ namespace zyppng {
 
   MediaNetwork::MediaNetwork( const Url & url_r, const zypp::Pathname & attach_point_hint_r )
   : MediaNetworkCommonHandler( url_r, attach_point_hint_r,
-			       "/", // urlpath at attachpoint
-			       true ) // does_download
+                               "/", // urlpath at attachpoint
+                               true ) // does_download
   {
     _workingDir.autoCleanup( true );
 

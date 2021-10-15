@@ -33,7 +33,7 @@ BOOST_AUTO_TEST_CASE(verifier_test)
   mm.provideFile(id, Pathname("/suse/setup/descr/EXTRA_PROV"));
   mm.release(id);
   mm.attach(id);
-  mm.provideFile(id, Pathname("/suse/setup/descr/EXTRA_PROV"));  
+  mm.provideFile(id, Pathname("/suse/setup/descr/EXTRA_PROV"));
 }
 
 // vim: set ts=2 sts=2 sw=2 ai et:

@@ -43,35 +43,35 @@ using namespace zypp::ui;
         };
 #endif
         virtual void start( const Url & file, Pathname localfile )
-	{
-	  USR << "DP +++ " << file  << endl;
-	  lp = 0;
-	}
+        {
+          USR << "DP +++ " << file  << endl;
+          lp = 0;
+        }
 
         virtual bool progress(int value, const Url &file, double dbps_avg = -1, double dbps_current = -1)
         {
-	  if ( abs(value-lp) >= 20 || value == 100 && lp != 100  )
-	  {
-	    USR << "DP " << file << " " << value << "%" << endl;
-	    lp = value;
-	  }
-	  return true;
+          if ( abs(value-lp) >= 20 || value == 100 && lp != 100  )
+          {
+            USR << "DP " << file << " " << value << "%" << endl;
+            lp = value;
+          }
+          return true;
 
-	}
+        }
 
         virtual Action problem( const Url &file , Error error , const std::string &description )
-	{
-	  USR << "DP !!! " << file << " (" << error << ")" << endl;
-	  return ABORT;
+        {
+          USR << "DP !!! " << file << " (" << error << ")" << endl;
+          return ABORT;
 
-	}
+        }
 
         virtual void finish( const Url &file , Error error , const std::string &reason )
-	{
-	  USR << "DP --- " << file << " (" << error << ")" << endl;
-	}
+        {
+          USR << "DP --- " << file << " (" << error << ")" << endl;
+        }
 
-	int lp;
+        int lp;
     };
 
     ////////////////////////////////////////////////////////////////////
@@ -98,7 +98,7 @@ using namespace zypp::ui;
 #endif
       virtual void start( Resolvable::constPtr resolvable_ptr, const Url &url )
       {
-	USR << "+++ " << resolvable_ptr << endl;
+        USR << "+++ " << resolvable_ptr << endl;
       }
 
 
@@ -109,23 +109,23 @@ using namespace zypp::ui;
       // - problems are just informal
       virtual void startDeltaDownload( const Pathname & /*filename*/, const ByteCount & /*downloadsize*/ )
       {
-	USR << __PRETTY_FUNCTION__ << endl;
+        USR << __PRETTY_FUNCTION__ << endl;
       }
 
       virtual bool progressDeltaDownload( int /*value*/ )
       {
-	USR << __PRETTY_FUNCTION__ << endl;
-	return true;
+        USR << __PRETTY_FUNCTION__ << endl;
+        return true;
       }
 
       virtual void problemDeltaDownload( const std::string &/*description*/ )
       {
-	USR << __PRETTY_FUNCTION__ << endl;
+        USR << __PRETTY_FUNCTION__ << endl;
       }
 
       virtual void finishDeltaDownload()
       {
-	USR << __PRETTY_FUNCTION__ << endl;
+        USR << __PRETTY_FUNCTION__ << endl;
       }
 
       // Apply delta rpm:
@@ -134,44 +134,44 @@ using namespace zypp::ui;
       // - problems are just informal
       virtual void startDeltaApply( const Pathname & /*filename*/ )
       {
-	USR << __PRETTY_FUNCTION__ << endl;
+        USR << __PRETTY_FUNCTION__ << endl;
       }
 
       virtual void progressDeltaApply( int /*value*/ )
       {
-	USR << __PRETTY_FUNCTION__ << endl;
+        USR << __PRETTY_FUNCTION__ << endl;
       }
 
       virtual void problemDeltaApply( const std::string &/*description*/ )
       {
-	USR << __PRETTY_FUNCTION__ << endl;
+        USR << __PRETTY_FUNCTION__ << endl;
       }
 
       virtual void finishDeltaApply()
       {
-	USR << __PRETTY_FUNCTION__ << endl;
+        USR << __PRETTY_FUNCTION__ << endl;
       }
 
       // return false if the download should be aborted right now
       virtual bool progress(int value, Resolvable::constPtr resolvable_ptr)
       {
-	if ( 1 || abs(value-lp) >= 20 || value == 100 && lp != 100  )
-	{
-	  USR << resolvable_ptr << " " << value << "%" << endl;
-	  lp = value;
-	}
-	return true;
+        if ( 1 || abs(value-lp) >= 20 || value == 100 && lp != 100  )
+        {
+          USR << resolvable_ptr << " " << value << "%" << endl;
+          lp = value;
+        }
+        return true;
       }
 
       virtual Action problem( Resolvable::constPtr resolvable_ptr , Error error , const std::string &/*description*/ )
       {
-	USR << "!!! " << resolvable_ptr << " (" << error << ")" << endl;
-	return ABORT;
+        USR << "!!! " << resolvable_ptr << " (" << error << ")" << endl;
+        return ABORT;
       }
 
       virtual void finish(Resolvable::constPtr resolvable_ptr , Error error , const std::string &/*reason*/ )
       {
-	USR << "--- " << resolvable_ptr << " (" << error << ")" << endl;
+        USR << "--- " << resolvable_ptr << " (" << error << ")" << endl;
       }
 
       int lp;

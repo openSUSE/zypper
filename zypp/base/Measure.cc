@@ -144,7 +144,7 @@ namespace zypp
       , _seq    ( 0 )
       , _log    ( log_r )
       {
-	_glevel += "..";
+        _glevel += "..";
         log() << _level << "START MEASURE(" << _ident << ")" << endl;
         _start.get();
       }
@@ -155,7 +155,7 @@ namespace zypp
         ++_seq;
         std::ostream & str( log() << _level << "MEASURE(" << _ident << ") " );
         dumpMeasure( str );
-	_glevel.erase( 0, 2 );
+        _glevel.erase( 0, 2 );
       }
 
       void restart()
@@ -187,8 +187,8 @@ namespace zypp
           {
             str_r << " [" << ( _stop - _elapsed ) << "]";
           }
-	if ( ! tag_r.empty() )
-	  str_r << " - " << tag_r;
+        if ( ! tag_r.empty() )
+          str_r << " - " << tag_r;
         return str_r << endl;
       }
 

@@ -23,7 +23,7 @@ namespace parser
   {
     public:
       typedef boost::shared_ptr<ParserProgress> Ptr;
-      
+
       /**
        * initializes a progress objetc, with a callback functor
        * if you are not reporting percentage, then set
@@ -33,12 +33,12 @@ namespace parser
       ParserProgress( boost::function<void (long int)> fnc, long int total_steps = 100 )
       : _fnc(fnc), _previous_progress(0), _total_steps(total_steps)
       {
-        
+
       };
-      
+
       ~ParserProgress()
       {};
-      
+
       /**
        * report progress, which in most cases
        * executes the functor associated with
@@ -53,19 +53,19 @@ namespace parser
           long int current_done = p;
           p = (long int)(((double) current_done/(double) _total_steps)*100);
         }
-        
+
         if (_fnc && ( p !=  _previous_progress ))
         {
           _previous_progress = p;
           _fnc(p);
         }
       }
-      
+
       void setTotalSteps( long int total_steps )
       {
         _total_steps = total_steps;
       }
-      
+
       /**
        * report progress finished
        */
@@ -78,7 +78,7 @@ namespace parser
           _fnc(p);
         }
       }
-      
+
       /**
        * report progress started
        */
@@ -91,7 +91,7 @@ namespace parser
           _fnc(p);
         }
       }
-      
+
     private:
       boost::function<void (long int)> _fnc;
       long int _previous_progress;

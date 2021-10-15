@@ -38,13 +38,13 @@ namespace zypp {
     public:
       MediaSource(const std::string &_type,  const std::string &_name,
                   unsigned int       _maj=0, unsigned int       _min=0,
-		  const std::string &_bdir=std::string(), bool  _own=true)
+                  const std::string &_bdir=std::string(), bool  _own=true)
         : maj_nr(_maj)
         , min_nr(_min)
         , type(_type)
         , name(_name)
-	, bdir(_bdir)
-	, iown(_own)
+        , bdir(_bdir)
+        , iown(_own)
       {}
 
       MediaSource()
@@ -77,12 +77,12 @@ namespace zypp {
        */
       virtual std::string asString() const
       {
-	std::string tmp1;
+        std::string tmp1;
         if(maj_nr != 0)
-	{
-	  tmp1 = "[" + str::numstring(maj_nr) + "," +
-	               str::numstring(min_nr) + "]";
-	}
+        {
+          tmp1 = "[" + str::numstring(maj_nr) + "," +
+                       str::numstring(min_nr) + "]";
+        }
         return type + "<" + name + tmp1 + ">";
       }
 
@@ -137,8 +137,8 @@ namespace zypp {
 
       AttachedMedia(const MediaSourceRef &_mediaSource,
                     const AttachPointRef &_attachPoint)
-     	: mediaSource( _mediaSource)
-	, attachPoint( _attachPoint)
+        : mediaSource( _mediaSource)
+        , attachPoint( _attachPoint)
       {}
 
       MediaSourceRef mediaSource;

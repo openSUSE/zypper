@@ -43,7 +43,7 @@ namespace zypp {
     ExternalDataSource::~ExternalDataSource()
     {
       if (linebuffer)
-    	free( linebuffer );
+        free( linebuffer );
       close ();
     }
 
@@ -52,12 +52,12 @@ namespace zypp {
     ExternalDataSource::send( const char *buffer, size_t length )
     {
       if ( outputfile ) {
-    	bool success = fwrite( buffer, length, 1, outputfile ) != 0;
-    	fflush( outputfile );
-    	return success;
+        bool success = fwrite( buffer, length, 1, outputfile ) != 0;
+        fflush( outputfile );
+        return success;
       }
       else
-    	return false;
+        return false;
     }
 
 
@@ -74,15 +74,15 @@ namespace zypp {
     {
       if ( inputfile && !feof( inputfile ) )
       {
-    	std::ostringstream datas;
-	 while ( true )
-	 {
-	   int readc = fgetc( inputfile );
-	   if ( readc == EOF ) break;
-	   datas << (char)readc;
-	   if ( (char)readc == c ) break;
-	 }
-	 return datas.str();
+        std::ostringstream datas;
+         while ( true )
+         {
+           int readc = fgetc( inputfile );
+           if ( readc == EOF ) break;
+           datas << (char)readc;
+           if ( (char)readc == c ) break;
+         }
+         return datas.str();
       }
       return std::string();
     }
@@ -101,9 +101,9 @@ namespace zypp {
     ExternalDataSource::receive( char *buffer, size_t length )
     {
       if ( inputfile )
-    	return fread( buffer, 1, length, inputfile );
+        return fread( buffer, 1, length, inputfile );
       else
-    	return 0;
+        return 0;
     }
 
     void ExternalDataSource::setBlocking( bool mode )
@@ -116,11 +116,11 @@ namespace zypp {
     {
       if ( inputfile )
       {
-    	ssize_t nread = getline( &linebuffer, &linebuffer_size, inputfile );
-    	if ( nread == -1 )
-    	    return "";
-    	else
-    	    return std::string( linebuffer, nread );
+        ssize_t nread = getline( &linebuffer, &linebuffer_size, inputfile );
+        if ( nread == -1 )
+            return "";
+        else
+            return std::string( linebuffer, nread );
       }
       else
         return "";
@@ -135,9 +135,9 @@ namespace zypp {
     ExternalDataSource::close()
     {
       if ( inputfile && inputfile != outputfile )
-    	fclose( inputfile );
+        fclose( inputfile );
       if ( outputfile )
-    	fclose( outputfile );
+        fclose( outputfile );
       inputfile = 0;
       outputfile = 0;
       return 0;

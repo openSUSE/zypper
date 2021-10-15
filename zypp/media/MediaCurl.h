@@ -95,7 +95,7 @@ class MediaCurl : public MediaNetworkCommonHandler
   public:
 
     MediaCurl( const Url &      url_r,
-	       const Pathname & attach_point_hint_r );
+               const Pathname & attach_point_hint_r );
 
     virtual ~MediaCurl() override { try { release(); } catch(...) {} }
 
@@ -104,7 +104,7 @@ class MediaCurl : public MediaNetworkCommonHandler
     class Callbacks
     {
       public:
-	virtual ~Callbacks();
+        virtual ~Callbacks();
         virtual bool progress( int percent ) = 0;
     };
 

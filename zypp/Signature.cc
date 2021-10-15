@@ -17,14 +17,14 @@ namespace zypp
 
   Signature::Signature()
   {
-      
+
   }
-    
+
   std::ostream & Signature::dumpOn( std::ostream & str ) const
   {
     return str;
   }
-  
+
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////

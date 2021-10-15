@@ -8,7 +8,7 @@ BOOST_AUTO_TEST_CASE(basic)
 {
   std::vector<HistoryLogData::Ptr> history;
   parser::HistoryLogReader parser( TESTS_SRC_DIR "/parser/HistoryLogReader_test.dat",
-				   parser::HistoryLogReader::Options(),
+                                   parser::HistoryLogReader::Options(),
     [&history]( HistoryLogData::Ptr ptr )->bool {
       history.push_back( ptr );
       return true;

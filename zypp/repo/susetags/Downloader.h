@@ -25,7 +25,7 @@ namespace zypp
   {
     namespace susetags
     {
-  
+
       /**
        * \short Downloader for SUSETags (YaST2) repositories
        * Encapsulates all the knowledge of which files have
@@ -58,7 +58,7 @@ namespace zypp
          * \short Status of the remote repository
          */
         RepoStatus status( MediaSetAccess &media ) override;
-        
+
         /**
          * Content file parser consumer
          */
@@ -66,7 +66,7 @@ namespace zypp
 
       private:
         parser::susetags::RepoIndex_Ptr _repoindex;
-	Pathname _delta_dir;
+        Pathname _delta_dir;
       };
 
     } // ns susetags

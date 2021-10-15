@@ -890,9 +890,9 @@ namespace
     do {
       PoolQuery q;
       if ( q.recover( s ) )
-	*out_r++ = std::move(q);
+        *out_r++ = std::move(q);
       else
-	break;
+        break;
     } while ( true );
   }
 

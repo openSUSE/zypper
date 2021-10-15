@@ -104,20 +104,20 @@ namespace zypp
           { return _pool->installed; }
 
           /** Get rootdir (for file conflicts check) */
-	  Pathname rootDir() const
-	  {
-	    const char * rd = ::pool_get_rootdir( _pool );
-	    return( rd ? rd : "/" );
-	  }
+          Pathname rootDir() const
+          {
+            const char * rd = ::pool_get_rootdir( _pool );
+            return( rd ? rd : "/" );
+          }
 
-	  /** Set rootdir (for file conflicts check) */
-	  void rootDir( const Pathname & root_r )
-	  {
-	    if ( root_r.empty() || root_r == "/" )
-	      ::pool_set_rootdir( _pool, nullptr );
-	    else
-	      ::pool_set_rootdir( _pool, root_r.c_str() );
-	  }
+          /** Set rootdir (for file conflicts check) */
+          void rootDir( const Pathname & root_r )
+          {
+            if ( root_r.empty() || root_r == "/" )
+              ::pool_set_rootdir( _pool, nullptr );
+            else
+              ::pool_set_rootdir( _pool, root_r.c_str() );
+          }
 
         public:
           /** \name Actions invalidating housekeeping data.
@@ -232,20 +232,20 @@ namespace zypp
 
         public:
           /// \name Requested locales.
-	  /// The requested LocaleSets managed in _requestedLocalesTracker
-	  /// are unexpanded; i.e. they contain just the pure user selection.
-	  /// The resolver however uses expanded sets ('de_DE' will also
-	  /// include its fallback locales 'de', (en); here in the namespace:
-	  /// callback and in the Resolver itself).
+          /// The requested LocaleSets managed in _requestedLocalesTracker
+          /// are unexpanded; i.e. they contain just the pure user selection.
+          /// The resolver however uses expanded sets ('de_DE' will also
+          /// include its fallback locales 'de', (en); here in the namespace:
+          /// callback and in the Resolver itself).
           //@{
-	  /** */
-	  void setTextLocale( const Locale & locale_r );
+          /** */
+          void setTextLocale( const Locale & locale_r );
 
 
-	  /** Start tracking changes based on this \a locales_r.
-	   * Usually called on TargetInit.
-	   */
-	  void initRequestedLocales( const LocaleSet & locales_r );
+          /** Start tracking changes based on this \a locales_r.
+           * Usually called on TargetInit.
+           */
+          void initRequestedLocales( const LocaleSet & locales_r );
 
           /** Added since last initRequestedLocales. */
           const LocaleSet & getAddedRequestedLocales() const
@@ -269,7 +269,7 @@ namespace zypp
           /** User change (tracked). */
           bool eraseRequestedLocale( const Locale & locale_r );
 
-	  /** All Locales occurring in any repo. */
+          /** All Locales occurring in any repo. */
           const LocaleSet & getAvailableLocales() const;
 
           bool isAvailableLocale( const Locale & locale_r ) const
@@ -294,19 +294,19 @@ namespace zypp
 
           bool isMultiversion( const Solvable & solv_r ) const;
 
-	  void multiversionSpecChanged();
+          void multiversionSpecChanged();
           //@}
 
         public:
           /** \name Installed on behalf of a user request hint. */
           //@{
           /** Get ident list of all autoinstalled solvables. */
-	  StringQueue autoInstalled() const
-	  { return _autoinstalled; }
+          StringQueue autoInstalled() const
+          { return _autoinstalled; }
 
-	  /** Set ident list of all autoinstalled solvables. */
-	  void setAutoInstalled( const StringQueue & autoInstalled_r )
-	  { _autoinstalled = autoInstalled_r; }
+          /** Set ident list of all autoinstalled solvables. */
+          void setAutoInstalled( const StringQueue & autoInstalled_r )
+          { _autoinstalled = autoInstalled_r; }
 
           bool isOnSystemByUser( IdString ident_r ) const
           { return !_autoinstalled.contains( ident_r.id() ); }
@@ -315,23 +315,23 @@ namespace zypp
           { return _autoinstalled.contains( ident_r.id() ); }
           //@}
 
-	public:
-	  /** \name Solvables which should trigger the reboot-needed hint if installed/updated. */
+        public:
+          /** \name Solvables which should trigger the reboot-needed hint if installed/updated. */
           //@{
           /** Set new Solvable specs.*/
           void setNeedrebootSpec( sat::SolvableSpec needrebootSpec_r )
-	  {
-	    _needrebootSpec = std::move(needrebootSpec_r);
-	    _needrebootSpec.setDirty();
-	  }
+          {
+            _needrebootSpec = std::move(needrebootSpec_r);
+            _needrebootSpec.setDirty();
+          }
 
-	  /** Whether \a solv_r matches the spec.*/
-	  bool isNeedreboot( const Solvable & solv_r ) const
-	  { return _needrebootSpec.contains( solv_r ); }
+          /** Whether \a solv_r matches the spec.*/
+          bool isNeedreboot( const Solvable & solv_r ) const
+          { return _needrebootSpec.contains( solv_r ); }
           //@}
 
-	public:
-	  /** \name Blacklisted Solvables. */
+        public:
+          /** \name Blacklisted Solvables. */
           //@{
           bool isRetracted( const Solvable & solv_r ) const
           { return _retractedSpec.contains( solv_r ); }
@@ -341,9 +341,9 @@ namespace zypp
           { return _ptfPackageSpec.contains( solv_r ); }
           //@}
 
-	public:
-	  /** accessor for etc/sysconfig/storage reading file on demand */
-	  const std::set<std::string> & requiredFilesystems() const;
+        public:
+          /** accessor for etc/sysconfig/storage reading file on demand */
+          const std::set<std::string> & requiredFilesystems() const;
 
         private:
           /** sat-pool. */
@@ -358,8 +358,8 @@ namespace zypp
           std::map<RepoIdType,RepoInfo> _repoinfos;
 
           /**  */
-	  base::SetTracker<LocaleSet> _requestedLocalesTracker;
-	  mutable scoped_ptr<TrackedLocaleIds> _trackedLocaleIdsPtr;
+          base::SetTracker<LocaleSet> _requestedLocalesTracker;
+          mutable scoped_ptr<TrackedLocaleIds> _trackedLocaleIdsPtr;
 
           mutable scoped_ptr<LocaleSet> _availableLocalesPtr;
 
@@ -368,18 +368,18 @@ namespace zypp
           mutable scoped_ptr<MultiversionList> _multiversionListPtr;
 
           /**  */
-	  sat::StringQueue _autoinstalled;
+          sat::StringQueue _autoinstalled;
 
-	  /** Solvables which should trigger the reboot-needed hint if installed/updated. */
-	  sat::SolvableSpec _needrebootSpec;
+          /** Solvables which should trigger the reboot-needed hint if installed/updated. */
+          sat::SolvableSpec _needrebootSpec;
 
-	  /** Blacklisted specs: */
-	  sat::SolvableSpec _retractedSpec;
-	  sat::SolvableSpec _ptfMasterSpec;
-	  sat::SolvableSpec _ptfPackageSpec;
+          /** Blacklisted specs: */
+          sat::SolvableSpec _retractedSpec;
+          sat::SolvableSpec _ptfMasterSpec;
+          sat::SolvableSpec _ptfPackageSpec;
 
-	  /** filesystems mentioned in /etc/sysconfig/storage */
-	  mutable scoped_ptr<std::set<std::string> > _requiredFilesystemsPtr;
+          /** filesystems mentioned in /etc/sysconfig/storage */
+          mutable scoped_ptr<std::set<std::string> > _requiredFilesystemsPtr;
       };
       ///////////////////////////////////////////////////////////////////
 

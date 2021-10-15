@@ -41,7 +41,7 @@ namespace zypp
         struct Impl;
 
       public:
-	typedef std::vector<std::string> ModaliasList;
+        typedef std::vector<std::string> ModaliasList;
 
         /** Singleton access. */
         static Modalias & instance();
@@ -77,8 +77,8 @@ namespace zypp
         /** List of modaliases found on system */
         const ModaliasList & modaliasList() const;
 
-	/** Manually set list of modaliases to use */
-	void modaliasList( ModaliasList newlist_r );
+        /** Manually set list of modaliases to use */
+        void modaliasList( ModaliasList newlist_r );
 
       private:
         /** Singleton ctor. */

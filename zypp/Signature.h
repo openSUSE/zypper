@@ -14,23 +14,23 @@
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
-  
+
   class Signature
   {
     public:
     Signature();
     ~Signature();
-    
+
     /** Overload to realize stream output. */
     std::ostream & dumpOn( std::ostream & str ) const;
-    
+
     private:
-  };  
-  
+  };
+
   /** \relates Signature Stream output */
   inline std::ostream & operator<<( std::ostream & str, const Signature & obj )
-  { return obj.dumpOn( str ); }  
-  
+  { return obj.dumpOn( str ); }
+
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////

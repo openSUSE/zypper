@@ -35,7 +35,7 @@ namespace yum
     inline OnMediaLocation loc_with_path_prefix( OnMediaLocation loc_r, const Pathname & prefix_r )
     {
       if ( ! prefix_r.empty() && prefix_r != "/" )
-	loc_r.changeFilename( prefix_r / loc_r.filename() );
+        loc_r.changeFilename( prefix_r / loc_r.filename() );
       return loc_r;
     }
 
@@ -44,23 +44,23 @@ namespace yum
     {
       Pathname deltafile;
       if ( ! PathInfo(dir).isDir() )
-	return deltafile;
+        return deltafile;
 
       // Strip the checksum preceding the file stem so we can look for an
       // old *-primary.xml which may contain some reusable blocks.
       std::string base { file.basename() };
       size_t hypoff = base.find( "-" );
       if ( hypoff != std::string::npos )
-	base.replace( 0, hypoff + 1, "" );
+        base.replace( 0, hypoff + 1, "" );
 
       std::list<std::string> retlist;
       if ( ! filesystem::readdir( retlist, dir, false ) )
       {
-	for ( const auto & fn : retlist )
-	{
-	  if ( str::endsWith( fn, base ) )
-	    deltafile = fn;
-	}
+        for ( const auto & fn : retlist )
+        {
+          if ( str::endsWith( fn, base ) )
+            deltafile = fn;
+        }
       }
       return deltafile;
     }
@@ -92,7 +92,7 @@ namespace yum
     {
       addWantedLocale( ZConfig::instance().textLocale() );
       for ( const Locale & it : ZConfig::instance().repoRefreshLocales() )
-	addWantedLocale( it );
+        addWantedLocale( it );
     }
 
     /** The callback invoked by the RepomdFileReader.
@@ -102,32 +102,32 @@ namespace yum
     bool operator()( const OnMediaLocation & loc_r, const std::string & typestr_r )
     {
       if ( str::endsWith( typestr_r, "_db" ) )
-	return true;	// skip sqlitedb
+        return true;	// skip sqlitedb
 
       bool zchk { str::endsWith( typestr_r, "_zck" ) };
 #if defined(LIBSOLVEXT_FEATURE_ZCHUNK_COMPRESSION)
       const std::string & basetype { zchk ? typestr_r.substr( 0, typestr_r.size()-4 ) : typestr_r };
 #else
       if ( zchk )
-	return true;	// skip zchunk if not supported by libsolv
+        return true;	// skip zchunk if not supported by libsolv
       const std::string & basetype { typestr_r };
 #endif
 
       // filter well known resource types
       if ( basetype == "other" || basetype == "filelists" )
-	return true;	// skip it
+        return true;	// skip it
 
       // filter localized susedata
       if ( str::startsWith( basetype, "susedata." ) )
       {
-	// susedata.LANG
-	if ( ! wantLocale( Locale(basetype.c_str()+9) ) )
-	  return true;	// skip it
+        // susedata.LANG
+        if ( ! wantLocale( Locale(basetype.c_str()+9) ) )
+          return true;	// skip it
       }
 
       // may take it... (prefer zchnk)
       if ( zchk || !_wantedFiles.count( basetype ) )
-	_wantedFiles[basetype] = loc_r;
+        _wantedFiles[basetype] = loc_r;
 
       return true;
     }
@@ -137,8 +137,8 @@ namespace yum
       // schedule fileS for download
       for ( const auto & el : _wantedFiles )
       {
-	const OnMediaLocation & loc { el.second };
-	const OnMediaLocation & loc_with_path { loc_with_path_prefix( loc, _downloader.repoInfo().path() ) };
+        const OnMediaLocation & loc { el.second };
+        const OnMediaLocation & loc_with_path { loc_with_path_prefix( loc, _downloader.repoInfo().path() ) };
         _downloader.enqueueDigested( OnMediaLocation(loc_with_path).setDeltafile( search_deltafile( deltaDir()/"repodata", loc.filename() ) ), FileChecker() );
       }
     }
@@ -154,8 +154,8 @@ namespace yum
     {
       while ( locale_r )
       {
-	_wantedLocales.insert( locale_r );
-	locale_r = locale_r.fallback();
+        _wantedLocales.insert( locale_r );
+        locale_r = locale_r.fallback();
       }
     }
 

@@ -116,15 +116,15 @@ namespace zypp
     class SolvIterMixin
     {
       public:
-	typedef size_t size_type;
+        typedef size_t size_type;
 
       public:
         /** \name Convenience methods.
          * In case \c Derived is able to provide a more efficient implementation,
-	 * the methods should be overloaded.
-	 */
+         * the methods should be overloaded.
+         */
         //@{
-	/** Whether the collection is epmty. */
+        /** Whether the collection is epmty. */
         bool empty() const
         { return( self().begin() == self().end() ); }
 
@@ -132,17 +132,17 @@ namespace zypp
         size_type size() const
         { size_type s = 0; for_( it, self().begin(), self().end() ) ++s; return s;}
 
-	/** Whether collection contains a specific \ref Solvable. */
-	template<class TSolv>
-	bool contains( const TSolv & solv_r ) const
-	{
-	  Solvable solv( asSolvable()( solv_r ) );
-	  for_( it, self().begin(), self().end() )
-	    if ( *it == solv )
-	      return true;
-	  return false;
-	}
-	//@}
+        /** Whether collection contains a specific \ref Solvable. */
+        template<class TSolv>
+        bool contains( const TSolv & solv_r ) const
+        {
+          Solvable solv( asSolvable()( solv_r ) );
+          for_( it, self().begin(), self().end() )
+            if ( *it == solv )
+              return true;
+          return false;
+        }
+        //@}
 
       public:
         /** \name Iterate as Solvable */
@@ -152,8 +152,8 @@ namespace zypp
         { return self().begin(); }
         Solvable_iterator solvableEnd() const
         { return self().end(); }
-	Iterable<Solvable_iterator> solvable() const
-	{ return makeIterable( solvableBegin(), solvableEnd() ); }
+        Iterable<Solvable_iterator> solvable() const
+        { return makeIterable( solvableBegin(), solvableEnd() ); }
         //@}
 
         /** \name Iterate as PoolItem */
@@ -163,8 +163,8 @@ namespace zypp
         { return make_transform_iterator( solvableBegin(), asPoolItem() ); }
         PoolItem_iterator poolItemEnd() const
         { return make_transform_iterator( solvableEnd(), asPoolItem() ); }
-	Iterable<PoolItem_iterator> poolItem() const
-	{ return makeIterable( poolItemBegin(), poolItemEnd() ); }
+        Iterable<PoolItem_iterator> poolItem() const
+        { return makeIterable( poolItemBegin(), poolItemEnd() ); }
         //@}
 
       private:
@@ -177,8 +177,8 @@ namespace zypp
         { return make_transform_iterator( unifiedSolvableBegin(), ui::asSelectable() ); }
         Selectable_iterator selectableEnd() const
         { return make_transform_iterator( unifiedSolvableEnd(), ui::asSelectable() ); }
-	Iterable<Selectable_iterator> selectable() const
-	{ return makeIterable( selectableBegin(), selectableEnd() ); }
+        Iterable<Selectable_iterator> selectable() const
+        { return makeIterable( selectableBegin(), selectableEnd() ); }
         //@}
 
       private:
@@ -188,8 +188,8 @@ namespace zypp
         { return make_filter_iterator( solvitermixin_detail::UnifyByIdent(), solvableBegin(), solvableEnd() ); }
         UnifiedSolvable_iterator unifiedSolvableEnd() const
         { return make_filter_iterator( solvitermixin_detail::UnifyByIdent(), solvableEnd(), solvableEnd() ); }
-	Iterable<UnifiedSolvable_iterator> unifiedSolvable() const
-	{ return makeIterable( unifiedSolvableBegin(), unifiedSolvableEnd() ); }
+        Iterable<UnifiedSolvable_iterator> unifiedSolvable() const
+        { return makeIterable( unifiedSolvableBegin(), unifiedSolvableEnd() ); }
         //@}
       private:
         const Derived & self() const

@@ -114,7 +114,7 @@ namespace zypp
         {
           bool failed = false;
 
-	  // it also closes _fd, fine
+          // it also closes _fd, fine
           int r = gzclose( _file );
           if ( r != Z_OK )
             {
@@ -125,7 +125,7 @@ namespace zypp
             }
 
           // Reset everything
-	  _fd = -1;
+          _fd = -1;
           _file = NULL;
           _mode = std::ios_base::openmode(0);
           if ( ! failed )
@@ -196,8 +196,8 @@ namespace zypp
     off_t
     gzstreambufimpl::compressed_tell() const
     {
-	off_t pos = lseek (_fd, 0, SEEK_CUR);
-	// hopefully the conversion is ok
+        off_t pos = lseek (_fd, 0, SEEK_CUR);
+        // hopefully the conversion is ok
         return pos;
     }
 

@@ -99,26 +99,26 @@ unsigned BinHeader::intList::set( void * val_r, unsigned cnt_r, rpmTagType type_
     {
 #if RPM_CHAR_TYPE != RPM_INT8_TYPE
       case RPM_CHAR_TYPE:
-	std::vector<long>( (char*)val_r, ((char*)val_r)+cnt_r ).swap( _data );
-	break;
+        std::vector<long>( (char*)val_r, ((char*)val_r)+cnt_r ).swap( _data );
+        break;
 #endif
       case RPM_INT8_TYPE:
-	std::vector<long>( (int8_t*)val_r, ((int8_t*)val_r)+cnt_r ).swap( _data );
-	break;
+        std::vector<long>( (int8_t*)val_r, ((int8_t*)val_r)+cnt_r ).swap( _data );
+        break;
       case RPM_INT16_TYPE:
-	std::vector<long>( (int16_t*)val_r, ((int16_t*)val_r)+cnt_r ).swap( _data );
-	break;
+        std::vector<long>( (int16_t*)val_r, ((int16_t*)val_r)+cnt_r ).swap( _data );
+        break;
       case RPM_INT32_TYPE:
-	std::vector<long>( (int32_t*)val_r, ((int32_t*)val_r)+cnt_r ).swap( _data );
-	break;
+        std::vector<long>( (int32_t*)val_r, ((int32_t*)val_r)+cnt_r ).swap( _data );
+        break;
 #ifndef _RPM_5
       case RPM_INT64_TYPE:
-	std::vector<long>( (int64_t*)val_r, ((int64_t*)val_r)+cnt_r ).swap( _data );
-	break;
+        std::vector<long>( (int64_t*)val_r, ((int64_t*)val_r)+cnt_r ).swap( _data );
+        break;
 #endif
       default:
-	std::vector<long>( cnt_r, 0L ).swap( _data );
-	break;
+        std::vector<long>( cnt_r, 0L ).swap( _data );
+        break;
     }
   else
     _data.clear();

@@ -49,41 +49,41 @@ namespace zypp
       class ProblemSolutionCombi : public ProblemSolution
       {
       public:
-	/** Constructor. */
-	ProblemSolutionCombi();
+        /** Constructor. */
+        ProblemSolutionCombi();
 
-	/**
-	 * Add a single action of an item
-	 */
-	void addSingleAction( PoolItem item, TransactionKind action );
+        /**
+         * Add a single action of an item
+         */
+        void addSingleAction( PoolItem item, TransactionKind action );
 
-	/**
-	 * Add a single action of a capability
-	 */
-	void addSingleAction( Capability capability, TransactionKind action );
+        /**
+         * Add a single action of a capability
+         */
+        void addSingleAction( Capability capability, TransactionKind action );
 
-	/**
-	 * Add a single action of a SolverQueueItem
-	 */
-	void addSingleAction( SolverQueueItem_Ptr item, TransactionKind action );
+        /**
+         * Add a single action of a SolverQueueItem
+         */
+        void addSingleAction( SolverQueueItem_Ptr item, TransactionKind action );
 
-	/**
-	 * returns the number of actions
-	 */
-	size_t actionCount()
-	{ return actions().size(); }
+        /**
+         * returns the number of actions
+         */
+        size_t actionCount()
+        { return actions().size(); }
 
-	/**
-	 * Set description text (append)
-	 */
-	void addDescription( std::string description )
-	{ pushDescriptionDetail( std::move(description) ); }
+        /**
+         * Set description text (append)
+         */
+        void addDescription( std::string description )
+        { pushDescriptionDetail( std::move(description) ); }
 
-	/**
-	 * Set description text (prepend)
-	 */
-	void addFrontDescription( std::string description )
-	{ pushDescriptionDetail( std::move(description), /*front*/true ); }
+        /**
+         * Set description text (prepend)
+         */
+        void addFrontDescription( std::string description )
+        { pushDescriptionDetail( std::move(description), /*front*/true ); }
       };
 
     } // namespace detail

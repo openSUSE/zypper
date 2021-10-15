@@ -37,9 +37,9 @@ namespace zypp
       const char * ovalue = ::setlocale( category_r, nullptr );
       if ( ovalue && ovalue != value_r )
       {
-	_category = category_r;
-	_value    = ovalue;
-	::setlocale( _category, value_r.c_str() );
+        _category = category_r;
+        _value    = ovalue;
+        ::setlocale( _category, value_r.c_str() );
       }
     }
 
@@ -52,8 +52,8 @@ namespace zypp
     {
       if ( _category != -1 )
       {
-	::setlocale( _category, _value.c_str() );
-	_category = -1;
+        ::setlocale( _category, _value.c_str() );
+        _category = -1;
       }
     }
 

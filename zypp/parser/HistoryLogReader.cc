@@ -50,9 +50,9 @@ namespace zypp
     void addActionFilter( const HistoryActionID & action_r )
     {
       if ( action_r == HistoryActionID::NONE )
-	_actionfilter.clear();
+        _actionfilter.clear();
       else
-	_actionfilter.insert( action_r.asString() );
+        _actionfilter.insert( action_r.asString() );
     }
 
     Pathname _filename;
@@ -87,15 +87,15 @@ namespace zypp
       ZYPP_CAUGHT( excpt );
       if ( _options.testFlag( IGNORE_INVALID_ITEMS ) )
       {
-	WAR << "Ignore invalid history log entry on line #" << lineNr_r << " '"<< line_r << "'" << endl;
-	return true;
+        WAR << "Ignore invalid history log entry on line #" << lineNr_r << " '"<< line_r << "'" << endl;
+        return true;
       }
       else
       {
-	ERR << "Invalid history log entry on line #" << lineNr_r << " '"<< line_r << "'" << endl;
-	ParseException newexcpt( str::Str() << "Error in history log on line #" << lineNr_r );
-	newexcpt.remember( excpt );
-	ZYPP_THROW( newexcpt );
+        ERR << "Invalid history log entry on line #" << lineNr_r << " '"<< line_r << "'" << endl;
+        ParseException newexcpt( str::Str() << "Error in history log on line #" << lineNr_r );
+        newexcpt.remember( excpt );
+        ZYPP_THROW( newexcpt );
       }
     }
 
@@ -124,7 +124,7 @@ namespace zypp
         continue;
 
       if ( ! parseLine( *line, line.lineNo() ) )
-	break;	// requested by consumer callback
+        break;	// requested by consumer callback
     }
 
     pd.toMax();
@@ -150,8 +150,8 @@ namespace zypp
 
       if ( pastDate )
       {
-	if ( ! parseLine( s, line.lineNo() ) )
-	  break;	// requested by consumer callback
+        if ( ! parseLine( s, line.lineNo() ) )
+          break;	// requested by consumer callback
       }
       else
       {
@@ -160,7 +160,7 @@ namespace zypp
         {
           pastDate = true;
           if ( ! parseLine( s, line.lineNo() ) )
-	    break;	// requested by consumer callback
+            break;	// requested by consumer callback
         }
       }
     }
@@ -198,8 +198,8 @@ namespace zypp
 
       if ( pastFromDate )
       {
-	if ( ! parseLine( s, line.lineNo() ) )
-	  break;	// requested by consumer callback
+        if ( ! parseLine( s, line.lineNo() ) )
+          break;	// requested by consumer callback
       }
     }
 

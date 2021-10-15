@@ -111,7 +111,7 @@ namespace zypp
       // xpath: /repomd/data (+)
       if ( reader_r->name() == "data" )
       {
-	_typeStr = reader_r->getAttribute("type").asString();
+        _typeStr = reader_r->getAttribute("type").asString();
         return true;
       }
 
@@ -126,14 +126,14 @@ namespace zypp
       // xpath: /repomd/checksum
       if ( reader_r->name() == "checksum" )
       {
-	_location.setChecksum( getChecksum( reader_r ) );
+        _location.setChecksum( getChecksum( reader_r ) );
         return true;
       }
 
       // xpath: /repomd/header-checksum
       if ( reader_r->name() == "header-checksum" )
       {
-	_location.setHeaderChecksum( getChecksum( reader_r ) );
+        _location.setHeaderChecksum( getChecksum( reader_r ) );
         return true;
       }
 
@@ -147,23 +147,23 @@ namespace zypp
       // xpath: /repomd/size
       if ( reader_r->name() == "size" )
       {
-	_location.setDownloadSize( getSize( reader_r ) );
+        _location.setDownloadSize( getSize( reader_r ) );
         return true;
       }
 
       // xpath: /repomd/header-size
       if ( reader_r->name() == "header-size" )
       {
-	_location.setHeaderSize( getSize( reader_r ) );
+        _location.setHeaderSize( getSize( reader_r ) );
         return true;
       }
 
       // xpath: /tags/content
       if ( reader_r->name() == "content" )
       {
-	const auto & tag = reader_r.nodeText();
-	if ( tag.c_str() && *tag.c_str() )
-	  _keywords.insert( tag.asString() );	// remember keyword
+        const auto & tag = reader_r.nodeText();
+        if ( tag.c_str() && *tag.c_str() )
+          _keywords.insert( tag.asString() );	// remember keyword
         return true;
       }
     }
@@ -175,9 +175,9 @@ namespace zypp
       {
         if (_callback) {
           _callback( std::move(_location), _typeStr );
-	  _location = OnMediaLocation();
-	  _typeStr.clear();
-	}
+          _location = OnMediaLocation();
+          _typeStr.clear();
+        }
         return true;
       }
     }
@@ -214,27 +214,27 @@ namespace zypp
       // gpg-pubkey-39db7c82-5847eb1f.asc?fpr=22C07BA534178CD02EFE22AAB88B2FD43DBDC284
       // Fingerprint is explicitely mentioned or id/fpr can be derived from the filename
       if ( tag.compare( 0,10,"gpg-pubkey" ) != 0 )
-	continue;
+        continue;
 
       static const str::regex rx( "^(gpg-pubkey([^?]*))(\\?fpr=([[:xdigit:]]{8,}))?$" );
       str::smatch what;
       if ( str::regex_match( tag.c_str(), what, rx ) ) {
-	std::string keyfile { what[1] };
-	std::string keyident;
-	if ( what.size(4) != std::string::npos ) {	// with fpr=
-	  keyident = what[4];
-	}
-	else {
-	  static const str::regex rx( /*gpg-pubkey*/"^-([[:xdigit:]]{8,})" );
-	  if ( str::regex_match( what[2], what, rx ) ) {
-	    keyident = what[1];
-	  }
-	  else {
-	    DBG << "Tag " << tag << " does not contain a keyident. ignore it." << endl;
-	    continue;
-	  }
-	}
-	ret.push_back( std::make_pair( std::move(keyfile), std::move(keyident) ) );
+        std::string keyfile { what[1] };
+        std::string keyident;
+        if ( what.size(4) != std::string::npos ) {	// with fpr=
+          keyident = what[4];
+        }
+        else {
+          static const str::regex rx( /*gpg-pubkey*/"^-([[:xdigit:]]{8,})" );
+          if ( str::regex_match( what[2], what, rx ) ) {
+            keyident = what[1];
+          }
+          else {
+            DBG << "Tag " << tag << " does not contain a keyident. ignore it." << endl;
+            continue;
+          }
+        }
+        ret.push_back( std::make_pair( std::move(keyfile), std::move(keyident) ) );
       }
     }
     return ret;

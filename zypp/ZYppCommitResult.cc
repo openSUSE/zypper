@@ -109,9 +109,9 @@ namespace zypp
       ++result[0];
       switch ( it->stepStage() )
       {
-	case sat::Transaction::STEP_DONE :	++result[1]; break;
-	case sat::Transaction::STEP_ERROR :	++result[2]; break;
-	case sat::Transaction::STEP_TODO :	++result[3]; break;
+        case sat::Transaction::STEP_DONE :	++result[1]; break;
+        case sat::Transaction::STEP_ERROR :	++result[2]; break;
+        case sat::Transaction::STEP_TODO :	++result[3]; break;
       }
     }
     str << "CommitResult "

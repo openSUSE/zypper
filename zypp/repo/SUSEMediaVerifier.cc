@@ -26,17 +26,17 @@ namespace zypp
     {
       SMVData( const Pathname & path_r )
       {
-	std::ifstream inp( path_r.c_str() );
-	if ( !inp ) {
-	  ERR << "Can't setup a SUSEMediaVerifier from file: " << path_r.asString() << endl;
-	  return;
-	}
-	getline( inp, _mediaVendor );
-	getline( inp, _mediaIdent );
-	std::string buffer;
-	getline( inp, buffer );
-	str::strtonum( buffer, _totalMedia );
-	//if ( !_totalMedia ) _totalMedia = 1;
+        std::ifstream inp( path_r.c_str() );
+        if ( !inp ) {
+          ERR << "Can't setup a SUSEMediaVerifier from file: " << path_r.asString() << endl;
+          return;
+        }
+        getline( inp, _mediaVendor );
+        getline( inp, _mediaIdent );
+        std::string buffer;
+        getline( inp, buffer );
+        str::strtonum( buffer, _totalMedia );
+        //if ( !_totalMedia ) _totalMedia = 1;
       }
 
       /** Validate object in a boolean context: valid */
@@ -93,19 +93,19 @@ namespace zypp
 
       Pathname mediaFilePath( media::MediaNr mediaNr_r = 0 ) const
       {
-	str::Format fmt { "/media.%d/media" };
-	fmt % str::numstring( mediaNr_r ? mediaNr_r : _mediaNr );
-	return fmt.str();
+        str::Format fmt { "/media.%d/media" };
+        fmt % str::numstring( mediaNr_r ? mediaNr_r : _mediaNr );
+        return fmt.str();
       }
 
       std::string expectedAsUserString() const
       {
-	// Translator: %1% the expected medium number; %2% the total number of media in the set; %3% the ident file on the medium.
-	str::Format fmt { _("Expected medium %1%/%2% identified by file '%3%' with content:") };
-	return str::Str()
-	<< ( fmt % mediaNr() % smvData()._totalMedia % mediaFilePath() ) << endl
-	<< "    " << smvData()._mediaVendor  << endl
-	<< "    " << smvData()._mediaIdent;
+        // Translator: %1% the expected medium number; %2% the total number of media in the set; %3% the ident file on the medium.
+        str::Format fmt { _("Expected medium %1%/%2% identified by file '%3%' with content:") };
+        return str::Str()
+        << ( fmt % mediaNr() % smvData()._totalMedia % mediaFilePath() ) << endl
+        << "    " << smvData()._mediaVendor  << endl
+        << "    " << smvData()._mediaIdent;
       }
 
     private:
@@ -155,7 +155,7 @@ namespace zypp
 
       const SMVData & smvData = _pimpl->smvData();
       if ( ! smvData )
-	return ret;	// we have no valid data
+        return ret;	// we have no valid data
 
       // bsc#1180851: If there is just one not-volatile medium in the set
       // tolerate a missing (vanished) media identifier and let the URL rule.
@@ -165,33 +165,33 @@ namespace zypp
 
       Pathname mediaFile { _pimpl->mediaFilePath() };
       try {
-	ref.provideFile( OnMediaLocation(mediaFile) );
-	mediaFile = ref.localPath( mediaFile );
+        ref.provideFile( OnMediaLocation(mediaFile) );
+        mediaFile = ref.localPath( mediaFile );
       }
       catch ( media::MediaFileNotFoundException & excpt_r )
       {
-	if ( relaxed ) {
-	  ZYPP_CAUGHT( excpt_r );
-	  return ret;
-	}
-	excpt_r.addHistory( _pimpl->expectedAsUserString() );
-	ZYPP_RETHROW( excpt_r );
+        if ( relaxed ) {
+          ZYPP_CAUGHT( excpt_r );
+          return ret;
+        }
+        excpt_r.addHistory( _pimpl->expectedAsUserString() );
+        ZYPP_RETHROW( excpt_r );
       }
       catch ( media::MediaNotAFileException & excpt_r )
       {
-	if ( relaxed ) {
-	  ZYPP_CAUGHT( excpt_r );
-	  return ret;
-	}
-	excpt_r.addHistory( _pimpl->expectedAsUserString() );
-	ZYPP_CAUGHT( excpt_r ); return ret;
+        if ( relaxed ) {
+          ZYPP_CAUGHT( excpt_r );
+          return ret;
+        }
+        excpt_r.addHistory( _pimpl->expectedAsUserString() );
+        ZYPP_CAUGHT( excpt_r ); return ret;
       }
 
       SMVData remote { mediaFile };
       ret = smvData.matches( remote );
       if ( ! ret ) {
-	DBG << "expect: " << smvData << " medium " << mediaNr() << endl;
-	DBG << "remote: " << remote  << endl;
+        DBG << "expect: " << smvData << " medium " << mediaNr() << endl;
+        DBG << "remote: " << remote  << endl;
       }
       return ret;
     }

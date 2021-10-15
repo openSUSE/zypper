@@ -59,59 +59,59 @@ try {
     for ( RepoInfo & nrepo : repoManager.knownRepositories() )
     {
       if ( ! nrepo.enabled() )
-	continue;
+        continue;
 
       // Often volatile media are sipped in automated environments
       // to avoid media chagne requests:
       if ( nrepo.url().schemeIsVolatile() )
-	continue;
+        continue;
 
       bool refreshNeeded = false;
       if ( nrepo.autorefresh() )	// test whether to autorefresh repo metadata
       {
-	for ( const Url & url : nrepo.baseUrls() )
-	{
-	  try
-	  {
-	    if ( repoManager.checkIfToRefreshMetadata( nrepo, url ) == RepoManager::REFRESH_NEEDED )
-	    {
-	      cout << "Need to autorefresh repo " << nrepo.alias() << endl;
-	      refreshNeeded = true;
-	    }
-	    break;	// exit after first successful checkIfToRefreshMetadata
-	  }
-	  catch ( const Exception & exp )
-	  {}	// Url failed, try next one...
-	}
-	// If all urls failed we can leave it to the code below to
-	// fail if access is actually needed and still failing.
-	// (missing metadata, package download, ...)
+        for ( const Url & url : nrepo.baseUrls() )
+        {
+          try
+          {
+            if ( repoManager.checkIfToRefreshMetadata( nrepo, url ) == RepoManager::REFRESH_NEEDED )
+            {
+              cout << "Need to autorefresh repo " << nrepo.alias() << endl;
+              refreshNeeded = true;
+            }
+            break;	// exit after first successful checkIfToRefreshMetadata
+          }
+          catch ( const Exception & exp )
+          {}	// Url failed, try next one...
+        }
+        // If all urls failed we can leave it to the code below to
+        // fail if access is actually needed and still failing.
+        // (missing metadata, package download, ...)
       }
 
       // initial metadata download or cache refresh
       if ( ! repoManager.isCached( nrepo ) || refreshNeeded )
       {
-	cout << "Refreshing repo " << nrepo << endl;
-	if ( repoManager.isCached( nrepo ) )
-	{
-	  repoManager.cleanCache( nrepo );
-	}
-	repoManager.refreshMetadata( nrepo );
-	repoManager.buildCache( nrepo );
+        cout << "Refreshing repo " << nrepo << endl;
+        if ( repoManager.isCached( nrepo ) )
+        {
+          repoManager.cleanCache( nrepo );
+        }
+        repoManager.refreshMetadata( nrepo );
+        repoManager.buildCache( nrepo );
       }
 
       // load cache
       try
       {
-	cout << "Loading resolvables from " << nrepo.alias() << endl;
-	repoManager.loadFromCache( nrepo );// load available packages to pool
+        cout << "Loading resolvables from " << nrepo.alias() << endl;
+        repoManager.loadFromCache( nrepo );// load available packages to pool
       }
       catch ( const Exception & exp )
       {
-	// cachefile has old fomat (or is corrupted): try yo rebuild it
-	repoManager.cleanCache( nrepo );
-	repoManager.buildCache( nrepo );
-	repoManager.loadFromCache( nrepo );
+        // cachefile has old fomat (or is corrupted): try yo rebuild it
+        repoManager.cleanCache( nrepo );
+        repoManager.buildCache( nrepo );
+        repoManager.loadFromCache( nrepo );
       }
     }
   }
@@ -161,33 +161,33 @@ try {
       unsigned probNo = 0;
       for ( const auto & probPtr : problems )
       {
-	cout << "Problem " << ++probNo << ": " << probPtr->description() << endl;
+        cout << "Problem " << ++probNo << ": " << probPtr->description() << endl;
 
-	const ProblemSolutionList & solutions = probPtr->solutions();
-	unsigned solNo = 0;
-	for ( const auto & solPtr : solutions )
-	{
-	  cout << "  Solution " << ++solNo << ": " << solPtr->description() << endl;
-	}
+        const ProblemSolutionList & solutions = probPtr->solutions();
+        unsigned solNo = 0;
+        for ( const auto & solPtr : solutions )
+        {
+          cout << "  Solution " << ++solNo << ": " << solPtr->description() << endl;
+        }
 
-	// if you (interactively) resolve problems pick 1 solution per problem
-	// and store it int the totry list. After having applied the selected
-	// start a new attempt.
-	//
-	// It's not necessary to process all problems. You can pick a solution
-	// for the first problem and retry immediately. Often one solution actually
-	// resolves more than one reported problem.
-	//
-	// totry.push_back( solPtr );
+        // if you (interactively) resolve problems pick 1 solution per problem
+        // and store it int the totry list. After having applied the selected
+        // start a new attempt.
+        //
+        // It's not necessary to process all problems. You can pick a solution
+        // for the first problem and retry immediately. Often one solution actually
+        // resolves more than one reported problem.
+        //
+        // totry.push_back( solPtr );
       }
 
 
       if ( ! totry.empty() )
       {
-	cout << "Apply selected solutions..." << endl;
-	zypp->resolver()->applySolutions( totry );
-	cout << "Solving dependencies..." << endl;
-	continue;
+        cout << "Apply selected solutions..." << endl;
+        zypp->resolver()->applySolutions( totry );
+        cout << "Solving dependencies..." << endl;
+        continue;
       }
       // otherwise give up
       throw "Solving dependencies failed: Giving up!";
@@ -203,7 +203,7 @@ try {
     for ( const PoolItem & pi : zypp->pool() )
     {
       if ( pi.status().transacts() )
-	cout << "  " << pi << endl;
+        cout << "  " << pi << endl;
     }
   }
   else
@@ -212,7 +212,7 @@ try {
     for ( const ui::Selectable_Ptr & sel : zypp->pool().proxy() )
     {
       if ( sel->toModify() )
-	cout << "  " << sel << endl;
+        cout << "  " << sel << endl;
     }
   }
 
@@ -242,10 +242,10 @@ try {
       ZYppCommitResult result = zypp->commit( policy );	// go....
       if ( ! ( result.allDone() || ( dryRunEtc && result.noError() ) ) )
       {
-	throw "Incomplete commit!";
-	// ZYppCommitResult offers access to the TransactionStepList
-	// where you can see which packages have been processed and
-	// which not.
+        throw "Incomplete commit!";
+        // ZYppCommitResult offers access to the TransactionStepList
+        // where you can see which packages have been processed and
+        // which not.
       }
       cout << "Commit succeeded" << endl;
     }

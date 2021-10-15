@@ -114,13 +114,13 @@ namespace zypp
       /** Remember credentials stored in URL authority leaving the password in \a url_r. */
       bool collect( const Url & url_r )
       {
-	bool ret = url_r.hasCredentialsInAuthority();
-	if ( ret )
-	{
-	  if ( !_cmPtr ) _cmPtr.reset( new media::CredentialManager( _root ) );
-	  _cmPtr->addUserCred( url_r );
-	}
-	return ret;
+        bool ret = url_r.hasCredentialsInAuthority();
+        if ( ret )
+        {
+          if ( !_cmPtr ) _cmPtr.reset( new media::CredentialManager( _root ) );
+          _cmPtr->addUserCred( url_r );
+        }
+        return ret;
       }
       /** \overload operating on Url container */
       template<class TContainer>
@@ -130,10 +130,10 @@ namespace zypp
       /** Remember credentials stored in URL authority stripping the passowrd from \a url_r. */
       bool extract( Url & url_r )
       {
-	bool ret = collect( url_r );
-	if ( ret )
-	  url_r.setPassword( std::string() );
-	return ret;
+        bool ret = collect( url_r );
+        if ( ret )
+          url_r.setPassword( std::string() );
+        return ret;
       }
       /** \overload operating on Url container */
       template<class TContainer>
@@ -310,33 +310,33 @@ namespace zypp
       bool nonroot( geteuid() != 0 );
       if ( nonroot && ! PathInfo(dir).userMayRX() )
       {
-	JobReport::warning( str::Format(_("Cannot read repo directory '%1%': Permission denied")) % dir );
+        JobReport::warning( str::Format(_("Cannot read repo directory '%1%': Permission denied")) % dir );
       }
       else
       {
-	std::list<Pathname> entries;
-	if ( filesystem::readdir( entries, dir, false ) != 0 )
-	{
-	  // TranslatorExplanation '%s' is a pathname
-	  ZYPP_THROW(Exception(str::form(_("Failed to read directory '%s'"), dir.c_str())));
-	}
+        std::list<Pathname> entries;
+        if ( filesystem::readdir( entries, dir, false ) != 0 )
+        {
+          // TranslatorExplanation '%s' is a pathname
+          ZYPP_THROW(Exception(str::form(_("Failed to read directory '%s'"), dir.c_str())));
+        }
 
-	str::regex allowedRepoExt("^\\.repo(_[0-9]+)?$");
-	for ( std::list<Pathname>::const_iterator it = entries.begin(); it != entries.end(); ++it )
-	{
-	  if ( str::regex_match(it->extension(), allowedRepoExt) )
-	  {
-	    if ( nonroot && ! PathInfo(*it).userMayR() )
-	    {
-	      JobReport::warning( str::Format(_("Cannot read repo file '%1%': Permission denied")) % *it );
-	    }
-	    else
-	    {
-	      const std::list<RepoInfo> & tmp( repositories_in_file( *it ) );
-	      repos.insert( repos.end(), tmp.begin(), tmp.end() );
-	    }
-	  }
-	}
+        str::regex allowedRepoExt("^\\.repo(_[0-9]+)?$");
+        for ( std::list<Pathname>::const_iterator it = entries.begin(); it != entries.end(); ++it )
+        {
+          if ( str::regex_match(it->extension(), allowedRepoExt) )
+          {
+            if ( nonroot && ! PathInfo(*it).userMayR() )
+            {
+              JobReport::warning( str::Format(_("Cannot read repo file '%1%': Permission denied")) % *it );
+            }
+            else
+            {
+              const std::list<RepoInfo> & tmp( repositories_in_file( *it ) );
+              repos.insert( repos.end(), tmp.begin(), tmp.end() );
+            }
+          }
+        }
       }
       return repos;
     }
@@ -346,23 +346,23 @@ namespace zypp
     inline void assert_alias( const RepoInfo & info )
     {
       if ( info.alias().empty() )
-	ZYPP_THROW( RepoNoAliasException( info ) );
+        ZYPP_THROW( RepoNoAliasException( info ) );
       // bnc #473834. Maybe we can match the alias against a regex to define
       // and check for valid aliases
       if ( info.alias()[0] == '.')
-	ZYPP_THROW(RepoInvalidAliasException(
-	  info, _("Repository alias cannot start with dot.")));
+        ZYPP_THROW(RepoInvalidAliasException(
+          info, _("Repository alias cannot start with dot.")));
     }
 
     inline void assert_alias( const ServiceInfo & info )
     {
       if ( info.alias().empty() )
-	ZYPP_THROW( ServiceNoAliasException( info ) );
+        ZYPP_THROW( ServiceNoAliasException( info ) );
       // bnc #473834. Maybe we can match the alias against a regex to define
       // and check for valid aliases
       if ( info.alias()[0] == '.')
-	ZYPP_THROW(ServiceInvalidAliasException(
-	  info, _("Service alias cannot start with dot.")));
+        ZYPP_THROW(ServiceInvalidAliasException(
+          info, _("Service alias cannot start with dot.")));
     }
 
     ////////////////////////////////////////////////////////////////////////////
@@ -370,13 +370,13 @@ namespace zypp
     inline void assert_urls( const RepoInfo & info )
     {
       if ( info.baseUrlsEmpty() )
-	ZYPP_THROW( RepoNoUrlException( info ) );
+        ZYPP_THROW( RepoNoUrlException( info ) );
     }
 
     inline void assert_url( const ServiceInfo & info )
     {
       if ( ! info.url().isValid() )
-	ZYPP_THROW( ServiceNoUrlException( info ) );
+        ZYPP_THROW( ServiceNoUrlException( info ) );
     }
 
     ////////////////////////////////////////////////////////////////////////////
@@ -443,8 +443,8 @@ namespace zypp
 
       bool operator()( const ServiceInfo & service_r ) const
       {
-	_services.insert( service_r );
-	return true;
+        _services.insert( service_r );
+        return true;
       }
 
     private:
@@ -532,43 +532,43 @@ namespace zypp
     {
       // trigger appdata refresh if some repos change
       if ( ( _reposDirty || env::ZYPP_PLUGIN_APPDATA_FORCE_COLLECT() )
-	&& geteuid() == 0 && ( _options.rootDir.empty() || _options.rootDir == "/" ) )
+        && geteuid() == 0 && ( _options.rootDir.empty() || _options.rootDir == "/" ) )
       {
-	try {
-	  std::list<Pathname> entries;
-	  filesystem::readdir( entries, _options.pluginsPath/"appdata", false );
-	  if ( ! entries.empty() )
-	  {
-	    ExternalProgram::Arguments cmd;
-	    cmd.push_back( "<" );		// discard stdin
-	    cmd.push_back( ">" );		// discard stdout
-	    cmd.push_back( "PROGRAM" );		// [2] - fix index below if changing!
-	    for ( const auto & rinfo : repos() )
-	    {
-	      if ( ! rinfo.enabled() )
-		continue;
-	      cmd.push_back( "-R" );
-	      cmd.push_back( rinfo.alias() );
-	      cmd.push_back( "-t" );
-	      cmd.push_back( rinfo.type().asString() );
-	      cmd.push_back( "-p" );
-	      cmd.push_back( rinfo.metadataPath().asString() );
-	    }
+        try {
+          std::list<Pathname> entries;
+          filesystem::readdir( entries, _options.pluginsPath/"appdata", false );
+          if ( ! entries.empty() )
+          {
+            ExternalProgram::Arguments cmd;
+            cmd.push_back( "<" );		// discard stdin
+            cmd.push_back( ">" );		// discard stdout
+            cmd.push_back( "PROGRAM" );		// [2] - fix index below if changing!
+            for ( const auto & rinfo : repos() )
+            {
+              if ( ! rinfo.enabled() )
+                continue;
+              cmd.push_back( "-R" );
+              cmd.push_back( rinfo.alias() );
+              cmd.push_back( "-t" );
+              cmd.push_back( rinfo.type().asString() );
+              cmd.push_back( "-p" );
+              cmd.push_back( rinfo.metadataPath().asString() );
+            }
 
-	    for_( it, entries.begin(), entries.end() )
-	    {
-	      PathInfo pi( *it );
-	      //DBG << "/tmp/xx ->" << pi << endl;
-	      if ( pi.isFile() && pi.userMayRX() )
-	      {
-		// trigger plugin
-		cmd[2] = pi.asString();		// [2] - PROGRAM
-		ExternalProgram prog( cmd, ExternalProgram::Stderr_To_Stdout );
-	      }
-	    }
-	  }
-	}
-	catch (...) {}	// no throw in dtor
+            for_( it, entries.begin(), entries.end() )
+            {
+              PathInfo pi( *it );
+              //DBG << "/tmp/xx ->" << pi << endl;
+              if ( pi.isFile() && pi.userMayRX() )
+              {
+                // trigger plugin
+                cmd[2] = pi.asString();		// [2] - PROGRAM
+                ExternalProgram prog( cmd, ExternalProgram::Stderr_To_Stdout );
+              }
+            }
+          }
+        }
+        catch (...) {}	// no throw in dtor
       }
     }
 
@@ -802,34 +802,34 @@ namespace zypp
      * we may easily remove user data (zypper --pkg-cache-dir . download ...)
      */
     inline void cleanupNonRepoMetadtaFolders( const Pathname & cachePath_r,
-					      const Pathname & defaultCachePath_r,
-					      const std::list<std::string> & repoEscAliases_r )
+                                              const Pathname & defaultCachePath_r,
+                                              const std::list<std::string> & repoEscAliases_r )
     {
       if ( cachePath_r != defaultCachePath_r )
-	return;
+        return;
 
       std::list<std::string> entries;
       if ( filesystem::readdir( entries, cachePath_r, false ) == 0 )
       {
-	entries.sort();
-	std::set<std::string> oldfiles;
-	set_difference( entries.begin(), entries.end(), repoEscAliases_r.begin(), repoEscAliases_r.end(),
-			std::inserter( oldfiles, oldfiles.end() ) );
+        entries.sort();
+        std::set<std::string> oldfiles;
+        set_difference( entries.begin(), entries.end(), repoEscAliases_r.begin(), repoEscAliases_r.end(),
+                        std::inserter( oldfiles, oldfiles.end() ) );
 
-	// bsc#1178966: Files or symlinks here have been created by the user
-	// for whatever purpose. It's our cache, so we purge them now before
-	// they may later conflict with directories we need.
-	PathInfo pi;
-	for ( const std::string & old : oldfiles )
-	{
-	  if ( old == Repository::systemRepoAlias() )	// don't remove the @System solv file
-	    continue;
-	  pi( cachePath_r/old );
-	  if ( pi.isDir() )
-	    filesystem::recursive_rmdir( pi.path() );
-	  else
-	    filesystem::unlink( pi.path() );
-	}
+        // bsc#1178966: Files or symlinks here have been created by the user
+        // for whatever purpose. It's our cache, so we purge them now before
+        // they may later conflict with directories we need.
+        PathInfo pi;
+        for ( const std::string & old : oldfiles )
+        {
+          if ( old == Repository::systemRepoAlias() )	// don't remove the @System solv file
+            continue;
+          pi( cachePath_r/old );
+          if ( pi.isDir() )
+            filesystem::recursive_rmdir( pi.path() );
+          else
+            filesystem::unlink( pi.path() );
+        }
       }
     }
   } // namespace
@@ -846,19 +846,19 @@ namespace zypp
       {
         // set the metadata path for the repo
         repoInfo.setMetadataPath( rawcache_path_for_repoinfo(_options, repoInfo) );
-	// set the downloaded packages path for the repo
-	repoInfo.setPackagesPath( packagescache_path_for_repoinfo(_options, repoInfo) );
-	// remember it
+        // set the downloaded packages path for the repo
+        repoInfo.setPackagesPath( packagescache_path_for_repoinfo(_options, repoInfo) );
+        // remember it
         _reposX.insert( repoInfo );	// direct access via _reposX in ctor! no reposManip.
 
-	// detect orphaned repos belonging to a deleted service
-	const std::string & serviceAlias( repoInfo.service() );
-	if ( ! ( serviceAlias.empty() || hasService( serviceAlias ) ) )
-	{
-	  WAR << "Schedule orphaned service repo for deletion: " << repoInfo << endl;
-	  orphanedRepos.push_back( repoInfo );
-	  continue;	// don't remember it in repoEscAliases
-	}
+        // detect orphaned repos belonging to a deleted service
+        const std::string & serviceAlias( repoInfo.service() );
+        if ( ! ( serviceAlias.empty() || hasService( serviceAlias ) ) )
+        {
+          WAR << "Schedule orphaned service repo for deletion: " << repoInfo << endl;
+          orphanedRepos.push_back( repoInfo );
+          continue;	// don't remember it in repoEscAliases
+        }
 
         repoEscAliases.push_back(repoInfo.escaped_alias());
       }
@@ -866,23 +866,23 @@ namespace zypp
       // Cleanup orphanded service repos:
       if ( ! orphanedRepos.empty() )
       {
-	for ( const auto & repoInfo : orphanedRepos )
-	{
-	  MIL << "Delete orphaned service repo " << repoInfo.alias() << endl;
-	  // translators: Cleanup a repository previously owned by a meanwhile unknown (deleted) service.
-	  //   %1% = service name
-	  //   %2% = repository name
-	  JobReport::warning( str::Format(_("Unknown service '%1%': Removing orphaned service repository '%2%'"))
-			      % repoInfo.service()
-			      % repoInfo.alias() );
-	  try {
-	    removeRepository( repoInfo );
-	  }
-	  catch ( const Exception & caugth )
-	  {
-	    JobReport::error( caugth.asUserHistory() );
-	  }
-	}
+        for ( const auto & repoInfo : orphanedRepos )
+        {
+          MIL << "Delete orphaned service repo " << repoInfo.alias() << endl;
+          // translators: Cleanup a repository previously owned by a meanwhile unknown (deleted) service.
+          //   %1% = service name
+          //   %2% = repository name
+          JobReport::warning( str::Format(_("Unknown service '%1%': Removing orphaned service repository '%2%'"))
+                              % repoInfo.service()
+                              % repoInfo.alias() );
+          try {
+            removeRepository( repoInfo );
+          }
+          catch ( const Exception & caugth )
+          {
+            JobReport::error( caugth.asUserHistory() );
+          }
+        }
       }
 
       // delete metadata folders without corresponding repo (e.g. old tmp directories)
@@ -892,14 +892,14 @@ namespace zypp
       // we may easily remove user data (zypper --pkg-cache-dir . download ...)
       repoEscAliases.sort();
       cleanupNonRepoMetadtaFolders( _options.repoRawCachePath,
-				    Pathname::assertprefix( _options.rootDir, ZConfig::instance().builtinRepoMetadataPath() ),
-				    repoEscAliases );
+                                    Pathname::assertprefix( _options.rootDir, ZConfig::instance().builtinRepoMetadataPath() ),
+                                    repoEscAliases );
       cleanupNonRepoMetadtaFolders( _options.repoSolvCachePath,
-				    Pathname::assertprefix( _options.rootDir, ZConfig::instance().builtinRepoSolvfilesPath() ),
-				    repoEscAliases );
+                                    Pathname::assertprefix( _options.rootDir, ZConfig::instance().builtinRepoSolvfilesPath() ),
+                                    repoEscAliases );
       cleanupNonRepoMetadtaFolders( _options.repoPackagesCachePath,
-				    Pathname::assertprefix( _options.rootDir, ZConfig::instance().builtinRepoPackagesPath() ),
-				    repoEscAliases );
+                                    Pathname::assertprefix( _options.rootDir, ZConfig::instance().builtinRepoPackagesPath() ),
+                                    repoEscAliases );
     }
     MIL << "end construct known repos" << endl;
   }
@@ -925,21 +925,21 @@ namespace zypp
     {
       case RepoType::RPMMD_e :
         status = RepoStatus( productdatapath/"repodata/repomd.xml") && RepoStatus( mediarootpath/"media.1/media" );
-	break;
+        break;
 
       case RepoType::YAST2_e :
         status = RepoStatus( productdatapath/"content" ) && RepoStatus( mediarootpath/"media.1/media" );
-	break;
+        break;
 
       case RepoType::RPMPLAINDIR_e :
-	status = RepoStatus::fromCookieFile( productdatapath/"cookie" );	// dir status at last refresh
-	break;
+        status = RepoStatus::fromCookieFile( productdatapath/"cookie" );	// dir status at last refresh
+        break;
 
       case RepoType::NONE_e :
-	// Return default RepoStatus in case of RepoType::NONE
-	// indicating it should be created?
+        // Return default RepoStatus in case of RepoType::NONE
+        // indicating it should be created?
         // ZYPP_THROW(RepoUnknownTypeException());
-	break;
+        break;
     }
 
     if ( ! status.empty() )
@@ -1006,98 +1006,98 @@ namespace zypp
 
       if ( url.schemeIsVolatile() )
       {
-	MIL << "Never refresh CD/DVD" << endl;
-	return REPO_UP_TO_DATE;
+        MIL << "Never refresh CD/DVD" << endl;
+        return REPO_UP_TO_DATE;
       }
 
       if ( policy == RefreshForced )
       {
-	MIL << "Forced refresh!" << endl;
-	return REFRESH_NEEDED;
+        MIL << "Forced refresh!" << endl;
+        return REFRESH_NEEDED;
       }
 
       if ( url.schemeIsLocal() )
       {
-	policy = RefreshIfNeededIgnoreDelay;
+        policy = RefreshIfNeededIgnoreDelay;
       }
 
       // Check whether repo.refresh.delay applies...
       if ( policy != RefreshIfNeededIgnoreDelay )
       {
-	// bsc#1174016: Prerequisite to skipping the refresh is that metadata
-	// and solv cache status match. They will not, if the repos URL was
-	// changed e.g. due to changed repovars.
-	RepoStatus cachestatus = cacheStatus( info );
+        // bsc#1174016: Prerequisite to skipping the refresh is that metadata
+        // and solv cache status match. They will not, if the repos URL was
+        // changed e.g. due to changed repovars.
+        RepoStatus cachestatus = cacheStatus( info );
 
-	if ( oldstatus == cachestatus )
-	{
-	  // difference in seconds
-	  double diff = ::difftime( (Date::ValueType)Date::now(), (Date::ValueType)oldstatus.timestamp() ) / 60;
-	  if ( diff < ZConfig::instance().repo_refresh_delay() )
-	  {
-	    if ( diff < 0 )
-	    {
-	      WAR << "Repository '" << info.alias() << "' was refreshed in the future!" << endl;
-	    }
-	    else
-	    {
-	      MIL << "Repository '" << info.alias()
-	      << "' has been refreshed less than repo.refresh.delay ("
-	      << ZConfig::instance().repo_refresh_delay()
-	      << ") minutes ago. Advising to skip refresh" << endl;
-	      return REPO_CHECK_DELAYED;
-	    }
-	  }
-	}
-	else {
-	  MIL << "Metadata and solv cache don't match. Check data on server..." << endl;
-	}
+        if ( oldstatus == cachestatus )
+        {
+          // difference in seconds
+          double diff = ::difftime( (Date::ValueType)Date::now(), (Date::ValueType)oldstatus.timestamp() ) / 60;
+          if ( diff < ZConfig::instance().repo_refresh_delay() )
+          {
+            if ( diff < 0 )
+            {
+              WAR << "Repository '" << info.alias() << "' was refreshed in the future!" << endl;
+            }
+            else
+            {
+              MIL << "Repository '" << info.alias()
+              << "' has been refreshed less than repo.refresh.delay ("
+              << ZConfig::instance().repo_refresh_delay()
+              << ") minutes ago. Advising to skip refresh" << endl;
+              return REPO_CHECK_DELAYED;
+            }
+          }
+        }
+        else {
+          MIL << "Metadata and solv cache don't match. Check data on server..." << endl;
+        }
       }
 
       repo::RepoType repokind = info.type();
       // if unknown: probe it
       if ( repokind == RepoType::NONE )
-	repokind = probe( url, info.path() );
+        repokind = probe( url, info.path() );
 
       // retrieve newstatus
       RepoStatus newstatus;
       switch ( repokind.toEnum() )
       {
-	case RepoType::RPMMD_e:
-	{
-	  MediaSetAccess media( url );
-	  newstatus = RepoStatus( info ) && yum::Downloader( info, mediarootpath ).status( media );
-	}
-	break;
+        case RepoType::RPMMD_e:
+        {
+          MediaSetAccess media( url );
+          newstatus = RepoStatus( info ) && yum::Downloader( info, mediarootpath ).status( media );
+        }
+        break;
 
-	case RepoType::YAST2_e:
-	{
-	  MediaSetAccess media( url );
-	  newstatus = RepoStatus( info ) && susetags::Downloader( info, mediarootpath ).status( media );
-	}
-	break;
+        case RepoType::YAST2_e:
+        {
+          MediaSetAccess media( url );
+          newstatus = RepoStatus( info ) && susetags::Downloader( info, mediarootpath ).status( media );
+        }
+        break;
 
-	case RepoType::RPMPLAINDIR_e:
-	  newstatus = RepoStatus( info ) && RepoStatus( MediaMounter(url).getPathName(info.path()) );	// dir status
-	  break;
+        case RepoType::RPMPLAINDIR_e:
+          newstatus = RepoStatus( info ) && RepoStatus( MediaMounter(url).getPathName(info.path()) );	// dir status
+          break;
 
-	default:
-	case RepoType::NONE_e:
-	  ZYPP_THROW( RepoUnknownTypeException( info ) );
-	  break;
+        default:
+        case RepoType::NONE_e:
+          ZYPP_THROW( RepoUnknownTypeException( info ) );
+          break;
       }
 
       // check status
       if ( oldstatus == newstatus )
       {
-	MIL << "repo has not changed" << endl;
-	touchIndexFile( info );
-	return REPO_UP_TO_DATE;
+        MIL << "repo has not changed" << endl;
+        touchIndexFile( info );
+        return REPO_UP_TO_DATE;
       }
       else // includes newstatus.empty() if e.g. repo format changed
       {
-	MIL << "repo has changed, going to refresh" << endl;
-	return REFRESH_NEEDED;
+        MIL << "repo has changed, going to refresh" << endl;
+        return REFRESH_NEEDED;
       }
     }
     catch ( const Exception &e )
@@ -1118,8 +1118,8 @@ namespace zypp
 
     // we will throw this later if no URL checks out fine
     RepoException rexception( info, PL_("Valid metadata not found at specified URL",
-					"Valid metadata not found at specified URLs",
-					info.baseUrlsSize() ) );
+                                        "Valid metadata not found at specified URLs",
+                                        info.baseUrlsSize() ) );
 
     // Suppress (interactive) media::MediaChangeReport if we in have multiple basurls (>1)
     media::ScopedDisableMediaChangeReport guard( info.baseUrlsSize() > 1 );
@@ -1137,34 +1137,34 @@ namespace zypp
 
         MIL << "Going to refresh metadata from " << url << endl;
 
-	// bsc#1048315: Always re-probe in case of repo format change.
-	// TODO: Would be sufficient to verify the type and re-probe
-	// if verification failed (or type is RepoType::NONE)
+        // bsc#1048315: Always re-probe in case of repo format change.
+        // TODO: Would be sufficient to verify the type and re-probe
+        // if verification failed (or type is RepoType::NONE)
         repo::RepoType repokind = info.type();
-	{
-	  repo::RepoType probed = probe( *it, info.path() );
-	  if ( repokind != probed )
-	  {
-	    repokind = probed;
-	    // update probed type only for repos in system
-	    for_( it, repoBegin(), repoEnd() )
-	    {
-	      if ( info.alias() == (*it).alias() )
-	      {
-		RepoInfo modifiedrepo = *it;
-		modifiedrepo.setType( repokind );
-		// don't modify .repo in refresh.
-		// modifyRepository( info.alias(), modifiedrepo );
-		break;
-	      }
-	    }
-	    // Adjust the probed type in RepoInfo
-	    info.setProbedType( repokind ); // lazy init!
-	  }
-	  // no need to continue with an unknown type
-	  if ( repokind.toEnum() == RepoType::NONE_e )
-	    ZYPP_THROW(RepoUnknownTypeException( info ));
-	}
+        {
+          repo::RepoType probed = probe( *it, info.path() );
+          if ( repokind != probed )
+          {
+            repokind = probed;
+            // update probed type only for repos in system
+            for_( it, repoBegin(), repoEnd() )
+            {
+              if ( info.alias() == (*it).alias() )
+              {
+                RepoInfo modifiedrepo = *it;
+                modifiedrepo.setType( repokind );
+                // don't modify .repo in refresh.
+                // modifyRepository( info.alias(), modifiedrepo );
+                break;
+              }
+            }
+            // Adjust the probed type in RepoInfo
+            info.setProbedType( repokind ); // lazy init!
+          }
+          // no need to continue with an unknown type
+          if ( repokind.toEnum() == RepoType::NONE_e )
+            ZYPP_THROW(RepoUnknownTypeException( info ));
+        }
 
         Pathname mediarootpath = rawcache_path_for_repoinfo( _options, info );
         if( filesystem::assert_dir(mediarootpath) )
@@ -1211,13 +1211,13 @@ namespace zypp
         }
         else if ( repokind.toEnum() == RepoType::RPMPLAINDIR_e )
         {
-	  // as substitute for real metadata remember the checksum of the directory we refreshed
+          // as substitute for real metadata remember the checksum of the directory we refreshed
           MediaMounter media( url );
           RepoStatus newstatus = RepoStatus( media.getPathName( info.path() ) );	// dir status
 
           Pathname productpath( tmpdir.path() / info.path() );
           filesystem::assert_dir( productpath );
-	  newstatus.saveToCookieFile( productpath/"cookie" );
+          newstatus.saveToCookieFile( productpath/"cookie" );
         }
         else
         {
@@ -1226,9 +1226,9 @@ namespace zypp
 
         // ok we have the metadata, now exchange
         // the contents
-	filesystem::exchange( tmpdir.path(), mediarootpath );
-	if ( ! isTmpRepo( info ) )
-	  reposManip();	// remember to trigger appdata refresh
+        filesystem::exchange( tmpdir.path(), mediarootpath );
+        if ( ! isTmpRepo( info ) )
+          reposManip();	// remember to trigger appdata refresh
 
         // we are done.
         return;
@@ -1243,8 +1243,8 @@ namespace zypp
         // cause of the problem of the first URL remembered
         if (it == info.baseUrlsBegin())
           rexception.remember(e);
-	else
-	  rexception.addHistory(  e.asUserString() );
+        else
+          rexception.addHistory(  e.asUserString() );
 
       }
     } // for every url
@@ -1305,13 +1305,13 @@ namespace zypp
       {
         MIL << info.alias() << " cache is up to date with metadata." << endl;
         if ( policy == BuildIfNeeded )
-	{
-	  // On the fly add missing solv.idx files for bash completion.
-	  const Pathname & base = solv_path_for_repoinfo( _options, info);
-	  if ( ! PathInfo(base/"solv.idx").isExist() )
-	    sat::updateSolvFileIndex( base/"solv" );
+        {
+          // On the fly add missing solv.idx files for bash completion.
+          const Pathname & base = solv_path_for_repoinfo( _options, info);
+          if ( ! PathInfo(base/"solv.idx").isExist() )
+            sat::updateSolvFileIndex( base/"solv" );
 
-	  return;
+          return;
         }
         else {
           MIL << info.alias() << " cache rebuild is forced" << endl;
@@ -1380,7 +1380,7 @@ namespace zypp
         // repo2solv expects -o as 1st arg!
         cmd.push_back( "-o" );
         cmd.push_back( solvfile.asString() );
-	cmd.push_back( "-X" );	// autogenerate pattern from pattern-package
+        cmd.push_back( "-X" );	// autogenerate pattern from pattern-package
         // bsc#1104415: no more application support // cmd.push_back( "-A" );	// autogenerate application pseudo packages
 
         if ( repokind == RepoType::RPMPLAINDIR )
@@ -1416,7 +1416,7 @@ namespace zypp
 
         // We keep it.
         guard.resetDispose();
-	sat::updateSolvFileIndex( solvfile );	// content digest for zypper bash completion
+        sat::updateSolvFileIndex( solvfile );	// content digest for zypper bash completion
       }
       break;
       default:
@@ -1665,9 +1665,9 @@ namespace zypp
 
       RepoType probedtype( probe( tosave.url(), info.path() ) );
       if ( probedtype == RepoType::NONE )
-	ZYPP_THROW(RepoUnknownTypeException(info));
+        ZYPP_THROW(RepoUnknownTypeException(info));
       else
-	tosave.setType(probedtype);
+        tosave.setType(probedtype);
     }
 
     progress.set(50);
@@ -1803,10 +1803,10 @@ namespace zypp
         // figure how many repos are there in the file:
         std::list<RepoInfo> filerepos = repositories_in_file(todelete.filepath());
         if ( filerepos.size() == 0	// bsc#984494: file may have already been deleted
-	  ||(filerepos.size() == 1 && filerepos.front().alias() == todelete.alias() ) )
+          ||(filerepos.size() == 1 && filerepos.front().alias() == todelete.alias() ) )
         {
           // easy: file does not exist, contains no or only the repo to delete: delete the file
-	  int ret = filesystem::unlink( todelete.filepath() );
+          int ret = filesystem::unlink( todelete.filepath() );
           if ( ! ( ret == 0 || ret == ENOENT ) )
           {
             // TranslatorExplanation '%s' is a filename
@@ -1847,7 +1847,7 @@ namespace zypp
           cleanCache( todelete, cSubprogrcv);
         // now delete metadata (#301037)
         cleanMetadata( todelete, mSubprogrcv );
-	cleanPackages( todelete, pSubprogrcv );
+        cleanPackages( todelete, pSubprogrcv );
         reposManip().erase(todelete);
         MIL << todelete.alias() << " successfully deleted." << endl;
         HistoryLog(_options.rootDir).removeRepository(todelete);
@@ -1909,22 +1909,22 @@ namespace zypp
 
       if ( toedit.enabled() && !newinfo.enabled() )
       {
-	// On the fly remove solv.idx files for bash completion if a repo gets disabled.
-	const Pathname & solvidx = solv_path_for_repoinfo(_options, newinfo)/"solv.idx";
-	if ( PathInfo(solvidx).isExist() )
-	  filesystem::unlink( solvidx );
+        // On the fly remove solv.idx files for bash completion if a repo gets disabled.
+        const Pathname & solvidx = solv_path_for_repoinfo(_options, newinfo)/"solv.idx";
+        if ( PathInfo(solvidx).isExist() )
+          filesystem::unlink( solvidx );
       }
 
       newinfo.setFilepath(toedit.filepath());
       newinfo.setMetadataPath( rawcache_path_for_repoinfo( _options, newinfo ) );
       newinfo.setPackagesPath( packagescache_path_for_repoinfo( _options, newinfo ) );
       {
-	// We should fix the API as we must inject those paths
-	// into the repoinfo in order to keep it usable.
-	RepoInfo & oinfo( const_cast<RepoInfo &>(newinfo_r) );
-	oinfo.setFilepath(toedit.filepath());
-	oinfo.setMetadataPath( rawcache_path_for_repoinfo( _options, newinfo ) );
-	oinfo.setPackagesPath( packagescache_path_for_repoinfo( _options, newinfo ) );
+        // We should fix the API as we must inject those paths
+        // into the repoinfo in order to keep it usable.
+        RepoInfo & oinfo( const_cast<RepoInfo &>(newinfo_r) );
+        oinfo.setFilepath(toedit.filepath());
+        oinfo.setMetadataPath( rawcache_path_for_repoinfo( _options, newinfo ) );
+        oinfo.setPackagesPath( packagescache_path_for_repoinfo( _options, newinfo ) );
       }
       reposManip().erase(toedit);
       reposManip().insert(newinfo);
@@ -1955,7 +1955,7 @@ namespace zypp
       for_( urlit, (*it).baseUrlsBegin(), (*it).baseUrlsEnd() )
       {
         if ( (*urlit).asString(urlview) == url.asString(urlview) )
-	  return *it;
+          return *it;
       }
     }
     RepoInfo info;
@@ -2039,7 +2039,7 @@ namespace zypp
     // now remove all repositories added by this service
     RepoCollector rcollector;
     getRepositoriesInService( alias,
-			      boost::make_function_output_iterator( bind( &RepoCollector::collect, &rcollector, _1 ) ) );
+                              boost::make_function_output_iterator( bind( &RepoCollector::collect, &rcollector, _1 ) ) );
     // cannot do this directly in getRepositoriesInService - would invalidate iterators
     for_(rit, rcollector.repos.begin(), rcollector.repos.end())
       removeRepository(*rit);
@@ -2058,7 +2058,7 @@ namespace zypp
         continue;
 
       try {
-	refreshService(*it, options_r);
+        refreshService(*it, options_r);
       }
       catch ( const repo::ServicePluginInformalException & e )
       { ;/* ignore ServicePluginInformalException */ }
@@ -2078,17 +2078,17 @@ namespace zypp
       Date lrf = service.lrf();
       if ( lrf )
       {
-	Date now( Date::now() );
-	if ( lrf <= now )
-	{
-	  if ( (lrf+=service.ttl()) > now ) // lrf+= !
-	  {
-	    MIL << "Skip: '" << service.alias() << "' metadata valid until " << lrf << endl;
-	    return;
-	  }
-	}
-	else
-	  WAR << "Force: '" << service.alias() << "' metadata last refresh in the future: " << lrf << endl;
+        Date now( Date::now() );
+        if ( lrf <= now )
+        {
+          if ( (lrf+=service.ttl()) > now ) // lrf+= !
+          {
+            MIL << "Skip: '" << service.alias() << "' metadata valid until " << lrf << endl;
+            return;
+          }
+        }
+        else
+          WAR << "Force: '" << service.alias() << "' metadata last refresh in the future: " << lrf << endl;
       }
     }
 
@@ -2144,7 +2144,7 @@ namespace zypp
     if ( service.ttl() != origTtl )	// repoindex.xml changed ttl
     {
       if ( !service.ttl() )
-	service.setLrf( Date() );	// don't need lrf when zero ttl
+        service.setLrf( Date() );	// don't need lrf when zero ttl
       serviceModified = true;
     }
     ////////////////////////////////////////////////////////////////////////////
@@ -2171,26 +2171,26 @@ namespace zypp
       Pathname path;
       if ( !it->path().empty() )
       {
-	if ( it->path() != "/" )
-	  path = it->path();
-	it->setPath("");
+        if ( it->path() != "/" )
+          path = it->path();
+        it->setPath("");
       }
 
       if ( it->baseUrlsEmpty() )
       {
-	Url url( service.rawUrl() );
-	if ( !path.empty() )
-	  url.setPathName( url.getPathName() / path );
-	it->setBaseUrl( std::move(url) );
+        Url url( service.rawUrl() );
+        if ( !path.empty() )
+          url.setPathName( url.getPathName() / path );
+        it->setBaseUrl( std::move(url) );
       }
       else if ( !path.empty() )
       {
-	RepoInfo::url_set urls( it->rawBaseUrls() );
-	for ( Url & url : urls )
-	{
-	  url.setPathName( url.getPathName() / path );
-	}
-	it->setBaseUrls( std::move(urls) );
+        RepoInfo::url_set urls( it->rawBaseUrls() );
+        for ( Url & url : urls )
+        {
+          url.setPathName( url.getPathName() / path );
+        }
+        it->setBaseUrls( std::move(urls) );
       }
     }
 
@@ -2206,21 +2206,21 @@ namespace zypp
     {
       if ( ! foundAliasIn( oldRepo->alias(), collector.repos ) )
       {
-	if ( oldRepo->enabled() )
-	{
-	  // Currently enabled. If this was a user modification remember the state.
-	  const auto & last = service.repoStates().find( oldRepo->alias() );
-	  if ( last != service.repoStates().end() && ! last->second.enabled )
-	  {
-	    DBG << "Service removes user enabled repo " << oldRepo->alias() << endl;
-	    service.addRepoToEnable( oldRepo->alias() );
-	    serviceModified = true;
-	  }
-	  else
-	    DBG << "Service removes enabled repo " << oldRepo->alias() << endl;
-	}
-	else
-	  DBG << "Service removes disabled repo " << oldRepo->alias() << endl;
+        if ( oldRepo->enabled() )
+        {
+          // Currently enabled. If this was a user modification remember the state.
+          const auto & last = service.repoStates().find( oldRepo->alias() );
+          if ( last != service.repoStates().end() && ! last->second.enabled )
+          {
+            DBG << "Service removes user enabled repo " << oldRepo->alias() << endl;
+            service.addRepoToEnable( oldRepo->alias() );
+            serviceModified = true;
+          }
+          else
+            DBG << "Service removes enabled repo " << oldRepo->alias() << endl;
+        }
+        else
+          DBG << "Service removes disabled repo " << oldRepo->alias() << endl;
 
         removeRepository( *oldRepo );
       }
@@ -2240,31 +2240,31 @@ namespace zypp
 
       if ( options_r.testFlag( RefreshService_restoreStatus ) )
       {
-	DBG << "Opt RefreshService_restoreStatus " << it->alias() << endl;
-	// this overrides any pending request!
-	// Remove from enable request list.
-	// NOTE: repoToDisable is handled differently.
-	//       It gets cleared on each refresh.
-	service.delRepoToEnable( it->alias() );
-	// toBeEnabled stays indeterminate!
+        DBG << "Opt RefreshService_restoreStatus " << it->alias() << endl;
+        // this overrides any pending request!
+        // Remove from enable request list.
+        // NOTE: repoToDisable is handled differently.
+        //       It gets cleared on each refresh.
+        service.delRepoToEnable( it->alias() );
+        // toBeEnabled stays indeterminate!
       }
       else
       {
-	if ( service.repoToEnableFind( it->alias() ) )
-	{
-	  DBG << "User request to enable service repo " << it->alias() << endl;
-	  toBeEnabled = true;
-	  // Remove from enable request list.
-	  // NOTE: repoToDisable is handled differently.
-	  //       It gets cleared on each refresh.
-	  service.delRepoToEnable( it->alias() );
-	  serviceModified = true;
-	}
-	else if ( service.repoToDisableFind( it->alias() ) )
-	{
-	  DBG << "User request to disable service repo " << it->alias() << endl;
-	  toBeEnabled = false;
-	}
+        if ( service.repoToEnableFind( it->alias() ) )
+        {
+          DBG << "User request to enable service repo " << it->alias() << endl;
+          toBeEnabled = true;
+          // Remove from enable request list.
+          // NOTE: repoToDisable is handled differently.
+          //       It gets cleared on each refresh.
+          service.delRepoToEnable( it->alias() );
+          serviceModified = true;
+        }
+        else if ( service.repoToDisableFind( it->alias() ) )
+        {
+          DBG << "User request to disable service repo " << it->alias() << endl;
+          toBeEnabled = false;
+        }
       }
 
       RepoInfoList::iterator oldRepo( findAlias( it->alias(), oldRepos ) );
@@ -2272,9 +2272,9 @@ namespace zypp
       {
         // Not found in oldRepos ==> a new repo to add
 
-	// Make sure the service repo is created with the appropriate enablement
-	if ( ! indeterminate(toBeEnabled) )
-	  it->setEnabled( ( bool ) toBeEnabled );
+        // Make sure the service repo is created with the appropriate enablement
+        if ( ! indeterminate(toBeEnabled) )
+          it->setEnabled( ( bool ) toBeEnabled );
 
         DBG << "Service adds repo " << it->alias() << " " << (it->enabled()?"enabled":"disabled") << endl;
         addRepository( *it );
@@ -2284,106 +2284,106 @@ namespace zypp
         // ==> an exising repo to check
         bool oldRepoModified = false;
 
-	if ( indeterminate(toBeEnabled) )
-	{
-	  // No user request: check for an old user modificaton otherwise follow service request.
-	  // NOTE: Assert toBeEnabled is boolean afterwards!
-	  if ( oldRepo->enabled() == it->enabled() )
-	    toBeEnabled = it->enabled();	// service requests no change to the system
-	  else if (options_r.testFlag( RefreshService_restoreStatus ) )
-	  {
-	    toBeEnabled = it->enabled();	// RefreshService_restoreStatus forced
-	    DBG << "Opt RefreshService_restoreStatus " << it->alias() <<  " forces " << (toBeEnabled?"enabled":"disabled") << endl;
-	  }
-	  else
-	  {
-	    const auto & last = service.repoStates().find( oldRepo->alias() );
-	    if ( last == service.repoStates().end() || last->second.enabled != it->enabled() )
-	      toBeEnabled = it->enabled();	// service request has changed since last refresh -> follow
-	    else
-	    {
-	      toBeEnabled = oldRepo->enabled();	// service request unchaned since last refresh -> keep user modification
-	      DBG << "User modified service repo " << it->alias() <<  " may stay " << (toBeEnabled?"enabled":"disabled") << endl;
-	    }
-	  }
-	}
+        if ( indeterminate(toBeEnabled) )
+        {
+          // No user request: check for an old user modificaton otherwise follow service request.
+          // NOTE: Assert toBeEnabled is boolean afterwards!
+          if ( oldRepo->enabled() == it->enabled() )
+            toBeEnabled = it->enabled();	// service requests no change to the system
+          else if (options_r.testFlag( RefreshService_restoreStatus ) )
+          {
+            toBeEnabled = it->enabled();	// RefreshService_restoreStatus forced
+            DBG << "Opt RefreshService_restoreStatus " << it->alias() <<  " forces " << (toBeEnabled?"enabled":"disabled") << endl;
+          }
+          else
+          {
+            const auto & last = service.repoStates().find( oldRepo->alias() );
+            if ( last == service.repoStates().end() || last->second.enabled != it->enabled() )
+              toBeEnabled = it->enabled();	// service request has changed since last refresh -> follow
+            else
+            {
+              toBeEnabled = oldRepo->enabled();	// service request unchaned since last refresh -> keep user modification
+              DBG << "User modified service repo " << it->alias() <<  " may stay " << (toBeEnabled?"enabled":"disabled") << endl;
+            }
+          }
+        }
 
         // changed enable?
-	if ( toBeEnabled == oldRepo->enabled() )
-	{
-	  DBG << "Service repo " << it->alias() << " stays " <<  (oldRepo->enabled()?"enabled":"disabled") << endl;
-	}
-	else if ( toBeEnabled )
-	{
-	  DBG << "Service repo " << it->alias() << " gets enabled" << endl;
-	  oldRepo->setEnabled( true );
-	  oldRepoModified = true;
-	}
-	else
+        if ( toBeEnabled == oldRepo->enabled() )
         {
-	  DBG << "Service repo " << it->alias() << " gets disabled" << endl;
-	  oldRepo->setEnabled( false );
-	  oldRepoModified = true;
-	}
+          DBG << "Service repo " << it->alias() << " stays " <<  (oldRepo->enabled()?"enabled":"disabled") << endl;
+        }
+        else if ( toBeEnabled )
+        {
+          DBG << "Service repo " << it->alias() << " gets enabled" << endl;
+          oldRepo->setEnabled( true );
+          oldRepoModified = true;
+        }
+        else
+        {
+          DBG << "Service repo " << it->alias() << " gets disabled" << endl;
+          oldRepo->setEnabled( false );
+          oldRepoModified = true;
+        }
 
-	// all other attributes follow the service request:
+        // all other attributes follow the service request:
 
-	// changed name (raw!)
-	if ( oldRepo->rawName() != it->rawName() )
-	{
-	  DBG << "Service repo " << it->alias() << " gets new NAME " << it->rawName() << endl;
-	  oldRepo->setName( it->rawName() );
-	  oldRepoModified = true;
-	}
+        // changed name (raw!)
+        if ( oldRepo->rawName() != it->rawName() )
+        {
+          DBG << "Service repo " << it->alias() << " gets new NAME " << it->rawName() << endl;
+          oldRepo->setName( it->rawName() );
+          oldRepoModified = true;
+        }
 
-	// changed autorefresh
-	if ( oldRepo->autorefresh() != it->autorefresh() )
-	{
-	  DBG << "Service repo " << it->alias() << " gets new AUTOREFRESH " << it->autorefresh() << endl;
-	  oldRepo->setAutorefresh( it->autorefresh() );
-	  oldRepoModified = true;
-	}
+        // changed autorefresh
+        if ( oldRepo->autorefresh() != it->autorefresh() )
+        {
+          DBG << "Service repo " << it->alias() << " gets new AUTOREFRESH " << it->autorefresh() << endl;
+          oldRepo->setAutorefresh( it->autorefresh() );
+          oldRepoModified = true;
+        }
 
-	// changed priority?
-	if ( oldRepo->priority() != it->priority() )
-	{
-	  DBG << "Service repo " << it->alias() << " gets new PRIORITY " << it->priority() << endl;
-	  oldRepo->setPriority( it->priority() );
-	  oldRepoModified = true;
-	}
+        // changed priority?
+        if ( oldRepo->priority() != it->priority() )
+        {
+          DBG << "Service repo " << it->alias() << " gets new PRIORITY " << it->priority() << endl;
+          oldRepo->setPriority( it->priority() );
+          oldRepoModified = true;
+        }
 
         // changed url?
         {
-	  RepoInfo::url_set newUrls( it->rawBaseUrls() );
-	  urlCredentialExtractor.extract( newUrls );	// Extract! to prevent passwds from disturbing the comparison below
-	  if ( oldRepo->rawBaseUrls() != newUrls )
-	  {
-	    DBG << "Service repo " << it->alias() << " gets new URLs " << newUrls << endl;
-	    oldRepo->setBaseUrls( std::move(newUrls) );
-	    oldRepoModified = true;
-	  }
-	}
+          RepoInfo::url_set newUrls( it->rawBaseUrls() );
+          urlCredentialExtractor.extract( newUrls );	// Extract! to prevent passwds from disturbing the comparison below
+          if ( oldRepo->rawBaseUrls() != newUrls )
+          {
+            DBG << "Service repo " << it->alias() << " gets new URLs " << newUrls << endl;
+            oldRepo->setBaseUrls( std::move(newUrls) );
+            oldRepoModified = true;
+          }
+        }
 
         // changed gpg check settings?
-	// ATM only plugin services can set GPG values.
-	if ( service.type() == ServiceType::PLUGIN )
-	{
-	  TriBool ogpg[3];	// Gpg RepoGpg PkgGpg
-	  TriBool ngpg[3];
-	  oldRepo->getRawGpgChecks( ogpg[0], ogpg[1], ogpg[2] );
-	  it->     getRawGpgChecks( ngpg[0], ngpg[1], ngpg[2] );
+        // ATM only plugin services can set GPG values.
+        if ( service.type() == ServiceType::PLUGIN )
+        {
+          TriBool ogpg[3];	// Gpg RepoGpg PkgGpg
+          TriBool ngpg[3];
+          oldRepo->getRawGpgChecks( ogpg[0], ogpg[1], ogpg[2] );
+          it->     getRawGpgChecks( ngpg[0], ngpg[1], ngpg[2] );
 #define Z_CHKGPG(I,N)										\
-	  if ( ! sameTriboolState( ogpg[I], ngpg[I] ) )						\
-	  {											\
-	    DBG << "Service repo " << it->alias() << " gets new "#N"Check " << ngpg[I] << endl;	\
-	    oldRepo->set##N##Check( ngpg[I] );							\
-	    oldRepoModified = true;								\
-	  }
-	  Z_CHKGPG( 0, Gpg );
-	  Z_CHKGPG( 1, RepoGpg );
-	  Z_CHKGPG( 2, PkgGpg );
+          if ( ! sameTriboolState( ogpg[I], ngpg[I] ) )						\
+          {											\
+            DBG << "Service repo " << it->alias() << " gets new "#N"Check " << ngpg[I] << endl;	\
+            oldRepo->set##N##Check( ngpg[I] );							\
+            oldRepoModified = true;								\
+          }
+          Z_CHKGPG( 0, Gpg );
+          Z_CHKGPG( 1, RepoGpg );
+          Z_CHKGPG( 2, PkgGpg );
 #undef Z_CHKGPG
-	}
+        }
 
         // save if modified:
         if ( oldRepoModified )
@@ -2413,14 +2413,14 @@ namespace zypp
     {
       if ( service.ttl() )
       {
-	service.setLrf( Date::now() );	// remember last refresh
-	serviceModified =  true;	// or use a cookie file
+        service.setLrf( Date::now() );	// remember last refresh
+        serviceModified =  true;	// or use a cookie file
       }
 
       if ( serviceModified )
       {
-	// write out modified service file.
-	modifyService( service.alias(), service );
+        // write out modified service file.
+        modifyService( service.alias(), service );
       }
     }
 
@@ -2482,18 +2482,18 @@ namespace zypp
       getRepositoriesInService(oldAlias, std::back_inserter(toModify));
       for_( it, toModify.begin(), toModify.end() )
       {
-	if ( oldService.enabled() != service.enabled() )
-	{
-	  if ( service.enabled() )
-	  {
-	    // reset to last refreshs state
-	    const auto & last = service.repoStates().find( it->alias() );
-	    if ( last != service.repoStates().end() )
-	      it->setEnabled( last->second.enabled );
-	  }
-	  else
-	    it->setEnabled( false );
-	}
+        if ( oldService.enabled() != service.enabled() )
+        {
+          if ( service.enabled() )
+          {
+            // reset to last refreshs state
+            const auto & last = service.repoStates().find( it->alias() );
+            if ( last != service.repoStates().end() )
+              it->setEnabled( last->second.enabled );
+          }
+          else
+            it->setEnabled( false );
+        }
 
         if ( oldAlias != service.alias() )
           it->setService(service.alias());

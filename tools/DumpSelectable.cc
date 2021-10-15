@@ -68,10 +68,10 @@ int main( int argc, char * argv[] )
     {
       --argc,++argv;
       if ( ! argc )
-	return errexit("--root requires an argument.");
+        return errexit("--root requires an argument.");
 
       if ( ! PathInfo( *argv ).isDir() )
-	return errexit("--root requires a directory.");
+        return errexit("--root requires a directory.");
 
       sysRoot = *argv;
     }
@@ -159,9 +159,9 @@ int main( int argc, char * argv[] )
     if ( verbose )
     {
       for_( it, sel->installedBegin(), sel->installedEnd() )
-	dumpPi( message, *it );
+        dumpPi( message, *it );
       for_( it, sel->availableBegin(), sel->availableEnd() )
-	dumpPi( message, *it );
+        dumpPi( message, *it );
     }
   }
 

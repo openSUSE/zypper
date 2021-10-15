@@ -78,8 +78,8 @@ namespace zypp
     inline bool ZYPP_RPM_DEBUG()
     {
       static bool val = [](){
-	const char * env = getenv("ZYPP_RPM_DEBUG");
-	return( env && str::strToBool( env, true ) );
+        const char * env = getenv("ZYPP_RPM_DEBUG");
+        return( env && str::strToBool( env, true ) );
       }();
       return val;
     }
@@ -124,7 +124,7 @@ inline std::string rpmQuoteFilename( const Pathname & path_r )
       // try to prepend cwd
       AutoDispose<char*> cwd( ::get_current_dir_name(), ::free );
       if ( cwd )
-	return Pathname( cwd ) / path_r;
+        return Pathname( cwd ) / path_r;
       WAR << "Can't get cwd!" << endl;
     }
 #endif
@@ -446,17 +446,17 @@ void RpmDb::doRebuildDatabase(callback::SendReport<RebuildDBReport> & report)
     {
       if ( ! str::endsWith( line, ignoreSuffix ) )
       {
-	errmsg += line;
-	errmsg += '\n';
-	WAR << line << endl;
+        errmsg += line;
+        errmsg += '\n';
+        WAR << line << endl;
       }
     }
     else if ( str::startsWith( line, progressPrefix ) )
     {
       if ( ! tics.incr() )
       {
-	WAR << "User requested abort." << endl;
-	systemKill();
+        WAR << "User requested abort." << endl;
+        systemKill();
       }
     }
   }
@@ -486,56 +486,56 @@ namespace
     struct Key
     {
       Key()
-	: _inRpmKeys( nullptr )
-	, _inZyppKeys( nullptr )
+        : _inRpmKeys( nullptr )
+        , _inZyppKeys( nullptr )
       {}
 
       void updateIf( const Edition & rpmKey_r )
       {
-	std::string keyRelease( rpmKey_r.release() );
-	int comp = _release.compare( keyRelease );
-	if ( comp < 0 )
-	{
-	  // update to newer release
-	  _release.swap( keyRelease );
-	  _inRpmKeys  = &rpmKey_r;
-	  _inZyppKeys = nullptr;
-	  if ( !keyRelease.empty() )
-	    DBG << "Old key in Z: gpg-pubkey-" << rpmKey_r.version() << "-" <<  keyRelease << endl;
-	}
-	else if ( comp == 0 )
-	{
-	  // stay with this release
-	  if ( ! _inRpmKeys )
-	    _inRpmKeys = &rpmKey_r;
-	}
-	// else: this is an old release
-	else
-	  DBG << "Old key in R: gpg-pubkey-" << rpmKey_r.version() << "-" <<  keyRelease << endl;
+        std::string keyRelease( rpmKey_r.release() );
+        int comp = _release.compare( keyRelease );
+        if ( comp < 0 )
+        {
+          // update to newer release
+          _release.swap( keyRelease );
+          _inRpmKeys  = &rpmKey_r;
+          _inZyppKeys = nullptr;
+          if ( !keyRelease.empty() )
+            DBG << "Old key in Z: gpg-pubkey-" << rpmKey_r.version() << "-" <<  keyRelease << endl;
+        }
+        else if ( comp == 0 )
+        {
+          // stay with this release
+          if ( ! _inRpmKeys )
+            _inRpmKeys = &rpmKey_r;
+        }
+        // else: this is an old release
+        else
+          DBG << "Old key in R: gpg-pubkey-" << rpmKey_r.version() << "-" <<  keyRelease << endl;
       }
 
       void updateIf( const PublicKeyData & zyppKey_r )
       {
-	std::string keyRelease( zyppKey_r.gpgPubkeyRelease() );
-	int comp = _release.compare( keyRelease );
-	if ( comp < 0 )
-	{
-	  // update to newer release
-	  _release.swap( keyRelease );
-	  _inRpmKeys  = nullptr;
-	  _inZyppKeys = &zyppKey_r;
-	  if ( !keyRelease.empty() )
-	    DBG << "Old key in R: gpg-pubkey-" << zyppKey_r.gpgPubkeyVersion() << "-" << keyRelease << endl;
-	}
-	else if ( comp == 0 )
-	{
-	  // stay with this release
-	  if ( ! _inZyppKeys )
-	    _inZyppKeys = &zyppKey_r;
-	}
-	// else: this is an old release
-	else
-	  DBG << "Old key in Z: gpg-pubkey-" << zyppKey_r.gpgPubkeyVersion() << "-" << keyRelease << endl;
+        std::string keyRelease( zyppKey_r.gpgPubkeyRelease() );
+        int comp = _release.compare( keyRelease );
+        if ( comp < 0 )
+        {
+          // update to newer release
+          _release.swap( keyRelease );
+          _inRpmKeys  = nullptr;
+          _inZyppKeys = &zyppKey_r;
+          if ( !keyRelease.empty() )
+            DBG << "Old key in R: gpg-pubkey-" << zyppKey_r.gpgPubkeyVersion() << "-" << keyRelease << endl;
+        }
+        else if ( comp == 0 )
+        {
+          // stay with this release
+          if ( ! _inZyppKeys )
+            _inZyppKeys = &zyppKey_r;
+        }
+        // else: this is an old release
+        else
+          DBG << "Old key in Z: gpg-pubkey-" << zyppKey_r.gpgPubkeyVersion() << "-" << keyRelease << endl;
       }
 
       std::string _release;
@@ -564,14 +564,14 @@ namespace
     {
       DBG << "gpg-pubkey-" << (*it).first << "-" << (*it).second._release << " "
           << ( (*it).second._inRpmKeys  ? "R" : "_" )
-	  << ( (*it).second._inZyppKeys ? "Z" : "_" ) << endl;
+          << ( (*it).second._inZyppKeys ? "Z" : "_" ) << endl;
       if ( ! (*it).second._inRpmKeys )
       {
-	zyppKeys.push_back( *(*it).second._inZyppKeys );
+        zyppKeys.push_back( *(*it).second._inZyppKeys );
       }
       if ( ! (*it).second._inZyppKeys )
       {
-	rpmKeys.insert( *(*it).second._inRpmKeys );
+        rpmKeys.insert( *(*it).second._inRpmKeys );
       }
     }
     rpmKeys_r.swap( rpmKeys );
@@ -604,9 +604,9 @@ void RpmDb::syncTrustedKeys( SyncTrustedKeyBits mode_r )
     {
       if ( ! rpmKeys.count( keyData.gpgPubkeyEdition() ) )
       {
-	DBG << "Excess key in Z to delete: gpg-pubkey-" << keyData.gpgPubkeyEdition() << endl;
-	getZYpp()->keyRing()->deleteKey( keyData.id(), /*trusted*/true );
-	if ( !dirty ) dirty = true;
+        DBG << "Excess key in Z to delete: gpg-pubkey-" << keyData.gpgPubkeyEdition() << endl;
+        getZYpp()->keyRing()->deleteKey( keyData.id(), /*trusted*/true );
+        if ( !dirty ) dirty = true;
       }
     }
     if ( dirty )
@@ -631,10 +631,10 @@ void RpmDb::syncTrustedKeys( SyncTrustedKeyBits mode_r )
       std::ofstream tmpos( tmpfile.path().c_str() );
       for_( it, rpmKeys.begin(), rpmKeys.end() )
       {
-	// we export the rpm key into a file
-	RpmHeader::constPtr result;
-	getData( "gpg-pubkey", *it, result );
-	tmpos << result->tag_description() << endl;
+        // we export the rpm key into a file
+        RpmHeader::constPtr result;
+        getData( "gpg-pubkey", *it, result );
+        tmpos << result->tag_description() << endl;
       }
     }
     try
@@ -646,10 +646,10 @@ void RpmDb::syncTrustedKeys( SyncTrustedKeyBits mode_r )
       std::set<Edition> missingKeys;
       for ( const Edition & key : rpmKeys )
       {
-	if ( getZYpp()->keyRing()->isKeyTrusted( key.version() ) ) // key.version is the gpgkeys short ID
-	  continue;
-	ERR << "Could not import key:" << str::Format("gpg-pubkey-%s") % key << " into zypp keyring (V3 key?)" << endl;
-	missingKeys.insert( key );
+        if ( getZYpp()->keyRing()->isKeyTrusted( key.version() ) ) // key.version is the gpgkeys short ID
+          continue;
+        ERR << "Could not import key:" << str::Format("gpg-pubkey-%s") % key << " into zypp keyring (V3 key?)" << endl;
+        missingKeys.insert( key );
       }
       if ( ! missingKeys.empty() )
         callback::SendReport<KeyRingReport>()->reportNonImportedKeys(missingKeys);
@@ -670,11 +670,11 @@ void RpmDb::syncTrustedKeys( SyncTrustedKeyBits mode_r )
     {
       try
       {
-	importPubkey( getZYpp()->keyRing()->exportTrustedPublicKey( *it ) );
+        importPubkey( getZYpp()->keyRing()->exportTrustedPublicKey( *it ) );
       }
       catch ( const RpmException & exp )
       {
-	ZYPP_CAUGHT( exp );
+        ZYPP_CAUGHT( exp );
       }
     }
   }
@@ -820,8 +820,8 @@ void RpmDb::removePubkey( const PublicKey & pubkey_r )
   {
     if ( (*it).version() == pubkeyVersion )
     {
-	found_edition = it;
-	break;
+        found_edition = it;
+        break;
     }
   }
 
@@ -1138,9 +1138,9 @@ namespace
   };
 
   RpmDb::CheckPackageResult doCheckPackageSig( const Pathname & path_r,			// rpm file to check
-					       const Pathname & root_r,			// target root
-					       bool  requireGPGSig_r,			// whether no gpg signature is to be reported
-					       RpmDb::CheckPackageDetail & detail_r )	// detailed result
+                                               const Pathname & root_r,			// target root
+                                               bool  requireGPGSig_r,			// whether no gpg signature is to be reported
+                                               RpmDb::CheckPackageDetail & detail_r )	// detailed result
   {
     PathInfo file( path_r );
     if ( ! file.isFile() )
@@ -1154,7 +1154,7 @@ namespace
     {
       ERR << "Can't open file for reading: " << file << " (" << ::Fstrerror(fd) << ")" << endl;
       if ( fd )
-	::Fclose( fd );
+        ::Fclose( fd );
       return RpmDb::CHK_ERROR;
     }
     rpmts ts = ::rpmtsCreate();
@@ -1195,9 +1195,9 @@ namespace
       RpmDb::CheckPackageResult lineres = RpmDb::CHK_ERROR;
       if ( line.find( ": OK" ) != std::string::npos )
       {
-	lineres = RpmDb::CHK_OK;
-	if ( line.find( "Signature, key ID" ) == std::string::npos )
-	  ++count[RpmDb::CHK_NOSIG];	// Valid but no gpg signature -> CHK_NOSIG
+        lineres = RpmDb::CHK_OK;
+        if ( line.find( "Signature, key ID" ) == std::string::npos )
+          ++count[RpmDb::CHK_NOSIG];	// Valid but no gpg signature -> CHK_NOSIG
       }
       else if ( line.find( ": NOKEY" ) != std::string::npos )
       { lineres = RpmDb::CHK_NOKEY; }
@@ -1232,9 +1232,9 @@ namespace
     {
       if ( count[RpmDb::CHK_OK] == count[RpmDb::CHK_NOSIG]  )
       {
-	detail_r.push_back( RpmDb::CheckPackageDetail::value_type( RpmDb::CHK_NOSIG, std::string("    ")+_("Package is not signed!") ) );
-	if ( requireGPGSig_r )
-	  ret = RpmDb::CHK_NOSIG;
+        detail_r.push_back( RpmDb::CheckPackageDetail::value_type( RpmDb::CHK_NOSIG, std::string("    ")+_("Package is not signed!") ) );
+        if ( requireGPGSig_r )
+          ret = RpmDb::CHK_NOSIG;
       }
     }
 
@@ -1728,7 +1728,7 @@ void RpmDb::doInstallPackage( const Pathname & filename, RpmInstFlags flags, cal
 
     if ( lineno >= MAXRPMMESSAGELINES ) {
       if ( line.find( " scriptlet failed, " ) == std::string::npos )	// always log %script errors
-	continue;
+        continue;
     }
 
     rpmmsg += line+'\n';
@@ -1905,7 +1905,7 @@ void RpmDb::doRemovePackage( const std::string & name_r, RpmInstFlags flags, cal
 
     if ( lineno >= MAXRPMMESSAGELINES ) {
       if ( line.find( " scriptlet failed, " ) == std::string::npos )	// always log %script errors
-	continue;
+        continue;
     }
     rpmmsg += line+'\n';
   }

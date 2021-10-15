@@ -37,7 +37,7 @@ namespace zypp
     {
       long ret = 0L;
       if ( char *ptr = ::getenv("ZYPP_MEDIA_CURL_DEBUG"); ptr && *ptr )
-	str::strtonum( ptr, ret );
+        str::strtonum( ptr, ret );
       return ret;
     }
 

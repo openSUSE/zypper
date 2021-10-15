@@ -28,9 +28,9 @@ namespace tools
 
   // CB data tracker
   void outs( std::ostream & str,
-	     std::optional<std::string_view> w = std::optional<std::string_view>(),
-	     std::optional<unsigned> i = std::optional<unsigned>(),
-	     std::optional<bool> f = std::optional<bool>() )
+             std::optional<std::string_view> w = std::optional<std::string_view>(),
+             std::optional<unsigned> i = std::optional<unsigned>(),
+             std::optional<bool> f = std::optional<bool>() )
   { outsopt(str,w); outsopt(str,i); outsopt(str,f) << endl; }
 
 } // namespace tools
@@ -60,30 +60,30 @@ BOOST_AUTO_TEST_CASE(WordConsumerSignature)
 
   // Trace:
   BOOST_CHECK_EQUAL( str.str(),
-		     "{}{0}{0}\n"	// F1
-		     "{0b2}{1}{1}\n"
-		     "{}{0}{@}\n"	// F2
-		     "{0b2}{1}{@}\n"
-		     "{}{@}{@}\n"	// F3
-		     "{0b2}{@}{@}\n"
-		     "{@}{@}{@}\n"	// F4
-		     "{@}{@}{@}\n"
-		     "{}{0}{0}\n"	// T1
-		     "{0}{1}{0}\n"
-		     "{2}{2}{0}\n"
-		     "{}{3}{1}\n"
-		     "{}{0}{@}\n"	// T2
-		     "{0}{1}{@}\n"
-		     "{2}{2}{@}\n"
-		     "{}{3}{@}\n"
-		     "{}{@}{@}\n"	// T3
-		     "{0}{@}{@}\n"
-		     "{2}{@}{@}\n"
-		     "{}{@}{@}\n"
-		     "{@}{@}{@}\n"	// T4
-		     "{@}{@}{@}\n"
-		     "{@}{@}{@}\n"
-		     "{@}{@}{@}\n"
+                     "{}{0}{0}\n"	// F1
+                     "{0b2}{1}{1}\n"
+                     "{}{0}{@}\n"	// F2
+                     "{0b2}{1}{@}\n"
+                     "{}{@}{@}\n"	// F3
+                     "{0b2}{@}{@}\n"
+                     "{@}{@}{@}\n"	// F4
+                     "{@}{@}{@}\n"
+                     "{}{0}{0}\n"	// T1
+                     "{0}{1}{0}\n"
+                     "{2}{2}{0}\n"
+                     "{}{3}{1}\n"
+                     "{}{0}{@}\n"	// T2
+                     "{0}{1}{@}\n"
+                     "{2}{2}{@}\n"
+                     "{}{3}{@}\n"
+                     "{}{@}{@}\n"	// T3
+                     "{0}{@}{@}\n"
+                     "{2}{@}{@}\n"
+                     "{}{@}{@}\n"
+                     "{@}{@}{@}\n"	// T4
+                     "{@}{@}{@}\n"
+                     "{@}{@}{@}\n"
+                     "{@}{@}{@}\n"
   );
 }
 
@@ -93,7 +93,7 @@ namespace tools
 
   /* Call splitter_r and check whether CB results match word_r. May CB abort at stopAt_r. */
   void checkSplit( std::function<unsigned(WordConsumer&&)> splitter_r, const std::initializer_list<const char*> & words_r,
-		   unsigned stopAt_r = -1U )
+                   unsigned stopAt_r = -1U )
   {
     //cout << "??? " << words_r.size() << endl;
     auto next = words_r.begin();

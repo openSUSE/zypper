@@ -51,31 +51,31 @@ namespace zypp {
     //	DESCRIPTION :
     //
     MediaDISK::MediaDISK( const Url &      url_r,
-			  const Pathname & attach_point_hint_r )
+                          const Pathname & attach_point_hint_r )
         : MediaHandler( url_r, attach_point_hint_r,
-    		    url_r.getPathName(), // urlpath below attachpoint
-    		    false ) // does_download
+                    url_r.getPathName(), // urlpath below attachpoint
+                    false ) // does_download
     {
       MIL << "MediaDISK::MediaDISK(" << url_r << ", " << attach_point_hint_r << ")" << endl;
 
       _device = Pathname(_url.getQueryParam("device")).asString();
       if( _device.empty())
       {
-	ERR << "Media url does not contain a device specification" << std::endl;
-	ZYPP_THROW(MediaBadUrlEmptyDestinationException(_url));
+        ERR << "Media url does not contain a device specification" << std::endl;
+        ZYPP_THROW(MediaBadUrlEmptyDestinationException(_url));
       }
 #if DELAYED_VERIFY
       DBG << "Verify of " << _device << " delayed" << std::endl;
 #else
       if( !verifyIfDiskVolume( _device))
       {
-	ZYPP_THROW(MediaBadUrlEmptyDestinationException(_url));
+        ZYPP_THROW(MediaBadUrlEmptyDestinationException(_url));
       }
 #endif
 
       _filesystem = _url.getQueryParam("filesystem");
       if(_filesystem.empty())
-	_filesystem="auto";
+        _filesystem="auto";
 
     }
 
@@ -90,66 +90,66 @@ namespace zypp {
     bool MediaDISK::verifyIfDiskVolume(const Pathname &dev_name)
     {
       if( dev_name.empty() ||
-	  dev_name.asString().compare(0, sizeof("/dev/")-1, "/dev/"))
+          dev_name.asString().compare(0, sizeof("/dev/")-1, "/dev/"))
       {
-	ERR << "Specified device name " << dev_name
-	    << " is not allowed" << std::endl;
-	return false;
+        ERR << "Specified device name " << dev_name
+            << " is not allowed" << std::endl;
+        return false;
       }
 
       PathInfo dev_info(dev_name);
       if( !dev_info.isBlk())
       {
-	ERR << "Specified device name " << dev_name
-	    << " is not a block device" << std::endl;
-	return false;
+        ERR << "Specified device name " << dev_name
+            << " is not a block device" << std::endl;
+        return false;
       }
 
       // check if a volume using /dev/disk/by-uuid links first
       {
-	Pathname            dpath("/dev/disk/by-uuid");
-	std::list<Pathname> dlist;
-	if( zypp::filesystem::readdir(dlist, dpath) == 0)
-	{
-	  std::list<Pathname>::const_iterator it;
-	  for(it = dlist.begin(); it != dlist.end(); ++it)
-	  {
-	    PathInfo vol_info(*it);
-	    if( vol_info.isBlk() && vol_info.devMajor() == dev_info.devMajor() &&
-	                            vol_info.devMinor() == dev_info.devMinor())
-	    {
-	      DBG << "Specified device name " << dev_name
-		  << " is a volume (disk/by-uuid link "
-		  << vol_info.path() << ")"
-		  << std::endl;
-	      return true;
-	    }
-	  }
-	}
+        Pathname            dpath("/dev/disk/by-uuid");
+        std::list<Pathname> dlist;
+        if( zypp::filesystem::readdir(dlist, dpath) == 0)
+        {
+          std::list<Pathname>::const_iterator it;
+          for(it = dlist.begin(); it != dlist.end(); ++it)
+          {
+            PathInfo vol_info(*it);
+            if( vol_info.isBlk() && vol_info.devMajor() == dev_info.devMajor() &&
+                                    vol_info.devMinor() == dev_info.devMinor())
+            {
+              DBG << "Specified device name " << dev_name
+                  << " is a volume (disk/by-uuid link "
+                  << vol_info.path() << ")"
+                  << std::endl;
+              return true;
+            }
+          }
+        }
       }
 
       // check if a volume using /dev/disk/by-label links
       // (e.g. vbd mapped volumes in a XEN vm)
       {
-	Pathname            dpath("/dev/disk/by-label");
-	std::list<Pathname> dlist;
-	if( zypp::filesystem::readdir(dlist, dpath) == 0)
-	{
-	  std::list<Pathname>::const_iterator it;
-	  for(it = dlist.begin(); it != dlist.end(); ++it)
-	  {
-	    PathInfo vol_info(*it);
-	    if( vol_info.isBlk() && vol_info.devMajor() == dev_info.devMajor() &&
-	                            vol_info.devMinor() == dev_info.devMinor())
-	    {
-	      DBG << "Specified device name " << dev_name
-		  << " is a volume (disk/by-label link "
-		  << vol_info.path() << ")"
-		  << std::endl;
-	      return true;
-	    }
-	  }
-	}
+        Pathname            dpath("/dev/disk/by-label");
+        std::list<Pathname> dlist;
+        if( zypp::filesystem::readdir(dlist, dpath) == 0)
+        {
+          std::list<Pathname>::const_iterator it;
+          for(it = dlist.begin(); it != dlist.end(); ++it)
+          {
+            PathInfo vol_info(*it);
+            if( vol_info.isBlk() && vol_info.devMajor() == dev_info.devMajor() &&
+                                    vol_info.devMinor() == dev_info.devMinor())
+            {
+              DBG << "Specified device name " << dev_name
+                  << " is a volume (disk/by-label link "
+                  << vol_info.path() << ")"
+                  << std::endl;
+              return true;
+            }
+          }
+        }
       }
 
       // check if a filesystem volume using the 'blkid' tool
@@ -163,11 +163,11 @@ namespace zypp {
       cmd >> DBG;
       if ( cmd.close() != 0 )
       {
-	ERR << cmd.execError() << endl
-	    << "Specified device name " << dev_name
-	    << " is not a usable disk volume"
-	    << std::endl;
-	return false;
+        ERR << cmd.execError() << endl
+            << "Specified device name " << dev_name
+            << " is not a usable disk volume"
+            << std::endl;
+        return false;
       }
       return true;
     }
@@ -183,7 +183,7 @@ namespace zypp {
     void MediaDISK::attachTo(bool next)
     {
       if(next)
-	ZYPP_THROW(MediaNotSupportedException(url()));
+        ZYPP_THROW(MediaNotSupportedException(url()));
       // FIXME
       // do mount --bind <partition>/<dir> to <to>
       //   mount /dev/<partition> /tmp_mount
@@ -191,7 +191,7 @@ namespace zypp {
       // FIXME: try all filesystems
 
       if(_device.empty())
-	ZYPP_THROW(MediaBadUrlEmptyDestinationException(url()));
+        ZYPP_THROW(MediaBadUrlEmptyDestinationException(url()));
 
       PathInfo dev_info(_device);
       if(!dev_info.isBlk())
@@ -200,32 +200,32 @@ namespace zypp {
       DBG << "Verifying " << _device << " ..." << std::endl;
       if( !verifyIfDiskVolume( _device))
       {
-	ZYPP_THROW(MediaBadUrlEmptyDestinationException(_url));
+        ZYPP_THROW(MediaBadUrlEmptyDestinationException(_url));
       }
 #endif
 
       if(_filesystem.empty())
-	ZYPP_THROW(MediaBadUrlEmptyFilesystemException(url()));
+        ZYPP_THROW(MediaBadUrlEmptyFilesystemException(url()));
 
       MediaSourceRef media( new MediaSource(
-	"disk", _device, dev_info.devMajor(), dev_info.devMinor()
+        "disk", _device, dev_info.devMajor(), dev_info.devMinor()
       ));
       AttachedMedia  ret( findAttachedMedia( media));
 
       if( ret.mediaSource &&
-	  ret.attachPoint &&
-	  !ret.attachPoint->empty())
+          ret.attachPoint &&
+          !ret.attachPoint->empty())
       {
-	DBG << "Using a shared media "
-	    << ret.mediaSource->name
-	    << " attached on "
-	    << ret.attachPoint->path
-	    << endl;
+        DBG << "Using a shared media "
+            << ret.mediaSource->name
+            << " attached on "
+            << ret.attachPoint->path
+            << endl;
 
-	removeAttachPoint();
-	setAttachPoint(ret.attachPoint);
-	setMediaSource(ret.mediaSource);
-	return;
+        removeAttachPoint();
+        setAttachPoint(ret.attachPoint);
+        setMediaSource(ret.mediaSource);
+        return;
       }
 
       MediaManager  manager;
@@ -233,40 +233,40 @@ namespace zypp {
       MountEntries::const_iterator e;
       for( e = entries.begin(); e != entries.end(); ++e)
       {
-	bool        is_device = false;
-	std::string dev_path(Pathname(e->src).asString());
-	PathInfo    dev_info;
+        bool        is_device = false;
+        std::string dev_path(Pathname(e->src).asString());
+        PathInfo    dev_info;
 
-	if( dev_path.compare(0, sizeof("/dev/")-1, "/dev/") == 0 &&
-	    dev_info(e->src) && dev_info.isBlk())
-	{
-	  is_device = true;
-	}
+        if( dev_path.compare(0, sizeof("/dev/")-1, "/dev/") == 0 &&
+            dev_info(e->src) && dev_info.isBlk())
+        {
+          is_device = true;
+        }
 
-	if( is_device && media->maj_nr == dev_info.devMajor() &&
-	                 media->min_nr == dev_info.devMinor())
-	{
-	  AttachPointRef ap( new AttachPoint(e->dir, false));
-	  AttachedMedia  am( media, ap);
-	  {
-	    DBG << "Using a system mounted media "
-		<< media->name
-		<< " attached on "
-		<< ap->path
-		<< endl;
+        if( is_device && media->maj_nr == dev_info.devMajor() &&
+                         media->min_nr == dev_info.devMinor())
+        {
+          AttachPointRef ap( new AttachPoint(e->dir, false));
+          AttachedMedia  am( media, ap);
+          {
+            DBG << "Using a system mounted media "
+                << media->name
+                << " attached on "
+                << ap->path
+                << endl;
 
-	    media->iown = false; // mark attachment as foreign
+            media->iown = false; // mark attachment as foreign
 
-	    setMediaSource(media);
-	    setAttachPoint(ap);
-	    return;
-	  }
-	}
+            setMediaSource(media);
+            setAttachPoint(ap);
+            return;
+          }
+        }
       }
 
       if( !isUseableAttachPoint( attachPoint() ) )
       {
-	setAttachPoint( createAttachPoint(), true );
+        setAttachPoint( createAttachPoint(), true );
       }
       std::string mountpoint( attachPoint().asString() );
 
@@ -274,17 +274,17 @@ namespace zypp {
       std::string options = _url.getQueryParam("mountoptions");
       if(options.empty())
       {
-    	options = "ro";
+        options = "ro";
       }
 
       if( !media->bdir.empty())
       {
-	options += ",bind";
-	mount.mount(media->bdir, mountpoint, "none", options);
+        options += ",bind";
+        mount.mount(media->bdir, mountpoint, "none", options);
       }
       else
       {
-      	mount.mount(_device, mountpoint, _filesystem, options);
+        mount.mount(_device, mountpoint, _filesystem, options);
       }
 
       setMediaSource(media);
@@ -311,7 +311,7 @@ namespace zypp {
         }
         ZYPP_THROW(MediaMountException(
           "Unable to verify that the media was mounted",
-	  _device, mountpoint
+          _device, mountpoint
         ));
       }
     }
@@ -380,7 +380,7 @@ namespace zypp {
     //	DESCRIPTION : Asserted that media is attached and retlist is empty.
     //
     void MediaDISK::getDirInfo( std::list<std::string> & retlist,
-				const Pathname & dirname, bool dots ) const
+                                const Pathname & dirname, bool dots ) const
     {
       MediaHandler::getDirInfo( retlist, dirname, dots );
     }
@@ -394,7 +394,7 @@ namespace zypp {
     //	DESCRIPTION : Asserted that media is attached and retlist is empty.
     //
     void MediaDISK::getDirInfo( filesystem::DirContent & retlist,
-				const Pathname & dirname, bool dots ) const
+                                const Pathname & dirname, bool dots ) const
     {
       MediaHandler::getDirInfo( retlist, dirname, dots );
     }

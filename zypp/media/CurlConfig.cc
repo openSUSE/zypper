@@ -30,7 +30,7 @@ namespace zypp
       // attempts to load .curlrc from the homedir
       char *home = getenv("HOME");
       if(home)
-	curlrcFile = std::string( home ) + std::string( "/.curlrc" );
+        curlrcFile = std::string( home ) + std::string( "/.curlrc" );
     }
     else
       curlrcFile = filename;
@@ -111,7 +111,7 @@ namespace zypp
         if (value[0] == '\"')
         {
           // remove the quotes
-	  std::string::size_type pos = value.rfind('\"');
+          std::string::size_type pos = value.rfind('\"');
           bool cut_last =
             pos == value.size() - 1 && pos > 1 && value[pos-1] != '\\';
           value = value.substr(1,
@@ -119,7 +119,7 @@ namespace zypp
 
           // replace special characters:
           pos = 0;
-	  while ((pos = value.find('\\', pos)) != std::string::npos)
+          while ((pos = value.find('\\', pos)) != std::string::npos)
           {
             // just erase the backslash if it is found at the end
             if (pos == value.size() - 1)

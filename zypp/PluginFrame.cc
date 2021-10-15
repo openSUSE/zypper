@@ -39,14 +39,14 @@ namespace zypp
       { setCommand( command_r ); }
 
       Impl( const std::string & command_r, const std::string & body_r )
-	: _body( body_r )
+        : _body( body_r )
       { setCommand( command_r ); }
 
       Impl( const std::string & command_r, HeaderInitializerList contents_r )
       { setCommand( command_r ); addHeader( contents_r ); }
 
       Impl( const std::string & command_r, const std::string & body_r, HeaderInitializerList contents_r )
-	: _body( body_r )
+        : _body( body_r )
       { setCommand( command_r ); addHeader( contents_r ); }
 
       Impl( std::istream & stream_r );
@@ -60,9 +60,9 @@ namespace zypp
 
       void setCommand( const std::string & command_r )
       {
-	if ( command_r.find( '\n' ) != std::string::npos )
-	  ZYPP_THROW( PluginFrameException( "Multiline command", command_r ) );
-	_command = command_r;
+        if ( command_r.find( '\n' ) != std::string::npos )
+          ZYPP_THROW( PluginFrameException( "Multiline command", command_r ) );
+        _command = command_r;
       }
 
       const std::string & body() const
@@ -86,61 +86,61 @@ namespace zypp
 
       const std::string & getHeader( const std::string & key_r ) const
       {
-	constKeyRange r( _header.equal_range( key_r ) );
-	if ( r.first == r.second )
-	  ZYPP_THROW( PluginFrameException( "No value for key", key_r ) );
-	const std::string & ret( r.first->second );
-	if ( ++r.first != r.second )
-	  ZYPP_THROW( PluginFrameException( "Multiple values for key", key_r ) );
-	return ret;
+        constKeyRange r( _header.equal_range( key_r ) );
+        if ( r.first == r.second )
+          ZYPP_THROW( PluginFrameException( "No value for key", key_r ) );
+        const std::string & ret( r.first->second );
+        if ( ++r.first != r.second )
+          ZYPP_THROW( PluginFrameException( "Multiple values for key", key_r ) );
+        return ret;
       }
 
       const std::string & getHeader( const std::string & key_r, const std::string & default_r ) const
       {
-	constKeyRange r( _header.equal_range( key_r ) );
-	if ( r.first == r.second )
-	  return default_r;
-	const std::string & ret( r.first->second );
-	if ( ++r.first != r.second )
-	  ZYPP_THROW( PluginFrameException( "Multiple values for key", key_r ) );
-	return ret;
+        constKeyRange r( _header.equal_range( key_r ) );
+        if ( r.first == r.second )
+          return default_r;
+        const std::string & ret( r.first->second );
+        if ( ++r.first != r.second )
+          ZYPP_THROW( PluginFrameException( "Multiple values for key", key_r ) );
+        return ret;
       }
 
       const std::string & getHeaderNT( const std::string & key_r, const std::string & default_r ) const
       {
-	HeaderListIterator iter( _header.find( key_r ) );
-	return iter != _header.end() ? iter->second : default_r;
+        HeaderListIterator iter( _header.find( key_r ) );
+        return iter != _header.end() ? iter->second : default_r;
       }
 
       HeaderList::value_type mkHeaderPair( const std::string & key_r, const std::string & value_r )
       {
-	if ( key_r.find_first_of( ":\n" ) != std::string::npos )
-	  ZYPP_THROW( PluginFrameException( "Illegal char in header key", key_r ) );
-	if ( value_r.find_first_of( "\n" ) != std::string::npos )
-	  ZYPP_THROW( PluginFrameException( "Illegal char in header value", value_r ) );
-	return HeaderList::value_type( key_r, value_r );
+        if ( key_r.find_first_of( ":\n" ) != std::string::npos )
+          ZYPP_THROW( PluginFrameException( "Illegal char in header key", key_r ) );
+        if ( value_r.find_first_of( "\n" ) != std::string::npos )
+          ZYPP_THROW( PluginFrameException( "Illegal char in header value", value_r ) );
+        return HeaderList::value_type( key_r, value_r );
       }
 
       void setHeader( const std::string & key_r, const std::string & value_r )
       {
-	clearHeader( key_r );
-	addHeader( key_r, value_r );
+        clearHeader( key_r );
+        addHeader( key_r, value_r );
       }
 
       void addHeader( const std::string & key_r, const std::string & value_r )
       {
-	_header.insert( mkHeaderPair( key_r, value_r ) );
+        _header.insert( mkHeaderPair( key_r, value_r ) );
       }
 
       void addHeader( HeaderInitializerList contents_r )
       {
-	for ( const auto & el : contents_r )
-	  addHeader( el.first, el.second );
+        for ( const auto & el : contents_r )
+          addHeader( el.first, el.second );
       }
 
       void clearHeader( const std::string & key_r )
       {
-	_header.erase( key_r );
+        _header.erase( key_r );
       }
 
     public:
@@ -155,8 +155,8 @@ namespace zypp
       /** Offer default Impl. */
       static shared_ptr<Impl> nullimpl()
       {
-	static shared_ptr<Impl> _nullimpl( new Impl );
-	return _nullimpl;
+        static shared_ptr<Impl> _nullimpl( new Impl );
+        return _nullimpl;
       }
     private:
       friend Impl * rwcowClone<Impl>( const Impl * rhs );
@@ -194,14 +194,14 @@ namespace zypp
     do {
       std::string data = str::getline( stream_r );
       if ( ! stream_r.good() )
-	ZYPP_THROW( PluginFrameException( "Missing NL after header" ) );
+        ZYPP_THROW( PluginFrameException( "Missing NL after header" ) );
 
       if ( data.empty() )
-	break;	// --> empty line sep. header and body
+        break;	// --> empty line sep. header and body
 
       std::string::size_type sep( data.find( ':') );
       if ( sep ==  std::string::npos )
-	ZYPP_THROW( PluginFrameException( "Missing colon in header" ) );
+        ZYPP_THROW( PluginFrameException( "Missing colon in header" ) );
 
       _header.insert( HeaderList::value_type( data.substr(0,sep), data.substr(sep+1) ) );
     } while ( true );

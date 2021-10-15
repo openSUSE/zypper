@@ -41,11 +41,11 @@ namespace zypp
       const char *version = gpgme_check_version(NULL);
       if ( version )
       {
-	MIL << "Initialized libgpgme version: " << version << endl;
+        MIL << "Initialized libgpgme version: " << version << endl;
       }
       else
       {
-	MIL << "Initialized libgpgme with unknown version" << endl;
+        MIL << "Initialized libgpgme with unknown version" << endl;
       }
     }
 
@@ -86,7 +86,7 @@ namespace zypp
       str << "  "  << obj.not_imported		<< " keys not imported." << endl;
       for ( gpgme_import_status_t p = obj.imports; p; p = p->next )
       {
-	str << "  - "  << p->fpr << ": " << p->result << endl;
+        str << "  - "  << p->fpr << ": " << p->result << endl;
       }
       // In V.1.11: str << "  "  << obj.skipped_v3_keys	<< " skipped v3 keys." << endl;
       return str << "}";

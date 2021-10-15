@@ -111,56 +111,56 @@ namespace zypp
     class EachLine : private base::NonCopyable
     {
       public:
-	/** Ctor taking a stream and reading the 1st line from it. */
-	EachLine( std::istream & str_r, unsigned lineNo_r = 0 );
+        /** Ctor taking a stream and reading the 1st line from it. */
+        EachLine( std::istream & str_r, unsigned lineNo_r = 0 );
 
-	/** Whether \c this contains a valid line to consume. */
-	bool valid() const
-	{ return _valid; }
+        /** Whether \c this contains a valid line to consume. */
+        bool valid() const
+        { return _valid; }
 
-	/** Evaluate class in a boolean context. */
-	explicit operator bool() const
-	{ return _valid; }
+        /** Evaluate class in a boolean context. */
+        explicit operator bool() const
+        { return _valid; }
 
-	/** Return the current line number. */
-	unsigned lineNo() const
-	{ return _lineNo; }
+        /** Return the current line number. */
+        unsigned lineNo() const
+        { return _lineNo; }
 
-	std::streamoff lineStart() const
-	{ return _lineStart; };
+        std::streamoff lineStart() const
+        { return _lineStart; };
 
-	/** Set current line number. */
-	void setLineNo( unsigned lineNo_r )
-	{ _lineNo = lineNo_r; }
+        /** Set current line number. */
+        void setLineNo( unsigned lineNo_r )
+        { _lineNo = lineNo_r; }
 
-	/** Access the current line. */
-	const std::string & operator*() const
-	{ return _line; }
-	/** \overload non const access */
-	std::string & operator*()
-	{ return _line; }
+        /** Access the current line. */
+        const std::string & operator*() const
+        { return _line; }
+        /** \overload non const access */
+        std::string & operator*()
+        { return _line; }
 
-	/** Access the current line. */
-	const std::string * operator->() const
-	{ return &_line; }
+        /** Access the current line. */
+        const std::string * operator->() const
+        { return &_line; }
 
-	/** Advance to next line. */
-	bool next();
+        /** Advance to next line. */
+        bool next();
 
-	/** Advance \a num_r lines. */
-	bool next( unsigned num_r )
-	{
-	  while ( num_r-- && next() )
-	    ; /* EMPTY */
-	  return valid();
-	}
+        /** Advance \a num_r lines. */
+        bool next( unsigned num_r )
+        {
+          while ( num_r-- && next() )
+            ; /* EMPTY */
+          return valid();
+        }
 
       private:
-	std::istream & _str;
-	std::string    _line;
-	std::streamoff _lineStart;
-	unsigned       _lineNo;
-	bool           _valid;
+        std::istream & _str;
+        std::string    _line;
+        std::streamoff _lineStart;
+        unsigned       _lineNo;
+        bool           _valid;
     };
     ///////////////////////////////////////////////////////////////////
 

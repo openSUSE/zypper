@@ -5,14 +5,14 @@
 #include <zypp/Pathname.h>
 #include <zypp/PoolQuery.h>
 #include <zypp/ZConfig.h>
- 
+
 namespace zypp
 {
   /** \name Locks */
   //@{
   /**
    * Singleton class which manipulate with locks file and apply locks on pool.
-   * for user information about locksfile and its format see 
+   * for user information about locksfile and its format see
    * <a>http://en.opensuse.org/Libzypp/Locksfile</a>
    */
   class Locks
@@ -55,19 +55,19 @@ namespace zypp
     /**
      * add lock by name and kind and
      * add this lock as toAdd
-     */ 
+     */
     void addLock( const ResKind& kind_r, const IdString& name_r );
 
     /**
      * add lock by name and kind and
      * add this lock as toAdd
-     */ 
+     */
     void addLock( const ResKind& kind_r, const C_Str& name_r );
 
     /**
      * unlocks by result of query and add to toRemove.
      *
-     * If unlock non-saved lock (so he is in toAdd list) then both is deleted 
+     * If unlock non-saved lock (so he is in toAdd list) then both is deleted
      * and nathing happen during save
      */
     void removeLock( const PoolQuery& query );
@@ -75,7 +75,7 @@ namespace zypp
     /**
      * remove lock by identifier (e.g. Selectable->ident()
      *
-     * If unlock non-saved lock (so he is in toAdd list) then both is deleted 
+     * If unlock non-saved lock (so he is in toAdd list) then both is deleted
      * and nathing happen during save
      */
     void removeLock( const IdString& ident_r );
@@ -83,7 +83,7 @@ namespace zypp
     /**
      * remove lock by name and kind
      *
-     * If unlock non-saved lock (so he is in toAdd list) then both is deleted 
+     * If unlock non-saved lock (so he is in toAdd list) then both is deleted
      * and nathing happen during save
      */
     void removeLock( const ResKind& kind_r, const IdString& name_r );
@@ -120,7 +120,7 @@ namespace zypp
      * \see SavingLocksReport
      */
     void merge();
-    
+
     /**
      * Gets true if some lock doesn't lock any object in pool
      * This can happen e.g. if package is removed or
@@ -144,10 +144,10 @@ namespace zypp
     //@}
   private:
     Locks();
-    
+
     RW_pointer<Impl, rw_pointer::Scoped<Impl> > _pimpl;
 
   };
 }
-    
+
 #endif

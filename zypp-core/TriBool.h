@@ -42,8 +42,8 @@ namespace zypp
   using   boost::logic::indeterminate;
 
   inline std::string asString( const TriBool & val_r, const std::string & istr_r = std::string(),
-						      const std::string & tstr_r = std::string(),
-						      const std::string & fstr_r = std::string() )
+                                                      const std::string & tstr_r = std::string(),
+                                                      const std::string & fstr_r = std::string() )
   {
     std::string ret;
     if (indeterminate(val_r))

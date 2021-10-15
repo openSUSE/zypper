@@ -229,19 +229,19 @@ namespace zypp
       /** Return \ref Capabilities selected by \ref Dep constant. */
       Capabilities dep( Dep which_r ) const
       {
-	switch( which_r.inSwitch() )
-	{
-	  case Dep::PROVIDES_e:    return provides();    break;
-	  case Dep::REQUIRES_e:    return requires();    break;
-	  case Dep::CONFLICTS_e:   return conflicts();   break;
-	  case Dep::OBSOLETES_e:   return obsoletes();   break;
-	  case Dep::RECOMMENDS_e:  return recommends();  break;
-	  case Dep::SUGGESTS_e:    return suggests();    break;
-	  case Dep::ENHANCES_e:    return enhances();    break;
-	  case Dep::SUPPLEMENTS_e: return supplements(); break;
-	  case Dep::PREREQUIRES_e: return prerequires(); break;
-	}
-	return Capabilities();
+        switch( which_r.inSwitch() )
+        {
+          case Dep::PROVIDES_e:    return provides();    break;
+          case Dep::REQUIRES_e:    return requires();    break;
+          case Dep::CONFLICTS_e:   return conflicts();   break;
+          case Dep::OBSOLETES_e:   return obsoletes();   break;
+          case Dep::RECOMMENDS_e:  return recommends();  break;
+          case Dep::SUGGESTS_e:    return suggests();    break;
+          case Dep::ENHANCES_e:    return enhances();    break;
+          case Dep::SUPPLEMENTS_e: return supplements(); break;
+          case Dep::PREREQUIRES_e: return prerequires(); break;
+        }
+        return Capabilities();
       }
       /** \overload operator[] */
       Capabilities operator[]( Dep which_r ) const
@@ -344,21 +344,21 @@ namespace zypp
       class SplitIdent
       {
       public:
-	SplitIdent() {}
-	SplitIdent( IdString ident_r );
-	SplitIdent( const char * ident_r );
-	SplitIdent( const std::string & ident_r );
-	SplitIdent( ResKind kind_r, IdString name_r );
-	SplitIdent( ResKind kind_r, const C_Str & name_r );
+        SplitIdent() {}
+        SplitIdent( IdString ident_r );
+        SplitIdent( const char * ident_r );
+        SplitIdent( const std::string & ident_r );
+        SplitIdent( ResKind kind_r, IdString name_r );
+        SplitIdent( ResKind kind_r, const C_Str & name_r );
 
-	IdString ident() const { return _ident; }
-	ResKind  kind()  const { return _kind; }
-	IdString name()  const { return _name; }
+        IdString ident() const { return _ident; }
+        ResKind  kind()  const { return _kind; }
+        IdString name()  const { return _name; }
 
       private:
-	IdString  _ident;
-	ResKind   _kind;
-	IdString  _name;
+        IdString  _ident;
+        ResKind   _kind;
+        IdString  _name;
       };
 
     public:
@@ -473,8 +473,8 @@ namespace zypp
       int res = 0;
       if ( lhs != rhs )
       {
-	if ( (res = lhs.kind().compare( rhs.kind() )) == 0 )
-	  res = lhs.name().compare( rhs.name() );
+        if ( (res = lhs.kind().compare( rhs.kind() )) == 0 )
+          res = lhs.name().compare( rhs.name() );
       }
       return res;
     }
@@ -484,7 +484,7 @@ namespace zypp
     {
       int res = compareByN( lhs, rhs );
       if ( res == 0 )
-	res = lhs.edition().compare( rhs.edition() );
+        res = lhs.edition().compare( rhs.edition() );
       return res;
     }
 
@@ -493,7 +493,7 @@ namespace zypp
     {
       int res = compareByNVR( lhs, rhs );
       if ( res == 0 )
-	res = lhs.arch().compare( rhs.arch() );
+        res = lhs.arch().compare( rhs.arch() );
       return res;
     }
 

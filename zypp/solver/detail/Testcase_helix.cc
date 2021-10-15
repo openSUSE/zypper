@@ -84,9 +84,9 @@ std::string helixXML( const Edition &edition )
     std::stringstream str;
     str << xml_tag_enclose(edition.version(), "version");
     if (!edition.release().empty())
-	str << xml_tag_enclose(edition.release(), "release");
+        str << xml_tag_enclose(edition.release(), "release");
     if (edition.epoch() != Edition::noepoch)
-	str << xml_tag_enclose(numstring(edition.epoch()), "epoch");
+        str << xml_tag_enclose(numstring(edition.epoch()), "epoch");
     return str.str();
 }
 
@@ -104,49 +104,49 @@ std::string helixXML( const Capability &cap )
     std::stringstream str;
     CapDetail detail = cap.detail();
     if (detail.isSimple()) {
-	if (detail.isVersioned()) {
-	    str << "<dep name='" << xml_escape(detail.name().asString()) << "'"
-		<< " op='" << xml_escape(detail.op().asString()) << "'"
-		<< " version='" <<  xml_escape(detail.ed().version()) << "'";
-	    if (!detail.ed().release().empty())
-		str << " release='" << xml_escape(detail.ed().release()) << "'";
-	    if (detail.ed().epoch() != Edition::noepoch)
-		str << " epoch='" << xml_escape(numstring(detail.ed().epoch())) << "'";
-	    str << " />" << endl;
-	} else {
-	    str << "<dep name='" << xml_escape(cap.asString()) << "' />" << endl;
-	}
+        if (detail.isVersioned()) {
+            str << "<dep name='" << xml_escape(detail.name().asString()) << "'"
+                << " op='" << xml_escape(detail.op().asString()) << "'"
+                << " version='" <<  xml_escape(detail.ed().version()) << "'";
+            if (!detail.ed().release().empty())
+                str << " release='" << xml_escape(detail.ed().release()) << "'";
+            if (detail.ed().epoch() != Edition::noepoch)
+                str << " epoch='" << xml_escape(numstring(detail.ed().epoch())) << "'";
+            str << " />" << endl;
+        } else {
+            str << "<dep name='" << xml_escape(cap.asString()) << "' />" << endl;
+        }
     } else if (detail.isExpression()) {
-	if (detail.capRel() == CapDetail::CAP_AND
-	    && detail.lhs().detail().isNamed()
-	    && detail.rhs().detail().isNamed()) {
-	    // packageand dependency
-	    str << "<dep name='packageand("
-		<< IdString(detail.lhs().id()) << ":"
-		<< IdString(detail.rhs().id()) << ")' />" << endl;
-	} else if (detail.capRel() == CapDetail::CAP_NAMESPACE
-	    && detail.lhs().id() == NAMESPACE_OTHERPROVIDERS) {
-	    str << "<dep name='otherproviders("
-		<< IdString(detail.rhs().id()) << ")' />" << endl;
-	} else {
-	    // modalias ?
-	    IdString packageName;
-	    if (detail.capRel() == CapDetail::CAP_AND) {
-		packageName = IdString(detail.lhs().id());
-		detail = detail.rhs().detail();
-	    }
-	    if (detail.capRel() == CapDetail::CAP_NAMESPACE
-		&& detail.lhs().id() == NAMESPACE_MODALIAS) {
-		str << "<dep name='modalias(";
-		if (!packageName.empty())
-		    str << packageName << ":";
-		str << IdString(detail.rhs().id()) << ")' />" << endl;
-	    } else {
-		str << "<!--- ignoring '" << xml_escape(cap.asString()) << "' -->" << endl;
-	    }
-	}
+        if (detail.capRel() == CapDetail::CAP_AND
+            && detail.lhs().detail().isNamed()
+            && detail.rhs().detail().isNamed()) {
+            // packageand dependency
+            str << "<dep name='packageand("
+                << IdString(detail.lhs().id()) << ":"
+                << IdString(detail.rhs().id()) << ")' />" << endl;
+        } else if (detail.capRel() == CapDetail::CAP_NAMESPACE
+            && detail.lhs().id() == NAMESPACE_OTHERPROVIDERS) {
+            str << "<dep name='otherproviders("
+                << IdString(detail.rhs().id()) << ")' />" << endl;
+        } else {
+            // modalias ?
+            IdString packageName;
+            if (detail.capRel() == CapDetail::CAP_AND) {
+                packageName = IdString(detail.lhs().id());
+                detail = detail.rhs().detail();
+            }
+            if (detail.capRel() == CapDetail::CAP_NAMESPACE
+                && detail.lhs().id() == NAMESPACE_MODALIAS) {
+                str << "<dep name='modalias(";
+                if (!packageName.empty())
+                    str << packageName << ":";
+                str << IdString(detail.rhs().id()) << ")' />" << endl;
+            } else {
+                str << "<!--- ignoring '" << xml_escape(cap.asString()) << "' -->" << endl;
+            }
+        }
     } else {
-	str << "<!--- ignoring '" << xml_escape(cap.asString()) << "' -->" << endl;
+        str << "<!--- ignoring '" << xml_escape(cap.asString()) << "' -->" << endl;
     }
 
     return str.str();
@@ -160,7 +160,7 @@ std::string helixXML( const Capabilities &caps )
     str << endl;
     for ( ; it != caps.end(); ++it)
     {
-	str << TAB2 << helixXML((*it));
+        str << TAB2 << helixXML((*it));
     }
     str << TAB;
     return str.str();
@@ -174,7 +174,7 @@ std::string helixXML( const CapabilitySet &caps )
     str << endl;
     for ( ; it != caps.end(); ++it)
     {
-	str << TAB2 << helixXML((*it));
+        str << TAB2 << helixXML((*it));
     }
     str << TAB;
     return str.str();
@@ -253,7 +253,7 @@ HelixResolvable::HelixResolvable(const std::string & path)
 {
     file = new ofgzstream(path.c_str());
     if (!file) {
-	ZYPP_THROW (Exception( "Can't open " + path ) );
+        ZYPP_THROW (Exception( "Can't open " + path ) );
     }
 
     *file << "<channel><subchannel>" << endl;
@@ -281,19 +281,19 @@ class  HelixControl {
 
   public:
     HelixControl (const std::string & controlPath,
-		  const RepositoryTable & sourceTable,
-		  const Arch & systemArchitecture,
-		  const target::Modalias::ModaliasList & modaliasList,
-		  const std::set<std::string> & multiversionSpec,
-		  const std::string & systemPath);
+                  const RepositoryTable & sourceTable,
+                  const Arch & systemArchitecture,
+                  const target::Modalias::ModaliasList & modaliasList,
+                  const std::set<std::string> & multiversionSpec,
+                  const std::string & systemPath);
     ~HelixControl ();
 
     void closeSetup()
     {
       if ( _inSetup )
       {
-	*file << "</setup>" << endl << "<trial>" << endl;
-	_inSetup = false;
+        *file << "</setup>" << endl << "<trial>" << endl;
+        _inSetup = false;
       }
     }
 
@@ -303,7 +303,7 @@ class  HelixControl {
     void addTagIf( const std::string & tag_r, bool yesno_r = true )
     {
       if ( yesno_r )
-	writeTag() << "<" << tag_r << "/>" << endl;
+        writeTag() << "<" << tag_r << "/>" << endl;
     }
 
     void installResolvable( const PoolItem & pi_r );
@@ -317,45 +317,45 @@ class  HelixControl {
 };
 
 HelixControl::HelixControl(const std::string & controlPath,
-			   const RepositoryTable & repoTable,
-			   const Arch & systemArchitecture,
-			   const target::Modalias::ModaliasList & modaliasList,
-			   const std::set<std::string> & multiversionSpec,
-			   const std::string & systemPath)
+                           const RepositoryTable & repoTable,
+                           const Arch & systemArchitecture,
+                           const target::Modalias::ModaliasList & modaliasList,
+                           const std::set<std::string> & multiversionSpec,
+                           const std::string & systemPath)
     :dumpFile (controlPath)
     ,_inSetup( true )
 {
     file = new std::ofstream(controlPath.c_str());
     if (!file) {
-	ZYPP_THROW (Exception( "Can't open " + controlPath ) );
+        ZYPP_THROW (Exception( "Can't open " + controlPath ) );
     }
 
     *file << "<?xml version=\"1.0\"?>" << endl
-	  << "<!-- libzypp resolver testcase -->" << endl
-	  << "<test>" << endl
-	  << "<setup arch=\"" << systemArchitecture << "\">" << endl
-	  << TAB << "<system file=\"" << systemPath << "\"/>" << endl << endl;
+          << "<!-- libzypp resolver testcase -->" << endl
+          << "<test>" << endl
+          << "<setup arch=\"" << systemArchitecture << "\">" << endl
+          << TAB << "<system file=\"" << systemPath << "\"/>" << endl << endl;
     for ( RepositoryTable::const_iterator it = repoTable.begin();
-	  it != repoTable.end(); ++it ) {
-	RepoInfo repo = it->first.info();
-	*file << TAB << "<!-- " << endl
-	      << TAB << "- alias       : " << repo.alias() << endl;
-	for ( RepoInfo::urls_const_iterator itUrl = repo.baseUrlsBegin();
-	      itUrl != repo.baseUrlsEnd();
-	      ++itUrl )
-	{
-	    *file << TAB << "- url         : " << *itUrl << endl;
-	}
-	*file << TAB << "- path        : " << repo.path() << endl;
-	*file << TAB << "- type        : " << repo.type() << endl;
-	*file << TAB << "- generated   : " << (it->first.generatedTimestamp()).form( "%Y-%m-%d %H:%M:%S" ) << endl;
-	*file << TAB << "- outdated    : " << (it->first.suggestedExpirationTimestamp()).form( "%Y-%m-%d %H:%M:%S" ) << endl;
-	*file << TAB << " -->" << endl;
+          it != repoTable.end(); ++it ) {
+        RepoInfo repo = it->first.info();
+        *file << TAB << "<!-- " << endl
+              << TAB << "- alias       : " << repo.alias() << endl;
+        for ( RepoInfo::urls_const_iterator itUrl = repo.baseUrlsBegin();
+              itUrl != repo.baseUrlsEnd();
+              ++itUrl )
+        {
+            *file << TAB << "- url         : " << *itUrl << endl;
+        }
+        *file << TAB << "- path        : " << repo.path() << endl;
+        *file << TAB << "- type        : " << repo.type() << endl;
+        *file << TAB << "- generated   : " << (it->first.generatedTimestamp()).form( "%Y-%m-%d %H:%M:%S" ) << endl;
+        *file << TAB << "- outdated    : " << (it->first.suggestedExpirationTimestamp()).form( "%Y-%m-%d %H:%M:%S" ) << endl;
+        *file << TAB << " -->" << endl;
 
-	*file << TAB << "<channel file=\"" << str::numstring((long)it->first.id())
-	      << "-package.xml.gz\" name=\"" << repo.alias() << "\""
-	      << " priority=\"" << repo.priority()
-	      << "\" />" << endl << endl;
+        *file << TAB << "<channel file=\"" << str::numstring((long)it->first.id())
+              << "-package.xml.gz\" name=\"" << repo.alias() << "\""
+              << " priority=\"" << repo.priority()
+              << "\" />" << endl << endl;
     }
 
     // HACK: directly access sat::pool
@@ -385,13 +385,13 @@ HelixControl::HelixControl(const std::string & controlPath,
 
 
     for_( it, modaliasList.begin(), modaliasList.end() ) {
-	*file << TAB << "<modalias name=\"" <<  xml_escape(*it)
-	      << "\" />" << endl;
+        *file << TAB << "<modalias name=\"" <<  xml_escape(*it)
+              << "\" />" << endl;
     }
 
     for_( it, multiversionSpec.begin(), multiversionSpec.end() ) {
-	*file << TAB << "<multiversion name=\"" <<  *it
-	      << "\" />" << endl;
+        *file << TAB << "<multiversion name=\"" <<  *it
+              << "\" />" << endl;
     }
 
     // setup continued outside....
@@ -401,7 +401,7 @@ HelixControl::~HelixControl()
 {
     closeSetup();	// in case it is still open
     *file << "</trial>" << endl
-	  << "</test>" << endl;
+          << "</test>" << endl;
     delete(file);
 }
 
@@ -409,53 +409,53 @@ void HelixControl::installResolvable( const PoolItem & pi_r )
 {
     *file << "<install channel=\"" << pi_r.repoInfo().alias() << "\""
           << " kind=\"" << pi_r.kind() << "\""
-	  << " name=\"" << pi_r.name() << "\""
-	  << " arch=\"" << pi_r.arch() << "\""
-	  << " version=\"" << pi_r.edition().version() << "\""
-	  << " release=\"" << pi_r.edition().release() << "\""
-	  << " status=\"" << pi_r.status() << "\""
-	  << "/>" << endl;
+          << " name=\"" << pi_r.name() << "\""
+          << " arch=\"" << pi_r.arch() << "\""
+          << " version=\"" << pi_r.edition().version() << "\""
+          << " release=\"" << pi_r.edition().release() << "\""
+          << " status=\"" << pi_r.status() << "\""
+          << "/>" << endl;
 }
 
 void HelixControl::lockResolvable( const PoolItem & pi_r )
 {
     *file << "<lock channel=\"" << pi_r.repoInfo().alias() << "\""
           << " kind=\"" << pi_r.kind() << "\""
-	  << " name=\"" << pi_r.name() << "\""
-	  << " arch=\"" << pi_r.arch() << "\""
-	  << " version=\"" << pi_r.edition().version() << "\""
-	  << " release=\"" << pi_r.edition().release() << "\""
-	  << " status=\"" << pi_r.status() << "\""
-	  << "/>" << endl;
+          << " name=\"" << pi_r.name() << "\""
+          << " arch=\"" << pi_r.arch() << "\""
+          << " version=\"" << pi_r.edition().version() << "\""
+          << " release=\"" << pi_r.edition().release() << "\""
+          << " status=\"" << pi_r.status() << "\""
+          << "/>" << endl;
 }
 
 void HelixControl::keepResolvable( const PoolItem & pi_r )
 {
     *file << "<keep channel=\"" << pi_r.repoInfo().alias() << "\""
           << " kind=\"" << pi_r.kind() << "\""
-	  << " name=\"" << pi_r.name() << "\""
-	  << " arch=\"" << pi_r.arch() << "\""
-	  << " version=\"" << pi_r.edition().version() << "\""
-	  << " release=\"" << pi_r.edition().release() << "\""
-	  << " status=\"" << pi_r.status() << "\""
-	  << "/>" << endl;
+          << " name=\"" << pi_r.name() << "\""
+          << " arch=\"" << pi_r.arch() << "\""
+          << " version=\"" << pi_r.edition().version() << "\""
+          << " release=\"" << pi_r.edition().release() << "\""
+          << " status=\"" << pi_r.status() << "\""
+          << "/>" << endl;
 }
 
 void HelixControl::deleteResolvable( const PoolItem & pi_r )
 {
     *file << "<uninstall  kind=\"" << pi_r.kind() << "\""
-	  << " name=\"" << pi_r.name() << "\""
-	  << " status=\"" << pi_r.status() << "\""
-	  << "/>" << endl;
+          << " name=\"" << pi_r.name() << "\""
+          << " status=\"" << pi_r.status() << "\""
+          << "/>" << endl;
 }
 
 void HelixControl::addDependencies (const CapabilitySet & capRequire, const CapabilitySet & capConflict)
 {
     for (CapabilitySet::const_iterator iter = capRequire.begin(); iter != capRequire.end(); iter++) {
-	*file << "<addRequire " <<  " name=\"" << iter->asString() << "\"" << "/>" << endl;
+        *file << "<addRequire " <<  " name=\"" << iter->asString() << "\"" << "/>" << endl;
     }
     for (CapabilitySet::const_iterator iter = capConflict.begin(); iter != capConflict.end(); iter++) {
-	*file << "<addConflict " << " name=\"" << iter->asString() << "\"" << "/>" << endl;
+        *file << "<addConflict " << " name=\"" << iter->asString() << "\"" << "/>" << endl;
     }
 }
 
@@ -485,26 +485,26 @@ bool Testcase::createTestcase(Resolver & resolver, bool dumpPool, bool runSolver
     PathInfo path (dumpPath);
 
     if ( !path.isExist() ) {
-	if (zypp::filesystem::assert_dir (dumpPath)!=0) {
-	    ERR << "Cannot create directory " << dumpPath << endl;
-	    return false;
-	}
+        if (zypp::filesystem::assert_dir (dumpPath)!=0) {
+            ERR << "Cannot create directory " << dumpPath << endl;
+            return false;
+        }
     } else {
-	if (!path.isDir()) {
-	    ERR << dumpPath << " is not a directory." << endl;
-	    return false;
-	}
-	// remove old stuff if pool will be dump
-	if (dumpPool)
-	    zypp::filesystem::clean_dir (dumpPath);
+        if (!path.isDir()) {
+            ERR << dumpPath << " is not a directory." << endl;
+            return false;
+        }
+        // remove old stuff if pool will be dump
+        if (dumpPool)
+            zypp::filesystem::clean_dir (dumpPath);
     }
 
     if (runSolver) {
         zypp::base::LogControl::TmpLineWriter tempRedirect;
-	zypp::base::LogControl::instance().logfile( dumpPath +"/y2log" );
-	zypp::base::LogControl::TmpExcessive excessive;
+        zypp::base::LogControl::instance().logfile( dumpPath +"/y2log" );
+        zypp::base::LogControl::TmpExcessive excessive;
 
-	resolver.resolvePool();
+        resolver.resolvePool();
     }
 
     ResPool pool 	= resolver.pool();
@@ -516,51 +516,51 @@ bool Testcase::createTestcase(Resolver & resolver, bool dumpPool, bool runSolver
     HelixResolvable_Ptr	system = NULL;
 
     if (dumpPool)
-	system = new HelixResolvable(dumpPath + "/solver-system.xml.gz");
+        system = new HelixResolvable(dumpPath + "/solver-system.xml.gz");
 
     for ( const PoolItem & pi : pool )
     {
-	if ( system && pi.status().isInstalled() ) {
-	    // system channel
-	    system->addResolvable( pi );
-	} else {
-	    // repo channels
-	    Repository repo  = pi.repository();
-	    if (dumpPool) {
-		if (repoTable.find (repo) == repoTable.end()) {
-		    repoTable[repo] = new HelixResolvable(dumpPath + "/"
-							  + str::numstring((long)repo.id())
-							  + "-package.xml.gz");
-		}
-		repoTable[repo]->addResolvable( pi );
-	    }
-	}
+        if ( system && pi.status().isInstalled() ) {
+            // system channel
+            system->addResolvable( pi );
+        } else {
+            // repo channels
+            Repository repo  = pi.repository();
+            if (dumpPool) {
+                if (repoTable.find (repo) == repoTable.end()) {
+                    repoTable[repo] = new HelixResolvable(dumpPath + "/"
+                                                          + str::numstring((long)repo.id())
+                                                          + "-package.xml.gz");
+                }
+                repoTable[repo]->addResolvable( pi );
+            }
+        }
 
-	if ( pi.status().isToBeInstalled()
-	     && !(pi.status().isBySolver())) {
-	    items_to_install.push_back( pi );
-	}
-	if ( pi.status().isKept()
-	     && !(pi.status().isBySolver())) {
-	    items_keep.push_back( pi );
-	}
-	if ( pi.status().isToBeUninstalled()
-	     && !(pi.status().isBySolver())) {
-	    items_to_remove.push_back( pi );
-	}
-	if ( pi.status().isLocked()
-	     && !(pi.status().isBySolver())) {
-	    items_locked.push_back( pi );
-	}
+        if ( pi.status().isToBeInstalled()
+             && !(pi.status().isBySolver())) {
+            items_to_install.push_back( pi );
+        }
+        if ( pi.status().isKept()
+             && !(pi.status().isBySolver())) {
+            items_keep.push_back( pi );
+        }
+        if ( pi.status().isToBeUninstalled()
+             && !(pi.status().isBySolver())) {
+            items_to_remove.push_back( pi );
+        }
+        if ( pi.status().isLocked()
+             && !(pi.status().isBySolver())) {
+            items_locked.push_back( pi );
+        }
     }
 
     // writing control file "*-test.xml"
     HelixControl control (dumpPath + "/solver-test.xml",
-			  repoTable,
-			  ZConfig::instance().systemArchitecture(),
-			  target::Modalias::instance().modaliasList(),
-			  ZConfig::instance().multiversionSpec(),
-			  "solver-system.xml.gz");
+                          repoTable,
+                          ZConfig::instance().systemArchitecture(),
+                          target::Modalias::instance().modaliasList(),
+                          ZConfig::instance().multiversionSpec(),
+                          "solver-system.xml.gz");
 
     // In <setup>: resolver flags,...
     control.writeTag() << "<focus value=\"" << resolver.focus() << "\"/>" << endl;
@@ -598,7 +598,7 @@ bool Testcase::createTestcase(Resolver & resolver, bool dumpPool, bool runSolver
 
     control.addDependencies (resolver.extraRequires(), resolver.extraConflicts());
     control.addDependencies (SystemCheck::instance().requiredSystemCap(),
-			     SystemCheck::instance().conflictSystemCap());
+                             SystemCheck::instance().conflictSystemCap());
     control.addUpgradeRepos( resolver.upgradeRepos() );
 
     control.addTagIf( "distupgrade",	resolver.isUpgradeMode() );

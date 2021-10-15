@@ -396,8 +396,8 @@ namespace zypp
       // require name part matching a pool items name (not just provides!)
       if ( pool.byIdentBegin( detail.name() ) != pool.byIdentEnd( detail.name() ) )
       {
-	rewrote_r = true;
-	return guesscap;
+        rewrote_r = true;
+        return guesscap;
       }
 
       // try the one but last '-'
@@ -413,10 +413,10 @@ namespace zypp
 
           // require name part matching a pool items name (not just provides!)
           if ( pool.byIdentBegin( detail.name() ) != pool.byIdentEnd( detail.name() ) )
-	  {
-	    rewrote_r = true;
-	    return guesscap;
-	  }
+          {
+            rewrote_r = true;
+            return guesscap;
+          }
         }
       }
     }

@@ -157,10 +157,10 @@ void NetworkRequestDispatcherPrivate::onSocketActivated( const SocketNotifier &l
 void NetworkRequestDispatcherPrivate::handleMultiSocketAction(curl_socket_t nativeSocket, int evBitmask)
 {
   int running = 0;
-  
-  // when inside a curl callback we can not call another multi curl API, 
-  // for now just lock the thing, but we should consider rewriting this 
-  // to post events instead of doing direct calls simply to decouple from 
+
+  // when inside a curl callback we can not call another multi curl API,
+  // for now just lock the thing, but we should consider rewriting this
+  // to post events instead of doing direct calls simply to decouple from
   // that limitation
   CURLMcode rc = CURLM_OK;
   {
@@ -177,7 +177,7 @@ void NetworkRequestDispatcherPrivate::handleMultiSocketAction(curl_socket_t nati
     _sigError.emit( *z_func() );
     return;
   }
-  
+
   // make sure we dequeue pending requests ( in case a call to dequeue was blocked during the API call )
   zypp::OnScopeExit scopeFinally([this](){
     this->dequeuePending();

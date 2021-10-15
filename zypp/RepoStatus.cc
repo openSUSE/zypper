@@ -33,17 +33,17 @@ namespace zypp
     {
       std::list<std::string> dircontent;
       if ( filesystem::readdir( dircontent, dir_r, false/*no dots*/ ) != 0 )
-	return; // readdir logged the error
+        return; // readdir logged the error
 
       for_( it, dircontent.begin(), dircontent.end() )
       {
-	PathInfo pi( dir_r + *it, PathInfo::LSTAT );
-	if ( pi.isDir() )
-	{
-	  if ( pi.mtime() > max_r )
-	    max_r = pi.mtime();
-	  recursiveTimestamp( pi.path(), max_r );
-	}
+        PathInfo pi( dir_r + *it, PathInfo::LSTAT );
+        if ( pi.isDir() )
+        {
+          if ( pi.mtime() > max_r )
+            max_r = pi.mtime();
+          recursiveTimestamp( pi.path(), max_r );
+        }
       }
     }
   } // namespace
@@ -69,9 +69,9 @@ namespace zypp
     void assignFromCtor( std::string && checksum_r, Date && timestamp_r )
     {
       if ( !checksum_r.empty() ) {
-	static const std::string magic( "43" );
-	checksum_r += magic;
-	_checksums.insert( std::move(checksum_r) );
+        static const std::string magic( "43" );
+        checksum_r += magic;
+        _checksums.insert( std::move(checksum_r) );
       }
       _timestamp = std::move(timestamp_r);
     }
@@ -80,27 +80,27 @@ namespace zypp
     void inject( std::string && checksum_r, Date && timestamp_r )
     {
       if ( !checksum_r.empty() ) {
-	_checksums.insert( std::move(checksum_r) );
-	_cachedchecksum.reset();
+        _checksums.insert( std::move(checksum_r) );
+        _cachedchecksum.reset();
       }
 
       if ( timestamp_r > _timestamp )
-	_timestamp = timestamp_r;
+        _timestamp = timestamp_r;
     }
 
     /** Inject the raw data from rhs */
     void injectFrom( const Impl & rhs )
     {
       if ( &rhs == this )	// no self insert
-	return;
+        return;
 
       if ( !rhs._checksums.empty() ) {
-	_checksums.insert( rhs._checksums.begin(), rhs._checksums.end() );
-	_cachedchecksum.reset();
+        _checksums.insert( rhs._checksums.begin(), rhs._checksums.end() );
+        _cachedchecksum.reset();
       }
 
       if ( rhs._timestamp > _timestamp )
-	_timestamp = rhs._timestamp;
+        _timestamp = rhs._timestamp;
     }
 
     bool empty() const
@@ -110,18 +110,18 @@ namespace zypp
     {
       std::string ret;
       if ( _checksums.empty() )
-	return ret;
+        return ret;
 
       if ( _checksums.size() == 1 )
-	ret = *_checksums.begin();
+        ret = *_checksums.begin();
       else {
-	if ( !_cachedchecksum ) {
-	  std::stringstream ss;
-	  for ( std::string_view c : _checksums )
-	    ss << c;
-	  _cachedchecksum = CheckSum::sha1(ss).checksum();
-	}
-	ret = *_cachedchecksum;
+        if ( !_cachedchecksum ) {
+          std::stringstream ss;
+          for ( std::string_view c : _checksums )
+            ss << c;
+          _cachedchecksum = CheckSum::sha1(ss).checksum();
+        }
+        ret = *_cachedchecksum;
       }
       return ret;
     }
@@ -165,13 +165,13 @@ namespace zypp
     {
       if ( info.isFile() )
       {
-	_pimpl->assignFromCtor( filesystem::sha1sum( path_r ), Date( info.mtime() ) );
+        _pimpl->assignFromCtor( filesystem::sha1sum( path_r ), Date( info.mtime() ) );
       }
       else if ( info.isDir() )
       {
-	time_t t = info.mtime();
-	recursiveTimestamp( path_r, t );
-	_pimpl->assignFromCtor( CheckSum::sha1FromString( str::numstring( t ) ).checksum(), Date( t ) );
+        time_t t = info.mtime();
+        recursiveTimestamp( path_r, t );
+        _pimpl->assignFromCtor( CheckSum::sha1FromString( str::numstring( t ) ).checksum(), Date( t ) );
       }
     }
   }

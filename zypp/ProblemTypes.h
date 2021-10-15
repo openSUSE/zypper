@@ -35,7 +35,7 @@
 #include <zypp/solver/detail/Types.h>	// SolutionAction type
 
 /////////////////////////////////////////////////////////////////////////
-namespace zypp 
+namespace zypp
 {
   DEFINE_PTR_TYPE(Resolver);
 

@@ -46,10 +46,10 @@ namespace zypp
     {
       if ( expires_r )
       {
-	Date exp( expires_r - Date::now() );
-	int ret = exp / Date::day;
-	if ( exp < 0 ) ret -= 1;
-	return ret;
+        Date exp( expires_r - Date::now() );
+        int ret = exp / Date::day;
+        if ( exp < 0 ) ret -= 1;
+        return ret;
       }
       return INT_MAX;
     }
@@ -59,18 +59,18 @@ namespace zypp
       str::Str str;
       if ( ! expires_r )
       {
-	// translators: an annotation to a gpg keys expiry date
-	str << _("does not expire");
+        // translators: an annotation to a gpg keys expiry date
+        str << _("does not expire");
       }
       else if ( isExpired( expires_r ) )
       {
-	// translators: an annotation to a gpg keys expiry date: "expired: 1999-04-12"
-	str << ( str::Format(_("expired: %1%") ) % expires_r.printDate() );
+        // translators: an annotation to a gpg keys expiry date: "expired: 1999-04-12"
+        str << ( str::Format(_("expired: %1%") ) % expires_r.printDate() );
       }
       else
       {
-	// translators: an annotation to a gpg keys expiry date: "expires: 2111-04-12"
-	str << ( str::Format(_("expires: %1%") ) % expires_r.printDate() );
+        // translators: an annotation to a gpg keys expiry date: "expires: 2111-04-12"
+        str << ( str::Format(_("expires: %1%") ) % expires_r.printDate() );
       }
       return str;
     }
@@ -79,25 +79,25 @@ namespace zypp
     {
       if ( !expires_r )
       { // translators: an annotation to a gpg keys expiry date
-	return _("(does not expire)");
+        return _("(does not expire)");
       }
       std::string ret( expires_r.asString() );
       int ttl( hasDaysToLive( expires_r ) );
       if ( ttl <= 90 )
       {
-	ret += " ";
-	if ( ttl < 0 )
-	{ // translators: an annotation to a gpg keys expiry date
-	  ret += _("(EXPIRED)");
-	}
-	else if ( ttl == 0 )
-	{ // translators: an annotation to a gpg keys expiry date
-	  ret += _("(expires within 24h)");
-	}
-	else
-	{ // translators: an annotation to a gpg keys expiry date
-	  ret += str::form( PL_("(expires in %d day)", "(expires in %d days)", ttl ), ttl );
-	}
+        ret += " ";
+        if ( ttl < 0 )
+        { // translators: an annotation to a gpg keys expiry date
+          ret += _("(EXPIRED)");
+        }
+        else if ( ttl == 0 )
+        { // translators: an annotation to a gpg keys expiry date
+          ret += _("(expires within 24h)");
+        }
+        else
+        { // translators: an annotation to a gpg keys expiry date
+          ret += str::form( PL_("(expires in %d day)", "(expires in %d days)", ttl ), ttl );
+        }
       }
       return ret;
     }
@@ -106,16 +106,16 @@ namespace zypp
     {
       std::string ret;
       if ( const char * n = ::gpgme_pubkey_algo_name( key_r->pubkey_algo ) )
-	ret = str::Str() << n << ' ' << key_r->length;
+        ret = str::Str() << n << ' ' << key_r->length;
       else
-	ret = "?";
+        ret = "?";
       return ret;
     }
 
     inline bool shorterIsSuffixCI( const std::string & lhs, const std::string & rhs )
     {
       if ( lhs.size() >= rhs.size() )
-	return str::endsWithCI( lhs, rhs );
+        return str::endsWithCI( lhs, rhs );
       return str::endsWithCI( rhs, lhs );
     }
   } //namespace
@@ -231,7 +231,7 @@ namespace zypp
     bool ret = false;
     for ( const PublicSubkeyData & sub : _subkeys ) {
       if ( shorterIsSuffixCI( sub.id(), id_r ) ) {
-	ret = true;
+        ret = true;
         break;
       }
     }
@@ -255,13 +255,13 @@ namespace zypp
       //libzypp expects the date of the latest signature on the first uid
       if ( rawData->uids && rawData->uids->signatures ) {
         data->_created = zypp::Date(rawData->uids->signatures->timestamp);
-	// bsc#1179222: The keyring does not order the signatures when multiple
-	// versions of the same key are imported. We take the last signature here,
-	// the one GPGME_EXPORT_MODE_MINIMAL will later use in export.
-	for ( auto t = rawData->uids->signatures->next; t; t = t->next ) {
-	  if ( t->timestamp > data->_created )
-	    data->_created = t->timestamp;
-	}
+        // bsc#1179222: The keyring does not order the signatures when multiple
+        // versions of the same key are imported. We take the last signature here,
+        // the one GPGME_EXPORT_MODE_MINIMAL will later use in export.
+        for ( auto t = rawData->uids->signatures->next; t; t = t->next ) {
+          if ( t->timestamp > data->_created )
+            data->_created = t->timestamp;
+        }
       }
       else
         data->_created = zypp::Date(sKey->timestamp);
@@ -419,7 +419,7 @@ namespace zypp
         ZYPP_THROW(Exception("Can't read public key from " + keyFile_r.asString() + ", file not found"));
 
       if ( filesystem::hardlinkCopy( keyFile_r, path() ) != 0 )
-	ZYPP_THROW(Exception("Can't copy public key data from " + keyFile_r.asString() + " to " +  path().asString() ));
+        ZYPP_THROW(Exception("Can't copy public key data from " + keyFile_r.asString() + " to " +  path().asString() ));
 
       readFromFile();
     }
@@ -435,8 +435,8 @@ namespace zypp
     {
       if ( ! keyData_r )
       {
-	WAR << "Invalid PublicKeyData supplied: scanning from file" << endl;
-	readFromFile();
+        WAR << "Invalid PublicKeyData supplied: scanning from file" << endl;
+        readFromFile();
       }
     }
 
@@ -550,7 +550,7 @@ namespace zypp
       return true;
     for ( const auto & keydata : hiddenKeys() ) {
       if ( keydata.providesKey( id_r ) )
-	return true;
+        return true;
     }
     return false;
   }

@@ -71,7 +71,7 @@ namespace zypp
       typedef std::vector<PoolItem>			ItemContainerT;
       typedef ItemContainerT::const_iterator            item_iterator;
       typedef filter_iterator<ByPoolItem,ItemContainerT::const_iterator>
-      							const_iterator;
+                                                        const_iterator;
       typedef ItemContainerT::size_type			size_type;
 
       /** ident index */

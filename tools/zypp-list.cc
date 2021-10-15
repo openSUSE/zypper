@@ -161,7 +161,7 @@ int main( int argc, char * argv[] )
     for_( it, pool.begin(), pool.end() )
     {
       if ( (*it).status().isLocked() )
-	OUT << *it << endl;
+        OUT << *it << endl;
     }
   }
 

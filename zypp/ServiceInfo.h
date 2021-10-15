@@ -171,10 +171,10 @@ namespace zypp
       unsigned	priority;
 
       RepoState()
-	: enabled( false ), autorefresh( true ), priority( RepoInfo::defaultPriority() )
+        : enabled( false ), autorefresh( true ), priority( RepoInfo::defaultPriority() )
       {}
       RepoState( const RepoInfo & repo_r )
-	: enabled( repo_r.enabled() ), autorefresh( repo_r.autorefresh() ), priority( repo_r.priority() )
+        : enabled( repo_r.enabled() ), autorefresh( repo_r.autorefresh() ), priority( repo_r.priority() )
       {}
       bool operator==( const RepoState & rhs ) const
       { return( enabled==rhs.enabled && autorefresh==rhs.autorefresh && priority==rhs.priority ); }

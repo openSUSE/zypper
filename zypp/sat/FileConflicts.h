@@ -39,19 +39,19 @@ namespace zypp
        */
       struct Conflict
       {
-	IdString lhsFilename() const	{ return IdString( _data[0] ); }
-	Solvable lhsSolvable() const	{ return Solvable( _data[1] ); }
-	IdString lhsFilemd5() const	{ return IdString( _data[2] ); }
+        IdString lhsFilename() const	{ return IdString( _data[0] ); }
+        Solvable lhsSolvable() const	{ return Solvable( _data[1] ); }
+        IdString lhsFilemd5() const	{ return IdString( _data[2] ); }
 
-	IdString rhsFilename() const	{ return IdString( _data[3] ); }
-	Solvable rhsSolvable() const	{ return Solvable( _data[4] ); }
-	IdString rhsFilemd5() const	{ return IdString( _data[5] ); }
+        IdString rhsFilename() const	{ return IdString( _data[3] ); }
+        Solvable rhsSolvable() const	{ return Solvable( _data[4] ); }
+        IdString rhsFilemd5() const	{ return IdString( _data[5] ); }
 
-	/** Ready to use (translated) string describing the Conflict */
-	std::string asUserString() const;
+        /** Ready to use (translated) string describing the Conflict */
+        std::string asUserString() const;
 
       private:
-	detail::IdType _data[queueBlockSize];
+        detail::IdType _data[queueBlockSize];
       };
 
     public:

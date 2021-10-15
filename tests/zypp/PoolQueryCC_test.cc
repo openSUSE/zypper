@@ -87,7 +87,7 @@ unsigned qtest( const std::string & pattern_r, Match::Mode mode_r, bool verbose_
       nlist( cout << "    o", o );
       nlist( cout << "    r", r );
       if ( ! verbose_r )
-	return qtestSIZEMISS;
+        return qtestSIZEMISS;
     }
   }
   catch ( const zypp::MatchInvalidRegexException & excpt )

@@ -77,14 +77,14 @@ bool SolverQueueItemDelete::addRule (sat::detail::CQueue & q)
 
     ::Id id = IdString(_name).id();
     if (_soft) {
-	queue_push( &(q), SOLVER_ERASE | SOLVER_SOLVABLE_NAME | SOLVER_WEAK | MAYBE_CLEANDEPS );
+        queue_push( &(q), SOLVER_ERASE | SOLVER_SOLVABLE_NAME | SOLVER_WEAK | MAYBE_CLEANDEPS );
     } else {
-	queue_push( &(q), SOLVER_ERASE | SOLVER_SOLVABLE_NAME | MAYBE_CLEANDEPS );
+        queue_push( &(q), SOLVER_ERASE | SOLVER_SOLVABLE_NAME | MAYBE_CLEANDEPS );
     }
     queue_push( &(q), id);
 
     MIL << "Delete " << _name << (_soft ? "(soft)" : "")
-	<< " with SAT-Pool: " << id << endl;
+        << " with SAT-Pool: " << id << endl;
     return true;
 }
 
@@ -106,7 +106,7 @@ SolverQueueItemDelete::cmp (SolverQueueItem_constPtr item) const
         return cmp;
     SolverQueueItemDelete_constPtr del = dynamic_pointer_cast<const SolverQueueItemDelete>(item);
     if (_name != del->_name) {
-	return _name.compare(del->_name);
+        return _name.compare(del->_name);
     }
     return 0;
 }

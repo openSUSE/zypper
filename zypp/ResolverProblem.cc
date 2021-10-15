@@ -42,10 +42,10 @@ namespace zypp
     {
       for ( const ProblemSolution_Ptr & solution : solutions_r )
       {
-	if ( solution->description()	== solution_r->description()
-	  && solution->details()	== solution_r->details()
-	  && solution->actions().size()	== solution_r->actions().size() )
-	  return true;
+        if ( solution->description()	== solution_r->description()
+          && solution->details()	== solution_r->details()
+          && solution->actions().size()	== solution_r->actions().size() )
+          return true;
       }
       return false;
     }

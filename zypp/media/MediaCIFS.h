@@ -45,7 +45,7 @@ namespace zypp {
 
     public:
       MediaCIFS( const Url&       url_r,
-		const Pathname & attach_point_hint_r );
+                const Pathname & attach_point_hint_r );
 
       virtual ~MediaCIFS() override { try { release(); } catch(...) {} }
 

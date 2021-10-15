@@ -78,8 +78,8 @@ namespace zypp
 
       bool operator()( sat::LookupAttr::iterator iter_r )
       {
-	if ( !_arch.empty() && iter_r.inSolvable().arch() != _arch )
-	  return false;
+        if ( !_arch.empty() && iter_r.inSolvable().arch() != _arch )
+          return false;
 
         CapDetail cap( iter_r.id() );
         if ( ! cap.isSimple() )
@@ -117,9 +117,9 @@ namespace zypp
 
       bool operator()( sat::LookupAttr::iterator iter_r )
       {
-	if ( !_arch.empty() && iter_r.inSolvable().arch() != _arch )
-	  return false;
-	return overlaps( Edition::MatchRange( Rel::EQ, iter_r.inSolvable().edition() ), _range );
+        if ( !_arch.empty() && iter_r.inSolvable().arch() != _arch )
+          return false;
+        return overlaps( Edition::MatchRange( Rel::EQ, iter_r.inSolvable().edition() ), _range );
       }
 
       std::string serialize() const
@@ -268,33 +268,33 @@ namespace zypp
         {
           if ( words[0] == "EditionRange" )
           {
-	    switch( words.size() )
-	    {
-	      case 3:
-		ret.predicate = EditionRangePredicate( Rel(words[1]), Edition(words[2]) );
-		break;
-	      case 4:
-		ret.predicate = EditionRangePredicate( Rel(words[1]), Edition(words[2]), Arch(words[3]) );
-		break;
-	      default:
-		ZYPP_THROW( Exception( str::Str() << "Wrong number of words: " << str_r ) );
-		break;
-	    }
+            switch( words.size() )
+            {
+              case 3:
+                ret.predicate = EditionRangePredicate( Rel(words[1]), Edition(words[2]) );
+                break;
+              case 4:
+                ret.predicate = EditionRangePredicate( Rel(words[1]), Edition(words[2]), Arch(words[3]) );
+                break;
+              default:
+                ZYPP_THROW( Exception( str::Str() << "Wrong number of words: " << str_r ) );
+                break;
+            }
           }
           else if ( words[0] == "SolvableRange" )
           {
-	    switch( words.size() )
-	    {
-	      case 3:
-		ret.predicate = SolvableRangePredicate( Rel(words[1]), Edition(words[2]) );
-		break;
-	      case 4:
-		ret.predicate = SolvableRangePredicate( Rel(words[1]), Edition(words[2]), Arch(words[3]) );
-		break;
-	      default:
-		ZYPP_THROW( Exception( str::Str() << "Wrong number of words: " << str_r ) );
-		break;
-	    }
+            switch( words.size() )
+            {
+              case 3:
+                ret.predicate = SolvableRangePredicate( Rel(words[1]), Edition(words[2]) );
+                break;
+              case 4:
+                ret.predicate = SolvableRangePredicate( Rel(words[1]), Edition(words[2]), Arch(words[3]) );
+                break;
+              default:
+                ZYPP_THROW( Exception( str::Str() << "Wrong number of words: " << str_r ) );
+                break;
+            }
           }
           else if ( words[0] == "CapabilityMatch" )
           {
@@ -318,50 +318,50 @@ namespace zypp
       /** Serialize \ref strMatcher \ref Match::Mode */
       static std::string serializeMode( Match::Mode mode_r )
       {
-	// Legacy code used "[C|X]" to differ just between OTHER (need to (C)ompile) and
-	// using the default search mode. As we now allow to specify a SEARCHMODE we
-	// need to serialize it:
-	switch ( mode_r )
-	{
+        // Legacy code used "[C|X]" to differ just between OTHER (need to (C)ompile) and
+        // using the default search mode. As we now allow to specify a SEARCHMODE we
+        // need to serialize it:
+        switch ( mode_r )
+        {
 #define OUTS(M,S) case Match::M: return #S; break
-	  // (C)ompile
-	  OUTS( OTHER,		C );
-	  // well known modes:
-	  OUTS( STRING,		T );
-	  OUTS( STRINGSTART,	S );
-	  OUTS( STRINGEND,	E );
-	  OUTS( SUBSTRING,	B );
-	  OUTS( GLOB,		G );
-	  OUTS( REGEX,		R );
+          // (C)ompile
+          OUTS( OTHER,		C );
+          // well known modes:
+          OUTS( STRING,		T );
+          OUTS( STRINGSTART,	S );
+          OUTS( STRINGEND,	E );
+          OUTS( SUBSTRING,	B );
+          OUTS( GLOB,		G );
+          OUTS( REGEX,		R );
 #undef OUTS
-	  // everything else use default
-	  case Match::NOTHING:
-	    break;
-	}
-	return "X";
+          // everything else use default
+          case Match::NOTHING:
+            break;
+        }
+        return "X";
       }
 
       /** Deserialize \ref strMatcher \ref Match::Mode */
       static Match::Mode deserializeMode( const std::string & str_r )
       {
-	switch ( str_r[0] )
-	{
+        switch ( str_r[0] )
+        {
 #define OUTS(M,C) case *#C: return Match::M; break
-	  // (C)ompile
-	  OUTS( OTHER,		C );
-	  // well known modes:
-	  OUTS( STRING,		T );
-	  OUTS( STRINGSTART,	S );
-	  OUTS( STRINGEND,	E );
-	  OUTS( SUBSTRING,	B );
-	  OUTS( GLOB,		G );
-	  OUTS( REGEX,		R );
+          // (C)ompile
+          OUTS( OTHER,		C );
+          // well known modes:
+          OUTS( STRING,		T );
+          OUTS( STRINGSTART,	S );
+          OUTS( STRINGEND,	E );
+          OUTS( SUBSTRING,	B );
+          OUTS( GLOB,		G );
+          OUTS( REGEX,		R );
 #undef OUTS
-	  // everything else use default
-	  default:
-	    break;
-	}
-	return Match::NOTHING;
+          // everything else use default
+          default:
+            break;
+        }
+        return Match::NOTHING;
       }
     };
 
@@ -481,26 +481,26 @@ namespace zypp
     bool operator==( const PoolQuery::Impl & rhs ) const
     {
       if ( _flags == rhs._flags
-	// bnc#792901: while libzypp uses exact match mode for a single
-	// package name lock, zypper always uses glob. :(
-	// We unify those two forms to enable zypper to remove zypp locks
-	// without need to actually evaluate the query (which would require
-	// repos to be loaded).
-	|| ( ( ( _flags.isModeString() && rhs._flags.isModeGlob() )
-	    || ( _flags.isModeGlob() && rhs._flags.isModeString() ) )
-	  && _strings.empty()
-	  && _attrs.size() == 1
-	  && _attrs.begin()->first == sat::SolvAttr::name ) )
+        // bnc#792901: while libzypp uses exact match mode for a single
+        // package name lock, zypper always uses glob. :(
+        // We unify those two forms to enable zypper to remove zypp locks
+        // without need to actually evaluate the query (which would require
+        // repos to be loaded).
+        || ( ( ( _flags.isModeString() && rhs._flags.isModeGlob() )
+            || ( _flags.isModeGlob() && rhs._flags.isModeString() ) )
+          && _strings.empty()
+          && _attrs.size() == 1
+          && _attrs.begin()->first == sat::SolvAttr::name ) )
       {
-	return ( _strings == rhs._strings
-	      && _attrs == rhs._attrs
-	      && _uncompiledPredicated == rhs._uncompiledPredicated
-	      && _match_word == rhs._match_word
-	      && _status_flags == rhs._status_flags
-	      && _edition == rhs._edition
-	      && _op == rhs._op
-	      && _repos == rhs._repos
-	      && _kinds == rhs._kinds );
+        return ( _strings == rhs._strings
+              && _attrs == rhs._attrs
+              && _uncompiledPredicated == rhs._uncompiledPredicated
+              && _match_word == rhs._match_word
+              && _status_flags == rhs._status_flags
+              && _edition == rhs._edition
+              && _op == rhs._op
+              && _repos == rhs._repos
+              && _kinds == rhs._kinds );
       }
       return false;
     }
@@ -597,17 +597,17 @@ namespace zypp
       for_( ai, _attrs.begin(), _attrs.end() )
       {
         if ( ai->second.empty() )
-	  continue;
-	for_( it, ai->second.begin(), ai->second.end() )
-	{
-	  if ( !it->empty() )
-	  {
-	    attrvals_empty = false;
-	    break;
-	  }
-	}
+          continue;
+        for_( it, ai->second.begin(), ai->second.end() )
+        {
+          if ( !it->empty() )
+          {
+            attrvals_empty = false;
+            break;
+          }
+        }
         if ( ! attrvals_empty )
-	  break;
+          break;
       }
 
       // chceck whether the per-attribute strings are all the same
@@ -686,9 +686,9 @@ namespace zypp
           if ( ! mstr.empty() )
             joined.insert( mstr );
 
-	  // copy and exchange the StrMatcher
-	  AttrMatchData nattr( *it );
-	  nattr.strMatcher = joinedStrMatcher( joined, _flags );
+          // copy and exchange the StrMatcher
+          AttrMatchData nattr( *it );
+          nattr.strMatcher = joinedStrMatcher( joined, _flags );
           _attrMatchList.push_back( std::move(nattr) );
         }
         else
@@ -723,10 +723,10 @@ namespace zypp
     std::string rxEscape( std::string str_r, const Match & flags_r )
     {
       if ( str_r.empty() || flags_r.isModeRegex() )
-	return str_r;
+        return str_r;
 
       if ( flags_r.isModeGlob() )
-	return str::rxEscapeGlob( std::move(str_r) );
+        return str::rxEscapeGlob( std::move(str_r) );
 
       return str::rxEscapeStr( std::move(str_r) );
     }
@@ -759,7 +759,7 @@ namespace zypp
     {
       ret << sep << rxEscape( s, flags_r );
       if ( sep == '(' )
-	sep = '|';
+        sep = '|';
     }
     ret << ')';
 
@@ -1231,8 +1231,8 @@ namespace zypp
       }
       else if ( attribute==PoolQueryAttr::requireAllAttr )
       {
-	// LEAGACY: attribute was defined but never implemented.
-	// Actually it should not occur outside our testcases.
+        // LEAGACY: attribute was defined but never implemented.
+        // Actually it should not occur outside our testcases.
       }
       else if ( attribute==PoolQueryAttr::caseSensitiveAttr )
       {
@@ -1302,17 +1302,17 @@ namespace zypp
         std::string s = attrName;
         str::replaceAll( s,"_",":" );
         SolvAttr a(s);
-	if ( a == SolvAttr::name || isDependencyAttribute( a ) )
-	{
-	  Capability c( attrValue );
-	  CapDetail d( c );
-	  if ( d.isVersioned() )
-	    addDependency( a, d.name().asString(), d.op(), d.ed() );
-	  else
-	    addDependency( a, attrValue );
-	}
-	else
-	  addAttribute( a, attrValue );
+        if ( a == SolvAttr::name || isDependencyAttribute( a ) )
+        {
+          Capability c( attrValue );
+          CapDetail d( c );
+          if ( d.isVersioned() )
+            addDependency( a, d.name().asString(), d.op(), d.ed() );
+          else
+            addDependency( a, attrValue );
+        }
+        else
+          addAttribute( a, attrValue );
       }
 
     } while ( true );
@@ -1338,46 +1338,46 @@ namespace zypp
       const AttrMatchData & attrmatch {  *_pimpl->_uncompiledPredicated.begin() };
       if ( attrmatch.attr == SolvAttr::name && attrmatch.strMatcher.flags().mode() == Match::OTHER )
       {
-	// ...for SolvAttr::name and following the global search flags.
-	// A candidate for a rewrite?
+        // ...for SolvAttr::name and following the global search flags.
+        // A candidate for a rewrite?
 
-	std::vector<std::string> words;
-	str::splitEscaped( attrmatch.predicateStr, std::back_inserter(words) );
-	if ( words.size() < 4 || words[3].empty() )
-	{
-	  // We have _NO_ arch rule in the complex predicate, so we can simplify it.
-	  //
-	  // NOTE: AFAIK it's not possible to create (or have created) a complex lock
-	  // with arch rule with zypper means. Nevertheless, in case such a rule made it
-	  // into a locks file, it's better to have a strange looking 'zypper locks' list
-	  // than to lock the wrong packages.
-	  // (and remember that you can't use "addAttribute( SolvAttr::arch, ... )" because
-	  // attributes are `OR`ed)
+        std::vector<std::string> words;
+        str::splitEscaped( attrmatch.predicateStr, std::back_inserter(words) );
+        if ( words.size() < 4 || words[3].empty() )
+        {
+          // We have _NO_ arch rule in the complex predicate, so we can simplify it.
+          //
+          // NOTE: AFAIK it's not possible to create (or have created) a complex lock
+          // with arch rule with zypper means. Nevertheless, in case such a rule made it
+          // into a locks file, it's better to have a strange looking 'zypper locks' list
+          // than to lock the wrong packages.
+          // (and remember that you can't use "addAttribute( SolvAttr::arch, ... )" because
+          // attributes are `OR`ed)
 
-	  // kind
-	  if ( attrmatch.kindPredicate )
-	  {
-	    _pimpl->_kinds.clear();	// an explicit kind overwrites any global one
-	    addKind( attrmatch.kindPredicate );
-	  }
+          // kind
+          if ( attrmatch.kindPredicate )
+          {
+            _pimpl->_kinds.clear();	// an explicit kind overwrites any global one
+            addKind( attrmatch.kindPredicate );
+          }
 
-	  // name
-	  addAttribute( SolvAttr::name, attrmatch.strMatcher.searchstring() );
+          // name
+          addAttribute( SolvAttr::name, attrmatch.strMatcher.searchstring() );
 
-	  // edition
-	  std::vector<std::string> words;
-	  str::splitEscaped( attrmatch.predicateStr, std::back_inserter(words) );
-	  if ( ! words.empty() )
-	  {
-	    if ( words[0] == "EditionRange" || words[0] == "SolvableRange" )
-	    {
-	      setEdition( Edition(words[2]), Rel(words[1]) );
-	    }
-	  }
+          // edition
+          std::vector<std::string> words;
+          str::splitEscaped( attrmatch.predicateStr, std::back_inserter(words) );
+          if ( ! words.empty() )
+          {
+            if ( words[0] == "EditionRange" || words[0] == "SolvableRange" )
+            {
+              setEdition( Edition(words[2]), Rel(words[1]) );
+            }
+          }
 
-	  // finally remove the complex lock
-	  _pimpl->_uncompiledPredicated.clear();
-	}
+          // finally remove the complex lock
+          _pimpl->_uncompiledPredicated.clear();
+        }
       }
     }
 
@@ -1525,34 +1525,34 @@ namespace zypp
     class PoolQueryMatcher
     {
       public:
-	typedef sat::LookupAttr::iterator base_iterator;
+        typedef sat::LookupAttr::iterator base_iterator;
 
       public:
-	const base_iterator & end() const
-	{
-	  static base_iterator _end;
-	  return _end;
-	}
+        const base_iterator & end() const
+        {
+          static base_iterator _end;
+          return _end;
+        }
 
-	bool advance( base_iterator & base_r ) const
-	{
-	  if ( base_r == end() )
-	    base_r = startNewQyery(); // first candidate
-	  else
+        bool advance( base_iterator & base_r ) const
+        {
+          if ( base_r == end() )
+            base_r = startNewQyery(); // first candidate
+          else
           {
             base_r.nextSkipSolvable(); // assert we don't visit this Solvable again
-	    ++base_r; // advance to next candidate
+            ++base_r; // advance to next candidate
           }
 
-	  while ( base_r != end() )
-	  {
-	    if ( isAMatch( base_r ) )
-	      return true;
-	    // No match: try next
+          while ( base_r != end() )
+          {
+            if ( isAMatch( base_r ) )
+              return true;
+            // No match: try next
             ++base_r;
-	  }
-	  return false;
-	}
+          }
+          return false;
+        }
 
         /** Provide all matching attributes within this solvable.
          *
@@ -1605,135 +1605,135 @@ namespace zypp
         }
 
       public:
-	/** Ctor stores the \ref PoolQuery settings.
+        /** Ctor stores the \ref PoolQuery settings.
          * \throw MatchException Any of the exceptions thrown by \ref PoolQuery::Impl::compile.
          */
-	PoolQueryMatcher( const shared_ptr<const PoolQuery::Impl> & query_r )
-	{
-	  query_r->compile();
+        PoolQueryMatcher( const shared_ptr<const PoolQuery::Impl> & query_r )
+        {
+          query_r->compile();
 
-	  // Repo restriction:
-	  sat::Pool satpool( sat::Pool::instance() );
+          // Repo restriction:
+          sat::Pool satpool( sat::Pool::instance() );
 
-	  for_( it, query_r->_repos.begin(), query_r->_repos.end() )
-	  {
-	    Repository r( satpool.reposFind( *it ) );
-	    if ( r )
-	      _repos.insert( r );
-	    else
-	      _neverMatchRepo = true;
-	  }
-	  // _neverMatchRepo: we just need to catch the case that no repo
-	  // matched, so we'd interpret the empty list as 'take from all'
-	  if ( _neverMatchRepo && ! _repos.empty() )
-	    _neverMatchRepo = false;
+          for_( it, query_r->_repos.begin(), query_r->_repos.end() )
+          {
+            Repository r( satpool.reposFind( *it ) );
+            if ( r )
+              _repos.insert( r );
+            else
+              _neverMatchRepo = true;
+          }
+          // _neverMatchRepo: we just need to catch the case that no repo
+          // matched, so we'd interpret the empty list as 'take from all'
+          if ( _neverMatchRepo && ! _repos.empty() )
+            _neverMatchRepo = false;
 
-	  // Kind restriction:
-	  _kinds = query_r->_kinds;
-	  // Edition restriction:
-	  _op      = query_r->_op;
-	  _edition = query_r->_edition;
-	  // Status restriction:
-	  _status_flags = query_r->_status_flags;
+          // Kind restriction:
+          _kinds = query_r->_kinds;
+          // Edition restriction:
+          _op      = query_r->_op;
+          _edition = query_r->_edition;
+          // Status restriction:
+          _status_flags = query_r->_status_flags;
           // StrMatcher
           _attrMatchList = query_r->_attrMatchList;
-	}
+        }
 
-	~PoolQueryMatcher()
-	{}
+        ~PoolQueryMatcher()
+        {}
 
       private:
-	/** Initialize a new base query. */
-	base_iterator startNewQyery() const
-	{
-	  sat::LookupAttr q;
+        /** Initialize a new base query. */
+        base_iterator startNewQyery() const
+        {
+          sat::LookupAttr q;
 
-	  if ( _neverMatchRepo )
-	    return q.end();
+          if ( _neverMatchRepo )
+            return q.end();
 
-	  // Repo restriction:
-	  if ( _repos.size() == 1 )
-	    q.setRepo( *_repos.begin() );
-	  // else: handled in isAMatch.
+          // Repo restriction:
+          if ( _repos.size() == 1 )
+            q.setRepo( *_repos.begin() );
+          // else: handled in isAMatch.
 
-	  // Attribute restriction:
-	  if ( _attrMatchList.size() == 1 ) // all (SolvAttr::allAttr) or 1 attr
-	  {
+          // Attribute restriction:
+          if ( _attrMatchList.size() == 1 ) // all (SolvAttr::allAttr) or 1 attr
+          {
             const AttrMatchData & matchData( _attrMatchList.front() );
-	    q.setAttr( matchData.attr );
+            q.setAttr( matchData.attr );
             if ( matchData.strMatcher ) // empty searchstring matches always
               q.setStrMatcher( matchData.strMatcher );
-	  }
+          }
           else // more than 1 attr (but not all)
           {
             // no restriction, it's all handled in isAMatch.
             q.setAttr( sat::SolvAttr::allAttr );
           }
 
-	  return q.begin();
-	}
+          return q.begin();
+        }
 
 
-	/** Check whether we are on a match.
-	 *
-	 * The check covers the whole Solvable, not just the current
-	 * attribute \c base_r points to. If there's no match, also
-	 * prepare \c base_r to advance appropriately. If there is
-	 * a match, simply return \c true. \ref advance always moves
-	 * to the next Solvable if there was a match.
-	 *
-	 * \note: Caller asserts we're not at \ref end.
-	*/
-	bool isAMatch( base_iterator & base_r ) const
-	{
-	  /////////////////////////////////////////////////////////////////////
-	  Repository inRepo( base_r.inRepo() );
-	  // Status restriction:
-	  if ( _status_flags
-	     && ( (_status_flags == PoolQuery::INSTALLED_ONLY) != inRepo.isSystemRepo() ) )
-	  {
-	    base_r.nextSkipRepo();
-	    return false;
-	  }
-	  // Repo restriction:
-	  if ( _repos.size() > 1 && _repos.find( inRepo ) == _repos.end() )
-	  {
-	    base_r.nextSkipRepo();
-	    return false;
-	  }
-	  /////////////////////////////////////////////////////////////////////
-	  sat::Solvable inSolvable( base_r.inSolvable() );
-	  // Edition restriction:
-	  if ( _op != Rel::ANY && !compareByRel( _op, inSolvable.edition(), _edition, Edition::Match() ) )
-	  {
-	    base_r.nextSkipSolvable();
-	    return false;
-	  }
+        /** Check whether we are on a match.
+         *
+         * The check covers the whole Solvable, not just the current
+         * attribute \c base_r points to. If there's no match, also
+         * prepare \c base_r to advance appropriately. If there is
+         * a match, simply return \c true. \ref advance always moves
+         * to the next Solvable if there was a match.
+         *
+         * \note: Caller asserts we're not at \ref end.
+        */
+        bool isAMatch( base_iterator & base_r ) const
+        {
+          /////////////////////////////////////////////////////////////////////
+          Repository inRepo( base_r.inRepo() );
+          // Status restriction:
+          if ( _status_flags
+             && ( (_status_flags == PoolQuery::INSTALLED_ONLY) != inRepo.isSystemRepo() ) )
+          {
+            base_r.nextSkipRepo();
+            return false;
+          }
+          // Repo restriction:
+          if ( _repos.size() > 1 && _repos.find( inRepo ) == _repos.end() )
+          {
+            base_r.nextSkipRepo();
+            return false;
+          }
+          /////////////////////////////////////////////////////////////////////
+          sat::Solvable inSolvable( base_r.inSolvable() );
+          // Edition restriction:
+          if ( _op != Rel::ANY && !compareByRel( _op, inSolvable.edition(), _edition, Edition::Match() ) )
+          {
+            base_r.nextSkipSolvable();
+            return false;
+          }
 
-	  // Kind restriction:
-	  // Delay the decision to nextSkipSolvable and return false, as there may be
-	  // some explicit kind:name predicate which overrules the global kinds.
-	  bool globalKindOk =( _kinds.empty() || inSolvable.isKind( _kinds.begin(), _kinds.end() ) );
+          // Kind restriction:
+          // Delay the decision to nextSkipSolvable and return false, as there may be
+          // some explicit kind:name predicate which overrules the global kinds.
+          bool globalKindOk =( _kinds.empty() || inSolvable.isKind( _kinds.begin(), _kinds.end() ) );
 
-	  /////////////////////////////////////////////////////////////////////
-	  // string and predicate matching:
+          /////////////////////////////////////////////////////////////////////
+          // string and predicate matching:
 
           if ( _attrMatchList.size() == 1 )
           {
             // String matching was done by the base iterator.
             // Now check any predicate:
-	    const AttrMatchData & matchData( _attrMatchList.front() );
+            const AttrMatchData & matchData( _attrMatchList.front() );
 
-	    if ( matchData.kindPredicate )
-	    {
-	      if ( matchData.kindPredicate != inSolvable.kind() )
-	      {
-		base_r.nextSkipSolvable();	// this matchData will never match in this solvable
-		return false;
-	      }
-	    }
-	    else if ( !globalKindOk )
-	      return false;			// only matching kindPredicate could overwrite this
+            if ( matchData.kindPredicate )
+            {
+              if ( matchData.kindPredicate != inSolvable.kind() )
+              {
+                base_r.nextSkipSolvable();	// this matchData will never match in this solvable
+                return false;
+              }
+            }
+            else if ( !globalKindOk )
+              return false;			// only matching kindPredicate could overwrite this
 
             if ( !matchData.predicate || matchData.predicate( base_r ) )
               return true;
@@ -1746,13 +1746,13 @@ namespace zypp
           {
             const AttrMatchData & matchData( *mi );
 
-	    if ( matchData.kindPredicate )
-	    {
-	      if ( matchData.kindPredicate != inSolvable.kind() )
-		continue;			// this matchData does not apply
-	    }
-	    else if ( !globalKindOk )
-	      continue;				// only matching kindPredicate could overwrite this
+            if ( matchData.kindPredicate )
+            {
+              if ( matchData.kindPredicate != inSolvable.kind() )
+                continue;			// this matchData does not apply
+            }
+            else if ( !globalKindOk )
+              continue;				// only matching kindPredicate could overwrite this
 
             sat::LookupAttr q( matchData.attr, inSolvable );
             if ( matchData.strMatcher ) // an empty searchstring matches always
@@ -1776,12 +1776,12 @@ namespace zypp
           }
           base_r.nextSkipSolvable();
           return false;
-	}
+        }
 
       private:
         /** Repositories include in the search. */
         std::set<Repository> _repos;
-	DefaultIntegral<bool,false> _neverMatchRepo;
+        DefaultIntegral<bool,false> _neverMatchRepo;
         /** Resolvable kinds to include. */
         std::set<ResKind> _kinds;
         /** Edition filter. */

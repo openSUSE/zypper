@@ -58,51 +58,51 @@ namespace zypp
       */
       struct DownloadFileReportHack : public callback::ReceiveReport<media::DownloadProgressReport>
       {
-	typedef callback::ReceiveReport<ReportType> BaseType;
-	typedef function<bool(int)>                 RedirectType;
+        typedef callback::ReceiveReport<ReportType> BaseType;
+        typedef function<bool(int)>                 RedirectType;
 
-	DownloadFileReportHack( RedirectType redirect_r )
-	: _oldRec( Distributor::instance().getReceiver() )
-	, _redirect( redirect_r )
-	{ connect(); }
-	~DownloadFileReportHack()
-	{ if ( _oldRec ) Distributor::instance().setReceiver( *_oldRec ); else Distributor::instance().noReceiver(); }
+        DownloadFileReportHack( RedirectType redirect_r )
+        : _oldRec( Distributor::instance().getReceiver() )
+        , _redirect( redirect_r )
+        { connect(); }
+        ~DownloadFileReportHack()
+        { if ( _oldRec ) Distributor::instance().setReceiver( *_oldRec ); else Distributor::instance().noReceiver(); }
 
-	virtual void start( const Url & file, Pathname localfile )
-	{
-	  if ( _oldRec )
-	    _oldRec->start( file, localfile );
-	  else
-	    BaseType::start( file, localfile );
-	}
+        virtual void start( const Url & file, Pathname localfile )
+        {
+          if ( _oldRec )
+            _oldRec->start( file, localfile );
+          else
+            BaseType::start( file, localfile );
+        }
 
-	virtual bool progress( int value, const Url & file, double dbps_avg = -1, double dbps_current = -1 )
-	{
-	  bool ret = true;
-	  if ( _oldRec )
-	    ret &= _oldRec->progress( value, file, dbps_avg, dbps_current );
+        virtual bool progress( int value, const Url & file, double dbps_avg = -1, double dbps_current = -1 )
+        {
+          bool ret = true;
+          if ( _oldRec )
+            ret &= _oldRec->progress( value, file, dbps_avg, dbps_current );
           if ( _redirect )
             ret &= _redirect( value );
-	  return ret;
-	}
+          return ret;
+        }
 
-	virtual Action problem( const Url & file, Error error, const std::string & description )
-	{
-	  if ( _oldRec )
-	    return _oldRec->problem( file, error, description );
-	  return BaseType::problem( file, error, description );
-	}
-	virtual void finish( const Url & file, Error error, const std::string & reason )
-	{
-	  if ( _oldRec )
-	    _oldRec->finish( file, error, reason );
-	  else
-	    BaseType::finish( file, error, reason );
-	}
+        virtual Action problem( const Url & file, Error error, const std::string & description )
+        {
+          if ( _oldRec )
+            return _oldRec->problem( file, error, description );
+          return BaseType::problem( file, error, description );
+        }
+        virtual void finish( const Url & file, Error error, const std::string & reason )
+        {
+          if ( _oldRec )
+            _oldRec->finish( file, error, reason );
+          else
+            BaseType::finish( file, error, reason );
+        }
 
-	private:
-	  Receiver * _oldRec;
-	  RedirectType _redirect;
+        private:
+          Receiver * _oldRec;
+          RedirectType _redirect;
       };
 
       /////////////////////////////////////////////////////////////////
@@ -185,18 +185,18 @@ namespace zypp
                 }
               }
 
-	      SUSEMediaVerifier lverifyer { mediafile };
-	      if ( lverifyer ) {
-		DBG << "Verifyer for repo '" << repo.alias() << "':" << lverifyer << endl;
-		for ( media::MediaNr i = 1; i <= lverifyer.totalMedia(); ++i ) {
-		  media::MediaVerifierRef verifier( new repo::SUSEMediaVerifier( lverifyer, i ) );
+              SUSEMediaVerifier lverifyer { mediafile };
+              if ( lverifyer ) {
+                DBG << "Verifyer for repo '" << repo.alias() << "':" << lverifyer << endl;
+                for ( media::MediaNr i = 1; i <= lverifyer.totalMedia(); ++i ) {
+                  media::MediaVerifierRef verifier( new repo::SUSEMediaVerifier( lverifyer, i ) );
                   media->setVerifier( i, verifier);
                 }
                 _verifier[media] = repo;
-	      }
-	      else {
-		WAR << "Invalid verifier for repo '" << repo.alias() << "' in '" << repo.metadataPath() << "': " << lverifyer << endl;
-	      }
+              }
+              else {
+                WAR << "Invalid verifier for repo '" << repo.alias() << "' in '" << repo.metadataPath() << "': " << lverifyer << endl;
+              }
             }
             else
             {
@@ -245,7 +245,7 @@ namespace zypp
       DownloadFileReportHack dumb( bind( mem_fun_ref( &ProvideFilePolicy::progress ), ref( policy_r ), _1 ) );
 
       RepoException repo_excpt(repo_r,
-			       str::form(_("Can't provide file '%s' from repository '%s'"),
+                               str::form(_("Can't provide file '%s' from repository '%s'"),
                                locWithPath.filename().c_str(),
                                repo_r.alias().c_str() ) );
 
@@ -267,15 +267,15 @@ namespace zypp
       PathInfo pi( destinationDir );
       if ( ! pi.isExist() )
       {
-	// try to create it...
-	assert_dir( destinationDir );
-	pi();
+        // try to create it...
+        assert_dir( destinationDir );
+        pi();
       }
       if ( geteuid() != 0 && ! pi.userMayW() )
       {
         WAR << "Destination dir '" << destinationDir << "' is not user writable, using tmp space." << endl;
         destinationDir = getZYpp()->tmpPath() / destinationDir;
-	assert_dir( destinationDir );
+        assert_dir( destinationDir );
         fetcher.addCachePath( destinationDir );
         MIL << "Added cache path " << destinationDir << endl;
       }
@@ -294,10 +294,10 @@ namespace zypp
           MIL << "Providing file of repo '" << repo_r.alias() << "' from " << url << endl;
           shared_ptr<MediaSetAccess> access = _impl->mediaAccessForUrl( url, repo_r );
 
-	  fetcher.enqueue( locWithPath, policy_r.fileChecker() );
-	  fetcher.start( destinationDir, *access );
+          fetcher.enqueue( locWithPath, policy_r.fileChecker() );
+          fetcher.start( destinationDir, *access );
 
-	  // reached if no exception has been thrown, so this is the correct file
+          // reached if no exception has been thrown, so this is the correct file
           ManagedFile ret( destinationDir + locWithPath.filename() );
           if ( !repo_r.keepPackages() )
           {
@@ -308,13 +308,13 @@ namespace zypp
           return ret;
         }
         catch ( const UserRequestException & excpt )
-	{
-	  ZYPP_RETHROW( excpt );
-	}
+        {
+          ZYPP_RETHROW( excpt );
+        }
         catch ( const FileCheckException & excpt )
-	{
-	  ZYPP_RETHROW( excpt );
-	}
+        {
+          ZYPP_RETHROW( excpt );
+        }
         catch ( const Exception &e )
         {
           ZYPP_CAUGHT( e );

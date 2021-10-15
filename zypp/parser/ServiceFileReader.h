@@ -36,7 +36,7 @@ namespace zypp
      * The \ref _callback is provided on construction.
      *
      * \code
-     * ServiceFileReader reader(service_file, 
+     * ServiceFileReader reader(service_file,
      *                bind( &SomeClass::callbackfunc, &SomeClassInstance, _1 ) );
      * \endcode
      */
@@ -44,7 +44,7 @@ namespace zypp
     {
       friend std::ostream & operator<<( std::ostream & str, const ServiceFileReader & obj );
     public:
-      
+
      /**
       * Callback definition.
       * First parameter is a \ref ServiceInfo object with the resource.
@@ -53,7 +53,7 @@ namespace zypp
       * to be thrown and the processing to be cancelled.
       */
       typedef function< bool( const ServiceInfo & )> ProcessService;
-      
+
       /** Implementation  */
       class Impl;
 
@@ -70,7 +70,7 @@ namespace zypp
       */
       ServiceFileReader( const Pathname & serviceFile,
                       const ProcessService & callback);
-     
+
       /**
        * Dtor
        */

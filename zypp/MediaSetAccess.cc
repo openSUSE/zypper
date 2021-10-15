@@ -53,7 +53,7 @@ IMPL_PTR_TYPE(MediaSetAccess);
     {
       media::MediaManager manager;
       for ( const auto & mm : _medias )
-	manager.close( mm.second );
+        manager.close( mm.second );
     }
     catch(...) {} // don't let exception escape a dtor.
   }
@@ -327,9 +327,9 @@ IMPL_PTR_TYPE(MediaSetAccess);
           }
 
           // Propagate the original error if _no_ callback receiver is connected, or
-	  // non_interactive mode (for optional files) is used (except for wrong media).
+          // non_interactive mode (for optional files) is used (except for wrong media).
           if ( ! callback::SendReport<media::MediaChangeReport>::connected()
-	     || (( options & PROVIDE_NON_INTERACTIVE ) && reason != media::MediaChangeReport::WRONG ) )
+             || (( options & PROVIDE_NON_INTERACTIVE ) && reason != media::MediaChangeReport::WRONG ) )
           {
               MIL << "Can't provide file. Non-Interactive mode." << endl;
               ZYPP_RETHROW(excp);
@@ -362,22 +362,22 @@ IMPL_PTR_TYPE(MediaSetAccess);
           else if ( user == media::MediaChangeReport::IGNORE )
           {
             DBG << "Skipping" << endl;
-	    SkipRequestException nexcp("User-requested skipping of a file");
-	    nexcp.remember(excp);
-	    ZYPP_THROW(nexcp);
-	  }
+            SkipRequestException nexcp("User-requested skipping of a file");
+            nexcp.remember(excp);
+            ZYPP_THROW(nexcp);
+          }
           else if ( user == media::MediaChangeReport::EJECT )
           {
             DBG << "Eject: try to release" << endl;
-	    try
-	    {
-	      media_mgr.releaseAll();
-	      media_mgr.release (media, devindex < devices.size() ? devices[devindex] : "");
-	    }
-	    catch ( const Exception & e)
-	    {
-	      ZYPP_CAUGHT(e);
-	    }
+            try
+            {
+              media_mgr.releaseAll();
+              media_mgr.release (media, devindex < devices.size() ? devices[devindex] : "");
+            }
+            catch ( const Exception & e)
+            {
+              ZYPP_CAUGHT(e);
+            }
           }
           else if ( user == media::MediaChangeReport::RETRY  ||
             user == media::MediaChangeReport::CHANGE_URL )

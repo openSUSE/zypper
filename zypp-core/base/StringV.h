@@ -43,12 +43,12 @@ namespace zypp
     inline std::string_view ltrim( std::string_view str_r, std::string_view chars_r = blank )
     {
       if ( str_r.empty() )
-	return str_r;
+        return str_r;
       auto pos = str_r.find_first_not_of( chars_r );
       if ( pos == str_r.npos )
-	str_r.remove_prefix( str_r.size() );
+        str_r.remove_prefix( str_r.size() );
       else if ( pos )
-	str_r.remove_prefix( pos );
+        str_r.remove_prefix( pos );
       return str_r;
     }
 
@@ -56,12 +56,12 @@ namespace zypp
     inline std::string_view rtrim( std::string_view str_r, std::string_view chars_r = blank )
     {
       if ( str_r.empty() )
-	return str_r;
+        return str_r;
       auto pos = str_r.find_last_not_of( chars_r );
       if ( pos == str_r.npos )
-	str_r.remove_suffix( str_r.size() );
+        str_r.remove_suffix( str_r.size() );
       else if ( (pos = str_r.size()-1-pos) )
-	str_r.remove_suffix( pos );
+        str_r.remove_suffix( pos );
       return str_r;
     }
 
@@ -69,7 +69,7 @@ namespace zypp
     inline std::string_view trim( std::string_view str_r, std::string_view chars_r = blank )
     {
       if ( str_r.empty() )
-	return str_r;
+        return str_r;
       str_r = ltrim( std::move(str_r), chars_r );
       str_r = rtrim( std::move(str_r), chars_r );
       return str_r;
@@ -79,11 +79,11 @@ namespace zypp
     inline std::string_view trim( std::string_view str_r, std::string_view chars_r, TrimFlag trim_r )
     {
       if ( str_r.empty() || trim_r == Trim::notrim )
-	return str_r;
+        return str_r;
       if ( trim_r.testFlag( Trim::left ) )
-	str_r = ltrim( std::move(str_r), chars_r );
+        str_r = ltrim( std::move(str_r), chars_r );
       if ( trim_r.testFlag( Trim::right ) )
-	str_r = rtrim( std::move(str_r), chars_r );
+        str_r = rtrim( std::move(str_r), chars_r );
       return str_r;
     }
     /** \overload Trimming blanks at \a trim_r sides of \a str_r. */

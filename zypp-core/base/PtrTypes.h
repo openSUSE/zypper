@@ -304,7 +304,7 @@ namespace zypp
         {}
 
         RW_pointer & operator=( std::nullptr_t )
-	{ reset(); return *this; }
+        { reset(); return *this; }
 
         void reset()
         { PtrType().swap( _dptr ); }
@@ -341,10 +341,10 @@ namespace zypp
 
       public:
         bool unique() const
-	{ return DTraits().unique( _dptr ); }
+        { return DTraits().unique( _dptr ); }
 
-	long use_count() const
-	{ return DTraits().use_count( _dptr ); }
+        long use_count() const
+        { return DTraits().use_count( _dptr ); }
 
         constPtrType getPtr() const
         { return _dptr; }
@@ -460,11 +460,11 @@ namespace zypp
         typedef typename DTraits::PtrType               PtrType;
         typedef typename DTraits::constPtrType          constPtrType;
 
-	RWCOW_pointer()
-	{}
+        RWCOW_pointer()
+        {}
 
-	RWCOW_pointer( std::nullptr_t )
-	{}
+        RWCOW_pointer( std::nullptr_t )
+        {}
 
         explicit
         RWCOW_pointer( typename PtrType::element_type * dptr )
@@ -477,7 +477,7 @@ namespace zypp
         {}
 
         RWCOW_pointer & operator=( std::nullptr_t )
-	{ reset(); return *this; }
+        { reset(); return *this; }
 
         void reset()
         { PtrType().swap( _dptr ); }
@@ -492,7 +492,7 @@ namespace zypp
         { _dptr.swap( rhs ); }
 
         explicit operator bool() const
-	{ return _dptr.get() != nullptr; }
+        { return _dptr.get() != nullptr; }
 
         const D & operator*() const
         { return *_dptr; };
@@ -514,10 +514,10 @@ namespace zypp
 
       public:
         bool unique() const
-	{ return DTraits().unique( _dptr ); }
+        { return DTraits().unique( _dptr ); }
 
-	long use_count() const
-	{ return DTraits().use_count( _dptr ); }
+        long use_count() const
+        { return DTraits().use_count( _dptr ); }
 
         constPtrType getPtr() const
         { return _dptr; }

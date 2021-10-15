@@ -14,7 +14,7 @@ namespace zyppng {
    * This implements the basic skeleton of ExternalProgram and Process.
    * Taking care of forking the process and setting up stdout and stderr so both
    * implementations can use the same code
-   * 
+   *
    */
   class AbstractSpawnEngine
   {
@@ -48,12 +48,12 @@ namespace zyppng {
 
     /**
      * @returns the pid of the forked process, without checking if the process is
-     *          still running.  
+     *          still running.
      */
     pid_t pid   ( );
 
-    /** 
-     * Kickstart the process, if this returns true it is guaranteed that exec() was successful 
+    /**
+     * Kickstart the process, if this returns true it is guaranteed that exec() was successful
      */
     virtual bool start ( const char *const *argv, int stdin_fd, int stdout_fd, int stderr_fd )  = 0;
 

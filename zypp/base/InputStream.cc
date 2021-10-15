@@ -35,7 +35,7 @@ namespace zypp
     {
       PathInfo p( file_r );
       if ( p.isFile() && filesystem::zipType( file_r ) == filesystem::ZT_NONE )
-	return p.size();
+        return p.size();
       return -1;
     }
 

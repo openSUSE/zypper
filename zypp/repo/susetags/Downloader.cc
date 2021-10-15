@@ -97,21 +97,21 @@ void Downloader::download( MediaSetAccess &media,
       str::smatch what;
       if ( str::regex_match( it->first, what, rx_packages ) )
       {
-	if ( what[4].empty() // packages(.gz)?
-	  || what[4] == "DU"
-	  || what[4] == "en" )
-	{ ; /* always downloaded */ }
-	else if ( what[4] == "FL" )
-	{ continue; /* never downloaded */ }
-	else
-	{
-	  // remember and decide later
-	  availablePackageTranslations[what[4]] = it;
-	  continue;
-	}
+        if ( what[4].empty() // packages(.gz)?
+          || what[4] == "DU"
+          || what[4] == "en" )
+        { ; /* always downloaded */ }
+        else if ( what[4] == "FL" )
+        { continue; /* never downloaded */ }
+        else
+        {
+          // remember and decide later
+          availablePackageTranslations[what[4]] = it;
+          continue;
+        }
       }
       else
-	continue; // discard
+        continue; // discard
     }
     else if ( it->first == "patterns.pat"
               || it->first == "patterns.pat.gz" )
@@ -166,17 +166,17 @@ void Downloader::download( MediaSetAccess &media,
     auto fnc_checkTransaltions( [&]( const Locale & locale_r ) {
       for ( Locale toGet( locale_r ); toGet; toGet = toGet.fallback() )
       {
-	auto it( availablePackageTranslations.find( toGet.code() ) );
-	if ( it != availablePackageTranslations.end() )
-	{
-	  auto mit( it->second );
-	  MIL << "adding job " << mit->first << endl;
+        auto it( availablePackageTranslations.find( toGet.code() ) );
+        if ( it != availablePackageTranslations.end() )
+        {
+          auto mit( it->second );
+          MIL << "adding job " << mit->first << endl;
           auto location = std::move( OnMediaLocation( repoInfo().path() + descr_dir + mit->first, 1 )
                                        .setChecksum( mit->second )
                                        .setDeltafile( search_deltafile(_delta_dir + descr_dir, mit->first) ));
-	  enqueueDigested(location, FileChecker());
-	  break;
-	}
+          enqueueDigested(location, FileChecker());
+          break;
+        }
       }
     });
     for ( const Locale & it : ZConfig::instance().repoRefreshLocales() )

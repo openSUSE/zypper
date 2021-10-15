@@ -43,7 +43,7 @@ namespace zypp
 //	CLASS NAME : SolverQueueItemDelete
 
 class SolverQueueItemDelete : public SolverQueueItem {
-    
+
   private:
 
     std::string _name;
@@ -53,7 +53,7 @@ class SolverQueueItemDelete : public SolverQueueItem {
 
     SolverQueueItemDelete (const ResPool & pool, std::string name, bool soft = false);
     virtual ~SolverQueueItemDelete();
-    
+
     // ---------------------------------- I/O
 
     virtual std::ostream & dumpOn( std::ostream & str ) const;
@@ -63,10 +63,10 @@ class SolverQueueItemDelete : public SolverQueueItem {
 
     // ---------------------------------- accessors
 
-    bool isSoft (void) const { return _soft; }    
+    bool isSoft (void) const { return _soft; }
 
     // ---------------------------------- methods
-    
+
     virtual bool addRule (sat::detail::CQueue & q);
     virtual SolverQueueItem_Ptr copy (void) const;
     virtual int cmp (SolverQueueItem_constPtr item) const;

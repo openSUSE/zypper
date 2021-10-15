@@ -40,9 +40,9 @@ namespace zypp
       static weak_ptr<callback::TempConnect<media::MediaChangeReport> > globalguard;
       if ( condition_r && ! (_guard = globalguard.lock()) )
       {
-	// aquire a new one....
-	_guard.reset( new callback::TempConnect<media::MediaChangeReport>() );
-	globalguard = _guard;
+        // aquire a new one....
+        _guard.reset( new callback::TempConnect<media::MediaChangeReport>() );
+        globalguard = _guard;
       }
     }
   } // namespace media
@@ -114,7 +114,7 @@ namespace zypp
     Target_Ptr ZYppImpl::target() const
     {
       if (! _target)
-	ZYPP_THROW(Exception("Target not initialized."));
+        ZYPP_THROW(Exception("Target not initialized."));
       return _target;
      }
 
@@ -156,13 +156,13 @@ namespace zypp
 
       MIL << "Attempt to commit (" << policy_r << ")" << endl;
       if (! _target)
-	ZYPP_THROW( Exception("Target not initialized.") );
+        ZYPP_THROW( Exception("Target not initialized.") );
 
 
       env::ScopedSet ea { "ZYPP_IS_RUNNING", str::numstring(getpid()).c_str() };
       env::ScopedSet eb;
       if ( _target->chrooted() )
-	eb = env::ScopedSet( "SYSTEMD_OFFLINE", "1" );	// bsc#1118758 - indicate no systemd if chrooted install
+        eb = env::ScopedSet( "SYSTEMD_OFFLINE", "1" );	// bsc#1118758 - indicate no systemd if chrooted install
 
       ZYppCommitResult res = _target->_pimpl->commit( pool(), policy_r );
 

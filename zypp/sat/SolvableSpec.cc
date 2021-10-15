@@ -34,14 +34,14 @@ namespace zypp
     public:
       void addIdent( IdString ident_r )
       {
-	if ( ! ident_r.empty() )
-	  _idents.insert( ident_r );
+        if ( ! ident_r.empty() )
+          _idents.insert( ident_r );
       }
 
       void addProvides( Capability provides_r )
       {
-	if ( ! provides_r.empty() && _provides.insert( provides_r ).second )
-	  setDirty();
+        if ( ! provides_r.empty() && _provides.insert( provides_r ).second )
+          setDirty();
       }
 
       bool addIdenticalInstalledToo() const
@@ -49,19 +49,19 @@ namespace zypp
 
       void addIdenticalInstalledToo( bool yesno_r )
       {
-	if ( yesno_r != _addIdenticalInstalledToo ) {
-	  _addIdenticalInstalledToo = yesno_r;
-	  if ( not _provides.empty() )
-	    setDirty();
-	}
+        if ( yesno_r != _addIdenticalInstalledToo ) {
+          _addIdenticalInstalledToo = yesno_r;
+          if ( not _provides.empty() )
+            setDirty();
+        }
       }
 
       void parse( const C_Str & spec_r )
       {
-	if ( str::hasPrefix( spec_r, "provides:" ) )
-	  addProvides( Capability(spec_r.c_str()+9) );
-	else
-	  addIdent( IdString(spec_r) );
+        if ( str::hasPrefix( spec_r, "provides:" ) )
+          addProvides( Capability(spec_r.c_str()+9) );
+        else
+          addIdent( IdString(spec_r) );
       }
 
 
@@ -76,33 +76,33 @@ namespace zypp
 
       const WhatProvides & cache() const
       {
-	if ( !_cache )
-	{
-	  _cache.reset( new WhatProvides( _provides ) );
-	  if ( _addIdenticalInstalledToo ) {
-	    for ( const auto & solv : *_cache ) {
-	      if ( solv.isSystem() )
-		continue;
-	      auto pi { ui::Selectable::get(solv)->identicalInstalledObj( PoolItem(solv) ) };
-	      if ( pi )
-		_cacheIdenticalInstalled.insert( pi );
-	    }
-	  }
-	}
-	return *_cache;
+        if ( !_cache )
+        {
+          _cache.reset( new WhatProvides( _provides ) );
+          if ( _addIdenticalInstalledToo ) {
+            for ( const auto & solv : *_cache ) {
+              if ( solv.isSystem() )
+                continue;
+              auto pi { ui::Selectable::get(solv)->identicalInstalledObj( PoolItem(solv) ) };
+              if ( pi )
+                _cacheIdenticalInstalled.insert( pi );
+            }
+          }
+        }
+        return *_cache;
       }
 
       bool contains( const sat::Solvable & solv_r ) const
       {
-	if ( _idents.count( solv_r.ident() ) )
-	  return true;
-	if ( needed() ) {
-	  if ( cache().contains( solv_r ) )
-	    return true;
-	  if ( _addIdenticalInstalledToo && _cacheIdenticalInstalled.contains( solv_r ) )
-	    return true;
-	}
-	return false;
+        if ( _idents.count( solv_r.ident() ) )
+          return true;
+        if ( needed() ) {
+          if ( cache().contains( solv_r ) )
+            return true;
+          if ( _addIdenticalInstalledToo && _cacheIdenticalInstalled.contains( solv_r ) )
+            return true;
+        }
+        return false;
       }
 
 
@@ -166,11 +166,11 @@ namespace zypp
     void SolvableSpec::parseFrom( const InputStream & istr_r )
     {
       iostr::simpleParseFile( istr_r,
-			      [this]( int num_r, const std::string & line_r )->bool
-			      {
-				this->parse( line_r );
-				return true;
-			      });
+                              [this]( int num_r, const std::string & line_r )->bool
+                              {
+                                this->parse( line_r );
+                                return true;
+                              });
     }
 
     void SolvableSpec::splitParseFrom( const C_Str & multispec_r )

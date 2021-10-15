@@ -110,8 +110,8 @@ namespace zypp
       {
         PoolItem ret( transactingCandidate() );
         if ( ! ret )
-	  ret = _candidate ? _candidate : defaultCandidate();
-	return ret;
+          ret = _candidate ? _candidate : defaultCandidate();
+        return ret;
       }
 
       /** Set a userCandidate (out of available objects).
@@ -129,8 +129,8 @@ namespace zypp
       {
         for ( const PoolItem & pi : available() )
         {
-	  if ( pi.isBlacklisted() )
-	    continue;
+          if ( pi.isBlacklisted() )
+            continue;
           if ( pi.repository() == repo_r )
             return pi;
         }
@@ -145,13 +145,13 @@ namespace zypp
        */
       PoolItem updateCandidateObj() const
       {
-	PoolItem defaultCand( defaultCandidate() );
+        PoolItem defaultCand( defaultCandidate() );
 
-	// multiversionInstall: This returns the candidate for the last
-	// instance installed. Actually we'd need a list here.
+        // multiversionInstall: This returns the candidate for the last
+        // instance installed. Actually we'd need a list here.
 
-	if ( ! defaultCand || defaultCand.isBlacklisted() )
-	  return PoolItem();
+        if ( ! defaultCand || defaultCand.isBlacklisted() )
+          return PoolItem();
 
         if ( installedEmpty() )
           return defaultCand;
@@ -180,15 +180,15 @@ namespace zypp
       PoolItem highestAvailableVersionObj() const
       {
         PoolItem ret;
-	bool blacklistedOk = false;
+        bool blacklistedOk = false;
         for ( const PoolItem & pi : available() )
         {
-	  if ( !blacklistedOk && pi.isBlacklisted() )
-	  {
-	    if ( ret )
-	      break;	// prefer a not retracted candidate
-	    blacklistedOk = true;
-	  }
+          if ( !blacklistedOk && pi.isBlacklisted() )
+          {
+            if ( ret )
+              break;	// prefer a not retracted candidate
+            blacklistedOk = true;
+          }
           if ( !ret || pi.edition() > ret.edition() )
             ret = pi;
         }
@@ -311,56 +311,56 @@ namespace zypp
       ////////////////////////////////////////////////////////////////////////
       bool hasBlacklisted() const
       { // Blacklisted items are sorted to the end of the available list.
-	return !_availableItems.empty() && _availableItems.rbegin()->isBlacklisted();
+        return !_availableItems.empty() && _availableItems.rbegin()->isBlacklisted();
       }
 
       bool hasBlacklistedInstalled() const
       { // Blacklisted items may be embedded in the installed list.
-	for ( const PoolItem & pi : installed() ) {
-	  if ( pi.isBlacklisted() )
-	    return true;
-	}
-	return false;
+        for ( const PoolItem & pi : installed() ) {
+          if ( pi.isBlacklisted() )
+            return true;
+        }
+        return false;
       }
 
       bool hasRetracted() const
       {
-	for ( const PoolItem & pi : makeIterable( _availableItems.rbegin(), _availableItems.rend() ) ) {
-	  if ( not pi.isBlacklisted() )
-	    break;
-	  if ( pi.isRetracted() )
-	    return true;
-	}
-	return false;
+        for ( const PoolItem & pi : makeIterable( _availableItems.rbegin(), _availableItems.rend() ) ) {
+          if ( not pi.isBlacklisted() )
+            break;
+          if ( pi.isRetracted() )
+            return true;
+        }
+        return false;
       }
 
       bool hasRetractedInstalled() const
       {
-	for ( const PoolItem & pi : installed() ) {
-	  if ( pi.isRetracted() )
-	    return true;
-	}
-	return false;
+        for ( const PoolItem & pi : installed() ) {
+          if ( pi.isRetracted() )
+            return true;
+        }
+        return false;
       }
 
       bool hasPtf() const
       {
-	for ( const PoolItem & pi : makeIterable( _availableItems.rbegin(), _availableItems.rend() ) ) {
-	  if ( not pi.isBlacklisted() )
-	    break;
-	  if ( pi.isPtf() )
-	    return true;
-	}
-	return false;
+        for ( const PoolItem & pi : makeIterable( _availableItems.rbegin(), _availableItems.rend() ) ) {
+          if ( not pi.isBlacklisted() )
+            break;
+          if ( pi.isPtf() )
+            return true;
+        }
+        return false;
       }
 
       bool hasPtfInstalled() const
       {
-	for ( const PoolItem & pi : installed() ) {
-	  if ( pi.isPtf() )
-	    return true;
-	}
-	return false;
+        for ( const PoolItem & pi : installed() ) {
+          if ( pi.isPtf() )
+            return true;
+        }
+        return false;
       }
 
 
@@ -369,12 +369,12 @@ namespace zypp
 
       bool multiversionInstall() const
       {
-	for ( const PoolItem & pi : picklist() )
-	{
-	  if ( pi.multiversionInstall() )
-	    return true;
-	}
-	return false;
+        for ( const PoolItem & pi : picklist() )
+        {
+          if ( pi.multiversionInstall() )
+            return true;
+        }
+        return false;
       }
 
       bool pickInstall( const PoolItem & pi_r, ResStatus::TransactByValue causer_r, bool yesno_r );
@@ -422,17 +422,17 @@ namespace zypp
       /** \copydoc Selectable::hasLocks()const */
       bool hasLocks() const
       {
-	for ( const PoolItem & pi : available() )
-	{
-	  if ( pi.status().isLocked() )
-	    return true;
-	}
+        for ( const PoolItem & pi : available() )
+        {
+          if ( pi.status().isLocked() )
+            return true;
+        }
         for ( const PoolItem & pi : installed() )
-	{
-	  if ( pi.status().isLocked() )
-	    return true;
-	}
-	return false;
+        {
+          if ( pi.status().isLocked() )
+            return true;
+        }
+        return false;
       }
 
     private:

@@ -176,7 +176,7 @@ BOOST_AUTO_TEST_CASE(RepVarExpand)
 }
 
 void varInAuthExpect( const Url & url_r, const std::string & expHost_r, const std::string & expPort_r, const std::string & expPath_r,
-		      const std::string & user_r = std::string(), const std::string & pass_r = std::string() )
+                      const std::string & user_r = std::string(), const std::string & pass_r = std::string() )
 {
   BOOST_CHECK_EQUAL( url_r.getHost(),     expHost_r );
   BOOST_CHECK_EQUAL( url_r.getPort(),     expPort_r );
@@ -223,16 +223,16 @@ BOOST_AUTO_TEST_CASE(replace_text)
   BOOST_CHECK_NO_THROW( Url("ftp://site.org/${arch:+somearch}/?arch=${arch:+somearch}") );
 
   BOOST_CHECK_EQUAL(replacer2(Url("ftp://user:secret@site.org/$arch/")).asCompleteString(),
-		    "ftp://user:secret@site.org/i686/");
+                    "ftp://user:secret@site.org/i686/");
 
   BOOST_CHECK_EQUAL(replacer2(Url("http://user:my$arch@site.org/$basearch/")).asCompleteString(),
-		    "http://user:my$arch@site.org/i386/");
+                    "http://user:my$arch@site.org/i386/");
 
   BOOST_CHECK_EQUAL(replacer2(Url("http://site.org/update/?arch=$arch")).asCompleteString(),
-		    "http://site.org/update/?arch=i686");
+                    "http://site.org/update/?arch=i686");
 
   BOOST_CHECK_EQUAL(replacer2(Url("http://site.org/update/$releasever/?arch=$arch")).asCompleteString(),
-		    "http://site.org/update/13.2/?arch=i686");
+                    "http://site.org/update/13.2/?arch=i686");
 
   // - bsc#1067605: Allow VAR in Url authority
   // fake some host name via $arch

@@ -39,13 +39,13 @@ namespace zypp
        **/
       class Testcase
       {
-	private:
-	  std::string dumpPath; // Path of the generated testcase
+        private:
+          std::string dumpPath; // Path of the generated testcase
 
-	public:
-	  Testcase();
-	  Testcase( const std::string & path );
-	  ~Testcase();
+        public:
+          Testcase();
+          Testcase( const std::string & path );
+          ~Testcase();
 
           bool createTestcase( Resolver & resolver, bool dumpPool = true, bool runSolver = true );
       };

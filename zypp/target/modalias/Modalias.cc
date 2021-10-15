@@ -44,68 +44,68 @@ namespace zypp
       inline bool isBlackListed( const Pathname & dir_r, const char * file_r )
       {
 #define PATH_IS( D, F ) ( ::strcmp( file_r, F ) == 0 && ::strcmp( dir_r.c_str(), D ) == 0 )
-	switch ( file_r[0] )
-	{
-	  case 'm':
-	    return PATH_IS( "/sys/devices/system", "memory" );	// bnc#824110: huge tree for systems with large RAM
-	    break;
-	}
-	return false;
+        switch ( file_r[0] )
+        {
+          case 'm':
+            return PATH_IS( "/sys/devices/system", "memory" );	// bnc#824110: huge tree for systems with large RAM
+            break;
+        }
+        return false;
 #undef PATH_IS
       }
 
       void foreach_file_recursive( const Pathname & dir_r, std::set<std::string> & arg_r )
       {
-	AutoDispose<DIR *> dir( ::opendir( dir_r.c_str() ), ::closedir );
-	if ( ! dir )
-	  return;
+        AutoDispose<DIR *> dir( ::opendir( dir_r.c_str() ), ::closedir );
+        if ( ! dir )
+          return;
 
-	struct dirent * dirent = NULL;
-	while ( (dirent = ::readdir(dir)) != NULL )
-	{
-	  if ( dirent->d_name[0] == '.' )
-	    continue;
+        struct dirent * dirent = NULL;
+        while ( (dirent = ::readdir(dir)) != NULL )
+        {
+          if ( dirent->d_name[0] == '.' )
+            continue;
 
-	  if ( isBlackListed( dir_r, dirent->d_name ) )
-	    continue;
+          if ( isBlackListed( dir_r, dirent->d_name ) )
+            continue;
 
-	  Pathname path;	// lazy init as needed
-	  unsigned char d_type = dirent->d_type;
-	  if ( d_type == DT_UNKNOWN )
-	  {
-	    path = dir_r/dirent->d_name;
-	    PathInfo pi( path, PathInfo::LSTAT );
-	    if ( pi.isDir() )
-	      d_type = DT_DIR;
-	    else if ( pi.isFile() )
-	      d_type = DT_REG;
-	  }
+          Pathname path;	// lazy init as needed
+          unsigned char d_type = dirent->d_type;
+          if ( d_type == DT_UNKNOWN )
+          {
+            path = dir_r/dirent->d_name;
+            PathInfo pi( path, PathInfo::LSTAT );
+            if ( pi.isDir() )
+              d_type = DT_DIR;
+            else if ( pi.isFile() )
+              d_type = DT_REG;
+          }
 
-	  if ( d_type == DT_DIR )
-	  {
-	    if ( path.empty() )
-	      path = dir_r/dirent->d_name;
-	    foreach_file_recursive( path, arg_r );
-	  }
-	  else if ( d_type == DT_REG && ::strcmp( dirent->d_name, "modalias" ) == 0 )
-	  {
-	    if ( path.empty() )
-	      path = dir_r/dirent->d_name;
-	    // read modalias line from file
-	    std::ifstream str( path.c_str() );
-	    std::string line( iostr::getline( str ) );
-	    if ( ! line.empty() )
-	      arg_r.insert( line );
-	  }
-	}
+          if ( d_type == DT_DIR )
+          {
+            if ( path.empty() )
+              path = dir_r/dirent->d_name;
+            foreach_file_recursive( path, arg_r );
+          }
+          else if ( d_type == DT_REG && ::strcmp( dirent->d_name, "modalias" ) == 0 )
+          {
+            if ( path.empty() )
+              path = dir_r/dirent->d_name;
+            // read modalias line from file
+            std::ifstream str( path.c_str() );
+            std::string line( iostr::getline( str ) );
+            if ( ! line.empty() )
+              arg_r.insert( line );
+          }
+        }
       }
 
       /** Recursively scan for modalias files and scan them to \a arg. */
       void foreach_file_recursive( const Pathname & dir_r, Modalias::ModaliasList & arg_r )
       {
-	std::set<std::string> arg;	// we want the aliases to be unified (the public API uses a vector)
-	foreach_file_recursive( dir_r, arg );
-	arg_r.insert( arg_r.end(), arg.begin(), arg.end() );
+        std::set<std::string> arg;	// we want the aliases to be unified (the public API uses a vector)
+        foreach_file_recursive( dir_r, arg );
+        arg_r.insert( arg_r.end(), arg.begin(), arg.end() );
       }
     } // namespace
     ///////////////////////////////////////////////////////////////////
@@ -120,33 +120,33 @@ namespace zypp
       /** Ctor. */
       Impl()
       {
-	const char * dir = getenv("ZYPP_MODALIAS_SYSFS");
-	if ( dir )
-	{
-	  PathInfo pi( dir );
-	  if (  pi.isFile() )
-	  {
-	    // Debug/testcases:
-	    //   find /sys/ -type f -name modalias -print0 | xargs -0 cat >/tmp/modaliases
-	    //   ZYPP_MODALIAS_SYSFS=/tmp/modaliases
-	    DBG << "Using $ZYPP_MODALIAS_SYSFS modalias file: " << dir << endl;
-	    iostr::forEachLine( InputStream( pi.path() ),
-	                        [&]( int num_r, std::string line_r )->bool
-	                        {
-		                  this->_modaliases.push_back( line_r );
-			          return true;
-				} );
-	    return;
-	  }
-	  DBG << "Using $ZYPP_MODALIAS_SYSFS: " << dir << endl;
-	}
-	else
-	{
-	  dir = "/sys";
-	  DBG << "Using /sys directory." << endl;
-	}
+        const char * dir = getenv("ZYPP_MODALIAS_SYSFS");
+        if ( dir )
+        {
+          PathInfo pi( dir );
+          if (  pi.isFile() )
+          {
+            // Debug/testcases:
+            //   find /sys/ -type f -name modalias -print0 | xargs -0 cat >/tmp/modaliases
+            //   ZYPP_MODALIAS_SYSFS=/tmp/modaliases
+            DBG << "Using $ZYPP_MODALIAS_SYSFS modalias file: " << dir << endl;
+            iostr::forEachLine( InputStream( pi.path() ),
+                                [&]( int num_r, std::string line_r )->bool
+                                {
+                                  this->_modaliases.push_back( line_r );
+                                  return true;
+                                } );
+            return;
+          }
+          DBG << "Using $ZYPP_MODALIAS_SYSFS: " << dir << endl;
+        }
+        else
+        {
+          dir = "/sys";
+          DBG << "Using /sys directory." << endl;
+        }
 
-	foreach_file_recursive( dir, _modaliases );
+        foreach_file_recursive( dir, _modaliases );
       }
 
       /** Dtor. */
@@ -169,15 +169,15 @@ namespace zypp
        */
       bool query( const char * cap_r ) const
       {
-	if ( cap_r && *cap_r )
-	{
-	  for_( it, _modaliases.begin(), _modaliases.end() )
-	  {
-	    if ( fnmatch( cap_r, (*it).c_str(), 0 ) == 0 )
-	      return true;
-	  }
-	}
-	return false;
+        if ( cap_r && *cap_r )
+        {
+          for_( it, _modaliases.begin(), _modaliases.end() )
+          {
+            if ( fnmatch( cap_r, (*it).c_str(), 0 ) == 0 )
+              return true;
+          }
+        }
+        return false;
       }
 
     public:
@@ -187,8 +187,8 @@ namespace zypp
       /** Offer default Impl. */
       static shared_ptr<Impl> nullimpl()
       {
-	static shared_ptr<Impl> _nullimpl( new Impl );
-	return _nullimpl;
+        static shared_ptr<Impl> _nullimpl( new Impl );
+        return _nullimpl;
       }
 
     };

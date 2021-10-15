@@ -40,18 +40,18 @@ namespace zypp {
     //                Thus attach_point_hint_r is ignored.
     //
     MediaDIR::MediaDIR( const Url &      url_r,
-    			const Pathname & /*attach_point_hint_r*/ )
+                        const Pathname & /*attach_point_hint_r*/ )
         : MediaHandler( url_r, url_r.getPathName(),
-    		    "/",    // urlpath below attachpoint
-    		    false ) // does_download
+                    "/",    // urlpath below attachpoint
+                    false ) // does_download
     {
-	MIL << "MediaDIR::MediaDIR(" << url_r << ")" << endl;
-	if( !url_r.getHost().empty())
-	{
-	  ZYPP_THROW(MediaBadUrlException(url_r,
-	    "Hostname not allowed in the Url"
-	  ));
-	}
+        MIL << "MediaDIR::MediaDIR(" << url_r << ")" << endl;
+        if( !url_r.getHost().empty())
+        {
+          ZYPP_THROW(MediaBadUrlException(url_r,
+            "Hostname not allowed in the Url"
+          ));
+        }
     }
 
     ///////////////////////////////////////////////////////////////////
@@ -65,7 +65,7 @@ namespace zypp {
     void MediaDIR::attachTo(bool next)
     {
       if(next)
-	ZYPP_THROW(MediaNotSupportedException(url()));
+        ZYPP_THROW(MediaNotSupportedException(url()));
 
       // fetch attach point from url again if needed ...
       // it may happen that attachPointHint (and attachPoint())
@@ -73,20 +73,20 @@ namespace zypp {
       // not existed while the handler was constructed.
       if( attachPoint().empty() && !url().getPathName().empty())
       {
-	Pathname real( getRealPath(url().getPathName()));
+        Pathname real( getRealPath(url().getPathName()));
 
-	PathInfo adir( real);
-	if( adir.isDir())
-	{
-	  // set attachpoint only if the dir exists
-	  setAttachPoint( real, false);
-	}
-	else
-	{
+        PathInfo adir( real);
+        if( adir.isDir())
+        {
+          // set attachpoint only if the dir exists
+          setAttachPoint( real, false);
+        }
+        else
+        {
           ZYPP_THROW(MediaBadUrlException(url(),
             "Specified path '" + url().getPathName() + "' is not a directory"
-	  ));
-	}
+          ));
+        }
       }
 
       // attach point is same as source path... we do not mount here
@@ -94,14 +94,14 @@ namespace zypp {
       {
         ZYPP_THROW(MediaBadUrlException(url(),
           "The media URL does not provide any useable directory path"
-	));
+        ));
       }
       else
       if(!PathInfo(attachPoint()).isDir())
       {
         ZYPP_THROW(MediaBadUrlException(url(),
-	  "Specified path '" + attachPoint().asString() + "' is not a directory"
-	));
+          "Specified path '" + attachPoint().asString() + "' is not a directory"
+        ));
       }
 
       MediaSourceRef media(new MediaSource("dir", attachPoint().asString()));
@@ -156,7 +156,7 @@ namespace zypp {
     //	DESCRIPTION : Asserted that media is attached and retlist is empty.
     //
     void MediaDIR::getDirInfo( std::list<std::string> & retlist,
-    			       const Pathname & dirname, bool dots ) const
+                               const Pathname & dirname, bool dots ) const
     {
       MediaHandler::getDirInfo( retlist, dirname, dots );
     }
@@ -170,7 +170,7 @@ namespace zypp {
     //	DESCRIPTION : Asserted that media is attached and retlist is empty.
     //
     void MediaDIR::getDirInfo( filesystem::DirContent & retlist,
-    			       const Pathname & dirname, bool dots ) const
+                               const Pathname & dirname, bool dots ) const
     {
       MediaHandler::getDirInfo( retlist, dirname, dots );
     }

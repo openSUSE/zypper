@@ -149,23 +149,23 @@ namespace zypp
     private:
       void _assign( std::string && rhs )
       {
-	_fullQuerytsr = std::move(rhs);
+        _fullQuerytsr = std::move(rhs);
 
-	static constexpr std::string_view tag { "proxypass=" };
-	if ( _fullQuerytsr.find( tag ) != std::string::npos )
-	{
-	  std::string safe;
-	  strv::split( _fullQuerytsr, "&", [&safe]( std::string_view val ) {
-	    if ( val.substr( 0, tag.size()  ) != tag ) {
-	      if ( ! safe.empty() )
-		safe += "&";
-	      safe += val;
-	    }
-	  });
-	  _safeQuerytsr = std::move(safe);
-	}
-	else
-	  _safeQuerytsr = std::nullopt;
+        static constexpr std::string_view tag { "proxypass=" };
+        if ( _fullQuerytsr.find( tag ) != std::string::npos )
+        {
+          std::string safe;
+          strv::split( _fullQuerytsr, "&", [&safe]( std::string_view val ) {
+            if ( val.substr( 0, tag.size()  ) != tag ) {
+              if ( ! safe.empty() )
+                safe += "&";
+              safe += val;
+            }
+          });
+          _safeQuerytsr = std::move(safe);
+        }
+        else
+          _safeQuerytsr = std::nullopt;
       }
     private:
       std::string                _fullQuerytsr;	///<
@@ -207,7 +207,7 @@ namespace zypp
     namespace // anonymous
     {
 
-			// -------------------------------------------------------------
+                        // -------------------------------------------------------------
       inline void
       checkUrlData(const std::string &data,
                    const std::string &name,
@@ -298,9 +298,9 @@ namespace zypp
                   const std::string &fragment)
     {
       if ( scheme.empty() && *pathdata.c_str() == '/' )
-	setScheme("file");
+        setScheme("file");
       else
-	setScheme(scheme);
+        setScheme(scheme);
 
       setAuthority(authority);
       setPathData(pathdata);
@@ -619,7 +619,7 @@ namespace zypp
 
       if( opts.has(ViewOptions::WITH_QUERY_STR))
       {
-	const std::string & querystr { getQueryString( opts ) };	// full or safe depending on opts
+        const std::string & querystr { getQueryString( opts ) };	// full or safe depending on opts
         if( !querystr.empty() )
         {
           url += "?" + querystr;

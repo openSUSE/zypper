@@ -165,7 +165,7 @@ namespace zypp
 
       byIdent_iterator byIdentBegin( const ByIdent & ident_r ) const
       {
-	return make_transform_iterator( id2item().equal_range( ident_r.get() ).first,
+        return make_transform_iterator( id2item().equal_range( ident_r.get() ).first,
                                         pool::PoolTraits::Id2ItemValueSelector() );
       }
 
@@ -196,7 +196,7 @@ namespace zypp
 
       byIdent_iterator byIdentEnd( const ByIdent & ident_r ) const
       {
-	return make_transform_iterator( id2item().equal_range( ident_r.get() ).second,
+        return make_transform_iterator( id2item().equal_range( ident_r.get() ).second,
                                         pool::PoolTraits::Id2ItemValueSelector() );
       }
 
@@ -313,20 +313,20 @@ namespace zypp
       class EstablishedStates
       {
       public:
-	~EstablishedStates();
-	/** Map holding pseudo installed items where current and established status differ. */
-	typedef std::map<PoolItem,ResStatus::ValidateValue> ChangedPseudoInstalled;
-	/** Return all pseudo installed items whose current state differs from the established one */
-	ChangedPseudoInstalled changedPseudoInstalled() const;
+        ~EstablishedStates();
+        /** Map holding pseudo installed items where current and established status differ. */
+        typedef std::map<PoolItem,ResStatus::ValidateValue> ChangedPseudoInstalled;
+        /** Return all pseudo installed items whose current state differs from the established one */
+        ChangedPseudoInstalled changedPseudoInstalled() const;
       private:
-	class Impl;
-	RW_pointer<Impl> _pimpl;
+        class Impl;
+        RW_pointer<Impl> _pimpl;
       private:
-	friend class pool::PoolImpl;
-	/** Factory: \ref ResPool::establishedStates */
-	EstablishedStates( shared_ptr<Impl> pimpl_r )
-	: _pimpl { pimpl_r }
-	{}
+        friend class pool::PoolImpl;
+        /** Factory: \ref ResPool::establishedStates */
+        EstablishedStates( shared_ptr<Impl> pimpl_r )
+        : _pimpl { pimpl_r }
+        {}
       };
       ///////////////////////////////////////////////////////////////////
 
