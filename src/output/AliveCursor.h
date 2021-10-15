@@ -8,13 +8,13 @@ class AliveCursor
 {
   public:
   friend std::ostream & operator<<( std::ostream & str, const AliveCursor & obj );
-  
+
   AliveCursor() : _current('-')
   {}
-  
+
   char current() const
   { return _current; }
-  
+
   void increase()
   {
     switch ( _current )
@@ -33,25 +33,25 @@ class AliveCursor
       break;
     }
   }
-  
+
   AliveCursor & operator++()
   {
     increase();
     return *this;
   }
-  
+
   AliveCursor & operator++(int)
   {
     increase();
     return *this;
   }
-  
+
   AliveCursor & done()
   {
     _current = '*';
     return *this;
   }
-  
+
   private:
   char _current;
 };

@@ -42,48 +42,48 @@ std::string SolverRequester::Feedback::asUserString( const SolverRequester::Opti
     case NOT_FOUND_NAME:
       if (_reqpkg.repo_alias.empty() && opts.from_repos.empty())
       {
-	if ( split.kind() == ResKind::package )
-	  return str::form(_("Package '%s' not found."), _reqpkg.orig_str.c_str() );
-	else if ( split.kind() == ResKind::patch )
-	  return str::form(_("Patch '%s' not found."), _reqpkg.orig_str.c_str() );
-	else if ( split.kind() == ResKind::product )
-	  return str::form(_("Product '%s' not found."), _reqpkg.orig_str.c_str() );
-	else if ( split.kind() == ResKind::pattern )
-	  return str::form(_("Pattern '%s' not found."), _reqpkg.orig_str.c_str() );
-	else if ( split.kind() == ResKind::srcpackage )
-	  return str::form(_("Source package '%s' not found."), _reqpkg.orig_str.c_str() );
-	else // just in case
-	  return str::form(_("Object '%s' not found."), _reqpkg.orig_str.c_str() );
+        if ( split.kind() == ResKind::package )
+          return str::form(_("Package '%s' not found."), _reqpkg.orig_str.c_str() );
+        else if ( split.kind() == ResKind::patch )
+          return str::form(_("Patch '%s' not found."), _reqpkg.orig_str.c_str() );
+        else if ( split.kind() == ResKind::product )
+          return str::form(_("Product '%s' not found."), _reqpkg.orig_str.c_str() );
+        else if ( split.kind() == ResKind::pattern )
+          return str::form(_("Pattern '%s' not found."), _reqpkg.orig_str.c_str() );
+        else if ( split.kind() == ResKind::srcpackage )
+          return str::form(_("Source package '%s' not found."), _reqpkg.orig_str.c_str() );
+        else // just in case
+          return str::form(_("Object '%s' not found."), _reqpkg.orig_str.c_str() );
       }
       else
       {
-	if ( split.kind() == ResKind::package )
-	  return str::form(_("Package '%s' not found in specified repositories."), _reqpkg.orig_str.c_str());
-	else if ( split.kind() == ResKind::patch )
-	  return str::form(_("Patch '%s' not found in specified repositories."), _reqpkg.orig_str.c_str());
-	else if ( split.kind() == ResKind::product )
-	  return str::form(_("Product '%s' not found in specified repositories."), _reqpkg.orig_str.c_str());
-	else if ( split.kind() == ResKind::pattern )
-	  return str::form(_("Pattern '%s' not found in specified repositories."), _reqpkg.orig_str.c_str());
-	else if ( split.kind() == ResKind::srcpackage )
-	  return str::form(_("Source package '%s' not found in specified repositories."), _reqpkg.orig_str.c_str());
-	else // just in case
-	  return str::form(_("Object '%s' not found in specified repositories."), _reqpkg.orig_str.c_str());
+        if ( split.kind() == ResKind::package )
+          return str::form(_("Package '%s' not found in specified repositories."), _reqpkg.orig_str.c_str());
+        else if ( split.kind() == ResKind::patch )
+          return str::form(_("Patch '%s' not found in specified repositories."), _reqpkg.orig_str.c_str());
+        else if ( split.kind() == ResKind::product )
+          return str::form(_("Product '%s' not found in specified repositories."), _reqpkg.orig_str.c_str());
+        else if ( split.kind() == ResKind::pattern )
+          return str::form(_("Pattern '%s' not found in specified repositories."), _reqpkg.orig_str.c_str());
+        else if ( split.kind() == ResKind::srcpackage )
+          return str::form(_("Source package '%s' not found in specified repositories."), _reqpkg.orig_str.c_str());
+        else // just in case
+          return str::form(_("Object '%s' not found in specified repositories."), _reqpkg.orig_str.c_str());
       }
     case NOT_FOUND_CAP:
     {
       // translators: meaning a package %s or provider of capability %s
       std::string ret( str::form(_("No provider of '%s' found."), _reqpkg.orig_str.c_str() ) );
       if ( _reqpkg.orig_str.find("debuginfo") != std::string::npos )
-	ret += " ['--plus-content debug'?]";
+        ret += " ['--plus-content debug'?]";
       return ret;
     }
 
     case NOT_INSTALLED:
       if ( _reqpkg.orig_str.find_first_of("?*") != std::string::npos ) // wildcards used
-	return str::form(_("No package matching '%s' is installed."), _reqpkg.orig_str.c_str() );
+        return str::form(_("No package matching '%s' is installed."), _reqpkg.orig_str.c_str() );
       else
-	return str::form(_("Package '%s' is not installed."), _reqpkg.orig_str.c_str() );
+        return str::form(_("Package '%s' is not installed."), _reqpkg.orig_str.c_str() );
 
     case NO_INSTALLED_PROVIDER:
       // translators: meaning provider of capability %s
@@ -92,27 +92,27 @@ std::string SolverRequester::Feedback::asUserString( const SolverRequester::Opti
     case ALREADY_INSTALLED:
       // TODO Package/Pattern/Patch/Product
       if ( _objinst->name() == split.name() )
-	return str::form(_("'%s' is already installed."), _reqpkg.parsed_cap.asString().c_str() );
+        return str::form(_("'%s' is already installed."), _reqpkg.parsed_cap.asString().c_str() );
       else
-	// translators: %s are package names
-	return str::form( _("'%s' providing '%s' is already installed."),
-			  _objinst->name().c_str(), _reqpkg.parsed_cap.asString().c_str() );
+        // translators: %s are package names
+        return str::form( _("'%s' providing '%s' is already installed."),
+                          _objinst->name().c_str(), _reqpkg.parsed_cap.asString().c_str() );
 
     case NO_UPD_CANDIDATE:
     {
       PoolItem highest = ui::asSelectable()(_objinst)->highestAvailableVersionObj();
       if ( highest  && ( identical(_objinst, highest) || _objinst->edition() >= highest->edition() ) )
-	return str::form( _("No update candidate for '%s'. The highest available version is already installed."),
-			  _objinst.asString().c_str() );
+        return str::form( _("No update candidate for '%s'. The highest available version is already installed."),
+                          _objinst.asString().c_str() );
       else
-	return str::form(_("No update candidate for '%s'."), _objinst->name().c_str() );
+        return str::form(_("No update candidate for '%s'."), _objinst->name().c_str() );
     }
 
     case UPD_CANDIDATE_USER_RESTRICTED:
     {
       PoolItem highest = ui::asSelectable()(_objsel)->highestAvailableVersionObj();
       return str::form(_("There is an update candidate '%s' for '%s', but it does not match the specified version, architecture, or repository."),
-		       highest.asString().c_str(), _objinst.asString().c_str() );
+                       highest.asString().c_str(), _objinst.asString().c_str() );
     }
 
     case UPD_CANDIDATE_CHANGES_VENDOR:
@@ -121,7 +121,7 @@ std::string SolverRequester::Feedback::asUserString( const SolverRequester::Opti
       std::ostringstream cmdhint;
       cmdhint << "zypper install " << highest.asString();
       return str::form(_("There is an update candidate for '%s' from vendor '%s', while the current vendor is '%s'. Use '%s' to install this candidate."),
-		       _objinst->name().c_str(), highest->vendor().c_str(), _objinst->vendor().c_str(), cmdhint.str().c_str() );
+                       _objinst->name().c_str(), highest->vendor().c_str(), _objinst->vendor().c_str(), cmdhint.str().c_str() );
     }
 
     case UPD_CANDIDATE_HAS_LOWER_PRIO:
@@ -130,7 +130,7 @@ std::string SolverRequester::Feedback::asUserString( const SolverRequester::Opti
       std::ostringstream cmdhint;
       cmdhint << "zypper install " << highest->name() << "-" << highest->edition() << "." << highest->arch();
       return str::form(_("There is an update candidate for '%s', but it comes from a repository with a lower priority. Use '%s' to install this candidate."),
-		       _objinst->name().c_str(), cmdhint.str().c_str() );
+                       _objinst->name().c_str(), cmdhint.str().c_str() );
     }
 
     case UPD_CANDIDATE_IS_LOCKED:
@@ -140,13 +140,13 @@ std::string SolverRequester::Feedback::asUserString( const SolverRequester::Opti
       cmdhint << "zypper removelock " << highest->name();
 
       return str::form(_("There is an update candidate for '%s', but it is locked. Use '%s' to unlock it."),
-		       _objinst->name().c_str(), cmdhint.str().c_str() );
+                       _objinst->name().c_str(), cmdhint.str().c_str() );
     }
 
     case NOT_IN_REPOS:
     {
       return str::form(_("Package '%s' is not available in your repositories. Cannot reinstall, upgrade, or downgrade."),
-		       _objinst->name().c_str() );
+                       _objinst->name().c_str() );
     }
 
     case SELECTED_IS_OLDER:
@@ -156,7 +156,7 @@ std::string SolverRequester::Feedback::asUserString( const SolverRequester::Opti
 
       std::ostringstream msg;
       msg << str::form(_("The selected package '%s' from repository '%s' has lower version than the installed one."),
-		       _objsel.asString().c_str(), _objsel.repoInfo().asUserString().c_str() );
+                       _objsel.asString().c_str(), _objsel.repoInfo().asUserString().c_str() );
       msg << " ";
       // translators: %s = "zypper install --oldpackage package-version.arch"
       msg << str::form(_("Use '%s' to force installation of the package."), cmdhint.str().c_str() );
@@ -179,9 +179,9 @@ std::string SolverRequester::Feedback::asUserString( const SolverRequester::Opti
     {
       const std::string & pname( pIdent( _objsel ) );
       return( str::Format(_("Patch '%1%' is optional. Use '%2%' to install it, or '%3%' to include all optional patches."))
-	      % pname
-	      % ( "zypper in patch:" + _objsel->name() )
-	      % "--with-optional" ).str();
+              % pname
+              % ( "zypper in patch:" + _objsel->name() )
+              % "--with-optional" ).str();
     }
 
     case PATCH_UNWANTED:
@@ -190,48 +190,48 @@ std::string SolverRequester::Feedback::asUserString( const SolverRequester::Opti
       std::string cmd1 = "zypper in --force patch:" + _objsel->name();
       std::string cmd2 = "zypper rl patch:" + _objsel->name();
       return str::form(_("Patch '%s' is locked. Use '%s' to install it, or unlock it using '%s'."),
-		       pname.c_str(), cmd1.c_str(), cmd2.c_str() );
+                       pname.c_str(), cmd1.c_str(), cmd2.c_str() );
     }
 
     case PATCH_WRONG_CAT:
     {
       const std::string & pname( pIdent( _objsel ) );
       return str::form(_("Patch '%s' is not in the specified category."),
-		       pname.c_str() );
+                       pname.c_str() );
     }
 
     case PATCH_WRONG_SEV:
     {
       const std::string & pname( pIdent( _objsel ) );
       return str::form(_("Patch '%s' has not the specified severity."),
-		       pname.c_str() );
+                       pname.c_str() );
     }
 
     case PATCH_TOO_NEW:
     {
       const std::string & pname( pIdent( _objsel ) );
       return str::form(_("Patch '%s' was issued after the specified date."),
-		       pname.c_str() );
+                       pname.c_str() );
     }
 
     case SET_TO_INSTALL:
       return str::form(_("Selecting '%s' from repository '%s' for installation."),
-		       _objsel.asString().c_str(), _objsel.repoInfo().asUserString().c_str() );
+                       _objsel.asString().c_str(), _objsel.repoInfo().asUserString().c_str() );
 
     case FORCED_INSTALL:
       return str::form(_("Forcing installation of '%s' from repository '%s'."),
-		       _objsel.asString().c_str(), _objsel.repoInfo().asUserString().c_str() );
+                       _objsel.asString().c_str(), _objsel.repoInfo().asUserString().c_str() );
 
     case SET_TO_REMOVE:
       return str::form(_("Selecting '%s' for removal."),
-		       _objsel.asString().c_str() );
+                       _objsel.asString().c_str() );
 
     case INSTALLED_LOCKED:
     {
       std::ostringstream cmdhint;
       cmdhint << "zypper removelock " << _objsel->name();
       return str::form(_("'%s' is locked. Use '%s' to unlock it."),
-		       _objsel->name().c_str(), cmdhint.str().c_str() );
+                       _objsel->name().c_str(), cmdhint.str().c_str() );
     }
 
     case ADDED_REQUIREMENT:
@@ -258,9 +258,9 @@ void SolverRequester::Feedback::print( Out & out, const SolverRequester::Options
       std::string detail;
       if ( !_userdata.empty() )	// matches with different case; typo?
       {
-	detail = "- ";
-	// translators: %1% expands to a single package name or a ','-separated enumeration of names.
-	detail += str::Format(_("Did you mean %1%?")) % _userdata;
+        detail = "- ";
+        // translators: %1% expands to a single package name or a ','-separated enumeration of names.
+        detail += str::Format(_("Did you mean %1%?")) % _userdata;
       }
       out.error( asUserString(opts), detail );
       break;

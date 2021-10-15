@@ -6,7 +6,7 @@
 \*---------------------------------------------------------------------------*/
 
 /** \file PackageArgs.h
- * 
+ *
  */
 
 #ifndef ZYPPER_PACKAGEARGS_H_
@@ -63,8 +63,8 @@ public:
 public:
   /** Takes arguments as a vector of strings */
   PackageArgs( const std::vector<std::string> & args,
-	       const ResKind & kind = ResKind::package,
-	       const Options & opts = Options() );
+               const ResKind & kind = ResKind::package,
+               const Options & opts = Options() );
 
   ~PackageArgs() {}
 

@@ -41,8 +41,8 @@ namespace zypp
     {
       if ( file_r == "repomd.xml" || file_r == "content" )
       {
-	// translator: %1% is a file name
-	Zypper::instance().out().notePar( 4, str::Format(_("File '%1%' is the repositories master index file. It ensures the integrity of the whole repo.") ) % file_r );
+        // translator: %1% is a file name
+        Zypper::instance().out().notePar( 4, str::Format(_("File '%1%' is the repositories master index file. It ensures the integrity of the whole repo.") ) % file_r );
       }
     }
 
@@ -61,36 +61,36 @@ namespace zypp
       Zypper & zypper = Zypper::instance();
       if ( zypper.out().type() == Out::TYPE_XML )
       {
-	{
-	  xmlout::Node parent( str, "gpgkey-info", xmlout::Node::optionalContent );
+        {
+          xmlout::Node parent( str, "gpgkey-info", xmlout::Node::optionalContent );
 
-	  if ( !context.empty() )
-	  {
-	    dumpAsXmlOn( *parent, context.repoInfo().asUserString(), "repository" );
-	  }
-	  dumpAsXmlOn( *parent, key.name(), "key-name" );
-	  dumpAsXmlOn( *parent, key.fingerprint(), "key-fingerprint" );
-	  dumpAsXmlOn( *parent, key.algoName(), "key-algorithm" );
-	  dumpAsXmlOn( *parent, key.created(), "key-created" );
-	  dumpAsXmlOn( *parent, key.expires(), "key-expires" );
-	  dumpAsXmlOn( *parent, key.rpmName(), "rpm-name" );
-	}
-	return str;
+          if ( !context.empty() )
+          {
+            dumpAsXmlOn( *parent, context.repoInfo().asUserString(), "repository" );
+          }
+          dumpAsXmlOn( *parent, key.name(), "key-name" );
+          dumpAsXmlOn( *parent, key.fingerprint(), "key-fingerprint" );
+          dumpAsXmlOn( *parent, key.algoName(), "key-algorithm" );
+          dumpAsXmlOn( *parent, key.created(), "key-created" );
+          dumpAsXmlOn( *parent, key.expires(), "key-expires" );
+          dumpAsXmlOn( *parent, key.rpmName(), "rpm-name" );
+        }
+        return str;
       }
 
       Table t;
       t.lineStyle( none );
       if ( !context.empty() )
       {
-	t << ( TableRow() << "" << _("Repository:") << context.repoInfo().asUserString() );
+        t << ( TableRow() << "" << _("Repository:") << context.repoInfo().asUserString() );
       }
       t << ( TableRow() << "" << _("Key Fingerprint:") << str::gapify( key.fingerprint(), 4 ) )
-	<< ( TableRow() << "" << _("Key Name:") << key.name() )
-	<< ( TableRow() << "" << _("Key Algorithm:") << key.algoName() )
-	<< ( TableRow() << "" << _("Key Created:") << key.created() )
-	<< ( TableRow() << "" << _("Key Expires:") << key.expiresAsString() );
+        << ( TableRow() << "" << _("Key Name:") << key.name() )
+        << ( TableRow() << "" << _("Key Algorithm:") << key.algoName() )
+        << ( TableRow() << "" << _("Key Created:") << key.created() )
+        << ( TableRow() << "" << _("Key Expires:") << key.expiresAsString() );
       for ( const PublicSubkeyData & sub : key.subkeys() )
-	t << ( TableRow() << "" << _("Subkey:") << sub.asString() );
+        t << ( TableRow() << "" << _("Subkey:") << sub.asString() );
       t << ( TableRow() << "" << _("Rpm Name:") << key.rpmName() );
 
       return str << t;
@@ -115,23 +115,23 @@ namespace zypp
 
       virtual void infoVerify( const std::string & file_r, const PublicKeyData & keyData_r, const KeyContext & context = KeyContext() )
       {
-	if ( keyData_r.expired() )
-	{
-	  Zypper::instance().out().warning( str::Format(_("The gpg key signing file '%1%' has expired.")) % file_r );
-	  dumpKeyInfo( (std::ostream&)ColorStream(std::cout,ColorContext::MSG_WARNING), keyData_r, context );
-	}
-	else if ( keyData_r.daysToLive() < 15 )
-	{
-	  Zypper::instance().out().info( str::Format(
-	    PL_( "The gpg key signing file '%1%' will expire in %2% day.",
-		 "The gpg key signing file '%1%' will expire in %2% days.",
-		 keyData_r.daysToLive() )) % file_r %  keyData_r.daysToLive() );
-	  dumpKeyInfo( std::cout, keyData_r, context );
-	}
-	else if ( Zypper::instance().out().verbosity() > Out::NORMAL )
-	{
-	  dumpKeyInfo( std::cout, keyData_r, context );
-	}
+        if ( keyData_r.expired() )
+        {
+          Zypper::instance().out().warning( str::Format(_("The gpg key signing file '%1%' has expired.")) % file_r );
+          dumpKeyInfo( (std::ostream&)ColorStream(std::cout,ColorContext::MSG_WARNING), keyData_r, context );
+        }
+        else if ( keyData_r.daysToLive() < 15 )
+        {
+          Zypper::instance().out().info( str::Format(
+            PL_( "The gpg key signing file '%1%' will expire in %2% day.",
+                 "The gpg key signing file '%1%' will expire in %2% days.",
+                 keyData_r.daysToLive() )) % file_r %  keyData_r.daysToLive() );
+          dumpKeyInfo( std::cout, keyData_r, context );
+        }
+        else if ( Zypper::instance().out().verbosity() > Out::NORMAL )
+        {
+          dumpKeyInfo( std::cout, keyData_r, context );
+        }
       }
 
       ////////////////////////////////////////////////////////////////////
@@ -150,32 +150,32 @@ namespace zypp
               Out::HIGH);
           else
             Zypper::instance().out().warning(
-	      str::Format(_("Accepting an unsigned file '%s' from repository '%s'."))
-	      % file % context.repoInfo().asUserString(),
+              str::Format(_("Accepting an unsigned file '%s' from repository '%s'."))
+              % file % context.repoInfo().asUserString(),
               Out::HIGH);
 
           return true;
         }
 
         std::string msg;
-	if ( context.empty() )
-	  // translator: %1% is a file name
+        if ( context.empty() )
+          // translator: %1% is a file name
           msg = str::Format(_("File '%1%' is unsigned.") ) % file;
         else
-	  // translator: %1% is a file name, %2% a repositories name
+          // translator: %1% is a file name, %2% a repositories name
           msg = str::Format(_("File '%1%' from repository '%2%' is unsigned.") ) % file % context.repoInfo().asUserString();
-	Zypper::instance().out().warning( msg );
+        Zypper::instance().out().warning( msg );
 
         hintUnsignedData();
 
-	if ( !context.empty() )
-	  hintIfMasterIndex( file );
+        if ( !context.empty() )
+          hintIfMasterIndex( file );
 
-	warnCanNotVerifyFile();
+        warnCanNotVerifyFile();
 
-	Zypper::instance().out().gap();
-	// TODO: use text::join( msg, text::qContinue() )
-	// once the above texts for mgs are translated
+        Zypper::instance().out().gap();
+        // TODO: use text::join( msg, text::qContinue() )
+        // once the above texts for mgs are translated
         std::string question;
         if (context.empty())
           question = str::Format(
@@ -218,25 +218,25 @@ namespace zypp
         }
 
         std::string msg;
-	if ( context.empty() )
-	  // translator: %1% is a file name, %2% is a gpg key ID
+        if ( context.empty() )
+          // translator: %1% is a file name, %2% is a gpg key ID
           msg = str::Format(_("File '%1%' is signed with an unknown key '%2%'.") ) % file % id;
         else
-	  // translator: %1% is a file name, %2% is a gpg key ID, %3% a repositories name
+          // translator: %1% is a file name, %2% is a gpg key ID, %3% a repositories name
           msg = str::Format(_("File '%1%' from repository '%3%' is signed with an unknown key '%2%'.") ) % file % id % context.repoInfo().asUserString();
-	Zypper::instance().out().warning( msg );
+        Zypper::instance().out().warning( msg );
 
         hintUnsignedData();
 
-	if ( !context.empty() )
-	  hintIfMasterIndex( file );
+        if ( !context.empty() )
+          hintIfMasterIndex( file );
 
-	warnCanNotVerifyFile();
+        warnCanNotVerifyFile();
 
-	Zypper::instance().out().gap();
+        Zypper::instance().out().gap();
         std::string question;
-	// TODO: use text::join( msg, text::qContinue() )
-	// once the above texts for mgs are translated
+        // TODO: use text::join( msg, text::qContinue() )
+        // once the above texts for mgs are translated
         if (context.empty())
           question = str::Format(
             // translators: the last %s is gpg key ID
@@ -262,10 +262,10 @@ namespace zypp
         Zypper & zypper = Zypper::instance();
 
         std::ostringstream s;
-	s << std::endl;
-	if (_gopts.gpg_auto_import_keys)
-	  s << _("Automatically importing the following key:") << std::endl;
-	else if ( _gopts.no_gpg_checks && canTrustTemporarily_r  )
+        s << std::endl;
+        if (_gopts.gpg_auto_import_keys)
+          s << _("Automatically importing the following key:") << std::endl;
+        else if ( _gopts.no_gpg_checks && canTrustTemporarily_r  )
           s << _("Automatically trusting the following key:") << std::endl;
         else
           s << _("New repository or package signing key received:") << std::endl;
@@ -403,22 +403,22 @@ namespace zypp
         }
 
         std::string msg;
-	if ( context.empty() )
-	  // translator: %1% is a file name
+        if ( context.empty() )
+          // translator: %1% is a file name
           msg = str::Format(_("Signature verification failed for file '%1%'.") ) % file;
         else
-	  // translator: %1% is a file name, %2% a repositories name
+          // translator: %1% is a file name, %2% a repositories name
           msg = str::Format(_("Signature verification failed for file '%1%' from repository '%2%'.") ) % file % context.repoInfo().asUserString();
-	Zypper::instance().out().error( msg );
+        Zypper::instance().out().error( msg );
 
         hintUnsignedData();
 
-	if ( !context.empty() )
-	  hintIfMasterIndex( file );
+        if ( !context.empty() )
+          hintIfMasterIndex( file );
 
-	warnFileModifiedAfterSigning();
+        warnFileModifiedAfterSigning();
 
-	Zypper::instance().out().gap();
+        Zypper::instance().out().gap();
         return read_bool_answer( PROMPT_YN_GPG_CHECK_FAILED_IGNORE, text::join( msg, text::qContinue() ), false);
       }
 
@@ -427,83 +427,83 @@ namespace zypp
       virtual void report ( const UserData & data )
       {
         if ( data.type() == zypp::ContentType( KeyRingReport::ACCEPT_PACKAGE_KEY_REQUEST ) )
-	  return askUserToAcceptPackageKey( data );
+          return askUserToAcceptPackageKey( data );
         else if ( data.type() == zypp::ContentType( KeyRingReport::KEYS_NOT_IMPORTED_REPORT ) )
-	  return reportKeysNotImportedReport( data );
-	else if ( data.type() == zypp::ContentType( KeyRingReport::REPORT_AUTO_IMPORT_KEY ) )
-	  return reportAutoImportKey( data );
+          return reportKeysNotImportedReport( data );
+        else if ( data.type() == zypp::ContentType( KeyRingReport::REPORT_AUTO_IMPORT_KEY ) )
+          return reportAutoImportKey( data );
         WAR << "Unhandled report() call" << endl;
       }
 
       void askUserToAcceptPackageKey( const UserData & data )
       {
-	if ( !data.hasvalue("PublicKey") || !data.hasvalue(("KeyContext")) ) {
-	  WAR << "Missing arguments in report call for content type: " << data.type() << endl;
-	  return;
-	}
-	const PublicKey &key  = data.get<PublicKey>("PublicKey");
-	const KeyContext &ctx = data.get<KeyContext>("KeyContext");
-	KeyRingReport::KeyTrust res = askUserToAcceptKey(key,ctx, false);
-	data.set("TrustKey", res == KeyRingReport::KEY_TRUST_AND_IMPORT);
-	return;
+        if ( !data.hasvalue("PublicKey") || !data.hasvalue(("KeyContext")) ) {
+          WAR << "Missing arguments in report call for content type: " << data.type() << endl;
+          return;
+        }
+        const PublicKey &key  = data.get<PublicKey>("PublicKey");
+        const KeyContext &ctx = data.get<KeyContext>("KeyContext");
+        KeyRingReport::KeyTrust res = askUserToAcceptKey(key,ctx, false);
+        data.set("TrustKey", res == KeyRingReport::KEY_TRUST_AND_IMPORT);
+        return;
       }
 
       void reportKeysNotImportedReport( const UserData & data )
       {
-	if ( !data.hasvalue("Keys") )
-	{
-	  WAR << "Missing arguments in report call for content type: " << data.type() << endl;
-	  return;
-	}
-	Zypper & zypper = Zypper::instance();
+        if ( !data.hasvalue("Keys") )
+        {
+          WAR << "Missing arguments in report call for content type: " << data.type() << endl;
+          return;
+        }
+        Zypper & zypper = Zypper::instance();
 
-	zypper.out().notePar(_("The rpm database seems to contain old V3 version gpg keys which are meanwhile obsolete and considered insecure:") );
+        zypper.out().notePar(_("The rpm database seems to contain old V3 version gpg keys which are meanwhile obsolete and considered insecure:") );
 
-	zypper.out().gap();
-	for ( const Edition & ed : data.get( "Keys", std::set<Edition>() ) )
-	  zypper.out().info( str::Str() << /*indent8*/"        gpg-pubkey-" << ed );
+        zypper.out().gap();
+        for ( const Edition & ed : data.get( "Keys", std::set<Edition>() ) )
+          zypper.out().info( str::Str() << /*indent8*/"        gpg-pubkey-" << ed );
 
-	Zypper::instance().out().par( 4,
-				      str::Format(_("To see details about a key call '%1%'.") )
-				      % "rpm -qi GPG-PUBKEY-VERSION" );
+        Zypper::instance().out().par( 4,
+                                      str::Format(_("To see details about a key call '%1%'.") )
+                                      % "rpm -qi GPG-PUBKEY-VERSION" );
 
-	Zypper::instance().out().par( 4,
-				      str::Format(_("Unless you believe the key in question is still in use, you can remove it from the rpm database calling '%1%'.") )
-				      % "rpm -e GPG-PUBKEY-VERSION" );
+        Zypper::instance().out().par( 4,
+                                      str::Format(_("Unless you believe the key in question is still in use, you can remove it from the rpm database calling '%1%'.") )
+                                      % "rpm -e GPG-PUBKEY-VERSION" );
 
-	zypper.out().gap();
+        zypper.out().gap();
       }
 
       void reportAutoImportKey( const UserData & data_r )
       {
-	if ( not ( data_r.hasvalue("KeyDataList") && data_r.hasvalue("KeySigning") && data_r.hasvalue("KeyContext") ) ) {
-	  WAR << "Missing arguments in report call for content type: " << data_r.type() << endl;
-	  return;
-	}
-	const std::list<PublicKeyData> & keyDataList { data_r.get<std::list<PublicKeyData>>("KeyDataList") };
-	const PublicKeyData &            keySigning  { data_r.get<PublicKeyData>("KeySigning") };
-	const KeyContext &               context     { data_r.get<KeyContext>("KeyContext") };
+        if ( not ( data_r.hasvalue("KeyDataList") && data_r.hasvalue("KeySigning") && data_r.hasvalue("KeyContext") ) ) {
+          WAR << "Missing arguments in report call for content type: " << data_r.type() << endl;
+          return;
+        }
+        const std::list<PublicKeyData> & keyDataList { data_r.get<std::list<PublicKeyData>>("KeyDataList") };
+        const PublicKeyData &            keySigning  { data_r.get<PublicKeyData>("KeySigning") };
+        const KeyContext &               context     { data_r.get<KeyContext>("KeyContext") };
 
-	Zypper & zypper { Zypper::instance() };
+        Zypper & zypper { Zypper::instance() };
 
-	// translator: %1% is the number of keys, %2% the name of a repository
-	zypper.out().notePar( str::Format( PL_( "Received %1% new package signing key from repository %2%:",
-						"Received %1% new package signing keys from repository %2%:",
-					 keyDataList.size() )) % keyDataList.size() % context.repoInfo().asUserString() );
+        // translator: %1% is the number of keys, %2% the name of a repository
+        zypper.out().notePar( str::Format( PL_( "Received %1% new package signing key from repository %2%:",
+                                                "Received %1% new package signing keys from repository %2%:",
+                                         keyDataList.size() )) % keyDataList.size() % context.repoInfo().asUserString() );
 
-	zypper.out().par( 2,_("Those additional keys are usually used to sign packages shipped by the repository. In order to validate those packages upon download and installation the new keys will be imported into the rpm database.") );
+        zypper.out().par( 2,_("Those additional keys are usually used to sign packages shipped by the repository. In order to validate those packages upon download and installation the new keys will be imported into the rpm database.") );
 
-	auto newTag { HIGHLIGHTString(_("New:") ) };
-	for ( const auto & kd : keyDataList ) {
-	  zypper.out().gap();
-	  dumpKeyInfo( std::cout << "  " << newTag << endl, kd );
-	}
+        auto newTag { HIGHLIGHTString(_("New:") ) };
+        for ( const auto & kd : keyDataList ) {
+          zypper.out().gap();
+          dumpKeyInfo( std::cout << "  " << newTag << endl, kd );
+        }
 
-	zypper.out().par( 2,HIGHLIGHTString(_("The repository metadata introducing the new keys have been signed and validated by the trusted key:")) );
-	zypper.out().gap();
-	dumpKeyInfo( std::cout, keySigning, context );
+        zypper.out().par( 2,HIGHLIGHTString(_("The repository metadata introducing the new keys have been signed and validated by the trusted key:")) );
+        zypper.out().gap();
+        dumpKeyInfo( std::cout, keySigning, context );
 
-	zypper.out().gap();
+        zypper.out().gap();
       }
 
     private:
@@ -522,7 +522,7 @@ namespace zypp
 
       virtual bool askUserToAcceptNoDigest( const Pathname &file )
       {
-	std::string question = (str::Format(_("No digest for file %s.")) % file).str() + " " + text::qContinue();
+        std::string question = (str::Format(_("No digest for file %s.")) % file).str() + " " + text::qContinue();
         return read_bool_answer(PROMPT_GPG_NO_DIGEST_ACCEPT, question, _gopts.no_gpg_checks);
       }
 
@@ -538,53 +538,53 @@ namespace zypp
 
       virtual bool askUserToAcceptWrongDigest( const Pathname &file, const std::string &requested, const std::string &found )
       {
-	Zypper & zypper = Zypper::instance();
-	std::string unblock( found.substr( 0, 4 ) );
+        Zypper & zypper = Zypper::instance();
+        std::string unblock( found.substr( 0, 4 ) );
 
-	zypper.out().gap();
-	// translators: !!! BOOST STYLE PLACEHOLDERS ( %N% - reorder and multiple occurrence is OK )
-	// translators: %1%      - a file name
-	// translators: %2%      - full path name
-	// translators: %3%, %4% - checksum strings (>60 chars), please keep them aligned
-	zypper.out().warning( str::Format(_(
-		"Digest verification failed for file '%1%'\n"
-		"[%2%]\n"
-		"\n"
-		"  expected %3%\n"
-		"  but got  %4%\n" ) )
-		% file.basename()
-		% file
-		% requested
-		% found
-	);
+        zypper.out().gap();
+        // translators: !!! BOOST STYLE PLACEHOLDERS ( %N% - reorder and multiple occurrence is OK )
+        // translators: %1%      - a file name
+        // translators: %2%      - full path name
+        // translators: %3%, %4% - checksum strings (>60 chars), please keep them aligned
+        zypper.out().warning( str::Format(_(
+                "Digest verification failed for file '%1%'\n"
+                "[%2%]\n"
+                "\n"
+                "  expected %3%\n"
+                "  but got  %4%\n" ) )
+                % file.basename()
+                % file
+                % requested
+                % found
+        );
 
-	zypper.out().info( MSG_WARNINGString(_(
-		"Accepting packages with wrong checksums can lead to a corrupted system "
-		"and in extreme cases even to a system compromise." ) ).str()
-	);
-	zypper.out().gap();
+        zypper.out().info( MSG_WARNINGString(_(
+                "Accepting packages with wrong checksums can lead to a corrupted system "
+                "and in extreme cases even to a system compromise." ) ).str()
+        );
+        zypper.out().gap();
 
-	// translators: !!! BOOST STYLE PLACEHOLDERS ( %N% - reorder and multiple occurrence is OK )
-	// translators: %1%      - abbreviated checksum (4 chars)
-	zypper.out().info( str::Format(_(
-		"However if you made certain that the file with checksum '%1%..' is secure, correct\n"
-		"and should be used within this operation, enter the first 4 characters of the checksum\n"
-		"to unblock using this file on your own risk. Empty input will discard the file.\n" ) )
-		% unblock
-	);
+        // translators: !!! BOOST STYLE PLACEHOLDERS ( %N% - reorder and multiple occurrence is OK )
+        // translators: %1%      - abbreviated checksum (4 chars)
+        zypper.out().info( str::Format(_(
+                "However if you made certain that the file with checksum '%1%..' is secure, correct\n"
+                "and should be used within this operation, enter the first 4 characters of the checksum\n"
+                "to unblock using this file on your own risk. Empty input will discard the file.\n" ) )
+                % unblock
+        );
 
-	// translators: A prompt option
-	PromptOptions popts( unblock+"/"+_("discard"), 1 );
-	// translators: A prompt option help text
-	popts.setOptionHelp( 0, _("Unblock using this file on your own risk.") );
-	// translators: A prompt option help text
-	popts.setOptionHelp( 1, _("Discard the file.") );
-	popts.setShownCount( 1 );
+        // translators: A prompt option
+        PromptOptions popts( unblock+"/"+_("discard"), 1 );
+        // translators: A prompt option help text
+        popts.setOptionHelp( 0, _("Unblock using this file on your own risk.") );
+        // translators: A prompt option help text
+        popts.setOptionHelp( 1, _("Discard the file.") );
+        popts.setShownCount( 1 );
 
-	// translators: A prompt text
-	zypper.out().prompt( PROMPT_GPG_WRONG_DIGEST_ACCEPT, _("Unblock or discard?"), popts );
-	int reply = get_prompt_reply( zypper, PROMPT_GPG_WRONG_DIGEST_ACCEPT, popts );
-	return( reply == 0 );
+        // translators: A prompt text
+        zypper.out().prompt( PROMPT_GPG_WRONG_DIGEST_ACCEPT, _("Unblock or discard?"), popts );
+        int reply = get_prompt_reply( zypper, PROMPT_GPG_WRONG_DIGEST_ACCEPT, popts );
+        return( reply == 0 );
       }
 
     private:

@@ -43,16 +43,16 @@ namespace
         if ( in.lineNo() > 1 )
           msg << endl;
 
-	const std::string & line( *in );
-	static str::regex  rx("^(warning|error): %.* scriptlet failed, ");
-	static str::smatch what;
-	if ( str::regex_match( line, what, rx ) )
-	{
-	  msg << ( (line[0] == 'w' ? ColorContext::MSG_WARNING : ColorContext::MSG_ERROR) << line );
-	  Zypper::instance().setExitInfoCode( ZYPPER_EXIT_INF_RPM_SCRIPT_FAILED );
-	}
-	else
-	  msg << line;
+        const std::string & line( *in );
+        static str::regex  rx("^(warning|error): %.* scriptlet failed, ");
+        static str::smatch what;
+        if ( str::regex_match( line, what, rx ) )
+        {
+          msg << ( (line[0] == 'w' ? ColorContext::MSG_WARNING : ColorContext::MSG_ERROR) << line );
+          Zypper::instance().setExitInfoCode( ZYPPER_EXIT_INF_RPM_SCRIPT_FAILED );
+        }
+        else
+          msg << line;
       }
 
       if ( trainlingNewline )
@@ -103,16 +103,16 @@ namespace out
       ret << " edition=\""	<< val_r->edition() << "\"";
       ret << " arch=\""	<< val_r->arch() << "\"";
       {
-	const std::string & text( val_r->summary() );
-	if ( ! text.empty() )
-	  ret << " summary=\"" << xml::escape( text ) << "\"";
+        const std::string & text( val_r->summary() );
+        if ( ! text.empty() )
+          ret << " summary=\"" << xml::escape( text ) << "\"";
       }
       {
-	const std::string & text( val_r->description() );
-	if ( ! text.empty() )
-	  ret << ">\n" << "<description>" << xml::escape( text ) << "</description>" << "</solvable>";
-	else
-	  ret << "/>";
+        const std::string & text( val_r->description() );
+        if ( ! text.empty() )
+          ret << ">\n" << "<description>" << xml::escape( text ) << "</description>" << "</solvable>";
+        else
+          ret << "/>";
       }
       return ret;
     }
@@ -179,7 +179,7 @@ struct PatchScriptReportReceiver : public callback::ReceiveReport<target::PatchS
 
 
   virtual void start( const Package::constPtr & package,
-		      const Pathname & path_r ) // script path
+                      const Pathname & path_r ) // script path
   {
     Zypper & zypper = Zypper::instance();
     if ( zypper.out().type() == Out::TYPE_XML )
@@ -307,11 +307,11 @@ private:
   {
     Zypper & zypper = Zypper::instance();
     _progress.reset( new Out::ProgressBar( zypper.out(),
-					   "remove-resolvable",
-					   // translators: This text is a progress display label e.g. "Removing packagename-x.x.x [42%]"
-					   str::Format(_("Removing %s") ) % resolvable_r->asString(),
-					   zypper.runtimeData().rpm_pkg_current,
-					   zypper.runtimeData().rpm_pkgs_total ) );
+                                           "remove-resolvable",
+                                           // translators: This text is a progress display label e.g. "Removing packagename-x.x.x [42%]"
+                                           str::Format(_("Removing %s") ) % resolvable_r->asString(),
+                                           zypper.runtimeData().rpm_pkg_current,
+                                           zypper.runtimeData().rpm_pkgs_total ) );
     (*_progress)->range( 100 );	// progress reports percent
   }
 
@@ -384,11 +384,11 @@ private:
   {
     Zypper & zypper = Zypper::instance();
     _progress.reset( new Out::ProgressBar( zypper.out(),
-					   "install-resolvable",
-					   // TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
-					   str::Format(_("Installing: %s") ) % resolvable_r->asString(),
-					   zypper.runtimeData().rpm_pkg_current,
-					   zypper.runtimeData().rpm_pkgs_total ) );
+                                           "install-resolvable",
+                                           // TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
+                                           str::Format(_("Installing: %s") ) % resolvable_r->asString(),
+                                           zypper.runtimeData().rpm_pkg_current,
+                                           zypper.runtimeData().rpm_pkgs_total ) );
     (*_progress)->range( 100 );
   }
 
@@ -419,8 +419,8 @@ struct FindFileConflictstReportReceiver : public callback::ReceiveReport<target:
     Zypper::instance().out().gap();
     _lastskip = 0;
     _progress.reset( new Out::ProgressBar( Zypper::instance().out(),
-					   "fileconflict-check",
-					   mkProgressBarLabel() ) );
+                                           "fileconflict-check",
+                                           mkProgressBarLabel() ) );
   }
 
   virtual bool start( const ProgressData & progress_r )
@@ -455,46 +455,46 @@ struct FindFileConflictstReportReceiver : public callback::ReceiveReport<target:
 
       if ( ! noFilelist_r.empty() )	// warning
       {
-	out.warning( str::Format( // TranslatorExplanation %1%(number of packages); detailed list follows
-				  PL_( "%1% package had to be excluded from file conflicts check because it is not yet download.",
-				       "%1% packages had to be excluded from file conflicts check because they are not yet downloaded.",
-				       noFilelist_r.size() ) ) % noFilelist_r.size() );
+        out.warning( str::Format( // TranslatorExplanation %1%(number of packages); detailed list follows
+                                  PL_( "%1% package had to be excluded from file conflicts check because it is not yet download.",
+                                       "%1% packages had to be excluded from file conflicts check because they are not yet downloaded.",
+                                       noFilelist_r.size() ) ) % noFilelist_r.size() );
 
-	out.notePar( 4, str::Format(
-		       // TranslatorExplanation %1%(commandline option)
-		       _("Checking for file conflicts requires not installed packages to be downloaded in advance "
-	                 "in order to access their file lists. See option '%1%' in the zypper manual page for details.")
-		     ) % "--download-in-advance / --dry-run --download-only" );
-	out.gap();
+        out.notePar( 4, str::Format(
+                       // TranslatorExplanation %1%(commandline option)
+                       _("Checking for file conflicts requires not installed packages to be downloaded in advance "
+                         "in order to access their file lists. See option '%1%' in the zypper manual page for details.")
+                     ) % "--download-in-advance / --dry-run --download-only" );
+        out.gap();
       }
 
       if ( ! conflicts_r.empty() )	// error + prompt
       {
-	out.list( "fileconflicts",
-		  // TranslatorExplanation %1%(number of conflicts); detailed list follows
-		  PL_("Detected %1% file conflict:",
-		      "Detected %1% file conflicts:",
-		      conflicts_r.size() ),
-		  conflicts_r, out::FileConflictsListFormater() );
-	out.gap();
+        out.list( "fileconflicts",
+                  // TranslatorExplanation %1%(number of conflicts); detailed list follows
+                  PL_("Detected %1% file conflict:",
+                      "Detected %1% file conflicts:",
+                      conflicts_r.size() ),
+                  conflicts_r, out::FileConflictsListFormater() );
+        out.gap();
 
-	if ( FileConflictPolicy::instance()._replaceFiles )
-	{
-	  out.info( _("Conflicting files will be replaced."), " [--replacefiles]" );
-	}
-	else
-	{
-	  bool cont = read_bool_answer( PROMPT_YN_CONTINUE_ON_FILECONFLICT, str::Str()
-		      // TranslatorExplanation Problem description before asking whether to "Continue? [yes/no] (no):"
-		      <<_("File conflicts happen when two packages attempt to install files with the same name but different contents. If you continue, conflicting files will be replaced losing the previous content.")
-		      << "\n"
-		      << text::qContinue(),
-		      false );
-	  out.gap();
+        if ( FileConflictPolicy::instance()._replaceFiles )
+        {
+          out.info( _("Conflicting files will be replaced."), " [--replacefiles]" );
+        }
+        else
+        {
+          bool cont = read_bool_answer( PROMPT_YN_CONTINUE_ON_FILECONFLICT, str::Str()
+                      // TranslatorExplanation Problem description before asking whether to "Continue? [yes/no] (no):"
+                      <<_("File conflicts happen when two packages attempt to install files with the same name but different contents. If you continue, conflicting files will be replaced losing the previous content.")
+                      << "\n"
+                      << text::qContinue(),
+                      false );
+          out.gap();
 
-	  if ( ! cont )
-	    return false;		// aborted.
-	}
+          if ( ! cont )
+            return false;		// aborted.
+        }
       }
     }
 
@@ -569,11 +569,11 @@ private:
   {
     Zypper & zypper = Zypper::instance();
     _progress.reset( new Out::ProgressBar( zypper.out(),
-					   "remove-resolvable",
-					   // translators: This text is a progress display label e.g. "Removing packagename-x.x.x [42%]"
-					   str::Format(_("Removing %s") ) % resolvable_r->asString(),
-					   zypper.runtimeData().rpm_pkg_current,
-					   zypper.runtimeData().rpm_pkgs_total ) );
+                                           "remove-resolvable",
+                                           // translators: This text is a progress display label e.g. "Removing packagename-x.x.x [42%]"
+                                           str::Format(_("Removing %s") ) % resolvable_r->asString(),
+                                           zypper.runtimeData().rpm_pkg_current,
+                                           zypper.runtimeData().rpm_pkgs_total ) );
     (*_progress)->range( 100 );	// progress reports percent
   }
 
@@ -635,11 +635,11 @@ private:
   {
     Zypper & zypper = Zypper::instance();
     _progress.reset( new Out::ProgressBar( zypper.out(),
-					   "install-resolvable",
-					   // TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
-					   str::Format(_("Installing: %s") ) % resolvable_r->asString(),
-					   zypper.runtimeData().rpm_pkg_current,
-					   zypper.runtimeData().rpm_pkgs_total ) );
+                                           "install-resolvable",
+                                           // TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
+                                           str::Format(_("Installing: %s") ) % resolvable_r->asString(),
+                                           zypper.runtimeData().rpm_pkg_current,
+                                           zypper.runtimeData().rpm_pkgs_total ) );
     (*_progress)->range( 100 );
   }
 
@@ -706,23 +706,23 @@ private:
 
     if ( resolvable_r ) {
       _progress.reset( new Out::ProgressBar( zypper.out(),
-					   "execute-resolvable-script",
-					   // TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
-					   str::Format(_("Executing %s script for: %s") ) % scriptType % resolvable_r->asString(),
-					   zypper.runtimeData().rpm_pkg_current,
-					   zypper.runtimeData().rpm_pkgs_total ) );
+                                           "execute-resolvable-script",
+                                           // TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
+                                           str::Format(_("Executing %s script for: %s") ) % scriptType % resolvable_r->asString(),
+                                           zypper.runtimeData().rpm_pkg_current,
+                                           zypper.runtimeData().rpm_pkgs_total ) );
     } else if ( packageName.size() ) {
       _progress.reset( new Out::ProgressBar( zypper.out(),
-					   "execute-resolvable-script",
-					   // TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
-					   str::Format(_("Executing %s script for: %s") ) % scriptType % packageName,
-					   zypper.runtimeData().rpm_pkg_current,
-					   zypper.runtimeData().rpm_pkgs_total ) );
+                                           "execute-resolvable-script",
+                                           // TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
+                                           str::Format(_("Executing %s script for: %s") ) % scriptType % packageName,
+                                           zypper.runtimeData().rpm_pkg_current,
+                                           zypper.runtimeData().rpm_pkgs_total ) );
     } else  {
       _progress.reset( new Out::ProgressBar( zypper.out(),
-					   "execute-script",
-					   // TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
-					   str::Format( _("Executing %s script") ) % scriptType, zypper.runtimeData().rpm_pkg_current, zypper.runtimeData().rpm_pkgs_total ) );
+                                           "execute-script",
+                                           // TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
+                                           str::Format( _("Executing %s script") ) % scriptType, zypper.runtimeData().rpm_pkg_current, zypper.runtimeData().rpm_pkgs_total ) );
     }
     (*_progress)->range( 100 );
   }
@@ -856,7 +856,7 @@ private:
       // TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
       str::Format(_("Cleaning up: %s") ) % name,
              zypper.runtimeData().rpm_pkg_current,
-					   zypper.runtimeData().rpm_pkgs_total ) );
+                                           zypper.runtimeData().rpm_pkgs_total ) );
     (*_progress)->range( 100 );
   }
 

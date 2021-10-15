@@ -99,7 +99,7 @@ namespace
     : _ref { take_r, &deleter }
     {
       if ( ! take_r )
-	ZYPP_THROW( AugException(_("Cannot initialize configuration file parser.") ) );
+        ZYPP_THROW( AugException(_("Cannot initialize configuration file parser.") ) );
     }
 
   public:
@@ -181,7 +181,7 @@ namespace
     {
       int res = ::aug_match( aug(), c_str(), nullptr );
       if ( res == -1 )
-	ZYPP_THROW( AugBadPath( str() ) );
+        ZYPP_THROW( AugBadPath( str() ) );
       return res;
     }
 
@@ -194,7 +194,7 @@ namespace
     {
       const char * v { nullptr };
       if ( ::aug_label( aug(), c_str(), &v ) == 1 )
-	return v;
+        return v;
       ZYPP_THROW( AugBadPath( str() ) );
     }
 
@@ -210,7 +210,7 @@ namespace
     {
       const char * v { nullptr };
       if ( ::aug_get( aug(), c_str(), &v ) == 1 )
-	return v;
+        return v;
       ZYPP_THROW( AugBadPath( str() ) );
     }
 
@@ -232,7 +232,7 @@ namespace
     {
       int ret = ::aug_rename( aug(), c_str(), label_r );
       if ( ret == -1 )
-	ZYPP_THROW( AugException( str::Format("Rename '%1%' failed at %2%") % label_r % str() )  );
+        ZYPP_THROW( AugException( str::Format("Rename '%1%' failed at %2%") % label_r % str() )  );
       return ret;
     }
 
@@ -248,7 +248,7 @@ namespace
     void set( const char * value_r )
     {
       if ( ::aug_set( aug(), c_str(), value_r ) != 0 )
-	ZYPP_THROW( AugBadPath( str() ) );
+        ZYPP_THROW( AugBadPath( str() ) );
     }
 
     void set( const std::string & value_r )
@@ -263,7 +263,7 @@ namespace
     void insert( const std::string & label_r, bool before_r )
     {
       if ( ::aug_insert( aug(), c_str(), label_r.c_str(), int(before_r) ) != 0 )
-	ZYPP_THROW( AugBadInsert( str(), label_r ) );
+        ZYPP_THROW( AugBadInsert( str(), label_r ) );
     }
 
     void insertBefore( const std::string & label_r )
@@ -297,19 +297,19 @@ namespace
 
       if ( unsigned m = obj_r.matches() )
       {
-	if ( m == 1 )
-	{
-	  const char * valif = obj_r.getRaw();
-	  if ( valif )
-	    str_r << " -{" << valif << "}-";
-	  else
-	    str_r << " --";
-	}
-	else
-	  str_r << " -AMBIGUOUS-";
+        if ( m == 1 )
+        {
+          const char * valif = obj_r.getRaw();
+          if ( valif )
+            str_r << " -{" << valif << "}-";
+          else
+            str_r << " --";
+        }
+        else
+          str_r << " -AMBIGUOUS-";
       }
       else
-	str_r << " -NOTINTREE-";
+        str_r << " -NOTINTREE-";
     }
     else
       str_r << "EMPTYAUGPATH";
@@ -366,7 +366,7 @@ namespace
     value_type operator[]( unsigned idx_r ) const
     {
       if ( idx_r < _d->_cnt )
-	return { *this, _d->_matches[idx_r] };
+        return { *this, _d->_matches[idx_r] };
       ZYPP_THROW( AugBadMatchIndex( idx_r ) );
     }
 
@@ -375,20 +375,20 @@ namespace
     {
       D( const AugPath & path_r )
       {
-	int res = ::aug_match( path_r.aug(), path_r.c_str(), &_matches );
-	if ( res == -1 )
-	  ZYPP_THROW( AugBadPath( path_r.c_str() ) );
-	_cnt = res;
+        int res = ::aug_match( path_r.aug(), path_r.c_str(), &_matches );
+        if ( res == -1 )
+          ZYPP_THROW( AugBadPath( path_r.c_str() ) );
+        _cnt = res;
       }
 
       ~D()
       {
-	if ( _matches )
-	{
-	  while ( _cnt-- )
-	    ::free( _matches[_cnt] );
-	  ::free( _matches );
-	}
+        if ( _matches )
+        {
+          while ( _cnt-- )
+            ::free( _matches[_cnt] );
+          ::free( _matches );
+        }
       }
 
       unsigned		_cnt	{ 0U };
@@ -439,9 +439,9 @@ namespace
     {
       for ( auto p : AugMatches( path_r ) )
       {
-	str_r << "  " << p << endl;
-	p.str() += "/*";
-	recDumpOn( str_r, p );
+        str_r << "  " << p << endl;
+        p.str() += "/*";
+        recDumpOn( str_r, p );
       }
       return str_r;
     }
@@ -587,21 +587,21 @@ Augeas::Augeas( Pathname customcfg_r, bool readmode_r  )
       fP += "/error";
       if ( fP.exists() )
       {
-	_pimpl->augLogERR();
-	std::string err { str::Format( "%1%\n%2%: " ) % cfg % fP.value() };
-	if ( ! (fP+"/line").value().empty() )
-	{
-	  err += ( str::Format( "at %1%:%2%: " ) % (fP+"/line").value() % (fP+"/char").value() );
-	}
-	err += ( str::Format( "%1%" ) % (fP+"/message").value() );
-	ZYPP_THROW( AugParseError( err ) );
+        _pimpl->augLogERR();
+        std::string err { str::Format( "%1%\n%2%: " ) % cfg % fP.value() };
+        if ( ! (fP+"/line").value().empty() )
+        {
+          err += ( str::Format( "at %1%:%2%: " ) % (fP+"/line").value() % (fP+"/char").value() );
+        }
+        err += ( str::Format( "%1%" ) % (fP+"/message").value() );
+        ZYPP_THROW( AugParseError( err ) );
       }
       MIL << "READ config file: " << cfg << endl;
     }
     else
     {
       if ( readmode_r && ! customcfg_r.empty() )
-	Zypper::instance().out().warning( str::Format(_("Config file '%1%' does not exist." ) ) % cfg );
+        Zypper::instance().out().warning( str::Format(_("Config file '%1%' does not exist." ) ) % cfg );
       WAR << "MISS config file: " << cfg << endl;
     }
   }
@@ -625,19 +625,19 @@ std::string Augeas::getOption( const std::string & option_r ) const
       unsigned matches = fP.matches();
       if ( matches == 1 )
       {
-	DBG << fP << endl;
-	ret = fP.value();
-	break;
+        DBG << fP << endl;
+        ret = fP.value();
+        break;
       }
       else if ( matches > 1 )
       {
-	// translator: %1% is the path to a config file, %2% is the name of an options inside the file
-	Zypper::instance().out().error( str::Format(_("%1%: Option '%2%' is defined multiple times. Using the last one.") ) % cfg % option_r );
+        // translator: %1% is the path to a config file, %2% is the name of an options inside the file
+        Zypper::instance().out().error( str::Format(_("%1%: Option '%2%' is defined multiple times. Using the last one.") ) % cfg % option_r );
 
-	fP = *AugMatches(fP).last();
-	WAR << fP << endl;
-	ret = fP.value();
-	break;
+        fP = *AugMatches(fP).last();
+        WAR << fP << endl;
+        ret = fP.value();
+        break;
       }
     }
     catch ( const AugException & excpt )

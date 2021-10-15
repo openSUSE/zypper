@@ -86,7 +86,7 @@ void report_unknown_repos( Out & out, const std::list<std::string> & not_found )
  * \returns        ZYPPER_EXIT_OK or zypper error codes
  */
 int repo_specs_to_aliases(Zypper & zypper, const std::vector<std::string> &repos,
-				std::list<std::string> & aliases, bool enabled_only = true );
+                                std::list<std::string> & aliases, bool enabled_only = true );
 
 /**
  * Reads known enabled repositories and stores them in gData.
@@ -135,10 +135,10 @@ bool match_repo( Zypper & zypper, const std::string str, RepoInfo *repo = 0 , bo
  * \param autorefresh Whether the repo should have autorefresh turned on
  */
 void add_repo_by_url(Zypper & zypper,
-		      const Url & url,
-		      const std::string & alias,
-		      const RepoServiceCommonOptions &opts,
-		      const RepoProperties &repoProps, bool noCheck);
+                      const Url & url,
+                      const std::string & alias,
+                      const RepoServiceCommonOptions &opts,
+                      const RepoProperties &repoProps, bool noCheck);
 
 /**
  * Add repository specified in given repo file on \a repo_file_url. All repos
@@ -150,7 +150,7 @@ void add_repo_by_url(Zypper & zypper,
  * \param autorefresh Whether the repo should have autorefresh turned on
  */
 void add_repo_from_file(Zypper & zypper,
-			 const std::string & repo_file_url , const RepoServiceCommonOptions &opts, const RepoProperties &repoProps, bool noCheck);
+                         const std::string & repo_file_url , const RepoServiceCommonOptions &opts, const RepoProperties &repoProps, bool noCheck);
 
 /**
  * Add repository specified by \repo to system repositories.

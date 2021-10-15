@@ -132,13 +132,13 @@ std::vector<int> PromptOptions::getReplyMatches( const std::string & reply_r ) c
     {
       if ( '0' <= *cp && *cp <= '9' )
       {
-	num *= 10;
-	num += (*cp-'0');
+        num *= 10;
+        num += (*cp-'0');
       }
       else
       {
-	num = unsigned(-1);
-	break;
+        num = unsigned(-1);
+        break;
       }
     }
 
@@ -147,17 +147,17 @@ std::vector<int> PromptOptions::getReplyMatches( const std::string & reply_r ) c
       // userland counting! #1 is the 1st (enabled) option (#0 will never match)
       if ( num != 0 )
       {
-	for ( unsigned i = 0; i < _options.size(); ++i )
-	{
-	  if ( isDisabled(i) )
-	    continue;
+        for ( unsigned i = 0; i < _options.size(); ++i )
+        {
+          if ( isDisabled(i) )
+            continue;
 
-	  if ( --num == 0 )
-	  {
-	    ret.push_back( i );
-	    break;
-	  }
-	}
+          if ( --num == 0 )
+          {
+            ret.push_back( i );
+            break;
+          }
+        }
       }
       return ret;	// a match - good or bad - will be eaten
     }
@@ -275,8 +275,8 @@ int read_action_ari_with_timeout( PromptId pid, unsigned timeout, int default_ac
     }
 
     std::string msg = str::Format(PL_("Autoselecting '%s' after %u second.",
-				      "Autoselecting '%s' after %u seconds.",
-				      timeout)) % poptions.options()[default_action] % timeout;
+                                      "Autoselecting '%s' after %u seconds.",
+                                      timeout)) % poptions.options()[default_action] % timeout;
 
     if ( zypper.out().type() == Out::TYPE_XML )
       zypper.out().info( msg );	// maybe progress??
@@ -343,7 +343,7 @@ unsigned get_prompt_reply( Zypper & zypper, PromptId pid, const PromptOptions & 
     // print the reply for convenience (only for normal output)
     if ( ! zypper.config().machine_readable )
       zypper.out().info( poptions.options()[poptions.defaultOpt()],
-			 Out::QUIET, Out::TYPE_NORMAL );
+                         Out::QUIET, Out::TYPE_NORMAL );
     MIL << "running non-interactively, returning " << poptions.options()[poptions.defaultOpt()] << endl;
     return poptions.defaultOpt();
   }
@@ -375,9 +375,9 @@ unsigned get_prompt_reply( Zypper & zypper, PromptId pid, const PromptOptions & 
     {
       WAR << "Could not read the answer - bad stream or EOF" << endl;
       zypper.out().error( _("Cannot read input: bad stream or EOF."),
-			  str::Format(_("If you run zypper without a terminal, use '%s' global\n"
-			  "option to make zypper use default answers to prompts."))
-			  % "--non-interactive" );
+                          str::Format(_("If you run zypper without a terminal, use '%s' global\n"
+                          "option to make zypper use default answers to prompts."))
+                          % "--non-interactive" );
       zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
       ZYPP_THROW( ExitRequestException("Cannot read input. Bad stream or EOF.") );
     }
@@ -425,8 +425,8 @@ unsigned get_prompt_reply( Zypper & zypper, PromptId pid, const PromptOptions & 
     {
       s << " "
         // translators: the %s are: 'y', 'yes' (translated), 'n', and 'no' (translated).
-	<< str::Format(_("Enter '%s' for '%s' or '%s' for '%s' if nothing else works for you."))
-	   % "y" % _("yes") % "n" % _("no");
+        << str::Format(_("Enter '%s' for '%s' or '%s' for '%s' if nothing else works for you."))
+           % "y" % _("yes") % "n" % _("no");
     }
     else if ( loopcnt > 1 )
     {

@@ -99,9 +99,9 @@ std::ostream & TableRow::dumpTo( std::ostream & stream, const Table & parent ) c
     if ( seen_first )
     {
       bool do_wrap = parent._do_wrap				// user requested wrapping
-		  && parent._width > parent._screen_width	// table is wider than screen
-		  && ( curpos + (int)parent._max_width[c] + (parent._style == none ? 2 : 3) > parent._screen_width	// the next table column would exceed the screen size
-		    || parent._force_break_after == (int)(c - 1) );	// or the user wishes to first break after the previous column
+                  && parent._width > parent._screen_width	// table is wider than screen
+                  && ( curpos + (int)parent._max_width[c] + (parent._style == none ? 2 : 3) > parent._screen_width	// the next table column would exceed the screen size
+                    || parent._force_break_after == (int)(c - 1) );	// or the user wishes to first break after the previous column
 
       if ( do_wrap )
       {
@@ -130,46 +130,46 @@ std::ostream & TableRow::dumpTo( std::ostream & stream, const Table & parent ) c
     {
       if ( !parent._inHeader && parent.editionStyle( c ) && Zypper::instance().config().do_colors )
       {
-	// Edition column
-	if ( parent._editionStyle.size() == 2 )
-	{
-	  // 2 Edition columns - highlight difference
-	  if ( editionSep == std::string::npos )
-	  {
-	    editionSep = str::commonPrefix( _columns[*parent._editionStyle.begin()],
-						  _columns[*(++parent._editionStyle.begin())] );
-	  }
+        // Edition column
+        if ( parent._editionStyle.size() == 2 )
+        {
+          // 2 Edition columns - highlight difference
+          if ( editionSep == std::string::npos )
+          {
+            editionSep = str::commonPrefix( _columns[*parent._editionStyle.begin()],
+                                                  _columns[*(++parent._editionStyle.begin())] );
+          }
 
-	  if ( editionSep == 0 )
-	  {
-	    stream << ( ColorContext::CHANGE << s );
-	  }
-	  else if ( editionSep == s.size() )
-	  {
-	    stream << ( _ctxt << s );
-	  }
-	  else
-	  {
-	    stream << ( _ctxt << s.substr( 0, editionSep ) ) << ( ColorContext::CHANGE << s.substr( editionSep ) );
-	  }
-	}
-	else
-	{
-	  // highlight edition-release separator
-	  editionSep = s.find( '-' );
-	  if ( editionSep != std::string::npos )
-	  {
-	    stream << ( _ctxt << s.substr( 0, editionSep ) << ( ColorContext::HIGHLIGHT << "-" ) << s.substr( editionSep+1 ) );
-	  }
-	  else	// no release part
-	  {
-	    stream << ( _ctxt << s );
-	  }
-	}
+          if ( editionSep == 0 )
+          {
+            stream << ( ColorContext::CHANGE << s );
+          }
+          else if ( editionSep == s.size() )
+          {
+            stream << ( _ctxt << s );
+          }
+          else
+          {
+            stream << ( _ctxt << s.substr( 0, editionSep ) ) << ( ColorContext::CHANGE << s.substr( editionSep ) );
+          }
+        }
+        else
+        {
+          // highlight edition-release separator
+          editionSep = s.find( '-' );
+          if ( editionSep != std::string::npos )
+          {
+            stream << ( _ctxt << s.substr( 0, editionSep ) << ( ColorContext::HIGHLIGHT << "-" ) << s.substr( editionSep+1 ) );
+          }
+          else	// no release part
+          {
+            stream << ( _ctxt << s );
+          }
+        }
       }
       else	// no special style
       {
-	stream << ( _ctxt << s );
+        stream << ( _ctxt << s );
       }
       stream.width( c == lastCol ? 0 : parent._max_width[c] - ssize );
     }

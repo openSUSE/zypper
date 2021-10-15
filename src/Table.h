@@ -224,7 +224,7 @@ public:
 
       if ( noL || noR ) {
         if ( noL && noR ) {
-	  using csidetail::simpleAnyTypeComp;
+          using csidetail::simpleAnyTypeComp;
 
           const boost::any &lUserData = a_r.userData();
           const boost::any &rUserData = b_r.userData();
@@ -523,16 +523,16 @@ public:
       unsigned cnt = 1;
       Iterator_ first = begin_r++;
       if ( begin_r == end_r && ! forceDetails_r )
-	r << *first;				// only one value
+        r << *first;				// only one value
       else
       {
-	r.addDetail( *first );			// list all in details
-	while ( begin_r != end_r )
-	{
-	  ++cnt;
-	  r.addDetail( *(begin_r++) );
-	}
-	r << "["+str::numstring(cnt)+"]";	// size as value
+        r.addDetail( *first );			// list all in details
+        while ( begin_r != end_r )
+        {
+          ++cnt;
+          r.addDetail( *(begin_r++) );
+        }
+        r << "["+str::numstring(cnt)+"]";	// size as value
       }
    }
     else

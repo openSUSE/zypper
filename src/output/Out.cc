@@ -70,16 +70,16 @@ std::string TermLine::get( unsigned width_r, SplitFlags flags_r, char exp_r ) co
     if ( flags_r.testFlag( SF_CRUSH ) )
     {
       if ( rlen > width_r )
-	return r.substr( 0, width_r ).str();
+        return r.substr( 0, width_r ).str();
       return str::Str() << l.substr( 0, width_r - rlen ) << r;
     }
     else if ( flags_r.testFlag( SF_SPLIT ) )
     {
       str::Str out;
       if ( llen > width_r )
-	mbs_write_wrapped( out.stream(), l.str(), 0, width_r );
+        mbs_write_wrapped( out.stream(), l.str(), 0, width_r );
       else
-	out << l;
+        out << l;
       return out << "\n" << ( rlen > width_r ? r.substr( 0, width_r ) : std::string( width_r - rlen, ' ' ) + r );
     }
     // else:

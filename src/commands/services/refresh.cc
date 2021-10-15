@@ -28,7 +28,7 @@ using namespace zypp;
  */
 template<typename T>
 void get_services( Zypper & zypper, const T & begin, const T & end,
-		   ServiceList & services, std::list<std::string> & not_found )
+                   ServiceList & services, std::list<std::string> & not_found )
 {
   for_( it, begin, end )
   {
@@ -57,7 +57,7 @@ void get_services( Zypper & zypper, const T & begin, const T & end,
       if ( s_ptr )
       {
         if ( s_ptr->alias() == current_service_ptr->alias()
-	  && s_ptr->url() == current_service_ptr->url() )
+          && s_ptr->url() == current_service_ptr->url() )
         {
           duplicate = true;
           break;
@@ -65,7 +65,7 @@ void get_services( Zypper & zypper, const T & begin, const T & end,
       }
       // repo
       else if ( repo_cmp_alias_urls( *dynamic_pointer_cast<RepoInfo>(service),
-				     *dynamic_pointer_cast<RepoInfo>(*serv_it) ) )
+                                     *dynamic_pointer_cast<RepoInfo>(*serv_it) ) )
       {
         duplicate = true;
         break;
@@ -166,7 +166,7 @@ int RefreshServicesCmd::refreshServices(Zypper &zypper, const std::vector<std::s
         if ( !found )
         {
           DBG << service_ptr->alias() << "(#" << number << ") not specified," << " skipping." << endl;
-	  --enabled_service_count;
+          --enabled_service_count;
           continue;
         }
       }
@@ -205,7 +205,7 @@ int RefreshServicesCmd::refreshServices(Zypper &zypper, const std::vector<std::s
           RepoCollector collector;
           RepoManager & rm = zypper.repoManager();
           rm.getRepositoriesInService( s->alias(),
-				       make_function_output_iterator( bind( &RepoCollector::collect, &collector, _1 ) ) );
+                                       make_function_output_iterator( bind( &RepoCollector::collect, &collector, _1 ) ) );
           for_( repoit, collector.repos.begin(), collector.repos.end() )
               RefreshRepoCmd::refreshRepository( zypper, *repoit, _force ? RefreshRepoCmd::Force : RefreshRepoCmd::Default );
         }
@@ -223,7 +223,7 @@ int RefreshServicesCmd::refreshServices(Zypper &zypper, const std::vector<std::s
       if ( error )
       {
         ERR << "Skipping service '" << service_ptr->alias() << "' because of the above error." << endl;
-	zypper.out().error( str::Format(_("Skipping service '%s' because of the above error.")) % service_ptr->asUserString().c_str() );
+        zypper.out().error( str::Format(_("Skipping service '%s' because of the above error.")) % service_ptr->asUserString().c_str() );
         ++error_count;
       }
     }
@@ -235,7 +235,7 @@ int RefreshServicesCmd::refreshServices(Zypper &zypper, const std::vector<std::s
   if ( enabled_service_count == 0 )
   {
     std::string hint = str::form(_("Use '%s' or '%s' commands to add or enable services."),
-				 "zypper addservice", "zypper modifyservice" );
+                                 "zypper addservice", "zypper modifyservice" );
     if ( !specified.empty() || !not_found.empty() )
       zypper.out().error(_("Specified services are not enabled or defined."), hint);
     else

@@ -62,10 +62,10 @@ std::string renderGlobalHelp ()
       help.gDef( cmdTxt, cmd->summary() );
 
       if ( std::get<ZypperCommand::CmdDescField::Id>(desc) == ZypperCommand::SUBCOMMAND_e ) {
-	// Get and print the detailed list of available subcommands
-	for ( const auto & p : SubCmd::getSubcommandSummaries() ) {
-	  help.gDef( p.first, p.second );
-	}
+        // Get and print the detailed list of available subcommands
+        for ( const auto & p : SubCmd::getSubcommandSummaries() ) {
+          help.gDef( p.first, p.second );
+        }
       }
     }
   }

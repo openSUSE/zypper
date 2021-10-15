@@ -40,10 +40,10 @@ void print_repo_details( Zypper & zypper, std::list<RepoInfo> & repos )
     p.add( _("Alias"),		repo.alias() );
     p.add( _("Name"),		repo.name() );
     p.add( _("URI"),		(repo.baseUrlSet()
-				 ? repo.url().asString()
-				 : (repo.mirrorListUrl().asString().empty()
-				    ? "n/a"
-				    : repo.mirrorListUrl().asString())) );
+                                 ? repo.url().asString()
+                                 : (repo.mirrorListUrl().asString().empty()
+                                    ? "n/a"
+                                    : repo.mirrorListUrl().asString())) );
     p.add( _("Enabled"),	repoGpgCheck._enabledYN.str() );
     p.add( _("GPG Check"),	repoGpgCheck._gpgCheckYN.str() );
     p.add( _("Priority"),	repoPriorityNumberAnnotated( repo.priority() ) );
@@ -142,14 +142,14 @@ int ListReposCmd::execute( Zypper &zypper, const std::vector<std::string> &posit
       if ( !stream )
       {
         zypper.out().error( str::Format(_("Can't open %s for writing.")) % file.asString(),
-			    _("Maybe you do not have write permissions?") );
+                            _("Maybe you do not have write permissions?") );
         return ( ZYPPER_EXIT_ERR_INVALID_ARGS );
       }
       else
       {
         print_repos_to( repos, stream );
         zypper.out().info( str::Format(_("Repositories have been successfully exported to %s.")) % file,
-			   Out::QUIET );
+                           Out::QUIET );
       }
     }
   }

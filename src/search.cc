@@ -42,18 +42,18 @@ FillSearchTableSolvable::FillSearchTableSolvable( Table & table_r, TriBool instN
   //              adapting OutXML::searchResult !
   //
   *_table << ( TableHeader()
-	  // translators: S for 'installed Status'
-	  << N_("S")
-	  // translators: name (general header)
-	  << N_("Name")
-	  // translators: type (general header)
-	  << N_("Type")
-	  // translators: package version (header)
-	  << table::EditionStyleSetter( *_table, N_("Version") )
-	  // translators: package architecture (header)
-	  << N_("Arch")
-	  // translators: package's repository (header)
-	  << N_("Repository") );
+          // translators: S for 'installed Status'
+          << N_("S")
+          // translators: name (general header)
+          << N_("Name")
+          // translators: type (general header)
+          << N_("Type")
+          // translators: package version (header)
+          << table::EditionStyleSetter( *_table, N_("Version") )
+          // translators: package architecture (header)
+          << N_("Arch")
+          // translators: package's repository (header)
+          << N_("Repository") );
 }
 
 bool FillSearchTableSolvable::operator()( const PoolItem & pi_r ) const
@@ -133,7 +133,7 @@ bool FillSearchTableSolvable::operator()( const PoolQuery::const_iterator & it_r
       if ( match->inSolvAttr() == sat::SolvAttr::summary ||
            match->inSolvAttr() == sat::SolvAttr::description )
       {
-	// multiline matchstring
+        // multiline matchstring
         lastRow.addDetail( attrib + ":" );
         lastRow.addDetail( match->asString() );
       }
@@ -194,12 +194,12 @@ FillSearchTableSelectable::FillSearchTableSelectable( Table & table, TriBool ins
   //              adapting OutXML::searchResult !
   //
   *_table << ( TableHeader()
-	  // translators: S for installed Status
-	  << N_("S")
-	  << N_("Name")
-	  // translators: package summary (header)
-	  << N_("Summary")
-	  << N_("Type") );
+          // translators: S for installed Status
+          << N_("S")
+          << N_("Name")
+          // translators: package summary (header)
+          << N_("Summary")
+          << N_("Type") );
 }
 
 bool FillSearchTableSelectable::operator()( const ui::Selectable::constPtr & s ) const
@@ -254,8 +254,8 @@ void list_patches( Zypper & zypper )
   Table tbl;
   FillPatchesTable callback( tbl, PatchHistoryData() );
   invokeOnEach( God->pool().byKindBegin(ResKind::patch),
-		God->pool().byKindEnd(ResKind::patch),
-		callback);
+                God->pool().byKindEnd(ResKind::patch),
+                callback);
 
   if ( tbl.empty() )
     zypper.out().info( _("No needed patches found.") );
@@ -328,11 +328,11 @@ static void list_pattern_table( Zypper & zypper, SolvableFilterMode mode_r )
       continue;
 
     tbl << ( TableRow()
-	<< computeStatusIndicator( pi )
-	<< pi.name()
-	<< pi.edition()
-	<< piRepoName
-	<< string_weak_status(pi.status()) );
+        << computeStatusIndicator( pi )
+        << pi.name()
+        << pi.edition()
+        << piRepoName
+        << string_weak_status(pi.status()) );
   }
   tbl.sort( 1 ); // Name
 
@@ -371,9 +371,9 @@ void list_packages(Zypper & zypper , ListPackagesFlags flags_r )
   }
   auto checkStatus = [=]( ResStatus status_r )->bool {
     return ( ( orphaned && status_r.isOrphaned() )
-	  || ( suggested && status_r.isSuggested() )
-	  || ( recommended && status_r.isRecommended() )
-	  || ( unneeded && status_r.isUnneeded() ) );
+          || ( suggested && status_r.isSuggested() )
+          || ( recommended && status_r.isRecommended() )
+          || ( unneeded && status_r.isUnneeded() ) );
   };
 
   for( const auto & sel : God->pool().proxy().byKind<Package>() )
@@ -383,44 +383,44 @@ void list_packages(Zypper & zypper , ListPackagesFlags flags_r )
     if ( iType( sel ) )
     {
       if ( ! showInstalled )
-	continue;
+        continue;
     }
     else
     {
       if ( ! showUninstalled )
-	continue;
+        continue;
     }
 
     for ( const auto & pi : sel->picklist() )
     {
       if ( check )
       {
-	// if checks are more detailed, show only matches
-	// not whole selectables
-	if ( pi.status().isInstalled() )
-	{
-	  if ( ! checkStatus( pi.status() ) )
-	    continue;
-	}
-	else
-	{
-	  PoolItem ipi( sel->identicalInstalledObj( pi ) );
-	  if ( !ipi || !checkStatus( ipi.status() ) )
-	    if ( ! checkStatus( pi.status() ) )
-	      continue;
-	}
+        // if checks are more detailed, show only matches
+        // not whole selectables
+        if ( pi.status().isInstalled() )
+        {
+          if ( ! checkStatus( pi.status() ) )
+            continue;
+        }
+        else
+        {
+          PoolItem ipi( sel->identicalInstalledObj( pi ) );
+          if ( !ipi || !checkStatus( ipi.status() ) )
+            if ( ! checkStatus( pi.status() ) )
+              continue;
+        }
       }
 
       const std::string & piRepoName( pi->repository().info().name() );
       if ( repofilter && piRepoName == "@System" )
-	continue;
+        continue;
 
       tbl << ( TableRow()
-	  << computeStatusIndicator( pi, sel )
-	  << piRepoName
-	  << pi->name()
+          << computeStatusIndicator( pi, sel )
+          << piRepoName
+          << pi->name()
           << pi->edition().asString()
-	  << pi->arch().asString() );
+          << pi->arch().asString() );
     }
   }
 
@@ -430,12 +430,12 @@ void list_packages(Zypper & zypper , ListPackagesFlags flags_r )
   {
     // display the result, even if --quiet specified
     tbl << ( TableHeader()
-	// translators: S for installed Status
-	<< N_("S")
-	<< N_("Repository")
-	<< N_("Name")
-	<< table::EditionStyleSetter( tbl, N_("Version") )
-	<< N_("Arch") );
+        // translators: S for installed Status
+        << N_("S")
+        << N_("Repository")
+        << N_("Name")
+        << table::EditionStyleSetter( tbl, N_("Version") )
+        << N_("Arch") );
 
     if ( flags_r.testFlag( ListPackagesBits::SortByRepo ) )
       tbl.sort( 1 ); // Repo
@@ -496,21 +496,21 @@ void list_product_table(Zypper & zypper , SolvableFilterMode mode_r)
       bool iType;
       const char * statusIndicator = computeStatusIndicator( pi, sel, &iType );
       if ( ( installed_only && !iType ) || ( notinst_only && iType) )
-	continue;
+        continue;
 
       const std::string & piRepoName( pi.repoInfo().name() );
       if ( repofilter && piRepoName == "@System" )
-	continue;
+        continue;
 
       // NOTE: 'Is Base' is available in the installed object only.
       tbl << ( TableRow()
-	  << statusIndicator
-	  << piRepoName
-	  << pi.name()
-	  << pi.summary()	// full name (bnc #589333)
-	  << pi.edition()
-	  << pi.arch()
-	  << asYesNo( iType && sel->identicalInstalledObj( pi )->asKind<Product>()->isTargetDistribution() ) );
+          << statusIndicator
+          << piRepoName
+          << pi.name()
+          << pi.summary()	// full name (bnc #589333)
+          << pi.edition()
+          << pi.arch()
+          << asYesNo( iType && sel->identicalInstalledObj( pi )->asKind<Product>()->isTargetDistribution() ) );
     }
   }
 

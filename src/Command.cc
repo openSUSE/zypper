@@ -266,7 +266,7 @@ DEF_ZYPPER_COMMAND( NEEDS_REBOOTING );
 ///////////////////////////////////////////////////////////////////
 
 ZypperCommand::ZypperCommand(ZypperCommand::Command command) : _command(command)
-{ 
+{
 }
 
 ZypperCommand::ZypperCommand( const std::string & strval_r )

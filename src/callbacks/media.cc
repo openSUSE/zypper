@@ -155,9 +155,9 @@ static void eject_drive_dialog( Zypper & zypper, Url & url, const std::vector<st
 
 
 static MediaChangeReport::Action request_medium_dvd_handler( Zypper & zypper,
-							     Url & url,
-							     const std::vector<std::string> & devices,
-							     unsigned & index )
+                                                             Url & url,
+                                                             const std::vector<std::string> & devices,
+                                                             unsigned & index )
 {
   // cd/dvd options
   // translators: a/r/i/u are replies to the "Abort, retry, ignore?" prompt.
@@ -191,18 +191,18 @@ namespace ZmartRecipients
 {
 
   MediaChangeReport::Action MediaChangeReportReceiver::requestMedia( Url & url,
-								     unsigned mediumNr,
-								     const std::string & label,
-								     MediaChangeReport::Error error,
-								     const std::string & description,
-								     const std::vector<std::string> & devices,
-								     unsigned & index)
+                                                                     unsigned mediumNr,
+                                                                     const std::string & label,
+                                                                     MediaChangeReport::Error error,
+                                                                     const std::string & description,
+                                                                     const std::vector<std::string> & devices,
+                                                                     unsigned & index)
   {
     Zypper & zypper = Zypper::instance();
 
     DBG << "medium problem, url: " << url.asString()
-	<< ", error " << error
-	<< ", label '" << label << "', #" << mediumNr << endl;
+        << ", error " << error
+        << ", label '" << label << "', #" << mediumNr << endl;
 
     zypper.out().error( description );
     if ( url.schemeIsVolatile() )	// cd/dvd
@@ -212,26 +212,26 @@ namespace ZmartRecipients
       // You can also have a look at the regular expressions used to check the answer here:
       // /usr/lib/locale/<your_locale>/LC_MESSAGES/SYS_LC_MESSAGES
       std::string request = str::Format(_("Please insert medium [%s] #%d and type 'y' to continue or 'n' to cancel the operation."))
-			    % label % mediumNr;
+                            % label % mediumNr;
       if ( read_bool_answer( PROMPT_YN_MEDIA_CHANGE, request, false ) )
       {
-	zypper.requestExit( false );
-	return MediaChangeReport::RETRY;
+        zypper.requestExit( false );
+        return MediaChangeReport::RETRY;
       }
       else
-	return MediaChangeReport::ABORT;
+        return MediaChangeReport::ABORT;
     }
 
     if ( error == MediaChangeReport::IO_SOFT )
     {
       MediaChangeReport::Action default_action = MediaChangeReport::RETRY;
       if ( repeat_counter.counter_overrun( url ) )
-	default_action = MediaChangeReport::ABORT;
+        default_action = MediaChangeReport::ABORT;
 
       MediaChangeReport::Action action = (Action)read_action_ari_with_timeout( PROMPT_ARI_MEDIA_PROBLEM, 30, default_action );
 
       if ( action == MediaChangeReport::RETRY )
-	zypper.requestExit( false );
+        zypper.requestExit( false );
 
       return action;
     }
@@ -261,9 +261,9 @@ namespace ZmartRecipients
     if ( action == MediaChangeReport::IGNORE )
     {
       if ( zypper.runtimeData().action_rpm_download
-	&& !zypper.runtimeData().seen_verify_hint )
+        && !zypper.runtimeData().seen_verify_hint )
       {
-	print_verify_hint( Zypper::instance().out() );
+        print_verify_hint( Zypper::instance().out() );
       }
       zypper.requestExit( false );
     }
@@ -280,8 +280,8 @@ namespace ZmartRecipients
   // ---------------------------------------------------------------------------
 
   bool AuthenticationReportReceiver::prompt( const Url & url,
-					     const std::string & description,
-					     media::AuthData & auth_data )
+                                             const std::string & description,
+                                             media::AuthData & auth_data )
   {
     Zypper & zypper = Zypper::instance();
 
@@ -289,7 +289,7 @@ namespace ZmartRecipients
     {
       std::string credfile( "/etc/zypp/credentials.d/" + url.getQueryParam("credentials") );
       zypper.out().warning( str::form(_("Authentication required to access %s. You need to be root to be able to read the credentials from %s."),
-				      url.asString().c_str(), credfile.c_str() ) );
+                                      url.asString().c_str(), credfile.c_str() ) );
     }
 
     if ( zypper.config().non_interactive )

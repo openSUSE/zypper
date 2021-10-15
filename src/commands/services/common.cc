@@ -134,9 +134,9 @@ bool refresh_service(Zypper & zypper, const ServiceInfo & service, RepoManager::
   {
     ZYPP_CAUGHT( e );
     zypper.out().error( e, str::form(_("Problem retrieving the repository index file for service '%s':"),
-				     service.asUserString().c_str()));
+                                     service.asUserString().c_str()));
     zypper.out().warning( str::form( _("Skipping service '%s' because of the above error."),
-				     service.asUserString().c_str()));
+                                     service.asUserString().c_str()));
     // this is just an informal note. The service will be used as is (usually empty)
     error = false;
   }
@@ -144,8 +144,8 @@ bool refresh_service(Zypper & zypper, const ServiceInfo & service, RepoManager::
   {
     ZYPP_CAUGHT( e );
     zypper.out().error( e, str::form(_("Problem retrieving the repository index file for service '%s':"),
-				     service.asUserString().c_str() ),
-			_("Check if the URI is valid and accessible.") );
+                                     service.asUserString().c_str() ),
+                        _("Check if the URI is valid and accessible.") );
     zypper.setExitCode( ZYPPER_EXIT_ERR_ZYPP );
   }
 

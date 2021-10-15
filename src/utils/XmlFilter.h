@@ -90,12 +90,12 @@ namespace zypp
       template <class Tp>
       TreeNode & assertParent( TreeNode & node_r, Tp && key_r )
       {
-	if ( !node_r._parent )
-	{
-	  node_r._parent = this;
-	  node_r._key = std::forward<Tp>(key_r);
-	}
-	return node_r;
+        if ( !node_r._parent )
+        {
+          node_r._parent = this;
+          node_r._key = std::forward<Tp>(key_r);
+        }
+        return node_r;
       }
 
     private:
@@ -140,84 +140,84 @@ namespace zypp
     {
       for ( auto && xpath : xpaths_r )
       {
-	std::vector<std::string> nodes;
-	str::split( xpath, back_inserter(nodes), "/" );
-	if ( nodes.empty() )
-	  continue;
-	StackNode * t = _top;
-	for ( auto && n : nodes )
-	  t = &((*t)[std::move(n)]);
-	t->value() = StackData( true );	// a node to collect
+        std::vector<std::string> nodes;
+        str::split( xpath, back_inserter(nodes), "/" );
+        if ( nodes.empty() )
+          continue;
+        StackNode * t = _top;
+        for ( auto && n : nodes )
+          t = &((*t)[std::move(n)]);
+        t->value() = StackData( true );	// a node to collect
       }
 
       if ( top().empty() )
-	return;		// nothing to collect
+        return;		// nothing to collect
 
       for ( const xml::Node & cnode( *_reader ); ! _reader.atEnd(); _reader.nextNode() )
       {
-	switch ( cnode.nodeType() )
-	{
-	  case XML_READER_TYPE_ELEMENT:
-	  {
-	    int depth = cnode.depth();
-	    bool empty = cnode.isEmptyElement();
-	    std::string cname( cnode.name().asString() );	// will be moved to pushed nodes
+        switch ( cnode.nodeType() )
+        {
+          case XML_READER_TYPE_ELEMENT:
+          {
+            int depth = cnode.depth();
+            bool empty = cnode.isEmptyElement();
+            std::string cname( cnode.name().asString() );	// will be moved to pushed nodes
 
-	    if ( !topData().collecting() )
-	    {
-	      if ( !top().hasChild( cname ) )
-	      {
-		// neither collecting nor for a persistent(wanted) node -> discard
-		if ( ! empty )
-		  _reader.seekToEndNode( depth, cname );
-		continue;
-	      }
-	      else if ( !top()[cname].value().persistent() )
-		topPush( depth, std::move(cname) );		// push to remember
-	      else
-		topPushAndOpen( depth, std::move(cname) );	// push and open
-	    }
-	    else
-	    {
-	      topPushAndOpen( depth, std::move(cname) );	// push and open
-	    }
+            if ( !topData().collecting() )
+            {
+              if ( !top().hasChild( cname ) )
+              {
+                // neither collecting nor for a persistent(wanted) node -> discard
+                if ( ! empty )
+                  _reader.seekToEndNode( depth, cname );
+                continue;
+              }
+              else if ( !top()[cname].value().persistent() )
+                topPush( depth, std::move(cname) );		// push to remember
+              else
+                topPushAndOpen( depth, std::move(cname) );	// push and open
+            }
+            else
+            {
+              topPushAndOpen( depth, std::move(cname) );	// push and open
+            }
 
-	    // collect/remember new top nodes attributes
-	    while( _reader.nextNodeAttribute() )
-	      topData().addAttr( { cnode.name().c_str(), cnode.value().c_str() } );
+            // collect/remember new top nodes attributes
+            while( _reader.nextNodeAttribute() )
+              topData().addAttr( { cnode.name().c_str(), cnode.value().c_str() } );
 
-	    if ( !empty )
-	      continue;	// go for END_ELEMENT...
-	    // else:
-	    //    isEmptyElement
-	    //    -> start ELEMENT is also END_ELEMENT
-	    //    -> fall through to XML_READER_TYPE_END_ELEMENT
-	  }
+            if ( !empty )
+              continue;	// go for END_ELEMENT...
+            // else:
+            //    isEmptyElement
+            //    -> start ELEMENT is also END_ELEMENT
+            //    -> fall through to XML_READER_TYPE_END_ELEMENT
+          }
 
-	  case XML_READER_TYPE_END_ELEMENT:
-	    topPop();
-	    break;
+          case XML_READER_TYPE_END_ELEMENT:
+            topPop();
+            break;
 
-	  case XML_READER_TYPE_TEXT:
-	  case XML_READER_TYPE_SIGNIFICANT_WHITESPACE:
-	    if ( topData().collecting() )
-	    {
-	      topData().stream() << cnode.value();
-	    }
-	    break;
+          case XML_READER_TYPE_TEXT:
+          case XML_READER_TYPE_SIGNIFICANT_WHITESPACE:
+            if ( topData().collecting() )
+            {
+              topData().stream() << cnode.value();
+            }
+            break;
 
-	  case XML_READER_TYPE_CDATA:
-	    if ( topData().collecting() )
-	    {
-	      topData().stream() << "<![CDATA[" << cnode.value() << "]]>";
-	    }
-	    break;
+          case XML_READER_TYPE_CDATA:
+            if ( topData().collecting() )
+            {
+              topData().stream() << "<![CDATA[" << cnode.value() << "]]>";
+            }
+            break;
 
-	  case XML_READER_TYPE_NONE:
-	  default:
-	    // ignore
-	    break;
-	}
+          case XML_READER_TYPE_NONE:
+          default:
+            // ignore
+            break;
+        }
       }
     }
 
@@ -235,44 +235,44 @@ namespace zypp
 
       std::ostream & open( std::ostream & str_r, std::string name_r, bool collecting_r = true )
       {
-	if ( open() ) throw std::logic_error("StackData::open");
-	if ( name_r.empty() )
-	{
-	  _stream = &str_r;
-	}
-	else
-	{
-	  _node.reset( new xmlout::Node( str_r, std::move(name_r), xmlout::Node::optionalContent ) );
-	  if ( !_attr.empty() )
-	  {
-	    for ( auto && attr : _attr )
-	      _node->addAttr( std::move(attr) );
-	    _attr.clear();
-	  }
-	  if ( _collecting != collecting_r )
-	    _collecting = collecting_r;
-	}
-	return str_r;
+        if ( open() ) throw std::logic_error("StackData::open");
+        if ( name_r.empty() )
+        {
+          _stream = &str_r;
+        }
+        else
+        {
+          _node.reset( new xmlout::Node( str_r, std::move(name_r), xmlout::Node::optionalContent ) );
+          if ( !_attr.empty() )
+          {
+            for ( auto && attr : _attr )
+              _node->addAttr( std::move(attr) );
+            _attr.clear();
+          }
+          if ( _collecting != collecting_r )
+            _collecting = collecting_r;
+        }
+        return str_r;
       }
 
       std::ostream & stream()
       {
-	if ( !_stream )
-	{
-	  if ( !_node ) throw std::logic_error("!StackData::open");
-	  _stream = &*(*_node);
-	}
-	return *_stream;
+        if ( !_stream )
+        {
+          if ( !_node ) throw std::logic_error("!StackData::open");
+          _stream = &*(*_node);
+        }
+        return *_stream;
       }
 
       void close()				{ _node.reset();_stream = nullptr; if ( _collecting ) _collecting = false; }
 
       void addAttr( xmlout::Node::Attr attr_r )
       {
-	if ( _node )
-	  _node->addAttr( std::move(attr_r) );
-	else
-	  _attr.push_back( std::move(attr_r) );
+        if ( _node )
+          _node->addAttr( std::move(attr_r) );
+        else
+          _attr.push_back( std::move(attr_r) );
       }
 
     private:
@@ -287,8 +287,8 @@ namespace zypp
     { return str << "StackData["
                  << (obj.persistent()?"p":"_")
                  << (obj.collecting()?"c":"_")
-		 << (obj.open()?"o":"_")
-		 <<"]"; }
+                 << (obj.open()?"o":"_")
+                 <<"]"; }
 
     typedef xml_filter::TreeNode<std::string,StackData> StackNode;
 
@@ -302,14 +302,14 @@ namespace zypp
     {
       StackData & data( node_r.value() );
       if ( data.open() )
-	return data.stream();
+        return data.stream();
       if ( node_r.hasParent() )
       {
-	// open parents in non collecting mode
-	// TODO: make 'strip root node' optional
-	data.open( getParentStream( node_r.parent() ),
-		   ( node_r.parent() != _stack ? node_r.key() : std::string() ), /*collecting*/false );
-	return data.stream();
+        // open parents in non collecting mode
+        // TODO: make 'strip root node' optional
+        data.open( getParentStream( node_r.parent() ),
+                   ( node_r.parent() != _stack ? node_r.key() : std::string() ), /*collecting*/false );
+        return data.stream();
       }
       return _out;
     }
@@ -319,7 +319,7 @@ namespace zypp
       StackNode & nnode( top()[name_r] );
       StackData & ndata( nnode.value() );
       if ( _top == &_stack )
-	name_r.clear();	// TODO: make 'strip root node' optional
+        name_r.clear();	// TODO: make 'strip root node' optional
       // open new node in collecting mode
       ndata.open( getParentStream( top() ), std::move(name_r), /*collecting*/true );
       // move top
@@ -336,13 +336,13 @@ namespace zypp
       StackNode & otop( top() );
       if ( otop.hasParent() )
       {
-	StackData & odata( topData() );
-	_top = &otop.parent();	// move top
-	odata.close();
-	if ( otop.empty() && !odata.persistent() )
-	{
-	  top().erase( otop.key() );
-	}
+        StackData & odata( topData() );
+        _top = &otop.parent();	// move top
+        odata.close();
+        if ( otop.empty() && !odata.persistent() )
+        {
+          top().erase( otop.key() );
+        }
       }
     }
 

@@ -32,10 +32,10 @@ namespace Pimpl
   inline std::ostream & operator<<( std::ostream & str, const SourceDownloadCmd::Options & obj )
   {
     return str << str::Format("{%1%|%2%%3%}")
-  	      % obj._directory
+              % obj._directory
   // 	      % (obj._manifest ? 'M' : 'm' )
-  	      % (obj._delete ? 'D' : 'd' )
-  	      % (obj._dryrun ? "(dry-run)" : "" );
+              % (obj._delete ? 'D' : 'd' )
+              % (obj._dryrun ? "(dry-run)" : "" );
   }
 
   /**
@@ -62,10 +62,10 @@ namespace Pimpl
     {
       enum Status
       {
-	S_EMPTY,	//< !needed && !downloaded
-	S_SUPERFLUOUS,	//< !needed &&  downloaded
-	S_MISSING,	//<  needed && !downloaded
-	S_OK,		//<  needed &&  downloaded
+        S_EMPTY,	//< !needed && !downloaded
+        S_SUPERFLUOUS,	//< !needed &&  downloaded
+        S_MISSING,	//<  needed && !downloaded
+        S_OK,		//<  needed &&  downloaded
       };
 
       SourcePkg( const std::string & longname_r = std::string() )
@@ -79,27 +79,27 @@ namespace Pimpl
 
       Status status() const
       {
-	if ( needed() )
-	  return downloaded() ? S_OK : S_MISSING;
-	return downloaded() ? S_SUPERFLUOUS : S_EMPTY;
+        if ( needed() )
+          return downloaded() ? S_OK : S_MISSING;
+        return downloaded() ? S_SUPERFLUOUS : S_EMPTY;
       }
 
       PoolItem lookupSrcPackage()
       {
-	if ( ! _srcPackage )
-	{
-	  ResPool pool( ResPool::instance() );
-	  Package::constPtr pkg( _packages.front()->asKind<Package>() );
-	  for_( it, pool.byIdentBegin<SrcPackage>( pkg->sourcePkgName() ), pool.byIdentEnd<SrcPackage>( pkg->sourcePkgName() ) )
-	  {
-	    if ( (*it)->edition() == pkg->sourcePkgEdition() )
-	    {
-	      _srcPackage = *it;
-	      break;
-	    }
-	  }
-	}
-	return _srcPackage;
+        if ( ! _srcPackage )
+        {
+          ResPool pool( ResPool::instance() );
+          Package::constPtr pkg( _packages.front()->asKind<Package>() );
+          for_( it, pool.byIdentBegin<SrcPackage>( pkg->sourcePkgName() ), pool.byIdentEnd<SrcPackage>( pkg->sourcePkgName() ) )
+          {
+            if ( (*it)->edition() == pkg->sourcePkgEdition() )
+            {
+              _srcPackage = *it;
+              break;
+            }
+          }
+        }
+        return _srcPackage;
       }
 
       std::string _longname;	//< Key: name-version-release.type
@@ -122,21 +122,21 @@ namespace Pimpl
       /** Return \ref SourcePkg for \a key_r (assert \c SourcePkg::_longname is set) */
       SourcePkg & get( const std::string & key_r )
       {
-	SourcePkg & ret( operator[]( key_r ) );
-	if ( ret._longname.empty() )
-	  ret._longname = key_r;
-	return ret;
+        SourcePkg & ret( operator[]( key_r ) );
+        if ( ret._longname.empty() )
+          ret._longname = key_r;
+        return ret;
       }
 
       void updateStatus( StatusMap & status_r ) const
       {
-	StatusMap status;
-	for_( it, begin(), end() )
-	{
-	  const SourcePkg & src( it->second );
-	  ++status[src.status()];
-	}
-	status_r.swap( status );
+        StatusMap status;
+        for_( it, begin(), end() )
+        {
+          const SourcePkg & src( it->second );
+          ++status[src.status()];
+        }
+        status_r.swap( status );
       }
     };
 
@@ -200,8 +200,8 @@ namespace Pimpl
     {
       ERR << "Can't create or access download directory" << endl;
       throw( Out::Error( ZYPPER_EXIT_ERR_BUG,
-			 str::Format(_("Can't create or access download directory '%s'.")) % pi.asString(),
-			 Errno( pi.error() ).asString() ) );
+                         str::Format(_("Can't create or access download directory '%s'.")) % pi.asString(),
+                         Errno( pi.error() ).asString() ) );
       return;
     }
 
@@ -209,7 +209,7 @@ namespace Pimpl
     {
       ERR << "Download directory is not readable." << endl;
       throw( Out::Error( ZYPPER_EXIT_ERR_PRIVILEGES,
-			 str::Format(_("Insufficient privileges to use download directory '%s'.")) % pi.asString() ) );
+                         str::Format(_("Insufficient privileges to use download directory '%s'.")) % pi.asString() ) );
       return;
     }
 
@@ -221,31 +221,31 @@ namespace Pimpl
       int ret = readdir( todolist, pi.path(), /*dots*/false );
       if ( ret != 0 )
       {
-	ERR << "Failed to read download directory." << endl;
-	throw( Out::Error( ZYPPER_EXIT_ERR_BUG,
-			   _("Failed to read download directory"),
-			   Errno().asString() ) );
-	return;
+        ERR << "Failed to read download directory." << endl;
+        throw( Out::Error( ZYPPER_EXIT_ERR_BUG,
+                           _("Failed to read download directory"),
+                           Errno().asString() ) );
+        return;
       }
 
       Out::ProgressBar report( _zypper.out(), _("Scanning download directory") );
       report->range( todolist.size() );
       for ( const auto & file : todolist )
       {
-	report->incr();	// fast enough to count in advance.
+        report->incr();	// fast enough to count in advance.
 
-	if ( file == _options._manifestName )
-	  continue;
+        if ( file == _options._manifestName )
+          continue;
 
-	using target::rpm::RpmHeader;
-	Pathname path( pi.path() / file );
-	RpmHeader::constPtr pkg( RpmHeader::readPackage( path, RpmHeader::NOVERIFY ) );
+        using target::rpm::RpmHeader;
+        Pathname path( pi.path() / file );
+        RpmHeader::constPtr pkg( RpmHeader::readPackage( path, RpmHeader::NOVERIFY ) );
 
-	if ( ! ( pkg && pkg->isSrc() ) )
-	  continue;
+        if ( ! ( pkg && pkg->isSrc() ) )
+          continue;
 
-	SourcePkg & spkg( _manifest.get( SourcePkg::makeLongname( pkg->tag_name(), pkg->tag_edition(), pkg->isNosrc() ) ) );
-	spkg._localFile = file;
+        SourcePkg & spkg( _manifest.get( SourcePkg::makeLongname( pkg->tag_name(), pkg->tag_edition(), pkg->isNosrc() ) ) );
+        spkg._localFile = file;
       }
     }
 
@@ -257,21 +257,21 @@ namespace Pimpl
 
       if ( _cmd.defaultSystemSetup( _zypper, flags ) != ZYPPER_EXIT_OK )
       {
-	ERR << "Startup returns " << _zypper.exitCode() << endl;
-	throw( Out::Error(_("Failed to read download directory"),
-			  Errno().asString() ) );
+        ERR << "Startup returns " << _zypper.exitCode() << endl;
+        throw( Out::Error(_("Failed to read download directory"),
+                          Errno().asString() ) );
       }
 
       Out::ProgressBar report( _zypper.out(), _("Scanning installed packages") );
       ResPool pool( ResPool::instance() );
       for_( it, pool.byKindBegin<Package>(), pool.byKindEnd<Package>() )
       {
-	if ( ! it->status().isInstalled() )
-	  continue;
+        if ( ! it->status().isInstalled() )
+          continue;
 
-	SourcePkg & spkg( _manifest.get( (*it)->asKind<Package>()->sourcePkgLongName() ) );
-	spkg._packages.push_back( *it );
-	++_installedPkgCount;	// on the fly count installed packages
+        SourcePkg & spkg( _manifest.get( (*it)->asKind<Package>()->sourcePkgLongName() ) );
+        spkg._packages.push_back( *it );
+        ++_installedPkgCount;	// on the fly count installed packages
       }
     }
   }
@@ -325,23 +325,23 @@ namespace Pimpl
       std::string l2( spkg._longname );
       if ( spkg._packages.empty() )
       {
-	TableRow tr;
-	tr << l1 << l2 << "-----";
-	t << tr;
+        TableRow tr;
+        tr << l1 << l2 << "-----";
+        t << tr;
       }
       else
       {
-	for ( const auto & pkg : spkg._packages )
-	{
-	  TableRow tr;
-	  tr << l1 << l2 << pkg.satSolvable();
-	  t << tr;
-	  if ( ! l1.empty() )
-	  {
-	    l1.clear();
-	    l2 = "  --\"--";
-	  }
-	}
+        for ( const auto & pkg : spkg._packages )
+        {
+          TableRow tr;
+          tr << l1 << l2 << pkg.satSolvable();
+          t << tr;
+          if ( ! l1.empty() )
+          {
+            l1.clear();
+            l2 = "  --\"--";
+          }
+        }
       }
     }
     str << t << endl;
@@ -361,11 +361,11 @@ namespace Pimpl
     {
       if ( _zypper.out().verbosity() > Out::NORMAL )
       {
-	dumpManifestTable( cout );
+        dumpManifestTable( cout );
       }
       else
       {
-	_zypper.out().info(_("Use '--verbose' option for a full list of required source packages.") );
+        _zypper.out().info(_("Use '--verbose' option for a full list of required source packages.") );
       }
       return;	// --> dry run ends here.
     }
@@ -378,27 +378,27 @@ namespace Pimpl
       report->range( status[SourcePkg::S_SUPERFLUOUS] );
       for ( auto & item : _manifest )
       {
-	SourcePkg & spkg( item.second );
-	if ( spkg.status() != SourcePkg::S_SUPERFLUOUS )
-	  continue;
+        SourcePkg & spkg( item.second );
+        if ( spkg.status() != SourcePkg::S_SUPERFLUOUS )
+          continue;
 
-	int res = filesystem::unlink( _dnlDir / spkg._localFile );
-	if ( res != 0 )
-	{
-	  throw( Out::Error( str::Format(_("Failed to remove source package '%s'")) % (_dnlDir / spkg._localFile),
-			     Errno().asString() ) );
-	}
-	MIL << spkg << endl;
-	spkg._localFile.clear();
-	DBG << spkg << endl;
-	report->incr();
+        int res = filesystem::unlink( _dnlDir / spkg._localFile );
+        if ( res != 0 )
+        {
+          throw( Out::Error( str::Format(_("Failed to remove source package '%s'")) % (_dnlDir / spkg._localFile),
+                             Errno().asString() ) );
+        }
+        MIL << spkg << endl;
+        spkg._localFile.clear();
+        DBG << spkg << endl;
+        report->incr();
       }
     }
     else
     {
       std::string msg(_("No superfluous source packages to delete.") );
       if ( status[SourcePkg::S_SUPERFLUOUS] )
-	msg += " (--no-delete)";
+        msg += " (--no-delete)";
       _zypper.out().info( msg );
     }
 
@@ -412,59 +412,59 @@ namespace Pimpl
       unsigned current = 0;
       for ( auto & item : _manifest )
       {
-	SourcePkg & spkg( item.second );
-	if ( spkg.status() != SourcePkg::S_MISSING )
-	  continue;
-	++current;
+        SourcePkg & spkg( item.second );
+        if ( spkg.status() != SourcePkg::S_MISSING )
+          continue;
+        ++current;
 
-	try
-	{
-	  Out::ProgressBar report( _zypper.out(), spkg._longname, current, status[SourcePkg::S_MISSING] );
+        try
+        {
+          Out::ProgressBar report( _zypper.out(), spkg._longname, current, status[SourcePkg::S_MISSING] );
 
-	  if ( ! spkg.lookupSrcPackage() )
-	  {
-	    report.error();
-	    throw( Out::Error( ZYPPER_EXIT_ERR_BUG,
-			       str::Format(_("Source package '%s' is not provided by any repository.")) % spkg._longname ) );
-	  }
-	  report.print( str::form( "%s (%s)",  spkg._longname.c_str(), spkg._srcPackage->repository().name().c_str() ) );
-	  MIL << spkg._srcPackage << endl;
+          if ( ! spkg.lookupSrcPackage() )
+          {
+            report.error();
+            throw( Out::Error( ZYPPER_EXIT_ERR_BUG,
+                               str::Format(_("Source package '%s' is not provided by any repository.")) % spkg._longname ) );
+          }
+          report.print( str::form( "%s (%s)",  spkg._longname.c_str(), spkg._srcPackage->repository().name().c_str() ) );
+          MIL << spkg._srcPackage << endl;
 
-	  ManagedFile localfile;
-	  {
-	    report.error(); // error if provideSrcPackage throws
-	    Out::DownloadProgress redirect( report );
-	    localfile = prov.provideSrcPackage( spkg._srcPackage->asKind<SrcPackage>() );
-	    DBG << localfile << endl;
-	    report.error( false );
-	  }
+          ManagedFile localfile;
+          {
+            report.error(); // error if provideSrcPackage throws
+            Out::DownloadProgress redirect( report );
+            localfile = prov.provideSrcPackage( spkg._srcPackage->asKind<SrcPackage>() );
+            DBG << localfile << endl;
+            report.error( false );
+          }
 
-	  if ( filesystem::hardlinkCopy( localfile, _dnlDir / (spkg._longname+".rpm") ) != 0 )
-	  {
-	    ERR << "Can't hardlink/copy " << localfile << " to " <<  (_dnlDir / spkg._longname) << endl;
-	    report.error();
-	    throw( Out::Error( ZYPPER_EXIT_ERR_BUG,
-			       str::Format(_("Error downloading source package '%s'.")) % spkg._longname,
-			       Errno().asString() ) );
-	  }
-	  spkg._localFile = spkg._longname;
-	}
-	catch ( const Out::Error & error_r )
-	{
-	  error_r.report( _zypper );
-	}
-	catch ( const Exception & exp )
-	{
-	  // TODO: Need class Out::Error support for exceptions
-	  ERR << exp << endl;
-	  _zypper.out().error( exp,
-			       str::Format(_("Error downloading source package '%s'.")) % spkg._longname );
+          if ( filesystem::hardlinkCopy( localfile, _dnlDir / (spkg._longname+".rpm") ) != 0 )
+          {
+            ERR << "Can't hardlink/copy " << localfile << " to " <<  (_dnlDir / spkg._longname) << endl;
+            report.error();
+            throw( Out::Error( ZYPPER_EXIT_ERR_BUG,
+                               str::Format(_("Error downloading source package '%s'.")) % spkg._longname,
+                               Errno().asString() ) );
+          }
+          spkg._localFile = spkg._longname;
+        }
+        catch ( const Out::Error & error_r )
+        {
+          error_r.report( _zypper );
+        }
+        catch ( const Exception & exp )
+        {
+          // TODO: Need class Out::Error support for exceptions
+          ERR << exp << endl;
+          _zypper.out().error( exp,
+                               str::Format(_("Error downloading source package '%s'.")) % spkg._longname );
 
-	  //throw( Out::Error( ZYPPER_EXIT_ERR_BUG ) );
-	}
+          //throw( Out::Error( ZYPPER_EXIT_ERR_BUG ) );
+        }
 
-	if ( _zypper.exitRequested() )
-	  throw( Out::Error( ZYPPER_EXIT_ON_SIGNAL ) );
+        if ( _zypper.exitRequested() )
+          throw( Out::Error( ZYPPER_EXIT_ON_SIGNAL ) );
       }
     }
     else

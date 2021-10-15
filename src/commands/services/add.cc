@@ -71,9 +71,9 @@ void add_service( Zypper & zypper, const ServiceInfo & service )
 // ---------------------------------------------------------------------------
 
 void add_service_by_url( Zypper & zypper,
-			 const Url & url,
-			 const std::string & alias,
-			 const RepoServiceCommonOptions &props )
+                         const Url & url,
+                         const std::string & alias,
+                         const RepoServiceCommonOptions &props )
 {
   MIL << "going to add service by url (alias=" << alias << ", url=" << url << ")" << endl;
 

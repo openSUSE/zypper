@@ -95,12 +95,12 @@ struct DownloadResolvableReportReceiver : public callback::ReceiveReport<repo::D
   void fillsRhs( TermLine & outstr_r, Zypper & zypper_r, Package::constPtr pkg_r )
   {
     outstr_r.rhs << " (" << ++zypper_r.runtimeData().commit_pkg_current
-		 << "/" << zypper_r.runtimeData().commit_pkgs_total << ")";
+                 << "/" << zypper_r.runtimeData().commit_pkgs_total << ")";
     if ( pkg_r )
     {
       outstr_r.rhs << ", " << pkg_r->downloadSize().asString( 5, 3 ) << " "
-		   // TranslatorExplanation %s is package size like "5.6 M"
-		   << str::Format(_("(%s unpacked)")) % pkg_r->installSize().asString( 5, 3 );
+                   // TranslatorExplanation %s is package size like "5.6 M"
+                   << str::Format(_("(%s unpacked)")) % pkg_r->installSize().asString( 5, 3 );
     }
   }
 
@@ -182,22 +182,22 @@ struct DownloadResolvableReportReceiver : public callback::ReceiveReport<repo::D
     {
       switch ( el.first )
       {
-	case RpmDb::CHK_OK:
-	  if ( zypper.out().verbosity() >= Out::HIGH )	// quiet about good sigcheck unless verbose.
-	    msg << el.second << "\n";
-	  break;
-	case RpmDb::CHK_NOSIG:
-	   msg << ( (result == RpmDb::CHK_OK ? ColorContext::MSG_WARNING : ColorContext::MSG_ERROR ) << el.second ) << "\n";
-	   break;
-	case RpmDb::CHK_NOKEY:		// can't check
-	case RpmDb::CHK_NOTFOUND:
-	  msg << ( ColorContext::MSG_WARNING << el.second ) << "\n";
-	  break;
-	case RpmDb::CHK_FAIL:		// failed check
-	case RpmDb::CHK_NOTTRUSTED:
-	case RpmDb::CHK_ERROR:
-	  msg << ( ColorContext::MSG_ERROR << el.second ) << "\n";
-	  break;
+        case RpmDb::CHK_OK:
+          if ( zypper.out().verbosity() >= Out::HIGH )	// quiet about good sigcheck unless verbose.
+            msg << el.second << "\n";
+          break;
+        case RpmDb::CHK_NOSIG:
+           msg << ( (result == RpmDb::CHK_OK ? ColorContext::MSG_WARNING : ColorContext::MSG_ERROR ) << el.second ) << "\n";
+           break;
+        case RpmDb::CHK_NOKEY:		// can't check
+        case RpmDb::CHK_NOTFOUND:
+          msg << ( ColorContext::MSG_WARNING << el.second ) << "\n";
+          break;
+        case RpmDb::CHK_FAIL:		// failed check
+        case RpmDb::CHK_NOTTRUSTED:
+        case RpmDb::CHK_ERROR:
+          msg << ( ColorContext::MSG_ERROR << el.second ) << "\n";
+          break;
       }
     }
 
@@ -205,7 +205,7 @@ struct DownloadResolvableReportReceiver : public callback::ReceiveReport<repo::D
     {
       const std::string & msgstr( msg.str() );
       if ( ! msgstr.empty() )
-	zypper.out().info( msg );
+        zypper.out().info( msg );
       return;
     }
 
@@ -217,22 +217,22 @@ struct DownloadResolvableReportReceiver : public callback::ReceiveReport<repo::D
       std::string err( str::Str() << pkg->asUserString() << ": " << _("Signature verification failed") << " " << result );
       switch ( result )
       {
-	case RpmDb::CHK_OK:
-	  // Can't happen; already handled above
-	  break;
+        case RpmDb::CHK_OK:
+          // Can't happen; already handled above
+          break;
 
-	case RpmDb::CHK_NOKEY:		// can't check
-	case RpmDb::CHK_NOTFOUND:
-	case RpmDb::CHK_NOSIG:
-	  msg << ( ColorContext::MSG_WARNING << err ) << "\n";
-	  break;
+        case RpmDb::CHK_NOKEY:		// can't check
+        case RpmDb::CHK_NOTFOUND:
+        case RpmDb::CHK_NOSIG:
+          msg << ( ColorContext::MSG_WARNING << err ) << "\n";
+          break;
 
-	case RpmDb::CHK_FAIL:		// failed check
-	case RpmDb::CHK_ERROR:
-	case RpmDb::CHK_NOTTRUSTED:
-	default:
-	  msg << ( ColorContext::MSG_ERROR << err ) << "\n";
-	  break;
+        case RpmDb::CHK_FAIL:		// failed check
+        case RpmDb::CHK_ERROR:
+        case RpmDb::CHK_NOTTRUSTED:
+        default:
+          msg << ( ColorContext::MSG_ERROR << err ) << "\n";
+          break;
       }
       msg << _("Accepting package despite the error.") << " (--no-gpg-checks)" << "\n";
       userData_r.set( "Action", IGNORE );
@@ -294,7 +294,7 @@ struct ProgressReportReceiver  : public callback::ReceiveReport<ProgressReport>
     Zypper::instance().out().progressEnd(
         str::numstring(data.numericId()),
         data.name(),
-	!( last == 100 || last == -1 )
+        !( last == 100 || last == -1 )
     );
   }
 };

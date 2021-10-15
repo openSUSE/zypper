@@ -41,7 +41,7 @@ struct CliMatchPatch
     {
       if ( val && ( !_dateBefore || val < _dateBefore ) )
       {
-	_dateBefore = val;
+        _dateBefore = val;
       }
     }
     _categories = std::move( categories_r );
@@ -75,11 +75,11 @@ struct CliMatchPatch
     if ( patch_r )	// non-patches pass
     {
       if ( _dateBefore && patch_r->timestamp() > _dateBefore )
-	return Missmatch::Date;
+        return Missmatch::Date;
       if ( ! ( _categories.empty() || patch_r->isCategory( _categories ) ) )
-	return Missmatch::Category;
+        return Missmatch::Category;
       if ( ! ( _severities.empty() || patch_r->isSeverity( _severities ) ) )
-	return Missmatch::Severity;
+        return Missmatch::Severity;
     }
     return Missmatch::None;
   }
@@ -289,9 +289,9 @@ public:
     };
 
     Feedback( const Id id,
-	      const PackageSpec & reqpkg,
-	      const PoolItem & selected = PoolItem(),
-	      const PoolItem & installed = PoolItem() )
+              const PackageSpec & reqpkg,
+              const PoolItem & selected = PoolItem(),
+              const PoolItem & installed = PoolItem() )
     : _id( id )
     , _reqpkg( reqpkg )
     , _objsel( selected )
@@ -456,9 +456,9 @@ private:
   void addConflict( const PackageSpec & pkg );
 
   void addFeedback( const Feedback::Id id,
-		    const PackageSpec & reqpkg,
-		    const PoolItem & selected = PoolItem(),
-		    const PoolItem & installed = PoolItem() )
+                    const PackageSpec & reqpkg,
+                    const PoolItem & selected = PoolItem(),
+                    const PoolItem & installed = PoolItem() )
   { _feedback.push_back( Feedback( id, reqpkg, selected, installed ) ); }
 
   void addFeedback( const Feedback::Id id_r, const PackageSpec & reqpkg_r, std::string userdata_r )

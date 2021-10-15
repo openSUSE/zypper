@@ -50,7 +50,7 @@ int rename_repo( Zypper & zypper, const std::string & alias, const std::string &
   {
     ERR << "Error while modifying the repository " << ex.asUserString() << endl;
     zypper.out().error( ex, _("Error while modifying the repository:"),
-			str::Format(_("Leaving repository '%s' unchanged.")) % alias );
+                        str::Format(_("Leaving repository '%s' unchanged.")) % alias );
   }
   return ZYPPER_EXIT_OK;
 }

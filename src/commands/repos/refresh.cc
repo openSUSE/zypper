@@ -208,52 +208,52 @@ int RefreshRepoCmd::refreshRepositories( Zypper &zypper, RefreshFlags flags_r, c
 
       if ( repo.enabled() )
       {
-	// enabled: Refreshed unless restricted by CLI args or mentioned in
-	// --plus-content as specific repo.
-	if ( !specified.empty() && std::find( specified.begin(), specified.end(), repo ) == specified.end() )
-	{
-	  if ( plusContent.count( repo ) )
-	  {
-	    MIL << "[--plus-content] check " << repo.alias() << endl;
-	    zypper.out().info( str::Format(_("Refreshing repository '%s'.")) % repo.asUserString(),
-			       " [--plus-content]" );
-	  }
-	  else
-	  {
-	    DBG << repo.alias() << "(#" << ") not specified," << " skipping." << endl;
-	    enabled_repo_count--;
-	    continue;
-	  }
-	}
+        // enabled: Refreshed unless restricted by CLI args or mentioned in
+        // --plus-content as specific repo.
+        if ( !specified.empty() && std::find( specified.begin(), specified.end(), repo ) == specified.end() )
+        {
+          if ( plusContent.count( repo ) )
+          {
+            MIL << "[--plus-content] check " << repo.alias() << endl;
+            zypper.out().info( str::Format(_("Refreshing repository '%s'.")) % repo.asUserString(),
+                               " [--plus-content]" );
+          }
+          else
+          {
+            DBG << repo.alias() << "(#" << ") not specified," << " skipping." << endl;
+            enabled_repo_count--;
+            continue;
+          }
+        }
       }
       else
       {
-	// disabled: No refresh unless mentioned in --plus-content (specific or content check).
-	// CLI args reffering to disabled repos are reported as error.
-	if ( doContentCheck || plusContent.count( repo ) )
-	{
-	  MIL << "[--plus-content] check " << repo.alias() << endl;
-	  zypper.out().info( str::Format(_("Scanning content of disabled repository '%s'.")) % repo.asUserString(),
-			     " [--plus-content]" );
-	}
-	else
-	{
-	  if ( !specified.empty() && std::find( specified.begin(), specified.end(), repo ) == specified.end() )
-	  {
-	    DBG << repo.alias() << "(#" << ") not specified," << " skipping." << endl;
-	  }
-	  else
-	  {
-	    std::string msg( str::Format(_("Skipping disabled repository '%s'")) % repo.asUserString() );
+        // disabled: No refresh unless mentioned in --plus-content (specific or content check).
+        // CLI args reffering to disabled repos are reported as error.
+        if ( doContentCheck || plusContent.count( repo ) )
+        {
+          MIL << "[--plus-content] check " << repo.alias() << endl;
+          zypper.out().info( str::Format(_("Scanning content of disabled repository '%s'.")) % repo.asUserString(),
+                             " [--plus-content]" );
+        }
+        else
+        {
+          if ( !specified.empty() && std::find( specified.begin(), specified.end(), repo ) == specified.end() )
+          {
+            DBG << repo.alias() << "(#" << ") not specified," << " skipping." << endl;
+          }
+          else
+          {
+            std::string msg( str::Format(_("Skipping disabled repository '%s'")) % repo.asUserString() );
 
-	    if ( specified.empty() )
-	      zypper.out().info( msg, Out::HIGH );
-	    else
-	      zypper.out().error( msg );
-	  }
-	  enabled_repo_count--;
-	  continue;
-	}
+            if ( specified.empty() )
+              zypper.out().info( msg, Out::HIGH );
+            else
+              zypper.out().error( msg );
+          }
+          enabled_repo_count--;
+          continue;
+        }
       }
 
       // do the refresh
@@ -285,7 +285,7 @@ int RefreshRepoCmd::refreshRepositories( Zypper &zypper, RefreshFlags flags_r, c
     }
 
     zypper.out().info( str::form(_("Use '%s' or '%s' commands to add or enable repositories."),
-				 "zypper addrepo", "zypper modifyrepo" ) );
+                                 "zypper addrepo", "zypper modifyrepo" ) );
     return code;
   }
   else if ( error_count == enabled_repo_count )

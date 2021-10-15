@@ -63,10 +63,10 @@ namespace
       const PoolItem & ipi( ui::Selectable::get(pi_r)->installedObj() );
       if ( ipi )
       {
-	if ( pi_r.edition() != ipi.edition() )
-	  parent.addAttr( { "edition-old", ipi.edition() } );
-	if ( pi_r.arch() != ipi.arch() )
-	  parent.addAttr( { "arch-old", ipi.arch() } );
+        if ( pi_r.edition() != ipi.edition() )
+          parent.addAttr( { "edition-old", ipi.edition() } );
+        if ( pi_r.arch() != ipi.arch() )
+          parent.addAttr( { "arch-old", ipi.arch() } );
       }
     }
 
@@ -77,8 +77,8 @@ namespace
     if ( !pi_r.repoInfo().alias().empty() )
     {
       xmlout::Node( *parent, "source", xmlout::Node::optionalContent, {
-	{ "url", pi_r.repoInfo().url().asString() },
-	{ "alias", pi_r.repoInfo().alias() },
+        { "url", pi_r.repoInfo().url().asString() },
+        { "alias", pi_r.repoInfo().alias() },
       } );
     }
     return str;
@@ -91,8 +91,8 @@ namespace
     for_( it, begin_r, end_r )
     {
       xmlout::Node issue { *parent, "issue", xmlout::Node::optionalContent, {
-	{ "type", it.type() },
-	{ "id", it.id() },
+        { "type", it.type() },
+        { "id", it.id() },
       } };
       zypp::dumpAsXmlOn( *issue, it.title(), "title" );
       zypp::dumpAsXmlOn( *issue, it.href(), "href" );
@@ -128,10 +128,10 @@ namespace
     if ( PatchHistoryData::value_type res { patchHistoryData_r[pi_r] }; res != PatchHistoryData::noData )
     {
       if ( res.second == pi_r.status().validate() )
-	dumpAsXmlOn( *parent, res.first, "status-since" );
+        dumpAsXmlOn( *parent, res.first, "status-since" );
       else
-	// patch status was changed by a non zypp transaction (not mentioned in the history)
-	DBG << "PatchHistoryData " << res.second << " but " << pi_r << endl;
+        // patch status was changed by a non zypp transaction (not mentioned in the history)
+        DBG << "PatchHistoryData " << res.second << " but " << pi_r << endl;
     }
     dumpAsXmlOn( *parent, patch->summary(), "summary" );
     dumpAsXmlOn( *parent, patch->description(), "description" );
@@ -140,8 +140,8 @@ namespace
     if ( !patch->repoInfo().alias().empty() )
     {
       xmlout::Node( *parent, "source", xmlout::Node::optionalContent, {
-	{ "url", patch->repoInfo().url().asString() },
-	{ "alias", patch->repoInfo().alias() },
+        { "url", patch->repoInfo().url().asString() },
+        { "alias", patch->repoInfo().alias() },
       } );
     }
 
@@ -258,28 +258,28 @@ namespace
     {
       bool operator()( const Patch::Category & lhs, const Patch::Category & rhs ) const
       {
-	if ( lhs == rhs )
-	  return false;
+        if ( lhs == rhs )
+          return false;
 
-	// top
-	if ( lhs == Patch::CAT_SECURITY )
-	  return true;
-	if ( rhs == Patch::CAT_SECURITY )
-	  return false;
+        // top
+        if ( lhs == Patch::CAT_SECURITY )
+          return true;
+        if ( rhs == Patch::CAT_SECURITY )
+          return false;
 
-	if ( lhs == Patch::CAT_RECOMMENDED )
-	  return true;
-	if ( rhs == Patch::CAT_RECOMMENDED )
-	  return false;
+        if ( lhs == Patch::CAT_RECOMMENDED )
+          return true;
+        if ( rhs == Patch::CAT_RECOMMENDED )
+          return false;
 
-	// bottom
-	if ( lhs == Patch::CAT_OPTIONAL )
-	  return false;
-	if ( rhs == Patch::CAT_OPTIONAL )
-	  return true;
+        // bottom
+        if ( lhs == Patch::CAT_OPTIONAL )
+          return false;
+        if ( rhs == Patch::CAT_OPTIONAL )
+          return true;
 
-	// the remaining ones in between
-	return lhs > rhs;
+        // the remaining ones in between
+        return lhs > rhs;
       }
     };
 
@@ -290,19 +290,19 @@ namespace
     {
       ++_collected;
       Level level = pi_r.isUnwanted() ? PatchCheckStats::kLOCKED
-				      : ( patch_r->restartSuggested() ? PatchCheckStats::kUSTACK
-								      : PatchCheckStats::kNEEDED );
+                                      : ( patch_r->restartSuggested() ? PatchCheckStats::kUSTACK
+                                                                      : PatchCheckStats::kNEEDED );
 
       Patch::Category cat = patch_r->categoryEnum();
       if ( level == kLOCKED )
-	++_locked;
+        ++_locked;
       else if ( _excludeOptionalPatches && cat == Patch::CAT_OPTIONAL )
-	++_optional;
+        ++_optional;
       else
       {
-	++_needed;
-	if ( cat == Patch::CAT_SECURITY )
-	  ++_security;
+        ++_needed;
+        if ( cat == Patch::CAT_SECURITY )
+          ++_security;
       }
 
       // detailed stats:
@@ -310,7 +310,7 @@ namespace
       ++detail[level];
       const std::string & ctgry( patch_r->category() );	// on the fly remember aliases, e.g. 'feature' == 'optional'
       if ( asString( cat ) != ctgry )
-	detail._aka.insert( ctgry );
+        detail._aka.insert( ctgry );
     }
 
     std::string renderCounter( const Counter & counter_r ) const
@@ -332,37 +332,37 @@ namespace
     if ( visited() )
     {
       if ( visited() && visited() > collected() )
-	// translator: stats table header (plural number is %2%)
-	out.info( str::Format(PL_("Considering %1% out of %2% applicable patches:",
-				  "Considering %1% out of %2% applicable patches:", visited())) % collected() % visited() );
-	else
-	  // translator: stats table header
-	  out.info( str::Format(PL_("Found %1% applicable patch:", "Found %1% applicable patches:", collected())) % collected() );
+        // translator: stats table header (plural number is %2%)
+        out.info( str::Format(PL_("Considering %1% out of %2% applicable patches:",
+                                  "Considering %1% out of %2% applicable patches:", visited())) % collected() % visited() );
+        else
+          // translator: stats table header
+          out.info( str::Format(PL_("Found %1% applicable patch:", "Found %1% applicable patches:", collected())) % collected() );
 
-	if ( collected() )
-	{
-	  if ( withDetails_r )
-	    renderDetails( out );
+        if ( collected() )
+        {
+          if ( withDetails_r )
+            renderDetails( out );
 
-	  if ( locked() )
-	  {
-	    // translator: stats summary
-	    out.info( ColorString( str::Format(PL_("%d patch locked", "%d patches locked", locked())) % locked(),
-				   ColorContext::HIGHLIGHT ).str(),
-		      Out::QUIET );
-	  }
+          if ( locked() )
+          {
+            // translator: stats summary
+            out.info( ColorString( str::Format(PL_("%d patch locked", "%d patches locked", locked())) % locked(),
+                                   ColorContext::HIGHLIGHT ).str(),
+                      Out::QUIET );
+          }
 
-	  if ( optional() )	// only if exclude_optional_patches
-	  {
-	    // translator: stats summary
-	    out.infoLRHint( ColorString( str::Format(PL_("%d patch optional", "%d patches optional", optional())) % optional(),
-					 ColorContext::LOWLIGHT ).str(),
-			    // translator: Hint displayed right adjusted; %1% is a CLI option
-			    // "42 patches optional                  (use --with-optional to include optional patches)"
-			    str::Format(_("use '%1%' to include optional patches")) % "--with-optional",
-			    Out::QUIET );
-	  }
-	}
+          if ( optional() )	// only if exclude_optional_patches
+          {
+            // translator: stats summary
+            out.infoLRHint( ColorString( str::Format(PL_("%d patch optional", "%d patches optional", optional())) % optional(),
+                                         ColorContext::LOWLIGHT ).str(),
+                            // translator: Hint displayed right adjusted; %1% is a CLI option
+                            // "42 patches optional                  (use --with-optional to include optional patches)"
+                            str::Format(_("use '%1%' to include optional patches")) % "--with-optional",
+                            Out::QUIET );
+          }
+        }
     }
     // always:
     {
@@ -391,46 +391,46 @@ namespace
       // 1st pass
       for ( const auto & p : _stats )
       {
-	const Stats & stats( p.second );
-	if ( !haveUPD && stats[kUSTACK] )	haveUPD = true;
-	if ( !havePAT && stats[kNEEDED])	havePAT = true;
-	if ( !haveLCK && stats[kLOCKED])	haveLCK = true;
-	if ( !haveAKA && !stats._aka.empty() )	haveAKA = true;
+        const Stats & stats( p.second );
+        if ( !haveUPD && stats[kUSTACK] )	haveUPD = true;
+        if ( !havePAT && stats[kNEEDED])	havePAT = true;
+        if ( !haveLCK && stats[kLOCKED])	haveLCK = true;
+        if ( !haveAKA && !stats._aka.empty() )	haveAKA = true;
       }
 
       // 2nd pass
       Table tbl;
       {
-	TableHeader hdr;
-	// translator: Table column header.
-	hdr << N_("Category");
-	// translator: Table column header.
-	if ( haveUPD )	hdr << N_("Updatestack");
-	// translator: Table column header.
-	if ( havePAT )	hdr << N_("Patches");
-	// translator: Table column header.
-	if ( haveLCK )	hdr << ColorString( ctxtLocked, N_("Locked") );
-	// translator: Table column header
-	// Used if stats collect data for more than one category name.
-	// Category    | Updatestack | Patches | Locked | Included categories
-	// ------------+-------------+---------+--------+---------------------
-	//  optional   | ...                      ..... | enhancement, feature
-	if ( haveAKA )	hdr << N_("Included categories");
-	tbl << std::move(hdr);
+        TableHeader hdr;
+        // translator: Table column header.
+        hdr << N_("Category");
+        // translator: Table column header.
+        if ( haveUPD )	hdr << N_("Updatestack");
+        // translator: Table column header.
+        if ( havePAT )	hdr << N_("Patches");
+        // translator: Table column header.
+        if ( haveLCK )	hdr << ColorString( ctxtLocked, N_("Locked") );
+        // translator: Table column header
+        // Used if stats collect data for more than one category name.
+        // Category    | Updatestack | Patches | Locked | Included categories
+        // ------------+-------------+---------+--------+---------------------
+        //  optional   | ...                      ..... | enhancement, feature
+        if ( haveAKA )	hdr << N_("Included categories");
+        tbl << std::move(hdr);
       }
 
       for ( const auto & p : _stats )
       {
-	const Patch::Category & category( p.first );
-	const Stats & stats( p.second );
+        const Patch::Category & category( p.first );
+        const Stats & stats( p.second );
 
-	TableRow row( category == Patch::CAT_OPTIONAL ? ctxtOptional : ColorContext::DEFAULT );
-	row << category;
-	if ( haveUPD )	row << renderCounter(stats[kUSTACK]);
-	if ( havePAT )	row << renderCounter(stats[kNEEDED]);
-	if ( haveLCK )	row << ColorString( ctxtLocked, renderCounter(stats[kLOCKED]) );
-	if ( haveAKA )	row << ( stats._aka.empty() ? "" : str::join( stats._aka, ", " ) );
-	tbl << std::move(row);
+        TableRow row( category == Patch::CAT_OPTIONAL ? ctxtOptional : ColorContext::DEFAULT );
+        row << category;
+        if ( haveUPD )	row << renderCounter(stats[kUSTACK]);
+        if ( havePAT )	row << renderCounter(stats[kNEEDED]);
+        if ( haveLCK )	row << ColorString( ctxtLocked, renderCounter(stats[kLOCKED]) );
+        if ( haveAKA )	row << ( stats._aka.empty() ? "" : str::join( stats._aka, ", " ) );
+        tbl << std::move(row);
       }
       cout << tbl;
       out.gap();
@@ -496,7 +496,7 @@ static bool xml_list_patches (Zypper & zypper, bool all_r, const PatchHistoryDat
       // if updates stack patches are available, show only those
       if ( all_r || !pkg_mgr_available || patchIsNeededRestartSuggested( pi ) )
       {
-	xmlPrintPatchUpdateOn( cout, pi, patchHistoryData_r );
+        xmlPrintPatchUpdateOn( cout, pi, patchHistoryData_r );
       }
     }
     ++patchcount;
@@ -518,10 +518,10 @@ static bool xml_list_patches (Zypper & zypper, bool all_r, const PatchHistoryDat
     {
       if ( patchIsApplicable( *it ) )
       {
-	const PoolItem & pi( *it );
-	Patch::constPtr patch = pi->asKind<Patch>();
-	if ( ! patchIsNeededRestartSuggested( pi ) )
-	  xmlPrintPatchUpdateOn( cout, pi, patchHistoryData_r );
+        const PoolItem & pi( *it );
+        Patch::constPtr patch = pi->asKind<Patch>();
+        if ( ! patchIsNeededRestartSuggested( pi ) )
+          xmlPrintPatchUpdateOn( cout, pi, patchHistoryData_r );
       }
     }
     cout << "</blocked-update-list>" << endl;
@@ -575,9 +575,9 @@ static bool list_patch_updates( Zypper & zypper, bool all_r, const PatchSelector
     if ( all_r || patchIsApplicable( pi ) )
     {
       if ( ! all_r && patchIsNeededRestartSuggested( pi ) )
-	intoPMTbl( pi );
+        intoPMTbl( pi );
       else
-	intoTbl( pi );
+        intoTbl( pi );
     }
   }
 
@@ -642,7 +642,7 @@ find_updates( const ResKind & kind, Candidates & candidates, bool all_r )
     for (; it != e; ++it)
     {
       if ( (*it)->kind() != ResKind::package )
-	continue;	// package updates only (bnc#779740)
+        continue;	// package updates only (bnc#779740)
 
       // show every package picked by doUpdate for installation
       // except the ones which are not currently installed (bnc #483910)
@@ -876,8 +876,8 @@ void list_patches_by_issue( Zypper & zypper, bool all_r, const PatchSelector & s
       q.addAttribute( sat::SolvAttr::updateReferenceId, issue.id() );
       if ( issue.anyType() && issue.specificId() ) 				// remember for pass2
       {
-	q.addAttribute( sat::SolvAttr::updateReferenceType, issue.id() );	// bnc#941309: let '--issue=bugzilla' also match the type
-	pass2.push_back( &issue );
+        q.addAttribute( sat::SolvAttr::updateReferenceType, issue.id() );	// bnc#941309: let '--issue=bugzilla' also match the type
+        pass2.push_back( &issue );
       }
     }
 
@@ -886,21 +886,21 @@ void list_patches_by_issue( Zypper & zypper, bool all_r, const PatchSelector & s
       PoolItem pi { *it };
 
       if ( only_needed && ! patchIsApplicable( pi ) )
-	continue;
+        continue;
 
       if ( ! cliMatchPatch( pi ) )
       {
-	DBG << pi.ident() << " skipped. (not matching CLI filter)" << endl;
-	continue;
+        DBG << pi.ident() << " skipped. (not matching CLI filter)" << endl;
+        continue;
       }
 
       for_( d, it.matchesBegin(), it.matchesEnd() )
       {
-	std::string itype { d->subFind( sat::SolvAttr::updateReferenceType ).asString() };
-	if ( issue.specificType() && itype != issue.type() )
-	  continue;	// assert correct type of specific IDs
-	// remember....
-	iresult[std::move(pi)][std::move(itype)].insert( d->subFind( sat::SolvAttr::updateReferenceId ).asString() );
+        std::string itype { d->subFind( sat::SolvAttr::updateReferenceType ).asString() };
+        if ( issue.specificType() && itype != issue.type() )
+          continue;	// assert correct type of specific IDs
+        // remember....
+        iresult[std::move(pi)][std::move(itype)].insert( d->subFind( sat::SolvAttr::updateReferenceId ).asString() );
       }
     }
   }
@@ -922,12 +922,12 @@ void list_patches_by_issue( Zypper & zypper, bool all_r, const PatchSelector & s
       PoolItem pi { *it };
 
       if ( only_needed && ! patchIsApplicable( pi ) )
-	continue;
+        continue;
 
       if ( ! cliMatchPatch( pi ) )
       {
-	DBG << pi.ident() << " skipped. (not matching CLI filter)" << endl;
-	continue;
+        DBG << pi.ident() << " skipped. (not matching CLI filter)" << endl;
+        continue;
       }
 
       if ( ! iresult.count( pi ) )
@@ -953,9 +953,9 @@ void list_patches_by_issue( Zypper & zypper, bool all_r, const PatchSelector & s
       const PoolItem & pi { res.first };
       for ( const auto & ires : res.second )
       {
-	const std::string & itype { ires.first };
-	for ( const std::string & iid : ires.second )
-	{ intoIssueMatchesTbl( pi, itype, iid ); }
+        const std::string & itype { ires.first };
+        for ( const std::string & iid : ires.second )
+        { intoIssueMatchesTbl( pi, itype, iid ); }
       }
     }
 
@@ -974,22 +974,22 @@ void list_patches_by_issue( Zypper & zypper, bool all_r, const PatchSelector & s
     {
       if ( !issueMatchesTbl.empty() )
       {
-	zypper.out().gap();
-	zypper.out().info(_("The following matches in issue numbers have been found:"));
+        zypper.out().gap();
+        zypper.out().info(_("The following matches in issue numbers have been found:"));
 
-	issueMatchesTbl.sort(); // use default sort
-	zypper.out().gap();
-	cout << issueMatchesTbl;
+        issueMatchesTbl.sort(); // use default sort
+        zypper.out().gap();
+        cout << issueMatchesTbl;
       }
 
       if ( !descrMatchesTbl.empty() )
       {
-	zypper.out().gap();
-	zypper.out().info(_( "Matches in patch descriptions of the following patches have been found:"));
+        zypper.out().gap();
+        zypper.out().info(_( "Matches in patch descriptions of the following patches have been found:"));
 
-	descrMatchesTbl.sort(); // use default sort
-	zypper.out().gap();
-	cout << descrMatchesTbl;
+        descrMatchesTbl.sort(); // use default sort
+        zypper.out().gap();
+        cout << descrMatchesTbl;
       }
     }
   }
@@ -1021,7 +1021,7 @@ void mark_updates_by_issue( Zypper & zypper, const std::set<Issue> &issues, Solv
       Patch::constPtr patch = asKind<Patch>(pi);
 
       if ( !pi.isBroken() ) // not needed
-	continue;
+        continue;
 
       // CliMatchPatch not needed, it's fed into srOpts!
 
@@ -1029,16 +1029,16 @@ void mark_updates_by_issue( Zypper & zypper, const std::set<Issue> &issues, Solv
 
       for_( d, it.matchesBegin(), it.matchesEnd() )
       {
-	const std::string & itype = d->subFind( sat::SolvAttr::updateReferenceType ).asString();
+        const std::string & itype = d->subFind( sat::SolvAttr::updateReferenceType ).asString();
 
-	if ( issue.specificType() && itype != issue.type() )
-	  continue;	// assert correct type of specific IDs
+        if ( issue.specificType() && itype != issue.type() )
+          continue;	// assert correct type of specific IDs
 
-	if ( sr.installPatch( pi ) )
-	  found = true;
-	else
-	  DBG << str::form("fix for %s issue number %s was not marked.",
-			   issue.type().c_str(), issue.id().c_str() );
+        if ( sr.installPatch( pi ) )
+          found = true;
+        else
+          DBG << str::form("fix for %s issue number %s was not marked.",
+                           issue.type().c_str(), issue.id().c_str() );
       }
     }
 
@@ -1047,12 +1047,12 @@ void mark_updates_by_issue( Zypper & zypper, const std::set<Issue> &issues, Solv
     {
       const std::string & itype( issue.type() );
       if ( itype == "bugzilla" )
-	zypper.out().info(str::form(_("Fix for bugzilla issue number %s was not found or is not needed."), issue.id().c_str() ));
+        zypper.out().info(str::form(_("Fix for bugzilla issue number %s was not found or is not needed."), issue.id().c_str() ));
       else if ( itype == "cve" )
-	zypper.out().info(str::form(_("Fix for CVE issue number %s was not found or is not needed."), issue.id().c_str() ));
+        zypper.out().info(str::form(_("Fix for CVE issue number %s was not found or is not needed."), issue.id().c_str() ));
       else
-	// translators: keep '%s issue' together, it's something like 'CVE issue' or 'Bugzilla issue'
-	zypper.out().info(str::form(_("Fix for %s issue number %s was not found or is not needed."), itype.c_str(), issue.id().c_str() ));
+        // translators: keep '%s issue' together, it's something like 'CVE issue' or 'Bugzilla issue'
+        zypper.out().info(str::form(_("Fix for %s issue number %s was not found or is not needed."), itype.c_str(), issue.id().c_str() ));
       zypper.setExitCode( ZYPPER_EXIT_INF_CAP_NOT_FOUND );
     }
   } // next issue from --bz --cve

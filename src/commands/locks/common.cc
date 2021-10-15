@@ -41,18 +41,18 @@ namespace locks
       if ( d.isVersioned() )
       {
 #ifdef ENABLE_NEW_STYLE_VERSIONED_LOCKS
-	q_r.addDependency( sat::SolvAttr::name, d.name().asString(), d.op(), d.ed() );
+        q_r.addDependency( sat::SolvAttr::name, d.name().asString(), d.op(), d.ed() );
 #else
-	q_r.addAttribute( sat::SolvAttr::name, d.name().asString() );
-	q_r.setEdition( d.ed(), d.op() );
+        q_r.addAttribute( sat::SolvAttr::name, d.name().asString() );
+        q_r.setEdition( d.ed(), d.op() );
 #endif
       }
       else
       {
 #ifdef ENABLE_NEW_STYLE_VERSIONED_LOCKS
-	q_r.addDependency( sat::SolvAttr::name, arg_r );
+        q_r.addDependency( sat::SolvAttr::name, arg_r );
 #else
-	q_r.addAttribute( sat::SolvAttr::name, arg_r );
+        q_r.addAttribute( sat::SolvAttr::name, arg_r );
 #endif
       }
     }
@@ -75,9 +75,9 @@ namespace locks
     {
       RepoInfo info;
       if ( match_repo( zypper, *it, &info ) )
-	q.addRepo( info.alias() );
+        q.addRepo( info.alias() );
       else //TODO some error handling
-	WAR << "unknown repository" << *it << endl;
+        WAR << "unknown repository" << *it << endl;
     }
     q.setComment(comment_r);
 
@@ -91,7 +91,7 @@ namespace locks
     {
       addNameDependency( q, arg_r );
       for_( it, kinds_r.begin(), kinds_r.end() )
-	q.addKind( *it );
+        q.addKind( *it );
     }
 
     return q;

@@ -37,10 +37,10 @@ namespace ZmartRecipients
         if (u==url)
         {
           if (++counter>=REPEAT_LIMIT)
-	  {
-	    counter = 0;	// reset!: next request might use the same URL again.
+          {
+            counter = 0;	// reset!: next request might use the same URL again.
             return true;
-	  }
+          }
         }
         else
         {

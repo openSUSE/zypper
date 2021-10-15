@@ -253,30 +253,30 @@ int ModifyServiceCmd::modifyService( Zypper & zypper, const std::string & alias 
       if ( !artoenable.empty() )
       {
         zypper.out().info( str::Format(PL_("Repository '%s' has been added to enabled repositories of service '%s'",
-					   "Repositories '%s' have been added to enabled repositories of service '%s'",
-					   artoenable.size()))
-	                   % str::join( artoenable.begin(), artoenable.end(), ", " ) % alias );
+                                           "Repositories '%s' have been added to enabled repositories of service '%s'",
+                                           artoenable.size()))
+                           % str::join( artoenable.begin(), artoenable.end(), ", " ) % alias );
       }
       if ( !artodisable.empty() )
       {
         zypper.out().info( str::Format(PL_("Repository '%s' has been added to disabled repositories of service '%s'",
-					   "Repositories '%s' have been added to disabled repositories of service '%s'",
-					   artodisable.size()))
-			   % str::join( artodisable.begin(), artodisable.end(), ", " ) % alias );
+                                           "Repositories '%s' have been added to disabled repositories of service '%s'",
+                                           artodisable.size()))
+                           % str::join( artodisable.begin(), artodisable.end(), ", " ) % alias );
       }
       if ( !rrtoenable.empty() )
       {
         zypper.out().info( str::Format(PL_("Repository '%s' has been removed from enabled repositories of service '%s'",
-					   "Repositories '%s' have been removed from enabled repositories of service '%s'",
-					   rrtoenable.size()))
-			   % str::join( rrtoenable.begin(), rrtoenable.end(), ", " ) % alias );
+                                           "Repositories '%s' have been removed from enabled repositories of service '%s'",
+                                           rrtoenable.size()))
+                           % str::join( rrtoenable.begin(), rrtoenable.end(), ", " ) % alias );
       }
       if ( !rrtodisable.empty())
       {
         zypper.out().info( str::Format(PL_("Repository '%s' has been removed from disabled repositories of service '%s'",
-					   "Repositories '%s' have been removed from disabled repositories of service '%s'",
-					   rrtodisable.size()))
-			   % str::join( rrtodisable.begin(), rrtodisable.end(), ", " ) % alias );
+                                           "Repositories '%s' have been removed from disabled repositories of service '%s'",
+                                           rrtodisable.size()))
+                           % str::join( rrtodisable.begin(), rrtodisable.end(), ", " ) % alias );
       }
     }
     else
@@ -289,7 +289,7 @@ int ModifyServiceCmd::modifyService( Zypper & zypper, const std::string & alias 
   {
     ERR << "Error while modifying the service:" << ex.asUserString() << endl;
     zypper.out().error( ex, _("Error while modifying the service:"),
-			str::Format(_("Leaving service %s unchanged.")) % alias );
+                        str::Format(_("Leaving service %s unchanged.")) % alias );
     return ZYPPER_EXIT_ERR_ZYPP;
   }
 

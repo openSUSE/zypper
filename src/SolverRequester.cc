@@ -39,18 +39,18 @@ namespace
       unsigned cnt = 0;
       for_( it, q_r.selectableBegin(), q_r.selectableEnd() )
       {
-	if ( cnt == 3 )
-	{
-	  ciMatchHint_r += ",...";
-	  break;
-	}
-	else
-	{
-	  if ( cnt )
-	    ciMatchHint_r += ", ";
-	  ciMatchHint_r += (*it)->name();
-	}
-	++cnt;
+        if ( cnt == 3 )
+        {
+          ciMatchHint_r += ",...";
+          break;
+        }
+        else
+        {
+          if ( cnt )
+            ciMatchHint_r += ", ";
+          ciMatchHint_r += (*it)->name();
+        }
+        ++cnt;
       }
     }
   }
@@ -67,10 +67,10 @@ namespace
     for_( it, repos.begin(), repos.end() )
       q.addRepo( *it );
     q.addDependency( sat::SolvAttr::name, splid.name().asString(),
-		     // only package names (no provides)
-		     cap.detail().op(), cap.detail().ed(),
-		     // defaults to Rel::ANY (NOOP) if no versioned cap
-		     Arch( cap.detail().arch() ) );
+                     // only package names (no provides)
+                     cap.detail().op(), cap.detail().ed(),
+                     // defaults to Rel::ANY (NOOP) if no versioned cap
+                     Arch( cap.detail().arch() ) );
     // defaults Arch_empty (NOOP) if no arch in cap
 
     DBG << "query: " << q << endl;
@@ -94,11 +94,11 @@ namespace
     {
       if ( traits::isPseudoInstalled( (*it).satSolvable().kind() ) )
       {
-	if ( (*it).isSatisfied() )
-	  providers.insert( *it );
+        if ( (*it).isSatisfied() )
+          providers.insert( *it );
       }
       else if ( (*it).satSolvable().isSystem() )
-	providers.insert( *it );
+        providers.insert( *it );
     }
     return providers;
   }
@@ -109,9 +109,9 @@ namespace
     if ( traits::isPseudoInstalled( s->kind() ) )
     {
       for_( it, s->availableBegin(), s->availableEnd() )
-	// this is OK also for patches - isSatisfied() excludes !isRelevant()
-	if ( it->status().isSatisfied() && ( !installed || installed->edition() < (*it)->edition() ) )
-	  installed = *it;
+        // this is OK also for patches - isSatisfied() excludes !isRelevant()
+        if ( it->status().isSatisfied() && ( !installed || installed->edition() < (*it)->edition() ) )
+          installed = *it;
     }
     else
       installed = s->installedObj();
@@ -257,21 +257,21 @@ void SolverRequester::install( const PackageSpec & pkg )
 
             // whether user requested specific repo/version/arch
             bool userconstraints = pkg.parsed_cap.detail().isVersioned()
-	                        || pkg.parsed_cap.detail().hasArch()
-				|| !_opts.from_repos.empty()
-				|| !pkg.repo_alias.empty();
+                                || pkg.parsed_cap.detail().hasArch()
+                                || !_opts.from_repos.empty()
+                                || !pkg.repo_alias.empty();
 
             // check vendor (since PoolItemBest does not do it)
             bool changes_vendor = ! VendorAttr::instance().equivalent( instobj->vendor(), (*sit)->vendor() );
 
             PoolItem best { s->updateCandidateObj() };
-	    if ( best && best.status().isLocked()
-	      && !(*sit).status().isLocked()
-	      && (*sit).edition() > instobj.edition() )
-	    {
-	      // This is a partially locked item. We try the best unlocked version.
-	      best = PoolItem();
-	    }
+            if ( best && best.status().isLocked()
+              && !(*sit).status().isLocked()
+              && (*sit).edition() > instobj.edition() )
+            {
+              // This is a partially locked item. We try the best unlocked version.
+              best = PoolItem();
+            }
 
             if ( userconstraints )
               updateTo( pkg, *sit);
@@ -290,17 +290,17 @@ void SolverRequester::install( const PackageSpec & pkg )
             MIL << "installing " << *sit << endl;
           }
           else
-	  {
-	    ++notInstalled;
+          {
+            ++notInstalled;
             // addFeedback(Feedback::NOT_INSTALLED, pkg);
-	    // delay Feedback::NOT_INSTALLED until we know
-	    // there is not a single match installed.
-	  }
+            // delay Feedback::NOT_INSTALLED until we know
+            // there is not a single match installed.
+          }
         }
       }
       if ( notInstalled == bestMatches.size() )
       {
-	addFeedback( Feedback::NOT_INSTALLED, pkg );
+        addFeedback( Feedback::NOT_INSTALLED, pkg );
       }
       return;
     }
@@ -459,14 +459,14 @@ void SolverRequester::updatePatches( bool updateStackOnly )
       PoolItem candidateObj( selPtr->candidateObj() );
       if ( dateLimit && asKind<Patch>(candidateObj)->timestamp() > _opts.cliMatchPatch._dateBefore )
       {
-	for ( const auto & pi : selPtr->available() )
-	{
-	  if ( asKind<Patch>(pi)->timestamp() <= _opts.cliMatchPatch._dateBefore )
-	  {
-	    candidateObj = pi;
-	    break;
-	  }
-	}
+        for ( const auto & pi : selPtr->available() )
+        {
+          if ( asKind<Patch>(pi)->timestamp() <= _opts.cliMatchPatch._dateBefore )
+          {
+            candidateObj = pi;
+            break;
+          }
+        }
       }
 
       if ( installPatch( patch, candidateObj, ignore_pkgmgmt ) )
@@ -477,23 +477,23 @@ void SolverRequester::updatePatches( bool updateStackOnly )
     {
       if ( any_marked )
       {
-	MIL << "got some pkgmgmt patches, will install these first" << endl;
+        MIL << "got some pkgmgmt patches, will install these first" << endl;
 
-	// When (auto)restricting patch to the updatestack only, drop "--with-update"
-	if ( Zypper::instance().runtimeData().solve_with_update )
-	{
-	  WAR << "Drop --with-update while patching the update stack" << endl;
-	  Zypper::instance().out().info(
-	    MSG_WARNINGString( str::Format(_("Ignoring option %s when updating the update stack first.")) % "--with-update" ).str()
-	  );
-	  Zypper::instance().runtimeData().solve_with_update = false;
-	}
+        // When (auto)restricting patch to the updatestack only, drop "--with-update"
+        if ( Zypper::instance().runtimeData().solve_with_update )
+        {
+          WAR << "Drop --with-update while patching the update stack" << endl;
+          Zypper::instance().out().info(
+            MSG_WARNINGString( str::Format(_("Ignoring option %s when updating the update stack first.")) % "--with-update" ).str()
+          );
+          Zypper::instance().runtimeData().solve_with_update = false;
+        }
       }
 
       if ( updateStackOnly )
       {
-	MIL << "updatestack-only: will stop here!" << endl;
-	break;
+        MIL << "updatestack-only: will stop here!" << endl;
+        break;
       }
     }
   }
@@ -529,7 +529,7 @@ bool SolverRequester::installPatch( const PackageSpec & patchspec, const PoolIte
       if ( Zypper::instance().config().reboot_req_non_interactive )
         ignoreFlags |= Patch::Reboot;
       if ( LicenseAgreementPolicy::instance()._autoAgreeWithLicenses )
-	ignoreFlags |= Patch::License;
+        ignoreFlags |= Patch::License;
 
       if ( selected.isUnwanted() )
       {
@@ -542,7 +542,7 @@ bool SolverRequester::installPatch( const PackageSpec & patchspec, const PoolIte
       {
         DBG << "candidate patch " << patch << " is optional" << endl;
         addFeedback( Feedback::PATCH_OPTIONAL, patchspec, selected, selected );
-	return false;
+        return false;
       }
 
       // bnc #221476
@@ -554,21 +554,21 @@ bool SolverRequester::installPatch( const PackageSpec & patchspec, const PoolIte
       }
 
       {
-	CliMatchPatch::Missmatch missmatch = _opts.cliMatchPatch.missmatch( patch );
-	if ( missmatch != CliMatchPatch::Missmatch::None )
-	{
-	  Feedback::Id id = Feedback::INVALID_REQUEST;
-	  switch ( missmatch )
-	  {
-	    case CliMatchPatch::Missmatch::Date:	id = Feedback::PATCH_TOO_NEW;	break;
-	    case CliMatchPatch::Missmatch::Category:	id = Feedback::PATCH_WRONG_CAT;	break;
-	    case CliMatchPatch::Missmatch::Severity:	id = Feedback::PATCH_WRONG_SEV;	break;
-	    case CliMatchPatch::Missmatch::None:	/* make gcc happy */		break;
-	  }
-	  DBG << "candidate patch " << patch << " does not pass CLI filter (" << static_cast<unsigned>(missmatch) << ")" << endl;
-	  addFeedback( id, patchspec, selected, selected );
-	  return false;
-	}
+        CliMatchPatch::Missmatch missmatch = _opts.cliMatchPatch.missmatch( patch );
+        if ( missmatch != CliMatchPatch::Missmatch::None )
+        {
+          Feedback::Id id = Feedback::INVALID_REQUEST;
+          switch ( missmatch )
+          {
+            case CliMatchPatch::Missmatch::Date:	id = Feedback::PATCH_TOO_NEW;	break;
+            case CliMatchPatch::Missmatch::Category:	id = Feedback::PATCH_WRONG_CAT;	break;
+            case CliMatchPatch::Missmatch::Severity:	id = Feedback::PATCH_WRONG_SEV;	break;
+            case CliMatchPatch::Missmatch::None:	/* make gcc happy */		break;
+          }
+          DBG << "candidate patch " << patch << " does not pass CLI filter (" << static_cast<unsigned>(missmatch) << ")" << endl;
+          addFeedback( id, patchspec, selected, selected );
+          return false;
+        }
       }
 
       // passed:
@@ -651,15 +651,15 @@ void SolverRequester::updateTo( const PackageSpec & pkg, const PoolItem & select
       MIL << *s << " update: setting " << selected << " to install" << endl;
     }
     else if ( selected->edition() == installed->edition()
-	    && selected->arch() != installed->arch()
-	    && pkg.parsed_cap.detail().hasArch() /*userselected architecture*/ )
+            && selected->arch() != installed->arch()
+            && pkg.parsed_cap.detail().hasArch() /*userselected architecture*/ )
     {
       // set 'candidate' for installation
       setToInstall( selected );
       MIL << *s << " update: setting " << selected << " to install (arch change request)" << endl;
     }
     else if ( selected->edition() == installed->edition()
-	    && !pkg.repo_alias.empty() /*userselected repo*/ )
+            && !pkg.repo_alias.empty() /*userselected repo*/ )
     {
       // set 'candidate' for installation
       setToInstall( selected );
@@ -730,9 +730,9 @@ void SolverRequester::updateTo( const PackageSpec & pkg, const PoolItem & select
   {
     // whether user requested specific repo/version/arch
     bool userconstraints = pkg.parsed_cap.detail().isVersioned()
-			|| pkg.parsed_cap.detail().hasArch()
-			|| !_opts.from_repos.empty()
-			|| !pkg.repo_alias.empty();
+                        || pkg.parsed_cap.detail().hasArch()
+                        || !_opts.from_repos.empty()
+                        || !pkg.repo_alias.empty();
     if ( userconstraints )
     {
       addFeedback( Feedback::UPD_CANDIDATE_USER_RESTRICTED, pkg, selected, installed );

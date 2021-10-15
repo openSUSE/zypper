@@ -545,7 +545,7 @@ static void notify_processes_using_deleted_files( Zypper & zypper )
 {
   if ( ! zypper.config().psCheckAccessDeleted ) {
     zypper.out().info( str::form(_("Check for running processes using deleted libraries is disabled in zypper.conf. Run '%s' to check manually."),
-				 "zypper ps -s" ) );
+                                 "zypper ps -s" ) );
   } else {
     zypper.out().info(_("Checking for running processes using deleted libraries..."), Out::HIGH );
     CheckAccessDeleted checker( false ); // wait for explicit call to check()
@@ -705,11 +705,11 @@ void solve_and_commit ( Zypper &zypper, SolveAndCommitPolicy policy )
     {
       if ( zypper.command() == ZypperCommand::VERIFY )
         zypper.out().info(_("Some of the dependencies of installed packages are broken."
-	" In order to fix these dependencies, the following actions need to be taken:") );
+        " In order to fix these dependencies, the following actions need to be taken:") );
 
       // check root user
       if ( zypper.command() == ZypperCommand::VERIFY && geteuid() != 0
-	&& !zypper.config().changedRoot )
+        && !zypper.config().changedRoot )
       {
         zypper.out().error(_("Root privileges are required to fix broken package dependencies.") );
         zypper.setExitCode( ZYPPER_EXIT_ERR_PRIVILEGES );
@@ -720,7 +720,7 @@ void solve_and_commit ( Zypper &zypper, SolveAndCommitPolicy policy )
 
       bool show_p_option = ( summary.packagesToRemove() && ( zypper.command() == ZypperCommand::INSTALL
                                                           || zypper.command() == ZypperCommand::UPDATE) )
-			|| ( summary.packagesToGetAndInstall() && zypper.command() == ZypperCommand::REMOVE );
+                        || ( summary.packagesToGetAndInstall() && zypper.command() == ZypperCommand::REMOVE );
 
       PromptOptions popts;
       // translators: These are the "Continue?" prompt options corresponding to
@@ -832,18 +832,18 @@ void solve_and_commit ( Zypper &zypper, SolveAndCommitPolicy policy )
 
       if ( !do_commit )
       {
-	zypper.setExitCode( ZYPPER_EXIT_ERR_ZYPP );
-	return;
+        zypper.setExitCode( ZYPPER_EXIT_ERR_ZYPP );
+        return;
       }
       else
       {
-	// COMMIT
+        // COMMIT
 
         if ( !confirm_licenses( zypper ) )
-	{
-	  zypper.setExitCode( ZYPPER_EXIT_ERR_ZYPP );
+        {
+          zypper.setExitCode( ZYPPER_EXIT_ERR_ZYPP );
           return;
-	}
+        }
 
         std::optional<ZYppCommitResult> result;
         try
@@ -857,37 +857,37 @@ void solve_and_commit ( Zypper &zypper, SolveAndCommitPolicy policy )
           // To be used to show overall progress of rpm transactions.
           gData.rpm_pkgs_total = God->resolver()->getTransaction().actionSize();
           gData.rpm_pkg_current = 0;
-	  gData.entered_commit = true;	// bsc#946750 - give ZYPPER_EXIT_ERR_COMMIT priority over ZYPPER_EXIT_ON_SIGNAL
+          gData.entered_commit = true;	// bsc#946750 - give ZYPPER_EXIT_ERR_COMMIT priority over ZYPPER_EXIT_ON_SIGNAL
 
-	  MIL << "committing..." << endl;
-	  if ( zypper.out().verbosity() >= Out::HIGH )
-	  {
-	    std::ostringstream s;
-	    s << _("committing");
-	    if ( policy.zyppCommitPolicy().dryRun() )
-	      s << " " << _("(dry run)");
-	    zypper.out().info( s.str(), Out::HIGH );
-	  }
+          MIL << "committing..." << endl;
+          if ( zypper.out().verbosity() >= Out::HIGH )
+          {
+            std::ostringstream s;
+            s << _("committing");
+            if ( policy.zyppCommitPolicy().dryRun() )
+              s << " " << _("(dry run)");
+            zypper.out().info( s.str(), Out::HIGH );
+          }
 
-	  // bsc#1183268: Patch reboot-needed flag overrules included packages.
-	  PatchRebootRulesWatchdog guard { summary.hasViewOption( Summary::PATCH_REBOOT_RULES ) && not summary.needMachineReboot() };
+          // bsc#1183268: Patch reboot-needed flag overrules included packages.
+          PatchRebootRulesWatchdog guard { summary.hasViewOption( Summary::PATCH_REBOOT_RULES ) && not summary.needMachineReboot() };
 
           MIL << "Using commit policy: " << policy.zyppCommitPolicy() << endl;
           result = God->commit( policy.zyppCommitPolicy() );
-          
-	  gData.show_media_progress_hack = false;
-	  gData.entered_commit = false;
+
+          gData.show_media_progress_hack = false;
+          gData.entered_commit = false;
 
           if ( !result->allDone() && !( dryRunEtc && result->noError() ) )
           { zypper.setExitCode( result->attemptToModify() ? ZYPPER_EXIT_ERR_COMMIT : ZYPPER_EXIT_ERR_ZYPP ); }	// error message comes later....
 
           MIL << endl << "DONE" << endl;
-	  if ( zypper.out().verbosity() >= Out::HIGH )
-	  {
-	    std::ostringstream s;
-	    s << *result;
-	    zypper.out().info( s.str(), Out::HIGH );
-	  }
+          if ( zypper.out().verbosity() >= Out::HIGH )
+          {
+            std::ostringstream s;
+            s << *result;
+            zypper.out().info( s.str(), Out::HIGH );
+          }
 
           show_update_messages( zypper, result->updateMessages() );
         }
@@ -895,7 +895,7 @@ void solve_and_commit ( Zypper &zypper, SolveAndCommitPolicy policy )
         {
           ZYPP_CAUGHT( e );
           zypper.out().error( e, _("Problem retrieving the package file from the repository:"),
-			      _("Please see the above error message for a hint.") );
+                              _("Please see the above error message for a hint.") );
           zypper.setExitCode( ZYPPER_EXIT_ERR_COMMIT );
           return;
         }
@@ -903,30 +903,30 @@ void solve_and_commit ( Zypper &zypper, SolveAndCommitPolicy policy )
         {
           ZYPP_CAUGHT( e );
           bool refresh_needed = false;
-	  if ( !e.info().baseUrlsEmpty() )
-	  {
-	    try
-	    {
-	      RepoManager manager( zypper.config().rm_options );
-	      for( RepoInfo::urls_const_iterator it = e.info().baseUrlsBegin(); it != e.info().baseUrlsEnd(); ++it )
-	      {
-		if ( manager.checkIfToRefreshMetadata( e.info(), *it, RepoManager::RefreshForced ) == RepoManager::REFRESH_NEEDED )
-		{
-		  refresh_needed = true;
-		  break;
-		}
-	      }
-	    }
-	    catch ( const Exception & )
-	    { DBG << "check if to refresh exception caught, ignoring" << endl; }
-	  }
+          if ( !e.info().baseUrlsEmpty() )
+          {
+            try
+            {
+              RepoManager manager( zypper.config().rm_options );
+              for( RepoInfo::urls_const_iterator it = e.info().baseUrlsBegin(); it != e.info().baseUrlsEnd(); ++it )
+              {
+                if ( manager.checkIfToRefreshMetadata( e.info(), *it, RepoManager::RefreshForced ) == RepoManager::REFRESH_NEEDED )
+                {
+                  refresh_needed = true;
+                  break;
+                }
+              }
+            }
+            catch ( const Exception & )
+            { DBG << "check if to refresh exception caught, ignoring" << endl; }
+          }
 
-	  std::string hint;
+          std::string hint;
           if ( refresh_needed )
-	    // translators: the first %s is 'zypper refresh' and the second is repo alias
-	    hint = str::Format(_("Repository '%s' is out of date. Running '%s' might help.")) % e.info().alias() % "zypper refresh";
-	  else
-	    hint = _("Please see the above error message for a hint.");
+            // translators: the first %s is 'zypper refresh' and the second is repo alias
+            hint = str::Format(_("Repository '%s' is out of date. Running '%s' might help.")) % e.info().alias() % "zypper refresh";
+          else
+            hint = _("Please see the above error message for a hint.");
           zypper.out().error( e, _("Problem retrieving the package file from the repository:"), hint );
           zypper.setExitCode( ZYPPER_EXIT_ERR_COMMIT );
           return;
@@ -956,7 +956,7 @@ void solve_and_commit ( Zypper &zypper, SolveAndCommitPolicy policy )
         }
 
         if ( zypper.exitCode() != ZYPPER_EXIT_OK )
-	{
+        {
           if ( result && result->singleTransactionMode() ) {
 
             CommitSummary cSummary( *result );
@@ -975,39 +975,39 @@ void solve_and_commit ( Zypper &zypper, SolveAndCommitPolicy policy )
             CommitSummary::showBasicErrorMessage( zypper );
           }
 
-	}
-	else
-	{
-	  // install any pending source packages
-	  //! \todo This won't be necessary once we get a new solver flag
-	  //! for installing source packages without their build deps
-	  if ( !zypper.runtimeData().srcpkgs_to_install.empty() )
-	    install_src_pkgs( zypper, policy.zyppCommitPolicy().downloadMode() );
+        }
+        else
+        {
+          // install any pending source packages
+          //! \todo This won't be necessary once we get a new solver flag
+          //! for installing source packages without their build deps
+          if ( !zypper.runtimeData().srcpkgs_to_install.empty() )
+            install_src_pkgs( zypper, policy.zyppCommitPolicy().downloadMode() );
 
-	  // set return value to 'reboot needed'
-	  if ( summary.needMachineReboot() )
-	  {
-	    zypper.setExitCode( ZYPPER_EXIT_INF_REBOOT_NEEDED );
-	    zypper.out().warning(_("One of the installed patches requires a reboot of"
-	    " your machine. Reboot as soon as possible."), Out::QUIET );
-	  }
-	  // set return value to 'restart needed' (restart of package manager)
-	  // however, 'reboot needed' takes precedence
-	  else if ( zypper.exitCode() != ZYPPER_EXIT_INF_REBOOT_NEEDED && summary.needPkgMgrRestart() )
-	  {
-	    zypper.setExitCode( ZYPPER_EXIT_INF_RESTART_NEEDED );
-	    zypper.out().warning(_("One of the installed patches affects the package"
-	    " manager itself. Run this command once more to install any other"
-	    " needed patches." ), Out::QUIET, Out::TYPE_NORMAL ); // don't show this to machines
-	  }
-	}
+          // set return value to 'reboot needed'
+          if ( summary.needMachineReboot() )
+          {
+            zypper.setExitCode( ZYPPER_EXIT_INF_REBOOT_NEEDED );
+            zypper.out().warning(_("One of the installed patches requires a reboot of"
+            " your machine. Reboot as soon as possible."), Out::QUIET );
+          }
+          // set return value to 'restart needed' (restart of package manager)
+          // however, 'reboot needed' takes precedence
+          else if ( zypper.exitCode() != ZYPPER_EXIT_INF_REBOOT_NEEDED && summary.needPkgMgrRestart() )
+          {
+            zypper.setExitCode( ZYPPER_EXIT_INF_RESTART_NEEDED );
+            zypper.out().warning(_("One of the installed patches affects the package"
+            " manager itself. Run this command once more to install any other"
+            " needed patches." ), Out::QUIET, Out::TYPE_NORMAL ); // don't show this to machines
+          }
+        }
 
         // check for running services (fate #300763)
         if ( !( zypper.config().changedRoot || dryRunEtc )
-	  && ( summary.packagesToRemove() || summary.packagesToUpgrade() || summary.packagesToDowngrade() ) )
-	{
+          && ( summary.packagesToRemove() || summary.packagesToUpgrade() || summary.packagesToDowngrade() ) )
+        {
           notify_processes_using_deleted_files( zypper );
-	}
+        }
       }
     }
     // noting to do

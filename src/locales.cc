@@ -65,13 +65,13 @@ namespace
     {
       std::string ret;
       if ( isRequested() )
-	ret = _("Requested");
+        ret = _("Requested");
       else if ( isFallback() )
-	ret = _("Fallback");
+        ret = _("Fallback");
       else {
-	ret = _("No");
-	if ( !isAvailable() )
-	  ret += " (n/a)";
+        ret = _("No");
+        if ( !isAvailable() )
+          ret += " (n/a)";
       }
       return ret;
     }
@@ -91,9 +91,9 @@ namespace
     if ( showAll_r )
     {
       for ( Locale rloc : God->target()->requestedLocales() )
-	ret[rloc].tagRequested();
+        ret[rloc].tagRequested();
       for ( const auto & avloc : God->pool().getAvailableLocales() )
-	ret[avloc].tagAvailable();	// Requested/Fallback state will be adjusted later
+        ret[avloc].tagAvailable();	// Requested/Fallback state will be adjusted later
     }
     else if ( ! localeArgs_r.empty() )
     {
@@ -102,35 +102,35 @@ namespace
       const auto & av { God->pool().getAvailableLocales() };
       for ( const auto & larg : localeArgs_r )
       {
-	std::string::size_type suffix = 0;
-	bool includeNoCountryCode = false;
-	if ( str::endsWith( larg, "_" ) )	// Suffix _ (_*) require a (not empty) country code
-	  suffix = 1;
-	else if ( str::endsWith( larg, "_*" ) )	// --"--  _* as convenience for the above
-	  suffix = 2;
-	else if ( str::endsWith( larg, "*" ) )	// Suffix * (except _*) also matches an empty country code
-	{
-	  suffix = 1;
-	  includeNoCountryCode = true;
-	}
+        std::string::size_type suffix = 0;
+        bool includeNoCountryCode = false;
+        if ( str::endsWith( larg, "_" ) )	// Suffix _ (_*) require a (not empty) country code
+          suffix = 1;
+        else if ( str::endsWith( larg, "_*" ) )	// --"--  _* as convenience for the above
+          suffix = 2;
+        else if ( str::endsWith( larg, "*" ) )	// Suffix * (except _*) also matches an empty country code
+        {
+          suffix = 1;
+          includeNoCountryCode = true;
+        }
 
-	if ( suffix )
-	{
-	  const std::string & stem { larg.substr( 0, larg.size() - suffix ) };
-	  for ( const auto & avloc : av )
-	  {
-	    if ( avloc.language().code() == stem && ( includeNoCountryCode || avloc.country().code() != CountryCode::noCode ) )
-	      ret[avloc].tagAvailable();	// Requested/Fallback state will be adjusted later
-	  }
-	}
-	else	// Exact locale arg
-	{
-	  Locale loc { larg };
-	  if ( av.count( loc ) )	// Requested/Fallback state will be adjusted later
-	    ret[loc].tagAvailable();
-	  else
-	    ret[loc];
-	}
+        if ( suffix )
+        {
+          const std::string & stem { larg.substr( 0, larg.size() - suffix ) };
+          for ( const auto & avloc : av )
+          {
+            if ( avloc.language().code() == stem && ( includeNoCountryCode || avloc.country().code() != CountryCode::noCode ) )
+              ret[avloc].tagAvailable();	// Requested/Fallback state will be adjusted later
+          }
+        }
+        else	// Exact locale arg
+        {
+          Locale loc { larg };
+          if ( av.count( loc ) )	// Requested/Fallback state will be adjusted later
+            ret[loc].tagAvailable();
+          else
+            ret[loc];
+        }
       }
     }
     else // no args/all, so we show all requested
@@ -139,9 +139,9 @@ namespace
       // if the target is just initialized but nor loaded.
       for ( Locale rloc : God->target()->requestedLocales() )
       {
-	ret[rloc].tagRequested();
-	while ( (rloc = rloc.fallback()) )
-	  ret[rloc].tagFallback();
+        ret[rloc].tagRequested();
+        while ( (rloc = rloc.fallback()) )
+          ret[rloc].tagFallback();
       }
       mustFixState = false;	// added with the right status
     }
@@ -152,15 +152,15 @@ namespace
       // Avaialble state should have been set before.
       for ( Locale rloc : God->target()->requestedLocales() )
       {
-	auto it { ret.find( rloc ) };
-	if ( it != ret.end() )
-	  it->second.tagRequested();
-	while ( (rloc = rloc.fallback()) )
-	{
-	  it = ret.find( rloc );
-	  if ( it != ret.end() )
-	    it->second.tagFallback();
-	}
+        auto it { ret.find( rloc ) };
+        if ( it != ret.end() )
+          it->second.tagRequested();
+        while ( (rloc = rloc.fallback()) )
+        {
+          it = ret.find( rloc );
+          if ( it != ret.end() )
+            it->second.tagFallback();
+        }
       }
     }
     return ret;
@@ -238,7 +238,7 @@ void localePackages( Zypper &zypper, const std::vector<std::string> &localeArgs,
   {
     zypper.out().gap();
     zypper.out().info( str::form( _("Packages for %s (locale '%s', requested: %s):"),
-				  el.first.name().c_str(), el.first.code().c_str(), el.second.asString().c_str() ) );
+                                  el.first.name().c_str(), el.first.code().c_str(), el.second.asString().c_str() ) );
     zypper.out().gap();
     printLocalePackages( zypper, el.first );
   }

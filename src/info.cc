@@ -44,7 +44,7 @@ namespace
     if ( ! rhs.empty() )
     {
       if ( ! lhs.empty() )
-	lhs += " ";
+        lhs += " ";
       lhs += rhs;
     }
     return lhs;
@@ -85,8 +85,8 @@ namespace
     } )
     {
       if ( ( isPatch && ( dep.second == Dep::PROVIDES || dep.second == Dep::CONFLICTS ) )
-	|| ( options_r._flags.testFlag( dep.first ) ) )			// dep.asString - CLI option name
-	tab_r.lst( dep.second.asUserString(), pi_r.dep( dep.second ) );	// dep.asUserString - i18n translation
+        || ( options_r._flags.testFlag( dep.first ) ) )			// dep.asString - CLI option name
+        tab_r.lst( dep.second.asUserString(), pi_r.dep( dep.second ) );	// dep.asUserString - i18n translation
     }
   }
 
@@ -121,14 +121,14 @@ namespace
     {
       if ( ! _kind )
       {
-	if ( defaultKind_r )
-	  _kind = defaultKind_r;
-	_name = ident_r;
+        if ( defaultKind_r )
+          _kind = defaultKind_r;
+        _name = ident_r;
       }
       else
       {
-	// strip kind spec from name; ':' after kind is asserted
-	_name = ident_r.substr( _kind.size()+1 );
+        // strip kind spec from name; ':' after kind is asserted
+        _name = ident_r.substr( _kind.size()+1 );
       }
     }
 
@@ -169,11 +169,11 @@ namespace {
     for ( const auto & pair : count )
     {
       cout << str::Format(PL_("There would be %1% match for '%2%'."
-			     ,"There would be %1% matches for '%2%'."
-			     ,pair.second))
-			 % pair.second
-			 % (pair.first.asString()+":"+name_r)
-	   << endl;
+                             ,"There would be %1% matches for '%2%'."
+                             ,pair.second))
+                         % pair.second
+                         % (pair.first.asString()+":"+name_r)
+           << endl;
     }
   }
 } // namespace
@@ -199,7 +199,7 @@ void printInfo(Zypper & zypper, const std::vector<std::string> &names_r, const P
     else if ( !options_r._kinds.empty() )
     {
       for ( const auto & kind : options_r._kinds )	// wanted kinds via -t
-	q.addKind( kind );
+        q.addKind( kind );
     }
     else
     {
@@ -212,10 +212,10 @@ void printInfo(Zypper & zypper, const std::vector<std::string> &names_r, const P
       ResKind oneKind( kn._kind );
       if ( !oneKind )
       {
-	if ( !options_r._kinds.empty() && options_r._kinds.size() == 1 )
-	  oneKind = *options_r._kinds.begin();
-	else
-	  oneKind = ResKind::package;
+        if ( !options_r._kinds.empty() && options_r._kinds.size() == 1 )
+          oneKind = *options_r._kinds.begin();
+        else
+          oneKind = ResKind::package;
       }
       // TranslatorExplanation E.g. "package 'zypper' not found."
       cout << "\n" << str::Format(_("%s '%s' not found.")) % kind_to_string_localized( oneKind, 1 ) % rawarg << endl;
@@ -225,14 +225,14 @@ void printInfo(Zypper & zypper, const std::vector<std::string> &names_r, const P
       h.addAttribute( sat::SolvAttr::name, kn._name );
 
       if ( h.empty() )
-	continue;
+        continue;
       else if ( !fallBackToAny )
       {
-	logOtherKindMatches( h, kn._name );
-	continue;
+        logOtherKindMatches( h, kn._name );
+        continue;
       }
       else
-	q = h;
+        q = h;
     }
 
     for_( it, q.selectableBegin(), q.selectableEnd() )
@@ -241,13 +241,13 @@ void printInfo(Zypper & zypper, const std::vector<std::string> &names_r, const P
 
       if ( zypper.out().type() != Out::TYPE_XML )
       {
-	// TranslatorExplanation E.g. "Information for package zypper:"
-	std::string info = str::Format(_("Information for %s %s:"))
-				 % kind_to_string_localized( sel.kind(), 1 )
-				 % sel.name();
+        // TranslatorExplanation E.g. "Information for package zypper:"
+        std::string info = str::Format(_("Information for %s %s:"))
+                                 % kind_to_string_localized( sel.kind(), 1 )
+                                 % sel.name();
 
-	cout << endl << info << endl;
-	cout << std::string( mbs_width(info), '-' ) << endl;
+        cout << endl << info << endl;
+        cout << std::string( mbs_width(info), '-' ) << endl;
       }
 
       if      ( sel.kind() == ResKind::package )	{ printPkgInfo( zypper, sel, options_r ); }
@@ -442,33 +442,33 @@ void printPatternInfo(Zypper & zypper, const ui::Selectable & s , const PrintInf
     {
       Table t;
       t << ( TableHeader()
-	  /* translators: Table column header */	<< N_("S")
-	  /* translators: Table column header */	<< N_("Name")
-	  /* translators: Table column header */	<< N_("Type")
-	  /* translators: Table column header */	<< N_("Dependency") );
+          /* translators: Table column header */	<< N_("S")
+          /* translators: Table column header */	<< N_("Name")
+          /* translators: Table column header */	<< N_("Type")
+          /* translators: Table column header */	<< N_("Dependency") );
 
       for ( ui::Selectable::Ptr sel : collect.req.selectable() )
       {
-	const ui::Selectable & s = *sel;
-	t << ( TableRow() << computeStatusIndicator( s ) << s.name() << s.kind().asString() << _("Required") );
+        const ui::Selectable & s = *sel;
+        t << ( TableRow() << computeStatusIndicator( s ) << s.name() << s.kind().asString() << _("Required") );
       }
       for ( ui::Selectable::Ptr sel : collect.rec.selectable() )
       {
-	const ui::Selectable & s = *sel;
-	t << ( TableRow() << computeStatusIndicator( s ) << s.name() << s.kind().asString() << _("Recommended") );
+        const ui::Selectable & s = *sel;
+        t << ( TableRow() << computeStatusIndicator( s ) << s.name() << s.kind().asString() << _("Recommended") );
       }
       if ( showSuggests )
-	for ( ui::Selectable::Ptr sel : collect.sug.selectable() )
-	{
-	  const ui::Selectable & s = *sel;
-	  t << ( TableRow() << computeStatusIndicator( s ) << s.name() << s.kind().asString() << _("Suggested") );
-	}
+        for ( ui::Selectable::Ptr sel : collect.sug.selectable() )
+        {
+          const ui::Selectable & s = *sel;
+          t << ( TableRow() << computeStatusIndicator( s ) << s.name() << s.kind().asString() << _("Suggested") );
+        }
 
       std::map<std::string, unsigned> depPrio({{_("Required"),0}, {_("Recommended"),1}, {_("Suggested"),2}});
       t.sort( [&depPrio]( const TableRow & lhs, const TableRow & rhs ) -> bool {
-	if ( lhs.columns()[3] != rhs.columns()[3] )
-	  return depPrio[lhs.columns()[3]] < depPrio[rhs.columns()[3]];
-	return  lhs.columns()[1] < rhs.columns()[1];
+        if ( lhs.columns()[3] != rhs.columns()[3] )
+          return depPrio[lhs.columns()[3]] < depPrio[rhs.columns()[3]];
+        return  lhs.columns()[1] < rhs.columns()[1];
       } );
 
       // translators: property name; short; used like "Name: value"
@@ -533,16 +533,16 @@ void printProductInfo(Zypper & zypper, const ui::Selectable & s, const PrintInfo
       // translators: property name; short; used like "Name: value"
       p.add( _("End of Support") );
       if ( eol )
-	p.lastValue() = eol.printDate();
+        p.lastValue() = eol.printDate();
       else
       {
-	p.lastValue() = _("unknown");
-	if ( str::startsWithCI( product->vendor(), "suse" ) )
-	{
-	  p.lastValue() += "; ";
-	  // translators: %1% is an URL or Path pointing to some document
-	  p.lastValue() += str::Format(_("See %1%")) % "https://www.suse.com/lifecycle";
-	}
+        p.lastValue() = _("unknown");
+        if ( str::startsWithCI( product->vendor(), "suse" ) )
+        {
+          p.lastValue() += "; ";
+          // translators: %1% is an URL or Path pointing to some document
+          p.lastValue() += str::Format(_("See %1%")) % "https://www.suse.com/lifecycle";
+        }
       }
     }
   }
@@ -558,9 +558,9 @@ void printProductInfo(Zypper & zypper, const ui::Selectable & s, const PrintInfo
     if ( installed )
     {
       if ( updateCand )
-	p.lastValue() = str::form(_("out-of-date (version %s installed)"), installed.edition().c_str() );
+        p.lastValue() = str::form(_("out-of-date (version %s installed)"), installed.edition().c_str() );
       else
-	p.lastValue() = _("up-to-date");
+        p.lastValue() = _("up-to-date");
     }
     else
       p.lastValue() = _("not installed");
@@ -579,22 +579,22 @@ void printProductInfo(Zypper & zypper, const ui::Selectable & s, const PrintInfo
       std::string indent( prefix.size(), ' ' );
       for ( const auto & el : cis )
       {
-	str::Str str;
-	str << prefix << el;
-	bool found = false;
-	for_( it, sat::Pool::instance().reposBegin(), sat::Pool::instance().reposEnd() )
-	{
-	  if ( (*it).hasContentIdentifier( el ) )
-	  {
-	    found = true;
-	    str << endl << indent << _("Provided by enabled repository")   << ": " << (*it).name();
-	  }
-	}
-	if ( ! found )
-	{
-	  str << endl << indent << ( ColorContext::MSG_WARNING << _("Not provided by any enabled repository") );
-	}
-	lines.push_back( str );
+        str::Str str;
+        str << prefix << el;
+        bool found = false;
+        for_( it, sat::Pool::instance().reposBegin(), sat::Pool::instance().reposEnd() )
+        {
+          if ( (*it).hasContentIdentifier( el ) )
+          {
+            found = true;
+            str << endl << indent << _("Provided by enabled repository")   << ": " << (*it).name();
+          }
+        }
+        if ( ! found )
+        {
+          str << endl << indent << ( ColorContext::MSG_WARNING << _("Not provided by any enabled repository") );
+        }
+        lines.push_back( str );
       }
       // translators: property name; short; used like "Name: value"
       p.lst( _("Update Repositories"),	lines, /*forceDetails_r*/true );
@@ -638,19 +638,19 @@ namespace
     {
       if ( it.id() )			// found Solvable with a SolvAttr::sourcename attribute
       {
-	// empty SolvAttr::sourcename means 'same as package'
-	IdString srcname( it.id() == sat::detail::emptyId ? it.inSolvable().ident().id() : it.id() );
-	if ( theone_r.ident() == srcname )	// name Solvable was built from matches, now check Edition...
-	{
-	  // empty SolvAttr::sourceevr means 'same as package'  (id-based comparisons are fine)
-	  IdString srcevr( it.inSolvable().lookupIdAttribute( sat::SolvAttr::sourceevr ) );
-	  if ( srcevr.empty() ) srcevr = IdString( it.inSolvable().edition().id() );
-	  if ( theone_r.edition().id() == srcevr.id() )
-	  {
-	    //std::cerr << it.inSolvable() << " - " << it.id() << " (" << it.inSolvable().ident().id() << ") | " << srcname << endl;
-	    ret.insert( { it.inSolvable().ident(), it.inSolvable().edition() } );
-	  }
-	}
+        // empty SolvAttr::sourcename means 'same as package'
+        IdString srcname( it.id() == sat::detail::emptyId ? it.inSolvable().ident().id() : it.id() );
+        if ( theone_r.ident() == srcname )	// name Solvable was built from matches, now check Edition...
+        {
+          // empty SolvAttr::sourceevr means 'same as package'  (id-based comparisons are fine)
+          IdString srcevr( it.inSolvable().lookupIdAttribute( sat::SolvAttr::sourceevr ) );
+          if ( srcevr.empty() ) srcevr = IdString( it.inSolvable().edition().id() );
+          if ( theone_r.edition().id() == srcevr.id() )
+          {
+            //std::cerr << it.inSolvable() << " - " << it.id() << " (" << it.inSolvable().ident().id() << ") | " << srcname << endl;
+            ret.insert( { it.inSolvable().ident(), it.inSolvable().edition() } );
+          }
+        }
       }
     }
     return ret;
@@ -665,7 +665,7 @@ namespace
       return "";
     for ( const PoolItem & pi : sel->installed() )
       if ( pi.edition() == binPkg_r.second )
-	return "i";
+        return "i";
     return "v";
     return computeStatusIndicator( *sel , binPkg_r.second );
   }
@@ -688,9 +688,9 @@ void printSrcPackageInfo(Zypper & zypper, const ui::Selectable & s, const PrintI
   {
     Table t;
     t << ( TableHeader()
-	/* translators: Table column header */	<< N_("S")
-	/* translators: Table column header */	<< N_("Name")
-	/* translators: Table column header */	<< N_("Version") );
+        /* translators: Table column header */	<< N_("S")
+        /* translators: Table column header */	<< N_("Name")
+        /* translators: Table column header */	<< N_("Version") );
 
     for ( auto binPkg : builtFrom )
     { t << ( TableRow() << BinPkgStatus( binPkg ) << binPkg.first << binPkg.second ); }

@@ -31,8 +31,8 @@ std::vector<ZyppFlags::CommandGroup> DryRunOptionSet::options()
     myOpts.push_back( {{
        { "dry-run", 'D', ZyppFlags::NoArgument, ZyppFlags::BoolType( &DryRunSettings::instanceNoConst()._enabled, ZyppFlags::StoreTrue, DryRunSettings::instance()._enabled ),
             text::join( _("Don't change anything, just report what would be done."),
-			// translators: %1% is a commandline option (like "--download-only")
-			str::Format(_("A meaningful file conflict check can only be performed if used together with '%1%'.")) % "--download-only" ) }
+                        // translators: %1% is a commandline option (like "--download-only")
+                        str::Format(_("A meaningful file conflict check can only be performed if used together with '%1%'.")) % "--download-only" ) }
     }});
   }
 

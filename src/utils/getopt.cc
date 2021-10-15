@@ -15,9 +15,9 @@ std::string longopts2optstring( const struct option* longopts )
     {
       optstring += (char)longopts->val;
       if ( longopts->has_arg == required_argument )
-	optstring += ':';
+        optstring += ':';
       else if ( longopts->has_arg == optional_argument )
-	optstring += "::";
+        optstring += "::";
     }
   }
   return optstring;
@@ -35,7 +35,7 @@ short2long_t make_short2long( const struct option* longopts )
       // on the fly check for duplicate short args
       if ( ! result.insert( short2long_t::value_type( longopts->val, longopts->name ) ).second )
       {
-	ZYPP_THROW(Exception(str::Str() << "duplicate short option -" << (char)longopts->val << " for --" << longopts->name << " and --" << result[longopts->val] ));
+        ZYPP_THROW(Exception(str::Str() << "duplicate short option -" << (char)longopts->val << " for --" << longopts->name << " and --" << result[longopts->val] ));
       }
     }
   }
@@ -104,9 +104,9 @@ parsed_opts parse_options( int argc, char** argv, const struct option* longopts 
       // creates if not there
       std::list<std::string>& value = result[mapidx];
       if ( optarg )
-	value.push_back( optarg );
+        value.push_back( optarg );
       else
-	value.push_back( "" );
+        value.push_back( "" );
       break;
     }
 

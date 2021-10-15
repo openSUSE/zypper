@@ -66,7 +66,7 @@ class LocksCallbacks {
       _saveReport.connect();
       _cleanReport.connect();
     }
-     
+
     ~LocksCallbacks()
     {
       _saveReport.disconnect();

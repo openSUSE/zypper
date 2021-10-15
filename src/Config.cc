@@ -66,7 +66,7 @@ namespace
     {
       char *term = ::getenv("TERM");
       if ( term && ::strcmp( term, "dumb" ) )
-	return true;
+        return true;
     }
     return false;
   }
@@ -229,7 +229,7 @@ namespace
     for ( const auto & p : optionPairs() )
     {
       if ( p.second == value_r )
-	return p.first;
+        return p.first;
     }
     return std::string();
   }
@@ -731,16 +731,16 @@ void Config::read( const std::string & file )
     {
       c = namedColor( augeas.getOption( asString( el.second ) ) );
       if ( c )
-	el.first = c;
+        el.first = c;
       // Fix color attributes: Default is mapped to Unchanged to allow
       // using the ColorStreams default rather than the terminal default.
       if ( el.second == ConfigOption::COLOR_PKGLISTHIGHLIGHT_ATTRIBUTE )	// currently the only one
       {
-	ansi::Color & c( el.first );
-	if ( c.fg() == ansi::Color::Fg::Default )
-	  c.fg( ansi::Color::Fg::Unchanged );
-	if ( c.bg() == ansi::Color::Bg::Default )
-	  c.bg( ansi::Color::Bg::Unchanged );
+        ansi::Color & c( el.first );
+        if ( c.fg() == ansi::Color::Fg::Default )
+          c.fg( ansi::Color::Fg::Unchanged );
+        if ( c.bg() == ansi::Color::Bg::Default )
+          c.bg( ansi::Color::Bg::Unchanged );
       }
     }
 
@@ -748,13 +748,13 @@ void Config::read( const std::string & file )
     if (!s.empty())
     {
       if ( s == "all" )
-	color_pkglistHighlight = true;
+        color_pkglistHighlight = true;
       else if ( s == "first" )
-	color_pkglistHighlight = indeterminate;
+        color_pkglistHighlight = indeterminate;
       else if ( s == "no" )
-	color_pkglistHighlight = false;
+        color_pkglistHighlight = false;
       else
-	WAR << "zypper.conf: color/pkglistHighlight: unknown value '" << s << "'" << endl;
+        WAR << "zypper.conf: color/pkglistHighlight: unknown value '" << s << "'" << endl;
     }
 
     s = augeas.getOption("color/background");	// legacy

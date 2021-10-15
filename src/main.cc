@@ -109,7 +109,7 @@ int main( int argc, char **argv )
       mode_t mask = 0022;
       mode_t omask = ::umask( mask );
       if ( mask != omask )
-	std::cerr << "zypper: adjusting umask " << str::octstring(omask,3) << " of sudo-user " << sudouser << " to " << str::octstring(mask,3) << " for user root." << endl;
+        std::cerr << "zypper: adjusting umask " << str::octstring(omask,3) << " of sudo-user " << sudouser << " to " << str::octstring(mask,3) << " for user root." << endl;
     }
   }
 

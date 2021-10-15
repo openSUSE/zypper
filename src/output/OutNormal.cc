@@ -384,12 +384,12 @@ void OutNormal::prompt( PromptId id, const std::string & prompt, const PromptOpt
     {
       if ( insgr )
       {
-	++invis;
-	if ( ch == 'm' )
-	  insgr = false;
+        ++invis;
+        if ( ch == 'm' )
+          insgr = false;
       }
       else if (  ch == '\033' )
-	insgr = true;
+        insgr = true;
     }
     invis %= 8;
 
@@ -400,7 +400,7 @@ void OutNormal::prompt( PromptId id, const std::string & prompt, const PromptOpt
       //                               0 1 2 3 4 5 6 7
       static const size_t resets[] = { 0,3,6,1,4,7,2,5 };
       for ( size_t i = resets[8-invis]; i; --i )
-	cout << ansi::Color::SGRReset();
+        cout << ansi::Color::SGRReset();
     }
   }
 
@@ -431,9 +431,9 @@ void OutNormal::promptHelp( const PromptOptions & poptions )
       const std::string & help { poptions.optionHelp(idx) };
       cout << " - ";
       if ( help.empty() )
-	cout << ( ColorContext::LOWLIGHT << "(" << _("no help available for this option") << ")" );
+        cout << ( ColorContext::LOWLIGHT << "(" << _("no help available for this option") << ")" );
       else
-	cout << help;
+        cout << help;
     }
     cout << endl;
   }

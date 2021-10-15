@@ -166,14 +166,14 @@ void OutXML::searchResult( const Table & table_r )
       const TableHeader & theader( table_r.header() );
       for_( it, theader.columnsNoTr().begin(), theader.columnsNoTr().end() )
       {
-	if ( *it == "S" )
-	  header.push_back( "status" );
-	else if ( *it == "Type" )
-	  header.push_back( "kind" );
-	else if ( *it == "Version" )
-	  header.push_back( "edition" );
-	else
-	  header.push_back( str::toLower( *it ) );
+        if ( *it == "S" )
+          header.push_back( "status" );
+        else if ( *it == "Type" )
+          header.push_back( "kind" );
+        else if ( *it == "Version" )
+          header.push_back( "edition" );
+        else
+          header.push_back( str::toLower( *it ) );
       }
     }
 
@@ -184,21 +184,21 @@ void OutXML::searchResult( const Table & table_r )
       unsigned cidx = 0;
       for_( cit, cols.begin(), cols.end() )
       {
-	cout << ' ' << (cidx < header.size() ? header[cidx] : "?" ) << "=\"";
-	if ( cidx == 0 )
-	{
-	  if ( (*cit)[0] == 'i' || (*cit)[0] == 'I' )	// test 1st char as locked is "iL"/"IL"
-	    cout << "installed\"";
-	  else if ( (*cit)[0] == 'v' )	// test 1st char as locked is "vL"
-	    cout << "other-version\"";
-	  else
-	    cout << "not-installed\"";
-	}
-	else
-	{
-	  cout << xml::escape(*cit) << '"';
-	}
-	++cidx;
+        cout << ' ' << (cidx < header.size() ? header[cidx] : "?" ) << "=\"";
+        if ( cidx == 0 )
+        {
+          if ( (*cit)[0] == 'i' || (*cit)[0] == 'I' )	// test 1st char as locked is "iL"/"IL"
+            cout << "installed\"";
+          else if ( (*cit)[0] == 'v' )	// test 1st char as locked is "vL"
+            cout << "other-version\"";
+          else
+            cout << "not-installed\"";
+        }
+        else
+        {
+          cout << xml::escape(*cit) << '"';
+        }
+        ++cidx;
       }
       cout << "/>" << endl;
     }

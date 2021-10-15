@@ -10,7 +10,7 @@
  *
  * This part is responsible for calling the solver, feeding the result back
  * to the user in form of dependency problem dialogue and installation summary,
- * and calling commit to do actually do what has been written in the summary. 
+ * and calling commit to do actually do what has been written in the summary.
  */
 #ifndef SOLVE_COMMIT_H_
 #define SOLVE_COMMIT_H_
@@ -20,8 +20,8 @@
 
 /**
  * Run the solver.
- * 
- * \return <tt>true</tt> if a solution has been found, <tt>false</tt> otherwise 
+ *
+ * \return <tt>true</tt> if a solution has been found, <tt>false</tt> otherwise
  */
 bool resolve(Zypper & zypper);
 

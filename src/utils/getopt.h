@@ -50,7 +50,7 @@ private:
     OIter & operator=( const std::string & s )	//< do the real work
     { _dest->_args.push_back( s ); return *this; }
   };
-  
+
   friend class OIter;
 
   void clear_argv();

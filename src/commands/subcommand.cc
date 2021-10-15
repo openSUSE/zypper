@@ -76,21 +76,21 @@ namespace	// subcommand detetction
       std::string sum { str::rtrim( ExternalProgram( { "man", "-f", cmd._name }, ExternalProgram::Discard_Stderr ).receiveLine() ) };
 
       if ( ! sum.empty() ) {
-	// # man -f zypper
-	// zypper (8)           - Command-line interface to ZYpp system management library (libzypp)
-	static const std::string_view sep { " - " };
-	std::string::size_type pos = sum.find( sep );
-	if ( pos != std::string::npos )
-	  sum.erase( 0, pos + sep.size() );
+        // # man -f zypper
+        // zypper (8)           - Command-line interface to ZYpp system management library (libzypp)
+        static const std::string_view sep { " - " };
+        std::string::size_type pos = sum.find( sep );
+        if ( pos != std::string::npos )
+          sum.erase( 0, pos + sep.size() );
       }
       else {
-	// translators: %1% is the name of the command which has no man page available.
-	static str::Format fmt( "<"+ LOWLIGHTString(_("No manual entry for %1%")).str() + ">" );
-	sum = ( fmt % cmd._name ).str();
+        // translators: %1% is the name of the command which has no man page available.
+        static str::Format fmt( "<"+ LOWLIGHTString(_("No manual entry for %1%")).str() + ">" );
+        sum = ( fmt % cmd._name ).str();
       }
       ret[cmd._cmd] = std::move(sum);
       if ( withPath )
-	ret[cmd._cmd] += "\n("+(cmd._path/cmd._name).asString()+")";
+        ret[cmd._cmd] += "\n("+(cmd._path/cmd._name).asString()+")";
     }
     return ret;
   }
@@ -104,7 +104,7 @@ namespace	// subcommand detetction
     }
     else {
       for ( const auto & p : getCommandsummaries( commands_r, withPath ) ) {
-	fmt.gDef( p.first, p.second );
+        fmt.gDef( p.first, p.second );
       }
     }
 
@@ -166,13 +166,13 @@ namespace	// subcommand detetction
       return;
 
     filesystem::dirForEach( dir_r,
-			    [&fnc_r]( const Pathname & dir_r, std::string name_r )->bool
-			    {
-			      SubcommandOptions::Detected cmd { detectSubcommand( dir_r, std::move(name_r) ) };
-			      if ( ! cmd._cmd.empty() )
-				fnc_r( std::move(cmd) );
-			      return true;
-			    } );
+                            [&fnc_r]( const Pathname & dir_r, std::string name_r )->bool
+                            {
+                              SubcommandOptions::Detected cmd { detectSubcommand( dir_r, std::move(name_r) ) };
+                              if ( ! cmd._cmd.empty() )
+                                fnc_r( std::move(cmd) );
+                              return true;
+                            } );
   }
 
   /* Just the command names for the short help. */
@@ -180,10 +180,10 @@ namespace	// subcommand detetction
   {
     auto collectSubcommandsIn = [&allCommands_r]( const Pathname & dir_r ) {
       detectSubcommandsIn( dir_r,
-			   [&allCommands_r]( SubcommandOptions::Detected cmd_r )
-			   {
-			     allCommands_r.insert( std::move(cmd_r._cmd) );
-			   } );
+                           [&allCommands_r]( SubcommandOptions::Detected cmd_r )
+                           {
+                             allCommands_r.insert( std::move(cmd_r._cmd) );
+                           } );
     };
 
     collectSubcommandsIn( SubcommandOptions::_execdir );
@@ -194,16 +194,16 @@ namespace	// subcommand detetction
 
   /* The command details for the long help. */
   inline void collectAllSubcommands( DetectedCommands & execdirCommands_r,
-				     DetectedCommands & pathCommands_r, const std::vector<Pathname> pathDirs_r )
+                                     DetectedCommands & pathCommands_r, const std::vector<Pathname> pathDirs_r )
   {
     // Commands in _execdir shadow commands in the path.
     auto collectSubcommandsIn = []( const Pathname & dir_r, DetectedCommands & commands_r, DetectedCommands * shaddow_r = nullptr ) {
       detectSubcommandsIn( dir_r,
-			   [&commands_r,shaddow_r]( SubcommandOptions::Detected cmd_r )
-			   {
-			     if ( ! ( shaddow_r && shaddow_r->count( cmd_r ) ) )
-			       commands_r.insert( std::move(cmd_r) );
-			   } );
+                           [&commands_r,shaddow_r]( SubcommandOptions::Detected cmd_r )
+                           {
+                             if ( ! ( shaddow_r && shaddow_r->count( cmd_r ) ) )
+                               commands_r.insert( std::move(cmd_r) );
+                           } );
     };
 
     collectSubcommandsIn( SubcommandOptions::_execdir, execdirCommands_r );
@@ -245,11 +245,11 @@ namespace	// command execution
       std::string ret;
       if ( !_args.empty() )
       {
-	for ( const auto & arg : _args )
-	{
-	  if ( !ret.empty() ) ret += " ";
-	  ret += quotearg( arg );
-	}
+        for ( const auto & arg : _args )
+        {
+          if ( !ret.empty() ) ret += " ";
+          ret += quotearg( arg );
+        }
       }
       return ret;
     }
@@ -320,14 +320,14 @@ namespace	// command execution
 
       if ( ! _args.empty() )
       {
-	const char * argv[_args.size()+1];
-	unsigned idx = 0;
-	for( ; idx < _args.size(); ++idx )
-	{ argv[idx] = _args[idx].c_str(); }
-	 argv[idx] = nullptr;
+        const char * argv[_args.size()+1];
+        unsigned idx = 0;
+        for( ; idx < _args.size(); ++idx )
+        { argv[idx] = _args[idx].c_str(); }
+         argv[idx] = nullptr;
 
-	if ( ! execvp( argv[0], (char**)argv ) )
-	{ _exit (0); }	// does not happen!
+        if ( ! execvp( argv[0], (char**)argv ) )
+        { _exit (0); }	// does not happen!
       }
       cerr << ( str::Format(_("cannot exec %1% (%2%)")) % command() % strerror(errno) ) << endl;
       _exit (128);
@@ -382,7 +382,7 @@ namespace	// command execution
       WAR <<     ( str::Format(txt)    % command() % code % strsignal(code) ) << endl;
       _execError = str::Format(_(txt)) % command() % code % strsignal(code);
       if ( WCOREDUMP(status) )
-	_execError += str::Format(" (%1)") % _("core dumped");
+        _execError += str::Format(" (%1)") % _("core dumped");
       _exitStatus = 128 + code;
     }
     else if ( WIFEXITED(status) )
@@ -390,16 +390,16 @@ namespace	// command execution
       code = WEXITSTATUS(status);
       if ( code )
       {
-	// translators: %1% - command name or path
-	// translators: %2% - exit code (number)
-	const char * txt = N_("%1% exited with status %2%");
-	WAR <<     ( str::Format(txt)    % command() % code ) << endl;
-	_execError = str::Format(_(txt)) % command() % code;
+        // translators: %1% - command name or path
+        // translators: %2% - exit code (number)
+        const char * txt = N_("%1% exited with status %2%");
+        WAR <<     ( str::Format(txt)    % command() % code ) << endl;
+        _execError = str::Format(_(txt)) % command() % code;
       }
       else
       {
-	DBG << command() << " successfully completed" << endl;
-	_execError.clear(); // empty if running or successfully completed
+        DBG << command() << " successfully completed" << endl;
+        _execError.clear(); // empty if running or successfully completed
       }
       _exitStatus = code;
     }
@@ -441,22 +441,22 @@ std::ostream & SubcommandOptions::showHelpOn( std::ostream & out ) const
       // translators: %1% is a directory name
       out << str::Format(_(
         "Zypper subcommands are standalone executables that live in the\n"
-	"zypper_execdir ('%1%').\n"
-	"\n"
-	"For subcommands zypper provides a wrapper that knows where the\n"
-	"subcommands live, and runs them by passing command-line arguments\n"
-	"to them.\n"
-	"\n"
-	"If a subcommand is not found in the zypper_execdir, the wrapper\n"
-	"will look in the rest of your $PATH for it. Thus, it's possible\n"
-	"to write local zypper extensions that don't live in system space.\n"
+        "zypper_execdir ('%1%').\n"
+        "\n"
+        "For subcommands zypper provides a wrapper that knows where the\n"
+        "subcommands live, and runs them by passing command-line arguments\n"
+        "to them.\n"
+        "\n"
+        "If a subcommand is not found in the zypper_execdir, the wrapper\n"
+        "will look in the rest of your $PATH for it. Thus, it's possible\n"
+        "to write local zypper extensions that don't live in system space.\n"
       ) ) % _execdir;
       out << endl;
 
       // translators: %1% is a zypper command
       out << str::Format(_(
-	"Using zypper global-options together with subcommands, as well as\n"
-	"executing subcommands in '%1%' is currently not supported.\n"
+        "Using zypper global-options together with subcommands, as well as\n"
+        "executing subcommands in '%1%' is currently not supported.\n"
       ) ) % "zypper shell";
       out << endl;
 
@@ -471,14 +471,14 @@ std::ostream & SubcommandOptions::showHelpOn( std::ostream & out ) const
       dumpDetectedCommandsOn( out, execdirCommands ) << endl;
 
       if ( _zypper.config().seach_subcommand_in_path ) {
-	// translators: headline of an enumeration
-	out << _("Zypper subcommands available from elsewhere on your $PATH") << ":" << endl;
-	out << endl;
-	dumpDetectedCommandsOn( out, pathCommands, /*withPath*/true ) << endl;
+        // translators: headline of an enumeration
+        out << _("Zypper subcommands available from elsewhere on your $PATH") << ":" << endl;
+        out << endl;
+        dumpDetectedCommandsOn( out, pathCommands, /*withPath*/true ) << endl;
       }
       else {
-	out << _("Using zypper subcommands available from elsewhere on your $PATH is disabled in zypper.conf.") << endl;
-	out << endl;
+        out << _("Using zypper subcommands available from elsewhere on your $PATH is disabled in zypper.conf.") << endl;
+        out << endl;
       }
 
       // translators: helptext; %1% is a zypper command
@@ -489,7 +489,7 @@ std::ostream & SubcommandOptions::showHelpOn( std::ostream & out ) const
       std::set<std::string> allCommands;
       collectAllSubcommandNames( allCommands, pathDirsIf( _zypper.config().seach_subcommand_in_path ) );
       if ( ! allCommands.empty() )
-	dumpRange( out, allCommands.begin(),allCommands.end(), "", "", ", ", "", "" );
+        dumpRange( out, allCommands.begin(),allCommands.end(), "", "", ", ", "", "" );
     }
   }
   else
@@ -503,9 +503,9 @@ std::ostream & SubcommandOptions::showHelpOn( std::ostream & out ) const
       Zypper & _zypper = Zypper::instance();
       if ( cmd.exitStatus() != 16 )	// man already returned 'No manual entry for...'
       {
-	_zypper.out().error( cmd.execError() );
-	// translators: %1% - command name
-	_zypper.out().info( str::Format(_("Manual entry for %1% can't be shown")) % _detected._name );
+        _zypper.out().error( cmd.execError() );
+        // translators: %1% - command name
+        _zypper.out().info( str::Format(_("Manual entry for %1% can't be shown")) % _detected._name );
       }
       _zypper.setExitCode( cmd.exitStatus() );
     }
@@ -558,7 +558,7 @@ bool SubCmd::isSubcommand(const std::string &strval_r )
     // Search in $PATH...
     for ( const auto & dir : pathDirsIf( true ) ) {
       if ( testAndRememberSubcommand( dir, execname, strval_r ) )
-	return true;
+        return true;
     }
   }
   return false;

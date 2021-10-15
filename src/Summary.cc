@@ -115,10 +115,10 @@ void Summary::readPool( const ResPool & pool )
 
         // set the 'need reboot' flag
         if ( patch->rebootSuggested() )
-	{
+        {
           _need_reboot_patch = true;
-	  _rebootNeeded[ResKind::patch].insert( ResPair( nullptr, patch ) );
-	}
+          _rebootNeeded[ResKind::patch].insert( ResPair( nullptr, patch ) );
+        }
         else if ( patch->restartSuggested() )
           _need_restart = true;
       }
@@ -182,21 +182,21 @@ void Summary::readPool( const ResPool & pool )
       Package::constPtr pkg = asKind<Package>(res);
       if ( pkg )
       {
-	switch ( pkg->vendorSupport() )
-	{
-	  case VendorSupportUnknown:
-	    _supportUnknown[res->kind()].insert( ResPair( nullptr, res ) );
-	    break;
-	  case VendorSupportUnsupported:
-	    _supportUnsupported[res->kind()].insert( ResPair( nullptr, res ) );
-	    break;
-	  case VendorSupportACC:
-	    _supportNeedACC[res->kind()].insert( ResPair( nullptr, res ) );
-	    break;
-	  default:
-	    // L1, L2 or L3 support are not reported
-	    break;
-	}
+        switch ( pkg->vendorSupport() )
+        {
+          case VendorSupportUnknown:
+            _supportUnknown[res->kind()].insert( ResPair( nullptr, res ) );
+            break;
+          case VendorSupportUnsupported:
+            _supportUnsupported[res->kind()].insert( ResPair( nullptr, res ) );
+            break;
+          case VendorSupportACC:
+            _supportNeedACC[res->kind()].insert( ResPair( nullptr, res ) );
+            break;
+          default:
+            // L1, L2 or L3 support are not reported
+            break;
+        }
       }
 
       // find in to_be_removed:
@@ -262,9 +262,9 @@ void Summary::readPool( const ResPool & pool )
       }
 
       if ( pkg && pkg->isCached() )
-	_incache += res->downloadSize();
+        _incache += res->downloadSize();
       else
-	_todownload += res->downloadSize();
+        _todownload += res->downloadSize();
     }
   }
 
@@ -313,13 +313,13 @@ void Summary::readPool( const ResPool & pool )
         continue;
       // ignore higher versions with different arch (except noarch) bnc #646410
       if ( (*it)->installedObj().arch() != candidate.arch()
-	&& (*it)->installedObj().arch() != Arch_noarch
-	&& candidate.arch() != Arch_noarch )
-	continue;
+        && (*it)->installedObj().arch() != Arch_noarch
+        && candidate.arch() != Arch_noarch )
+        continue;
       // mutliversion packages do not end up in _toupgrade, so we need to remove
       // them from candidates if the candidate actually installs (bnc #629197)
       if ( _multiInstalled.find( candidate.name() ) != _multiInstalled.end()
-	&& candidate.status().isToBeInstalled() )
+        && candidate.status().isToBeInstalled() )
         continue;
 
       candidates[*kit].insert( ResPair( nullptr, candidate.resolvable() ) );
@@ -336,9 +336,9 @@ void Summary::readPool( const ResPool & pool )
   //       were no upgrades for that kind.
   for_( kit, kinds.begin(), kinds.end() )
     std::set_difference( candidates[*kit].begin(), candidates[*kit].end(),
-			 _toupgrade [*kit].begin(), _toupgrade [*kit].end(),
-			 inserter( _notupdated[*kit], _notupdated[*kit].begin() ),
-			 Summary::ResPairNameCompare() );
+                         _toupgrade [*kit].begin(), _toupgrade [*kit].end(),
+                         inserter( _notupdated[*kit], _notupdated[*kit].begin() ),
+                         Summary::ResPairNameCompare() );
 
   // remove kinds with empty sets after the set_difference
   for ( KindToResPairSet::iterator it = _notupdated.begin(); it != _notupdated.end(); )
@@ -406,29 +406,29 @@ namespace
       // Check if buddy release package contains some update indicator provides.
       if ( Zypper::instance().command() != ZypperCommand::DIST_UPGRADE_e )
       {
-	static const Capability indicator( "product-update()", Rel::EQ, "dup" );
-	if ( obj_r->asKind<Product>()->referencePackage().provides().matches( indicator ) )
-	{
-	  WAR << obj_r << " provides " << indicator << endl;
-	  // translator: '%1%' is a products name
-	  //             '%2%' is a command to call (like 'zypper dup')
-	  //             Both may contain whitespace and should be enclosed by quotes!
-	  std::string ctcmsg( str::Format( _("Product '%1%' requires to be updated by calling '%2%'!") ) % obj_r->summary() % DEFAULTString("zypper dup") );
-	  // ^^^ summary() for products like in ResPair2Name
-	  //     DEFAULTString to prevent the command string from being colored in MSG_WARNINGString below
-	  tr_r.addDetail( MSG_WARNINGString( ctcmsg ) );
-	  ctc_r.push_back( std::move(ctcmsg) );
-	}
+        static const Capability indicator( "product-update()", Rel::EQ, "dup" );
+        if ( obj_r->asKind<Product>()->referencePackage().provides().matches( indicator ) )
+        {
+          WAR << obj_r << " provides " << indicator << endl;
+          // translator: '%1%' is a products name
+          //             '%2%' is a command to call (like 'zypper dup')
+          //             Both may contain whitespace and should be enclosed by quotes!
+          std::string ctcmsg( str::Format( _("Product '%1%' requires to be updated by calling '%2%'!") ) % obj_r->summary() % DEFAULTString("zypper dup") );
+          // ^^^ summary() for products like in ResPair2Name
+          //     DEFAULTString to prevent the command string from being colored in MSG_WARNINGString below
+          tr_r.addDetail( MSG_WARNINGString( ctcmsg ) );
+          ctc_r.push_back( std::move(ctcmsg) );
+        }
       }
     }
   }
 } // namespace
 ///////////////////////////////////////////////////////////////////
 bool Summary::writeResolvableList( std::ostream & out,
-				   const ResPairSet & resolvables,
-				   ansi::Color color,
-				   unsigned maxEntires_r,
-				   bool withKind_r )
+                                   const ResPairSet & resolvables,
+                                   ansi::Color color,
+                                   unsigned maxEntires_r,
+                                   bool withKind_r )
 {
   bool ret = true;	// whether the complete list was written, or maxEntires_r clipped
 
@@ -448,7 +448,7 @@ bool Summary::writeResolvableList( std::ostream & out,
       const std::string & name( ResPair2Name( respair, withKind_r ) );
       ++relevant_entries;
       if ( maxEntires_r && relevant_entries > maxEntires_r )
-	continue;
+        continue;
 
       // quote names with spaces
       bool quote = name.find_first_of( " " ) != std::string::npos;
@@ -459,13 +459,13 @@ bool Summary::writeResolvableList( std::ostream & out,
       // highlight 1st char?
       if ( pkglistHighlight || ( indeterminate(pkglistHighlight) && name[0] != firstCh ) )
       {
-	s << ( color << pkglistHighlightAttribute << name[0] ) << name.c_str()+1;
-	if ( indeterminate(pkglistHighlight) )
-	   firstCh = name[0];
+        s << ( color << pkglistHighlightAttribute << name[0] ) << name.c_str()+1;
+        if ( indeterminate(pkglistHighlight) )
+           firstCh = name[0];
       }
       else
       {
-	s << name;
+        s << name;
       }
 
       // quote?
@@ -475,10 +475,10 @@ bool Summary::writeResolvableList( std::ostream & out,
       if ( _multiInstalled.find( respair.second->name() ) != _multiInstalled.end() )
       {
         if ( respair.first && respair.first->edition() != respair.second->edition() )
-	  s << "-" << respair.first->edition().asString()
+          s << "-" << respair.first->edition().asString()
             << "->" << respair.second->edition().asString();
         else
-	  s << "-" << respair.second->edition().asString();
+          s << "-" << respair.second->edition().asString();
       }
 
       s << " ";
@@ -489,8 +489,8 @@ bool Summary::writeResolvableList( std::ostream & out,
       // translators: Appended when clipping a long enumeration:
       // "ConsoleKit-devel ConsoleKit-doc ... and 20828 more items."
       s << ( color << str::Format(PL_( "... and %1% more item.",
-				       "... and %1% more items.",
-				       relevant_entries) ) % relevant_entries );
+                                       "... and %1% more items.",
+                                       relevant_entries) ) % relevant_entries );
       ret = false;
     }
     mbs_write_wrapped( out, s.str(), 2, _wrap_width );
@@ -515,7 +515,7 @@ bool Summary::writeResolvableList( std::ostream & out,
     if ( !(_viewop & SHOW_VERSION) && _multiInstalled.find( respair.second->name() ) != _multiInstalled.end() )
     {
       if ( respair.first && respair.first->edition() != respair.second->edition() )
-	name += std::string("-") + respair.first->edition().asString()
+        name += std::string("-") + respair.first->edition().asString()
              + "->" + respair.second->edition().asString();
       else
         name += std::string("-") + respair.second->edition().asString();
@@ -529,8 +529,8 @@ bool Summary::writeResolvableList( std::ostream & out,
       {
         tr << respair.first->edition().asString() + " -> " +
               respair.second->edition().asString();
-	// bsc#1061384: add hint if product is better updated by a different command
-	addUpdateHint( tr, _ctc, respair.second );
+        // bsc#1061384: add hint if product is better updated by a different command
+        addUpdateHint( tr, _ctc, respair.second );
       }
       else
         tr << respair.second->edition().asString();
@@ -565,8 +565,8 @@ bool Summary::writeResolvableList( std::ostream & out,
     // translators: Appended when clipping a long enumeration:
     // "ConsoleKit-devel ConsoleKit-doc ... and 20828 more items."
     out << ( color << str::Format(PL_( "... and %1% more item.",
-				       "... and %1% more items.",
-				       relevant_entries) ) % relevant_entries ) << endl;
+                                       "... and %1% more items.",
+                                       relevant_entries) ) % relevant_entries ) << endl;
     ret = false;
   }
 
@@ -582,35 +582,35 @@ void Summary::writeNewlyInstalled( std::ostream & out )
     std::string label( "%d" );
     if ( it->first == ResKind::package )
       label = PL_(
-	"The following NEW package is going to be installed:",
-	"The following %d NEW packages are going to be installed:",
-	it->second.size() );
+        "The following NEW package is going to be installed:",
+        "The following %d NEW packages are going to be installed:",
+        it->second.size() );
     else if ( it->first == ResKind::patch )
       label = PL_(
-	"The following NEW patch is going to be installed:",
-	"The following %d NEW patches are going to be installed:",
-	it->second.size() );
+        "The following NEW patch is going to be installed:",
+        "The following %d NEW patches are going to be installed:",
+        it->second.size() );
     else if ( it->first == ResKind::pattern )
       label = PL_(
-	"The following NEW pattern is going to be installed:",
-	"The following %d NEW patterns are going to be installed:",
-	it->second.size() );
+        "The following NEW pattern is going to be installed:",
+        "The following %d NEW patterns are going to be installed:",
+        it->second.size() );
     else if ( it->first == ResKind::product )
       label = PL_(
-	"The following NEW product is going to be installed:",
-	"The following %d NEW products are going to be installed:",
-	it->second.size());
+        "The following NEW product is going to be installed:",
+        "The following %d NEW products are going to be installed:",
+        it->second.size());
     else if ( it->first == ResKind::srcpackage )
       label = PL_(
-	"The following source package is going to be installed:",
-	"The following %d source packages are going to be installed:",
-	it->second.size() );
+        "The following source package is going to be installed:",
+        "The following %d source packages are going to be installed:",
+        it->second.size() );
     else if ( it->first == ResKind::application )
 #if ( WITH_APPLICATION_SUMMARY )
       label = PL_(
-	"The following application is going to be installed:",
-	"The following %d applications are going to be installed:",
-	it->second.size() );
+        "The following application is going to be installed:",
+        "The following %d applications are going to be installed:",
+        it->second.size() );
 #else
       continue;
 #endif
@@ -878,15 +878,15 @@ static void collectNotInstalledDeps( const Dep & dep, const ResObject::constPtr 
 
       if ( (*it)->offSystem() )
       {
-	if ( (*it)->toDelete() )
-	  continue;		// ignore explicitly deleted
-	tmp.push_back( (*it) );	// remember uninstalled
+        if ( (*it)->toDelete() )
+          continue;		// ignore explicitly deleted
+        tmp.push_back( (*it) );	// remember uninstalled
       }
       else
       {
-	// at least one of the recommendations is/gets installed: discard all
-	tmp.clear();
-	break;
+        // at least one of the recommendations is/gets installed: discard all
+        tmp.clear();
+        break;
       }
     }
     if ( !tmp.empty() )
@@ -894,8 +894,8 @@ static void collectNotInstalledDeps( const Dep & dep, const ResObject::constPtr 
       // collect remembered ones
       for_( it, tmp.begin(), tmp.end() )
       {
-	//DBG << dep << " :" << (*it)->onSystem() << ": " << dump(*(*it)) << endl;
-	result[(*it)->kind()].insert( Summary::ResPair( nullptr, (*it)->candidateObj() ) );
+        //DBG << dep << " :" << (*it)->onSystem() << ": " << dump(*(*it)) << endl;
+        result[(*it)->kind()].insert( Summary::ResPair( nullptr, (*it)->candidateObj() ) );
       }
     }
   }
@@ -1004,34 +1004,34 @@ void Summary::writeRecommended( std::ostream & out )
 
       if ( resolver->onlyRequires() )
       {
-	label = PL_( "The following package is recommended, but will not be installed (only required packages will be installed):",
-		     "The following %d packages are recommended, but will not be installed (only required packages will be installed):",
-		     it->second.size() );
-	label = str::form( label.c_str(), it->second.size() );
+        label = PL_( "The following package is recommended, but will not be installed (only required packages will be installed):",
+                     "The following %d packages are recommended, but will not be installed (only required packages will be installed):",
+                     it->second.size() );
+        label = str::form( label.c_str(), it->second.size() );
 
-	out << endl << ( ColorContext::HIGHLIGHT << label ) << endl;
-	writeResolvableList( out, notRequired, ColorContext::HIGHLIGHT );
+        out << endl << ( ColorContext::HIGHLIGHT << label ) << endl;
+        writeResolvableList( out, notRequired, ColorContext::HIGHLIGHT );
       }
       else
       {
         if ( !softLocked.empty() )
         {
-	  label = PL_( "The following package is recommended, but will not be installed because it's unwanted (was manually removed before):",
-		       "The following %d packages are recommended, but will not be installed because they are unwanted (were manually removed before):",
-		       it->second.size() );
-	  label = str::form( label.c_str(), it->second.size() );
+          label = PL_( "The following package is recommended, but will not be installed because it's unwanted (was manually removed before):",
+                       "The following %d packages are recommended, but will not be installed because they are unwanted (were manually removed before):",
+                       it->second.size() );
+          label = str::form( label.c_str(), it->second.size() );
 
-	  out << endl << ( ColorContext::HIGHLIGHT << label ) << endl;
-	  writeResolvableList( out, softLocked, ColorContext::HIGHLIGHT );
+          out << endl << ( ColorContext::HIGHLIGHT << label ) << endl;
+          writeResolvableList( out, softLocked, ColorContext::HIGHLIGHT );
         }
         if ( !conflicts.empty() )
         {
-	  label = PL_( "The following package is recommended, but will not be installed due to conflicts or dependency issues:",
-		       "The following %d packages are recommended, but will not be installed due to conflicts or dependency issues:",
-		       it->second.size() );
-	  label = str::form( label.c_str(), it->second.size() );
+          label = PL_( "The following package is recommended, but will not be installed due to conflicts or dependency issues:",
+                       "The following %d packages are recommended, but will not be installed due to conflicts or dependency issues:",
+                       it->second.size() );
+          label = str::form( label.c_str(), it->second.size() );
 
-	  out << endl << ( ColorContext::HIGHLIGHT << label ) << endl;
+          out << endl << ( ColorContext::HIGHLIGHT << label ) << endl;
           writeResolvableList( out, conflicts, ColorContext::HIGHLIGHT );
         }
       }
@@ -1040,23 +1040,23 @@ void Summary::writeRecommended( std::ostream & out )
     {
       if ( it->first == ResKind::patch )
         label = PL_( "The following patch is recommended, but will not be installed:",
-		     "The following %d patches are recommended, but will not be installed:",
-		     it->second.size() );
+                     "The following %d patches are recommended, but will not be installed:",
+                     it->second.size() );
       else if ( it->first == ResKind::pattern )
         label = PL_( "The following pattern is recommended, but will not be installed:",
-		     "The following %d patterns are recommended, but will not be installed:",
-		     it->second.size() );
+                     "The following %d patterns are recommended, but will not be installed:",
+                     it->second.size() );
       else if ( it->first == ResKind::product )
-	label = PL_( "The following product is recommended, but will not be installed:",
-		     "The following %d products are recommended, but will not be installed:",
-		     it->second.size() );
+        label = PL_( "The following product is recommended, but will not be installed:",
+                     "The following %d products are recommended, but will not be installed:",
+                     it->second.size() );
       else if ( it->first == ResKind::application )
 #if ( WITH_APPLICATION_SUMMARY )
-	label = PL_( "The following application is recommended, but will not be installed:",
-		     "The following %d applications are recommended, but will not be installed:",
-		     it->second.size() );
+        label = PL_( "The following application is recommended, but will not be installed:",
+                     "The following %d applications are recommended, but will not be installed:",
+                     it->second.size() );
 #else
-	continue;
+        continue;
 #endif
       label = str::form( label.c_str(), it->second.size() );
 
@@ -1653,16 +1653,16 @@ void Summary::writeXmlResolvableList( std::ostream & out, const KindToResPairSet
         out << " arch-old=\"" << rold->arch() << "\"";
       }
       {
-	const std::string & text( res->summary() );
-	if ( !text.empty() )
-	  out << " summary=\"" << xml::escape(text) << "\"";
+        const std::string & text( res->summary() );
+        if ( !text.empty() )
+          out << " summary=\"" << xml::escape(text) << "\"";
       }
       {
-	const std::string & text( res->description() );
-	if ( !text.empty() )
-	  out << ">\n" << "<description>" << xml::escape( text ) << "</description>" << "</solvable>" << endl;
-	else
-	  out << "/>" << endl;
+        const std::string & text( res->description() );
+        if ( !text.empty() )
+          out << ">\n" << "<description>" << xml::escape( text ) << "</description>" << "</solvable>" << endl;
+        else
+          out << "/>" << endl;
       }
     }
   }

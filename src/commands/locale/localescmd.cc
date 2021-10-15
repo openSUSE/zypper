@@ -17,7 +17,7 @@ LocalesCmd::LocalesCmd( std::vector<std::string> &&commandAliases_r )
       _( "locales (lloc) [OPTIONS] [LOCALE] ..." ),
       _( "List requested locales (languages codes)." ),
       {
-	_( "List requested locales and corresponding packages."),
+        _( "List requested locales and corresponding packages."),
         str::form ( "Called without arguments, lists the requested locales. If the locale packages for a requested language are not yet on the system, they can be installed by calling '%s'.", "zypper aloc <LOCALE>" )
       },
       DisableAll

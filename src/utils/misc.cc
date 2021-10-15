@@ -43,7 +43,7 @@ bool runningOnEnterprise()
     {
       static const CpeId enterprise( "cpe:/o:suse:sle%02" );
       if ( compare( platform->cpeId(), enterprise, SetRelation::subset ) )
-	ret = true;
+        ret = true;
     }
   return ret;
 }
@@ -126,10 +126,10 @@ std::string i18nPatchStatus( const PoolItem & pi_r )
   {
     case ResStatus::BROKEN:
       if ( pi_r.isUnwanted() )
-	// Translator: Patch status: needed, optional, unwanted, applied, not needed
-	return HIGHLIGHTString( tUnwanted ).str();
+        // Translator: Patch status: needed, optional, unwanted, applied, not needed
+        return HIGHLIGHTString( tUnwanted ).str();
       if ( Zypper::instance().config().exclude_optional_patches && pi_r->asKind<Patch>()->categoryEnum() == Patch::CAT_OPTIONAL )
-	return LOWLIGHTString( tOptional ).str();
+        return LOWLIGHTString( tOptional ).str();
       return tNeeded;
       break;
     case ResStatus::SATISFIED:		return POSITIVEString( tApplied ).str();	break;
@@ -160,9 +160,9 @@ const char * textPatchStatus( const PoolItem & pi_r )
   {
     case ResStatus::BROKEN:
       if ( pi_r.isUnwanted() )
-	return tUnwanted;
+        return tUnwanted;
       if ( Zypper::instance().config().exclude_optional_patches && pi_r->asKind<Patch>()->categoryEnum() == Patch::CAT_OPTIONAL )
-	return tOptional;
+        return tOptional;
       return tNeeded;
       break;
     case ResStatus::SATISFIED:		return tApplied;	break;
@@ -249,9 +249,9 @@ struct PatchHistoryData::D
   {
     if ( auto n { _data.find( solv_r.ident().id() ) }; n != _data.end() ) {
       if ( auto v { n->second.find( solv_r.edition().id() ) }; v != n->second.end() ) {
-	if ( auto a { v->second.find( solv_r.arch().id() ) }; a != v->second.end() ) {
-	  return a->second;
-	}
+        if ( auto a { v->second.find( solv_r.arch().id() ) }; a != v->second.end() ) {
+          return a->second;
+        }
       }
     }
     return noData;
@@ -276,12 +276,12 @@ PatchHistoryData::PatchHistoryData( bool doparse_r )
   {
     const Pathname & historyFile { Pathname::assertprefix( Zypper::instance().config().root_dir, ZConfig::instance().historyLogFile() ) };
     parser::HistoryLogReader parser( historyFile, parser::HistoryLogReader::IGNORE_INVALID_ITEMS,
-				     [=]( HistoryLogData::Ptr ptr_r )->bool {
-				       if ( ! this->_d )
-					 this->_d.reset( new D );
-				       this->_d->remember( dynamic_pointer_cast<HistoryLogPatchStateChange>(ptr_r) );
-				       return true;
-				     } );
+                                     [=]( HistoryLogData::Ptr ptr_r )->bool {
+                                       if ( ! this->_d )
+                                         this->_d.reset( new D );
+                                       this->_d->remember( dynamic_pointer_cast<HistoryLogPatchStateChange>(ptr_r) );
+                                       return true;
+                                     } );
     parser.addActionFilter( HistoryActionID::PATCH_STATE_CHANGE );
     parser.readAll();
   }
@@ -302,10 +302,10 @@ namespace
     if ( PatchHistoryData::value_type res { historyData_r[pi_r] }; res != PatchHistoryData::noData )
     {
       if ( res.second == pi_r.status().validate() )
-	ret = res.first.printISO( Date::TimeFormat::none, Date::TimeZoneFormat::none );
+        ret = res.first.printISO( Date::TimeFormat::none, Date::TimeZoneFormat::none );
       else
-	// patch status was changed by a non zypp transaction (not mentioned in the history)
-	DBG << "PatchHistoryData " << res.second << " but " << pi_r << endl;
+        // patch status was changed by a non zypp transaction (not mentioned in the history)
+        DBG << "PatchHistoryData " << res.second << " but " << pi_r << endl;
     }
     return ret;
   }
@@ -480,11 +480,11 @@ namespace
     {
       try
       {
-	ret = parser::ProductFileReader::scanFile( baseproduct.path() );
+        ret = parser::ProductFileReader::scanFile( baseproduct.path() );
       }
       catch ( const Exception & excpt )
       {
-	ZYPP_CAUGHT( excpt );
+        ZYPP_CAUGHT( excpt );
       }
     }
     return ret;
@@ -522,11 +522,11 @@ Url make_obs_url( const std::string & obsuri )
       static str::regex obs_uri2_rx("^(" OBS_PROJECT_NAME_RX ")(/(.*)?)?$");
       if ( str::regex_match( platform, what, obs_uri2_rx ) )
       {
-	project = what[1];
-	platform = ( what[3].empty() ? it->second.second : what[3] );
+        project = what[1];
+        platform = ( what[3].empty() ? it->second.second : what[3] );
       }
       else
-	it = wellKnownServers.end();	// we stay with the 1st match, thus will use the global defaults
+        it = wellKnownServers.end();	// we stay with the 1st match, thus will use the global defaults
     }
 
     // Now bulid the url; ':' in project is replaced by ':/'
@@ -539,48 +539,48 @@ Url make_obs_url( const std::string & obsuri )
     {
       if ( default_platform.empty() )
       {
-	// Try to guess platform from baseproduct....
-	const parser::ProductFileData & pdata( baseproductdata( zypper.config().root_dir ) );
-	if ( pdata.empty() )
-	{
-	  // Guess failed:
-			     // translators: don't translate '<platform>'
-	  zypper.out().error(_("Unable to guess a value for <platform>."),
-			     _("Please use obs://<project>/<platform>") );
-	  zypper.out().info(str::form(_("Example: %s"), "obs://zypp:Head/openSUSE_Factory"));
-	  return Url();	// FAIL!
-	}
+        // Try to guess platform from baseproduct....
+        const parser::ProductFileData & pdata( baseproductdata( zypper.config().root_dir ) );
+        if ( pdata.empty() )
+        {
+          // Guess failed:
+                             // translators: don't translate '<platform>'
+          zypper.out().error(_("Unable to guess a value for <platform>."),
+                             _("Please use obs://<project>/<platform>") );
+          zypper.out().info(str::form(_("Example: %s"), "obs://zypp:Head/openSUSE_Factory"));
+          return Url();	// FAIL!
+        }
 
-	platform = pdata.name().asString();
-	if ( platform == "openSUSE"  )
-	{
-	  if ( pdata.productline() == "Leap" )
-	    platform += "_Leap_$releasever";
-	  else if ( str::containsCI( pdata.summary(), "Tumbleweed" ) )
-	    platform += "_Tumbleweed";
-	  else
-	    platform += "_$releasever";
-	}
-	else if ( platform == "MicroOS" && pdata.vendor() == "openSUSE" )
-	{
-	  // bsc#1153687 Hotfix
-	  platform = "openSUSE_Tumbleweed";
-	}
-	else if ( platform == "Leap" && pdata.vendor() == "openSUSE" )
-	{
-	  // bsc#1187425 Hotfix
-	  platform = "openSUSE_Leap_$releasever";
-	}
-	else
-	  platform += "_$releasever";
+        platform = pdata.name().asString();
+        if ( platform == "openSUSE"  )
+        {
+          if ( pdata.productline() == "Leap" )
+            platform += "_Leap_$releasever";
+          else if ( str::containsCI( pdata.summary(), "Tumbleweed" ) )
+            platform += "_Tumbleweed";
+          else
+            platform += "_$releasever";
+        }
+        else if ( platform == "MicroOS" && pdata.vendor() == "openSUSE" )
+        {
+          // bsc#1153687 Hotfix
+          platform = "openSUSE_Tumbleweed";
+        }
+        else if ( platform == "Leap" && pdata.vendor() == "openSUSE" )
+        {
+          // bsc#1187425 Hotfix
+          platform = "openSUSE_Leap_$releasever";
+        }
+        else
+          platform += "_$releasever";
 
-	zypper.out().info( "Guessed: platform = " + platform );
-	path /= platform;
+        zypper.out().info( "Guessed: platform = " + platform );
+        path /= platform;
       }
       else
       {
-	zypper.out().info( "zypper.conf: obs.platform = " + default_platform );
-	path /= default_platform;
+        zypper.out().info( "zypper.conf: obs.platform = " + default_platform );
+        path /= default_platform;
       }
     }
     else
@@ -702,7 +702,7 @@ std::string asXML(const Product & p, bool is_installed , const std::vector<std::
     {
       const std::string & text( p.description() );
       if ( ! text.empty() )
-	*xmlout::Node( *parent, "description" ) << xml::escape( text );
+        *xmlout::Node( *parent, "description" ) << xml::escape( text );
     }
 
     if ( is_installed && fwdTags.size() )
@@ -717,11 +717,11 @@ std::string asXML(const Product & p, bool is_installed , const std::vector<std::
       const Pathname & proddir( Pathname::assertprefix( Zypper::instance().config().root_dir, "/etc/products.d" ) );
       try
       {
-	XmlFilter::fwd( InputStream( proddir+p.referenceFilename() ), *fwd, std::move(tags)  );
+        XmlFilter::fwd( InputStream( proddir+p.referenceFilename() ), *fwd, std::move(tags)  );
       }
       catch ( const Exception & exp )
       {
-	ZYPP_CAUGHT( exp );	// parse error
+        ZYPP_CAUGHT( exp );	// parse error
       }
     }
   }
@@ -750,7 +750,7 @@ std::string asXML( const Pattern & p, bool is_installed )
     {
       const std::string & text( p.description() );
       if ( ! text.empty() )
-	*xmlout::Node( *parent, "description" ) << xml::escape( text );
+        *xmlout::Node( *parent, "description" ) << xml::escape( text );
     }
   }
   return str.str();
@@ -845,9 +845,9 @@ const char * computeStatusIndicator( const PoolItem & pi_r, ui::Selectable::cons
     if ( sel_r-> hasInstalledObj() )
     {
       if ( sel_r->identicalInstalled( pi_r ) )
-	stem = pi_r.identIsAutoInstalled() ? i : I;
+        stem = pi_r.identIsAutoInstalled() ? i : I;
       else
-	stem = v;
+        stem = v;
     }
     // else _
   }

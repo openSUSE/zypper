@@ -88,13 +88,13 @@ void Zypper::assertZYppPtrGod()
     {
       // ask user whether to tell it to quit
       mbs_write_wrapped( Out::Info(out()) << "", _(
-	"PackageKit is blocking zypper. This happens if you have an"
-	" updater applet or other software management application using"
-	" PackageKit running."
+        "PackageKit is blocking zypper. This happens if you have an"
+        " updater applet or other software management application using"
+        " PackageKit running."
       ), 0, out().defaultFormatWidth( 100 ) );
 
       mbs_write_wrapped( Out::Info(out()) << "", _(
-	"We can ask PackageKit to interrupt the current action as soon as possible, but it depends on PackageKit how fast it will respond to this request."
+        "We can ask PackageKit to interrupt the current action as soon as possible, but it depends on PackageKit how fast it will respond to this request."
       ), 0, out().defaultFormatWidth( 100 ) );
 
       bool reply = read_bool_answer( PROMPT_PACKAGEKIT_QUIT, _("Ask PackageKit to quit?"), false );
@@ -102,15 +102,15 @@ void Zypper::assertZYppPtrGod()
       // tell it to quit
       while ( reply && still_locked )
       {
-	packagekit_suggest_quit();
-	::sleep( 2 );
-	if ( packagekit_running() )
-	{
-	  out().info(_("PackageKit is still running (probably busy)."));
-	  reply = read_bool_answer( PROMPT_PACKAGEKIT_QUIT, _("Try again?"), false );
-	}
-	else
-	  still_locked = false;
+        packagekit_suggest_quit();
+        ::sleep( 2 );
+        if ( packagekit_running() )
+        {
+          out().info(_("PackageKit is still running (probably busy)."));
+          reply = read_bool_answer( PROMPT_PACKAGEKIT_QUIT, _("Try again?"), false );
+        }
+        else
+          still_locked = false;
       }
     }
 
@@ -129,12 +129,12 @@ void Zypper::assertZYppPtrGod()
       { God = getZYpp(); }
       catch ( ZYppFactoryException & e )
       {
-	// this should happen only rarely, so no special handling here
-	ERR  << "still locked." << endl;
-	out().error( e.asString() );
+        // this should happen only rarely, so no special handling here
+        ERR  << "still locked." << endl;
+        out().error( e.asString() );
 
-	setExitCode( ZYPPER_EXIT_ZYPP_LOCKED );
-	ZYPP_THROW( ExitRequestException("ZYpp locked") );
+        setExitCode( ZYPPER_EXIT_ZYPP_LOCKED );
+        ZYPP_THROW( ExitRequestException("ZYpp locked") );
       }
     }
   }
@@ -162,11 +162,11 @@ namespace {
       PathInfo pi( dir_r );
       if ( pi.isExist() )
       {
-	if ( ! ( pi.isDir() && pi.userMayRWX() ) )
-	  mayuse = false;
+        if ( ! ( pi.isDir() && pi.userMayRWX() ) )
+          mayuse = false;
       }
       else
-	mayuse = userMayUseDir( dir_r.dirname() );
+        mayuse = userMayUseDir( dir_r.dirname() );
     }
     return mayuse;
   }

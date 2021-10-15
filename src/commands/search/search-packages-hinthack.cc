@@ -33,20 +33,20 @@ namespace searchPackagesHintHack
     bool maySearchPackagesAtAll( Zypper & zypper_r )
     {
       if ( ! zypper_r.config().do_ttyout )
-	return false;	// no terminal output, i.e. no user in front
+        return false;	// no terminal output, i.e. no user in front
 
       Out & out( zypper_r.out() );
       if ( ! out.typeNORMAL() || out.verbosity() < Out::NORMAL )
-	return false;	// xml output or quiet mode
+        return false;	// xml output or quiet mode
 
       if ( zypper_r.runningShell() )
-	return false;	// we don't support subcommands in shell
+        return false;	// we don't support subcommands in shell
 
       if ( zypper_r.config().non_interactive )
-	return false;	// Never forward in non-interactive mode (search-packages itself relies on this!)
+        return false;	// Never forward in non-interactive mode (search-packages itself relies on this!)
 
       if ( zypper_r.config().changedRoot )
-	return false;	// we're chrooted
+        return false;	// we're chrooted
 
       return true;
     }
@@ -60,13 +60,13 @@ namespace searchPackagesHintHack
       // RpmDb access is blocked while the Target is not initialized.
       // Launching the Target just for this query would be an overkill.
       struct TmpUnblock {
-	TmpUnblock()
-	: _wasBlocked( librpmDb::isBlocked() )
-	{ if ( _wasBlocked ) librpmDb::unblockAccess(); }
-	~TmpUnblock()
-	{ if ( _wasBlocked ) librpmDb::blockAccess(); }
+        TmpUnblock()
+        : _wasBlocked( librpmDb::isBlocked() )
+        { if ( _wasBlocked ) librpmDb::unblockAccess(); }
+        ~TmpUnblock()
+        { if ( _wasBlocked ) librpmDb::blockAccess(); }
       private:
-	bool _wasBlocked;
+        bool _wasBlocked;
       } tmpUnblock;
 
       librpmDb::db_const_iterator it;
@@ -81,8 +81,8 @@ namespace searchPackagesHintHack
       msg << str::Format(_("For an extended search including not yet activated remote resources please use '%1%'.")) % "zypper search-packages";
 
       if ( ! plgInstalled_r )
-	// translator: %1% denotes a zypper command to execute. Like 'zypper search-packages'.
-	msg << ' ' << str::Format(_("The package providing this subcommand is currently not installed. You can install it by calling '%1%'.")) % "zypper in zypper-search-packages-plugin";
+        // translator: %1% denotes a zypper command to execute. Like 'zypper search-packages'.
+        msg << ' ' << str::Format(_("The package providing this subcommand is currently not installed. You can install it by calling '%1%'.")) % "zypper in zypper-search-packages-plugin";
 
       zypper_r.out().notePar( 4, msg );
     }
@@ -95,14 +95,14 @@ namespace searchPackagesHintHack
       zypper_r.out().gap();
       if ( indeterminate(callSP) )
       {
-	zypper_r.out().par( str::Format(_("For an extended search including not yet activated remote resources you may run '%1%' at any time.")) % "zypper search-packages" );
-	std::string question { str::Format(_("Do you want to run '%1%' now?")) % "zypper search-packages" };
-	std::pair<bool,bool> answer { read_bool_answer_opt_save( PROMPT_YN_RUN_SEARCH_PACKAGES, question, false ) };
-	callSP = answer.first;
-	if ( answer.second )
-	{
-	  zypper_r.configNoConst().saveback_search_runSearchPackages( callSP );
-	}
+        zypper_r.out().par( str::Format(_("For an extended search including not yet activated remote resources you may run '%1%' at any time.")) % "zypper search-packages" );
+        std::string question { str::Format(_("Do you want to run '%1%' now?")) % "zypper search-packages" };
+        std::pair<bool,bool> answer { read_bool_answer_opt_save( PROMPT_YN_RUN_SEARCH_PACKAGES, question, false ) };
+        callSP = answer.first;
+        if ( answer.second )
+        {
+          zypper_r.configNoConst().saveback_search_runSearchPackages( callSP );
+        }
       }
 #ifdef ENABLE_DISABLED_IN_CONFIG_HINT
       else
@@ -110,10 +110,10 @@ namespace searchPackagesHintHack
       else if ( callSP )
 #endif
       {
-	HIGHLIGHTString tag { callSP ? "Enabled in zypper.conf:" : "Disabled in zypper.conf:" };
-	std::string hint { callSP ? "[search] runSearchPackages = always" : "[search] runSearchPackages = never" };
-	zypper_r.out().infoLRHint( text::join( tag, str::Format(_("Run '%1%' to search in not yet activated remote resources.")) % "zypper search-packages" ),
-				   hint );
+        HIGHLIGHTString tag { callSP ? "Enabled in zypper.conf:" : "Disabled in zypper.conf:" };
+        std::string hint { callSP ? "[search] runSearchPackages = always" : "[search] runSearchPackages = never" };
+        zypper_r.out().infoLRHint( text::join( tag, str::Format(_("Run '%1%' to search in not yet activated remote resources.")) % "zypper search-packages" ),
+                                   hint );
       }
       zypper_r.out().gap();
 
@@ -130,14 +130,14 @@ namespace searchPackagesHintHack
       plgOptions->_detected._path = ZSPP_BinaryPath.dirname();
       // Slightly adjust the commandline and forward it to the subcommand
       {
-	SubcommandOptions::Arglist args { zypper_r.argv(), zypper_r.argv()+zypper_r.argc() };
-	args[0] = "search-packages";
-	// indicate it's called from zypper; replacing the command name it also separates global and command opts
-	args[argvCmdIdx] = "--no-query-local";
-	// explicitly insert "--" in case the plugin does not know whether the last option takes an argument
-	args.insert( args.begin()+argvArgIdx, "--" );
+        SubcommandOptions::Arglist args { zypper_r.argv(), zypper_r.argv()+zypper_r.argc() };
+        args[0] = "search-packages";
+        // indicate it's called from zypper; replacing the command name it also separates global and command opts
+        args[argvCmdIdx] = "--no-query-local";
+        // explicitly insert "--" in case the plugin does not know whether the last option takes an argument
+        args.insert( args.begin()+argvArgIdx, "--" );
 
-	plgOptions->args( std::move(args) );
+        plgOptions->args( std::move(args) );
       }
 
       SubCmd cmd ( { plgOptions->_detected._cmd }, plgOptions );
@@ -168,7 +168,7 @@ namespace searchPackagesHintHack
       // Be quiet unless we happen to know that the subcommand could be installed and hint.
       ui::Selectable::Ptr plg { ui::Selectable::get( ResKind::package, ZSPP_PackageName ) };
       if ( ! plg || plg->availableEmpty() )
-	return;
+        return;
 #else
       return;
 #endif

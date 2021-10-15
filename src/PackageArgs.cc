@@ -43,11 +43,11 @@ void PackageArgs::preprocess( const std::vector<std::string> & args )
     }
     // standalone operator
     else if ( tmp == "=" || tmp == "==" || tmp == "<"
-	   || tmp == ">" || tmp == "<=" || tmp == ">=" )
+           || tmp == ">" || tmp == "<=" || tmp == ">=" )
     {
       // not at the start or the end
       if ( i && i < argc - 1 )
-	op = true;
+        op = true;
     }
     // operator at the end of a random string, e.g. 'zypper='
     else if ( tmp.find_last_of( "=<>" ) == tmp.size() - 1 && i < argc - 1 )
@@ -206,8 +206,8 @@ void PackageArgs::argsToCaps( const ResKind & kind )
     if ( spec.modified )
     {
       std::string msg = str::form(_("'%s' not found in package names. Trying '%s'."),
-				  arg.c_str(),
-				  parsedcap.asString().c_str() );
+                                  arg.c_str(),
+                                  parsedcap.asString().c_str() );
       zypper.out().info( msg, Out::HIGH ); // TODO this should not be called here
       DBG << "'" << arg << "' not found, trying '" << parsedcap <<  "'" << endl;
     }
