@@ -240,24 +240,24 @@ namespace out
 
       if ( _layout._singleline )
       {
-	if ( _layout._gaped )
-	  _str << std::endl;
-	_str << _indent << element << std::endl;
+        if ( _layout._gaped )
+          _str << std::endl;
+        _str << _indent << element << std::endl;
       }
       else
       {
-	if ( _cpos != 0 && ! fitsOnLine( 1/*' '*/ + element.size() ) )
-	  endLine();
+        if ( _cpos != 0 && ! fitsOnLine( 1/*' '*/ + element.size() ) )
+          endLine();
 
-	if ( _cpos == 0 )
-	{
-	  if ( !_indent.empty() )
-	    printAndCount( _indent );
-	}
-	else
-	  printAndCount( " " );
+        if ( _cpos == 0 )
+        {
+          if ( !_indent.empty() )
+            printAndCount( _indent );
+        }
+        else
+          printAndCount( " " );
 
-	printAndCount( element );
+        printAndCount( element );
       }
     }
 
@@ -299,8 +299,8 @@ namespace out
     {
       if ( !_t.empty() )
       {
-	_t.setHeader( _formater.header() );
-	_str << _t;
+        _t.setHeader( _formater.header() );
+        _str << _t;
       }
     }
 
@@ -425,7 +425,7 @@ public:
   {
     QUIET  = 0,		///< Only important messages (no progress or status, only the result).
     NORMAL = 1,		///< Default output verbosity level. Progress for important tasks, moderate
-			///< amount of status messages, operation information, result.
+                        ///< amount of status messages, operation information, result.
     HIGH   = 2,		///< More detailed description of the operations.
     DEBUG  = 3		///< \todo drop this level in favor of zypper.log?
   } Verbosity;
@@ -522,18 +522,18 @@ private:
    * replacing optional \c %1% in \a title_r with size. */
   template <class TContainer, class TFormater>
   void container( const std::string & nodeName_r, const std::string & title_r,
-		  const TContainer & container_r, const TFormater & formater_r )
+                  const TContainer & container_r, const TFormater & formater_r )
   {
     TitleNode guard( XmlNode( *this, nodeName_r, XmlNode::Attr( "size", str::numstring( container_r.size() ) ) ),
-		     str::Format( title_r ) % container_r.size() );
+                     str::Format( title_r ) % container_r.size() );
     switch ( type() )
     {
       case TYPE_NORMAL:
-	writeContainer( std::cout, container_r, formater_r );
-	break;
+        writeContainer( std::cout, container_r, formater_r );
+        break;
       case TYPE_XML:
-	xmlWriteContainer( std::cout, container_r, formater_r );
-	break;
+        xmlWriteContainer( std::cout, container_r, formater_r );
+        break;
     }
   }
 
@@ -542,14 +542,14 @@ public:
    * replacing optional \c %1% in \a title_r with size. */
   template <class TContainer, class TFormater = out::ListFormater>
   void list( const std::string & nodeName_r, const std::string & title_r,
-	     const TContainer & container_r, const TFormater & formater_r = TFormater() )
+             const TContainer & container_r, const TFormater & formater_r = TFormater() )
   { container( nodeName_r, title_r, container_r, formater_r ); }
 
   /** Write table from container creating a TitleNode with \c size="nnn" attribute and
    * replacing optional \c %1% in \a title_r with size. */
   template <class TContainer, class TFormater = out::TableFormater>
   void table( const std::string & nodeName_r, const std::string & title_r,
-	      const TContainer & container_r, const TFormater & formater_r = TFormater() )
+              const TContainer & container_r, const TFormater & formater_r = TFormater() )
   { container( nodeName_r, title_r, container_r, formater_r ); }
 
 public:

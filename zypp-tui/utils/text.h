@@ -54,9 +54,9 @@ namespace mbs
     {
       if ( (ch & _XXoooooo) == _Xooooooo )	// '10xxxxxx'
       {
-	if ( _cont > 0 )
-	{ _wc = (_wc<<6)+(ch & _ooXXXXXX); --_cont; }
-	return true;
+        if ( _cont > 0 )
+        { _wc = (_wc<<6)+(ch & _ooXXXXXX); --_cont; }
+        return true;
       }
       if ( _cont > 0 )				// error, else ignore excess chars
       { _wc = L'?'; _cont = -1; }
@@ -99,14 +99,14 @@ namespace mbs
     {
       if ( _cols == size_t(-1) )
       {
-	if ( _wc < L' ' )
-	  _cols = 0;	// CTRLs
-	else
-	{
-	  _cols = ::wcwidth( _wc );
-	  if ( _cols == size_t(-1) )
-	    _cols = 1;	// -1 due to LC_CTYPE?
-	}
+        if ( _wc < L' ' )
+          _cols = 0;	// CTRLs
+        else
+        {
+          _cols = ::wcwidth( _wc );
+          if ( _cols == size_t(-1) )
+            _cols = 1;	// -1 due to LC_CTYPE?
+        }
       }
       return _cols;
     }
@@ -131,52 +131,52 @@ namespace mbs
           return *this;
         }
 
-	_tread = ::mbrtowc( &_wc, _tpos, _trest, &_mbstate );
+        _tread = ::mbrtowc( &_wc, _tpos, _trest, &_mbstate );
 
-	_cols = size_t(-1);
+        _cols = size_t(-1);
 
-	if ( _tread >= (size_t)-2 )
-	{
-	  // common case is -1 due to LC_CTYPE
-	  // skip this and continue with next mb
-	  memset( &_mbstate, 0, sizeof(_mbstate) );
-	  _tread = 1;
-	  MbToWc c( *_tpos );
-	  while ( ( _tread < _trest ) && c.add( *(_tpos+_tread) ) )
-	    _tread += 1;
-	  _wc = c._wc;
-	}
+        if ( _tread >= (size_t)-2 )
+        {
+          // common case is -1 due to LC_CTYPE
+          // skip this and continue with next mb
+          memset( &_mbstate, 0, sizeof(_mbstate) );
+          _tread = 1;
+          MbToWc c( *_tpos );
+          while ( ( _tread < _trest ) && c.add( *(_tpos+_tread) ) )
+            _tread += 1;
+          _wc = c._wc;
+        }
 
-	switch ( _tread )
-	{
+        switch ( _tread )
+        {
 // 	  case (size_t)-2:
 // 	  case (size_t)-1:
 // 	    _tread = 0;
 // 	    // fall through
-	  case 0:
-	    setToEnd();
-	    break;
+          case 0:
+            setToEnd();
+            break;
 
-	  default:
-	    if ( ::iswspace(_wc) )
-	    {
-	      switch ( _wc )
-	      {
-		case L'\n':
-		case L' ':
-		  break;
-		default:
-		  _wc = L' ';
-	      }
-	    }
-	    else if ( _wc == L'\033' )	// ansi SGR ?
-	    {
-	      unsigned asize = ansiSize( _tpos );
-	      if ( asize && asize <= _trest )
-		_tread = asize;
-	    }
-	    break;
-	}
+          default:
+            if ( ::iswspace(_wc) )
+            {
+              switch ( _wc )
+              {
+                case L'\n':
+                case L' ':
+                  break;
+                default:
+                  _wc = L' ';
+              }
+            }
+            else if ( _wc == L'\033' )	// ansi SGR ?
+            {
+              unsigned asize = ansiSize( _tpos );
+              if ( asize && asize <= _trest )
+                _tread = asize;
+            }
+            break;
+        }
       }
       return *this;
     }
@@ -188,10 +188,10 @@ namespace mbs
       const char * p = pos_r;
       if ( *p == '\033' && *(++p) == '[' )
       {
-	for ( char ch = *(++p); ( '0' <= ch && ch <= '9' ) || ch ==';'; ch = *(++p) )
-	{;}
-	if ( *p == 'm' )
-	  ret = p+1 - pos_r;
+        for ( char ch = *(++p); ( '0' <= ch && ch <= '9' ) || ch ==';'; ch = *(++p) )
+        {;}
+        if ( *p == 'm' )
+          ret = p+1 - pos_r;
       }
       return ret;
     }
@@ -299,15 +299,15 @@ namespace mbs
     {
       if ( count_r )
       {
-	writeout(true);	// but keep indent
-	_gapLines += count_r;
+        writeout(true);	// but keep indent
+        _gapLines += count_r;
 #if ( ZYPPER_TRACE_MBS )
-	while ( count_r-- )
-	  _out << "<BR>" << endl;	// "<BR>"
+        while ( count_r-- )
+          _out << "<BR>" << endl;	// "<BR>"
 #else
-	_out << std::string( count_r, '\n' );
+        _out << std::string( count_r, '\n' );
 #endif
-	_lpos = 0;
+        _lpos = 0;
       }
     }
 
@@ -380,16 +380,16 @@ namespace mbs
     {
       gotoParBegin();
       {
-	ScopedIndentIncrement s1( *this, tagincr_r );
-	write( tag_r, /*leadingWSindents_r*/false );
+        ScopedIndentIncrement s1( *this, tagincr_r );
+        write( tag_r, /*leadingWSindents_r*/false );
       }
       {
-	ScopedIndentIncrement s1( *this, textincr_r );
-	if ( _lpos < _indent )
-	  _gapForced = _indent - _lpos;
-	else
-	  gotoNextLine();
-	write( text_r );
+        ScopedIndentIncrement s1( *this, textincr_r );
+        if ( _lpos < _indent )
+          _gapForced = _indent - _lpos;
+        else
+          gotoNextLine();
+        write( text_r );
       }
       gotoParBegin();
     }
@@ -412,32 +412,32 @@ namespace mbs
     {
       for( MbsIterator it( text_r ); ! it.atEnd(); ++it )
       {
-	if ( it.isNL() )
-	{
-	  gotoNextPar();	// write out any pending word and start new par
-	}
-	else if ( it.isWS() )
-	{
-	  if ( _word )		// write out pending word and start new gap
-	  {
-	    writeout();
-	    ++_gap;
-	  }
-	  else
-	  {
-	    if ( atParBegin() && leadingWSindents_r )	// ws at par begin may increment indent
-	      ++_indentGap;
-	    else
-	      ++_gap;
-	  }
-	}
-	else // non WS		// remember in word
-	{
-	  if ( !_word )
-	    _word = it.pos();
-	  _wSize += it.size();
-	  _wColumns += it.columns();
-	}
+        if ( it.isNL() )
+        {
+          gotoNextPar();	// write out any pending word and start new par
+        }
+        else if ( it.isWS() )
+        {
+          if ( _word )		// write out pending word and start new gap
+          {
+            writeout();
+            ++_gap;
+          }
+          else
+          {
+            if ( atParBegin() && leadingWSindents_r )	// ws at par begin may increment indent
+              ++_indentGap;
+            else
+              ++_gap;
+          }
+        }
+        else // non WS		// remember in word
+        {
+          if ( !_word )
+            _word = it.pos();
+          _wSize += it.size();
+          _wColumns += it.columns();
+        }
       }
       writeout();		// write out any pending word; gaps are remembered for next text
     }
@@ -450,13 +450,13 @@ namespace mbs
     {
       if ( _word )
       {
-	_writeoutPending();
-	// reset gaps and word
-	clearGap();
-	clearWord();
+        _writeoutPending();
+        // reset gaps and word
+        clearGap();
+        clearWord();
       }
       else if ( force_r )
-	clearGap();
+        clearGap();
     }
 
     void _writeoutPending()
@@ -464,19 +464,19 @@ namespace mbs
       // NOTE: we are either atLineBegin or in a _gap between words
       if ( !atLineBegin() )
       {
-	if ( _gap < _gapForced )
-	  _gap = _gapForced;
-	if ( !_defaultWrap || _lpos+_gap+_wColumns <= _defaultWrap )
-	{
-	  _out << std::string( _gap, ' ' ) <<  boost::string_ref( _word, _wSize );
-	  _lpos += _gap + _wColumns;
-	  return;
-	}
-	// Here: did not fit on this line
-	// suppress gap and write indented on next line
-	clearGap();
-	_out << endl;
-	_lpos = 0;
+        if ( _gap < _gapForced )
+          _gap = _gapForced;
+        if ( !_defaultWrap || _lpos+_gap+_wColumns <= _defaultWrap )
+        {
+          _out << std::string( _gap, ' ' ) <<  boost::string_ref( _word, _wSize );
+          _lpos += _gap + _wColumns;
+          return;
+        }
+        // Here: did not fit on this line
+        // suppress gap and write indented on next line
+        clearGap();
+        _out << endl;
+        _lpos = 0;
       }
 
       // Here: atLineBegin
@@ -488,26 +488,26 @@ namespace mbs
       // Try writing the whole word
       if ( !_defaultWrap || useIndent+_wColumns <= _defaultWrap )
       {
-	_out << std::string( useIndent, ' ' ) <<  boost::string_ref( _word, _wSize );
-	_lpos += useIndent + _wColumns;
-	return;
+        _out << std::string( useIndent, ' ' ) <<  boost::string_ref( _word, _wSize );
+        _lpos += useIndent + _wColumns;
+        return;
       }
 
       // Still here: word is too big, we need to split it :(
       for( MbsIterator it( boost::string_ref( _word, _wSize ) ); ! it.atEnd(); ++it )
       {
-	if ( atLineBegin() )
-	{
-	  _out << std::string( useIndent, ' ' );
-	  _lpos += useIndent;
-	}
-	_out << it.ref();
-	++_lpos;
-	if ( _lpos >= _defaultWrap )
-	{
-	  _out << endl;
-	  _lpos = 0;
-	}
+        if ( atLineBegin() )
+        {
+          _out << std::string( useIndent, ' ' );
+          _lpos += useIndent;
+        }
+        _out << it.ref();
+        ++_lpos;
+        if ( _lpos >= _defaultWrap )
+        {
+          _out << endl;
+          _lpos = 0;
+        }
       }
     }
 
@@ -516,10 +516,10 @@ namespace mbs
     {
       if ( indentFix_r )
       {
-	if ( indentFix_r < 0 && ( size_t(-indentFix_r) >= indent_r ) )
-	  indent_r = 0;
-	else
-	  indent_r += indentFix_r;
+        if ( indentFix_r < 0 && ( size_t(-indentFix_r) >= indent_r ) )
+          indent_r = 0;
+        else
+          indent_r += indentFix_r;
       }
      return indent_r;
     }
@@ -536,14 +536,14 @@ namespace mbs
     static size_t saneIncrementIndent( size_t current_r, size_t increment_r, size_t wrap_r )
     {
       if ( ! increment_r )
-	return current_r;
+        return current_r;
 
       increment_r += current_r;
       if ( wrap_r && current_r < wrap_r )
       {
-	size_t limit = current_r + ( (wrap_r-current_r)/2 );
-	if ( limit < increment_r )
-	  increment_r = limit;
+        size_t limit = current_r + ( (wrap_r-current_r)/2 );
+        if ( limit < increment_r )
+          increment_r = limit;
       }
       return increment_r;
     }

@@ -27,32 +27,32 @@ std::string mbs_substr_by_width( boost::string_ref text_r, std::string::size_typ
 
       if ( pos < colpos_r )	// starts before range
       {
-	if ( end > colpos_r )	// pad incomplete sequence at range begin
-	  ret += std::string( std::min(end,colend)-colpos_r, ' ' );
+        if ( end > colpos_r )	// pad incomplete sequence at range begin
+          ret += std::string( std::min(end,colend)-colpos_r, ' ' );
       }
       else 			// starts inside range (pos < colend by the way we loop)
       {
-	if ( end <= colend )	// completely inside
-	{
-	  if ( !spos )
-	    spos = it.pos();
-	  slen += it.size();
-	}
-	else			// partial outside
-	{
-	  if ( spos )
-	  {
-	    ret += std::string( spos, slen );
-	    spos = nullptr;
-	    slen = 0;		// don't collect it after loop
-	  }
-	  ret += std::string( colend-pos, ' ' );
-	  break;		// done
-	}
+        if ( end <= colend )	// completely inside
+        {
+          if ( !spos )
+            spos = it.pos();
+          slen += it.size();
+        }
+        else			// partial outside
+        {
+          if ( spos )
+          {
+            ret += std::string( spos, slen );
+            spos = nullptr;
+            slen = 0;		// don't collect it after loop
+          }
+          ret += std::string( colend-pos, ' ' );
+          break;		// done
+        }
       }
 
       if ( end >= colend )
-	break;
+        break;
       pos = end;
     }
     if ( spos )

@@ -34,38 +34,38 @@ namespace utf8
     {
       // test for locales using dual width fonts:
       static bool isCJK = []()->bool {
-	const char * lang = ::getenv( "LANG" );
-	return ( lang && ( !strncmp( lang, "zh", 2 )
-	                || !strncmp( lang, "ko", 2 )
-			|| !strncmp( lang, "ja", 2 ) ) );
+        const char * lang = ::getenv( "LANG" );
+        return ( lang && ( !strncmp( lang, "zh", 2 )
+                        || !strncmp( lang, "ko", 2 )
+                        || !strncmp( lang, "ja", 2 ) ) );
       }();
 
       if ( isCJK )
       {
-	// this should actually be correct for ALL locales:
-	size_type len = 0;
-	const char *s = _str.c_str();
-	for ( size_type slen = _str.size(); slen > 0; )
-	{
-	  if ( *s == '\033' && *(s+1) == '[' )	// skip ansi SGR
-	  {
-	    slen -= 2; s += 2;
-	    while ( slen > 0 && *s != 'm' )
-	    { --slen; ++s; }
-	    if ( slen > 0 )
-	    { --slen; ++s; }
-	    continue;
-	  }
+        // this should actually be correct for ALL locales:
+        size_type len = 0;
+        const char *s = _str.c_str();
+        for ( size_type slen = _str.size(); slen > 0; )
+        {
+          if ( *s == '\033' && *(s+1) == '[' )	// skip ansi SGR
+          {
+            slen -= 2; s += 2;
+            while ( slen > 0 && *s != 'm' )
+            { --slen; ++s; }
+            if ( slen > 0 )
+            { --slen; ++s; }
+            continue;
+          }
 
-	  wchar_t wc;
-	  size_t bytes = mbrtowc( &wc, s, slen, NULL );
-	  if ( bytes <= 0 )
-	    break;
-	  len += wcwidth( wc );
-	  slen -= bytes;
-	  s += bytes;
-	}
-	return len;
+          wchar_t wc;
+          size_t bytes = mbrtowc( &wc, s, slen, NULL );
+          if ( bytes <= 0 )
+            break;
+          len += wcwidth( wc );
+          slen -= bytes;
+          s += bytes;
+        }
+        return len;
       }
 
       // NON CJK: faster and hopefully accurate enough:
@@ -74,26 +74,26 @@ namespace utf8
       size_type ansi = 0;
       for ( auto ch : _str )
       {
-	if ( ansi )
-	{
-	  if ( ansi == 1 && ch == '[' )
-	  {
-	    ansi = 2;
-	    continue;
-	  }
-	  else if ( ansi >= 2 ) // not testing for in [0-9;m]
-	  {
-	    ++ansi;
-	    if ( ch == 'm' ) // SGR end
-	    { ret -= ansi; ansi = 0; }
-	    continue;
-	  }
-	}
+        if ( ansi )
+        {
+          if ( ansi == 1 && ch == '[' )
+          {
+            ansi = 2;
+            continue;
+          }
+          else if ( ansi >= 2 ) // not testing for in [0-9;m]
+          {
+            ++ansi;
+            if ( ch == 'm' ) // SGR end
+            { ret -= ansi; ansi = 0; }
+            continue;
+          }
+        }
 
-	if ( isContinuationByte( ch ) )
-	  --ret;
-	else if ( ch == '\033' )
-	  ansi = 1;
+        if ( isContinuationByte( ch ) )
+          --ret;
+        else if ( ch == '\033' )
+          ansi = 1;
       }
       return ret;
     }
@@ -119,32 +119,32 @@ namespace utf8
     size_type upos( size_type pos_r, size_type start_r = 0 ) const
     {
       if ( pos_r == npos || start_r > _str.size() )
-	return npos;
+        return npos;
 
       size_type upos = start_r;
       for ( const char * chp = _str.c_str() + upos; *chp; ++chp, ++upos )
       {
-	if ( ! isContinuationByte( *chp ) )
-	{
-	   if ( pos_r )
-	     --pos_r;
-	   else
-	     return upos;
+        if ( ! isContinuationByte( *chp ) )
+        {
+           if ( pos_r )
+             --pos_r;
+           else
+             return upos;
 
-	   while ( *chp == '\033' && *(chp+1) == '[' )	// skip any ansi SGR
-	   {
-	     chp += 2;
-	     upos += 2;
-	     while ( *chp && *chp != 'm' )
-	     { ++chp; ++upos; }
-	     if ( *chp )
-	     { ++chp; ++upos; }
-	     else
-	       break;	// incomplete ansi SGR
-	   }
-	   if ( ! *chp )
-	     break;	// incomplete ansi SGR
-	}
+           while ( *chp == '\033' && *(chp+1) == '[' )	// skip any ansi SGR
+           {
+             chp += 2;
+             upos += 2;
+             while ( *chp && *chp != 'm' )
+             { ++chp; ++upos; }
+             if ( *chp )
+             { ++chp; ++upos; }
+             else
+               break;	// incomplete ansi SGR
+           }
+           if ( ! *chp )
+             break;	// incomplete ansi SGR
+        }
       }
       return( pos_r ? npos : upos );
     }

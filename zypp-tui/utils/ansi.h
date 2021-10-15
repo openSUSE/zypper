@@ -48,13 +48,13 @@ namespace ansi
 
       const char * str() const
       {
-	if ( _fbck )	// determine _seq<>_fbck on 1st use (dtor is too early as do_ttyout() is not yet ready)
-	{
-	  if ( ! do_ttyout() )
-	    _seq = _fbck;
-	  _fbck = nullptr;
-	}
-	return _seq;
+        if ( _fbck )	// determine _seq<>_fbck on 1st use (dtor is too early as do_ttyout() is not yet ready)
+        {
+          if ( ! do_ttyout() )
+            _seq = _fbck;
+          _fbck = nullptr;
+        }
+        return _seq;
       }
 
     private:
@@ -219,25 +219,25 @@ namespace ansi
     {
       switch ( color_r )
       {
-	case Black:
-	case BrightBlack:	_comp.fg = Fg::Black;	break;
-	case Red:
-	case BrightRed:		_comp.fg = Fg::Red;	break;
-	case Green:
-	case BrightGreen:	_comp.fg = Fg::Green;	break;
-	case Yellow:
-	case BrightYellow:	_comp.fg = Fg::Yellow;	break;
-	case Blue:
-	case BrightBlue:	_comp.fg = Fg::Blue;	break;
-	case Magenta:
-	case BrightMagenta:	_comp.fg = Fg::Magenta;	break;
-	case Cyan:
-	case BrightCyan:	_comp.fg = Fg::Cyan;	break;
-	case White:
-	case BrightWhite:	_comp.fg = Fg::White;	break;
-	default:
-	case Default:
-	case BrightDefault:	break;
+        case Black:
+        case BrightBlack:	_comp.fg = Fg::Black;	break;
+        case Red:
+        case BrightRed:		_comp.fg = Fg::Red;	break;
+        case Green:
+        case BrightGreen:	_comp.fg = Fg::Green;	break;
+        case Yellow:
+        case BrightYellow:	_comp.fg = Fg::Yellow;	break;
+        case Blue:
+        case BrightBlue:	_comp.fg = Fg::Blue;	break;
+        case Magenta:
+        case BrightMagenta:	_comp.fg = Fg::Magenta;	break;
+        case Cyan:
+        case BrightCyan:	_comp.fg = Fg::Cyan;	break;
+        case White:
+        case BrightWhite:	_comp.fg = Fg::White;	break;
+        default:
+        case Default:
+        case BrightDefault:	break;
       }
     }
 
@@ -360,58 +360,58 @@ namespace ansi
       if ( ! ( color_r && do_colors() ) )	// nocolor, all ::Unchanged, uid 0: return empty string
       {
 #if ( ZYPPER_TRACE_SGR )
-	std::string & ret( _def[0] );
-	if ( ret.empty() )
-	  ret =  "[]";
-	return ret;
+        std::string & ret( _def[0] );
+        if ( ret.empty() )
+          ret =  "[]";
+        return ret;
 #else
-	return _def[0];
+        return _def[0];
 #endif
       }
 
       std::string & ret( _def[color_r._comp.uid] );
       if ( ret.empty() )
       {
-	ret += ESC"[";
-	switch ( color_r._comp.attr )
-	{
-	  case Attr::Normal:	ret += "22;27;";	break;
-	  case Attr::Bright:	ret += "1;";		break;
-	  case Attr::Reverse:	ret += "7;";		break;
-	  default:
-	  case Attr::Unchanged:	break;
-	}
-	switch ( color_r._comp.fg )
-	{
-	  case Fg::Black:	ret += "30;";		break;
-	  case Fg::Red:		ret += "31;";		break;
-	  case Fg::Green:	ret += "32;";		break;
-	  case Fg::Yellow:	ret += "33;";		break;
-	  case Fg::Blue:	ret += "34;";		break;
-	  case Fg::Magenta:	ret += "35;";		break;
-	  case Fg::Cyan:	ret += "36;";		break;
-	  case Fg::White:	ret += "37;";		break;
-	  case Fg::Default:	ret += "39;";		break;
-	  default:
-	  case Fg::Unchanged:	break;
-	}
-	switch ( color_r._comp.bg )
-	{
-	  case Bg::Black:	ret += "40;";		break;
-	  case Bg::Red:		ret += "41;";		break;
-	  case Bg::Green:	ret += "42;";		break;
-	  case Bg::Yellow:	ret += "43;";		break;
-	  case Bg::Blue:	ret += "44;";		break;
-	  case Bg::Magenta:	ret += "45;";		break;
-	  case Bg::Cyan:	ret += "46;";		break;
-	  case Bg::White:	ret += "47;";		break;
-	  case Bg::Default:	ret += "49;";		break;
-	  default:
-	  case Bg::Unchanged:	break;
-	}
-	*ret.rbegin() = 'm';	// turn trailing ';' into 'm'
+        ret += ESC"[";
+        switch ( color_r._comp.attr )
+        {
+          case Attr::Normal:	ret += "22;27;";	break;
+          case Attr::Bright:	ret += "1;";		break;
+          case Attr::Reverse:	ret += "7;";		break;
+          default:
+          case Attr::Unchanged:	break;
+        }
+        switch ( color_r._comp.fg )
+        {
+          case Fg::Black:	ret += "30;";		break;
+          case Fg::Red:		ret += "31;";		break;
+          case Fg::Green:	ret += "32;";		break;
+          case Fg::Yellow:	ret += "33;";		break;
+          case Fg::Blue:	ret += "34;";		break;
+          case Fg::Magenta:	ret += "35;";		break;
+          case Fg::Cyan:	ret += "36;";		break;
+          case Fg::White:	ret += "37;";		break;
+          case Fg::Default:	ret += "39;";		break;
+          default:
+          case Fg::Unchanged:	break;
+        }
+        switch ( color_r._comp.bg )
+        {
+          case Bg::Black:	ret += "40;";		break;
+          case Bg::Red:		ret += "41;";		break;
+          case Bg::Green:	ret += "42;";		break;
+          case Bg::Yellow:	ret += "43;";		break;
+          case Bg::Blue:	ret += "44;";		break;
+          case Bg::Magenta:	ret += "45;";		break;
+          case Bg::Cyan:	ret += "46;";		break;
+          case Bg::White:	ret += "47;";		break;
+          case Bg::Default:	ret += "49;";		break;
+          default:
+          case Bg::Unchanged:	break;
+        }
+        *ret.rbegin() = 'm';	// turn trailing ';' into 'm'
 #if ( ZYPPER_TRACE_SGR )
-	ret += ( color_r == Color() ? "[*]" : "[@]" );
+        ret += ( color_r == Color() ? "[*]" : "[@]" );
 #endif
       }
       return ret;
@@ -431,10 +431,10 @@ namespace ansi
       {}
 
       struct {
-	Color::Attr	attr;	// std::uint8_t
-	Color::Fg	fg;	// std::uint8_t
-	Color::Bg	bg;	// std::uint8_t
-	std::uint8_t 	_f;	// std::uint8_t
+        Color::Attr	attr;	// std::uint8_t
+        Color::Fg	fg;	// std::uint8_t
+        Color::Bg	bg;	// std::uint8_t
+        std::uint8_t 	_f;	// std::uint8_t
       };
       UidType		uid;	// std::uint32_t
     } _comp;
@@ -585,9 +585,9 @@ namespace ansi
       std::string ret( plainstr() );
       if ( do_colors() && color_r )
       {
-	using str::replaceAll;
-	replaceAll( ret, Color::SGRReset(), color_r.str() );
-	ret = color_r.str() + ret + Color::SGRReset();
+        using str::replaceAll;
+        replaceAll( ret, Color::SGRReset(), color_r.str() );
+        ret = color_r.str() + ret + Color::SGRReset();
       }
 #if ( ZYPPER_TRACE_SGR )
       return "[\"<]" + ret + "[>\"]";
@@ -694,7 +694,7 @@ namespace ansi
     {
       _color = color_r;
       if ( hasStream() )
-	stream() << _color;
+        stream() << _color;
       return *this;
     }
 
@@ -703,7 +703,7 @@ namespace ansi
     {
       _color <= color_r;
       if ( hasStream() )
-	stream() << _color;
+        stream() << _color;
       return *this;
     }
 
@@ -719,8 +719,8 @@ namespace ansi
       std::string ret;
       if ( hasContent() )
       {
-	ret = _bufferP->str();
-	ret += Color::SGRReset();
+        ret = _bufferP->str();
+        ret += Color::SGRReset();
       }
       return ret;
     }
@@ -771,12 +771,12 @@ namespace ansi
     std::ostream & stream() const
     {
       if ( _directP )
-	return *_directP;
+        return *_directP;
 
       if ( !_bufferP )
       {
-	_bufferP.reset( new std::ostringstream );
-	*_bufferP << _color;
+        _bufferP.reset( new std::ostringstream );
+        *_bufferP << _color;
       }
       return *_bufferP;
     }
@@ -790,7 +790,7 @@ namespace ansi
     {
       std::string ret;
       if ( hasContent() )
-	ret = _bufferP->str();
+        ret = _bufferP->str();
       return ret;
     }
 
