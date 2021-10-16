@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-10-13 15:45+0200\n"
-"PO-Revision-Date: 2021-07-28 14:11+0000\n"
+"PO-Revision-Date: 2021-10-17 02:12+0000\n"
 "Last-Translator: Yasuhiko Kamata <belphegor@belbel.or.jp>\n"
 "Language-Team: Japanese <https://l10n.opensuse.org/projects/zypper/master/ja/"
 ">\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 4.7.1\n"
+"X-Generator: Weblate 4.8.1\n"
 
 #: src/Command.cc:93
 msgid "Invalid command"
@@ -4714,16 +4714,16 @@ msgid ""
 "will look in the rest of your $PATH for it. Thus, it's possible\n"
 "to write local zypper extensions that don't live in system space.\n"
 msgstr ""
-"zypper のサブコマンドそれぞれに対して、 zypper_execdir ('%1%') 内に\n"
-"個別の実行ファイルが存在しています。\n"
+"zypper のサブコマンドは、 zypper_execdir ('%1%') 内に個別の実行\n"
+"ファイルとして存在しています。\n"
 "\n"
-"zypper 本体は、サブコマンドに対するラッパーとして動作するように\n"
-"なっていて、サブコマンドの配置場所とその実行、およびコマンドライン\n"
-"パラメータの受け渡しまでを行います。\n"
+"zypper 本体は、サブコマンドに対するラッパーとして動作し、\n"
+"サブコマンドの配置場所とその実行、およびコマンドラインパラメータの\n"
+"受け渡しまでを行います。\n"
 "\n"
 "サブコマンドが zypper_execdir 内に見つからない場合、ラッパーはお使いの\n"
-" $PATH 環境変数を参照します。そのため、システム以外の場所に zypper\n"
-"の独自拡張を配置し、利用することができるようになっています。\n"
+"$PATH 環境変数を参照します。そのため、システム以外の場所に zypper\n"
+"の独自拡張を配置して利用できるようになっています。\n"
 
 #: src/commands/subcommand.cc:458
 #, boost-format
@@ -4731,8 +4731,8 @@ msgid ""
 "Using zypper global-options together with subcommands, as well as\n"
 "executing subcommands in '%1%' is currently not supported.\n"
 msgstr ""
-"zypper にグローバルオプションとサブコマンドを指定して実行する\n"
-"場合、 '%1%' 内でのサブコマンドの実行は現時点ではサポートしていません。\n"
+"zypper のサブコマンドは、グローバルオプションの指定や\n"
+"'%1%' からの実行には対応していません。\n"
 
 #. translators: headline of an enumeration; %1% is a directory name
 #: src/commands/subcommand.cc:469
@@ -4749,7 +4749,7 @@ msgstr "お使いの $PATH 内の他の場所で利用可能な zypper サブコ
 msgid ""
 "Using zypper subcommands available from elsewhere on your $PATH is disabled "
 "in zypper.conf."
-msgstr ""
+msgstr "zypper.conf の設定で、 $PATH 内にある zypper サブコマンドの使用が無効化されています。"
 
 #. translators: helptext; %1% is a zypper command
 #: src/commands/subcommand.cc:485
@@ -4774,6 +4774,8 @@ msgid ""
 "Lists available subcommands. Using zypper subcommands found on your $PATH is "
 "disabled in zypper.conf."
 msgstr ""
+"利用可能なサブコマンドを一覧表示します。なお zypper.conf の設定により、 $PATH 内にある zypper "
+"サブコマンドの使用が無効化されています。"
 
 #. Currently no concept how to handle global options and ZYPPlock
 #: src/commands/subcommand.cc:626
