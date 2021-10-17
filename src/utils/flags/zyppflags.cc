@@ -410,7 +410,7 @@ int parseCLI( const int argc, char * const *argv, const std::vector<CommandGroup
           }
 
           if ( !conflictingList.empty() ) {
-            for ( const std::string conflicting : conflictingList ){
+            for ( const std::string &conflicting : conflictingList ){
               auto it = longOptIndex.find( conflicting );
               if ( it == longOptIndex.end() ) {
                 WAR << "Ignoring unknown option " << conflicting << " specified as conflicting flag for " << opt.name << endl;
