@@ -1,4 +1,23 @@
 -------------------------------------------------------------------
+Mon Oct 18 12:02:57 CEST 2021 - ma@suse.de
+
+- Zypper should keep cached files if transaction is aborted
+  (bsc#1190356)
+  Singletrans mode currently does not keep files around if the
+  transaction is aborted. This patch fixes the problem.
+- Require a minimum number of mirrors for multicurl (bsc#1191609)
+- Use procfs to detect nr of open fd's if rlimit is too high
+  (bsc#1191324)
+  Especially in a VM iterating over all possible fd's to close open
+  ones right before a exec() slows down zypper unnecessarily. This
+  patch uses /proc/self/fd to iterate over open fd's in case rlimit
+  is above 1024.
+- po: Fix some lost '%' signs in positional args (bsc#1191370)
+- RepoManager: Don't probe for plaindir repo if URL schema is
+  plugin: (bsc#1191286)
+- version 17.28.6 (22)
+
+-------------------------------------------------------------------
 Mon Oct  4 12:46:46 CEST 2021 - ma@suse.de
 
 - Downloader does not respect checkExistsOnly flag (bsc#1190712)
