@@ -1,4 +1,26 @@
 -------------------------------------------------------------------
+Mon Oct 18 12:05:45 CEST 2021 - ma@suse.de
+
+- Fix compiler warning.
+- zypper.conf: New option whether to collect subcommands found in
+  $PATH (fixes #379)
+  +[subcommand] i
+  +
+  +##  Whether to look for subcommands in $PATH
+  +##
+  +## If a subcommand is not found in the zypper_execdir, the wrapper
+  +## will look in the rest of your $PATH for it. Thus, it's possible
+  +## to write local zypper extensions that don't live in system space.
+  +## See section SUBCOMMANDS in the zypper manpage.
+  +##
+  +## Valid values: boolean
+  +## Default value: yes
+  +##
+  +# seachSubcommandInPath = yes.
+- help subcommand: show path of command found in $PATH.
+- version 1.14.50
+
+-------------------------------------------------------------------
 Fri Sep  3 14:38:00 CEST 2021 - ma@suse.de
 
 - Avoid calling 'su' to detect a too restrictive sudo user umask
