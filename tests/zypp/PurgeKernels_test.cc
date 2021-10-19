@@ -292,6 +292,20 @@ namespace  {
           //{ "kernel-default-base-5.7.8-3.1.1.1.x86_64" },
           }
       },
+      // same test set as before, but this time the user took the uname-r kernel output
+      // we should ignore the -flavor in the end and just use the edition part
+      TestSample {
+        TESTS_SRC_DIR"/zypp/data/PurgeKernels/kernel-base",
+        "5.7.8-3-default",
+        Arch("x86_64"),
+        "running, 5.7.8-2.1.1-default",
+        {
+          { "kernel-default-base-5.7.8-1.1.1.1.x86_64" },
+          { "kernel-default-base-5.8.8-2.1.1.1.x86_64" },
+          //{ "kernel-default-base-5.7.8-2.1.1.1.x86_64" },
+          //{ "kernel-default-base-5.7.8-3.1.1.1.x86_64" },
+          }
+      },
       TestSample {
         TESTS_SRC_DIR"/zypp/data/PurgeKernels/flavour",
         "1-3-rt",

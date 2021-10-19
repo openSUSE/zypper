@@ -324,7 +324,18 @@ namespace zypp {
       } else {
         str::smatch what;
         if ( !str::regex_match( word, what, specRegex ) ) {
-          _keepSpecificEditions.insert( Edition(word) );
+          // Allow uname_r version numbers by cutting off any postfix that comes after a second dash, including the second dash.
+          // Github-Issue openSUSE/zypper#418
+          std::string_view edition(word);
+          const auto firstDash = word.find_first_of ('-');
+          if ( firstDash != std::string::npos ) {
+            const auto secondDash = word.find_first_of ('-', firstDash+1 );
+            if ( secondDash != std::string::npos ) {
+              WAR << "Ignoring possible flavor postfix:'"<< word.substr (secondDash) <<"' in keep spec: " << word << std::endl;
+              edition = std::string_view( word.c_str (), secondDash );
+            }
+          }
+          _keepSpecificEditions.insert( Edition(IdString(edition)) );
           continue;
         }
 
@@ -456,6 +467,7 @@ namespace zypp {
             for ( Capability prov : solv.provides() ) {
               if ( prov.detail().name() == solv.name() && _keepSpecificEditions.count( prov.detail().ed() ) ) {
                 markAsKeep( solv );
+                break;
               }
             }
           });
