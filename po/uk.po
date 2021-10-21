@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: zypper.uk\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-10-13 15:45+0200\n"
-"PO-Revision-Date: 2021-10-14 01:14+0000\n"
+"PO-Revision-Date: 2021-10-22 00:12+0000\n"
 "Last-Translator: Taras Panchenko <top39@ukr.net>\n"
 "Language-Team: Ukrainian <https://l10n.opensuse.org/projects/zypper/master/"
 "uk/>\n"
@@ -85,33 +85,33 @@ msgstr ""
 #, c-format, boost-format
 msgid "The following package failed to install:"
 msgid_plural "The following %d packages failed to install:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Не вдалося встановити пакунок:"
+msgstr[1] "Не вдалося встановити %d пакунки:"
+msgstr[2] "Не вдалося встановити %d пакунків:"
 
 #: src/CommitSummary.cc:140
 #, c-format, boost-format
 msgid "The following package installation was skipped:"
 msgid_plural "The following %d package installations were skipped:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Встановлення пакунку було пропущено:"
+msgstr[1] "Встановлення %d пакунків було пропущено:"
+msgstr[2] "Встановлення %d пакунків було пропущено:"
 
 #: src/CommitSummary.cc:155
 #, c-format, boost-format
 msgid "The following package failed to uninstall:"
 msgid_plural "The following %d packages failed to uninstall:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Не вдалося вилучити пакунок:"
+msgstr[1] "Не вдалося вилучити %d пакунки:"
+msgstr[2] "Не вдалося вилучити %d пакунків:"
 
 #: src/CommitSummary.cc:170
 #, c-format, boost-format
 msgid "The following package removal was skipped:"
 msgid_plural "The following %d package removal were skipped:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Вилучення пакунку було пропущено:"
+msgstr[1] "Вилучення %d пакунків було пропущено:"
+msgstr[2] "Вилучення %d пакунків було пропущено:"
 
 #. translators: Appended when clipping a long enumeration:
 #. "ConsoleKit-devel ConsoleKit-doc ... and 20828 more items."
@@ -1561,7 +1561,7 @@ msgstr "Назва ключа:"
 
 #: src/callbacks/keyring.h:89
 msgid "Key Algorithm:"
-msgstr ""
+msgstr "Алгоритм ключа:"
 
 #: src/callbacks/keyring.h:90
 msgid "Key Created:"
@@ -1780,9 +1780,9 @@ msgstr ""
 #, boost-format
 msgid "Received %1% new package signing key from repository %2%:"
 msgid_plural "Received %1% new package signing keys from repository %2%:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Отримано %1% новий пакунок ключа підпису зі сховища %2%:"
+msgstr[1] "Отримано %1% нових пакунки ключів підпису зі сховища %2%:"
+msgstr[2] "Отримано %1% нових пакунків ключів підпису зі сховища %2%:"
 
 #: src/callbacks/keyring.h:494
 msgid ""
@@ -1793,13 +1793,15 @@ msgstr ""
 
 #: src/callbacks/keyring.h:496
 msgid "New:"
-msgstr ""
+msgstr "Новий:"
 
 #: src/callbacks/keyring.h:502
 msgid ""
 "The repository metadata introducing the new keys have been signed and "
 "validated by the trusted key:"
 msgstr ""
+"Метадані сховища, що представляють нові ключі, були підписані та перевірені "
+"надійним ключем:"
 
 #: src/callbacks/keyring.h:525
 #, c-format, boost-format
@@ -2149,19 +2151,19 @@ msgstr ""
 #: src/callbacks/rpm.h:711 src/callbacks/rpm.h:718
 #, c-format, boost-format
 msgid "Executing %s script for: %s"
-msgstr ""
+msgstr "Виконання сценарію %s для: %s"
 
 #. TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
 #: src/callbacks/rpm.h:725
 #, c-format, boost-format
 msgid "Executing %s script"
-msgstr ""
+msgstr "Виконання сценарію %s"
 
 #. TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
 #: src/callbacks/rpm.h:857
 #, c-format, boost-format
 msgid "Cleaning up: %s"
-msgstr ""
+msgstr "Прибирання: %s"
 
 #. translator: %s is an other command: "This is an alias for 'zypper info -t patch'."
 #: src/commands/commandhelpformatter.h:94
@@ -2647,7 +2649,7 @@ msgstr "Обмежити блок вказаним сховищем."
 
 #: src/commands/locks/add.cc:48
 msgid "Reason for specific lock."
-msgstr ""
+msgstr "Причина конкретного блокування."
 
 #: src/commands/locks/add.cc:81
 msgid "Specified lock has been successfully added."
@@ -2722,7 +2724,7 @@ msgstr "Сховище"
 
 #: src/commands/locks/list.cc:138
 msgid "Comment"
-msgstr ""
+msgstr "Примітка"
 
 #. translators: locks table value
 #: src/commands/locks/list.cc:156 src/commands/locks/list.cc:235
@@ -2834,6 +2836,8 @@ msgid ""
 "This is the recommended way for scripts to test whether a system reboot is "
 "suggested."
 msgstr ""
+"Це рекомендований спосіб для сценаріїв, щоб перевірити, чи пропонується "
+"перезавантаження системи."
 
 #: src/commands/needs-rebooting.cc:38
 msgid ""
@@ -4872,7 +4876,7 @@ msgid ""
 "to write local zypper extensions that don't live in system space.\n"
 msgstr ""
 "Підкоманди zypper - самостійно виконуються і живуть у\n"
-"zypper_execdir («%1%»).\n"
+"zypper_execdir ('%1%').\n"
 "\n"
 "Для підкоманд zypper надає оболонку, яка знає, де вони\n"
 "живуть, і запускає їх, передаючи аргументи командного рядка.\n"
