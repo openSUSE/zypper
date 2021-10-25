@@ -455,8 +455,8 @@ namespace zypp
     /** Kinds to search */
     Kinds _kinds;
 
-    /** comments */
-    std::string _comment;
+    /** Optional comment string for serialization. */
+    mutable std::string _comment;
     //@}
 
   public:
@@ -492,6 +492,7 @@ namespace zypp
           && _attrs.size() == 1
           && _attrs.begin()->first == sat::SolvAttr::name ) )
       {
+        // ma: Intentionally a different _comment is not considered.
         return ( _strings == rhs._strings
               && _attrs == rhs._attrs
               && _uncompiledPredicated == rhs._uncompiledPredicated
@@ -870,8 +871,12 @@ namespace zypp
   void PoolQuery::addKind(const ResKind & kind)
   { _pimpl->_kinds.insert(kind); }
 
+  void PoolQuery::setComment(const std::string & comment) const
+  { _pimpl->_comment = comment; }
+#if LEGACY(1722)
   void PoolQuery::setComment(const std::string & comment)
   { _pimpl->_comment = comment; }
+#endif
 
   void PoolQuery::addString(const std::string & value)
   { _pimpl->_strings.insert(value); }
@@ -1476,8 +1481,8 @@ namespace zypp
       str << "complex: "<< it->serialize() << delim;
     }
 
-    str << PoolQueryAttr::commentAttr.asString() << ": "
-        << comment() << delim ;
+    if ( const std::string & c { comment() }; not c.empty() )
+      str << PoolQueryAttr::commentAttr.asString() << ": " << c << delim ;
 
     //separating delim - protection
     str << delim;

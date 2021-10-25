@@ -423,7 +423,7 @@ public:
 bool Locks::Impl::mergeList(callback::SendReport<SavingLocksReport>& report)
 {
   MIL << "merge list old: " << locks().size()
-    << " to add: " << toAdd.size() << "to remove: " << toRemove.size() << endl;
+    << " to add: " << toAdd.size() << " to remove: " << toRemove.size() << endl;
   for_(it,toRemove.begin(),toRemove.end())
   {
     std::set<sat::Solvable> s(it->begin(),it->end());
@@ -433,7 +433,11 @@ bool Locks::Impl::mergeList(callback::SendReport<SavingLocksReport>& report)
   if (!report->progress())
     return false;
 
-  MANIPlocks().insert( toAdd.begin(), toAdd.end() );
+  for ( const auto & q : toAdd ) {
+    const auto & [i,b] { MANIPlocks().insert( q ) };
+    if ( not b &&  i->comment() != q.comment() )
+      i->setComment( q.comment() ); // update comment if query already exists
+  }
 
   toAdd.clear();
   toRemove.clear();

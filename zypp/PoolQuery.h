@@ -159,8 +159,14 @@ namespace zypp
      * only the specified repo will be returned (multiple repos will be ORed).
      */
     void addRepo(const std::string &repoalias);
-    void setComment(const std::string & comment);
 
+    /** Set an optional comment string describing the purpose of the query.
+     * Stored and retrieved when serializing the query. E.g. as lock.
+     */
+    void setComment(const std::string & comment) const;
+#if LEGACY(1722)
+    void setComment(const std::string & comment);
+#endif
 
     /** Installed status filter setters. */
     //@{
