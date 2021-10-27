@@ -6,7 +6,7 @@
 
 \section zypp-repovars-intro Repository Variables
 
-Within a \c .repo or \c .serivce file, the name and URLs are subject to variable substitution.
+Within a \c .repo or \c .service file, the name and URLs are subject to variable substitution.
 
 Variables are e.g. usefull for related repositories like packman (<tt>http://ftp.gwdg.de/pub/linux/packman/suse/$releasever</tt>), which shall always fit the installed distribution, even after a distribution upgrade. To help performing a distribution upgrade, the value of \c $releasever can be overwritten in zypper using the \c --releasever global option. This way you can easily switch all repositories using \c $releasever to the new version (provided the server layouts did not change and new repos are already available).
 
