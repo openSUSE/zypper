@@ -47,7 +47,8 @@ namespace zypp
         {
           try
           {
-            close(); // !!! make sure handler gets properly deleted.
+            if ( _handler )
+              close(); // !!! make sure handler gets properly deleted.
           }
           catch(...) {}
         }
