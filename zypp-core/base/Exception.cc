@@ -122,6 +122,21 @@ namespace zypp
     }
   }
 
+  void Exception::remember( std::exception_ptr old_r )
+  {
+    try {
+      if (old_r) {
+        std::rethrow_exception(old_r);
+      }
+    } catch( const Exception& e ) {
+      remember( e );
+    } catch ( const std::exception& e ) {
+      addHistory( e.what() );
+    } catch ( ... ) {
+      addHistory( "Remembered unknown exception" );
+    }
+  }
+
   void Exception::addHistory( const std::string & msg_r )
   { _history.push_front( msg_r ); }
 

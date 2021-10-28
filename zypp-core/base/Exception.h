@@ -217,6 +217,9 @@ namespace zypp
     /** \overload moving */
     void remember( Exception && old_r );
 
+    /** \overload std::exception_ptr */
+    void remember( std::exception_ptr old_r );
+
     /** Add some message text to the history. */
     void addHistory( const std::string & msg_r );
     /** \overload moving */
@@ -380,6 +383,29 @@ namespace zypp
       Exception::log( excpt_r, where_r, "RETHROW: " );
       throw;
     }
+
+    /** Helper for \ref ZYPP_EXCPT_PTR( Exception ). */
+    template<class TExcpt, EnableIfIsException<TExcpt> = 0>
+    std::exception_ptr do_ZYPP_EXCPT_PTR( const TExcpt & excpt_r, const CodeLocation & where_r );
+    template<class TExcpt, EnableIfIsException<TExcpt>>
+    std::exception_ptr do_ZYPP_EXCPT_PTR( const TExcpt & excpt_r, const CodeLocation & where_r )
+    {
+      excpt_r.relocate( where_r );
+      Exception::log( excpt_r, where_r, "THROW:   " );
+      return std::make_exception_ptr( excpt_r );
+    }
+
+    /** Helper for \ref ZYPP_EXCPT_PTR( not Exception ). */
+    template<class TExcpt, EnableIfNotException<TExcpt> = 0>
+    std::exception_ptr do_ZYPP_EXCPT_PTR( const TExcpt & excpt_r, const CodeLocation & where_r );
+    template<class TExcpt, EnableIfNotException<TExcpt>>
+    std::exception_ptr do_ZYPP_EXCPT_PTR( const TExcpt & excpt_r, const CodeLocation & where_r )
+    {
+      Exception::log( typeid(excpt_r).name(), where_r, "THROW:   " );
+      return std::make_exception_ptr( excpt_r );
+    }
+
+
   } // namespace exception_detail
   ///////////////////////////////////////////////////////////////////
 
@@ -391,6 +417,10 @@ namespace zypp
   /** Drops a logline and throws the Exception. */
 #define ZYPP_THROW(EXCPT)\
   ::zypp::exception_detail::do_ZYPP_THROW( EXCPT, ZYPP_EX_CODELOCATION )
+
+  /** Drops a logline and returns Exception as a std::exception_ptr. */
+#define ZYPP_EXCPT_PTR(EXCPT)\
+  ::zypp::exception_detail::do_ZYPP_EXCPT_PTR( EXCPT, ZYPP_EX_CODELOCATION )
 
   /** Drops a logline telling the Exception was caught (in order to handle it). */
 #define ZYPP_CAUGHT(EXCPT)\
