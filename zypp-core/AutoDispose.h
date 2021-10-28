@@ -116,13 +116,23 @@ namespace zypp
       {}
 
       /** Ctor taking value and no dispose function. */
-      explicit AutoDispose( param_type value_r )
+      explicit AutoDispose( const value_type & value_r )
       : _pimpl( new Impl( value_r ) )
       {}
 
       /** Ctor taking value and dispose function. */
-      AutoDispose( param_type value_r, const Dispose & dispose_r )
+      AutoDispose( const value_type & value_r, const Dispose & dispose_r )
       : _pimpl( new Impl( value_r, dispose_r ) )
+      {}
+
+      /** Ctor taking rvalue and no dispose function. */
+      explicit AutoDispose( value_type &&value_r )
+        : _pimpl( new Impl( std::move(value_r) ) )
+      {}
+
+      /** Ctor taking rvalue and dispose function. */
+      AutoDispose( value_type &&value_r, const Dispose & dispose_r )
+        : _pimpl( new Impl( std::move(value_r), dispose_r ) )
       {}
 
     public:
@@ -171,12 +181,14 @@ namespace zypp
     private:
       struct Impl : private base::NonCopyable
       {
-        Impl( param_type value_r )
-        : _value( value_r )
+        template <typename T>
+        Impl( T &&value_r )
+          : _value( std::forward<T>(value_r) )
         {}
-        Impl( param_type value_r, const Dispose & dispose_r )
-        : _value( value_r )
-        , _dispose( dispose_r )
+        template <typename T, typename D>
+        Impl( T &&value_r, D &&dispose_r )
+          : _value( std::forward<T>(value_r) )
+          , _dispose( std::forward<D>(dispose_r) )
         {}
         ~Impl()
         {
