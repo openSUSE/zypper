@@ -1,0 +1,32 @@
+#!/usr/bin/env python3
+
+import urllib3
+import sys
+import re
+
+p = re.compile('.*debuginfo.*')
+
+http = urllib3.PoolManager()
+r = http.request('GET', 'http://download.opensuse.org/history/list')
+if ( r.status != 200 ):
+  print("Failed to download history list\n")
+  sys.exit(1)
+
+html = r.data.decode("utf-8")
+list = html.split("\n")  
+
+for i in list:
+  if ( len(i) == 0 ):
+    continue
+  print ( "Searching for history in: "+i )
+  rEntries = http.request('GET', "http://download.opensuse.org/history/"+i.strip()+"/rpm.list", preload_content=False )
+  if ( rEntries.status != 200 ):
+    print("Failed to download history database for "+i+"\n")
+    continue
+  
+  for line in rEntries:
+    if ( p.search( line.decode() ) ):
+       print("Found match: "+line.decode()+" in: "+"http://download.opensuse.org/history/"+i.strip() )
+
+
+print("Done")
