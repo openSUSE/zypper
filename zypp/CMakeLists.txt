@@ -136,7 +136,7 @@ SET( zypp_HEADERS
   KeyManager.h
   KeyRing.h
   KeyRingContexts.h
-  #KVMap.h
+  KVMap.h
   LanguageCode.h
   Locale.h
   Locks.h
@@ -305,7 +305,7 @@ SET( zypp_media_HEADERS
   media/MediaMultiCurl.h
   media/MediaDIR.h
   media/MediaDISK.h
-  #media/MediaException.h
+  media/MediaException.h
   media/MediaHandler.h
   media/MediaHandlerFactory.h
   media/MediaISO.h
@@ -314,7 +314,7 @@ SET( zypp_media_HEADERS
   media/MediaNFS.h
   media/MediaSource.h
   media/MediaUserAuth.h
-  #media/Mount.h
+  media/Mount.h
   media/ProxyInfo.h
   media/CredentialFileReader.h
   media/CredentialManager.h
