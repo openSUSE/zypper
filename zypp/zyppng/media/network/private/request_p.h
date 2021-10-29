@@ -16,7 +16,7 @@
 
 #include <zypp-core/zyppng/base/private/base_p.h>
 #include <zypp/zyppng/media/network/request.h>
-#include <zypp/media/MediaException.h>
+#include <zypp-media/MediaException>
 #include <zypp-core/zyppng/base/Timer>
 #include <zypp/base/Regex.h>
 #include <curl/curl.h>

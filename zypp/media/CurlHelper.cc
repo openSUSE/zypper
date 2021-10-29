@@ -7,7 +7,7 @@
 #include <zypp/base/String.h>
 #include <zypp/media/ProxyInfo.h>
 #include <zypp/media/MediaUserAuth.h>
-#include <zypp/media/MediaException.h>
+#include <zypp-media/MediaException>
 #include <list>
 
 using std::endl;

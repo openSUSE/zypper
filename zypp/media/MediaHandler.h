@@ -24,7 +24,7 @@
 #include <zypp/Url.h>
 
 #include <zypp/media/MediaSource.h>
-#include <zypp/media/MediaException.h>
+#include <zypp-media/MediaException>
 #include <zypp/APIConfig.h>
 #include <zypp/OnMediaLocation.h>
 

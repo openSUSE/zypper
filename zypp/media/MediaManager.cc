@@ -14,11 +14,11 @@
 #include <iostream>
 #include <typeinfo>
 
-#include <zypp/media/MediaException.h>
+#include <zypp-media/MediaException>
 #include <zypp/media/MediaManager.h>
 #include <zypp/media/MediaHandlerFactory.h>
 #include <zypp/media/MediaHandler.h>
-#include <zypp/media/Mount.h>
+#include <zypp-media/Mount>
 
 #include <zypp/base/String.h>
 #include <zypp/base/Logger.h>

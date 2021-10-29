@@ -12,10 +12,10 @@
 
 #include <iostream>
 
-#include <zypp/base/String.h>
-#include <zypp/base/Gettext.h>
+#include <zypp-core/base/String.h>
+#include <zypp-core/base/Gettext.h>
 
-#include <zypp/media/MediaException.h>
+#include <zypp-media/MediaException>
 
 using std::endl;
 using zypp::str::form;

@@ -12,7 +12,7 @@
 #include <iostream>
 #include <zypp/base/Logger.h>
 #include <zypp/media/UrlResolverPlugin.h>
-#include <zypp/media/MediaException.h>
+#include <zypp-media/MediaException>
 #include <zypp/PluginScript.h>
 #include <zypp/ZConfig.h>
 

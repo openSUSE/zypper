@@ -6,7 +6,7 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file zypp/media/Mount.h
+/** \file zypp-media/Mount
  *
 */
 
@@ -21,7 +21,7 @@
 #include <iosfwd>
 
 #include <zypp/ExternalProgram.h>
-#include <zypp/KVMap.h>
+#include <zypp-core/KVMap>
 
 namespace zypp {
   namespace media {

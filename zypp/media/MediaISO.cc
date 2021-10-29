@@ -12,7 +12,7 @@
 #include <iostream>
 
 #include <zypp/base/Logger.h>
-#include <zypp/media/Mount.h>
+#include <zypp-media/Mount>
 
 #include <zypp/media/MediaISO.h>
 

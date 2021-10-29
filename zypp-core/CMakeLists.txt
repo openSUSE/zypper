@@ -15,6 +15,8 @@ SET( zypp_toplevel_headers
   Digest.h
   ExternalProgram.h
   Globals.h
+  KVMap
+  kvmap.h
   ManagedFile.h
   Pathname.h
   TriBool.h

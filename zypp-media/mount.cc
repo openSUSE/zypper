@@ -20,10 +20,10 @@
 #include <fstream>
 #include <string>
 
+#include <zypp-media/Mount>
 #include <zypp/base/ExternalDataSource.h>
 #include <zypp/base/Logger.h>
-#include <zypp/media/Mount.h>
-#include <zypp/media/MediaException.h>
+#include <zypp-media/MediaException>
 
 #include <zypp/PathInfo.h>
 

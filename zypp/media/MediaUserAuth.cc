@@ -16,7 +16,7 @@
 #include <zypp/base/Gettext.h>
 #include <zypp/base/String.h>
 
-#include <zypp/media/MediaException.h>
+#include <zypp-media/MediaException>
 #include <zypp/media/MediaUserAuth.h>
 
 using std::endl;

@@ -33,10 +33,10 @@ IF (DEBIAN)
 ENDIF (DEBIAN)
 
 IF ( ENABLE_DEVEL_BUILD )
-	MESSAGE( WARNING "Zypp devel build enabled, do not do this in production" )
-	SET( ZYPP_RPM_BINARY "${CMAKE_BINARY_DIR}/tools/zypp-rpm/zypp-rpm")
+        MESSAGE( WARNING "Zypp devel build enabled, do not do this in production" )
+        SET( ZYPP_RPM_BINARY "${CMAKE_BINARY_DIR}/tools/zypp-rpm/zypp-rpm")
 ELSE()
-	SET( ZYPP_RPM_BINARY "${ZYPP_LIBEXEC_INSTALL_DIR}/zypp-rpm")
+        SET( ZYPP_RPM_BINARY "${ZYPP_LIBEXEC_INSTALL_DIR}/zypp-rpm")
 ENDIF( ENABLE_DEVEL_BUILD )
 
 message ( "Using zypp-rpm from path: ${ZYPP_RPM_BINARY}" )
@@ -152,8 +152,8 @@ ELSE ( NOT RPM_FOUND)
   endif()
 
   if( RPM_LIB_VER VERSION_GREATER_EQUAL "5.0.0" )
-  	MESSAGE( STATUS "rpm found: enable rpm-4 compat interface." )
-  	ADD_DEFINITIONS(-D_RPM_5)
+        MESSAGE( STATUS "rpm found: enable rpm-4 compat interface." )
+        ADD_DEFINITIONS(-D_RPM_5)
   endif ()
 
 ENDIF( NOT RPM_FOUND)
@@ -344,6 +344,7 @@ ENDIF ( ENABLE_PREVIEW_SINGLE_RPMTRANS_AS_DEFAULT_FOR_ZYPPER )
 ####################################################################
 ADD_SUBDIRECTORY( zypp-proto )
 ADD_SUBDIRECTORY( zypp-core )
+ADD_SUBDIRECTORY( zypp-media )
 ADD_SUBDIRECTORY( zypp )
 # do not build devel by default
 ADD_SUBDIRECTORY( devel EXCLUDE_FROM_ALL )

@@ -22,7 +22,7 @@
 #include <zypp/base/String.h>
 #include <zypp/media/MediaHandler.h>
 #include <zypp/media/MediaManager.h>
-#include <zypp/media/Mount.h>
+#include <zypp-media/Mount>
 #include <limits.h>
 #include <stdlib.h>
 #include <errno.h>

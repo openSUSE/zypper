@@ -20,7 +20,7 @@
 
 #include <zypp/media/CredentialFileReader.h>
 #include <zypp/media/CredentialManager.h>
-#include <zypp/media/MediaException.h>
+#include <zypp-media/MediaException>
 
 #include <boost/interprocess/sync/file_lock.hpp>
 #include <boost/interprocess/sync/scoped_lock.hpp>

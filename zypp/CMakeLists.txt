@@ -136,7 +136,7 @@ SET( zypp_HEADERS
   KeyManager.h
   KeyRing.h
   KeyRingContexts.h
-  KVMap.h
+  #KVMap.h
   LanguageCode.h
   Locale.h
   Locks.h
@@ -271,10 +271,8 @@ INSTALL(  FILES
 
 SET( zypp_media_SRCS
   media/CurlHelper.cc
-  media/MediaException.cc
   media/MediaHandler.cc
   media/MediaHandlerFactory.cc
-  media/Mount.cc
   media/MediaNFS.cc
   media/MediaCD.cc
   media/MediaDIR.cc
@@ -307,7 +305,7 @@ SET( zypp_media_HEADERS
   media/MediaMultiCurl.h
   media/MediaDIR.h
   media/MediaDISK.h
-  media/MediaException.h
+  #media/MediaException.h
   media/MediaHandler.h
   media/MediaHandlerFactory.h
   media/MediaISO.h
@@ -316,7 +314,7 @@ SET( zypp_media_HEADERS
   media/MediaNFS.h
   media/MediaSource.h
   media/MediaUserAuth.h
-  media/Mount.h
+  #media/Mount.h
   media/ProxyInfo.h
   media/CredentialFileReader.h
   media/CredentialManager.h
@@ -940,8 +938,9 @@ macro( ADDZYPPLIB LIBNAME )
   # System libraries
   SET(UTIL_LIBRARY util)
 
-  # CAUTION, link those 2 libs always first and always in that order,
+  # CAUTION, link those libs always first and always in that order,
   # otherwise you get symbol lookup errors when linking against libzypp
+  TARGET_LINK_LIBRARIES(${LIBNAME} zypp-media )
   TARGET_LINK_LIBRARIES(${LIBNAME} zypp-core )
   TARGET_LINK_LIBRARIES(${LIBNAME} zypp-protobuf )
 

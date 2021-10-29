@@ -12,7 +12,7 @@
 #include <zypp/zyppng/media/network/networkrequestdispatcher.h>
 #include <zypp/media/TransferSettings.h>
 #include <zypp/media/CurlHelper.h>
-#include <zypp/media/MediaException.h>
+#include <zypp-media/MediaException>
 #include <zypp/base/String.h>
 #include <zypp/media/CredentialManager.h>
 #include <zypp/ZConfig.h>

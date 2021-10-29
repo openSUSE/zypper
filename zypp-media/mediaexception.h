@@ -6,7 +6,7 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file zypp/media/MediaException.h
+/** \file zypp-media/MediaException
  *
 */
 #ifndef ZYPP_MEDIA_MEDIAEXCEPTION_H
@@ -17,10 +17,10 @@
 #include <string>
 #include <vector>
 
-#include <zypp/base/Exception.h>
-#include <zypp/Pathname.h>
-#include <zypp/Url.h>
-#include <zypp/ByteCount.h>
+#include <zypp-core/base/Exception.h>
+#include <zypp-core/Pathname.h>
+#include <zypp-core/Url.h>
+#include <zypp-core/ByteCount.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

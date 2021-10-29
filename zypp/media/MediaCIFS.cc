@@ -16,8 +16,8 @@
 #include <zypp/base/Logger.h>
 #include <zypp/base/Gettext.h>
 #include <zypp/TmpPath.h>
-#include <zypp/KVMap.h>
-#include <zypp/media/Mount.h>
+#include <zypp-core/KVMap>
+#include <zypp-media/Mount>
 #include <zypp/media/MediaUserAuth.h>
 #include <zypp/media/CredentialManager.h>
 #include <zypp/ZYppCallbacks.h>

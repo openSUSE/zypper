@@ -9,7 +9,7 @@
 #include "medianetwork.h"
 #include "private/medianetworkserver_p.h"
 
-#include <zypp/media/MediaException.h>
+#include <zypp-media/MediaException>
 #include <zypp-core/zyppng/base/private/linuxhelpers_p.h>
 #include <zypp-core/zyppng/base/EventLoop>
 #include <zypp-core/zyppng/base/AutoDisconnect>
@@ -26,7 +26,7 @@
 
 #include <zypp/media/CurlHelper.h>
 #include <zypp/media/MediaUserAuth.h>
-#include <zypp/media/MediaException.h>
+#include <zypp-media/MediaException>
 #include <zypp/media/CredentialManager.h>
 #include <zypp/ZConfig.h>
 #include <zypp/ZYppCallbacks.h>

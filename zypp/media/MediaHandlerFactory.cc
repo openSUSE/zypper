@@ -3,7 +3,7 @@
 
 #include <zypp/base/Logger.h>
 
-#include <zypp/media/MediaException.h>
+#include <zypp-media/MediaException>
 #include <zypp/media/MediaHandler.h>
 
 #include <zypp/media/MediaNFS.h>

@@ -24,7 +24,7 @@ extern "C"
 
 #include <zypp/base/Logger.h>
 #include <zypp/ExternalProgram.h>
-#include <zypp/media/Mount.h>
+#include <zypp-media/Mount>
 #include <zypp/media/MediaCD.h>
 #include <zypp/media/MediaManager.h>
 #include <zypp/Url.h>

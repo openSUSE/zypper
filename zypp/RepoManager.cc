@@ -35,7 +35,7 @@
 
 #include <zypp/media/MediaManager.h>
 #include <zypp/media/CredentialManager.h>
-#include <zypp/media/MediaException.h>
+#include <zypp-media/MediaException>
 #include <zypp/MediaSetAccess.h>
 #include <zypp/ExternalProgram.h>
 #include <zypp/ManagedFile.h>
