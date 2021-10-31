@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: zypper.uk\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-10-13 15:45+0200\n"
-"PO-Revision-Date: 2021-10-22 00:12+0000\n"
+"PO-Revision-Date: 2021-10-31 23:11+0000\n"
 "Last-Translator: Taras Panchenko <top39@ukr.net>\n"
 "Language-Team: Ukrainian <https://l10n.opensuse.org/projects/zypper/master/"
 "uk/>\n"
@@ -1505,6 +1505,11 @@ msgid ""
 "repository provider or check his web site. Many provider maintain a web page "
 "showing the fingerprints of the GPG keys they are using."
 msgstr ""
+"Відкритий ключ GPG чітко ідентифікується за власним відбитком. Не "
+"покладайтеся на назву ключів. Якщо ви не впевнені, чи автентичний наданий "
+"ключ, запитайте у постачальника сховища або перевірте його веб-сайт. Багато "
+"провайдерів підтримують веб-сторінки, на яких відображаються відбитки ключів "
+"GPG, які вони використовують."
 
 #: src/callbacks/keyring.h:37
 msgid ""
@@ -1790,6 +1795,9 @@ msgid ""
 "repository. In order to validate those packages upon download and "
 "installation the new keys will be imported into the rpm database."
 msgstr ""
+"Ці додаткові ключі зазвичай використовуються для підпису пакунків, що "
+"надсилаються до сховища. Щоб перевірити ці пакунки після завантаження та "
+"встановлення, нові ключі будуть імпортовані в базу даних rpm."
 
 #: src/callbacks/keyring.h:496
 msgid "New:"
@@ -2621,7 +2629,7 @@ msgstr "Не вилучати відповідні пакунки для зад�
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
 #: src/commands/locks/add.cc:29
 msgid "addlock (al) [OPTIONS] <LOCKSPEC>..."
-msgstr ""
+msgstr "addlock (al) [ПАРАМЕТРИ] <LOCKSPEC>..."
 
 #. translators: command summary
 #: src/commands/locks/add.cc:31 src/commands/locks/add.cc:34
@@ -3060,6 +3068,8 @@ msgid ""
 "When updating the affected/vulnerable packages described by a patch, zypper "
 "always aims for the latest available version."
 msgstr ""
+"Під час оновлення уражених/уразливих пакунків, вказаних у латках, zypper "
+"завжди прагне до останньої з наявних версій."
 
 #: src/commands/patch.cc:50
 msgid ""
@@ -4910,6 +4920,8 @@ msgid ""
 "Using zypper subcommands available from elsewhere on your $PATH is disabled "
 "in zypper.conf."
 msgstr ""
+"Можливість використання підкоманд zypper з іншого місця відповідно до вашого "
+"$PATH, вимкнено у zypper.conf."
 
 #. translators: helptext; %1% is a zypper command
 #: src/commands/subcommand.cc:485
@@ -4933,6 +4945,8 @@ msgid ""
 "Lists available subcommands. Using zypper subcommands found on your $PATH is "
 "disabled in zypper.conf."
 msgstr ""
+"Перелік наявних підкоманд. Використання підкоманд zypper, знайдених у вашому "
+"$PATH, вимкнено в zypper.conf."
 
 #. Currently no concept how to handle global options and ZYPPlock
 #: src/commands/subcommand.cc:626
