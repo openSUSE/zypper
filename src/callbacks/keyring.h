@@ -92,6 +92,13 @@ namespace zypp
       for ( const PublicSubkeyData & sub : key.subkeys() )
         t << ( TableRow() << "" << _("Subkey:") << sub.asString() );
       t << ( TableRow() << "" << _("Rpm Name:") << key.rpmName() );
+      t << ( TableRow() << "" << _("Rpm Name:") << key.rpmName() );
+      for ( const PublicKeySignatureData & sig : key.signatures()) {
+          std::string label = "Signature:";
+          if (sig.inTrustedRing())
+              label = "Trusted signature:";
+          t << ( TableRow() << "" << _(label.c_str()) << sig );
+      }
 
       return str << t;
     }
