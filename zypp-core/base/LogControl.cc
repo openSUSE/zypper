@@ -252,7 +252,8 @@ namespace zypp
       // if we are in the same thread as the Log worker we can directly push our messages out, no need to use the socket
       if ( std::this_thread::get_id() == LogThread::instance().threadId() ) {
         auto writer = LogThread::instance().getLineWriter();
-        writer->writeOut( msg );
+        if ( writer )
+          writer->writeOut( msg );
         return;
       }
 
