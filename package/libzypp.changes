@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Thu Nov  4 15:16:29 CET 2021 - ma@suse.de
+
+- Check log writer before accessing it (fixes #355, bsc#1192337)
+- Save locks: Update an existing locks changed comment string.
+- Allow uname-r format in purge kernels keepspec (fixes
+  openSUSE/zypper#418)
+- version 17.28.7 (22)
+
+-------------------------------------------------------------------
 Mon Oct 18 12:02:57 CEST 2021 - ma@suse.de
 
 - Zypper should keep cached files if transaction is aborted
