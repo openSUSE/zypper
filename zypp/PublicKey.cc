@@ -214,12 +214,6 @@ namespace zypp
   public:
     /** Offer default Impl. */
     static shared_ptr<Impl> nullimpl();
-    static Target & target(const Pathname & sysRoot = "/")
-    {
-      if ( ! getZYpp()->getTarget() )
-        getZYpp()->initializeTarget( sysRoot );
-      return *getZYpp()->getTarget();
-    }
 
   private:
     friend Impl * rwcowClone<Impl>( const Impl * rhs );
@@ -295,17 +289,10 @@ namespace zypp
   }
 
   bool PublicKeySignatureData::inTrustedRing() const
-  {
-    std::list<PublicKey> allKeys = _pimpl->target().rpmDb().pubkeys();
-    return std::any_of(allKeys.begin(), allKeys.end(), [this](const PublicKey & key) {
-      return key.id() == id();
-    });
-  }
+  { return getZYpp()->keyRing()->isKeyTrusted(id()); }
 
-  bool PublicKeySignatureData::inSeenRing() const
-  {
-    return true;// TODO: locate the "seen" ring and implement this function
-  }
+  bool PublicKeySignatureData::inKnownRing() const
+  { return getZYpp()->keyRing()->isKeyKnown(id()); }
 
   ///////////////////////////////////////////////////////////////////
   /// \class PublicKeyData::Impl

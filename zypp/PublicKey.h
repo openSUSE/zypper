@@ -171,7 +171,7 @@ namespace zypp
     bool inTrustedRing() const;
 
     /** Whether the key has been seen before. */
-    bool inSeenRing() const;
+    bool inKnownRing() const;
 
     /** Simple string representation.
      * Encodes \ref id, \ref created and \ref expires
