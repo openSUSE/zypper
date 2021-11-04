@@ -47,7 +47,6 @@ SET( zypp_SRCS
   KeyRingContexts.cc
   Locks.cc
   MediaSetAccess.cc
-  OnMediaLocation.cc
   Package.cc
   Patch.cc
   PathInfo.cc
@@ -144,7 +143,7 @@ SET( zypp_HEADERS
   MediaProducts.h
   MediaSetAccess.h
   Vendor.h
-  OnMediaLocation.h
+  #OnMediaLocation.h
   Package.h
   PackageKeyword.h
   Patch.h

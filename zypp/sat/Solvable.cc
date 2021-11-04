@@ -24,7 +24,7 @@
 #include <zypp/sat/LookupAttr.h>
 
 #include <zypp/Repository.h>
-#include <zypp/OnMediaLocation.h>
+#include <zypp-core/OnMediaLocation>
 #include <zypp/ZConfig.h>
 
 #include <zypp/ui/Selectable.h>

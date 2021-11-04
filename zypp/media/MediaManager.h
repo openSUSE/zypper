@@ -18,7 +18,7 @@
 #include <zypp/Pathname.h>
 #include <zypp/PathInfo.h>
 #include <zypp/Url.h>
-#include <zypp/OnMediaLocation.h>
+#include <zypp-core/OnMediaLocation>
 #include <zypp/media/MediaSource.h>
 #include <zypp-media/MediaException>
 

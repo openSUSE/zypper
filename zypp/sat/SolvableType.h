@@ -15,7 +15,7 @@
 
 #include <zypp/sat/Solvable.h>
 #include <zypp/Repository.h>
-#include <zypp/OnMediaLocation.h>
+#include <zypp-core/OnMediaLocation>
 #include <zypp/ByteCount.h>
 #include <zypp/CheckSum.h>
 #include <zypp/CpeId.h>

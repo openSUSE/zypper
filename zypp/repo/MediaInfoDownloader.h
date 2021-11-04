@@ -13,7 +13,7 @@
 #include <zypp/Url.h>
 #include <zypp/Pathname.h>
 #include <zypp/Fetcher.h>
-#include <zypp/OnMediaLocation.h>
+#include <zypp-core/OnMediaLocation>
 #include <zypp/MediaSetAccess.h>
 #include <zypp/ProgressData.h>
 

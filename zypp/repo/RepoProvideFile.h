@@ -19,7 +19,7 @@
 #include <zypp/base/Functional.h>
 #include <zypp/RepoInfo.h>
 #include <zypp/ManagedFile.h>
-#include <zypp/OnMediaLocation.h>
+#include <zypp-core/OnMediaLocation>
 #include <zypp/ProvideFilePolicy.h>
 
 ///////////////////////////////////////////////////////////////////

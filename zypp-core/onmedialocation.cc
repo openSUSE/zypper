@@ -12,7 +12,7 @@
 #include <iostream>
 //#include <zypp/base/Logger.h>
 
-#include <zypp/OnMediaLocation.h>
+#include <zypp-core/OnMediaLocation>
 
 using std::endl;
 

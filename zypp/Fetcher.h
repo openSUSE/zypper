@@ -19,7 +19,7 @@
 #include <zypp/base/PtrTypes.h>
 #include <zypp/Pathname.h>
 #include <zypp/Url.h>
-#include <zypp/OnMediaLocation.h>
+#include <zypp-core/OnMediaLocation>
 #include <zypp/Digest.h>
 #include <zypp/MediaSetAccess.h>
 #include <zypp/FileChecker.h>

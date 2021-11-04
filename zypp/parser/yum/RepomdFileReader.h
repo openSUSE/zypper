@@ -18,7 +18,7 @@
 #include <zypp/base/NonCopyable.h>
 #include <zypp/base/Function.h>
 
-#include <zypp/OnMediaLocation.h>
+#include <zypp-core/OnMediaLocation>
 
 namespace zypp
 {

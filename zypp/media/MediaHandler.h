@@ -26,7 +26,7 @@
 #include <zypp/media/MediaSource.h>
 #include <zypp-media/MediaException>
 #include <zypp/APIConfig.h>
-#include <zypp/OnMediaLocation.h>
+#include <zypp-core/OnMediaLocation>
 
 #undef ZYPP_BASE_LOGGER_LOGGROUP
 #define ZYPP_BASE_LOGGER_LOGGROUP "zypp::media"

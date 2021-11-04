@@ -18,6 +18,8 @@ SET( zypp_toplevel_headers
   KVMap
   kvmap.h
   ManagedFile.h
+  onmedialocation.cc
+  OnMediaLocation
   Pathname.h
   TriBool.h
   Url.h
@@ -29,6 +31,7 @@ SET( zypp_toplevel_SRCS
   Date.cc
   Digest.cc
   ExternalProgram.cc
+  onmedialocation.cc
   Pathname.cc
   Url.cc
 )

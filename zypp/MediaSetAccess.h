@@ -22,7 +22,7 @@
 #include <zypp/media/MediaManager.h>
 #include <zypp/Pathname.h>
 #include <zypp/CheckSum.h>
-#include <zypp/OnMediaLocation.h>
+#include <zypp-core/OnMediaLocation>
 #include <zypp/ManagedFile.h>
 
 ///////////////////////////////////////////////////////////////////

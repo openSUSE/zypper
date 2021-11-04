@@ -15,7 +15,7 @@
 #include <iosfwd>
 #include <list>
 
-#include <zypp/OnMediaLocation.h>
+#include <zypp-core/OnMediaLocation>
 #include <zypp/Edition.h>
 #include <zypp/Arch.h>
 #include <zypp/Date.h>
