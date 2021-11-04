@@ -143,7 +143,7 @@ SET( zypp_HEADERS
   MediaProducts.h
   MediaSetAccess.h
   Vendor.h
-  #OnMediaLocation.h
+  OnMediaLocation.h
   Package.h
   PackageKeyword.h
   Patch.h
