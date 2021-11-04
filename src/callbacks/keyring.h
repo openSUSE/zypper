@@ -92,15 +92,39 @@ namespace zypp
       for ( const PublicSubkeyData & sub : key.subkeys() )
         t << ( TableRow() << "" << _("Subkey:") << sub.asString() );
       t << ( TableRow() << "" << _("Rpm Name:") << key.rpmName() );
-      t << ( TableRow() << "" << _("Rpm Name:") << key.rpmName() );
-      for ( const PublicKeySignatureData & sig : key.signatures()) {
-          std::string label = "Signature:";
+
+      str << t << '\n';
+
+      int numSignatures = (int)key.signatures().size();
+      if (numSignatures > 0) {
+
+        if (numSignatures == 1) // TODO: use a more appropriate format for the single signature case
+          str << _("There is a signature on the key.") << "\n\n";
+        else
+          str << str::form(_("There are %d signatures on the key."), numSignatures) << "\n\n";
+
+        t = Table();
+        t.lineStyle(none);
+        t << ( TableRow(ColorContext::PROMPT) << "" << _("Familiarity") << _("Signature") );
+
+        // TODO: Can we put a clean row separator here, instead of relying on color to distinguish the
+        //       header from the data?
+
+        for ( const PublicKeySignatureData & sig : key.signatures()) {
+          std::string familiarity;
           if (sig.inTrustedRing())
-              label = "Trusted signature:";
-          t << ( TableRow() << "" << _(label.c_str()) << sig );
+            familiarity = _("Trusted");
+          else if (sig.inKnownRing())
+            familiarity = _("Known");
+          else
+            familiarity = _("Unknown");
+
+          t << ( TableRow() << "" << familiarity << sig );
+        }
+        return str << t;
       }
 
-      return str << t;
+      return str;
     }
 
     inline std::ostream & dumpKeyInfo( std::ostream & str, const PublicKey & key, const KeyContext & context = KeyContext() )
