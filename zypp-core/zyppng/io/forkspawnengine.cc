@@ -9,6 +9,7 @@
 #include <zypp-core/zyppng/base/EventDispatcher>
 #include <zypp-core/zyppng/base/private/linuxhelpers_p.h>
 #include <zypp-core/base/CleanerThread_p.h>
+#include <zypp-core/base/LogControl.h>
 
 #include <cstdint>
 #include <iostream>
@@ -103,7 +104,11 @@ void zyppng::AbstractDirectSpawnEngine::mapExtraFds ( int controlFd )
   const auto maxFds = ( ::getdtablesize() - 1 );
   //If the rlimits are too high we need to use a different approach
   // in detecting how many fds we need to close, or otherwise we are too slow (bsc#1191324)
-  if ( maxFds >= 1024 && zypp::PathInfo( "/proc/self/fd" ).isExist() ) {
+  if ( maxFds > 1024 && zypp::PathInfo( "/proc/self/fd" ).isExist() ) {
+    
+    std::vector<int> fdsToClose;
+    fdsToClose.reserve (256);
+
     zypp::filesystem::dirForEachExt( "/proc/self/fd", [&]( const zypp::Pathname &p, const zypp::filesystem::DirEntry &entry ){
       if ( entry.type != zypp::filesystem::FT_LINK)
         return true;
@@ -112,9 +117,14 @@ void zyppng::AbstractDirectSpawnEngine::mapExtraFds ( int controlFd )
       if ( !fdVal || !canCloseFd(*fdVal) )
         return true;
 
-      ::close( *fdVal );
+      // we can not call close() directly here because zypp::filesystem::dirForEachExt actually has a fd open on
+      // /proc/self/fd that we would close as well. So we just remember which fd's we WOULD close and then do it
+      // after iterating
+      fdsToClose.push_back (*fdVal);
       return true;
     });
+    for ( int cFd : fdsToClose )
+      ::close( cFd );
   } else {
     // close all filedescriptors above the last we want to keep
     for ( int i = maxFds; i > lastFdToKeep; --i ) {
@@ -330,13 +340,13 @@ bool zyppng::ForkSpawnEngine::start( const char * const *argv, int stdin_fd, int
     } else if ( res == zypp::io::ReadAllResult::Ok ) {
       switch( buf.type ) {
         case ChildErrType::CHDIR_FAILED:
-          _execError = zypp::str::form( _("Can't exec '%s', chdir failed (%s)."), _args[0].c_str(), strerror(buf.childErrno) );
+          _execError = zypp::str::form( _("Can't exec '%s', chdir failed (%s)."), _args[0].c_str(), zypp::str::strerror(buf.childErrno).c_str() );
           break;
         case ChildErrType::CHROOT_FAILED:
-          _execError = zypp::str::form( _("Can't exec '%s', chroot failed (%s)."), _args[0].c_str(), strerror(buf.childErrno) );
+          _execError = zypp::str::form( _("Can't exec '%s', chroot failed (%s)."), _args[0].c_str(), zypp::str::strerror(buf.childErrno).c_str() );
           break;
         case ChildErrType::EXEC_FAILED:
-          _execError = zypp::str::form( _("Can't exec '%s', exec failed (%s)."), _args[0].c_str(), strerror(buf.childErrno) );
+          _execError = zypp::str::form( _("Can't exec '%s', exec failed (%s)."), _args[0].c_str(), zypp::str::strerror(buf.childErrno).c_str() );
           break;
         // all other cases need to be some sort of error, because we only get data if the exec fails
         default:

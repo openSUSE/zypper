@@ -148,6 +148,13 @@ namespace zypp
       /** will cause the log thread to exit and flush all sockets */
       void emergencyShutdown();
 
+      /**
+       *  This will completely disable logging,
+       *  its supposed to be called in the child process after fork()
+       *  was called to shut down all logging completely
+       */
+      static void notifyFork();
+
     public:
       /** Get the current LineWriter */
       shared_ptr<LineWriter> getLineWriter() const;

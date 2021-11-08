@@ -672,6 +672,9 @@ namespace zypp
         {
           logControlValidFlag() = 1;
           std::call_once( flagReadEnvAutomatically, &LogControlImpl::readEnvVars, this);
+
+          // make sure the LogControl is invalidated when we fork
+          pthread_atfork( nullptr, nullptr, &LogControl::notifyFork );
         }
 
       public:
@@ -867,6 +870,11 @@ namespace zypp
     void base::LogControl::emergencyShutdown()
     {
       LogThread::instance().stop();
+    }
+
+    void LogControl::notifyFork()
+    {
+      logger::logControlValidFlag () = 0;
     }
 
     ///////////////////////////////////////////////////////////////////
