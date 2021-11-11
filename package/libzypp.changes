@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Nov 11 15:12:44 CET 2021 - ma@suse.de
+
+- Disable logger in the child after fork (bsc#1192436)
+- version 17.28.8 (22)
+
+-------------------------------------------------------------------
 Thu Nov  4 15:16:29 CET 2021 - ma@suse.de
 
 - Check log writer before accessing it (fixes #355, bsc#1192337)
