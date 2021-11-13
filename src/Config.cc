@@ -297,6 +297,7 @@ Config::Config()
   , reboot_req_non_interactive( false )
   , no_gpg_checks( false )
   , gpg_auto_import_keys( false )
+  , gpg_auto_import_key_id( "" )
   , machine_readable( false )
   , no_refresh( false )
   , no_cd( false )
@@ -569,6 +570,18 @@ std::vector<ZyppFlags::CommandGroup> Config::cliOptions()
               })),
               // translators: --gpg-auto-import-keys
               _("Automatically trust and import new repository signing keys.")
+        },
+        { "gpg-auto-import-key-id", 0, ZyppFlags::RequiredArgument, std::move( ZyppFlags::StringType( &gpg_auto_import_key_id, "", "KEY_ID").
+            after( [](const ZyppFlags::CommandOption &, const boost::optional<std::string> & key_id) {
+              std::string warn = str::form(
+                  _("Turning on '%s' for key id '%s'. The specified signing key will be automatically imported if present!"),
+                  "--gpg-auto-import-key-id",
+                  key_id->c_str());
+              Zypper::instance().out().warning( warn, Out::HIGH );
+              MIL << "gpg-auto-import-key-id is on for " << *key_id << endl;
+            })),
+            // translators: --gpg-auto-import-key-id
+            _("Automatically trust and import the specified repository signing key, if it is present.")
         },
         { "plus-repo", 'p', ZyppFlags::Repeatable | ZyppFlags::RequiredArgument, ZyppFlags::GenericContainerType( plusRepoFromCLI, ARG_URI ),
               // translators: --plus-repo, -p <URI>

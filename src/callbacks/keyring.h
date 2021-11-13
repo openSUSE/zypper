@@ -273,8 +273,9 @@ namespace zypp
         // gpg key info
         dumpKeyInfo( s << std::endl, key_r, context_r )  << std::endl;
 
-        // if --gpg-auto-import-keys or --no-gpg-checks print info and don't ask
-        if (_gopts.gpg_auto_import_keys)
+        // if --gpg-auto-import-keys, --no-gpg-check, or --gpg-auto-import-key-id matches key, print info and don't ask.
+        if (_gopts.gpg_auto_import_keys
+            || (!_gopts.gpg_auto_import_key_id.empty() && _gopts.gpg_auto_import_key_id == key_r.id()))
         {
           MIL << "Automatically importing key " << key_r << std::endl;
           zypper.out().info(s.str());
