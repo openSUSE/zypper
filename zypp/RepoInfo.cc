@@ -815,7 +815,7 @@ namespace zypp
     {
       WAR << "License(" << name_r << ") in " << name() << " contains no fallback text!" << endl;
       // Using the fist locale instead of returning no text at all.
-      // So the user might recognize that there is a license, even if he
+      // So the user might recognize that there is a license, even if they
       // can't read it.
       getLang = *avlocales.begin();
     }

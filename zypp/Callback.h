@@ -43,7 +43,7 @@ namespace zypp
    *
    * That way the sending side does not need to know whether some receiver
    * is listening. And it enables the receiver to return a reasonable value,
-   * in case he's got no idea, what else to return.
+   * in case it's got no idea, what else to return.
    *
    * \code
    *   struct Foo : public callback::ReportBase
@@ -96,7 +96,7 @@ namespace zypp
    *
    * \note In case you must return some value and don't know which,
    * return the task structures default. The author of the task
-   * structure had to provide this value, so it's probabely better
+   * structure had to provide this value, so it's probably better
    * than anything you \e invent.
    * \code
    *   int somefunction()

@@ -262,7 +262,7 @@ namespace zypp
 
     /**
      * Cleanup when deleting packages. Whether the solver should per default
-     * try to remove packages exclusively required by the ones he's asked to delete.
+     * try to remove packages exclusively required by the ones it's asked to delete.
      */
     void setCleandepsOnRemove( bool yesno_r );
     void setDefaultCleandepsOnRemove(); // set back to default (in zypp.conf)

@@ -176,7 +176,7 @@ namespace zypp
        *
        *  Userdata accepted:
        * \param "Action"	DownloadResolvableReport::Action user advice how to behave on error (ABORT).
-       *                        If you set just an empty value here, a default probelm report will be triggered.
+       *                        If you set just an empty value here, a default problem report will be triggered.
        *
        * Legacy data:
        * \param "Package"	Replaced by \c "ResObject" in 16.10.0. Package::constPtr of the package (\c nullptr in case of a SrcPackage)
@@ -407,7 +407,7 @@ namespace zypp
        *        data. As an input parameter auth_data can be prefilled with
        *        username (from previous try) or auth_type (available
        *        authentication methods aquired from server (only CurlAuthData)).
-       *        As an output parameter it serves for sending username, pasword
+       *        As an output parameter it serves for sending username, password
        *        or other special data (derived AuthData objects).
        * \return true if user chooses to continue with authentication,
        *         false otherwise
@@ -928,7 +928,7 @@ namespace zypp
      * type of conflict of old and new lock
      */
     enum ConflictState{
-      SAME_RESULTS, /**< locks lock same item in pool but his parameters is different */
+      SAME_RESULTS, /**< locks lock same item in pool but its parameters are different */
       INTERSECT /**< locks lock some file and unlocking lock unlock only part
       * of iti, so removing old lock can unlock more items in pool */
     };

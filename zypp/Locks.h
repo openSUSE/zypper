@@ -67,24 +67,24 @@ namespace zypp
     /**
      * unlocks by result of query and add to toRemove.
      *
-     * If unlock non-saved lock (so he is in toAdd list) then both is deleted
-     * and nathing happen during save
+     * If unlock non-saved lock (so it is in toAdd list) then both is deleted
+     * and nothing happens during save
      */
     void removeLock( const PoolQuery& query );
 
     /**
      * remove lock by identifier (e.g. Selectable->ident()
      *
-     * If unlock non-saved lock (so he is in toAdd list) then both is deleted
-     * and nathing happen during save
+     * If unlock non-saved lock (so it is in toAdd list) then both is deleted
+     * and nothing happens during save
      */
     void removeLock( const IdString& ident_r );
 
     /**
      * remove lock by name and kind
      *
-     * If unlock non-saved lock (so he is in toAdd list) then both is deleted
-     * and nathing happen during save
+     * If unlock non-saved lock (so it is in toAdd list) then both is deleted
+     * and nothing happens during save
      */
     void removeLock( const ResKind& kind_r, const IdString& name_r );
     void removeLock( const ResKind& kind_r, const C_Str & name_r );
