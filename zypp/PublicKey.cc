@@ -25,8 +25,6 @@
 #include <zypp/base/LogTools.h>
 #include <zypp/Date.h>
 #include <zypp/KeyManager.h>
-#include <zypp/Target.h>
-#include <zypp/target/rpm/RpmDb.h>
 #include <zypp/ZYppFactory.h>
 
 #include <gpgme.h>
