@@ -28,6 +28,7 @@
 
 struct _gpgme_key;
 struct _gpgme_subkey;
+struct _gpgme_key_sig;
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -128,6 +129,72 @@ namespace zypp
   { return str << obj.asString(); }
 
   ///////////////////////////////////////////////////////////////////
+  /// \class PublicKeySignatureData
+  /// \brief Class representing a signature on a GPG Public Key.
+  /// \see \ref PublicKeyData.
+  ///////////////////////////////////////////////////////////////////
+  class PublicKeySignatureData
+  {
+  public:
+    /** Default constructed: empty data. */
+    PublicKeySignatureData();
+
+    ~PublicKeySignatureData();
+
+    /** Whether this contains valid data (not default constructed). */
+    explicit operator bool() const;
+
+  public:
+    /** The key ID of key used to create the signature. */
+    std::string id() const;
+
+    /** The user ID associated with this key, if present. */
+    std::string name() const;
+
+    /** Creation date. */
+    Date created() const;
+
+    /** Expiry date, or \c Date() if the key never expires. */
+    Date expires() const;
+
+    /**  Whether the key has expired. */
+    bool expired() const;
+
+    /** Number of days (24h) until the key expires (or since it expired).
+     * A value of \c 0 means the key will expire within the next 24h.
+     * Negative values indicate the key has expired less than \c N days ago.
+     * For keys without expiration date \c INT_MAX is returned.
+     */
+    int daysToLive() const;
+
+    /** Whether the signature is trusted in rpmdb. */
+    bool inTrustedRing() const;
+
+    /** Whether the key has been seen before. */
+    bool inKnownRing() const;
+
+    /** Simple string representation.
+     * Encodes \ref id, \ref created and \ref expires
+     * \code
+     * 640DB551 2016-04-12 [expires: 2019-04-12]
+     * \endcode
+     */
+    std::string asString() const;
+
+  private:
+    struct Impl;
+    RWCOW_pointer<Impl> _pimpl;
+    friend class PublicKeyData;
+    friend std::ostream & dumpOn( std::ostream & str, const PublicKeyData & obj );
+    PublicKeySignatureData(const _gpgme_key_sig *rawKeySignatureData);
+  };
+  ///////////////////////////////////////////////////////////////////
+
+  /** \relates PublicKeySignatureData Stream output */
+  inline std::ostream & operator<<( std::ostream & str, const PublicKeySignatureData & obj )
+  { return str << obj.asString(); }
+
+  ///////////////////////////////////////////////////////////////////
   /// \class PublicKeyData
   /// \brief Class representing one GPG Public Keys data.
   /// \ref PublicKeyData are provided e.g. by a \ref PublicKey or
@@ -177,7 +244,7 @@ namespace zypp
     int daysToLive() const;
 
     /** * Expiry info in a human readable form.
-     * The exipry daye plus an annotation if the key has expired, or will
+     * The expiry date plus an annotation if the key has expired, or will
      * expire within 90 days.
      * \code
      * (does not expire)
@@ -213,12 +280,16 @@ namespace zypp
 
   public:
     typedef const PublicSubkeyData * SubkeyIterator;
+    typedef const PublicKeySignatureData * KeySignatureIterator;
 
     /** Whether \ref subkeys is not empty. */
     bool hasSubkeys() const;
 
     /** Iterate any subkeys. */
     Iterable<SubkeyIterator> subkeys() const;
+
+    /** Iterate all key signatures. */
+    Iterable<KeySignatureIterator> signatures() const;
 
     /** Whether \a id_r is the \ref id or \ref fingerprint of the primary key or of a subkey.
      * As a convenience also allows to test the 8byte short ID e.g. rpm uses as version.
@@ -230,6 +301,10 @@ namespace zypp
      */
     static bool isSafeKeyId( const std::string & id_r )
     { return id_r.size() >= 16; }
+
+  public:
+    /** Whether \ref signatures is not empty. */
+    bool hasSignatures() const;
 
   public:
     /** Random art fingerprint visualization type (\ref base::DrunkenBishop). */

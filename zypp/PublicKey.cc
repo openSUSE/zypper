@@ -25,6 +25,7 @@
 #include <zypp/base/LogTools.h>
 #include <zypp/Date.h>
 #include <zypp/KeyManager.h>
+#include <zypp/ZYppFactory.h>
 
 #include <gpgme.h>
 
@@ -197,6 +198,101 @@ namespace zypp
   }
 
   ///////////////////////////////////////////////////////////////////
+  /// \class PublicKeySignatureData::Impl
+  /// \brief  PublicKeySignatureData implementation.
+  ///////////////////////////////////////////////////////////////////
+
+  struct PublicKeySignatureData::Impl
+  {
+    std::string _keyid;
+    std::string _name;
+    Date        _created;
+    Date        _expires;
+
+  public:
+    /** Offer default Impl. */
+    static shared_ptr<Impl> nullimpl();
+
+  private:
+    friend Impl * rwcowClone<Impl>( const Impl * rhs );
+    /** clone for RWCOW_pointer */
+    Impl * clone() const;
+  };
+
+  shared_ptr<zypp::PublicKeySignatureData::Impl> PublicKeySignatureData::Impl::nullimpl()
+  {
+    static shared_ptr<Impl> _nullimpl( new Impl );
+    return _nullimpl;
+  }
+
+  zypp::PublicKeySignatureData::Impl *PublicKeySignatureData::Impl::clone() const
+  {
+    return new Impl( *this );
+  }
+
+  ///////////////////////////////////////////////////////////////////
+  /// class PublicKeySignatureData
+  ///////////////////////////////////////////////////////////////////
+
+  PublicKeySignatureData::PublicKeySignatureData()
+    : _pimpl( Impl::nullimpl() )
+  {}
+
+  PublicKeySignatureData::PublicKeySignatureData(const _gpgme_key_sig *rawKeySignatureData)
+    : _pimpl (new Impl)
+  {
+    _pimpl->_keyid = str::asString(rawKeySignatureData->keyid);
+    _pimpl->_name = str::asString(rawKeySignatureData->uid);
+    _pimpl->_created = zypp::Date(rawKeySignatureData->timestamp);
+    _pimpl->_expires = zypp::Date(rawKeySignatureData->expires);
+  }
+
+  PublicKeySignatureData::~PublicKeySignatureData()
+  {}
+
+  PublicKeySignatureData::operator bool() const
+  { return !_pimpl->_keyid.empty(); }
+
+  std::string PublicKeySignatureData::id() const
+  { return _pimpl->_keyid; }
+
+  std::string PublicKeySignatureData::name() const
+  { return _pimpl->_name; }
+
+  Date PublicKeySignatureData::created() const
+  { return _pimpl->_created; }
+
+  Date PublicKeySignatureData::expires() const
+  { return _pimpl->_expires; }
+
+  bool PublicKeySignatureData::expired() const
+  { return isExpired( _pimpl->_expires ); }
+
+  int PublicKeySignatureData::daysToLive() const
+  { return hasDaysToLive( _pimpl->_expires ); }
+
+  std::string PublicKeySignatureData::asString() const
+  {
+    std::string nameStr;
+    if (!name().empty()) {
+      nameStr = str::Str() << name() << " ";
+    }
+    else {
+      nameStr = "[User ID not found] ";
+    }
+    return str::Str() << nameStr
+                      << id() << " "
+                      << created().printDate()
+                      << " [" << expiresDetail( expires() ) << "]";
+  }
+
+  bool PublicKeySignatureData::inTrustedRing() const
+  { return getZYpp()->keyRing()->isKeyTrusted(id()); }
+
+  bool PublicKeySignatureData::inKnownRing() const
+  { return getZYpp()->keyRing()->isKeyKnown(id()); }
+
+  ///////////////////////////////////////////////////////////////////
   /// \class PublicKeyData::Impl
   /// \brief  PublicKeyData implementation.
   ///////////////////////////////////////////////////////////////////
@@ -211,6 +307,7 @@ namespace zypp
     Date        _expires;
 
     std::vector<PublicSubkeyData> _subkeys;
+    std::vector<PublicKeySignatureData> _signatures;
 
   public:
     bool hasSubkeyId( const std::string & id_r ) const;
@@ -246,7 +343,7 @@ namespace zypp
 
   shared_ptr<PublicKeyData::Impl> PublicKeyData::Impl::fromGpgmeKey(gpgme_key_t rawData)
   {
-    //gpgpme stores almost nothing in the top level key
+    //gpgme stores almost nothing in the top level key
     //the information we look for is stored in the subkey, where subkey[0]
     //is always the primary key
     gpgme_subkey_t sKey = rawData->subkeys;
@@ -259,6 +356,10 @@ namespace zypp
         // versions of the same key are imported. We take the last signature here,
         // the one GPGME_EXPORT_MODE_MINIMAL will later use in export.
         for ( auto t = rawData->uids->signatures->next; t; t = t->next ) {
+            if (t->keyid != nullptr) {
+              data->_signatures.push_back(PublicKeySignatureData(t));
+            }
+
           if ( t->timestamp > data->_created )
             data->_created = t->timestamp;
         }
@@ -366,6 +467,9 @@ namespace zypp
 
   Iterable<PublicKeyData::SubkeyIterator> PublicKeyData::subkeys() const
   { return makeIterable( &(*_pimpl->_subkeys.begin()), &(*_pimpl->_subkeys.end()) ); }
+
+  Iterable<PublicKeyData::KeySignatureIterator> PublicKeyData::signatures() const
+  { return makeIterable( &(*_pimpl->_signatures.begin()), &(*_pimpl->_signatures.end()) ); }
 
   bool PublicKeyData::providesKey( const std::string & id_r ) const
   {
