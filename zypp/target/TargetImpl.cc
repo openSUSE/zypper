@@ -400,7 +400,7 @@ namespace zypp
 
       /** Execute script and report against report_r.
        * Return \c std::pair<bool,PatchScriptReport::Action> to indicate if
-       * execution was successfull (<tt>first = true</tt>), or the desired
+       * execution was successful (<tt>first = true</tt>), or the desired
        * \c PatchScriptReport::Action in case execution failed
        * (<tt>first = false</tt>).
        *
@@ -1366,7 +1366,7 @@ namespace zypp
       }
       else
       {
-        DBG << "dryRun: Not stroring non-package data." << endl;
+        DBG << "dryRun: Not storing non-package data." << endl;
       }
 
       ///////////////////////////////////////////////////////////////////

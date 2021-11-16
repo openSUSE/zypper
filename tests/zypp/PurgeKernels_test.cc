@@ -180,7 +180,7 @@ namespace  {
         }
       },
       TestSample {
-        //kernel-1-2 is explicitely in the keep spec, it should not be removed
+        //kernel-1-2 is explicitly in the keep spec, it should not be removed
         //kernel-1-5 provides a symbol for a kmp that has a non kernel package depending on it, it should not be removed
         TESTS_SRC_DIR"/zypp/data/PurgeKernels/withdeps",
         "1-1-default",

@@ -112,7 +112,7 @@ namespace zyppng {
       void cancel  ( NetworkRequest &req , const NetworkRequestError &err );
 
       /*!
-       * Start dispatching requests, this needs to be done explicitely before any request can be executed.
+       * Start dispatching requests, this needs to be done explicitly before any request can be executed.
        */
       void run ( );
 

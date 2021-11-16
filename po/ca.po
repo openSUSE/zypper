@@ -5020,7 +5020,7 @@ msgstr "instal·la %1% tot i que ha estat retret"
 #. translator: %1% is a package name
 #: zypp/solver/detail/SATResolver.cc:1452
 #, boost-format
-msgid "allow to install the PTF %1%"
+msgid "allow installing the PTF %1%"
 msgstr "permet instal·lar el PTF %1%"
 
 #. translator: %1% is a package name

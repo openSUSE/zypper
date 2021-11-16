@@ -252,7 +252,7 @@ namespace yamltest::detail {
         auto doc = YAML::LoadFile( fName );
         if ( !parseJobs( doc, target, err ) )
           return false;
-        MIL << "Including file " << fName << "was successfull" << std::endl;
+        MIL << "Including file " << fName << "was successful" << std::endl;
       } catch ( YAML::Exception &e ) {
         if ( err ) *err = e.what();
         return false;

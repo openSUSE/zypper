@@ -8,7 +8,7 @@
 <HR><!-- ====================================================================== -->
 \section plugins-intro Introduction
 
-Plugins allow to extend the ZYpp package manager without the need to change
+Plugins allow one to extend the ZYpp package manager without the need to change
 code. Plugins are designed as external programs so that they can be written in any language.
 
 \section plugin-protocols Plugin protocols

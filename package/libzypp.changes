@@ -4885,7 +4885,7 @@ Tue Mar 31 15:51:32 CEST 2009 - ma@suse.de
 Thu Mar 12 18:38:30 CET 2009 - ma@suse.de
 
 - Add Resolver::setSolveSrcPackages. Per default disable solving
-  of source package dependencies. We will later allow to enable
+  of source package dependencies. We will later allow enabling
   it per package.
 - version 6.3.0 (2)
 
@@ -5041,7 +5041,7 @@ Thu Jan 22 10:41:27 CET 2009 - ma@suse.de
 -------------------------------------------------------------------
 Fri Jan  9 17:01:10 CET 2009 - jkupec@suse.cz
 
-- handle HTTP 503 reponses as temporary errors (bnc #462545)
+- handle HTTP 503 responses as temporary errors (bnc #462545)
 
 -------------------------------------------------------------------
 Thu Dec 18 22:26:18 CET 2008 - ma@suse.de
@@ -6972,7 +6972,7 @@ Wed Apr  2 10:24:17 CEST 2008 - ma@suse.de
 -------------------------------------------------------------------
 Tue Apr  1 21:54:10 CEST 2008 - ma@suse.de
 
-- Extend sat::WhatProvides to allow to query for possible providers
+- Extend sat::WhatProvides allows one to query for possible providers
   of a collection of capabilies. E.g. all providers of a packages
   requirements.
 - Fixed retrieval of translated texts from .solv files, provided the
@@ -7065,7 +7065,7 @@ Fri Mar 14 17:28:39 CET 2008 - ma@suse.de
 Fri Mar 14 14:27:43 CET 2008 - dmacvicar@suse.de
 
 - look for openssl in cmake, actually we build require it
-- explicitely link against openssl and crypto, required to
+- explicitly link against openssl and crypto, required to
   compile in all platforms/distros.
 
 -------------------------------------------------------------------
@@ -11400,7 +11400,7 @@ Tue Apr  4 19:19:39 CEST 2006 - mt@suse.de
 
 - Added flag to MediaManager::isUseableAttachPoint, whether
   to check against system mount entries or not.
-- Disallow to use the attachpoints of another media handlers
+- Disallows one to use the attachpoints of another media handlers
   as source path in MediaDIR.
 - rev 2917
 
@@ -11523,7 +11523,7 @@ Fri Mar 31 16:34:51 CEST 2006 - mt@suse.de
 Fri Mar 31 13:27:09 CEST 2006 - mt@suse.de
 
 - Implemented several hal get/set/removeDeviceProperty wrappers
-- Improved HalException to allow to fetch HAL/DBUS error componets
+- Improved HalException allows one to fetch HAL/DBUS error componets
 - rev 2830
 
 -------------------------------------------------------------------

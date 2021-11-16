@@ -32,7 +32,7 @@ namespace zyppng {
 
   bool DownloadPrivateBase::handleRequestAuthError( std::shared_ptr<Request> req, const zyppng::NetworkRequestError &err )
   {
-    //Handle the auth errors explicitely, we need to give the user a way to put in new credentials
+    //Handle the auth errors explicitly, we need to give the user a way to put in new credentials
     //if we get valid new credentials we can retry the request
     bool retry = false;
     if ( err.type() == NetworkRequestError::Unauthorized || err.type() == NetworkRequestError::AuthFailed ) {
@@ -274,7 +274,7 @@ namespace zyppng {
   void Download::cancel()
   {
     Z_D();
-    d->forceState ( std::make_unique<FinishedState>( NetworkRequestErrorPrivate::customError( NetworkRequestError::Cancelled, "Download was cancelled explicitely" ), *d_func() ) );
+    d->forceState ( std::make_unique<FinishedState>( NetworkRequestErrorPrivate::customError( NetworkRequestError::Cancelled, "Download was cancelled explicitly" ), *d_func() ) );
   }
 
   DownloadSpec &Download::spec()

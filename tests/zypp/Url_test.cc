@@ -97,7 +97,7 @@ BOOST_AUTO_TEST_CASE(test_url1)
 
     BOOST_CHECK_EQUAL( one, url.asString() );
     BOOST_CHECK_EQUAL( two, url.asCompleteString() );
-    // hidden proxypass in the query is available when explicitely asked for
+    // hidden proxypass in the query is available when explicitly asked for
     BOOST_CHECK_EQUAL( url.getQueryParam( "proxypass" ), "@PROXYPASS@" );
 
     // absolute path defaults to 'file://'

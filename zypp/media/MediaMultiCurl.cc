@@ -1381,7 +1381,7 @@ void MediaMultiCurl::doGetFileCopy( const OnMediaLocation &srcFile , const Pathn
   }
   else
   {
-    WAR << "Could not get the reponse code." << endl;
+    WAR << "Could not get the response code." << endl;
   }
 
   bool ismetalink = false;

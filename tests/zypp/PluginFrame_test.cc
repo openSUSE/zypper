@@ -114,7 +114,7 @@ BOOST_AUTO_TEST_CASE(PluginScriptTest)
   scr.open( "/bin/cat" );
   BOOST_CHECK_EQUAL( scr.isOpen(), true );
   BOOST_CHECK_EQUAL( (scr.getPid() != PluginScript::NotConnected ), true );
-  BOOST_CHECK_EQUAL( scr.script(), "/bin/cat" );			// set after successfull open
+  BOOST_CHECK_EQUAL( scr.script(), "/bin/cat" );			// set after successful open
 
   BOOST_CHECK_THROW( scr.open( "/bin/ls" ), PluginScriptException );	// already open
   BOOST_CHECK_EQUAL( scr.isOpen(), true );				// stay with "/bin/cat"

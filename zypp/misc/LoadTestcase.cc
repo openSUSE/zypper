@@ -127,7 +127,7 @@ namespace zypp::misc::testcase {
 
         } else if (node->equals( "trial" )) {
           if ( !setupDone ) {
-            if ( err ) *err = "Any trials must be preceeded by the setup!";
+            if ( err ) *err = "Any trials must be preceded by the setup!";
             return false;
           }
           TestcaseTrial trial;
