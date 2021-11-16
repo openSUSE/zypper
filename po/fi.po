@@ -4829,7 +4829,7 @@ msgstr "asenna %1%, vaikka se on vedetty takaisin"
 #. translator: %1% is a package name
 #: zypp/solver/detail/SATResolver.cc:1452
 #, boost-format
-msgid "allow to install the PTF %1%"
+msgid "allow installing the PTF %1%"
 msgstr "salli asentaa PTF %1%"
 
 #. translator: %1% is a package name

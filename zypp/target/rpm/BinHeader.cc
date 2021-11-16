@@ -261,7 +261,7 @@ unsigned BinHeader::int_list( tag tag_r, intList & lst_r ) const
         return lst_r.set( headerget.val(), headerget.cnt(), headerget.type() );
 
       default:
-        INT << "RPM_TAG MISSMATCH: RPM_INTxx_TYPE " << tag_r << " got type " << headerget.type() << endl;
+        INT << "RPM_TAG MISMATCH: RPM_INTxx_TYPE " << tag_r << " got type " << headerget.type() << endl;
       }
     }
   }
@@ -292,7 +292,7 @@ unsigned BinHeader::string_list( tag tag_r, stringList & lst_r ) const
         return lst_r.set( (char**)headerget.val(), headerget.cnt() );
 
       default:
-        INT << "RPM_TAG MISSMATCH: RPM_STRING_ARRAY_TYPE " << tag_r << " got type " << headerget.type() << endl;
+        INT << "RPM_TAG MISMATCH: RPM_STRING_ARRAY_TYPE " << tag_r << " got type " << headerget.type() << endl;
       }
     }
   }
@@ -335,7 +335,7 @@ int BinHeader::int_val( tag tag_r ) const
 #endif
 
       default:
-        INT << "RPM_TAG MISSMATCH: RPM_INTxx_TYPE " << tag_r << " got type " << headerget.type() << endl;
+        INT << "RPM_TAG MISMATCH: RPM_INTxx_TYPE " << tag_r << " got type " << headerget.type() << endl;
       }
     }
   }
@@ -388,7 +388,7 @@ std::string BinHeader::string_val( tag tag_r ) const
         return (char*)headerget.val();
 
      default:
-        INT << "RPM_TAG MISSMATCH: RPM_STRING_TYPE " << tag_r << " got type " << headerget.type() << endl;
+        INT << "RPM_TAG MISMATCH: RPM_STRING_TYPE " << tag_r << " got type " << headerget.type() << endl;
       }
     }
   }

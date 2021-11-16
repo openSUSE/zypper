@@ -344,7 +344,7 @@ namespace zypp
 
     //------------------------------------------------------------------------
     // get/set functions, returnig \c true if requested status change
-    // was successfull (i.e. leading to the desired transaction).
+    // was successful (i.e. leading to the desired transaction).
     // If a lower level (e.g.SOLVER) wants to transact, but it's
     // already set by a higher level, \c true should be returned.
     // Removing a higher levels transaction bit should fail.

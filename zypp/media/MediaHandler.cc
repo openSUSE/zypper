@@ -314,7 +314,7 @@ MediaHandler::setAttachPrefix(const Pathname &attach_prefix)
 {
   if( attach_prefix.empty())
   {
-    MIL << "Reseting to built-in attach point prefixes."
+    MIL << "Resetting to built-in attach point prefixes."
         << std::endl;
     MediaHandler::_attachPrefix = attach_prefix;
     return true;

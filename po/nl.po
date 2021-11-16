@@ -4641,7 +4641,7 @@ msgstr "%1% installeren hoewel het is ingetrokken"
 #. translator: %1% is a package name
 #: zypp/solver/detail/SATResolver.cc:1452
 #, boost-format
-msgid "allow to install the PTF %1%"
+msgid "allow installing the PTF %1%"
 msgstr "toestaan de PTF %1% te installeren"
 
 #. translator: %1% is a package name

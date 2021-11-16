@@ -468,7 +468,7 @@ namespace zypp
       catch ( media::MediaFileNotFoundException & exception )
       {
         ZYPP_CAUGHT( exception );
-        WAR << "Skiping subtree hidden at " << resource.filename() << endl;
+        WAR << "Skipping subtree hidden at " << resource.filename() << endl;
         return;
       }
 

@@ -107,7 +107,7 @@ namespace zypp
             break;
 
           default:
-            WAR << "Igore unknown attribute: " << it << endl;
+            WAR << "Ignore unknown attribute: " << it << endl;
         }
       }
 

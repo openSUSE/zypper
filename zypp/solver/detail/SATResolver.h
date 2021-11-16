@@ -87,10 +87,10 @@ class SATResolver : public base::ReferenceCounted, private base::NonCopyable, pr
     ResolverFocus _focus;		// The resolvers general attitude
 
     bool _fixsystem:1;			// repair errors in rpm dependency graph
-    bool _allowdowngrade:1;		// allow to downgrade installed solvable
-    bool _allownamechange:1;		// allow to change name of installed solvable
-    bool _allowarchchange:1;		// allow to change architecture of installed solvables
-    bool _allowvendorchange:1;		// allow to change vendor of installed solvables
+    bool _allowdowngrade:1;		// allow one to downgrade installed solvable
+    bool _allownamechange:1;		// allow one to change name of installed solvable
+    bool _allowarchchange:1;		// allow one to change architecture of installed solvables
+    bool _allowvendorchange:1;		// allow one to change vendor of installed solvables
     bool _allowuninstall:1;		// allow removal of installed solvables
     bool _updatesystem:1;		// update
     bool _noupdateprovide:1;		// true: update packages needs not to provide old package
@@ -99,10 +99,10 @@ class SATResolver : public base::ReferenceCounted, private base::NonCopyable, pr
     bool _ignorealreadyrecommended:1;	// true: ignore recommended packages that were already recommended by the installed packages
     bool _distupgrade:1;
     bool _distupgrade_removeunsupported:1;
-    bool _dup_allowdowngrade:1;		// dup mode: allow to downgrade installed solvable
-    bool _dup_allownamechange:1;	// dup mode: allow to change name of installed solvable
-    bool _dup_allowarchchange:1;	// dup mode: allow to change architecture of installed solvables
-    bool _dup_allowvendorchange:1;	// dup mode: allow to change vendor of installed solvables
+    bool _dup_allowdowngrade:1;		// dup mode: allow one to downgrade installed solvable
+    bool _dup_allownamechange:1;	// dup mode: allow one to change name of installed solvable
+    bool _dup_allowarchchange:1;	// dup mode: allow one to change architecture of installed solvables
+    bool _dup_allowvendorchange:1;	// dup mode: allow one to change vendor of installed solvables
     bool _solveSrcPackages:1;		// false: generate no job rule for source packages selected in the pool
     bool _cleandepsOnRemove:1;		// whether removing a package should also remove no longer needed requirements
 

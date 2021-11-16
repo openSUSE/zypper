@@ -212,7 +212,7 @@ namespace zypp
     for ( const std::string & tag : keywords() ) {
       // Get keyhints on the fly:
       // gpg-pubkey-39db7c82-5847eb1f.asc?fpr=22C07BA534178CD02EFE22AAB88B2FD43DBDC284
-      // Fingerprint is explicitely mentioned or id/fpr can be derived from the filename
+      // Fingerprint is explicitly mentioned or id/fpr can be derived from the filename
       if ( tag.compare( 0,10,"gpg-pubkey" ) != 0 )
         continue;
 

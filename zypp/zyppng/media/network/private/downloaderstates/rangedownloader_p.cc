@@ -109,7 +109,7 @@ namespace zyppng {
     auto &parent = stateMachine();
 
 
-    //Handle the auth errors explicitely, we need to give the user a way to put in new credentials
+    //Handle the auth errors explicitly, we need to give the user a way to put in new credentials
     //if we get valid new credentials we can retry the request
     if ( err.type() == NetworkRequestError::Unauthorized || err.type() == NetworkRequestError::AuthFailed ) {
       retry = parent.handleRequestAuthError( req, err );

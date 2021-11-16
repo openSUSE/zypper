@@ -460,7 +460,7 @@ namespace zypp {
           currOff++;
           currROff--;
 
-          // a kernel package might be explicitely locked by version
+          // a kernel package might be explicitly locked by version
           // We need to go over all package name provides ( provides is named like the package ) and match
           // them against the specified version to know which ones to keep. (bsc#1176740  bsc#1176192)
           std::for_each( kernelMap.second.begin(), kernelMap.second.end(), [ & ]( sat::Solvable solv ){
@@ -560,7 +560,7 @@ namespace zypp {
 
       editionToSolvableMap[edToUse].push_back( installedKrnlPck );
 
-      //in the first step we collect all packages in this list, then later we will remove the packages we want to explicitely keep
+      //in the first step we collect all packages in this list, then later we will remove the packages we want to explicitly keep
       packagesToRemove.insert( installedKrnlPck );
     };
 
@@ -604,18 +604,18 @@ namespace zypp {
 
       } else {
 
-        // if adapting the groups do not forget to explicitely handle the group when querying the matches
-        const str::regex explicitelyHandled("kernel-syms(-.*)?|kernel(-.*)?-devel");
+        // if adapting the groups do not forget to explicitly handle the group when querying the matches
+        const str::regex explicitlyHandled("kernel-syms(-.*)?|kernel(-.*)?-devel");
 
         MIL << "Not a kernel package, inspecting more closely " << std::endl;
 
         // we directly handle all noarch packages that export multiversion(kernel)
         if ( installedKrnlPck.arch() == Arch_noarch ) {
 
-          MIL << "Handling package explicitely due to architecture (noarch)."<< std::endl;
+          MIL << "Handling package explicitly due to architecture (noarch)."<< std::endl;
           addPackageToMap( GroupInfo::Sources, installedKrnlPck.name(), "", installedKrnlPck );
 
-        } else if ( str::smatch match; str::regex_match( installedKrnlPck.name(), match, explicitelyHandled ) ) {
+        } else if ( str::smatch match; str::regex_match( installedKrnlPck.name(), match, explicitlyHandled ) ) {
 
           // try to get the flavour from the name
           // if we have a kernel-syms getting no flavour means we have the "default" one, otherwise we use the flavour
@@ -632,10 +632,10 @@ namespace zypp {
           else if ( installedKrnlPck.name() == "kernel-syms" )
             flav = "default";
 
-          MIL << "Handling package explicitely due to name match."<< std::endl;
+          MIL << "Handling package explicitly due to name match."<< std::endl;
           addPackageToMap ( GroupInfo::RelatedBinaries, installedKrnlPck.name(), flav, installedKrnlPck );
         } else {
-          MIL << "Package not explicitely handled" << std::endl;
+          MIL << "Package not explicitly handled" << std::endl;
         }
       }
 

@@ -972,7 +972,7 @@ void MediaCurl::doGetFileCopy( const OnMediaLocation &srcFile , const Pathname &
     }
     else
     {
-      WAR << "Could not get the reponse code." << endl;
+      WAR << "Could not get the response code." << endl;
     }
 
     if (modified || infoRet != CURLE_OK)

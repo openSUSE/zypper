@@ -258,9 +258,9 @@ namespace zypp
         return str << "search nothing";
 
       if ( obj.attr() )
-        str << "seach " << obj.attr() << " in ";
+        str << "search " << obj.attr() << " in ";
       else
-        str << "seach ALL in ";
+        str << "search ALL in ";
 
       if ( obj.solvable() )
         return str << obj.solvable();

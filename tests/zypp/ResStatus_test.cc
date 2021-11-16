@@ -145,8 +145,8 @@ void testTable( Transition transition, Evaluate evaluate )
 // All tests below should define 3 checks, abbrev. by defines
 //
 //    CHECK_DONE_*:         When does the tranaction succeed? (return if not)
-//    CHECK_STATE( NEXT ):  The state the transition leads to (if successfull)
-//    CHECK_CAUSER_*:       Changes to the remembered causer (if successfull)
+//    CHECK_STATE( NEXT ):  The state the transition leads to (if successful)
+//    CHECK_CAUSER_*:       Changes to the remembered causer (if successful)
 //
 
 #define DOCHECK( FROMSTATE, TOSTATE, C_DONE, C_STATE, C_CAUSER ) \

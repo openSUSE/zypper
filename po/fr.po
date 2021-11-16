@@ -4654,7 +4654,7 @@ msgstr "installer %1% bien qu'il ait été retiré"
 #. translator: %1% is a package name
 #: zypp/solver/detail/SATResolver.cc:1452
 #, boost-format
-msgid "allow to install the PTF %1%"
+msgid "allow installing the PTF %1%"
 msgstr "autoriser l'installation du PTF %1%"
 
 #. translator: %1% is a package name

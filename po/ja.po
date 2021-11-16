@@ -4629,7 +4629,7 @@ msgstr "撤回済みの %1% をインストールする"
 #. translator: %1% is a package name
 #: zypp/solver/detail/SATResolver.cc:1452
 #, boost-format
-msgid "allow to install the PTF %1%"
+msgid "allow installing the PTF %1%"
 msgstr "PTF %1% のインストールを許可する"
 
 #. translator: %1% is a package name

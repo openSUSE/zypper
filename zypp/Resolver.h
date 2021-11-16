@@ -215,22 +215,22 @@ namespace zypp
      * Default for all flags is \c false unless overwritten by zypp.conf.
      */
     //@{
-    /** Whether to allow to downgrade installed solvable */
+    /** Whether to allow one to downgrade installed solvable */
     void setAllowDowngrade( bool yesno_r );
     void setDefaultAllowDowngrade();	// Set back to default
     bool allowDowngrade() const;
 
-    /** Whether to allow to change name of installed solvable */
+    /** Whether to allow one to change name of installed solvable */
     void setAllowNameChange( bool yesno_r );
     void setDefaultAllowNameChange();	// Set back to default
     bool allowNameChange() const;
 
-    /** Whether to allow to change architecture of installed solvables */
+    /** Whether to allow one to change architecture of installed solvables */
     void setAllowArchChange( bool yesno_r );
     void setDefaultAllowArchChange();	// Set back to default
     bool allowArchChange() const;
 
-    /**  Whether to allow to change vendor of installed solvables
+    /**  Whether to allow one to change vendor of installed solvables
      * \see \ref VendorAttr for definition of vendor equivalence.
      */
     void setAllowVendorChange( bool yesno_r );
@@ -273,22 +273,22 @@ namespace zypp
      * all DUP flags is \c true unless overwritten by zypp.conf.
      */
     //@{
-    /** dup mode: allow to downgrade installed solvable */
+    /** dup mode: allow one to downgrade installed solvable */
     void dupSetAllowDowngrade( bool yesno_r );
     void dupSetDefaultAllowDowngrade();		// Set back to default (in zypp.conf)
     bool dupAllowDowngrade() const;
 
-    /** dup mode: allow to change name of installed solvable */
+    /** dup mode: allow one to change name of installed solvable */
     void dupSetAllowNameChange( bool yesno_r );
     void dupSetDefaultAllowNameChange();	// Set back to default (in zypp.conf)
     bool dupAllowNameChange() const;
 
-    /** dup mode: allow to change architecture of installed solvables */
+    /** dup mode: allow one to change architecture of installed solvables */
     void dupSetAllowArchChange( bool yesno_r );
     void dupSetDefaultAllowArchChange();	// Set back to default (in zypp.conf)
     bool dupAllowArchChange() const;
 
-    /**  dup mode: allow to change vendor of installed solvables*/
+    /**  dup mode: allow one to change vendor of installed solvables*/
     void dupSetAllowVendorChange( bool yesno_r );
     void dupSetDefaultAllowVendorChange();	// Set back to default (in zypp.conf)
     bool dupAllowVendorChange() const;

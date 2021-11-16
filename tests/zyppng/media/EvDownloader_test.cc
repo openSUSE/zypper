@@ -674,7 +674,7 @@ BOOST_DATA_TEST_CASE( dltest_auth_basic, bdata::make( withSSL ), withSSL )
   web.addRequestHandler( "quit", [ &ev ]( WebServer::Request & ){ ev->quit();} );
 
   {
-    // simply check by request count if the test was successfull:
+    // simply check by request count if the test was successful:
     // if the proactive code adding the credentials to the first request is not executed we will
     // have more than 1 request.
     int reqCount = 0;

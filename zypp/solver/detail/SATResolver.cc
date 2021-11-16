@@ -1449,7 +1449,7 @@ SATResolver::problems ()
                           description = str::Format(_("install %1% although it has been retracted")) % s.asString();
                         } else if ( s.isPtf() ) {
                           // translator: %1% is a package name
-                          description = str::Format(_("allow to install the PTF %1%")) % s.asString();
+                          description = str::Format(_("allow installing the PTF %1%")) % s.asString();
                         } else {
                           // translator: %1% is a package name
                           description = str::Format(_("install %1% although it is blacklisted")) % s.asString();

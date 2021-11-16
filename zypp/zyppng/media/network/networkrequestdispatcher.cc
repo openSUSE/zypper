@@ -386,7 +386,7 @@ void NetworkRequestDispatcher::enqueue(const std::shared_ptr<NetworkRequest> &re
 
 void NetworkRequestDispatcher::cancel( NetworkRequest &req, std::string reason )
 {
-  cancel( req, NetworkRequestErrorPrivate::customError( NetworkRequestError::Cancelled, reason.size() ? std::move(reason) : "Request explicitely cancelled" ) );
+  cancel( req, NetworkRequestErrorPrivate::customError( NetworkRequestError::Cancelled, reason.size() ? std::move(reason) : "Request explicitly cancelled" ) );
 }
 
 void NetworkRequestDispatcher::cancel(NetworkRequest &req, const NetworkRequestError &err)

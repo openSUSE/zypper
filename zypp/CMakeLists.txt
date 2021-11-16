@@ -990,7 +990,7 @@ ADDZYPPLIB(zypp-allsym)
 ADD_DEPENDENCIES( zypp-allsym zypp )
 
 #this part does nothing yet, only when switching away from using a map file to
-#a approach where symbols are exported explicitely it would make a difference
+#a approach where symbols are exported explicitly it would make a difference
 #ZYPPNG symbols need to be added to the map file to be exported
 IF( EXPORT_NG_API )
 ADD_DEFINITIONS(-DEXPORT_EXPERIMENTAL_API)
