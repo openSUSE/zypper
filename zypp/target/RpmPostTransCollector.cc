@@ -47,6 +47,7 @@ namespace zypp
       public:
         Impl( const Pathname & root_r )
         : _root( root_r )
+        , _myJobReport { "cmdout", "%posttrans" }
         {}
 
         ~Impl()
@@ -91,9 +92,10 @@ namespace zypp
 
           Pathname noRootScriptDir( ZConfig::instance().update_scriptsPath() / tmpDir().basename() );
 
-          ProgressData scriptProgress( static_cast<ProgressData::value_type>(_scripts.size()) );
           callback::SendReport<ProgressReport> report;
+          ProgressData scriptProgress( static_cast<ProgressData::value_type>(_scripts.size()) );
           scriptProgress.sendTo( ProgressReportAdaptor( ProgressData::ReceiverFnc(), report ) );
+          str::Format fmtScriptProgress { _("Executing %%posttrans script '%1%'") };
 
           bool firstScript = true;
           while ( ! _scripts.empty() )
@@ -102,7 +104,7 @@ namespace zypp
             const std::string & script = scriptPair.first;
             const std::string & pkgident( script.substr( 0, script.size()-6 ) );	// strip tmp file suffix
 
-            scriptProgress.name( str::Format(_("Executing %%posttrans script '%1%'")) % pkgident );
+            scriptProgress.name( fmtScriptProgress % pkgident );
 
             bool canContinue = true;
             if (firstScript)  {
@@ -117,7 +119,7 @@ namespace zypp
               msg << "Execution of %posttrans scripts cancelled";
               WAR << msg << endl;
               historylog.comment( msg, true /*timestamp*/);
-              JobReport::warning( msg );
+              _myJobReport.warning( msg );
               return false;
             }
 
@@ -154,8 +156,7 @@ namespace zypp
                 str::Str msg;
                 msg << "Output of " << pkgident << " %posttrans script:\n" << scriptmsg;
                 historylog.comment( msg, true /*timestamp*/);
-                JobReport::UserData userData( "cmdout", "%posttrans" );
-                JobReport::info( msg, userData );
+                _myJobReport.info( msg );
               }
 
               if ( ret != 0 )
@@ -164,7 +165,7 @@ namespace zypp
                 msg << pkgident << " %posttrans script failed (returned " << ret << ")";
                 WAR << msg << endl;
                 historylog.comment( msg, true /*timestamp*/);
-                JobReport::warning( msg );
+                _myJobReport.warning( msg );
               }
             }
           }
@@ -194,7 +195,7 @@ namespace zypp
           }
 
           historylog.comment( msg, true /*timestamp*/);
-          JobReport::warning( msg );
+          _myJobReport.warning( msg );
 
           _scripts.clear();
         }
@@ -213,6 +214,8 @@ namespace zypp
         Pathname _root;
         std::list< std::pair< std::string, std::string > > _scripts;
         boost::scoped_ptr<filesystem::TmpDir> _ptrTmpdir;
+
+        UserDataJobReport _myJobReport; ///< JobReport with ContentType "cmdout/%posttrans"
     };
 
     /** \relates RpmPostTransCollector::Impl Stream output */
