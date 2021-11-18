@@ -14,7 +14,7 @@
 
 #include <zypp/base/Logger.h>
 #include <zypp/base/IOStream.h>
-#include <zypp/base/String.h>
+#include <zypp/base/StringV.h>
 #include <zypp/base/Regex.h>
 #include <zypp/sat/Queue.h>
 #include <zypp/sat/FileConflicts.h>
@@ -30,33 +30,38 @@
 namespace
 {
   /** Print additional rpm outout and scan for %script errors. */
-  void processAdditionalRpmOutput( const std::string & output_r, const bool trainlingNewline = false )
+  void processAdditionalRpmOutput( const std::string & output_r )
   {
     if ( ! output_r.empty() )
     {
-      std::istringstream input( output_r );
-
+      static str::regex rx("^(warning|error): %.* scriptlet failed, ");
+      static str::smatch what;
       Out::Info info( Zypper::instance().out() );
       ColorStream msg( info << "", ColorContext::HIGHLIGHT );
-      for ( iostr::EachLine in( input ); in; in.next() )
-      {
-        if ( in.lineNo() > 1 )
-          msg << endl;
-
-        const std::string & line( *in );
-        static str::regex  rx("^(warning|error): %.* scriptlet failed, ");
-        static str::smatch what;
-        if ( str::regex_match( line, what, rx ) )
-        {
-          msg << ( (line[0] == 'w' ? ColorContext::MSG_WARNING : ColorContext::MSG_ERROR) << line );
-          Zypper::instance().setExitInfoCode( ZYPPER_EXIT_INF_RPM_SCRIPT_FAILED );
+      auto chkLine {
+        [&]( const std::string & line ) -> void {
+          if ( str::regex_match( line, what, rx ) ) {
+            msg << ( (line[0] == 'w' ? ColorContext::MSG_WARNING : ColorContext::MSG_ERROR) << line );
+            Zypper::instance().setExitInfoCode( ZYPPER_EXIT_INF_RPM_SCRIPT_FAILED );
+          }
+          else
+            msg << line;
         }
-        else
-          msg << line;
-      }
+      };
 
-      if ( trainlingNewline )
-        msg << endl;
+      if ( output_r.find( '\n' ) == std::string::npos ) {
+        // singleline
+        chkLine( output_r );
+      }
+      else {
+        // multiline
+        std::istringstream input( output_r );
+        for ( iostr::EachLine in( input ); in; in.next() ) {
+          if ( in.lineNo() > 1 )
+            msg << endl;
+          chkLine( *in );
+        }
+      }
     }
   }
 
@@ -259,8 +264,14 @@ struct RemoveResolvableReportReceiver : public callback::ReceiveReport<target::r
     return !Zypper::instance().exitRequested();
   }
 
-  virtual Action problem( Resolvable::constPtr resolvable, Error error, const std::string & description )
+  virtual Action problem( Resolvable::constPtr resolvable, Error error, const std::string & description_r )
   {
+    std::string description;  // We just need the 1st line (exception message), the rest is additional rpm output we already reported.
+    strv::split( description_r, "\n", [&description]( std::string_view line_r, unsigned nr_r ) {
+      if ( nr_r == 0 ) description = line_r;
+      return false;
+    });
+
     // finsh progress; indicate error
     if ( _progress )
     {
@@ -292,11 +303,14 @@ struct RemoveResolvableReportReceiver : public callback::ReceiveReport<target::r
     if (error != NO_ERROR)
       // set proper exit code, don't write to output, the error should have been reported in problem()
       Zypper::instance().setExitCode(ZYPPER_EXIT_ERR_ZYPP);
-    else
-    {
-      // bnc #369450: print additional rpm output
-      processAdditionalRpmOutput( reason, true );
-    }
+  }
+
+  void report( const UserData & userData_r ) override
+  {
+    // Any additional rpm output is printed immediately....
+    if ( userData_r.type() == ReportType::contentRpmout && userData_r.haskey("line") ) {
+      processAdditionalRpmOutput( userData_r.get<std::reference_wrapper<const std::string>>("line").get() );
+   }
   }
 
   virtual void reportend()
@@ -336,8 +350,14 @@ struct InstallResolvableReportReceiver : public callback::ReceiveReport<target::
     return !Zypper::instance().exitRequested();
   }
 
-  virtual Action problem( Resolvable::constPtr resolvable, Error error, const std::string & description, RpmLevel /*unused*/ )
+  virtual Action problem( Resolvable::constPtr resolvable, Error error, const std::string & description_r, RpmLevel /*unused*/ )
   {
+    std::string description;  // We just need the 1st line (exception message), the rest is additional rpm output we already reported.
+    strv::split( description_r, "\n", [&description]( std::string_view line_r, unsigned nr_r ) {
+      if ( nr_r == 0 ) description = line_r;
+      return false;
+    });
+
     // finsh progress; indicate error
     if ( _progress )
     {
@@ -369,11 +389,14 @@ struct InstallResolvableReportReceiver : public callback::ReceiveReport<target::
     if ( error != NO_ERROR )
       // don't write to output, the error should have been reported in problem() (bnc #381203)
       Zypper::instance().setExitCode(ZYPPER_EXIT_ERR_ZYPP);
-    else
-    {
-      // bnc #369450: print additional rpm output
-      processAdditionalRpmOutput( reason, true );
-    }
+  }
+
+  void report( const UserData & userData_r ) override
+  {
+    // Any additional rpm output is printed immediately....
+    if ( userData_r.type() == ReportType::contentRpmout && userData_r.haskey("line") ) {
+      processAdditionalRpmOutput( userData_r.get<std::reference_wrapper<const std::string>>("line").get() );
+   }
   }
 
   virtual void reportend()
@@ -543,16 +566,11 @@ struct RemoveResolvableSAReportReceiver : public callback::ReceiveReport<target:
     if (error != NO_ERROR)
       // set proper exit code, don't write to output, the error should have been reported in problem()
       Zypper::instance().setExitCode(ZYPPER_EXIT_ERR_ZYPP);
-    else
-    {
-      // bnc #369450: print additional rpm output
-      // processAdditionalRpmOutput( reason );
-    }
   }
 
   void report( const UserData & userData_r ) override
   {
-    if ( userData_r.type() == target::rpm::RemoveResolvableReportSA::contentRpmout
+    if ( userData_r.type() == ReportType::contentRpmout
           &&  userData_r.haskey("line") ) {
             std::string line;
             if ( userData_r.get("line", line) ) {
@@ -609,16 +627,11 @@ struct InstallResolvableSAReportReceiver : public callback::ReceiveReport<target
     if ( error != NO_ERROR )
       // don't write to output, the error should have been reported in problem() (bnc #381203)
       Zypper::instance().setExitCode(ZYPPER_EXIT_ERR_ZYPP);
-    else
-    {
-      // bnc #369450: print additional rpm output
-      // processAdditionalRpmOutput( reason );
-    }
   }
 
   void report( const UserData & userData_r ) override
   {
-    if ( userData_r.type() == target::rpm::InstallResolvableReportSA::contentRpmout
+    if ( userData_r.type() == ReportType::contentRpmout
           &&  userData_r.haskey("line") ) {
       std::string line;
       if ( userData_r.get("line", line) ) {
@@ -678,16 +691,11 @@ struct CommitScriptReportSAReportReceiver : public callback::ReceiveReport<targe
     if ( error != NO_ERROR )
       // don't write to output, the error should have been reported in problem() (bnc #381203)
       Zypper::instance().setExitCode(ZYPPER_EXIT_ERR_ZYPP);
-    else
-    {
-      // bnc #369450: print additional rpm output
-      // processAdditionalRpmOutput( reason );
-    }
   }
 
   void report( const UserData & userData_r ) override
   {
-    if ( userData_r.type() == target::rpm::CommitScriptReportSA::contentRpmout
+    if ( userData_r.type() == ReportType::contentRpmout
           &&  userData_r.haskey("line") ) {
       std::string line;
       if ( userData_r.get("line", line) ) {
@@ -760,16 +768,11 @@ struct TransactionReportSAReceiver : public callback::ReceiveReport<target::rpm:
     if ( error != NO_ERROR )
       // don't write to output, the error should have been reported in problem() (bnc #381203)
       Zypper::instance().setExitCode(ZYPPER_EXIT_ERR_ZYPP);
-    else
-    {
-      // bnc #369450: print additional rpm output
-      // processAdditionalRpmOutput( reason );
-    }
   }
 
   void report( const UserData & userData_r ) override
   {
-    if ( userData_r.type() == target::rpm::TransactionReportSA::contentRpmout
+    if ( userData_r.type() == ReportType::contentRpmout
           &&  userData_r.haskey("line") ) {
       std::string line;
       if ( userData_r.get("line", line) ) {
@@ -825,16 +828,11 @@ struct CleanupPackageReportSAReceiver : public callback::ReceiveReport<target::r
     if ( error != NO_ERROR )
       // don't write to output, the error should have been reported in problem() (bnc #381203)
       Zypper::instance().setExitCode(ZYPPER_EXIT_ERR_ZYPP);
-    else
-    {
-      // bnc #369450: print additional rpm output
-      // processAdditionalRpmOutput( reason );
-    }
   }
 
   void report( const UserData & userData_r ) override
   {
-    if ( userData_r.type() == target::rpm::CleanupPackageReportSA::contentRpmout
+    if ( userData_r.type() == ReportType::contentRpmout
          &&  userData_r.haskey("line") ) {
       std::string line;
       if ( userData_r.get("line", line) ) {
