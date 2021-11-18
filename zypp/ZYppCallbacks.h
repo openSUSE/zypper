@@ -1008,6 +1008,21 @@ namespace zypp
     //@}
   };
 
+  ///////////////////////////////////////////////////////////////////
+  /// \class UserDataJobReport
+  /// \brief \ref JobReport convenience sending this instance of \ref UserData with each message.
+  ///////////////////////////////////////////////////////////////////
+  struct UserDataJobReport : public JobReport::UserData
+  {
+    using JobReport::UserData::UserData;
+
+    bool debug( const std::string & msg_r )     { return JobReport::debug( msg_r, *this ); }
+    bool info( const std::string & msg_r )      { return JobReport::info( msg_r, *this ); }
+    bool warning( const std::string & msg_r )   { return JobReport::warning( msg_r, *this ); }
+    bool error( const std::string & msg_r )     { return JobReport::error( msg_r, *this ); }
+    bool important( const std::string & msg_r ) { return JobReport::important( msg_r, *this ); }
+    bool data( const std::string & msg_r )      { return JobReport::data( msg_r, *this ); }
+  };
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
