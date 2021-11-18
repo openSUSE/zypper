@@ -28,6 +28,8 @@ namespace ZmartRecipients
   {
     virtual bool message( MsgType type_r, const std::string & msg_r, const UserData & userData_r ) const
     {
+      static const JobReport::UserData::ContentType rpmPosttrans { "cmdout", "%posttrans" };
+
       Out & out( Zypper::instance().out() );
       switch ( type_r.asEnum() )
       {
@@ -36,9 +38,13 @@ namespace ZmartRecipients
           break;
 
         case MsgType::info:
-          if ( userData_r.type().type() == "cmdout" )
+          if ( userData_r.type() == rpmPosttrans )
           {
-            // Render command output (like %posttrans) highlighted
+            processAdditionalRpmOutput( msg_r );
+          }
+          else if ( userData_r.type().type() == "cmdout" )
+          {
+            // Render command output highlighted
             out.info( HIGHLIGHTString(msg_r).str() );
           }
           else
