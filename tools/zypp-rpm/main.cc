@@ -73,7 +73,7 @@ bool recvBytes ( int fd, char *buf, size_t n ) {
 }
 
 bool sendBytes ( int fd, const void *buf, size_t n ) {
-  const auto written =  zyppng::eintrSafeCall( ::write, fd, buf, n );
+  const size_t written =  zyppng::eintrSafeCall( ::write, fd, buf, n );
   return written == n;
 }
 
