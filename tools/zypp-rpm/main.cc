@@ -33,6 +33,19 @@ extern "C"
 #define ZDBG std::cout
 #define ZERR std::cerr
 
+namespace env
+{
+  /// Allows to increase rpm loglevel
+  inline bool ZYPP_RPM_DEBUG()
+  {
+    static bool val = [](){
+      const char * env = getenv("ZYPP_RPM_DEBUG");
+      return( env && zypp::str::strToBool( env, true ) );
+    }();
+    return val;
+  }
+} // namespace env
+
 // this is the order we expect the FDs we need to communicate to be set up
 // by the parent. This is not pretty but it works and is less effort than
 // setting up a Unix Domain Socket and sending FDs over that.
@@ -365,7 +378,7 @@ int main( int, char ** )
   ::rpmtsSetNotifyCallback( ts, rpmLibCallback, &data );
 
   // make sure we get da log
-  ::rpmlogSetMask( RPMLOG_UPTO( RPMLOG_PRI(RPMLOG_INFO) ) );
+  ::rpmlogSetMask( RPMLOG_UPTO( RPMLOG_PRI(env::ZYPP_RPM_DEBUG() ? RPMLOG_DEBUG : RPMLOG_INFO) ) );
   ::rpmlogSetCallback( rpmLogCallback, nullptr );
 
   // redirect the script output to a fd ( log level MUST be at least INFO )
@@ -803,7 +816,6 @@ int rpmLogCallback ( rpmlogRec rec, rpmlogCallbackData )
   zypp::proto::target::RpmLog log;
   log.set_level( rpmlogRecPriority(rec)  );
   log.set_line( zypp::str::asString( ::rpmlogRecMessage(rec) ) );
-  ZERR << "Pushing log message: " << log.line() << std::endl;
   pushMessage( log );
 
   return logRc;
