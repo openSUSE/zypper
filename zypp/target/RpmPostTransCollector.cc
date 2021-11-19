@@ -98,6 +98,7 @@ namespace zypp
           str::Format fmtScriptProgress { _("Executing %%posttrans script '%1%'") };
 
           bool firstScript = true;
+          str::Format fmtScriptFailedMsg { "warning: %%posttrans(%1%) scriptlet failed, exit status %2%\n" }; // like rpm would report it (intentionally not translated and NL-terminated)
           while ( ! _scripts.empty() )
           {
             const auto &scriptPair = _scripts.front();
@@ -136,37 +137,34 @@ namespace zypp
             };
             ExternalProgram prog( cmd, ExternalProgram::Stderr_To_Stdout, false, -1, true, _root );
 
+            // For now we continue to collect the lines and write the history file at the end.
+            // But JobReport lines are now sent immediately as they occur.
             str::Str collect;
             for( std::string line = prog.receiveLine(); ! line.empty(); line = prog.receiveLine() )
             {
               DBG << line;
-              collect << "    " << line;
+              collect << line;
+              _myJobReport.info( line );
             }
 
             //script was executed, remove it from the list
             _scripts.pop_front();
 
             int ret = prog.close();
-            const std::string & scriptmsg( collect );
-
-            if ( ret != 0 || ! scriptmsg.empty() )
+            if ( ret != 0 )
             {
-              if ( ! scriptmsg.empty() )
-              {
-                str::Str msg;
-                msg << "Output of " << pkgident << " %posttrans script:\n" << scriptmsg;
-                historylog.comment( msg, true /*timestamp*/);
-                _myJobReport.info( msg );
-              }
+              const std::string & msg { fmtScriptFailedMsg % pkgident % ret };
+              WAR << msg;
+              collect << msg;
+              _myJobReport.info( msg ); // info!, as rpm would have reported it.
+            }
 
-              if ( ret != 0 )
-              {
-                str::Str msg;
-                msg << pkgident << " %posttrans script failed (returned " << ret << ")";
-                WAR << msg << endl;
-                historylog.comment( msg, true /*timestamp*/);
-                _myJobReport.warning( msg );
-              }
+            const std::string & scriptmsg( collect );
+            if ( ! scriptmsg.empty() )
+            {
+              str::Str msg;
+              msg << "Output of " << pkgident << " %posttrans script:\n" << scriptmsg;
+              historylog.comment( msg, true /*timestamp*/);
             }
           }
 
