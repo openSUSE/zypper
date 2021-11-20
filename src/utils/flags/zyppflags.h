@@ -48,6 +48,8 @@
 // translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #define ARG_URI                _( "URI" )
 // translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
+#define ARG_KEY_ID             _( "KEY_ID" )
+// translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #define ARG_YYYY_MM_DD         _( "YYYY-MM-DD" )
 // translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #define ARG_MODE               _( "MODE" )

@@ -261,11 +261,23 @@ namespace zypp
       {
         Zypper & zypper = Zypper::instance();
 
+        // if --gpg-auto-import-keys,  "*" is in _gopts.gpg_auto_import_keys. In this case, allow any key.
+        bool autoImportKey = std::find(_gopts.gpg_auto_import_keys.begin(), _gopts.gpg_auto_import_keys.end(), "*") != _gopts.gpg_auto_import_keys.end();
+
+        // if --gpg-auto-import-keys <KEY_ID>, acceptable key IDs are in _gopts.gpg_auto_import_keys.
+        if (!autoImportKey) {
+          autoImportKey = std::any_of(_gopts.gpg_auto_import_keys.begin(), _gopts.gpg_auto_import_keys.end(), [&key_r](const std::string& keyId) {
+            return key_r.providesKey(keyId);
+          });
+        }
+
+        bool autoTrustKey = _gopts.no_gpg_checks && canTrustTemporarily_r;
+
         std::ostringstream s;
         s << std::endl;
-        if (_gopts.gpg_auto_import_keys)
+        if (autoImportKey)
           s << _("Automatically importing the following key:") << std::endl;
-        else if ( _gopts.no_gpg_checks && canTrustTemporarily_r  )
+        else if (autoTrustKey)
           s << _("Automatically trusting the following key:") << std::endl;
         else
           s << _("New repository or package signing key received:") << std::endl;
@@ -273,16 +285,15 @@ namespace zypp
         // gpg key info
         dumpKeyInfo( s << std::endl, key_r, context_r )  << std::endl;
 
-        // if --gpg-auto-import-keys, --no-gpg-check, or --gpg-auto-import-key-id matches key, print info and don't ask.
-        if (_gopts.gpg_auto_import_keys
-            || (!_gopts.gpg_auto_import_key_id.empty() && _gopts.gpg_auto_import_key_id == key_r.id()))
+        // if --no-gpg-check enabled or --gpg-auto-import-keys enabled and applicable, print info and don't ask.
+        if (autoImportKey)
         {
           MIL << "Automatically importing key " << key_r << std::endl;
           zypper.out().info(s.str());
           hintFingerprint();
           return KeyRingReport::KEY_TRUST_AND_IMPORT;
         }
-        else if (_gopts.no_gpg_checks && canTrustTemporarily_r )
+        else if (autoTrustKey)
         {
           MIL << "Automatically trusting key " << key_r << std::endl;
           zypper.out().info(s.str());
