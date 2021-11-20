@@ -112,9 +112,16 @@ template <>
 int argValueConvert ( const CommandOption &, const boost::optional<std::string> &in );
 
 template <template<typename ...> class Container, typename T >
-Value GenericContainerType  ( Container<T> &target_r, std::string hint = std::string(), const std::string sep = "" ) {
+Value GenericContainerType  ( Container<T> &target_r, std::string hint = std::string(), const std::string &sep = "", const std::string &defaultVal = std::string() ) {
+  DefValueFun defValueFun;
+  if (!defaultVal.empty()) {
+    defValueFun = [defaultVal]() { return boost::optional<std::string>(defaultVal); };
+  }
+  else {
+    defValueFun = noDefaultValue;
+  }
   return Value (
-    noDefaultValue,
+    std::move( defValueFun ),
     [ &target_r, sep ] ( const CommandOption &opt, const boost::optional<std::string> &in ) {
       if ( !in ) ZYPP_THROW(MissingArgumentException(opt.name)); //value required
 
