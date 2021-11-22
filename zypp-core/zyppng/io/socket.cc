@@ -23,6 +23,9 @@ namespace zyppng {
     if ( _socket >= 0 )
       return true;
 
+    _error = Socket::NoError;
+    _emittedErr = false;
+
     // Since Linux 2.6.27 we can pass additional flags with the type argument to avoid fcntl
     // if creating sockets fails we might need to change that
     _socket = ::socket( _domain, _type | SOCK_NONBLOCK | SOCK_CLOEXEC, _protocol );
@@ -54,13 +57,16 @@ namespace zyppng {
     return false;
   }
 
-  void SocketPrivate::setError(Socket::SocketError error , std::string &&err )
+  void SocketPrivate::setError( Socket::SocketError error , std::string &&err, bool emit )
   {
-    if ( _error == error )
-      return;
-    _error = error;
-    _errorDesc = std::move(err);
-    _sigError.emit( error );
+    // we only remember the first error that happend
+    if ( _error == Socket::NoError && _error != error ) {
+      _emittedErr = emit;
+      _error = error;
+      _errorDesc = std::move(err);
+    }
+    if ( emit && !_emittedErr )
+      _sigError.emit( error );
   }
 
   bool SocketPrivate::transition( Socket::SocketState newState )
@@ -201,38 +207,45 @@ namespace zyppng {
 
   bool SocketPrivate::readRawBytesToBuffer()
   {
+    Z_Z();
     auto bytesToRead = rawBytesAvailable();
     if ( bytesToRead == 0 ) {
       // make sure to check if bytes are available even if the ioctl call returns something different
       bytesToRead = 4096;
     }
 
-    char *buf = _readBuf.reserve( bytesToRead );
-    const auto bytesRead = z_func()->readData( buf, bytesToRead );
+    auto &readBuf = _readChannels[0];
+    char *buf = readBuf.reserve( bytesToRead );
+    const auto bytesRead = z_func()->readData( 0, buf, bytesToRead );
 
-    if ( bytesRead < 0 ) {
-      _readBuf.chop( bytesToRead );
+    if ( bytesRead <= 0 ) {
+      readBuf.chop( bytesToRead );
+
+      switch ( bytesRead ) {
+        case -2:
+          // there is simply no data to read ignore and try again
+        return true;
+        case 0: {
+          // remote close 
+          setError( Socket::ConnectionClosedByRemote, "The remote host closed the connection", true );
+          break;
+        }
+        case -1:
+        default: {
+          setError( Socket::InternalError, strerr_cxx(), true );
+          break;
+        } 
+      }
+      z->abort();
       return false;
     }
 
     if ( bytesToRead > bytesRead )
-      _readBuf.chop( bytesToRead-bytesRead );
-
-    if ( bytesRead > 0 ) {
-      _readyRead.emit();
-      return true;
-    }
-    //handle remote close
-    else if ( bytesRead == 0 && errno != EAGAIN && errno != EWOULDBLOCK  ) {
-      setError( Socket::ConnectionClosedByRemote, "The remote host closed the connection" );
-      return false;
-    }
-
-    if ( errno == EAGAIN || errno == EWOULDBLOCK )
-      return true;
-
-    setError( Socket::InternalError, strerr_cxx() );
-    return false;
+      readBuf.chop( bytesToRead-bytesRead );
+      
+    _readyRead.emit();
+    _channelReadyRead.emit(0);
+    return true;
   }
 
   bool SocketPrivate::writePendingData()
@@ -271,6 +284,8 @@ namespace zyppng {
         }
         s._writeBuffer.discard( written );
         _sigBytesWritten.emit( written );
+        if ( s._writeBuffer.size() == 0 )
+          _sigAllBytesWritten.emit(); 
       }
       return true;
     }, _state );
@@ -404,8 +419,13 @@ namespace zyppng {
     : IODevice( *( new SocketPrivate( domain, type, protocol, *this )))
   { }
 
-  size_t Socket::rawBytesAvailable() const
+  size_t Socket::rawBytesAvailable( uint channel ) const
   {
+    if ( channel != 0 ) {
+      constexpr std::string_view msg("Socket does not support multiple read channels");
+      ERR << msg << std::endl;
+      throw std::logic_error( msg.data() );
+    }
     return d_func()->rawBytesAvailable();
   }
 
@@ -704,6 +724,10 @@ namespace zyppng {
       if ( written > 0 )
         d->_sigBytesWritten.emit( written );
     }
+
+    if ( s._writeBuffer.size() == 0 )
+      d->_sigAllBytesWritten.emit(); 
+
     return count;
   }
 
@@ -777,8 +801,13 @@ namespace zyppng {
     return bytesAvailable() > 0;
   }
 
-  off_t Socket::readData( char *buffer, off_t bufsize )
+  off_t Socket::readData( uint channel, char *buffer, off_t bufsize )
   {
+    if ( channel != 0 ) {
+      constexpr std::string_view msg("Socket does not support multiple read channels");
+      ERR << msg << std::endl;
+      throw std::logic_error( msg.data() );
+    }
 
     Z_D();
     if ( d->state() != SocketState::ConnectedState )
@@ -788,20 +817,18 @@ namespace zyppng {
 
     // special case for remote close
     if ( read == 0 ) {
-      d->setError( ConnectionClosedByRemote, "The remote host closed the connection" );
-      abort();
-      return -1;
+      d->setError( ConnectionClosedByRemote, "The remote host closed the connection", false );
+      return 0;
     } else if ( read < 0 ) {
       switch ( errno ) {
 #if EAGAIN != EWOULDBLOCK
         case EWOULDBLOCK:
 #endif
         case EAGAIN: {
-          return 0;
+          return -2;
         }
         default: {
-          d->setError( UnknownSocketError, strerr_cxx( errno ) );
-          abort();
+          d->setError( UnknownSocketError, strerr_cxx( errno ), false );
           return -1;
         }
       }
@@ -809,9 +836,13 @@ namespace zyppng {
     return read;
   }
 
-  size_t Socket::bytesAvailable() const
-  {;
-    return IODevice::bytesAvailable();
+  void Socket::readChannelChanged ( uint channel ) 
+  { 
+    if ( channel != 0 ) {
+      constexpr std::string_view msg("Changing the readChannel on a Socket is not supported");
+      ERR << msg << std::endl;
+      throw std::logic_error( msg.data() );
+    }
   }
 
   size_t Socket::bytesPending() const
@@ -849,11 +880,6 @@ namespace zyppng {
   SignalProxy<void (Socket::SocketError)> Socket::sigError()
   {
     return d_func()->_sigError;
-  }
-
-  SignalProxy<void (std::size_t)> Socket::sigBytesWritten()
-  {
-    return d_func()->_sigBytesWritten;
   }
 
 }

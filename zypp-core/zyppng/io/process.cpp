@@ -1,5 +1,5 @@
 #include "process.h"
-#include <zypp-core/zyppng/base/private/base_p.h>
+#include <zypp-core/zyppng/io/private/asyncdatasource_p.h>
 #include <zypp-core/zyppng/base/EventDispatcher>
 #include <zypp-core/zyppng/io/private/abstractspawnengine_p.h>
 #include <zypp-core/zyppng/io/AsyncDataSource>
@@ -13,16 +13,20 @@ namespace zyppng {
    *       signals that the fork has worked out but NOT that the app actually started
    */
 
-  class ProcessPrivate : public BasePrivate
+  class ProcessPrivate : public AsyncDataSourcePrivate
   {
   public:
-    ProcessPrivate( Process &p ) : BasePrivate(p)
+    ProcessPrivate( Process &p ) : AsyncDataSourcePrivate(p)
     { }
 
+    void cleanup() {
+      _stdinFd  = -1;
+      _stderrFd = -1;
+      _stdoutFd = -1;
+      _pid = -1;
+    }
+
     std::unique_ptr<AbstractSpawnEngine> _spawnEngine = AbstractSpawnEngine::createDefaultEngine();
-    AsyncDataSource::Ptr _stdinDevice;
-    AsyncDataSource::Ptr _stdoutDevice;
-    AsyncDataSource::Ptr _stderrDevice;
     zypp::AutoFD _stdinFd  = -1;
     zypp::AutoFD _stderrFd = -1;
     zypp::AutoFD _stdoutFd = -1;
@@ -31,11 +35,13 @@ namespace zyppng {
     Signal<void ( int )> _sigFinished;
     Signal<void ()> _sigFailedToStart;
 
+    Process::OutputChannelMode _channelMode = Process::Seperate;
+    Process::OutputChannel _currentChannel  = Process::StdOut;
   };
 
   ZYPP_IMPL_PRIVATE(Process)
 
-  Process::Process() : Base( *( new ProcessPrivate(*this) ) )
+  Process::Process() : AsyncDataSource( *( new ProcessPrivate(*this) ) )
   {
 
   }
@@ -54,7 +60,7 @@ namespace zyppng {
     }
   }
 
-  bool Process::start(const char * const *argv )
+  bool Process::start( const char *const *argv )
   {
     Z_D();
 
@@ -63,13 +69,12 @@ namespace zyppng {
       return false;
     }
 
+    if ( isRunning() )
+      return false;
+
     // clean up the previous run
-    d->_stdinDevice.reset();
-    d->_stdoutDevice.reset();
-    d->_stderrDevice.reset();
-    d->_stdinFd  = -1;
-    d->_stderrFd = -1;
-    d->_stdoutFd = -1;
+    AsyncDataSource::close();
+    d->cleanup();
 
     // create the pipes we need
     auto stdinPipe = Pipe::create( );
@@ -84,13 +89,20 @@ namespace zyppng {
       return false;
     }
 
-    auto stderrPipe = Pipe::create( );
-    if ( !stderrPipe ) {
-      d->_sigFailedToStart.emit();
-      return false;
+    int stderr_fd = -1;
+    std::optional<Pipe> stderrPipe;
+    if ( d->_channelMode == Seperate ) {
+      stderrPipe = Pipe::create( );
+      if ( !stderrPipe ) {
+        d->_sigFailedToStart.emit();
+        return false;
+      }
+      stderr_fd = stderrPipe->writeFd;
+    } else {
+      stderr_fd = stdoutPipe->writeFd;
     }
 
-    if ( d->_spawnEngine->start( argv, stdinPipe->readFd, stdoutPipe->writeFd, stderrPipe->writeFd ) ) {
+    if ( d->_spawnEngine->start( argv, stdinPipe->readFd, stdoutPipe->writeFd, stderr_fd ) ) {
 
       // if we reach this point the engine guarantees that exec() was successful
       d->_pid = d->_spawnEngine->pid( );
@@ -106,16 +118,17 @@ namespace zyppng {
       // make sure the fds we need are kept open
       d->_stdinFd  = std::move( stdinPipe->writeFd );
       d->_stdoutFd = std::move( stdoutPipe->readFd );
-      d->_stderrFd = std::move( stderrPipe->readFd );
 
-      d->_stdinDevice = AsyncDataSource::create();
-      d->_stdinDevice->open( -1, d->_stdinFd );
+      std::vector<int> rFds { d->_stdoutFd };
+      if ( stderrPipe ) {
+        d->_stderrFd = std::move( stderrPipe->readFd );
+        rFds.push_back( d->_stderrFd.value() );
+      }
 
-      d->_stdoutDevice = AsyncDataSource::create();
-      d->_stdoutDevice->open( d->_stdoutFd );
-
-      d->_stderrDevice = AsyncDataSource::create();
-      d->_stderrDevice->open( d->_stderrFd );
+      if ( !openFds( rFds, d->_stdinFd ) ) {
+        stop( SIGKILL );
+        return false;
+      }
 
       d->_sigStarted.emit();
       return true;
@@ -134,7 +147,16 @@ namespace zyppng {
 
   bool Process::isRunning()
   {
-    return ( d_func()->_pid > -1 );
+    Z_D();
+    return ( d->_pid > -1 );
+  }
+
+  void Process::close ()
+  {
+    flush();
+    stop(SIGKILL);
+    d_func()->cleanup();
+    AsyncDataSource::close();
   }
 
   const std::string &Process::executedCommand() const
@@ -227,21 +249,6 @@ namespace zyppng {
     return d_func()->_spawnEngine->addFd( fd );
   }
 
-  std::shared_ptr<IODevice> Process::stdinDevice()
-  {
-    return d_func()->_stdinDevice;
-  }
-
-  std::shared_ptr<IODevice> Process::stdoutDevice()
-  {
-    return d_func()->_stdoutDevice;
-  }
-
-  std::shared_ptr<IODevice> Process::stderrDevice()
-  {
-    return d_func()->_stderrDevice;
-  }
-
   int Process::stdinFd()
   {
     return d_func()->_stdinFd;
@@ -271,5 +278,8 @@ namespace zyppng {
   {
     return d_func()->_sigFinished;
   }
+
+  Process::OutputChannelMode Process::outputChannelMode() const { return d_func()->_channelMode; }
+  void Process::setOutputChannelMode(const OutputChannelMode &outputChannelMode) { d_func()->_channelMode = outputChannelMode; }
 
 }

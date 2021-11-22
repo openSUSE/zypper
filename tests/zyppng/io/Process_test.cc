@@ -62,12 +62,13 @@ BOOST_AUTO_TEST_CASE( Basic )
   BOOST_REQUIRE_EQUAL( exitCode, 123 );
   BOOST_REQUIRE( !gotFailedToStart );
 
-  BOOST_REQUIRE( proc->stdoutDevice()->bytesAvailable() );
+  proc->setReadChannel( zyppng::Process::StdOut );
+  BOOST_REQUIRE( proc->bytesAvailable( ) );
 
-  auto data = proc->stdoutDevice()->readLine();
+  auto data = proc->readLine();
   BOOST_REQUIRE_EQUAL( data.asStringView(), std::string_view("Hello\n") );
 
-  data = proc->stdoutDevice()->readLine();
+  data = proc->readLine();
   BOOST_REQUIRE_EQUAL( data.asStringView(), std::string_view("I'm the second line\n") );
 
   BOOST_REQUIRE( !proc->isRunning() );
@@ -132,7 +133,7 @@ BOOST_AUTO_TEST_CASE( mapExtraFD )
   proc->addFd( pipeB->writeFd );
 
   auto dataSource = zyppng::AsyncDataSource::create();
-  BOOST_REQUIRE( dataSource->open( pipeB->readFd, pipeA->writeFd ) );
+  BOOST_REQUIRE( dataSource->openFds( { pipeB->readFd }, pipeA->writeFd ) );
   BOOST_REQUIRE( dataSource->canRead() );
   BOOST_REQUIRE( dataSource->canWrite( ) );
 

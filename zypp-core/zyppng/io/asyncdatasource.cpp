@@ -1,84 +1,77 @@
-#include "asyncdatasource.h"
+#include "private/asyncdatasource_p.h"
 
 #include <zypp-core/base/IOTools.h>
 #include <zypp-core/zyppng/base/AutoDisconnect>
 #include <zypp-core/zyppng/base/EventDispatcher>
-#include <zypp-core/zyppng/io/private/iodevice_p.h>
-#include <zypp-core/zyppng/io/private/iobuffer_p.h>
-#include <zypp-core/zyppng/base/SocketNotifier>
 #include <zypp-core/zyppng/base/private/linuxhelpers_p.h>
 
 namespace zyppng {
 
-  class AsyncDataSourcePrivate : public IODevicePrivate {
-    ZYPP_DECLARE_PUBLIC(AsyncDataSource);
-  public:
-    AsyncDataSourcePrivate ( AsyncDataSource &pub ) : IODevicePrivate(pub) {}
-    SocketNotifier::Ptr _readNotifier;
-    SocketNotifier::Ptr _writeNotifier;
-    IOBuffer _writeBuffer;
-    int _readFd  = -1;
-    int _writeFd = -1;
-
-    void notifierActivated (const SocketNotifier &notify, int evTypes );
-    void readyRead  ( );
-    void readyWrite ( );
-
-    void closeWriteChannel ( AsyncDataSource::ChannelCloseReason reason );
-    void closeReadChannel  ( AsyncDataSource::ChannelCloseReason reason );
-
-    Signal<void( AsyncDataSource::ChannelCloseReason )> _sigWriteFdClosed;
-    Signal<void( AsyncDataSource::ChannelCloseReason )> _sigReadFdClosed;
-    Signal< void (std::size_t)> _sigBytesWritten;
-  };
-
   void AsyncDataSourcePrivate::notifierActivated( const SocketNotifier &notify, int evTypes )
   {
-    if ( _readNotifier.get() == &notify ) {
-      readyRead();
-    } else if ( _writeNotifier.get() == &notify ) {
+    if ( _writeNotifier.get() == &notify ) {
       if ( evTypes & SocketNotifier::Error ) {
         DBG << "Closing due to error when polling" << std::endl;
         closeWriteChannel(  AsyncDataSource::RemoteClose );
         return;
       }
       readyWrite();
+    } else {
+
+        auto dev = std::find_if( _readFds.begin(), _readFds.end(),
+        [ &notify ]( const auto &dev ){ return ( dev._readNotifier.get() == &notify ); } );
+
+        if ( dev == _readFds.end() ) {
+          return;
+        }
+
+        readyRead( std::distance( _readFds.begin(), dev ) );
     }
   }
 
-  void AsyncDataSourcePrivate::readyRead()
+  void AsyncDataSourcePrivate::readyRead( uint channel )
   {
-    auto bytesToRead = z_func()->rawBytesAvailable();
+    auto bytesToRead = z_func()->rawBytesAvailable( channel );
     if ( bytesToRead == 0 ) {
       // make sure to check if bytes are available even if the ioctl call returns something different
       bytesToRead = 4096;
     }
 
+    auto &_readBuf = _readChannels[channel];
     char *buf = _readBuf.reserve( bytesToRead );
-    const auto bytesRead = z_func()->readData( buf, bytesToRead );
+    const auto bytesRead = z_func()->readData( channel, buf, bytesToRead );
 
-    if ( bytesRead < 0 ) {
+    if ( bytesRead <= 0 ) {
       _readBuf.chop( bytesToRead );
+
+      switch( bytesRead ) {
+        // remote close , close the read channel
+        case 0: {
+          closeReadChannel( channel, AsyncDataSource::RemoteClose );
+          break;
+        }
+        // no data is available , just try again later
+        case -2: break;
+        // anything else
+        default:
+        case -1: {
+          closeReadChannel( channel, AsyncDataSource::InternalError );
+          break;
+        }
+      }
       return;
     }
 
     if ( bytesToRead > (size_t)bytesRead )
       _readBuf.chop( bytesToRead-bytesRead );
 
-    if ( bytesRead > 0 ) {
+    if ( channel == _currentReadChannel )
       _readyRead.emit();
-      return;
-    }
-    //handle remote close
-    else if ( bytesRead == 0 && errno != EAGAIN && errno != EWOULDBLOCK  ) {
-      closeReadChannel(  AsyncDataSource::RemoteClose );
-    }
-
-    if ( errno == EAGAIN || errno == EWOULDBLOCK )
-      return;
+    _channelReadyRead.emit( channel );
+    return;
 
     //setError( Socket::InternalError, strerr_cxx() );
-    closeReadChannel(  AsyncDataSource::InternalError );
+    closeReadChannel( channel, AsyncDataSource::InternalError );
   }
 
   void AsyncDataSourcePrivate::readyWrite()
@@ -114,6 +107,9 @@ namespace zyppng {
     }
     _writeBuffer.discard( written );
     _sigBytesWritten.emit( written );
+
+    if ( _writeBuffer.size() == 0 )
+      _sigAllBytesWritten.emit();
   }
 
   void AsyncDataSourcePrivate::closeWriteChannel( AsyncDataSource::ChannelCloseReason reason )
@@ -127,14 +123,15 @@ namespace zyppng {
       _sigWriteFdClosed.emit( reason );
   }
 
-  void AsyncDataSourcePrivate::closeReadChannel( AsyncDataSource::ChannelCloseReason reason )
+  void AsyncDataSourcePrivate::closeReadChannel( uint channel, AsyncDataSource::ChannelCloseReason reason )
   {
+    auto &readFd = _readFds[channel];
     // we do not clear the read buffer so code has the opportunity to read whats left in there
-    bool sig = _readFd >= 0;
-    _readNotifier.reset();
-    _readFd = -1;
+    bool sig = readFd._readFd >= 0;
+    readFd._readNotifier.reset();
+    readFd._readFd = -1;
     if ( sig )
-      _sigReadFdClosed.emit( reason );
+      _sigReadFdClosed.emit( channel, reason );
   }
 
   ZYPP_IMPL_PRIVATE(AsyncDataSource)
@@ -142,23 +139,37 @@ namespace zyppng {
   AsyncDataSource::AsyncDataSource() : IODevice( *( new AsyncDataSourcePrivate(*this) ) )
   { }
 
+  AsyncDataSource::AsyncDataSource( AsyncDataSourcePrivate &d )
+    : IODevice(d)
+  {}
+
   AsyncDataSource::Ptr AsyncDataSource::create()
   {
     return std::shared_ptr<AsyncDataSource>( new AsyncDataSource );
   }
 
-  bool AsyncDataSource::open( int readFd, int writeFd )
+
+  bool AsyncDataSource::openFds ( std::vector<int> readFds, int writeFd )
   {
     Z_D();
-    close();
+
+    if ( d->_mode != IODevice::Closed )
+      return false;
+
     IODevice::OpenMode mode;
-    if ( readFd >= 0 ) {
-      mode |= IODevice::ReadOnly;
-      d->_readFd = readFd;
-      zypp::io::setFDBlocking( readFd, false );
-      d->_readNotifier = SocketNotifier::create( readFd, SocketNotifier::Read | AbstractEventSource::Error, true );
-      d->_readNotifier->connect( &SocketNotifier::sigActivated, *d, &AsyncDataSourcePrivate::notifierActivated );
+
+    for ( const auto readFd : readFds ) {
+      if ( readFd >= 0 ) {
+        mode |= IODevice::ReadOnly;
+        d->_readFds.push_back( {
+          readFd,
+          SocketNotifier::create( readFd, SocketNotifier::Read | AbstractEventSource::Error, true )
+        });
+        zypp::io::setFDBlocking( readFd, false );
+        d->_readFds.back()._readNotifier->connect( &SocketNotifier::sigActivated, *d, &AsyncDataSourcePrivate::notifierActivated );
+      }
     }
+
     if ( writeFd >= 0 ) {
       mode |= IODevice::WriteOnly;
       d->_writeFd = writeFd;
@@ -166,7 +177,17 @@ namespace zyppng {
       d->_writeNotifier = SocketNotifier::create( writeFd, SocketNotifier::Write | AbstractEventSource::Error, false );
       d->_writeNotifier->connect( &SocketNotifier::sigActivated, *d, &AsyncDataSourcePrivate::notifierActivated );
     }
-    return IODevice::open( mode );
+
+    if( !IODevice::open( mode ) ) {
+      d->_readFds.clear();
+      d->_writeNotifier.reset();
+      d->_writeFd = -1;
+      return false;
+    }
+
+    // make sure we have enough read buffers
+    setReadChannelCount( d->_readFds.size() );
+    return true;
   }
 
   off_t zyppng::AsyncDataSource::writeData( const char *data, off_t count )
@@ -180,71 +201,103 @@ namespace zyppng {
     return count;
   }
 
-  off_t zyppng::AsyncDataSource::readData( char *buffer, off_t bufsize )
+  off_t zyppng::AsyncDataSource::readData( uint channel, char *buffer, off_t bufsize )
   {
     Z_D();
-    const auto read = eintrSafeCall( ::read, d->_readFd, buffer, bufsize );
-
-    // special case for remote close
-    if ( read == 0 ) {
-      d->closeReadChannel( RemoteClose );
-      return -1;
-    } else if ( read < 0 ) {
+    if ( channel >= d->_readFds.size() ) {
+      ERR << constants::outOfRangeErrMsg << std::endl;
+      throw std::logic_error( constants::outOfRangeErrMsg.data() );
+    }
+    const auto read = eintrSafeCall( ::read, d->_readFds[channel]._readFd, buffer, bufsize );
+    if ( read < 0 ) {
       switch ( errno ) {
-#if EAGAIN != EWOULDBLOCK
-        case EWOULDBLOCK:
-#endif
+      #if EAGAIN != EWOULDBLOCK
+              case EWOULDBLOCK:
+      #endif
         case EAGAIN: {
-          return 0;
+          return -2;
         }
-        default: {
-          d->closeReadChannel( InternalError );
-          return -1;
-        }
+        default:
+          break;
       }
     }
     return read;
   }
 
-  size_t AsyncDataSource::rawBytesAvailable() const
+  size_t AsyncDataSource::rawBytesAvailable( uint channel ) const
   {
+    Z_D();
+
+    if ( channel >= d->_readFds.size() ) {
+      ERR << constants::outOfRangeErrMsg << std::endl;
+      throw std::logic_error( constants::outOfRangeErrMsg.data() );
+    }
+
     if ( isOpen() && canRead() )
-      return zyppng::bytesAvailableOnFD( d_func()->_readFd );
+      return zyppng::bytesAvailableOnFD( d->_readFds[channel]._readFd );
     return 0;
+  }
+
+  void AsyncDataSource::readChannelChanged ( uint channel )
+  {
+    Z_D();
+    if ( channel >= d->_readFds.size() ) {
+      ERR << constants::outOfRangeErrMsg << std::endl;
+      throw std::logic_error( constants::outOfRangeErrMsg.data() );
+    }
   }
 
   void zyppng::AsyncDataSource::close()
   {
     Z_D();
-    d->_readNotifier.reset();
+    for( uint i = 0; i < d->_readFds.size(); ++i ) {
+      auto &readChan = d->_readFds[i];
+      readChan._readNotifier.reset();
+      if ( readChan._readFd >= 0)
+        d->_sigReadFdClosed.emit( i, UserRequest );
+    }
+    d->_readFds.clear();
+
     d->_writeNotifier.reset();
     d->_writeBuffer.clear();
-
-    if ( d->_readFd >= 0)
-      d->_sigReadFdClosed.emit( UserRequest );
     if ( d->_writeFd >= 0 )
       d->_sigWriteFdClosed.emit( UserRequest );
 
     IODevice::close();
   }
 
-  bool AsyncDataSource::waitForReadyRead(int timeout)
+  bool AsyncDataSource::waitForReadyRead( int timeout )
   {
     Z_D();
     if ( !canRead() )
       return false;
 
+    return waitForReadyRead( d->_currentReadChannel, timeout );
+  }
+
+  bool AsyncDataSource::waitForReadyRead( uint channel, int timeout )
+  {
+    Z_D();
+    if ( !canRead() )
+      return false;
+
+    if ( channel >= d->_readFds.size() ) {
+      ERR << constants::outOfRangeErrMsg << std::endl;
+      throw std::logic_error( constants::outOfRangeErrMsg.data() );
+    }
+
     bool gotRR = false;
-    auto rrConn = AutoDisconnect( d->_readyRead.connect([&](){
-      gotRR = true;
+    auto rrConn = AutoDisconnect( d->_channelReadyRead.connect([&]( int activated ){
+      gotRR = ( channel == activated );
     }) );
 
     // we can only wait if we are open for reading and still have a valid fd
-    while ( readFdOpen() && canRead() && !gotRR ) {
+    auto &channelRef = d->_readFds[ channel ];
+    while ( readFdOpen(channel) && canRead() && !gotRR ) {
       int rEvents = 0;
-      if ( EventDispatcher::waitForFdEvent( d->_readFd,  AbstractEventSource::Read | AbstractEventSource::Error , rEvents, timeout ) ) {
+      if ( EventDispatcher::waitForFdEvent( channelRef._readFd,  AbstractEventSource::Read | AbstractEventSource::Error , rEvents, timeout ) ) {
         //simulate signal from read notifier
-        d->notifierActivated( *d->_readNotifier, rEvents );
+        d->notifierActivated( *channelRef._readNotifier, rEvents );
       } else {
         //timeout
         return false;
@@ -253,23 +306,52 @@ namespace zyppng {
     return gotRR;
   }
 
+  void AsyncDataSource::flush ()
+  {
+    Z_D();
+    if ( !canWrite() )
+      return;
+
+    int timeout = -1;
+    while ( canWrite() && d->_writeBuffer.frontSize() ) {
+      int rEvents = 0;
+      if ( EventDispatcher::waitForFdEvent( d->_writeFd,  AbstractEventSource::Write | AbstractEventSource::Error , rEvents, timeout ) ) {
+        //simulate signal from write notifier
+        d->readyWrite();
+      } else {
+        //timeout
+        return;
+      }
+    }
+  }
+
   SignalProxy<void (AsyncDataSource::ChannelCloseReason)> AsyncDataSource::sigWriteFdClosed()
   {
     return d_func()->_sigWriteFdClosed;
   }
 
-  SignalProxy<void (AsyncDataSource::ChannelCloseReason)> AsyncDataSource::sigReadFdClosed()
+  SignalProxy<void( uint, AsyncDataSource::ChannelCloseReason )> AsyncDataSource::sigReadFdClosed()
   {
     return d_func()->_sigReadFdClosed;
   }
 
-  SignalProxy<void (std::size_t)> AsyncDataSource::sigBytesWritten()
-  {
-    return d_func()->_sigBytesWritten;
-  }
-
   bool AsyncDataSource::readFdOpen() const
   {
-    return ( d_func()->_readNotifier && d_func()->_readFd >= 0 );
+    Z_D();
+    if ( !d->_readChannels.size() )
+      return false;
+    return readFdOpen( d_func()->_currentReadChannel );
   }
+
+  bool AsyncDataSource::readFdOpen(uint channel) const
+  {
+    Z_D();
+    if ( channel >= d->_readFds.size() ) {
+      ERR << constants::outOfRangeErrMsg << std::endl;
+      throw std::logic_error( constants::outOfRangeErrMsg.data() );
+    }
+    auto &channelRef = d->_readFds[ channel ];
+    return ( channelRef._readNotifier && channelRef._readFd >= 0 );
+  }
+
 }

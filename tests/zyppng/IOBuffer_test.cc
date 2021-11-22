@@ -110,7 +110,7 @@ BOOST_AUTO_TEST_CASE(reserveAndRead)
   // fill buffer with an arithmetic progression
   for (int i = 1; i < 256; ++i) {
     zyppng::ByteArray ba(i, char(i));
-    char *ringPos = buf.reserve(i);
+    char *ringPos = buf.reserve( i );
     BOOST_REQUIRE(ringPos);
     memcpy(ringPos, ba.data(), i);
   }

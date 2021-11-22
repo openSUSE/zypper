@@ -15,7 +15,7 @@
 #ifndef ZYPPNG_IO_PROCESS_H_DEFINED
 #define ZYPPNG_IO_PROCESS_H_DEFINED
 
-#include <zypp-core/zyppng/base/Base>
+#include <zypp-core/zyppng/io/AsyncDataSource>
 #include <zypp-core/zyppng/base/Signals>
 #include <memory>
 #include <map>
@@ -26,7 +26,7 @@ namespace zyppng {
   class ProcessPrivate;
   class IODevice;
 
-  class Process : public Base
+  class Process : public AsyncDataSource
   {
     ZYPP_DECLARE_PRIVATE(Process);
   public:
@@ -34,16 +34,26 @@ namespace zyppng {
      * For passing additional environment variables to set
      */
     using Environment = std::map<std::string,std::string>;
-
     using Ptr = std::shared_ptr<Process>;
     using WeakPtr = std::weak_ptr<Process>;
+
+    enum OutputChannelMode {
+      Seperate,
+      Merged
+    };
+
+    enum OutputChannel {
+      StdOut = 0,
+      StdErr = 1
+    };
 
     static Ptr create ();
     ~Process();
 
-    bool start (const char *const *argv);
+    bool start ( const char *const *argv );
     void stop  ( int signal = SIGTERM );
     bool isRunning ();
+    void close () override;
 
     const std::string &executedCommand () const;
     const std::string &execError() const;
@@ -72,10 +82,6 @@ namespace zyppng {
     const std::vector<int> &fdsToMap () const;
     void addFd ( int fd );
 
-    std::shared_ptr<IODevice> stdinDevice ();
-    std::shared_ptr<IODevice> stdoutDevice ();
-    std::shared_ptr<IODevice> stderrDevice ();
-
     int stdinFd ();
     int stdoutFd ();
     int stderrFd ();
@@ -83,6 +89,9 @@ namespace zyppng {
     SignalProxy<void ()> sigStarted  ();
     SignalProxy<void ()> sigFailedToStart  ();
     SignalProxy<void ( int )> sigFinished ();
+
+    OutputChannelMode outputChannelMode() const;
+    void setOutputChannelMode(const OutputChannelMode &outputChannelMode);
 
   protected:
     Process();

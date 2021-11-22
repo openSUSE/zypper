@@ -2327,7 +2327,7 @@ namespace zypp
         prog->addFd( scriptPipe->writeFd );
 
         // set up the AsyncDataSource to read script output
-        if ( !scriptSource->open( scriptPipe->readFd ) )
+        if ( !scriptSource->openFds( std::vector<int>{ scriptPipe->readFd } ) )
           ZYPP_THROW( target::rpm::RpmSubprocessException( "Failed to open scriptFD to subprocess" ) );
 
         prog->sigStarted().connect( [&](){
@@ -2336,17 +2336,10 @@ namespace zypp
           messagePipe->unrefWrite();
           scriptPipe->unrefWrite();
 
-          // read the stdout and forward it to our log
-          prog->stdoutDevice()->connectFunc( &zyppng::IODevice::sigReadyRead, [&](){
-            while( prog->stdoutDevice()->canReadLine() ) {
-              L_DBG("zypp-rpm") << "<stdout> " << prog->stdoutDevice()->readLine().asStringView(); // no endl! - readLine does not trim
-            }
-          });
-
-          // read the stderr and forward it to our log
-          prog->stderrDevice()->connectFunc( &zyppng::IODevice::sigReadyRead, [&](){
-            while( prog->stderrDevice()->canReadLine() ) {
-              L_ERR("zypp-rpm") << "<stderr> " << prog->stderrDevice()->readLine().asStringView(); // no endl! - readLine does not trim
+          // read the stdout and stderr and forward it to our log
+          prog->connectFunc( &zyppng::IODevice::sigChannelReadyRead, [&]( int channel ){
+            while( prog->canReadLine( channel ) ) {
+              L_ERR("zypp-rpm") <<  ( channel == zyppng::Process::StdOut ? "<stdout> " : "<stderr> " ) << prog->channelReadLine( channel ).asStringView();  // no endl! - readLine does not trim
             }
           });
 
@@ -2378,7 +2371,7 @@ namespace zypp
 
         // this is the source for control messages from zypp-rpm , we will get structured data information
         // in form of protobuf messages
-        if ( !msgSource->open( messagePipe->readFd ) )
+        if ( !msgSource->openFds( std::vector<int>{ messagePipe->readFd } ) )
           ZYPP_THROW( target::rpm::RpmSubprocessException( "Failed to open read stream to subprocess" ) );
 
         zyppng::rpc::HeaderSizeType pendingMessageSize = 0;
@@ -2659,13 +2652,13 @@ namespace zypp
 
         // make sure to read all data from the log source
         bool readMsgs = false;
-        while( prog->stderrDevice()->canReadLine() ) {
+        while( prog->canReadLine( zyppng::Process::StdErr ) ) {
           readMsgs = true;
-          MIL << "zypp-rpm: " << prog->stderrDevice()->readLine().asStringView();
+          MIL << "zypp-rpm: " << prog->channelReadLine( zyppng::Process::StdErr ).asStringView();
         }
-        while( prog->stdoutDevice()->canReadLine() ) {
+        while( prog->canReadLine( zyppng::Process::StdOut ) ) {
           readMsgs = true;
-          MIL << "zypp-rpm: " << prog->stdoutDevice()->readLine().asStringView();
+          MIL << "zypp-rpm: " << prog->channelReadLine( zyppng::Process::StdOut ).asStringView();
         }
 
         while ( scriptSource->canReadLine() ) {

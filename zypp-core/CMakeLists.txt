@@ -243,6 +243,7 @@ SET( zyppng_core_HEADERS
 )
 
 SET( zyppng_io_private_HEADERS
+  zyppng/io/private/asyncdatasource_p.h
   zyppng/io/private/iobuffer_p.h
   zyppng/io/private/iodevice_p.h
   zyppng/io/private/socket_p.h

@@ -37,7 +37,7 @@ namespace zyppng {
     { }
 
     bool initSocket () ;
-    void setError ( Socket::SocketError error, std::string &&err );
+    void setError ( Socket::SocketError error, std::string &&err, bool emit = true );
     bool handleConnectError ( int error );
 
     bool transition ( Socket::SocketState newState );
@@ -61,12 +61,12 @@ namespace zyppng {
     bool _borrowedSocket = false;
 
     //error handling
+    bool _emittedErr = false;
     Socket::SocketError _error = Socket::NoError;
     std::string _errorDesc;
 
     //signals
     Signal< void(Socket::SocketError)> _sigError;
-    Signal< void (std::size_t)> _sigBytesWritten;
     Signal< void()> _incomingConnection;
     Signal< void()> _connected;
     Signal< void()> _disconnected;

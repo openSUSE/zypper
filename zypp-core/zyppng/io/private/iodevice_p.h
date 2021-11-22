@@ -15,6 +15,8 @@
 #ifndef ZYPPNG_IO_IODEVICE_P_DEFINED
 #define ZYPPNG_IO_IODEVICE_P_DEFINED
 
+#include <vector>
+#include <functional>
 #include <zypp-core/zyppng/io/iodevice.h>
 #include <zypp-core/zyppng/base/private/base_p.h>
 #include "iobuffer_p.h"
@@ -22,12 +24,22 @@
 
 namespace zyppng {
 
+  namespace constants {
+    constexpr std::string_view outOfRangeErrMsg("Channel index out of range");
+  }
+
   class IODevicePrivate : public BasePrivate {
   public:
     IODevicePrivate ( IODevice &p );
-    IOBuffer _readBuf;
+
+    std::vector<IOBuffer> _readChannels;
+    uint _currentReadChannel = 0;
+
     IODevice::OpenMode _mode = IODevice::Closed;
-    Signal< void()> _readyRead;
+    Signal<void()>    _readyRead;
+    Signal<void(uint)> _channelReadyRead;
+    Signal< void (std::size_t)> _sigBytesWritten;
+    Signal< void ()> _sigAllBytesWritten;
   };
 
 }

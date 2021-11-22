@@ -516,7 +516,8 @@ bool EventDispatcher::waitForFdEvent( const int fd, int events , int &revents , 
         if ( errno == EINTR )
           continue;
 
-        break;
+        ERR << "g_poll error: " << strerror(errno) << std::endl;
+        return false;
       }
       case 1:
         eventTriggered = true;

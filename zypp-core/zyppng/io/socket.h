@@ -87,11 +87,6 @@ namespace zyppng {
     void close() override;
 
     /*!
-     * Returns the current number of bytes that can be read from the socket.
-     */
-    size_t bytesAvailable() const override;
-
-    /*!
      * Returns the current number of bytes that are not yet written to the socket.
      */
     size_t bytesPending() const;
@@ -208,12 +203,6 @@ namespace zyppng {
     SignalProxy<void ()> sigDisconnected ();
 
     /*!
-     * Signal is emitted every time bytes have been written to the underlying socket.
-     * This can be used to track how much data was actually sent.
-     */
-    SignalProxy<void ( std::size_t )> sigBytesWritten ();
-
-    /*!
      * Signal is emitted whenever a error happend in the socket. Make sure to check
      * the actual error code to determine if the error is fatal.
      */
@@ -232,9 +221,10 @@ namespace zyppng {
 
     // IODevice interface
   protected:
-    size_t rawBytesAvailable() const override;
+    size_t rawBytesAvailable( uint channel = 0 ) const override;
     off_t writeData(const char *data, off_t count) override;
-    off_t readData(char *buffer, off_t bufsize) override;
+    off_t readData( uint channel, char *buffer, off_t bufsize ) override;
+    void  readChannelChanged ( uint channel ) override;
   };
 }
 #endif
