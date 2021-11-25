@@ -1710,7 +1710,7 @@ void RpmDb::doInstallPackage( const Pathname & filename, RpmInstFlags flags, cal
   cmdout.set( "lineno", lineno );
 
   // LEGACY: collect and forward additional rpm output in finish
-  std::string rpmmsg;				// TODO: immediately forward lines via Callback::report rather than collecting
+  std::string rpmmsg;
   std::vector<std::string> configwarnings;	// TODO: immediately process lines rather than collecting
 
   while ( systemReadLine( line ) )
@@ -1766,7 +1766,10 @@ void RpmDb::doInstallPackage( const Pathname & filename, RpmInstFlags flags, cal
     sstr << "rpm output:" << endl << rpmmsg << endl;
     historylog.comment(sstr.str());
     // TranslatorExplanation the colon is followed by an error message
-    ZYPP_THROW(RpmSubprocessException(_("RPM failed: ") + (rpmmsg.empty() ? error_message : rpmmsg) ));
+    auto excpt { RpmSubprocessException(_("RPM failed: ") + error_message ) };
+    if ( not rpmmsg.empty() )
+      excpt.addHistory( rpmmsg );
+    ZYPP_THROW(std::move(excpt));
   }
   else if ( ! rpmmsg.empty() )
   {
@@ -1777,7 +1780,7 @@ void RpmDb::doInstallPackage( const Pathname & filename, RpmInstFlags flags, cal
     sstr << "Additional rpm output:" << endl << rpmmsg << endl;
     historylog.comment(sstr.str());
 
-    // report additional rpm output in finish
+    // report additional rpm output in finish (LEGACY! Lines are immediately reported as InstallResolvableReport::contentRpmout)
     // TranslatorExplanation Text is followed by a ':'  and the actual output.
     report->finishInfo(str::form( "%s:\n%s\n", _("Additional rpm output"),  rpmmsg.c_str() ));
   }
@@ -1890,7 +1893,7 @@ void RpmDb::doRemovePackage( const std::string & name_r, RpmInstFlags flags, cal
 
 
   // LEGACY: collect and forward additional rpm output in finish
-  std::string rpmmsg;		// TODO: immediately forward lines via Callback::report rather than collecting
+  std::string rpmmsg;
 
   // got no progress from command, so we fake it:
   // 5  - command started
@@ -1922,7 +1925,10 @@ void RpmDb::doRemovePackage( const std::string & name_r, RpmInstFlags flags, cal
     sstr << "rpm output:" << endl << rpmmsg << endl;
     historylog.comment(sstr.str());
     // TranslatorExplanation the colon is followed by an error message
-    ZYPP_THROW(RpmSubprocessException(_("RPM failed: ") + (rpmmsg.empty() ? error_message: rpmmsg) ));
+    auto excpt { RpmSubprocessException(_("RPM failed: ") + error_message ) };
+    if ( not rpmmsg.empty() )
+      excpt.addHistory( rpmmsg );
+    ZYPP_THROW(std::move(excpt));
   }
   else if ( ! rpmmsg.empty() )
   {
@@ -1933,7 +1939,7 @@ void RpmDb::doRemovePackage( const std::string & name_r, RpmInstFlags flags, cal
     sstr << "Additional rpm output:" << endl << rpmmsg << endl;
     historylog.comment(sstr.str());
 
-    // report additional rpm output in finish
+    // report additional rpm output in finish (LEGACY! Lines are immediately reported as RemoveResolvableReport::contentRpmout)
     // TranslatorExplanation Text is followed by a ':'  and the actual output.
     report->finishInfo(str::form( "%s:\n%s\n", _("Additional rpm output"),  rpmmsg.c_str() ));
   }
