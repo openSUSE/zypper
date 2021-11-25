@@ -128,7 +128,7 @@ void CommitSummary::writeFailedInstalls( std::ostream & out )
 
   label = str::form( label.c_str(), _failedInstalls.size() );
 
-  out << endl << ( ColorContext::HIGHLIGHT << label ) << endl;
+  out << endl << ( ColorContext::MSG_ERROR << label ) << endl;
   writeResolvableList( out, _failedInstalls, ColorContext::NEGATIVE );
 }
 
@@ -143,7 +143,7 @@ void CommitSummary::writeSkippedInstalls( std::ostream & out )
 
   label = str::form( label.c_str(), _failedInstalls.size() );
 
-  out << endl << ( ColorContext::HIGHLIGHT << label ) << endl;
+  out << endl << ( ColorContext::MSG_WARNING << label ) << endl;
   writeResolvableList( out, _skippedInstalls, ColorContext::NEGATIVE );
 }
 
@@ -158,7 +158,7 @@ void CommitSummary::writeFailedRemovals( std::ostream & out )
 
   label = str::form( label.c_str(), _failedInstalls.size() );
 
-  out << endl << ( ColorContext::HIGHLIGHT << label ) << endl;
+  out << endl << ( ColorContext::MSG_ERROR << label ) << endl;
   writeResolvableList( out, _failedRemovals, ColorContext::NEGATIVE );
 }
 
@@ -173,7 +173,7 @@ void CommitSummary::writeSkippedRemovals( std::ostream & out )
 
   label = str::form( label.c_str(), _failedInstalls.size() );
 
-  out << endl << ( ColorContext::HIGHLIGHT << label ) << endl;
+  out << endl << ( ColorContext::MSG_WARNING << label ) << endl;
   writeResolvableList( out, _skippedRemovals, ColorContext::NEGATIVE );
 }
 
