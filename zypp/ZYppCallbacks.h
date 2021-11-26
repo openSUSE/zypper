@@ -669,6 +669,37 @@ namespace zypp
       };
 #endif
 
+      ///////////////////////////////////////////////////////////////////
+      /// \brief Report active throughout the whole rpm transaction.
+      ///
+      /// The report covers events not directly related to an individual
+      /// sub-task. Mostly log lines.
+      /// \todo maybe include the sub-task reports here as well, so it
+      /// becomes the only report needed to follow the transaction.
+      ///////////////////////////////////////////////////////////////////
+      struct SingleTransReport : public callback::ReportBase
+      {
+        /** \c "zypp-rpm/logline" report a line suitable to be written to the screen.
+         * UserData:
+         * \c "line"  : std::reference_wrapper<const std::string>; the line to show
+         * \c "level" : enum class loglevel; rendering hint
+         */
+        static const UserData::ContentType contentLogline;
+        /** Rendering hint for log-lines to show. */
+        enum class loglevel { dbg, msg, war, err, crt };
+        /** Suggested prefix for log-lines to show. */
+        static const char *const loglevelPrefix( loglevel level_r )
+        {
+          switch ( level_r ) {
+            case loglevel::crt:  return "fatal error: ";
+            case loglevel::err:  return "error: ";
+            case loglevel::war:  return "warning: ";
+            case loglevel::msg:  return "";
+            case loglevel::dbg:  return "D: ";
+          }
+        }
+      };
+
       // Generic transaction reports, this is used for verifying and preparing tasks, the name param
       // for the start function defines which report we are looking at
       struct TransactionReportSA : public callback::ReportBase

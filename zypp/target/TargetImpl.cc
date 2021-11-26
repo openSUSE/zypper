@@ -76,6 +76,7 @@
 
 // include the error codes from zypp-rpm
 #include "tools/zypp-rpm/errorcodes.h"
+#include <rpm/rpmlog.h>
 
 #include <optional>
 
@@ -1851,6 +1852,54 @@ namespace zypp
       }
     }
 
+
+    ///////////////////////////////////////////////////////////////////
+    /// \brief Convenience SendReport<rpm::SingleTransReport> wrapper.
+    ///
+    /// Provide convenience methods to invoke a generic \ref report
+    /// supplied with the proper \ref UserData and \ref ContentType,
+    ///////////////////////////////////////////////////////////////////
+    struct SendSingleTransReport : public callback::SendReport<rpm::SingleTransReport>
+    {
+      /** Convenience to send a \ref contentLogline. */
+      void sendLogline( const std::string & line_r, ReportType::loglevel level_r = ReportType::loglevel::msg )
+      {
+        callback::UserData data { ReportType::contentLogline };
+        data.set( "line", std::cref(line_r) );
+        data.set( "level", level_r );
+        report( data );
+      }
+      /** Convenience to send a \ref contentLogline translating a rpm loglevel. */
+      void sendLoglineRpm( const std::string & line_r, unsigned rpmlevel_r )
+      {
+        auto u2rpmlevel = []( unsigned rpmlevel_r ) -> ReportType::loglevel {
+          switch ( rpmlevel_r ) {
+            case RPMLOG_EMERG:  [[fallthrough]];  // system is unusable
+            case RPMLOG_ALERT:  [[fallthrough]];  // action must be taken immediately
+            case RPMLOG_CRIT:                     // critical conditions
+              return ReportType::loglevel::crt;
+            case RPMLOG_ERR:                      // error conditions
+              return ReportType::loglevel::err;
+            case RPMLOG_WARNING:                  // warning conditions
+              return ReportType::loglevel::war;
+            default:            [[fallthrough]];
+            case RPMLOG_NOTICE: [[fallthrough]];  // normal but significant condition
+            case RPMLOG_INFO:                     // informational
+              return ReportType::loglevel::msg;
+            case RPMLOG_DEBUG:
+              return ReportType::loglevel::dbg;
+          }
+        };
+        sendLogline( line_r, u2rpmlevel( rpmlevel_r ) );
+      }
+
+    private:
+      void report( const callback::UserData & userData_r )
+      { (*this)->report( userData_r ); }
+    };
+
+    const callback::UserData::ContentType rpm::SingleTransReport::contentLogline { "zypp-rpm", "logline" };
+
     const callback::UserData::ContentType rpm::InstallResolvableReportSA::contentRpmout( "zypp-rpm","installpkgsa" );
     const callback::UserData::ContentType rpm::RemoveResolvableReportSA::contentRpmout( "zypp-rpm","removepkgsa" );
     const callback::UserData::ContentType rpm::CommitScriptReportSA::contentRpmout( "zypp-rpm","scriptsa" );
@@ -1860,6 +1909,9 @@ namespace zypp
     void TargetImpl::commitInSingleTransaction(const ZYppCommitPolicy &policy_r, CommitPackageCache &packageCache_r, ZYppCommitResult &result_r)
     {
       namespace zpt = zypp::proto::target;
+
+      SendSingleTransReport report; // active throughout the whole rpm transaction
+
       // steps: this is our todo-list
       ZYppCommitResult::TransactionStepList & steps( result_r.rTransactionStepList() );
       MIL << "TargetImpl::commit(<list>" << policy_r << ")" << steps.size() << endl;
@@ -2063,7 +2115,7 @@ namespace zypp
           } else if ( cleanupreport ) {
             sendLogRep( (*cleanupreport), rpm::CleanupPackageReportSA::contentRpmout );
           } else {
-            WAR << "Got rpm output without active report " << line << std::endl;
+            WAR << "Got rpm output without active report " << line; // no endl! - readLine does not trim
           }
 
           // remember rpm output
@@ -2381,9 +2433,7 @@ namespace zypp
                 ERR << "Failed to parse " << m.messagetypename() << " message from zypp-rpm." << std::endl;
                 continue;
               }
-
-              sendRpmLineToReport( p.line() );
-
+              report.sendLoglineRpm( p.line(), p.level() );
 
             } else if (  mName == "zypp.proto.target.PackageBegin" )  {
               finalizeCurrentReport();
