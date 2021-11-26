@@ -29,39 +29,66 @@
 ///////////////////////////////////////////////////////////////////
 namespace
 {
+  using loglevel = zypp::target::rpm::SingleTransReport::loglevel;
+
+  /** Print additional rpm outout line and scan for %script errors. */
+  inline void processAdditionalRpmOutputLine( const std::string & line_r, loglevel level_r = loglevel::msg, const char *const prefix_r = nullptr )
+  {
+    static str::smatch what;
+    Out::Info info( Zypper::instance().out() );
+    ColorStream msg( info << "", ColorContext::HIGHLIGHT );
+
+    std::string_view msgline { zypp::strv::rtrim( line_r, "\n" ) };
+
+    if ( prefix_r ) {
+      // a line without prefix (from rpm log subsystem via singletrans report)
+      static str::regex rx("^%.* scriptlet failed, ");
+      if ( str::regex_match( line_r, what, rx ) )
+        Zypper::instance().setExitInfoCode( ZYPPER_EXIT_INF_RPM_SCRIPT_FAILED );
+
+      switch ( level_r ) {
+        case loglevel::crt: [[fallthrough]];
+        case loglevel::err:
+          msg << ( ColorContext::MSG_ERROR << prefix_r<<msgline );
+          break;
+        case loglevel::war:
+          msg << ( ColorContext::MSG_WARNING << prefix_r<<msgline );
+          break;
+        case loglevel::msg:
+          msg << prefix_r<<msgline;
+          break;
+        case loglevel::dbg:
+          msg << ( ColorContext::LOWLIGHT << prefix_r<<msgline );
+          break;
+      }
+    }
+    else {
+      // a single line with prefix (parsed from traditional rpm calls stdout/stderr)
+      static str::regex rx("^(warning|error): %.* scriptlet failed, ");
+      if ( str::regex_match( line_r, what, rx ) ) {
+        Zypper::instance().setExitInfoCode( ZYPPER_EXIT_INF_RPM_SCRIPT_FAILED );
+        msg << ( (line_r[0] == 'w' ? ColorContext::MSG_WARNING : ColorContext::MSG_ERROR) << msgline );
+      }
+      else
+        msg << msgline;
+    }
+  }
+
   /** Print additional rpm outout and scan for %script errors. */
   void processAdditionalRpmOutput( const std::string & output_r )
   {
-    if ( ! output_r.empty() )
-    {
-      static str::regex rx("^(warning|error): %.* scriptlet failed, ");
-      static str::smatch what;
-      Out::Info info( Zypper::instance().out() );
-      ColorStream msg( info << "", ColorContext::HIGHLIGHT );
-      auto chkLine {
-        [&]( const std::string & line ) -> void {
-          if ( str::regex_match( line, what, rx ) ) {
-            msg << ( (line[0] == 'w' ? ColorContext::MSG_WARNING : ColorContext::MSG_ERROR) << line );
-            Zypper::instance().setExitInfoCode( ZYPPER_EXIT_INF_RPM_SCRIPT_FAILED );
-          }
-          else
-            msg << line;
-        }
-      };
+    if ( output_r.empty() )
+      return;
 
-      if ( output_r.find( '\n' ) == std::string::npos ) {
-        // singleline
-        chkLine( output_r );
-      }
-      else {
-        // multiline
-        std::istringstream input( output_r );
-        for ( iostr::EachLine in( input ); in; in.next() ) {
-          if ( in.lineNo() > 1 )
-            msg << endl;
-          chkLine( *in );
-        }
-      }
+    if ( output_r.find( '\n' ) == std::string::npos ) {
+      // singleline
+      processAdditionalRpmOutputLine( output_r );
+    }
+    else {
+      // multiline
+      std::istringstream input( output_r );
+      for ( iostr::EachLine in( input ); in; in.next() )
+        processAdditionalRpmOutputLine( *in );
     }
   }
 
@@ -534,6 +561,21 @@ private:
 
 
 ///////////////////////////////////////////////////////////////////
+/// \brief Report active throughout the whole rpm transaction.
+///////////////////////////////////////////////////////////////////
+struct SingleTransReportReceiver : public callback::ReceiveReport<target::rpm::SingleTransReport>
+{
+  void report( const UserData & userData_r ) override
+  {
+    if ( userData_r.type() == ReportType::contentLogline ) {
+      const std::string & line { userData_r.get<std::reference_wrapper<const std::string>>("line").get() };
+      ReportType::loglevel level { userData_r.get<ReportType::loglevel>("level") };
+      processAdditionalRpmOutputLine( line, level, ReportType::loglevelPrefix( level ) );
+    }
+  }
+};
+
+///////////////////////////////////////////////////////////////////
  // progress for removing a resolvable during a single transaction
 struct RemoveResolvableSAReportReceiver : public callback::ReceiveReport<target::rpm::RemoveResolvableReportSA>
 {
@@ -878,6 +920,7 @@ class RpmCallbacks {
     ZmartRecipients::InstallResolvableReportReceiver _removeReceiver;
     ZmartRecipients::FindFileConflictstReportReceiver _fileConflictsReceiver;
 
+    ZmartRecipients::SingleTransReportReceiver _singleTransaReceiver;  // active throughout the whole rpm transaction
     ZmartRecipients::RemoveResolvableSAReportReceiver _installSaReceiver;
     ZmartRecipients::InstallResolvableSAReportReceiver _removeSaReceiver;
     ZmartRecipients::CommitScriptReportSAReportReceiver _scriptSaReceiver;
@@ -893,6 +936,7 @@ class RpmCallbacks {
       _removeReceiver.connect();
       _fileConflictsReceiver.connect();
 
+      _singleTransaReceiver.connect();
       _installSaReceiver.connect();
       _removeSaReceiver.connect();
       _scriptSaReceiver.connect();
@@ -908,6 +952,7 @@ class RpmCallbacks {
       _removeReceiver.disconnect();
       _fileConflictsReceiver.disconnect();
 
+      _singleTransaReceiver.disconnect();
       _installSaReceiver.disconnect();
       _removeSaReceiver.disconnect();
       _scriptSaReceiver.disconnect();
