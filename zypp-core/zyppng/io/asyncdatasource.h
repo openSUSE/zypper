@@ -59,6 +59,9 @@ namespace zyppng {
     off_t writeData(const char *data, off_t count) override;
     off_t readData(char *buffer, off_t bufsize) override;
     size_t rawBytesAvailable() const override;
+
+  private:
+    using IODevice::open;
   };
 }
 

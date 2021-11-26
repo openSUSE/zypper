@@ -27,7 +27,7 @@ namespace zyppng {
   /*!
    * State implementation for the metalink detection phase,
    * this state issues a HEAD request while setting the magic
-   * "Accept: *\/*, application/metalink+xml, application/metalink4+xml"
+   * "Accept: *\/\*, application/metalink+xml, application/metalink4+xml"
    * header in the request to figure out if a metalink file is available or not.
    *
    * In order to use metalink support the server

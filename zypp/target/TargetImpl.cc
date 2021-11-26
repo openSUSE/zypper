@@ -1896,7 +1896,8 @@ namespace zypp
 
       bool abort = false;
       zypp::AutoDispose<std::unordered_map<int, ManagedFile>> locCache([]( std::unordered_map<int, ManagedFile> &data ){
-        for ( auto &[key, value] : data ) {
+        for ( auto &[_, value] : data ) {
+          (void)_; // unsused; for older g++ versions
           value.resetDispose();
         }
         data.clear();
