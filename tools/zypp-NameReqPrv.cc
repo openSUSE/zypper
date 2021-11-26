@@ -126,8 +126,8 @@ struct Table
     #define fmtREPO "(%2d)%-*s"
     #define argREPO slv.repository().info().priority(), _maxREPO, slv.repository().name().c_str()
 
-    #define fmtTIME "%10ld"
-    #define argTIME time_t( slv.isSystem() ? slv.installtime() : slv.buildtime() )
+    #define fmtTIME "%s%10ld"
+    #define argTIME  ( slv.isSystem() && slv.installtime() ? "i" : "b" ), time_t( slv.isSystem() && slv.installtime() ? slv.installtime() : slv.buildtime() )
 
     #define fmtVEND "%s"
     #define argVEND slv.vendor().c_str()
