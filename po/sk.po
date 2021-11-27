@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-10-13 15:45+0200\n"
-"PO-Revision-Date: 2021-10-13 19:11+0000\n"
+"PO-Revision-Date: 2021-11-27 14:13+0000\n"
 "Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
 "Language-Team: Slovak <https://l10n.opensuse.org/projects/zypper/master/sk/>"
 "\n"
@@ -2361,7 +2361,7 @@ msgstr "Vyberte balíky výlučne podľa schopnosti."
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/installremove.cc:82
 msgid "remove (rm) [OPTIONS] <CAPABILITY> ..."
-msgstr "remove (rm) [voľby] <schopnosť> ..."
+msgstr "remove (rm) [VOĽBY] <SCHOPNOSŤ> ..."
 
 #. translators: command summary: remove, rm
 #: src/commands/installremove.cc:84
@@ -2407,7 +2407,7 @@ msgstr "Odinštalovanie zdrojových balíkov nie je definované a implementovan�
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/installremove.cc:166
 msgid "install (in) [OPTIONS] <CAPABILITY|RPM_FILE_URI> ..."
-msgstr "install (in) [voľby] <schopnosť|uri_rpm_súboru> ..."
+msgstr "install (in) [VOĽBY] <SCHOPNOSŤ|URI_SÚBORU_RPM> ..."
 
 #. translators: command summary: install, in
 #: src/commands/installremove.cc:168
@@ -2884,7 +2884,7 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/nullcommands.cc:37
 msgid "what-provides (wp) <CAPABILITY>"
-msgstr "what-provides (wp) <schopnosť>"
+msgstr "what-provides (wp) <SCHOPNOSŤ>"
 
 #. translators: command summary: what-provides, wp
 #: src/commands/nullcommands.cc:39
