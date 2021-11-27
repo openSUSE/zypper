@@ -1787,8 +1787,8 @@ Repository Options: :: {nop}
 *--no-gpg-checks*::
 	Ignore GPG check failures and continue. If a GPG issue occurs when using this option zypper prints and logs a warning and automatically continues without interrupting the operation. Use this option with caution, as you can easily overlook security problems by using it. (see section *GPG checks*)
 
-*--gpg-auto-import-keys*::
-	If new repository signing key is found, do not ask what to do; trust and import it automatically. This option causes that the new key is imported also in non-interactive mode, where it would otherwise got rejected.
+*--gpg-auto-import-keys* _KEY_ID_::
+	If the specified repository signing key is found, do not ask what to do; trust and import it automatically. This option causes that the new key is imported also in non-interactive mode, where it would otherwise got rejected. The KEY_ID argument is optional; when left unspecified, any repository signing key which is found will be trusted and imported automatically. You can specify this option multiple times.
 
 *-p*, *--plus-repo* _URI_::
 	Use an additional repository for this operation. The repository aliased tmp# and named by the specified URI will be added for this operation and removed at the end. You can specify this option multiple times.
