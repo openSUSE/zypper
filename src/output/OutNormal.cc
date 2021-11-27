@@ -49,13 +49,19 @@ bool OutNormal::infoWarningFilter( Verbosity verbosity_r, Type mask )
   return false;
 }
 
+void OutNormal::fixupProgressNL()
+{
+  if ( !_newline )  // An active Progress bar is not NL terminated
+    cout << ansi::tty::clearLN; // Wipe it before writing out a normal line to the screen
+    // Alternative : cout << endl; to Keep the progress bar visible.
+}
+
 void OutNormal::info( const std::string & msg_r, Verbosity verbosity_r, Type mask )
 {
   if ( infoWarningFilter( verbosity_r, mask ) )
     return;
 
-  if ( !_newline )
-    cout << endl;
+  fixupProgressNL();
 
   ColorString msg( msg_r, ColorContext::MSG_STATUS );
   if ( verbosity_r == Out::QUIET )
@@ -75,8 +81,7 @@ void OutNormal::warning( const std::string & msg, Verbosity verbosity_r, Type ma
   if ( infoWarningFilter( verbosity_r, mask ) )
     return;
 
-  if ( !_newline )
-    cout << endl;
+  fixupProgressNL();
 
   cout << ( ColorContext::MSG_WARNING << _("Warning: ") ) << msg << endl;
   _newline = true;
@@ -84,8 +89,7 @@ void OutNormal::warning( const std::string & msg, Verbosity verbosity_r, Type ma
 
 void OutNormal::error( const std::string & problem_desc, const std::string & hint )
 {
-  if ( !_newline )
-    cout << endl;
+  fixupProgressNL();
 
   cerr << ( ColorContext::MSG_ERROR << problem_desc );
   if ( !hint.empty() && verbosity() > Out::QUIET )
@@ -98,8 +102,7 @@ void OutNormal::error( const std::string & problem_desc, const std::string & hin
 
 void OutNormal::error( const Exception & e, const std::string & problem_desc, const std::string & hint )
 {
-  if ( !_newline )
-    cout << endl;
+  fixupProgressNL();
 
   // problem and cause
   cerr << ( ColorContext::MSG_ERROR << problem_desc << endl << zyppExceptionReport(e) ) << endl;
@@ -352,8 +355,7 @@ void OutNormal::dwnldProgressEnd( const Url & uri, long rate, TriBool error )
 
 void OutNormal::prompt( PromptId id, const std::string & prompt, const PromptOptions & poptions, const std::string & startdesc )
 {
-  if ( !_newline )
-    cout << endl;
+  fixupProgressNL();
 
   if ( startdesc.empty() )
   {

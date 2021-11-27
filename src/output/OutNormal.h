@@ -85,6 +85,7 @@ protected:
 
 private:
   bool infoWarningFilter(Verbosity verbosity, Type mask);
+  void fixupProgressNL(); //< Make sure we're at BOL even if a ProgressBar is active
   void displayProgress(const std::string & s, int percent);
   void displayTick(const std::string & s);
 
