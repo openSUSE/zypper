@@ -10,11 +10,11 @@ extern "C"
   #include <libintl.h>
 }
 #include <iostream>
-#include <boost/algorithm/string.hpp>
 
 #include <zypp/base/Logger.h>
 #include <zypp/base/Measure.h>
 #include <zypp/base/String.h>
+#include <zypp/base/StringV.h>
 #include <zypp/base/Exception.h>
 #include <zypp/ZConfig.h>
 
@@ -560,10 +560,14 @@ std::vector<ZyppFlags::CommandGroup> Config::cliOptions()
               _("Ignore GPG check failures and continue.")
         },
         { "gpg-auto-import-keys", 0, ZyppFlags::OptionalArgument | ZyppFlags::Repeatable, std::move( ZyppFlags::GenericContainerType( gpg_auto_import_keys, ARG_KEY_ID, ",", "*" ).
-              after( [this](const ZyppFlags::CommandOption &, const boost::optional<std::string> & arg) {
+              after( [](const ZyppFlags::CommandOption &, const boost::optional<std::string> & arg) {
                 if (arg.has_value()) {
                   std::vector<std::string> key_ids;
-                  boost::split(key_ids, *arg, boost::is_any_of(","));
+                  strv::splitRx(*arg, ",", [&key_ids]( std::string_view key_id ) {
+                    if ( ! key_id.empty() )
+                      key_ids.push_back( std::string(key_id) );
+                  });
+
                   for (const std::string& key_id : key_ids) {
                     std::string warn = str::form(
                         _("Turning on '%s' for key id '%s'. This signing key will be automatically imported if present!"),
