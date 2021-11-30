@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-07-26 11:04+0200\n"
-"PO-Revision-Date: 2021-07-26 20:11+0000\n"
-"Last-Translator: Dingzhong Chen <wsxy162@gmail.com>\n"
+"PO-Revision-Date: 2021-11-30 09:11+0000\n"
+"Last-Translator: Hillwood Yang <hillwoodroc@gmail.com>\n"
 "Language-Team: Chinese (China) <https://l10n.opensuse.org/projects/libzypp/"
 "master/zh_CN/>\n"
 "Language: zh_CN\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 4.7.1\n"
+"X-Generator: Weblate 4.8.1\n"
 
 #: zypp/CountryCode.cc:50
 msgid "Unknown country: "
@@ -4186,7 +4186,7 @@ msgstr "软件源中没有 url。"
 #: zypp/repo/SUSEMediaVerifier.cc:104
 #, boost-format
 msgid "Expected medium %1%/%2% identified by file '%3%' with content:"
-msgstr ""
+msgstr "由'%3%' 文件标识的预期介质 %1%/%2% 内容为："
 
 #. [lhs][rhs] 0 = installed; 1 = to be installed
 #. TranslatorExplanation %1%(filename) %2%(package1) %3%(package2)
@@ -4630,6 +4630,8 @@ msgid ""
 "install %1% from vendor %2%\n"
 "  replacing %3% from vendor %4%"
 msgstr ""
+"由供应商 %2% 安装 %1% 代替\n"
+"由供应商 %4% 安装 %3%"
 
 #: zypp/solver/detail/SATResolver.cc:1507
 #, boost-format
@@ -4689,7 +4691,7 @@ msgstr "新更新消息"
 
 #: zypp/target/TargetImpl.cc:2619
 msgid "Executing the transaction failed because of the following problems:"
-msgstr ""
+msgstr "由于以下问题执行操作失败："
 
 #. TranslatorExplanation after semicolon is error message
 #. TranslatorExplanation the colon is followed by an error message
@@ -4958,11 +4960,11 @@ msgstr "命令退出，未知错误。"
 #: zypp-core/zyppng/io/forkspawnengine.cc:111
 #: zypp-core/zyppng/io/forkspawnengine.cc:359
 msgid "Invalid spawn arguments given."
-msgstr ""
+msgstr "子参数无效。"
 
 #: zypp-core/zyppng/io/forkspawnengine.cc:174
 msgid "Unable to create control pipe."
-msgstr ""
+msgstr "无法创建控制管道。"
 
 #: zypp-core/zyppng/io/forkspawnengine.cc:240
 #, c-format, boost-format
@@ -4994,22 +4996,22 @@ msgstr "无法派生 (%s)。"
 #: zypp-core/zyppng/io/forkspawnengine.cc:306
 #, c-format, boost-format
 msgid "Can't exec '%s', chdir failed (%s)."
-msgstr ""
+msgstr "无法执行 '%s'，chdir 失败 (%s) 。"
 
 #: zypp-core/zyppng/io/forkspawnengine.cc:309
 #, c-format, boost-format
 msgid "Can't exec '%s', chroot failed (%s)."
-msgstr ""
+msgstr "无法执行  '%s'，chroot 失败 (%s)。"
 
 #: zypp-core/zyppng/io/forkspawnengine.cc:312
 #, c-format, boost-format
 msgid "Can't exec '%s', exec failed (%s)."
-msgstr ""
+msgstr "无法执行 '%s'，执行失败 (%s)。"
 
 #: zypp-core/zyppng/io/forkspawnengine.cc:316
 #, c-format, boost-format
 msgid "Can't exec '%s', unexpected error."
-msgstr ""
+msgstr "无法执行 '%s'，意外错误。"
 
 #~ msgid "%s does not belong to a distupgrade repository"
 #~ msgstr "%s 不属于发行版升级源"
