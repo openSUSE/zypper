@@ -113,7 +113,7 @@ void OutXML::progress( const std::string & id, const std::string& label, int val
   writeProgressTag( id, label, value, false );
 }
 
-void OutXML::progressEnd( const std::string & id, const std::string& label, bool error )
+void OutXML::progressEnd( const std::string & id, const std::string& label, const std::string & /*donetag*/, bool error )
 {
   if ( progressFilter() )
     return;
