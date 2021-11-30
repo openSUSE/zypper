@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: zypper.ko\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-10-13 15:45+0200\n"
-"PO-Revision-Date: 2021-10-29 09:13+0000\n"
+"PO-Revision-Date: 2021-11-30 12:15+0000\n"
 "Last-Translator: Kim Tae Kyeong <kim@taekyeong.me>\n"
 "Language-Team: Korean <https://l10n.opensuse.org/projects/zypper/master/ko/>"
 "\n"
@@ -76,25 +76,25 @@ msgstr "'%1%'을(를) 실행하여 종속성 문제를 복구할 수 있습니�
 #, c-format, boost-format
 msgid "The following package failed to install:"
 msgid_plural "The following %d packages failed to install:"
-msgstr[0] ""
+msgstr[0] "%d 패키지 설치 실패함:"
 
 #: src/CommitSummary.cc:140
 #, c-format, boost-format
 msgid "The following package installation was skipped:"
 msgid_plural "The following %d package installations were skipped:"
-msgstr[0] ""
+msgstr[0] "%d 패키지 설치를 건너뜀:"
 
 #: src/CommitSummary.cc:155
 #, c-format, boost-format
 msgid "The following package failed to uninstall:"
 msgid_plural "The following %d packages failed to uninstall:"
-msgstr[0] ""
+msgstr[0] "%d 패키지 제거를 실패함:"
 
 #: src/CommitSummary.cc:170
 #, c-format, boost-format
 msgid "The following package removal was skipped:"
 msgid_plural "The following %d package removal were skipped:"
-msgstr[0] ""
+msgstr[0] "%d 패키지 제거를 건너뜀:"
 
 #. translators: Appended when clipping a long enumeration:
 #. "ConsoleKit-devel ConsoleKit-doc ... and 20828 more items."
@@ -172,9 +172,9 @@ msgstr "테이블에서 텍스트를 약어로 표시하지 않습니다."
 
 #. translators: --table-style, -s, %1% denotes the supported range of the integer argument (e.g. "1-11")
 #: src/Config.cc:424
-#, fuzzy, boost-format
+#, boost-format
 msgid "Table style (%1%)."
-msgstr "테이블 스타일(정수)."
+msgstr "테이블 스타일 (%1%)."
 
 #: src/Config.cc:428 src/commands/optionsets.cc:284
 msgid "Entering non-interactive mode."
@@ -430,7 +430,7 @@ msgstr "지정된 리포지토리에서 '%s' 패턴을 찾을 수 없습니다."
 #: src/RequestFeedback.cc:69
 #, c-format, boost-format
 msgid "Source package '%s' not found in specified repositories."
-msgstr "지정된 리포지토리에서 원본 패키지 '%s'을(를) 찾을 수 없습니다."
+msgstr "지정된 리포지토리에서 소스 패키지 '%s'을(를) 찾을 수 없습니다."
 
 #. just in case
 #: src/RequestFeedback.cc:71
@@ -686,7 +686,7 @@ msgstr[0] "다음 응용 프로그램이 설치됩니다."
 #, c-format, boost-format
 msgid "The following package is going to be REMOVED:"
 msgid_plural "The following %d packages are going to be REMOVED:"
-msgstr[0] "다음 패키지가 제거됩니다."
+msgstr[0] "다음 %d 패키지가 제거됩니다:"
 
 #: src/Summary.cc:641
 #, c-format, boost-format
@@ -716,7 +716,7 @@ msgstr[0] "다음 응용 프로그램이 제거됩니다."
 #, c-format, boost-format
 msgid "The following package is going to be upgraded:"
 msgid_plural "The following %d packages are going to be upgraded:"
-msgstr[0] "다음 패키지가 업그레이드됩니다."
+msgstr[0] "다음 %d 패키지가 업그레이드됩니다:"
 
 #: src/Summary.cc:685
 #, c-format, boost-format
@@ -746,7 +746,7 @@ msgstr[0] "다음 응용 프로그램이 업그레이드됩니다."
 #, c-format, boost-format
 msgid "The following package is going to be downgraded:"
 msgid_plural "The following %d packages are going to be downgraded:"
-msgstr[0] "다음 패키지가 다운그레이드됩니다."
+msgstr[0] "다음 %d 패키지가 다운그레이드됩니다:"
 
 #: src/Summary.cc:731
 #, c-format, boost-format
@@ -776,7 +776,7 @@ msgstr[0] "다음 응용 프로그램이 다운그레이드됩니다."
 #, c-format, boost-format
 msgid "The following package is going to be reinstalled:"
 msgid_plural "The following %d packages are going to be reinstalled:"
-msgstr[0] "다음 패키지가 다시 설치됩니다."
+msgstr[0] "다음 %d 패키지가 재설치됩니다:"
 
 #: src/Summary.cc:774
 #, c-format, boost-format
@@ -807,7 +807,7 @@ msgstr[0] "다음 응용 프로그램이 다시 설치됩니다."
 msgid "The following recommended package was automatically selected:"
 msgid_plural ""
 "The following %d recommended packages were automatically selected:"
-msgstr[0] "다음 권장 패키지가 자동으로 선택되었습니다."
+msgstr[0] "다음 %d 권장 패키지가 자동으로 선택되었습니다:"
 
 #: src/Summary.cc:939
 #, c-format, boost-format
@@ -1104,7 +1104,7 @@ msgstr "작업 후에 %s의 여유 공간이 생깁니다."
 #: src/Summary.cc:1432
 msgid "package to upgrade"
 msgid_plural "packages to upgrade"
-msgstr[0] "꾸러미로 업그레이드"
+msgstr[0] "업그레이드할 패키지"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
 #: src/Summary.cc:1443
@@ -1116,7 +1116,7 @@ msgstr[0] "로 다운그레이드"
 #: src/Summary.cc:1446
 msgid "package to downgrade"
 msgid_plural "packages to downgrade"
-msgstr[0] "꾸러미로 다운그레이드"
+msgstr[0] "다운그레이드할 패키지"
 
 #. translators: this text will be preceded by a number e.g. "5 new"
 #: src/Summary.cc:1457
@@ -1128,7 +1128,7 @@ msgstr[0] "새로운"
 #: src/Summary.cc:1460
 msgid "new package to install"
 msgid_plural "new packages to install"
-msgstr[0] "새로운 꾸러미로 설치"
+msgstr[0] "설치할 새로운 패키지"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
 #: src/Summary.cc:1471
@@ -1140,7 +1140,7 @@ msgstr[0] "로 재설치"
 #: src/Summary.cc:1474
 msgid "package to reinstall"
 msgid_plural "packages to reinstall"
-msgstr[0] "꾸러미로 재설치"
+msgstr[0] "재설치할 패키지"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
 #: src/Summary.cc:1485
@@ -1152,7 +1152,7 @@ msgstr[0] "를 제거"
 #: src/Summary.cc:1488
 msgid "package to remove"
 msgid_plural "packages to remove"
-msgstr[0] "꾸러미 제거됨"
+msgstr[0] "제거할 패키지"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
 #: src/Summary.cc:1499
@@ -1164,7 +1164,7 @@ msgstr[0] "로 제조사 변경"
 #: src/Summary.cc:1502
 msgid "package will change vendor"
 msgid_plural "packages will change vendor"
-msgstr[0] "꾸러미의 제조사가 변경됨"
+msgstr[0] "공급자를 변경할 패키지"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
 #: src/Summary.cc:1513
@@ -1176,7 +1176,7 @@ msgstr[0] "개의 아키텍쳐 변경"
 #: src/Summary.cc:1516
 msgid "package will change arch"
 msgid_plural "packages will change arch"
-msgstr[0] "개의 아키텍쳐로 변경할 꾸러미"
+msgstr[0] "아키텍쳐를 변경할 패키지"
 
 #. translators: this text will be preceded by a number e.g. "5 new"
 #: src/Summary.cc:1527
@@ -1289,6 +1289,8 @@ msgid ""
 "repository provider or check his web site. Many provider maintain a web page "
 "showing the fingerprints of the GPG keys they are using."
 msgstr ""
+"GPG pubkey는 지문으로 명확하게 식별됩니다. 키 이름에 의존하지 마십시오. 제시된 키가 정상인지 확실하지 않은 경우 저장소 "
+"제공자에게 문의하거나 웹 사이트를 확인하십시오. 많은 공급자가 사용 중인 GPG 키의 지문을 보여주는 웹 페이지를 유지 관리합니다."
 
 #: src/callbacks/keyring.h:37
 msgid ""
@@ -1562,7 +1564,7 @@ msgstr ""
 #, boost-format
 msgid "Received %1% new package signing key from repository %2%:"
 msgid_plural "Received %1% new package signing keys from repository %2%:"
-msgstr[0] ""
+msgstr[0] "%1%개의 새로운 패키지 서명 키를 저장소 %2%에서 가져옴:"
 
 #: src/callbacks/keyring.h:494
 msgid ""
@@ -1570,6 +1572,8 @@ msgid ""
 "repository. In order to validate those packages upon download and "
 "installation the new keys will be imported into the rpm database."
 msgstr ""
+"이러한 추가 키는 일반적으로 저장소에서 제공하는 패키지에 서명하는 데 사용됩니다. 다운로드 및 설치 시 해당 패키지의 유효성을 검사하기 "
+"위해 새 키를 rpm 데이터베이스로 가져옵니다."
 
 #: src/callbacks/keyring.h:496
 msgid "New:"
@@ -1913,13 +1917,13 @@ msgstr ""
 #: src/callbacks/rpm.h:711 src/callbacks/rpm.h:718
 #, c-format, boost-format
 msgid "Executing %s script for: %s"
-msgstr ""
+msgstr "%s의 스크립트 실행 중: %s"
 
 #. TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
 #: src/callbacks/rpm.h:725
 #, c-format, boost-format
 msgid "Executing %s script"
-msgstr ""
+msgstr "%s 스크립트 실행 중"
 
 #. TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
 #: src/callbacks/rpm.h:857
@@ -6721,7 +6725,7 @@ msgstr ""
 #: src/utils/misc.cc:93
 msgid "package"
 msgid_plural "packages"
-msgstr[0] "꾸러미"
+msgstr[0] "패키지"
 
 #: src/utils/misc.cc:95
 msgid "pattern"
@@ -6741,7 +6745,7 @@ msgstr[0] "패치"
 #: src/utils/misc.cc:101
 msgid "srcpackage"
 msgid_plural "srcpackages"
-msgstr[0] "src꾸러미"
+msgstr[0] "src패키지"
 
 #: src/utils/misc.cc:103
 msgid "application"
