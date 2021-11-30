@@ -34,18 +34,14 @@ namespace
   /** Print additional rpm outout line and scan for %script errors. */
   inline void processAdditionalRpmOutputLine( const std::string & line_r, loglevel level_r = loglevel::msg, const char *const prefix_r = nullptr )
   {
-    static str::smatch what;
     Out::Info info( Zypper::instance().out() );
     ColorStream msg( info << "", ColorContext::HIGHLIGHT );
 
     std::string_view msgline { zypp::strv::rtrim( line_r, "\n" ) };
 
     if ( prefix_r ) {
-      // a line without prefix (from rpm log subsystem via singletrans report)
-      static str::regex rx("^%.* scriptlet failed, ");
-      if ( str::regex_match( line_r, what, rx ) )
-        Zypper::instance().setExitInfoCode( ZYPPER_EXIT_INF_RPM_SCRIPT_FAILED );
-
+      // Checking for ZYPPER_EXIT_INF_RPM_SCRIPT_FAILED (like in the traditional rpv case below)
+      // is not needed here. The script callback callback handles this.
       switch ( level_r ) {
         case loglevel::crt: [[fallthrough]];
         case loglevel::err:
@@ -65,6 +61,7 @@ namespace
     else {
       // a single line with prefix (parsed from traditional rpm calls stdout/stderr)
       static str::regex rx("^(warning|error): %.* scriptlet failed, ");
+      static str::smatch what;
       if ( str::regex_match( line_r, what, rx ) ) {
         Zypper::instance().setExitInfoCode( ZYPPER_EXIT_INF_RPM_SCRIPT_FAILED );
         msg << ( (line_r[0] == 'w' ? ColorContext::MSG_WARNING : ColorContext::MSG_ERROR) << msgline );
@@ -726,13 +723,14 @@ struct CommitScriptReportSAReportReceiver : public callback::ReceiveReport<targe
     // finsh progress; indicate error
     if ( _progress )
     {
-      (*_progress).error( error != NO_ERROR );
+      ProgressEnd donetag { error==NO_ERROR ? ProgressEnd::done : error==CRITICAL ? ProgressEnd::error : ProgressEnd::attention };
+      (*_progress).error( donetag );
       _progress.reset();
     }
 
-    if ( error != NO_ERROR )
+    if ( error == WARN )
       // don't write to output, the error should have been reported in problem() (bnc #381203)
-      Zypper::instance().setExitCode(ZYPPER_EXIT_ERR_ZYPP);
+      Zypper::instance().setExitInfoCode( ZYPPER_EXIT_INF_RPM_SCRIPT_FAILED );
   }
 
   void report( const UserData & userData_r ) override
