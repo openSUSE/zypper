@@ -74,7 +74,7 @@ public:
 
   virtual void promptHelp(const PromptOptions & poptions);
 
-  void setUseColors(bool value)
+  void setUseColors( bool value ) override
   { _use_colors = value; }
 
 protected:

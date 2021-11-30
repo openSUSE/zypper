@@ -126,17 +126,15 @@ int main( int argc, char **argv )
 
   MIL << "===== Hi, me zypper " VERSION << endl;
   dumpRange( MIL, argv, argv+argc, (sudo ? "===== 'sudo' ": "===== "), "'", "' '", "'", " =====" ) << endl;
-
-  OutNormal out( Out::QUIET );
-
+  Zypper & zypper( Zypper::instance() );
 
   if ( ::signal( SIGINT, signal_handler ) == SIG_ERR )
-    out.error("Failed to set SIGINT handler.");
+    zypper.out().error("Failed to set SIGINT handler.");
   if ( ::signal (SIGTERM, signal_handler ) == SIG_ERR )
-    out.error("Failed to set SIGTERM handler.");
+    zypper.out().error("Failed to set SIGTERM handler.");
 
   if ( ::signal( SIGPIPE, signal_nopipe ) == SIG_ERR )
-    out.error("Failed to set SIGPIPE handler.");
+    zypper.out().error("Failed to set SIGPIPE handler.");
 
   try
   {
@@ -151,19 +149,18 @@ int main( int argc, char **argv )
   catch ( const Exception & e )
   {
     ZYPP_CAUGHT( e );
-    out.error( e, "Failed to initialize zypper callbacks." );
-    report_a_bug( out );
+    zypper.out().error( e, "Failed to initialize zypper callbacks." );
+    report_a_bug( zypper.out() );
     return ZYPPER_EXIT_ERR_BUG;
   }
   catch (...)
   {
-    out.error( "Failed to initialize zypper callbacks." );
+    zypper.out().error( "Failed to initialize zypper callbacks." );
     ERR << "Failed to initialize zypper callbacks." << endl;
-    report_a_bug( out );
+    report_a_bug( zypper.out() );
     return ZYPPER_EXIT_ERR_BUG;
   }
 
-  Zypper & zypper( Zypper::instance() );
   int & exitcode { say_goodbye.exitcode };
   exitcode = zypper.main( argc, argv );
   if ( !exitcode )

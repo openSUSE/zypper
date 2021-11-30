@@ -872,6 +872,8 @@ public:
     return DtorReset( _verbosity, verbosity_r );
   }
 
+  /** Hint for a handler whether config would allow to use colors. */
+  virtual void setUseColors( bool yesno ) {}
 
 public:
   /** Return the type of the instance. */
