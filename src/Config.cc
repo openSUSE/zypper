@@ -131,19 +131,11 @@ namespace
     return ret;
   }
 
-  void setColorForOut ( const bool &set )
-  {
-    OutNormal *currOut = dynamic_cast<OutNormal *>( Zypper::instance().outputWriter() );
-    if ( currOut )
-      currOut->setUseColors( set );
-  }
+  void setColorForOut ( bool yesno_r )
+  { Zypper::instance().out().setUseColors( yesno_r ); }
 
-  void setOutVerbosity ( Out::Verbosity verb )
-  {
-    Out *currOut = Zypper::instance().outputWriter();
-    if ( currOut )
-      currOut->setVerbosity( verb );
-  }
+  void setOutVerbosity ( Out::Verbosity verb_r )
+  { Zypper::instance().out().setVerbosity( verb_r ); }
 } // namespace
 //////////////////////////////////////////////////////////////////
 

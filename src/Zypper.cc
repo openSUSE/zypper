@@ -260,24 +260,17 @@ Out & Zypper::out()
   // PENDING SigINT? Some frequently called place to avoid exiting from within the signal handler?
   immediateExitCheck();
 
-  if ( _out_ptr )
-    return *_out_ptr;
-
-  cerr << "uninitialized output writer" << endl;
-  ZYPP_THROW( ExitRequestException("no output writer") );
-}
-
-Out *Zypper::outputWriter()
-{
-  return _out_ptr;
-}
-
-void Zypper::setOutputWriter(Out *out)
-{
-  if ( _out_ptr ) {
-    delete _out_ptr;
-    _out_ptr = nullptr;
+  if ( not _out_ptr ) {
+    _out_ptr = new OutNormal( Out::QUIET );
   }
+
+  return *_out_ptr;
+}
+
+void Zypper::setOutputWriter( Out *out )
+{
+  if ( _out_ptr && _out_ptr != out )  // prevent self destruct
+    delete _out_ptr;
   _out_ptr = out;
 }
 
@@ -300,16 +293,15 @@ int Zypper::processGlobalOptions()
   MIL << "START" << endl;
 
   //setup the default output, this could be overridden by cli values
-  OutNormal * p = new OutNormal( _config.verbosity );
-  p->setUseColors( _config.do_colors );
-  setOutputWriter( p );
+  out().setVerbosity( _config.verbosity );
+  out().setUseColors( _config.do_colors );
 
   std::vector<ZyppFlags::CommandGroup> globalOpts = _config.cliOptions();
   int nextFlag = searchPackagesHintHack::argvCmdIdx = ZyppFlags::parseCLI( _argc, _argv, globalOpts );
 
   out().info( str::Format(_("Verbosity: %d")) % _config.verbosity , Out::HIGH );
   DBG << "Verbosity " << _config.verbosity << endl;
-  DBG << "Output type " << _out_ptr->type() << endl;
+  DBG << "Output type " << out().type() << endl;
 
   // ======== other global options ========
   {

@@ -142,8 +142,6 @@ public:
 
   // setters & getters
   Out & out();
-
-  Out *outputWriter ( );
   void setOutputWriter( Out * out );
 
   const Config & config()				{ return _config; }
