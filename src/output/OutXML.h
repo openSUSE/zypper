@@ -6,54 +6,37 @@
 class OutXML : public Out
 {
 public:
-  OutXML(Verbosity verbosity = NORMAL);
-  virtual ~OutXML();
+  OutXML( Verbosity verbosity );
+  ~OutXML() override;
 
 public:
-  virtual void info(const std::string & msg, Verbosity verbosity = NORMAL, Type mask = TYPE_ALL);
-  virtual void warning(const std::string & msg, Verbosity verbosity = NORMAL, Type mask = TYPE_ALL);
-  virtual void error(const std::string & problem_desc, const std::string & hint = "");
-  virtual void error(const Exception & e,
-             const std::string & problem_desc,
-             const std::string & hint = "");
+  void info( const std::string & msg, Verbosity verbosity, Type mask ) override;
+  void warning( const std::string & msg, Verbosity verbosity, Type mask ) override;
+  void error( const std::string & problem_desc, const std::string & hint ) override;
+  void error( const Exception & e, const std::string & problem_desc, const std::string & hint ) override;
 
   // progress
-  virtual void progressStart(const std::string & id,
-                             const std::string & label,
-                             bool is_tick = false);
-  virtual void progress(const std::string & id,
-                        const std::string & label,
-                        int value = -1);
-  virtual void progressEnd(const std::string & id,
-                           const std::string & label,
-                           bool error);
+  void progressStart( const std::string & id, const std::string & label, bool is_tick ) override;
+  void progress( const std::string & id, const std::string & label, int value ) override;
+  void progressEnd( const std::string & id, const std::string & label, const std::string & donetag, bool error ) override;
 
   // progress with download rate
-  virtual void dwnldProgressStart(const Url & uri);
-  virtual void dwnldProgress(const Url & uri,
-                             int value = -1,
-                             long rate = -1);
-  virtual void dwnldProgressEnd(const Url & uri,
-                                long rate = -1,
-                                TriBool error = false);
+  void dwnldProgressStart( const Url & uri ) override;
+  void dwnldProgress( const Url & uri, int value, long rate ) override;
+  void dwnldProgressEnd( const Url & uri, long rate, TriBool error ) override;
 
-  virtual void searchResult( const Table & table_r );
+  void searchResult( const Table & table_r ) override;
 
-  virtual void prompt(PromptId id,
-                      const std::string & prompt,
-                      const PromptOptions & poptions,
-                      const std::string & startdesc = "");
+  void prompt( PromptId id, const std::string & prompt, const PromptOptions & poptions, const std::string & startdesc ) override;
 
-  virtual void promptHelp(const PromptOptions & poptions);
+  void promptHelp( const PromptOptions & poptions ) override;
 
 protected:
-  virtual bool mine(Type type);
+  bool mine( Type type ) override;
 
 private:
-  bool infoWarningFilter(Verbosity verbosity, Type mask);
-  void writeProgressTag(const std::string & id,
-                        const std::string & label,
-                        int value, bool done, bool error = false);
+  bool infoWarningFilter( Verbosity verbosity, Type mask );
+  void writeProgressTag( const std::string & id, const std::string & label, int value, bool done, bool error = false );
 };
 
 #endif /*OUTXML_H_*/
