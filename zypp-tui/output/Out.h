@@ -3,6 +3,7 @@
 
 #include <string>
 #include <sstream>
+#include <optional>
 
 #include <zypp/base/Xml.h>
 #include <zypp/base/NonCopyable.h>
@@ -29,6 +30,9 @@ inline char * asYesNo( bool val_r ) { return val_r ? _("Yes") : _("No"); }
 using namespace zypp;
 
 class Zypper;
+
+/// ProgressBars default end tags.
+enum class ProgressEnd { done, attention, error };
 
 ///////////////////////////////////////////////////////////////////
 namespace text
@@ -770,12 +774,19 @@ public:
    * \param id      Identifier. Any string used to match multiple overlapping
    *                progress reports.
    * \param label   Progress description.
+   * \param donetag Optional string overwriting the default [done]/[error] tags.
    * \param error   <tt>false</tt> if the operation finished with success,
    *                <tt>true</tt> otherwise.
    */
   virtual void progressEnd(const std::string & id,
                            const std::string & label,
-                           bool error = false) = 0; // might be a string with error message instead
+                           const std::string & donetag,
+                           bool error = false) = 0;
+  /** \overload using the default [done]/[attention]/[error] tags in screen output. depending on \a donetag. */
+  void progressEnd( const std::string & id, const std::string & label, ProgressEnd donetag );
+  /** \overload using the default [done]/[error] tags in screen output depending on \a error. */
+  void progressEnd( const std::string & id, const std::string & label, bool error = false )
+  { progressEnd( id, label, error ? ProgressEnd::error : ProgressEnd::done ); }
   //@}
 
   /** \name Download progress with download rate */
@@ -979,7 +990,6 @@ public:
    */
   ProgressBar( Out & out_r, NoStartBar, const std::string & progressId_r, const std::string & label_r, unsigned current_r = 0, unsigned total_r = 0 )
     : _out( out_r )
-    , _error( indeterminate )
     , _progressId( progressId_r )
   {
     if ( total_r )
@@ -1016,9 +1026,9 @@ public:
   ~ProgressBar()
   {
     _progress.noSend();	// suppress ~ProgressData final report
-    if ( indeterminate( _error ) )
-      _error = ( _progress.reportValue() != 100 && _progress.reportPercent() );
-    _out.progressEnd( _progressId, outLabel( _progress.name() ), bool(_error) );
+    if ( not _donetag )
+      error( _progress.reportValue() != 100 && _progress.reportPercent() );
+    _out.progressEnd( _progressId, outLabel( _progress.name() ), *_donetag );
   }
 
   /** Immediately print the progress bar not waiting for a new trigger. */
@@ -1030,12 +1040,16 @@ public:
   { _progress.name( label_r ); print(); }
 
   /** Explicitly indicate the error condition for the final progress bar. */
-  void error( TriBool error_r = true )
-  { _error = error_r; }
+  void error( ProgressEnd donetag_r = ProgressEnd::error )
+  { _donetag = donetag_r; }
 
-  /** \overload to disambiguate. */
+  /** \overload just done/error.  */
   void error( bool error_r )
-  { _error = error_r; }
+  { _donetag = error_r ? ProgressEnd::error : ProgressEnd::done; }
+
+  /** Reset any error condition. */
+  void errorreset()
+  { _donetag.reset(); }
 
   /** \overload also change the progress bar label. */
   void error( const std::string & label_r )
@@ -1089,7 +1103,7 @@ private:
 
 private:
   Out & _out;
-  TriBool _error;
+  std::optional<ProgressEnd> _donetag;
   ProgressData _progress;
   std::string _progressId;
   std::string _labelPrefix;

@@ -201,7 +201,7 @@ void OutNormal::progress( const std::string & id, const std::string & label, int
   _newline = false;
 }
 
-void OutNormal::progressEnd( const std::string & id, const std::string & label, bool error )
+void OutNormal::progressEnd( const std::string & id, const std::string & label, const std::string & donetag, bool error )
 {
   if ( progressFilter() )
     return;
@@ -221,15 +221,10 @@ void OutNormal::progressEnd( const std::string & id, const std::string & label, 
 
     outstr.lhs << label << ' ';
     outstr.rhs << '[';
-    if ( error )
-      outstr.rhs << NEGATIVEString(_("error") );
-    else
-      outstr.rhs << _("done");
   }
-  else
-    outstr.rhs << (error ? _("error") : _("done"));
+  // else: just write the donetag
 
-  outstr.rhs << ']';
+  outstr.rhs << donetag << ']';
 
   std::string outline( outstr.get( termwidth() ) );
   cout << outline << endl << std::flush;

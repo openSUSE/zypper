@@ -116,6 +116,19 @@ void Out::searchResult( const Table & table_r )
   std::cout << table_r;
 }
 
+void Out::progressEnd( const std::string & id, const std::string & label, ProgressEnd donetag_r )
+{
+  // translator: Shown as result tag in a progress bar: ............[done]
+  static const std::string done      { _("done") };
+  // translator: Shown as result tag in a progress bar: .......[attention]
+  static const std::string attention { MSG_WARNINGString(_("attention")).str() };
+  // translator: Shown as result tag in a progress bar: ...........[error]
+  static const std::string error     { MSG_ERRORString(_("error")).str() };
+
+  const std::string & donetag { donetag_r==ProgressEnd::done ? done : donetag_r==ProgressEnd::error ? error : attention };
+  progressEnd( id, label, donetag, donetag_r==ProgressEnd::error );
+}
+
 ////////////////////////////////////////////////////////////////////////////////
 //	class Out::Error
 ////////////////////////////////////////////////////////////////////////////////
