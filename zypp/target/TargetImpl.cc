@@ -2141,9 +2141,10 @@ namespace zypp
             if( str::endsWith( l, endOfScriptTag ) ) {
               DBG << "Received end of script tag" << std::endl;
               gotEndOfScript = true;
-              l = l.substr( 0, l.size() - endOfScriptTag.size() );
-              if ( l.size() == 0 )
+              std::string::size_type rawsize { l.size() - endOfScriptTag.size() };
+              if ( not rawsize )
                 return;
+              l = l.substr( 0, rawsize );
             }
 
             sendRpmLineToReport( l );
