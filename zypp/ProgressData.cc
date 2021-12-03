@@ -67,6 +67,7 @@ namespace zypp
     if ( _d->_state == INIT )
     {
       _d->_state = RUN;
+      DBG << str::form( "{#%u|%s} START", numericId(), name().c_str() ) << endl;
     }
     // XXX << str::form( "{#%u|%s}(%lld%s)", numericId(), name().c_str(), _d->_last_val, ( hasRange() ? "%" : "!" ) ) << endl;
 
@@ -85,7 +86,7 @@ namespace zypp
     }
     else if ( _d->_state == END )
     {
-      DBG << str::form( "{#%u|%s}END", numericId(), name().c_str() ) << endl;
+      DBG << str::form( "{#%u|%s} END", numericId(), name().c_str() ) << endl;
     }
 
     return true;	// continue per default

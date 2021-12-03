@@ -2139,14 +2139,13 @@ namespace zypp
 
             std::string l = scriptSource->readLine().asString();
             if( str::endsWith( l, endOfScriptTag ) ) {
-              DBG << "Received end of script tag" << std::endl;
               gotEndOfScript = true;
               std::string::size_type rawsize { l.size() - endOfScriptTag.size() };
               if ( not rawsize )
                 return;
               l = l.substr( 0, rawsize );
             }
-
+            L_DBG("zypp-rpm") << "[rpm> " << l; // no endl! - readLine does not trim
             sendRpmLineToReport( l );
           }
         };
@@ -2177,7 +2176,6 @@ namespace zypp
             assert(false);
           }
 
-          DBG << "Starting new report, setting gotEndOfScript to false" << std::endl;
           gotEndOfScript = false;
         };
 
@@ -2280,7 +2278,6 @@ namespace zypp
             ( *cleanupreport)->progress( 100 );
             ( *cleanupreport)->finish( rpm::CleanupPackageReportSA::NO_ERROR );
           }
-          DBG << "Report finalized" << std::endl;
           currentStepId = -1;
           lineno = 0;
           rpmmsg.clear();
@@ -2338,14 +2335,14 @@ namespace zypp
           // read the stdout and forward it to our log
           prog->stdoutDevice()->connectFunc( &zyppng::IODevice::sigReadyRead, [&](){
             while( prog->stdoutDevice()->canReadLine() ) {
-              L_DBG("zypp-rpm") << "zypp-rpm stdout: " << prog->stdoutDevice()->readLine().asStringView(); // no endl! - readLine does not trim
+              L_DBG("zypp-rpm") << "<stdout> " << prog->stdoutDevice()->readLine().asStringView(); // no endl! - readLine does not trim
             }
           });
 
           // read the stderr and forward it to our log
           prog->stderrDevice()->connectFunc( &zyppng::IODevice::sigReadyRead, [&](){
             while( prog->stderrDevice()->canReadLine() ) {
-              L_ERR("zypp-rpm") << "zypp-rpm stderr: " << prog->stderrDevice()->readLine().asStringView(); // no endl! - readLine does not trim
+              L_ERR("zypp-rpm") << "<stderr> " << prog->stderrDevice()->readLine().asStringView(); // no endl! - readLine does not trim
             }
           });
 
@@ -2434,6 +2431,9 @@ namespace zypp
                 ERR << "Failed to parse " << m.messagetypename() << " message from zypp-rpm." << std::endl;
                 continue;
               }
+              ( p.level() >= RPMLOG_ERR     ? L_ERR("zypp-rpm")
+              : p.level() >= RPMLOG_WARNING ? L_WAR("zypp-rpm")
+              : L_DBG("zypp-rpm") ) << "[rpm " << p.level() << "> " << p.line(); // no endl! - readLine does not trim
               report.sendLoglineRpm( p.line(), p.level() );
 
             } else if (  mName == "zypp.proto.target.PackageBegin" )  {
@@ -2515,7 +2515,6 @@ namespace zypp
             } else if (  mName == "zypp.proto.target.ScriptFinished" )  {
 
               // we just read the message, we do not act on it because a ScriptError is reported after ScriptFinished
-              MIL << "Received" << mName << " from zypp-rpm" << std::endl;
 
             } else if (  mName == "zypp.proto.target.ScriptError" )  {
 
