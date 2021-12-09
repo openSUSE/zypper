@@ -57,7 +57,6 @@ SET( zypp_SRCS
   PoolQueryResult.cc
   ProblemSolution.cc
   Product.cc
-  #ProgressData.cc
   ProvideFilePolicy.cc
   PublicKey.cc
   PurgeKernels.cc
@@ -157,7 +156,6 @@ SET( zypp_HEADERS
   ProblemSolution.h
   ProblemTypes.h
   Product.h
-  #ProgressData.h
   ProvideFilePolicy.h
   PublicKey.h
   PurgeKernels.h
@@ -219,41 +217,23 @@ SET( zypp_base_HEADERS
   base/DrunkenBishop.h
   base/SerialNumber.h
   base/Env.h
-  #base/fXstream.h
   base/Random.h
   base/Algorithm.h
   base/Counter.h
   base/Debug.h
-  #base/DefaultIntegral.h
-  #base/DtorReset.h
-  #base/UserRequestException.h
   base/Functional.h
-  #base/GzStream.h
-  #base/InputStream.h
   base/Json.h
   base/LocaleGuard.h
   base/Measure.h
   base/NamedValue.h
-  #base/ProvideNumericId.h
   base/ReferenceCounted.h
   base/SetRelationMixin.h
   base/SetTracker.h
   base/Signal.h
-  #base/SimpleStreambuf.h
   base/StrMatcher.h
-  #base/Sysconfig.h
   base/TypeTraits.h
   base/ValueTransform.h
-  #base/WatchFile.h
 )
-
-IF (ENABLE_ZCHUNK_COMPRESSION)
-
-  #list( APPEND zypp_base_HEADERS
-  #  base/ZckStream.h
-  #)
-
-ENDIF(ENABLE_ZCHUNK_COMPRESSION)
 
 INSTALL(  FILES
   ${zypp_base_HEADERS}
@@ -295,39 +275,14 @@ SET( zypp_media_HEADERS
   media/MediaManager.h
   media/MediaNFS.h
   media/MediaSource.h
-  #media/MediaUserAuth.h
-  media/Mount.h
-  #media/ProxyInfo.h
-  #media/CredentialFileReader.h
-  #media/CredentialManager.h
-  #media/CurlConfig.h
-  #media/TransferSettings.h
   media/MediaPriority.h
-  #media/MetaLinkParser.h
   media/ZsyncParser.h
-  #media/MediaBlockList.h
   media/UrlResolverPlugin.h
 )
 
 INSTALL(  FILES
   ${zypp_media_HEADERS}
   DESTINATION ${INCLUDE_INSTALL_DIR}/zypp/media
-)
-
-IF ( LIBPROXY_FOUND )
-  #SET(zypp_media_proxyinfo_libproxy_HEADERS media/proxyinfo/ProxyInfoLibproxy.h)
-ENDIF( LIBPROXY_FOUND )
-
-SET( zypp_media_proxyinfo_HEADERS
-  #media/proxyinfo/ProxyInfoImpl.h
-  #media/proxyinfo/ProxyInfoSysconfig.h
-  #${zypp_media_proxyinfo_libproxy_HEADERS}
-  #media/proxyinfo/ProxyInfos.h
-)
-
-INSTALL(  FILES
-  ${zypp_media_proxyinfo_HEADERS}
-  DESTINATION ${INCLUDE_INSTALL_DIR}/zypp/media/proxyinfo
 )
 
 SET( zypp_parser_SRCS
@@ -339,9 +294,6 @@ SET( zypp_parser_SRCS
 )
 
 SET( zypp_parser_HEADERS
-  #parser/ParseException.h
-  #parser/IniParser.h
-  #parser/IniDict.h
   parser/HistoryLogReader.h
   parser/ParserProgress.h
   parser/RepoFileReader.h
@@ -741,6 +693,7 @@ SET ( zypp_core_compat_HEADERS
   TriBool.h
   Pathname.h
   ByteArray.h
+  ProgressData.h
 )
 
 INSTALL( FILES
@@ -773,13 +726,28 @@ SET ( zypp_core_base_compat_HEADERS
   base/PtrTypes.h
   base/Errno.h
   base/Iterable.h
+  base/DefaultIntegral.h
+  base/DtorReset.h
+  base/GzStream.h
+  base/InputStream.h
+  base/ProvideNumericId.h
+  base/SimpleStreambuf.h
+  base/Sysconfig.h
+  base/UserRequestException.h
+  base/WatchFile.h
+  base/fXstream.h
 )
+
+IF (ENABLE_ZCHUNK_COMPRESSION)
+list( APPEND zypp_core_base_compat_HEADERS
+  base/ZckStream.h
+)
+ENDIF(ENABLE_ZCHUNK_COMPRESSION)
 
 INSTALL( FILES
   ${zypp_core_base_compat_HEADERS}
   DESTINATION ${INCLUDE_INSTALL_DIR}/zypp/base
 )
-
 
 SET ( zypp_core_url_compat_HEADERS
   url/UrlException.h
@@ -792,13 +760,50 @@ INSTALL( FILES
   DESTINATION ${INCLUDE_INSTALL_DIR}/zypp/url
 )
 
+
+SET ( zypp_media_compat_HEADERS
+  media/CredentialFileReader.h
+  media/CredentialManager.h
+  media/MediaBlockList.h
+  media/MediaUserAuth.h
+  media/MetaLinkParser.h
+  media/ProxyInfo.h
+  media/TransferSettings.h
+  media/Mount.h
+  media/CurlConfig.h
+)
+
+INSTALL( FILES
+  ${zypp_media_compat_HEADERS}
+  DESTINATION ${INCLUDE_INSTALL_DIR}/zypp/media
+)
+
 SET ( zypp_core_parser_compat_HEADERS
   parser/xml/XmlEscape.h
+  parser/IniDict.h
+  parser/IniParser.h
+  parser/ParseException.h
 )
 
 INSTALL( FILES
   ${zypp_core_parser_compat_HEADERS}
   DESTINATION ${INCLUDE_INSTALL_DIR}/zypp/parser/xml
+)
+
+IF ( LIBPROXY_FOUND )
+  SET(zypp_media_proxyinfo_libproxy_HEADERS media/proxyinfo/ProxyInfoLibproxy.h)
+ENDIF( LIBPROXY_FOUND )
+
+SET( zypp_media_compat_proxyinfo_HEADERS
+  media/proxyinfo/ProxyInfoImpl.h
+  media/proxyinfo/ProxyInfoSysconfig.h
+  ${zypp_media_proxyinfo_libproxy_HEADERS}
+  media/proxyinfo/ProxyInfos.h
+)
+
+INSTALL(  FILES
+  ${zypp_media_compat_proxyinfo_HEADERS}
+  DESTINATION ${INCLUDE_INSTALL_DIR}/zypp/media/proxyinfo
 )
 
 add_subdirectory( zyppng )
@@ -840,7 +845,7 @@ ${zypp_parser_xml_HEADERS}
 ${zypp_parser_HEADERS}
 ${zypp_ui_HEADERS}
 ${zypp_media_HEADERS}
-${zypp_media_proxyinfo_HEADERS}
+${zypp_media_compat_proxyinfo_HEADERS}
 ${zypp_base_HEADERS}
 ${zypp_solver_HEADERS}
 ${zypp_solver_detail_HEADERS}
@@ -859,6 +864,7 @@ ${zypp_core_compat_HEADERS}
 ${zypp_core_base_compat_HEADERS}
 ${zypp_core_url_compat_HEADERS}
 ${zypp_core_parser_compat_HEADERS}
+${zypp_media_compat_HEADERS}
 )
 
 #
