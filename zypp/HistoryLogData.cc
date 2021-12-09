@@ -15,7 +15,7 @@
 #include <zypp/base/PtrTypes.h>
 #include <zypp/base/String.h>
 #include <zypp/base/Logger.h>
-#include <zypp/parser/ParseException.h>
+#include <zypp-core/parser/ParseException>
 
 #include <zypp/HistoryLogData.h>
 

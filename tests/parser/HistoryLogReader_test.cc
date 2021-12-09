@@ -1,6 +1,6 @@
 #include "TestSetup.h"
 #include <zypp/parser/HistoryLogReader.h>
-#include <zypp/parser/ParseException.h>
+#include <zypp-core/parser/ParseException>
 
 using namespace zypp;
 

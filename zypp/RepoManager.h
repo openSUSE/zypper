@@ -27,7 +27,7 @@
 #include <zypp/repo/ServiceType.h>
 #include <zypp/ServiceInfo.h>
 #include <zypp/RepoStatus.h>
-#include <zypp/ProgressData.h>
+#include <zypp-core/ui/ProgressData>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

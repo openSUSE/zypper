@@ -15,13 +15,13 @@
 #include <zypp/base/String.h>
 #include <zypp/base/Logger.h>
 #include <zypp/base/Gettext.h>
-#include <zypp/base/InputStream.h>
-#include <zypp/base/DefaultIntegral.h>
+#include <zypp-core/base/InputStream>
+#include <zypp-core/base/DefaultIntegral>
 
 #include <zypp/Pathname.h>
 
 #include <zypp/parser/xml/Reader.h>
-#include <zypp/parser/ParseException.h>
+#include <zypp-core/parser/ParseException>
 
 #include <zypp/RepoInfo.h>
 

@@ -18,8 +18,8 @@
 #include <zypp/base/Gettext.h>
 #include <zypp/base/Exception.h>
 #include <zypp/base/Measure.h>
-#include <zypp/base/WatchFile.h>
-#include <zypp/base/Sysconfig.h>
+#include <zypp-core/fs/WatchFile>
+#include <zypp-core/parser/Sysconfig>
 #include <zypp/base/IOStream.h>
 
 #include <zypp/ZConfig.h>

@@ -24,7 +24,7 @@
 
 #include <zypp/ZConfig.h>
 #include <zypp/PathInfo.h>
-#include <zypp/parser/IniDict.h>
+#include <zypp-core/parser/IniDict>
 
 #undef  ZYPP_BASE_LOGGER_LOGGROUP
 #define ZYPP_BASE_LOGGER_LOGGROUP "zypp::VendorAttr"

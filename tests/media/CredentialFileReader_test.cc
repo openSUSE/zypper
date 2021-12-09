@@ -5,9 +5,9 @@
 #include <zypp/Url.h>
 #include <zypp/PathInfo.h>
 #include <zypp/base/Easy.h>
-#include <zypp/media/MediaUserAuth.h>
+#include <zypp-media/auth/AuthData>
 
-#include <zypp/media/CredentialFileReader.h>
+#include <zypp-media/auth/CredentialFileReader>
 
 using std::cout;
 using std::endl;

@@ -17,15 +17,15 @@
 #include <zypp/ExternalProgram.h>
 #include <zypp/base/String.h>
 #include <zypp/base/Gettext.h>
-#include <zypp/base/Sysconfig.h>
+#include <zypp-core/parser/Sysconfig>
 #include <zypp/base/Gettext.h>
 
 #include <zypp/media/MediaCurl.h>
-#include <zypp/media/ProxyInfo.h>
-#include <zypp/media/MediaUserAuth.h>
-#include <zypp/media/CredentialManager.h>
-#include <zypp/media/CurlConfig.h>
-#include <zypp/media/CurlHelper.h>
+#include <zypp-curl/ProxyInfo>
+#include <zypp-curl/auth/CurlAuthData>
+#include <zypp-media/auth/CredentialManager>
+#include <zypp-curl/CurlConfig>
+#include <zypp-curl/private/curlhelper_p.h>
 #include <zypp/Target.h>
 #include <zypp/ZYppFactory.h>
 #include <zypp/ZConfig.h>
@@ -39,6 +39,175 @@
 #include <unistd.h>
 
 using std::endl;
+
+namespace internal {
+  using namespace zypp;
+  struct ProgressData
+  {
+    ProgressData( CURL *_curl, time_t _timeout = 0, const zypp::Url & _url = zypp::Url(),
+      zypp::ByteCount expectedFileSize_r = 0,
+      zypp::callback::SendReport<zypp::media::DownloadProgressReport> *_report = nullptr );
+
+    CURL	*curl;
+    zypp::Url	url;
+    time_t	timeout;
+    bool	reached;
+    bool      fileSizeExceeded;
+    zypp::callback::SendReport<zypp::media::DownloadProgressReport> *report;
+    zypp::ByteCount _expectedFileSize;
+
+    time_t _timeStart	= 0;	///< Start total stats
+    time_t _timeLast	= 0;	///< Start last period(~1sec)
+    time_t _timeRcv	= 0;	///< Start of no-data timeout
+    time_t _timeNow	= 0;	///< Now
+
+    double _dnlTotal	= 0.0;	///< Bytes to download or 0 if unknown
+    double _dnlLast	= 0.0;	///< Bytes downloaded at period start
+    double _dnlNow	= 0.0;	///< Bytes downloaded now
+
+    int    _dnlPercent= 0;	///< Percent completed or 0 if _dnlTotal is unknown
+
+    double _drateTotal= 0.0;	///< Download rate so far
+    double _drateLast	= 0.0;	///< Download rate in last period
+
+    void updateStats( double dltotal = 0.0, double dlnow = 0.0 );
+
+    int reportProgress() const;
+
+
+    // download rate of the last period (cca 1 sec)
+    double                                        drate_period;
+    // bytes downloaded at the start of the last period
+    double                                        dload_period;
+    // seconds from the start of the download
+    long                                          secs;
+    // average download rate
+    double                                        drate_avg;
+    // last time the progress was reported
+    time_t                                        ltime;
+    // bytes downloaded at the moment the progress was last reported
+    double                                        dload;
+    // bytes uploaded at the moment the progress was last reported
+    double                                        uload;
+  };
+
+
+
+  ProgressData::ProgressData(CURL *_curl, time_t _timeout, const Url &_url, ByteCount expectedFileSize_r, zypp::callback::SendReport< zypp::media::DownloadProgressReport> *_report)
+    : curl( _curl )
+    , url( _url )
+    , timeout( _timeout )
+    , reached( false )
+    , fileSizeExceeded ( false )
+    , report( _report )
+    , _expectedFileSize( expectedFileSize_r )
+  {}
+
+  void ProgressData::updateStats(double dltotal, double dlnow)
+  {
+    time_t now = _timeNow = time(0);
+
+    // If called without args (0.0), recompute based on the last values seen
+    if ( dltotal && dltotal != _dnlTotal )
+      _dnlTotal = dltotal;
+
+    if ( dlnow && dlnow != _dnlNow )
+    {
+      _timeRcv = now;
+      _dnlNow = dlnow;
+    }
+    else if ( !_dnlNow && !_dnlTotal )
+    {
+      // Start time counting as soon as first data arrives.
+      // Skip the connection / redirection time at begin.
+      return;
+    }
+
+    // init or reset if time jumps back
+    if ( !_timeStart || _timeStart > now )
+      _timeStart = _timeLast = _timeRcv = now;
+
+    // timeout condition
+    if ( timeout )
+      reached = ( (now - _timeRcv) > timeout );
+
+    // check if the downloaded data is already bigger than what we expected
+    fileSizeExceeded = _expectedFileSize > 0 && _expectedFileSize < static_cast<ByteCount::SizeType>(_dnlNow);
+
+    // percentage:
+    if ( _dnlTotal )
+      _dnlPercent = int(_dnlNow * 100 / _dnlTotal);
+
+    // download rates:
+    _drateTotal = _dnlNow / std::max( int(now - _timeStart), 1 );
+
+    if ( _timeLast < now )
+    {
+      _drateLast = (_dnlNow - _dnlLast) / int(now - _timeLast);
+      // start new period
+      _timeLast  = now;
+      _dnlLast   = _dnlNow;
+    }
+    else if ( _timeStart == _timeLast )
+      _drateLast = _drateTotal;
+  }
+
+  int ProgressData::reportProgress() const
+  {
+    if ( fileSizeExceeded )
+      return 1;
+    if ( reached )
+      return 1;	// no-data timeout
+    if ( report && !(*report)->progress( _dnlPercent, url, _drateTotal, _drateLast ) )
+      return 1;	// user requested abort
+    return 0;
+  }
+
+  const char * anonymousIdHeader()
+  {
+    // we need to add the release and identifier to the
+    // agent string.
+    // The target could be not initialized, and then this information
+    // is guessed.
+    static const std::string _value(
+      str::trim( str::form(
+        "X-ZYpp-AnonymousId: %s",
+        Target::anonymousUniqueId( Pathname()/*guess root*/ ).c_str() ) )
+      );
+    return _value.c_str();
+  }
+
+  const char * distributionFlavorHeader()
+  {
+    // we need to add the release and identifier to the
+    // agent string.
+    // The target could be not initialized, and then this information
+    // is guessed.
+    static const std::string _value(
+      str::trim( str::form(
+        "X-ZYpp-DistributionFlavor: %s",
+        Target::distributionFlavor( Pathname()/*guess root*/ ).c_str() ) )
+      );
+    return _value.c_str();
+  }
+
+  const char * agentString()
+  {
+    // we need to add the release and identifier to the
+    // agent string.
+    // The target could be not initialized, and then this information
+    // is guessed.
+    static const std::string _value(
+      str::form(
+        "ZYpp " LIBZYPP_VERSION_STRING " (curl %s) %s"
+        , curl_version_info(CURLVERSION_NOW)->version
+        , Target::targetDistribution( Pathname()/*guess root*/ ).c_str()
+        )
+      );
+    return _value.c_str();
+  }
+}
+
 
 using namespace internal;
 using namespace zypp::base;

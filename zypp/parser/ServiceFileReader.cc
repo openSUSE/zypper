@@ -13,10 +13,10 @@
 #include <zypp/base/Logger.h>
 #include <zypp/base/String.h>
 #include <zypp/base/Regex.h>
-#include <zypp/base/InputStream.h>
-#include <zypp/base/UserRequestException.h>
+#include <zypp-core/base/InputStream>
+#include <zypp-core/base/UserRequestException>
 
-#include <zypp/parser/IniDict.h>
+#include <zypp-core/parser/IniDict>
 #include <zypp/parser/ServiceFileReader.h>
 #include <zypp/ServiceInfo.h>
 

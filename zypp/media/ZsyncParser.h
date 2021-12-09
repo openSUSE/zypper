@@ -16,7 +16,7 @@
 
 #include <zypp/base/Exception.h>
 #include <zypp/base/NonCopyable.h>
-#include <zypp/media/MediaBlockList.h>
+#include <zypp-curl/parser/MediaBlockList>
 #include <zypp/Url.h>
 
 namespace zypp {

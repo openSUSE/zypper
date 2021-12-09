@@ -34,13 +34,13 @@ extern "C"
 #include <zypp/base/String.h>
 #include <zypp/base/Gettext.h>
 #include <zypp/base/LocaleGuard.h>
-#include <zypp/base/DtorReset.h>
+#include <zypp-core/base/DtorReset>
 
 #include <zypp/Date.h>
 #include <zypp/Pathname.h>
 #include <zypp/PathInfo.h>
 #include <zypp/PublicKey.h>
-#include <zypp/ProgressData.h>
+#include <zypp-core/ui/ProgressData>
 
 #include <zypp/target/rpm/RpmDb.h>
 #include <zypp/target/rpm/RpmCallbacks.h>

@@ -23,7 +23,7 @@ extern "C"
 
 #include <zypp/base/LogTools.h>
 #include <zypp/base/IOStream.h>
-#include <zypp/base/InputStream.h>
+#include <zypp-core/base/InputStream>
 #include <zypp/AutoDispose.h>
 #include <zypp/PathInfo.h>
 

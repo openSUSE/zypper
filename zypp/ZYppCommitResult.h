@@ -18,7 +18,7 @@
 
 #include <zypp/PoolItem.h>
 #include <zypp/sat/Transaction.h>
-#include <zypp/base/DefaultIntegral.h>
+#include <zypp-core/base/DefaultIntegral>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

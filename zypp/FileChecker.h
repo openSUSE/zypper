@@ -14,7 +14,7 @@
 
 #include <iosfwd>
 #include <list>
-#include <zypp/base/DefaultIntegral.h>
+#include <zypp-core/base/DefaultIntegral>
 #include <zypp/base/Exception.h>
 #include <zypp/base/Function.h>
 #include <zypp/PathInfo.h>

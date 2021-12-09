@@ -16,7 +16,7 @@
 
 #include "Downloader.h"
 #include <zypp/repo/MediaInfoDownloader.h>
-#include <zypp/base/UserRequestException.h>
+#include <zypp-core/base/UserRequestException>
 #include <zypp/parser/xml/Reader.h>
 #include <zypp/parser/yum/RepomdFileReader.h>
 

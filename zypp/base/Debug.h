@@ -21,7 +21,7 @@
 #include <zypp/base/Logger.h>
 #include <zypp/base/String.h>
 #include <zypp/ExternalProgram.h>
-#include <zypp/base/ProvideNumericId.h>
+#include <zypp-core/base/ProvideNumericId>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

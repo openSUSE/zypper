@@ -16,7 +16,7 @@
 
 #include <zypp/media/MediaNetworkCommonHandler.h>
 #include <zypp-core/zyppng/core/Url>
-#include <zypp/zyppng/media/network/AuthData>
+#include <zypp-curl/ng/network/AuthData>
 #include <zypp-proto/envelope.pb.h>
 #include <zypp-proto/messages.pb.h>
 #include <zypp-core/zyppng/io/private/iobuffer_p.h>

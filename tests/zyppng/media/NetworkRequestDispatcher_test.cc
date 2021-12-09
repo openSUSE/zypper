@@ -1,10 +1,10 @@
 #include <boost/test/unit_test.hpp>
 #include <boost/test/data/test_case.hpp>
 #include <zypp-core/zyppng/base/EventLoop>
-#include <zypp/media/MetaLinkParser.h> // for hexstr2bytes
-#include <zypp/zyppng/media/network/request.h>
-#include <zypp/zyppng/media/network/networkrequestdispatcher.h>
-#include <zypp/zyppng/media/network/networkrequesterror.h>
+#include <zypp-curl/parser/MetaLinkParser> // for hexstr2bytes
+#include <zypp-curl/ng/network/Request>
+#include <zypp-curl/ng/network/NetworkRequestDispatcher>
+#include <zypp-curl/ng/network/NetworkRequestError>
 #include <zypp/TmpPath.h>
 #include <zypp/base/String.h>
 #include <zypp/Digest.h>

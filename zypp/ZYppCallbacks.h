@@ -21,8 +21,8 @@
 #include <zypp/Package.h>
 #include <zypp/Patch.h>
 #include <zypp/Url.h>
-#include <zypp/ProgressData.h>
-#include <zypp/media/MediaUserAuth.h>
+#include <zypp-core/ui/ProgressData>
+#include <zypp-media/auth/AuthData>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

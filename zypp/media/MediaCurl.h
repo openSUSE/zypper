@@ -17,6 +17,7 @@
 #include <zypp/media/MediaNetworkCommonHandler.h>
 
 #include <curl/curl.h>
+
 namespace zypp {
   namespace media {
 

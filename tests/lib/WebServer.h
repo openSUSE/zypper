@@ -5,7 +5,7 @@
 #include <zypp/Url.h>
 #include <zypp/Pathname.h>
 #include <zypp/base/PtrTypes.h>
-#include <zypp/media/TransferSettings.h>
+#include <zypp-curl/TransferSettings>
 
 #include <functional>
 

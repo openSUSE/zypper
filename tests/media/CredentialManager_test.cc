@@ -3,8 +3,8 @@
 
 #include <zypp/Url.h>
 #include <zypp/TmpPath.h>
-#include <zypp/media/CredentialFileReader.cc>
-#include <zypp/media/CredentialManager.h>
+#include <zypp-media/auth/CredentialFileReader>
+#include <zypp-media/auth/CredentialManager>
 
 #include <zypp/PathInfo.h>
 

@@ -13,7 +13,7 @@
 #include <iostream>
 
 #include <zypp/base/String.h>
-#include <zypp/base/DefaultIntegral.h>
+#include <zypp-core/base/DefaultIntegral>
 #include <zypp/parser/xml/XmlEscape.h>
 
 #include <zypp/RepoInfo.h>

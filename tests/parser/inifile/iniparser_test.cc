@@ -6,8 +6,8 @@
 #include <boost/test/unit_test.hpp>
 
 #include <zypp/base/Logger.h>
-#include <zypp/base/InputStream.h>
-#include <zypp/parser/IniParser.h>
+#include <zypp-core/base/InputStream>
+#include <zypp-core/parser/IniParser>
 #include <zypp/Url.h>
 #include <zypp/PathInfo.h>
 

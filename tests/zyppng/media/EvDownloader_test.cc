@@ -1,11 +1,11 @@
 #include <zypp-core/zyppng/base/EventLoop>
 #include <zypp-core/zyppng/base/EventDispatcher>
-#include <zypp/zyppng/media/network/downloader.h>
-#include <zypp/zyppng/media/network/downloadspec.h>
-#include <zypp/zyppng/media/network/networkrequesterror.h>
-#include <zypp/zyppng/media/network/networkrequestdispatcher.h>
-#include <zypp/zyppng/media/network/request.h>
-#include <zypp/media/CredentialManager.h>
+#include <zypp-curl/ng/network/Downloader>
+#include <zypp-curl/ng/network/DownloadSpec>
+#include <zypp-curl/ng/network/NetworkRequestError>
+#include <zypp-curl/ng/network/NetworkRequestDispatcher>
+#include <zypp-curl/ng/network/Request>
+#include <zypp-media/auth/CredentialManager>
 #include <zypp/Digest.h>
 #include <zypp/TmpPath.h>
 #include <zypp/PathInfo.h>
@@ -43,6 +43,7 @@ BOOST_DATA_TEST_CASE( dltest_basic, bdata::make( withSSL ), withSSL)
   auto ev = zyppng::EventLoop::create();
 
   zyppng::Downloader::Ptr downloader = std::make_shared<zyppng::Downloader>();
+  downloader->setCredManagerOptions( zypp::media::CredManagerOptions( zypp::ZConfig::instance().repoManagerRoot()) );
 
   //make sure the data here is big enough to cross the threshold of 256 bytes so we get a progress signal emitted and not only the alive signal.
   std::string dummyContent = "This is just some dummy content,\nto test downloading and signals.\n"
@@ -371,6 +372,7 @@ BOOST_DATA_TEST_CASE( test1, bdata::make( generateMirr() ) * bdata::make( withSS
 
   zypp::filesystem::TmpFile targetFile;
   std::shared_ptr<zyppng::Downloader> downloader = std::make_shared<zyppng::Downloader>();
+  downloader->setCredManagerOptions( zypp::media::CredManagerOptions( zypp::ZConfig::instance().repoManagerRoot()) );
   downloader->requestDispatcher()->setMaximumConcurrentConnections( maxDLs );
 
   //first metalink download, generate a fully valid one
@@ -537,6 +539,7 @@ BOOST_DATA_TEST_CASE( dltest_auth, bdata::make( withSSL ), withSSL )
   auto ev = zyppng::EventLoop::create();
 
   std::shared_ptr<zyppng::Downloader> downloader = std::make_shared<zyppng::Downloader>();
+  downloader->setCredManagerOptions( zypp::media::CredManagerOptions( zypp::ZConfig::instance().repoManagerRoot()) );
 
   WebServer web((zypp::Pathname(TESTS_SRC_DIR)/"/zyppng/data/downloader").c_str(), 10001, withSSL );
   BOOST_REQUIRE( web.start() );
@@ -651,6 +654,7 @@ BOOST_DATA_TEST_CASE( dltest_auth_basic, bdata::make( withSSL ), withSSL )
   auto ev = zyppng::EventLoop::create();
 
   std::shared_ptr<zyppng::Downloader> downloader = std::make_shared<zyppng::Downloader>();
+  downloader->setCredManagerOptions( zypp::media::CredManagerOptions( zypp::ZConfig::instance().repoManagerRoot()) );
 
   WebServer web((zypp::Pathname(TESTS_SRC_DIR)/"/zyppng/data/downloader").c_str(), 10001, withSSL );
   BOOST_REQUIRE( web.start() );

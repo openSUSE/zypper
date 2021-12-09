@@ -15,7 +15,7 @@
 
 #include <zypp/base/Gettext.h>
 #include <zypp/base/LogTools.h>
-#include <zypp/base/DefaultIntegral.h>
+#include <zypp-core/base/DefaultIntegral>
 #include <zypp/parser/xml/XmlEscape.h>
 
 #include <zypp/ManagedFile.h>
@@ -30,7 +30,7 @@
 #include <zypp/ExternalProgram.h>
 
 #include <zypp/base/IOStream.h>
-#include <zypp/base/InputStream.h>
+#include <zypp-core/base/InputStream>
 #include <zypp/parser/xml/Reader.h>
 
 

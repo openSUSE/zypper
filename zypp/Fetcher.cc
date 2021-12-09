@@ -18,13 +18,13 @@
 #include <zypp/base/LogControl.h>
 #include <zypp/base/LogTools.h>
 #include <zypp/base/PtrTypes.h>
-#include <zypp/base/DefaultIntegral.h>
+#include <zypp-core/base/DefaultIntegral>
 #include <zypp/base/String.h>
 #include <zypp-media/MediaException>
 #include <zypp/Fetcher.h>
 #include <zypp/ZYppFactory.h>
 #include <zypp/CheckSum.h>
-#include <zypp/base/UserRequestException.h>
+#include <zypp-core/base/UserRequestException>
 #include <zypp/parser/susetags/ContentFileReader.h>
 #include <zypp/parser/susetags/RepoIndex.h>
 

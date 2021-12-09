@@ -24,7 +24,7 @@
 #include <zypp/ExternalProgram.h>
 #include <zypp/base/Regex.h>
 #include <zypp/base/IOStream.h>
-#include <zypp/base/InputStream.h>
+#include <zypp-core/base/InputStream>
 #include <zypp/target/rpm/librpmDb.h>
 
 #include <zypp/misc/CheckAccessDeleted.h>

@@ -5,7 +5,7 @@
 #include <zypp/base/Logger.h>
 #include <zypp/base/PtrTypes.h>
 #include <zypp/base/ReferenceCounted.h>
-#include <zypp/base/ProvideNumericId.h>
+#include <zypp-core/base/ProvideNumericId>
 
 #define BOOST_TEST_MODULE PtrTypes
 

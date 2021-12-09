@@ -16,8 +16,8 @@
 
 #include <zypp/base/Logger.h>
 #include <zypp/base/String.h>
-#include <zypp/base/DtorReset.h>
-#include <zypp/base/DefaultIntegral.h>
+#include <zypp-core/base/DtorReset>
+#include <zypp-core/base/DefaultIntegral>
 
 #include <zypp/parser/xml/ParseDef.h>
 #include <zypp/parser/xml/ParseDefException.h>

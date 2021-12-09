@@ -25,7 +25,7 @@
 #include <zypp/base/String.h>
 #include <zypp/base/Regex.h>
 #include <zypp/base/Gettext.h>
-#include <zypp/base/WatchFile.h>
+#include <zypp-core/fs/WatchFile>
 #include <zypp/PathInfo.h>
 #include <zypp/KeyRing.h>
 #include <zypp/ExternalProgram.h>

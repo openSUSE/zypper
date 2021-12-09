@@ -15,7 +15,7 @@
 #include <zypp/Fetcher.h>
 #include <zypp-core/OnMediaLocation>
 #include <zypp/MediaSetAccess.h>
-#include <zypp/ProgressData.h>
+#include <zypp-core/ui/ProgressData>
 #include <zypp/RepoInfo.h>
 #include <zypp/RepoStatus.h>
 #include <zypp/repo/Downloader.h>

@@ -15,7 +15,7 @@
 #include <iosfwd>
 
 #include <zypp/base/NonCopyable.h>
-#include <zypp/base/InputStream.h>
+#include <zypp-core/base/InputStream>
 #include <zypp/base/Function.h>
 
 #include <zypp/parser/xml/Node.h>

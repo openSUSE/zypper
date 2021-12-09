@@ -19,7 +19,7 @@ extern "C"
 
 #include <zypp/base/Easy.h>
 #include <zypp/base/LogTools.h>
-#include <zypp/base/DtorReset.h>
+#include <zypp-core/base/DtorReset>
 #include <zypp/base/String.h>
 
 #include <zypp/DiskUsageCounter.h>

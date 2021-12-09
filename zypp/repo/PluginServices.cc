@@ -11,8 +11,8 @@
 #include <zypp/base/Logger.h>
 #include <zypp/base/Gettext.h>
 #include <zypp/base/String.h>
-#include <zypp/base/InputStream.h>
-#include <zypp/base/UserRequestException.h>
+#include <zypp-core/base/InputStream>
+#include <zypp-core/base/UserRequestException>
 
 #include <zypp/repo/PluginServices.h>
 #include <zypp/ServiceInfo.h>

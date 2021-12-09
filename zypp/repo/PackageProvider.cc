@@ -15,7 +15,7 @@
 #include <zypp/repo/PackageDelta.h>
 #include <zypp/base/Logger.h>
 #include <zypp/base/Gettext.h>
-#include <zypp/base/UserRequestException.h>
+#include <zypp-core/base/UserRequestException>
 #include <zypp/base/NonCopyable.h>
 #include <zypp/repo/PackageProvider.h>
 #include <zypp/repo/Applydeltarpm.h>

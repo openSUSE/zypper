@@ -11,7 +11,7 @@
 */
 #include <iostream>
 #include <zypp/base/Logger.h>
-#include <zypp/base/DefaultIntegral.h>
+#include <zypp-core/base/DefaultIntegral>
 
 #include <zypp/PoolItem.h>
 #include <zypp/ResPool.h>

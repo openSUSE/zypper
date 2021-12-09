@@ -16,7 +16,7 @@
 
 #include <zypp/base/Logger.h>
 #include <zypp/base/Exception.h>
-#include <zypp/base/DefaultIntegral.h>
+#include <zypp-core/base/DefaultIntegral>
 #include <zypp/Repository.h>
 #include <zypp/TmpPath.h>
 #include <zypp/target/CommitPackageCacheImpl.h>

@@ -15,7 +15,7 @@
 #include <zypp/base/PtrTypes.h>
 #include <zypp/base/NonCopyable.h>
 #include <zypp/base/Function.h>
-#include <zypp/base/InputStream.h>
+#include <zypp-core/base/InputStream>
 #include <zypp/Pathname.h>
 #include <zypp/Date.h>
 

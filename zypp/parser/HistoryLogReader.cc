@@ -12,10 +12,10 @@
  */
 #include <iostream>
 
-#include <zypp/base/InputStream.h>
+#include <zypp-core/base/InputStream>
 #include <zypp/base/IOStream.h>
 #include <zypp/base/Logger.h>
-#include <zypp/parser/ParseException.h>
+#include <zypp-core/parser/ParseException>
 
 #include <zypp/parser/HistoryLogReader.h>
 

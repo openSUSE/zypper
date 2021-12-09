@@ -20,10 +20,10 @@
 
 #include <solv/solvversion.h>
 
-#include <zypp/base/InputStream.h>
+#include <zypp-core/base/InputStream>
 #include <zypp/base/LogTools.h>
 #include <zypp/base/Gettext.h>
-#include <zypp/base/DefaultIntegral.h>
+#include <zypp-core/base/DefaultIntegral>
 #include <zypp/base/Function.h>
 #include <zypp/base/Regex.h>
 #include <zypp/PathInfo.h>
@@ -34,7 +34,7 @@
 #include <zypp/RepoManager.h>
 
 #include <zypp/media/MediaManager.h>
-#include <zypp/media/CredentialManager.h>
+#include <zypp-media/auth/CredentialManager>
 #include <zypp-media/MediaException>
 #include <zypp/MediaSetAccess.h>
 #include <zypp/ExternalProgram.h>

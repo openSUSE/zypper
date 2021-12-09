@@ -16,7 +16,7 @@
 #include <zypp/base/Function.h>
 #include <zypp/base/Hash.h>
 #include <zypp/base/String.h>
-#include <zypp/base/DefaultIntegral.h>
+#include <zypp-core/base/DefaultIntegral>
 
 #include <zypp/parser/xml/Node.h>
 

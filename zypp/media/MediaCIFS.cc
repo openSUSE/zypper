@@ -18,8 +18,8 @@
 #include <zypp/TmpPath.h>
 #include <zypp-core/KVMap>
 #include <zypp-media/Mount>
-#include <zypp/media/MediaUserAuth.h>
-#include <zypp/media/CredentialManager.h>
+#include <zypp-media/auth/AuthData>
+#include <zypp-media/auth/CredentialManager>
 #include <zypp/ZYppCallbacks.h>
 #include <zypp/ZConfig.h>
 

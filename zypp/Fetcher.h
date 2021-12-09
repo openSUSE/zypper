@@ -23,7 +23,7 @@
 #include <zypp/Digest.h>
 #include <zypp/MediaSetAccess.h>
 #include <zypp/FileChecker.h>
-#include <zypp/ProgressData.h>
+#include <zypp-core/ui/ProgressData>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

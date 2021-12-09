@@ -12,7 +12,7 @@
 
 #include <zypp/Url.h>
 #include <zypp/Pathname.h>
-#include <zypp/ProgressData.h>
+#include <zypp-core/ui/ProgressData>
 #include <zypp/RepoInfo.h>
 #include <zypp/RepoStatus.h>
 #include <zypp/MediaSetAccess.h>

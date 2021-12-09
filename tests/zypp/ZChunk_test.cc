@@ -1,9 +1,9 @@
 // Boost.Test
 #include <boost/test/unit_test.hpp>
 
-#include <zypp/base/ZckStream.h>
+#include <zypp-core/base/ZckStream>
 #include <zypp/Pathname.h>
-#include <zypp/base/InputStream.h>
+#include <zypp-core/base/InputStream>
 #include <zypp/PathInfo.h>
 
 BOOST_AUTO_TEST_CASE(zchunk_simple_read_write)

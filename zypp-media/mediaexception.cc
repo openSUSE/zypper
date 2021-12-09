@@ -6,7 +6,7 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file zypp/media/MediaException.cc
+/** \file zypp-media/mediaexception.cc
  *
 */
 

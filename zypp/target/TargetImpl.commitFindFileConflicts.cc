@@ -25,7 +25,7 @@ extern "C"
 #include <zypp/base/LogTools.h>
 #include <zypp/base/Gettext.h>
 #include <zypp/base/Exception.h>
-#include <zypp/base/UserRequestException.h>
+#include <zypp-core/base/UserRequestException>
 
 #include <zypp/sat/Queue.h>
 #include <zypp/sat/FileConflicts.h>

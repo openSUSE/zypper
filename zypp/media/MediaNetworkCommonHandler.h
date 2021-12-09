@@ -12,7 +12,7 @@
 #define ZYPP_MEDIA_MEDIANETWORKCOMMONHANDLER_H
 
 #include <zypp/media/MediaHandler.h>
-#include <zypp/media/TransferSettings.h>
+#include <zypp-curl/TransferSettings>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

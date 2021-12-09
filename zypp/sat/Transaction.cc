@@ -16,7 +16,7 @@ extern "C"
 #include <iostream>
 #include <zypp/base/LogTools.h>
 #include <zypp/base/SerialNumber.h>
-#include <zypp/base/DefaultIntegral.h>
+#include <zypp-core/base/DefaultIntegral>
 #include <zypp/base/NonCopyable.h>
 #include <zypp/base/Hash.h>
 

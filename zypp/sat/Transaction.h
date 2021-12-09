@@ -16,7 +16,7 @@
 #include <zypp/base/PtrTypes.h>
 #include <zypp/base/Flags.h>
 #include <zypp/base/Iterator.h>
-#include <zypp/base/DefaultIntegral.h>
+#include <zypp-core/base/DefaultIntegral>
 
 #include <zypp/sat/SolvIterMixin.h>
 #include <zypp/sat/Solvable.h>

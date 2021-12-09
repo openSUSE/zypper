@@ -45,6 +45,8 @@ namespace zypp
    *
    * It reads /etc/zypp/zypp.conf, the filename can be overridden by
    * setting the ZYPP_CONF environment variable to a different file.
+   * Config values for \ref MediaConfig are forwarded to the MediaConfig
+   * singleton.
    *
    * Note, if you add settings to this file, please follow the following
    * convention:

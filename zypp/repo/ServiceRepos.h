@@ -11,7 +11,7 @@
 #define ZYPP_REPO_SERVICE_REPOS
 
 #include <zypp/base/NonCopyable.h>
-#include <zypp/ProgressData.h>
+#include <zypp-core/ui/ProgressData>
 #include <zypp/ServiceInfo.h>
 #include <zypp/RepoInfo.h>
 

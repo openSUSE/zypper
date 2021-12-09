@@ -23,7 +23,7 @@ extern "C"
 #include <zypp/base/Flags.h>
 #include <zypp/base/Iterator.h>
 #include <zypp/base/NonCopyable.h>
-#include <zypp/base/DefaultIntegral.h>
+#include <zypp-core/base/DefaultIntegral>
 
 #include <zypp/Pathname.h>
 

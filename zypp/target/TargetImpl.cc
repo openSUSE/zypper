@@ -25,7 +25,7 @@
 #include <zypp/base/Gettext.h>
 #include <zypp/base/IOStream.h>
 #include <zypp/base/Functional.h>
-#include <zypp/base/UserRequestException.h>
+#include <zypp-core/base/UserRequestException>
 #include <zypp/base/Json.h>
 
 #include <zypp/ZConfig.h>

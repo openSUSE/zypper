@@ -14,7 +14,7 @@
 
 #include <iosfwd>
 
-#include <zypp/base/DefaultIntegral.h>
+#include <zypp-core/base/DefaultIntegral>
 #include <zypp/sat/detail/PoolMember.h>
 #include <zypp/Capability.h>
 

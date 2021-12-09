@@ -9,8 +9,8 @@
 #include <zypp/base/Debug.h>
 #include <zypp/base/Functional.h>
 #include <zypp/base/IOStream.h>
-#include <zypp/base/InputStream.h>
-#include <zypp/base/ProvideNumericId.h>
+#include <zypp-core/base/InputStream>
+#include <zypp-core/base/ProvideNumericId>
 #include <zypp/base/Flags.h>
 #include <zypp/AutoDispose.h>
 

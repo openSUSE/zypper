@@ -13,10 +13,10 @@
 #include <zypp/base/LogTools.h>
 #include <zypp/base/String.h>
 #include <zypp/base/StringV.h>
-#include <zypp/base/InputStream.h>
-#include <zypp/base/UserRequestException.h>
+#include <zypp-core/base/InputStream>
+#include <zypp-core/base/UserRequestException>
 
-#include <zypp/parser/IniDict.h>
+#include <zypp-core/parser/IniDict>
 #include <zypp/parser/RepoFileReader.h>
 
 using std::endl;

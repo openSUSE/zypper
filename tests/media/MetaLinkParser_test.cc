@@ -2,7 +2,7 @@
 #include <vector>
 #include <boost/test/unit_test.hpp>
 
-#include <zypp/media/MetaLinkParser.h>
+#include <zypp-curl/parser/MetaLinkParser>
 
 using namespace zypp;
 using namespace zypp::media;

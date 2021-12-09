@@ -18,9 +18,9 @@
 #include <zypp/ZConfig.h>
 #include <zypp/base/Logger.h>
 #include <zypp/media/MediaManager.h>
-#include <zypp/base/UserRequestException.h>
+#include <zypp-core/base/UserRequestException>
 
-#include <zypp/ProgressData.h>
+#include <zypp-core/ui/ProgressData>
 
 namespace zypp
 {

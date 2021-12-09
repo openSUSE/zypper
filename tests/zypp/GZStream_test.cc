@@ -1,9 +1,9 @@
 // Boost.Test
 #include <boost/test/unit_test.hpp>
 
-#include <zypp/base/GzStream.h>
+#include <zypp-core/base/GzStream>
 #include <zypp/Pathname.h>
-#include <zypp/base/InputStream.h>
+#include <zypp-core/base/InputStream>
 
 BOOST_AUTO_TEST_CASE(gz_simple_read_write)
 {

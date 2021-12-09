@@ -13,9 +13,9 @@
 #include <zypp/ZConfig.h>
 #include <zypp/repo/MediaInfoDownloader.h>
 #include <zypp/repo/susetags/Downloader.h>
-#include <zypp/parser/ParseException.h>
+#include <zypp-core/parser/ParseException>
 #include <zypp/parser/susetags/RepoIndex.h>
-#include <zypp/base/UserRequestException.h>
+#include <zypp-core/base/UserRequestException>
 
 using namespace zypp::parser;
 using namespace zypp::parser::susetags;

@@ -19,8 +19,8 @@
 
 #include <zypp/media/MediaHandler.h>
 #include <zypp/media/MediaCurl.h>
-#include <zypp/media/MediaBlockList.h>
-#include <zypp/media/TransferSettings.h>
+#include <zypp-curl/parser/MediaBlockList>
+#include <zypp-curl/TransferSettings>
 #include <zypp/ZYppCallbacks.h>
 
 namespace zypp {

@@ -13,7 +13,7 @@
 #include <zypp/base/Function.h>
 
 #include "MediaInfoDownloader.h"
-#include <zypp/base/UserRequestException.h>
+#include <zypp-core/base/UserRequestException>
 
 
 namespace zypp

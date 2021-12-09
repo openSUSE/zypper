@@ -15,7 +15,7 @@
 #include <iosfwd>
 
 #include <zypp/base/PtrTypes.h>
-#include <zypp/ProgressData.h>
+#include <zypp-core/ui/ProgressData>
 #include <zypp/Pathname.h>
 
 ///////////////////////////////////////////////////////////////////

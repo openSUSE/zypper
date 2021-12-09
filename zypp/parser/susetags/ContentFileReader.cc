@@ -15,8 +15,8 @@
 #include <zypp/base/LogTools.h>
 #include <zypp/base/String.h>
 #include <zypp/base/IOStream.h>
-#include <zypp/base/UserRequestException.h>
-#include <zypp/parser/ParseException.h>
+#include <zypp-core/base/UserRequestException>
+#include <zypp-core/parser/ParseException>
 
 #include <zypp/parser/susetags/ContentFileReader.h>
 #include <zypp/parser/susetags/RepoIndex.h>

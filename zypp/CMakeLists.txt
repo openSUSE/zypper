@@ -57,7 +57,7 @@ SET( zypp_SRCS
   PoolQueryResult.cc
   ProblemSolution.cc
   Product.cc
-  ProgressData.cc
+  #ProgressData.cc
   ProvideFilePolicy.cc
   PublicKey.cc
   PurgeKernels.cc
@@ -157,7 +157,7 @@ SET( zypp_HEADERS
   ProblemSolution.h
   ProblemTypes.h
   Product.h
-  ProgressData.h
+  #ProgressData.h
   ProvideFilePolicy.h
   PublicKey.h
   PurgeKernels.h
@@ -208,13 +208,9 @@ SET( zypp_base_SRCS
   base/SerialNumber.cc
   base/Random.cc
   base/Measure.cc
-  base/GzStream.cc
-  base/InputStream.cc
   base/SetRelationMixin.cc
   base/StrMatcher.h
   base/StrMatcher.cc
-  base/UserRequestException.cc
-  base/Sysconfig.cc
 )
 
 SET( zypp_base_HEADERS
@@ -223,43 +219,39 @@ SET( zypp_base_HEADERS
   base/DrunkenBishop.h
   base/SerialNumber.h
   base/Env.h
-  base/fXstream.h
+  #base/fXstream.h
   base/Random.h
   base/Algorithm.h
   base/Counter.h
   base/Debug.h
-  base/DefaultIntegral.h
-  base/DtorReset.h
-  base/UserRequestException.h
+  #base/DefaultIntegral.h
+  #base/DtorReset.h
+  #base/UserRequestException.h
   base/Functional.h
-  base/GzStream.h
-  base/InputStream.h
+  #base/GzStream.h
+  #base/InputStream.h
   base/Json.h
   base/LocaleGuard.h
   base/Measure.h
   base/NamedValue.h
-  base/ProvideNumericId.h
+  #base/ProvideNumericId.h
   base/ReferenceCounted.h
   base/SetRelationMixin.h
   base/SetTracker.h
   base/Signal.h
-  base/SimpleStreambuf.h
+  #base/SimpleStreambuf.h
   base/StrMatcher.h
-  base/Sysconfig.h
+  #base/Sysconfig.h
   base/TypeTraits.h
   base/ValueTransform.h
-  base/WatchFile.h
+  #base/WatchFile.h
 )
 
 IF (ENABLE_ZCHUNK_COMPRESSION)
 
-  list( APPEND zypp_base_SRCS
-    base/ZckStream.cc
-  )
-
-  list( APPEND zypp_base_HEADERS
-    base/ZckStream.h
-  )
+  #list( APPEND zypp_base_HEADERS
+  #  base/ZckStream.h
+  #)
 
 ENDIF(ENABLE_ZCHUNK_COMPRESSION)
 
@@ -269,7 +261,6 @@ INSTALL(  FILES
 )
 
 SET( zypp_media_SRCS
-  media/CurlHelper.cc
   media/MediaHandler.cc
   media/MediaHandlerFactory.cc
   media/MediaNFS.cc
@@ -277,7 +268,6 @@ SET( zypp_media_SRCS
   media/MediaDIR.cc
   media/MediaDISK.cc
   media/MediaCIFS.cc
-  media/ProxyInfo.cc
   media/MediaNetworkCommonHandler.h
   media/MediaCurl.cc
   media/MediaMultiCurl.cc
@@ -285,15 +275,8 @@ SET( zypp_media_SRCS
   media/MediaPlugin.cc
   media/MediaSource.cc
   media/MediaManager.cc
-  media/MediaUserAuth.cc
-  media/CredentialFileReader.cc
-  media/CredentialManager.cc
-  media/CurlConfig.cc
-  media/TransferSettings.cc
   media/MediaPriority.cc
-  media/MetaLinkParser.cc
   media/ZsyncParser.cc
-  media/MediaBlockList.cc
   media/UrlResolverPlugin.cc
 )
 
@@ -312,17 +295,17 @@ SET( zypp_media_HEADERS
   media/MediaManager.h
   media/MediaNFS.h
   media/MediaSource.h
-  media/MediaUserAuth.h
+  #media/MediaUserAuth.h
   media/Mount.h
-  media/ProxyInfo.h
-  media/CredentialFileReader.h
-  media/CredentialManager.h
-  media/CurlConfig.h
-  media/TransferSettings.h
+  #media/ProxyInfo.h
+  #media/CredentialFileReader.h
+  #media/CredentialManager.h
+  #media/CurlConfig.h
+  #media/TransferSettings.h
   media/MediaPriority.h
-  media/MetaLinkParser.h
+  #media/MetaLinkParser.h
   media/ZsyncParser.h
-  media/MediaBlockList.h
+  #media/MediaBlockList.h
   media/UrlResolverPlugin.h
 )
 
@@ -332,20 +315,14 @@ INSTALL(  FILES
 )
 
 IF ( LIBPROXY_FOUND )
-  SET(zypp_media_proxyinfo_libproxy_SRCS media/proxyinfo/ProxyInfoLibproxy.cc)
-  SET(zypp_media_proxyinfo_libproxy_HEADERS media/proxyinfo/ProxyInfoLibproxy.h)
+  #SET(zypp_media_proxyinfo_libproxy_HEADERS media/proxyinfo/ProxyInfoLibproxy.h)
 ENDIF( LIBPROXY_FOUND )
 
-SET( zypp_media_proxyinfo_SRCS
-  media/proxyinfo/ProxyInfoSysconfig.cc
-  ${zypp_media_proxyinfo_libproxy_SRCS}
-)
-
 SET( zypp_media_proxyinfo_HEADERS
-  media/proxyinfo/ProxyInfoImpl.h
-  media/proxyinfo/ProxyInfoSysconfig.h
-  ${zypp_media_proxyinfo_libproxy_HEADERS}
-  media/proxyinfo/ProxyInfos.h
+  #media/proxyinfo/ProxyInfoImpl.h
+  #media/proxyinfo/ProxyInfoSysconfig.h
+  #${zypp_media_proxyinfo_libproxy_HEADERS}
+  #media/proxyinfo/ProxyInfos.h
 )
 
 INSTALL(  FILES
@@ -354,9 +331,6 @@ INSTALL(  FILES
 )
 
 SET( zypp_parser_SRCS
-  parser/ParseException.cc
-  parser/IniParser.cc
-  parser/IniDict.cc
   parser/HistoryLogReader.cc
   parser/RepoFileReader.cc
   parser/RepoindexFileReader.cc
@@ -365,9 +339,9 @@ SET( zypp_parser_SRCS
 )
 
 SET( zypp_parser_HEADERS
-  parser/ParseException.h
-  parser/IniParser.h
-  parser/IniDict.h
+  #parser/ParseException.h
+  #parser/IniParser.h
+  #parser/IniDict.h
   parser/HistoryLogReader.h
   parser/ParserProgress.h
   parser/RepoFileReader.h
@@ -939,6 +913,7 @@ macro( ADDZYPPLIB LIBNAME )
 
   # CAUTION, link those libs always first and always in that order,
   # otherwise you get symbol lookup errors when linking against libzypp
+  TARGET_LINK_LIBRARIES(${LIBNAME} zypp-curl )
   TARGET_LINK_LIBRARIES(${LIBNAME} zypp-media )
   TARGET_LINK_LIBRARIES(${LIBNAME} zypp-core )
   TARGET_LINK_LIBRARIES(${LIBNAME} zypp-protobuf )

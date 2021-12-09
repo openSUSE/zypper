@@ -38,6 +38,10 @@ SET( zypp_toplevel_SRCS
 INSTALL(  FILES ${zypp_toplevel_headers} DESTINATION "${INCLUDE_INSTALL_DIR}/zypp-core" )
 
 SET( zypp_base_HEADERS
+  base/DefaultIntegral
+  base/defaultintegral.h
+  base/DtorReset
+  base/dtorreset.h
   base/Easy.h
   base/EnumClass.h
   base/Errno.h
@@ -45,8 +49,14 @@ SET( zypp_base_HEADERS
   base/ExternalDataSource.h
   base/Function.h
   base/Flags.h
+  base/fXstream
+  base/fxstream.h
   base/Gettext.h
+  base/GzStream
+  base/gzstream.h
   base/Hash.h
+  base/InputStream
+  base/inputstream.h
   base/IOStream.h
   base/IOTools.h
   base/Iterable.h
@@ -56,12 +66,18 @@ SET( zypp_base_HEADERS
   base/Logger.h
   base/NonCopyable.h
   base/ProfilingFormater.h
+  base/ProvideNumericId
+  base/providenumericid.h
   base/PtrTypes.h
   base/ReferenceCounted.h
   base/Regex.h
+  base/SimpleStreambuf
+  base/simplestreambuf.h
   base/String.h
   base/StringV.h
   base/Unit.h
+  base/UserRequestException
+  base/userrequestexception.h
   base/Xml.h
 )
 
@@ -70,6 +86,8 @@ SET( zypp_base_SRCS
   base/Exception.cc
   base/ExternalDataSource.cc
   base/Gettext.cc
+  base/gzstream.cc
+  base/inputstream.cc
   base/IOStream.cc
   base/IOTools.cc
   base/LogControl.cc
@@ -79,8 +97,22 @@ SET( zypp_base_SRCS
   base/String.cc
   base/StringV.cc
   base/Unit.cc
+  base/userrequestexception.cc
   base/Xml.cc
 )
+
+IF (ENABLE_ZCHUNK_COMPRESSION)
+
+  list( APPEND zypp_base_SRCS
+    base/zckstream.cc
+  )
+
+  list( APPEND zypp_base_HEADERS
+    base/ZckStream
+    base/zckstream.h
+  )
+
+ENDIF(ENABLE_ZCHUNK_COMPRESSION)
 
 INSTALL(  FILES ${zypp_base_HEADERS} DESTINATION "${INCLUDE_INSTALL_DIR}/zypp-core/base" )
 
@@ -93,9 +125,22 @@ SET( zypp_fs_SRCS
 SET( zypp_fs_HEADERS
   fs/PathInfo.h
   fs/TmpPath.h
+  fs/WatchFile
+  fs/watchfile.h
 )
 
 INSTALL(  FILES ${zypp_fs_HEADERS} DESTINATION "${INCLUDE_INSTALL_DIR}/zypp-core/fs" )
+
+SET( zypp_ui_SRCS
+  ui/progressdata.cc
+)
+
+SET( zypp_ui_HEADERS
+  ui/ProgressData
+  ui/progressdata.h
+)
+
+INSTALL(  FILES ${zypp_ui_HEADERS} DESTINATION "${INCLUDE_INSTALL_DIR}/zypp-core/ui" )
 
 
 SET( zypp_url_SRCS
@@ -110,6 +155,26 @@ SET( zypp_url_HEADERS
 )
 
 INSTALL(  FILES ${zypp_url_HEADERS} DESTINATION "${INCLUDE_INSTALL_DIR}/zypp-core/url" )
+
+SET( zypp_parser_SRCS
+  parser/iniparser.cc
+  parser/inidict.cc
+  parser/parseexception.cc
+  parser/sysconfig.cc
+)
+
+SET( zypp_parser_HEADERS
+  parser/IniParser
+  parser/iniparser.h
+  parser/IniDict
+  parser/inidict.h
+  parser/ParseException
+  parser/parseexception.h
+  parser/Sysconfig
+  parser/sysconfig.h
+)
+
+INSTALL(  FILES ${zypp_parser_HEADERS} DESTINATION "${INCLUDE_INSTALL_DIR}/zypp-core/parser" )
 
 SET( zypp_parser_xml_SRCS
   parser/xml/XmlEscape.cc
@@ -269,7 +334,9 @@ SET ( zypp_HEADERS
   ${zyppng_async_HEADERS}
   ${zypp_base_HEADERS}
   ${zypp_fs_HEADERS}
+  ${zypp_ui_HEADERS}
   ${zypp_url_HEADERS}
+  ${zypp_parser_HEADERS}
   ${zypp_parser_xml_HEADERS}
   ${zyppng_base_HEADERS}
   ${zyppng_base_private_HEADERS}
@@ -287,7 +354,9 @@ SET ( zypp_SRCS
   ${zypp_toplevel_SRCS}
   ${zypp_base_SRCS}
   ${zypp_fs_SRCS}
+  ${zypp_ui_SRCS}
   ${zypp_url_SRCS}
+  ${zypp_parser_SRCS}
   ${zypp_parser_xml_SRCS}
   ${zyppng_base_SRCS}
   ${zyppng_io_SRCS}

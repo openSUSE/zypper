@@ -23,17 +23,19 @@ extern "C"
 #include <fstream>
 #include <zypp/base/LogTools.h>
 #include <zypp/base/IOStream.h>
-#include <zypp/base/InputStream.h>
+#include <zypp-core/base/InputStream>
 #include <zypp/base/String.h>
 #include <zypp/base/Regex.h>
 
 #include <zypp/ZConfig.h>
 #include <zypp/ZYppFactory.h>
 #include <zypp/PathInfo.h>
-#include <zypp/parser/IniDict.h>
+#include <zypp-core/parser/IniDict>
 
 #include <zypp/sat/Pool.h>
 #include <zypp/sat/detail/PoolImpl.h>
+
+#include <zypp-media/MediaConfig>
 
 using std::endl;
 using namespace zypp::filesystem;
@@ -324,11 +326,6 @@ namespace zypp
         , download_use_deltarpm_always  ( false )
         , download_media_prefer_download( true )
         , download_mediaMountdir	( "/var/adm/mount" )
-        , download_max_concurrent_connections( 5 )
-        , download_min_download_speed	( 0 )
-        , download_max_download_speed	( 0 )
-        , download_max_silent_tries	( 5 )
-        , download_transfer_timeout	( 180 )
         , commit_downloadMode		( DownloadDefault )
         , gpgCheck			( true )
         , repoGpgCheck			( indeterminate )
@@ -362,6 +359,7 @@ namespace zypp
           INT << "Reconfigure to " << _parsedZyppConf << endl;
           ZConfig::instance()._pimpl.reset( this );
         }
+
         if ( PathInfo(_parsedZyppConf).isExist() )
         {
           parser::IniDict dict( _parsedZyppConf );
@@ -377,6 +375,10 @@ namespace zypp
             {
               std::string entry(it->first);
               std::string value(it->second);
+
+              if ( _mediaConf.setConfigValue( section, entry, value ) )
+                continue;
+
               //DBG << (*it).first << "=" << (*it).second << endl;
               if ( section == "main" )
               {
@@ -452,33 +454,9 @@ namespace zypp
                 {
                   download_media_prefer_download.restoreToDefault( str::compareCI( value, "volatile" ) != 0 );
                 }
-
                 else if ( entry == "download.media_mountdir" )
                 {
                   download_mediaMountdir.restoreToDefault( Pathname(value) );
-                }
-
-                else if ( entry == "download.max_concurrent_connections" )
-                {
-                  str::strtonum(value, download_max_concurrent_connections);
-                }
-                else if ( entry == "download.min_download_speed" )
-                {
-                  str::strtonum(value, download_min_download_speed);
-                }
-                else if ( entry == "download.max_download_speed" )
-                {
-                  str::strtonum(value, download_max_download_speed);
-                }
-                else if ( entry == "download.max_silent_tries" )
-                {
-                  str::strtonum(value, download_max_silent_tries);
-                }
-                else if ( entry == "download.transfer_timeout" )
-                {
-                  str::strtonum(value, download_transfer_timeout);
-                  if ( download_transfer_timeout < 0 )		download_transfer_timeout = 0;
-                  else if ( download_transfer_timeout > 3600 )	download_transfer_timeout = 3600;
                 }
                 else if ( entry == "commit.downloadMode" )
                 {
@@ -594,14 +572,6 @@ namespace zypp
                 {
                   history_log_path = Pathname(value);
                 }
-                else if ( entry == "credentials.global.dir" )
-                {
-                  credentials_global_dir_path = Pathname(value);
-                }
-                else if ( entry == "credentials.global.file" )
-                {
-                  credentials_global_file_path = Pathname(value);
-                }
                 else if ( entry == "techpreview.ZYPP_SINGLE_RPMTRANS" )
                 {
                   DBG << "techpreview.ZYPP_SINGLE_RPMTRANS=" << value << endl;
@@ -678,12 +648,6 @@ namespace zypp
     DefaultOption<bool> download_media_prefer_download;
     DefaultOption<Pathname> download_mediaMountdir;
 
-    int download_max_concurrent_connections;
-    int download_min_download_speed;
-    int download_max_download_speed;
-    int download_max_silent_tries;
-    int download_transfer_timeout;
-
     Option<DownloadMode> commit_downloadMode;
 
     DefaultOption<bool>		gpgCheck;
@@ -712,12 +676,13 @@ namespace zypp
     target::rpm::RpmInstFlags rpmInstallFlags;
 
     Pathname history_log_path;
-    Pathname credentials_global_dir_path;
-    Pathname credentials_global_file_path;
 
     std::string userData;
 
     Option<Pathname> pluginsPath;
+
+    /* Other config singleton instances */
+    MediaConfig &_mediaConf = MediaConfig::instance();
 
   private:
     // HACK for bnc#906096: let pool re-evaluate multiversion spec
@@ -1066,19 +1031,19 @@ namespace zypp
   { _pimpl->download_media_prefer_download.restoreToDefault(); }
 
   long ZConfig::download_max_concurrent_connections() const
-  { return _pimpl->download_max_concurrent_connections; }
+  { return _pimpl->_mediaConf.download_max_concurrent_connections(); }
 
   long ZConfig::download_min_download_speed() const
-  { return _pimpl->download_min_download_speed; }
+  { return _pimpl->_mediaConf.download_min_download_speed(); }
 
   long ZConfig::download_max_download_speed() const
-  { return _pimpl->download_max_download_speed; }
+  { return _pimpl->_mediaConf.download_max_download_speed(); }
 
   long ZConfig::download_max_silent_tries() const
-  { return _pimpl->download_max_silent_tries; }
+  { return _pimpl->_mediaConf.download_max_silent_tries(); }
 
   long ZConfig::download_transfer_timeout() const
-  { return _pimpl->download_transfer_timeout; }
+  { return _pimpl->_mediaConf.download_transfer_timeout(); }
 
   Pathname ZConfig::download_mediaMountdir() const		{ return _pimpl->download_mediaMountdir; }
   void ZConfig::set_download_mediaMountdir( Pathname newval_r )	{ _pimpl->download_mediaMountdir.set( std::move(newval_r) ); }
@@ -1189,14 +1154,12 @@ namespace zypp
 
   Pathname ZConfig::credentialsGlobalDir() const
   {
-    return ( _pimpl->credentials_global_dir_path.empty() ?
-        Pathname("/etc/zypp/credentials.d") : _pimpl->credentials_global_dir_path );
+    return _pimpl->_mediaConf.credentialsGlobalDir();
   }
 
   Pathname ZConfig::credentialsGlobalFile() const
   {
-    return ( _pimpl->credentials_global_file_path.empty() ?
-        Pathname("/etc/zypp/credentials.cat") : _pimpl->credentials_global_file_path );
+    return _pimpl->_mediaConf.credentialsGlobalFile();
   }
 
   ///////////////////////////////////////////////////////////////////

@@ -16,7 +16,7 @@
 #include <sstream>
 
 #include <zypp/base/LogTools.h>
-#include <zypp/base/DefaultIntegral.h>
+#include <zypp-core/base/DefaultIntegral>
 #include <zypp/base/String.h>
 #include <zypp/base/Signal.h>
 #include <zypp/base/IOStream.h>

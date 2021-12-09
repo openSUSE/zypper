@@ -20,7 +20,7 @@
 #include <zypp/solver/detail/Testcase.h>
 #include <zypp/base/Logger.h>
 #include <zypp/base/LogControl.h>
-#include <zypp/base/GzStream.h>
+#include <zypp-core/base/GzStream>
 #include <zypp/base/String.h>
 #include <zypp/base/PtrTypes.h>
 #include <zypp/base/NonCopyable.h>

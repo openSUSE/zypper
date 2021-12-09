@@ -17,7 +17,7 @@
 #include <zypp/base/Gettext.h>
 #include <zypp/base/Logger.h>
 #include <zypp/base/String.h>
-#include <zypp/base/UserRequestException.h>
+#include <zypp-core/base/UserRequestException>
 #include <zypp/repo/RepoProvideFile.h>
 #include <zypp/ZYppCallbacks.h>
 #include <zypp/MediaSetAccess.h>

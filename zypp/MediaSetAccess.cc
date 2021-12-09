@@ -12,7 +12,7 @@
 
 #include <zypp/base/LogTools.h>
 #include <zypp/base/Regex.h>
-#include <zypp/base/UserRequestException.h>
+#include <zypp-core/base/UserRequestException>
 #include <zypp-media/MediaException>
 #include <zypp/ZYppCallbacks.h>
 #include <zypp/MediaSetAccess.h>

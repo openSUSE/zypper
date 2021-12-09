@@ -9,7 +9,7 @@ using boost::unit_test::test_case;
 
 #include <zypp/base/LogControl.h>
 #include <zypp/base/LogTools.h>
-#include <zypp/base/InputStream.h>
+#include <zypp-core/base/InputStream>
 #include <zypp/base/IOStream.h>
 #include <zypp/base/Flags.h>
 #include <zypp/ZYppFactory.h>

@@ -7,9 +7,9 @@
 |                                                                      |
 ----------------------------------------------------------------------*/
 #include "private/medianetworkserver_p.h"
-#include <zypp/zyppng/media/network/downloader.h>
-#include <zypp/zyppng/media/network/downloadspec.h>
-#include <zypp/zyppng/media/network/private/mirrorcontrol_p.h>
+#include <zypp-curl/ng/network/Downloader>
+#include <zypp-curl/ng/network/DownloadSpec>
+#include <zypp-curl/ng/network/private/mirrorcontrol_p.h>
 #include <zypp-core/zyppng/base/private/threaddata_p.h>
 #include <zypp-core/zyppng/base/private/linuxhelpers_p.h>
 #include <zypp-core/zyppng/base/EventLoop>
@@ -17,19 +17,31 @@
 #include <zypp-core/zyppng/base/SocketNotifier>
 #include <zypp-core/zyppng/rpc/rpc.h>
 
-#include <zypp/media/TransferSettings.h>
+#include <zypp-curl/TransferSettings>
 #include <zypp/PathInfo.h>
 
 #include <zypp-proto/envelope.pb.h>
 #include <zypp-proto/messages.pb.h>
 
-#include <zypp/zyppng/media/network/private/mediadebug_p.h>
+#include <zypp-curl/ng/network/private/mediadebug_p.h>
+#include <zypp/Target.h>
+#include <zypp/ZConfig.h>
 
 #include <algorithm>
 #include <csignal>
 
 #undef ZYPP_BASE_LOGGER_LOGGROUP
 #define ZYPP_BASE_LOGGER_LOGGROUP "zypp::MediaNetworkServer"
+
+namespace internal {
+  /**
+   * initialized only once, this gets the agent string
+   * which also includes the curl version
+   *
+   * Defined in MediaCurl.cc
+   */
+  const char * agentString();
+}
 
 namespace zyppng {
 
@@ -38,6 +50,16 @@ namespace zyppng {
   MediaNetworkServer::MediaNetworkServer( )
     : _downloadManager( std::make_shared<Downloader>( MirrorControl::create() ) )
   {
+    _downloadManager->setCredManagerOptions( zypp::media::CredManagerOptions( zypp::ZConfig::instance().repoManagerRoot()) );
+    auto dispatcher = _downloadManager->requestDispatcher();
+    if ( dispatcher ) {
+      dispatcher->setAgentString( ::internal::agentString() );
+      dispatcher->setHostSpecificHeader("download.opensuse.org", "X-ZYpp-AnonymousId", zypp::Target::anonymousUniqueId( zypp::Pathname()/*guess root*/ ) );
+      dispatcher->setHostSpecificHeader("download.opensuse.org", "X-ZYpp-DistributionFlavor", zypp::Target::distributionFlavor( zypp::Pathname()/*guess root*/ ) );
+    } else {
+      // this branch should never be executed
+      ERR << "Unable to initialize user agent string and zypp http headers." << std::endl;
+    }
   }
 
   void MediaNetworkServer::listen( const std::string &sockPath )

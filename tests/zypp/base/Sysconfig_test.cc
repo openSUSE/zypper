@@ -13,7 +13,7 @@
 #include <zypp/PathInfo.h>
 #include <zypp/ExternalProgram.h>
 
-#include <zypp/base/Sysconfig.h>
+#include <zypp-core/parser/Sysconfig>
 
 using boost::unit_test::test_suite;
 using boost::unit_test::test_case;

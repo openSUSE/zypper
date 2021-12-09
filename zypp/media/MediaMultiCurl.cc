@@ -25,9 +25,10 @@
 #include <zypp/ZConfig.h>
 #include <zypp/base/Logger.h>
 #include <zypp/media/MediaMultiCurl.h>
-#include <zypp/media/MetaLinkParser.h>
+#include <zypp-curl/parser/MetaLinkParser>
 #include <zypp/ManagedFile.h>
-#include <zypp/media/CurlHelper.h>
+#include <zypp-curl/private/curlhelper_p.h>
+#include <zypp-curl/auth/CurlAuthData>
 
 using std::endl;
 using namespace zypp::base;

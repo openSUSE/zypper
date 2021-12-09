@@ -425,6 +425,10 @@ fi
 %{_datadir}/cmake/Modules/*
 %{_includedir}/zypp
 %{_includedir}/zypp-core
+%{_includedir}/zypp-media
+%{_includedir}/zypp-curl
+%{_libdir}/pkgconfig/libzypp.pc
+%{_libdir}/pkgconfig/libzypp.pc
 %{_libdir}/pkgconfig/libzypp.pc
 
 %files devel-doc

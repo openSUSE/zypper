@@ -19,6 +19,6 @@
 #define LIBZYPP_SOVERSION      @LIBZYPP_SO_FIRST@
 #define LIBZYPP_VERSION        @LIBZYPP_NUMVERSION@
 
-#include <zypp/Globals.h>
+#include <zypp-core/Globals.h>
 
 #endif //ZYPP_APICONFIG_H
