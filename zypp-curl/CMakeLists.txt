@@ -149,7 +149,7 @@ ADD_LIBRARY( zypp-curl STATIC
   ${zypp_curl_auth_SRCS} ${zypp_curl_auth_private_HEADERS} ${zypp_curl_auth_HEADERS}
   ${zypp_curl_ng_network_SRCS} ${zypp_curl_ng_network_HEADERS} ${zypp_curl_ng_network_private_HEADERS} ${zypp_curl_ng_network_private_SOURCES}
   ${zypp_curl_parser_SRCS} ${zypp_curl_parser_private_HEADERS} ${zypp_curl_parser_HEADERS}
-  ${zypp_curl_proxyinfo_HEADERS} ${zypp_curl_proxyinfo_libproxy_SRCS}
+  ${zypp_curl_proxyinfo_HEADERS} ${zypp_curl_proxyinfo_SRCS}
   )
 #we include generated headers, so we need to wait for zypp-protobuf to be ready
 add_dependencies( zypp-curl zypp-protobuf )
