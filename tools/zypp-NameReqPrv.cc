@@ -279,6 +279,7 @@ int main( int argc, char * argv[] )
 
   ///////////////////////////////////////////////////////////////////
 
+  auto _ { getZYpp() };
   ZConfig::instance();
   Pathname sysRoot("/");
   sat::Pool satpool( sat::Pool::instance() );
