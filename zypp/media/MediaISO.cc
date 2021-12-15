@@ -61,31 +61,25 @@ namespace zypp
       if( _filesystem.empty())
         _filesystem = "auto";
 
-      std::string arg;
-      zypp::Url   src;
-      try
+      Url src;
       {
-        // this percent-decodes the query parameter, it must be later encoded
-        // again before used in a Url object
-        arg = _url.getQueryParam("url");
-        if( arg.empty() && _isofile.dirname().absolute())
-        {
-          src = std::string("dir:///");
-          src.setPathName(url::encode(_isofile.dirname().asString(), URL_SAFE_CHARS));
+        const std::string & arg { _url.getQueryParam("url") };
+        if ( arg.empty() ) {
+          src = "dir:/";
+          src.setPathName( _isofile.dirname() );
           _isofile = _isofile.basename();
         }
-        else
-        {
-          src = url::encode(arg, URL_SAFE_CHARS);
+        else try {
+          src = arg;
         }
-      }
-      catch(const zypp::url::UrlException &e)
-      {
-        ZYPP_CAUGHT(e);
-        ERR << "Unable to parse iso filename source media url" << std::endl;
-        MediaBadUrlException ne(_url);
-        ne.remember(e);
-        ZYPP_THROW(ne);
+        catch( const url::UrlException & e )
+        {
+          ZYPP_CAUGHT(e);
+          ERR << "Unable to parse iso filename source media url" << std::endl;
+          MediaBadUrlException ne(_url);
+          ne.remember(e);
+          ZYPP_THROW(ne);
+        }
       }
       if( !src.isValid())
       {
