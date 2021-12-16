@@ -18,7 +18,7 @@ SET( zypp_toplevel_headers
   KVMap
   kvmap.h
   ManagedFile.h
-  onmedialocation.cc
+  onmedialocation.h
   OnMediaLocation
   Pathname.h
   TriBool.h
