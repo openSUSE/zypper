@@ -164,7 +164,7 @@ msgstr ""
 #: src/Config.cc:377
 msgid "User defined transaction id used in history and plugins."
 msgstr ""
-"tBenutzerdefinierte Transaktions-ID, die in der Historie und Plugins benutzt "
+"Benutzerdefinierte Transaktions-ID, die in der Historie und Plugins benutzt "
 "wird."
 
 #. translators: --quiet, -q
