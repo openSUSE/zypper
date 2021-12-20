@@ -1059,10 +1059,6 @@ public:
   void error( const char * label_r )
   { _progress.name( label_r ); error( true ); }
 
-  /** \overload also change the progress bar label. */
-  void error( TriBool error_r, const std::string & label_r )
-  { _progress.name( label_r ); error( error_r ); }
-
 public:
   /** \name Access the embedded ProgressData object */
   //@{
