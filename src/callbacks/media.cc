@@ -15,6 +15,7 @@
 #include "utils/prompt.h"
 
 #include <zypp/media/MediaManager.h>
+#include <zypp-curl/auth/CurlAuthData>
 
 using std::cin;
 using namespace zypp;
