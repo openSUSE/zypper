@@ -109,7 +109,7 @@ SET( zypp_curl_ng_network_private_HEADERS
   ng/network/private/downloaderstates/zck_p.h
 )
 
-SET( zypp_curl_ng_network_private_SOURCES
+SET( zypp_curl_ng_network_private_SRCS
   ng/network/private/downloaderstates/basicdownloader_p.cc
   ng/network/private/downloaderstates/detectmeta_p.cc
   ng/network/private/downloaderstates/final_p.cc
@@ -144,12 +144,25 @@ SET( zypp_curl_parser_SRCS
 INSTALL(  FILES ${zypp_curl_parser_HEADERS} DESTINATION "${INCLUDE_INSTALL_DIR}/zypp-curl/parser" )
 
 
-ADD_LIBRARY( zypp-curl STATIC
-  ${zypp_curl_SRCS} ${zypp_curl_private_HEADERS} ${zypp_curl_HEADERS}
-  ${zypp_curl_auth_SRCS} ${zypp_curl_auth_private_HEADERS} ${zypp_curl_auth_HEADERS}
-  ${zypp_curl_ng_network_SRCS} ${zypp_curl_ng_network_HEADERS} ${zypp_curl_ng_network_private_HEADERS} ${zypp_curl_ng_network_private_SOURCES}
-  ${zypp_curl_parser_SRCS} ${zypp_curl_parser_private_HEADERS} ${zypp_curl_parser_HEADERS}
-  ${zypp_curl_proxyinfo_HEADERS} ${zypp_curl_proxyinfo_SRCS}
-  )
+SET( zypp_curl_lib_SRCS
+    ${zypp_curl_SRCS}
+    ${zypp_curl_auth_SRCS}
+    ${zypp_curl_ng_network_SRCS}
+    ${zypp_curl_parser_SRCS}
+    ${zypp_curl_proxyinfo_SRCS}
+    ${zypp_curl_ng_network_private_SRCS}
+)
+SET( zypp_curl_lib_HEADERS
+    ${zypp_curl_private_HEADERS} ${zypp_curl_HEADERS}
+    ${zypp_curl_auth_private_HEADERS} ${zypp_curl_auth_HEADERS}
+    ${zypp_curl_ng_network_HEADERS} ${zypp_curl_ng_network_private_HEADERS}
+    ${zypp_curl_parser_private_HEADERS} ${zypp_curl_parser_HEADERS}
+    ${zypp_curl_proxyinfo_HEADERS}
+)
+
+# Default loggroup for all files
+SET_LOGGROUP( "zypp-curl" $${zypp_curl_lib_SRCS} )
+
+ADD_LIBRARY( zypp-curl STATIC ${zypp_curl_lib_SRCS} ${zypp_curl_lib_HEADERS} )
 #we include generated headers, so we need to wait for zypp-protobuf to be ready
 add_dependencies( zypp-curl zypp-protobuf )

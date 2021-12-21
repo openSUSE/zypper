@@ -135,6 +135,15 @@ MACRO(ADD_TESTS)
   ENDFOREACH( loop_var )
 ENDMACRO(ADD_TESTS)
 
+# Macro to set the log group for a list of files
+MACRO( SET_LOGGROUP _group _files  )
+  SET_SOURCE_FILES_PROPERTIES( ${_files} COMPILE_FLAGS -DZYPP_BASE_LOGGER_LOGGROUP=\\"${_group}\\" )
+  FOREACH (_currentFile ${ARGN})
+#MESSAGE( STATUS "setting loggroup to \"${_group}\" for ${_currentFile}" )
+    SET_SOURCE_FILES_PROPERTIES( ${_currentFile} COMPILE_FLAGS -DZYPP_BASE_LOGGER_LOGGROUP=\\"${_group}\\" )
+  ENDFOREACH (_currentFile ${ARGN})
+ENDMACRO( SET_LOGGROUP )
+
 ####################################################################
 
 INCLUDE(CheckSymbolExists)

@@ -364,6 +364,9 @@ SET ( zypp_SRCS
   ${zyppng_thread_SRCS}
 )
 
+# Default loggroup for all files
+SET_LOGGROUP( "zypp-core" ${zypp_SRCS} )
+
 ADD_LIBRARY( zypp-core STATIC ${zypp_SRCS} ${zypp_HEADERS} )
 #we include generated headers, so we need to wait for zypp-protobuf to be ready
 add_dependencies( zypp-core zypp-protobuf )

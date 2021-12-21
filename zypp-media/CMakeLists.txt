@@ -47,9 +47,18 @@ SET( zypp_media_auth_SRCS
 INSTALL(  FILES ${zypp_media_auth_HEADERS} DESTINATION "${INCLUDE_INSTALL_DIR}/zypp-media/auth" )
 
 
-ADD_LIBRARY( zypp-media STATIC
-  ${zypp_media_SRCS} ${zypp_media_private_HEADERS} ${zypp_media_HEADERS}
-  ${zypp_media_auth_SRCS} ${zypp_media_auth_private_HEADERS} ${zypp_media_auth_HEADERS}
-  )
+SET( zypp_media_lib_SRCS
+    ${zypp_media_SRCS}
+    ${zypp_media_auth_SRCS}
+)
+SET( zypp_media_lib_HEADERS
+    ${zypp_media_private_HEADERS} ${zypp_media_HEADERS}
+    ${zypp_media_auth_private_HEADERS} ${zypp_media_auth_HEADERS}
+)
+
+# Default loggroup for all files
+SET_LOGGROUP( "zypp-media" ${zypp_media_lib_SRCS} )
+
+ADD_LIBRARY( zypp-media STATIC ${zypp_media_lib_SRCS} ${zypp_media_lib_HEADERS} )
 #we include generated headers, so we need to wait for zypp-protobuf to be ready
 add_dependencies( zypp-media zypp-protobuf )
