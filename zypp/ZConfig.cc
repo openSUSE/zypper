@@ -713,10 +713,13 @@ namespace zypp
 
         if ( ! cacheHit )
         {
-          if ( root_r == "/" )
-            ret.swap( _specMap[Pathname()] );		// original zypp.conf
-          else
-            scanConfAt( root_r, ret, zConfImpl_r );	// scan zypp.conf at root_r
+          // bsc#1193488: If no (/root)/.../zypp.conf exists use the default zypp.conf
+          // multiversion settings. It is a legacy that the packaged multiversion setting
+          // in zypp.conf (the kernel) may differ from the builtin default (empty).
+          // But we want a missing config to behave similar to the default one, otherwise
+          // a bare metal install easily runs into trouble.
+          if ( root_r == "/" || scanConfAt( root_r, ret, zConfImpl_r ) == 0 )
+            ret = _specMap[Pathname()];
           scanDirAt( root_r, ret, zConfImpl_r );	// add multiversion.d at root_r
           using zypp::operator<<;
           MIL << "MultiversionSpec '" << root_r << "' = " << ret << endl;
@@ -728,11 +731,11 @@ namespace zypp
       {	return _specMap[Pathname()]; }
 
     private:
-      void scanConfAt( const Pathname root_r, MultiversionSpec & spec_r, const Impl & zConfImpl_r )
+      int scanConfAt( const Pathname root_r, MultiversionSpec & spec_r, const Impl & zConfImpl_r )
       {
         static const str::regex rx( "^multiversion *= *(.*)" );
         str::smatch what;
-        iostr::simpleParseFile( InputStream( Pathname::assertprefix( root_r, _autodetectZyppConfPath() ) ),
+        return iostr::simpleParseFile( InputStream( Pathname::assertprefix( root_r, _autodetectZyppConfPath() ) ),
                                 [&]( int num_r, std::string line_r )->bool
                                 {
                                   if ( line_r[0] == 'm' && str::regex_match( line_r, what, rx ) )
