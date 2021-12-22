@@ -142,28 +142,19 @@ bool zyppng::ForkSpawnEngine::start( const char * const *argv, int stdin_fd, int
   _executedCommand.clear();
   _args.clear();
 
-  const char * chdirTo = nullptr;
-
   if ( !argv || !argv[0] ) {
     _execError = _("Invalid spawn arguments given.");
     _exitStatus = 128;
     return false;
   }
 
-  if ( !_chroot.empty() )
-  {
-    const auto chroot = _chroot.c_str();
-    if ( chroot[0] == '\0' )
-    {
-      _chroot = zypp::Pathname();	// ignore empty _chroot
-    }
-    else if ( chroot[0] == '/' && chroot[1] == '\0' )
-    {
-      // If _chroot is '/' do not chroot, but chdir to '/'
-      // unless arglist defines another dir.
-      chdirTo = "/";
-      _chroot = zypp::Pathname();
-    }
+  const char * chdirTo = nullptr;
+
+  if ( _chroot == "/" ) {
+    // If _chroot is '/' do not chroot, but chdir to '/'
+    // unless arglist defines another dir.
+    chdirTo = "/";
+    _chroot = zypp::Pathname();
   }
 
   if ( !_workingDirectory.empty() )
@@ -400,19 +391,11 @@ bool zyppng::GlibSpawnEngine::start( const char * const *argv, int stdin_fd, int
 
   const char * chdirTo = nullptr;
 
-  if ( !_chroot.empty() ) {
-    const auto chroot = _chroot.c_str();
-    if ( chroot[0] == '\0' )
-    {
-      _chroot = zypp::Pathname();	// ignore empty _chroot
-    }
-    else if ( chroot[0] == '/' && chroot[1] == '\0' )
-    {
-      // If _chroot is '/' do not chroot, but chdir to '/'
-      // unless arglist defines another dir.
-      chdirTo = "/";
-      _chroot = zypp::Pathname();
-    }
+  if ( _chroot == "/" ) {
+    // If _chroot is '/' do not chroot, but chdir to '/'
+    // unless arglist defines another dir.
+    chdirTo = "/";
+    _chroot = zypp::Pathname();
   }
 
   if ( !_workingDirectory.empty() )
