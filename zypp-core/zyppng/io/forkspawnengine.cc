@@ -22,6 +22,10 @@
 #include <stdlib.h> // setenv
 #include <sys/prctl.h> // prctl(), PR_SET_PDEATHSIG
 
+#undef  ZYPP_BASE_LOGGER_LOGGROUP
+#define ZYPP_BASE_LOGGER_LOGGROUP "zypp::exec"
+
+
 zyppng::AbstractDirectSpawnEngine::~AbstractDirectSpawnEngine()
 {
   if ( AbstractDirectSpawnEngine::isRunning() ) {

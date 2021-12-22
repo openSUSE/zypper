@@ -7,6 +7,9 @@
 
 #include "private/forkspawnengine_p.h"
 
+#undef  ZYPP_BASE_LOGGER_LOGGROUP
+#define ZYPP_BASE_LOGGER_LOGGROUP "zypp::exec"
+
 namespace zyppng {
 
 
@@ -170,7 +173,7 @@ namespace zyppng {
       status = WEXITSTATUS (status);
       if(status)
       {
-          DBG << "Pid " << _pid << " exited with status " << status << std::endl;
+          WAR << "Pid " << _pid << " exited with status " << status << std::endl;
           _execError = zypp::str::form( _("Command exited with status %d."), status );
       }
       else
@@ -184,14 +187,15 @@ namespace zyppng {
     else if (WIFSIGNALED (status))
     {
       status = WTERMSIG (status);
-      WAR << "Pid " << _pid << " was killed by signal " << status
-              << " (" << strsignal(status);
-      if (WCOREDUMP (status))
-      {
-          WAR << ", core dumped";
+      std::string sigdetail { strsignal(status) };
+      if ( WCOREDUMP(status) ) {
+        sigdetail += "; Core dumped";
       }
-      WAR << ")" << std::endl;
-      _execError = zypp::str::form( _("Command was killed by signal %d (%s)."), status, strsignal(status) );
+      if ( status == SIGKILL ) {
+        sigdetail += "; Out of memory?";
+      }
+      WAR << "Pid " << _pid << " was killed by signal " << status << " (" << sigdetail << ")" << std::endl;
+      _execError = zypp::str::form( _("Command was killed by signal %d (%s)."), status, sigdetail.c_str() );
       status+=128;
     }
     else {
