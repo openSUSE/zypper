@@ -180,7 +180,7 @@ namespace zypp
      *
      * Each separator match found in \a line_r will be enclosed by 2 words being reported.
      * Words may be empty if the separator match is located at the beginning or at the end
-     * of \a line_r, or it there are consecutive separator match occurrences.
+     * of \a line_r, or if there are consecutive separator match occurrences.
      *
      * Accepted callbacks: [bool|void]( [std::string_view[, unsigned[, bool]]] )
      * (or no callback at all)
@@ -205,7 +205,7 @@ namespace zypp
      *
      * - If \a sep_r is not empty, each separator found in \a line_r will be enclosed by 2
      * words being reported. Words may be empty if the separator is located at the beginning
-     * or the end of \a line_r or it there are consecutive occurrences.
+     * or the end of \a line_r or if there are consecutive occurrences.
      *
      * - If \a sep_r is unspecified or empty, it splits on whitespace /[BLANK,TAB]+/. In this
      * case only the (not empty) words found on the line are reported (trimmed).

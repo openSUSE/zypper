@@ -18,7 +18,7 @@ namespace zyppng {
 
   /*!
     \internal
-    Process forking engine thats using the traditional fork() approach
+    Process forking engine that's using the traditional fork() approach
    */
   class ForkSpawnEngine : public AbstractDirectSpawnEngine
   {
@@ -41,7 +41,7 @@ namespace zyppng {
 
   /*!
     \internal
-    Process forking engine thats using g_spawn from glib which can in most cases optimize
+    Process forking engine that's using g_spawn from glib which can in most cases optimize
     using posix_spawn.
    */
   class GlibSpawnEngine : public AbstractDirectSpawnEngine
