@@ -1,4 +1,17 @@
 -------------------------------------------------------------------
+Thu Dec 23 16:01:31 CET 2021 - ma@suse.de
+
+- Use the default zypp.conf settings if no zypp.conf exists
+  (bsc#1193488)
+- Fix wrong encoding of iso: URL components (bsc#954813)
+- Handle armv8l as armv7hl compatible userland.
+- Introduce zypp-curl a sublibrary for CURL related code.
+- zypp-rpm: Increase rpm loglevel if ZYPP_RPM_DEBUG is set.
+- Save all signatures associated with a public key in its
+  PublicKeyData.
+- version 17.29.0 (22)
+
+-------------------------------------------------------------------
 Thu Nov 11 15:12:44 CET 2021 - ma@suse.de
 
 - Disable logger in the child after fork (bsc#1192436)
