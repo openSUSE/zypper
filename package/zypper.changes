@@ -1,4 +1,14 @@
 -------------------------------------------------------------------
+Thu Dec 23 16:04:14 CET 2021 - ma@suse.de
+
+- Singletrans: handle fatal and non-fatal script errors properly.
+- Add SingleTransReportReceiver.
+- Immediately write out additional rpm output.
+- BuildRequires:  libzypp-devel >= 17.29.0.
+  Need SingleTransReport and immediate rpm script output reports.
+- version 1.14.51
+
+-------------------------------------------------------------------
 Mon Oct 18 12:05:45 CEST 2021 - ma@suse.de
 
 - Fix compiler warning.
