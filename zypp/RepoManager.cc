@@ -1399,18 +1399,14 @@ namespace zypp
 
         for ( std::string output( prog.receiveLine() ); output.length(); output = prog.receiveLine() ) {
           WAR << "  " << output;
-          if ( errdetail.empty() ) {
-            errdetail = prog.command();
-            errdetail += '\n';
-          }
           errdetail += output;
         }
 
         int ret = prog.close();
         if ( ret != 0 )
         {
-          RepoException ex(str::form( _("Failed to cache repo (%d)."), ret ));
-          ex.remember( errdetail );
+          RepoException ex(info, str::form( _("Failed to cache repo (%d)."), ret ));
+          ex.addHistory( str::Str() << prog.command() << endl << errdetail << prog.execError() ); // errdetail lines are NL-terminaled!
           ZYPP_THROW(ex);
         }
 
