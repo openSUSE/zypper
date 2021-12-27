@@ -56,7 +56,7 @@ namespace
 
     // there seems to be a backporting of how rpm prints the signature check result
     // breaking our tests here, instead of checking for exact equality we just require
-    // that all elements in the lhs are existant in the rhs instance.
+    // that all elements in the lhs exist in the rhs instance.
     //if ( lhs.detail.size() != rhs.detail.size() )
     //  return false;
 

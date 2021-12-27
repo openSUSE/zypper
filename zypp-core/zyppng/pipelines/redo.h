@@ -132,7 +132,7 @@ namespace zyppng {
       Pred _pred;
     };
 
-    //check if its possible to query the given type for function_traits
+    //check if it is possible to query the given type for function_traits
     template <typename T>
     using has_func_trait = typename function_traits<T>::return_type;
 

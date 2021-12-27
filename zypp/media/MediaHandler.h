@@ -313,7 +313,7 @@ class MediaHandler {
          * server like FTP. After calling disconnect() the media object still is
          * valid and files are present.
          *
-         * After calling disconnect() it's not possible to call provideFile() or
+         * After calling disconnect(), it's not possible to call provideFile() or
          * provideDir() anymore.
          *
          * \throws MediaException
@@ -543,7 +543,7 @@ class MediaHandler {
          * server like FTP. After calling disconnect() the media object still is
          * valid and files are present.
          *
-         * After calling disconnect() it's not possible to call provideFile() or
+         * After calling disconnect(), it's not possible to call provideFile() or
          * provideDir() anymore.
          *
          * \throws MediaException

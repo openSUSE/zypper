@@ -145,7 +145,7 @@ namespace zyppng {
      * stage of the lifetime of a Download.
      */
     enum State {
-      InitialState,   //< This is the initial state, its only set before a download starts
+      InitialState,   //< This is the initial state. It is only set before a download starts.
       DetectMetaLink, //< Metalink downloads are enabled, trying to detect if we get a metalink or not
       DlMetaLinkInfo, //< Downloading the metalink description file
       PrepareMulti,   //< This state is set for async preparations of the multi download, like mirror rating

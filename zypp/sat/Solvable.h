@@ -81,7 +81,7 @@ namespace zypp
     public:
       /** The identifier.
        * This is the solvables \ref name, \b except for packages and
-       * source packes, prefixed by it's \ref kind.
+       * source packes, prefixed by its \ref kind.
        */
       IdString ident()const;
 
@@ -162,7 +162,7 @@ namespace zypp
        * packages should not be installed.
        *
        * - PTFs usually contain special features or fixes which are not yet released as
-       * an official patch upadate. Installing a PTF will prevent it's packages from being
+       * an official patch upadate. Installing a PTF will prevent its packages from being
        * updated until you decide to remove the PTF and follow the official releases again.
        */
       //@{

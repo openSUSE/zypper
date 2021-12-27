@@ -210,7 +210,7 @@ namespace zypp
         {
           if ( reader_r->depth() == 0 )
           {
-            // on the verry first level we skip any initial whitespace and comments...
+            // on the very first level we skip any initial whitespace and comments...
             do {
               // advance to next node
               if ( ! reader_r.nextNode() )

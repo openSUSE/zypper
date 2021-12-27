@@ -25,8 +25,8 @@ namespace zypp
     /** UI status
      * Status values calculated by \ref Selectable.
 
-     * \note The \ref Status enum, and it's use within \ref Selectabe
-     * is tightly related to the Y2UI. It might be not verry usefull
+     * \note The \ref Status enum, and its use within \ref Selectabe
+     * is tightly related to the Y2UI. It might be not very useful
      * outside the Y2UI.
      *
      * \todo make it an EnumerationClass

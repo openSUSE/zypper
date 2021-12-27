@@ -56,7 +56,7 @@ public:
 
   /*!
    * Returns the timestamp of the last change to the database this
-   * credential is stored in, or 0 if its not known.
+   * credential is stored in, or 0 if it is not known.
    */
   time_t lastDatabaseUpdate () const;
   void setLastDatabaseUpdate ( time_t time );

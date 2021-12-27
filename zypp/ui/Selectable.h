@@ -80,7 +80,7 @@ namespace zypp
       /** Get the \ref Selctable */
       static Ptr get( const pool::ByIdent & ident_r );
 
-      /** Get the \ref Selctable by it's \c sat-identifyer. */
+      /** Get the \ref Selctable by its \c sat-identifier. */
       static Ptr get( IdString ident_r )
       { return get( pool::ByIdent( ident_r ) ); }
 
@@ -108,7 +108,7 @@ namespace zypp
     public:
       /** The identifier.
        * This is the solvables \ref name, \b except for packages and
-       * source packes, prefixed by it's \ref kind.
+       * source packes, prefixed by its \ref kind.
        * \see \ref sat::Solvable.
        */
       IdString ident() const;

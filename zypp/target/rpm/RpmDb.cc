@@ -2065,7 +2065,7 @@ bool RpmDb::backupPackage(const std::string& packageName)
 
     std::string tarmsg;
 
-    // TODO: its probably possible to start tar with -v and watch it adding
+    // TODO: it is probably possible to start tar with -v and watch it adding
     // files to report progress
     for (std::string output = tar.receiveLine(); output.length() ;output = tar.receiveLine())
     {

@@ -84,7 +84,7 @@ class SATResolver : public base::ReferenceCounted, private base::NonCopyable, pr
     PoolItemList _result_items_to_install;
     PoolItemList _result_items_to_remove;
   public:
-    ResolverFocus _focus;		// The resolvers general attitude
+    ResolverFocus _focus;		// The resolver's general attitude
 
     bool _fixsystem:1;			// repair errors in rpm dependency graph
     bool _allowdowngrade:1;		// allow one to downgrade installed solvable

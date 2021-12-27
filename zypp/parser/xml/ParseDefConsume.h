@@ -330,9 +330,9 @@ namespace zypp
      * \relates parse_def_assign::Builder
      *
      * This function allows convenient contruction of a \ref parse_def_assign::Consumer
-     * to be passed as \ref Node conssumer to \ref ParseDef. Simply list each attributes
-     * name together with the variable it's value should be assigned to. If the attribute
-     * name is omitted, the nodes text value gets assigned.
+     * to be passed as \ref Node conssumer to \ref ParseDef. Simply list each attribute's
+     * name together with the variable its value should be assigned to. If the attribute
+     * name is omitted, the node's text value gets assigned.
      *
      * Target variables can be of any type tsupported by \ref Assigner.
      * Basically all types constructible from \c char*, or where a

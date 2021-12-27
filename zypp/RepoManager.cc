@@ -384,7 +384,7 @@ namespace zypp
     ///////////////////////////////////////////////////////////////////
     namespace
     {
-      /** Whether repo is not under RM control and provides it's own methadata paths. */
+      /** Whether repo is not under RM control and provides its own methadata paths. */
       inline bool isTmpRepo( const RepoInfo & info_r )
       { return( info_r.filepath().empty() && info_r.usesAutoMethadataPaths() ); }
     } // namespace

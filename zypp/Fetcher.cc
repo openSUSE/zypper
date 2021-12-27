@@ -694,7 +694,7 @@ namespace zypp
  }
 
   // this method takes all the user pointed indexes, gets them and also tries to
-  // download their signature, and verify them. After that, its parses each one
+  // download their signature, and verify them. After that, it parses each one
   // to fill the checksum cache.
   void Fetcher::Impl::downloadAndReadIndexList( MediaSetAccess &media, const Pathname &dest_dir)
   {

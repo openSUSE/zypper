@@ -20,7 +20,7 @@
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 {
-  /** The resolvers dependency namespaces */
+  /** The resolver's dependency namespaces */
   enum class ResolverNamespace : std::uint8_t
   {
     language	= 1<<0,	///< language support

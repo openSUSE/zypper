@@ -58,7 +58,7 @@ include(FeatureSummary)
 set( CMAKE_ALLOW_LOOSE_LOOP_CONSTRUCTS_gpgme_saved ${CMAKE_ALLOW_LOOSE_LOOP_CONSTRUCTS} )
 set( CMAKE_ALLOW_LOOSE_LOOP_CONSTRUCTS true )
 
-#if this is built-in, please replace, if it isn't, export into a MacroToBool.cmake of it's own
+#if this is built-in, please replace, if it isn't, export into a MacroToBool.cmake of its own
 macro( macro_bool_to_bool FOUND_VAR )
   foreach( _current_VAR ${ARGN} )
     if ( ${FOUND_VAR} )

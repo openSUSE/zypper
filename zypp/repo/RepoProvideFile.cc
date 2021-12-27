@@ -136,10 +136,10 @@ namespace zypp
         }
       }
 
-      /** Provide a MediaSetAccess for \c url with label and verifyer adjusted.
+      /** Provide a MediaSetAccess for \c url with label and verifier adjusted.
        *
        * As the same url (e.g. \c 'dvd:///' ) might be used for multiple repos
-       * we must always adjust the repo specific data (label,verifyer).
+       * we must always adjust the repo specific data (label,verifier).
        *
        * \todo This mixture of media and repos specific data is fragile.
       */
@@ -185,17 +185,17 @@ namespace zypp
                 }
               }
 
-              SUSEMediaVerifier lverifyer { mediafile };
-              if ( lverifyer ) {
-                DBG << "Verifyer for repo '" << repo.alias() << "':" << lverifyer << endl;
-                for ( media::MediaNr i = 1; i <= lverifyer.totalMedia(); ++i ) {
-                  media::MediaVerifierRef verifier( new repo::SUSEMediaVerifier( lverifyer, i ) );
+              SUSEMediaVerifier lverifier { mediafile };
+              if ( lverifier ) {
+                DBG << "Verifier for repo '" << repo.alias() << "':" << lverifier << endl;
+                for ( media::MediaNr i = 1; i <= lverifier.totalMedia(); ++i ) {
+                  media::MediaVerifierRef verifier( new repo::SUSEMediaVerifier( lverifier, i ) );
                   media->setVerifier( i, verifier);
                 }
                 _verifier[media] = repo;
               }
               else {
-                WAR << "Invalid verifier for repo '" << repo.alias() << "' in '" << repo.metadataPath() << "': " << lverifyer << endl;
+                WAR << "Invalid verifier for repo '" << repo.alias() << "' in '" << repo.metadataPath() << "': " << lverifier << endl;
               }
             }
             else

@@ -131,15 +131,15 @@ namespace zypp
    * }
    * \endcode
    *
-   * Print an Exception followed by it's history if available:
+   * Print an Exception, followed by its history, if available:
    * \code
    * Exception error;
    * ERR << error << endl << error.historyAsString();
    * \endcode
    *
    * \todo That's a draft to have a common way of throwing exceptions.
-   * Most probabely we'll finally use blocxx exceptions. Here, but not
-   * in the remaining code of zypp. If we can we should try to wrap
+   * Most probably, we'll finally use blocxx exceptions here, but not
+   * in the remaining code of zypp. If we can, we should try to wrap
    * the blocxx macros and typedef the classes in here.
    **/
   class Exception : public std::exception

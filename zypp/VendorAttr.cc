@@ -111,7 +111,7 @@ namespace zypp
       _vendorMatch.clear();
     }
 
-    /** Helper mapping a vendor string to it's eqivalence class ID.
+    /** Helper mapping a vendor string to its eqivalence class ID.
      *
      * \li Return the vendor strings eqivalence class ID stored in _vendorMatch.
      * \li If not found, assign and return the eqivalence class ID of the lowercased string.

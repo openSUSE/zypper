@@ -126,7 +126,7 @@ public:
   void start ( uint64_t timeout );
 
   /*!
-   * \brief Stops the timer if its running. The \sa sigExpired signal will not emit until \sa start was called again
+   * \brief Stops the timer if it is running. The \sa sigExpired signal will not emit until \sa start was called again.
    */
   void stop  ();
 

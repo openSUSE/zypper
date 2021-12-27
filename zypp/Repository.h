@@ -108,7 +108,7 @@ namespace zypp
          * \endcode
          * Semantically the value is just a plain string, even
          * if OBS often uses the location of the project as
-         * unique identifyer.
+         * unique identifier.
          */
         ContentIdentifier contentIdentifier() const;
 
@@ -172,15 +172,15 @@ namespace zypp
         /** Hint whether the Repo may provide updates for a product.
          *
          * Either the repository claims to update a product via a repository updates
-         * tag in it's metadata or a known product lists the repositories ContentIdentifier
-         * as required update repo.
+         * tag in its metadata or a known product lists the repositories ContentIdentifier
+         * as a required update repo.
          */
         bool isUpdateRepo() const;
 
-        /** Hint whether the Repo may provide updates for a product identified by it's \ref CpeId
+        /** Hint whether the Repo may provide updates for a product identified by its \ref CpeId
          *
          * Either the repository claims to update a product via a repository updates
-         * tag in it's metadata or a known product lists the repositories ContentIdentifier
+         * tag in its metadata or a known product lists the repositories ContentIdentifier
          * as required update repo.
          */
         bool providesUpdatesFor( const CpeId & cpeid_r ) const;
@@ -260,7 +260,7 @@ namespace zypp
         void clearInfo();
 
     public:
-        /** Remove this \ref Repository from it's \ref Pool. */
+        /** Remove this \ref Repository from its \ref Pool. */
         void eraseFromPool();
 
         /** Functor calling \ref eraseFromPool. */
@@ -316,8 +316,8 @@ namespace zypp
         IdType id() const { return _id; }
         /** libsolv internal priorities.
          * Unlike the \ref RepoInfo priority which tries to be YUM conform
-         * (H[1-99]L), this one is the solvers internal priority representation.
-         * It is type \c int and as one might expect it, the higher the value
+         * (H[1-99]L), this one is the solver's internal priority representation.
+         * It is type \c int and, as one might expect, the higher the value,
          * the higher the priority. Subpriority is currently used to express
          * media preferences (\see \ref MediaPriority).
          */
@@ -409,7 +409,7 @@ namespace zypp
     //
     //	CLASS NAME : Repository::EraseFromPool
     //
-    /** Functor removing \ref Repository from it's \ref Pool.
+    /** Functor removing \ref Repository from its \ref Pool.
      *
      * E.g. used as dispose function in. \ref AutoDispose
      * to provide a convenient and exception safe temporary
@@ -433,7 +433,7 @@ namespace zypp
      * 3 sat::pool(){0repos|2solv}
      * \endcode
      * Leaving the block without calling <tt>tmprepo.resetDispose();</tt>
-     * before, will automatically remove the \ref Repo from it's \ref Pool.
+     * before, will automatically remove the \ref Repo from its \ref Pool.
      */
     struct Repository::EraseFromPool
     {

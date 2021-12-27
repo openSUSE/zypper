@@ -63,7 +63,7 @@ void zyppng::AbstractDirectSpawnEngine::mapExtraFds ( int controlFd )
   int nextBackupFd = lastFdToKeep + 1; //this we will use to count the fds upwards
   std::vector<int> safeFds;
   for ( auto fd : _mapFds ) {
-    // if the fds are bigger than the last one we will map to its safe
+    // If the fds are larger than the last one we will map to, it is safe.
     if ( fd > lastFdToKeep ) {
       safeFds.push_back( fd );
     } else {

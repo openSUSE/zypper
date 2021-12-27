@@ -901,7 +901,7 @@ namespace zyppng {
 
   void MediaNetwork::getDir(const zypp::filesystem::Pathname &dirname, bool recurse_r) const
   {
-    //we could make this download concurrently, but its not used anywhere in the code, so why bother
+    //we could make this download concurrently, but it is not used anywhere in the code, so why bother
     zypp::filesystem::DirContent content;
     getDirInfo( content, dirname, /*dots*/false );
 

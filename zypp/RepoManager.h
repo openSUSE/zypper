@@ -563,7 +563,7 @@ namespace zypp
     repo::ServiceType probeService( const Url &url ) const;
 
     /**
-     * Adds new service by it's alias and url
+     * Adds a new service by its alias and URL
      *
      * \param alias unique identifier of the service
      * \param url url to service

@@ -243,7 +243,7 @@ namespace zypp {
 
         //////////////////////////////////////////////////////
         // In case we need a tmpfile, credentials will remove
-        // it in it's destructor after the mout call below.
+        // it in its destructor after the mout call below.
         filesystem::TmpPath credentials;
         if ( !username.empty() || !password.empty() )
         {

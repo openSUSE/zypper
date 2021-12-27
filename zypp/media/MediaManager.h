@@ -619,7 +619,7 @@ namespace zypp::media
      * to a server like FTP. After calling disconnect() the media
      * object (attach point) is still valid and files are present.
      *
-     * But after calling disconnect() it's not possible to call
+     * But after calling disconnect(), it's not possible to call
      * fetch more data using the provideFile() or provideDir()
      * functions anymore.
      *

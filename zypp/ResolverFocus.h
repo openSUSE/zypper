@@ -17,7 +17,7 @@
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 {
-  /** The resolvers general attitude. */
+  /** The resolver's general attitude. */
   enum class ResolverFocus
   {
     Default = 0	///< Request the standard behavior (as defined in zypp.conf or 'Job')

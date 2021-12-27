@@ -7,7 +7,7 @@
 #if !defined ( __cpp_lib_void_t )
 
 namespace std {
-  //define void_t since its only available starting with C++17 in some compilers
+  //define void_t since it is only available starting with C++17 in some compilers
   template<typename... Ts> struct make_void { typedef void type;};
   template<typename... Ts> using void_t = typename make_void<Ts...>::type;
 }

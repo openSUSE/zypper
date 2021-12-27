@@ -178,7 +178,7 @@ namespace zyppng {
 
       /*!
        * Emitted when there is a error in the backend the dispatcher can not recover from. All requests are cancelled
-       * use \a lastError to get more informations.
+       * use \a lastError to get more information.
        */
       SignalProxy<void ( NetworkRequestDispatcher & )> sigError ();
    };

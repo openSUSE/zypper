@@ -70,7 +70,7 @@
  *
  * void MyClass::doSomething()
  * {
- *   // its also possible to use the d_func() to access the pointer:
+ *   // It is also possible to use the d_func() to access the pointer:
  *   d_func()->something = 10;
  * }
  *

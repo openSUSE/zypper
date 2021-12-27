@@ -66,7 +66,7 @@ namespace zypp
         /** Housekeeping data serial number. */
         const SerialNumber & serial() const;
 
-        /** Serial number changing whenever resusePoolIDs==true was used. ResPool must also invalidate it's PoolItems! */
+        /** Serial number changing whenever resusePoolIDs==true was used. ResPool must also invalidate its PoolItems! */
         const SerialNumber & serialIDs() const;
 
         /** Update housekeeping data if necessary (e.g. whatprovides). */

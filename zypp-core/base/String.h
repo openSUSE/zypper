@@ -77,7 +77,7 @@ namespace zypp
    * \endcode
    *
    * This is where \ref C_Str can help. Constructible from \c std::string and \c char*,
-   * it \e reduces the \c std::string to it's \c char*. At the same time it converts
+   * it \e reduces the \c std::string to its \c char*. At the same, time it converts
    * \c (char*)0 into an \c "" string.
    *
    * \code
@@ -440,7 +440,7 @@ namespace zypp
       return return_r;
     }
 
-    /** Parse \c str into a bool if it's a legal \c true or \c false string; else \c indterminate. */
+    /** Parse \c str into a bool if it's a legal \c true or \c false string; else \c indeterminate. */
     TriBool strToTriBool( const C_Str & str );
 
     //@}

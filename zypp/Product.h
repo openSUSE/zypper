@@ -97,7 +97,7 @@ namespace zypp
     /** The product flags */
     std::list<std::string> flags() const;
 
-    /** The date when this Product goes out of support as indicated by it's medadata.
+    /** The date when this Product goes out of support as indicated by its medadata.
      * Use \ref hasEOfLife if it's important to distinguish whether the value
      * is not defined in the metadata, or defined but empty/invalid/TBD.
      */

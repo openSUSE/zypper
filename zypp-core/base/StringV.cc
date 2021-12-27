@@ -155,7 +155,7 @@ namespace zypp
         if ( match.end(0) == 0 && searchfrom == wordstart && searchfrom != line_r.data() ) {
           // An empty(!) separator found at wordstart is ignored unless we're at the very beginning.
           // If searchfrom == wordstart we just skipped over a not-empty separator. If wordstart is
-          // not part of a 2nd not-empty separator, we want the next separator to it's right.
+          // not part of a 2nd not-empty separator, we want the next separator to its right.
           // Example: Rx:"b*" Str:"0b2" - at pos 2 Rx matches empty; the previous cycle found 'b' and reported the '0'.
           ++searchfrom;
         } else {

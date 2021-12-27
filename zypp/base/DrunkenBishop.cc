@@ -35,7 +35,7 @@ namespace zypp
         SE = 0x3,
       };
 
-      /** Convert a hex digit (case insensitive) into it's (4bit) integral value.
+      /** Convert a hex digit (case insensitive) into its (4bit) integral value.
        * \throws std::invalid_argument if char
        */
       inline std::uint8_t hexDigit( char ch_r )

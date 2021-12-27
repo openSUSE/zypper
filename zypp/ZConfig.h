@@ -334,9 +334,9 @@ namespace zypp
       DownloadMode commit_downloadMode() const;
 
       /** \name Signature checking (repodata and packages)
-       * If \ref gpgcheck is \c on (the default) we will either check the signature
+       * If \ref gpgcheck is \c on (the default), we will either check the signature
        * of repo metadata (packages are secured via checksum in the metadata), or the
-       * signature of an rpm package to install if it's repo metadata are not signed
+       * signature of an rpm package to install if its repo metadata is not signed
        * or not checked. If \ref gpgcheck is \c off, no checks are performed.
        *
        * The default behavior can be altered by explicitly setting \ref repo_gpgcheck and/or
@@ -366,7 +366,7 @@ namespace zypp
       Pathname vendorPath() const;
 
       /**
-       * The resolvers general attitude when resolving jobs.
+       * The resolver's general attitude when resolving jobs.
        */
       ResolverFocus solver_focus() const;
 

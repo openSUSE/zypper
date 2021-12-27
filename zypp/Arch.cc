@@ -30,10 +30,10 @@ namespace zypp
   //
   //	CLASS NAME : Arch::CompatEntry
   //
-  /** Holds an architecture ID and it's compatible relation.
-   * An architecture is compatibleWith, if it's _idBit is set in
-   * _compatBits. noarch has ID 0, non builtin archs ID 1 and
-   * have to be treated specialy.
+  /** Holds an architecture ID and its compatible relation.
+   * An architecture is compatibleWith, if its _idBit is set in
+   * _compatBits. noarch has ID 0, non-builtin archs have ID 1 and
+   * have to be treated specially.
   */
   struct Arch::CompatEntry
   {

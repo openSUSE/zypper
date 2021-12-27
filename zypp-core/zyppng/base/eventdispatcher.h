@@ -33,8 +33,8 @@ class EventDispatcherPrivate;
 /*!
  * The EventDispatcher class implements the libzypp event loop native backend.
  *
- * Libzypp is using a thread local dispatcher, means each thread has its own unique disptacher. Only special case is when
- * we need to work together with a already exisiting event loop, for example in a Qt application. The default implementation however
+ * Libzypp is using a thread local dispatcher, which means each thread has its own unique disptacher. The only special case is when
+ * we need to work together with an already exisiting event loop, for example in a Qt application. The default implementation however
  * uses the glib eventloop, just like Qt and GTK, so integrating libzypp here is just a matter of passing the default main context
  * to the constructor of \ref EventDispatcher.
  */

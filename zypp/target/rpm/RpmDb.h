@@ -114,7 +114,7 @@ public:
    * an empty Pathname is given the default (\c/) is used.
    *
    * Calling initDatabase a second time with different arguments will return
-   * an error but leave the database in it's original state.
+   * an error but leave the database in its original state.
    *
    * If the  database already exists and \c doRebuild_r is true,
    * \ref rebuildDatabase is called.
@@ -260,7 +260,7 @@ public:
    */
   void syncTrustedKeys( SyncTrustedKeyBits mode_r = SYNC_BOTH );
   /**
-   * iterates through zypp keyring and import all non existant keys
+   * iterates through zypp keyring and import all non-existent keys
    * into rpm keyring
    */
   void importZyppKeyRingTrustedKeys();
@@ -360,8 +360,8 @@ public:
   };
 
   /** Detailed rpm signature check log messages
-   * A single multiline message if \ref CHK_OK. Otherwise each message line
-   * together with it's \ref CheckPackageResult.
+   * A single multiline message if \ref CHK_OK. Otherwise, each message line
+   * together with its \ref CheckPackageResult.
    */
   struct CheckPackageDetail : std::vector<std::pair<CheckPackageResult,std::string>>
   {};

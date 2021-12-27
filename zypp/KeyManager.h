@@ -47,7 +47,7 @@ class KeyManagerCtx
         /** Creates a new KeyManagerCtx for PGP using a custom homedir/keyring.
          *
          * \note If you explicitly pass an empty \c Pathname, no homedir/keyring
-         * will be set and GPGME will use it's defaults.
+         * will be set and GPGME will use its defaults.
          *
          * \throws KeyRingException if context can not be created or set up
          */

@@ -432,9 +432,9 @@ namespace zypp
          *
          * \note Unfortunately the underlying libsolv dataiterator as returned
          * by \ref subBegin and \ref subFind loses some context when being created.
-         * Thus it's not possible to invoke \ref subBegin and \ref subFind on an
+         * Thus, it's not possible to invoke \ref subBegin and \ref subFind on an
          * iterator that was previously returned by one of those methods. The result
-         * will be an \c end iterator. For the same reason it is not possible for an
+         * will be an \c end iterator. For the same reason, it is not possible for an
          * iterator to leave the sub-structure again.
          *
          * \code
@@ -543,7 +543,7 @@ namespace zypp
       public:
         /**
          * C-tor taking over ownership of the passed \c detail::CDataiterator
-         * and doing it's first iteration (::dataiterator_step)
+         * and doing its first iteration (::dataiterator_step)
          */
         iterator( detail::DIWrap & dip_r );
 

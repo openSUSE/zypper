@@ -48,7 +48,7 @@
  * via shared_ptr, e.g. the \ref EventLoop does this for all \ref AbstractEventSource 's that are
  * registered to receive events using shared_from_this.
  *
- * To have signals in a Object its recommended to subclass the Type from \ref zyppng::Base
+ * To have signals in an Object, it is recommended to subclass the Type from \ref zyppng::Base
  * and always have the objects in a \ref std::shared_ptr.
  * \ref zyppng::Base provides the \ref zyppng::Base::connect and \ref zyppng::Base::connectFunc
  * helpers to connect signals and slots. Connections made with those helpers will make sure the

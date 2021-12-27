@@ -227,9 +227,9 @@ std::vector< MirrorSet > generateMirr ()
   res.back().dlTotal = 2148018;
   res.back().expectSuccess = true;
   res.back().expectedHandlerDownloads = 1;
-  //its not really possible to know how many times the downloads will fail, there are
+  //it is not really possible to know how many times the downloads will fail, there are
   //5 broken mirrors in the set, but if a working mirror is done before the last broken
-  //URL is picked from the dataset not all broken URLs will be used
+  //URL is picked from the dataset, not all broken URLs will be used
   res.back().expectedFileDownloads  = -1;
   res.back().expectedStates = { zyppng::Download::InitialState, zyppng::Download::DlMetaLinkInfo, zyppng::Download::PrepareMulti, zyppng::Download::DlMetalink, zyppng::Download::Finished};
   for ( int i = 10 ; i >= 1; i-- ) {
@@ -247,9 +247,9 @@ std::vector< MirrorSet > generateMirr ()
   res.back().dlTotal = 2148018;
   res.back().expectSuccess = true;
   res.back().expectedHandlerDownloads  = 1;
-  //its not really possible to know how many times the downloads will fail, there are
+  //it is not really possible to know how many times the downloads will fail, there are
   //5 broken mirrors in the set, but if a working mirror is done before the last broken
-  //URL is picked from the dataset not all broken URLs will be used
+  //URL is picked from the dataset, not all broken URLs will be used
   res.back().expectedFileDownloads  = -1;
   res.back().expectedStates = { zyppng::Download::InitialState, zyppng::Download::DlMetaLinkInfo, zyppng::Download::PrepareMulti, zyppng::Download::DlMetalink, zyppng::Download::Finished};
   for ( int i = 10 ; i >= 1; i-- ) {

@@ -69,8 +69,8 @@ namespace zypp
     ///
     /// This type of verifier however is convenience to tell in advance if the
     /// wrong media is inserted. Errors when retrieving the data are logged,
-    /// but won't let any verification fail. If the medium happens to be right
-    /// everything is fine, if it's wrong download time will tell.
+    /// but won't let any verification fail. If the medium happens to be right,
+    /// everything is fine. If it's wrong, download time will tell.
     ///
     class SUSEMediaVerifier::Impl
     {

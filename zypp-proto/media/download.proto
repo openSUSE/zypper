@@ -19,7 +19,7 @@ message DownloadSpec {
     string delta = 3;
     uint64 expectedFileSize = 4;
     string targetPath = 5;
-    bool   checkExistanceOnly = 6; //< this will NOT download the file but only query the server if its existant
+    bool   checkExistanceOnly = 6; //< this will NOT download the file, but only query the server if it exists
     bool   metalink_enabled = 7;   //< should the download try to use metalinks
     uint32   headerSize = 8;         //< Optional file header size for things like zchunk
     Checksum headerChecksum = 9;     //< Optional file header checksum

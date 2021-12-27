@@ -191,7 +191,7 @@ namespace zypp
      * \li \ref True and \ref False. No supprise, they always return
      *     \c true or \c false.
      * \li \ref Not\<TCondition\>. TCondition is a functor, and
-     *     it's result is inverted.
+     *     its result is inverted.
      * \li \ref Chain\<TACondition,TBCondition\>. \c TACondition and \c TBCondition
      *     are functors, and Chain evaluates <tt>TACondition && TBCondition</tt>.
      *

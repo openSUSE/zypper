@@ -45,13 +45,13 @@ namespace zyppng {
    * it also supports a parent/child relationship where the parent object keeps
    * a reference for all its children.
    *
-   * Generally all objects that want to send or receive signals should derive from Base since it
-   * will help on enforcing a correct use of shared_ptr semantics. Generally with signal/slot emission
-   * its easy to run into the issue of a object being deleted while it emits a signal. Think about a Socket
+   * Generally, all objects that want to send or receive signals should derive from Base, since it
+   * will help enforcing a correct use of shared_ptr semantics. Generally, with signal/slot emission,
+   * it is easy to run into the issue of an object being deleted while it emits a signal. Think about a Socket
    * that emits a \a closed signal. It might be removed from the list of connections and the last reference of the
-   * object deleted before the signal returns.
-   * In order to prevent this from happening we established a rule of "Always own a reference to the object you use".
-   * The connection helpers \ref Base::connect and \ref Base::connectFunc help with enforcing this rule, even asserting
+   * object gets deleted before the signal returns.
+   * In order to prevent this from happening, we established a rule of "Always own a reference to the object you use".
+   * The connection helper's \ref Base::connect and \ref Base::connectFunc help with enforcing this rule, even asserting
    * when compiled without NDEBUG defined.
    *
    * \sa zypp/zyppng/base/signals.h

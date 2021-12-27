@@ -237,7 +237,7 @@ namespace zypp
        *
        * All methods return \c bool, because a progress receiver may
        * return \c false to indicate the desire to abort the pending
-       * action. The incident is logged, but it's finaly up to the caller
+       * action. The incident is logged, but it's finally up to the caller
        * to honor this.
        */
       //@{

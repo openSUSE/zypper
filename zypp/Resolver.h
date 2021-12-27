@@ -164,7 +164,7 @@ namespace zypp
     sat::Transaction getTransaction();
 
     /**
-     * Define the resolvers general attitude when resolving jobs.
+     * Define the resolver's general attitude when resolving jobs.
      * \see \ref ResolverFocus
      */
     void setFocus( ResolverFocus focus_r );
@@ -254,14 +254,14 @@ namespace zypp
      * will be generated for them. Source packages requested via e.g. \ref addRequire will
      * always be solved.
      * \NOTE Be carefull. The older the source package is, the stranger may be the
-     * result of solving it's build dependencies.
+     * result of solving its build dependencies.
      */
     void setSolveSrcPackages( bool yesno_r );
     void setDefaultSolveSrcPackages();
     bool solveSrcPackages() const;
 
     /**
-     * Cleanup when deleting packages. Whether the solver should per default
+     * Cleanup when deleting packages. Whether the solver should, per default,
      * try to remove packages exclusively required by the ones it's asked to delete.
      */
     void setCleandepsOnRemove( bool yesno_r );

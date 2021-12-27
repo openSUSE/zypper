@@ -71,8 +71,8 @@ namespace zypp
 
       /*!
        * Checks if the given file in proc is part of our root
-       * or not. If the file was unlinked IGNORE is returned to signal
-       * that its better to check the next file.
+       * or not. If the file was unlinked, IGNORE is returned to signal
+       * that it is better to check the next file.
        */
       Type in_our_root( const Pathname &path ) const {
 
@@ -153,7 +153,7 @@ namespace zypp
           return contloop;
         });
 
-        // if res is still IGNORE we did not find a explicit answer. So to be safe we assume its running on the host
+        // If res is still IGNORE, we did not find a explicit answer. So, to be safe, we assume it is running on the host.
         if ( res == IGNORE )
           return false; // can't tell for sure, lets assume host
 

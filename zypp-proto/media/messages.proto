@@ -36,7 +36,7 @@ message DownloadStart {
 }
 
 // constant updates about the state of the download
-// if total is NOT set, its a "Alive" update only
+// if total is NOT set, it is an "Alive" update only
 message DownloadProgress {
     uint32 requestId = 1;
     string url = 2;
@@ -64,10 +64,10 @@ message UnSubscribeProgress {
   uint32 requestId = 1;
 }
 
-// this message can only be sent when a download is tracked
-// otherwise its silenty ignored without even a return code
-// the expected answer message for this is a DownloadFin with
-// its status code set to cancelled ( if it was not finished before )
+// This message can only be sent when a download is tracked.
+// Otherwise, it is silenty ignored without even a return code.
+// The expected answer message for this is a DownloadFin with
+// its status code set to cancelled (if it was not finished before).
 message CancelDownload {
     uint32 requestId = 1;
 }

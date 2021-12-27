@@ -116,7 +116,7 @@ namespace zypp
       { return resolvable() ? resolvable()->satSolvable() : sat::Solvable::noSolvable; }
 
       /** Return the buddy we share our status object with.
-       * A \ref Product e.g. may share it's status with an associated reference \ref Package.
+       * A \ref Product e.g. may share its status with an associated reference \ref Package.
        */
       sat::Solvable buddy() const;
 

@@ -196,7 +196,7 @@ namespace zypp
           store_r = _ttext;
       }
 
-      /** finaly */
+      /** finally */
       void done( const xml::Node & _node )
       {
         _pdata._edition = Edition( _version, _release );

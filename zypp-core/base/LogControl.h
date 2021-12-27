@@ -149,9 +149,9 @@ namespace zypp
       void emergencyShutdown();
 
       /**
-       *  This will completely disable logging,
-       *  its supposed to be called in the child process after fork()
-       *  was called to shut down all logging completely
+       *  This will completely disable logging.
+       *  It is supposed to be called in the child process after fork()
+       *  was called to shut down all logging completely.
        */
       static void notifyFork();
 

@@ -796,7 +796,7 @@ namespace zyppng {
             return 0;
           }
 
-          //we always download a range even if its not explicitly requested
+          //we always download a range even if it is not explicitly requested
           if ( _requestedRanges.empty() ) {
             _requestedRanges.push_back( NetworkRequest::Range() );
           }

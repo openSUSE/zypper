@@ -68,7 +68,7 @@ namespace zypp
       /** Parse and add spec from a string (`IDENT` or provides:CAPABILITY`). */
       void parse( const C_Str & spec_r );
 
-      /** Parse file \a istr_r and add it's specs (one per line, #-comments). */
+      /** Parse file \a istr_r and add its specs (one per line, #-comments). */
       void parseFrom( const InputStream & istr_r );
 
       /** Parse and add specs from iterator range. */

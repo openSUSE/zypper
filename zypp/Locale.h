@@ -102,7 +102,7 @@ namespace zypp
      *
      * If \a requested_r is not specified \ref ZConfig::textLocale is assumed.
      *
-     * If neither \c requested_r nor any of it's \ref fallback locales are available
+     * If neither \c requested_r nor any of its \ref fallback locales are available
      * in \a avLocales_r, \ref Locale::noCode is returned.
      */
     static Locale bestMatch( const LocaleSet & avLocales_r, Locale requested_r = Locale() );

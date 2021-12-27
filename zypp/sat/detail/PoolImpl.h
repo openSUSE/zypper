@@ -67,7 +67,7 @@ namespace zypp
           const SerialNumber & serial() const
           { return _serial; }
 
-          /** Serial number changing whenever resusePoolIDs==true was used. ResPool must also invalidate it's PoolItems! */
+          /** Serial number changing whenever resusePoolIDs==true was used. ResPool must also invalidate its PoolItems! */
           const SerialNumber & serialIDs() const
           { return _serialIDs; }
 
@@ -350,7 +350,7 @@ namespace zypp
           CPool * _pool;
           /** Serial number - changes with each Pool content change. */
           SerialNumber _serial;
-          /** Serial number of IDs - changes whenever resusePoolIDs==true - ResPool must also invalidate it's PoolItems! */
+          /** Serial number of IDs - changes whenever resusePoolIDs==true - ResPool must also invalidate its PoolItems! */
           SerialNumber _serialIDs;
           /** Watch serial number. */
           SerialNumberWatcher _watcher;

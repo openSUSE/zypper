@@ -339,7 +339,7 @@ namespace zypp
         // NOTE: the explicit ::repo_free above asserts all solvables are memset(0)!
         if ( !_pool->urepos )
         {
-          _serialIDs.setDirty();	// Indicate resusePoolIDs - ResPool must also invalidate it's PoolItems
+          _serialIDs.setDirty();	// Indicate resusePoolIDs - ResPool must also invalidate its PoolItems
           ::pool_freeallrepos( _pool, /*resusePoolIDs*/true );
         }
       }

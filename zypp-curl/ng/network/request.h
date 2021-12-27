@@ -248,8 +248,8 @@ namespace zyppng {
     NetworkRequestError error () const;
 
     /**
-     * In some cases curl can provide extended error informations collected at
-     * runtime. In those cases its possible to query that information.
+     * In some cases, curl can provide extended error information collected at
+     * runtime. In those cases, it is possible to query that information.
      */
     std::string extendedErrorString() const;
 

@@ -530,7 +530,7 @@ namespace zypp
 
             if ( script.isFile() )
             {
-              // Assert it's set executable, unify by md5sum.
+              // Assert it's set as executable, unify by md5sum.
               filesystem::addmod( script.path(), 0500 );
               unifytag = filesystem::md5sum( script.path() );
             }
@@ -1921,7 +1921,7 @@ namespace zypp
       // Send notification once upon calling rpm
       NotifyAttemptToModify attemptToModify( result_r );
 
-      // let zypper know we executed in one big transaction so in case of failures it can show extended error informations
+      // let zypper know we executed in one big transaction so in case of failures it can show extended error information
       result_r.setSingleTransactionMode( true );
 
       // bsc#1181328: Some systemd tools require /proc to be mounted
@@ -2307,7 +2307,7 @@ namespace zypp
         };
         auto prog = zyppng::Process::create();
 
-        // we set up a pipe to communicate with the process, its too dangerous to use stdout since librpm
+        // we set up a pipe to communicate with the process, it is too dangerous to use stdout since librpm
         // might print to it.
         auto messagePipe = zyppng::Pipe::create();
         if ( !messagePipe )
@@ -2693,7 +2693,7 @@ namespace zypp
               ZYPP_THROW( rpm::RpmTransactionFailedException( sstr.str() ) );
 
             } else {
-              ZYPP_THROW( rpm::RpmTransactionFailedException("RPM failed with a unexpected error, check the logs for more informations.") );
+              ZYPP_THROW( rpm::RpmTransactionFailedException("RPM failed with a unexpected error, check the logs for more information.") );
             }
             break;
           }
@@ -2708,13 +2708,13 @@ namespace zypp
             ZYPP_THROW( rpm::RpmInitException( rpm().root(), rpm().dbPath() ) );
             break;
           case zypprpm::FailedToReadPackage:
-            ZYPP_THROW( rpm::RpmSubprocessException("zypp-rpm was unable to read a package, check the logs for more informations.") );
+            ZYPP_THROW( rpm::RpmSubprocessException("zypp-rpm was unable to read a package, check the logs for more information.") );
             break;
           case zypprpm::FailedToAddStepToTransaction:
-            ZYPP_THROW( rpm::RpmSubprocessException("zypp-rpm failed to build the transaction, check the logs for more informations.") );
+            ZYPP_THROW( rpm::RpmSubprocessException("zypp-rpm failed to build the transaction, check the logs for more information.") );
             break;
           case zypprpm::RpmOrderFailed:
-            ZYPP_THROW( rpm::RpmSubprocessException("zypp-rpm failed to order the transaction, check the logs for more informations.") );
+            ZYPP_THROW( rpm::RpmSubprocessException("zypp-rpm failed to order the transaction, check the logs for more information.") );
             break;
         }
 

@@ -262,8 +262,8 @@ void NetworkRequestDispatcherPrivate::setFinished( NetworkRequest &req, NetworkR
     return nullptr;
   };
 
-  // We have a tricky situation if a network request is called when inside a callback, in those cases its
-  // not allowed to call curl_multi_remove_handle, we need to tell the callback to fail, so the download
+  // We have a tricky situation if a network request is called when inside a callback. In those cases, it is
+  // not allowed to call curl_multi_remove_handle. We need to tell the callback to fail, so the download
   // is cancelled by curl itself. We also need to store the current result for later
   auto rmode = std::get_if<NetworkRequestPrivate::running_t>( &req.d_func()->_runningMode );
   if ( rmode ) {

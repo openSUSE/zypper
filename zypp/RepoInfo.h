@@ -302,13 +302,13 @@ namespace zypp
        *   \c repo_gpgcheck = \c on same as the default.
        *
        *   \c repo_gpgcheck = \c off will silently accept unsigned repos. It will NOT turn of
-       *   signature checking on the whole, nevertheless it's not a secure setting.
+       *   signature checking on the whole. Nevertheless, it's not a secure setting.
        *
        *   \c pkg_gpgcheck = \c on will enforce the package signature checking and the need
        *   to confirm unsigned packages for all repos (signed and unsigned).
        *
        *   \c pkg_gpgcheck = \c off will silently accept unsigned packages. It will NOT turn of
-       *   signature checking on the whole, nevertheless it's not a secure setting.
+       *   signature checking on the whole. Nevertheless, it's not a secure setting.
        *
        * If \c gpgCheck is \c off (not recommneded), no checks are performed. You can still
        * enable them individually by setting \c repo_gpgcheck and/or \c pkg_gpgcheck to \c on.

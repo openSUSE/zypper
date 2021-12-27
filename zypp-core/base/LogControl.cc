@@ -66,7 +66,7 @@ namespace zypp
     void lock () {
       // acquire lock
       while ( _atomicLock.test_and_set())
-        // reschedule the current thread while we wait, maybe when its our next turn the lock is free again
+        // Reschedule the current thread while we wait. Maybe, when it is our next turn, the lock is free again.
         std::this_thread::yield();
     }
 
@@ -75,7 +75,7 @@ namespace zypp
     }
 
   private:
-    // we use a lock free atomic flag here so this lock can be safely obtained in a signal handler as well
+    // we use a lock-free atomic flag here, so this lock can be safely obtained in a signal handler as well
     std::atomic_flag _atomicLock = ATOMIC_FLAG_INIT;
   };
 
@@ -123,7 +123,7 @@ namespace zypp
 
     LogThread ()
     {
-      // Name the thread that started the logger assuming it's main thread.
+      // Name the thread that started the logger, assuming it's the main thread.
       zyppng::ThreadData::current().setName(ZYPP_MAIN_THREAD_NAME);
       _thread = std::thread( [this] () {
         workerMain();
@@ -509,9 +509,9 @@ namespace zypp
 
       /*
        * Ugly hack to prevent the use of LogControlImpl when libzypp is shutting down.
-       * Due to the c++ std thread_local static instances are cleaned up before the first global static
+       * Due to the C++ standard, thread_local static instances are cleaned up before the first global static
        * destructor is called. So all classes that use logging after that point in time would crash the
-       * application because its accessing a variable that has already been destroyed.
+       * application because it is accessing a variable that has already been destroyed.
        */
       int &logControlValidFlag() {
         // We are using a POD flag that does not have a destructor,

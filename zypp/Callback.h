@@ -41,9 +41,9 @@ namespace zypp
    * For methods returning non-void, define a reasonable return value,
    * because this is what you get back in case no receiver is listening.
    *
-   * That way the sending side does not need to know whether some receiver
-   * is listening. And it enables the receiver to return a reasonable value,
-   * in case it's got no idea, what else to return.
+   * This way, the sending side does not need to know whether some receiver
+   * is listening, and it enables the receiver to return a reasonable value
+   * in case it has got no idea what else to return.
    *
    * \code
    *   struct Foo : public callback::ReportBase
@@ -117,10 +117,10 @@ namespace zypp
    * \endcode
    *
    * \li \c connect Connect this ReceiveReport (in case some other
-   * ReceiveReport is connected, it get disconnected. Remember its
+   * ReceiveReport is connected, it get disconnected. Remember it is
    * a Callback light).
    * \li \c disconnect Disconnect this ReceiveReport in case it is
-   * connected. If not connected nothing happens.
+   * connected. If not connected, nothing happens.
    * \li \c connected Test whether this ReceiveReport is currently
    * connected.
    * \li \c whoIsConnected Return a 'ReceiveReport*' to the currently
@@ -128,7 +128,7 @@ namespace zypp
    *
    * \par Passing Userdata via Callbacks
    *
-   * For typesafe passing of user data via callbacks \see \ref UserData.
+   * For typesafe passing of user data via callbacks, \see \ref UserData.
    *
    * ReportBase provides a generic \ref callback::ReportBase:report method
    * which can be used to communicate by encoding everything in its \a UserData

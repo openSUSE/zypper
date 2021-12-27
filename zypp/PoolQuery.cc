@@ -216,8 +216,8 @@ namespace zypp
       {}
 
       /** A usable Predicate must provide a string serialization.
-       * As there is no \c operator== for \ref Predicate, we compare it's
-       * string representation instead. If you add new predicated, check the
+       * As there is no \c operator== for \ref Predicate, we compare its
+       * string representation instead. If you add new predicate, check the
        * deserialization code in \ref deserialize.
        */
       template<class TPredicate>
@@ -1146,7 +1146,7 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
 
 
-  //\TODO maybe ctor with stream can be usefull
+  //\TODO maybe ctor with stream can be useful
   //\TODO let it throw, let it throw, let it throw.
   bool PoolQuery::recover( std::istream &str, char delim )
   {

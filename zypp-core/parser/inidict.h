@@ -153,7 +153,7 @@ namespace zypp
       SectionSet _dict;
       /**
        * empty map used to simulate
-       * iteration in non existant
+       * iteration in non-existent
        * sections
        */
       EntrySet _empty_map;

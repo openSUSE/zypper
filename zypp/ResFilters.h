@@ -135,7 +135,7 @@ namespace zypp
      * up and down.
      *
      * If you look at a functor, you'll see that it contains both, the function
-     * to call (it's <tt>operator()</tt> ) and the data you'd otherwise pass as
+     * to call (its <tt>operator()</tt>) and the data you'd otherwise pass as
      * <tt>void * data</tt>. That's nice and safe.
      *
      * \todo migrate to namespace filter and enhance to support Solvables as well.

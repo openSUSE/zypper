@@ -58,7 +58,7 @@ namespace zypp
   public:
     /** \name BitField range definitions.
      *
-     * \note Enlarge FieldType if more bit's needed. It's not yet
+     * \note Enlarge FieldType if more bits are needed. It's not yet
      * checked by the compiler.
      */
     //@{
@@ -73,7 +73,7 @@ namespace zypp
     typedef bit::Range<FieldType,TransactDetailField::end,   1> LicenceConfirmedField;
     typedef bit::Range<FieldType,LicenceConfirmedField::end, 4> WeakField;
     typedef bit::Range<FieldType,WeakField::end,             1> UserLockQueryField; // internal
-    // enlarge FieldType if more bit's needed. It's not yet
+    // enlarge FieldType if more bits are needed. It's not yet
     // checked by the compiler.
     //@}
   public:

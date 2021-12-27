@@ -88,9 +88,9 @@ namespace zypp
       void attemptToModify( bool yesno_r );
 
       /**
-       * \c True if the commit was executed in one big rpm transaction, this can be used to figure out
-       *    when its required to show more information about which packages failed during the transaction
-       *    because otherwise those informations might get lost in the backlog.
+       * \c True if the commit was executed in one big rpm transaction. This can be used to figure out
+       *    when it is required to show more information about which packages failed during the transaction,
+       *    because otherwise, that information might get lost in the backlog.
        */
       bool singleTransactionMode() const;
       void setSingleTransactionMode( bool yesno_r );

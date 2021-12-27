@@ -306,7 +306,7 @@ namespace zypp
       /// of pseudo installed items (like Patches) is computed (roughly whether
       /// their dependencies are broken or satisfied) and remembered.
       ///
-      /// Comparing the items established state against it's current state
+      /// Comparing the item's established state against its current state
       /// tells how the current transaction would influence the item (break
       /// or repair a Patch).
       ///

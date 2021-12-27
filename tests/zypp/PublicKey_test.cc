@@ -25,7 +25,7 @@ BOOST_AUTO_TEST_CASE(publickey_test)
   zypp::PublicKey empty_key;
   BOOST_REQUIRE( ! empty_key.isValid() );
 
-  BOOST_CHECK_THROW( zypp::PublicKey("nonexistant"), Exception );
+  BOOST_CHECK_THROW( zypp::PublicKey("nonexistent"), Exception );
 
   zypp::PublicKey k2(DATADIR/"susekey.asc");
   BOOST_CHECK_EQUAL( k2.id(), "A84EDAE89C800ACA" );

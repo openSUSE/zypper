@@ -465,7 +465,7 @@ namespace zypp
       private:
         /** Watch sat pools serial number. */
         SerialNumberWatcher                   _watcher;
-        /** Watch sat pools Serial number of IDs - changes whenever resusePoolIDs==true - ResPool must also invalidate it's PoolItems! */
+        /** Watch sat pools Serial number of IDs - changes whenever resusePoolIDs==true - ResPool must also invalidate its PoolItems! */
         SerialNumberWatcher                   _watcherIDs;
         mutable ContainerT                    _store;
         mutable DefaultIntegral<bool,true>    _storeDirty;

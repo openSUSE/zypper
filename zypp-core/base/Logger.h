@@ -67,7 +67,7 @@ namespace zypp
 /** \defgroup ZYPP_BASE_LOGGER_MACROS ZYPP_BASE_LOGGER_MACROS
  *  Convenience macros for logging.
  *
- * The macros finaly call @ref getStream, providing appropriate arguments,
+ * The macros finally call @ref getStream, providing appropriate arguments,
  * to return the log stream.
  *
  * @code

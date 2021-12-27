@@ -211,7 +211,7 @@ namespace zyppng {
    * Defines a transition between \a Source and \a Target states.
    * The EventSource \a ev triggers the transition from Source to Target if the condition \a Cond
    * evaluates to true. The operation \a Op is called between exiting the old and entering the new state.
-   * It can be used to transfer informations from the old into the new state.
+   * It can be used to transfer information from the old into the new state.
    *
    * \tparam Source defines the type of the Source state
    * \tparam ev takes a member function pointer returning the event trigger signal that is used to trigger the transition to \a Target
