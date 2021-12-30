@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-10-13 15:45+0200\n"
-"PO-Revision-Date: 2021-05-13 23:59+0000\n"
+"PO-Revision-Date: 2021-12-30 23:11+0000\n"
 "Last-Translator: Mindaugas Baranauskas <opensuse.lietuviu.kalba@gmail.com>\n"
 "Language-Team: Lithuanian <https://l10n.opensuse.org/projects/zypper/master/"
 "lt/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=n==1 ? 0 : n%10>=2 && (n%100<10 || n"
 "%100>=20) ? 1 : n%10==0 || (n%100>10 && n%100<20) ? 2 : 3;\n"
-"X-Generator: Weblate 4.6.2\n"
+"X-Generator: Weblate 4.9.1\n"
 
 #: src/Command.cc:93
 msgid "Invalid command"
@@ -57,7 +57,7 @@ msgstr "Kitos komandos:"
 
 #: src/Command.cc:167
 msgid "Subcommands:"
-msgstr ""
+msgstr "Pokomandžiai:"
 
 #: src/Command.cc:288
 #, c-format, boost-format
@@ -78,37 +78,37 @@ msgstr ""
 #, c-format, boost-format
 msgid "The following package failed to install:"
 msgid_plural "The following %d packages failed to install:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Nepavyko įdiegti paketo:"
+msgstr[1] "Nepavyko įdiegti %d paketų:"
+msgstr[2] "Nepavyko įdiegti %d paketų:"
+msgstr[3] "Nepavyko įdiegti %d paketų:"
 
 #: src/CommitSummary.cc:140
 #, c-format, boost-format
 msgid "The following package installation was skipped:"
 msgid_plural "The following %d package installations were skipped:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Vieno paketo diegimas praleistas:"
+msgstr[1] "%d paketų diegimas praleistas:"
+msgstr[2] "%d paketų diegimas praleistas:"
+msgstr[3] "%d paketų diegimas praleistas:"
 
 #: src/CommitSummary.cc:155
 #, c-format, boost-format
 msgid "The following package failed to uninstall:"
 msgid_plural "The following %d packages failed to uninstall:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Nepavyko pašalinti paketo:"
+msgstr[1] "Nepavyko pašalinti %d paketų:"
+msgstr[2] "Nepavyko pašalinti %d paketų:"
+msgstr[3] "Nepavyko pašalinti %d paketo:"
 
 #: src/CommitSummary.cc:170
 #, c-format, boost-format
 msgid "The following package removal was skipped:"
 msgid_plural "The following %d package removal were skipped:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Paketo šalinimas praleistas:"
+msgstr[1] "%d paketų šalinimas praleistas:"
+msgstr[2] "%d paketų šalinimas praleistas:"
+msgstr[3] "%d paketo šalinimas praleistas:"
 
 #. translators: Appended when clipping a long enumeration:
 #. "ConsoleKit-devel ConsoleKit-doc ... and 20828 more items."
@@ -130,7 +130,7 @@ msgstr "Netinkamas lentelės stilius %d."
 #: src/Config.cc:54
 #, c-format, boost-format
 msgid " Use an integer number from %d to %d"
-msgstr ""
+msgstr " Nurodykite sveikąjį skaičių nuo %d iki %d"
 
 #: src/Config.cc:252
 msgid "The path specified in the --root option must be absolute."
@@ -191,9 +191,9 @@ msgstr "Lentelėse netrumpinti teksto."
 
 #. translators: --table-style, -s, %1% denotes the supported range of the integer argument (e.g. "1-11")
 #: src/Config.cc:424
-#, fuzzy, boost-format
+#, boost-format
 msgid "Table style (%1%)."
-msgstr "Lentelės stilius (sveikasis skaičius)."
+msgstr "Lentelės stilius (%1%)."
 
 #: src/Config.cc:428 src/commands/optionsets.cc:284
 msgid "Entering non-interactive mode."
@@ -374,11 +374,11 @@ msgstr ""
 #: src/Config.cc:822
 #, boost-format
 msgid "Option '%1%' saved in '%2%'."
-msgstr ""
+msgstr "„%1%“ parinktis įrašyta į „%2%“."
 
 #: src/Config.cc:829
 msgid "Failed to save option."
-msgstr ""
+msgstr "Nepavyko įrašyti parinkties."
 
 #: src/PackageArgs.cc:208
 #, c-format, boost-format
@@ -1293,10 +1293,10 @@ msgstr[3] "%d pataisa prašo iš naujo paleisti kompiuterį:"
 #, c-format, boost-format
 msgid "The following package requires a system reboot:"
 msgid_plural "The following %d packages require a system reboot:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Šis paketas prašo iš naujo paleisti sistemą:"
+msgstr[1] "Šie %d paketai prašo iš naujo paleisti sistemą:"
+msgstr[2] "Šie %d paketų prašo iš naujo paleisti sistemą:"
+msgstr[3] "Šis %d paketas prašo iš naujo paleisti sistemą:"
 
 #: src/Summary.cc:1390
 #, boost-format
@@ -1481,7 +1481,7 @@ msgstr "Reikia paleisti iš naujo."
 #. Continue? [y/n/...? shows all options] (y):
 #: src/Summary.cc:1629
 msgid "Consider to cancel:"
-msgstr ""
+msgstr "Galbūt geriau atsisakyti:"
 
 #: src/Zypper.cc:91
 msgid ""
@@ -1600,7 +1600,7 @@ msgstr "Rakto pavadinimas:"
 
 #: src/callbacks/keyring.h:89
 msgid "Key Algorithm:"
-msgstr ""
+msgstr "Rakto algoritmas:"
 
 #: src/callbacks/keyring.h:90
 msgid "Key Created:"
@@ -1612,7 +1612,7 @@ msgstr "Rakto galioja iki:"
 
 #: src/callbacks/keyring.h:93
 msgid "Subkey:"
-msgstr ""
+msgstr "Poraktis:"
 
 #: src/callbacks/keyring.h:94
 msgid "Rpm Name:"
@@ -1650,9 +1650,9 @@ msgstr "Rinkmena „%s“ nepasirašyta."
 
 #. translator: %1% is a file name, %2% a repositories name
 #: src/callbacks/keyring.h:166
-#, fuzzy, boost-format
+#, boost-format
 msgid "File '%1%' from repository '%2%' is unsigned."
-msgstr "Rinkmena „%s“ iš saugyklos „%s“ yra nepasirašyta, tęsti?"
+msgstr "Rinkmena „%1%“ iš saugyklos „%2%“ nėra pasirašyta."
 
 #. TranslatorExplanation: speaking of a file
 #: src/callbacks/keyring.h:183
@@ -1681,15 +1681,15 @@ msgstr ""
 
 #. translator: %1% is a file name, %2% is a gpg key ID
 #: src/callbacks/keyring.h:223
-#, fuzzy, boost-format
+#, boost-format
 msgid "File '%1%' is signed with an unknown key '%2%'."
-msgstr "Rinkmena „%s“ pasirašyta nežinomu raktu „%s“. Tęsti?"
+msgstr "Rinkmena „%1%“ pasirašyta nežinomu raktu „%2%“."
 
 #. translator: %1% is a file name, %2% is a gpg key ID, %3% a repositories name
 #: src/callbacks/keyring.h:226
-#, fuzzy, boost-format
+#, boost-format
 msgid "File '%1%' from repository '%3%' is signed with an unknown key '%2%'."
-msgstr "Rinkmena „%s“ iš saugyklos „%s“ pasirašyta nežinomu raktu „%s“. Tęsti?"
+msgstr "Rinkmena „%1%“ iš saugyklos „%3%“ pasirašyta nežinomu raktu „%2%“."
 
 #. translators: the last %s is gpg key ID
 #: src/callbacks/keyring.h:243
@@ -1724,10 +1724,8 @@ msgstr ""
 
 #. translators: this message is shown after showing description of the key
 #: src/callbacks/keyring.h:308
-#, fuzzy
 msgid "Do you want to reject the key, or trust always?"
-msgstr ""
-"Kaip elgtis su raktu: atmesti, laikinai juo pasitikėti, ar visada pasitikėti?"
+msgstr "Kaip elgtis su raktu: atmesti ar visada pasitikėti?"
 
 #. translators: r/t/a stands for Reject/TrustTemporarily/trustAlways(import)
 #. translate to whatever is appropriate for your language
@@ -1750,7 +1748,7 @@ msgstr "a/l"
 #. The answers should be lower case letters.
 #: src/callbacks/keyring.h:336
 msgid "r/a/"
-msgstr ""
+msgstr "a/v/"
 
 #. translators: help text for the 'r' option in the 'r/t/a' prompt
 #: src/callbacks/keyring.h:342
@@ -1807,7 +1805,7 @@ msgstr ""
 #: src/callbacks/keyring.h:467
 #, boost-format
 msgid "To see details about a key call '%1%'."
-msgstr ""
+msgstr "Išsamesnė informacija apie raktą įvykdžius „%1%“."
 
 #: src/callbacks/keyring.h:471
 #, boost-format
@@ -1835,7 +1833,7 @@ msgstr ""
 
 #: src/callbacks/keyring.h:496
 msgid "New:"
-msgstr ""
+msgstr "Naujas:"
 
 #: src/callbacks/keyring.h:502
 msgid ""
@@ -2181,19 +2179,19 @@ msgstr ""
 #: src/callbacks/rpm.h:711 src/callbacks/rpm.h:718
 #, c-format, boost-format
 msgid "Executing %s script for: %s"
-msgstr ""
+msgstr "Vykdomas %s scenarijus: %s"
 
 #. TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
 #: src/callbacks/rpm.h:725
 #, c-format, boost-format
 msgid "Executing %s script"
-msgstr ""
+msgstr "Vykdomas %s scenarijus"
 
 #. TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
 #: src/callbacks/rpm.h:857
 #, c-format, boost-format
 msgid "Cleaning up: %s"
-msgstr ""
+msgstr "Išvaloma: %s"
 
 #. translator: %s is an other command: "This is an alias for 'zypper info -t patch'."
 #: src/commands/commandhelpformatter.h:94
@@ -2203,7 +2201,7 @@ msgstr "Tai pseudonimas, skirtas „%s“."
 
 #: src/commands/commandhelpformatter.h:107
 msgid "Examples:"
-msgstr ""
+msgstr "Pavyzdžiai:"
 
 #: src/commands/commandhelpformatter.h:110
 msgid "Arguments:"
@@ -2250,7 +2248,7 @@ msgstr "Komandos:"
 #. translators: --details
 #: src/commands/commonflags.h:23 src/commands/inrverify.cc:35
 msgid "Show the detailed installation summary."
-msgstr ""
+msgstr "Rodyti išsamią diegimo santrauką."
 
 #: src/commands/commonflags.h:30
 #, boost-format
@@ -2485,12 +2483,12 @@ msgstr ""
 #. translators: command summary: list-patches, lp
 #: src/commands/listpatches.cc:18
 msgid "List available patches."
-msgstr ""
+msgstr "Visų prieinamų pataisų sąrašas."
 
 #. translators: command description
 #: src/commands/listpatches.cc:20
 msgid "List all applicable patches."
-msgstr ""
+msgstr "Visų pritaikomų pataisų sąrašas."
 
 #. translators: -a, --all
 #: src/commands/listpatches.cc:31
@@ -2724,7 +2722,7 @@ msgstr "Saugykla"
 
 #: src/commands/locks/list.cc:138
 msgid "Comment"
-msgstr ""
+msgstr "Komentaras"
 
 #. translators: locks table value
 #: src/commands/locks/list.cc:156 src/commands/locks/list.cc:235
@@ -2852,12 +2850,12 @@ msgstr ""
 
 #: src/commands/needs-rebooting.cc:45
 msgid "Reboot is probably not necessary."
-msgstr ""
+msgstr "Greičiausiai nebūtina paleisti iš naujo."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/nullcommands.cc:17
 msgid "moo"
-msgstr ""
+msgstr "moo"
 
 #. translators: command summary
 #. translators: command description
@@ -2960,7 +2958,7 @@ msgstr "Rodyti tik įdiegtus paketus"
 #. translators: -u, --not-installed-only
 #: src/commands/optionsets.cc:206
 msgid "Show only packages which are not installed."
-msgstr ""
+msgstr "Rodyti tik neįdiegtus paketus."
 
 #: src/commands/optionsets.cc:239
 msgid ""
@@ -3022,7 +3020,7 @@ msgstr ""
 #. translators: --sort-by-catalog
 #: src/commands/optionsets.cc:382 src/commands/optionsets.cc:393
 msgid "Sort packages by repository."
-msgstr ""
+msgstr "Paketus rikiuoti pagal saugyklas."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/patch.cc:24
@@ -3216,7 +3214,7 @@ msgstr ""
 #. translators: --conflicts
 #: src/commands/query/info.cc:75
 msgid "Show conflicts."
-msgstr ""
+msgstr "Rodyti konfliktus."
 
 #. translators: --obsoletes
 #: src/commands/query/info.cc:79
