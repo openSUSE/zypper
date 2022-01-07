@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: libzypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-07-26 11:04+0200\n"
-"PO-Revision-Date: 2022-01-05 11:11+0000\n"
+"PO-Revision-Date: 2022-01-07 12:12+0000\n"
 "Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
 "Language-Team: Slovak <https://l10n.opensuse.org/projects/libzypp/master/sk/>"
 "\n"
@@ -315,7 +315,7 @@ msgstr "Dominika"
 #. :DMA:212:
 #: zypp/CountryCode.cc:216
 msgid "Dominican Republic"
-msgstr "Dominikánska Republika"
+msgstr "Dominikánska republika"
 
 #. :DOM:214:
 #: zypp/CountryCode.cc:217
