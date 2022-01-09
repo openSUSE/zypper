@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: libzypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-07-26 11:04+0200\n"
-"PO-Revision-Date: 2022-01-07 12:12+0000\n"
+"PO-Revision-Date: 2022-01-09 19:12+0000\n"
 "Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
 "Language-Team: Slovak <https://l10n.opensuse.org/projects/libzypp/master/sk/>"
 "\n"
@@ -692,7 +692,7 @@ msgstr "Lotyšsko"
 #. :LVA:428:
 #: zypp/CountryCode.cc:292
 msgid "Libya"
-msgstr "Libéria"
+msgstr "Líbya"
 
 #. :LBY:434:
 #: zypp/CountryCode.cc:293
@@ -785,7 +785,7 @@ msgstr "Maurícius"
 #. :MUS:480:
 #: zypp/CountryCode.cc:311
 msgid "Maldives"
-msgstr "Mali"
+msgstr "Maldivy"
 
 #. :MDV:462:
 #: zypp/CountryCode.cc:312
@@ -1060,7 +1060,7 @@ msgstr "Salvádor"
 #. :SLV:222:
 #: zypp/CountryCode.cc:366
 msgid "Syria"
-msgstr "Surinam"
+msgstr "Sýria"
 
 #. :SYR:760:
 #: zypp/CountryCode.cc:367
