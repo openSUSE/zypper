@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Mon Jan 10 13:02:11 CET 2022 - ma@suse.de
+
+- Fix broken install path for parser compat headers (fixes #372)
+- RepoManager: remember exec errors in exception history
+  (bsc#1193007)
+- version 17.29.1 (22)
+
+-------------------------------------------------------------------
 Thu Dec 23 16:01:31 CET 2021 - ma@suse.de
 
 - Use the default zypp.conf settings if no zypp.conf exists
