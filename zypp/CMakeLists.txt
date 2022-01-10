@@ -778,8 +778,17 @@ INSTALL( FILES
   DESTINATION ${INCLUDE_INSTALL_DIR}/zypp/media
 )
 
-SET ( zypp_core_parser_compat_HEADERS
+SET ( zypp_core_parser_xml_compat_HEADERS
   parser/xml/XmlEscape.h
+)
+
+INSTALL( FILES
+  ${zypp_core_parser_xml_compat_HEADERS}
+  DESTINATION ${INCLUDE_INSTALL_DIR}/zypp/parser/xml
+)
+
+
+SET ( zypp_core_parser_compat_HEADERS
   parser/IniDict.h
   parser/IniParser.h
   parser/ParseException.h
@@ -787,7 +796,7 @@ SET ( zypp_core_parser_compat_HEADERS
 
 INSTALL( FILES
   ${zypp_core_parser_compat_HEADERS}
-  DESTINATION ${INCLUDE_INSTALL_DIR}/zypp/parser/xml
+  DESTINATION ${INCLUDE_INSTALL_DIR}/zypp/parser
 )
 
 IF ( LIBPROXY_FOUND )
