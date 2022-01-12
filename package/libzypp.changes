@@ -1,7 +1,8 @@
 -------------------------------------------------------------------
 Mon Jan 10 13:02:11 CET 2022 - ma@suse.de
 
-- Fix broken install path for parser compat headers (fixes #372)
+- Fix broken install path for parser compat headers (fixes #372,
+  bsc#1194597)
 - RepoManager: remember exec errors in exception history
   (bsc#1193007)
 - version 17.29.1 (22)
