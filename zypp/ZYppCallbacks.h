@@ -23,6 +23,7 @@
 #include <zypp/Url.h>
 #include <zypp-core/ui/ProgressData>
 #include <zypp-media/auth/AuthData>
+#include <zypp-curl/auth/CurlAuthData>  // bsc#1194597: CurlAuthData must be exposed for zypper
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
