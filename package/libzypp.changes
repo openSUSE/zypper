@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Jan 20 17:29:52 CET 2022 - ma@suse.de
+
+- Fix Legacy include (bsc#1194597)
+- version 17.29.2 (22)
+
+-------------------------------------------------------------------
 Mon Jan 10 13:02:11 CET 2022 - ma@suse.de
 
 - Fix broken install path for parser compat headers (fixes #372,
