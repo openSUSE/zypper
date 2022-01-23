@@ -18,16 +18,16 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-10-13 15:45+0200\n"
-"PO-Revision-Date: 2021-08-22 15:11+0000\n"
-"Last-Translator: Javier Llorente <javier@opensuse.org>\n"
-"Language-Team: Spanish <https://l10n.opensuse.org/projects/zypper/master/es/"
-">\n"
+"PO-Revision-Date: 2022-01-23 20:11+0000\n"
+"Last-Translator: Matías Silva Bustos <matiasasb@gmail.com>\n"
+"Language-Team: Spanish <https://l10n.opensuse.org/projects/zypper/master/es/>"
+"\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.7.1\n"
+"X-Generator: Weblate 4.9.1\n"
 
 #: src/Command.cc:93
 msgid "Invalid command"
@@ -885,7 +885,7 @@ msgstr[1] ""
 msgid "The following recommended patch was automatically selected:"
 msgid_plural ""
 "The following %d recommended patches were automatically selected:"
-msgstr[0] "Se seleccionó automáticamente el siguiente parche  recomendado:"
+msgstr[0] "Se seleccionó automáticamente el siguiente parche recomendado:"
 msgstr[1] ""
 "Los siguientes %d parches recomendados fueron seleccionados automáticamente:"
 
@@ -1082,7 +1082,7 @@ msgstr[1] "Los siguientes %d productos van a cambiar la arquitectura:"
 msgid "The following application is going to change architecture:"
 msgid_plural "The following %d applications are going to change architecture:"
 msgstr[0] "La siguiente aplicación cambiará de arquitectura:"
-msgstr[1] "Las siguientes %d aplicaciones  cambiaran de arquitectura:"
+msgstr[1] "Las siguientes %d aplicaciones cambiaran de arquitectura:"
 
 #: src/Summary.cc:1180
 #, c-format, boost-format
@@ -1117,7 +1117,7 @@ msgstr[1] "Los siguientes %d productos van a cambiar de proveedor:"
 msgid "The following application is going to change vendor:"
 msgid_plural "The following %d applications are going to change vendor:"
 msgstr[0] "La siguiente aplicación cambiará de proveedor:"
-msgstr[1] "Las siguientes %d aplicaciones  cambiaran de proveedor:"
+msgstr[1] "Las siguientes %d aplicaciones cambiaran de proveedor:"
 
 #: src/Summary.cc:1224
 #, c-format, boost-format
@@ -1320,8 +1320,8 @@ msgstr[1] "paquetes cambiarán de proveedor"
 #: src/Summary.cc:1513
 msgid "to change arch"
 msgid_plural "to change arch"
-msgstr[0] "a cambiar arquitectura"
-msgstr[1] "a cambiar arquitectura"
+msgstr[0] "a cambiar de arquitectura"
+msgstr[1] "a cambiar de arquitectura"
 
 #. translators: this text will be preceded by a number e.g. "5 packages ..."
 #: src/Summary.cc:1516
@@ -1446,6 +1446,11 @@ msgid ""
 "repository provider or check his web site. Many provider maintain a web page "
 "showing the fingerprints of the GPG keys they are using."
 msgstr ""
+"Una clave GPG se identifica claramente por su huella. No confíe en los "
+"nombres de las claves. Si no está seguro si la clave presentada es "
+"auténtica, consulte al proveedor del repositorio o verifique su sitio web. "
+"Muchos proveedores mantienen una página web que muestra las huellas de las "
+"claves GPG que están utilizando."
 
 #: src/callbacks/keyring.h:37
 msgid ""
@@ -1501,7 +1506,7 @@ msgstr "Nombre de la clave:"
 
 #: src/callbacks/keyring.h:89
 msgid "Key Algorithm:"
-msgstr ""
+msgstr "Algoritmo de cifrado:"
 
 #: src/callbacks/keyring.h:90
 msgid "Key Created:"
@@ -1726,18 +1731,22 @@ msgstr ""
 
 #. translator: %1% is the number of keys, %2% the name of a repository
 #: src/callbacks/keyring.h:490
-#, boost-format
+#, boost-format, fuzzy
 msgid "Received %1% new package signing key from repository %2%:"
 msgid_plural "Received %1% new package signing keys from repository %2%:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Se recibió una nueva clave del repositorio %2%:"
+msgstr[1] "Se recibieron %1% nuevas claves del repositorio %2%:"
 
 #: src/callbacks/keyring.h:494
+#, fuzzy
 msgid ""
 "Those additional keys are usually used to sign packages shipped by the "
 "repository. In order to validate those packages upon download and "
 "installation the new keys will be imported into the rpm database."
 msgstr ""
+"Esas claves adicionales se usan usualmente para firmar paquetes shipped por "
+"el repositorio. Con el fin de validar esos paquetes en la descarga y la "
+"instalación las nuevas claves serán importadas en la base de datos rpm."
 
 #: src/callbacks/keyring.h:496
 msgid "New:"
@@ -1748,6 +1757,8 @@ msgid ""
 "The repository metadata introducing the new keys have been signed and "
 "validated by the trusted key:"
 msgstr ""
+"Los metadatos del repositorio estrenando las nuevas claves fueron firmados y "
+"validados por una clave confiable:"
 
 #: src/callbacks/keyring.h:525
 #, c-format, boost-format
@@ -2632,8 +2643,9 @@ msgid "Restrict the lock to the specified repository."
 msgstr "Restringe el bloqueo al repositorio especificado."
 
 #: src/commands/locks/add.cc:48
+#, fuzzy
 msgid "Reason for specific lock."
-msgstr ""
+msgstr "Razón para el cerramiento puntual."
 
 #: src/commands/locks/add.cc:81
 msgid "Specified lock has been successfully added."
@@ -3047,6 +3059,8 @@ msgid ""
 "When updating the affected/vulnerable packages described by a patch, zypper "
 "always aims for the latest available version."
 msgstr ""
+"Cuando se actualizan los paquetes afectados/vulnerables descritos por el "
+"parche zypper siempre procura la última versión disponible."
 
 #: src/commands/patch.cc:50
 msgid ""
@@ -3997,8 +4011,8 @@ msgid ""
 "Use the global GPG check setting defined in /etc/zypp/zypp.conf. This is the "
 "default."
 msgstr ""
-"Usar la configuración de comprobación GPG global definida en /etc/zypp/zypp."
-"conf.  Este es el valor por omisión."
+"Usar la configuración de comprobación GPG global definida en /etc/zypp/"
+"zypp.conf. Este es el valor por omisión."
 
 #. translators: -a, --alias
 #: src/commands/reposerviceoptionsets.cc:182
@@ -4782,10 +4796,9 @@ msgstr "source-install (si) [opciones] <nombre> ..."
 
 #. translators: command summary: source-install, si
 #: src/commands/sourceinstall.cc:23
+#, fuzzy
 msgid "Install source packages and their build dependencies."
-msgstr ""
-"Instalar los paquetes de origen y las dependencias  de prototipos "
-"correspondientes."
+msgstr "Instalar los paquetes fuente y sus dependencias."
 
 #. translators: command description
 #: src/commands/sourceinstall.cc:25
@@ -4936,10 +4949,13 @@ msgid "Zypper subcommands available from elsewhere on your $PATH"
 msgstr "Subcomandos de zypper disponibles en otras ubicaciones de su $PATH"
 
 #: src/commands/subcommand.cc:480
+#, fuzzy
 msgid ""
 "Using zypper subcommands available from elsewhere on your $PATH is disabled "
 "in zypper.conf."
 msgstr ""
+"El uso de subcomandos de zypper disponibles de cualquier otro lado en su $"
+"PATH está deshabilitado en zypper.conf."
 
 #. translators: helptext; %1% is a zypper command
 #: src/commands/subcommand.cc:485
@@ -4964,6 +4980,8 @@ msgid ""
 "Lists available subcommands. Using zypper subcommands found on your $PATH is "
 "disabled in zypper.conf."
 msgstr ""
+"Lista los subcomandos disponibles. Usar subcomandos de zypper encontrados en "
+"su $PATH está deshabilitado en zypper.conf."
 
 #. Currently no concept how to handle global options and ZYPPlock
 #: src/commands/subcommand.cc:626
@@ -6507,10 +6525,13 @@ msgstr ""
 "resolución."
 
 #: src/solve-commit.cc:529
+#, fuzzy
 msgid ""
 "DownloadAsNeeded can not be used with ZYPP_SINGLE_RPMTRANS=1, falling back "
 "to DownloadInAdvance"
 msgstr ""
+"DownloadAsNeeded no puede ser usado con ZYPP_SINGLE_RPMTRANS=1, retrayendo a "
+"DownloadInAdvance"
 
 #: src/solve-commit.cc:547
 #, c-format, boost-format
@@ -6711,8 +6732,8 @@ msgstr "Las dependencias de todos los paquetes instalados están satisfechas."
 #, boost-format
 msgid "Considering %1% out of %2% applicable patches:"
 msgid_plural "Considering %1% out of %2% applicable patches:"
-msgstr[0] "Se van a tener en cuenta %1% de los %2% parches aplicables:"
-msgstr[1] "Se van a tener en cuenta %1% de los %2% parches aplicables:"
+msgstr[0] "Se considera %1% de los %2% parches aplicables:"
+msgstr[1] "Se consideran %1% de los %2% parches aplicables:"
 
 #. translator: stats table header
 #: src/update.cc:340
