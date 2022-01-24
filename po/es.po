@@ -17,8 +17,8 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-07-26 11:04+0200\n"
-"PO-Revision-Date: 2021-12-30 03:11+0000\n"
-"Last-Translator: Javier Llorente <javier@opensuse.org>\n"
+"PO-Revision-Date: 2022-01-24 10:12+0000\n"
+"Last-Translator: Matías Silva Bustos <matiasasb@gmail.com>\n"
 "Language-Team: Spanish <https://l10n.opensuse.org/projects/libzypp/master/es/"
 ">\n"
 "Language: es\n"
@@ -4224,7 +4224,7 @@ msgstr "No hay ninguna URL en el repositorio."
 #: zypp/repo/SUSEMediaVerifier.cc:104
 #, boost-format
 msgid "Expected medium %1%/%2% identified by file '%3%' with content:"
-msgstr ""
+msgstr "Medio esperado %1%/%2% identificado por el archivo «%3%» conteniendo:"
 
 #. [lhs][rhs] 0 = installed; 1 = to be installed
 #. TranslatorExplanation %1%(filename) %2%(package1) %3%(package2)
@@ -4691,6 +4691,8 @@ msgid ""
 "install %1% from vendor %2%\n"
 "  replacing %3% from vendor %4%"
 msgstr ""
+"instalar %1% del proveedor %2%\n"
+" reemplazando %3% del proveedor %4%"
 
 #: zypp/solver/detail/SATResolver.cc:1507
 #, boost-format
@@ -4751,7 +4753,7 @@ msgstr "Nuevo mensaje de actualización"
 
 #: zypp/target/TargetImpl.cc:2619
 msgid "Executing the transaction failed because of the following problems:"
-msgstr ""
+msgstr "Falló la ejecución de la transacción debido a los siguientes problemas:"
 
 #. TranslatorExplanation after semicolon is error message
 #. TranslatorExplanation the colon is followed by an error message
@@ -5067,22 +5069,22 @@ msgstr "No es posible hacer fork (%s)."
 #: zypp-core/zyppng/io/forkspawnengine.cc:306
 #, c-format, boost-format
 msgid "Can't exec '%s', chdir failed (%s)."
-msgstr ""
+msgstr "No es posible ejecutar '%s', chdir falló (%s)."
 
 #: zypp-core/zyppng/io/forkspawnengine.cc:309
 #, c-format, boost-format
 msgid "Can't exec '%s', chroot failed (%s)."
-msgstr ""
+msgstr "No es posible ejecutar '%s', falló chroot (%s)."
 
 #: zypp-core/zyppng/io/forkspawnengine.cc:312
 #, c-format, boost-format
 msgid "Can't exec '%s', exec failed (%s)."
-msgstr ""
+msgstr "No es posible ejecutar '%s', falló exec (%s)."
 
 #: zypp-core/zyppng/io/forkspawnengine.cc:316
 #, c-format, boost-format
 msgid "Can't exec '%s', unexpected error."
-msgstr ""
+msgstr "No es posible ejecutar '%s', error inesperado."
 
 #~ msgid "%s does not belong to a distupgrade repository"
 #~ msgstr "%s no pertenece a un repositorio distupgrade"
