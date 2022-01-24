@@ -17,7 +17,7 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-07-26 11:04+0200\n"
-"PO-Revision-Date: 2022-01-24 10:12+0000\n"
+"PO-Revision-Date: 2022-01-24 21:12+0000\n"
 "Last-Translator: Matías Silva Bustos <matiasasb@gmail.com>\n"
 "Language-Team: Spanish <https://l10n.opensuse.org/projects/libzypp/master/es/"
 ">\n"
@@ -3725,14 +3725,14 @@ msgstr[1] "(expira en %d días)"
 #: zypp/RepoInfo.cc:547
 #, boost-format
 msgid "Looking for gpg key ID %1% in cache %2%."
-msgstr "Buscando la llave gpg con identificador ID %1% en la caché %2%."
+msgstr "Buscando la clave gpg identificada con %1% en la caché %2%."
 
 #. translator: %1% is a gpg key ID like 3DBDC284
 #. %2% is a repositories name
 #: zypp/RepoInfo.cc:575
 #, boost-format
 msgid "Looking for gpg key ID %1% in repository %2%."
-msgstr "Buscando la llave gpg con identificador %1% en el repositorio %2%."
+msgstr "Buscando la clave gpg identificada con %1% en el repositorio %2%."
 
 #. translator: %1% is a repositories name
 #: zypp/RepoInfo.cc:599
@@ -3862,7 +3862,7 @@ msgstr "No es posible suprimir %s"
 
 #: zypp/RepoManager.cc:2003 zypp/RepoManager.cc:2453
 msgid "Can't figure out where the service is stored."
-msgstr "No es posible determinar donde está almacenado el servicio."
+msgstr "No es posible determinar dónde está almacenado el servicio."
 
 # clients/support_registration.ycp:225 include/support/registration.ycp:77
 # clients/support_askkey.ycp:246 include/support/supportio.ycp:79
@@ -3947,7 +3947,7 @@ msgid "Unknown support option. Description not available"
 msgstr "Opción de asistencia desconocida. Descripción no disponible."
 
 #: zypp/ZYppFactory.cc:403
-#, c-format, boost-format
+#, boost-format, c-format, fuzzy
 msgid ""
 "System management is locked by the application with pid %d (%s).\n"
 "Close this application before trying again."
@@ -4061,6 +4061,7 @@ msgid "Path '%s' on medium '%s' is not a directory."
 msgstr "La vía %s del medio %s no es un directorio."
 
 #: zypp/media/MediaException.cc:101
+#, fuzzy
 msgid "Malformed URI"
 msgstr "Formato de URI incorrecto"
 
@@ -4141,7 +4142,7 @@ msgstr "La descarga de datos ha excedido el tamaño esperado '%s 1' de '%s 2'."
 #: zypp/zyppng/media/network/networkrequesterror.cc:118
 #, c-format, boost-format
 msgid "Location '%s' is temporarily unaccessible."
-msgstr "La ubicación '%s' está momentaneamente inaccesible."
+msgstr "La ubicación '%s' está momentáneamente inaccesible."
 
 #: zypp/media/MediaException.cc:213
 #, c-format, boost-format
@@ -4224,7 +4225,8 @@ msgstr "No hay ninguna URL en el repositorio."
 #: zypp/repo/SUSEMediaVerifier.cc:104
 #, boost-format
 msgid "Expected medium %1%/%2% identified by file '%3%' with content:"
-msgstr "Medio esperado %1%/%2% identificado por el archivo «%3%» conteniendo:"
+msgstr ""
+"Medio esperado %1%/%2% identificado por el archivo «%3%», el cual contiene:"
 
 #. [lhs][rhs] 0 = installed; 1 = to be installed
 #. TranslatorExplanation %1%(filename) %2%(package1) %3%(package2)
@@ -4384,7 +4386,7 @@ msgstr "romper %s ignorando algunas de sus dependencias"
 
 #: zypp/solver/detail/ProblemSolutionIgnore.cc:48
 msgid "generally ignore of some dependencies"
-msgstr "generalmente se ignoran algunas dependencias"
+msgstr "ignorar en general algunas dependencias"
 
 #: zypp/solver/detail/SATResolver.cc:1089
 #, boost-format
