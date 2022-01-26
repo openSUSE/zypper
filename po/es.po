@@ -17,7 +17,7 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-07-26 11:04+0200\n"
-"PO-Revision-Date: 2022-01-24 21:12+0000\n"
+"PO-Revision-Date: 2022-01-26 19:12+0000\n"
 "Last-Translator: Matías Silva Bustos <matiasasb@gmail.com>\n"
 "Language-Team: Spanish <https://l10n.opensuse.org/projects/libzypp/master/es/"
 ">\n"
@@ -1281,7 +1281,7 @@ msgstr "Conflictos"
 
 #: zypp/Dep.cc:100
 msgid "Obsoletes"
-msgstr "Obsoletos"
+msgstr "Desplaza"
 
 #: zypp/Dep.cc:101
 msgid "Recommends"
@@ -4509,30 +4509,30 @@ msgstr ""
 #, boost-format
 msgid "the installed %1% obsoletes '%2%' provided by the installed %3%"
 msgstr ""
-"el elemento %1% instalado deja obsoleto a %2%, proporcionado por el elemento "
-"%3% instalado"
+"el elemento %1% instalado desplaza a %2%, proporcionado por el elemento %3% "
+"instalado"
 
 #: zypp/solver/detail/SATResolver.cc:1155
 #, boost-format
 msgid "the installed %1% obsoletes '%2%' provided by the to be installed %3%"
 msgstr ""
-"el elemento %1% instalado deja obsoleto a %2%, proporcionado por el elemento "
-"%3% que se va a instalar"
+"el elemento %1% instalado desplaza a %2%, proporcionado por el elemento %3% "
+"que se va a instalar"
 
 #: zypp/solver/detail/SATResolver.cc:1159
 #, boost-format
 msgid "the to be installed %1% obsoletes '%2%' provided by the installed %3%"
 msgstr ""
-"el elemento %1% que se va a instalar deja obsoleto a %2%, proporcionado por "
-"el elemento %3% instalado"
+"el elemento %1% que se va a instalar desplaza a %2%, proporcionado por el "
+"elemento %3% instalado"
 
 #: zypp/solver/detail/SATResolver.cc:1161
 #, boost-format
 msgid ""
 "the to be installed %1% obsoletes '%2%' provided by the to be installed %3%"
 msgstr ""
-"el elemento %1% que se va a instalar deja obsoleto a %2%, proporcionado por "
-"el elemento %3% que se va a instalar"
+"el elemento %1% que se va a instalar desplaza a %2%, proporcionado por el "
+"elemento %3% que se va a instalar"
 
 #: zypp/solver/detail/SATResolver.cc:1166
 #, boost-format
