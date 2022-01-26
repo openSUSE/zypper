@@ -18,7 +18,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-10-13 15:45+0200\n"
-"PO-Revision-Date: 2022-01-23 20:11+0000\n"
+"PO-Revision-Date: 2022-01-26 19:11+0000\n"
 "Last-Translator: Matías Silva Bustos <matiasasb@gmail.com>\n"
 "Language-Team: Spanish <https://l10n.opensuse.org/projects/zypper/master/es/>"
 "\n"
@@ -2643,9 +2643,8 @@ msgid "Restrict the lock to the specified repository."
 msgstr "Restringe el bloqueo al repositorio especificado."
 
 #: src/commands/locks/add.cc:48
-#, fuzzy
 msgid "Reason for specific lock."
-msgstr "Razón para el cerramiento puntual."
+msgstr "Razón para la clausura puntual."
 
 #: src/commands/locks/add.cc:81
 msgid "Specified lock has been successfully added."
@@ -4796,9 +4795,8 @@ msgstr "source-install (si) [opciones] <nombre> ..."
 
 #. translators: command summary: source-install, si
 #: src/commands/sourceinstall.cc:23
-#, fuzzy
 msgid "Install source packages and their build dependencies."
-msgstr "Instalar los paquetes fuente y sus dependencias."
+msgstr "Instalar los paquetes fuente y sus dependencias de construcción."
 
 #. translators: command description
 #: src/commands/sourceinstall.cc:25
