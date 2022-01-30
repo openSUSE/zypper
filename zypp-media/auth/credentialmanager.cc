@@ -243,13 +243,20 @@ namespace zypp
       // get from /etc/zypp/credentials.d, delete the leading path
       credfile = _options.customCredFileDir / file.basename();
 
-    // make sure only our thread accesses the file
-    bpci::file_lock lockFile ( credfile.c_str() );
-    bpci::scoped_lock lock( lockFile );
+    PathInfo pi { credfile };
+    if ( pi.userMayR() ) try {
+      // make sure only our thread accesses the file
+      bpci::file_lock lockFile ( credfile.c_str() );
+      bpci::scoped_lock lock( lockFile );
 
-    CredentialFileReader(credfile, bind(&Impl::processCredentials, this, _1));
+      CredentialFileReader(credfile, bind(&Impl::processCredentials, this, _1));
+    }
+    catch ( ... ) {
+      WAR << pi << " failed to lock file for reading." << endl;
+    }
+
     if (_credsTmp.empty())
-      WAR << file << " does not contain valid credentials or is not readable." << endl;
+      WAR << pi << " does not contain valid credentials or is not readable." << endl;
     else
     {
       result = *_credsTmp.begin();
@@ -265,26 +272,31 @@ namespace zypp
       const mode_t mode)
   {
     int ret = 0;
-    filesystem::assert_dir(file.dirname());
+    filesystem::assert_file_mode( file, mode );
 
-    std::ofstream fs(file.c_str());
-    if (!fs)
-      ret = 1;
+    PathInfo pi { file };
+    if ( pi.userMayRW() ) try {
+      // make sure only our thread accesses the file
+      bpci::file_lock lockFile ( file.c_str() );
+      bpci::scoped_lock lock( lockFile );
 
-    // make sure only our thread accesses the file
-    bpci::file_lock lockFile ( file.c_str() );
-    bpci::scoped_lock lock( lockFile );
-
-
-    for_(it, creds.begin(), creds.end())
-    {
-      (*it)->dumpAsIniOn(fs);
-      (*it)->setLastDatabaseUpdate( time( nullptr ) );
-      fs << endl;
+      std::ofstream fs(file.c_str());
+      for_(it, creds.begin(), creds.end())
+      {
+        (*it)->dumpAsIniOn(fs);
+        (*it)->setLastDatabaseUpdate( time( nullptr ) );
+        fs << endl;
+      }
+      if ( !fs ) {
+        WAR << pi << " failed to write credentials to file." << endl;
+        ret = 1;
+      }
+      fs.close();
     }
-    fs.close();
-
-    filesystem::chmod(file, mode);
+    catch ( ... ) {
+      WAR << pi << " failed to lock file for writing." << endl;
+      ret = 1;
+    }
 
     return ret;
   }
