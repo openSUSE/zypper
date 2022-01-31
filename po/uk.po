@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: zypper.uk\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-10-13 15:45+0200\n"
-"PO-Revision-Date: 2022-01-27 00:12+0000\n"
+"PO-Revision-Date: 2022-02-01 00:12+0000\n"
 "Last-Translator: Taras Panchenko <top39@ukr.net>\n"
 "Language-Team: Ukrainian <https://l10n.opensuse.org/projects/zypper/master/"
 "uk/>\n"
@@ -69,17 +69,18 @@ msgstr "Підкоманди:"
 #: src/Command.cc:288
 #, c-format, boost-format
 msgid "Unknown command '%s'"
-msgstr "Невідома команда «%s»"
+msgstr "Невідома команда \"%s\""
 
 #: src/CommitSummary.cc:90
 msgid "Installation has completed with error."
-msgstr "Установка завершилася з помилкою."
+msgstr "Встановлення завершилося з помилкою."
 
 #: src/CommitSummary.cc:92
 #, boost-format
 msgid "You may run '%1%' to repair any dependency problems."
 msgstr ""
-"Ви можете запустити «%1%» для виправлення будь-яких проблем із залежностями."
+"Ви можете запустити \"%1%\" для виправлення будь-яких проблем із "
+"залежностями."
 
 #: src/CommitSummary.cc:125
 #, c-format, boost-format
@@ -283,7 +284,7 @@ msgstr "Ігнорувати помилки під час перевірки GPG
 msgid ""
 "Turning on '%s'. New repository signing keys will be automatically imported!"
 msgstr ""
-"Буде увімкнено «%s». Нові ключі підписування сховищ будуть автоматично "
+"Буде увімкнено \"%s\". Нові ключі підпису сховищ будуть автоматично "
 "імпортовані!"
 
 #. translators: --gpg-auto-import-keys
@@ -384,7 +385,7 @@ msgstr ""
 #: src/Config.cc:822
 #, boost-format
 msgid "Option '%1%' saved in '%2%'."
-msgstr "Опція «%1%» збережена у «%2%»."
+msgstr "Параметр \"%1%\" збережено у \"%2%\"."
 
 #: src/Config.cc:829
 msgid "Failed to save option."
@@ -393,113 +394,113 @@ msgstr "Помилка запису опції."
 #: src/PackageArgs.cc:208
 #, c-format, boost-format
 msgid "'%s' not found in package names. Trying '%s'."
-msgstr "«%s» не знайдено серед назв пакунків. Пробуємо «%s»."
+msgstr "\"%s\" не знайдено серед назв пакунків. Пробуємо \"%s\"."
 
 #: src/PackageArgs.cc:218
 #, c-format, boost-format
 msgid "'%s' is not a package name or capability."
-msgstr "«%s» не є назвою пакунка або «здатності»."
+msgstr "\"%s\" не є назвою пакунка або його здатності."
 
 #: src/RequestFeedback.cc:40
 #, c-format, boost-format
 msgid "'%s' not found in package names. Trying capabilities."
-msgstr "«%s» не знайдено у назвах пакунків. Пошук можливостей."
+msgstr "\"%s\" не знайдено у назвах пакунків. Спробуємо пошук за здатністю."
 
 #: src/RequestFeedback.cc:46
 #, c-format, boost-format
 msgid "Package '%s' not found."
-msgstr "Пакунок «%s» не знайдено."
+msgstr "Пакунок \"%s\" не знайдено."
 
 #: src/RequestFeedback.cc:48
 #, c-format, boost-format
 msgid "Patch '%s' not found."
-msgstr "Виправлення «%s» не знайдено."
+msgstr "Виправлення \"%s\" не знайдено."
 
 #: src/RequestFeedback.cc:50
 #, c-format, boost-format
 msgid "Product '%s' not found."
-msgstr "Продукт «%s» не знайдено."
+msgstr "Продукт \"%s\" не знайдено."
 
 #: src/RequestFeedback.cc:52
 #, c-format, boost-format
 msgid "Pattern '%s' not found."
-msgstr "Шаблон «%s» не знайдено."
+msgstr "Шаблон \"%s\" не знайдено."
 
 #: src/RequestFeedback.cc:54
 #, c-format, boost-format
 msgid "Source package '%s' not found."
-msgstr "Cирцевий пакунок «%s» не знайдено."
+msgstr "Cирцевий пакунок \"%s\" не знайдено."
 
 #. just in case
 #: src/RequestFeedback.cc:56
 #, c-format, boost-format
 msgid "Object '%s' not found."
-msgstr "Об'єкт «%s» не знайдено."
+msgstr "Об'єкт \"%s\" не знайдено."
 
 #: src/RequestFeedback.cc:61
 #, c-format, boost-format
 msgid "Package '%s' not found in specified repositories."
-msgstr "Пакунок «%s» не знайдено у вказаних сховищах."
+msgstr "Пакунок \"%s\" не знайдено у вказаних сховищах."
 
 #: src/RequestFeedback.cc:63
 #, c-format, boost-format
 msgid "Patch '%s' not found in specified repositories."
-msgstr "Виправлення «%s» не знайдено у вказаних сховищах."
+msgstr "Виправлення \"%s\" не знайдено у вказаних сховищах."
 
 #: src/RequestFeedback.cc:65
 #, c-format, boost-format
 msgid "Product '%s' not found in specified repositories."
-msgstr "Продукт «%s» не знайдено у вказаних сховищах."
+msgstr "Продукт \"%s\" не знайдено у вказаних сховищах."
 
 #: src/RequestFeedback.cc:67
 #, c-format, boost-format
 msgid "Pattern '%s' not found in specified repositories."
-msgstr "Шаблон «%s» не знайдено у вказаних сховищах."
+msgstr "Шаблон \"%s\" не знайдено у вказаних сховищах."
 
 #: src/RequestFeedback.cc:69
 #, c-format, boost-format
 msgid "Source package '%s' not found in specified repositories."
-msgstr "Cирцевий пакунок «%s» не знайдений в зазначених репозиторіях."
+msgstr "Cирцевий пакунок \"%s\" не знайдений в зазначених репозиторіях."
 
 #. just in case
 #: src/RequestFeedback.cc:71
 #, c-format, boost-format
 msgid "Object '%s' not found in specified repositories."
-msgstr "Об'єкт «%s» не знайдено у вказаних сховищах."
+msgstr "Об'єкт \"%s\" не знайдено у вказаних сховищах."
 
 #. translators: meaning a package %s or provider of capability %s
 #: src/RequestFeedback.cc:76
 #, c-format, boost-format
 msgid "No provider of '%s' found."
-msgstr "Не знайдено постачальників «%s»."
+msgstr "Не знайдено постачальників \"%s\"."
 
 #. wildcards used
 #: src/RequestFeedback.cc:84
 #, c-format, boost-format
 msgid "No package matching '%s' is installed."
-msgstr "Не встановлено пакунків, що відповідають «%s»."
+msgstr "Не встановлено пакунків, що відповідають \"%s\"."
 
 #: src/RequestFeedback.cc:86
 #, c-format, boost-format
 msgid "Package '%s' is not installed."
-msgstr "Не встановлено пакунок «%s»."
+msgstr "Не встановлено пакунок \"%s\"."
 
 #. translators: meaning provider of capability %s
 #: src/RequestFeedback.cc:90
 #, c-format, boost-format
 msgid "No provider of '%s' is installed."
-msgstr "Не встановлено постачальників «%s»."
+msgstr "Не встановлено постачальників \"%s\"."
 
 #: src/RequestFeedback.cc:95
 #, c-format, boost-format
 msgid "'%s' is already installed."
-msgstr "«%s» вже встановлено."
+msgstr "\"%s\" вже встановлено."
 
 #. translators: %s are package names
 #: src/RequestFeedback.cc:98
 #, c-format, boost-format
 msgid "'%s' providing '%s' is already installed."
-msgstr "«%s», що містить «%s» вже встановлено."
+msgstr "\"%s\", що містить \"%s\" вже встановлено."
 
 #: src/RequestFeedback.cc:105
 #, c-format, boost-format
@@ -507,7 +508,8 @@ msgid ""
 "No update candidate for '%s'. The highest available version is already "
 "installed."
 msgstr ""
-"Немає кандидатів на оновлення «%s». Найновіша наявна версія вже встановлена."
+"Немає кандидатів на оновлення \"%s\". Найновіша наявна версія вже "
+"встановлена."
 
 #: src/RequestFeedback.cc:108
 #, c-format, boost-format
@@ -520,7 +522,7 @@ msgid ""
 "There is an update candidate '%s' for '%s', but it does not match the "
 "specified version, architecture, or repository."
 msgstr ""
-"Кандидат на оновлення «%s» для «%s» існує, але не відповідає зазначеній "
+"Кандидат на оновлення \"%s\" для \"%s\" існує, але не відповідає зазначеній "
 "версії, архітектурі або сховищу."
 
 #: src/RequestFeedback.cc:123
@@ -529,8 +531,9 @@ msgid ""
 "There is an update candidate for '%s' from vendor '%s', while the current "
 "vendor is '%s'. Use '%s' to install this candidate."
 msgstr ""
-"Існує кандидат оновлення для «%s» від постачальника «%s», тоді як поточний "
-"постачальник це «%s». Використовуйте «%s» для встановлення цього кандидата."
+"Існує кандидат оновлення для \"%s\" від постачальника \"%s\", тоді як "
+"поточний постачальник це \"%s\". Використовуйте \"%s\" для встановлення "
+"цього кандидата."
 
 #: src/RequestFeedback.cc:132
 #, c-format, boost-format
@@ -538,8 +541,8 @@ msgid ""
 "There is an update candidate for '%s', but it comes from a repository with a "
 "lower priority. Use '%s' to install this candidate."
 msgstr ""
-"Кандидат на оновлення «%s» належить сховищу з меншим пріоритетом. "
-"Використовуйте «%s» для його установки."
+"Кандидат на оновлення \"%s\" належить сховищу з меншим пріоритетом. "
+"Використовуйте \"%s\" для його установки."
 
 #: src/RequestFeedback.cc:142
 #, c-format, boost-format
@@ -547,7 +550,7 @@ msgid ""
 "There is an update candidate for '%s', but it is locked. Use '%s' to unlock "
 "it."
 msgstr ""
-"Кандидат на оновлення «%s» заблоковано. Використовуйте «%s» для "
+"Кандидата на оновлення \"%s\" заблоковано. Використовуйте \"%s\" для "
 "розблокування."
 
 #: src/RequestFeedback.cc:148
@@ -556,7 +559,7 @@ msgid ""
 "Package '%s' is not available in your repositories. Cannot reinstall, "
 "upgrade, or downgrade."
 msgstr ""
-"Пакунок «%s» відсутній у ваших сховищах. Не можна перевстановити, оновити "
+"Пакунок \"%s\" відсутній у ваших сховищах. Не можна перевстановити, оновити "
 "або відкотити."
 
 #: src/RequestFeedback.cc:158
@@ -565,24 +568,24 @@ msgid ""
 "The selected package '%s' from repository '%s' has lower version than the "
 "installed one."
 msgstr ""
-"Вибраний пакунок «%s» із сховища «%s» має версію нижчу, ніж встановлений "
+"Вибраний пакунок \"%s\" із сховища \"%s\" має версію нижчу, ніж встановлений "
 "пакунок."
 
 #. translators: %s = "zypper install --oldpackage package-version.arch"
 #: src/RequestFeedback.cc:162
 #, c-format, boost-format
 msgid "Use '%s' to force installation of the package."
-msgstr "Використовуйте «%s» для примусової установки пакунку."
+msgstr "Використовуйте \"%s\" для примусового встановлення пакунку."
 
 #: src/RequestFeedback.cc:169
 #, c-format, boost-format
 msgid "Patch '%s' is interactive, skipping."
-msgstr "Виправлення «%s» є інтерактивним, пропускається."
+msgstr "Виправлення \"%s\" є інтерактивним, пропускається."
 
 #: src/RequestFeedback.cc:175
 #, c-format, boost-format
 msgid "Patch '%s' is not needed."
-msgstr "Виправлення «%s» не потрібне."
+msgstr "Виправлення \"%s\" не потрібне."
 
 #: src/RequestFeedback.cc:181
 #, boost-format
@@ -590,60 +593,60 @@ msgid ""
 "Patch '%1%' is optional. Use '%2%' to install it, or '%3%' to include all "
 "optional patches."
 msgstr ""
-"Латка «%1%» необов'язкова. Використовуйте «%2%» для встановлення, або «%3%» "
-"для включення усіх необов'язкових латок."
+"Латка \"%1%\" необов'язкова. Використовуйте \"%2%\" для встановлення, або \""
+"%3%\" для включення усіх необов'язкових латок."
 
 #: src/RequestFeedback.cc:192
 #, c-format, boost-format
 msgid "Patch '%s' is locked. Use '%s' to install it, or unlock it using '%s'."
 msgstr ""
-"Виправлення «%s» заблоковано. Використовуйте «%s» для установки або «%s» для "
-"розблокування."
+"Виправлення \"%s\" заблоковано. Використовуйте \"%s\" для установки або \"%"
+"s\" для розблокування."
 
 #: src/RequestFeedback.cc:199
 #, c-format, boost-format
 msgid "Patch '%s' is not in the specified category."
-msgstr "Виправлення «%s» не знайдено у вказаній категорії."
+msgstr "Виправлення \"%s\" не знайдено у вказаній категорії."
 
 #: src/RequestFeedback.cc:206
 #, c-format, boost-format
 msgid "Patch '%s' has not the specified severity."
-msgstr "Виправлення «%s» не має вказаної важливості."
+msgstr "Виправлення \"%s\" не має вказаної важливості."
 
 #: src/RequestFeedback.cc:213
 #, c-format, boost-format
 msgid "Patch '%s' was issued after the specified date."
-msgstr "Виправлення «%s» випущено після зазначеної дати."
+msgstr "Виправлення \"%s\" випущено після зазначеної дати."
 
 #: src/RequestFeedback.cc:218
 #, c-format, boost-format
 msgid "Selecting '%s' from repository '%s' for installation."
-msgstr "Вибір «%s» із сховища «%s» для встановлення."
+msgstr "Вибір \"%s\" із сховища \"%s\" для встановлення."
 
 #: src/RequestFeedback.cc:222
 #, c-format, boost-format
 msgid "Forcing installation of '%s' from repository '%s'."
-msgstr "Примусова установка «%s» із сховища «%s»."
+msgstr "Примусове встановлення \"%s\" зі сховища \"%s\"."
 
 #: src/RequestFeedback.cc:226
 #, c-format, boost-format
 msgid "Selecting '%s' for removal."
-msgstr "Вибір «%s» для видалення."
+msgstr "Вибір \"%s\" для видалення."
 
 #: src/RequestFeedback.cc:233
 #, c-format, boost-format
 msgid "'%s' is locked. Use '%s' to unlock it."
-msgstr "«%s» заблоковано. Використовуйте «%s» для розблокування."
+msgstr "\"%s\" заблоковано. Використовуйте \"%s\" для розблокування."
 
 #: src/RequestFeedback.cc:238
 #, c-format, boost-format
 msgid "Adding requirement: '%s'."
-msgstr "Додавання вимоги: «%s»."
+msgstr "Додавання вимоги: \"%s\"."
 
 #: src/RequestFeedback.cc:241
 #, c-format, boost-format
 msgid "Adding conflict: '%s'."
-msgstr "Додавання конфлікту: «%s»."
+msgstr "Додавання конфлікту: \"%s\"."
 
 #. translators: %1% expands to a single package name or a ','-separated enumeration of names.
 #: src/RequestFeedback.cc:263
@@ -659,12 +662,12 @@ msgstr "При оновленні стека оновлень спочатку �
 #: src/SolverRequester.h:52
 #, boost-format
 msgid "Suspicious category filter value '%1%'."
-msgstr "Підозріле значення фільтру категорії «%1%»."
+msgstr "Підозріле значення фільтру категорії \"%1%\"."
 
 #: src/SolverRequester.h:60
 #, boost-format
 msgid "Suspicious severity filter value '%1%'."
-msgstr "Підозріле значення фільтру важливості «%1%»."
+msgstr "Підозріле значення фільтру важливості \"%1%\"."
 
 #. translator: '%1%' is a products name
 #. '%2%' is a command to call (like 'zypper dup')
@@ -672,7 +675,7 @@ msgstr "Підозріле значення фільтру важливості 
 #: src/Summary.cc:416
 #, boost-format
 msgid "Product '%1%' requires to be updated by calling '%2%'!"
-msgstr "Продукт «%1%» вимагає оновлення командою «%2%»!"
+msgstr "Продукт \"%1%\" вимагає оновлення командою \"%2%\"!"
 
 #: src/Summary.cc:585
 #, c-format, boost-format
@@ -1232,7 +1235,8 @@ msgstr "Встановлені"
 #: src/Summary.cc:1348
 #, boost-format
 msgid "Run '%1%' to see the complete list of locked items."
-msgstr "Запустіть «%1%», щоб переглянути повний список заблокованих елементів."
+msgstr ""
+"Запустіть \"%1%\", щоб переглянути повний список заблокованих елементів."
 
 #: src/Summary.cc:1357
 #, c-format, boost-format
@@ -1458,7 +1462,7 @@ msgstr "Непередбачений виняток."
 #: src/Zypper.cc:289
 #, c-format, boost-format
 msgid "Type '%s' to get command-specific help."
-msgstr "Введіть «%s», щоб прочитати довідку з окремої команди."
+msgstr "Введіть \"%s\", щоб прочитати довідку з окремої команди."
 
 #: src/Zypper.cc:310
 #, c-format, boost-format
@@ -1520,7 +1524,7 @@ msgid ""
 "File '%1%' is the repositories master index file. It ensures the integrity "
 "of the whole repo."
 msgstr ""
-"Файл «%1%» це основний індекс сховища. Він контролює цілісність всього "
+"Файл \"%1%\" це основний індекс сховища. Він контролює цілісність всього "
 "сховища."
 
 #: src/callbacks/keyring.h:51
@@ -1577,89 +1581,91 @@ msgstr "Назва rpm:"
 #: src/callbacks/keyring.h:120
 #, boost-format
 msgid "The gpg key signing file '%1%' has expired."
-msgstr "Термін дії gpg-ключа, яким підписано файл «%1%», минув."
+msgstr "Термін дії gpg-ключа, яким підписано файл \"%1%\", минув."
 
 #: src/callbacks/keyring.h:126
 #, boost-format
 msgid "The gpg key signing file '%1%' will expire in %2% day."
 msgid_plural "The gpg key signing file '%1%' will expire in %2% days."
 msgstr[0] ""
-"Термін дії gpg-ключа, яким підписаний файл «%1%», минає через %2% день."
+"Термін дії gpg-ключа, яким підписаний файл \"%1%\", минає через %2% день."
 msgstr[1] ""
-"Термін дії gpg-ключа, яким підписаний файл «%1%», минає через %2% дні."
+"Термін дії gpg-ключа, яким підписаний файл \"%1%\", минає через %2% дні."
 msgstr[2] ""
-"Термін дії gpg-ключа, яким підписаний файл «%1%», минає через %2% днів."
+"Термін дії gpg-ключа, яким підписаний файл \"%1%\", минає через %2% днів."
 
 #: src/callbacks/keyring.h:149
 #, c-format, boost-format
 msgid "Accepting an unsigned file '%s'."
-msgstr "Приймається непідписаний файл «%s»."
+msgstr "Приймається непідписаний файл \"%s\"."
 
 #: src/callbacks/keyring.h:153
 #, c-format, boost-format
 msgid "Accepting an unsigned file '%s' from repository '%s'."
-msgstr "Приймається непідписаний файл «%s» зі сховища «%s»."
+msgstr "Приймається непідписаний файл \"%s\" зі сховища \"%s\"."
 
 #. translator: %1% is a file name
 #: src/callbacks/keyring.h:163
 #, boost-format
 msgid "File '%1%' is unsigned."
-msgstr "Файл «%1%» не підписано."
+msgstr "Файл \"%1%\" не підписано."
 
 #. translator: %1% is a file name, %2% a repositories name
 #: src/callbacks/keyring.h:166
 #, boost-format
 msgid "File '%1%' from repository '%2%' is unsigned."
-msgstr "Файл «%1%» зі сховища «%2%» не підписано."
+msgstr "Файл \"%1%\" зі сховища \"%2%\" не підписано."
 
 #. TranslatorExplanation: speaking of a file
 #: src/callbacks/keyring.h:183
 #, c-format, boost-format
 msgid "File '%s' is unsigned, continue?"
-msgstr "Файл «%s» не підписано, продовжити?"
+msgstr "Файл \"%s\" не підписано, продовжити?"
 
 #. TranslatorExplanation: speaking of a file
 #: src/callbacks/keyring.h:187
 #, c-format, boost-format
 msgid "File '%s' from repository '%s' is unsigned, continue?"
-msgstr "Файл «%s» зі сховища «%s» не підписано, продовжити?"
+msgstr "Файл \"%s\" зі сховища \"%s\" не підписано, продовжити?"
 
 #: src/callbacks/keyring.h:210
 #, c-format, boost-format
 msgid "Accepting file '%s' signed with an unknown key '%s'."
-msgstr "Приймається файл «%s», який підписано невідомим ключем «%s»."
+msgstr "Приймається файл \"%s\", який підписано невідомим ключем \"%s\"."
 
 #: src/callbacks/keyring.h:214
 #, c-format, boost-format
 msgid ""
 "Accepting file '%s' from repository '%s' signed with an unknown key '%s'."
 msgstr ""
-"Приймається файл «%s» зі сховища «%s», який підписано невідомим ключем «%s»."
+"Приймається файл \"%s\" зі сховища \"%s\", який підписано невідомим ключем \""
+"%s\"."
 
 #. translator: %1% is a file name, %2% is a gpg key ID
 #: src/callbacks/keyring.h:223
 #, boost-format
 msgid "File '%1%' is signed with an unknown key '%2%'."
-msgstr "Файл «%1%» підписано невідомим ключем «%2%»."
+msgstr "Файл \"%1%\" підписано невідомим ключем \"%2%\"."
 
 #. translator: %1% is a file name, %2% is a gpg key ID, %3% a repositories name
 #: src/callbacks/keyring.h:226
 #, boost-format
 msgid "File '%1%' from repository '%3%' is signed with an unknown key '%2%'."
-msgstr "Файл «%1%» зі сховища «%3%» підписаний невідомим ключем «%2%»."
+msgstr "Файл \"%1%\" зі сховища \"%3%\" підписаний невідомим ключем \"%2%\"."
 
 #. translators: the last %s is gpg key ID
 #: src/callbacks/keyring.h:243
 #, c-format, boost-format
 msgid "File '%s' is signed with an unknown key '%s'. Continue?"
-msgstr "Файл «%s» підписано невідомим ключем «%s». Продовжити?"
+msgstr "Файл \"%s\" підписано невідомим ключем \"%s\". Продовжити?"
 
 #. translators: the last %s is gpg key ID
 #: src/callbacks/keyring.h:247
 #, c-format, boost-format
 msgid ""
 "File '%s' from repository '%s' is signed with an unknown key '%s'. Continue?"
-msgstr "Файл «%s» зі сховища «%s» підписано невідомим ключем «%s». Продовжити?"
+msgstr ""
+"Файл \"%s\" зі сховища \"%s\" підписано невідомим ключем \"%s\". Продовжити?"
 
 #: src/callbacks/keyring.h:267
 msgid "Automatically importing the following key:"
@@ -1724,13 +1730,13 @@ msgstr "Довіряти ключу та імпортувати до довір�
 #: src/callbacks/keyring.h:389
 #, c-format, boost-format
 msgid "Ignoring failed signature verification for file '%s'!"
-msgstr "Ігнорується невдала перевірка підпису файлу «%s»!"
+msgstr "Ігнорується невдала перевірка підпису файлу \"%s\"!"
 
 #: src/callbacks/keyring.h:392
 #, c-format, boost-format
 msgid ""
 "Ignoring failed signature verification for file '%s' from repository '%s'!"
-msgstr "Ігнорується невдала перевірка підпису файлу «%s» зі сховища «%s»!"
+msgstr "Ігнорується невдала перевірка підпису файлу \"%s\" зі сховища \"%s\"!"
 
 #: src/callbacks/keyring.h:398
 msgid "Double-check this is not caused by some malicious changes in the file!"
@@ -1740,13 +1746,13 @@ msgstr "Двічі перевірте що причиною цього не є �
 #: src/callbacks/keyring.h:408
 #, boost-format
 msgid "Signature verification failed for file '%1%'."
-msgstr "Перевірка підпису файлу «%1%» зазнала невдачі."
+msgstr "Перевірка підпису файлу \"%1%\" зазнала невдачі."
 
 #. translator: %1% is a file name, %2% a repositories name
 #: src/callbacks/keyring.h:411
 #, boost-format
 msgid "Signature verification failed for file '%1%' from repository '%2%'."
-msgstr "Перевірка підпису файлу «%1%» зі сховища «%2%» зазнала невдачі."
+msgstr "Перевірка підпису файлу \"%1%\" зі сховища \"%2%\" зазнала невдачі."
 
 #: src/callbacks/keyring.h:460
 msgid ""
@@ -1759,7 +1765,7 @@ msgstr ""
 #: src/callbacks/keyring.h:467
 #, boost-format
 msgid "To see details about a key call '%1%'."
-msgstr "Для перегляду деталей стосовно запиту ключа «%1%»."
+msgstr "Для перегляду деталей стосовно запиту ключа \"%1%\"."
 
 #: src/callbacks/keyring.h:471
 #, boost-format
@@ -1768,7 +1774,7 @@ msgid ""
 "from the rpm database calling '%1%'."
 msgstr ""
 "Якщо ви вважаєте що ключ про який йде мова все ще використовується у базі "
-"даних rpm видалить його за допомогою запита «%1%»."
+"даних rpm видалить його за допомогою запита \"%1%\"."
 
 #. translator: %1% is the number of keys, %2% the name of a repository
 #: src/callbacks/keyring.h:490
@@ -1820,7 +1826,7 @@ msgid ""
 "  expected %3%\n"
 "  but got  %4%\n"
 msgstr ""
-"Невдача перевірка цифрового підпису файлу «%1%»\n"
+"Невдача перевірка цифрового підпису файлу \"%1%\"\n"
 "[%2%]\n"
 "\n"
 "  очікувалось %3%\n"
@@ -1844,7 +1850,7 @@ msgid ""
 "to unblock using this file on your own risk. Empty input will discard the "
 "file.\n"
 msgstr ""
-"Однак, якщо ви переконалися, що файл з контрольною сумою «%1%..» є "
+"Однак, якщо ви переконалися, що файл з контрольною сумою \"%1%..\" є "
 "безпечним, правильним\n"
 "і повинен бути використаний протягом цієї операції, введіть перші 4 символи "
 "контрольної суми\n"
@@ -2119,7 +2125,7 @@ msgid ""
 msgstr ""
 "Для перевірки на конфлікти файлів необхідно завантажити невстановлені "
 "пакунки заздалегідь, щоб отримати доступ до їхніх списків файлів. Докладніше "
-"див. у описі параметра «%1%» у посібнику zypper."
+"див. у описі параметра \"%1%\" у посібнику zypper."
 
 #. TranslatorExplanation %1%(number of conflicts); detailed list follows
 #: src/callbacks/rpm.h:475
@@ -2167,7 +2173,7 @@ msgstr "Прибирання: %s"
 #: src/commands/commandhelpformatter.h:94
 #, c-format, boost-format
 msgid "This is an alias for '%s'."
-msgstr "Це псевдонім для «%s»."
+msgstr "Це псевдонім для \"%s\"."
 
 #: src/commands/commandhelpformatter.h:107
 msgid "Examples:"
@@ -2231,7 +2237,7 @@ msgid ""
 "Do a 'best effort' approach to update. Updates to a lower than the latest "
 "version are also acceptable."
 msgstr ""
-"Використати підхід «найменших зусиль» для оновлення. Також прийнятне "
+"Використати підхід \"найменших зусиль\" для оновлення. Також прийнятне "
 "оновлення до версій які не є найостаннішими."
 
 #: src/commands/commonflags.h:45
@@ -2282,8 +2288,8 @@ msgid ""
 "for more information about this command."
 msgstr ""
 "Ви збираєтесь оновити дистрибутив за допомогою всіх увімкнених сховищ. Перед "
-"тим як продовжити переконайтесь, що ці сховища між собою сумісні. Див. «%s» "
-"для більш детальнішої інформації про цю команду."
+"тим як продовжити переконайтесь, що ці сховища між собою сумісні. Див. \"%s\""
+" для більш детальнішої інформації про цю команду."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/help.cc:22
@@ -2344,7 +2350,7 @@ msgid ""
 "supporting available hardware, languages or filesystems. Useful after having "
 "added e.g. new hardware or driver repos."
 msgstr ""
-"Такий запит як «%1%» обмежує команду у пошуку пакунків які підтримують "
+"Такий запит як \"%1%\" обмежує команду у пошуку пакунків які підтримують "
 "наявне обладнання, мови або файлові системи. Це корисно після додавання "
 "сховищ для нового обладнання або драйверів."
 
@@ -2359,11 +2365,11 @@ msgstr ""
 
 #: src/commands/installremove.cc:62
 msgid "Select packages by plain name, not by capability."
-msgstr "Вибрати пакунки за назвою, а не за «здатністю»."
+msgstr "Вибрати пакунки за назвою, а не за здатністю."
 
 #: src/commands/installremove.cc:63
 msgid "Select packages solely by capability."
-msgstr "Обирайте пакунки виключно за «здатністю»."
+msgstr "Обирайте пакунки виключно за здатністю."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/installremove.cc:82
@@ -2381,8 +2387,8 @@ msgid ""
 "Remove packages with specified capabilities. A capability is NAME[.ARCH]"
 "[OP<VERSION>], where OP is one of <, <=, =, >=, >."
 msgstr ""
-"Вилучити пакунки з вказаною «здатністю». «Здатність» це запис у вигляді "
-"НАЗВА[.АРХ][ДІЯ<ВЕРСІЯ>], де ДІЯ є одним з знаків порівняння <, <=, =, >=, >."
+"Вилучити пакунки з вказаною здатністю. Здатність - це запис у вигляді НАЗВА[."
+"АРХ][ДІЯ<ВЕРСІЯ>], де ДІЯ є одним з знаків порівняння <, <=, =, >=, >."
 
 #: src/commands/installremove.cc:104 src/commands/installremove.cc:224
 #: src/utils/messages.cc:53
@@ -2428,8 +2434,8 @@ msgid ""
 "location. A capability is NAME[.ARCH][OP<VERSION>], where OP is one of <, "
 "<=, =, >=, >."
 msgstr ""
-"Встановити пакунки з визначеною «здатністю» або RPM файли у визначене місце. "
-"«Здатність» це НАЗВА[.АРХ][ДІЯ<ВЕРСІЯ>], де ДІЯ є одним з знаків порівняння "
+"Встановити пакунки з визначеною здатністю або RPM файли у визначене місце. "
+"Здатність - це НАЗВА[.АРХ][ДІЯ<ВЕРСІЯ>], де ДІЯ є одним з знаків порівняння "
 "<, <=, =, >=, >."
 
 #. translators: --from <ALIAS|#|URI>
@@ -2538,8 +2544,8 @@ msgid ""
 "Specify locale which shall be supported by the language code. Get a list of "
 "all available locales by calling '%s'."
 msgstr ""
-"Вкажіть локаль яка повинна підтримуватися мовним кодом. Отримайте список "
-"усіх наявних локалей виконавши запит «%s»."
+"Вкажіть локаль, яка повинна підтримуватися мовним кодом. Отримайте список "
+"усіх наявних локалей виконавши запит \"%s\"."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/locale/localescmd.cc:17
@@ -2575,12 +2581,12 @@ msgid ""
 "Get all locales with lang code 'en' that have their own country code, "
 "excluding the fallback 'en':"
 msgstr ""
-"Отримати всі локалі які мають код «en» разом з кодом власної країни, за "
-"винятком резервної «en»:"
+"Отримати всі локалі які мають код \"en\" разом з кодом власної країни, за "
+"винятком резервної \"en\":"
 
 #: src/commands/locale/localescmd.cc:86
 msgid "Get all locales with lang code 'en' with or without country code:"
-msgstr "Отримати всі локалі які мають код «en» разом або без коду країни:"
+msgstr "Отримати всі локалі які мають код \"en\" разом або без коду країни:"
 
 #: src/commands/locale/localescmd.cc:93
 msgid "Get the locale matching the argument exactly: "
@@ -2588,7 +2594,7 @@ msgstr "Отримати локаль яка точно відповідає а�
 
 #: src/commands/locale/localescmd.cc:100
 msgid "Get the list of packages which are available for 'de' and 'en':"
-msgstr "Отримати список наявних пакунків для «de» та «en»:"
+msgstr "Отримати список наявних пакунків для \"de\" та \"en\":"
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/locale/removelocalecmd.cc:18
@@ -2610,7 +2616,7 @@ msgid ""
 "requested locales by calling '%s'."
 msgstr ""
 "Вкажіть локалі які слід видалити за допомогою мовного коду. Отримайте "
-"пропонований список локалей через запит «%s»."
+"пропонований список локалей через запит \"%s\"."
 
 #: src/commands/locale/removelocalecmd.cc:46
 msgid "Do not remove corresponding packages for given locale(s)."
@@ -2793,7 +2799,7 @@ msgid ""
 "with '%1%' or by package name."
 msgstr ""
 "Вилучає блокування пакунка. Вкажіть номер блокування, отримавши його за до "
-"за його номером отриманим з «%1%» або за назвою пакунка."
+"за його номером отриманим з \"%1%\" або за назвою пакунка."
 
 #: src/commands/locks/remove.cc:45
 msgid "Remove only locks with specified repository."
@@ -2893,11 +2899,11 @@ msgstr "what-provides (wp) <ЗДАТНІСТЬ>"
 #. translators: command summary: what-provides, wp
 #: src/commands/nullcommands.cc:39
 msgid "List packages providing specified capability."
-msgstr "Список пакунків що мають певну «здатність»."
+msgstr "Список пакунків що мають певну здатність."
 
 #: src/commands/nullcommands.cc:42
 msgid "List all packages providing the specified capability."
-msgstr "Список всіх пакунків що надають певні «здатності»."
+msgstr "Список всіх пакунків що надають певні здатності."
 
 #. translators: command description what-provides: %1% is a zypper command line, %2% a command line option
 #: src/commands/nullcommands.cc:44
@@ -2906,8 +2912,9 @@ msgid ""
 "The command is an alias for '%1%' and performs a case-insensitive search. "
 "For a case-sensitive search call the search command and add the '%2%' option."
 msgstr ""
-"Команда є псевдонімом для «%1%» і виконує пошук без урахування регістру. Для "
-"пошуку з урахуванням регістру викличте команду пошуку та додайте опцію «%2%»."
+"Команда є псевдонімом для \"%1%\" і виконує пошук без урахування регістру. "
+"Для пошуку з урахуванням регістру викличте команду пошуку та додайте опцію \""
+"%2%\"."
 
 #. "what-provides" is obsolete
 #. The "what-provides" now is included in "search" command, e.g.
@@ -2916,12 +2923,12 @@ msgstr ""
 #: src/commands/nullcommands.cc:57
 #, c-format, boost-format
 msgid "Command '%s' is replaced by '%s'."
-msgstr "Команду «%s» змінено на «%s»."
+msgstr "Команду \"%s\" змінено на \"%s\"."
 
 #: src/commands/nullcommands.cc:58
 #, c-format, boost-format
 msgid "See '%s' for all available options."
-msgstr "Див. «%s» для усіх наявних параметрів."
+msgstr "Див. \"%s\" для усіх наявних параметрів."
 
 #: src/commands/optionsets.cc:33
 msgid "Don't change anything, just report what would be done."
@@ -2935,7 +2942,7 @@ msgid ""
 "'%1%'."
 msgstr ""
 "Значуща перевірка конфліктів файлів може бути виконана тільки при "
-"використані разом зі «%1%»."
+"використані разом зі \"%1%\"."
 
 #. translators: -r, --repo <ALIAS|#|URI>
 #: src/commands/optionsets.cc:67
@@ -2945,7 +2952,7 @@ msgstr "Працювати лише з вказаним сховищем."
 #: src/commands/optionsets.cc:87
 #, c-format, boost-format
 msgid "Option '--%s' overrides a previously set download mode."
-msgstr "Параметр «--%s» скасовує попередньо встановлений режим завантаження."
+msgstr "Параметр \"--%s\" скасовує попередньо встановлений режим завантаження."
 
 #: src/commands/optionsets.cc:116
 #, c-format, boost-format
@@ -2978,8 +2985,8 @@ msgid ""
 "Automatically say 'yes' to third party license confirmation prompt. See 'man "
 "zypper' for more details."
 msgstr ""
-"Автоматично казати «так» для підтвердження ліцензій сторонніх виробників. "
-"Див. подробиці у «man zypper»."
+"Автоматично казати \"так\" для підтвердження ліцензій сторонніх виробників. "
+"Див. подробиці у \"man zypper\"."
 
 #: src/commands/optionsets.cc:244
 msgid ""
@@ -3132,7 +3139,7 @@ msgid ""
 "system service name."
 msgstr ""
 "Для кожного пов'язаного з системою процесу показати у стандартний вивід "
-"print <формат> в кожному новому рядку. Будь-яка «%s» директива у <формат> "
+"print <формат> в кожному новому рядку. Будь-яка \"%s\" директива у <формат> "
 "буде замінена на назву системного сервісу."
 
 #. translators: -d, --debugFile <path>
@@ -3201,7 +3208,8 @@ msgstr "Можливо ви бажаєте перезапустити ці пр�
 #, c-format, boost-format
 msgid ""
 "See '%s' for information about the meaning of values in the above table."
-msgstr "Див. «%s» для інформації про значення в таблиці, яка знаходиться вище."
+msgstr ""
+"Див. \"%s\" для інформації про значення в таблиці, яка знаходиться вище."
 
 #: src/commands/ps.cc:208
 msgid ""
@@ -3486,7 +3494,8 @@ msgstr "Вказаний тип не є дійсним типом сховища
 #: src/commands/repos/add.cc:131
 #, c-format, boost-format
 msgid "See '%s' or '%s' to get a list of known repository types."
-msgstr "Щоб побачити список відомих типів сховищ, скористайтесь «%s» або «%s»."
+msgstr ""
+"Щоб побачити список відомих типів сховищ, скористайтесь \"%s\" або \"%s\"."
 
 #: src/commands/repos/clean.cc:16
 msgid "clean (cc) [ALIAS|#|URI] ..."
@@ -3635,7 +3644,7 @@ msgstr "Не визначено жодного сховища."
 
 #: src/commands/repos/list.cc:333
 msgid "Use the 'zypper addrepo' command to add one or more repositories."
-msgstr "Вживайте команду «zypper addrepo», щоб додати одне або більше сховищ."
+msgstr "Вживайте команду \"zypper addrepo\", щоб додати одне або більше сховищ."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/repos/modify.cc:24
@@ -3661,7 +3670,7 @@ msgid ""
 "the '%1%' aggregate options."
 msgstr ""
 "Змінити властивості сховища, вказаного за допомогою псевдоніма, номера або "
-"URI, або за допомогою сукупності параметрів «%1%»."
+"URI, або за допомогою сукупності параметрів \"%1%\"."
 
 #: src/commands/repos/modify.cc:89
 #, c-format, boost-format
@@ -3724,12 +3733,12 @@ msgstr "Оновити також сервіси перед оновленням
 #: src/commands/repos/refresh.cc:95
 #, c-format, boost-format
 msgid "The '%s' global option has no effect here."
-msgstr "Глобальний параметр «%s» тут не працюватиме."
+msgstr "Глобальний параметр \"%s\" тут не працюватиме."
 
 #: src/commands/repos/refresh.cc:103
 #, c-format, boost-format
 msgid "Arguments are not allowed if '%s' is used."
-msgstr "Аргументи не дозволені, якщо використовується «%s»."
+msgstr "Аргументи не дозволені, якщо використовується \"%s\"."
 
 #: src/commands/repos/refresh.cc:195 src/repos.cc:1023
 msgid "Specified repositories: "
@@ -3738,22 +3747,22 @@ msgstr "Вказані сховища: "
 #: src/commands/repos/refresh.cc:218
 #, c-format, boost-format
 msgid "Refreshing repository '%s'."
-msgstr "Оновлення сховища «%s»."
+msgstr "Оновлення сховища \"%s\"."
 
 #: src/commands/repos/refresh.cc:236 src/repos.cc:844
 #, c-format, boost-format
 msgid "Scanning content of disabled repository '%s'."
-msgstr "Сканування вмісту вимкненого сховища «%s»."
+msgstr "Сканування вмісту вимкненого сховища \"%s\"."
 
 #: src/commands/repos/refresh.cc:247
 #, c-format, boost-format
 msgid "Skipping disabled repository '%s'"
-msgstr "Пропускається вимкнене сховище «%s»"
+msgstr "Пропускається вимкнене сховище \"%s\""
 
 #: src/commands/repos/refresh.cc:262 src/repos.cc:861 src/repos.cc:904
 #, c-format, boost-format
 msgid "Skipping repository '%s' because of the above error."
-msgstr "Пропускається сховище «%s» через помилку вище."
+msgstr "Пропускається сховище \"%s\" через помилку вище."
 
 #: src/commands/repos/refresh.cc:274
 msgid ""
@@ -3772,7 +3781,7 @@ msgstr "Немає визначених увімкнених сховищ."
 #, c-format, boost-format
 msgid "Use '%s' or '%s' commands to add or enable repositories."
 msgstr ""
-"Для додавання або увімкнення сховищ використовуйте команди «%s» або «%s»."
+"Для додавання або увімкнення сховищ використовуйте команди \"%s\" або \"%s\"."
 
 #: src/commands/repos/refresh.cc:293
 msgid "Could not refresh the repositories because of errors."
@@ -3817,7 +3826,7 @@ msgstr "Ігнорувати рядок запиту в URI."
 #: src/commands/repos/remove.cc:96
 #, c-format, boost-format
 msgid "Repository '%s' not found by alias, number or URI."
-msgstr "Сховище «%s» не знайдено за його псевдонімом, номером або URI."
+msgstr "Сховище \"%s\" не знайдено за його псевдонімом, номером або URI."
 
 #: src/commands/repos/rename.cc:33
 #, c-format, boost-format
@@ -3825,18 +3834,18 @@ msgid ""
 "Cannot change alias of '%s' repository. The repository belongs to service "
 "'%s' which is responsible for setting its alias."
 msgstr ""
-"Неможливо змінити псевдонім сховища «%s». Сховище належить сервісу «%s», "
+"Неможливо змінити псевдонім сховища \"%s\". Сховище належить сервісу \"%s\", "
 "який відповідає за встановлення його псевдоніму."
 
 #: src/commands/repos/rename.cc:43
 #, c-format, boost-format
 msgid "Repository '%s' renamed to '%s'."
-msgstr "Сховище «%s» перейменоване на «%s»."
+msgstr "Сховище \"%s\" перейменоване на \"%s\"."
 
 #: src/commands/repos/rename.cc:47 src/repos.cc:1202
 #, c-format, boost-format
 msgid "Repository named '%s' already exists. Please use another alias."
-msgstr "Вже існує сховище з назвою «%s». Будь ласка, введіть інший псевдонім."
+msgstr "Вже існує сховище з назвою \"%s\". Будь ласка, введіть інший псевдонім."
 
 #: src/commands/repos/rename.cc:52 src/repos.cc:1680
 msgid "Error while modifying the repository:"
@@ -3845,7 +3854,7 @@ msgstr "Помилка під час зміни сховища:"
 #: src/commands/repos/rename.cc:53
 #, c-format, boost-format
 msgid "Leaving repository '%s' unchanged."
-msgstr "Сховище «%s» буде залишене без змін."
+msgstr "Сховище \"%s\" буде залишене без змін."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/repos/rename.cc:64
@@ -3870,7 +3879,7 @@ msgstr "Замало аргументів. Потрібні, принаймні,
 #: src/commands/repos/rename.cc:114
 #, c-format, boost-format
 msgid "Repository '%s' not found."
-msgstr "Сховище «%s» не знайдено."
+msgstr "Сховище \"%s\" не знайдено."
 
 #: src/commands/reposerviceoptionsets.cc:35 src/repos.cc:107
 #, c-format, boost-format
@@ -3878,7 +3887,7 @@ msgid ""
 "Invalid priority '%s'. Use a positive integer number. The greater the "
 "number, the lower the priority."
 msgstr ""
-"Недійсний пріоритет «%s». Для зазначення пріоритету використовуйте додатне "
+"Недійсний пріоритет \"%s\". Для зазначення пріоритету використовуйте додатне "
 "ціле число. Чим вище число, тим нижчий пріоритет."
 
 #: src/commands/reposerviceoptionsets.cc:72
@@ -3976,7 +3985,7 @@ msgstr "Увімкнути строгу перевірку GPG для цього
 #: src/commands/reposerviceoptionsets.cc:142
 #, boost-format
 msgid "Short hand for '%1%'."
-msgstr "Скорочення для «%1%»."
+msgstr "Скорочення для \"%1%\"."
 
 #: src/commands/reposerviceoptionsets.cc:143
 msgid "Enable GPG check but allow the repository metadata to be unsigned."
@@ -4070,7 +4079,7 @@ msgid ""
 "use '%1%'."
 msgstr ""
 "Для розширеного пошуку, включаючи ще не активовані віддалені ресурси, будь-"
-"ласка, використовуйте «%1%»."
+"ласка, використовуйте \"%1%\"."
 
 #. translator: %1% denotes a zypper command to execute. Like 'zypper search-packages'.
 #: src/commands/search/search-packages-hinthack.cc:85
@@ -4080,7 +4089,7 @@ msgid ""
 "install it by calling '%1%'."
 msgstr ""
 "Пакунок що надає дану підкоманду зараз не встановлено. Ви можете встановити "
-"його зробивши запит «%1%»."
+"його зробивши запит \"%1%\"."
 
 #: src/commands/search/search-packages-hinthack.cc:98
 #, boost-format
@@ -4089,17 +4098,17 @@ msgid ""
 "run '%1%' at any time."
 msgstr ""
 "Для розширеного пошуку, включаючи ще не активовані віддалені ресурси ви "
-"можете запустити «%1%» у будь-який час."
+"можете запустити \"%1%\" у будь-який час."
 
 #: src/commands/search/search-packages-hinthack.cc:99
 #, boost-format
 msgid "Do you want to run '%1%' now?"
-msgstr "Ви хочете запустити «%1%» зараз?"
+msgstr "Ви хочете запустити \"%1%\" зараз?"
 
 #: src/commands/search/search-packages-hinthack.cc:115
 #, boost-format
 msgid "Run '%1%' to search in not yet activated remote resources."
-msgstr "Запустити «%1%» для пошуку у ще не активованих віддалених ресурсах."
+msgstr "Запустити \"%1%\" для пошуку у ще не активованих віддалених ресурсах."
 
 #. translators: command summary: search, se
 #: src/commands/search/search.cc:76
@@ -4123,8 +4132,8 @@ msgid ""
 "* and ? wildcards can also be used within search strings. If a search string "
 "is enclosed in '/', it's interpreted as a regular expression."
 msgstr ""
-"Також можна використовувати в межах рядка пошуку підстановочні символи «*» "
-"та «?». Якщо рядок пошуку завершується на «/» це буде інтерпретовано як "
+"Також можна використовувати в межах рядка пошуку підстановочні символи \"*\" "
+"та \"?\". Якщо рядок пошуку завершується на \"/\" це буде інтерпретовано як "
 "регулярний вираз."
 
 #. translators: --match-substrings
@@ -4298,7 +4307,7 @@ msgstr ""
 #: src/commands/search/search.cc:290 src/repos.cc:781
 #, c-format, boost-format
 msgid "Specified repository '%s' is disabled."
-msgstr "Віддалене сховище «%s» вимкнено."
+msgstr "Віддалене сховище \"%s\" вимкнено."
 
 #. translators: empty search result message
 #: src/commands/search/search.cc:463
@@ -4316,7 +4325,8 @@ msgstr "Дивись підказку у вищенаведеному повід
 #: src/commands/search/search.cc:495 src/repos.cc:990
 msgid "Running 'zypper refresh' as root might resolve the problem."
 msgstr ""
-"Виконання команди «zypper refresh» від адміністратора може зарадити проблемі."
+"Виконання команди \"zypper refresh\" від адміністратора може зарадити "
+"проблемі."
 
 #. translators: -g, --category <CATEGORY>
 #: src/commands/selectpatchoptionset.cc:24
@@ -4352,17 +4362,17 @@ msgstr "Обрати проблеми що відповідають вказан
 #: src/commands/services/add.cc:55
 #, c-format, boost-format
 msgid "Service aliased '%s' already exists. Please use another alias."
-msgstr "Вже існує сховище з назвою «%s». Будь ласка, введіть інший псевдонім."
+msgstr "Вже існує сховище з назвою \"%s\". Будь ласка, введіть інший псевдонім."
 
 #: src/commands/services/add.cc:62
 #, c-format, boost-format
 msgid "Error occurred while adding service '%s'."
-msgstr "Помилка під час додавання сервісу «%s»."
+msgstr "Помилка під час додавання сервісу \"%s\"."
 
 #: src/commands/services/add.cc:68
 #, c-format, boost-format
 msgid "Service '%s' has been successfully added."
-msgstr "Успішно додано сервіс «%s»."
+msgstr "Успішно додано сервіс \"%s\"."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/services/add.cc:102
@@ -4388,18 +4398,18 @@ msgstr "Помилка читання сервісів:"
 #: src/commands/services/common.cc:129
 #, c-format, boost-format
 msgid "Refreshing service '%s'."
-msgstr "Оновлення сервісу «%s»."
+msgstr "Оновлення сервісу \"%s\"."
 
 #: src/commands/services/common.cc:136 src/commands/services/common.cc:146
 #, c-format, boost-format
 msgid "Problem retrieving the repository index file for service '%s':"
-msgstr "Проблема отримання файлу індексу сховища для сервісу «%s»:"
+msgstr "Проблема отримання файлу індексу сховища для сервісу \"%s\":"
 
 #: src/commands/services/common.cc:138 src/commands/services/refresh.cc:226
 #: src/repos.cc:1732
 #, c-format, boost-format
 msgid "Skipping service '%s' because of the above error."
-msgstr "Пропуск сервісу «%s» через помилку вище."
+msgstr "Пропуск сервісу \"%s\" через помилку вище."
 
 #: src/commands/services/common.cc:148
 msgid "Check if the URI is valid and accessible."
@@ -4408,12 +4418,12 @@ msgstr "Перевірте чи дійсна та доступна вказан�
 #: src/commands/services/common.cc:159
 #, c-format, boost-format
 msgid "Removing service '%s':"
-msgstr "Вилучення сервісу «%s»:"
+msgstr "Вилучення сервісу \"%s\":"
 
 #: src/commands/services/common.cc:162
 #, c-format, boost-format
 msgid "Service '%s' has been removed."
-msgstr "Сервіс «%s» було вилучено."
+msgstr "Сервіс \"%s\" було вилучено."
 
 #: src/commands/services/list.cc:81
 msgid "services (ls) [OPTIONS]"
@@ -4431,7 +4441,7 @@ msgstr "Список визначених сервісів."
 #, c-format, boost-format
 msgid "No services defined. Use the '%s' command to add one or more services."
 msgstr ""
-"Не визначено жодного сервісу. Вживайте команду «%s», щоб додати один або "
+"Не визначено жодного сервісу. Вживайте команду \"%s\", щоб додати один або "
 "більше сервісів."
 
 #. translators: command synopsis; do not translate lowercase words
@@ -4456,7 +4466,7 @@ msgid ""
 "'%1%' aggregate options."
 msgstr ""
 "Змінити властивості сервісів, вказаних за допомогою псевдоніма, номера або "
-"URI, або за допомогою сукупності параметрів «%1%»."
+"URI, або за допомогою сукупності параметрів \"%1%\"."
 
 #: src/commands/services/modify.cc:41
 msgid "Advanced:"
@@ -4497,27 +4507,27 @@ msgstr "Потрібен псевдонім або сукупність пара
 #: src/commands/services/modify.cc:104
 #, c-format, boost-format
 msgid "Service '%s' not found."
-msgstr "Сервіс «%s» не знайдено."
+msgstr "Сервіс \"%s\" не знайдено."
 
 #: src/commands/services/modify.cc:235
 #, c-format, boost-format
 msgid "Service '%s' has been successfully enabled."
-msgstr "Сервіс «%s» успішно увімкнено."
+msgstr "Сервіс \"%s\" успішно увімкнено."
 
 #: src/commands/services/modify.cc:237
 #, c-format, boost-format
 msgid "Service '%s' has been successfully disabled."
-msgstr "Сервіс «%s» успішно вимкнено."
+msgstr "Сервіс \"%s\" успішно вимкнено."
 
 #: src/commands/services/modify.cc:243
 #, c-format, boost-format
 msgid "Autorefresh has been enabled for service '%s'."
-msgstr "Для сервісу «%s» було увімкнено автоматичне оновлення."
+msgstr "Для сервісу \"%s\" було увімкнено автоматичне оновлення."
 
 #: src/commands/services/modify.cc:245
 #, c-format, boost-format
 msgid "Autorefresh has been disabled for service '%s'."
-msgstr "Для сервісу «%s» було вимкнено автоматичне оновлення."
+msgstr "Для сервісу \"%s\" було вимкнено автоматичне оновлення."
 
 #: src/commands/services/modify.cc:250
 #, c-format, boost-format
@@ -5650,8 +5660,8 @@ msgstr ""
 #, c-format, boost-format
 msgid "Aborting installation due to user disagreement with %s %s license."
 msgstr ""
-"Скасовується встановлення через те що користувач не погодився з ліцензією %s "
-"%s."
+"Скасовується встановлення через те, що користувач не погодився з ліцензією "
+"%s %s."
 
 #: src/misc.cc:248
 msgid "License"
@@ -5850,7 +5860,7 @@ msgstr "Примусове оновлення сирих метаданих"
 #: src/repos.cc:288
 #, c-format, boost-format
 msgid "Retrieving repository '%s' metadata"
-msgstr "Отримання метаданих сховища «%s»"
+msgstr "Отримання метаданих сховища \"%s\""
 
 # power-off message
 #: src/repos.cc:312
@@ -5987,8 +5997,8 @@ msgid ""
 "The metadata cache needs to be built for the '%s' repository. You can run "
 "'zypper refresh' as root to do this."
 msgstr ""
-"Для сховища «%s» слід спочатку побудувати кеш метаданих. Ви можете виконати "
-"цю дію командою «zypper refresh», відданою адміністратором."
+"Для сховища \"%s\" слід спочатку побудувати кеш метаданих. Ви можете "
+"виконати цю дію командою \"zypper refresh\", відданою адміністратором."
 
 #: src/repos.cc:925
 #, c-format, boost-format
@@ -6106,7 +6116,7 @@ msgstr "Сховище «%s» успішно додано"
 #: src/repos.cc:1274
 #, c-format, boost-format
 msgid "Reading data from '%s' media"
-msgstr "Читання даних з носія «%s»"
+msgstr "Читання даних з носія \"%s\""
 
 #: src/repos.cc:1280
 #, c-format, boost-format
@@ -6229,7 +6239,7 @@ msgstr "Сховище %s буде залишене без змін."
 
 #: src/repos.cc:1768
 msgid "Loading repository data..."
-msgstr "Завантаження даних сховища…"
+msgstr "Завантаження даних сховища..."
 
 #: src/repos.cc:1770
 msgid ""
@@ -6242,7 +6252,7 @@ msgstr ""
 #: src/repos.cc:1790
 #, c-format, boost-format
 msgid "Retrieving repository '%s' data..."
-msgstr "Отримання даних сховища «%s»…"
+msgstr "Отримання даних сховища \"%s\"..."
 
 #: src/repos.cc:1796
 #, c-format, boost-format
@@ -6270,7 +6280,7 @@ msgid ""
 "Repository '%s' appears to be outdated. Consider using a different mirror or "
 "server."
 msgstr ""
-"Вірогідно, сховище «%s» застаріло. Спробуйте використовувати інший сервер "
+"Вірогідно, сховище \"%s\" застаріло. Спробуйте використовувати інший сервер "
 "або дзеркало."
 
 #. translators: the first %s is 'zypper refresh' and the second 'zypper clean -m'
@@ -6281,7 +6291,7 @@ msgstr "Спробуйте «%s» або, навіть, «%s» перш ніж �
 
 #: src/repos.cc:1849
 msgid "Reading installed packages..."
-msgstr "Читання встановлених пакунків…"
+msgstr "Читання встановлених пакунків..."
 
 #: src/repos.cc:1858
 msgid "Problem occurred while reading the installed packages:"
@@ -6433,7 +6443,7 @@ msgstr[2] "%d проблем:"
 #. should not happen! If solve() failed at least one problem must be set!
 #: src/solve-commit.cc:226
 msgid "Specified capability not found"
-msgstr "Вказана «здатність» не знайдена"
+msgstr "Вказану здатність не знайдено"
 
 #: src/solve-commit.cc:236
 #, c-format, boost-format
@@ -7023,9 +7033,9 @@ msgid ""
 "package which might lead to broken dependencies of other packages. It is "
 "recommended to run '%s' after the operation has finished."
 msgstr ""
-"Ви хочете зігнорувати проблему зі звантаженням або встановленням пакунка, що "
-"може призвести до пошкодження залежностей інших пакунків. Рекомендовано "
-"запустити «%s» після виконання цієї дії."
+"Ви ігноруєте проблему із завантаженням або встановленням пакунка, що може "
+"призвести до пошкодження залежностей інших пакунків. Рекомендовано запустити "
+"\"%s\" після виконання цієї дії."
 
 #: src/utils/messages.cc:111
 #, boost-format
@@ -7061,7 +7071,7 @@ msgstr ""
 #: src/utils/messages.cc:141
 #, c-format, boost-format
 msgid "Type '%s' to get a list of global options and commands."
-msgstr "Введіть «%s», щоб прочитати список глобальних параметрів та команд."
+msgstr "Введіть \"%s\", щоб прочитати список глобальних параметрів та команд."
 
 #. translators: %1% is the name of an (unknown) command
 #. translators: %2% something providing more info (like 'zypper help subcommand')
