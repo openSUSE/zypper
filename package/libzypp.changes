@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Tue Feb  1 18:49:00 CET 2022 - ma@suse.de
+
+- Public header files on older distros must use c++11
+  (bsc#1194597)
+- Fix exception handling when reading or writing credentials
+  (bsc#1194898)
+- version 17.29.3 (22)
+
+-------------------------------------------------------------------
 Thu Jan 20 17:29:52 CET 2022 - ma@suse.de
 
 - Fix Legacy include (bsc#1194597)
