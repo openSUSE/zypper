@@ -98,7 +98,9 @@ namespace zypp
       typedef typename boost::call_traits<Tp>::const_reference  const_reference;
       typedef Tp                                                value_type;
       typedef typename boost::call_traits<Tp>::value_type       result_type;
-      using dispose_param_type = std::conditional_t< std::is_pointer_v<Tp> || std::is_integral_v<Tp>, Tp const, reference >;
+      // bsc#1194597: Header is exposed in the public API, so it must be c++11:
+      // using dispose_param_type = std::conditional_t< std::is_pointer_v<Tp> || std::is_integral_v<Tp>, Tp const, reference >;
+      using dispose_param_type = typename std::conditional< std::is_pointer<Tp>::value || std::is_integral<Tp>::value, Tp const, reference >::type;
 
     public:
       /** Dispose function signatue. */
