@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-10-13 15:45+0200\n"
-"PO-Revision-Date: 2022-02-03 00:11+0000\n"
+"PO-Revision-Date: 2022-02-03 18:11+0000\n"
 "Last-Translator: Murat Servan Kahraman <muratservan@outlook.com>\n"
 "Language-Team: Turkish <https://l10n.opensuse.org/projects/zypper/master/tr/>"
 "\n"
@@ -1820,7 +1820,7 @@ msgstr "Bu kilidi silmek istiyor musunuz?"
 
 #: src/callbacks/locks.h:45
 msgid "The following query does not lock anything:"
-msgstr "Aşağıdaki sorgu hiç bir şeyi kilitlemez."
+msgstr "Aşağıdaki sorgu hiçbir şeyi kilitlemez:"
 
 #. help text for the "Abort, retry, ignore?" prompt for media errors
 #: src/callbacks/media.cc:27
@@ -1879,7 +1879,7 @@ msgstr "Aygıtlar algılanamadı, çıkaramazsınız."
 
 #: src/callbacks/media.cc:107
 msgid "Try to eject the device manually."
-msgstr "Aygıtı el ile çıkarmayı deneyin"
+msgstr "Aygıtı el ile çıkarmayı deneyin."
 
 #: src/callbacks/media.cc:118
 msgid "Detected devices:"
@@ -1957,12 +1957,12 @@ msgstr "Şifre"
 
 #: src/callbacks/repo.h:49
 msgid "Retrieving delta"
-msgstr "Delta alınıyor."
+msgstr "Delta alınıyor"
 
 #. translators: this text is a progress display label e.g. "Applying delta foo [42%]"
 #: src/callbacks/repo.h:74
 msgid "Applying delta"
-msgstr "Delta uygulanıyor."
+msgstr "Delta uygulanıyor"
 
 #. TranslatorExplanation %s is package size like "5.6 M"
 #: src/callbacks/repo.h:103
@@ -3467,8 +3467,9 @@ msgstr "URI"
 #. translators: property name; short; used like "Name: value"
 #: src/commands/repos/list.cc:47 src/commands/repos/list.cc:230
 #: src/commands/services/list.cc:106 src/repos.cc:1256
+#, fuzzy
 msgid "Enabled"
-msgstr "Etkinleştir."
+msgstr "Etkinleşti"
 
 #. GPG Check
 #. translators: property name; short; used like "Name: value"
@@ -3687,7 +3688,7 @@ msgstr "Devre dışı bırakılmış '%s' deposunun içeriği taranıyor."
 #: src/commands/repos/refresh.cc:247
 #, c-format, boost-format
 msgid "Skipping disabled repository '%s'"
-msgstr "Devre dışı olan '%s' deposu atlanıyor."
+msgstr "Devre dışı olan '%s' deposu atlanıyor"
 
 #: src/commands/repos/refresh.cc:262 src/repos.cc:861 src/repos.cc:904
 #, c-format, boost-format
@@ -4237,7 +4238,7 @@ msgstr "Eşleşen öge bulunamadı."
 
 #: src/commands/search/search.cc:493
 msgid "Problem occurred initializing or executing the search query"
-msgstr "Arama sorgusu yükleniyorken yada yürütülüyorken hata oluştu."
+msgstr "Arama sorgusu başlatılırken ya da yürütülürken hata oluştu"
 
 #: src/commands/search/search.cc:494
 msgid "See the above message for a hint."
