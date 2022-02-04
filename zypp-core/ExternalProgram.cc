@@ -318,13 +318,22 @@ namespace zypp {
       _backend->setUseDefaultLocale( default_locale );
 
       if ( _backend->start( argv, stdinFd, stdoutFd, stderrFd ) ) {
-
-        inputfile  = fdopen( childStdoutParentFd, "r" );
-        childStdoutParentFd.resetDispose();
-        outputfile = fdopen( childStdinParentFd, "w" );
-        childStdinParentFd.resetDispose();
-
-        if (!inputfile || !outputfile)
+        bool connected = true;
+        if ( childStdoutParentFd != -1 ) {
+          inputfile = fdopen( childStdoutParentFd, "r" );
+          if ( inputfile )
+            childStdoutParentFd.resetDispose();
+          else
+            connected = false;
+        }
+        if ( childStdinParentFd != -1 ) {
+          outputfile = fdopen( childStdinParentFd, "w" );
+          if ( outputfile )
+            childStdinParentFd.resetDispose();
+          else
+            connected = false;
+        }
+        if ( not connected )
         {
             ERR << "Cannot create streams to external program " << argv[0] << endl;
             ExternalProgram::close();

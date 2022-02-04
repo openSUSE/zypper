@@ -348,6 +348,7 @@ bool zyppng::ForkSpawnEngine::start( const char * const *argv, int stdin_fd, int
           _execError = zypp::str::form( _("Can't exec '%s', unexpected error."), _args[0].c_str() );
           break;
       }
+      ERR << "pid " << _pid << " launch failed: " << _execError << std::endl;
 
       // reap child and collect exit code
       isRunning( true );
