@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Tue Feb  8 10:52:48 CET 2022 - ma@suse.de
+
+- Fix handling of redirected command in-/output (bsc#1195326)
+  This fixes delays at the end of zypper operations, where
+  zypper unintentionally waits for appdata plugin scripts to
+  complete.
+- version 17.29.4 (22)
+
+-------------------------------------------------------------------
 Tue Feb  1 18:49:00 CET 2022 - ma@suse.de
 
 - Public header files on older distros must use c++11
