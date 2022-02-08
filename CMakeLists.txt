@@ -356,8 +356,6 @@ ADD_SUBDIRECTORY( zypp-core )
 ADD_SUBDIRECTORY( zypp-media )
 ADD_SUBDIRECTORY( zypp-curl )
 ADD_SUBDIRECTORY( zypp )
-# do not build devel by default
-ADD_SUBDIRECTORY( devel EXCLUDE_FROM_ALL )
 ADD_SUBDIRECTORY( tools )
 ADD_SUBDIRECTORY( doc )
 
