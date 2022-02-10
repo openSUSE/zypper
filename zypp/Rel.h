@@ -79,7 +79,7 @@ namespace zypp
     {}
 
     /** Ctor from string.
-     * Legal values for \a strval_r are: "==", "!=", "<", "<=", ">", ">=",<BR>
+     * Legal values for \a strval_r are: "="/"==", "!=", "<", "<=", ">", ">=",<BR>
      * as well as "EQ", "NE", "LT", "LE", "GT", "GE", "ANY", "NONE"<BR>
      * and "" (empty string resolves to ANY).
      *
@@ -112,7 +112,7 @@ namespace zypp
     { return (bits_r & ANY_e) == bits_r; }
 
     /** String representation of relational operator.
-     * \return "==", "!=", "<", "<=", ">", ">=", "ANY" or "NONE"
+     * \return "=", "!=", "<", "<=", ">", ">=", "ANY" or "NONE"
     */
     const std::string & asString() const;
     /** \overload */

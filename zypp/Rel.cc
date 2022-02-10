@@ -108,7 +108,7 @@ namespace zypp
     if ( _table.empty() )
       {
         // initialize it
-        _table[EQ_e]   = "==";
+        _table[EQ_e]   = "=";
         _table[NE_e]   = "!=";
         _table[LT_e]   = "<";
         _table[LE_e]   = "<=";
