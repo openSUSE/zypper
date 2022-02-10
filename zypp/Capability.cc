@@ -517,34 +517,35 @@ namespace zypp
       case CapDetail::NOCAP:
         return str << "<NoCap>";
         break;
+
       case CapDetail::NAMED:
         str << obj.name();
         if ( obj.hasArch() )
           str << archsep << obj.arch();
         return str;
         break;
+
       case CapDetail::VERSIONED:
         str << obj.name();
         if ( obj.hasArch() )
           str << archsep << obj.arch();
         return str << " " << obj.op() << " " << obj.ed();
         break;
+
       case CapDetail::EXPRESSION:
         switch ( obj.capRel() )
         {
-          case CapDetail::REL_NONE:
-          case CapDetail::CAP_AND:
-          case CapDetail::CAP_OR:
-          case CapDetail::CAP_WITH:
-          case CapDetail::CAP_ARCH:
-            return str << obj.lhs().detail() << " " << obj.capRel() << " " << obj.rhs().detail();
-            break;
           case CapDetail::CAP_NAMESPACE:
             return str << obj.lhs().detail() << "(" << obj.rhs().detail() << ")";
+            break;
+          default:
+            return str << obj.lhs().detail() << " " << obj.capRel() << " " << obj.rhs().detail();
+            return str << "(" << obj.lhs().detail() << " " << obj.capRel() << " " << obj.rhs().detail() << ")";
+            break;
         }
         break;
     }
-    return str <<  "<UnknownCap>";
+    return str <<  "<UnknownCap:" << obj.lhs().detail() << " " << obj.capRel() << " " << obj.rhs().detail() << ">";
   }
 
   std::ostream & operator<<( std::ostream & str, CapDetail::Kind obj )
@@ -564,13 +565,17 @@ namespace zypp
     switch ( obj )
     {
       case CapDetail::REL_NONE:      return str << "NoCapRel"; break;
-      case CapDetail::CAP_AND:       return str << "&"; break; // AND
-      case CapDetail::CAP_OR:        return str << "|"; break; // OR
-      case CapDetail::CAP_WITH:      return str << "+"; break; // WITH
+      case CapDetail::CAP_AND:       return str << "and"; break;        // &
+      case CapDetail::CAP_OR:        return str << "or"; break;         // |
+      case CapDetail::CAP_COND:      return str << "if"; break;
+      case CapDetail::CAP_UNLESS:    return str << "unless"; break;
+      case CapDetail::CAP_ELSE:      return str << "else"; break;
+      case CapDetail::CAP_WITH:      return str << "with"; break;       // +
+      case CapDetail::CAP_WITHOUT:   return str << "without"; break;    // -
       case CapDetail::CAP_NAMESPACE: return str << "NAMESPACE"; break;
       case CapDetail::CAP_ARCH:      return str << "ARCH"; break;
    }
-    return str << "UnknownCapRel";
+   return str << "UnknownCapRel("+str::numstring(obj)+")";
   }
 
   /////////////////////////////////////////////////////////////////

@@ -311,12 +311,19 @@ namespace zypp
       */
       enum CapRel
       {
-        REL_NONE      = 0,
-        CAP_AND       = 16,
-        CAP_OR        = 17,
-        CAP_WITH      = 18,
-        CAP_NAMESPACE = 19,
-        CAP_ARCH      = 20
+        REL_NONE      = 0,  ///< Not an expression
+        CAP_AND       = 16, ///< \c and
+        CAP_OR        = 17, ///< \c or
+
+        CAP_COND      = 22, ///< \c if
+        CAP_UNLESS    = 29, ///< \c unless
+        CAP_ELSE      = 26, ///< \c else
+
+        CAP_WITH      = 18, ///< \c with
+        CAP_WITHOUT   = 28, ///< \c without
+
+        CAP_NAMESPACE = 19, ///<
+        CAP_ARCH      = 20, ///< Used internally
       };
 
     public:
