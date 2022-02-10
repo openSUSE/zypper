@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-10-13 15:45+0200\n"
-"PO-Revision-Date: 2021-11-27 14:13+0000\n"
+"PO-Revision-Date: 2022-02-10 19:12+0000\n"
 "Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
 "Language-Team: Slovak <https://l10n.opensuse.org/projects/zypper/master/sk/>"
 "\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Weblate 4.8.1\n"
+"X-Generator: Weblate 4.9.1\n"
 
 #: src/Command.cc:93
 msgid "Invalid command"
@@ -2077,7 +2077,7 @@ msgstr "Inštalácia %s zlyhala:"
 #: src/callbacks/rpm.h:389 src/callbacks/rpm.h:640
 #, c-format, boost-format
 msgid "Installing: %s"
-msgstr "Inštalovanie: %s"
+msgstr "Inštaluje sa: %s"
 
 #. translators: A progressbar label
 #: src/callbacks/rpm.h:408
