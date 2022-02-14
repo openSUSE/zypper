@@ -1248,8 +1248,9 @@ namespace {
 
     std::string description() const {
       return str::Str()
-      << (str::Format( "%1% is not yet fully integrated into %2%." ) % printlist(_ptf) % printlist(_patch)) << endl
-      << "Typically you want to keep the PTF and choose to not install the maintenance patches.";
+      // translator: %1% is the name of a PTF, %2% the name of a patch.
+      << (str::Format( _("%1% is not yet fully integrated into %2%.") ) % printlist(_ptf) % printlist(_patch)) << endl
+      << _("Typically you want to keep the PTF and choose to not install the maintenance patches.");
     }
   private:
     using StoreType = IdString;
