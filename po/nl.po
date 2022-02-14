@@ -16,16 +16,16 @@ msgstr ""
 "Project-Id-Version: zypp.nl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-02-14 16:34+0100\n"
-"PO-Revision-Date: 2021-07-26 20:11+0000\n"
+"PO-Revision-Date: 2022-02-14 23:12+0000\n"
 "Last-Translator: Freek de Kruijf <freek@opensuse.org>\n"
-"Language-Team: Dutch <https://l10n.opensuse.org/projects/libzypp/master/nl/"
-">\n"
+"Language-Team: Dutch <https://l10n.opensuse.org/projects/libzypp/master/nl/>"
+"\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.7.1\n"
+"X-Generator: Weblate 4.9.1\n"
 
 #: zypp/CountryCode.cc:50
 msgid "Unknown country: "
@@ -4413,13 +4413,15 @@ msgstr "niet-installeerbare providers: "
 #: zypp/solver/detail/SATResolver.cc:1252
 #, boost-format
 msgid "%1% is not yet fully integrated into %2%."
-msgstr ""
+msgstr "%1% is nog niet volledig geïntegreerd in %2%."
 
 #: zypp/solver/detail/SATResolver.cc:1253
 msgid ""
 "Typically you want to keep the PTF and choose to not install the maintenance "
 "patches."
 msgstr ""
+"U wilt Typisch de PTF behouden en er voor te kiezen de patches voor "
+"onderhoud niet te installeren."
 
 #: zypp/solver/detail/SATResolver.cc:1309
 #, boost-format
@@ -4532,6 +4534,8 @@ msgid ""
 "install %1% from vendor %2%\n"
 "  replacing %3% from vendor %4%"
 msgstr ""
+"installeer %1% van leverancier %2%\n"
+"  ter vervanging van %3% van leverancier %4%"
 
 #: zypp/solver/detail/SATResolver.cc:1540
 #, boost-format
