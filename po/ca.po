@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-02-14 16:34+0100\n"
-"PO-Revision-Date: 2021-07-26 20:11+0000\n"
+"PO-Revision-Date: 2022-02-14 23:12+0000\n"
 "Last-Translator: David Medina <medipas@gmail.com>\n"
 "Language-Team: Catalan <https://l10n.opensuse.org/projects/libzypp/master/ca/"
 ">\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.7.1\n"
+"X-Generator: Weblate 4.9.1\n"
 
 #: zypp/CountryCode.cc:50
 msgid "Unknown country: "
@@ -4789,13 +4789,15 @@ msgstr "proveïdors no desinstal·lables: "
 #: zypp/solver/detail/SATResolver.cc:1252
 #, boost-format
 msgid "%1% is not yet fully integrated into %2%."
-msgstr ""
+msgstr "%1% encara no s'ha integrat plenament a %2%."
 
 #: zypp/solver/detail/SATResolver.cc:1253
 msgid ""
 "Typically you want to keep the PTF and choose to not install the maintenance "
 "patches."
 msgstr ""
+"Normalment voleu mantenir el PTF (format de text net) i opteu per no instal·"
+"lar els pedaços de manteniment."
 
 #: zypp/solver/detail/SATResolver.cc:1309
 #, boost-format
@@ -4874,7 +4876,7 @@ msgstr "instal·la %1% tot i que ha estat retret"
 #: zypp/solver/detail/SATResolver.cc:1485
 #, boost-format
 msgid "allow installing the PTF %1%"
-msgstr "permet instal·lar el PTF %1%"
+msgstr "permet instal·lar el PTF (format de text net) %1%"
 
 #. translator: %1% is a package name
 #: zypp/solver/detail/SATResolver.cc:1488
