@@ -5,11 +5,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libzypp\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-26 11:04+0200\n"
+"POT-Creation-Date: 2022-02-14 16:34+0100\n"
 "PO-Revision-Date: 2022-01-09 19:12+0000\n"
 "Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
-"Language-Team: Slovak <https://l10n.opensuse.org/projects/libzypp/master/sk/>"
-"\n"
+"Language-Team: Slovak <https://l10n.opensuse.org/projects/libzypp/master/sk/"
+">\n"
 "Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -3663,39 +3663,39 @@ msgid "Following actions will be done:"
 msgstr "Budú vykonané nasledovné akcie:"
 
 #. translators: an annotation to a gpg keys expiry date
-#: zypp/PublicKey.cc:63
+#: zypp/PublicKey.cc:64
 msgid "does not expire"
 msgstr "nevyprší"
 
 #. translators: an annotation to a gpg keys expiry date: "expired: 1999-04-12"
-#: zypp/PublicKey.cc:68
+#: zypp/PublicKey.cc:69
 #, boost-format
 msgid "expired: %1%"
 msgstr "vypršal: %1%"
 
 #. translators: an annotation to a gpg keys expiry date: "expires: 2111-04-12"
-#: zypp/PublicKey.cc:73
+#: zypp/PublicKey.cc:74
 #, boost-format
 msgid "expires: %1%"
 msgstr "vyprší: %1%"
 
 #. translators: an annotation to a gpg keys expiry date
-#: zypp/PublicKey.cc:82
+#: zypp/PublicKey.cc:83
 msgid "(does not expire)"
 msgstr "(nevyprší)"
 
 #. translators: an annotation to a gpg keys expiry date
-#: zypp/PublicKey.cc:91
+#: zypp/PublicKey.cc:92
 msgid "(EXPIRED)"
 msgstr "(VYPRŠANÉ)"
 
 #. translators: an annotation to a gpg keys expiry date
-#: zypp/PublicKey.cc:95
+#: zypp/PublicKey.cc:96
 msgid "(expires within 24h)"
 msgstr "(vyprší do 24h)"
 
 #. translators: an annotation to a gpg keys expiry date
-#: zypp/PublicKey.cc:99
+#: zypp/PublicKey.cc:100
 #, c-format, boost-format
 msgid "(expires in %d day)"
 msgid_plural "(expires in %d days)"
@@ -3729,7 +3729,7 @@ msgid "Cannot read repo directory '%1%': Permission denied"
 msgstr "Nie je možné čítať adresár repozitára '%1%': Prístup zamietnutý"
 
 #. TranslatorExplanation '%s' is a pathname
-#: zypp/RepoManager.cc:321 zypp/RepoManager.cc:784 zypp/RepoManager.cc:1569
+#: zypp/RepoManager.cc:321 zypp/RepoManager.cc:784 zypp/RepoManager.cc:1565
 #: zypp/repo/PluginServices.cc:49
 #, c-format, boost-format
 msgid "Failed to read directory '%s'"
@@ -3749,8 +3749,8 @@ msgid "Service alias cannot start with dot."
 msgstr "Alias služby nemôže začínať bodkou."
 
 #. TranslatorExplanation '%s' is a filename
-#: zypp/RepoManager.cc:739 zypp/RepoManager.cc:1687 zypp/RepoManager.cc:1753
-#: zypp/RepoManager.cc:1831 zypp/RepoManager.cc:1896 zypp/RepoManager.cc:2027
+#: zypp/RepoManager.cc:739 zypp/RepoManager.cc:1683 zypp/RepoManager.cc:1749
+#: zypp/RepoManager.cc:1827 zypp/RepoManager.cc:1892 zypp/RepoManager.cc:2023
 #, c-format, boost-format
 msgid "Can't open file '%s' for writing."
 msgstr "Nemôžem otvoriť súbor '%s' pre zápis."
@@ -3791,12 +3791,12 @@ msgid "Can't create cache at %s - no writing permissions."
 msgstr ""
 "Nie je možné vytvoriť vyrovnávaciu pamäť v %s - žiadne práva na zapisovanie."
 
-#: zypp/RepoManager.cc:1412
+#: zypp/RepoManager.cc:1408
 #, c-format, boost-format
 msgid "Failed to cache repo (%d)."
 msgstr "Zlyhalo ukladanie do vyrovnávacej pamäti pre repozitár (%d)."
 
-#: zypp/RepoManager.cc:1423
+#: zypp/RepoManager.cc:1419
 msgid "Unhandled repository type"
 msgstr "Nepodporovaný typ repozitára"
 
@@ -3806,44 +3806,44 @@ msgstr "Nepodporovaný typ repozitára"
 #. on ftp file-not-found(bnc #335906). Instead we'll check another types
 #. before throwing.
 #. TranslatorExplanation '%s' is an URL
-#: zypp/RepoManager.cc:1460 zypp/RepoManager.cc:2522
+#: zypp/RepoManager.cc:1456 zypp/RepoManager.cc:2518
 #, c-format, boost-format
 msgid "Error trying to read from '%s'"
 msgstr "Chyba pri čítaní z '%s'"
 
 #. TranslatorExplanation '%s' is an URL
-#: zypp/RepoManager.cc:1513 zypp/RepoManager.cc:2530
+#: zypp/RepoManager.cc:1509 zypp/RepoManager.cc:2526
 #, c-format, boost-format
 msgid "Unknown error reading from '%s'"
 msgstr "Neznáma chyba čítania z '%s'"
 
-#: zypp/RepoManager.cc:1651
+#: zypp/RepoManager.cc:1647
 #, c-format, boost-format
 msgid "Adding repository '%s'"
 msgstr "Pridávam repozitár '%s'"
 
 #. TranslatorExplanation '%s' is an URL
-#: zypp/RepoManager.cc:1739
+#: zypp/RepoManager.cc:1735
 #, c-format, boost-format
 msgid "Invalid repo file name at '%s'"
 msgstr "Neplatný názov súboru repozitára v '%s'"
 
-#: zypp/RepoManager.cc:1780
+#: zypp/RepoManager.cc:1776
 #, c-format, boost-format
 msgid "Removing repository '%s'"
 msgstr "Odstraňujem repozitár '%s'"
 
-#: zypp/RepoManager.cc:1799 zypp/RepoManager.cc:1877
+#: zypp/RepoManager.cc:1795 zypp/RepoManager.cc:1873
 msgid "Can't figure out where the repo is stored."
 msgstr "Nie je možné prísť na to, kde je uložený repozitár."
 
 #. TranslatorExplanation '%s' is a filename
-#: zypp/RepoManager.cc:1813 zypp/RepoManager.cc:2015
+#: zypp/RepoManager.cc:1809 zypp/RepoManager.cc:2011
 #, c-format, boost-format
 msgid "Can't delete '%s'"
 msgstr "Nie je možné vymazať '%s'"
 
-#: zypp/RepoManager.cc:2003 zypp/RepoManager.cc:2453
+#: zypp/RepoManager.cc:1999 zypp/RepoManager.cc:2449
 msgid "Can't figure out where the service is stored."
 msgstr "Nie je možné prísť na to, kde je uložená služba."
 
@@ -3953,14 +3953,13 @@ msgid "Invalid regular expression '%s'"
 msgstr "Neplatný regulárny výraz '%s'"
 
 #. !\todo add comma to the message for the next release
-#: zypp/media/MediaCIFS.cc:427 zypp/media/MediaCurl.cc:1261
-#: zypp/zyppng/media/medianetwork.cc:581
+#: zypp/media/MediaCIFS.cc:427 zypp/media/MediaCurl.cc:1430
+#: zypp/zyppng/media/medianetwork.cc:582
 #, c-format, boost-format
 msgid "Authentication required for '%s'"
 msgstr "'%s' vyžaduje autentifikáciu"
 
-#: zypp/media/MediaCurl.cc:634
-#: zypp/zyppng/media/network/networkrequesterror.cc:127
+#: zypp/media/MediaCurl.cc:803 zypp-curl/ng/network/networkrequesterror.cc:127
 msgid ""
 "Visit the SUSE Customer Center to check whether your registration is valid "
 "and has not expired."
@@ -3968,165 +3967,13 @@ msgstr ""
 "Navštívte SUSE Customer Center, aby ste skontrolovali, či je vaša "
 "registrácia platná a ešte nevypršala."
 
-#: zypp/media/MediaCurl.cc:636
-#: zypp/zyppng/media/network/networkrequesterror.cc:129
+#: zypp/media/MediaCurl.cc:805 zypp-curl/ng/network/networkrequesterror.cc:129
 msgid ""
 "Visit the Novell Customer Center to check whether your registration is valid "
 "and has not expired."
 msgstr ""
 "Navštívte Novell Customer Center, aby ste skontrolovali, či je vaša "
 "registrácia platná a ešte nevypršala."
-
-#: zypp/media/MediaException.cc:33
-#, c-format, boost-format
-msgid "Failed to mount %s on %s"
-msgstr "Nepodarilo sa pripojiť %s na %s"
-
-#: zypp/media/MediaException.cc:43
-#, c-format, boost-format
-msgid "Failed to unmount %s"
-msgstr "Nepodarilo sa odpojiť %s"
-
-#: zypp/media/MediaException.cc:48
-#, c-format, boost-format
-msgid "Bad file name: %s"
-msgstr "Nesprávne meno súboru: %s"
-
-#: zypp/media/MediaException.cc:53
-#, c-format, boost-format
-msgid "Medium not opened when trying to perform action '%s'."
-msgstr "Médium sa neotvorilo pri pokuse vykonať '%s'."
-
-#: zypp/media/MediaException.cc:58
-#: zypp/zyppng/media/network/networkrequesterror.cc:138
-#, c-format, boost-format
-msgid "File '%s' not found on medium '%s'"
-msgstr "Súbor '%s' nebol nájdený na médiu '%s'"
-
-#: zypp/media/MediaException.cc:63
-#, c-format, boost-format
-msgid "Cannot write file '%s'."
-msgstr "Nemôžem zapísať súbor '%s'."
-
-#: zypp/media/MediaException.cc:68
-msgid "Medium not attached"
-msgstr "Médium nie je pripojené"
-
-#: zypp/media/MediaException.cc:73
-msgid "Bad media attach point"
-msgstr "Nesprávny prípojný bod média"
-
-#. TranslatorExplanation: curl is the name of a library, don't translate
-#: zypp/media/MediaException.cc:79
-#, c-format, boost-format
-msgid "Download (curl) initialization failed for '%s'"
-msgstr "Zlyhala inicializácia sťahovania (curl) pre '%s'"
-
-#: zypp/media/MediaException.cc:84
-#, c-format, boost-format
-msgid "System exception '%s' on medium '%s'."
-msgstr "Systémová výnimka '%s' na médiu '%s'."
-
-#: zypp/media/MediaException.cc:89
-#, c-format, boost-format
-msgid "Path '%s' on medium '%s' is not a file."
-msgstr "Cesta '%s' na médiu '%s' nie je súborom."
-
-#: zypp/media/MediaException.cc:94
-#, c-format, boost-format
-msgid "Path '%s' on medium '%s' is not a directory."
-msgstr "Cesta '%s' na médiu '%s' nie je adresárom."
-
-#: zypp/media/MediaException.cc:101
-msgid "Malformed URI"
-msgstr "Chybné URI"
-
-#: zypp/media/MediaException.cc:111
-msgid "Empty host name in URI"
-msgstr "Prázdny názov hostiteľa v URI"
-
-#: zypp/media/MediaException.cc:116
-msgid "Empty filesystem in URI"
-msgstr "Prázdny súborový systém v URI"
-
-#: zypp/media/MediaException.cc:121
-msgid "Empty destination in URI"
-msgstr "Prázdny cieľ v URI"
-
-#: zypp/media/MediaException.cc:126
-#, c-format, boost-format
-msgid "Unsupported URI scheme in '%s'."
-msgstr "Nepodporovaná schéma URI v '%s'."
-
-#: zypp/media/MediaException.cc:131
-msgid "Operation not supported by medium"
-msgstr "Operácie nie je médiom podporovaná"
-
-#: zypp/media/MediaException.cc:138
-#, c-format, boost-format
-msgid ""
-"Download (curl) error for '%s':\n"
-"Error code: %s\n"
-"Error message: %s\n"
-msgstr ""
-"Chyba sťahovania (curl) pre '%s':\n"
-"Kód chyby: %s\n"
-"Chybová správa: %s\n"
-
-#. TranslatorExplanation: curl is the name of a library, don't translate
-#: zypp/media/MediaException.cc:146
-#, c-format, boost-format
-msgid "Error occurred while setting download (curl) options for '%s':"
-msgstr ""
-"Vyskytla sa chyba počas nastavovania možností sťahovania (curl) pre '%s':"
-
-#: zypp/media/MediaException.cc:153
-#, c-format, boost-format
-msgid "Media source '%s' does not contain the desired medium"
-msgstr "Zdroj média '%s' neobsahuje požadované médium"
-
-#: zypp/media/MediaException.cc:158
-#, c-format, boost-format
-msgid "Medium '%s' is in use by another instance"
-msgstr "Médium '%s' už používa iná inštancia"
-
-#: zypp/media/MediaException.cc:164
-msgid "Cannot eject any media"
-msgstr "Nemôžem vysunúť žiadne médium"
-
-#: zypp/media/MediaException.cc:166
-#, c-format, boost-format
-msgid "Cannot eject media '%s'"
-msgstr "Nemôžem vysunúť médium '%s'"
-
-#: zypp/media/MediaException.cc:181
-#, c-format, boost-format
-msgid "Permission to access '%s' denied."
-msgstr "Zamietnutý prístup na '%s'."
-
-#: zypp/media/MediaException.cc:189
-#: zypp/zyppng/media/network/networkrequesterror.cc:122
-#, c-format, boost-format
-msgid "Timeout exceeded when accessing '%s'."
-msgstr "Vypršal časový limit pri prístupe na '%s'."
-
-#: zypp/media/MediaException.cc:197
-#, c-format, boost-format
-msgid "Downloaded data exceeded the expected filesize '%s' of '%s'."
-msgstr "Stiahnuté dáta prekročili očakávanú veľkosť súboru '%s' z '%s'."
-
-#: zypp/media/MediaException.cc:205
-#: zypp/zyppng/media/network/networkrequesterror.cc:118
-#, c-format, boost-format
-msgid "Location '%s' is temporarily unaccessible."
-msgstr "Umiestnenie '%s' je dočasne nedostupné."
-
-#: zypp/media/MediaException.cc:213
-#, c-format, boost-format
-msgid " SSL certificate problem, verify that the CA cert is OK for '%s'."
-msgstr ""
-" problém s certifikátom SSL, skontrolujte či certifikát CA je v poriadku pre "
-"'%s'."
 
 #: zypp/media/MediaHandler.cc:369
 msgid ""
@@ -4135,11 +3982,6 @@ msgid ""
 msgstr ""
 "Vytvoriť prípojný bod: Nie je možné nájsť zapisovateľný adresár pre "
 "vytvorenie prípojného bodu"
-
-#: zypp/media/MediaUserAuth.cc:150
-#, c-format, boost-format
-msgid "Unsupported HTTP authentication method '%s'"
-msgstr "'%s' nie je podporovaná metóda autentifikácie"
 
 #: zypp/misc/CheckAccessDeleted.cc:455
 msgid "Please install package 'lsof' first."
@@ -4348,7 +4190,7 @@ msgstr ""
 "  inštalovaným z\n"
 "     %4%"
 
-#: zypp/sat/detail/PoolImpl.cc:195
+#: zypp/sat/detail/PoolImpl.cc:197
 msgid "Can not create sat-pool."
 msgstr "Nepodarilo sa vytvoriť sat-pole."
 
@@ -4548,102 +4390,115 @@ msgstr ""
 msgid "not installable providers: "
 msgstr "neinštalovateľní poskytovatelia: "
 
-#: zypp/solver/detail/SATResolver.cc:1278
+#. translator: %1% is the name of a PTF, %2% the name of a patch.
+#: zypp/solver/detail/SATResolver.cc:1252
+#, boost-format
+msgid "%1% is not yet fully integrated into %2%."
+msgstr ""
+
+#: zypp/solver/detail/SATResolver.cc:1253
+msgid ""
+"Typically you want to keep the PTF and choose to not install the maintenance "
+"patches."
+msgstr ""
+
+#: zypp/solver/detail/SATResolver.cc:1309
 #, boost-format
 msgid "remove lock to allow removal of %1%"
 msgstr "odstrániť zámok pre umožnenie odstránenia %1%"
 
-#: zypp/solver/detail/SATResolver.cc:1283
-#: zypp/solver/detail/SATResolver.cc:1319
+#: zypp/solver/detail/SATResolver.cc:1314
+#: zypp/solver/detail/SATResolver.cc:1352
 #, boost-format
 msgid "do not install %1%"
 msgstr "neinštalovať %1%"
 
-#: zypp/solver/detail/SATResolver.cc:1298
-#: zypp/solver/detail/SATResolver.cc:1340
+#: zypp/solver/detail/SATResolver.cc:1331
+#: zypp/solver/detail/SATResolver.cc:1373
 #, boost-format
 msgid "keep %1%"
 msgstr "ponechať %1%"
 
-#: zypp/solver/detail/SATResolver.cc:1303
+#: zypp/solver/detail/SATResolver.cc:1336
 #, boost-format
 msgid "remove lock to allow installation of %1%"
 msgstr "odstrániť zámok pre umožnenie inštalácie %1%"
 
-#: zypp/solver/detail/SATResolver.cc:1354
-#: zypp/solver/detail/SATResolver.cc:1375
+#: zypp/solver/detail/SATResolver.cc:1387
+#: zypp/solver/detail/SATResolver.cc:1408
 msgid "This request will break your system!"
 msgstr "Tento požiadavka poruší váš systém!"
 
-#: zypp/solver/detail/SATResolver.cc:1355
-#: zypp/solver/detail/SATResolver.cc:1376
+#: zypp/solver/detail/SATResolver.cc:1388
+#: zypp/solver/detail/SATResolver.cc:1409
 msgid "ignore the warning of a broken system"
 msgstr "ignorovať varovanie o porušení systému"
 
-#: zypp/solver/detail/SATResolver.cc:1360
+#: zypp/solver/detail/SATResolver.cc:1393
 #, boost-format
 msgid "do not ask to install a solvable providing %1%"
 msgstr "nepožadovať inštaláciu riešenia, ktoré poskytuje %1%"
 
-#: zypp/solver/detail/SATResolver.cc:1382
+#: zypp/solver/detail/SATResolver.cc:1415
 #, boost-format
 msgid "do not ask to delete all solvables providing %1%"
 msgstr "nepožadovať zmazanie všetkých riešení, ktoré poskytuje %1%"
 
-#: zypp/solver/detail/SATResolver.cc:1395
+#: zypp/solver/detail/SATResolver.cc:1428
 #, boost-format
 msgid "do not install most recent version of %1%"
 msgstr "neinštalovať najnovšiu verziu %1%"
 
-#: zypp/solver/detail/SATResolver.cc:1416
+#: zypp/solver/detail/SATResolver.cc:1449
 #, boost-format
 msgid "keep %1% despite the inferior architecture"
 msgstr "ponechať %1% napriek nižšej architektúre"
 
-#: zypp/solver/detail/SATResolver.cc:1421
+#: zypp/solver/detail/SATResolver.cc:1454
 #, boost-format
 msgid "install %1% despite the inferior architecture"
 msgstr "nainštalovať %1% napriek nižšej architektúre"
 
-#: zypp/solver/detail/SATResolver.cc:1430
+#: zypp/solver/detail/SATResolver.cc:1463
 #, boost-format
 msgid "keep obsolete %1%"
 msgstr "ponechať zastaraný %1%"
 
-#: zypp/solver/detail/SATResolver.cc:1435
+#: zypp/solver/detail/SATResolver.cc:1468
 #, boost-format
 msgid "install %1% from excluded repository"
 msgstr "inštalovať %1% z vylúčeného repozitára"
 
 #. translator: %1% is a package name
-#: zypp/solver/detail/SATResolver.cc:1449
+#: zypp/solver/detail/SATResolver.cc:1482
 #, boost-format
 msgid "install %1% although it has been retracted"
 msgstr "inštalovať %1%, aj keď bol stiahnutý späť"
 
 #. translator: %1% is a package name
-#: zypp/solver/detail/SATResolver.cc:1452
+#: zypp/solver/detail/SATResolver.cc:1485
 #, boost-format
 msgid "allow installing the PTF %1%"
 msgstr "umožniť inštaláciu PTF %1%"
 
 #. translator: %1% is a package name
-#: zypp/solver/detail/SATResolver.cc:1455
+#: zypp/solver/detail/SATResolver.cc:1488
 #, boost-format
 msgid "install %1% although it is blacklisted"
 msgstr "inštalovať %1%, aj keď je nežiadúci"
 
-#: zypp/solver/detail/SATResolver.cc:1475
+#: zypp/solver/detail/SATResolver.cc:1508
 #, boost-format
 msgid "downgrade of %1% to %2%"
 msgstr "znížiť verziu %1% na %2%"
 
-#: zypp/solver/detail/SATResolver.cc:1482
+#: zypp/solver/detail/SATResolver.cc:1515
 #, boost-format
 msgid "architecture change of %1% to %2%"
 msgstr "zmena architektúry %1% na %2%"
 
-#: zypp/solver/detail/SATResolver.cc:1493
+#. FIXME? Actually .ident() must be eq. But the more verbose 'else' isn't bad either.
+#: zypp/solver/detail/SATResolver.cc:1526
 #, boost-format
 msgid ""
 "install %1% (with vendor change)\n"
@@ -4652,7 +4507,7 @@ msgstr ""
 "inštalovať %1% (so zmenou dodávateľa)\n"
 "  %2% -->  %3%"
 
-#: zypp/solver/detail/SATResolver.cc:1498
+#: zypp/solver/detail/SATResolver.cc:1531
 #, boost-format
 msgid ""
 "install %1% from vendor %2%\n"
@@ -4661,24 +4516,23 @@ msgstr ""
 "inštalovať %1% od dodávateľa %2%\n"
 "  nahradenie %3% od dodávateľa %4%"
 
-#: zypp/solver/detail/SATResolver.cc:1507
+#: zypp/solver/detail/SATResolver.cc:1540
 #, boost-format
 msgid "replacement of %1% with %2%"
 msgstr "nahradenie %1% s %2%"
 
-#: zypp/solver/detail/SATResolver.cc:1518
+#: zypp/solver/detail/SATResolver.cc:1551
 #, boost-format
 msgid "deinstallation of %1%"
 msgstr "odinštalovanie %1%"
 
-#. strip tmp file suffix
-#: zypp/target/RpmPostTransCollector.cc:105
+#: zypp/target/RpmPostTransCollector.cc:98
 #, boost-format
 msgid "Executing %%posttrans script '%1%'"
 msgstr "Vykonávanie %%posttrans skriptu '%1%'"
 
 #. show a final message
-#: zypp/target/RpmPostTransCollector.cc:173
+#: zypp/target/RpmPostTransCollector.cc:172
 #, c-format, boost-format
 msgid "Executing %posttrans scripts"
 msgstr "Vykonávanie %p osttrans skriptov"
@@ -4687,44 +4541,44 @@ msgstr "Vykonávanie %p osttrans skriptov"
 msgid "Installation has been aborted as directed."
 msgstr "Inštalácia bola podľa príkazu zrušená."
 
-#: zypp/target/TargetImpl.cc:417
+#: zypp/target/TargetImpl.cc:419
 msgid " executed"
 msgstr " spustený"
 
-#: zypp/target/TargetImpl.cc:439
+#: zypp/target/TargetImpl.cc:441
 msgid " execution failed"
 msgstr " spustenie zlyhalo"
 
 #. translators: We may find the same script content in files with different names.
 #. Only the first occurence is executed, subsequent ones are skipped. It's a one-line
 #. message for a log file. Preferably start translation with "%s"
-#: zypp/target/TargetImpl.cc:556
+#: zypp/target/TargetImpl.cc:558
 #, c-format, boost-format
 msgid "%s already executed as %s)"
 msgstr "%s už spustený ako %s)"
 
-#: zypp/target/TargetImpl.cc:566
+#: zypp/target/TargetImpl.cc:568
 msgid " execution skipped while aborting"
 msgstr " spustenie odložené kvôli prerušeniu programu"
 
-#: zypp/target/TargetImpl.cc:621 zypp/target/TargetImpl.cc:641
-#: zypp/target/TargetImpl.cc:669 zypp/target/TargetImpl.cc:706
-#: zypp/target/TargetImpl.cc:714
+#: zypp/target/TargetImpl.cc:623 zypp/target/TargetImpl.cc:643
+#: zypp/target/TargetImpl.cc:671 zypp/target/TargetImpl.cc:708
+#: zypp/target/TargetImpl.cc:716
 msgid "Error sending update message notification."
 msgstr "Chyba zasielania oznámenia o aktualizačnej správe."
 
-#: zypp/target/TargetImpl.cc:765
+#: zypp/target/TargetImpl.cc:767
 msgid "New update message"
 msgstr "Nová správa aktualizácie"
 
-#: zypp/target/TargetImpl.cc:2619
+#: zypp/target/TargetImpl.cc:2688
 msgid "Executing the transaction failed because of the following problems:"
 msgstr "Vykonanie transakcie zlyhalo z dôvodu nasledujúcich problémov:"
 
 #. TranslatorExplanation after semicolon is error message
 #. TranslatorExplanation the colon is followed by an error message
 #: zypp/target/rpm/RpmDb.cc:467 zypp/target/rpm/RpmDb.cc:1769
-#: zypp/target/rpm/RpmDb.cc:1925
+#: zypp/target/rpm/RpmDb.cc:1928
 msgid "RPM failed: "
 msgstr "RPM zlyhalo: "
 
@@ -4783,69 +4637,53 @@ msgstr ""
 "Balík rpm vytvoril %s as %s.\n"
 "Tu je prvých 25 riadkov rozdielov:\n"
 
-#. report additional rpm output in finish
+#. report additional rpm output in finish (LEGACY! Lines are immediately reported as InstallResolvableReport::contentRpmout)
 #. TranslatorExplanation Text is followed by a ':'  and the actual output.
-#: zypp/target/rpm/RpmDb.cc:1782 zypp/target/rpm/RpmDb.cc:1938
+#. report additional rpm output in finish (LEGACY! Lines are immediately reported as RemoveResolvableReport::contentRpmout)
+#. TranslatorExplanation Text is followed by a ':'  and the actual output.
+#: zypp/target/rpm/RpmDb.cc:1785 zypp/target/rpm/RpmDb.cc:1944
 msgid "Additional rpm output"
 msgstr "Ďalší výstup z rpm"
 
-#: zypp/target/rpm/RpmDb.cc:2080
+#: zypp/target/rpm/RpmDb.cc:2086
 #, c-format, boost-format
 msgid "created backup %s"
 msgstr "Bola vytvorená záloha %s"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2101
+#: zypp/target/rpm/RpmDb.cc:2107
 msgid "Signature is OK"
 msgstr "Podpis je v poriadku"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2103
+#: zypp/target/rpm/RpmDb.cc:2109
 msgid "Unknown type of signature"
 msgstr "Neznámy typ podpisu"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2105
+#: zypp/target/rpm/RpmDb.cc:2111
 msgid "Signature does not verify"
 msgstr "Podpis neoveruje"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2107
+#: zypp/target/rpm/RpmDb.cc:2113
 msgid "Signature is OK, but key is not trusted"
 msgstr "Podpis je v poriadku, ale kľúč nie je dôveryhodný"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2109
+#: zypp/target/rpm/RpmDb.cc:2115
 msgid "Signatures public key is not available"
 msgstr "Verejný kľúč podpisov nie je k dispozícii"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2111
+#: zypp/target/rpm/RpmDb.cc:2117
 msgid "File does not exist or signature can't be checked"
 msgstr "Súbor neexistuje alebo podpis nie je možné overiť"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2113
+#: zypp/target/rpm/RpmDb.cc:2119
 msgid "File is unsigned"
 msgstr "Súbor je nepodpísaný"
-
-#: zypp/zyppng/media/network/networkrequesterror.cc:143
-#, c-format, boost-format
-msgid ""
-"Download (curl) error for '%s':\n"
-"Error code: %s\n"
-msgstr ""
-"Chyba sťahovania (curl) pre '%s':\n"
-"Kód chyby: %s\n"
-
-#: zypp/zyppng/media/network/networkrequesterror.cc:149
-#, c-format, boost-format
-msgid ""
-"Download (curl) error for '%s':\n"
-"Unable to retrieve HTTP response\n"
-msgstr ""
-"Chyba sťahovania (curl) pre '%s':\n"
-"Odpoveď HTTP sa nepodarilo načítať\n"
 
 #. dubious: Throw on malformed known types, otherwise log a warning.
 #: zypp-core/CheckSum.cc:136
@@ -4884,8 +4722,7 @@ msgstr "Neplatný odkaz na prázdny URL objekt"
 msgid "Unable to parse Url components"
 msgstr "Nie je možné prečítať zložky URL"
 
-#. TranslatorExplanation followed by the list of error messages that lead to this exception
-#: zypp-core/base/Exception.cc:134
+#: zypp-core/base/Exception.cc:150
 msgid "History:"
 msgstr "História:"
 
@@ -4972,75 +4809,249 @@ msgstr "Neplatný oddeľovací znak pre mapu parametrov"
 msgid "Invalid parameter array join separator character"
 msgstr "Neplatný oddeľovací znak pre spájanie poľa parametrov"
 
-#: zypp-core/zyppng/io/abstractspawnengine.cc:174
+#: zypp-core/zyppng/io/abstractspawnengine.cc:177
 #, c-format, boost-format
 msgid "Command exited with status %d."
 msgstr "Stav príkazu po skončení je %d."
 
-#: zypp-core/zyppng/io/abstractspawnengine.cc:194
+#: zypp-core/zyppng/io/abstractspawnengine.cc:198
 #, c-format, boost-format
 msgid "Command was killed by signal %d (%s)."
 msgstr "Príkaz bol zabitý signálom %d (%s)."
 
-#: zypp-core/zyppng/io/abstractspawnengine.cc:199
+#: zypp-core/zyppng/io/abstractspawnengine.cc:203
 msgid "Command exited with unknown error."
 msgstr "Príkaz skončil s neznámou chybou."
 
-#: zypp-core/zyppng/io/forkspawnengine.cc:111
-#: zypp-core/zyppng/io/forkspawnengine.cc:359
+#: zypp-core/zyppng/io/forkspawnengine.cc:150
+#: zypp-core/zyppng/io/forkspawnengine.cc:392
 msgid "Invalid spawn arguments given."
 msgstr "Zadané nesprávne argumenty spawn."
 
-#: zypp-core/zyppng/io/forkspawnengine.cc:174
+#: zypp-core/zyppng/io/forkspawnengine.cc:206
 msgid "Unable to create control pipe."
 msgstr "Nie je možné vytvoriť riadiacu rúru."
 
-#: zypp-core/zyppng/io/forkspawnengine.cc:240
+#: zypp-core/zyppng/io/forkspawnengine.cc:272
 #, c-format, boost-format
 msgid "Can't chroot to '%s' (%s)."
 msgstr "Nemôžem spraviť chroot do '%s' (%s)."
 
-#: zypp-core/zyppng/io/forkspawnengine.cc:250
+#: zypp-core/zyppng/io/forkspawnengine.cc:282
 #, c-format, boost-format
 msgid "Can't chdir to '%s' (%s)."
 msgstr "Nie je možné vykonať chroot pre '%s' (%s)."
 
-#: zypp-core/zyppng/io/forkspawnengine.cc:251
+#: zypp-core/zyppng/io/forkspawnengine.cc:283
 #, c-format, boost-format
 msgid "Can't chdir to '%s' inside chroot '%s' (%s)."
 msgstr "Nie je možné vykonať chdir pre '%s' vo vnútri chroot '%s' (%s)."
 
 #. don't want to get here
-#: zypp-core/zyppng/io/forkspawnengine.cc:280
+#: zypp-core/zyppng/io/forkspawnengine.cc:312
 #, c-format, boost-format
 msgid "Can't exec '%s' (%s)."
 msgstr "Nemôžem spustiť '%s' (%s)."
 
-#: zypp-core/zyppng/io/forkspawnengine.cc:287
-#: zypp-core/zyppng/io/forkspawnengine.cc:448
+#: zypp-core/zyppng/io/forkspawnengine.cc:319
+#: zypp-core/zyppng/io/forkspawnengine.cc:473
 #, c-format, boost-format
 msgid "Can't fork (%s)."
 msgstr "Nemôžem spraviť rozdelenie programu (%s)."
 
-#: zypp-core/zyppng/io/forkspawnengine.cc:306
+#: zypp-core/zyppng/io/forkspawnengine.cc:338
 #, c-format, boost-format
 msgid "Can't exec '%s', chdir failed (%s)."
 msgstr "Nemožno vykonať '%s', chdir zlyhal (%s)."
 
-#: zypp-core/zyppng/io/forkspawnengine.cc:309
+#: zypp-core/zyppng/io/forkspawnengine.cc:341
 #, c-format, boost-format
 msgid "Can't exec '%s', chroot failed (%s)."
 msgstr "Nemožno vykonať '%s', chroot zlyhal (%s)."
 
-#: zypp-core/zyppng/io/forkspawnengine.cc:312
+#: zypp-core/zyppng/io/forkspawnengine.cc:344
 #, c-format, boost-format
 msgid "Can't exec '%s', exec failed (%s)."
 msgstr "Nemožno vykonať '%s', exec zlyhal (%s)."
 
-#: zypp-core/zyppng/io/forkspawnengine.cc:316
+#: zypp-core/zyppng/io/forkspawnengine.cc:348
 #, c-format, boost-format
 msgid "Can't exec '%s', unexpected error."
 msgstr "Nemožno vykonať '%s', neočakávaná chyba."
+
+#: zypp-media/mediaexception.cc:33
+#, c-format, boost-format
+msgid "Failed to mount %s on %s"
+msgstr "Nepodarilo sa pripojiť %s na %s"
+
+#: zypp-media/mediaexception.cc:43
+#, c-format, boost-format
+msgid "Failed to unmount %s"
+msgstr "Nepodarilo sa odpojiť %s"
+
+#: zypp-media/mediaexception.cc:48
+#, c-format, boost-format
+msgid "Bad file name: %s"
+msgstr "Nesprávne meno súboru: %s"
+
+#: zypp-media/mediaexception.cc:53
+#, c-format, boost-format
+msgid "Medium not opened when trying to perform action '%s'."
+msgstr "Médium sa neotvorilo pri pokuse vykonať '%s'."
+
+#: zypp-media/mediaexception.cc:58
+#: zypp-curl/ng/network/networkrequesterror.cc:138
+#, c-format, boost-format
+msgid "File '%s' not found on medium '%s'"
+msgstr "Súbor '%s' nebol nájdený na médiu '%s'"
+
+#: zypp-media/mediaexception.cc:63
+#, c-format, boost-format
+msgid "Cannot write file '%s'."
+msgstr "Nemôžem zapísať súbor '%s'."
+
+#: zypp-media/mediaexception.cc:68
+msgid "Medium not attached"
+msgstr "Médium nie je pripojené"
+
+#: zypp-media/mediaexception.cc:73
+msgid "Bad media attach point"
+msgstr "Nesprávny prípojný bod média"
+
+#. TranslatorExplanation: curl is the name of a library, don't translate
+#: zypp-media/mediaexception.cc:79
+#, c-format, boost-format
+msgid "Download (curl) initialization failed for '%s'"
+msgstr "Zlyhala inicializácia sťahovania (curl) pre '%s'"
+
+#: zypp-media/mediaexception.cc:84
+#, c-format, boost-format
+msgid "System exception '%s' on medium '%s'."
+msgstr "Systémová výnimka '%s' na médiu '%s'."
+
+#: zypp-media/mediaexception.cc:89
+#, c-format, boost-format
+msgid "Path '%s' on medium '%s' is not a file."
+msgstr "Cesta '%s' na médiu '%s' nie je súborom."
+
+#: zypp-media/mediaexception.cc:94
+#, c-format, boost-format
+msgid "Path '%s' on medium '%s' is not a directory."
+msgstr "Cesta '%s' na médiu '%s' nie je adresárom."
+
+#: zypp-media/mediaexception.cc:101
+msgid "Malformed URI"
+msgstr "Chybné URI"
+
+#: zypp-media/mediaexception.cc:111
+msgid "Empty host name in URI"
+msgstr "Prázdny názov hostiteľa v URI"
+
+#: zypp-media/mediaexception.cc:116
+msgid "Empty filesystem in URI"
+msgstr "Prázdny súborový systém v URI"
+
+#: zypp-media/mediaexception.cc:121
+msgid "Empty destination in URI"
+msgstr "Prázdny cieľ v URI"
+
+#: zypp-media/mediaexception.cc:126
+#, c-format, boost-format
+msgid "Unsupported URI scheme in '%s'."
+msgstr "Nepodporovaná schéma URI v '%s'."
+
+#: zypp-media/mediaexception.cc:131
+msgid "Operation not supported by medium"
+msgstr "Operácie nie je médiom podporovaná"
+
+#: zypp-media/mediaexception.cc:138
+#, c-format, boost-format
+msgid ""
+"Download (curl) error for '%s':\n"
+"Error code: %s\n"
+"Error message: %s\n"
+msgstr ""
+"Chyba sťahovania (curl) pre '%s':\n"
+"Kód chyby: %s\n"
+"Chybová správa: %s\n"
+
+#. TranslatorExplanation: curl is the name of a library, don't translate
+#: zypp-media/mediaexception.cc:146
+#, c-format, boost-format
+msgid "Error occurred while setting download (curl) options for '%s':"
+msgstr ""
+"Vyskytla sa chyba počas nastavovania možností sťahovania (curl) pre '%s':"
+
+#: zypp-media/mediaexception.cc:153
+#, c-format, boost-format
+msgid "Media source '%s' does not contain the desired medium"
+msgstr "Zdroj média '%s' neobsahuje požadované médium"
+
+#: zypp-media/mediaexception.cc:158
+#, c-format, boost-format
+msgid "Medium '%s' is in use by another instance"
+msgstr "Médium '%s' už používa iná inštancia"
+
+#: zypp-media/mediaexception.cc:164
+msgid "Cannot eject any media"
+msgstr "Nemôžem vysunúť žiadne médium"
+
+#: zypp-media/mediaexception.cc:166
+#, c-format, boost-format
+msgid "Cannot eject media '%s'"
+msgstr "Nemôžem vysunúť médium '%s'"
+
+#: zypp-media/mediaexception.cc:181
+#, c-format, boost-format
+msgid "Permission to access '%s' denied."
+msgstr "Zamietnutý prístup na '%s'."
+
+#: zypp-media/mediaexception.cc:189
+#: zypp-curl/ng/network/networkrequesterror.cc:122
+#, c-format, boost-format
+msgid "Timeout exceeded when accessing '%s'."
+msgstr "Vypršal časový limit pri prístupe na '%s'."
+
+#: zypp-media/mediaexception.cc:197
+#, c-format, boost-format
+msgid "Downloaded data exceeded the expected filesize '%s' of '%s'."
+msgstr "Stiahnuté dáta prekročili očakávanú veľkosť súboru '%s' z '%s'."
+
+#: zypp-media/mediaexception.cc:205
+#: zypp-curl/ng/network/networkrequesterror.cc:118
+#, c-format, boost-format
+msgid "Location '%s' is temporarily unaccessible."
+msgstr "Umiestnenie '%s' je dočasne nedostupné."
+
+#: zypp-media/mediaexception.cc:213
+#, c-format, boost-format
+msgid " SSL certificate problem, verify that the CA cert is OK for '%s'."
+msgstr ""
+" problém s certifikátom SSL, skontrolujte či certifikát CA je v poriadku pre "
+"'%s'."
+
+#: zypp-curl/auth/curlauthdata.cc:97
+#, c-format, boost-format
+msgid "Unsupported HTTP authentication method '%s'"
+msgstr "'%s' nie je podporovaná metóda autentifikácie"
+
+#: zypp-curl/ng/network/networkrequesterror.cc:143
+#, c-format, boost-format
+msgid ""
+"Download (curl) error for '%s':\n"
+"Error code: %s\n"
+msgstr ""
+"Chyba sťahovania (curl) pre '%s':\n"
+"Kód chyby: %s\n"
+
+#: zypp-curl/ng/network/networkrequesterror.cc:149
+#, c-format, boost-format
+msgid ""
+"Download (curl) error for '%s':\n"
+"Unable to retrieve HTTP response\n"
+msgstr ""
+"Chyba sťahovania (curl) pre '%s':\n"
+"Odpoveď HTTP sa nepodarilo načítať\n"
 
 #~ msgid "%s does not belong to a distupgrade repository"
 #~ msgstr "%s nepatrí do repozitára zvýšenia verzie distribúcie"

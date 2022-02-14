@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lcn memory\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-26 11:04+0200\n"
+"POT-Creation-Date: 2022-02-14 16:34+0100\n"
 "PO-Revision-Date: 2012-08-24 14:42+0200\n"
 "Last-Translator: Jean Cayron <jean.cayron@base.be>\n"
 "Language-Team: Walloon <linux-wa@walon.org>\n"
@@ -3688,40 +3688,40 @@ msgid "Following actions will be done:"
 msgstr "Dji va fé les faitindjes shuvants :"
 
 #. translators: an annotation to a gpg keys expiry date
-#: zypp/PublicKey.cc:63
+#: zypp/PublicKey.cc:64
 #, fuzzy
 msgid "does not expire"
 msgstr "(n' espire nén)"
 
 #. translators: an annotation to a gpg keys expiry date: "expired: 1999-04-12"
-#: zypp/PublicKey.cc:68
+#: zypp/PublicKey.cc:69
 #, boost-format
 msgid "expired: %1%"
 msgstr ""
 
 #. translators: an annotation to a gpg keys expiry date: "expires: 2111-04-12"
-#: zypp/PublicKey.cc:73
+#: zypp/PublicKey.cc:74
 #, boost-format
 msgid "expires: %1%"
 msgstr ""
 
 #. translators: an annotation to a gpg keys expiry date
-#: zypp/PublicKey.cc:82
+#: zypp/PublicKey.cc:83
 msgid "(does not expire)"
 msgstr "(n' espire nén)"
 
 #. translators: an annotation to a gpg keys expiry date
-#: zypp/PublicKey.cc:91
+#: zypp/PublicKey.cc:92
 msgid "(EXPIRED)"
 msgstr "(ESPIRÉ)"
 
 #. translators: an annotation to a gpg keys expiry date
-#: zypp/PublicKey.cc:95
+#: zypp/PublicKey.cc:96
 msgid "(expires within 24h)"
 msgstr "(espire divant 24 e)"
 
 #. translators: an annotation to a gpg keys expiry date
-#: zypp/PublicKey.cc:99
+#: zypp/PublicKey.cc:100
 #, fuzzy, c-format, boost-format
 msgid "(expires in %d day)"
 msgid_plural "(expires in %d days)"
@@ -3754,7 +3754,7 @@ msgid "Cannot read repo directory '%1%': Permission denied"
 msgstr ""
 
 #. TranslatorExplanation '%s' is a pathname
-#: zypp/RepoManager.cc:321 zypp/RepoManager.cc:784 zypp/RepoManager.cc:1569
+#: zypp/RepoManager.cc:321 zypp/RepoManager.cc:784 zypp/RepoManager.cc:1565
 #: zypp/repo/PluginServices.cc:49
 #, c-format, boost-format
 msgid "Failed to read directory '%s'"
@@ -3774,8 +3774,8 @@ msgid "Service alias cannot start with dot."
 msgstr "On no metou di siervice ni s' pout cominçî avou on pont."
 
 #. TranslatorExplanation '%s' is a filename
-#: zypp/RepoManager.cc:739 zypp/RepoManager.cc:1687 zypp/RepoManager.cc:1753
-#: zypp/RepoManager.cc:1831 zypp/RepoManager.cc:1896 zypp/RepoManager.cc:2027
+#: zypp/RepoManager.cc:739 zypp/RepoManager.cc:1683 zypp/RepoManager.cc:1749
+#: zypp/RepoManager.cc:1827 zypp/RepoManager.cc:1892 zypp/RepoManager.cc:2023
 #, c-format, boost-format
 msgid "Can't open file '%s' for writing."
 msgstr "Dji n' sai nén drovi l' fitchî « %s » pol sicrire."
@@ -3815,12 +3815,12 @@ msgstr "Dji basti l' muchete do depot « %s »"
 msgid "Can't create cache at %s - no writing permissions."
 msgstr "Dji n' sai ahiver l' muchete a %s - pont d' droet di scrijhaedje."
 
-#: zypp/RepoManager.cc:1412
+#: zypp/RepoManager.cc:1408
 #, c-format, boost-format
 msgid "Failed to cache repo (%d)."
 msgstr "Li metaedje e muchete do depot (%d) a fwait berwete."
 
-#: zypp/RepoManager.cc:1423
+#: zypp/RepoManager.cc:1419
 msgid "Unhandled repository type"
 msgstr "Dji n' sai nén apougnî cisse sôre di depot la"
 
@@ -3830,44 +3830,44 @@ msgstr "Dji n' sai nén apougnî cisse sôre di depot la"
 #. on ftp file-not-found(bnc #335906). Instead we'll check another types
 #. before throwing.
 #. TranslatorExplanation '%s' is an URL
-#: zypp/RepoManager.cc:1460 zypp/RepoManager.cc:2522
+#: zypp/RepoManager.cc:1456 zypp/RepoManager.cc:2518
 #, c-format, boost-format
 msgid "Error trying to read from '%s'"
 msgstr "Åk n' a nén stî come dji sayive di lére a pårti di « %s »"
 
 #. TranslatorExplanation '%s' is an URL
-#: zypp/RepoManager.cc:1513 zypp/RepoManager.cc:2530
+#: zypp/RepoManager.cc:1509 zypp/RepoManager.cc:2526
 #, c-format, boost-format
 msgid "Unknown error reading from '%s'"
 msgstr "Åk di nén cnoxhou n' a nén stî come dji léjheu a pårti d' \"%s\""
 
-#: zypp/RepoManager.cc:1651
+#: zypp/RepoManager.cc:1647
 #, c-format, boost-format
 msgid "Adding repository '%s'"
 msgstr "Dji radjoute li depot « %s »"
 
 #. TranslatorExplanation '%s' is an URL
-#: zypp/RepoManager.cc:1739
+#: zypp/RepoManager.cc:1735
 #, c-format, boost-format
 msgid "Invalid repo file name at '%s'"
 msgstr "No do fitchî do depot so « %s » nén valåbe"
 
-#: zypp/RepoManager.cc:1780
+#: zypp/RepoManager.cc:1776
 #, c-format, boost-format
 msgid "Removing repository '%s'"
 msgstr ""
 
-#: zypp/RepoManager.cc:1799 zypp/RepoManager.cc:1877
+#: zypp/RepoManager.cc:1795 zypp/RepoManager.cc:1873
 msgid "Can't figure out where the repo is stored."
 msgstr "Dji n' sai nén trover ewou ç' kel depot est wårdé."
 
 #. TranslatorExplanation '%s' is a filename
-#: zypp/RepoManager.cc:1813 zypp/RepoManager.cc:2015
+#: zypp/RepoManager.cc:1809 zypp/RepoManager.cc:2011
 #, c-format, boost-format
 msgid "Can't delete '%s'"
 msgstr "Dji n' sai disfacer « %s »"
 
-#: zypp/RepoManager.cc:2003 zypp/RepoManager.cc:2453
+#: zypp/RepoManager.cc:1999 zypp/RepoManager.cc:2449
 msgid "Can't figure out where the service is stored."
 msgstr "Dji n' sai nén trover ewou ç' kel siervice est wårdé."
 
@@ -3969,188 +3969,29 @@ msgid "Invalid regular expression '%s'"
 msgstr "Erîlêye ratourneure « %s » nén valåbe"
 
 #. !\todo add comma to the message for the next release
-#: zypp/media/MediaCIFS.cc:427 zypp/media/MediaCurl.cc:1261
-#: zypp/zyppng/media/medianetwork.cc:581
+#: zypp/media/MediaCIFS.cc:427 zypp/media/MediaCurl.cc:1430
+#: zypp/zyppng/media/medianetwork.cc:582
 #, c-format, boost-format
 msgid "Authentication required for '%s'"
 msgstr "I s' fåt otintifyî po « %s »"
 
-#: zypp/media/MediaCurl.cc:634
-#: zypp/zyppng/media/network/networkrequesterror.cc:127
+#: zypp/media/MediaCurl.cc:803 zypp-curl/ng/network/networkrequesterror.cc:127
 msgid ""
 "Visit the SUSE Customer Center to check whether your registration is valid "
 "and has not expired."
 msgstr ""
 
-#: zypp/media/MediaCurl.cc:636
-#: zypp/zyppng/media/network/networkrequesterror.cc:129
+#: zypp/media/MediaCurl.cc:805 zypp-curl/ng/network/networkrequesterror.cc:129
 msgid ""
 "Visit the Novell Customer Center to check whether your registration is valid "
 "and has not expired."
 msgstr ""
-
-#: zypp/media/MediaException.cc:33
-#, c-format, boost-format
-msgid "Failed to mount %s on %s"
-msgstr "Li montaedje di %s dins %s a fwait berwete"
-
-#: zypp/media/MediaException.cc:43
-#, c-format, boost-format
-msgid "Failed to unmount %s"
-msgstr "Li dismontaedje di %s a fwait berwete"
-
-#: zypp/media/MediaException.cc:48
-#, c-format, boost-format
-msgid "Bad file name: %s"
-msgstr "Mwais no d' fitchî : %s"
-
-#: zypp/media/MediaException.cc:53
-#, c-format, boost-format
-msgid "Medium not opened when trying to perform action '%s'."
-msgstr "Media nén drovou cwand dj' a sayî d' fé l' faitindje « %s »."
-
-#: zypp/media/MediaException.cc:58
-#: zypp/zyppng/media/network/networkrequesterror.cc:138
-#, c-format, boost-format
-msgid "File '%s' not found on medium '%s'"
-msgstr "Fitchî « %s » nén trové sol media « %s »"
-
-#: zypp/media/MediaException.cc:63
-#, c-format, boost-format
-msgid "Cannot write file '%s'."
-msgstr "Dji n' sai scrire li fitchî « %s »."
-
-#: zypp/media/MediaException.cc:68
-msgid "Medium not attached"
-msgstr "Media nén ataetchî"
-
-#: zypp/media/MediaException.cc:73
-msgid "Bad media attach point"
-msgstr "Mwais pont d' ataetche do media"
-
-#. TranslatorExplanation: curl is the name of a library, don't translate
-#: zypp/media/MediaException.cc:79
-#, c-format, boost-format
-msgid "Download (curl) initialization failed for '%s'"
-msgstr "L' inicialijhaedje di l' aberwetaedje (curl) a fwait berwete po « %s »"
-
-#: zypp/media/MediaException.cc:84
-#, c-format, boost-format
-msgid "System exception '%s' on medium '%s'."
-msgstr "Foû rîle sistinme « %s » sol media « %s »."
-
-#: zypp/media/MediaException.cc:89
-#, c-format, boost-format
-msgid "Path '%s' on medium '%s' is not a file."
-msgstr "Li tchmin « %s » sol media « %s » n' est nén on fitchî."
-
-#: zypp/media/MediaException.cc:94
-#, c-format, boost-format
-msgid "Path '%s' on medium '%s' is not a directory."
-msgstr "Li tchmin « %s » sol media « %s » n' est nén on ridant."
-
-#: zypp/media/MediaException.cc:101
-msgid "Malformed URI"
-msgstr "URI må fwaite"
-
-#: zypp/media/MediaException.cc:111
-msgid "Empty host name in URI"
-msgstr "Vude no do lodjoe e l' URI"
-
-#: zypp/media/MediaException.cc:116
-msgid "Empty filesystem in URI"
-msgstr "Vude sistinme di fitchî e l' URI"
-
-#: zypp/media/MediaException.cc:121
-msgid "Empty destination in URI"
-msgstr "Vude såme e l' URI"
-
-#: zypp/media/MediaException.cc:126
-#, c-format, boost-format
-msgid "Unsupported URI scheme in '%s'."
-msgstr "Arindjmint d' URI nén sopoirté dins \"%s\"."
-
-#: zypp/media/MediaException.cc:131
-msgid "Operation not supported by medium"
-msgstr "Operåcion nén sopoirtêye på media"
-
-#: zypp/media/MediaException.cc:138
-#, c-format, boost-format
-msgid ""
-"Download (curl) error for '%s':\n"
-"Error code: %s\n"
-"Error message: %s\n"
-msgstr ""
-"Aroke d' aberwetaedje (curl) po « %s » :\n"
-"Côde di l' aroke : %s\n"
-"Messaedje d' aroke : %s\n"
-
-#. TranslatorExplanation: curl is the name of a library, don't translate
-#: zypp/media/MediaException.cc:146
-#, c-format, boost-format
-msgid "Error occurred while setting download (curl) options for '%s':"
-msgstr ""
-"Åk n' a nén stî come dji definixheu les tchuzes d' aberwetaedje (curl) po « "
-"%s » :"
-
-#: zypp/media/MediaException.cc:153
-#, c-format, boost-format
-msgid "Media source '%s' does not contain the desired medium"
-msgstr "I gn a nén e media sourdant « %s » li media volou"
-
-#: zypp/media/MediaException.cc:158
-#, c-format, boost-format
-msgid "Medium '%s' is in use by another instance"
-msgstr "Li media « %s » est eployî pa-z ene ôte instance"
-
-#: zypp/media/MediaException.cc:164
-msgid "Cannot eject any media"
-msgstr "Dji n' sai fé rexhe nou media"
-
-#: zypp/media/MediaException.cc:166
-#, c-format, boost-format
-msgid "Cannot eject media '%s'"
-msgstr "Dji n' sai fé rexhe li media « %s »"
-
-#: zypp/media/MediaException.cc:181
-#, c-format, boost-format
-msgid "Permission to access '%s' denied."
-msgstr "Droet di moussî e « %s » rifuzé."
-
-#: zypp/media/MediaException.cc:189
-#: zypp/zyppng/media/network/networkrequesterror.cc:122
-#, c-format, boost-format
-msgid "Timeout exceeded when accessing '%s'."
-msgstr "L' astådje a stî trop longue po moussî e \"%s\"."
-
-#: zypp/media/MediaException.cc:197
-#, c-format, boost-format
-msgid "Downloaded data exceeded the expected filesize '%s' of '%s'."
-msgstr ""
-
-#: zypp/media/MediaException.cc:205
-#: zypp/zyppng/media/network/networkrequesterror.cc:118
-#, c-format, boost-format
-msgid "Location '%s' is temporarily unaccessible."
-msgstr "Dji n' sai moussî e l' eplaeçmint « %s » pol moumint."
-
-#: zypp/media/MediaException.cc:213
-#, c-format, boost-format
-msgid " SSL certificate problem, verify that the CA cert is OK for '%s'."
-msgstr ""
-" : rujhe di l' acertineure SSL, waitîz k' l' acert. di l' OA est boune po « "
-"%s »."
 
 #: zypp/media/MediaHandler.cc:369
 msgid ""
 "Create attach point: Can't find a writable directory to create an attach "
 "point"
 msgstr ""
-
-#: zypp/media/MediaUserAuth.cc:150
-#, c-format, boost-format
-msgid "Unsupported HTTP authentication method '%s'"
-msgstr "Metôde d' otintifiaedje HTTP \"%s\" nén sopoirtêye"
 
 #: zypp/misc/CheckAccessDeleted.cc:455
 msgid "Please install package 'lsof' first."
@@ -4314,7 +4155,7 @@ msgid ""
 "     %4%"
 msgstr ""
 
-#: zypp/sat/detail/PoolImpl.cc:195
+#: zypp/sat/detail/PoolImpl.cc:197
 msgid "Can not create sat-pool."
 msgstr "Dji n' sai ahiver sat-pool."
 
@@ -4494,133 +4335,145 @@ msgstr ""
 msgid "not installable providers: "
 msgstr "ahesseus nén astalåves : "
 
-#: zypp/solver/detail/SATResolver.cc:1278
+#. translator: %1% is the name of a PTF, %2% the name of a patch.
+#: zypp/solver/detail/SATResolver.cc:1252
+#, boost-format
+msgid "%1% is not yet fully integrated into %2%."
+msgstr ""
+
+#: zypp/solver/detail/SATResolver.cc:1253
+msgid ""
+"Typically you want to keep the PTF and choose to not install the maintenance "
+"patches."
+msgstr ""
+
+#: zypp/solver/detail/SATResolver.cc:1309
 #, boost-format
 msgid "remove lock to allow removal of %1%"
 msgstr ""
 
-#: zypp/solver/detail/SATResolver.cc:1283
-#: zypp/solver/detail/SATResolver.cc:1319
+#: zypp/solver/detail/SATResolver.cc:1314
+#: zypp/solver/detail/SATResolver.cc:1352
 #, boost-format
 msgid "do not install %1%"
 msgstr ""
 
-#: zypp/solver/detail/SATResolver.cc:1298
-#: zypp/solver/detail/SATResolver.cc:1340
+#: zypp/solver/detail/SATResolver.cc:1331
+#: zypp/solver/detail/SATResolver.cc:1373
 #, boost-format
 msgid "keep %1%"
 msgstr ""
 
-#: zypp/solver/detail/SATResolver.cc:1303
+#: zypp/solver/detail/SATResolver.cc:1336
 #, boost-format
 msgid "remove lock to allow installation of %1%"
 msgstr ""
 
-#: zypp/solver/detail/SATResolver.cc:1354
-#: zypp/solver/detail/SATResolver.cc:1375
+#: zypp/solver/detail/SATResolver.cc:1387
+#: zypp/solver/detail/SATResolver.cc:1408
 msgid "This request will break your system!"
 msgstr "Cisse dimande ci va scheter vosse sistinme !"
 
-#: zypp/solver/detail/SATResolver.cc:1355
-#: zypp/solver/detail/SATResolver.cc:1376
+#: zypp/solver/detail/SATResolver.cc:1388
+#: zypp/solver/detail/SATResolver.cc:1409
 msgid "ignore the warning of a broken system"
 msgstr "passer houte l' adviertixhmint d' on sketé sistinme"
 
-#: zypp/solver/detail/SATResolver.cc:1360
+#: zypp/solver/detail/SATResolver.cc:1393
 #, boost-format
 msgid "do not ask to install a solvable providing %1%"
 msgstr ""
 
-#: zypp/solver/detail/SATResolver.cc:1382
+#: zypp/solver/detail/SATResolver.cc:1415
 #, boost-format
 msgid "do not ask to delete all solvables providing %1%"
 msgstr ""
 
-#: zypp/solver/detail/SATResolver.cc:1395
+#: zypp/solver/detail/SATResolver.cc:1428
 #, boost-format
 msgid "do not install most recent version of %1%"
 msgstr ""
 
-#: zypp/solver/detail/SATResolver.cc:1416
+#: zypp/solver/detail/SATResolver.cc:1449
 #, boost-format
 msgid "keep %1% despite the inferior architecture"
 msgstr ""
 
-#: zypp/solver/detail/SATResolver.cc:1421
+#: zypp/solver/detail/SATResolver.cc:1454
 #, boost-format
 msgid "install %1% despite the inferior architecture"
 msgstr ""
 
-#: zypp/solver/detail/SATResolver.cc:1430
+#: zypp/solver/detail/SATResolver.cc:1463
 #, boost-format
 msgid "keep obsolete %1%"
 msgstr ""
 
-#: zypp/solver/detail/SATResolver.cc:1435
+#: zypp/solver/detail/SATResolver.cc:1468
 #, boost-format
 msgid "install %1% from excluded repository"
 msgstr ""
 
 #. translator: %1% is a package name
-#: zypp/solver/detail/SATResolver.cc:1449
+#: zypp/solver/detail/SATResolver.cc:1482
 #, boost-format
 msgid "install %1% although it has been retracted"
 msgstr ""
 
 #. translator: %1% is a package name
-#: zypp/solver/detail/SATResolver.cc:1452
+#: zypp/solver/detail/SATResolver.cc:1485
 #, boost-format
 msgid "allow installing the PTF %1%"
 msgstr ""
 
 #. translator: %1% is a package name
-#: zypp/solver/detail/SATResolver.cc:1455
+#: zypp/solver/detail/SATResolver.cc:1488
 #, boost-format
 msgid "install %1% although it is blacklisted"
 msgstr ""
 
-#: zypp/solver/detail/SATResolver.cc:1475
+#: zypp/solver/detail/SATResolver.cc:1508
 #, boost-format
 msgid "downgrade of %1% to %2%"
 msgstr ""
 
-#: zypp/solver/detail/SATResolver.cc:1482
+#: zypp/solver/detail/SATResolver.cc:1515
 #, boost-format
 msgid "architecture change of %1% to %2%"
 msgstr ""
 
-#: zypp/solver/detail/SATResolver.cc:1493
+#. FIXME? Actually .ident() must be eq. But the more verbose 'else' isn't bad either.
+#: zypp/solver/detail/SATResolver.cc:1526
 #, boost-format
 msgid ""
 "install %1% (with vendor change)\n"
 "  %2%  -->  %3%"
 msgstr ""
 
-#: zypp/solver/detail/SATResolver.cc:1498
+#: zypp/solver/detail/SATResolver.cc:1531
 #, boost-format
 msgid ""
 "install %1% from vendor %2%\n"
 "  replacing %3% from vendor %4%"
 msgstr ""
 
-#: zypp/solver/detail/SATResolver.cc:1507
+#: zypp/solver/detail/SATResolver.cc:1540
 #, boost-format
 msgid "replacement of %1% with %2%"
 msgstr ""
 
-#: zypp/solver/detail/SATResolver.cc:1518
+#: zypp/solver/detail/SATResolver.cc:1551
 #, boost-format
 msgid "deinstallation of %1%"
 msgstr ""
 
-#. strip tmp file suffix
-#: zypp/target/RpmPostTransCollector.cc:105
+#: zypp/target/RpmPostTransCollector.cc:98
 #, boost-format
 msgid "Executing %%posttrans script '%1%'"
 msgstr ""
 
 #. show a final message
-#: zypp/target/RpmPostTransCollector.cc:173
+#: zypp/target/RpmPostTransCollector.cc:172
 #, c-format, boost-format
 msgid "Executing %posttrans scripts"
 msgstr ""
@@ -4629,44 +4482,44 @@ msgstr ""
 msgid "Installation has been aborted as directed."
 msgstr "L' astalaedje a stî abandné come dimandé."
 
-#: zypp/target/TargetImpl.cc:417
+#: zypp/target/TargetImpl.cc:419
 msgid " executed"
 msgstr " enondé"
 
-#: zypp/target/TargetImpl.cc:439
+#: zypp/target/TargetImpl.cc:441
 msgid " execution failed"
 msgstr " a fwait berwete a l' enondaedje"
 
 #. translators: We may find the same script content in files with different names.
 #. Only the first occurence is executed, subsequent ones are skipped. It's a one-line
 #. message for a log file. Preferably start translation with "%s"
-#: zypp/target/TargetImpl.cc:556
+#: zypp/target/TargetImpl.cc:558
 #, c-format, boost-format
 msgid "%s already executed as %s)"
 msgstr ""
 
-#: zypp/target/TargetImpl.cc:566
+#: zypp/target/TargetImpl.cc:568
 msgid " execution skipped while aborting"
 msgstr " a passé l' enondaedje cwand il abandnéve"
 
-#: zypp/target/TargetImpl.cc:621 zypp/target/TargetImpl.cc:641
-#: zypp/target/TargetImpl.cc:669 zypp/target/TargetImpl.cc:706
-#: zypp/target/TargetImpl.cc:714
+#: zypp/target/TargetImpl.cc:623 zypp/target/TargetImpl.cc:643
+#: zypp/target/TargetImpl.cc:671 zypp/target/TargetImpl.cc:708
+#: zypp/target/TargetImpl.cc:716
 msgid "Error sending update message notification."
 msgstr "Åk n' a nén stî come dji meteu a djoû l' notifiaedje do messaedje."
 
-#: zypp/target/TargetImpl.cc:765
+#: zypp/target/TargetImpl.cc:767
 msgid "New update message"
 msgstr "Novea messaedje di metaedje a djoû"
 
-#: zypp/target/TargetImpl.cc:2619
+#: zypp/target/TargetImpl.cc:2688
 msgid "Executing the transaction failed because of the following problems:"
 msgstr ""
 
 #. TranslatorExplanation after semicolon is error message
 #. TranslatorExplanation the colon is followed by an error message
 #: zypp/target/rpm/RpmDb.cc:467 zypp/target/rpm/RpmDb.cc:1769
-#: zypp/target/rpm/RpmDb.cc:1925
+#: zypp/target/rpm/RpmDb.cc:1928
 msgid "RPM failed: "
 msgstr "RPM a fwait berwete :"
 
@@ -4727,67 +4580,55 @@ msgstr ""
 "rpm a ahivé %s come %s/\n"
 "Vos avoz droci les 25 prumirès royes di diferince :\n"
 
-#. report additional rpm output in finish
+#. report additional rpm output in finish (LEGACY! Lines are immediately reported as InstallResolvableReport::contentRpmout)
 #. TranslatorExplanation Text is followed by a ':'  and the actual output.
-#: zypp/target/rpm/RpmDb.cc:1782 zypp/target/rpm/RpmDb.cc:1938
+#. report additional rpm output in finish (LEGACY! Lines are immediately reported as RemoveResolvableReport::contentRpmout)
+#. TranslatorExplanation Text is followed by a ':'  and the actual output.
+#: zypp/target/rpm/RpmDb.cc:1785 zypp/target/rpm/RpmDb.cc:1944
 msgid "Additional rpm output"
 msgstr "Ôtès rexhowes di rpm"
 
-#: zypp/target/rpm/RpmDb.cc:2080
+#: zypp/target/rpm/RpmDb.cc:2086
 #, c-format, boost-format
 msgid "created backup %s"
 msgstr "copeye di såvrité di %s ahivêye"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2101
+#: zypp/target/rpm/RpmDb.cc:2107
 #, fuzzy
 msgid "Signature is OK"
 msgstr "Sinateure di fitchî %s nén trovêye"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2103
+#: zypp/target/rpm/RpmDb.cc:2109
 msgid "Unknown type of signature"
 msgstr ""
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2105
+#: zypp/target/rpm/RpmDb.cc:2111
 #, fuzzy
 msgid "Signature does not verify"
 msgstr "Sinateure di fitchî %s nén trovêye"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2107
+#: zypp/target/rpm/RpmDb.cc:2113
 #, fuzzy
 msgid "Signature is OK, but key is not trusted"
 msgstr "Sinateure di fitchî %s nén trovêye"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2109
+#: zypp/target/rpm/RpmDb.cc:2115
 msgid "Signatures public key is not available"
 msgstr ""
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2111
+#: zypp/target/rpm/RpmDb.cc:2117
 msgid "File does not exist or signature can't be checked"
 msgstr ""
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2113
+#: zypp/target/rpm/RpmDb.cc:2119
 msgid "File is unsigned"
-msgstr ""
-
-#: zypp/zyppng/media/network/networkrequesterror.cc:143
-#, c-format, boost-format
-msgid ""
-"Download (curl) error for '%s':\n"
-"Error code: %s\n"
-msgstr ""
-
-#: zypp/zyppng/media/network/networkrequesterror.cc:149
-#, c-format, boost-format
-msgid ""
-"Download (curl) error for '%s':\n"
-"Unable to retrieve HTTP response\n"
 msgstr ""
 
 #. dubious: Throw on malformed known types, otherwise log a warning.
@@ -4827,8 +4668,7 @@ msgstr "Vude referince d' objet di l' Url nén valåbe"
 msgid "Unable to parse Url components"
 msgstr "Dji n' sai analijhî les componints di l' Url"
 
-#. TranslatorExplanation followed by the list of error messages that lead to this exception
-#: zypp-core/base/Exception.cc:134
+#: zypp-core/base/Exception.cc:150
 msgid "History:"
 msgstr "Istwere :"
 
@@ -4914,74 +4754,245 @@ msgstr ""
 msgid "Invalid parameter array join separator character"
 msgstr ""
 
-#: zypp-core/zyppng/io/abstractspawnengine.cc:174
+#: zypp-core/zyppng/io/abstractspawnengine.cc:177
 #, c-format, boost-format
 msgid "Command exited with status %d."
 msgstr "Li comande a moussî foû avou l' sitatut %d."
 
-#: zypp-core/zyppng/io/abstractspawnengine.cc:194
+#: zypp-core/zyppng/io/abstractspawnengine.cc:198
 #, c-format, boost-format
 msgid "Command was killed by signal %d (%s)."
 msgstr "Li comande a stî touwêye på signå %d (%s)."
 
-#: zypp-core/zyppng/io/abstractspawnengine.cc:199
+#: zypp-core/zyppng/io/abstractspawnengine.cc:203
 msgid "Command exited with unknown error."
 msgstr "Li comande a moussî foû avou ene aroke nén cnoxhowe."
 
-#: zypp-core/zyppng/io/forkspawnengine.cc:111
-#: zypp-core/zyppng/io/forkspawnengine.cc:359
+#: zypp-core/zyppng/io/forkspawnengine.cc:150
+#: zypp-core/zyppng/io/forkspawnengine.cc:392
 msgid "Invalid spawn arguments given."
 msgstr ""
 
-#: zypp-core/zyppng/io/forkspawnengine.cc:174
+#: zypp-core/zyppng/io/forkspawnengine.cc:206
 msgid "Unable to create control pipe."
 msgstr ""
 
-#: zypp-core/zyppng/io/forkspawnengine.cc:240
+#: zypp-core/zyppng/io/forkspawnengine.cc:272
 #, c-format, boost-format
 msgid "Can't chroot to '%s' (%s)."
 msgstr "Dji n' sai fé chroot a « %s » (%s)."
 
-#: zypp-core/zyppng/io/forkspawnengine.cc:250
+#: zypp-core/zyppng/io/forkspawnengine.cc:282
 #, fuzzy, c-format, boost-format
 msgid "Can't chdir to '%s' (%s)."
 msgstr "Dji n' sai fé chroot a « %s » (%s)."
 
-#: zypp-core/zyppng/io/forkspawnengine.cc:251
+#: zypp-core/zyppng/io/forkspawnengine.cc:283
 #, fuzzy, c-format, boost-format
 msgid "Can't chdir to '%s' inside chroot '%s' (%s)."
 msgstr "Dji n' sai fé chdir a « / » divins chroot (%s)."
 
 #. don't want to get here
-#: zypp-core/zyppng/io/forkspawnengine.cc:280
+#: zypp-core/zyppng/io/forkspawnengine.cc:312
 #, c-format, boost-format
 msgid "Can't exec '%s' (%s)."
 msgstr "Dji n' sai enonder « %s » (%s)."
 
-#: zypp-core/zyppng/io/forkspawnengine.cc:287
-#: zypp-core/zyppng/io/forkspawnengine.cc:448
+#: zypp-core/zyppng/io/forkspawnengine.cc:319
+#: zypp-core/zyppng/io/forkspawnengine.cc:473
 #, c-format, boost-format
 msgid "Can't fork (%s)."
 msgstr "Dji n' sai fé on fork (%s)."
 
-#: zypp-core/zyppng/io/forkspawnengine.cc:306
+#: zypp-core/zyppng/io/forkspawnengine.cc:338
 #, c-format, boost-format
 msgid "Can't exec '%s', chdir failed (%s)."
 msgstr ""
 
-#: zypp-core/zyppng/io/forkspawnengine.cc:309
+#: zypp-core/zyppng/io/forkspawnengine.cc:341
 #, c-format, boost-format
 msgid "Can't exec '%s', chroot failed (%s)."
 msgstr ""
 
-#: zypp-core/zyppng/io/forkspawnengine.cc:312
+#: zypp-core/zyppng/io/forkspawnengine.cc:344
 #, c-format, boost-format
 msgid "Can't exec '%s', exec failed (%s)."
 msgstr ""
 
-#: zypp-core/zyppng/io/forkspawnengine.cc:316
+#: zypp-core/zyppng/io/forkspawnengine.cc:348
 #, c-format, boost-format
 msgid "Can't exec '%s', unexpected error."
+msgstr ""
+
+#: zypp-media/mediaexception.cc:33
+#, c-format, boost-format
+msgid "Failed to mount %s on %s"
+msgstr "Li montaedje di %s dins %s a fwait berwete"
+
+#: zypp-media/mediaexception.cc:43
+#, c-format, boost-format
+msgid "Failed to unmount %s"
+msgstr "Li dismontaedje di %s a fwait berwete"
+
+#: zypp-media/mediaexception.cc:48
+#, c-format, boost-format
+msgid "Bad file name: %s"
+msgstr "Mwais no d' fitchî : %s"
+
+#: zypp-media/mediaexception.cc:53
+#, c-format, boost-format
+msgid "Medium not opened when trying to perform action '%s'."
+msgstr "Media nén drovou cwand dj' a sayî d' fé l' faitindje « %s »."
+
+#: zypp-media/mediaexception.cc:58
+#: zypp-curl/ng/network/networkrequesterror.cc:138
+#, c-format, boost-format
+msgid "File '%s' not found on medium '%s'"
+msgstr "Fitchî « %s » nén trové sol media « %s »"
+
+#: zypp-media/mediaexception.cc:63
+#, c-format, boost-format
+msgid "Cannot write file '%s'."
+msgstr "Dji n' sai scrire li fitchî « %s »."
+
+#: zypp-media/mediaexception.cc:68
+msgid "Medium not attached"
+msgstr "Media nén ataetchî"
+
+#: zypp-media/mediaexception.cc:73
+msgid "Bad media attach point"
+msgstr "Mwais pont d' ataetche do media"
+
+#. TranslatorExplanation: curl is the name of a library, don't translate
+#: zypp-media/mediaexception.cc:79
+#, c-format, boost-format
+msgid "Download (curl) initialization failed for '%s'"
+msgstr "L' inicialijhaedje di l' aberwetaedje (curl) a fwait berwete po « %s »"
+
+#: zypp-media/mediaexception.cc:84
+#, c-format, boost-format
+msgid "System exception '%s' on medium '%s'."
+msgstr "Foû rîle sistinme « %s » sol media « %s »."
+
+#: zypp-media/mediaexception.cc:89
+#, c-format, boost-format
+msgid "Path '%s' on medium '%s' is not a file."
+msgstr "Li tchmin « %s » sol media « %s » n' est nén on fitchî."
+
+#: zypp-media/mediaexception.cc:94
+#, c-format, boost-format
+msgid "Path '%s' on medium '%s' is not a directory."
+msgstr "Li tchmin « %s » sol media « %s » n' est nén on ridant."
+
+#: zypp-media/mediaexception.cc:101
+msgid "Malformed URI"
+msgstr "URI må fwaite"
+
+#: zypp-media/mediaexception.cc:111
+msgid "Empty host name in URI"
+msgstr "Vude no do lodjoe e l' URI"
+
+#: zypp-media/mediaexception.cc:116
+msgid "Empty filesystem in URI"
+msgstr "Vude sistinme di fitchî e l' URI"
+
+#: zypp-media/mediaexception.cc:121
+msgid "Empty destination in URI"
+msgstr "Vude såme e l' URI"
+
+#: zypp-media/mediaexception.cc:126
+#, c-format, boost-format
+msgid "Unsupported URI scheme in '%s'."
+msgstr "Arindjmint d' URI nén sopoirté dins \"%s\"."
+
+#: zypp-media/mediaexception.cc:131
+msgid "Operation not supported by medium"
+msgstr "Operåcion nén sopoirtêye på media"
+
+#: zypp-media/mediaexception.cc:138
+#, c-format, boost-format
+msgid ""
+"Download (curl) error for '%s':\n"
+"Error code: %s\n"
+"Error message: %s\n"
+msgstr ""
+"Aroke d' aberwetaedje (curl) po « %s » :\n"
+"Côde di l' aroke : %s\n"
+"Messaedje d' aroke : %s\n"
+
+#. TranslatorExplanation: curl is the name of a library, don't translate
+#: zypp-media/mediaexception.cc:146
+#, c-format, boost-format
+msgid "Error occurred while setting download (curl) options for '%s':"
+msgstr ""
+"Åk n' a nén stî come dji definixheu les tchuzes d' aberwetaedje (curl) po « "
+"%s » :"
+
+#: zypp-media/mediaexception.cc:153
+#, c-format, boost-format
+msgid "Media source '%s' does not contain the desired medium"
+msgstr "I gn a nén e media sourdant « %s » li media volou"
+
+#: zypp-media/mediaexception.cc:158
+#, c-format, boost-format
+msgid "Medium '%s' is in use by another instance"
+msgstr "Li media « %s » est eployî pa-z ene ôte instance"
+
+#: zypp-media/mediaexception.cc:164
+msgid "Cannot eject any media"
+msgstr "Dji n' sai fé rexhe nou media"
+
+#: zypp-media/mediaexception.cc:166
+#, c-format, boost-format
+msgid "Cannot eject media '%s'"
+msgstr "Dji n' sai fé rexhe li media « %s »"
+
+#: zypp-media/mediaexception.cc:181
+#, c-format, boost-format
+msgid "Permission to access '%s' denied."
+msgstr "Droet di moussî e « %s » rifuzé."
+
+#: zypp-media/mediaexception.cc:189
+#: zypp-curl/ng/network/networkrequesterror.cc:122
+#, c-format, boost-format
+msgid "Timeout exceeded when accessing '%s'."
+msgstr "L' astådje a stî trop longue po moussî e \"%s\"."
+
+#: zypp-media/mediaexception.cc:197
+#, c-format, boost-format
+msgid "Downloaded data exceeded the expected filesize '%s' of '%s'."
+msgstr ""
+
+#: zypp-media/mediaexception.cc:205
+#: zypp-curl/ng/network/networkrequesterror.cc:118
+#, c-format, boost-format
+msgid "Location '%s' is temporarily unaccessible."
+msgstr "Dji n' sai moussî e l' eplaeçmint « %s » pol moumint."
+
+#: zypp-media/mediaexception.cc:213
+#, c-format, boost-format
+msgid " SSL certificate problem, verify that the CA cert is OK for '%s'."
+msgstr ""
+" : rujhe di l' acertineure SSL, waitîz k' l' acert. di l' OA est boune po « "
+"%s »."
+
+#: zypp-curl/auth/curlauthdata.cc:97
+#, c-format, boost-format
+msgid "Unsupported HTTP authentication method '%s'"
+msgstr "Metôde d' otintifiaedje HTTP \"%s\" nén sopoirtêye"
+
+#: zypp-curl/ng/network/networkrequesterror.cc:143
+#, c-format, boost-format
+msgid ""
+"Download (curl) error for '%s':\n"
+"Error code: %s\n"
+msgstr ""
+
+#: zypp-curl/ng/network/networkrequesterror.cc:149
+#, c-format, boost-format
+msgid ""
+"Download (curl) error for '%s':\n"
+"Unable to retrieve HTTP response\n"
 msgstr ""
 
 #~ msgid "%s does not belong to a distupgrade repository"

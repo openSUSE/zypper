@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-26 11:04+0200\n"
+"POT-Creation-Date: 2022-02-14 16:34+0100\n"
 "PO-Revision-Date: 2021-11-30 09:11+0000\n"
 "Last-Translator: Hillwood Yang <hillwoodroc@gmail.com>\n"
 "Language-Team: Chinese (China) <https://l10n.opensuse.org/projects/libzypp/"
@@ -3669,39 +3669,39 @@ msgid "Following actions will be done:"
 msgstr "将执行以下动作："
 
 #. translators: an annotation to a gpg keys expiry date
-#: zypp/PublicKey.cc:63
+#: zypp/PublicKey.cc:64
 msgid "does not expire"
 msgstr "永不过期"
 
 #. translators: an annotation to a gpg keys expiry date: "expired: 1999-04-12"
-#: zypp/PublicKey.cc:68
+#: zypp/PublicKey.cc:69
 #, boost-format
 msgid "expired: %1%"
 msgstr "过期日期：%1%"
 
 #. translators: an annotation to a gpg keys expiry date: "expires: 2111-04-12"
-#: zypp/PublicKey.cc:73
+#: zypp/PublicKey.cc:74
 #, boost-format
 msgid "expires: %1%"
 msgstr "过期日期：%1%"
 
 #. translators: an annotation to a gpg keys expiry date
-#: zypp/PublicKey.cc:82
+#: zypp/PublicKey.cc:83
 msgid "(does not expire)"
 msgstr "（永不过期）"
 
 #. translators: an annotation to a gpg keys expiry date
-#: zypp/PublicKey.cc:91
+#: zypp/PublicKey.cc:92
 msgid "(EXPIRED)"
 msgstr "（已过期）"
 
 #. translators: an annotation to a gpg keys expiry date
-#: zypp/PublicKey.cc:95
+#: zypp/PublicKey.cc:96
 msgid "(expires within 24h)"
 msgstr "（24 小时内过期）"
 
 #. translators: an annotation to a gpg keys expiry date
-#: zypp/PublicKey.cc:99
+#: zypp/PublicKey.cc:100
 #, c-format, boost-format
 msgid "(expires in %d day)"
 msgid_plural "(expires in %d days)"
@@ -3733,7 +3733,7 @@ msgid "Cannot read repo directory '%1%': Permission denied"
 msgstr "无法读取源文件夹 '%1%'：权限被拒"
 
 #. TranslatorExplanation '%s' is a pathname
-#: zypp/RepoManager.cc:321 zypp/RepoManager.cc:784 zypp/RepoManager.cc:1569
+#: zypp/RepoManager.cc:321 zypp/RepoManager.cc:784 zypp/RepoManager.cc:1565
 #: zypp/repo/PluginServices.cc:49
 #, c-format, boost-format
 msgid "Failed to read directory '%s'"
@@ -3753,8 +3753,8 @@ msgid "Service alias cannot start with dot."
 msgstr "服务别名不能以点开头。"
 
 #. TranslatorExplanation '%s' is a filename
-#: zypp/RepoManager.cc:739 zypp/RepoManager.cc:1687 zypp/RepoManager.cc:1753
-#: zypp/RepoManager.cc:1831 zypp/RepoManager.cc:1896 zypp/RepoManager.cc:2027
+#: zypp/RepoManager.cc:739 zypp/RepoManager.cc:1683 zypp/RepoManager.cc:1749
+#: zypp/RepoManager.cc:1827 zypp/RepoManager.cc:1892 zypp/RepoManager.cc:2023
 #, c-format, boost-format
 msgid "Can't open file '%s' for writing."
 msgstr "无法打开 '%s' 文件进行写入。"
@@ -3792,12 +3792,12 @@ msgstr "正在构建软件源 '%s' 的缓存"
 msgid "Can't create cache at %s - no writing permissions."
 msgstr "无法在 %s 创建缓存 - 无写入权限。"
 
-#: zypp/RepoManager.cc:1412
+#: zypp/RepoManager.cc:1408
 #, c-format, boost-format
 msgid "Failed to cache repo (%d)."
 msgstr "缓存软件源 (%d) 失败。"
 
-#: zypp/RepoManager.cc:1423
+#: zypp/RepoManager.cc:1419
 msgid "Unhandled repository type"
 msgstr "未处理的软件源类型"
 
@@ -3807,44 +3807,44 @@ msgstr "未处理的软件源类型"
 #. on ftp file-not-found(bnc #335906). Instead we'll check another types
 #. before throwing.
 #. TranslatorExplanation '%s' is an URL
-#: zypp/RepoManager.cc:1460 zypp/RepoManager.cc:2522
+#: zypp/RepoManager.cc:1456 zypp/RepoManager.cc:2518
 #, c-format, boost-format
 msgid "Error trying to read from '%s'"
 msgstr "试图读取 '%s' 出错"
 
 #. TranslatorExplanation '%s' is an URL
-#: zypp/RepoManager.cc:1513 zypp/RepoManager.cc:2530
+#: zypp/RepoManager.cc:1509 zypp/RepoManager.cc:2526
 #, c-format, boost-format
 msgid "Unknown error reading from '%s'"
 msgstr "读取 '%s' 遇到未知错误"
 
-#: zypp/RepoManager.cc:1651
+#: zypp/RepoManager.cc:1647
 #, c-format, boost-format
 msgid "Adding repository '%s'"
 msgstr "正在添加软件源 '%s'"
 
 #. TranslatorExplanation '%s' is an URL
-#: zypp/RepoManager.cc:1739
+#: zypp/RepoManager.cc:1735
 #, c-format, boost-format
 msgid "Invalid repo file name at '%s'"
 msgstr "'%s' 处的源文件名无效"
 
-#: zypp/RepoManager.cc:1780
+#: zypp/RepoManager.cc:1776
 #, c-format, boost-format
 msgid "Removing repository '%s'"
 msgstr "正在移除软件源 '%s'"
 
-#: zypp/RepoManager.cc:1799 zypp/RepoManager.cc:1877
+#: zypp/RepoManager.cc:1795 zypp/RepoManager.cc:1873
 msgid "Can't figure out where the repo is stored."
 msgstr "不确定软件源的存储位置。"
 
 #. TranslatorExplanation '%s' is a filename
-#: zypp/RepoManager.cc:1813 zypp/RepoManager.cc:2015
+#: zypp/RepoManager.cc:1809 zypp/RepoManager.cc:2011
 #, c-format, boost-format
 msgid "Can't delete '%s'"
 msgstr "无法删除 '%s'"
 
-#: zypp/RepoManager.cc:2003 zypp/RepoManager.cc:2453
+#: zypp/RepoManager.cc:1999 zypp/RepoManager.cc:2449
 msgid "Can't figure out where the service is stored."
 msgstr "不确定服务的储存位置。"
 
@@ -3950,184 +3950,29 @@ msgid "Invalid regular expression '%s'"
 msgstr "无效的正则表达式 '%s'"
 
 #. !\todo add comma to the message for the next release
-#: zypp/media/MediaCIFS.cc:427 zypp/media/MediaCurl.cc:1261
-#: zypp/zyppng/media/medianetwork.cc:581
+#: zypp/media/MediaCIFS.cc:427 zypp/media/MediaCurl.cc:1430
+#: zypp/zyppng/media/medianetwork.cc:582
 #, c-format, boost-format
 msgid "Authentication required for '%s'"
 msgstr "'%s' 需要认证"
 
-#: zypp/media/MediaCurl.cc:634
-#: zypp/zyppng/media/network/networkrequesterror.cc:127
+#: zypp/media/MediaCurl.cc:803 zypp-curl/ng/network/networkrequesterror.cc:127
 msgid ""
 "Visit the SUSE Customer Center to check whether your registration is valid "
 "and has not expired."
 msgstr "访问 SUSE 客户中心检查您的注册是否有效且未过期。"
 
-#: zypp/media/MediaCurl.cc:636
-#: zypp/zyppng/media/network/networkrequesterror.cc:129
+#: zypp/media/MediaCurl.cc:805 zypp-curl/ng/network/networkrequesterror.cc:129
 msgid ""
 "Visit the Novell Customer Center to check whether your registration is valid "
 "and has not expired."
 msgstr "访问 Novell 客户中心检查您的注册是否有效并尚未过期。"
-
-#: zypp/media/MediaException.cc:33
-#, c-format, boost-format
-msgid "Failed to mount %s on %s"
-msgstr "未能把 %s 挂载到 %s"
-
-#: zypp/media/MediaException.cc:43
-#, c-format, boost-format
-msgid "Failed to unmount %s"
-msgstr "卸载 %s 失败"
-
-#: zypp/media/MediaException.cc:48
-#, c-format, boost-format
-msgid "Bad file name: %s"
-msgstr "文件名错误：%s"
-
-#: zypp/media/MediaException.cc:53
-#, c-format, boost-format
-msgid "Medium not opened when trying to perform action '%s'."
-msgstr "当试图执行动作 '%s' 时，介质没有打开。"
-
-#: zypp/media/MediaException.cc:58
-#: zypp/zyppng/media/network/networkrequesterror.cc:138
-#, c-format, boost-format
-msgid "File '%s' not found on medium '%s'"
-msgstr "文件 '%s' 未在介质 '%s' 上找到"
-
-#: zypp/media/MediaException.cc:63
-#, c-format, boost-format
-msgid "Cannot write file '%s'."
-msgstr "无法写入文件 '%s'。"
-
-#: zypp/media/MediaException.cc:68
-msgid "Medium not attached"
-msgstr "介质未挂载"
-
-#: zypp/media/MediaException.cc:73
-msgid "Bad media attach point"
-msgstr "介质挂载点错误"
-
-#. TranslatorExplanation: curl is the name of a library, don't translate
-#: zypp/media/MediaException.cc:79
-#, c-format, boost-format
-msgid "Download (curl) initialization failed for '%s'"
-msgstr "下载(curl) '%s' 时初始化失败"
-
-#: zypp/media/MediaException.cc:84
-#, c-format, boost-format
-msgid "System exception '%s' on medium '%s'."
-msgstr "系统例外 '%s'（发生于介质 '%s' 上）。"
-
-#: zypp/media/MediaException.cc:89
-#, c-format, boost-format
-msgid "Path '%s' on medium '%s' is not a file."
-msgstr "路径 '%s'（介质 '%s' 上）并不是一个文件。"
-
-#: zypp/media/MediaException.cc:94
-#, c-format, boost-format
-msgid "Path '%s' on medium '%s' is not a directory."
-msgstr "路径 '%s'（介质 '%s' 上）并不是一个文件夹。"
-
-#: zypp/media/MediaException.cc:101
-msgid "Malformed URI"
-msgstr "异常的 URI"
-
-#: zypp/media/MediaException.cc:111
-msgid "Empty host name in URI"
-msgstr "URI 中主机名为空"
-
-#: zypp/media/MediaException.cc:116
-msgid "Empty filesystem in URI"
-msgstr "URI 中文件系统为空"
-
-#: zypp/media/MediaException.cc:121
-msgid "Empty destination in URI"
-msgstr "URI 中目标为空"
-
-#: zypp/media/MediaException.cc:126
-#, c-format, boost-format
-msgid "Unsupported URI scheme in '%s'."
-msgstr "不支持 '%s' 中的 URI 方案。"
-
-#: zypp/media/MediaException.cc:131
-msgid "Operation not supported by medium"
-msgstr "介质不支持此操作"
-
-#: zypp/media/MediaException.cc:138
-#, c-format, boost-format
-msgid ""
-"Download (curl) error for '%s':\n"
-"Error code: %s\n"
-"Error message: %s\n"
-msgstr ""
-"下载 (curl) '%s' 出错：\n"
-"错误代码：%s\n"
-"错误消息：%s\n"
-
-#. TranslatorExplanation: curl is the name of a library, don't translate
-#: zypp/media/MediaException.cc:146
-#, c-format, boost-format
-msgid "Error occurred while setting download (curl) options for '%s':"
-msgstr "为 '%s' 设置下载 (curl) 选项时出错："
-
-#: zypp/media/MediaException.cc:153
-#, c-format, boost-format
-msgid "Media source '%s' does not contain the desired medium"
-msgstr "介质来源 '%s' 不包含期望的介质"
-
-#: zypp/media/MediaException.cc:158
-#, c-format, boost-format
-msgid "Medium '%s' is in use by another instance"
-msgstr "介质 '%s' 正被另一个实例使用"
-
-#: zypp/media/MediaException.cc:164
-msgid "Cannot eject any media"
-msgstr "无法弹出任何介质"
-
-#: zypp/media/MediaException.cc:166
-#, c-format, boost-format
-msgid "Cannot eject media '%s'"
-msgstr "无法弹出介质 '%s'"
-
-#: zypp/media/MediaException.cc:181
-#, c-format, boost-format
-msgid "Permission to access '%s' denied."
-msgstr "访问 '%s' 的准入请求被拒绝。"
-
-#: zypp/media/MediaException.cc:189
-#: zypp/zyppng/media/network/networkrequesterror.cc:122
-#, c-format, boost-format
-msgid "Timeout exceeded when accessing '%s'."
-msgstr "访问 '%s' 时超时。"
-
-#: zypp/media/MediaException.cc:197
-#, c-format, boost-format
-msgid "Downloaded data exceeded the expected filesize '%s' of '%s'."
-msgstr "下载到的数据超出了预期文件大小 '%s'/'%s'。"
-
-#: zypp/media/MediaException.cc:205
-#: zypp/zyppng/media/network/networkrequesterror.cc:118
-#, c-format, boost-format
-msgid "Location '%s' is temporarily unaccessible."
-msgstr "位置 '%s' 暂时无法访问。"
-
-#: zypp/media/MediaException.cc:213
-#, c-format, boost-format
-msgid " SSL certificate problem, verify that the CA cert is OK for '%s'."
-msgstr " SSL 证书问题，请校验 '%s' 的 CA 证书。"
 
 #: zypp/media/MediaHandler.cc:369
 msgid ""
 "Create attach point: Can't find a writable directory to create an attach "
 "point"
 msgstr "创建挂接点：找不到可用于创建挂接点的可写目录"
-
-#: zypp/media/MediaUserAuth.cc:150
-#, c-format, boost-format
-msgid "Unsupported HTTP authentication method '%s'"
-msgstr "不支持 HTTP 认证方法 '%s'"
 
 #: zypp/misc/CheckAccessDeleted.cc:455
 msgid "Please install package 'lsof' first."
@@ -4342,7 +4187,7 @@ msgstr ""
 " %4%\n"
 " 冲突"
 
-#: zypp/sat/detail/PoolImpl.cc:195
+#: zypp/sat/detail/PoolImpl.cc:197
 msgid "Can not create sat-pool."
 msgstr "无法创建 sat-pool。"
 
@@ -4520,102 +4365,115 @@ msgstr ""
 msgid "not installable providers: "
 msgstr "无法安装的提供者： "
 
-#: zypp/solver/detail/SATResolver.cc:1278
+#. translator: %1% is the name of a PTF, %2% the name of a patch.
+#: zypp/solver/detail/SATResolver.cc:1252
+#, boost-format
+msgid "%1% is not yet fully integrated into %2%."
+msgstr ""
+
+#: zypp/solver/detail/SATResolver.cc:1253
+msgid ""
+"Typically you want to keep the PTF and choose to not install the maintenance "
+"patches."
+msgstr ""
+
+#: zypp/solver/detail/SATResolver.cc:1309
 #, boost-format
 msgid "remove lock to allow removal of %1%"
 msgstr "移除锁定以允许移除 %1%"
 
-#: zypp/solver/detail/SATResolver.cc:1283
-#: zypp/solver/detail/SATResolver.cc:1319
+#: zypp/solver/detail/SATResolver.cc:1314
+#: zypp/solver/detail/SATResolver.cc:1352
 #, boost-format
 msgid "do not install %1%"
 msgstr "不安装 %1%"
 
-#: zypp/solver/detail/SATResolver.cc:1298
-#: zypp/solver/detail/SATResolver.cc:1340
+#: zypp/solver/detail/SATResolver.cc:1331
+#: zypp/solver/detail/SATResolver.cc:1373
 #, boost-format
 msgid "keep %1%"
 msgstr "保留 %1%"
 
-#: zypp/solver/detail/SATResolver.cc:1303
+#: zypp/solver/detail/SATResolver.cc:1336
 #, boost-format
 msgid "remove lock to allow installation of %1%"
 msgstr "移除锁定以允许安装 %1%"
 
-#: zypp/solver/detail/SATResolver.cc:1354
-#: zypp/solver/detail/SATResolver.cc:1375
+#: zypp/solver/detail/SATResolver.cc:1387
+#: zypp/solver/detail/SATResolver.cc:1408
 msgid "This request will break your system!"
 msgstr "此请求将破坏您的系统！"
 
-#: zypp/solver/detail/SATResolver.cc:1355
-#: zypp/solver/detail/SATResolver.cc:1376
+#: zypp/solver/detail/SATResolver.cc:1388
+#: zypp/solver/detail/SATResolver.cc:1409
 msgid "ignore the warning of a broken system"
 msgstr "忽略损坏系统的警告"
 
-#: zypp/solver/detail/SATResolver.cc:1360
+#: zypp/solver/detail/SATResolver.cc:1393
 #, boost-format
 msgid "do not ask to install a solvable providing %1%"
 msgstr "不询问就安装提供 %1% 的一个解析项"
 
-#: zypp/solver/detail/SATResolver.cc:1382
+#: zypp/solver/detail/SATResolver.cc:1415
 #, boost-format
 msgid "do not ask to delete all solvables providing %1%"
 msgstr "不询问就删除提供 %1% 的所有解析项"
 
-#: zypp/solver/detail/SATResolver.cc:1395
+#: zypp/solver/detail/SATResolver.cc:1428
 #, boost-format
 msgid "do not install most recent version of %1%"
 msgstr "不安装最新版本的 %1%"
 
-#: zypp/solver/detail/SATResolver.cc:1416
+#: zypp/solver/detail/SATResolver.cc:1449
 #, boost-format
 msgid "keep %1% despite the inferior architecture"
 msgstr "即使架构较低，仍保留 %1%"
 
-#: zypp/solver/detail/SATResolver.cc:1421
+#: zypp/solver/detail/SATResolver.cc:1454
 #, boost-format
 msgid "install %1% despite the inferior architecture"
 msgstr "即使架构较低，仍安装 %1%"
 
-#: zypp/solver/detail/SATResolver.cc:1430
+#: zypp/solver/detail/SATResolver.cc:1463
 #, boost-format
 msgid "keep obsolete %1%"
 msgstr "保留淘汰的 %1%"
 
-#: zypp/solver/detail/SATResolver.cc:1435
+#: zypp/solver/detail/SATResolver.cc:1468
 #, boost-format
 msgid "install %1% from excluded repository"
 msgstr "安装来自排除的软件源的 %1%"
 
 #. translator: %1% is a package name
-#: zypp/solver/detail/SATResolver.cc:1449
+#: zypp/solver/detail/SATResolver.cc:1482
 #, boost-format
 msgid "install %1% although it has been retracted"
 msgstr "尽管 %1% 已收回，仍予以安装"
 
 #. translator: %1% is a package name
-#: zypp/solver/detail/SATResolver.cc:1452
+#: zypp/solver/detail/SATResolver.cc:1485
 #, boost-format
 msgid "allow installing the PTF %1%"
 msgstr "允许安装 PTF %1%"
 
 #. translator: %1% is a package name
-#: zypp/solver/detail/SATResolver.cc:1455
+#: zypp/solver/detail/SATResolver.cc:1488
 #, boost-format
 msgid "install %1% although it is blacklisted"
 msgstr "尽管 %1% 已列入黑名单，仍予以安装"
 
-#: zypp/solver/detail/SATResolver.cc:1475
+#: zypp/solver/detail/SATResolver.cc:1508
 #, boost-format
 msgid "downgrade of %1% to %2%"
 msgstr "将 %1% 降级到 %2%"
 
-#: zypp/solver/detail/SATResolver.cc:1482
+#: zypp/solver/detail/SATResolver.cc:1515
 #, boost-format
 msgid "architecture change of %1% to %2%"
 msgstr "架构从 %1% 变为 %2%"
 
-#: zypp/solver/detail/SATResolver.cc:1493
+#. FIXME? Actually .ident() must be eq. But the more verbose 'else' isn't bad either.
+#: zypp/solver/detail/SATResolver.cc:1526
 #, boost-format
 msgid ""
 "install %1% (with vendor change)\n"
@@ -4624,7 +4482,7 @@ msgstr ""
 "安装 %1%（并更改厂商）\n"
 "  %2%  -->  %3%"
 
-#: zypp/solver/detail/SATResolver.cc:1498
+#: zypp/solver/detail/SATResolver.cc:1531
 #, boost-format
 msgid ""
 "install %1% from vendor %2%\n"
@@ -4633,24 +4491,23 @@ msgstr ""
 "由供应商 %2% 安装 %1% 代替\n"
 "由供应商 %4% 安装 %3%"
 
-#: zypp/solver/detail/SATResolver.cc:1507
+#: zypp/solver/detail/SATResolver.cc:1540
 #, boost-format
 msgid "replacement of %1% with %2%"
 msgstr "将 %1% 用 %2% 取代"
 
-#: zypp/solver/detail/SATResolver.cc:1518
+#: zypp/solver/detail/SATResolver.cc:1551
 #, boost-format
 msgid "deinstallation of %1%"
 msgstr "卸载 %1%"
 
-#. strip tmp file suffix
-#: zypp/target/RpmPostTransCollector.cc:105
+#: zypp/target/RpmPostTransCollector.cc:98
 #, boost-format
 msgid "Executing %%posttrans script '%1%'"
 msgstr "正在执行 %%posttrans 脚本“%1%”"
 
 #. show a final message
-#: zypp/target/RpmPostTransCollector.cc:173
+#: zypp/target/RpmPostTransCollector.cc:172
 #, c-format, boost-format
 msgid "Executing %posttrans scripts"
 msgstr "正在执行 %p osttrans 脚本"
@@ -4659,44 +4516,44 @@ msgstr "正在执行 %p osttrans 脚本"
 msgid "Installation has been aborted as directed."
 msgstr "安装已按指示中止。"
 
-#: zypp/target/TargetImpl.cc:417
+#: zypp/target/TargetImpl.cc:419
 msgid " executed"
 msgstr " 已执行"
 
-#: zypp/target/TargetImpl.cc:439
+#: zypp/target/TargetImpl.cc:441
 msgid " execution failed"
 msgstr " 执行失败"
 
 #. translators: We may find the same script content in files with different names.
 #. Only the first occurence is executed, subsequent ones are skipped. It's a one-line
 #. message for a log file. Preferably start translation with "%s"
-#: zypp/target/TargetImpl.cc:556
+#: zypp/target/TargetImpl.cc:558
 #, c-format, boost-format
 msgid "%s already executed as %s)"
 msgstr "%s 早已作为 %s 执行了）"
 
-#: zypp/target/TargetImpl.cc:566
+#: zypp/target/TargetImpl.cc:568
 msgid " execution skipped while aborting"
 msgstr " 中止时跳过执行"
 
-#: zypp/target/TargetImpl.cc:621 zypp/target/TargetImpl.cc:641
-#: zypp/target/TargetImpl.cc:669 zypp/target/TargetImpl.cc:706
-#: zypp/target/TargetImpl.cc:714
+#: zypp/target/TargetImpl.cc:623 zypp/target/TargetImpl.cc:643
+#: zypp/target/TargetImpl.cc:671 zypp/target/TargetImpl.cc:708
+#: zypp/target/TargetImpl.cc:716
 msgid "Error sending update message notification."
 msgstr "发送更新消息通知出错。"
 
-#: zypp/target/TargetImpl.cc:765
+#: zypp/target/TargetImpl.cc:767
 msgid "New update message"
 msgstr "新更新消息"
 
-#: zypp/target/TargetImpl.cc:2619
+#: zypp/target/TargetImpl.cc:2688
 msgid "Executing the transaction failed because of the following problems:"
 msgstr "由于以下问题执行操作失败："
 
 #. TranslatorExplanation after semicolon is error message
 #. TranslatorExplanation the colon is followed by an error message
 #: zypp/target/rpm/RpmDb.cc:467 zypp/target/rpm/RpmDb.cc:1769
-#: zypp/target/rpm/RpmDb.cc:1925
+#: zypp/target/rpm/RpmDb.cc:1928
 msgid "RPM failed: "
 msgstr "RPM 失败： "
 
@@ -4755,69 +4612,53 @@ msgstr ""
 "rpm 已将 %s 创建为 %s。\n"
 "以下是前 25 行差异：\n"
 
-#. report additional rpm output in finish
+#. report additional rpm output in finish (LEGACY! Lines are immediately reported as InstallResolvableReport::contentRpmout)
 #. TranslatorExplanation Text is followed by a ':'  and the actual output.
-#: zypp/target/rpm/RpmDb.cc:1782 zypp/target/rpm/RpmDb.cc:1938
+#. report additional rpm output in finish (LEGACY! Lines are immediately reported as RemoveResolvableReport::contentRpmout)
+#. TranslatorExplanation Text is followed by a ':'  and the actual output.
+#: zypp/target/rpm/RpmDb.cc:1785 zypp/target/rpm/RpmDb.cc:1944
 msgid "Additional rpm output"
 msgstr "额外的 RPM 输出"
 
-#: zypp/target/rpm/RpmDb.cc:2080
+#: zypp/target/rpm/RpmDb.cc:2086
 #, c-format, boost-format
 msgid "created backup %s"
 msgstr "已创建备份 %s"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2101
+#: zypp/target/rpm/RpmDb.cc:2107
 msgid "Signature is OK"
 msgstr "签名正确"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2103
+#: zypp/target/rpm/RpmDb.cc:2109
 msgid "Unknown type of signature"
 msgstr "未知签名类型"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2105
+#: zypp/target/rpm/RpmDb.cc:2111
 msgid "Signature does not verify"
 msgstr "无法校验签名"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2107
+#: zypp/target/rpm/RpmDb.cc:2113
 msgid "Signature is OK, but key is not trusted"
 msgstr "签名正确，但密钥是非受信的"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2109
+#: zypp/target/rpm/RpmDb.cc:2115
 msgid "Signatures public key is not available"
 msgstr "签名公钥不可用"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2111
+#: zypp/target/rpm/RpmDb.cc:2117
 msgid "File does not exist or signature can't be checked"
 msgstr "文件不存在或无法检查其签名"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2113
+#: zypp/target/rpm/RpmDb.cc:2119
 msgid "File is unsigned"
 msgstr "未签署文件"
-
-#: zypp/zyppng/media/network/networkrequesterror.cc:143
-#, c-format, boost-format
-msgid ""
-"Download (curl) error for '%s':\n"
-"Error code: %s\n"
-msgstr ""
-"下载 (curl) \"%s\" 时发生错误：\n"
-"错误代码：%s\n"
-
-#: zypp/zyppng/media/network/networkrequesterror.cc:149
-#, c-format, boost-format
-msgid ""
-"Download (curl) error for '%s':\n"
-"Unable to retrieve HTTP response\n"
-msgstr ""
-"下载 (curl) \"%s\" 时发生错误：\n"
-"无法检索 HTTP 响应\n"
 
 #. dubious: Throw on malformed known types, otherwise log a warning.
 #: zypp-core/CheckSum.cc:136
@@ -4856,8 +4697,7 @@ msgstr "无效的空 URL 对象引用"
 msgid "Unable to parse Url components"
 msgstr "无法解析 URL 组件"
 
-#. TranslatorExplanation followed by the list of error messages that lead to this exception
-#: zypp-core/base/Exception.cc:134
+#: zypp-core/base/Exception.cc:150
 msgid "History:"
 msgstr "历史："
 
@@ -4943,75 +4783,246 @@ msgstr "无效的参数映射分割的分隔符"
 msgid "Invalid parameter array join separator character"
 msgstr "无效的参数数组合并的分隔符"
 
-#: zypp-core/zyppng/io/abstractspawnengine.cc:174
+#: zypp-core/zyppng/io/abstractspawnengine.cc:177
 #, c-format, boost-format
 msgid "Command exited with status %d."
 msgstr "命令退出，状态 %d。"
 
-#: zypp-core/zyppng/io/abstractspawnengine.cc:194
+#: zypp-core/zyppng/io/abstractspawnengine.cc:198
 #, c-format, boost-format
 msgid "Command was killed by signal %d (%s)."
 msgstr "命令已被信号 %d (%s) 杀死。"
 
-#: zypp-core/zyppng/io/abstractspawnengine.cc:199
+#: zypp-core/zyppng/io/abstractspawnengine.cc:203
 msgid "Command exited with unknown error."
 msgstr "命令退出，未知错误。"
 
-#: zypp-core/zyppng/io/forkspawnengine.cc:111
-#: zypp-core/zyppng/io/forkspawnengine.cc:359
+#: zypp-core/zyppng/io/forkspawnengine.cc:150
+#: zypp-core/zyppng/io/forkspawnengine.cc:392
 msgid "Invalid spawn arguments given."
 msgstr "子参数无效。"
 
-#: zypp-core/zyppng/io/forkspawnengine.cc:174
+#: zypp-core/zyppng/io/forkspawnengine.cc:206
 msgid "Unable to create control pipe."
 msgstr "无法创建控制管道。"
 
-#: zypp-core/zyppng/io/forkspawnengine.cc:240
+#: zypp-core/zyppng/io/forkspawnengine.cc:272
 #, c-format, boost-format
 msgid "Can't chroot to '%s' (%s)."
 msgstr "无法 chroot 到 '%s' (%s)。"
 
-#: zypp-core/zyppng/io/forkspawnengine.cc:250
+#: zypp-core/zyppng/io/forkspawnengine.cc:282
 #, c-format, boost-format
 msgid "Can't chdir to '%s' (%s)."
 msgstr "无法 chdir 到 '%s' (%s)。"
 
-#: zypp-core/zyppng/io/forkspawnengine.cc:251
+#: zypp-core/zyppng/io/forkspawnengine.cc:283
 #, c-format, boost-format
 msgid "Can't chdir to '%s' inside chroot '%s' (%s)."
 msgstr "无法 chdir 到 %s，它在 chroot %s (%s) 中。"
 
 #. don't want to get here
-#: zypp-core/zyppng/io/forkspawnengine.cc:280
+#: zypp-core/zyppng/io/forkspawnengine.cc:312
 #, c-format, boost-format
 msgid "Can't exec '%s' (%s)."
 msgstr "无法执行 '%s' (%s)。"
 
-#: zypp-core/zyppng/io/forkspawnengine.cc:287
-#: zypp-core/zyppng/io/forkspawnengine.cc:448
+#: zypp-core/zyppng/io/forkspawnengine.cc:319
+#: zypp-core/zyppng/io/forkspawnengine.cc:473
 #, c-format, boost-format
 msgid "Can't fork (%s)."
 msgstr "无法派生 (%s)。"
 
-#: zypp-core/zyppng/io/forkspawnengine.cc:306
+#: zypp-core/zyppng/io/forkspawnengine.cc:338
 #, c-format, boost-format
 msgid "Can't exec '%s', chdir failed (%s)."
 msgstr "无法执行 '%s'，chdir 失败 (%s) 。"
 
-#: zypp-core/zyppng/io/forkspawnengine.cc:309
+#: zypp-core/zyppng/io/forkspawnengine.cc:341
 #, c-format, boost-format
 msgid "Can't exec '%s', chroot failed (%s)."
 msgstr "无法执行  '%s'，chroot 失败 (%s)。"
 
-#: zypp-core/zyppng/io/forkspawnengine.cc:312
+#: zypp-core/zyppng/io/forkspawnengine.cc:344
 #, c-format, boost-format
 msgid "Can't exec '%s', exec failed (%s)."
 msgstr "无法执行 '%s'，执行失败 (%s)。"
 
-#: zypp-core/zyppng/io/forkspawnengine.cc:316
+#: zypp-core/zyppng/io/forkspawnengine.cc:348
 #, c-format, boost-format
 msgid "Can't exec '%s', unexpected error."
 msgstr "无法执行 '%s'，意外错误。"
+
+#: zypp-media/mediaexception.cc:33
+#, c-format, boost-format
+msgid "Failed to mount %s on %s"
+msgstr "未能把 %s 挂载到 %s"
+
+#: zypp-media/mediaexception.cc:43
+#, c-format, boost-format
+msgid "Failed to unmount %s"
+msgstr "卸载 %s 失败"
+
+#: zypp-media/mediaexception.cc:48
+#, c-format, boost-format
+msgid "Bad file name: %s"
+msgstr "文件名错误：%s"
+
+#: zypp-media/mediaexception.cc:53
+#, c-format, boost-format
+msgid "Medium not opened when trying to perform action '%s'."
+msgstr "当试图执行动作 '%s' 时，介质没有打开。"
+
+#: zypp-media/mediaexception.cc:58
+#: zypp-curl/ng/network/networkrequesterror.cc:138
+#, c-format, boost-format
+msgid "File '%s' not found on medium '%s'"
+msgstr "文件 '%s' 未在介质 '%s' 上找到"
+
+#: zypp-media/mediaexception.cc:63
+#, c-format, boost-format
+msgid "Cannot write file '%s'."
+msgstr "无法写入文件 '%s'。"
+
+#: zypp-media/mediaexception.cc:68
+msgid "Medium not attached"
+msgstr "介质未挂载"
+
+#: zypp-media/mediaexception.cc:73
+msgid "Bad media attach point"
+msgstr "介质挂载点错误"
+
+#. TranslatorExplanation: curl is the name of a library, don't translate
+#: zypp-media/mediaexception.cc:79
+#, c-format, boost-format
+msgid "Download (curl) initialization failed for '%s'"
+msgstr "下载(curl) '%s' 时初始化失败"
+
+#: zypp-media/mediaexception.cc:84
+#, c-format, boost-format
+msgid "System exception '%s' on medium '%s'."
+msgstr "系统例外 '%s'（发生于介质 '%s' 上）。"
+
+#: zypp-media/mediaexception.cc:89
+#, c-format, boost-format
+msgid "Path '%s' on medium '%s' is not a file."
+msgstr "路径 '%s'（介质 '%s' 上）并不是一个文件。"
+
+#: zypp-media/mediaexception.cc:94
+#, c-format, boost-format
+msgid "Path '%s' on medium '%s' is not a directory."
+msgstr "路径 '%s'（介质 '%s' 上）并不是一个文件夹。"
+
+#: zypp-media/mediaexception.cc:101
+msgid "Malformed URI"
+msgstr "异常的 URI"
+
+#: zypp-media/mediaexception.cc:111
+msgid "Empty host name in URI"
+msgstr "URI 中主机名为空"
+
+#: zypp-media/mediaexception.cc:116
+msgid "Empty filesystem in URI"
+msgstr "URI 中文件系统为空"
+
+#: zypp-media/mediaexception.cc:121
+msgid "Empty destination in URI"
+msgstr "URI 中目标为空"
+
+#: zypp-media/mediaexception.cc:126
+#, c-format, boost-format
+msgid "Unsupported URI scheme in '%s'."
+msgstr "不支持 '%s' 中的 URI 方案。"
+
+#: zypp-media/mediaexception.cc:131
+msgid "Operation not supported by medium"
+msgstr "介质不支持此操作"
+
+#: zypp-media/mediaexception.cc:138
+#, c-format, boost-format
+msgid ""
+"Download (curl) error for '%s':\n"
+"Error code: %s\n"
+"Error message: %s\n"
+msgstr ""
+"下载 (curl) '%s' 出错：\n"
+"错误代码：%s\n"
+"错误消息：%s\n"
+
+#. TranslatorExplanation: curl is the name of a library, don't translate
+#: zypp-media/mediaexception.cc:146
+#, c-format, boost-format
+msgid "Error occurred while setting download (curl) options for '%s':"
+msgstr "为 '%s' 设置下载 (curl) 选项时出错："
+
+#: zypp-media/mediaexception.cc:153
+#, c-format, boost-format
+msgid "Media source '%s' does not contain the desired medium"
+msgstr "介质来源 '%s' 不包含期望的介质"
+
+#: zypp-media/mediaexception.cc:158
+#, c-format, boost-format
+msgid "Medium '%s' is in use by another instance"
+msgstr "介质 '%s' 正被另一个实例使用"
+
+#: zypp-media/mediaexception.cc:164
+msgid "Cannot eject any media"
+msgstr "无法弹出任何介质"
+
+#: zypp-media/mediaexception.cc:166
+#, c-format, boost-format
+msgid "Cannot eject media '%s'"
+msgstr "无法弹出介质 '%s'"
+
+#: zypp-media/mediaexception.cc:181
+#, c-format, boost-format
+msgid "Permission to access '%s' denied."
+msgstr "访问 '%s' 的准入请求被拒绝。"
+
+#: zypp-media/mediaexception.cc:189
+#: zypp-curl/ng/network/networkrequesterror.cc:122
+#, c-format, boost-format
+msgid "Timeout exceeded when accessing '%s'."
+msgstr "访问 '%s' 时超时。"
+
+#: zypp-media/mediaexception.cc:197
+#, c-format, boost-format
+msgid "Downloaded data exceeded the expected filesize '%s' of '%s'."
+msgstr "下载到的数据超出了预期文件大小 '%s'/'%s'。"
+
+#: zypp-media/mediaexception.cc:205
+#: zypp-curl/ng/network/networkrequesterror.cc:118
+#, c-format, boost-format
+msgid "Location '%s' is temporarily unaccessible."
+msgstr "位置 '%s' 暂时无法访问。"
+
+#: zypp-media/mediaexception.cc:213
+#, c-format, boost-format
+msgid " SSL certificate problem, verify that the CA cert is OK for '%s'."
+msgstr " SSL 证书问题，请校验 '%s' 的 CA 证书。"
+
+#: zypp-curl/auth/curlauthdata.cc:97
+#, c-format, boost-format
+msgid "Unsupported HTTP authentication method '%s'"
+msgstr "不支持 HTTP 认证方法 '%s'"
+
+#: zypp-curl/ng/network/networkrequesterror.cc:143
+#, c-format, boost-format
+msgid ""
+"Download (curl) error for '%s':\n"
+"Error code: %s\n"
+msgstr ""
+"下载 (curl) \"%s\" 时发生错误：\n"
+"错误代码：%s\n"
+
+#: zypp-curl/ng/network/networkrequesterror.cc:149
+#, c-format, boost-format
+msgid ""
+"Download (curl) error for '%s':\n"
+"Unable to retrieve HTTP response\n"
+msgstr ""
+"下载 (curl) \"%s\" 时发生错误：\n"
+"无法检索 HTTP 响应\n"
 
 #~ msgid "%s does not belong to a distupgrade repository"
 #~ msgstr "%s 不属于发行版升级源"
