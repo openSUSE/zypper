@@ -1232,6 +1232,36 @@ std::string SATResolver::SATproblemRuleInfoString (Id probr, std::string &detail
   return ret;
 }
 
+/////////////////////////////////////////////////////////////////////////
+namespace {
+  /// bsc#1194848 hint on ptf<>patch conflicts
+  struct PtfPatchHint
+  {
+    void notInstallPatch( sat::Solvable slv_r, unsigned solution_r )
+    { _patch.push_back( slv_r.ident() ); }
+
+    void removePtf(  sat::Solvable slv_r, unsigned solution_r )
+    { _ptf.push_back( slv_r.ident() ); }
+
+    bool applies() const
+    { return not (_ptf.empty() || _patch.empty()); }
+
+    std::string description() const {
+      return str::Str()
+      << (str::Format( "%1% is not yet fully integrated into %2%." ) % printlist(_ptf) % printlist(_patch)) << endl
+      << "Typically you want to keep the PTF and choose to not install the maintenance patches.";
+    }
+  private:
+    using StoreType = IdString;
+    static std::string printlist( const std::vector<StoreType> & list_r )
+    { str::Str ret; dumpRange( ret.stream(), list_r.begin(), list_r.end(), "", "", ", ", "", "" ); return ret; }
+
+    std::vector<StoreType> _ptf;
+    std::vector<StoreType> _patch;
+  };
+}
+/////////////////////////////////////////////////////////////////////////
+
 ResolverProblemList
 SATResolver::problems ()
 {
@@ -1258,7 +1288,7 @@ SATResolver::problems ()
             MIL << whatString << endl;
             MIL << "------------------------------------" << endl;
             ResolverProblem_Ptr resolverProblem = new ResolverProblem (whatString, detail, SATgetCompleteProblemInfoStrings( problem ));
-
+            PtfPatchHint ptfPatchHint;  // bsc#1194848 hint on ptf<>patch conflicts
             solution = 0;
             while ((solution = solver_next_solution(_satSolver, problem, solution)) != 0) {
                 element = 0;
@@ -1283,6 +1313,8 @@ SATResolver::problems ()
                                         std::string description = str::Format(_("do not install %1%") ) % s.asString();
                                         MIL << description << endl;
                                         problemSolution->addDescription (description);
+                                        if ( s.isKind<Patch>() )
+                                          ptfPatchHint.notInstallPatch( s, resolverProblem->solutions().size() );
                                     }
                                 } else {
                                     ERR << "SOLVER_INSTALL_SOLVABLE: No item found for " << s.asString() << endl;
@@ -1519,6 +1551,8 @@ SATResolver::problems ()
                                 MIL << description << endl;
                                 problemSolution->addDescription (description);
                                 problemSolution->addSingleAction (itemFrom, REMOVE);
+                                if ( s.isPtfMaster() )
+                                  ptfPatchHint.removePtf( s, resolverProblem->solutions().size() );
                             }
                         }
                     }
@@ -1543,6 +1577,10 @@ SATResolver::problems ()
                 MIL << "------------------------------------" << endl;
             }
 
+            // bsc#1194848 hint on ptf<>patch conflicts
+            if ( ptfPatchHint.applies() ) {
+              resolverProblem->setDescription( str::Str() << ptfPatchHint.description() << endl << "(" << resolverProblem->description() << ")" );
+            }
             // save problem
             resolverProblems.push_back (resolverProblem);
         }
