@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-02-14 16:34+0100\n"
-"PO-Revision-Date: 2021-07-27 01:10+0000\n"
+"PO-Revision-Date: 2022-02-15 12:12+0000\n"
 "Last-Translator: Yasuhiko Kamata <belphegor@belbel.or.jp>\n"
 "Language-Team: Japanese <https://l10n.opensuse.org/projects/libzypp/master/"
 "ja/>\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 4.7.1\n"
+"X-Generator: Weblate 4.9.1\n"
 
 #: zypp/CountryCode.cc:50
 msgid "Unknown country: "
@@ -4398,13 +4398,13 @@ msgstr "インストール不可能なプロバイダ: "
 #: zypp/solver/detail/SATResolver.cc:1252
 #, boost-format
 msgid "%1% is not yet fully integrated into %2%."
-msgstr ""
+msgstr "%1% は未だ %2% に完全統合されていません。"
 
 #: zypp/solver/detail/SATResolver.cc:1253
 msgid ""
 "Typically you want to keep the PTF and choose to not install the maintenance "
 "patches."
-msgstr ""
+msgstr "PTF をそのまま維持し、メンテナンスパッチをインストールしないように選択するのが一般的です。"
 
 #: zypp/solver/detail/SATResolver.cc:1309
 #, boost-format
