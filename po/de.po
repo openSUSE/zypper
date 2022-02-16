@@ -18,16 +18,16 @@ msgstr ""
 "Project-Id-Version: zypp.de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-02-14 16:34+0100\n"
-"PO-Revision-Date: 2021-05-17 11:59+0000\n"
+"PO-Revision-Date: 2022-02-16 16:12+0000\n"
 "Last-Translator: Gemineo <vistatec@gemineo.de>\n"
-"Language-Team: German <https://l10n.opensuse.org/projects/libzypp/master/de/"
-">\n"
+"Language-Team: German <https://l10n.opensuse.org/projects/libzypp/master/de/>"
+"\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.6.2\n"
+"X-Generator: Weblate 4.9.1\n"
 
 #: zypp/CountryCode.cc:50
 msgid "Unknown country: "
@@ -4061,8 +4061,7 @@ msgstr "Das Repository enthält keine URL."
 #, fuzzy, boost-format
 msgid "Expected medium %1%/%2% identified by file '%3%' with content:"
 msgstr ""
-"Erwartet wird Medium %1%/%2%, identifiziert durch Datei '%3%', mit dem "
-"Inhalt:"
+"Erwartetes Medium %1%/%2%, identifiziert durch Datei '%3%', mit dem Inhalt:"
 
 #. [lhs][rhs] 0 = installed; 1 = to be installed
 #. TranslatorExplanation %1%(filename) %2%(package1) %3%(package2)
@@ -4417,15 +4416,18 @@ msgstr "Nicht installierbare Anbieter: "
 
 #. translator: %1% is the name of a PTF, %2% the name of a patch.
 #: zypp/solver/detail/SATResolver.cc:1252
-#, boost-format
+#, boost-format, fuzzy
 msgid "%1% is not yet fully integrated into %2%."
-msgstr ""
+msgstr "%1% ist noch nicht vollständig in %2% integriert."
 
 #: zypp/solver/detail/SATResolver.cc:1253
+#, fuzzy
 msgid ""
 "Typically you want to keep the PTF and choose to not install the maintenance "
 "patches."
 msgstr ""
+"Normalerweise würden Sie das PTF behalten und die Wartungspatches nicht "
+"installieren."
 
 #: zypp/solver/detail/SATResolver.cc:1309
 #, boost-format
@@ -4536,11 +4538,13 @@ msgstr ""
 "  %2% --> %3%"
 
 #: zypp/solver/detail/SATResolver.cc:1531
-#, boost-format
+#, boost-format, fuzzy
 msgid ""
 "install %1% from vendor %2%\n"
 "  replacing %3% from vendor %4%"
 msgstr ""
+"%1% von Hersteller %2% installieren\n"
+"und %3% von Hersteller %4% ersetzen"
 
 #: zypp/solver/detail/SATResolver.cc:1540
 #, boost-format
@@ -4598,8 +4602,11 @@ msgid "New update message"
 msgstr "Neue Aktualisierungsbenachrichtigung"
 
 #: zypp/target/TargetImpl.cc:2688
+#, fuzzy
 msgid "Executing the transaction failed because of the following problems:"
 msgstr ""
+"Die Ausführung der Transaktion ist aufgrund der folgenden Probleme "
+"fehlgeschlagen:"
 
 #. TranslatorExplanation after semicolon is error message
 #. TranslatorExplanation the colon is followed by an error message
@@ -4857,12 +4864,14 @@ msgstr "Kommando mit unbekanntem Fehler beendet."
 
 #: zypp-core/zyppng/io/forkspawnengine.cc:150
 #: zypp-core/zyppng/io/forkspawnengine.cc:392
+#, fuzzy
 msgid "Invalid spawn arguments given."
-msgstr ""
+msgstr "Ungültige Spawn-Argumente angegeben."
 
 #: zypp-core/zyppng/io/forkspawnengine.cc:206
+#, fuzzy
 msgid "Unable to create control pipe."
-msgstr ""
+msgstr "Steuer-Pipe kann nicht erstellt werden."
 
 #: zypp-core/zyppng/io/forkspawnengine.cc:272
 #, c-format, boost-format
@@ -4892,24 +4901,24 @@ msgid "Can't fork (%s)."
 msgstr "(%s) abzweigen nicht möglich."
 
 #: zypp-core/zyppng/io/forkspawnengine.cc:338
-#, c-format, boost-format
+#, boost-format, c-format, fuzzy
 msgid "Can't exec '%s', chdir failed (%s)."
-msgstr ""
+msgstr "exec '%s' nicht möglich, chdir fehlgeschlagen (%s)."
 
 #: zypp-core/zyppng/io/forkspawnengine.cc:341
-#, c-format, boost-format
+#, boost-format, c-format, fuzzy
 msgid "Can't exec '%s', chroot failed (%s)."
-msgstr ""
+msgstr "exec '%s' nicht möglich, chroot fehlgeschlagen (%s)."
 
 #: zypp-core/zyppng/io/forkspawnengine.cc:344
-#, c-format, boost-format
+#, boost-format, c-format, fuzzy
 msgid "Can't exec '%s', exec failed (%s)."
-msgstr ""
+msgstr "exec '%s' nicht möglich, exec fehlgeschlagen (%s)."
 
 #: zypp-core/zyppng/io/forkspawnengine.cc:348
-#, c-format, boost-format
+#, boost-format, c-format, fuzzy
 msgid "Can't exec '%s', unexpected error."
-msgstr ""
+msgstr "exec '%s' nicht möglich, unerwarteter Fehler."
 
 #: zypp-media/mediaexception.cc:33
 #, c-format, boost-format
