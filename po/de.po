@@ -17,7 +17,7 @@ msgstr ""
 "Project-Id-Version: zypper.de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-10-13 15:45+0200\n"
-"PO-Revision-Date: 2022-02-16 14:57+0000\n"
+"PO-Revision-Date: 2022-02-16 18:12+0000\n"
 "Last-Translator: Gemineo <vistatec@gemineo.de>\n"
 "Language-Team: German <https://l10n.opensuse.org/projects/zypper/master/de/>"
 "\n"
@@ -1442,12 +1442,19 @@ msgid "Non-option program arguments: "
 msgstr "Andere Programmargumente (keine Optionen): "
 
 #: src/callbacks/keyring.h:32
+#, fuzzy
 msgid ""
 "A GPG pubkey is clearly identified by it's fingerprint. Do not rely the keys "
 "name. If you are not sure whether the presented key is authentic, ask the "
 "repository provider or check his web site. Many provider maintain a web page "
 "showing the fingerprints of the GPG keys they are using."
 msgstr ""
+"Ein öffentlicher GPG-Schlüssel wird durch seinen Fingerabdruck eindeutig "
+"identifiziert. Verlassen Sie sich nicht auf den Namen des Schlüssels. Wenn "
+"Sie nicht sicher sind, ob der dargestellte Schlüssel authentisch ist, fragen "
+"Sie den Anbieter des Repositorys oder sehen Sie auf seiner Website nach. "
+"Viele Anbieter besitzen eine Webseite, auf der die Fingerabdrücke der von "
+"ihnen verwendeten GPG-Schlüssel angezeigt werden."
 
 #: src/callbacks/keyring.h:37
 msgid ""
@@ -1505,8 +1512,9 @@ msgid "Key Name:"
 msgstr "Name des Schlüssels:"
 
 #: src/callbacks/keyring.h:89
+#, fuzzy
 msgid "Key Algorithm:"
-msgstr ""
+msgstr "Schlüsselalgorithmus:"
 
 #: src/callbacks/keyring.h:90
 msgid "Key Created:"
@@ -1736,28 +1744,37 @@ msgstr ""
 
 #. translator: %1% is the number of keys, %2% the name of a repository
 #: src/callbacks/keyring.h:490
-#, boost-format
+#, boost-format, fuzzy
 msgid "Received %1% new package signing key from repository %2%:"
 msgid_plural "Received %1% new package signing keys from repository %2%:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1% neuen Paket-Signierschlüssel von Repository %2% erhalten:"
+msgstr[1] "%1% neue Paket-Signierschlüssel von Repository %2% erhalten:"
 
 #: src/callbacks/keyring.h:494
+#, fuzzy
 msgid ""
 "Those additional keys are usually used to sign packages shipped by the "
 "repository. In order to validate those packages upon download and "
 "installation the new keys will be imported into the rpm database."
 msgstr ""
+"Diese zusätzlichen Schlüssel werden normalerweise zum Signieren von Paketen "
+"verwendet, die vom Repository versendet werden. Um diese Pakete beim "
+"Download und der Installation zu validieren, werden die neuen Schlüssel in "
+"die rpm-Datenbank importiert."
 
 #: src/callbacks/keyring.h:496
+#, fuzzy
 msgid "New:"
-msgstr ""
+msgstr "Neu:"
 
 #: src/callbacks/keyring.h:502
+#, fuzzy
 msgid ""
 "The repository metadata introducing the new keys have been signed and "
 "validated by the trusted key:"
 msgstr ""
+"Die Repository-Metadaten, die die neuen Schlüssel einführen, wurden mit dem "
+"vertrauenswürdigen Schlüssel signiert und validiert:"
 
 #: src/callbacks/keyring.h:525
 #, c-format, boost-format
@@ -2103,21 +2120,21 @@ msgstr ""
 
 #. TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
 #: src/callbacks/rpm.h:711 src/callbacks/rpm.h:718
-#, c-format, boost-format
+#, boost-format, c-format, fuzzy
 msgid "Executing %s script for: %s"
-msgstr ""
+msgstr "Skript %s wird ausgeführt für: %s"
 
 #. TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
 #: src/callbacks/rpm.h:725
-#, c-format, boost-format
+#, boost-format, c-format, fuzzy
 msgid "Executing %s script"
-msgstr ""
+msgstr "Skript %s wird ausgeführt"
 
 #. TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
 #: src/callbacks/rpm.h:857
-#, c-format, boost-format
+#, boost-format, c-format, fuzzy
 msgid "Cleaning up: %s"
-msgstr ""
+msgstr "Bereinigung von: %s"
 
 #. translator: %s is an other command: "This is an alias for 'zypper info -t patch'."
 #: src/commands/commandhelpformatter.h:94
@@ -2626,8 +2643,9 @@ msgid "Restrict the lock to the specified repository."
 msgstr "Die Sperre auf das angegebene Repository beschränken."
 
 #: src/commands/locks/add.cc:48
+#, fuzzy
 msgid "Reason for specific lock."
-msgstr ""
+msgstr "Grund für die bestimmte Sperre."
 
 #: src/commands/locks/add.cc:81
 msgid "Specified lock has been successfully added."
@@ -2699,8 +2717,9 @@ msgid "Repository"
 msgstr "Repository"
 
 #: src/commands/locks/list.cc:138
+#, fuzzy
 msgid "Comment"
-msgstr ""
+msgstr "Kommentar"
 
 #. translators: locks table value
 #: src/commands/locks/list.cc:156 src/commands/locks/list.cc:235
@@ -3039,10 +3058,13 @@ msgid "Install all available needed patches."
 msgstr "Alle verfügbaren erforderliche Patches installieren."
 
 #: src/commands/patch.cc:30
+#, fuzzy
 msgid ""
 "When updating the affected/vulnerable packages described by a patch, zypper "
 "always aims for the latest available version."
 msgstr ""
+"Beim Aktualisieren der betroffenen/gefährdeten Pakete, die durch einen Patch "
+"beschrieben werden, zielt zypper immer auf die neueste verfügbare Version ab."
 
 #: src/commands/patch.cc:50
 msgid ""
@@ -4961,10 +4983,13 @@ msgid "Zypper subcommands available from elsewhere on your $PATH"
 msgstr "Zypper-Unterkommandos in anderen Ordnern im $PATH"
 
 #: src/commands/subcommand.cc:480
+#, fuzzy
 msgid ""
 "Using zypper subcommands available from elsewhere on your $PATH is disabled "
 "in zypper.conf."
 msgstr ""
+"Die Verwendung von zypper-Unterkommandos, die an anderer Stelle in Ihrem $"
+"PATH verfügbar sind, ist in zypper.conf deaktiviert."
 
 #. translators: helptext; %1% is a zypper command
 #: src/commands/subcommand.cc:485
@@ -4984,10 +5009,14 @@ msgid "Lists available subcommands."
 msgstr "Verfügbare Unterkommandos auflisten."
 
 #: src/commands/subcommand.cc:523
+#, fuzzy
 msgid ""
 "Lists available subcommands. Using zypper subcommands found on your $PATH is "
 "disabled in zypper.conf."
 msgstr ""
+"Listet die verfügbaren Unterkommandos auf. Die Verwendung von zypper-"
+"Unterkommandos, die in Ihrem $PATH gefunden werden, ist in zypper.conf "
+"deaktiviert."
 
 #. Currently no concept how to handle global options and ZYPPlock
 #: src/commands/subcommand.cc:626
@@ -6536,10 +6565,13 @@ msgid "Error creating the solver test case."
 msgstr "Fehler beim Erstellen des Testfalls für Auflösung."
 
 #: src/solve-commit.cc:529
+#, fuzzy
 msgid ""
 "DownloadAsNeeded can not be used with ZYPP_SINGLE_RPMTRANS=1, falling back "
 "to DownloadInAdvance"
 msgstr ""
+"DownloadAsNeeded kann nicht mit ZYPP_SINGLE_RPMTRANS=1 verwendet werden, "
+"sodass auf DownloadInAdvance zurückgegriffen wird."
 
 #: src/solve-commit.cc:547
 #, c-format, boost-format
