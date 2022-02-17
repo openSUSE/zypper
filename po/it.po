@@ -15,8 +15,8 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-02-14 16:34+0100\n"
-"PO-Revision-Date: 2021-07-26 20:11+0000\n"
-"Last-Translator: Paolo Za <zapaolo@email.it>\n"
+"PO-Revision-Date: 2022-02-17 17:12+0000\n"
+"Last-Translator: Davide Aiello <davide.aiello@novilingulists.com>\n"
 "Language-Team: Italian <https://l10n.opensuse.org/projects/libzypp/master/it/"
 ">\n"
 "Language: it\n"
@@ -24,7 +24,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.7.1\n"
+"X-Generator: Weblate 4.9.1\n"
 "X-Poedit-Bookmarks: 370,-1,-1,-1,-1,-1,-1,-1,-1,-1\n"
 
 #: zypp/CountryCode.cc:50
@@ -4390,13 +4390,15 @@ msgstr "provider non installabili: "
 #: zypp/solver/detail/SATResolver.cc:1252
 #, boost-format
 msgid "%1% is not yet fully integrated into %2%."
-msgstr ""
+msgstr "%1% non è ancora completamente integrato in %2%."
 
 #: zypp/solver/detail/SATResolver.cc:1253
 msgid ""
 "Typically you want to keep the PTF and choose to not install the maintenance "
 "patches."
 msgstr ""
+"In genere, è consigliabile mantenere il PTF e scegliere di non installare le "
+"patch di manutenzione."
 
 #: zypp/solver/detail/SATResolver.cc:1309
 #, boost-format
@@ -4829,11 +4831,11 @@ msgstr "Il comando è terminato con un errore sconosciuto."
 #: zypp-core/zyppng/io/forkspawnengine.cc:150
 #: zypp-core/zyppng/io/forkspawnengine.cc:392
 msgid "Invalid spawn arguments given."
-msgstr ""
+msgstr "Argomenti di distribuzione non validi forniti."
 
 #: zypp-core/zyppng/io/forkspawnengine.cc:206
 msgid "Unable to create control pipe."
-msgstr ""
+msgstr "Impossibile creare pipe di controllo."
 
 #: zypp-core/zyppng/io/forkspawnengine.cc:272
 #, c-format, boost-format
@@ -4876,7 +4878,7 @@ msgstr "Impossibile eseguire '%s', chroot non riuscito (%s)."
 #: zypp-core/zyppng/io/forkspawnengine.cc:344
 #, c-format, boost-format
 msgid "Can't exec '%s', exec failed (%s)."
-msgstr ""
+msgstr "Impossibile eseguire '%s'; esecuzione non riuscita (%s)."
 
 #: zypp-core/zyppng/io/forkspawnengine.cc:348
 #, c-format, boost-format
