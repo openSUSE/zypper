@@ -693,7 +693,7 @@ SATResolver::solverInit(const PoolItemList & weakItems)
     }
 
     for (PoolItemList::const_iterator iter = weakItems.begin(); iter != weakItems.end(); iter++) {
-        Id id = (*iter)->satSolvable().id();
+        Id id = iter->id();
         if (id == ID_NULL) {
             ERR << "Weaken: " << *iter << " not found" << endl;
         }
@@ -764,7 +764,7 @@ SATResolver::resolvePool(const CapabilitySet & requires_caps,
     solverInit(weakItems);
 
     for (PoolItemList::const_iterator iter = _items_to_install.begin(); iter != _items_to_install.end(); iter++) {
-        Id id = (*iter)->satSolvable().id();
+        Id id = iter->id();
         if (id == ID_NULL) {
             ERR << "Install: " << *iter << " not found" << endl;
         } else {
@@ -775,7 +775,7 @@ SATResolver::resolvePool(const CapabilitySet & requires_caps,
     }
 
     for (PoolItemList::const_iterator iter = _items_to_remove.begin(); iter != _items_to_remove.end(); iter++) {
-        Id id = (*iter)->satSolvable().id();
+        Id id = iter->id();
         if (id == ID_NULL) {
             ERR << "Delete: " << *iter << " not found" << endl;
         } else {
@@ -834,7 +834,7 @@ SATResolver::resolveQueue(const SolverQueueItemList &requestQueue,
 
     // Add addition item status to the resolve-queue cause these can be set by problem resolutions
     for (PoolItemList::const_iterator iter = _items_to_install.begin(); iter != _items_to_install.end(); iter++) {
-        Id id = (*iter)->satSolvable().id();
+        Id id = iter->id();
         if (id == ID_NULL) {
             ERR << "Install: " << *iter << " not found" << endl;
         } else {
@@ -844,7 +844,7 @@ SATResolver::resolveQueue(const SolverQueueItemList &requestQueue,
         }
     }
     for (PoolItemList::const_iterator iter = _items_to_remove.begin(); iter != _items_to_remove.end(); iter++) {
-        sat::detail::IdType ident( (*iter)->satSolvable().ident().id() );
+        sat::detail::IdType ident( iter->ident().id() );
         MIL << "Delete " << *iter << ident << endl;
         queue_push( &(_jobQueue), SOLVER_ERASE | SOLVER_SOLVABLE_NAME | MAYBE_CLEANDEPS );
         queue_push( &(_jobQueue), ident);
@@ -1009,7 +1009,7 @@ struct FindPackage : public resfilter::ResObjectFilterFunctor
 //----------------------------------------------------------------------------
 inline sat::Solvable mapBuddy( const PoolItem & item_r )
 {
-  if ( item_r.satSolvable().isKind<Package>() )
+  if ( item_r.isKind<Package>() )
   {
     sat::Solvable buddy = item_r.buddy();
     if ( buddy )
@@ -1598,15 +1598,15 @@ void SATResolver::setLocks()
     unsigned acnt = 0;
 
     for (PoolItemList::const_iterator iter = _items_to_lock.begin(); iter != _items_to_lock.end(); ++iter) {
-        sat::detail::SolvableIdType ident( (*iter)->satSolvable().id() );
+        sat::detail::SolvableIdType id( iter->id() );
         if (iter->status().isInstalled()) {
             ++icnt;
             queue_push( &(_jobQueue), SOLVER_INSTALL | SOLVER_SOLVABLE );
-            queue_push( &(_jobQueue), ident );
+            queue_push( &(_jobQueue), id );
         } else {
             ++acnt;
             queue_push( &(_jobQueue), SOLVER_ERASE | SOLVER_SOLVABLE | MAYBE_CLEANDEPS );
-            queue_push( &(_jobQueue), ident );
+            queue_push( &(_jobQueue), id );
         }
     }
     MIL << "Locked " << icnt << " installed items and " << acnt << " NOT installed items." << endl;
@@ -1617,7 +1617,7 @@ void SATResolver::setLocks()
     ///////////////////////////////////////////////////////////////////
     std::set<IdString> unifiedByName;
     for (PoolItemList::const_iterator iter = _items_to_keep.begin(); iter != _items_to_keep.end(); ++iter) {
-      IdString ident( (*iter)->satSolvable().ident() );
+      IdString ident( iter->ident() );
       if ( unifiedByName.insert( ident ).second )
       {
         if ( ! ui::Selectable::get( *iter )->hasInstalledObj() )
