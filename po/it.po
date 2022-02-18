@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-02-14 16:34+0100\n"
-"PO-Revision-Date: 2022-02-17 17:12+0000\n"
+"PO-Revision-Date: 2022-02-18 13:12+0000\n"
 "Last-Translator: Davide Aiello <davide.aiello@novilingulists.com>\n"
 "Language-Team: Italian <https://l10n.opensuse.org/projects/libzypp/master/it/"
 ">\n"
@@ -4835,7 +4835,7 @@ msgstr "Argomenti di distribuzione non validi forniti."
 
 #: zypp-core/zyppng/io/forkspawnengine.cc:206
 msgid "Unable to create control pipe."
-msgstr "Impossibile creare pipe di controllo."
+msgstr "Impossibile creare la pipe di controllo."
 
 #: zypp-core/zyppng/io/forkspawnengine.cc:272
 #, c-format, boost-format
