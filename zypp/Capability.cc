@@ -35,6 +35,19 @@ namespace zypp
   namespace
   { /////////////////////////////////////////////////////////////////
 
+    /// Round Robin string buffer
+    template <unsigned TLen = 5>
+    struct TempStrings
+    {
+      /** Reference to the next (cleared) tempstring. */
+      std::string & getNext()
+      { unsigned c = _next; _next = (_next+1) % TLen; _buf[c].clear(); return _buf[c]; }
+
+    private:
+      unsigned _next = 0;
+      std::string _buf[TLen];
+    };
+
     /** backward skip whitespace starting at pos_r */
     inline std::string::size_type backskipWs( const std::string & str_r, std::string::size_type pos_r )
     {
@@ -307,9 +320,118 @@ namespace zypp
   : _id( ::pool_rel2id( myPool().getPool(), asIdString(namespace_r).id(), (value_r.empty() ? STRID_NULL : value_r.id() ), REL_NAMESPACE, /*create*/true ) )
   {}
 
+  ///////////////////////////////////////////////////////////////////
+  // https://rpm-software-management.github.io/rpm/manual/boolean_dependencies.html
+  namespace
+  {
+    inline const char * opstr( int op_r )
+    {
+      switch ( op_r )
+      {
+        case REL_GT:               return " > ";
+        case REL_EQ:               return " = ";
+        case REL_LT:               return " < ";
+        case REL_GT|REL_EQ:        return " >= ";
+        case REL_LT|REL_EQ:        return " <= ";
+        case REL_GT|REL_LT:        return " != ";
+        case REL_GT|REL_LT|REL_EQ: return " <=> ";
+        case REL_AND:              return " and ";
+        case REL_OR:               return " or ";
+        case REL_COND:             return " if ";
+        case REL_UNLESS:           return " unless ";
+        case REL_ELSE:             return " else ";
+        case REL_WITH:             return " with ";
+        case REL_WITHOUT:          return " without ";
+      }
+      return "UNKNOWNCAPREL";
+    }
+
+    inline bool isBoolOp( int op_r )
+    {
+      switch ( op_r ) {
+        case REL_AND:
+        case REL_OR:
+        case REL_COND:
+        case REL_UNLESS:
+        case REL_ELSE:
+        case REL_WITH:
+        case REL_WITHOUT:
+          return true;
+      }
+      return false;
+    }
+
+    inline bool needsBrace( int op_r, int parop_r )
+    {
+      return ( isBoolOp( parop_r ) || parop_r == 0 ) && isBoolOp( op_r )
+      && ( parop_r != op_r || op_r == REL_COND || op_r == REL_UNLESS || op_r == REL_ELSE )
+      && not ( ( parop_r == REL_COND || parop_r == REL_UNLESS ) && op_r == REL_ELSE );
+    }
+
+    void cap2strHelper( std::string & outs_r, sat::detail::CPool * pool_r, sat::detail::IdType id_r, int parop_r )
+    {
+      if ( ISRELDEP(id_r) ) {
+        ::Reldep * rd = GETRELDEP( pool_r, id_r );
+        int op = rd->flags;
+
+        if ( op == CapDetail::CAP_ARCH ) {
+          if ( rd->evr == ARCH_SRC || rd->evr == ARCH_NOSRC ) {
+            // map arch .{src,nosrc} to kind srcpackage
+            outs_r += ResKind::srcpackage.c_str();
+            outs_r += ":";
+            outs_r += IdString(rd->name).c_str();
+            return;
+          }
+          cap2strHelper( outs_r, pool_r, rd->name, op );
+          outs_r += ".";
+          cap2strHelper( outs_r, pool_r, rd->evr, op );
+          return;
+        }
+
+        if ( op == CapDetail::CAP_NAMESPACE ) {
+          cap2strHelper( outs_r, pool_r, rd->name, op );
+          outs_r += "(";
+          cap2strHelper( outs_r, pool_r, rd->evr, op );
+          outs_r += ")";
+          return;
+        }
+
+        if ( op == REL_FILECONFLICT )
+        {
+          cap2strHelper( outs_r, pool_r, rd->name, op );
+          return;
+        }
+
+        if ( needsBrace( op, parop_r ) ) {
+          outs_r += "(";
+          cap2strHelper( outs_r, pool_r, rd->name, op );
+          outs_r += opstr( op );
+          cap2strHelper( outs_r, pool_r, rd->evr, op );
+          outs_r += ")";
+          return;
+        }
+
+        cap2strHelper( outs_r, pool_r, rd->name, op );
+        outs_r += opstr( op );
+        cap2strHelper( outs_r, pool_r, rd->evr, op );
+      }
+      else
+        outs_r += IdString(id_r).c_str();
+    }
+  } // namespace
+  ///////////////////////////////////////////////////////////////////
 
   const char * Capability::c_str() const
-  { return( _id ? ::pool_dep2str( myPool().getPool(), _id ) : "" ); }
+  {
+    if ( not id() ) return "";
+    if ( not ISRELDEP(id()) ) return IdString(id()).c_str();
+
+    static TempStrings<5> tempstrs;   // Round Robin buffer to prolong the lifetime of the returned char*
+
+    std::string & outs { tempstrs.getNext() };
+    cap2strHelper( outs, myPool().getPool(), id(), 0 );
+    return outs.c_str();
+  }
 
   CapMatch Capability::_doMatch( sat::detail::IdType lhs,  sat::detail::IdType rhs )
   {
@@ -438,12 +560,12 @@ namespace zypp
   */
   std::ostream & operator<<( std::ostream & str, const Capability & obj )
   {
-    return str << obj.detail();
+    return str << obj.c_str();
   }
 
   std::ostream & dumpOn( std::ostream & str, const Capability & obj )
   {
-    return str << obj.detail();
+    return str << ( obj ? ::pool_dep2str( sat::Pool::instance().get(), obj.id() ) : "" );
   }
 
   ///////////////////////////////////////////////////////////////////
@@ -497,7 +619,7 @@ namespace zypp
       return;
     }
     // map back libsolvs pseudo arch 'src' to kind srcpackage
-    if ( _archIfSimple == ARCH_SRC )
+    if ( _archIfSimple == ARCH_SRC || _archIfSimple == ARCH_NOSRC )
     {
       _lhs = IdString( (ResKind::srcpackage.asString() + ":" + IdString(_lhs).c_str()).c_str() ).id();
       _archIfSimple = 0;
@@ -533,19 +655,28 @@ namespace zypp
         break;
 
       case CapDetail::EXPRESSION:
-        switch ( obj.capRel() )
-        {
-          case CapDetail::CAP_NAMESPACE:
-            return str << obj.lhs().detail() << "(" << obj.rhs().detail() << ")";
-            break;
-          default:
-            return str << obj.lhs().detail() << " " << obj.capRel() << " " << obj.rhs().detail();
-            return str << "(" << obj.lhs().detail() << " " << obj.capRel() << " " << obj.rhs().detail() << ")";
-            break;
+      {
+        std::string outs;
+        auto pool = sat::Pool::instance().get();
+        auto op = obj.capRel();
+        if ( obj.capRel() == CapDetail::CAP_NAMESPACE ) {
+          cap2strHelper( outs, pool, obj.lhs().id(), op );
+          outs += "(";
+          cap2strHelper( outs, pool, obj.rhs().id(), op );
+          outs += ")";
         }
-        break;
+        else {
+          outs += "(";
+          cap2strHelper( outs, pool, obj.lhs().id(), op );
+          outs += opstr( op );
+          cap2strHelper( outs, pool, obj.rhs().id(), op );
+          outs += ")";
+        }
+        return str << outs;
+      }
+      break;
     }
-    return str <<  "<UnknownCap:" << obj.lhs().detail() << " " << obj.capRel() << " " << obj.rhs().detail() << ">";
+    return str <<  "<UnknownCap(" << obj.lhs() << " " << obj.capRel() << " " << obj.rhs() << ")>";
   }
 
   std::ostream & operator<<( std::ostream & str, CapDetail::Kind obj )
