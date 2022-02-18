@@ -17,7 +17,7 @@ msgstr ""
 "Project-Id-Version: zypper.de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-10-13 15:45+0200\n"
-"PO-Revision-Date: 2022-02-16 18:12+0000\n"
+"PO-Revision-Date: 2022-02-18 15:12+0000\n"
 "Last-Translator: Gemineo <vistatec@gemineo.de>\n"
 "Language-Team: German <https://l10n.opensuse.org/projects/zypper/master/de/>"
 "\n"
@@ -6571,7 +6571,7 @@ msgid ""
 "to DownloadInAdvance"
 msgstr ""
 "DownloadAsNeeded kann nicht mit ZYPP_SINGLE_RPMTRANS=1 verwendet werden, "
-"sodass auf DownloadInAdvance zurückgegriffen wird."
+"sodass auf DownloadInAdvance zurückgegriffen wird"
 
 #: src/solve-commit.cc:547
 #, c-format, boost-format
