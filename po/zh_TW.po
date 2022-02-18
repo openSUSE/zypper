@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-02-14 16:34+0100\n"
-"PO-Revision-Date: 2021-03-07 04:25+0000\n"
+"PO-Revision-Date: 2022-02-18 13:12+0000\n"
 "Last-Translator: Grace Yu <grace.yu@excel-gits.com>\n"
 "Language-Team: Chinese (Taiwan) <https://l10n.opensuse.org/projects/libzypp/"
 "master/zh_TW/>\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 3.6.1\n"
+"X-Generator: Weblate 4.9.1\n"
 
 #: zypp/CountryCode.cc:50
 msgid "Unknown country: "
@@ -4030,7 +4030,7 @@ msgstr "套件庫中沒有 url。"
 #: zypp/repo/SUSEMediaVerifier.cc:104
 #, boost-format
 msgid "Expected medium %1%/%2% identified by file '%3%' with content:"
-msgstr ""
+msgstr "檔案 \"%3%\" 所識別的媒體 %1%/%2% 內容應為："
 
 #. [lhs][rhs] 0 = installed; 1 = to be installed
 #. TranslatorExplanation %1%(filename) %2%(package1) %3%(package2)
@@ -4360,13 +4360,13 @@ msgstr "無法安裝的提供者： "
 #: zypp/solver/detail/SATResolver.cc:1252
 #, boost-format
 msgid "%1% is not yet fully integrated into %2%."
-msgstr ""
+msgstr "%1% 尚未完全整合到 %2% 中。"
 
 #: zypp/solver/detail/SATResolver.cc:1253
 msgid ""
 "Typically you want to keep the PTF and choose to not install the maintenance "
 "patches."
-msgstr ""
+msgstr "通常情況下，您需要保留 PTF 並選擇不安裝維護修補程式。"
 
 #: zypp/solver/detail/SATResolver.cc:1309
 #, boost-format
@@ -4479,6 +4479,8 @@ msgid ""
 "install %1% from vendor %2%\n"
 "  replacing %3% from vendor %4%"
 msgstr ""
+"安裝來自廠商 %2% 的 %1%\n"
+"  取代廠商 %4% 的 %3%"
 
 #: zypp/solver/detail/SATResolver.cc:1540
 #, boost-format
@@ -4537,7 +4539,7 @@ msgstr "新的更新提醒"
 
 #: zypp/target/TargetImpl.cc:2688
 msgid "Executing the transaction failed because of the following problems:"
-msgstr ""
+msgstr "由於出現以下問題，執行交易失敗："
 
 #. TranslatorExplanation after semicolon is error message
 #. TranslatorExplanation the colon is followed by an error message
@@ -4789,11 +4791,11 @@ msgstr "因未知錯誤指令跳出。"
 #: zypp-core/zyppng/io/forkspawnengine.cc:150
 #: zypp-core/zyppng/io/forkspawnengine.cc:392
 msgid "Invalid spawn arguments given."
-msgstr ""
+msgstr "指定了無效的衍生引數。"
 
 #: zypp-core/zyppng/io/forkspawnengine.cc:206
 msgid "Unable to create control pipe."
-msgstr ""
+msgstr "無法建立控制管線。"
 
 #: zypp-core/zyppng/io/forkspawnengine.cc:272
 #, c-format, boost-format
@@ -4825,22 +4827,22 @@ msgstr "無法 fork (%s)。"
 #: zypp-core/zyppng/io/forkspawnengine.cc:338
 #, c-format, boost-format
 msgid "Can't exec '%s', chdir failed (%s)."
-msgstr ""
+msgstr "無法執行 \"%s\"，chdir 失敗 (%s)。"
 
 #: zypp-core/zyppng/io/forkspawnengine.cc:341
 #, c-format, boost-format
 msgid "Can't exec '%s', chroot failed (%s)."
-msgstr ""
+msgstr "無法執行 \"%s\"，chroot 失敗 (%s)。"
 
 #: zypp-core/zyppng/io/forkspawnengine.cc:344
 #, c-format, boost-format
 msgid "Can't exec '%s', exec failed (%s)."
-msgstr ""
+msgstr "無法執行 \"%s\"，exec 失敗 (%s)。"
 
 #: zypp-core/zyppng/io/forkspawnengine.cc:348
 #, c-format, boost-format
 msgid "Can't exec '%s', unexpected error."
-msgstr ""
+msgstr "無法執行 \"%s\"，發生非預期的錯誤。"
 
 #: zypp-media/mediaexception.cc:33
 #, c-format, boost-format
