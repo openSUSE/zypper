@@ -18,6 +18,7 @@ extern "C"
 #include <solv/solvable.h>
 #include <solv/poolarch.h>
 #include <solv/repo_solv.h>
+#include <solv/pool_parserpmrichdep.h>
 }
 #include <iosfwd>
 
@@ -184,6 +185,11 @@ namespace zypp
               return &_pool->solvables[id_r];
             return 0;
           }
+
+        public:
+          /** libsolv capability parser */
+          sat::detail::IdType parserpmrichdep( const char * capstr_r )
+          { return ::pool_parserpmrichdep( _pool, capstr_r ); }
 
         public:
           /** Get id of the first valid \ref Solvable.
