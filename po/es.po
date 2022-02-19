@@ -18,8 +18,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-10-13 15:45+0200\n"
-"PO-Revision-Date: 2022-01-26 19:11+0000\n"
-"Last-Translator: Matías Silva Bustos <matiasasb@gmail.com>\n"
+"PO-Revision-Date: 2022-02-19 03:12+0000\n"
+"Last-Translator: Antonio Simón <antonio@trans-mission.com>\n"
 "Language-Team: Spanish <https://l10n.opensuse.org/projects/zypper/master/es/>"
 "\n"
 "Language: es\n"
@@ -1731,22 +1731,22 @@ msgstr ""
 
 #. translator: %1% is the number of keys, %2% the name of a repository
 #: src/callbacks/keyring.h:490
-#, boost-format, fuzzy
+#, boost-format
 msgid "Received %1% new package signing key from repository %2%:"
 msgid_plural "Received %1% new package signing keys from repository %2%:"
-msgstr[0] "Se recibió una nueva clave del repositorio %2%:"
-msgstr[1] "Se recibieron %1% nuevas claves del repositorio %2%:"
+msgstr[0] "Se recibió la nueva clave de firma de paquete %1% del repositorio %2%:"
+msgstr[1] ""
+"Se recibieron las nuevas claves de firma de paquete %1% del repositorio %2%:"
 
 #: src/callbacks/keyring.h:494
-#, fuzzy
 msgid ""
 "Those additional keys are usually used to sign packages shipped by the "
 "repository. In order to validate those packages upon download and "
 "installation the new keys will be imported into the rpm database."
 msgstr ""
-"Esas claves adicionales se usan usualmente para firmar paquetes shipped por "
-"el repositorio. Con el fin de validar esos paquetes en la descarga y la "
-"instalación las nuevas claves serán importadas en la base de datos rpm."
+"Esas claves adicionales se suelen usar para firmar paquetes enviados por el "
+"repositorio. Para validar esos paquetes durante la descarga y la "
+"instalación, las nuevas claves se importarán en la base de datos rpm."
 
 #: src/callbacks/keyring.h:496
 msgid "New:"
@@ -4947,13 +4947,12 @@ msgid "Zypper subcommands available from elsewhere on your $PATH"
 msgstr "Subcomandos de zypper disponibles en otras ubicaciones de su $PATH"
 
 #: src/commands/subcommand.cc:480
-#, fuzzy
 msgid ""
 "Using zypper subcommands available from elsewhere on your $PATH is disabled "
 "in zypper.conf."
 msgstr ""
 "El uso de subcomandos de zypper disponibles de cualquier otro lado en su $"
-"PATH está deshabilitado en zypper.conf."
+"PATH está inhabilitado en zypper.conf."
 
 #. translators: helptext; %1% is a zypper command
 #: src/commands/subcommand.cc:485
@@ -6523,13 +6522,12 @@ msgstr ""
 "resolución."
 
 #: src/solve-commit.cc:529
-#, fuzzy
 msgid ""
 "DownloadAsNeeded can not be used with ZYPP_SINGLE_RPMTRANS=1, falling back "
 "to DownloadInAdvance"
 msgstr ""
-"DownloadAsNeeded no puede ser usado con ZYPP_SINGLE_RPMTRANS=1, retrayendo a "
-"DownloadInAdvance"
+"DownloadAsNeeded no se puede usar con ZYPP_SINGLE_RPMTRANS=1, se está "
+"volviendo a DownloadInAdvance"
 
 #: src/solve-commit.cc:547
 #, c-format, boost-format
