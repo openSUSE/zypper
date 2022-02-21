@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-10-13 15:45+0200\n"
-"PO-Revision-Date: 2022-02-18 14:20+0000\n"
+"PO-Revision-Date: 2022-02-21 13:12+0000\n"
 "Last-Translator: Davide Aiello <davide.aiello@novilingulists.com>\n"
 "Language-Team: Italian <https://l10n.opensuse.org/projects/zypper/master/it/>"
 "\n"
@@ -2541,7 +2541,7 @@ msgstr "Elenca tutte le impostazioni internazionali disponibili."
 #: src/commands/locale/localescmd.cc:48
 msgid "Ignoring positional arguments because --all argument was provided."
 msgstr ""
-"Gli argomenti posizionali vengono ingorati perché è stato fornito "
+"Gli argomenti posizionali vengono ignorati perché è stato fornito "
 "l'argomento --all."
 
 #: src/commands/locale/localescmd.cc:75
@@ -3396,7 +3396,7 @@ msgstr "Elenca gli aggiornamenti disponibili nei repository specificati."
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/query/patterns.cc:18
 msgid "patterns (pt) [OPTIONS] [REPOSITORY] ..."
-msgstr "patterns (pt) [oopzioni] [repository] ..."
+msgstr "patterns (pt) [opzioni] [repository] ..."
 
 #. translators: command summary: patterns, pt
 #: src/commands/query/patterns.cc:20
@@ -6329,7 +6329,7 @@ msgid ""
 "Repository '%s' appears to be outdated. Consider using a different mirror or "
 "server."
 msgstr ""
-"Il repository '%s' potrebbe non essere aggiornato. Cconsiderare l'uso di un "
+"Il repository '%s' potrebbe non essere aggiornato. Considerare l'uso di un "
 "mirror o di un server diverso."
 
 #. translators: the first %s is 'zypper refresh' and the second 'zypper clean -m'
