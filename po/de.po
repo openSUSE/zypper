@@ -17,7 +17,7 @@ msgstr ""
 "Project-Id-Version: zypper.de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-10-13 15:45+0200\n"
-"PO-Revision-Date: 2022-02-18 15:12+0000\n"
+"PO-Revision-Date: 2022-02-21 10:12+0000\n"
 "Last-Translator: Gemineo <vistatec@gemineo.de>\n"
 "Language-Team: German <https://l10n.opensuse.org/projects/zypper/master/de/>"
 "\n"
@@ -1127,7 +1127,7 @@ msgstr[1] "Die folgenden %d Anwendungen werden den Anbieter ändern:"
 msgid "The following package has no support information from its vendor:"
 msgid_plural ""
 "The following %d packages have no support information from their vendor:"
-msgstr[0] "Das folgende Paket  wird vom Anbieter nicht unterstützt:"
+msgstr[0] "Das folgende Paket wird vom Anbieter nicht unterstützt:"
 msgstr[1] ""
 "Die folgenden %d Pakete  haben keine Support-Informationen von ihrem "
 "Anbieter:"
@@ -1464,10 +1464,9 @@ msgid ""
 "system compromise."
 msgstr ""
 "Das Signieren von Daten ermöglicht dem Empfänger die Überprüfung, ob nach "
-"dem Signieren Änderungen an den Daten vorgenommen wurden.\n"
-"Das Akzeptieren von Paketen mit falscher Prüfsumme kann zu einem "
-"beschädigten System führen und in Extremfällen auch zu einer "
-"Systemgefährdung."
+"dem Signieren Änderungen an den Daten vorgenommen wurden. Das Akzeptieren "
+"von Paketen mit falscher Prüfsumme kann zu einem beschädigten System führen "
+"und in Extremfällen auch zu einer Systemgefährdung."
 
 #. translator: %1% is a file name
 #: src/callbacks/keyring.h:45
@@ -2048,7 +2047,7 @@ msgstr "Entfernen von %s fehlgeschlagen:"
 #: src/callbacks/rpm.h:312 src/callbacks/rpm.h:574
 #, c-format, boost-format
 msgid "Removing %s"
-msgstr "%s  wird entfernt"
+msgstr "%s wird entfernt"
 
 #: src/callbacks/rpm.h:349
 #, c-format, boost-format
@@ -3507,7 +3506,7 @@ msgstr "clean (cc) [Alias|#|URI] ..."
 
 #: src/commands/repos/clean.cc:17 src/commands/repos/clean.cc:18
 msgid "Clean local caches."
-msgstr "Lokale Caches  bereinigen."
+msgstr "Lokale Caches bereinigen."
 
 #. translators: -r, --repo <ALIAS|#|URI>
 #: src/commands/repos/clean.cc:37
@@ -5331,8 +5330,8 @@ msgid ""
 "Don't download any source rpms, but show which source rpms are missing or "
 "extraneous."
 msgstr ""
-"Kein Herunterladen von von Quell-RPMs, stattdessen anzeigen, welche Quell-"
-"RPMs fehlen oder irrelevant sind."
+"Kein Herunterladen von Quell-RPMs, stattdessen anzeigen, welche Quell-RPMs "
+"fehlen oder irrelevant sind."
 
 #. translators: --status
 #: src/commands/utils/source-download.cc:512
@@ -6013,7 +6012,7 @@ msgstr ""
 "Dies könnte durch ungültige Metadaten im Repository oder durch einen Bug im "
 "Metadatenanalysierer verursacht worden sein. Im letzteren Fall oder wenn Sie "
 "im Zweifel sind, erstellen Sie anhand der folgenden Anweisungen einen "
-"Fehlerbericht:  http://de.opensuse.org/Zypper/Fehlersuche."
+"Fehlerbericht: http://de.opensuse.org/Zypper/Fehlersuche."
 
 #: src/repos.cc:450
 #, c-format, boost-format
@@ -6046,7 +6045,7 @@ msgstr "Deaktiviertes Repository '%s' wird ignoriert"
 #, c-format, boost-format
 msgid "Global option '%s' can be used to temporarily enable repositories."
 msgstr ""
-"Die globale Option '%s 1'  kann zur temporären Aktivierung von Repositorys "
+"Die globale Option '%s 1' kann zur temporären Aktivierung von Repositorys "
 "verwendet werden."
 
 #: src/repos.cc:803 src/repos.cc:809
@@ -7180,7 +7179,7 @@ msgid ""
 "In case '%1%' is not a typo it's probably not a built-in command, but "
 "provided as a subcommand or plug-in (see '%2%')."
 msgstr ""
-"Falls '%1%' kein Tippfehler ist, ist es wohl kein eingebauter Befehl, wird\n"
+"Falls '%1%' kein Tippfehler ist, ist es wohl kein eingebauter Befehl, wird "
 "aber als Unterbefehl oder Plugin (siehe '%2%') bereitgestellt."
 
 #. translators: %1% and %2% are plug-in packages which might provide it.
@@ -7192,8 +7191,8 @@ msgid ""
 "installed first. Those packages are often named '%1%' or '%2%'."
 msgstr ""
 "In diesem Fall muss zunächst ein spezielles Paket installiert werden, das "
-"den\n"
-"Unterbefehl bereitstellt. Diese Pakete werden oft '%1%' oder '%2%' genannt."
+"den Unterbefehl bereitstellt. Diese Pakete werden oft '%1%' oder '%2%' "
+"genannt."
 
 #: src/utils/misc.cc:93
 msgid "package"
