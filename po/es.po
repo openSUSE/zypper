@@ -17,8 +17,8 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-02-14 16:34+0100\n"
-"PO-Revision-Date: 2022-01-26 19:12+0000\n"
-"Last-Translator: Matías Silva Bustos <matiasasb@gmail.com>\n"
+"PO-Revision-Date: 2022-02-22 02:12+0000\n"
+"Last-Translator: Antonio Simón <antonio@trans-mission.com>\n"
 "Language-Team: Spanish <https://l10n.opensuse.org/projects/libzypp/master/es/"
 ">\n"
 "Language: es\n"
@@ -3944,10 +3944,10 @@ msgstr "Para obtener asistencia se necesita un contrato adicional de cliente."
 
 #: zypp/VendorSupportOptions.cc:56
 msgid "Unknown support option. Description not available"
-msgstr "Opción de asistencia desconocida. Descripción no disponible."
+msgstr "Opción de asistencia desconocida. Descripción no disponible"
 
 #: zypp/ZYppFactory.cc:403
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid ""
 "System management is locked by the application with pid %d (%s).\n"
 "Close this application before trying again."
@@ -4427,13 +4427,14 @@ msgstr "proveedores no instalables: "
 #: zypp/solver/detail/SATResolver.cc:1252
 #, boost-format
 msgid "%1% is not yet fully integrated into %2%."
-msgstr ""
+msgstr "%1% aún no se ha integrado por completo en %2%."
 
 #: zypp/solver/detail/SATResolver.cc:1253
 msgid ""
 "Typically you want to keep the PTF and choose to not install the maintenance "
 "patches."
 msgstr ""
+"Lo habitual es conservar el PTF y no instalar los parches de mantenimiento."
 
 #: zypp/solver/detail/SATResolver.cc:1309
 #, boost-format
@@ -4872,7 +4873,7 @@ msgstr "El comando ha terminado con un error desconocido."
 #: zypp-core/zyppng/io/forkspawnengine.cc:150
 #: zypp-core/zyppng/io/forkspawnengine.cc:392
 msgid "Invalid spawn arguments given."
-msgstr ""
+msgstr "Se han proporcionado argumentos spawn no válidos."
 
 #: zypp-core/zyppng/io/forkspawnengine.cc:206
 msgid "Unable to create control pipe."
@@ -4987,7 +4988,6 @@ msgid "Path '%s' on medium '%s' is not a directory."
 msgstr "La vía %s del medio %s no es un directorio."
 
 #: zypp-media/mediaexception.cc:101
-#, fuzzy
 msgid "Malformed URI"
 msgstr "Formato de URI incorrecto"
 
