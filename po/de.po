@@ -18,7 +18,7 @@ msgstr ""
 "Project-Id-Version: zypp.de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-02-14 16:34+0100\n"
-"PO-Revision-Date: 2022-02-16 16:12+0000\n"
+"PO-Revision-Date: 2022-02-21 11:12+0000\n"
 "Last-Translator: Gemineo <vistatec@gemineo.de>\n"
 "Language-Team: German <https://l10n.opensuse.org/projects/libzypp/master/de/>"
 "\n"
@@ -1306,7 +1306,7 @@ msgstr ""
 
 #: zypp/KeyRing.cc:759
 msgid "Failed to import key."
-msgstr "Importieren des Schlüssels  fehlgeschlagen."
+msgstr "Importieren des Schlüssels fehlgeschlagen."
 
 #: zypp/KeyRing.cc:766
 msgid "Failed to delete key."
