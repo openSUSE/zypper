@@ -1352,16 +1352,16 @@ msgstr "Non-option programme arguments: "
 
 #: src/callbacks/keyring.h:32
 msgid ""
-"A GPG pubkey is clearly identified by it's fingerprint. Do not rely the keys "
+"A GPG pubkey is clearly identified by it's fingerprint. Do not rely on the key's "
 "name. If you are not sure whether the presented key is authentic, ask the "
-"repository provider or check his web site. Many provider maintain a web page "
+"repository provider or check their website. Many provider maintain a webpage "
 "showing the fingerprints of the GPG keys they are using."
 msgstr ""
 
 #: src/callbacks/keyring.h:37
 msgid ""
 "Signing data enables the recipient to verify that no modifications occurred "
-"after the data were signed. Accepting data with no, wrong or unknown "
+"after the data was signed. Accepting data with no, wrong or an unknown "
 "signature can lead to a corrupted system and in extreme cases even to a "
 "system compromise."
 msgstr ""
