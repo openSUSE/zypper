@@ -18,7 +18,7 @@ msgstr ""
 "Project-Id-Version: zypp.de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-02-14 16:34+0100\n"
-"PO-Revision-Date: 2022-02-21 11:12+0000\n"
+"PO-Revision-Date: 2022-02-22 11:12+0000\n"
 "Last-Translator: Gemineo <vistatec@gemineo.de>\n"
 "Language-Team: German <https://l10n.opensuse.org/projects/libzypp/master/de/>"
 "\n"
@@ -4058,7 +4058,7 @@ msgstr "Das Repository enthält keine URL."
 
 #. Translator: %1% the expected medium number; %2% the total number of media in the set; %3% the ident file on the medium.
 #: zypp/repo/SUSEMediaVerifier.cc:104
-#, fuzzy, boost-format
+#, boost-format
 msgid "Expected medium %1%/%2% identified by file '%3%' with content:"
 msgstr ""
 "Erwartetes Medium %1%/%2%, identifiziert durch Datei '%3%', mit dem Inhalt:"
@@ -4416,17 +4416,16 @@ msgstr "Nicht installierbare Anbieter: "
 
 #. translator: %1% is the name of a PTF, %2% the name of a patch.
 #: zypp/solver/detail/SATResolver.cc:1252
-#, boost-format, fuzzy
+#, boost-format
 msgid "%1% is not yet fully integrated into %2%."
 msgstr "%1% ist noch nicht vollständig in %2% integriert."
 
 #: zypp/solver/detail/SATResolver.cc:1253
-#, fuzzy
 msgid ""
 "Typically you want to keep the PTF and choose to not install the maintenance "
 "patches."
 msgstr ""
-"Normalerweise würden Sie das PTF behalten und die Wartungspatches nicht "
+"Normalerweise würden Sie das PTF behalten und die Wartungs-Patches nicht "
 "installieren."
 
 #: zypp/solver/detail/SATResolver.cc:1309
@@ -4538,7 +4537,7 @@ msgstr ""
 "  %2% --> %3%"
 
 #: zypp/solver/detail/SATResolver.cc:1531
-#, boost-format, fuzzy
+#, boost-format
 msgid ""
 "install %1% from vendor %2%\n"
 "  replacing %3% from vendor %4%"
@@ -4602,7 +4601,6 @@ msgid "New update message"
 msgstr "Neue Aktualisierungsbenachrichtigung"
 
 #: zypp/target/TargetImpl.cc:2688
-#, fuzzy
 msgid "Executing the transaction failed because of the following problems:"
 msgstr ""
 "Die Ausführung der Transaktion ist aufgrund der folgenden Probleme "
@@ -4864,12 +4862,10 @@ msgstr "Kommando mit unbekanntem Fehler beendet."
 
 #: zypp-core/zyppng/io/forkspawnengine.cc:150
 #: zypp-core/zyppng/io/forkspawnengine.cc:392
-#, fuzzy
 msgid "Invalid spawn arguments given."
 msgstr "Ungültige Spawn-Argumente angegeben."
 
 #: zypp-core/zyppng/io/forkspawnengine.cc:206
-#, fuzzy
 msgid "Unable to create control pipe."
 msgstr "Steuer-Pipe kann nicht erstellt werden."
 
@@ -4901,22 +4897,22 @@ msgid "Can't fork (%s)."
 msgstr "(%s) abzweigen nicht möglich."
 
 #: zypp-core/zyppng/io/forkspawnengine.cc:338
-#, boost-format, c-format, fuzzy
+#, boost-format, c-format
 msgid "Can't exec '%s', chdir failed (%s)."
 msgstr "exec '%s' nicht möglich, chdir fehlgeschlagen (%s)."
 
 #: zypp-core/zyppng/io/forkspawnengine.cc:341
-#, boost-format, c-format, fuzzy
+#, boost-format, c-format
 msgid "Can't exec '%s', chroot failed (%s)."
 msgstr "exec '%s' nicht möglich, chroot fehlgeschlagen (%s)."
 
 #: zypp-core/zyppng/io/forkspawnengine.cc:344
-#, boost-format, c-format, fuzzy
+#, boost-format, c-format
 msgid "Can't exec '%s', exec failed (%s)."
 msgstr "exec '%s' nicht möglich, exec fehlgeschlagen (%s)."
 
 #: zypp-core/zyppng/io/forkspawnengine.cc:348
-#, boost-format, c-format, fuzzy
+#, boost-format, c-format
 msgid "Can't exec '%s', unexpected error."
 msgstr "exec '%s' nicht möglich, unerwarteter Fehler."
 
