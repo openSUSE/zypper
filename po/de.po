@@ -17,7 +17,7 @@ msgstr ""
 "Project-Id-Version: zypper.de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-10-13 15:45+0200\n"
-"PO-Revision-Date: 2022-02-21 10:12+0000\n"
+"PO-Revision-Date: 2022-02-22 10:12+0000\n"
 "Last-Translator: Gemineo <vistatec@gemineo.de>\n"
 "Language-Team: German <https://l10n.opensuse.org/projects/zypper/master/de/>"
 "\n"
@@ -83,28 +83,28 @@ msgid "You may run '%1%' to repair any dependency problems."
 msgstr "Mit '%1%' können Sie Abhängigkeitsprobleme beheben."
 
 #: src/CommitSummary.cc:125
-#, boost-format, c-format, fuzzy
+#, boost-format, c-format
 msgid "The following package failed to install:"
 msgid_plural "The following %d packages failed to install:"
 msgstr[0] "Das folgende Paket konnte nicht installiert werden:"
 msgstr[1] "Die folgenden %d Pakete konnten nicht installiert werden:"
 
 #: src/CommitSummary.cc:140
-#, boost-format, c-format, fuzzy
+#, boost-format, c-format
 msgid "The following package installation was skipped:"
 msgid_plural "The following %d package installations were skipped:"
 msgstr[0] "Die folgende Paketinstallation wurde übersprungen:"
 msgstr[1] "Die folgenden %d Paketinstallationen wurden übersprungen:"
 
 #: src/CommitSummary.cc:155
-#, boost-format, c-format, fuzzy
+#, boost-format, c-format
 msgid "The following package failed to uninstall:"
 msgid_plural "The following %d packages failed to uninstall:"
 msgstr[0] "Das folgende Paket konnte nicht deinstalliert werden:"
 msgstr[1] "Die folgenden %d Pakete konnten nicht deinstalliert werden:"
 
 #: src/CommitSummary.cc:170
-#, boost-format, c-format, fuzzy
+#, boost-format, c-format
 msgid "The following package removal was skipped:"
 msgid_plural "The following %d package removal were skipped:"
 msgstr[0] "Die folgende Paketentfernung wurde übersprungen:"
@@ -1442,7 +1442,6 @@ msgid "Non-option program arguments: "
 msgstr "Andere Programmargumente (keine Optionen): "
 
 #: src/callbacks/keyring.h:32
-#, fuzzy
 msgid ""
 "A GPG pubkey is clearly identified by it's fingerprint. Do not rely the keys "
 "name. If you are not sure whether the presented key is authentic, ask the "
@@ -1511,7 +1510,6 @@ msgid "Key Name:"
 msgstr "Name des Schlüssels:"
 
 #: src/callbacks/keyring.h:89
-#, fuzzy
 msgid "Key Algorithm:"
 msgstr "Schlüsselalgorithmus:"
 
@@ -1743,14 +1741,13 @@ msgstr ""
 
 #. translator: %1% is the number of keys, %2% the name of a repository
 #: src/callbacks/keyring.h:490
-#, boost-format, fuzzy
+#, boost-format
 msgid "Received %1% new package signing key from repository %2%:"
 msgid_plural "Received %1% new package signing keys from repository %2%:"
 msgstr[0] "%1% neuen Paket-Signierschlüssel von Repository %2% erhalten:"
 msgstr[1] "%1% neue Paket-Signierschlüssel von Repository %2% erhalten:"
 
 #: src/callbacks/keyring.h:494
-#, fuzzy
 msgid ""
 "Those additional keys are usually used to sign packages shipped by the "
 "repository. In order to validate those packages upon download and "
@@ -1762,12 +1759,10 @@ msgstr ""
 "die rpm-Datenbank importiert."
 
 #: src/callbacks/keyring.h:496
-#, fuzzy
 msgid "New:"
 msgstr "Neu:"
 
 #: src/callbacks/keyring.h:502
-#, fuzzy
 msgid ""
 "The repository metadata introducing the new keys have been signed and "
 "validated by the trusted key:"
@@ -2119,19 +2114,19 @@ msgstr ""
 
 #. TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
 #: src/callbacks/rpm.h:711 src/callbacks/rpm.h:718
-#, boost-format, c-format, fuzzy
+#, boost-format, c-format
 msgid "Executing %s script for: %s"
 msgstr "Skript %s wird ausgeführt für: %s"
 
 #. TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
 #: src/callbacks/rpm.h:725
-#, boost-format, c-format, fuzzy
+#, boost-format, c-format
 msgid "Executing %s script"
 msgstr "Skript %s wird ausgeführt"
 
 #. TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
 #: src/callbacks/rpm.h:857
-#, boost-format, c-format, fuzzy
+#, boost-format, c-format
 msgid "Cleaning up: %s"
 msgstr "Bereinigung von: %s"
 
@@ -2642,7 +2637,6 @@ msgid "Restrict the lock to the specified repository."
 msgstr "Die Sperre auf das angegebene Repository beschränken."
 
 #: src/commands/locks/add.cc:48
-#, fuzzy
 msgid "Reason for specific lock."
 msgstr "Grund für die bestimmte Sperre."
 
@@ -2716,7 +2710,6 @@ msgid "Repository"
 msgstr "Repository"
 
 #: src/commands/locks/list.cc:138
-#, fuzzy
 msgid "Comment"
 msgstr "Kommentar"
 
@@ -2826,7 +2819,6 @@ msgstr ""
 "erforderlich ist, andernfalls wird der Exitcode ZYPPER_EXIT_OK verwendet."
 
 #: src/commands/needs-rebooting.cc:26
-#, fuzzy
 msgid ""
 "This is the recommended way for scripts to test whether a system reboot is "
 "suggested."
@@ -3057,7 +3049,6 @@ msgid "Install all available needed patches."
 msgstr "Alle verfügbaren erforderliche Patches installieren."
 
 #: src/commands/patch.cc:30
-#, fuzzy
 msgid ""
 "When updating the affected/vulnerable packages described by a patch, zypper "
 "always aims for the latest available version."
@@ -4982,7 +4973,6 @@ msgid "Zypper subcommands available from elsewhere on your $PATH"
 msgstr "Zypper-Unterkommandos in anderen Ordnern im $PATH"
 
 #: src/commands/subcommand.cc:480
-#, fuzzy
 msgid ""
 "Using zypper subcommands available from elsewhere on your $PATH is disabled "
 "in zypper.conf."
@@ -5008,7 +4998,6 @@ msgid "Lists available subcommands."
 msgstr "Verfügbare Unterkommandos auflisten."
 
 #: src/commands/subcommand.cc:523
-#, fuzzy
 msgid ""
 "Lists available subcommands. Using zypper subcommands found on your $PATH is "
 "disabled in zypper.conf."
@@ -6564,7 +6553,6 @@ msgid "Error creating the solver test case."
 msgstr "Fehler beim Erstellen des Testfalls für Auflösung."
 
 #: src/solve-commit.cc:529
-#, fuzzy
 msgid ""
 "DownloadAsNeeded can not be used with ZYPP_SINGLE_RPMTRANS=1, falling back "
 "to DownloadInAdvance"
