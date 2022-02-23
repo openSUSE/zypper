@@ -38,8 +38,38 @@ void printDefaultInfo(Zypper & zypper, const ui::Selectable & s , const PrintInf
 ///////////////////////////////////////////////////////////////////
 namespace
 {
+  /**
+   * Return the most interesting \ref PoolItems inside a \ref Selectable.
+   *
+   * Returns the installed item, the updateCandidate and \c theone which
+   * is, unlike the first two, guaranteed to be not NULL.
+   *
+   * \c theone: An updateCandidate is always better than any installed
+   * object. If the best version is already installed try to look it up
+   * in the repo it came from, otherwise use the installed one.
+   * If there is no installed one either, use the candidate.
+   *
+   * \code
+   * auto [installed, updateCand, theone] = theInterestingPoolItems( sel );
+   * \endcode
+   */
+  inline auto theInterestingPoolItems( const ui::Selectable & sel )
+  {
+    PoolItem installed  { sel.installedObj() };
+    PoolItem updateCand { sel.updateCandidateObj() };
+    PoolItem theone     { updateCand };
+    if ( not theone ) {
+      theone = sel.identicalAvailableObj( installed );
+      if ( not theone ) {
+        theone = installed;
+        if ( not theone )
+          theone = sel.candidateObj();
+      }
+    }
+    return std::make_tuple( installed, updateCand, theone );
+  }
 
-  std::string joinWords( std::string lhs, const std::string & rhs )
+  inline std::string joinWords( std::string lhs, const std::string & rhs )
   {
     if ( ! rhs.empty() )
     {
@@ -263,18 +293,7 @@ void printInfo(Zypper & zypper, const std::vector<std::string> &names_r, const P
 /** Information for kinds which don't have a extra needs... */
 void printDefaultInfo(Zypper & zypper, const ui::Selectable & s, const PrintInfoOptions &options_r  )
 {
-  PoolItem installed( s.installedObj() );
-  PoolItem updateCand( s.updateCandidateObj() );
-  // An updateCandidate is always better than any installed object.
-  // If the best version is already installed try to look it up in
-  // the repo it came from, otherwise use the installed one.
-  PoolItem theone( updateCand );
-  if ( !theone )
-  {
-    theone = s.identicalAvailableObj( installed );
-    if ( !theone )
-      theone = installed;
-  }
+  auto [installed, updateCand, theone] = theInterestingPoolItems( s );
 
   PropertyTable p;
   printCommonData( theone, p );
@@ -304,18 +323,7 @@ Description    :
  */
 void printPkgInfo(Zypper & zypper, const ui::Selectable & s , const PrintInfoOptions &options_r )
 {
-  PoolItem installed( s.installedObj() );
-  PoolItem updateCand( s.updateCandidateObj() );
-  // An updateCandidate is always better than any installed object.
-  // If the best version is already installed try to look it up in
-  // the repo it came from, otherwise use the installed one.
-  PoolItem theone( updateCand );
-  if ( !theone )
-  {
-    theone = s.identicalAvailableObj( installed );
-    if ( !theone )
-      theone = installed;
-  }
+  auto [installed, updateCand, theone] = theInterestingPoolItems( s );
   Package::constPtr package = theone->asKind<Package>();
 
   PropertyTable p;
@@ -413,7 +421,7 @@ This pattern provides a graphical application and a command line tool for keepin
  */
 void printPatternInfo(Zypper & zypper, const ui::Selectable & s , const PrintInfoOptions &options_r )
 {
-  PoolItem theone( s.theObj() );
+  auto [installed, updateCand, theone] = theInterestingPoolItems( s );
   Pattern::constPtr pattern = theone->asKind<Pattern>();
 
   PropertyTable p;
@@ -506,18 +514,7 @@ void printProductInfo(Zypper & zypper, const ui::Selectable & s, const PrintInfo
     return;
   }
 
-  PoolItem installed( s.installedObj() );
-  PoolItem updateCand( s.updateCandidateObj() );
-  // An updateCandidate is always better than any installed object.
-  // If the best version is already installed try to look it up in
-  // the repo it came from, otherwise use the installed one.
-  PoolItem theone( updateCand );
-  if ( !theone )
-  {
-    theone = s.identicalAvailableObj( installed );
-    if ( !theone )
-      theone = installed;
-  }
+  auto [installed, updateCand, theone] = theInterestingPoolItems( s );
 
   PropertyTable p;
   printCommonData( theone, p );
@@ -675,7 +672,7 @@ namespace
 
 void printSrcPackageInfo(Zypper & zypper, const ui::Selectable & s, const PrintInfoOptions &options_r  )
 {
-  PoolItem theone( s.theObj() );
+  auto [installed, updateCand, theone] = theInterestingPoolItems( s );
   SrcPackage::constPtr srcPackage = theone->asKind<SrcPackage>();
 
   PropertyTable p;
