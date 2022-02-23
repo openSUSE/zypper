@@ -5,11 +5,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper.ko\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-13 15:45+0200\n"
+"POT-Creation-Date: 2022-02-23 18:47+0100\n"
 "PO-Revision-Date: 2021-11-30 12:15+0000\n"
 "Last-Translator: Kim Tae Kyeong <kim@taekyeong.me>\n"
-"Language-Team: Korean <https://l10n.opensuse.org/projects/zypper/master/ko/>"
-"\n"
+"Language-Team: Korean <https://l10n.opensuse.org/projects/zypper/master/ko/"
+">\n"
 "Language: ko\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -115,144 +115,144 @@ msgstr "잘못된 테이블 스타일 %d입니다."
 msgid " Use an integer number from %d to %d"
 msgstr " %d부터 %d까지의 정수 사용"
 
-#: src/Config.cc:252
+#: src/Config.cc:244
 msgid "The path specified in the --root option must be absolute."
 msgstr "--root 옵션에서 지정한 경로는 절대 경로여야 합니다."
 
 #. translators: --help, -h
-#: src/Config.cc:330
+#: src/Config.cc:322
 msgid "Help."
 msgstr "도움말."
 
 #. translators: --version, -V
-#: src/Config.cc:339
+#: src/Config.cc:331
 msgid "Output the version number."
 msgstr "버전 번호를 출력합니다."
 
 #. translators: --promptids
-#: src/Config.cc:351
+#: src/Config.cc:343
 msgid "Output a list of zypper's user prompts."
 msgstr "zypper 사용자 프롬프트 목록을 출력합니다."
 
 #. translators: --config, -c <FILE>
-#: src/Config.cc:364
+#: src/Config.cc:356
 msgid "Use specified config file instead of the default."
 msgstr "기본 파일 대신 지정된 구성 파일을 사용합니다."
 
-#: src/Config.cc:371
+#: src/Config.cc:363
 msgid "User data string must not contain nonprintable or newline characters!"
 msgstr ""
 "사용자 데이터 스트링에 인쇄할 수 없는 문자나 줄바꿈 문자를 포함하면 안 됩니"
 "다!"
 
 #. translators: --userdata <STRING>
-#: src/Config.cc:377
+#: src/Config.cc:369
 msgid "User defined transaction id used in history and plugins."
 msgstr "이력과 플러그인에서 사용되는 사용자 정의 트랜잭션 ID."
 
 #. translators: --quiet, -q
-#: src/Config.cc:385
+#: src/Config.cc:377
 msgid "Suppress normal output, print only error messages."
 msgstr "일반 출력을 생략하고 오류 메시지만 출력합니다."
 
 #. translators: --verbose, -v
-#: src/Config.cc:393
+#: src/Config.cc:385
 msgid "Increase verbosity."
 msgstr "표시 수준을 높입니다."
 
 #. translators: --color / --no-color
-#: src/Config.cc:414
+#: src/Config.cc:406
 msgid "Whether to use colors in output if tty supports it."
 msgstr "tty가 지원할 경우 컬러 출력 여부를 지정합니다."
 
 #. translators: --no-abbrev, -A
-#: src/Config.cc:419
+#: src/Config.cc:411
 msgid "Do not abbreviate text in tables."
 msgstr "테이블에서 텍스트를 약어로 표시하지 않습니다."
 
 #. translators: --table-style, -s, %1% denotes the supported range of the integer argument (e.g. "1-11")
-#: src/Config.cc:424
+#: src/Config.cc:416
 #, boost-format
 msgid "Table style (%1%)."
 msgstr "테이블 스타일 (%1%)."
 
-#: src/Config.cc:428 src/commands/optionsets.cc:284
+#: src/Config.cc:420 src/commands/optionsets.cc:284
 msgid "Entering non-interactive mode."
 msgstr "비대화형 모드로 들어가는 중입니다."
 
 #. translators: --non-interactive, -n
-#: src/Config.cc:432
+#: src/Config.cc:424
 msgid "Do not ask anything, use default answers automatically."
 msgstr "아무것도 묻지 않고 자동으로 기본 답변을 사용합니다."
 
-#: src/Config.cc:437
+#: src/Config.cc:429
 msgid ""
 "Patches having the flag rebootSuggested set will not be treated as "
 "interactive."
 msgstr "rebootSuggested 플래그를 설정한 패치는 대화식으로 처리되지 않습니다."
 
 #. translators: --non-interactive-include-reboot-patches
-#: src/Config.cc:441
+#: src/Config.cc:433
 msgid ""
 "Do not treat patches as interactive, which have the rebootSuggested-flag set."
 msgstr "rebootSuggested-flag가 설정된 패치를 대화형으로 취급하지 않습니다."
 
 #. translators: --xmlout, -x
-#: src/Config.cc:451
+#: src/Config.cc:443
 msgid "Switch to XML output."
 msgstr "XML 출력으로 전환합니다."
 
 #. translators: --ignore-unknown, -i
-#: src/Config.cc:456
+#: src/Config.cc:448
 msgid "Ignore unknown packages."
 msgstr "알 수 없는 패키지를 무시합니다."
 
 #. translators: --terse, -t
-#: src/Config.cc:467
+#: src/Config.cc:459
 msgid ""
 "Terse output for machine consumption. Implies --no-abbrev and --no-color."
 msgstr ""
 "시스템 사용에 대한 간단한 출력입니다. --no-abbrev 및 --no-color를 의미합니다."
 
 #. translators: --reposd-dir, -D <DIR>
-#: src/Config.cc:491
+#: src/Config.cc:483
 msgid "Use alternative repository definition file directory."
 msgstr "대체 리포지토리 정의 파일 디렉토리를 사용합니다."
 
 #. translators: --cache-dir, -C <DIR>
-#: src/Config.cc:506
+#: src/Config.cc:498
 msgid "Use alternative directory for all caches."
 msgstr "모든 캐시에 대한 대체 디렉토리를 사용합니다."
 
 #. translators: --raw-cache-dir <DIR>
-#: src/Config.cc:519
+#: src/Config.cc:511
 msgid "Use alternative raw meta-data cache directory."
 msgstr "대체 원시 메타 데이터 캐시 디렉토리를 사용합니다."
 
 #. translators: --solv-cache-dir <DIR>
-#: src/Config.cc:533
+#: src/Config.cc:525
 msgid "Use alternative solv file cache directory."
 msgstr "대체 solv 파일 캐시 디렉토리를 사용합니다."
 
 #. translators: --pkg-cache-dir <DIR>
-#: src/Config.cc:547
+#: src/Config.cc:539
 msgid "Use alternative package cache directory."
 msgstr "대체 패키지 캐시 디렉토리를 사용합니다."
 
-#: src/Config.cc:552
+#: src/Config.cc:544
 msgid "Repository Options"
 msgstr "리포지토리 옵션"
 
-#: src/Config.cc:556
+#: src/Config.cc:548
 msgid "Entering 'no-gpg-checks' mode."
 msgstr "'no-gpg-checks' 모드로 들어가는 중입니다."
 
 #. translators: --no-gpg-checks
-#: src/Config.cc:560
+#: src/Config.cc:552
 msgid "Ignore GPG check failures and continue."
 msgstr "GPG 확인 오류를 무시하고 계속합니다."
 
-#: src/Config.cc:565
+#: src/Config.cc:557
 #, c-format, boost-format
 msgid ""
 "Turning on '%s'. New repository signing keys will be automatically imported!"
@@ -260,17 +260,17 @@ msgstr ""
 "'%s'을(를) 설정 중입니다. 새 리포지토리 서명 키가 자동으로 임포트됩니다."
 
 #. translators: --gpg-auto-import-keys
-#: src/Config.cc:571
+#: src/Config.cc:563
 msgid "Automatically trust and import new repository signing keys."
 msgstr "새로운 리포지토리 서명 키를 자동으로 신뢰하고 임포트합니다."
 
 #. translators: --plus-repo, -p <URI>
-#: src/Config.cc:575
+#: src/Config.cc:567
 msgid "Use an additional repository."
 msgstr "추가 리포지토리를 사용합니다."
 
 #. translators: --plus-content <TAG>
-#: src/Config.cc:579
+#: src/Config.cc:571
 msgid ""
 "Additionally use disabled repositories providing a specific keyword. Try '--"
 "plus-content debug' to enable repos indicating to provide debug packages."
@@ -279,84 +279,84 @@ msgstr ""
 "plus-content debug'를 사용하여 디버그 패키지 제공을 나타내는 리포지토리를 활"
 "성화합니다."
 
-#: src/Config.cc:585
+#: src/Config.cc:577
 msgid "Repositories disabled, using the database of installed packages only."
 msgstr ""
 "리포지토리가 비활성화되었습니다. 설치된 패키지의 데이터베이스만 사용합니다."
 
 #. translators: --disable-repositories
-#: src/Config.cc:589
+#: src/Config.cc:581
 msgid "Do not read meta-data from repositories."
 msgstr "리포지토리의 메타 데이터를 읽지 않습니다."
 
-#: src/Config.cc:593
+#: src/Config.cc:585
 msgid "Autorefresh disabled."
 msgstr "자동 새로 고침이 비활성화되었습니다."
 
 #. translators: --no-refresh
-#: src/Config.cc:597
+#: src/Config.cc:589
 msgid "Do not refresh the repositories."
 msgstr "리포지토리를 새로 고침하지 않습니다."
 
-#: src/Config.cc:601
+#: src/Config.cc:593
 msgid "CD/DVD repositories disabled."
 msgstr "CD/DVD 리포지토리가 비활성화되었습니다."
 
 #. translators: --no-cd
-#: src/Config.cc:605
+#: src/Config.cc:597
 msgid "Ignore CD/DVD repositories."
 msgstr "CD/DVD 리포지토리를 무시합니다."
 
-#: src/Config.cc:609
+#: src/Config.cc:601
 msgid "Remote repositories disabled."
 msgstr "원격 리포지토리가 비활성화되었습니다."
 
 #. translators: --no-remote
-#: src/Config.cc:613
+#: src/Config.cc:605
 msgid "Ignore remote repositories."
 msgstr "원격 리포지토리를 무시합니다."
 
 #. translators: --releasever
-#: src/Config.cc:620
+#: src/Config.cc:612
 msgid ""
 "Set the value of $releasever in all .repo files (default: distribution "
 "version)"
 msgstr "$releasever 값을 모든 .repo 파일에서 설정합니다(기본: 배포 버전)"
 
-#: src/Config.cc:624
+#: src/Config.cc:616
 msgid "Target Options"
 msgstr "대상 옵션"
 
 #. translators: --root, -R <DIR>
-#: src/Config.cc:629
+#: src/Config.cc:621
 msgid "Operate on a different root directory."
 msgstr "다른 루트 디렉토리에서 작동합니다."
 
 #. translators: --installroot <DIR>
-#: src/Config.cc:635
+#: src/Config.cc:627
 msgid ""
 "Operate on a different root directory, but share repositories with the host."
 msgstr "다른 루트 디렉토리에서 작동하지만 호스트와 리포지토리를 공유합니다."
 
-#: src/Config.cc:641
+#: src/Config.cc:633
 msgid "Ignoring installed resolvables."
 msgstr "설치된 resolvable을 무시하는 중입니다."
 
 #. translators: --disable-system-resolvables
-#: src/Config.cc:644
+#: src/Config.cc:636
 msgid "Do not read installed packages."
 msgstr "설치된 패키지를 읽지 않습니다."
 
-#: src/Config.cc:811
+#: src/Config.cc:803
 msgid "No config file is in use. Can not save options."
 msgstr "사용 중인 구성 파일이 없습니다. 옵션을 저장할 수 없습니다."
 
-#: src/Config.cc:822
+#: src/Config.cc:814
 #, boost-format
 msgid "Option '%1%' saved in '%2%'."
 msgstr "'%1%' 옵션이 '%2%'에 저장되었습니다."
 
-#: src/Config.cc:829
+#: src/Config.cc:821
 msgid "Failed to save option."
 msgstr "옵션을 저장하지 못했습니다."
 
@@ -1054,7 +1054,7 @@ msgstr "사용 가능"
 
 #. translators: used as 'tag:' (i.e. followed by ':')
 #. translators: property name; short; used like "Name: value"
-#: src/Summary.cc:1343 src/info.cc:332 src/info.cc:423 src/info.cc:554
+#: src/Summary.cc:1343 src/info.cc:340 src/info.cc:433 src/info.cc:553
 msgid "Installed"
 msgstr "설치됨"
 
@@ -1243,27 +1243,27 @@ msgstr "PackageKit가 여전히 실행 중입니다(사용 중일 수 있음)."
 msgid "Try again?"
 msgstr "다시 해보시겠습니까?"
 
-#: src/Zypper.cc:248 src/Zypper.cc:715 src/commands/basecommand.cc:287
+#: src/Zypper.cc:248 src/Zypper.cc:707 src/commands/basecommand.cc:287
 msgid "Unexpected exception."
 msgstr "예상치 못한 예외가 발생했습니다."
 
 #. translators: %s is "help" or "zypper help" depending on whether
 #. zypper shell is running or not
-#: src/Zypper.cc:289
+#: src/Zypper.cc:282
 #, c-format, boost-format
 msgid "Type '%s' to get command-specific help."
 msgstr "명령 관련 도움말을 가져오려면 '%s'을(를) 입력합니다."
 
-#: src/Zypper.cc:310
+#: src/Zypper.cc:302
 #, c-format, boost-format
 msgid "Verbosity: %d"
 msgstr "표시 수준: %d"
 
-#: src/Zypper.cc:319
+#: src/Zypper.cc:311
 msgid "Enforced setting"
 msgstr "적용된 설정"
 
-#: src/Zypper.cc:342
+#: src/Zypper.cc:334
 msgid ""
 "The /etc/products.d/baseproduct symlink is dangling or missing!\n"
 "The link must point to your core products .prod file in /etc/products.d.\n"
@@ -1273,12 +1273,12 @@ msgstr ""
 
 #. TranslatorExplanation The %s is "--plus-repo"
 #. TranslatorExplanation The %s is "--option-name"
-#: src/Zypper.cc:535 src/Zypper.cc:587
+#: src/Zypper.cc:527 src/Zypper.cc:579
 #, c-format, boost-format
 msgid "The %s option has no effect here, ignoring."
 msgstr "%s 옵션은 여기서 아무런 의미가 없습니다. 무시 중입니다."
 
-#: src/Zypper.cc:658
+#: src/Zypper.cc:650
 msgid "Non-option program arguments: "
 msgstr "비옵션 프로그램 인수: "
 
@@ -1289,8 +1289,10 @@ msgid ""
 "repository provider or check his web site. Many provider maintain a web page "
 "showing the fingerprints of the GPG keys they are using."
 msgstr ""
-"GPG pubkey는 지문으로 명확하게 식별됩니다. 키 이름에 의존하지 마십시오. 제시된 키가 정상인지 확실하지 않은 경우 저장소 "
-"제공자에게 문의하거나 웹 사이트를 확인하십시오. 많은 공급자가 사용 중인 GPG 키의 지문을 보여주는 웹 페이지를 유지 관리합니다."
+"GPG pubkey는 지문으로 명확하게 식별됩니다. 키 이름에 의존하지 마십시오. 제시"
+"된 키가 정상인지 확실하지 않은 경우 저장소 제공자에게 문의하거나 웹 사이트를 "
+"확인하십시오. 많은 공급자가 사용 중인 GPG 키의 지문을 보여주는 웹 페이지를 유"
+"지 관리합니다."
 
 #: src/callbacks/keyring.h:37
 msgid ""
@@ -1572,8 +1574,9 @@ msgid ""
 "repository. In order to validate those packages upon download and "
 "installation the new keys will be imported into the rpm database."
 msgstr ""
-"이러한 추가 키는 일반적으로 저장소에서 제공하는 패키지에 서명하는 데 사용됩니다. 다운로드 및 설치 시 해당 패키지의 유효성을 검사하기 "
-"위해 새 키를 rpm 데이터베이스로 가져옵니다."
+"이러한 추가 키는 일반적으로 저장소에서 제공하는 패키지에 서명하는 데 사용됩니"
+"다. 다운로드 및 설치 시 해당 패키지의 유효성을 검사하기 위해 새 키를 rpm 데이"
+"터베이스로 가져옵니다."
 
 #: src/callbacks/keyring.h:496
 msgid "New:"
@@ -1672,29 +1675,29 @@ msgid "The following query does not lock anything:"
 msgstr "다음 쿼리는 모든 항목을 잠그지 않습니다."
 
 #. help text for the "Abort, retry, ignore?" prompt for media errors
-#: src/callbacks/media.cc:27
+#: src/callbacks/media.cc:28
 msgid "Skip retrieval of the file and abort current operation."
 msgstr "파일 불러오기를 생략하고 현재 작업을 중단합니다."
 
 #. help text for the "Abort, retry, ignore?" prompt for media errors
-#: src/callbacks/media.cc:29
+#: src/callbacks/media.cc:30
 msgid "Try to retrieve the file again."
 msgstr "파일을 다시 불러오십시오."
 
 #. help text for the "Abort, retry, ignore?" prompt for media errors
-#: src/callbacks/media.cc:31
+#: src/callbacks/media.cc:32
 msgid ""
 "Skip retrieval of the file and try to continue with the operation without "
 "the file."
 msgstr "파일 불러오기를 생략하고 파일 없이 작업을 계속합니다."
 
 #. help text for the "Abort, retry, ignore?" prompt for media errors
-#: src/callbacks/media.cc:33
+#: src/callbacks/media.cc:34
 msgid "Change current base URI and try retrieving the file again."
 msgstr "현재 기본 URI를 변경하고 파일을 다시 불러옵니다."
 
 #. translators: this is a prompt label, will appear as "New URI: "
-#: src/callbacks/media.cc:48
+#: src/callbacks/media.cc:49
 msgid "New URI"
 msgstr "새 URI"
 
@@ -1704,50 +1707,50 @@ msgstr "새 URI"
 #. The 'u' reply means 'Change URI'.
 #. https protocol-specific options:
 #. 's' stands for Disable SSL certificate authority check
-#: src/callbacks/media.cc:76
+#: src/callbacks/media.cc:77
 msgid "a/r/i/u/s"
 msgstr "중단/재시도/무시/URI 변경/SSL 인증 기관 비활성화"
 
-#: src/callbacks/media.cc:78
+#: src/callbacks/media.cc:79
 msgid "Disable SSL certificate authority check and continue."
 msgstr "SSL 인증 기관 확인을 비활성화하고 계속하십시오."
 
 #. translators: this is a prompt text
-#: src/callbacks/media.cc:81 src/callbacks/media.cc:173
-#: src/callbacks/media.cc:253 src/utils/prompt.cc:226 src/utils/prompt.cc:313
+#: src/callbacks/media.cc:82 src/callbacks/media.cc:174
+#: src/callbacks/media.cc:254 src/utils/prompt.cc:226 src/utils/prompt.cc:313
 msgid "Abort, retry, ignore?"
 msgstr "중단, 재시도 또는 무시하시겠습니까?"
 
-#: src/callbacks/media.cc:89
+#: src/callbacks/media.cc:90
 msgid "SSL certificate authority check disabled."
 msgstr "SSL 인증 기관 확인이 비활성화되었습니다."
 
-#: src/callbacks/media.cc:106
+#: src/callbacks/media.cc:107
 msgid "No devices detected, cannot eject."
 msgstr "장치가 감지되지 않았으므로 꺼낼 수 없습니다."
 
-#: src/callbacks/media.cc:107
+#: src/callbacks/media.cc:108
 msgid "Try to eject the device manually."
 msgstr "장치를 직접 꺼내십시오."
 
-#: src/callbacks/media.cc:118
+#: src/callbacks/media.cc:119
 msgid "Detected devices:"
 msgstr "감지된 장치:"
 
-#: src/callbacks/media.cc:133
+#: src/callbacks/media.cc:134
 msgid "Cancel"
 msgstr "취소"
 
-#: src/callbacks/media.cc:135
+#: src/callbacks/media.cc:136
 msgid "Select device to eject."
 msgstr "꺼낼 장치를 선택하십시오."
 
-#: src/callbacks/media.cc:150
+#: src/callbacks/media.cc:151
 msgid "Insert the CD/DVD and press ENTER to continue."
 msgstr "계속하려면 CD/DVD를 넣고 <ENTER> 키를 누르십시오."
 
 # window title for kernel loading (see txt_load_kernel)
-#: src/callbacks/media.cc:153
+#: src/callbacks/media.cc:154
 msgid "Retrying..."
 msgstr "재시도 중..."
 
@@ -1757,11 +1760,11 @@ msgstr "재시도 중..."
 #. The 'u' reply means 'Change URI'.
 #. cd/dvd protocol-specific options:
 #. 'e' stands for Eject medium
-#: src/callbacks/media.cc:168
+#: src/callbacks/media.cc:169
 msgid "a/r/i/u/e"
 msgstr "중단/재시도/무시/URI 변경/매체 꺼내기"
 
-#: src/callbacks/media.cc:170
+#: src/callbacks/media.cc:171
 msgid "Eject medium."
 msgstr "매체를 꺼내십시오."
 
@@ -1769,7 +1772,7 @@ msgstr "매체를 꺼내십시오."
 #. Try to check what answers does zypper accept (it always accepts y/n at least)
 #. You can also have a look at the regular expressions used to check the answer here:
 #. /usr/lib/locale/<your_locale>/LC_MESSAGES/SYS_LC_MESSAGES
-#: src/callbacks/media.cc:214
+#: src/callbacks/media.cc:215
 #, c-format, boost-format
 msgid ""
 "Please insert medium [%s] #%d and type 'y' to continue or 'n' to cancel the "
@@ -1781,11 +1784,11 @@ msgstr ""
 #. translators: a/r/i/u are replies to the "Abort, retry, ignore?" prompt
 #. Translate the a/r/i part exactly as you did the a/r/i string.
 #. the 'u' reply means 'Change URI'.
-#: src/callbacks/media.cc:249
+#: src/callbacks/media.cc:250
 msgid "a/r/i/u"
 msgstr "중단/재시도/무시/URI 변경"
 
-#: src/callbacks/media.cc:291
+#: src/callbacks/media.cc:292
 #, c-format, boost-format
 msgid ""
 "Authentication required to access %s. You need to be root to be able to read "
@@ -1794,12 +1797,12 @@ msgstr ""
 "%s에 액세스하려면 인증이 필요합니다. %s에서 인증서를 읽을 수 있으려면 루트 사"
 "용자여야 합니다."
 
-#: src/callbacks/media.cc:313 src/callbacks/media.cc:320
+#: src/callbacks/media.cc:314 src/callbacks/media.cc:321
 msgid "User Name"
 msgstr "사용자 이름"
 
 #. password
-#: src/callbacks/media.cc:328
+#: src/callbacks/media.cc:329
 msgid "Password"
 msgstr "비밀번호"
 
@@ -1837,40 +1840,40 @@ msgid "Accepting package despite the error."
 msgstr "오류를 무시하고 패키지를 승인합니다."
 
 #. TranslatorExplanation speaking of a script - "Running: script file name (package name, script dir)"
-#: src/callbacks/rpm.h:189
+#: src/callbacks/rpm.h:218
 #, c-format, boost-format
 msgid "Running: %s  (%s, %s)"
 msgstr "실행 중: %s  (%s, %s)"
 
-#: src/callbacks/rpm.h:272
+#: src/callbacks/rpm.h:307
 #, c-format, boost-format
 msgid "Removal of %s failed:"
 msgstr "%s 제거 실패:"
 
 #. translators: This text is a progress display label e.g. "Removing packagename-x.x.x [42%]"
-#: src/callbacks/rpm.h:312 src/callbacks/rpm.h:574
+#: src/callbacks/rpm.h:350 src/callbacks/rpm.h:631
 #, c-format, boost-format
 msgid "Removing %s"
 msgstr "%s 제거 중"
 
-#: src/callbacks/rpm.h:349
+#: src/callbacks/rpm.h:393
 #, c-format, boost-format
 msgid "Installation of %s failed:"
 msgstr "%s의 설치에 실패:"
 
 #. TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
-#: src/callbacks/rpm.h:389 src/callbacks/rpm.h:640
+#: src/callbacks/rpm.h:436 src/callbacks/rpm.h:692
 #, c-format, boost-format
 msgid "Installing: %s"
 msgstr "설치 중: %s"
 
 #. translators: A progressbar label
-#: src/callbacks/rpm.h:408
+#: src/callbacks/rpm.h:455
 msgid "Checking for file conflicts:"
 msgstr "파일 충돌 확인:"
 
 #. TranslatorExplanation %1%(number of packages); detailed list follows
-#: src/callbacks/rpm.h:459
+#: src/callbacks/rpm.h:506
 #, boost-format
 msgid ""
 "%1% package had to be excluded from file conflicts check because it is not "
@@ -1881,7 +1884,7 @@ msgid_plural ""
 msgstr[0] ""
 
 #. TranslatorExplanation %1%(commandline option)
-#: src/callbacks/rpm.h:465
+#: src/callbacks/rpm.h:512
 #, boost-format
 msgid ""
 "Checking for file conflicts requires not installed packages to be downloaded "
@@ -1893,18 +1896,18 @@ msgstr ""
 "조하십시오."
 
 #. TranslatorExplanation %1%(number of conflicts); detailed list follows
-#: src/callbacks/rpm.h:475
+#: src/callbacks/rpm.h:522
 #, boost-format
 msgid "Detected %1% file conflict:"
 msgid_plural "Detected %1% file conflicts:"
 msgstr[0] "%1%개의 파일 충돌이 검색되었습니다."
 
-#: src/callbacks/rpm.h:483
+#: src/callbacks/rpm.h:530
 msgid "Conflicting files will be replaced."
 msgstr "충돌하는 파일이 바뀝니다."
 
 #. TranslatorExplanation Problem description before asking whether to "Continue? [yes/no] (no):"
-#: src/callbacks/rpm.h:489
+#: src/callbacks/rpm.h:536
 msgid ""
 "File conflicts happen when two packages attempt to install files with the "
 "same name but different contents. If you continue, conflicting files will be "
@@ -1914,19 +1917,19 @@ msgstr ""
 "생합니다. 계속하면 충돌하는 파일이 바뀌고 이전 내용이 손실됩니다."
 
 #. TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
-#: src/callbacks/rpm.h:711 src/callbacks/rpm.h:718
+#: src/callbacks/rpm.h:759 src/callbacks/rpm.h:766
 #, c-format, boost-format
 msgid "Executing %s script for: %s"
 msgstr "%s의 스크립트 실행 중: %s"
 
 #. TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
-#: src/callbacks/rpm.h:725
+#: src/callbacks/rpm.h:773
 #, c-format, boost-format
 msgid "Executing %s script"
 msgstr "%s 스크립트 실행 중"
 
 #. TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
-#: src/callbacks/rpm.h:857
+#: src/callbacks/rpm.h:895
 #, c-format, boost-format
 msgid "Cleaning up: %s"
 msgstr ""
@@ -2457,7 +2460,7 @@ msgstr[0] "%lu 잠금이 제거되었습니다."
 #. translators: name (general header)
 #: src/commands/locks/list.cc:135 src/commands/repos/list.cc:41
 #: src/commands/repos/list.cc:223 src/commands/services/list.cc:105
-#: src/info.cc:58 src/info.cc:446 src/info.cc:692 src/locales.cc:201
+#: src/info.cc:88 src/info.cc:456 src/info.cc:691 src/locales.cc:201
 #: src/search.cc:48 src/search.cc:199 src/search.cc:304 src/search.cc:436
 #: src/search.cc:483 src/update.cc:789 src/utils/misc.cc:324
 msgid "Name"
@@ -2471,13 +2474,13 @@ msgstr "일치 항목"
 #. translators: type (general header)
 #: src/commands/locks/list.cc:138 src/commands/repos/list.cc:52
 #: src/commands/repos/list.cc:261 src/commands/services/list.cc:114
-#: src/info.cc:447 src/search.cc:50 src/search.cc:202
+#: src/info.cc:457 src/search.cc:50 src/search.cc:202
 msgid "Type"
 msgstr "유형"
 
 #. translators: property name; short; used like "Name: value"
 #. translators: package's repository (header)
-#: src/commands/locks/list.cc:138 src/info.cc:56 src/search.cc:56
+#: src/commands/locks/list.cc:138 src/info.cc:86 src/search.cc:56
 #: src/search.cc:306 src/search.cc:435 src/search.cc:479 src/update.cc:786
 #: src/utils/misc.cc:323
 msgid "Repository"
@@ -4870,7 +4873,7 @@ msgstr "다운로드 디렉토리의 필요 없는 소스 패키지:"
 
 #. translators: table headers
 #. translators: property name; short; used like "Name: value"
-#: src/commands/utils/source-download.cc:318 src/info.cc:345
+#: src/commands/utils/source-download.cc:318 src/info.cc:353
 msgid "Source package"
 msgstr "소스 패키지"
 
@@ -5024,119 +5027,124 @@ msgstr "%s이(가) %s보다 이전입니다."
 #. translators: property name; short; used like "Name: value"
 #. translators: Table column header
 #. translators: package version (header)
-#: src/info.cc:60 src/info.cc:693 src/search.cc:52 src/search.cc:305
+#: src/info.cc:90 src/info.cc:692 src/search.cc:52 src/search.cc:305
 #: src/search.cc:437 src/search.cc:484
 msgid "Version"
 msgstr "버전"
 
 #. translators: property name; short; used like "Name: value"
 #. translators: package architecture (header)
-#: src/info.cc:62 src/search.cc:54 src/search.cc:438 src/search.cc:485
+#: src/info.cc:92 src/search.cc:54 src/search.cc:438 src/search.cc:485
 #: src/update.cc:795
 msgid "Arch"
 msgstr "아키텍처"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:64
+#: src/info.cc:94
 msgid "Vendor"
 msgstr "제조사"
 
 #. translators: property name; short; used like "Name: value"
 #. translators: package summary (header)
-#: src/info.cc:70 src/search.cc:201 src/utils/misc.cc:330 src/utils/misc.cc:372
+#: src/info.cc:100 src/search.cc:201 src/utils/misc.cc:330
+#: src/utils/misc.cc:372
 msgid "Summary"
 msgstr "요약"
 
 #. translators: property name; short; used like "Name: value"
 #. translators: header of table column - the package summary
-#: src/info.cc:72 src/locales.cc:203
+#: src/info.cc:102 src/locales.cc:203
 msgid "Description"
 msgstr "설명"
 
-#: src/info.cc:99
+#: src/info.cc:129
 msgid "automatically"
 msgstr "자동으로"
 
-#: src/info.cc:171
+#: src/info.cc:201
 #, boost-format
 msgid "There would be %1% match for '%2%'."
 msgid_plural "There would be %1% matches for '%2%'."
 msgstr[0] "'%2%'에 대해 %1%개가 일치할 것입니다."
 
 #. TranslatorExplanation E.g. "package 'zypper' not found."
-#: src/info.cc:221
+#: src/info.cc:251
 #, c-format, boost-format
 msgid "%s '%s' not found."
 msgstr "%s '%s'을(를) 찾을 수 없습니다."
 
 #. TranslatorExplanation E.g. "Information for package zypper:"
-#: src/info.cc:245
+#: src/info.cc:275
 #, c-format, boost-format
 msgid "Information for %s %s:"
 msgstr "%s %s에 대한 정보:"
 
-#: src/info.cc:327
+#: src/info.cc:335
 msgid "Support Level"
 msgstr "지원 수준"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:330
+#: src/info.cc:338
 msgid "Installed Size"
 msgstr "설치후 크기"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:334 src/info.cc:382 src/info.cc:557 src/utils/misc.cc:328
+#: src/info.cc:342 src/info.cc:392 src/info.cc:556 src/utils/misc.cc:328
 #: src/utils/misc.cc:370
 msgid "Status"
 msgstr "상태"
 
-#: src/info.cc:338 src/info.cc:561
+#: src/info.cc:346 src/info.cc:560
 #, c-format, boost-format
 msgid "out-of-date (version %s installed)"
 msgstr "만료(버전 %s 설치됨)"
 
-#: src/info.cc:340 src/info.cc:563
+#: src/info.cc:348 src/info.cc:562
 msgid "up-to-date"
 msgstr "최신"
 
-#: src/info.cc:343 src/info.cc:566
+#: src/info.cc:351 src/info.cc:565
 msgid "not installed"
 msgstr "설치되지 않음"
+
+#: src/info.cc:355
+msgid "Upstream URL"
+msgstr ""
 
 #. translators: property name; short; used like "Name: value"
 #. translator: Table column header.
 #. Name
-#: src/info.cc:384 src/update.cc:406 src/utils/misc.cc:325
+#: src/info.cc:394 src/update.cc:406 src/utils/misc.cc:325
 #: src/utils/misc.cc:367
 msgid "Category"
 msgstr "범주"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:386 src/utils/misc.cc:326 src/utils/misc.cc:368
+#: src/info.cc:396 src/utils/misc.cc:326 src/utils/misc.cc:368
 msgid "Severity"
 msgstr "심각도"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:388
+#: src/info.cc:398
 msgid "Created On"
 msgstr "제작됨"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:390 src/utils/misc.cc:327 src/utils/misc.cc:369
+#: src/info.cc:400 src/utils/misc.cc:327 src/utils/misc.cc:369
 msgid "Interactive"
 msgstr "대화형"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:425
+#: src/info.cc:435
 msgid "Visible to User"
 msgstr "사용자에게 표시"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:439 src/info.cc:475
+#: src/info.cc:449 src/info.cc:485
 msgid "Contents"
 msgstr "컨텐트"
 
-#: src/info.cc:439
+#: src/info.cc:449
 msgid "(empty)"
 msgstr "(비어 있음)"
 
@@ -5145,94 +5153,94 @@ msgstr "(비어 있음)"
 #. translators: S for 'installed Status'
 #. translators: S for installed Status
 #. TranslatorExplanation S stands for Status
-#: src/info.cc:445 src/info.cc:691 src/locales.cc:199 src/search.cc:46
+#: src/info.cc:455 src/info.cc:690 src/locales.cc:199 src/search.cc:46
 #: src/search.cc:198 src/search.cc:303 src/search.cc:434 src/search.cc:478
 #: src/update.cc:784
 msgid "S"
 msgstr "S"
 
 #. translators: Table column header
-#: src/info.cc:448 src/search.cc:307
+#: src/info.cc:458 src/search.cc:307
 msgid "Dependency"
 msgstr "종속성"
 
 #  tree node string
-#: src/info.cc:453 src/info.cc:467
+#: src/info.cc:463 src/info.cc:477
 msgid "Required"
 msgstr "필요"
 
-#: src/info.cc:458 src/info.cc:467 src/search.cc:243
+#: src/info.cc:468 src/info.cc:477 src/search.cc:243
 msgid "Recommended"
 msgstr "권장됨"
 
-#: src/info.cc:464 src/info.cc:467 src/search.cc:245
+#: src/info.cc:474 src/info.cc:477 src/search.cc:245
 msgid "Suggested"
 msgstr "제안됨"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:534
+#: src/info.cc:533
 msgid "End of Support"
 msgstr "지원 종료"
 
-#: src/info.cc:539
+#: src/info.cc:538
 msgid "unknown"
 msgstr "알 수 없음"
 
 #. translators: %1% is an URL or Path pointing to some document
-#: src/info.cc:544
+#: src/info.cc:543
 #, boost-format
 msgid "See %1%"
 msgstr "%1 확인"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:550
+#: src/info.cc:549
 msgid "Flavor"
 msgstr "특징"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:552 src/search.cc:486
+#: src/info.cc:551 src/search.cc:486
 msgid "Is Base"
 msgstr "기본"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:573 src/info.cc:600
+#: src/info.cc:572 src/info.cc:599
 msgid "Update Repositories"
 msgstr "리포지토리 업데이트"
 
-#: src/info.cc:578
+#: src/info.cc:577
 msgid "Content Id"
 msgstr "컨텐트 ID"
 
-#: src/info.cc:590
+#: src/info.cc:589
 msgid "Provided by enabled repository"
 msgstr "활성화된 리포지토리에서 제공함"
 
-#: src/info.cc:595
+#: src/info.cc:594
 msgid "Not provided by any enabled repository"
 msgstr "활성화된 리포지토리에서 제공하지 않음"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:605
+#: src/info.cc:604
 msgid "CPE Name"
 msgstr "CPE 이름"
 
-#: src/info.cc:610
+#: src/info.cc:609
 msgid "undefined"
 msgstr "정의되지 않음"
 
-#: src/info.cc:612
+#: src/info.cc:611
 msgid "invalid CPE Name"
 msgstr "CPE 이름이 잘못되었습니다."
 
 # src/isdn/complex.ycp:266 src/modem/complex.ycp:207
 # src/provider/complex.ycp:186
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:615
+#: src/info.cc:614
 msgid "Short Name"
 msgstr "짧은 이름"
 
 #. translators: property name; short; used like "Name: value"; is followed by a list of binary packages built from this source package
-#: src/info.cc:701
+#: src/info.cc:700
 msgid "Builds binary package"
 msgstr "바이너리 패키지 빌드"
 
@@ -5245,7 +5253,7 @@ msgstr "요청됨"
 msgid "Fallback"
 msgstr "대체"
 
-#: src/locales.cc:72 src/output/Out.h:26 src/repos.cc:131 src/repos.cc:159
+#: src/locales.cc:72 src/output/Out.h:27 src/repos.cc:131 src/repos.cc:159
 msgid "No"
 msgstr "아니요"
 
@@ -5395,67 +5403,74 @@ msgstr "소스 패키지 %s-%s이(가) 설치되었습니다."
 msgid "Problem installing source package %s-%s:"
 msgstr "소스 패키지 %s-%s을(를) 설치하는 중 문제 발생:"
 
-#: src/output/Out.h:26 src/repos.cc:125 src/repos.cc:153
+#. translator: Shown as result tag in a progress bar: ............[done]
+#. Translator: download progress bar result: ".............[done]"
+#: src/output/Out.cc:122 src/output/OutNormal.cc:334
+#: src/output/OutNormal.cc:337
+msgid "done"
+msgstr "완료"
+
+#. translator: Shown as result tag in a progress bar: .......[attention]
+#: src/output/Out.cc:124
+msgid "attention"
+msgstr ""
+
+#. translator: Shown as result tag in a progress bar: ...........[error]
+#. Translator: download progress bar result: "............[error]"
+#: src/output/Out.cc:126 src/output/OutNormal.cc:331
+#: src/output/OutNormal.cc:337
+msgid "error"
+msgstr "오류"
+
+#: src/output/Out.h:27 src/repos.cc:125 src/repos.cc:153
 msgid "Yes"
 msgstr "예"
 
 #. translator: usually followed by a ' ' and some explanatory text
-#: src/output/Out.h:37
+#: src/output/Out.h:41
 msgid "Note:"
 msgstr "참조:"
 
 #. translator: usually followed by a ' ' and some explanatory text
-#: src/output/Out.h:39
+#: src/output/Out.h:43
 msgid "Warning:"
 msgstr "경고:"
 
 #. translator: usually followed by a ' ' and some explanatory text
-#: src/output/Out.h:41
+#: src/output/Out.h:45
 msgid "Error:"
 msgstr "오류:"
 
-#: src/output/Out.h:43
+#: src/output/Out.h:47
 msgid "Continue?"
 msgstr "계속하시겠습니까?"
 
 #. Since this message will be emitted before we know if the current output is XML or Normal we need to send this message to stderr
 #. to not break scripts that use xml output (bsc#1172925)
-#: src/output/OutNormal.cc:81 src/utils/flags/zyppflags.cc:392
+#: src/output/OutNormal.cc:86 src/utils/flags/zyppflags.cc:392
 msgid "Warning: "
 msgstr "경고: "
 
-#. Translator: download progress bar result: "............[error]"
-#: src/output/OutNormal.cc:222 src/output/OutNormal.cc:227
-#: src/output/OutNormal.cc:333 src/output/OutNormal.cc:339
-msgid "error"
-msgstr "오류"
-
-#. Translator: download progress bar result: ".............[done]"
-#: src/output/OutNormal.cc:224 src/output/OutNormal.cc:227
-#: src/output/OutNormal.cc:336 src/output/OutNormal.cc:339
-msgid "done"
-msgstr "완료"
-
-#: src/output/OutNormal.cc:249 src/output/OutNormal.cc:283
-#: src/output/OutNormal.cc:321
+#: src/output/OutNormal.cc:247 src/output/OutNormal.cc:281
+#: src/output/OutNormal.cc:319
 msgid "Retrieving:"
 msgstr "검색 중:"
 
 # window title for kernel loading (see txt_load_kernel)
-#: src/output/OutNormal.cc:256
+#: src/output/OutNormal.cc:254
 msgid "starting"
 msgstr "시작 중"
 
 #. Translator: download progress bar result: "........[not found]"
-#: src/output/OutNormal.cc:330 src/output/OutNormal.cc:339
+#: src/output/OutNormal.cc:328 src/output/OutNormal.cc:337
 msgid "not found"
 msgstr "찾을 수 없음"
 
-#: src/output/OutNormal.cc:417
+#: src/output/OutNormal.cc:414
 msgid "No help available for this prompt."
 msgstr "이 프롬프트에 사용 가능한 도움말이 없습니다."
 
-#: src/output/OutNormal.cc:434
+#: src/output/OutNormal.cc:431
 msgid "no help available for this option"
 msgstr "이 옵션에 사용 가능한 도움말이 없습니다."
 

@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper.hu\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-13 15:45+0200\n"
+"POT-Creation-Date: 2022-02-23 18:47+0100\n"
 "PO-Revision-Date: 2019-03-21 12:49+0000\n"
 "Last-Translator: Robert Taisz <robert.taisz@emerald.hu>\n"
 "Language-Team: Hungarian <https://l10n.opensuse.org/projects/zypper/master/"
@@ -130,80 +130,80 @@ msgstr "Érvénytelen táblázatstílus: %d."
 msgid " Use an integer number from %d to %d"
 msgstr " Használjon %d és %d közötti egész számot"
 
-#: src/Config.cc:252
+#: src/Config.cc:244
 msgid "The path specified in the --root option must be absolute."
 msgstr ""
 "A --root kapcsoló használatánál abszolút elérési útvonalat kell megadni."
 
 #. translators: --help, -h
-#: src/Config.cc:330
+#: src/Config.cc:322
 msgid "Help."
 msgstr "Súgó."
 
 #. translators: --version, -V
-#: src/Config.cc:339
+#: src/Config.cc:331
 msgid "Output the version number."
 msgstr "A verziószám kiíratása."
 
 #. translators: --promptids
-#: src/Config.cc:351
+#: src/Config.cc:343
 msgid "Output a list of zypper's user prompts."
 msgstr "A Zypper felhasználói kérdéseit tartalmazó lista kiíratása."
 
 #. translators: --config, -c <FILE>
-#: src/Config.cc:364
+#: src/Config.cc:356
 msgid "Use specified config file instead of the default."
 msgstr "A megadott konfigurációs fájl használata az alapértelmezett helyett."
 
-#: src/Config.cc:371
+#: src/Config.cc:363
 msgid "User data string must not contain nonprintable or newline characters!"
 msgstr ""
 "A felhasználóadat nem tartalmazhat nem-nyomtatható vagy újsor karaktereket!"
 
 #. translators: --userdata <STRING>
-#: src/Config.cc:377
+#: src/Config.cc:369
 msgid "User defined transaction id used in history and plugins."
 msgstr ""
 "A felhasználó által meghatározott tranzakcióazonosító, az előzményekben és a "
 "bővítményekben használatos."
 
 #. translators: --quiet, -q
-#: src/Config.cc:385
+#: src/Config.cc:377
 msgid "Suppress normal output, print only error messages."
 msgstr "A normál kimenet elrejtése, csak a hibaüzenetek kiíratása."
 
 #. translators: --verbose, -v
-#: src/Config.cc:393
+#: src/Config.cc:385
 msgid "Increase verbosity."
 msgstr "Nagyobb részletesség."
 
 #. translators: --color / --no-color
-#: src/Config.cc:414
+#: src/Config.cc:406
 msgid "Whether to use colors in output if tty supports it."
 msgstr "Kell-e színeket használni a kimenetben, ha a tty támogatja."
 
 #. translators: --no-abbrev, -A
-#: src/Config.cc:419
+#: src/Config.cc:411
 msgid "Do not abbreviate text in tables."
 msgstr "Ne szerepeljenek rövidítések a táblázatokban."
 
 #. translators: --table-style, -s, %1% denotes the supported range of the integer argument (e.g. "1-11")
-#: src/Config.cc:424
+#: src/Config.cc:416
 #, fuzzy, boost-format
 msgid "Table style (%1%)."
 msgstr "Táblázatstílus (egész szám)."
 
-#: src/Config.cc:428 src/commands/optionsets.cc:284
+#: src/Config.cc:420 src/commands/optionsets.cc:284
 msgid "Entering non-interactive mode."
 msgstr "Belépés a nem interaktív módba."
 
 #. translators: --non-interactive, -n
-#: src/Config.cc:432
+#: src/Config.cc:424
 msgid "Do not ask anything, use default answers automatically."
 msgstr ""
 "Ne kérdezzen semmit, automatikusan használja az alapértelmezett válaszokat."
 
-#: src/Config.cc:437
+#: src/Config.cc:429
 msgid ""
 "Patches having the flag rebootSuggested set will not be treated as "
 "interactive."
@@ -212,7 +212,7 @@ msgstr ""
 "interaktívként lesznek kezelve."
 
 #. translators: --non-interactive-include-reboot-patches
-#: src/Config.cc:441
+#: src/Config.cc:433
 msgid ""
 "Do not treat patches as interactive, which have the rebootSuggested-flag set."
 msgstr ""
@@ -220,17 +220,17 @@ msgstr ""
 "rebootSuggested-flag jelző."
 
 #. translators: --xmlout, -x
-#: src/Config.cc:451
+#: src/Config.cc:443
 msgid "Switch to XML output."
 msgstr "Váltás XML-kimenetre."
 
 #. translators: --ignore-unknown, -i
-#: src/Config.cc:456
+#: src/Config.cc:448
 msgid "Ignore unknown packages."
 msgstr "Az ismeretlen csomagok figyelmen kívül hagyása."
 
 #. translators: --terse, -t
-#: src/Config.cc:467
+#: src/Config.cc:459
 msgid ""
 "Terse output for machine consumption. Implies --no-abbrev and --no-color."
 msgstr ""
@@ -238,44 +238,44 @@ msgstr ""
 "--no-abbrev és --no-color."
 
 #. translators: --reposd-dir, -D <DIR>
-#: src/Config.cc:491
+#: src/Config.cc:483
 msgid "Use alternative repository definition file directory."
 msgstr "Alternatív telepítési forrásleíró fájl könyvtárának használata."
 
 #. translators: --cache-dir, -C <DIR>
-#: src/Config.cc:506
+#: src/Config.cc:498
 msgid "Use alternative directory for all caches."
 msgstr "Alternatív gyorsítótár könyvtárának használata."
 
 #. translators: --raw-cache-dir <DIR>
-#: src/Config.cc:519
+#: src/Config.cc:511
 msgid "Use alternative raw meta-data cache directory."
 msgstr "Alternatív nyers metaadat gyorsítótár könyvtárának használata."
 
 #. translators: --solv-cache-dir <DIR>
-#: src/Config.cc:533
+#: src/Config.cc:525
 msgid "Use alternative solv file cache directory."
 msgstr "Alternatív solv fájl gyorsítótárának használata."
 
 #. translators: --pkg-cache-dir <DIR>
-#: src/Config.cc:547
+#: src/Config.cc:539
 msgid "Use alternative package cache directory."
 msgstr "Alternatív csomag gyorsítótár könyvtárának használata."
 
-#: src/Config.cc:552
+#: src/Config.cc:544
 msgid "Repository Options"
 msgstr "Telepítési forrás beállításai"
 
-#: src/Config.cc:556
+#: src/Config.cc:548
 msgid "Entering 'no-gpg-checks' mode."
 msgstr "Belépés a 'gpg ellenőrzések kihagyása' módba."
 
 #. translators: --no-gpg-checks
-#: src/Config.cc:560
+#: src/Config.cc:552
 msgid "Ignore GPG check failures and continue."
 msgstr "GPG-ellenőrzési hibák figyelmen kívül hagyása és folytatás."
 
-#: src/Config.cc:565
+#: src/Config.cc:557
 #, c-format, boost-format
 msgid ""
 "Turning on '%s'. New repository signing keys will be automatically imported!"
@@ -284,19 +284,19 @@ msgstr ""
 "importálásra kerül!"
 
 #. translators: --gpg-auto-import-keys
-#: src/Config.cc:571
+#: src/Config.cc:563
 msgid "Automatically trust and import new repository signing keys."
 msgstr ""
 "A telepítési források új kulcsainak megbízhatóvá minősítése és importálása "
 "automatikusan."
 
 #. translators: --plus-repo, -p <URI>
-#: src/Config.cc:575
+#: src/Config.cc:567
 msgid "Use an additional repository."
 msgstr "További telepítési forrás használata."
 
 #. translators: --plus-content <TAG>
-#: src/Config.cc:579
+#: src/Config.cc:571
 msgid ""
 "Additionally use disabled repositories providing a specific keyword. Try '--"
 "plus-content debug' to enable repos indicating to provide debug packages."
@@ -306,45 +306,45 @@ msgstr ""
 "telepítési források engedélyezéséhez, amelyek azt állítják, hogy "
 "hibakeresési csomagokat biztosítanak."
 
-#: src/Config.cc:585
+#: src/Config.cc:577
 msgid "Repositories disabled, using the database of installed packages only."
 msgstr ""
 "Telepítési forrás letiltva, csak a telepített csomagok adatbázisát használja."
 
 #. translators: --disable-repositories
-#: src/Config.cc:589
+#: src/Config.cc:581
 msgid "Do not read meta-data from repositories."
 msgstr "Ne olvassa be a metaadatokat a telepítési forrásokból."
 
-#: src/Config.cc:593
+#: src/Config.cc:585
 msgid "Autorefresh disabled."
 msgstr "Automatikus frissítés kikapcsolva."
 
 #. translators: --no-refresh
-#: src/Config.cc:597
+#: src/Config.cc:589
 msgid "Do not refresh the repositories."
 msgstr "Ne frissítse a telepítési forrásokat."
 
-#: src/Config.cc:601
+#: src/Config.cc:593
 msgid "CD/DVD repositories disabled."
 msgstr "CD/DVD telepítési források kikapcsolva."
 
 #. translators: --no-cd
-#: src/Config.cc:605
+#: src/Config.cc:597
 msgid "Ignore CD/DVD repositories."
 msgstr "CD/DVD telepítési források mellőzése."
 
-#: src/Config.cc:609
+#: src/Config.cc:601
 msgid "Remote repositories disabled."
 msgstr "Távoli telepítési források kikapcsolva."
 
 #. translators: --no-remote
-#: src/Config.cc:613
+#: src/Config.cc:605
 msgid "Ignore remote repositories."
 msgstr "Távoli telepítési források mellőzése."
 
 #. translators: --releasever
-#: src/Config.cc:620
+#: src/Config.cc:612
 msgid ""
 "Set the value of $releasever in all .repo files (default: distribution "
 "version)"
@@ -352,43 +352,43 @@ msgstr ""
 "A $releasever beállítása minden .repo fájlban (alapértelmezés: a "
 "disztribúció verziója)"
 
-#: src/Config.cc:624
+#: src/Config.cc:616
 msgid "Target Options"
 msgstr "Cél kapcsolói"
 
 #. translators: --root, -R <DIR>
-#: src/Config.cc:629
+#: src/Config.cc:621
 msgid "Operate on a different root directory."
 msgstr "Működés másik root könyvtárban."
 
 #. translators: --installroot <DIR>
-#: src/Config.cc:635
+#: src/Config.cc:627
 msgid ""
 "Operate on a different root directory, but share repositories with the host."
 msgstr ""
 "Működés másik gyökérkönyvtárban, de a telepítési források megosztása az "
 "állomással."
 
-#: src/Config.cc:641
+#: src/Config.cc:633
 msgid "Ignoring installed resolvables."
 msgstr "Telepített feloldhatók figyelmen kívül hagyása."
 
 #. translators: --disable-system-resolvables
-#: src/Config.cc:644
+#: src/Config.cc:636
 msgid "Do not read installed packages."
 msgstr "Ne olvassa be a telepített csomagokat."
 
-#: src/Config.cc:811
+#: src/Config.cc:803
 msgid "No config file is in use. Can not save options."
 msgstr ""
 "Nincs használatban konfigurációs fájl. Nem lehet menteni a beállításokat."
 
-#: src/Config.cc:822
+#: src/Config.cc:814
 #, boost-format
 msgid "Option '%1%' saved in '%2%'."
 msgstr "A(z) '%1%' beállítás mentve a következő könyvtárban: '%2%'."
 
-#: src/Config.cc:829
+#: src/Config.cc:821
 msgid "Failed to save option."
 msgstr "Nem sikerült a beállítás mentése."
 
@@ -1166,7 +1166,7 @@ msgstr "Elérhető"
 
 #. translators: used as 'tag:' (i.e. followed by ':')
 #. translators: property name; short; used like "Name: value"
-#: src/Summary.cc:1343 src/info.cc:332 src/info.cc:423 src/info.cc:554
+#: src/Summary.cc:1343 src/info.cc:340 src/info.cc:433 src/info.cc:553
 msgid "Installed"
 msgstr "Telepítve"
 
@@ -1374,27 +1374,27 @@ msgstr "A PAckageKit még fut (valószínűleg művelet hajt végre)."
 msgid "Try again?"
 msgstr "Megpróbálja újra?"
 
-#: src/Zypper.cc:248 src/Zypper.cc:715 src/commands/basecommand.cc:287
+#: src/Zypper.cc:248 src/Zypper.cc:707 src/commands/basecommand.cc:287
 msgid "Unexpected exception."
 msgstr "Váratlan kivétel."
 
 #. translators: %s is "help" or "zypper help" depending on whether
 #. zypper shell is running or not
-#: src/Zypper.cc:289
+#: src/Zypper.cc:282
 #, c-format, boost-format
 msgid "Type '%s' to get command-specific help."
 msgstr "A parancsspecifikus súgó használatához írja be a következőt: '%s'."
 
-#: src/Zypper.cc:310
+#: src/Zypper.cc:302
 #, c-format, boost-format
 msgid "Verbosity: %d"
 msgstr "Részletesség: %d"
 
-#: src/Zypper.cc:319
+#: src/Zypper.cc:311
 msgid "Enforced setting"
 msgstr "Kényszerített beállítás"
 
-#: src/Zypper.cc:342
+#: src/Zypper.cc:334
 msgid ""
 "The /etc/products.d/baseproduct symlink is dangling or missing!\n"
 "The link must point to your core products .prod file in /etc/products.d.\n"
@@ -1406,12 +1406,12 @@ msgstr ""
 
 #. TranslatorExplanation The %s is "--plus-repo"
 #. TranslatorExplanation The %s is "--option-name"
-#: src/Zypper.cc:535 src/Zypper.cc:587
+#: src/Zypper.cc:527 src/Zypper.cc:579
 #, c-format, boost-format
 msgid "The %s option has no effect here, ignoring."
 msgstr "Az %s kapcsolónak itt nincs szerepe, ezért figyelmen kívül marad."
 
-#: src/Zypper.cc:658
+#: src/Zypper.cc:650
 msgid "Non-option program arguments: "
 msgstr "Nem kapcsoló jellegű paraméterek: "
 
@@ -1819,17 +1819,17 @@ msgid "The following query does not lock anything:"
 msgstr "A következő lekérdezés nem zárol semmit:"
 
 #. help text for the "Abort, retry, ignore?" prompt for media errors
-#: src/callbacks/media.cc:27
+#: src/callbacks/media.cc:28
 msgid "Skip retrieval of the file and abort current operation."
 msgstr "Újrapróbálkozások kihagyása és a jelenlegi művelet megszakítása."
 
 #. help text for the "Abort, retry, ignore?" prompt for media errors
-#: src/callbacks/media.cc:29
+#: src/callbacks/media.cc:30
 msgid "Try to retrieve the file again."
 msgstr "Fájl letöltésének újrapróbálása."
 
 #. help text for the "Abort, retry, ignore?" prompt for media errors
-#: src/callbacks/media.cc:31
+#: src/callbacks/media.cc:32
 msgid ""
 "Skip retrieval of the file and try to continue with the operation without "
 "the file."
@@ -1838,12 +1838,12 @@ msgstr ""
 "nélkül."
 
 #. help text for the "Abort, retry, ignore?" prompt for media errors
-#: src/callbacks/media.cc:33
+#: src/callbacks/media.cc:34
 msgid "Change current base URI and try retrieving the file again."
 msgstr "URI megváltoztatása és a fájl újraletöltésének megkísérlése."
 
 #. translators: this is a prompt label, will appear as "New URI: "
-#: src/callbacks/media.cc:48
+#: src/callbacks/media.cc:49
 msgid "New URI"
 msgstr "Új URI"
 
@@ -1853,52 +1853,52 @@ msgstr "Új URI"
 #. The 'u' reply means 'Change URI'.
 #. https protocol-specific options:
 #. 's' stands for Disable SSL certificate authority check
-#: src/callbacks/media.cc:76
+#: src/callbacks/media.cc:77
 msgid "a/r/i/u/s"
 msgstr "m/r/l/u/s"
 
-#: src/callbacks/media.cc:78
+#: src/callbacks/media.cc:79
 msgid "Disable SSL certificate authority check and continue."
 msgstr ""
 "SSL-tanúsítvány hitelesítésszolgáltató ellenőrzésének letiltása és folytatás."
 
 #. translators: this is a prompt text
-#: src/callbacks/media.cc:81 src/callbacks/media.cc:173
-#: src/callbacks/media.cc:253 src/utils/prompt.cc:226 src/utils/prompt.cc:313
+#: src/callbacks/media.cc:82 src/callbacks/media.cc:174
+#: src/callbacks/media.cc:254 src/utils/prompt.cc:226 src/utils/prompt.cc:313
 msgid "Abort, retry, ignore?"
 msgstr "Megszakítás, újra, mellőz?"
 
-#: src/callbacks/media.cc:89
+#: src/callbacks/media.cc:90
 msgid "SSL certificate authority check disabled."
 msgstr "SSL-tanúsítvány hitelesítésszolgáltató ellenőrzésének letiltása."
 
-#: src/callbacks/media.cc:106
+#: src/callbacks/media.cc:107
 msgid "No devices detected, cannot eject."
 msgstr "Eszköz nem található, a kiadás nem lehetséges."
 
-#: src/callbacks/media.cc:107
+#: src/callbacks/media.cc:108
 msgid "Try to eject the device manually."
 msgstr "Az eszköz kézi kiadásának megpróbálása."
 
-#: src/callbacks/media.cc:118
+#: src/callbacks/media.cc:119
 msgid "Detected devices:"
 msgstr "Felismert eszközök:"
 
 # cancel button label
-#: src/callbacks/media.cc:133
+#: src/callbacks/media.cc:134
 msgid "Cancel"
 msgstr "Mégsem"
 
-#: src/callbacks/media.cc:135
+#: src/callbacks/media.cc:136
 msgid "Select device to eject."
 msgstr "Kiadni kívánt eszköz kiválasztása."
 
-#: src/callbacks/media.cc:150
+#: src/callbacks/media.cc:151
 msgid "Insert the CD/DVD and press ENTER to continue."
 msgstr "Helyezze be a CD/DVD-t, majd nyomja meg az ENTER billenytyűt."
 
 # window title for kernel loading (see txt_load_kernel)
-#: src/callbacks/media.cc:153
+#: src/callbacks/media.cc:154
 msgid "Retrying..."
 msgstr "Újrapróbálkozás..."
 
@@ -1908,11 +1908,11 @@ msgstr "Újrapróbálkozás..."
 #. The 'u' reply means 'Change URI'.
 #. cd/dvd protocol-specific options:
 #. 'e' stands for Eject medium
-#: src/callbacks/media.cc:168
+#: src/callbacks/media.cc:169
 msgid "a/r/i/u/e"
 msgstr "m/r/l/u/k"
 
-#: src/callbacks/media.cc:170
+#: src/callbacks/media.cc:171
 msgid "Eject medium."
 msgstr "Adathordozó kiadása."
 
@@ -1920,7 +1920,7 @@ msgstr "Adathordozó kiadása."
 #. Try to check what answers does zypper accept (it always accepts y/n at least)
 #. You can also have a look at the regular expressions used to check the answer here:
 #. /usr/lib/locale/<your_locale>/LC_MESSAGES/SYS_LC_MESSAGES
-#: src/callbacks/media.cc:214
+#: src/callbacks/media.cc:215
 #, c-format, boost-format
 msgid ""
 "Please insert medium [%s] #%d and type 'y' to continue or 'n' to cancel the "
@@ -1932,11 +1932,11 @@ msgstr ""
 #. translators: a/r/i/u are replies to the "Abort, retry, ignore?" prompt
 #. Translate the a/r/i part exactly as you did the a/r/i string.
 #. the 'u' reply means 'Change URI'.
-#: src/callbacks/media.cc:249
+#: src/callbacks/media.cc:250
 msgid "a/r/i/u"
 msgstr "m/r/l/u"
 
-#: src/callbacks/media.cc:291
+#: src/callbacks/media.cc:292
 #, c-format, boost-format
 msgid ""
 "Authentication required to access %s. You need to be root to be able to read "
@@ -1945,13 +1945,13 @@ msgstr ""
 "A(z) %s eléréséhez hitelesítés szükséges. A(z) %s hitelesítési adatainak "
 "beolvasásához root felhasználónak kell lennie."
 
-#: src/callbacks/media.cc:313 src/callbacks/media.cc:320
+#: src/callbacks/media.cc:314 src/callbacks/media.cc:321
 msgid "User Name"
 msgstr "Felhasználói név"
 
 # password dialog title
 #. password
-#: src/callbacks/media.cc:328
+#: src/callbacks/media.cc:329
 msgid "Password"
 msgstr "Jelszó"
 
@@ -1989,41 +1989,41 @@ msgid "Accepting package despite the error."
 msgstr "A csomag elfogadása a hiba ellenére."
 
 #. TranslatorExplanation speaking of a script - "Running: script file name (package name, script dir)"
-#: src/callbacks/rpm.h:189
+#: src/callbacks/rpm.h:218
 #, c-format, boost-format
 msgid "Running: %s  (%s, %s)"
 msgstr "Futtatás: %s  (%s, %s)"
 
-#: src/callbacks/rpm.h:272
+#: src/callbacks/rpm.h:307
 #, c-format, boost-format
 msgid "Removal of %s failed:"
 msgstr "%s eltávolítása meghiúsult:"
 
 #. translators: This text is a progress display label e.g. "Removing packagename-x.x.x [42%]"
-#: src/callbacks/rpm.h:312 src/callbacks/rpm.h:574
+#: src/callbacks/rpm.h:350 src/callbacks/rpm.h:631
 #, c-format, boost-format
 msgid "Removing %s"
 msgstr "Eltávolítás: %s"
 
-#: src/callbacks/rpm.h:349
+#: src/callbacks/rpm.h:393
 #, c-format, boost-format
 msgid "Installation of %s failed:"
 msgstr "A(z) %s telepítése meghiúsult:"
 
 # modules/inst_target_part.ycp:676
 #. TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
-#: src/callbacks/rpm.h:389 src/callbacks/rpm.h:640
+#: src/callbacks/rpm.h:436 src/callbacks/rpm.h:692
 #, c-format, boost-format
 msgid "Installing: %s"
 msgstr "%s telepítése"
 
 #. translators: A progressbar label
-#: src/callbacks/rpm.h:408
+#: src/callbacks/rpm.h:455
 msgid "Checking for file conflicts:"
 msgstr "Fájlütközések keresése:"
 
 #. TranslatorExplanation %1%(number of packages); detailed list follows
-#: src/callbacks/rpm.h:459
+#: src/callbacks/rpm.h:506
 #, boost-format
 msgid ""
 "%1% package had to be excluded from file conflicts check because it is not "
@@ -2035,7 +2035,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. TranslatorExplanation %1%(commandline option)
-#: src/callbacks/rpm.h:465
+#: src/callbacks/rpm.h:512
 #, boost-format
 msgid ""
 "Checking for file conflicts requires not installed packages to be downloaded "
@@ -2047,19 +2047,19 @@ msgstr ""
 "zypper kézikönyvében a(z) '%1%' leírása tartalmaz."
 
 #. TranslatorExplanation %1%(number of conflicts); detailed list follows
-#: src/callbacks/rpm.h:475
+#: src/callbacks/rpm.h:522
 #, boost-format
 msgid "Detected %1% file conflict:"
 msgid_plural "Detected %1% file conflicts:"
 msgstr[0] "%1% fájlütközés észlelhető:"
 msgstr[1] "%1% fájlütközés észlelhető:"
 
-#: src/callbacks/rpm.h:483
+#: src/callbacks/rpm.h:530
 msgid "Conflicting files will be replaced."
 msgstr "Az ütközést okozó fájlokat a rendszer lecseréli."
 
 #. TranslatorExplanation Problem description before asking whether to "Continue? [yes/no] (no):"
-#: src/callbacks/rpm.h:489
+#: src/callbacks/rpm.h:536
 msgid ""
 "File conflicts happen when two packages attempt to install files with the "
 "same name but different contents. If you continue, conflicting files will be "
@@ -2070,19 +2070,19 @@ msgstr ""
 "ütközést okozó fájlokat a rendszer lecseréli, a korábbi tartalom elveszik."
 
 #. TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
-#: src/callbacks/rpm.h:711 src/callbacks/rpm.h:718
+#: src/callbacks/rpm.h:759 src/callbacks/rpm.h:766
 #, c-format, boost-format
 msgid "Executing %s script for: %s"
 msgstr ""
 
 #. TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
-#: src/callbacks/rpm.h:725
+#: src/callbacks/rpm.h:773
 #, c-format, boost-format
 msgid "Executing %s script"
 msgstr ""
 
 #. TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
-#: src/callbacks/rpm.h:857
+#: src/callbacks/rpm.h:895
 #, c-format, boost-format
 msgid "Cleaning up: %s"
 msgstr ""
@@ -2634,7 +2634,7 @@ msgstr[1] "%lu zárolás eltávolítva."
 #. translators: name (general header)
 #: src/commands/locks/list.cc:135 src/commands/repos/list.cc:41
 #: src/commands/repos/list.cc:223 src/commands/services/list.cc:105
-#: src/info.cc:58 src/info.cc:446 src/info.cc:692 src/locales.cc:201
+#: src/info.cc:88 src/info.cc:456 src/info.cc:691 src/locales.cc:201
 #: src/search.cc:48 src/search.cc:199 src/search.cc:304 src/search.cc:436
 #: src/search.cc:483 src/update.cc:789 src/utils/misc.cc:324
 msgid "Name"
@@ -2648,13 +2648,13 @@ msgstr "Megfelelések"
 #. translators: type (general header)
 #: src/commands/locks/list.cc:138 src/commands/repos/list.cc:52
 #: src/commands/repos/list.cc:261 src/commands/services/list.cc:114
-#: src/info.cc:447 src/search.cc:50 src/search.cc:202
+#: src/info.cc:457 src/search.cc:50 src/search.cc:202
 msgid "Type"
 msgstr "Típus"
 
 #. translators: property name; short; used like "Name: value"
 #. translators: package's repository (header)
-#: src/commands/locks/list.cc:138 src/info.cc:56 src/search.cc:56
+#: src/commands/locks/list.cc:138 src/info.cc:86 src/search.cc:56
 #: src/search.cc:306 src/search.cc:435 src/search.cc:479 src/update.cc:786
 #: src/utils/misc.cc:323
 msgid "Repository"
@@ -5139,7 +5139,7 @@ msgstr "Felesleges forráscsomagok a letöltés könyvtárban:"
 
 #. translators: table headers
 #. translators: property name; short; used like "Name: value"
-#: src/commands/utils/source-download.cc:318 src/info.cc:345
+#: src/commands/utils/source-download.cc:318 src/info.cc:353
 msgid "Source package"
 msgstr "Forráscsomag"
 
@@ -5298,40 +5298,41 @@ msgstr "%s régebbi, mint %s"
 #. translators: property name; short; used like "Name: value"
 #. translators: Table column header
 #. translators: package version (header)
-#: src/info.cc:60 src/info.cc:693 src/search.cc:52 src/search.cc:305
+#: src/info.cc:90 src/info.cc:692 src/search.cc:52 src/search.cc:305
 #: src/search.cc:437 src/search.cc:484
 msgid "Version"
 msgstr "Verzió"
 
 #. translators: property name; short; used like "Name: value"
 #. translators: package architecture (header)
-#: src/info.cc:62 src/search.cc:54 src/search.cc:438 src/search.cc:485
+#: src/info.cc:92 src/search.cc:54 src/search.cc:438 src/search.cc:485
 #: src/update.cc:795
 msgid "Arch"
 msgstr "Architektúra"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:64
+#: src/info.cc:94
 msgid "Vendor"
 msgstr "Gyártó"
 
 #. translators: property name; short; used like "Name: value"
 #. translators: package summary (header)
-#: src/info.cc:70 src/search.cc:201 src/utils/misc.cc:330 src/utils/misc.cc:372
+#: src/info.cc:100 src/search.cc:201 src/utils/misc.cc:330
+#: src/utils/misc.cc:372
 msgid "Summary"
 msgstr "Összegzés"
 
 #. translators: property name; short; used like "Name: value"
 #. translators: header of table column - the package summary
-#: src/info.cc:72 src/locales.cc:203
+#: src/info.cc:102 src/locales.cc:203
 msgid "Description"
 msgstr "Leírás"
 
-#: src/info.cc:99
+#: src/info.cc:129
 msgid "automatically"
 msgstr "automatikusan"
 
-#: src/info.cc:171
+#: src/info.cc:201
 #, boost-format
 msgid "There would be %1% match for '%2%'."
 msgid_plural "There would be %1% matches for '%2%'."
@@ -5339,50 +5340,54 @@ msgstr[0] "%1% találat lenne a következőhöz: '%2%'."
 msgstr[1] "%1% találat lenne a következőhöz: '%2%'."
 
 #. TranslatorExplanation E.g. "package 'zypper' not found."
-#: src/info.cc:221
+#: src/info.cc:251
 #, c-format, boost-format
 msgid "%s '%s' not found."
 msgstr "A(z) %s '%s' nem található."
 
 #. TranslatorExplanation E.g. "Information for package zypper:"
-#: src/info.cc:245
+#: src/info.cc:275
 #, c-format, boost-format
 msgid "Information for %s %s:"
 msgstr "%s %s információ:"
 
-#: src/info.cc:327
+#: src/info.cc:335
 msgid "Support Level"
 msgstr "Támogatási szint"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:330
+#: src/info.cc:338
 msgid "Installed Size"
 msgstr "Telepített méret"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:334 src/info.cc:382 src/info.cc:557 src/utils/misc.cc:328
+#: src/info.cc:342 src/info.cc:392 src/info.cc:556 src/utils/misc.cc:328
 #: src/utils/misc.cc:370
 msgid "Status"
 msgstr "Állapot"
 
-#: src/info.cc:338 src/info.cc:561
+#: src/info.cc:346 src/info.cc:560
 #, c-format, boost-format
 msgid "out-of-date (version %s installed)"
 msgstr "elavult (%s verziószám telepítve)"
 
-#: src/info.cc:340 src/info.cc:563
+#: src/info.cc:348 src/info.cc:562
 msgid "up-to-date"
 msgstr "naprakész"
 
 # modules/inst_target_part.ycp:676
-#: src/info.cc:343 src/info.cc:566
+#: src/info.cc:351 src/info.cc:565
 msgid "not installed"
 msgstr "nincs telepítve"
+
+#: src/info.cc:355
+msgid "Upstream URL"
+msgstr ""
 
 #. translators: property name; short; used like "Name: value"
 #. translator: Table column header.
 #. Name
-#: src/info.cc:384 src/update.cc:406 src/utils/misc.cc:325
+#: src/info.cc:394 src/update.cc:406 src/utils/misc.cc:325
 #: src/utils/misc.cc:367
 msgid "Category"
 msgstr "Kategória"
@@ -5390,31 +5395,31 @@ msgstr "Kategória"
 # modules/inst_sw_single.ycp:85
 # clients/inst_sw_single.ycp:150
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:386 src/utils/misc.cc:326 src/utils/misc.cc:368
+#: src/info.cc:396 src/utils/misc.cc:326 src/utils/misc.cc:368
 msgid "Severity"
 msgstr "Súlyosság"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:388
+#: src/info.cc:398
 msgid "Created On"
 msgstr "Létrehozás dátuma"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:390 src/utils/misc.cc:327 src/utils/misc.cc:369
+#: src/info.cc:400 src/utils/misc.cc:327 src/utils/misc.cc:369
 msgid "Interactive"
 msgstr "Interaktív"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:425
+#: src/info.cc:435
 msgid "Visible to User"
 msgstr "A felhasználó számára látható"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:439 src/info.cc:475
+#: src/info.cc:449 src/info.cc:485
 msgid "Contents"
 msgstr "Tartalom"
 
-#: src/info.cc:439
+#: src/info.cc:449
 msgid "(empty)"
 msgstr "(üres)"
 
@@ -5423,7 +5428,7 @@ msgstr "(üres)"
 #. translators: S for 'installed Status'
 #. translators: S for installed Status
 #. TranslatorExplanation S stands for Status
-#: src/info.cc:445 src/info.cc:691 src/locales.cc:199 src/search.cc:46
+#: src/info.cc:455 src/info.cc:690 src/locales.cc:199 src/search.cc:46
 #: src/search.cc:198 src/search.cc:303 src/search.cc:434 src/search.cc:478
 #: src/update.cc:784
 msgid "S"
@@ -5431,84 +5436,84 @@ msgstr "S"
 
 # clients/inst_sw_single.ycp:705
 #. translators: Table column header
-#: src/info.cc:448 src/search.cc:307
+#: src/info.cc:458 src/search.cc:307
 msgid "Dependency"
 msgstr "Függőség"
 
-#: src/info.cc:453 src/info.cc:467
+#: src/info.cc:463 src/info.cc:477
 msgid "Required"
 msgstr "Kötelező"
 
-#: src/info.cc:458 src/info.cc:467 src/search.cc:243
+#: src/info.cc:468 src/info.cc:477 src/search.cc:243
 msgid "Recommended"
 msgstr "Javasolt"
 
-#: src/info.cc:464 src/info.cc:467 src/search.cc:245
+#: src/info.cc:474 src/info.cc:477 src/search.cc:245
 msgid "Suggested"
 msgstr "Javasolt"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:534
+#: src/info.cc:533
 msgid "End of Support"
 msgstr "Támogatás vége"
 
-#: src/info.cc:539
+#: src/info.cc:538
 msgid "unknown"
 msgstr "ismeretlen"
 
 #. translators: %1% is an URL or Path pointing to some document
-#: src/info.cc:544
+#: src/info.cc:543
 #, boost-format
 msgid "See %1%"
 msgstr "Lásd: %1%"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:550
+#: src/info.cc:549
 msgid "Flavor"
 msgstr "Ízesítés"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:552 src/search.cc:486
+#: src/info.cc:551 src/search.cc:486
 msgid "Is Base"
 msgstr "Alap"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:573 src/info.cc:600
+#: src/info.cc:572 src/info.cc:599
 msgid "Update Repositories"
 msgstr "Telepítési források frissítése"
 
-#: src/info.cc:578
+#: src/info.cc:577
 msgid "Content Id"
 msgstr "Tartalom azonosítója"
 
-#: src/info.cc:590
+#: src/info.cc:589
 msgid "Provided by enabled repository"
 msgstr "Engedélyezett telepítési forrásból"
 
-#: src/info.cc:595
+#: src/info.cc:594
 msgid "Not provided by any enabled repository"
 msgstr "Nem engedélyezett telepítési forrásból"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:605
+#: src/info.cc:604
 msgid "CPE Name"
 msgstr "CPE neve"
 
-#: src/info.cc:610
+#: src/info.cc:609
 msgid "undefined"
 msgstr "nem definiált"
 
-#: src/info.cc:612
+#: src/info.cc:611
 msgid "invalid CPE Name"
 msgstr "Érvénytelen CPE-név"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:615
+#: src/info.cc:614
 msgid "Short Name"
 msgstr "Rövid név"
 
 #. translators: property name; short; used like "Name: value"; is followed by a list of binary packages built from this source package
-#: src/info.cc:701
+#: src/info.cc:700
 msgid "Builds binary package"
 msgstr "Bináris csomagot készít"
 
@@ -5521,7 +5526,7 @@ msgstr "Kért"
 msgid "Fallback"
 msgstr "Tartalék"
 
-#: src/locales.cc:72 src/output/Out.h:26 src/repos.cc:131 src/repos.cc:159
+#: src/locales.cc:72 src/output/Out.h:27 src/repos.cc:131 src/repos.cc:159
 msgid "No"
 msgstr "Nem"
 
@@ -5675,67 +5680,74 @@ msgstr "A(z) %s-%s forráscsomag telepítése sikeresen befejeződött."
 msgid "Problem installing source package %s-%s:"
 msgstr "Hiba történt a(z) %s-%s forráscsomag telepítése közben:"
 
-#: src/output/Out.h:26 src/repos.cc:125 src/repos.cc:153
+#. translator: Shown as result tag in a progress bar: ............[done]
+#. Translator: download progress bar result: ".............[done]"
+#: src/output/Out.cc:122 src/output/OutNormal.cc:334
+#: src/output/OutNormal.cc:337
+msgid "done"
+msgstr "kész"
+
+#. translator: Shown as result tag in a progress bar: .......[attention]
+#: src/output/Out.cc:124
+msgid "attention"
+msgstr ""
+
+#. translator: Shown as result tag in a progress bar: ...........[error]
+#. Translator: download progress bar result: "............[error]"
+#: src/output/Out.cc:126 src/output/OutNormal.cc:331
+#: src/output/OutNormal.cc:337
+msgid "error"
+msgstr "hiba"
+
+#: src/output/Out.h:27 src/repos.cc:125 src/repos.cc:153
 msgid "Yes"
 msgstr "Igen"
 
 #. translator: usually followed by a ' ' and some explanatory text
-#: src/output/Out.h:37
+#: src/output/Out.h:41
 msgid "Note:"
 msgstr "Megjegyzés:"
 
 #. translator: usually followed by a ' ' and some explanatory text
-#: src/output/Out.h:39
+#: src/output/Out.h:43
 msgid "Warning:"
 msgstr "Figyelmeztetés:"
 
 #. translator: usually followed by a ' ' and some explanatory text
-#: src/output/Out.h:41
+#: src/output/Out.h:45
 msgid "Error:"
 msgstr "Hiba:"
 
-#: src/output/Out.h:43
+#: src/output/Out.h:47
 msgid "Continue?"
 msgstr "Folytatja?"
 
 #. Since this message will be emitted before we know if the current output is XML or Normal we need to send this message to stderr
 #. to not break scripts that use xml output (bsc#1172925)
-#: src/output/OutNormal.cc:81 src/utils/flags/zyppflags.cc:392
+#: src/output/OutNormal.cc:86 src/utils/flags/zyppflags.cc:392
 msgid "Warning: "
 msgstr "Figyelmeztetés: "
 
-#. Translator: download progress bar result: "............[error]"
-#: src/output/OutNormal.cc:222 src/output/OutNormal.cc:227
-#: src/output/OutNormal.cc:333 src/output/OutNormal.cc:339
-msgid "error"
-msgstr "hiba"
-
-#. Translator: download progress bar result: ".............[done]"
-#: src/output/OutNormal.cc:224 src/output/OutNormal.cc:227
-#: src/output/OutNormal.cc:336 src/output/OutNormal.cc:339
-msgid "done"
-msgstr "kész"
-
-#: src/output/OutNormal.cc:249 src/output/OutNormal.cc:283
-#: src/output/OutNormal.cc:321
+#: src/output/OutNormal.cc:247 src/output/OutNormal.cc:281
+#: src/output/OutNormal.cc:319
 msgid "Retrieving:"
 msgstr "Letöltés:"
 
 # window title for kernel loading (see txt_load_kernel)
-#: src/output/OutNormal.cc:256
+#: src/output/OutNormal.cc:254
 msgid "starting"
 msgstr "indítás"
 
 #. Translator: download progress bar result: "........[not found]"
-#: src/output/OutNormal.cc:330 src/output/OutNormal.cc:339
+#: src/output/OutNormal.cc:328 src/output/OutNormal.cc:337
 msgid "not found"
 msgstr "nem található"
 
-#: src/output/OutNormal.cc:417
+#: src/output/OutNormal.cc:414
 msgid "No help available for this prompt."
 msgstr "Ennél a parancssornál nem érhető el a súgó."
 
-#: src/output/OutNormal.cc:434
+#: src/output/OutNormal.cc:431
 msgid "no help available for this option"
 msgstr "ehhez a paraméterhez nem tartozik súgó"
 

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-13 15:45+0200\n"
+"POT-Creation-Date: 2022-02-23 18:47+0100\n"
 "PO-Revision-Date: 2008-11-17 23:32+0700\n"
 "Last-Translator: Thanomsub Noppaburana <donga.nb@gmail.com>\n"
 "Language-Team: Thai <thai-l10n@googlegroups.com>\n"
@@ -114,240 +114,240 @@ msgstr "รูปแบบ %d ของตารางใช้ไม่ได�
 msgid " Use an integer number from %d to %d"
 msgstr ""
 
-#: src/Config.cc:252
+#: src/Config.cc:244
 msgid "The path specified in the --root option must be absolute."
 msgstr "พาธที่ระบุให้กับตัวเลือก --root จะต้องเป็นพาธที่สมบูรณ์"
 
 #. translators: --help, -h
-#: src/Config.cc:330
+#: src/Config.cc:322
 msgid "Help."
 msgstr ""
 
 #. translators: --version, -V
-#: src/Config.cc:339
+#: src/Config.cc:331
 msgid "Output the version number."
 msgstr ""
 
 #. translators: --promptids
-#: src/Config.cc:351
+#: src/Config.cc:343
 msgid "Output a list of zypper's user prompts."
 msgstr ""
 
 #. translators: --config, -c <FILE>
-#: src/Config.cc:364
+#: src/Config.cc:356
 msgid "Use specified config file instead of the default."
 msgstr ""
 
-#: src/Config.cc:371
+#: src/Config.cc:363
 msgid "User data string must not contain nonprintable or newline characters!"
 msgstr ""
 
 #. translators: --userdata <STRING>
-#: src/Config.cc:377
+#: src/Config.cc:369
 msgid "User defined transaction id used in history and plugins."
 msgstr ""
 
 #. translators: --quiet, -q
-#: src/Config.cc:385
+#: src/Config.cc:377
 msgid "Suppress normal output, print only error messages."
 msgstr ""
 
 #. translators: --verbose, -v
-#: src/Config.cc:393
+#: src/Config.cc:385
 msgid "Increase verbosity."
 msgstr ""
 
 #. translators: --color / --no-color
-#: src/Config.cc:414
+#: src/Config.cc:406
 msgid "Whether to use colors in output if tty supports it."
 msgstr ""
 
 #. translators: --no-abbrev, -A
-#: src/Config.cc:419
+#: src/Config.cc:411
 msgid "Do not abbreviate text in tables."
 msgstr ""
 
 #. translators: --table-style, -s, %1% denotes the supported range of the integer argument (e.g. "1-11")
-#: src/Config.cc:424
+#: src/Config.cc:416
 #, boost-format
 msgid "Table style (%1%)."
 msgstr ""
 
-#: src/Config.cc:428 src/commands/optionsets.cc:284
+#: src/Config.cc:420 src/commands/optionsets.cc:284
 msgid "Entering non-interactive mode."
 msgstr "เข้าสู่โหมดโต้ตอบกับผู้ใช้"
 
 #. translators: --non-interactive, -n
-#: src/Config.cc:432
+#: src/Config.cc:424
 msgid "Do not ask anything, use default answers automatically."
 msgstr ""
 
-#: src/Config.cc:437
+#: src/Config.cc:429
 msgid ""
 "Patches having the flag rebootSuggested set will not be treated as "
 "interactive."
 msgstr ""
 
 #. translators: --non-interactive-include-reboot-patches
-#: src/Config.cc:441
+#: src/Config.cc:433
 msgid ""
 "Do not treat patches as interactive, which have the rebootSuggested-flag set."
 msgstr ""
 
 #. translators: --xmlout, -x
-#: src/Config.cc:451
+#: src/Config.cc:443
 msgid "Switch to XML output."
 msgstr ""
 
 #. translators: --ignore-unknown, -i
-#: src/Config.cc:456
+#: src/Config.cc:448
 msgid "Ignore unknown packages."
 msgstr ""
 
 #. translators: --terse, -t
-#: src/Config.cc:467
+#: src/Config.cc:459
 msgid ""
 "Terse output for machine consumption. Implies --no-abbrev and --no-color."
 msgstr ""
 
 #. translators: --reposd-dir, -D <DIR>
-#: src/Config.cc:491
+#: src/Config.cc:483
 msgid "Use alternative repository definition file directory."
 msgstr ""
 
 #. translators: --cache-dir, -C <DIR>
-#: src/Config.cc:506
+#: src/Config.cc:498
 msgid "Use alternative directory for all caches."
 msgstr ""
 
 #. translators: --raw-cache-dir <DIR>
-#: src/Config.cc:519
+#: src/Config.cc:511
 msgid "Use alternative raw meta-data cache directory."
 msgstr ""
 
 #. translators: --solv-cache-dir <DIR>
-#: src/Config.cc:533
+#: src/Config.cc:525
 msgid "Use alternative solv file cache directory."
 msgstr ""
 
 #. translators: --pkg-cache-dir <DIR>
-#: src/Config.cc:547
+#: src/Config.cc:539
 msgid "Use alternative package cache directory."
 msgstr ""
 
-#: src/Config.cc:552
+#: src/Config.cc:544
 msgid "Repository Options"
 msgstr ""
 
-#: src/Config.cc:556
+#: src/Config.cc:548
 msgid "Entering 'no-gpg-checks' mode."
 msgstr "เข้าสู่โหมด 'ไม่ตรวจสอบ-gpg'"
 
 #. translators: --no-gpg-checks
-#: src/Config.cc:560
+#: src/Config.cc:552
 msgid "Ignore GPG check failures and continue."
 msgstr ""
 
-#: src/Config.cc:565
+#: src/Config.cc:557
 #, c-format, boost-format
 msgid ""
 "Turning on '%s'. New repository signing keys will be automatically imported!"
 msgstr ""
 
 #. translators: --gpg-auto-import-keys
-#: src/Config.cc:571
+#: src/Config.cc:563
 msgid "Automatically trust and import new repository signing keys."
 msgstr ""
 
 #. translators: --plus-repo, -p <URI>
-#: src/Config.cc:575
+#: src/Config.cc:567
 msgid "Use an additional repository."
 msgstr ""
 
 #. translators: --plus-content <TAG>
-#: src/Config.cc:579
+#: src/Config.cc:571
 msgid ""
 "Additionally use disabled repositories providing a specific keyword. Try '--"
 "plus-content debug' to enable repos indicating to provide debug packages."
 msgstr ""
 
-#: src/Config.cc:585
+#: src/Config.cc:577
 msgid "Repositories disabled, using the database of installed packages only."
 msgstr "คลังแพกเกจถูกปิดการใช้งาน จะใช้ฐานข้อมูลของแพกเกจที่ถูกติดตั้งไว้แล้วเท่านั้น"
 
 #. translators: --disable-repositories
-#: src/Config.cc:589
+#: src/Config.cc:581
 msgid "Do not read meta-data from repositories."
 msgstr ""
 
-#: src/Config.cc:593
+#: src/Config.cc:585
 msgid "Autorefresh disabled."
 msgstr "การเรียกปรับปรุงใหม่อัตโนมัติ ถูกปิดการใช้งาน"
 
 #. translators: --no-refresh
-#: src/Config.cc:597
+#: src/Config.cc:589
 msgid "Do not refresh the repositories."
 msgstr ""
 
-#: src/Config.cc:601
+#: src/Config.cc:593
 msgid "CD/DVD repositories disabled."
 msgstr "คลังแพกเกจจากแผ่นซีดี/ดีวีดี ถูกปิดการใช้งาน"
 
 #. translators: --no-cd
-#: src/Config.cc:605
+#: src/Config.cc:597
 msgid "Ignore CD/DVD repositories."
 msgstr ""
 
-#: src/Config.cc:609
+#: src/Config.cc:601
 msgid "Remote repositories disabled."
 msgstr "คลังแพกเกจระยะไกล ถูกปิดการใช้งาน"
 
 #. translators: --no-remote
-#: src/Config.cc:613
+#: src/Config.cc:605
 msgid "Ignore remote repositories."
 msgstr ""
 
 #. translators: --releasever
-#: src/Config.cc:620
+#: src/Config.cc:612
 msgid ""
 "Set the value of $releasever in all .repo files (default: distribution "
 "version)"
 msgstr ""
 
-#: src/Config.cc:624
+#: src/Config.cc:616
 msgid "Target Options"
 msgstr "ตัวเลือกของเป้าหมาย"
 
 #. translators: --root, -R <DIR>
-#: src/Config.cc:629
+#: src/Config.cc:621
 msgid "Operate on a different root directory."
 msgstr "ปฏิบัติการในไดเรกทอรีรากที่ต่างออกไป"
 
 #. translators: --installroot <DIR>
-#: src/Config.cc:635
+#: src/Config.cc:627
 msgid ""
 "Operate on a different root directory, but share repositories with the host."
 msgstr ""
 
-#: src/Config.cc:641
+#: src/Config.cc:633
 msgid "Ignoring installed resolvables."
 msgstr "ไม่สนใจการแก้ปัญหาของตัวที่ถูกติดตั้งแล้ว"
 
 #. translators: --disable-system-resolvables
-#: src/Config.cc:644
+#: src/Config.cc:636
 msgid "Do not read installed packages."
 msgstr "ไม่ต้องอ่านข้อมูลแพกเกจที่ติดตั้งไว้แล้ว"
 
-#: src/Config.cc:811
+#: src/Config.cc:803
 msgid "No config file is in use. Can not save options."
 msgstr ""
 
-#: src/Config.cc:822
+#: src/Config.cc:814
 #, boost-format
 msgid "Option '%1%' saved in '%2%'."
 msgstr ""
 
-#: src/Config.cc:829
+#: src/Config.cc:821
 msgid "Failed to save option."
 msgstr ""
 
@@ -1024,7 +1024,7 @@ msgstr "รุ่นที่มีอยู่: %1 (%2)"
 
 #. translators: used as 'tag:' (i.e. followed by ':')
 #. translators: property name; short; used like "Name: value"
-#: src/Summary.cc:1343 src/info.cc:332 src/info.cc:423 src/info.cc:554
+#: src/Summary.cc:1343 src/info.cc:340 src/info.cc:433 src/info.cc:553
 msgid "Installed"
 msgstr "ถูกติดตั้งแล้ว"
 
@@ -1225,27 +1225,27 @@ msgstr ""
 msgid "Try again?"
 msgstr "ลองอีกครั้งหรือไม่ ?"
 
-#: src/Zypper.cc:248 src/Zypper.cc:715 src/commands/basecommand.cc:287
+#: src/Zypper.cc:248 src/Zypper.cc:707 src/commands/basecommand.cc:287
 msgid "Unexpected exception."
 msgstr "เกิดข้อผิดพลาดยกเว้นที่ไม่ได้คาดไว้ "
 
 #. translators: %s is "help" or "zypper help" depending on whether
 #. zypper shell is running or not
-#: src/Zypper.cc:289
+#: src/Zypper.cc:282
 #, c-format, boost-format
 msgid "Type '%s' to get command-specific help."
 msgstr "พิมพ์ '%s' เพื่อเรียกดูความช่วยเหลือของคำสั่งที่ระบุ"
 
-#: src/Zypper.cc:310
+#: src/Zypper.cc:302
 #, c-format, boost-format
 msgid "Verbosity: %d"
 msgstr "แสดงข้อความ: %d"
 
-#: src/Zypper.cc:319
+#: src/Zypper.cc:311
 msgid "Enforced setting"
 msgstr ""
 
-#: src/Zypper.cc:342
+#: src/Zypper.cc:334
 msgid ""
 "The /etc/products.d/baseproduct symlink is dangling or missing!\n"
 "The link must point to your core products .prod file in /etc/products.d.\n"
@@ -1253,12 +1253,12 @@ msgstr ""
 
 #. TranslatorExplanation The %s is "--plus-repo"
 #. TranslatorExplanation The %s is "--option-name"
-#: src/Zypper.cc:535 src/Zypper.cc:587
+#: src/Zypper.cc:527 src/Zypper.cc:579
 #, c-format, boost-format
 msgid "The %s option has no effect here, ignoring."
 msgstr "ตัวเลือก %s ไม่มีผลอะไรที่นี่ ไม่สนใจมัน"
 
-#: src/Zypper.cc:658
+#: src/Zypper.cc:650
 msgid "Non-option program arguments: "
 msgstr "อาร์กิวเมนต์ของโปรแกรมที่ไม่มีตัวเลือกใด: "
 
@@ -1626,29 +1626,29 @@ msgid "The following query does not lock anything:"
 msgstr "การค้นข้อมูลต่อไปนี้จะไม่มีการล็อควัตถุใด ๆ:"
 
 #. help text for the "Abort, retry, ignore?" prompt for media errors
-#: src/callbacks/media.cc:27
+#: src/callbacks/media.cc:28
 msgid "Skip retrieval of the file and abort current operation."
 msgstr ""
 
 #. help text for the "Abort, retry, ignore?" prompt for media errors
-#: src/callbacks/media.cc:29
+#: src/callbacks/media.cc:30
 msgid "Try to retrieve the file again."
 msgstr ""
 
 #. help text for the "Abort, retry, ignore?" prompt for media errors
-#: src/callbacks/media.cc:31
+#: src/callbacks/media.cc:32
 msgid ""
 "Skip retrieval of the file and try to continue with the operation without "
 "the file."
 msgstr ""
 
 #. help text for the "Abort, retry, ignore?" prompt for media errors
-#: src/callbacks/media.cc:33
+#: src/callbacks/media.cc:34
 msgid "Change current base URI and try retrieving the file again."
 msgstr ""
 
 #. translators: this is a prompt label, will appear as "New URI: "
-#: src/callbacks/media.cc:48
+#: src/callbacks/media.cc:49
 #, fuzzy
 msgid "New URI"
 msgstr "ที่อยู่ URI"
@@ -1659,53 +1659,53 @@ msgstr "ที่อยู่ URI"
 #. The 'u' reply means 'Change URI'.
 #. https protocol-specific options:
 #. 's' stands for Disable SSL certificate authority check
-#: src/callbacks/media.cc:76
+#: src/callbacks/media.cc:77
 #, fuzzy
 msgid "a/r/i/u/s"
 msgstr "a/r/i"
 
-#: src/callbacks/media.cc:78
+#: src/callbacks/media.cc:79
 msgid "Disable SSL certificate authority check and continue."
 msgstr ""
 
 #. translators: this is a prompt text
-#: src/callbacks/media.cc:81 src/callbacks/media.cc:173
-#: src/callbacks/media.cc:253 src/utils/prompt.cc:226 src/utils/prompt.cc:313
+#: src/callbacks/media.cc:82 src/callbacks/media.cc:174
+#: src/callbacks/media.cc:254 src/utils/prompt.cc:226 src/utils/prompt.cc:313
 msgid "Abort, retry, ignore?"
 msgstr "ยุติ, ลองใหม่ หรือไม่สนใจ ?"
 
-#: src/callbacks/media.cc:89
+#: src/callbacks/media.cc:90
 msgid "SSL certificate authority check disabled."
 msgstr ""
 
-#: src/callbacks/media.cc:106
+#: src/callbacks/media.cc:107
 msgid "No devices detected, cannot eject."
 msgstr ""
 
-#: src/callbacks/media.cc:107
+#: src/callbacks/media.cc:108
 msgid "Try to eject the device manually."
 msgstr ""
 
-#: src/callbacks/media.cc:118
+#: src/callbacks/media.cc:119
 #, fuzzy
 msgid "Detected devices:"
 msgstr "ตรวจหาอุปกรณ์"
 
-#: src/callbacks/media.cc:133
+#: src/callbacks/media.cc:134
 msgid "Cancel"
 msgstr "ยกเลิก"
 
-#: src/callbacks/media.cc:135
+#: src/callbacks/media.cc:136
 #, fuzzy
 msgid "Select device to eject."
 msgstr "เลือกรายการที่จะแก้ไข"
 
-#: src/callbacks/media.cc:150
+#: src/callbacks/media.cc:151
 #, fuzzy
 msgid "Insert the CD/DVD and press ENTER to continue."
 msgstr "ใส่แผ่นซีดี %1 จากนั้นกดที่ปุ่ม ทำต่อไป"
 
-#: src/callbacks/media.cc:153
+#: src/callbacks/media.cc:154
 #, fuzzy
 msgid "Retrying..."
 msgstr "กำลังรับข้อมูล %1..."
@@ -1716,12 +1716,12 @@ msgstr "กำลังรับข้อมูล %1..."
 #. The 'u' reply means 'Change URI'.
 #. cd/dvd protocol-specific options:
 #. 'e' stands for Eject medium
-#: src/callbacks/media.cc:168
+#: src/callbacks/media.cc:169
 #, fuzzy
 msgid "a/r/i/u/e"
 msgstr "a/r/i"
 
-#: src/callbacks/media.cc:170
+#: src/callbacks/media.cc:171
 msgid "Eject medium."
 msgstr ""
 
@@ -1729,7 +1729,7 @@ msgstr ""
 #. Try to check what answers does zypper accept (it always accepts y/n at least)
 #. You can also have a look at the regular expressions used to check the answer here:
 #. /usr/lib/locale/<your_locale>/LC_MESSAGES/SYS_LC_MESSAGES
-#: src/callbacks/media.cc:214
+#: src/callbacks/media.cc:215
 #, c-format, boost-format
 msgid ""
 "Please insert medium [%s] #%d and type 'y' to continue or 'n' to cancel the "
@@ -1739,24 +1739,24 @@ msgstr "โปรดใส่สื่อ [%s] #%d และพิมพ์ 'y' 
 #. translators: a/r/i/u are replies to the "Abort, retry, ignore?" prompt
 #. Translate the a/r/i part exactly as you did the a/r/i string.
 #. the 'u' reply means 'Change URI'.
-#: src/callbacks/media.cc:249
+#: src/callbacks/media.cc:250
 #, fuzzy
 msgid "a/r/i/u"
 msgstr "a/r/i"
 
-#: src/callbacks/media.cc:291
+#: src/callbacks/media.cc:292
 #, c-format, boost-format
 msgid ""
 "Authentication required to access %s. You need to be root to be able to read "
 "the credentials from %s."
 msgstr ""
 
-#: src/callbacks/media.cc:313 src/callbacks/media.cc:320
+#: src/callbacks/media.cc:314 src/callbacks/media.cc:321
 msgid "User Name"
 msgstr "ชื่อผู้ใช้"
 
 #. password
-#: src/callbacks/media.cc:328
+#: src/callbacks/media.cc:329
 msgid "Password"
 msgstr "รหัสผ่าน"
 
@@ -1795,40 +1795,40 @@ msgid "Accepting package despite the error."
 msgstr ""
 
 #. TranslatorExplanation speaking of a script - "Running: script file name (package name, script dir)"
-#: src/callbacks/rpm.h:189
+#: src/callbacks/rpm.h:218
 #, c-format, boost-format
 msgid "Running: %s  (%s, %s)"
 msgstr "กำลังเรียกใช้: %s  (%s, %s)"
 
-#: src/callbacks/rpm.h:272
+#: src/callbacks/rpm.h:307
 #, c-format, boost-format
 msgid "Removal of %s failed:"
 msgstr "ล้มเหลวในการถอนการติดตั้ง %s:"
 
 #. translators: This text is a progress display label e.g. "Removing packagename-x.x.x [42%]"
-#: src/callbacks/rpm.h:312 src/callbacks/rpm.h:574
+#: src/callbacks/rpm.h:350 src/callbacks/rpm.h:631
 #, c-format, boost-format
 msgid "Removing %s"
 msgstr "กำลังถอนการติดตั้ง %s"
 
-#: src/callbacks/rpm.h:349
+#: src/callbacks/rpm.h:393
 #, c-format, boost-format
 msgid "Installation of %s failed:"
 msgstr "ล้มเหลวในการติดตั้ง %s:"
 
 #. TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
-#: src/callbacks/rpm.h:389 src/callbacks/rpm.h:640
+#: src/callbacks/rpm.h:436 src/callbacks/rpm.h:692
 #, c-format, boost-format
 msgid "Installing: %s"
 msgstr "กำลังติดตั้ง: %s"
 
 #. translators: A progressbar label
-#: src/callbacks/rpm.h:408
+#: src/callbacks/rpm.h:455
 msgid "Checking for file conflicts:"
 msgstr ""
 
 #. TranslatorExplanation %1%(number of packages); detailed list follows
-#: src/callbacks/rpm.h:459
+#: src/callbacks/rpm.h:506
 #, boost-format
 msgid ""
 "%1% package had to be excluded from file conflicts check because it is not "
@@ -1839,7 +1839,7 @@ msgid_plural ""
 msgstr[0] ""
 
 #. TranslatorExplanation %1%(commandline option)
-#: src/callbacks/rpm.h:465
+#: src/callbacks/rpm.h:512
 #, boost-format
 msgid ""
 "Checking for file conflicts requires not installed packages to be downloaded "
@@ -1848,18 +1848,18 @@ msgid ""
 msgstr ""
 
 #. TranslatorExplanation %1%(number of conflicts); detailed list follows
-#: src/callbacks/rpm.h:475
+#: src/callbacks/rpm.h:522
 #, boost-format
 msgid "Detected %1% file conflict:"
 msgid_plural "Detected %1% file conflicts:"
 msgstr[0] ""
 
-#: src/callbacks/rpm.h:483
+#: src/callbacks/rpm.h:530
 msgid "Conflicting files will be replaced."
 msgstr ""
 
 #. TranslatorExplanation Problem description before asking whether to "Continue? [yes/no] (no):"
-#: src/callbacks/rpm.h:489
+#: src/callbacks/rpm.h:536
 msgid ""
 "File conflicts happen when two packages attempt to install files with the "
 "same name but different contents. If you continue, conflicting files will be "
@@ -1867,19 +1867,19 @@ msgid ""
 msgstr ""
 
 #. TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
-#: src/callbacks/rpm.h:711 src/callbacks/rpm.h:718
+#: src/callbacks/rpm.h:759 src/callbacks/rpm.h:766
 #, c-format, boost-format
 msgid "Executing %s script for: %s"
 msgstr ""
 
 #. TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
-#: src/callbacks/rpm.h:725
+#: src/callbacks/rpm.h:773
 #, c-format, boost-format
 msgid "Executing %s script"
 msgstr ""
 
 #. TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
-#: src/callbacks/rpm.h:857
+#: src/callbacks/rpm.h:895
 #, c-format, boost-format
 msgid "Cleaning up: %s"
 msgstr ""
@@ -2375,7 +2375,7 @@ msgstr[0] "เอาออกทั้งหมด"
 #. translators: name (general header)
 #: src/commands/locks/list.cc:135 src/commands/repos/list.cc:41
 #: src/commands/repos/list.cc:223 src/commands/services/list.cc:105
-#: src/info.cc:58 src/info.cc:446 src/info.cc:692 src/locales.cc:201
+#: src/info.cc:88 src/info.cc:456 src/info.cc:691 src/locales.cc:201
 #: src/search.cc:48 src/search.cc:199 src/search.cc:304 src/search.cc:436
 #: src/search.cc:483 src/update.cc:789 src/utils/misc.cc:324
 msgid "Name"
@@ -2390,13 +2390,13 @@ msgstr "แพตช์"
 #. translators: type (general header)
 #: src/commands/locks/list.cc:138 src/commands/repos/list.cc:52
 #: src/commands/repos/list.cc:261 src/commands/services/list.cc:114
-#: src/info.cc:447 src/search.cc:50 src/search.cc:202
+#: src/info.cc:457 src/search.cc:50 src/search.cc:202
 msgid "Type"
 msgstr "ประเภท"
 
 #. translators: property name; short; used like "Name: value"
 #. translators: package's repository (header)
-#: src/commands/locks/list.cc:138 src/info.cc:56 src/search.cc:56
+#: src/commands/locks/list.cc:138 src/info.cc:86 src/search.cc:56
 #: src/search.cc:306 src/search.cc:435 src/search.cc:479 src/update.cc:786
 #: src/utils/misc.cc:323
 msgid "Repository"
@@ -4739,7 +4739,7 @@ msgstr ""
 
 #. translators: table headers
 #. translators: property name; short; used like "Name: value"
-#: src/commands/utils/source-download.cc:318 src/info.cc:345
+#: src/commands/utils/source-download.cc:318 src/info.cc:353
 #, fuzzy
 msgid "Source package"
 msgstr "แพกเกจต้นฉบับ"
@@ -4894,122 +4894,127 @@ msgstr "%s เก่ากว่า %s"
 #. translators: property name; short; used like "Name: value"
 #. translators: Table column header
 #. translators: package version (header)
-#: src/info.cc:60 src/info.cc:693 src/search.cc:52 src/search.cc:305
+#: src/info.cc:90 src/info.cc:692 src/search.cc:52 src/search.cc:305
 #: src/search.cc:437 src/search.cc:484
 msgid "Version"
 msgstr "รุ่น"
 
 #. translators: property name; short; used like "Name: value"
 #. translators: package architecture (header)
-#: src/info.cc:62 src/search.cc:54 src/search.cc:438 src/search.cc:485
+#: src/info.cc:92 src/search.cc:54 src/search.cc:438 src/search.cc:485
 #: src/update.cc:795
 msgid "Arch"
 msgstr "สถาปัตยกรรม"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:64
+#: src/info.cc:94
 msgid "Vendor"
 msgstr "ผู้จัดจำหน่าย"
 
 #. translators: property name; short; used like "Name: value"
 #. translators: package summary (header)
-#: src/info.cc:70 src/search.cc:201 src/utils/misc.cc:330 src/utils/misc.cc:372
+#: src/info.cc:100 src/search.cc:201 src/utils/misc.cc:330
+#: src/utils/misc.cc:372
 msgid "Summary"
 msgstr "สรุป"
 
 #. translators: property name; short; used like "Name: value"
 #. translators: header of table column - the package summary
-#: src/info.cc:72 src/locales.cc:203
+#: src/info.cc:102 src/locales.cc:203
 msgid "Description"
 msgstr "คำอธิบาย"
 
-#: src/info.cc:99
+#: src/info.cc:129
 msgid "automatically"
 msgstr ""
 
-#: src/info.cc:171
+#: src/info.cc:201
 #, boost-format
 msgid "There would be %1% match for '%2%'."
 msgid_plural "There would be %1% matches for '%2%'."
 msgstr[0] ""
 
 #. TranslatorExplanation E.g. "package 'zypper' not found."
-#: src/info.cc:221
+#: src/info.cc:251
 #, c-format, boost-format
 msgid "%s '%s' not found."
 msgstr "ไม่พบ%s '%s'"
 
 #. TranslatorExplanation E.g. "Information for package zypper:"
-#: src/info.cc:245
+#: src/info.cc:275
 #, c-format, boost-format
 msgid "Information for %s %s:"
 msgstr "ข้อมูลของ %s %s:"
 
-#: src/info.cc:327
+#: src/info.cc:335
 #, fuzzy
 msgid "Support Level"
 msgstr "ป้ายชื่อ: %1"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:330
+#: src/info.cc:338
 msgid "Installed Size"
 msgstr "ขนาดเมื่อติดตั้ง"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:334 src/info.cc:382 src/info.cc:557 src/utils/misc.cc:328
+#: src/info.cc:342 src/info.cc:392 src/info.cc:556 src/utils/misc.cc:328
 #: src/utils/misc.cc:370
 msgid "Status"
 msgstr "สถานะ"
 
-#: src/info.cc:338 src/info.cc:561
+#: src/info.cc:346 src/info.cc:560
 #, c-format, boost-format
 msgid "out-of-date (version %s installed)"
 msgstr "เป็นรุ่นเก่า (ติดตั้งรุ่น %s ไว้)"
 
-#: src/info.cc:340 src/info.cc:563
+#: src/info.cc:348 src/info.cc:562
 msgid "up-to-date"
 msgstr "เป็นรุ่นปัจจุบัน"
 
-#: src/info.cc:343 src/info.cc:566
+#: src/info.cc:351 src/info.cc:565
 msgid "not installed"
 msgstr "ยังไม่ถูกติดตั้ง"
+
+#: src/info.cc:355
+msgid "Upstream URL"
+msgstr ""
 
 #. translators: property name; short; used like "Name: value"
 #. translator: Table column header.
 #. Name
-#: src/info.cc:384 src/update.cc:406 src/utils/misc.cc:325
+#: src/info.cc:394 src/update.cc:406 src/utils/misc.cc:325
 #: src/utils/misc.cc:367
 msgid "Category"
 msgstr "หมวดหมู่"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:386 src/utils/misc.cc:326 src/utils/misc.cc:368
+#: src/info.cc:396 src/utils/misc.cc:326 src/utils/misc.cc:368
 #, fuzzy
 msgid "Severity"
 msgstr "ความปลอดภัย"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:388
+#: src/info.cc:398
 msgid "Created On"
 msgstr "สร้างเมื่อ"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:390 src/utils/misc.cc:327 src/utils/misc.cc:369
+#: src/info.cc:400 src/utils/misc.cc:327 src/utils/misc.cc:369
 #, fuzzy
 msgid "Interactive"
 msgstr "การโต้ตอบ: "
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:425
+#: src/info.cc:435
 msgid "Visible to User"
 msgstr ""
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:439 src/info.cc:475
+#: src/info.cc:449 src/info.cc:485
 msgid "Contents"
 msgstr "เนื้อหา"
 
-#: src/info.cc:439
+#: src/info.cc:449
 msgid "(empty)"
 msgstr "(ว่าง)"
 
@@ -5018,98 +5023,98 @@ msgstr "(ว่าง)"
 #. translators: S for 'installed Status'
 #. translators: S for installed Status
 #. TranslatorExplanation S stands for Status
-#: src/info.cc:445 src/info.cc:691 src/locales.cc:199 src/search.cc:46
+#: src/info.cc:455 src/info.cc:690 src/locales.cc:199 src/search.cc:46
 #: src/search.cc:198 src/search.cc:303 src/search.cc:434 src/search.cc:478
 #: src/update.cc:784
 msgid "S"
 msgstr "สถานะ"
 
 #. translators: Table column header
-#: src/info.cc:448 src/search.cc:307
+#: src/info.cc:458 src/search.cc:307
 msgid "Dependency"
 msgstr "ความเกี่ยวพันกัน"
 
-#: src/info.cc:453 src/info.cc:467
+#: src/info.cc:463 src/info.cc:477
 #, fuzzy
 msgid "Required"
 msgstr "ต้องการใช้"
 
-#: src/info.cc:458 src/info.cc:467 src/search.cc:243
+#: src/info.cc:468 src/info.cc:477 src/search.cc:243
 msgid "Recommended"
 msgstr "ที่ถูกแนะนำ"
 
-#: src/info.cc:464 src/info.cc:467 src/search.cc:245
+#: src/info.cc:474 src/info.cc:477 src/search.cc:245
 msgid "Suggested"
 msgstr "ที่ถูกเสนอแนะ"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:534
+#: src/info.cc:533
 msgid "End of Support"
 msgstr ""
 
-#: src/info.cc:539
+#: src/info.cc:538
 msgid "unknown"
 msgstr "ไม่ทราบ"
 
 #. translators: %1% is an URL or Path pointing to some document
-#: src/info.cc:544
+#: src/info.cc:543
 #, boost-format
 msgid "See %1%"
 msgstr ""
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:550
+#: src/info.cc:549
 msgid "Flavor"
 msgstr ""
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:552 src/search.cc:486
+#: src/info.cc:551 src/search.cc:486
 msgid "Is Base"
 msgstr ""
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:573 src/info.cc:600
+#: src/info.cc:572 src/info.cc:599
 #, fuzzy
 msgid "Update Repositories"
 msgstr "คลังแพกเกจที่ระบุ: "
 
-#: src/info.cc:578
+#: src/info.cc:577
 #, fuzzy
 msgid "Content Id"
 msgstr "เนื้อหา"
 
-#: src/info.cc:590
+#: src/info.cc:589
 #, fuzzy
 msgid "Provided by enabled repository"
 msgstr "ทำการข้ามคลังแพกเกจ '%s' ซึ่งถูกปิดการใช้งาน"
 
-#: src/info.cc:595
+#: src/info.cc:594
 #, fuzzy
 msgid "Not provided by any enabled repository"
 msgstr "ไม่พบผลิตภัณฑ์บนคลังแพกเกจ"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:605
+#: src/info.cc:604
 #, fuzzy
 msgid "CPE Name"
 msgstr "ชื่อของแผงวงจร"
 
-#: src/info.cc:610
+#: src/info.cc:609
 msgid "undefined"
 msgstr ""
 
-#: src/info.cc:612
+#: src/info.cc:611
 #, fuzzy
 msgid "invalid CPE Name"
 msgstr "ค่าเวลาใช้งานไม่ได้"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:615
+#: src/info.cc:614
 msgid "Short Name"
 msgstr "ชื่อสั้น"
 
 #. translators: property name; short; used like "Name: value"; is followed by a list of binary packages built from this source package
-#: src/info.cc:701
+#: src/info.cc:700
 msgid "Builds binary package"
 msgstr ""
 
@@ -5122,7 +5127,7 @@ msgstr ""
 msgid "Fallback"
 msgstr ""
 
-#: src/locales.cc:72 src/output/Out.h:26 src/repos.cc:131 src/repos.cc:159
+#: src/locales.cc:72 src/output/Out.h:27 src/repos.cc:131 src/repos.cc:159
 msgid "No"
 msgstr "ไม่ใช่"
 
@@ -5270,69 +5275,76 @@ msgstr "ติดตั้งแพกเกจต้นฉบับ %s-%s เ�
 msgid "Problem installing source package %s-%s:"
 msgstr "เกิดปัญหาในการติดตั้งแพกเกจต้นฉบับ %s-%s:"
 
-#: src/output/Out.h:26 src/repos.cc:125 src/repos.cc:153
+#. translator: Shown as result tag in a progress bar: ............[done]
+#. Translator: download progress bar result: ".............[done]"
+#: src/output/Out.cc:122 src/output/OutNormal.cc:334
+#: src/output/OutNormal.cc:337
+msgid "done"
+msgstr "เสร็จแล้ว"
+
+#. translator: Shown as result tag in a progress bar: .......[attention]
+#: src/output/Out.cc:124
+msgid "attention"
+msgstr ""
+
+#. translator: Shown as result tag in a progress bar: ...........[error]
+#. Translator: download progress bar result: "............[error]"
+#: src/output/Out.cc:126 src/output/OutNormal.cc:331
+#: src/output/OutNormal.cc:337
+msgid "error"
+msgstr "ผิดพลาด"
+
+#: src/output/Out.h:27 src/repos.cc:125 src/repos.cc:153
 msgid "Yes"
 msgstr "ใช่"
 
 #. translator: usually followed by a ' ' and some explanatory text
-#: src/output/Out.h:37
+#: src/output/Out.h:41
 msgid "Note:"
 msgstr ""
 
 #. translator: usually followed by a ' ' and some explanatory text
-#: src/output/Out.h:39
+#: src/output/Out.h:43
 #, fuzzy
 msgid "Warning:"
 msgstr "แจ้งเตือน: "
 
 #. translator: usually followed by a ' ' and some explanatory text
-#: src/output/Out.h:41
+#: src/output/Out.h:45
 #, fuzzy
 msgid "Error:"
 msgstr "ผิดพลาด"
 
-#: src/output/Out.h:43
+#: src/output/Out.h:47
 msgid "Continue?"
 msgstr "ทำต่อไปหรือไม่ ?"
 
 #. Since this message will be emitted before we know if the current output is XML or Normal we need to send this message to stderr
 #. to not break scripts that use xml output (bsc#1172925)
-#: src/output/OutNormal.cc:81 src/utils/flags/zyppflags.cc:392
+#: src/output/OutNormal.cc:86 src/utils/flags/zyppflags.cc:392
 msgid "Warning: "
 msgstr "แจ้งเตือน: "
 
-#. Translator: download progress bar result: "............[error]"
-#: src/output/OutNormal.cc:222 src/output/OutNormal.cc:227
-#: src/output/OutNormal.cc:333 src/output/OutNormal.cc:339
-msgid "error"
-msgstr "ผิดพลาด"
-
-#. Translator: download progress bar result: ".............[done]"
-#: src/output/OutNormal.cc:224 src/output/OutNormal.cc:227
-#: src/output/OutNormal.cc:336 src/output/OutNormal.cc:339
-msgid "done"
-msgstr "เสร็จแล้ว"
-
-#: src/output/OutNormal.cc:249 src/output/OutNormal.cc:283
-#: src/output/OutNormal.cc:321
+#: src/output/OutNormal.cc:247 src/output/OutNormal.cc:281
+#: src/output/OutNormal.cc:319
 msgid "Retrieving:"
 msgstr "กำลังรับข้อมูล:"
 
-#: src/output/OutNormal.cc:256
+#: src/output/OutNormal.cc:254
 msgid "starting"
 msgstr "กำลังเริ่ม"
 
 #. Translator: download progress bar result: "........[not found]"
-#: src/output/OutNormal.cc:330 src/output/OutNormal.cc:339
+#: src/output/OutNormal.cc:328 src/output/OutNormal.cc:337
 #, fuzzy
 msgid "not found"
 msgstr "ไม่พบ"
 
-#: src/output/OutNormal.cc:417
+#: src/output/OutNormal.cc:414
 msgid "No help available for this prompt."
 msgstr "ไม่พบข้อความช่วยเหลือของส่วนนี้"
 
-#: src/output/OutNormal.cc:434
+#: src/output/OutNormal.cc:431
 msgid "no help available for this option"
 msgstr "ไม่พบข้อความช่วยเหลือของตัวเลือกนี้"
 
