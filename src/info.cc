@@ -351,6 +351,8 @@ void printPkgInfo(Zypper & zypper, const ui::Selectable & s , const PrintInfoOpt
       p.lastValue() = _("not installed");
   // translators: property name; short; used like "Name: value"
   p.add( _("Source package"),	package->sourcePkgLongName() );
+  if ( const srd::string & url { package->url() }; not url.empty() )
+    p.add( _("Upstream URL"),	url );
 
   printSummaryDescDeps( theone, p, options_r );
   zypper.out().info( str::Str() << p, Out::QUIET );
