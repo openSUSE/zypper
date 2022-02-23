@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypper.nl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-02-23 18:47+0100\n"
-"PO-Revision-Date: 2021-07-29 12:11+0000\n"
+"PO-Revision-Date: 2022-02-24 01:12+0000\n"
 "Last-Translator: Freek de Kruijf <freek@opensuse.org>\n"
 "Language-Team: Dutch <https://l10n.opensuse.org/projects/zypper/master/nl/>\n"
 "Language: nl\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.7.1\n"
+"X-Generator: Weblate 4.9.1\n"
 
 #: src/Command.cc:93
 msgid "Invalid command"
@@ -4963,6 +4963,8 @@ msgid ""
 "Using zypper subcommands available from elsewhere on your $PATH is disabled "
 "in zypper.conf."
 msgstr ""
+"Gebruik van zypper subcommando's beschikbaar van ergens anders op uw $PATH "
+"is uitgeschakeld in zypper.conf."
 
 #. translators: helptext; %1% is a zypper command
 #: src/commands/subcommand.cc:485
@@ -4986,6 +4988,8 @@ msgid ""
 "Lists available subcommands. Using zypper subcommands found on your $PATH is "
 "disabled in zypper.conf."
 msgstr ""
+"Toont een lijst van beschikbare subcommando's. Gebruik van zypper "
+"subcommando's gevonden op uw $PATH is uitgeschakeld in zypper.conf."
 
 #. Currently no concept how to handle global options and ZYPPlock
 #: src/commands/subcommand.cc:626
@@ -5470,7 +5474,7 @@ msgstr "niet geïnstalleerd"
 
 #: src/info.cc:355
 msgid "Upstream URL"
-msgstr ""
+msgstr "URL van upstream"
 
 #. translators: property name; short; used like "Name: value"
 #. translator: Table column header.
@@ -5775,7 +5779,7 @@ msgstr "gereed"
 #. translator: Shown as result tag in a progress bar: .......[attention]
 #: src/output/Out.cc:124
 msgid "attention"
-msgstr ""
+msgstr "attentie"
 
 #. translator: Shown as result tag in a progress bar: ...........[error]
 #. Translator: download progress bar result: "............[error]"
