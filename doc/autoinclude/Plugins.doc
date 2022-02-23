@@ -22,7 +22,7 @@ This type of plugin receive input reading the standard input, and answer ZYpp wr
 
 \subsection plugin-protocol-stateful Stateful
 
-This type of plugin is called by ZYpp and a conversation using a simple protocol. The protocol is based on STOMP http://stomp.github.com (Streaming Text Orientated Messaging Protocol). Messages (called "frames") look like the following:
+This type of plugin is called by ZYpp and a conversation using a simple protocol. The protocol is based on STOMP https://stomp.github.io (Streaming Text Orientated Messaging Protocol). Messages (called "frames") look like the following:
 
 \verbatim
 COMMAND
