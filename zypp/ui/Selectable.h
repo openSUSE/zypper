@@ -142,7 +142,8 @@ namespace zypp
        * In contrary to \ref candidateObj, this may return no item even if
        * there are available objects. This simply means the best object is
        * already installed, and all available objects violate at least one
-       * update policy.
+       * update policy. Or all available objects are blacklisted (e.g. a PTF)
+       * in which there does not need to be an installed item either.
        * \note Avoids to return blacklisted items.
        */
       PoolItem updateCandidateObj() const;
