@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-14 16:34+0100\n"
+"POT-Creation-Date: 2022-02-24 18:28+0100\n"
 "PO-Revision-Date: 2022-02-17 11:12+0000\n"
 "Last-Translator: Grace Yu <grace.yu@excel-gits.com>\n"
 "Language-Team: Chinese (China) <https://l10n.opensuse.org/projects/libzypp/"
@@ -4179,7 +4179,7 @@ msgstr ""
 " 的文件\n"
 " %3% 冲突"
 
-#: zypp/sat/detail/PoolImpl.cc:197
+#: zypp/sat/detail/PoolImpl.cc:201
 msgid "Can not create sat-pool."
 msgstr "无法创建 sat-pool。"
 
@@ -4358,114 +4358,124 @@ msgid "not installable providers: "
 msgstr "无法安装的提供者： "
 
 #. translator: %1% is the name of a PTF, %2% the name of a patch.
-#: zypp/solver/detail/SATResolver.cc:1252
+#: zypp/solver/detail/SATResolver.cc:1253
 #, boost-format
 msgid "%1% is not yet fully integrated into %2%."
 msgstr "%1% 尚未完全集成到 %2% 中。"
 
-#: zypp/solver/detail/SATResolver.cc:1253
+#: zypp/solver/detail/SATResolver.cc:1254
 msgid ""
 "Typically you want to keep the PTF and choose to not install the maintenance "
 "patches."
 msgstr "通常情况下，您需要保留 PTF 并选择不安装维护补丁。"
 
-#: zypp/solver/detail/SATResolver.cc:1309
+#. translator: %1% is the name of a PTF.
+#: zypp/solver/detail/SATResolver.cc:1259
+#, boost-format
+msgid "The installed %1% blocks the desired action."
+msgstr ""
+
+#: zypp/solver/detail/SATResolver.cc:1260
+msgid "Typically you want to keep the PTF and choose to cancel the action."
+msgstr ""
+
+#: zypp/solver/detail/SATResolver.cc:1316
 #, boost-format
 msgid "remove lock to allow removal of %1%"
 msgstr "移除锁定以允许移除 %1%"
 
-#: zypp/solver/detail/SATResolver.cc:1314
-#: zypp/solver/detail/SATResolver.cc:1352
+#: zypp/solver/detail/SATResolver.cc:1321
+#: zypp/solver/detail/SATResolver.cc:1359
 #, boost-format
 msgid "do not install %1%"
 msgstr "不安装 %1%"
 
-#: zypp/solver/detail/SATResolver.cc:1331
-#: zypp/solver/detail/SATResolver.cc:1373
+#: zypp/solver/detail/SATResolver.cc:1338
+#: zypp/solver/detail/SATResolver.cc:1380
 #, boost-format
 msgid "keep %1%"
 msgstr "保留 %1%"
 
-#: zypp/solver/detail/SATResolver.cc:1336
+#: zypp/solver/detail/SATResolver.cc:1343
 #, boost-format
 msgid "remove lock to allow installation of %1%"
 msgstr "移除锁定以允许安装 %1%"
 
-#: zypp/solver/detail/SATResolver.cc:1387
-#: zypp/solver/detail/SATResolver.cc:1408
+#: zypp/solver/detail/SATResolver.cc:1394
+#: zypp/solver/detail/SATResolver.cc:1415
 msgid "This request will break your system!"
 msgstr "此请求将破坏您的系统！"
 
-#: zypp/solver/detail/SATResolver.cc:1388
-#: zypp/solver/detail/SATResolver.cc:1409
+#: zypp/solver/detail/SATResolver.cc:1395
+#: zypp/solver/detail/SATResolver.cc:1416
 msgid "ignore the warning of a broken system"
 msgstr "忽略损坏系统的警告"
 
-#: zypp/solver/detail/SATResolver.cc:1393
+#: zypp/solver/detail/SATResolver.cc:1400
 #, boost-format
 msgid "do not ask to install a solvable providing %1%"
 msgstr "不询问就安装提供 %1% 的一个解析项"
 
-#: zypp/solver/detail/SATResolver.cc:1415
+#: zypp/solver/detail/SATResolver.cc:1422
 #, boost-format
 msgid "do not ask to delete all solvables providing %1%"
 msgstr "不询问就删除提供 %1% 的所有解析项"
 
-#: zypp/solver/detail/SATResolver.cc:1428
+#: zypp/solver/detail/SATResolver.cc:1435
 #, boost-format
 msgid "do not install most recent version of %1%"
 msgstr "不安装最新版本的 %1%"
 
-#: zypp/solver/detail/SATResolver.cc:1449
+#: zypp/solver/detail/SATResolver.cc:1456
 #, boost-format
 msgid "keep %1% despite the inferior architecture"
 msgstr "即使架构较低，仍保留 %1%"
 
-#: zypp/solver/detail/SATResolver.cc:1454
+#: zypp/solver/detail/SATResolver.cc:1461
 #, boost-format
 msgid "install %1% despite the inferior architecture"
 msgstr "即使架构较低，仍安装 %1%"
 
-#: zypp/solver/detail/SATResolver.cc:1463
+#: zypp/solver/detail/SATResolver.cc:1470
 #, boost-format
 msgid "keep obsolete %1%"
 msgstr "保留淘汰的 %1%"
 
-#: zypp/solver/detail/SATResolver.cc:1468
+#: zypp/solver/detail/SATResolver.cc:1475
 #, boost-format
 msgid "install %1% from excluded repository"
 msgstr "安装来自排除的软件源的 %1%"
 
 #. translator: %1% is a package name
-#: zypp/solver/detail/SATResolver.cc:1482
+#: zypp/solver/detail/SATResolver.cc:1489
 #, boost-format
 msgid "install %1% although it has been retracted"
 msgstr "尽管 %1% 已收回，仍予以安装"
 
 #. translator: %1% is a package name
-#: zypp/solver/detail/SATResolver.cc:1485
+#: zypp/solver/detail/SATResolver.cc:1492
 #, boost-format
 msgid "allow installing the PTF %1%"
 msgstr "允许安装 PTF %1%"
 
 #. translator: %1% is a package name
-#: zypp/solver/detail/SATResolver.cc:1488
+#: zypp/solver/detail/SATResolver.cc:1495
 #, boost-format
 msgid "install %1% although it is blacklisted"
 msgstr "尽管 %1% 已列入黑名单，仍予以安装"
 
-#: zypp/solver/detail/SATResolver.cc:1508
+#: zypp/solver/detail/SATResolver.cc:1515
 #, boost-format
 msgid "downgrade of %1% to %2%"
 msgstr "将 %1% 降级到 %2%"
 
-#: zypp/solver/detail/SATResolver.cc:1515
+#: zypp/solver/detail/SATResolver.cc:1522
 #, boost-format
 msgid "architecture change of %1% to %2%"
 msgstr "架构从 %1% 变为 %2%"
 
 #. FIXME? Actually .ident() must be eq. But the more verbose 'else' isn't bad either.
-#: zypp/solver/detail/SATResolver.cc:1526
+#: zypp/solver/detail/SATResolver.cc:1533
 #, boost-format
 msgid ""
 "install %1% (with vendor change)\n"
@@ -4474,7 +4484,7 @@ msgstr ""
 "安装 %1%（并更改厂商）\n"
 "  %2%  -->  %3%"
 
-#: zypp/solver/detail/SATResolver.cc:1531
+#: zypp/solver/detail/SATResolver.cc:1538
 #, boost-format
 msgid ""
 "install %1% from vendor %2%\n"
@@ -4483,12 +4493,12 @@ msgstr ""
 "由供应商 %2% 安装 %1% 代替\n"
 "由供应商 %4% 安装 %3%"
 
-#: zypp/solver/detail/SATResolver.cc:1540
+#: zypp/solver/detail/SATResolver.cc:1547
 #, boost-format
 msgid "replacement of %1% with %2%"
 msgstr "将 %1% 用 %2% 取代"
 
-#: zypp/solver/detail/SATResolver.cc:1551
+#: zypp/solver/detail/SATResolver.cc:1558
 #, boost-format
 msgid "deinstallation of %1%"
 msgstr "卸载 %1%"

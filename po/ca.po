@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-14 16:34+0100\n"
+"POT-Creation-Date: 2022-02-24 18:28+0100\n"
 "PO-Revision-Date: 2022-02-14 23:12+0000\n"
 "Last-Translator: David Medina <medipas@gmail.com>\n"
 "Language-Team: Catalan <https://l10n.opensuse.org/projects/libzypp/master/ca/"
@@ -4592,7 +4592,7 @@ msgstr ""
 "  de la instal·lació de\n"
 "     %4%"
 
-#: zypp/sat/detail/PoolImpl.cc:197
+#: zypp/sat/detail/PoolImpl.cc:201
 msgid "Can not create sat-pool."
 msgstr "No es pot crear sat-pool."
 
@@ -4786,116 +4786,126 @@ msgid "not installable providers: "
 msgstr "proveïdors no desinstal·lables: "
 
 #. translator: %1% is the name of a PTF, %2% the name of a patch.
-#: zypp/solver/detail/SATResolver.cc:1252
+#: zypp/solver/detail/SATResolver.cc:1253
 #, boost-format
 msgid "%1% is not yet fully integrated into %2%."
 msgstr "%1% encara no s'ha integrat plenament a %2%."
 
-#: zypp/solver/detail/SATResolver.cc:1253
+#: zypp/solver/detail/SATResolver.cc:1254
 msgid ""
 "Typically you want to keep the PTF and choose to not install the maintenance "
 "patches."
 msgstr ""
-"Normalment voleu mantenir el PTF (format de text net) i opteu per no instal·"
-"lar els pedaços de manteniment."
+"Normalment voleu mantenir el PTF (format de text net) i opteu per no "
+"instal·lar els pedaços de manteniment."
 
-#: zypp/solver/detail/SATResolver.cc:1309
+#. translator: %1% is the name of a PTF.
+#: zypp/solver/detail/SATResolver.cc:1259
+#, boost-format
+msgid "The installed %1% blocks the desired action."
+msgstr ""
+
+#: zypp/solver/detail/SATResolver.cc:1260
+msgid "Typically you want to keep the PTF and choose to cancel the action."
+msgstr ""
+
+#: zypp/solver/detail/SATResolver.cc:1316
 #, boost-format
 msgid "remove lock to allow removal of %1%"
 msgstr "suprimeix el bloqueig per permetre la supressió de %1%"
 
-#: zypp/solver/detail/SATResolver.cc:1314
-#: zypp/solver/detail/SATResolver.cc:1352
+#: zypp/solver/detail/SATResolver.cc:1321
+#: zypp/solver/detail/SATResolver.cc:1359
 #, boost-format
 msgid "do not install %1%"
 msgstr "no instal·lis %1%"
 
-#: zypp/solver/detail/SATResolver.cc:1331
-#: zypp/solver/detail/SATResolver.cc:1373
+#: zypp/solver/detail/SATResolver.cc:1338
+#: zypp/solver/detail/SATResolver.cc:1380
 #, boost-format
 msgid "keep %1%"
 msgstr "mantén %1%"
 
-#: zypp/solver/detail/SATResolver.cc:1336
+#: zypp/solver/detail/SATResolver.cc:1343
 #, boost-format
 msgid "remove lock to allow installation of %1%"
 msgstr "suprimeix el bloqueig per permetre la instal·lació de %1%"
 
-#: zypp/solver/detail/SATResolver.cc:1387
-#: zypp/solver/detail/SATResolver.cc:1408
+#: zypp/solver/detail/SATResolver.cc:1394
+#: zypp/solver/detail/SATResolver.cc:1415
 msgid "This request will break your system!"
 msgstr "Aquesta petició trencarà l'estabilitat del sistema!"
 
-#: zypp/solver/detail/SATResolver.cc:1388
-#: zypp/solver/detail/SATResolver.cc:1409
+#: zypp/solver/detail/SATResolver.cc:1395
+#: zypp/solver/detail/SATResolver.cc:1416
 msgid "ignore the warning of a broken system"
 msgstr "ignora l'avís de sistema trencat"
 
-#: zypp/solver/detail/SATResolver.cc:1393
+#: zypp/solver/detail/SATResolver.cc:1400
 #, boost-format
 msgid "do not ask to install a solvable providing %1%"
 msgstr "no preguntis la instal·lació d'un resoluble que proporcioni %1%"
 
-#: zypp/solver/detail/SATResolver.cc:1415
+#: zypp/solver/detail/SATResolver.cc:1422
 #, boost-format
 msgid "do not ask to delete all solvables providing %1%"
 msgstr "no preguntis la supressió de tots els resolubles que proporcionin %1%"
 
-#: zypp/solver/detail/SATResolver.cc:1428
+#: zypp/solver/detail/SATResolver.cc:1435
 #, boost-format
 msgid "do not install most recent version of %1%"
 msgstr "no instal·lis la versió més recent de %1%"
 
-#: zypp/solver/detail/SATResolver.cc:1449
+#: zypp/solver/detail/SATResolver.cc:1456
 #, boost-format
 msgid "keep %1% despite the inferior architecture"
 msgstr "mantén %1% malgrat l'arquitectura inferior"
 
-#: zypp/solver/detail/SATResolver.cc:1454
+#: zypp/solver/detail/SATResolver.cc:1461
 #, boost-format
 msgid "install %1% despite the inferior architecture"
 msgstr "instal·la %1% malgrat l'arquitectura inferior"
 
-#: zypp/solver/detail/SATResolver.cc:1463
+#: zypp/solver/detail/SATResolver.cc:1470
 #, boost-format
 msgid "keep obsolete %1%"
 msgstr "mantén obsolet %1%"
 
-#: zypp/solver/detail/SATResolver.cc:1468
+#: zypp/solver/detail/SATResolver.cc:1475
 #, boost-format
 msgid "install %1% from excluded repository"
 msgstr "instal·la %1% des d'un repositori exclòs"
 
 #. translator: %1% is a package name
-#: zypp/solver/detail/SATResolver.cc:1482
+#: zypp/solver/detail/SATResolver.cc:1489
 #, boost-format
 msgid "install %1% although it has been retracted"
 msgstr "instal·la %1% tot i que ha estat retret"
 
 #. translator: %1% is a package name
-#: zypp/solver/detail/SATResolver.cc:1485
+#: zypp/solver/detail/SATResolver.cc:1492
 #, boost-format
 msgid "allow installing the PTF %1%"
 msgstr "permet instal·lar el PTF (format de text net) %1%"
 
 #. translator: %1% is a package name
-#: zypp/solver/detail/SATResolver.cc:1488
+#: zypp/solver/detail/SATResolver.cc:1495
 #, boost-format
 msgid "install %1% although it is blacklisted"
 msgstr "instal·la %1% tot i que és a la llista negra"
 
-#: zypp/solver/detail/SATResolver.cc:1508
+#: zypp/solver/detail/SATResolver.cc:1515
 #, boost-format
 msgid "downgrade of %1% to %2%"
 msgstr "degradació de %1% a %2%"
 
-#: zypp/solver/detail/SATResolver.cc:1515
+#: zypp/solver/detail/SATResolver.cc:1522
 #, boost-format
 msgid "architecture change of %1% to %2%"
 msgstr "canvi d'arquitectura de %1% a %2%"
 
 #. FIXME? Actually .ident() must be eq. But the more verbose 'else' isn't bad either.
-#: zypp/solver/detail/SATResolver.cc:1526
+#: zypp/solver/detail/SATResolver.cc:1533
 #, boost-format
 msgid ""
 "install %1% (with vendor change)\n"
@@ -4904,7 +4914,7 @@ msgstr ""
 "instal·la %1% (amb canvi de proveïdor)\n"
 "  %2%  -->  %3%"
 
-#: zypp/solver/detail/SATResolver.cc:1531
+#: zypp/solver/detail/SATResolver.cc:1538
 #, boost-format
 msgid ""
 "install %1% from vendor %2%\n"
@@ -4913,12 +4923,12 @@ msgstr ""
 "instal·la %1% del proveïdor %2%\n"
 "  i reemplaça %3% del proveïdor %4%"
 
-#: zypp/solver/detail/SATResolver.cc:1540
+#: zypp/solver/detail/SATResolver.cc:1547
 #, boost-format
 msgid "replacement of %1% with %2%"
 msgstr "reemplaçament de %1% per %2%"
 
-#: zypp/solver/detail/SATResolver.cc:1551
+#: zypp/solver/detail/SATResolver.cc:1558
 #, boost-format
 msgid "deinstallation of %1%"
 msgstr "desinstal·lació de %1%"
