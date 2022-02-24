@@ -14,16 +14,16 @@ msgstr ""
 "Project-Id-Version: zypper.fr\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-02-23 18:47+0100\n"
-"PO-Revision-Date: 2021-09-14 19:11+0000\n"
-"Last-Translator: Lucie Charrier <c.chalu@free.fr>\n"
-"Language-Team: French <https://l10n.opensuse.org/projects/zypper/master/fr/"
-">\n"
+"PO-Revision-Date: 2022-02-24 14:12+0000\n"
+"Last-Translator: Sophie Leroy <sophie@stoquart.com>\n"
+"Language-Team: French <https://l10n.opensuse.org/projects/zypper/master/fr/>"
+"\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 4.7.1\n"
+"X-Generator: Weblate 4.9.1\n"
 
 #: src/Command.cc:93
 msgid "Invalid command"
@@ -2640,8 +2640,8 @@ msgid ""
 msgstr ""
 "LOCKSPEC est formé de '[KIND:]NAME[ OP EDITION]', où NAME (nom) peut "
 "également être un modèle Glob utilisant les caractères génériques * et ?. "
-"Les types non-paquet peuvent avoir leur nom précédé de leur chaîne KIND: (p. "
-"ex. 'patch:foo') ou utiliser l'option de commande --type."
+"Les types non-paquet peuvent avoir leur nom précédé de leur chaîne KIND : ("
+"p. ex. 'patch:foo') ou utiliser l'option de commande --type."
 
 #: src/commands/locks/add.cc:36
 msgid ""
@@ -4958,6 +4958,8 @@ msgid ""
 "Using zypper subcommands available from elsewhere on your $PATH is disabled "
 "in zypper.conf."
 msgstr ""
+"L'utilisation des sous-commandes zypper disponibles à partir d'un autre "
+"endroit de votre $PATH est désactivée dans zypper.conf."
 
 #. translators: helptext; %1% is a zypper command
 #: src/commands/subcommand.cc:485
@@ -4982,6 +4984,8 @@ msgid ""
 "Lists available subcommands. Using zypper subcommands found on your $PATH is "
 "disabled in zypper.conf."
 msgstr ""
+"Répertorie les sous-commandes disponibles. L'utilisation des sous-commandes "
+"zypper trouvées sur votre $PATH est désactivée dans zypper.conf."
 
 #. Currently no concept how to handle global options and ZYPPlock
 #: src/commands/subcommand.cc:626
@@ -5094,7 +5098,7 @@ msgstr ""
 #. translators: Label text; is followed by ': cmdline argument'
 #: src/commands/utils/download.cc:238
 msgid "Argument resolves to no package"
-msgstr "L'argument ne retourne aucun paquet."
+msgstr "L'argument ne retourne aucun paquet"
 
 #: src/commands/utils/download.cc:253 src/solve-commit.cc:1023
 msgid "Nothing to do."
@@ -5127,7 +5131,7 @@ msgstr "Le paquet '%s' n'est pas en cours de téléchargement."
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/utils/licenses.cc:19
 msgid "licenses"
-msgstr "licenses"
+msgstr "licences"
 
 #. translators: command summary: licenses
 #: src/commands/utils/licenses.cc:21
@@ -5476,7 +5480,7 @@ msgstr "non installé"
 
 #: src/info.cc:355
 msgid "Upstream URL"
-msgstr ""
+msgstr "URL en amont"
 
 #. translators: property name; short; used like "Name: value"
 #. translator: Table column header.
@@ -5777,7 +5781,7 @@ msgstr "fait"
 #. translator: Shown as result tag in a progress bar: .......[attention]
 #: src/output/Out.cc:124
 msgid "attention"
-msgstr ""
+msgstr "attention"
 
 #. translator: Shown as result tag in a progress bar: ...........[error]
 #. Translator: download progress bar result: "............[error]"
@@ -5995,7 +5999,7 @@ msgstr ""
 "Cela peut être provoqué par la présence de métadonnées non valides dans le "
 "dépôt ou par un bogue dans l'analyseur de métadonnées. Dans ce dernier cas, "
 "ou dans le doute, créez un rapport de bogues en suivant les instructions "
-"disponibles à l'adresse http://fr.opensuse.org/Zypper/Dépannage."
+"disponibles à l'adresse http://fr.opensuse.org/Zypper/Dépannage"
 
 # TLABEL linuxrc_2002_03_29_0036__117
 #: src/repos.cc:450
@@ -6714,8 +6718,8 @@ msgid ""
 "- use another repository"
 msgstr ""
 "Échec de la vérification de l'intégrité du paquet. Il y a peut-être un "
-"problème avec le support ou le dépôt. Essayez l'une des solutions "
-"suivantes :\n"
+"problème avec le support ou le dépôt. Essayez l'une des solutions suivantes :"
+"\n"
 "\n"
 "- Réessayez la commande précédente.\n"
 "- Rafraîchissez les dépôts via 'zypper refresh'.\n"
