@@ -1234,7 +1234,7 @@ std::string SATResolver::SATproblemRuleInfoString (Id probr, std::string &detail
 
 /////////////////////////////////////////////////////////////////////////
 namespace {
-  /// bsc#1194848 hint on ptf<>patch conflicts
+  /// bsc#1194848 hint on ptf<>patch conflicts or common ptf conflicts
   struct PtfPatchHint
   {
     void notInstallPatch( sat::Solvable slv_r, unsigned solution_r )
@@ -1244,13 +1244,20 @@ namespace {
     { _ptf.push_back( slv_r.ident() ); }
 
     bool applies() const
-    { return not (_ptf.empty() || _patch.empty()); }
+    { return not _ptf.empty(); }
 
     std::string description() const {
+      if ( not _patch.empty() ) {
+        return str::Str()
+        // translator: %1% is the name of a PTF, %2% the name of a patch.
+        << (str::Format( _("%1% is not yet fully integrated into %2%.") ) % printlist(_ptf) % printlist(_patch)) << endl
+        << _("Typically you want to keep the PTF and choose to not install the maintenance patches.");
+      }
+      //else: a common problem due to an installed ptf
       return str::Str()
-      // translator: %1% is the name of a PTF, %2% the name of a patch.
-      << (str::Format( _("%1% is not yet fully integrated into %2%.") ) % printlist(_ptf) % printlist(_patch)) << endl
-      << _("Typically you want to keep the PTF and choose to not install the maintenance patches.");
+      // translator: %1% is the name of a PTF.
+      << (str::Format( _("The installed %1% blocks the desired action.") ) % printlist(_ptf)) << endl
+      << _("Typically you want to keep the PTF and choose to cancel the action.");
     }
   private:
     using StoreType = IdString;
