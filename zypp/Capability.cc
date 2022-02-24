@@ -188,6 +188,7 @@ namespace zypp
                                     const ResKind & kind_r )
     {
       static const Arch srcArch( IdString(ARCH_SRC).asString() );
+      static const Arch nosrcArch( IdString(ARCH_NOSRC).asString() );
       static const std::string srcKindPrefix( ResKind::srcpackage.asString() + ':' );
 
       // check for an embedded 'srcpackage:foo' to be mapped to 'foo' and 'ResKind::srcpackage'.
@@ -203,7 +204,7 @@ namespace zypp
       if ( asep != std::string::npos )
       {
         Arch ext( name_r.substr( asep+1 ) );
-        if ( ext.isBuiltIn() || ext == srcArch )
+        if ( ext.isBuiltIn() || ext == srcArch || ext == nosrcArch )
         {
           arch = ext;
           name.erase( asep );
