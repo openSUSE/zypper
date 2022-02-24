@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-02-24 18:28+0100\n"
-"PO-Revision-Date: 2022-02-15 12:12+0000\n"
+"PO-Revision-Date: 2022-02-25 01:12+0000\n"
 "Last-Translator: Yasuhiko Kamata <belphegor@belbel.or.jp>\n"
 "Language-Team: Japanese <https://l10n.opensuse.org/projects/libzypp/master/"
 "ja/>\n"
@@ -4412,11 +4412,11 @@ msgstr ""
 #: zypp/solver/detail/SATResolver.cc:1259
 #, boost-format
 msgid "The installed %1% blocks the desired action."
-msgstr ""
+msgstr "インストール済みの %1% が処理をブロックしています。"
 
 #: zypp/solver/detail/SATResolver.cc:1260
 msgid "Typically you want to keep the PTF and choose to cancel the action."
-msgstr ""
+msgstr "PTF をそのまま維持し、この処理をキャンセルするのが一般的です。"
 
 #: zypp/solver/detail/SATResolver.cc:1316
 #, boost-format
