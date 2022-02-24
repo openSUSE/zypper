@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Feb 24 13:47:26 CET 2022 - ma@suse.de
+
+- Hint on ptf<>patch resolver conflicts (bsc#1194848)
+- version 17.29.5 (22)
+
+-------------------------------------------------------------------
 Tue Feb  8 10:52:48 CET 2022 - ma@suse.de
 
 - Fix handling of redirected command in-/output (bsc#1195326)
