@@ -117,6 +117,7 @@ namespace mbs
     bool isNL() const			{ return( _wc == L'\n' ); }
     bool isWS() const			{ return( _wc == L' ' ); }
     bool isCH() const			{ return !( atEnd() || isNL() || isWS() ); }
+    bool isSGR() const			{ return not atEnd() && _wc == L'\033'; }
 
     MbsIterator & operator++()
     {
@@ -210,6 +211,28 @@ namespace mbs
 
     wchar_t		_wc;	// result of last ::mbrtowc
     mbstate_t		_mbstate;
+  };
+
+  ///////////////////////////////////////////////////////////////////
+  /// \class MbsIteratorNoSGR
+  /// \brief \ref MbsIterator skipping ANSI SGR
+  ///////////////////////////////////////////////////////////////////
+  struct MbsIteratorNoSGR : public MbsIterator
+  {
+    MbsIteratorNoSGR( boost::string_ref text_r )
+    : MbsIterator( text_r )
+    { skipSGR(); }
+
+    MbsIteratorNoSGR & operator++()
+    {
+      MbsIterator::operator++();
+      skipSGR();
+      return *this;
+    }
+
+  private:
+    void skipSGR()
+    { while ( isSGR() ) MbsIterator::operator++(); }
   };
 
   ///////////////////////////////////////////////////////////////////
