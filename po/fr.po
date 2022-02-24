@@ -20,16 +20,16 @@ msgstr ""
 "Project-Id-Version: zypp.fr\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-02-14 16:34+0100\n"
-"PO-Revision-Date: 2021-04-30 14:57+0000\n"
-"Last-Translator: Guillaume GARDET <guillaume.gardet@opensuse.org>\n"
-"Language-Team: French <https://l10n.opensuse.org/projects/libzypp/master/fr/"
-">\n"
+"PO-Revision-Date: 2022-02-24 13:12+0000\n"
+"Last-Translator: Sophie Leroy <sophie@stoquart.com>\n"
+"Language-Team: French <https://l10n.opensuse.org/projects/libzypp/master/fr/>"
+"\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 4.6\n"
+"X-Generator: Weblate 4.9.1\n"
 
 #: zypp/CountryCode.cc:50
 msgid "Unknown country: "
@@ -4233,31 +4233,31 @@ msgid ""
 "the installed %1% does not belong to a distupgrade repository and must be "
 "replaced"
 msgstr ""
-"le/la %1% installé(e) n'appartient à aucun dépôt de mise à niveau de la "
-"distribution et doit être remplacé(e)"
+"l'élément %1% installé n'appartient à aucun dépôt de mise à niveau de la "
+"distribution et doit être remplacé"
 
 #. just in case
 #: zypp/solver/detail/SATResolver.cc:1091
 #, boost-format
 msgid "the to be installed %1% does not belong to a distupgrade repository"
 msgstr ""
-"le/la %1% à installer n'appartient à aucun dépôt de mise à niveau de la "
+"l'élément %1% à installer n'appartient à aucun dépôt de mise à niveau de la "
 "distribution"
 
 #: zypp/solver/detail/SATResolver.cc:1095
 #, boost-format
 msgid "the installed %1% has inferior architecture"
-msgstr "le/la %1% installé(e) présente une architecture inférieure"
+msgstr "l'élément %1% installé présente une architecture inférieure"
 
 #: zypp/solver/detail/SATResolver.cc:1097
 #, boost-format
 msgid "the to be installed %1% has inferior architecture"
-msgstr "le/la %1% à installer présente une architecture inférieure"
+msgstr "l'élément %1% à installer présente une architecture inférieure"
 
 #: zypp/solver/detail/SATResolver.cc:1100
 #, boost-format
 msgid "problem with the installed %1%"
-msgstr "problème avec le/la %1% installé(e)"
+msgstr "problème avec l'élément %1% installé"
 
 # TLABEL kinternet_2002_02_20_2255__29
 #: zypp/solver/detail/SATResolver.cc:1103
@@ -4300,12 +4300,12 @@ msgstr "%1% n'est pas installable"
 #: zypp/solver/detail/SATResolver.cc:1128
 #, boost-format
 msgid "nothing provides '%1%' needed by the installed %2%"
-msgstr "rien ne fournit '%1%' qui est nécessaire pour le/la %2% installé(e)"
+msgstr "rien ne fournit '%1%' qui est nécessaire pour l'élément %2% installé"
 
 #: zypp/solver/detail/SATResolver.cc:1130
 #, boost-format
 msgid "nothing provides '%1%' needed by the to be installed %2%"
-msgstr "rien ne fournit '%1%' qui est nécessaire pour le/la %2% à installer"
+msgstr "rien ne fournit '%1%' qui est nécessaire pour l'élément %2% à installer"
 
 #: zypp/solver/detail/SATResolver.cc:1133
 #, boost-format
@@ -4316,15 +4316,15 @@ msgstr "impossible d'installer à la fois %1% et %2%"
 #, boost-format
 msgid "the installed %1% conflicts with '%2%' provided by the installed %3%"
 msgstr ""
-"le/la %1% installé(e) est en conflit avec '%2%' fourni par le/la %3% "
-"installé(e)"
+"l'élément %1% installé est en conflit avec '%2%' fourni par l'élément %3% "
+"installé"
 
 #: zypp/solver/detail/SATResolver.cc:1140
 #, boost-format
 msgid ""
 "the installed %1% conflicts with '%2%' provided by the to be installed %3%"
 msgstr ""
-"le/la %1% installé(e) est en conflit avec '%2%' fourni par le/la %3% à "
+"l'élément %1% installé est en conflit avec '%2%' fourni par l'élément %3% à "
 "installer"
 
 #: zypp/solver/detail/SATResolver.cc:1144
@@ -4332,8 +4332,8 @@ msgstr ""
 msgid ""
 "the to be installed %1% conflicts with '%2%' provided by the installed %3%"
 msgstr ""
-"le/la %1% à installer est en conflit avec '%2%' fourni par le/la %3% "
-"installé(e)"
+"l'élément %1% à installer est en conflit avec '%2%' fourni par l'élément %3% "
+"installé"
 
 #: zypp/solver/detail/SATResolver.cc:1146
 #, boost-format
@@ -4341,53 +4341,54 @@ msgid ""
 "the to be installed %1% conflicts with '%2%' provided by the to be installed "
 "%3%"
 msgstr ""
-"le/la %1% à installer est en conflit avec '%2%' fourni par le/la %3% à "
-"installer"
+"l'élément %1% à installer est en conflit avec '%2%' fourni par l'élément %3% "
+"à installer"
 
 #: zypp/solver/detail/SATResolver.cc:1153
 #, boost-format
 msgid "the installed %1% obsoletes '%2%' provided by the installed %3%"
 msgstr ""
-"le/la %1% installé(e) rend obsolète '%2%' fourni par le/la %3% installé(e)"
+"l'élément %1% installé rend obsolète '%2%' fourni par l'élément %3% installé"
 
 #: zypp/solver/detail/SATResolver.cc:1155
 #, boost-format
 msgid "the installed %1% obsoletes '%2%' provided by the to be installed %3%"
 msgstr ""
-"le/la %1% installé(e) rend obsolète '%2%' fourni par le/la %3% à installer"
+"l'élément %1% installé rend obsolète '%2%' fourni par l'élément %3% à "
+"installer"
 
 #: zypp/solver/detail/SATResolver.cc:1159
 #, boost-format
 msgid "the to be installed %1% obsoletes '%2%' provided by the installed %3%"
 msgstr ""
-"le/la %1% à installer rend obsolète '%2%' fourni par le/la %3% installé(e)"
+"l'élément %1% à installer rend obsolète '%2%' fourni par l'élément %3% "
+"installé"
 
 #: zypp/solver/detail/SATResolver.cc:1161
 #, boost-format
 msgid ""
 "the to be installed %1% obsoletes '%2%' provided by the to be installed %3%"
 msgstr ""
-"le/la %1% à installer rend obsolète '%2%' fourni par le/la %3% à installer"
+"l'élément %1% à installer rend obsolète '%2%' fourni par l'élément %3% à "
+"installer"
 
 #: zypp/solver/detail/SATResolver.cc:1166
 #, boost-format
 msgid "the installed %1% conflicts with '%2%' provided by itself"
-msgstr ""
-"le/la %1% installé(e) est en conflit avec '%2%' fourni par lui/elle-même"
+msgstr "l'élément %1% installé est en conflit avec '%2%' fourni par lui-même"
 
 #: zypp/solver/detail/SATResolver.cc:1168
 #, boost-format
 msgid "the to be installed %1% conflicts with '%2%' provided by itself"
-msgstr ""
-"le/la %1% à installer est en conflit avec '%2%' fourni par lui/elle-même"
+msgstr "l'élément %1% à installer est en conflit avec '%2%' fourni par lui-même"
 
 #: zypp/solver/detail/SATResolver.cc:1200
 #, boost-format
 msgid ""
 "the installed %1% requires '%2%', but this requirement cannot be provided"
 msgstr ""
-"le/la %1% installé(e) nécessite '%2%', mais cette condition ne peut pas être "
-"remplie"
+"l'élément %1% installé nécessite '%2%', mais cette condition ne peut pas "
+"être remplie"
 
 #: zypp/solver/detail/SATResolver.cc:1202
 #, boost-format
@@ -4395,8 +4396,8 @@ msgid ""
 "the to be installed %1% requires '%2%', but this requirement cannot be "
 "provided"
 msgstr ""
-"le/la %1% à installer nécessite '%2%', mais cette condition ne peut pas être "
-"remplie"
+"l'élement %1% à installer nécessite '%2%', mais cette condition ne peut pas "
+"être remplie"
 
 #: zypp/solver/detail/SATResolver.cc:1204
 msgid "deleted providers: "
@@ -4418,13 +4419,15 @@ msgstr "fournisseurs non installables : "
 #: zypp/solver/detail/SATResolver.cc:1252
 #, boost-format
 msgid "%1% is not yet fully integrated into %2%."
-msgstr ""
+msgstr "%1% n'est pas totalement intégré dans %2%."
 
 #: zypp/solver/detail/SATResolver.cc:1253
 msgid ""
 "Typically you want to keep the PTF and choose to not install the maintenance "
 "patches."
 msgstr ""
+"Généralement, vous voulez conserver le PTF et choisir de ne pas installer "
+"les correctifs de maintenance."
 
 #: zypp/solver/detail/SATResolver.cc:1309
 #, boost-format
@@ -4538,6 +4541,8 @@ msgid ""
 "install %1% from vendor %2%\n"
 "  replacing %3% from vendor %4%"
 msgstr ""
+"installer %1% du fournisseur %2%\n"
+"en remplaçant %3% du fournisseur %4%"
 
 #: zypp/solver/detail/SATResolver.cc:1540
 #, boost-format
@@ -4598,6 +4603,7 @@ msgstr "Nouveau message de mise à jour"
 #: zypp/target/TargetImpl.cc:2688
 msgid "Executing the transaction failed because of the following problems:"
 msgstr ""
+"L'exécution de la transaction a échoué en raison des problèmes suivants :"
 
 #. TranslatorExplanation after semicolon is error message
 #. TranslatorExplanation the colon is followed by an error message
@@ -4861,11 +4867,11 @@ msgstr "La commande s'est terminée à cause d'une erreur inconnue."
 #: zypp-core/zyppng/io/forkspawnengine.cc:150
 #: zypp-core/zyppng/io/forkspawnengine.cc:392
 msgid "Invalid spawn arguments given."
-msgstr ""
+msgstr "Argument spawn fournis non valides."
 
 #: zypp-core/zyppng/io/forkspawnengine.cc:206
 msgid "Unable to create control pipe."
-msgstr ""
+msgstr "Impossible de créer un pipe de contrôle."
 
 #: zypp-core/zyppng/io/forkspawnengine.cc:272
 #, c-format, boost-format
@@ -4899,22 +4905,22 @@ msgstr "Impossible d'exécuter une commande fork (%s)."
 #: zypp-core/zyppng/io/forkspawnengine.cc:338
 #, c-format, boost-format
 msgid "Can't exec '%s', chdir failed (%s)."
-msgstr ""
+msgstr "Impossible d'exécuter '%s'. La commande chdir a échoué(%s)."
 
 #: zypp-core/zyppng/io/forkspawnengine.cc:341
 #, c-format, boost-format
 msgid "Can't exec '%s', chroot failed (%s)."
-msgstr ""
+msgstr "Impossible d'exécuter '%s'. La commande chroot a échoué (%s)."
 
 #: zypp-core/zyppng/io/forkspawnengine.cc:344
 #, c-format, boost-format
 msgid "Can't exec '%s', exec failed (%s)."
-msgstr ""
+msgstr "Impossible d'exécuter '%s'. La commande exec a échoué (%s)."
 
 #: zypp-core/zyppng/io/forkspawnengine.cc:348
 #, c-format, boost-format
 msgid "Can't exec '%s', unexpected error."
-msgstr ""
+msgstr "Impossible d'exécuter '%s'. Erreur inattendue."
 
 # TLABEL restore_2002_08_07_0216__88
 #: zypp-media/mediaexception.cc:33
