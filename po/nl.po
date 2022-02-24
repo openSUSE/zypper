@@ -16,10 +16,10 @@ msgstr ""
 "Project-Id-Version: zypp.nl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-02-24 18:28+0100\n"
-"PO-Revision-Date: 2022-02-14 23:12+0000\n"
+"PO-Revision-Date: 2022-02-25 01:12+0000\n"
 "Last-Translator: Freek de Kruijf <freek@opensuse.org>\n"
-"Language-Team: Dutch <https://l10n.opensuse.org/projects/libzypp/master/nl/"
-">\n"
+"Language-Team: Dutch <https://l10n.opensuse.org/projects/libzypp/master/nl/>"
+"\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -4427,11 +4427,11 @@ msgstr ""
 #: zypp/solver/detail/SATResolver.cc:1259
 #, boost-format
 msgid "The installed %1% blocks the desired action."
-msgstr ""
+msgstr "De geïnstalleerde %1% blokkeert de gewenste actie."
 
 #: zypp/solver/detail/SATResolver.cc:1260
 msgid "Typically you want to keep the PTF and choose to cancel the action."
-msgstr ""
+msgstr "U wilt typisch de PTF behouden en er voor kiezen de actie te annuleren."
 
 #: zypp/solver/detail/SATResolver.cc:1316
 #, boost-format
