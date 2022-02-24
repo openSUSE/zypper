@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Thu Feb 24 13:48:24 CET 2022 - ma@suse.de
+
+- info: print the packages upstream URL if available (fixes #426)
+- info: Fix SEGV with not installed PTFs (bsc#1196317)
+- Don't prevent less restrictive umasks (bsc#1195999)
+- version 1.14.52
+
+-------------------------------------------------------------------
 Thu Dec 23 16:04:14 CET 2021 - ma@suse.de
 
 - Singletrans: handle fatal and non-fatal script errors properly.
