@@ -297,9 +297,9 @@ void ListReposCmd::printRepoList( Zypper & zypper, const std::list<RepoInfo> & r
     // number
     tr << ColorString( repoGpgCheck._tagColor, str::numstring( i, nindent ) ).str();
     // alias
-    if ( all || showalias ) tr << repo.alias();
+    if ( all || showalias ) tr << ColorString( repoGpgCheck._tagColor, repo.alias() );
     // name
-    if ( all || showname ) tr << repo.name();
+    if ( all || showname ) tr << ColorString( repoGpgCheck._tagColor, repo.name() );
     // enabled?
     tr << repoGpgCheck._enabledYN.str();
     // GPG Check
