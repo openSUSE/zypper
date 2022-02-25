@@ -112,6 +112,7 @@ int main( int argc, char * argv[] )
   filesystem::assert_dir( mroot );
 
   message( "Use archiecture " + march.asString() );
+  base::LogControl::instance().logfile( mroot/"ToolScanRepos.log" );
   TestSetup test( mroot, march );
 
   int ret = 0;
