@@ -36,9 +36,9 @@ void service_list_tr( Zypper & zypper,
     tr << ColorString( repoGpgCheck._tagColor, str::numstring(reponumber) ).str();
 
   // alias
-  tr << srv->alias();
+  tr << ColorString( repoGpgCheck._tagColor, srv->alias() );
   // name
-  tr << srv->name();
+  tr << ColorString( repoGpgCheck._tagColor, srv->name() );
   // enabled?
   tr << repoGpgCheck._enabledYN.str();
   // GPG Check
