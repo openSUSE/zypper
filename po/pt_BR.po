@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-02-23 18:47+0100\n"
-"PO-Revision-Date: 2021-10-20 21:11+0000\n"
+"PO-Revision-Date: 2022-02-27 17:12+0000\n"
 "Last-Translator: Rodrigo Macedo <rmsolucoeseminformatic4@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) <https://l10n.opensuse.org/projects/"
 "zypper/master/pt_BR/>\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 4.8.1\n"
+"X-Generator: Weblate 4.9.1\n"
 "X-Poedit-Language: Portuguese\n"
 "X-Poedit-Country: BRAZIL\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -5393,7 +5393,7 @@ msgstr "não instalado"
 
 #: src/info.cc:355
 msgid "Upstream URL"
-msgstr ""
+msgstr "URL acima"
 
 #. translators: property name; short; used like "Name: value"
 #. translator: Table column header.
@@ -5697,7 +5697,7 @@ msgstr "concluído"
 #. translator: Shown as result tag in a progress bar: .......[attention]
 #: src/output/Out.cc:124
 msgid "attention"
-msgstr ""
+msgstr "atenção"
 
 #. translator: Shown as result tag in a progress bar: ...........[error]
 #. Translator: download progress bar result: "............[error]"
