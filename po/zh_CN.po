@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-02-23 18:47+0100\n"
-"PO-Revision-Date: 2022-02-16 11:12+0000\n"
-"Last-Translator: Grace Yu <grace.yu@excel-gits.com>\n"
+"PO-Revision-Date: 2022-02-27 17:12+0000\n"
+"Last-Translator: Marguerite Su <i@marguerite.su>\n"
 "Language-Team: Chinese (China) <https://l10n.opensuse.org/projects/zypper/"
 "master/zh_CN/>\n"
 "Language: zh_CN\n"
@@ -495,9 +495,7 @@ msgstr ""
 msgid ""
 "There is an update candidate for '%s' from vendor '%s', while the current "
 "vendor is '%s'. Use '%s' to install this candidate."
-msgstr ""
-"有一个用于 ‘%s’ 的更新候选，来自厂家 ‘%s’，但当前厂家是 ‘%s’。可使用 ‘%s’ 安"
-"装该候选。"
+msgstr "有一个 ‘%s’ 的更新候选，来自源 ‘%s’，但当前是来自 ‘%s’。可使用 ‘%s’ 安装该候选。"
 
 #: src/RequestFeedback.cc:132
 #, c-format, boost-format
@@ -957,44 +955,44 @@ msgstr[0] "将改变以下 %d 个应用程序的架构："
 #, c-format, boost-format
 msgid "The following package is going to change vendor:"
 msgid_plural "The following %d packages are going to change vendor:"
-msgstr[0] "将改变以下 %d 个软件包的厂商："
+msgstr[0] "将改变以下 %d 个软件包的来源："
 
 #: src/Summary.cc:1185
 #, c-format, boost-format
 msgid "The following patch is going to change vendor:"
 msgid_plural "The following %d patches are going to change vendor:"
-msgstr[0] "将改变以下 %d 个补丁的厂商："
+msgstr[0] "将改变以下 %d 个补丁的来源："
 
 #: src/Summary.cc:1190
 #, c-format, boost-format
 msgid "The following pattern is going to change vendor:"
 msgid_plural "The following %d patterns are going to change vendor:"
-msgstr[0] "将改变以下 %d 个软件集的厂商："
+msgstr[0] "将改变以下 %d 个软件集的来源："
 
 #: src/Summary.cc:1195
 #, c-format, boost-format
 msgid "The following product is going to change vendor:"
 msgid_plural "The following %d products are going to change vendor:"
-msgstr[0] "将改变以下 %d 个产品的厂商："
+msgstr[0] "将改变以下 %d 个产品的来源："
 
 #: src/Summary.cc:1201
 #, c-format, boost-format
 msgid "The following application is going to change vendor:"
 msgid_plural "The following %d applications are going to change vendor:"
-msgstr[0] "将改变以下 %d 个应用程序的厂商："
+msgstr[0] "将改变以下 %d 个应用程序的来源："
 
 #: src/Summary.cc:1224
 #, c-format, boost-format
 msgid "The following package has no support information from its vendor:"
 msgid_plural ""
 "The following %d packages have no support information from their vendor:"
-msgstr[0] "以下 %d 个软件包没有来自其厂商的支援信息："
+msgstr[0] "以下 %d 个软件包没有来自其出品方的支持信息："
 
 #: src/Summary.cc:1242
 #, c-format, boost-format
 msgid "The following package is not supported by its vendor:"
 msgid_plural "The following %d packages are not supported by their vendor:"
-msgstr[0] "以下 %d 个软件包不被其厂商支持："
+msgstr[0] "以下 %d 个软件包不被其出品方支持："
 
 #: src/Summary.cc:1260
 #, c-format, boost-format
@@ -1141,13 +1139,13 @@ msgstr[0] "个软件包将移除"
 #: src/Summary.cc:1499
 msgid "to change vendor"
 msgid_plural " to change vendor"
-msgstr[0] "个软件包将改变厂商"
+msgstr[0] "个软件包将跨源"
 
 #. translators: this text will be preceded by a number e.g. "5 packages ..."
 #: src/Summary.cc:1502
 msgid "package will change vendor"
 msgid_plural "packages will change vendor"
-msgstr[0] "个软件包将改变厂商"
+msgstr[0] "个软件包将跨源"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
 #: src/Summary.cc:1513
@@ -2174,7 +2172,7 @@ msgstr "静默地安装作为命令行参数给出的未经签名的 rpm 软件�
 msgid ""
 "Install even if the item is already installed (reinstall), downgraded or "
 "changes vendor or architecture."
-msgstr "即使该软件包已安装仍强制安装（重装）， 降级或变更厂商或架构。"
+msgstr "即使该软件包已安装仍强制安装(重装)、降级或变更出品方或架构。"
 
 #. translators: rug related message, shown if
 #. 'zypper in --entire-catalog foorepo someargument' is specified
@@ -4357,7 +4355,7 @@ msgstr "是否允许修改已安装解析项的架构。"
 
 #: src/commands/solveroptionset.cc:92
 msgid "Whether to allow changing the vendor of installed resolvables."
-msgstr "是否允许修改已安装解析项的厂商。"
+msgstr "是否允许修改已安装软件包的出品方。"
 
 #. translators: -u, --clean-deps
 #: src/commands/solveroptionset.cc:116
@@ -4941,7 +4939,7 @@ msgstr "架构"
 #. translators: property name; short; used like "Name: value"
 #: src/info.cc:94
 msgid "Vendor"
-msgstr "厂商"
+msgstr "出品方"
 
 #. translators: property name; short; used like "Name: value"
 #. translators: package summary (header)
@@ -5008,7 +5006,7 @@ msgstr "未安装"
 
 #: src/info.cc:355
 msgid "Upstream URL"
-msgstr ""
+msgstr "上游网址"
 
 #. translators: property name; short; used like "Name: value"
 #. translator: Table column header.
@@ -5305,7 +5303,7 @@ msgstr "完毕"
 #. translator: Shown as result tag in a progress bar: .......[attention]
 #: src/output/Out.cc:124
 msgid "attention"
-msgstr ""
+msgstr "注意"
 
 #. translator: Shown as result tag in a progress bar: ...........[error]
 #. Translator: download progress bar result: "............[error]"
@@ -6135,7 +6133,7 @@ msgstr "切换显示待安装软件包所属软件源。"
 #. translators: help text for 'm' option in the 'Continue?' prompt
 #: src/solve-commit.cc:753
 msgid "Toggle display of package vendor names."
-msgstr "切换显示软件包厂商名称。"
+msgstr "切换显示软件包出品方名称。"
 
 #. translators: help text for 'd' option in the 'Continue?' prompt
 #: src/solve-commit.cc:755
