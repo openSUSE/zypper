@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-02-23 18:47+0100\n"
-"PO-Revision-Date: 2022-02-27 17:12+0000\n"
+"PO-Revision-Date: 2022-02-28 03:12+0000\n"
 "Last-Translator: Marguerite Su <i@marguerite.su>\n"
 "Language-Team: Chinese (China) <https://l10n.opensuse.org/projects/zypper/"
 "master/zh_CN/>\n"
@@ -3832,21 +3832,21 @@ msgstr "搜索建议了搜索字符串内容的软件包。"
 msgid ""
 "Search for all packages that provide any of the provides of the package(s) "
 "matched by the input parameters."
-msgstr "搜索提供与输入参数匹配的任一软件包的所有软件包。"
+msgstr "搜索提供了与所输入参数匹配的软件包所提供的功能的全部软件包。"
 
 #. translators: --requires-pkg
 #: src/commands/search/search.cc:149
 msgid ""
 "Search for all packages that require any of the provides of the package(s) "
 "matched by the input parameters."
-msgstr "搜索需要与输入参数匹配的任一软件包的所有软件包。"
+msgstr "搜索依赖着与所输入参数匹配的软件包提供的功能的全部软件包。"
 
 #. translators: --recommends-pkg
 #: src/commands/search/search.cc:153
 msgid ""
 "Search for all packages that recommend any of the provides of the package(s) "
 "matched by the input parameters."
-msgstr "搜索推荐任何与输入参数匹配的软件包的所有软件包。"
+msgstr "搜索推荐了与所输入参数匹配的软件包提供的功能的全部软件包。"
 
 #. translators: --supplements-pkg
 #: src/commands/search/search.cc:157
