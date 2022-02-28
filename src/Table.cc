@@ -35,6 +35,121 @@ static const char * lines[][3] = {
   { ":", "-", "+" },					///< colon separated values
 };
 
+
+namespace {
+  /// Compare wchar_t case sensitive.
+  inline int wccmp( const wchar_t & l, const wchar_t & r )
+  { return l == r ? 0 : l < r ? -1 : 1; }
+
+  /// Compare wchar_t case insensitive.
+  inline int wccasecmp( const wchar_t & l, const wchar_t & r )
+  { return ::wcsncasecmp( &l, &r, 1 ); }
+
+  /// Whether wchar_t is a Zero digit.
+  inline bool isZero( const wchar_t & ch )
+  { return ch == L'0'; }
+
+  /// Whether wchar_t is a digit.
+  inline bool isDigit( const wchar_t & ch )
+  { return ::iswdigit( ch ); }
+
+  /// Whether both wchar_t are digits.
+  inline bool bothDigits( const wchar_t & l, const wchar_t & r )
+  { return isDigit( l ) && isDigit( r ); }
+
+  /// Whether both wchar_t are no digits.
+  inline bool bothNotDigits( const wchar_t & l, const wchar_t & r )
+  { return not ( isDigit( l ) || isDigit( r ) ); }
+
+  /// Whether both are at the end of the string.
+  inline bool bothAtEnd( const mbs::MbsIteratorNoSGR & lit, const mbs::MbsIteratorNoSGR & rit )
+  { return lit.atEnd() && rit.atEnd(); }
+
+  /// Whether there are one or more trailing Zeros.
+  inline bool skipTrailingZeros( mbs::MbsIteratorNoSGR & it )
+  {
+    if ( isZero( *it ) ) {
+      do { ++it; } while ( isZero( *it ) );
+      return it.atEnd();
+    }
+    return false;
+  }
+
+  /// compare like numbers: longer digit sequence wins, otherwise first difference
+  inline int wcnumcmpValue( mbs::MbsIteratorNoSGR & lit, mbs::MbsIteratorNoSGR & rit )
+  {
+    // PRE: no leading Zeros
+    // POST: if 0(equal) is returned, all digis were skipped
+    int diff = 0;
+    for ( ;; ++lit, ++rit ) {
+      if ( isDigit( *lit ) ) {
+        if ( isDigit( *rit ) ) {
+          if ( not diff && *lit != *rit )
+            diff = *lit < *rit ? -1 : 1;
+        }
+        else
+          return 1;     // DIG !DIG
+      }
+      else {
+        if ( isDigit( *rit ) )
+          return -1;    // !DIG DIG
+        else
+          return diff;  // !DIG !DIG
+      }
+    }
+  }
+} // namespace
+
+int TableRow::Less::defaultStrComp( bool ci_r, const std::string & lhs, const std::string & rhs )
+{
+  auto wcharcmp = &wccmp; // always start with case sensitive compare
+  int nbias = 0;          // remember the 1st difference (in case num compare equal)
+  int cbias = 0;          // remember the 1st difference (in case ci compare equal)
+  int cmp = 0;
+  mbs::MbsIteratorNoSGR lit { lhs };
+  mbs::MbsIteratorNoSGR rit { rhs };
+  while ( true ) {
+
+    // Endgame: tricky: trailing Zeros are ignored, but count as nbias if there is none.
+    if ( lit.atEnd() ) {
+      if ( skipTrailingZeros( rit ) && not nbias ) return -1;
+      return rit.atEnd() ? (nbias ? nbias : cbias) : -1;
+    }
+    if ( rit.atEnd() ) {
+      if ( skipTrailingZeros( lit ) && not nbias ) return 1;
+      return lit.atEnd() ? (nbias ? nbias : cbias) : 1;
+    }
+
+    // num <> num?
+    if ( bothDigits( *lit, *rit ) ) {
+      if ( isZero( *lit ) || isZero( *rit ) ) {
+        int lead = 0; // the more leasing zeros a number has, the less: 001 01 1
+        while ( isZero( *lit ) ) { ++lit; --lead; }
+        while ( isZero( *rit ) ) { ++rit; ++lead; }
+        if ( not nbias && lead )
+          nbias = bothAtEnd( lit, rit ) ? -lead : lead;  // the less trailing zeros, the less: a a0 a00
+      }
+      if ( (cmp = wcnumcmpValue( lit, rit )) )
+        return cmp;
+      continue; // already skipped all digits
+    }
+    else {
+      if ( (cmp = wcharcmp( *lit, *rit )) ) {
+        if ( not cbias ) cbias = cmp; // remember the 1st difference (by wccmp)
+        if ( ci_r ) {
+          if ( (cmp = wccasecmp( *lit, *rit )) )
+            return cmp;
+          wcharcmp = &wccasecmp;
+          ci_r = false;
+        }
+        else
+          return cmp;
+      }
+    }
+    ++lit; ++rit;
+  }
+}
+
 TableRow & TableRow::add( std::string s )
 {
   if ( _translateColumns )
