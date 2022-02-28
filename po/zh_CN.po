@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-02-24 18:28+0100\n"
-"PO-Revision-Date: 2022-02-17 11:12+0000\n"
-"Last-Translator: Grace Yu <grace.yu@excel-gits.com>\n"
+"PO-Revision-Date: 2022-02-28 12:12+0000\n"
+"Last-Translator: Marguerite Su <i@marguerite.su>\n"
 "Language-Team: Chinese (China) <https://l10n.opensuse.org/projects/libzypp/"
 "master/zh_CN/>\n"
 "Language: zh_CN\n"
@@ -4373,11 +4373,11 @@ msgstr "通常情况下，您需要保留 PTF 并选择不安装维护补丁。"
 #: zypp/solver/detail/SATResolver.cc:1259
 #, boost-format
 msgid "The installed %1% blocks the desired action."
-msgstr ""
+msgstr "已安装的 %1% 阻碍了期望进行的操作。"
 
 #: zypp/solver/detail/SATResolver.cc:1260
 msgid "Typically you want to keep the PTF and choose to cancel the action."
-msgstr ""
+msgstr "通常来说您会想要保留该暂时性修复并选择取消该操作。"
 
 #: zypp/solver/detail/SATResolver.cc:1316
 #, boost-format
@@ -4450,13 +4450,13 @@ msgstr "安装来自排除的软件源的 %1%"
 #: zypp/solver/detail/SATResolver.cc:1489
 #, boost-format
 msgid "install %1% although it has been retracted"
-msgstr "尽管 %1% 已收回，仍予以安装"
+msgstr "尽管 %1% 已被维护团队撤回，仍予以安装"
 
 #. translator: %1% is a package name
 #: zypp/solver/detail/SATResolver.cc:1492
 #, boost-format
 msgid "allow installing the PTF %1%"
-msgstr "允许安装 PTF %1%"
+msgstr "允许安装暂时性修复 %1%"
 
 #. translator: %1% is a package name
 #: zypp/solver/detail/SATResolver.cc:1495
