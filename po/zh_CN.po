@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-02-23 18:47+0100\n"
-"PO-Revision-Date: 2022-02-28 03:12+0000\n"
+"PO-Revision-Date: 2022-02-28 07:12+0000\n"
 "Last-Translator: Marguerite Su <i@marguerite.su>\n"
 "Language-Team: Chinese (China) <https://l10n.opensuse.org/projects/zypper/"
 "master/zh_CN/>\n"
@@ -1176,7 +1176,7 @@ msgstr[0] "个源代码包将安装"
 msgid ""
 "Package manager restart required. (Run this command once again after the "
 "update stack got updated)"
-msgstr "需要重启动包管理器（请在更新堆栈获得更新后再次运行此命令）。"
+msgstr "需要重启包管理器。(请在更新堆栈获得更新后再次运行此命令)"
 
 #: src/Summary.cc:1612
 msgid "System reboot required."
@@ -1596,8 +1596,9 @@ msgid ""
 "to unblock using this file on your own risk. Empty input will discard the "
 "file.\n"
 msgstr ""
-"然而若您确信校验码为 '%1%..' 的文件应用于此操作中安全且正确，可输入\n"
-"该校验码的前 4 个字符来使用该文件但风险自负。不输入将丢弃该文件。\n"
+"然而若您确信校验码为 '%1%..' 的文件\n"
+"应用于此操作中安全且正确，\n"
+"可输入该校验码的前 4 个字符来使用该文件但风险自负。不输入将丢弃该文件。\n"
 
 #. translators: A prompt option
 #: src/callbacks/keyring.h:577
@@ -2123,7 +2124,8 @@ msgid ""
 "or similar."
 msgstr ""
 "一款补丁的安装情况完全取决于其依赖关系。\n"
-"因此仅仅是复制文件、数据库记录或其它东西并不代表安装了补丁。"
+"因此仅仅是复制文件、数据库记录或其它东西\n"
+"并不代表安装了补丁。"
 
 #: src/commands/installremove.cc:126
 msgid "Uninstallation of a source package not defined and implemented."
@@ -3853,7 +3855,7 @@ msgstr "搜索推荐了与所输入参数匹配的软件包提供的功能的全
 msgid ""
 "Search for all packages that supplement any of the provides of the "
 "package(s) matched by the input parameters."
-msgstr "搜索补充任何与输入参数匹配的软件包的所有软件包。"
+msgstr "搜索补充了与所输入参数匹配的软件包所提供的功能的全部软件包。"
 
 #. translators: --conflicts-pkg
 #: src/commands/search/search.cc:161
@@ -3874,7 +3876,7 @@ msgstr "搜索会废弃与输入参数匹配的任一软件包的所有软件包
 msgid ""
 "Search for all packages that suggest any of the provides of the package(s) "
 "matched by the input parameters."
-msgstr "搜索建议任何与输入参数匹配的软件包的所有软件包。"
+msgstr "搜索建议了与所输入参数匹配的软件包所提供的功能的全部软件包。"
 
 #. translators: -t, --type <TYPE>
 #: src/commands/search/search.cc:173
