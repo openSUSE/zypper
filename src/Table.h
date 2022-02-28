@@ -139,12 +139,31 @@ auto ColumnIf( bool condition_r, Tif_ && if_r ) -> ctcdetail::ColumnIf<decltype(
 { return { condition_r, std::forward<Tif_>(if_r) }; }
 
 
+namespace table
+{
+  /// Table column styles
+  ///
+  /// \see \ref Column style setter below.
+  /// \code
+  /// th << table::Column( N_("Name"), CStyle::SortCi );
+  /// \endcode
+  enum class CStyle
+  {
+    Default = 0,
+    Edition,      ///< Editions with v-r setparator highlighted
+    SortCi,       ///< String values to be sorted case insensitive
+  };
+}
+
+
 class TableRow
 {
 private:
   std::ostream & dumpDetails( std::ostream & stream, const Table & parent ) const;
 
 public:
+  struct Less; ///< Binary predicate for sorting.
+
   TableRow()
   : _ctxt( ColorContext::DEFAULT )
   {}
@@ -199,68 +218,6 @@ public:
   { _userData = n_r; }
 
   // BinaryPredicate
-  struct Less
-  {
-    std::list<unsigned> _by_columns;
-    Less( std::list<unsigned> by_columns_r ) : _by_columns( std::move(by_columns_r) ) {
-    }
-
-    bool operator()( const TableRow & a_r, const TableRow & b_r ) const
-    {
-      for ( unsigned curr_column : _by_columns ) {
-        int c = compCol( curr_column, a_r, b_r );
-        if ( c > 0 )
-          return false;
-        else if ( c < 0 )
-          return true;
-      }
-      return false;
-    }
-
-    int compCol ( const unsigned curr_column_r, const TableRow & a_r, const TableRow & b_r ) const
-    {
-      bool noL = curr_column_r >= a_r._columns.size();
-      bool noR = curr_column_r >= b_r._columns.size();
-
-      if ( noL || noR ) {
-        if ( noL && noR ) {
-          using csidetail::simpleAnyTypeComp;
-
-          const boost::any &lUserData = a_r.userData();
-          const boost::any &rUserData = b_r.userData();
-
-          if ( lUserData.empty() && !rUserData.empty() )
-            return -1;
-
-          else if ( !lUserData.empty() && rUserData.empty() )
-            return 1;
-
-          else if ( lUserData.empty() && rUserData.empty() )
-            return 0;
-
-          else if ( lUserData.type() != rUserData.type() ) {
-            ZYPP_THROW( zypp::Exception( str::form("Incompatible user types") ) );
-
-          } else if ( lUserData.type() == typeid(SolvableCSI) ) {
-            return simpleAnyTypeComp<SolvableCSI> ( lUserData, rUserData );
-
-          } else if ( lUserData.type() == typeid(std::string) ) {
-            return simpleAnyTypeComp<std::string>( lUserData, rUserData );
-
-          } else if ( lUserData.type() == typeid(unsigned) ) {
-            return simpleAnyTypeComp<unsigned>( lUserData, rUserData );
-
-          } else if ( lUserData.type() == typeid(int) ) {
-            return simpleAnyTypeComp<int>( lUserData, rUserData );
-
-          }
-          ZYPP_THROW( zypp::Exception( str::form("Unsupported user types") ) );
-        } else
-          return ( noL && ! noR ? -1 : ! noL && noR ?  1 : 0);
-      }
-      return ( a_r._columns[curr_column_r] < b_r._columns[curr_column_r] ? -1 : a_r._columns[curr_column_r] > b_r._columns[curr_column_r] ?  1 : 0 );
-    }
-  };
 
   const container & columns() const
   { return _translateColumns ? _translatedColumns : _columns; }
@@ -314,10 +271,24 @@ template<class Tif_> TableRow & operator<<( TableRow & tr, ctcdetail::ColumnIf<T
 { if ( val._ifelse ) tr.add( val._ifelse() ); return tr; }
 
 
-class TableHeader : public TableRow {
+class TableHeader : public TableRow
+{
 public:
+  using CStyle = table::CStyle;
   //! Constructor. Reserve place for c columns.
   TableHeader (unsigned c = 0): TableRow (c) { _translateColumns = true; }
+
+  bool hasStyle( unsigned c, CStyle s ) const
+  { return _cstyle.count(c) && _cstyle.at(c) == s; }
+
+  CStyle style( unsigned c ) const
+  { return _cstyle.count(c) ? _cstyle.at(c) : CStyle::Default; }
+
+  void style( unsigned c, CStyle s )
+  { _cstyle[c] = s; }
+
+private:
+  std::map<unsigned,CStyle> _cstyle;  ///< Column style and sort hints are remembered here
 };
 
 /** \relates TableHeader  Add column. */
@@ -329,6 +300,80 @@ template<class Tp_>
 TableHeader && operator<<( TableHeader && th, Tp_ && val )
 { return std::move( th << std::forward<Tp_>(val) ); }
 
+
+struct TableRow::Less
+{
+  using SortParam = std::tuple<unsigned,bool>;  ///< column and sortCI
+
+  Less( const TableHeader & header_r, std::list<unsigned> by_columns_r )
+  {
+    for ( unsigned curr_column : by_columns_r ) {
+      _by_columns.push_back( SortParam( curr_column, header_r.hasStyle( curr_column, table::CStyle::SortCi ) ) );
+    }
+  }
+
+  bool operator()( const TableRow & a_r, const TableRow & b_r ) const
+  {
+    int c = 0;
+    for ( const SortParam sortParam : _by_columns ) {
+      if ( (c = compCol( sortParam, a_r, b_r )) )
+        return c < 0;
+    }
+    return false;
+  }
+
+private:
+  int compCol( const SortParam & sortParam_r, const TableRow & a_r, const TableRow & b_r ) const
+  {
+    const auto & [ byColumn, sortCI ] { sortParam_r };
+    bool noL = byColumn >= a_r._columns.size();
+    bool noR = byColumn >= b_r._columns.size();
+
+    if ( noL || noR ) {
+      if ( noL && noR ) {
+        using csidetail::simpleAnyTypeComp;
+
+        const boost::any &lUserData = a_r.userData();
+        const boost::any &rUserData = b_r.userData();
+
+        if ( lUserData.empty() && !rUserData.empty() )
+          return -1;
+
+        else if ( !lUserData.empty() && rUserData.empty() )
+          return 1;
+
+        else if ( lUserData.empty() && rUserData.empty() )
+          return 0;
+
+        else if ( lUserData.type() != rUserData.type() ) {
+          ZYPP_THROW( zypp::Exception( str::form("Incompatible user types") ) );
+
+        } else if ( lUserData.type() == typeid(SolvableCSI) ) {
+          return simpleAnyTypeComp<SolvableCSI> ( lUserData, rUserData );
+
+        } else if ( lUserData.type() == typeid(std::string) ) {
+          return simpleAnyTypeComp<std::string>( lUserData, rUserData );
+
+        } else if ( lUserData.type() == typeid(unsigned) ) {
+          return simpleAnyTypeComp<unsigned>( lUserData, rUserData );
+
+        } else if ( lUserData.type() == typeid(int) ) {
+          return simpleAnyTypeComp<int>( lUserData, rUserData );
+
+        }
+        ZYPP_THROW( zypp::Exception( str::form("Unsupported user types") ) );
+      } else
+        return ( noL && ! noR ? -1 : ! noL && noR ?  1 : 0);
+    }
+    return defaultStrComp( sortCI, a_r._columns[byColumn], b_r._columns[byColumn] );
+  }
+
+  /** Natural('sort -V' like) [case insensitive] compare ignoring ANSI SGR chars. */
+  static int defaultStrComp( bool ci_r, const std::string & lhs, const std::string & rhs );
+
+private:
+  std::list<SortParam> _by_columns;
+};
 
 /** \todo nice idea but poor interface */
 class Table
@@ -362,9 +407,9 @@ public:
   void sort()					{ sort( unsigned(_defaultSortColumn ) ); }
 
   /** Sort by \a byColumn_r */
-  void sort( unsigned byColumn_r )		{ if ( byColumn_r != Unsorted ) _rows.sort( TableRow::Less( { byColumn_r } ) ); }
-  void sort( const std::list<unsigned> & byColumns_r )	{ if ( byColumns_r.size() ) _rows.sort( TableRow::Less( byColumns_r ) ); }
-  void sort( std::list<unsigned> && byColumns_r )	{ if ( byColumns_r.size() ) _rows.sort( TableRow::Less( std::move(byColumns_r) ) ); }
+  void sort( unsigned byColumn_r )		        { if ( byColumn_r != Unsorted ) _rows.sort( TableRow::Less( header(), { byColumn_r } ) ); }
+  void sort( const std::list<unsigned> & byColumns_r )	{ if ( byColumns_r.size() ) _rows.sort( TableRow::Less( header(), byColumns_r ) ); }
+  void sort( std::list<unsigned> && byColumns_r )	{ if ( byColumns_r.size() ) _rows.sort( TableRow::Less( header(), std::move(byColumns_r) ) ); }
 
   /** Custom sort */
   template<class TCompare, std::enable_if_t<!std::is_integral<TCompare>::value, int> = 0>
@@ -428,6 +473,30 @@ private:
 
 namespace table
 {
+  /// Table column style setter.
+  ///
+  /// \see \ref CStyle colum styles.
+  /// \code
+  /// th << table::Column( N_("Name"), CStyle::SortCi );
+  /// \endcode
+  struct Column
+  {
+    Column( std::string header_r, CStyle style_r = CStyle::Default )
+    : _header( std::move(header_r) )
+    , _style( style_r )
+    {}
+    std::string _header;
+    CStyle      _style;
+  };
+  /** \relates table::Column set \ref TableHeader style. */
+  inline TableHeader & operator<<( TableHeader & th, Column && obj )
+  { th.style( th.cols(), obj._style ); return th << std::move(obj._header); }
+  /** \relates table::Column set \ref TableHeader style.*/
+  inline TableHeader && operator<<( TableHeader && th, Column && obj )
+  { return std::move( th << std::move(obj) ); }
+
+
+
   /** TableHeader manipulator */
   struct EditionStyleSetter
   {
