@@ -791,8 +791,8 @@ void list_updates(Zypper & zypper, const ResKindSet & kinds, bool best_effort, b
     if (!best_effort)
     {
       if (*it == ResKind::package)
-        th << table::EditionStyleSetter( tbl, N_("Current Version") );
-      th << table::EditionStyleSetter( tbl, N_("Available Version") ) << N_("Arch");
+        th << table::Column( N_("Current Version"), table::CStyle::Edition );
+      th << table::Column( N_("Available Version"), table::CStyle::Edition ) << N_("Arch");
     }
 
     tbl << th;

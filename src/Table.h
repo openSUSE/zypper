@@ -287,6 +287,17 @@ public:
   void style( unsigned c, CStyle s )
   { _cstyle[c] = s; }
 
+
+  std::set<unsigned> editionColumns() const
+  {
+    std::set<unsigned> ret;
+    for ( const auto & [c,s] : _cstyle ) {
+      if ( s == CStyle::Edition )
+        ret.insert( c );
+    }
+    return ret;
+  }
+
 private:
   std::map<unsigned,CStyle> _cstyle;  ///< Column style and sort hints are remembered here
 };
@@ -429,10 +440,6 @@ public:
 
   Table();
 
-  // poor workaround missing column styles and table entry objects
-  void setEditionStyle( unsigned column )
-  { _editionStyle.insert( column ); }
-
 private:
   void dumpRule( std::ostream & stream ) const;
   void updateColWidths( const TableRow & tr ) const;
@@ -464,9 +471,6 @@ private:
   DefaultIntegral<unsigned,Unsorted> _defaultSortColumn;
 
   mutable bool _inHeader;
-  std::set<unsigned> _editionStyle;
-  bool editionStyle( unsigned column ) const
-  { return _editionStyle.find( column ) != _editionStyle.end(); }
 
   friend class TableRow;
 };
@@ -493,34 +497,6 @@ namespace table
   { th.style( th.cols(), obj._style ); return th << std::move(obj._header); }
   /** \relates table::Column set \ref TableHeader style.*/
   inline TableHeader && operator<<( TableHeader && th, Column && obj )
-  { return std::move( th << std::move(obj) ); }
-
-
-
-  /** TableHeader manipulator */
-  struct EditionStyleSetter
-  {
-    EditionStyleSetter( Table & table_r, std::string header_r )
-    : _table( table_r )
-    , _header( std::move(header_r) )
-    {}
-    Table & _table;
-    std::string _header;
-  };
-
-  // NOTE: Overloading TableHeader operator<< which uses a universal-reference
-  // requires exact matches for the EditionStyleSetter arg! Missing overloads
-  // result in compiler complaining about missing EditionStyleSetter::asString.
-
-  /** \relates table::EditionStyleSetter */
-  inline TableHeader & operator<<( TableHeader & th, EditionStyleSetter && obj )
-  {
-    obj._table.setEditionStyle( th.cols() );
-    th.add( std::move(obj._header) );
-    return th;
-  }
-  /** \overload preserving TableHeader rvalue reference. */
-  inline TableHeader && operator<<( TableHeader && th, EditionStyleSetter && obj )
   { return std::move( th << std::move(obj) ); }
 }
 
