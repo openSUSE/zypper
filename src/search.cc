@@ -49,7 +49,7 @@ FillSearchTableSolvable::FillSearchTableSolvable( Table & table_r, TriBool instN
           // translators: type (general header)
           << N_("Type")
           // translators: package version (header)
-          << table::EditionStyleSetter( *_table, N_("Version") )
+          << table::Column( N_("Version"), table::CStyle::Edition )
           // translators: package architecture (header)
           << N_("Arch")
           // translators: package's repository (header)
@@ -302,7 +302,7 @@ static void list_pattern_table( Zypper & zypper, SolvableFilterMode mode_r )
   tbl << ( TableHeader()
       << N_("S")
       << N_("Name")
-      << table::EditionStyleSetter( tbl, N_("Version") )
+      << table::Column( N_("Version"), table::CStyle::Edition )
       << N_("Repository")
       << N_("Dependency") );
 
@@ -434,7 +434,7 @@ void list_packages(Zypper & zypper , ListPackagesFlags flags_r )
         << N_("S")
         << N_("Repository")
         << N_("Name")
-        << table::EditionStyleSetter( tbl, N_("Version") )
+        << table::Column( N_("Version"), table::CStyle::Edition )
         << N_("Arch") );
 
     if ( flags_r.testFlag( ListPackagesBits::SortByRepo ) )
@@ -481,7 +481,7 @@ void list_product_table(Zypper & zypper , SolvableFilterMode mode_r)
       // product whereas simply Name is the official full name of the product.
       << N_("Internal Name")
       << N_("Name")
-      << table::EditionStyleSetter( tbl, N_("Version") )
+      << table::Column( N_("Version"), table::CStyle::Edition )
       << N_("Arch")
       << N_("Is Base") );
 

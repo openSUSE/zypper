@@ -243,16 +243,17 @@ std::ostream & TableRow::dumpTo( std::ostream & stream, const Table & parent ) c
     }
     else
     {
-      if ( !parent._inHeader && parent.editionStyle( c ) && Zypper::instance().config().do_colors )
+      if ( !parent._inHeader && parent.header().hasStyle( c, table::CStyle::Edition ) && Zypper::instance().config().do_colors )
       {
+        const std::set<unsigned> & editionColumns { parent.header().editionColumns() };
         // Edition column
-        if ( parent._editionStyle.size() == 2 )
+        if ( editionColumns.size() == 2 )
         {
           // 2 Edition columns - highlight difference
           if ( editionSep == std::string::npos )
           {
-            editionSep = str::commonPrefix( _columns[*parent._editionStyle.begin()],
-                                                  _columns[*(++parent._editionStyle.begin())] );
+            editionSep = str::commonPrefix( _columns[*editionColumns.begin()],
+                                            _columns[*(++editionColumns.begin())] );
           }
 
           if ( editionSep == 0 )
