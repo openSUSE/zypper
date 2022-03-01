@@ -321,7 +321,7 @@ FillPatchesTable::FillPatchesTable( Table & table_r, const PatchHistoryData & hi
 {
   table_r << ( TableHeader()
   << N_("Repository")
-  << N_("Name")
+  << table::Column( N_("Name"), table::CStyle::SortCi )
   << N_("Category")
   << N_("Severity")
   << N_("Interactive")
@@ -363,7 +363,7 @@ FillPatchesTableForIssue::FillPatchesTableForIssue( Table & table_r, const Patch
   //<< _("Repository")
   << N_("Issue")
   << N_("No.")
-  << N_("Patch")	// Name
+  << table::Column( N_("Patch"), table::CStyle::SortCi )	// Name
   << N_("Category")
   << N_("Severity")
   << N_("Interactive")

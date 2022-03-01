@@ -786,7 +786,7 @@ void list_updates(Zypper & zypper, const ResKindSet & kinds, bool best_effort, b
       th << N_("Repository");
 
     name_col = th.cols();
-    th << N_("Name");
+    th << table::Column( N_("Name"), table::CStyle::SortCi );
     // best_effort does not know version or arch yet
     if (!best_effort)
     {
