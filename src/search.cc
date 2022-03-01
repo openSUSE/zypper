@@ -45,7 +45,7 @@ FillSearchTableSolvable::FillSearchTableSolvable( Table & table_r, TriBool instN
           // translators: S for 'installed Status'
           << N_("S")
           // translators: name (general header)
-          << N_("Name")
+          << table::Column( N_("Name"), table::CStyle::SortCi )
           // translators: type (general header)
           << N_("Type")
           // translators: package version (header)
@@ -196,7 +196,7 @@ FillSearchTableSelectable::FillSearchTableSelectable( Table & table, TriBool ins
   *_table << ( TableHeader()
           // translators: S for installed Status
           << N_("S")
-          << N_("Name")
+          << table::Column( N_("Name"), table::CStyle::SortCi )
           // translators: package summary (header)
           << N_("Summary")
           << N_("Type") );
@@ -301,7 +301,7 @@ static void list_pattern_table( Zypper & zypper, SolvableFilterMode mode_r )
   // translators: S for installed Status
   tbl << ( TableHeader()
       << N_("S")
-      << N_("Name")
+      << table::Column( N_("Name"), table::CStyle::SortCi )
       << table::Column( N_("Version"), table::CStyle::Edition )
       << N_("Repository")
       << N_("Dependency") );
@@ -433,7 +433,7 @@ void list_packages(Zypper & zypper , ListPackagesFlags flags_r )
         // translators: S for installed Status
         << N_("S")
         << N_("Repository")
-        << N_("Name")
+        << table::Column( N_("Name"), table::CStyle::SortCi )
         << table::Column( N_("Version"), table::CStyle::Edition )
         << N_("Arch") );
 
@@ -480,7 +480,7 @@ void list_product_table(Zypper & zypper , SolvableFilterMode mode_r)
       // translators: used in products. Internal Name is the unix name of the
       // product whereas simply Name is the official full name of the product.
       << N_("Internal Name")
-      << N_("Name")
+      << table::Column( N_("Name"), table::CStyle::SortCi )
       << table::Column( N_("Version"), table::CStyle::Edition )
       << N_("Arch")
       << N_("Is Base") );
