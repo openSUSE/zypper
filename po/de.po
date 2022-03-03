@@ -17,10 +17,10 @@ msgstr ""
 "Project-Id-Version: zypper.de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-02-23 18:47+0100\n"
-"PO-Revision-Date: 2022-02-22 10:12+0000\n"
+"PO-Revision-Date: 2022-03-03 20:12+0000\n"
 "Last-Translator: Gemineo <vistatec@gemineo.de>\n"
-"Language-Team: German <https://l10n.opensuse.org/projects/zypper/master/de/"
-">\n"
+"Language-Team: German <https://l10n.opensuse.org/projects/zypper/master/de/>"
+"\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -5489,8 +5489,9 @@ msgid "not installed"
 msgstr "nicht installiert"
 
 #: src/info.cc:355
+#, fuzzy
 msgid "Upstream URL"
-msgstr ""
+msgstr "Upstream-URL"
 
 #. translators: property name; short; used like "Name: value"
 #. translator: Table column header.
@@ -5795,8 +5796,9 @@ msgstr "fertig"
 
 #. translator: Shown as result tag in a progress bar: .......[attention]
 #: src/output/Out.cc:124
+#, fuzzy
 msgid "attention"
-msgstr ""
+msgstr "Achtung"
 
 #. translator: Shown as result tag in a progress bar: ...........[error]
 #. Translator: download progress bar result: "............[error]"
