@@ -20,7 +20,7 @@ msgstr ""
 "Project-Id-Version: zypp.fr\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-02-24 18:28+0100\n"
-"PO-Revision-Date: 2022-03-03 15:12+0000\n"
+"PO-Revision-Date: 2022-03-04 11:12+0000\n"
 "Last-Translator: Sophie Leroy <sophie@stoquart.com>\n"
 "Language-Team: French <https://l10n.opensuse.org/projects/libzypp/master/fr/>"
 "\n"
@@ -1303,7 +1303,7 @@ msgstr "Complète"
 #: zypp/KeyRing.cc:753
 #, c-format, boost-format
 msgid "Tried to import not existent key %s into keyring %s"
-msgstr "Tentative d'importation de la clé inexistante %s dans le porte-clé %s"
+msgstr "Tentative d'importation d'une clé inexistante %s dans le porte-clé %s"
 
 #: zypp/KeyRing.cc:759
 msgid "Failed to import key."
@@ -4271,17 +4271,17 @@ msgstr "Problèmes de dépendance"
 #: zypp/solver/detail/SATResolver.cc:1109
 #, boost-format
 msgid "nothing provides the requested '%1%'"
-msgstr "rien ne fourni le/la '%1%' demandé(e)"
+msgstr "rien ne fournit le/la '%1%' demandé(e)"
 
 #: zypp/solver/detail/SATResolver.cc:1110
 #: zypp/solver/detail/SATResolver.cc:1114
 msgid "Have you enabled all the required repositories?"
-msgstr "Avez-vous activé tous les dépôts requis ?"
+msgstr "Avez-vous activé tous les dépôts requis ?"
 
 #: zypp/solver/detail/SATResolver.cc:1113
 #, boost-format
 msgid "the requested package %1% does not exist"
-msgstr "le paquet demandé %1% n'existe pas"
+msgstr "le paquetage demandé %1% n'existe pas"
 
 #: zypp/solver/detail/SATResolver.cc:1117
 msgid "unsupported request"
@@ -4389,8 +4389,8 @@ msgstr ""
 msgid ""
 "the installed %1% requires '%2%', but this requirement cannot be provided"
 msgstr ""
-"l'élément %1% installé nécessite '%2%', mais cette condition ne peut pas "
-"être remplie"
+"l'élément %1% installé nécessite '%2%', mais cette exigence ne peut pas être "
+"remplie"
 
 #: zypp/solver/detail/SATResolver.cc:1202
 #, boost-format
@@ -4398,7 +4398,7 @@ msgid ""
 "the to be installed %1% requires '%2%', but this requirement cannot be "
 "provided"
 msgstr ""
-"l'élement %1% à installer nécessite '%2%', mais cette condition ne peut pas "
+"l'élement %1% à installer nécessite '%2%', mais cette exigence ne peut pas "
 "être remplie"
 
 #: zypp/solver/detail/SATResolver.cc:1204
@@ -4478,13 +4478,13 @@ msgstr "ignorer l'avertissement d'un système cassé"
 #: zypp/solver/detail/SATResolver.cc:1400
 #, boost-format
 msgid "do not ask to install a solvable providing %1%"
-msgstr "ne pas demander d'installer un élément résoluble fournissant %1%"
+msgstr "ne pas demander d'installer un élément résolvable fournissant %1%"
 
 #: zypp/solver/detail/SATResolver.cc:1422
 #, boost-format
 msgid "do not ask to delete all solvables providing %1%"
 msgstr ""
-"ne pas demander de supprimer tous les éléments résolubles fournissant %1%"
+"ne pas demander de supprimer tous les éléments résolvables fournissant %1%"
 
 #: zypp/solver/detail/SATResolver.cc:1435
 #, boost-format
@@ -4617,7 +4617,7 @@ msgstr "Nouveau message de mise à jour"
 #: zypp/target/TargetImpl.cc:2688
 msgid "Executing the transaction failed because of the following problems:"
 msgstr ""
-"L'exécution de la transaction a échoué en raison des problèmes suivants :"
+"L'exécution de la transaction a échoué en raison des problèmes suivants :"
 
 #. TranslatorExplanation after semicolon is error message
 #. TranslatorExplanation the colon is followed by an error message
@@ -4900,8 +4900,7 @@ msgstr "Impossible d'appliquer la commande chdir vers '%s' (%s)."
 #: zypp-core/zyppng/io/forkspawnengine.cc:283
 #, c-format, boost-format
 msgid "Can't chdir to '%s' inside chroot '%s' (%s)."
-msgstr ""
-"Impossible d'appliquer la commande chdir vers '%s' dans le chroot '%s' ('%s)."
+msgstr "Impossible d'appliquer la commande chdir à '%s' dans chroot '%s' ('%s)."
 
 #. don't want to get here
 #: zypp-core/zyppng/io/forkspawnengine.cc:312
@@ -4919,7 +4918,7 @@ msgstr "Impossible d'exécuter une commande fork (%s)."
 #: zypp-core/zyppng/io/forkspawnengine.cc:338
 #, c-format, boost-format
 msgid "Can't exec '%s', chdir failed (%s)."
-msgstr "Impossible d'exécuter '%s'. La commande chdir a échoué(%s)."
+msgstr "Impossible d'exécuter '%s'. La commande chdir a échoué (%s)."
 
 #: zypp-core/zyppng/io/forkspawnengine.cc:341
 #, c-format, boost-format
@@ -5060,7 +5059,7 @@ msgstr "Impossible d'éjecter un support"
 #: zypp-media/mediaexception.cc:166
 #, c-format, boost-format
 msgid "Cannot eject media '%s'"
-msgstr "Impossible d'éjecter les supports '%s'"
+msgstr "Impossible d'éjecter le support '%s'"
 
 #: zypp-media/mediaexception.cc:181
 #, c-format, boost-format
