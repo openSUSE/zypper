@@ -17,7 +17,7 @@ msgstr ""
 "Project-Id-Version: zypper.de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-02-23 18:47+0100\n"
-"PO-Revision-Date: 2022-03-04 14:12+0000\n"
+"PO-Revision-Date: 2022-03-04 18:12+0000\n"
 "Last-Translator: Gemineo <vistatec@gemineo.de>\n"
 "Language-Team: German <https://l10n.opensuse.org/projects/zypper/master/de/>"
 "\n"
@@ -5489,7 +5489,6 @@ msgid "not installed"
 msgstr "nicht installiert"
 
 #: src/info.cc:355
-#, fuzzy
 msgid "Upstream URL"
 msgstr "Upstream-URL"
 
@@ -5796,7 +5795,6 @@ msgstr "fertig"
 
 #. translator: Shown as result tag in a progress bar: .......[attention]
 #: src/output/Out.cc:124
-#, fuzzy
 msgid "attention"
 msgstr "Achtung"
 
