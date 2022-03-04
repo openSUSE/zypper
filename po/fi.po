@@ -20,7 +20,7 @@ msgstr ""
 "Project-Id-Version: zypp.fi\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-02-24 18:28+0100\n"
-"PO-Revision-Date: 2021-03-15 11:56+0000\n"
+"PO-Revision-Date: 2022-03-04 11:12+0000\n"
 "Last-Translator: Tommi Nieminen <software@legisign.org>\n"
 "Language-Team: Finnish <https://l10n.opensuse.org/projects/libzypp/master/fi/"
 ">\n"
@@ -29,7 +29,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 3.6.1\n"
+"X-Generator: Weblate 4.9.1\n"
 
 #: zypp/CountryCode.cc:50
 msgid "Unknown country: "
@@ -4250,7 +4250,7 @@ msgstr "Asennuslähteen verkko-osoite puuttuu."
 #: zypp/repo/SUSEMediaVerifier.cc:104
 #, boost-format
 msgid "Expected medium %1%/%2% identified by file '%3%' with content:"
-msgstr ""
+msgstr "Odotettiin tiedoston ”%3%” mukaista tietovälinettä %1%/%2% sisältönään:"
 
 #. [lhs][rhs] 0 = installed; 1 = to be installed
 #. TranslatorExplanation %1%(filename) %2%(package1) %3%(package2)
@@ -4602,23 +4602,24 @@ msgstr "poistetut tarjoajat: "
 #: zypp/solver/detail/SATResolver.cc:1253
 #, boost-format
 msgid "%1% is not yet fully integrated into %2%."
-msgstr ""
+msgstr "%1% ei vielä ole täysin integroitu paikkaukseen %2%."
 
 #: zypp/solver/detail/SATResolver.cc:1254
 msgid ""
 "Typically you want to keep the PTF and choose to not install the maintenance "
 "patches."
 msgstr ""
+"Tavallisesti haluat säilyttää PTF:n ja olla asentamatta ylläpitopaikkauksia."
 
 #. translator: %1% is the name of a PTF.
 #: zypp/solver/detail/SATResolver.cc:1259
 #, boost-format
 msgid "The installed %1% blocks the desired action."
-msgstr ""
+msgstr "Asennettu %1% estää halutun toimenpiteen."
 
 #: zypp/solver/detail/SATResolver.cc:1260
 msgid "Typically you want to keep the PTF and choose to cancel the action."
-msgstr ""
+msgstr "Tavallisesti haluat säilyttää PTF:n ja perua toimenpiteen."
 
 #: zypp/solver/detail/SATResolver.cc:1316
 #, boost-format
@@ -4731,6 +4732,8 @@ msgid ""
 "install %1% from vendor %2%\n"
 "  replacing %3% from vendor %4%"
 msgstr ""
+"asenna toimittajalta %2% %1%,\n"
+"joka korvaa paketin %3% toimittajalta %4%"
 
 #: zypp/solver/detail/SATResolver.cc:1547
 #, boost-format
@@ -4789,7 +4792,7 @@ msgstr "Uusi päivitysviesti"
 
 #: zypp/target/TargetImpl.cc:2688
 msgid "Executing the transaction failed because of the following problems:"
-msgstr ""
+msgstr "Toimenpidettä ei voitu suorittaa seuraavien ongelmien takia:"
 
 #. TranslatorExplanation after semicolon is error message
 #. TranslatorExplanation the colon is followed by an error message
@@ -5048,7 +5051,7 @@ msgstr ""
 
 #: zypp-core/zyppng/io/forkspawnengine.cc:206
 msgid "Unable to create control pipe."
-msgstr ""
+msgstr "Hallintaputkea ei voitu luoda."
 
 #: zypp-core/zyppng/io/forkspawnengine.cc:272
 #, c-format, boost-format
@@ -5080,22 +5083,22 @@ msgstr "Haarauttaminen (fork) ei onnistu (%s)."
 #: zypp-core/zyppng/io/forkspawnengine.cc:338
 #, c-format, boost-format
 msgid "Can't exec '%s', chdir failed (%s)."
-msgstr ""
+msgstr "Ei voida suorittaa ”%s”: chdir epäonnistui (%s)."
 
 #: zypp-core/zyppng/io/forkspawnengine.cc:341
 #, c-format, boost-format
 msgid "Can't exec '%s', chroot failed (%s)."
-msgstr ""
+msgstr "Ei voida suorittaa ”%s”: chroot epäonnistui (%s)."
 
 #: zypp-core/zyppng/io/forkspawnengine.cc:344
 #, c-format, boost-format
 msgid "Can't exec '%s', exec failed (%s)."
-msgstr ""
+msgstr "Ei voida suorittaa ”%s”: exec epäonnistui (%s)."
 
 #: zypp-core/zyppng/io/forkspawnengine.cc:348
 #, c-format, boost-format
 msgid "Can't exec '%s', unexpected error."
-msgstr ""
+msgstr "Ei voida suorittaa ”%s”: tuntematon syy."
 
 #: zypp-media/mediaexception.cc:33
 #, c-format, boost-format
