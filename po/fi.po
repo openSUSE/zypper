@@ -23,10 +23,10 @@ msgstr ""
 "Project-Id-Version: zypper.fi\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-02-23 18:47+0100\n"
-"PO-Revision-Date: 2022-01-31 00:12+0000\n"
-"Last-Translator: Kimmo Kujansuu <mrkujansuu@gmail.com>\n"
-"Language-Team: Finnish <https://l10n.opensuse.org/projects/zypper/master/fi/"
-">\n"
+"PO-Revision-Date: 2022-03-04 11:12+0000\n"
+"Last-Translator: Tommi Nieminen <software@legisign.org>\n"
+"Language-Team: Finnish <https://l10n.opensuse.org/projects/zypper/master/fi/>"
+"\n"
 "Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -92,29 +92,29 @@ msgstr "Mahdolliset riippuvuusongelmat voi korjata komennolla \"%1%”."
 #, c-format, boost-format
 msgid "The following package failed to install:"
 msgid_plural "The following %d packages failed to install:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Seuraavan paketin asennus epäonnistui:"
+msgstr[1] "Seuraavien %d paketin asennus epäonnistui:"
 
 #: src/CommitSummary.cc:140
 #, c-format, boost-format
 msgid "The following package installation was skipped:"
 msgid_plural "The following %d package installations were skipped:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Seuraavan paketin asennus sivuutettiin:"
+msgstr[1] "Seuraavien %d paketin asennus sivuutettiin:"
 
 #: src/CommitSummary.cc:155
 #, c-format, boost-format
 msgid "The following package failed to uninstall:"
 msgid_plural "The following %d packages failed to uninstall:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Seuraavan paketin asennuksen poistaminen epäonnistui:"
+msgstr[1] "Seuraavien %d paketin asennuksen poistaminen epäonnistui:"
 
 #: src/CommitSummary.cc:170
 #, c-format, boost-format
 msgid "The following package removal was skipped:"
 msgid_plural "The following %d package removal were skipped:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Seuraavan paketin poistaminen sivuutettiin:"
+msgstr[1] "Seuraavien %d paketin poistaminen sivuutettiin:"
 
 #. translators: Appended when clipping a long enumeration:
 #. "ConsoleKit-devel ConsoleKit-doc ... and 20828 more items."
@@ -1420,6 +1420,10 @@ msgid ""
 "repository provider or check his web site. Many provider maintain a web page "
 "showing the fingerprints of the GPG keys they are using."
 msgstr ""
+"Julkisen GPG-avaimen tunnistaa sen sormenjäljestä. Älä luota avaimen nimeen. "
+"Ellet ole varma annetun avaimen todenperäisyydestä, kysy asennuslähteen "
+"tarjoajalta tai tarkista sen sivustolta. Monet tarjoajat ylläpitävät "
+"verkkosivua, jolla esittävät käyttämiensä GPG-avainten sormenjäljet."
 
 #: src/callbacks/keyring.h:37
 msgid ""
@@ -1477,7 +1481,7 @@ msgstr "Avaimen nimi:"
 
 #: src/callbacks/keyring.h:89
 msgid "Key Algorithm:"
-msgstr ""
+msgstr "Avainalgoritmi:"
 
 #: src/callbacks/keyring.h:90
 msgid "Key Created:"
@@ -1708,7 +1712,9 @@ msgstr ""
 msgid "Received %1% new package signing key from repository %2%:"
 msgid_plural "Received %1% new package signing keys from repository %2%:"
 msgstr[0] ""
+"Asennuslähteestä %2% vastaanotettiin %1% uusi paketin allekirjoitusavain:"
 msgstr[1] ""
+"Asennuslähteestä %2% vastaanotettiin %1% uutta paketin allekirjoitusavainta:"
 
 #: src/callbacks/keyring.h:494
 msgid ""
@@ -1716,16 +1722,21 @@ msgid ""
 "repository. In order to validate those packages upon download and "
 "installation the new keys will be imported into the rpm database."
 msgstr ""
+"Lisäavaimia käytetään yleensä allekirjoittamaan asennuslähteen tarjoamia "
+"paketteja. Uudet avaimet tuodaan RPM-tietokantaan, jotta paketit voidaan "
+"todentaa ladattaessa ja asennettaessa."
 
 #: src/callbacks/keyring.h:496
 msgid "New:"
-msgstr ""
+msgstr "Uudet:"
 
 #: src/callbacks/keyring.h:502
 msgid ""
 "The repository metadata introducing the new keys have been signed and "
 "validated by the trusted key:"
 msgstr ""
+"Uudet avaimet esittelevät asennuslähteen metatiedot on allekirjoitettu ja "
+"todennettu luotetulla avaimella:"
 
 #: src/callbacks/keyring.h:525
 #, c-format, boost-format
@@ -2069,19 +2080,19 @@ msgstr ""
 #: src/callbacks/rpm.h:759 src/callbacks/rpm.h:766
 #, c-format, boost-format
 msgid "Executing %s script for: %s"
-msgstr ""
+msgstr "Suoritetaan skriptiä %s: %s"
 
 #. TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
 #: src/callbacks/rpm.h:773
 #, c-format, boost-format
 msgid "Executing %s script"
-msgstr ""
+msgstr "Suoritetaan skriptiä %s"
 
 #. TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
 #: src/callbacks/rpm.h:895
 #, c-format, boost-format
 msgid "Cleaning up: %s"
-msgstr ""
+msgstr "Siivotaan: %s"
 
 #. translator: %s is an other command: "This is an alias for 'zypper info -t patch'."
 #: src/commands/commandhelpformatter.h:94
@@ -2568,7 +2579,7 @@ msgstr "Rajoita lukitus vain tiettyyn asennuslähteeseen."
 
 #: src/commands/locks/add.cc:48
 msgid "Reason for specific lock."
-msgstr ""
+msgstr "Syy tiettyyn lukitukseen."
 
 #: src/commands/locks/add.cc:81
 msgid "Specified lock has been successfully added."
@@ -2641,7 +2652,7 @@ msgstr "Asennuslähde"
 
 #: src/commands/locks/list.cc:138
 msgid "Comment"
-msgstr ""
+msgstr "Huomautus"
 
 #. translators: locks table value
 #: src/commands/locks/list.cc:156 src/commands/locks/list.cc:235
@@ -2753,6 +2764,8 @@ msgid ""
 "This is the recommended way for scripts to test whether a system reboot is "
 "suggested."
 msgstr ""
+"Tämä on skripteille suositeltu tapa kokeilla, pitääkö järjestelmän "
+"uudelleenkäynnistystä ehdottaa."
 
 #: src/commands/needs-rebooting.cc:38
 msgid ""
@@ -2978,6 +2991,8 @@ msgid ""
 "When updating the affected/vulnerable packages described by a patch, zypper "
 "always aims for the latest available version."
 msgstr ""
+"Päivitettäessä paikkauksen kuvaamia vaikutuksen alaisia tai haavoittuvia "
+"paketteja zypper tähtää aina viimeisimpään saatavilla olevaan versioon."
 
 #: src/commands/patch.cc:50
 msgid ""
@@ -4842,6 +4857,8 @@ msgid ""
 "Using zypper subcommands available from elsewhere on your $PATH is disabled "
 "in zypper.conf."
 msgstr ""
+"zypper.conf estää käyttämästä muualta hakupolusta ($PATH) tulevia zypper-"
+"alikomentoja."
 
 #. translators: helptext; %1% is a zypper command
 #: src/commands/subcommand.cc:485
@@ -4864,6 +4881,8 @@ msgid ""
 "Lists available subcommands. Using zypper subcommands found on your $PATH is "
 "disabled in zypper.conf."
 msgstr ""
+"Luettelee saatavilla olevat alikomennot. zypper.conf estää käyttämästä "
+"muualta hakupolusta ($PATH) saatavia alikomentoja."
 
 #. Currently no concept how to handle global options and ZYPPlock
 #: src/commands/subcommand.cc:626
@@ -5341,7 +5360,7 @@ msgstr "ei asennettu"
 
 #: src/info.cc:355
 msgid "Upstream URL"
-msgstr ""
+msgstr "Ylävirran verkko-osoite"
 
 #. translators: property name; short; used like "Name: value"
 #. translator: Table column header.
@@ -5646,7 +5665,7 @@ msgstr "valmis"
 #. translator: Shown as result tag in a progress bar: .......[attention]
 #: src/output/Out.cc:124
 msgid "attention"
-msgstr ""
+msgstr "huomio"
 
 #. translator: Shown as result tag in a progress bar: ...........[error]
 #. Translator: download progress bar result: "............[error]"
@@ -6401,6 +6420,8 @@ msgid ""
 "DownloadAsNeeded can not be used with ZYPP_SINGLE_RPMTRANS=1, falling back "
 "to DownloadInAdvance"
 msgstr ""
+"DownloadAsNeeded on mahdoton, koska ZYPP_SINGLE_RPMTRANS=1: käytetään "
+"DownloadInAdvance"
 
 #: src/solve-commit.cc:547
 #, c-format, boost-format
