@@ -18,8 +18,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-02-23 18:47+0100\n"
-"PO-Revision-Date: 2022-03-03 20:12+0000\n"
-"Last-Translator: Antonio Simón <antonio@trans-mission.com>\n"
+"PO-Revision-Date: 2022-03-07 19:12+0000\n"
+"Last-Translator: Victor hck <correohck@gmail.com>\n"
 "Language-Team: Spanish <https://l10n.opensuse.org/projects/zypper/master/es/>"
 "\n"
 "Language: es\n"
@@ -160,8 +160,8 @@ msgstr ""
 #: src/Config.cc:363
 msgid "User data string must not contain nonprintable or newline characters!"
 msgstr ""
-"La cadena de datos del usuario no debe contener caracteres no imprimibles ni "
-"saltos de línea."
+"¡La cadena de datos del usuario no debe contener caracteres no imprimibles "
+"ni saltos de línea!"
 
 #. translators: --userdata <STRING>
 #: src/Config.cc:369
@@ -284,8 +284,8 @@ msgstr "Omitir errores de comprobación de GPG y continuar."
 msgid ""
 "Turning on '%s'. New repository signing keys will be automatically imported!"
 msgstr ""
-"Se va a activar '%s'. Las nuevas claves de firma del repositorio se "
-"importarán automáticamente."
+"¡Se va a activar '%s'. Las nuevas claves de firma del repositorio se "
+"importarán automáticamente!"
 
 #. translators: --gpg-auto-import-keys
 #: src/Config.cc:563
@@ -687,7 +687,7 @@ msgstr "Valor de filtro de gravedad sospechoso '%1%'."
 #: src/Summary.cc:416
 #, boost-format
 msgid "Product '%1%' requires to be updated by calling '%2%'!"
-msgstr "Es preciso actualizar el producto '%1%' llamando a '%2%'."
+msgstr "¡Es preciso actualizar el producto '%1%' llamando a '%2%'!"
 
 #: src/Summary.cc:585
 #, c-format, boost-format
@@ -1292,8 +1292,8 @@ msgstr[1] "paquetes a instalar"
 #: src/Summary.cc:1485
 msgid "to remove"
 msgid_plural "to remove"
-msgstr[0] "a quitar"
-msgstr[1] "a quitar"
+msgstr[0] "a eliminar"
+msgstr[1] "a eliminar"
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
 #: src/Summary.cc:1488
@@ -1680,19 +1680,19 @@ msgstr "Confiar en la clave e importarla en el anillo de claves de confianza."
 #: src/callbacks/keyring.h:389
 #, c-format, boost-format
 msgid "Ignoring failed signature verification for file '%s'!"
-msgstr "Ignorando el error de verificación de la firma del archivo '%s'."
+msgstr "¡Ignorando el error de verificación de la firma del archivo '%s'!"
 
 #: src/callbacks/keyring.h:392
 #, c-format, boost-format
 msgid ""
 "Ignoring failed signature verification for file '%s' from repository '%s'!"
 msgstr ""
-"Ignorando el error de verificación de la firma del archivo '%s' del "
-"repositorio '%s'."
+"¡Ignorando el error de verificación de la firma del archivo '%s' del "
+"repositorio '%s'!"
 
 #: src/callbacks/keyring.h:398
 msgid "Double-check this is not caused by some malicious changes in the file!"
-msgstr "Compruebe que no se debe a cambios malintencionados en el archivo."
+msgstr "¡Compruebe que no se debe a cambios malintencionados en el archivo!"
 
 #. translator: %1% is a file name
 #: src/callbacks/keyring.h:408
