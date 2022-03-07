@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-02-23 18:47+0100\n"
-"PO-Revision-Date: 2022-03-04 18:12+0000\n"
+"PO-Revision-Date: 2022-03-07 11:12+0000\n"
 "Last-Translator: Davide Aiello <davide.aiello@novilingulists.com>\n"
 "Language-Team: Italian <https://l10n.opensuse.org/projects/zypper/master/it/>"
 "\n"
@@ -589,7 +589,7 @@ msgid ""
 "Patch '%1%' is optional. Use '%2%' to install it, or '%3%' to include all "
 "optional patches."
 msgstr ""
-"La patch '%s' è opzionale. Usare '%2%' per installarla, oppure '%3%' per "
+"La patch '%1%' è opzionale. Usare '%2%' per installarla, oppure '%3%' per "
 "includere tutte le patch opzionali."
 
 #: src/RequestFeedback.cc:192
@@ -913,9 +913,11 @@ msgid "The following recommended source package was automatically selected:"
 msgid_plural ""
 "The following %d recommended source packages were automatically selected:"
 msgstr[0] ""
-"Il seguente pacchetto raccomandato è stato selezionato automaticamente:"
+"Il seguente pacchetto di origine raccomandato è stato selezionato "
+"automaticamente:"
 msgstr[1] ""
-"I seguenti %d pacchetti raccomandati sono stati selezionati automaticamente:"
+"I seguenti %d pacchetti di origine raccomandati sono stati selezionati "
+"automaticamente:"
 
 #: src/Summary.cc:960
 #, c-format, boost-format
@@ -2069,10 +2071,10 @@ msgid_plural ""
 "%1% packages had to be excluded from file conflicts check because they are "
 "not yet downloaded."
 msgstr[0] ""
-"Il pacchetto è stato escluso dal controllo dei conflitti in quanto non è "
+"%1% pacchetto è stato escluso dal controllo dei conflitti in quanto non è "
 "ancora stato scaricato."
 msgstr[1] ""
-"Il pacchetti sono stati esclusi dal controllo dei conflitti in quanto non "
+"%1% pacchetti sono stati esclusi dal controllo dei conflitti in quanto non "
 "sono ancora stati scaricati."
 
 #. TranslatorExplanation %1%(commandline option)
@@ -5862,7 +5864,7 @@ msgstr "Priorità del repository effettive:"
 #: src/repos.cc:183
 #, boost-format
 msgid "See '%1%' for details"
-msgstr "Vedere '%s' per ulteriori dettagli"
+msgstr "Vedere '%1' per ulteriori dettagli"
 
 #: src/repos.cc:192
 #, boost-format
