@@ -550,32 +550,33 @@ namespace zypp
     MediaManager::releaseAll()
     {
       MIL << "Releasing all attached media" << std::endl;
-
-      ManagedMediaMap::iterator m(m_impl->mediaMap.begin());
-      for( ; m != m_impl->mediaMap.end(); ++m)
-      {
-        auto &hdl = m->second.handler();
-        if( hdl.dependsOnParent())
-          continue;
-
-        try
-        {
-          if(hdl.isAttached())
-          {
-            DBG << "Releasing media id " << m->first << std::endl;
-            m->second.desired  = false;
-            hdl.release();
+      auto releaseAction = []( MediaAccessId mId_r, ManagedMedia & mManagedMedia_r, bool ifDependsOnParent_r ) {
+        auto & hdl = mManagedMedia_r.handler();
+        if ( hdl.dependsOnParent() == ifDependsOnParent_r ) {
+          try {
+            if ( hdl.isAttached() ) {
+              DBG << "Releasing media id " << mId_r << std::endl;
+              mManagedMedia_r.desired = false;
+              hdl.release();
+            }
+            else {
+              DBG << "Media id " << mId_r << " not attached " << std::endl;
+            }
           }
-          else
-          {
-            DBG << "Media id " << m->first << " not attached " << std::endl;
+          catch ( const MediaException & e ) {
+            ZYPP_CAUGHT(e);
+            ERR << "Failed to release media id " << mId_r << std::endl;
           }
         }
-        catch(const MediaException & e)
-        {
-          ZYPP_CAUGHT(e);
-          ERR << "Failed to release media id " << m->first << std::endl;
-        }
+      };
+
+      // 1st pass releases any stacked mounts (ISO)
+      for ( auto & [ mId, mManagedMedia ] : m_impl->mediaMap ) {
+        releaseAction( mId, mManagedMedia, /*ifDependsOnParent*/true );
+      }
+      // 2nd pass releases all the rest
+      for ( auto & [ mId, mManagedMedia ] : m_impl->mediaMap ) {
+        releaseAction( mId, mManagedMedia, /*ifDependsOnParent*/false );
       }
 
       MIL << "Exit" << std::endl;
