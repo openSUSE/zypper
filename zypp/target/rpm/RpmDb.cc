@@ -1109,9 +1109,9 @@ void RpmDb::getData( const std::string & name_r, const Edition & ed_r,
 ///////////////////////////////////////////////////////////////////
 namespace
 {
-  struct RpmlogCapture : public std::string
+  struct RpmlogCapture : public std::vector<std::string>
   {
-    RpmlogCapture() : _cap(this)
+    RpmlogCapture()
     {
       rpmlogSetCallback( rpmLogCB, this );
       _oldMask = rpmlogSetMask( RPMLOG_UPTO( RPMLOG_PRI(RPMLOG_INFO) ) );
@@ -1128,14 +1128,26 @@ namespace
 
     int rpmLog( rpmlogRec rec_r )
     {
-      if ( _cap ) (*_cap) += rpmlogRecMessage( rec_r );
+      std::string l { ::rpmlogRecMessage( rec_r ) };  // NL terminated line!
+      l.pop_back(); // strip trailing NL
+      push_back( std::move(l) );
       return 0;
     }
 
   private:
-    std::string * _cap;
     int _oldMask = 0;
   };
+
+  std::ostream & operator<<( std::ostream & str, const RpmlogCapture & obj )
+  {
+    char sep = '\0';
+    for ( const auto & l : obj ) {
+      if ( sep ) str << sep; else sep = '\n';
+      str << l;
+    }
+    return str;
+  }
+
 
   RpmDb::CheckPackageResult doCheckPackageSig( const Pathname & path_r,			// rpm file to check
                                                const Pathname & root_r,			// target root
@@ -1179,13 +1191,11 @@ namespace
     //     V3 RSA/SHA256 Signature, key ID 3dbdc284: OK
     //     MD5 digest: OK (fd5259fe677a406951dcb2e9d08c4dcc)
     //
-    std::vector<std::string> lines;
-    str::split( vresult, std::back_inserter(lines), "\n" );
     unsigned count[7] = { 0, 0, 0, 0, 0, 0, 0 };
-
-    for ( unsigned i = 1; i < lines.size(); ++i )
+    for ( std::string & line : vresult )
     {
-      std::string &line( lines[i] );
+      if ( line[0] != ' ' ) // result lines are indented
+        continue;
 
       RpmDb::CheckPackageResult lineres = RpmDb::CHK_ERROR;
       if ( line.find( ": OK" ) != std::string::npos )
@@ -1289,7 +1299,7 @@ namespace
       }
 
       WAR << path_r << " (" << requireGPGSig_r << " -> " << ret << ")" << endl;
-      WAR << vresult;
+      WAR << vresult << endl;
     }
     else
       DBG << path_r << " [0-Signature is OK]" << endl;
