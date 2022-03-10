@@ -2377,7 +2377,7 @@ namespace zypp
         if ( !msgSource->open( messagePipe->readFd ) )
           ZYPP_THROW( target::rpm::RpmSubprocessException( "Failed to open read stream to subprocess" ) );
 
-        size_t pendingMessageSize = 0;
+        zyppng::rpc::HeaderSizeType pendingMessageSize = 0;
         const auto &processMessages = [&] ( ) {
 
           // lambda function that parses the passed message type and checks if the stepId is a valid offset
