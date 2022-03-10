@@ -1160,18 +1160,13 @@ namespace
     rpmts ts = ::rpmtsCreate();
     ::rpmtsSetRootDir( ts, root_r.c_str() );
     ::rpmtsSetVSFlags( ts, RPMVSF_DEFAULT );
-
-    rpmQVKArguments_s qva;
-    memset( &qva, 0, sizeof(rpmQVKArguments_s) );
-#ifndef HAVE_RPM_VERIFY_TRANSACTION_STEP
-    // Legacy: In rpm >= 4.15 qva_flags symbols don't exist
-    // and qva_flags is not used in signature checking at all.
-    qva.qva_flags = (VERIFY_DIGEST|VERIFY_SIGNATURE);
-#else
+#ifdef HAVE_RPM_VERIFY_TRANSACTION_STEP
     ::rpmtsSetVfyFlags( ts, RPMVSF_DEFAULT );
 #endif
+
     RpmlogCapture vresult;
     LocaleGuard guard( LC_ALL, "C" );	// bsc#1076415: rpm log output is localized, but we need to parse it :(
+    static rpmQVKArguments_s qva = ([](){ rpmQVKArguments_s qva; memset( &qva, 0, sizeof(rpmQVKArguments_s) ); return qva; })();
     int res = ::rpmVerifySignatures( &qva, ts, fd, path_r.basename().c_str() );
     guard.restore();
 
