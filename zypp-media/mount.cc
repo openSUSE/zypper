@@ -139,7 +139,7 @@ void Mount::umount( const std::string & path )
       output[output.size()-1] = '\0'; // clip tailing NL
       DBG << "stdout: " << output << endl;
 
-      if  ( output.find ( "device is busy" ) != std::string::npos ) {
+      if  ( output.find ( " is busy" ) != std::string::npos ) { // 'device|target is busy'
         err = "Device is busy";
         doRetry = true;
       }
