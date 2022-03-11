@@ -47,22 +47,10 @@ namespace zypp {
 
 
 Mount::Mount()
-{
-    process = 0;
-    exit_code = -1;
-}
+{}
 
 Mount::~Mount()
-{
-   MIL <<  "~Mount()" << endl;
-
-   if ( process )
-      delete process;
-
-   process = NULL;
-
-   MIL << "~Mount() end" << endl;
-}
+{}
 
 void Mount::mount( const std::string & source,
                    const std::string & target,
@@ -70,205 +58,83 @@ void Mount::mount( const std::string & source,
                    const std::string & options,
                    const Environment & environment )
 {
-    const char *const argv[] = {
-        "/bin/mount",
-        "-t", filesystem.c_str(),
-        "-o", options.c_str(),
-        source.c_str(),
-        target.c_str(),
-        NULL
-     };
+  const char *const argv[] = {
+    "/bin/mount",
+    "-t", filesystem.c_str(),
+    "-o", options.c_str(),
+    source.c_str(),
+    target.c_str(),
+    NULL
+  };
 
-    std::string err;
+  std::string err;    // Error summary
+  std::string value;  // legacy: Exception collects just the last output line
+  ExternalProgram prog { argv, environment, ExternalProgram::Stderr_To_Stdout, false, -1, true };
+  for ( std::string output = prog.receiveLine(); output.length(); output = prog.receiveLine() ) {
+    output[output.size()-1] = '\0'; // clip tailing NL
+    value = std::move( output );
+    DBG << "stdout: " << value << endl;
 
-    this->run(argv, environment, ExternalProgram::Stderr_To_Stdout);
-
-    if ( process == NULL )
-    {
-      ZYPP_THROW(MediaMountException("Mounting media failed", source, target));
+    if ( value.find( "is already mounted on" ) != std::string::npos ) {
+      err = "Media already mounted";
     }
-
-    std::string value;
-    std::string output = process->receiveLine();
-
-    // parse error messages
-    while ( output.length() > 0)
-    {
-        std::string::size_type 	ret;
-
-        // extract \n
-        ret = output.find_first_of ( "\n" );
-        if ( ret != std::string::npos )
-        {
-            value.assign ( output, 0, ret );
-        }
-        else
-        {
-            value = output;
-        }
-
-        DBG << "stdout: " << value << endl;
-
-        if  ( value.find ( "is already mounted on" ) != std::string::npos )
-        {
-            err = "Media already mounted";
-        }
-        else if  ( value.find ( "ermission denied" ) != std::string::npos )
-        {
-            err = "Permission denied";
-        }
-        else if  ( value.find ( "wrong fs type" ) != std::string::npos )
-        {
-            err = "Invalid filesystem on media";
-        }
-        else if  ( value.find ( "No medium found" ) != std::string::npos )
-        {
-            err = "No medium found";
-        }
-        else if  ( value.find ( "Not a directory" ) != std::string::npos )
-        {
-            if( filesystem == "nfs" || filesystem == "nfs4" )
-            {
-                err = "Nfs path is not a directory";
-            }
-            else
-            {
-               err = "Unable to find directory on the media";
-            }
-        }
-
-        output = process->receiveLine();
+    else if ( value.find( "ermission denied" ) != std::string::npos ) {
+      err = "Permission denied";
     }
-
-    int status = Status();
-
-    if ( status == 0 )
-    {
-        // return codes overwites parsed error message
-        err = "";
+    else if ( value.find( "wrong fs type" ) != std::string::npos ) {
+      err = "Invalid filesystem on media";
     }
-    else if ( status != 0 && err == "" )
-    {
-        err = "Mounting media failed";
+    else if ( value.find( "No medium found" ) != std::string::npos ) {
+      err = "No medium found";
     }
+    else if ( value.find( "Not a directory" ) != std::string::npos ) {
+      if ( filesystem == "nfs" || filesystem == "nfs4" ) {
+        err = "NFS path is not a directory";
+      }
+      else {
+        err = "Unable to find directory on the media";
+      }
+    }
+  }
+  int exitCode = prog.close();
 
-    if ( err != "" ) {
-      WAR << "mount " << source << " " << target << ": " << err << endl;
-      ZYPP_THROW(MediaMountException(err, source, target, value));
-    } else {
-      MIL << "mounted " << source << " " << target << endl;
-    }
+  if ( exitCode != 0 ) {
+    if ( err.empty() ) err = "Mounting media failed";
+    WAR << "mount " << source << " " << target << ": " << exitCode << ": " << err << endl;
+    ZYPP_THROW(MediaMountException(err, source, target, value));
+  }
+  else
+    MIL << "mounted " << source << " " << target << endl;
 }
 
 void Mount::umount( const std::string & path )
 {
-    const char *const argv[] = {
-        "/bin/umount",
-        path.c_str(),
-        NULL
-     };
+  const char *const argv[] = {
+    "/bin/umount",
+    path.c_str(),
+    NULL
+  };
 
-    std::string err;
+  std::string err;  // Error summary
+  ExternalProgram prog { argv, ExternalProgram::Stderr_To_Stdout, false, -1, true };
+  for ( std::string output = prog.receiveLine(); output.length(); output = prog.receiveLine() ) {
+    output[output.size()-1] = '\0'; // clip tailing NL
+    DBG << "stdout: " << output << endl;
 
-    this->run(argv, ExternalProgram::Stderr_To_Stdout);
-
-    if ( process == NULL )
-    {
-        ZYPP_THROW(MediaUnmountException("E_mount_failed", path));
+    if  ( output.find ( "device is busy" ) != std::string::npos ) {
+      err = "Device is busy";
     }
 
-    std::string value;
-    std::string output = process->receiveLine();
-
-    // parse error messages
-    while ( output.length() > 0)
-    {
-        std::string::size_type 	ret;
-
-        // extract \n
-        ret = output.find_first_of ( "\n" );
-        if ( ret != std::string::npos )
-        {
-            value.assign ( output, 0, ret );
-        }
-        else
-        {
-            value = output;
-        }
-
-        DBG << "stdout: " << value << endl;
-
-        // if  ( value.find ( "not mounted" ) != std::string::npos )
-        // {
-        //    err = Error::E_already_mounted;
-        // }
-
-        if  ( value.find ( "device is busy" ) != std::string::npos )
-        {
-            err = "Device is busy";
-        }
-
-        output = process->receiveLine();
-    }
-
-    int status = Status();
-
-    if ( status == 0 )
-    {
-        // return codes overwites parsed error message
-        err = "";
-    }
-    else if ( status != 0 && err == "" )
-    {
-        err = "Unmounting media failed";
-    }
-
-    if ( err != "") {
-      WAR << "umount " << path << ": " << err << endl;
-      ZYPP_THROW(MediaUnmountException(err, path));
-    } else {
-      MIL << "unmounted " << path << endl;
-    }
-}
-
-void Mount::run( const char *const *argv, const Environment& environment,
-                 ExternalProgram::Stderr_Disposition disp )
-{
-  exit_code = -1;
-
-  if ( process != NULL )
-  {
-     delete process;
-     process = NULL;
   }
-  // Launch the program
+  int exitCode = prog.close();
 
-  process = new ExternalProgram(argv, environment, disp, false, -1, true);
-}
-
-/*--------------------------------------------------------------*/
-/* Return the exit status of the Mount process, closing the	*/
-/* connection if not already done				*/
-/*--------------------------------------------------------------*/
-int Mount::Status()
-{
-   if ( process == NULL )
-      return -1;
-
-   exit_code = process->close();
-   process->kill();
-   delete process;
-   process = 0;
-
-   DBG << "exit code: " << exit_code << endl;
-
-   return exit_code;
-}
-
-/* Forcably kill the process */
-void Mount::Kill()
-{
-  if (process) process->kill();
+  if ( exitCode != 0 ) {
+    if ( err.empty() ) err = "Unmounting media failed";
+    WAR << "umount " << path << ": " << exitCode << ": " << err << endl;
+    ZYPP_THROW(MediaUnmountException(err, path));
+  }
+  else
+    MIL << "unmounted " << path << endl;
 }
 
 // STATIC

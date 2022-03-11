@@ -138,41 +138,10 @@ namespace zypp {
         getEntries(const std::string &mtab = "");
 
     private:
-
-        /** The connection to the mount process.
-         * */
-        ExternalProgram *process;
-
-        /**
-         * Run mount with the specified arguments and handle stderr.
-         * @param argv Mount arguments
-         * @param environment Addittional environment to set
-         * @param stderr_disp How to handle stderr, merged with stdout by default
-         * */
-        void run( const char *const *argv, const Environment& environment,
-                  ExternalProgram::Stderr_Disposition stderr_disp =
-                  ExternalProgram::Stderr_To_Stdout);
-
-        void run( const char *const *argv,
-                  ExternalProgram::Stderr_Disposition stderr_disp =
-                  ExternalProgram::Stderr_To_Stdout) {
-          Environment notused;
-          run( argv, notused, stderr_disp );
-        }
-
-        /** Return the exit status of the process, closing the connection if
-         * not already done.
-         * */
-        int Status();
-
-        /** Forcably kill the process
-         * */
-        void Kill();
-
-
-        /** The exit code of the process, or -1 if not yet known.
-         * */
-        int exit_code;
+#if LEGACY(1722)
+        ExternalProgram * _bincompat1;
+        int               _bincompat2;
+#endif
     };
 
 
