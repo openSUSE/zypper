@@ -136,7 +136,7 @@ void Mount::umount( const std::string & path )
 
     ExternalProgram prog { argv, ExternalProgram::Stderr_To_Stdout, false, -1, true };
     for ( std::string output = prog.receiveLine(); output.length(); output = prog.receiveLine() ) {
-      output[output.size()-1] = '\0'; // clip tailing NL
+      output.pop_back();  // clip tailing NL
       DBG << "stdout: " << output << endl;
 
       if  ( output.find ( " is busy" ) != std::string::npos ) { // 'device|target is busy'
