@@ -116,17 +116,37 @@ void Mount::umount( const std::string & path )
   };
 
   std::string err;  // Error summary
-  ExternalProgram prog { argv, ExternalProgram::Stderr_To_Stdout, false, -1, true };
-  for ( std::string output = prog.receiveLine(); output.length(); output = prog.receiveLine() ) {
-    output[output.size()-1] = '\0'; // clip tailing NL
-    DBG << "stdout: " << output << endl;
+  int exitCode = -1;
 
-    if  ( output.find ( "device is busy" ) != std::string::npos ) {
-      err = "Device is busy";
+  bool doRetry = false;
+  unsigned numRetry = 2;
+  do {
+    if ( doRetry ) {
+      if ( --numRetry ) {
+        WAR << "umount " << path << ": " << exitCode << ": " << err << " - retrying in 1 sec." << endl;
+        sleep( 1 );
+        err.clear();
+        doRetry = false;
+      }
+      else {
+        WAR << "umount " << path << ": " << exitCode << ": " << err << " - giving up" << endl;
+        break;
+      }
     }
 
-  }
-  int exitCode = prog.close();
+    ExternalProgram prog { argv, ExternalProgram::Stderr_To_Stdout, false, -1, true };
+    for ( std::string output = prog.receiveLine(); output.length(); output = prog.receiveLine() ) {
+      output[output.size()-1] = '\0'; // clip tailing NL
+      DBG << "stdout: " << output << endl;
+
+      if  ( output.find ( "device is busy" ) != std::string::npos ) {
+        err = "Device is busy";
+        doRetry = true;
+      }
+    }
+    exitCode = prog.close();
+
+  } while( exitCode != 0 && doRetry );
 
   if ( exitCode != 0 ) {
     if ( err.empty() ) err = "Unmounting media failed";
