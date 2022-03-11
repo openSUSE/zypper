@@ -119,7 +119,7 @@ BOOST_AUTO_TEST_CASE(unsigned_pkg)
     { RpmDb::CHK_OK,	"    Header SHA256 digest: OK" },
     { RpmDb::CHK_OK,	"    Payload SHA256 digest: OK" },
     { RpmDb::CHK_OK,	"    MD5 digest: OK" },
-    { RpmDb::CHK_NOSIG,	"    Package is not signed!" },
+    { RpmDb::CHK_NOSIG,	"    Package header is not signed!" },
   } };
   BOOST_CHECK_EQUAL( xpct, cs );
 }
