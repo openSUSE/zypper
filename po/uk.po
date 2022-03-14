@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypp.uk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-24 18:28+0100\n"
+"POT-Creation-Date: 2022-03-14 15:21+0100\n"
 "PO-Revision-Date: 2021-03-11 21:56+0000\n"
 "Last-Translator: Lesath <4lesath@gmail.com>\n"
 "Language-Team: Ukrainian <https://l10n.opensuse.org/projects/libzypp/master/"
@@ -4750,8 +4750,8 @@ msgstr ""
 
 #. TranslatorExplanation after semicolon is error message
 #. TranslatorExplanation the colon is followed by an error message
-#: zypp/target/rpm/RpmDb.cc:467 zypp/target/rpm/RpmDb.cc:1769
-#: zypp/target/rpm/RpmDb.cc:1928
+#: zypp/target/rpm/RpmDb.cc:467 zypp/target/rpm/RpmDb.cc:1810
+#: zypp/target/rpm/RpmDb.cc:1969
 msgid "RPM failed: "
 msgstr "Помилка RPM: "
 
@@ -4767,25 +4767,29 @@ msgstr "Не вдалося імпортувати відкритий ключ %
 msgid "Failed to remove public key %1%"
 msgstr "Не вдалося вилучити відкрити ключ %1%"
 
-#: zypp/target/rpm/RpmDb.cc:1235
-msgid "Package is not signed!"
-msgstr "Пакунок не підписаний!"
+#: zypp/target/rpm/RpmDb.cc:1271
+msgid "Package header is not signed!"
+msgstr ""
+
+#: zypp/target/rpm/RpmDb.cc:1273
+msgid "Package payload is not signed!"
+msgstr ""
 
 #. Translator: %s = name of an rpm package. A list of diffs follows
 #. this message.
-#: zypp/target/rpm/RpmDb.cc:1568
+#: zypp/target/rpm/RpmDb.cc:1609
 #, c-format, boost-format
 msgid "Changed configuration files for %s:"
 msgstr "Змінено конфігураційні файли для %s:"
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:1750
+#: zypp/target/rpm/RpmDb.cc:1791
 #, c-format, boost-format
 msgid "rpm saved %s as %s, but it was impossible to determine the difference"
 msgstr "rpm збережено %s як %s, але було неможливо виявити різницю"
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:1752
+#: zypp/target/rpm/RpmDb.cc:1793
 #, c-format, boost-format
 msgid ""
 "rpm saved %s as %s.\n"
@@ -4795,13 +4799,13 @@ msgstr ""
 "Ось перші 25 рядків розбіжностей:\n"
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:1755
+#: zypp/target/rpm/RpmDb.cc:1796
 #, c-format, boost-format
 msgid "rpm created %s as %s, but it was impossible to determine the difference"
 msgstr "rpm створила %s як %s, але було неможливо виявити різницю"
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:1757
+#: zypp/target/rpm/RpmDb.cc:1798
 #, c-format, boost-format
 msgid ""
 "rpm created %s as %s.\n"
@@ -4814,47 +4818,47 @@ msgstr ""
 #. TranslatorExplanation Text is followed by a ':'  and the actual output.
 #. report additional rpm output in finish (LEGACY! Lines are immediately reported as RemoveResolvableReport::contentRpmout)
 #. TranslatorExplanation Text is followed by a ':'  and the actual output.
-#: zypp/target/rpm/RpmDb.cc:1785 zypp/target/rpm/RpmDb.cc:1944
+#: zypp/target/rpm/RpmDb.cc:1826 zypp/target/rpm/RpmDb.cc:1985
 msgid "Additional rpm output"
 msgstr "Додатковий вивід rpm"
 
-#: zypp/target/rpm/RpmDb.cc:2086
+#: zypp/target/rpm/RpmDb.cc:2127
 #, c-format, boost-format
 msgid "created backup %s"
 msgstr "створено резервну копію %s"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2107
+#: zypp/target/rpm/RpmDb.cc:2148
 msgid "Signature is OK"
 msgstr "З підписом усе гаразд"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2109
+#: zypp/target/rpm/RpmDb.cc:2150
 msgid "Unknown type of signature"
 msgstr "Невідомий тип підпису"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2111
+#: zypp/target/rpm/RpmDb.cc:2152
 msgid "Signature does not verify"
 msgstr "Підпис не перевіряється"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2113
+#: zypp/target/rpm/RpmDb.cc:2154
 msgid "Signature is OK, but key is not trusted"
 msgstr "З підписом усе гаразд, але ключ - ненадійний"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2115
+#: zypp/target/rpm/RpmDb.cc:2156
 msgid "Signatures public key is not available"
 msgstr "Публічний ключ підписів - недоступний"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2117
+#: zypp/target/rpm/RpmDb.cc:2158
 msgid "File does not exist or signature can't be checked"
 msgstr "Файл не існує чи підпис не можна перевірити"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2119
+#: zypp/target/rpm/RpmDb.cc:2160
 msgid "File is unsigned"
 msgstr "Файл не підписаний"
 
@@ -5224,6 +5228,9 @@ msgid ""
 msgstr ""
 "Помилка (curl) завантаження «%s»:\n"
 "Не вдається отримати відповідь HTTP\n"
+
+#~ msgid "Package is not signed!"
+#~ msgstr "Пакунок не підписаний!"
 
 #~ msgid "%s does not belong to a distupgrade repository"
 #~ msgstr "%s не належить до сховища distupgrade (оновлення дистрибутиву)"

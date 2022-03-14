@@ -15,11 +15,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypp.nl\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-24 18:28+0100\n"
+"POT-Creation-Date: 2022-03-14 15:21+0100\n"
 "PO-Revision-Date: 2022-02-25 01:12+0000\n"
 "Last-Translator: Freek de Kruijf <freek@opensuse.org>\n"
-"Language-Team: Dutch <https://l10n.opensuse.org/projects/libzypp/master/nl/>"
-"\n"
+"Language-Team: Dutch <https://l10n.opensuse.org/projects/libzypp/master/nl/"
+">\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -4431,7 +4431,8 @@ msgstr "De geïnstalleerde %1% blokkeert de gewenste actie."
 
 #: zypp/solver/detail/SATResolver.cc:1260
 msgid "Typically you want to keep the PTF and choose to cancel the action."
-msgstr "U wilt typisch de PTF behouden en er voor kiezen de actie te annuleren."
+msgstr ""
+"U wilt typisch de PTF behouden en er voor kiezen de actie te annuleren."
 
 #: zypp/solver/detail/SATResolver.cc:1316
 #, boost-format
@@ -4608,8 +4609,8 @@ msgstr "Uitvoeren van de transactie is mislukt vanwege de volgende problemen:"
 
 #. TranslatorExplanation after semicolon is error message
 #. TranslatorExplanation the colon is followed by an error message
-#: zypp/target/rpm/RpmDb.cc:467 zypp/target/rpm/RpmDb.cc:1769
-#: zypp/target/rpm/RpmDb.cc:1928
+#: zypp/target/rpm/RpmDb.cc:467 zypp/target/rpm/RpmDb.cc:1810
+#: zypp/target/rpm/RpmDb.cc:1969
 msgid "RPM failed: "
 msgstr "RPM is mislukt: "
 
@@ -4625,19 +4626,23 @@ msgstr "Importeren van publieke sleutel %1% is mislukt"
 msgid "Failed to remove public key %1%"
 msgstr "Verwijderen van publieke sleutel %1% is mislukt"
 
-#: zypp/target/rpm/RpmDb.cc:1235
-msgid "Package is not signed!"
-msgstr "Pakket is niet ondertekend!"
+#: zypp/target/rpm/RpmDb.cc:1271
+msgid "Package header is not signed!"
+msgstr ""
+
+#: zypp/target/rpm/RpmDb.cc:1273
+msgid "Package payload is not signed!"
+msgstr ""
 
 #. Translator: %s = name of an rpm package. A list of diffs follows
 #. this message.
-#: zypp/target/rpm/RpmDb.cc:1568
+#: zypp/target/rpm/RpmDb.cc:1609
 #, c-format, boost-format
 msgid "Changed configuration files for %s:"
 msgstr "Configuratiebestanden gewijzigd voor %s:"
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:1750
+#: zypp/target/rpm/RpmDb.cc:1791
 #, c-format, boost-format
 msgid "rpm saved %s as %s, but it was impossible to determine the difference"
 msgstr ""
@@ -4645,7 +4650,7 @@ msgstr ""
 "te bepalen"
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:1752
+#: zypp/target/rpm/RpmDb.cc:1793
 #, c-format, boost-format
 msgid ""
 "rpm saved %s as %s.\n"
@@ -4655,7 +4660,7 @@ msgstr ""
 "Dit zijn de eerste 25 regels die verschillend zijn:\n"
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:1755
+#: zypp/target/rpm/RpmDb.cc:1796
 #, c-format, boost-format
 msgid "rpm created %s as %s, but it was impossible to determine the difference"
 msgstr ""
@@ -4663,7 +4668,7 @@ msgstr ""
 "achterhalen"
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:1757
+#: zypp/target/rpm/RpmDb.cc:1798
 #, c-format, boost-format
 msgid ""
 "rpm created %s as %s.\n"
@@ -4677,47 +4682,47 @@ msgstr ""
 #. TranslatorExplanation Text is followed by a ':'  and the actual output.
 #. report additional rpm output in finish (LEGACY! Lines are immediately reported as RemoveResolvableReport::contentRpmout)
 #. TranslatorExplanation Text is followed by a ':'  and the actual output.
-#: zypp/target/rpm/RpmDb.cc:1785 zypp/target/rpm/RpmDb.cc:1944
+#: zypp/target/rpm/RpmDb.cc:1826 zypp/target/rpm/RpmDb.cc:1985
 msgid "Additional rpm output"
 msgstr "Aanvullende rpm-uitvoer"
 
-#: zypp/target/rpm/RpmDb.cc:2086
+#: zypp/target/rpm/RpmDb.cc:2127
 #, c-format, boost-format
 msgid "created backup %s"
 msgstr "reservekopie %s aangemaakt"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2107
+#: zypp/target/rpm/RpmDb.cc:2148
 msgid "Signature is OK"
 msgstr "Ondertekening is OK"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2109
+#: zypp/target/rpm/RpmDb.cc:2150
 msgid "Unknown type of signature"
 msgstr "Onbekend type ondertekening"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2111
+#: zypp/target/rpm/RpmDb.cc:2152
 msgid "Signature does not verify"
 msgstr "Ondertekening klopt niet"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2113
+#: zypp/target/rpm/RpmDb.cc:2154
 msgid "Signature is OK, but key is not trusted"
 msgstr "Ondertekening is OK, maar sleutel kan niet worden vertrouwd"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2115
+#: zypp/target/rpm/RpmDb.cc:2156
 msgid "Signatures public key is not available"
 msgstr "Handtekeningen van publieke sleutel zijn niet beschikbaar"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2117
+#: zypp/target/rpm/RpmDb.cc:2158
 msgid "File does not exist or signature can't be checked"
 msgstr "Bestand bestaat niet of ondertekening kan niet gecontroleerd worden"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2119
+#: zypp/target/rpm/RpmDb.cc:2160
 msgid "File is unsigned"
 msgstr "Bestand heeft geen ondertekening"
 
@@ -5085,6 +5090,9 @@ msgid ""
 msgstr ""
 "Fout bij downloaden (curl) voor '%s':\n"
 "Kan HTTP-respons niet ophalen\n"
+
+#~ msgid "Package is not signed!"
+#~ msgstr "Pakket is niet ondertekend!"
 
 #~ msgid "%s does not belong to a distupgrade repository"
 #~ msgstr "%s behoort niet tot een opslagruimte voor distributie-upgrade"

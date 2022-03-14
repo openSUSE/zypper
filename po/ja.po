@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-24 18:28+0100\n"
+"POT-Creation-Date: 2022-03-14 15:21+0100\n"
 "PO-Revision-Date: 2022-02-25 01:12+0000\n"
 "Last-Translator: Yasuhiko Kamata <belphegor@belbel.or.jp>\n"
 "Language-Team: Japanese <https://l10n.opensuse.org/projects/libzypp/master/"
@@ -4593,8 +4593,8 @@ msgstr "下記の問題が発生したことによって処理が失敗しまし
 
 #. TranslatorExplanation after semicolon is error message
 #. TranslatorExplanation the colon is followed by an error message
-#: zypp/target/rpm/RpmDb.cc:467 zypp/target/rpm/RpmDb.cc:1769
-#: zypp/target/rpm/RpmDb.cc:1928
+#: zypp/target/rpm/RpmDb.cc:467 zypp/target/rpm/RpmDb.cc:1810
+#: zypp/target/rpm/RpmDb.cc:1969
 msgid "RPM failed: "
 msgstr "RPMの失敗: "
 
@@ -4610,25 +4610,29 @@ msgstr "公開鍵をファイル %1% からインポートすることができ�
 msgid "Failed to remove public key %1%"
 msgstr "公開鍵 %1% を削除することができませんでした"
 
-#: zypp/target/rpm/RpmDb.cc:1235
-msgid "Package is not signed!"
-msgstr "パッケージに署名がありません！"
+#: zypp/target/rpm/RpmDb.cc:1271
+msgid "Package header is not signed!"
+msgstr ""
+
+#: zypp/target/rpm/RpmDb.cc:1273
+msgid "Package payload is not signed!"
+msgstr ""
 
 #. Translator: %s = name of an rpm package. A list of diffs follows
 #. this message.
-#: zypp/target/rpm/RpmDb.cc:1568
+#: zypp/target/rpm/RpmDb.cc:1609
 #, c-format, boost-format
 msgid "Changed configuration files for %s:"
 msgstr "%s 向けに変更された設定ファイル:"
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:1750
+#: zypp/target/rpm/RpmDb.cc:1791
 #, c-format, boost-format
 msgid "rpm saved %s as %s, but it was impossible to determine the difference"
 msgstr "rpmは %s を %s として保存しましたが、差異を判別できませんでした"
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:1752
+#: zypp/target/rpm/RpmDb.cc:1793
 #, c-format, boost-format
 msgid ""
 "rpm saved %s as %s.\n"
@@ -4638,13 +4642,13 @@ msgstr ""
 "以下は差異のある最初の25行です。\n"
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:1755
+#: zypp/target/rpm/RpmDb.cc:1796
 #, c-format, boost-format
 msgid "rpm created %s as %s, but it was impossible to determine the difference"
 msgstr "rpmは %s を %s として作成しましたが、差異を判別できませんでした"
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:1757
+#: zypp/target/rpm/RpmDb.cc:1798
 #, c-format, boost-format
 msgid ""
 "rpm created %s as %s.\n"
@@ -4657,47 +4661,47 @@ msgstr ""
 #. TranslatorExplanation Text is followed by a ':'  and the actual output.
 #. report additional rpm output in finish (LEGACY! Lines are immediately reported as RemoveResolvableReport::contentRpmout)
 #. TranslatorExplanation Text is followed by a ':'  and the actual output.
-#: zypp/target/rpm/RpmDb.cc:1785 zypp/target/rpm/RpmDb.cc:1944
+#: zypp/target/rpm/RpmDb.cc:1826 zypp/target/rpm/RpmDb.cc:1985
 msgid "Additional rpm output"
 msgstr "追加のrpm出力"
 
-#: zypp/target/rpm/RpmDb.cc:2086
+#: zypp/target/rpm/RpmDb.cc:2127
 #, c-format, boost-format
 msgid "created backup %s"
 msgstr "バックアップ %s が作成されました"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2107
+#: zypp/target/rpm/RpmDb.cc:2148
 msgid "Signature is OK"
 msgstr "署名に問題はありません"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2109
+#: zypp/target/rpm/RpmDb.cc:2150
 msgid "Unknown type of signature"
 msgstr "不明な種類の署名です"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2111
+#: zypp/target/rpm/RpmDb.cc:2152
 msgid "Signature does not verify"
 msgstr "署名は正しくありません"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2113
+#: zypp/target/rpm/RpmDb.cc:2154
 msgid "Signature is OK, but key is not trusted"
 msgstr "署名に問題はありませんが、鍵を信頼していません"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2115
+#: zypp/target/rpm/RpmDb.cc:2156
 msgid "Signatures public key is not available"
 msgstr "署名の公開鍵がありません"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2117
+#: zypp/target/rpm/RpmDb.cc:2158
 msgid "File does not exist or signature can't be checked"
 msgstr "ファイルが存在しないか、署名を確認できません"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2119
+#: zypp/target/rpm/RpmDb.cc:2160
 msgid "File is unsigned"
 msgstr "ファイルに署名がありません"
 
@@ -5070,6 +5074,9 @@ msgid ""
 msgstr ""
 "'%s' のダウンロード (curl) でエラーが発生しました:\n"
 "HTTP レスポンスの取得ができませんでした\n"
+
+#~ msgid "Package is not signed!"
+#~ msgstr "パッケージに署名がありません！"
 
 #~ msgid "%s does not belong to a distupgrade repository"
 #~ msgstr "%s はdistupgradeのリポジトリに属していません"

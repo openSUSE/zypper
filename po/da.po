@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libzypp\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-24 18:28+0100\n"
+"POT-Creation-Date: 2022-03-14 15:21+0100\n"
 "PO-Revision-Date: 2019-12-06 11:54+0000\n"
 "Last-Translator: scootergrisen <scootergrisen@gmail.com>\n"
 "Language-Team: Danish <https://l10n.opensuse.org/projects/libzypp/master/da/"
@@ -4560,8 +4560,8 @@ msgstr ""
 
 #. TranslatorExplanation after semicolon is error message
 #. TranslatorExplanation the colon is followed by an error message
-#: zypp/target/rpm/RpmDb.cc:467 zypp/target/rpm/RpmDb.cc:1769
-#: zypp/target/rpm/RpmDb.cc:1928
+#: zypp/target/rpm/RpmDb.cc:467 zypp/target/rpm/RpmDb.cc:1810
+#: zypp/target/rpm/RpmDb.cc:1969
 msgid "RPM failed: "
 msgstr "RPM mislykkedes: "
 
@@ -4577,25 +4577,29 @@ msgstr "Import af offentlig nøgle %1% mislykkedes"
 msgid "Failed to remove public key %1%"
 msgstr "Fjernelse af den offentlige nøgle %1% mislykkedes"
 
-#: zypp/target/rpm/RpmDb.cc:1235
-msgid "Package is not signed!"
-msgstr "Pakke er ikke signeret!"
+#: zypp/target/rpm/RpmDb.cc:1271
+msgid "Package header is not signed!"
+msgstr ""
+
+#: zypp/target/rpm/RpmDb.cc:1273
+msgid "Package payload is not signed!"
+msgstr ""
 
 #. Translator: %s = name of an rpm package. A list of diffs follows
 #. this message.
-#: zypp/target/rpm/RpmDb.cc:1568
+#: zypp/target/rpm/RpmDb.cc:1609
 #, c-format, boost-format
 msgid "Changed configuration files for %s:"
 msgstr "Konfigurationsfiler er ændret for %s:"
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:1750
+#: zypp/target/rpm/RpmDb.cc:1791
 #, c-format, boost-format
 msgid "rpm saved %s as %s, but it was impossible to determine the difference"
 msgstr "rpm gemte %s som %s, men det var umuligt at bestemme forskellen"
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:1752
+#: zypp/target/rpm/RpmDb.cc:1793
 #, c-format, boost-format
 msgid ""
 "rpm saved %s as %s.\n"
@@ -4605,13 +4609,13 @@ msgstr ""
 "Her er de første 25 linjer af forskelle:\n"
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:1755
+#: zypp/target/rpm/RpmDb.cc:1796
 #, c-format, boost-format
 msgid "rpm created %s as %s, but it was impossible to determine the difference"
 msgstr "rpm oprettede %s som %s, men det var umuligt at bestemme forskellen"
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:1757
+#: zypp/target/rpm/RpmDb.cc:1798
 #, c-format, boost-format
 msgid ""
 "rpm created %s as %s.\n"
@@ -4624,47 +4628,47 @@ msgstr ""
 #. TranslatorExplanation Text is followed by a ':'  and the actual output.
 #. report additional rpm output in finish (LEGACY! Lines are immediately reported as RemoveResolvableReport::contentRpmout)
 #. TranslatorExplanation Text is followed by a ':'  and the actual output.
-#: zypp/target/rpm/RpmDb.cc:1785 zypp/target/rpm/RpmDb.cc:1944
+#: zypp/target/rpm/RpmDb.cc:1826 zypp/target/rpm/RpmDb.cc:1985
 msgid "Additional rpm output"
 msgstr "Yderligere rpm-output"
 
-#: zypp/target/rpm/RpmDb.cc:2086
+#: zypp/target/rpm/RpmDb.cc:2127
 #, c-format, boost-format
 msgid "created backup %s"
 msgstr "backup %s blev oprettet"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2107
+#: zypp/target/rpm/RpmDb.cc:2148
 msgid "Signature is OK"
 msgstr "Signatur er OK"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2109
+#: zypp/target/rpm/RpmDb.cc:2150
 msgid "Unknown type of signature"
 msgstr "Ukendt signaturtype"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2111
+#: zypp/target/rpm/RpmDb.cc:2152
 msgid "Signature does not verify"
 msgstr "Signaturen verificerer ikke"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2113
+#: zypp/target/rpm/RpmDb.cc:2154
 msgid "Signature is OK, but key is not trusted"
 msgstr "Signaturen er OK, men nøglen er ikke betroet"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2115
+#: zypp/target/rpm/RpmDb.cc:2156
 msgid "Signatures public key is not available"
 msgstr "Signaturens offentlige nøgle er ikke tilgængelig"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2117
+#: zypp/target/rpm/RpmDb.cc:2158
 msgid "File does not exist or signature can't be checked"
 msgstr "Filen findes ikke eller signaturen kan ikke tjekkes"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2119
+#: zypp/target/rpm/RpmDb.cc:2160
 msgid "File is unsigned"
 msgstr "Filen er uden signatur"
 
@@ -5027,6 +5031,9 @@ msgid ""
 "Download (curl) error for '%s':\n"
 "Unable to retrieve HTTP response\n"
 msgstr ""
+
+#~ msgid "Package is not signed!"
+#~ msgstr "Pakke er ikke signeret!"
 
 #~ msgid "%s does not belong to a distupgrade repository"
 #~ msgstr "%s hører ikke til en distopgradering-softwarekilde"

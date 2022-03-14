@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-24 18:28+0100\n"
+"POT-Creation-Date: 2022-03-14 15:21+0100\n"
 "PO-Revision-Date: 2018-01-29 14:07+0000\n"
 "Last-Translator: Özgür Ateş Fırat <ozgursebahat@mail.ru>\n"
 "Language-Team: Turkish <https://l10n.opensuse.org/projects/libzypp/master/tr/"
@@ -5192,8 +5192,8 @@ msgstr ""
 # clients/online_update_load.ycp:380
 #. TranslatorExplanation after semicolon is error message
 #. TranslatorExplanation the colon is followed by an error message
-#: zypp/target/rpm/RpmDb.cc:467 zypp/target/rpm/RpmDb.cc:1769
-#: zypp/target/rpm/RpmDb.cc:1928
+#: zypp/target/rpm/RpmDb.cc:467 zypp/target/rpm/RpmDb.cc:1810
+#: zypp/target/rpm/RpmDb.cc:1969
 #, fuzzy
 msgid "RPM failed: "
 msgstr "İndirme işlemi başarısız oldu:"
@@ -5210,27 +5210,30 @@ msgstr "%1% dosyasından genel anahtar alınamadı"
 msgid "Failed to remove public key %1%"
 msgstr "'%1%' genel anahtarı silinemedi"
 
-#: zypp/target/rpm/RpmDb.cc:1235
-#, fuzzy
-msgid "Package is not signed!"
-msgstr "Geri yüklenecek paketler"
+#: zypp/target/rpm/RpmDb.cc:1271
+msgid "Package header is not signed!"
+msgstr ""
+
+#: zypp/target/rpm/RpmDb.cc:1273
+msgid "Package payload is not signed!"
+msgstr ""
 
 # clients/sw_single.ycp:310
 #. Translator: %s = name of an rpm package. A list of diffs follows
 #. this message.
-#: zypp/target/rpm/RpmDb.cc:1568
+#: zypp/target/rpm/RpmDb.cc:1609
 #, fuzzy, c-format, boost-format
 msgid "Changed configuration files for %s:"
 msgstr "Yapılandırma dosyalarını kaydet"
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:1750
+#: zypp/target/rpm/RpmDb.cc:1791
 #, c-format, boost-format
 msgid "rpm saved %s as %s, but it was impossible to determine the difference"
 msgstr ""
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:1752
+#: zypp/target/rpm/RpmDb.cc:1793
 #, c-format, boost-format
 msgid ""
 "rpm saved %s as %s.\n"
@@ -5238,13 +5241,13 @@ msgid ""
 msgstr ""
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:1755
+#: zypp/target/rpm/RpmDb.cc:1796
 #, c-format, boost-format
 msgid "rpm created %s as %s, but it was impossible to determine the difference"
 msgstr ""
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:1757
+#: zypp/target/rpm/RpmDb.cc:1798
 #, c-format, boost-format
 msgid ""
 "rpm created %s as %s.\n"
@@ -5255,48 +5258,48 @@ msgstr ""
 #. TranslatorExplanation Text is followed by a ':'  and the actual output.
 #. report additional rpm output in finish (LEGACY! Lines are immediately reported as RemoveResolvableReport::contentRpmout)
 #. TranslatorExplanation Text is followed by a ':'  and the actual output.
-#: zypp/target/rpm/RpmDb.cc:1785 zypp/target/rpm/RpmDb.cc:1944
+#: zypp/target/rpm/RpmDb.cc:1826 zypp/target/rpm/RpmDb.cc:1985
 msgid "Additional rpm output"
 msgstr "Ek rpm çıktısı"
 
 # clients/inst_sw_backup.ycp:260
-#: zypp/target/rpm/RpmDb.cc:2086
+#: zypp/target/rpm/RpmDb.cc:2127
 #, c-format, boost-format
 msgid "created backup %s"
 msgstr "%s yedeklemesi oluşturuldu"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2107
+#: zypp/target/rpm/RpmDb.cc:2148
 msgid "Signature is OK"
 msgstr ""
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2109
+#: zypp/target/rpm/RpmDb.cc:2150
 msgid "Unknown type of signature"
 msgstr ""
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2111
+#: zypp/target/rpm/RpmDb.cc:2152
 msgid "Signature does not verify"
 msgstr ""
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2113
+#: zypp/target/rpm/RpmDb.cc:2154
 msgid "Signature is OK, but key is not trusted"
 msgstr ""
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2115
+#: zypp/target/rpm/RpmDb.cc:2156
 msgid "Signatures public key is not available"
 msgstr ""
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2117
+#: zypp/target/rpm/RpmDb.cc:2158
 msgid "File does not exist or signature can't be checked"
 msgstr ""
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2119
+#: zypp/target/rpm/RpmDb.cc:2160
 msgid "File is unsigned"
 msgstr ""
 
@@ -5671,6 +5674,10 @@ msgid ""
 "Download (curl) error for '%s':\n"
 "Unable to retrieve HTTP response\n"
 msgstr ""
+
+#, fuzzy
+#~ msgid "Package is not signed!"
+#~ msgstr "Geri yüklenecek paketler"
 
 #~ msgid "%s does not belong to a distupgrade repository"
 #~ msgstr "%s dağıtım güncelleme deposuna ait değil."
