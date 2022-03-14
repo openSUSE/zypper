@@ -1,4 +1,19 @@
 -------------------------------------------------------------------
+Mon Mar 14 15:40:04 CET 2022 - ma@suse.de
+
+- Fix package signature check (bsc#184501)
+  Pay attention that header and payload are secured by a valid
+  signature and report more detailed which signature is missing.
+- Retry umount if device is busy (bsc#1196061, closes #381)
+  A previously released ISO image may need a bit more time to
+  release it's loop device. So we wait a bit and retry.
+- Fix serializing/deserializing type mismatch in zypp-rpm
+  protocol (bsc#1196925)
+- Fix handling of ISO media in releaseAll (bsc#1196061)
+- Hint on common ptf resolver conflicts (bsc#1194848)
+- version 17.29.6 (22)
+
+-------------------------------------------------------------------
 Thu Feb 24 13:47:26 CET 2022 - ma@suse.de
 
 - Hint on ptf<>patch resolver conflicts (bsc#1194848)
