@@ -20,7 +20,7 @@ msgstr ""
 "Project-Id-Version: zypp.fi\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-03-14 15:21+0100\n"
-"PO-Revision-Date: 2022-03-10 15:12+0000\n"
+"PO-Revision-Date: 2022-03-16 00:12+0000\n"
 "Last-Translator: Tommi Nieminen <software@legisign.org>\n"
 "Language-Team: Finnish <https://l10n.opensuse.org/projects/libzypp/master/fi/"
 ">\n"
@@ -4816,11 +4816,11 @@ msgstr "Julkisen avaimen %1% poisto epäonnistui"
 
 #: zypp/target/rpm/RpmDb.cc:1271
 msgid "Package header is not signed!"
-msgstr ""
+msgstr "Paketin otsaketta ei ole allekirjoitettu!"
 
 #: zypp/target/rpm/RpmDb.cc:1273
 msgid "Package payload is not signed!"
-msgstr ""
+msgstr "Paketin sisältöä ei ole allekirjoitettu!"
 
 #. Translator: %s = name of an rpm package. A list of diffs follows
 #. this message.
