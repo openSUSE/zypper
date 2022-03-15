@@ -14,8 +14,8 @@ msgstr ""
 "Project-Id-Version: zypp.ru\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-03-14 15:21+0100\n"
-"PO-Revision-Date: 2021-01-04 16:37+0000\n"
-"Last-Translator: Alex Minton <alex239@gmail.com>\n"
+"PO-Revision-Date: 2022-03-16 00:12+0000\n"
+"Last-Translator: Sergey Mashkov <cy6ergn0m@gmail.com>\n"
 "Language-Team: Russian <https://l10n.opensuse.org/projects/libzypp/master/ru/"
 ">\n"
 "Language: ru\n"
@@ -24,7 +24,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 3.6.1\n"
+"X-Generator: Weblate 4.9.1\n"
 
 #: zypp/CountryCode.cc:50
 msgid "Unknown country: "
@@ -4053,6 +4053,8 @@ msgstr "В репозитории нет URL-адреса."
 #, boost-format
 msgid "Expected medium %1%/%2% identified by file '%3%' with content:"
 msgstr ""
+"Ожидается носитель %1%/%2% идентифицированный в файле '%3%' со следующим "
+"содержимым:"
 
 #. [lhs][rhs] 0 = installed; 1 = to be installed
 #. TranslatorExplanation %1%(filename) %2%(package1) %3%(package2)
@@ -4220,27 +4222,30 @@ msgid ""
 "the installed %1% does not belong to a distupgrade repository and must be "
 "replaced"
 msgstr ""
+"установленный пакет %1% не содержится в репозитории обновления и должен быть "
+"заменён"
 
 #. just in case
 #: zypp/solver/detail/SATResolver.cc:1091
 #, boost-format
 msgid "the to be installed %1% does not belong to a distupgrade repository"
 msgstr ""
+"установленный пакет %1% не принадлежит репозиторию обновления дистрибутива"
 
 #: zypp/solver/detail/SATResolver.cc:1095
 #, boost-format
 msgid "the installed %1% has inferior architecture"
-msgstr ""
+msgstr "установленный %1% имеет низшую архитектуру"
 
 #: zypp/solver/detail/SATResolver.cc:1097
 #, boost-format
 msgid "the to be installed %1% has inferior architecture"
-msgstr ""
+msgstr "будет установлен %1% с низшей архитектурой"
 
 #: zypp/solver/detail/SATResolver.cc:1100
 #, boost-format
 msgid "problem with the installed %1%"
-msgstr ""
+msgstr "проблема с установленным %1%"
 
 #: zypp/solver/detail/SATResolver.cc:1103
 msgid "conflicting requests"
@@ -4253,17 +4258,17 @@ msgstr "проблема с некоторыми зависимостями"
 #: zypp/solver/detail/SATResolver.cc:1109
 #, boost-format
 msgid "nothing provides the requested '%1%'"
-msgstr ""
+msgstr "никто не предоставляет запрошенный '%1%'"
 
 #: zypp/solver/detail/SATResolver.cc:1110
 #: zypp/solver/detail/SATResolver.cc:1114
 msgid "Have you enabled all the required repositories?"
-msgstr ""
+msgstr "Вы включили все необходимые репозитории?"
 
 #: zypp/solver/detail/SATResolver.cc:1113
 #, boost-format
 msgid "the requested package %1% does not exist"
-msgstr ""
+msgstr "запрошенный пакет %1% не существует"
 
 #: zypp/solver/detail/SATResolver.cc:1117
 msgid "unsupported request"
@@ -4272,88 +4277,90 @@ msgstr "запрос не поддерживается"
 #: zypp/solver/detail/SATResolver.cc:1120
 #, boost-format
 msgid "'%1%' is provided by the system and cannot be erased"
-msgstr ""
+msgstr "'%1' поставляется как часть системы и не может быть удалён"
 
 #: zypp/solver/detail/SATResolver.cc:1123
 #, boost-format
 msgid "%1% is not installable"
-msgstr ""
+msgstr "%1% не может быть установлен"
 
 #: zypp/solver/detail/SATResolver.cc:1128
 #, boost-format
 msgid "nothing provides '%1%' needed by the installed %2%"
-msgstr ""
+msgstr "никто не предоставляет '%1' требуемый для установленного %2%"
 
 #: zypp/solver/detail/SATResolver.cc:1130
 #, boost-format
 msgid "nothing provides '%1%' needed by the to be installed %2%"
-msgstr ""
+msgstr "никто не предоставляет '%1%' требуемый для установки %2%"
 
 #: zypp/solver/detail/SATResolver.cc:1133
 #, boost-format
 msgid "cannot install both %1% and %2%"
-msgstr ""
+msgstr "невозможно установить оба %1% и %2%"
 
 #: zypp/solver/detail/SATResolver.cc:1138
 #, boost-format
 msgid "the installed %1% conflicts with '%2%' provided by the installed %3%"
-msgstr ""
+msgstr "установленный %1% конфликтует с '%2%' предоставленным %3%"
 
 #: zypp/solver/detail/SATResolver.cc:1140
 #, boost-format
 msgid ""
 "the installed %1% conflicts with '%2%' provided by the to be installed %3%"
-msgstr ""
+msgstr "установленный %1% конфликтует с '%2%', требуемым для установки %3%"
 
 #: zypp/solver/detail/SATResolver.cc:1144
 #, boost-format
 msgid ""
 "the to be installed %1% conflicts with '%2%' provided by the installed %3%"
 msgstr ""
+"устанавливаемый %1% конфликтует с '%2%' требуемым для установленного %3%"
 
 #: zypp/solver/detail/SATResolver.cc:1146
 #, boost-format
 msgid ""
 "the to be installed %1% conflicts with '%2%' provided by the to be installed "
 "%3%"
-msgstr ""
+msgstr "устанавливаемый %1% конфликтует с '%2%' требуемым для установки %3%"
 
 #: zypp/solver/detail/SATResolver.cc:1153
 #, boost-format
 msgid "the installed %1% obsoletes '%2%' provided by the installed %3%"
-msgstr ""
+msgstr "установленный %1% заменяет '%2%', требуемый для установленного %3%"
 
 #: zypp/solver/detail/SATResolver.cc:1155
 #, boost-format
 msgid "the installed %1% obsoletes '%2%' provided by the to be installed %3%"
-msgstr ""
+msgstr "установленный %1% заменяет '%2%' требуемый для установки %3%"
 
 #: zypp/solver/detail/SATResolver.cc:1159
 #, boost-format
 msgid "the to be installed %1% obsoletes '%2%' provided by the installed %3%"
-msgstr ""
+msgstr "устанавливаемый %1% заменяет '%2%' требуемый для установленного %3%"
 
 #: zypp/solver/detail/SATResolver.cc:1161
 #, boost-format
 msgid ""
 "the to be installed %1% obsoletes '%2%' provided by the to be installed %3%"
-msgstr ""
+msgstr "устанавливаемый %1% заменяет %2% требуемый для установленного %3%"
 
 #: zypp/solver/detail/SATResolver.cc:1166
 #, boost-format
 msgid "the installed %1% conflicts with '%2%' provided by itself"
-msgstr ""
+msgstr "установленный %1% конфликтует с '%2%' предоставленным самим собой"
 
 #: zypp/solver/detail/SATResolver.cc:1168
 #, boost-format
 msgid "the to be installed %1% conflicts with '%2%' provided by itself"
-msgstr ""
+msgstr "устанавливаемый %1% конфликтует с '%2%', который поставляет сам"
 
 #: zypp/solver/detail/SATResolver.cc:1200
 #, boost-format
 msgid ""
 "the installed %1% requires '%2%', but this requirement cannot be provided"
 msgstr ""
+"установленный %1% требует '%2%', но это требование не может быть выполнено"
 
 #: zypp/solver/detail/SATResolver.cc:1202
 #, boost-format
@@ -4361,6 +4368,7 @@ msgid ""
 "the to be installed %1% requires '%2%', but this requirement cannot be "
 "provided"
 msgstr ""
+"устанавливаемый %1% требует '%2%', но это требование не может быть выполнено"
 
 #: zypp/solver/detail/SATResolver.cc:1204
 msgid "deleted providers: "
@@ -4382,45 +4390,46 @@ msgstr "поставщики, не подлежащие установке: "
 #: zypp/solver/detail/SATResolver.cc:1253
 #, boost-format
 msgid "%1% is not yet fully integrated into %2%."
-msgstr ""
+msgstr "%1% ещё не полностью интегрирован в %2%."
 
 #: zypp/solver/detail/SATResolver.cc:1254
 msgid ""
 "Typically you want to keep the PTF and choose to not install the maintenance "
 "patches."
 msgstr ""
+"Скорее всего вы захотите оставить PTF и решите не устанавливать исправления."
 
 #. translator: %1% is the name of a PTF.
 #: zypp/solver/detail/SATResolver.cc:1259
 #, boost-format
 msgid "The installed %1% blocks the desired action."
-msgstr ""
+msgstr "Установленный %1% не позволяет выполнить желаемое действие."
 
 #: zypp/solver/detail/SATResolver.cc:1260
 msgid "Typically you want to keep the PTF and choose to cancel the action."
-msgstr ""
+msgstr "Скорее всего вы хотите оставить PTF и решите отменить действие."
 
 #: zypp/solver/detail/SATResolver.cc:1316
 #, boost-format
 msgid "remove lock to allow removal of %1%"
-msgstr ""
+msgstr "снять блокировку чтобы разрешить удаление %1%"
 
 #: zypp/solver/detail/SATResolver.cc:1321
 #: zypp/solver/detail/SATResolver.cc:1359
 #, boost-format
 msgid "do not install %1%"
-msgstr ""
+msgstr "не устанавливать %1%"
 
 #: zypp/solver/detail/SATResolver.cc:1338
 #: zypp/solver/detail/SATResolver.cc:1380
 #, boost-format
 msgid "keep %1%"
-msgstr ""
+msgstr "оставить %1%"
 
 #: zypp/solver/detail/SATResolver.cc:1343
 #, boost-format
 msgid "remove lock to allow installation of %1%"
-msgstr ""
+msgstr "снять блокировку чтобы разрешить установку %1%"
 
 #: zypp/solver/detail/SATResolver.cc:1394
 #: zypp/solver/detail/SATResolver.cc:1415
@@ -4435,37 +4444,37 @@ msgstr "игнорировать предупреждение о поврежд�
 #: zypp/solver/detail/SATResolver.cc:1400
 #, boost-format
 msgid "do not ask to install a solvable providing %1%"
-msgstr ""
+msgstr "не просить установить решение, которое предоставляет %1%"
 
 #: zypp/solver/detail/SATResolver.cc:1422
 #, boost-format
 msgid "do not ask to delete all solvables providing %1%"
-msgstr ""
+msgstr "не просить удалять все решения, предоставляющие %1%"
 
 #: zypp/solver/detail/SATResolver.cc:1435
 #, boost-format
 msgid "do not install most recent version of %1%"
-msgstr ""
+msgstr "не устанавливать самую последнюю версию %1"
 
 #: zypp/solver/detail/SATResolver.cc:1456
 #, boost-format
 msgid "keep %1% despite the inferior architecture"
-msgstr ""
+msgstr "оставить %1% не смотря на низшую архитектуру"
 
 #: zypp/solver/detail/SATResolver.cc:1461
 #, boost-format
 msgid "install %1% despite the inferior architecture"
-msgstr ""
+msgstr "установить %1% не смотря на низшую архитектуру"
 
 #: zypp/solver/detail/SATResolver.cc:1470
 #, boost-format
 msgid "keep obsolete %1%"
-msgstr ""
+msgstr "оставить устаревший %1%"
 
 #: zypp/solver/detail/SATResolver.cc:1475
 #, boost-format
 msgid "install %1% from excluded repository"
-msgstr ""
+msgstr "установить %1% из выключенного репозитория"
 
 #. translator: %1% is a package name
 #: zypp/solver/detail/SATResolver.cc:1489
@@ -4488,12 +4497,12 @@ msgstr "установить %1%, хоть он и в чёрном списке"
 #: zypp/solver/detail/SATResolver.cc:1515
 #, boost-format
 msgid "downgrade of %1% to %2%"
-msgstr ""
+msgstr "понизить версию %1% до %2%"
 
 #: zypp/solver/detail/SATResolver.cc:1522
 #, boost-format
 msgid "architecture change of %1% to %2%"
-msgstr ""
+msgstr "изменить архитектуру %1% на %2%"
 
 #. FIXME? Actually .ident() must be eq. But the more verbose 'else' isn't bad either.
 #: zypp/solver/detail/SATResolver.cc:1533
@@ -4502,6 +4511,8 @@ msgid ""
 "install %1% (with vendor change)\n"
 "  %2%  -->  %3%"
 msgstr ""
+"установить %1% (со сменой поставщика)\n"
+"  %2%  -->  %3%"
 
 #: zypp/solver/detail/SATResolver.cc:1538
 #, boost-format
@@ -4509,16 +4520,18 @@ msgid ""
 "install %1% from vendor %2%\n"
 "  replacing %3% from vendor %4%"
 msgstr ""
+"установить %1% от поставщика %2%\n"
+"  заменяющий %3% от поставщика %4%"
 
 #: zypp/solver/detail/SATResolver.cc:1547
 #, boost-format
 msgid "replacement of %1% with %2%"
-msgstr ""
+msgstr "замена %1% на %2%"
 
 #: zypp/solver/detail/SATResolver.cc:1558
 #, boost-format
 msgid "deinstallation of %1%"
-msgstr ""
+msgstr "удаление %1%"
 
 #: zypp/target/RpmPostTransCollector.cc:98
 #, boost-format
@@ -4567,7 +4580,7 @@ msgstr "Новое сообщение об обновлении"
 
 #: zypp/target/TargetImpl.cc:2688
 msgid "Executing the transaction failed because of the following problems:"
-msgstr ""
+msgstr "Транзакция не удалась из-за следующих проблем:"
 
 #. TranslatorExplanation after semicolon is error message
 #. TranslatorExplanation the colon is followed by an error message
@@ -4590,11 +4603,11 @@ msgstr "Не удалось удалить открытый ключ %1%"
 
 #: zypp/target/rpm/RpmDb.cc:1271
 msgid "Package header is not signed!"
-msgstr ""
+msgstr "Заголовок пакета не подписан!"
 
 #: zypp/target/rpm/RpmDb.cc:1273
 msgid "Package payload is not signed!"
-msgstr ""
+msgstr "Содержимое пакета на подписано!"
 
 #. Translator: %s = name of an rpm package. A list of diffs follows
 #. this message.
@@ -4824,11 +4837,11 @@ msgstr "Команда завершилась с неизвестной ошиб
 #: zypp-core/zyppng/io/forkspawnengine.cc:150
 #: zypp-core/zyppng/io/forkspawnengine.cc:392
 msgid "Invalid spawn arguments given."
-msgstr ""
+msgstr "Заданы неверные аргументы запуска."
 
 #: zypp-core/zyppng/io/forkspawnengine.cc:206
 msgid "Unable to create control pipe."
-msgstr ""
+msgstr "Невозможно создать контролирующий канал."
 
 #: zypp-core/zyppng/io/forkspawnengine.cc:272
 #, c-format, boost-format
@@ -4860,22 +4873,22 @@ msgstr "Невозможно выполнить fork (%s)."
 #: zypp-core/zyppng/io/forkspawnengine.cc:338
 #, c-format, boost-format
 msgid "Can't exec '%s', chdir failed (%s)."
-msgstr ""
+msgstr "Невозможно выполнить '%s', chdir не удалась (%s)."
 
 #: zypp-core/zyppng/io/forkspawnengine.cc:341
 #, c-format, boost-format
 msgid "Can't exec '%s', chroot failed (%s)."
-msgstr ""
+msgstr "Невозможно выполнить '%s', chroot не удалась (%s)."
 
 #: zypp-core/zyppng/io/forkspawnengine.cc:344
 #, c-format, boost-format
 msgid "Can't exec '%s', exec failed (%s)."
-msgstr ""
+msgstr "Невозможно выполнить '%s', exec не удался (%s)."
 
 #: zypp-core/zyppng/io/forkspawnengine.cc:348
 #, c-format, boost-format
 msgid "Can't exec '%s', unexpected error."
-msgstr ""
+msgstr "Невозможно выполнить '%s': неожиданная ошибка."
 
 #: zypp-media/mediaexception.cc:33
 #, c-format, boost-format
