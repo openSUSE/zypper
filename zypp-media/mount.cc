@@ -122,7 +122,7 @@ void Mount::umount( const std::string & path )
   unsigned numRetry = 2;
   do {
     if ( doRetry ) {
-      if ( --numRetry ) {
+      if ( numRetry-- ) {
         WAR << "umount " << path << ": " << exitCode << ": " << err << " - retrying in 1 sec." << endl;
         sleep( 1 );
         err.clear();
