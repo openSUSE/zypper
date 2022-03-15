@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-03-14 15:21+0100\n"
-"PO-Revision-Date: 2022-02-28 12:12+0000\n"
+"PO-Revision-Date: 2022-03-15 15:12+0000\n"
 "Last-Translator: Marguerite Su <i@marguerite.su>\n"
 "Language-Team: Chinese (China) <https://l10n.opensuse.org/projects/libzypp/"
 "master/zh_CN/>\n"
@@ -4573,11 +4573,11 @@ msgstr "移除公钥 %1% 失败"
 
 #: zypp/target/rpm/RpmDb.cc:1271
 msgid "Package header is not signed!"
-msgstr ""
+msgstr "软件包包头未签名！"
 
 #: zypp/target/rpm/RpmDb.cc:1273
 msgid "Package payload is not signed!"
-msgstr ""
+msgstr "软件包数据体未签名！"
 
 #. Translator: %s = name of an rpm package. A list of diffs follows
 #. this message.
