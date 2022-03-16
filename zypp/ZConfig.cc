@@ -316,8 +316,8 @@ namespace zypp
     typedef std::set<std::string> MultiversionSpec;
 
     public:
-      Impl( const Pathname & override_r = Pathname() )
-        : _parsedZyppConf         	( override_r )
+      Impl()
+        : _parsedZyppConf         	( _autodetectZyppConfPath() )
         , cfg_arch                	( defaultSystemArchitecture() )
         , cfg_textLocale          	( defaultTextLocale() )
         , cfg_cache_path		{ "/var/cache/zypp" }
@@ -350,22 +350,6 @@ namespace zypp
         , pluginsPath			( "/usr/lib/zypp/plugins" )
       {
         MIL << "libzypp: " LIBZYPP_VERSION_STRING << endl;
-        // override_r has higest prio
-        // ZYPP_CONF might override /etc/zypp/zypp.conf
-        if ( _parsedZyppConf.empty() )
-        {
-          _parsedZyppConf = _autodetectZyppConfPath();
-        }
-        else
-        {
-          // Inject this into ZConfig. Be shure this is
-          // allocated via new.
-          // ma: override_r might not be needed anymore since the
-          //     Vendor_test is now able to initialize VendorAttr directly.
-          INT << "Reconfigure to " << _parsedZyppConf << endl;
-          ZConfig::instance()._pimpl.reset( this );
-        }
-
         if ( PathInfo(_parsedZyppConf).isExist() )
         {
           parser::IniDict dict( _parsedZyppConf );
