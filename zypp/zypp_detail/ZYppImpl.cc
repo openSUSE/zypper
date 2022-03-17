@@ -116,7 +116,12 @@ namespace zypp
       if (! _target)
         ZYPP_THROW(Exception("Target not initialized."));
       return _target;
-     }
+    }
+
+    void ZYppImpl::changeTargetTo( Target_Ptr newtarget_r )
+    {
+      _target = newtarget_r;
+    }
 
     void ZYppImpl::initializeTarget( const Pathname & root, bool doRebuild_r )
     {
@@ -126,11 +131,9 @@ namespace zypp
               MIL << "Repeated call to initializeTarget()" << endl;
               return;
           }
-
           _target->unload();
-
       }
-      _target = new Target( root, doRebuild_r );
+      changeTargetTo( new Target( root, doRebuild_r ) );
       _target->buildCache();
     }
 
@@ -139,7 +142,7 @@ namespace zypp
       if (_target)
           _target->unload();
 
-      _target = nullptr;
+      changeTargetTo( nullptr );
     }
 
     //------------------------------------------------------------------------

@@ -109,6 +109,10 @@ namespace zypp
       void setPartitions(const DiskUsageCounter::MountPointSet &mp);
       DiskUsageCounter::MountPointSet getPartitions() const;
 
+    public:
+      /** Hook for actions to trigger if the Target changes (initialize/finish) */
+      void changeTargetTo( Target_Ptr newtarget_r );
+
     private:
       /** */
       Target_Ptr _target;
