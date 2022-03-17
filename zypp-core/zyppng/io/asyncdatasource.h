@@ -54,6 +54,11 @@ namespace zyppng {
      */
     SignalProxy< void (std::size_t)> sigBytesWritten ();
 
+    /*!
+     * Returns true as long as the read channel was not closed ( e.g. sigReadFdClosed was emitted )
+     */
+    bool readFdOpen () const;
+
   protected:
     AsyncDataSource (  );
     off_t writeData(const char *data, off_t count) override;

@@ -2162,7 +2162,7 @@ namespace zypp
           processDataFromScriptFd();
 
           // end of script is always sent by zypp-rpm, we need to wait for it to keep order
-          while ( scriptSource->canRead() && !gotEndOfScript ) {
+          while ( scriptSource->readFdOpen() && scriptSource->canRead() && !gotEndOfScript ) {
             // readyRead will trigger processDataFromScriptFd so no need to call it again
             // we still got nothing, lets wait for more
             scriptSource->waitForReadyRead( 100 );

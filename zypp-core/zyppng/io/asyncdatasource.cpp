@@ -239,8 +239,8 @@ namespace zyppng {
       gotRR = true;
     }) );
 
-    // we can only wait if we are open for reading
-    while ( canRead() && !gotRR ) {
+    // we can only wait if we are open for reading and still have a valid fd
+    while ( readFdOpen() && canRead() && !gotRR ) {
       int rEvents = 0;
       if ( EventDispatcher::waitForFdEvent( d->_readFd,  AbstractEventSource::Read | AbstractEventSource::Error , rEvents, timeout ) ) {
         //simulate signal from read notifier
@@ -266,5 +266,10 @@ namespace zyppng {
   SignalProxy<void (std::size_t)> AsyncDataSource::sigBytesWritten()
   {
     return d_func()->_sigBytesWritten;
+  }
+
+  bool AsyncDataSource::readFdOpen() const
+  {
+    return ( d_func()->_readNotifier && d_func()->_readFd >= 0 );
   }
 }

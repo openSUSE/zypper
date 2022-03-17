@@ -29,6 +29,7 @@ BOOST_AUTO_TEST_CASE ( pipe_read_close )
 
   BOOST_REQUIRE( dataSource->open( pipeFds[0] ) );
   BOOST_REQUIRE( dataSource->canRead() );
+  BOOST_REQUIRE( dataSource->readFdOpen() );
 
   dataSource->connectFunc( &zyppng::AsyncDataSource::sigReadyRead, [&](){
     std::cout <<"Got read"<<std::endl;
@@ -48,6 +49,8 @@ BOOST_AUTO_TEST_CASE ( pipe_read_close )
 
   loop->run();
   writer.join();
+
+  BOOST_REQUIRE ( !dataSource->readFdOpen() );
 
   ::close( pipeFds[0] );
   BOOST_REQUIRE_EQUAL( std::string_view( readData.data(), readData.size() ), text );
