@@ -134,9 +134,7 @@ namespace zypp
 
       /** Overload to realize stream output. */
       virtual std::ostream & dumpOn( std::ostream & str ) const
-      {
-        return str << "TargetImpl";
-      }
+      { return str << "Target(" << root() << ")"; }
 
       /** The RPM database */
       rpm::RpmDb & rpm();
