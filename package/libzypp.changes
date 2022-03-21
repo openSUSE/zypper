@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Mon Mar 21 09:04:36 CET 2022 - ma@suse.de
+
+- Fix possible hang in singletrans mode (bsc#1197134)
+- Do 2 retries if mount is still busy.
+- version 17.29.7 (22)
+
+-------------------------------------------------------------------
 Mon Mar 14 15:40:04 CET 2022 - ma@suse.de
 
 - Fix package signature check (bsc#184501)
