@@ -8,7 +8,7 @@ Mon Mar 21 09:04:36 CET 2022 - ma@suse.de
 -------------------------------------------------------------------
 Mon Mar 14 15:40:04 CET 2022 - ma@suse.de
 
-- Fix package signature check (bsc#184501)
+- Fix package signature check (bsc#1184501)
   Pay attention that header and payload are secured by a valid
   signature and report more detailed which signature is missing.
 - Retry umount if device is busy (bsc#1196061, closes #381)
