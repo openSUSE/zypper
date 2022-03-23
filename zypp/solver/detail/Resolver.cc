@@ -86,6 +86,18 @@ Resolver::Resolver (const ResPool & pool)
     , _solveSrcPackages         ( false )
     , _cleandepsOnRemove        ( ZConfig::instance().solver_cleandepsOnRemove() )
     , _ignoreAlreadyRecommended ( true )
+    , _applyDefault_focus                ( true )
+    , _applyDefault_forceResolve         ( true )
+    , _applyDefault_cleandepsOnRemove    ( true )
+    , _applyDefault_onlyRequires         ( true )
+    , _applyDefault_allowDowngrade       ( true )
+    , _applyDefault_allowNameChange      ( true )
+    , _applyDefault_allowArchChange      ( true )
+    , _applyDefault_allowVendorChange    ( true )
+    , _applyDefault_dupAllowDowngrade    ( true )
+    , _applyDefault_dupAllowNameChange   ( true )
+    , _applyDefault_dupAllowArchChange   ( true )
+    , _applyDefault_dupAllowVendorChange ( true )
 {
     sat::Pool satPool( sat::Pool::instance() );
     _satResolver = new SATResolver(_pool, satPool.get());
@@ -103,12 +115,16 @@ sat::detail::CSolver * Resolver::get() const
 //---------------------------------------------------------------------------
 // forward flags too SATResolver
 
-void Resolver::setFocus( ResolverFocus focus_r )	{ _satResolver->_focus = ( focus_r == ResolverFocus::Default ) ? ZConfig::instance().solver_focus() : focus_r; }
+void Resolver::setFocus( ResolverFocus focus_r )	{
+  _applyDefault_focus = ( focus_r == ResolverFocus::Default );
+  _satResolver->_focus = _applyDefault_focus ? ZConfig::instance().solver_focus() : focus_r;
+}
 ResolverFocus Resolver::focus() const			{ return _satResolver->_focus; }
 
 #define ZOLV_FLAG_TRIBOOL( ZSETTER, ZGETTER, ZVARNAME, ZVARDEFAULT )			\
     void Resolver::ZSETTER( TriBool state_r )						\
-    { _satResolver->ZVARNAME = indeterminate(state_r) ? ZVARDEFAULT : bool(state_r); }	\
+    { _applyDefault_##ZGETTER = indeterminate(state_r);					\
+      _satResolver->ZVARNAME = _applyDefault_##ZGETTER ? ZVARDEFAULT : bool(state_r); }	\
     bool Resolver::ZGETTER() const							\
     { return _satResolver->ZVARNAME; }							\
 
@@ -130,12 +146,14 @@ ZOLV_FLAG_TRIBOOL( dupSetAllowVendorChange,	dupAllowVendorChange,	_dup_allowvend
 
 void Resolver::setOnlyRequires( TriBool state_r )
 {
-  _onlyRequires = indeterminate(state_r) ? ZConfig::instance().solver_onlyRequires() : bool(state_r);
+  _applyDefault_onlyRequires = indeterminate(state_r);
+  _onlyRequires = _applyDefault_onlyRequires ? ZConfig::instance().solver_onlyRequires() : bool(state_r);
 }
 
 void Resolver::setCleandepsOnRemove( TriBool state_r )
 {
-  _cleandepsOnRemove = indeterminate(state_r) ? ZConfig::instance().solver_cleandepsOnRemove() : bool(state_r);
+  _applyDefault_cleandepsOnRemove = indeterminate(state_r);
+  _cleandepsOnRemove = _applyDefault_cleandepsOnRemove ? ZConfig::instance().solver_cleandepsOnRemove() : bool(state_r);
 }
 
 //---------------------------------------------------------------------------

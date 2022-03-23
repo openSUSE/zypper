@@ -86,6 +86,25 @@ class Resolver : private base::NonCopyable
     bool _ignoreAlreadyRecommended:1; // ignore recommended packages that have already been recommended by the installed packages
     //@}
 
+    /** \name applyDefaults
+     * Remember whether global default or explicit settings are applied to SATResolver.
+     * Global defaults may change with the Target, explicit settings not.
+     */
+    //@{
+    bool _applyDefault_focus:1;
+    bool _applyDefault_forceResolve:1;
+    bool _applyDefault_cleandepsOnRemove:1;
+    bool _applyDefault_onlyRequires:1;
+    bool _applyDefault_allowDowngrade:1;
+    bool _applyDefault_allowNameChange:1;
+    bool _applyDefault_allowArchChange:1;
+    bool _applyDefault_allowVendorChange:1;
+    bool _applyDefault_dupAllowDowngrade:1;
+    bool _applyDefault_dupAllowNameChange:1;
+    bool _applyDefault_dupAllowArchChange:1;
+    bool _applyDefault_dupAllowVendorChange:1;
+    //@}
+
     // Additional QueueItems which has to be regarded by the solver
     // This will be used e.g. by solution actions
     solver::detail::SolverQueueItemList _removed_queue_items;
