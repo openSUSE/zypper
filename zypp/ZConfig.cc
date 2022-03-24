@@ -21,6 +21,7 @@ extern "C"
 }
 #include <iostream>
 #include <fstream>
+#include <optional>
 #include <zypp/base/LogTools.h>
 #include <zypp/base/IOStream.h>
 #include <zypp-core/base/InputStream>
@@ -627,6 +628,30 @@ namespace zypp
       ~Impl()
       {}
 
+      void notifyTargetChanged()
+      {
+        Pathname newRoot { _autodetectSystemRoot() };
+        MIL << "notifyTargetChanged (" << newRoot << ")" << endl;
+
+        if ( newRoot.emptyOrRoot() ) {
+          _currentTargetDefaults.reset(); // to initial settigns from /
+        }
+        else {
+          _currentTargetDefaults = TargetDefaults();
+
+          Pathname newConf { newRoot/_autodetectZyppConfPath() };
+          if ( PathInfo(newConf).isExist() ) {
+            parser::IniDict dict( newConf );
+            for ( const auto & [entry,value] : dict.entries( "main" ) ) {
+              (*_currentTargetDefaults).consume( entry, value );
+            }
+          }
+          else {
+            MIL << _parsedZyppConf << " not found, using defaults." << endl;
+          }
+        }
+      }
+
     public:
     /** Remember any parsed zypp.conf. */
     Pathname _parsedZyppConf;
@@ -692,10 +717,11 @@ namespace zypp
 
 
   public:
-    const TargetDefaults & targetDefaults() const { return _initialTargetDefaults; }
-    TargetDefaults &       targetDefaults()       { return _initialTargetDefaults; }
+    const TargetDefaults & targetDefaults() const { return _currentTargetDefaults ? *_currentTargetDefaults : _initialTargetDefaults; }
+    TargetDefaults &       targetDefaults()       { return _currentTargetDefaults ? *_currentTargetDefaults : _initialTargetDefaults; }
   private:
     TargetDefaults                _initialTargetDefaults; ///< Initial TargetDefaults from /
+    std::optional<TargetDefaults> _currentTargetDefaults; ///< TargetDefaults while --root
 
   private:
     // HACK for bnc#906096: let pool re-evaluate multiversion spec
@@ -819,9 +845,11 @@ namespace zypp
   ZConfig::~ZConfig( )
   {}
 
+  void ZConfig::notifyTargetChanged()
+  { return _pimpl->notifyTargetChanged(); }
+
   Pathname ZConfig::systemRoot() const
   { return _autodetectSystemRoot(); }
-
 
   Pathname ZConfig::repoManagerRoot() const
   {

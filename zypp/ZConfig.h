@@ -550,6 +550,8 @@ namespace zypp
       class Impl;
       /** Dtor */
       ~ZConfig();
+      void notifyTargetChanged();  ///< internal
+
   private:
       friend class RepoManager;
       /** The builtin config file value. */

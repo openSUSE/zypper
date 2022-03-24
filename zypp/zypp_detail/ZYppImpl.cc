@@ -121,6 +121,8 @@ namespace zypp
     void ZYppImpl::changeTargetTo( Target_Ptr newtarget_r )
     {
       _target = newtarget_r;
+      ZConfig::instance().notifyTargetChanged();
+      resolver()->setDefaultSolverFlags( /*all_r*/false );  // just changed defaults
     }
 
     void ZYppImpl::initializeTarget( const Pathname & root, bool doRebuild_r )
