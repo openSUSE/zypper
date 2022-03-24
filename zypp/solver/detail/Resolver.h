@@ -143,6 +143,17 @@ class Resolver : private base::NonCopyable
     ResPool pool() const;
     void setPool( const ResPool & pool ) { _pool = pool; }
 
+    /**
+     * Reset all solver flags to the systems default (e.g. from zypp.conf).
+     *
+     * The information whether a \ref SATResolver setting was explicitly set or follows
+     * the targets default (zypp.conf) is stored here in the \ref Resolver.
+     * If \a all_r is \c false, only those settings are updated, which still follow
+     * the target defaults (e.g. after the target has changed). Otherwise all explicit
+     * settings are discarded and the defaults are applied.
+     */
+    void setDefaultSolverFlags( bool all_r );
+
     void addUpgradeRepo( Repository repo_r ) 		{ if ( repo_r && ! repo_r.isSystemRepo() ) _upgradeRepos.insert( repo_r ); }
     bool upgradingRepo( Repository repo_r ) const	{ return( _upgradeRepos.find( repo_r ) != _upgradeRepos.end() ); }
     void removeUpgradeRepo( Repository repo_r )		{ _upgradeRepos.erase( repo_r ); }

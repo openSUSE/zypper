@@ -112,6 +112,29 @@ Resolver::~Resolver()
 sat::detail::CSolver * Resolver::get() const
 { return _satResolver->get(); }
 
+
+void Resolver::setDefaultSolverFlags( bool all_r )
+{
+  MIL << "setDefaultSolverFlags all=" << all_r << endl;
+
+  if ( all_r || _applyDefault_focus ) setFocus( ResolverFocus::Default );
+
+#define ZOLV_FLAG_DEFAULT( ISDEFAULT, ZSETTER )        \
+  if ( all_r || ISDEFAULT ) ZSETTER( indeterminate )
+
+  ZOLV_FLAG_DEFAULT( _applyDefault_forceResolve,         setForceResolve         );
+  ZOLV_FLAG_DEFAULT( _applyDefault_cleandepsOnRemove,    setCleandepsOnRemove    );
+  ZOLV_FLAG_DEFAULT( _applyDefault_onlyRequires,         setOnlyRequires         );
+  ZOLV_FLAG_DEFAULT( _applyDefault_allowDowngrade,       setAllowDowngrade       );
+  ZOLV_FLAG_DEFAULT( _applyDefault_allowNameChange,      setAllowNameChange      );
+  ZOLV_FLAG_DEFAULT( _applyDefault_allowArchChange,      setAllowArchChange      );
+  ZOLV_FLAG_DEFAULT( _applyDefault_allowVendorChange,    setAllowVendorChange    );
+  ZOLV_FLAG_DEFAULT( _applyDefault_dupAllowDowngrade,    dupSetAllowDowngrade    );
+  ZOLV_FLAG_DEFAULT( _applyDefault_dupAllowNameChange,   dupSetAllowNameChange   );
+  ZOLV_FLAG_DEFAULT( _applyDefault_dupAllowArchChange,   dupSetAllowArchChange   );
+  ZOLV_FLAG_DEFAULT( _applyDefault_dupAllowVendorChange, dupSetAllowVendorChange );
+#undef ZOLV_FLAG_TRIBOOL
+}
 //---------------------------------------------------------------------------
 // forward flags too SATResolver
 
@@ -143,6 +166,7 @@ ZOLV_FLAG_TRIBOOL( dupSetAllowVendorChange,	dupAllowVendorChange,	_dup_allowvend
 
 #undef ZOLV_FLAG_TRIBOOL
 //---------------------------------------------------------------------------
+// those two hare handled in here
 
 void Resolver::setOnlyRequires( TriBool state_r )
 {

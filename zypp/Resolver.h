@@ -51,6 +51,19 @@ namespace zypp
     virtual ~Resolver();
 
     /**
+     * Reset all solver flags to the systems default (e.g. from zypp.conf).
+     *
+     * Call this to discard all settings you explicitly applied here. All flags
+     * are adjusted to follow the current systems default. If you want to reset
+     * just a specific flag, call its 'setDefault...' method.
+     *
+     * Calling the method with \a all_r is set to \c false, is used internally.
+     * It updates only those flags which were not explicitly changed. E.g after
+     * switching to a target which uses different defaults in its zypp.conf..
+     */
+    void setDefaultSolverFlags( bool all_r = true );
+
+    /**
      * Resolve package dependencies:
      *
      * Enter \ref systemVerification mode to monitor and repair dependencies

@@ -50,6 +50,9 @@ namespace zypp
   //	Resolver interface forwarded to implementation
   //
   ///////////////////////////////////////////////////////////////////
+  void Resolver::setDefaultSolverFlags( bool all_r )
+  { return _pimpl->setDefaultSolverFlags( all_r ); }
+
   sat::detail::CSolver * Resolver::get() const
   { return _pimpl->get(); }
 
