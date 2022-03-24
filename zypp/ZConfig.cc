@@ -315,6 +315,82 @@ namespace zypp
   {
     typedef std::set<std::string> MultiversionSpec;
 
+    /// Settings that follow a changed Target
+    struct TargetDefaults
+    {
+      TargetDefaults()
+      : solver_focus                        ( ResolverFocus::Default )
+      , solver_onlyRequires                 ( false )
+      , solver_allowVendorChange            ( false )
+      , solver_dupAllowDowngrade            ( true )
+      , solver_dupAllowNameChange           ( true )
+      , solver_dupAllowArchChange           ( true )
+      , solver_dupAllowVendorChange         ( true )
+      , solver_cleandepsOnRemove            ( false )
+      , solver_upgradeTestcasesToKeep       ( 2 )
+      , solverUpgradeRemoveDroppedPackages  ( true )
+      {}
+
+      bool consume( const std::string & entry, const std::string & value )
+      {
+        if ( entry == "solver.focus" )
+        {
+          fromString( value, solver_focus );
+        }
+        else if ( entry == "solver.onlyRequires" )
+        {
+          solver_onlyRequires.set( str::strToBool( value, solver_onlyRequires ) );
+        }
+        else if ( entry == "solver.allowVendorChange" )
+        {
+          solver_allowVendorChange.set( str::strToBool( value, solver_allowVendorChange ) );
+        }
+        else if ( entry == "solver.dupAllowDowngrade" )
+        {
+          solver_dupAllowDowngrade.set( str::strToBool( value, solver_dupAllowDowngrade ) );
+        }
+        else if ( entry == "solver.dupAllowNameChange" )
+        {
+          solver_dupAllowNameChange.set( str::strToBool( value, solver_dupAllowNameChange ) );
+        }
+        else if ( entry == "solver.dupAllowArchChange" )
+        {
+          solver_dupAllowArchChange.set( str::strToBool( value, solver_dupAllowArchChange ) );
+        }
+        else if ( entry == "solver.dupAllowVendorChange" )
+        {
+          solver_dupAllowVendorChange.set( str::strToBool( value, solver_dupAllowVendorChange ) );
+        }
+        else if ( entry == "solver.cleandepsOnRemove" )
+        {
+          solver_cleandepsOnRemove.set( str::strToBool( value, solver_cleandepsOnRemove ) );
+        }
+        else if ( entry == "solver.upgradeTestcasesToKeep" )
+        {
+          solver_upgradeTestcasesToKeep.set( str::strtonum<unsigned>( value ) );
+        }
+        else if ( entry == "solver.upgradeRemoveDroppedPackages" )
+        {
+          solverUpgradeRemoveDroppedPackages.restoreToDefault( str::strToBool( value, solverUpgradeRemoveDroppedPackages.getDefault() ) );
+        }
+        else
+          return false;
+
+        return true;
+      }
+
+      ResolverFocus       solver_focus;
+      Option<bool>        solver_onlyRequires;
+      Option<bool>        solver_allowVendorChange;
+      Option<bool>        solver_dupAllowDowngrade;
+      Option<bool>        solver_dupAllowNameChange;
+      Option<bool>        solver_dupAllowArchChange;
+      Option<bool>        solver_dupAllowVendorChange;
+      Option<bool>        solver_cleandepsOnRemove;
+      Option<unsigned>    solver_upgradeTestcasesToKeep;
+      DefaultOption<bool> solverUpgradeRemoveDroppedPackages;
+    };
+
     public:
       Impl()
         : _parsedZyppConf         	( _autodetectZyppConfPath() )
@@ -336,16 +412,6 @@ namespace zypp
         , gpgCheck			( true )
         , repoGpgCheck			( indeterminate )
         , pkgGpgCheck			( indeterminate )
-        , solver_focus			( ResolverFocus::Default )
-        , solver_onlyRequires		( false )
-        , solver_allowVendorChange	( false )
-        , solver_dupAllowDowngrade	( true )
-        , solver_dupAllowNameChange	( true )
-        , solver_dupAllowArchChange	( true )
-        , solver_dupAllowVendorChange	( true )
-        , solver_cleandepsOnRemove	( false )
-        , solver_upgradeTestcasesToKeep	( 2 )
-        , solverUpgradeRemoveDroppedPackages( true )
         , apply_locks_file		( true )
         , pluginsPath			( "/usr/lib/zypp/plugins" )
       {
@@ -372,6 +438,9 @@ namespace zypp
               //DBG << (*it).first << "=" << (*it).second << endl;
               if ( section == "main" )
               {
+                if ( _initialTargetDefaults.consume( entry, value ) )
+                  continue;
+
                 if ( entry == "arch" )
                 {
                   Arch carch( value );
@@ -476,46 +545,6 @@ namespace zypp
                 {
                   cfg_kernel_keep_spec = value;
                 }
-                else if ( entry == "solver.focus" )
-                {
-                  fromString( value, solver_focus );
-                }
-                else if ( entry == "solver.onlyRequires" )
-                {
-                  solver_onlyRequires.set( str::strToBool( value, solver_onlyRequires ) );
-                }
-                else if ( entry == "solver.allowVendorChange" )
-                {
-                  solver_allowVendorChange.set( str::strToBool( value, solver_allowVendorChange ) );
-                }
-                else if ( entry == "solver.dupAllowDowngrade" )
-                {
-                  solver_dupAllowDowngrade.set( str::strToBool( value, solver_dupAllowDowngrade ) );
-                }
-                else if ( entry == "solver.dupAllowNameChange" )
-                {
-                  solver_dupAllowNameChange.set( str::strToBool( value, solver_dupAllowNameChange ) );
-                }
-                else if ( entry == "solver.dupAllowArchChange" )
-                {
-                  solver_dupAllowArchChange.set( str::strToBool( value, solver_dupAllowArchChange ) );
-                }
-                else if ( entry == "solver.dupAllowVendorChange" )
-                {
-                  solver_dupAllowVendorChange.set( str::strToBool( value, solver_dupAllowVendorChange ) );
-                }
-                else if ( entry == "solver.cleandepsOnRemove" )
-                {
-                  solver_cleandepsOnRemove.set( str::strToBool( value, solver_cleandepsOnRemove ) );
-                }
-                else if ( entry == "solver.upgradeTestcasesToKeep" )
-                {
-                  solver_upgradeTestcasesToKeep.set( str::strtonum<unsigned>( value ) );
-                }
-                else if ( entry == "solver.upgradeRemoveDroppedPackages" )
-                {
-                  solverUpgradeRemoveDroppedPackages.restoreToDefault( str::strToBool( value, solverUpgradeRemoveDroppedPackages.getDefault() ) );
-                }
                 else if ( entry == "solver.checkSystemFile" )
                 {
                   solver_checkSystemFile = Pathname(value);
@@ -575,8 +604,6 @@ namespace zypp
               }
             }
           }
-          //
-
         }
         else
         {
@@ -644,17 +671,6 @@ namespace zypp
     DefaultOption<TriBool>	repoGpgCheck;
     DefaultOption<TriBool>	pkgGpgCheck;
 
-    ResolverFocus	solver_focus;
-    Option<bool>	solver_onlyRequires;
-    Option<bool>	solver_allowVendorChange;
-    Option<bool>	solver_dupAllowDowngrade;
-    Option<bool>	solver_dupAllowNameChange;
-    Option<bool>	solver_dupAllowArchChange;
-    Option<bool>	solver_dupAllowVendorChange;
-    Option<bool>	solver_cleandepsOnRemove;
-    Option<unsigned>	solver_upgradeTestcasesToKeep;
-    DefaultOption<bool> solverUpgradeRemoveDroppedPackages;
-
     Pathname solver_checkSystemFile;
     Pathname solver_checkSystemFileDir;
 
@@ -673,6 +689,13 @@ namespace zypp
 
     /* Other config singleton instances */
     MediaConfig &_mediaConf = MediaConfig::instance();
+
+
+  public:
+    const TargetDefaults & targetDefaults() const { return _initialTargetDefaults; }
+    TargetDefaults &       targetDefaults()       { return _initialTargetDefaults; }
+  private:
+    TargetDefaults                _initialTargetDefaults; ///< Initial TargetDefaults from /
 
   private:
     // HACK for bnc#906096: let pool re-evaluate multiversion spec
@@ -1058,21 +1081,21 @@ namespace zypp
   void ZConfig::resetRepoGpgCheck()			{ _pimpl->repoGpgCheck.restoreToDefault(); }
   void ZConfig::resetPkgGpgCheck()			{ _pimpl->pkgGpgCheck.restoreToDefault(); }
 
-  ResolverFocus ZConfig::solver_focus() const		{ return _pimpl->solver_focus; }
 
-  bool ZConfig::solver_onlyRequires() const
-  { return _pimpl->solver_onlyRequires; }
+  ResolverFocus ZConfig::solver_focus() const           { return _pimpl->targetDefaults().solver_focus; }
+  bool ZConfig::solver_onlyRequires() const             { return _pimpl->targetDefaults().solver_onlyRequires; }
+  bool ZConfig::solver_allowVendorChange() const        { return _pimpl->targetDefaults().solver_allowVendorChange; }
+  bool ZConfig::solver_dupAllowDowngrade() const        { return _pimpl->targetDefaults().solver_dupAllowDowngrade; }
+  bool ZConfig::solver_dupAllowNameChange() const       { return _pimpl->targetDefaults().solver_dupAllowNameChange; }
+  bool ZConfig::solver_dupAllowArchChange() const       { return _pimpl->targetDefaults().solver_dupAllowArchChange; }
+  bool ZConfig::solver_dupAllowVendorChange() const     { return _pimpl->targetDefaults().solver_dupAllowVendorChange; }
+  bool ZConfig::solver_cleandepsOnRemove() const        { return _pimpl->targetDefaults().solver_cleandepsOnRemove; }
+  unsigned ZConfig::solver_upgradeTestcasesToKeep() const { return _pimpl->targetDefaults().solver_upgradeTestcasesToKeep; }
 
-  bool ZConfig::solver_allowVendorChange() const
-  { return _pimpl->solver_allowVendorChange; }
+  bool ZConfig::solverUpgradeRemoveDroppedPackages() const          { return _pimpl->targetDefaults().solverUpgradeRemoveDroppedPackages; }
+  void ZConfig::setSolverUpgradeRemoveDroppedPackages( bool val_r ) { _pimpl->targetDefaults().solverUpgradeRemoveDroppedPackages.set( val_r ); }
+  void ZConfig::resetSolverUpgradeRemoveDroppedPackages()           { _pimpl->targetDefaults().solverUpgradeRemoveDroppedPackages.restoreToDefault(); }
 
-  bool ZConfig::solver_dupAllowDowngrade() const	{ return _pimpl->solver_dupAllowDowngrade; }
-  bool ZConfig::solver_dupAllowNameChange() const	{ return _pimpl->solver_dupAllowNameChange; }
-  bool ZConfig::solver_dupAllowArchChange() const	{ return _pimpl->solver_dupAllowArchChange; }
-  bool ZConfig::solver_dupAllowVendorChange() const	{ return _pimpl->solver_dupAllowVendorChange; }
-
-  bool ZConfig::solver_cleandepsOnRemove() const
-  { return _pimpl->solver_cleandepsOnRemove; }
 
   Pathname ZConfig::solver_checkSystemFile() const
   { return ( _pimpl->solver_checkSystemFile.empty()
@@ -1082,12 +1105,6 @@ namespace zypp
   { return ( _pimpl->solver_checkSystemFileDir.empty()
       ? (configPath()/"systemCheck.d") : _pimpl->solver_checkSystemFileDir ); }
 
-  unsigned ZConfig::solver_upgradeTestcasesToKeep() const
-  { return _pimpl->solver_upgradeTestcasesToKeep; }
-
-  bool ZConfig::solverUpgradeRemoveDroppedPackages() const		{ return _pimpl->solverUpgradeRemoveDroppedPackages; }
-  void ZConfig::setSolverUpgradeRemoveDroppedPackages( bool val_r )	{ _pimpl->solverUpgradeRemoveDroppedPackages.set( val_r ); }
-  void ZConfig::resetSolverUpgradeRemoveDroppedPackages()		{ _pimpl->solverUpgradeRemoveDroppedPackages.restoreToDefault(); }
 
   namespace
   {
