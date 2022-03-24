@@ -129,6 +129,13 @@ namespace zypp
       */
       void setLineFormater( const shared_ptr<LineFormater> & formater_r );
 
+      /*!
+       * Sets a special log mode that uses the ppid in the log output and always shows the
+       * thread name (if the default formatter is used). This is only used by internal zypp tools that directly want to log into the
+       * parents logfile.
+       */
+      void enableLogForwardingMode ( bool enable = true );
+
     public:
       /** Set path for the logfile.
        * Permission for logfiles is set to 0640 unless an explicit mode_t

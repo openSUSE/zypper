@@ -555,6 +555,7 @@ namespace zypp
         /** \overload Setter */
         void hideThreadName( bool onOff_r )
         { _hideThreadName = onOff_r; }
+
         /** \overload Static getter */
         static bool instanceHideThreadName()
         {
@@ -568,6 +569,20 @@ namespace zypp
           if ( impl ) impl->hideThreadName( onOff_r );
         }
 
+        /** Hint for formatter wether we forward all logs to a parents log */
+        static bool instanceLogToPPID( )
+        {
+          auto impl = LogControlImpl::instance();
+          return impl ? impl->_logToPPIDMode : false;
+        }
+
+        /** \overload Static setter */
+        static void instanceSetLogToPPID( bool onOff_r )
+        {
+          auto impl = LogControlImpl::instance();
+          if ( impl )
+            impl->_logToPPIDMode = onOff_r;
+        }
 
         /** NULL _lineWriter indicates no loggin. */
         void setLineWriter( const shared_ptr<LogControl::LineWriter> & writer_r )
@@ -599,6 +614,7 @@ namespace zypp
         LogClient    _logClient;
         std::ostream _no_stream;
         bool         _excessive;
+        bool         _logToPPIDMode = false; ///< Hint for formatter to use the PPID and always show the thread name
         mutable TriBool _hideThreadName = indeterminate;	///< Hint for Formater whether to hide the thread name.
 
         shared_ptr<LogControl::LineFormater> _lineFormater;
@@ -780,7 +796,9 @@ namespace zypp
       static char nohostname[] = "unknown";
       std::string now( Date::now().form( "%Y-%m-%d %H:%M:%S" ) );
       std::string ret;
-      if ( LogControlImpl::instanceHideThreadName() )
+
+      const bool logToPPID = LogControlImpl::instanceLogToPPID();
+      if ( !logToPPID && LogControlImpl::instanceHideThreadName() )
         ret = str::form( "%s <%d> %s(%d) [%s] %s(%s):%d %s",
                          now.c_str(), level_r,
                          ( gethostname( hostname, 1024 ) ? nohostname : hostname ),
@@ -792,7 +810,7 @@ namespace zypp
         ret = str::form( "%s <%d> %s(%d) [%s] %s(%s):%d {T:%s} %s",
                          now.c_str(), level_r,
                          ( gethostname( hostname, 1024 ) ? nohostname : hostname ),
-                         getpid(),
+                         logToPPID ? getppid() : getpid(),
                          group_r.c_str(),
                          file_r, func_r, line_r,
                          zyppng::ThreadData::current().name().c_str(),
@@ -849,6 +867,11 @@ namespace zypp
       if ( !impl )
         return;
       impl->setLineFormater( formater_r );
+    }
+
+    void LogControl::enableLogForwardingMode(bool enable)
+    {
+      LogControlImpl::instanceSetLogToPPID ( enable );
     }
 
     void LogControl::logNothing()
