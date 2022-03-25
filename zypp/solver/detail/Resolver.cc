@@ -119,67 +119,66 @@ void Resolver::setDefaultSolverFlags( bool all_r )
 
   if ( all_r || _applyDefault_focus ) setFocus( ResolverFocus::Default );
 
-#define ZOLV_FLAG_DEFAULT( ISDEFAULT, ZSETTER )        \
-  if ( all_r || ISDEFAULT ) ZSETTER( indeterminate )
+#define ZOLV_FLAG_DEFAULT( ZSETTER, ZGETTER )        \
+  if ( all_r || _applyDefault_##ZGETTER ) ZSETTER( indeterminate )
 
-  ZOLV_FLAG_DEFAULT( _applyDefault_forceResolve,         setForceResolve         );
-  ZOLV_FLAG_DEFAULT( _applyDefault_cleandepsOnRemove,    setCleandepsOnRemove    );
-  ZOLV_FLAG_DEFAULT( _applyDefault_onlyRequires,         setOnlyRequires         );
-  ZOLV_FLAG_DEFAULT( _applyDefault_allowDowngrade,       setAllowDowngrade       );
-  ZOLV_FLAG_DEFAULT( _applyDefault_allowNameChange,      setAllowNameChange      );
-  ZOLV_FLAG_DEFAULT( _applyDefault_allowArchChange,      setAllowArchChange      );
-  ZOLV_FLAG_DEFAULT( _applyDefault_allowVendorChange,    setAllowVendorChange    );
-  ZOLV_FLAG_DEFAULT( _applyDefault_dupAllowDowngrade,    dupSetAllowDowngrade    );
-  ZOLV_FLAG_DEFAULT( _applyDefault_dupAllowNameChange,   dupSetAllowNameChange   );
-  ZOLV_FLAG_DEFAULT( _applyDefault_dupAllowArchChange,   dupSetAllowArchChange   );
-  ZOLV_FLAG_DEFAULT( _applyDefault_dupAllowVendorChange, dupSetAllowVendorChange );
+  ZOLV_FLAG_DEFAULT( setForceResolve         ,forceResolve         );
+  ZOLV_FLAG_DEFAULT( setCleandepsOnRemove    ,cleandepsOnRemove    );
+  ZOLV_FLAG_DEFAULT( setOnlyRequires         ,onlyRequires         );
+  ZOLV_FLAG_DEFAULT( setAllowDowngrade       ,allowDowngrade       );
+  ZOLV_FLAG_DEFAULT( setAllowNameChange      ,allowNameChange      );
+  ZOLV_FLAG_DEFAULT( setAllowArchChange      ,allowArchChange      );
+  ZOLV_FLAG_DEFAULT( setAllowVendorChange    ,allowVendorChange    );
+  ZOLV_FLAG_DEFAULT( dupSetAllowDowngrade    ,dupAllowDowngrade    );
+  ZOLV_FLAG_DEFAULT( dupSetAllowNameChange   ,dupAllowNameChange   );
+  ZOLV_FLAG_DEFAULT( dupSetAllowArchChange   ,dupAllowArchChange   );
+  ZOLV_FLAG_DEFAULT( dupSetAllowVendorChange ,dupAllowVendorChange );
 #undef ZOLV_FLAG_TRIBOOL
 }
 //---------------------------------------------------------------------------
 // forward flags too SATResolver
-
 void Resolver::setFocus( ResolverFocus focus_r )	{
   _applyDefault_focus = ( focus_r == ResolverFocus::Default );
   _satResolver->_focus = _applyDefault_focus ? ZConfig::instance().solver_focus() : focus_r;
 }
 ResolverFocus Resolver::focus() const			{ return _satResolver->_focus; }
 
-#define ZOLV_FLAG_TRIBOOL( ZSETTER, ZGETTER, ZVARNAME, ZVARDEFAULT )			\
+#define ZOLV_FLAG_TRIBOOL( ZSETTER, ZGETTER, ZVARDEFAULT, ZVARNAME )			\
     void Resolver::ZSETTER( TriBool state_r )						\
     { _applyDefault_##ZGETTER = indeterminate(state_r);					\
-      _satResolver->ZVARNAME = _applyDefault_##ZGETTER ? ZVARDEFAULT : bool(state_r); }	\
+      bool newval = _applyDefault_##ZGETTER ? ZVARDEFAULT : bool(state_r);		\
+      if ( ZVARNAME != newval ) {							\
+        DBG << #ZGETTER << ": changed from " << (bool)ZVARNAME << " to " << newval << endl;\
+        ZVARNAME = newval;								\
+      }											\
+    }											\
     bool Resolver::ZGETTER() const							\
-    { return _satResolver->ZVARNAME; }							\
+    { return ZVARNAME; }								\
+
+// Flags stored here follow the naming convention,...
+// TODO: But why do we need them here? Probably too many layers and they can
+// go to _satResolver too.
+#define ZOLV_FLAG_LOCALTB( ZSETTER, ZGETTER, ZVARDEFAULT )				\
+    ZOLV_FLAG_TRIBOOL( ZSETTER, ZGETTER, ZVARDEFAULT, _##ZGETTER )
+// Flags down in _satResolver don't (yet).
+#define ZOLV_FLAG_SATSOLV( ZSETTER, ZGETTER, ZVARDEFAULT, ZVARNAME )			\
+    ZOLV_FLAG_TRIBOOL( ZSETTER, ZGETTER, ZVARDEFAULT, _satResolver->ZVARNAME )
 
 // NOTE: ZVARDEFAULT must be in sync with SATResolver ctor
-ZOLV_FLAG_TRIBOOL( setForceResolve,		forceResolve,		_allowuninstall,	false )
-
-ZOLV_FLAG_TRIBOOL( setAllowDowngrade,		allowDowngrade,		_allowdowngrade,	false )
-ZOLV_FLAG_TRIBOOL( setAllowNameChange,		allowNameChange,	_allownamechange,	true )	// bsc#1071466
-ZOLV_FLAG_TRIBOOL( setAllowArchChange,		allowArchChange,	_allowarchchange,	false )
-ZOLV_FLAG_TRIBOOL( setAllowVendorChange,	allowVendorChange,	_allowvendorchange,	ZConfig::instance().solver_allowVendorChange() )
-
-ZOLV_FLAG_TRIBOOL( dupSetAllowDowngrade,	dupAllowDowngrade,	_dup_allowdowngrade,	ZConfig::instance().solver_dupAllowDowngrade() )
-ZOLV_FLAG_TRIBOOL( dupSetAllowNameChange,	dupAllowNameChange,	_dup_allownamechange,	ZConfig::instance().solver_dupAllowNameChange() )
-ZOLV_FLAG_TRIBOOL( dupSetAllowArchChange,	dupAllowArchChange,	_dup_allowarchchange,	ZConfig::instance().solver_dupAllowArchChange() )
-ZOLV_FLAG_TRIBOOL( dupSetAllowVendorChange,	dupAllowVendorChange,	_dup_allowvendorchange,	ZConfig::instance().solver_dupAllowVendorChange() )
-
+ZOLV_FLAG_SATSOLV( setForceResolve         ,forceResolve         ,false                                             ,_allowuninstall        )
+ZOLV_FLAG_LOCALTB( setCleandepsOnRemove    ,cleandepsOnRemove    ,ZConfig::instance().solver_cleandepsOnRemove()    )
+ZOLV_FLAG_LOCALTB( setOnlyRequires         ,onlyRequires         ,ZConfig::instance().solver_onlyRequires()         )
+ZOLV_FLAG_SATSOLV( setAllowDowngrade       ,allowDowngrade       ,false                                             ,_allowdowngrade        )
+ZOLV_FLAG_SATSOLV( setAllowNameChange      ,allowNameChange      ,true /*bsc#1071466*/                              ,_allownamechange       )
+ZOLV_FLAG_SATSOLV( setAllowArchChange      ,allowArchChange      ,false                                             ,_allowarchchange       )
+ZOLV_FLAG_SATSOLV( setAllowVendorChange    ,allowVendorChange    ,ZConfig::instance().solver_allowVendorChange()    ,_allowvendorchange     )
+ZOLV_FLAG_SATSOLV( dupSetAllowDowngrade    ,dupAllowDowngrade    ,ZConfig::instance().solver_dupAllowDowngrade()    ,_dup_allowdowngrade    )
+ZOLV_FLAG_SATSOLV( dupSetAllowNameChange   ,dupAllowNameChange   ,ZConfig::instance().solver_dupAllowNameChange()   ,_dup_allownamechange   )
+ZOLV_FLAG_SATSOLV( dupSetAllowArchChange   ,dupAllowArchChange   ,ZConfig::instance().solver_dupAllowArchChange()   ,_dup_allowarchchange   )
+ZOLV_FLAG_SATSOLV( dupSetAllowVendorChange ,dupAllowVendorChange ,ZConfig::instance().solver_dupAllowVendorChange() ,_dup_allowvendorchange )
+#undef ZOLV_FLAG_SATSOLV
+#undef ZOLV_FLAG_LOCALTB
 #undef ZOLV_FLAG_TRIBOOL
-//---------------------------------------------------------------------------
-// those two hare handled in here
-
-void Resolver::setOnlyRequires( TriBool state_r )
-{
-  _applyDefault_onlyRequires = indeterminate(state_r);
-  _onlyRequires = _applyDefault_onlyRequires ? ZConfig::instance().solver_onlyRequires() : bool(state_r);
-}
-
-void Resolver::setCleandepsOnRemove( TriBool state_r )
-{
-  _applyDefault_cleandepsOnRemove = indeterminate(state_r);
-  _cleandepsOnRemove = _applyDefault_cleandepsOnRemove ? ZConfig::instance().solver_cleandepsOnRemove() : bool(state_r);
-}
-
 //---------------------------------------------------------------------------
 
 ResPool Resolver::pool() const

@@ -186,9 +186,6 @@ class Resolver : private base::NonCopyable
     bool ignoreAlreadyRecommended() const	{ return _ignoreAlreadyRecommended; }
     void setIgnoreAlreadyRecommended( bool yesno_r ) { _ignoreAlreadyRecommended = yesno_r; }
 
-    bool onlyRequires () const			{ return _onlyRequires; }
-    void setOnlyRequires( TriBool state_r );
-
     bool isUpgradeMode() const 			{ return _upgradeMode; }// Resolver has been called with doUpgrade
     void setUpgradeMode( bool yesno_r )		{ _upgradeMode = yesno_r; }
 
@@ -200,9 +197,6 @@ class Resolver : private base::NonCopyable
 
     bool solveSrcPackages() const 		{ return _solveSrcPackages; }
     void setSolveSrcPackages( TriBool state_r )	{ _solveSrcPackages = indeterminate(state_r) ? false : bool(state_r); }
-
-    bool cleandepsOnRemove() const 		{ return _cleandepsOnRemove; }
-    void setCleandepsOnRemove( TriBool state_r );
     //@}
 
     void setFocus( ResolverFocus focus_r );
@@ -212,18 +206,17 @@ class Resolver : private base::NonCopyable
     void ZSETTER( TriBool state_r );		\
     bool ZGETTER() const;			\
 
-    ZOLV_FLAG_TRIBOOL( setForceResolve,		forceResolve )
-
-    ZOLV_FLAG_TRIBOOL( setAllowDowngrade,	allowDowngrade )
-    ZOLV_FLAG_TRIBOOL( setAllowNameChange,	allowNameChange )
-    ZOLV_FLAG_TRIBOOL( setAllowArchChange,	allowArchChange )
-    ZOLV_FLAG_TRIBOOL( setAllowVendorChange,	allowVendorChange )
-
-    ZOLV_FLAG_TRIBOOL( dupSetAllowDowngrade,	dupAllowDowngrade )
-    ZOLV_FLAG_TRIBOOL( dupSetAllowNameChange,	dupAllowNameChange )
-    ZOLV_FLAG_TRIBOOL( dupSetAllowArchChange,	dupAllowArchChange )
-    ZOLV_FLAG_TRIBOOL( dupSetAllowVendorChange,	dupAllowVendorChange )
-
+    ZOLV_FLAG_TRIBOOL( setForceResolve          ,forceResolve         )
+    ZOLV_FLAG_TRIBOOL( setCleandepsOnRemove     ,cleandepsOnRemove    )
+    ZOLV_FLAG_TRIBOOL( setOnlyRequires          ,onlyRequires         )
+    ZOLV_FLAG_TRIBOOL( setAllowDowngrade        ,allowDowngrade       )
+    ZOLV_FLAG_TRIBOOL( setAllowNameChange       ,allowNameChange      )
+    ZOLV_FLAG_TRIBOOL( setAllowArchChange       ,allowArchChange      )
+    ZOLV_FLAG_TRIBOOL( setAllowVendorChange     ,allowVendorChange    )
+    ZOLV_FLAG_TRIBOOL( dupSetAllowDowngrade     ,dupAllowDowngrade    )
+    ZOLV_FLAG_TRIBOOL( dupSetAllowNameChange    ,dupAllowNameChange   )
+    ZOLV_FLAG_TRIBOOL( dupSetAllowArchChange    ,dupAllowArchChange   )
+    ZOLV_FLAG_TRIBOOL( dupSetAllowVendorChange  ,dupAllowVendorChange )
 #undef ZOLV_FLAG_TRIBOOL
 
     ResolverProblemList problems() const;
