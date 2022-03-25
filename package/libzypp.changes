@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Mar 25 17:08:46 CET 2022 - ma@suse.de
+
+- ZConfig: Update solver settings if target changes (bsc#1196368)
+- version 17.30.0 (22)
+
+-------------------------------------------------------------------
 Mon Mar 21 09:04:36 CET 2022 - ma@suse.de
 
 - Fix possible hang in singletrans mode (bsc#1197134)
