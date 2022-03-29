@@ -155,7 +155,15 @@ namespace zyppng {
           return m_value;
       }
 
+      T &operator* ()
+      {
+          return get();
+      }
 
+      const T &operator* () const
+      {
+          return get();
+      }
 
       T *operator-> ()
       {
@@ -319,16 +327,35 @@ namespace zyppng {
 
   };
 
+  template <typename Type, typename Err = std::exception_ptr >
+  static expected<Type,Err> make_expected_success( Type &&t )
+  {
+    return expected<Type,Err>::success( std::forward<Type>(t) );
+  }
+
+  namespace detail {
+
+    // helper to figure out the return type for a mbind callback, if the ArgType is void the callback is considered to take no argument.
+    // Due to how std::conditional works, we cannot pass std::invoke_result_t but instead use the template type std::invoke_result, since
+    // one of the two options have no "::type" because the substitution fails, this breaks the std::conditional_t since it can only work with two well formed
+    // types. Instead we pass in the template types and evaluate the ::type in the end, when the correct invoke_result was chosen.
+    template < typename Function, typename ArgType>
+    using mbind_cb_result_t = typename std::conditional_t< std::is_same_v<ArgType,void>, std::invoke_result<Function>,std::invoke_result<Function, ArgType> >::type;
+  }
+
 
   template < typename T
            , typename E
            , typename Function
-           , typename ResultType = decltype(std::declval<Function>()(std::declval<T>()))
+           , typename ResultType = detail::mbind_cb_result_t<Function, T>
            >
   std::enable_if_t< !detail::is_async_op< remove_smart_ptr_t<ResultType> >::value, ResultType> mbind( const expected<T, E>& exp, Function f)
   {
       if (exp) {
-        return std::invoke( f, exp.get() );
+        if constexpr ( std::is_same_v<T,void> )
+          return std::invoke( f );
+        else
+          return std::invoke( f, exp.get() );
       } else {
           return ResultType::error(exp.error());
       }
@@ -337,12 +364,15 @@ namespace zyppng {
   template < typename T
     , typename E
     , typename Function
-    , typename ResultType = decltype(std::declval<Function>()(std::declval<T>()))
+    , typename ResultType = detail::mbind_cb_result_t<Function, T>
     >
   std::enable_if_t< !detail::is_async_op< remove_smart_ptr_t<ResultType> >::value, ResultType> mbind( expected<T, E>&& exp, Function f)
   {
     if (exp) {
-      return std::invoke( f, std::move(exp.get()) );
+      if constexpr ( std::is_same_v<T,void> )
+        return std::invoke( f );
+      else
+        return std::invoke( f, std::move(exp.get()) );
     } else {
       return ResultType::error( std::move(exp.error()) );
     }
@@ -351,12 +381,15 @@ namespace zyppng {
   template < typename T
     , typename E
     , typename Function
-    , typename ResultType = decltype(std::declval<Function>()(std::declval<T>()))
+    , typename ResultType = detail::mbind_cb_result_t<Function, T>
     >
   std::enable_if_t< detail::is_async_op< remove_smart_ptr_t<ResultType> >::value, ResultType> mbind( const expected<T, E>& exp, Function f)
   {
     if (exp) {
-      return std::invoke( f, exp.get() );
+      if constexpr ( std::is_same_v<T,void> )
+        return std::invoke( f );
+      else
+        return std::invoke( f, exp.get() );
     } else {
       return  makeReadyResult( remove_smart_ptr_t<ResultType>::value_type::error(exp.error()) );
     }
@@ -365,12 +398,15 @@ namespace zyppng {
   template < typename T
     , typename E
     , typename Function
-    , typename ResultType = decltype(std::declval<Function>()(std::declval<T>()))
+    , typename ResultType = detail::mbind_cb_result_t<Function, T>
     >
   std::enable_if_t< detail::is_async_op< remove_smart_ptr_t<ResultType> >::value, ResultType> mbind( expected<T, E>&& exp, Function f)
   {
     if (exp) {
-      return std::invoke( f, std::move(exp.get()) );
+      if constexpr ( std::is_same_v<T,void> )
+        return std::invoke( f );
+      else
+        return std::invoke( f, std::move(exp.get()) );
     } else {
       return  makeReadyResult( remove_smart_ptr_t<ResultType>::value_type::error( std::move(exp.error()) ) );
     }
