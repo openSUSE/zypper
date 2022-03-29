@@ -52,12 +52,19 @@ namespace zyppng {
      */
     pid_t pid   ( );
 
-    /**
+    /*!
      * Kickstart the process, if this returns true it is guaranteed that exec() was successful
      */
     virtual bool start ( const char *const *argv, int stdin_fd, int stdout_fd, int stderr_fd )  = 0;
 
     virtual bool isRunning ( bool wait = false ) = 0;
+
+    /*!
+     * Used to notify the backend that the process has ended,
+     * helpful when the process is tracked in another way than calling \ref isRunning,
+     * for example in a eventloop.
+     */
+    virtual void notifyExited ( int status );
 
     bool dieWithParent() const;
     void setDieWithParent( bool dieWithParent );

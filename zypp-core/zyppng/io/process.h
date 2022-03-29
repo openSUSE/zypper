@@ -55,6 +55,19 @@ namespace zyppng {
     bool isRunning ();
     void close () override;
 
+    /*!
+     * Blocks until the process has exited, during that time readyRead is not
+     * emitted for any read channels. Call \ref readAll to get all remaining data
+     * that was written by the process
+     */
+    void waitForExit ();
+
+    /*!
+     * Close the stdin fd of the subprocess. This is required for processes
+     * that run until their stdin is closed.
+     */
+    void closeWriteChannel () override;
+
     const std::string &executedCommand () const;
     const std::string &execError() const;
 

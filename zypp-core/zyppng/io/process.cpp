@@ -23,14 +23,12 @@ namespace zyppng {
       _stdinFd  = -1;
       _stderrFd = -1;
       _stdoutFd = -1;
-      _pid = -1;
     }
 
     std::unique_ptr<AbstractSpawnEngine> _spawnEngine = AbstractSpawnEngine::createDefaultEngine();
     zypp::AutoFD _stdinFd  = -1;
     zypp::AutoFD _stderrFd = -1;
     zypp::AutoFD _stdoutFd = -1;
-    pid_t _pid = -1;
     Signal<void ()> _sigStarted;
     Signal<void ( int )> _sigFinished;
     Signal<void ()> _sigFailedToStart;
@@ -54,8 +52,8 @@ namespace zyppng {
   Process::~Process()
   {
     Z_D();
-    if ( d->_pid >= 0 ) {
-      EventDispatcher::instance()->untrackChildProcess( d->_pid );
+    if ( d->_spawnEngine->pid() >= 0 ) {
+      EventDispatcher::instance()->untrackChildProcess( d->_spawnEngine->pid() );
       DBG << "Process destroyed while still running removing from EventLoop." << std::endl;
     }
   }
@@ -105,13 +103,12 @@ namespace zyppng {
     if ( d->_spawnEngine->start( argv, stdinPipe->readFd, stdoutPipe->writeFd, stderr_fd ) ) {
 
       // if we reach this point the engine guarantees that exec() was successful
-      d->_pid = d->_spawnEngine->pid( );
+      const auto pid = d->_spawnEngine->pid( );
 
       // register to the eventloop right away
-      EventDispatcher::instance()->trackChildProcess( d->_pid, [this]( int, int status ){
+      EventDispatcher::instance()->trackChildProcess( pid, [this]( int, int status ){
         Z_D();
-        d->_spawnEngine->setExitStatus( d->_spawnEngine->checkStatus( status ) );
-        d->_pid = -1;
+        d->_spawnEngine->notifyExited( status );
         d->_sigFinished.emit( d->_spawnEngine->exitStatus() );
       });
 
@@ -148,7 +145,7 @@ namespace zyppng {
   bool Process::isRunning()
   {
     Z_D();
-    return ( d->_pid > -1 );
+    return ( d->_spawnEngine->pid() > -1 );
   }
 
   void Process::close ()
@@ -157,6 +154,24 @@ namespace zyppng {
     stop(SIGKILL);
     d_func()->cleanup();
     AsyncDataSource::close();
+  }
+
+  void Process::waitForExit()
+  {
+    Z_D();
+    if ( d->_spawnEngine->isRunning() ) {
+      // we will manually track the exit status
+      EventDispatcher::instance()->untrackChildProcess( d->_spawnEngine->pid() );
+      // wait for the process to exit
+      d->_spawnEngine->isRunning( true );
+    }
+  }
+
+  void Process::closeWriteChannel()
+  {
+    Z_D();
+    d->_stdinFd  = -1;
+    AsyncDataSource::closeWriteChannel();
   }
 
   const std::string &Process::executedCommand() const
@@ -201,7 +216,7 @@ namespace zyppng {
 
   pid_t Process::pid()
   {
-    return d_func()->_pid;
+    return d_func()->_spawnEngine->pid();
   }
 
   int Process::exitStatus() const

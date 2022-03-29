@@ -96,6 +96,12 @@ namespace zyppng {
     _mapFds.push_back( fd );
   }
 
+  void AbstractSpawnEngine::notifyExited(int status)
+  {
+    _exitStatus = checkStatus( status );
+    _pid = -1;
+  }
+
   bool AbstractSpawnEngine::dieWithParent() const
   {
     return _dieWithParent;
