@@ -1,0 +1,31 @@
+/*---------------------------------------------------------------------\
+|                          ____ _   __ __ ___                          |
+|                         |__  / \ / / . \ . \                         |
+|                           / / \ V /|  _/  _/                         |
+|                          / /__ | | | | | |                           |
+|                         /_____||_| |_| |_|                           |
+|                                                                      |
+----------------------------------------------------------------------*/
+
+syntax = "proto3";
+option optimize_for = LITE_RUNTIME;
+
+package zypp.proto.test;
+
+/*!
+ Helper settings for the TVM ( Test Volatile Mouning ) worker. This can be
+ used to define the number of available devices and which of those have inserted media.
+
+ This data is written to a file in the provider dir for the tvm worker to read.
+ The worker only reads the data while the test only writes it. This way we can simulate
+ a user inserting/changing CDs
+ */
+
+message TVMSettings
+{
+   message Device {
+      string name = 1;          // the device name
+      string insertedPath = 2;  // the path what is currently inserted into the device
+   }
+   repeated Device devices = 1;
+}

@@ -100,6 +100,15 @@ class WebServer
    */
   void addRequestHandler ( const std::string &path, RequestHandler &&handler );
 
+  /**
+   * Sets the default request handler callback as a fallback if no specific handler was registered for
+   * a given path. The path from the HTTP request can be queried as the "REQUEST_URI" param from the \ref Request structure passed to the callback.
+   *
+   * \note a request handler path is always prefixed with /handler so to call a handler named test, the
+   *       URL is "http://localhost/handler/test"
+   */
+  void setDefaultHandler ( RequestHandler &&handler );
+
   /*!
    * Removes a registered request hander, can be called at any time
    */
@@ -109,6 +118,11 @@ class WebServer
    * Creates a request handler that simply returns the string in \a resp
    */
   static RequestHandler makeResponse(std::string resp);
+
+  /*!
+   * Creates a request handler that simply returns 404
+   */
+  static RequestHandler makeDefaultHandler( );
 
   /*!
    * Creates a request handler that sends a HTTP response with \a status and \a content

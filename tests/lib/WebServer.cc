@@ -377,12 +377,12 @@ public:
               //remove "/handler/" prefix
               std::string key = req.params.at("SCRIPT_NAME").substr( handlerPrefix().length() );
 
-              auto it = _handlers.find( key );
+              const auto &it = _handlers.find( key );
               if ( it == _handlers.end() ) {
-                req.rerr << "Status: 404 Not Found\r\n"
-                         << "Content-Type: text/html\r\n"
-                         << "\r\n"
-                         << "Request handler was not found";
+                if ( !_defaultHandler ) {
+                  _defaultHandler = makeDefaultHandler();
+                }
+                _defaultHandler( req );
                 FCGX_Finish_r(&request);
                 continue;
               }
@@ -451,6 +451,7 @@ public:
     zypp::Pathname _docroot;
     zypp::shared_ptr<std::thread> _thrd;
     std::map<std::string, WebServer::RequestHandler> _handlers;
+    WebServer::RequestHandler _defaultHandler;
     unsigned int _port;
     int _wakeupPipe[2];
 
@@ -486,6 +487,12 @@ void WebServer::addRequestHandler( const std::string &path, RequestHandler &&han
 {
   std::lock_guard<std::mutex> lock( _pimpl->_mut );
   _pimpl->_handlers[path] = std::move(handler);
+}
+
+void WebServer::setDefaultHandler ( RequestHandler &&handler )
+{
+  std::lock_guard<std::mutex> lock( _pimpl->_mut );
+  _pimpl->_defaultHandler = std::move(handler);
 }
 
 void WebServer::removeRequestHandler(const std::string &path)
@@ -532,6 +539,16 @@ WebServer::RequestHandler WebServer::makeResponse( std::string resp )  {
     req.rout << resp;
   };
 };
+
+WebServer::RequestHandler WebServer::makeDefaultHandler( )
+{
+  return []( WebServer::Request & req ){
+    req.rerr  << "Status: 404 Not Found\r\n"
+              << "Content-Type: text/html\r\n"
+              << "\r\n"
+              << "Request handler was not found";
+  };
+}
 
 WebServer::RequestHandler WebServer::makeResponse( std::string status, std::string content )  {
   return makeResponse( status , std::vector<std::string>(), content );
