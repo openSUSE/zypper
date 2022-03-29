@@ -46,4 +46,34 @@ namespace std {
 
 #endif
 
+/*!
+ * Simple helper template to make a callback that binds the "this" pointer, to be used in
+ * a pipeline.
+ */
+template<typename Obj, typename Ret, typename Arg>
+auto mem_fn_cb( Obj& o, Ret (Obj::*objMemFunc)( Arg&& ) ) {
+  return [tPtr = &o, fun = objMemFunc ]( Arg &&r ){
+    return std::invoke(fun, tPtr, std::move(r) );
+  };
+}
+
+template<typename Obj, typename Ret, typename Arg>
+auto mem_fn_cb( Obj& o, Ret (Obj::*objMemFunc)( const Arg& ) ) {
+  return [tPtr = &o, fun = objMemFunc ]( const Arg &r ){
+    return std::invoke(fun, tPtr, r );
+  };
+}
+
+template<typename Obj, typename Ret, typename Arg>
+auto mem_fn_cb( Obj& o, Ret (Obj::*objMemFunc)( Arg ) ) {
+  return [tPtr = &o, fun = objMemFunc ]( Arg r ){
+    if constexpr ( std::is_invocable_v< decltype (fun), Obj*, Arg&&> ) {
+      return std::invoke(fun, tPtr, std::move(r) );
+    } else {
+      return std::invoke(fun, tPtr, r );
+    }
+  };
+}
+
+
 #endif

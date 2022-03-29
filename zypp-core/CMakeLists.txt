@@ -371,6 +371,9 @@ SET ( zypp_SRCS
 # Default loggroup for all files
 SET_LOGGROUP( "zypp-core" ${zypp_SRCS} )
 
+# System libraries
+SET(UTIL_LIBRARY util)
+
 ADD_LIBRARY( zypp-core STATIC ${zypp_SRCS} ${zypp_HEADERS} )
 #we include generated headers, so we need to wait for zypp-protobuf to be ready
 add_dependencies( zypp-core zypp-protobuf )
@@ -380,3 +383,14 @@ target_link_libraries( zypp-core ${OPENSSL_LIBRARIES} )
 target_link_libraries( zypp-core ${CRYPTO_LIBRARIES} )
 target_link_libraries( zypp-core pthread )
 target_link_libraries( zypp-core ${SIGCPP_LIBRARIES} )
+TARGET_LINK_LIBRARIES( zypp-core ${ZLIB_LIBRARY} )
+message("URIL LIB  ${UTIL_LIBRARY}")
+TARGET_LINK_LIBRARIES( zypp-core ${UTIL_LIBRARY} )
+
+IF (ENABLE_ZSTD_COMPRESSION)
+  TARGET_LINK_LIBRARIES( zypp-core ${ZSTD_LIBRARY})
+ENDIF (ENABLE_ZSTD_COMPRESSION)
+
+IF (ENABLE_ZCHUNK_COMPRESSION)
+  TARGET_LINK_LIBRARIES( zypp-core ${ZCHUNK_LDFLAGS})
+ENDIF(ENABLE_ZCHUNK_COMPRESSION)

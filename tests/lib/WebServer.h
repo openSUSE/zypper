@@ -38,9 +38,9 @@ class WebServer
  public:
 
    struct Request {
-     Request ( std::istream::__streambuf_type *rinbuf,
-               std::ostream::__streambuf_type *routbuf,
-               std::ostream::__streambuf_type *rerrbuf );
+     Request ( std::streambuf *rinbuf,
+               std::streambuf *routbuf,
+               std::streambuf *rerrbuf );
      std::string path;
      std::map< std::string, std::string > params;
      std::istream rin;

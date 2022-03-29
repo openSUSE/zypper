@@ -23,9 +23,7 @@
 
 using namespace boost;
 
-namespace zypp {
-  L_ENV_CONSTR_DEFINE_FUNC(ZYPP_MEDIA_CURL_DEBUG)
-}
+L_ENV_CONSTR_DEFINE_FUNC(ZYPP_MEDIA_CURL_DEBUG)
 
 
 namespace zyppng {

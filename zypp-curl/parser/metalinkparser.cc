@@ -414,7 +414,9 @@ MetaLinkParser::~MetaLinkParser()
 void
 MetaLinkParser::parse(const Pathname &filename)
 {
+  MIL << "Begin parse " << filename << std::endl;
   parse(InputStream(filename));
+  MIL << "End parse " << filename << std::endl;
 }
 
 void

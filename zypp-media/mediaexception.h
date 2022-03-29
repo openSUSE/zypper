@@ -113,6 +113,23 @@ namespace zypp
       std::string _path;
     };
 
+    class MediaJammedException : public MediaException
+    {
+    public:
+      /** Ctor taking message.
+       * Use \ref ZYPP_THROW to throw exceptions.
+      */
+      MediaJammedException() : MediaException( "Media Jammed Exception" )
+      {}
+
+      /** Dtor. */
+      ~MediaJammedException() noexcept override {};
+    protected:
+      std::ostream & dumpOn( std::ostream & str ) const override;
+
+    private:
+    };
+
     class MediaBadFilenameException : public MediaException
     {
     public:
@@ -540,6 +557,15 @@ namespace zypp
         : MediaException(msg)
       {}
       virtual ~MediaInvalidCredentialsException() noexcept {}
+    };
+
+    class MediaRequestCancelledException : public MediaException
+    {
+    public:
+      MediaRequestCancelledException( const std::string & msg = "" )
+        : MediaException(msg)
+      {}
+      virtual ~MediaRequestCancelledException() noexcept {}
     };
 
   /////////////////////////////////////////////////////////////////

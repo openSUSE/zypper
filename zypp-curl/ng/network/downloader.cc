@@ -143,8 +143,10 @@ namespace zyppng {
     }
 
     //reset state variables
-    _emittedSigStart = false;
-    _specHasZckInfo  = zypp::indeterminate;
+    _specHasZckInfo    = zypp::indeterminate;
+    _emittedSigStart   = false;
+    _stoppedOnMetalink = false;
+    _lastTriedAuthTime = 0;
 
     // restart the statemachine
     if ( cState == Download::Finished )
@@ -273,6 +275,16 @@ namespace zyppng {
   {
     Z_D();
     d->forceState ( std::make_unique<FinishedState>( NetworkRequestErrorPrivate::customError( NetworkRequestError::Cancelled, "Download was cancelled explicitly" ), *d_func() ) );
+  }
+
+  void Download::setStopOnMetalink(const bool set)
+  {
+    d_func()->_stopOnMetalink = set;
+  }
+
+  bool Download::stoppedOnMetalink() const
+  {
+    return d_func()->_stoppedOnMetalink;
   }
 
   DownloadSpec &Download::spec()

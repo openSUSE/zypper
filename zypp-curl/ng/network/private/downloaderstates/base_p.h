@@ -98,6 +98,8 @@ namespace zyppng {
     Downloader *_parent = nullptr;
 
     time_t _lastTriedAuthTime = 0; //< if initialized this shows the last timestamp that we loaded a cred for the given URL from CredentialManager
+    bool _stopOnMetalink     = false; //< Stop the download if a metalink was received for external parsing
+    bool _stoppedOnMetalink  = false; //< Statemachine was stopped after receiving a metalink file
     NetworkRequest::Priority _defaultSubRequestPriority = NetworkRequest::High;
 
     Signal< void ( Download &req )> _sigStarted;

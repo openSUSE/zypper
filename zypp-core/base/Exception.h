@@ -401,7 +401,7 @@ namespace zypp
     std::exception_ptr do_ZYPP_EXCPT_PTR( const TExcpt & excpt_r, const CodeLocation & where_r )
     {
       excpt_r.relocate( where_r );
-      Exception::log( excpt_r, where_r, "THROW:   " );
+      Exception::log( excpt_r, where_r, "EXCPTR:   " );
       return std::make_exception_ptr( excpt_r );
     }
 
@@ -411,7 +411,7 @@ namespace zypp
     template<class TExcpt, EnableIfNotException<TExcpt>>
     std::exception_ptr do_ZYPP_EXCPT_PTR( const TExcpt & excpt_r, const CodeLocation & where_r )
     {
-      Exception::log( typeid(excpt_r).name(), where_r, "THROW:   " );
+      Exception::log( typeid(excpt_r).name(), where_r, "EXCPTR:   " );
       return std::make_exception_ptr( excpt_r );
     }
 

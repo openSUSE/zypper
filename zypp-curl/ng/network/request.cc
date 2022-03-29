@@ -613,7 +613,10 @@ namespace zyppng {
     that->resetActivityTimer();
 
     rmode._isInCallback = true;
-    that->_sigProgress.emit( *that->z_func(), dltotal, dlnow, ultotal, ulnow );
+    if ( rmode._lastProgressNow != dlnow ) {
+      rmode._lastProgressNow = dlnow;
+      that->_sigProgress.emit( *that->z_func(), dltotal, dlnow, ultotal, ulnow );
+    }
     rmode._isInCallback = false;
 
     return rmode._cachedResult ? CURLE_ABORTED_BY_CALLBACK : CURLE_OK;

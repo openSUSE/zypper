@@ -338,7 +338,7 @@ namespace zyppng {
             }
 
             // wait for the full message size to be available
-            if ( readBuf.size() < static_cast<size_t>( *pendingMessageSize ) )
+            if ( readBuf.size() < static_cast<int64_t>( *pendingMessageSize ) )
               return;
 
             ByteArray message ( *pendingMessageSize, '\0' );

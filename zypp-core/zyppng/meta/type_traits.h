@@ -14,10 +14,9 @@ namespace std {
 
 #endif
 
-
-#if __cplusplus < 201703L
-
 namespace std {
+
+#if __cplusplus < 202002L
 
 //implementation of the detector idiom, used to help with SFINAE
 //from https://en.cppreference.com/w/cpp/experimental/is_detected
@@ -73,6 +72,10 @@ using is_detected_convertible = std::is_convertible<detected_t<Op, Args...>, To>
 template <class To, template<class...> class Op, class... Args>
 constexpr bool is_detected_convertible_v = is_detected_convertible<To, Op, Args...>::value_t::value;
 
+#endif
+
+#if __cplusplus < 201703L
+
 //https://en.cppreference.com/w/cpp/types/conjunction)
 template<class...> struct conjunction : std::true_type { };
 template<class B1> struct conjunction<B1> : B1 { };
@@ -91,8 +94,8 @@ struct disjunction<B1, Bn...>
 template<class B>
 struct negation : std::bool_constant< !bool(B::value)> { };
 
-}
 #endif
+}
 
 
 namespace zyppng {

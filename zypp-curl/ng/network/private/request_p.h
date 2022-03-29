@@ -123,6 +123,7 @@ namespace zyppng {
       bool _isInCallback          = false;
       std::optional<NetworkRequestError> _cachedResult;
 
+      off_t _lastProgressNow = -1; // last value returned from CURL, lets only send signals if we get actual updates
       off_t _downloaded = 0; //downloaded bytes
       zypp::ByteCount _contentLenght; // the content length as reported by the server
 

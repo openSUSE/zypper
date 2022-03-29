@@ -7,6 +7,7 @@ SET( zypp_media_PROTOBUF_SOURCES
   media/download.proto
   media/messages.proto
   media/networkrequesterror.proto
+  media/provider.proto
 )
 
 SET( zypp_target_PROTOBUF_SOURCES
@@ -19,4 +20,3 @@ protobuf_generate_cpp( ZYPPTARGET_PROTO_SRCS ZYPPTARGET_PROTO_HDRS ${zypp_target
 
 
 ADD_LIBRARY( zypp-protobuf STATIC ${ZYPPCORE_PROTO_SRCS} ${ZYPPCORE_PROTO_HDRS} ${ZYPPMEDIA_PROTO_SRCS} ${ZYPPMEDIA_PROTO_HDRS} ${ZYPPTARGET_PROTO_HDRS} ${ZYPPTARGET_PROTO_SRCS} )
-

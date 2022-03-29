@@ -151,7 +151,7 @@ namespace zypp
 
     bool SUSEMediaVerifier::isDesiredMedia( const media::MediaHandler & ref ) const
     {
-      bool ret = true;	// optimistic return unless we definitely now it does not match
+      bool ret = true;	// optimistic return unless we definitely know it does not match
 
       const SMVData & smvData = _pimpl->smvData();
       if ( ! smvData )

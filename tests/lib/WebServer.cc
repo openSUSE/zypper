@@ -103,7 +103,7 @@ static inline std::string handlerPrefix()
   return pref;
 }
 
-WebServer::Request::Request( std::istream::__streambuf_type *rinbuf, std::ostream::__streambuf_type *routbuf, std::ostream::__streambuf_type *rerrbuf )
+WebServer::Request::Request(std::streambuf *rinbuf, std::streambuf *routbuf, std::streambuf *rerrbuf )
   : rin  ( rinbuf )
   , rout ( routbuf )
   , rerr ( rerrbuf )

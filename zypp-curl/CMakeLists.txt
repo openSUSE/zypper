@@ -166,3 +166,7 @@ SET_LOGGROUP( "zypp-curl" $${zypp_curl_lib_SRCS} )
 ADD_LIBRARY( zypp-curl STATIC ${zypp_curl_lib_SRCS} ${zypp_curl_lib_HEADERS} )
 #we include generated headers, so we need to wait for zypp-protobuf to be ready
 add_dependencies( zypp-curl zypp-protobuf )
+
+TARGET_LINK_LIBRARIES( zypp-curl ${CURL_LIBRARIES} )
+TARGET_LINK_LIBRARIES( zypp-curl ${LIBPROXY_LIBRARIES} )
+TARGET_LINK_LIBRARIES( zypp-curl ${LIBXML2_LIBRARIES} )

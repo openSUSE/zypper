@@ -216,6 +216,11 @@ namespace zypp
       return str;
     }
 
+    std::ostream & MediaJammedException::dumpOn( std::ostream & str ) const {
+      str << _("No free ressources available to attach medium.");
+      return str;
+    }
+
     /////////////////////////////////////////////////////////////////
   } // namespace media
 } // namespace zypp

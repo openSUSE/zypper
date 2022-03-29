@@ -79,6 +79,7 @@ namespace zyppng {
 
   bool DlMetaLinkInfoState::initializeRequest(std::shared_ptr<Request> &r )
   {
+    MIL << "Requesting Metalink info from server!" << std::endl;
     r->transferSettings().addHeader("Accept: */*, application/metalink+xml, application/metalink4+xml");
     return BasicDownloaderStateBase::initializeRequest(r);
   }
@@ -95,8 +96,15 @@ namespace zyppng {
       return BasicDownloaderStateBase::gotFinished();
     }
 
+    auto &sm = stateMachine();
+    if ( sm._stopOnMetalink ) {
+      MIL << "Stopping after receiving MetaLink data as requested" << std::endl;
+      sm._stoppedOnMetalink = true;
+      return BasicDownloaderStateBase::gotFinished();
+    }
+
     // Move to Prepare Multi state
-    MIL << "Downloading on " << stateMachine()._spec.url() << " returned a Metalink " << std::endl;
+    MIL << "Downloading on " << sm._spec.url() << " returned a Metalink " << std::endl;
     _sigGotMetalink.emit();
   }
 

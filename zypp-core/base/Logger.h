@@ -109,15 +109,22 @@ namespace zypp
 #define L_INT(GROUP) ZYPP_BASE_LOGGER_LOG( GROUP, zypp::base::logger::E_INT )
 #define L_USR(GROUP) ZYPP_BASE_LOGGER_LOG( GROUP, zypp::base::logger::E_USR )
 
+
 #define L_ENV_CONSTR_DEFINE_FUNC(ENV) \
-    const char *empty_or_group_if_##ENV ( const char *group ) \
-    { \
-      static bool has_##ENV = (::getenv(#ENV) != NULL); \
-      return has_##ENV ? group : nullptr; \
+    namespace zypp::log { \
+      bool has_env_constr_##ENV () \
+      { \
+          static bool has_##ENV = (::getenv(#ENV) != NULL); \
+          return has_##ENV; \
+      } \
+      const char *empty_or_group_if_##ENV ( const char *group ) \
+      { \
+        return has_env_constr_##ENV() ? group : nullptr; \
+      } \
     }
 
-#define L_ENV_CONSTR_FWD_DECLARE_FUNC(ENV) const char *empty_or_group_if_##ENV ( const char *group )
-#define L_ENV_CONSTR(ENV,GROUP,LEVEL) ZYPP_BASE_LOGGER_LOG( zypp::empty_or_group_if_##ENV( #GROUP ), LEVEL )
+#define L_ENV_CONSTR_FWD_DECLARE_FUNC(ENV) namespace zypp::log { bool has_env_constr_##ENV (); const char *empty_or_group_if_##ENV ( const char *group ); }
+#define L_ENV_CONSTR(ENV,GROUP,LEVEL) ZYPP_BASE_LOGGER_LOG( zypp::log::empty_or_group_if_##ENV( #GROUP ), LEVEL )
 
 #define L_BASEFILE ( *__FILE__ == '/' ? strrchr( __FILE__, '/' ) + 1 : __FILE__ )
 

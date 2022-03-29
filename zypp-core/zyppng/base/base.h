@@ -136,7 +136,7 @@ namespace zyppng {
     }
 
     /*!
-     * Preferred way to connect a signal to a slow, this will automatically take care of tracking the target object in the connection
+     * Preferred way to connect a signal to a slot, this will automatically take care of tracking the target object in the connection
      */
     template< typename SenderFunc, typename ReceiverFunc >
     static auto connect ( typename internal::MemberFunction<SenderFunc>::ClassType &s, SenderFunc &&sFun, typename internal::MemberFunction<ReceiverFunc>::ClassType &recv, ReceiverFunc &&rFunc ) {

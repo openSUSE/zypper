@@ -204,6 +204,18 @@ namespace zyppng {
     void cancel ();
 
     /*!
+     * This will finalize the download once a metalink file was received. This is a special setting used
+     * if the metalink file should be processed outside of the Downloader.
+     */
+    void setStopOnMetalink ( const bool set = true );
+
+    /*!
+     * Returns true if the download was stopped after receiving metalink data. The target file
+     * will contain the metalink description.
+     */
+    bool stoppedOnMetalink () const;
+
+    /*!
      * Returns a reference to the internally used download spec.
      * \sa zyppng::DownloadSpec
      * \note Changing settings after the download started might result in undefined or weird behaviour

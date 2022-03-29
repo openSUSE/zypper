@@ -14,6 +14,11 @@
 
 namespace zyppng {
 
+  InvalidMessageReceivedException::InvalidMessageReceivedException( const std::string &msg )
+    : zypp::Exception( zypp::str::Str() << "Invalid Message received: (" << msg <<")" )
+  { }
+
+
   zyppng::RpcMessageStream::RpcMessageStream( IODevice::Ptr iostr ) : _ioDev( std::move(iostr) )
   {
     connect( *_nextMessageTimer, &Timer::sigExpired, *this, &RpcMessageStream::timeout );

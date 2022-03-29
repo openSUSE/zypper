@@ -49,14 +49,63 @@ SET( zypp_media_auth_SRCS
 
 INSTALL(  FILES ${zypp_media_auth_HEADERS} DESTINATION "${INCLUDE_INSTALL_DIR}/zypp-media/auth" )
 
+SET( zypp_media_ng_HEADERS
+  ng/headervaluemap.h
+  ng/HeaderValueMap
+  ng/provide.h
+  ng/Provide
+  ng/providefwd.h
+  ng/ProvideFwd
+  ng/provide-configvars.h
+  ng/providespec.h
+  ng/ProvideSpec
+  ng/provideres.h
+  ng/provideitem.h
+  ng/ProvideRes
+  ng/mediaverifier.h
+  ng/MediaVerifier
+  ng/worker/provideworker.h
+  ng/worker/ProvideWorker
+  ng/worker/mountingworker.h
+  ng/worker/MountingWorker
+)
+
+SET( zypp_media_ng_private_HEADERS
+  ng/private/attachedmediainfo_p.h
+  ng/private/provide_p.h
+  ng/private/providefwd_p.h
+  ng/private/provideitem_p.h
+  ng/private/providemessage_p.h
+  ng/private/providequeue_p.h
+  ng/private/providedbg_p.h
+
+)
+
+SET( zypp_media_ng_SRCS
+  ng/headervaluemap.cc
+  ng/provide.cc
+  ng/provideres.cc
+  ng/providespec.cc
+  ng/provideitem.cc
+  ng/providemessage.cc
+  ng/providequeue.cc
+  ng/mediaverifier.cc
+  ng/worker/provideworker.cc
+  ng/worker/mountingworker.cc
+)
+
+INSTALL(  FILES ${zypp_media_ng_HEADERS} DESTINATION "${INCLUDE_INSTALL_DIR}/zypp-media/ng" )
+
 
 SET( zypp_media_lib_SRCS
     ${zypp_media_SRCS}
     ${zypp_media_auth_SRCS}
+    ${zypp_media_ng_SRCS}
 )
 SET( zypp_media_lib_HEADERS
     ${zypp_media_private_HEADERS} ${zypp_media_HEADERS}
     ${zypp_media_auth_private_HEADERS} ${zypp_media_auth_HEADERS}
+    ${zypp_media_ng_private_HEADERS} ${zypp_media_ng_HEADERS}
 )
 
 # Default loggroup for all files

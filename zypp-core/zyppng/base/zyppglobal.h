@@ -104,4 +104,23 @@ template <typename Ptr> inline auto zyppGetPtrHelper(Ptr &ptr) -> decltype(ptr.o
 #define Z_D() auto const d = d_func()
 #define Z_Z() auto const z = z_func()
 
+/*
+ * Helper Macro to forward declare types and ref types
+ */
+#define ZYPP_FWD_DECL_TYPE_WITH_REFS(T) \
+  class T; \
+  using T##Ref = std::shared_ptr<T>; \
+  using T##WeakRef = std::weak_ptr<T>
+
+//@TODO enable for c++20
+#if 0
+#define ZYPP_FWD_DECL_TEMPL_TYPE_WITH_REFS(T, TArg1, ...) \
+  template< typename TArg1 __VA_OPT__(, typename) __VA_ARGS__  > \
+  class T; \
+  template< typename TArg1 __VA_OPT__(, typename) __VA_ARGS__  > \
+  using T##Ref = std::shared_ptr<T<TArg1 __VA_OPT__(,) __VA_ARGS__>>; \
+  template< typename TArg1 __VA_OPT__(, typename) __VA_ARGS__  > \
+  using T##WeakRef = std::weak_ptr<T<TArg1 __VA_OPT__(,) __VA_ARGS__ >>
+#endif
+
 #endif
