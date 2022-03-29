@@ -162,6 +162,9 @@ namespace zypp
        */
       static void notifyFork();
 
+      /** will push a line to the logthread without formatting it */
+      void logRawLine ( std::string &&line );
+
     public:
       /** Get the current LineWriter */
       shared_ptr<LineWriter> getLineWriter() const;

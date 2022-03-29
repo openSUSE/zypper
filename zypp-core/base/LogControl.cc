@@ -187,9 +187,14 @@ namespace zypp
       auto writer = getLineWriter();
       if ( writer ) {
         for ( auto &sock : clients ){
-          while ( sock->canReadLine() ) {
-            auto br = sock->readLine();
-            writer->writeOut( std::string( br.data(), br.size() - 1 ) );
+          auto br = sock->readLine();
+          while ( !br.empty() ) {
+            if ( br.back () == '\n' )
+              writer->writeOut( std::string( br.data(), br.size() - 1 ) );
+            else
+              writer->writeOut( std::string( br.data(), br.size() ) );
+
+            br = sock->readLine();
           }
         }
       }
@@ -645,6 +650,10 @@ namespace zypp
           return ret;
         }
 
+        void putRawLine ( std::string &&line ) {
+          _logClient.pushMessage( std::move(line) );
+        }
+
         /** Format and write out a logline from Loglinebuf. */
         void putStream( const std::string & group_r,
                         LogLevel            level_r,
@@ -898,6 +907,11 @@ namespace zypp
     void LogControl::notifyFork()
     {
       logger::logControlValidFlag () = 0;
+    }
+
+    void LogControl::logRawLine ( std::string &&line )
+    {
+      LogControlImpl::instance ()->putRawLine ( std::move(line) );
     }
 
     ///////////////////////////////////////////////////////////////////
