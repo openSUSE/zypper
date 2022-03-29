@@ -1491,9 +1491,9 @@ msgstr "Аргументы программы, не являющиеся пар�
 
 #: src/callbacks/keyring.h:32
 msgid ""
-"A GPG pubkey is clearly identified by it's fingerprint. Do not rely the keys "
+"A GPG pubkey is clearly identified by its fingerprint. Do not rely on the key's "
 "name. If you are not sure whether the presented key is authentic, ask the "
-"repository provider or check his web site. Many provider maintain a web page "
+"repository provider or check their web site. Many providers maintain a web page "
 "showing the fingerprints of the GPG keys they are using."
 msgstr ""
 "Ключ GPG идентифицируется исключительно по отпечатку. Не полагайтесь на имя "
