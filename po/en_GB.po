@@ -1352,7 +1352,7 @@ msgstr "Non-option programme arguments: "
 
 #: src/callbacks/keyring.h:32
 msgid ""
-"A GPG pubkey is clearly identified by it's fingerprint. Do not rely on the key's "
+"A GPG pubkey is clearly identified by its fingerprint. Do not rely on the key's "
 "name. If you are not sure whether the presented key is authentic, ask the "
 "repository provider or check their website. Many providers maintain a webpage "
 "showing the fingerprints of the GPG keys they are using."
