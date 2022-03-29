@@ -43,9 +43,9 @@ namespace zyppng {
   };
 
   template < typename AsyncOp >
-  struct lifter< std::unique_ptr<AsyncOp>, std::void_t< std::enable_if_t< zyppng::detail::is_async_op<AsyncOp>::value > > > {
+  struct lifter< std::shared_ptr<AsyncOp>, std::void_t< std::enable_if_t< zyppng::detail::is_async_op<AsyncOp>::value > > > {
 
-    using LiftedFun = std::unique_ptr<AsyncOp>;
+    using LiftedFun = std::shared_ptr<AsyncOp>;
 
     lifter( LiftedFun &&fun ) : _fun(std::move(fun)) {}
     lifter( lifter && ) = default;

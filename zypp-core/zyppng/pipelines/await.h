@@ -63,7 +63,7 @@ namespace zyppng {
             typename SignalGetter >
   auto await ( SignalGetter &&sigGet )
   {
-    return  std::make_unique<detail::AwaitImpl<T, SignalGetter>>( std::forward<SignalGetter>(sigGet) );
+    return  std::make_shared<detail::AwaitImpl<T, SignalGetter>>( std::forward<SignalGetter>(sigGet) );
   }
 
 }

@@ -31,7 +31,19 @@ Container<Ret> transform( Container<Msg, CArgs...>&& val, Transformation transfo
 {
   Container<Ret> res;
   std::transform( std::make_move_iterator(val.begin()), std::make_move_iterator(val.end()), std::back_inserter(res), transformation );
-  return std::move(res);
+  return res;
+}
+
+template < template< class, class... > class Container,
+  typename Msg,
+  typename Transformation,
+  typename Ret = std::result_of_t<Transformation(Msg)>,
+  typename ...CArgs >
+Container<Ret> transform( const Container<Msg, CArgs...>& val, Transformation transformation )
+{
+  Container<Ret> res;
+  std::transform( val.begin(), val.end(), std::back_inserter(res), transformation );
+  return res;
 }
 
 namespace detail {
@@ -39,9 +51,9 @@ namespace detail {
     struct transform_helper {
         Transformation function;
 
-        template<template< class, class... > class Container, typename Msg, typename ...CArgs>
-        auto operator()( Container<Msg, CArgs...>&& arg ) {
-          return zyppng::transform( std::forward< Container<Msg,CArgs...> >(arg), function );
+        template< class Container >
+        auto operator()( Container&& arg ) {
+          return zyppng::transform( std::forward<Container>(arg), function );
         }
     };
 }

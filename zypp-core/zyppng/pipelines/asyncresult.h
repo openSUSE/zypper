@@ -77,7 +77,7 @@ namespace zyppng {
     template <typename Prev, typename AOp >
     struct AsyncResult<Prev,AOp> : public zyppng::AsyncOp< typename AOp::value_type > {
 
-      AsyncResult ( std::unique_ptr<Prev> && prevTask, std::unique_ptr<AOp> &&cb )
+      AsyncResult ( std::shared_ptr<Prev> && prevTask, std::shared_ptr<AOp> &&cb )
         : _prevTask( std::move(prevTask) )
         , _myTask( std::move(cb) ) {
         connect();
@@ -108,20 +108,20 @@ namespace zyppng {
 
         if ( _prevTask ) {
           //dumpInfo();
-          _prevTask.reset(nullptr);
+          _prevTask.reset();
         }
 
         _myTask->operator()(std::move(resStore));
       }
 
-      std::unique_ptr<Prev> _prevTask;
-      std::unique_ptr<AOp> _myTask;
+      std::shared_ptr<Prev> _prevTask;
+      std::shared_ptr<AOp> _myTask;
     };
 
     template<typename AOp, typename In>
     struct AsyncResult<void, AOp, In> : public zyppng::AsyncOp< typename AOp::value_type > {
 
-      AsyncResult ( std::unique_ptr<AOp> &&cb )
+      AsyncResult ( std::shared_ptr<AOp> &&cb )
         : _myTask( std::move(cb) ) {
         connect();
       }
@@ -144,16 +144,7 @@ namespace zyppng {
           this->setReady( std::move( in ) );
         });
       }
-      std::unique_ptr<AOp> _myTask;
-    };
-
-    //A async result that is ready right away
-    template <typename T>
-    struct ReadyResult : public zyppng::AsyncOp< T >
-    {
-      ReadyResult( T &&val ) {
-        this->setReady( std::move(val) );
-      }
+      std::shared_ptr<AOp> _myTask;
     };
 
     //need a wrapper to connect a sync callback to a async one
@@ -186,7 +177,7 @@ namespace zyppng {
 
       virtual ~SimplifyHelper(){}
 
-      void operator() ( std::unique_ptr<AOp> &&op ) {
+      void operator() ( std::shared_ptr<AOp> &&op ) {
         assert( !_task );
         _task = std::move(op);
         _task->onReady( [this]( Ret &&val ){
@@ -194,7 +185,7 @@ namespace zyppng {
         });
       }
     private:
-      std::unique_ptr<AOp> _task;
+      std::shared_ptr<AOp> _task;
     };
 
     /*!
@@ -203,21 +194,16 @@ namespace zyppng {
      * Usually we do not want to wait on the future of a future but get the nested result immediately
      */
     template < typename Res >
-    inline std::unique_ptr<AsyncOp<Res>> simplify ( std::unique_ptr< AsyncOp<Res> > &&res ) {
+    inline std::shared_ptr<AsyncOp<Res>> simplify ( std::shared_ptr< AsyncOp<Res> > &&res ) {
       return std::move(res);
     }
 
     template < typename Res,
-      typename AOp =  AsyncOp< std::unique_ptr< AsyncOp<Res>> > >
-    inline std::unique_ptr<AsyncOp<Res>> simplify ( std::unique_ptr< AsyncOp< std::unique_ptr< AsyncOp<Res>> > > &&res ) {
-      std::unique_ptr<AsyncOp<Res>> op = std::make_unique< detail::AsyncResult< AOp, SimplifyHelper< AsyncOp<Res>>> >( std::move(res), std::make_unique<SimplifyHelper< AsyncOp<Res>>>() );
+      typename AOp =  AsyncOp< std::shared_ptr< AsyncOp<Res>> > >
+    inline std::shared_ptr<AsyncOp<Res>> simplify ( std::shared_ptr< AsyncOp< std::shared_ptr< AsyncOp<Res>> > > &&res ) {
+      std::shared_ptr<AsyncOp<Res>> op = std::make_shared< detail::AsyncResult< AOp, SimplifyHelper< AsyncOp<Res>>> >( std::move(res), std::make_shared<SimplifyHelper< AsyncOp<Res>>>() );
       return detail::simplify( std::move(op) );
     }
-  }
-
-  template <typename T>
-  AsyncOpPtr<T> makeReadyResult ( T && result ) {
-    return std::make_unique<detail::ReadyResult<T>>( std::move(result) );
   }
 
   namespace operators {
@@ -230,9 +216,9 @@ namespace zyppng {
       //is the callback signature what we want?
       , std::enable_if_t< detail::is_future_monad_cb< Callback, Ret, typename PrevOp::value_type >::value, int> = 0
       >
-    auto operator| ( std::unique_ptr<PrevOp> &&future, std::unique_ptr<Callback> &&c )
+    auto operator| ( std::shared_ptr<PrevOp> &&future, std::shared_ptr<Callback> &&c )
     {
-      std::unique_ptr<AsyncOp<Ret>> op = std::make_unique<detail::AsyncResult< PrevOp, Callback>>( std::move(future), std::move(c) );
+      std::shared_ptr<AsyncOp<Ret>> op = std::make_shared<detail::AsyncResult< PrevOp, Callback>>( std::move(future), std::move(c) );
       return detail::simplify( std::move(op) );
     }
 
@@ -243,11 +229,11 @@ namespace zyppng {
       , std::enable_if_t< detail::is_async_op<PrevOp>::value, int> = 0
       , std::enable_if_t< detail::is_sync_monad_cb< Callback, typename PrevOp::value_type >::value, int> = 0
       >
-    auto operator| ( std::unique_ptr<PrevOp> &&future, Callback &&c )
+    auto operator| ( std::shared_ptr<PrevOp> &&future, Callback &&c )
     {
-      std::unique_ptr<AsyncOp<Ret>> op(std::make_unique<detail::AsyncResult< PrevOp, detail::SyncCallbackWrapper<Callback, typename PrevOp::value_type, Ret> >>(
+      std::shared_ptr<AsyncOp<Ret>> op(std::make_shared<detail::AsyncResult< PrevOp, detail::SyncCallbackWrapper<Callback, typename PrevOp::value_type, Ret> >>(
         std::move(future)
-          ,  std::make_unique<detail::SyncCallbackWrapper<Callback, typename PrevOp::value_type, Ret>>( std::forward<Callback>(c) ) ));
+          ,  std::make_shared<detail::SyncCallbackWrapper<Callback, typename PrevOp::value_type, Ret>>( std::forward<Callback>(c) ) ));
 
       return detail::simplify( std::move(op) );
     }
@@ -259,9 +245,9 @@ namespace zyppng {
       , std::enable_if_t< !detail::is_async_op< remove_smart_ptr_t<SyncRes> >::value, int> = 0
       , std::enable_if_t< detail::is_future_monad_cb< Callback, Ret, SyncRes >::value, int> = 0
       >
-    auto  operator| ( SyncRes &&in, std::unique_ptr<Callback> &&c )
+    auto  operator| ( SyncRes &&in, std::shared_ptr<Callback> &&c )
     {
-      AsyncOpPtr<Ret> op( std::make_unique<detail::AsyncResult<void, Callback, SyncRes>>( std::move(c) ) );
+      AsyncOpRef<Ret> op( std::make_shared<detail::AsyncResult<void, Callback, SyncRes>>( std::move(c) ) );
       static_cast< detail::AsyncResult<void, Callback, SyncRes>* >(op.get())->run( std::move(in) );
       return detail::simplify( std::move(op) );
     }

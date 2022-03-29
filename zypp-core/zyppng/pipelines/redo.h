@@ -56,9 +56,9 @@ namespace zyppng {
     };
 
     template< typename MyAsyncOp, typename Pred >
-    struct RedoWhileImpl< std::unique_ptr<MyAsyncOp>,Pred, std::enable_if_t< is_async_op< MyAsyncOp >::value > > : public AsyncOp<typename MyAsyncOp::value_type> {
+    struct RedoWhileImpl< std::shared_ptr<MyAsyncOp>,Pred, std::enable_if_t< is_async_op< MyAsyncOp >::value > > : public AsyncOp<typename MyAsyncOp::value_type> {
 
-      using Task = std::unique_ptr<MyAsyncOp>;
+      using Task = std::shared_ptr<MyAsyncOp>;
       using OutType  = typename MyAsyncOp::value_type;
 
       template <typename T, typename P>
@@ -83,14 +83,14 @@ namespace zyppng {
 
       template <typename T, typename P>
       static auto create ( T &&t, P &&p ) {
-        return std::make_unique<RedoWhileImpl>( std::forward<T>(t), std::forward<P>(p));
+        return std::make_shared<RedoWhileImpl>( std::forward<T>(t), std::forward<P>(p));
       }
 
     private:
 
       Task _task;
       Pred _pred;
-      std::unique_ptr<AsyncOp<OutType>> _pipeline;
+      std::shared_ptr<AsyncOp<OutType>> _pipeline;
     };
 
     //implementation for a function returning a asynchronous result
@@ -109,7 +109,7 @@ namespace zyppng {
 
       template<typename InType>
       void operator() ( InType &&arg ) {
-        _asyncRes.reset(nullptr);
+        _asyncRes.reset();
         _asyncRes = _task( InType( arg ) );
         _asyncRes->onReady(
           [this, inArg = arg ]( OutType &&arg ) mutable {
@@ -122,11 +122,11 @@ namespace zyppng {
 
       template <typename T, typename P>
       static auto create ( T &&t, P &&p ) {
-        return std::make_unique<RedoWhileImpl>( std::forward<T>(t), std::forward<P>(p));
+        return std::make_shared<RedoWhileImpl>( std::forward<T>(t), std::forward<P>(p));
       }
 
     private:
-      std::unique_ptr<AsyncOp<OutType>> _asyncRes;
+      std::shared_ptr<AsyncOp<OutType>> _asyncRes;
 
       Task _task;
       Pred _pred;

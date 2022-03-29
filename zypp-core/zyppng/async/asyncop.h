@@ -14,10 +14,10 @@
 #ifndef ZYPPNG_ASYNC_ASYNCOP_H_INCLUDED
 #define ZYPPNG_ASYNC_ASYNCOP_H_INCLUDED
 
-
+#include <zypp-core/zyppng/base/Base>
 #include <zypp-core/base/Exception.h>
 #include <zypp-core/zyppng/base/Signals>
-#include <boost/optional.hpp>
+#include <optional>
 #include <memory>
 
 namespace zyppng {
@@ -35,8 +35,76 @@ namespace zyppng {
     virtual ~AsyncOpNotReadyException();
   };
 
-  AsyncOpNotReadyException::~AsyncOpNotReadyException()
+  class CancelNotImplementedException : public zypp::Exception
+  {
+  public:
+    CancelNotImplementedException()
+      : Exception ("AsyncOp does not support cancelling the operation")
+    {}
+    virtual ~CancelNotImplementedException();
+
+
+  };
+
+  inline AsyncOpNotReadyException::~AsyncOpNotReadyException()
   { }
+
+
+  inline CancelNotImplementedException::~CancelNotImplementedException()
+  { }
+
+
+  struct AsyncOpBase : public Base {
+
+    /*!
+     * Should return true if the async op supports cancelling, otherwise false
+     */
+    virtual bool canCancel () {
+      return false;
+    }
+
+    /*!
+     * Explicitely cancels the async operation if it supports that,
+     * otherwise throws a \ref CancelNotImplementedException
+     *
+     * Generally every AsyncOp HAS TO support cancelling by releasing the last reference
+     * to it, however in some special cases we need to be able to cancel programatically
+     * from the backends and notify the frontends by returning a error from a AsyncOp.
+     */
+    virtual void cancel () {
+      throw CancelNotImplementedException();
+    }
+
+    /*!
+     * Signal that is emitted once the AsyncOp is started
+     */
+    SignalProxy<void()> sigStarted () {
+      return _sigStarted;
+    }
+
+    /*!
+     * Signal that might be emitted during operation of the AsyncOp,
+     * not every AsyncOp will use this
+     */
+    SignalProxy<void( const std::string & /*text*/, int /*current*/, int /*max*/ )> sigProgress () {
+      return _sigProgress;
+    }
+
+    /*!
+     * Signal that is emitted once the AsyncOp is ready and no
+     * callback was registered with \ref onReady
+     */
+    SignalProxy<void()> sigReady () {
+      return _sigReady;
+    }
+
+  protected:
+    Signal<void()> _sigStarted;
+    Signal<void()> _sigReady;
+    Signal<void( const std::string & /*text*/, int /*current*/, int /*max*/ )> _sigProgress;
+  };
+
+
 
   /*!
    *\class AsyncOp
@@ -44,7 +112,7 @@ namespace zyppng {
    * Its the base for all async callbacks as well as the async result type. That basically means
    * every pipeline is just a AsyncOp that contains all previous operations that were defined in the pipeline.
    *
-   * When implementing a async operation it is required to add a operator() to the class taking the
+   * When implementing a async operation that is to be used in a pipeline it is required to add a operator() to the class taking the
    * input parameter. After the operation is finished the implementation must call setReady(). Calling
    * setReady() must be treated like calling return in a normal function and not execute anymore code on the
    * AsyncOp instance afterwards, since the next operation in the pipeline is allowed to free the previous operation
@@ -54,12 +122,14 @@ namespace zyppng {
    * is cached internally and can be retrieved with \sa get().
    *
    * A async operation can be cancelled by releasing the result object ( the resulting combinatory object ), this will
-   * destroy all previous operations that are either running or pending as well.
+   * destroy all previous operations that are either running or pending as well. The destructors MUST NOT call setReady() but
+   * only release currently running operations.
    */
   template <typename Result>
-  struct AsyncOp {
+  struct AsyncOp : public AsyncOpBase {
 
     using value_type = Result;
+    using Ptr = std::shared_ptr<AsyncOp<Result>>;
 
     AsyncOp () = default;
 
@@ -77,8 +147,13 @@ namespace zyppng {
      * storing it.
      */
     void setReady ( value_type && val ) {
-      if ( _readyCb )
+      if ( _readyCb ) {
+        // use a weak reference to know if `this` was deleted by the callback()
+        auto weak = weak_from_this();
         _readyCb( std::move( val ) );
+        if ( !weak.expired() )
+          _readyCb = {};
+      }
       else { //we need to cache the value because no callback is available
         _maybeValue = std::move(val);
         _sigReady.emit();
@@ -91,7 +166,7 @@ namespace zyppng {
      * \note This can only be used when no callback is registered.
      */
     bool isReady () const {
-      return _maybeValue.is_initialized();
+      return _maybeValue.has_value();
     }
 
     /*!
@@ -99,14 +174,27 @@ namespace zyppng {
      * when the object gets into ready state. In case the
      * object is in ready state when registering the callback
      * it is called right away.
+     * \note this will disable the emitting of sigReady() so it should
+     *       be only used by the pipeline implementation
+     *
+     * \note the callback is removed from the AsyncOp after it was executed
+     *       when the AsyncOp becomes ready
      */
     template< typename Fun >
     void onReady ( Fun cb ) {
       this->_readyCb =  std::forward<Fun>(cb);
 
       if ( isReady() ) {
-        _readyCb( std::move( _maybeValue.get()) );
-        _maybeValue = boost::optional<value_type>();
+        // use a weak reference to know if `this` was deleted by the callback()
+        auto weak = weak_from_this();
+
+        _readyCb( std::move( _maybeValue.value()) );
+        _maybeValue.reset();
+
+        // reset the callback, it might be a lambda with captured ressources
+        // that need to be released after returning from the func
+        if ( !weak.expired() )
+          _readyCb = {};
       }
     }
 
@@ -117,27 +205,27 @@ namespace zyppng {
     value_type &get (){
       if ( !isReady() )
         ZYPP_THROW(AsyncOpNotReadyException());
-      return _maybeValue.get();
-    }
-
-    /*!
-     * Signal that is emitted once the AsyncOp is ready and no
-     * callback was registered with \ref onReady
-     */
-    SignalProxy<void()> sigReady () {
-      return _sigReady;
+      return _maybeValue.value();
     }
 
   private:
-    Signal<void()> _sigReady;
     std::function<void(value_type &&)> _readyCb;
-    boost::optional<value_type> _maybeValue;
+    std::optional<value_type> _maybeValue;
   };
 
   template <typename T>
-  using AsyncOpPtr = std::unique_ptr<AsyncOp<T>>;
+  using AsyncOpRef = std::shared_ptr<AsyncOp<T>>;
 
   namespace detail {
+
+    //A async result that is ready right away
+    template <typename T>
+    struct ReadyResult : public zyppng::AsyncOp< T >
+    {
+      ReadyResult( T &&val ) {
+        this->setReady( std::move(val) );
+      }
+    };
 
 #if 0
     template <typename T>
@@ -169,6 +257,11 @@ namespace zyppng {
 
 #endif
 
+  }
+
+  template <typename T>
+  AsyncOpRef<T> makeReadyResult ( T && result ) {
+    return std::make_shared<detail::ReadyResult<T>>( std::move(result) );
   }
 
 }
