@@ -33,6 +33,12 @@ namespace zypp {
       return std::string_view( data(), size() );
     }
 #endif
+
+    static std::size_t maxSize () {
+      static const auto size = ByteArray().max_size();
+      return size;
+    }
+
   };
 
   class UByteArray : public std::vector<unsigned char>
@@ -40,6 +46,11 @@ namespace zypp {
   public:
     using vector<unsigned char>::vector;
     explicit UByteArray ( const char *data, const int len = -1 ) : UByteArray( data, data + (len == -1 ? strlen(data) : len) ) { }
+
+    static std::size_t maxSize () {
+      static const auto size = UByteArray().max_size();
+      return size;
+    }
   };
 }
 
