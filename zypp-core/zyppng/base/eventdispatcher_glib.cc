@@ -296,6 +296,7 @@ EventDispatcherPrivate::~EventDispatcherPrivate()
     GAbstractEventSource::destruct( src );
   });
   _runningTimers.clear();
+  _eventSources.clear();
 
   if ( _idleSource ) {
     g_source_destroy( _idleSource );
