@@ -19,6 +19,7 @@ OPTION (DISABLE_AUTODOCS "Do not require doxygen being installed (required to bu
 OPTION (EXPORT_NG_API "Export experimental libzypp API" OFF)
 # This option will reroute all tool binaries to the libzypp build dir instead of taking those installed in the default directories.
 OPTION (ENABLE_DEVEL_BUILD "Developer build, use zypp tools directly from build dir rather than the default locations" OFF)
+OPTION (INSTALL_NG_BINARIES "Installs the NG binaries, disabled for now since we are not actively using them." OFF)
 # Distros using just zypper may want to enable this as default earlier
 OPTION (ENABLE_PREVIEW_SINGLE_RPMTRANS_AS_DEFAULT_FOR_ZYPPER "[preview] Force zypper into using a single rpm transaction to install" OFF)
 #--------------------------------------------------------------------------------
@@ -35,12 +36,15 @@ ENDIF (DEBIAN)
 IF ( ENABLE_DEVEL_BUILD )
         MESSAGE( WARNING "Zypp devel build enabled, do not do this in production" )
         SET( ZYPP_RPM_BINARY "${CMAKE_BINARY_DIR}/tools/zypp-rpm/zypp-rpm")
+        SET( ZYPP_WORKER_PATH "${CMAKE_BINARY_DIR}/tools/workers" )
 ELSE()
         SET( ZYPP_RPM_BINARY "${ZYPP_LIBEXEC_INSTALL_DIR}/zypp-rpm")
+        SET( ZYPP_WORKER_PATH "${ZYPP_LIBEXEC_INSTALL_DIR}/workers" )
 ENDIF( ENABLE_DEVEL_BUILD )
 
 message ( "Using zypp-rpm from path: ${ZYPP_RPM_BINARY}" )
-add_definitions( -DZYPP_RPM_BINARY="${ZYPP_RPM_BINARY}")
+add_definitions( -DZYPP_RPM_BINARY="${ZYPP_RPM_BINARY}"  )
+add_definitions( -DZYPP_WORKER_PATH="${ZYPP_WORKER_PATH}")
 
 IF (${have_system} STREQUAL x)
   MESSAGE (STATUS "Building for SUSE")
