@@ -533,17 +533,11 @@ MediaHandler::checkAttached(bool matchMountFs) const
         if ( ref.attachPoint->path != Pathname(e->dir) )
           continue;	// at least the mount points must match
 
-        bool        is_device = false;
-        PathInfo    dev_info;
-        if( str::hasPrefix( Pathname(e->src).asString(), "/dev/" ) &&
-            dev_info(e->src) && dev_info.isBlk() )
-        {
-          is_device = true;
-        }
-
+        bool is_device = e->isBlockDevice();
         if( is_device &&  (ref.mediaSource->maj_nr &&
                            ref.mediaSource->bdir.empty()))
         {
+          PathInfo    dev_info(e->src);
           std::string mtype(matchMountFs ? e->type : ref.mediaSource->type);
           MediaSource media(mtype, e->src, dev_info.devMajor(), dev_info.devMinor());
 

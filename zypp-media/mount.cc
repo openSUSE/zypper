@@ -46,6 +46,13 @@ namespace zypp {
     }
 
 
+
+bool MountEntry::isBlockDevice() const
+{
+  PathInfo dev_info;
+  return ( str::hasPrefix( Pathname(src).asString(), "/dev/" ) && dev_info(src) && dev_info.isBlk() );
+}
+
 Mount::Mount()
 {}
 
@@ -252,6 +259,17 @@ Mount::getEntries(const std::string &mtab)
     }
   }
   return entries;
+}
+
+time_t Mount::getMTime()
+{
+  time_t mtime = zypp::PathInfo("/etc/mtab").mtime();
+  if( mtime <= 0)
+  {
+    WAR << "Failed to retrieve modification time of '/etc/mtab'"
+        << std::endl;
+  }
+  return mtime;
 }
 
   } // namespace media

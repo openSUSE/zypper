@@ -47,6 +47,11 @@ namespace zypp {
             , pass(passnum)
         {}
 
+        /**
+         * Returns true if the src part points to a block device in /dev
+         */
+        bool isBlockDevice () const;
+
         std::string src;  //!< name of mounted file system
         std::string dir;  //!< file system path prefix
         std::string type; //!< filesystem / mount type
@@ -136,6 +141,12 @@ namespace zypp {
         */
         static MountEntries
         getEntries(const std::string &mtab = "");
+
+       /**
+        * Get the modification time of the /etc/mtab file.
+        * \return Modification time of the /etc/mtab file.
+        */
+        static time_t getMTime();
 
     private:
 #if LEGACY(1722)

@@ -272,13 +272,7 @@ namespace zypp
       static inline time_t
       getMountTableMTime()
       {
-        time_t mtime = zypp::PathInfo("/etc/mtab").mtime();
-        if( mtime <= 0)
-        {
-          WAR << "Failed to retrieve modification time of '/etc/mtab'"
-              << std::endl;
-        }
-        return mtime;
+        return Mount::getMTime();
       }
 
       static inline MountEntries
