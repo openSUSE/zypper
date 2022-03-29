@@ -1,5 +1,6 @@
 #include "private/iobuffer_p.h"
 #include <cstring>
+#include <cassert>
 
 namespace zyppng {
 
@@ -7,11 +8,12 @@ namespace zyppng {
     DefChunkSize = 4096
   };
 
-  IOBuffer::IOBuffer(unsigned chunkSize) : _defaultChunkSize ( chunkSize == 0 ? DefChunkSize : chunkSize )
+  IOBuffer::IOBuffer( int64_t chunkSize ) : _defaultChunkSize ( chunkSize == 0 ? DefChunkSize : chunkSize )
   { }
 
-  char *IOBuffer::reserve( size_t bytes )
+  char *IOBuffer::reserve( int64_t bytes )
   {
+    assert( bytes > 0 && size_t(bytes) < ByteArray::maxSize() );
     // do we need a new chunk?
     if ( _chunks.size() ) {
       auto &back = _chunks.back();
@@ -25,7 +27,7 @@ namespace zyppng {
     // not enough space ready allocate a new one
     _chunks.push_back( Chunk{} );
     auto &back = _chunks.back();
-    back._buffer.insert( back._buffer.end(), std::max<size_t>( _defaultChunkSize, bytes ), '\0' );
+    back._buffer.insert( back._buffer.end(), std::max<int64_t>( _defaultChunkSize, bytes ), '\0' );
     back.tail += bytes;
     return back.data();
   }
@@ -38,7 +40,7 @@ namespace zyppng {
     return _chunks.front().data();
   }
 
-  size_t IOBuffer::frontSize() const
+  int64_t IOBuffer::frontSize() const
   {
     if ( _chunks.empty() )
       return 0;
@@ -50,15 +52,15 @@ namespace zyppng {
     _chunks.clear();
   }
 
-  size_t IOBuffer::discard( size_t bytes )
+  int64_t IOBuffer::discard( int64_t bytes )
   {
-    const size_t bytesToDiscard = std::min(bytes, size());
+    const int64_t bytesToDiscard = std::min(bytes, size());
     if ( bytesToDiscard == size() ) {
       clear();
       return bytesToDiscard;
     }
 
-    size_t discardedSoFar = 0;
+    int64_t discardedSoFar = 0;
 
     // since the chunks might not be used completely we need to iterate over them
     // counting how much used bytes we actually discard until we hit the requested amount
@@ -82,7 +84,7 @@ namespace zyppng {
   /*!
    * Removes bytes from the end of the buffer
    */
-  void IOBuffer::chop( size_t bytes )
+  void IOBuffer::chop( int64_t bytes )
   {
     if ( bytes == 0 )
       return;
@@ -93,7 +95,7 @@ namespace zyppng {
       return;
     }
 
-    size_t choppedSoFar = 0;
+    int64_t choppedSoFar = 0;
     while ( choppedSoFar < bytes && _chunks.size() ) {
       auto bytesStillToChop =  bytes - choppedSoFar;
       auto &chunk = _chunks.back();
@@ -108,8 +110,10 @@ namespace zyppng {
     }
   }
 
-  void IOBuffer::append(const char *data, size_t count)
+  void IOBuffer::append(const char *data, int64_t count)
   {
+    assert( count > 0 && size_t(count) < ByteArray::maxSize() );
+
     char *buf = reserve( count );
     if ( count == 1 )
       *buf = *data;
@@ -123,7 +127,7 @@ namespace zyppng {
     append( data.data(), data.size() );
   }
 
-  size_t IOBuffer::read( char *buffer, size_t max )
+  int64_t IOBuffer::read( char *buffer, int64_t max )
   {
     const size_t bytesToRead = std::min( size(), max );
     size_t readSoFar = 0;
@@ -144,9 +148,9 @@ namespace zyppng {
     return readSoFar;
   }
 
-  size_t IOBuffer::size() const
+  int64_t IOBuffer::size() const
   {
-    size_t s = 0;
+    int64_t s = 0;
     for ( const auto &c : _chunks )
       s+= c.len();
     return s;
@@ -157,14 +161,14 @@ namespace zyppng {
     return _chunks.size();
   }
 
-  int64_t IOBuffer::indexOf( const char c, size_t maxCount, size_t pos ) const
+  int64_t IOBuffer::indexOf(const char c, int64_t maxCount, int64_t pos ) const
   {
     if ( maxCount == 0 )
       return -1;
 
     maxCount = std::min<size_t>( maxCount, size() );
 
-    size_t  scannedSoFar  = 0;
+    int64_t  scannedSoFar  = 0;
     for ( const auto &chunk : _chunks ) {
 
       //as long as pos is still after the current chunk just increase the count
@@ -195,8 +199,10 @@ namespace zyppng {
     return -1;
   }
 
-  ByteArray IOBuffer::readLine(const size_t max)
+  ByteArray IOBuffer::readLine( const int64_t max )
   {
+    assert( ( max >= 2 || max == 0 ) && size_t(max) <= ByteArray::maxSize() );
+
     const auto idx = indexOf( '\n', max == 0 ? size() : max );
     if ( idx == -1 )
       return {};
@@ -204,6 +210,16 @@ namespace zyppng {
     zyppng::ByteArray b( idx+1, '\0' );
     read( b.data(), idx+1 );
     return b;
+  }
+
+  int64_t IOBuffer::readLine( char *buffer, int64_t max )
+  {
+    assert( buffer != nullptr && max > 1 );
+    const auto maxRead = max - 1;
+    const auto idx = indexOf( '\n', maxRead );
+    const auto bytesRead = read( buffer, idx == -1 ? maxRead : idx + 1  );
+    buffer[bytesRead] = '\0';
+    return bytesRead;
   }
 
   bool IOBuffer::canReadLine() const

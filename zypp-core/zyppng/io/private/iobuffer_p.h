@@ -12,8 +12,8 @@ namespace zyppng {
     struct Chunk {
       ByteArray _buffer;
 
-      unsigned head = 0;
-      unsigned tail = 0;
+      int64_t head = 0;
+      int64_t tail = 0;
 
       char * data () {
         return _buffer.data() + head;
@@ -23,35 +23,36 @@ namespace zyppng {
         return _buffer.data() + head;
       }
 
-      unsigned available() const {
+      int64_t available() const {
         return _buffer.size() - tail;
       }
-      unsigned len () const {
+      int64_t len () const {
         return tail - head;
       }
     };
 
   public:
-    IOBuffer( unsigned chunkSize = 0);
+    IOBuffer( int64_t chunkSize = 0 );
 
-    char *reserve( size_t bytes );
+    char *reserve( int64_t bytes );
     char *front ();
-    size_t frontSize () const;
+    int64_t frontSize () const;
     void clear     ( );
-    size_t discard ( size_t bytes );
-    void chop ( size_t bytes );
-    void append ( const char *data, size_t count );
+    int64_t discard( int64_t bytes );
+    void chop ( int64_t bytes );
+    void append ( const char *data, int64_t count );
     void append ( const ByteArray &data );
-    size_t read ( char *buffer, size_t max );
-    size_t size ( ) const;
+    int64_t read ( char *buffer, int64_t max );
+    int64_t size ( ) const;
     std::vector<Chunk>::size_type chunks ()  const;
     inline int64_t indexOf ( const char c ) const { return indexOf( c, size() ); }
-    int64_t indexOf ( const char c, size_t maxCount, size_t pos = 0 ) const;
-    ByteArray readLine ( const size_t max = 0 );
+    int64_t indexOf (const char c, int64_t maxCount, int64_t pos = 0 ) const;
+    ByteArray readLine ( const int64_t max = 0 );
+    int64_t readLine( char *buffer, int64_t max );
     bool canReadLine () const;
 
   private:
-    unsigned _defaultChunkSize;
+    int64_t _defaultChunkSize;
     std::vector<Chunk> _chunks;
   };
 

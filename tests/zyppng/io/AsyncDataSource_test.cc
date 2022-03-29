@@ -7,6 +7,7 @@
 #include <string_view>
 #include <iostream>
 #include <glib-unix.h>
+#include <fstream>
 
 #include <mutex>
 #include <condition_variable>
@@ -36,7 +37,6 @@ BOOST_AUTO_TEST_CASE ( pipe_read_close )
   BOOST_REQUIRE( dataSource->readFdOpen() );
 
   const auto &readAllData = [&](){
-    std::cout <<"Trying to read all data"<<std::endl;
     zypp::ByteArray d = dataSource->readAll();
     readData.insert( readData.end(), d.begin(), d.end()  );
   };
@@ -92,7 +92,6 @@ BOOST_AUTO_TEST_CASE ( pipe_read_close2 )
   BOOST_REQUIRE( dataSource->canRead() );
 
   const auto &readAllData = [&](){
-    std::cout <<"Trying to read all data"<<std::endl;
     zypp::ByteArray d = dataSource->readAll();
     readData.insert( readData.end(), d.begin(), d.end()  );
   };
@@ -151,10 +150,10 @@ BOOST_AUTO_TEST_CASE ( pipe_write_close )
   BOOST_REQUIRE( dataSink->openFds( {}, pipeFds[1] ) );
   BOOST_REQUIRE( dataSink->canWrite() );
 
-  std::size_t bytesWritten = 0;
-  dataSink->connectFunc( &zyppng::AsyncDataSource::sigBytesWritten, [&]( std::size_t bytes ){
+  int64_t bytesWritten = 0;
+  dataSink->connectFunc( &zyppng::AsyncDataSource::sigBytesWritten, [&]( int64_t bytes ){
     bytesWritten += bytes;
-    if ( bytesWritten == text.size() )
+    if ( std::size_t(bytesWritten) == text.size() )
       loop->quit();
 
   });
@@ -183,9 +182,6 @@ BOOST_AUTO_TEST_CASE ( pipe_write_close )
     });
 
     loop->run();
-
-    std::cout << "Thread did read: " << readData.data() << std::endl;
-
     ::close( readFd );
 
   }, pipeFds[0], text );
@@ -220,8 +216,8 @@ BOOST_AUTO_TEST_CASE ( pipe_close )
   BOOST_REQUIRE( dataSink->openFds( {}, pipeFds[1] ) );
   BOOST_REQUIRE( dataSink->canWrite() );
 
-  std::size_t bytesWritten = 0;
-  dataSink->connectFunc( &zyppng::AsyncDataSource::sigBytesWritten, [&]( std::size_t bytes ){
+  int64_t bytesWritten = 0;
+  dataSink->connectFunc( &zyppng::AsyncDataSource::sigBytesWritten, [&]( int64_t bytes ){
     bytesWritten += bytes;
   });
 
@@ -270,13 +266,13 @@ BOOST_AUTO_TEST_CASE ( multichannel )
   BOOST_REQUIRE( dataSink2->openFds( {}, pipe2Fds[1] ) );
   BOOST_REQUIRE( dataSink2->canWrite() );
 
-  std::size_t bytesWritten = 0;
-  dataSink->connectFunc( &zyppng::AsyncDataSource::sigBytesWritten, [&]( std::size_t bytes ){
+  int64_t bytesWritten = 0;
+  dataSink->connectFunc( &zyppng::AsyncDataSource::sigBytesWritten, [&]( int64_t bytes ){
     bytesWritten += bytes;
   });
 
-  std::size_t bytesWritten2 = 0;
-  dataSink2->connectFunc( &zyppng::AsyncDataSource::sigBytesWritten, [&]( std::size_t bytes ){
+  int64_t bytesWritten2 = 0;
+  dataSink2->connectFunc( &zyppng::AsyncDataSource::sigBytesWritten, [&]( int64_t bytes ){
     bytesWritten2 += bytes;
   });
 
@@ -327,3 +323,48 @@ BOOST_AUTO_TEST_CASE ( multichannel )
   BOOST_REQUIRE_EQUAL( text[1], std::string_view( dataRecv[1].data(), dataRecv[1].size() ) );
 }
 
+BOOST_AUTO_TEST_CASE ( readl )
+{
+  std::string_view text[] = { "Hello\n", "World\n", "123456" };
+  int pipeFds[2] { -1, -1 };
+  BOOST_REQUIRE( g_unix_open_pipe( pipeFds, FD_CLOEXEC, nullptr ) );
+
+  auto loop = zyppng::EventLoop::create();
+  auto dataSource = zyppng::AsyncDataSource::create();
+
+  // make sure we are not stuck
+  auto timer = zyppng::Timer::create();
+  timer->start( 3000 );
+
+  bool timeout = false;
+  timer->connectFunc( &zyppng::Timer::sigExpired, [&]( auto & ){
+    loop->quit();
+    timeout = true;
+  });
+
+  BOOST_REQUIRE( dataSource->openFds( { pipeFds[0] } ) );
+  BOOST_REQUIRE( dataSource->canRead() );
+
+  dataSource->setReadChannel( 0 );
+  dataSource->sigReadyRead ().connect([&](){
+    // now write more data without returning to the ev loop, and check if we get it all
+    ::write( pipeFds[1], text[1].data(), text[1].size() );
+    ::write( pipeFds[1], text[2].data(), text[2].size() );
+
+    auto ba = dataSource->readLine();
+    BOOST_REQUIRE_EQUAL( text[0], std::string_view( ba.data(), ba.size() ) );
+    ba = dataSource->readLine( text[1].size () + 1 ); // trigger code path with fixed size
+    BOOST_REQUIRE_EQUAL( text[1], std::string_view( ba.data(), ba.size() ) );
+    ba = dataSource->readLine();
+    BOOST_REQUIRE_EQUAL( text[2], std::string_view( ba.data(), ba.size() ) );
+    loop->quit();
+  });
+
+  //write the first line
+  ::write( pipeFds[1], text[0].data(), text[0].size() );
+
+  loop->run();
+
+  BOOST_REQUIRE( !timeout );
+
+}

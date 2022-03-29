@@ -37,7 +37,7 @@ namespace zyppng {
    * Tries to use the FIONREAD ioctl to detect how many bytes are available on a file descriptor,
    * this can fail and return 0 so just use it as a indicator on how many bytes are pending
    */
-  int bytesAvailableOnFD ( int fd );
+  int64_t bytesAvailableOnFD( int fd );
 
   /*!
    * Small helper struct around creating a Unix pipe to ensure RAII with pipes

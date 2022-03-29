@@ -89,7 +89,7 @@ namespace zyppng {
     /*!
      * Returns the current number of bytes that are not yet written to the socket.
      */
-    size_t bytesPending() const;
+    int64_t bytesPending() const;
 
     /*!
      * Returns the current state the socket is in,
@@ -161,7 +161,7 @@ namespace zyppng {
      *
      * \note do not use until there is no other way
      */
-    bool waitForReadyRead ( int timeout = -1 );
+    bool waitForReadyRead ( uint channel, int timeout = -1 ) override;
 
     /*!
      * Returns the native socket handle.
@@ -221,9 +221,9 @@ namespace zyppng {
 
     // IODevice interface
   protected:
-    size_t rawBytesAvailable( uint channel = 0 ) const override;
-    off_t writeData(const char *data, off_t count) override;
-    off_t readData( uint channel, char *buffer, off_t bufsize ) override;
+    int64_t rawBytesAvailable( uint channel = 0 ) const override;
+    int64_t writeData(const char *data, int64_t count) override;
+    int64_t readData( uint channel, char *buffer, int64_t bufsize ) override;
     void  readChannelChanged ( uint channel ) override;
   };
 }

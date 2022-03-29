@@ -27,28 +27,23 @@ namespace zyppng {
     bool openFds ( std::vector<int> readFds, int writeFd = -1 );
     void close () override;
 
-    /*!
-     * Blocks the current event loop to wait until there are bytes available to read from the device.
-     * This always operates on the read channel that is selected as the default when the function is first called,
-     * even if the default channel would be changed during the wait.
-     *
-     * \sa zyppng::IODevice::currentReadChannel
-     * \note do not use until there is a very good reason, like event processing should not continue until readyRead was sent
-     */
-    bool waitForReadyRead(int timeout);
+    using IODevice::waitForReadyRead;
 
-    /*!
-     * Blocks the current event loop to wait until there are bytes available to read from the given read channel.
-     *
-     * \note do not use until there is a very good reason, like event processing should not continue until readyRead was sent
-     */
-    bool waitForReadyRead(uint channel, int timeout);
+    virtual void closeWriteChannel ();
 
     /*!
      * Blocks the current event loop to wait until all bytes currently in the buffer have been written to
      * the write fd.
      *
      * \note do not use until there is a very good reason, like event processing should not continue until readyRead was sent
+     */
+    bool waitForReadyRead(uint channel, int timeout) override;
+
+    /*!
+     * Blocks the current event loop to wait until all bytes currently in the buffer have been written to
+     * the write fd.
+     *
+     * \note do not use until there is a very good reason, like event processing should not continue until bytesWritten was sent
      */
     void flush ();
 
@@ -79,13 +74,13 @@ namespace zyppng {
   protected:
     AsyncDataSource (  );
     AsyncDataSource( AsyncDataSourcePrivate &d );
-    off_t writeData(const char *data, off_t count) override;
+    int64_t writeData(const char *data, int64_t count) override;
 
   private:
     using IODevice::open;
 
-    off_t readData( uint channel, char *buffer, off_t bufsize ) override;
-    size_t rawBytesAvailable( uint channel ) const override;
+    int64_t readData( uint channel, char *buffer, int64_t bufsize ) override;
+    int64_t rawBytesAvailable( uint channel ) const override;
     void readChannelChanged ( uint channel ) override;
   };
 }

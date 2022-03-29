@@ -29,7 +29,7 @@ BOOST_AUTO_TEST_CASE ( lorem )
   auto listeningSock = zyppng::Socket::create( AF_UNIX, SOCK_STREAM, 0 );
   auto error = zyppng::Socket::NoError;
 
-  size_t bytesWritten = 0;
+  int64_t bytesWritten = 0;
   zyppng::ByteArray dataReceived; //< This is where the thread will write the data
 
   auto addr = std::make_shared<zyppng::UnixSockAddr>( "socktest", true );
@@ -300,10 +300,10 @@ BOOST_AUTO_TEST_CASE ( lotsofdata )
   auto error = zyppng::Socket::NoError;
 
   const int iterations = 1000000;
-  size_t bytesShouldBeWritten = 0;
-  size_t bytesWritten = 0;
-  size_t bytesWrittenSignaled = 0;
-  size_t bytesReceived = 0;
+  int64_t bytesShouldBeWritten = 0;
+  int64_t bytesWritten = 0;
+  int64_t bytesWrittenSignaled = 0;
+  int64_t bytesReceived = 0;
 
   auto addr = std::make_shared<zyppng::UnixSockAddr>( "socktest", true );
   BOOST_REQUIRE( listeningSock->bind( addr ) );

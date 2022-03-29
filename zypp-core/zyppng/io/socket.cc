@@ -197,7 +197,7 @@ namespace zyppng {
     return true;
   }
 
-  int zyppng::SocketPrivate::rawBytesAvailable() const
+  int64_t zyppng::SocketPrivate::rawBytesAvailable() const
   {
     if ( state() != Socket::ConnectedState )
       return 0;
@@ -226,7 +226,7 @@ namespace zyppng {
           // there is simply no data to read ignore and try again
         return true;
         case 0: {
-          // remote close 
+          // remote close
           setError( Socket::ConnectionClosedByRemote, "The remote host closed the connection", true );
           break;
         }
@@ -234,7 +234,7 @@ namespace zyppng {
         default: {
           setError( Socket::InternalError, strerr_cxx(), true );
           break;
-        } 
+        }
       }
       z->abort();
       return false;
@@ -242,7 +242,7 @@ namespace zyppng {
 
     if ( bytesToRead > bytesRead )
       readBuf.chop( bytesToRead-bytesRead );
-      
+
     _readyRead.emit();
     _channelReadyRead.emit(0);
     return true;
@@ -285,7 +285,7 @@ namespace zyppng {
         s._writeBuffer.discard( written );
         _sigBytesWritten.emit( written );
         if ( s._writeBuffer.size() == 0 )
-          _sigAllBytesWritten.emit(); 
+          _sigAllBytesWritten.emit();
       }
       return true;
     }, _state );
@@ -419,7 +419,7 @@ namespace zyppng {
     : IODevice( *( new SocketPrivate( domain, type, protocol, *this )))
   { }
 
-  size_t Socket::rawBytesAvailable( uint channel ) const
+  int64_t Socket::rawBytesAvailable( uint channel ) const
   {
     if ( channel != 0 ) {
       constexpr std::string_view msg("Socket does not support multiple read channels");
@@ -677,7 +677,7 @@ namespace zyppng {
 
   }
 
-  off_t Socket::writeData( const char *data, off_t count )
+  int64_t Socket::writeData( const char *data, int64_t count )
   {
     Z_D();
     if ( d->state() != SocketState::ConnectedState )
@@ -726,7 +726,7 @@ namespace zyppng {
     }
 
     if ( s._writeBuffer.size() == 0 )
-      d->_sigAllBytesWritten.emit(); 
+      d->_sigAllBytesWritten.emit();
 
     return count;
   }
@@ -782,10 +782,10 @@ namespace zyppng {
     return bufferEmpty;
   }
 
-  bool Socket::waitForReadyRead(int timeout)
+  bool Socket::waitForReadyRead( uint channel, int timeout)
   {
     Z_D();
-    if ( d->state() != Socket::ConnectedState )
+    if ( d->state() != Socket::ConnectedState || channel != 0 )
       return false;
 
     // we can only wait if we are in connected state
@@ -801,7 +801,7 @@ namespace zyppng {
     return bytesAvailable() > 0;
   }
 
-  off_t Socket::readData( uint channel, char *buffer, off_t bufsize )
+  int64_t Socket::readData( uint channel, char *buffer, int64_t bufsize )
   {
     if ( channel != 0 ) {
       constexpr std::string_view msg("Socket does not support multiple read channels");
@@ -836,8 +836,8 @@ namespace zyppng {
     return read;
   }
 
-  void Socket::readChannelChanged ( uint channel ) 
-  { 
+  void Socket::readChannelChanged ( uint channel )
+  {
     if ( channel != 0 ) {
       constexpr std::string_view msg("Changing the readChannel on a Socket is not supported");
       ERR << msg << std::endl;
@@ -845,10 +845,10 @@ namespace zyppng {
     }
   }
 
-  size_t Socket::bytesPending() const
+  int64_t Socket::bytesPending() const
   {
     Z_D();
-    return std::visit([&]( const auto &s ) -> size_t {
+    return std::visit([&]( const auto &s ) -> int64_t {
       using T = std::decay_t<decltype (s)>;
       if constexpr ( std::is_same_v<T, SocketPrivate::ConnectedState> || std::is_same_v<T, SocketPrivate::ClosingState> ) {
         return s._writeBuffer.size();

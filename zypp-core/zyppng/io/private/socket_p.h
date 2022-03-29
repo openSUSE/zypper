@@ -48,7 +48,7 @@ namespace zyppng {
     void onSocketActivatedSlot ( const SocketNotifier &, int ev ) {
       return onSocketActivated(ev);
     }
-    int  rawBytesAvailable () const;
+    int64_t rawBytesAvailable () const;
     bool readRawBytesToBuffer ();
     bool writePendingData ();
 

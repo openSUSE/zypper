@@ -51,11 +51,11 @@ namespace zyppng {
     }
   }
 
-  int bytesAvailableOnFD(int fd)
+  int64_t bytesAvailableOnFD( int fd )
   {
     int value;
     if ( ioctl( fd, FIONREAD, &value) >= 0 )
-      return value;
+      return int64_t(value);
 
     return 0;
   }

@@ -62,16 +62,14 @@ namespace zyppng {
       return;
     }
 
-    if ( bytesToRead > (size_t)bytesRead )
+    if ( bytesToRead > bytesRead )
       _readBuf.chop( bytesToRead-bytesRead );
 
     if ( channel == _currentReadChannel )
       _readyRead.emit();
+
     _channelReadyRead.emit( channel );
     return;
-
-    //setError( Socket::InternalError, strerr_cxx() );
-    closeReadChannel( channel, AsyncDataSource::InternalError );
   }
 
   void AsyncDataSourcePrivate::readyWrite()
@@ -158,6 +156,7 @@ namespace zyppng {
 
     IODevice::OpenMode mode;
 
+    bool error = false;
     for ( const auto readFd : readFds ) {
       if ( readFd >= 0 ) {
         mode |= IODevice::ReadOnly;
@@ -165,20 +164,29 @@ namespace zyppng {
           readFd,
           SocketNotifier::create( readFd, SocketNotifier::Read | AbstractEventSource::Error, true )
         });
-        zypp::io::setFDBlocking( readFd, false );
+        if ( zypp::io::setFDBlocking( readFd, false ) == zypp::io::BlockingMode::FailedToSetMode ) {
+          ERR << "Failed to set read FD to non blocking" << std::endl;
+          error = true;
+          break;
+        }
         d->_readFds.back()._readNotifier->connect( &SocketNotifier::sigActivated, *d, &AsyncDataSourcePrivate::notifierActivated );
       }
     }
 
-    if ( writeFd >= 0 ) {
+    if ( writeFd >= 0 && !error ) {
       mode |= IODevice::WriteOnly;
-      d->_writeFd = writeFd;
-      zypp::io::setFDBlocking( writeFd, false );
-      d->_writeNotifier = SocketNotifier::create( writeFd, SocketNotifier::Write | AbstractEventSource::Error, false );
-      d->_writeNotifier->connect( &SocketNotifier::sigActivated, *d, &AsyncDataSourcePrivate::notifierActivated );
+      if ( zypp::io::setFDBlocking( writeFd, false ) == zypp::io::BlockingMode::FailedToSetMode ) {
+        ERR << "Failed to set write FD to non blocking" << std::endl;
+        error = true;
+      } else {
+        d->_writeFd = writeFd;
+        d->_writeNotifier = SocketNotifier::create( writeFd, SocketNotifier::Write | AbstractEventSource::Error, false );
+        d->_writeNotifier->connect( &SocketNotifier::sigActivated, *d, &AsyncDataSourcePrivate::notifierActivated );
+      }
     }
 
-    if( !IODevice::open( mode ) ) {
+    if( error || !IODevice::open( mode ) ) {
+      d->_mode = IODevice::Closed;
       d->_readFds.clear();
       d->_writeNotifier.reset();
       d->_writeFd = -1;
@@ -190,7 +198,7 @@ namespace zyppng {
     return true;
   }
 
-  off_t zyppng::AsyncDataSource::writeData( const char *data, off_t count )
+  int64_t zyppng::AsyncDataSource::writeData( const char *data, int64_t count )
   {
     Z_D();
     if ( count > 0 ) {
@@ -201,7 +209,7 @@ namespace zyppng {
     return count;
   }
 
-  off_t zyppng::AsyncDataSource::readData( uint channel, char *buffer, off_t bufsize )
+  int64_t zyppng::AsyncDataSource::readData( uint channel, char *buffer, int64_t bufsize )
   {
     Z_D();
     if ( channel >= d->_readFds.size() ) {
@@ -224,7 +232,7 @@ namespace zyppng {
     return read;
   }
 
-  size_t AsyncDataSource::rawBytesAvailable( uint channel ) const
+  int64_t AsyncDataSource::rawBytesAvailable( uint channel ) const
   {
     Z_D();
 
@@ -260,19 +268,32 @@ namespace zyppng {
 
     d->_writeNotifier.reset();
     d->_writeBuffer.clear();
-    if ( d->_writeFd >= 0 )
+    if ( d->_writeFd >= 0 ) {
+      d->_writeFd = -1;
       d->_sigWriteFdClosed.emit( UserRequest );
+    }
 
     IODevice::close();
   }
 
-  bool AsyncDataSource::waitForReadyRead( int timeout )
+  void AsyncDataSource::closeWriteChannel()
   {
     Z_D();
-    if ( !canRead() )
-      return false;
 
-    return waitForReadyRead( d->_currentReadChannel, timeout );
+    // if we are open writeOnly, simply call close();
+    if ( !canRead() ) {
+      close();
+      return;
+    }
+
+    d->_mode = ReadOnly;
+    d->_writeNotifier.reset();
+    d->_writeBuffer.clear();
+
+    if ( d->_writeFd >= 0 ) {
+      d->_writeFd = -1;
+      d->_sigWriteFdClosed.emit( UserRequest );
+    }
   }
 
   bool AsyncDataSource::waitForReadyRead( uint channel, int timeout )
@@ -287,7 +308,7 @@ namespace zyppng {
     }
 
     bool gotRR = false;
-    auto rrConn = AutoDisconnect( d->_channelReadyRead.connect([&]( int activated ){
+    auto rrConn = AutoDisconnect( d->_channelReadyRead.connect([&]( uint activated ){
       gotRR = ( channel == activated );
     }) );
 

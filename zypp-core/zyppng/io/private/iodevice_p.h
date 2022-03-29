@@ -28,17 +28,22 @@ namespace zyppng {
     constexpr std::string_view outOfRangeErrMsg("Channel index out of range");
   }
 
+  enum {
+    DefIoDeviceBufChunkSize = 16384
+  };
+
   class IODevicePrivate : public BasePrivate {
   public:
     IODevicePrivate ( IODevice &p );
 
     std::vector<IOBuffer> _readChannels;
     uint _currentReadChannel = 0;
+    int64_t _readBufChunkSize = DefIoDeviceBufChunkSize;
 
     IODevice::OpenMode _mode = IODevice::Closed;
     Signal<void()>    _readyRead;
     Signal<void(uint)> _channelReadyRead;
-    Signal< void (std::size_t)> _sigBytesWritten;
+    Signal< void (int64_t)> _sigBytesWritten;
     Signal< void ()> _sigAllBytesWritten;
   };
 
