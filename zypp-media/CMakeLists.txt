@@ -7,6 +7,8 @@ INCLUDE_DIRECTORIES ( ${LIBZYPP_SOURCE_DIR} )
 ADD_DEFINITIONS( -DLOCALEDIR="${CMAKE_INSTALL_PREFIX}/share/locale" -DTEXTDOMAIN="zypp" -DZYPP_DLL )
 
 SET( zypp_media_HEADERS
+  CDTools
+  cdtools.h
   MediaConfig
   mediaconfig.h
   mediaexception.h
@@ -19,6 +21,7 @@ SET( zypp_media_private_HEADERS
 )
 
 SET( zypp_media_SRCS
+  cdtools.cc
   mediaconfig.cc
   mediaexception.cc
   mount.cc
