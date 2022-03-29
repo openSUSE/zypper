@@ -110,7 +110,6 @@ namespace zyppng {
     Signal< void ( Downloader &parent, Download& download )> _sigFinished;
     Signal< void ( Downloader &parent )> _queueEmpty;
     std::shared_ptr<MirrorControl> _mirrors;
-    zypp::media::CredManagerOptions _credManagerOptions; //< The credential manager options used to initialize the CredentialManager
   };
 
 }

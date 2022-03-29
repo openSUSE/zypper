@@ -37,61 +37,54 @@ namespace zyppng {
 
       MIL << "Authentication failed for " << req->url() << " trying to recover." << std::endl;
 
-      zypp::media::CredentialManager cm(  _parent ? _parent->credManagerOptions() : zypp::media::CredManagerOptions() );
-      auto authDataPtr = cm.getCred( req->url() );
-
-      // get stored credentials
-      NetworkAuthData_Ptr cmcred( authDataPtr ? new NetworkAuthData( *authDataPtr ) : new NetworkAuthData() );
       TransferSettings &ts = req->transferSettings();
+      const auto &applyCredToSettings = [&ts]( AuthData_Ptr auth, const std::string &authHint ) {
+        ts.setUsername( auth->username() );
+        ts.setPassword( auth->password() );
+        auto nwCred = dynamic_cast<NetworkAuthData *>( auth.get() );
+        if ( nwCred ) {
+          // set available authentication types from the error
+          if ( nwCred->authType() == CURLAUTH_NONE )
+            nwCred->setAuthType( authHint );
 
-      // We got credentials from store, _triedCredFromStore makes sure we just try the auth from store once
-      // if its timestamp does not change between 2 retries
-      if ( cmcred && ( !req->_triedCredFromStore || req->_authTimestamp < cmcred->lastDatabaseUpdate() ) ) {
-        MIL << "got stored credentials:" << std::endl << *cmcred << std::endl;
-        ts.setUsername( cmcred->username() );
-        ts.setPassword( cmcred->password() );
+          // set auth type (seems this must be set _after_ setting the userpwd)
+          if ( nwCred->authType()  != CURLAUTH_NONE ) {
+            // FIXME: only overwrite if not empty?
+            ts.setAuthType(nwCred->authTypeAsString());
+          }
+        }
+      };
+
+      // try to find one in the cache
+      zypp::url::ViewOption vopt;
+      vopt = vopt
+             - zypp::url::ViewOption::WITH_USERNAME
+             - zypp::url::ViewOption::WITH_PASSWORD
+             - zypp::url::ViewOption::WITH_QUERY_STR;
+
+      auto cachedCred = zypp::media::CredentialManager::findIn( _credCache, req->url(), vopt );
+
+      // only consider a cache entry if its newer than what we tried last time
+      if ( cachedCred && cachedCred->lastDatabaseUpdate() > req->_authTimestamp ) {
+        MIL << "Found a credential match in the cache!" << std::endl;
+        applyCredToSettings( cachedCred, "" );
+        _lastTriedAuthTime = req->_authTimestamp = cachedCred->lastDatabaseUpdate();
         retry = true;
-        req->_triedCredFromStore = true;
-        _lastTriedAuthTime = req->_authTimestamp = cmcred->lastDatabaseUpdate();
       } else {
 
-        //we did not get credentials from the store, emit a signal that allows
-        //setting new auth data
-
-        NetworkAuthData credFromUser;
-        credFromUser.setUrl( req->url() );
+        NetworkAuthData_Ptr credFromUser = NetworkAuthData_Ptr( new NetworkAuthData() );
+        credFromUser->setUrl( req->url() );
+        credFromUser->setLastDatabaseUpdate ( req->_authTimestamp );
 
         //in case we got a auth hint from the server the error object will contain it
         std::string authHint = err.extraInfoValue("authHint", std::string());
 
-        //preset from store if we found something
-        if ( cmcred && !cmcred->username().empty() )
-          credFromUser.setUsername( cmcred->username() );
-
-        _sigAuthRequired.emit( *z_func(), credFromUser, authHint );
-        if ( credFromUser.valid() ) {
-          MIL << "Got user provided credentials" << std::endl;
-          ts.setUsername( credFromUser.username() );
-          ts.setPassword( credFromUser.password() );
-
-          // set available authentication types from the error
-          if ( credFromUser.authType() == CURLAUTH_NONE )
-            credFromUser.setAuthType( authHint );
-
-          // set auth type (seems this must be set _after_ setting the userpwd)
-          if ( credFromUser.authType()  != CURLAUTH_NONE ) {
-            // FIXME: only overwrite if not empty?
-            req->transferSettings().setAuthType(credFromUser.authTypeAsString());
-          }
-
-          cm.addCred( credFromUser );
-          cm.save();
-
-          // potentially setting this after the file has been touched we might miss a change
-          // in a later loop, if another update to the store happens right in the few ms difference
-          // between the actual file write and calling time() here. However this is highly unlikely
-          _lastTriedAuthTime = req->_authTimestamp = time( nullptr ) ;
-
+        _sigAuthRequired.emit( *z_func(), *credFromUser, authHint );
+        if ( credFromUser->valid() ) {
+          // remember for next time , we don't want to ask the user again for the same URL set
+          _credCache.insert( credFromUser );
+          applyCredToSettings( credFromUser, authHint );
+          _lastTriedAuthTime = req->_authTimestamp = credFromUser->lastDatabaseUpdate();
           retry = true;
         }
       }
@@ -172,6 +165,7 @@ namespace zyppng {
       if ( _spec.settings().proxy().empty() )
         ::internal::fillSettingsSystemProxy( url, set );
 
+#if 0
       /* Fixes bsc#1174011 "auth=basic ignored in some cases"
        * We should proactively add the password to the request if basic auth is configured
        * and a password is available in the credentials but not in the URL.
@@ -190,6 +184,7 @@ namespace zyppng {
           set.setPassword(cred->password());
         }
       }
+#endif
 
     } catch ( const zypp::media::MediaBadUrlException & e ) {
       res = NetworkRequestErrorPrivate::customError( NetworkRequestError::MalformedURL, e.asString(), buildExtraInfo() );
@@ -388,16 +383,6 @@ namespace zyppng {
       d->_runningDownloads.back()->cancel();
       d->_runningDownloads.pop_back();
     }
-  }
-
-  const zypp::media::CredManagerOptions &Downloader::credManagerOptions() const
-  {
-    return d_func()->_credManagerOptions;
-  }
-
-  void Downloader::setCredManagerOptions(const zypp::media::CredManagerOptions &options)
-  {
-    d_func()->_credManagerOptions = options;
   }
 
   std::shared_ptr<Download> Downloader::downloadFile(const zyppng::DownloadSpec &spec )

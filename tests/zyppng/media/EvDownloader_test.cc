@@ -43,7 +43,6 @@ BOOST_DATA_TEST_CASE( dltest_basic, bdata::make( withSSL ), withSSL)
   auto ev = zyppng::EventLoop::create();
 
   zyppng::Downloader::Ptr downloader = std::make_shared<zyppng::Downloader>();
-  downloader->setCredManagerOptions( zypp::media::CredManagerOptions( zypp::ZConfig::instance().repoManagerRoot()) );
 
   //make sure the data here is big enough to cross the threshold of 256 bytes so we get a progress signal emitted and not only the alive signal.
   std::string dummyContent = "This is just some dummy content,\nto test downloading and signals.\n"
@@ -372,7 +371,6 @@ BOOST_DATA_TEST_CASE( test1, bdata::make( generateMirr() ) * bdata::make( withSS
 
   zypp::filesystem::TmpFile targetFile;
   std::shared_ptr<zyppng::Downloader> downloader = std::make_shared<zyppng::Downloader>();
-  downloader->setCredManagerOptions( zypp::media::CredManagerOptions( zypp::ZConfig::instance().repoManagerRoot()) );
   downloader->requestDispatcher()->setMaximumConcurrentConnections( maxDLs );
 
   //first metalink download, generate a fully valid one
@@ -539,7 +537,6 @@ BOOST_DATA_TEST_CASE( dltest_auth, bdata::make( withSSL ), withSSL )
   auto ev = zyppng::EventLoop::create();
 
   std::shared_ptr<zyppng::Downloader> downloader = std::make_shared<zyppng::Downloader>();
-  downloader->setCredManagerOptions( zypp::media::CredManagerOptions( zypp::ZConfig::instance().repoManagerRoot()) );
 
   WebServer web((zypp::Pathname(TESTS_SRC_DIR)/"/zyppng/data/downloader").c_str(), 10001, withSSL );
   BOOST_REQUIRE( web.start() );
@@ -603,8 +600,10 @@ BOOST_DATA_TEST_CASE( dltest_auth, bdata::make( withSSL ), withSSL )
 
     dl->sigAuthRequired().connect( [&]( zyppng::Download &, zyppng::NetworkAuthData &auth, const std::string &availAuth ){
       gotAuthRequest++;
+      auth.setUrl( web.url() );
       auth.setUsername("test");
       auth.setPassword("test");
+      auth.setLastDatabaseUpdate( time( nullptr ) );
     });
 
     dl->sigStateChanged().connect([&]( zyppng::Download &, zyppng::Download::State state ){
@@ -617,89 +616,5 @@ BOOST_DATA_TEST_CASE( dltest_auth, bdata::make( withSSL ), withSSL )
     BOOST_TEST_REQ_SUCCESS( dl );
     BOOST_REQUIRE_EQUAL( gotAuthRequest, 1 );
     BOOST_REQUIRE ( allStates == std::vector<zyppng::Download::State>({ zyppng::Download::InitialState, zyppng::Download::DlMetaLinkInfo, zyppng::Download::PrepareMulti, zyppng::Download::DlMetalink, zyppng::Download::Finished}) );
-  }
-
-  {
-    //the creds should be in the credential manager now, we should not need to specify them again in the slot
-    bool gotAuthRequest = false;
-    auto dl = downloader->downloadFile( zyppng::DownloadSpec(weburl, targetFile.path()) );
-    dl->spec().setTransferSettings(set);
-
-    dl->sigFinished( ).connect([ &ev ]( zyppng::Download & ){
-      ev->quit();
-    });
-
-    dl->sigAuthRequired().connect( [&]( zyppng::Download &, zyppng::NetworkAuthData &auth, const std::string &availAuth ){
-      gotAuthRequest = true;
-    });
-
-    dl->start();
-    ev->run();
-    BOOST_TEST_REQ_SUCCESS( dl );
-    BOOST_REQUIRE( !gotAuthRequest );
-  }
-}
-
-/**
- * Test for bsc#1174011 auth=basic ignored in some cases
- *
- * If the URL specifes ?auth=basic libzypp should proactively send credentials we have available in the cred store
- */
-BOOST_DATA_TEST_CASE( dltest_auth_basic, bdata::make( withSSL ), withSSL )
-{
-  //don't write or read creds from real settings dir
-  zypp::filesystem::TmpDir repoManagerRoot;
-  zypp::ZConfig::instance().setRepoManagerRoot( repoManagerRoot.path() );
-
-  auto ev = zyppng::EventLoop::create();
-
-  std::shared_ptr<zyppng::Downloader> downloader = std::make_shared<zyppng::Downloader>();
-  downloader->setCredManagerOptions( zypp::media::CredManagerOptions( zypp::ZConfig::instance().repoManagerRoot()) );
-
-  WebServer web((zypp::Pathname(TESTS_SRC_DIR)/"/zyppng/data/downloader").c_str(), 10001, withSSL );
-  BOOST_REQUIRE( web.start() );
-
-  zypp::filesystem::TmpFile targetFile;
-  zyppng::Url weburl (web.url());
-  weburl.setPathName("/handler/test.txt");
-  weburl.setQueryParam("auth", "basic");
-  weburl.setUsername("test");
-
-  // make sure the creds are already available
-  zypp::media::CredentialManager cm( repoManagerRoot.path() );
-  zypp::media::AuthData data ("test", "test");
-  data.setUrl( weburl );
-  cm.addCred( data );
-  cm.save();
-
-  zyppng::TransferSettings set = web.transferSettings();
-
-  web.addRequestHandler( "test.txt", createAuthHandler() );
-  web.addRequestHandler( "quit", [ &ev ]( WebServer::Request & ){ ev->quit();} );
-
-  {
-    // simply check by request count if the test was successful:
-    // if the proactive code adding the credentials to the first request is not executed we will
-    // have more than 1 request.
-    int reqCount = 0;
-    auto dispatcher = downloader->requestDispatcher();
-    dispatcher->sigDownloadStarted().connect([&]( zyppng::NetworkRequestDispatcher &, zyppng::NetworkRequest & ){
-      reqCount++;
-    });
-
-
-    auto dl = downloader->downloadFile( zyppng::DownloadSpec(weburl, targetFile.path())
-      .setMetalinkEnabled( false )
-      .setTransferSettings( set )
-    );
-
-    dl->sigFinished( ).connect([ &ev ]( zyppng::Download & ){
-      ev->quit();
-    });
-
-    dl->start();
-    ev->run();
-    BOOST_TEST_REQ_SUCCESS( dl );
-    BOOST_REQUIRE_EQUAL( reqCount, 1 );
   }
 }

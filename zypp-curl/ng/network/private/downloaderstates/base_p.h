@@ -24,6 +24,7 @@
 #include <zypp-curl/ng/network/TransferSettings>
 #include <zypp-curl/ng/network/private/mirrorcontrol_p.h>
 #include <zypp-curl/ng/network/networkrequesterror.h>
+#include <zypp-media/auth/CredentialManager>
 
 namespace zyppng {
 
@@ -69,8 +70,7 @@ namespace zyppng {
       }
       void disconnectSignals ();
 
-      bool _triedCredFromStore = false; //< already tried to authenticate from credential store?
-      time_t _authTimestamp = 0; //< timestamp of the AuthData we tried from the store
+      time_t _authTimestamp = 0; //< timestamp of the AuthData we tried already
       Url _originalUrl;  //< The unstripped URL as it was passed to Download , before transfer settings are removed
       MirrorControl::MirrorHandle _myMirror;
 
@@ -92,12 +92,14 @@ namespace zyppng {
     std::shared_ptr<NetworkRequestDispatcher> _requestDispatcher;
     std::shared_ptr<MirrorControl> _mirrorControl;
 
+    zypp::media::CredentialManager::CredentialSet _credCache; //< the credential cache for this download
+
     DownloadSpec _spec; // the download settings
     mutable zypp::TriBool _specHasZckInfo = zypp::indeterminate;
 
     Downloader *_parent = nullptr;
 
-    time_t _lastTriedAuthTime = 0; //< if initialized this shows the last timestamp that we loaded a cred for the given URL from CredentialManager
+    time_t _lastTriedAuthTime = 0; //< if initialized this shows the last timestamp that got from user code for a auth request
     bool _stopOnMetalink     = false; //< Stop the download if a metalink was received for external parsing
     bool _stoppedOnMetalink  = false; //< Statemachine was stopped after receiving a metalink file
     NetworkRequest::Priority _defaultSubRequestPriority = NetworkRequest::High;

@@ -5,7 +5,6 @@
 #include <zypp-core/zyppng/base/Base>
 #include <zypp-core/zyppng/base/signals.h>
 #include <zypp-core/zyppng/core/Url>
-#include <zypp-media/auth/CredentialManager>
 #include <zypp-curl/ng/network/networkrequesterror.h>
 #include <zypp-curl/ng/network/AuthData>
 
@@ -44,16 +43,6 @@ namespace zyppng {
     Downloader();
     Downloader( std::shared_ptr<MirrorControl> mc );
     virtual ~Downloader();
-
-    /*!
-     * Returns the currently used CredentialManager options
-     */
-    const zypp::media::CredManagerOptions &credManagerOptions () const;
-
-    /*!
-     * Sets the options for the CredentialManager to retrieve auth data
-     */
-    void setCredManagerOptions ( const zypp::media::CredManagerOptions & options );
 
     /*!
      * Generates a new Download object in waiting state
@@ -262,6 +251,10 @@ namespace zyppng {
     /*!
      * Is emitted when a request requires authentication and it was not given or if auth failed.
      * A connected slot should fill in the \a auth information in order to provide login credentials.
+     *
+     * \note the URL in the \a auth data is set to the url of the request needing authorization.
+     *       This URL can be different than the one in the spec, due to redirect/metalink.
+     *       Also the lastDatabaseUpdate field is set to the timestamp of the auth data that was tried already ( if available )
      */
     SignalProxy<void ( Download &req, NetworkAuthData &auth, const std::string &availAuth )> sigAuthRequired ( );
 

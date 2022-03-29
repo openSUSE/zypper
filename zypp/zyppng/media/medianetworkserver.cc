@@ -16,6 +16,7 @@
 #include <zypp-core/zyppng/base/EventDispatcher>
 #include <zypp-core/zyppng/base/SocketNotifier>
 #include <zypp-core/zyppng/rpc/rpc.h>
+#include <zypp-media/auth/CredentialManager>
 
 #include <zypp-curl/TransferSettings>
 #include <zypp/PathInfo.h>
@@ -50,7 +51,6 @@ namespace zyppng {
   MediaNetworkServer::MediaNetworkServer( )
     : _downloadManager( std::make_shared<Downloader>( MirrorControl::create() ) )
   {
-    _downloadManager->setCredManagerOptions( zypp::media::CredManagerOptions( zypp::ZConfig::instance().repoManagerRoot()) );
     auto dispatcher = _downloadManager->requestDispatcher();
     if ( dispatcher ) {
       dispatcher->setAgentString( ::internal::agentString() );
@@ -376,6 +376,18 @@ namespace zyppng {
       }, *this ),
       r.dl->connectFunc( &Download::sigFinished, [ this, &r ]( auto & ) {
         this->trackedDlFinished( r );
+      }, *this ),
+      r.dl->connectFunc( &Download::sigAuthRequired, [ this, &r ]( zyppng::Download &dl, zyppng::NetworkAuthData &authData, const std::string & ) {
+          zypp::media::CredentialManager mgr( zypp::media::CredManagerOptions( zypp::ZConfig::instance().repoManagerRoot() ) );
+          auto ptr = mgr.getCred ( authData.url() );
+          if ( ptr ) {
+            if ( ptr->lastDatabaseUpdate() > authData.lastDatabaseUpdate() ) {
+              authData.setUrl( ptr->url() );
+              authData.setUsername( ptr->username() );
+              authData.setPassword( ptr->password() );
+              authData.setLastDatabaseUpdate( ptr->lastDatabaseUpdate() );
+            }
+          }
       }, *this )
     };
   }

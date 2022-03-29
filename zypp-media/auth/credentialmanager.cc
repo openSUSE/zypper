@@ -179,7 +179,7 @@ namespace zypp
   }
 
 
-  static AuthData_Ptr findIn(const CredentialManager::CredentialSet & set,
+  AuthData_Ptr CredentialManager::findIn(const CredentialManager::CredentialSet & set,
                              const Url & url,
                              url::ViewOption vopt)
   {
