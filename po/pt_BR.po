@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-03-14 15:21+0100\n"
-"PO-Revision-Date: 2022-04-01 21:12+0000\n"
+"PO-Revision-Date: 2022-04-02 00:12+0000\n"
 "Last-Translator: Luiz Fernando Ranghetti <elchevive68@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) <https://l10n.opensuse.org/projects/"
 "libzypp/master/pt_BR/>\n"
@@ -4618,7 +4618,7 @@ msgstr "O cabeçalho do pacote não está assinado!"
 
 #: zypp/target/rpm/RpmDb.cc:1273
 msgid "Package payload is not signed!"
-msgstr ""
+msgstr "A carga útil do pacote não está assinada!"
 
 #. Translator: %s = name of an rpm package. A list of diffs follows
 #. this message.
