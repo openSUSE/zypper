@@ -74,7 +74,8 @@ std::string SolverRequester::Feedback::asUserString( const SolverRequester::Opti
     {
       // translators: meaning a package %s or provider of capability %s
       std::string ret( str::form(_("No provider of '%s' found."), _reqpkg.orig_str.c_str() ) );
-      if ( _reqpkg.orig_str.find("debuginfo") != std::string::npos )
+      const std::set<std::string> &plusContentRepos = Zypper::instance().runtimeData().plusContentRepos;
+      if ( _reqpkg.orig_str.find("debuginfo") != std::string::npos && plusContentRepos.find("debug") == plusContentRepos.cend())
         ret += " ['--plus-content debug'?]";
       return ret;
     }
