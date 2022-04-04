@@ -9,10 +9,10 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-02-23 18:47+0100\n"
-"PO-Revision-Date: 2022-02-10 15:12+0000\n"
+"PO-Revision-Date: 2022-04-04 14:12+0000\n"
 "Last-Translator: Murat Servan Kahraman <muratservan@outlook.com>\n"
-"Language-Team: Turkish <https://l10n.opensuse.org/projects/zypper/master/tr/"
-">\n"
+"Language-Team: Turkish <https://l10n.opensuse.org/projects/zypper/master/tr/>"
+"\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1285,8 +1285,8 @@ msgstr[1] "kaldırılacak paketler"
 #: src/Summary.cc:1499
 msgid "to change vendor"
 msgid_plural " to change vendor"
-msgstr[0] "dağıtıcıyı değiştir"
-msgstr[1] "dağıtıcıyı değiştir"
+msgstr[0] ""
+msgstr[1] ""
 
 #. translators: this text will be preceded by a number e.g. "5 packages ..."
 #: src/Summary.cc:1502
@@ -1667,8 +1667,6 @@ msgstr "'%s' dosyası için imza doğrulama başarısızlığı yok sayılıyor!
 msgid ""
 "Ignoring failed signature verification for file '%s' from repository '%s'!"
 msgstr ""
-"'%s' deposunda bulunan  '%s'! dosyası için imza doğrulama başarısızlığı yok "
-"sayılıyor."
 
 #: src/callbacks/keyring.h:398
 msgid "Double-check this is not caused by some malicious changes in the file!"
@@ -1712,18 +1710,22 @@ msgstr ""
 
 #. translator: %1% is the number of keys, %2% the name of a repository
 #: src/callbacks/keyring.h:490
-#, fuzzy, boost-format
+#, boost-format
 msgid "Received %1% new package signing key from repository %2%:"
 msgid_plural "Received %1% new package signing keys from repository %2%:"
-msgstr[0] "%2% deposundan %1% adet yeni paket imzalama anahtarı alındı:"
-msgstr[1] "%2% deposundan %1% adet yeni paket imzalama anahtarı alındı:"
+msgstr[0] ""
+msgstr[1] ""
 
 #: src/callbacks/keyring.h:494
+#, fuzzy
 msgid ""
 "Those additional keys are usually used to sign packages shipped by the "
 "repository. In order to validate those packages upon download and "
 "installation the new keys will be imported into the rpm database."
 msgstr ""
+"Bu ek anahtarlar genellikle, depolar tarafından sunulan paketlerin "
+"imzalanması için kullanılır. İndirme ve kurulum sırasında bu paketlerin "
+"doğrulanması için yeni anahtarlar rpm veritabanına aktarılır."
 
 #: src/callbacks/keyring.h:496
 msgid "New:"
@@ -1808,11 +1810,11 @@ msgstr "Engellemeyi kaldır veya at?"
 #: src/callbacks/locks.h:27
 msgid ""
 "The following query locks the same objects as the one you want to remove:"
-msgstr "Aşağıdaki sorgu silmek istediğiniz nesnelerden aynılarını kitler"
+msgstr ""
 
 #: src/callbacks/locks.h:30
 msgid "The following query locks some of the objects you want to unlock:"
-msgstr "Aşağıdaki sorgu istediğiniz açık olan nesnelerin kitlenmesini sağlar"
+msgstr ""
 
 #: src/callbacks/locks.h:35 src/callbacks/locks.h:50
 msgid "Do you want to remove this lock?"
@@ -1860,8 +1862,9 @@ msgid "a/r/i/u/s"
 msgstr "a/r/i/u/s"
 
 #: src/callbacks/media.cc:79
+#, fuzzy
 msgid "Disable SSL certificate authority check and continue."
-msgstr "(Nodeps ile)"
+msgstr "SSL sertifikası yetki kontrolünü devre dışı bırak ve devam et."
 
 #. translators: this is a prompt text
 #: src/callbacks/media.cc:82 src/callbacks/media.cc:174
@@ -1914,8 +1917,9 @@ msgid "a/r/i/u/e"
 msgstr "a/r/i/u/e"
 
 #: src/callbacks/media.cc:171
+#, fuzzy
 msgid "Eject medium."
-msgstr "Medyayı(CD/DVD)  çıkar"
+msgstr "Medyayı(CD/DVD)  çıkar."
 
 #. TranslatorExplanation translate letters 'y' and 'n' to whathever is appropriate for your language.
 #. Try to check what answers does zypper accept (it always accepts y/n at least)
@@ -3467,9 +3471,8 @@ msgstr "URI"
 #. translators: property name; short; used like "Name: value"
 #: src/commands/repos/list.cc:47 src/commands/repos/list.cc:230
 #: src/commands/services/list.cc:106 src/repos.cc:1256
-#, fuzzy
 msgid "Enabled"
-msgstr "Etkinleşti"
+msgstr ""
 
 #. GPG Check
 #. translators: property name; short; used like "Name: value"
@@ -4469,14 +4472,12 @@ msgstr[0] "'%s' deposu '%s' hizmetinin etkin depolarına eklendi"
 msgstr[1] "'%s' depoları '%s' hizmetinin etkin depolarına eklendi"
 
 #: src/commands/services/modify.cc:262
-#, c-format, boost-format
+#, boost-format, c-format, fuzzy
 msgid "Repository '%s' has been added to disabled repositories of service '%s'"
 msgid_plural ""
 "Repositories '%s' have been added to disabled repositories of service '%s'"
-msgstr[0] ""
-"'%s' deposu '%s' hizmetinin devre dışı bırakılmış depolarına eklendi."
-msgstr[1] ""
-"'%s' depoları '%s' hizmetinin devre dışı bırakılmış depolarına eklendi."
+msgstr[0] "'%s' deposu '%s' hizmetinin devre dışı bırakılmış depolarına eklendi"
+msgstr[1] "'%s' depoları '%s' hizmetinin devre dışı bırakılmış depolarına eklendi"
 
 #: src/commands/services/modify.cc:269
 #, c-format, boost-format
@@ -5272,7 +5273,7 @@ msgstr "%s %s ile eşleşiyor"
 #: src/commands/utils/versioncmp.cc:77
 #, c-format, boost-format
 msgid "%s is newer than %s"
-msgstr "'%s' daha yeni '%s' den."
+msgstr ""
 
 #: src/commands/utils/versioncmp.cc:79
 #, c-format, boost-format
@@ -5465,7 +5466,7 @@ msgstr "Nitelik"
 #. translators: property name; short; used like "Name: value"
 #: src/info.cc:551 src/search.cc:486
 msgid "Is Base"
-msgstr "Temel mi?"
+msgstr ""
 
 #. translators: property name; short; used like "Name: value"
 #: src/info.cc:572 src/info.cc:599
@@ -5677,8 +5678,9 @@ msgstr "tamamlandı"
 
 #. translator: Shown as result tag in a progress bar: .......[attention]
 #: src/output/Out.cc:124
+#, fuzzy
 msgid "attention"
-msgstr ""
+msgstr "dikkat"
 
 # include/ui/common_messages.ycp:95
 #. translator: Shown as result tag in a progress bar: ...........[error]
@@ -5736,7 +5738,7 @@ msgstr "bulunamadı"
 
 #: src/output/OutNormal.cc:414
 msgid "No help available for this prompt."
-msgstr "Bu bilgi için yardım mevcut değil"
+msgstr ""
 
 #: src/output/OutNormal.cc:431
 msgid "no help available for this option"
@@ -5798,7 +5800,7 @@ msgstr[1] "%1% depo"
 #: src/repos.cc:225
 #, c-format, boost-format
 msgid "Checking whether to refresh metadata for %s"
-msgstr "%s için meta veri lerini yenilleyip kontrol ediliyor."
+msgstr ""
 
 # clients/rc_config_step1.ycp:253
 #: src/repos.cc:254
@@ -5833,7 +5835,7 @@ msgstr "'%s' deposu devre dışı bırakılırken hata oluştu."
 #: src/repos.cc:344
 #, c-format, boost-format
 msgid "Problem retrieving files from '%s'."
-msgstr "'%s' den dosyalar alınırken problem ortaya çıktı. "
+msgstr ""
 
 #: src/repos.cc:345 src/repos.cc:1859 src/solve-commit.cc:898
 #: src/solve-commit.cc:929 src/solve-commit.cc:953
@@ -5880,12 +5882,12 @@ msgstr "\"%s\" için meta veriler alınırken hata oluştu:"
 
 #: src/repos.cc:414
 msgid "Forcing building of repository cache"
-msgstr "Depo önbelliği zorlamayla oluşturuluyor."
+msgstr ""
 
 #: src/repos.cc:439
 #, c-format, boost-format
 msgid "Error parsing metadata for '%s':"
-msgstr "'%s' için meta verilerine ayırma hatası."
+msgstr ""
 
 #. TranslatorExplanation Don't translate the URL unless it is translated, too
 #: src/repos.cc:441
@@ -5968,8 +5970,9 @@ msgid "Repository '%s' stays disabled."
 msgstr "Depo '%s' devre dışı kalır."
 
 #: src/repos.cc:981
+#, fuzzy
 msgid "Initializing Target"
-msgstr "Hedef başlatılıyor."
+msgstr "Hedef Başlatılıyor"
 
 # clients/online_update_start.ycp:171
 #: src/repos.cc:989
@@ -6077,14 +6080,14 @@ msgid "Repository '%s' successfully added"
 msgstr "'%s' deposu başarıyla eklendi"
 
 #: src/repos.cc:1274
-#, c-format, boost-format
+#, boost-format, c-format, fuzzy
 msgid "Reading data from '%s' media"
-msgstr "'%s' mediyasından veri okunuyor."
+msgstr "'%s' ortamından veri okunuyor"
 
 #: src/repos.cc:1280
-#, c-format, boost-format
+#, boost-format, c-format, fuzzy
 msgid "Problem reading data from '%s' media"
-msgstr "'%s' medyasından veri okurken sorun oluştu."
+msgstr "'%s' medyasından veri okurken sorun oluştu"
 
 #: src/repos.cc:1281
 msgid "Please check if your installation media is valid and readable."
@@ -6106,7 +6109,7 @@ msgstr "Lütfen URI nin geçerli ve erişilebilir olduğunu kontrol edin."
 
 #: src/repos.cc:1365
 msgid "Problem parsing the file at the specified URI"
-msgstr "Belirtilen URI de dosyayı ayırma hatası."
+msgstr ""
 
 #. TranslatorExplanation Don't translate the '.repo' string.
 #: src/repos.cc:1367
@@ -6223,7 +6226,7 @@ msgstr "Depo '%s' önbelleğe alınmadı. Önbelleğe almak..."
 #: src/repos.cc:1802 src/repos.cc:1836
 #, c-format, boost-format
 msgid "Problem loading data from '%s'"
-msgstr "'%s' den veri yüklenirken hata oluştu."
+msgstr ""
 
 # clients/rc_config_step1.ycp:253
 #: src/repos.cc:1806
@@ -6249,7 +6252,7 @@ msgstr ""
 #: src/repos.cc:1838
 #, c-format, boost-format
 msgid "Try '%s', or even '%s' before doing so."
-msgstr "Yapmadan önce '%s' deneyin yada '%s'"
+msgstr ""
 
 #: src/repos.cc:1849
 msgid "Reading installed packages..."
@@ -7223,15 +7226,17 @@ msgid "Press '%c' to exit the pager."
 msgstr "Çağrı cihazından çıkmak için '%c' tuşuna basın."
 
 #: src/utils/pager.cc:42
+#, fuzzy
 msgid "Use arrows or pgUp/pgDown keys to scroll the text by lines or pages."
 msgstr ""
-"Metni satır satır ya da sayfa sayfa kaydırmak için ok ya da pgUp/pgDown "
+"Metni satır ya da sayfa şeklinde kaydırmak için ok ya da pgUp/pgDown "
 "tuşlarını kullanın."
 
 #: src/utils/pager.cc:44
+#, fuzzy
 msgid "Use the Enter or Space key to scroll the text by lines or pages."
 msgstr ""
-"Metni satır satır ya da sayfa sayfa kaydırmak için Enter ya da Space tuşunu "
+"Metni satır ya da sayfa şeklinde kaydırmak için Enter ya da Space tuşunu "
 "kullanın."
 
 #. translators: Press '?' to see all options embedded in this prompt: "Continue? [y/n/? shows all options] (y):"
