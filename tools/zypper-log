@@ -182,7 +182,7 @@ function pid_filter()
     #  ] bin/y2start:16 y2base called with ["menu", "ncurses"]
     #  legacy YCP:
     #  ] genericfrontend.cc(main):675 Launched YaST2 component 'y2base' 'installation' '("continue")' 'qt'
-    grep -a '\] \(main\.cc(\|bin/y2start:\|genericfrontend\.cc(\)' |
+    grep -a '\] \(main\.cc(\|bin/y2start\>\|genericfrontend\.cc(\)' |
     sed 's/ {T:[^}]*}//' |
     awk '
       function outh() {
