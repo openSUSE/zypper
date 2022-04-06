@@ -20,16 +20,16 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-03-14 15:21+0100\n"
-"PO-Revision-Date: 2021-07-26 20:11+0000\n"
-"Last-Translator: Aleš Kastner <alkas@volny.cz>\n"
-"Language-Team: Czech <https://l10n.opensuse.org/projects/libzypp/master/cs/"
-">\n"
+"PO-Revision-Date: 2022-04-06 23:12+0000\n"
+"Last-Translator: Jan Papež <honyczek@centrum.cz>\n"
+"Language-Team: Czech <https://l10n.opensuse.org/projects/libzypp/master/cs/>"
+"\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Weblate 4.7.1\n"
+"X-Generator: Weblate 4.9.1\n"
 
 #: zypp/CountryCode.cc:50
 msgid "Unknown country: "
@@ -4602,23 +4602,25 @@ msgstr "neinstalovatelní poskytovatelé: "
 #: zypp/solver/detail/SATResolver.cc:1253
 #, boost-format
 msgid "%1% is not yet fully integrated into %2%."
-msgstr ""
+msgstr "%1% ještě není plně zaintegrován do %2%."
 
 #: zypp/solver/detail/SATResolver.cc:1254
 msgid ""
 "Typically you want to keep the PTF and choose to not install the maintenance "
 "patches."
 msgstr ""
+"Obvykle budete chtít ponechat PTF a vybrat, že nechcete instalovat údržbové "
+"záplaty."
 
 #. translator: %1% is the name of a PTF.
 #: zypp/solver/detail/SATResolver.cc:1259
 #, boost-format
 msgid "The installed %1% blocks the desired action."
-msgstr ""
+msgstr "Nainstalovaný %1% blokuje vyžadovanou akci."
 
 #: zypp/solver/detail/SATResolver.cc:1260
 msgid "Typically you want to keep the PTF and choose to cancel the action."
-msgstr ""
+msgstr "Obvykle budete chtít ponechat PTF a vybrat zrušení této akce."
 
 #: zypp/solver/detail/SATResolver.cc:1316
 #, boost-format
@@ -4814,11 +4816,11 @@ msgstr "Nepodařilo se smazat veřejný klíč %1%"
 
 #: zypp/target/rpm/RpmDb.cc:1271
 msgid "Package header is not signed!"
-msgstr ""
+msgstr "Hlavička balíčku není podepsaná!"
 
 #: zypp/target/rpm/RpmDb.cc:1273
 msgid "Package payload is not signed!"
-msgstr ""
+msgstr "Obsah balíčku není podepsán!"
 
 #. Translator: %s = name of an rpm package. A list of diffs follows
 #. this message.
