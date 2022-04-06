@@ -21,15 +21,15 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-02-23 18:47+0100\n"
-"PO-Revision-Date: 2021-10-19 20:12+0000\n"
-"Last-Translator: Aleš Kastner <alkas@volny.cz>\n"
+"PO-Revision-Date: 2022-04-06 23:12+0000\n"
+"Last-Translator: Jan Papež <honyczek@centrum.cz>\n"
 "Language-Team: Czech <https://l10n.opensuse.org/projects/zypper/master/cs/>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Weblate 4.8.1\n"
+"X-Generator: Weblate 4.9.1\n"
 
 #: src/Command.cc:93
 msgid "Invalid command"
@@ -5414,7 +5414,7 @@ msgstr "není nainstalováno"
 
 #: src/info.cc:355
 msgid "Upstream URL"
-msgstr ""
+msgstr "Upstreamová URL adresa"
 
 #. translators: property name; short; used like "Name: value"
 #. translator: Table column header.
@@ -5715,7 +5715,7 @@ msgstr "dokončeno"
 #. translator: Shown as result tag in a progress bar: .......[attention]
 #: src/output/Out.cc:124
 msgid "attention"
-msgstr ""
+msgstr "upozornění"
 
 #. translator: Shown as result tag in a progress bar: ...........[error]
 #. Translator: download progress bar result: "............[error]"
