@@ -21,7 +21,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-03-14 15:21+0100\n"
 "PO-Revision-Date: 2022-04-06 23:12+0000\n"
-"Last-Translator: Jan Papež <honyczek@centrum.cz>\n"
+"Last-Translator: Aleš Kastner <alkas@volny.cz>\n"
 "Language-Team: Czech <https://l10n.opensuse.org/projects/libzypp/master/cs/>"
 "\n"
 "Language: cs\n"
@@ -4662,7 +4662,7 @@ msgstr "nežádejte instalaci řešení poskytující %1%"
 #: zypp/solver/detail/SATResolver.cc:1422
 #, boost-format
 msgid "do not ask to delete all solvables providing %1%"
-msgstr "nepožadujte smazání všech řešitelných problémů poskytujících %1%"
+msgstr "nepožadovat smazání všech řešitelných problémů poskytujících% 1%"
 
 #: zypp/solver/detail/SATResolver.cc:1435
 #, boost-format
