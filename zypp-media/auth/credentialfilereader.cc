@@ -102,7 +102,7 @@ namespace zypp
             else if ( key_r == "password" )
               _secret->setPassword( value_r );
             else
-              WAR << "Ignore unknown attribute '" << key_r << "=" << value_r << "' in file " << _input << endl;
+              _secret->extraValues()[key_r] = value_r;
           }
           // else: ignored section due to wrong URL
         }
@@ -148,4 +148,3 @@ namespace zypp
   ///////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
-

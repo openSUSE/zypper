@@ -42,6 +42,16 @@ void AuthData::setLastDatabaseUpdate( time_t time )
   _lastChange = time;
 }
 
+const std::map<std::string, std::string> &AuthData::extraValues() const
+{
+  return _extraValues;
+}
+
+std::map<std::string, std::string> &AuthData::extraValues()
+{
+  return _extraValues;
+}
+
 std::ostream & AuthData::dumpOn( std::ostream & str ) const
 {
   if (_url.isValid())
@@ -66,6 +76,12 @@ std::ostream & AuthData::dumpAsIniOn( std::ostream & str ) const
   str
     << "username = " << _username << endl
     << "password = " << _password << endl;
+
+  for ( const auto &v : _extraValues ) {
+    if ( v.first == "username" || v.first == "password" )
+      continue;
+    str << v.first << " = " << v.second << endl;
+  }
 
   return str;
 }

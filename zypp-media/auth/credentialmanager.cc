@@ -200,7 +200,6 @@ namespace zypp
     return AuthData_Ptr();
   }
 
-
   AuthData_Ptr CredentialManager::Impl::getCred(const Url & url) const
   {
     AuthData_Ptr result;
@@ -267,12 +266,14 @@ namespace zypp
   }
 
   static int save_creds_in_file(
-      const CredentialManager::CredentialSet creds,
+      CredentialManager::CredentialSet &creds,
       const Pathname & file,
       const mode_t mode)
   {
     int ret = 0;
     filesystem::assert_file_mode( file, mode );
+
+    const auto now = time( nullptr );
 
     PathInfo pi { file };
     if ( pi.userMayRW() ) try {
@@ -284,7 +285,7 @@ namespace zypp
       for_(it, creds.begin(), creds.end())
       {
         (*it)->dumpAsIniOn(fs);
-        (*it)->setLastDatabaseUpdate( time( nullptr ) );
+        (*it)->setLastDatabaseUpdate( now );
         fs << endl;
       }
       if ( !fs ) {
@@ -349,6 +350,22 @@ namespace zypp
       saveInFile(cred, credfile);
   }
 
+  time_t CredentialManager::timestampForCredDatabase ( const zypp::Url &url )
+  {
+    Pathname credfile;
+    if ( url.isValid() ) {
+      credfile = url.getQueryParam("credentials");
+    }
+
+    if (credfile.empty())
+      credfile = _pimpl->_options.userCredFilePath;
+
+    zypp::PathInfo pi(credfile);
+    if ( pi.isExist() && pi.isFile() )
+      return pi.mtime();
+
+    return 0;
+  }
 
   void CredentialManager::addGlobalCred(const AuthData & cred)
   {

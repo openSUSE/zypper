@@ -14,6 +14,7 @@
 
 #include <zypp-core/Url.h>
 #include <zypp-core/base/PtrTypes.h>
+#include <zypp-media/ng/HeaderValueMap>
 
 namespace zypp {
   namespace media {
@@ -61,6 +62,9 @@ public:
   time_t lastDatabaseUpdate () const;
   void setLastDatabaseUpdate ( time_t time );
 
+  const std::map<std::string, std::string> &extraValues() const;
+  std::map<std::string, std::string> &extraValues();
+
   virtual std::ostream & dumpOn( std::ostream & str ) const;
 
   virtual std::ostream & dumpAsIniOn( std::ostream & str ) const;
@@ -70,6 +74,7 @@ private:
   std::string _username;
   std::string _password;
   time_t _lastChange; //< timestamp of the last change to the database this credential is stored in
+  std::map<std::string, std::string> _extraValues;
 };
 
 typedef shared_ptr<AuthData> AuthData_Ptr;

@@ -158,6 +158,15 @@ namespace zypp
      */
     void clearAll(bool global = false);
 
+    /*!
+     * Helper function to find a matching AuthData instance in a CredentialSet
+     */
+    static AuthData_Ptr findIn( const CredentialManager::CredentialSet & set,  const Url & url, url::ViewOption vopt );
+
+    /*!
+     * Returns the timestamp of the database the given URL creds would be stored
+     */
+    time_t timestampForCredDatabase ( const zypp::Url &url );
 
     CredentialIterator credsGlobalBegin() const;
     CredentialIterator credsGlobalEnd()   const;
@@ -184,4 +193,3 @@ namespace zypp
 //////////////////////////////////////////////////////////////////////
 
 #endif /* ZYPP_MEDIA_AUTH_CREDENTIALMANAGER_H */
-
