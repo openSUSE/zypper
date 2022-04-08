@@ -62,8 +62,8 @@ namespace zypp
         , JobReport::UserData( "cmdout" ) );
       }
       return ret;
-#endif // SINGLE_RPMTRANS_AS_DEFAULT_FOR_ZYPPER
     })();
+#endif // SINGLE_RPMTRANS_AS_DEFAULT_FOR_ZYPPER
     return singleTrans;
   }
 
