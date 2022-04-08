@@ -59,6 +59,12 @@ namespace zypp
 //////////////////////////////////////////////////////////////////
 namespace
 {
+  namespace env
+  {
+    inline bool NO_COLOR()
+    { return ::getenv("NO_COLOR"); }
+  } // namespace env
+
   /** Simple check whether stdout is a (not dumb) tty */
   inline bool mayUseANSIEscapes()
   {
@@ -73,7 +79,7 @@ namespace
 
   /** Simple check whether stdout can handle colors */
   inline bool hasANSIColor()
-  { return mayUseANSIEscapes(); }
+  { return mayUseANSIEscapes() && not env::NO_COLOR(); }
 
   /** Color names (case insensitive) accepted in the config file. */
   ansi::Color namedColor( std::string name_r )
