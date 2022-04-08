@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: zypper.uk\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-02-23 18:47+0100\n"
-"PO-Revision-Date: 2022-02-01 11:12+0000\n"
+"PO-Revision-Date: 2022-04-08 20:12+0000\n"
 "Last-Translator: Taras Panchenko <top39@ukr.net>\n"
 "Language-Team: Ukrainian <https://l10n.opensuse.org/projects/zypper/master/"
 "uk/>\n"
@@ -1328,9 +1328,9 @@ msgstr[2] "нових пакунків встановити"
 #: src/Summary.cc:1471
 msgid "to reinstall"
 msgid_plural "to reinstall"
-msgstr[0] "перевстановити"
-msgstr[1] "перевстановити"
-msgstr[2] "перевстановити"
+msgstr[0] "до перевстановлення"
+msgstr[1] "до перевстановлення"
+msgstr[2] "до перевстановлення"
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
 #: src/Summary.cc:1474
@@ -1344,9 +1344,9 @@ msgstr[2] "пакунків перевстановити"
 #: src/Summary.cc:1485
 msgid "to remove"
 msgid_plural "to remove"
-msgstr[0] "вилучити"
-msgstr[1] "вилучити"
-msgstr[2] "вилучити"
+msgstr[0] "до вилучення"
+msgstr[1] "до вилучення"
+msgstr[2] "до вилучення"
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
 #: src/Summary.cc:1488
@@ -1360,9 +1360,9 @@ msgstr[2] "пакунків вилучити"
 #: src/Summary.cc:1499
 msgid "to change vendor"
 msgid_plural " to change vendor"
-msgstr[0] "для зміни постачальника"
-msgstr[1] "для зміни постачальників"
-msgstr[2] "для зміни постачальників"
+msgstr[0] "до зміни постачальника"
+msgstr[1] "до зміни постачальників"
+msgstr[2] "до зміни постачальників"
 
 #. translators: this text will be preceded by a number e.g. "5 packages ..."
 #: src/Summary.cc:1502
@@ -5439,7 +5439,7 @@ msgstr "не встановлено"
 
 #: src/info.cc:355
 msgid "Upstream URL"
-msgstr ""
+msgstr "URL адреса джерела"
 
 #. translators: property name; short; used like "Name: value"
 #. translator: Table column header.
@@ -5742,7 +5742,7 @@ msgstr "завершено"
 #. translator: Shown as result tag in a progress bar: .......[attention]
 #: src/output/Out.cc:124
 msgid "attention"
-msgstr ""
+msgstr "увага"
 
 #. translator: Shown as result tag in a progress bar: ...........[error]
 #. Translator: download progress bar result: "............[error]"
