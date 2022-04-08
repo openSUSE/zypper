@@ -29,7 +29,7 @@ namespace zypp
   {
     inline void hintFingerprint()
     {
-      Zypper::instance().out().notePar( 4, _("A GPG pubkey is clearly identified by it's fingerprint. Do not rely the keys name. If you are not sure whether the presented key is authentic, ask the repository provider or check his web site. Many provider maintain a web page showing the fingerprints of the GPG keys they are using.") );
+      Zypper::instance().out().notePar( 4, _("A GPG pubkey is clearly identified by its fingerprint. Do not rely on the key's name. If you are not sure whether the presented key is authentic, ask the repository provider or check their web site. Many providers maintain a web page showing the fingerprints of the GPG keys they are using.") );
     }
 
     inline void hintUnsignedData()
