@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-02-23 18:47+0100\n"
-"PO-Revision-Date: 2022-02-24 18:12+0000\n"
+"PO-Revision-Date: 2022-04-15 13:12+0000\n"
 "Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
 "Language-Team: Slovak <https://l10n.opensuse.org/projects/zypper/master/sk/>"
 "\n"
@@ -2020,7 +2020,7 @@ msgstr "Heslo"
 
 #: src/callbacks/repo.h:49
 msgid "Retrieving delta"
-msgstr "Sťahujem delta balík"
+msgstr "Sťahuje sa delta"
 
 #. translators: this text is a progress display label e.g. "Applying delta foo [42%]"
 #: src/callbacks/repo.h:74
@@ -2041,7 +2041,7 @@ msgstr "Vo vyrovnávacej pamäti %1%"
 #: src/callbacks/repo.h:128
 #, c-format, boost-format
 msgid "Retrieving %s %s-%s.%s"
-msgstr "Sťahujem %s %s-%s.%s"
+msgstr "Sťahuje sa %s %s-%s.%s"
 
 #: src/callbacks/repo.h:217
 msgid "Signature verification failed"
@@ -5758,7 +5758,7 @@ msgstr "Pozor: "
 #: src/output/OutNormal.cc:247 src/output/OutNormal.cc:281
 #: src/output/OutNormal.cc:319
 msgid "Retrieving:"
-msgstr "Sťahujem:"
+msgstr "Sťahuje sa:"
 
 #: src/output/OutNormal.cc:254
 msgid "starting"
