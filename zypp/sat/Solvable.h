@@ -501,10 +501,11 @@ namespace zypp
     namespace detail
     {
       ///////////////////////////////////////////////////////////////////
-      //
-      //	CLASS NAME : SolvableIterator
-      //
-      /** */
+      /// \class SolvableIterator
+      /// \brief Iterate over valid Solvables in the pool.
+      /// If the Solvable passed to the ctor is not valid, advance
+      /// to the next valid solvable (or Solvable::noSolvable if the
+      /// end is reached,
       class SolvableIterator : public boost::iterator_adaptor<
           SolvableIterator                   // Derived
           , CSolvable*                       // Base
@@ -515,16 +516,16 @@ namespace zypp
       {
         public:
           SolvableIterator()
-          : SolvableIterator::iterator_adaptor_( 0 )
+          : SolvableIterator::iterator_adaptor_( nullptr )
           {}
 
           explicit SolvableIterator( const Solvable & val_r )
-          : SolvableIterator::iterator_adaptor_( 0 )
-          { assignVal( val_r ); }
+          : SolvableIterator::iterator_adaptor_( nullptr )
+          { initialAssignVal( val_r ); }
 
           explicit SolvableIterator( SolvableIdType id_r )
-          : SolvableIterator::iterator_adaptor_( 0 )
-          { assignVal( Solvable( id_r ) ); }
+          : SolvableIterator::iterator_adaptor_( nullptr )
+          { initialAssignVal( Solvable(id_r) ); }
 
         private:
           friend class boost::iterator_core_access;
@@ -536,6 +537,9 @@ namespace zypp
           { assignVal( _val.nextInPool() ); }
 
         private:
+          void initialAssignVal( const Solvable & val_r )
+          { assignVal( val_r ? val_r : val_r.nextInPool() ); }
+
           void assignVal( const Solvable & val_r )
           { _val = val_r; base_reference() = _val.get(); }
 
