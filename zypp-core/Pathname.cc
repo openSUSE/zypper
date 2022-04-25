@@ -227,6 +227,42 @@ namespace zypp
       return base.substr( pos );
     }
 
+    Pathname Pathname::realpath() const
+    {
+      std::string real;
+      if( !empty())
+      {
+    #if __GNUC__ > 2
+        /** GNU extension */
+        char *ptr = ::realpath(_name.c_str(), NULL);
+        if( ptr != NULL)
+        {
+          real = ptr;
+          free( ptr);
+        }
+        else
+        /** the SUSv2 way */
+        if( EINVAL == errno)
+        {
+          char buff[PATH_MAX + 2];
+          memset(buff, '\0', sizeof(buff));
+          if( ::realpath(_name.c_str(), buff) != NULL)
+          {
+            real = buff;
+          }
+        }
+    #else
+        char buff[PATH_MAX + 2];
+        memset(buff, '\0', sizeof(buff));
+        if( ::realpath(_name.c_str(), buff) != NULL)
+        {
+          real = buff;
+        }
+    #endif
+      }
+      return zypp::Pathname(real);
+    }
+
     ///////////////////////////////////////////////////////////////////
     //
     //	METHOD NAME : Pathname::assertprefix

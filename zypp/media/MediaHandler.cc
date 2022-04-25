@@ -120,44 +120,13 @@ MediaHandler::resetParentId()
 std::string
 MediaHandler::getRealPath(const std::string &path)
 {
-  std::string real;
-  if( !path.empty())
-  {
-#if __GNUC__ > 2
-    /** GNU extension */
-    char *ptr = ::realpath(path.c_str(), NULL);
-    if( ptr != NULL)
-    {
-      real = ptr;
-      free( ptr);
-    }
-    else
-    /** the SUSv2 way */
-    if( EINVAL == errno)
-    {
-      char buff[PATH_MAX + 2];
-      memset(buff, '\0', sizeof(buff));
-      if( ::realpath(path.c_str(), buff) != NULL)
-      {
-        real = buff;
-      }
-    }
-#else
-    char buff[PATH_MAX + 2];
-    memset(buff, '\0', sizeof(buff));
-    if( ::realpath(path.c_str(), buff) != NULL)
-    {
-      real = buff;
-    }
-#endif
-  }
-  return real;
+  return getRealPath(zypp::Pathname(path)).asString();
 }
 
 zypp::Pathname
 MediaHandler::getRealPath(const Pathname &path)
 {
-  return zypp::Pathname(getRealPath(path.asString()));
+  return path.realpath();
 }
 
 

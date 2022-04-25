@@ -145,6 +145,9 @@ namespace zypp
       static Pathname relativename( const Pathname & name_r )
       { return name_r.absolute() ? cat( ".", name_r ) : name_r; }
 
+      /** Returns this path as the absolute canonical pathname */
+      Pathname realpath() const;
+
       /** Return \c path_r prefixed with \c root_r, unless it is already prefixed. */
       static Pathname assertprefix( const Pathname & root_r, const Pathname & path_r );
 
