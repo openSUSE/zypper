@@ -20,4 +20,7 @@ INSTALL(TARGETS zypp-NameReqPrv		DESTINATION "${CMAKE_INSTALL_PREFIX}/bin")
 ADD_SUBDIRECTORY( zypp-rpm )
 ADD_SUBDIRECTORY( zypp-media-http )
 ADD_SUBDIRECTORY( zypp-media-disc )
+ADD_SUBDIRECTORY( zypp-media-nfs )
+
+
 ADD_SUBDIRECTORY( zypp-media-tvm )
