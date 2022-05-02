@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon May  2 15:30:49 CEST 2022 - ma@suse.de
+
+- info: Fix SEGV with not installed PTFs (bsc#1196317)
+- version 1.13.61
+
+-------------------------------------------------------------------
 Tue Jul 20 18:46:39 CEST 2021 - ma@suse.de
 
 - Add support for PTFs (jsc#SLE-17974)
