@@ -131,7 +131,7 @@ namespace zyppng {
       {"nfs4" ,"nfs"},
       {"cd"   ,"disc"},
       {"dvd"  ,"disc"},
-      {"dir"  ,"file"}
+      {"file"  ,"dir"}
     };
 
     bool _isRunning = false;

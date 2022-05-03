@@ -22,6 +22,8 @@ ADD_SUBDIRECTORY( zypp-media-http )
 ADD_SUBDIRECTORY( zypp-media-disc )
 ADD_SUBDIRECTORY( zypp-media-nfs )
 ADD_SUBDIRECTORY( zypp-media-smb )
+ADD_SUBDIRECTORY( zypp-media-dir )
+
 
 
 ADD_SUBDIRECTORY( zypp-media-tvm )
