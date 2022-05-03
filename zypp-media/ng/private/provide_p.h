@@ -127,11 +127,12 @@ namespace zyppng {
       {"ftp"  ,"http"},
       {"tftp" ,"http"},
       {"https","http"},
-      {"cifs"  ,"smb"},
-      {"nfs4" ,"nfs"},
+      {"cifs" ,"smb" },
+      {"nfs4" ,"nfs" },
       {"cd"   ,"disc"},
       {"dvd"  ,"disc"},
-      {"file"  ,"dir"}
+      {"file" ,"dir" },
+      {"hd"   ,"disk"}
     };
 
     bool _isRunning = false;
