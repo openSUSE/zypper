@@ -9,7 +9,7 @@
 #ifndef ZYPP_NG_TOOLS_DISCPROVIDER_H_INCLUDED
 #define ZYPP_NG_TOOLS_DISCPROVIDER_H_INCLUDED
 
-#include <zypp-media/ng/worker/ProvideWorker>
+#include <zypp-media/ng/worker/DeviceDriver>
 #include <zypp-core/zyppng/base/Signals>
 #include <any>
 #include <unordered_map>
@@ -19,41 +19,23 @@
  *       This is only used in the zypp testsuite.
  */
 
-struct Device
-{
-  std::string  _name;           //!< device "node" name
-  zypp::Pathname _contentDir;   //!< current contents of the device
-  zypp::Pathname _mountPoint = {}; //!< Mountpoint of the device, if empty dev is not mounted
-  std::unordered_map<std::string, std::any> _properties = {};
-};
-
-struct AttachedMedia
-{
-  std::shared_ptr<Device> _dev;
-  zypp::Pathname _attachRoot;
-};
-
-class TestVMProvider : public zyppng::worker::ProvideWorker
+class TestVMProvider : public zyppng::worker::DeviceDriver
 {
 public:
-  TestVMProvider( std::string_view workerName );
+
+  TestVMProvider();
   ~TestVMProvider();
 
-  void detectDevices();
-  void immediateShutdown() override;
-protected:
-  // ProvideWorker interface
+  // DeviceDriver interface
   zyppng::expected<zyppng::worker::WorkerCaps> initialize(const zyppng::worker::Configuration &conf) override;
-  void provide() override;
-  void cancel(const std::deque<zyppng::worker::ProvideWorkerItemRef>::iterator &i ) override;
-  void unmountDevice ( Device &dev );
+  zyppng::worker::AttachResult mountDevice ( const uint32_t id, const zypp::Url &attachUrl, const std::string &attachId, const std::string &label, const zyppng::HeaderValueMap &extras ) override;
+  void detectDevices();
+
+protected:
+  void unmountDevice ( zyppng::worker::Device &dev ) override;
 
 private:
-  zypp::Pathname _attachRoot;
   zypp::Pathname _provRoot;
-  std::vector<std::shared_ptr<Device>> _sysDevs;
-  std::unordered_map<std::string, AttachedMedia> _attachedMedia;
-  bool _devicesDetected = false; //< We delay device detection to the first attach request, to avoid doing it without needing it
 };
 
 #endif

@@ -9,15 +9,17 @@
 #ifndef ZYPP_NG_TOOLS_NFSPROVIDER_H_INCLUDED
 #define ZYPP_NG_TOOLS_NFSPROVIDER_H_INCLUDED
 
-#include <zypp-media/ng/worker/MountingWorker>
+#include <zypp-media/ng/worker/DeviceDriver>
 
-class NfsProvider : public zyppng::worker::MountingWorker
+class NfsProvider : public zyppng::worker::DeviceDriver
 {
   public:
-    NfsProvider( std::string_view workerName );
+    NfsProvider();
     ~NfsProvider();
-  protected:
-    void handleMountRequest ( zyppng::worker::ProvideWorkerItem &req ) override;
+
+    // DeviceDriver interface
+    zyppng::worker::AttachResult mountDevice ( const uint32_t id, const zypp::Url &attachUrl, const std::string &attachId, const std::string &label, const zyppng::HeaderValueMap &extras ) override;
+
 };
 
 #endif

@@ -2,6 +2,7 @@
 
 #include <csignal>
 #include <zypp-core/zyppng/base/private/linuxhelpers_p.h>
+#include <zypp-media/ng/worker/MountingWorker>
 
 int main( int , char *[] )
 {
@@ -9,12 +10,14 @@ int main( int , char *[] )
   // to CTRL+C us
   zyppng::blockSignalsForCurrentThread( { SIGPIPE, SIGINT } );
 
-  auto provider = std::make_shared<DiskProvider>("zypp-media-disk");
-  auto res = provider->run (STDIN_FILENO, STDOUT_FILENO);
+  auto driver = std::make_shared<DiskProvider>();
+  auto worker = std::make_shared<zyppng::worker::MountingWorker>( "zypp-media-disk", driver );
+  driver->setProvider( worker );
 
-  MIL << "DIR Worker shutting down" << std::endl;
+  auto res = worker->run (STDIN_FILENO, STDOUT_FILENO);
 
-  provider->immediateShutdown();
+  MIL << "DISK Worker shutting down" << std::endl;
+
   if ( res )
     return 0;
 

@@ -17,63 +17,24 @@
 namespace zyppng::worker
 {
 
-  MountingWorker::MountingWorker( zyppng::worker::WorkerCaps::WorkerType wType, std::string_view workerName )
+  MountingWorker::MountingWorker( std::string_view workerName, DeviceDriverRef driver )
     : ProvideWorker( workerName )
-    , _wtype( wType )
-  {
-
-  }
+    , _driver(driver)
+  { }
 
   MountingWorker::~MountingWorker()
-  { }
+  {
+    _driver->immediateShutdown();
+  }
 
   zyppng::expected<zyppng::worker::WorkerCaps> MountingWorker::initialize( const zyppng::worker::Configuration &conf )
   {
-    const auto &values = conf.values();
-    if ( const auto &i = values.find( std::string(zyppng::ATTACH_POINT) ); i != values.end() ) {
-      const auto &val = i->second;
-      MIL << "Got attachpoint from controller: " << val << std::endl;
-      _attachRoot = val;
-    } else {
-      return zyppng::expected<zyppng::worker::WorkerCaps>::error(ZYPP_EXCPT_PTR( zypp::Exception("Attach point required to work.") ));
-    }
-
-    zyppng::worker::WorkerCaps caps;
-    caps.set_worker_type ( _wtype );
-    caps.set_cfg_flags(
-      zyppng::worker::WorkerCaps::Flags (
-        zyppng::worker::WorkerCaps::Pipeline
-        | zyppng::worker::WorkerCaps::ZyppLogFormat
-        | zyppng::worker::WorkerCaps::SingleInstance
-        )
-      );
-
-    return zyppng::expected<zyppng::worker::WorkerCaps>::success(caps);
-  }
-
-  void MountingWorker::detectDevices()
-  {
-    return;
-  }
-
-  std::vector<std::shared_ptr<Device>> &MountingWorker::knownDevices()
-  {
-    return _sysDevs;
-  }
-
-  const std::vector<std::shared_ptr<Device>> &MountingWorker::knownDevices() const
-  {
-    return _sysDevs;
-  }
-
-  std::unordered_map<std::string, AttachedMedia> &MountingWorker::attachedMedia()
-  {
-    return _attachedMedia;
+    return _driver->initialize(conf);
   }
 
   void MountingWorker::provide()
   {
-    detectDevices();
+    _driver->detectDevices();
     auto &queue = requestQueue();
 
     if ( !queue.size() )
@@ -87,14 +48,44 @@ namespace zyppng::worker
     try {
       switch ( req->_spec.code () ) {
         case zyppng::ProvideMessage::Code::Attach: {
-          return handleMountRequest( *req );
+
+          const auto attachUrl = zypp::Url( req->_spec.value( zyppng::AttachMsgFields::Url ).asString() );
+          const auto label     = req->_spec.value( zyppng::AttachMsgFields::Label, "No label" ).asString();
+          const auto attachId  = req->_spec.value( zyppng::AttachMsgFields::AttachId ).asString();
+          HeaderValueMap vals;
+          req ->_spec.forEachVal([&]( const std::string &name, const auto &val ) {
+            if ( name == zyppng::AttachMsgFields::Url
+              || name == zyppng::AttachMsgFields::Label
+              || name == zyppng::AttachMsgFields::AttachId )
+              return true;
+            vals.add( name, val );
+            return true;
+          });
+
+          const auto &res = _driver->mountDevice( req->_spec.requestId(),  attachUrl, attachId, label, vals );
+          if ( !res ) {
+            const auto &err = res.error();
+            req->_state = zyppng::worker::ProvideWorkerItem::Finished;
+            provideFailed( req->_spec.requestId()
+              , err._code
+              , err._reason
+              , err._transient
+              , err._extra );
+            return;
+          }
+
+          MIL << "Attach of " << attachUrl << " was successfull" << std::endl;
+          attachSuccess( req->_spec.requestId() );
+          return;
         }
         case zyppng::ProvideMessage::Code::Detach: {
 
           const auto url = zypp::Url( req->_spec.value( zyppng::DetachMsgFields::Url ).asString() );
           const auto &attachId = url.getAuthority();
-          auto i = _attachedMedia.find( attachId );
-          if ( i == _attachedMedia.end() ) {
+
+          if ( _driver->detachMedia( attachId ) ) {
+            detachSuccess ( req->_spec.requestId() );
+          } else {
             provideFailed( req->_spec.requestId()
               , zyppng::ProvideMessage::Code::NotFound
               , "Attach ID not known."
@@ -103,30 +94,19 @@ namespace zyppng::worker
             return;
           }
 
-          _attachedMedia.erase(i);
-          detachSuccess ( req->_spec.requestId() );
-          // now unmount all others
-          for ( auto i = _sysDevs.begin (); i != _sysDevs.end(); ) {
-            if ( i->use_count() == 1 && !(*i)->_mountPoint.empty() ) {
-              MIL << "Unmounting device " << (*i)->_name << " since its not used anymore" << std::endl;
-              unmountDevice(*(*i));
-              if ( (*i)->_ephemeral ) {
-                i = _sysDevs.erase(i);
-                continue;
-              }
-            }
-            ++i;
-          }
+          _driver->releaseIdleDevices();
           return;
         }
+
         case zyppng::ProvideMessage::Code::Provide: {
 
           const auto url = zypp::Url( req->_spec.value( zyppng::DetachMsgFields::Url ).asString() );
           const auto &attachId = url.getAuthority();
           const auto &path = zypp::Pathname(url.getPathName());
+          const auto &availMedia = _driver->attachedMedia();
 
-          auto i = _attachedMedia.find( attachId );
-          if ( i == _attachedMedia.end() ) {
+          auto i = availMedia.find( attachId );
+          if ( i == availMedia.end() ) {
             ERR << "Unknown Attach ID " << attachId << std::endl;
             provideFailed( req->_spec.requestId()
               , zyppng::ProvideMessage::Code::NotFound
@@ -206,77 +186,6 @@ namespace zyppng::worker
 
   void MountingWorker::immediateShutdown()
   {
-    // here we need to unmount everything
-    for ( auto &dev : _sysDevs )
-      unmountDevice(*dev);
-    _attachedMedia.clear();
-  }
-
-  void MountingWorker::unmountDevice ( Device &dev )
-  {
-    if ( dev._mountPoint.empty () )
-      return;
-    try {
-      zypp::media::Mount mount;
-      mount.umount( dev._mountPoint.asString() );
-      removeAttachPoint( dev._mountPoint );
-    } catch (const zypp::media::MediaException & excpt_r) {
-      ERR << "Failed to unmount device: " << dev._name << std::endl;
-      ZYPP_CAUGHT(excpt_r);
-    }
-    dev._mountPoint = zypp::Pathname();
-  }
-
-  bool MountingWorker::isVolatile () const
-  {
-    return false;
-  }
-
-  const zypp::Pathname &MountingWorker::attachRoot () const
-  {
-    return _attachRoot;
-  }
-
-  zyppng::expected<void> MountingWorker::isDesiredMedium ( const zypp::Url &deviceUrl, const zypp::Pathname &mountPoint, const zyppng::MediaDataVerifierRef &verifier, uint mediaNr )
-  {
-    if ( !verifier ) {
-      return zyppng::expected<void>::success();	// we have no valid data
-    }
-
-    auto devVerifier = verifier->clone();
-    if ( !devVerifier ) {
-      // unlikely to happen
-      return zyppng::expected<void>::error( ZYPP_EXCPT_PTR( zypp::Exception("Failed to clone verifier") ) );
-    }
-
-    // bsc#1180851: If there is just one not-volatile medium in the set
-    // tolerate a missing (vanished) media identifier and let the URL rule.
-    bool relaxed = verifier->totalMedia() == 1 && !isVolatile();
-
-    const auto &relMediaPath = devVerifier->mediaFilePath( mediaNr );
-    zypp::Pathname mediaFile { mountPoint / relMediaPath };
-    zypp::PathInfo pi( mediaFile );
-    if ( !pi.isExist() ) {
-      if ( relaxed )
-        return zyppng::expected<void>::success();
-      auto excpt =  zypp::media::MediaFileNotFoundException( deviceUrl, relMediaPath ) ;
-      excpt.addHistory( verifier->expectedAsUserString( mediaNr ) );
-      return zyppng::expected<void>::error( ZYPP_EXCPT_PTR( std::move(excpt) ) );
-    }
-    if ( !pi.isFile() ) {
-      if ( relaxed )
-        return zyppng::expected<void>::success();
-      auto excpt =  zypp::media::MediaNotAFileException( deviceUrl, relMediaPath ) ;
-      excpt.addHistory( verifier->expectedAsUserString( mediaNr ) );
-      return zyppng::expected<void>::error( ZYPP_EXCPT_PTR( std::move(excpt) ) );
-    }
-
-    if ( !devVerifier->load( mediaFile ) ) {
-      return zyppng::expected<void>::error( ZYPP_EXCPT_PTR( zypp::Exception("Failed to load media information from medium") ) );
-    }
-    if ( !verifier->matches( devVerifier ) ) {
-      return zyppng::expected<void>::error( ZYPP_EXCPT_PTR( zypp::media::MediaNotDesiredException( deviceUrl ) ) );
-    }
-    return zyppng::expected<void>::success();
+    _driver->immediateShutdown();
   }
 }

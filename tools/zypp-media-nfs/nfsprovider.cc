@@ -26,60 +26,44 @@ using namespace std::literals::string_view_literals;
 constexpr auto NFS_MOUNT_TIMEOUT = 300;
 constexpr std::array<std::string_view, 2> NFS_MOUNT_FSTYPES = { "nfs"sv, "nfs4"sv };
 
-NfsProvider::NfsProvider( std::string_view workerName )
-  : MountingWorker( zyppng::worker::WorkerCaps::SimpleMount, workerName )
+NfsProvider::NfsProvider( )
+  : DeviceDriver( zyppng::worker::WorkerCaps::SimpleMount )
 { }
 
 NfsProvider::~NfsProvider()
 { }
 
-void NfsProvider::handleMountRequest ( zyppng::worker::ProvideWorkerItem &req )
+zyppng::worker::AttachResult NfsProvider::mountDevice ( const uint32_t id, const zypp::Url &attachUrl, const std::string &attachId, const std::string &label, const zyppng::HeaderValueMap &extras )
 {
-  if ( req._spec.code() != zyppng::ProvideMessage::Code::Attach ) {
-    req._state = zyppng::worker::ProvideWorkerItem::Finished;
-    provideFailed( req._spec.requestId()
-      , zyppng::ProvideMessage::Code::MountFailed
-      , "No useable device found"
-      , false
-      , {} );
-    return;
-  }
-
   try
   {
-    const auto attachUrl = zypp::Url( req._spec.value( zyppng::AttachMsgFields::Url ).asString() );
     if ( attachUrl.getHost().empty() ) {
-      req._state = zyppng::worker::ProvideWorkerItem::Finished;
-      provideFailed( req._spec.requestId()
-        , zyppng::ProvideMessage::Code::MountFailed
+      return zyppng::worker::AttachResult::error(
+        zyppng::ProvideMessage::Code::MountFailed
         , "Host can not be empty"
         , false
-        , {} );
-      return;
+      );
     }
 
     // set up the verifier
     zyppng::MediaDataVerifierRef verifier;
     zyppng::MediaDataVerifierRef devVerifier;
-    if ( req._spec.value( zyppng::AttachMsgFields::VerifyType ).valid() ) {
-      verifier = zyppng::MediaDataVerifier::createVerifier( req._spec.value(zyppng::AttachMsgFields::VerifyType).asString() );
-      devVerifier = zyppng::MediaDataVerifier::createVerifier( req._spec.value(zyppng::AttachMsgFields::VerifyType).asString() );
-      if ( !verifier || !devVerifier ) {
-        provideFailed( req._spec.requestId()
-          , zyppng::ProvideMessage::Code::MountFailed
+    if ( extras.value( zyppng::AttachMsgFields::VerifyType ).valid() ) {
+      verifier = zyppng::MediaDataVerifier::createVerifier( extras.value(zyppng::AttachMsgFields::VerifyType).asString() );
+      if ( !verifier ) {
+        return zyppng::worker::AttachResult::error(
+          zyppng::ProvideMessage::Code::MountFailed
           , "Invalid verifier type"
           , false
-          , {} );
-        return;
+        );
       }
 
-      if ( !verifier->load( req._spec.value(zyppng::AttachMsgFields::VerifyData).asString() ) ) {
-        provideFailed( req._spec.requestId()
-          , zyppng::ProvideMessage::Code::MountFailed
+      if ( !verifier->load( extras.value(zyppng::AttachMsgFields::VerifyData).asString() ) ) {
+        return zyppng::worker::AttachResult::error(
+          zyppng::ProvideMessage::Code::MountFailed
           , "Failed to create verifier from file"
           , false
-          , {} );
-        return;
+        );
       }
     }
     const auto &devs = knownDevices();
@@ -92,27 +76,25 @@ void NfsProvider::handleMountRequest ( zyppng::worker::ProvideWorkerItem &req )
     // first check if we have that device already
     auto i = std::find_if( devs.begin(), devs.end(), [&]( const auto &d ) { return d->_name == path; } );
     if ( i != devs.end() ) {
-      auto res = isDesiredMedium( attachUrl, (*i)->_mountPoint, verifier, req._spec.value( zyppng::AttachMsgFields::MediaNr, 1 ).asInt() );
+      auto res = isDesiredMedium( attachUrl, (*i)->_mountPoint, verifier, extras.value( zyppng::AttachMsgFields::MediaNr, 1 ).asInt() );
       if ( !res ) {
         try {
           std::rethrow_exception( res.error() );
         } catch( const zypp::Exception& e ) {
-          provideFailed( req._spec.requestId()
-            , zyppng::ProvideMessage::Code::MediumNotDesired
+          return zyppng::worker::AttachResult::error(
+            zyppng::ProvideMessage::Code::MediumNotDesired
             , false
             , e );
         } catch ( ... ) {
-          provideFailed( req._spec.requestId()
-            , zyppng::ProvideMessage::Code::MediumNotDesired
+          return zyppng::worker::AttachResult::error(
+            zyppng::ProvideMessage::Code::MediumNotDesired
             , "Checking the medium failed with an uknown error"
             , false
-            , {} );
+            );
         }
-        return;
       } else {
-        attachedMedia().insert( std::make_pair( req._spec.value(zyppng::AttachMsgFields::AttachId ).asString(), zyppng::worker::AttachedMedia{ *i, "/" } ) );
-        attachSuccess( req._spec.requestId() );
-        return;
+        attachedMedia().insert( std::make_pair( attachId, zyppng::worker::AttachedMedia{ *i, "/" } ) );
+        return zyppng::worker::AttachResult::success();
       }
     }
 
@@ -170,12 +152,11 @@ void NfsProvider::handleMountRequest ( zyppng::worker::ProvideWorkerItem &req )
     {
       newAp = createAttachPoint( attachRoot() );
       if ( newAp.empty() ) {
-        provideFailed( req._spec.requestId()
-          , zyppng::ProvideMessage::Code::MountFailed
+        return zyppng::worker::AttachResult::error(
+          zyppng::ProvideMessage::Code::MountFailed
           , "Failed to create mount directory."
           , false
-          , {} );
-        return;
+        );
       }
 
       mount.mount( path, newAp.asString(), filesystem, options );
@@ -204,70 +185,78 @@ void NfsProvider::handleMountRequest ( zyppng::worker::ProvideWorkerItem &req )
           "Unable to verify that the media was mounted",
           path, newAp.asString()
         ));
-      } else {
-        MIL << "New device " << path << " mounted on " << newAp << std::endl;
-        auto newDev = std::shared_ptr<zyppng::worker::Device>( new zyppng::worker::Device{
-          ._name = path,
-          ._mountPoint = newAp,
-          ._ephemeral = true // device should be removed after the last attachment was released
-          });
-        knownDevices().push_back( newDev );
-        attachedMedia().insert( std::make_pair( req._spec.value(zyppng::AttachMsgFields::AttachId ).asString(), zyppng::worker::AttachedMedia{ newDev, "/" } ) );
-        attachSuccess( req._spec.requestId() );
-        return;
       }
+
+      // if we reach this place, mount worked -> YAY, lets see if that is the desired medium!
+      const auto &isDesired = isDesiredMedium( attachUrl, newAp, verifier, extras.value( zyppng::AttachMsgFields::MediaNr, 1 ).asInt() );
+      if ( !isDesired ) {
+        try {
+          mount.umount( newAp.asString() );
+        } catch (const zypp::media::MediaException & excpt_r) {
+          ZYPP_CAUGHT(excpt_r);
+        }
+        ZYPP_THROW( zypp::media::MediaNotDesiredException( attachUrl ) );
+      }
+
+      MIL << "New device " << path << " mounted on " << newAp << std::endl;
+      auto newDev = std::shared_ptr<zyppng::worker::Device>( new zyppng::worker::Device{
+        ._name = path,
+        ._maj_nr = 0,
+        ._min_nr = 0,
+        ._mountPoint = newAp,
+        ._ephemeral = true, // device should be removed after the last attachment was released
+        ._properties = {}
+      });
+      knownDevices().push_back( newDev );
+      attachedMedia().insert( std::make_pair( attachId, zyppng::worker::AttachedMedia{ newDev, "/" } ) );
+      return zyppng::worker::AttachResult::success();
+
     }
     catch (const zypp::media::MediaMountException &e )
     {
       removeAttachPoint(newAp);
       ZYPP_CAUGHT(e);
-      provideFailed( req._spec.requestId()
-        , zyppng::ProvideMessage::Code::MountFailed
+      return zyppng::worker::AttachResult::error(
+        zyppng::ProvideMessage::Code::MountFailed
         , false
-        , e );
-        return;
+        , e
+      );
     }
     catch (const zypp::media::MediaException & e)
     {
       removeAttachPoint(newAp);
       ZYPP_CAUGHT(e);
-      provideFailed( req._spec.requestId()
-        , zyppng::ProvideMessage::Code::MountFailed
+      return zyppng::worker::AttachResult::error(
+        zyppng::ProvideMessage::Code::MountFailed
         , false
-        , e );
-        return;
+        , e
+      );
     }
 
     // We should never reach this place, but if we do fail the attach request
-    provideFailed( req._spec.requestId()
-      , zyppng::ProvideMessage::Code::MountFailed
+    return zyppng::worker::AttachResult::error(
+      zyppng::ProvideMessage::Code::MountFailed
       , zypp::str::Str()<<"Mounting the medium " << attachUrl << " failed for an unknown reason"
       , false
     );
-    return;
 
   }  catch ( const zypp::Exception &e  ) {
-    req._state = zyppng::worker::ProvideWorkerItem::Finished;
-    provideFailed( req._spec.requestId()
-      , zyppng::ProvideMessage::Code::BadRequest
+    return zyppng::worker::AttachResult::error(
+      zyppng::ProvideMessage::Code::BadRequest
       , false
-      , e );
-    return;
+      , e
+    );
   }  catch ( const std::exception &e  ) {
-    req._state = zyppng::worker::ProvideWorkerItem::Finished;
-    provideFailed( req._spec.requestId()
-      , zyppng::ProvideMessage::Code::BadRequest
+    return zyppng::worker::AttachResult::error(
+      zyppng::ProvideMessage::Code::BadRequest
       , e.what()
       , false
-      , {} );
-    return;
+    );
   }  catch ( ... ) {
-    req._state = zyppng::worker::ProvideWorkerItem::Finished;
-    provideFailed( req._spec.requestId()
-      , zyppng::ProvideMessage::Code::BadRequest
+    return zyppng::worker::AttachResult::error(
+      zyppng::ProvideMessage::Code::BadRequest
       , "Unknown exception"
       , false
-      , {} );
-    return;
+    );
   }
 }

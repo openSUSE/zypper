@@ -1,7 +1,11 @@
+
 #include "discprovider.h"
 
-#include <csignal>
 #include <zypp-core/zyppng/base/private/linuxhelpers_p.h>
+#include <zypp-media/ng/worker/MountingWorker>
+
+#include <csignal>
+
 
 int main( int , char *[] )
 {
@@ -9,7 +13,10 @@ int main( int , char *[] )
   // to CTRL+C us
   zyppng::blockSignalsForCurrentThread( { SIGPIPE, SIGINT } );
 
-  auto provider = std::make_shared<DiscProvider>("zypp-media-disc");
+  auto driver = std::make_shared<DiscProvider>();
+  auto provider = std::make_shared<zyppng::worker::MountingWorker>( "zypp-media-disc", driver );
+  driver->setProvider( provider );
+
   auto res = provider->run (STDIN_FILENO, STDOUT_FILENO);
   provider->immediateShutdown();
   if ( res )

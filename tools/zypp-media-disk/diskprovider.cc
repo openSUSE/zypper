@@ -112,47 +112,32 @@ bool verifyIfDiskVolume( const zypp::Pathname &dev_name )
 
 
 
-DiskProvider::DiskProvider( std::string_view workerName )
-  : MountingWorker( zyppng::worker::WorkerCaps::SimpleMount, workerName )
+DiskProvider::DiskProvider()
+  : DeviceDriver( zyppng::worker::WorkerCaps::SimpleMount )
 { }
 
 DiskProvider::~DiskProvider()
 { }
 
-void DiskProvider::handleMountRequest ( zyppng::worker::ProvideWorkerItem &req )
+zyppng::worker::AttachResult DiskProvider::mountDevice ( const uint32_t id, const zypp::Url &attachUrl, const std::string &attachId, const std::string &label, const zyppng::HeaderValueMap &extras )
 {
-  if ( req._spec.code() != zyppng::ProvideMessage::Code::Attach ) {
-    req._state = zyppng::worker::ProvideWorkerItem::Finished;
-    provideFailed( req._spec.requestId()
-      , zyppng::ProvideMessage::Code::MountFailed
-      , "Unsupported message for handleMountRequest"
-      , false
-      , {} );
-    return;
-  }
-
   try
   {
-    const auto attachUrl = zypp::Url( req._spec.value( zyppng::AttachMsgFields::Url ).asString() );
     if ( !attachUrl.getHost().empty() ) {
-      req._state = zyppng::worker::ProvideWorkerItem::Finished;
-      provideFailed( req._spec.requestId()
-        , zyppng::ProvideMessage::Code::MountFailed
+      return zyppng::worker::AttachResult::error(
+        zyppng::ProvideMessage::Code::MountFailed
         , "Host must be empty in dir:// and file:// URLs"
         , false
-        , {} );
-      return;
+        );
     }
 
     const std::string &device = zypp::Pathname(attachUrl.getQueryParam("device")).asString();
     if ( device.empty() ) {
-      req._state = zyppng::worker::ProvideWorkerItem::Finished;
-      provideFailed( req._spec.requestId()
-        , zyppng::ProvideMessage::Code::MountFailed
+      return zyppng::worker::AttachResult::error(
+        zyppng::ProvideMessage::Code::MountFailed
         , "Media url does not contain a device specification"
         , false
-        , {} );
-      return;
+      );
     }
 
     std::string filesystem = attachUrl.getQueryParam("filesystem");
@@ -161,24 +146,20 @@ void DiskProvider::handleMountRequest ( zyppng::worker::ProvideWorkerItem &req )
 
     zypp::PathInfo dev_info( device );
     if(!dev_info.isBlk()) {
-      req._state = zyppng::worker::ProvideWorkerItem::Finished;
-      provideFailed( req._spec.requestId()
-        , zyppng::ProvideMessage::Code::MountFailed
+      return zyppng::worker::AttachResult::error(
+        zyppng::ProvideMessage::Code::MountFailed
         , "Media url does not specify a valid block device"
         , false
-        , {} );
-      return;
+        );
     }
 
     DBG << "Verifying " << device << " ..." << std::endl;
     if( !verifyIfDiskVolume( device)) {
-      req._state = zyppng::worker::ProvideWorkerItem::Finished;
-      provideFailed( req._spec.requestId()
-        , zyppng::ProvideMessage::Code::MountFailed
+      return zyppng::worker::AttachResult::error(
+        zyppng::ProvideMessage::Code::MountFailed
         , "Could not verify URL points to a disk volume!"
         , false
-        , {} );
-      return;
+        );
     }
 
     // disks can have a attach root ( path relative to the device root )
@@ -186,26 +167,22 @@ void DiskProvider::handleMountRequest ( zyppng::worker::ProvideWorkerItem &req )
 
     // set up the verifier
     zyppng::MediaDataVerifierRef verifier;
-    zyppng::MediaDataVerifierRef devVerifier;
-    if ( req._spec.value( zyppng::AttachMsgFields::VerifyType ).valid() ) {
-      verifier = zyppng::MediaDataVerifier::createVerifier( req._spec.value(zyppng::AttachMsgFields::VerifyType).asString() );
-      devVerifier = zyppng::MediaDataVerifier::createVerifier( req._spec.value(zyppng::AttachMsgFields::VerifyType).asString() );
-      if ( !verifier || !devVerifier ) {
-        provideFailed( req._spec.requestId()
-          , zyppng::ProvideMessage::Code::MountFailed
+    if ( extras.value( zyppng::AttachMsgFields::VerifyType ).valid() ) {
+      verifier = zyppng::MediaDataVerifier::createVerifier( extras.value(zyppng::AttachMsgFields::VerifyType).asString() );
+      if ( !verifier ) {
+        return zyppng::worker::AttachResult::error(
+          zyppng::ProvideMessage::Code::MountFailed
           , "Invalid verifier type"
           , false
-          , {} );
-        return;
+          );
       }
 
-      if ( !verifier->load( req._spec.value(zyppng::AttachMsgFields::VerifyData).asString() ) ) {
-        provideFailed( req._spec.requestId()
-          , zyppng::ProvideMessage::Code::MountFailed
+      if ( !verifier->load( extras.value(zyppng::AttachMsgFields::VerifyData).asString() ) ) {
+        return zyppng::worker::AttachResult::error(
+          zyppng::ProvideMessage::Code::MountFailed
           , "Failed to create verifier from file"
           , false
-          , {} );
-        return;
+          );
       }
     }
     const auto &devs = knownDevices();
@@ -216,27 +193,26 @@ void DiskProvider::handleMountRequest ( zyppng::worker::ProvideWorkerItem &req )
           && d->_min_nr == dev_info.devMinor();
     });
     if ( i != devs.end() ) {
-      auto res = isDesiredMedium( attachUrl, (*i)->_mountPoint / relAttachRoot, verifier, req._spec.value( zyppng::AttachMsgFields::MediaNr, 1 ).asInt() );
+      auto res = isDesiredMedium( attachUrl, (*i)->_mountPoint / relAttachRoot, verifier, extras.value( zyppng::AttachMsgFields::MediaNr, 1 ).asInt() );
       if ( !res ) {
         try {
           std::rethrow_exception( res.error() );
         } catch( const zypp::Exception& e ) {
-          provideFailed( req._spec.requestId()
-            , zyppng::ProvideMessage::Code::MediumNotDesired
+          return zyppng::worker::AttachResult::error(
+            zyppng::ProvideMessage::Code::MediumNotDesired
             , false
-            , e );
+            , e
+          );
         } catch ( ... ) {
-          provideFailed( req._spec.requestId()
-            , zyppng::ProvideMessage::Code::MediumNotDesired
+          return zyppng::worker::AttachResult::error(
+            zyppng::ProvideMessage::Code::MediumNotDesired
             , "Checking the medium failed with an uknown error"
             , false
-            , {} );
+          );
         }
-        return;
       } else {
-        attachedMedia().insert( std::make_pair( req._spec.value(zyppng::AttachMsgFields::AttachId ).asString(), zyppng::worker::AttachedMedia{ *i, relAttachRoot } ) );
-        attachSuccess( req._spec.requestId() );
-        return;
+        attachedMedia().insert( std::make_pair( attachId, zyppng::worker::AttachedMedia{ *i, relAttachRoot } ) );
+        return zyppng::worker::AttachResult::success();
       }
     }
 
@@ -246,7 +222,9 @@ void DiskProvider::handleMountRequest ( zyppng::worker::ProvideWorkerItem &req )
       ._name   = dev_info.path().asString(),
       ._maj_nr = dev_info.devMajor(),
       ._min_nr = dev_info.devMinor(),
-      ._ephemeral = true // forget about the device after we are finished with it
+      ._mountPoint = {},
+      ._ephemeral = true, // forget about the device after we are finished with it
+      ._properties = {}
       });
 
     // since the kernel will not let us remount a disc ro if it was already mounted in the system as rw we need to
@@ -277,12 +255,11 @@ void DiskProvider::handleMountRequest ( zyppng::worker::ProvideWorkerItem &req )
     try {
       newAp = createAttachPoint( attachRoot() );
       if ( newAp.empty() ) {
-        provideFailed( req._spec.requestId()
-          , zyppng::ProvideMessage::Code::MountFailed
+        return zyppng::worker::AttachResult::error(
+          zyppng::ProvideMessage::Code::MountFailed
           , "Failed to create mount directory."
           , false
-          , {} );
-        return;
+        );
       }
 
       std::string options = attachUrl.getQueryParam("mountoptions");
@@ -297,15 +274,61 @@ void DiskProvider::handleMountRequest ( zyppng::worker::ProvideWorkerItem &req )
         mount.mount( dev_info.path().asString(), newAp.asString(), filesystem, options);
       }
 
+      // wait for /etc/mtab update ...
+      // (shouldn't be needed)
+      int limit = 3;
+      bool mountsucceeded = false;
+
+      const auto &checkAttachedDisk = [&]( const zypp::media::MountEntry &e ) {
+        if ( bindSource) {
+          if ( *bindSource == e.src ) {
+            DBG << "Found bound media "
+                << devPtr->_name
+                << " in the mount table as " << e.src << std::endl;
+            return true;
+          }
+        }
+        return DeviceDriver::devicePredicate( devPtr->_maj_nr, devPtr->_min_nr ) ( e );
+      };
+
+      // mount command came back OK, lets wait for mtab to update
+      while( !(mountsucceeded=checkAttached( newAp, checkAttachedDisk )) && --limit) {
+        MIL << "Mount did not appear yet, sleeping for 1s" << std::endl;
+        sleep(1);
+      }
+
+      // mount didn't work after all, bail out
+      if ( !mountsucceeded ) {
+        try {
+          mount.umount( newAp.asString() );
+        } catch (const zypp::media::MediaException & excpt_r) {
+          ZYPP_CAUGHT(excpt_r);
+        }
+        ZYPP_THROW( zypp::media::MediaMountException(
+          "Unable to verify that the media was mounted",
+          devPtr->_name, newAp.asString()
+        ));
+      }
+
+      // if we reach this place, mount worked -> YAY, lets see if that is the desired medium!
+      auto isDesired = isDesiredMedium( attachUrl, newAp / relAttachRoot, verifier, extras.value( zyppng::AttachMsgFields::MediaNr, 1 ).asInt() );
+      if ( !isDesired ) {
+        try {
+          mount.umount( newAp.asString() );
+        } catch (const zypp::media::MediaException & excpt_r) {
+          ZYPP_CAUGHT(excpt_r);
+        }
+        ZYPP_THROW( zypp::media::MediaNotDesiredException( attachUrl ) );
+      }
     }
     catch ( const zypp::Exception &e ) {
       removeAttachPoint(newAp);
       ZYPP_CAUGHT(e);
-      provideFailed( req._spec.requestId()
-        , zyppng::ProvideMessage::Code::MountFailed
+      return zyppng::worker::AttachResult::error(
+        zyppng::ProvideMessage::Code::MountFailed
         , false
-        , e );
-      return;
+        , e
+      );
     }
     catch ( ... ) {
       removeAttachPoint(newAp);
@@ -315,32 +338,26 @@ void DiskProvider::handleMountRequest ( zyppng::worker::ProvideWorkerItem &req )
     // mount worked ! YAY
     devPtr->_mountPoint = newAp;
     knownDevices().push_back( devPtr );
-    attachedMedia().insert( std::make_pair( req._spec.value(zyppng::AttachMsgFields::AttachId ).asString(), zyppng::worker::AttachedMedia{ devPtr, relAttachRoot } ) );
-    attachSuccess( req._spec.requestId() );
-    return;
+    attachedMedia().insert( std::make_pair( attachId, zyppng::worker::AttachedMedia{ devPtr, relAttachRoot } ) );
+    return zyppng::worker::AttachResult::success();
 
   }  catch ( const zypp::Exception &e  ) {
-    req._state = zyppng::worker::ProvideWorkerItem::Finished;
-    provideFailed( req._spec.requestId()
-      , zyppng::ProvideMessage::Code::BadRequest
+    return zyppng::worker::AttachResult::error(
+      zyppng::ProvideMessage::Code::BadRequest
       , false
-      , e );
-    return;
+      , e
+    );
   }  catch ( const std::exception &e  ) {
-    req._state = zyppng::worker::ProvideWorkerItem::Finished;
-    provideFailed( req._spec.requestId()
-      , zyppng::ProvideMessage::Code::BadRequest
+    return zyppng::worker::AttachResult::error(
+      zyppng::ProvideMessage::Code::BadRequest
       , e.what()
       , false
-      , {} );
-    return;
+    );
   }  catch ( ... ) {
-    req._state = zyppng::worker::ProvideWorkerItem::Finished;
-    provideFailed( req._spec.requestId()
-      , zyppng::ProvideMessage::Code::BadRequest
+    return zyppng::worker::AttachResult::error(
+      zyppng::ProvideMessage::Code::BadRequest
       , "Unknown exception"
       , false
-      , {} );
-    return;
+    );
   }
 }

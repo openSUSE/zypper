@@ -46,6 +46,7 @@ namespace zyppng::worker {
     RequestCancelException();
   };
 
+  ZYPP_FWD_DECL_TYPE_WITH_REFS (ProvideWorker);
   ZYPP_FWD_DECL_TYPE_WITH_REFS (ProvideWorkerItem);
 
   class ProvideWorkerItem : public zyppng::Base
@@ -80,26 +81,6 @@ namespace zyppng::worker {
     expected<void> run ( int recv = STDIN_FILENO, int send = STDOUT_FILENO );
 
     std::deque<ProvideWorkerItemRef> &requestQueue();
-
-    zypp::Pathname createAttachPoint(const zypp::Pathname &attach_root) const;
-    void removeAttachPoint ( const zypp::Pathname &attach_pt ) const;
-    bool checkAttached ( const zypp::Pathname &mountPoint, const std::function<bool( const zypp::media::MountEntry &)> predicate );
-
-    /*!
-     * Returns a predicate for the \ref checkAttached function that looks for a real device in the mount table
-     */
-    static const std::function<bool( const zypp::media::MountEntry &)> devicePredicate ( unsigned int majNr,  unsigned int minNr );
-
-    /*!
-     * Returns a predicate for the \ref checkAttached function that looks for a virtual mount ( like smb or nfs ) in the mount table
-     */
-    static const std::function<bool( const zypp::media::MountEntry &)> fstypePredicate ( const std::string &src, const std::vector<std::string> &fstypes );
-
-    /*!
-     * Returns a predicate for the \ref checkAttached function that looks for a bind mount in the mount table
-     */
-    static const std::function<bool( const zypp::media::MountEntry &)> bindMountPredicate ( const std::string &src );
-
     /*!
      * Called when the worker process exits
      */
@@ -194,26 +175,6 @@ namespace zyppng::worker {
     void redirect       ( const uint32_t id, const zypp::Url &url, const zypp::Pathname &newPath );
 
     /*!
-     * This will request a media change from the user and BLOCK until it was acknowledged.
-     *
-     */
-    enum MediaChangeRes {
-      SUCCESS,
-      ABORT,
-      SKIP
-    };
-    MediaChangeRes requestMediaChange ( const uint32_t id, const std::string &label, const int32_t mediaNr, const std::vector<std::string> &devices, const std::optional<std::string> &desc = {} );
-
-    /*!
-     * This will send a authorization request message to the controller, asking for credentials for a given \a url.
-     * The \a lastTimstamp should be initialized with the last \ref AuthInfo timestamp that was received from the controller
-     * or -1 if none was received before.
-     *
-     * \note this blocks until a answer is received, all other received messages are delayed
-     */
-    expected<AuthInfo> requireAuthorization ( const uint32_t id, const zypp::Url &url, const std::string &lastTriedUsername = "", const int64_t lastTimestamp = -1, const std::map<std::string, std::string> &extraFields = {} );
-
-    /*!
      * Returns the control IO datasource, only valid after \ref run was called
      */
     AsyncDataSource &controlIO ();
@@ -237,7 +198,6 @@ namespace zyppng::worker {
     ProvideNotificatioMode _provNotificationMode = QUEUE_NOT_EMTPY;
     bool _inControllerRequest = false; //< Used to signalize that we are currently in a blocking controller callback
     bool _isRunning = false;
-    time_t  _attach_mtime = 0; //< Timestamp of the mtab we did read
     std::string_view _workerName;
     EventLoop::Ptr _loop = EventLoop::create();
     Timer::Ptr _msgAvail = Timer::create();

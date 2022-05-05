@@ -2,6 +2,7 @@
 
 #include <csignal>
 #include <zypp-core/zyppng/base/private/linuxhelpers_p.h>
+#include <zypp-media/ng/worker/MountingWorker>
 
 int main( int , char *[] )
 {
@@ -9,9 +10,11 @@ int main( int , char *[] )
   // to CTRL+C us
   zyppng::blockSignalsForCurrentThread( { SIGPIPE, SIGINT } );
 
-  auto provider = std::make_shared<NfsProvider>("zypp-media-nfs");
-  auto res = provider->run (STDIN_FILENO, STDOUT_FILENO);
-  provider->immediateShutdown();
+  auto driver = std::make_shared<NfsProvider>();
+  auto worker = std::make_shared<zyppng::worker::MountingWorker>( "zypp-media-nfs", driver );
+  driver->setProvider( worker );
+
+  auto res = worker->run (STDIN_FILENO, STDOUT_FILENO);
   if ( res )
     return 0;
 

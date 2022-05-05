@@ -17,7 +17,9 @@ target_link_libraries( ${PROJECT_NAME} zypp-core )
 target_link_libraries( ${PROJECT_NAME} zypp-protobuf )
 target_link_libraries( ${PROJECT_NAME} ${PROTOBUF_LITE_LIBRARIES} )
 
-INSTALL( TARGETS ${PROJECT_NAME} DESTINATION "${ZYPP_LIBEXEC_INSTALL_DIR}" )
+IF ( INSTALL_NG_BINARIES )
+  INSTALL( TARGETS ${PROJECT_NAME} DESTINATION "${ZYPP_LIBEXEC_INSTALL_DIR}/workers" )
+ENDIF()
 
 set_target_properties( ${PROJECT_NAME}
     PROPERTIES

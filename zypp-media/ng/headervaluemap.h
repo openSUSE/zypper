@@ -120,15 +120,38 @@ namespace zyppng {
     HeaderValueMap( std::initializer_list<ValueMap::value_type> init );
 
     bool contains( const std::string &key ) const;
+    bool contains( const std::string_view &key ) const {
+      return contains(std::string(key));
+    }
+
     void set( const std::string &key, const Value &val );
     void set( const std::string &key, Value &&val );
     void add( const std::string &key, const Value &val);
     void clear ();
     ValueMap::size_type size() const noexcept;
+
     std::vector<Value> &values ( const std::string &key );
     const std::vector<Value> &values ( const std::string &key ) const;
 
+    std::vector<Value> &values ( const std::string_view &key ) {
+      return values( std::string(key) );
+    }
+
+    const std::vector<Value> &values ( const std::string_view &key ) const {
+      return values( std::string(key) );
+    }
+
+    /*!
+     * Returns the last entry with key \a str in the list of values
+     * or the default value specified in \a defaultVal
+     */
+    Value value ( const std::string_view &str, const Value &defaultVal = Value() ) const;
+    Value value ( const std::string &str, const Value &defaultVal = Value() ) const;
+
     Value &operator[]( const std::string &key );
+    Value &operator[]( const std::string_view &key );
+    const Value &operator[]( const std::string &key ) const;
+    const Value &operator[]( const std::string_view &key ) const;
 
     const_iterator erase( const const_iterator &i );
     bool erase( const std::string &key );

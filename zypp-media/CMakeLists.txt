@@ -64,6 +64,8 @@ SET( zypp_media_ng_HEADERS
   ng/ProvideRes
   ng/mediaverifier.h
   ng/MediaVerifier
+  ng/worker/devicedriver.h
+  ng/worker/DeviceDriver
   ng/worker/provideworker.h
   ng/worker/ProvideWorker
   ng/worker/mountingworker.h
@@ -90,6 +92,7 @@ SET( zypp_media_ng_SRCS
   ng/providemessage.cc
   ng/providequeue.cc
   ng/mediaverifier.cc
+  ng/worker/devicedriver.cc
   ng/worker/provideworker.cc
   ng/worker/mountingworker.cc
 )

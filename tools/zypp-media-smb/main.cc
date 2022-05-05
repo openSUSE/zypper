@@ -2,6 +2,7 @@
 
 #include <csignal>
 #include <zypp-core/zyppng/base/private/linuxhelpers_p.h>
+#include <zypp-media/ng/worker/MountingWorker>
 
 int main( int , char *[] )
 {
@@ -9,12 +10,14 @@ int main( int , char *[] )
   // to CTRL+C us
   zyppng::blockSignalsForCurrentThread( { SIGPIPE, SIGINT } );
 
-  auto provider = std::make_shared<SmbProvider>("zypp-media-smb");
-  auto res = provider->run (STDIN_FILENO, STDOUT_FILENO);
+  auto driver = std::make_shared<SmbProvider>();
+  auto worker = std::make_shared<zyppng::worker::MountingWorker>( "zypp-media-smb", driver );
+  driver->setProvider( worker );
+
+  auto res = worker->run (STDIN_FILENO, STDOUT_FILENO);
 
   MIL << "SMB Worker shutting down" << std::endl;
 
-  provider->immediateShutdown();
   if ( res )
     return 0;
 

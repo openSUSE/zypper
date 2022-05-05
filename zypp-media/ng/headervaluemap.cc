@@ -219,11 +219,38 @@ namespace zyppng {
     return _values.at(key);
   }
 
+  HeaderValueMap::Value HeaderValueMap::value ( const std::string_view &str, const HeaderValueMap::Value &defaultVal) const
+  { return value( std::string(str), defaultVal ); }
+
+  HeaderValueMap::Value HeaderValueMap::value ( const std::string &str, const HeaderValueMap::Value &defaultVal) const
+  {
+    if ( !contains(str) || !_values.at(str).size() )
+      return defaultVal;
+    return _values.at(str).back();
+  }
+
   HeaderValueMap::Value &HeaderValueMap::operator[](const std::string &key)
   {
     if ( !contains(key) )
       return InvalidValue;
     return _values[key].back();
+  }
+
+  HeaderValueMap::Value &HeaderValueMap::operator[]( const std::string_view &key )
+  {
+    return (*this)[std::string(key)];
+  }
+
+  const HeaderValueMap::Value &HeaderValueMap::operator[]( const std::string &key ) const
+  {
+    if ( !contains(key) )
+      return InvalidValue;
+    return _values.at(key).back();
+  }
+
+  const HeaderValueMap::Value &HeaderValueMap::operator[]( const std::string_view &key ) const
+  {
+    return (*this)[std::string(key)];
   }
 
   HeaderValueMap::const_iterator HeaderValueMap::erase(const const_iterator &i)
