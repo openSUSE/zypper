@@ -23,6 +23,7 @@
 #include <zypp/PoolItem.h>
 #include <zypp/Product.h>
 #include <zypp/Pattern.h>
+#include <zypp/AutoDispose.h>
 
 #include "main.h"
 #include "Zypper.h"
@@ -627,7 +628,8 @@ Pathname cache_rpm( const std::string & rpm_uri_str, const Pathname & cache_dir 
   try
   {
     media::MediaManager mm;
-    media::MediaAccessId mid = mm.open(rpmurl);
+    AutoDispose<media::MediaAccessId> mid { mm.open(rpmurl) };
+    mid.setDispose( [&mm]( media::MediaAccessId mid ){ mm.release(mid); mm.close(mid); } );
     mm.attach(mid);
 
     mm.provideFile(mid, rpmpath.basename());
@@ -635,9 +637,6 @@ Pathname cache_rpm( const std::string & rpm_uri_str, const Pathname & cache_dir 
     filesystem::assert_dir(cache_dir);
     bool error =
       filesystem::hardlinkCopy(localrpmpath, cache_dir / localrpmpath.basename());
-
-    mm.release(mid);
-    mm.close(mid);
 
     if ( error )
     {
