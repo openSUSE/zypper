@@ -1483,20 +1483,24 @@ namespace zypp
         }
         else
         {
-          // single trans mode does a test install via rpm
-          if ( policy_r.singleTransModeEnabled() ) {
-            commitInSingleTransaction( policy_r, packageCache, result );
-          } else {
-            if ( ! policy_r.dryRun() )
-            {
+          if ( ! policy_r.dryRun() )
+          {
+            if ( policy_r.singleTransModeEnabled() ) {
+              commitInSingleTransaction( policy_r, packageCache, result );
+            } else {
               // if cache is preloaded, check for file conflicts
               commitFindFileConflicts( policy_r, result );
               commit( policy_r, packageCache, result );
             }
-            else
-            {
-              DBG << "dryRun/downloadOnly: Not installing/deleting anything." << endl;
-              if ( explicitDryRun ) {
+          }
+          else
+          {
+            DBG << "dryRun/downloadOnly: Not installing/deleting anything." << endl;
+            if ( explicitDryRun ) {
+              if ( policy_r.singleTransModeEnabled() ) {
+                // single trans mode does a test install via rpm
+                commitInSingleTransaction( policy_r, packageCache, result );
+              } else {
                 // if cache is preloaded, check for file conflicts
                 commitFindFileConflicts( policy_r, result );
               }
