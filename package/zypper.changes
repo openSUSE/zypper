@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Tue May 17 12:32:09 CEST 2022 - ma@suse.de
+
+- Return ZYPPER_EXIT_INF_RPM_SCRIPT_FAILED (107) also if %posttrans
+  script failed. Requires ZYPPER_ON_CODE12_RETURN_107=1 being set
+  in the environment (bsc#1198139)
+- version 1.13.62
+
+-------------------------------------------------------------------
 Mon May  2 15:30:49 CEST 2022 - ma@suse.de
 
 - info: Fix SEGV with not installed PTFs (bsc#1196317)
