@@ -12,14 +12,39 @@
 
 #include <zypp/base/Logger.h>
 #include <zypp/base/String.h>
+#include <zypp/base/Regex.h>
 #include <zypp/ZYppCallbacks.h>
 
 #include "Zypper.h"
 #include "output/prompt.h"
 
 ///////////////////////////////////////////////////////////////////
+namespace env
+{
+  bool ZYPPER_ON_CODE12_RETURN_107(); // in callbacks/rpm.h
+} // namespace env
+///////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////
 namespace ZmartRecipients
 {
+  /** bsc#1198139: return 107 if %posttrans fails.
+   * %posttrans are executed by libzypp directly, that's why the failure is
+   * reported here and not via the rpm callbacks.
+   * Returning 107 is not backported to Code-12,but we make it available if
+   * $ZYPPER_ON_CODE12_RETURN_107 is set in the environment.
+   **/
+  inline void checkFailedPosttrans( const std::string & msg_r )
+  {
+    static const bool envZYPPER_ON_CODE12_RETURN_107 = env::ZYPPER_ON_CODE12_RETURN_107();
+    if ( envZYPPER_ON_CODE12_RETURN_107 ) {
+      static str::regex  rx("%posttrans script failed \\(returned");  // sent from libzypp(RpmPostTransCollector)
+      static str::smatch what;
+      if ( str::regex_match( msg_r, what, rx ) )
+        Zypper::instance().setExitInfoCode( ZYPPER_EXIT_INF_RPM_SCRIPT_FAILED );
+    }
+  }
+
   ///////////////////////////////////////////////////////////////////
   /// \class JobReportReceiver
   /// \brief Receive generic notification callbacks
@@ -40,6 +65,7 @@ namespace ZmartRecipients
 	  break;
 
 	case MsgType::warning:
+          checkFailedPosttrans( msg_r );  // bsc#1198139: return 107 if %posttrans fails
 	  out.warning( msg_r );
 	  break;
 
