@@ -116,12 +116,6 @@ namespace internal {
       _timeRcv = now;
       _dnlNow = dlnow;
     }
-    else if ( !_dnlNow && !_dnlTotal )
-    {
-      // Start time counting as soon as first data arrives.
-      // Skip the connection / redirection time at begin.
-      return;
-    }
 
     // init or reset if time jumps back
     if ( !_timeStart || _timeStart > now )
