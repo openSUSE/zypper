@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-03-14 15:21+0100\n"
-"PO-Revision-Date: 2022-03-09 05:31+0000\n"
-"Last-Translator: Andika Triwidada <andika@gmail.com>\n"
+"PO-Revision-Date: 2022-05-20 11:13+0000\n"
+"Last-Translator: Kukuh Syafaat <syafaatkukuh@gmail.com>\n"
 "Language-Team: Indonesian <https://l10n.opensuse.org/projects/libzypp/master/"
 "id/>\n"
 "Language: id\n"
@@ -5043,11 +5043,11 @@ msgstr "Gagal menghapus kunci publik %1%"
 
 #: zypp/target/rpm/RpmDb.cc:1271
 msgid "Package header is not signed!"
-msgstr ""
+msgstr "Header paket tidak ditandatangani!"
 
 #: zypp/target/rpm/RpmDb.cc:1273
 msgid "Package payload is not signed!"
-msgstr ""
+msgstr "Payload paket tidak ditandatangani!"
 
 #. Translator: %s = name of an rpm package. A list of diffs follows
 #. this message.
