@@ -7,81 +7,82 @@ msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-03-14 15:21+0100\n"
-"PO-Revision-Date: 2001-07-17 16:12+0200\n"
-"Last-Translator: Зоран Димовски <zoki.dimovski@gmail.com>\n"
-"Language-Team: Macedonian <i18n@suse.de>\n"
+"PO-Revision-Date: 2022-05-24 10:13+0000\n"
+"Last-Translator: Kristijan Fremen Velkovski <me@krisfremen.com>\n"
+"Language-Team: Macedonian <https://l10n.opensuse.org/projects/libzypp/master/"
+"mk/>\n"
 "Language: mk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.9.1\n"
 
 #: zypp/CountryCode.cc:50
 msgid "Unknown country: "
-msgstr ""
+msgstr "Непозната држава: "
 
 #. Defined CountryCode constants
 #. Defined LanguageCode constants
 #: zypp/CountryCode.cc:149 zypp/LanguageCode.cc:148
 msgid "No Code"
-msgstr ""
+msgstr "Без код"
 
 #: zypp/CountryCode.cc:158
 msgid "Andorra"
-msgstr ""
+msgstr "Андора"
 
 # US
 # fuzzy
 #. :AND:020:
 #: zypp/CountryCode.cc:159
-#, fuzzy
 msgid "United Arab Emirates"
-msgstr "Соединетите Американски Држави"
+msgstr "Соединети Американски Држави"
 
 #. :ARE:784:
 #: zypp/CountryCode.cc:160
 msgid "Afghanistan"
-msgstr ""
+msgstr "Афганистан"
 
 # AG
 #. :AFG:004:
 #: zypp/CountryCode.cc:161
 msgid "Antigua and Barbuda"
-msgstr "Antigua и Barbuda"
+msgstr "Антигва и Барбуда"
 
 #. :ATG:028:
 #: zypp/CountryCode.cc:162
 msgid "Anguilla"
-msgstr ""
+msgstr "Ангила"
 
 #. :AIA:660:
 #: zypp/CountryCode.cc:163
 msgid "Albania"
-msgstr ""
+msgstr "Албанија"
 
 # AM
 # fuzzy
 #. :ALB:008:
 #: zypp/CountryCode.cc:164
 msgid "Armenia"
-msgstr "Аргентина"
+msgstr "Арменија"
 
 # AN
 # fuzzy
 #. :ARM:051:
 #: zypp/CountryCode.cc:165
 msgid "Netherlands Antilles"
-msgstr "Холандија"
+msgstr "Холандски Антили"
 
 #. :ANT:530:
 #: zypp/CountryCode.cc:166
 msgid "Angola"
-msgstr ""
+msgstr "Ангола"
 
 #. :AGO:024:
 #: zypp/CountryCode.cc:167
 msgid "Antarctica"
-msgstr ""
+msgstr "Антарктика"
 
 # AR
 #. :ATA:010:
@@ -94,7 +95,7 @@ msgstr "Аргентина"
 #. :ARG:032:
 #: zypp/CountryCode.cc:169
 msgid "American Samoa"
-msgstr "Америка, Северна"
+msgstr "Америчка Самоа"
 
 # AT
 #. :ASM:016:
@@ -111,7 +112,7 @@ msgstr "Австралија"
 #. :AUS:036:
 #: zypp/CountryCode.cc:172
 msgid "Aruba"
-msgstr ""
+msgstr "Аруба"
 
 # FO
 # fuzzy
@@ -131,7 +132,7 @@ msgstr "Српски"
 #. :AZE:031:
 #: zypp/CountryCode.cc:175
 msgid "Bosnia and Herzegovina"
-msgstr ""
+msgstr "Босна и Херцеговина"
 
 # BB
 #. :BIH:070:
@@ -155,7 +156,7 @@ msgstr "Белгија"
 #. :BEL:056:
 #: zypp/CountryCode.cc:179
 msgid "Burkina Faso"
-msgstr ""
+msgstr "Буркина Фасо"
 
 # BG
 #. :BFA:854:
@@ -173,22 +174,22 @@ msgstr "Бразил"
 #. :BHR:048:
 #: zypp/CountryCode.cc:182
 msgid "Burundi"
-msgstr ""
+msgstr "Бурунди"
 
 #. :BDI:108:
 #: zypp/CountryCode.cc:183
 msgid "Benin"
-msgstr ""
+msgstr "Бенин"
 
 #. :BEN:204:
 #: zypp/CountryCode.cc:184
 msgid "Bermuda"
-msgstr ""
+msgstr "Бермуда"
 
 #. :BMU:060:
 #: zypp/CountryCode.cc:185
 msgid "Brunei Darussalam"
-msgstr ""
+msgstr "Брунеј"
 
 # BO
 #. :BRN:096:
@@ -212,7 +213,7 @@ msgstr "Панама"
 #. :BHS:044:
 #: zypp/CountryCode.cc:189
 msgid "Bhutan"
-msgstr ""
+msgstr "Бутан"
 
 # FO
 # fuzzy
@@ -225,7 +226,7 @@ msgstr "Ирска"
 #. :BVT:074:
 #: zypp/CountryCode.cc:191
 msgid "Botswana"
-msgstr ""
+msgstr "Боцвана"
 
 # BY
 # fuzzy
@@ -249,14 +250,15 @@ msgstr "Канада"
 
 #. :CAN:124:
 #: zypp/CountryCode.cc:195
+#, fuzzy
 msgid "Cocos (Keeling) Islands"
-msgstr ""
+msgstr "Кокосови Острови"
 
 #. :CCK:166:
 #. :CAF:140:
 #: zypp/CountryCode.cc:196 zypp/CountryCode.cc:198
 msgid "Congo"
-msgstr ""
+msgstr "Конго"
 
 # CF
 # fuzzy
@@ -274,15 +276,14 @@ msgstr "Швајцарија"
 #. :CHE:756:
 #: zypp/CountryCode.cc:200
 msgid "Cote D'Ivoire"
-msgstr ""
+msgstr "Брег на Слоновата Коска"
 
 # FO
 # fuzzy
 #. :CIV:384:
 #: zypp/CountryCode.cc:201
-#, fuzzy
 msgid "Cook Islands"
-msgstr "Ирска"
+msgstr "Кукови Острови"
 
 # CL
 #. :COK:184:
@@ -293,7 +294,7 @@ msgstr "Чиле"
 #. :CHL:152:
 #: zypp/CountryCode.cc:203
 msgid "Cameroon"
-msgstr ""
+msgstr "Камерун"
 
 # CN
 #. :CMR:120:
@@ -311,7 +312,7 @@ msgstr "Колумбија"
 #. :COL:170:
 #: zypp/CountryCode.cc:206
 msgid "Costa Rica"
-msgstr ""
+msgstr "Коста Рика"
 
 # CU
 # fuzzy
@@ -323,17 +324,17 @@ msgstr "Колумбија"
 #. :CUB:192:
 #: zypp/CountryCode.cc:208
 msgid "Cape Verde"
-msgstr ""
+msgstr "Зелен ’Рт"
 
 #. :CPV:132:
 #: zypp/CountryCode.cc:209
 msgid "Christmas Island"
-msgstr ""
+msgstr "Божиќен Остров"
 
 #. :CXR:162:
 #: zypp/CountryCode.cc:210
 msgid "Cyprus"
-msgstr ""
+msgstr "Кипар"
 
 # CZ
 # fuzzy
@@ -351,7 +352,7 @@ msgstr "Германија"
 #. :DEU:276:
 #: zypp/CountryCode.cc:213
 msgid "Djibouti"
-msgstr ""
+msgstr "Џибути"
 
 # DK
 #. :DJI:262:
@@ -402,12 +403,12 @@ msgstr "Енергија"
 #. :EGY:818:
 #: zypp/CountryCode.cc:221
 msgid "Western Sahara"
-msgstr ""
+msgstr "Западна Сахара"
 
 #. :ESH:732:
 #: zypp/CountryCode.cc:222
 msgid "Eritrea"
-msgstr ""
+msgstr "Еритреја"
 
 # ES
 #. :ERI:232:
