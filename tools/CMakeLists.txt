@@ -28,6 +28,7 @@ ADD_SUBDIRECTORY( zypp-media-smb )
 ADD_SUBDIRECTORY( zypp-media-dir )
 ADD_SUBDIRECTORY( zypp-media-disk )
 ADD_SUBDIRECTORY( zypp-media-iso )
+ADD_SUBDIRECTORY( zypp-media-copy )
 ADD_SUBDIRECTORY( zypp-media-tvm )
 
 FIND_PACKAGE( Notcurses++ )
