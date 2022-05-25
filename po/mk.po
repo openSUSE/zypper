@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-03-14 15:21+0100\n"
-"PO-Revision-Date: 2022-05-24 10:13+0000\n"
+"PO-Revision-Date: 2022-05-25 20:12+0000\n"
 "Last-Translator: Kristijan Fremen Velkovski <me@krisfremen.com>\n"
 "Language-Team: Macedonian <https://l10n.opensuse.org/projects/libzypp/master/"
 "mk/>\n"
@@ -432,17 +432,17 @@ msgstr "Финска"
 #. :FIN:246:
 #: zypp/CountryCode.cc:226
 msgid "Fiji"
-msgstr ""
+msgstr "Фиџи"
 
 #. :FJI:242:
 #: zypp/CountryCode.cc:227
 msgid "Falkland Islands (Malvinas)"
-msgstr ""
+msgstr "Фолкландските Острови (Малвини)"
 
 #. :FLK:238:
 #: zypp/CountryCode.cc:228
 msgid "Federated States of Micronesia"
-msgstr ""
+msgstr "Сојузни Држави на Микронезија"
 
 # FO
 # fuzzy
@@ -460,12 +460,12 @@ msgstr "Франција"
 #. :FRA:250:
 #: zypp/CountryCode.cc:231
 msgid "Metropolitan France"
-msgstr ""
+msgstr "Метрополитна Франција"
 
 #. :FXX:249:
 #: zypp/CountryCode.cc:232
 msgid "Gabon"
-msgstr ""
+msgstr "Габон"
 
 #. :GAB:266:
 #: zypp/CountryCode.cc:233
@@ -1424,7 +1424,7 @@ msgstr "Финска"
 #. :VGB:092:
 #: zypp/CountryCode.cc:394
 msgid "Virgin Islands, U.S."
-msgstr "Финска"
+msgstr "Американски Девствени Острови"
 
 #. :VIR:850:
 #: zypp/CountryCode.cc:395
@@ -4103,9 +4103,9 @@ msgstr ""
 #. TranslatorExplanation '%s' is a pathname
 #: zypp/RepoManager.cc:321 zypp/RepoManager.cc:784 zypp/RepoManager.cc:1565
 #: zypp/repo/PluginServices.cc:49
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Failed to read directory '%s'"
-msgstr "Failed to parse: %s."
+msgstr "Неможеше да се прочита директориумот '%s'"
 
 #: zypp/RepoManager.cc:331
 #, boost-format
@@ -4143,9 +4143,9 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: zypp/RepoManager.cc:1172 zypp/RepoManager.cc:1285 zypp/RepoManager.cc:1341
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Can't create %s"
-msgstr "Couldn't open file: %s."
+msgstr "Неможеше да се створи %s"
 
 #: zypp/RepoManager.cc:1180
 msgid "Can't create metadata cache directory."
@@ -4162,9 +4162,9 @@ msgid "Can't create cache at %s - no writing permissions."
 msgstr ""
 
 #: zypp/RepoManager.cc:1408
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Failed to cache repo (%d)."
-msgstr "Failed to parse: %s."
+msgstr "Неможеше да се кешира складиштето (%d)."
 
 #: zypp/RepoManager.cc:1419
 msgid "Unhandled repository type"
@@ -4209,9 +4209,9 @@ msgstr ""
 
 #. TranslatorExplanation '%s' is a filename
 #: zypp/RepoManager.cc:1809 zypp/RepoManager.cc:2011
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Can't delete '%s'"
-msgstr "Couldn't open file: %s."
+msgstr "Неможеше да се избрише '%s'"
 
 #: zypp/RepoManager.cc:1999 zypp/RepoManager.cc:2449
 msgid "Can't figure out where the service is stored."
@@ -4831,9 +4831,8 @@ msgid " executed"
 msgstr ""
 
 #: zypp/target/TargetImpl.cc:441
-#, fuzzy
 msgid " execution failed"
-msgstr "DBI Execution failed: %s"
+msgstr " егзекуцијата не успеа"
 
 #. translators: We may find the same script content in files with different names.
 #. Only the first occurence is executed, subsequent ones are skipped. It's a one-line
@@ -5123,9 +5122,9 @@ msgid "Can't chroot to '%s' (%s)."
 msgstr ""
 
 #: zypp-core/zyppng/io/forkspawnengine.cc:282
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Can't chdir to '%s' (%s)."
-msgstr "Couldn't open file: %s."
+msgstr "Неможеше да се chdir-а во '%s' (%s)."
 
 #: zypp-core/zyppng/io/forkspawnengine.cc:283
 #, c-format, boost-format
@@ -5165,14 +5164,14 @@ msgid "Can't exec '%s', unexpected error."
 msgstr ""
 
 #: zypp-media/mediaexception.cc:33
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Failed to mount %s on %s"
-msgstr "Failed to parse: %s."
+msgstr "Неможеше да се монтира %s во %s"
 
 #: zypp-media/mediaexception.cc:43
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Failed to unmount %s"
-msgstr "Failed to parse: %s."
+msgstr "Неможеше да се демонтира %s"
 
 #: zypp-media/mediaexception.cc:48
 #, c-format, boost-format
