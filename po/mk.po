@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-03-14 15:21+0100\n"
-"PO-Revision-Date: 2022-05-25 20:12+0000\n"
+"PO-Revision-Date: 2022-05-26 04:13+0000\n"
 "Last-Translator: Kristijan Fremen Velkovski <me@krisfremen.com>\n"
 "Language-Team: Macedonian <https://l10n.opensuse.org/projects/libzypp/master/"
 "mk/>\n"
@@ -470,7 +470,7 @@ msgstr "Габон"
 #. :GAB:266:
 #: zypp/CountryCode.cc:233
 msgid "United Kingdom"
-msgstr ""
+msgstr "Обединето Кралство"
 
 # GD
 #. :GBR:826:
@@ -507,7 +507,7 @@ msgstr "Кина"
 #. :GHA:288:
 #: zypp/CountryCode.cc:239
 msgid "Gibraltar"
-msgstr ""
+msgstr "Гибралтар"
 
 # GL
 # fuzzy
@@ -526,17 +526,17 @@ msgstr "Јамајка"
 #. :GMB:270:
 #: zypp/CountryCode.cc:242
 msgid "Guinea"
-msgstr ""
+msgstr "Гвинеја"
 
 #. :GIN:324:
 #: zypp/CountryCode.cc:243
 msgid "Guadeloupe"
-msgstr ""
+msgstr "Гваделуп"
 
 #. :GLP:312:
 #: zypp/CountryCode.cc:244
 msgid "Equatorial Guinea"
-msgstr ""
+msgstr "Екваторска Гвинеја"
 
 # GR
 #. :GNQ:226:
@@ -547,7 +547,7 @@ msgstr "Грција"
 #. :GRC:300:
 #: zypp/CountryCode.cc:246
 msgid "South Georgia and the South Sandwich Islands"
-msgstr ""
+msgstr "Јужна Џорџија и Јужни Сендвички Острови"
 
 # GT
 #. :SGS:239:
@@ -565,17 +565,17 @@ msgstr "Гватемала"
 #. :GUM:316:
 #: zypp/CountryCode.cc:249
 msgid "Guinea-Bissau"
-msgstr ""
+msgstr "Гвинеја-Бисао"
 
 #. :GNB:624:
 #: zypp/CountryCode.cc:250
 msgid "Guyana"
-msgstr ""
+msgstr "Гвајана"
 
 #. :GUY:328:
 #: zypp/CountryCode.cc:251
 msgid "Hong Kong"
-msgstr ""
+msgstr "Хонгконг"
 
 #. :HKG:344:
 #: zypp/CountryCode.cc:252
@@ -597,7 +597,7 @@ msgstr "Хрватска"
 #. :HRV:191:
 #: zypp/CountryCode.cc:255
 msgid "Haiti"
-msgstr ""
+msgstr "Хаити"
 
 # HU
 #. :HTI:332:
@@ -627,7 +627,7 @@ msgstr "Израел"
 #. :ISR:376:
 #: zypp/CountryCode.cc:260
 msgid "Isle of Man"
-msgstr ""
+msgstr "Островот Ман"
 
 # IN
 # fuzzy
@@ -638,7 +638,7 @@ msgstr "Икони"
 #. :IND:356:
 #: zypp/CountryCode.cc:262
 msgid "British Indian Ocean Territory"
-msgstr ""
+msgstr "Британска Индоокеанска Територија"
 
 # IQ
 # fuzzy
@@ -650,7 +650,7 @@ msgstr "Израел"
 #. :IRQ:368:
 #: zypp/CountryCode.cc:264
 msgid "Iran"
-msgstr ""
+msgstr "Иран"
 
 # IS
 #. :IRN:364:
@@ -667,7 +667,7 @@ msgstr "Италија"
 #. :ITA:380:
 #: zypp/CountryCode.cc:267
 msgid "Jersey"
-msgstr ""
+msgstr "Џерси"
 
 # JM
 # fuzzy
@@ -691,7 +691,7 @@ msgstr "Јапонија"
 #. :JPN:392:
 #: zypp/CountryCode.cc:271
 msgid "Kenya"
-msgstr ""
+msgstr "Кенија"
 
 # KZ
 # fuzzy
@@ -711,7 +711,7 @@ msgstr "Колумбија"
 #. :KHM:116:
 #: zypp/CountryCode.cc:274
 msgid "Kiribati"
-msgstr ""
+msgstr "Кирибати"
 
 #. :KIR:296:
 #: zypp/CountryCode.cc:275
