@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-03-14 15:21+0100\n"
-"PO-Revision-Date: 2018-03-09 22:04+0000\n"
+"PO-Revision-Date: 2022-05-29 21:13+0000\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <https://l10n.opensuse.org/projects/libzypp/"
 "master/nn/>\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 2.18\n"
+"X-Generator: Weblate 4.9.1\n"
 
 #: zypp/CountryCode.cc:50
 msgid "Unknown country: "
@@ -200,7 +200,7 @@ msgstr "Botswana"
 #. :BWA:072:
 #: zypp/CountryCode.cc:192
 msgid "Belarus"
-msgstr "Kviterussland"
+msgstr "Belarus"
 
 #. :BLR:112:
 #: zypp/CountryCode.cc:193
@@ -1542,7 +1542,7 @@ msgstr ""
 #. language code: bel be
 #: zypp/LanguageCode.cc:259
 msgid "Belarusian"
-msgstr "Kviterussisk"
+msgstr "Belarusisk"
 
 #. language code: bem
 #: zypp/LanguageCode.cc:261
