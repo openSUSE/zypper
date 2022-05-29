@@ -391,11 +391,11 @@ namespace zypp
     }
     catch ( const FileCheckException &e )
     {
-      ZYPP_RETHROW(e);
+      throw;  // let known exceptions bypass  silently
     }
     catch ( const Exception &e )
     {
-      ZYPP_RETHROW(e);
+      throw; // slet known exceptions bypass  silently
     }
     catch (...)
     {
