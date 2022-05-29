@@ -10,6 +10,8 @@
 #ifndef ZYPP_REPO_DOWNLOADER
 #define ZYPP_REPO_DOWNLOADER
 
+#include <optional>
+
 #include <zypp/Url.h>
 #include <zypp/Pathname.h>
 #include <zypp-core/ui/ProgressData>
@@ -17,11 +19,14 @@
 #include <zypp/MediaSetAccess.h>
 #include <zypp/Fetcher.h>
 #include <zypp/RepoInfo.h>
+#include <zypp/repo/PluginRepoverification.h>
 
 namespace zypp
 {
   namespace repo
   {
+    using zypp_private::repo::PluginRepoverification;
+
     /**
       * \short Downloader base class
       *
@@ -57,12 +62,20 @@ namespace zypp
 
       const RepoInfo & repoInfo() const { return _repoinfo; }
 
+
+      void setPluginRepoverification( std::optional<PluginRepoverification> pluginRepoverification_r )
+      { _pluginRepoverification = std::move(pluginRepoverification_r); }
+
+      void setNoPluginRepoverification()
+      { setPluginRepoverification( std::nullopt ); }
+
       protected:
         /** Common workflow downloading a (signed) master index file */
         void defaultDownloadMasterIndex( MediaSetAccess & media_r, const Pathname & destdir_r, const Pathname & masterIndex_r );
 
       private:
         RepoInfo _repoinfo;
+        std::optional<PluginRepoverification> _pluginRepoverification;  ///< \see \ref plugin-repoverification
     };
   } // ns repo
 } // ns zypp

@@ -46,6 +46,7 @@
 #include <zypp/repo/yum/Downloader.h>
 #include <zypp/repo/susetags/Downloader.h>
 #include <zypp/repo/PluginServices.h>
+#include <zypp/repo/PluginRepoverification.h>
 
 #include <zypp/Target.h> // for Target::targetDistribution() for repo index services
 #include <zypp/ZYppFactory.h> // to get the Target from ZYpp instance
@@ -518,11 +519,12 @@ namespace zypp
   /// \brief RepoManager implementation.
   ///
   ///////////////////////////////////////////////////////////////////
-  struct RepoManager::Impl
+  struct ZYPP_LOCAL RepoManager::Impl
   {
   public:
     Impl( const RepoManagerOptions &opt )
       : _options(opt)
+      , _pluginRepoverification( _options.pluginsPath/"repoverification", _options.rootDir )
     {
       init_knownServices();
       init_knownRepositories();
@@ -708,6 +710,8 @@ namespace zypp
     ServiceSet		_services;
 
     DefaultIntegral<bool,false> _reposDirty;
+
+    PluginRepoverification _pluginRepoverification;
 
   private:
     friend Impl * rwcowClone<Impl>( const Impl * rhs );
@@ -1189,8 +1193,11 @@ namespace zypp
 
           MIL << "Creating downloader for [ " << info.alias() << " ]" << endl;
 
-          if ( repokind.toEnum() == RepoType::RPMMD_e )
-            downloader_ptr.reset(new yum::Downloader(info, mediarootpath));
+          if ( repokind.toEnum() == RepoType::RPMMD_e ) {
+            downloader_ptr.reset(new yum::Downloader(info, mediarootpath ));
+            if ( _pluginRepoverification.checkIfNeeded() )
+              downloader_ptr->setPluginRepoverification( _pluginRepoverification ); // susetags is dead so we apply just to yum
+          }
           else
             downloader_ptr.reset( new susetags::Downloader(info, mediarootpath) );
 

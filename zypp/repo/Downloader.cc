@@ -140,10 +140,9 @@ void Downloader::download( MediaSetAccess &media,
 
 void Downloader::defaultDownloadMasterIndex( MediaSetAccess & media_r, const Pathname & destdir_r, const Pathname & masterIndex_r )
 {
+  // always download them, even if repoGpgCheck is disabled
   Pathname sigpath = masterIndex_r.extend( ".asc" );
   Pathname keypath = masterIndex_r.extend( ".key" );
-
-  // always download them, even if repoGpgCheck is disabled
 
   //enable precache for next start() call
   setMediaSetAccess( media_r );
@@ -152,21 +151,29 @@ void Downloader::defaultDownloadMasterIndex( MediaSetAccess & media_r, const Pat
   start( destdir_r );
   reset();
 
-  FileChecker checker;	// set to sigchecker if appropriate, else Null.
-  ExtraSignatureFileChecker sigchecker;
-  bool isSigned = PathInfo(destdir_r / sigpath).isExist();
+  // The local files are in destdir_r, if they were present on the server
+  Pathname sigpathLocal { destdir_r/sigpath };
+  Pathname keypathLocal { destdir_r/keypath };
 
+
+  CompositeFileChecker checkers;
+
+  if ( _pluginRepoverification && _pluginRepoverification->isNeeded() )
+    checkers.add( _pluginRepoverification->getChecker( sigpathLocal, keypathLocal, repoInfo() ) );
+
+  ExtraSignatureFileChecker sigchecker;
+  bool isSigned = PathInfo(sigpathLocal).isExist();
   if ( repoInfo().repoGpgCheck() )
   {
     if ( isSigned || repoInfo().repoGpgCheckIsMandatory() )
     {
       // only add the signature if it exists
       if ( isSigned )
-        sigchecker.signature( destdir_r / sigpath );
+        sigchecker.signature( sigpathLocal );
 
       // only add the key if it exists
-      if ( PathInfo(destdir_r / keypath).isExist() )
-        sigchecker.addPublicKey( destdir_r / keypath );
+      if ( PathInfo(keypathLocal).isExist() )
+        sigchecker.addPublicKey( keypathLocal );
 
       // set the checker context even if the key is not known
       // (unsigned repo, key file missing; bnc #495977)
@@ -187,7 +194,7 @@ void Downloader::defaultDownloadMasterIndex( MediaSetAccess & media_r, const Pat
           { INT << "Oops!" << endl; }
         });
       }
-      checker = FileChecker( ref(sigchecker) );	// ref() to the local sigchecker is important as we want back fileValidated!
+      checkers.add( ref(sigchecker) );	// ref() to the local sigchecker is important as we want back fileValidated!
     }
     else
     {
@@ -199,7 +206,7 @@ void Downloader::defaultDownloadMasterIndex( MediaSetAccess & media_r, const Pat
     WAR << "Signature checking disabled in config of repository " << repoInfo().alias() << endl;
   }
 
-  enqueue( OnMediaLocation( masterIndex_r, 1 ).setDownloadSize( ByteCount( 20, ByteCount::MB ) ), checker ? checker : FileChecker(NullFileChecker()) );
+  enqueue( OnMediaLocation( masterIndex_r, 1 ).setDownloadSize( ByteCount( 20, ByteCount::MB ) ), checkers );
   start( destdir_r, media_r );
   reset();
 

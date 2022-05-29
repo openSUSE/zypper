@@ -102,6 +102,8 @@ The plugins default location is obtained from \ref zypp::ZConfig::pluginsPath()
 
 \subpage plugin-system Receive notification if system content has changed
 
+\subpage plugin-repoverification Repository metadata verification beyond GPG
+
 \ref plugin-services
 
 \ref plugin-url-resolver

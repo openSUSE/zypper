@@ -38,6 +38,13 @@ Packages requiring a feature may use the corresponding \c Requires: in their .sp
     <DD>Added COMMITBEGIN/COMMITEND.</DD>
   </DL></DD>
 
+  <DT>plugin:repoverification</DT>
+  <DD><DL>
+    <DT>\ref plugin-repoverification </DT>
+    <DT>version 0</DT>
+    <DD>Repository metadata verification beyond GPG.</DD>
+  </DL></DD>
+
   <DT>plugin:services</DT>
   <DD><DL>
     <DT>\ref plugin-services </DT>
