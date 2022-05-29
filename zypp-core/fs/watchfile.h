@@ -56,11 +56,11 @@ namespace zypp
       WatchFile( const Pathname & path_r = Pathname(),
                  Initial mode            = INIT )
       : _path( path_r )
-      {
-        PathInfo pi( mode == INIT ? path_r : Pathname() );
-        _size  = pi.size();
-        _mtime = pi.mtime();
-      }
+      { ctorInit( mode ); }
+
+      WatchFile( Pathname && path_r, Initial mode = INIT )
+      : _path( std::move(path_r) )
+      { ctorInit( mode ); }
 
       const Pathname & path() const
       { return _path; }
@@ -87,6 +87,14 @@ namespace zypp
           return true;
         }
         return false;
+      }
+
+    private:
+      void ctorInit( Initial mode )
+      {
+        PathInfo pi( mode == INIT ? _path : Pathname() );
+        _size  = pi.size();
+        _mtime = pi.mtime();
       }
 
     private:
