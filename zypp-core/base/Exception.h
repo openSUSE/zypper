@@ -220,6 +220,16 @@ namespace zypp
     /** \overload std::exception_ptr */
     void remember( std::exception_ptr old_r );
 
+    /** Remembering a plain string is most probably not wanted - we \ref addHistory.
+     * It would discards the old history and replace it with this string.
+     * If that's actually your intent, explicitly wrap it into an \ref Exception.
+     */
+    void remember( const std::string & msg_r )
+    { addHistory( msg_r ); }
+    /** \overload moving */
+    void remember( std::string && msg_r )
+    { addHistory( std::move(msg_r) ); }
+
     /** Add some message text to the history. */
     void addHistory( const std::string & msg_r );
     /** \overload moving */
