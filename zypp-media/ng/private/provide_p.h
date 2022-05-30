@@ -98,6 +98,7 @@ namespace zyppng {
     expected<ProvideQueue::Config> schemeConfig(const std::string &scheme);
 
     std::shared_ptr<ProvideResourceData> addToFileCache    ( const zypp::Pathname &downloadedFile );
+    bool isInCache ( const zypp::Pathname &downloadedFile ) const;
 
     bool isRunning() const;
 

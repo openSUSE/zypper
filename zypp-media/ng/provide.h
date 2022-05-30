@@ -48,10 +48,12 @@ namespace zyppng {
     public:
       ProvideMediaHandle () = default;
       ProvideMediaHandle ( Provide &parent, const std::string &hdl );
+      std::shared_ptr<Provide> parent() const;
       bool isValid () const;
       std::string handle() const;
     private:
-      zypp::AutoDispose<std::string> _ref;
+      struct Data;
+      std::shared_ptr<Data> _ref;
   };
 
   /*!

@@ -31,6 +31,7 @@ class CopyProvider : public zyppng::worker::ProvideWorker
         zyppng::worker::WorkerCaps::Flags (
           zyppng::worker::WorkerCaps::Pipeline
           | zyppng::worker::WorkerCaps::ZyppLogFormat
+          | zyppng::worker::WorkerCaps::FileArtifacts
           )
         );
 

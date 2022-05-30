@@ -410,6 +410,9 @@ namespace zyppng {
       return true;
     };
 
+    const bool doesDownload = this->_capabilities.worker_type() == Config::Downloading;
+    const bool fileNeedsCleanup = doesDownload || ( _capabilities.worker_type() == Config::CPUBound && _capabilities.cfg_flags() & Config::FileArtifacts );
+
     while ( auto msg = _messageStream->nextMessage () ) {
 
       if ( msg->messagetypename() == rpc::messageTypeName<zypp::proto::ProvideMessage>() ) {
@@ -422,6 +425,13 @@ namespace zyppng {
 
         const auto &reqIter = getRequest( provMsg );
         if ( reqIter == _activeItems.end() ) {
+          if (  provMsg->code() == ProvideMessage::Code::ProvideFinished && fileNeedsCleanup ) {
+            const auto locFName = provMsg->value( ProvideFinishedMsgFields::LocalFilename ).asString();
+            if ( !_parent.isInCache(locFName) ) {
+              MIL << "Received a ProvideFinished message for a non existant request. Since this worker reported to create file artifacts, the file is cleaned up." << std::endl;
+              zypp::filesystem::unlink( locFName );
+            }
+          }
           continue;
         }
 
@@ -448,7 +458,8 @@ namespace zyppng {
           if ( code == ProvideMessage::Code::ProvideFinished ) {
 
             // we are going to register the file to the cache if this is a downloading worker, so it can not leak
-            // no matter if the item does the correct dance or not
+            // no matter if the item does the correct dance or not, this code is duplicated by all ProvideItems that receive ProvideFinished
+            // results that require file cleanups.
             // we keep the ref around until after sending the result to the item. At that point it should take a reference
             std::shared_ptr<ProvideResourceData> dataRef;
 
@@ -458,13 +469,9 @@ namespace zyppng {
               return;
             }
 
-            const bool fileNeedsCleanup = this->_capabilities.worker_type() == Config::Downloading
-                                          || ( _capabilities.worker_type() == Config::CPUBound && _capabilities.cfg_flags() & Config::FileArtifacts );
-
-            if ( fileNeedsCleanup ) {
-
+            // when a worker is downloading we keep a internal book of cache files
+            if ( doesDownload ) {
               const auto locFName = provMsg->value( ProvideFinishedMsgFields::LocalFilename ).asString();
-
               if ( provMsg->value( ProvideFinishedMsgFields::CacheHit, false ).asBool()) {
                 dataRef = _parent.addToFileCache ( locFName );
                 if ( !dataRef ) {

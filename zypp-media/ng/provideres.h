@@ -44,6 +44,13 @@ namespace zyppng
     const zypp::Pathname file () const;
 
     /*!
+     * Returns a reference to the internally used managed file instance.
+     * \note If you obtain this for a file that is inside the providers working directory ( e.g. a provide result for a download ),
+     *       the continued use after the Provide instance was relased is undefined behaviour and not supported!
+     */
+    const zypp::ManagedFile & asManagedFile () const;
+
+    /*!
      * Returns a reference to the currently held media handle, this can be a invalid handle
      */
     const ProvideMediaHandle &mediaHandle () const;

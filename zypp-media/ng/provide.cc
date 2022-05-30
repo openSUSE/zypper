@@ -611,6 +611,9 @@ namespace zyppng {
                 continue;
               }
             }
+          } else {
+            MIL_PRV << "No idle workers and no free CPU spots, wait for the next schedule run" << std::endl;
+            break;
           }
 
           // if we reach here we skip over the item and try to schedule it again later
@@ -739,6 +742,12 @@ namespace zyppng {
     i.first->second->_myFile = zypp::ManagedFile( downloadedFile, zypp::filesystem::unlink );
 
     return i.first->second;
+  }
+
+  bool ProvidePrivate::isInCache ( const zypp::Pathname &downloadedFile ) const
+  {
+    const auto &key = downloadedFile.asString();
+    return (_fileCache.count(key) > 0);
   }
 
   void ProvidePrivate::queueItem  ( ProvideItemRef item )
@@ -904,20 +913,39 @@ namespace zyppng {
     return ++_nextRequestId;
   }
 
+  struct ProvideMediaHandle::Data
+  {
+    Data( Provide &parent, const std::string &hdl )
+      : _parent( parent.weak_this<Provide>() )
+      , _hdlName(hdl) { }
+
+    ~Data() {
+      auto p = _parent.lock(); if (p) p->releaseMedia(_hdlName);
+    }
+
+    ProvideWeakRef _parent;
+    std::string _hdlName;
+  };
 
   ProvideMediaHandle::ProvideMediaHandle( Provide &parent, const std::string &hdl )
-  : _ref( hdl, [ weakP = parent.weak_this<Provide>() ]( const std::string &v ) { auto p = weakP.lock(); if (p) p->releaseMedia(v);})
+  : _ref( std::make_shared<ProvideMediaHandle::Data>( parent, hdl ) )
   {}
+
+  std::shared_ptr<Provide> ProvideMediaHandle::parent() const
+  {
+    return _ref->_parent.lock();
+  }
 
   bool ProvideMediaHandle::isValid() const
   {
-    return (!_ref->empty());
+    return ( _ref.get() != nullptr );
   }
 
   std::string ProvideMediaHandle::handle() const
   {
-    return _ref.value();
+    return _ref->_hdlName;
   }
+
 
   Provide::Provide( const zypp::Pathname &workDir ) : Base( *new ProvidePrivate( zypp::Pathname(workDir), *this ) )
   {

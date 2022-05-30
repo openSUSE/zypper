@@ -669,12 +669,12 @@ namespace zyppng {
         const auto cacheHit    = msg.value( ProvideFinishedMsgFields::CacheHit ).asBool();
         const auto &wConf      = queue.workerConfig();
 
-        const bool fileNeedsCleanup = wConf.worker_type() == ProvideQueue::Config::Downloading
-                                      || ( wConf.worker_type() == ProvideQueue::Config::CPUBound && wConf.cfg_flags() & ProvideQueue::Config::FileArtifacts );
+        const bool doesDownload     = wConf.worker_type() == ProvideQueue::Config::Downloading;
+        const bool fileNeedsCleanup = doesDownload || ( wConf.worker_type() == ProvideQueue::Config::CPUBound && wConf.cfg_flags() & ProvideQueue::Config::FileArtifacts );
 
         std::shared_ptr<ProvideResourceData> dataRef;
 
-        if ( fileNeedsCleanup ) {
+        if ( doesDownload ) {
 
           dataRef = provider().addToFileCache ( locFilename );
           if ( !dataRef ) {
@@ -696,7 +696,10 @@ namespace zyppng {
         } else {
           dataRef = std::make_shared<ProvideResourceData>();
           dataRef->_myFile = zypp::ManagedFile( zypp::filesystem::Pathname(locFilename) );
-          dataRef->_myFile.resetDispose();
+          if ( fileNeedsCleanup )
+            dataRef->_myFile.setDispose( zypp::filesystem::unlink );
+          else
+            dataRef->_myFile.resetDispose();
         }
 
         _targetFile = locFilename;

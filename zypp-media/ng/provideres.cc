@@ -26,6 +26,11 @@ namespace zyppng {
     return _data->_myFile;
   }
 
+  const zypp::ManagedFile & ProvideRes::asManagedFile () const
+  {
+    return _data->_myFile;
+  }
+
   const ProvideMediaHandle &ProvideRes::mediaHandle () const
   {
     return _data->_mediaHandle;
