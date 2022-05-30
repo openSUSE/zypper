@@ -1,4 +1,19 @@
 -------------------------------------------------------------------
+Mon May 30 14:37:57 CEST 2022 - ma@suse.de
+
+- PluginRepoverification: initial version hooked into
+  repo::Downloader and repo refresh.
+- Immediately start monitoring the download.transfer_timeout.
+  Do not wait until the first data arrived. (bsc#1199042)
+- singletrans: no dry-run commit if doing just download-only.
+- Work around cases where sat repo.start points to an invalid
+  solvable.  May happen if (wrong arch) solvables were removed
+  at the  beginning of the repo.
+- fix misplaced #endif SINGLE_RPMTRANS_AS_DEFAULT_FOR_ZYPPER
+  (fixes #388)
+- version 17.30.1 (22)
+
+-------------------------------------------------------------------
 Fri Mar 25 17:08:46 CET 2022 - ma@suse.de
 
 - ZConfig: Update solver settings if target changes (bsc#1196368)
