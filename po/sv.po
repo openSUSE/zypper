@@ -14,8 +14,8 @@ msgstr ""
 "Project-Id-Version: zypp.sv\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-03-14 15:21+0100\n"
-"PO-Revision-Date: 2022-03-04 22:12+0000\n"
-"Last-Translator: Fredrik Persson <fpersson.se@gmail.com>\n"
+"PO-Revision-Date: 2022-05-31 18:12+0000\n"
+"Last-Translator: Luna  Jernberg <bittin@opensuse.org>\n"
 "Language-Team: Swedish <https://l10n.opensuse.org/projects/libzypp/master/sv/"
 ">\n"
 "Language: sv\n"
@@ -4216,7 +4216,7 @@ msgstr "Det finns ingen URL i förrådet."
 #: zypp/repo/SUSEMediaVerifier.cc:104
 #, boost-format
 msgid "Expected medium %1%/%2% identified by file '%3%' with content:"
-msgstr ""
+msgstr "Förväntat medium %1%/%2% identifierat av filen '%3%' med innehåll:"
 
 #. [lhs][rhs] 0 = installed; 1 = to be installed
 #. TranslatorExplanation %1%(filename) %2%(package1) %3%(package2)
@@ -4404,7 +4404,7 @@ msgstr ""
 #: zypp/solver/detail/SATResolver.cc:1100
 #, boost-format
 msgid "problem with the installed %1%"
-msgstr ""
+msgstr "problem med den installerade %1%"
 
 #: zypp/solver/detail/SATResolver.cc:1103
 msgid "conflicting requests"
@@ -4417,17 +4417,17 @@ msgstr "vissa beroendeproblem"
 #: zypp/solver/detail/SATResolver.cc:1109
 #, boost-format
 msgid "nothing provides the requested '%1%'"
-msgstr ""
+msgstr "ingenting tillhandahåller den begärda '%1%'"
 
 #: zypp/solver/detail/SATResolver.cc:1110
 #: zypp/solver/detail/SATResolver.cc:1114
 msgid "Have you enabled all the required repositories?"
-msgstr ""
+msgstr "Har du aktiverat alla nödvändiga förråd?"
 
 #: zypp/solver/detail/SATResolver.cc:1113
 #, boost-format
 msgid "the requested package %1% does not exist"
-msgstr ""
+msgstr "det begärda paketet %1% finns inte"
 
 #: zypp/solver/detail/SATResolver.cc:1117
 msgid "unsupported request"
@@ -4436,7 +4436,7 @@ msgstr "begäran stöds inte"
 #: zypp/solver/detail/SATResolver.cc:1120
 #, boost-format
 msgid "'%1%' is provided by the system and cannot be erased"
-msgstr ""
+msgstr "'%1%' tillhandahålls av systemet och kan inte raderas"
 
 #: zypp/solver/detail/SATResolver.cc:1123
 #, boost-format
@@ -4456,12 +4456,13 @@ msgstr ""
 #: zypp/solver/detail/SATResolver.cc:1133
 #, boost-format
 msgid "cannot install both %1% and %2%"
-msgstr ""
+msgstr "kan inte installera både %1% och %2%"
 
 #: zypp/solver/detail/SATResolver.cc:1138
 #, boost-format
 msgid "the installed %1% conflicts with '%2%' provided by the installed %3%"
 msgstr ""
+"den installerade %1% står i konflikt med '%2%' från den installerade %3%"
 
 #: zypp/solver/detail/SATResolver.cc:1140
 #, boost-format
@@ -4546,7 +4547,7 @@ msgstr "leverantörer som inte går att installera: "
 #: zypp/solver/detail/SATResolver.cc:1253
 #, boost-format
 msgid "%1% is not yet fully integrated into %2%."
-msgstr ""
+msgstr "%1% är ännu inte helt integrerad i %2%."
 
 #: zypp/solver/detail/SATResolver.cc:1254
 msgid ""
@@ -4558,7 +4559,7 @@ msgstr ""
 #: zypp/solver/detail/SATResolver.cc:1259
 #, boost-format
 msgid "The installed %1% blocks the desired action."
-msgstr ""
+msgstr "Den installerade %1% blockerar önskad åtgärd."
 
 #: zypp/solver/detail/SATResolver.cc:1260
 msgid "Typically you want to keep the PTF and choose to cancel the action."
@@ -4567,24 +4568,24 @@ msgstr ""
 #: zypp/solver/detail/SATResolver.cc:1316
 #, boost-format
 msgid "remove lock to allow removal of %1%"
-msgstr ""
+msgstr "ta bort lås för att tillåta borttagning av %1%"
 
 #: zypp/solver/detail/SATResolver.cc:1321
 #: zypp/solver/detail/SATResolver.cc:1359
 #, boost-format
 msgid "do not install %1%"
-msgstr ""
+msgstr "installera inte %1%"
 
 #: zypp/solver/detail/SATResolver.cc:1338
 #: zypp/solver/detail/SATResolver.cc:1380
 #, boost-format
 msgid "keep %1%"
-msgstr ""
+msgstr "behåll %1%"
 
 #: zypp/solver/detail/SATResolver.cc:1343
 #, boost-format
 msgid "remove lock to allow installation of %1%"
-msgstr ""
+msgstr "ta bort lås för att tillåta installation av %1%"
 
 #: zypp/solver/detail/SATResolver.cc:1394
 #: zypp/solver/detail/SATResolver.cc:1415
@@ -4609,7 +4610,7 @@ msgstr ""
 #: zypp/solver/detail/SATResolver.cc:1435
 #, boost-format
 msgid "do not install most recent version of %1%"
-msgstr ""
+msgstr "installera inte senaste versionen av %1%"
 
 #: zypp/solver/detail/SATResolver.cc:1456
 #, boost-format
@@ -4624,7 +4625,7 @@ msgstr ""
 #: zypp/solver/detail/SATResolver.cc:1470
 #, boost-format
 msgid "keep obsolete %1%"
-msgstr ""
+msgstr "behåll föråldrad %1%"
 
 #: zypp/solver/detail/SATResolver.cc:1475
 #, boost-format
@@ -4652,12 +4653,12 @@ msgstr ""
 #: zypp/solver/detail/SATResolver.cc:1515
 #, boost-format
 msgid "downgrade of %1% to %2%"
-msgstr ""
+msgstr "nergradering av %1% till %2%"
 
 #: zypp/solver/detail/SATResolver.cc:1522
 #, boost-format
 msgid "architecture change of %1% to %2%"
-msgstr ""
+msgstr "arkitekturändring på %1% till %2%"
 
 #. FIXME? Actually .ident() must be eq. But the more verbose 'else' isn't bad either.
 #: zypp/solver/detail/SATResolver.cc:1533
@@ -4666,6 +4667,8 @@ msgid ""
 "install %1% (with vendor change)\n"
 "  %2%  -->  %3%"
 msgstr ""
+"installera %1% (med leverantörsändring)\n"
+"  %2%  -->  %3%"
 
 #: zypp/solver/detail/SATResolver.cc:1538
 #, boost-format
@@ -4673,16 +4676,18 @@ msgid ""
 "install %1% from vendor %2%\n"
 "  replacing %3% from vendor %4%"
 msgstr ""
+"installera %1% från leverantör %2%\n"
+"  ersätter %3% från leverantören %4%"
 
 #: zypp/solver/detail/SATResolver.cc:1547
 #, boost-format
 msgid "replacement of %1% with %2%"
-msgstr ""
+msgstr "ersättning av %1% med %2%"
 
 #: zypp/solver/detail/SATResolver.cc:1558
 #, boost-format
 msgid "deinstallation of %1%"
-msgstr ""
+msgstr "avinstallation av %1%"
 
 #: zypp/target/RpmPostTransCollector.cc:98
 #, boost-format
@@ -4732,7 +4737,7 @@ msgstr "Nytt uppdateringsmeddelande"
 
 #: zypp/target/TargetImpl.cc:2688
 msgid "Executing the transaction failed because of the following problems:"
-msgstr ""
+msgstr "Det gick inte att utföra transaktionen på grund av följande problem:"
 
 #. TranslatorExplanation after semicolon is error message
 #. TranslatorExplanation the colon is followed by an error message
@@ -5024,12 +5029,12 @@ msgstr "Kan inte dela upp (%s)."
 #: zypp-core/zyppng/io/forkspawnengine.cc:338
 #, c-format, boost-format
 msgid "Can't exec '%s', chdir failed (%s)."
-msgstr ""
+msgstr "Kan inte köra '%s', chdir misslyckades (%s)."
 
 #: zypp-core/zyppng/io/forkspawnengine.cc:341
 #, c-format, boost-format
 msgid "Can't exec '%s', chroot failed (%s)."
-msgstr ""
+msgstr "Kan inte köra '%s', chroot misslyckades (%s)."
 
 #: zypp-core/zyppng/io/forkspawnengine.cc:344
 #, c-format, boost-format
