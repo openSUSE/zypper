@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-02-23 18:47+0100\n"
-"PO-Revision-Date: 2022-03-07 05:12+0000\n"
-"Last-Translator: Kukuh Syafaat <syafaatkukuh@gmail.com>\n"
+"PO-Revision-Date: 2022-05-31 23:13+0000\n"
+"Last-Translator: Salman Mubarak <salmandjuli@gmail.com>\n"
 "Language-Team: Indonesian <https://l10n.opensuse.org/projects/zypper/master/"
 "id/>\n"
 "Language: id\n"
@@ -21,7 +21,7 @@ msgstr ""
 
 #: src/Command.cc:93
 msgid "Invalid command"
-msgstr "Perintah tidak valid"
+msgstr "Perintah tidak sesuai"
 
 #: src/Command.cc:111
 msgid "Repository Management:"
@@ -37,11 +37,11 @@ msgstr "Manajemen Perangkat Lunak:"
 
 #: src/Command.cc:131
 msgid "Update Management:"
-msgstr "Manajemen Pemutakhiran:"
+msgstr "Manajemen Pembaruan:"
 
 #: src/Command.cc:138
 msgid "Querying:"
-msgstr "Mengkueri:"
+msgstr "Menanyakan:"
 
 #: src/Command.cc:149
 msgid "Package Locks:"
@@ -49,7 +49,7 @@ msgstr "Kunci Paket:"
 
 #: src/Command.cc:154
 msgid "Locale Management:"
-msgstr "Manajemen Locale:"
+msgstr "Manajemen Lokal:"
 
 #: src/Command.cc:158
 msgid "Other Commands:"
@@ -62,17 +62,17 @@ msgstr "Sub perintah:"
 #: src/Command.cc:288
 #, c-format, boost-format
 msgid "Unknown command '%s'"
-msgstr "Perintah '%s' tidak dikenal"
+msgstr "Perintah '%s' tidak diketahui"
 
 #: src/CommitSummary.cc:90
 msgid "Installation has completed with error."
-msgstr "Instalasi selesai dengan galat."
+msgstr "Instalasi selesai dengan kesalahan."
 
 #: src/CommitSummary.cc:92
 #, boost-format
 msgid "You may run '%1%' to repair any dependency problems."
 msgstr ""
-"Anda dapat menjalankan '%1%' untuk memperbaiki masalah dependensi apa pun."
+"Anda dapat menjalankan '%1%' untuk memperbaiki setiap masalah dependensi."
 
 #: src/CommitSummary.cc:125
 #, c-format, boost-format
@@ -110,7 +110,7 @@ msgstr[0] "... dan %1% item lagi."
 #: src/Config.cc:53
 #, c-format, boost-format
 msgid "Invalid table style %d."
-msgstr "Gaya tabel %d tidak valid."
+msgstr "Gaya tabel %d tidak sah."
 
 #: src/Config.cc:54
 #, c-format, boost-format
@@ -119,7 +119,7 @@ msgstr " Gunakan bilangan bulat dari %d hingga %d"
 
 #: src/Config.cc:244
 msgid "The path specified in the --root option must be absolute."
-msgstr "Path yang ditentukan dalam opsi - root harus mutlak."
+msgstr "Jalur yang ditentukan dalam opsi - root harus mutlak."
 
 #. translators: --help, -h
 #: src/Config.cc:322
@@ -129,17 +129,18 @@ msgstr "Bantuan."
 #. translators: --version, -V
 #: src/Config.cc:331
 msgid "Output the version number."
-msgstr "Keluarkan nomor versi."
+msgstr "Keluaran nomor versi."
 
 #. translators: --promptids
 #: src/Config.cc:343
 msgid "Output a list of zypper's user prompts."
-msgstr "Keluarkan daftar petunjuk pengguna zypper."
+msgstr "Keluaran daftar petunjuk pengguna zypper."
 
 #. translators: --config, -c <FILE>
 #: src/Config.cc:356
+#, fuzzy
 msgid "Use specified config file instead of the default."
-msgstr "Gunakan berkas konfigurasi yang ditentukan sebagai ganti bawaan."
+msgstr "Gunakan konfigurasi khusus file yang dialihkan sebagai ganti bawaan."
 
 #: src/Config.cc:363
 msgid "User data string must not contain nonprintable or newline characters!"
@@ -212,7 +213,7 @@ msgstr "Beralih ke keluaran XML."
 #. translators: --ignore-unknown, -i
 #: src/Config.cc:448
 msgid "Ignore unknown packages."
-msgstr "Abaikan paket yang tidak dikenal."
+msgstr "Abaikan paket yang tidak diketahui."
 
 #. translators: --terse, -t
 #: src/Config.cc:459
