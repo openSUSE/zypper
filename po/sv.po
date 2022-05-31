@@ -12,16 +12,16 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-02-23 18:47+0100\n"
-"PO-Revision-Date: 2019-03-21 12:50+0000\n"
-"Last-Translator: Sven Åhr <anders.ahr@gmail.com>\n"
-"Language-Team: Swedish <https://l10n.opensuse.org/projects/zypper/master/sv/"
-">\n"
+"PO-Revision-Date: 2022-05-31 18:13+0000\n"
+"Last-Translator: Luna  Jernberg <bittin@opensuse.org>\n"
+"Language-Team: Swedish <https://l10n.opensuse.org/projects/zypper/master/sv/>"
+"\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 3.3\n"
+"X-Generator: Weblate 4.9.1\n"
 
 #: src/Command.cc:93
 msgid "Invalid command"
@@ -183,9 +183,9 @@ msgstr "Inga förkortningar i tabeller."
 
 #. translators: --table-style, -s, %1% denotes the supported range of the integer argument (e.g. "1-11")
 #: src/Config.cc:416
-#, fuzzy, boost-format
+#, boost-format
 msgid "Table style (%1%)."
-msgstr "Tabellformat (heltal)."
+msgstr "Tabellformat (%1%)."
 
 #: src/Config.cc:420 src/commands/optionsets.cc:284
 msgid "Entering non-interactive mode."
@@ -1454,7 +1454,7 @@ msgstr "Nyckelnamn:"
 
 #: src/callbacks/keyring.h:89
 msgid "Key Algorithm:"
-msgstr ""
+msgstr "Nyckelalgoritm:"
 
 #: src/callbacks/keyring.h:90
 msgid "Key Created:"
@@ -1688,7 +1688,7 @@ msgstr ""
 
 #: src/callbacks/keyring.h:496
 msgid "New:"
-msgstr ""
+msgstr "Ny:"
 
 #: src/callbacks/keyring.h:502
 msgid ""
@@ -2032,19 +2032,19 @@ msgstr ""
 #: src/callbacks/rpm.h:759 src/callbacks/rpm.h:766
 #, c-format, boost-format
 msgid "Executing %s script for: %s"
-msgstr ""
+msgstr "Kör %s skript för: %s"
 
 #. TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
 #: src/callbacks/rpm.h:773
 #, c-format, boost-format
 msgid "Executing %s script"
-msgstr ""
+msgstr "Kör %s skript"
 
 #. TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
 #: src/callbacks/rpm.h:895
 #, c-format, boost-format
 msgid "Cleaning up: %s"
-msgstr ""
+msgstr "Rensar upp: %s"
 
 #. translator: %s is an other command: "This is an alias for 'zypper info -t patch'."
 #: src/commands/commandhelpformatter.h:94
@@ -2362,7 +2362,7 @@ msgstr "list-patches (lp) [ALTERNATIV]"
 #. translators: command summary: list-patches, lp
 #: src/commands/listpatches.cc:18
 msgid "List available patches."
-msgstr ""
+msgstr "Lista tillgängliga patchar."
 
 #. translators: command description
 #: src/commands/listpatches.cc:20
@@ -2603,7 +2603,7 @@ msgstr "Förråd"
 
 #: src/commands/locks/list.cc:138
 msgid "Comment"
-msgstr ""
+msgstr "Kommentar"
 
 #. translators: locks table value
 #: src/commands/locks/list.cc:156 src/commands/locks/list.cc:235
@@ -4552,7 +4552,7 @@ msgstr "Kommandot har bara effekt i zypper-skalet."
 #: src/commands/solveroptionset.cc:23
 #, boost-format
 msgid "Valid values: %1%"
-msgstr ""
+msgstr "Giltiga värden: %1%"
 
 #: src/commands/solveroptionset.cc:35 src/commands/solveroptionset.cc:58
 msgid "Solver options"
@@ -4953,7 +4953,7 @@ msgstr ""
 #. translators: command summary: targetos, tos
 #: src/commands/utils/purge-kernels.cc:28
 msgid "Remove old kernels."
-msgstr ""
+msgstr "Ta bort gamla kärnor."
 
 #. translators: command description
 #: src/commands/utils/purge-kernels.cc:30
@@ -4970,7 +4970,7 @@ msgstr ""
 #: src/commands/utils/purge-kernels.cc:52
 #, boost-format
 msgid "Configuration: %1%"
-msgstr ""
+msgstr "Konfiguration: %1%"
 
 #: src/commands/utils/purge-kernels.cc:53
 #, boost-format
@@ -5572,7 +5572,7 @@ msgstr "klar"
 #. translator: Shown as result tag in a progress bar: .......[attention]
 #: src/output/Out.cc:124
 msgid "attention"
-msgstr ""
+msgstr "uppmärksamhet"
 
 #. translator: Shown as result tag in a progress bar: ...........[error]
 #. Translator: download progress bar result: "............[error]"
@@ -6197,7 +6197,7 @@ msgstr "Problem: "
 
 #: src/solve-commit.cc:80
 msgid "Detailed information: "
-msgstr ""
+msgstr "Detaljerad information: "
 
 #. TranslatorExplanation %d is the solution number
 #: src/solve-commit.cc:93
@@ -6230,8 +6230,9 @@ msgstr[1] "Välj numret för någon av lösningarna ovan eller avbryt"
 #. correspond to skip/retry/cancel/detailed information in that order.
 #. The answers should be lower case letters.
 #: src/solve-commit.cc:143
+#, fuzzy
 msgid "s/r/c/d"
-msgstr ""
+msgstr "s/r/c/d"
 
 #. translators: answers for dependency problem solution input prompt:
 #. "Choose from above solutions by number or cancel"
@@ -6247,19 +6248,19 @@ msgstr ""
 #: src/solve-commit.cc:165
 #, boost-format
 msgid "Choose solution %1%"
-msgstr ""
+msgstr "Välj lösning %1%"
 
 #: src/solve-commit.cc:167
 msgid "Skip problem and continue."
-msgstr ""
+msgstr "Hoppa över problemet och fortsätt."
 
 #: src/solve-commit.cc:170
 msgid "Retry solving immediately."
-msgstr ""
+msgstr "Försök att lösa omedelbart igen."
 
 #: src/solve-commit.cc:172
 msgid "Choose no solution and cancel."
-msgstr ""
+msgstr "Välj ingen lösning och avbryt."
 
 #: src/solve-commit.cc:173
 msgid "Toggle show detailed conflict information."
@@ -7009,7 +7010,7 @@ msgstr ""
 
 #: src/utils/misc.cc:329 src/utils/misc.cc:371
 msgid "Since"
-msgstr ""
+msgstr "Sen"
 
 #. << _("Repository")
 #: src/utils/misc.cc:364
