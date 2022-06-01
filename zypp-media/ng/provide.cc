@@ -1094,6 +1094,19 @@ namespace zyppng {
     return fut;
   }
 
+  AsyncOpRef<expected<zypp::ManagedFile>> Provide::copyFile ( const zypp::Pathname &source, const zypp::Pathname &target )
+  {
+    using namespace zyppng::operators;
+
+    zypp::Url url("copy:///");
+    url.setPathName( source );
+    auto fut = provide( url, ProvideFileSpec().setDestFilenameHint( target ))
+      | mbind( [&]( ProvideRes &&copyRes) {
+          return expected<zypp::ManagedFile>::success( copyRes.asManagedFile() );
+      } );
+    return fut;
+  }
+
   void Provide::start ()
   {
     Z_D();

@@ -122,6 +122,11 @@ namespace zyppng {
      */
     AsyncOpRef<expected<std::string>> checksumForFile ( const zypp::Pathname &p, const std::string &algorithm );
 
+    /*!
+     * Schedules a copy job to copy a file from \a source to \a target
+     */
+    AsyncOpRef<expected<zypp::ManagedFile>> copyFile ( const zypp::Pathname &source, const zypp::Pathname &target );
+
     void start();
     void setWorkerPath( const zypp::Pathname &path );
     bool isRunning() const;
