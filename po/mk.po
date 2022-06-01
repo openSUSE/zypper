@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-03-14 15:21+0100\n"
-"PO-Revision-Date: 2022-05-26 04:13+0000\n"
+"PO-Revision-Date: 2022-06-01 11:12+0000\n"
 "Last-Translator: Kristijan Fremen Velkovski <me@krisfremen.com>\n"
 "Language-Team: Macedonian <https://l10n.opensuse.org/projects/libzypp/master/"
 "mk/>\n"
@@ -4453,6 +4453,13 @@ msgid ""
 "  from package\n"
 "     %4%"
 msgstr ""
+"Фајл %1%\n"
+"  од пакет\n"
+"     %2%\n"
+"  е во конфликт со фајлот\n"
+"     %3%\n"
+"  од пакет\n"
+"     %4%"
 
 #. TranslatorExplanation %1%(filename1) %2%(package1) %3%(filename2) %4%(package2)
 #: zypp/sat/FileConflicts.cc:76
@@ -4495,17 +4502,17 @@ msgstr ""
 
 #: zypp/sat/detail/PoolImpl.cc:201
 msgid "Can not create sat-pool."
-msgstr ""
+msgstr "Неможе да се создаде sat-pool."
 
 #. TranslatorExplanation %s = name of package, patch, selection ...
 #: zypp/solver/detail/ProblemSolutionIgnore.cc:42
 #, c-format, boost-format
 msgid "break %s by ignoring some of its dependencies"
-msgstr ""
+msgstr "скрши %s со игнорирање некои од неговите зависности"
 
 #: zypp/solver/detail/ProblemSolutionIgnore.cc:48
 msgid "generally ignore of some dependencies"
-msgstr ""
+msgstr "генерално игнорирај некои зависности"
 
 #: zypp/solver/detail/SATResolver.cc:1089
 #, boost-format
@@ -4513,6 +4520,7 @@ msgid ""
 "the installed %1% does not belong to a distupgrade repository and must be "
 "replaced"
 msgstr ""
+"инсталираниот %1% не припаѓа во distupgrade складижте и мора да се замени"
 
 #. just in case
 #: zypp/solver/detail/SATResolver.cc:1091
@@ -4523,7 +4531,7 @@ msgstr ""
 #: zypp/solver/detail/SATResolver.cc:1095
 #, boost-format
 msgid "the installed %1% has inferior architecture"
-msgstr ""
+msgstr "инсталираниот %1% има инфериорна архитектура"
 
 #: zypp/solver/detail/SATResolver.cc:1097
 #, boost-format
@@ -4533,30 +4541,30 @@ msgstr ""
 #: zypp/solver/detail/SATResolver.cc:1100
 #, boost-format
 msgid "problem with the installed %1%"
-msgstr ""
+msgstr "проблем со инсталираниот %1%"
 
 #: zypp/solver/detail/SATResolver.cc:1103
 msgid "conflicting requests"
-msgstr ""
+msgstr "спротивставени барања"
 
 #: zypp/solver/detail/SATResolver.cc:1106
 msgid "some dependency problem"
-msgstr ""
+msgstr "некои проблеми со зависности"
 
 #: zypp/solver/detail/SATResolver.cc:1109
 #, boost-format
 msgid "nothing provides the requested '%1%'"
-msgstr ""
+msgstr "ништо не го поддржува бараниот '%1%'"
 
 #: zypp/solver/detail/SATResolver.cc:1110
 #: zypp/solver/detail/SATResolver.cc:1114
 msgid "Have you enabled all the required repositories?"
-msgstr ""
+msgstr "Дали ги вклучивте сите потребни складишта?"
 
 #: zypp/solver/detail/SATResolver.cc:1113
 #, boost-format
 msgid "the requested package %1% does not exist"
-msgstr ""
+msgstr "бараниот пакет %1% не постои"
 
 #: zypp/solver/detail/SATResolver.cc:1117
 msgid "unsupported request"
